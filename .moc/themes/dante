@@ -1,0 +1,58 @@
+# moc theme similar to vim's dante theme
+# by jwc < http://jwcxz.com >
+#
+# this is a moc theme that tries to look
+# like the dante.vim colorscheme
+#
+# note that this will probably look very
+# ugly unless you have cyan set to a 
+# *dark color* ...
+
+background				= default	default
+frame					= cyan		default
+
+window_title			= yellow	default
+
+directory				= red		default
+selected_directory		= red		cyan		bold
+
+playlist				= green		default
+selected_playlist		= green		cyan		bold
+
+file					= white		default	
+selected_file			= yellow	cyan		bold
+
+marked_file				= green		default		bold
+marked_selected_file	= green		cyan		bold
+
+info					= cyan		default
+selected_info			= cyan		default		bold
+marked_info				= cyan		default
+marked_selected_info	= cyan		default		bold
+
+title					= green		default		bold
+state					= blue		black		bold
+
+current_time			= blue		default		bold
+time_left				= blue		default
+total_time				= cyan		default		bold
+time_total_frames		= cyan		default	
+
+sound_parameters		= cyan		default		bold
+legend					= cyan		default	
+disabled				= black		default		bold
+enabled					= white		default
+
+empty_mixer_bar			= white		default	
+filled_mixer_bar		= black		cyan
+
+empty_time_bar			= white		default	
+filled_time_bar			= black		cyan
+
+entry					= yellow	default		bold
+entry_title				= yellow	default
+
+status					= yellow	default	
+error					= red		default		bold
+message					= green		default		bold
+plist_time				= blue		default
