@@ -64,7 +64,12 @@ ReadTags		= yes
 # Directory in which you store music files. If you specify it you will be able
 # to quickly go to this directory with the '-m' parameter or the 'm' command.
 # This can also point to a playlist.
-#MusicDir		= "/home/joe/music"
+MusicDir		= "/mnt/Loisirs/matt/Music/"
+Fastdir1		= "/home/teto/Téléchargements"
+#Fastdir1		= "~/Téléchargements"
+Fastdir2		= "/home/teto/Musique"
+
+#go_to_fast_dir1 = "1"
 
 # How to sort? FileName is the only option for now.
 Sort			= FileName
@@ -129,13 +134,13 @@ OSSDevice		= /dev/dsp
 OSSMixerDevice		= /dev/mixer
 
 # OSS Mixer channel: pcm or master.
-OSSMixerChannel		= pcm
+OSSMixerChannel1	= pcm
 
 # Second OSS Mixer channel: pcm or master.
 OSSMixerChannel2	= master
 
 # ALSA mixer device.
-AlsaMixer 		= PCM
+AlsaMixer1 		= PCM
 
 # Second ALSA mixer device.
 AlsaMixer2		= Master
@@ -250,7 +255,7 @@ SyncPlaylist		= yes
 
 # Choose a keymap file (relative to ~/.moc/ or absolute path).
 # Example keymap with description is included (keymap.example).
-#Keymap			= my_keymap
+Keymap			= matt.keymap
 
 # Use ASCII characters instead of graphic for drawing lines. This helps on
 # some terminals.

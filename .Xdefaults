@@ -1,0 +1,50 @@
+URxvt*depth: 32
+!URxvt*inputMethod: ibus
+! RGBA with A=0 => transparent
+XTerm*bellIsUrgent: true
+URxvt*background: rgba:00ff/00ff/0200/c800
+*.URxvt.urgentOnBell: true 
+!URt*termName: rxvt-unicode
+!URxvt*keysym.End: \033[4~
+!URxvt*keysym.Home: \033[1~
+! scroll back to the bottom on keypress
+URxvt*scrollTtyKeypress: true
+
+! normal settings
+!URxvt*background:       rgba:0000/0000/0000/dddd
+URxvt*color0:   #101010
+URxvt*color1:   #f13a21
+URxvt*color2:   #93f91d
+URxvt*color3:   #ffd00a
+URxvt*color4:   #004f9e
+URxvt*color5:   #ec0048
+URxvt*color6:   #2aa7e7
+URxvt*color7:   #f2f2f2
+URxvt*color8:   #1d202f
+URxvt*color9:   #ff361e
+URxvt*color10:  #ffc005
+URxvt*color11:  #93ff00
+URxvt*color12:  #0071ff
+URxvt*color13:  #ef0051
+URxvt*color14:  #4bb8fd
+URxvt*color15:  #a020f0
+URxvt*cursorColor:      white
+URxvt*font:     xft:Bitstream Vera Sans Mono:style=Regular:pixelsize=13:antialias=true
+URxvt*foreground:       #f2f2f2
+!URxvt*geometry: 74x27
+
+URxvt*saveLines:        10000
+!URxvt*scrollBar:        true
+URxvt*scrollBar_floating:       true
+URxvt*scrollBar_right:  true
+!URxvt*scrollColor:      #c2dd5a
+!URxvt*scrollstyle:      plain
+URxvt*scrollTtyOutput:  false
+URxvt*scrollWithBuffer: true
+!URxvt*termName: xterm
+!URxvt*shading: 20
+URxvt*perl-lib : /home/teto/.urxvt/perl
+URxvt*perl-ext-common: test,default,matcher
+URxvt*scrollbar: false
+URxvt.urlLauncher: firefox
+URxvt.matcher.button: 2

@@ -3,7 +3,7 @@
 
 xcompmgr&
 
-urxvtd -q&
+urxvtd -q -o -f&
 
 # Wait for program coming up
 wait_for_program () {
