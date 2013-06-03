@@ -1,0 +1,5 @@
+[user]
+	name = Matt
+	email = mattator@gmail.com
+[push]
+	default = simple
