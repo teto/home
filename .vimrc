@@ -18,6 +18,20 @@ set cursorline
 " show/hide line numbers
 map <C-N><C-N> :set invnumber<CR>
 
+" cterm => terminal color, gui => with gvim ?
+highlight Pmenu ctermfg=Cyan ctermbg=Blue cterm=None guifg=Cyan guibg=DarkBlue
+
+" selected element
+highlight PmenuSel   ctermfg=White ctermbg=Blue cterm=Bold guifg=White guibg=DarkBlue gui=Bold
+
+" scrollbar
+highlight PmenuSbar ctermbg=Cyan guibg=Cyan
+highlight PmenuThumb ctermfg=White guifg=White 
+
+
+highlight CursorLine  cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
+highlight CursorColumn cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
+" :nnoremap <Leader>c :set cursorline! cursorcolumn!<CR>
 syntax on
 
 set rtp+=~/.vim/bundle/vundle/
@@ -30,4 +44,6 @@ Bundle 'sickill/vim-monokai'
 Bundle 'scrooloose/nerdtree'
 " Bundle 'Lokaltog/powerline'
 Bundle 'Lokaltog/vim-powerline'
+Bundle 'mhinz/vim-startify'
+Bundle 'scrooloose/nerdcommenter'
 " set statusline=%t       "tail of the filename
