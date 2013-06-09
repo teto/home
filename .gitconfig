@@ -3,3 +3,5 @@
 	email = mattator@gmail.com
 [push]
 	default = simple
+[core]
+	excludesfile = /home/teto/.gitignore_global
