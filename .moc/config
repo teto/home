@@ -134,13 +134,13 @@ OSSDevice		= /dev/dsp
 OSSMixerDevice		= /dev/mixer
 
 # OSS Mixer channel: pcm or master.
-OSSMixerChannel1	= pcm
+OSSMixerChannel	= pcm
 
 # Second OSS Mixer channel: pcm or master.
 OSSMixerChannel2	= master
 
 # ALSA mixer device.
-AlsaMixer1 		= PCM
+AlsaMixer 		= PCM
 
 # Second ALSA mixer device.
 AlsaMixer2		= Master

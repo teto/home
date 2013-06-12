@@ -21,6 +21,8 @@ client.urgent           #870000 #870000 #ffffff #090e14
 client.background       #06090d
 
 set $mod Mod1
+set $output1 LVDS1
+set $output2 DP3
 #set $workspace1 "1: Main"
 #set $workspace2 "2: Web"
 
@@ -33,9 +35,9 @@ set $w4 4 qemu
 assign [class="^Firefox$"] $w2
 
 #for_window [instance="audioplayer"] move to scratchpad
-for_window [instance="audioplayer"] move scratchpad
-for_window [instance="flyingterminal"] move scratchpad
-for_window [instance="ircclient"] move scratchpad
+for_window [instance="pad_audioplayer"] move scratchpad
+for_window [instance="pad_flyingterminal"] move scratchpad
+for_window [instance="pad_ircclient"] move scratchpad
 for_window [class="Navigator"] floating enable,border 1 pixel;
 
 
@@ -46,14 +48,13 @@ focus_follows_mouse no
 #workspace_bar no
 #new_window bb
 
-#assign [Class="Navigator"] 2
 
 
 #bindsym $mod+F1 exec urxvt -name ranger -e ranger
 mode "focused" {
 
                 # hardcoded focus keybindings
-                bindsym b [class="(?i)firefox"] focus
+                bindsym b [class="(?i)firefox"] focus; mode "default"
                 bindsym w [class="(?i)terminal" title="weechat"] focus
                 bindsym m [class="(?i)thunderbird"] focus
                 bindsym f [class="(?i)terminal" title="mc"] focus
@@ -82,18 +83,26 @@ mode "focused" {
                 bindsym Escape mode "default"
 }
 
-bindsym $mod+n mode "focused"
 
+# TODO remove since it is used by Dunst ?
+bindsym $mod+n mode "focused"
+bindsym $mod+c mode "command"
+
+
+# Media keys
+# For audio first
 bindsym XF86AudioRaiseVolume exec "amixer -q set Master 2dB+ unmute; notify-send Audio Raised volume"
 bindsym XF86AudioLowerVolume exec "amixer -q set Master 2dB- unmute; notify-send Audio lowered"
 bindsym XF86AudioMute exec "amixer -q set Master toggle"
-
-
 
 bindsym XF86AudioStop exec "mocp -P; notify-send Music Paused"
 bindsym XF86AudioPlay exec "mocp -G; notify-send Resuming music"
 bindsym XF86AudioNext exec "mocp -f; notify-send Next song"
 bindsym XF86AudioPrev exec mocp -r
+
+# for backlight
+bindsym XF86MonBrightnessUp exec xbacklight -inc 10
+bindsym XF86MonBrightnessDown exec xbacklight -dec 5
 
 workspace_auto_back_and_forth yes
 # Go into hibernation
@@ -129,10 +138,10 @@ bindsym $mod+Shift+A kill
 bindsym $mod+d exec dmenu_run
 
 #for_window [title="MOC"] move scratchpad
-for_window [Class="Transmission"] floating enable
-bindsym $mod+F2 [instance="audioplayer"] scratchpad show
-bindsym $mod+F1 [instance="flyingterminal"] scratchpad show
-bindsym $mod+F3 scratchpad show
+for_window [Class="^Transmission"] floating enable
+bindsym $mod+F2 [instance="pad_(?!audioplayer)"] move scratchpad ; [instance="pad_audioplayer"] scratchpad show
+bindsym $mod+F1 [instance="pad_(?!flyingterminal)"] move scratchpad; [instance="pad_flyingterminal"] scratchpad show
+#bindsym $mod+F3 scratchpad show
 
 
 
@@ -186,7 +195,8 @@ bindsym $mod+Shift+space floating toggle
 bindsym $mod+space focus mode_toggle
 
 # focus the parent container
-bindsym $mod+q focus parent
+bindsym $mod+p focus parent
+bindsym $mod+q exec nautilus --no-desktop
 
 # focus the child container
 #bindcode $mod+d focus child
@@ -204,8 +214,8 @@ bindsym $mod+ccedilla workspace 9
 bindsym $mod+agrave workspace 10
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace $w1
-bindsym $mod+Shift+2 move container to workspace $w2
+bindsym $mod+Shift+1 move container to workspace $w1 output $output1
+bindsym $mod+Shift+2 move container to workspace $w2 output $output2
 bindsym $mod+Shift+3 move container to workspace number 3
 bindsym $mod+Shift+4 move container to workspace $w4
 bindsym $mod+Shift+5 move container to workspace 5
@@ -221,6 +231,17 @@ bindsym $mod+Shift+C reload
 bindsym $mod+Shift+R restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+E exit
+
+
+mode "command" {
+
+	bindsym f exec "$HOME/.i3/script.sh fn_keys"
+	bindsym t exec "$HOME/.i3/script.sh touchpad"
+# set monitors, wap them ? etc..
+
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+}
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -256,7 +277,25 @@ bar {
 	position top
         #status_command i3status
 	status_command conky -c ~/.conkyrc
+	
+	tray_output LVDS1
+    colors {
+        background #090e14
+        statusline #ffffff
 
+        # class            border  backgrd text
+        focused_workspace  #d72f6b #d70a53 #FFFF50
+        active_workspace   #06090d #06090d #696f89
+        inactive_workspace #06090d #06090d #696f89
+        urgent_workspace   #d72f6b #d70a53 #FFFF50
+    }
+}
+bar {
+	position top
+        #status_command i3status
+	status_command conky -c ~/.conkyrc
+	
+	tray_output DP3
     colors {
         background #090e14
         statusline #ffffff
@@ -270,8 +309,12 @@ bar {
 }
 
 
-#exec urxvtc -name audioplayer -e cmus
-#exec urxvtc -name flyingterminal
+exec urxvtc -name audioplayer -e mocp 
+exec urxvtc -name flyingterminal
+
+# DP3 & LVDS1
+exec_always xrandr --output $output1 --auto --output $output2 --right-of $output1
+
 #exec urxvtc -name irclient -e irssi
 
 exec ~/.i3/autostart

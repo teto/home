@@ -44,7 +44,7 @@ URxvt*scrollWithBuffer: true
 !URxvt*termName: xterm
 !URxvt*shading: 20
 URxvt*perl-lib : /home/teto/.urxvt/perl
-URxvt*perl-ext-common: test,default,matcher
+URxvt*perl-ext-common: default,matcher
 URxvt*scrollbar: false
 URxvt.urlLauncher: firefox
 URxvt.matcher.button: 2

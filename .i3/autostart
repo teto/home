@@ -1,48 +1,12 @@
 #!/bin/bash
 
-
-xcompmgr&
-
-urxvtd -q -o -f&
-
-# Wait for program coming up
-wait_for_program () {
-  n=0
-    while true
-    do
-        # PID of last background command
-            if xdotool search --onlyvisible --pid $!; then
-            break
-            else
-            if [ $n -eq 90 ]; then
-            notify-send -u critical "Error during start"
-                    break
-                    else
-                    n=`expr $n + 1`
-                            sleep 0.5
-                                  fi
-                                  fi
-                                  done
-                                  }
-
-
-
-
-feh --bg-scale Images/abstrait2.jpg&
-
 # OSD
 dunst&
-
-
-## Set touchpad off
-#synclient TouchpadOff=1
-
 
 
 #firefox &
 
 ## Set startup volume
-
 # set volume
 pactl set-sink-volume 0 '30%' &
 
@@ -52,7 +16,5 @@ pactl set-sink-volume 0 '30%' &
 #i3-msg workspace 1
 
 #i3-msg layout tabbed
-urxvtc -name audioplayer -e cmus
 #urxvt256c -name mail -e bash -c "mutt" &
-#wait_for_program
 #dunst-checkmail&
