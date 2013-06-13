@@ -5,3 +5,5 @@
 	default = simple
 [core]
 	excludesfile = /home/teto/.gitignore_global
+[color]
+	ui = auto

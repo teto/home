@@ -1,0 +1,2 @@
+set $output1 LVDS1
+set $output2 DP1
