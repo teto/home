@@ -43,6 +43,7 @@ eval "$command"
 
 if [ $? != "0" ]; then
 	notify-send "Xrandr error"
+	echo 'set $output1 LVDS1'
 fi
 
 exit

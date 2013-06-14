@@ -1,9 +1,3 @@
-set $output1 LVDS1
-set $output2 DP1
-bindsym XF86AudioRaiseVolume exec "amixer -q set Master 2dB+ unmute; notify-send Audio Raised volume"
-bindsym XF86AudioLowerVolume exec "amixer -q set Master 2dB- unmute; notify-send Audio lowered"
-bindsym XF86AudioMute exec "amixer -q set Master toggle"
-
 # Should you change your keyboard layout somewhen, delete
 # this file and re-run i3-config-wizard(1).
 
