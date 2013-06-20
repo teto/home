@@ -1,16 +1,16 @@
-set $output1 LVDS1
-set $output2 DP1
-bindsym XF86AudioRaiseVolume exec "amixer -q set Master 2dB+ unmute; notify-send Audio Raised volume"
-bindsym XF86AudioLowerVolume exec "amixer -q set Master 2dB- unmute; notify-send Audio lowered"
-bindsym XF86AudioMute exec "amixer -q set Master toggle"
-
 # Should you change your keyboard layout somewhen, delete
 # this file and re-run i3-config-wizard(1).
 
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
+set $output1 LVDS
+set $output2 LVDS
+### Start of config.mediakeys
 
+bindsym XF86AudioRaiseVolume exec "amixer -q set Master 2dB+ unmute; notify-send Audio Raised volume"
+bindsym XF86AudioLowerVolume exec "amixer -q set Master 2dB- unmute; notify-send Audio lowered"
+bindsym XF86AudioMute exec "amixer -q set Master toggle"
 
-# font for window titles
+### end of config.mediakeys# font for window titles
 font xft:Liberation Sans Mono 8
 
 # class                 border  backgrd text    indicator
