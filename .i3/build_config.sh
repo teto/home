@@ -14,7 +14,7 @@ command="$(xrandr_build_command)"
 
 eval "$command"
 
-echo "bindsym \$mod+Shift+m exec $command;" >> "$folder/config.monitors"
+echo "bindsym \$mod+Shift+f exec $command;" >> "$folder/config.monitors"
 
 echo "set \$wallpaper $wallpaper" > "$folder/config"
 

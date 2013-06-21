@@ -1,0 +1,67 @@
+#
+# Fichier de configuration des raccourcis de Calcurse
+#
+# Ce fichier définie les raccourcis clavier utilisés par Calcurse.
+# Les lignes débutant par "#" sont des commentaires ignorés par Calcurse.
+# Pour assigner un raccourci clavier à une action, ce fichier doit contenir une ligne
+# qui respecte la syntaxe suivante :
+#
+#        ACTION  TOUCHE1  TOUCHE2  ...  TOUCHEn
+#
+# Où ACTION désigne la commande à exécuter lorsque TOUCHE1, TOUCHE2, ..., ou TOUCHEn
+# est pressée.
+#
+# Pour définir un raccourci utilisant la touche CONTRÔLE, préfixer la touche avec 'C-'.
+# Les touches échap, espace et tabulation horizontale peuvent être spécifiées en utilisant
+# les mots clefs respectifs ESC, SPC et TAB.
+# Les touches fléchées peuvent aussi être spécifiées avec les mots clefs UP, DWN, LFT, RGT.
+# Enfin les touches Début et Fin peuvent être assignées en utilisant les mots clefs KEY_HOME et KEY_END.
+#
+# Une description de ce que chaque ACTION fait est disponible
+# dans le menu de configuration de calcurse.
+
+generic-cancel  ESC 
+generic-select  SPC 
+generic-credits  @ 
+generic-help  ? 
+generic-quit  q Q 
+generic-save  s S ^S 
+generic-copy  c 
+generic-paste  p ^V 
+generic-change-view  TAB 
+generic-import  i I 
+generic-export  x X 
+generic-goto  g G 
+generic-other-cmd  o O 
+generic-config-menu  C 
+generic-redraw  ^R 
+generic-add-appt  ^A 
+generic-add-todo  ^T 
+generic-prev-day  T ^H 
+generic-next-day  t ^L 
+generic-prev-week  W ^K 
+generic-next-week  w ^J 
+generic-prev-month  M 
+generic-next-month  m 
+generic-prev-year  Y 
+generic-next-year  y 
+generic-scroll-down  ^N 
+generic-scroll-up  ^P 
+generic-goto-today  ^G 
+move-right  l L RGT 
+move-left  h H LFT 
+move-down  j J DWN 
+move-up  k K UP 
+start-of-week  0 
+end-of-week  $ 
+add-item  a A 
+del-item  d D 
+edit-item  e E 
+view-item  v V 
+pipe-item  | 
+flag-item  ! 
+repeat  r R 
+edit-note  n N 
+view-note  > 
+raise-priority  + 
+lower-priority  - 
