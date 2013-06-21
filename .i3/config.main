@@ -45,10 +45,10 @@ focus_follows_mouse no
 bindsym $mod+m  mode "monitors"
 mode "monitors" {
 	
-	bindsym $mod+Left to output left
-	bindsym $mod+Right to output right
-	bindsym $mod+Up to output top
-	bindsym $mod+Down to output bottom
+	bindsym $mod+Left move workspace to output left
+	bindsym $mod+Right move workspace output right
+	bindsym $mod+Up move workspace to output top
+	bindsym $mod+Down move workspace to output bottom
                 
 	bindsym $mod+Shift+Left workspace prev_on_output
 	bindsym $mod+Shift+Right workspace next_on_output
