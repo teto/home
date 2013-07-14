@@ -1,4 +1,47 @@
 URxvt*depth: 32
+
+
+
+!URxvt.keysym.S-Page_Up       : captured by terminal for scrolling
+!URxvt.keysym.S-Page_Down     : captured by terminal for scrolling
+!URxvt.keysym.C-S-Page_Up     : seen as Rxvt.keysym.S-Page_Up
+!URxvt.keysym.C-S-Page_Down   : seen as Rxvt.keysym.S-Page_Down
+!!URxvt.keysym.M-C-S-Page_Up   : seen as Rxvt.keysym.S-Page_Up
+!URxvt.keysym.M-C-S-Page_Down : seen as Rxvt.keysym.S-Page_Down
+
+URxvt.keysym.C-Up             : \033[1;5A
+URxvt.keysym.C-S-Up             : \033[1;5A
+URxvt.keysym.C-Down           : \033[1;5B
+URxvt.keysym.C-Right          : \033[1;5C
+URxvt.keysym.C-Left           : \033[1;5D
+
+! test to see if that changes font
+URxvt.keysym.M-C-1: command:\033]50;suxuseuro\007
+!worked !!!!
+  URxvt.keysym.M-C-2: command:\033]50;9x15bold\007
+
+!URxvt.keysym.C-Up             : \033[1;5A
+!URxvt.keysym.Mod4-v:
+! 27 stands for extended, 5 for Ctrl, 9 for tab cf
+! http://lists.schmorp.de/pipermail/rxvt-unicode/2012q4/001655.html
+URxvt.keysym.Control-Tab: \033[27;5;9~
+! le 27 fait penser a la touche ESC en decimal et \033 = <ESC> en octal
+! &
+URXvt.keysym.Control-0x26: \033[27;5;38~
+! é
+URxvt.keysym.Control-0xe9: \033[27;5;130~
+! "
+URxvt.keysym.Control-0x22: \033[27;5;34~
+! '
+URxvt.keysym.Control-0x27: \033[27;5;39~
+
+! (
+URxvt.keysym.Control-0x28: \033[27;5;40~
+! -
+URxvt.keysym.Control-0x2d: \033[K 
+
+! should stant for ampersand
+! URxvt.keysym.Control-Tab: \033[27;5;38~
 !URxvt*inputMethod: ibus
 ! RGBA with A=0 => transparent
 XTerm*bellIsUrgent: true
@@ -9,7 +52,6 @@ URxvt*background: rgba:00ff/00ff/0200/c800
 !URxvt*keysym.Home: \033[1~
 ! scroll back to the bottom on keypress
 URxvt*scrollTtyKeypress: true
-
 ! normal settings
 !URxvt*background:       rgba:0000/0000/0000/dddd
 URxvt*color0:   #101010
@@ -48,3 +90,7 @@ URxvt*perl-ext-common: default,matcher
 URxvt*scrollbar: false
 URxvt.urlLauncher: firefox
 URxvt.matcher.button: 2
+! Disables manua l encoding
+URxvt.iso14755: false
+URxvt.iso14755_52: false
+
