@@ -15,22 +15,22 @@ function xrandr_build_command()
 {
 
 	local _monitors_list=$(xrandr_list_connected_monitors)
+	local command="xrandr "
+ for monitor in $_monitors_list; do
 
-# for monitor in $monitors; do
-
-# 	echo "set \$output${i} $monitor"
+ 	#echo "set \$output${i} $monitor"
 	
-# 	command="$command --output $monitor --auto "
-# 	if [ ! -z $previous_monitor ]; then
-# 		command="$command --right-of $previous_monitor"
-# 	fi
-# 	previous_monitor=$monitor
+ 	command="$command --output $monitor --auto "
+ 	if [ ! -z $previous_monitor ]; then
+ 		command="$command --right-of $previous_monitor"
+ 	fi
+ 	previous_monitor=$monitor
 
-# 	# care: blanks needed
-# 	i=$(expr $i + 1)
-# done
+ 	# care: blanks needed
+ 	i=$(expr $i + 1)
+ done
 
-#echo $command
+echo "$command"
 
 #eval "$command"
 }

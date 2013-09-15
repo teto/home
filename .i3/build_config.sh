@@ -10,6 +10,12 @@ source "$folder/xrandr.sh"
 res="$(i3_build_outputs_config)"
 echo "$res" > "$folder/config.monitors"
 
+command="$(xrandr_build_command)"
+
+eval "$command"
+
+echo "bindsym \$mod+Shift+f exec $command;" >> "$folder/config.monitors"
+
 echo "set \$wallpaper $wallpaper" > "$folder/config"
 
 #list=$( find . -regex './config\..*' -print)

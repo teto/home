@@ -4,6 +4,12 @@ set t_Co=256			" colors
 "let g:Powerline_symbols = "fancy" " to use unicode symbols
 let mapleader = ","
 
+" allow to use fancy caracters
+set encoding=utf-8
+
+" display a menu when need t ocomplete a command 
+set wildmenu
+
 " Use visual bell instead of beeping when doing something wrong
 set visualbell
 
@@ -21,6 +27,25 @@ set cursorline
 
 " show/hide line numbers
 map <C-N><C-N> :set invnumber<CR>
+
+" show tab and trailing spaces
+set listchars=tab:→
+"\,trail:·
+set list
+
+" a tab takes 4 characters
+set tabstop=4
+
+
+"""""""""""""""""""""""""""""""""""""
+" cscope configuration
+" """""""""""""""""""""""""""""""""""
+"
+"
+set cscopeverbose 
+
+" Regenerate database
+" map 
 
 
 map <esc>[27;5;9~ <C-Tab>
@@ -88,7 +113,17 @@ Bundle 'scrooloose/nerdcommenter'
 " Bundle 'minibufexpl.vim' To delete
 " Bundle 'Command-T' Replaced by ctrlp
 Bundle 'kien/ctrlp.vim'
+Bundle 'CCTree'
 Bundle 'Modeliner'
+Bundle 'autoload_cscope.vim'
+" Bundle 'gfxmonk/vim-background-make'
+" Bundle 'tpope/vim-dispatch'
+Bundle 'makebg'
+Bundle 'SuperTab'
+Bundle 'taglist.vim'
+Bundle 'vim-addon-background-cmd'
+
+
 " Press F12 to toggle mouse between terminal & vim control
 Bundle 'nvie/vim-togglemouse' 
 " set statusline=%t       "tail of the filename
@@ -131,14 +166,23 @@ nmap <S-N> :NERDTreeToggle<Enter>
  map <C-k> <C-w>k
  map <C-l> <C-w>l
 
+" Nerdtree shortcuts
+noremap <F2> :NERDTreeToggle<Enter>
+
+" taglist
+let Tlist_Use_Right_Window   = 1
+noremap <F3> :Tlist<Enter>
+
+
+noremap <F4> exec ":emenu <tab>"
 
 "execute ":source '$HOME/.vim/test_tab.vim'"
 source $HOME/.vim/test_tab.vim
 
 " A stands for Alt
-nnoremap <C-h> :call MoveToTab('2')<CR>
-nnoremap <C-l> :call MoveToPrevTab()<CR>
+nnoremap <C-h> :call MoveToTab(2)<CR>
+nnoremap <C-l> :call MoveToTab(1)<CR>
 
 
-map <F2> :echo 'Current time is ' . strftime('%c')<CR>
-map! <F3> a<C-R>=strftime('%c')<CR><Esc>
+" map <F2> :echo 'Current time is ' . strftime('%c')<CR>
+" map! <F3> a<C-R>=strftime('%c')<CR><Esc>

@@ -1,21 +1,4 @@
 <?xml version="1.0"?>
 <gconf>
-	<entry name="show_desktop" mtime="1366280503" type="bool" value="false"/>
-	<entry name="desktop_font" mtime="1319652293" type="string">
-		<stringvalue>Ubuntu 11</stringvalue>
-	</entry>
-	<entry name="start_with_sidebar" mtime="1362437087" type="bool" value="true"/>
-	<entry name="default_folder_viewer" mtime="1307185791" type="string">
-		<stringvalue>list_view</stringvalue>
-	</entry>
-	<entry name="sidebar_width" mtime="1319652293" type="int" value="135"/>
-	<entry name="start_with_location_bar" mtime="1319652293" type="bool" value="true"/>
-	<entry name="media_automount_open" mtime="1283417307" type="bool" value="false"/>
-	<entry name="executable_text_activation" mtime="1319652293" type="string">
-		<stringvalue>display</stringvalue>
-	</entry>
-	<entry name="navigation_window_saved_maximized" mtime="1362474000" type="bool" value="true"/>
-	<entry name="navigation_window_saved_geometry" mtime="1345137853" type="string">
-		<stringvalue>936x672+138+83</stringvalue>
-	</entry>
+	<entry name="show_desktop" mtime="1371568504" type="bool" value="false"/>
 </gconf>
