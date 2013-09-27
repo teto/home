@@ -54,11 +54,13 @@ ENABLE_OH_MY_ZSH=false
 
 autoload -Uz promptinit
 promptinit
- prompt adam1
+prompt adam1
 
 
-
+# Allow shared history
 #setopt histignorealldups sharehistory
+# Allow for functions in the prompt.
+setopt PROMPT_SUBST
 
 # Use emacs keybindings even if our EDITOR is set to vi
 # -v to use vi keybindings
@@ -69,9 +71,35 @@ HISTSIZE=1000
 SAVEHIST=1000
 HISTFILE=~/.zsh_history
 
+
+
+
 # Use modern completion system
 autoload -Uz compinit
 compinit
+
+
+# to get intel about Versioning Control Systems 
+autoload -Uz vcs_info
+
+#vcs_info_printsys
+
+
+# URxvt keys
+watch=all
+
+
+# configure vcs
+# enable => Disable everything but specified
+zstyle ':vcs_info:*' enable git svn
+#zstyle ':vcs_info:*' disable bzr cdv darcs mtn svk tla
+zstyle ':vcs_info:(hg*|git*):*' check-for-changes true
+zstyle ':vcs_info:git*' formats "%c%u %b%m" # hash changes branch misc
+zstyle ':vcs_info:*'    formats "%f[%%n@%%m %1~] $ " "%f%a %F{3}%m%u%c %f%b:%r/%S" 
+zstyle ':vcs_info:*'    nvcsformats   "%f[%n@%m %1~]$ " ""
+zstyle ':vcs_info:*'    actionformats '%F{5}(%f%s%F{5})%F{3}-%F{5}[%F{2}%b%F{3}|%F{1}%a%F{5}]%f '
+
+
 
 zstyle ':completion:*' auto-description 'specify: %d'
 zstyle ':completion:*' completer _expand _complete _correct _approximate
@@ -99,10 +127,21 @@ function update_urxvt_title()
 	echo -e "\e]2;$PWD\a"
 }
 
+precmd() {
+	    vcs_info
+}
+
 source /usr/local/lib/python3.3/dist-packages/Powerline-beta-py3.3.egg/powerline/bindings/zsh/powerline.zsh
 
 
 # list of callbacks that are called on cwd change
 chpwd_functions=(${chpwd_functions[@]} "update_urxvt_title")
 
-RPS1=%T
+RPS1='${vcs_info_msg_0_} %T'
+
+
+
+##### ALIASES #####
+alias svim="sudo vim"
+
+# PROMPT="%{$fg_bold[cyan]%}$ZSH_THEME_CLOUD_PREFIX %{$fg_bold[green]%}%p %{$fg[green]%}%c %{$fg_bold[cyan]%}$(vcs_info_msg_0_)%{$fg_bold[blue]%} % %{$reset_color%}"
