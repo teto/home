@@ -1,3 +1,2 @@
-set $output1 LVDS1
-set $output2 LVDS1
-bindsym $mod+Shift+f exec xrandr  --output LVDS1 --auto ;
+set $output1 DP1
+

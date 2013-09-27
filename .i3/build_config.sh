@@ -1,22 +1,13 @@
 #!/bin/bash
 folder="$HOME/.i3"
 
-wallpaper="/home/teto/Images/route66.png"
+#wallpaper="/home/teto/Images/route66.png"
 
 
 #generate screens variables
-source "$folder/xrandr.sh" 
+python "$folder/generate_monitors_config.py" > "$folder/config.monitors"
 
-res="$(i3_build_outputs_config)"
-echo "$res" > "$folder/config.monitors"
-
-command="$(xrandr_build_command)"
-
-eval "$command"
-
-echo "bindsym \$mod+Shift+f exec $command;" >> "$folder/config.monitors"
-
-echo "set \$wallpaper $wallpaper" > "$folder/config"
+#echo "set \$wallpaper $wallpaper" > "$folder/config"
 
 #list=$( find . -regex './config\..*' -print)
 #for config_part in $list; do

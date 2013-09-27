@@ -11,6 +11,24 @@ function xrandr_list_connected_monitors()
 	echo $_monitors_list
 }
 
+
+function xrandr_number_of_connected_monitors()
+{
+	local list=( $(xrandr_list_connected_monitors) )
+
+	echo ${#list[@]}
+	
+
+}
+
+
+# @param monitor name
+function xrandr_is_monitor_connected()
+{
+
+}
+
+
 function xrandr_build_command()
 {
 

@@ -29,8 +29,8 @@ highlight PmenuSbar ctermbg=Cyan guibg=Cyan
 highlight PmenuThumb ctermfg=White guifg=White 
 
 
-highlight CursorLine  cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
-highlight CursorColumn cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
+" highlight CursorLine  cterm=NONE ctermbg=white ctermfg=white guibg=darkred guifg=white
+" highlight CursorColumn cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
 " :nnoremap <Leader>c :set cursorline! cursorcolumn!<CR>
 syntax on
 
