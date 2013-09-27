@@ -4,6 +4,18 @@ set t_Co=256			" colors
 "let g:Powerline_symbols = "fancy" " to use unicode symbols
 let mapleader = ","
 
+
+set showmatch
+
+set autochdir
+" 
+" " When on, Vim will change the current working directory
+" " whenever you open a file, switch buffers, delete a buffer
+" " or open/close a window.
+" " It will change to the directory containing the file which
+" " was opened or selected.
+" " Note: When this option is on some plugins may not work.
+
 scriptencoding utf-8
 " allow to use fancy caracters
 set encoding=utf-8
@@ -33,13 +45,51 @@ set cursorline
 " show/hide line numbers
 map <C-N><C-N> :set invnumber<CR>
 
-" show tab and trailing spaces
-set listchars=trail:·,tab:→
+
+" Display unprintable characters with '^' and
+" " put $ after the line.
 set list     
 
-" a tab takes 4 characters
+" show tab and trailing spaces
+" Ctrl+v, u, unicode hex code
+" "
+" " tab chars
+" " 21E2 ⇢
+" " 21E5 ⇥
+" " 21E8 ⇨
+" " 2192 → (rightwards arrow, &rarr;)
+" " 21D2 ⇒ (rightwards double arrow, &rArr;)
+" " 25B8 ▸ (TextMate style)
+" "→ 
+" " trail chars
+" " 25CF ●
+" " 2639 ☹ (frowning face)
+" " 267A ♺ (recycling symbol)
+" " 261F ☟ (hand pointing down)
+" " F8FF  (apple logo)
+" "
+" " eol chars
+" " 21B2 ↲
+" " 21B5 ↵ (carriage return, &crarr;)
+" " 21A9 ↩
+" " 23CE ⏎ (return symbol)
+" " 00AC ¬ (TextMate style)
+"
+"
+"
+" " Working with <Tab>s?
+" " tabstop == softtabstop
+" "
+" " Working with spaces?
+" " softtabstop == shiftwidth
+
+set listchars=trail:·,tab:→\ ,eol:↲
+
+" a tab takes 4 characters (local to buffer)
 set tabstop=4
 
+" Number of spaces to use for each step of (auto)indent.
+set shiftwidth=4
 
 " start scrolling before reaching end of screen in order to keep more context
 set scrolloff=3
@@ -48,6 +98,13 @@ set scrolloff=3
 " Quick timeouts on key combinations.
 set timeoutlen=300
 
+" - boolean (default off), local to buffer
+"  compilation option
+set smartindent 
+
+
+" Hide the default mode text (e.g. -- INSERT -- below the statusline)
+" set noshowmode
 
 
 """""""""""""""""""""""""""""""""""""
@@ -129,7 +186,7 @@ Bundle 'gmarik/vundle'
 Bundle 'sickill/vim-monokai'    
 Bundle 'scrooloose/nerdtree'
 " Bundle 'Lokaltog/powerline'
-Bundle 'Lokaltog/vim-powerline'
+" Bundle 'Lokaltog/vim-powerline'
 Bundle 'mhinz/vim-startify'
 Bundle 'scrooloose/nerdcommenter'
 " Bundle 'minibufexpl.vim' To delete
@@ -142,9 +199,10 @@ Bundle 'autoload_cscope.vim'
 " Bundle 'tpope/vim-dispatch'
 Bundle 'makebg'
 Bundle 'SuperTab'
-Bundle 'taglist.vim'
+" Bundle 'taglist.vim'
 Bundle 'vim-addon-background-cmd'
-
+Bundle 'Lokaltog/powerline' 
+" , {'rtp': 'powerline/bindings/vim'}
 " Press F12 to toggle mouse between terminal & vim control
 Bundle 'nvie/vim-togglemouse' 
 " set statusline=%t       "tail of the filename
@@ -198,7 +256,7 @@ noremap <F3> :Tlist<Enter>
 noremap <F4> exec ":emenu <tab>"
 
 "execute ":source '$HOME/.vim/test_tab.vim'"
-source $HOME/.vim/test_tab.vim
+"source $HOME/.vim/test_tab.vim
 
 " A stands for Alt
 nnoremap <C-h> :call MoveToTab(2)<CR>
