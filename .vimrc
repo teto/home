@@ -4,11 +4,16 @@ set t_Co=256			" colors
 "let g:Powerline_symbols = "fancy" " to use unicode symbols
 let mapleader = ","
 
+scriptencoding utf-8
 " allow to use fancy caracters
 set encoding=utf-8
 
 " display a menu when need t ocomplete a command 
 set wildmenu
+set wildmode=list:longest
+"Ignore these files when completing names and in Explorer
+set wildignore=.svn,CVS,.git,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg,*.png,*.xpm,*.gif
+
 
 " Use visual bell instead of beeping when doing something wrong
 set visualbell
@@ -29,12 +34,20 @@ set cursorline
 map <C-N><C-N> :set invnumber<CR>
 
 " show tab and trailing spaces
-set listchars=tab:→
-"\,trail:·
-set list
+set listchars=trail:·,tab:→
+set list     
 
 " a tab takes 4 characters
 set tabstop=4
+
+
+" start scrolling before reaching end of screen in order to keep more context
+set scrolloff=3
+
+
+" Quick timeouts on key combinations.
+set timeoutlen=300
+
 
 
 """""""""""""""""""""""""""""""""""""
@@ -43,6 +56,15 @@ set tabstop=4
 "
 "
 set cscopeverbose 
+
+
+" TODO 
+"augroup Python
+	"au!
+"augroup END
+" in order to scroll faster
+nnoremap <C-e> 3<C-e>
+nnoremap <C-y> 3<C-y>
 
 " Regenerate database
 " map 
@@ -122,7 +144,6 @@ Bundle 'makebg'
 Bundle 'SuperTab'
 Bundle 'taglist.vim'
 Bundle 'vim-addon-background-cmd'
-
 
 " Press F12 to toggle mouse between terminal & vim control
 Bundle 'nvie/vim-togglemouse' 

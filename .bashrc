@@ -3,6 +3,7 @@
 # for examples
 
 export CONCURRENCY_LEVEL=4
+export PYTHONPATH="$HOME/xp_couplage/"
 
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
@@ -100,3 +101,6 @@ fi
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
+
+
+source /usr/share/autojump/autojump.sh
