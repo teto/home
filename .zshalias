@@ -1,0 +1,8 @@
+alias ls="ls --color=auto"
+alias ll="ls -l" 
+alias la="ls -la"
+
+alias agi="sudo apt-get install"
+alias ags="sudo apt-cache search"
+alias agg="sudo apt-get update && sudo apt-get upgrade"
+

@@ -3,8 +3,6 @@
 
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 set $output1 LVDS
-set $output2 LVDS
-bindsym $mod+Shift+f exec xrandr  --output LVDS --auto ;
 ### Start of config.mediakeys
 
 bindsym XF86AudioRaiseVolume exec "amixer -q set Master 2dB+ unmute; notify-send Audio Raised volume"
@@ -52,13 +50,18 @@ focus_follows_mouse no
 #workspace_bar no
 #new_window bb
 
+
+# Manage monitors, enable or disable
+bindsym $mod+Shift+V exec "$HOME/.i3/manage_monitors.sh"
+
+# TODO should detect the number of monitors !
 bindsym $mod+m  mode "monitors"
 mode "monitors" {
 	
 	bindsym $mod+Left move workspace to output left
 	bindsym $mod+Right move workspace to output right
 	bindsym $mod+Up move workspace to output top
-	bindsym $mod+Down move workspace to output bottom
+	bindsym $mod+Down move workspace to output down
                 
 	bindsym $mod+Shift+Left workspace prev_on_output
 	bindsym $mod+Shift+Right workspace next_on_output
@@ -67,6 +70,8 @@ mode "monitors" {
         bindsym Escape mode "default"
 
 }
+
+
 
 #bindsym $mod+F1 exec urxvt -name ranger -e ranger
 mode "focused" {
@@ -129,7 +134,6 @@ workspace_auto_back_and_forth yes
 # The IPC interface allows programs like an external workspace bar
 # (i3-wsbar) or i3-msg (can be used to "remote-control" i3) to work.
 ipc-socket ~/.i3/ipc.sock
-
 
 
 # font for window titles. ISO 10646 = Unicode
@@ -208,6 +212,7 @@ bindsym $mod+e layout default
 
 # to lock screen
 bindsym $mod+Ctrl+L exec "i3lock -i ~/Images/route66.png"
+
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
 
@@ -248,15 +253,17 @@ bindsym $mod+Shift+0 move container to workspace 10
 # reload the configuration file
 bindsym $mod+Shift+C exec "$HOME/.i3/build_config.sh"; reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+R restart
+bindsym $mod+Shift+R exec "$HOME/.i3/build_config.sh"; restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+E exit
+# command is 'exit'
+bindsym $mod+Shift+E exec "$HOME/.i3/logout.sh"
 
 
 mode "command" {
 
-	bindsym f exec "$HOME/.i3/script.sh fn_keys"
-	bindsym t exec "$HOME/.i3/script.sh touchpad"
+	bindsym f exec "$HOME/.i3/script.sh fn_keys"; mode default
+	bindsym t exec "$HOME/.i3/script.sh touchpad"; mode default
+
 # set monitors, wap them ? etc..
 
 	bindsym Return mode "default"
@@ -265,24 +272,42 @@ mode "command" {
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
-        # These bindings trigger as soon as you enter the resize mode
-
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
+        
+       # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 10 px or 10 ppt
-        bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym m resize grow width 10 px or 10 ppt
+        bindsym j resize grow left 10 px or 10 ppt
+        bindsym Shift+j resize shrink left 10 px or 10 ppt
+
+        bindsym k resize grow up  10 px or 10 ppt
+        bindsym Shift+k resize shrink up 10 px or 10 ppt
+
+        bindsym l resize grow down 10 px or 10 ppt
+        bindsym Shift+l resize shrink down 10 px or 10 ppt
+
+        bindsym m resize grow right 10 px or 10 ppt
+        bindsym Shift+m resize shrink right 10 px or 10 ppt
 
         # same bindings, but for the arrow keys
-        bindsym Right resize shrink width 10 px or 10 ppt
-        bindsym Up resize grow height 10 px or 10 ppt
-        bindsym Down resize shrink height 10 px or 10 ppt
-        bindsym Left resize grow width 10 px or 10 ppt
+        #bindsym Right resize shrink width 10 px or 10 ppt
+        #bindsym Up resize grow height 10 px or 10 ppt
+        #bindsym Down resize shrink height 10 px or 10 ppt
+        #bindsym Left resize grow width 10 px or 10 ppt
+        bindsym Left resize grow left 10 px or 10 ppt
+        bindsym Shift+Left resize shrink left 10 px or 10 ppt        
 
-        # back to normal: Enter or Escape
+        bindsym Up resize shrink up  10 px or 10 ppt
+        bindsym Shift+Up resize grow up 10 px or 10 ppt
+
+        bindsym Down resize grow down 10 px or 10 ppt
+        bindsym Shift+Down resize shrink down 10 px or 10 ppt
+
+        bindsym Right resize grow right 10 px or 10 ppt
+        bindsym Shift+Right resize shrink right 10 px or 10 ppt
+
+
+
+	# back to normal: Enter or Escape
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
@@ -290,12 +315,17 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 
+bindsym $mod+w exec "$HOME/.i3/choose_wallpaper.sh"
+
 bindsym $mod+ctrl+minus move scratchpad
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
 	position top
-        status_command i3status
+        #status_command i3status
+        #status_command py3status -c /home/teto/.i3/i3status.conf
+	status_command i3pystatus 
+#-c /home/teto/.i3/
 	output $output1
 	output $output2
 	#status_command conky -c ~/.conkyrc

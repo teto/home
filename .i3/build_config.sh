@@ -7,6 +7,11 @@ folder="$HOME/.i3"
 #generate screens variables
 python "$folder/generate_monitors_config.py" > "$folder/config.monitors"
 
+# if generation failed
+if [ $? -ne 0 ]; then
+	i3-nagbar -m "Could not configure monitors properly. Falling back"&
+	echo -e "set \$output1 LVDS\nset \$output2 LVDS" > "$folder/config.monitors"
+fi
 #echo "set \$wallpaper $wallpaper" > "$folder/config"
 
 #list=$( find . -regex './config\..*' -print)
