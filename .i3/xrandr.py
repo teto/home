@@ -1,6 +1,6 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 import subprocess
-import re # regex
+# import re 
  
 positions = {
 "1920x1080": "--above", # Monitor
@@ -10,9 +10,10 @@ positions = {
 
 # set first as primary and others right of 1st one
 def build_xrandr_command( monitors ):
-	main_monitor = monitors.pop(0)
+
+	main_monitor = monitors[0]
 	command="xrandr --output " + main_monitor +" --auto "
-	for monitor in monitors:
+	for monitor in monitors[1:]:
 		command+="--output "+monitor+" --right-of "+ main_monitor + " --auto ";
 
 	return command	

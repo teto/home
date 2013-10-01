@@ -16,9 +16,27 @@ prompt adam1
 # Allow for functions in the prompt.
 setopt PROMPT_SUBST
 
+# prevents the same command from being registered twice
+setopt histignoredups
+
+# allow to change directory without entering "d"
+setopt AUTO_CD
+# This makes cd=pushd
+setopt AUTO_PUSHD
+
+
+# Don't overwrite, append!
+setopt APPEND_HISTORY
+# Pretty    Obvious.  Right?
+setopt HIST_REDUCE_BLANKS
+# Save the time and how long a command ran
+setopt EXTENDED_HISTORY
 # Use emacs keybindings even if our EDITOR is set to vi
 # -v to use vi keybindings
 bindkey -v
+
+
+alias sz='source ~/.zshrc'
 
 # Keep 1000 lines of history within the shell and save it to ~/.zsh_history:
 HISTSIZE=1000
@@ -85,8 +103,14 @@ precmd() {
 	    vcs_info
 }
 
-source /usr/local/lib/python3.3/dist-packages/Powerline-beta-py3.3.egg/powerline/bindings/zsh/powerline.zsh
+source "$HOME/.zshalias"
 
+#source /usr/local/lib/python3.3/dist-packages/Powerline-beta-py3.3.egg/powerline/bindings/zsh/powerline.zsh
+
+FOLDER="$HOME/.shellhelpers/*"
+for file in $FOLDER; do
+	source "$file"
+done
 
 # list of callbacks that are called on cwd change
 chpwd_functions=(${chpwd_functions[@]} "update_urxvt_title")
