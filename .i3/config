@@ -3,6 +3,7 @@
 
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 set $output1 LVDS
+set $output2 LVDS
 ### Start of config.mediakeys
 
 bindsym XF86AudioRaiseVolume exec "amixer -q set Master 2dB+ unmute; notify-send Audio Raised volume"
