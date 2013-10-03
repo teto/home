@@ -107,10 +107,10 @@ source "$HOME/.zshalias"
 
 #source /usr/local/lib/python3.3/dist-packages/Powerline-beta-py3.3.egg/powerline/bindings/zsh/powerline.zsh
 
-FOLDER="$HOME/.shellhelpers/*"
-for file in $FOLDER; do
-	source "$file"
-done
+# source my local script
+FOLDER="$HOME/.shellhelpers"
+
+. $FOLDER
 
 # list of callbacks that are called on cwd change
 chpwd_functions=(${chpwd_functions[@]} "update_urxvt_title")
