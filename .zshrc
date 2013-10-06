@@ -44,7 +44,7 @@ SAVEHIST=1000
 HISTFILE=~/.zsh_history
 
 # custom scripts
-source .shellhelpers/*
+source ~/.shellhelpers/*
 
 # Use modern completion system
 autoload -Uz compinit
