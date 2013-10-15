@@ -7,9 +7,9 @@ from i3 import choose_via_dmenu
 connected_monitors = xrandr.list_connected_monitors();
 
 #print  "\n".join(connected_monitors) # | 
-chosen_monitor= choose_via_dmenu("dmenu -p 'Choose a monitor:'", connected_monitors )
-print 'stdout', chosen_monitor
-print 'connected monitors', len( connected_monitors )
+chosen_monitor= choose_via_dmenu( connected_monitors )
+print ('stdout', chosen_monitor)
+print ('connected monitors', len( connected_monitors ) )
 
 actions= {
 "Disable": "--output OUTPUT --off",
@@ -19,8 +19,8 @@ actions= {
 "Bottom": "--below "
 }
 
-chosen_action= choose_via_dmenu( "dmenu -p Action ?", actions.viewkeys() )
-print "my action", chosen_action
+chosen_action= choose_via_dmenu(  actions.keys(),prompt=" Action ?" )
+print( "my action", chosen_action)
 
 
 reference_monitor=chosen_monitor
@@ -40,6 +40,6 @@ else:
         command="xrandr --output "+chosen_monitor+" "+actions[chosen_action]+" "+reference_monitor+ " --auto"
 
 #actions[choice]
-print "command", command
+print ("command", command)
 subprocess.call( command , shell=True );                             
 xrandr.py                                 

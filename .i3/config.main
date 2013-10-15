@@ -25,11 +25,16 @@ workspace "$w3" output $output2
 workspace "$w4" output $output2
 assign [class="^Firefox$"] $w2
 
+
+# default border size
+new_window 1pixel
+new_float pixel 2
+
 #for_window [instance="audioplayer"] move to scratchpad
 for_window [instance="pad_audioplayer"] move scratchpad
 for_window [instance="pad_flyingterminal"] move scratchpad
 for_window [instance="pad_ircclient"] move scratchpad
-for_window [class="Navigator"] floating enable,border 1 pixel;
+for_window [class="Navigator"] floating enable,border 1 pixel; hide_edge_borders vertical
 
 
 #workspace 1 "main"
@@ -98,11 +103,7 @@ mode "focused" {
 
 # TODO remove since it is used by Dunst ?
 bindsym $mod+n mode "focused"
-bindsym $mod+c mode "command"
-
-
-# Media keys
-# For audio first
+bindsym $mod+c exec "/home/teto/.i3/misc_commands.py"
 #bindsym XF86AudioRaiseVolume exec "amixer -q set Master 2dB+ unmute; notify-send Audio Raised volume"
 #bindsym XF86AudioLowerVolume exec "amixer -q set Master 2dB- unmute; notify-send Audio lowered"
 #bindsym XF86AudioMute exec "amixer -q set Master toggle"
@@ -246,7 +247,7 @@ bindsym $mod+Shift+C exec "$HOME/.i3/build_config.sh"; reload
 bindsym $mod+Shift+R exec "$HOME/.i3/build_config.sh"; restart
 # exit i3 (logs you out of your X session)
 # command is 'exit'
-bindsym $mod+Shift+E exec "$HOME/.i3/logout.sh"
+bindsym $mod+Shift+E exec "$HOME/.i3/logout.py"
 
 
 mode "command" {
