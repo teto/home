@@ -7,3 +7,5 @@
 	excludesfile = /home/teto/.gitignore_global
 [color]
 	ui = auto
+[sendemail]
+	chainreplyto = false

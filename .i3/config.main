@@ -27,7 +27,7 @@ assign [class="^Firefox$"] $w2
 
 
 # default border size
-new_window 1pixel
+#new_window 1pixel
 new_float pixel 2
 
 #for_window [instance="audioplayer"] move to scratchpad
@@ -338,7 +338,7 @@ bar {
 
 
 
-exec urxvtc -name pad_audioplayer -e mocp 
+exec urxvtc -name pad_audioplayer -e mocp
 exec urxvtc -name pad_flyingterminal
 
 # DP3 & LVDS1

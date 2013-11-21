@@ -47,7 +47,7 @@ map <C-N><C-N> :set invnumber<CR>
 
 
 " Display unprintable characters with '^' and
-" " put $ after the line.
+" set nolist to disable or set list!
 set list     
 
 " show tab and trailing spaces
@@ -83,7 +83,7 @@ set list
 " " Working with spaces?
 " " softtabstop == shiftwidth
 
-set listchars=trail:·,tab:→\ ,eol:↲
+set listchars=trail:·,tab:→\ ,eol:↲,precedes:<,extends:>
 
 " a tab takes 4 characters (local to buffer)
 set tabstop=4
@@ -254,6 +254,7 @@ noremap <F3> :Tlist<Enter>
 
 
 noremap <F4> exec ":emenu <tab>"
+noremap <F11> :set list!<CR>
 
 "execute ":source '$HOME/.vim/test_tab.vim'"
 "source $HOME/.vim/test_tab.vim
