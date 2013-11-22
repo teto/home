@@ -35,13 +35,108 @@ setopt EXTENDED_HISTORY
 # -v to use vi keybindings
 bindkey -v
 
+# Schémas de complétion
+                                                                                                        
+# - Schéma A :
+# 1ère tabulation : complète jusqu'au bout de la partie commune
+# 2ème tabulation : propose une liste de choix
+# 3ème tabulation : complète avec le 1er item de la liste
+# 4ème tabulation : complète avec le 2ème item de la liste, etc...
+# -> c'est le schéma de complétion par défaut de zsh.
+
+# Schéma B :
+# 1ère tabulation : propose une liste de choix et complète avec le 1er item
+#                   de la liste
+# 2ème tabulation : complète avec le 2ème item de la liste, etc...
+# Si vous voulez ce schéma, décommentez la ligne suivante :
+#setopt menu_complete
+
+# Schéma C :
+# 1ère tabulation : complète jusqu'au bout de la partie commune et
+#                   propose une liste de choix
+# 2ème tabulation : complète avec le 1er item de la liste
+# 3ème tabulation : complète avec le 2ème item de la liste, etc...
+# Ce schéma est le meilleur à mon goût !
+# Si vous voulez ce schéma, décommentez la ligne suivante :
+unsetopt list_ambiguous
+# (Merci à Youri van Rietschoten de m'avoir donné l'info !)
+# Quand le dernier caractère d'une complétion est '/' et que l'on
+# tape 'espace' après, le '/' est effacé
+setopt auto_remove_slash
+# Ne fait pas de complétion sur les fichiers et répertoires cachés
+unsetopt glob_dots
+
+# Traite les liens symboliques comme il faut
+setopt chase_links
+
+# Quand l'utilisateur commence sa commande par '!' pour faire de la
+# complétion historique, il n'exécute pas la commande immédiatement
+# mais il écrit la commande dans le prompt
+setopt hist_verify
+# Si la commande est invalide mais correspond au nom d'un sous-répertoire
+# exécuter 'cd sous-répertoire'
+setopt auto_cd
+# L'exécution de "cd" met le répertoire d'où l'on vient sur la pile
+setopt auto_pushd
+# Ignore les doublons dans la pile
+setopt pushd_ignore_dups
+# N'affiche pas la pile après un "pushd" ou "popd"
+setopt pushd_silent
+# "pushd" sans argument = "pushd $HOME"
+
+# Ne stocke pas  une ligne dans l'historique si elle  est identique à la
+# précédente
+setopt hist_ignore_dups
+                                                                                                        
+# Supprime les  répétitions dans le fichier  d'historique, ne conservant
+# que la dernière occurrence ajoutée
+#setopt hist_ignore_all_dups
+
+# Supprime les  répétitions dans l'historique lorsqu'il  est plein, mais
+# pas avant
+setopt hist_expire_dups_first
+
+# N'enregistre  pas plus d'une fois  une même ligne, quelles  que soient
+# les options fixées pour la session courante
+#setopt hist_save_no_dups
+
+# La recherche dans  l'historique avec l'éditeur de commandes  de zsh ne
+# montre  pas  une même  ligne  plus  d'une fois,  même  si  elle a  été
+# enregistrée
+setopt hist_find_no_dups
+
+# Lowers the delay time between the prefix key and other keys - fixes pausing in vim
+ set -sg escape-time 1
+
+
+# reload .tmux.conf
+#bind-key r source-file ~/.tmux.conf \; display-message "TMUX Configuration reloaded"
+#bind-key r source-file ~/.zshrc \; display-message "ZSH Configuration reloaded"
+
+# show vim status
+# # http://zshwiki.org/home/examples/zlewidgets
+# if I could change the cursor instead that would be great
+function zle-line-init zle-keymap-select {
+    RPS1="${${KEYMAP/vicmd/NORMAL}/(main|viins)/INSERT}"
+    RPS2=$RPS1
+    zle reset-prompt
+}
+
+zle -N zle-line-init
+zle -N zle-keymap-select
+
+
+# Affiche le code de sortie si différent de '0'                                                         
+setopt print_exit_value
+
+
 
 alias sz='source ~/.zshrc'
 
 # Keep 1000 lines of history within the shell and save it to ~/.zsh_history:
 HISTSIZE=1000
 SAVEHIST=1000
-HISTFILE=~/.zsh_history
+HISTFILE=$HOME/.zsh_history
 
 # custom scripts
 source ~/.shellhelpers/*
@@ -120,6 +215,5 @@ RPS1='${vcs_info_msg_0_} %T'
 
 
 ##### ALIASES #####
-alias svim="sudo vim"
 
 # PROMPT="%{$fg_bold[cyan]%}$ZSH_THEME_CLOUD_PREFIX %{$fg_bold[green]%}%p %{$fg[green]%}%c %{$fg_bold[cyan]%}$(vcs_info_msg_0_)%{$fg_bold[blue]%} % %{$reset_color%}"

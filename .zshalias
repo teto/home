@@ -1,8 +1,39 @@
+### ls related updates
 alias ls="ls --color=auto"
 alias ll="ls -l" 
-alias la="ls -la"
+alias la="ls -a"
+alias lla="ls -la"
 
+
+### package managmeent related
 alias agi="sudo apt-get install"
 alias ags="sudo apt-cache search"
 alias agg="sudo apt-get update && sudo apt-get upgrade"
+alias acf="apt-cache find"
+
+### 
+alias dfh="df --human-readable"
+alias duh="du --human-readable"
+
+
+alias svim="sudo vim"
+
+# Gestion du 'ls' : couleur & ne touche pas aux accents
+alias ls='ls --classify --tabsize=0 --literal --color=auto --show-control-chars --human-readable'
+
+if [ -x /usr/bin/dircolors ]; then
+#    eval "`dircolors -b`"
+ #   alias ls='ls --color=auto'
+    alias dir='dir --color=auto'
+    alias vdir='vdir --color=auto'
+
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
+
+# Demande confirmation avant d'écraser un fichier
+# alias cp='cp --interactive'
+# alias mv='mv --interactive'
+# alias rm='rm --interactive
 

@@ -235,15 +235,15 @@ nmap <S-N> :NERDTreeToggle<Enter>
 
 
 " Quickly edit/reload the vimrc file
- nmap <silent> <leader>ev :e $MYVIMRC<CR>
- nmap <silent> <leader>sv :so! $MYVIMRC<CR>
+nmap <silent> <leader>ev :e $MYVIMRC<CR>
+nmap <silent> <leader>sv :so! $MYVIMRC<CR>
 "
 "
 " Easy window navigation
- map <C-h> <C-w>h
- map <C-j> <C-w>j
- map <C-k> <C-w>k
- map <C-l> <C-w>l
+map <C-h> <C-w>h
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-l> <C-w>l
 
 " Nerdtree shortcuts
 noremap <F2> :NERDTreeToggle<Enter>
@@ -254,7 +254,10 @@ noremap <F3> :Tlist<Enter>
 
 
 noremap <F4> exec ":emenu <tab>"
+" Hide/display invisible characters
 noremap <F11> :set list!<CR>
+" 
+noremap <F10> :set paste!<CR>
 
 "execute ":source '$HOME/.vim/test_tab.vim'"
 "source $HOME/.vim/test_tab.vim
