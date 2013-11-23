@@ -109,6 +109,9 @@ setopt hist_find_no_dups
  set -sg escape-time 1
 
 
+# parameter expansion, command substitution and arithmetic expansion are performed in prompts
+# setopt prompt_subst
+
 # reload .tmux.conf
 #bind-key r source-file ~/.tmux.conf \; display-message "TMUX Configuration reloaded"
 #bind-key r source-file ~/.zshrc \; display-message "ZSH Configuration reloaded"
@@ -129,10 +132,18 @@ zle -N zle-keymap-select
 # Affiche le code de sortie si différent de '0'                                                         
 setopt print_exit_value
 
+bindkey '^?' backward-delete-char
+bindkey '^H' backward-delete-char
 
+# history search in vim mode
+# http://zshwiki.org./home/zle/bindkeys#why_isn_t_control-r_working_anymore
+bindkey -M viins '^s' history-incremental-search-backward
+bindkey -M vicmd '^s' history-incremental-search-backward
 
 alias sz='source ~/.zshrc'
-
+###############################################
+### History mgmt
+###############################################
 # Keep 1000 lines of history within the shell and save it to ~/.zsh_history:
 HISTSIZE=1000
 SAVEHIST=1000

@@ -33,7 +33,7 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # Demande confirmation avant d'écraser un fichier
-# alias cp='cp --interactive'
-# alias mv='mv --interactive'
-# alias rm='rm --interactive
+alias cp='cp --interactive'
+alias mv='mv --interactive'
+alias rm='rm --interactive'
 
