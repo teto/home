@@ -94,11 +94,13 @@
 	"gpu_window_buffer": "auto",
 	"gutter": true,
 	"highlight_line": true,
-	"highlight_modified_tabs": false,
+	"highlight_modified_tabs": true,
 	"hot_exit": true,
 	"ignored_packages":
 	[
-		"Vintage"
+		"Pylinter",
+		"Vintage",
+		"Zen Tabs"
 	],
 	"indent_guide_options":
 	[

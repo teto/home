@@ -2,7 +2,6 @@
 
 
 # Customize to your needs...
-# export PATH=$PATH:/home/teto/bin:/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games
 # =======
 # Set up the prompt
 
@@ -16,21 +15,9 @@ prompt adam1
 # Allow for functions in the prompt.
 setopt PROMPT_SUBST
 
-# prevents the same command from being registered twice
-setopt histignoredups
-
-# allow to change directory without entering "d"
-setopt AUTO_CD
-# This makes cd=pushd
-setopt AUTO_PUSHD
 
 
-# Don't overwrite, append!
-setopt APPEND_HISTORY
-# Pretty    Obvious.  Right?
-setopt HIST_REDUCE_BLANKS
-# Save the time and how long a command ran
-setopt EXTENDED_HISTORY
+
 # Use emacs keybindings even if our EDITOR is set to vi
 # -v to use vi keybindings
 bindkey -v
@@ -58,7 +45,7 @@ bindkey -v
 # 3ème tabulation : complète avec le 2ème item de la liste, etc...
 # Ce schéma est le meilleur à mon goût !
 # Si vous voulez ce schéma, décommentez la ligne suivante :
-unsetopt list_ambiguous
+#unsetopt list_ambiguous
 # (Merci à Youri van Rietschoten de m'avoir donné l'info !)
 # Quand le dernier caractère d'une complétion est '/' et que l'on
 # tape 'espace' après, le '/' est effacé
@@ -87,10 +74,9 @@ setopt pushd_silent
 # Ne stocke pas  une ligne dans l'historique si elle  est identique à la
 # précédente
 setopt hist_ignore_dups
-                                                                                                        
 # Supprime les  répétitions dans le fichier  d'historique, ne conservant
 # que la dernière occurrence ajoutée
-#setopt hist_ignore_all_dups
+setopt hist_ignore_all_dups
 
 # Supprime les  répétitions dans l'historique lorsqu'il  est plein, mais
 # pas avant
@@ -106,7 +92,7 @@ setopt hist_expire_dups_first
 setopt hist_find_no_dups
 
 # Lowers the delay time between the prefix key and other keys - fixes pausing in vim
- set -sg escape-time 1
+set -sg escape-time 1
 
 
 # parameter expansion, command substitution and arithmetic expansion are performed in prompts
@@ -125,12 +111,27 @@ function zle-line-init zle-keymap-select {
     zle reset-prompt
 }
 
+zle-keymap-select () {
+	if [ $KEYMAP = vicmd ]; then
+		echo -ne "\033]12;Red\007"
+		else
+			echo -ne "\033]12;Grey\007"
+			fi
+}
+zle -N zle-keymap-select
+zle-line-init () {
+	zle -K viins
+	echo -ne "\033]12;Grey\007"
+}
+zle -N zle-line-init
+bindkey -v
+
 zle -N zle-line-init
 zle -N zle-keymap-select
 
 
-# Affiche le code de sortie si différent de '0'                                                         
-setopt print_exit_value
+# Affiche le code de sortie si différent de '0 
+# setopt print_exit_value
 
 bindkey '^?' backward-delete-char
 bindkey '^H' backward-delete-char
@@ -144,10 +145,18 @@ alias sz='source ~/.zshrc'
 ###############################################
 ### History mgmt
 ###############################################
-# Keep 1000 lines of history within the shell and save it to ~/.zsh_history:
-HISTSIZE=1000
-SAVEHIST=1000
-HISTFILE=$HOME/.zsh_history
+# Keep X lines of history within the shell and save it to ~/.zsh_history:
+HISTSIZE=500
+SAVEHIST=500
+HISTFILE="$HOME/.zsh_history"
+
+
+# Don't overwrite, append!
+setopt APPEND_HISTORY
+# Pretty    Obvious.  Right?
+setopt HIST_REDUCE_BLANKS
+# Save the time and how long a command ran
+setopt EXTENDED_HISTORY
 
 # custom scripts
 source ~/.shellhelpers/*

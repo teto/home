@@ -1,4 +1,4 @@
-# Recent settings file for Wireshark 1.8.2.
+# Recent settings file for Wireshark 1.10.2.
 #
 # This file is regenerated each time Wireshark is quit
 # and when changing configuration profile.
@@ -15,7 +15,7 @@ gui.filter_toolbar_show: TRUE
 
 # Wireless Settings Toolbar show (hide).
 # TRUE or FALSE (case-insensitive).
-gui.airpcap_toolbar_show: FALSE
+gui.wireless_toolbar_show: FALSE
 
 # Show (hide) old AirPcap driver warning dialog box.
 # TRUE or FALSE (case-insensitive).

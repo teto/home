@@ -1,13 +1,36 @@
+# ZSH specific
+# Suffix aliases execute a command based on a file’s extension. Suffix aliases are used with the alias -s command.  Here’s my favorite feature of aliases in zsh.  By adding this line:
+# g => global , does not depend on position on line
+alias -s html=vim
+alias -s json=vim
+alias -s Vagrantfile=vim
+
+alias rake="rake1.9.1"
+##############################
 ### ls related updates
+##############################
 alias ls="ls --color=auto"
 alias ll="ls -l" 
 alias la="ls -a"
 alias lla="ls -la"
 
+##############################
+### vagrant
+##############################
+alias -g vinit="vagrant init"
+alias -g vup="vagrant up"
+alias -g vhalt="vagrant halt"
+alias -g vpi="vagrant plugin install"
+alias -g vpu="vagrant plugin uninstall"
+alias -g vpl="vagrant plugin list"
 
+##############################
 ### package managmeent related
+##############################
 alias agi="sudo apt-get install"
-alias ags="sudo apt-cache search"
+alias agy="sudo apt-get -y install"
+alias acl="apt-cache search"
+alias acs="apt-cache show"
 alias agg="sudo apt-get update && sudo apt-get upgrade"
 alias acf="apt-cache find"
 
@@ -23,7 +46,6 @@ alias ls='ls --classify --tabsize=0 --literal --color=auto --show-control-chars 
 
 if [ -x /usr/bin/dircolors ]; then
 #    eval "`dircolors -b`"
- #   alias ls='ls --color=auto'
     alias dir='dir --color=auto'
     alias vdir='vdir --color=auto'
 
@@ -33,7 +55,23 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # Demande confirmation avant d'écraser un fichier
-alias cp='cp --interactive'
-alias mv='mv --interactive'
-alias rm='rm --interactive'
+#alias cp='cp --interactive'
+#alias mv='mv --interactive'
+#alias rm='rm --interactive'
 
+
+##############################
+### Git alias
+##############################
+alias gci="git commit"
+alias glog="git log"
+alias gch="git checkout"
+alias gbl="git branch --list"
+alias gst="git status"
+alias gbc="git branch"
+
+
+##############################
+### compilation related 
+##############################
+alias makej="make -j4"
