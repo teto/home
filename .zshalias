@@ -5,8 +5,13 @@ alias -s html=vim
 alias -s json=vim
 alias -s Vagrantfile=vim
 
-alias rake="rake1.9.1"
+# not always needed ?
+# alias rake="rake1.9.1"
 ##############################
+# 
+alias servethis="python -c 'import SimpleHTTPServer; SimpleHTTPServer.test()'"
+alias pypath='python -c "import sys; print sys.path" | tr "," "\n" | grep -v "egg"'
+
 ### ls related updates
 ##############################
 alias ls="ls --color=auto"
@@ -30,9 +35,11 @@ alias -g vpl="vagrant plugin list"
 alias agi="sudo apt-get install"
 alias agy="sudo apt-get -y install"
 alias acl="apt-cache search"
+alias acf="apt-cache find"
 alias acs="apt-cache show"
 alias agg="sudo apt-get update && sudo apt-get upgrade"
-alias acf="apt-cache find"
+
+alias sdpkg="sudo dpkg"
 
 ### 
 alias dfh="df --human-readable"
