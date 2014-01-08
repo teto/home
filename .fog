@@ -1,0 +1,5 @@
+default:
+ libvirt_uri: "qemu:///system"
+
+libvirt:
+ libvirt_uri: "qemu:///system"
