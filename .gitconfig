@@ -12,6 +12,21 @@
 [sendemail]
 	chainreplyto = false
 
+# Github helpers
+[url "git://github.com/"]
+  # Read-only
+  insteadOf = gh:
+[url "git@github.com:"]
+  # With write access
+  insteadOf = wgh:
+
+# vimdiff as merge and diff tool
+[merge]
+    tool = vimdiff
+[diff]
+    tool = vimdiff
+[difftool]
+    prompt = false
 
 [alias]
 ci=commit

@@ -5,6 +5,29 @@ alias -s html=vim
 alias -s json=vim
 alias -s Vagrantfile=vim
 
+##############################
+### Git
+##############################
+ alias ga='git add'
+ alias gp='git push'
+ alias gl='git log'
+ alias gs='git status'
+ alias gd='git diff'
+ alias gm='git commit -m'
+ alias gma='git commit -am'
+ alias gb='git branch'
+ alias gc='git checkout'
+ alias gra='git remote add'
+ alias grr='git remote rm'
+ alias gpu='git pull'
+ alias gcl='git clone'
+ alias gta='git tag -a -m'
+ alias gf='git reflog'
+#
+#
+
+
+
 # not always needed ?
 # alias rake="rake1.9.1"
 ##############################
@@ -18,6 +41,13 @@ alias ls="ls --color=auto"
 alias ll="ls -l" 
 alias la="ls -a"
 alias lla="ls -la"
+
+
+
+# Movement aliases
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
 
 ##############################
 ### vagrant
