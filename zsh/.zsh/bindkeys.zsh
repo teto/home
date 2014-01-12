@@ -12,3 +12,6 @@ bindkey "^D"      delete-char                          # ctrl-d
 bindkey "^F"      forward-char                         # ctrl-f
 bindkey "^B"      backward-char                        # ctrl-b
 bindkey -v   # Default to standard vi bindings, regardless of editor string
+
+bindkey '^R' history-incremental-search-backward
+bindkey '\e[3~' delete-char
