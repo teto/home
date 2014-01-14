@@ -2,13 +2,13 @@
 
 # OSD
 dunst&
-
+owncloud&
 
 #firefox &
 
 ## Set startup volume
 # set volume
-pactl set-sink-volume 0 '30%' &
+# pactl set-sink-volume 0 '30%' &
 
 
 

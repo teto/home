@@ -4,25 +4,33 @@
 alias -s html=vim
 alias -s json=vim
 alias -s Vagrantfile=vim
+alias -s rb=ruby
+alias -s py=python3
+alias -s png=eog
+alias -s jpg=eog
+alias -s gif=eog
+alias -s avi=mplayer
+alias -s mp3=mocp
 
 ##############################
 ### Git
 ##############################
- alias ga='git add'
- alias gp='git push'
- alias gl='git log'
- alias gs='git status'
- alias gd='git diff'
- alias gm='git commit -m'
- alias gma='git commit -am'
- alias gb='git branch'
- alias gc='git checkout'
- alias gra='git remote add'
- alias grr='git remote rm'
- alias gpu='git pull'
- alias gcl='git clone'
- alias gta='git tag -a -m'
- alias gf='git reflog'
+alias ga='git add'
+alias gp='git push'
+alias gl='git log'
+alias gs='git status'
+alias gd='git diff'
+alias gm='git commit -m'
+alias gma='git commit -am'
+alias gb='git branch'
+alias gc='git checkout'
+alias gra='git remote add'
+alias grr='git remote rm'
+alias grr='git remote -v'
+alias gpu='git pull'
+alias gcl='git clone'
+alias gta='git tag -a -m'
+alias gf='git reflog'
 #
 #
 
@@ -35,14 +43,15 @@ alias -s Vagrantfile=vim
 alias servethis="python -c 'import SimpleHTTPServer; SimpleHTTPServer.test()'"
 alias pypath='python -c "import sys; print sys.path" | tr "," "\n" | grep -v "egg"'
 
+##############################
 ### ls related updates
 ##############################
 alias ls="ls --color=auto"
-alias ll="ls -l" 
+alias l="ls -l" 
 alias la="ls -a"
 alias lla="ls -la"
 
-
+alias v="vim"
 
 # Movement aliases
 alias ..="cd .."
@@ -63,6 +72,7 @@ alias -g vpl="vagrant plugin list"
 ### package managmeent related
 ##############################
 alias agi="sudo apt-get install"
+alias agr="sudo apt-get remove"
 alias agy="sudo apt-get -y install"
 alias acl="apt-cache search"
 alias acf="apt-cache find"
@@ -76,7 +86,7 @@ alias dfh="df --human-readable"
 alias duh="du --human-readable"
 
 
-alias svim="sudo vim"
+alias sv="sudo vim"
 
 # Gestion du 'ls' : couleur & ne touche pas aux accents
 alias ls='ls --classify --tabsize=0 --literal --color=auto --show-control-chars --human-readable'
@@ -103,9 +113,9 @@ fi
 alias gci="git commit"
 alias glog="git log"
 alias gch="git checkout"
-alias gbl="git branch --list"
+alias gbl="git branch --list" # todo add all ?
 alias gst="git status"
-alias gbc="git branch"
+alias gbr="git branch"
 
 
 ##############################
