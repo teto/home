@@ -2,7 +2,7 @@
 
 import subprocess
 
-from . import Status
+from i3pystatus import Status
 
 status = Status(standalone=True)
 
@@ -51,9 +51,9 @@ status.register("load")
   #  },)
 
 # Displays whether a DHCP client is running
-status.register("runwatch",
-    name="DHCP",
-    path="/var/run/dhclient*.pid",)
+#status.register("runwatch",
+    #name="DHCP",
+    #path="/var/run/dhclient*.pid",)
 
 # Shows the address and up/down state of eth0. If it is up the address is shown in
 # green (the default value of color_up) and the CIDR-address is shown

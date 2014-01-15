@@ -1,101 +1,3 @@
-servers = (
-  { address = "irc.ubuntu.com"; chatnet = "Ubuntu"; port = "8001"; },
-  { address = "eu.irc6.net"; chatnet = "IRCnet"; port = "6667"; },
-  { address = "open.ircnet.net"; chatnet = "IRCnet"; port = "6667"; },
-  { address = "irc.efnet.org"; chatnet = "EFNet"; port = "6667"; },
-  { 
-    address = "irc.undernet.org";
-    chatnet = "Undernet";
-    port = "6667";
-  },
-  { address = "irc.dal.net"; chatnet = "DALnet"; port = "6667"; },
-  { 
-    address = "irc.quakenet.org";
-    chatnet = "QuakeNet";
-    port = "6667";
-  },
-  { address = "irc.oftc.net"; chatnet = "OFTC"; port = "6667"; },
-  {
-    address = "irc.gamesurge.net";
-    chatnet = "GameSurge";
-    port = "6667";
-  },
-  { address = "irc.webchat.org"; chatnet = "WebChat"; port = "6667"; },
-  { address = "irc.rizon.net"; chatnet = "Rizon"; port = "6667"; },
-  { address = "irc.link-net.org"; chatnet = "LinkNet"; port = "6667"; },
-  { address = "silc.silcnet.org"; chatnet = "SILC"; port = "706"; }
-);
-
-chatnets = {
-  IRCnet = {
-    type = "IRC";
-    max_kicks = "4";
-    max_msgs = "5";
-    max_whois = "4";
-    max_query_chans = "5";
-  };
-  EFNet = { 
-    type = "IRC";
-    max_kicks = "4";
-    max_msgs = "3";
-    max_whois = "1";
-  };
-  Undernet = {
-    type = "IRC";
-    max_kicks = "1";
-    max_msgs = "3";
-    max_whois = "30";
-  };
-  DALnet = {
-    type = "IRC";
-    max_kicks = "4";
-    max_msgs = "3";
-    max_whois = "30";
-  };
-  QuakeNet = {
-    type = "IRC";
-    max_kicks = "1";
-    max_msgs = "3";
-    max_whois = "30";
-  };
-  OFTC = { 
-    type = "IRC";
-    max_kicks = "1";
-    max_msgs = "3";
-    max_whois = "30";
-  };
-  GameSurge = {
-    type = "IRC";
-    max_kicks = "1";
-    max_msgs = "3";
-    max_whois = "30";
-  };
-  WebChat = {
-    type = "IRC";
-    max_kicks = "1";
-    max_msgs = "3";
-    max_whois = "30";
-  };
-  Rizon = { 
-    type = "IRC";
-    max_kicks = "1";
-    max_msgs = "3";
-    max_whois = "30";
-  };
-  LinkNet = {
-    type = "IRC";
-    max_kicks = "1";
-    max_msgs = "3";
-    max_whois = "30";
-  };
-  SILC = { type = "SILC"; };
-  Ubuntu = { type = "IRC"; };
-};
-
-channels = (
-  { name = "#irssi"; chatnet = "ircnet"; autojoin = "No"; },
-  { name = "silc"; chatnet = "silc"; autojoin = "No"; }
-);
 
 aliases = {
   J = "join";
@@ -261,4 +163,109 @@ statusbar = {
 settings = {
   "fe-text" = { actlist_sort = "refnum"; };
   core = { real_name = "matt"; user_name = "teto"; nick = "teto"; };
+};
+servers = (
+  { address = "irc.stealth.net"; chatnet = "IRCnet"; port = "6668"; },
+  { address = "irc.efnet.org"; chatnet = "EFNet"; port = "6667"; },
+  { 
+    address = "irc.undernet.org";
+    chatnet = "Undernet";
+    port = "6667";
+  },
+  {
+    address = "irc.freenode.net";
+    chatnet = "FREENODE";
+    port = "6667";
+    use_ssl = "no";
+    ssl_verify = "no";
+    autoconnect = "yes";
+  },
+  {
+    address = "irc.langochat.org";
+    chatnet = "LANGOCHAT";
+    port = "6667";
+    use_ssl = "no";
+    ssl_verify = "no";
+    autoconnect = "yes";
+  }
+);
+
+chatnets = {
+  fog= {type = "IRC"};
+  libvirt = {
+    type = "IRC"
+  };
+  Tuxfamily = { type = "IRC"; 
+  };
+  IRCnet = {
+    type = "IRC";
+    max_kicks = "4";
+    max_msgs = "5";
+    max_whois = "4";
+    max_query_chans = "5";
+  };
+  EFNet = { 
+    type = "IRC";
+    max_kicks = "4";
+    max_msgs = "3";
+    max_whois = "1";
+  };
+  Undernet = {
+    type = "IRC";
+    max_kicks = "1";
+    max_msgs = "3";
+    max_whois = "30";
+  };
+  DALnet = {
+    type = "IRC";
+    max_kicks = "4";
+    max_msgs = "3";
+    max_whois = "30";
+  };
+  QuakeNet = {
+    type = "IRC";
+    max_kicks = "1";
+    max_msgs = "3";
+    max_whois = "30";
+  };
+  SILC = { type = "SILC"; };
+  FREENODE = { type = "IRC"; };
+  LANGOCHAT = { type = "IRC"; };
+};
+
+channels = (
+  { name = "#irssi"; chatnet = "ircnet"; autojoin = "No"; },
+  { name = "silc"; chatnet = "silc"; autojoin = "No"; },
+  { name = "tfmodo"; chatnet = "Tuxfamily"; autojoin = "Yes"; },
+  { name = "tuxfamily"; chatnet = "Tuxfamily"; autojoin = "Yes"; }
+  { name = "fog"; chatnet = "Tuxfamily"; autojoin = "Yes"; }
+  { name = "libvirt"; chatnet = "Tuxfamily"; autojoin = "Yes"; }
+);
+
+
+
+settings = {
+  core = {
+    real_name = "Luke skywalker";
+    user_name = "teto";
+    nick = "teto";
+    quit_message = "See you net cow-boy !";
+    ## saber  
+  };
+
+  "fe-text" = { actlist_sort = "refnum"; };
+
+  "fe-common/core" = {
+    hilight_nick_matches = "yes";
+    show_nickmode = "yes";
+    beep_when_window_active = "yes";
+  };
+  "perl/core/scripts" = {
+    nicklist_automode = "SCREEN";
+    nicklist_width = "11";
+  };
+  proxy = {
+    irssiproxy_password = "";
+    irssiproxy_ports = "";
+  };
 };

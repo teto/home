@@ -189,6 +189,7 @@ Bundle 'scrooloose/nerdtree'
 " Bundle 'Lokaltog/vim-powerline'
 Bundle 'mhinz/vim-startify'
 Bundle 'scrooloose/nerdcommenter'
+Bundle 'showmarks2'
 " Bundle 'minibufexpl.vim' To delete
 " Bundle 'Command-T' Replaced by ctrlp
 Bundle 'kien/ctrlp.vim'

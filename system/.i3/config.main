@@ -315,7 +315,7 @@ bar {
 	position top
         #status_command i3status
         #status_command py3status -c /home/teto/.i3/i3status.conf
-	status_command i3pystatus 
+	status_command python i3pystatus.py
 #-c /home/teto/.i3/
 	output $output1
 	output $output2
