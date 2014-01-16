@@ -48,6 +48,7 @@ alias pypath='python -c "import sys; print sys.path" | tr "," "\n" | grep -v "eg
 ##############################
 alias ls="ls --color=auto"
 alias l="ls -l" 
+alias ll="ls -l" 
 alias la="ls -a"
 alias lla="ls -la"
 

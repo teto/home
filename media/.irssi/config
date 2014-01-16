@@ -1,4 +1,3 @@
-
 aliases = {
   J = "join";
   WJOIN = "join -window";
@@ -162,8 +161,32 @@ statusbar = {
 };
 settings = {
   "fe-text" = { actlist_sort = "refnum"; };
-  core = { real_name = "matt"; user_name = "teto"; nick = "teto"; };
+  core = {
+    real_name = "Luke skywalker";
+    user_name = "teto";
+    nick = "teto";
+    quit_message = "See you net cow-boy !";
+    ## saber  
+    hostname = "cameaeae";
+  };
+
+
+  "fe-common/core" = {
+    hilight_nick_matches = "yes";
+    show_nickmode = "yes";
+    beep_when_window_active = "yes";
+  };
+  "perl/core/scripts" = {
+    nicklist_automode = "SCREEN";
+    nicklist_width = "11";
+  };
+  proxy = { irssiproxy_password = ""; irssiproxy_ports = ""; };
 };
+
+###############################################
+### Set of servers mapped to a logical network 
+###############################################
+
 servers = (
   { address = "irc.stealth.net"; chatnet = "IRCnet"; port = "6668"; },
   { address = "irc.efnet.org"; chatnet = "EFNet"; port = "6667"; },
@@ -174,7 +197,7 @@ servers = (
   },
   {
     address = "irc.freenode.net";
-    chatnet = "FREENODE";
+    chatnet = "Freenode";
     port = "6667";
     use_ssl = "no";
     ssl_verify = "no";
@@ -182,21 +205,44 @@ servers = (
   },
   {
     address = "irc.langochat.org";
-    chatnet = "LANGOCHAT";
+    chatnet = "Langochat";
     port = "6667";
     use_ssl = "no";
     ssl_verify = "no";
     autoconnect = "yes";
+  },
+  { 
+    address = "irc.oftc.net";
+    chatnet = "libvirt";
+    autoconnect = "no";
   }
 );
 
+
+#################################
+## This defines the logical networks we want to join
+#################################
 chatnets = {
-  fog= {type = "IRC"};
-  libvirt = {
-    type = "IRC"
+  Freenode = {
+    type = "IRC";
+    max_kicks = "4";
+    max_msgs = "5";
+    max_whois = "4";
+    max_query_chans = "5";
   };
-  Tuxfamily = { type = "IRC"; 
+
+
+  Langochat = {
+    type = "IRC";
+    max_kicks = "4";
+    max_msgs = "5";
+    max_whois = "4";
+    max_query_chans = "5";
   };
+
+  fog = { type = "IRC"; };
+  libvirt = { type = "IRC"; };
+  Tuxfamily = { type = "IRC"; };
   IRCnet = {
     type = "IRC";
     max_kicks = "4";
@@ -229,43 +275,18 @@ chatnets = {
     max_whois = "30";
   };
   SILC = { type = "SILC"; };
-  FREENODE = { type = "IRC"; };
-  LANGOCHAT = { type = "IRC"; };
 };
 
 channels = (
   { name = "#irssi"; chatnet = "ircnet"; autojoin = "No"; },
   { name = "silc"; chatnet = "silc"; autojoin = "No"; },
-  { name = "tfmodo"; chatnet = "Tuxfamily"; autojoin = "Yes"; },
-  { name = "tuxfamily"; chatnet = "Tuxfamily"; autojoin = "Yes"; }
-  { name = "fog"; chatnet = "Tuxfamily"; autojoin = "Yes"; }
-  { name = "libvirt"; chatnet = "Tuxfamily"; autojoin = "Yes"; }
+  { name = "#tfmodo"; chatnet = "Tuxfamily"; autojoin = "Yes"; },
+  { name = "#tuxfamily"; chatnet = "Tuxfamily"; autojoin = "Yes"; },
+  { name = "#fog"; chatnet = "Freenode"; autojoin = "Yes"; },
+  { name = "#libvirt"; chatnet = "Libvirt"; autojoin = "Yes"; },
+  { name = "#gcn"; chatnet = "Langochat"; autojoin = "Yes"; },
+  { name = "#lispmob"; chatnet = "Freenode"; autojoin = "Yes"; }
 );
 
 
 
-settings = {
-  core = {
-    real_name = "Luke skywalker";
-    user_name = "teto";
-    nick = "teto";
-    quit_message = "See you net cow-boy !";
-    ## saber  
-  };
-
-  "fe-text" = { actlist_sort = "refnum"; };
-
-  "fe-common/core" = {
-    hilight_nick_matches = "yes";
-    show_nickmode = "yes";
-    beep_when_window_active = "yes";
-  };
-  "perl/core/scripts" = {
-    nicklist_automode = "SCREEN";
-    nicklist_width = "11";
-  };
-  proxy = {
-    irssiproxy_password = "";
-    irssiproxy_ports = "";
-  };
-};
