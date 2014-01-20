@@ -303,10 +303,10 @@ bar {
 	position top
         #status_command i3status
         #status_command py3status -c /home/teto/.i3/i3status.conf
-	status_command python i3pystatus.py
+	status_command python3 ~/.i3/myStatus.py
 #-c /home/teto/.i3/
-	output $output1
-	output $output2
+	#output $output1
+	#output $output2
 	#status_command conky -c ~/.conkyrc
 	
 #	tray_output $output1 

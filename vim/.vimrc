@@ -1,3 +1,10 @@
+" Search parameters
+set hlsearch " highlight search terms
+set incsearch " show search matches as you type
+set ignorecase " ignore case when searching
+
+
+
 set nocompatible               " be iMproved
 filetype off                   " required!
 set t_Co=256			" colors
@@ -85,11 +92,8 @@ set list
 
 set listchars=trail:·,tab:→\ ,eol:↲,precedes:<,extends:>
 
-" a tab takes 4 characters (local to buffer)
-set tabstop=4
-
-" Number of spaces to use for each step of (auto)indent.
-set shiftwidth=4
+set tabstop=4 " a tab takes 4 characters (local to buffer)
+set shiftwidth=4 " Number of spaces to use per step of (auto)indent.
 
 " start scrolling before reaching end of screen in order to keep more context
 set scrolloff=3
@@ -270,3 +274,6 @@ nnoremap <C-l> :call MoveToTab(1)<CR>
 
 " map <F2> :echo 'Current time is ' . strftime('%c')<CR>
 " map! <F3> a<C-R>=strftime('%c')<CR><Esc>
+
+" let use sudo once the file is loaded
+cmap w!! w !sudo tee % >/dev/null
