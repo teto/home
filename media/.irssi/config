@@ -213,8 +213,8 @@ servers = (
   },
   { 
     address = "irc.oftc.net";
-    chatnet = "libvirt";
-    autoconnect = "no";
+    chatnet = "Libvirt";
+    autoconnect = "yes";
   }
 );
 
@@ -241,7 +241,7 @@ chatnets = {
   };
 
   fog = { type = "IRC"; };
-  libvirt = { type = "IRC"; };
+  Libvirt = { type = "IRC"; };
   Tuxfamily = { type = "IRC"; };
   IRCnet = {
     type = "IRC";
@@ -282,10 +282,10 @@ channels = (
   { name = "silc"; chatnet = "silc"; autojoin = "No"; },
   { name = "#tfmodo"; chatnet = "Tuxfamily"; autojoin = "Yes"; },
   { name = "#tuxfamily"; chatnet = "Tuxfamily"; autojoin = "Yes"; },
-  { name = "#fog"; chatnet = "Freenode"; autojoin = "Yes"; },
-  { name = "#libvirt"; chatnet = "Libvirt"; autojoin = "Yes"; },
-  { name = "#gcn"; chatnet = "Langochat"; autojoin = "Yes"; },
-  { name = "#lispmob"; chatnet = "Freenode"; autojoin = "Yes"; }
+  { name = "#fog"; chatnet = "Freenode"; autojoin = "no"; },
+  { name = "#libvirt"; chatnet = "Libvirt"; autojoin = "No"; },
+  { name = "#gcn"; chatnet = "Langochat"; autojoin = "No"; },
+  { name = "#lispmob"; chatnet = "Freenode"; autojoin = "No"; }
 );
 
 
