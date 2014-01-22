@@ -230,7 +230,7 @@ bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
 
 # reload the configuration file
-bindsym $mod+Shift+C exec "$HOME/.i3/build_config.sh"; reload
+bindsym $mod+Shift+C  reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+R exec "$HOME/.i3/build_config.sh"; restart
 # exit i3 (logs you out of your X session)
@@ -305,8 +305,9 @@ bar {
         #status_command py3status -c /home/teto/.i3/i3status.conf
 	status_command python3 ~/.i3/myStatus.py
 #-c /home/teto/.i3/
-	#output $output1
-	#output $output2
+	output $output0
+	output $output1
+	output $output2
 	#status_command conky -c ~/.conkyrc
 	
 #	tray_output $output1 
