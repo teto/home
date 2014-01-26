@@ -8,8 +8,16 @@
 # for ssh logins, install and configure the libpam-umask package.
 #umask 022
 
+# specs are here
+# http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html
 export XDG_CONFIG_HOME="$HOME/.config"
-export SYSCONFDIR="$HOME/.config" 
+#export XDG_CACHE_HOME="$HOME/.config"
+#export XDG_RUNTIME_DIR="$HOME/.config"
+#export XDG_DATA_HOME="$HOME/.config"
+#export XDG_CONFIG_HOME="$HOME/.config"
+
+# Var used by libvirt. Others also ?
+export SYSCONFDIR="$HOME/.config/libvirt" 
 # libvirtd.conf
 # if running bash
 if [ -n "$BASH_VERSION" ]; then

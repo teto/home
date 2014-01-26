@@ -2,7 +2,7 @@
 
 import subprocess
 
-from i3pystatus import Status
+from i3pystatus.core import Status
 
 status = Status(standalone=True)
 

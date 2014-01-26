@@ -64,10 +64,10 @@ ReadTags		= yes
 # Directory in which you store music files. If you specify it you will be able
 # to quickly go to this directory with the '-m' parameter or the 'm' command.
 # This can also point to a playlist.
-MusicDir		= "/mnt/Loisirs/matt/Music/"
-Fastdir1		= "/home/teto/Téléchargements"
+MusicDir		= /mnt/Loisirs/matt/Music/
+Fastdir1		= "${HOME}/Téléchargements"
 #Fastdir1		= "~/Téléchargements"
-Fastdir2		= "/home/teto/Musique"
+Fastdir2		= "${HOME}/Musique"
 
 #go_to_fast_dir1 = "1"
 
@@ -214,7 +214,7 @@ XTermTheme		= transparent-background
 
 # MOC directory - where pid file, socket, and state files are stored.
 # You can use ~ at the beginning.
-# MOCDir		= ~/.moc
+MOCDir		= ~/.moc
 
 # Use mmap() to read files. mmap() is much slower on NFS.
 UseMmap			= no

@@ -134,8 +134,8 @@ bindsym $mod+Shift+Return exec --no-startup-id ~/.i3/fork_term.sh
 bindsym $mod+Shift+A kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec i3-dmenu-desktop
-#dmenu_run j4-
+bindsym $mod+d exec j4-dmenu-desktop
+#dmenu_run -
 
 #for_window [title="MOC"] move scratchpad
 for_window [Class="^Transmission"] floating enable
@@ -305,9 +305,9 @@ bar {
         #status_command py3status -c /home/teto/.i3/i3status.conf
 	status_command python3 ~/.i3/myStatus.py
 #-c /home/teto/.i3/
-	output $output0
-	output $output1
-	output $output2
+	#output $output0
+	#output $output1
+	#output $output2
 	#status_command conky -c ~/.conkyrc
 	
 #	tray_output $output1 
