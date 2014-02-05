@@ -1,0 +1,12 @@
+#The mailcap file has a "test=" field. If the part after the "=" evaluates to false, then the line is skipped and the program reading .mailcap searches for a subsequent line with a matching MIME type.
+#test=[ -n "$DISPLAY" ]
+application/pdf; evince '%s';
+# pdftotext
+# wordtotext
+# ppt2text 
+# downlaod script mutt_bgrun
+#application/pdf; pdftohtml -q -stdout %s | w3m -T text/html; copiousoutput 
+#application/msword; wvWare -x /usr/lib/wv/wvHtml.xml %s 2>/dev/null | w3m -T text/html; copiousoutput
+text/*; less '%s';
+text/html; mutt_bgrun firefox -new-tab '%s';
+image/*; eog '%s';

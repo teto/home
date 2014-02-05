@@ -1,1 +1,1 @@
-/usr/share/irssi/scripts/nicklist.pl
+nicklist.pl
