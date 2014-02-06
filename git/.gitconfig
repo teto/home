@@ -1,6 +1,7 @@
 [user]
-	name = Matt
+	name = Matthieu Coudron
 	email = mattator@gmail.com
+	signingkey = E1B768A0
 [push]
 	default = simple
 [core]
@@ -8,7 +9,7 @@
 	whitespace = trailing-space,space-before-tab
 
 [color]
-	ui = auto
+	ui = true
 [sendemail]
 	chainreplyto = false
 

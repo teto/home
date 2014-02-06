@@ -175,6 +175,7 @@ settings = {
     hilight_nick_matches = "yes";
     show_nickmode = "yes";
     beep_when_window_active = "yes";
+    theme = "xchat";
   };
   "perl/core/scripts" = {
     nicklist_automode = "SCREEN";
@@ -297,19 +298,20 @@ keyboard = (
 hilights = ( { text = "teto"; nick = "yes"; word = "yes"; } );
 windows = {
   1 = { immortal = "yes"; name = "(status)"; level = "ALL"; };
-  2 = {
+  2 = { };
+  3 = {
     items = (
       {
         type = "CHANNEL";
         chat_type = "IRC";
-        name = "#virt";
+        name = "#eaeaeazea";
         tag = "Libvirt";
       }
     );
+    sticky = "yes";
   };
-  3 = { name = "hilight"; sticky = "yes"; };
 };
 mainwindows = {
-  1 = { first_line = "8"; lines = "51"; };
-  3 = { first_line = "1"; lines = "7"; };
+  1 = { first_line = "27"; lines = "21"; };
+  3 = { first_line = "1"; lines = "26"; };
 };

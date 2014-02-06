@@ -7,7 +7,7 @@
     #   %b  body
     #   %i  iconname (including its path)
     #   %I  iconname (without its path)
-    format = "%s %b"
+    format = "%a\n%s %b"
 
     # Sort messages by urgency
     sort = yes
@@ -18,7 +18,7 @@
     # keybindings to remove notification
     # available modifiers are 'ctrl', 'mod1' (the alt-key), 'mod2', 'mod3'
     # and 'mod4' (windows-key)
-    modifier = ctrl
+    modifier = mod4
 
     # use xev to find the names for keys
     key = space

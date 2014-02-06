@@ -31,7 +31,7 @@ folder-hook . 'unset trash'
 set sendmail="/usr/bin/msmtp"
 
 #set use_envelope_from
-#set spoolfile="$HOME/Mail/inbox"
+set spoolfile="~/Maildir"
 
 
 
