@@ -9,7 +9,6 @@ source $ZDOTDIR/aliases.zsh
 source $ZDOTDIR/bindkeys.zsh
 source $ZDOTDIR/functions.zsh
 source $ZDOTDIR/history.zsh
-source ~/.zsh/zsh_hooks.zsh
-#source ~/.zsh/hitch.zsh
-# source /opt/github/env.sh
+source $ZDOTDIR/zsh_hooks.zsh
+source $ZDOTDIR/mail.zsh
 #source  ${HOME}/.dotfiles/z/z.sh

@@ -1,3 +1,6 @@
+# if a process takeslonger than this, display its processing time
+REPORTTIME=10
+
 function virtualenv_info {
     [ $VIRTUAL_ENV ] && echo '('`basename $VIRTUAL_ENV`') '
 }

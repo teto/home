@@ -1,0 +1,27 @@
+
+# Upon debugging, you want verbose, you make it yes
+ VERBOSE=no
+MAILDIR=$HOME/Maildir/
+SPAMBOX=spam
+
+# Directory for storing procmail items
+PMDIR=$HOME/.procmail # Create this directory on your system for recipe files
+#PATH=/bin:/usr/bin
+# TODO enlever qd ca marchera
+LOGFILE=procmail.log
+
+
+#INCLUDERC=$PMDIR/test.rc
+#INCLUDERC=$PMDIR/lists.rc
+# conditions start with *
+:0
+#* ^(From|Cc|To).*frnog.org
+* ^(From|Cc|To).*frnog.org
+$MAILDIR/frnog/
+
+
+#all other mail goes to DEFAULT mailbox
+
+
+
+
