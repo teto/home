@@ -1,0 +1,5 @@
+[mesTravaux]
+localPath=/home/teto/articles_matt
+targetPath=MesTravaux
+backend=owncloud
+connection=ownCloud
