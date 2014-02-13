@@ -140,6 +140,7 @@ bindsym $mod+d exec j4-dmenu-desktop
 #for_window [title="MOC"] move scratchpad
 for_window [Class="^Transmission"] floating enable
 bindsym $mod+F2 [instance="pad_(?!audioplayer)"] move scratchpad ; [instance="pad_audioplayer"] scratchpad show
+#i3-msg [con_marki=pad1] focus
 bindsym $mod+F1 [instance="pad_(?!flyingterminal)"] move scratchpad; [instance="pad_flyingterminal"] scratchpad show
 #bindsym $mod+F3 scratchpad show
 
@@ -216,6 +217,12 @@ bindsym $mod+egrave workspace 7
 bindsym $mod+underscore workspace 8
 bindsym $mod+ccedilla workspace 9
 bindsym $mod+agrave workspace 10
+
+# move to scratchpad
+bindsym $mod+Shift+F1 mark pad1; move scratchpad
+bindsym $mod+Shift+F2 move container to workspace "$w2" 
+bindsym $mod+Shift+F3 move container to workspace "$w3"
+bindsym $mod+Shift+F4 move container to workspace "$w4"
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace "$w1"
