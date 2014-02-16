@@ -1,6 +1,11 @@
 
 # Upon debugging, you want verbose, you make it yes
 VERBOSE=yes
+
+# Make sure that $MAILDIR exists and that it is a directory!
+# DEFAULT=$MAILDIR/inbox/ # See the slash!
+#     # DEFAULT must end in a trailing / to inform Procmail 
+#         # to use maildir storage
 MAILDIR=$HOME/Maildir/
 SPAMBOX=spam
 LASTFOLDER=$MAILDIR
@@ -9,7 +14,7 @@ LASTFOLDER=$MAILDIR
 PMDIR=$HOME/.procmail # Create this directory on your system for recipe files
 #PATH=/bin:/usr/bin
 # TODO enlever qd ca marchera
-LOGFILE=$PMDIR/procmail.log
+LOGFILE=$MAILDIR/procmail.log
 
 
 INCLUDERC=$PMDIR/ietf.rc
