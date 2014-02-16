@@ -1,12 +1,13 @@
-# Format de date
+# When line ends with '|', runs command in shell 
+#
+#
+## Format de date
 set date_format="%A %d %b %Y à %H:%M:%S (%Z)"
 
 # assign an application to an attachement type (pdf/word etc..)
-set mailcap_path="~/.mutt/mailcaps"
+set mailcap_path=$MUTT/mailcaps|
 
-#source $HOME/.mutt/mailboxes
 #source $HOME/.mutt/folder_hooks
-#source ~/.mutt/muttrc.mailboxes
 
 #/var/spool/mail/teto 
 set realname="Matthieu Coudron"
@@ -31,7 +32,6 @@ folder-hook . 'unset trash'
 set sendmail="/usr/bin/msmtp"
 
 #set use_envelope_from
-set spoolfile="~/Maildir"
 
 
 
@@ -45,11 +45,10 @@ set sort = 'threads'
 
 # to choose between 4 types maildir, etc...
 set mbox_type=maildir
-#set record = "+sent"
-#set postponed = "+postponed"
 #mailboxes +gmail2/INBOX +lip6/inbox
 #mailboxes "/home/teto/Maildir"
-mailboxes "~/Maildir"
+
+source $MUTT/mailboxes|
 # set file
 set signature="Matthieu Coudron"
 
@@ -64,4 +63,5 @@ hdr_order Date From To Cc
 ##################################
 ### for colors
 ##################################
-source "$HOME/.mutt/mutt_colors"
+#p"$HOME/.mutt/
+source $MUTT/colors.mutt|

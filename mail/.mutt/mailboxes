@@ -1,0 +1,10 @@
+# mutt mailboxes
+#
+
+#
+set spoolfile="~/Maildir"
+set record = "+sent"
+set postponed = "+postponed"
+mailboxes !
+mailboxes ~/Maildir
+mailboxes ~/Maildir/frnog

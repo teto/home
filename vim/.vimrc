@@ -1,10 +1,3 @@
-" Search parameters
-set hlsearch " highlight search terms
-set incsearch " show search matches as you type
-set ignorecase " ignore case when searching
-
-
-
 set nocompatible               " be iMproved
 filetype off                   " required!
 set t_Co=256			" colors
@@ -43,54 +36,14 @@ set ttymouse=urxvt
 " Display line numbers on the left
 " set number
 
-" Always display the status line, even if only one window is displayed
-set laststatus=2
-
-" highlight cursor line
-set cursorline
 
 " show/hide line numbers
 map <C-N><C-N> :set invnumber<CR>
 
 
+
 " Display unprintable characters with '^' and
 " set nolist to disable or set list!
-set list     
-
-" show tab and trailing spaces
-" Ctrl+v, u, unicode hex code
-" "
-" " tab chars
-" " 21E2 ⇢
-" " 21E5 ⇥
-" " 21E8 ⇨
-" " 2192 → (rightwards arrow, &rarr;)
-" " 21D2 ⇒ (rightwards double arrow, &rArr;)
-" " 25B8 ▸ (TextMate style)
-" "→ 
-" " trail chars
-" " 25CF ●
-" " 2639 ☹ (frowning face)
-" " 267A ♺ (recycling symbol)
-" " 261F ☟ (hand pointing down)
-" " F8FF  (apple logo)
-" "
-" " eol chars
-" " 21B2 ↲
-" " 21B5 ↵ (carriage return, &crarr;)
-" " 21A9 ↩
-" " 23CE ⏎ (return symbol)
-" " 00AC ¬ (TextMate style)
-"
-"
-"
-" " Working with <Tab>s?
-" " tabstop == softtabstop
-" "
-" " Working with spaces?
-" " softtabstop == shiftwidth
-
-set listchars=trail:·,tab:→\ ,eol:↲,precedes:<,extends:>
 
 set tabstop=4 " a tab takes 4 characters (local to buffer)
 set shiftwidth=4 " Number of spaces to use per step of (auto)indent.
@@ -129,8 +82,6 @@ nnoremap <C-y> 3<C-y>
 
 " Regenerate database
 " map 
-
-
 map <esc>[27;5;9~ <C-Tab>
 map <esc>[1;5A <C-Up>
 map <esc>[1;5B <C-Down>
@@ -144,32 +95,12 @@ map <esc>[27;5;39~ <C-'>
 map <esc>[27;5;34~ <C-">
 map <esc>[27;5;40~ <C-(>
 "
-"  TAbbar colorization
-"
-hi TabLineFill ctermfg=LightGreen ctermbg=DarkGreen
-hi TabLine ctermfg=Blue ctermbg=Yellow
-hi TabLineSel ctermfg=Red ctermbg=Yellow
 
-
-
-" cterm => terminal color, gui => with gvim ?
-highlight Pmenu ctermfg=Cyan ctermbg=Blue cterm=None guifg=Cyan guibg=DarkBlue
-
-" selected element
-highlight PmenuSel   ctermfg=White ctermbg=Blue cterm=Bold guifg=White guibg=DarkBlue gui=Bold
-
-" scrollbar
-highlight PmenuSbar ctermbg=Cyan guibg=Cyan
-highlight PmenuThumb ctermfg=White guifg=White 
-
-
-" highlight CursorLine  cterm=NONE ctermbg=white ctermfg=white guibg=darkred guifg=white
-" highlight CursorColumn cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
-" :nnoremap <Leader>c :set cursorline! cursorcolumn!<CR>
 syntax on
 
 
 " Setting up Vundle - the vim plugin bundler
+" it will download itself if not existing
     let iCanHazVundle=1
     let vundle_readme=expand('~/.vim/vundle/README.md')
     if !filereadable(vundle_readme)
@@ -182,35 +113,9 @@ syntax on
 
 
 set rtp+=~/.vim/vundle/
+" set rtp+=~/powerline/bindings/vim
 call vundle#rc()
 
-" let Vundle manage Vundle
-"  " required! 
-Bundle 'gmarik/vundle'
-Bundle 'sickill/vim-monokai'    
-Bundle 'scrooloose/nerdtree'
-" Bundle 'Lokaltog/powerline'
-" Bundle 'Lokaltog/vim-powerline'
-Bundle 'mhinz/vim-startify'
-Bundle 'scrooloose/nerdcommenter'
-Bundle 'showmarks2'
-" Bundle 'minibufexpl.vim' To delete
-" Bundle 'Command-T' Replaced by ctrlp
-Bundle 'kien/ctrlp.vim'
-Bundle 'CCTree'
-Bundle 'Modeliner'
-Bundle 'autoload_cscope.vim'
-" Bundle 'gfxmonk/vim-background-make'
-" Bundle 'tpope/vim-dispatch'
-Bundle 'makebg'
-Bundle 'SuperTab'
-" Bundle 'taglist.vim'
-Bundle 'vim-addon-background-cmd'
-Bundle 'Lokaltog/powerline' 
-" , {'rtp': 'powerline/bindings/vim'}
-" Press F12 to toggle mouse between terminal & vim control
-Bundle 'nvie/vim-togglemouse' 
-" set statusline=%t       "tail of the filename
 
 filetype plugin on
 
@@ -236,12 +141,11 @@ nmap <C-&> :tabn1<Enter>
 nmap <C-é> :tabn2<Enter>
 nmap <C-"> :tabn3<Enter>
 nmap <C-'> :tabn4<Enter>
-nmap <S-N> :NERDTreeToggle<Enter>
 
 
 " Quickly edit/reload the vimrc file
 nmap <silent> <leader>ev :e $MYVIMRC<CR>
-nmap <silent> <leader>sv :so! $MYVIMRC<CR>
+nmap <sile4t> <leader>sv :so! $MYVIMRC<CR>
 "
 "
 " Easy window navigation
@@ -276,4 +180,8 @@ nnoremap <C-l> :call MoveToTab(1)<CR>
 " map! <F3> a<C-R>=strftime('%c')<CR><Esc>
 
 " let use sudo once the file is loaded
+" source ~/.vim/insert_mode
+" source ~/.vim/display
+source ~/.vim/colors
+source ~/.vim/bundles
 cmap w!! w !sudo tee % >/dev/null

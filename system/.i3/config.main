@@ -28,7 +28,10 @@ new_float pixel 2
 for_window [instance="pad_audioplayer"] move scratchpad
 for_window [instance="pad_flyingterminal"] move scratchpad
 for_window [instance="pad_ircclient"] move scratchpad
-for_window [class="Navigator"] floating enable,border 1 pixel; hide_edge_borders vertical
+for_window [class="Navigator"] floating enable,border 1 pixel;
+
+# vertical | horizontal | both
+hide_edge_borders both
 
 
 #workspace 1 "main"

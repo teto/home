@@ -1,26 +1,58 @@
 
 # Upon debugging, you want verbose, you make it yes
- VERBOSE=no
+VERBOSE=yes
 MAILDIR=$HOME/Maildir/
 SPAMBOX=spam
+LASTFOLDER=$MAILDIR
 
 # Directory for storing procmail items
 PMDIR=$HOME/.procmail # Create this directory on your system for recipe files
 #PATH=/bin:/usr/bin
 # TODO enlever qd ca marchera
-LOGFILE=procmail.log
+LOGFILE=$PMDIR/procmail.log
 
 
-#INCLUDERC=$PMDIR/test.rc
+INCLUDERC=$PMDIR/ietf.rc
 #INCLUDERC=$PMDIR/lists.rc
 # conditions start with *
+#
+#
+#########################################
+# FrNog 
+#########################################
 :0
 #* ^(From|Cc|To).*frnog.org
 * ^(From|Cc|To).*frnog.org
 $MAILDIR/frnog/
 
+#########################################
+# IETF ml
+#########################################
+#:0
+#* ^(From|Cc|To).lisp@ietf.org
+#$MAILDIR/lisp
 
+:0
+* ^(From|Cc|To).trill@ietf.org
+$MAILDIR/trill/
+
+:0
+* ^(From|Cc|To).lisp@ietf.org
+$MAILDIR/lisp/
 #all other mail goes to DEFAULT mailbox
+
+
+:0
+* ^(From|Cc|To).mptcp-dev@listes.uclouvain.be
+$MAILDIR/mptcp/
+
+
+:0
+* ^(From|Cc|To).lua-l@lists.lua.org
+$MAILDIR/lua/
+:0
+* ^(From|Cc|To).luabind-user@lists.sourceforge.net
+$MAILDIR/luabind/
 
 
 
