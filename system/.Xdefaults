@@ -1,5 +1,7 @@
+!URxvt*font:     xft:Bitstream Vera Sans Mono:style=Regular:pixelsize=13:antialias=true
+URxvt*font: xft:Inconsolata For Powerline:size=11
 URxvt*depth: 32
-
+URxvt.clipboard.autocopy:   true
 
 
 !URxvt.keysym.S-Page_Up       : captured by terminal for scrolling
@@ -30,11 +32,10 @@ URxvt.keysym.Control-Tab: \033[27;5;9~
 URXvt.keysym.Control-0x26: \033[27;5;38~
 ! é
 URxvt.keysym.Control-0xe9: \033[27;5;130~
-! "
+! guillemets
 URxvt.keysym.Control-0x22: \033[27;5;34~
-! '
+! 
 URxvt.keysym.Control-0x27: \033[27;5;39~
-
 ! (
 URxvt.keysym.Control-0x28: \033[27;5;40~
 ! -
@@ -54,24 +55,23 @@ URxvt*background: rgba:00ff/00ff/0200/c800
 URxvt*scrollTtyKeypress: true
 ! normal settings
 !URxvt*background:       rgba:0000/0000/0000/dddd
-URxvt*color0:   #101010
-URxvt*color1:   #f13a21
-URxvt*color2:   #93f91d
-URxvt*color3:   #ffd00a
-URxvt*color4:   #004f9e
-URxvt*color5:   #ec0048
-URxvt*color6:   #2aa7e7
-URxvt*color7:   #f2f2f2
-URxvt*color8:   #1d202f
-URxvt*color9:   #ff361e
-URxvt*color10:  #ffc005
-URxvt*color11:  #93ff00
-URxvt*color12:  #0071ff
-URxvt*color13:  #ef0051
-URxvt*color14:  #4bb8fd
-URxvt*color15:  #a020f0
+!URxvt*color0:   #101010
+!URxvt*color1:   #f13a21
+!URxvt*color2:   #93f91d
+!URxvt*color3:   #ffd00a
+!URxvt*color4:   #004f9e
+!URxvt*color5:   #ec0048
+!URxvt*color6:   #2aa7e7
+!URxvt*color7:   #f2f2f2
+!URxvt*color8:   #1d202f
+!URxvt*color9:   #ff361e
+!URxvt*color10:  #ffc005
+!URxvt*color11:  #93ff00
+!URxvt*color12:  #0071ff
+!URxvt*color13:  #ef0051
+!URxvt*color14:  #4bb8fd
+!URxvt*color15:  #a020f0
 URxvt*cursorColor:      white
-URxvt*font:     xft:Bitstream Vera Sans Mono:style=Regular:pixelsize=13:antialias=true
 URxvt*foreground:       #f2f2f2
 !URxvt*geometry: 74x27
 

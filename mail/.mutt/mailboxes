@@ -1,10 +1,27 @@
-# mutt mailboxes
-#
-
-#
-set spoolfile="~/Maildir"
-set record = "+sent"
-set postponed = "+postponed"
+mailboxes *
 mailboxes !
-mailboxes ~/Maildir
-mailboxes ~/Maildir/frnog
+mailboxes =gmail/[Gmail].Brouillons
+mailboxes =gmail/[Gmail].Important
+mailboxes =gmail/[Gmail].Corbeille
+mailboxes =gmail/[Gmail].Messages envoy&AOk-s
+mailboxes =gmail/[Gmail].Spam
+mailboxes =gmail/[Gmail].Suivis
+mailboxes =gmail/[Gmail].Tous les messages
+mailboxes =gmail/Analytics
+mailboxes =gmail/Anim'Int
+mailboxes =gmail/Blue Cosmos
+mailboxes =gmail/Dev ML
+mailboxes =gmail/Famille
+mailboxes =gmail/GCN
+mailboxes =gmail/INBOX
+mailboxes =gmail/Intech
+mailboxes =gmail/lisp
+mailboxes =gmail/lists.trill
+mailboxes =gmail/Luabind
+mailboxes =gmail/Moi
+mailboxes =gmail/mptcp
+mailboxes =gmail/oflags
+mailboxes =gmail/Stage2A
+mailboxes =gmail/stage3a
+mailboxes =gmail/Toutfr
+mailboxes =gmail/tuxfamily

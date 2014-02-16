@@ -4,11 +4,11 @@ font xft:Liberation Sans Mono 8
 
 set $mod Mod1
 
-set $term urxvtc
+set $term rxvt-unicode
 
 set $w1 1 main
 set $w2 2 web
-set $w3 3 editeurs
+set $w3 3 éditeurs
 set $w4 4 qemu
 set $w5 5 misc
 

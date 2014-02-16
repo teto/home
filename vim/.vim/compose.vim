@@ -6,3 +6,5 @@ set scrolloff=3
 
 "  compilation option
 set smartindent 
+
+set noshowmode " hide the default mode text

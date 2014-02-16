@@ -17,7 +17,7 @@ export XDG_CONFIG_HOME="$HOME/.config"
 #export XDG_CONFIG_HOME="$HOME/.config"
 
 # Var used by libvirt. Others also ?
-export SYSCONFDIR="$HOME/.config/libvirt" 
+# export SYSCONFDIR="$HOME/.config/libvirt" 
 # libvirtd.conf
 # if running bash
 if [ -n "$BASH_VERSION" ]; then

@@ -9,20 +9,17 @@ HISTFILE=~/.zsh_history
 export HISTIGNORE="ls:ll:cd:cd -:pwd:exit:date:* --help"
 
 # multiple zsh sessions will append to the same history file (incrementally, after each command is executed)
-setopt inc_append_history
+# setopt inc_append_history
 
-# purge duplicates first
-setopt hist_expire_dups_first
+setopt hist_expire_dups_first # purge duplicates first
 
-# if a new command line being added to the history list duplicates an older one, the older command is removed from the list
-setopt hist_ignore_all_dups
 
-# reduce unnecessary blanks from commands being written to history
-setopt hist_reduce_blanks
-
-# import new commands from history (mostly)
-setopt share_history
-
+setopt hist_ignore_dups # Do not write events to history that are duplicates of previous events
+setopt hist_ignore_space # remove command line from history list when first character on the line is a space
+setopt hist_find_no_dups # When searching history don't display results already cycled through twice
+setopt hist_reduce_blanks # Remove extra blanks from each command line being added to history
+setopt hist_verify # don't execute, just expand history
+setopt share_history # imports new commands and appends typed commands to history
 
 
 

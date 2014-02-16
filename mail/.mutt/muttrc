@@ -5,7 +5,7 @@
 set date_format="%A %d %b %Y à %H:%M:%S (%Z)"
 
 # assign an application to an attachement type (pdf/word etc..)
-set mailcap_path=$MUTT/mailcaps|
+set mailcap_path= $MUTT/mailcaps
 
 #source $HOME/.mutt/folder_hooks
 
@@ -13,15 +13,15 @@ set mailcap_path=$MUTT/mailcaps|
 set realname="Matthieu Coudron"
 
 # to improve performance
-set header_cache =~/.mutt/cache/headers
-set message_cachedir =~/.mutt/cache/bodies
+set header_cache = ${MUTT}/cache/headers
+set message_cachedir = $MUTT/cache/bodies
 set pager=less
 set move=no
 #utilise lors de l'ecriture de ses messages
 set editor=vim
 
 # there are the mails
-set folder="~/Maildir"
+set folder= $MAILDIR
 
 # load different config depending on current mailbox
 folder-hook . 'unset trash'
@@ -44,11 +44,12 @@ set sort = 'threads'
 
 
 # to choose between 4 types maildir, etc...
+set mbox= $MAILDIR
 set mbox_type=maildir
 #mailboxes +gmail2/INBOX +lip6/inbox
 #mailboxes "/home/teto/Maildir"
 
-source $MUTT/mailboxes|
+source ${MUTT}/mailboxes
 # set file
 set signature="Matthieu Coudron"
 
@@ -64,4 +65,4 @@ hdr_order Date From To Cc
 ### for colors
 ##################################
 #p"$HOME/.mutt/
-source $MUTT/colors.mutt|
+source $MUTT/colors.mutt

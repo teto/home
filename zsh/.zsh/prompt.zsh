@@ -1,6 +1,7 @@
 # if a process takeslonger than this, display its processing time
 REPORTTIME=10
-
+# delay to consider when changing vi mode
+KEYTIMEOUT=1
 function virtualenv_info {
     [ $VIRTUAL_ENV ] && echo '('`basename $VIRTUAL_ENV`') '
 }
