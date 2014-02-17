@@ -1,0 +1,9 @@
+i3-discuss@i3.zekjur.net
+lua-l@lists.lua.org
+sofnets@tibre.lip6.fr
+ravir@rp.lip6.fr
+lisplab@rp.lip6.fr
+sdn@irtf.org
+multipathtcp@ietf.org
+nwcrg@irtf.org
+netadmin@rp.lip6.fr

@@ -97,6 +97,8 @@ syntax on
 filetype plugin on
 
 " Modeline shortcuts 
+set modeline
+set modelines=4
 nmap <leader>ml :Modeliner<Enter>
 
 " Tab shortcuts
@@ -160,3 +162,14 @@ source ~/.vim/compose.vim
 cmap w!! w !sudo tee % >/dev/null
 
 let g:airline_powerline_fonts = 1
+
+
+" to remove timeout when changing modes
+if ! has('gui_running')
+    set ttimeoutlen=10
+    augroup FastEscape
+        autocmd!
+        au InsertEnter * set timeoutlen=0
+        au InsertLeave * set timeoutlen=1000
+    augroup END
+endif
