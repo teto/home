@@ -1,4 +1,6 @@
 !URxvt*font:     xft:Bitstream Vera Sans Mono:style=Regular:pixelsize=13:antialias=true
+URxvt.intensityStyles: false
+
 URxvt*font: xft:Inconsolata For Powerline:size=11
 URxvt*depth: 32
 URxvt.clipboard.autocopy:   true

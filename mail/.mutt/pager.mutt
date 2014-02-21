@@ -1,0 +1,23 @@
+# you could use less/more/most or any other pager here
+set pager="builtin"
+
+# nb of lines when scrolling
+set pager_context=5
+
+#Order in which the headers are presented.
+hdr_order From: Date: To: Cc: Subject
+
+#
+set pager_index_lines=10
+#Show 2 messages on either side of the message I'm reading.
+alternative_order text/enriched text/plain text/html  
+#In which order to show the body parts (I leave HTML for last)
+
+# displays "~" to show EOF
+set tilde
+
+
+bind pager <up> previous-line
+bind pager <down> next-line
+bind pager [ previous-unread
+bind pager ] next-unread

@@ -9,13 +9,12 @@ set mailcap_path= $MUTT/mailcaps
 
 #source $HOME/.mutt/folder_hooks
 
-#/var/spool/mail/teto 
+# Do this on a per account basis
 set realname="Matthieu Coudron"
 
 # to improve performance
 set header_cache = ${MUTT}/cache/headers
 set message_cachedir = $MUTT/cache/bodies
-set pager=less
 set move=no
 #utilise lors de l'ecriture de ses messages
 set editor=vim
@@ -40,29 +39,33 @@ set sendmail="/usr/bin/msmtp"
 set timeout = 300
 
 set imap_keepalive = 300
+
+# how to display inbox
 set sort = 'threads'
 
 
 # to choose between 4 types maildir, etc...
 set mbox= $MAILDIR
 set mbox_type=maildir
-#mailboxes +gmail2/INBOX +lip6/inbox
-#mailboxes "/home/teto/Maildir"
 
-source ${MUTT}/mailboxes
-# set file
+# TODO set file
 set signature="Matthieu Coudron"
 
-# set autoview
-#unauto_view *
-# auto_view text/html
-# auto_view application/msword application/x-zip-compressed application/pdf
-# alternative_order text/plain
 
-hdr_order Date From To Cc
 
 ##################################
 ### for colors
 ##################################
 #p"$HOME/.mutt/
-source $MUTT/colors.mutt
+source ${MUTT}/mailboxes
+source $MUTT/colors/mutt-colors-solarized-dark-256.muttrc
+source $MUTT/pager.mutt
+
+set spoolfile=$MAILDIR/gmail/INBOX
+
+set status_format="Mailbox is %f with %M messages [%v]  You have %n new messages "
+
+# how folders are displayed when typing 'y'
+set folder_format="%2C %t %N new mails %8s %d %f" # what I settled on
+
+set mark_old=no

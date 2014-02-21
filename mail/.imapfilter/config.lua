@@ -30,30 +30,88 @@ myaccount = IMAP {
 
 myaccount.INBOX:check_status()
 
+
+myaddresses = {
+}
+
+-- format mailing list, dst folder, subscription state
+ml = {
+	
+	{"trill@ietf.org", "trill",true},
+	{"lisp@ietf.org", "lisp",true},
+	{"mptcp@ietf.org", "mptcp",true},
+	{"mptcp-dev@listes.uclouvain.be", "mptcp", true},
+	{ "debian-security-announce@lists.debian.org", "debian", false},
+	{"boost-users@lists.boost.org","boost", false},
+	{"lua-l@lists.lua.org","lua",true},
+	{"luabind-user@lists.sourceforge.net","lua",true},
+	{"@lispmob.org","lispmob",true},
+	{"libnl@lists.infradead.org","libnl",true},
+	{"@frnog.org","frnog",true}
+
+}
+
+
+generate_mutt_file = function (list,filename)
+	-- list mailing list I've subscribed to
+	local subscribe = "subscribe "
+	-- lists identify mailing lists, even if I don't subscribe to them
+	local lists = "lists "
+	--local alternates = ""
+	for _,entry in pairs(list) do
+		local email = entry[1]
+		local dst = entry[2]
+		local subscribed = entry [3]
+
+		print(email, dst, subscribe)
+		if subscribed  then
+			subscribe = subscribe.." "..email
+		else
+			lists = lists.." "..email
+		end
+		results = myaccount.INBOX:contain_to( email ) + myaccount.INBOX:contain_cc( email)
+		results:move_messages(myaccount[dst])
+
+	end
+	
+	--p
+	--subscribe = subscribe + "\n"
+	--lists = lists + "\n"
+	f = io.open(filename,"w")
+	f:write(subscribe.."\n"..lists.."\n" )
+	f:close()
+end
+
+
+generate_mutt_file(ml, os.getenv("MUTT").."/mailing_lists.mutt")
 messages = myaccount.INBOX:select_all()
 ml_filters = {
-	{"to","trill@ietf.org", myaccount["trill"]},
-	{"to","lisp@ietf.org", myaccount["lisp"]},
-	{"to","mptcp@ietf.org", myaccount["mptcp"]},
-	{"to","mptcp-dev@listes.uclouvain.be", myaccount["mptcp"]}
 	
+
 }
+
+
+function parseRule(account, field,value,dst)
+    subresults = res:contain_field(field,value)
+    if subresults:move_messages( account[dst] ) == false then
+      print("Cannot move messages to !"..dst)
+    end
+end
+
 -- @param res         the table of messages to filter
 -- @param ruleTable   the table of rules to match messages against
-parseRules = function ( res, ruleTable )
+function parseRules( res, ruleTable )
 local subresults = {}
   for _,entry in pairs(ruleTable) do
 	--print(entry[1], entry [2] , entry[3])
     -- don't use match_field, it downloads part of the msg (slow)
-    subresults = res:contain_field(entry[1], entry[2])
-    if subresults:move_messages( entry[3] ) == false then
-      print("Cannot move messages!")
-    end
+	parseRule( entry[1], entry[2] )
+	
   end
 end
 
 
-parseRules( messages, ml_filters)
+--parseRules( messages, ml_filters)
 
 --results = myaccount.INBOX:contain_to("trill@ietf.org")
 --results:move_messages(myaccount['lists/trill'])

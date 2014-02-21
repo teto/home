@@ -161,8 +161,27 @@ source ~/.vim/vundle.vim
 source ~/.vim/compose.vim
 cmap w!! w !sudo tee % >/dev/null
 
+
+set background=dark
 let g:airline_powerline_fonts = 1
 
+let g:solarized_termtrans = 0
+" let g:solarized_style     =   "dark"  
+" g:solarized_contrast  =   "normal"|   "high" or "low"
+
+" to alternate between dark and light bg
+" to alternate between dark and light bg
+function! ToggleBackground()
+ if (w:solarized_style=="dark")
+ let w:solarized_style="light"
+ colorscheme solarized
+else
+ let w:solarized_style="dark"
+ colorscheme solarized
+endif
+endfunction
+
+colorscheme solarized
 
 " to remove timeout when changing modes
 if ! has('gui_running')
@@ -173,3 +192,10 @@ if ! has('gui_running')
         au InsertLeave * set timeoutlen=1000
     augroup END
 endif
+
+command! Togbg call ToggleBackground()
+nnoremap <f5> :call ToggleBackground()<cr>
+inoremap <f5> <esc>:call ToggleBackground()<cr>a
+vnoremap <f5> <esc>:call ToggleBackground()<cr>
+
+
