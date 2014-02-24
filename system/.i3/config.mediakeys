@@ -1,19 +1,19 @@
 ### Start of config.mediakeys
 
-bindsym XF86AudioStop exec "mocp -P; notify-send Music Paused"
-bindsym XF86AudioPlay exec "mocp -G; notify-send Resuming music"
-bindsym XF86AudioNext exec "mocp -f; notify-send Next song"
+bindsym XF86AudioStop exec ${ player.stop } ${ notify("Music Paused") }
+bindsym XF86AudioPlay exec ${ player.play } ; ${notify(" Resuming music")
+bindsym XF86AudioNext exec ${ player.next }; $(notify("Next song")}
 bindsym XF86AudioPrev exec mocp -r
 
 
-bindsym XF86AudioRaiseVolume exec "amixer -q set Master 2dB+ unmute; notify-send Audio Raised volume"
+bindsym XF86AudioRaiseVolume exec "${volume.up}; notify-send Audio Raised volume"
 bindsym XF86AudioLowerVolume exec "amixer -q set Master 2dB- unmute; notify-send Audio lowered"
 bindsym XF86AudioMute exec "amixer -q set Master toggle"
 
 
 
 ### for backlight
-bindsym XF86MonBrightnessUp exec xbacklight -inc 10
-bindsym XF86MonBrightnessDown exec xbacklight -dec 5
+bindsym XF86MonBrightnessUp exec ${ screen.lightup }
+bindsym XF86MonBrightnessDown exec ${ screen.lightdown }
 
 ### end of config.mediakeys

@@ -1,0 +1,29 @@
+volume {
+
+alsa {	
+	up : amixer -q set Master 2dB+ unmute
+	down : 
+}
+q
+# TODO autodetect default sink-volume,
+pulseaudio {
+	up : pacmd set-sink-volume 1 
+	down: : pacmd set-sink-volume 1
+},
+
+xbacklight {
+	lightup : xbacklight -inc 10,
+	lightdown : xbacklight -dec 5
+},
+mocp {
+	pause :  "mocp -P",
+	play : "mocp -G",
+	next : "mocp -f"
+}
+,
+cmus {
+
+},
+ncmpcpp {
+
+}
