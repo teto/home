@@ -1,0 +1,2 @@
+{% macro notify(msg) -%}
+{% endmacro %}

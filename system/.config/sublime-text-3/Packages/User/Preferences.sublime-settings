@@ -98,9 +98,9 @@
 	"hot_exit": true,
 	"ignored_packages":
 	[
-		"Pylinter",
 		"Vintage",
 		"Makefile",
+		"Pylinter",
 		"Zen Tabs"
 	],
 	"indent_guide_options":
