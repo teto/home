@@ -1,0 +1,3 @@
+" B for bookmarks, T for toolbar
+
+setglobal guioptions=B
