@@ -98,10 +98,15 @@
 	"hot_exit": true,
 	"ignored_packages":
 	[
-		"Vintage",
-		"Makefile",
+		"JSONLint",
+		"Sublimerge Pro",
+		"sublimelint",
+		"Zen Tabs",
 		"Pylinter",
-		"Zen Tabs"
+		"Jedi - Python autocompletion",
+		"Vintage",
+		"Python Improved",
+		"Makefile"
 	],
 	"indent_guide_options":
 	[
