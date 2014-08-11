@@ -1,0 +1,322 @@
+###
+# Mutt: alternate keymapping
+# © 2004 Rado
+###
+
+bind index z noop	# generic vi-like binding
+
+# bind generic
+bind generic L bottom-page
+bind generic M middle-page
+bind generic H top-page
+bind generic z\r current-top
+bind generic z. current-middle
+bind generic z- current-bottom
+
+bind generic : enter-command
+bind generic q exit
+bind generic ? help
+bind generic ! help
+bind generic \cL refresh
+bind generic <space> select-entry
+bind generic \r select-entry
+bind generic \n select-entry
+
+bind generic t tag-entry
+bind generic + tag-prefix
+bind generic = tag-prefix
+
+bind generic \cA first-entry
+bind generic \cE last-entry
+bind generic <home> first-entry
+bind generic <end> last-entry
+
+bind generic <down> next-entry
+bind generic <up> previous-entry
+bind generic . next-entry
+bind generic , previous-entry
+
+bind generic <pagedown> next-page
+bind generic <pageup> previous-page
+bind generic \cF next-page
+bind generic \cB previous-page
+bind generic <right> next-page
+bind generic <left> previous-page
+
+bind generic / search
+bind generic n search-next
+bind generic N search-opposite
+bind generic \cR search-reverse
+
+# bind index
+
+macro index R '<tag-pattern>~N<enter><tag-prefix><clear-flag>n'
+
+bind index <space> display-message
+bind index <enter> display-message
+bind index \r display-message
+bind index \n display-message
+bind index % display-address
+bind index h display-toggle-weed
+bind index l limit
+bind index o sort-mailbox
+bind index O sort-reverse
+bind index v view-attachments
+
+bind index b bounce-message
+bind index m mail
+bind index g group-reply
+bind index L list-reply
+bind index r reply
+bind index f forward-message
+bind index p recall-message
+
+bind index a create-alias
+bind index e edit
+bind index c change-folder
+bind index $ sync-mailbox
+bind index P fetch-mail
+bind index s save-message
+bind index C copy-message
+
+bind index F flag-message
+bind index W clear-flag
+bind index w set-flag
+
+bind index d delete-message
+bind index D delete-pattern
+bind index t tag-entry
+bind index + tag-prefix
+bind index = tag-prefix
+bind index T tag-pattern
+bind index \cT tag-thread
+bind index u undelete-message
+bind index U undelete-pattern
+bind index \cU undelete-thread
+bind index G untag-pattern
+
+bind index \cke extract-keys
+bind index \ckm mail-key
+bind index | pipe-message
+bind index \cP print-message
+
+bind index x quit
+bind index q exit
+bind index ? help
+bind index \cX forget-passphrase
+
+bind index \cA first-entry
+bind index \cE last-entry
+bind index <home> first-entry
+bind index <end> last-entry
+
+bind index <pagedown> next-page
+bind index <pageup> previous-page
+bind index \cF next-page
+bind index \cB previous-page
+bind index <right> next-page
+bind index <left> previous-page
+
+bind index <down> next-undeleted
+bind index <up> previous-undeleted
+bind index j next-undeleted
+bind index k previous-undeleted
+bind index . next-entry
+bind index , previous-entry
+
+bind index Y next-unread
+
+bind index / search
+bind index n search-next
+bind index N search-opposite
+bind index \cR search-reverse
+
+# bind pager
+bind pager \cA top
+bind pager \cE bottom
+bind pager <home> top
+bind pager <end> bottom
+bind pager \cL redraw-screen
+
+bind pager L list-reply
+bind pager b bounce-message
+bind pager f forward-message
+bind pager g group-reply
+bind pager m mail
+bind pager p recall-message
+bind pager r reply
+
+bind pager C copy-message
+bind pager a create-alias
+bind pager c change-folder
+bind pager d delete-message
+bind pager e edit
+bind pager s save-message
+bind pager t tag-message
+bind pager u undelete-message
+
+bind pager F flag-message
+
+bind pager % display-address
+bind pager h display-toggle-weed
+bind pager v view-attachments
+bind pager '<' skip-quoted
+bind pager '>' toggle-quoted
+
+bind pager : enter-command
+bind pager ? help
+bind pager i exit
+bind pager q exit
+bind pager x quit
+bind pager ! show-version
+
+bind pager Pe extract-keys
+bind pager Pk mail-key
+bind pager \cP print-message
+bind pager | pipe-message
+
+bind pager <enter> next-line
+bind pager \r next-line
+bind pager \n next-line
+bind pager <backspace> previous-line
+
+bind pager <pagedown> next-page
+bind pager <pageup> previous-page
+bind pager \cF next-page
+bind pager \cB previous-page
+bind pager <right> next-page
+bind pager <left> previous-page
+bind pager <space> next-page
+bind pager - previous-page
+
+bind pager j next-undeleted
+bind pager k previous-undeleted
+bind pager <up> previous-undeleted
+bind pager <down> next-undeleted
+bind pager . next-entry
+bind pager , previous-entry
+
+bind pager / search
+bind pager n search-next
+bind pager N search-opposite
+bind pager \cR search-reverse
+bind pager '\' search-toggle
+
+bind pager \t next-unread
+bind pager Y next-unread
+macro pager l "<exit><limit>"
+
+# bind alias
+bind alias / search
+bind alias n search-next
+bind alias N search-opposite
+bind alias \cR search-reverse
+
+# bind query
+# bind query a create-alias
+# bind query m mail
+# bind query / search
+# bind query n search-next
+# bind query N search-opposite
+# bind query \cR search-reverse
+
+# bind attach
+bind attach b bounce-message
+bind attach c collapse-parts
+bind attach d delete-entry
+bind attach h display-toggle-weed
+bind attach Pe extract-keys
+bind attach f forward-message
+bind attach g group-reply
+bind attach L list-reply
+bind attach | pipe-entry
+bind attach \cP print-entry
+bind attach r reply
+bind attach s save-entry
+bind attach u undelete-entry
+bind attach \r view-text
+bind attach \n view-text
+bind attach <enter> view-text
+bind attach m view-attach
+bind attach v view-attach
+
+# bind compose
+bind compose a attach-file
+bind compose A attach-message
+bind compose K attach-key
+bind compose C copy-file
+bind compose d detach-file
+bind compose h display-toggle-weed
+bind compose b edit-bcc
+bind compose c edit-cc
+bind compose D edit-description
+bind compose \cE edit-encoding
+bind compose \cF edit-from
+bind compose f edit-fcc
+bind compose H edit-headers
+bind compose e edit-message
+bind compose E edit-file
+bind compose M edit-mime
+bind compose r edit-reply-to
+bind compose s edit-subject
+bind compose t edit-to
+bind compose \cT edit-type
+bind compose \cX forget-passphrase
+bind compose p pgp-menu
+bind compose | pipe-entry
+bind compose P postpone-message
+bind compose \cP print-entry
+bind compose R rename-file
+bind compose g send-message
+bind compose v view-attach
+bind compose \r view-attach
+bind compose \n view-attach
+bind compose w write-fcc
+
+# bind postpone
+bind postpone d delete-entry
+bind postpone u undelete-entry
+
+# bind browser
+bind browser \t toggle-mailboxes
+bind browser c change-dir
+bind browser f enter-mask
+bind browser / search
+bind browser m buffy-list
+bind browser n search-next
+bind browser N search-opposite
+bind browser \cR search-reverse
+bind browser \cN select-new
+bind browser o sort
+bind browser O sort-reverse
+
+# bind pgp
+bind pgp v view-name
+bind pgp Pv verify-key
+
+# bind editor
+bind editor <backspace> backspace
+bind editor \cB backward-char
+bind editor <left> backward-char
+bind editor \cA bol
+bind editor <home> bol
+bind editor \t complete
+bind editor \cT complete-query
+bind editor \cD delete-char
+bind editor <delete> delete-char
+bind editor \cE eol
+bind editor <end> eol
+bind editor \cF forward-char
+bind editor <right> forward-char
+bind editor \cN history-down
+bind editor <down> history-down
+bind editor \cP history-up
+bind editor <up> history-up
+bind editor \cK kill-eol
+bind editor \cU kill-line
+bind editor \cW kill-word
+bind editor \cQ quote-char
+
+###
+# EOF
+###
