@@ -3,7 +3,6 @@ URxvt.intensityStyles: false
 
 URxvt*font: xft:Inconsolata For Powerline:size=11
 URxvt*depth: 32
-URxvt.clipboard.autocopy:   true
 
 
 !URxvt.keysym.S-Page_Up       : captured by terminal for scrolling
@@ -77,7 +76,6 @@ URxvt*cursorColor:      white
 URxvt*foreground:       #f2f2f2
 !URxvt*geometry: 74x27
 
-URxvt*saveLines:        10000
 !URxvt*scrollBar:        true
 URxvt*scrollBar_floating:       true
 URxvt*scrollBar_right:  true
