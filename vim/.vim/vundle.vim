@@ -38,3 +38,4 @@ Bundle 'Lokaltog/powerline' , {'rtp': 'powerline/bindings/vim/'}
 " Press F12 to toggle mouse between terminal & vim control
 Bundle 'nvie/vim-togglemouse' 
 Bundle 'Solarized'
+Bundle 'fugitive.vim'
