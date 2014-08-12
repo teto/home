@@ -6,8 +6,8 @@
 	default = simple
 [core]
 	excludesfile = /home/teto/.gitignore_global
-	whitespace = trailing-space,space-before-tab
-
+	whitespace = space-before-tab
+#trailing-space
 [color]
 	ui = true
 [sendemail]

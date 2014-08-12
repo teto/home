@@ -1,4 +1,7 @@
 #source ~/.zsh/checks.zsh
+autoload predict-on
+predict-on
+
 source $ZDOTDIR/colors.zsh
 source $ZDOTDIR/setopt.zsh
 source $ZDOTDIR/exports.zsh

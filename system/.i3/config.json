@@ -63,6 +63,7 @@
         }
     },
     "volume" : {
+        
         "alsa" : {	
         	"volume_up" : "amixer -q set Master 2dB+ unmute",
         	"volume_down" : "amixer -q set Master 2dB- unmute",

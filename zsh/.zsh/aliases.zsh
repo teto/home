@@ -25,6 +25,7 @@ alias denfr="dict -d fd-eng-fra"
 ### Git
 ##############################
 alias ga='git add'
+alias gaa='git add --all'
 alias gp='git push'
 alias gl='git log'
 alias gst="git status"

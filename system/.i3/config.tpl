@@ -1,3 +1,6 @@
+#xrdb -query
+#bindsym XF86TouchpadToggle exec "synclient TouchpadOff=$(synclient | awk '/TouchpadOff/ {print ($3+1)%2}')"
+
 {% include "colors/"+theme+"/common.tpl" %}
 
 {%macro add_bar(position="top",command="i3bar",theme="default") %}
