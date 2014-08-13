@@ -98,8 +98,8 @@
 	"hot_exit": true,
 	"ignored_packages":
 	[
-		"Zen Tabs",
 		"Pylinter",
+		"Zen Tabs",
 		"Makefile",
 		"Vintage"
 	],

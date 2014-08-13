@@ -72,13 +72,13 @@ alias -g vpl="vagrant plugin list"
 ##############################
 ### package managmeent related
 ##############################
-alias agi="sudo apt-get install"
-alias agr="sudo apt-get remove"
+alias agi="sudo apt install"
+alias agr="sudo apt remove"
 alias agy="sudo apt-get -y install"
 alias acl="apt-cache search"
 alias acf="apt-cache find"
 alias acs="apt-cache show"
-alias agg="sudo apt-get update && sudo apt-get upgrade"
+alias agg="sudo apt update && sudo apt upgrade"
 
 alias sdpkg="sudo dpkg"
 
