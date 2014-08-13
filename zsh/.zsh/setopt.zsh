@@ -1,5 +1,5 @@
 # ===== Basics
-setopt no_beep # don't beep on error
+setopt beep # (no_)beep don't beep on error
 setopt interactive_comments # Allow comments even in interactive shells (especially for Muness)
 
 # ===== Changing Directories
