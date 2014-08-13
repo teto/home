@@ -12,18 +12,30 @@ alias -s gif=eog
 alias -s avi=mplayer
 alias -s mp3=mocp
 
+
+##############################
+### Dictionary lookup
+##############################
+alias dfren="dict -d fd-fra-eng"
+alias denfr="dict -d fd-eng-fra"
+
+
+
 ##############################
 ### Git
 ##############################
 alias ga='git add'
+alias gaa='git add --all'
 alias gp='git push'
 alias gl='git log'
+alias gst="git status"
 alias gs='git status'
 alias gd='git diff'
 alias gm='git commit -m'
 alias gma='git commit -am'
 alias gb='git branch'
-alias gc='git checkout'
+alias gbl="git branch --list" # todo add all ?
+alias gch='git checkout'
 alias gra='git remote add'
 alias grr='git remote rm'
 alias grv='git remote -v'
@@ -31,8 +43,7 @@ alias gpu='git pull'
 alias gcl='git clone'
 alias gta='git tag -a -m'
 alias gf='git reflog'
-#
-#
+
 
 
 
@@ -64,6 +75,7 @@ alias ....="cd ../../.."
 ##############################
 alias -g vinit="vagrant init"
 alias -g vup="vagrant up"
+alias -g vssh="vagrant ssh"
 alias -g vhalt="vagrant halt"
 alias -g vpi="vagrant plugin install"
 alias -g vpu="vagrant plugin uninstall"
@@ -107,16 +119,6 @@ fi
 #alias mv='mv --interactive'
 #alias rm='rm --interactive'
 
-
-##############################
-### Git alias
-##############################
-alias gci="git commit"
-alias glog="git log"
-alias gch="git checkout"
-alias gbl="git branch --list" # todo add all ?
-alias gst="git status"
-alias gbr="git branch"
 
 
 ##############################

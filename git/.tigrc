@@ -1,0 +1,8 @@
+bind generic X !git cherry-pick -x %(commit)
+bind generic C !git cherry-pick %(commit)
+bind generic R !git revert %(commit)
+bind generic E !git format-patch -1 %(commit)
+bind generic 0 !git checkout %(commit)
+bind generic 9 !git checkout %(commit)~
+bind generic A !git commit --amend -s
+bind generic S !git show %(commit)

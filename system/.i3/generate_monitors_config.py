@@ -38,7 +38,7 @@ try:
 	cmd=x.build_xrandr_command(monitors)
 	with open(outputFile,"w+") as f:
 		f.write("########################\n ###  %s \n###################\n"%outputFile)
-		f.write("exec_always %s\n"%cmd)
+		#f.write("exec_always %s\n"%cmd)
 		monitors2 = starmap( lambda id,mon: (id, mon if mon else monitors[0]), zip_longest(  range(1,3),  monitors ) )
 		for i,monitorName in monitors2: 
 			#print(i, monitorName)

@@ -182,8 +182,8 @@ bindsym $mod+Shift+Right move right
 bindsym $mod+b split h
 
 # split in vertical orientation
-bindsym $mod+v split v
-#bindsym $mod+v layout toggle split
+#bindsym $mod+v split v
+bindsym $mod+v layout toggle split
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen
@@ -320,7 +320,7 @@ bar {
 	#output $output2
 	#status_command conky -c ~/.conkyrc
 	
-#	tray_output $output1 
+#	tray_output $output15
     colors {
         background #090e14
         statusline #ffffff
@@ -337,8 +337,14 @@ bar {
 
 
 ### TODO need to run urxvtd beforehand
+### display error in case it does not launch
+# Provide command to send to a specific scratchpad (rename title) or use mark ?
+#
 exec_always urxvtc -name pad_audioplayer -e mocp
 exec_always urxvtc -name pad_flyingterminal
+exec_always urxvtc -name pad_cmus -e cmus
+exec_always urxvtc -name pad_term4
+exec_always urxvtc -name pad_term5
 
 # DP3 & LVDS1
 # to move
