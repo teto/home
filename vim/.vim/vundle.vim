@@ -31,10 +31,10 @@ Bundle 'autoload_cscope.vim'
 " Bundle 'gfxmonk/vim-background-make'
 " Bundle 'tpope/vim-dispatch'
 Bundle 'makebg'
-Bundle 'SuperTab'
+" Bundle 'SuperTab'
 " Bundle 'taglist.vim'
-Bundle 'vim-addon-background-cmd'
-Bundle 'Lokaltog/powerline' , {'rtp': 'powerline/bindings/vim/'}
+" Bundle 'vim-addon-background-cmd'
+" Bundle 'Lokaltog/powerline' , {'rtp': 'powerline/bindings/vim/'}
 " Press F12 to toggle mouse between terminal & vim control
 Bundle 'nvie/vim-togglemouse' 
 Bundle 'Solarized'
