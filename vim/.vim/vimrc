@@ -155,6 +155,7 @@ source ~/.vim/search.vim
 source ~/.vim/vundle.vim
 source ~/.vim/compose.vim
 source ~/.vim/cscope.vim
+source ~/.vim/ycm.vim
 cmap w!! w !sudo tee % >/dev/null
 
 

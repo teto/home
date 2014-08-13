@@ -1,0 +1,4 @@
+" A few mappings I can't remember
+" gU goes to FQDN
+" O opens the current url for edition
+setglobal guioptions=B
