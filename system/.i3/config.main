@@ -25,9 +25,10 @@ assign [class="^Firefox$"] $w2
 new_float pixel 2
 
 #for_window [instance="audioplayer"] move to scratchpad
-for_window [instance="pad_audioplayer"] move scratchpad
-for_window [instance="pad_flyingterminal"] move scratchpad
-for_window [instance="pad_ircclient"] move scratchpad
+for_window [instance="pad_*"] move scratchpad
+#for_window [instance="pad_flyingterminal"] move scratchpad
+#for_window [instance="pad_flyingterminal"] move scratchpad
+#for_window [instance="pad_ircclient"] move scratchpad
 for_window [class="Navigator"] floating enable,border 1 pixel;
 
 # vertical | horizontal | both
@@ -145,6 +146,7 @@ for_window [Class="^Transmission"] floating enable
 bindsym $mod+F2 [instance="pad_(?!audioplayer)"] move scratchpad ; [instance="pad_audioplayer"] scratchpad show
 #i3-msg [con_marki=pad1] focus
 bindsym $mod+F1 [instance="pad_(?!flyingterminal)"] move scratchpad; [instance="pad_flyingterminal"] scratchpad show
+bindsym $mod+F3 [instance="pad_(?!ncmpcpp)"] move scratchpad; [instance="pad_ncmpcpp"] scratchpad show
 #bindsym $mod+F3 scratchpad show
 
 
@@ -313,7 +315,7 @@ bar {
 	position top
         #status_command i3status
         #status_command py3status -c /home/teto/.i3/i3status.conf
-	status_command python3 ~/.i3/myStatus.py
+	status_command python3 /home/teto/.i3/myStatus.py
 #-c /home/teto/.i3/
 	#output $output0
 	#output $output1
@@ -342,13 +344,16 @@ bar {
 #
 exec_always urxvtc -name pad_audioplayer -e mocp
 exec_always urxvtc -name pad_flyingterminal
-exec_always urxvtc -name pad_cmus -e cmus
-exec_always urxvtc -name pad_term4
-exec_always urxvtc -name pad_term5
+exec_always urxvtc -name pad_ncmpcpp -e ncmpcpp
+#exec_always urxvtc -name pad_term4
+#exec_always urxvtc -name pad_term5
 
 # DP3 & LVDS1
 # to move
-#exec_always xrandr --output $output1 --auto --output $output2 --right-of $output1
+# TODO ca ca plante si j'en ai 
+bindsym XF86Display exec ~/.i3/monitors.sh
+
+exec_always xrandr --output $output1 --auto --output $output2 --right-of $output1
 
 #exec urxvtc -name irclient -e irssi
 

@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 
 import subprocess
+from i3pystatus.mail import notmuchmail
 
-from i3pystatus.core import Status
+from i3pystatus import Status
 
 status = Status(standalone=True)
 
@@ -41,14 +42,14 @@ status.register("load")
 # This would look like this:
 # Discharging 6h:51m
 #status.register("battery",
-#   format="{status} {remaining_hm}",
-#    alert=True,
- #   alert_percentage=5,
-  #  status={
-   #     "DIS":  "Discharging",
-    #    "CHR":  "Charging",
-     #   "FULL": "Bat full",
-  #  },)
+   #format="{status}{remaining_hm}",
+    #alert=True,
+    #alert_percentage=5,
+   #status={
+       #"DIS":  "Discharging",
+       #"CHR":  "Charging",
+      #"FULL": "Bat full",
+   #},)
 
 # Displays whether a DHCP client is running
 #status.register("runwatch",
@@ -77,9 +78,9 @@ status.register("load")
 # Shows disk usage of /
 # Format:
 # 42/128G [86G]
-status.register("disk",
-    path="/",
-    format="{used}/{total}G [{avail}G]",)
+#status.register("disk",
+ #   path="/",
+ #   format="{used}/{total}G [{avail}G]",)
 
 # Shows pulseaudio default sink volume
 #
@@ -90,11 +91,20 @@ status.register("disk",
 # Format:
 # Cloud connected▶Reroute to Remain
 status.register("mpd",
-    format="{title}{status}{album}",
+    format="{status}{title}",
     status={
         "pause": "▷",
         "play": "▶",
         "stop": "◾",
     },)
 
+status.register("alsa");
+
+status.register("mail",
+        backends=[ notmuchmail.Notmuch ],
+        email_client="thunderbird",
+# TODO replace with mutt or alot or sup later
+        hide_if_null=False,
+        interval=10
+        );
 status.run()

@@ -4,22 +4,28 @@ home
 This folder contains my customizations for:
 *bash
 *git
-*i3 (i3wm.org, a great tiling window manager)
+*i3 (i3wm.org, a great if not the best tiling window manager)
+*i3pystatus
 *liquidprompt
+*mpd
 *msmtp
 *mutt (Mail User Agent)
 *netrc (template only)
 *newbeuter (RSS reader)
+*notmuch
+*offlineimap
 *powerline
 *procmail
+*ranger
 *rxvt*unicode(256)
+*sup
 *vim
 *zsh
 
 Configurations
-
+====
 Install each package via GNU stow:
-dotfiles# stow <PKG>
+	dotfiles# stow <PKG>
 
 The "scripts" folder contains :
 <!*** a bootstrap script to install everything.**>

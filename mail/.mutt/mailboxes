@@ -1,7 +1,7 @@
 mailboxes *
 mailboxes !
-mailboxes =gmail/[Gmail].Corbeille
 mailboxes =gmail/[Gmail].Brouillons
+mailboxes =gmail/[Gmail].Corbeille
 mailboxes =gmail/[Gmail].Messages envoy&AOk-s
 mailboxes =gmail/[Gmail].Spam
 mailboxes =gmail/[Gmail].Suivis

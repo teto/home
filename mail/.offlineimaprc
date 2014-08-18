@@ -29,8 +29,8 @@ footer = "\n"
 [Account gmail]
 localrepository = gmail-local
 remoterepository = gmail-remote
-# in minutes
-autorefresh=10
+# interval between updates (in minutes)
+autorefresh=0
 # in bytes
 maxsize=2000000 
 # in daysA
@@ -39,7 +39,7 @@ maxage=10
 status_backend = sqlite
 presynchook=imapfilter
 # TODO notify user
-# postsynchook=
+postsynchook= notmuch new
 
 #[Account lip6]
 #localrepository = lip6-local
@@ -69,9 +69,9 @@ remoteuser = mattator@gmail.com
 realdelete = yes
 maxconnections = 3
 ssl= yes
-# sslcacertfile= 
+sslcacertfile= /etc/ssl/certs/ca-certificates.crt
 # newer offlineimap > 6.5.4 needs this
-cert_fingerprint = 89091347184d41768bfc0da9fad94bfe882dd358
+# cert_fingerprint = 89091347184d41768bfc0da9fad94bfe882dd358
 # name translations would need to be done in both repositories, but reverse
 #nametrans = lambda foldername: foldername.replace('bar', 'BAR')
 # prevent sync with All mail folder since it duplicates mail
