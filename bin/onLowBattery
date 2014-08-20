@@ -1,0 +1,22 @@
+
+#!/bin/bash
+#
+# low battery warning
+#
+
+#/etc/acpi/events/lowbattery:
+
+#event=battery.*
+#action=/etc/acpi/actions/lowbattery.sh %e
+
+#/etc/acpi/actions/lowbattery.sh:
+
+BATTERY=/sys/class/power_supply/BAT0
+
+REM=`grep "POWER_SUPPLY_CHARGE_NOW" $BATTERY/uevent | awk -F= '{ print $2 }'`
+FULL=`grep "POWER_SUPPLY_CHARGE_FULL_DESIGN" $BATTERY/uevent | awk -F= '{ print $2 }'`
+PERCENT=`echo $(( $REM * 100 / $FULL ))`
+
+if [ $PERCENT -le "82" ]; then
+  /usr/bin/i3-nagbar -m "Low battery"
+fi

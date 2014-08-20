@@ -1,0 +1,5 @@
+#!/bin/bash
+notmuch new
+
+# TODO run the filters
+notmuch tag --batch --input="~/.notmuch/tag_ietf

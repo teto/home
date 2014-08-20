@@ -48,7 +48,7 @@ URxvt.keysym.Control-0x2d: \033[K
 ! RGBA with A=0 => transparent
 XTerm*bellIsUrgent: true
 URxvt*background: rgba:00ff/00ff/0200/c800
-*.URxvt.urgentOnBell: true 
+URxvt*urgentOnBell: true 
 !URt*termName: rxvt-unicode
 !URxvt*keysym.End: \033[4~
 !URxvt*keysym.Home: \033[1~

@@ -37,27 +37,32 @@ maxsize=2000000
 maxage=10
 
 status_backend = sqlite
-presynchook=imapfilter
+# presynchook=imapfilter
 # TODO notify user
 postsynchook= notmuch new
 
-#[Account lip6]
-#localrepository = lip6-local
-#remoterepository = lip6-remote
+[Account lip6]
+localrepository = lip6-local
+remoterepository = lip6-remote
+maxage=10
+status_backend = sqlite
+# presynchook=imapfilter
+# TODO notify user run a script that will launch tag
+postsynchook= postSyncHookMatt
 
-#[Repository lip6-local]
-#type = Maildir
-#localfolders = ~/.mail/lip62
+[Repository lip6-local]
+type = Maildir
+localfolders = ~/Maildir/lip6
 
-#[Repository lip6-remote]
-#type = IMAP
-#remotehost = tibre.lip6.fr:993
-#remoteuser =coudron 
-#realdelete = no
+[Repository lip6-remote]
+type = IMAP
+remotehost = tibre.lip6.fr
+ssl=yes
+remoteuser =coudron 
+realdelete = no
 # on gmail just remove tags, you really need to move files to trash folder
-#realdelete = yes
-
 maxconnections = 3
+cert_fingerprint = b9220be8750401748241ab1cb2a3d2b493053c5c
 
 [Repository gmail-local]
 type = Maildir
