@@ -3,11 +3,13 @@ ack
 ACK
 GPS
 MPTCP
+Nagle
 NTP
 OWD
 OWDs
 QoE
 RFC
 RTT
+SCTP
 subflow
 veigas
