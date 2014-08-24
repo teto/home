@@ -1,2 +1,4 @@
 config
+debug
+info
 config.monitors
