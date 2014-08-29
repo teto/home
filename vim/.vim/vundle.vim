@@ -8,6 +8,7 @@ call vundle#begin()
 
 " let Vundle manage Vundle
 "  " required! 
+Plugin 'easymotion'
 Plugin 'gmarik/vundle'
 Plugin 'sickill/vim-monokai'    
 Plugin 'scrooloose/nerdtree'
@@ -32,7 +33,7 @@ Plugin 'nvie/vim-togglemouse'
 Plugin 'Solarized'
 Plugin 'fugitive.vim'
 Plugin 'Valloric/YouCompleteMe.git'
-Plugin 'vim-flake8'
+"Plugin 'vim-flake8'
 call vundle#end()
 
 filetype plugin indent on    " required

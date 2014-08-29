@@ -32,15 +32,16 @@ set wildignore=.svn,CVS,.git,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg,*.
 set visualbell
 
 " enable mouse to click on tabs etc... 
-set mouse=a
+" set mouse=a
 set ttymouse=urxvt
 " Display line numbers on the left
 " set number
 
 
-" show/hide line numbers
+" TODO do a macro that cycles throught show/hide absolute/relative line numbers
 map <C-N><C-N> :set invnumber<CR>
-
+"Prefer relative line numbering?
+"set relativenumber"
 
 
 " Display unprintable characters with '^' and
@@ -48,7 +49,7 @@ map <C-N><C-N> :set invnumber<CR>
 
 
 " Quick timeouts on key combinations.
-set timeoutlen=300
+set timeoutlen=400
 
 " - boolean (default off), local to buffer
 
@@ -123,16 +124,15 @@ nmap <silent> <leader>sv :so! $MYVIMRC<CR>
 "
 "
 " Easy window navigation
-map <C-h> <C-w>h
-map <C-j> <C-w>j
-map <C-k> <C-w>k
-map <C-l> <C-w>l
 
 " Nerdtree shortcuts
 noremap <F2> :NERDTreeToggle<Enter>
 let Tlist_Use_Right_Window   = 1
 noremap <F3> :Tlist<Enter>
+
+
 noremap <F4> exec ":emenu <tab>"
+
 " Hide/display invisible characters
 noremap <F11> :set list!<CR>
 noremap <F10> :set paste!<CR>
@@ -140,8 +140,8 @@ noremap <F10> :set paste!<CR>
 "source $HOME/.vim/test_tab.vim
 
 " A stands for Alt
-nnoremap <C-h> :call MoveToTab(2)<CR>
-nnoremap <C-l> :call MoveToTab(1)<CR>
+" nnoremap <C-h> :call MoveToTab(2)<CR>
+" nnoremap <C-l> :call MoveToTab(1)<CR>
 
 
 " map <F2> :echo 'Current time is ' . strftime('%c')<CR>
@@ -156,6 +156,7 @@ source ~/.vim/vundle.vim
 source ~/.vim/compose.vim
 source ~/.vim/cscope.vim
 source ~/.vim/ycm.vim
+source ~/.vim/splits.vim
 cmap w!! w !sudo tee % >/dev/null
 
 

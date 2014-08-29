@@ -101,7 +101,7 @@ status.register("mpd",
 status.register("alsa");
 
 status.register("mail",
-        backends=[ notmuchmail.Notmuch ],
+        backends=[ notmuchmail.Notmuch(db_path="/home/teto/Maildir") ],
         email_client="thunderbird",
 # TODO replace with mutt or alot or sup later
         hide_if_null=False,
