@@ -21,7 +21,7 @@ URxvt.keysym.C-Left           : \033[1;5D
 ! test to see if that changes font
 URxvt.keysym.M-C-1: command:\033]50;suxuseuro\007
 !worked !!!!
-  URxvt.keysym.M-C-2: command:\033]50;9x15bold\007
+URxvt.keysym.M-C-2: command:\033]50;9x15bold\007
 
 !URxvt.keysym.C-Up             : \033[1;5A
 !URxvt.keysym.Mod4-v:
@@ -48,7 +48,8 @@ URxvt.keysym.Control-0x2d: \033[K
 ! RGBA with A=0 => transparent
 XTerm*bellIsUrgent: true
 URxvt*background: rgba:00ff/00ff/0200/c800
-URxvt*urgentOnBell: true 
+*urgentOnBell: true 
+!URxvt*urgentOnBell: true 
 !URt*termName: rxvt-unicode
 !URxvt*keysym.End: \033[4~
 !URxvt*keysym.Home: \033[1~

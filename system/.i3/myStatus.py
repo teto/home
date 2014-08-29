@@ -13,9 +13,6 @@ status = Status(standalone=True)
 status.register("clock",
     format="%a %-d %b %X KW%V",)
 
-# Shows the average load of the last minute and the last 5 minutes
-# (the default value for format is used)
-status.register("load")
 
 # Shows your CPU temperature, if you have a Intel CPU
 #status.register("temp",   format="{temp:.0f}°C",)
@@ -75,15 +72,8 @@ status.register("load")
  #   interface="wlan0",
   #  format_up="{essid} {quality:03.0f}%",)
 
-# Shows disk usage of /
-# Format:
-# 42/128G [86G]
-#status.register("disk",
- #   path="/",
- #   format="{used}/{total}G [{avail}G]",)
 
 # Shows pulseaudio default sink volume
-#
 # Note: requires libpulseaudio from PyPI
 #status.register("pulseaudio",   format="♪{volume}",)
 
@@ -101,7 +91,7 @@ status.register("mpd",
 status.register("alsa");
 
 status.register("mail",
-        backends=[ notmuchmail.Notmuch ],
+        backends=[ notmuchmail.Notmuch() ],
         email_client="thunderbird",
 # TODO replace with mutt or alot or sup later
         hide_if_null=False,

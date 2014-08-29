@@ -321,7 +321,7 @@ bar {
 	#output $output1
 	#output $output2
 	#status_command conky -c ~/.conkyrc
-	
+	verbose 1
 #	tray_output $output15
     colors {
         background #090e14

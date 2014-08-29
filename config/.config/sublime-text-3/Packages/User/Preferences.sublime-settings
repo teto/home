@@ -2,6 +2,9 @@
 	"highlight_modified_tabs": true,
 	"ignored_packages":
 	[
-		"Vintage"
+		"Vintage",
+		"Python Improved",
+		"Jedi - Python autocompletion",
+		"Anaconda"
 	]
 }
