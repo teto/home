@@ -1,8 +1,21 @@
 " Setting up Vundle
 set nocompatible              " be iMproved, required
 filetype off                  " required
+
+let iCanHazVundle=1
+let vundle_readme=expand('~/.vim/bundle/vundle/README.md')
+if !filereadable(vundle_readme)
+	echo "Installing Vundle.."
+	echo ""
+	silent !mkdir -p ~/.vim/bundle
+	silent !git clone https://github.com/gmarik/Vundle.vim ~/.vim/bundle/vundle
+	let iCanHazVundle=0
+endif
+
+
+
 " set runtime path
-set rtp+=~/.vim/bundle/Vundle.vim
+set rtp+=~/.vim/bundle/vundle
 " alternatively, pass a path where Vundle should install plugins begin(path)
 call vundle#begin()
 
