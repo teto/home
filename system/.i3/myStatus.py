@@ -11,7 +11,12 @@ status = Status(standalone=True)
 # Tue 30 Jul 11:59:46 PM KW31
 #                          ^-- calendar week
 status.register("clock",
-    format="%a %-d %b %X KW%V",)
+        format="%a %-d %b %X KW%V",
+    #format=[
+        #"%a %-d %b %X KW%V",
+        #"%a %-d %b %X "
+        #],
+    )
 
 
 # Shows your CPU temperature, if you have a Intel CPU
@@ -90,11 +95,11 @@ status.register("mpd",
 
 status.register("alsa");
 
-status.register("mail",
-        backends=[ notmuchmail.Notmuch() ],
-        email_client="thunderbird",
-# TODO replace with mutt or alot or sup later
-        hide_if_null=False,
-        interval=10
-        );
+#status.register("mail",
+        #backends=[ notmuchmail.Notmuch() ],
+        #email_client="thunderbird",
+## TODO replace with mutt or alot or sup later
+        #hide_if_null=False,
+        #interval=10
+        #);
 status.run()

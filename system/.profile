@@ -14,7 +14,12 @@ export XDG_CONFIG_HOME="$HOME/.config"
 #export XDG_CACHE_HOME="$HOME/.config"
 #export XDG_RUNTIME_DIR="$HOME/.config"
 #export XDG_DATA_HOME="$HOME/.config"
-#export XDG_CONFIG_HOME="$HOME/.config"
+
+export PYTHONPATH="/home/teto/libnl/python/build/lib.linux-x86_64-3.3:$PYTHONPATH"
+
+export MAILDIR="$HOME/Maildir"
+export POWERLINE="$HOME/powerline"
+#export PYTHONPATH="$HOME:$HOME/toml.py:/home/teto/libnl/python/build/lib.linux-x86_64-3.3:$PYTHONPATH"
 
 # Var used by libvirt. Others also ?
 # export SYSCONFDIR="$HOME/.config/libvirt" 

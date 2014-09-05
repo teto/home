@@ -2,6 +2,9 @@
 
 # TODO replace with compton
 #xcompmgr&
+export PYTHONPATH="$PYTHONPATH:/home/teto/i3pystatus"
+
+mpd&
 
 # need to launch daemon before i3, cos of scratchpads
 urxvtd -q -o -f&

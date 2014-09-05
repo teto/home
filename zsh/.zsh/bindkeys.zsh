@@ -15,4 +15,5 @@ bindkey -v   # Default to standard vi bindings, regardless of editor string
 
 bindkey '^R' history-incremental-search-backward
 bindkey '\e[3~' delete-char
+# bindkey '\eq' push-line
 bindkey '\eq' push-line-or-edit

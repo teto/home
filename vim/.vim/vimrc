@@ -196,4 +196,4 @@ nnoremap <f5> :call ToggleBackground()<cr>
 inoremap <f5> <esc>:call ToggleBackground()<cr>a
 vnoremap <f5> <esc>:call ToggleBackground()<cr>
 
-
+set shiftround    " round indent to multiple of 'shiftwidth'
