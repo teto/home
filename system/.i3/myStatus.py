@@ -11,7 +11,13 @@ status = Status(standalone=True)
 # Tue 30 Jul 11:59:46 PM KW31
 #                          ^-- calendar week
 status.register("clock",
-        format="%a %-d %b %X KW%V",
+        format=
+#[
+            #("%a %-d %b %X KW%V",'Europe/London'),
+            #("%a %-d %b %X KW%V",'Europe/Dublin'),
+            "%a %-d %b %X"
+            #("%a %-d %b %X",'Europe/Paris'),
+ #           ]
     #format=[
         #"%a %-d %b %X KW%V",
         #"%a %-d %b %X "
