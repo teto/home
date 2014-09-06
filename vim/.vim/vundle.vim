@@ -40,7 +40,7 @@ Plugin 'makebg'
 " Plugin 'SuperTab'
 " Plugin 'taglist.vim'
 " Plugin 'vim-addon-background-cmd'
-Plugin 'Lokaltog/powerline' , {'rtp': 'powerline/bindings/vim/'}
+" Plugin 'Lokaltog/powerline' , {'rtp': 'powerline/bindings/vim/'}
 " Press F12 to toggle mouse between terminal & vim control
 Plugin 'nvie/vim-togglemouse' 
 Plugin 'Solarized'
@@ -50,7 +50,9 @@ Plugin 'vim-flake8'
 call vundle#end()
 
 
-" E501 = long lines, W293 = ?
+" For plugin vim-flake8 : E501 = long lines, W293 = ?
 let g:flake8_ignore="E501"
+
+set rtp+=$POWERLINE/powerline/bindings/vim/
 
 filetype plugin indent on    " required

@@ -1,1 +1,5 @@
 theme = "solarized_dark"
+
+[bindings]
+'ctrl f' = move halfpage down
+'ctrl b' = move halfpage up
