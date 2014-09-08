@@ -1,4 +1,10 @@
-!URxvt*font:     xft:Bitstream Vera Sans Mono:style=Regular:pixelsize=13:antialias=true
+! This file is the oldest version
+! It should be best to use ~/.Xresources instead
+!
+!
+!http://superuser.com/questions/243914/xresources-or-xdefaults
+!
+!!URxvt*font:     xft:Bitstream Vera Sans Mono:style=Regular:pixelsize=13:antialias=true
 URxvt.intensityStyles: false
 
 URxvt*font: xft:Inconsolata For Powerline:size=11
@@ -48,7 +54,7 @@ URxvt.keysym.Control-0x2d: \033[K
 ! RGBA with A=0 => transparent
 XTerm*bellIsUrgent: true
 URxvt*background: rgba:00ff/00ff/0200/c800
-*urgentOnBell: true 
+!*urgentOnBell: true 
 !URxvt*urgentOnBell: true 
 !URt*termName: rxvt-unicode
 !URxvt*keysym.End: \033[4~
@@ -86,12 +92,4 @@ URxvt*scrollTtyOutput:  false
 URxvt*scrollWithBuffer: true
 !URxvt*termName: xterm
 !URxvt*shading: 20
-URxvt*perl-lib : /home/teto/.urxvt/perl
-URxvt*perl-ext-common: default,matcher
-URxvt*scrollbar: false
-URxvt.urlLauncher: firefox
-URxvt.matcher.button: 2
-! Disables manua l encoding
-URxvt.iso14755: false
-URxvt.iso14755_52: false
 

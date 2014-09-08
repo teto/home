@@ -1,5 +1,14 @@
 URxvt.clipboard.autocopy:   true
 URxvt*saveLines:        10000
 URxvt.depth: 32
+URxvt.urgentOnBell: true
 !URxvt.background: [95]#0000ff
+URxvt*perl-lib : /home/teto/.urxvt/perl
+URxvt*perl-ext-common: default,matcher
+URxvt*scrollbar: false
+URxvt.urlLauncher: firefox
+URxvt.matcher.button: 2
+! Disables manua l encoding
+URxvt.iso14755: false
+URxvt.iso14755_52: false
 !URxvt.background: rgba:1111/1111/1111/dddd

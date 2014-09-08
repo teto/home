@@ -157,6 +157,7 @@ source ~/.vim/compose.vim
 source ~/.vim/cscope.vim
 source ~/.vim/ycm.vim
 source ~/.vim/splits.vim
+source ~/.vim/vim_file_chooser.vim
 cmap w!! w !sudo tee % >/dev/null
 
 
