@@ -12,19 +12,20 @@ status = Status(standalone=True)
 #                          ^-- calendar week
 status.register("clock",
         format=
-#[
-            #("%a %-d %b %X KW%V",'Europe/London'),
+[
+#            ("%a %-d %b %X KW%V",'Europe/London'),
             #("%a %-d %b %X KW%V",'Europe/Dublin'),
-            "%a %-d %b %X"
-            #("%a %-d %b %X",'Europe/Paris'),
- #           ]
+            "%a %-d %b %X",
+            ("%a %-d %b %X",'Europe/Paris'),
+ ]           
     #format=[
         #"%a %-d %b %X KW%V",
         #"%a %-d %b %X "
         #],
-    )
+   )
 
 
+status.register("pulseaudio");
 # Shows your CPU temperature, if you have a Intel CPU
 #status.register("temp",   format="{temp:.0f}°C",)
 
@@ -49,15 +50,15 @@ status.register("clock",
 
 # This would look like this:
 # Discharging 6h:51m
-#status.register("battery",
-   #format="{status}{remaining_hm}",
-    #alert=True,
-    #alert_percentage=5,
-   #status={
-       #"DIS":  "Discharging",
-       #"CHR":  "Charging",
-      #"FULL": "Bat full",
-   #},)
+status.register("battery",
+   format="{status}{remaining_hm}",
+    alert=True,
+    alert_percentage=5,
+   status={
+       "DIS":  "Discharging",
+       "CHR":  "Charging",
+      "FULL": "Bat full",
+   },)
 
 # Displays whether a DHCP client is running
 #status.register("runwatch",
@@ -71,9 +72,9 @@ status.register("clock",
 # (defaults of format_down and color_down)
 #
 # Note: the network module requires PyPI package netifaces-py3
-#status.register("network",
- #   interface="eth0",
-  #  format_up="{v4cidr}",)
+status.register("network",
+    interface="eth0",
+    format_up="{v4cidr}",)
 
 # Has all the options of the normal network and adds some wireless specific things
 # like quality and network names.
@@ -99,13 +100,13 @@ status.register("mpd",
         "stop": "◾",
     },)
 
-status.register("alsa");
+status.register("alsa",);
 
-#status.register("mail",
-        #backends=[ notmuchmail.Notmuch() ],
-        #email_client="thunderbird",
+status.register("mail",
+        backends=[ notmuchmail.Notmuch() ],
+        email_client="thunderbird",
 ## TODO replace with mutt or alot or sup later
-        #hide_if_null=False,
+        hide_if_null=False,
         #interval=10
-        #);
+        );
 status.run()

@@ -6,11 +6,11 @@ set $mod Mod1
 
 set $term rxvt-unicode
 
-set $w1 1 main
-set $w2 2 web
-set $w3 3 éditeurs
-set $w4 4 qemu
-set $w5 5 misc
+set $w1 1:main
+set $w2 2:web
+set $w3 3:éditeurs
+set $w4 4:qemu
+set $w5 5:misc
 
 
 workspace "$w1" output $output1
@@ -21,7 +21,7 @@ assign [class="^Firefox$"] $w2
 
 
 # default border size
-#new_window 1pixel
+new_window 1pixel
 new_float pixel 2
 
 #for_window [instance="audioplayer"] move to scratchpad
@@ -315,6 +315,7 @@ bar {
 	position top
         #status_command i3status
         #status_command py3status -c /home/teto/.i3/i3status.conf
+	strip_workspace_numbers 1
 	status_command python3 /home/teto/.i3/myStatus.py
 #-c /home/teto/.i3/
 	#output $output0
