@@ -10,6 +10,10 @@
 *.symvers
 *.aux
 
+
+# Editor specific
+######################
+
 # Binaries #
 ############
 *.pdf
@@ -20,6 +24,8 @@
 *.bak
 *.odp#
 *.swp
+*.layout
+*.bmarks
 
 # Packages #
 ############

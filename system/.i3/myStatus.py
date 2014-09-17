@@ -51,7 +51,7 @@ status.register("pulseaudio");
 # This would look like this:
 # Discharging 6h:51m
 status.register("battery",
-   format="{status}{remaining_hm}",
+   format="{status}{remaining}",
     alert=True,
     alert_percentage=5,
    status={

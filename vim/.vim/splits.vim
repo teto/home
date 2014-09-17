@@ -18,6 +18,6 @@ nnoremap <silent> - :exe "resize -3"
 " set splitright
 
 
-set winheight=30
-set winminheight=5
+"set winheight=30
+"set winminheight=5
 

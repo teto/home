@@ -30,7 +30,9 @@ function current_pwd {
 #include "ns3/string.h"#include "ns3/string.h"#include "ns3/string.h"<F9>
 #include "ns3/string.h"
 powerline_path=$(get_python_pkg_dir powerline)
-if [[ "$powerline_path" != "" ]]; then
+powerline_path=""
+if [[ $? -eq 0 && "$powerline_path" != "" ]]; then
+	powerline-daemon -q
 	source ${powerline_path}/bindings/zsh/powerline.zsh
 else
 	# Setup your normal PS1 here.
@@ -41,6 +43,19 @@ PROMPT='%K{blue}%n@%m%k %B%F{cyan}%(4~|...|)%3~%F{white}  [%T]
 #${PR_GREEN}%n%{$reset_color%} %{$FG[239]%}at%{$reset_color%} ${PR_BOLD_BLUE}$(box_name)%{$reset_color%} %{$FG[239]%}in%{$reset_color%} ${PR_BOLD_YELLOW}$(current_pwd)%{$reset_color%} $(git_prompt_string)
 #$(prompt_char) '
 fi
+
+
+RPROMPT='[%D{%L:%M:%S %p}]'
+
+
+# this code makes the prompt blink which is bad
+# TRAPALRM is called every TMOUT, in our case it will reset the prompt
+#http://stackoverflow.com/questions/2187829/constantly-updated-clock-in-zsh-prompt
+#TMOUT=1
+
+#TRAPALRM() {
+    #zle reset-prompt
+#}
 
 
 # prompt called in case of error
