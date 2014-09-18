@@ -80,5 +80,5 @@ sslcacertfile= /etc/ssl/certs/ca-certificates.crt
 # name translations would need to be done in both repositories, but reverse
 #nametrans = lambda foldername: foldername.replace('bar', 'BAR')
 # prevent sync with All mail folder since it duplicates mail
-folderfilter = lambda foldername: foldername not in ['[Gmail]/All Mail','[Gmail]/Tous les messages','[Gmail]/Important']
+folderfilter = lambda foldername: foldername not in ['[Gmail]/All Mail','[Gmail]/Spam','[Gmail]/Important']
 
