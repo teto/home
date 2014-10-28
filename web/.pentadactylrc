@@ -1,4 +1,11 @@
 " A few mappings I can't remember
 " gU goes to FQDN
 " O opens the current url for edition
-setglobal guioptions=B
+" n to add tab number, B for bookmark bar
+setglobal guioptions=nB
+
+style -name tabbrowser-height-fix chrome://* <<EOM
+[dactyl-australis=true] .tabbrowser-tabs {
+    max-height:       unset !important;
+}
+EOM

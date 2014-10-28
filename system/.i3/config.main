@@ -184,8 +184,8 @@ bindsym $mod+Shift+Right move right
 bindsym $mod+b split h
 
 # split in vertical orientation
-#bindsym $mod+v split v
-bindsym $mod+v layout toggle split
+bindsym $mod+v split v
+#bindsym $mod+v layout toggle split
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen
@@ -354,7 +354,7 @@ exec_always urxvtc -name pad_ncmpcpp -e ncmpcpp
 # TODO ca ca plante si j'en ai 
 bindsym XF86Display exec ~/.i3/monitors.sh
 
-exec_always xrandr --output $output1 --auto --output $output2 --right-of $output1
+#exec_always xrandr --output $output1 --auto --output $output2 --right-of $output1
 
 #exec urxvtc -name irclient -e irssi
 
