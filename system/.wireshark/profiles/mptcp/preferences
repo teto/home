@@ -10,11 +10,11 @@
 # Open a console window (WIN32 only)
 # One of: NEVER, AUTOMATIC, ALWAYS
 # (case-insensitive).
-#gui.console_open: NEVER
+gui.console_open: ALWAYS
 
 # Alternating colors in TreeViews?
 # TRUE or FALSE (case-insensitive)
-#gui.tree_view_altern_colors: FALSE
+gui.tree_view_altern_colors: TRUE
 
 # Display Icons on Expert Composite Dialog Tabs?
 # TRUE or FALSE (case-insensitive)
@@ -42,7 +42,7 @@
 # Where to start the File Open dialog box
 # One of: LAST_OPENED, SPECIFIED
 # (case-insensitive).
-#gui.fileopen.style: LAST_OPENED
+gui.fileopen.style: SPECIFIED
 
 # The max. number of items in the open recent files list
 # A decimal number
@@ -54,7 +54,7 @@
 
 # Directory to start in when opening File Open dialog.
 # A path to a directory
-#gui.fileopen.dir: 
+gui.fileopen.dir: /home/teto/pcaps/mptcp167.1407349533.bmL
 
 # The preview timeout in the File Open dialog
 # A decimal number
@@ -130,7 +130,7 @@
 
 # Automatically scroll the recently expanded item
 # TRUE or FALSE (case-insensitive)
-#gui.auto_scroll_on_expand: FALSE
+gui.auto_scroll_on_expand: TRUE
 
 # The percentage down the view the recently expanded item should be scrolled
 # A decimal number
@@ -195,27 +195,33 @@
 
 # Packet list hidden columns
 # List all columns to hide in the packet list.
-gui.column.hidden: %Cus:ip.src:1:R,%Cus:ip.dst:1:R
+gui.column.hidden: %Cus:ip.src:1:R,%Cus:ip.dst:1:R,%Cus:tcp.options.mptcp.subflowseqno:0:R,%Cus:tcp.options.mptcp.recvtok:0:R,%Cus:tcp.options.mptcp.datafin.flag:0:R,%Cus:tcp.options.mptcp.subflowseqno:0:R
 
 # Packet list column format
 # Each pair of strings consists of a column title and its format
 gui.column.format: 
-	"No.", "%m",
+	"No.", "%Cus:frame.number:0:R",
 	"Time", "%Cus:frame.time:0:R",
 	"ITR", "%Cus:ip.src:1:R",
 	"ETR", "%Cus:ip.dst:1:R",
 	"Source", "%ns",
 	"Destination", "%und",
 	"tcpseq", "%Cus:tcp.seq:0:R",
+	"DSS_ssn", "%Cus:tcp.options.mptcp.subflowseqno:0:R",
+	"SeqToDSN", "%Cus:tcp.options.mptcp.seq2dsn:0:R",
+	"dataseqno", "%Cus:tcp.options.mptcp.dataseqno:0:R",
+	"recv token", "%Cus:tcp.options.mptcp.recvtok:0:R",
+	"send key", "%Cus:tcp.options.mptcp.sendkey:0:R",
 	"datafin", "%Cus:tcp.options.mptcp.datafin.flag:0:R",
 	"dataack", "%Cus:tcp.options.mptcp.dataack:0:R",
 	"mptcpseq", "%Cus:tcp.options.mptcp.subflowseqno:0:R",
-	"mptcptest", "%Cus::0:R",
+	"mptcptest", "%Cus:mptcp.stream:0:R",
 	"Protocol", "%p",
 	"Length", "%L",
 	"Info", "%i",
-	"send key", "%Cus:tcp.options.mptcp.sendkey:0:R",
-	"recv key", "%Cus:tcp.options.mptcp.recvkey:0:R"
+	"recv key", "%Cus:tcp.options.mptcp.recvkey:0:R",
+	"src port", "%uS",
+	"dst port", "%uD"
 
 ####### User Interface: Font ########
 
@@ -231,7 +237,7 @@ gui.qt.font_name: Liberation Mono,9,-1,5,50,0,0,0,0,0
 
 # Layout type (1-6)
 # A decimal number
-gui.layout_type: 5
+#gui.layout_type: 1
 
 # Layout content of the pane 1
 # One of: NONE, PLIST, PDETAILS, PBYTES
@@ -248,15 +254,29 @@ gui.layout_type: 5
 # (case-insensitive).
 #gui.layout_content_3: PBYTES
 
+####### Filter Expressions ########
+gui.filter_expressions.label: tcp.options.mptcp.recvtok
+gui.filter_expressions.enabled: TRUE
+gui.filter_expressions.expr: tcp.options.mptcp.recvtok
+gui.filter_expressions.label: 2001:41d0:a:38a8::1  == ipv6.src
+gui.filter_expressions.enabled: TRUE
+gui.filter_expressions.expr: 2001:41d0:a:38a8::1  == ipv6.src
+gui.filter_expressions.label: 37.187.104.168 == ip.src
+gui.filter_expressions.enabled: TRUE
+gui.filter_expressions.expr: 37.187.104.168 == ip.src
+gui.filter_expressions.label: tcp.options.mpt…ok == 109896498
+gui.filter_expressions.enabled: TRUE
+gui.filter_expressions.expr: tcp.options.mptcp.recvtok == 109896498
+
 ####### Capture ########
 
 # Default capture device
 # A string
-#capture.device: 
+capture.device: eth0
 
 # Interface link-layer header types (Ex: en0(1),en1(143),...)
 # A string
-#capture.devices_linktypes: 
+capture.devices_linktypes: bluetooth0(201)
 
 # Interface descriptions (Ex: eth0(eth0 descr),eth1(eth1 descr),...)
 # A string
@@ -272,15 +292,15 @@ gui.layout_type: 5
 
 # Interface buffer size (Ex: en0(1),en1(143),...)
 # A string
-#capture.devices_buffersize: 
+capture.devices_buffersize: eth0(2),any(2),lo(2),wlan0(2),bluetooth0(2),bluetooth-monitor(2),nflog(2),nfqueue(2),usbmon1(2),usbmon2(2),usbmon3(2),usbmon4(2)
 
 # Interface snap length (Ex: en0(65535),en1(1430),...)
 # A string
-#capture.devices_snaplen: 
+capture.devices_snaplen: eth0:0(262144),any:0(262144),lo:0(262144),wlan0:0(262144),bluetooth0:0(262144),bluetooth-monitor:0(262144),nflog:0(262144),nfqueue:0(262144),usbmon1:0(262144),usbmon2:0(262144),usbmon3:0(262144),usbmon4:0(262144)
 
 # Interface promiscuous mode (Ex: en0(0),en1(1),...)
 # A string
-#capture.devices_pmode: 
+capture.devices_pmode: eth0(1),any(1),lo(1),wlan0(1),bluetooth0(1),bluetooth-monitor(1),nflog(1),nfqueue(1),usbmon1(1),usbmon2(1),usbmon3(1),usbmon4(1)
 
 # Capture in promiscuous mode?
 # TRUE or FALSE (case-insensitive)
@@ -4593,6 +4613,10 @@ gui.layout_type: 5
 # TRUE or FALSE (case-insensitive)
 #tcp.dissect_experimental_options_with_magic: TRUE
 
+# Assume TCP Option MPTCP (30)
+# TRUE or FALSE (case-insensitive)
+#tcp.analyze_mptcp: TRUE
+
 # Set the port for IPSEC/ISAKMP messages (typically 10000)
 # A decimal number
 #tcpencap.tcp.port: 0
@@ -5005,7 +5029,7 @@ gui.layout_type: 5
 
 # When selected, statistics based on the stats_tree system will by default be sorted in descending order.
 # TRUE or FALSE (case-insensitive)
-#statistics.st_sort_defdescending: TRUE
+statistics.st_sort_defdescending: FALSE
 
 # When selected, the item/node names of statistics based on the stats_tree system will be sorted taking case into account. Else the case of the name will be ignored.
 # TRUE or FALSE (case-insensitive)
@@ -5017,7 +5041,7 @@ gui.layout_type: 5
 
 # When selected, the stats_tree nodes representing a range of values (0-49, 50-100, etc.) will always be sorted ascending; else it follows the sort direction of the tree. Only effective if "Always sort 'range' nodes by name" is also selected.
 # TRUE or FALSE (case-insensitive)
-#statistics.st_sort_rng_fixorder: TRUE
+statistics.st_sort_rng_fixorder: FALSE
 
 # When selected, the full name (including menu path) of the stats_tree plug-in is show in windows. If cleared the plug-in name is shown without menu path (only the part of the name after last '/' character.)
 # TRUE or FALSE (case-insensitive)

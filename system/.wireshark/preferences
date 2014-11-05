@@ -37,12 +37,12 @@
 # Open a console window (WIN32 only)
 # One of: NEVER, AUTOMATIC, ALWAYS
 # (case-insensitive).
-#gui.console_open: NEVER
+gui.console_open: ALWAYS
 
 # Where to start the File Open dialog box
 # One of: LAST_OPENED, SPECIFIED
 # (case-insensitive).
-#gui.fileopen.style: LAST_OPENED
+gui.fileopen.style: LAST_OPENED
 
 # The max. number of items in the open recent files list
 # A decimal number
@@ -54,7 +54,7 @@
 
 # Directory to start in when opening File Open dialog.
 # A path to a directory
-#gui.fileopen.dir: 
+gui.fileopen.dir: /home/teto/pcaps
 
 # The preview timeout in the File Open dialog
 # A decimal number
@@ -303,7 +303,7 @@ gui.filter_expressions.expr: tcp.options.mptcp.datafin.flag == 1
 # MESSAGE  = 32
 # INFO     = 64
 # DEBUG    = 128
-#console.log.level: 28
+console.log.level: 64
 
 ####### Name Resolution ########
 
@@ -4027,7 +4027,7 @@ nameres.transport_name: FALSE
 
 # Make the TCP dissector use relative sequence numbers instead of absolute ones. To use this option you must also enable "Analyze TCP sequence numbers". 
 # TRUE or FALSE (case-insensitive)
-tcp.relative_sequence_numbers: FALSE
+tcp.relative_sequence_numbers: TRUE
 
 # Make the TCP dissector use this scaling factor for streams where the signalled scaling factor is not visible in the capture
 # One of: Not known, 0 (no scaling), 1 (multiply by 2), 2 (multiply by 4), 3 (multiply by 8), 4 (multiply by 16), 5 (multiply by 32), 6 (multiply by 64), 7 (multiply by 128), 8 (multiply by 256), 9 (multiply by 512), 10 (multiply by 1024), 11 (multiply by 2048), 12 (multiply by 4096), 13 (multiply by 8192), 14 (multiply by 16384)

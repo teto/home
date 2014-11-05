@@ -92,21 +92,28 @@ status.register("network",
 # Shows mpd status
 # Format:
 # Cloud connected▶Reroute to Remain
-status.register("mpd",
+mpd = status.register("mpd",
     format="{status}{title}",
     status={
         "pause": "▷",
         "play": "▶",
         "stop": "◾",
-    },)
+    },
+    #on_lclick="hello world"
+    )
 
-status.register("alsa",);
+#print("mdp on_lclick", mpd);
 
-status.register("mail",
+alsa = status.register("alsa",);
+
+#print("alsa")
+res = status.register("mail",
         backends=[ notmuchmail.Notmuch() ],
         email_client="thunderbird",
 ## TODO replace with mutt or alot or sup later
         hide_if_null=False,
         #interval=10
         );
+#print("Result:", res)
+# res.on_leftclick()
 status.run()

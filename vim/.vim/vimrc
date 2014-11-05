@@ -6,6 +6,10 @@ let g:Powerline_symbols = "fancy" " to use unicode symbols
 let mapleader = ","
 
 
+if has('nvim')
+	runtime! python_setup.vim
+endif
+
 set showmatch
 
 set autochdir

@@ -67,11 +67,11 @@ gui.geometry_main_upper_pane: 303
 
 # Main window middle pane size.
 # Decimal number.
-gui.geometry_main_lower_pane: 260
+gui.geometry_main_lower_pane: 308
 
 # Packet list column pixel widths.
 # Each pair of strings consists of a column format and its pixel width.
-column.width: %m, 117, %t, 94, %Cus:ip.src, 211, %Cus:ip.dst, 132, %Cus:ip.src, 211, %Cus:ip.dst, 132, %p, 74, %L, 58, %i, 665
+column.width: %m, 117, %t, 94, %Cus:ip.src, 211, %Cus:ip.dst, 132, %Cus:ip.src, 211, %Cus:ip.dst, 132, %p, 74, %L, 58, %i, 726
 
 # Last directory navigated to in File Open dialog.
-gui.fileopen_remembered_dir: /home/teto/mptcp/
+gui.fileopen_remembered_dir: /home/teto/ns3/

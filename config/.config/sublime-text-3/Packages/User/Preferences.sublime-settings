@@ -1,7 +1,8 @@
 {
-    "highlight_modified_tabs": true, 
-    "ignored_packages": [
-        "Vintage", 
-        "Makefile"
-    ]
+	"highlight_modified_tabs": true,
+	"ignored_packages":
+	[
+		"Makefile",
+		"Vintage"
+	]
 }
