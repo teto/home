@@ -1,8 +1,17 @@
 {
+	"always_show_minimap_viewport": true,
+	"caret_extra_bottom": 0,
+	"caret_extra_top": 0,
+	"caret_extra_width": 0,
+	"caret_style": "smooth",
+	"enable_tab_scrolling": true,
+	"gutter": true,
+	"highlight_line": true,
 	"highlight_modified_tabs": true,
 	"ignored_packages":
 	[
 		"Makefile",
 		"Vintage"
-	]
+	],
+	"line_numbers": true
 }

@@ -32,7 +32,7 @@ function current_pwd {
 powerline_path=$(get_python_pkg_dir powerline)
 powerline_path=""
 if [[ $? -eq 0 && "$powerline_path" != "" ]]; then
-	powerline-daemon -q
+	${powerline_path}/../EGG-INFO/scripts/powerline-daemon -q
 	source ${powerline_path}/bindings/zsh/powerline.zsh
 else
 	# Setup your normal PS1 here.

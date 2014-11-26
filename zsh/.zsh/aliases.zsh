@@ -62,8 +62,10 @@ alias l="ls -l"
 alias ll="ls -l" 
 alias la="ls -a"
 alias lla="ls -la"
+alias llt="ls -lt"
 
 alias v="vim"
+alias nv="nvim"
 
 # Movement aliases
 alias ..="cd .."

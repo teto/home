@@ -3,6 +3,7 @@
 # TODO replace with compton
 #xcompmgr&
 export PYTHONPATH="$PYTHONPATH:/home/teto/i3pystatus"
+export PYTHONPATH="$PYTHONPATH:/home/teto/powerline"
 
 mpd&
 

@@ -136,11 +136,6 @@ gui.auto_scroll_on_expand: TRUE
 # A decimal number
 #gui.auto_scroll_percentage: 0
 
-# Qt Language
-# One of: auto, en, fr, de, zh_CN, pl, ja_JP, it
-# (case-insensitive).
-#gui.qt_language: auto
-
 # Enable Packet Editor (Experimental)
 # TRUE or FALSE (case-insensitive)
 #gui.packet_editor.enabled: FALSE
@@ -195,25 +190,28 @@ gui.auto_scroll_on_expand: TRUE
 
 # Packet list hidden columns
 # List all columns to hide in the packet list.
-gui.column.hidden: %Cus:ip.src:1:R,%Cus:ip.dst:1:R,%Cus:tcp.options.mptcp.subflowseqno:0:R,%Cus:tcp.options.mptcp.recvtok:0:R,%Cus:tcp.options.mptcp.datafin.flag:0:R,%Cus:tcp.options.mptcp.subflowseqno:0:R
+gui.column.hidden: %Cus:ip.src:1:R,%Cus:ip.dst:1:R,%Cus:tcp.options.mptcp.subflowseqno:0:R,%Cus:tcp.options.mptcp.dataseqno:0:R,%Cus:tcp.options.mptcp.recvtok:0:R,%Cus:tcp.options.mptcp.datafin.flag:0:R,%Cus:tcp.options.mptcp.subflowseqno:0:R,%Cus:tcp.options.mptcp.recvkey:0:R
 
 # Packet list column format
 # Each pair of strings consists of a column title and its format
 gui.column.format: 
 	"No.", "%Cus:frame.number:0:R",
 	"Time", "%Cus:frame.time:0:R",
+	"Source", "%ns",
 	"ITR", "%Cus:ip.src:1:R",
 	"ETR", "%Cus:ip.dst:1:R",
-	"Source", "%ns",
-	"Destination", "%und",
+	"Destination", "%rnd",
 	"tcpseq", "%Cus:tcp.seq:0:R",
+	"ack", "%Cus:tcp.ack:0:R",
+	"dataack", "%Cus:tcp.options.mptcp.dataack:0:R",
 	"DSS_ssn", "%Cus:tcp.options.mptcp.subflowseqno:0:R",
 	"SeqToDSN", "%Cus:tcp.options.mptcp.seq2dsn:0:R",
-	"dataseqno", "%Cus:tcp.options.mptcp.dataseqno:0:R",
+	"Raw DSN", "%Cus:tcp.options.mptcp.rawdataseqno:0:R",
+	"DSN", "%Cus:tcp.options.mptcp.dataseqno:0:R",
 	"recv token", "%Cus:tcp.options.mptcp.recvtok:0:R",
+	"ISDN", "%Cus:tcp.options.mptcp.expected_idsn:0:R",
 	"send key", "%Cus:tcp.options.mptcp.sendkey:0:R",
 	"datafin", "%Cus:tcp.options.mptcp.datafin.flag:0:R",
-	"dataack", "%Cus:tcp.options.mptcp.dataack:0:R",
 	"mptcpseq", "%Cus:tcp.options.mptcp.subflowseqno:0:R",
 	"mptcptest", "%Cus:mptcp.stream:0:R",
 	"Protocol", "%p",
@@ -221,7 +219,8 @@ gui.column.format:
 	"Info", "%i",
 	"recv key", "%Cus:tcp.options.mptcp.recvkey:0:R",
 	"src port", "%uS",
-	"dst port", "%uD"
+	"dst port", "%uD",
+	"flags", "%Cus:tcp.flags:0:R"
 
 ####### User Interface: Font ########
 
@@ -256,17 +255,20 @@ gui.qt.font_name: Liberation Mono,9,-1,5,50,0,0,0,0,0
 
 ####### Filter Expressions ########
 gui.filter_expressions.label: tcp.options.mptcp.recvtok
-gui.filter_expressions.enabled: TRUE
+gui.filter_expressions.enabled: FALSE
 gui.filter_expressions.expr: tcp.options.mptcp.recvtok
 gui.filter_expressions.label: 2001:41d0:a:38a8::1  == ipv6.src
-gui.filter_expressions.enabled: TRUE
+gui.filter_expressions.enabled: FALSE
 gui.filter_expressions.expr: 2001:41d0:a:38a8::1  == ipv6.src
 gui.filter_expressions.label: 37.187.104.168 == ip.src
-gui.filter_expressions.enabled: TRUE
+gui.filter_expressions.enabled: FALSE
 gui.filter_expressions.expr: 37.187.104.168 == ip.src
 gui.filter_expressions.label: tcp.options.mpt…ok == 109896498
-gui.filter_expressions.enabled: TRUE
+gui.filter_expressions.enabled: FALSE
 gui.filter_expressions.expr: tcp.options.mptcp.recvtok == 109896498
+gui.filter_expressions.label: tcp.options.mptcp.datafin.flag == 1
+gui.filter_expressions.enabled: TRUE
+gui.filter_expressions.expr: tcp.options.mptcp.datafin.flag == 1
 
 ####### Capture ########
 
@@ -361,15 +363,15 @@ capture.devices_pmode: eth0(1),any(1),lo(1),wlan0(1),bluetooth0(1),bluetooth-mon
 
 # Resolve IPv4, IPv6, and IPX addresses into host names. The next set of check boxes determines how name resolution should be performed. If no other options are checked name resolution is made from Wireshark's host file, capture file name resolution blocks and DNS packets in the capture.
 # TRUE or FALSE (case-insensitive)
-#nameres.network_name: FALSE
+nameres.network_name: TRUE
 
 # Use your system's configured name resolver (usually DNS) to resolve network names. Only applies when network name resolution is enabled.
 # TRUE or FALSE (case-insensitive)
-#nameres.use_external_name_resolver: TRUE
+nameres.use_external_name_resolver: FALSE
 
 # By default "hosts" files will be loaded from multiple sources. Checking this box only loads the "hosts" in the current profile.
 # TRUE or FALSE (case-insensitive)
-#nameres.hosts_file_handling: FALSE
+nameres.hosts_file_handling: TRUE
 
 ####### Printing ########
 
@@ -1015,7 +1017,7 @@ capture.devices_pmode: eth0(1),any(1),lo(1),wlan0(1),bluetooth0(1),bluetooth-mon
 #bta2dp.a2dp.content_protection.scms_t: FALSE
 
 # Force decoding stream as A2DP with specified codec
-# One of: Default, SBC, MPEG12 AUDIO, MPEG24 AAC
+# One of: Default, SBC, MPEG12 AUDIO, MPEG24 AAC, APT-X
 # (case-insensitive).
 #bta2dp.a2dp.codec: Default
 
