@@ -1,6 +1,14 @@
 ! This file is the oldest version
 ! It should be best to use ~/.Xresources instead
 !
+
+# generates escape j
+URxvt.keysym.Mod4-j:\033j
+URxvt.keysym.Mod4-k:\033k
+URxvt.keysym.Mod4-h:\033h
+URxvt.keysym.Mod4-l:\033l
+
+
 !
 !http://superuser.com/questions/243914/xresources-or-xdefaults
 !

@@ -4,6 +4,14 @@ nmap <silent> <C-Down> :wincmd j<CR>
 nmap <silent> <C-Left> :wincmd h<CR>
 nmap <silent> <C-Right> :wincmd l<CR>
 
+
+
+" nmap = *normal mode* mapping
+nmap <silent> ^[OC :wincmd l<CR>
+nmap <silent> ^[OC :wincmd h<CR>
+nmap <silent> OC :wincmd l<CR>
+nmap <silent> OD :wincmd h<CR>
+
 " window
 nmap <leader>sw<left>  :topleft  vnew<CR>
 nmap <leader>sw<right> :botright vnew<CR>

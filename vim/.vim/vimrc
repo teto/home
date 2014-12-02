@@ -1,4 +1,7 @@
 set nocompatible               " be iMproved
+
+set autoread " automatically reload file when it has been changed
+
 filetype on                   " required!
 set t_Co=256			" use 256 colors
 
