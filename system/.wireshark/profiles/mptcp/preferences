@@ -207,6 +207,7 @@ gui.column.format:
 	"DSS_ssn", "%Cus:tcp.options.mptcp.subflowseqno:0:R",
 	"SeqToDSN", "%Cus:tcp.options.mptcp.seq2dsn:0:R",
 	"Raw DSN", "%Cus:tcp.options.mptcp.rawdataseqno:0:R",
+	"seg len", "%Cus:tcp.len:0:R",
 	"DSN", "%Cus:tcp.options.mptcp.dataseqno:0:R",
 	"recv token", "%Cus:tcp.options.mptcp.recvtok:0:R",
 	"ISDN", "%Cus:tcp.options.mptcp.expected_idsn:0:R",
@@ -220,7 +221,8 @@ gui.column.format:
 	"recv key", "%Cus:tcp.options.mptcp.recvkey:0:R",
 	"src port", "%uS",
 	"dst port", "%uD",
-	"flags", "%Cus:tcp.flags:0:R"
+	"flags", "%Cus:tcp.flags:0:R",
+	"reinjections", "%Cus:mptcp.analysis.mapping.reinjection:0:R"
 
 ####### User Interface: Font ########
 
@@ -4618,6 +4620,10 @@ nameres.hosts_file_handling: TRUE
 # Assume TCP Option MPTCP (30)
 # TRUE or FALSE (case-insensitive)
 #tcp.analyze_mptcp: TRUE
+
+# Assume TCP Option MPTCP (30)
+# TRUE or FALSE (case-insensitive)
+#tcp.analyze_mptcp_seq: TRUE
 
 # Set the port for IPSEC/ISAKMP messages (typically 10000)
 # A decimal number

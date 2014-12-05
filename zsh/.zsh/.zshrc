@@ -13,6 +13,6 @@ source $ZDOTDIR/aliases.zsh
 source $ZDOTDIR/bindkeys.zsh
 source $ZDOTDIR/functions.zsh
 source $ZDOTDIR/history.zsh
-source $ZDOTDIR/zsh_hooks.zsh
+source $ZDOTDIR/hooks.zsh
 source $ZDOTDIR/mail.zsh
 #source  ${HOME}/.dotfiles/z/z.sh

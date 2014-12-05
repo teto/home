@@ -20,7 +20,7 @@ export PYTHONPATH="/home/teto/libnlofficiel/python/build/lib.linux-x86_64-3.3:$P
 #export PYTHONPATH="/home/teto/powerline:$PYTHONPATH"
 export PATH="$PATH:/home/teto/csvfix/csvfix/bin"
 export MAILDIR="$HOME/Maildir"
-export POWERLINE="$HOME/powerline"
+#export POWERLINE="$HOME/powerline"
 #export PYTHONPATH="$HOME:$HOME/toml.py:/home/teto/libnl/python/build/lib.linux-x86_64-3.3:$PYTHONPATH"
  
 
