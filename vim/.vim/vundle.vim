@@ -40,7 +40,7 @@ Plugin 'makebg'
 " Plugin 'SuperTab'
 " Plugin 'taglist.vim'
 " Plugin 'vim-addon-background-cmd'
-" Plugin 'Lokaltog/powerline' , {'rtp': 'powerline/bindings/vim/'}
+Plugin 'Lokaltog/powerline' , {'rtp': 'powerline/bindings/vim/'}
 " Press F12 to toggle mouse between terminal & vim control
 Plugin 'nvie/vim-togglemouse' 
 Plugin 'Solarized'

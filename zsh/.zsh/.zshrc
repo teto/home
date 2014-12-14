@@ -2,6 +2,7 @@
 autoload predict-on
 predict-on
 
+source $ZDOTDIR/path.zsh
 source $ZDOTDIR/autojump.zsh
 source $ZDOTDIR/colors.zsh
 source $ZDOTDIR/setopt.zsh

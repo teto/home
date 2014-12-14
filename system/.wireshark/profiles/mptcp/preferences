@@ -271,6 +271,9 @@ gui.filter_expressions.expr: tcp.options.mptcp.recvtok == 109896498
 gui.filter_expressions.label: tcp.options.mptcp.datafin.flag == 1
 gui.filter_expressions.enabled: TRUE
 gui.filter_expressions.expr: tcp.options.mptcp.datafin.flag == 1
+gui.filter_expressions.label: tcp.options.mptcp.dataseqno
+gui.filter_expressions.enabled: TRUE
+gui.filter_expressions.expr: tcp.options.mptcp.dataseqno
 
 ####### Capture ########
 
