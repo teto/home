@@ -20,7 +20,7 @@ fi
 #list=$( find . -regex './config\..*' -print)
 #for config_part in $list; do
 
-list="$folder/config.header  $folder/config.monitors $folder/config.colors $folder/config.mediakeys $folder/config.main"
+list="$folder/config.header  $folder/config.monitors $folder/config.colors $folder/config.mediakeys $folder/filters.config $folder/config.main"
 cat $list > "$folder/config"
 
 #cat "$folder/config.monitors" "$folder/config.main" > "$folder/config"

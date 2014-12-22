@@ -1,0 +1,4 @@
+#set sidebar_delim   = '  │'
+set sidebar_visible = yes
+set sidebar_width   = 30
+color sidebar_new color221 color233

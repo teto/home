@@ -11,7 +11,7 @@ This folder contains my customizations for:
 * liquidprompt (a script to make your prompt adapt to the current context)
 * mpd (configuration files to run this music server as a user)
 * msmtp (MSA: Mail Sending Agent)
-* mutt (Mail User Agent, incomplete config)
+* mutt / mutt-kz (Mail User Agent, incomplete config)
 * netrc (template only)
 * newbeuter (RSS reader)
 * notmuch (to tag mails)
@@ -41,7 +41,10 @@ You can also copy some programs I use to the bin folder:
 
 You will also find cronjobs to load via 'crontab -e' or 'crontab <file>' i nthe cron folder. For instance there is one cronjob that runs 'offlineimap -a <account>'.
 
-There might be additionnal more specific READMEs in subfolders.
+There might be additional more specific READMEs in subfolders.
+
+
+The folder "compilation" is an example of how to ./configure certain programs
 
 Powerline & Fonts
 ====

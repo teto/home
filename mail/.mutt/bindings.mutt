@@ -1,0 +1,57 @@
+# Index Key Bindings ---------------------------------
+#########################
+bind index gg       first-entry
+bind index G        last-entry
+
+
+bind index \C<left> 	sidebar-prev
+bind index <right> 	sidebar-next
+bind index \Co		sidebar-open
+macro index <Tab> 	'<enter-command>toggle sidebar_visible<enter><redraw-screen>'
+macro pager <Tab> 	'<enter-command>toggle sidebar_visible<enter><redraw-screen>'
+bind index R        group-reply
+bind index $	    sync-mailbox
+bind index <  		collapse-thread
+bind index >  		collapse-all
+
+#bind index \Cf		next-page
+#bind index \Cb		previous-page
+bind index \Cb		half-up
+bind index \Cf		half-down
+
+
+
+bind index \CP sidebar-prev-new
+bind index \CN sidebar-next-new
+
+# Ctrl-R to mark all as read
+macro index \Cr "T~U<enter><tag-prefix><clear-flag>N<untag-pattern>.<enter>" "mark all messages as read"
+
+# Sync email
+#macro index O "<shell-escape>offlineimap<enter>"           "run offlineimap to sync all mail"
+#macro index o "<shell-escape>offlineimap -qf INBOX<enter>" "run offlineimap to sync inbox"
+
+# Saner copy/move dialogs
+macro index C "<copy-message>?<toggle-mailboxes>" "copy a message to a mailbox"
+macro index M "<save-message>?<toggle-mailboxes>" "move a message to a mailbox"
+
+
+bind index <space> 	next-unread
+
+
+# Pager Key Bindings 
+# should be useless since I use an external pager (aka less)
+#########################
+bind pager k  previous-line
+bind pager j  next-line
+bind pager gg top
+bind pager G  bottom
+
+bind pager R  group-reply
+
+# View attachments properly.
+bind attach <return> view-mailcap
+
+# pager bindings
+#########################
+macro pager \Cu "|urlview<enter>" "call urlview to open links"

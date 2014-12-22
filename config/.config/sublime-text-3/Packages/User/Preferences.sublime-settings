@@ -4,6 +4,7 @@
 	"caret_extra_top": 0,
 	"caret_extra_width": 0,
 	"caret_style": "smooth",
+	"color_scheme": "Packages/User/SublimeLinter/Monokai (SL).tmTheme",
 	"enable_tab_scrolling": true,
 	"gutter": true,
 	"highlight_line": true,
@@ -11,7 +12,9 @@
 	"ignored_packages":
 	[
 		"Makefile",
-		"Vintage"
+		"Python PEP8 Autoformat",
+		"Vintage",
+		"AutoPEP8"
 	],
 	"line_numbers": true
 }

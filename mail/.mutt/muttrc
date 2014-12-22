@@ -23,7 +23,7 @@ set editor=vim
 set folder= $MAILDIR
 
 # load different config depending on current mailbox
-folder-hook . 'unset trash'
+#folder-hook . 'unset trash'
 #folder-hook gmail2 source "$HOME/.mutt/account_gmail"
 #folder-hook lip6
 
@@ -31,27 +31,36 @@ folder-hook . 'unset trash'
 set sendmail="/usr/bin/msmtp"
 
 #set use_envelope_from
-
-
+set wait_key=no  # when running external programs
+set quit # don't ask, just do !
+set beep_new             # bell on new mails
 
 #set mail_check = 120
 
+
+set fast_reply=no # ask questions before editing message
 set timeout = 300
 
 set imap_keepalive = 300
 
-# how to display inbox
+set pager = "less"
 set sort = 'threads'
-
-
+# order of posts
+# set sort_aux=last-date-received
+set sort_aux=reverse-last-date-received
 # to choose between 4 types maildir, etc...
 set mbox= $MAILDIR
 set mbox_type=maildir
+
+
+set history=100
+set history_file= $MUTT/cache/history
 
 # TODO set file
 set signature="Matthieu Coudron"
 
 
+set alias_file=~/.mutt/aliases.mutt
 
 ##################################
 ### for colors
@@ -59,7 +68,11 @@ set signature="Matthieu Coudron"
 #p"$HOME/.mutt/
 source ${MUTT}/mailboxes
 source $MUTT/colors/mutt-colors-solarized-dark-256.muttrc
+source $MUTT/index.mutt
 source $MUTT/pager.mutt
+source $MUTT/bindings.mutt
+source $MUTT/sidebar.mutt
+source $MUTT/aliases.mutt
 
 set spoolfile=$MAILDIR/gmail/INBOX
 

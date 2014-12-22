@@ -31,7 +31,8 @@ alias gl='git log'
 alias gst="git status"
 alias gs='git status'
 alias gd='git diff'
-alias gm='git commit -m'
+alias gm='git commit'
+alias gmm='git commit -m'
 alias gma='git commit -am'
 alias gb='git branch'
 alias gbl="git branch --list" # todo add all ?
@@ -64,8 +65,10 @@ alias la="ls -a"
 alias lla="ls -la"
 alias llt="ls -lt"
 
+### oftenly used programs
 alias v="vim"
 alias nv="nvim"
+alias m="mutt"
 
 # Movement aliases
 alias ..="cd .."

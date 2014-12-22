@@ -17,7 +17,6 @@ workspace "$w1" output $output1
 workspace "$w2" output $output2
 workspace "$w3" output $output2
 workspace "$w4" output $output2
-assign [class="^Firefox$"] $w2
 
 
 # default border size
