@@ -1,0 +1,4 @@
+#!/bin/bash
+notmuch new 
+notmuch tag --batch --input="$HOME/.notmuch/foss"
+notmuch tag --batch --input="$HOME/.notmuch/tag_ietf"

@@ -14,7 +14,7 @@ set realname="Matthieu Coudron"
 
 # to improve performance
 set header_cache = ${MUTT}/cache/headers
-set message_cachedir = $MUTT/cache/bodies
+# set message_cachedir = ${MUTT}/cache/bodies
 set move=no
 #utilise lors de l'ecriture de ses messages
 set editor=vim
@@ -41,7 +41,6 @@ set beep_new             # bell on new mails
 set fast_reply=no # ask questions before editing message
 set timeout = 300
 
-set imap_keepalive = 300
 
 set pager = "less"
 set sort = 'threads'

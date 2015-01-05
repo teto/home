@@ -110,12 +110,15 @@ alsa = status.register("alsa",)
 
 # print("alsa")
 res = status.register("mail",
-                      backends=[notmuchmail.Notmuch()],
+                      backends=[
+                        notmuchmail.Notmuch(account="lip6", query="tag:inbox and tag:unread"),
+                        notmuchmail.Notmuch(account="gmail", query="tag:inbox and tag:unread"),
+                      ],
                       # email_client="",
                       # TODO replace with mutt or alot or sup later
                       hide_if_null=False,
                       interval=1,
-                      on_leftclick="urxvtc -e mutt"
+                      on_leftclick="urxvtc -e mutt",
                       log_level=logging.DEBUG
                       )
 #print("Result:", res)

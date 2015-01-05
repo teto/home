@@ -1,0 +1,3 @@
+# imap config in a separate file, in case
+# it's disabled
+set imap_keepalive = 300
