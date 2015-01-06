@@ -160,6 +160,7 @@ source ~/.vim/display.vim
 " source ~/.vim/colors.vim
 source ~/.vim/search.vim
 source ~/.vim/vundle.vim
+source ~/.vim/plug.vim
 source ~/.vim/compose.vim
 source ~/.vim/cscope.vim
 source ~/.vim/ycm.vim

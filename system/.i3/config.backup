@@ -1,0 +1,293 @@
+# Generated with i3gen
+
+### Rendering mediaplayer.tpl
+
+
+bindsym XF86AudioStop exec mocp -P; notify-send Music Paused
+bindsym XF86AudioPlay exec mocp -G; notify-send  Resuming music
+bindsym XF86AudioNext exec mocp -f; notify-send Next song
+bindsym XF86AudioPrev exec mocp -r; notify-send Next song
+### end of mediaplayer.tpl
+
+
+### Rendering volume.tpl
+
+bindsym XF86AudioRaiseVolume exec amixer -q set Master 2dB+ unmute; notify-send Audio Raised volume; notify-send Audio Raised volumebindsym XF86AudioLowerVolume exec "amixer -q set Master 2dB- unmute; notify-send Audio lowered"; notify-send Lowered volume to XXXbindsym XF86AudioMute exec ; notify-send Mute
+### end of volume.tpl
+
+
+### Rendering focus_win.tpl
+
+bindsym Mod1+Left focus left
+bindsym Mod1+Down focus down
+bindsym Mod1+Up focus up
+bindsym Mod1+Right focus right
+### end of focus_win.tpl
+
+
+### Rendering move_win.tpl
+
+bindsym Mod1+Shift+Left move left
+bindsym Mod1+Shift+Down move down
+bindsym Mod1+Shift+Up move up
+bindsym Mod1+Shift+Right move right
+### end of move_win.tpl
+
+
+### Rendering layout.tpl
+
+
+### end of layout.tpl
+
+
+### Rendering bar.tpl
+
+
+bar {
+    position top
+    status_command i3bar
+    strip_workspace_numbers 1
+colors {
+    background #090e14
+    statusline #ffffff
+
+    # class            border  backgrd text
+    focused_workspace  #d72f6b #d70a53 #FFFF50
+    active_workspace   #06090d #06090d #696f89
+    inactive_workspace #06090d #06090d #696f89
+    urgent_workspace   #d72f6b #d70a53 #FFFF50        
+}
+
+}
+### end of bar.tpl
+
+
+### Rendering ws.tpl
+
+# number of ws registered  ['1:main', '2:web', '3:éditeurs', '4:qemu']
+set $ws1 "1:main"
+set $ws2 "2:web"
+set $ws3 "3:éditeurs"
+set $ws4 "4:qemu"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+
+### end of ws.tpl
+
+
+### Rendering ws_assign.tpl
+
+# expects variables called "wsX" with X from 1 to 10
+bindsym Mod1+Shift+1 move container to workspace $ws1
+bindsym Mod1+Shift+2 move container to workspace $ws2
+bindsym Mod1+Shift+3 move container to workspace $ws3
+bindsym Mod1+Shift+4 move container to workspace $ws4
+bindsym Mod1+Shift+5 move container to workspace $ws5
+bindsym Mod1+Shift+6 move container to workspace $ws6
+bindsym Mod1+Shift+7 move container to workspace $ws7
+bindsym Mod1+Shift+8 move container to workspace $ws8
+bindsym Mod1+Shift+9 move container to workspace $ws9
+### end of ws_assign.tpl
+
+
+### Rendering ws_goto.tpl
+
+# expects variables called "wsX" with X from 1 to 10
+bindsym Mod1+$mod+ampersand workspace $ws1
+bindsym Mod1+$mod+eacute workspace $ws2
+bindsym Mod1+$mod+quotedbl workspace $ws3
+bindsym Mod1+$mod+apostrophe workspace $ws4
+bindsym Mod1+$mod+parenleft workspace $ws5
+bindsym Mod1+$mod+minus workspace $ws6
+bindsym Mod1+$mod+egrave workspace $ws7
+bindsym Mod1+$mod+underscore workspace $ws8
+bindsym Mod1+$mod+ccedilla workspace $ws9
+### end of ws_goto.tpl
+
+
+### Rendering main.tpl
+
+focus_follows_mouse no
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier Mod1
+
+# kill focused window
+bindsym Mod1+Shift+A kill
+
+# start dmenu (a program launcher)
+bindsym Mod1+d exec j4-dmenu-desktop
+
+ipc-socket ~/.i3/ipc.sock
+### end of main.tpl
+
+
+### Rendering session.tpl
+
+
+# reload the configuration file
+bindsym $mod+Shift+C  reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+# exec "$HOME/.i3/build_config.sh"; 
+bindsym Mod1+Shift+R exec "$HOME/.i3/build_config"; restart
+# exit i3 (logs you out of your X session)
+# command is 'exit'
+bindsym $mod+Shift+E exec "$HOME/.i3/logout.py"
+
+# to lock screen
+bindsym $mod+Ctrl+L exec "i3lock -i ~/Images/route66.png"
+### end of session.tpl
+
+
+### Rendering perso.tpl
+
+
+set $output1 'LVDS1'
+set $output2 'DP1'
+# Use mod-Control-Up and Down to rotate through the workspace list.
+
+
+
+assign [class="^Firefox$"] $w1
+assign [class="^Thunderbird$"] $w2
+assign [class="sublime$"] $w4
+assign [class="codeblocks$"] $w3
+
+#for_window [title="MOC"] move scratchpad
+for_window [Class="^Transmission"] floating enable
+bindsym $mod+F2 [instance="pad_(?!audioplayer)"] move scratchpad ; [instance="pad_audioplayer"] scratchpad show
+#i3-msg [con_marki=pad1] focus
+bindsym $mod+F1 [instance="pad_(?!flyingterminal)"] move scratchpad; [instance="pad_flyingterminal"] scratchpad show
+bindsym $mod+F3 [instance="pad_(?!ncmpcpp)"] move scratchpad; [instance="pad_ncmpcpp"] scratchpad show
+#bindsym $mod+F3 scratchpad show
+
+
+
+
+# default border size
+new_window 1pixel
+new_float pixel 2
+
+#for_window [instance="audioplayer"] move to scratchpad
+for_window [instance="pad_*"] move scratchpad
+#for_window [instance="pad_flyingterminal"] move scratchpad
+#for_window [instance="pad_flyingterminal"] move scratchpad
+#for_window [instance="pad_ircclient"] move scratchpad
+for_window [class="Navigator"] floating enable,border 1 pixel;
+
+# vertical | horizontal | both
+hide_edge_borders both
+
+# focus the parent container
+bindsym $mod+p focus parent
+bindsym $mod+q exec nautilus --no-desktop
+
+# focus the child container
+#bindcode $mod+d focus child
+
+
+### TODO need to run urxvtd beforehand
+### display error in case it does not launch
+# Provide command to send to a specific scratchpad (rename title) or use mark ?
+#
+exec_always urxvtc -name pad_audioplayer -e mocp
+exec_always urxvtc -name pad_flyingterminal
+exec_always urxvtc -name pad_ncmpcpp -e ncmpcpp
+#exec_always urxvtc -name pad_term4
+#exec_always urxvtc -name pad_term5
+
+# DP3 & LVDS1
+# to move
+# TODO ca ca plante si j'en ai 
+bindsym XF86Display exec ~/.i3/monitors.sh
+
+#exec_always xrandr --output $output1 --auto --output $output2 --right-of $output1
+
+#exec urxvtc -name irclient -e irssi
+
+exec ~/.i3/autostart
+### end of perso.tpl
+
+# Started rendering mode
+bindsym Mod1+r mode resize
+mode resize {
+
+### Rendering resize.tpl
+
+bindsym Left resize grow left 10 px or 10 ppt
+bindsym Shift+ Left resize shrink left 10 px or 10 ppt
+
+bindsym Shift+ Right resize shrink up 10 px or 10 ppt
+
+bindsym Down resize grow down 10 px or 10 ppt
+bindsym Shift+Down resize shrink down 10 px or 10 ppt
+
+bindsym Right resize grow right 10 px or 10 ppt
+bindsym Shift+Right resize shrink right 10 px or 10 pptbindsym Left resize grow left 10 px or 10 ppt
+bindsym Shift+ Left resize shrink left 10 px or 10 ppt
+
+bindsym Shift+ j resize shrink up 10 px or 10 ppt
+
+bindsym l resize grow down 10 px or 10 ppt
+bindsym Shift+l resize shrink down 10 px or 10 ppt
+
+bindsym j resize grow right 10 px or 10 ppt
+bindsym Shift+j resize shrink right 10 px or 10 ppt
+### end of resize.tpl
+
+bindsym Return mode "default"
+bindsym Escape mode "default"
+}
+# Started rendering mode
+bindsym Mod1+m mode monitors
+mode monitors {
+
+### Rendering monitors.tpl
+
+	
+bindsym Mod1+Left move workspace to output left
+bindsym Mod1+Right move workspace to output right
+bindsym Mod1+Up move workspace to output top
+bindsym Mod1+Down move workspace to output down
+            
+bindsym Mod1+Shift+Left workspace prev_on_output
+bindsym Mod1+Shift+Right workspace next_on_output
+### end of monitors.tpl
+
+bindsym Return mode "default"
+bindsym Escape mode "default"
+}
+
+### Rendering default/common.tpl
+
+
+set $mod Mod1
+
+
+#########################################
+### config.colors
+#########################################
+# class                 border  backgrd text   indicator
+client.focused          #d72f6b #d70a53 #FFFF50 #FFFF50
+client.focused_inactive #06090d #06090d #696f89 #090e14
+client.unfocused        #090e14 #090e14 #696f89 #090e14
+client.urgent           #870000 #870000 #ffffff #090e14
+client.background       #06090d
+
+hide_edge_borders both  
+# font for window titles. ISO 10646 = Unicode
+font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+
+# default border size
+#new_window 1pixel
+new_float pixel 2
+
+# font for window titles
+font xft:Liberation Sans Mono 8
+
+
+### end of default/common.tpl
+

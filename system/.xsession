@@ -2,9 +2,9 @@
 
 # TODO replace with compton
 #xcompmgr&
-export PYTHONPATH="$PYTHONPATH:/home/teto/i3pystatus"
-export PYTHONPATH="$PYTHONPATH:/home/teto/powerline"
 
+. "$HOME/.zshenv"
+# echo $PYTHONPATH
 mpd&
 
 # need to launch daemon before i3, cos of scratchpads
@@ -17,7 +17,7 @@ setxkbmap -option terminate:ctrl_alt_bksp
 feh --bg-scale Images/abstrait2.jpg&
 
 # alsamixer in systray
-"$HOME/.i3/build_config.sh"
+"$HOME/.i3/build_config"
 
 # Set background color
 xsetroot -solid "#333333"

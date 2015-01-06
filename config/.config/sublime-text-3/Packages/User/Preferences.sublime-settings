@@ -4,7 +4,7 @@
 	"caret_extra_top": 0,
 	"caret_extra_width": 0,
 	"caret_style": "smooth",
-	"color_scheme": "Packages/User/SublimeLinter/Monokai (SL).tmTheme",
+	"color_scheme": "Packages/Color Scheme - Default/Monokai.tmTheme",
 	"enable_tab_scrolling": true,
 	"gutter": true,
 	"highlight_line": true,
@@ -13,8 +13,8 @@
 	[
 		"Makefile",
 		"Python PEP8 Autoformat",
-		"Vintage",
-		"AutoPEP8"
+		"AutoPEP8",
+		"Vintage"
 	],
 	"line_numbers": true
 }

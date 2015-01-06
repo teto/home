@@ -2,5 +2,7 @@ set nocompatible
 
 if has('nvim')
 	runtime! python_setup.vim
-	set unnamedclip
 endif
+
+
+source ~/.vim/vimrc

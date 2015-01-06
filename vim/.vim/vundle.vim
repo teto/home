@@ -36,11 +36,11 @@ Plugin 'Modeliner'
 Plugin 'autoload_cscope.vim'
 " Plugin 'gfxmonk/vim-background-make'
 " Plugin 'tpope/vim-dispatch'
-Plugin 'makebg'
+" Plugin 'makebg'
 " Plugin 'SuperTab'
 " Plugin 'taglist.vim'
 " Plugin 'vim-addon-background-cmd'
-Plugin 'Lokaltog/powerline' , {'rtp': 'powerline/bindings/vim/'}
+" Plugin 'Lokaltog/powerline' , {'rtp': 'powerline/bindings/vim/'}
 " Press F12 to toggle mouse between terminal & vim control
 Plugin 'nvie/vim-togglemouse' 
 Plugin 'Solarized'
