@@ -6,7 +6,8 @@
 # nm_default_uri=""
 set virtual_spoolfile
 # virtual folders
-virtual-mailboxes \
-"INBOX"                "notmuch://?query=tag:inbox and NOT tag:killed" \
-"lisp"	"notmuch://?query=tag:lisp"
+virtual-mailboxes
+"INBOX"                "notmuch://?query=tag:inbox and NOT tag:killed"\
+"lisp"	"notmuch://?query=tag:lisp"\
+"github"	"notmuch://?query=tag:github"
 

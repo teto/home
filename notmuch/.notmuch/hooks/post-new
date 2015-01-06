@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# TODO run the filters
+notmuch tag --batch --input="$HOME/.notmuch/tag_ietf"
+notmuch tag --batch --input="$HOME/.notmuch/foss"
