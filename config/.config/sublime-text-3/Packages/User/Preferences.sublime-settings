@@ -13,8 +13,8 @@
 	[
 		"Makefile",
 		"Python PEP8 Autoformat",
-		"Vintage",
-		"AutoPEP8"
+		"AutoPEP8",
+		"Vintage"
 	],
 	"line_numbers": true
 }

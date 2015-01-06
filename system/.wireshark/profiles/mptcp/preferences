@@ -197,6 +197,7 @@ gui.column.hidden: %Cus:ip.src:1:R,%Cus:ip.dst:1:R,%Cus:tcp.options.mptcp.subflo
 gui.column.format: 
 	"No.", "%Cus:frame.number:0:R",
 	"Time", "%Cus:frame.time:0:R",
+	"Time delta", "%Cus:frame.time_delta:0:R",
 	"Source", "%ns",
 	"ITR", "%Cus:ip.src:1:R",
 	"ETR", "%Cus:ip.dst:1:R",

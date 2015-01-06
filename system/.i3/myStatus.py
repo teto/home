@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import subprocess, logging
+import logging
 from i3pystatus.mail import notmuchmail
 
 from i3pystatus import Status
@@ -53,8 +53,8 @@ status.register("battery",
                 alert=True,
                 alert_percentage=5,
                 status={
-                    "DIS":  "Discharging",
-                    "CHR":  "Charging",
+                    "DIS": "Discharging",
+                    "CHR": "Charging",
                     "FULL": "Bat full",
                 },)
 # status.register("shell",
@@ -75,7 +75,7 @@ status.register("battery",
 #
 # Note: the network module requires PyPI package netifaces-py3
 status.register("network",
-                interface="eth0",
+
                 format_up="{v4cidr}",)
 
 # Has all the options of the normal network and adds some wireless specific things
@@ -91,10 +91,15 @@ status.register("network",
 # Note: requires libpulseaudio from PyPI
 #status.register("pulseaudio",   format="♪{volume}",)
 
+status.register("pomodoro"
+
+                )
 # Shows mpd status
 # Format:
 # Cloud connected▶Reroute to Remain
-mpd = status.register("mpd",
+
+status.register("mpd",
+
                       format="{status}{title}",
                       status={
                           "pause": "▷",
@@ -110,12 +115,13 @@ alsa = status.register("alsa",)
 
 # print("alsa")
 res = status.register("mail",
-                      backends=[notmuchmail.Notmuch()],
+  format="{current}{unread}",
+                      backends=[notmuchmail.Notmuch(account="gmail+lip6")],
                       # email_client="",
                       # TODO replace with mutt or alot or sup later
                       hide_if_null=False,
                       interval=1,
-                      on_leftclick="urxvtc -e mutt"
+                      on_leftclick=["urxvtc -e mutt", True],
                       log_level=logging.DEBUG
                       )
 #print("Result:", res)

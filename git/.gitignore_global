@@ -26,6 +26,7 @@
 *.swp
 *.layout
 *.bmarks
+*.~lock*
 
 # Packages #
 ############

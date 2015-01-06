@@ -1,0 +1,12 @@
+#
+# This is the notmuch specific configuration
+# it is in a specific file in case one wants to switch between mutt-kz (with notmuch support)
+# to mutt (legacy, that does not understand the following variables)
+
+# nm_default_uri=""
+set virtual_spoolfile
+# virtual folders
+virtual-mailboxes \
+"INBOX"                "notmuch://?query=tag:inbox and NOT tag:killed" \
+"lisp"	"notmuch://?query=tag:lisp"
+
