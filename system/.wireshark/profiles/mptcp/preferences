@@ -275,6 +275,12 @@ gui.filter_expressions.expr: tcp.options.mptcp.datafin.flag == 1
 gui.filter_expressions.label: tcp.options.mptcp.dataseqno
 gui.filter_expressions.enabled: TRUE
 gui.filter_expressions.expr: tcp.options.mptcp.dataseqno
+gui.filter_expressions.label: mptcp.analysis.unmapped
+gui.filter_expressions.enabled: TRUE
+gui.filter_expressions.expr: mptcp.analysis.unmapped
+gui.filter_expressions.label: mptcp.analysis.unmapped
+gui.filter_expressions.enabled: TRUE
+gui.filter_expressions.expr: mptcp.analysis.unmapped
 
 ####### Capture ########
 

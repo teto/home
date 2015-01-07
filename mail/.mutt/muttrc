@@ -72,6 +72,7 @@ source $MUTT/pager.mutt
 source $MUTT/bindings.mutt
 source $MUTT/sidebar.mutt
 source $MUTT/aliases.mutt
+source $MUTT/muttkzrc
 
 set spoolfile=$MAILDIR/gmail/INBOX
 

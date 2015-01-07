@@ -48,7 +48,7 @@ maxage=10
 status_backend = sqlite
 # presynchook=imapfilter
 # TODO notify user run a script that will launch tag
-postsynchook= postSyncHookMatt
+postsynchook= notmuch new
 
 [Repository lip6-local]
 type = Maildir

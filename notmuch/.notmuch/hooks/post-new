@@ -1,5 +1,6 @@
 #!/bin/bash
 
 # TODO run the filters
-notmuch tag --batch --input="$HOME/.notmuch/tag_ietf"
-notmuch tag --batch --input="$HOME/.notmuch/foss"
+notmuch tag --batch --input="$MAILDIR/.notmuch/ietf"
+notmuch tag --batch --input="$MAILDIR/.notmuch/foss"
+notmuch tag --batch --input="$MAILDIR/.notmuch/security"
