@@ -10,20 +10,23 @@ status = Status(standalone=True)
 # Displays clock like this:
 # Tue 30 Jul 11:59:46 PM KW31
 #                          ^-- calendar week
-status.register("clock",
+clock = status.register("clock",
                 format=[
-                    ("Format 0",'Europe/London'),
+                    
                     # ("%a %-d Format 1",'Europe/Dublin'),
                     # "%a %-d %b %X ",
                     ("%a %-d %b %X", 'Europe/Paris'),
+                    ("Format 0",'Europe/London'),
                 ],
-                on_leftclick= ["urxvtc"] ,
-                on_rightclick= ["next_format", 2] ,
+                on_clicks={'left': ["urxvtc"] ,
+                 'right':  ["next_format", 1]
+                 },
                 log_level=logging.DEBUG,
                 )
 
-
-status.register("pulseaudio")
+# clock.on_click(1)
+# print(clock.on_clicks)
+# status.register("pulseaudio")
 # Shows your CPU temperature, if you have a Intel CPU
 #status.register("temp",   format="{temp:.0f}°C",)
 
@@ -75,8 +78,8 @@ status.register("battery",
 #
 # Note: the network module requires PyPI package netifaces-py3
 status.register("network",
-
-                format_up="{v4cidr}",)
+                format_up="{v4cidr}",
+                )
 
 # Has all the options of the normal network and adds some wireless specific things
 # like quality and network names.
@@ -91,9 +94,7 @@ status.register("network",
 # Note: requires libpulseaudio from PyPI
 #status.register("pulseaudio",   format="♪{volume}",)
 
-status.register("pomodoro"
-
-                )
+status.register("pomodoro")
 # Shows mpd status
 # Format:
 # Cloud connected▶Reroute to Remain
@@ -114,18 +115,19 @@ status.register("mpd",
 alsa = status.register("alsa",)
 
 # print("alsa")
-res = status.register("mail",
-                      backends=[
-                        notmuchmail.Notmuch(account="lip6", query="tag:inbox and tag:unread"),
-                        notmuchmail.Notmuch(account="gmail", query="tag:inbox and tag:unread"),
-                      ],
-                      # email_client="",
-                      # TODO replace with mutt or alot or sup later
-                      hide_if_null=False,
-                      interval=1,
-                      on_leftclick="urxvtc -e mutt"
-                      log_level=logging.DEBUG
-                      )
+# res = status.register(
+#   "mail",
+#   backends=[
+#     notmuchmail.Notmuch(account="lip6", query="tag:inbox and tag:unread"),
+#     notmuchmail.Notmuch(account="gmail", query="tag:inbox and tag:unread"),
+#   ],
+#   # email_client="",
+#   # TODO replace with mutt or alot or sup later
+#   hide_if_null=False,
+#   interval=1,
+#   on_leftclick="urxvtc -e mutt",
+#   log_level=logging.DEBUG
+#   )
 #print("Result:", res)
 # res.on_leftclick()
 status.run()

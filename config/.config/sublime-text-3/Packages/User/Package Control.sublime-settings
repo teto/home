@@ -1,0 +1,34 @@
+{
+	"in_process_packages":
+	[
+	],
+	"installed_dependencies":
+	[
+		"0_package_control_loader",
+		"bz2",
+		"ssl-linux"
+	],
+	"installed_packages":
+	[
+		"Anaconda",
+		"AutoPEP8",
+		"BracketHighlighter",
+		"Gnuplot",
+		"INI",
+		"Jedi - Python autocompletion",
+		"Jinja2",
+		"JSONLint",
+		"Package Control",
+		"Pretty YAML",
+		"Python Flake8 Lint",
+		"Python Improved",
+		"Python PEP8 Autoformat",
+		"sublime-github",
+		"sublimelint",
+		"SublimeLinter-pep8",
+		"TOML",
+		"Vagrant",
+		"VimL",
+		"Zeal"
+	]
+}
