@@ -14,6 +14,9 @@ bind index $	    sync-mailbox
 bind index <  		collapse-thread
 bind index >  		collapse-all
 
+
+macro index s "<shell-escape>offlineimap <enter>" 
+
 #bind index \Cf		next-page
 #bind index \Cb		previous-page
 bind index \Cb		half-up

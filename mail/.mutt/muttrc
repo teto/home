@@ -33,8 +33,16 @@ set sendmail="/usr/bin/msmtp"
 #set use_envelope_from
 set wait_key=no  # when running external programs
 set quit # don't ask, just do !
+set delete # don't ask, just do !
 set beep_new             # bell on new mails
 
+
+set pipe_decode          # strip headers and eval mimes when piping
+set thorough_search      # strip headers and eval mimes before searching
+
+# Status Bar -----------------------------------------
+# set status_chars  = " *%A"
+# set status_format = "───[ Folder: %f ]───[%r%m messages%?n? (%n new)?%?d? (%d to delete)?%?t? (%t tagged)? ]───%>─%?p?( %p postponed )?───"
 #set mail_check = 120
 
 
@@ -55,6 +63,16 @@ set mbox_type=maildir
 set history=100
 set history_file= $MUTT/cache/history
 
+
+# set postponed +=
+
+# Header Options -------------------------------------
+ ignore *                                # ignore all headers
+ unignore from: to: cc: date: subject:   # show only these
+ unhdr_order *                           # some distros order things by default
+ hdr_order from: to: cc: date: subject:  # and in this order
+
+
 # TODO set file
 set signature="Matthieu Coudron"
 
@@ -73,6 +91,7 @@ source $MUTT/bindings.mutt
 source $MUTT/sidebar.mutt
 source $MUTT/aliases.mutt
 source $MUTT/muttkzrc
+source $MUTT/statusbar.mutt
 
 set spoolfile=$MAILDIR/gmail/INBOX
 
