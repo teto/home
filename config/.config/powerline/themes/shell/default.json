@@ -1,17 +1,18 @@
 {
 	"default_module": "powerline.segments.common",
 	"segments": {
+	"above": [
+		{
 		"left": [
 			{
-				"function": "powerline.segments.shell.mode"
-			},
-			{
 				"function": "hostname",
-				"priority": 10
+				"priority": 10,
+				"args": {
+					"only_if_ssh": true
+				}
 			},
 			{
-				"function": "user",
-				"priority": 30
+				"function": "powerline.segments.common.bat.battery"
 			},
 			{
 				"function": "virtualenv",
@@ -19,11 +20,22 @@
 			},
 			{
 				"function": "powerline.segments.shell.cwd",
-				"priority": 10
+				"priority": 10,
+				"args": {
+					"use_path_separator": "/"
+				}
 			},
 			{
 				"function": "powerline.segments.shell.jobnum",
 				"priority": 20
+			}
+		]
+		}
+		],
+		"left": [
+			{
+				"function": "powerline.segments.shell.mode",
+				"default": "viins"
 			}
 		],
 		"right": [
@@ -32,8 +44,19 @@
 				"priority": 10
 			},
 			{
+				"function": "powerline.segments.common.time.date",
+				"args" : {
+					"format": "%X"
+				}
+			},
+
+			{
 				"function": "branch",
-				"priority": 40
+				"priority": 40,
+				"args": {
+					"status_colors": true
+				}
+				
 			}
 		]
 	}
