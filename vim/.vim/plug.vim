@@ -25,5 +25,8 @@ Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'sickill/vim-monokai'
 Plug 'surround.vim'
 Plug 'elzr/vim-json', { 'for': 'json' }
+" Plug 'powerline/Powerline'
 
 call plug#end()
+
+set rtp+=/home/teto/powerline/powerline/bindings/vim/
