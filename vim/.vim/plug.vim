@@ -10,14 +10,23 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'Valloric/YouCompleteMe.git'
+Plug 'https://github.com/Valloric/YouCompleteMe' , { 'do': './install.sh --clang-interpreter' }
+" Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --clang-interpreter' }
 Plug 'vim-flake8'
 Plug 'mhinz/vim-startify'
 " Plug 'Lokaltog/powerline' , {'rtp': 'powerline/bindings/vim/'}
 Plug 'CCTree'
+Plug 'showmarks2'
 
+Plug 'kien/ctrlp.vim'
 Plug 'Solarized'
-
 Plug 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'sickill/vim-monokai'
+Plug 'surround.vim'
+Plug 'elzr/vim-json', { 'for': 'json' }
+" Plug 'powerline/Powerline'
 
 call plug#end()
+
+set rtp+=/home/teto/powerline/powerline/bindings/vim/

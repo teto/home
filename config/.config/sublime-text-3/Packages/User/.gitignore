@@ -7,4 +7,5 @@ Package Control.system-ca-bundle
 Package Control.cache/
 Package Control.ca-certs/
 linters/
-
+*.sublime-build
+*.cache

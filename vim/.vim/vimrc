@@ -1,13 +1,24 @@
 set nocompatible               " be iMproved
-
+set splitbelow	" on horizontal splits
+set splitright   " on vertical split
 set autoread " automatically reload file when it has been changed
-
+set linebreak " better display
 filetype on                   " required!
 set t_Co=256			" use 256 colors
+set backspace=indent,eol,start
+
+set smarttab "use shiftwidth
+set incsearch " start searching straightaway
+set showmode " Show the current mode
 
 let g:Powerline_symbols = "fancy" " to use unicode symbols
-let mapleader = ","
+" let mapleader = ","
+let mapleader = " "
+nnoremap <Leader>v :e $MYVIMRC<CR> " open vimrc
+nnoremap <Leader>R :source $MYVIMRC<CR> " open vimrc
 
+
+nnoremap <Leader>/ :set hlsearch! hls?<CR> " toggle search highlighting
 
 if has('nvim')
 	runtime! python_setup.vim
@@ -94,7 +105,35 @@ map <esc>[27;5;40~ <C-(>
 
 syntax on
 
+" set undodir=~/.vim/tmp/undo//     " undo files
+" set backupdir=~/.vim/tmp/backup// " backups
+" set directory=~/.vim/tmp/swap//   " swap files
 
+" Wildmenu completion {{{
+
+set wildmenu
+set wildmode=list:longest
+
+set wildignore+=.hg,.git,.svn                    " Version control
+set wildignore+=*.aux,*.out,*.toc                " LaTeX intermediate files
+set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg   " binary images
+set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest " compiled object files
+set wildignore+=*.spl                            " compiled spelling word lists
+set wildignore+=*.sw?                            " Vim swap files
+set wildignore+=*.DS_Store                       " OSX bullshit
+
+set wildignore+=*.luac                           " Lua byte code
+
+set wildignore+=migrations                       " Django migrations
+set wildignore+=*.pyc                            " Python byte code
+
+set wildignore+=*.orig                           " Merge resolution files
+
+" Clojure/Leiningen
+set wildignore+=classes
+set wildignore+=lib
+
+" }}}
 
 " to load plugins in ftplugin matching ftdetect
 filetype plugin on
@@ -159,13 +198,14 @@ noremap <F10> :set paste!<CR>
 source ~/.vim/display.vim
 " source ~/.vim/colors.vim
 source ~/.vim/search.vim
-source ~/.vim/vundle.vim
+" source ~/.vim/vundle.vim
 source ~/.vim/plug.vim
 source ~/.vim/compose.vim
 source ~/.vim/cscope.vim
 source ~/.vim/ycm.vim
 source ~/.vim/splits.vim
 source ~/.vim/vim_file_chooser.vim
+source ~/.vim/plug.vim
 cmap w!! w !sudo tee % >/dev/null
 
 
@@ -206,3 +246,6 @@ inoremap <f5> <esc>:call ToggleBackground()<cr>a
 vnoremap <f5> <esc>:call ToggleBackground()<cr>
 
 set shiftround    " round indent to multiple of 'shiftwidth'
+
+" auto reload vimrc on save
+au! BufWritePost .vimrc source %
