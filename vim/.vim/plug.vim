@@ -10,7 +10,7 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'https://github.com/Valloric/YouCompleteMe' , { 'do': './install.sh --clang-interpreter' }
+Plug 'https://github.com/Valloric/YouCompleteMe' , { 'do': './install.sh --system-libclang --clang-completer' }
 " Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --clang-interpreter' }
 Plug 'vim-flake8'
 Plug 'mhinz/vim-startify'
