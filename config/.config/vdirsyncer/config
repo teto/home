@@ -63,7 +63,6 @@ fileext = .ics
 [storage lip6_remote]
 auth=basic
 type = caldav
-url = https://mycaldavurl
+url = https://cloud.lip6.fr/remote.php/caldav/calendars/coudron/pro
 #url = https://owncloud.example.com/remote.php/caldav/
-username = username
-password = password
+username = coudron
