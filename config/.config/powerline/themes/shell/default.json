@@ -54,7 +54,7 @@
 				"function": "powerline.segments.common.vcs.branch",
 				"priority": 40,
 				"args": {
-					"status_colors": true
+					"status_colors": false
 				}
 				
 			}
