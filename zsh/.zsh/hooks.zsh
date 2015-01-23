@@ -46,9 +46,9 @@ function postexec {
   set_running_app
 }
 
-#function zle-keymap-select {
-  #zle reset-prompt
-#}
+function zle-keymap-select {
+  zle reset-prompt
+}
 
-#zle -N zle-keymap-select
+zle -N zle-keymap-select
 

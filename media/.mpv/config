@@ -1,3 +1,6 @@
 # Write your default config options here!
+vg=opengl
+status-msg="Time: ${time-pos}"
+
 
 

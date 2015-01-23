@@ -16,8 +16,8 @@ alias -s mp3=mocp
 ##############################
 ### Dictionary lookup
 ##############################
-alias dfren="dict -d fd-fra-eng"
-alias denfr="dict -d fd-eng-fra"
+alias fren="dict -d fd-fra-eng"
+alias enfr="dict -d fd-eng-fra"
 
 
 
@@ -69,6 +69,7 @@ alias llt="ls -lt"
 alias v="vim"
 alias nv="nvim"
 alias m="mutt"
+alias r="ranger"
 
 # Movement aliases
 alias ..="cd .."

@@ -7,6 +7,7 @@
 set virtual_spoolfile
 # virtual folders
 virtual-mailboxes \
+"unread"	"notmuch://?query=tag:inbox and tag:unread and NOT tag:killed" \
 "INBOX"	"notmuch://?query=tag:inbox and NOT tag:killed" \
 "lisp"	"notmuch://?query=tag:lisp" \
 "github"	"notmuch://?query=tag:github" \

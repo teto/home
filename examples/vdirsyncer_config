@@ -1,0 +1,69 @@
+# An example configuration for vdirsyncer.
+
+# Optional parameters are commented out.
+# This file doesn't document all available parameters, see
+# http://vdirsyncer.readthedocs.org/ for the rest of them.
+
+[general]
+# A folder where vdirsyncer can store some metadata about each pair.
+status_path = ~/.vdirsyncer/status/
+
+# CARDDAV
+#[pair bob_contacts]
+# A `[pair <name>]` block defines two storages `a` and `b` that should be
+# synchronized. The definition of these storages follows in `[storage <name>]`
+# blocks. This is similar to accounts in OfflineIMAP.
+#a = bob_contacts_local
+#b = bob_contacts_remote
+
+
+# Synchronize all collections available on "side B" (in this case the server).
+# You need to run `vdirsyncer discover` if new calendars/addressbooks are added
+# on the server.
+
+# Omitting this parameter implies that the given path and URL in the
+# corresponding `[storage <name>]` blocks are already directly pointing to a
+# collection each.
+
+#collections = ["from b"]
+
+# To resolve a conflict the following values are possible:
+#   `null` - abort when collisions occur (default)
+#   `"a wins"` - assume a's items to be more up-to-date
+#   `"b wins"` - assume b's items to be more up-to-date
+#conflict_resolution = null
+
+#[storage bob_contacts_local]
+## A storage references actual data on a remote server or on the local disk.
+## Similar to repositories in OfflineIMAP.
+#type = filesystem
+#path = ~/.contacts/
+#fileext = .vcf
+
+#[storage bob_contacts_remote]
+#type = carddav
+#url = https://owncloud.example.com/remote.php/carddav/
+#username =
+# The password can also be fetched from the system password storage, netrc or a
+# custom command. See http://vdirsyncer.readthedocs.org/en/stable/keyring.html
+#password =
+
+# CALDAV
+[pair lip6_calendar]
+a = lip6_local
+b = lip6_remote
+#collections = ["private", "work"]
+
+[storage lip6_local]
+type = filesystem
+path = ~/.calendars/lip6
+fileext = .ics
+
+
+[storage lip6_remote]
+auth=basic
+type = caldav
+url = https://mycaldavurl
+#url = https://owncloud.example.com/remote.php/caldav/
+username = username
+password = password
