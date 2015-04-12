@@ -11,3 +11,6 @@ export ZDOTDIR="$HOME/.zsh"
 
 
 export MUTT="$HOME/.mutt"
+
+export EDITOR="vim"
+export TERMINAL="urxvt"
