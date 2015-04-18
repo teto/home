@@ -2,7 +2,7 @@
 
 import logging
 from i3pystatus.mail import notmuchmail
-import keyring.backends.netrc as backend
+#import keyring.backends.netrc as backend
 from i3pystatus import Status
 # from i3pystatus.core.netrc_backend import NetrcBackend
 
