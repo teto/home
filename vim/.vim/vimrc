@@ -11,7 +11,6 @@ set smarttab "use shiftwidth
 set incsearch " start searching straightaway
 set showmode " Show the current mode
 
-let g:Powerline_symbols = "fancy" " to use unicode symbols
 " let mapleader = ","
 let mapleader = " "
 nnoremap <Leader>v :e $MYVIMRC<CR> " open vimrc
@@ -20,9 +19,6 @@ nnoremap <Leader>R :source $MYVIMRC<CR> " open vimrc
 
 nnoremap <Leader>/ :set hlsearch! hls?<CR> " toggle search highlighting
 
-if has('nvim')
-	runtime! python_setup.vim
-endif
 
 set showmatch
 
@@ -201,6 +197,7 @@ source ~/.vim/search.vim
 " source ~/.vim/vundle.vim
 source ~/.vim/plug.vim
 source ~/.vim/compose.vim
+source ~/.vim/powerline.vim
 source ~/.vim/cscope.vim
 source ~/.vim/ycm.vim
 source ~/.vim/splits.vim

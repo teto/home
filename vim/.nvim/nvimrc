@@ -1,8 +1,8 @@
 set nocompatible
 
-if has('nvim')
-	runtime! python_setup.vim
-endif
+"if has('nvim')
+	"runtime! python_setup.vim
+"endif
 
 
 source ~/.vim/vimrc

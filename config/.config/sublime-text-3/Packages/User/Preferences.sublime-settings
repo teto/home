@@ -1,21 +1,23 @@
 {
+	"always_prompt_for_file_reload": false,
 	"always_show_minimap_viewport": true,
 	"caret_extra_bottom": 0,
 	"caret_extra_top": 0,
 	"caret_extra_width": 0,
 	"caret_style": "smooth",
-	"color_scheme": "Packages/Color Scheme - Default/Monokai.tmTheme",
+	"color_scheme": "Packages/User/Monokai (SL) (Flake8Lint).tmTheme",
 	"enable_tab_scrolling": true,
 	"gutter": true,
 	"highlight_line": true,
 	"highlight_modified_tabs": true,
 	"ignored_packages":
 	[
-		"Makefile",
-		"Python PEP8 Autoformat",
-		"AutoPEP8",
 		"Vintage",
-		"Anaconda"
+		"AutoPEP8",
+		"GitGutter",
+		"Anaconda",
+		"Makefile",
+		"Python PEP8 Autoformat"
 	],
 	"line_numbers": true
 }

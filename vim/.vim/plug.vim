@@ -11,12 +11,17 @@ endif
 call plug#begin('~/.vim/plugged')
 
 Plug 'https://github.com/Valloric/YouCompleteMe' , { 'do': './install.sh --system-libclang --clang-completer' }
-" Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --clang-interpreter' }
 Plug 'vim-flake8'
-Plug 'mhinz/vim-startify'
-" Plug 'Lokaltog/powerline' , {'rtp': 'powerline/bindings/vim/'}
+if !has('nvim')
+	"Plug 'Lokaltog/powerline' , {'rtp': 'powerline/bindings/vim/'}
+	Plug 'mhinz/vim-startify'
+endif
+
 Plug 'CCTree'
 Plug 'showmarks2'
+
+
+Plug 'junegunn/vim-github-dashboard'
 
 Plug 'kien/ctrlp.vim'
 Plug 'Solarized'
@@ -25,8 +30,7 @@ Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'sickill/vim-monokai'
 Plug 'surround.vim'
 Plug 'elzr/vim-json', { 'for': 'json' }
-" Plug 'powerline/Powerline'
 
 call plug#end()
 
-set rtp+=/home/teto/powerline/powerline/bindings/vim/
+" set rtp+=/home/teto/powerline/powerline/bindings/vim/

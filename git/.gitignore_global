@@ -10,14 +10,13 @@
 *.symvers
 *.aux
 
-
 # Editor specific
 ######################
 
 # Binaries #
 ############
 *.pdf
-
+*.a
 
 # Backup files #
 ################
