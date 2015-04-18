@@ -1,2 +1,6 @@
 
-./configure --enable-dependency-tracking --enable-notmuch --enable-gpgme --enable-hcache --enable-imap --enable-smtp --with-ssl --with-gnutls --with-sasl --with-curses --with-regex --enable-debug
+./prepare --enable-dependency-tracking --enable-notmuch  --enable-hcache --enable-imap --enable-smtp --with-ssl --with-gnutls  --with-curses --with-regex --enable-debug
+
+Optional arguments:
+--enable-gpgme
+--with-sasl
