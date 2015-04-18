@@ -118,17 +118,17 @@ status.register(
 alsa = status.register("alsa",)
 
 # print("alsa")
-res = status.register(
-    "mail",
-    backends=[
-        notmuchmail.Notmuch(account="lip6", query="tag:inbox and tag:unread"),
-        notmuchmail.Notmuch(account="gmail", query="tag:inbox and tag:unread"),
-    ],
-    hide_if_null=False,
-    interval=1,
-    # on_clicks={'left', "urxvtc -e mutt"},
-    log_level=logging.DEBUG
-)
+#res = status.register(
+    #"mail",
+    #backends=[
+        #notmuchmail.Notmuch(account="lip6", query="tag:inbox and tag:unread"),
+        #notmuchmail.Notmuch(account="gmail", query="tag:inbox and tag:unread"),
+    #],
+    #hide_if_null=False,
+    #interval=1,
+    ## on_clicks={'left', "urxvtc -e mutt"},
+    #log_level=logging.DEBUG
+#)
 #print("Result:", res)
 # res.on_leftclick()
 status.run()
