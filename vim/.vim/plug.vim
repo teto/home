@@ -19,16 +19,13 @@ endif
 
 Plug 'CCTree'
 Plug 'showmarks2'
-
-
 Plug 'junegunn/vim-github-dashboard'
-
 Plug 'kien/ctrlp.vim'
 Plug 'Solarized'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'sickill/vim-monokai'
 Plug 'surround.vim'
-Plug 'elzr/vim-json', { 'for': 'json' }
+"Plug 'elzr/vim-json', { 'for': 'json' }
 
 call plug#end()
