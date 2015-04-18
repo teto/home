@@ -1,0 +1,43 @@
+{
+	"height": 24,
+	"position": "top",
+	"monitor": 0,
+	"theme": {
+		"uri": "file:////usr/local/share/candybar/theme-default/index.html",
+		"config": {}
+	},
+	"widgets": [
+		{
+			"module": "desktops_i3",
+			"config": {}
+		},
+		{
+			"module": "window_title",
+			"config": {}
+		},
+		{
+			"module": "now_playing_mpd",
+			"config": {}
+		},
+		{
+			"module": "volume",
+			"config": {}
+		},
+		{
+			"module": "weather",
+			"config": {}
+		},
+		{
+			"module": "external_ip",
+			"config": {}
+		},
+		{
+			"module": "battery",
+			"config": {}
+		},
+		{
+			"module": "datetime",
+			"config": {}
+		}
+	]
+}
