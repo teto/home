@@ -20,7 +20,7 @@ workspace "$w4" output $output2
 
 
 # default border size
-new_window 1pixel
+new_window  pixel 2
 new_float pixel 2
 
 #for_window [instance="audioplayer"] move to scratchpad
@@ -29,6 +29,10 @@ for_window [instance="pad_*"] move scratchpad
 #for_window [instance="pad_flyingterminal"] move scratchpad
 #for_window [instance="pad_ircclient"] move scratchpad
 for_window [class="Navigator"] floating enable,border 1 pixel;
+# this concerns too many boxes, thus creating bugs
+for_window [class="Codeblocks" title="Global Variable Editor"] resize grow right 500;
+for_window [class="Codeblocks" title="codeblocks"] resize grow left 300;
+for_window [class="Codeblocks" title="Multiple matches"] resize grow right 300;
 
 # vertical | horizontal | both
 hide_edge_borders both
