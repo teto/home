@@ -14,6 +14,9 @@ bindkey "^B"      backward-char                        # ctrl-b
 bindkey -v   # Default to standard vi bindings, regardless of editor string
 
 bindkey '^R' history-incremental-search-backward
-bindkey '\e[3~' delete-char
-# bindkey '\eq' push-line
-bindkey '\eq' push-line-or-edit
+#bindkey "q" push-line
+#bindkey 'q' push-line-or-edit
+bindkey '^A' push-line-or-edit
+
+bindkey '^P' up-history
+bindkey '^N' down-history

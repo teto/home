@@ -2,8 +2,9 @@
 
 import logging
 from i3pystatus.mail import notmuchmail
-
+import keyring.backends.netrc as backend
 from i3pystatus import Status
+# from i3pystatus.core.netrc_backend import NetrcBackend
 
 status = Status(standalone=True)
 
@@ -110,7 +111,7 @@ status.register(
         "play": "▶",
         "stop": "◾",
     },
-    #on_lclick="hello world"
+    on_leftclick="hello world"
 )
 
 #print("mdp on_lclick", mpd);
@@ -129,6 +130,17 @@ alsa = status.register("alsa",)
     ## on_clicks={'left', "urxvtc -e mutt"},
     #log_level=logging.DEBUG
 #)
+
+#res = status.register("github",
+        #username="teto",
+        #interval=5,
+        ##password="placeholder",
+        #format="hello world: {unread} {unread_count}",
+        ## keyring_backend="netrc",
+        ## keyring_backend=keyring.backend.netrc,
+        #keyring_backend=backend.NetrcBackend,
+        #log_level=logging.DEBUG,
+        #)
 #print("Result:", res)
 # res.on_leftclick()
 status.run()

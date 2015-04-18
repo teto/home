@@ -16,8 +16,12 @@ Plug 'mhinz/vim-startify'
 if !has('nvim')
 	Plug 'Lokaltog/powerline' , {'rtp': 'powerline/bindings/vim/'}
 endif
+
 Plug 'CCTree'
 Plug 'showmarks2'
+
+
+Plug 'junegunn/vim-github-dashboard'
 
 Plug 'kien/ctrlp.vim'
 Plug 'Solarized'
@@ -28,5 +32,3 @@ Plug 'surround.vim'
 Plug 'elzr/vim-json', { 'for': 'json' }
 
 call plug#end()
-
-"set rtp+=/home/teto/powerline/powerline/bindings/vim/

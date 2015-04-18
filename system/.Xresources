@@ -1,6 +1,6 @@
 URxvt.clipboard.autocopy:   true
 URxvt*saveLines:        10000
-URxvt.depth: 32
+!URxvt.depth: 32
 URxvt.urgentOnBell: true
 !URxvt.background: [95]#0000ff
 URxvt*perl-lib : /home/teto/.urxvt/perl

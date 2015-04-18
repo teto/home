@@ -1,22 +1,22 @@
 
-zle-keymap-select () {
-#	echo $TERM
+#zle-keymap-select () {
+##	echo $TERM
 
-    if [ "$TERM" = "rxvt-unicode" ]; then
-        if [ $KEYMAP = vicmd ]; then
-            echo -ne "\033]12;Red\007"
-        else
-            echo -ne "\033]12;Grey\007"
-        fi
-    fi
-}
-zle -N zle-keymap-select
+    #if [ "$TERM" = "rxvt-unicode" ]; then
+        #if [ $KEYMAP = vicmd ]; then
+            #echo -ne "\033]12;Red\007"
+        #else
+            #echo -ne "\033]12;Grey\007"
+        #fi
+    #fi
+#}
+#zle -N zle-keymap-select
 
-# set prompt to insertion mode
-zle-line-init () {
-	zle -K viins
-}
-zle -N zle-line-init
+## set prompt to insertion mode
+#zle-line-init () {
+	#zle -K viins
+#}
+#zle -N zle-line-init
 
 # Put the string "hostname::/full/directory/path" in the title bar:
 function set_term_title {
@@ -46,9 +46,9 @@ function postexec {
   set_running_app
 }
 
-function zle-keymap-select {
-  zle reset-prompt
-}
+#function zle-keymap-select {
+  #zle reset-prompt
+#}
 
-zle -N zle-keymap-select
+#zle -N zle-keymap-select
 
