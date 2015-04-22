@@ -61,5 +61,5 @@ To install .desktop entries
 Powerline & Fonts
 ====
 
-* list fonts with fc*list
-* regenerate cache with fc*cache *vf  (append ~/.fonts for local fonts only)
+* list fonts with fc-list
+* regenerate cache with fc-cache -vf  (append ~/.fonts for local fonts only)
