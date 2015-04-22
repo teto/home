@@ -26,6 +26,10 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'sickill/vim-monokai'
 Plug 'surround.vim'
+Plug 'tpope/vim-markdown'
 "Plug 'elzr/vim-json', { 'for': 'json' }
+Plug 'numkil/ag.vim'
+Plug 'gundo'
+Plug 'dhruvasagar/vim-table-mode/'
 
 call plug#end()

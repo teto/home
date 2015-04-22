@@ -22,7 +22,7 @@ nnoremap <Leader>/ :set hlsearch! hls?<CR> " toggle search highlighting
 
 set showmatch
 
-set autochdir
+" set autochdir
 " 
 " " When on, Vim will change the current working directory
 " " whenever you open a file, switch buffers, delete a buffer
