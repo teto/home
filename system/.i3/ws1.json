@@ -29,12 +29,12 @@
                                "x": 0,
                                "y": 0
                             },
-                            "name": "/home/teto/dce",
+                            "name": "DCE",
                             "percent": 0.333333333333333,
                             "swallows": [
                                {
                                 "class": "^URxvt$",
-                                "title": "^\\/home\\/teto\\/dce$"
+                                "title": "^/home/teto/dce$"
                                }
                             ],
                             "type": "con"
@@ -54,7 +54,7 @@
                             "swallows": [
                                {
                                 "class": "^URxvt$",
-                                "title": "^\\/home\\/teto\\/ns3off$"
+                                "title": "^/home/teto/ns3off$"
                                }
                             ],
                             "type": "con"
@@ -74,7 +74,7 @@
                             "swallows": [
                                {
                                 "class": "^URxvt$",
-                                "title": "^\\/home\\/teto\\/ntp$"
+                                "title": "^/home/teto/ntp$"
                                }
                             ],
                             "type": "con"
@@ -105,8 +105,8 @@
                     "swallows": [
                        {
                         "class": "^URxvt$",
-                        "instance": "^rxvt\\-unicode$",
-                        "title": "^\\/home\\/teto\\/neovim$"
+						//"instance": "^rxvt-unicode$",
+                        "title": "^/home/teto/neovim$"
                        }
                     ],
                     "type": "con"
@@ -126,8 +126,8 @@
                     "swallows": [
                        {
                         "class": "^URxvt$",
-                        "instance": "^rxvt\\-unicode$",
-                        "title": "^\\/home\\/teto$"
+                        "instance": "^rxvt-unicode$",
+                        "title": "^/home/teto$"
                        }
                     ],
                     "type": "con"
