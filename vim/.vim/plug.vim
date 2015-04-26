@@ -31,5 +31,10 @@ Plug 'tpope/vim-markdown'
 Plug 'numkil/ag.vim'
 Plug 'gundo'
 Plug 'dhruvasagar/vim-table-mode/'
+" Had to disable this one, needs a vim with lua compiled
+" and it's not possible in neovim yet
+"Plug 'jeaye/color_coded'
+"
+Plug 'rdnetto/YCM-Generator'
 
 call plug#end()

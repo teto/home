@@ -1,3 +1,64 @@
+URxvt.intensityStyles: true
+
+URxvt*font: xft:Inconsolata For Powerline:size=11
+
+
+
+! test to see if that changes font
+
+! should stant for ampersand
+! URxvt.keysym.Control-Tab: \033[27;5;38~
+!URxvt*inputMethod: ibus
+! RGBA with A=0 => transparent
+XTerm*bellIsUrgent: true
+URxvt*scrollTtyKeypress: true
+! normal settings
+URxvt*cursorColor:      white
+
+URxvt*scrollBar_floating:       true
+URxvt*scrollBar_right:  true
+URxvt*scrollTtyOutput:  false
+URxvt*scrollWithBuffer: true
+!URxvt*termName: xterm
+URxvt.keysym.Mod4-j:\033j
+URxvt.keysym.Mod4-k:\033k
+URxvt.keysym.Mod4-h:\033h
+URxvt.keysym.Mod4-l:\033l
+
+
+!URxvt.keysym.S-Page_Up       : captured by terminal for scrolling
+!URxvt.keysym.S-Page_Down     : captured by terminal for scrolling
+!URxvt.keysym.C-S-Page_Up     : seen as Rxvt.keysym.S-Page_Up
+!URxvt.keysym.C-S-Page_Down   : seen as Rxvt.keysym.S-Page_Down
+!!URxvt.keysym.M-C-S-Page_Up   : seen as Rxvt.keysym.S-Page_Up
+!URxvt.keysym.M-C-S-Page_Down : seen as Rxvt.keysym.S-Page_Down
+
+URxvt.keysym.C-Up             : \033[1;5A
+URxvt.keysym.C-S-Up             : \033[1;5A
+URxvt.keysym.C-Down           : \033[1;5B
+URxvt.keysym.C-Right          : \033[1;5C
+URxvt.keysym.C-Left           : \033[1;5D
+
+
+
+!URxvt.keysym.M-C-1: command:\033]50;suxuseuro\007*/
+!worked !!!!
+URxvt.keysym.M-C-2: command:\033]50;9x15bold\007*/
+URxvt.keysym.Control-Tab: \033[27;5;9~
+! le 27 fait penser a la touche ESC en decimal et \033 = <ESC> en octal
+! &
+URXvt.keysym.Control-0x26: \033[27;5;38~
+! é
+URxvt.keysym.Control-0xe9: \033[27;5;130~
+! guillemets
+URxvt.keysym.Control-0x22: \033[27;5;34~
+! 
+URxvt.keysym.Control-0x27: \033[27;5;39~
+! (
+URxvt.keysym.Control-0x28: \033[27;5;40~
+! -
+URxvt.keysym.Control-0x2d: \033[K 
+
 ! Compile xft: Attempt to find a visual with the given bit depth; option -depth.
 ! URxvt*depth: bitdepth
 
