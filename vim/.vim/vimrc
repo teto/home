@@ -238,9 +238,7 @@ if ! has('gui_running')
 endif
 
 command! Togbg call ToggleBackground()
-nnoremap <f5> :call ToggleBackground()<cr>
-inoremap <f5> <esc>:call ToggleBackground()<cr>a
-vnoremap <f5> <esc>:call ToggleBackground()<cr>
+nnoremap <f4> :call ToggleBackground()<cr>
 
 set shiftround    " round indent to multiple of 'shiftwidth'
 

@@ -1,7 +1,0 @@
-! This file is the oldest version
-! It should be best to use ~/.Xresources instead
-!http://superuser.com/questions/243914/xresources-or-xdefaults
-!
-#include "Xresources#include "Xresources/solarized.dark"
-#include "Xresources.d/solarized.dark"
-#include "Xresources.d/urxvt"

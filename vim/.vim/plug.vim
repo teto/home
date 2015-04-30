@@ -31,10 +31,14 @@ Plug 'tpope/vim-markdown'
 Plug 'numkil/ag.vim'
 Plug 'gundo'
 Plug 'dhruvasagar/vim-table-mode/'
+Plug 'airblade/vim-gutter'
 " Had to disable this one, needs a vim with lua compiled
 " and it's not possible in neovim yet
+" color_coded requires vim to be compiled with -lua
 "Plug 'jeaye/color_coded'
 "
-Plug 'rdnetto/YCM-Generator'
+Plug 'bbchung/clighter'
+" YCM generator is not really a plugin is it ?
+" Plug 'rdnetto/YCM-Generator'
 
 call plug#end()

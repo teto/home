@@ -1,7 +1,7 @@
 [rc]
 use_copy=true
-use_primary=false
-synchronize=false
+use_primary=true
+synchronize=true
 save_history=true
 history_pos=false
 history_x=1
@@ -14,7 +14,7 @@ auto_mouse=true
 key_input=false
 restore_empty=true
 rc_edit=false
-type_search=false
+type_search=true
 case_search=false
 ignore_whiteonly=false
 trim_wspace_begend=false
@@ -22,7 +22,7 @@ trim_newline=false
 hyperlinks_only=false
 confirm_clear=true
 current_on_top=true
-single_line=true
+single_line=false
 reverse_history=false
 item_length=50
 persistent_history=false

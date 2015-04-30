@@ -19,8 +19,10 @@ workspace "$w3" output $output2
 workspace "$w4" output $output2
 
 
+show_marks yes
+
 # default border size
-new_window  pixel 2
+#new_window  pixel 2
 new_float pixel 2
 
 #for_window [instance="audioplayer"] move to scratchpad
@@ -35,7 +37,7 @@ for_window [class="Codeblocks" title="codeblocks"] resize grow left 300;
 for_window [class="Codeblocks" title="Multiple matches"] resize grow right 300;
 
 # vertical | horizontal | both
-hide_edge_borders both
+#hide_edge_borders both
 
 
 #workspace 1 "main"
