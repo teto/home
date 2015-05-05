@@ -2,6 +2,7 @@
 
 # TODO replace with compton
 #xcompmgr&
+xrdb -override $HOME/.Xdefaults
 
 . "$HOME/.zshenv"
 # echo $PYTHONPATH
