@@ -140,10 +140,10 @@ set modelines=4
 nmap <leader>ml :Modeliner<Enter>
 
 " Tab shortcuts
-let tableader = "t" 
-execute "nmap <unique> ". g:tableader.g:tableader." :tabnew<Enter>"
-nmap <leader>t :tabnew<Enter>
-nmap <leader><S-t> :tabclose<Enter>
+"let tableader = "t" 
+"execute "nmap <unique> ". g:tableader.g:tableader." :tabnew<Enter>"
+"nmap <leader>t :tabnew<Enter>
+"nmap <leader><S-t> :tabclose<Enter>
 
 " nmap <C-Left> <C-&>
 
@@ -237,10 +237,11 @@ if ! has('gui_running')
     augroup END
 endif
 
+
+nnoremap <leader>r :!%:p<return>
+
 command! Togbg call ToggleBackground()
-nnoremap <f5> :call ToggleBackground()<cr>
-inoremap <f5> <esc>:call ToggleBackground()<cr>a
-vnoremap <f5> <esc>:call ToggleBackground()<cr>
+nnoremap <f4> :call ToggleBackground()<cr>
 
 set shiftround    " round indent to multiple of 'shiftwidth'
 

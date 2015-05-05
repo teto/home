@@ -31,6 +31,6 @@ ulimit -c unlimited
 # exec /usr/bin/i3 -V -d all >> ~/.i3/logfile
 
 
-
+parcellite&
 
 # Please see http://i3wm.org/docs/userguide.html for a complete reference! 
