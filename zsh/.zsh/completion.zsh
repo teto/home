@@ -1,3 +1,8 @@
+# what does it do ?
+# this is a bit violent. Look if zsh autosuggestions improve things
+#autoload predict-on
+#predict-on
+
 autoload -U compinit && compinit                                                                                       
 zmodload -i zsh/complist
 
