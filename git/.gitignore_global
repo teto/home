@@ -20,6 +20,7 @@
 
 # Backup files #
 ################
+.waf*
 *.bak
 *.odp#
 *.swp
