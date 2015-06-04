@@ -47,7 +47,7 @@ set visualbell
 
 " enable mouse to click on tabs etc... 
 " set mouse=a
-set ttymouse=urxvt
+"set ttymouse=urxvt
 " Display line numbers on the left
 " set number
 
