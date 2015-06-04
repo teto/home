@@ -31,9 +31,9 @@ alias gl='git log'
 alias gst="git status"
 alias gs='git status'
 alias gd='git diff'
-alias gm='git commit'
+alias gc='git commit'
 alias gcm='git commit -m'
-alias gca='git commit -am'
+alias gcam='git commit -am'
 alias gb='git branch'
 alias gbl="git branch --list" # todo add all ?
 alias gch='git checkout'
@@ -59,7 +59,6 @@ alias pypath='python -c "import sys; print sys.path" | tr "," "\n" | grep -v "eg
 ### ls related updates
 ##############################
 alias ls="ls --color=auto"
-alias l="ls -l" 
 alias ll="ls -l" 
 alias la="ls -a"
 alias lla="ls -la"
@@ -70,6 +69,7 @@ alias v="vim"
 alias nv="nvim"
 alias m="mutt"
 alias r="ranger"
+alias l="less -R" 
 
 # Movement aliases
 alias ..="cd .."
