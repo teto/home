@@ -7,35 +7,6 @@
 # font for window titles
 font xft:Liberation Sans Mono 8
 
-# experimental part about 
-# Mod4 => window key
-set $mad Mod4
-
-# https://faq.i3wm.org/question/5429/stay-in-mode-only-while-key-is-pressed/
-#bindsym Mod4+f exec notify-send "hello world"; mode "xp"; exec /home/teto/i3ipc-python/set_marks.py
-#bindcode 133 exec notify-send "hello world"; mode "xp"; exec /home/teto/i3ipc-python/set_marks.py
-bindsym $mad+f exec notify-send "XP mode"; mode "xp"; exec /home/teto/i3ipc-python/set_marks.py
-
-
-
-#bindsym Mod4 mode xp; exec /home/teto/i3ipc-python/set_marks.py
-mode xp {
-	bindsym tyotzetmod2+a [con_mark="a"] focus; 
-	bindsym $mad+b [con_mark="b"] focus; 
-	bindsym $mad+c [con_mark="c"] focus; 
-	bindsym $mad+d [con_mark="d"] focus; 
-	bindsym $mad+e [con_mark="e"] focus; 
-	bindsym $mad+f [con_mark="f"] focus; 
-	bindsym $mad+g [con_mark="g"] focus; 
-
-	# bindcode --release 133 mode default; exec /home/teto/i3ipc-python/set_marks.py  --unmark
-	bindsym --release $mad+f mode default; exec notify-send "Removing marks, exiting mode"; exec /home/teto/i3ipc-python/set_marks.py  --unmark
-
-	bindsym Return mode "default"
-	bindsym Escape mode "default"
-}
-
-show_marks yes
 
 set $mod Mod1
 

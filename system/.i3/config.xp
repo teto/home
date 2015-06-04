@@ -1,0 +1,28 @@
+# experimental part about 
+# Mod4 => window key
+set $mad Super_L 
+# Mod4
+
+# https://faq.i3wm.org/question/5942/using-modifer-key-as-a-binding/
+# https://faq.i3wm.org/question/5429/stay-in-mode-only-while-key-is-pressed/
+set $set_mark  /home/teto/.i3/set_marks.py
+bindsym $mad exec notify-send "XP mode"; mode "xp"; exec $set_mark
+
+
+mode xp {
+	bindsym Mod4+a [con_mark="a"] focus; mode "default";exec notify-send "a focused"; exec $set_mark --unmark
+	bindsym Mod4+b [con_mark="b"] focus; mode "default";exec notify-send "b focused"; exec $set_mark  --unmark
+	bindsym Mod4+c [con_mark="c"] focus; mode "default";exec notify-send "c focused"; exec $set_mark  --unmark
+	bindsym Mod4+d [con_mark="d"] focus; mode "default";exec notify-send "d focused"; exec $set_mark  --unmark
+	bindsym Mod4+e [con_mark="e"] focus; mode "default";exec notify-send "e focused"; exec $set_mark  --unmark
+	
+	# for some unknown reason, releasing $mad does not always work, especially the first time. 
+	bindsym --release $mad  exec notify-send "removing mode"; mode "default"; exec $set_mark --unmark
+
+	# keep as backup when 
+	bindsym Escape mode "default"; exec $set_mark --unmark
+}
+
+# only available on i3-next
+show_marks yes
+

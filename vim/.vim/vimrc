@@ -247,3 +247,5 @@ set shiftround    " round indent to multiple of 'shiftwidth'
 
 " auto reload vimrc on save
 au! BufWritePost .vimrc source %
+
+let g:netrw_home=$XDG_CACHE_HOME.'/vim'
