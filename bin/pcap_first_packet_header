@@ -1,0 +1,13 @@
+#!/bin/bash
+
+if [ $# -lt 1 ] ; then
+	echo "Use: $0 <pcapfile>"
+	exit 1
+fi
+
+#hexdump -n 24 -C "$1" | cut -c 11-59
+
+# http://www.kroosec.com/2012/10/a-look-at-pcap-file-format.html
+echo "First 4 bytes are timestamp in second since epoch"
+echo "Seconds (4bytes) - microseconds (4) - packet size (4) - packet size as captured on wire (4)"
+hexdump -C "$1" -s 24 -n 16 | cut -c 11-59
