@@ -26,3 +26,8 @@ mode xp {
 # only available on i3-next
 show_marks yes
 
+# Tests for title_format
+# give the focused window a prefix
+bindsym $mod+Shift+g title_format "[test] %title"
+
+for_window [class="(?i)firefox"] title_format "<span foreground='red'>%title</span>"

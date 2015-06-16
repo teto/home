@@ -12,6 +12,8 @@
 
 # Editor specific
 ######################
+*.cbp
+
 
 # Binaries #
 ############
@@ -48,6 +50,7 @@
 *.sqlite
 *.db
 *.out
+*.drift
 
 
 # OS generated files #
