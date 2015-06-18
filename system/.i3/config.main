@@ -147,7 +147,8 @@ bindsym $mod+Shift+Return exec --no-startup-id ~/.i3/fork_term.sh
 bindsym $mod+Shift+A kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec j4-dmenu-desktop
+#bindsym $mod+d exec j4-dmenu-desktop
+bindsym $mod+d exec j4-dmenu-desktop --dmenu='rofi -dmenu'
 #dmenu_run -
 
 #for_window [title="MOC"] move scratchpad

@@ -5,6 +5,7 @@
 #define PREFIX URxvt
 #include "Xresources.d/solarized.dark"
 #include "Xresources.d/urxvt"
+#include "Xresources.d/rofi/turquoise"
 
 
 

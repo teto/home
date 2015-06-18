@@ -13,7 +13,7 @@ URxvt*font: xft:Inconsolata For Powerline:size=11
 XTerm*bellIsUrgent: true
 URxvt*scrollTtyKeypress: true
 ! normal settings
-URxvt*cursorColor:      white
+! URxvt*cursorColor:      white
 
 URxvt*scrollBar_floating:       true
 URxvt*scrollBar_right:  true
@@ -39,11 +39,9 @@ URxvt.keysym.C-Down           : \033[1;5B
 URxvt.keysym.C-Right          : \033[1;5C
 URxvt.keysym.C-Left           : \033[1;5D
 
-
-
 !URxvt.keysym.M-C-1: command:\033]50;suxuseuro\007*/
 !worked !!!!
-URxvt.keysym.M-C-2: command:\033]50;9x15bold\007*/
+! URxvt.keysym.M-C-2: command:\033]50;9x15bold\007*/
 URxvt.keysym.Control-Tab: \033[27;5;9~
 ! le 27 fait penser a la touche ESC en decimal et \033 = <ESC> en octal
 ! &

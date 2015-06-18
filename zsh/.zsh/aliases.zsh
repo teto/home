@@ -31,7 +31,7 @@ alias gl='git log'
 alias gst="git status"
 alias gs='git status'
 alias gd='git diff'
-alias gm='git commit'
+alias gc='git commit'
 alias gcm='git commit -m'
 alias gca='git commit -am'
 alias gb='git branch'
@@ -47,11 +47,9 @@ alias gf='git reflog'
 
 
 
-
 # not always needed ?
 # alias rake="rake1.9.1"
 ##############################
-# 
 alias servethis="python -c 'import SimpleHTTPServer; SimpleHTTPServer.test()'"
 alias pypath='python -c "import sys; print sys.path" | tr "," "\n" | grep -v "egg"'
 
@@ -59,7 +57,6 @@ alias pypath='python -c "import sys; print sys.path" | tr "," "\n" | grep -v "eg
 ### ls related updates
 ##############################
 alias ls="ls --color=auto"
-alias l="ls -l" 
 alias ll="ls -l" 
 alias la="ls -a"
 alias lla="ls -la"
@@ -70,6 +67,7 @@ alias v="vim"
 alias nv="nvim"
 alias m="mutt"
 alias r="ranger"
+alias l="less" 
 
 # Movement aliases
 alias ..="cd .."
