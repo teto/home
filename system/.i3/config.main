@@ -111,6 +111,7 @@ mode "focused" {
 # TODO remove since it is used by Dunst ?
 bindsym $mod+n mode "focused"
 bindsym $mod+c exec "~/.i3/misc_commands.py"
+bindsym $mod+t exec floating toggle
 #bindsym XF86AudioRaiseVolume exec "amixer -q set Master 2dB+ unmute; notify-send Audio Raised volume"
 #bindsym XF86AudioLowerVolume exec "amixer -q set Master 2dB- unmute; notify-send Audio lowered"
 #bindsym XF86AudioMute exec "amixer -q set Master toggle"
@@ -159,6 +160,9 @@ bindsym $mod+F1 [instance="pad_(?!flyingterminal)"] move scratchpad; [instance="
 bindsym $mod+F3 [instance="pad_(?!ncmpcpp)"] move scratchpad; [instance="pad_ncmpcpp"] scratchpad show
 #bindsym $mod+F3 scratchpad show
 
+#pad_audioplayer
+# class followed by command
+bindsym $mod+w exec python ~/.i3/runorfocus.py "Firefox" firefox
 
 
 

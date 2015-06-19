@@ -44,6 +44,7 @@ alias gpu='git pull'
 alias gcl='git clone'
 alias gta='git tag -a -m'
 alias gf='git reflog'
+alias gbr='git branch'
 
 
 
