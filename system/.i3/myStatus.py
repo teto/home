@@ -4,6 +4,8 @@ import logging
 from i3pystatus.mail import notmuchmail
 #import keyring.backends.netrc as backend
 from i3pystatus import Status
+from i3pystatus.updates import aptget
+
 # from i3pystatus.core.netrc_backend import NetrcBackend
 
 status = Status(standalone=True)
@@ -117,6 +119,12 @@ status.register(
 #print("mdp on_lclick", mpd);
 
 alsa = status.register("alsa",)
+alsa = status.register("dpms",)
+
+status.register("updates",
+                format = "Updates: {count}",
+                format_no_updates = "No updates",
+                backends = [aptget.AptGet() ])
 
 # print("alsa")
 #res = status.register(
