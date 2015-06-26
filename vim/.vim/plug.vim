@@ -33,6 +33,9 @@ Plug 'gundo'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'dhruvasagar/vim-table-mode/'
 Plug 'airblade/vim-gitgutter'
+Plug 'mhinz/vim-rfc'
+Plug 'chrisbra/unicode.vim'
+Plug 'vim-scripts/rfc-syntax', { 'for': 'rfc' } " optional syntax highlighting for 
 " Had to disable this one, needs a vim with lua compiled
 " and it's not possible in neovim yet
 " color_coded requires vim to be compiled with -lua

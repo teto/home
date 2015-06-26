@@ -22,6 +22,7 @@ clock = status.register(
         ("Format 0", 'Europe/London'),
     ],
     on_leftclick=["urxvtc"],
+    interval=10,
     # on_clicks={
     #     'left': ["urxvtc"],
     #     'upscroll': ["next_format", 1],

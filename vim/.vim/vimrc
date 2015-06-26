@@ -20,6 +20,13 @@ nnoremap <Leader>R :source $MYVIMRC<CR> " open vimrc
 nnoremap <Leader>/ :set hlsearch! hls?<CR> " toggle search highlighting
 
 
+
+" transforms some characters into their digraphs equivalent 
+" if your font supports it 
+" concealcursor
+let g:tex_conceal="agdms"
+set conceallevel=2
+
 set showmatch
 
 " set autochdir
@@ -33,7 +40,11 @@ set showmatch
 
 scriptencoding utf-8
 " allow to use fancy caracters
+if &termencoding == ""
+	let &termencoding = &encoding
+endif
 set encoding=utf-8
+setglobal fileencoding=utf-8
 
 " display a menu when need t ocomplete a command 
 set wildmenu
