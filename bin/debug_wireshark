@@ -1,0 +1,11 @@
+#!/bin/bash
+#https://www.wireshark.org/docs/wsdg_html_chunked/ChSrcDebug.html
+WIRESHARK_ABORT_ON_DISSECTOR_BUG=1
+G_DEBUG=fatal_criticals 
+
+# or break on proto_report_dissector_bug
+libtool --mode=execute gdb wireshark
+
+
+#libtool --mode=execute ddd wireshark
+#libtool
