@@ -1,4 +1,5 @@
-if has('cscope')
+if has('cscope') 
+	"&& !exists('Cscope')
   set cscopetag cscopeverbose
 
   if has('quickfix')
@@ -12,5 +13,5 @@ if has('cscope')
   cnoreabbrev css cs show
   cnoreabbrev csh cs help
 
-  command -nargs=0 Cscope cs add $VIMSRC/src/cscope.out $VIMSRC/src
+  command! -nargs=0 Cscope cs add $VIMSRC/src/cscope.out $VIMSRC/src
 endif

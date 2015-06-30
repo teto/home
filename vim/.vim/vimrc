@@ -1,3 +1,8 @@
+" To debug mappings, type :verbose map <mapping>
+
+" marker starts with " <section name> {{{ and finishes with  }}}
+set foldmethod=marker
+
 set nocompatible               " be iMproved
 set splitbelow	" on horizontal splits
 set splitright   " on vertical split
@@ -18,8 +23,10 @@ set title " vim will change terminal title
 
 " let mapleader = ","
 let mapleader = " "
-nnoremap <Leader>v :e $MYVIMRC<CR> " open vimrc
-nnoremap <Leader>R :source $MYVIMRC<CR> " open vimrc
+
+" Quickly edit/reload the vimrc file
+"nmap <silent> <leader>ev :e $MYVIMRC<CR>
+"nmap <silent> <leader>sv :so! $MYVIMRC<CR>
 
 
 nnoremap <Leader>/ :set hlsearch! hls?<CR> " toggle search highlighting
@@ -61,10 +68,6 @@ set wildignore=.svn,CVS,.git,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg,*.
 " Use visual bell instead of beeping when doing something wrong
 set visualbell
 
-" enable mouse to click on tabs etc... 
-" set mouse=a
-" neovim doesn't like the next line
-" set ttymouse=urxvt
 " Display line numbers on the left
 " set number
 
@@ -87,9 +90,6 @@ set timeoutlen=400
 
 " Hide the default mode text (e.g. -- INSERT -- below the statusline)
 " set noshowmode
-
-
-
 
 " TODO 
 "augroup Python
@@ -166,9 +166,9 @@ nmap <leader>ml :Modeliner<Enter>
 
 " nmap <C-Enter> :vs<Enter>
 " map <C-Left> gT
-nmap <tab> :tabn<Enter>
-nmap <C-Right> :tabn<Enter>
-nmap <C-Left> :tabN<Enter>
+"nmap <tab> :tabn<Enter>
+"nmap <C-Right> :tabn<Enter>
+"nmap <C-Left> :tabN<Enter>
 
 nmap <C-Tab> :tabN<Enter>
 nmap <C-&> :tabn1<Enter>
@@ -177,9 +177,6 @@ nmap <C-"> :tabn3<Enter>
 nmap <C-'> :tabn4<Enter>
 
 
-" Quickly edit/reload the vimrc file
-nmap <silent> <leader>ev :e $MYVIMRC<CR>
-nmap <silent> <leader>sv :so! $MYVIMRC<CR>
 "
 "
 " Easy window navigation
@@ -206,6 +203,8 @@ noremap <F10> :set paste!<CR>
 " map <F2> :echo 'Current time is ' . strftime('%c')<CR>
 " map! <F3> a<C-R>=strftime('%c')<CR><Esc>
 
+" Plug section {{{
+
 " let use sudo once the file is loaded
 " source ~/.vim/insert_mode
 source ~/.vim/display.vim
@@ -220,7 +219,9 @@ source ~/.vim/ycm.vim
 source ~/.vim/splits.vim
 source ~/.vim/vim_file_chooser.vim
 source ~/.vim/jedi.vim
+source ~/.vim/ctrlp.vim 
 source ~/.vim/plug.vim
+" }}}
 cmap w!! w !sudo tee % >/dev/null
 
 
@@ -233,17 +234,20 @@ let g:solarized_termtrans = 0
 
 " to alternate between dark and light bg
 " to alternate between dark and light bg
-function! ToggleBackground()
- if (w:solarized_style=="dark")
- let w:solarized_style="light"
- colorscheme solarized
-else
- let w:solarized_style="dark"
- colorscheme solarized
-endif
-endfunction
+"function! ToggleBackground()
+ "if (w:solarized_style=="dark")
+ "let w:solarized_style="light"
+ "colorscheme solarized
+"else
+ "let w:solarized_style="dark"
+ "colorscheme solarized
+"endif
+"endfunction
+"command! Togbg call ToggleBackground()
+"nnoremap <f4> :call ToggleBackground()<cr>
 
-colorscheme solarized
+" colorscheme solarized
+colorscheme monokai
 
 " to remove timeout when changing modes
 if ! has('gui_running')
@@ -258,12 +262,14 @@ endif
 
 nnoremap <leader>r :!%:p<return>
 
-command! Togbg call ToggleBackground()
-nnoremap <f4> :call ToggleBackground()<cr>
 
 set shiftround    " round indent to multiple of 'shiftwidth'
 
 " auto reload vimrc on save
 au! BufWritePost .vimrc source %
 
+nnoremap <Leader>ev :e $MYVIMRC<CR> " open vimrc
+nnoremap <Leader>sv :source $MYVIMRC<CR> " reload vimrc
 let g:netrw_home=$XDG_CACHE_HOME.'/vim'
+
+" vim:foldmethod=marker:foldlevel=0

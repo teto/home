@@ -5,3 +5,6 @@ if has('nvim')
 endif
 
 source ~/.vim/vimrc
+
+
+let g:netrw_home=$XDG_CACHE_HOME.'/nvim'

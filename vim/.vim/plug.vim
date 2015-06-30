@@ -13,11 +13,11 @@ call plug#begin('~/.vim/plugged')
 Plug 'https://github.com/Valloric/YouCompleteMe' , { 'do': './install.sh --system-libclang --clang-completer' }
 Plug 'vim-flake8'
 Plug 'mhinz/vim-startify'
-if has('nvim')
+"if has('nvim')
 	Plug 'bling/vim-airline'
-else
-	Plug 'Lokaltog/powerline' , {'rtp': 'powerline/bindings/vim/'}
-endif
+"else
+	"Plug 'Lokaltog/powerline' , {'rtp': 'powerline/bindings/vim/'}
+"endif
 
 Plug 'CCTree'
 Plug 'showmarks2'
@@ -25,7 +25,7 @@ Plug 'junegunn/vim-github-dashboard'
 Plug 'kien/ctrlp.vim'
 Plug 'Solarized'
 Plug 'scrooloose/nerdcommenter'
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+" Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'sickill/vim-monokai'
 Plug 'surround.vim'
 Plug 'tpope/vim-markdown'
@@ -46,5 +46,8 @@ Plug 'vim-scripts/rfc-syntax', { 'for': 'rfc' } " optional syntax highlighting f
 " Plug 'bbchung/clighter'
 " YCM generator is not really a plugin is it ?
 " Plug 'rdnetto/YCM-Generator'
+" Plug 'erezsh/erezvim' "zenburn scheme. This plugin resets some keymaps,
+" annoying
+Plug 'chrisbra/csv.vim'
 
 call plug#end()
