@@ -5,7 +5,8 @@
 
 
 # font for window titles
-font xft:Liberation Sans Mono 8
+# TODO prefix with pango if you want to have fancy effects
+font pango:Liberation Sans Mono 9
 
 
 set $mod Mod1
@@ -239,8 +240,8 @@ bindsym $mod+ccedilla workspace 9
 bindsym $mod+agrave workspace 10
 
 # move to scratchpad
-bindsym $mod+Shift+F1 mark pad1; move scratchpad
-bindsym $mod+Shift+F2 move container to workspace "$w2" 
+bindsym $mod+Shift+F1 move scratchpad
+bindsym $mod+Shift+F2 floating toggle
 bindsym $mod+Shift+F3 move container to workspace "$w3"
 bindsym $mod+Shift+F4 move container to workspace "$w4"
 
@@ -321,7 +322,7 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 
-bindsym $mod+w exec "~/.i3/choose_wallpaper.sh"
+#bindsym $mod+w exec "~/.i3/choose_wallpaper.sh"
 
 bindsym $mod+ctrl+minus move scratchpad
 # Start i3bar to display a workspace bar (plus the system information i3status

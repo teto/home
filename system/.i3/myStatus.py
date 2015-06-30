@@ -125,6 +125,7 @@ alsa = status.register("dpms",)
 status.register("updates",
                 format = "Updates: {count}",
                 format_no_updates = "No updates",
+                on_leftclick=["urxvtc -e 'sudo apt upgrade'"],
                 backends = [aptget.AptGet() ])
 
 # print("alsa")

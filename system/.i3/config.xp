@@ -31,3 +31,4 @@ show_marks yes
 bindsym $mod+Shift+g title_format "[test] %title"
 
 for_window [class="(?i)firefox"] title_format "<span foreground='red'>%title</span>"
+for_window [class="(?i)firefox"] title_format "<span foreground='red'>%title</span>"
