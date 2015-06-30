@@ -1,6 +1,7 @@
 URxvt.intensityStyles: true
 
-URxvt*font: xft:Inconsolata For Powerline:size=11
+! we can specify several fonts, if one glyph is not found in one font, urxvt will look for the next matching font
+URxvt*font: xft:Inconsolata For Powerline:size=11; xft:Linux Libertine
 
 
 
