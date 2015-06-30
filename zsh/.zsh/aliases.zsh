@@ -69,6 +69,7 @@ alias nv="nvim"
 alias m="mutt"
 alias r="ranger"
 alias l="less" 
+alias z="zathura" 
 
 # Movement aliases
 alias ..="cd .."
@@ -120,11 +121,6 @@ if [ -x /usr/bin/dircolors ]; then
     alias fgrep='fgrep --color=auto'
     alias egrep='egrep --color=auto'
 fi
-
-# Demande confirmation avant d'écraser un fichier
-#alias cp='cp --interactive'
-#alias mv='mv --interactive'
-#alias rm='rm --interactive'
 
 
 

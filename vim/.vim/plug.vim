@@ -13,7 +13,9 @@ call plug#begin('~/.vim/plugged')
 Plug 'https://github.com/Valloric/YouCompleteMe' , { 'do': './install.sh --system-libclang --clang-completer' }
 Plug 'vim-flake8'
 Plug 'mhinz/vim-startify'
-if !has('nvim')
+if has('nvim')
+	Plug 'bling/vim-airline'
+else
 	Plug 'Lokaltog/powerline' , {'rtp': 'powerline/bindings/vim/'}
 endif
 

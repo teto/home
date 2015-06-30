@@ -11,6 +11,11 @@ set smarttab "use shiftwidth
 set incsearch " start searching straightaway
 set showmode " Show the current mode
 
+
+set title " vim will change terminal title
+" look at :h titlestring
+
+
 " let mapleader = ","
 let mapleader = " "
 nnoremap <Leader>v :e $MYVIMRC<CR> " open vimrc
@@ -58,7 +63,8 @@ set visualbell
 
 " enable mouse to click on tabs etc... 
 " set mouse=a
-set ttymouse=urxvt
+" neovim doesn't like the next line
+" set ttymouse=urxvt
 " Display line numbers on the left
 " set number
 
@@ -213,6 +219,7 @@ source ~/.vim/cscope.vim
 source ~/.vim/ycm.vim
 source ~/.vim/splits.vim
 source ~/.vim/vim_file_chooser.vim
+source ~/.vim/jedi.vim
 source ~/.vim/plug.vim
 cmap w!! w !sudo tee % >/dev/null
 
