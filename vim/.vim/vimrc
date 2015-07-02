@@ -16,6 +16,20 @@ set smarttab "use shiftwidth
 set incsearch " start searching straightaway
 set showmode " Show the current mode
 
+" /quickfix
+"
+"let c_no_bracket_error=1
+"let c_no_curly_error=1
+"let c_comment_strings=1
+"let c_gnu=1
+
+"set ts=2
+"set sw=2
+"set sta
+"set et
+"set ai
+"set si
+"set cin
 
 set title " vim will change terminal title
 " look at :h titlestring
@@ -30,6 +44,10 @@ let mapleader = " "
 
 
 nnoremap <Leader>/ :set hlsearch! hls?<CR> " toggle search highlighting
+
+" search for  item in quickfix list
+nnoremap <F2> :cp<CR>
+nnoremap <F3> :cn<CR>
 
 
 
@@ -182,9 +200,9 @@ nmap <C-'> :tabn4<Enter>
 " Easy window navigation
 
 " Nerdtree shortcuts
-noremap <F2> :NERDTreeToggle<Enter>
+" noremap <F2> :NERDTreeToggle<Enter>
 let Tlist_Use_Right_Window   = 1
-noremap <F3> :Tlist<Enter>
+" noremap <F3> :Tlist<Enter>
 
 
 noremap <F4> exec ":emenu <tab>"
@@ -221,6 +239,7 @@ source ~/.vim/vim_file_chooser.vim
 source ~/.vim/jedi.vim
 source ~/.vim/ctrlp.vim 
 source ~/.vim/plug.vim
+source ~/.vim/startify.vim
 " }}}
 cmap w!! w !sudo tee % >/dev/null
 

@@ -31,3 +31,6 @@ export MUTT="$HOME/.mutt"
 
 export EDITOR="vim"
 export TERMINAL="urxvt"
+
+
+export XDG_DATA_HOME="$HOME/.local"
