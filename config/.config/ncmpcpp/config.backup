@@ -37,6 +37,8 @@ mpd_music_dir = "/home/teto/Musique"
 #mpd_crossfade_time = "5"
 #
 #mpd_communication_mode = "notifications" (polling/notifications)
+mpd_communication_mode = "notifications" 
+#P
 #
 ##### music visualizer #####
 ##
@@ -58,7 +60,7 @@ mpd_music_dir = "/home/teto/Musique"
 ## If you set format to 44100:16:2, make it 'yes'.
 ##
 #
-#visualizer_in_stereo = "no"
+visualizer_in_stereo = "yes"
 #
 #visualizer_fifo_path = ""
 #
@@ -409,7 +411,7 @@ mpd_music_dir = "/home/teto/Musique"
 #
 #block_search_constraints_change_if_items_found = "yes"
 #
-#mouse_support = "yes"
+mouse_support = "yes"
 #
 #mouse_list_scroll_whole_page = "yes"
 #
@@ -451,7 +453,9 @@ mpd_music_dir = "/home/teto/Musique"
 #
 #external_editor = ""
 #
-#use_console_editor = "no" (set to yes, if your editor is console app)
+#(set to yes, if your editor is console app)
+use_console_editor = "yes" 
+
 #
 ##### colors definitions #####
 #

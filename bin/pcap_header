@@ -5,4 +5,6 @@ if [ $# -lt 1 ] ; then
 	exit 1
 fi
 
+echo -e "Format description at:\n http://www.kroosec.com/2012/10/a-look-at-pcap-file-format.html"
+echo "Magic number (4) | MAjor Version (2) | Minor version (2)"
 hexdump -n 24 -C "$1" | cut -c 11-59
