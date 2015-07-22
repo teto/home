@@ -154,12 +154,13 @@ bindsym $mod+d exec j4-dmenu-desktop --dmenu='rofi -dmenu'
 #dmenu_run -
 
 #for_window [title="MOC"] move scratchpad
-for_window [Class="^Transmission"] floating enable
+#for_window [Class="^Transmission"] floating enable
+#bindsym $mod+F1 [instance="pad_(?!flyingterminal)"] move scratchpad; [instance="pad_flyingterminal"] scratchpad show
+#bindsym $mod+F2 [instance="pad_(?!audioplayer)"] move scratchpad ; [instance="pad_audioplayer"] scratchpad show
+#bindsym $mod+F3 [instance="pad_(?!ncmpcpp)"] move scratchpad; [instance="pad_ncmpcpp"] scratchpad show
+bindsym $mod+F1 [con_mark="pad_1"] scratchpad show
 bindsym $mod+F2 [instance="pad_(?!audioplayer)"] move scratchpad ; [instance="pad_audioplayer"] scratchpad show
-#i3-msg [con_marki=pad1] focus
-bindsym $mod+F1 [instance="pad_(?!flyingterminal)"] move scratchpad; [instance="pad_flyingterminal"] scratchpad show
 bindsym $mod+F3 [instance="pad_(?!ncmpcpp)"] move scratchpad; [instance="pad_ncmpcpp"] scratchpad show
-#bindsym $mod+F3 scratchpad show
 
 #pad_audioplayer
 # class followed by command
@@ -239,8 +240,10 @@ bindsym $mod+underscore workspace 8
 bindsym $mod+ccedilla workspace 9
 bindsym $mod+agrave workspace 10
 
+for_window [con_mark="^pad_*"] move scratchpad
+
 # move to scratchpad
-bindsym $mod+Shift+F1 move scratchpad
+bindsym $mod+Shift+F1 mark "pad_1"
 bindsym $mod+Shift+F2 floating toggle
 bindsym $mod+Shift+F3 move container to workspace "$w3"
 bindsym $mod+Shift+F4 move container to workspace "$w4"
@@ -359,9 +362,9 @@ bar {
 ### display error in case it does not launch
 # Provide command to send to a specific scratchpad (rename title) or use mark ?
 #
-exec_always urxvtc -name pad_audioplayer -e mocp
+exec_always urxvtc -name pad_audioplayer -e "mocp; $SHELL"; 
 exec_always urxvtc -name pad_flyingterminal
-exec_always urxvtc -name pad_ncmpcpp -e ncmpcpp
+exec_always urxvtc -name pad_ncmpcpp -e sh ncmpcpp;$SHELL 
 #exec_always urxvtc -name pad_term4
 #exec_always urxvtc -name pad_term5
 

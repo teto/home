@@ -114,7 +114,6 @@ status.register(
         "play": "▶",
         "stop": "◾",
     },
-    on_leftclick="hello world"
 )
 
 #print("mdp on_lclick", mpd);

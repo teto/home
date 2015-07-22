@@ -208,12 +208,19 @@ let Tlist_Use_Right_Window   = 1
 " noremap <F3> :Tlist<Enter>
 
 
+" est mappe a autre chose pour l'instant
 noremap <F4> exec ":emenu <tab>"
 
-" Hide/display invisible characters
-noremap <F11> :set list!<CR>
+
+" should become useless with
 noremap <F10> :set paste!<CR>
 
+
+" todo enable rainbow parentheses
+"nnoremap <leader>R :CtrlP<CR>
+" est deja mappe :/
+nnoremap <leader>p :CtrlP<CR>
+nnoremap <leader>u :Gundo<CR>
 "source $HOME/.vim/test_tab.vim
 
 " A stands for Alt
@@ -289,8 +296,9 @@ set shiftround    " round indent to multiple of 'shiftwidth'
 
 " auto reload vimrc on save
 au! BufWritePost .vimrc source %
-
-nnoremap <Leader>ev :e $MYVIMRC<CR> " open vimrc
+" open vimrc
+nnoremap <Leader>ev :vs $MYVIMRC<CR> 
+nnoremap <Leader>ep :vs ~/.vim/plug.vim<CR> 
 nnoremap <Leader>sv :source $MYVIMRC<CR> " reload vimrc
 let g:netrw_home=$XDG_CACHE_HOME.'/vim'
 

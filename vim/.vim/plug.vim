@@ -20,14 +20,16 @@ Plug 'mhinz/vim-startify'
 "endif
 
 Plug 'CCTree'
-Plug 'showmarks2'
+"Plug 'showmarks2'
 Plug 'junegunn/vim-github-dashboard'
 Plug 'kien/ctrlp.vim'
+Plug 'mattn/ctrlp-mark'
+"Plug 'mattn/ctrlp-register'
 Plug 'Solarized'
 Plug 'scrooloose/nerdcommenter'
 " Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'sickill/vim-monokai'
-Plug 'surround.vim'
+"Plug 'surround.vim'
 Plug 'tpope/vim-markdown'
 "Plug 'elzr/vim-json', { 'for': 'json' }
 Plug 'numkil/ag.vim'
@@ -38,6 +40,11 @@ Plug 'airblade/vim-gitgutter'
 Plug 'mhinz/vim-rfc'
 Plug 'chrisbra/unicode.vim'
 Plug 'vim-scripts/rfc-syntax', { 'for': 'rfc' } " optional syntax highlighting for 
+Plug 'vim-latex/vim-latex', {'for': 'tex'}
+Plug 'vimwiki/vimwiki'
+Plug 'kshenoy/vim-signature'
+Plug 'vim-scripts/DynamicSigns'
+
 " Had to disable this one, needs a vim with lua compiled
 " and it's not possible in neovim yet
 " color_coded requires vim to be compiled with -lua
@@ -49,5 +56,6 @@ Plug 'vim-scripts/rfc-syntax', { 'for': 'rfc' } " optional syntax highlighting f
 " Plug 'erezsh/erezvim' "zenburn scheme. This plugin resets some keymaps,
 " annoying
 Plug 'chrisbra/csv.vim'
+Plug 'luochen1990/rainbow'
 
 call plug#end()
