@@ -43,6 +43,7 @@ Plug 'vim-scripts/rfc-syntax', { 'for': 'rfc' } " optional syntax highlighting f
 Plug 'vim-latex/vim-latex', {'for': 'tex'}
 Plug 'vimwiki/vimwiki'
 Plug 'kshenoy/vim-signature'
+Plug 'vim-scripts/DynamicSigns'
 
 " Had to disable this one, needs a vim with lua compiled
 " and it's not possible in neovim yet

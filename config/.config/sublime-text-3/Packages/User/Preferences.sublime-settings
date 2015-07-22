@@ -14,9 +14,9 @@
 	[
 		"Makefile",
 		"Python PEP8 Autoformat",
+		"Vintage",
 		"GitGutter",
 		"AutoPEP8",
-		"Vintage",
 		"Anaconda"
 	],
 	"line_numbers": true

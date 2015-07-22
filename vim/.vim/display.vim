@@ -40,6 +40,42 @@ set list
 " "
 " " Working with spaces?
 " " softtabstop == shiftwidth
+" Hide/display invisible characters
+let g:current_listchar = 0
 
-set listchars=trail:·,tab:→\ ,eol:↲,precedes:<,extends:>
+	let g:listchar_formats=[ 
+				\"trail:·,tab:→\ ,eol:↲,precedes:<,extends:>", 
+				\"trail:·"
+				\]
+"				\"trail:." 
+
+
+" lists are 0 indexed
+function! ToggleInvisibleChar()
+	" l => local to the function
+
+	let l:len = len(g:listchar_formats)
+	
+	"echo l:listchar_formats[g:current_listchar]
+			let g:current_listchar = g:current_listchar + 1
+	
+	if g:current_listchar == l:len 
+	   set nolist
+	   return
+   elseif g:current_listchar > l:len
+	   let g:current_listchar = 0
+	   "elseif g:current_listchar > l:len
+	endif
+	"echo g:current_listchar
+	"echo g:listchar_formats[g:current_listchar]
+	let &listchars=g:listchar_formats[g:current_listchar]
+	"set listchars="trail:·"
+	set list   
+
+"what does s mean
+endfunction
+
+
+command! ToggleListchars call ToggleInvisibleChar()
+noremap <F11> :ToggleListchars <CR>
 
