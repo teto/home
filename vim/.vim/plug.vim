@@ -10,7 +10,7 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'https://github.com/Valloric/YouCompleteMe' , { 'do': './install.sh --system-libclang --clang-completer' }
+Plug 'Valloric/YouCompleteMe' , { 'do': './install.sh --system-libclang --clang-completer' }
 Plug 'vim-flake8'
 Plug 'mhinz/vim-startify'
 "if has('nvim')
@@ -22,9 +22,9 @@ Plug 'mhinz/vim-startify'
 Plug 'CCTree'
 "Plug 'showmarks2'
 Plug 'junegunn/vim-github-dashboard'
-Plug 'kien/ctrlp.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'mattn/ctrlp-mark'
-"Plug 'mattn/ctrlp-register'
+Plug 'mattn/ctrlp-register'
 Plug 'Solarized'
 Plug 'scrooloose/nerdcommenter'
 " Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
