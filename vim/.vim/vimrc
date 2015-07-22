@@ -16,6 +16,9 @@ set smarttab "use shiftwidth
 set incsearch " start searching straightaway
 set showmode " Show the current mode
 
+
+" decide with which program to open files when typing 'gx'
+let g:netrw_browsex_viewer="xdg-open"
 " /quickfix
 "
 "let c_no_bracket_error=1
