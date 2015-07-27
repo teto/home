@@ -11,7 +11,9 @@ URxvt*font: xft:Inconsolata For Powerline:size=11; xft:Linux Libertine
 ! URxvt.keysym.Control-Tab: \033[27;5;38~
 !URxvt*inputMethod: ibus
 ! RGBA with A=0 => transparent
-XTerm*bellIsUrgent: true
+!XTerm*bellIsUrgent: true
+URxvt*urgentOnBell: true
+
 URxvt*scrollTtyKeypress: true
 ! normal settings
 ! URxvt*cursorColor:      white

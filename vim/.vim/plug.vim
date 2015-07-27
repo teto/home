@@ -19,8 +19,11 @@ Plug 'mhinz/vim-startify'
 	"Plug 'Lokaltog/powerline' , {'rtp': 'powerline/bindings/vim/'}
 "endif
 
-Plug 'CCTree'
+"Plug 'CCTree'
 "Plug 'showmarks2'
+
+Plug 'tpope/vim-sleuth'
+Plug 'tpope/vim-vinegar'
 Plug 'junegunn/vim-github-dashboard'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'mattn/ctrlp-mark'
@@ -43,7 +46,8 @@ Plug 'vim-scripts/rfc-syntax', { 'for': 'rfc' } " optional syntax highlighting f
 Plug 'vim-latex/vim-latex', {'for': 'tex'}
 Plug 'vimwiki/vimwiki'
 Plug 'kshenoy/vim-signature'
-Plug 'vim-scripts/DynamicSigns'
+"Plug 'vim-scripts/DynamicSigns'
+Plug 'vasconcelloslf/vim-interestingwords'
 
 " Had to disable this one, needs a vim with lua compiled
 " and it's not possible in neovim yet

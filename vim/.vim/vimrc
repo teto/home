@@ -177,6 +177,9 @@ set modeline
 set modelines=4
 nmap <leader>ml :Modeliner<Enter>
 
+" X clipboard gets aliased to +
+set clipboard=unnamedplus
+
 " Tab shortcuts
 "let tableader = "t" 
 "execute "nmap <unique> ". g:tableader.g:tableader." :tabnew<Enter>"
@@ -226,6 +229,7 @@ nnoremap <leader>u :Gundo<CR>
 " A stands for Alt
 " nnoremap <C-h> :call MoveToTab(2)<CR>
 " nnoremap <C-l> :call MoveToTab(1)<CR>
+
 
 
 " map <F2> :echo 'Current time is ' . strftime('%c')<CR>

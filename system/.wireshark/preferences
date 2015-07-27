@@ -1,4 +1,4 @@
-# Configuration file for Wireshark 1.12.1.
+# Configuration file for Wireshark 1.99.7.
 #
 # This file is regenerated each time preferences are saved within
 # Wireshark. Making manual changes should be safe, however.
@@ -32,12 +32,12 @@ gui.console_open: ALWAYS
 # Protocol-tree expander style
 # One of: NONE, SQUARE, TRIANGLE, CIRCULAR
 # (case-insensitive).
-#gui.protocol_tree_expander_style: SQUARE
+gui.protocol_tree_expander_style: SQUARE
 
 # Hex dump highlight style
 # One of: BOLD, INVERSE
 # (case-insensitive).
-#gui.hex_dump_highlight_style: INVERSE
+gui.hex_dump_highlight_style: INVERSE
 
 # Where to start the File Open dialog box
 # One of: LAST_OPENED, SPECIFIED
@@ -46,11 +46,11 @@ gui.console_open: ALWAYS
 
 # The max. number of items in the open recent files list
 # A decimal number
-#gui.recent_files_count.max: 10
+gui.recent_files_count.max: 10
 
 # The max. number of entries in the display filter list
 # A decimal number
-#gui.recent_display_filter_entries.max: 10
+gui.recent_display_filter_entries.max: 10
 
 # Directory to start in when opening File Open dialog.
 # A path to a directory
@@ -58,15 +58,15 @@ gui.fileopen.dir: /home/teto/pcaps
 
 # The preview timeout in the File Open dialog
 # A decimal number
-#gui.fileopen.preview: 3
+gui.fileopen.preview: 3
 
 # Ask to save unsaved capture files?
 # TRUE or FALSE (case-insensitive)
-#gui.ask_unsaved: TRUE
+gui.ask_unsaved: TRUE
 
 # Wrap to beginning/end of file during search?
 # TRUE or FALSE (case-insensitive)
-#gui.find_wrap: TRUE
+gui.find_wrap: TRUE
 
 # Settings dialogs use a save button?
 # TRUE or FALSE (case-insensitive)
@@ -74,19 +74,19 @@ gui.fileopen.dir: /home/teto/pcaps
 
 # Save window position at exit?
 # TRUE or FALSE (case-insensitive)
-#gui.geometry.save.position: TRUE
+gui.geometry.save.position: TRUE
 
 # Save window size at exit?
 # TRUE or FALSE (case-insensitive)
-#gui.geometry.save.size: TRUE
+gui.geometry.save.size: TRUE
 
 # Save window maximized state at exit?
 # TRUE or FALSE (case-insensitive)
-#gui.geometry.save.maximized: TRUE
+gui.geometry.save.maximized: TRUE
 
 # Use Mac OS X style (Mac OS X with native GTK only)?
 # TRUE or FALSE (case-insensitive)
-#gui.macosx_style: TRUE
+gui.macosx_style: TRUE
 
 # Main Toolbar style
 # One of: ICONS, TEXT, BOTH
@@ -96,7 +96,7 @@ gui.fileopen.dir: /home/teto/pcaps
 # Filter Toolbar style
 # One of: ICONS, TEXT, BOTH
 # (case-insensitive).
-#gui.toolbar_filter_style: TEXT
+gui.toolbar_filter_style: TEXT
 
 # The path to the webbrowser (Ex: mozilla)
 # A string
@@ -104,16 +104,16 @@ gui.webbrowser: xdg-open %s
 
 # Check for updates (Windows only)
 # TRUE or FALSE (case-insensitive)
-#gui.update.enabled: TRUE
+gui.update.enabled: TRUE
 
 # The type of update to fetch. You should probably leave this set to UPDATE_CHANNEL_STABLE.
 # One of: DEVELOPMENT, STABLE
 # (case-insensitive).
-#gui.update.channel: STABLE
+gui.update.channel: STABLE
 
 # How often to check for software updates in seconds
 # A decimal number
-#gui.update.interval: 86400
+gui.update.interval: 86400
 
 # Custom window title. (Appended to existing titles.)
 # A string
@@ -121,12 +121,12 @@ gui.webbrowser: xdg-open %s
 
 # Custom start page title
 # A string
-#gui.start_title: The World's Most Popular Network Protocol Analyzer
+gui.start_title: The World's Most Popular Network Protocol Analyzer
 
 # Show version in the start page and/or main screen's title bar
 # One of: WELCOME, TITLE, BOTH, NEITHER
 # (case-insensitive).
-#gui.version_placement: BOTH
+gui.version_placement: BOTH
 
 # Automatically scroll the recently expanded item
 # TRUE or FALSE (case-insensitive)
@@ -136,11 +136,6 @@ gui.webbrowser: xdg-open %s
 # A decimal number
 #gui.auto_scroll_percentage: 0
 
-# Qt Language
-# One of: auto, en, fr, de, zh_CN
-# (case-insensitive).
-#gui.qt_language: auto
-
 # Enable Packet Editor (Experimental)
 # TRUE or FALSE (case-insensitive)
 #gui.packet_editor.enabled: FALSE
@@ -149,11 +144,11 @@ gui.webbrowser: xdg-open %s
 
 # Color preferences for a marked frame
 # A six-digit hexadecimal RGB color triplet (e.g. fce94f)
-#gui.marked_frame.fg: ffffff
+gui.marked_frame.fg: ffffff
 
 # Color preferences for a marked frame
 # A six-digit hexadecimal RGB color triplet (e.g. fce94f)
-#gui.marked_frame.bg: 00202a
+gui.marked_frame.bg: 00202a
 
 # Color preferences for a ignored frame
 # A six-digit hexadecimal RGB color triplet (e.g. fce94f)
@@ -161,7 +156,7 @@ gui.ignored_frame.fg: 7f7f7f
 
 # Color preferences for a ignored frame
 # A six-digit hexadecimal RGB color triplet (e.g. fce94f)
-#gui.ignored_frame.bg: ffffff
+gui.ignored_frame.bg: ffffff
 
 # TCP stream window color preference
 # A six-digit hexadecimal RGB color triplet (e.g. fce94f)
@@ -169,7 +164,7 @@ gui.stream.client.fg: 7f0000
 
 # TCP stream window color preference
 # A six-digit hexadecimal RGB color triplet (e.g. fce94f)
-#gui.stream.client.bg: fbeded
+gui.stream.client.bg: fbeded
 
 # TCP stream window color preference
 # A six-digit hexadecimal RGB color triplet (e.g. fce94f)
@@ -177,7 +172,7 @@ gui.stream.server.fg: 00007f
 
 # TCP stream window color preference
 # A six-digit hexadecimal RGB color triplet (e.g. fce94f)
-#gui.stream.server.bg: ededfb
+gui.stream.server.bg: ededfb
 
 # Valid color filter background
 # A six-digit hexadecimal RGB color triplet (e.g. fce94f)
@@ -195,7 +190,7 @@ gui.color_filter_bg.deprecated: ffffaf
 
 # Packet list hidden columns
 # List all columns to hide in the packet list.
-gui.column.hidden: %Cus:ip.src:1:R,%Cus:ip.dst:1:R
+gui.column.hidden: %Cus:ip.src:1:R,%Cus:ip.dst:1:R,%Cus:ip.dst:1:R
 
 # Packet list column format
 # Each pair of strings consists of a column title and its format
@@ -217,7 +212,7 @@ gui.column.format:
 
 # Font name for packet list, protocol tree, and hex dump panes. (GTK+)
 # A string
-#gui.gtk2.font_name: Monospace 10
+gui.gtk2.font_name: Monospace 10
 
 # Font name for packet list, protocol tree, and hex dump panes. (Qt)
 # A string
@@ -227,22 +222,22 @@ gui.qt.font_name: Liberation Mono,9,-1,5,50,0,0,0,0,0
 
 # Layout type (1-6)
 # A decimal number
-gui.layout_type: 5
+gui.layout_type: 2
 
 # Layout content of the pane 1
 # One of: NONE, PLIST, PDETAILS, PBYTES
 # (case-insensitive).
-#gui.layout_content_1: PLIST
+gui.layout_content_1: PLIST
 
 # Layout content of the pane 2
 # One of: NONE, PLIST, PDETAILS, PBYTES
 # (case-insensitive).
-#gui.layout_content_2: PDETAILS
+gui.layout_content_2: PDETAILS
 
 # Layout content of the pane 3
 # One of: NONE, PLIST, PDETAILS, PBYTES
 # (case-insensitive).
-#gui.layout_content_3: PBYTES
+gui.layout_content_3: PBYTES
 
 ####### Filter Expressions ########
 gui.filter_expressions.label: DataFin
@@ -276,31 +271,35 @@ gui.filter_expressions.expr: ip.src == 132.227.74.34
 
 # Interface buffer size (Ex: en0(1),en1(143),...)
 # A string
-#capture.devices_buffersize: 
+capture.devices_buffersize: eth0(2),any(2),lo(2),bluetooth-monitor(2),nflog(2),nfqueue(2),usbmon1(2),usbmon2(2),usbmon3(2),usbmon4(2)
 
 # Interface snap length (Ex: en0(65535),en1(1430),...)
 # A string
-#capture.devices_snaplen: 
+capture.devices_snaplen: eth0:0(262144),any:0(262144),lo:0(262144),bluetooth-monitor:0(262144),nflog:0(262144),nfqueue:0(262144),usbmon1:0(262144),usbmon2:0(262144),usbmon3:0(262144),usbmon4:0(262144)
 
 # Interface promiscuous mode (Ex: en0(0),en1(1),...)
 # A string
-#capture.devices_pmode: 
+capture.devices_pmode: eth0(1),any(1),lo(1),bluetooth-monitor(1),nflog(1),nfqueue(1),usbmon1(1),usbmon2(1),usbmon3(1),usbmon4(1)
 
 # Capture in promiscuous mode?
 # TRUE or FALSE (case-insensitive)
-#capture.prom_mode: TRUE
+capture.prom_mode: TRUE
+
+# Interface capture filter (Ex: en0(tcp),en1(udp),...)
+# A string
+capture.devices_filter: eth0(),any(),lo(),bluetooth-monitor(),nflog(),nfqueue(),usbmon1(),usbmon2(),usbmon3(),usbmon4()
 
 # Capture in Pcap-NG format?
 # TRUE or FALSE (case-insensitive)
-#capture.pcap_ng: TRUE
+capture.pcap_ng: TRUE
 
 # Update packet list in real time during capture?
 # TRUE or FALSE (case-insensitive)
-#capture.real_time_update: TRUE
+capture.real_time_update: TRUE
 
 # Scroll packet list during capture?
 # TRUE or FALSE (case-insensitive)
-#capture.auto_scroll: TRUE
+capture.auto_scroll: TRUE
 
 # Show capture info dialog while capturing?
 # TRUE or FALSE (case-insensitive)
@@ -310,11 +309,11 @@ gui.filter_expressions.expr: ip.src == 132.227.74.34
 # List of columns to be displayed in the capture options dialog.
 # Possible values: INTERFACE, LINK, PMODE, SNAPLEN, MONITOR, BUFFER, FILTER
 # 
-#capture.columns: 
-#	"INTERFACE", "LINK",
-#	"PMODE", "SNAPLEN",
-#	"MONITOR", "BUFFER",
-#	"FILTER"
+capture.columns: 
+	"INTERFACE", "LINK",
+	"PMODE", "SNAPLEN",
+	"MONITOR", "BUFFER",
+	"FILTER"
 
 ####### Console ########
 
@@ -347,25 +346,9 @@ console.log.level: 64
 # TRUE or FALSE (case-insensitive)
 #nameres.use_external_name_resolver: TRUE
 
-# Enable concurrent DNS name resolution. Only applies when network name resolution is enabled. You probably want to enable this.
-# TRUE or FALSE (case-insensitive)
-#nameres.concurrent_dns: TRUE
-
-# The maximum number of DNS requests that may be active at any time. A large value (many thousands) might overload the network or make your DNS server behave badly.
-# A decimal number
-#nameres.name_resolve_concurrency: 500
-
 # By default "hosts" files will be loaded from multiple sources. Checking this box only loads the "hosts" in the current profile.
 # TRUE or FALSE (case-insensitive)
 #nameres.hosts_file_handling: FALSE
-
-# You must restart Wireshark for this change to take effect
-# TRUE or FALSE (case-insensitive)
-#nameres.load_smi_modules: FALSE
-
-# Some errors can be ignored. If unsure, set to false.
-# TRUE or FALSE (case-insensitive)
-#nameres.suppress_smi_errors: FALSE
 
 ####### Printing ########
 
@@ -381,17 +364,25 @@ console.log.level: 64
 
 # Output gets piped to this command when the destination is set to "command"
 # A string
-#print.command: lpr
+print.command: lpr
 
 # This is the file that gets written to when the destination is set to "file"
 # A path to a file
-#print.file: wireshark.out
+print.file: wireshark.out
 
 ####### Protocols ########
 
 # Display all hidden protocol items in the packet list.
 # TRUE or FALSE (case-insensitive)
 #protocols.display_hidden_proto_items: FALSE
+
+# Display all byte fields with a space character between each byte in the packet list.
+# TRUE or FALSE (case-insensitive)
+#protocols.display_byte_fields_with_spaces: FALSE
+
+# Look for dissectors that left some bytes undecoded.
+# TRUE or FALSE (case-insensitive)
+#protocols.enable_incomplete_dissectors_check: FALSE
 
 # Use a registered heuristic sub-dissector to decode the data payload
 # TRUE or FALSE (case-insensitive)
@@ -686,7 +677,7 @@ console.log.level: 64
 
 # Dissect more detail for framebuffer service
 # TRUE or FALSE (case-insensitive)
-#adb_cs.framebuffer_more_details: FALSE
+#adb_service.framebuffer_more_details: FALSE
 
 # Set the UDP port for ADwin packets (if other than the default of 6543)
 # A decimal number
@@ -729,6 +720,14 @@ console.log.level: 64
 # Whether persistent call leg information is to be kept
 # TRUE or FALSE (case-insensitive)
 #alcap.leg_info: TRUE
+
+# Set the TCP port for AMQP(if other than the default of 5672)
+# A decimal number
+#amqp.tcp.port: 5672
+
+# Set the TCP port for AMQP over TLS/SSL(if other than the default of 5671)
+# A decimal number
+#amqp.ssl.port: 5671
 
 # The dynamic payload type which will be interpreted as AMR; The value must be greater than 95
 # A decimal number
@@ -795,14 +794,14 @@ console.log.level: 64
 # TRUE or FALSE (case-insensitive)
 #arp.detect_duplicate_ips: TRUE
 
-# Set the UDP port numbers (typically the range 5555 to 5560) used for ARUBA encapsulated remote mirroring frames;
+# Set the UDP port numbers (typically the range 5555 to 5560) used for Aruba Networks encapsulated remote mirroring frames;
 # 0 (default) means that the ARUBA_ERM dissector is not active
 # 
 # A string denoting an positive integer range (e.g., "1-20,30-40")
 #aruba_erm.udp.ports: 0
 
 # Type of formats for captured packets
-# One of: pcap (type 0), peek (type1), airmagnet (type 2), pcap+radio header (type 3), ppi (type 4)
+# One of: pcap (type 0), peek (type 1), Airmagnet (type 2), pcap + radio header (type 3), PPI (type 4)
 # (case-insensitive).
 #aruba_erm.type.captured: pcap (type 0)
 
@@ -865,11 +864,6 @@ console.log.level: 64
 # TRUE or FALSE (case-insensitive)
 #atm.dissect_lane_as_sscop: FALSE
 
-# Type used to dissect unknown AAL2 traffic
-# One of: Raw data, UMTS FP
-# (case-insensitive).
-#atm.unknown_aal2_type: Raw data
-
 # ATMTCP TCP port if other than the default
 # A decimal number
 #atmtcp.tcp.port: 2812
@@ -877,6 +871,10 @@ console.log.level: 64
 # Whether the ATP dissector should reassemble messages spanning multiple DDP packets
 # TRUE or FALSE (case-insensitive)
 #atp.desegment: TRUE
+
+# Enable checksum calculation.
+# TRUE or FALSE (case-insensitive)
+#ax25_kiss.showcksum: FALSE
 
 # Enable decoding of the payload as APRS.
 # TRUE or FALSE (case-insensitive)
@@ -963,6 +961,10 @@ console.log.level: 64
 # TRUE or FALSE (case-insensitive)
 #bittorrent.decode_client: FALSE
 
+# Whether the BMP dissector should reassemble messages spanning multiple TCP segments. To use this option, you must also enable "Allow subdissectors to reassemble TCP streams" in the TCP protocol settings.
+# TRUE or FALSE (case-insensitive)
+#bmp.desegment: TRUE
+
 # Novell Servers option 85 can be configured as a string instead of address
 # TRUE or FALSE (case-insensitive)
 #bootp.novellserverstring: FALSE
@@ -1007,13 +1009,9 @@ console.log.level: 64
 #bta2dp.a2dp.content_protection.scms_t: FALSE
 
 # Force decoding stream as A2DP with specified codec
-# One of: Default, SBC, MPEG12 AUDIO, MPEG24 AAC
+# One of: Default, SBC, MPEG12 AUDIO, MPEG24 AAC, APT-X
 # (case-insensitive).
 #bta2dp.a2dp.codec: Default
-
-# Force decoding as AVDTP Signaling
-# TRUE or FALSE (case-insensitive)
-#btavdtp.avdtp.force: FALSE
 
 # Dissecting the top protocols
 # TRUE or FALSE (case-insensitive)
@@ -1117,11 +1115,6 @@ console.log.level: 64
 # TRUE or FALSE (case-insensitive)
 #camel.persistentsrt: FALSE
 
-# Next level protocol like CANopen etc.
-# One of: Raw data (no further dissection), CANopen protocol, DeviceNet protocol, J1939 protocol
-# (case-insensitive).
-#can.protocol: Raw data (no further dissection)
-
 # Set the port for CAPWAP Control messages (if other than the default of 5246)
 # A decimal number
 #capwap.udp.port.control: 5246
@@ -1145,6 +1138,14 @@ console.log.level: 64
 # Whether the CAST dissector should reassemble messages spanning multiple TCP segments. To use this option, you must also enable "Allow subdissectors to reassemble TCP streams" in the TCP protocol settings.
 # TRUE or FALSE (case-insensitive)
 #cast.reassembly: TRUE
+
+# Whether the checksum of all messages should be validated or not
+# TRUE or FALSE (case-insensitive)
+#cattp.checksum: TRUE
+
+# Enable CAT-TP heuristic dissection (default is enabled)
+# TRUE or FALSE (case-insensitive)
+#cattp.enable: TRUE
 
 # Specify how the dissector should handle the CCSDS checkword
 # One of: Use header flag, Override header flag to be false, Override header flag to be true
@@ -1242,6 +1243,14 @@ console.log.level: 64
 # TRUE or FALSE (case-insensitive)
 #cops.packetcable: TRUE
 
+# Set the UDP port for totem ring protocol implemented in corosync cluster engine
+# A decimal number
+#corosync_totemnet.udp.port: 5405
+
+# Semicolon-separated  list of keys for decryption(e.g. key1;key2;...
+# A string
+#corosync_totemnet.private_keys: 
+
 # Whether segmented COTP datagrams should be reassembled. To use this option, you must also enable "Allow subdissectors to reassemble TCP streams" in the TCP protocol settings.
 # TRUE or FALSE (case-insensitive)
 #cotp.reassemble: TRUE
@@ -1254,6 +1263,22 @@ console.log.level: 64
 # Whether to decode OSI TPDUs with ATN (Aereonautical Telecommunications Network) extensions. To use this option, you must also enable "Always try to decode NSDU as transport PDUs" in the CLNP protocol settings.
 # TRUE or FALSE (case-insensitive)
 #cotp.decode_atn: FALSE
+
+# Whether the memcache dissector should reassemble PDUs spanning multiple TCP segments. To use this option, you must also enable "Allow subdissectors to reassemble TCP streams" in the TCP protocol settings.
+# TRUE or FALSE (case-insensitive)
+#couchbase.desegment_pdus: TRUE
+
+# TCP ports to be decoded as Couchbase (default is 11210)
+# A string denoting an positive integer range (e.g., "1-20,30-40")
+#couchbase.tcp.ports: 11210
+
+# Set the TCP port for CP 2179 Protocol packets (if other than the default of 0)
+# A decimal number
+#cp2179.tcp.port: 0
+
+# Whether the SEL Protocol dissector should automatically pre-process Telnet data to remove IAC bytes
+# TRUE or FALSE (case-insensitive)
+#cp2179.telnetclean: TRUE
 
 # Set the port for CPFI messages (if other than the default of 5000)
 # A decimal number
@@ -1286,6 +1311,10 @@ console.log.level: 64
 # Whether the LAN sync dissector should reassemble PDUs spanning multiple TCP segments. To use this option, you must also enable "Allow subdissectors to reassemble TCP streams" in the TCP protocol settings.
 # TRUE or FALSE (case-insensitive)
 #db-lsp.desegment_pdus: TRUE
+
+# Try to decode the payload using an heuristic sub-dissector
+# TRUE or FALSE (case-insensitive)
+#db-lsp.try_heuristic: TRUE
 
 # Whether the DCCP summary line should be shown in the protocol tree
 # TRUE or FALSE (case-insensitive)
@@ -1403,6 +1432,10 @@ console.log.level: 64
 # TRUE or FALSE (case-insensitive)
 #distcc.desegment_distcc_over_tcp: TRUE
 
+# Whether DJIUAV should reassemble messages spanning multiple TCP segments (required to get useful results)
+# TRUE or FALSE (case-insensitive)
+#djiuav.desegment: TRUE
+
 # Set the TCP port for Distributed Lock Manager
 # A decimal number
 #dlm3.tcp.port: 21064
@@ -1501,33 +1534,6 @@ console.log.level: 64
 # A decimal number
 #dtcp-ip.tcp.port: 0
 
-# redirect dtls debug to file name; leave empty to disable debug, use "-" to redirect output to stderr
-# 
-# A path to a file
-#dtls.debug_file: 
-
-# Pre-Shared-Key as HEX string, should be 0 to 16 bytes
-# A string
-#dtls.psk: 
-
-# The filename of a file which contains a list of 
-# (pre-)master secrets in one of the following formats:
-# 
-# RSA <EPMS> <PMS>
-# RSA Session-ID:<SSLID> Master-Key:<MS>
-# CLIENT_RANDOM <CRAND> <MS>
-# 
-# Where:
-# <EPMS> = First 8 bytes of the Encrypted PMS
-# <PMS> = The Pre-Master-Secret (PMS)
-# <SSLID> = The SSL Session ID
-# <MS> = The Master-Secret (MS)
-# <CRAND> = The Client's random number from the ClientHello message
-# 
-# (All fields are in hex notation)
-# A path to a file
-#dtls.keylog_file: 
-
 # Set the TDP port for the DTPT Server
 # A decimal number
 #dtpt.tcp.port: 5721
@@ -1571,11 +1577,6 @@ console.log.level: 64
 # Determines whether all I/O connections will assume a 32-bit header in the T->O direction
 # TRUE or FALSE (case-insensitive)
 #enip.t2o_run_idle: FALSE
-
-# Decode all unidentified I/O traffic as this type
-# One of: Regular Ethernet/IP I/O data, CIP Safety, CIP Motion
-# (case-insensitive).
-#enip.default_io_dissector: Regular Ethernet/IP I/O data
 
 # The UDP port on which ENTTEC packets will be sent
 # A decimal number
@@ -1633,6 +1634,10 @@ console.log.level: 64
 # This is done only if the Decoding is not SET or the packet does not belong to a SA. Assumes a 12 byte auth (HMAC-SHA1-96/HMAC-MD5-96/AES-XCBC-MAC-96) and attempts decode based on the ethertype 13 bytes from packet end
 # TRUE or FALSE (case-insensitive)
 #esp.enable_null_encryption_decode_heuristic: FALSE
+
+# Check that successive frames increase sequence number by 1 within an SPI.  This should work OK when only one host is sending frames on an SPI
+# TRUE or FALSE (case-insensitive)
+#esp.do_esp_sequence_analysis: TRUE
 
 # Attempt to decode based on the SAD described hereafter.
 # TRUE or FALSE (case-insensitive)
@@ -1764,23 +1769,6 @@ console.log.level: 64
 # A string denoting an positive integer range (e.g., "1-20,30-40")
 #fix.tcp.port: 
 
-# Decode FLIP payload according to mode
-# One of: no decoding, heuristic, forced
-# (case-insensitive).
-#flip.decoding_mode: heuristic
-
-# Decode payload as RTP if detected
-# TRUE or FALSE (case-insensitive)
-#flip.heur_decode_rtp: TRUE
-
-# Decode payload as RTCP if detected
-# TRUE or FALSE (case-insensitive)
-#flip.heur_decode_rtcp: TRUE
-
-# Decoding to user-defined protocol
-# A string
-#flip.forced_decode: data
-
 # With this option display filters for fmp fhandle a RPC call, even if the actual fhandle is only present in one of the packets
 # TRUE or FALSE (case-insensitive)
 #fmp.fhandle_find_both_reqrep: FALSE
@@ -1870,7 +1858,7 @@ console.log.level: 64
 # TRUE or FALSE (case-insensitive)
 #gearman.desegment: TRUE
 
-# Set up the TCP port for GED125 (default is 5000)
+# Set up the TCP port for GED125
 # A decimal number
 #ged125.tcp_port: 0
 
@@ -1881,6 +1869,10 @@ console.log.level: 64
 # Whether the GIOP dissector should reassemble messages spanning multiple TCP segments. To use this option, you must also enable "Allow subdissectors to reassemble TCP streams" in the TCP protocol settings.
 # TRUE or FALSE (case-insensitive)
 #giop.desegment_giop_messages: TRUE
+
+# Whether fragmented GIOP messages should be reassembled
+# TRUE or FALSE (case-insensitive)
+#giop.reassemble: TRUE
 
 # File containing stringified IORs, one per line.
 # A path to a file
@@ -1996,6 +1988,10 @@ console.log.level: 64
 # TRUE or FALSE (case-insensitive)
 #gtp.dissect_gtp_over_tcp: TRUE
 
+# Enable GVSP heuristic dissection (default is enabled)
+# TRUE or FALSE (case-insensitive)
+#gvsp.enable_heuristic: TRUE
+
 # H.225 Server TLS Port
 # A decimal number
 #h225.tls.port: 1300
@@ -2072,6 +2068,14 @@ console.log.level: 64
 # TRUE or FALSE (case-insensitive)
 #bthci_acl.hci_acl_reassembly: TRUE
 
+# The UDP port used in L3 communications (default 47000)
+# A string denoting an positive integer range (e.g., "1-20,30-40")
+#hcrt.dissector_udp_port: 47000
+
+# The ethernet type used for L2 communications
+# A decimal number
+#hcrt.dissector_ethertype: 61522
+
 # Enable heuristic HDCP2 dissector (default is false)
 # TRUE or FALSE (case-insensitive)
 #hdcp2.enable: FALSE
@@ -2087,6 +2091,10 @@ console.log.level: 64
 # Set the TCP port for HiSLIP traffic if other than the default
 # A decimal number
 #hislip.tcp.port: 4880
+
+# Enable HiSLIP heuristic dissection (default is disabled)
+# TRUE or FALSE (case-insensitive)
+#hislip.enable_heuristic: FALSE
 
 # Set the port for HNBAP messages (Default of 29169)
 # A decimal number
@@ -2104,6 +2112,10 @@ console.log.level: 64
 # Set the TCP port for HPFEEDS messages
 # A decimal number
 #hpfeeds.dissector_port: 0
+
+# Try to decode the payload using an heuristic sub-dissector
+# TRUE or FALSE (case-insensitive)
+#hpfeeds.try_heuristic: TRUE
 
 # Whether the HTTP dissector should reassemble headers of a request spanning multiple TCP segments. To use this option, you must also enable "Allow subdissectors to reassemble TCP streams" in the TCP protocol settings.
 # TRUE or FALSE (case-insensitive)
@@ -2129,14 +2141,21 @@ console.log.level: 64
 # A string denoting an positive integer range (e.g., "1-20,30-40")
 #http.ssl.port: 443
 
-# The HTTP2 heuristic is weak and there are some false positives
+# The weak HTTP2 heuristic has some false positives and is disabled by default. The stronger HTTP2 Magic Hello heuristic is always enabled.
 # TRUE or FALSE (case-insensitive)
 #http2.heuristic_http2: FALSE
 
-# How the I2C messages are interpreted
-# One of: None (raw I2C), IPMB, HDMI (including HDCP)
-# (case-insensitive).
-#i2c.type: IPMB
+# When set, dissector will attempt to identify unknown IBA payloads as containing an encapsulated ethertype, and parse them accordingly
+# TRUE or FALSE (case-insensitive)
+#infiniband.identify_payload: TRUE
+
+# When set, dissector will attempt to identify and parse Mellanox Ethernet-over-InfiniBand packets
+# TRUE or FALSE (case-insensitive)
+#infiniband.dissect_eoib: TRUE
+
+# when set the Analyser will consider this as RRoce UDP Port and parse it accordingly
+# A decimal number
+#infiniband.rroce.port: 0
 
 # ICEP TCP port
 # A decimal number
@@ -2232,14 +2251,6 @@ console.log.level: 64
 # A string denoting an positive integer range (e.g., "1-20,30-40")
 #inap.ssn: 106,241
 
-# When set, dissector will attempt to identify unknown IBA payloads as containing an encapsulated ethertype, and parse them accordingly
-# TRUE or FALSE (case-insensitive)
-#infiniband.identify_payload: TRUE
-
-# When set, dissector will attempt to identify and parse Mellanox Ethernet-over-InfiniBand packets
-# TRUE or FALSE (case-insensitive)
-#infiniband.dissect_eoib: TRUE
-
 # Check to treat all traffic between the configured source/destination as SDP
 # TRUE or FALSE (case-insensitive)
 #infiniband_sdp.manual_en: FALSE
@@ -2320,10 +2331,6 @@ console.log.level: 64
 # TRUE or FALSE (case-insensitive)
 #ip.tso_support: TRUE
 
-# Whether to look up IP addresses in each GeoIP database we have loaded
-# TRUE or FALSE (case-insensitive)
-#ip.use_geoip: TRUE
-
 # Whether to interpret the originally reserved flag as security flag
 # TRUE or FALSE (case-insensitive)
 #ip.security_flag: FALSE
@@ -2340,13 +2347,13 @@ console.log.level: 64
 # TRUE or FALSE (case-insensitive)
 #ipv6.summary_in_tree: TRUE
 
-# Whether to look up IPv6 addresses in each GeoIP database we have loaded
-# TRUE or FALSE (case-insensitive)
-#ipv6.use_geoip: TRUE
-
 # Whether to check that all RPL Source Routing Headers adhere to RFC 6554
 # TRUE or FALSE (case-insensitive)
 #ipv6.perform_strict_rpl_srh_rfc_checking: FALSE
+
+# Try to decode a packet using an heuristic sub-dissector before using a sub-dissector registered to a specific port
+# TRUE or FALSE (case-insensitive)
+#ipv6.try_heuristic_first: FALSE
 
 # The iSCSI protocol version
 # One of: Draft 08, Draft 09, Draft 11, Draft 12, Draft 13
@@ -2377,22 +2384,44 @@ console.log.level: 64
 # A decimal number
 #iscsi.target_system_port: 860
 
-# When enabled, pdus are assumed to contain a data digest
-# TRUE or FALSE (case-insensitive)
-#iscsi.enable_data_digests: FALSE
-
-# When enabled, data digests are assumed to be CRC32C
-# TRUE or FALSE (case-insensitive)
-#iscsi.data_digest_is_crc32c: TRUE
-
-# The size of a data digest (bytes)
-# A decimal number
-#iscsi.data_digest_size: 4
-
 # The protocol running on the D channel
 # One of: LAPD, DPNSS
 # (case-insensitive).
 #isdn.dchannel_protocol: LAPD
+
+# Check to treat all traffic between the configured source/destination as iSER
+# TRUE or FALSE (case-insensitive)
+#iser.manual_en: FALSE
+
+# Type of address specified
+# One of: LID, GID
+# (case-insensitive).
+#iser.addr_a_type: LID
+
+# LID/GID of address A
+# A string
+#iser.addr_a_id: 
+
+# QP Number for address A
+# A decimal number
+#iser.addr_a_qp: 0
+
+# Type of address specified
+# One of: LID, GID
+# (case-insensitive).
+#iser.addr_b_type: LID
+
+# LID/GID of address B
+# A string
+#iser.addr_b_id: 
+
+# QP Number for address B
+# A decimal number
+#iser.addr_b_qp: 0
+
+# Range of iSER target ports(default 3260)
+# A string denoting an positive integer range (e.g., "1-20,30-40")
+#iser.target_ports: 3260
 
 # The dynamic payload type which will be interpreted as ISMACryp
 # A decimal number
@@ -2477,7 +2506,7 @@ console.log.level: 64
 #isns.desegment: TRUE
 
 # Note national variants may not be fully supported
-# One of: ITU Standard, French National Standard, Israeli National Standard, Russian National Standard, Japan National Standard
+# One of: ITU Standard, French National Standard, Israeli National Standard, Russian National Standard, Japan National Standard, Japan National Standard (TTC)
 # (case-insensitive).
 #isup.variant: ITU Standard
 
@@ -2576,14 +2605,6 @@ console.log.level: 64
 # Whether the Kerberos dissector should reassemble messages spanning multiple TCP segments. To use this option, you must also enable "Allow subdissectors to reassemble TCP streams" in the TCP protocol settings.
 # TRUE or FALSE (case-insensitive)
 #kerberos.desegment: TRUE
-
-# Whether the dissector should try to decrypt encrypted Kerberos blobs. This requires that the proper keytab file is installed as well.
-# TRUE or FALSE (case-insensitive)
-#kerberos.decrypt: FALSE
-
-# The keytab file containing all the secrets
-# A path to a file
-#kerberos.file: 
 
 # TCP ports to be decoded as Kyoto Tycoon (binary protocol) (default: 1978-1979)
 # A string denoting an positive integer range (e.g., "1-20,30-40")
@@ -2684,6 +2705,10 @@ console.log.level: 64
 # TRUE or FALSE (case-insensitive)
 #lmp.checksum: FALSE
 
+# Use oneline info column by replace all new line characters by spaces
+# TRUE or FALSE (case-insensitive)
+#logcat.oneline_info_column: TRUE
+
 # Set the TCP or UDP port for Pegasus LSC messages
 # A decimal number
 #lsc.port: 0
@@ -2695,6 +2720,10 @@ console.log.level: 64
 # Swap frame control bytes (needed for some APs
 # TRUE or FALSE (case-insensitive)
 #lwapp.swap_fc: FALSE
+
+# Whether to validate the LWL4 crc when crc bit is not set
+# TRUE or FALSE (case-insensitive)
+#lwl4.check_crc: TRUE
 
 # Set the UDP port for lwres daemon(if other than the default of 921)
 # A decimal number
@@ -2794,6 +2823,10 @@ console.log.level: 64
 # A decimal number
 #mausb.tcp.port: 0
 
+# Set the port for Media Agnostic Packets
+# A decimal number
+#mausb.udp.port: 0
+
 # Try to identify MBIM data packets on "usb.bulk" using heuristic
 # TRUE or FALSE (case-insensitive)
 #mbim.bulk_heuristic: TRUE
@@ -2802,9 +2835,18 @@ console.log.level: 64
 # TRUE or FALSE (case-insensitive)
 #mbim.control_decode_unknown_itf: FALSE
 
+# Format used for SMS PDU decoding
+# One of: Automatic, 3GPP, 3GPP2
+# (case-insensitive).
+#mbim.sms_pdu_format: Automatic
+
+# Set the UDP port for the MCPE Server
+# A decimal number
+#mcpe.udp.port: 19132
+
 # A frame is considered for decoding as MDSHDR if either ethertype is 0xFCFC or zero. Turn this flag off if you don't want ethertype zero to be decoded as MDSHDR. This might be useful to avoid problems with test frames.
 # TRUE or FALSE (case-insensitive)
-#mdshdr.decode_if_etype_zero: TRUE
+#mdshdr.decode_if_etype_zero: FALSE
 
 # Set the SCTP port for MEGACO text messages
 # A decimal number
@@ -2953,11 +2995,6 @@ console.log.level: 64
 # Whether the section dissector should verify the CRC
 # TRUE or FALSE (case-insensitive)
 #mpeg_sect.verify_crc: FALSE
-
-# Default decoder for MPLS payload
-# One of: SAToP (no RTP support), CESoPSN basic NxDS0 mode (no RTP support), Ethernet MPLS PW (CW is heuristically detected), Frame relay DLCI MPLS PW, HDLC MPLS PW (no CW), FR Port mode, HDLC MPLS PW (no CW), HDLC mode, PPP payload, Ethernet MPLS PW (with CW), Ethernet MPLS PW (no CW, early implementations), Generic MPLS PW (with Generic/Preferred MPLS CW), Internal TDM, MPLS PW ATM N-to-One encapsulation, with CW, MPLS PW ATM N-to-One encapsulation, no CW, MPLS PW ATM One-to-One or AAL5 PDU encapsulation, MPLS PW ATM AAL5 CPCS-SDU mode encapsulation
-# (case-insensitive).
-#mpls.mplspref.payload: Ethernet MPLS PW (CW is heuristically detected)
 
 # Lowest label is used to segregate flows inside a pseudowire
 # TRUE or FALSE (case-insensitive)
@@ -3269,7 +3306,7 @@ console.log.level: 64
 #nfs.display_major_nfsv4_ops: TRUE
 
 # Decode all NFS file handles as if they are of this type
-# One of: Unknown, SVR4, KNFSD_LE, NFSD_LE, KNFSD_NEW, ONTAP_V3, ONTAP_V4, ONTAP_GX_V3, CELERRA_VNX, GLUSTER
+# One of: Unknown, SVR4, KNFSD_LE, NFSD_LE, KNFSD_NEW, ONTAP_V3, ONTAP_V4, ONTAP_GX_V3, CELERRA_VNX, GLUSTER, dCache
 # (case-insensitive).
 #nfs.default_fhandle_type: Unknown
 
@@ -3293,11 +3330,11 @@ console.log.level: 64
 # TRUE or FALSE (case-insensitive)
 #olsr.nrlolsr: TRUE
 
-# The TCP ports for the OPC UA TCP Binary Protocol
+# The TCP ports for the OPC UA TCP Binary Protocol (comma separated list)
 # A string denoting an positive integer range (e.g., "1-20,30-40")
 #opcua.tcp_ports: 4840
 
-#  OpenFlow TCP port (6653 is the IANA assigned port)
+# OpenFlow TCP port (6653 is the IANA assigned port)
 # A decimal number
 #openflow.tcp.port: 6653
 
@@ -3316,10 +3353,6 @@ console.log.level: 64
 # Automatically assign a detected SCM UDID (by reading SNMT->SNTM_assign_UDID_SCM) and set it for the file
 # TRUE or FALSE (case-insensitive)
 #opensafety.scm_udid_autoset: TRUE
-
-# Enable the calculation for the second CRC
-# TRUE or FALSE (case-insensitive)
-#opensafety.calculate_crc2: FALSE
 
 # Port used by any UDP demo implementation to transport data
 # A decimal number
@@ -3413,6 +3446,10 @@ console.log.level: 64
 # TRUE or FALSE (case-insensitive)
 #opsi.desegment_opsi_messages: TRUE
 
+#  OptoMMP TCP port if other than the default
+# A decimal number
+#optommp.tcp.port: 0
+
 # Set the TCP port for OSC
 # A decimal number
 #osc.tcp.port: 0
@@ -3504,7 +3541,7 @@ console.log.level: 64
 
 # The UDP port on which Packet Cable Lawful Intercept packets will be sent
 # A decimal number
-#pcli.udp_port: 9000
+#pcli.udp_port: 0
 
 # PDC Port if other then the default
 # A decimal number
@@ -3536,6 +3573,16 @@ console.log.level: 64
 # (case-insensitive).
 #pdcp-lte.layer_to_show: RLC Info
 
+# If RRC Security Info not seen, e.g. in Handover
+# One of: EEA0 (NULL), EEA1 (SNOW3G), EEA2 (AES), EEA3 (ZUC)
+# (case-insensitive).
+#pdcp-lte.default_ciphering_algorithm: EEA0 (NULL)
+
+# If RRC Security Info not seen, e.g. in Handover
+# One of: EIA0 (NULL), EIA1 (SNOW3G), EIA2 (AES), EIA3 (ZUC)
+# (case-insensitive).
+#pdcp-lte.default_integrity_algorithm: EIA0 (NULL)
+
 # N.B. only possible if build with algorithm support, and have key available and configured
 # TRUE or FALSE (case-insensitive)
 #pdcp-lte.decipher_signalling: TRUE
@@ -3546,7 +3593,7 @@ console.log.level: 64
 
 # N.B. only possible if build with algorithm support, and have key available and configured
 # TRUE or FALSE (case-insensitive)
-#pdcp-lte.verify_integrity: FALSE
+#pdcp-lte.verify_integrity: TRUE
 
 # Whether the dissector should put the internal PER data in the tree or if it should hide it
 # TRUE or FALSE (case-insensitive)
@@ -3635,6 +3682,11 @@ console.log.level: 64
 # TRUE or FALSE (case-insensitive)
 #prp.enable: FALSE
 
+# Properly translates vendor specific opcodes
+# One of: Unknown vendor, Eastman Kodak, Canon, Nikon, Casio EX-F1, Microsoft / MTP, Olympus E series
+# (case-insensitive).
+#ptpip.vendor: Unknown vendor
+
 # Set the UDP port for pulse
 # A decimal number
 #pulse.udp.port: 539
@@ -3650,6 +3702,10 @@ console.log.level: 64
 # Reassemble segmented Q.931 messages (Q.931 - Annex H)
 # TRUE or FALSE (case-insensitive)
 #q931.reassembly: TRUE
+
+# Decode ISO/IEC cause coding standard as ITU-T
+# TRUE or FALSE (case-insensitive)
+#q931.iso_iec_cause_coding: FALSE
 
 # Type of Facility encoding
 # One of: Dissect facility as QSIG, Dissect facility as ETSI
@@ -3735,6 +3791,14 @@ console.log.level: 64
 # topology plugin defined in the overlay
 # A string
 #reload.topology_plugin: CHORD-RELOAD
+
+#  riemann UDP port if other than the default
+# A decimal number
+#riemann.udp.port: 0
+
+#  riemann TCP port if other than the default
+# A decimal number
+#riemann.tcp.port: 0
 
 # Display the third and forth bytes of the RIPv2 header as the Routing Domain field (introduced in RFC 1388 [January 1993] and obsolete as of RFC 1723 [November 1994])
 # TRUE or FALSE (case-insensitive)
@@ -3881,11 +3945,6 @@ console.log.level: 64
 # TRUE or FALSE (case-insensitive)
 #rsync.desegment: TRUE
 
-# Payload Protocol Type
-# One of: NONE      , SEL FM    , DNP3      , MODBUS RTU, SYNPHASOR , L&G 8979  
-# (case-insensitive).
-#rtacser.rtacserial_payload_proto: NONE      
-
 # RTCDC SCTP PPID if other than the default
 # A decimal number
 #rtcdc.sctp.ppi: 50
@@ -4031,7 +4090,7 @@ console.log.level: 64
 # TRUE or FALSE (case-insensitive)
 #sccp.show_more_info: FALSE
 
-# Set the source and destination addresses to the GT digits (if RI=GT).  This may affect TCAP's ability to recognize which messages belong to which TCAP session.
+# Set the source and destination addresses to the GT digits (if present).  This may affect TCAP's ability to recognize which messages belong to which TCAP session.
 # TRUE or FALSE (case-insensitive)
 #sccp.set_addresses: FALSE
 
@@ -4100,7 +4159,7 @@ console.log.level: 64
 # TRUE or FALSE (case-insensitive)
 #selfm.desegment: TRUE
 
-# Whether the SEL Protocol dissector should automatically pre-process Telnet data to remove IAC bytes
+# Whether the SEL Protocol dissector should automatically pre-process Telnet data to remove duplicate 0xFF IAC bytes
 # TRUE or FALSE (case-insensitive)
 #selfm.telnetclean: TRUE
 
@@ -4108,9 +4167,13 @@ console.log.level: 64
 # A decimal number
 #selfm.tcp.port: 0
 
-# Perform CRC16 validation on Fast SER Messages
+# Perform CRC16 validation on Fast Messages
 # TRUE or FALSE (case-insensitive)
 #selfm.crc_verification: FALSE
+
+# List of word bits contained in SER equations (Comma-separated, no Quotes or Checksums)
+# A string
+#selfm.ser_list: 
 
 # Whether the session dissector should reassemble messages spanning multiple SES segments
 # TRUE or FALSE (case-insensitive)
@@ -4350,11 +4413,6 @@ console.log.level: 64
 # TRUE or FALSE (case-insensitive)
 #ssh.desegment_buffers: TRUE
 
-# Redirect SSL debug to file name; leave empty to disable debugging, or use "-" to redirect output to stderr
-# 
-# A path to a file
-#ssl.debug_file: 
-
 # Whether the SSL dissector should reassemble SSL records spanning multiple TCP segments. To use this option, you must also enable "Allow subdissectors to reassemble TCP streams" in the TCP protocol settings.
 # TRUE or FALSE (case-insensitive)
 #ssl.desegment_ssl_records: TRUE
@@ -4366,28 +4424,6 @@ console.log.level: 64
 # For troubleshooting ignore the mac check result and decrypt also if the Message Authentication Code (MAC) fails.
 # TRUE or FALSE (case-insensitive)
 #ssl.ignore_ssl_mac_failed: FALSE
-
-# Pre-Shared-Key as HEX string, should be 0 to 16 bytes
-# A string
-#ssl.psk: 
-
-# The filename of a file which contains a list of 
-# (pre-)master secrets in one of the following formats:
-# 
-# RSA <EPMS> <PMS>
-# RSA Session-ID:<SSLID> Master-Key:<MS>
-# CLIENT_RANDOM <CRAND> <MS>
-# 
-# Where:
-# <EPMS> = First 8 bytes of the Encrypted PMS
-# <PMS> = The Pre-Master-Secret (PMS)
-# <SSLID> = The SSL Session ID
-# <MS> = The Master-Secret (MS)
-# <CRAND> = The Client's random number from the ClientHello message
-# 
-# (All fields are in hex notation)
-# A path to a file
-#ssl.keylog_file: 
 
 # Whether the STANAG 5066 DTS Layer dissector should reassemble DPDUs spanning multiple TCP segments
 # TRUE or FALSE (case-insensitive)
@@ -4416,6 +4452,14 @@ console.log.level: 64
 # Whether the BPDU dissector should use 802.1t System ID Extensions when dissecting the Bridge Identifier
 # TRUE or FALSE (case-insensitive)
 #stp.use_system_id_extension: TRUE
+
+# Reassembles greater than MTU sized STT packets broken into segments on transmit
+# TRUE or FALSE (case-insensitive)
+#stt.reassemble: TRUE
+
+# Whether to validate the STT checksum or not.
+# TRUE or FALSE (case-insensitive)
+#stt.check_checksum: FALSE
 
 # Version used by Wireshark
 # One of: Internet Draft version 08, RFC 3868
@@ -4538,7 +4582,7 @@ console.log.level: 64
 
 # Do not call any subdissectors for Retransmitted or OutOfOrder segments
 # TRUE or FALSE (case-insensitive)
-#tcp.no_subdissector_on_error: FALSE
+#tcp.no_subdissector_on_error: TRUE
 
 # Assume TCP Experimental Options (253, 254) have a Magic Number and use it for dissection
 # TRUE or FALSE (case-insensitive)
@@ -4632,7 +4676,7 @@ console.log.level: 64
 # TRUE or FALSE (case-insensitive)
 #tpkt.desegment: TRUE
 
-# Whether to load the Data base or not, not loading the DB dissaables the protocol, Wireshar has to be restarted for thesetting to take effect 
+# Whether to load the Database or not; not loading the DB disables the protocol; Wireshark has to be restarted for the setting to take effect.
 # TRUE or FALSE (case-insensitive)
 #tpncp.load_db: FALSE
 
@@ -4927,19 +4971,19 @@ console.log.level: 64
 # (case-insensitive).
 #zbee_nwk.seclevel: AES-128 Encryption, 32-bit Integrity Protection
 
+# Set the TCP port for ZVT messages (port 20007 according to the spec)
+# A decimal number
+#zvt.tcp.port: 0
+
 ####### Statistics ########
 
 # Determines time between tap updates
 # A decimal number
-#statistics.update_interval: 3000
-
-# Determines maximum height of RTP Player window
-# A decimal number
-#statistics.rtp_player_max_visible: 4
+statistics.update_interval: 3000
 
 # If enabled burst rates will be calcuted for statistics that use the stats_tree system. Burst rates are calculated over a much shorter time interval than the rate column.
 # TRUE or FALSE (case-insensitive)
-#statistics.st_enable_burstinfo: TRUE
+statistics.st_enable_burstinfo: TRUE
 
 # If selected the stats_tree statistics nodes will show the count of events within the burst window instead of a burst rate. Burst rate is calculated as number of events within burst window divided by the burst windown length.
 # TRUE or FALSE (case-insensitive)
@@ -4947,32 +4991,32 @@ console.log.level: 64
 
 # Sets the duration of the time interval into which events are grouped when calculating the burst rate. Higher resolution (smaller number) increases processing overhead.
 # A decimal number
-#statistics.st_burst_resolution: 5
+statistics.st_burst_resolution: 5
 
 # Sets the duration of the sliding window during which the burst rate is measured. Longer window relative to burst rate resolution increases processing overhead. Will be truncated to a multiple of burst resolution.
 # A decimal number
-#statistics.st_burst_windowlen: 100
+statistics.st_burst_windowlen: 100
 
 # Sets the default column by which stats based on the stats_tree system is sorted.
 # One of: Node name (topic/item), Item count, Average value of the node, Minimum value of the node, Maximum value of the node, Burst rate of the node
 # (case-insensitive).
-#statistics.st_sort_defcolflag: Item count
+statistics.st_sort_defcolflag: Item count
 
 # When selected, statistics based on the stats_tree system will by default be sorted in descending order.
 # TRUE or FALSE (case-insensitive)
-#statistics.st_sort_defdescending: TRUE
+statistics.st_sort_defdescending: TRUE
 
 # When selected, the item/node names of statistics based on the stats_tree system will be sorted taking case into account. Else the case of the name will be ignored.
 # TRUE or FALSE (case-insensitive)
-#statistics.st_sort_casesensitve: TRUE
+statistics.st_sort_casesensitve: TRUE
 
 # When selected, the stats_tree nodes representing a range of values (0-49, 50-100, etc.) will always be sorted by name (the range of the node). Else range nodes are sorted by the same column as the rest of  the tree.
 # TRUE or FALSE (case-insensitive)
-#statistics.st_sort_rng_nameonly: TRUE
+statistics.st_sort_rng_nameonly: TRUE
 
 # When selected, the stats_tree nodes representing a range of values (0-49, 50-100, etc.) will always be sorted ascending; else it follows the sort direction of the tree. Only effective if "Always sort 'range' nodes by name" is also selected.
 # TRUE or FALSE (case-insensitive)
-#statistics.st_sort_rng_fixorder: TRUE
+statistics.st_sort_rng_fixorder: TRUE
 
 # When selected, the full name (including menu path) of the stats_tree plug-in is show in windows. If cleared the plug-in name is shown without menu path (only the part of the name after last '/' character.)
 # TRUE or FALSE (case-insensitive)
