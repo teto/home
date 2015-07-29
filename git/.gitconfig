@@ -26,7 +26,7 @@
 	tool = vimdiff
 	conflictstyle = diff3
 [diff]
-    tool = vimdiff
+	tool = nvim -d
 [difftool]
     prompt = false
 
@@ -43,4 +43,5 @@ lg1 = log --graph --abbrev-commit --decorate --date=relative --format=format:'%C
 lg2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
 lg = !"git lg1"
 [mergetool]
-	prompt = true
+	prompt = false
+	path = nvim

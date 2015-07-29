@@ -1,7 +1,7 @@
 set nocompatible
 
 if has('nvim')
-	runtime! python_setup.vim
+	"runtime! python_setup.vim
  " when launching term
 	tnoremap <Esc> <C-\><C-n>
 endif

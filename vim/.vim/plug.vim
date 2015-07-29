@@ -24,6 +24,7 @@ Plug 'mhinz/vim-startify'
 
 Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-vinegar'
+Plug 'tpope/vim-fugitive'
 Plug 'junegunn/vim-github-dashboard'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'mattn/ctrlp-mark'

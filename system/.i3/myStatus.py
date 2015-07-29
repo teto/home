@@ -1,20 +1,20 @@
 # -*- coding: utf-8 -*-
 
-                import logging
-                from i3pystatus.mail import notmuchmail
+import logging
+from i3pystatus.mail import notmuchmail
 #import keyring.backends.netrc as backend
-                from i3pystatus import Status
-                from i3pystatus.updates import aptget
+from i3pystatus import Status
+from i3pystatus.updates import aptget
 
 # from i3pystatus.core.netrc_backend import NetrcBackend
 
-                status = Status(standalone=True)
+status = Status(standalone=True)
 
 # Displays clock like this:
 # Tue 30 Jul 11:59:46 PM KW31
 #                          ^-- calendar week
-                clock = status.register(
-                    "clock",
+clock = status.register(
+    "clock",
     format=[
         # ("%a %-d Format 1",'Europe/Dublin'),
         # "%a %-d %b %X ",
