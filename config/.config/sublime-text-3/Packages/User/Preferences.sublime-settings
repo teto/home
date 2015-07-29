@@ -14,10 +14,11 @@
 	[
 		"Python PEP8 Autoformat",
 		"Makefile",
+		"GitGutter",
+		"Vintage",
 		"AutoPEP8",
 		"Anaconda",
-		"Vintage",
-		"GitGutter"
+		"GitGutter",
 	],
 	"line_numbers": true
 }

@@ -14,15 +14,12 @@ urxvtd -q -o -f&
 # Enable zapping (C-A-<Bksp> kills X)
 setxkbmap -option terminate:ctrl_alt_bksp
 
-
-feh --bg-scale Images/abstrait2.jpg&
-
 # alsamixer in systray
-"$HOME/.i3/build_config"
+"$HOME/.i3/build_config.sh"
 
 # Set background color
-xsetroot -solid "#333333"
 
+xsetroot -solid "#333333"
 # Enable core dumps in case something goes wrong
 ulimit -c unlimited
 

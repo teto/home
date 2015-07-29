@@ -5,6 +5,22 @@ nmap <silent> <C-Left> :wincmd h<CR>
 nmap <silent> <C-Right> :wincmd l<CR>
 
 
+nmap <silent> <M-Up> :wincmd k<CR>
+nmap <silent> <M-Down> :wincmd j<CR>
+nmap <silent> <M-Left> :wincmd h<CR>
+nmap <silent> <M-Right> :wincmd l<CR>
+
+
+" For comparison
+"nnoremap p :echom "p"<cr>
+"nnoremap <S-p> :echom "S-p"<cr>
+"nnoremap <C-p> :echom "C-p"<cr>
+"nnoremap <C-S-p> :echom "C-S-p"<cr>
+"nnoremap <M-p> :echom "M-p"<cr>
+"nnoremap <M-S-p> :echom "M-S-p"<cr>
+"nnoremap <C-M-p> :echom "C-M-p"<cr>
+"nnoremap <C-M-S-p> :echom "C-M-S-p"<cr>
+
 
 " nmap = *normal mode* mapping
 nmap <silent> ^[OC :wincmd l<CR>

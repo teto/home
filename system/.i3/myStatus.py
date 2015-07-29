@@ -1,28 +1,29 @@
 # -*- coding: utf-8 -*-
 
-import logging
-from i3pystatus.mail import notmuchmail
+                import logging
+                from i3pystatus.mail import notmuchmail
 #import keyring.backends.netrc as backend
-from i3pystatus import Status
-from i3pystatus.updates import aptget
+                from i3pystatus import Status
+                from i3pystatus.updates import aptget
 
 # from i3pystatus.core.netrc_backend import NetrcBackend
 
-status = Status(standalone=True)
+                status = Status(standalone=True)
 
 # Displays clock like this:
 # Tue 30 Jul 11:59:46 PM KW31
 #                          ^-- calendar week
-clock = status.register(
-    "clock",
+                clock = status.register(
+                    "clock",
     format=[
         # ("%a %-d Format 1",'Europe/Dublin'),
         # "%a %-d %b %X ",
         ("%a %-d %b %X", 'Europe/Paris'),
         ("Format 0", 'Europe/London'),
     ],
-    on_leftclick=["urxvtc"],
-    interval=10,
+    on_leftclick=["/usr/bin/urxvtc",'-e', 'ikhal'],
+    on_rightclick=["/usr/bin/urxvtc",'-e', 'cal'],
+    # interval=10,
     # on_clicks={
     #     'left': ["urxvtc"],
     #     'upscroll': ["next_format", 1],
@@ -114,42 +115,50 @@ status.register(
         "play": "▶",
         "stop": "◾",
     },
+    on_rightclick=['urxvtc', '-e', 'ncmpcpp']
+
 )
 
 #print("mdp on_lclick", mpd);
 
-alsa = status.register("alsa",)
-alsa = status.register("alsa",mixer="Headphone", format="Headset")
+alsa = status.register("alsa", mixer="Headphone", format="Headset")
 dpms = status.register("dpms", )
+
+alsa = status.register("alsa",
+        on_leftclick=['urxvtc', '-e', 'alsamixer']
+        )
+
 status.register("updates",
                 format = "Updates: {count}",
                 format_no_updates = "No updates",
-                on_leftclick="urxvtc -e 'sudo apt upgrade'",
+                on_leftclick=["urxvtc", '-e', 'zsh' , '-c' , 'sudo apt upgrade; zsh'],
                 backends = [aptget.AptGet() ])
 
 # print("alsa")
-#res = status.register(
-    #"mail",
-    #backends=[
-        #notmuchmail.Notmuch(account="lip6", query="tag:inbox and tag:unread"),
-        #notmuchmail.Notmuch(account="gmail", query="tag:inbox and tag:unread"),
-    #],
-    #hide_if_null=False,
-    #interval=1,
-    ## on_clicks={'left', "urxvtc -e mutt"},
-    #log_level=logging.DEBUG
-#)
+res = status.register(
+    "mail",
+    backends=[
+        # notmuchmail.Notmuch(account="lip6", query="tag:inbox and tag:unread"),
+        notmuchmail.Notmuch(account="gmail", query="tag:inbox and tag:unread"),
+    ],
+    hide_if_null=False,
+    interval=60,
+    # on_clicks={'left', "urxvtc -e mutt"},
+    on_leftclick=['/usr/bin/urxvtc', '-e', 'mutt'],
+    log_level=logging.DEBUG
+)
 
-#res = status.register("github",
-        #username="teto",
-        #interval=5,
-        ##password="placeholder",
-        #format="hello world: {unread} {unread_count}",
-        ## keyring_backend="netrc",
-        ## keyring_backend=keyring.backend.netrc,
-        #keyring_backend=backend.NetrcBackend,
-        #log_level=logging.DEBUG,
-        #)
+res = status.register("github",
+        username="teto",
+        interval=300,
+        #password="placeholder",
+        format="Github {unread} {unread_count}",
+        # keyring_backend="netrc",
+        # keyring_backend=keyring.backend.netrc,
+        # keyring_backend=backend.netrcbackend,
+        log_level=logging.DEBUG,
+        )
 #print("Result:", res)
 # res.on_leftclick()
 status.run()
+
