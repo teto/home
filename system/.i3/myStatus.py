@@ -119,12 +119,12 @@ status.register(
 #print("mdp on_lclick", mpd);
 
 alsa = status.register("alsa",)
-alsa = status.register("dpms",)
-
+alsa = status.register("alsa",mixer="Headphone", format="Headset")
+dpms = status.register("dpms", )
 status.register("updates",
                 format = "Updates: {count}",
                 format_no_updates = "No updates",
-                on_leftclick=["urxvtc -e 'sudo apt upgrade'"],
+                on_leftclick="urxvtc -e 'sudo apt upgrade'",
                 backends = [aptget.AptGet() ])
 
 # print("alsa")
