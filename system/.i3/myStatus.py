@@ -115,7 +115,7 @@ status.register(
         "play": "▶",
         "stop": "◾",
     },
-    on_leftclick=['urxvtc', '-e', 'ncmpcpp']
+    on_rightclick=['urxvtc', '-e', 'ncmpcpp']
 
 )
 
@@ -148,7 +148,7 @@ res = status.register(
 
 res = status.register("github",
         username="teto",
-        interval=5,
+        interval=300,
         #password="placeholder",
         format="Github {unread} {unread_count}",
         # keyring_backend="netrc",

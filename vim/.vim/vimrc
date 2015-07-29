@@ -1,15 +1,21 @@
 " To debug mappings, type :verbose map <mapping>
 
 " marker starts with " <section name> {{{ and finishes with  }}}
-set foldmethod=marker
+"set foldmethod=marker
+"
+" vim specific codes
+if !has('nvim')
+    set nocompatible               " be iMproved
+    " terminal codes are ignored by neovim
+    " https://github.com/neovim/neovim/issues/2330
+    set t_Co=256                        " use 256 colors
+endif
 
-set nocompatible               " be iMproved
 set splitbelow	" on horizontal splits
 set splitright   " on vertical split
 set autoread " automatically reload file when it has been changed
 set linebreak " better display
 filetype on                   " required!
-set t_Co=256			" use 256 colors
 set backspace=indent,eol,start
 
 set smarttab "use shiftwidth
@@ -179,6 +185,9 @@ nmap <leader>ml :Modeliner<Enter>
 
 " X clipboard gets aliased to +
 set clipboard=unnamedplus
+" copy to external clipboard
+noremap gp "+p 
+noremap gy "+y 
 
 " Tab shortcuts
 "let tableader = "t" 

@@ -25,7 +25,6 @@ alias enfr="dict -d fd-eng-fra"
 ### Git
 ##############################
 alias ga='git add'
-alias gaa='git add --all'
 alias gp='git push'
 alias gl='git log'
 alias gst="git status"
@@ -64,11 +63,11 @@ alias lla="ls -la"
 alias llt="ls -lt"
 
 ### oftenly used programs
-alias v="vim"
-alias nv="nvim"
+alias v="nvim"
+#alias n="nvim"
 alias m="mutt"
 alias r="ranger"
-alias l="less" 
+alias l="view" 
 alias z="zathura" 
 
 # Movement aliases

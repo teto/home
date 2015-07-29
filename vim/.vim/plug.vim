@@ -31,7 +31,6 @@ Plug 'mattn/ctrlp-register'
 Plug 'Solarized'
 Plug 'scrooloose/nerdcommenter'
 " Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-Plug 'sickill/vim-monokai'
 "Plug 'surround.vim'
 Plug 'tpope/vim-markdown'
 "Plug 'elzr/vim-json', { 'for': 'json' }
@@ -48,6 +47,12 @@ Plug 'vimwiki/vimwiki'
 Plug 'kshenoy/vim-signature'
 "Plug 'vim-scripts/DynamicSigns'
 Plug 'vasconcelloslf/vim-interestingwords'
+
+" Schemes
+Plug 'whatyouhide/vim-gotham'
+Plug 'sickill/vim-monokai'
+Plug 'mhinz/vim-janah'
+
 
 " Had to disable this one, needs a vim with lua compiled
 " and it's not possible in neovim yet

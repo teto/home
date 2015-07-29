@@ -2,9 +2,14 @@ set nocompatible
 
 if has('nvim')
 	runtime! python_setup.vim
+ " when launching term
+	tnoremap <Esc> <C-\><C-n>
 endif
 
 source ~/.vim/vimrc
 
 
 let g:netrw_home=$XDG_CACHE_HOME.'/nvim'
+
+"let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
