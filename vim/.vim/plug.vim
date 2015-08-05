@@ -29,13 +29,15 @@ Plug 'junegunn/vim-github-dashboard'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'mattn/ctrlp-mark'
 Plug 'mattn/ctrlp-register'
+
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
 Plug 'Solarized'
 Plug 'scrooloose/nerdcommenter'
 " Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 "Plug 'surround.vim'
 Plug 'tpope/vim-markdown'
 "Plug 'elzr/vim-json', { 'for': 'json' }
-Plug 'numkil/ag.vim'
+"Plug 'numkil/ag.vim'
 Plug 'gundo'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'dhruvasagar/vim-table-mode/'
@@ -48,6 +50,7 @@ Plug 'vimwiki/vimwiki'
 Plug 'kshenoy/vim-signature'
 "Plug 'vim-scripts/DynamicSigns'
 Plug 'vasconcelloslf/vim-interestingwords'
+Plug 'mhinz/vim-grepper'
 
 " Schemes
 Plug 'whatyouhide/vim-gotham'
