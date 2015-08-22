@@ -27,7 +27,9 @@ URxvt.keysym.Mod4-j:\033j
 URxvt.keysym.Mod4-k:\033k
 URxvt.keysym.Mod4-h:\033h
 URxvt.keysym.Mod4-l:\033l
-
+URxvt.keysym.C-C: perl:clipboard:copy
+URxvt.keysym.C-V: perl:clipboard:paste
+URxvt.keysym.C-A-V: perl:clipboard:paste_escaped
 
 !URxvt.keysym.S-Page_Up       : captured by terminal for scrolling
 !URxvt.keysym.S-Page_Down     : captured by terminal for scrolling
@@ -222,7 +224,7 @@ URxvt*buffered: True
 ! URxvt*pastableTabs: boolean
 
 ! True: blink the cursor. False: do not blink the cursor [default]; option -bc.
-! URxvt*cursorBlink: boolean
+URxvt*cursorBlink: true
 
 ! True: Make the cursor underlined. False: Make the cursor a box [default]; option -uc.
 ! URxvt*cursorUnderline: boolean
@@ -290,7 +292,8 @@ URxvt*buffered: True
 ! Compile frills: Associate string with keysym sym. The intervening resource name keysym. cannot be
 ! URxvt*keysym.sym: string
 
-! URxvt*perl-ext-common: string
+! To enable clipboard integration
+URxvt*perl-ext-common: clipboard
 
 ! Comma-separated list(s) of perl extension scripts (default: "default") to use in this terminal instance;
 ! URxvt*perl-ext: string
@@ -320,7 +323,8 @@ URxvt*buffered: True
 ! URxvt*override-redirect: boolean
 
 ! Turn on/off ISO 14755 (default enabled).
-! URxvt*iso14755: boolean
+! prevents C-S-V from working so i disabled it 
+URxvt*iso14755: false
 
 ! Turn on/off ISO 14755 5.2 mode (default enabled).
 ! URxvt*iso14755_52: boolean
