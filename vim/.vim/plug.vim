@@ -29,7 +29,7 @@ Plug 'junegunn/vim-github-dashboard'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'mattn/ctrlp-mark'
 Plug 'mattn/ctrlp-register'
-
+Plug 'unblevable/quick-scope'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
 Plug 'Solarized'
 Plug 'scrooloose/nerdcommenter'
@@ -51,7 +51,7 @@ Plug 'kshenoy/vim-signature'
 "Plug 'vim-scripts/DynamicSigns'
 Plug 'vasconcelloslf/vim-interestingwords'
 Plug 'mhinz/vim-grepper'
-
+Plug 'benekastah/neomake'
 " Schemes
 Plug 'whatyouhide/vim-gotham'
 Plug 'sickill/vim-monokai'
