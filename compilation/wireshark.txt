@@ -1,0 +1,52 @@
+=== build with cmake (advised)==
+Some example here;
+https://git.lekensteyn.nl/peter/wireshark-notes/tree/sync-build.sh#n94
+        -DCMAKE_INSTALL_PREFIX=/tmp/wsroot \
+    CC=$CC CXX=$CXX \
+    PKG_CONFIG_LIBDIR=$LIBDIR/pkgconfig \
+        $remotesrcdir \
+
+CXX="-Wno-unused-but-set-variable"
+
+    cmake \
+        -G"Unix Makefiles" \
+        -DENABLE_GTK3=0 \
+        -DENABLE_PORTAUDIO=0 \
+        -DENABLE_QT5=1 \
+        -DENABLE_GEOIP=0 \
+        -DENABLE_KERBEROS=1 \
+        -DENABLE_SBC=0 \
+        -DENABLE_SMI=0 \
+        -DENABLE_GNUTLS=1 \
+        -DENABLE_GCRYPT=1 \
+        -DCMAKE_BUILD_TYPE=Debug \
+        -DDISABLE_WERROR=1 \
+        -DENABLE_EXTRA_COMPILER_WARNINGS=0 \
+        .. \
+        -DCMAKE_C_FLAGS=$(printf %q "$CFLAGS") \
+        -DCMAKE_CXX_FLAGS=$(printf %q "$CXXFLAGS") \
+        -DCMAKE_EXPORT_COMPILE_COMMANDS=1
+        
+        -DCMAKE_LIBRARY_PATH=$LIBDIR \
+
+==== Build  (old methold won't worek) ===
+To Speed up compilation I've created 2 subfolders "debug" and "release"
+
+To sum up the build process looks like that:
+./autogen.sh && cd debug && ../configure .... && make -j4
+
+
+In release subfolder, I typically run this configuration
+CFLAGS="-Wno-unused-but-set-variable" CXXFLAGS=$CFLAGS ../configure --enable-setcap-install --without-gtk3 --with-qt  --disable-warnings-as-errors --disable-warnings-as-errors --enable-mergecap=no --enable-airpcap=no --enable-rawshark=no --enable-editcap=no --with-pcap-remote=no
+
+In debug subfolder, I typically run this configuration:
+CFLAGS="-Wno-unused-but-set-variable -g3 -O0" CXXFLAGS=$CFLAGS ../configure --enable-setcap-install --without-gtk3 --with-qt --disable-warnings-as-errors --enable-mergecap=no --enable-airpcap=no --enable-rawshark=no --enable-editcap=no --with-pcap-remote=no
+
+
+When compiling, do make -C epan/dissectors if you don't want to compile everything
+To deal with memory-related issues, it will help much if you compile with CFLAGS='-fsanitize=address -g3 -O1' CXXFLAGS=$CFLAGS LDFLAGS=-fsanitize=address
+
+
+=== To debug wireshark ====
+libtool --mode=execute gdb wireshark
+
