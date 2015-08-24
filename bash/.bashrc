@@ -104,3 +104,5 @@ fi
 
 
 source /usr/share/autojump/autojump.sh
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
