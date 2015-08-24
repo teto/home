@@ -171,12 +171,12 @@ bindsym $mod+w exec python ~/.i3/runorfocus.py "Firefox" firefox
 
 
 
-
+# MATT important !!
 # change focus
-bindsym $mod+h focus left
-bindsym $mod+j focus down
-bindsym $mod+k focus up
-bindsym $mod+l focus right
+bindsym $mod+h exec ~/.i3/i3nvim.py left
+bindsym $mod+j exec ~/.i3/i3nvim.py down
+bindsym $mod+k exec ~/.i3/i3nvim.py up
+bindsym $mod+l exec ~/.i3/i3nvim.py right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left

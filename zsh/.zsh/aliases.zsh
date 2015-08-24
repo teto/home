@@ -1,15 +1,15 @@
 # ZSH specific
 # Suffix aliases execute a command based on a file’s extension. Suffix aliases are used with the alias -s command.  Here’s my favorite feature of aliases in zsh.  By adding this line:
 # g => global , does not depend on position on line
-alias -s html=vim
-alias -s json=vim
+alias -s html=nvim
+alias -s json=nvim
 alias -s Vagrantfile=vim
 alias -s rb=ruby
 alias -s py=python3
-alias -s png=eog
-alias -s jpg=eog
-alias -s gif=eog
-alias -s avi=mplayer
+alias -s png=xdg-open
+alias -s jpg=xdg-open
+alias -s gif=xdg-open
+alias -s avi=mpv
 alias -s mp3=mocp
 
 
@@ -68,6 +68,7 @@ alias v="nvim"
 alias m="mutt"
 alias r="ranger"
 alias l="view" 
+alias s="sxiv" 
 alias z="zathura" 
 
 # Movement aliases

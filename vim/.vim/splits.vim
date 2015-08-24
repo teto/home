@@ -28,8 +28,7 @@ nmap <silent> ^[OC :wincmd h<CR>
 nmap <silent> OC :wincmd l<CR>
 nmap <silent> OD :wincmd h<CR>
 
-" window
-nmap <leader>sw<left>  :topleft  vnew<CR>
+" window nmap <leader>sw<left>  :topleft  vnew<CR>
 nmap <leader>sw<right> :botright vnew<CR>
 nmap <leader>sw<up>    :topleft  new<CR>
 nmap <leader>sw<down>  :botright new<CR>
@@ -44,4 +43,12 @@ nnoremap <silent> - :exe "resize -3"
 
 "set winheight=30
 "set winminheight=5
+
+function! WinCmdWithRes(toto)
+	let l:res = bufnr('%')
+	"echo l:res
+	exec "wincmd ".a:toto
+	"echo bufnr('%') == res
+	let g:wincmd_result= bufnr('%') != l:res
+endfunction
 

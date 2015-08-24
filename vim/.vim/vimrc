@@ -11,6 +11,9 @@ if !has('nvim')
     set t_Co=256                        " use 256 colors
 endif
 
+
+set viminfo='100,f1
+
 set splitbelow	" on horizontal splits
 set splitright   " on vertical split
 set autoread " automatically reload file when it has been changed
@@ -240,7 +243,6 @@ nnoremap <leader>u :Gundo<CR>
 " nnoremap <C-l> :call MoveToTab(1)<CR>
 
 
-
 " map <F2> :echo 'Current time is ' . strftime('%c')<CR>
 " map! <F3> a<C-R>=strftime('%c')<CR><Esc>
 
@@ -315,4 +317,5 @@ nnoremap <Leader>ep :vs ~/.vim/plug.vim<CR>
 nnoremap <Leader>sv :source $MYVIMRC<CR> " reload vimrc
 let g:netrw_home=$XDG_CACHE_HOME.'/vim'
 
+"let g:gitgutter_enabled = false
 " vim:foldmethod=marker:foldlevel=0

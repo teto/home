@@ -1,0 +1,38 @@
+
+Look at https://www.nsnam.org/docs/dce/manual/html/getting-started.html to see how to compile with kernel stack or 
+https://plus.google.com/+HajimeTazaki/posts/1QUmR3n3vNA
+
+
+Pour pouvoir charger le noyau mptcp dans DCE, il faut se placer dans le noyau mptcp et faire un merge
+avec next-next-sim (qui est basé sur le noyuau upstream)
+# Clone net-next-sim
+git clone https://github.com/thehajime/net-next-sim.git
+cd net-next-sim
+# Select a kernel version
+git checkout sim-ns3-3.10.0-branch
+# Configure and build
+make defconfig OPT=yes ARCH=sim
+make library OPT=yes ARCH=sim
+cd ..
+
+
+
+
+# Download, configure, build and install DCE
+hg clone http://code.nsnam.org/ns-3-dce  -r dce-1.2
+./waf configure --with-ns3=$HOME/dce/build --enable-opt \
+                --enable-kernel-stack=$HOME/dce/net-next-sim/arch \
+                --prefix=$HOME/dce/build
+./waf build
+./waf install
+
+./waf configure --with-ns3
+
+
+Thus in my case:
+--enable-opt removed since it does not work well for now:
+./waf configure --with-ns3=$HOME/ns3off/install --enable-kernel-stack=$HOME/mptcpoff/arch --prefix=$HOME/dce/build
+il
+
+
+Il n'y a pas non plus de checks sur --enable-kernel-stack ?

@@ -1,0 +1,11 @@
+git clone git://git.kernel.org/pub/scm/linux/kernel/git/shemminger/iproute2.git
+
+To make it work with DCE:
+gch -b dce v2.6.38
+patch -p1 < ~/dce/utils/iproute-2.6.38-fix-01.patch
+
+Les infos sont dans bake.xml chercher 'module name="iproute"'
+
+
+En fait fallait juste patcher 
+make CCOPTS+=-fpic CCOPTS+=-D_GNU_SOURCE CCOPTS+=-O0 CCOPTS+=-U_FORTIFY_SOURCE CCOPTS+=-g LDFLAGS=-pie LDFLAGS+=-rdynamic
