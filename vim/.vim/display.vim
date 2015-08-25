@@ -1,8 +1,3 @@
-" Always display the status line, even if only one window is displayed
-set laststatus=2
-
-" highlight cursor line
-set cursorline
 
 " Display unprintable characters with '^' and
 " set nolist to disable or set list!
@@ -42,9 +37,9 @@ set list
 " " softtabstop == shiftwidth
 " Hide/display invisible characters
 let g:current_listchar = 0
+				"\"trail:·,tab:→\ ,eol:↲,precedes:<,extends:>", 
 
 	let g:listchar_formats=[ 
-				\"trail:·,tab:→\ ,eol:↲,precedes:<,extends:>", 
 				\"trail:·"
 				\]
 "				\"trail:." 
@@ -57,19 +52,19 @@ function! ToggleInvisibleChar()
 	let l:len = len(g:listchar_formats)
 	
 	"echo l:listchar_formats[g:current_listchar]
-			let g:current_listchar = g:current_listchar + 1
 	
-	if g:current_listchar == l:len 
+	if g:current_listchar >= l:len 
 	   set nolist
+		 let g:current_listchar = 0
 	   return
-   elseif g:current_listchar > l:len
-	   let g:current_listchar = 0
+   else
 	   "elseif g:current_listchar > l:len
+			let g:current_listchar = g:current_listchar + 1
 	endif
-	"echo g:current_listchar
-	"echo g:listchar_formats[g:current_listchar]
-	let &listchars=g:listchar_formats[g:current_listchar]
-	"set listchars="trail:·"
+	echo g:current_listchar
+
+	"set listchars=g:listchar_formats[g:current_listchar]
+	set listchars="trail:·"
 	set list   
 
 "what does s mean
