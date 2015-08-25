@@ -209,7 +209,6 @@ source ~/.vim/plug.vim
 source ~/.vim/cscope.vim
 source ~/.vim/splits.vim
 source ~/.vim/vim_file_chooser.vim
-source ~/.vim/jedi.vim
 source ~/.vim/plug.vim
 " }}}
 
@@ -263,7 +262,7 @@ nnoremap <Leader>ev :vs $MYVIMRC<CR>
 nnoremap <Leader>ep :vs ~/.vim/plug.vim<CR> 
 nnoremap <Leader>sv :source $MYVIMRC<CR> " reload vimrc
 
-nnoremap <Leader>e :Sex<CR> " reload vimrc
+nnoremap <Leader>e :Vex<CR> " open netrw
 nnoremap <Leader>w :w<CR>
 nnoremap <Leader>o :CtrlP<CR>
 nnoremap <leader>p :CtrlP<CR>
@@ -318,6 +317,18 @@ nnoremap <F6> :YcmDebugInfo<CR>
 nnoremap <leader>jd :YcmCompleter GoTo<CR>
 " }}}
 
-nnoremap <F3> :Neomake
+" Jedi (python) completion {{{
+let g:jedi#auto_vim_configuration = 0 " to prevent python's help popup
+" }}}
+"
+autocmd CompleteDone * pclose
+":
+" Put this in vimrc, add custom commands in the function.
+function! FocusLost_SaveFiles()
+  exe ":au FocusLost" expand("%") ":wa"
+endfunction
+
+nnoremap <F3> :Neomake<CR>
+nnoremap <F4> :call FocusLost_SaveFiles()
 let g:gitgutter_enabled = 0
 " vim:foldmethod=marker:foldlevel=0

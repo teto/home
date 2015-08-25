@@ -7,7 +7,7 @@ if has('nvim')
 	tnoremap <Esc> <C-\><C-n>
 endif
 
-
+let g:diminactive_use_syntax = 1
 let g:netrw_home=$XDG_CACHE_HOME.'/nvim'
 
 "let $NVIM_TUI_ENABLE_TRUE_COLOR=1
