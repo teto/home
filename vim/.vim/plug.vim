@@ -52,7 +52,7 @@ Plug 'vim-scripts/rfc-syntax', { 'for': 'rfc' } " optional syntax highlighting f
 "Plug 'vim-scripts/AutomaticLaTexPlugin', {'for': 'tex'}
 Plug 'tmhedberg/SimpylFold', { 'for': 'py' } " provides python folding
 Plug 'vimwiki/vimwiki'
-"Plug 'kshenoy/vim-signature'
+Plug 'kshenoy/vim-signature' " display marks in gutter, love it
 "Plug 'vim-scripts/DynamicSigns'
 Plug 'vasconcelloslf/vim-interestingwords' " highlight the words you choose
 Plug 'mhinz/vim-grepper' " async grep neovim only
