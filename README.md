@@ -4,7 +4,8 @@ home
 This folder contains my customizations for:
 * alot (MUA: Mail User Agent)
 * bash
-* git
+* font handling
+* git (Source control)
 * htop
 * i3 (i3wm.org, a great if not the best tiling window manager)
 * i3pystatus (generates a status line for i3bar)
@@ -13,20 +14,23 @@ This folder contains my customizations for:
 * mpd (configuration files to run this music server as a user)
 * msmtp (MSA: Mail Sending Agent)
 * mutt / mutt-kz (Mail User Agent, incomplete config)
+* ncmpcpp (mpd console player)
 * neovim (fork of vim)
-* netrc (template only)
+* netrc (template only, password database)
 * newbeuter (RSS reader)
 * notmuch (to tag mails)
 * offlineimap (MRA: Mail Retriever Agent)
-* powerline
+* powerline (to generate a fancy prompt)
 * procmail
 * qutebrowser (vim like browser)
 * ranger (CLI file explorer)
 * rxvt* unicode(256)
 * sup (MUA, incomplete, I use alot instead)
+* sxiv (image viewer)
 * tig (a git history reader)
-* tmux
-* vim/neovim (neovim is a great fork of vim)
+* tmux (terminal multiplexer)
+* vim (text editor)
+* weechat (Irc client)
 * zsh (powerful alternative to bash)
 
 Configurations & install
@@ -37,6 +41,7 @@ Install each package via GNU stow:
 To change your shell to zsh:
 chsh -s /bin/zsh <login>
 
+boostrap.sh shows also some specific command
 
 The "scripts" folder contains :
 <!***  a bootstrap script to install everything.**>
@@ -55,6 +60,7 @@ The folder "compilation" is an example of how to ./configure certain programs
 
 To install .desktop entries
 ====
+Put them in
 ~/.local/share/applications
 
 
@@ -62,4 +68,5 @@ Powerline & Fonts
 ====
 
 * list fonts with fc-list
-* regenerate cache with fc-cache -vf  (append ~/.fonts for local fonts only)
+* regenerate cache with fc-cache -vf : it will look into the directories defined in your $HOME/.fonts.conf
+Make sure (append ~/.fonts for local fonts only)
