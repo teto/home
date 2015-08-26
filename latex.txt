@@ -1,0 +1,10 @@
+Using tex once a year, here are the few notes worth remembering to stop researching the same intel every year :)
+
+Many things exist in repositories, packages:
+- apt install texlive-publishers
+
+To know where is your personal directories
+$ kpsewhich -var-value=TEXMFHOME
+
+To make sure the db was updated:
+sudo texhash

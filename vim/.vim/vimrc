@@ -2,10 +2,10 @@
 
 " marker starts with " <section name> {{{ and finishes with  }}}
 "set foldmethod=marker
+set nocompatible               " be iMproved
 "
 " vim specific codes
 if !has('nvim')
-    set nocompatible               " be iMproved
     " terminal codes are ignored by neovim
     " https://github.com/neovim/neovim/issues/2330
     set t_Co=256                        " use 256 colors
@@ -21,13 +21,26 @@ set linebreak " better display
 filetype on                   " required!
 set backspace=indent,eol,start
 
+set tabstop=4 " a tab takes 4 characters (local to buffer)
+set shiftwidth=4 " Number of spaces to use per step of (auto)indent.
+
+" start scrolling before reaching end of screen in order to keep more context
+set scrolloff=3
+
+"  compilation option
+set smartindent 
+
+set noshowmode " hide the default mode text
 set smarttab "use shiftwidth
-set incsearch " start searching straightaway
 set showmode " Show the current mode
 
-
+set cursorline " highlight cursor line
+" Netrw configuration {{{
 " decide with which program to open files when typing 'gx'
 let g:netrw_browsex_viewer="xdg-open"
+let g:netrw_home=$XDG_CACHE_HOME.'/vim'
+let g:netrw_liststyle=1 " long listing with timestamp
+" }}}
 " /quickfix
 "
 "let c_no_bracket_error=1
@@ -35,24 +48,10 @@ let g:netrw_browsex_viewer="xdg-open"
 "let c_comment_strings=1
 "let c_gnu=1
 
-"set ts=2
-"set sw=2
-"set sta
-"set et
-"set ai
-"set si
-"set cin
-
 set title " vim will change terminal title
 " look at :h titlestring
 
-
-" let mapleader = ","
 let mapleader = " "
-
-" Quickly edit/reload the vimrc file
-"nmap <silent> <leader>ev :e $MYVIMRC<CR>
-"nmap <silent> <leader>sv :so! $MYVIMRC<CR>
 
 
 nnoremap <Leader>/ :set hlsearch! hls?<CR> " toggle search highlighting
@@ -99,9 +98,7 @@ set wildignore=.svn,CVS,.git,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg,*.
 set visualbell
 
 " Display line numbers on the left
-" set number
-
-
+set number
 " TODO do a macro that cycles throught show/hide absolute/relative line numbers
 map <C-N><C-N> :set invnumber<CR>
 "Prefer relative line numbering?
@@ -112,38 +109,29 @@ map <C-N><C-N> :set invnumber<CR>
 " set nolist to disable or set list!
 
 
-" Quick timeouts on key combinations.
-set timeoutlen=400
-
-" - boolean (default off), local to buffer
+set timeoutlen=400 " Quick timeouts on key combinations.
 
 
-" Hide the default mode text (e.g. -- INSERT -- below the statusline)
-" set noshowmode
 
-" TODO 
-"augroup Python
-	"au!
-"augroup END
 " in order to scroll faster
 nnoremap <C-e> 3<C-e>
 nnoremap <C-y> 3<C-y>
 
 " Regenerate database
 " map 
-map <esc>[27;5;9~ <C-Tab>
-map <esc>[1;5A <C-Up>
-map <esc>[1;5B <C-Down>
-map <esc>[1;5C <C-Right>
-map <esc>[1;5D <C-Left>
-map <esc>[1;2D <S-Left>
-map <esc>[1;2C <S-Right>
-" tabn 4. Createon
-map <esc>[27;5;38~ <C-&>
-map <esc>[27;5;130~ <C-é>
-map <esc>[27;5;39~ <C-'>
-map <esc>[27;5;34~ <C-">
-map <esc>[27;5;40~ <C-(>
+"map <esc>[27;5;9~ <C-Tab>
+"map <esc>[1;5A <C-Up>
+"map <esc>[1;5B <C-Down>
+"map <esc>[1;5C <C-Right>
+"map <esc>[1;5D <C-Left>
+"map <esc>[1;2D <S-Left>
+"map <esc>[1;2C <S-Right>
+"" tabn 4. Createon
+"map <esc>[27;5;38~ <C-&>
+"map <esc>[27;5;130~ <C-é>
+"map <esc>[27;5;39~ <C-'>
+"map <esc>[27;5;34~ <C-">
+"map <esc>[27;5;40~ <C-(>
 "
 
 syntax on
@@ -192,34 +180,7 @@ set clipboard=unnamedplus
 noremap gp "+p 
 noremap gy "+y 
 
-" Tab shortcuts
-"let tableader = "t" 
-"execute "nmap <unique> ". g:tableader.g:tableader." :tabnew<Enter>"
-"nmap <leader>t :tabnew<Enter>
-"nmap <leader><S-t> :tabclose<Enter>
-
-" nmap <C-Left> <C-&>
-
-" nmap <C-Enter> :vs<Enter>
-" map <C-Left> gT
-"nmap <tab> :tabn<Enter>
-"nmap <C-Right> :tabn<Enter>
-"nmap <C-Left> :tabN<Enter>
-
-nmap <C-Tab> :tabN<Enter>
-nmap <C-&> :tabn1<Enter>
-nmap <C-é> :tabn2<Enter>
-nmap <C-"> :tabn3<Enter>
-nmap <C-'> :tabn4<Enter>
-
-
-"
-"
 " Easy window navigation
-
-" Nerdtree shortcuts
-" noremap <F2> :NERDTreeToggle<Enter>
-let Tlist_Use_Right_Window   = 1
 " noremap <F3> :Tlist<Enter>
 
 
@@ -227,24 +188,16 @@ let Tlist_Use_Right_Window   = 1
 noremap <F4> exec ":emenu <tab>"
 
 
-" should become useless with
+" should become useless with neovim
 noremap <F10> :set paste!<CR>
 
 
 " todo enable rainbow parentheses
 "nnoremap <leader>R :CtrlP<CR>
 " est deja mappe :/
-nnoremap <leader>p :CtrlP<CR>
-nnoremap <leader>u :Gundo<CR>
-"source $HOME/.vim/test_tab.vim
-
-" A stands for Alt
-" nnoremap <C-h> :call MoveToTab(2)<CR>
-" nnoremap <C-l> :call MoveToTab(1)<CR>
 
 
-" map <F2> :echo 'Current time is ' . strftime('%c')<CR>
-" map! <F3> a<C-R>=strftime('%c')<CR><Esc>
+
 
 " Plug section {{{
 
@@ -252,21 +205,14 @@ nnoremap <leader>u :Gundo<CR>
 " source ~/.vim/insert_mode
 source ~/.vim/display.vim
 " source ~/.vim/colors.vim
-source ~/.vim/search.vim
-" source ~/.vim/vundle.vim
 source ~/.vim/plug.vim
-source ~/.vim/compose.vim
-source ~/.vim/powerline.vim
 source ~/.vim/cscope.vim
-source ~/.vim/ycm.vim
 source ~/.vim/splits.vim
 source ~/.vim/vim_file_chooser.vim
-source ~/.vim/jedi.vim
-source ~/.vim/ctrlp.vim 
 source ~/.vim/plug.vim
-source ~/.vim/startify.vim
 " }}}
-cmap w!! w !sudo tee % >/dev/null
+
+"cmap w!! w !sudo tee % >/dev/null
 
 
 set background=dark
@@ -315,7 +261,74 @@ au! BufWritePost .vimrc source %
 nnoremap <Leader>ev :vs $MYVIMRC<CR> 
 nnoremap <Leader>ep :vs ~/.vim/plug.vim<CR> 
 nnoremap <Leader>sv :source $MYVIMRC<CR> " reload vimrc
-let g:netrw_home=$XDG_CACHE_HOME.'/vim'
 
-"let g:gitgutter_enabled = false
+nnoremap <Leader>e :Vex<CR> " open netrw
+nnoremap <Leader>w :w<CR>
+nnoremap <Leader>o :CtrlP<CR>
+nnoremap <leader>p :CtrlP<CR>
+nnoremap <leader>u :Gundo<CR>
+
+nnoremap <F8> :vertical wincmd f<CR> " open file under cursor in a split
+nnoremap <leader>gfs :vertical wincmd f<CR> " open file under cursor in a split
+" Powerline config {{{
+
+let g:Powerline_symbols = "fancy" " to use unicode symbols
+" }}}
+
+" Startify config {{{
+let g:startify_list_order = ['sessions','files', 'dir', 'bookmarks']
+let g:startify_session_dir = $XDG_DATA_HOME.'/.vim/session'
+let g:startify_bookmarks = [ '~/.vimrc' ]
+let g:startify_session_autoload = 1
+let g:startify_session_persistence = 1
+let g:startify_change_to_vcs_root = 0
+let g:startify_session_savevars = []
+" }}}
+
+" Ctrpl config {{{
+let g:ctrlp_cmd = 'CtrlPMixed'
+let g:ctrlp_match_window = 'results:100' " overcome limit imposed by max height
+let g:ctrlp_extensions= ['dir','mark']
+" }}}
+
+" Search parameters {{{
+set nohlsearch " highlight search terms
+set incsearch " show search matches as you type
+set ignorecase " ignore case when searching
+" set smartcase " to check
+" }}}
+
+" YouCompleteMe config {{{
+let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
+let g:ycm_confirm_extra_conf = 0
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+" g:ycm_show_diagnostics_ui=1
+"let g:ycm_server_use_vim_stdout = 1
+let g:ycm_server_log_level = 'debug'
+
+nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
+nnoremap <F6> :YcmDebugInfo<CR>
+
+"You may also want to map the subcommands to something less verbose; for instance, nnoremap <leader>jd :YcmCompleter GoTo<CR> maps the <leader>jd sequence to the longer subcommand invocation.
+
+"The various GoTo* subcommands add entries to Vim's jumplist so you can use CTRL-O to jump back to where you where before invoking the command (and CTRL-I to jump forward; see :h jumplist for details).
+
+nnoremap <leader>jd :YcmCompleter GoTo<CR>
+" }}}
+
+" Jedi (python) completion {{{
+let g:jedi#auto_vim_configuration = 0 " to prevent python's help popup
+" }}}
+"
+autocmd CompleteDone * pclose
+":
+" Put this in vimrc, add custom commands in the function.
+function! FocusLost_SaveFiles()
+  exe ":au FocusLost" expand("%") ":wa"
+endfunction
+
+nnoremap <F3> :Neomake<CR>
+nnoremap <F4> :call FocusLost_SaveFiles()
+let g:gitgutter_enabled = 0
 " vim:foldmethod=marker:foldlevel=0

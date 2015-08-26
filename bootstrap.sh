@@ -16,3 +16,6 @@ sudo update-desktop-database
 #xdg-settings set default-web-browser
 # 
 #run-parts --regex '*.cron' cron/
+# TODO replace by XDG_ ?
+stow -t  $HOME/.local local
+stow -t  $HOME/.config config

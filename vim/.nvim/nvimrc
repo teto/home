@@ -1,5 +1,5 @@
 " to debug vimscript, use :mess to display error messages
-set nocompatible
+source ~/.vim/vimrc
 
 if has('nvim')
 	"runtime! python_setup.vim
@@ -7,9 +7,7 @@ if has('nvim')
 	tnoremap <Esc> <C-\><C-n>
 endif
 
-source ~/.vim/vimrc
-
-let g:ycm_server_log_level = "debug"
+let g:diminactive_use_syntax = 1
 let g:netrw_home=$XDG_CACHE_HOME.'/nvim'
 
 "let $NVIM_TUI_ENABLE_TRUE_COLOR=1

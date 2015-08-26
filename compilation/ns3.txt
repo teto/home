@@ -1,11 +1,11 @@
 
 == clang with C++11 support
 
-CXX="clang++" CXXFLAGS="-g -Wno-potentially-evaluated-expression -std=c++11" ./waf configure --prefix=install--build-profile=debug  
+CXX="clang++" CXXFLAGS="-g -Wno-potentially-evaluated-expression -std=c++11" ./waf configure --prefix=install --build-profile=debug  
 
 == g++ with C++11 support
 
-CXX="g++" CXXFLAGS=" -Wno-unused-variable -std=c++11" ./waf configure --prefix=install--build-profile=debug  
+CXX="g++" CXXFLAGS=" -Wno-unused-variable -std=c++11" ./waf configure --prefix=install --build-profile=debug  
 
 
 
