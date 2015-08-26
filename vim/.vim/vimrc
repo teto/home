@@ -321,8 +321,13 @@ nnoremap <leader>jd :YcmCompleter GoTo<CR>
 let g:jedi#auto_vim_configuration = 0 " to prevent python's help popup
 " }}}
 "
-autocmd CompleteDone * pclose
-":
+autocmd CompleteDone * pclose " close the popup on python completion
+
+" Tex configuration {{{
+" See :help ft-tex-plugin
+let g:tex_flavor = "latex"
+"}}}
+"
 " Put this in vimrc, add custom commands in the function.
 function! FocusLost_SaveFiles()
   exe ":au FocusLost" expand("%") ":wa"

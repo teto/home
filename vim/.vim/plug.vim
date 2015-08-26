@@ -22,6 +22,7 @@ Plug 'mhinz/vim-startify'
 
 "Plug 'CCTree'
 "Plug 'showmarks2'
+Plug 'vim-voom/VOoM'
 Plug 'blueyed/vim-diminactive'
 Plug 'tpope/vim-sleuth' " Dunno what it is
 Plug 'tpope/vim-vinegar' " Improves netrw

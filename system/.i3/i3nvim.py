@@ -42,28 +42,30 @@ def get_nvim_socket():
         2/ look for nvim processes in its children
         3/ search for socket name in the nvim child process
         """
-        # return '/tmp/nvimnT7Nor/0'
-        # get pid and from pid look for socket
-        pid = subprocess.check_output("xdotool getwindowfocus getwindowpid", shell=True).decode()
-        pid = pid.rstrip()
-        pid = int(pid)
-        log.debug("Retreived terminal pid %d, nvim should be one of its children" % pid)
-        proc = psutil.Process( pid)
-        log.debug( "proc name %s with %d children" % (proc.name(), len(proc.children(recursive=True))))
-        for child in proc.children(recursive=True):
-                log.debug("child name & pid %s/%d" % (child.name(), child.pid))
-                if child.name() == "nvim":
-                        log.debug("Found an nvim subprocess !")
-                        # look for socket 
-                        # for filename, fd in child.open_files():
+        try:
+                pid = subprocess.check_output("xdotool getwindowfocus getwindowpid", shell=True).decode()
+                pid = pid.rstrip()
+                pid = int(pid)
+                log.debug("Retreived terminal pid %d, nvim should be one of its children" % pid)
+                proc = psutil.Process( pid)
+                log.debug( "proc name %s with %d children" % (proc.name(), len(proc.children(recursive=True))))
+                for child in proc.children(recursive=True):
+                        log.debug("child name & pid %s/%d" % (child.name(), child.pid))
+                        if child.name() == "nvim":
+                                log.debug("Found an nvim subprocess !")
+                                # look for socket 
+                                # for filename, fd in child.open_files():
                                 # log.debug("Open file %s " % filename)
-                        for con in child.connections(kind="unix"):
-                                filename = con.laddr
-                                # log.debug("Socket %s " % filename)
-                                if "/tmp/nvim" in filename:
-                                        log.debug("Found a match: %s" % filename) 
-                                        return True, filename
-                        return False, ""
+                                for con in child.connections(kind="unix"):
+                                        filename = con.laddr
+                                        # log.debug("Socket %s " % filename)
+                                        if "/tmp/nvim" in filename:
+                                                log.debug("Found a match: %s" % filename) 
+                                                return True, filename
+                                return False, ""
+        except Exception as e:
+                log.error('Could not find neovim socket %s' % e)
+                return False, ""
 
         # instead of using psutil one could do sthg like:
         #  lsof -a -U -p 15684 -F n | grep /tmp/nvim |head -n1
