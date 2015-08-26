@@ -19,3 +19,7 @@ sudo update-desktop-database
 # TODO replace by XDG_ ?
 stow -t  $HOME/.local local
 stow -t  $HOME/.config config
+
+# regenerate the user font cache
+# will look into folders listed in .fonts.conf
+fc-cache -fv
