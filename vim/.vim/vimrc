@@ -11,7 +11,6 @@ if !has('nvim')
     set t_Co=256                        " use 256 colors
 endif
 
-
 set viminfo='100,f1
 
 set splitbelow	" on horizontal splits
@@ -216,7 +215,6 @@ source ~/.vim/plug.vim
 
 
 set background=dark
-let g:airline_powerline_fonts = 1
 
 let g:solarized_termtrans = 0
 " let g:solarized_style     =   "dark"  
@@ -320,7 +318,14 @@ nnoremap <leader>jd :YcmCompleter GoTo<CR>
 " Jedi (python) completion {{{
 let g:jedi#auto_vim_configuration = 0 " to prevent python's help popup
 " }}}
-"
+
+" Airline {{{
+let g:airline_powerline_fonts = 0
+let g:airline_left_sep = '>'
+let g:airline_right_sep = '<'
+let g:airline_section = '|'
+"let g:airline_theme = 'solarized'
+"}}}
 autocmd CompleteDone * pclose " close the popup on python completion
 
 " Tex configuration {{{

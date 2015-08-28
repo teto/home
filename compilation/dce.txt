@@ -20,8 +20,8 @@ cd ..
 
 # Download, configure, build and install DCE
 hg clone http://code.nsnam.org/ns-3-dce  -r dce-1.2
-./waf configure --with-ns3=$HOME/dce/build --enable-opt \
-                --enable-kernel-stack=$HOME/dce/net-next-sim/arch \
+./waf configure --with-ns3=$HOME/ns3off --enable-opt \
+                --enable-kernel-stack=$HOME/mptcpoff \
                 --prefix=$HOME/dce/build
 ./waf build
 ./waf install

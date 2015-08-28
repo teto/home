@@ -29,8 +29,14 @@ export ZDOTDIR="$HOME/.zsh"
 export MAILDIR="$HOME/Maildir" 
 export MUTT="$HOME/.mutt"
 
-export EDITOR="vim"
+export EDITOR="nvim"
 export TERMINAL="urxvt"
 
 
 export XDG_DATA_HOME="$HOME/.local"
+
+# for DCE/ns3 experiments
+DCE_PATH="$HOME/mptcpoff" # for liblinux.so
+DCE_PATH="$DCE_PATH:$HOME/iproute2/ip" # for 'ip' program
+export DCE_PATH
+

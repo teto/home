@@ -14,6 +14,7 @@ Plug 'Valloric/YouCompleteMe' , { 'do': './install.sh --system-libclang --clang-
 Plug 'vim-flake8'
 Plug 'hynek/vim-python-pep8-indent' " does not work
 Plug 'mhinz/vim-startify'
+Plug 'dietsche/vim-lastplace' " restore last cursor postion
 "if has('nvim')
 	Plug 'bling/vim-airline'
 "else
