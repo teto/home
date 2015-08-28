@@ -5,7 +5,7 @@
 	"caret_extra_top": 0,
 	"caret_extra_width": 0,
 	"caret_style": "smooth",
-	"color_scheme": "Packages/User/MonokaiGray (Flake8Lint).tmTheme",
+	"color_scheme": "Packages/User/Monokai (Flake8Lint).tmTheme",
 	"enable_tab_scrolling": true,
 	"gutter": true,
 	"highlight_line": true,
@@ -15,9 +15,9 @@
 		"Makefile",
 		"GitGutter",
 		"Vintage",
-		"Anaconda",
+		"Python PEP8 Autoformat",
 		"AutoPEP8",
-		"Python PEP8 Autoformat"
+		"Anaconda"
 	],
 	"line_numbers": true
 }

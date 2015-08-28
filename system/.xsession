@@ -4,8 +4,8 @@
 #xcompmgr&
 xrdb -override $HOME/.Xresources
 
-. "$HOME/.zshenv"
-# echo $PYTHONPATH
+. "$HOME/.zsh/.zshenv"
+# launch mpd in user mode
 mpd&
 
 # need to launch daemon before i3, cos of scratchpads
@@ -15,11 +15,12 @@ urxvtd -q -o -f&
 setxkbmap -option terminate:ctrl_alt_bksp
 
 # alsamixer in systray
+# regenerate i3 config
 "$HOME/.i3/build_config.sh"
 
 # Set background color
-
 xsetroot -solid "#333333"
+
 # Enable core dumps in case something goes wrong
 ulimit -c unlimited
 
@@ -27,7 +28,9 @@ ulimit -c unlimited
 # echo "Starting at $(date)" >> ~/.i3/logfile
 # exec /usr/bin/i3 -V -d all >> ~/.i3/logfile
 
-
+# clipboard manager
 parcellite&
+# network manager systray icon
+#nm-applet&
 
 # Please see http://i3wm.org/docs/userguide.html for a complete reference! 

@@ -27,9 +27,9 @@ URxvt.keysym.Mod4-j:\033j
 URxvt.keysym.Mod4-k:\033k
 URxvt.keysym.Mod4-h:\033h
 URxvt.keysym.Mod4-l:\033l
-URxvt.keysym.C-C: perl:clipboard:copy
-URxvt.keysym.C-V: perl:clipboard:paste
-URxvt.keysym.C-A-V: perl:clipboard:paste_escaped
+!URxvt.keysym.C-C: perl:clipboard:copy
+!URxvt.keysym.C-V: perl:clipboard:paste
+!URxvt.keysym.C-A-V: perl:clipboard:paste_escaped
 
 !URxvt.keysym.S-Page_Up       : captured by terminal for scrolling
 !URxvt.keysym.S-Page_Down     : captured by terminal for scrolling
@@ -293,7 +293,7 @@ URxvt*cursorBlink: true
 ! URxvt*keysym.sym: string
 
 ! To enable clipboard integration
-URxvt*perl-ext-common: clipboard
+!URxvt*perl-ext-common: clipboard
 
 ! Comma-separated list(s) of perl extension scripts (default: "default") to use in this terminal instance;
 ! URxvt*perl-ext: string

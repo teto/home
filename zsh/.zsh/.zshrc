@@ -30,7 +30,7 @@ done
 # History parameters {{{
 HISTSIZE=10000
 SAVEHIST=9000
-HISTFILE="$ZDOTDIR/history.tmp"
+HISTFILE="$XDG_CACHE_HOME/zsh_history.tmp"
 
 # make some commands not show up in history
 export HISTIGNORE="ls:ll:cd:cd -:pwd:exit:date:* --help"

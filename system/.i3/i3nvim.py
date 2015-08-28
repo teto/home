@@ -52,13 +52,14 @@ def get_nvim_socket():
                 for child in proc.children(recursive=True):
                         log.debug("child name & pid %s/%d" % (child.name(), child.pid))
                         if child.name() == "nvim":
-                                log.debug("Found an nvim subprocess !")
+                                unix_sockets = child.connections(kind="unix")
+                                log.debug("Found an nvim subprocess with %d " % len(unix_sockets))
                                 # look for socket 
                                 # for filename, fd in child.open_files():
                                 # log.debug("Open file %s " % filename)
-                                for con in child.connections(kind="unix"):
+                                for con in unix_sockets:
                                         filename = con.laddr
-                                        # log.debug("Socket %s " % filename)
+                                        log.debug("Socket %s " % filename)
                                         if "/tmp/nvim" in filename:
                                                 log.debug("Found a match: %s" % filename) 
                                                 return True, filename
