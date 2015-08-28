@@ -63,6 +63,11 @@ To install .desktop entries
 Put them in
 ~/.local/share/applications
 
+Latex
+====
+God I hate latex...
+Don't forget to configure mendeley to export references into texmf/bibtex
+There is a script to help debug tex problems in bin/
 
 Powerline & Fonts
 ====

@@ -3,6 +3,7 @@ from neovim import attach
 import argparse
 import subprocess
 import os
+import traceback
 import logging
 import psutil
 
@@ -66,6 +67,7 @@ def get_nvim_socket():
                                 return False, ""
         except Exception as e:
                 log.error('Could not find neovim socket %s' % e)
+                log.error(traceback.format_exc())
                 return False, ""
 
         # instead of using psutil one could do sthg like:

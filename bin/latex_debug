@@ -1,0 +1,4 @@
+#!/bin/sh
+kpsexpand '$TEXMFHOME'
+kpsexpand '$TEXMFLOCAL'
+echo "http://tex.stackexchange.com/questions/31339/setting-environment-variables-for-latex-and-bibtex-in-bashrc?lq=1"

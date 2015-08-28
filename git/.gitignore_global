@@ -51,7 +51,8 @@
 *.db
 *.out
 *.drift
-
+*.bbl
+*.blg
 
 # OS generated files #
 ######################

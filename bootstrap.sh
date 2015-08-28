@@ -16,9 +16,12 @@ sudo update-desktop-database
 #xdg-settings set default-web-browser
 # 
 #run-parts --regex '*.cron' cron/
-# TODO replace by XDG_ ?
-stow -t  $HOME/.local local
-stow -t  $HOME/.config config
+# TODO todo check varenv are set or set them here and write them into a file sourced by zsh ?
+stow -t  "$XDG_DATA_HOME" local
+stow -t  "$XDG_CONFIG_HOME" config
+
+ln -s "$HOME/dotfiles/texmf" "$HOME/texmf"
+# TODO tex rehash
 
 # regenerate the user font cache
 # will look into folders listed in .fonts.conf

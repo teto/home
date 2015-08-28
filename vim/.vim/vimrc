@@ -299,10 +299,18 @@ set ignorecase " ignore case when searching
 " YouCompleteMe config {{{
 let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
 let g:ycm_confirm_extra_conf = 0
-let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+let g:ycm_key_list_select_completion = ['<TAB>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<S-TAB>', '<Up>']
+let g:ycm_auto_trigger = 1
+let g:ycm_error_symbol = ">>" " used to signal errors in gutter
+let g:ycm_warning_symbol = '!' " warn in gutter
+let g:ycm_show_diagnostics_ui = 1 " show info in gutter
 " g:ycm_show_diagnostics_ui=1
 "let g:ycm_server_use_vim_stdout = 1
+"let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_key_invoke_completion = '<C-Space>'
+let g:ycm_key_detailed_diagnostics = '<leader>d'
+let g:ycm_goto_buffer_command = 'same-buffer' " horizontal-split, new-tab, new-or-existing tab
 let g:ycm_server_log_level = 'debug'
 
 nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
@@ -327,6 +335,22 @@ let g:airline_section = '|'
 "let g:airline_theme = 'solarized'
 "}}}
 autocmd CompleteDone * pclose " close the popup on python completion
+
+" Restor cursor position {{{
+function! ResCur()
+  " $ => last line of buffer
+  " '" => cursor position on exit
+  if line("'\"") <= line("$")
+    normal! g`"
+    return 1
+  endif
+endfunction
+
+augroup resCur
+  autocmd!
+  autocmd BufWinEnter * call ResCur()
+augroup END
+" }}}
 
 " Tex configuration {{{
 " See :help ft-tex-plugin
