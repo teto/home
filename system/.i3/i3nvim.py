@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/python2
 from neovim import attach
 import argparse
 import subprocess
@@ -71,7 +71,7 @@ def get_nvim_socket():
                 return False, ""
 
         # instead of using psutil one could do sthg like:
-        #  lsof -a -U -p 15684 -F n | grep /tmp/nvim |head -n1
+        # lsof -a -U -p 15684 -F n | grep /tmp/nvim |head -n1
 
 def send_nvim_wincmd(path_to_socket, direction):
         log.info("Sending %s to socket %s" % (direction, path_to_socket))
@@ -99,7 +99,7 @@ def send_i3_cmd(direction):
 """
 Program starts here
 """
-# TODO we can set NVIM_LISTEN_ADDRESS before hand
+# TODO we can set NVIM_LISTEN_ADDRESS before hand
 parser = argparse.ArgumentParser(description="parameter to send to wincmd")
 parser.add_argument("direction", choices=directions.keys())
 parser.add_argument("--test", action="store_const", const=True)

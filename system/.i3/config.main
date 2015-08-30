@@ -111,7 +111,7 @@ mode "focused" {
 
 # TODO remove since it is used by Dunst ?
 bindsym $mod+n mode "focused"
-bindsym $mod+c exec "~/.i3/misc_commands.py"
+#bindsym $mod+c exec "~/.i3/misc_commands.py"
 bindsym $mod+t exec floating toggle
 #bindsym XF86AudioRaiseVolume exec "amixer -q set Master 2dB+ unmute; notify-send Audio Raised volume"
 #bindsym XF86AudioLowerVolume exec "amixer -q set Master 2dB- unmute; notify-send Audio lowered"
@@ -224,10 +224,11 @@ bindsym $mod+space focus mode_toggle
 
 # focus the parent container
 bindsym $mod+p focus parent
-bindsym $mod+q exec nautilus --no-desktop
+bindsym $mod+c focus child
+
+bindsym $mod+q exec nemo
 
 # focus the child container
-#bindcode $mod+d focus child
 
 # switch to workspace
 bindsym $mod+ampersand workspace "$w1"
