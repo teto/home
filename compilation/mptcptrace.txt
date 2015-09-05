@@ -1,0 +1,10 @@
+You first need to install libcheck, which does not seem packaged for Ubuntu (?) !
+You can fetch it from:
+svn co https://check.svn.sourceforge.net/svnroot/check/trunk check
+
+It is installed in a specific location not recognized so I  had to configure mptcptrace with;
+https://bitbucket.org/bhesmans/mptcptrace
+$ PKG_CONFIG_PATH="/usr/local/lib" ../autogen.sh
+
+
+Quand on utilise mptcptrace avec DCE/ns3, utiliser l'option "-o 2" pour indiquer un offset de 2.

@@ -36,3 +36,18 @@ il
 
 
 Il n'y a pas non plus de checks sur --enable-kernel-stack ?
+
+
+Test one's protocol under DCE:
+======
+
+You have to compile with the flags:
+
+    Compile your objects using this gcc flag: -fPIC for exemple: gcc -fPIC -c foo.c
+
+        (option) Some application needs to be compile with -U_FORTIFY_SOURCE so that the application doesn’t use alternative symbols including __chk (like memcpy_chk).
+
+    Link your executable using this gcc flag: -pie and -rdynamic for exemple: gcc -o foo -pie -rdynamic foo.o
+
+CFLAGS=-fPIC -U_FORTIFY_SOURCE LDFLAGS=-pie -rdynamic
+

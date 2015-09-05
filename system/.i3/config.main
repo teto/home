@@ -8,6 +8,8 @@
 # TODO prefix with pango if you want to have fancy effects
 font pango:Liberation Sans Mono 9
 
+# font for window titles. ISO 10646 = Unicode
+#font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 
 set $mod Mod1
 
@@ -128,8 +130,6 @@ workspace_auto_back_and_forth yes
 ipc-socket ~/.i3/ipc.sock
 
 
-# font for window titles. ISO 10646 = Unicode
-font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod

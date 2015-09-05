@@ -47,10 +47,11 @@ Plug 'airblade/vim-gitgutter'
 Plug 'mhinz/vim-rfc'
 Plug 'chrisbra/unicode.vim'
 Plug 'vim-scripts/rfc-syntax', { 'for': 'rfc' } " optional syntax highlighting for 
+Plug 'vim-scripts/Modeliner' " <leader>ml to setup buffer modeline
 " this one could not compile my program
 "Plug 'vim-latex/vim-latex', {'for': 'tex'}
 " ATP author gh mirror seems to be git@github.com:coot/atp_vim.git
-"Plug 'coot/atp_vim', {'for': 'tex'}
+Plug 'coot/atp_vim', {'for': 'tex'}
 "Plug 'vim-scripts/AutomaticLaTexPlugin', {'for': 'tex'}
 Plug 'tmhedberg/SimpylFold', { 'for': 'py' } " provides python folding
 Plug 'vimwiki/vimwiki'

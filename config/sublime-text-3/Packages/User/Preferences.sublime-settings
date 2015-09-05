@@ -12,12 +12,12 @@
 	"highlight_modified_tabs": true,
 	"ignored_packages":
 	[
-		"Python PEP8 Autoformat",
-		"Anaconda",
-		"GitGutter",
-		"Makefile",
 		"AutoPEP8",
-		"Vintage"
+		"Anaconda",
+		"Makefile",
+		"Vintage",
+		"GitGutter",
+		"Python PEP8 Autoformat"
 	],
 	"line_numbers": true
 }

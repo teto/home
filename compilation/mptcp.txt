@@ -1,0 +1,41 @@
+As easy as to compile the kernel:
+You just need to write good options to your kernel config as done later on.
+
+Tricky part is when you want to compile the kernel as a library to load it within ns3 DCE:
+from the mptcp repository you add the net-next-sim repository as a remote even if it is on your filesystem.
+
+$ git clone git@github.com:multipath-tcp/mptcp.git ~/mptcpoff
+$ git clone git://github.com/thehajime/net-next-sim.git ~/net-next-sim
+
+
+From the 'mptcpoff' local repository, checkout the branch you are interested in then:
+$ git checkout mptcp_v0.89
+$ git remote add nuse ~/net-next-sim
+$ git fetch net-next-sim
+$ git merge net-next-sim/sim3.14 --no-commit
+
+=== How to choose the branches to merge
+From the kernel source tree:
+$ make kernelversion
+For instance mptcp_v0.89 (with the kernel 3.14.33) should run ok with net-next-sim3.14 (3.14.0) (both can be merged, I tested it !).
+
+=== create a proper config file ".config"
+
+cat >> arch/sim/defconfig <<END
+CONFIG_MPTCP=y
+CONFIG_MPTCP_PM_ADVANCED=y
+CONFIG_MPTCP_FULLMESH=y
+CONFIG_MPTCP_NDIFFPORTS=y
+CONFIG_DEFAULT_FULLMESH=y
+CONFIG_DEFAULT_MPTCP_PM="fullmesh"
+
+CONFIG_TCP_CONG_COUPLED=y
+CONFIG_TCP_CONG_OLIA=y
+
+END
+
+make clean ARCH=sim
+make defconfig ARCH=sim
+make library ARCH=sim COV=yes
+
+

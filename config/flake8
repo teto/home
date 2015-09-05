@@ -1,7 +1,7 @@
 
 
 [flake8]
-ignore = E501,W291, F841, E265
+ignore = E501,W291, F841, E265, N806, E265
 max-line-length = 160
 exclude = .git, test_*
 max-complexity = 10

@@ -1,3 +1,4 @@
+# vim: set noet fenc=utf-8 ff=unix foldmethod=marker sts=0 sw=4 ts=4 :
 # When line ends with '|', runs command in shell 
 #
 #
@@ -12,12 +13,10 @@ set mailcap_path= $MUTT/mailcaps
 # Do this on a per account basis
 set realname="Matthieu Coudron"
 
-# to improve performance
-set header_cache = ${MUTT}/cache/headers
 # set message_cachedir = ${MUTT}/cache/bodies
 set move=no
 #utilise lors de l'ecriture de ses messages
-set editor=vim
+set editor=$EDITOR
 
 # there are the mails
 set folder= $MAILDIR
@@ -31,26 +30,26 @@ set folder= $MAILDIR
 set sendmail="/usr/bin/msmtp"
 
 #set use_envelope_from
+# Interactive questions {{{
+set abort_unmodified=ask-yes
+set abort_nosubject=no
 set wait_key=no  # when running external programs
 set quit # don't ask, just do !
 set delete # don't ask, just do !
+set fast_reply=no # ask questions before editing message
+# }}}
+
+
 set beep_new             # bell on new mails
 
 
 set pipe_decode          # strip headers and eval mimes when piping
 set thorough_search      # strip headers and eval mimes before searching
 
-# Status Bar -----------------------------------------
-# set status_chars  = " *%A"
-# set status_format = "───[ Folder: %f ]───[%r%m messages%?n? (%n new)?%?d? (%d to delete)?%?t? (%t tagged)? ]───%>─%?p?( %p postponed )?───"
-#set mail_check = 120
 
-
-set fast_reply=no # ask questions before editing message
 set timeout = 300
 
-
-set pager = "less"
+# display related
 set sort = 'threads'
 # order of posts
 # set sort_aux=last-date-received
@@ -61,16 +60,21 @@ set mbox_type=maildir
 
 
 set history=100
+# TODO move it to $XDG_CACHE_HOME/mutt/
 set history_file= $MUTT/cache/history
-
+# to improve performance
+set header_cache = ${MUTT}/cache/headers
+# where to put temp files when composing for instance
+# set tmpdir= 
 
 # set postponed +=
 
-# Header Options -------------------------------------
- ignore *                                # ignore all headers
- unignore from: to: cc: date: subject:   # show only these
- unhdr_order *                           # some distros order things by default
- hdr_order from: to: cc: date: subject:  # and in this order
+# Header Options {{{
+ignore *                                # ignore all headers
+unignore from: to: cc: date: subject:   # show only these
+unhdr_order *                           # some distros order things by default
+hdr_order from: to: cc: date: subject:  # and in this order
+# }}}
 
 
 # TODO set file
@@ -82,22 +86,130 @@ set alias_file=~/.mutt/aliases.mutt
 ##################################
 ### for colors
 ##################################
-#p"$HOME/.mutt/
+# this should be generated (rename it to generated then)
 source ${MUTT}/mailboxes
 source $MUTT/colors/mutt-colors-solarized-dark-256.muttrc
-source $MUTT/index.mutt
-source $MUTT/pager.mutt
-source $MUTT/bindings.mutt
-source $MUTT/sidebar.mutt
-source $MUTT/aliases.mutt
+#source $MUTT/bindings.mutt
 source $MUTT/muttkzrc
-source $MUTT/statusbar.mutt
 
 set spoolfile=$MAILDIR/gmail/INBOX
 
-set status_format="Mailbox is %f with %M messages [%v]  You have %n new messages "
 
 # how folders are displayed when typing 'y'
 set folder_format="%2C %t %N new mails %8s %d %f" # what I settled on
 
 set mark_old=no
+
+# Pager config {{{
+# you could use less/more/most or any other pager here
+set pager="builtin"
+
+set pager = "less" # todo set it to $PAGER ?
+
+# nb of lines when scrolling
+set pager_context=5
+
+#Order in which the headers are presented.
+hdr_order From: Date: To: Cc: Subject
+
+#
+set pager_index_lines=10
+#Show 2 messages on either side of the message I'm reading.
+alternative_order text/enriched text/plain text/html  
+#In which order to show the body parts (I leave HTML for last)
+
+# displays "~" to show EOF
+set tilde
+
+
+bind pager <up> previous-line
+bind pager <down> next-line
+bind pager [ previous-unread
+bind pager ] next-unread
+
+
+# Pager View Options ---------------------------------
+# set pager_index_lines = 10 # number of index lines to show
+# set pager_context = 3      # number of context lines to show
+# set pager_stop             # don't go to next message automatically
+# set menu_scroll            # scroll in menus
+# set tilde                  # show tildes like in vim
+# unset markers              # no ugly plus signs
+#
+# set quote_regexp = "^( {0,4}[>|:#%]| {0,4}[a-z0-9]+[>|]+)+"
+# alternative_order text/plain text/enriched text/html
+# }}}
+#
+# Sidebar config {{{
+#set sidebar_delim   = '  │'
+set sidebar_visible = yes
+set sidebar_width   = 30
+color sidebar_new color221 color233
+# }}}
+
+# Status Bar {{{
+set status_chars  = " *%A"
+set status_format = "───[ Folder: %f ]───[%r%m messages%?n? (%n new)?%?d? (%d to delete)?%?t? (%t tagged)? ]───%>─%?p?( %p postponed )?───"
+#set status_format="Mailbox is %f with %M messages [%v]  You have %n new messages "
+# }}}
+
+# Index Key Bindings  {{{
+bind index gg       first-entry
+bind index G        last-entry
+
+
+bind index \C<left> 	sidebar-prev
+bind index <right> 	sidebar-next
+bind index \Co		sidebar-open
+macro index <Tab> 	'<enter-command>toggle sidebar_visible<enter><redraw-screen>'
+macro pager <Tab> 	'<enter-command>toggle sidebar_visible<enter><redraw-screen>'
+bind index R        group-reply
+bind index $	    sync-mailbox
+bind index <  		collapse-thread
+bind index >  		collapse-all
+
+
+macro index s "<shell-escape>offlineimap <enter>" 
+
+#bind index \Cf		next-page
+#bind index \Cb		previous-page
+bind index \Cb		half-up
+bind index \Cf		half-down
+
+
+
+bind index \CP sidebar-prev-new
+bind index \CN sidebar-next-new
+
+# Ctrl-R to mark all as read
+macro index \Cr "T~U<enter><tag-prefix><clear-flag>N<untag-pattern>.<enter>" "mark all messages as read"
+
+# Sync email
+#macro index O "<shell-escape>offlineimap<enter>"           "run offlineimap to sync all mail"
+#macro index o "<shell-escape>offlineimap -qf INBOX<enter>" "run offlineimap to sync inbox"
+
+# Saner copy/move dialogs
+macro index C "<copy-message>?<toggle-mailboxes>" "copy a message to a mailbox"
+macro index M "<save-message>?<toggle-mailboxes>" "move a message to a mailbox"
+
+
+bind index <space> 	next-unread
+
+
+# Pager Key Bindings 
+# should be useless since I use an external pager (aka less)
+#########################
+bind pager k  previous-line
+bind pager j  next-line
+bind pager gg top
+bind pager G  bottom
+
+bind pager R  group-reply
+
+# View attachments properly.
+bind attach <return> view-mailcap
+
+# pager bindings
+#########################
+macro pager \Cu "|urlview<enter>" "call urlview to open links"
+# }}}
