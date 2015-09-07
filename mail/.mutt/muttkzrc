@@ -4,8 +4,10 @@
 # to mutt (legacy, that does not understand the following variables)
 
 # nm_default_uri=""
-set virtual_spoolfile
-# virtual folders
+
+# when true, mutt will use the first virtual mailbox
+set virtual_spoolfile=yes
+# virtual folders, TODO generate a part automatically ?
 virtual-mailboxes \
 "unread"	"notmuch://?query=tag:inbox and tag:unread and NOT tag:killed" \
 "INBOX"	"notmuch://?query=tag:inbox and NOT tag:killed" \

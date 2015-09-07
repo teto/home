@@ -6,8 +6,11 @@
 set date_format="%A %d %b %Y à %H:%M:%S (%Z)"
 
 # assign an application to an attachement type (pdf/word etc..)
+# TODO does it bring benefits to put it into $HOME/.mailcaps
 set mailcap_path= $MUTT/mailcaps
 
+# advised on http://wcm1.web.rice.edu/mutt-tips.html
+set text_flowed=yes
 #source $HOME/.mutt/folder_hooks
 
 # Do this on a per account basis
@@ -80,7 +83,8 @@ hdr_order from: to: cc: date: subject:  # and in this order
 # TODO set file
 set signature="Matthieu Coudron"
 
-
+# aliases = name <-> email
+# TODO should be generated too or sync via caldav ?
 set alias_file=~/.mutt/aliases.mutt
 
 ##################################
@@ -90,6 +94,7 @@ set alias_file=~/.mutt/aliases.mutt
 source ${MUTT}/mailboxes
 source $MUTT/colors/mutt-colors-solarized-dark-256.muttrc
 #source $MUTT/bindings.mutt
+# is there a way to include it conditionnaly ?
 source $MUTT/muttkzrc
 
 set spoolfile=$MAILDIR/gmail/INBOX
@@ -157,12 +162,19 @@ set status_format = "───[ Folder: %f ]───[%r%m messages%?n? (%n new)
 bind index gg       first-entry
 bind index G        last-entry
 
+# }}}
 
-bind index \C<left> 	sidebar-prev
+# sidebar bindings {{{
+bind index <left> 	sidebar-prev
 bind index <right> 	sidebar-next
+# to open the focused box, yes this is counterintuitive
 bind index \Co		sidebar-open
 macro index <Tab> 	'<enter-command>toggle sidebar_visible<enter><redraw-screen>'
 macro pager <Tab> 	'<enter-command>toggle sidebar_visible<enter><redraw-screen>'
+#bind index \CP sidebar-prev-new
+#bind index \CN sidebar-next-new
+# }}}
+
 bind index R        group-reply
 bind index $	    sync-mailbox
 bind index <  		collapse-thread
@@ -178,8 +190,6 @@ bind index \Cf		half-down
 
 
 
-bind index \CP sidebar-prev-new
-bind index \CN sidebar-next-new
 
 # Ctrl-R to mark all as read
 macro index \Cr "T~U<enter><tag-prefix><clear-flag>N<untag-pattern>.<enter>" "mark all messages as read"
@@ -196,9 +206,8 @@ macro index M "<save-message>?<toggle-mailboxes>" "move a message to a mailbox"
 bind index <space> 	next-unread
 
 
-# Pager Key Bindings 
+# Pager Key Bindings  {{{
 # should be useless since I use an external pager (aka less)
-#########################
 bind pager k  previous-line
 bind pager j  next-line
 bind pager gg top

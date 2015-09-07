@@ -2000,6 +2000,10 @@ nameres.hosts_file_handling: TRUE
 # A string denoting an positive integer range (e.g., "1-20,30-40")
 #gprs-ns.udp.ports: 2157,19999
 
+# Whether the Gryphon dissector should desegment all messages spanning multiple TCP segments
+# TRUE or FALSE (case-insensitive)
+#gryphon.desegment: TRUE
+
 # Set the port(s) for ip.access IPA (default: 3002,3003,3006,4249,4250,5000)
 # A string denoting an positive integer range (e.g., "1-20,30-40")
 #gsm_ipa.tcp_ports: 3002,3003,3006,4249,4250,5000
@@ -2888,6 +2892,10 @@ nameres.hosts_file_handling: TRUE
 # A decimal number
 #mactelnet.port: 20561
 
+# The name of the file containing the mate module's configuration
+# A path to a file
+#mate.config: 
+
 # Set the port for Media Agnostic Packets
 # A decimal number
 #mausb.tcp.port: 0
@@ -3390,6 +3398,10 @@ nameres.hosts_file_handling: TRUE
 # TRUE or FALSE (case-insensitive)
 #olsr.nrlolsr: TRUE
 
+# The TCP ports for the OPC UA TCP Binary Protocol (comma separated list)
+# A string denoting an positive integer range (e.g., "1-20,30-40")
+#opcua.tcp_ports: 4840
+
 # OpenFlow TCP port (6653 is the IANA assigned port)
 # A decimal number
 #openflow.tcp.port: 6653
@@ -3666,6 +3678,14 @@ nameres.hosts_file_handling: TRUE
 # Decode packets on this UDP port as PacketCable CCC
 # A decimal number
 #pkt_ccc.udp_port: 0
+
+# Whether the PN-RT summary line should be shown in the protocol tree
+# TRUE or FALSE (case-insensitive)
+#pn_rt.summary_in_tree: TRUE
+
+# Reassemble PNIO Fragments and get them decoded
+# TRUE or FALSE (case-insensitive)
+#pn_rt.desegment: TRUE
 
 # Protocol payload type
 # One of: Data, Sony FeliCa, NXP MiFare, ISO 7816
@@ -4865,6 +4885,10 @@ nameres.hosts_file_handling: TRUE
 # A string denoting an positive integer range (e.g., "1-20,30-40")
 #uma.tcp.ports: 14001
 
+# UNISTIM port (default 5000)
+# A decimal number
+#unistim.udp.port: 0
+
 # Try to decode a packet using a heuristic sub-dissector before attempting to dissect the packet using the "usb.bulk", "usb.interrupt" or "usb.control" dissector tables.
 # TRUE or FALSE (case-insensitive)
 #usb.try_heuristics: TRUE
@@ -4918,6 +4942,35 @@ nameres.hosts_file_handling: TRUE
 # One of: No subdissection, Line based text, As json, As SIP
 # (case-insensitive).
 #websocket.text_type: No subdissection
+
+# Set the maximum Basic CID used in the Wimax decoder (if other than the default of 320).  Note: The maximum Primary CID is double the maximum Basic CID.
+# A decimal number
+#wmx.basic_cid_max: 320
+
+# Set to TRUE to use the Corrigendum 2 version of Wimax message decoding. Set to FALSE to use the 802.16e-2005  version.
+# TRUE or FALSE (case-insensitive)
+#wmx.corrigendum_2_version: FALSE
+
+# Show transaction ID direction bit separately from the rest of the transaction ID field.
+# TRUE or FALSE (case-insensitive)
+#wimaxasncp.show_transaction_id_d_bit: FALSE
+
+# Print debug output to the console.
+# TRUE or FALSE (case-insensitive)
+#wimaxasncp.debug_enabled: FALSE
+
+# Set UDP port for WiMAX ASN Control Plane Protocol
+# A decimal number
+#wimaxasncp.udp.wimax_port: 2231
+
+# Version of the NWG that the R6 protocol complies with
+# One of: R1.0 v1.0.0, R1.0 v1.2.0, R1.0 v1.2.1
+# (case-insensitive).
+#wimaxasncp.nwg_version: R1.0 v1.2.1
+
+# WiMAX MAX PHY UDP port
+# A decimal number
+#wimaxmacphy.udp.port: 0
 
 # Whether the WINS-Replication dissector should reassemble messages spanning multiple TCP segments. To use this option, you must also enable "Allow subdissectors to reassemble TCP streams" in the TCP protocol settings.
 # TRUE or FALSE (case-insensitive)
