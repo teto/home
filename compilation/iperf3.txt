@@ -1,0 +1,26 @@
+Pendre soit la version patchée sur mon github soit appliquer le patch ci dessous:
+not sure about the "--with-pic"
+./configure CFLAGS="-g -U_FORTIFY_SOURCE -fPIC" LDFLAGS="-pie -rdynamic" --with-pic --disable-shared --disable-static
+$ git clone git@github.com:teto/iperf.git
+$ git checkout -b dce_fix gh/dce_fix
+
+
+
+https://groups.google.com/forum/#!searchin/ns-3-users/dce$20iperf3/ns-3-users/RkFPqXSkyvs/fxfsjgVfAuYJ
+Patch à utiliser pour pouvoir le compiler tranquillement:
+diff --git a/src/Makefile.am b/src/Makefile.am
+index 23b0c72..271d4cb 100644
+--- a/src/Makefile.am
++++ b/src/Makefile.am
+@@ -49,9 +49,9 @@ iperf3_LDFLAGS          = -g
+ iperf3_profile_SOURCES  = main.c \
+                                                  $(libiperf_la_SOURCES)
+ 
+-iperf3_profile_CFLAGS   = -pg -g
++iperf3_profile_CFLAGS   =  -g
+ iperf3_profile_LDADD    = libiperf.la
+-iperf3_profile_LDFLAGS  = -pg -g
++iperf3_profile_LDFLAGS  =  -g
+ 
+ # Specify the sources and various flags for the test cases
+ t_timer_SOURCES         = t_timer.c

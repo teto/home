@@ -362,7 +362,7 @@ function! FocusLost_SaveFiles()
   exe ":au FocusLost" expand("%") ":wa"
 endfunction
 
-nnoremap <F3> :Neomake<CR>
-nnoremap <F4> :call FocusLost_SaveFiles()
+nnoremap <F4> :Neomake<CR>
+nnoremap <F5> :call FocusLost_SaveFiles()
 let g:gitgutter_enabled = 0
 " vim:foldmethod=marker:foldlevel=0

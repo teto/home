@@ -1,4 +1,4 @@
-# ZSH specific
+#  vim: set et fenc=utf-8 ff=unix sts=0 sw=4 ts=4 : 
 # Suffix aliases execute a command based on a file’s extension. Suffix aliases are used with the alias -s command.  Here’s my favorite feature of aliases in zsh.  By adding this line:
 # g => global , does not depend on position on line
 alias -s html=nvim
@@ -21,9 +21,7 @@ alias enfr="dict -d fd-eng-fra"
 
 
 
-##############################
-### Git
-##############################
+### Git {{{
 alias ga='git add'
 alias gp='git push'
 alias gl='git log'
@@ -44,7 +42,7 @@ alias gcl='git clone'
 alias gta='git tag -a -m'
 alias gf='git reflog'
 alias gbr='git branch'
-
+# }}}
 
 
 # not always needed ?
@@ -54,15 +52,15 @@ alias servethis="python -c 'import SimpleHTTPServer; SimpleHTTPServer.test()'"
 alias pypath='python -c "import sys; print sys.path" | tr "," "\n" | grep -v "egg"'
 alias set_time="dpkg-reconfigure tzdata"
 
-##############################
-### ls related updates
-##############################
+### ls related updates {{{
 # I also export TIME_STYLE to change the output of this
+# {{{
 alias ls="ls --color=auto --time-style=iso"
 alias ll="ls -l" 
 alias la="ls -a"
 alias lla="ls -la"
 alias llt="ls -lt"
+# }}}
 
 ### oftenly used programs
 alias v="nvim"
@@ -80,7 +78,7 @@ alias ....="cd ../../.."
 
 ##############################
 ### vagrant
-##############################
+############################### {{{
 alias -g vinit="vagrant init"
 alias -g vup="vagrant up"
 alias -g vssh="vagrant ssh"
@@ -88,10 +86,9 @@ alias -g vhalt="vagrant halt"
 alias -g vpi="vagrant plugin install"
 alias -g vpu="vagrant plugin uninstall"
 alias -g vpl="vagrant plugin list"
+# }}}
 
-##############################
-### package managmeent related
-##############################
+### package managmeent related {{{
 alias -g agi="sudo apt install"
 alias -g agr="sudo apt remove"
 alias -g agy="sudo apt -y install"
@@ -101,6 +98,7 @@ alias -g acs="apt-cache show"
 alias -g agu="sudo apt update "
 alias -g agg="sudo apt update && sudo apt upgrade"
 alias -g agf="sudo apt update && sudo apt full-upgrade"
+# }}}
 
 alias sdpkg="sudo dpkg"
 
@@ -124,9 +122,8 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
-
-
 ##############################
 ### compilation related 
 ##############################
 alias makej="make -j4"
+alias nm="nm -l"
