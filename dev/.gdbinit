@@ -2,12 +2,16 @@
 # to export a backtrace to a file
 # set logging on
 # set logging file <myfile>
-# autoload .gdbinit in subfolders of
 #
+# Some useful commands:
 # List loaded sources: info sources
 # list libraries: info sharedlibrary
 # library related configs are of the form set solib-search-path
-# symbol-filey
+# symbol-file
+# to display the TUI, either launch gdb via 'gdbtui' or type CTRL-X CTRL-A once gdb launched
+
+
+# autoload .gdbinit in subfolders of
 add-auto-load-safe-path /home/teto/
 
 source ~/.gdb/printers.py
