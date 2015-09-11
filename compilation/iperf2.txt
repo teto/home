@@ -1,0 +1,8 @@
+To confirm:
+
+apt-get source iperf
+
+Cd into the source directory
+$ ./autogen.sh
+$ ./configure
+$ patch < ~/dce/utils/iperf_4_dce.patch

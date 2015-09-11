@@ -54,7 +54,8 @@ export TERMINAL="urxvt"
 DCE_PATH="$HOME/mptcpoff" # for liblinux.so
 DCE_PATH="$DCE_PATH:$HOME/iproute2/ip" # for 'ip' program
 DCE_PATH="$DCE_PATH:$HOME/iperf3/src" # for 'iperf3' program
-DCE_PATH="$DCE_PATH:$HOME/iperf-2.0.5/src" # for 'iperf' program
+#DCE_PATH="$DCE_PATH:$HOME/iperf-2.0.5/src" # for 'iperf' program
+DCE_PATH="$DCE_PATH:$HOME/iperf2/src" # for 'iperf' program
 export DCE_PATH
 
 export DCE_FOLDER="$HOME/dce"

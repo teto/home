@@ -28,6 +28,9 @@ hg clone http://code.nsnam.org/ns-3-dce  -r dce-1.2
 
 ./waf configure --with-ns3
 
+nomadeshop.com
+hawaiisurf.com
+xjsadow leboncoin
 
 Thus in my case:
 --enable-opt removed since it does not work well for now:
