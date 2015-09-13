@@ -290,10 +290,10 @@ let g:ctrlp_extensions= ['dir','mark']
 " }}}
 
 " Search parameters {{{
-set nohlsearch " highlight search terms
+set hlsearch " highlight search terms
 set incsearch " show search matches as you type
 set ignorecase " ignore case when searching
-" set smartcase " to check
+set smartcase " take case into account if search entry has capitals in it
 " }}}
 
 " YouCompleteMe config {{{
