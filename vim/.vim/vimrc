@@ -15,25 +15,30 @@ set viminfo='100,f1
 
 set splitbelow	" on horizontal splits
 set splitright   " on vertical split
-set autoread " automatically reload file when it has been changed
+set autoread " automatically reload file when it has been changed (hope they fix this damn feature one day)
 set linebreak " better display
+set breakat=80
+set breakindent=1
+set showbreak=">>>"
 filetype on                   " required!
 set backspace=indent,eol,start
 
-set tabstop=4 " a tab takes 4 characters (local to buffer)
-set shiftwidth=4 " Number of spaces to use per step of (auto)indent.
 
 " start scrolling before reaching end of screen in order to keep more context
 set scrolloff=3
 
 "  compilation option
-set smartindent 
 
-set noshowmode " hide the default mode text
-set smarttab "use shiftwidth
-set showmode " Show the current mode
-
+set noshowmode " Show the current mode on command line
 set cursorline " highlight cursor line
+
+" Tabulation config {{{
+set tabstop=4 " a tab takes 4 characters (local to buffer)
+set shiftwidth=4 " Number of spaces to use per step of (auto)indent.
+set smarttab "use shiftwidth
+set smartindent 
+" }}}
+
 " Netrw configuration {{{
 " decide with which program to open files when typing 'gx'
 let g:netrw_browsex_viewer="xdg-open"
@@ -55,9 +60,6 @@ let mapleader = " "
 
 nnoremap <Leader>/ :set hlsearch! hls?<CR> " toggle search highlighting
 
-" search for  item in quickfix list
-nnoremap <F2> :cp<CR>
-nnoremap <F3> :cn<CR>
 
 
 
@@ -183,12 +185,6 @@ noremap gy "+y
 " noremap <F3> :Tlist<Enter>
 
 
-" est mappe a autre chose pour l'instant
-noremap <F4> exec ":emenu <tab>"
-
-
-" should become useless with neovim
-noremap <F10> :set paste!<CR>
 
 
 " todo enable rainbow parentheses
@@ -202,13 +198,12 @@ noremap <F10> :set paste!<CR>
 
 " let use sudo once the file is loaded
 " source ~/.vim/insert_mode
+source ~/.vim/plug.vim
 source ~/.vim/display.vim
 " source ~/.vim/colors.vim
-source ~/.vim/plug.vim
 source ~/.vim/cscope.vim
 source ~/.vim/splits.vim
 source ~/.vim/vim_file_chooser.vim
-source ~/.vim/plug.vim
 " }}}
 
 "cmap w!! w !sudo tee % >/dev/null
@@ -294,6 +289,7 @@ set hlsearch " highlight search terms
 set incsearch " show search matches as you type
 set ignorecase " ignore case when searching
 set smartcase " take case into account if search entry has capitals in it
+set nowrapscan " prevent from going back to the beginning of the file
 " }}}
 
 " YouCompleteMe config {{{
@@ -336,6 +332,12 @@ let g:airline_section = '|'
 "}}}
 autocmd CompleteDone * pclose " close the popup on python completion
 
+
+" Gitgutter config {{{
+
+let g:gitgutter_enabled = 0
+"}}}
+
 " Restor cursor position {{{
 function! ResCur()
   " $ => last line of buffer
@@ -362,7 +364,16 @@ function! FocusLost_SaveFiles()
   exe ":au FocusLost" expand("%") ":wa"
 endfunction
 
+" search for  item in quickfix list
+nnoremap <F2> :cp<CR>
+nnoremap <F3> :cn<CR>
 nnoremap <F4> :Neomake<CR>
 nnoremap <F5> :call FocusLost_SaveFiles()
-let g:gitgutter_enabled = 0
+" search for  item in quickfix list
+nnoremap <F7> :bp<CR>
+nnoremap <F8> :bn<CR>
+" est mappe a autre chose pour l'instant
+"noremap <F4> exec ":emenu <tab>"
+" should become useless with neovim
+noremap <F10> :set paste!<CR>
 " vim:foldmethod=marker:foldlevel=0
