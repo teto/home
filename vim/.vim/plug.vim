@@ -23,6 +23,10 @@ Plug 'dietsche/vim-lastplace' " restore last cursor postion
 
 "Plug 'CCTree'
 "Plug 'showmarks2'
+Plug 'teto/nvim-wm'
+"Plug 'teto/vim-listchars'
+Plug '~/vim-listchars'
+Plug 'vim-voom/VOoM'
 Plug 'vim-voom/VOoM'
 Plug 'blueyed/vim-diminactive'
 Plug 'tpope/vim-sleuth' " Dunno what it is

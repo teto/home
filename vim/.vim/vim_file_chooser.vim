@@ -6,7 +6,7 @@
 " ":RagerChooser" or the keybinding "<leader>r".  Once you select one or more
 " files, press enter and ranger will quit again and vim will open the selected
 " files.
-
+" https://github.com/hut/ranger/blob/master/examples/vim_file_chooser.vim
 function! RangeChooser()
     let temp = tempname()
     " The option "--choosefiles" was added in ranger 1.5.1. Use the next line
