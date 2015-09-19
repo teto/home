@@ -9,12 +9,17 @@ if !has('nvim')
     " terminal codes are ignored by neovim
     " https://github.com/neovim/neovim/issues/2330
     set t_Co=256                        " use 256 colors
+	scriptencoding utf-8
+	" allow to use fancy caracters
+	if &termencoding == ""
+		let &termencoding = &encoding
+	endif
+	set encoding=utf-8
+	setglobal fileencoding=utf-8
 endif
 
 set viminfo='100,f1
 
-set splitbelow	" on horizontal splits
-set splitright   " on vertical split
 set autoread " automatically reload file when it has been changed (hope they fix this damn feature one day)
 set linebreak " better display
 set breakat=80
@@ -80,13 +85,6 @@ set showmatch
 " " was opened or selected.
 " " Note: When this option is on some plugins may not work.
 
-scriptencoding utf-8
-" allow to use fancy caracters
-if &termencoding == ""
-	let &termencoding = &encoding
-endif
-set encoding=utf-8
-setglobal fileencoding=utf-8
 
 " display a menu when need t ocomplete a command 
 set wildmenu
@@ -170,10 +168,11 @@ set wildignore+=lib
 " to load plugins in ftplugin matching ftdetect
 filetype plugin on
 
-" Modeline shortcuts 
+" Modeline shortcuts  {{{
 set modeline
 set modelines=4
 nmap <leader>ml :Modeliner<Enter>
+" }}}
 
 " X clipboard gets aliased to +
 set clipboard=unnamedplus
@@ -197,9 +196,7 @@ noremap gy "+y
 " Plug section {{{
 
 " let use sudo once the file is loaded
-" source ~/.vim/insert_mode
 source ~/.vim/plug.vim
-"source ~/.vim/display.vim
 " source ~/.vim/colors.vim
 " this should be made a plugin as well
 source ~/.vim/vim_file_chooser.vim
@@ -244,6 +241,9 @@ nmap <leader>sw<down>  :botright new<CR>
 
 nnoremap <silent> + :exe "resize +3"
 nnoremap <silent> - :exe "resize -3"
+
+set splitbelow	" on horizontal splits
+set splitright   " on vertical split
 
 " }}}
 
@@ -385,6 +385,20 @@ let g:airline_section = '|'
 "}}}
 autocmd CompleteDone * pclose " close the popup on python completion
 
+
+" Anzu plugin / search improvements {{{
+nmap n <Plug>(anzu-n-with-echo)
+nmap N <Plug>(anzu-N-with-echo)
+nmap * <Plug>(anzu-star-with-echo)
+nmap # <Plug>(anzu-sharp-with-echo)
+
+" clear status
+nmap <Esc><Esc> <Plug>(anzu-clear-search-status)
+
+
+" statusline
+set statusline=%{anzu#search_status()}
+" }}}
 
 " Gitgutter config {{{
 

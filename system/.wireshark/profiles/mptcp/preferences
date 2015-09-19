@@ -2411,7 +2411,7 @@ nameres.hosts_file_handling: TRUE
 
 # Whether to validate the IPv4 checksum
 # TRUE or FALSE (case-insensitive)
-#ip.check_checksum: FALSE
+ip.check_checksum: TRUE
 
 # Whether to correct for TSO-enabled (TCP segmentation offload) hardware captures, such as spoofing the IP packet length
 # TRUE or FALSE (case-insensitive)
@@ -4638,7 +4638,7 @@ nameres.hosts_file_handling: TRUE
 
 # Whether to validate the TCP checksum or not.  (Invalid checksums will cause reassembly, if enabled, to fail.)
 # TRUE or FALSE (case-insensitive)
-#tcp.check_checksum: FALSE
+tcp.check_checksum: TRUE
 
 # Whether subdissector can request TCP streams to be reassembled
 # TRUE or FALSE (case-insensitive)
