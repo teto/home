@@ -1,12 +1,12 @@
 
 
-bindsym XF86AudioNext exec notify-send "Audio next"
-bindsym XF86AudioPrev exec notify-send "Audio prev"
-bindsym XF86AudioPause exec notify-send "Audio Pause"
+bindsym XF86AudioNext exec mpc next; exec notify-send "Audio next"
+bindsym XF86AudioPrev exec mpc prev; exec notify-send "Audio prev"
+bindsym XF86AudioPause exec mpc toggle; exec notify-send "Audio Pause"
 
-bindsym XF86AudioRaiseVolume exec notify-send "Audio Raised volume"
-bindsym XF86AudioLowerVolume exec notify-send "Lowered volume to XXX"
-bindsym XF86AudioMute exec notify-send "Mute"
+bindsym XF86AudioRaiseVolume exec amixer -q set Master 2dB+ unmute; exec notify-send "Audio Raised volume"
+bindsym XF86AudioLowerVolume exec amixer -q set Master 2dB- unmute; exec notify-send Audio lowered
+bindsym XF86AudioMute exec amixer -q set Master toggle; exec notify-send "Mute toggle"
 
 
 

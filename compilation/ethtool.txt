@@ -1,0 +1,5 @@
+git://git.kernel.org/pub/scm/network/ethtool/ethtool.git
+
+gch -b dce v3.14
+
+

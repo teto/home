@@ -12,7 +12,7 @@ log = logging.getLogger(__name__)
 # log.setLevel(logging.INFO)
 log.setLevel(logging.DEBUG)
 
-log.addHandler(logging.FileHandler("/home/teto/i3nvim.log", delay=False))
+log.addHandler(logging.FileHandler(os.path.join(os.getenv("HOME","") , "i3nvim.log"), delay=False))
 
 """
 Exit value:
@@ -28,9 +28,68 @@ directions = {
 
 
 
+def thunderbird_dispatcher(direction):
+        if direction == 'right':
+                key = "Ctrl+Tab"
+        elif direction == 'left':
+                key = "Ctrl+Shift+Tab"
+        else:
+                return False
+        cmd = "xdotool search '{name}' key '{key}'".format(
+                name=get_focused_window_name(),
+                key=key,
+        )
+        log.debug('Launching command %s' % cmd)
+        os.system(cmd)
+        return True
+
+def weechat_dispatcher(direction):
+        if direction == 'right':
+                key = "F5"
+        elif direction == 'left':
+                key = "F6"
+        else:
+                return False
+        cmd = "xdotool key {key}".format(
+                # name=get_focused_window_name(),
+                key=key,
+        )
+        log.debug('Launching command %s' % cmd)
+        os.system(cmd)
+        return True
+
+
+def nvim_dispatcher(direction):
+        print("TRIDI")
+        log.info("NVIM detected")
+        res, socket = get_nvim_socket()
+
+        if not res:
+                log.error("Could not find vim socket")
+        elif send_nvim_wincmd(socket, directions[direction]):
+                log.debug("nvim changed its focus")
+                # if neovim succeeded changing buffer 
+                return True
+        else:
+                log.debug("nvim did not change focus")
+        return False
+
+def get_dispatcher():
+        name = get_focused_window_name()
+        log.debug("Window name=%s" % name)
+# if we are focusing neovim
+        if name.endswith("NVIM"):
+                return nvim_dispatcher
+        elif name.startswith("matt@"):
+                return weechat_dispatcher
+        elif name.endswith("Thunderbird"):
+                return thunderbird_dispatcher
+        
+        return i3_dispatcher
+
 def get_focused_window_name():
         try:
-                out = subprocess.check_output("xdotool getwindowfocus getwindowname", shell=True).decode()
+                out = subprocess.check_output("xdotool getwindowfocus getwindowname", shell=True).decode('utf-8').rstrip()
                 return out
         except Exception as e:
                 log.error(e)
@@ -91,10 +150,11 @@ def send_nvim_wincmd(path_to_socket, direction):
 
         return False
 
-def send_i3_cmd(direction):
+def i3_dispatcher(direction):
         cmd = "i3-msg focus %s" % (direction)
         log.info("running command: %s" % cmd)
         os.system(cmd)
+        return True
 
 """
 Program starts here
@@ -106,24 +166,14 @@ parser.add_argument("--test", action="store_const", const=True)
 
 args = parser.parse_args()
 
+"""
+get dispatcher function
+"""
+dispatcher = get_dispatcher()
 
-name = get_focused_window_name().rstrip()
-log.debug("Window name=%s" % name)
-# if we are focusing neovim
-if name.endswith("NVIM"):
-
-        log.info("NVIM detected")
-        res, socket = get_nvim_socket()
-
-        if not res:
-                log.error("Could not find vim socket")
-        elif send_nvim_wincmd(socket, directions[args.direction]):
-                log.debug("nvim changed its focus")
-                # if neovim succeeded changing buffer 
-                exit(0)
-        else:
-                log.debug("nvim did not change focus")
-
+log.info("Calling dispatcher %r with direction %s" % (dispatcher, args.direction))
+# dispatcher("toto")
 # if anything failed or nvim didn't change buffer focus, we forward the command o i3
-send_i3_cmd(args.direction)
+if not dispatcher(args.direction):
+        i3_dispatcher(args.direction)
 exit(0)

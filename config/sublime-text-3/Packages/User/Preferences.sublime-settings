@@ -7,16 +7,17 @@
 	"caret_style": "smooth",
 	"color_scheme": "Packages/User/Monokai (Flake8Lint).tmTheme",
 	"enable_tab_scrolling": true,
+	"font_size": 10,
 	"gutter": true,
 	"highlight_line": true,
 	"highlight_modified_tabs": true,
 	"ignored_packages":
 	[
-		"Python PEP8 Autoformat",
 		"Anaconda",
-		"Makefile",
 		"AutoPEP8",
 		"GitGutter",
+		"Makefile",
+		"Python PEP8 Autoformat",
 		"Vintage"
 	],
 	"line_numbers": true

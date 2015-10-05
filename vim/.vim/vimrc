@@ -436,6 +436,11 @@ let g:listchar_formats=[
 nmap <F11> <Plug>(ToggleListchars)
 
 " }}}
+
+" Grepper {{{
+nnoremap <leader>git :Grepper  -tool git -open -nojump
+nnoremap <leader>ag  :Grepper! -tool ag  -open -switch
+" }}}
 "
 " Put this in vimrc, add custom commands in the function.
 function! FocusLost_SaveFiles()

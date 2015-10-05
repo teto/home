@@ -132,6 +132,7 @@ status.register("updates",
                 format = "Updates: {count}",
                 format_no_updates = "No updates",
                 on_leftclick=["urxvtc", '-e', 'zsh' , '-c' , 'sudo apt upgrade; zsh'],
+                on_rightclick="run",
                 backends = [aptget.AptGet() ])
 
 # print("alsa")

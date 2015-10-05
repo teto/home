@@ -110,6 +110,7 @@ mode "focused" {
                 bindsym Escape mode "default"
 }
 
+bindsym $mod+shift+s sticky toggle
 
 # TODO remove since it is used by Dunst ?
 bindsym $mod+n mode "focused"
@@ -173,16 +174,16 @@ bindsym $mod+w exec python ~/.i3/runorfocus.py "Firefox" firefox
 
 # MATT important !!
 # change focus
-bindsym $mod+h exec ~/.i3/i3nvim.py left
-bindsym $mod+j exec ~/.i3/i3nvim.py down
-bindsym $mod+k exec ~/.i3/i3nvim.py up
-bindsym $mod+l exec ~/.i3/i3nvim.py right
+bindsym $mod+h exec ~/.i3/i3dispatch.py left
+bindsym $mod+j exec ~/.i3/i3dispatch.py down
+bindsym $mod+k exec ~/.i3/i3dispatch.py up
+bindsym $mod+l exec ~/.i3/i3dispatch.py right
 
 # alternatively, you can use the cursor keys:
-bindsym $mod+Left exec ~/.i3/i3nvim.py left
-bindsym $mod+Down exec ~/.i3/i3nvim.py down
-bindsym $mod+Up   exec ~/.i3/i3nvim.py up
-bindsym $mod+Right exec ~/.i3/i3nvim.py right
+bindsym $mod+Left exec ~/.i3/i3dispatch.py left
+bindsym $mod+Down exec ~/.i3/i3dispatch.py down
+bindsym $mod+Up   exec ~/.i3/i3dispatch.py up
+bindsym $mod+Right exec ~/.i3/i3dispatch.py right
 
 # move focused window
 bindsym $mod+Shift+J move left

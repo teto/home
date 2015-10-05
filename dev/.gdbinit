@@ -51,7 +51,12 @@ end
 # enters python mode
 python
 import os
-gdb.execute('directory ' + '/home/teto/iperf3/src')
+dirs = [
+"/home/teto/iperf3/src",
+"/home/teto/ns3off/src",
+"/home/teto/iperf2/src"
+]
+gdb.execute('directory ' + ' '.join(dirs))
 
 gdb.execute("set history filename " + os.environ['XDG_CACHE_HOME'] + "gdb_history")
 
