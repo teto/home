@@ -1,4 +1,12 @@
 === build with cmake (advised)==
+
+On UBUNTU, it's possible that wireshark doesn't find lua else wireshark relies on lua.pc to find it
+pkg-config --cflags lua / lu5.2 
+
+It may be a good idea to copy 
+/usr/lib/x86_64-linux-gnu/pkgconfig/lua5.2.pc
+and rename it to lua.pc for instance
+
 Some example here;
 https://git.lekensteyn.nl/peter/wireshark-notes/tree/sync-build.sh#n94
         -DCMAKE_INSTALL_PREFIX=/tmp/wsroot \
