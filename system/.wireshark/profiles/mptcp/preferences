@@ -1,4 +1,4 @@
-# Configuration file for Wireshark 1.99.9.
+# Configuration file for Wireshark 1.99.10.
 #
 # This file is regenerated each time preferences are saved within
 # Wireshark. Making manual changes should be safe, however.
@@ -7,7 +7,7 @@
 
 ####### User Interface ########
 
-# Open a console window (WIN32 only)
+# Open a console window (Windows only)
 # One of: NEVER, AUTOMATIC, ALWAYS
 # (case-insensitive).
 gui.console_open: ALWAYS
@@ -195,7 +195,7 @@ gui.auto_scroll_on_expand: TRUE
 
 # Packet list hidden columns
 # List all columns to hide in the packet list.
-gui.column.hidden: %Cus:frame.time_delta:0:R,%Cus:ip.src:1:R,%Cus:ip.dst:1:R,%Cus:tcp.options.mptcp.subflowseqno:0:R,%Cus:tcp.options.mptcp.seq2dsn:0:R,%Cus:tcp.len:0:R,%Cus:tcp.options.mptcp.recvtok:0:R,%Cus:tcp.options.mptcp.sendkey:0:R,%Cus:tcp.options.mptcp.datafin.flag:0:R,%Cus:tcp.options.mptcp.subflowseqno:0:R,%Cus:mptcp.stream:0:R,%p,%Cus:tcp.options.mptcp.recvkey:0:R,%Cus:mptcp.analysis.mapping.reinjection:0:R
+gui.column.hidden: %Cus:mptcp.stream:0:R,%Cus:ip.src:1:R,%Cus:ip.dst:1:R,%Cus:tcp.options.mptcp.subflowseqno:0:R,%Cus:tcp.options.mptcp.seq2dsn:0:R,%Cus:tcp.len:0:R,%Cus:tcp.options.mptcp.recvtok:0:R,%Cus:tcp.options.mptcp.sendkey:0:R,%Cus:tcp.options.mptcp.datafin.flag:0:R,%Cus:tcp.options.mptcp.subflowseqno:0:R,%Cus:mptcp.stream:0:R,%p,%Cus:tcp.options.mptcp.recvkey:0:R,%Cus:mptcp.analysis.mapping.reinjection:0:R
 
 # Packet list column format
 # Each pair of strings consists of a column title and its format
@@ -203,6 +203,9 @@ gui.column.format:
 	"No.", "%Cus:frame.number:0:R",
 	"Time", "%Rt",
 	"Time delta", "%Cus:frame.time_delta:0:R",
+	"mptcpstream", "%Cus:mptcp.stream:0:R",
+	"tcpstream", "%Cus:tcp.stream:0:R",
+	"latency", "%Cus:mptcp.app_latency:0:R",
 	"Source", "%ns",
 	"ITR", "%Cus:ip.src:1:R",
 	"ETR", "%Cus:ip.dst:1:R",
@@ -211,11 +214,12 @@ gui.column.format:
 	"ack", "%Cus:tcp.ack:0:R",
 	"mappinglength", "%Cus:tcp.options.mptcp.datalvllen:0:R",
 	"Raw dack", "%Cus:tcp.options.mptcp.rawdataack32:0:R",
-	"processed dataack", "%Cus:tcp.options.mptcp.dataack:0:R",
+	"processed dataack", "%Cus:mptcp.dataack:0:R",
 	"DSS_ssn", "%Cus:tcp.options.mptcp.subflowseqno:0:R",
 	"SeqToDSN", "%Cus:tcp.options.mptcp.seq2dsn:0:R",
-	"dss Raw DSN", "%Cus:tcp.options.mptcp.rawdataseqno:0:R",
-	"dss processed DSN", "%Cus:tcp.options.mptcp.dataseqno:0:R",
+	"dssRawDSN", "%Cus:tcp.options.mptcp.rawdataseqno:0:R",
+	"dsn_end", "%Cus:mptcp.dsn_end:0:R",
+	"dssprocessedDSN", "%Cus:mptcp.dsn:0:R",
 	"seg len", "%Cus:tcp.len:0:R",
 	"recv token", "%Cus:tcp.options.mptcp.recvtok:0:R",
 	"ISDN", "%Cus:tcp.options.mptcp.expected_idsn:0:R",
@@ -1164,6 +1168,10 @@ nameres.hosts_file_handling: TRUE
 # (case-insensitive).
 #btvdp.vdp.codec: H263
 
+# Dissect next layer
+# TRUE or FALSE (case-insensitive)
+#btsnoop.dissect_next_layer: FALSE
+
 # TCP Port to Accept Bundle Protocol Connections
 # A decimal number
 #bundle.tcp.port: 4556
@@ -1855,6 +1863,14 @@ nameres.hosts_file_handling: TRUE
 # A decimal number
 #fcip.target_port: 3225
 
+# Dissect next layer
+# TRUE or FALSE (case-insensitive)
+#file-pcap.dissect_next_layer: FALSE
+
+# Dissect next layer
+# TRUE or FALSE (case-insensitive)
+#file-pcapng.dissect_next_layer: FALSE
+
 # Whether the FIX dissector should reassemble messages spanning multiple TCP segments. To use this option, you must also enable "Allow subdissectors to reassemble TCP streams" in the TCP protocol settings.
 # TRUE or FALSE (case-insensitive)
 #fix.desegment: TRUE
@@ -1967,6 +1983,10 @@ nameres.hosts_file_handling: TRUE
 # Whether fragmented GIOP messages should be reassembled
 # TRUE or FALSE (case-insensitive)
 #giop.reassemble: TRUE
+
+# Maximum allowed message size in bytes (default=10485760)
+# A decimal number
+#giop.max_message_size: 10485760
 
 # File containing stringified IORs, one per line.
 # A path to a file
@@ -2774,6 +2794,10 @@ ip.check_checksum: TRUE
 # A decimal number
 #lge_monitor.udp.port: 0
 
+# TCP port used by ENEA LINX, usually 19790
+# A decimal number
+#linxtcp.tcp.port: 0
+
 # Dissect this ethertype as LLT traffic in addition to the default, 0xCAFE.
 # A hexadecimal number
 #llt.alternate_ethertype: 0
@@ -2805,6 +2829,10 @@ ip.check_checksum: TRUE
 # Whether to validate the LWL4 crc when crc bit is not set
 # TRUE or FALSE (case-insensitive)
 #lwl4.check_crc: TRUE
+
+# 128-bit decryption key in hexadecimal format
+# A string
+#lwm.lwmes_key: 
 
 # Set the UDP port for lwres daemon(if other than the default of 921)
 # A decimal number
@@ -3100,6 +3128,14 @@ ip.check_checksum: TRUE
 # Disable to blame all packets with CW.Reserved <> 0. This conforms to RFC4717.
 # TRUE or FALSE (case-insensitive)
 #mplspwatmn1cw.extend_cw_length_with_rsvd: FALSE
+
+# Assume TCP Option MPTCP (30)
+# TRUE or FALSE (case-insensitive)
+#mptcp.analyze_mptcp: TRUE
+
+# Assume TCP Option MPTCP (30)
+# TRUE or FALSE (case-insensitive)
+mptcp.analyze_mappings: TRUE
 
 # Whether the MQ dissector should reassemble messages spanning multiple TCP segments. To use this option, you must also enable "Allow subdissectors to reassemble TCP streams" in the TCP protocol settings.
 # TRUE or FALSE (case-insensitive)
@@ -3494,7 +3530,7 @@ ip.check_checksum: TRUE
 # TRUE or FALSE (case-insensitive)
 #opsi.desegment_opsi_messages: TRUE
 
-#  OptoMMP TCP port if other than the default
+#  OptoMMP TCP or UDP port if other than the default
 # A decimal number
 #optommp.tcp.port: 0
 
@@ -3788,17 +3824,21 @@ ip.check_checksum: TRUE
 # A decimal number
 #quic.udp.quics.port: 443
 
-# Shared secret used to decode User Passwords
+# Shared secret used to decode User Passwords and validate Response Authenticators
 # A string
 #radius.shared_secret: 
+
+# Whether to check or not if Response Authenticator is correct. You need to define shared secret for this to work.
+# TRUE or FALSE (case-insensitive)
+#radius.validate_authenticator: FALSE
 
 # Whether to add or not to the tree the AVP's payload length
 # TRUE or FALSE (case-insensitive)
 #radius.show_length: FALSE
 
-# An alternate UDP port to decode as RADIUS
-# A decimal number
-#radius.alternate_port: 0
+# A list of UDP ports to decode as RADIUS
+# A string denoting an positive integer range (e.g., "1-20,30-40")
+#radius.ports: 1645,1646,1700,1812,1813,3799
 
 # Time to live for a radius request used for matching it with a response
 # A decimal number
@@ -4563,6 +4603,10 @@ ip.check_checksum: TRUE
 # TRUE or FALSE (case-insensitive)
 #sua.set_addresses: FALSE
 
+# No description
+# TRUE or FALSE (case-insensitive)
+#sv.decode_data_as_phsmeas: FALSE
+
 # Set the port number for synchrophasor frames over UDP(if other than the default of 4713)
 # A decimal number
 #synphasor.udp_port: 4713
@@ -4681,18 +4725,6 @@ tcp.check_checksum: TRUE
 # TRUE or FALSE (case-insensitive)
 #tcp.dissect_experimental_options_with_magic: TRUE
 
-# Assume TCP Option MPTCP (30)
-# TRUE or FALSE (case-insensitive)
-#tcp.analyze_mptcp: TRUE
-
-# Assume TCP Option MPTCP (30)
-# TRUE or FALSE (case-insensitive)
-#tcp.analyze_mptcp_mapping: FALSE
-
-# Assume TCP Option MPTCP (30)
-# TRUE or FALSE (case-insensitive)
-#tcp.mptcp_show_both_32_and_64: TRUE
-
 # Set the port for IPSEC/ISAKMP messages (typically 10000)
 # A decimal number
 #tcpencap.tcp.port: 0
@@ -4700,6 +4732,22 @@ tcp.check_checksum: TRUE
 # The TDMoE channel that contains the D-Channel.
 # A decimal number
 #tdmoe.d_channel: 24
+
+# The TDMoD channel that contains the D-Channel.
+# A decimal number
+#tdmop.d_channel: 16
+
+# The bitmask of channels in uncompressed TDMoP frame
+# A hexadecimal number
+#tdmop.ts_mask: 0xffffffff
+
+# The ethertype assigned to TDMoP (without IP/UDP) stream
+# A hexadecimal number
+#tdmop.ethertype: 0
+
+# The udp port assigned to TDMoP stream
+# A decimal number
+#tdmop.udpport: 0
 
 # Whether the TDS dissector should reassemble TDS buffers spanning multiple TCP segments. To use this option, you must also enable "Allow subdissectors to reassemble TCP streams" in the TCP protocol settings.
 # TRUE or FALSE (case-insensitive)
