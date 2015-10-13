@@ -11,9 +11,11 @@ endif
 call plug#begin('~/.vim/plugged')
 
 Plug 'Valloric/YouCompleteMe' , { 'do': './install.sh --system-libclang --clang-completer' }
-Plug 'vim-flake8'
+Plug 'vim-flake8' " for python syntax
+Plug 'fisadev/vim-ctrlp-cmdpalette' " sublime text like palette
+Plug 'osyo-manga/vim-anzu' " to improve internal search
 Plug 'hynek/vim-python-pep8-indent' " does not work
-Plug 'mhinz/vim-startify'
+Plug 'mhinz/vim-startify' 
 Plug 'dietsche/vim-lastplace' " restore last cursor postion
 "if has('nvim')
 	Plug 'bling/vim-airline'
@@ -26,7 +28,6 @@ Plug 'dietsche/vim-lastplace' " restore last cursor postion
 Plug 'teto/nvim-wm'
 "Plug 'teto/vim-listchars'
 Plug '~/vim-listchars'
-Plug 'vim-voom/VOoM'
 Plug 'vim-voom/VOoM'
 Plug 'blueyed/vim-diminactive'
 Plug 'tpope/vim-sleuth' " Dunno what it is

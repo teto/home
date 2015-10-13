@@ -7,6 +7,7 @@
 	"caret_style": "smooth",
 	"color_scheme": "Packages/User/Monokai (Flake8Lint).tmTheme",
 	"enable_tab_scrolling": true,
+	"font_size": 10,
 	"gutter": true,
 	"highlight_line": true,
 	"highlight_modified_tabs": true,
@@ -16,7 +17,6 @@
 		"AutoPEP8",
 		"GitGutter",
 		"Makefile",
-		"Package Control",
 		"Python PEP8 Autoformat",
 		"Vintage"
 	],
