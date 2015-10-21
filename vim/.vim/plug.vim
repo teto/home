@@ -1,4 +1,4 @@
-
+" vim: set noet fenc=utf-8 ff=unix sts=0 sw=4 ts=4 : 
 "autoinstalL
 if empty(glob('~/.vim/autoload/plug.vim'))
 	  silent !mkdir -p ~/.vim/autoload
@@ -83,6 +83,7 @@ Plug 'Solarized'
 " Plug 'erezsh/erezvim' "zenburn scheme. This plugin resets some keymaps,
 " annoying
 Plug 'chrisbra/csv.vim'
-Plug 'luochen1990/rainbow' " does it work ?
+" Plug 'luochen1990/rainbow' " does it work ?
+Plug 'eapache/rainbow_parentheses.vim'
 
 call plug#end()
