@@ -1,4 +1,4 @@
-# Configuration file for Wireshark 1.99.10.
+# Configuration file for Wireshark 2.1.0.
 #
 # This file is regenerated each time preferences are saved within
 # Wireshark. Making manual changes should be safe, however.
@@ -195,7 +195,7 @@ gui.auto_scroll_on_expand: TRUE
 
 # Packet list hidden columns
 # List all columns to hide in the packet list.
-gui.column.hidden: %Cus:mptcp.stream:0:R,%Cus:ip.src:1:R,%Cus:ip.dst:1:R,%Cus:tcp.options.mptcp.subflowseqno:0:R,%Cus:tcp.options.mptcp.seq2dsn:0:R,%Cus:tcp.len:0:R,%Cus:tcp.options.mptcp.recvtok:0:R,%Cus:tcp.options.mptcp.sendkey:0:R,%Cus:tcp.options.mptcp.datafin.flag:0:R,%Cus:tcp.options.mptcp.subflowseqno:0:R,%Cus:mptcp.stream:0:R,%p,%Cus:tcp.options.mptcp.recvkey:0:R,%Cus:mptcp.analysis.mapping.reinjection:0:R
+gui.column.hidden: %Cus:frame.number:0:R,%Rt,%Cus:frame.time_delta:0:R,%Cus:mptcp.stream:0:R,%Cus:ip.src:1:R,%Cus:ip.dst:1:R,%Cus:tcp.options.mptcp.subflowseqno:0:R,%Cus:tcp.len:0:R,%Cus:tcp.options.mptcp.recvtok:0:R,%Cus:tcp.options.mptcp.expected_idsn:0:R,%Cus:tcp.options.mptcp.sendkey:0:R,%Cus:tcp.options.mptcp.datafin.flag:0:R,%Cus:tcp.options.mptcp.subflowseqno:0:R,%Cus:mptcp.stream:0:R,%p,%Cus:tcp.options.mptcp.recvkey:0:R,%Cus:mptcp.analysis.mapping.reinjection:0:R
 
 # Packet list column format
 # Each pair of strings consists of a column title and its format
@@ -212,14 +212,13 @@ gui.column.format:
 	"Destination", "%rnd",
 	"tcpseq", "%Cus:tcp.seq:0:R",
 	"ack", "%Cus:tcp.ack:0:R",
-	"mappinglength", "%Cus:tcp.options.mptcp.datalvllen:0:R",
-	"Raw dack", "%Cus:tcp.options.mptcp.rawdataack32:0:R",
-	"processed dataack", "%Cus:mptcp.dataack:0:R",
-	"DSS_ssn", "%Cus:tcp.options.mptcp.subflowseqno:0:R",
-	"SeqToDSN", "%Cus:tcp.options.mptcp.seq2dsn:0:R",
+	"dsn", "%Cus:mptcp.dsn:0:R",
+	"dss_dsn", "%Cus:mptcp.dss.dsn:0:R",
+	"dss_length", "%Cus:tcp.options.mptcp.datalvllen:0:R",
 	"dssRawDSN", "%Cus:tcp.options.mptcp.rawdataseqno:0:R",
-	"dsn_end", "%Cus:mptcp.dsn_end:0:R",
-	"dssprocessedDSN", "%Cus:mptcp.dsn:0:R",
+	"RawDack", "%Cus:tcp.options.mptcp.datalvllen:0:R",
+	"processed dataack", "%Cus:mptcp.ack:0:R",
+	"DSS_ssn", "%Cus:tcp.options.mptcp.subflowseqno:0:R",
 	"seg len", "%Cus:tcp.len:0:R",
 	"recv token", "%Cus:tcp.options.mptcp.recvtok:0:R",
 	"ISDN", "%Cus:tcp.options.mptcp.expected_idsn:0:R",
@@ -233,8 +232,8 @@ gui.column.format:
 	"Length", "%L",
 	"Info", "%i",
 	"recv key", "%Cus:tcp.options.mptcp.recvkey:0:R",
-	"src port", "%uS",
-	"dst port", "%uD",
+	"sport", "%uS",
+	"dport", "%uD",
 	"flags", "%Cus:tcp.flags:0:R",
 	"reinjections", "%Cus:mptcp.analysis.mapping.reinjection:0:R"
 
@@ -657,6 +656,10 @@ nameres.hosts_file_handling: TRUE
 # Enable this option to recognise all traffic on RTP dynamic payload type 96 (0x60) as FEC data corresponding to Pro-MPEG Code of Practice #3 release 2
 # TRUE or FALSE (case-insensitive)
 #2dparityfec.enable: FALSE
+
+# Derive IID from a short 16-bit address according to RFC 4944 (using the PAN ID).
+# TRUE or FALSE (case-insensitive)
+#6lowpan.rfc4944_short_address_format: FALSE
 
 # IPv6 prefix to use for stateful address decompression.
 # A string
@@ -1457,6 +1460,10 @@ nameres.hosts_file_handling: TRUE
 # Whether the DHCP failover dissector should reassemble messages spanning multiple TCP segments. To use this option, you must also enable "Allow subdissectors to reassemble TCP streams" in the TCP protocol settings.
 # TRUE or FALSE (case-insensitive)
 #dhcpfo.desegment: TRUE
+
+# Whether Option 18 is dissected as CableLab or RFC 3315
+# TRUE or FALSE (case-insensitive)
+#dhcpv6.cablelabs_interface_id: FALSE
 
 # Whether the Bulk Leasequery dissector should desegment all messages spanning multiple TCP segments
 # TRUE or FALSE (case-insensitive)
@@ -3135,6 +3142,10 @@ ip.check_checksum: TRUE
 
 # Assume TCP Option MPTCP (30)
 # TRUE or FALSE (case-insensitive)
+#mptcp.relative_seq: TRUE
+
+# Assume TCP Option MPTCP (30)
+# TRUE or FALSE (case-insensitive)
 mptcp.analyze_mappings: TRUE
 
 # Whether the MQ dissector should reassemble messages spanning multiple TCP segments. To use this option, you must also enable "Allow subdissectors to reassemble TCP streams" in the TCP protocol settings.
@@ -4729,6 +4740,10 @@ tcp.check_checksum: TRUE
 # A decimal number
 #tcpencap.tcp.port: 0
 
+# Whether the TCPROS dissector should reassemble messages spanning multiple TCP segments. To use this option, you must also enable "Allow subdissectors to reassemble TCP streams" in the TCP protocol settings.
+# TRUE or FALSE (case-insensitive)
+#tcpros.desegment_tcpros_messages: TRUE
+
 # The TDMoE channel that contains the D-Channel.
 # A decimal number
 #tdmoe.d_channel: 24
@@ -4905,7 +4920,7 @@ tcp.check_checksum: TRUE
 # TRUE or FALSE (case-insensitive)
 #udplite.ignore_checksum_coverage: TRUE
 
-# Whether to validate the UDPlite checksum
+# Whether to validate the UDP-Lite checksum
 # TRUE or FALSE (case-insensitive)
 #udplite.check_checksum: FALSE
 

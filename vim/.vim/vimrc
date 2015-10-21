@@ -311,6 +311,7 @@ nnoremap <Leader>e :Vex<CR> " open netrw
 nnoremap <Leader>w :w<CR>
 nnoremap <Leader>o :CtrlP<CR>
 nnoremap <leader>p :CtrlP<CR>
+nnoremap <leader>b :CtrlPBuffer<CR>
 nnoremap <leader>u :Gundo<CR>
 nnoremap <leader>r :<C-U>RangerChooser<CR>
 
@@ -381,7 +382,12 @@ let g:airline_powerline_fonts = 0
 let g:airline_left_sep = ''
 let g:airline_right_sep = ''
 let g:airline_section = '|'
+" display buffers as tabs if no split
+let g:airline#extensions#tabline#enabled = 1 
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
 "let g:airline_theme = 'solarized'
+
 "}}}
 autocmd CompleteDone * pclose " close the popup on python completion
 
@@ -443,7 +449,7 @@ nnoremap <leader>ag  :Grepper! -tool ag  -open -switch
 " }}}
 "
 " Put this in vimrc, add custom commands in the function.
-function! FocusLost_SaveFiles()
+function! AutoSaveOnLostFocus()
   exe ":au FocusLost" expand("%") ":wa"
 endfunction
 
@@ -451,7 +457,7 @@ endfunction
 nnoremap <F2> :cp<CR>
 nnoremap <F3> :cn<CR>
 nnoremap <F4> :Neomake<CR>
-nnoremap <F5> :call FocusLost_SaveFiles()
+nnoremap <F5> :call AutoSaveOnLostFocus()
 " search for  item in quickfix list
 nnoremap <F7> :bp<CR>
 nnoremap <F8> :bn<CR>
