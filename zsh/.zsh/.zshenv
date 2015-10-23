@@ -16,6 +16,7 @@ export XDG_CACHE_HOME="$HOME/.cache"
 #PATH="/usr/lib/w3m:$PATH"
 #PATH="$PATH:/home/teto/csvfix/csvfix/bin"
 PATH="$PATH:/home/teto/powerline/scripts"
+PATH="$PATH:/home/teto/mptcpanalyzer"
 
 # set PATH so it includes user's private bin if it  exists
 if [ -d "$HOME/bin" ] ; then
