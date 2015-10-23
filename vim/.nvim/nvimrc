@@ -7,6 +7,9 @@ if has('nvim')
 	tnoremap <Esc> <C-\><C-n>
 endif
 
+"'.'
+"set shada=!,'50,<1000,s100,:0,n/home/teto/.cache/nvim/shada
+set shada=!,'50,<1000,s100,:0,n$XDG_CACHE_HOME/nvim/shada
 let g:diminactive_use_syntax = 1
 let g:netrw_home=$XDG_CACHE_HOME.'/nvim'
 

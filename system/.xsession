@@ -33,4 +33,6 @@ parcellite&
 # network manager systray icon
 #nm-applet&
 
+# remap caps lock to escape (cool for vim)
+xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'           
 # Please see http://i3wm.org/docs/userguide.html for a complete reference! 

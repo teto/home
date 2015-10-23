@@ -5,7 +5,6 @@ alias -s html=nvim
 alias -s json=nvim
 alias -s Vagrantfile=vim
 alias -s rb=ruby
-alias -s py=python3
 alias -s png=xdg-open
 alias -s jpg=xdg-open
 alias -s gif=xdg-open

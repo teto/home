@@ -311,6 +311,7 @@ nnoremap <Leader>e :Vex<CR> " open netrw
 nnoremap <Leader>w :w<CR>
 nnoremap <Leader>o :CtrlP<CR>
 nnoremap <leader>p :CtrlP<CR>
+nnoremap <leader>b :CtrlPBuffer<CR>
 nnoremap <leader>u :Gundo<CR>
 nnoremap <leader>r :<C-U>RangerChooser<CR>
 
@@ -381,7 +382,23 @@ let g:airline_powerline_fonts = 0
 let g:airline_left_sep = ''
 let g:airline_right_sep = ''
 let g:airline_section = '|'
+" display buffers as tabs if no split
+" see :h airline-tabline
+let g:airline#extensions#tabline#enabled = 1 
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
 "let g:airline_theme = 'solarized'
+let g:airline#extensions#tabline#buffer_nr_show = 1
+let g:airline#extensions#tabline#show_buffers = 1  
+let g:airline#extensions#tabline#buffer_min_count =2
+let g:airline#extensions#tabline#buffer_idx_mode = 1
+nmap <leader>1 <Plug>AirlineSelectTab1
+nmap <leader>2 <Plug>AirlineSelectTab2
+nmap <leader>3 <Plug>AirlineSelectTab3
+nmap <leader>4 <Plug>AirlineSelectTab4
+nmap <leader>5 <Plug>AirlineSelectTab5
+
+
 "}}}
 autocmd CompleteDone * pclose " close the popup on python completion
 
@@ -447,9 +464,6 @@ let g:listchar_formats=[
     \"trail:·,tab:→\ ,eol:↲,precedes:<,extends:>"   
    \]
 
-"noremap <F11> <Plug>ToggleListchars
-nmap <F11> <Plug>(ToggleListchars)
-
 " }}}
 
 " Grepper {{{
@@ -458,7 +472,7 @@ nnoremap <leader>ag  :Grepper! -tool ag  -open -switch
 " }}}
 "
 " Put this in vimrc, add custom commands in the function.
-function! FocusLost_SaveFiles()
+function! AutoSaveOnLostFocus()
   exe ":au FocusLost" expand("%") ":wa"
 endfunction
 
@@ -466,7 +480,7 @@ endfunction
 nnoremap <F2> :cp<CR>
 nnoremap <F3> :cn<CR>
 nnoremap <F4> :Neomake<CR>
-nnoremap <F5> :call FocusLost_SaveFiles()
+nnoremap <F5> :call AutoSaveOnLostFocus()
 " search for  item in quickfix list
 nnoremap <F7> :bp<CR>
 nnoremap <F8> :bn<CR>
@@ -474,4 +488,6 @@ nnoremap <F8> :bn<CR>
 "noremap <F4> exec ":emenu <tab>"
 " should become useless with neovim
 noremap <F10> :set paste!<CR>
+nmap <F11> <Plug>(ToggleListchars)
+
 " vim:foldmethod=marker:foldlevel=0

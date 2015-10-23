@@ -19,6 +19,7 @@ sudo update-desktop-database
 # TODO todo check varenv are set or set them here and write them into a file sourced by zsh ?
 stow -t  "$XDG_DATA_HOME" local
 stow -t  "$XDG_CONFIG_HOME" config
+stow -t "$HOME/.ipython" ipython
 
 ln -s "$HOME/dotfiles/texmf" "$HOME/texmf"
 # TODO tex rehash
