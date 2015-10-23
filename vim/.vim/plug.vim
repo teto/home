@@ -9,7 +9,7 @@ endif
 
 
 call plug#begin('~/.vim/plugged')
-
+Plug 'xuhdev/vim-latex-live-preview'
 Plug 'Valloric/YouCompleteMe' , { 'do': './install.sh --system-libclang --clang-completer' }
 Plug 'vim-flake8' " for python syntax
 Plug 'fisadev/vim-ctrlp-cmdpalette' " sublime text like palette

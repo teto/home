@@ -14,9 +14,8 @@ https://git.lekensteyn.nl/peter/wireshark-notes/tree/sync-build.sh#n94
     PKG_CONFIG_LIBDIR=$LIBDIR/pkgconfig \
         $remotesrcdir \
 
-CXX="-Wno-unused-but-set-variable"
 
-    cmake \
+CXX="-Wno-unused-but-set-variable" cmake \
         -G"Unix Makefiles" \
         -DENABLE_GTK3=0 \
         -DENABLE_PORTAUDIO=0 \
@@ -34,7 +33,7 @@ CXX="-Wno-unused-but-set-variable"
         -DCMAKE_C_FLAGS=$(printf %q "$CFLAGS") \
         -DCMAKE_CXX_FLAGS=$(printf %q "$CXXFLAGS") \
         -DCMAKE_EXPORT_COMPILE_COMMANDS=1
-        
+
         -DCMAKE_LIBRARY_PATH=$LIBDIR \
 
 ==== Build  (old methold won't worek) ===
