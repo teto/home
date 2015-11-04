@@ -38,7 +38,13 @@ Configurations & install
 Install each package via GNU stow:
 	dotfiles$ stow <PKG>
 
+Some packages will need you to set a specific target with stow -t <TARGET> <PKG>
+
+You may also need to copy (sensitive) files from the "examples" folder and update their content, for instance the xdg config.
+Same for the "etc" folder that reminds you of some interesting configurations for "/etc" files.
+
 To change your shell to zsh:
+====
 chsh -s /bin/zsh <login>
 
 boostrap.sh shows also some specific command

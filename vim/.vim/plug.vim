@@ -34,12 +34,16 @@ Plug 'tpope/vim-sleuth' " Dunno what it is
 Plug 'tpope/vim-vinegar' " Improves netrw
 Plug 'tpope/vim-fugitive'
 "Plug 'junegunn/vim-github-dashboard'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'mattn/ctrlp-mark'
-Plug 'mattn/ctrlp-register'
+"Plug 'ctrlpvim/ctrlp.vim'
+"Plug 'mattn/ctrlp-mark'
+"Plug 'mattn/ctrlp-register'
 Plug 'unblevable/quick-scope'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
 Plug 'scrooloose/nerdcommenter'
+Plug 'junegunn/vim-peekaboo'
+Plug 'mhinz/vim-randomtag'
+
+" to 
+Plug 'junegunn/vim-easy-align'
 " Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 "Plug 'surround.vim'
 "Plug 'tpope/vim-markdown', { 'for': 'md' }
@@ -56,7 +60,10 @@ Plug 'vim-scripts/Modeliner' " <leader>ml to setup buffer modeline
 " this one could not compile my program
 "Plug 'vim-latex/vim-latex', {'for': 'tex'}
 " ATP author gh mirror seems to be git@github.com:coot/atp_vim.git
-Plug 'coot/atp_vim', {'for': 'tex'}
+"Plug 'coot/atp_vim', {'for': 'tex'}
+
+" This one has bindings mapped to <leader>l
+Plug 'lervag/vimtex', {'for': 'tex'}
 "Plug 'vim-scripts/AutomaticLaTexPlugin', {'for': 'tex'}
 Plug 'tmhedberg/SimpylFold', { 'for': 'py' } " provides python folding
 Plug 'vimwiki/vimwiki'

@@ -18,7 +18,7 @@ if !has('nvim')
 	setglobal fileencoding=utf-8
 endif
 
-set viminfo='100,f1
+"set viminfo='100,f1
 
 set autoread " automatically reload file when it has been changed (hope they fix this damn feature one day)
 set linebreak " better display
@@ -96,12 +96,13 @@ set wildignore=.svn,CVS,.git,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg,*.
 " Use visual bell instead of beeping when doing something wrong
 set visualbell
 
+" if boths are set at the same time, vim uses an hybrid mode
 " Display line numbers on the left
 set number
+"Prefer relative line numbering?
+set relativenumber
 " TODO do a macro that cycles throught show/hide absolute/relative line numbers
 map <C-N><C-N> :set invnumber<CR>
-"Prefer relative line numbering?
-"set relativenumber"
 
 
 " Display unprintable characters with '^' and
@@ -199,6 +200,7 @@ noremap gy "+y
 source ~/.vim/plug.vim
 " source ~/.vim/colors.vim
 " this should be made a plugin as well
+" TODO this does not work with neovim
 source ~/.vim/vim_file_chooser.vim
 " }}}
 
@@ -251,12 +253,13 @@ set splitright   " on vertical split
 "set winminheight=5
 
 " hope this can be removed if wincmd_result
+" TODO bufnr is not good enough
 function! WinCmdWithRes(toto)
-	let l:res = bufnr('%')
+	let l:res = winnr()
 	"echo l:res
 	exec "wincmd ".a:toto
 	"echo bufnr('%') == res
-	let g:wincmd_result= bufnr('%') != l:res
+	let g:wincmd_result= winnr() != l:res
 endfunction
 
 
@@ -333,10 +336,35 @@ let g:startify_session_savevars = []
 " }}}
 
 " Ctrpl config {{{
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'mattn/ctrlp-mark'
+Plug 'mattn/ctrlp-register'
 let g:ctrlp_cmd = 'CtrlPMixed'
 let g:ctrlp_match_window = 'results:100' " overcome limit imposed by max height
 let g:ctrlp_extensions= ['dir','mark']
 " }}}
+
+
+" FZF config {{{
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+
+" This is the default extra key bindings
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-v': 'vsplit' }
+
+" Default fzf layout
+" - down / up / left / right
+" - window (nvim only)
+let g:fzf_layout = { 'down': '~40%' }
+
+" Advanced customization using autoload functions
+"autocmd VimEnter * command! Colors
+  "\ call fzf#vim#colors({'left': '15%', 'options': '--reverse --margin 30%,0'})
+" }}}
+
 
 " Search parameters {{{
 set hlsearch " highlight search terms
@@ -469,6 +497,23 @@ let g:listchar_formats=[
 " Grepper {{{
 nnoremap <leader>git :Grepper  -tool git -open -nojump
 nnoremap <leader>ag  :Grepper! -tool ag  -open -switch
+" }}}
+
+" Peekaboo config {{{
+" Default peekaboo window
+let g:peekaboo_window = 'vertical botright 30new'
+
+" Delay opening of peekaboo window (in ms. default: 0)
+let g:peekaboo_delay = 750
+
+" Compact display; do not display the names of the register groups
+let g:peekaboo_compact = 1
+" }}}
+" Neomake config {{{
+let g:neomake_verbose = 0
+" C and CPP are handled by YCM and java usually by elim
+"let s:neomake_exclude_ft = [ 'c', 'cpp', 'java' ]
+"let g:neomake_python_pep8_maker
 " }}}
 "
 " Put this in vimrc, add custom commands in the function.
