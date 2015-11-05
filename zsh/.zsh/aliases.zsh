@@ -62,10 +62,12 @@ alias llt="ls -lt"
 # }}}
 
 ### oftenly used programs
+alias c="cat"
 alias v="nvim"
 #alias n="nvim"
 alias m="mutt"
 alias r="ranger"
+# view uses vim as a pager
 alias l="view" 
 alias s="sxiv" 
 alias z="zathura" 

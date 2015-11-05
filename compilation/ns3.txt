@@ -6,7 +6,9 @@ CXX="clang++" CXXFLAGS="-g -Wno-potentially-evaluated-expression -std=c++11" ./w
 
 == g++ with C++11 support
 
-CXX="g++" CXXFLAGS=" -Wno-unused-variable -std=c++11" ./waf configure --prefix=install --build-profile=debug  
+WARNING !! Add to CXX flags missing things !
+
+CXX="g++" CXXFLAGS=" -Wno-unused-variable -std=c++11" ./waf configure --prefix=install --build-profile=debug
 
 
 
