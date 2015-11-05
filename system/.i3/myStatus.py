@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import logging
-from i3pystatus.mail import notmuchmail
+# from i3pystatus.mail import notmuchmail
 #import keyring.backends.netrc as backend
 from i3pystatus import Status
 from i3pystatus.updates import aptget
@@ -135,19 +135,19 @@ status.register("updates",
                 on_rightclick="run",
                 backends = [aptget.AptGet() ])
 
-# print("alsa")
-res = status.register(
-    "mail",
-    backends=[
-        # notmuchmail.Notmuch(account="lip6", query="tag:inbox and tag:unread"),
-        notmuchmail.Notmuch(account="gmail", query="tag:inbox and tag:unread"),
-    ],
-    hide_if_null=False,
-    interval=60,
-    # on_clicks={'left', "urxvtc -e mutt"},
-    on_leftclick=['/usr/bin/urxvtc', '-e', 'mutt'],
-    log_level=logging.DEBUG
-)
+# # print("alsa")
+# res = status.register(
+    # "mail",
+    # backends=[
+        # # notmuchmail.Notmuch(account="lip6", query="tag:inbox and tag:unread"),
+        # notmuchmail.Notmuch(account="gmail", query="tag:inbox and tag:unread"),
+    # ],
+    # hide_if_null=False,
+    # interval=60,
+    # # on_clicks={'left', "urxvtc -e mutt"},
+    # on_leftclick=['/usr/bin/urxvtc', '-e', 'mutt'],
+    # log_level=logging.DEBUG
+# )
 
 res = status.register("github",
         username="teto",
