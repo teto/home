@@ -3,8 +3,12 @@
 WIRESHARK_ABORT_ON_DISSECTOR_BUG=1
 G_DEBUG=fatal_criticals 
 
+if [ $# -eq 0 ]; then
+  echo 
+fi
+
 # or break on proto_report_dissector_bug
-libtool --mode=execute gdb ./run/wireshark
+libtool --mode=execute gdb ./run/$1
 
 
 #libtool --mode=execute ddd wireshark

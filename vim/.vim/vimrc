@@ -58,7 +58,8 @@ let g:netrw_liststyle=1 " long listing with timestamp
 "let c_gnu=1
 
 set title " vim will change terminal title
-" look at :h titlestring
+"set titlestring
+" look at :h titlestring (follows statusbar convention
 
 let mapleader = " "
 

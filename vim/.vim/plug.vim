@@ -33,13 +33,14 @@ Plug 'blueyed/vim-diminactive'
 Plug 'tpope/vim-sleuth' " Dunno what it is
 Plug 'tpope/vim-vinegar' " Improves netrw
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
 "Plug 'junegunn/vim-github-dashboard'
 "Plug 'ctrlpvim/ctrlp.vim'
 "Plug 'mattn/ctrlp-mark'
 "Plug 'mattn/ctrlp-register'
 Plug 'unblevable/quick-scope'
 Plug 'scrooloose/nerdcommenter'
-Plug 'junegunn/vim-peekaboo'
+"Plug 'junegunn/vim-peekaboo' " gives a preview of buffers when pasting
 Plug 'mhinz/vim-randomtag'
 
 " to 
