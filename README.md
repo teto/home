@@ -64,6 +64,11 @@ There might be additional more specific READMEs in subfolders.
 
 The folder "compilation" is an example of how to ./configure certain programs
 
+Neovim
+====
+:PlugUpgrade / :PlugInstall
+
+
 To install .desktop entries
 ====
 Put them in
@@ -74,6 +79,15 @@ Latex
 God I hate latex...
 Don't forget to configure mendeley to export references into texmf/bibtex
 There is a script to help debug tex problems in bin/
+
+Python packages
+====
+
+Instead of install system wide packages (requiring higher privileges), you may want to install python packages using:
+$ pip3 install --user -r requirements.txt
+
+A requirements.txt example was generated with $ pip3 freeze and saved in the examples folder.
+
 
 Powerline & Fonts
 ====

@@ -151,7 +151,7 @@ bindsym $mod+Shift+A kill
 
 # start dmenu (a program launcher)
 #bindsym $mod+d exec j4-dmenu-desktop
-bindsym $mod+d exec j4-dmenu-desktop --dmenu='rofi -dmenu'
+bindsym $mod+eacute exec j4-dmenu-desktop --dmenu='rofi -dmenu'
 #dmenu_run -
 
 #for_window [title="MOC"] move scratchpad
@@ -165,7 +165,7 @@ bindsym $mod+F3 [instance="pad_(?!ncmpcpp)"] move scratchpad; [instance="pad_ncm
 
 #pad_audioplayer
 # class followed by command
-bindsym $mod+w exec python ~/.i3/runorfocus.py "Firefox" firefox
+#bindsym $mod+w exec python ~/.i3/runorfocus.py "Firefox" firefox
 
 
 
@@ -209,7 +209,7 @@ bindsym $mod+f fullscreen
 bindsym $mod+Shift+f fullscreen global
 
 # change container layout (stacked, tabbed, default)
-bindsym $mod+e layout toggle
+bindsym $mod+ampersand layout toggle
 #bindsym $mod+s layout stacking
 #bindsym $mod+z layout tabbed
 #bindsym $mod+e layout default
@@ -225,23 +225,33 @@ bindsym $mod+space focus mode_toggle
 
 # focus the parent container
 bindsym $mod+p focus parent
-bindsym $mod+c focus child
+bindsym $mod+quotedbl  focus child
 
-bindsym $mod+q exec nemo
+#bindsym $mod+q exec nemo
 
 # focus the child container
 
 # switch to workspace
-bindsym $mod+ampersand workspace "$w1"
-bindsym $mod+eacute workspace "$w2"
-bindsym $mod+quotedbl workspace "$w3"
-bindsym $mod+apostrophe workspace "$w4"
-bindsym $mod+parenleft workspace "$w5"
-bindsym $mod+minus workspace 6
-bindsym $mod+egrave workspace 7
-bindsym $mod+underscore workspace 8
-bindsym $mod+ccedilla workspace 9
-bindsym $mod+agrave workspace 10
+#bindsym $mod+ampersand workspace "$w1"
+#bindsym $mod+eacute workspace "$w2"
+#bindsym $mod+quotedbl workspace "$w3"
+#bindsym $mod+apostrophe workspace "$w4"
+#bindsym $mod+parenleft workspace "$w5"
+#bindsym $mod+minus workspace 6
+#bindsym $mod+egrave workspace 7
+#bindsym $mod+underscore workspace 8
+#bindsym $mod+ccedilla workspace 9
+#bindsym $mod+agrave workspace 10
+bindsym $mod+a workspace "$w1"
+bindsym $mod+z workspace "$w2"
+bindsym $mod+e workspace "$w3"
+bindsym $mod+q workspace "$w4"
+bindsym $mod+s workspace "$w5"
+bindsym $mod+d workspace 6
+bindsym $mod+w workspace 7
+bindsym $mod+x workspace 8
+bindsym $mod+c workspace 9
+#bindsym $mod+x workspace 10
 
 for_window [con_mark="^pad_*"] move scratchpad
 
@@ -321,6 +331,7 @@ mode "resize" {
 
 
 	# back to normal: Enter or Escape
+        bindsym $mod+r mode "default"
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }

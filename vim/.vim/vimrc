@@ -37,11 +37,14 @@ set scrolloff=3
 set noshowmode " Show the current mode on command line
 set cursorline " highlight cursor line
 
-" Tabulation config {{{
+" Indentation {{{
 set tabstop=4 " a tab takes 4 characters (local to buffer)
 set shiftwidth=4 " Number of spaces to use per step of (auto)indent.
 set smarttab "use shiftwidth
 set smartindent 
+set shiftround " round indent to multiple of 'shiftwidth' (for << and >>)
+set softtabstop=2 " remove <Tab> symbols as it was spaces
+"set expandtab " replace <Tab with spaces
 " }}}
 
 " Netrw configuration {{{
@@ -464,7 +467,17 @@ au Syntax * RainbowParenthesesLoadBraces
 " Gitgutter config {{{
 
 let g:gitgutter_enabled = 0
-"}}}
+let g:gitgutter_map_keys = 0
+let g:gitgutter_max_signs = 200
+let g:gitgutter_realtime = 0
+let g:gitgutter_eager = 0
+let g:gitgutter_diff_args = '--ignore-space-at-eol'
+nmap <silent> ]h :GitGutterNextHunk<CR>
+nmap <silent> [h :GitGutterPrevHunk<CR>
+nnoremap <silent> <Leader>gu :GitGutterRevertHunk<CR>
+nnoremap <silent> <Leader>gp :GitGutterPreviewHunk<CR><c-w>j
+nnoremap cog :GitGutterToggle<CR>
+" }}}
 
 " Restor cursor position {{{
 function! ResCur()
@@ -487,12 +500,20 @@ augroup END
 let g:tex_flavor = "latex"
 "}}}
 
+" Fold configuration {{{
+"set foldtext=
+set foldcolumn=1
+" }}}
+
 " vim-listchars config {{{
 let g:listchar_formats=[ 
    \"trail:·",
     \"trail:·,tab:→\ ,eol:↲,precedes:<,extends:>"   
    \]
-
+" while waiting to finish my vim-listchars plugin
+"set listchars=tab:»·,eol:↲,nbsp:␣,extends:…
+set listchars=tab:•·,trail:·,extends:❯,precedes:❮,nbsp:×
+set fillchars=vert:│,fold:─
 " }}}
 
 " Grepper {{{
@@ -510,13 +531,50 @@ let g:peekaboo_delay = 750
 " Compact display; do not display the names of the register groups
 let g:peekaboo_compact = 1
 " }}}
+
+
+
+Plug '907th/vim-auto-save'
+" {{{
+  nnoremap coa :AutoSaveToggle<CR>
+  let g:auto_save_in_insert_mode = 0
+  let g:auto_save_events = ['CursorHold']
+" }}}
+
+
+Plug 'lervag/vimtex'
+" {{{
+  let g:vimtex_view_method = 'zathura'
+  augroup latex
+    autocmd!
+    autocmd FileType tex nnoremap <buffer><F4> :VimtexView<CR>
+    autocmd FileType tex nnoremap <buffer><F5> :VimtexCompile<CR>
+    autocmd FileType tex map <silent> <buffer><F8> :call vimtex#latexmk#errors_open(0)<CR>
+  augroup END
+" }}}
+
+
 " Neomake config {{{
 let g:neomake_verbose = 0
+let g:neomake_python_enabled_makers = ['pyflakes']
+
+autocmd! BufWritePost * Neomake
+let g:neomake_airline = 0
+let g:neomake_error_sign = { 'text': '✘', 'texthl': 'ErrorSign' }
+let g:neomake_warning_sign = { 'text': ':(', 'texthl': 'WarningSign' }
+"let g:neomake_ruby_enabled_makers = ['mri']
+
 " C and CPP are handled by YCM and java usually by elim
 "let s:neomake_exclude_ft = [ 'c', 'cpp', 'java' ]
 "let g:neomake_python_pep8_maker
 " }}}
 "
+
+set diffopt=filler,vertical " default behavior for diff
+
+" Y behave like D or C
+nnoremap Y y$
+
 " Put this in vimrc, add custom commands in the function.
 function! AutoSaveOnLostFocus()
   exe ":au FocusLost" expand("%") ":wa"

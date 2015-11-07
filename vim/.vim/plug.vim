@@ -1,14 +1,9 @@
 " vim: set noet fenc=utf-8 ff=unix sts=0 sw=4 ts=4 : 
 "autoinstalL
-if empty(glob('~/.vim/autoload/plug.vim'))
-	  silent !mkdir -p ~/.vim/autoload
-	    silent !curl -fLo ~/.vim/autoload/plug.vim
-		    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-		  autocmd VimEnter * PlugInstall
-endif
 
+let s:plugdir = $XDG_CONFIG_HOME.'/nvim/plugged'
 
-call plug#begin('~/.vim/plugged')
+call plug#begin(s:plugdir)
 Plug 'xuhdev/vim-latex-live-preview'
 Plug 'Valloric/YouCompleteMe' , { 'do': './install.sh --system-libclang --clang-completer' }
 Plug 'vim-flake8' " for python syntax

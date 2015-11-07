@@ -14,8 +14,9 @@ https://git.lekensteyn.nl/peter/wireshark-notes/tree/sync-build.sh#n94
     PKG_CONFIG_LIBDIR=$LIBDIR/pkgconfig \
         $remotesrcdir \
 
-
-CXX="-Wno-unused-but-set-variable" cmake \
+$ mkdir -p debug
+$ cd debug
+$ CXXFLAGS="-Wno-unused-but-set-variable" cmake \
         -G"Unix Makefiles" \
         -DENABLE_GTK3=0 \
         -DENABLE_PORTAUDIO=0 \
@@ -32,7 +33,10 @@ CXX="-Wno-unused-but-set-variable" cmake \
         .. \
         -DCMAKE_C_FLAGS=$(printf %q "$CFLAGS") \
         -DCMAKE_CXX_FLAGS=$(printf %q "$CXXFLAGS") \
-        -DCMAKE_EXPORT_COMPILE_COMMANDS=1
+        -DCMAKE_EXPORT_COMPILE_COMMANDS=1 \
+        -DCMAKE_C_COMPILER=clang \
+        -DCMAKE_CXX_COMPILER=clang++ 
+
 
         -DCMAKE_LIBRARY_PATH=$LIBDIR \
 
@@ -47,7 +51,7 @@ In release subfolder, I typically run this configuration
 CFLAGS="-Wno-unused-but-set-variable" CXXFLAGS=$CFLAGS ../configure --enable-setcap-install --without-gtk3 --with-qt  --disable-warnings-as-errors --disable-warnings-as-errors --enable-mergecap=no --enable-airpcap=no --enable-rawshark=no --enable-editcap=no --with-pcap-remote=no
 
 In debug subfolder, I typically run this configuration:
-CFLAGS="-Wno-unused-but-set-variable -g3 -O0" CXXFLAGS=$CFLAGS ../configure --enable-setcap-install --without-gtk3 --with-qt --disable-warnings-as-errors --enable-mergecap=no --enable-airpcap=no --enable-rawshark=no --enable-editcap=no --with-pcap-remote=no
+CXX="clang" CFLAGS="-Wno-unused-but-set-variable -g3 -O0" CXXFLAGS="$CFLAGS" ../configure --enable-setcap-install --without-gtk3 --with-qt --disable-warnings-as-errors --enable-mergecap=no --enable-airpcap=no --enable-rawshark=no --enable-editcap=no --with-pcap-remote=no
 
 
 When compiling, do make -C epan/dissectors if you don't want to compile everything
