@@ -2,13 +2,6 @@
 source ~/.vim/vimrc
 
 
-let s:plugdir = $XDG_CONFIG_HOME.'/nvim/autoload/plug.vim'
-if empty(glob(s:plugdir))
-	  silent !mkdir -p $XDG_CONFIG_HOME.'/nvim/autoload'
-	    silent !curl -fLo s:plugdir
-		    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-		  autocmd VimEnter * PlugInstall
-endif
 
 
 if has('nvim')

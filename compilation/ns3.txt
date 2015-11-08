@@ -8,6 +8,11 @@ CXX="clang++" CXXFLAGS="-g -Wno-potentially-evaluated-expression -std=c++11" ./w
 
 WARNING !! Add to CXX flags missing things !
 
+Sur la derniere Ubuntu, avec gcc 5 il y a un ABI breakage et donc pour supprimer l'erreur:
+/usr/bin/../lib/gcc/x86_64-linux-gnu/5.2.1/../../../../include/c++/5.2.1/sstream:300:14: error: '__xfer_bufptrs' redeclared with 'public' access
+cf https://gcc.gnu.org/bugzilla/show_bug.cgi?id=65899
+on peut ajouter -include stream aux flags  !
+
 CXX="g++" CXXFLAGS=" -Wno-unused-variable -std=c++11" ./waf configure --prefix=install --build-profile=debug
 
 

@@ -274,6 +274,14 @@ gui.qt.font_name: Liberation Mono,9,-1,5,50,0,0,0,0,0
 # TRUE or FALSE (case-insensitive)
 #gui.packet_list_separator.enabled: FALSE
 
+# Show related packet indicators in the first column
+# TRUE or FALSE (case-insensitive)
+#gui.packet_list_show_related: TRUE
+
+# Show the intelligent scroll bar (a minimap of packet list colors in the scrollbar)
+# TRUE or FALSE (case-insensitive)
+#gui.packet_list_show_minimap: TRUE
+
 ####### Filter Expressions ########
 gui.filter_expressions.label: tcp.options.mptcp.recvtok
 gui.filter_expressions.enabled: FALSE
@@ -2462,10 +2470,6 @@ ip.check_checksum: TRUE
 # TRUE or FALSE (case-insensitive)
 #ipv6.summary_in_tree: TRUE
 
-# Whether to look up IPv6 addresses in each GeoIP database we have loaded
-# TRUE or FALSE (case-insensitive)
-#ipv6.use_geoip: TRUE
-
 # Whether to check that all RPL Source Routing Headers adhere to RFC 6554
 # TRUE or FALSE (case-insensitive)
 #ipv6.perform_strict_rpl_srh_rfc_checking: FALSE
@@ -3038,6 +3042,11 @@ ip.check_checksum: TRUE
 # TRUE or FALSE (case-insensitive)
 #mime_multipart.remove_base64_encoding: FALSE
 
+# Register Format
+# One of: UINT16     , INT16      , UINT32     , INT32      , IEEE FLT   , MODICON FLT
+# (case-insensitive).
+#modbus.mbus_register_format: UINT16     
+
 # Whether the Modbus RTU dissector should desegment all messages spanning multiple TCP segments
 # TRUE or FALSE (case-insensitive)
 #mbrtu.desegment: TRUE
@@ -3050,16 +3059,6 @@ ip.check_checksum: TRUE
 # A decimal number
 #mbrtu.tcp.port: 0
 
-# Register Format
-# One of: UINT16     , INT16      , UINT32     , INT32      , IEEE FLT   , MODICON FLT
-# (case-insensitive).
-#mbrtu.mbus_register_format: UINT16     
-
-# Register Addressing Type (Raw, Modicon 5 or 6). This option has no effect on the underlying protocol, but changes the register address display format
-# One of: RAW            , MODICON 5-DIGIT, MODICON 6-DIGIT
-# (case-insensitive).
-#mbrtu.mbus_register_addr_type: RAW            
-
 # Whether the Modbus RTU dissector should desegment all messages spanning multiple TCP segments
 # TRUE or FALSE (case-insensitive)
 #mbtcp.desegment: TRUE
@@ -3067,16 +3066,6 @@ ip.check_checksum: TRUE
 # Set the TCP port for Modbus/TCP packets (if other than the default of 502)
 # A decimal number
 #mbtcp.tcp.port: 502
-
-# Register Format
-# One of: UINT16     , INT16      , UINT32     , INT32      , IEEE FLT   , MODICON FLT
-# (case-insensitive).
-#mbtcp.mbus_register_format: UINT16     
-
-# Register Addressing Type (Raw, Modicon 5 or 6). This option has no effect on the underlying protocol, but changes the register address display format
-# One of: RAW            , MODICON 5-DIGIT, MODICON 6-DIGIT
-# (case-insensitive).
-#mbtcp.mbus_register_addr_type: RAW            
 
 # Mojito UDP Port
 # A decimal number
@@ -3148,15 +3137,15 @@ ip.check_checksum: TRUE
 
 # Assume TCP Option MPTCP (30)
 # TRUE or FALSE (case-insensitive)
-mptcp.analyze_mappings: TRUE
+#mptcp.analyze_mappings: TRUE
 
 # Assume TCP Option MPTCP (30)
 # TRUE or FALSE (case-insensitive)
-mptcp.interdsn_latency: TRUE
+#mptcp.interdsn_latency: TRUE
 
 # Assume TCP Option MPTCP (30)
 # TRUE or FALSE (case-insensitive)
-mptcp.intersubflows_retransmission: TRUE
+#mptcp.intersubflows_retransmission: TRUE
 
 # Whether the MQ dissector should reassemble messages spanning multiple TCP segments. To use this option, you must also enable "Allow subdissectors to reassemble TCP streams" in the TCP protocol settings.
 # TRUE or FALSE (case-insensitive)

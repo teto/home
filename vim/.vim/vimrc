@@ -18,7 +18,104 @@ if !has('nvim')
 	setglobal fileencoding=utf-8
 endif
 
-"set viminfo='100,f1
+
+let s:plugdir = $XDG_CONFIG_HOME.'/nvim/plugged'
+
+let s:plugscript = $XDG_CONFIG_HOME.'/nvim/autoload/plug.vim'
+if empty(glob(s:plugscript))
+	  silent !mkdir -p $XDG_CONFIG_HOME.'/nvim/autoload'
+	    silent !curl -fLo s:plugscript
+		    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+		  autocmd VimEnter * PlugInstall
+endif
+
+call plug#begin(s:plugdir)
+"Plug 'xuhdev/vim-latex-live-preview'
+Plug 'Valloric/YouCompleteMe' , { 'do': './install.sh --system-libclang --clang-completer' }
+"Plug 'vim-flake8' " for python syntax
+Plug 'fisadev/vim-ctrlp-cmdpalette' " sublime text like palette
+Plug 'osyo-manga/vim-anzu' " to improve internal search
+Plug 'hynek/vim-python-pep8-indent' " does not work
+Plug 'mhinz/vim-startify' 
+Plug 'dietsche/vim-lastplace' " restore last cursor postion
+"if has('nvim')
+	Plug 'bling/vim-airline'
+"else
+	"Plug 'Lokaltog/powerline' , {'rtp': 'powerline/bindings/vim/'}
+"endif
+
+"Plug 'CCTree'
+"Plug 'showmarks2'
+Plug 'teto/nvim-wm'
+"Plug 'teto/vim-listchars'
+Plug '~/vim-listchars'
+Plug 'vim-voom/VOoM' " can show a tex file Table of Content
+Plug 'blueyed/vim-diminactive' " disable syntax coloring on inactive splits
+Plug 'tpope/vim-sleuth' " Dunno what it is
+Plug 'tpope/vim-vinegar' " Improves netrw
+Plug 'tpope/vim-fugitive' " to use with Git
+Plug 'tpope/vim-surround' " don't realy know how to use yet
+"Plug 'junegunn/vim-github-dashboard'
+"Plug 'ctrlpvim/ctrlp.vim'
+"Plug 'mattn/ctrlp-mark'
+"Plug 'mattn/ctrlp-register'
+Plug 'unblevable/quick-scope'  " highlight characeters to help in f/F moves
+Plug 'scrooloose/nerdcommenter'
+"Plug 'junegunn/vim-peekaboo' " gives a preview of buffers when pasting
+Plug 'mhinz/vim-randomtag'
+
+" to 
+Plug 'junegunn/vim-easy-align'
+" Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+"Plug 'surround.vim'
+"Plug 'tpope/vim-markdown', { 'for': 'md' }
+"Plug 'elzr/vim-json', { 'for': 'json' }
+"Plug 'numkil/ag.vim'
+Plug 'gundo'
+Plug 'Lokaltog/vim-easymotion'
+Plug 'dhruvasagar/vim-table-mode'
+Plug 'airblade/vim-gitgutter' " will show which lines changed compared to last clean state
+Plug 'mhinz/vim-rfc'
+Plug 'chrisbra/unicode.vim' " can show a list of unicode characeters, with their name  :UnicodeTable etc... 
+Plug 'vim-scripts/rfc-syntax', { 'for': 'rfc' } " optional syntax highlighting for 
+Plug 'vim-scripts/Modeliner' " <leader>ml to setup buffer modeline
+" this one could not compile my program
+"Plug 'vim-latex/vim-latex', {'for': 'tex'}
+" ATP author gh mirror seems to be git@github.com:coot/atp_vim.git
+"Plug 'coot/atp_vim', {'for': 'tex'}
+
+" This one has bindings mapped to <leader>l
+Plug 'lervag/vimtex', {'for': 'tex'}
+"Plug 'vim-scripts/AutomaticLaTexPlugin', {'for': 'tex'}
+Plug 'tmhedberg/SimpylFold', { 'for': 'py' } " provides python folding
+Plug 'vimwiki/vimwiki'   " to write notes
+Plug 'kshenoy/vim-signature' " display marks in gutter, love it
+"Plug 'vim-scripts/DynamicSigns'
+Plug 'vasconcelloslf/vim-interestingwords' " highlight the words you choose
+Plug 'mhinz/vim-grepper' " async grep neovim only
+Plug 'benekastah/neomake' " async build for neovim
+" color schemes {{{
+Plug 'whatyouhide/vim-gotham'
+Plug 'sickill/vim-monokai'
+Plug 'mhinz/vim-janah'
+Plug 'Solarized'
+" }}}
+
+" Had to disable this one, needs a vim with lua compiled
+" and it's not possible in neovim yet
+" color_coded requires vim to be compiled with -lua
+"Plug 'jeaye/color_coded'
+"
+" Plug 'bbchung/clighter'
+" YCM generator is not really a plugin is it ?
+" Plug 'rdnetto/YCM-Generator'
+" Plug 'erezsh/erezvim' "zenburn scheme. This plugin resets some keymaps,
+" annoying
+Plug 'chrisbra/csv.vim'
+" Plug 'luochen1990/rainbow' " does it work ?
+Plug 'eapache/rainbow_parentheses.vim'  " Display successive delimiters such as [,(... with different colors 
+Plug 'LaTeX-Box-Team/LaTeX-Box'
+call plug#end()
 
 set autoread " automatically reload file when it has been changed (hope they fix this damn feature one day)
 set linebreak " better display
@@ -37,13 +134,16 @@ set scrolloff=3
 set noshowmode " Show the current mode on command line
 set cursorline " highlight cursor line
 
+
+
+
 " Indentation {{{
 set tabstop=4 " a tab takes 4 characters (local to buffer)
 set shiftwidth=4 " Number of spaces to use per step of (auto)indent.
 set smarttab "use shiftwidth
 set smartindent 
 set shiftround " round indent to multiple of 'shiftwidth' (for << and >>)
-set softtabstop=2 " remove <Tab> symbols as it was spaces
+"set softtabstop=4 " remove <Tab> symbols as it was spaces
 "set expandtab " replace <Tab with spaces
 " }}}
 
@@ -201,7 +301,7 @@ noremap gy "+y
 " Plug section {{{
 
 " let use sudo once the file is loaded
-source ~/.vim/plug.vim
+"source ~/.vim/plug.vim
 " source ~/.vim/colors.vim
 " this should be made a plugin as well
 " TODO this does not work with neovim
@@ -267,7 +367,7 @@ function! WinCmdWithRes(toto)
 endfunction
 
 
-
+" Appearance {{{
 set background=dark
 
 let g:solarized_termtrans = 0
@@ -290,6 +390,10 @@ let g:solarized_termtrans = 0
 
 " colorscheme solarized
 colorscheme monokai
+
+"}}}
+
+
 
 " to remove timeout when changing modes
 if ! has('gui_running')
@@ -331,7 +435,7 @@ let g:Powerline_symbols = "fancy" " to use unicode symbols
 
 " Startify config {{{
 let g:startify_list_order = ['sessions','files', 'dir', 'bookmarks']
-let g:startify_session_dir = $XDG_DATA_HOME.'/.vim/session'
+let g:startify_session_dir = $XDG_DATA_HOME.'/nvim/session'
 let g:startify_bookmarks = [ '~/.vimrc' ]
 let g:startify_session_autoload = 1
 let g:startify_session_persistence = 1
@@ -499,6 +603,16 @@ augroup END
 " See :help ft-tex-plugin
 let g:tex_flavor = "latex"
 "}}}
+Plug 'lervag/vimtex'
+" {{{
+  let g:vimtex_view_method = 'zathura'
+  augroup latex
+    autocmd!
+    autocmd FileType tex nnoremap <buffer><F4> :VimtexView<CR>
+    autocmd FileType tex nnoremap <buffer><F5> :VimtexCompile<CR>
+    autocmd FileType tex map <silent> <buffer><F8> :call vimtex#latexmk#errors_open(0)<CR>
+  augroup END
+" }}}
 
 " Fold configuration {{{
 "set foldtext=
@@ -542,21 +656,12 @@ Plug '907th/vim-auto-save'
 " }}}
 
 
-Plug 'lervag/vimtex'
-" {{{
-  let g:vimtex_view_method = 'zathura'
-  augroup latex
-    autocmd!
-    autocmd FileType tex nnoremap <buffer><F4> :VimtexView<CR>
-    autocmd FileType tex nnoremap <buffer><F5> :VimtexCompile<CR>
-    autocmd FileType tex map <silent> <buffer><F8> :call vimtex#latexmk#errors_open(0)<CR>
-  augroup END
-" }}}
 
 
 " Neomake config {{{
 let g:neomake_verbose = 0
 let g:neomake_python_enabled_makers = ['pyflakes']
+let g:neomake_c_gcc_args = ['-fsyntax-only', '-Wall']
 
 autocmd! BufWritePost * Neomake
 let g:neomake_airline = 0
