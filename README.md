@@ -88,6 +88,10 @@ $ pip3 install --user -r requirements.txt
 
 A requirements.txt example was generated with $ pip3 freeze and saved in the examples folder.
 
+The matching binaries are then put in ~/.local/bin  thus you may want to add it to the $PATH
+
+Packages can also be installed from HEAD
+for instance pip3 install git+https://github.com/geier/khal
 
 Powerline & Fonts
 ====

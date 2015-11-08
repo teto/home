@@ -44,6 +44,8 @@ export LD_LIBRARY_PATH="/usr/local/lib:$LD_LIBRARY_PATH"
 
 #export ZDOTDIR="$HOME/.zsh"
 
+export IPYTHONDIR="$XDG_CONFIG_HOME/ipython"
+
 export MAILDIR="$HOME/Maildir" 
 export MUTT="$HOME/.mutt"
 

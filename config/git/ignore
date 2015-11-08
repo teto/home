@@ -6,9 +6,12 @@
 *.exe
 *.o
 *.so
-*.pyc
+*.py[cod]
 *.symvers
 *.aux
+__pycache__/
+
+*.mo
 
 # Editor specific
 ######################
@@ -28,6 +31,7 @@
 *.layout
 *.bmarks
 *.~lock*
+*.tmp
 
 # Packages #
 ############
