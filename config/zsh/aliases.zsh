@@ -108,7 +108,7 @@ alias dfh="df --human-readable"
 alias duh="du --human-readable"
 
 
-alias sv="sudo vim"
+alias sv="sudo nvim"
 
 # Gestion du 'ls' : couleur & ne touche pas aux accents
 alias ls='ls --classify --tabsize=0 --literal --color=auto --show-control-chars --human-readable'

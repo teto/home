@@ -1,3 +1,6 @@
+git+https://github.com/powerline/powerline
+git+https://github.com/pydata/pandas
+git+https://github.com/The-Compiler/qutebrowser
 Babel==2.1.1
 Jinja2==2.8
 MarkupSafe==0.23
@@ -37,7 +40,6 @@ pexpect==3.2
 piston-mini-client==0.7.5
 plainbox==0.22.2
 ply==3.7
--e git+git@github.com:powerline/powerline.git@029d54a64a6a3e4f2a8fd36948eea4cc0d37c5ba#egg=powerline_status-origin/master
 pyasn1==0.1.8
 pycparser==2.14
 pycrypto==2.6.1

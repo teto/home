@@ -223,9 +223,27 @@ bindsym $mod+Shift+space floating toggle
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
 
+
+mode "programs" {
+
+    bindsym q exec "qutebrowser"; mode default
+    bindsym f exec "firefox"; mode default
+    bindsym c exec "codeblocks"; mode default
+    bindsym n exec "nemo"; mode default
+
+# set monitors, wap them ? etc..
+    bindsym $mod+apostrophe mode "default"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+            
+
 # focus the parent container
 bindsym $mod+p focus parent
 bindsym $mod+quotedbl  focus child
+#bindsym $mod+quotedbl workspace "$w3"
+bindsym $mod+apostrophe mode "programs"
 
 #bindsym $mod+q exec nemo
 

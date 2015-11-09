@@ -10,12 +10,14 @@
 *.symvers
 *.aux
 __pycache__/
+*.cpp_parameters
 
 *.mo
 
 # Editor specific
 ######################
 *.cbp
+*.workspace
 
 
 # Binaries #
@@ -60,6 +62,8 @@ __pycache__/
 
 # OS generated files #
 ######################
+# IPC socks for instance
+*.sock
 .DS_Store
 .DS_Store?
 ._*

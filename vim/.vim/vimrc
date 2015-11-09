@@ -56,13 +56,15 @@ Plug 'tpope/vim-vinegar' " Improves netrw
 Plug 'tpope/vim-fugitive' " to use with Git
 Plug 'tpope/vim-surround' " don't realy know how to use yet
 "Plug 'junegunn/vim-github-dashboard'
-"Plug 'ctrlpvim/ctrlp.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 "Plug 'mattn/ctrlp-mark'
 "Plug 'mattn/ctrlp-register'
 Plug 'unblevable/quick-scope'  " highlight characeters to help in f/F moves
 Plug 'scrooloose/nerdcommenter'
 "Plug 'junegunn/vim-peekaboo' " gives a preview of buffers when pasting
 Plug 'mhinz/vim-randomtag'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 
 " to 
 Plug 'junegunn/vim-easy-align'
@@ -454,8 +456,6 @@ let g:ctrlp_extensions= ['dir','mark']
 
 
 " FZF config {{{
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
 
 " This is the default extra key bindings
 let g:fzf_action = {

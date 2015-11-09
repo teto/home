@@ -18,13 +18,13 @@ source $ZDOTDIR/transfer.zsh
 
 # Mail check {{{
 MAILDIR="$HOME/Maildir"
-MAILCHECK=100 # interval in seconds
+MAILCHECK=1000 # interval in seconds
 
 
 # Transform maildir boxes (/lists/ )
-for i in $MAILDIR/**/new(/N); do
-	  mailpath+=("${i}?You have new mail in ${i:h:t}.")
-done
+#for i in $MAILDIR/**/new(/N); do
+	  #mailpath+=("${i}?You have new mail in ${i:h:t}.")
+#done
 # }}}
 
 # History parameters {{{

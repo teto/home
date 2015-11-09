@@ -1,0 +1,6 @@
+== A few VIM tips ==
+
+<~buffer>Ctrl+^ will make you switch to the chosen buffer
+
+
+Ctrl O while in insert mode goes to normal mode for one action
