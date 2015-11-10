@@ -195,30 +195,30 @@ gui.auto_scroll_on_expand: TRUE
 
 # Packet list hidden columns
 # List all columns to hide in the packet list.
-gui.column.hidden: %Rt,%Cus:mptcp.stream:0:R,%Cus:ip.src:1:R,%Cus:ip.dst:1:R,%Cus:tcp.options.mptcp.subflowseqno:0:R,%Cus:tcp.len:0:R,%Cus:tcp.options.mptcp.recvtok:0:R,%Cus:tcp.options.mptcp.expected_idsn:0:R,%Cus:tcp.options.mptcp.sendkey:0:R,%Cus:tcp.options.mptcp.datafin.flag:0:R,%Cus:tcp.options.mptcp.subflowseqno:0:R,%Cus:mptcp.stream:0:R,%p,%Cus:tcp.options.mptcp.recvkey:0:R,%Cus:mptcp.analysis.mapping.reinjection:0:R,%m
+gui.column.hidden: %Cus:mptcp.stream:0:R,%Cus:ip.src:1:R,%Cus:ip.dst:1:R,%Cus:tcp.options.mptcp.subflowseqno:0:R,%Cus:tcp.len:0:R,%Cus:tcp.options.mptcp.recvtok:0:R,%Cus:tcp.options.mptcp.expected_idsn:0:R,%Cus:tcp.options.mptcp.sendkey:0:R,%Cus:tcp.options.mptcp.datafin.flag:0:R,%Cus:tcp.options.mptcp.subflowseqno:0:R,%Cus:mptcp.stream:0:R,%p,%L,%Cus:tcp.options.mptcp.recvkey:0:R,%Cus:mptcp.analysis.mapping.reinjection:0:R,%m
 
 # Packet list column format
 # Each pair of strings consists of a column title and its format
 gui.column.format: 
 	"No.", "%Cus:frame.number:0:R",
 	"related_mapping", "%Cus:mptcp.related_mapping:0:R",
-	"Time", "%Rt",
+	"reltime", "%Rt",
 	"Time delta", "%Cus:frame.time_delta:0:R",
 	"mptcpstream", "%Cus:mptcp.stream:0:R",
 	"latency", "%Cus:mptcp.app_latency:0:R",
 	"tcpstream", "%Cus:tcp.stream:0:R",
-	"Source", "%ns",
+	"ipsrc", "%ns",
 	"ITR", "%Cus:ip.src:1:R",
 	"ETR", "%Cus:ip.dst:1:R",
-	"Destination", "%rnd",
+	"ipdst", "%rnd",
 	"tcpseq", "%Cus:tcp.seq:0:R",
 	"ack", "%Cus:tcp.ack:0:R",
 	"dsn", "%Cus:mptcp.dsn:0:R",
 	"dss_dsn", "%Cus:mptcp.dss.dsn:0:R",
 	"dss_length", "%Cus:tcp.options.mptcp.datalvllen:0:R",
 	"dssRawDSN", "%Cus:tcp.options.mptcp.rawdataseqno:0:R",
-	"RawDack", "%Cus:tcp.options.mptcp.datalvllen:0:R",
-	"processed dataack", "%Cus::0:R",
+	"RawDack", "%Cus:mptcp.ack:0:R",
+	"dack", "%Cus:mptcp.ack:0:R",
 	"DSS_ssn", "%Cus:tcp.options.mptcp.subflowseqno:0:R",
 	"seg len", "%Cus:tcp.len:0:R",
 	"recv token", "%Cus:tcp.options.mptcp.recvtok:0:R",

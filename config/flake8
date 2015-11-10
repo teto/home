@@ -1,7 +1,9 @@
 
 
 [flake8]
-ignore = E501,W291, F841, E265, N806, E265
+# E111 => 4 spaces tabs
+# don't let spaces else it is not recognized
+ignore = E501,W291,F841,E265,N806,E265,E111
 max-line-length = 160
 exclude = .git, test_*
 max-complexity = 10

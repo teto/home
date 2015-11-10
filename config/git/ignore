@@ -1,5 +1,5 @@
-# Compiled source #
-###################
+#  vim: set noet fenc=utf-8 ff=unix sts=0 sw=4 ts=4 foldmethod=marker
+# Compiled source {{{
 *.com
 *.class
 *.dll
@@ -11,22 +11,26 @@
 *.aux
 __pycache__/
 *.cpp_parameters
-
+# }}}
 *.mo
 
-# Editor specific
+# Editor specific {{{
 ######################
 *.cbp
 *.workspace
+*.Rhistory
+# }}}
 
-
-# Binaries #
+# Binaries {{{
 ############
 *.pdf
 *.a
+*.png
+*.pcap
+# }}}
 
-# Backup files #
-################
+
+# Backup files {{{
 *.bak
 *.odp#
 *.swp
@@ -34,6 +38,8 @@ __pycache__/
 *.bmarks
 *.~lock*
 *.tmp
+# }}}
+
 
 # Packages #
 ############
@@ -49,8 +55,8 @@ __pycache__/
 *.tar
 *.zip
 
-# Logs and databases #
-######################
+# Logs and databases {{{
+*.csv
 *.log
 *.sql
 *.sqlite
@@ -59,9 +65,10 @@ __pycache__/
 *.drift
 *.bbl
 *.blg
+# }}}
 
-# OS generated files #
-######################
+
+# OS generated files {{{
 # IPC socks for instance
 *.sock
 .DS_Store
@@ -72,3 +79,4 @@ __pycache__/
 Icon?
 ehthumbs.db
 Thumbs.db
+# }}}
