@@ -99,3 +99,19 @@ Powerline & Fonts
 * list fonts with fc-list
 * regenerate cache with fc-cache -vf : it will look into the directories defined in your $HOME/.fonts.conf
 Make sure (append ~/.fonts for local fonts only)
+
+
+system config tips/tricks /etc
+===
+In /etc/sysctl.conf you may want to add
+
+# choose core filename
+kernel.core_pattern = core.%e.%p
+
+# for HDD, you may want to set a lower swappiness
+vm.swappiness = 20
+
+# Uncomment the following to stop low-level messages on console
+#kernel.printk = 3 4 1 3
+
+To enable automatic coredumps, look at /etc/security/limits.conf
