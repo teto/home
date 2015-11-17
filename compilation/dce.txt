@@ -2,6 +2,7 @@
 Look at https://www.nsnam.org/docs/dce/manual/html/getting-started.html to see how to compile with kernel stack or 
 https://plus.google.com/+HajimeTazaki/posts/1QUmR3n3vNA
 
+DCE itself does not support clang yet.
 
 Pour pouvoir charger le noyau mptcp dans DCE, il faut se placer dans le noyau mptcp et faire un merge
 avec next-next-sim (qui est basé sur le noyuau upstream)

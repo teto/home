@@ -101,6 +101,7 @@ Plug 'whatyouhide/vim-gotham'
 Plug 'sickill/vim-monokai'
 Plug 'mhinz/vim-janah'
 Plug 'Solarized'
+Plug 'morhetz/gruvbox'
 " }}}
 
 " Had to disable this one, needs a vim with lua compiled
@@ -113,7 +114,7 @@ Plug 'Solarized'
 " Plug 'rdnetto/YCM-Generator'
 " Plug 'erezsh/erezvim' "zenburn scheme. This plugin resets some keymaps,
 " annoying
-Plug 'chrisbra/csv.vim'
+Plug 'chrisbra/csv.vim' "
 " Plug 'luochen1990/rainbow' " does it work ?
 Plug 'eapache/rainbow_parentheses.vim'  " Display successive delimiters such as [,(... with different colors 
 Plug 'LaTeX-Box-Team/LaTeX-Box'

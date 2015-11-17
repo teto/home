@@ -11,7 +11,11 @@ gsettings set org.gnome.desktop.background show-desktop-icons false
 # be careful that local .desktop need relogin !
 # desktop-file-validate
 #~/.local/share/applications
-sudo update-desktop-database
+# This one worked
+#xdg-desktop-menu install --novendor *.desktop
+# TODO now 
+
+# sudo update-desktop-database
 
 #xdg-settings set default-web-browser
 # 

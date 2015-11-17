@@ -114,4 +114,5 @@ vm.swappiness = 20
 # Uncomment the following to stop low-level messages on console
 #kernel.printk = 3 4 1 3
 
+$sudo sysctl -p to reload the config.
 To enable automatic coredumps, look at /etc/security/limits.conf
