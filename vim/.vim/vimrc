@@ -29,13 +29,22 @@ if empty(glob(s:plugscript))
 		  autocmd VimEnter * PlugInstall
 endif
 
+
+
+" 
+let mapleader = " "
+
 call plug#begin(s:plugdir)
 "Plug 'xuhdev/vim-latex-live-preview'
+" {{{ Autocompletion and linting 
+Plug 'hynek/vim-python-pep8-indent' " does not work
 Plug 'Valloric/YouCompleteMe' , { 'do': './install.sh --system-libclang --clang-completer' }
+" }}}
+
+
 "Plug 'vim-flake8' " for python syntax
 Plug 'fisadev/vim-ctrlp-cmdpalette' " sublime text like palette
 Plug 'osyo-manga/vim-anzu' " to improve internal search
-Plug 'hynek/vim-python-pep8-indent' " does not work
 Plug 'mhinz/vim-startify' 
 Plug 'dietsche/vim-lastplace' " restore last cursor postion
 "if has('nvim')
@@ -49,22 +58,26 @@ Plug 'dietsche/vim-lastplace' " restore last cursor postion
 Plug 'teto/nvim-wm'
 "Plug 'teto/vim-listchars'
 Plug '~/vim-listchars'
-Plug 'vim-voom/VOoM' " can show a tex file Table of Content
+"Plug 'vim-voom/VOoM' " can show a tex file Table of Content
 Plug 'blueyed/vim-diminactive' " disable syntax coloring on inactive splits
 Plug 'tpope/vim-sleuth' " Dunno what it is
 Plug 'tpope/vim-vinegar' " Improves netrw
 Plug 'tpope/vim-fugitive' " to use with Git
 Plug 'tpope/vim-surround' " don't realy know how to use yet
 "Plug 'junegunn/vim-github-dashboard'
-Plug 'ctrlpvim/ctrlp.vim'
-"Plug 'mattn/ctrlp-mark'
-"Plug 'mattn/ctrlp-register'
 Plug 'unblevable/quick-scope'  " highlight characeters to help in f/F moves
 Plug 'scrooloose/nerdcommenter'
 "Plug 'junegunn/vim-peekaboo' " gives a preview of buffers when pasting
-Plug 'mhinz/vim-randomtag'
+Plug 'mhinz/vim-randomtag' " Adds a :Random function that launches help at random
+
+" {{{ fuzzers
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+Plug 'ctrlpvim/ctrlp.vim'
+"Plug 'mattn/ctrlp-mark'
+"Plug 'mattn/ctrlp-register'
+" }}}
+
 
 " to 
 Plug 'junegunn/vim-easy-align'
@@ -81,14 +94,7 @@ Plug 'mhinz/vim-rfc'
 Plug 'chrisbra/unicode.vim' " can show a list of unicode characeters, with their name  :UnicodeTable etc... 
 Plug 'vim-scripts/rfc-syntax', { 'for': 'rfc' } " optional syntax highlighting for 
 Plug 'vim-scripts/Modeliner' " <leader>ml to setup buffer modeline
-" this one could not compile my program
-"Plug 'vim-latex/vim-latex', {'for': 'tex'}
-" ATP author gh mirror seems to be git@github.com:coot/atp_vim.git
-"Plug 'coot/atp_vim', {'for': 'tex'}
-
 " This one has bindings mapped to <leader>l
-Plug 'lervag/vimtex', {'for': 'tex'}
-"Plug 'vim-scripts/AutomaticLaTexPlugin', {'for': 'tex'}
 Plug 'tmhedberg/SimpylFold', { 'for': 'py' } " provides python folding
 Plug 'vimwiki/vimwiki'   " to write notes
 Plug 'kshenoy/vim-signature' " display marks in gutter, love it
@@ -117,7 +123,16 @@ Plug 'morhetz/gruvbox'
 Plug 'chrisbra/csv.vim' "
 " Plug 'luochen1990/rainbow' " does it work ?
 Plug 'eapache/rainbow_parentheses.vim'  " Display successive delimiters such as [,(... with different colors 
-Plug 'LaTeX-Box-Team/LaTeX-Box'
+
+" {{{ Latex attempts
+" this one could not compile my program
+" "Plug 'vim-latex/vim-latex', {'for': 'tex'}
+" " ATP author gh mirror seems to be git@github.com:coot/atp_vim.git
+" "Plug 'coot/atp_vim', {'for': 'tex'}
+Plug 'LaTeX-Box-Team/LaTeX-Box', {'for': 'tex'}
+"Plug 'lervag/vimtex', {'for': 'tex'}
+" }}}
+
 call plug#end()
 
 set autoread " automatically reload file when it has been changed (hope they fix this damn feature one day)
@@ -167,7 +182,6 @@ set title " vim will change terminal title
 "set titlestring
 " look at :h titlestring (follows statusbar convention
 
-let mapleader = " "
 
 
 nnoremap <Leader>/ :set hlsearch! hls?<CR> " toggle search highlighting
@@ -301,7 +315,7 @@ noremap gy "+y
 
 
 
-" Plug section {{{
+" External sourced files section {{{
 
 " let use sudo once the file is loaded
 "source ~/.vim/plug.vim
@@ -418,7 +432,7 @@ set shiftround    " round indent to multiple of 'shiftwidth'
 au! BufWritePost .vimrc source %
 " open vimrc
 nnoremap <Leader>ev :vs $MYVIMRC<CR> 
-nnoremap <Leader>ep :vs ~/.vim/plug.vim<CR> 
+"nnoremap <Leader>ep :vs ~/.vim/plug.vim<CR> 
 nnoremap <Leader>sv :source $MYVIMRC<CR> " reload vimrc
 
 nnoremap <Leader>e :Vex<CR> " open netrw
@@ -455,6 +469,33 @@ let g:ctrlp_match_window = 'results:100' " overcome limit imposed by max height
 let g:ctrlp_extensions= ['dir','mark']
 " }}}
 
+" Csv config {{{
+" you can use :CsvVertFold to hide commands
+" There is the analyze command as well
+    let g:csv_autocmd_arrange = 1
+    let g:csv_autocmd_arrange_size = 1024*1024
+" }}}
+
+" Latex box config {{{
+" to open the TOC on a tex 
+"if s:extfname ==? "tex"
+  "...
+  "let g:LatexBox_split_type="new"
+  "...
+"endif
+
+let g:LatexBox_viewer = "xdg-open"
+let g:LatexBox_Folding = 1 "Enable section folding
+" jump to first error after compilation
+let g:LatexBox_autojump = 1
+let g:LatexBox_quickfix = 2
+" set quickfix to 2 if you enable that
+let g:LatexBox_latexmk_preview_continuously = 1
+let g:LatexBox_latexmk_async = 1
+let g:LatexBox_output_type = "pdf"
+" 
+let g:LatexBox_latexmk_options = ""
+"}}}
 
 " FZF config {{{
 
@@ -473,7 +514,6 @@ let g:fzf_layout = { 'down': '~40%' }
 "autocmd VimEnter * command! Colors
   "\ call fzf#vim#colors({'left': '15%', 'options': '--reverse --margin 30%,0'})
 " }}}
-
 
 " Search parameters {{{
 set hlsearch " highlight search terms
@@ -604,7 +644,7 @@ augroup END
 " See :help ft-tex-plugin
 let g:tex_flavor = "latex"
 "}}}
-Plug 'lervag/vimtex'
+
 " {{{
   let g:vimtex_view_method = 'zathura'
   augroup latex
@@ -649,14 +689,17 @@ let g:peekaboo_compact = 1
 
 
 
-Plug '907th/vim-auto-save'
+"Plug '907th/vim-auto-save' " don't rembmer: check
 " {{{
   nnoremap coa :AutoSaveToggle<CR>
   let g:auto_save_in_insert_mode = 0
   let g:auto_save_events = ['CursorHold']
 " }}}
 
+" Customized commands depending on buffer type {{{
 
+nnoremap <LocalLeader>sv :source $MYVIMRC<CR> " reload vimrc
+" }}}
 
 
 " Neomake config {{{

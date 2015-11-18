@@ -116,3 +116,12 @@ vm.swappiness = 20
 
 $sudo sysctl -p to reload the config.
 To enable automatic coredumps, look at /etc/security/limits.conf
+
+Set default applications
+====
+Run 
+$ xdg-mime query filetype ~/Téléchargements/coflow-scheduling.pdf
+to get the name of the mime/type. You can then ask the default with:
+$ XDG_UTILS_DEBUG_LEVEL=4 xdg-mime query default application/pdf
+and finally update it with
+$ xdg-mime default zathura.desktop application/pdf
