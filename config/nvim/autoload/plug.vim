@@ -24,11 +24,14 @@
 "   " Using git URL
 "   Plug 'https://github.com/junegunn/vim-github-dashboard.git'
 "
+"   " Using a non-master branch
+"   Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
+
 "   " Plugin options
 "   Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
 "
 "   " Plugin outside ~/.vim/plugged with post-update hook
-"   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
+"   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 "
 "   " Unmanaged plugin (manually installed and updated)
 "   Plug '~/my-prototype-plugin'
@@ -172,11 +175,14 @@ function! plug#end()
             call s:assoc(lod.map, cmd, name)
           endif
           call add(s:triggers[name].map, cmd)
-        elseif cmd =~ '^[A-Z]'
+        elseif cmd =~# '^[A-Z]'
           if exists(':'.cmd) != 2
             call s:assoc(lod.cmd, cmd, name)
           endif
           call add(s:triggers[name].cmd, cmd)
+        else
+          call s:err('Invalid `on` option: '.cmd.
+          \ '. Should start with an uppercase letter or `<Plug>`.')
         endif
       endfor
     endif
@@ -294,7 +300,7 @@ endif
 
 function! s:err(msg)
   echohl ErrorMsg
-  echom a:msg
+  echom '[vim-plug] '.a:msg
   echohl None
   return 0
 endfunction

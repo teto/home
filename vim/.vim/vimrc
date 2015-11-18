@@ -38,7 +38,7 @@ call plug#begin(s:plugdir)
 "Plug 'xuhdev/vim-latex-live-preview'
 " {{{ Autocompletion and linting 
 Plug 'hynek/vim-python-pep8-indent' " does not work
-Plug 'Valloric/YouCompleteMe' , { 'do': './install.sh --system-libclang --clang-completer' }
+Plug 'Valloric/YouCompleteMe' , { 'do': './install.py --system-libclang --clang-completer' }
 " }}}
 
 
@@ -486,13 +486,13 @@ let g:ctrlp_extensions= ['dir','mark']
 "endif
 
 let g:LatexBox_viewer = "xdg-open"
-let g:LatexBox_Folding = 1 "Enable section folding
+let g:LatexBox_Folding = 0 "Enable section folding
 " jump to first error after compilation
 let g:LatexBox_autojump = 1
 let g:LatexBox_quickfix = 2
 " set quickfix to 2 if you enable that
 let g:LatexBox_latexmk_preview_continuously = 1
-let g:LatexBox_latexmk_async = 1
+let g:LatexBox_latexmk_async = 0
 let g:LatexBox_output_type = "pdf"
 " 
 let g:LatexBox_latexmk_options = ""
@@ -641,20 +641,20 @@ augroup resCur
 augroup END
 " }}}
 
-" Tex configuration {{{
+" Generic Tex configuration {{{
 " See :help ft-tex-plugin
 let g:tex_flavor = "latex"
 "}}}
 
-" {{{
-  let g:vimtex_view_method = 'zathura'
-  augroup latex
-    autocmd!
-    autocmd FileType tex nnoremap <buffer><F4> :VimtexView<CR>
-    autocmd FileType tex nnoremap <buffer><F5> :VimtexCompile<CR>
-    autocmd FileType tex map <silent> <buffer><F8> :call vimtex#latexmk#errors_open(0)<CR>
-  augroup END
-" }}}
+" Vimtex configuration {{{
+  "let g:vimtex_view_method = 'zathura'
+  "augroup latex
+    "autocmd!
+    "autocmd FileType tex nnoremap <buffer><F4> :VimtexView<CR>
+    "autocmd FileType tex nnoremap <buffer><F5> :VimtexCompile<CR>
+    "autocmd FileType tex map <silent> <buffer><F8> :call vimtex#latexmk#errors_open(0)<CR>
+  "augroup END
+"" }}}
 
 " Fold configuration {{{
 "set foldtext=
