@@ -64,7 +64,7 @@ Plug 'tpope/vim-sleuth' " Dunno what it is
 Plug 'tpope/vim-vinegar' " Improves netrw
 Plug 'tpope/vim-fugitive' " to use with Git
 Plug 'tpope/vim-surround' " don't realy know how to use yet
-"Plug 'junegunn/vim-github-dashboard'
+Plug 'junegunn/vim-github-dashboard'
 Plug 'unblevable/quick-scope'  " highlight characeters to help in f/F moves
 Plug 'scrooloose/nerdcommenter'
 "Plug 'junegunn/vim-peekaboo' " gives a preview of buffers when pasting
@@ -91,7 +91,7 @@ Plug 'Lokaltog/vim-easymotion'
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'airblade/vim-gitgutter' " will show which lines changed compared to last clean state
 Plug 'mhinz/vim-rfc'
-Plug 'chrisbra/unicode.vim' " can show a list of unicode characeters, with their name  :UnicodeTable etc... 
+"Plug 'chrisbra/unicode.vim' " can show a list of unicode characeters, with their name  :UnicodeTable etc... 
 Plug 'vim-scripts/rfc-syntax', { 'for': 'rfc' } " optional syntax highlighting for 
 Plug 'vim-scripts/Modeliner' " <leader>ml to setup buffer modeline
 " This one has bindings mapped to <leader>l
@@ -136,7 +136,8 @@ Plug 'LaTeX-Box-Team/LaTeX-Box', {'for': 'tex'}
 call plug#end()
 
 set autoread " automatically reload file when it has been changed (hope they fix this damn feature one day)
-set linebreak " better display
+set linebreak " better display (makes sense only with wrap)
+set wrap
 set breakat=80
 set breakindent " preserve indentation on wrap
 set showbreak=">>>"
@@ -729,13 +730,17 @@ function! AutoSaveOnLostFocus()
   exe ":au FocusLost" expand("%") ":wa"
 endfunction
 
+" search items in location list (per window)
+nnoremap <F1> :lprev<CR>
+nnoremap <F2> :lnext<CR>
+" search for  item in quickfix list (global/unique)
+nnoremap <F3> :cprev<CR>
+nmap <F4> :cnext<CR>
+nnoremap <F5> :Neomake<CR>
+nnoremap <F6> :call AutoSaveOnLostFocus()
 " search for  item in quickfix list
-nnoremap <F2> :cp<CR>
-nnoremap <F3> :cn<CR>
-nnoremap <F4> :Neomake<CR>
-nnoremap <F5> :call AutoSaveOnLostFocus()
-" search for  item in quickfix list
-nnoremap <F7> :bp<CR>
+" goto previous buffer
+nnoremap <F7> :bp<CR> 
 nnoremap <F8> :bn<CR>
 " est mappe a autre chose pour l'instant
 "noremap <F4> exec ":emenu <tab>"
