@@ -42,6 +42,11 @@ Plug 'Valloric/YouCompleteMe' , { 'do': './install.py --system-libclang --clang-
 " }}}
 
 
+" {{{ To ease movements
+"Plug 'rhysd/clever-f.vim'
+"Plug 'unblevable/quick-scope'  " highlight characeters to help in f/F moves
+Plug 'Lokaltog/vim-easymotion'
+" }}}
 "Plug 'vim-flake8' " for python syntax
 Plug 'fisadev/vim-ctrlp-cmdpalette' " sublime text like palette
 Plug 'osyo-manga/vim-anzu' " to improve internal search
@@ -52,7 +57,7 @@ Plug 'dietsche/vim-lastplace' " restore last cursor postion
 "else
 	"Plug 'Lokaltog/powerline' , {'rtp': 'powerline/bindings/vim/'}
 "endif
-
+Plug 'wannesm/wmgraphviz.vim'
 "Plug 'CCTree'
 "Plug 'showmarks2'
 Plug 'teto/nvim-wm'
@@ -65,7 +70,6 @@ Plug 'tpope/vim-vinegar' " Improves netrw
 Plug 'tpope/vim-fugitive' " to use with Git
 Plug 'tpope/vim-surround' " don't realy know how to use yet
 Plug 'junegunn/vim-github-dashboard'
-Plug 'unblevable/quick-scope'  " highlight characeters to help in f/F moves
 Plug 'scrooloose/nerdcommenter'
 "Plug 'junegunn/vim-peekaboo' " gives a preview of buffers when pasting
 Plug 'mhinz/vim-randomtag' " Adds a :Random function that launches help at random
@@ -87,7 +91,6 @@ Plug 'junegunn/vim-easy-align'
 "Plug 'elzr/vim-json', { 'for': 'json' }
 "Plug 'numkil/ag.vim'
 Plug 'gundo'
-Plug 'Lokaltog/vim-easymotion'
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'airblade/vim-gitgutter' " will show which lines changed compared to last clean state
 Plug 'mhinz/vim-rfc'
@@ -580,6 +583,18 @@ nmap <leader>5 <Plug>AirlineSelectTab5
 "}}}
 autocmd CompleteDone * pclose " close the popup on python completion
 
+
+" {{{ Clever f
+"
+" }}}
+
+
+" {{{ Quickscope config
+"let g:qs_first_occurrence_highlight_color = 155
+"let g:qs_second_occurrence_highlight_color = 81
+"let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+"nmap <leader>q <plug>(QuickScopeToggle)
+" }}}
 
 " Rainbow parentheses {{{
 let g:rbpt_colorpairs = [
