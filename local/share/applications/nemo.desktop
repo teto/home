@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Terminal=false
+Icon[en_US]=
+Exec=nemo
+Name[en_US]=Application launcher
+Comment[en_US]=
+Name=Nemo
+Comment=
+Icon=

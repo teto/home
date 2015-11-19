@@ -46,6 +46,7 @@ Plug 'Valloric/YouCompleteMe' , { 'do': './install.py --system-libclang --clang-
 "Plug 'rhysd/clever-f.vim'
 "Plug 'unblevable/quick-scope'  " highlight characeters to help in f/F moves
 Plug 'Lokaltog/vim-easymotion'
+Plug 'vim-scripts/QuickFixCurrentNumber'
 " }}}
 "Plug 'vim-flake8' " for python syntax
 Plug 'fisadev/vim-ctrlp-cmdpalette' " sublime text like palette
@@ -69,7 +70,7 @@ Plug 'tpope/vim-sleuth' " Dunno what it is
 Plug 'tpope/vim-vinegar' " Improves netrw
 Plug 'tpope/vim-fugitive' " to use with Git
 Plug 'tpope/vim-surround' " don't realy know how to use yet
-Plug 'junegunn/vim-github-dashboard'
+Plug 'junegunn/vim-github-dashboard' " needs ruby support, thus won't work in neovim
 Plug 'scrooloose/nerdcommenter'
 "Plug 'junegunn/vim-peekaboo' " gives a preview of buffers when pasting
 Plug 'mhinz/vim-randomtag' " Adds a :Random function that launches help at random
@@ -105,12 +106,14 @@ Plug 'kshenoy/vim-signature' " display marks in gutter, love it
 Plug 'vasconcelloslf/vim-interestingwords' " highlight the words you choose
 Plug 'mhinz/vim-grepper' " async grep neovim only
 Plug 'benekastah/neomake' " async build for neovim
+
 " color schemes {{{
 Plug 'whatyouhide/vim-gotham'
 Plug 'sickill/vim-monokai'
 Plug 'mhinz/vim-janah'
 Plug 'Solarized'
 Plug 'morhetz/gruvbox'
+Plug 'romainl/flattened'
 " }}}
 
 " Had to disable this one, needs a vim with lua compiled
@@ -196,8 +199,8 @@ nnoremap <Leader>/ :set hlsearch! hls?<CR> " toggle search highlighting
 " transforms some characters into their digraphs equivalent 
 " if your font supports it 
 " concealcursor
-let g:tex_conceal="agdms"
-set conceallevel=2
+"let g:tex_conceal="agdms"
+"set conceallevel=2
 
 set showmatch
 
@@ -717,7 +720,8 @@ let g:peekaboo_compact = 1
 nnoremap <LocalLeader>sv :source $MYVIMRC<CR> " reload vimrc
 " }}}
 
-
+" {{{ vim-scripts/QuickFixCurrentNumber
+" }}}
 " Neomake config {{{
 let g:neomake_verbose = 0
 let g:neomake_python_enabled_makers = ['pyflakes']
