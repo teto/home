@@ -1,4 +1,5 @@
 git+https://github.com/powerline/powerline
+git+https://github.com/geier/khal.git
 git+https://github.com/pydata/pandas
 git+https://github.com/The-Compiler/qutebrowser
 Babel==2.1.1

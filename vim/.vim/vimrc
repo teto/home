@@ -710,9 +710,9 @@ let g:peekaboo_compact = 1
 
 "Plug '907th/vim-auto-save' " don't rembmer: check
 " {{{
-  nnoremap coa :AutoSaveToggle<CR>
-  let g:auto_save_in_insert_mode = 0
-  let g:auto_save_events = ['CursorHold']
+  "nnoremap coa :AutoSaveToggle<CR>
+  "let g:auto_save_in_insert_mode = 0
+  "let g:auto_save_events = ['CursorHold']
 " }}}
 
 " Customized commands depending on buffer type {{{
@@ -722,6 +722,7 @@ nnoremap <LocalLeader>sv :source $MYVIMRC<CR> " reload vimrc
 
 " {{{ vim-scripts/QuickFixCurrentNumber
 " }}}
+
 " Neomake config {{{
 let g:neomake_verbose = 0
 let g:neomake_python_enabled_makers = ['pyflakes']
@@ -756,7 +757,7 @@ nnoremap <F2> :lnext<CR>
 nnoremap <F3> :cprev<CR>
 nmap <F4> :cnext<CR>
 nnoremap <F5> :Neomake<CR>
-nnoremap <F6> :call AutoSaveOnLostFocus()
+"nnoremap <F6> :call AutoSaveOnLostFocus()
 " search for  item in quickfix list
 " goto previous buffer
 nnoremap <F7> :bp<CR> 

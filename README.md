@@ -79,6 +79,8 @@ Latex
 God I hate latex...
 Don't forget to configure mendeley to export references into texmf/bibtex
 There is a script to help debug tex problems in bin/
+To understand why latex can't find the citations:
+http://tex.stackexchange.com/questions/63852/question-mark-instead-of-citation-number
 
 Python packages
 ====
