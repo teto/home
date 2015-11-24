@@ -414,9 +414,14 @@ let g:solarized_termtrans = 0
 
 " colorscheme solarized
 colorscheme monokai
-
 "}}}
 
+" Gruvbox config {{{
+" contrast can be soft/medium/hard
+" there are other many options
+let g:gruvbox_contrast_dark="hard"
+let g:gruvbox_contrast_light="hard"
+" }}
 
 
 " to remove timeout when changing modes
