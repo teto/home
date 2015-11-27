@@ -8,7 +8,7 @@
 	whitespace = space-before-tab
 #trailing-space
 [color]
-	ui = true
+	ui = auto
 [sendemail]
 	chainreplyto = false
 

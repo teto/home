@@ -34,6 +34,10 @@ endif
 " 
 let mapleader = " "
 
+
+" to configure vim for haskell, refer to
+" http://yannesposito.com/Scratch/en/blog/Vim-as-IDE/
+
 call plug#begin(s:plugdir)
 "Plug 'xuhdev/vim-latex-live-preview'
 " {{{ Autocompletion and linting 
