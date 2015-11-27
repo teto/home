@@ -107,13 +107,14 @@ Plug 'vasconcelloslf/vim-interestingwords' " highlight the words you choose
 Plug 'mhinz/vim-grepper' " async grep neovim only
 Plug 'benekastah/neomake' " async build for neovim
 
-" color schemes {{{
+" colorschemes {{{
 Plug 'whatyouhide/vim-gotham'
 Plug 'sickill/vim-monokai'
 Plug 'mhinz/vim-janah'
 Plug 'Solarized'
 Plug 'morhetz/gruvbox'
 Plug 'romainl/flattened'
+Plug 'joshdick/onedark.vim'
 " }}}
 
 " Had to disable this one, needs a vim with lua compiled
