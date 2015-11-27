@@ -1,5 +1,6 @@
 # vim: set foldmethod=marker:
-
+# See https://wiki.archlinux.org/index.php/XDG_Base_Directory_support#Partial to get aound
+#  non XDG conformant programs
 
 # PATH {{{
 #PATH="/usr/lib/w3m:$PATH"
@@ -36,10 +37,14 @@ export LD_LIBRARY_PATH="/usr/local/lib:$LD_LIBRARY_PATH"
 export IPYTHONDIR="$XDG_CONFIG_HOME/ipython"
 
 export MAILDIR="$HOME/Maildir" 
-export MUTT="$HOME/.mutt"
+export MUTT="$XDG_CONFIG_HOME/mutt"
 
 export EDITOR="nvim"
 export TERMINAL="urxvt"
+export LESSHISTFILE="$XDG_CACHE_HOME/less/history"
+export NOTMUCH_CONFIG="$XDG_CONFIG_HOME/notmuch/notmuchrc"
+export INPUTRC="$XDG_CONFIG_HOME/inputrc"
+
 
 
 # for DCE/ns3 experiments {{{
