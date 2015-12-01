@@ -43,3 +43,8 @@ You have to compile with the flags:
 
 CFLAGS=-fPIC -U_FORTIFY_SOURCE LDFLAGS=-pie -rdynamic
 
+
+Running tests:
+- Invalid test name: cannot contain any of '"/\|?': Check that process "test-empty(ns3)" completes correctly.
+
+./waf --run "test-runner --test-name=netlink-socket --verbose"
