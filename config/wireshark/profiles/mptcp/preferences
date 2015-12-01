@@ -84,7 +84,7 @@ gui.fileopen.dir: /home/teto/pcaps/mptcp167.1407349533.bmL
 # TRUE or FALSE (case-insensitive)
 #gui.geometry.save.maximized: TRUE
 
-# Use Mac OS X style (Mac OS X with native GTK only)?
+# Use OS X style (OS X with native GTK only)?
 # TRUE or FALSE (case-insensitive)
 #gui.macosx_style: TRUE
 
@@ -875,12 +875,12 @@ nameres.hosts_file_handling: TRUE
 # A string denoting an positive integer range (e.g., "1-20,30-40")
 #ansi_map.map.ssn: 5-14
 
-# Type of matching invoke/response, risk of missmatch if loose matching choosen
+# Type of matching invoke/response, risk of mismatch if loose matching chosen
 # One of: Transaction ID only, Transaction ID and Source, Transaction ID Source and Destination
 # (case-insensitive).
 #ansi_map.transaction.matchtype: Transaction ID and Source
 
-# Type of matching invoke/response, risk of missmatch if loose matching choosen
+# Type of matching invoke/response, risk of mismatch if loose matching chosen
 # One of: Transaction ID only, Transaction ID and Source, Transaction ID Source and Destination
 # (case-insensitive).
 #ansi_tcap.transaction.matchtype: Transaction ID only
@@ -2159,7 +2159,7 @@ nameres.hosts_file_handling: TRUE
 # TRUE or FALSE (case-insensitive)
 #h501.desegment: TRUE
 
-# Mantain relationships between transactions and contexts and display an extra tree showing context data
+# Maintain relationships between transactions and contexts and display an extra tree showing context data
 # TRUE or FALSE (case-insensitive)
 #h248.ctx_info: FALSE
 
@@ -2477,6 +2477,10 @@ ip.check_checksum: TRUE
 # Try to decode a packet using an heuristic sub-dissector before using a sub-dissector registered to a specific port
 # TRUE or FALSE (case-insensitive)
 #ipv6.try_heuristic_first: FALSE
+
+# Whether to display IPv6 extension headers as a separate protocol or a sub-protocol of the IPv6 packet
+# TRUE or FALSE (case-insensitive)
+#ipv6.exthdr_under_root_protocol_tree: FALSE
 
 # The iSCSI protocol version
 # One of: Draft 08, Draft 09, Draft 11, Draft 12, Draft 13
@@ -3127,25 +3131,25 @@ ip.check_checksum: TRUE
 # TRUE or FALSE (case-insensitive)
 #mplspwatmn1cw.extend_cw_length_with_rsvd: FALSE
 
-# Assume TCP Option MPTCP (30)
+# To use this option you must also enable "Analyze TCP sequence numbers". 
 # TRUE or FALSE (case-insensitive)
 #mptcp.analyze_mptcp: TRUE
 
-# Assume TCP Option MPTCP (30)
+# In case you don't capture the key, it will use the first DSN seen
 # TRUE or FALSE (case-insensitive)
 #mptcp.relative_sequence_numbers: TRUE
 
-# Assume TCP Option MPTCP (30)
+# You need to capture the handshake for this to work."Map TCP subflows to their respective MPTCP connections"
 # TRUE or FALSE (case-insensitive)
-#mptcp.analyze_mappings: TRUE
+mptcp.analyze_mappings: TRUE
 
-# Assume TCP Option MPTCP (30)
+# You need to enable DSS mapping analysis for this option to work
 # TRUE or FALSE (case-insensitive)
-#mptcp.interdsn_latency: TRUE
+mptcp.interdsn_latency: TRUE
 
-# Assume TCP Option MPTCP (30)
+# You need to enable DSS mapping analysis for this option to work
 # TRUE or FALSE (case-insensitive)
-#mptcp.intersubflows_retransmission: TRUE
+mptcp.intersubflows_retransmission: TRUE
 
 # Whether the MQ dissector should reassemble messages spanning multiple TCP segments. To use this option, you must also enable "Allow subdissectors to reassemble TCP streams" in the TCP protocol settings.
 # TRUE or FALSE (case-insensitive)
@@ -3992,7 +3996,7 @@ ip.check_checksum: TRUE
 
 # Default link-layer type to use if an Open Reply packet has not been received.
 # A decimal number
-#rpcap.linktype: 0
+#rpcap.linktype: 4294967295
 
 # Check to treat all traffic between the configured source/destination as RPCoRDMA
 # TRUE or FALSE (case-insensitive)
@@ -4141,6 +4145,10 @@ ip.check_checksum: TRUE
 # Specifies the maximum number of samples dissected in a DATA_BATCH submessage. Increasing this value may affect performances if the trace has a lot of big batched samples.
 # A decimal number
 #rtps.max_batch_samples_dissected: 16
+
+# Shows the Topic Name and Type Name of the samples.
+# TRUE or FALSE (case-insensitive)
+#rtps.enable_topic_info: FALSE
 
 # RTSP TCP Ports range
 # A string denoting an positive integer range (e.g., "1-20,30-40")
@@ -4423,6 +4431,10 @@ ip.check_checksum: TRUE
 # Whether the export object functionality will take the full path file name as file identifier
 # TRUE or FALSE (case-insensitive)
 #smb2.eosmb2_take_name_as_fid: FALSE
+
+# Whether the dissector should reassemble Named Pipes over SMB2 commands
+# TRUE or FALSE (case-insensitive)
+#smb2.pipe_reassembly: TRUE
 
 # Whether the SMB Direct dissector should reassemble fragmented payloads
 # TRUE or FALSE (case-insensitive)
