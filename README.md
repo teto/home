@@ -127,3 +127,17 @@ to get the name of the mime/type. You can then ask the default with:
 $ XDG_UTILS_DEBUG_LEVEL=4 xdg-mime query default application/pdf
 and finally update it with
 $ xdg-mime default zathura.desktop application/pdf
+
+
+Python
+====
+To instlal as user
+wget https://bootstrap.pypa.io/get-pip.py
+python3.X get-pip.py --user
+
+TODO
+====
+Automatically setup some important scripts so that they run in rams:
+ sudo vmtouch -dl /usr/bin/python3.4
+ sudo vmtouch -dl ~/.i3/i3dispatch.py
+ ulimit -a|grep locked to check the user limit

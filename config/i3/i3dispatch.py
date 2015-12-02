@@ -1,4 +1,4 @@
-#!/usr/bin/python2
+#!/usr/bin/python3.4
 from neovim import attach
 import argparse
 import subprocess
