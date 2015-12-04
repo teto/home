@@ -543,6 +543,10 @@ let g:ycm_key_detailed_diagnostics = '<leader>d'
 let g:ycm_goto_buffer_command = 'same-buffer' " horizontal-split, new-tab, new-or-existing tab
 let g:ycm_server_log_level = 'debug'
 
+" Add triggers to ycm for LaTeX-Box autocompletion
+let g:ycm_semantic_triggers = {
+      \  'tex'  : ['{'],
+      \ }
 nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
 nnoremap <F6> :YcmDebugInfo<CR>
 
@@ -572,8 +576,16 @@ let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline#extensions#tabline#show_buffers = 1  
 let g:airline#extensions#tabline#buffer_min_count =2
 let g:airline#extensions#tabline#buffer_idx_mode = 1
-nmap <leader>1 <Plug>AirlineSelectTab1
-nmap <leader>2 <Plug>AirlineSelectTab2
+let g:airline_extensions = ['branch', 'tabline']
+
+let g:airline#extensions#whitespace#enabled = 0
+let g:airline#extensions#whitespace#mixed_indent_algo = 2
+  let g:airline#extensions#whitespace#checks = [ 'indent', 'trailing', 'long' ]
+
+
+
+nmap <leader>& <Plug>AirlineSelectTab1
+nmap <leader>é <Plug>AirlineSelectTab2
 nmap <leader>3 <Plug>AirlineSelectTab3
 nmap <leader>4 <Plug>AirlineSelectTab4
 nmap <leader>5 <Plug>AirlineSelectTab5
@@ -704,11 +716,14 @@ let g:peekaboo_compact = 1
 
 
 
-"Plug '907th/vim-auto-save' " don't rembmer: check
+Plug '907th/vim-auto-save' " don't rembmer: check
 " {{{
   "nnoremap coa :AutoSaveToggle<CR>
-  "let g:auto_save_in_insert_mode = 0
+" AutoSave is disabled by default, run :AutoSaveToggle to enable/disable it.
+let g:auto_save = 1  " enable AutoSave on Vim startup
+let g:auto_save_in_insert_mode = 0
   "let g:auto_save_events = ['CursorHold']
+let g:auto_save_events = ["InsertLeave", "TextChanged"]
 " }}}
 
 " Customized commands depending on buffer type {{{
