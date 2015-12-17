@@ -23,8 +23,13 @@ cd ..
 
 Thus in my case:
 --enable-opt removed since it does not work well for now:
-./waf configure --with-ns3=$HOME/ns3off/install --enable-kernel-stack=$HOME/mptcpoff/arch --prefix=$HOME/dce/build
-il
+
+TODO refaire une passe pr que ca compile avec clang++
+CXX="clang++"
+
+```
+CXX="g++" CXXFLAGS=" -g -Wno-reorder -Wno-unused-variable -std=c++11 -include sstream" ./waf configure --with-ns3=$HOME/ns3off/install --enable-kernel-stack=$HOME/mptcpoff/arch --prefix=$HOME/dce/build
+```
 
 
 Il n'y a pas non plus de checks sur --enable-kernel-stack ?

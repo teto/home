@@ -151,7 +151,7 @@ bindsym $mod+Shift+A kill
 
 # start dmenu (a program launcher)
 #bindsym $mod+d exec j4-dmenu-desktop
-bindsym $mod+eacute exec j4-dmenu-desktop --dmenu='rofi -dmenu'
+bindsym $mod+eacute exec j4-dmenu-desktop --dmenu='rofi -i -dmenu'
 #dmenu_run -
 
 #for_window [title="MOC"] move scratchpad

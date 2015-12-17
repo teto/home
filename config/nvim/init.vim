@@ -1,7 +1,7 @@
 " to debug vimscript, use :mess to display error messages
 " source ~/.vim/vimrc
 
-
+"$NVIM_PYTHON_LOG_FILE
 
 let s:plugdir = $XDG_CONFIG_HOME.'/nvim/plugged'
 
@@ -35,6 +35,7 @@ Plug 'Valloric/YouCompleteMe' , { 'do': './install.py --system-libclang --clang-
 "Plug 'unblevable/quick-scope'  " highlight characeters to help in f/F moves
 Plug 'Lokaltog/vim-easymotion'
 Plug 'vim-scripts/QuickFixCurrentNumber'
+Plug 'tpope/vim-rsi'
 " }}}
 "Plug 'vim-flake8' " for python syntax
 Plug 'fisadev/vim-ctrlp-cmdpalette' " sublime text like palette
@@ -70,10 +71,18 @@ Plug 'ctrlpvim/ctrlp.vim'
 "Plug 'mattn/ctrlp-mark'
 "Plug 'mattn/ctrlp-register'
 " }}}
+function! BuildComposer(info)
+  if a:info.status != 'unchanged' || a:info.force
+    !cargo build --release
+    UpdateRemotePlugins
+  endif
+endfunction
 
+Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') }
+"Plug 'euclio/vim-markdown-composer' " Needs rust, cargo, pelnty of things
+"Plug 'greyblake/vim-preview' " depends on ruby 'redcarpet', thus doesn't work in neovim ?
 
-" to 
-Plug 'junegunn/vim-easy-align'
+Plug 'junegunn/vim-easy-align'   " to align '=' on multiple lines for instance
 " Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 "Plug 'surround.vim'
 "Plug 'tpope/vim-markdown', { 'for': 'md' }
@@ -82,13 +91,14 @@ Plug 'junegunn/vim-easy-align'
 Plug 'gundo'
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'airblade/vim-gitgutter' " will show which lines changed compared to last clean state
-Plug 'mhinz/vim-rfc'
+Plug 'mhinz/vim-rfc', { 'for': 'rfc' }
 "Plug 'chrisbra/unicode.vim' " can show a list of unicode characeters, with their name  :UnicodeTable etc... 
-Plug 'vim-scripts/rfc-syntax', { 'for': 'rfc' } " optional syntax highlighting for 
+"Plug 'vim-scripts/rfc-syntax', { 'for': 'rfc' } " optional syntax highlighting for 
 Plug 'vim-scripts/Modeliner' " <leader>ml to setup buffer modeline
+Plug 'sfiera/vim-emacsmodeline' " Reads emacs modelines
 " This one has bindings mapped to <leader>l
 Plug 'tmhedberg/SimpylFold', { 'for': 'py' } " provides python folding
-Plug 'vimwiki/vimwiki'   " to write notes
+"Plug 'vimwiki/vimwiki'   " to write notes
 Plug 'kshenoy/vim-signature' " display marks in gutter, love it
 "Plug 'vim-scripts/DynamicSigns'
 Plug 'vasconcelloslf/vim-interestingwords' " highlight the words you choose
@@ -367,6 +377,11 @@ set splitright   " on vertical split
 
 " }}}
 
+
+" {{{ Markdown composer
+let g:markdown_composer_open_browser        = "qutebrowser"
+let g:markdown_composer_autostart           = 1
+" }}}
 "set winheight=30
 "set winminheight=5
 
@@ -704,11 +719,11 @@ let g:peekaboo_compact = 1
 
 
 
-"Plug '907th/vim-auto-save' " don't rembmer: check
+Plug '907th/vim-auto-save' " don't rembmer: check
 " {{{
-  "nnoremap coa :AutoSaveToggle<CR>
-  "let g:auto_save_in_insert_mode = 0
-  "let g:auto_save_events = ['CursorHold']
+  nnoremap coa :AutoSaveToggle<CR>
+  let g:auto_save_in_insert_mode = 0
+  let g:auto_save_events = ['CursorHold', 'FocusLost']
 " }}}
 
 " Customized commands depending on buffer type {{{
