@@ -1,3 +1,4 @@
+" vim: set noet fenc=utf-8 ff=unix sts=0 sw=2 ts=8 : 
 " to debug vimscript, use :mess to display error messages
 " source ~/.vim/vimrc
 
@@ -35,10 +36,13 @@ Plug 'Valloric/YouCompleteMe' , { 'do': './install.py --system-libclang --clang-
 "Plug 'unblevable/quick-scope'  " highlight characeters to help in f/F moves
 Plug 'Lokaltog/vim-easymotion'
 Plug 'vim-scripts/QuickFixCurrentNumber'
+Plug 'wellle/visual-split.vim'
+Plug 'justinmk/vim-ipmotion'
+Plug 'justinmk/vim-sneak'
 " }}}
 "Plug 'vim-flake8' " for python syntax
 Plug 'fisadev/vim-ctrlp-cmdpalette' " sublime text like palette
-Plug 'osyo-manga/vim-anzu' " to improve internal search
+"Plug 'osyo-manga/vim-anzu' " to improve internal search
 Plug 'mhinz/vim-startify' 
 Plug 'dietsche/vim-lastplace' " restore last cursor postion
 "if has('nvim')
@@ -56,6 +60,7 @@ Plug '~/vim-listchars'
 Plug 'blueyed/vim-diminactive' " disable syntax coloring on inactive splits
 Plug 'tpope/vim-sleuth' " Dunno what it is
 Plug 'tpope/vim-vinegar' " Improves netrw
+Plug 'justinmk/vim-gtfo'
 Plug 'tpope/vim-fugitive' " to use with Git
 Plug 'tpope/vim-surround' " don't realy know how to use yet
 Plug 'junegunn/vim-github-dashboard' " needs ruby support, thus won't work in neovim
@@ -130,6 +135,9 @@ Plug 'LaTeX-Box-Team/LaTeX-Box', {'for': 'tex'}
 " }}}
 
 call plug#end()
+
+
+
 
 set autoread " automatically reload file when it has been changed (hope they fix this damn feature one day)
 set linebreak " better display (makes sense only with wrap)
@@ -411,9 +419,15 @@ colorscheme monokai
 " there are other many options
 let g:gruvbox_contrast_dark="hard"
 let g:gruvbox_contrast_light="hard"
-" }}
+" }}}
 
-
+" Diminactive config {{{
+let g:diminactive_buftype_blacklist = []
+let g:diminactive_debug = 0
+  let g:diminactive_use_colorcolumn = 1
+  let g:diminactive_use_syntax = 0
+  let g:diminactive_enable_focus = 0
+"}}}
 " to remove timeout when changing modes
 if ! has('gui_running')
     set ttimeoutlen=10
@@ -498,6 +512,9 @@ let g:LatexBox_latexmk_async = 0
 let g:LatexBox_output_type = "pdf"
 let g:LatexBox_show_warnings = 1 " list warnings as errors
 let g:LatexBox_latexmk_options = ""
+"let g:LatexBox_completion_command
+
+let g:LatexBox_ignore_warnings= ["Bibliography not compatible with author-year citations."]
 "}}}
 
 " FZF config {{{
@@ -796,7 +813,6 @@ endif
 "'.'
 "set shada=!,'50,<1000,s100,:0,n/home/teto/.cache/nvim/shada
 set shada=!,'50,<1000,s100,:0,n$XDG_CACHE_HOME/nvim/shada
-let g:diminactive_use_syntax = 1
 let g:netrw_home=$XDG_CACHE_HOME.'/nvim'
 " Cursor configuration {{{
 "let $NVIM_TUI_ENABLE_TRUE_COLOR=1
