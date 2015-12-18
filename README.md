@@ -4,6 +4,7 @@ home
 This folder contains my customizations for:
 * alot (MUA: Mail User Agent)
 * bash
+* clerk (to control mpd via rofi)
 * font handling
 * git (Source control)
 * htop
@@ -24,6 +25,7 @@ This folder contains my customizations for:
 * procmail
 * qutebrowser (vim like browser)
 * ranger (CLI file explorer)
+* rofi (a dmenu-like interactive prompt, works with clerk/i3 etc...)
 * rxvt* unicode(256)
 * sup (MUA, incomplete, I use alot instead)
 * sxiv (image viewer)
@@ -35,6 +37,9 @@ This folder contains my customizations for:
 
 Configurations & install
 ====
+
+New but uncomplete method: run make with the appropriate target
+
 Install each package via GNU stow:
 	dotfiles$ stow <PKG>
 
@@ -66,7 +71,7 @@ The folder "compilation" is an example of how to ./configure certain programs
 
 Neovim
 ====
-:PlugUpgrade / :PlugInstall
+:PlugUpgrade / :PlugInstall / :UpdateRemotePlugins
 
 
 To install .desktop entries
@@ -131,7 +136,7 @@ $ xdg-mime default zathura.desktop application/pdf
 
 Python
 ====
-To instlal as user
+To install as user
 wget https://bootstrap.pypa.io/get-pip.py
 python3.X get-pip.py --user
 

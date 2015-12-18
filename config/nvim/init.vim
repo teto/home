@@ -2,11 +2,14 @@
 " to debug vimscript, use :mess to display error messages
 " source ~/.vim/vimrc
 
+"$NVIM_PYTHON_LOG_FILE
 
 
 let s:plugdir = $XDG_CONFIG_HOME.'/nvim/plugged'
 
 let s:plugscript = $XDG_CONFIG_HOME.'/nvim/autoload/plug.vim'
+
+
 if empty(glob(s:plugscript))
 	  silent !mkdir -p $XDG_CONFIG_HOME.'/nvim/autoload'
 	    silent !curl -fLo s:plugscript
@@ -39,6 +42,7 @@ Plug 'vim-scripts/QuickFixCurrentNumber'
 Plug 'wellle/visual-split.vim'
 Plug 'justinmk/vim-ipmotion'
 Plug 'justinmk/vim-sneak'
+Plug 'tpope/vim-rsi'
 " }}}
 "Plug 'vim-flake8' " for python syntax
 Plug 'fisadev/vim-ctrlp-cmdpalette' " sublime text like palette
@@ -75,10 +79,17 @@ Plug 'ctrlpvim/ctrlp.vim'
 "Plug 'mattn/ctrlp-mark'
 "Plug 'mattn/ctrlp-register'
 " }}}
+function! BuildComposer(info)
+  if a:info.status != 'unchanged' || a:info.force
+    !cargo build --release
+    UpdateRemotePlugins
+  endif
+endfunction
 
+Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') } " Needs rust, cargo, plenty of things
+"Plug 'greyblake/vim-preview' " depends on ruby 'redcarpet', thus doesn't work in neovim ?
 
-" to 
-Plug 'junegunn/vim-easy-align'
+Plug 'junegunn/vim-easy-align'   " to align '=' on multiple lines for instance
 " Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 "Plug 'surround.vim'
 "Plug 'tpope/vim-markdown', { 'for': 'md' }
@@ -87,13 +98,14 @@ Plug 'junegunn/vim-easy-align'
 Plug 'gundo'
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'airblade/vim-gitgutter' " will show which lines changed compared to last clean state
-Plug 'mhinz/vim-rfc'
+Plug 'mhinz/vim-rfc', { 'for': 'rfc' }
 "Plug 'chrisbra/unicode.vim' " can show a list of unicode characeters, with their name  :UnicodeTable etc... 
-Plug 'vim-scripts/rfc-syntax', { 'for': 'rfc' } " optional syntax highlighting for 
+"Plug 'vim-scripts/rfc-syntax', { 'for': 'rfc' } " optional syntax highlighting for 
 Plug 'vim-scripts/Modeliner' " <leader>ml to setup buffer modeline
+Plug 'sfiera/vim-emacsmodeline' " Reads emacs modelines
 " This one has bindings mapped to <leader>l
 Plug 'tmhedberg/SimpylFold', { 'for': 'py' } " provides python folding
-Plug 'vimwiki/vimwiki'   " to write notes
+"Plug 'vimwiki/vimwiki'   " to write notes
 Plug 'kshenoy/vim-signature' " display marks in gutter, love it
 "Plug 'vim-scripts/DynamicSigns'
 Plug 'vasconcelloslf/vim-interestingwords' " highlight the words you choose
@@ -173,7 +185,7 @@ set shiftround " round indent to multiple of 'shiftwidth' (for << and >>)
 " Netrw configuration {{{
 " decide with which program to open files when typing 'gx'
 let g:netrw_browsex_viewer="xdg-open"
-let g:netrw_home=$XDG_CACHE_HOME.'/vim'
+let g:netrw_home=$XDG_CACHE_HOME.'/nvim'
 let g:netrw_liststyle=1 " long listing with timestamp
 " }}}
 " /quickfix
@@ -375,6 +387,11 @@ set splitright   " on vertical split
 
 " }}}
 
+
+" {{{ Markdown composer
+let g:markdown_composer_open_browser        = "qutebrowser"
+let g:markdown_composer_autostart           = 1
+" }}}
 "set winheight=30
 "set winminheight=5
 
@@ -501,20 +518,22 @@ let g:ctrlp_extensions= ['dir','mark']
 "endif
 
 " try with zathura ?
-let g:LatexBox_viewer = "xdg-open"
+" xdg-open
+let g:LatexBox_viewer = "zathura"
 let g:LatexBox_Folding = 0 "Enable section folding
 " jump to first error after compilation
 let g:LatexBox_autojump = 1
+" quickfix to 2 => open auto if not empty
 let g:LatexBox_quickfix = 2
-" set quickfix to 2 if you enable that
 let g:LatexBox_latexmk_preview_continuously = 1
-let g:LatexBox_latexmk_async = 0
+" let async to 1 to enable autoopening of quickifx
+let g:LatexBox_latexmk_async = 1
 let g:LatexBox_output_type = "pdf"
 let g:LatexBox_show_warnings = 1 " list warnings as errors
 let g:LatexBox_latexmk_options = ""
 "let g:LatexBox_completion_command
 
-let g:LatexBox_ignore_warnings= ["Bibliography not compatible with author-year citations."]
+"let g:LatexBox_ignore_warnings= ["Bibliography not compatible with author-year citations."]
 "}}}
 
 " FZF config {{{
@@ -603,9 +622,9 @@ let g:airline#extensions#whitespace#mixed_indent_algo = 2
 
 nmap <leader>& <Plug>AirlineSelectTab1
 nmap <leader>é <Plug>AirlineSelectTab2
-nmap <leader>3 <Plug>AirlineSelectTab3
-nmap <leader>4 <Plug>AirlineSelectTab4
-nmap <leader>5 <Plug>AirlineSelectTab5
+nmap <leader>" <Plug>AirlineSelectTab3
+nmap <leader>' <Plug>AirlineSelectTab4
+nmap <leader>( <Plug>AirlineSelectTab5
 
 
 "}}}
@@ -660,7 +679,7 @@ let g:gitgutter_map_keys = 0
 let g:gitgutter_max_signs = 200
 let g:gitgutter_realtime = 0
 let g:gitgutter_eager = 0
-let g:gitgutter_diff_args = '--ignore-space-at-eol'
+"let g:gitgutter_diff_args = '--ignore-space-at-eol'
 nmap <silent> ]h :GitGutterNextHunk<CR>
 nmap <silent> [h :GitGutterPrevHunk<CR>
 nnoremap <silent> <Leader>gu :GitGutterRevertHunk<CR>
@@ -735,12 +754,9 @@ let g:peekaboo_compact = 1
 
 Plug '907th/vim-auto-save' " don't rembmer: check
 " {{{
-  "nnoremap coa :AutoSaveToggle<CR>
-" AutoSave is disabled by default, run :AutoSaveToggle to enable/disable it.
-let g:auto_save = 1  " enable AutoSave on Vim startup
-let g:auto_save_in_insert_mode = 0
-  "let g:auto_save_events = ['CursorHold']
-let g:auto_save_events = ["InsertLeave", "TextChanged"]
+  nnoremap coa :AutoSaveToggle<CR>
+  let g:auto_save_in_insert_mode = 0
+  let g:auto_save_events = ['CursorHold', 'FocusLost']
 " }}}
 
 " Customized commands depending on buffer type {{{
@@ -812,9 +828,11 @@ endif
 
 "'.'
 "set shada=!,'50,<1000,s100,:0,n/home/teto/.cache/nvim/shada
-set shada=!,'50,<1000,s100,:0,n$XDG_CACHE_HOME/nvim/shada
-let g:netrw_home=$XDG_CACHE_HOME.'/nvim'
-" Cursor configuration {{{
-"let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+if has("nvim")
+  set shada=!,'50,<1000,s100,:0,n$XDG_CACHE_HOME/nvim/shada
+  let g:netrw_home=$XDG_CACHE_HOME.'/nvim'
+  " Cursor configuration {{{
+  "let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+  let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+endif
 " }}}

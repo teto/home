@@ -151,7 +151,7 @@ bindsym $mod+Shift+A kill
 
 # start dmenu (a program launcher)
 #bindsym $mod+d exec j4-dmenu-desktop
-bindsym $mod+eacute exec j4-dmenu-desktop --dmenu='rofi -dmenu'
+#bindsym $mod+eacute exec j4-dmenu-desktop --dmenu='rofi -modi "run,ssh,dmenu" -dmenu'
 #dmenu_run -
 
 #for_window [title="MOC"] move scratchpad
@@ -229,6 +229,7 @@ mode "programs" {
     bindsym q exec "qutebrowser"; mode default
     bindsym f exec "firefox"; mode default
     bindsym c exec "codeblocks"; mode default
+    bindsym m exec "mendeleydesktop"; mode default
     bindsym n exec "nemo"; mode default
 
 # set monitors, wap them ? etc..

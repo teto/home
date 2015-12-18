@@ -1,15 +1,28 @@
+! Run rofi  -dump-xresources to see the possible values
+/*rofi.key-window: F2*/
+rofi.key-run: Alt+eacute
+/*rofi.key-ssh: Alt+F3*/
+
+
+rofi.kb-mode-previous: Alt+Left
+rofi.kb-mode-next:	Alt+Right,Tab
+
+!Means it is at center
+rofi.loc: 0
 rofi.opacity: 90
 rofi.width: 50
-rofi.lines: 5
 rofi.columns: 1
 rofi.font: SourceCodePro 9
+rofi.fuzzy: true
+rofi.modi:                           run,window,ssh
+rofi.sidebar-mode: true
+
 rofi.fg: #1aa
 rofi.bg: #333
 rofi.hlfg: #333
 rofi.hlbg: #1aa
 rofi.bc: #1aa
 rofi.bw: 2
-rofi.loc: 0
 rofi.padding: 2
 rofi.yoffset: -2
 rofi.xoffset: 0
@@ -17,6 +30,3 @@ rofi.fixed-num-lines: false
 rofi.hmode: false
 rofi.terminal: urxvt
 rofi.ssh-set-title: true
-rofi.key: F12
-rofi.rkey: mod1+F2
-rofi.skey: mod1+F3
