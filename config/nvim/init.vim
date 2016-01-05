@@ -307,10 +307,11 @@ set wildignore+=lib
 " to load plugins in ftplugin matching ftdetect
 filetype plugin on
 
-" Modeline shortcuts  {{{
+" Modeliner shortcuts  {{{
 set modeline
 set modelines=4
 nmap <leader>ml :Modeliner<Enter>
+let g:Modeliner_format = 'et ff= fenc= sts= sw= ts= fdm=marker'
 " }}}
 
 " X clipboard gets aliased to +
