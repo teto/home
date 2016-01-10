@@ -42,7 +42,7 @@ Plug 'vim-scripts/QuickFixCurrentNumber'
 Plug 'wellle/visual-split.vim'
 Plug 'justinmk/vim-ipmotion'
 Plug 'justinmk/vim-sneak'
-Plug 'tpope/vim-rsi'
+Plug 'tpope/vim-rsi'  " maps readline bindings
 " }}}
 "Plug 'vim-flake8' " for python syntax
 Plug 'fisadev/vim-ctrlp-cmdpalette' " sublime text like palette
@@ -57,25 +57,25 @@ Plug 'dietsche/vim-lastplace' " restore last cursor postion
 Plug 'wannesm/wmgraphviz.vim'
 "Plug 'CCTree'
 "Plug 'showmarks2'
-Plug 'teto/nvim-wm'
+Plug 'teto/nvim-wm'  " to use WM bindings instead of vim's to move between splits
 "Plug 'teto/vim-listchars'
 Plug '~/vim-listchars'
 "Plug 'vim-voom/VOoM' " can show a tex file Table of Content
 Plug 'blueyed/vim-diminactive' " disable syntax coloring on inactive splits
 Plug 'tpope/vim-sleuth' " Dunno what it is
 Plug 'tpope/vim-vinegar' " Improves netrw
-Plug 'justinmk/vim-gtfo'
+Plug 'justinmk/vim-gtfo' " ?
 Plug 'tpope/vim-fugitive' " to use with Git
 Plug 'tpope/vim-surround' " don't realy know how to use yet
-Plug 'junegunn/vim-github-dashboard' " needs ruby support, thus won't work in neovim
+"Plug 'junegunn/vim-github-dashboard' " needs ruby support, thus won't work in neovim
 Plug 'scrooloose/nerdcommenter'
 "Plug 'junegunn/vim-peekaboo' " gives a preview of buffers when pasting
-Plug 'mhinz/vim-randomtag' " Adds a :Random function that launches help at random
+"Plug 'mhinz/vim-randomtag' " Adds a :Random function that launches help at random
 
 " {{{ fuzzers
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'ctrlpvim/ctrlp.vim'
+Plug 'ctrlpvim/ctrlp.vim' " todo remove in favor of FZF
 "Plug 'mattn/ctrlp-mark'
 "Plug 'mattn/ctrlp-register'
 " }}}
@@ -95,14 +95,14 @@ Plug 'junegunn/vim-easy-align'   " to align '=' on multiple lines for instance
 "Plug 'tpope/vim-markdown', { 'for': 'md' }
 "Plug 'elzr/vim-json', { 'for': 'json' }
 "Plug 'numkil/ag.vim'
-Plug 'gundo'
+Plug 'gundo' " visual removal
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'airblade/vim-gitgutter' " will show which lines changed compared to last clean state
 Plug 'mhinz/vim-rfc', { 'for': 'rfc' }
 "Plug 'chrisbra/unicode.vim' " can show a list of unicode characeters, with their name  :UnicodeTable etc... 
 "Plug 'vim-scripts/rfc-syntax', { 'for': 'rfc' } " optional syntax highlighting for 
 Plug 'vim-scripts/Modeliner' " <leader>ml to setup buffer modeline
-Plug 'sfiera/vim-emacsmodeline' " Reads emacs modelines
+"Plug 'sfiera/vim-emacsmodeline' " Reads emacs modelines
 " This one has bindings mapped to <leader>l
 Plug 'tmhedberg/SimpylFold', { 'for': 'py' } " provides python folding
 "Plug 'vimwiki/vimwiki'   " to write notes
@@ -135,7 +135,7 @@ Plug 'NLKNguyen/papercolor-theme'
 " annoying
 Plug 'chrisbra/csv.vim' "
 " Plug 'luochen1990/rainbow' " does it work ?
-Plug 'eapache/rainbow_parentheses.vim'  " Display successive delimiters such as [,(... with different colors 
+"Plug 'eapache/rainbow_parentheses.vim'  " Display successive delimiters such as [,(... with different colors 
 
 " {{{ Latex attempts
 " this one could not compile my program
@@ -667,10 +667,10 @@ let g:rbpt_max = 4
 let g:rbpt_loadcmd_toggle = 0
 let g:bold_parentheses = 1      " Default on
 
-au VimEnter * RainbowParenthesesToggle
-au Syntax * RainbowParenthesesLoadRound
-au Syntax * RainbowParenthesesLoadSquare
-au Syntax * RainbowParenthesesLoadBraces
+"au VimEnter * RainbowParenthesesToggle
+"au Syntax * RainbowParenthesesLoadRound
+"au Syntax * RainbowParenthesesLoadSquare
+"au Syntax * RainbowParenthesesLoadBraces
 " }}}
 
 " Gitgutter config {{{
