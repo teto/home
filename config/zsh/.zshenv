@@ -50,11 +50,19 @@ export INPUTRC="$XDG_CONFIG_HOME/inputrc"
 # for DCE/ns3 experiments {{{
 DCE_PATH="$HOME/mptcpoff" # for liblinux.so
 DCE_PATH="$DCE_PATH:$HOME/iproute2/ip" # for 'ip' program
-DCE_PATH="$DCE_PATH:$HOME/iperf3/src" # for 'iperf3' program
-#DCE_PATH="$DCE_PATH:$HOME/iperf-2.0.5/src" # for 'iperf' program
-DCE_PATH="$DCE_PATH:$HOME/iperf2/src" # for 'iperf' program
+DCE_PATH="$DCE_PATH:$HOME/iperf3/src"
+DCE_PATH="$DCE_PATH:$HOME/iperf2/src"
+# now for ntp experiments
+DCE_PATH="$DCE_PATH:$HOME/Ntimed" 
+DCE_PATH="$DCE_PATH:$HOME/openntpd"
+DCE_PATH="$DCE_PATH:$HOME/chrony"
+DCE_PATH="$DCE_PATH:$HOME/ntp"
+
+
+
 export DCE_PATH
 
+# for ns3 testing
 export DCE_FOLDER="$HOME/dce"
 export NS3_FOLDER="$HOME/ns3off"
 # }}}
