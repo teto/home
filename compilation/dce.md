@@ -16,8 +16,8 @@ make defconfig OPT=yes ARCH=sim
 make library OPT=yes ARCH=sim
 cd ..
 
-
-
+memcpy (buf->sysname, m_sysName.c_str (), std::min ((int) m_sysName.length (), 64));
+memcpy (buf->sysname, m_sysName.c_str (), std::min ((int) m_sysName.length (), 64));
 
 # Download, configure, build and install DCE
 

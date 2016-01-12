@@ -33,6 +33,8 @@ Plug 'hynek/vim-python-pep8-indent' " does not work
 Plug 'Valloric/YouCompleteMe' , { 'do': './install.py --system-libclang --clang-completer' }
 " }}}
 
+Plug 'kana/vim-operator-user'
+Plug 'haya14busa/vim-operator-flashy'
 
 " {{{ To ease movements
 "Plug 'rhysd/clever-f.vim'
