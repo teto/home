@@ -1,4 +1,4 @@
-" vim: set noet fenc=utf-8 ff=unix sts=0 sw=2 ts=8 : 
+" vim: set noet fenc=utf-8 ff=unix sts=0 sw=2 ts=8 fdm=marker :
 " to debug vimscript, use :mess to display error messages
 " source ~/.vim/vimrc
 
@@ -27,10 +27,16 @@ let mapleader = " "
 " http://yannesposito.com/Scratch/en/blog/Vim-as-IDE/
 
 call plug#begin(s:plugdir)
-"Plug 'xuhdev/vim-latex-live-preview'
+
 " {{{ Autocompletion and linting 
-Plug 'hynek/vim-python-pep8-indent' " does not work
 Plug 'Valloric/YouCompleteMe' , { 'do': './install.py --system-libclang --clang-completer' }
+" }}}
+
+" Python {{{1
+
+Plug 'hynek/vim-python-pep8-indent', {'for': 'py'} " does not work
+Plug 'mjbrownie/GetFilePlus', {'for': 'py'} " improves gf on imports
+Plug 'tmhedberg/SimpylFold', { 'for': 'py' } " provides python folding
 " }}}
 
 
@@ -45,20 +51,20 @@ Plug 'justinmk/vim-sneak'
 Plug 'tpope/vim-rsi'  " maps readline bindings
 " }}}
 "Plug 'vim-flake8' " for python syntax
-Plug 'fisadev/vim-ctrlp-cmdpalette' " sublime text like palette
+"Plug 'fisadev/vim-ctrlp-cmdpalette' " sublime text like palette
 "Plug 'osyo-manga/vim-anzu' " to improve internal search
-Plug 'mhinz/vim-startify' 
+Plug 'mhinz/vim-startify' " very popular, vim's homepage
 Plug 'dietsche/vim-lastplace' " restore last cursor postion
+" Powerline does not work in neovim hence use vim-airline instead
 "if has('nvim')
 	Plug 'bling/vim-airline'
 "else
 	"Plug 'Lokaltog/powerline' , {'rtp': 'powerline/bindings/vim/'}
 "endif
-Plug 'wannesm/wmgraphviz.vim'
+Plug 'wannesm/wmgraphviz.vim' " graphviz syntax highlighting
 "Plug 'CCTree'
 "Plug 'showmarks2'
 Plug 'teto/nvim-wm'  " to use WM bindings instead of vim's to move between splits
-"Plug 'teto/vim-listchars'
 Plug '~/vim-listchars'
 "Plug 'vim-voom/VOoM' " can show a tex file Table of Content
 Plug 'blueyed/vim-diminactive' " disable syntax coloring on inactive splits
@@ -74,8 +80,13 @@ Plug 'scrooloose/nerdcommenter'
 
 " {{{ fuzzers
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-Plug 'ctrlpvim/ctrlp.vim' " todo remove in favor of FZF
+
+
+" Many options available :
+" https://github.com/junegunn/fzf.vim
+" Most commands support CTRL-T / CTRL-X / CTRL-V key bindings to open in a new tab, a new split, or in a new vertical split
+Plug 'junegunn/fzf.vim' " defines :Files / :Commits for FZF
+"Plug 'ctrlpvim/ctrlp.vim' " todo remove in favor of FZF
 "Plug 'mattn/ctrlp-mark'
 "Plug 'mattn/ctrlp-register'
 " }}}
@@ -89,7 +100,7 @@ endfunction
 Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') } " Needs rust, cargo, plenty of things
 "Plug 'greyblake/vim-preview' " depends on ruby 'redcarpet', thus doesn't work in neovim ?
 
-Plug 'junegunn/vim-easy-align'   " to align '=' on multiple lines for instance
+"Plug 'junegunn/vim-easy-align'   " to align '=' on multiple lines for instance
 " Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 "Plug 'surround.vim'
 "Plug 'tpope/vim-markdown', { 'for': 'md' }
@@ -104,11 +115,10 @@ Plug 'mhinz/vim-rfc', { 'for': 'rfc' }
 Plug 'vim-scripts/Modeliner' " <leader>ml to setup buffer modeline
 "Plug 'sfiera/vim-emacsmodeline' " Reads emacs modelines
 " This one has bindings mapped to <leader>l
-Plug 'tmhedberg/SimpylFold', { 'for': 'py' } " provides python folding
 "Plug 'vimwiki/vimwiki'   " to write notes
 Plug 'kshenoy/vim-signature' " display marks in gutter, love it
 "Plug 'vim-scripts/DynamicSigns'
-Plug 'vasconcelloslf/vim-interestingwords' " highlight the words you choose
+Plug 'vasconcelloslf/vim-interestingwords' " highlight the words you choose <leader>k
 Plug 'mhinz/vim-grepper' " async grep neovim only
 Plug 'benekastah/neomake' " async build for neovim
 
@@ -471,9 +481,15 @@ nnoremap <Leader>sv :source $MYVIMRC<CR> " reload vimrc
 
 nnoremap <Leader>e :Vex<CR> " open netrw
 nnoremap <Leader>w :w<CR>
-nnoremap <Leader>o :CtrlP<CR>
-nnoremap <leader>p :CtrlP<CR>
-nnoremap <leader>b :CtrlPBuffer<CR>
+
+" mostly fzf mappings, use TAB to mark several files at the same time
+nnoremap <Leader>o :FzfFiles<CR>
+nnoremap <Leader>g :FzfGitFiles<CR>
+nnoremap <Leader>c :FzfCommits<CR>
+nnoremap <Leader>C :FzfColors<CR>
+"nnoremap <leader>p :CtrlP<CR>
+nnoremap <leader>b :FzfBuffers<CR>
+nnoremap <leader>m :FzfMarks<CR>
 nnoremap <leader>u :Gundo<CR>
 nnoremap <leader>r :<C-U>RangerChooser<CR>
 
@@ -495,12 +511,12 @@ let g:startify_session_savevars = []
 " }}}
 
 " Ctrpl config {{{
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'mattn/ctrlp-mark'
-Plug 'mattn/ctrlp-register'
-let g:ctrlp_cmd = 'CtrlPMixed'
-let g:ctrlp_match_window = 'results:100' " overcome limit imposed by max height
-let g:ctrlp_extensions= ['dir','mark']
+"Plug 'ctrlpvim/ctrlp.vim'
+"Plug 'mattn/ctrlp-mark'
+"Plug 'mattn/ctrlp-register'
+"let g:ctrlp_cmd = 'CtrlPMixed'
+"let g:ctrlp_match_window = 'results:100' " overcome limit imposed by max height
+"let g:ctrlp_extensions= ['dir','mark']
 " }}}
 
 " Csv config {{{
@@ -538,6 +554,7 @@ let g:LatexBox_latexmk_options = ""
 "}}}
 
 " FZF config {{{
+let g:fzf_command_prefix = 'Fzf' " prefix commands :Files become :FzfFiles, etc.
 
 " This is the default extra key bindings
 let g:fzf_action = {
@@ -549,10 +566,13 @@ let g:fzf_action = {
 " - down / up / left / right
 " - window (nvim only)
 let g:fzf_layout = { 'down': '~40%' }
+" For Commits and BCommits to customize the options used by 'git log':
+let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
 
 " Advanced customization using autoload functions
 "autocmd VimEnter * command! Colors
   "\ call fzf#vim#colors({'left': '15%', 'options': '--reverse --margin 30%,0'})
+" Advanced customization using autoload functions
 " }}}
 
 " Search parameters {{{

@@ -56,7 +56,7 @@ DCE_PATH="$DCE_PATH:$HOME/iperf2/src"
 DCE_PATH="$DCE_PATH:$HOME/Ntimed" 
 DCE_PATH="$DCE_PATH:$HOME/openntpd"
 DCE_PATH="$DCE_PATH:$HOME/chrony"
-DCE_PATH="$DCE_PATH:$HOME/ntp"
+DCE_PATH="$DCE_PATH:$HOME/ntpoff/ntpd"
 
 
 

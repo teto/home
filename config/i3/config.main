@@ -168,11 +168,11 @@ bindsym $mod+F3 [instance="pad_(?!ncmpcpp)"] move scratchpad; [instance="pad_ncm
 #bindsym $mod+w exec python ~/.i3/runorfocus.py "Firefox" firefox
 
 
+bindsym $mod+oe exec ~/i3-easyfocus/i3-easyfocus
 
 
 
-
-# MATT important !!
+# This may be slow since script involves a few steps
 # change focus
 bindsym $mod+h exec ~/.i3/i3dispatch.py left
 bindsym $mod+j exec ~/.i3/i3dispatch.py down
@@ -201,8 +201,8 @@ bindsym $mod+Shift+Right move right
 bindsym $mod+b split h
 
 # split in vertical orientation
-bindsym $mod+v split v
-#bindsym $mod+v layout toggle split
+# needs i3next
+bindsym $mod+v split toggle 
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen
@@ -231,6 +231,8 @@ mode "programs" {
     bindsym c exec "codeblocks"; mode default
     bindsym m exec "mendeleydesktop"; mode default
     bindsym n exec "nemo"; mode default
+    bindsym w exec "wireshark"; mode default
+    bindsym z exec "zathura"; mode default
 
 # set monitors, wap them ? etc..
     bindsym $mod+apostrophe mode "default"
