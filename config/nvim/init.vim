@@ -66,7 +66,7 @@ Plug 'wannesm/wmgraphviz.vim' " graphviz syntax highlighting
 "Plug 'showmarks2'
 Plug 'teto/nvim-wm'  " to use WM bindings instead of vim's to move between splits
 Plug '~/vim-listchars'
-"Plug 'vim-voom/VOoM' " can show a tex file Table of Content
+Plug 'vim-voom/VOoM' " can show tex/restDown Table of Content (ToC)
 Plug 'blueyed/vim-diminactive' " disable syntax coloring on inactive splits
 Plug 'tpope/vim-sleuth' " Dunno what it is
 Plug 'tpope/vim-vinegar' " Improves netrw

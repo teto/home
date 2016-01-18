@@ -53,7 +53,7 @@ DCE_PATH="$DCE_PATH:$HOME/iproute2/ip" # for 'ip' program
 DCE_PATH="$DCE_PATH:$HOME/iperf3/src"
 DCE_PATH="$DCE_PATH:$HOME/iperf2/src"
 # now for ntp experiments
-DCE_PATH="$DCE_PATH:$HOME/Ntimed" 
+DCE_PATH="$DCE_PATH:$HOME/ntimed" 
 DCE_PATH="$DCE_PATH:$HOME/openntpd"
 DCE_PATH="$DCE_PATH:$HOME/chrony"
 DCE_PATH="$DCE_PATH:$HOME/ntpoff/ntpd"

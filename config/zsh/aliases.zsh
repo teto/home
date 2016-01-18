@@ -1,4 +1,4 @@
-#  vim: set et fenc=utf-8 ff=unix sts=0 sw=4 ts=4 : 
+#  vim: set et fenc=utf-8 ff=unix sts=0 sw=4 ts=4 fdm=marker : 
 # Suffix aliases execute a command based on a file’s extension. Suffix aliases are used with the alias -s command.  Here’s my favorite feature of aliases in zsh.  By adding this line:
 # g => global , does not depend on position on line
 alias -s html=nvim
@@ -12,12 +12,10 @@ alias -s avi=mpv
 alias -s mp3=mocp
 
 
-##############################
-### Dictionary lookup
-##############################
+### Dictionary lookup {{{
 alias fren="dict -d fd-fra-eng"
 alias enfr="dict -d fd-eng-fra"
-
+# }}}
 
 
 ### Git {{{
@@ -61,25 +59,26 @@ alias lla="ls -la"
 alias llt="ls -lt"
 # }}}
 
-### oftenly used programs
+# oftenly used programs {{{
 alias c="cat"
 alias v="nvim"
 #alias n="nvim"
 alias m="mutt"
 alias r="ranger"
 # view uses vim as a pager
-alias l="view" 
+alias l="nvim +view"
 alias s="sxiv" 
-alias z="zathura" 
+alias z="zathura"
+alias q="qutebrowser"
+# }}}
 
-# Movement aliases
+# Movement aliases {{{
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
+#}}}
 
-##############################
-### vagrant
-############################### {{{
+# vagrant {{{
 alias -g vinit="vagrant init"
 alias -g vup="vagrant up"
 alias -g vssh="vagrant ssh"
@@ -123,8 +122,7 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
-##############################
-### compilation related 
-##############################
+### compilation related {{{
 alias makej="make -j4"
 alias nm="nm -l"
+# }}}
