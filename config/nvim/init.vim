@@ -35,6 +35,9 @@ Plug 'Valloric/YouCompleteMe' , { 'do': './install.py --system-libclang --clang-
 Plug 'kana/vim-operator-user' " dependancy for operator-flashy
 Plug 'haya14busa/vim-operator-flashy' " Flash selection on copy
 
+" better handling of buffer closue (type :sayonara)
+Plug 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
+
 " Python {{{1
 
 Plug 'hynek/vim-python-pep8-indent', {'for': 'py'} " does not work
@@ -79,7 +82,14 @@ Plug 'tpope/vim-surround' " don't realy know how to use yet
 "Plug 'junegunn/vim-github-dashboard' " needs ruby support, thus won't work in neovim
 Plug 'scrooloose/nerdcommenter'
 "Plug 'junegunn/vim-peekaboo' " gives a preview of buffers when pasting
-"Plug 'mhinz/vim-randomtag' " Adds a :Random function that launches help at random
+Plug 'mhinz/vim-randomtag', { 'on': 'Random' } " Adds a :Random function that launches help at random
+" vim-sayonara {{{1
+nnoremap <silent><leader>q  :Sayonara<cr>
+nnoremap <silent><leader>Q  :Sayonara!<cr>
+
+let g:sayonara_confirm_quit = 0
+" }}}
+
 
 " {{{ fuzzers
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -112,8 +122,9 @@ Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') } " Needs
 Plug 'gundo' " visual removal
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'airblade/vim-gitgutter' " will show which lines changed compared to last clean state
-Plug 'mhinz/vim-rfc', { 'for': 'rfc' }
-"Plug 'chrisbra/unicode.vim' " can show a list of unicode characeters, with their name  :UnicodeTable etc... 
+Plug 'mhinz/vim-rfc', { 'on': 'RFC' }
+" can show a list of unicode characeters, with their name  :UnicodeTable etc... 
+Plug 'chrisbra/unicode.vim', { 'on': ['<plug>(UnicodeComplete)', '<plug>(UnicodeGA)', 'UnicodeTable'] } 
 "Plug 'vim-scripts/rfc-syntax', { 'for': 'rfc' } " optional syntax highlighting for 
 Plug 'vim-scripts/Modeliner' " <leader>ml to setup buffer modeline
 "Plug 'sfiera/vim-emacsmodeline' " Reads emacs modelines
@@ -475,10 +486,17 @@ nnoremap <leader>r :!%:p<return>
 
 set shiftround    " round indent to multiple of 'shiftwidth'
 
-" auto reload vimrc on save
+" auto reload vim config on save
 au! BufWritePost .vimrc source %
+" Watch for changes to vimrc
+
+    augroup myvimrc
+      au!
+      au BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc,init so $MYVIMRC | if has('gui_running') | so $MYGVIMRC | endif
+    augroup END
+
 " open vimrc
-nnoremap <Leader>ev :vs $MYVIMRC<CR> 
+nnoremap <Leader>ev :e $MYVIMRC<CR> 
 "nnoremap <Leader>ep :vs ~/.vim/plug.vim<CR> 
 nnoremap <Leader>sv :source $MYVIMRC<CR> " reload vimrc
 
@@ -504,7 +522,14 @@ let g:Powerline_symbols = "fancy" " to use unicode symbols
 " }}}
 
 " Startify config {{{
-let g:startify_list_order = ['sessions','files', 'dir', 'bookmarks']
+nnoremap <leader>st :Startify<cr>
+
+let g:startify_list_order = [
+      \ ['   MRU'],           'files' ,
+      \ ['   MRU '.getcwd()], 'dir',
+      \ ['   Sessions'],      'sessions',
+      \ ['   Bookmarks'],     'bookmarks',
+      \ ]
 let g:startify_session_dir = $XDG_DATA_HOME.'/nvim/session'
 let g:startify_bookmarks = [ '~/.vimrc' ]
 let g:startify_session_autoload = 1
