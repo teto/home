@@ -1,9 +1,22 @@
+Lists compilation directives to load different ntp programs in DCE/ns3.
 
-=== Ntimed ===
+
+ns3 & DCE clock testing
+===
+To run the ns3 testsuite related to per-node clocks:
+ns3off$ /test.py -sclock
+
+To run the DCE tests:
+ns3testing$ ./test_ns3.py --load-log ns_clock.txt example dce-ntpd --out=toto.log 
+
+
+
+Ntimed 
+===
 Pour le compiler
 
 https://github.com/bsdphk/Ntimed or 
-https://github.com/teto/Ntimed on branch "add_ldflags"
+https://github.com/teto/Ntimed on branch "freestyle" (ex-"add_ldflags")
 
 $ sh ./configure
 $ CFLAGS="-fPIC -U_FORTIFY_SOURCE " LDFLAGS="-pie -rdynamic -ggdb" make
@@ -52,6 +65,8 @@ CFLAGS="-fPIC -U_FORTIFY_SOURCE -g" LDFLAGS="-pie -rdynamic" ./configure
 Chrony 
 ===
 
+On linux relies exclusively on adjtimex.
+
 git://git.tuxfamily.org/gitroot/chrony/chrony.git
 
 Compilation:
@@ -91,7 +106,8 @@ To add debug statements in "isc" folder, use "isc_log_write"
 To add debug statements in "ntpd" folder, use "msyslog" I think
 
 
-=== NTP debugging guide ===
+NTPd debugging guide 
+===
 First start ntpd locally
 sudo ntpd -c ~/dotfiles/ntp.conf -l ntp.log -p ntp.pid -f ntp.drift -n -D 1
 ntpq --numeric --peers
