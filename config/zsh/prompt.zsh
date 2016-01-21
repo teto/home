@@ -2,30 +2,6 @@
 REPORTTIME=10
 # delay to consider when changing vi mode
 KEYTIMEOUT=1
-function virtualenv_info {
-    [ $VIRTUAL_ENV ] && echo '('`basename $VIRTUAL_ENV`') '
-}
-
-# determine Ruby version whether using RVM or rbenv
-# the chpwd_functions line cause this to update only when the directory changes
-function _update_ruby_version() {
-    typeset -g ruby_version=''
-    if which rvm-prompt &> /dev/null; then
-      # ruby_version="$(rvm-prompt i v g)"
-      ruby_version="$(rvm-prompt i v p g)"
-    else
-      if which rbenv &> /dev/null; then
-        ruby_version="$(rbenv version | sed -e "s/ (set.*$//")"
-      fi
-    fi
-}
-
-# list of functions to call for each directory change
-chpwd_functions+=(_update_ruby_version)
-
-function current_pwd {
-  echo $(pwd | sed -e "s,^$HOME,~,")
-}
 
 #include "ns3/string.h"#include "ns3/string.h"#include "ns3/string.h"<F9>
 #include "ns3/string.h"
@@ -38,7 +14,7 @@ echo "Powerline path ${powerline_path}"
 # if [[ $? -eq 0 && "$powerline_path" != "" ]]; then
   # ${powerline_path}/../EGG-INFO/scripts/powerline-daemon -q
 	# ${powerline_path}/../scripts/powerline-daemon -q
-	source ${powerline_path}/bindings/zsh/powerline.zsh
+	#source ${powerline_path}/bindings/zsh/powerline.zsh
 # else
 	# Setup your normal PS1 here.
 # explanations available here:

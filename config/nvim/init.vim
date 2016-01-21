@@ -240,7 +240,7 @@ Plug 'NLKNguyen/papercolor-theme'
 " Plug 'rdnetto/YCM-Generator'
 " Plug 'erezsh/erezvim' "zenburn scheme. This plugin resets some keymaps,
 " annoying
-Plug 'chrisbra/csv.vim' " disabled cause creates problems
+"Plug 'chrisbra/csv.vim', {'for': 'txt'}
 " Plug 'luochen1990/rainbow' " does it work ?
 "Plug 'eapache/rainbow_parentheses.vim'  " Display successive delimiters such as [,(... with different colors 
 
@@ -611,9 +611,11 @@ nnoremap <Leader>C :FzfColors<CR>
 nnoremap <leader>b :FzfBuffers<CR>
 nnoremap <leader>m :FzfMarks<CR>
 nnoremap <leader>u :UndoTreeToggle<CR>
-nnoremap <leader>r :<C-U>RangerChooser<CR>
 
-nnoremap <F8> :vertical wincmd f<CR> " open file under cursor in a split
+" fails with neovim use :te instead ?
+nnoremap <leader>r :<C-U>RangerChooser<CR> 
+
+"nnoremap <F8> :vertical wincmd f<CR> " open file under cursor in a split
 nnoremap <leader>gfs :vertical wincmd f<CR> " open file under cursor in a split
 
 " Powerline config {{{
@@ -941,6 +943,8 @@ map y <Plug>(operator-flashy)
 nmap Y <Plug>(operator-flashy)$
 
 nnoremap <silent> <Leader>B :TagbarToggle<CR>
+" set vim's cwd to current file's
+nnoremap ,cd :cd %:p:h<CR>:pwd<CR>
 
 if has('nvim')
 	"runtime! python_setup.vim
