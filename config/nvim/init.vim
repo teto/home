@@ -52,7 +52,7 @@ Plug 'tmhedberg/SimpylFold', { 'for': 'py' } " provides python folding
 "Plug 'unblevable/quick-scope'  " highlight characeters to help in f/F moves
 Plug 'Lokaltog/vim-easymotion'
 Plug 'vim-scripts/QuickFixCurrentNumber'
-Plug 'wellle/visual-split.vim'
+"Plug 'wellle/visual-split.vim'
 Plug 'justinmk/vim-ipmotion'
 Plug 'justinmk/vim-sneak'
 Plug 'tpope/vim-rsi'  " maps readline bindings
@@ -84,6 +84,8 @@ Plug 'tpope/vim-surround' " don't realy know how to use yet
 Plug 'scrooloose/nerdcommenter'
 "Plug 'junegunn/vim-peekaboo' " gives a preview of buffers when pasting
 Plug 'mhinz/vim-randomtag', { 'on': 'Random' } " Adds a :Random function that launches help at random
+Plug 'majutsushi/tagbar'
+
 " vim-sayonara {{{1
 nnoremap <silent><leader>q  :Sayonara<cr>
 nnoremap <silent><leader>Q  :Sayonara!<cr>

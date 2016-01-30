@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+# to refresh the bar
+# 
+# pkill -SIGUSR1 -f "python /home/user/.config/i3/pystatus.py"
 
 import logging
 # from i3pystatus.mail import notmuchmail
@@ -10,9 +13,12 @@ from i3pystatus.updates import aptget
 
 status = Status(standalone=True)
 
+#status.register("text",
+
 # Displays clock like this:
 # Tue 30 Jul 11:59:46 PM KW31
 #                          ^-- calendar week
+# TODO click should refresh it !
 clock = status.register(
     "clock",
     format=[
@@ -29,7 +35,7 @@ clock = status.register(
     #     'upscroll': ["next_format", 1],
     #     'downscroll': ["next_format", -1]
     # },
-    log_level=logging.DEBUG,
+    # log_level=logging.DEBUG,
 )
 
 # clock.on_click(1)
@@ -87,6 +93,8 @@ status.register("battery",
 # Note: the network module requires PyPI package netifaces-py3
 status.register("network",
                 format_up="{v4cidr}",
+                hints= {"markup": "pango"},
+                on_leftclick="ip addr show dev {interface} | xmessage -file -",
                 )
 
 # Has all the options of the normal network and adds some wireless specific things
