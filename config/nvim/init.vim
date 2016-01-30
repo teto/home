@@ -30,8 +30,9 @@ call plug#begin(s:plugdir)
 
 " {{{ Autocompletion and linting 
 Plug 'Valloric/YouCompleteMe' , { 'do': './install.py --system-libclang --clang-completer' }
+Plug 'majutsushi/tagbar'
 " }}}
-
+Plug 'tomtom/quickfixsigns_vim'
 Plug 'kana/vim-operator-user' " dependancy for operator-flashy
 Plug 'haya14busa/vim-operator-flashy' " Flash selection on copy
 
@@ -863,11 +864,15 @@ nmap <F11> <Plug>(ToggleListchars)
 
 " vim:foldmethod=marker:foldlevel=0
 " Get off my lawn
-noremap <Left> :echoe "Use h"<CR>
-nnoremap <Right> :echoe "Use l"<CR>
-nnoremap <Up> :echoe "Use k"<CR>
-nnoremap <Down> :echoe "Use j"<CR>
+"noremap <Left> :echoe "Use h"<CR>
+"nnoremap <Right> :echoe "Use l"<CR>
+"nnoremap <Up> :echoe "Use k"<CR>
+"nnoremap <Down> :echoe "Use j"<CR>
 
+map y <Plug>(operator-flashy)
+nmap Y <Plug>(operator-flashy)$
+
+nnoremap <silent> <Leader>B :TagbarToggle<CR>
 
 if has('nvim')
 	"runtime! python_setup.vim
