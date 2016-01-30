@@ -6,7 +6,7 @@
 
 [general]
 # A folder where vdirsyncer can store some metadata about each pair.
-status_path = ~/.vdirsyncer/status/
+status_path = ~/.cache/vdirsyncer/status/
 
 # CARDDAV
 #[pair bob_contacts]
@@ -48,21 +48,43 @@ status_path = ~/.vdirsyncer/status/
 # custom command. See http://vdirsyncer.readthedocs.org/en/stable/keyring.html
 #password =
 
-# CALDAV
-[pair lip6_calendar]
-a = lip6_local
-b = lip6_remote
+
+
+# CARDDAV => Contacts
+[pair lip6_carddav]
+a = lip6_local_carddav
+b = lip6_remote_carddav
+collections = ["from b"]
 #collections = ["private", "work"]
 
-[storage lip6_local]
+[storage lip6_local_carddav]
 type = filesystem
-path = ~/.calendars/lip6
+path = ~/.cache/contacts
+fileext = .vcf
+
+[storage lip6_remote_carddav]
+auth=basic
+type = carddav
+url = https://cloud.lip6.fr/remote.php/carddav/addressbooks/coudron/pro
+username = coudron
+password.fetch = ["command", "keyring", "get", "lip6_cloud", "coudron"]
+
+# CALDAV => Calendar
+[pair lip6_caldav]
+a = lip6_local_caldav
+b = lip6_remote_caldav
+#collections = ["private", "work"]
+
+[storage lip6_local_caldav]
+type = filesystem
+path = ~/.cache/calendars/lip6
 fileext = .ics
 
 
-[storage lip6_remote]
+[storage lip6_remote_caldav]
 auth=basic
 type = caldav
 url = https://cloud.lip6.fr/remote.php/caldav/calendars/coudron/pro
 #url = https://owncloud.example.com/remote.php/caldav/
 username = coudron
+password.fetch = ["command", "keyring", "get", "lip6_cloud", "coudron"]
