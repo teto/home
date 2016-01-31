@@ -61,6 +61,24 @@ Plug 'tpope/vim-rsi'  " maps readline bindings
 "Plug 'fisadev/vim-ctrlp-cmdpalette' " sublime text like palette
 "Plug 'osyo-manga/vim-anzu' " to improve internal search
 Plug 'mhinz/vim-startify' " very popular, vim's homepage
+
+" Startify config {{{
+nnoremap <leader>st :Startify<cr>
+
+let g:startify_list_order = [
+      \ ['   MRU'],           'files' ,
+      \ ['   MRU '.getcwd()], 'dir',
+      \ ['   Sessions'],      'sessions',
+      \ ['   Bookmarks'],     'bookmarks',
+      \ ]
+let g:startify_session_dir = $XDG_DATA_HOME.'/nvim/session'
+let g:startify_bookmarks = [ '~/.vimrc' ]
+let g:startify_session_autoload = 1
+let g:startify_session_persistence = 1
+let g:startify_change_to_vcs_root = 0
+let g:startify_session_savevars = []
+" }}}
+
 Plug 'dietsche/vim-lastplace' " restore last cursor postion
 " Powerline does not work in neovim hence use vim-airline instead
 "if has('nvim')
@@ -95,13 +113,38 @@ let g:sayonara_confirm_quit = 0
 
 
 " {{{ fuzzers
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf', { 'dir': $XDG_DATA_HOME . '/fzf', 'do': './install --all --64' }
 
 
 " Many options available :
 " https://github.com/junegunn/fzf.vim
 " Most commands support CTRL-T / CTRL-X / CTRL-V key bindings to open in a new tab, a new split, or in a new vertical split
 Plug 'junegunn/fzf.vim' " defines :Files / :Commits for FZF
+
+" FZF config {{{
+let g:fzf_command_prefix = 'Fzf' " prefix commands :Files become :FzfFiles, etc.
+
+let g:fzf_nvim_statusline = 0 " disable statusline overwriting
+
+" This is the default extra key bindings
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-v': 'vsplit' }
+
+" Default fzf layout
+" - down / up / left / right
+" - window (nvim only)
+let g:fzf_layout = { 'down': '~40%' }
+" For Commits and BCommits to customize the options used by 'git log':
+let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
+
+" Advanced customization using autoload functions
+"autocmd VimEnter * command! Colors
+  "\ call fzf#vim#colors({'left': '15%', 'options': '--reverse --margin 30%,0'})
+" Advanced customization using autoload functions
+" }}}
+
 "Plug 'ctrlpvim/ctrlp.vim' " todo remove in favor of FZF
 "Plug 'mattn/ctrlp-mark'
 "Plug 'mattn/ctrlp-register'
@@ -138,6 +181,21 @@ Plug 'kshenoy/vim-signature' " display marks in gutter, love it
 Plug 'vasconcelloslf/vim-interestingwords' " highlight the words you choose <leader>k
 Plug 'mhinz/vim-grepper' " async grep neovim only
 Plug 'benekastah/neomake' " async build for neovim
+
+" Neomake config {{{
+let g:neomake_verbose = 1
+let g:neomake_python_enabled_makers = ['pyflakes']
+let g:neomake_c_gcc_args = ['-fsyntax-only', '-Wall']
+
+let g:neomake_airline = 0
+let g:neomake_error_sign = { 'text': '✘', 'texthl': 'ErrorSign' }
+let g:neomake_warning_sign = { 'text': ':(', 'texthl': 'WarningSign' }
+"let g:neomake_ruby_enabled_makers = ['mri']
+
+" C and CPP are handled by YCM and java usually by elim
+"let s:neomake_exclude_ft = [ 'c', 'cpp', 'java' ]
+"let g:neomake_python_pep8_maker
+" }}}
 
 " colorschemes {{{
 Plug 'whatyouhide/vim-gotham'
@@ -524,22 +582,6 @@ nnoremap <leader>gfs :vertical wincmd f<CR> " open file under cursor in a split
 let g:Powerline_symbols = "fancy" " to use unicode symbols
 " }}}
 
-" Startify config {{{
-nnoremap <leader>st :Startify<cr>
-
-let g:startify_list_order = [
-      \ ['   MRU'],           'files' ,
-      \ ['   MRU '.getcwd()], 'dir',
-      \ ['   Sessions'],      'sessions',
-      \ ['   Bookmarks'],     'bookmarks',
-      \ ]
-let g:startify_session_dir = $XDG_DATA_HOME.'/nvim/session'
-let g:startify_bookmarks = [ '~/.vimrc' ]
-let g:startify_session_autoload = 1
-let g:startify_session_persistence = 1
-let g:startify_change_to_vcs_root = 0
-let g:startify_session_savevars = []
-" }}}
 
 " Ctrpl config {{{
 "Plug 'ctrlpvim/ctrlp.vim'
@@ -584,27 +626,6 @@ let g:LatexBox_latexmk_options = ""
 "let g:LatexBox_ignore_warnings= ["Bibliography not compatible with author-year citations."]
 "}}}
 
-" FZF config {{{
-let g:fzf_command_prefix = 'Fzf' " prefix commands :Files become :FzfFiles, etc.
-
-" This is the default extra key bindings
-let g:fzf_action = {
-  \ 'ctrl-t': 'tab split',
-  \ 'ctrl-x': 'split',
-  \ 'ctrl-v': 'vsplit' }
-
-" Default fzf layout
-" - down / up / left / right
-" - window (nvim only)
-let g:fzf_layout = { 'down': '~40%' }
-" For Commits and BCommits to customize the options used by 'git log':
-let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
-
-" Advanced customization using autoload functions
-"autocmd VimEnter * command! Colors
-  "\ call fzf#vim#colors({'left': '15%', 'options': '--reverse --margin 30%,0'})
-" Advanced customization using autoload functions
-" }}}
 
 " Search parameters {{{
 set hlsearch " highlight search terms
@@ -664,11 +685,15 @@ let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline#extensions#tabline#show_buffers = 1  
 let g:airline#extensions#tabline#buffer_min_count =2
 let g:airline#extensions#tabline#buffer_idx_mode = 1
+
+let g:airline#extensions#tabline#show_tabs = 1
+
+let g:airline#extensions#tabline#formatter = 'unique_tail'
 let g:airline_extensions = ['branch', 'tabline']
 
 let g:airline#extensions#whitespace#enabled = 0
 let g:airline#extensions#whitespace#mixed_indent_algo = 2
-  let g:airline#extensions#whitespace#checks = [ 'indent', 'trailing', 'long' ]
+let g:airline#extensions#whitespace#checks = [ 'indent', 'trailing', 'long' ]
 
 
 
@@ -677,16 +702,16 @@ nmap <leader>é <Plug>AirlineSelectTab2
 nmap <leader>" <Plug>AirlineSelectTab3
 nmap <leader>' <Plug>AirlineSelectTab4
 nmap <leader>( <Plug>AirlineSelectTab5
+nmap <leader>- <Plug>AirlineSelectTab6
+nmap <leader>è <Plug>AirlineSelectTab7
 
 
 "}}}
 autocmd CompleteDone * pclose " close the popup on python completion
 
-
 " {{{ Clever f
 "
 " }}}
-
 
 " {{{ Quickscope config
 "let g:qs_first_occurrence_highlight_color = 155
@@ -788,7 +813,7 @@ set fillchars=vert:│,fold:─
 
 " Grepper {{{
 nnoremap <leader>git :Grepper  -tool git -open -nojump
-nnoremap <leader>ag  :Grepper! -tool ag  -open -switch
+nnoremap <leader>ag  :Grepper -tool ag  -open -switch
 " }}}
 
 " Peekaboo config {{{
@@ -806,7 +831,6 @@ let g:peekaboo_compact = 1
 
 Plug '907th/vim-auto-save' " don't rembmer: check
 " {{{
-  nnoremap coa :AutoSaveToggle<CR>
   let g:auto_save_in_insert_mode = 0
   let g:auto_save_events = ['CursorHold', 'FocusLost']
 " }}}
@@ -819,21 +843,6 @@ nnoremap <LocalLeader>sv :source $MYVIMRC<CR> " reload vimrc
 " {{{ vim-scripts/QuickFixCurrentNumber
 " }}}
 
-" Neomake config {{{
-let g:neomake_verbose = 0
-let g:neomake_python_enabled_makers = ['pyflakes']
-let g:neomake_c_gcc_args = ['-fsyntax-only', '-Wall']
-
-autocmd! BufWritePost * Neomake
-let g:neomake_airline = 0
-let g:neomake_error_sign = { 'text': '✘', 'texthl': 'ErrorSign' }
-let g:neomake_warning_sign = { 'text': ':(', 'texthl': 'WarningSign' }
-"let g:neomake_ruby_enabled_makers = ['mri']
-
-" C and CPP are handled by YCM and java usually by elim
-"let s:neomake_exclude_ft = [ 'c', 'cpp', 'java' ]
-"let g:neomake_python_pep8_maker
-" }}}
 "
 
 set diffopt=filler,vertical " default behavior for diff
@@ -845,6 +854,8 @@ nnoremap Y y$
 function! AutoSaveOnLostFocus()
   exe ":au FocusLost" expand("%") ":wa"
 endfunction
+
+nnoremap coa :AutoSaveToggle<CR>
 
 " search items in location list (per window)
 nnoremap <F1> :lprev<CR>
@@ -881,6 +892,8 @@ if has('nvim')
  " when launching term
 	tnoremap <Esc> <C-\><C-n>
 endif
+
+autocmd! BufWritePost * Neomake
 
 "'.'
 "set shada=!,'50,<1000,s100,:0,n/home/teto/.cache/nvim/shada

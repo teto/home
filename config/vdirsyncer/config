@@ -59,7 +59,8 @@ collections = ["from b"]
 
 [storage lip6_local_carddav]
 type = filesystem
-path = ~/.cache/contacts
+path = ~/.local/contacts
+#path = ~/.local/contacts
 fileext = .vcf
 
 [storage lip6_remote_carddav]
@@ -77,7 +78,7 @@ b = lip6_remote_caldav
 
 [storage lip6_local_caldav]
 type = filesystem
-path = ~/.cache/calendars/lip6
+path = ~/.local/calendars/lip6
 fileext = .ics
 
 

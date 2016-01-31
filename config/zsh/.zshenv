@@ -18,6 +18,16 @@ fi
 export PATH
 # }}}
 
+# simulate XDG for some apps {{{
+export WEECHAT_HOME="$XDG_CONFIG_HOME/weechat"
+export INPUTRC="$XDG_CONFIG_HOME/readline"
+export TIGRC_USER="$XDG_CONFIG_HOME/tig/tigrc"
+export LESSHISTFILE="$XDG_CACHE_HOME/less/history"
+export NOTMUCH_CONFIG="$XDG_CONFIG_HOME/notmuch/notmuchrc"
+export INPUTRC="$XDG_CONFIG_HOME/inputrc"
+export IPYTHONDIR="$XDG_CONFIG_HOME/ipython"
+#}}}
+
 # PYTHONPATH {{{
 PYTHONPATH="$PYTHONPATH:$HOME/i3pystatus"
 pYTHONPATH="$PYTHONPATH:$HOME/powerline"
@@ -36,16 +46,13 @@ export LD_LIBRARY_PATH="/usr/local/lib:$LD_LIBRARY_PATH"
 
 #export ZDOTDIR="$HOME/.zsh"
 
-export IPYTHONDIR="$XDG_CONFIG_HOME/ipython"
+# TODO try removing ?
+export MUTT="$XDG_CONFIG_HOME/mutt"
 
 export MAILDIR="$HOME/Maildir" 
-export MUTT="$XDG_CONFIG_HOME/mutt"
 
 export EDITOR="nvim"
 export TERMINAL="urxvt"
-export LESSHISTFILE="$XDG_CACHE_HOME/less/history"
-export NOTMUCH_CONFIG="$XDG_CONFIG_HOME/notmuch/notmuchrc"
-export INPUTRC="$XDG_CONFIG_HOME/inputrc"
 
 
 

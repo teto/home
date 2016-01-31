@@ -7,8 +7,8 @@ set date_format="%A %d %b %Y à %H:%M:%S (%Z)"
 
 # assign an application to an attachement type (pdf/word etc..)
 # TODO does it bring benefits to put it into $HOME/.mailcaps
-set mailcap_path= $MUTT/mailcaps
-
+set mailcap_path= $XDG_CONFIG_HOME/mutt/mailcaps
+set record = $XDG_DATA_HOME/mutt/record/sent
 # advised on http://wcm1.web.rice.edu/mutt-tips.html
 set text_flowed=yes
 #source $HOME/.mutt/folder_hooks
@@ -16,7 +16,7 @@ set text_flowed=yes
 # Do this on a per account basis
 set realname="Matthieu Coudron"
 
-# set message_cachedir = ${MUTT}/cache/bodies
+set message_cachedir = $XDG_DATA_HOME/mutt/bodies
 set move=no
 #utilise lors de l'ecriture de ses messages
 set editor=$EDITOR
@@ -64,9 +64,9 @@ set mbox_type=maildir
 
 set history=100
 # TODO move it to $XDG_CACHE_HOME/mutt/
-set history_file= $MUTT/cache/history
+set history_file= $XDG_CACHE_HOME/mutt/history
 # to improve performance
-set header_cache = ${MUTT}/cache/headers
+set header_cache = $XDG_CACHE_HOME/mutt/headers
 # where to put temp files when composing for instance
 # set tmpdir= 
 
@@ -85,7 +85,7 @@ set signature="Matthieu Coudron"
 
 # aliases = name <-> email
 # TODO should be generated too or sync via caldav ?
-set alias_file=~/.mutt/aliases.mutt
+#set alias_file=~/.mutt/aliases.mutt
 
 ##################################
 ### for colors
