@@ -100,9 +100,9 @@ mark_end =		"
 
 # Key bindings for directories: defaults are Shift-number
 # shift 1 = ! = Fastdir1
-go_to_fast_dir1 =	1
-go_to_fast_dir2 =	2
-go_to_fast_dir3 =	3
+go_to_fast_dir1 =	&
+go_to_fast_dir2 =	é
+go_to_fast_dir3 =	"
 go_to_fast_dir4 =	4
 go_to_fast_dir5 =	%
 go_to_fast_dir6 =	^

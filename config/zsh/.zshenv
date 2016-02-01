@@ -29,14 +29,14 @@ export IPYTHONDIR="$XDG_CONFIG_HOME/ipython"
 #}}}
 
 # PYTHONPATH {{{
+
+PYTHONPATH="/home/teto/powerline"
 PYTHONPATH="$PYTHONPATH:$HOME/i3pystatus"
 pYTHONPATH="$PYTHONPATH:$HOME/powerline"
 PYTHONPATH="$PYTHONPATH:$HOME/i3gen"
 PYTHONPATH="$PYTHONPATH:$HOME/analyzer"
-PYTHONPATH="$PYTHONPATH:$HOME/python-keyring-lib"
+#PYTHONPATH="$PYTHONPATH:$HOME/python-keyring-lib"
 PYTHONPATH="$PYTHONPATH:$HOME/i3ipc-python"
-#PYTHONPATH="$PYTHONPATH:/home/teto/mptcpanalyzer"
-PYTHONPATH="/home/teto/powerline:$PYTHONPATH"
 export PYTHONPATH
 # }}}
 

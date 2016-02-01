@@ -4,9 +4,9 @@
 #xcompmgr&
 xrdb -override $HOME/.Xresources
 
-. "$HOME/.zsh/.zshenv"
+#. "$HOME/.zsh/.zshenv"
 # launch mpd in user mode
-mpd&
+mpd &
 
 # need to launch daemon before i3, cos of scratchpads
 urxvtd -q -o -f&
@@ -16,7 +16,7 @@ setxkbmap -option terminate:ctrl_alt_bksp
 
 # alsamixer in systray
 # regenerate i3 config
-"$HOME/.i3/build_config.sh"
+"$HOME/.config/i3/build_config.sh"
 
 # Set background color
 xsetroot -solid "#333333"
@@ -34,5 +34,6 @@ parcellite&
 #nm-applet&
 
 # remap caps lock to escape (cool for vim)
-xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'           
+#xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'           
+# should be loaded automatically
 # Please see http://i3wm.org/docs/userguide.html for a complete reference! 

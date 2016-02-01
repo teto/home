@@ -138,10 +138,13 @@ alsa = status.register("alsa",
 
 status.register("updates",
                 format = "Updates: {count}",
+                format_working = "In progress",
                 format_no_updates = "No updates",
-                on_leftclick=["urxvtc", '-e', 'zsh' , '-c' , 'sudo apt upgrade; zsh'],
+                # on_leftclick=["urxvtc", '-e', 'zsh' , '-c' , 'sudo apt upgrade; zsh'],
                 on_rightclick="run",
-                backends = [aptget.AptGet() ])
+                backends = [aptget.AptGet()],
+                log_level=logging.DEBUG
+                )
 
 # # print("alsa")
 # res = status.register(
@@ -157,17 +160,19 @@ status.register("updates",
     # log_level=logging.DEBUG
 # )
 
-res = status.register("github",
-        username="teto",
-        interval=300,
-        #password="placeholder",
-        format="Github {unread} {unread_count}",
-        # keyring_backend="netrc",
-        # keyring_backend=keyring.backend.netrc,
-        # keyring_backend=backend.netrcbackend,
-        log_level=logging.DEBUG,
-        )
-#print("Result:", res)
-# res.on_leftclick()
+# res = status.register("github",
+        # username="teto",
+        # interval=300,
+        # #password="placeholder",
+        # format="Github {unread} {unread_count}",
+        # # keyring_backend="netrc",
+        # # keyring_backend=keyring.backend.netrc,
+        # # keyring_backend=backend.netrcbackend,
+        # log_level=logging.DEBUG,
+        # )
+# #print("Result:", res)
+# # res.on_leftclick()
+
+
 status.run()
 

@@ -69,7 +69,6 @@ Fastdir1		= "${HOME}/Téléchargements"
 #Fastdir1		= "~/Téléchargements"
 Fastdir2		= "${HOME}/Musique"
 
-#go_to_fast_dir1 = "1"
 
 # How to sort? FileName is the only option for now.
 Sort			= FileName
