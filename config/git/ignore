@@ -1,4 +1,4 @@
-#  vim: set noet fenc=utf-8 ff=unix sts=0 sw=4 ts=4 foldmethod=marker
+#  vim: set noet fenc=utf-8 ff=unix sts=0 sw=4 ts=4 foldmethod=marker :
 # Compiled source {{{
 *.com
 *.class
@@ -11,8 +11,11 @@
 *.aux
 __pycache__/
 *.cpp_parameters
-# }}}
 *.mo
+*.fls
+*.fdb_latexmk
+ls-R
+# }}}
 
 # Editor specific {{{
 ######################

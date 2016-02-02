@@ -609,6 +609,9 @@ let g:Powerline_symbols = "fancy" " to use unicode symbols
 
 " try with zathura ?
 " xdg-open
+" TODO add synctex 
+" https://wiki.math.cmu.edu/iki/wiki/tips/20140310-zathura-fsearch.html
+" --synctex-forward 193:1:paper.tex paper.pdf
 let g:LatexBox_viewer = "zathura"
 let g:LatexBox_Folding = 0 "Enable section folding
 " jump to first error after compilation
@@ -620,9 +623,12 @@ let g:LatexBox_latexmk_preview_continuously = 1
 let g:LatexBox_latexmk_async = 1
 let g:LatexBox_output_type = "pdf"
 let g:LatexBox_show_warnings = 1 " list warnings as errors
-let g:LatexBox_latexmk_options = ""
 "let g:LatexBox_completion_command
 
+" allow to sync cursor position from vim to pdf
+" Inverse search (pdf to vim) should also be possible with extra options (not
+" here yet)
+let g:LatexBox_latexmk_options = "-pdflatex='pdflatex -synctex=1 \%O \%S'"
 "let g:LatexBox_ignore_warnings= ["Bibliography not compatible with author-year citations."]
 "}}}
 
@@ -843,7 +849,8 @@ nnoremap <LocalLeader>sv :source $MYVIMRC<CR> " reload vimrc
 " {{{ vim-scripts/QuickFixCurrentNumber
 " }}}
 
-"
+" draw a line on 80th column
+set colorcolumn=80
 
 set diffopt=filler,vertical " default behavior for diff
 
@@ -897,10 +904,11 @@ autocmd! BufWritePost * Neomake
 
 "'.'
 "set shada=!,'50,<1000,s100,:0,n/home/teto/.cache/nvim/shada
+
+" nvim specific configuration {{{
 if has("nvim")
   set shada=!,'50,<1000,s100,:0,n$XDG_CACHE_HOME/nvim/shada
   let g:netrw_home=$XDG_CACHE_HOME.'/nvim'
-  " Cursor configuration {{{
   "let $NVIM_TUI_ENABLE_TRUE_COLOR=1
   let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 endif
