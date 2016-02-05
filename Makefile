@@ -19,6 +19,9 @@ pip:
 	wget https://bootstrap.pypa.io/get-pip.py /tmp/
 	python3.5 get-pip.py --user
 
+keyring:
+	echo "Setup keyrings"
+	#keyring set
 
 cache:
 	#mkdir -p $(shell echo "${XDG_CACHE_HOME:-$HOME/.cache}/less")

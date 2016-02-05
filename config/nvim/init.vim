@@ -691,6 +691,7 @@ nmap <leader>è <Plug>AirlineSelectTab7
 
 
 "}}}
+
 autocmd CompleteDone * pclose " close the popup on python completion
 
 " {{{ Clever f
@@ -811,9 +812,13 @@ let g:peekaboo_delay = 750
 let g:peekaboo_compact = 1
 " }}}
 
+" vimplug bindings {{{
+nnoremap <leader>pi :PlugInstall<CR>
+nnoremap <leader>pU :PlugUpgrade<CR>
+nnoremap <leader>pu :PlugUpdate<CR>
+" }}}
 
-
-" {{{
+" autosave {{{
   let g:auto_save_in_insert_mode = 0
   let g:auto_save_events = ['CursorHold', 'FocusLost']
 " }}}
