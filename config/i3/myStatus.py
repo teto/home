@@ -11,7 +11,7 @@ from i3pystatus.updates import aptget
 
 # from i3pystatus.core.netrc_backend import NetrcBackend
 
-status = Status(standalone=True)
+status = Status(standalone=True, logfile="/home/teto/i3pystatus.log", click_events=True)
 
 #status.register("text",
 
@@ -27,15 +27,17 @@ clock = status.register(
         ("%a %-d %b %X", 'Europe/Paris'),
         ("Format 0", 'Europe/London'),
     ],
-    on_leftclick=["/usr/bin/urxvtc",'-e', 'ikhal'],
-    on_rightclick=["/usr/bin/urxvtc",'-e', 'cal'],
+    on_leftclick="urxvtc -e ikhal",
+    # on_leftclick="xmessage toto",
+    # on_rightclick=["/usr/bin/urxvtc",'-e', 'cal'],
+    on_rightclick="gnome-terminal -e sh",
     # interval=10,
     # on_clicks={
     #     'left': ["urxvtc"],
     #     'upscroll': ["next_format", 1],
     #     'downscroll': ["next_format", -1]
     # },
-    # log_level=logging.DEBUG,
+    log_level=logging.DEBUG,
 )
 
 # clock.on_click(1)
