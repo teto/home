@@ -34,8 +34,8 @@ $ CXXFLAGS="-Wno-unused-but-set-variable" cmake \
         -DCMAKE_C_FLAGS=$(printf %q "$CFLAGS") \
         -DCMAKE_CXX_FLAGS=$(printf %q "$CXXFLAGS") \
         -DCMAKE_EXPORT_COMPILE_COMMANDS=1 \
-        -DCMAKE_C_COMPILER=clang \
-        -DCMAKE_CXX_COMPILER=clang++ 
+        -DCMAKE_C_COMPILER=gcc \
+        -DCMAKE_CXX_COMPILER=g++ 
 
 
         -DCMAKE_LIBRARY_PATH=$LIBDIR \
