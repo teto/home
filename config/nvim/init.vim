@@ -39,6 +39,9 @@ Plug 'haya14busa/vim-operator-flashy' " Flash selection on copy
 " better handling of buffer closue (type :sayonara)
 Plug 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
 
+" filetypes {{{
+Plug 'cespare/vim-toml'
+" }}}
 " Python {{{1
 
 Plug 'hynek/vim-python-pep8-indent', {'for': 'py'} " does not work
@@ -553,6 +556,7 @@ let g:latex_view_general_viewer = 'zathura'
 "let g:tex_flavor = 'latex'
 "let g:tex_isk='48-57,a-z,A-Z,192-255,:'
 " }}}
+
 nnoremap <leader>r :!%:p<return>
 
 
