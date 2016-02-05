@@ -47,6 +47,7 @@ Plug 'tmhedberg/SimpylFold', { 'for': 'py' } " provides python folding
 " }}}
 
 
+Plug '907th/vim-auto-save' " don't rembmer: check
 " {{{ To ease movements
 "Plug 'rhysd/clever-f.vim'
 "Plug 'unblevable/quick-scope'  " highlight characeters to help in f/F moves
@@ -200,6 +201,7 @@ let g:neomake_warning_sign = { 'text': ':(', 'texthl': 'WarningSign' }
 " colorschemes {{{
 Plug 'whatyouhide/vim-gotham'
 Plug 'sickill/vim-monokai'
+Plug 'justinmk/molokai'
 Plug 'mhinz/vim-janah'
 Plug 'Solarized'
 Plug 'morhetz/gruvbox'
@@ -227,8 +229,7 @@ Plug 'chrisbra/csv.vim' "
 " "Plug 'vim-latex/vim-latex', {'for': 'tex'}
 " " ATP author gh mirror seems to be git@github.com:coot/atp_vim.git
 " "Plug 'coot/atp_vim', {'for': 'tex'}
-Plug 'LaTeX-Box-Team/LaTeX-Box', {'for': 'tex'}
-"Plug 'lervag/vimtex', {'for': 'tex'}
+Plug 'lervag/vimtex', {'for': 'tex'}
 " }}}
 
 call plug#end()
@@ -527,9 +528,9 @@ let g:gruvbox_contrast_light="hard"
 " Diminactive config {{{
 let g:diminactive_buftype_blacklist = []
 let g:diminactive_debug = 0
-  let g:diminactive_use_colorcolumn = 1
-  let g:diminactive_use_syntax = 0
-  let g:diminactive_enable_focus = 0
+let g:diminactive_use_colorcolumn = 1
+let g:diminactive_use_syntax = 0
+let g:diminactive_enable_focus = 0
 "}}}
 " to remove timeout when changing modes
 if ! has('gui_running')
@@ -541,14 +542,23 @@ if ! has('gui_running')
     augroup END
 endif
 
-
+" vimtex {{{
+let g:vimtex_quickfix_open_on_warning = 0
+let g:vimtex_index_split_pos = 'below'
+let g:vimtex_view_method = 'zathura'
+"let g:vimtex_snippets_leader = ','
+let g:vimtex_latexmk_progname = 'nvr'
+let g:latex_view_general_viewer = 'zathura'
+"let g:tex_stylish = 1
+"let g:tex_flavor = 'latex'
+"let g:tex_isk='48-57,a-z,A-Z,192-255,:'
+" }}}
 nnoremap <leader>r :!%:p<return>
 
 
 set shiftround    " round indent to multiple of 'shiftwidth'
 
 " auto reload vim config on save
-au! BufWritePost .vimrc source %
 " Watch for changes to vimrc
 
     augroup myvimrc
@@ -599,38 +609,6 @@ let g:Powerline_symbols = "fancy" " to use unicode symbols
     let g:csv_autocmd_arrange_size = 1024*1024
 " }}}
 
-" Latex box config {{{
-" to open the TOC on a tex 
-"if s:extfname ==? "tex"
-  "...
-  "let g:LatexBox_split_type="new"
-  "...
-"endif
-
-" try with zathura ?
-" xdg-open
-" TODO add synctex 
-" https://wiki.math.cmu.edu/iki/wiki/tips/20140310-zathura-fsearch.html
-" --synctex-forward 193:1:paper.tex paper.pdf
-let g:LatexBox_viewer = "zathura"
-let g:LatexBox_Folding = 0 "Enable section folding
-" jump to first error after compilation
-let g:LatexBox_autojump = 1
-" quickfix to 2 => open auto if not empty
-let g:LatexBox_quickfix = 2
-let g:LatexBox_latexmk_preview_continuously = 1
-" let async to 1 to enable autoopening of quickifx
-let g:LatexBox_latexmk_async = 1
-let g:LatexBox_output_type = "pdf"
-let g:LatexBox_show_warnings = 1 " list warnings as errors
-"let g:LatexBox_completion_command
-
-" allow to sync cursor position from vim to pdf
-" Inverse search (pdf to vim) should also be possible with extra options (not
-" here yet)
-let g:LatexBox_latexmk_options = "-pdflatex='pdflatex -synctex=1 \%O \%S'"
-"let g:LatexBox_ignore_warnings= ["Bibliography not compatible with author-year citations."]
-"}}}
 
 
 " Search parameters {{{
@@ -659,9 +637,9 @@ let g:ycm_goto_buffer_command = 'same-buffer' " horizontal-split, new-tab, new-o
 let g:ycm_server_log_level = 'debug'
 
 " Add triggers to ycm for LaTeX-Box autocompletion
-let g:ycm_semantic_triggers = {
-      \  'tex'  : ['{'],
-      \ }
+"let g:ycm_semantic_triggers = {
+      "\  'tex'  : ['{'],
+      "\ }
 nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
 nnoremap <F6> :YcmDebugInfo<CR>
 
@@ -835,7 +813,6 @@ let g:peekaboo_compact = 1
 
 
 
-Plug '907th/vim-auto-save' " don't rembmer: check
 " {{{
   let g:auto_save_in_insert_mode = 0
   let g:auto_save_events = ['CursorHold', 'FocusLost']

@@ -59,8 +59,7 @@ collections = ["from b"]
 
 [storage lip6_local_carddav]
 type = filesystem
-path = ~/.local/contacts
-#path = ~/.local/contacts
+path.fetch = ["command", "sh", "-c", "echo $XDG_DATA_HOME/contacts"]
 fileext = .vcf
 
 [storage lip6_remote_carddav]
@@ -78,7 +77,7 @@ b = lip6_remote_caldav
 
 [storage lip6_local_caldav]
 type = filesystem
-path = ~/.local/calendars/lip6
+path.fetch = ["command", "sh", "-c", "echo $XDG_DATA_HOME/calendars/lip6"]
 fileext = .ics
 
 
