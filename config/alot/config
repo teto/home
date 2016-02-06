@@ -89,16 +89,17 @@ q = exit
     ' ' = move next
 
 [accounts]
-[[lip6]]
-address = matthieu.coudron@lip6.fr
-realname = Matthieu Coudron
+#[[lip6]]
+#address = matthieu.coudron@lip6.fr
+#realname = Matthieu Coudron
 # signature = ~/signature_pro.txt
 
-#[[perso]]
-#realname = Matt
-#address = 
-#signature = ~/signature_perso.txt
-# sendmail_command =
+[[perso]]
+realname = Matt
+address = mattator@gmail.com
+signature = ~/signature_perso.txt
+# -t => will look for addresses into the mail
+sendmail_command = msmtp --account=gmail -t
 
 [[[abook]]]
 type = shellcommand

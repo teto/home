@@ -1,6 +1,33 @@
 mailboxes *
 mailboxes !
+mailboxes =gmail/Analytics
+mailboxes =gmail/Anim'Int
+mailboxes =gmail/Blue Cosmos
+mailboxes =gmail/Dev ML
+mailboxes =gmail/Famille
+mailboxes =gmail/GCN
+mailboxes =gmail/INBOX
+mailboxes =gmail/Intech
+mailboxes =gmail/Luabind
+mailboxes =gmail/Moi
+mailboxes =gmail/Stage2A
+mailboxes =gmail/Toutfr
 mailboxes =gmail/[Gmail].Brouillons
 mailboxes =gmail/[Gmail].Corbeille
 mailboxes =gmail/[Gmail].Messages envoy&AOk-s
 mailboxes =gmail/[Gmail].Suivis
+mailboxes =gmail/[Gmail].Tous les messages
+mailboxes =gmail/boost
+mailboxes =gmail/debian
+mailboxes =gmail/frnog
+mailboxes =gmail/libnl
+mailboxes =gmail/lisp
+mailboxes =gmail/lispmob
+mailboxes =gmail/lua
+mailboxes =gmail/mptcp
+mailboxes =gmail/ns3
+mailboxes =gmail/ns3.clock
+mailboxes =gmail/oflags
+mailboxes =gmail/stage3a
+mailboxes =gmail/trill
+mailboxes =gmail/tuxfamily

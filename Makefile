@@ -3,7 +3,7 @@ SHELL = bash
 XDG_CONFIG_HOME ?= $(HOME)/.config
 XDG_CACHE_HOME ?= $(XDG_CACHE_HOME)/.cache
 
-.PHONY: config
+.PHONY: config etc
 
 # http://stackoverflow.com/questions/448910/makefile-variable-assignment
 config:
@@ -22,7 +22,12 @@ pip:
 keyring:
 	echo "Setup keyrings"
 	#keyring set
+	keyring set gmail mattator
+	keyring set lip6_cloud coudron
 
 cache:
 	#mkdir -p $(shell echo "${XDG_CACHE_HOME:-$HOME/.cache}/less")
-	mkdir -p ${HOME}/.cache/less
+	mkdir -p ${XDG_CACHE_HOME}/less
+
+etc:
+	sudo cp etc/profile.d/* /etc/profile.d/
