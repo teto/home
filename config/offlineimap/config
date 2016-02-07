@@ -2,6 +2,7 @@
 accounts = gmail
 maxsyncaccounts= 4
 socktimeout = 60
+python_file = get_settings.py
 
 metadata = $XDG_DATA_HOME/offlineimap
 # choose one from machineui, blinkenlights, quiet, ttyui, basic
@@ -71,7 +72,11 @@ localfolders = ~/Maildir/gmail
 
 [Repository gmail-remote]
 type = Gmail
-remoteuser = mattator@gmail.com
+# remoteusereval = get_user ("gmail")
+# remotepasseval = get_pwd ("gmail")
+# for now rely on .netrc
+user = mattator
+
 realdelete = yes
 maxconnections = 3
 ssl= yes

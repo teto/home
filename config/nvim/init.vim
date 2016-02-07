@@ -555,6 +555,15 @@ let g:latex_view_general_viewer = 'zathura'
 "let g:tex_stylish = 1
 "let g:tex_flavor = 'latex'
 "let g:tex_isk='48-57,a-z,A-Z,192-255,:'
+
+if !exists('g:ycm_semantic_triggers')
+    let g:ycm_semantic_triggers = {}
+endif
+let g:ycm_semantic_triggers.tex = [
+    \ 're!\\[A-Za-z]*(ref|cite)[A-Za-z]*([^]]*])?{([^}]*,?)*',
+    \ 're!\\includegraphics([^]]*])?{[^}]*',
+    \ 're!\\(include|input){[^}]*'
+    \ ]
 " }}}
 
 nnoremap <leader>r :!%:p<return>

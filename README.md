@@ -2,7 +2,8 @@ home
 ====
 
 This folder contains my customizations for:
-* alot (MUA: Mail User Agent)
+* alot (MUA: Mail User Agent, like mutt is)
+* astroid (like alot, but with a GUI interface)
 * bash
 * clerk (to control mpd via rofi)
 * font handling
@@ -11,6 +12,8 @@ This folder contains my customizations for:
 * i3 (i3wm.org, a great if not the best tiling window manager)
 * i3pystatus (generates a status line for i3bar)
 * irssi (an IRC CLI client)
+* khard (a carddav CLI)
+* khal (a calendar CLI)
 * liquidprompt (a script to make your prompt adapt to the current context)
 * mpd (configuration files to run this music server as a user)
 * msmtp (MSA: Mail Sending Agent)
