@@ -12,7 +12,7 @@ compton&
 # set volume
 # pactl set-sink-volume 0 '30%' &
 
-
+#nm-applet
 
 ## Working shells on workspace 1
 #i3-msg workspace 1

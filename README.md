@@ -32,6 +32,7 @@ This folder contains my customizations for:
 * rxvt* unicode(256)
 * sup (MUA, incomplete, I use alot instead)
 * sxiv (image viewer)
+* termite (a modal terminal)
 * tig (a git history reader)
 * tmux (terminal multiplexer)
 * vim (text editor)
