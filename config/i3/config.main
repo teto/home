@@ -13,7 +13,8 @@ font pango:Liberation Sans Mono 9
 
 set $mod Mod1
 
-set $term rxvt-unicode
+#set $term rxvt-unicode
+set $term termite
 
 set $w1 1:main
 set $w2 2:web
@@ -77,7 +78,6 @@ mode "monitors" {
 
 
 
-#bindsym $mod+F1 exec urxvt -name ranger -e ranger
 mode "focused" {
 
                 # hardcoded focus keybindings
@@ -397,9 +397,9 @@ bar {
 ### display error in case it does not launch
 # Provide command to send to a specific scratchpad (rename title) or use mark ?
 #
-exec_always urxvtc -name pad_audioplayer -e "mocp; $SHELL"; 
-exec_always urxvtc -name pad_flyingterminal
-exec_always urxvtc -name pad_ncmpcpp -e sh ncmpcpp;$SHELL 
+#exec_always urxvtc -name pad_audioplayer -e "mocp; $SHELL"; 
+#exec_always urxvtc -name pad_flyingterminal
+#exec_always urxvtc -name pad_ncmpcpp -e sh ncmpcpp;$SHELL 
 #exec_always urxvtc -name pad_term4
 #exec_always urxvtc -name pad_term5
 

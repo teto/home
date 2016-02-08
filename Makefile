@@ -31,3 +31,8 @@ cache:
 
 etc:
 	sudo cp etc/profile.d/* /etc/profile.d/
+
+fonts:
+	echo "Regenerating cache"
+	echo "list fonts with fc-list"
+	fc-cache -vf 

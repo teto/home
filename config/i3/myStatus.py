@@ -28,7 +28,7 @@ clock = status.register(
         ("%a %-d %b %X", 'Europe/Paris'),
         ("Format 0", 'Europe/London'),
     ],
-    on_leftclick="urxvtc -e ikhal",
+    on_leftclick="termite -e ikhal",
     # on_leftclick="xmessage toto",
     # on_rightclick=["/usr/bin/urxvtc",'-e', 'cal'],
     on_rightclick="gnome-terminal -e sh",

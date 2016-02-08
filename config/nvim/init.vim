@@ -633,13 +633,13 @@ set wrapscan " prevent from going back to the beginning of the file
 " }}}
 
 " YouCompleteMe config {{{
-let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
+let g:ycm_global_ycm_extra_conf = $XDG_CONFIG_HOME."/nvim/.ycm_extra_conf.py"
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_key_list_select_completion = ['<TAB>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<S-TAB>', '<Up>']
 let g:ycm_auto_trigger = 1
 let g:ycm_error_symbol = ">>" " used to signal errors in gutter
-let g:ycm_warning_symbol = '!' " warn in gutter
+let g:ycm_warning_symbol = '!' " warn in gutter TODO use unicode chars
 let g:ycm_show_diagnostics_ui = 1 " show info in gutter
 " g:ycm_show_diagnostics_ui=1
 "let g:ycm_server_use_vim_stdout = 1
@@ -650,9 +650,11 @@ let g:ycm_goto_buffer_command = 'same-buffer' " horizontal-split, new-tab, new-o
 let g:ycm_server_log_level = 'debug'
 
 " Add triggers to ycm for LaTeX-Box autocompletion
-"let g:ycm_semantic_triggers = {
-      "\  'tex'  : ['{'],
-      "\ }
+let g:ycm_semantic_triggers = {
+      \  'tex'  : ['{'],
+      \ 'mail' : ['@'],
+      \ }
+
 nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
 nnoremap <F6> :YcmDebugInfo<CR>
 
@@ -902,9 +904,9 @@ autocmd! BufWritePost * Neomake
 
 " nvim specific configuration {{{
 if has("nvim")
-  set shada=!,'50,<1000,s100,:0,n$XDG_CACHE_HOME/nvim/shada
-  let g:netrw_home=$XDG_CACHE_HOME.'/nvim'
-  "let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+  "set shada=!,'50,<1000,s100,:0,n$XDG_CACHE_HOME/nvim/shada
+  let g:netrw_home=$XDG_DATA_HOME.'/nvim'
+  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
   let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 endif
 " }}}

@@ -9,7 +9,7 @@ xrdb -override $HOME/.Xresources
 mpd &
 
 # need to launch daemon before i3, cos of scratchpads
-urxvtd -q -o -f&
+#urxvtd -q -o -f&
 
 # Enable zapping (C-A-<Bksp> kills X)
 setxkbmap -option terminate:ctrl_alt_bksp
@@ -32,7 +32,7 @@ ulimit -c unlimited
 parcellite&
 # network manager systray icon
 #nm-applet&
-
+xmodmap ~/.Xmodmap
 # remap caps lock to escape (cool for vim)
 #xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'           
 # should be loaded automatically
