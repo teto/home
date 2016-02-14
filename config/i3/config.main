@@ -171,19 +171,31 @@ bindsym $mod+F3 [instance="pad_(?!ncmpcpp)"] move scratchpad; [instance="pad_ncm
 bindsym $mod+oe exec ~/i3-easyfocus/i3-easyfocus
 
 
+# This may be slow since script involves a few steps
+# change focus
+bindsym $mod+h exec 3dispatch left
+bindsym $mod+j exec 3dispatch down
+bindsym $mod+k exec 3dispatch up
+bindsym $mod+l exec 3dispatch right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Left  exec i3dispatch left
+bindsym $mod+Down  exec i3dispatch down
+bindsym $mod+Up    exec i3dispatch up
+bindsym $mod+Right exec i3dispatch right
 
 # This may be slow since script involves a few steps
 # change focus
-bindsym $mod+h exec ~/.i3/i3dispatch.py left
-bindsym $mod+j exec ~/.i3/i3dispatch.py down
-bindsym $mod+k exec ~/.i3/i3dispatch.py up
-bindsym $mod+l exec ~/.i3/i3dispatch.py right
+#bindsym $mod+h exec ~/.i3/i3dispatch.py left
+#bindsym $mod+j exec ~/.i3/i3dispatch.py down
+#bindsym $mod+k exec ~/.i3/i3dispatch.py up
+#bindsym $mod+l exec ~/.i3/i3dispatch.py right
 
-# alternatively, you can use the cursor keys:
-bindsym $mod+Left exec ~/.i3/i3dispatch.py left
-bindsym $mod+Down exec ~/.i3/i3dispatch.py down
-bindsym $mod+Up   exec ~/.i3/i3dispatch.py up
-bindsym $mod+Right exec ~/.i3/i3dispatch.py right
+## alternatively, you can use the cursor keys:
+#bindsym $mod+Left exec ~/.i3/i3dispatch.py left
+#bindsym $mod+Down exec ~/.i3/i3dispatch.py down
+#bindsym $mod+Up   exec ~/.i3/i3dispatch.py up
+#bindsym $mod+Right exec ~/.i3/i3dispatch.py right
 
 # move focused window
 bindsym $mod+Shift+J move left

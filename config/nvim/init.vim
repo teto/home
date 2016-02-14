@@ -1,12 +1,11 @@
 " vim: set noet fenc=utf-8 ff=unix sts=0 sw=2 ts=8 fdm=marker :
 " to debug vimscript, use :mess to display error messages
-" source ~/.vim/vimrc
 
 "$NVIM_PYTHON_LOG_FILE
 
 
+" TODO move to XDG_DATA_HOME
 let s:plugdir = $XDG_CONFIG_HOME.'/nvim/plugged'
-
 let s:plugscript = $XDG_CONFIG_HOME.'/nvim/autoload/plug.vim'
 
 
@@ -95,7 +94,7 @@ Plug 'wannesm/wmgraphviz.vim' " graphviz syntax highlighting
 "Plug 'showmarks2'
 Plug 'teto/nvim-wm'  " to use WM bindings instead of vim's to move between splits
 "Plug '~/vim-listchars'
-Plug 'teto/vim-listchars'
+Plug 'teto/vim-listchars' " to cycle between different list/listchars configurations
 Plug 'vim-voom/VOoM' " can show tex/restDown Table of Content (ToC)
 Plug 'blueyed/vim-diminactive' " disable syntax coloring on inactive splits
 Plug 'tpope/vim-sleuth' " Dunno what it is
@@ -224,7 +223,7 @@ Plug 'NLKNguyen/papercolor-theme'
 " Plug 'rdnetto/YCM-Generator'
 " Plug 'erezsh/erezvim' "zenburn scheme. This plugin resets some keymaps,
 " annoying
-Plug 'chrisbra/csv.vim' "
+Plug 'chrisbra/csv.vim' " disabled cause creates problems
 " Plug 'luochen1990/rainbow' " does it work ?
 "Plug 'eapache/rainbow_parentheses.vim'  " Display successive delimiters such as [,(... with different colors 
 
@@ -601,6 +600,7 @@ nnoremap <leader>r :<C-U>RangerChooser<CR>
 
 nnoremap <F8> :vertical wincmd f<CR> " open file under cursor in a split
 nnoremap <leader>gfs :vertical wincmd f<CR> " open file under cursor in a split
+
 " Powerline config {{{
 
 let g:Powerline_symbols = "fancy" " to use unicode symbols
@@ -622,8 +622,6 @@ let g:Powerline_symbols = "fancy" " to use unicode symbols
     let g:csv_autocmd_arrange = 1
     let g:csv_autocmd_arrange_size = 1024*1024
 " }}}
-
-
 
 " Search parameters {{{
 set hlsearch " highlight search terms
@@ -870,6 +868,7 @@ nnoremap <F2> :lnext<CR>
 " search for  item in quickfix list (global/unique)
 nnoremap <F3> :cprev<CR>
 nmap <F4> :cnext<CR>
+
 nnoremap <F5> :Neomake<CR>
 nnoremap <F6> :call AutoSaveOnLostFocus()
 " search for  item in quickfix list
