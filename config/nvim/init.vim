@@ -94,7 +94,8 @@ Plug 'wannesm/wmgraphviz.vim' " graphviz syntax highlighting
 "Plug 'CCTree'
 "Plug 'showmarks2'
 Plug 'teto/nvim-wm'  " to use WM bindings instead of vim's to move between splits
-Plug '~/vim-listchars'
+"Plug '~/vim-listchars'
+Plug 'teto/vim-listchars'
 Plug 'vim-voom/VOoM' " can show tex/restDown Table of Content (ToC)
 Plug 'blueyed/vim-diminactive' " disable syntax coloring on inactive splits
 Plug 'tpope/vim-sleuth' " Dunno what it is
@@ -801,14 +802,16 @@ set foldcolumn=1
 " }}}
 
 " vim-listchars config {{{
-let g:listchar_formats=[ 
-   \"trail:·",
-    \"trail:·,tab:→\ ,eol:↲,precedes:<,extends:>"   
-   \]
+    "\"trail:·,tab:→\ ,eol:↲,precedes:<,extends:>"
+"let g:listchar_formats=[ 
+   "\"trail:·",
+    "\"trail:>"
+   "\]
+    "\"extends:>"
 " while waiting to finish my vim-listchars plugin
 "set listchars=tab:»·,eol:↲,nbsp:␣,extends:…
-set listchars=tab:•·,trail:·,extends:❯,precedes:❮,nbsp:×
-set fillchars=vert:│,fold:─
+"set listchars=tab:•·,trail:·,extends:❯,precedes:❮,nbsp:×
+"set fillchars=vert:│,fold:─
 " }}}
 
 " Grepper {{{
@@ -856,10 +859,10 @@ nnoremap Y y$
 
 " Put this in vimrc, add custom commands in the function.
 function! AutoSaveOnLostFocus()
-  exe ":au FocusLost" expand("%") ":wa"
+  exe ":au FocusLost ".expand("%")." :wa | :echom 'Focus lost'"
 endfunction
 
-nnoremap coa :AutoSaveToggle<CR>
+"nnoremap coa :AutoSaveToggle<CR>
 
 " search items in location list (per window)
 nnoremap <F1> :lprev<CR>
@@ -868,7 +871,7 @@ nnoremap <F2> :lnext<CR>
 nnoremap <F3> :cprev<CR>
 nmap <F4> :cnext<CR>
 nnoremap <F5> :Neomake<CR>
-"nnoremap <F6> :call AutoSaveOnLostFocus()
+nnoremap <F6> :call AutoSaveOnLostFocus()
 " search for  item in quickfix list
 " goto previous buffer
 nnoremap <F7> :bp<CR> 
@@ -877,7 +880,7 @@ nnoremap <F8> :bn<CR>
 "noremap <F4> exec ":emenu <tab>"
 " should become useless with neovim
 noremap <F10> :set paste!<CR>
-nmap <F11> <Plug>(ToggleListchars)
+map <F12> <Plug>(ToggleListchars)
 
 " vim:foldmethod=marker:foldlevel=0
 " Get off my lawn

@@ -1,5 +1,6 @@
 
-== clang with C++11 support
+clang with C++11 support
+==
 
 CXX="clang++" CXXFLAGS="-g -Wno-potentially-evaluated-expression -Wno-reorder -std=c++11" ./waf configure --prefix=install --build-profile=debug
 
@@ -22,3 +23,5 @@ on peut ajouter -include sstream aux flags  !
 Pour voir la config (flags/compilo etc...) actuelle, aller dans build/c4che/_cache.py
 
 
+To run tests and see results
+./waf --run "test-runner --test-name=node-scheduling --stop-on-failure --fullness=QUICK --verbose"
