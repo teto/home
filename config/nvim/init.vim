@@ -50,7 +50,7 @@ Plug 'mjbrownie/GetFilePlus', {'for': 'py'} " improves gf on imports
 Plug 'tmhedberg/SimpylFold', { 'for': 'py' } " provides python folding
 " }}}
 
-
+Plug 'mbbill/undotree'
 Plug '907th/vim-auto-save' " don't rembmer: check
 " {{{ To ease movements
 "Plug 'rhysd/clever-f.vim'
@@ -58,8 +58,8 @@ Plug '907th/vim-auto-save' " don't rembmer: check
 Plug 'Lokaltog/vim-easymotion'
 Plug 'vim-scripts/QuickFixCurrentNumber'
 "Plug 'wellle/visual-split.vim'
-Plug 'justinmk/vim-ipmotion'
-Plug 'justinmk/vim-sneak'
+Plug 'justinmk/vim-ipmotion' " ?
+"Plug 'justinmk/vim-sneak' " remaps 's'
 Plug 'tpope/vim-rsi'  " maps readline bindings
 " }}}
 "Plug 'vim-flake8' " for python syntax
@@ -94,8 +94,6 @@ Plug 'dietsche/vim-lastplace' " restore last cursor postion
 Plug 'wannesm/wmgraphviz.vim' " graphviz syntax highlighting
 "Plug 'CCTree'
 "Plug 'showmarks2'
-Plug 'teto/nvim-wm'  " to use WM bindings instead of vim's to move between splits
-"Plug '~/vim-listchars'
 Plug 'teto/vim-listchars' " to cycle between different list/listchars configurations
 Plug 'vim-voom/VOoM' " can show tex/restDown Table of Content (ToC)
 Plug 'blueyed/vim-diminactive' " disable syntax coloring on inactive splits
@@ -443,6 +441,10 @@ nmap <silent> <C-Down> :wincmd j<CR>
 nmap <silent> <C-Left> :wincmd h<CR>
 nmap <silent> <C-Right> :wincmd l<CR>
 
+nmap <silent> <D-Up> :wincmd k<CR>
+nmap <silent> <D-Down> :wincmd j<CR>
+nmap <silent> <D-Left> :wincmd h<CR>
+nmap <silent> <D-Right> :wincmd l<CR>
 
 nmap <silent> <M-Up> :wincmd k<CR>
 nmap <silent> <M-Down> :wincmd j<CR>
@@ -487,17 +489,6 @@ let g:markdown_composer_autostart           = 1
 " }}}
 "set winheight=30
 "set winminheight=5
-
-" hope this can be removed if wincmd_result
-" TODO bufnr is not good enough
-function! WinCmdWithRes(toto)
-	let l:res = winnr()
-	"echo l:res
-	exec "wincmd ".a:toto
-	"echo bufnr('%') == res
-	let g:wincmd_result= winnr() != l:res
-endfunction
-
 
 " Appearance {{{
 set background=dark
@@ -579,8 +570,12 @@ set shiftround    " round indent to multiple of 'shiftwidth'
 
     augroup myvimrc
       au!
-      au BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc,init so $MYVIMRC | if has('gui_running') | so $MYGVIMRC | endif
+      au BufWritePost $MYVIMRC,.vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc,init.vim so $MYVIMRC | if has('gui_running') | so $MYGVIMRC | endif
+
+
+
     augroup END
+
 
 " open vimrc
 nnoremap <Leader>ev :e $MYVIMRC<CR> 
@@ -598,7 +593,7 @@ nnoremap <Leader>C :FzfColors<CR>
 "nnoremap <leader>p :CtrlP<CR>
 nnoremap <leader>b :FzfBuffers<CR>
 nnoremap <leader>m :FzfMarks<CR>
-nnoremap <leader>u :Gundo<CR>
+nnoremap <leader>u :UndoTreeToggle<CR>
 nnoremap <leader>r :<C-U>RangerChooser<CR>
 
 nnoremap <F8> :vertical wincmd f<CR> " open file under cursor in a split
@@ -840,6 +835,13 @@ nnoremap <leader>pu :PlugUpdate<CR>
 " autosave {{{
   let g:auto_save_in_insert_mode = 0
   let g:auto_save_events = ['CursorHold', 'FocusLost']
+" Put this in vimrc, add custom commands in the function.
+function! AutoSaveOnLostFocus()
+  " to solve pb with Airline https://github.com/vim-airline/vim-airline/issues/1030#issuecomment-183958050
+   
+  exe ":au FocusLost ".expand("%")." :wa | :AirlineRefresh | :echom 'Focus lost'"
+
+endfunction
 " }}}
 
 " Customized commands depending on buffer type {{{
@@ -850,6 +852,9 @@ nnoremap <LocalLeader>sv :source $MYVIMRC<CR> " reload vimrc
 " {{{ vim-scripts/QuickFixCurrentNumber
 " }}}
 
+autocmd syntax markdown setlocal textwidth=80
+autocmd syntax pandoc setlocal textwidth=80
+autocmd syntax text setlocal textwidth=80 
 " draw a line on 80th column
 set colorcolumn=80
 
@@ -858,10 +863,6 @@ set diffopt=filler,vertical " default behavior for diff
 " Y behave like D or C
 nnoremap Y y$
 
-" Put this in vimrc, add custom commands in the function.
-function! AutoSaveOnLostFocus()
-  exe ":au FocusLost ".expand("%")." :wa | :echom 'Focus lost'"
-endfunction
 
 "nnoremap coa :AutoSaveToggle<CR>
 
@@ -873,7 +874,7 @@ nnoremap <F3> :cprev<CR>
 nmap <F4> :cnext<CR>
 
 nnoremap <F5> :Neomake<CR>
-nnoremap <F6> :call AutoSaveOnLostFocus()
+nnoremap <F6> :AutoSaveToggle<CR>
 " search for  item in quickfix list
 " goto previous buffer
 nnoremap <F7> :bp<CR> 
