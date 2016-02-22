@@ -11,6 +11,10 @@ set $set_mark  /home/teto/.i3/set_marks.py
 # # The middle button over a titlebar kills the window
 bindsym --release button2 kill
 
+# test
+bindsym super+right exec "xdotool getactivewindow key -clearmodifiers --window %1 Ctrl+Shit+Tab"
+bindsym super+left exec "xdotool getactivewindow key -clearmodifiers --window %1 Ctrl+Tab"
+#bindsym control+h exec "xdotool getactivewindow key -clearmodifiers --window %1 BackSpace"
 
 
 # The right button toggles floating
@@ -20,6 +24,22 @@ bindsym $mod+button3 floating toggle
 # # The side buttons move the window around
 bindsym button9 move left
 bindsym button8 move right
+
+bindsym $mod+shift+p mode mouse
+
+mode mouse {
+
+#xdotool mousemove --sync 1000 10
+#xdotool click 3
+#sleep 1
+#
+	bindsym $mod+Left exec	$(xdotool mousemove_relative --sync -- -15 0)
+	bindsym $mod+Right exec $(xdotool mousemove_relative --sync -- 15 0)
+	bindsym $mod+Down exec  $(xdotool mousemove_relative --sync -- 0 15)
+	bindsym $mod+Up   exec  $(xdotool mousemove_relative --sync -- 0 -15)
+#xdotool click 1
+	bindsym Escape mode "default"
+}
 
 #mode xp {
 	#bindsym Mod4+a [con_mark="a"] focus; mode "default";exec notify-send "a focused"; exec $set_mark --unmark
