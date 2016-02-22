@@ -1,7 +1,6 @@
 #!/bin/bash
-
-# TODO run the filters
+#echo $(dirname ${BASH_SOURCE:-$0})
 notmuch tag --batch --input="$XDG_CONFIG_HOME/notmuch/ietf"
 notmuch tag --batch --input="$XDG_CONFIG_HOME/notmuch/foss"
-notmuch tag +bruno -- from:martin.bruno.mail@gmail.com
+notmuch tag --batch --input="$XDG_CONFIG_HOME/notmuch/pres"
 #notmuch tag --batch --input="$XDG_CONFIG_HOME/notmuch/security"

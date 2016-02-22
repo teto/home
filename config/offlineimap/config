@@ -12,20 +12,39 @@ ui = ttyui
 [mbnames]
 #generate mailboxes file for mutt
 enabled = yes
-filename = $XDG_CONFIG_HOME/mutt/mailboxes_test
-header = "mailboxes *\nmailboxes !\n"
-peritem = mailboxes =%(accountname)s/%(foldername)s
-sep = "\n"
-footer = "\n"
-
-[mbnames]
-#generate mailboxes file for mutt
-enabled = yes
 filename = $XDG_CONFIG_HOME/mutt/mailboxes
 header = "mailboxes *\nmailboxes !\n"
 peritem = mailboxes =%(accountname)s/%(foldername)s
 sep = "\n"
 footer = "\n"
+
+
+[Account lip6]
+localrepository = lip6-local
+remoterepository = lip6-remote
+maxage=10
+status_backend = sqlite
+# presynchook=imapfilter
+# TODO notify user run a script that will launch tag
+postsynchook= notmuch --config=$XDG_CONFIG_HOME/notmuch/notmuchrc_pro new
+
+[Repository lip6-local]
+type = Maildir
+localfolders = ~/Maildir/lip6
+
+[Repository lip6-remote]
+type = IMAP
+remotehost = tibre.lip6.fr
+ssl=yes
+remoteuser = coudron 
+realdelete = no
+# on gmail just remove tags, you really need to move files to trash folder
+maxconnections = 3
+cert_fingerprint = 2e8c0587d5d7416f69da73eaae7dc208e2a7dfb5 
+
+
+
+
 
 [Account gmail]
 localrepository = gmail-local
@@ -37,34 +56,11 @@ maxsize=2000000
 # in daysA
 maxage=10
 synclabels= yes
-
 status_backend = sqlite
 # presynchook=imapfilter
 # TODO notify user
-postsynchook= notmuch new
+postsynchook= notmuch --config=$XDG_CONFIG_HOME/notmuch/notmuchrc new
 
-[Account lip6]
-localrepository = lip6-local
-remoterepository = lip6-remote
-maxage=10
-status_backend = sqlite
-# presynchook=imapfilter
-# TODO notify user run a script that will launch tag
-postsynchook= notmuch new
-
-[Repository lip6-local]
-type = Maildir
-localfolders = ~/Maildir/lip6
-
-[Repository lip6-remote]
-type = IMAP
-remotehost = tibre.lip6.fr
-ssl=yes
-remoteuser =coudron 
-realdelete = no
-# on gmail just remove tags, you really need to move files to trash folder
-maxconnections = 3
-cert_fingerprint = b9220be8750401748241ab1cb2a3d2b493053c5c
 
 [Repository gmail-local]
 type = GmailMaildir

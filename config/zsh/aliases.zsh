@@ -126,3 +126,8 @@ fi
 alias makej="make -j4"
 alias nm="nm -l"
 # }}}
+
+# Mail {{{
+alias ml="python2.7 -malot -n ~/.config/notmuch/notmuchrc_pro"
+alias mg="python2.7 -malot -n ~/.config/notmuch/notmuchrc"
+# }}}

@@ -89,10 +89,12 @@ q = exit
     ' ' = move next
 
 [accounts]
-#[[lip6]]
-#address = matthieu.coudron@lip6.fr
-#realname = Matthieu Coudron
-# signature = ~/signature_pro.txt
+
+[[lip6]]
+address = matthieu.coudron@lip6.fr
+realname = Matthieu Coudron
+ signature = ~/signature_pro.txt
+sendmail_command = msmtp --account=pro -t
 
 [[perso]]
 realname = Matt
@@ -101,8 +103,8 @@ signature = ~/signature_perso.txt
 # -t => will look for addresses into the mail
 sendmail_command = msmtp --account=gmail -t
 
-[[[abook]]]
-type = shellcommand
-command = khard email -s
-regexp = '^(?P<email>[^@]+@[^\t]+)\t+(?P<name>[^\t]+)'
-ignorecase = True
+	[[[abook]]]
+	type = shellcommand
+	command = khard email -s
+	regexp = '^(?P<email>[^@]+@[^\t]+)\t+(?P<name>[^\t]+)'
+	ignorecase = True

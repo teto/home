@@ -5,15 +5,17 @@
 
 
 " TODO move to XDG_DATA_HOME
-let s:plugdir = $XDG_CONFIG_HOME.'/nvim/plugged'
-let s:plugscript = $XDG_CONFIG_HOME.'/nvim/autoload/plug.vim'
+let s:nvimdir = (exists("$XDG_CONFIG_HOME") ? $XDG_CONFIG_HOME : $HOME.'/.config').'/nvim'
+let s:plugscript = s:nvimdir.'/autoload/plug.vim'
 
+"silent echom s:plugscript
+"silent echom s:nvimdir
 
 if empty(glob(s:plugscript))
-	  silent !mkdir -p $XDG_CONFIG_HOME.'/nvim/autoload'
-	    silent !curl -fLo s:plugscript
-		    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-		  autocmd VimEnter * PlugInstall
+  execute "!mkdir -p " s:nvimdir.'/autoload' s:nvimdir.'/plugged'
+  execute "!curl -fLo" s:plugscript
+		\ "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+		  autocmd VimEnter * PlugInstall | source $MYVIMRC
 endif
 
 
@@ -25,7 +27,7 @@ let mapleader = " "
 " to configure vim for haskell, refer to
 " http://yannesposito.com/Scratch/en/blog/Vim-as-IDE/
 
-call plug#begin(s:plugdir)
+call plug#begin(s:nvimdir.'/plugged')
 
 " {{{ Autocompletion and linting 
 Plug 'Valloric/YouCompleteMe' , { 'do': './install.py --system-libclang --clang-completer' }
@@ -101,6 +103,7 @@ Plug 'tpope/vim-sleuth' " Dunno what it is
 Plug 'tpope/vim-vinegar' " Improves netrw
 Plug 'justinmk/vim-gtfo' " ?
 Plug 'tpope/vim-fugitive' " to use with Git
+Plug 'jaxbot/github-issues.vim'
 Plug 'tpope/vim-surround' " don't realy know how to use yet
 "Plug 'junegunn/vim-github-dashboard' " needs ruby support, thus won't work in neovim
 Plug 'scrooloose/nerdcommenter'
