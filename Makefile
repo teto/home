@@ -2,8 +2,9 @@ SHELL = bash
 # provide a default
 XDG_CONFIG_HOME ?= $(HOME)/.config
 XDG_CACHE_HOME ?= $(XDG_CACHE_HOME)/.cache
+MAILDIR ?= $(HOME)/Maildir
 
-.PHONY: config etc
+.PHONY: config etc mail
 
 # http://stackoverflow.com/questions/448910/makefile-variable-assignment
 config:
@@ -28,6 +29,12 @@ keyring:
 cache:
 	#mkdir -p $(shell echo "${XDG_CACHE_HOME:-$HOME/.cache}/less")
 	mkdir -p ${XDG_CACHE_HOME}/less
+
+mail:
+	mkdir -p ${MAILDIR}/lip6/.notmuch
+	mkdir -p ${MAILDIR}/gmail/.notmuch
+	ln -s ${HOME}/dotfiles/hooks_pro ${MAILDIR}/lip6/.notmuch/hooks 
+	ln -s ${HOME}/dotfiles/hooks_perso ${MAILDIR}/gmail/.notmuch/hooks 
 
 etc:
 	sudo cp etc/profile.d/* /etc/profile.d/

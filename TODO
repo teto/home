@@ -1,6 +1,5 @@
 - add a "focus or raise" program (for scratchpad windows)
 https://faq.i3wm.org/question/2473/run-or-focus-in-i3/
 - make sure VCS prompt is asynchronous (as in http://www.anishathalye.com/2015/02/07/an-asynchronous-shell-prompt/ )
-- be able to launch layouts through dmenu
 - in qutebrowser, CTRL + E should go into insert mode if not already active
 
