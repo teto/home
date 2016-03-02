@@ -8,7 +8,7 @@ ns3off$ ./test.py -sclock
 -snode-scheduling
 
 To run the DCE tests:
-ns3testing$ ./test_ns3.py --load-log ns_clock.txt example dce-ntpd --out=toto.log 
+`ns3testing$ ./test_ns3.py --load-log ns_clock.txt example dce-ntpd --out=toto.log `
 
 
 
@@ -18,9 +18,10 @@ Pour le compiler
 
 https://github.com/bsdphk/Ntimed or 
 https://github.com/teto/Ntimed on branch "freestyle" (ex-"add_ldflags")
-
+```
 $ sh ./configure
 $ CFLAGS="-fPIC -U_FORTIFY_SOURCE " LDFLAGS="-pie -rdynamic -ggdb" make
+```
 
 ./ntimed-client --poll-server 1.ubuntu.pool.ntp.org
 The '-t /tmp/somefile' arguments tells it to write a full blow-by-blow

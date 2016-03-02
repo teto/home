@@ -36,3 +36,6 @@ fonts:
 	echo "Regenerating cache"
 	echo "list fonts with fc-list"
 	fc-cache -vf 
+
+git:
+	echo "Install git hooks for this repo"

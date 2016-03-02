@@ -2,7 +2,9 @@
 " to debug vimscript, use :mess to display error messages
 
 "$NVIM_PYTHON_LOG_FILE
-
+" to test startup time
+" nvim --startuptime startup.log
+" nvim -u NONE --startuptime startup.log
 
 " TODO move to XDG_DATA_HOME
 let s:plugdir = $XDG_CONFIG_HOME.'/nvim/plugged'
@@ -27,6 +29,7 @@ let mapleader = " "
 
 call plug#begin(s:plugdir)
 
+Plug 'junegunn/limelight.vim'
 " {{{ Autocompletion and linting 
 Plug 'Valloric/YouCompleteMe' , { 'do': './install.py --system-libclang --clang-completer' }
 Plug 'majutsushi/tagbar'
@@ -97,6 +100,7 @@ Plug 'vim-voom/VOoM' " can show tex/restDown Table of Content (ToC)
 Plug 'blueyed/vim-diminactive' " disable syntax coloring on inactive splits
 Plug 'tpope/vim-sleuth' " Dunno what it is
 Plug 'tpope/vim-vinegar' " Improves netrw
+Plug 'brettanomyces/nvim-terminus' "edit term command in nvim
 Plug 'justinmk/vim-gtfo' " ?
 Plug 'tpope/vim-fugitive' " to use with Git
 Plug 'tpope/vim-surround' " don't realy know how to use yet
@@ -183,7 +187,7 @@ Plug 'kshenoy/vim-signature' " display marks in gutter, love it
 Plug 'vasconcelloslf/vim-interestingwords' " highlight the words you choose <leader>k
 Plug 'mhinz/vim-grepper' " async grep neovim only
 Plug 'benekastah/neomake' " async build for neovim
-
+Plug 'mhinz/vim-signify'
 " Neomake config {{{
 let g:neomake_verbose = 1
 let g:neomake_python_enabled_makers = ['pyflakes']
@@ -584,7 +588,8 @@ nnoremap <Leader>w :w<CR>
 
 " mostly fzf mappings, use TAB to mark several files at the same time
 nnoremap <Leader>o :FzfFiles<CR>
-nnoremap <Leader>g :FzfGitFiles<CR>
+"nnoremap <Leader>g :FzfGitFiles<CR>
+nnoremap <Leader>h :FzfHistory<CR>
 nnoremap <Leader>c :FzfCommits<CR>
 nnoremap <Leader>C :FzfColors<CR>
 "nnoremap <leader>p :CtrlP<CR>
@@ -829,6 +834,17 @@ nnoremap <leader>pU :PlugUpgrade<CR>
 nnoremap <leader>pu :PlugUpdate<CR>
 " }}}
 
+" signify {{{
+let g:signify_vcs_list = [ 'git']
+let g:signify_mapping_next_hunk = '<leader>gj'
+let g:signify_mapping_prev_hunk = '<leader>gk' 
+let g:signify_mapping_toggle_highlight = '<leader>gh' 
+"let g:signify_line_color_add    = 'DiffAdd'
+"let g:signify_line_color_delete = 'DiffDelete'
+"let g:signify_line_color_change = 'DiffChange' 
+let g:signify_mapping_toggle = '<leader>gt'
+" }}}
+
 " autosave {{{
   let g:auto_save_in_insert_mode = 0
   let g:auto_save_events = ['CursorHold', 'FocusLost']
@@ -847,6 +863,20 @@ nnoremap <LocalLeader>sv :source $MYVIMRC<CR> " reload vimrc
 " }}}
 
 " {{{ vim-scripts/QuickFixCurrentNumber
+" }}}
+
+" Tips from vim-galore {{{
+
+" to alternate between header and source file
+autocmd BufLeave *.{c,cpp} mark C
+autocmd BufLeave *.h       mark H
+
+" Don't lose selection when shifting sidewards
+xnoremap <  <gv
+xnoremap >  >gv
+
+" todo do the same for .Xresources ?
+autocmd BufWritePost ~/.Xdefaults call system('xrdb ~/.Xdefaults')
 " }}}
 
 autocmd syntax markdown setlocal textwidth=80
