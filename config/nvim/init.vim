@@ -85,6 +85,7 @@ let g:startify_session_autoload = 1
 let g:startify_session_persistence = 1
 let g:startify_change_to_vcs_root = 0
 let g:startify_session_savevars = []
+let g:startify_session_delete_buffers = 1
 " }}}
 
 Plug 'dietsche/vim-lastplace' " restore last cursor postion
@@ -96,6 +97,7 @@ Plug 'dietsche/vim-lastplace' " restore last cursor postion
 "endif
 Plug 'wannesm/wmgraphviz.vim' " graphviz syntax highlighting
 "Plug 'CCTree'
+Plug 'tpope/vim-commentary' "<leader>gcc to comment ?
 "Plug 'showmarks2'
 Plug 'teto/vim-listchars' " to cycle between different list/listchars configurations
 Plug 'vim-voom/VOoM' " can show tex/restDown Table of Content (ToC)
@@ -914,6 +916,9 @@ nnoremap <F8> :bn<CR>
 " should become useless with neovim
 noremap <F10> :set paste!<CR>
 map <F12> <Plug>(ToggleListchars)
+
+" Command to toggle line wrapping.
+nnoremap <Leader>wr :set wrap! \| :set wrap?<CR>
 
 " vim:foldmethod=marker:foldlevel=0
 " Get off my lawn
