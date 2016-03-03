@@ -14,7 +14,7 @@ echo "Powerline path ${powerline_path}"
 # if [[ $? -eq 0 && "$powerline_path" != "" ]]; then
   # ${powerline_path}/../EGG-INFO/scripts/powerline-daemon -q
 	# ${powerline_path}/../scripts/powerline-daemon -q
-	#source ${powerline_path}/bindings/zsh/powerline.zsh
+	source ${powerline_path}/bindings/zsh/powerline.zsh
 # else
 	# Setup your normal PS1 here.
 # explanations available here:
@@ -25,9 +25,7 @@ echo "Powerline path ${powerline_path}"
 #$(prompt_char) '
 # fi
 
-
 #RPROMPT='[%D{%L:%M:%S %p}]'
-
 
 # this code makes the prompt blink which is bad
 # TRAPALRM is called every TMOUT, in our case it will reset the prompt

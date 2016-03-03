@@ -9,6 +9,7 @@ PATH="$PATH:/home/teto/powerline/scripts"
 PATH="$PATH:/home/teto/mptcpanalyzer"
 PATH="$PATH:$HOME/.local/bin"
 PATH="$PATH:$HOME/dotfiles/bin"
+PATH="$PATH:$XDG_DATA_HOME/fzf/bin"
 
 # set PATH so it includes user's private bin if it  exists
 if [ -d "$HOME/bin" ] ; then
