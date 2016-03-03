@@ -2,7 +2,9 @@
 " to debug vimscript, use :mess to display error messages
 
 "$NVIM_PYTHON_LOG_FILE
-
+" to test startup time
+" nvim --startuptime startup.log
+" nvim -u NONE --startuptime startup.log
 
 " TODO move to XDG_DATA_HOME
 let s:nvimdir = (exists("$XDG_CONFIG_HOME") ? $XDG_CONFIG_HOME : $HOME.'/.config').'/nvim'
@@ -29,6 +31,7 @@ let mapleader = " "
 
 call plug#begin(s:nvimdir.'/plugged')
 
+Plug 'junegunn/limelight.vim'
 " {{{ Autocompletion and linting 
 Plug 'Valloric/YouCompleteMe' , { 'frozen': 1,  'for': 'cpp' , 'do': './install.py --system-libclang --clang-completer' }
 " }}}
@@ -82,6 +85,7 @@ let g:startify_session_autoload = 1
 let g:startify_session_persistence = 1
 let g:startify_change_to_vcs_root = 0
 let g:startify_session_savevars = []
+let g:startify_session_delete_buffers = 1
 " }}}
 
 Plug 'dietsche/vim-lastplace' " restore last cursor postion
@@ -93,13 +97,15 @@ Plug 'dietsche/vim-lastplace' " restore last cursor postion
 "endif
 Plug 'wannesm/wmgraphviz.vim', {'for': 'dot'} " graphviz syntax highlighting
 "Plug 'CCTree'
+Plug 'tpope/vim-commentary' "<leader>gcc to comment ?
 "Plug 'showmarks2'
 Plug 'teto/vim-listchars' " to cycle between different list/listchars configurations
 "Plug 'vim-voom/VOoM' " can show tex/restDown Table of Content (ToC)
 Plug 'blueyed/vim-diminactive' " disable syntax coloring on inactive splits
 "Plug 'tpope/vim-sleuth' " Dunno what it is
 Plug 'tpope/vim-vinegar' " Improves netrw
-"Plug 'justinmk/vim-gtfo' " ?
+"Plug 'brettanomyces/nvim-terminus' "edit term command in nvim
+Plug 'justinmk/vim-gtfo' " ?
 Plug 'tpope/vim-fugitive' " to use with Git
 "Plug 'jaxbot/github-issues.vim' " works only with vim
 Plug 'tpope/vim-surround' " don't realy know how to use yet
@@ -191,6 +197,7 @@ Plug 'mhinz/vim-grepper', { 'on': 'Grepper'}
 "Plug 'teto/neovim-auto-autoread' " works only in neovim, runs external checker
 "Plug 'benekastah/neomake' " async build for neovim
 Plug '~/neomake', {'branch': 'graphviz'} " async build for neovim
+Plug 'mhinz/vim-signify'
 
 " Neomake config {{{
 let g:neomake_verbose = 1
@@ -596,7 +603,8 @@ nnoremap <Leader>w :w<CR>
 
 " mostly fzf mappings, use TAB to mark several files at the same time
 nnoremap <Leader>o :FzfFiles<CR>
-nnoremap <Leader>g :FzfGitFiles<CR>
+"nnoremap <Leader>g :FzfGitFiles<CR>
+nnoremap <Leader>h :FzfHistory<CR>
 nnoremap <Leader>c :FzfCommits<CR>
 nnoremap <Leader>C :FzfColors<CR>
 "nnoremap <leader>p :CtrlP<CR>
@@ -841,6 +849,17 @@ nnoremap <leader>pU :PlugUpgrade<CR>
 nnoremap <leader>pu :PlugUpdate<CR>
 " }}}
 
+" signify {{{
+let g:signify_vcs_list = [ 'git']
+let g:signify_mapping_next_hunk = '<leader>gj'
+let g:signify_mapping_prev_hunk = '<leader>gk' 
+let g:signify_mapping_toggle_highlight = '<leader>gh' 
+"let g:signify_line_color_add    = 'DiffAdd'
+"let g:signify_line_color_delete = 'DiffDelete'
+"let g:signify_line_color_change = 'DiffChange' 
+let g:signify_mapping_toggle = '<leader>gt'
+" }}}
+
 " autosave {{{
   let g:auto_save_in_insert_mode = 0
   let g:auto_save_events = ['CursorHold', 'FocusLost']
@@ -859,6 +878,20 @@ nnoremap <LocalLeader>sv :source $MYVIMRC<CR> " reload vimrc
 " }}}
 
 " {{{ vim-scripts/QuickFixCurrentNumber
+" }}}
+
+" Tips from vim-galore {{{
+
+" to alternate between header and source file
+autocmd BufLeave *.{c,cpp} mark C
+autocmd BufLeave *.h       mark H
+
+" Don't lose selection when shifting sidewards
+xnoremap <  <gv
+xnoremap >  >gv
+
+" todo do the same for .Xresources ?
+autocmd BufWritePost ~/.Xdefaults call system('xrdb ~/.Xdefaults')
 " }}}
 
 autocmd syntax markdown setlocal textwidth=80
@@ -893,6 +926,9 @@ nnoremap <F8> :bn<CR>
 " should become useless with neovim
 noremap <F10> :set paste!<CR>
 map <F12> <Plug>(ToggleListchars)
+
+" Command to toggle line wrapping.
+nnoremap <Leader>wr :set wrap! \| :set wrap?<CR>
 
 " vim:foldmethod=marker:foldlevel=0
 " Get off my lawn

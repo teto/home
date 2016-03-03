@@ -57,6 +57,9 @@ export TERMINAL="urxvt"
 
 
 # for DCE/ns3 experiments {{{
+# remove automatic access to kernel since we may want to look at it
+# in $HOME/libos-tools
+DCE_PATH="$HOME/libos-tools" # for libsim-linux.so (modified version of libos-tools can create a liblinux.so)
 #DCE_PATH="$HOME/mptcpoff" # for liblinux.so
 DCE_PATH="$DCE_PATH:$HOME/iproute2/ip" # for 'ip' program
 DCE_PATH="$DCE_PATH:$HOME/iperf3/src"
