@@ -1,8 +1,13 @@
-+lisp -- to:lisp@ietf.org
++ietf +lisp -- to:lisp@ietf.org
++ietf +trill -- to:trill@ietf.org
++ietf +taps -- to:taps@ietf.org
++ietf +sdn -- to:sdn@irtf.org
 
-+trill -- to:trill@ietf.org
+#internet history
++ih -- to:internet-history@postel.org
 
 +mptcp -- to:mptcp-dev@listes.uclouvain.be
++mptcp +ietf -- to:mptcp@ietf.org
 
 # todo supprimer les tags new & inbox
 +frnog -- to:*@frnog.org

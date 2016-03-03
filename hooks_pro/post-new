@@ -1,6 +1,9 @@
 #!/bin/bash
 #echo $(dirname ${BASH_SOURCE:-$0})
+echo "hello world"
+export NOTMUCH_CONFIG="$XDG_CONFIG_HOME/notmuch/notmuchrc_pro"
 notmuch tag --batch --input="$XDG_CONFIG_HOME/notmuch/ietf"
 notmuch tag --batch --input="$XDG_CONFIG_HOME/notmuch/foss"
 notmuch tag --batch --input="$XDG_CONFIG_HOME/notmuch/pres"
+notmuch tag +itc -unread +spam -- to:itc@COMSOC.ORG
 #notmuch tag --batch --input="$XDG_CONFIG_HOME/notmuch/security"

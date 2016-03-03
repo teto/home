@@ -7,7 +7,9 @@ To run the ns3 testsuite related to per-node clocks:
 ns3off$ ./test.py -sclock
 -snode-scheduling
 
-To run the DCE tests:
+To run the DCE tests: $ myscripts/ntp/run-ntp.sh
+
+OUTDATED:
 ns3testing$ ./test_ns3.py --load-log ns_clock.txt example dce-ntpd --out=toto.log 
 
 

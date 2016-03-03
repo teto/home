@@ -1,4 +1,25 @@
+# list of options on :
+# http://alot.readthedocs.org/en/latest/configuration/config_options.html
+
 theme = "solarized_dark"
+auto_remove_unread = True
+ask_subject = True
+#auto_replyto_mailinglist
+# launch sequence of commands separated by ;
+initial_command = search tag:inbox AND NOT tag:killed AND NOT tag:ietf ; 
+# alot hooks
+#hooksfile
+input_timeout=0.3
+# list of adresses
+mailinglists = lisp@ietf.org, taps@ietf.org 
+prefer_plaintext = True
+#search_threads_sort_order
+#terminal_cmd
+#template_dir=
+prompt_suffix = Yes master ?
+
+# String prepended to line when quoting
+quote_prefix = "> "
 
 [bindings]
 'ctrl f' = move halfpage down
@@ -17,7 +38,7 @@ G = move last
 @ = refresh
 ? = help bindings
 I = search tag:inbox AND NOT tag:killed
-'#' = taglist
+'t' = taglist
 shift tab = bprevious
 U = search tag:unread
 tab = bnext
@@ -26,10 +47,19 @@ d = bclose
 $ = flush
 m = compose
 o = prompt 'search '
+s l = prompt 'search tag:lisp'
+#R = prompt 'refineprompt tag:unread'
 q = exit
 ';' = bufferlist
 ':' = prompt
 . = repeat
+
+Q = call myhook
+
+[tag]
+   [[lisp]]
+    fg=white
+    translated = LISP
 
 [bufferlist]
     x = close
@@ -59,6 +89,7 @@ q = exit
     'g f' = togglesource
 
 [taglist]
+# add possibility to mark tags or autocompletion in search ?
     enter = select
 
 [thread]
@@ -93,7 +124,7 @@ q = exit
 [[lip6]]
 address = matthieu.coudron@lip6.fr
 realname = Matthieu Coudron
- signature = ~/signature_pro.txt
+signature = ~/signature_pro.txt
 sendmail_command = msmtp --account=pro -t
 
 [[perso]]

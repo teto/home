@@ -28,7 +28,11 @@ TODO refaire une passe pr que ca compile avec clang++
 CXX="clang++"
 
 ```
-CXX="g++" CXXFLAGS=" -g -Wno-reorder -Wno-unused-variable -std=c++11 -include sstream" ./waf configure --with-ns3=$HOME/ns3off/install --enable-kernel-stack=$HOME/mptcpoff/arch --prefix=$HOME/dce/build
+CXX="g++" CXXFLAGS=" -g -Wno-reorder -Wno-unused-variable -std=c++11 -include sstream" \
+./waf configure --with-ns3=$HOME/ns3off/install \
+--enable-kernel-stack=$HOME/mptcpoff/arch \
+--with-glibc=$HOME/glibc/include \
+--prefix=$HOME/dce/build
 ```
 
 
@@ -37,6 +41,8 @@ Il n'y a pas non plus de checks sur --enable-kernel-stack ?
 
 Test one's protocol under DCE:
 ======
+
+
 
 You have to compile with the flags:
 

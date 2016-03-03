@@ -30,18 +30,19 @@ let mapleader = " "
 call plug#begin(s:nvimdir.'/plugged')
 
 " {{{ Autocompletion and linting 
-Plug 'Valloric/YouCompleteMe' , { 'do': './install.py --system-libclang --clang-completer' }
-Plug 'majutsushi/tagbar'
+Plug 'Valloric/YouCompleteMe' , { 'frozen': 1,  'for': 'cpp' , 'do': './install.py --system-libclang --clang-completer' }
 " }}}
-Plug 'tomtom/quickfixsigns_vim'
 Plug 'kana/vim-operator-user' " dependancy for operator-flashy
 Plug 'haya14busa/vim-operator-flashy' " Flash selection on copy
 
 " better handling of buffer closue (type :sayonara)
 Plug 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
 
+" Using a non-master branch
+"Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
+
 " filetypes {{{
-Plug 'cespare/vim-toml'
+Plug 'cespare/vim-toml', { 'for': 'toml'}
 " }}}
 " Python {{{1
 
@@ -51,12 +52,11 @@ Plug 'tmhedberg/SimpylFold', { 'for': 'py' } " provides python folding
 " }}}
 
 Plug 'mbbill/undotree'
-Plug '907th/vim-auto-save' " don't rembmer: check
+Plug '907th/vim-auto-save', { 'for': 'python' } " 
 " {{{ To ease movements
 "Plug 'rhysd/clever-f.vim'
 "Plug 'unblevable/quick-scope'  " highlight characeters to help in f/F moves
 Plug 'Lokaltog/vim-easymotion'
-Plug 'vim-scripts/QuickFixCurrentNumber'
 "Plug 'wellle/visual-split.vim'
 Plug 'justinmk/vim-ipmotion' " ?
 "Plug 'justinmk/vim-sneak' " remaps 's'
@@ -91,23 +91,23 @@ Plug 'dietsche/vim-lastplace' " restore last cursor postion
 "else
 	"Plug 'Lokaltog/powerline' , {'rtp': 'powerline/bindings/vim/'}
 "endif
-Plug 'wannesm/wmgraphviz.vim' " graphviz syntax highlighting
+Plug 'wannesm/wmgraphviz.vim', {'for': 'dot'} " graphviz syntax highlighting
 "Plug 'CCTree'
 "Plug 'showmarks2'
 Plug 'teto/vim-listchars' " to cycle between different list/listchars configurations
-Plug 'vim-voom/VOoM' " can show tex/restDown Table of Content (ToC)
+"Plug 'vim-voom/VOoM' " can show tex/restDown Table of Content (ToC)
 Plug 'blueyed/vim-diminactive' " disable syntax coloring on inactive splits
-Plug 'tpope/vim-sleuth' " Dunno what it is
+"Plug 'tpope/vim-sleuth' " Dunno what it is
 Plug 'tpope/vim-vinegar' " Improves netrw
-Plug 'justinmk/vim-gtfo' " ?
+"Plug 'justinmk/vim-gtfo' " ?
 Plug 'tpope/vim-fugitive' " to use with Git
-Plug 'jaxbot/github-issues.vim'
+"Plug 'jaxbot/github-issues.vim' " works only with vim
 Plug 'tpope/vim-surround' " don't realy know how to use yet
 "Plug 'junegunn/vim-github-dashboard' " needs ruby support, thus won't work in neovim
 Plug 'scrooloose/nerdcommenter'
 "Plug 'junegunn/vim-peekaboo' " gives a preview of buffers when pasting
 Plug 'mhinz/vim-randomtag', { 'on': 'Random' } " Adds a :Random function that launches help at random
-Plug 'majutsushi/tagbar'
+Plug 'majutsushi/tagbar', {'on': 'TagbarToggle'}
 
 " vim-sayonara {{{1
 nnoremap <silent><leader>q  :Sayonara<cr>
@@ -119,7 +119,6 @@ let g:sayonara_confirm_quit = 0
 
 " {{{ fuzzers
 Plug 'junegunn/fzf', { 'dir': $XDG_DATA_HOME . '/fzf', 'do': './install --all --64' }
-
 
 " Many options available :
 " https://github.com/junegunn/fzf.vim
@@ -161,7 +160,7 @@ function! BuildComposer(info)
   endif
 endfunction
 
-Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') } " Needs rust, cargo, plenty of things
+Plug 'euclio/vim-markdown-composer', { 'for': 'md', 'do': function('BuildComposer') } " Needs rust, cargo, plenty of things
 "Plug 'greyblake/vim-preview' " depends on ruby 'redcarpet', thus doesn't work in neovim ?
 
 "Plug 'junegunn/vim-easy-align'   " to align '=' on multiple lines for instance
@@ -170,9 +169,13 @@ Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') } " Needs
 "Plug 'tpope/vim-markdown', { 'for': 'md' }
 "Plug 'elzr/vim-json', { 'for': 'json' }
 "Plug 'numkil/ag.vim'
-Plug 'gundo' " visual removal
-Plug 'dhruvasagar/vim-table-mode'
-Plug 'airblade/vim-gitgutter' " will show which lines changed compared to last clean state
+Plug 'dhruvasagar/vim-table-mode', {'for': 'txt'}
+
+"Plug 'airblade/vim-gitgutter' " will show which lines changed compared to last clean state
+Plug 'kshenoy/vim-signature' " display marks in gutter, love it
+Plug 'vim-scripts/QuickFixCurrentNumber'
+"Plug 'tomtom/quickfixsigns_vim'
+
 Plug 'mhinz/vim-rfc', { 'on': 'RFC' }
 " can show a list of unicode characeters, with their name  :UnicodeTable etc... 
 Plug 'chrisbra/unicode.vim', { 'on': ['<plug>(UnicodeComplete)', '<plug>(UnicodeGA)', 'UnicodeTable'] } 
@@ -181,18 +184,24 @@ Plug 'vim-scripts/Modeliner' " <leader>ml to setup buffer modeline
 "Plug 'sfiera/vim-emacsmodeline' " Reads emacs modelines
 " This one has bindings mapped to <leader>l
 "Plug 'vimwiki/vimwiki'   " to write notes
-Plug 'kshenoy/vim-signature' " display marks in gutter, love it
 "Plug 'vim-scripts/DynamicSigns'
 Plug 'vasconcelloslf/vim-interestingwords' " highlight the words you choose <leader>k
-Plug 'mhinz/vim-grepper' " async grep neovim only
-Plug 'benekastah/neomake' " async build for neovim
+" async grep neovim only
+Plug 'mhinz/vim-grepper', { 'on': 'Grepper'}
+"Plug 'teto/neovim-auto-autoread' " works only in neovim, runs external checker
+"Plug 'benekastah/neomake' " async build for neovim
+Plug '~/neomake', {'branch': 'graphviz'} " async build for neovim
 
 " Neomake config {{{
 let g:neomake_verbose = 1
 let g:neomake_python_enabled_makers = ['pyflakes']
+let g:neomake_logfile = '/home/teto/neomake.log'
 let g:neomake_c_gcc_args = ['-fsyntax-only', '-Wall']
+let g:neomake_open_list = 1
 
-let g:neomake_airline = 0
+let g:neomake_airline = 1
+let g:neomake_echo_current_error = 1
+let g:neomake_place_signs=1
 let g:neomake_error_sign = { 'text': '✘', 'texthl': 'ErrorSign' }
 let g:neomake_warning_sign = { 'text': ':(', 'texthl': 'WarningSign' }
 "let g:neomake_ruby_enabled_makers = ['mri']
@@ -690,7 +699,7 @@ let g:airline_extensions = ['branch', 'tabline']
 let g:airline#extensions#whitespace#enabled = 0
 let g:airline#extensions#whitespace#mixed_indent_algo = 2
 let g:airline#extensions#whitespace#checks = [ 'indent', 'trailing', 'long' ]
-
+"|neomake#statusline#LoclistStatus should be shown in warning section
 
 
 nmap <leader>& <Plug>AirlineSelectTab1

@@ -57,7 +57,7 @@ export TERMINAL="urxvt"
 
 
 # for DCE/ns3 experiments {{{
-DCE_PATH="$HOME/mptcpoff" # for liblinux.so
+#DCE_PATH="$HOME/mptcpoff" # for liblinux.so
 DCE_PATH="$DCE_PATH:$HOME/iproute2/ip" # for 'ip' program
 DCE_PATH="$DCE_PATH:$HOME/iperf3/src"
 DCE_PATH="$DCE_PATH:$HOME/iperf2/src"

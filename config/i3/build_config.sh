@@ -21,7 +21,7 @@ fi
 #for config_part in $list; do
 
 #list="$folder/config.gaps "
-list="${list:-} $folder/config.header $folder/config.xp $folder/config.monitors $folder/config.colors $folder/config.mediakeys $folder/filters.config $folder/config.main "
+list="${list:-} $folder/config.header $folder/config.xp $folder/config.audio  $folder/config.monitors $folder/config.colors $folder/config.mediakeys $folder/filters.config $folder/config.main "
 cat $list > "$folder/config"
 
 #cat "$folder/config.monitors" "$folder/config.main" > "$folder/config"

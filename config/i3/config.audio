@@ -1,0 +1,12 @@
+
+bindsym $mod+Shift+Z mode audio
+
+mode audio {
+bindsym Up exec "amixer -q set Master 2dB+ unmute; notify-send Audio Raised volume"
+bindsym Down exec "amixer -q set Master 2dB- unmute; notify-send Audio lowered"
+
+bindsym m exec "amixer -q set Master toggle"
+
+bindsym Escape mode default
+
+}
