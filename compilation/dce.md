@@ -2,7 +2,6 @@
 Look at https://www.nsnam.org/docs/dce/manual/html/getting-started.html to see how to compile with kernel stack or 
 https://plus.google.com/+HajimeTazaki/posts/1QUmR3n3vNA
 
-DCE itself does not support clang yet.
 
 Pour pouvoir charger le noyau mptcp dans DCE, il faut se placer dans le noyau mptcp et faire un merge
 avec next-next-sim (qui est basé sur le noyuau upstream)
@@ -21,16 +20,14 @@ memcpy (buf->sysname, m_sysName.c_str (), std::min ((int) m_sysName.length (), 6
 
 # Download, configure, build and install DCE
 
-Thus in my case:
---enable-opt removed since it does not work well for now:
-
 TODO refaire une passe pr que ca compile avec clang++
 CXX="clang++"
-
+-include sstream
+-Wno-deprecated-declarations
 ```
-CXX="g++" CXXFLAGS=" -g -Wno-reorder -Wno-unused-variable -std=c++11 -include sstream" \
+CXX="g++" CXXFLAGS=" -g -Wno-reorder -Wno-unused-variable -std=c++11 " \
 ./waf configure --with-ns3=$HOME/ns3off/install \
---enable-kernel-stack=$HOME/mptcpoff/arch \
+--enable-kernel-stack=$HOME/whichone/arch \
 --with-glibc=$HOME/glibc/include \
 --prefix=$HOME/dce/build
 ```
@@ -39,9 +36,7 @@ CXX="g++" CXXFLAGS=" -g -Wno-reorder -Wno-unused-variable -std=c++11 -include ss
 Il n'y a pas non plus de checks sur --enable-kernel-stack ?
 
 
-Test one's protocol under DCE:
-======
-
+# Test one's protocol under DCE:
 
 
 You have to compile with the flags:

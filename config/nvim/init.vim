@@ -202,13 +202,14 @@ Plug 'mhinz/vim-grepper', { 'on': 'Grepper'}
 "Plug 'benekastah/neomake' " async build for neovim
 Plug '~/neomake', {'branch': 'graphviz'} " async build for neovim
 Plug 'mhinz/vim-signify'
+Plug 'teddywing/auditory.vim' " play sounds as you type
 
 " Neomake config {{{
 let g:neomake_verbose = 1
 let g:neomake_python_enabled_makers = ['pyflakes']
 let g:neomake_logfile = '/home/teto/neomake.log'
 let g:neomake_c_gcc_args = ['-fsyntax-only', '-Wall']
-let g:neomake_open_list = 1
+let g:neomake_open_list = 0
 
 let g:neomake_airline = 1
 let g:neomake_echo_current_error = 1
