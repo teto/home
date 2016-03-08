@@ -4,8 +4,10 @@
 # add 'j' command
 . /usr/share/autojump/autojump.sh
 
-# list of aliases
 source "$ZDOTDIR/aliases.zsh"
+# notifies when long command finishes
+source "$ZDOTDIR/zbell.zsh" 
+
 #source $ZDOTDIR/hooks.zsh
 
 # adds a transfer function to upload a file & display its url
@@ -125,7 +127,8 @@ bindkey '^Z' fancy-ctrl-z
 
 # Why did I put that ?
 export SYSCONFDIR="$XDG_CONFIG_HOME"
-#
+
+
 # Setup zsh-autosuggestions
 #source /home/teto/zsh-autosuggestions/autosuggestions.zsh
 
@@ -154,6 +157,9 @@ zstyle ':vcs_info:*' actionformats '%F{5}(%f%s%F{5})%F{3}-%F{5}[%F{2}%b%F{3}|%F{
 zstyle ':vcs_info:*' formats '%F{5}(%f%s%F{5})%F{3}-%F{5}[%F{2}%b%F{5}]%f '
 zstyle ':vcs_info:*' enable git #svn cvs 
 
+add-zsh-hook preexec set_command_as_term_title
+#add-zsh-hook zsh_directory_name
+#add-zsh-hook precmd 
 # autocompletion config {{{1
 # enables autocompletion for apt
 compdef apt=apt-get
@@ -219,12 +225,27 @@ function prompt_cmd() {
 
 }
 
+function set_command_as_term_title (){
+    # set tmux-title to running program
+    #printf "\033k$(echo "$1" | cut -d" " -f1)\033\\"
+    # set urxvt-title to running program
+    #print "hello"
+    print -Pn "\e]0;$(echo "$1")\a"
+}
+
 function rprompt_cmd() {
 	# get vcs info
 	vcs_info
 
 echo "${vcs_info_msg_0_}"
 }
+
+
+precmd () {print -Pn "\e]0;$(pwd)\a"}
+
+# Pour afficher la commande dans le titre du terminal
+# https://github.com/robbyrussell/oh-my-zsh/blob/master/lib/termsupport.zsh
+source "$ZDOTDIR/prompt.zsh"
 
 # prompt config {{{1
 #PROMPT='$(prompt_cmd)' # single quotes to prevent immediate execution
@@ -271,10 +292,6 @@ echo "${vcs_info_msg_0_}"
     #zle && zle reset-prompt
 #}
 ## }}}
-
-# Pour afficher la commande dans le titre du terminal
-# https://github.com/robbyrussell/oh-my-zsh/blob/master/lib/termsupport.zsh
-source "$ZDOTDIR/prompt.zsh"
 
 ## use ctrl+t to toggle autosuggestions(hopefully this wont be needed as
 ## zsh-autosuggestions is designed to be unobtrusive)

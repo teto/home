@@ -20,11 +20,15 @@ if empty(glob(s:plugscript))
 		  autocmd VimEnter * PlugInstall | source $MYVIMRC
 endif
 
+" Read-only pdf through pdftotext
+autocmd BufReadPre *.pdf silent set ro
+autocmd BufReadPost *.pdf silent %!pdftotext -nopgbrk -layout -q -eol unix "%" - | fmt -w78
 
+" convert all kinds of files (but pdf) to plain text
+autocmd BufReadPost *.doc,*.docx,*.rtf,*.odp,*.odt silent %!pandoc "%" -tplain -o /dev/stdout
 
 " 
 let mapleader = " "
-
 
 " to configure vim for haskell, refer to
 " http://yannesposito.com/Scratch/en/blog/Vim-as-IDE/
@@ -33,7 +37,7 @@ call plug#begin(s:nvimdir.'/plugged')
 
 Plug 'junegunn/limelight.vim'
 " {{{ Autocompletion and linting 
-Plug 'Valloric/YouCompleteMe' , { 'frozen': 1,  'for': 'cpp' , 'do': './install.py --system-libclang --clang-completer' }
+Plug 'Valloric/YouCompleteMe' , { 'frozen': 1,  'do': './install.py --system-libclang --clang-completer' }
 " }}}
 Plug 'kana/vim-operator-user' " dependancy for operator-flashy
 Plug 'haya14busa/vim-operator-flashy' " Flash selection on copy
