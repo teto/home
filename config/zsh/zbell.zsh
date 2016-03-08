@@ -21,7 +21,7 @@ zmodload zsh/datetime || return
 autoload -Uz add-zsh-hook || return
 
 # initialize zbell_duration if not set
-(( ${+zbell_duration} )) || zbell_duration=15
+(( ${+zbell_duration} )) || zbell_duration=10
 
 # initialize zbell_ignore if not set
 (( ${+zbell_ignore} )) || zbell_ignore=($EDITOR $PAGER)
@@ -55,6 +55,7 @@ zbell_end() {
 
 	if (( ! $has_ignored_cmd )) && (( ran_long )); then
 		print -n "\a"
+		notify-send "$zbell_lastcmd"
 	fi
 }
 
