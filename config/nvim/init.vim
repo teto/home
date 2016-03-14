@@ -99,6 +99,7 @@ Plug 'dietsche/vim-lastplace' " restore last cursor postion
 "else
 	"Plug 'Lokaltog/powerline' , {'rtp': 'powerline/bindings/vim/'}
 "endif
+Plug 'justinmk/vim-dirvish' " replaces netrw 
 Plug 'wannesm/wmgraphviz.vim', {'for': 'dot'} " graphviz syntax highlighting
 "Plug 'CCTree'
 Plug 'tpope/vim-commentary' "<leader>gcc to comment ?
@@ -281,7 +282,7 @@ set noshowmode " Show the current mode on command line
 set cursorline " highlight cursor line
 
 
-
+let g:lastplace_ignore = "gitcommit,svn"
 
 " Indentation {{{
 set tabstop=4 " a tab takes 4 characters (local to buffer)

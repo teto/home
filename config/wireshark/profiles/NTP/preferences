@@ -115,11 +115,15 @@ gui.webbrowser: xdg-open %s
 # A decimal number
 #gui.update.interval: 86400
 
-# Custom window title. (Appended to existing titles.)
+# Custom window title to be appended to the existing title
+# %P = profile name
+# %V = version info
 # A string
 #gui.window_title: 
 
-# Custom window title. (Prepended to existing titles.)
+# Custom window title to be prepended to the existing title
+# %P = profile name
+# %V = version info
 # A string
 #gui.prepend_window_title: 
 
@@ -262,6 +266,7 @@ gui.layout_type: 5
 #gui.packet_list_show_minimap: TRUE
 
 ####### Filter Expressions ########
+
 gui.filter_expressions.label: DataFin
 gui.filter_expressions.enabled: TRUE
 gui.filter_expressions.expr: tcp.options.mptcp.datafin.flag == 1
@@ -349,6 +354,12 @@ gui.filter_expressions.expr: ip.src == 132.227.74.34
 # INFO     = 64
 # DEBUG    = 128
 console.log.level: 64
+
+####### Extcap Utilities ########
+
+# Save arguments on start of capture
+# TRUE or FALSE (case-insensitive)
+#extcap.gui_save_on_start: TRUE
 
 ####### Name Resolution ########
 
@@ -848,6 +859,10 @@ console.log.level: 64
 # TRUE or FALSE (case-insensitive)
 #arp.detect_duplicate_ips: TRUE
 
+# Try to resolve physical addresses to host names from ARP requests/responses
+# TRUE or FALSE (case-insensitive)
+#arp.register_network_address_binding: TRUE
+
 # Set the UDP port numbers (typically the range 5555 to 5560) used for Aruba Networks encapsulated remote mirroring frames;
 # 0 (default) means that the ARUBA_ERM dissector is not active
 # 
@@ -1027,6 +1042,11 @@ console.log.level: 64
 # Option Number for PacketCable CableLabs Client Configuration
 # A decimal number
 #bootp.pkt.ccc.option: 122
+
+# Endianness applied to UUID fields
+# One of: Little Endian, Big Endian
+# (case-insensitive).
+#bootp.uuid.endian: Little Endian
 
 # Set the UDP port for BRP messages
 # A decimal number
@@ -1228,6 +1248,10 @@ console.log.level: 64
 # IPv4 address or hostname of the image generator
 # A string
 #cigi.ig: 
+
+# Whether the CIP dissector should display enhanced/verbose data in the Info column for CIP explicit messages
+# TRUE or FALSE (case-insensitive)
+#cip.enhanced_info_column: TRUE
 
 # NSAP selector for Transport Protocol (last byte in hex)
 # A hexadecimal number
@@ -2049,6 +2073,10 @@ console.log.level: 64
 # Dissect GTP over TCP
 # TRUE or FALSE (case-insensitive)
 #gtp.dissect_gtp_over_tcp: TRUE
+
+# Track GTP session
+# TRUE or FALSE (case-insensitive)
+#gtp.track_gtp_session: FALSE
 
 # H.225 Server TLS Port
 # A decimal number
@@ -3058,13 +3086,25 @@ console.log.level: 64
 # TRUE or FALSE (case-insensitive)
 #mplspwatmn1cw.extend_cw_length_with_rsvd: FALSE
 
-# Assume TCP Option MPTCP (30)
+# To use this option you must also enable "Analyze TCP sequence numbers". 
 # TRUE or FALSE (case-insensitive)
 #mptcp.analyze_mptcp: TRUE
 
-# Assume TCP Option MPTCP (30)
+# In case you don't capture the key, it will use the first DSN seen
 # TRUE or FALSE (case-insensitive)
-#mptcp.analyze_mappings: FALSE
+#mptcp.relative_sequence_numbers: TRUE
+
+# You need to capture the handshake for this to work."Map TCP subflows to their respective MPTCP connections"
+# TRUE or FALSE (case-insensitive)
+mptcp.analyze_mappings: TRUE
+
+# You need to enable DSS mapping analysis for this option to work
+# TRUE or FALSE (case-insensitive)
+mptcp.interdsn_latency: TRUE
+
+# You need to enable DSS mapping analysis for this option to work
+# TRUE or FALSE (case-insensitive)
+mptcp.intersubflows_retransmission: TRUE
 
 # Whether the MQ dissector should reassemble messages spanning multiple TCP segments. To use this option, you must also enable "Allow subdissectors to reassemble TCP streams" in the TCP protocol settings.
 # TRUE or FALSE (case-insensitive)
@@ -3658,10 +3698,6 @@ console.log.level: 64
 # (case-insensitive).
 #ppp.fcs_type: None
 
-# Whether Van Jacobson-compressed PPP frames should be decompressed
-# TRUE or FALSE (case-insensitive)
-#ppp.decompress_vj: TRUE
-
 # Default Protocol ID to be used for PPPMuxCP
 # A hexadecimal number
 #ppp.default_proto_id: 0
@@ -3840,7 +3876,7 @@ console.log.level: 64
 #rlc-lte.call_pdcp_for_srb: TRUE
 
 # Call PDCP dissector for user-plane PDUs.  Note that without reassembly, it canonly be called for complete PDUs (i.e. not segmented over RLC)
-# One of: Off, 7-bit SN, 12-bit SN, 15-bit SN, Use signalled value
+# One of: Off, 7-bit SN, 12-bit SN, 15-bit SN, 18-bit SN, Use signalled value
 # (case-insensitive).
 #rlc-lte.call_pdcp_for_drb: Use signalled value
 
