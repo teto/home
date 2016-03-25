@@ -246,7 +246,7 @@ Plug 'NLKNguyen/papercolor-theme'
 " Plug 'rdnetto/YCM-Generator'
 " Plug 'erezsh/erezvim' "zenburn scheme. This plugin resets some keymaps,
 " annoying
-"Plug 'chrisbra/csv.vim', {'for': 'txt'}
+"Plug 'chrisbra/csv.vim', {'for': 'csv'}
 " Plug 'luochen1990/rainbow' " does it work ?
 "Plug 'eapache/rainbow_parentheses.vim'  " Display successive delimiters such as [,(... with different colors 
 
@@ -260,7 +260,8 @@ Plug 'lervag/vimtex', {'for': 'tex'}
 
 call plug#end()
 
-
+"nnoremap <silent> <leader>k :call InterestingWords('n')<cr>
+"nnoremap <silent> <leader>K :call UncolorAllWords()<cr>
 
 
 set autoread " automatically reload file when it has been changed (hope they fix this damn feature one day)
@@ -452,7 +453,7 @@ noremap gy "+y
 " source ~/.vim/colors.vim
 " this should be made a plugin as well
 " TODO this does not work with neovim
-source ~/.vim/vim_file_chooser.vim
+"source ~/.vim/vim_file_chooser.vim
 " }}}
 
 " Window / splits {{{
