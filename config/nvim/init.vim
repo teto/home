@@ -41,6 +41,7 @@ Plug 'Valloric/YouCompleteMe' , { 'frozen': 1,  'do': './install.py --system-lib
 " }}}
 Plug 'kana/vim-operator-user' " dependancy for operator-flashy
 Plug 'haya14busa/vim-operator-flashy' " Flash selection on copy
+Plug 'romainl/vim-qf'	" tame qf
 
 " better handling of buffer closue (type :sayonara)
 Plug 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
@@ -51,15 +52,18 @@ Plug 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
 " filetypes {{{
 Plug 'cespare/vim-toml', { 'for': 'toml'}
 " }}}
+
 " Python {{{1
 
 Plug 'hynek/vim-python-pep8-indent', {'for': 'py'} " does not work
 Plug 'mjbrownie/GetFilePlus', {'for': 'py'} " improves gf on imports
 Plug 'tmhedberg/SimpylFold', { 'for': 'py' } " provides python folding
 " }}}
-
+"Plug 'Valloric/ListToggle'
+Plug 'tpope/vim-obsession'
 Plug 'mbbill/undotree'
-Plug '907th/vim-auto-save', { 'for': 'python' } " 
+Plug '907th/vim-auto-save' 
+", { 'for': 'python' } " 
 " {{{ To ease movements
 "Plug 'rhysd/clever-f.vim'
 "Plug 'unblevable/quick-scope'  " highlight characeters to help in f/F moves
@@ -83,10 +87,11 @@ let g:startify_list_order = [
       \ ['   Sessions'],      'sessions',
       \ ['   Bookmarks'],     'bookmarks',
       \ ]
-let g:startify_session_dir = $XDG_DATA_HOME.'/nvim/session'
-let g:startify_bookmarks = [ '~/.vimrc' ]
+let g:startify_session_dir = $XDG_DATA_HOME.'/nvim/sessions'
+let g:startify_bookmarks = []
+let g:startify_files_number = 10
 let g:startify_session_autoload = 1
-let g:startify_session_persistence = 1
+let g:startify_session_persistence = 0
 let g:startify_change_to_vcs_root = 0
 let g:startify_session_savevars = []
 let g:startify_session_delete_buffers = 1
@@ -260,8 +265,13 @@ Plug 'lervag/vimtex', {'for': 'tex'}
 
 call plug#end()
 
+
 "nnoremap <silent> <leader>k :call InterestingWords('n')<cr>
 "nnoremap <silent> <leader>K :call UncolorAllWords()<cr>
+
+" K works in vim files
+autocmd FileType vim setlocal keywordprg=:help
+
 
 
 set autoread " automatically reload file when it has been changed (hope they fix this damn feature one day)
@@ -562,26 +572,6 @@ if ! has('gui_running')
     augroup END
 endif
 
-" vimtex {{{
-let g:vimtex_quickfix_open_on_warning = 0
-let g:vimtex_index_split_pos = 'below'
-let g:vimtex_view_method = 'zathura'
-"let g:vimtex_snippets_leader = ','
-let g:vimtex_latexmk_progname = 'nvr'
-let g:latex_view_general_viewer = 'zathura'
-"let g:tex_stylish = 1
-"let g:tex_flavor = 'latex'
-"let g:tex_isk='48-57,a-z,A-Z,192-255,:'
-
-if !exists('g:ycm_semantic_triggers')
-    let g:ycm_semantic_triggers = {}
-endif
-let g:ycm_semantic_triggers.tex = [
-    \ 're!\\[A-Za-z]*(ref|cite)[A-Za-z]*([^]]*])?{([^}]*,?)*',
-    \ 're!\\includegraphics([^]]*])?{[^}]*',
-    \ 're!\\(include|input){[^}]*'
-    \ ]
-" }}}
 
 nnoremap <leader>r :!%:p<return>
 
@@ -717,7 +707,7 @@ let g:airline#extensions#whitespace#enabled = 0
 let g:airline#extensions#whitespace#mixed_indent_algo = 2
 let g:airline#extensions#whitespace#checks = [ 'indent', 'trailing', 'long' ]
 "|neomake#statusline#LoclistStatus should be shown in warning section
-
+let g:airline_section_z = airline#section#create(['%{ObsessionStatus(''$'', '''')}'])
 
 nmap <leader>& <Plug>AirlineSelectTab1
 nmap <leader>é <Plug>AirlineSelectTab2
@@ -809,7 +799,28 @@ let g:tex_flavor = "latex"
 "}}}
 
 " Vimtex configuration {{{
-  "let g:vimtex_view_method = 'zathura'
+let g:vimtex_quickfix_open_on_warning = 0
+let g:vimtex_index_split_pos = 'below'
+let g:vimtex_view_method = 'zathura'
+"let g:vimtex_snippets_leader = ','
+let g:vimtex_latexmk_progname = 'nvr'
+let g:latex_view_general_viewer = 'zathura'
+"let g:tex_stylish = 1
+"let g:tex_flavor = 'latex'
+"let g:tex_isk='48-57,a-z,A-Z,192-255,:'
+
+if !exists('g:ycm_semantic_triggers')
+    let g:ycm_semantic_triggers = {}
+endif
+
+let g:ycm_semantic_triggers.tex = [
+    \ 're!\\[A-Za-z]*(ref|cite)[A-Za-z]*([^]]*])?{([^}]*,?)*',
+    \ 're!\\includegraphics([^]]*])?{[^}]*',
+    \ 're!\\(include|input){[^}]*'
+    \ ]
+"<plug>(vimtex-toc-toggle)
+"<plug>(vimtex-labels-toggle)
+    autocmd FileType tex nnoremap <leader>lt <plug>(vimtex-toc-toggle)
   "augroup latex
     "autocmd!
     "autocmd FileType tex nnoremap <buffer><F4> :VimtexView<CR>
@@ -871,7 +882,8 @@ let g:signify_mapping_toggle = '<leader>gt'
 
 " autosave {{{
   let g:auto_save_in_insert_mode = 0
-  let g:auto_save_events = ['CursorHold', 'FocusLost']
+  let g:auto_save_events = ['FocusLost']
+  "let g:auto_save_events = ['CursorHold', 'FocusLost']
 " Put this in vimrc, add custom commands in the function.
 function! AutoSaveOnLostFocus()
   " to solve pb with Airline https://github.com/vim-airline/vim-airline/issues/1030#issuecomment-183958050
@@ -925,7 +937,8 @@ nnoremap <F3> :cprev<CR>
 nmap <F4> :cnext<CR>
 
 nnoremap <F5> :Neomake<CR>
-nnoremap <F6> :AutoSaveToggle<CR>
+"nnoremap <F6> :AutoSaveToggle<CR>
+nnoremap <F6> :AutoSaveOnLostFocus<CR>
 " search for  item in quickfix list
 " goto previous buffer
 nnoremap <F7> :bp<CR> 
