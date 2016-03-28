@@ -35,13 +35,16 @@ let mapleader = " "
 
 call plug#begin(s:nvimdir.'/plugged')
 
-Plug 'junegunn/limelight.vim'
+"Plug 'junegunn/limelight.vim' " to highlight ucrrent paragraph only
+Plug 'bronson/vim-trailing-whitespace' " :FixTrailingWhitespace
+" Plug 'tkhoa2711/vim-togglenumber' " by default mapped to <leader>n
+
 " {{{ Autocompletion and linting 
 Plug 'Valloric/YouCompleteMe' , { 'frozen': 1,  'do': './install.py --system-libclang --clang-completer' }
 " }}}
+
 Plug 'kana/vim-operator-user' " dependancy for operator-flashy
 Plug 'haya14busa/vim-operator-flashy' " Flash selection on copy
-Plug 'romainl/vim-qf'	" tame qf
 
 " better handling of buffer closue (type :sayonara)
 Plug 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
@@ -59,7 +62,8 @@ Plug 'hynek/vim-python-pep8-indent', {'for': 'py'} " does not work
 Plug 'mjbrownie/GetFilePlus', {'for': 'py'} " improves gf on imports
 Plug 'tmhedberg/SimpylFold', { 'for': 'py' } " provides python folding
 " }}}
-"Plug 'Valloric/ListToggle'
+
+Plug 'Valloric/ListToggle' " toggling seems to fail
 Plug 'tpope/vim-obsession'
 Plug 'mbbill/undotree'
 Plug '907th/vim-auto-save' 
@@ -73,13 +77,14 @@ Plug 'justinmk/vim-ipmotion' " ?
 "Plug 'justinmk/vim-sneak' " remaps 's'
 Plug 'tpope/vim-rsi'  " maps readline bindings
 " }}}
+
 "Plug 'vim-flake8' " for python syntax
 "Plug 'fisadev/vim-ctrlp-cmdpalette' " sublime text like palette
 "Plug 'osyo-manga/vim-anzu' " to improve internal search
 Plug 'mhinz/vim-startify' " very popular, vim's homepage
 
 " Startify config {{{
-nnoremap <leader>st :Startify<cr>
+"nnoremap <leader>st :Startify<cr>
 
 let g:startify_list_order = [
       \ ['   MRU'],           'files' ,
@@ -87,6 +92,8 @@ let g:startify_list_order = [
       \ ['   Sessions'],      'sessions',
       \ ['   Bookmarks'],     'bookmarks',
       \ ]
+let g:startify_use_env = 0
+let g:startify_disable_at_vimenter = 0
 let g:startify_session_dir = $XDG_DATA_HOME.'/nvim/sessions'
 let g:startify_bookmarks = []
 let g:startify_files_number = 10
@@ -104,7 +111,7 @@ Plug 'dietsche/vim-lastplace' " restore last cursor postion
 "else
 	"Plug 'Lokaltog/powerline' , {'rtp': 'powerline/bindings/vim/'}
 "endif
-Plug 'justinmk/vim-dirvish' " replaces netrw 
+"Plug 'justinmk/vim-dirvish' " replaces netrw 
 Plug 'wannesm/wmgraphviz.vim', {'for': 'dot'} " graphviz syntax highlighting
 "Plug 'CCTree'
 Plug 'tpope/vim-commentary' "<leader>gcc to comment ?
@@ -115,12 +122,12 @@ Plug 'blueyed/vim-diminactive' " disable syntax coloring on inactive splits
 "Plug 'tpope/vim-sleuth' " Dunno what it is
 Plug 'tpope/vim-vinegar' " Improves netrw
 "Plug 'brettanomyces/nvim-terminus' "edit term command in nvim
-Plug 'justinmk/vim-gtfo' " ?
+"Plug 'justinmk/vim-gtfo' " ?
 Plug 'tpope/vim-fugitive' " to use with Git
 "Plug 'jaxbot/github-issues.vim' " works only with vim
-Plug 'tpope/vim-surround' " don't realy know how to use yet
+"Plug 'tpope/vim-surround' " don't realy know how to use yet
 "Plug 'junegunn/vim-github-dashboard' " needs ruby support, thus won't work in neovim
-Plug 'scrooloose/nerdcommenter'
+"Plug 'scrooloose/nerdcommenter'
 "Plug 'junegunn/vim-peekaboo' " gives a preview of buffers when pasting
 Plug 'mhinz/vim-randomtag', { 'on': 'Random' } " Adds a :Random function that launches help at random
 Plug 'majutsushi/tagbar', {'on': 'TagbarToggle'}
@@ -141,9 +148,10 @@ Plug 'junegunn/fzf', { 'dir': $XDG_DATA_HOME . '/fzf', 'do': './install --all --
 " Most commands support CTRL-T / CTRL-X / CTRL-V key bindings to open in a new tab, a new split, or in a new vertical split
 Plug 'junegunn/fzf.vim' " defines :Files / :Commits for FZF
 
+"}}}
+
 " FZF config {{{
 let g:fzf_command_prefix = 'Fzf' " prefix commands :Files become :FzfFiles, etc.
-
 let g:fzf_nvim_statusline = 0 " disable statusline overwriting
 
 " This is the default extra key bindings
@@ -165,10 +173,6 @@ let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %
 " Advanced customization using autoload functions
 " }}}
 
-"Plug 'ctrlpvim/ctrlp.vim' " todo remove in favor of FZF
-"Plug 'mattn/ctrlp-mark'
-"Plug 'mattn/ctrlp-register'
-" }}}
 function! BuildComposer(info)
   if a:info.status != 'unchanged' || a:info.force
     !cargo build --release
@@ -251,7 +255,7 @@ Plug 'NLKNguyen/papercolor-theme'
 " Plug 'rdnetto/YCM-Generator'
 " Plug 'erezsh/erezvim' "zenburn scheme. This plugin resets some keymaps,
 " annoying
-"Plug 'chrisbra/csv.vim', {'for': 'csv'}
+Plug 'chrisbra/csv.vim', {'for': 'csv'}
 " Plug 'luochen1990/rainbow' " does it work ?
 "Plug 'eapache/rainbow_parentheses.vim'  " Display successive delimiters such as [,(... with different colors 
 
@@ -496,11 +500,11 @@ nmap <silent> <M-Right> :wincmd l<CR>
 "nnoremap <C-M-S-p> :echom "C-M-S-p"<cr>
 
 
-" nmap = *normal mode* mapping
-nmap <silent> ^[OC :wincmd l<CR>
-nmap <silent> ^[OC :wincmd h<CR>
-nmap <silent> OC :wincmd l<CR>
-nmap <silent> OD :wincmd h<CR>
+"wnmap = *normal mode* mapping
+"nmap <silent> ^[OC :wincmd l<CR>
+"nmap <silent> ^[OC :wincmd h<CR>
+"nmap <silent> OC :wincmd l<CR>
+"nmap <silent> OD :wincmd h<CR>
 
 " window nmap <leader>sw<left>  :topleft  vnew<CR>
 nmap <leader>sw<right> :botright vnew<CR>
@@ -599,12 +603,12 @@ nnoremap <Leader>e :Vex<CR> " open netrw
 nnoremap <Leader>w :w<CR>
 
 " mostly fzf mappings, use TAB to mark several files at the same time
+" https://github.com/neovim/neovim/issues/4487
 nnoremap <Leader>o :FzfFiles<CR>
-"nnoremap <Leader>g :FzfGitFiles<CR>
+nnoremap <Leader><space> :FzfGitFiles<CR>
 nnoremap <Leader>h :FzfHistory<CR>
 nnoremap <Leader>c :FzfCommits<CR>
 nnoremap <Leader>C :FzfColors<CR>
-"nnoremap <leader>p :CtrlP<CR>
 nnoremap <leader>b :FzfBuffers<CR>
 nnoremap <leader>m :FzfMarks<CR>
 nnoremap <leader>u :UndoTreeToggle<CR>
@@ -620,7 +624,6 @@ nnoremap <leader>gfs :vertical wincmd f<CR> " open file under cursor in a split
 let g:Powerline_symbols = "fancy" " to use unicode symbols
 " }}}
 
-
 " Ctrpl config {{{
 "Plug 'ctrlpvim/ctrlp.vim'
 "Plug 'mattn/ctrlp-mark'
@@ -635,6 +638,11 @@ let g:Powerline_symbols = "fancy" " to use unicode symbols
 " There is the analyze command as well
     let g:csv_autocmd_arrange = 1
     let g:csv_autocmd_arrange_size = 1024*1024
+" }}}
+
+" ToggleList config {{{
+let g:lt_location_list_toggle_map = '<F3>' " '<leader>l'
+let g:lt_quickfix_list_toggle_map = '<F2>' " '<leader>qq'
 " }}}
 
 " Search parameters {{{
@@ -659,7 +667,8 @@ let g:ycm_show_diagnostics_ui = 1 " show info in gutter
 "let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_key_invoke_completion = '<C-Space>'
 let g:ycm_key_detailed_diagnostics = '<leader>d'
-let g:ycm_goto_buffer_command = 'same-buffer' " horizontal-split, new-tab, new-or-existing tab
+" several solutions available: horizontal-split, new-tab, new-or-existing tab
+let g:ycm_goto_buffer_command = 'same-buffer' 
 let g:ycm_server_log_level = 'debug'
 
 " Add triggers to ycm for LaTeX-Box autocompletion
@@ -703,12 +712,13 @@ let g:airline#extensions#tabline#show_tabs = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail'
 let g:airline_extensions = ['branch', 'tabline']
 
+let g:airline#extensions#tagbar#enabled = 0
+
 let g:airline#extensions#whitespace#enabled = 0
 let g:airline#extensions#whitespace#mixed_indent_algo = 2
 let g:airline#extensions#whitespace#checks = [ 'indent', 'trailing', 'long' ]
 "|neomake#statusline#LoclistStatus should be shown in warning section
 let g:airline_section_z = airline#section#create(['%{ObsessionStatus(''$'', '''')}'])
-
 nmap <leader>& <Plug>AirlineSelectTab1
 nmap <leader>é <Plug>AirlineSelectTab2
 nmap <leader>" <Plug>AirlineSelectTab3
@@ -931,14 +941,14 @@ nnoremap Y y$
 
 " search items in location list (per window)
 nnoremap <F1> :lprev<CR>
-nnoremap <F2> :lnext<CR>
+"nnoremap <F2> :lnext<CR>
 " search for  item in quickfix list (global/unique)
-nnoremap <F3> :cprev<CR>
+"nnoremap <F3> :cprev<CR>
 nmap <F4> :cnext<CR>
 
 nnoremap <F5> :Neomake<CR>
-"nnoremap <F6> :AutoSaveToggle<CR>
-nnoremap <F6> :AutoSaveOnLostFocus<CR>
+nnoremap <F6> :AutoSaveToggle<CR>
+"nnoremap <F6> :AutoSaveOnLostFocus<CR>
 " search for  item in quickfix list
 " goto previous buffer
 nnoremap <F7> :bp<CR> 
@@ -973,7 +983,38 @@ if has('nvim')
 endif
 
 autocmd! BufWritePost * Neomake
+" Bye bye ex mode
+noremap Q <NOP>
+" space and tabs - T4 by default
+"map <Leader>s2 :set expandtab ts=2 sts=2 sw=2<CR>
+"map <Leader>s4 :set expandtab ts=4 sts=4 sw=4<CR>
+"map <Leader>s8 :set expandtab ts=8 sts=8 sw=4<CR>
+"map <Leader>t2 :set noexpandtab ts=2 sts=2 sw=2<CR>
+"map <Leader>t4 :set noexpandtab ts=4 sts=4 sw=4<CR>
+"map <Leader>t8 :set noexpandtab ts=8 sts=8 sw=8<CR>
 
+" buffers
+map <Leader>n :bnext<CR>
+map <Leader>N :bNext<CR>
+map <Leader>p :bprevious<CR>
+map <Leader>d :bdelete<CR>
+
+" indents
+"nmap <S-Tab> <<
+"nmap <Tab> >>
+"vmap <S-Tab> <gv
+"vmap <Tab> >gv
+
+
+
+" azerty customizations : utilise <C-V> pour entrer le caractère utilisé {{{
+"https://www.reddit.com/r/vim/comments/2tvupe/azerty_keymapping/
+" parce que # est l'opposé de * et ù est a coté de *
+map ù #  
+noremap             <C-j>           }
+noremap             <C-k>           {
+
+" }}}
 "'.'
 "set shada=!,'50,<1000,s100,:0,n/home/teto/.cache/nvim/shada
 

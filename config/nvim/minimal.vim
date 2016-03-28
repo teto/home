@@ -8,12 +8,12 @@ let s:plugscript = s:nvimdir.'/autoload/plug.vim'
 "silent echom s:plugscript
 "silent echom s:nvimdir
 
-if empty(glob(s:plugscript))
-  execute "!mkdir -p " s:nvimdir.'/autoload' s:nvimdir.'/plugged'
-  execute "!curl -fLo" s:plugscript
-		\ "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
-		  autocmd VimEnter * PlugInstall | source $MYVIMRC
-endif
+"if empty(glob(s:plugscript))
+  "execute "!mkdir -p " s:nvimdir.'/autoload' s:nvimdir.'/plugged'
+  "execute "!curl -fLo" s:plugscript
+		"\ "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+		  "autocmd VimEnter * PlugInstall | source $MYVIMRC
+"endif
 
 let mapleader = " "
 
@@ -23,7 +23,8 @@ syntax enable
 
 call plug#begin(s:nvimdir.'/plugged')
 
-Plug 'lervag/vimtex', {'for': 'tex'}
+"Plug 'lervag/vimtex', {'for': 'tex'}
+Plug 'Valloric/ListToggle'
 
 call plug#end()
 

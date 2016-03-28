@@ -1,2 +1,4 @@
-set keymap vi
+# https://wiki.archlinux.org/index.php/readline
 set editing-mode vi
+
+# set keymap vi
