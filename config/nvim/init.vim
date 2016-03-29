@@ -63,7 +63,7 @@ Plug 'mjbrownie/GetFilePlus', {'for': 'py'} " improves gf on imports
 Plug 'tmhedberg/SimpylFold', { 'for': 'py' } " provides python folding
 " }}}
 
-Plug 'Valloric/ListToggle' " toggling seems to fail
+" Plug 'Valloric/ListToggle' " toggling seems to fail
 Plug 'tpope/vim-obsession'
 Plug 'mbbill/undotree'
 Plug '907th/vim-auto-save' 
@@ -264,8 +264,10 @@ Plug 'chrisbra/csv.vim', {'for': 'csv'}
 " "Plug 'vim-latex/vim-latex', {'for': 'tex'}
 " " ATP author gh mirror seems to be git@github.com:coot/atp_vim.git
 " "Plug 'coot/atp_vim', {'for': 'tex'}
-Plug 'lervag/vimtex', {'for': 'tex'}
+Plug 'lervag/vimtex', {'for': 'tex'} " so far the best one
 " }}}
+
+Plug 'vim-scripts/YankRing.vim'
 
 call plug#end()
 
@@ -283,7 +285,7 @@ set linebreak " better display (makes sense only with wrap)
 set wrap
 set breakat=80
 set breakindent " preserve indentation on wrap
-set showbreak=">>>"
+set showbreak=">>>"  " displayed in front of wrapped lines
 filetype on                   " required!
 set backspace=indent,eol,start
 
@@ -830,7 +832,7 @@ let g:ycm_semantic_triggers.tex = [
     \ ]
 "<plug>(vimtex-toc-toggle)
 "<plug>(vimtex-labels-toggle)
-    autocmd FileType tex nnoremap <leader>lt <plug>(vimtex-toc-toggle)
+    " autocmd FileType tex nnoremap <leader>lt <plug>(vimtex-toc-toggle)
   "augroup latex
     "autocmd!
     "autocmd FileType tex nnoremap <buffer><F4> :VimtexView<CR>
@@ -1010,7 +1012,7 @@ map <Leader>d :bdelete<CR>
 " azerty customizations : utilise <C-V> pour entrer le caractère utilisé {{{
 "https://www.reddit.com/r/vim/comments/2tvupe/azerty_keymapping/
 " parce que # est l'opposé de * et ù est a coté de *
-map ù #  
+map ù %  
 noremap             <C-j>           }
 noremap             <C-k>           {
 
