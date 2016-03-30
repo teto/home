@@ -16,6 +16,13 @@ bindsym super+right exec "xdotool getactivewindow key -clearmodifiers --window %
 bindsym super+left exec "xdotool getactivewindow key -clearmodifiers --window %1 Ctrl+Tab"
 #bindsym control+h exec "xdotool getactivewindow key -clearmodifiers --window %1 BackSpace"
 
+# bindym $mod+shift+b mode border
+bindsym $mod+shift+b border toggle
+# mode border {
+
+
+# bindsym Escape mode "default"
+# }
 
 # The right button toggles floating
 bindsym button3 floating toggle

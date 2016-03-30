@@ -5,11 +5,12 @@ audible_bell = false
 mouse_autohide = false
 allow_bold = true
 dynamic_title = true
+fullscreen = false
 urgent_on_bell = true
 clickable_url = true
 font = Inconsolata For Powerline 11
 scrollback_lines = 10000
-search_wrap = true
+search_wrap = false
 #icon_name = terminal
 #geometry = 640x480
 

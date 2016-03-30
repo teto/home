@@ -212,7 +212,7 @@ Plug 'mhinz/vim-grepper', { 'on': 'Grepper'}
 "Plug 'benekastah/neomake' " async build for neovim
 Plug '~/neomake', {'branch': 'graphviz'} " async build for neovim
 Plug 'mhinz/vim-signify'
-Plug 'teddywing/auditory.vim' " play sounds as you type
+" Plug 'teddywing/auditory.vim' " play sounds as you type
 
 " Neomake config {{{
 let g:neomake_verbose = 1
@@ -267,7 +267,7 @@ Plug 'chrisbra/csv.vim', {'for': 'csv'}
 Plug 'lervag/vimtex', {'for': 'tex'} " so far the best one
 " }}}
 
-Plug 'vim-scripts/YankRing.vim'
+" Plug 'vim-scripts/YankRing.vim' " breaks in neovim, overrides yy as well
 
 call plug#end()
 

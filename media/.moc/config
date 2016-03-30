@@ -198,10 +198,11 @@ XTerms += xterm-256colour:xterm-256color
 XTerms += rxvt:rxvt-unicode
 XTerms += rxvt-unicode-256colour:rxvt-unicode-256color
 XTerms += eterm
+XTerms += xterm-termite
 
 # Theme file. This can be absolute path or relative to
 # /usr/share/moc/themes/ (depends on installation prefix) or ~/.moc/themes/
-# Theme			= example_theme
+Theme			= darkdot_theme
 
 # The theme used when running on an xterm.
 XTermTheme		= transparent-background
