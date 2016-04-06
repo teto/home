@@ -347,6 +347,12 @@ gui.filter_expressions.expr: tcp.options.mptcp.subtype == 1
 gui.filter_expressions.label: mptcp.stream == 0
 gui.filter_expressions.enabled: TRUE
 gui.filter_expressions.expr: mptcp.stream == 0
+gui.filter_expressions.label: Apply this filter
+gui.filter_expressions.enabled: TRUE
+gui.filter_expressions.expr: ip.src == 10.1.0.1 and tcp.srcport == 49078
+gui.filter_expressions.label: addrid a lacon
+gui.filter_expressions.enabled: TRUE
+gui.filter_expressions.expr: ip.src == 10.1.0.1 and tcp.srcport == 49078
 
 ####### Capture ########
 
@@ -981,6 +987,11 @@ nameres.hosts_file_handling: TRUE
 # One of: Version 1.2
 # (case-insensitive).
 #asterix.i023_version: Version 1.2
+
+# Select the CAT025 version
+# One of: Version 1.1
+# (case-insensitive).
+#asterix.i025_version: Version 1.1
 
 # Select the CAT034 version
 # One of: Version 1.27
@@ -2485,7 +2496,7 @@ nameres.hosts_file_handling: TRUE
 
 # Whether to validate the IPv4 checksum
 # TRUE or FALSE (case-insensitive)
-ip.check_checksum: TRUE
+#ip.check_checksum: FALSE
 
 # Whether to correct for TSO-enabled (TCP segmentation offload) hardware captures, such as spoofing the IP packet length
 # TRUE or FALSE (case-insensitive)
@@ -3531,6 +3542,10 @@ mptcp.intersubflows_retransmission: TRUE
 # Modbus/TCP words can be transcoded either big- or little endian. Default will be little endian
 # TRUE or FALSE (case-insensitive)
 #opensafety.mbtcp_big_endian: FALSE
+
+# Enables additional information in the dissection for better debugging an openSAFETY trace
+# TRUE or FALSE (case-insensitive)
+#opensafety.debug_verbose: FALSE
 
 # Enable heuristic dissection for openSAFETY over UDP encoded traffic
 # TRUE or FALSE (case-insensitive)
@@ -4719,7 +4734,7 @@ mptcp.intersubflows_retransmission: TRUE
 
 # Whether to validate the TCP checksum or not.  (Invalid checksums will cause reassembly, if enabled, to fail.)
 # TRUE or FALSE (case-insensitive)
-tcp.check_checksum: TRUE
+#tcp.check_checksum: FALSE
 
 # Whether subdissector can request TCP streams to be reassembled
 # TRUE or FALSE (case-insensitive)
@@ -4731,7 +4746,7 @@ tcp.check_checksum: TRUE
 
 # Make the TCP dissector use relative sequence numbers instead of absolute ones. To use this option you must also enable "Analyze TCP sequence numbers". 
 # TRUE or FALSE (case-insensitive)
-#tcp.relative_sequence_numbers: TRUE
+tcp.relative_sequence_numbers: FALSE
 
 # Make the TCP dissector use this scaling factor for streams where the signalled scaling factor is not visible in the capture
 # One of: Not known, 0 (no scaling), 1 (multiply by 2), 2 (multiply by 4), 3 (multiply by 8), 4 (multiply by 16), 5 (multiply by 32), 6 (multiply by 64), 7 (multiply by 128), 8 (multiply by 256), 9 (multiply by 512), 10 (multiply by 1024), 11 (multiply by 2048), 12 (multiply by 4096), 13 (multiply by 8192), 14 (multiply by 16384)

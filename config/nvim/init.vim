@@ -36,9 +36,9 @@ let mapleader = " "
 call plug#begin(s:nvimdir.'/plugged')
 
 "Plug 'junegunn/limelight.vim' " to highlight ucrrent paragraph only
-Plug 'bronson/vim-trailing-whitespace' " :FixTrailingWhitespace
+" Plug 'bronson/vim-trailing-whitespace' " :FixTrailingWhitespace
 " Plug 'tkhoa2711/vim-togglenumber' " by default mapped to <leader>n
-
+Plug 'dzeban/vim-log-syntax'
 " {{{ Autocompletion and linting 
 Plug 'Valloric/YouCompleteMe' , { 'frozen': 1,  'do': './install.py --system-libclang --clang-completer' }
 " }}}
@@ -652,7 +652,7 @@ set hlsearch " highlight search terms
 set incsearch " show search matches as you type
 set ignorecase " ignore case when searching
 set smartcase " take case into account if search entry has capitals in it
-set wrapscan " prevent from going back to the beginning of the file
+set nowrapscan " prevent from going back to the beginning of the file
 " }}}
 
 " YouCompleteMe config {{{
