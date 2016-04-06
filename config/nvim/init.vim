@@ -42,6 +42,9 @@ Plug 'bronson/vim-trailing-whitespace' " :FixTrailingWhitespace
 " {{{ Autocompletion and linting 
 Plug 'Valloric/YouCompleteMe' , { 'frozen': 1,  'do': './install.py --system-libclang --clang-completer' }
 " }}}
+"Plug 'mattn/vim-rtags' a l'air léger
+Plug 'shaneharper/vim-rtags' " <leader>r ou bien :RtagsFind  mais ne marche pas
+Plug 'lyuts/vim-rtags'  " a l'air d'etre le plus complet
 
 Plug 'kana/vim-operator-user' " dependancy for operator-flashy
 Plug 'haya14busa/vim-operator-flashy' " Flash selection on copy
@@ -114,7 +117,7 @@ Plug 'dietsche/vim-lastplace' " restore last cursor postion
 "Plug 'justinmk/vim-dirvish' " replaces netrw 
 Plug 'wannesm/wmgraphviz.vim', {'for': 'dot'} " graphviz syntax highlighting
 "Plug 'CCTree'
-Plug 'tpope/vim-commentary' "<leader>gcc to comment ?
+ Plug 'tpope/vim-commentary' "gcc to comment/gcgc does not work that well
 "Plug 'showmarks2'
 Plug 'teto/vim-listchars' " to cycle between different list/listchars configurations
 "Plug 'vim-voom/VOoM' " can show tex/restDown Table of Content (ToC)
@@ -579,7 +582,7 @@ if ! has('gui_running')
 endif
 
 
-nnoremap <leader>r :!%:p<return>
+"nnoremap <leader>r :!%:p<return>
 
 
 set shiftround    " round indent to multiple of 'shiftwidth'
@@ -616,7 +619,7 @@ nnoremap <leader>m :FzfMarks<CR>
 nnoremap <leader>u :UndoTreeToggle<CR>
 
 " fails with neovim use :te instead ?
-nnoremap <leader>r :<C-U>RangerChooser<CR> 
+"nnoremap <leader>r :<C-U>RangerChooser<CR> 
 
 "nnoremap <F8> :vertical wincmd f<CR> " open file under cursor in a split
 nnoremap <leader>gfs :vertical wincmd f<CR> " open file under cursor in a split
@@ -920,8 +923,8 @@ autocmd BufLeave *.{c,cpp} mark C
 autocmd BufLeave *.h       mark H
 
 " Don't lose selection when shifting sidewards
-xnoremap <  <gv
-xnoremap >  >gv
+"xnoremap <  <gv
+"xnoremap >  >gv
 
 " todo do the same for .Xresources ?
 autocmd BufWritePost ~/.Xdefaults call system('xrdb ~/.Xdefaults')
