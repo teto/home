@@ -707,6 +707,7 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
 "let g:airline_theme = 'solarized'
+let g:airline_section_b = ""
 let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline#extensions#tabline#show_buffers = 1  
 let g:airline#extensions#tabline#buffer_min_count =2
@@ -718,6 +719,10 @@ let g:airline#extensions#tabline#formatter = 'unique_tail'
 let g:airline_extensions = ['branch', 'tabline']
 
 let g:airline#extensions#tagbar#enabled = 0
+
+let g:airline#extensions#ycm#enabled = 1
+let g:airline#extensions#ycm#error_symbol = 'E:'
+let g:airline#extensions#ycm#warning_symbol = 'W:'
 
 let g:airline#extensions#whitespace#enabled = 0
 let g:airline#extensions#whitespace#mixed_indent_algo = 2
