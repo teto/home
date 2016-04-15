@@ -90,15 +90,18 @@ Plug 'mhinz/vim-startify' " very popular, vim's homepage
 "nnoremap <leader>st :Startify<cr>
 
 let g:startify_list_order = [
+      \ ['   Bookmarks'],     'bookmarks',
       \ ['   MRU'],           'files' ,
       \ ['   MRU '.getcwd()], 'dir',
       \ ['   Sessions'],      'sessions',
-      \ ['   Bookmarks'],     'bookmarks',
       \ ]
 let g:startify_use_env = 0
 let g:startify_disable_at_vimenter = 0
 let g:startify_session_dir = $XDG_DATA_HOME.'/nvim/sessions'
-let g:startify_bookmarks = []
+let g:startify_bookmarks = [
+      \ {'i': $XDG_CONFIG_HOME.'/i3/config.main'},
+      \ {'z': $XDG_CONFIG_HOME.'/zsh/.zshenv'},
+      \ ]
 let g:startify_files_number = 10
 let g:startify_session_autoload = 1
 let g:startify_session_persistence = 0
@@ -114,7 +117,14 @@ Plug 'dietsche/vim-lastplace' " restore last cursor postion
 "else
 	"Plug 'Lokaltog/powerline' , {'rtp': 'powerline/bindings/vim/'}
 "endif
-"Plug 'justinmk/vim-dirvish' " replaces netrw 
+"
+" Text objects {{{
+" Plug 'kana/vim-textobj-fold' " ability to do yaz
+" }}}
+
+"
+Plug 'justinmk/vim-dirvish' " replaces netrw 
+Plug 'justinmk/vim-gtfo' " gfo to open filemanager in cwd
 Plug 'wannesm/wmgraphviz.vim', {'for': 'dot'} " graphviz syntax highlighting
 "Plug 'CCTree'
  Plug 'tpope/vim-commentary' "gcc to comment/gcgc does not work that well
@@ -935,6 +945,16 @@ autocmd BufLeave *.h       mark H
 autocmd BufWritePost ~/.Xdefaults call system('xrdb ~/.Xdefaults')
 " }}}
 
+" Dirvish {{{
+let g:loaded_netrwPlugin = 1
+command! -nargs=? -complete=dir Vexplore leftabove vsplit | silent Dirvish <args>
+command! -nargs=? -complete=dir Sexplore belowright split | silent Dirvish <args>
+nnoremap gx :call netrw#BrowseX(expand((exists("g:netrw_gx")? g:netrw_gx : '<cfile>')),netrw#CheckIfRemote())<cr>
+" }}}
+
+
+set hidden " you can open a new buffer even if current is unsaved (error E37)
+
 autocmd syntax markdown setlocal textwidth=80
 autocmd syntax pandoc setlocal textwidth=80
 autocmd syntax text setlocal textwidth=80 
@@ -1008,7 +1028,7 @@ map <Leader>n :bnext<CR>
 map <Leader>N :bNext<CR>
 map <Leader>p :bprevious<CR>
 map <Leader>d :bdelete<CR>
-
+map <Leader>s :setlocal spell spelllang=en_us<CR>
 " indents
 "nmap <S-Tab> <<
 "nmap <Tab> >>
