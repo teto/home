@@ -655,7 +655,7 @@ set hlsearch " highlight search terms
 set incsearch " show search matches as you type
 set ignorecase " ignore case when searching
 set smartcase " take case into account if search entry has capitals in it
-set nowrapscan " prevent from going back to the beginning of the file
+set wrapscan " prevent from going back to the beginning of the file
 " }}}
 
 " YouCompleteMe config {{{
@@ -905,6 +905,7 @@ let g:signify_mapping_toggle = '<leader>gt'
   let g:auto_save_events = ['FocusLost']
   "let g:auto_save_events = ['CursorHold', 'FocusLost']
 " Put this in vimrc, add custom commands in the function.
+" deprecated
 function! AutoSaveOnLostFocus()
   " to solve pb with Airline https://github.com/vim-airline/vim-airline/issues/1030#issuecomment-183958050
    
@@ -947,7 +948,6 @@ set diffopt=filler,vertical " default behavior for diff
 nnoremap Y y$
 
 
-"nnoremap coa :AutoSaveToggle<CR>
 
 " search items in location list (per window)
 nnoremap <F1> :lprev<CR>
@@ -1015,7 +1015,7 @@ map <Leader>d :bdelete<CR>
 "vmap <S-Tab> <gv
 "vmap <Tab> >gv
 
-
+set hidden 
 
 " azerty customizations : utilise <C-V> pour entrer le caractère utilisé {{{
 "https://www.reddit.com/r/vim/comments/2tvupe/azerty_keymapping/

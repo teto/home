@@ -11,6 +11,7 @@
     "thread_index": {
         "page_jump_rows": "6",
         "sort_order": "newest",
+        "thread_load_step": "250",
         "cell": {
             "font_description": "default",
             "line_spacing": "2",
@@ -20,6 +21,7 @@
             "tags_length": "80",
             "subject_color": "#807d74",
             "subject_color_selected": "#000000",
+            "background_color_selected": "",
             "tags_color": "#31587a",
             "hidden_tags": "attachment,flagged,unread"
         }
@@ -36,7 +38,8 @@
             "cmd": "gvim",
             "args": "-f -c 'set ft=mail' '+set fileencoding=utf-8' '+set ff=unix' '+set enc=utf-8'"
         },
-        "charset": "utf-8"
+        "charset": "utf-8",
+        "save_draft_on_force_quit": "true"
     },
     "mail": {
         "reply": {
@@ -69,6 +72,9 @@
             "for_tags": "",
             "code_tag": "```",
             "enable_for_patches": "true"
+        },
+        "gravatar": {
+            "enable": "true"
         }
     },
     "crypto": {
