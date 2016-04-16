@@ -168,8 +168,9 @@ bindsym $mod+F3 [instance="pad_(?!ncmpcpp)"] move scratchpad; [instance="pad_ncm
 #bindsym $mod+w exec python ~/.i3/runorfocus.py "Firefox" firefox
 
 
-bindsym $mod+oe exec ~/i3-easyfocus/i3-easyfocus
+bindsym $mod+oe exec /home/teto/i3-easyfocus/i3-easyfocus
 
+bindsym $mod+shift+e exec /home/teto/i3-easyfocus/i3-easyfocus
 
 # This may be slow since script involves a few steps
 # change focus
@@ -312,7 +313,7 @@ bindsym $mod+Shift+C  reload
 bindsym $mod+Shift+R exec "$HOME/.i3/build_config.sh"; restart
 # exit i3 (logs you out of your X session)
 # command is 'exit'
-bindsym $mod+Shift+E exec "$HOME/.i3/logout.py"
+# bindsym $mod+Shift+E exec "$HOME/.i3/logout.py"
 
 
 mode "command" {

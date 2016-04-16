@@ -27,6 +27,7 @@ export LESSHISTFILE="$XDG_CACHE_HOME/less/history"
 export NOTMUCH_CONFIG="$XDG_CONFIG_HOME/notmuch/notmuchrc"
 export INPUTRC="$XDG_CONFIG_HOME/inputrc"
 export IPYTHONDIR="$XDG_CONFIG_HOME/ipython"
+export JUPYTER_CONFIG_DIR=${XDG_CONFIG_HOME:-$HOME/.config}/jupyter
 #}}}
 
 # PYTHONPATH {{{

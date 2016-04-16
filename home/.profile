@@ -1,4 +1,9 @@
 # vim: set noet fenc=utf-8 ff=unix sts=0 sw=2 ts=8 fdm=marker: 
+
+
+
+PATH
+
 # XDG configuration {{{
 # Specs here:
 # http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html
@@ -9,6 +14,7 @@ export XDG_CONFIG_HOME="$HOME/.config"
 
 #$XDG_CACHE_HOME defines the base directory relative to which user specific non-essential data files should be stored. By default "$HOME/.cache"
 export XDG_CACHE_HOME="$HOME/.cache"
+
 # }}}
 
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
