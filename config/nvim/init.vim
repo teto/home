@@ -1037,6 +1037,9 @@ map <Leader>s :setlocal spell spelllang=en_us<CR>
 
 set hidden 
 
+" inoremap :echom 'hello world'
+noremap <D-b> :echom 'hello world'<CR>
+
 " azerty customizations : utilise <C-V> pour entrer le caractère utilisé {{{
 "https://www.reddit.com/r/vim/comments/2tvupe/azerty_keymapping/
 " parce que # est l'opposé de * et ù est a coté de *
