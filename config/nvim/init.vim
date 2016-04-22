@@ -1,5 +1,8 @@
 " vim: set noet fenc=utf-8 ff=unix sts=0 sw=2 ts=8 fdm=marker :
 " to debug vimscript, use :mess to display error messages
+map <C-D> <C-]>
+" map <C-D> :tag<CR>
+map <D-b> :echom "hello papy"
 
 "$NVIM_PYTHON_LOG_FILE
 " to test startup time
@@ -39,6 +42,7 @@ call plug#begin(s:nvimdir.'/plugged')
 " Plug 'bronson/vim-trailing-whitespace' " :FixTrailingWhitespace
 " Plug 'tkhoa2711/vim-togglenumber' " by default mapped to <leader>n
 Plug 'dzeban/vim-log-syntax'
+Plug 'Yggdroot/indentLine'
 " {{{ Autocompletion and linting 
 Plug 'Valloric/YouCompleteMe' , { 'frozen': 1,  'do': './install.py --system-libclang --clang-completer' }
 " }}}
@@ -1034,8 +1038,6 @@ map <Leader>s :setlocal spell spelllang=en_us<CR>
 "nmap <Tab> >>
 "vmap <S-Tab> <gv
 "vmap <Tab> >gv
-
-
 
 " azerty customizations : utilise <C-V> pour entrer le caractère utilisé {{{
 "https://www.reddit.com/r/vim/comments/2tvupe/azerty_keymapping/
