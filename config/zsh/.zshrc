@@ -145,7 +145,7 @@ export SYSCONFDIR="$XDG_CONFIG_HOME"
 
 #zle -N zle-line-init
 
-eval "`dircolors -b "$XDG_CONFIG_HOME/dircolors/dircolors.ansi-dark"`"
+eval "`dircolors -b "$XDG_CONFIG_HOME/dircolors/solarized.ansi-dark"`"
 
 
 
