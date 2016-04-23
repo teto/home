@@ -42,7 +42,7 @@ call plug#begin(s:nvimdir.'/plugged')
 " Plug 'bronson/vim-trailing-whitespace' " :FixTrailingWhitespace
 " Plug 'tkhoa2711/vim-togglenumber' " by default mapped to <leader>n
 Plug 'dzeban/vim-log-syntax'
-Plug 'Yggdroot/indentLine'
+Plug 'Yggdroot/indentLine',{ 'for': 'python' } 
 " {{{ Autocompletion and linting 
 Plug 'Valloric/YouCompleteMe' , { 'frozen': 1,  'do': './install.py --system-libclang --clang-completer' }
 " }}}

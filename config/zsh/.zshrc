@@ -307,4 +307,4 @@ source "$FZF_PATH"/key-bindings.zsh
 
 
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
