@@ -1,4 +1,5 @@
 # https://wiki.archlinux.org/index.php/readline
 set editing-mode vi
-
+# Ctrl X + Ctrl E opens vim with cmd
+# edit-and-execute-command
 # set keymap vi

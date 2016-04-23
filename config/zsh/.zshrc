@@ -86,7 +86,7 @@ zle -N self-insert url-quote-magic
 
 #}}}
 
-# Bindings {{{1
+# Bindings ZLE commands {{{1
 # To see the key combo you want to use just do:
 # cat > /dev/null
 # And press it
@@ -100,9 +100,15 @@ bindkey "[A"      history-search-backward              # up arrow
 bindkey "^D"      delete-char                          # ctrl-d
 bindkey "^F"      forward-char                         # ctrl-f
 bindkey "^B"      backward-char                        # ctrl-b
+
 bindkey -v   # Default to standard vi bindings, regardless of editor string
 
+zle -N edit-command-line
+
+# Press ESC-v to edit current line in your favorite $editor
+bindkey -M vicmd v edit-command-line
 bindkey '^R' history-incremental-search-backward
+
 #bindkey "q" push-line
 #bindkey 'q' push-line-or-edit
 bindkey '^A' push-line-or-edit
@@ -139,7 +145,7 @@ export SYSCONFDIR="$XDG_CONFIG_HOME"
 
 #zle -N zle-line-init
 
-
+eval "`dircolors -b "$XDG_CONFIG_HOME/dircolors/dircolors.ansi-dark"`"
 
 
 
@@ -149,6 +155,8 @@ export SYSCONFDIR="$XDG_CONFIG_HOME"
 autoload -Uz add-zsh-hook
 autoload -Uz vcs_info
 autoload -U compinit && compinit
+autoload -z edit-command-line
+
 zmodload -i zsh/complist
 
 
