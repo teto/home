@@ -314,5 +314,5 @@ source "$FZF_PATH"/key-bindings.zsh
 # }}}
 
 
-# REMOVE
+
 # [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
