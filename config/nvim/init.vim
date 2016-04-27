@@ -42,7 +42,8 @@ call plug#begin(s:nvimdir.'/plugged')
 " Plug 'bronson/vim-trailing-whitespace' " :FixTrailingWhitespace
 " Plug 'tkhoa2711/vim-togglenumber' " by default mapped to <leader>n
 Plug 'dzeban/vim-log-syntax'
-Plug 'Yggdroot/indentLine',{ 'for': 'python' } 
+" Plug 'Yggdroot/indentLine',{ 'for': 'python' }  " draw verticals indents but
+" seems greedy
 " {{{ Autocompletion and linting 
 Plug 'Valloric/YouCompleteMe' , { 'frozen': 1,  'do': './install.py --system-libclang --clang-completer' }
 " }}}
@@ -919,7 +920,6 @@ let g:signify_mapping_toggle = '<leader>gt'
   let g:auto_save_events = ['FocusLost']
   "let g:auto_save_events = ['CursorHold', 'FocusLost']
 " Put this in vimrc, add custom commands in the function.
-" deprecated
 function! AutoSaveOnLostFocus()
   " to solve pb with Airline https://github.com/vim-airline/vim-airline/issues/1030#issuecomment-183958050
    
@@ -972,6 +972,7 @@ set diffopt=filler,vertical " default behavior for diff
 nnoremap Y y$
 
 
+"nnoremap coa :AutoSaveToggle<CR>
 
 " search items in location list (per window)
 nnoremap <F1> :lprev<CR>
@@ -1039,12 +1040,6 @@ map <Leader>s :setlocal spell spelllang=en_us<CR>
 "vmap <S-Tab> <gv
 "vmap <Tab> >gv
 
-
-set hidden 
-
-" inoremap :echom 'hello world'
-noremap <D-b> :echom 'hello world'<CR>
-
 " azerty customizations : utilise <C-V> pour entrer le caractère utilisé {{{
 "https://www.reddit.com/r/vim/comments/2tvupe/azerty_keymapping/
 " parce que # est l'opposé de * et ù est a coté de *
@@ -1056,6 +1051,8 @@ noremap             <C-k>           {
 "'.'
 "set shada=!,'50,<1000,s100,:0,n/home/teto/.cache/nvim/shada
 
+" added 'n' to defaults to allow wrapping lines to overlap with numbers
+set cpoptions="aABceFsn"
 " nvim specific configuration {{{
 if has("nvim")
   "set shada=!,'50,<1000,s100,:0,n$XDG_CACHE_HOME/nvim/shada

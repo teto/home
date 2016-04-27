@@ -1,9 +1,5 @@
 # vim: set noet fenc=utf-8 ff=unix sts=0 sw=2 ts=8 fdm=marker: 
 
-
-
-PATH
-
 # XDG configuration {{{
 # Specs here:
 # http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html
