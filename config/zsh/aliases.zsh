@@ -1,15 +1,16 @@
 #  vim: set et fenc=utf-8 ff=unix sts=0 sw=4 ts=4 fdm=marker : 
 # Suffix aliases execute a command based on a file’s extension. Suffix aliases are used with the alias -s command.  Here’s my favorite feature of aliases in zsh.  By adding this line:
 # g => global , does not depend on position on line
-alias -s html=nvim
+alias -s html=qutebrowser
 alias -s json=nvim
-alias -s Vagrantfile=vim
+alias -s Vagrantfile=nvim
 alias -s rb=ruby
-alias -s png=xdg-open
+alias -s png=sxiv
 alias -s jpg=xdg-open
 alias -s gif=xdg-open
 alias -s avi=mpv
 alias -s mp3=mocp
+alias -s pdf=zathura
 
 
 ### Dictionary lookup {{{
@@ -51,7 +52,6 @@ alias set_time="dpkg-reconfigure tzdata"
 
 ### ls related updates {{{
 # I also export TIME_STYLE to change the output of this
-# {{{
 alias ls="ls --color=auto --time-style=iso"
 alias ll="ls -l" 
 alias la="ls -a"
@@ -75,7 +75,6 @@ alias q="qutebrowser"
 # Movement aliases {{{
 alias ..="cd .."
 alias ...="cd ../.."
-alias ....="cd ../../.."
 #}}}
 
 # vagrant {{{
@@ -107,6 +106,7 @@ alias dfh="df --human-readable"
 alias duh="du --human-readable"
 
 
+# todo add option to discard ENV ?!
 alias sv="sudo nvim"
 
 # Gestion du 'ls' : couleur & ne touche pas aux accents

@@ -4,9 +4,7 @@
 
 # PATH {{{
 #PATH="/usr/lib/w3m:$PATH"
-#PATH="$PATH:/home/teto/csvfix/csvfix/bin"
-PATH="$PATH:/home/teto/powerline/scripts"
-PATH="$PATH:/home/teto/mptcpanalyzer"
+# PATH="$PATH:/home/teto/mptcpanalyzer"
 PATH="$PATH:$HOME/.local/bin"
 PATH="$PATH:$HOME/dotfiles/bin"
 PATH="$PATH:$XDG_DATA_HOME/fzf/bin"
@@ -32,11 +30,10 @@ export JUPYTER_CONFIG_DIR=${XDG_CONFIG_HOME:-$HOME/.config}/jupyter
 
 # PYTHONPATH {{{
 
-PYTHONPATH="/home/teto/powerline"
-PYTHONPATH="$PYTHONPATH:$HOME/i3pystatus"
-pYTHONPATH="$PYTHONPATH:$HOME/powerline"
+# PYTHONPATH="$PYTHONPATH:$HOME/i3pystatus"
+# pYTHONPATH="$PYTHONPATH:$HOME/powerline"
 PYTHONPATH="$PYTHONPATH:$HOME/i3gen"
-PYTHONPATH="$PYTHONPATH:$HOME/analyzer"
+# PYTHONPATH="$PYTHONPATH:$HOME/analyzer"
 #PYTHONPATH="$PYTHONPATH:$HOME/python-keyring-lib"
 PYTHONPATH="$PYTHONPATH:$HOME/i3ipc-python"
 export PYTHONPATH
@@ -54,7 +51,7 @@ export MUTT="$XDG_CONFIG_HOME/mutt"
 export MAILDIR="$HOME/Maildir" 
 
 export EDITOR="nvim"
-export TERMINAL="urxvt"
+export TERMINAL="termite"
 
 
 
