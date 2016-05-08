@@ -3,10 +3,8 @@
 # OSD
 dunst&
 #owncloud&
-volumeicon& 
+# volumeicon& 
 compton&
-
-#firefox &
 
 ## Set startup volume
 # set volume
@@ -20,4 +18,3 @@ compton&
 #i3-msg layout tabbed
 #urxvt256c -name mail -e bash -c "mutt" &
 #dunst-checkmail&
-rofi -pid $XDG_CACHE_HOME/rofi.pid &

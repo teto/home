@@ -5,9 +5,9 @@
 # PATH {{{
 #PATH="/usr/lib/w3m:$PATH"
 # PATH="$PATH:/home/teto/mptcpanalyzer"
-PATH="$PATH:$HOME/.local/bin"
-PATH="$PATH:$HOME/dotfiles/bin"
-PATH="$PATH:$XDG_DATA_HOME/fzf/bin"
+PATH="$HOME/.local/bin:$PATH"
+PATH="$HOME/dotfiles/bin:$PATH"
+PATH="$XDG_DATA_HOME/fzf/bin:$PATH"
 
 # set PATH so it includes user's private bin if it  exists
 if [ -d "$HOME/bin" ] ; then
