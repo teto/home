@@ -150,7 +150,7 @@ bindsym $mod+Shift+Return exec --no-startup-id ~/.i3/fork_term.sh
 bindsym $mod+Shift+A kill
 
 # start dmenu (a program launcher)
-#bindsym $mod+d exec j4-dmenu-desktop
+bindsym $mod+Tab exec "rofi -modi 'run,DRun,window,ssh' -show run"
 #bindsym $mod+eacute exec j4-dmenu-desktop --dmenu='rofi -modi "run,ssh,dmenu" -dmenu'
 #dmenu_run -
 
@@ -426,3 +426,5 @@ bindsym XF86Display exec ~/.i3/monitors.sh
 #exec urxvtc -name irclient -e irssi
 
 exec ~/.i3/autostart
+#https://faq.i3wm.org/question/2155/how-can-i-use-autostart-desktop-files-in-i3/
+# exec dex -ae i3

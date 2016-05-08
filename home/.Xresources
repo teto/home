@@ -2,10 +2,11 @@
 ! It should be best to use ~/.Xresources instead
 !http://superuser.com/questions/243914/xresources-or-xdefaults
 
-#define PREFIX URxvt
-#include "Xresources.d/solarized.dark"
-#include "Xresources.d/urxvt"
-#include "Xresources.d/rofi/turquoise"
+/* You need to install https://github.com/DaveDavenport/rofi-themes/ */
+/* #define PREFIX URxvt */
+/* #include "Xresources.d/solarized.dark" */
+/* #include "Xresources.d/urxvt" */
+#include "roti-themes/Themes/lb.theme"
 
 
 !URxvt.termName: rxvt-unicode-256color

@@ -74,6 +74,7 @@ DCE_PATH="$DCE_PATH:$HOME/ntpoff/ntpd"
 export DCE_PATH
 
 # for ns3 testing
-export DCE_FOLDER="$HOME/dce"
-export NS3_FOLDER="$HOME/ns3off"
+export DCE_FOLDER="$HOME/dce2"
+export NS3_FOLDER="$HOME/ns3off2"
+export NS3_TESTING="$HOME/ns3testing"
 # }}}
