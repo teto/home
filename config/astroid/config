@@ -1,7 +1,7 @@
 {
     "astroid": {
         "config": {
-            "version": "3"
+            "version": "5"
         },
         "notmuch_config": "\/home\/teto\/.config\/notmuch\/notmuchrc",
         "debug": {
@@ -34,12 +34,13 @@
         }
     },
     "editor": {
+        "cmd": "gvim -geom 10x10 --servername %2 --socketid %3 -f -c 'set ft=mail' '+set fileencoding=utf-8' '+set ff=unix' '+set enc=utf-8' %1",
+        "charset": "utf-8",
+        "save_draft_on_force_quit": "true",
         "gvim": {
             "cmd": "gvim",
             "args": "-f -c 'set ft=mail' '+set fileencoding=utf-8' '+set ff=unix' '+set enc=utf-8'"
-        },
-        "charset": "utf-8",
-        "save_draft_on_force_quit": "true"
+        }
     },
     "mail": {
         "reply": {
@@ -92,7 +93,10 @@
             "save_sent": "false",
             "save_sent_to": "\/home\/root\/Mail\/sent\/cur\/",
             "additional_sent_tags": "",
-            "save_drafts_to": "\/home\/root\/Mail\/drafts\/"
+            "save_drafts_to": "\/home\/root\/Mail\/drafts\/",
+            "signature_file": "",
+            "signature_default_on": "true",
+            "signature_attach": "false"
         }
     },
     "startup": {

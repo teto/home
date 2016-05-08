@@ -1,7 +1,5 @@
 ! Run rofi  -dump-xresources to see the possible values
-/*rofi.key-window: F2*/
-rofi.key-run: Alt+Tab
-/*rofi.key-ssh: Alt+F3*/
+! rofi.key-run: Alt+Tab
 
 
 rofi.kb-mode-previous: Alt+Left
@@ -9,7 +7,7 @@ rofi.kb-mode-next:	Alt+Right, Alt+Tab
 
 !Means it is at center
 rofi.loc: 0
-rofi.opacity: 90
+!rofi.opacity: 90
 rofi.width: 50
 rofi.columns: 1
 rofi.font: SourceCodePro 9
@@ -18,11 +16,6 @@ rofi.modi:       run,DRun,window,ssh,
 /* see to integrate teiler */
 rofi.sidebar-mode: true
 
-rofi.fg: #1aa
-rofi.bg: #333
-rofi.hlfg: #333
-rofi.hlbg: #1aa
-rofi.bc: #1aa
 rofi.bw: 2
 rofi.padding: 2
 rofi.yoffset: -2
