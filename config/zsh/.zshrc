@@ -66,6 +66,8 @@ setopt auto_menu # show completion menu on successive tab press. needs unsetop m
 setopt auto_name_dirs # any parameter that is set to the absolute name of a directory immediately becomes a name for that directory
 setopt complete_in_word # Allow completion from within a word/phrase
 
+setopt dotglob # add hidden files to glob results
+
 unsetopt menu_complete # do not autoselect the first completion entry
 
 # ===== Correction
