@@ -35,7 +35,8 @@ mail:
 	mkdir -p ${MAILDIR}/gmail/.notmuch
 	ln -s ${HOME}/dotfiles/hooks_pro ${MAILDIR}/lip6/.notmuch/hooks 
 	ln -s ${HOME}/dotfiles/hooks_perso ${MAILDIR}/gmail/.notmuch/hooks 
-
+	notmuch --config=${XDG_CONFIG_HOME}/notmuch/notmuchrc new 
+	notmuch --config=${XDG_CONFIG_HOME}/notmuch/notmuchrc_pro new 
 etc:
 	sudo cp etc/profile.d/* /etc/profile.d/
 

@@ -2,9 +2,7 @@
 
 # TODO replace with compton
 #xcompmgr&
-xrdb -override $HOME/.Xresources
 
-#. "$HOME/.zsh/.zshenv"
 # launch mpd in user mode
 mpd &
 
@@ -14,9 +12,14 @@ mpd &
 # Enable zapping (C-A-<Bksp> kills X)
 setxkbmap -option terminate:ctrl_alt_bksp
 
+export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
+source "$HOME/.zshenv"
+
 # alsamixer in systray
 # regenerate i3 config
-"$HOME/.config/i3/build_config.sh"
+"$XDG_CONFIG_HOME/i3/build_config.sh"
+
+xrdb -I"$HOME" "$HOME/.Xresources"
 
 # Set background color
 xsetroot -solid "#333333"
@@ -33,7 +36,6 @@ parcellite&
 # network manager systray icon
 #nm-applet&
 xmodmap ~/.Xmodmap
-# remap caps lock to escape (cool for vim)
-#xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'           
+
 # should be loaded automatically
 # Please see http://i3wm.org/docs/userguide.html for a complete reference! 

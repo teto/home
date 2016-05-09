@@ -2,25 +2,9 @@
 ! It should be best to use ~/.Xresources instead
 !http://superuser.com/questions/243914/xresources-or-xdefaults
 
-#define PREFIX URxvt
-#include "Xresources.d/solarized.dark"
-#include "Xresources.d/urxvt"
-#include "Xresources.d/rofi/turquoise"
+!You need to install https://github.com/DaveDavenport/rofi-themes/ */
+!#include "Xresources.d/solarized.dark"
+! #include "Xresources.d/urxvt" */
+*color0: #d70a53 
+#include "rofi-themes/Themes/lb.theme"
 
-
-!URxvt.termName: rxvt-unicode-256color
-
-!URxvt*saveLines:        10000
-!!URxvt.depth: 32
-!URxvt.urgentOnBell: true
-
-!!
-!URxvt*perl-lib : /home/teto/.urxvt/perl
-!URxvt*perl-ext-common: default,matcher
-!URxvt*scrollbar: false
-!URxvt.urlLauncher: firefox
-!URxvt.matcher.button: 2
-!! Disables manua l encoding
-!URxvt.iso14755: false
-!URxvt.iso14755_52: false
-!URxvt.background: rgba:1111/1111/1111/dddd

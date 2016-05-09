@@ -54,3 +54,6 @@ Running tests:
 - Invalid test name: cannot contain any of '"/\|?': Check that process "test-empty(ns3)" completes correctly.
 
 ./waf --run "test-runner --test-name=netlink-socket --verbose"
+
+
+ CXXFLAGS="-g -std=c++11 -Wno-deprecated-declarations" ./waf configure --with-ns3=$HOME/ns3off/install

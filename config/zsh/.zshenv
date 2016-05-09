@@ -5,9 +5,9 @@
 # PATH {{{
 #PATH="/usr/lib/w3m:$PATH"
 # PATH="$PATH:/home/teto/mptcpanalyzer"
-PATH="$PATH:$HOME/.local/bin"
-PATH="$PATH:$HOME/dotfiles/bin"
-PATH="$PATH:$XDG_DATA_HOME/fzf/bin"
+PATH="$HOME/.local/bin:$PATH"
+PATH="$HOME/dotfiles/bin:$PATH"
+PATH="$XDG_DATA_HOME/fzf/bin:$PATH"
 
 # set PATH so it includes user's private bin if it  exists
 if [ -d "$HOME/bin" ] ; then
@@ -74,6 +74,7 @@ DCE_PATH="$DCE_PATH:$HOME/ntpoff/ntpd"
 export DCE_PATH
 
 # for ns3 testing
-export DCE_FOLDER="$HOME/dce"
-export NS3_FOLDER="$HOME/ns3off"
+export DCE_FOLDER="$HOME/dce2"
+export NS3_FOLDER="$HOME/ns3off2"
+export NS3_TESTING="$HOME/ns3testing"
 # }}}

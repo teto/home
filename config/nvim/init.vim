@@ -290,8 +290,6 @@ Plug 'lervag/vimtex', {'for': 'tex'} " so far the best one
 call plug#end()
 
 
-"nnoremap <silent> <leader>k :call InterestingWords('n')<cr>
-"nnoremap <silent> <leader>K :call UncolorAllWords()<cr>
 
 " K works in vim files
 autocmd FileType vim setlocal keywordprg=:help
@@ -586,6 +584,26 @@ let g:diminactive_use_colorcolumn = 1
 let g:diminactive_use_syntax = 0
 let g:diminactive_enable_focus = 0
 "}}}
+
+" i3 autocommands {{{
+" todo when opening i3 files, set makeprg to build_config
+" augroup i3
+" autcmd! 
+
+"   autocmd BufWinEnter  call ResCur()
+" augroup END
+
+" }}}
+
+" interesting words {{{
+"nnoremap <silent> <leader>k :call InterestingWords('n')<cr>
+"nnoremap <silent> <leader>K :call UncolorAllWords()<cr>
+" let g:terminal_color_0 = "#202020"
+" let g:interestingWordsTermColors = ['#202020', '121', '211', '137', '214', '222']
+" let g:interestingWordsTermColors = ['#aeee00', '#ff0000', '#0000ff', '#b88823', '#ffa724', '#ff2c4b']
+
+" }}}
+
 " to remove timeout when changing modes
 if ! has('gui_running')
     set ttimeoutlen=10
