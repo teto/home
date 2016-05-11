@@ -25,6 +25,7 @@ bindsym $mod+shift+q exec dotfiles/bin/i3-list-windows --filter qutebrowser
 # mode border {
 
 
+hide_edge_borders smart
 
 # set_from_resource $<name> <resource_name> <fallback>
 set_from_resource $black i3wm.color0 #000000

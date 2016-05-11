@@ -42,6 +42,8 @@ call plug#begin(s:nvimdir.'/plugged')
 " Plug 'bronson/vim-trailing-whitespace' " :FixTrailingWhitespace
 " Plug 'tkhoa2711/vim-togglenumber' " by default mapped to <leader>n
 Plug 'dzeban/vim-log-syntax'
+Plug 'timeyyy/orchestra.nvim'
+Plug 'timeyyy/clackclack.symphony'
 " Plug 'Yggdroot/indentLine',{ 'for': 'python' }  " draw verticals indents but
 " seems greedy
 " {{{ Autocompletion and linting 
@@ -159,7 +161,8 @@ let g:sayonara_confirm_quit = 0
 
 
 " {{{ fuzzers
-Plug 'junegunn/fzf', { 'dir': $XDG_DATA_HOME . '/fzf', 'do': './install --all --64' }
+" Plug 'junegunn/fzf', { 'dir': $XDG_DATA_HOME . '/fzf', 'do': './install --completion --key-bindings --64' }
+Plug 'junegunn/fzf', { 'dir': $XDG_DATA_HOME . '/fzf', 'do': './install --all --64'}
 
 " Many options available :
 " https://github.com/junegunn/fzf.vim
@@ -1057,6 +1060,8 @@ map <Leader>s :setlocal spell spelllang=en_us<CR>
 "nmap <Tab> >>
 "vmap <S-Tab> <gv
 "vmap <Tab> >gv
+" call orchestra#prelude()
+" call orchestra#set_tune('clackclack')
 
 " azerty customizations : utilise <C-V> pour entrer le caractère utilisé {{{
 "https://www.reddit.com/r/vim/comments/2tvupe/azerty_keymapping/
