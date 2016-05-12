@@ -4,7 +4,11 @@
 dunst&
 #owncloud&
 # volumeicon& 
-compton&
+
+
+# for now generates pb with i3 next
+# loads in $XDG_CON/compton.conf
+# compton&
 
 ## Set startup volume
 # set volume
