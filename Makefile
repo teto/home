@@ -1,7 +1,7 @@
 SHELL = bash
 # provide a default
 XDG_CONFIG_HOME ?= $(HOME)/.config
-XDG_CACHE_HOME ?= $(XDG_CACHE_HOME)/.cache
+XDG_CACHE_HOME ?= $(HOME)/.cache
 MAILDIR ?= $(HOME)/Maildir
 
 .PHONY: config etc mail
@@ -18,7 +18,7 @@ zsh:
 
 pip:
 	wget https://bootstrap.pypa.io/get-pip.py /tmp/
-	python3.5 get-pip.py --user
+	python3.5 /tmp/get-pip.py --user
 
 keyring:
 	echo "Setup keyrings"
@@ -28,7 +28,7 @@ keyring:
 
 cache:
 	#mkdir -p $(shell echo "${XDG_CACHE_HOME:-$HOME/.cache}/less")
-	mkdir -p ${XDG_CACHE_HOME}/less
+	mkdir -p ${XDG_CACHE_HOME}/less ${XDG_CACHE_HOME}/mptcpanalyzer
 
 mail:
 	mkdir -p ${MAILDIR}/lip6/.notmuch

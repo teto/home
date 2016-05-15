@@ -54,6 +54,11 @@ export EDITOR="nvim"
 export TERMINAL="termite"
 
 
+# FZF {{{
+export FZF_DEFAULT_OPTS=" --exact"
+#--color=
+# }}}
+
 
 # for DCE/ns3 experiments {{{
 # remove automatic access to kernel since we may want to look at it

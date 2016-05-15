@@ -20,6 +20,7 @@ bindsym super+left exec "xdotool getactivewindow key -clearmodifiers --window %1
 bindsym $mod+shift+b border toggle
 bindsym $mod+shift+q exec dotfiles/bin/i3-list-windows --filter qutebrowser
 
+for_window [urgent=latest] exec notify-send "Hello world"
 
 # bindsym $mod+shift+e exec /home/teto/i3-easyfocus/easyfocus
 # mode border {

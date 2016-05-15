@@ -56,7 +56,8 @@ alias ls="ls --color=auto --time-style=iso"
 alias ll="ls -l" 
 alias la="ls -a"
 alias lla="ls -la"
-alias llt="ls -lt"
+# -r makes recent changes appear last, more practical
+alias llt="ls -ltr"
 # }}}
 
 # oftenly used programs {{{
@@ -108,6 +109,11 @@ alias duh="du --human-readable"
 
 # todo add option to discard ENV ?!
 alias sv="sudo nvim"
+# vim
+alias ec='nvim $XDG_CONFIG_HOME/'
+
+alias pipu='python3.5 -mpip install -U --user '
+alias pydev='python3.5 setup.py develop --user'
 
 # Gestion du 'ls' : couleur & ne touche pas aux accents
 alias ls='ls --classify --tabsize=0 --literal --color=auto --show-control-chars --human-readable'
