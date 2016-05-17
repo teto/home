@@ -63,8 +63,11 @@ export FZF_DEFAULT_OPTS=" --exact"
 # for DCE/ns3 experiments {{{
 # remove automatic access to kernel since we may want to look at it
 # in $HOME/libos-tools
+# created this kind of problem :/
+# <3>net/mptcp/mptcp_ctrl.c: mptcp_add_sock: token 0x635c914e pi 2, src_addr:0.0.0.0:0 dst_addr:0.0.0.0:0, cnt_subflows now 2
 DCE_PATH="$HOME/libos-tools" # for libsim-linux.so (modified version of libos-tools can create a liblinux.so)
-#DCE_PATH="$HOME/mptcpoff" # for liblinux.so
+# so reverted back to plain old net-next-sim
+# DCE_PATH="$HOME/mptcpoff" # for liblinux.so
 DCE_PATH="$DCE_PATH:$HOME/iproute2/ip" # for 'ip' program
 DCE_PATH="$DCE_PATH:$HOME/iperf3/src"
 DCE_PATH="$DCE_PATH:$HOME/iperf2/src"

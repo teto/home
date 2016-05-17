@@ -203,7 +203,7 @@ gui.auto_scroll_on_expand: TRUE
 
 # Packet list hidden columns
 # List all columns to hide in the packet list.
-gui.column.hidden: %Cus:mptcp.stream:0:R,%Cus:mptcp.app_latency:0:R,%Cus:ip.src:1:R,%Cus:ip.dst:1:R,%Cus:tcp.len:0:R,%Cus:tcp.options.mptcp.recvtok:0:R,%Cus:tcp.options.mptcp.expected_idsn:0:R,%Cus:tcp.options.mptcp.sendkey:0:R,%Cus:tcp.options.mptcp.datafin.flag:0:R,%Cus:tcp.options.mptcp.subflowseqno:0:R,%Cus:mptcp.stream:0:R,%p,%L,%Cus:tcp.options.mptcp.recvkey:0:R,%Cus:mptcp.analysis.mapping.reinjection:0:R
+gui.column.hidden: %At,%Cus:mptcp.stream:0:R,%Cus:mptcp.app_latency:0:R,%Cus:ip.src:1:R,%Cus:ip.dst:1:R,%Cus:tcp.options.mptcp.subflowseqno:0:R,%Cus:tcp.len:0:R,%Cus:tcp.options.mptcp.recvtok:0:R,%Cus:tcp.options.mptcp.expected_idsn:0:R,%Cus:tcp.options.mptcp.sendkey:0:R,%Cus:tcp.options.mptcp.datafin.flag:0:R,%Cus:tcp.options.mptcp.subflowseqno:0:R,%Cus:mptcp.stream:0:R,%p,%L,%Cus:tcp.options.mptcp.recvkey:0:R,%Cus:mptcp.analysis.mapping.reinjection:0:R
 
 # Packet list column format
 # Each pair of strings consists of a column title and its format
@@ -474,6 +474,14 @@ nameres.hosts_file_handling: TRUE
 # Resolve VLAN IDs to describing names. To do so you need a file called vlans in your user preference directory. Format of the file is:  "ID<Tab>Name" One line per VLAN.
 # TRUE or FALSE (case-insensitive)
 #nameres.vlan_name: FALSE
+
+# You must restart Wireshark for this change to take effect
+# TRUE or FALSE (case-insensitive)
+#nameres.load_smi_modules: FALSE
+
+# Some errors can be ignored. If unsure, set to false.
+# TRUE or FALSE (case-insensitive)
+#nameres.suppress_smi_errors: FALSE
 
 ####### Printing ########
 
@@ -2518,6 +2526,10 @@ nameres.hosts_file_handling: TRUE
 # TRUE or FALSE (case-insensitive)
 #ip.tso_support: TRUE
 
+# Whether to look up IP addresses in each GeoIP database we have loaded
+# TRUE or FALSE (case-insensitive)
+#ip.use_geoip: TRUE
+
 # Whether to interpret the originally reserved flag as security flag
 # TRUE or FALSE (case-insensitive)
 #ip.security_flag: FALSE
@@ -2533,6 +2545,10 @@ nameres.hosts_file_handling: TRUE
 # Whether the IPv6 summary line should be shown in the protocol tree
 # TRUE or FALSE (case-insensitive)
 #ipv6.summary_in_tree: TRUE
+
+# Whether to look up IPv6 addresses in each GeoIP database we have loaded
+# TRUE or FALSE (case-insensitive)
+#ipv6.use_geoip: TRUE
 
 # Whether to check that all RPL Source Routing Headers adhere to RFC 6554
 # TRUE or FALSE (case-insensitive)
@@ -5160,6 +5176,10 @@ tcp.relative_sequence_numbers: FALSE
 # Determines time between tap updates
 # A decimal number
 #statistics.update_interval: 3000
+
+# Determines maximum height of RTP Player window
+# A decimal number
+#statistics.rtp_player_max_visible: 4
 
 # If enabled burst rates will be calcuted for statistics that use the stats_tree system. Burst rates are calculated over a much shorter time interval than the rate column.
 # TRUE or FALSE (case-insensitive)

@@ -1,3 +1,6 @@
+To run from build directory:
+WIRESHARK_RUN_FROM_BUILD_DIRECTORY=1 ./run/wireshark
+
 === build with cmake (advised)==
 
 On UBUNTU, it's possible that wireshark doesn't find lua else wireshark relies on lua.pc to find it
