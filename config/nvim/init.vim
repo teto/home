@@ -107,7 +107,10 @@ let g:startify_disable_at_vimenter = 0
 let g:startify_session_dir = $XDG_DATA_HOME.'/nvim/sessions'
 let g:startify_bookmarks = [
       \ {'i': $XDG_CONFIG_HOME.'/i3/config.main'},
-      \ {'z': $XDG_CONFIG_HOME.'/zsh/.zshenv'},
+      \ {'z': $XDG_CONFIG_HOME.'/zsh/'},
+      \ {'q': $XDG_CONFIG_HOME.'/qutebrowser/qutebrowser.conf'},
+      \ {'m': $XDG_CONFIG_HOME.'/mptcpanalyzer/config'},
+      \ {'n': $XDG_CONFIG_HOME.'/ncmpcpp/config'},
       \ ]
 let g:startify_files_number = 10
 let g:startify_session_autoload = 1
@@ -185,8 +188,24 @@ let g:fzf_action = {
 " - down / up / left / right
 " - window (nvim only)
 let g:fzf_layout = { 'down': '~40%' }
+
 " For Commits and BCommits to customize the options used by 'git log':
 let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
+
+" Customize fzf colors to match your color scheme
+" let g:fzf_colors = \ { 'fg':      ['fg', 'Normal'],
+"   \ 'bg':      ['bg', 'Normal'],
+"   \ 'hl':      ['fg', 'Comment'],
+"   \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+"   \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+"   \ 'hl+':     ['fg', 'Statement'],
+"   \ 'info':    ['fg', 'PreProc'],
+"   \ 'prompt':  ['fg', 'Conditional'],
+"   \ 'pointer': ['fg', 'Exception'],
+"   \ 'marker':  ['fg', 'Keyword'],
+"   \ 'spinner': ['fg', 'Label'],
+"   \ 'header':  ['fg', 'Comment'] 
+" }
 
 " Advanced customization using autoload functions
 "autocmd VimEnter * command! Colors
@@ -703,7 +722,6 @@ let g:ycm_auto_trigger = 1
 let g:ycm_error_symbol = ">>" " used to signal errors in gutter
 let g:ycm_warning_symbol = '!' " warn in gutter TODO use unicode chars
 let g:ycm_show_diagnostics_ui = 1 " show info in gutter
-" g:ycm_show_diagnostics_ui=1
 "let g:ycm_server_use_vim_stdout = 1
 "let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_key_invoke_completion = '<C-Space>'

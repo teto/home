@@ -1,4 +1,4 @@
-# Configuration file for Wireshark 2.1.0.
+# Configuration file for Wireshark 2.1.0-git.
 #
 # This file is regenerated each time preferences are saved within
 # Wireshark. Making manual changes should be safe, however.
@@ -100,7 +100,7 @@ gui.fileopen.dir: /home/teto/pcaps/mptcp167.1407349533.bmL
 
 # The path to the webbrowser (Ex: mozilla)
 # A string
-#gui.webbrowser: /usr/bin/xdg-open %s
+#gui.webbrowser: 
 
 # Check for updates (Windows only)
 # TRUE or FALSE (case-insensitive)
@@ -203,7 +203,7 @@ gui.auto_scroll_on_expand: TRUE
 
 # Packet list hidden columns
 # List all columns to hide in the packet list.
-gui.column.hidden: %Cus:mptcp.stream:0:R,%Cus:mptcp.app_latency:0:R,%Cus:ip.src:1:R,%Cus:ip.dst:1:R,%Cus:tcp.options.mptcp.subflowseqno:0:R,%Cus:tcp.len:0:R,%Cus:tcp.options.mptcp.recvtok:0:R,%Cus:tcp.options.mptcp.expected_idsn:0:R,%Cus:tcp.options.mptcp.sendkey:0:R,%Cus:tcp.options.mptcp.datafin.flag:0:R,%Cus:tcp.options.mptcp.subflowseqno:0:R,%Cus:mptcp.stream:0:R,%p,%L,%Cus:tcp.options.mptcp.recvkey:0:R,%Cus:mptcp.analysis.mapping.reinjection:0:R,%m
+gui.column.hidden: %At,%Cus:mptcp.stream:0:R,%Cus:mptcp.app_latency:0:R,%Cus:ip.src:1:R,%Cus:ip.dst:1:R,%Cus:tcp.options.mptcp.subflowseqno:0:R,%Cus:tcp.len:0:R,%Cus:tcp.options.mptcp.recvtok:0:R,%Cus:tcp.options.mptcp.expected_idsn:0:R,%Cus:tcp.options.mptcp.sendkey:0:R,%Cus:tcp.options.mptcp.datafin.flag:0:R,%Cus:tcp.options.mptcp.subflowseqno:0:R,%Cus:mptcp.stream:0:R,%p,%L,%Cus:tcp.options.mptcp.recvkey:0:R,%Cus:mptcp.analysis.mapping.reinjection:0:R
 
 # Packet list column format
 # Each pair of strings consists of a column title and its format
@@ -463,10 +463,6 @@ nameres.network_name: TRUE
 # TRUE or FALSE (case-insensitive)
 nameres.use_external_name_resolver: FALSE
 
-# Enable concurrent DNS name resolution. Only applies when network name resolution is enabled. You probably want to enable this.
-# TRUE or FALSE (case-insensitive)
-#nameres.concurrent_dns: TRUE
-
 # The maximum number of DNS requests that may be active at any time. A large value (many thousands) might overload the network or make your DNS server behave badly.
 # A decimal number
 #nameres.name_resolve_concurrency: 500
@@ -478,6 +474,14 @@ nameres.hosts_file_handling: TRUE
 # Resolve VLAN IDs to describing names. To do so you need a file called vlans in your user preference directory. Format of the file is:  "ID<Tab>Name" One line per VLAN.
 # TRUE or FALSE (case-insensitive)
 #nameres.vlan_name: FALSE
+
+# You must restart Wireshark for this change to take effect
+# TRUE or FALSE (case-insensitive)
+#nameres.load_smi_modules: FALSE
+
+# Some errors can be ignored. If unsure, set to false.
+# TRUE or FALSE (case-insensitive)
+#nameres.suppress_smi_errors: FALSE
 
 ####### Printing ########
 
@@ -1665,6 +1669,18 @@ nameres.hosts_file_handling: TRUE
 # TRUE or FALSE (case-insensitive)
 #dns.desegment_dns_messages: TRUE
 
+# Specifies that decryption should be attempted on all packets, even if the session initialization wasn't captured.
+# TRUE or FALSE (case-insensitive)
+#dof.custom_dof_decrypt_all: FALSE
+
+# Specifies that operations should be tracked across multiple packets, providing summary lists. This takes time and memory.
+# TRUE or FALSE (case-insensitive)
+#dof.custom_dof_track_operations: FALSE
+
+# Limits the number of operations shown before and after the current operations
+# A decimal number
+#dof.custom_dof_track_operations_window: 5
+
 # Whether the DRDA dissector should reassemble messages spanning multiple TCP segments. To use this option, you must also enable "Allow subdissectors to reassemble TCP streams" in the TCP protocol settings.
 # TRUE or FALSE (case-insensitive)
 #drda.desegment: TRUE
@@ -2308,6 +2324,10 @@ nameres.hosts_file_handling: TRUE
 # A string denoting an positive integer range (e.g., "1-20,30-40")
 #http.tcp.port: 80,3128,3132,5985,8080,8088,11371,1900,2869,2710
 
+# SCTP Ports range
+# A string denoting an positive integer range (e.g., "1-20,30-40")
+#http.sctp.port: 80
+
 # SSL/TLS Ports range
 # A string denoting an positive integer range (e.g., "1-20,30-40")
 #http.ssl.port: 443
@@ -2418,6 +2438,10 @@ nameres.hosts_file_handling: TRUE
 # A decimal number
 #ilp.tcp.port: 7276
 
+# Whether to use heuristics for post-STARTTLS detection of encrypted IMAP conversations
+# TRUE or FALSE (case-insensitive)
+#imap.ssl_heuristic: TRUE
+
 # TCAP Subsystem numbers used for INAP
 # A string denoting an positive integer range (e.g., "1-20,30-40")
 #inap.ssn: 106,241
@@ -2502,6 +2526,10 @@ nameres.hosts_file_handling: TRUE
 # TRUE or FALSE (case-insensitive)
 #ip.tso_support: TRUE
 
+# Whether to look up IP addresses in each GeoIP database we have loaded
+# TRUE or FALSE (case-insensitive)
+#ip.use_geoip: TRUE
+
 # Whether to interpret the originally reserved flag as security flag
 # TRUE or FALSE (case-insensitive)
 #ip.security_flag: FALSE
@@ -2517,6 +2545,10 @@ nameres.hosts_file_handling: TRUE
 # Whether the IPv6 summary line should be shown in the protocol tree
 # TRUE or FALSE (case-insensitive)
 #ipv6.summary_in_tree: TRUE
+
+# Whether to look up IPv6 addresses in each GeoIP database we have loaded
+# TRUE or FALSE (case-insensitive)
+#ipv6.use_geoip: TRUE
 
 # Whether to check that all RPL Source Routing Headers adhere to RFC 6554
 # TRUE or FALSE (case-insensitive)
@@ -2756,9 +2788,9 @@ nameres.hosts_file_handling: TRUE
 # TRUE or FALSE (case-insensitive)
 #jxta.desegment: TRUE
 
-# Kafka broker's TCP port
-# A decimal number
-#kafka.tcp.port: 0
+# TCP Ports range
+# A string denoting an positive integer range (e.g., "1-20,30-40")
+#kafka.tcp.ports: 
 
 # Set the port for Kismet Drone/Server messages (if other than the default of 2502)
 # A decimal number
@@ -3122,7 +3154,7 @@ nameres.hosts_file_handling: TRUE
 # TRUE or FALSE (case-insensitive)
 #mbrtu.crc_verification: FALSE
 
-# Set the TCP port for encapsulated Modbus RTU packets
+# Set the TCP/UDP port for encapsulated Modbus RTU packets
 # A decimal number
 #mbrtu.tcp.port: 0
 
@@ -4777,6 +4809,10 @@ tcp.relative_sequence_numbers: FALSE
 # TRUE or FALSE (case-insensitive)
 #tcp.dissect_experimental_options_with_magic: TRUE
 
+# Collect and store process information retrieved from IPFIX dissector
+# TRUE or FALSE (case-insensitive)
+#tcp.display_process_info_from_ipfix: FALSE
+
 # Set the port for IPSEC/ISAKMP messages (typically 10000)
 # A decimal number
 #tcpencap.tcp.port: 0
@@ -5140,6 +5176,10 @@ tcp.relative_sequence_numbers: FALSE
 # Determines time between tap updates
 # A decimal number
 #statistics.update_interval: 3000
+
+# Determines maximum height of RTP Player window
+# A decimal number
+#statistics.rtp_player_max_visible: 4
 
 # If enabled burst rates will be calcuted for statistics that use the stats_tree system. Burst rates are calculated over a much shorter time interval than the rate column.
 # TRUE or FALSE (case-insensitive)

@@ -1,0 +1,23 @@
+lines.linewidth   : 1.0     # line width in points
+lines.linestyle   : -       # solid line
+lines.color       : red    # has no affect on plot(); see axes.prop_cycle
+lines.marker      : x    # the default marker
+lines.markersize  : 10            # markersize, in points
+lines.markerfacecolor  : red
+
+
+
+
+axes.titlesize : 10
+axes.labelsize : 20
+axes.prop_cycle    :  red #cycler('color', 'bgrcmyk')
+
+
+grid.color       :   black   # grid color
+grid.linestyle   :   :       # dotted
+grid.linewidth   :   0.5     # in points
+#grid.alpha       :   1.0     # transparency, between 0.0 and 1.0
+
+xtick.labelsize : 16
+ytick.labelsize : 16
+
