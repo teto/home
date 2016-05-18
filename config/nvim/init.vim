@@ -1077,9 +1077,12 @@ noremap             <C-k>           {
 " added 'n' to defaults to allow wrapping lines to overlap with numbers
 set cpoptions="aABceFsn"
 " nvim specific configuration {{{
+
+set termguicolors
 if has("nvim")
   "set shada=!,'50,<1000,s100,:0,n$XDG_CACHE_HOME/nvim/shada
   let g:netrw_home=$XDG_DATA_HOME.'/nvim'
+  "now ignored 
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
   let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 endif
