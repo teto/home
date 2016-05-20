@@ -203,7 +203,7 @@ gui.auto_scroll_on_expand: TRUE
 
 # Packet list hidden columns
 # List all columns to hide in the packet list.
-gui.column.hidden: %At,%Cus:mptcp.stream:0:R,%Cus:mptcp.app_latency:0:R,%Cus:ip.src:1:R,%Cus:ip.dst:1:R,%Cus:tcp.options.mptcp.subflowseqno:0:R,%Cus:tcp.len:0:R,%Cus:tcp.options.mptcp.recvtok:0:R,%Cus:tcp.options.mptcp.expected_idsn:0:R,%Cus:tcp.options.mptcp.sendkey:0:R,%Cus:tcp.options.mptcp.datafin.flag:0:R,%Cus:tcp.options.mptcp.subflowseqno:0:R,%Cus:mptcp.stream:0:R,%p,%L,%Cus:tcp.options.mptcp.recvkey:0:R,%Cus:mptcp.analysis.mapping.reinjection:0:R
+gui.column.hidden: %At,%Cus:mptcp.stream:0:R,%Cus:mptcp.app_latency:0:R,%Cus:ip.src:1:R,%Cus:ip.dst:1:R,%Cus:mptcp.ack:0:R,%Cus:tcp.options.mptcp.subflowseqno:0:R,%Cus:tcp.len:0:R,%Cus:tcp.options.mptcp.recvtok:0:R,%Cus:tcp.options.mptcp.expected_idsn:0:R,%Cus:tcp.options.mptcp.sendkey:0:R,%Cus:tcp.options.mptcp.datafin.flag:0:R,%Cus:tcp.options.mptcp.subflowseqno:0:R,%Cus:mptcp.stream:0:R,%p,%L,%Cus:tcp.options.mptcp.recvkey:0:R,%Cus:mptcp.analysis.mapping.reinjection:0:R
 
 # Packet list column format
 # Each pair of strings consists of a column title and its format
@@ -226,8 +226,9 @@ gui.column.format:
 	"dss_dsn", "%Cus:mptcp.dss.dsn:0:R",
 	"dss_length", "%Cus:tcp.options.mptcp.datalvllen:0:R",
 	"dssRawDSN", "%Cus:tcp.options.mptcp.rawdataseqno:0:R",
-	"RawDack", "%Cus:mptcp.ack:0:R",
+	"Dack", "%Cus:mptcp.ack:0:R",
 	"dack", "%Cus:mptcp.ack:0:R",
+	"rawdack", "%Cus:tcp.options.mptcp.rawdataack:0:R",
 	"DSS_ssn", "%Cus:tcp.options.mptcp.subflowseqno:0:R",
 	"seg len", "%Cus:tcp.len:0:R",
 	"recv token", "%Cus:tcp.options.mptcp.recvtok:0:R",
@@ -245,8 +246,7 @@ gui.column.format:
 	"sport", "%uS",
 	"dport", "%uD",
 	"flags", "%Cus:tcp.flags:0:R",
-	"reinjections", "%Cus:mptcp.analysis.mapping.reinjection:0:R",
-	"New Column", "%m"
+	"reinjections", "%Cus:mptcp.analysis.mapping.reinjection:0:R"
 
 ####### User Interface: Font ########
 
@@ -516,6 +516,10 @@ nameres.hosts_file_handling: TRUE
 # Look for dissectors that left some bytes undecoded.
 # TRUE or FALSE (case-insensitive)
 #protocols.enable_incomplete_dissectors_check: FALSE
+
+# TCP port used by source of IEC104, usually 2404
+# A decimal number
+#104apci.tcp.port: 2404
 
 # Use a registered heuristic sub-dissector to decode the data payload
 # TRUE or FALSE (case-insensitive)
@@ -1805,10 +1809,6 @@ nameres.hosts_file_handling: TRUE
 # One of: Attempt to guess, LLC multiplexed, Unspecified
 # (case-insensitive).
 #erf.aal5_type: Attempt to guess
-
-# Whether the FCS is present in Ethernet packets
-# TRUE or FALSE (case-insensitive)
-#erf.ethfcs: TRUE
 
 # When set, dissector will FORCE to decode directly Ethernet FrameSome vendor use fake ERSPAN frame (with not ERSPAN Header)
 # TRUE or FALSE (case-insensitive)
