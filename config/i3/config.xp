@@ -12,13 +12,12 @@ set $set_mark  /home/teto/.i3/set_marks.py
 bindsym --release button2 kill
 
 # test
-bindsym super+right exec "xdotool getactivewindow key -clearmodifiers --window %1 Ctrl+Shit+Tab"
-bindsym super+left exec "xdotool getactivewindow key -clearmodifiers --window %1 Ctrl+Tab"
+# bindsym super+right exec "xdotool getactivewindow key -clearmodifiers --window %1 Ctrl+Shit+Tab"
+# bindsym super+left exec "xdotool getactivewindow key -clearmodifiers --window %1 Ctrl+Tab"
 #bindsym control+h exec "xdotool getactivewindow key -clearmodifiers --window %1 BackSpace"
 
 # bindym $mod+shift+b mode border
-bindsym $mod+shift+b border toggle
-bindsym $mod+shift+q exec dotfiles/bin/i3-list-windows --filter qutebrowser
+# bindsym $mod+shift+q exec dotfiles/bin/i3-list-windows --filter qutebrowser
 
 for_window [urgent=latest] exec notify-send "Hello world"
 
@@ -45,22 +44,6 @@ bindsym $mod+button3 floating toggle
 bindsym button9 move left
 bindsym button8 move right
 
-bindsym $mod+shift+p mode mouse
-
-mode mouse {
-
-#xdotool mousemove --sync 1000 10
-#xdotool click 3
-#sleep 1
-#
-	bindsym $mod+Left exec	$(xdotool mousemove_relative --sync -- -15 0)
-	bindsym $mod+Right exec $(xdotool mousemove_relative --sync -- 15 0)
-	bindsym $mod+Down exec  $(xdotool mousemove_relative --sync -- 0 15)
-	bindsym $mod+Up   exec  $(xdotool mousemove_relative --sync -- 0 -15)
-#xdotool click 1
-	bindsym Escape mode "default"
-}
-
 #mode xp {
 	#bindsym Mod4+a [con_mark="a"] focus; mode "default";exec notify-send "a focused"; exec $set_mark --unmark
 	#bindsym Mod4+b [con_mark="b"] focus; mode "default";exec notify-send "b focused"; exec $set_mark  --unmark
@@ -76,11 +59,10 @@ mode mouse {
 #}
 
 # only available on i3-next
-show_marks yes
 
 # Tests for title_format
 # give the focused window a prefix
-bindsym $mod+Shift+g title_format "[test] %title"
+# bindsym $mod+Shift+g title_format "[test] %title"
 
 #for_window [class="(?i)firefox"] title_format "<span foreground='red'>%title</span>"
 #for_window [class="(?i)firefox"] title_format "<span foreground='red'>%title</span>"

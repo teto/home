@@ -1,16 +1,23 @@
-lines.linewidth   : 1.0     # line width in points
-lines.linestyle   : -       # solid line
+# vim: set filetype=xdefaults :
+lines.linewidth   : 0.0     # line width in points
+lines.linestyle   : None  # cycler('linestyle', ['--','-'])       # solid line
 lines.color       : red    # has no affect on plot(); see axes.prop_cycle
-lines.marker      : x    # the default marker
-lines.markersize  : 10            # markersize, in points
-lines.markerfacecolor  : red
+# lines.marker      : x    # the default marker
+# lines.markersize  : 10            # markersize, in points
+# lines.markerfacecolor  : red */
 
 
-
+# legend
+legend.fancybox    : True
 
 axes.titlesize : 10
 axes.labelsize : 20
-axes.prop_cycle    :  red #cycler('color', 'bgrcmyk')
+
+# you can set several cyclers !!!
+# cycler('color', 'rgb') + cycler('lw', [1, 2, 3])
+#  cycler('linestyle', ['-', '--', ':', '-.'])
+# WARN: cyclers have to be of the same length !
+axes.prop_cycle    :  cycler('color', 'bgrc') + cycler('linestyle', ['None', ' ', ':', '-.']) + cycler('marker', ['.', '.', 'x', 'x'])
 
 
 grid.color       :   black   # grid color

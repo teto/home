@@ -1,9 +1,12 @@
-#!/bin/bash
+#!/bin/sh
 folder="$HOME/.i3"
 
 #wallpaper="/home/teto/Images/route66.png"
-
-
+# if [ $# -gt 0 ];
+if [ $(i3 --version | grep -c gaps) -gt 0 ]
+then 
+	list="$folder/config.gaps "
+fi
 #generate screens variables with filename in parameter
 python3 "$folder/generate_monitors_config.py"  "$folder/config.monitors"
 
@@ -20,7 +23,7 @@ fi
 #list=$( find . -regex './config\..*' -print)
 #for config_part in $list; do
 
-#list="$folder/config.gaps "
+# list="$folder/config.gaps "
 list="${list:-} $folder/config.header $folder/config.xp $folder/config.audio  $folder/config.monitors $folder/config.colors $folder/config.mediakeys $folder/filters.config $folder/config.main "
 cat $list > "$folder/config"
 

@@ -1,14 +1,16 @@
 #########################################
 ### config.colors
 #########################################
-
-#
+# violet #C043C6
+# backup #d70a53
 # original client.border #d72f6b 
 # client .background 
-# class                 border  backgrd text    indicator
-client.focused          #d70a53 $client_bg #FFFF50
+# class                 border  backgrd text    indicator  child border
+client.focused          #C043C6 $client_bg #FFFF50
 client.focused_inactive #06090d #06090d #696f89 #090e14
 client.unfocused        #090e14 #090e14 #696f89 #090e14
 client.urgent           #870000 #870000 #ffffff #090e14
 client.background       $client_bg
 # client.background       #66ff33
+
+client.placeholder  #000000 #0c0c0c #ffffff #000000   #0c0c0c
