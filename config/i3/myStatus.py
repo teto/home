@@ -25,8 +25,8 @@ clock = status.register(
     format=[
         # ("%a %-d Format 1",'Europe/Dublin'),
         # "%a %-d %b %X ",
-        ("%a %-d %b %X", 'Europe/Paris'),
-        ("Format 0", 'Europe/London'),
+        (" %a %-d %b %X", 'Europe/Paris'),
+        (" Format 0", 'Europe/London'),
     ],
     on_leftclick="termite -e ikhal",
     # on_leftclick="xmessage toto",
@@ -69,7 +69,7 @@ status.register("temp",   format="{temp:.0f}°C",)
 # This would look like this:
 # Discharging 6h:51m
 status.register("battery",
-                format="{status}{remaining}",
+                format=" {status}{remaining}",
                 alert=True,
                 alert_percentage=5,
                 status={
@@ -132,7 +132,7 @@ status.register(
 
 #print("mdp on_lclick", mpd);
 
-alsa = status.register("alsa", mixer="Headphone", format="Headset")
+alsa = status.register("alsa", mixer="Headphone", format="")
 dpms = status.register("dpms", )
 
 alsa = status.register("alsa",

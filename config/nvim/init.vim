@@ -767,7 +767,10 @@ let g:airline#extensions#tabline#show_buffers = 1
 let g:airline#extensions#tabline#buffer_min_count =2
 let g:airline#extensions#tabline#buffer_idx_mode = 1
 
-let g:airline#extensions#tabline#show_tabs = 1
+let g:airline#extensions#tabline#buffers_label = 'b'
+
+let g:airline#extensions#tabline#tabs_label = 't'
+let g:airline#extensions#tabline#show_tabs = 0
 
 let g:airline#extensions#tabline#formatter = 'unique_tail'
 let g:airline_extensions = ['branch', 'tabline']
@@ -780,7 +783,7 @@ let g:airline#extensions#ycm#warning_symbol = 'W:'
 
 let g:airline#extensions#whitespace#enabled = 0
 let g:airline#extensions#whitespace#mixed_indent_algo = 2
-let g:airline#extensions#whitespace#checks = [ 'indent', 'trailing', 'long' ]
+" let g:airline#extensions#whitespace#checks = [ 'indent', 'trailing', 'long' ]
 "|neomake#statusline#LoclistStatus should be shown in warning section
 let g:airline_section_z = airline#section#create(['%{ObsessionStatus(''$'', '''')}'])
 nmap <leader>& <Plug>AirlineSelectTab1
@@ -790,7 +793,9 @@ nmap <leader>' <Plug>AirlineSelectTab4
 nmap <leader>( <Plug>AirlineSelectTab5
 nmap <leader>- <Plug>AirlineSelectTab6
 nmap <leader>è <Plug>AirlineSelectTab7
-
+nmap <leader>è <Plug>AirlineSelectTab7
+nmap <leader>_ <Plug>AirlineSelectTab8
+nmap <leader>ç <Plug>AirlineSelectTab9
 
 "}}}
 

@@ -19,10 +19,13 @@ https://git.lekensteyn.nl/peter/wireshark-notes/tree/sync-build.sh#n94
 
 exec --no-startup-id xautolock -time 5 -locker pixellock
 
+
+ -DCMAKE_INSTALL_PREFIX:
+
 $ mkdir -p debug
 $ cd debug
 $ CXXFLAGS="-Wno-unused-but-set-variable" cmake \
-        -G"Unix Makefiles" \
+        -G"Ninja" \
         -DENABLE_GTK3=0 \
         -DENABLE_PORTAUDIO=0 \
         -DENABLE_QT5=1 \
@@ -30,7 +33,7 @@ $ CXXFLAGS="-Wno-unused-but-set-variable" cmake \
         -DENABLE_KERBEROS=1 \
         -DENABLE_SBC=0 \
         -DENABLE_SMI=0 \
-        -DENABLE_GNUTLS=1 \
+        -DENABLE_GNUTLS=0 \
         -DENABLE_GCRYPT=1 \
         -DCMAKE_BUILD_TYPE=Debug \
         -DDISABLE_WERROR=1 \

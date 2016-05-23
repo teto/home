@@ -37,5 +37,9 @@ parcellite&
 #nm-applet&
 xmodmap ~/.Xmodmap
 
+if [ -a ~/.xsession_forthiscomputer.sh ];
+then
+	source ~/.xsession_forthiscomputer.sh
+fi
 # should be loaded automatically
 # Please see http://i3wm.org/docs/userguide.html for a complete reference! 

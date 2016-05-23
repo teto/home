@@ -12,7 +12,7 @@ rofi.width: 50
 rofi.columns: 1
 rofi.font: SourceCodePro 9
 rofi.fuzzy: true
-rofi.modi:       run,DRun,window,ssh,
+rofi.modi:       run,DRun,window,ssh,Layouts:/home/teto/.i3/list_layouts.sh
 /* see to integrate teiler */
 rofi.sidebar-mode: true
 
