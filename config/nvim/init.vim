@@ -32,7 +32,6 @@ autocmd BufReadPost *.doc,*.docx,*.rtf,*.odp,*.odt silent %!pandoc "%" -tplain -
 
 " 
 let mapleader = " "
-
 " to configure vim for haskell, refer to
 " http://yannesposito.com/Scratch/en/blog/Vim-as-IDE/
 
@@ -42,7 +41,8 @@ call plug#begin(s:nvimdir.'/plugged')
 " Plug 'bronson/vim-trailing-whitespace' " :FixTrailingWhitespace
 " Plug 'tkhoa2711/vim-togglenumber' " by default mapped to <leader>n
 Plug 'dzeban/vim-log-syntax'
-Plug 'wellle/targets.vim'
+Plug 'bfredl/nvim-ipy'  " adds the :IPython command
+Plug 'wellle/targets.vim' " Adds new motion targets ci{
 Plug 'timeyyy/orchestra.nvim' " to play some music on 
 Plug 'timeyyy/clackclack.symphony' " data to play with orchestra.vim
 " Plug 'Yggdroot/indentLine',{ 'for': 'python' }  " draw verticals indents but
