@@ -1,8 +1,8 @@
 # for_window [class="^.*"] border pixel 0
 # smart_gaps on
 
-gaps inner 20
-gaps outer 5
+gaps inner 0
+gaps outer 0
 
 set $mode_gaps Gaps: (o) outer, (i) inner
 set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)

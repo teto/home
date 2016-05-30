@@ -46,7 +46,7 @@ call plug#begin(s:nvimdir.'/plugged')
 " Plug 'tkhoa2711/vim-togglenumber' " by default mapped to <leader>n
 Plug 'dzeban/vim-log-syntax'
 
-Plug 'wellle/targets.vim'
+Plug 'wellle/targets.vim' " doc interesting https://github.com/wellle/targets.vim
 Plug 'timeyyy/orchestra.nvim' " to play some music on 
 Plug 'timeyyy/clackclack.symphony' " data to play with orchestra.vim
 

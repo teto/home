@@ -25,7 +25,7 @@ clock = status.register(
     format=[
         # ("%a %-d Format 1",'Europe/Dublin'),
         # "%a %-d %b %X ",
-        (" %a %-d %b %X", 'Europe/Paris'),
+        (" %a %-d %b %X", 'Europe/Paris'),
         (" Format 0", 'Europe/London'),
     ],
     on_leftclick="termite -e ikhal",
@@ -41,12 +41,15 @@ clock = status.register(
     log_level=logging.DEBUG,
 )
 
+# status.register(“xkblayout”, layouts=[“fr us”, “us”])
+
 # clock.on_click(1)
 # print(clock.on_clicks)
 # status.register("pulseaudio")
 # Shows your CPU temperature, if you have a Intel CPU
 status.register("temp",   format="{temp:.0f}°C",)
-
+status.register("backlight",   format="{percentage}%",)
+#
 # The battery monitor has many formatting options, see README for details
 
 # This would look like this, when discharging (or charging)
@@ -68,7 +71,7 @@ status.register("temp",   format="{temp:.0f}°C",)
 
 # This would look like this:
 # Discharging 6h:51m
-
+
 status.register("battery",
                 format=" {status}{remaining}",
                 alert=True,
@@ -135,7 +138,7 @@ status.register(
 #print("mdp on_lclick", mpd);
 
 alsa = status.register("alsa", mixer="Headphone", format="")
-dpms = status.register("dpms", )
+dpms = status.register("dpms", format="")
 
 alsa = status.register("alsa",
         on_leftclick=['urxvtc', '-e', 'alsamixer']

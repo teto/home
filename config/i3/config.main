@@ -12,22 +12,31 @@ font pango:Liberation Sans Mono 9, FontAwesome 9
 # font for window titles. ISO 10646 = Unicode
 #font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 
+# xmodmap to see the mappings for ModX etc...
 set $mod Mod1
+set $rmod Mod1
 
 #set $term rxvt-unicode
 set $term termite
 
+
 set $w1 1:
 set $w2 2:
-set $w3 3:éditeurs
+set $w3 3:
 set $w4 4:qemu
 set $w5 5:misc
+set $w6 6:irc
+set $w7 7
+set $w8 8
+set $w9 9:mendeley
 
 
-workspace "$w1" output $output1
-workspace "$w2" output $output2
-workspace "$w3" output $output2
-workspace "$w4" output $output2
+# workspace "$w1" output $output1
+# workspace "$w2" output $output2
+# workspace "$w3" output $output2
+# workspace "$w4" output $output2
+# workspace "$w4" output $output2
+# workspace "$w9" output $output2
 
 
 # default border size
@@ -45,17 +54,10 @@ for_window [class="Codeblocks" title="Global Variable Editor"] resize grow right
 for_window [class="Codeblocks" title="codeblocks"] resize grow left 300;
 for_window [class="Codeblocks" title="Multiple matches"] resize grow right 300;
 
-# vertical | horizontal | both
-#hide_edge_borders both
-
-
 show_marks yes
-#workspace 1 "main"
-#workspace 2 "Web"
 
 focus_follows_mouse no
 #workspace_bar no
-#new_window bb
 
 
 # Manage monitors, enable or disable
@@ -74,8 +76,7 @@ mode "monitors" {
 	bindsym $mod+Shift+Right workspace next_on_output
 
 	bindsym Return mode "default"
-        bindsym Escape mode "default"
-
+	bindsym Escape mode "default"
 }
 
 
@@ -281,12 +282,12 @@ bindsym $mod+apostrophe mode "programs"
 bindsym $mod+a workspace "$w1"
 bindsym $mod+z workspace "$w2"
 bindsym $mod+e workspace "$w3"
-bindsym $mod+q workspace "$w4"
-bindsym $mod+s workspace "$w5"
-bindsym $mod+d workspace 6
-bindsym $mod+w workspace 7
-bindsym $mod+x workspace 8
-bindsym $mod+c workspace 9
+bindsym $rmod+i workspace "$w4"
+bindsym $rmod+o workspace "$w5"
+bindsym $mod+d workspace "$w6"
+bindsym $mod+w workspace "$w7"
+bindsym $mod+x workspace "$w8"
+bindsym $mod+c workspace "$w9"
 #bindsym $mod+x workspace 10
 
 for_window [con_mark="^pad_*"] move scratchpad
@@ -435,7 +436,10 @@ mode mouse {
 	bindsym Escape mode "default"
 }
 
+no_focus [window_role="pop-up"]
 
+floating_minimum_size 75 x 50
+floating_maximum_size -1 x -1
 
 ### TODO need to run urxvtd beforehand
 ### display error in case it does not launch
