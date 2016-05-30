@@ -68,17 +68,19 @@ status.register("temp",   format="{temp:.0f}°C",)
 
 # This would look like this:
 # Discharging 6h:51m
+
 status.register("battery",
-                format=" {status}{remaining}",
+                format=" {status}{remaining}",
                 alert=True,
                 alert_percentage=5,
                 status={
+                    'DPL': 'DPL',
                     "DIS": "Discharging",
-                    "CHR": "Charging",
-                    "FULL": "Bat full",
+                    "CHR": "Charging",
+                    "FULL": "",
                 },)
 # status.register("shell",
-#                 command="zisizimpossible"
+#                 command="zisizimpossible"
 #                 ,
 #                 log_level=logging.DEBUG)
 

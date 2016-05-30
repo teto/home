@@ -45,9 +45,11 @@ call plug#begin(s:nvimdir.'/plugged')
 " Plug 'bronson/vim-trailing-whitespace' " :FixTrailingWhitespace
 " Plug 'tkhoa2711/vim-togglenumber' " by default mapped to <leader>n
 Plug 'dzeban/vim-log-syntax'
-Plug 'timeyyy/orchestra.nvim'
-Plug 'timeyyy/clackclack.symphony'
+
 Plug 'wellle/targets.vim'
+Plug 'timeyyy/orchestra.nvim' " to play some music on 
+Plug 'timeyyy/clackclack.symphony' " data to play with orchestra.vim
+
 " Plug 'Yggdroot/indentLine',{ 'for': 'python' }  " draw verticals indents but
 " seems greedy
 " {{{ Autocompletion and linting 
