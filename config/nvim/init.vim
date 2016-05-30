@@ -34,6 +34,9 @@ autocmd BufReadPost *.doc,*.docx,*.rtf,*.odp,*.odt silent %!pandoc "%" -tplain -
 let mapleader = " "
 " to configure vim for haskell, refer to
 " http://yannesposito.com/Scratch/en/blog/Vim-as-IDE/
+function! DoRemote(arg)
+  UpdateRemotePlugins
+endfunction
 
 call plug#begin(s:nvimdir.'/plugged')
 
@@ -45,10 +48,13 @@ Plug 'bfredl/nvim-ipy'  " adds the :IPython command
 Plug 'wellle/targets.vim' " Adds new motion targets ci{
 Plug 'timeyyy/orchestra.nvim' " to play some music on 
 Plug 'timeyyy/clackclack.symphony' " data to play with orchestra.vim
+
 " Plug 'Yggdroot/indentLine',{ 'for': 'python' }  " draw verticals indents but
 " seems greedy
 " {{{ Autocompletion and linting 
-Plug 'Valloric/YouCompleteMe' , { 'frozen': 1,  'do': './install.py --system-libclang --clang-completer' }
+" Plug 'Valloric/YouCompleteMe' , { 'frozen': 1,  'do': './install.py --system-libclang --clang-completer' }
+Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
+Plug 'zchee/deoplete-clang'
 " }}}
 "Plug 'mattn/vim-rtags' a l'air léger
 Plug 'shaneharper/vim-rtags' " <leader>r ou bien :RtagsFind  mais ne marche pas
@@ -500,16 +506,10 @@ noremap gy "+y
 
 
 
+"
+imap <silent> <C-k> <Up>
+imap <silent> <C-j> <Down>
 
-" External sourced files section {{{
-
-" let use sudo once the file is loaded
-"source ~/.vim/plug.vim
-" source ~/.vim/colors.vim
-" this should be made a plugin as well
-" TODO this does not work with neovim
-"source ~/.vim/vim_file_chooser.vim
-" }}}
 
 " Window / splits {{{
 "cmap w!! w !sudo tee % >/dev/null
@@ -552,8 +552,8 @@ nmap <leader>sw<right> :botright vnew<CR>
 nmap <leader>sw<up>    :topleft  new<CR>
 nmap <leader>sw<down>  :botright new<CR>
 
-nnoremap <silent> + :exe "resize +3"
-nnoremap <silent> - :exe "resize -3"
+" nnoremap <silent> + :exe "resize +3"
+" nnoremap <silent> - :exe "resize -3"
 
 set splitbelow	" on horizontal splits
 set splitright   " on vertical split
@@ -747,7 +747,18 @@ nnoremap <F6> :YcmDebugInfo<CR>
 nnoremap <leader>jd :YcmCompleter GoTo<CR>
 " }}}
 
+" Deoplete {{{
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_ignore_case = 1
+let g:deoplete#disable_auto_complete = 0
+let g:deoplete#enable_debug = 1
+" Let <Tab> also do completion
+" inoremap <silent><expr> <Tab>
+" \ pumvisible() ? "<C-n>" :
+" \ deoplete#mappings#manual_complete()
+" }}}
 " Jedi (python) completion {{{
+let g:deoplete#sources#clang#libclang_path="/usr/lib/llvm-3.8/lib/libclang.so"
 let g:jedi#auto_vim_configuration = 0 " to prevent python's help popup
 " }}}
 
@@ -1021,7 +1032,7 @@ nnoremap Y y$
 
 " search items in location list (per window)
 nnoremap <F1> :lprev<CR>
-"nnoremap <F2> :lnext<CR>
+nnoremap <F2> :lnext<CR>
 " search for  item in quickfix list (global/unique)
 "nnoremap <F3> :cprev<CR>
 nmap <F4> :cnext<CR>
@@ -1101,9 +1112,12 @@ noremap             <C-k>           {
 " added 'n' to defaults to allow wrapping lines to overlap with numbers
 set cpoptions="aABceFsn"
 " nvim specific configuration {{{
+
+set termguicolors
 if has("nvim")
   "set shada=!,'50,<1000,s100,:0,n$XDG_CACHE_HOME/nvim/shada
   let g:netrw_home=$XDG_DATA_HOME.'/nvim'
+  "now ignored 
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
   let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 endif
