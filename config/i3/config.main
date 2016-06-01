@@ -28,7 +28,7 @@ set $w5 5:misc
 set $w6 6:irc
 set $w7 7
 set $w8 8
-set $w9 9:mendeley
+set $w9 9
 
 
 # workspace "$w1" output $output1
@@ -282,8 +282,8 @@ bindsym $mod+apostrophe mode "programs"
 bindsym $mod+a workspace "$w1"
 bindsym $mod+z workspace "$w2"
 bindsym $mod+e workspace "$w3"
-bindsym $rmod+i workspace "$w4"
-bindsym $rmod+o workspace "$w5"
+bindsym $rmod+q workspace "$w4"
+bindsym $rmod+s workspace "$w5"
 bindsym $mod+d workspace "$w6"
 bindsym $mod+w workspace "$w7"
 bindsym $mod+x workspace "$w8"
@@ -304,11 +304,11 @@ bindsym $mod+Shift+2 move container to workspace "$w2"
 bindsym $mod+Shift+3 move container to workspace "$w3"
 bindsym $mod+Shift+4 move container to workspace "$w4"
 bindsym $mod+Shift+5 move container to workspace "$w5"
-bindsym $mod+Shift+6 move container to workspace 6
-bindsym $mod+Shift+7 move container to workspace 7
-bindsym $mod+Shift+8 move container to workspace 8
-bindsym $mod+Shift+9 move container to workspace 9
-bindsym $mod+Shift+0 move container to workspace 10
+bindsym $mod+Shift+6 move container to workspace "$w6"
+bindsym $mod+Shift+7 move container to workspace "$w7"
+bindsym $mod+Shift+8 move container to workspace "$w8"
+bindsym $mod+Shift+9 move container to workspace "$w9"
+bindsym $mod+Shift+0 move container to workspace "$w10"
 # }}}
 
 # reload the configuration file

@@ -44,10 +44,10 @@ call plug#begin(s:nvimdir.'/plugged')
 " Plug 'bronson/vim-trailing-whitespace' " :FixTrailingWhitespace
 " Plug 'tkhoa2711/vim-togglenumber' " by default mapped to <leader>n
 Plug 'dzeban/vim-log-syntax'
-Plug 'bfredl/nvim-ipy'  " adds the :IPython command
+" Plug 'bfredl/nvim-ipy'  " adds the :IPython command
 Plug 'wellle/targets.vim' " Adds new motion targets ci{
-Plug 'timeyyy/orchestra.nvim' " to play some music on 
-Plug 'timeyyy/clackclack.symphony' " data to play with orchestra.vim
+" Plug 'timeyyy/orchestra.nvim' " to play some music on 
+" Plug 'timeyyy/clackclack.symphony' " data to play with orchestra.vim
 
 " Plug 'Yggdroot/indentLine',{ 'for': 'python' }  " draw verticals indents but
 " seems greedy
@@ -57,9 +57,9 @@ Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
 Plug 'zchee/deoplete-clang'
 " }}}
 "Plug 'mattn/vim-rtags' a l'air léger
-Plug 'shaneharper/vim-rtags' " <leader>r ou bien :RtagsFind  mais ne marche pas
+" Plug 'shaneharper/vim-rtags' " <leader>r ou bien :RtagsFind  mais ne marche pas
 Plug 'lyuts/vim-rtags'  " a l'air d'etre le plus complet
-
+Plug 'tpope/vim-unimpaired' " [<space> [e [n ]n pour gerer les conflits etc...
 Plug 'kana/vim-operator-user' " dependancy for operator-flashy
 Plug 'haya14busa/vim-operator-flashy' " Flash selection on copy
 
@@ -81,7 +81,7 @@ Plug 'tmhedberg/SimpylFold', { 'for': 'py' } " provides python folding
 " }}}
 
 " Plug 'Valloric/ListToggle' " toggling seems to fail
-Plug 'tpope/vim-obsession'
+Plug 'tpope/vim-obsession' " very cool, register edited files in a Session.vim, call with :Obsession
 Plug 'mbbill/undotree'
 Plug '907th/vim-auto-save' 
 ", { 'for': 'python' } " 
@@ -150,7 +150,7 @@ Plug 'teto/vim-listchars' " to cycle between different list/listchars configurat
 "Plug 'vim-voom/VOoM' " can show tex/restDown Table of Content (ToC)
 Plug 'blueyed/vim-diminactive' " disable syntax coloring on inactive splits
 "Plug 'tpope/vim-sleuth' " Dunno what it is
-Plug 'tpope/vim-vinegar' " Improves netrw
+" Plug 'tpope/vim-vinegar' " Improves netrw (not needed with dirvish)
 "Plug 'brettanomyces/nvim-terminus' "edit term command in nvim
 "Plug 'justinmk/vim-gtfo' " ?
 Plug 'tpope/vim-fugitive' " to use with Git
@@ -1090,6 +1090,19 @@ map <Leader>N :bNext<CR>
 map <Leader>p :bprevious<CR>
 map <Leader>d :bdelete<CR>
 map <Leader>s :setlocal spell spelllang=en_us<CR>
+
+
+" Unimpared {{{
+" advised by tpope for these remote countries that don't use qwerty
+" https://github.com/tpope/vim-unimpaired
+nmap < [
+nmap > ]
+omap < [
+omap > ]
+xmap < [
+xmap > ]
+" }}}
+
 " indents
 "nmap <S-Tab> <<
 "nmap <Tab> >>

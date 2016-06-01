@@ -2,3 +2,7 @@
 192.168.1.1 SERV_2
 192.168.0.2 Client_1
 192.168.1.2 Client_2
+
+# CA marche on peut filtrer via ip.dst_host == ctest1
+10.1.0.1 ctest1
+10.1.1.1 ctest1
