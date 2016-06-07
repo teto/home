@@ -44,8 +44,6 @@ call plug#begin(s:nvimdir.'/plugged')
 " Plug 'bronson/vim-trailing-whitespace' " :FixTrailingWhitespace
 " Plug 'tkhoa2711/vim-togglenumber' " by default mapped to <leader>n
 Plug 'dzeban/vim-log-syntax'
-" Plug 'bfredl/nvim-ipy'  " adds the :IPython command
-Plug 'wellle/targets.vim' " Adds new motion targets ci{
 " Plug 'timeyyy/orchestra.nvim' " to play some music on 
 " Plug 'timeyyy/clackclack.symphony' " data to play with orchestra.vim
 
@@ -54,8 +52,10 @@ Plug 'wellle/targets.vim' " Adds new motion targets ci{
 " {{{ Autocompletion and linting 
 " Plug 'Valloric/YouCompleteMe' , { 'frozen': 1,  'do': './install.py --system-libclang --clang-completer' }
 Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
-Plug 'zchee/deoplete-clang'
+Plug 'zchee/deoplete-clang', { 'for': 'cpp' }
+Plug 'zchee/deoplete-jedi', { 'for': 'python'}
 " }}}
+
 "Plug 'mattn/vim-rtags' a l'air léger
 " Plug 'shaneharper/vim-rtags' " <leader>r ou bien :RtagsFind  mais ne marche pas
 Plug 'lyuts/vim-rtags'  " a l'air d'etre le plus complet
@@ -74,28 +74,37 @@ Plug 'cespare/vim-toml', { 'for': 'toml'}
 " }}}
 
 " Python {{{1
-
-Plug 'hynek/vim-python-pep8-indent', {'for': 'py'} " does not work
-Plug 'mjbrownie/GetFilePlus', {'for': 'py'} " improves gf on imports
-Plug 'tmhedberg/SimpylFold', { 'for': 'py' } " provides python folding
+" Plug 'klen/python-mode', { 'for': 'python'}
+" Plug 'hynek/vim-python-pep8-indent', {'for': 'python'} " does not work
+" Plug 'mjbrownie/GetFilePlus', {'for': 'python'} " improves gf on imports
+" fails on relad
+" Plug 'tmhedberg/SimpylFold', { 'for': 'python' } " provides python folding
+"Plug 'vim-flake8' " for python syntax
+" Plug 'bfredl/nvim-ipy'  " adds the :IPython command
+" Plug 'danielroseman/pygd-vim', {'for': 'python'} " provokes an error
 " }}}
 
 " Plug 'Valloric/ListToggle' " toggling seems to fail
-Plug 'tpope/vim-obsession' " very cool, register edited files in a Session.vim, call with :Obsession
+Plug 'tpope/vim-obsession' ", {'on': 'Obsession', 'ObsessionStatus'}  very cool, register edited files in a Session.vim, call with :Obsession
 Plug 'mbbill/undotree'
 Plug '907th/vim-auto-save' 
 ", { 'for': 'python' } " 
+
+" Text objects {{{
+Plug 'michaeljsmith/vim-indent-object'
+" }}}
+"
 " {{{ To ease movements
 "Plug 'rhysd/clever-f.vim'
 "Plug 'unblevable/quick-scope'  " highlight characeters to help in f/F moves
 Plug 'Lokaltog/vim-easymotion'
 "Plug 'wellle/visual-split.vim'
+Plug 'wellle/targets.vim' " Adds new motion targets ci{
 Plug 'justinmk/vim-ipmotion' " ?
 "Plug 'justinmk/vim-sneak' " remaps 's'
 Plug 'tpope/vim-rsi'  " maps readline bindings
 " }}}
 
-"Plug 'vim-flake8' " for python syntax
 "Plug 'fisadev/vim-ctrlp-cmdpalette' " sublime text like palette
 "Plug 'osyo-manga/vim-anzu' " to improve internal search
 Plug 'mhinz/vim-startify' " very popular, vim's homepage
@@ -141,7 +150,7 @@ Plug 'dietsche/vim-lastplace' " restore last cursor postion
 
 "
 Plug 'justinmk/vim-dirvish' " replaces netrw 
-Plug 'justinmk/vim-gtfo' " gfo to open filemanager in cwd
+" Plug 'justinmk/vim-gtfo' " gfo to open filemanager in cwd
 Plug 'wannesm/wmgraphviz.vim', {'for': 'dot'} " graphviz syntax highlighting
 "Plug 'CCTree'
  Plug 'tpope/vim-commentary' "gcc to comment/gcgc does not work that well
@@ -257,7 +266,7 @@ Plug 'vasconcelloslf/vim-interestingwords' " highlight the words you choose <lea
 Plug 'mhinz/vim-grepper', { 'on': 'Grepper'}
 "Plug 'teto/neovim-auto-autoread' " works only in neovim, runs external checker
 "Plug 'benekastah/neomake' " async build for neovim
-Plug '~/neomake', {'branch': 'graphviz'} " async build for neovim
+Plug '~/neomake' " , {'branch': 'graphviz'}  async build for neovim
 Plug 'mhinz/vim-signify'
 " Plug 'teddywing/auditory.vim' " play sounds as you type
 
@@ -702,8 +711,8 @@ let g:Powerline_symbols = "fancy" " to use unicode symbols
 " }}}
 
 " ToggleList config {{{
-let g:lt_location_list_toggle_map = '<F3>' " '<leader>l'
-let g:lt_quickfix_list_toggle_map = '<F2>' " '<leader>qq'
+let g:lt_location_list_toggle_map = '<F2>' " '<leader>l'
+let g:lt_quickfix_list_toggle_map = '<F3>' " '<leader>qq'
 " }}}
 
 " Search parameters {{{
@@ -759,7 +768,7 @@ let g:deoplete#enable_debug = 1
 " }}}
 " Jedi (python) completion {{{
 let g:deoplete#sources#clang#libclang_path="/usr/lib/llvm-3.8/lib/libclang.so"
-let g:jedi#auto_vim_configuration = 0 " to prevent python's help popup
+let g:jedi#auto_vim_configuration = 1 " to prevent python's help popup
 " }}}
 
 " Airline {{{
@@ -779,6 +788,8 @@ let g:airline#extensions#tabline#show_buffers = 1
 let g:airline#extensions#tabline#buffer_min_count =2
 let g:airline#extensions#tabline#buffer_idx_mode = 1
 
+let g:airline#extensions#obsession#enabled = 1
+
 let g:airline#extensions#tabline#buffers_label = 'b'
 
 let g:airline#extensions#tabline#tabs_label = 't'
@@ -789,6 +800,8 @@ let g:airline_extensions = ['branch', 'tabline']
 
 let g:airline#extensions#tagbar#enabled = 0
 
+let g:airline_detect_spell=1
+
 let g:airline#extensions#ycm#enabled = 1
 let g:airline#extensions#ycm#error_symbol = 'E:'
 let g:airline#extensions#ycm#warning_symbol = 'W:'
@@ -797,7 +810,7 @@ let g:airline#extensions#whitespace#enabled = 0
 let g:airline#extensions#whitespace#mixed_indent_algo = 2
 " let g:airline#extensions#whitespace#checks = [ 'indent', 'trailing', 'long' ]
 "|neomake#statusline#LoclistStatus should be shown in warning section
-let g:airline_section_z = airline#section#create(['%{ObsessionStatus(''$'', '''')}'])
+" let g:airline_section_z = airline#section#create(['%{ObsessionStatus(''$'', '''')}'])
 nmap <leader>& <Plug>AirlineSelectTab1
 nmap <leader>é <Plug>AirlineSelectTab2
 nmap <leader>" <Plug>AirlineSelectTab3
@@ -925,6 +938,18 @@ let g:ycm_semantic_triggers.tex = [
 set foldcolumn=1
 " }}}
 
+" Pymode {{{
+let g:pymode_python = 'python3'
+let g:pymode_warnings = 1
+let g:pymode_paths = []
+let g:pymode_trim_whitespaces = 1
+let g:pymode_options = 0
+let g:pymode_folding = 0
+let g:pymode_motion = 1
+let g:pymode_rope_goto_definition_bind = 'gd'
+let g:pymode_lint = 0
+" "}}}
+
 " vim-listchars config {{{
     "\"trail:·,tab:→\ ,eol:↲,precedes:<,extends:>"
 "let g:listchar_formats=[ 
@@ -1048,7 +1073,7 @@ nnoremap <F8> :bn<CR>
 "noremap <F4> exec ":emenu <tab>"
 " should become useless with neovim
 noremap <F10> :set paste!<CR>
-map <F12> <Plug>(ToggleListchars)
+map <F11> <Plug>(ToggleListchars)
 
 " Command to toggle line wrapping.
 nnoremap <Leader>wr :set wrap! \| :set wrap?<CR>
@@ -1092,15 +1117,15 @@ map <Leader>d :bdelete<CR>
 map <Leader>s :setlocal spell spelllang=en_us<CR>
 
 
-" Unimpared {{{
+" Unimpaired {{{
 " advised by tpope for these remote countries that don't use qwerty
 " https://github.com/tpope/vim-unimpaired
-nmap < [
-nmap > ]
-omap < [
-omap > ]
-xmap < [
-xmap > ]
+" nmap < [
+" nmap > ]
+" omap < [
+" omap > ]
+" xmap < [
+" xmap > ]
 " }}}
 
 " indents
