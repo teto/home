@@ -398,12 +398,6 @@ set showmatch
 " " Note: When this option is on some plugins may not work.
 
 
-" display a menu when need t ocomplete a command 
-set wildmenu
-set wildmode=list:longest
-"Ignore these files when completing names and in Explorer
-set wildignore=.svn,CVS,.git,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg,*.png,*.xpm,*.gif
-
 
 " Use visual bell instead of beeping when doing something wrong
 set visualbell
@@ -454,8 +448,12 @@ syntax on
 
 " Wildmenu completion {{{
 
+" display a menu when need t ocomplete a command 
 set wildmenu
-set wildmode=list:longest
+set wildmode=full,longest:full
+"Ignore these files when completing names and in Explorer
+" set wildignore=.svn,CVS,.git,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg,*.png,*.xpm,*.gif
+
 
 set wildignore+=.hg,.git,.svn                    " Version control
 set wildignore+=*.aux,*.out,*.toc                " LaTeX intermediate files
@@ -795,9 +793,10 @@ let g:airline#extensions#ycm#warning_symbol = 'W:'
 
 let g:airline#extensions#whitespace#enabled = 0
 let g:airline#extensions#whitespace#mixed_indent_algo = 2
+let g:airline#extensions#obsession#enabled = 1
 " let g:airline#extensions#whitespace#checks = [ 'indent', 'trailing', 'long' ]
 "|neomake#statusline#LoclistStatus should be shown in warning section
-let g:airline_section_z = airline#section#create(['%{ObsessionStatus(''$'', '''')}'])
+" let g:airline_section_z = airline#section#create(['%{ObsessionStatus(''$'', '''')}'])
 nmap <leader>& <Plug>AirlineSelectTab1
 nmap <leader>é <Plug>AirlineSelectTab2
 nmap <leader>" <Plug>AirlineSelectTab3
@@ -1089,8 +1088,10 @@ map <Leader>n :bnext<CR>
 map <Leader>N :bNext<CR>
 map <Leader>p :bprevious<CR>
 map <Leader>d :bdelete<CR>
+" TODO trigger a menu in vim
 map <Leader>s :setlocal spell spelllang=en_us<CR>
 
+"http://stackoverflow.com/questions/28613190/exclude-quickfix-buffer-from-bnext-bprevious
 
 " Unimpared {{{
 " advised by tpope for these remote countries that don't use qwerty
