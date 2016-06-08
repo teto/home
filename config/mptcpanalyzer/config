@@ -4,6 +4,7 @@
 [DEFAULT]
 # If you have several installations of tshark, then you can put the fullpath here
 tshark_binary = /home/teto/wireshark/debug/run/tshark
+wireshark_profile = mptcp
 
 # use yaml to load this into a list ?
 # style0
