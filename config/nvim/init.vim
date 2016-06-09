@@ -1,8 +1,8 @@
 " vim: set noet fenc=utf-8 ff=unix sts=0 sw=2 ts=8 fdm=marker :
 " to debug vimscript, use :mess to display error messages
-map <C-D> <C-]>
+" map <C-D> <C-]>
 " map <C-D> :tag<CR>
-map <D-b> :echom "hello papy"
+" map <D-b> :echom "hello papy"
 
 "$NVIM_PYTHON_LOG_FILE
 " to test startup time
@@ -38,6 +38,16 @@ function! DoRemote(arg)
   UpdateRemotePlugins
 endfunction
 
+function! BuildComposer(info)
+  if a:info.status != 'unchanged' || a:info.force
+    !cargo build --release
+    UpdateRemotePlugins
+  endif
+endfunction
+
+
+
+" vim-plug plugin declarations {{{1
 call plug#begin(s:nvimdir.'/plugged')
 
 "Plug 'junegunn/limelight.vim' " to highlight ucrrent paragraph only
@@ -49,7 +59,7 @@ Plug 'dzeban/vim-log-syntax'
 
 " Plug 'Yggdroot/indentLine',{ 'for': 'python' }  " draw verticals indents but
 " seems greedy
-" {{{ Autocompletion and linting 
+"  Autocompletion and linting {{{2
 " Plug 'Valloric/YouCompleteMe' , { 'frozen': 1,  'do': './install.py --system-libclang --clang-completer' }
 Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
 Plug 'zchee/deoplete-clang', { 'for': 'cpp' }
@@ -69,11 +79,11 @@ Plug 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
 " Using a non-master branch
 "Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
 
-" filetypes {{{
+" filetypes {{{2
 Plug 'cespare/vim-toml', { 'for': 'toml'}
 " }}}
 
-" Python {{{1
+" Python {{{2
 " Plug 'klen/python-mode', { 'for': 'python'}
 " Plug 'hynek/vim-python-pep8-indent', {'for': 'python'} " does not work
 " Plug 'mjbrownie/GetFilePlus', {'for': 'python'} " improves gf on imports
@@ -109,32 +119,6 @@ Plug 'tpope/vim-rsi'  " maps readline bindings
 "Plug 'osyo-manga/vim-anzu' " to improve internal search
 Plug 'mhinz/vim-startify' " very popular, vim's homepage
 
-" Startify config {{{
-"nnoremap <leader>st :Startify<cr>
-
-let g:startify_list_order = [
-      \ ['   Bookmarks'],     'bookmarks',
-      \ ['   MRU'],           'files' ,
-      \ ['   MRU '.getcwd()], 'dir',
-      \ ['   Sessions'],      'sessions',
-      \ ]
-let g:startify_use_env = 0
-let g:startify_disable_at_vimenter = 0
-let g:startify_session_dir = $XDG_DATA_HOME.'/nvim/sessions'
-let g:startify_bookmarks = [
-      \ {'i': $XDG_CONFIG_HOME.'/i3/config.main'},
-      \ {'z': $XDG_CONFIG_HOME.'/zsh/'},
-      \ {'q': $XDG_CONFIG_HOME.'/qutebrowser/qutebrowser.conf'},
-      \ {'m': $XDG_CONFIG_HOME.'/mptcpanalyzer/config'},
-      \ {'n': $XDG_CONFIG_HOME.'/ncmpcpp/config'},
-      \ ]
-let g:startify_files_number = 10
-let g:startify_session_autoload = 1
-let g:startify_session_persistence = 0
-let g:startify_change_to_vcs_root = 0
-let g:startify_session_savevars = []
-let g:startify_session_delete_buffers = 1
-" }}}
 
 Plug 'dietsche/vim-lastplace' " restore last cursor postion
 " Powerline does not work in neovim hence use vim-airline instead
@@ -171,7 +155,7 @@ Plug 'tpope/vim-fugitive' " to use with Git
 Plug 'mhinz/vim-randomtag', { 'on': 'Random' } " Adds a :Random function that launches help at random
 Plug 'majutsushi/tagbar', {'on': 'TagbarToggle'}
 
-" vim-sayonara {{{1
+" vim-sayonara {{{2
 nnoremap <silent><leader>q  :Sayonara<cr>
 nnoremap <silent><leader>Q  :Sayonara!<cr>
 
@@ -179,7 +163,7 @@ let g:sayonara_confirm_quit = 0
 " }}}
 
 
-" {{{ fuzzers
+"  fuzzers {{{2
 " Plug 'junegunn/fzf', { 'dir': $XDG_DATA_HOME . '/fzf', 'do': './install --completion --key-bindings --64' }
 Plug 'junegunn/fzf', { 'dir': $XDG_DATA_HOME . '/fzf', 'do': './install --all --64'}
 
@@ -190,61 +174,13 @@ Plug 'junegunn/fzf.vim' " defines :Files / :Commits for FZF
 
 "}}}
 
-" FZF config {{{
-let g:fzf_command_prefix = 'Fzf' " prefix commands :Files become :FzfFiles, etc.
-let g:fzf_nvim_statusline = 0 " disable statusline overwriting
 
-" This is the default extra key bindings
-let g:fzf_action = {
-  \ 'ctrl-t': 'tab split',
-  \ 'ctrl-x': 'split',
-  \ 'ctrl-v': 'vsplit' }
 
-" Default fzf layout
-" - down / up / left / right
-" - window (nvim only)
-let g:fzf_layout = { 'down': '~40%' }
-
-" For Commits and BCommits to customize the options used by 'git log':
-let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
-
-" Customize fzf colors to match your color scheme
-" let g:fzf_colors = \ { 'fg':      ['fg', 'Normal'],
-"   \ 'bg':      ['bg', 'Normal'],
-"   \ 'hl':      ['fg', 'Comment'],
-"   \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-"   \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-"   \ 'hl+':     ['fg', 'Statement'],
-"   \ 'info':    ['fg', 'PreProc'],
-"   \ 'prompt':  ['fg', 'Conditional'],
-"   \ 'pointer': ['fg', 'Exception'],
-"   \ 'marker':  ['fg', 'Keyword'],
-"   \ 'spinner': ['fg', 'Label'],
-"   \ 'header':  ['fg', 'Comment'] 
-" }
-
-" Advanced customization using autoload functions
-"autocmd VimEnter * command! Colors
-  "\ call fzf#vim#colors({'left': '15%', 'options': '--reverse --margin 30%,0'})
-" Advanced customization using autoload functions
-" }}}
-
-function! BuildComposer(info)
-  if a:info.status != 'unchanged' || a:info.force
-    !cargo build --release
-    UpdateRemotePlugins
-  endif
-endfunction
-
-Plug 'euclio/vim-markdown-composer', { 'for': 'md', 'do': function('BuildComposer') } " Needs rust, cargo, plenty of things
-"Plug 'greyblake/vim-preview' " depends on ruby 'redcarpet', thus doesn't work in neovim ?
+Plug 'euclio/vim-markdown-composer' " , { 'for': 'markdown', 'do': function('BuildComposer') } " Needs rust, cargo, plenty of things :help markdown-composer
 
 "Plug 'junegunn/vim-easy-align'   " to align '=' on multiple lines for instance
-" Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 "Plug 'surround.vim'
-"Plug 'tpope/vim-markdown', { 'for': 'md' }
 "Plug 'elzr/vim-json', { 'for': 'json' }
-"Plug 'numkil/ag.vim'
 Plug 'dhruvasagar/vim-table-mode', {'for': 'txt'}
 
 "Plug 'airblade/vim-gitgutter' " will show which lines changed compared to last clean state
@@ -270,24 +206,6 @@ Plug '~/neomake' " , {'branch': 'graphviz'}  async build for neovim
 Plug 'mhinz/vim-signify'
 " Plug 'teddywing/auditory.vim' " play sounds as you type
 
-" Neomake config {{{
-let g:neomake_verbose = 1
-let g:neomake_python_enabled_makers = ['pyflakes']
-let g:neomake_logfile = '/home/teto/neomake.log'
-let g:neomake_c_gcc_args = ['-fsyntax-only', '-Wall']
-let g:neomake_open_list = 0
-
-let g:neomake_airline = 1
-let g:neomake_echo_current_error = 1
-let g:neomake_place_signs=1
-let g:neomake_error_sign = { 'text': '✘', 'texthl': 'ErrorSign' }
-let g:neomake_warning_sign = { 'text': ':(', 'texthl': 'WarningSign' }
-"let g:neomake_ruby_enabled_makers = ['mri']
-
-" C and CPP are handled by YCM and java usually by elim
-"let s:neomake_exclude_ft = [ 'c', 'cpp', 'java' ]
-"let g:neomake_python_pep8_maker
-" }}}
 
 " colorschemes {{{
 Plug 'whatyouhide/vim-gotham'
@@ -326,6 +244,7 @@ Plug 'lervag/vimtex', {'for': 'tex'} " so far the best one
 " Plug 'vim-scripts/YankRing.vim' " breaks in neovim, overrides yy as well
 
 call plug#end()
+" }}}
 
 
 
@@ -506,12 +425,9 @@ noremap gy "+y
 
 
 
-
 " todo enable rainbow parentheses
 "nnoremap <leader>R :CtrlP<CR>
 " est deja mappe :/
-
-
 
 "
 imap <silent> <C-k> <Up>
@@ -569,6 +485,7 @@ set splitright   " on vertical split
 
 
 " {{{ Markdown composer
+" Run with :ComposerStart
 let g:markdown_composer_open_browser        = "qutebrowser"
 let g:markdown_composer_autostart           = 1
 " }}}
@@ -687,6 +604,45 @@ nnoremap <leader>u :UndoTreeToggle<CR>
 "nnoremap <F8> :vertical wincmd f<CR> " open file under cursor in a split
 nnoremap <leader>gfs :vertical wincmd f<CR> " open file under cursor in a split
 
+" FZF config {{{
+let g:fzf_command_prefix = 'Fzf' " prefix commands :Files become :FzfFiles, etc.
+let g:fzf_nvim_statusline = 0 " disable statusline overwriting
+
+" This is the default extra key bindings
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-v': 'vsplit' }
+
+" Default fzf layout
+" - down / up / left / right
+" - window (nvim only)
+let g:fzf_layout = { 'down': '~40%' }
+
+" For Commits and BCommits to customize the options used by 'git log':
+let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
+
+" Customize fzf colors to match your color scheme
+" let g:fzf_colors = \ { 'fg':      ['fg', 'Normal'],
+"   \ 'bg':      ['bg', 'Normal'],
+"   \ 'hl':      ['fg', 'Comment'],
+"   \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+"   \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+"   \ 'hl+':     ['fg', 'Statement'],
+"   \ 'info':    ['fg', 'PreProc'],
+"   \ 'prompt':  ['fg', 'Conditional'],
+"   \ 'pointer': ['fg', 'Exception'],
+"   \ 'marker':  ['fg', 'Keyword'],
+"   \ 'spinner': ['fg', 'Label'],
+"   \ 'header':  ['fg', 'Comment'] 
+" }
+
+" Advanced customization using autoload functions
+"autocmd VimEnter * command! Colors
+  "\ call fzf#vim#colors({'left': '15%', 'options': '--reverse --margin 30%,0'})
+" Advanced customization using autoload functions
+" }}}
+
 " Powerline config {{{
 
 let g:Powerline_symbols = "fancy" " to use unicode symbols
@@ -764,6 +720,7 @@ let g:deoplete#enable_debug = 1
 " \ pumvisible() ? "<C-n>" :
 " \ deoplete#mappings#manual_complete()
 " }}}
+
 " Jedi (python) completion {{{
 let g:deoplete#sources#clang#libclang_path="/usr/lib/llvm-3.8/lib/libclang.so"
 let g:jedi#auto_vim_configuration = 1 " to prevent python's help popup
@@ -824,6 +781,52 @@ nmap <leader>ç <Plug>AirlineSelectTab9
 "}}}
 
 autocmd CompleteDone * pclose " close the popup on python completion
+
+" Neomake config {{{
+let g:neomake_verbose = 1
+let g:neomake_python_enabled_makers = ['pyflakes']
+let g:neomake_logfile = '/home/teto/neomake.log'
+let g:neomake_c_gcc_args = ['-fsyntax-only', '-Wall']
+let g:neomake_open_list = 0
+
+let g:neomake_airline = 1
+let g:neomake_echo_current_error = 1
+let g:neomake_place_signs=1
+let g:neomake_error_sign = { 'text': '✘', 'texthl': 'ErrorSign' }
+let g:neomake_warning_sign = { 'text': ':(', 'texthl': 'WarningSign' }
+"let g:neomake_ruby_enabled_makers = ['mri']
+
+" C and CPP are handled by YCM and java usually by elim
+"let s:neomake_exclude_ft = [ 'c', 'cpp', 'java' ]
+"let g:neomake_python_pep8_maker
+" }}}
+
+" Startify config {{{
+"nnoremap <leader>st :Startify<cr>
+
+let g:startify_list_order = [
+      \ ['   MRU '.getcwd()], 'dir',
+      \ ['   MRU'],           'files' ,
+      \ ['   Bookmarks'],     'bookmarks',
+      \ ['   Sessions'],      'sessions',
+      \ ]
+let g:startify_use_env = 0
+let g:startify_disable_at_vimenter = 0
+let g:startify_session_dir = $XDG_DATA_HOME.'/nvim/sessions'
+let g:startify_bookmarks = [
+      \ {'i': $XDG_CONFIG_HOME.'/i3/config.main'},
+      \ {'z': $XDG_CONFIG_HOME.'/zsh/'},
+      \ {'m': $XDG_CONFIG_HOME.'/mptcpanalyzer/config'},
+      \ {'n': $XDG_CONFIG_HOME.'/ncmpcpp/config'},
+      \ ]
+      " \ {'q': $XDG_CONFIG_HOME.'/qutebrowser/qutebrowser.conf'},
+let g:startify_files_number = 10
+let g:startify_session_autoload = 1
+let g:startify_session_persistence = 0
+let g:startify_change_to_vcs_root = 0
+let g:startify_session_savevars = []
+let g:startify_session_delete_buffers = 1
+" }}}
 
 " {{{ Clever f
 "
@@ -1058,8 +1061,8 @@ nnoremap Y y$
 nnoremap <F1> :lprev<CR>
 nnoremap <F2> :lnext<CR>
 " search for  item in quickfix list (global/unique)
-"nnoremap <F3> :cprev<CR>
-nmap <F4> :cnext<CR>
+nnoremap <F3> :cprev<CR>
+nnoremap <F4> :cnext<CR>
 
 nnoremap <F5> :Neomake<CR>
 nnoremap <F6> :AutoSaveToggle<CR>
