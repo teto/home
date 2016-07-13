@@ -309,12 +309,13 @@ source "$ZDOTDIR/prompt.zsh"
 #install it first
 #source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-# Eanble FZF fuzzy matcher {{{
+# Enable FZF fuzzy matcher {{{
 FZF_PATH="$XDG_DATA_HOME/fzf/shell/"
 source "$FZF_PATH"/completion.zsh
 source "$FZF_PATH"/key-bindings.zsh
 # }}}
 
+# added by Nix installer
+if [ -e /home/teto/.nix-profile/etc/profile.d/nix.sh ]; then . /home/teto/.nix-profile/etc/profile.d/nix.sh; fi 
 
 
-# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

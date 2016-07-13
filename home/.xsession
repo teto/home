@@ -4,7 +4,7 @@
 #xcompmgr&
 
 # launch mpd in user mode
-mpd &
+# mpd &
 
 # need to launch daemon before i3, cos of scratchpads
 #urxvtd -q -o -f&
@@ -37,9 +37,9 @@ parcellite&
 #nm-applet&
 xmodmap ~/.Xmodmap
 
-if [ -a ~/.xsession_forthiscomputer.sh ];
-then
-	source ~/.xsession_forthiscomputer.sh
-fi
+# if [ -a ~/.xsession_forthiscomputer.sh ];
+# then
+# 	source ~/.xsession_forthiscomputer.sh
+# fi
 # should be loaded automatically
 # Please see http://i3wm.org/docs/userguide.html for a complete reference! 

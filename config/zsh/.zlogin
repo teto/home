@@ -13,6 +13,7 @@ uptime
 # Accepte les messages d'autres utilisateurs
 mesg y
 
+
 # Pour les ordinateurs avec un pavé numérique...
 # Active le pavé numérique quand on se loggue en console
 #case "`tty`" in /dev/tty[1-6]*)

@@ -1,2 +1,3 @@
 #!/bin/bash
 echo "Hello world"
+if [ -e /home/teto/.nix-profile/etc/profile.d/nix.sh ]; then . /home/teto/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer

@@ -66,6 +66,10 @@ Plug 'zchee/deoplete-clang', { 'for': 'cpp' }
 Plug 'zchee/deoplete-jedi', { 'for': 'python'}
 " }}}
 
+
+Plug 'KabbAmine/vCoolor.vim' " RGBA color picker
+Plug 'https://github.com/arakashic/chromatica.nvim' " semantic color syntax
+
 "Plug 'mattn/vim-rtags' a l'air léger
 " Plug 'shaneharper/vim-rtags' " <leader>r ou bien :RtagsFind  mais ne marche pas
 Plug 'lyuts/vim-rtags'  " a l'air d'etre le plus complet
@@ -99,6 +103,7 @@ Plug 'tpope/vim-obsession' ", {'on': 'Obsession', 'ObsessionStatus'}  very cool,
 Plug 'mbbill/undotree'
 Plug '907th/vim-auto-save' 
 ", { 'for': 'python' } " 
+Plug 'bfredl/nvim-miniyank' " killring alike plugin, cycling paste
 
 " Text objects {{{
 Plug 'michaeljsmith/vim-indent-object'
@@ -149,7 +154,7 @@ Plug 'blueyed/vim-diminactive' " disable syntax coloring on inactive splits
 Plug 'tpope/vim-fugitive' " to use with Git
 "Plug 'jaxbot/github-issues.vim' " works only with vim
 "Plug 'tpope/vim-surround' " don't realy know how to use yet
-"Plug 'junegunn/vim-github-dashboard' " needs ruby support, thus won't work in neovim
+Plug 'junegunn/vim-github-dashboard' " needs ruby support, thus won't work in neovim
 "Plug 'scrooloose/nerdcommenter'
 "Plug 'junegunn/vim-peekaboo' " gives a preview of buffers when pasting
 Plug 'mhinz/vim-randomtag', { 'on': 'Random' } " Adds a :Random function that launches help at random
@@ -177,7 +182,8 @@ Plug 'junegunn/fzf.vim' " defines :Files / :Commits for FZF
 
 
 Plug 'euclio/vim-markdown-composer' " , { 'for': 'markdown', 'do': function('BuildComposer') } " Needs rust, cargo, plenty of things :help markdown-composer
-
+Plug 'Rykka/riv.vim' " , {'for': 'rst'}
+Plug 'Rykka/InstantRst'
 "Plug 'junegunn/vim-easy-align'   " to align '=' on multiple lines for instance
 "Plug 'surround.vim'
 "Plug 'elzr/vim-json', { 'for': 'json' }
@@ -492,6 +498,11 @@ let g:markdown_composer_autostart           = 1
 "set winheight=30
 "set winminheight=5
 
+" Restdown {{{
+let g:instant_rst_browser = "qutebrowser"
+let g:instant_rst_additional_dirs=[ "/home/teto/mptcpweb" ]
+" }}}
+
 " Appearance {{{
 set background=dark
 
@@ -603,6 +614,13 @@ nnoremap <leader>u :UndoTreeToggle<CR>
 
 "nnoremap <F8> :vertical wincmd f<CR> " open file under cursor in a split
 nnoremap <leader>gfs :vertical wincmd f<CR> " open file under cursor in a split
+
+" Chromatica (needs libclang > 3.9) {{{
+" let g:chomatica#respnsive_mode=1
+" let g:chromatica#libclang_path='/usr/local/opt/llvm/lib'
+let g:chromatica#libclang_path="/usr/lib/llvm-3.8/lib/"
+" }}}
+
 
 " FZF config {{{
 let g:fzf_command_prefix = 'Fzf' " prefix commands :Files become :FzfFiles, etc.
@@ -1155,8 +1173,9 @@ noremap             <C-k>           {
 set cpoptions="aABceFsn"
 " nvim specific configuration {{{
 
-set termguicolors
 if has("nvim")
+  " should work with vim also but need a very new vim
+  set termguicolors
   "set shada=!,'50,<1000,s100,:0,n$XDG_CACHE_HOME/nvim/shada
   let g:netrw_home=$XDG_DATA_HOME.'/nvim'
   "now ignored 
