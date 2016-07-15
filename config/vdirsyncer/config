@@ -69,6 +69,24 @@ url = https://cloud.lip6.fr/remote.php/carddav/addressbooks/coudron/pro
 username = coudron
 password.fetch = ["command", "keyring", "get", "lip6_cloud", "coudron"]
 
+
+# Need oauth and also gmail kharddav seems broken
+# [storage perso_local_carddav]
+# type = filesystem
+# path.fetch = ["command", "sh", "-c", "echo $XDG_DATA_HOME/contacts"]
+# fileext = .vcf
+
+
+# [storage perso_remote_carddav]
+# auth=basic
+# type = carddav
+# url = google.com
+# username = mattator
+# password.fetch = ["command", "keyring", "get", "gmail", "coudron"]
+
+
+
+
 # CALDAV => Calendar
 [pair lip6_caldav]
 a = lip6_local_caldav
