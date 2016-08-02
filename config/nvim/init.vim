@@ -2,7 +2,7 @@
 " to debug vimscript, use :mess to display error messages
 " map <C-D> <C-]>
 " map <C-D> :tag<CR>
-" map <D-b> :echom "hello papy"
+map <D-b> :echom "hello papy"
 
 "$NVIM_PYTHON_LOG_FILE
 " to test startup time
@@ -67,7 +67,7 @@ Plug 'zchee/deoplete-jedi', { 'for': 'python'}
 " }}}
 
 
-Plug 'KabbAmine/vCoolor.vim' " RGBA color picker
+Plug 'KabbAmine/vCoolor.vim', { 'on': 'VCooler' } " RGBA color picker
 Plug 'https://github.com/arakashic/chromatica.nvim' " semantic color syntax
 
 "Plug 'mattn/vim-rtags' a l'air léger
@@ -82,6 +82,9 @@ Plug 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
 
 " Using a non-master branch
 "Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
+Plug 'nhooyr/neoman.vim' " :Nman to see manpage in vim
+
+Plug 'critiqjo/lldb.nvim' " To debug (use clang to get correct line numbers
 
 " filetypes {{{2
 Plug 'cespare/vim-toml', { 'for': 'toml'}
@@ -107,6 +110,10 @@ Plug 'bfredl/nvim-miniyank' " killring alike plugin, cycling paste
 
 " Text objects {{{
 Plug 'michaeljsmith/vim-indent-object'
+Plug 'tommcdo/vim-lion' " Use with gl/L<text object><character to align to>
+Plug 'tommcdo/vim-exchange' " Use with cx<text object> to cut, cxx to exchange
+Plug 'tommcdo/vim-kangaroo' "  zp to push/zP to pop the position
+Plug 'tommcdo/vim-ninja-feet' " 
 " }}}
 "
 " {{{ To ease movements
@@ -415,7 +422,7 @@ filetype plugin on
 
 " Modeliner shortcuts  {{{
 set modeline
-set modelines=4
+set modelines=4 "number of lines checked
 nmap <leader>ml :Modeliner<Enter>
 let g:Modeliner_format = 'et ff= fenc= sts= sw= ts= fdm=marker'
 " }}}
@@ -448,7 +455,7 @@ nmap <silent> <C-Down> :wincmd j<CR>
 nmap <silent> <C-Left> :wincmd h<CR>
 nmap <silent> <C-Right> :wincmd l<CR>
 
-nmap <silent> <D-Up> :wincmd k<CR>
+nmap  <D-Up> :wincmd k<CR>
 nmap <silent> <D-Down> :wincmd j<CR>
 nmap <silent> <D-Left> :wincmd h<CR>
 nmap <silent> <D-Right> :wincmd l<CR>
@@ -1171,6 +1178,7 @@ noremap             <C-k>           {
 
 " added 'n' to defaults to allow wrapping lines to overlap with numbers
 set cpoptions="aABceFsn"
+set matchpairs+=<:>
 " nvim specific configuration {{{
 
 if has("nvim")
