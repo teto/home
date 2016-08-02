@@ -1,15 +1,13 @@
 " vim: set noet fenc=utf-8 ff=unix sts=0 sw=2 ts=8 fdm=marker :
 " to debug vimscript, use :mess to display error messages
-" map <C-D> <C-]>
+map <C-D> <C-]>
 " map <C-D> :tag<CR>
-" map <D-b> :echom "hello papy"
+map <D-b> :echom "hello papy"
 
 "$NVIM_PYTHON_LOG_FILE
 " to test startup time
 " nvim --startuptime startup.log
 " nvim -u NONE --startuptime startup.log
-
-set display=lastline
 
 " TODO move to XDG_DATA_HOME
 let s:nvimdir = (exists("$XDG_CONFIG_HOME") ? $XDG_CONFIG_HOME : $HOME.'/.config').'/nvim'
@@ -34,48 +32,24 @@ autocmd BufReadPost *.doc,*.docx,*.rtf,*.odp,*.odt silent %!pandoc "%" -tplain -
 
 " 
 let mapleader = " "
+
 " to configure vim for haskell, refer to
 " http://yannesposito.com/Scratch/en/blog/Vim-as-IDE/
-function! DoRemote(arg)
-  UpdateRemotePlugins
-endfunction
 
-function! BuildComposer(info)
-  if a:info.status != 'unchanged' || a:info.force
-    !cargo build --release
-    UpdateRemotePlugins
-  endif
-endfunction
-
-
-
-" vim-plug plugin declarations {{{1
 call plug#begin(s:nvimdir.'/plugged')
 
 "Plug 'junegunn/limelight.vim' " to highlight ucrrent paragraph only
 " Plug 'bronson/vim-trailing-whitespace' " :FixTrailingWhitespace
 " Plug 'tkhoa2711/vim-togglenumber' " by default mapped to <leader>n
-Plug 'dzeban/vim-log-syntax' " hl warn/error
-" Plug 'timeyyy/orchestra.nvim' " to play some music on 
-" Plug 'timeyyy/clackclack.symphony' " data to play with orchestra.vim
-
-" Plug 'Yggdroot/indentLine',{ 'for': 'python' }  " draw verticals indents but
-" seems greedy
-"  Autocompletion and linting {{{2
-" Plug 'Valloric/YouCompleteMe' , { 'frozen': 1,  'do': './install.py --system-libclang --clang-completer' }
-Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
-Plug 'zchee/deoplete-clang', { 'for': 'cpp' }
-Plug 'zchee/deoplete-jedi', { 'for': 'python'}
+Plug 'dzeban/vim-log-syntax'
+Plug 'Yggdroot/indentLine',{ 'for': 'python' } 
+" {{{ Autocompletion and linting 
+Plug 'Valloric/YouCompleteMe' , { 'frozen': 1,  'do': './install.py --system-libclang --clang-completer' }
 " }}}
-
-
-Plug 'KabbAmine/vCoolor.vim' " RGBA color picker
-Plug 'https://github.com/arakashic/chromatica.nvim', {'for': 'cpp'} " semantic color syntax
-
 "Plug 'mattn/vim-rtags' a l'air léger
-" Plug 'shaneharper/vim-rtags' " <leader>r ou bien :RtagsFind  mais ne marche pas
+Plug 'shaneharper/vim-rtags' " <leader>r ou bien :RtagsFind  mais ne marche pas
 Plug 'lyuts/vim-rtags'  " a l'air d'etre le plus complet
-Plug 'tpope/vim-unimpaired' " [<space> [e [n ]n pour gerer les conflits etc...
+
 Plug 'kana/vim-operator-user' " dependancy for operator-flashy
 Plug 'haya14busa/vim-operator-flashy' " Flash selection on copy
 
@@ -85,47 +59,60 @@ Plug 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
 " Using a non-master branch
 "Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
 
-" filetypes {{{2
+" filetypes {{{
 Plug 'cespare/vim-toml', { 'for': 'toml'}
 " }}}
 
-" Python {{{2
-" Plug 'klen/python-mode', { 'for': 'python'}
-" Plug 'hynek/vim-python-pep8-indent', {'for': 'python'} " does not work
-" Plug 'mjbrownie/GetFilePlus', {'for': 'python'} " improves gf on imports
-" fails on relad
-" Plug 'tmhedberg/SimpylFold', { 'for': 'python' } " provides python folding
-"Plug 'vim-flake8' " for python syntax
-" Plug 'bfredl/nvim-ipy'  " adds the :IPython command
-" Plug 'danielroseman/pygd-vim', {'for': 'python'} " provokes an error
+" Python {{{1
+
+Plug 'hynek/vim-python-pep8-indent', {'for': 'py'} " does not work
+Plug 'mjbrownie/GetFilePlus', {'for': 'py'} " improves gf on imports
+Plug 'tmhedberg/SimpylFold', { 'for': 'py' } " provides python folding
 " }}}
 
 " Plug 'Valloric/ListToggle' " toggling seems to fail
-Plug 'tpope/vim-obsession' ", {'on': 'Obsession', 'ObsessionStatus'}  very cool, register edited files in a Session.vim, call with :Obsession
+Plug 'tpope/vim-obsession'
 Plug 'mbbill/undotree'
-Plug '907th/vim-auto-save'  " mapped to F6
+Plug '907th/vim-auto-save' 
 ", { 'for': 'python' } " 
-Plug 'bfredl/nvim-miniyank' " killring alike plugin, cycling paste
-
-" Text objects {{{
-Plug 'michaeljsmith/vim-indent-object'
-" }}}
-
 " {{{ To ease movements
 "Plug 'rhysd/clever-f.vim'
 "Plug 'unblevable/quick-scope'  " highlight characeters to help in f/F moves
 Plug 'Lokaltog/vim-easymotion'
 "Plug 'wellle/visual-split.vim'
-Plug 'wellle/targets.vim' " Adds new motion targets ci{
 Plug 'justinmk/vim-ipmotion' " ?
 "Plug 'justinmk/vim-sneak' " remaps 's'
 Plug 'tpope/vim-rsi'  " maps readline bindings
 " }}}
 
+"Plug 'vim-flake8' " for python syntax
 "Plug 'fisadev/vim-ctrlp-cmdpalette' " sublime text like palette
 "Plug 'osyo-manga/vim-anzu' " to improve internal search
 Plug 'mhinz/vim-startify' " very popular, vim's homepage
 
+" Startify config {{{
+"nnoremap <leader>st :Startify<cr>
+
+let g:startify_list_order = [
+      \ ['   Bookmarks'],     'bookmarks',
+      \ ['   MRU'],           'files' ,
+      \ ['   MRU '.getcwd()], 'dir',
+      \ ['   Sessions'],      'sessions',
+      \ ]
+let g:startify_use_env = 0
+let g:startify_disable_at_vimenter = 0
+let g:startify_session_dir = $XDG_DATA_HOME.'/nvim/sessions'
+let g:startify_bookmarks = [
+      \ {'i': $XDG_CONFIG_HOME.'/i3/config.main'},
+      \ {'z': $XDG_CONFIG_HOME.'/zsh/.zshenv'},
+      \ ]
+let g:startify_files_number = 10
+let g:startify_session_autoload = 1
+let g:startify_session_persistence = 0
+let g:startify_change_to_vcs_root = 0
+let g:startify_session_savevars = []
+let g:startify_session_delete_buffers = 1
+" }}}
 
 Plug 'dietsche/vim-lastplace' " restore last cursor postion
 " Powerline does not work in neovim hence use vim-airline instead
@@ -141,7 +128,7 @@ Plug 'dietsche/vim-lastplace' " restore last cursor postion
 
 "
 Plug 'justinmk/vim-dirvish' " replaces netrw 
-" Plug 'justinmk/vim-gtfo' " gfo to open filemanager in cwd
+Plug 'justinmk/vim-gtfo' " gfo to open filemanager in cwd
 Plug 'wannesm/wmgraphviz.vim', {'for': 'dot'} " graphviz syntax highlighting
 "Plug 'CCTree'
  Plug 'tpope/vim-commentary' "gcc to comment/gcgc does not work that well
@@ -150,23 +137,28 @@ Plug 'teto/vim-listchars' " to cycle between different list/listchars configurat
 "Plug 'vim-voom/VOoM' " can show tex/restDown Table of Content (ToC)
 Plug 'blueyed/vim-diminactive' " disable syntax coloring on inactive splits
 "Plug 'tpope/vim-sleuth' " Dunno what it is
-" Plug 'tpope/vim-vinegar' " Improves netrw (not needed with dirvish)
+Plug 'tpope/vim-vinegar' " Improves netrw
 "Plug 'brettanomyces/nvim-terminus' "edit term command in nvim
 "Plug 'justinmk/vim-gtfo' " ?
 Plug 'tpope/vim-fugitive' " to use with Git
 "Plug 'jaxbot/github-issues.vim' " works only with vim
 "Plug 'tpope/vim-surround' " don't realy know how to use yet
-Plug 'junegunn/vim-github-dashboard' " needs ruby support, thus won't work in neovim
+"Plug 'junegunn/vim-github-dashboard' " needs ruby support, thus won't work in neovim
 "Plug 'scrooloose/nerdcommenter'
 "Plug 'junegunn/vim-peekaboo' " gives a preview of buffers when pasting
 Plug 'mhinz/vim-randomtag', { 'on': 'Random' } " Adds a :Random function that launches help at random
 Plug 'majutsushi/tagbar', {'on': 'TagbarToggle'}
 
+" vim-sayonara {{{1
+nnoremap <silent><leader>q  :Sayonara<cr>
+nnoremap <silent><leader>Q  :Sayonara!<cr>
+
+let g:sayonara_confirm_quit = 0
+" }}}
 
 
-"  fuzzers {{{2
-" Plug 'junegunn/fzf', { 'dir': $XDG_DATA_HOME . '/fzf', 'do': './install --completion --key-bindings --64' }
-Plug 'junegunn/fzf', { 'dir': $XDG_DATA_HOME . '/fzf', 'do': './install --all --64'}
+" {{{ fuzzers
+Plug 'junegunn/fzf', { 'dir': $XDG_DATA_HOME . '/fzf', 'do': './install --all --64' }
 
 " Many options available :
 " https://github.com/junegunn/fzf.vim
@@ -175,14 +167,45 @@ Plug 'junegunn/fzf.vim' " defines :Files / :Commits for FZF
 
 "}}}
 
+" FZF config {{{
+let g:fzf_command_prefix = 'Fzf' " prefix commands :Files become :FzfFiles, etc.
+let g:fzf_nvim_statusline = 0 " disable statusline overwriting
 
+" This is the default extra key bindings
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-v': 'vsplit' }
 
-Plug 'euclio/vim-markdown-composer' " , { 'for': 'markdown', 'do': function('BuildComposer') } " Needs rust, cargo, plenty of things :help markdown-composer
-" Plug 'Rykka/riv.vim', {'for': 'rst'} " restdown helper, commands 'Riv*'
-" Plug 'Rykka/InstantRst' {'for': 'rst'}
+" Default fzf layout
+" - down / up / left / right
+" - window (nvim only)
+let g:fzf_layout = { 'down': '~40%' }
+" For Commits and BCommits to customize the options used by 'git log':
+let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
+
+" Advanced customization using autoload functions
+"autocmd VimEnter * command! Colors
+  "\ call fzf#vim#colors({'left': '15%', 'options': '--reverse --margin 30%,0'})
+" Advanced customization using autoload functions
+" }}}
+
+function! BuildComposer(info)
+  if a:info.status != 'unchanged' || a:info.force
+    !cargo build --release
+    UpdateRemotePlugins
+  endif
+endfunction
+
+Plug 'euclio/vim-markdown-composer', { 'for': 'md', 'do': function('BuildComposer') } " Needs rust, cargo, plenty of things
+"Plug 'greyblake/vim-preview' " depends on ruby 'redcarpet', thus doesn't work in neovim ?
+
 "Plug 'junegunn/vim-easy-align'   " to align '=' on multiple lines for instance
+" Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 "Plug 'surround.vim'
+"Plug 'tpope/vim-markdown', { 'for': 'md' }
 "Plug 'elzr/vim-json', { 'for': 'json' }
+"Plug 'numkil/ag.vim'
 Plug 'dhruvasagar/vim-table-mode', {'for': 'txt'}
 
 "Plug 'airblade/vim-gitgutter' " will show which lines changed compared to last clean state
@@ -204,10 +227,28 @@ Plug 'vasconcelloslf/vim-interestingwords' " highlight the words you choose <lea
 Plug 'mhinz/vim-grepper', { 'on': 'Grepper'}
 "Plug 'teto/neovim-auto-autoread' " works only in neovim, runs external checker
 "Plug 'benekastah/neomake' " async build for neovim
-Plug '~/neomake' " , {'branch': 'graphviz'}  async build for neovim
+Plug '~/neomake', {'branch': 'graphviz'} " async build for neovim
 Plug 'mhinz/vim-signify'
 " Plug 'teddywing/auditory.vim' " play sounds as you type
 
+" Neomake config {{{
+let g:neomake_verbose = 1
+let g:neomake_python_enabled_makers = ['pyflakes']
+let g:neomake_logfile = '/home/teto/neomake.log'
+let g:neomake_c_gcc_args = ['-fsyntax-only', '-Wall']
+let g:neomake_open_list = 0
+
+let g:neomake_airline = 1
+let g:neomake_echo_current_error = 1
+let g:neomake_place_signs=1
+let g:neomake_error_sign = { 'text': '✘', 'texthl': 'ErrorSign' }
+let g:neomake_warning_sign = { 'text': ':(', 'texthl': 'WarningSign' }
+"let g:neomake_ruby_enabled_makers = ['mri']
+
+" C and CPP are handled by YCM and java usually by elim
+"let s:neomake_exclude_ft = [ 'c', 'cpp', 'java' ]
+"let g:neomake_python_pep8_maker
+" }}}
 
 " colorschemes {{{
 Plug 'whatyouhide/vim-gotham'
@@ -246,15 +287,10 @@ Plug 'lervag/vimtex', {'for': 'tex'} " so far the best one
 " Plug 'vim-scripts/YankRing.vim' " breaks in neovim, overrides yy as well
 
 call plug#end()
-" }}}
 
-" vim-sayonara {{{2
-nnoremap <silent><leader>q  :Sayonara<cr>
-nnoremap <silent><leader>Q  :Sayonara!<cr>
 
-let g:sayonara_confirm_quit = 0
-" }}}
-
+"nnoremap <silent> <leader>k :call InterestingWords('n')<cr>
+"nnoremap <silent> <leader>K :call UncolorAllWords()<cr>
 
 " K works in vim files
 autocmd FileType vim setlocal keywordprg=:help
@@ -278,7 +314,6 @@ set scrolloff=3
 
 set noshowmode " Show the current mode on command line
 set cursorline " highlight cursor line
-set showcmd 
 
 
 let g:lastplace_ignore = "gitcommit,svn"
@@ -335,6 +370,12 @@ set showmatch
 " " Note: When this option is on some plugins may not work.
 
 
+" display a menu when need t ocomplete a command 
+set wildmenu
+set wildmode=list:longest
+"Ignore these files when completing names and in Explorer
+set wildignore=.svn,CVS,.git,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg,*.png,*.xpm,*.gif
+
 
 " Use visual bell instead of beeping when doing something wrong
 set visualbell
@@ -385,12 +426,8 @@ syntax on
 
 " Wildmenu completion {{{
 
-" display a menu when need t ocomplete a command 
 set wildmenu
-set wildmode=full,longest:full
-"Ignore these files when completing names and in Explorer
-" set wildignore=.svn,CVS,.git,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg,*.png,*.xpm,*.gif
-
+set wildmode=list:longest
 
 set wildignore+=.hg,.git,.svn                    " Version control
 set wildignore+=*.aux,*.out,*.toc                " LaTeX intermediate files
@@ -434,14 +471,23 @@ noremap gy "+y
 
 
 
+
 " todo enable rainbow parentheses
 "nnoremap <leader>R :CtrlP<CR>
 " est deja mappe :/
 
-"
-imap <silent> <C-k> <Up>
-imap <silent> <C-j> <Down>
 
+
+
+" External sourced files section {{{
+
+" let use sudo once the file is loaded
+"source ~/.vim/plug.vim
+" source ~/.vim/colors.vim
+" this should be made a plugin as well
+" TODO this does not work with neovim
+"source ~/.vim/vim_file_chooser.vim
+" }}}
 
 " Window / splits {{{
 "cmap w!! w !sudo tee % >/dev/null
@@ -484,8 +530,8 @@ nmap <leader>sw<right> :botright vnew<CR>
 nmap <leader>sw<up>    :topleft  new<CR>
 nmap <leader>sw<down>  :botright new<CR>
 
-" nnoremap <silent> + :exe "resize +3"
-" nnoremap <silent> - :exe "resize -3"
+nnoremap <silent> + :exe "resize +3"
+nnoremap <silent> - :exe "resize -3"
 
 set splitbelow	" on horizontal splits
 set splitright   " on vertical split
@@ -494,17 +540,11 @@ set splitright   " on vertical split
 
 
 " {{{ Markdown composer
-" Run with :ComposerStart
 let g:markdown_composer_open_browser        = "qutebrowser"
 let g:markdown_composer_autostart           = 1
 " }}}
 "set winheight=30
 "set winminheight=5
-
-" Restdown {{{
-let g:instant_rst_browser = "qutebrowser"
-let g:instant_rst_additional_dirs=[ "/home/teto/mptcpweb" ]
-" }}}
 
 " Appearance {{{
 set background=dark
@@ -545,26 +585,6 @@ let g:diminactive_use_colorcolumn = 1
 let g:diminactive_use_syntax = 0
 let g:diminactive_enable_focus = 0
 "}}}
-
-" i3 autocommands {{{
-" todo when opening i3 files, set makeprg to build_config
-" augroup i3
-" autcmd! 
-
-"   autocmd BufWinEnter  call ResCur()
-" augroup END
-
-" }}}
-
-" interesting words {{{
-"nnoremap <silent> <leader>k :call InterestingWords('n')<cr>
-"nnoremap <silent> <leader>K :call UncolorAllWords()<cr>
-" let g:terminal_color_0 = "#202020"
-" let g:interestingWordsTermColors = ['#202020', '121', '211', '137', '214', '222']
-" let g:interestingWordsTermColors = ['#aeee00', '#ff0000', '#0000ff', '#b88823', '#ffa724', '#ff2c4b']
-
-" }}}
-
 " to remove timeout when changing modes
 if ! has('gui_running')
     set ttimeoutlen=10
@@ -618,52 +638,6 @@ nnoremap <leader>u :UndoTreeToggle<CR>
 "nnoremap <F8> :vertical wincmd f<CR> " open file under cursor in a split
 nnoremap <leader>gfs :vertical wincmd f<CR> " open file under cursor in a split
 
-" Chromatica (needs libclang > 3.9) {{{
-" let g:chomatica#respnsive_mode=1
-" let g:chromatica#libclang_path='/usr/local/opt/llvm/lib'
-let g:chromatica#libclang_path="/usr/lib/llvm-3.8/lib/"
-" }}}
-
-
-" FZF config {{{
-let g:fzf_command_prefix = 'Fzf' " prefix commands :Files become :FzfFiles, etc.
-let g:fzf_nvim_statusline = 0 " disable statusline overwriting
-
-" This is the default extra key bindings
-let g:fzf_action = {
-  \ 'ctrl-t': 'tab split',
-  \ 'ctrl-x': 'split',
-  \ 'ctrl-v': 'vsplit' }
-
-" Default fzf layout
-" - down / up / left / right
-" - window (nvim only)
-let g:fzf_layout = { 'down': '~40%' }
-
-" For Commits and BCommits to customize the options used by 'git log':
-let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
-
-" Customize fzf colors to match your color scheme
-" let g:fzf_colors = \ { 'fg':      ['fg', 'Normal'],
-"   \ 'bg':      ['bg', 'Normal'],
-"   \ 'hl':      ['fg', 'Comment'],
-"   \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-"   \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-"   \ 'hl+':     ['fg', 'Statement'],
-"   \ 'info':    ['fg', 'PreProc'],
-"   \ 'prompt':  ['fg', 'Conditional'],
-"   \ 'pointer': ['fg', 'Exception'],
-"   \ 'marker':  ['fg', 'Keyword'],
-"   \ 'spinner': ['fg', 'Label'],
-"   \ 'header':  ['fg', 'Comment'] 
-" }
-
-" Advanced customization using autoload functions
-"autocmd VimEnter * command! Colors
-  "\ call fzf#vim#colors({'left': '15%', 'options': '--reverse --margin 30%,0'})
-" Advanced customization using autoload functions
-" }}}
-
 " Powerline config {{{
 
 let g:Powerline_symbols = "fancy" " to use unicode symbols
@@ -686,8 +660,8 @@ let g:Powerline_symbols = "fancy" " to use unicode symbols
 " }}}
 
 " ToggleList config {{{
-let g:lt_location_list_toggle_map = '<F2>' " '<leader>l'
-let g:lt_quickfix_list_toggle_map = '<F3>' " '<leader>qq'
+let g:lt_location_list_toggle_map = '<F3>' " '<leader>l'
+let g:lt_quickfix_list_toggle_map = '<F2>' " '<leader>qq'
 " }}}
 
 " Search parameters {{{
@@ -707,6 +681,7 @@ let g:ycm_auto_trigger = 1
 let g:ycm_error_symbol = ">>" " used to signal errors in gutter
 let g:ycm_warning_symbol = '!' " warn in gutter TODO use unicode chars
 let g:ycm_show_diagnostics_ui = 1 " show info in gutter
+" g:ycm_show_diagnostics_ui=1
 "let g:ycm_server_use_vim_stdout = 1
 "let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_key_invoke_completion = '<C-Space>'
@@ -731,20 +706,8 @@ nnoremap <F6> :YcmDebugInfo<CR>
 nnoremap <leader>jd :YcmCompleter GoTo<CR>
 " }}}
 
-" Deoplete {{{
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#enable_ignore_case = 1
-let g:deoplete#disable_auto_complete = 0
-let g:deoplete#enable_debug = 1
-" Let <Tab> also do completion
-" inoremap <silent><expr> <Tab>
-" \ pumvisible() ? "<C-n>" :
-" \ deoplete#mappings#manual_complete()
-" }}}
-
 " Jedi (python) completion {{{
-let g:deoplete#sources#clang#libclang_path="/usr/lib/llvm-3.8/lib/libclang.so"
-let g:jedi#auto_vim_configuration = 1 " to prevent python's help popup
+let g:jedi#auto_vim_configuration = 0 " to prevent python's help popup
 " }}}
 
 " Airline {{{
@@ -764,19 +727,12 @@ let g:airline#extensions#tabline#show_buffers = 1
 let g:airline#extensions#tabline#buffer_min_count =2
 let g:airline#extensions#tabline#buffer_idx_mode = 1
 
-let g:airline#extensions#obsession#enabled = 1
-
-let g:airline#extensions#tabline#buffers_label = 'b'
-
-let g:airline#extensions#tabline#tabs_label = 't'
-let g:airline#extensions#tabline#show_tabs = 0
+let g:airline#extensions#tabline#show_tabs = 1
 
 let g:airline#extensions#tabline#formatter = 'unique_tail'
 let g:airline_extensions = ['branch', 'tabline']
 
 let g:airline#extensions#tagbar#enabled = 0
-
-let g:airline_detect_spell=1
 
 let g:airline#extensions#ycm#enabled = 1
 let g:airline#extensions#ycm#error_symbol = 'E:'
@@ -784,10 +740,9 @@ let g:airline#extensions#ycm#warning_symbol = 'W:'
 
 let g:airline#extensions#whitespace#enabled = 0
 let g:airline#extensions#whitespace#mixed_indent_algo = 2
-let g:airline#extensions#obsession#enabled = 1
-" let g:airline#extensions#whitespace#checks = [ 'indent', 'trailing', 'long' ]
+let g:airline#extensions#whitespace#checks = [ 'indent', 'trailing', 'long' ]
 "|neomake#statusline#LoclistStatus should be shown in warning section
-" let g:airline_section_z = airline#section#create(['%{ObsessionStatus(''$'', '''')}'])
+let g:airline_section_z = airline#section#create(['%{ObsessionStatus(''$'', '''')}'])
 nmap <leader>& <Plug>AirlineSelectTab1
 nmap <leader>é <Plug>AirlineSelectTab2
 nmap <leader>" <Plug>AirlineSelectTab3
@@ -795,60 +750,11 @@ nmap <leader>' <Plug>AirlineSelectTab4
 nmap <leader>( <Plug>AirlineSelectTab5
 nmap <leader>- <Plug>AirlineSelectTab6
 nmap <leader>è <Plug>AirlineSelectTab7
-nmap <leader>è <Plug>AirlineSelectTab7
-nmap <leader>_ <Plug>AirlineSelectTab8
-nmap <leader>ç <Plug>AirlineSelectTab9
+
 
 "}}}
 
 autocmd CompleteDone * pclose " close the popup on python completion
-
-" Neomake config {{{
-let g:neomake_verbose = 1
-let g:neomake_python_enabled_makers = ['pyflakes']
-let g:neomake_logfile = '/home/teto/neomake.log'
-let g:neomake_c_gcc_args = ['-fsyntax-only', '-Wall']
-let g:neomake_open_list = 0
-
-let g:neomake_airline = 1
-let g:neomake_echo_current_error = 1
-let g:neomake_place_signs=1
-let g:neomake_error_sign = { 'text': '✘', 'texthl': 'ErrorSign' }
-let g:neomake_warning_sign = { 'text': ':(', 'texthl': 'WarningSign' }
-"let g:neomake_ruby_enabled_makers = ['mri']
-
-" let g:neomake_rst_enabled_makers = ['pyflakes']
-" C and CPP are handled by YCM and java usually by elim
-"let s:neomake_exclude_ft = [ 'c', 'cpp', 'java' ]
-"let g:neomake_python_pep8_maker
-" }}}
-
-" Startify config {{{
-"nnoremap <leader>st :Startify<cr>
-
-let g:startify_list_order = [
-      \ ['   MRU '.getcwd()], 'dir',
-      \ ['   MRU'],           'files' ,
-      \ ['   Bookmarks'],     'bookmarks',
-      \ ['   Sessions'],      'sessions',
-      \ ]
-let g:startify_use_env = 0
-let g:startify_disable_at_vimenter = 0
-let g:startify_session_dir = $XDG_DATA_HOME.'/nvim/sessions'
-let g:startify_bookmarks = [
-      \ {'i': $XDG_CONFIG_HOME.'/i3/config.main'},
-      \ {'z': $XDG_CONFIG_HOME.'/zsh/'},
-      \ {'m': $XDG_CONFIG_HOME.'/mptcpanalyzer/config'},
-      \ {'n': $XDG_CONFIG_HOME.'/ncmpcpp/config'},
-      \ ]
-      " \ {'q': $XDG_CONFIG_HOME.'/qutebrowser/qutebrowser.conf'},
-let g:startify_files_number = 10
-let g:startify_session_autoload = 1
-let g:startify_session_persistence = 0
-let g:startify_change_to_vcs_root = 0
-let g:startify_session_savevars = []
-let g:startify_session_delete_buffers = 1
-" }}}
 
 " {{{ Clever f
 "
@@ -962,18 +868,6 @@ let g:ycm_semantic_triggers.tex = [
 set foldcolumn=1
 " }}}
 
-" Pymode {{{
-let g:pymode_python = 'python3'
-let g:pymode_warnings = 1
-let g:pymode_paths = []
-let g:pymode_trim_whitespaces = 1
-let g:pymode_options = 0
-let g:pymode_folding = 0
-let g:pymode_motion = 1
-let g:pymode_rope_goto_definition_bind = 'gd'
-let g:pymode_lint = 0
-" "}}}
-
 " vim-listchars config {{{
     "\"trail:·,tab:→\ ,eol:↲,precedes:<,extends:>"
 "let g:listchar_formats=[ 
@@ -1025,6 +919,7 @@ let g:signify_mapping_toggle = '<leader>gt'
   let g:auto_save_events = ['FocusLost']
   "let g:auto_save_events = ['CursorHold', 'FocusLost']
 " Put this in vimrc, add custom commands in the function.
+" deprecated
 function! AutoSaveOnLostFocus()
   " to solve pb with Airline https://github.com/vim-airline/vim-airline/issues/1030#issuecomment-183958050
    
@@ -1077,14 +972,13 @@ set diffopt=filler,vertical " default behavior for diff
 nnoremap Y y$
 
 
-"nnoremap coa :AutoSaveToggle<CR>
 
 " search items in location list (per window)
 nnoremap <F1> :lprev<CR>
-nnoremap <F2> :lnext<CR>
+"nnoremap <F2> :lnext<CR>
 " search for  item in quickfix list (global/unique)
-nnoremap <F3> :cprev<CR>
-nnoremap <F4> :cnext<CR>
+"nnoremap <F3> :cprev<CR>
+nmap <F4> :cnext<CR>
 
 nnoremap <F5> :Neomake<CR>
 nnoremap <F6> :AutoSaveToggle<CR>
@@ -1097,7 +991,7 @@ nnoremap <F8> :bn<CR>
 "noremap <F4> exec ":emenu <tab>"
 " should become useless with neovim
 noremap <F10> :set paste!<CR>
-map <F11> <Plug>(ToggleListchars)
+map <F12> <Plug>(ToggleListchars)
 
 " Command to toggle line wrapping.
 nnoremap <Leader>wr :set wrap! \| :set wrap?<CR>
@@ -1138,30 +1032,24 @@ map <Leader>n :bnext<CR>
 map <Leader>N :bNext<CR>
 map <Leader>p :bprevious<CR>
 map <Leader>d :bdelete<CR>
-" TODO trigger a menu in vim
 map <Leader>s :setlocal spell spelllang=en_us<CR>
-
-"http://stackoverflow.com/questions/28613190/exclude-quickfix-buffer-from-bnext-bprevious
-
-" Unimpaired {{{
-" advised by tpope for these remote countries that don't use qwerty
-" https://github.com/tpope/vim-unimpaired
-" nmap < [
-" nmap > ]
-" omap < [
-" omap > ]
-" xmap < [
-" xmap > ]
-" }}}
-
 " indents
 "nmap <S-Tab> <<
 "nmap <Tab> >>
 "vmap <S-Tab> <gv
 "vmap <Tab> >gv
-" call orchestra#prelude()
-" call orchestra#set_tune('clackclack')
 
+<<<<<<< HEAD
+||||||| merged common ancestors
+
+
+=======
+set hidden 
+
+" inoremap :echom 'hello world'
+noremap <D-b> :echom 'hello world'<CR>
+
+>>>>>>> gh/master
 " azerty customizations : utilise <C-V> pour entrer le caractère utilisé {{{
 "https://www.reddit.com/r/vim/comments/2tvupe/azerty_keymapping/
 " parce que # est l'opposé de * et ù est a coté de *
@@ -1173,16 +1061,10 @@ noremap             <C-k>           {
 "'.'
 "set shada=!,'50,<1000,s100,:0,n/home/teto/.cache/nvim/shada
 
-" added 'n' to defaults to allow wrapping lines to overlap with numbers
-set cpoptions="aABceFsn"
 " nvim specific configuration {{{
-
 if has("nvim")
-  " should work with vim also but need a very new vim
-  set termguicolors
   "set shada=!,'50,<1000,s100,:0,n$XDG_CACHE_HOME/nvim/shada
   let g:netrw_home=$XDG_DATA_HOME.'/nvim'
-  "now ignored 
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
   let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 endif

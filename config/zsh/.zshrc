@@ -324,3 +324,5 @@ source "$FZF_PATH"/key-bindings.zsh
 if [ -e /home/teto/.nix-profile/etc/profile.d/nix.sh ]; then . /home/teto/.nix-profile/etc/profile.d/nix.sh; fi 
 
 
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
