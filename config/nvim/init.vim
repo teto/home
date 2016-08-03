@@ -68,7 +68,7 @@ Plug 'zchee/deoplete-clang', { 'for': 'cpp' }
 Plug 'zchee/deoplete-jedi', { 'for': 'python'}
 " }}}
 
-
+Plug 'janko-m/vim-test' "look at the website, many examples
 Plug 'https://github.com/arakashic/chromatica.nvim', {'for': 'cpp'} " semantic color syntax
 Plug 'KabbAmine/vCoolor.vim', { 'on': 'VCooler' } " RGBA color picker
 
@@ -752,6 +752,12 @@ let g:deoplete#enable_debug = 1
 " Jedi (python) completion {{{
 let g:deoplete#sources#clang#libclang_path="/usr/lib/llvm-3.8/lib/libclang.so"
 let g:jedi#auto_vim_configuration = 1 " to prevent python's help popup
+
+let g:jedi#goto_assignments_command = "<leader>pa"
+let g:jedi#goto_definitions_command = "<leader>pd"
+let g:jedi#documentation_command = "<leader>pk"
+let g:jedi#usages_command = "<leader>pu"
+let g:jedi#rename_command = "<leader>pr"
 " }}}
 
 " Airline {{{
@@ -812,10 +818,12 @@ autocmd CompleteDone * pclose " close the popup on python completion
 
 " Neomake config {{{
 let g:neomake_verbose = 1
-let g:neomake_python_enabled_makers = ['pyflakes']
+let g:neomake_python_enabled_makers = ['flake8']
 let g:neomake_logfile = '/home/teto/neomake.log'
 let g:neomake_c_gcc_args = ['-fsyntax-only', '-Wall']
 let g:neomake_open_list = 0
+
+" let g:neomake_python_flake8_maker = { 'args': ['--ignore=E501'], }
 
 let g:neomake_airline = 1
 let g:neomake_echo_current_error = 1
