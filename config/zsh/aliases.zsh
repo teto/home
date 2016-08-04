@@ -13,6 +13,10 @@ alias -s mp3=mocp
 alias -s pdf=zathura
 
 
+alias mp="mptcpanalyzer"
+alias mn="mptcpnumerics"
+
+
 ### Dictionary lookup {{{
 alias fren="dict -d fd-fra-eng"
 alias enfr="dict -d fd-eng-fra"

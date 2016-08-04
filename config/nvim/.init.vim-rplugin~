@@ -2,9 +2,6 @@
 call remote#host#RegisterPlugin('python3', '/home/teto/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete', [
       \ {'sync': v:true, 'name': '_deoplete', 'type': 'function', 'opts': {}},
      \ ])
-call remote#host#RegisterPlugin('python3', '/home/teto/.config/nvim/plugged/chromatica.nvim/rplugin/python3/chromatica', [
-      \ {'sync': v:true, 'name': '_chromatica', 'type': 'function', 'opts': {}},
-     \ ])
 call remote#host#RegisterPlugin('python3', '/home/teto/.config/nvim/plugged/vim-markdown-composer/rplugin/python3/markdown_composer', [
       \ {'sync': v:true, 'name': 'FileType', 'type': 'autocmd', 'opts': {'pattern': 'markdown'}},
       \ {'sync': v:false, 'name': 'BufEnter', 'type': 'autocmd', 'opts': {'pattern': '*.md,*.mkd,*.markdown'}},
