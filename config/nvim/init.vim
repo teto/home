@@ -9,8 +9,6 @@ map <D-b> :echom "hello papy"
 " nvim --startuptime startup.log
 " nvim -u NONE --startuptime startup.log
 
-set display=lastline
-
 " TODO move to XDG_DATA_HOME
 let s:nvimdir = (exists("$XDG_CONFIG_HOME") ? $XDG_CONFIG_HOME : $HOME.'/.config').'/nvim'
 let s:plugscript = s:nvimdir.'/autoload/plug.vim'
@@ -55,7 +53,7 @@ call plug#begin(s:nvimdir.'/plugged')
 "Plug 'junegunn/limelight.vim' " to highlight ucrrent paragraph only
 " Plug 'bronson/vim-trailing-whitespace' " :FixTrailingWhitespace
 " Plug 'tkhoa2711/vim-togglenumber' " by default mapped to <leader>n
-Plug 'dzeban/vim-log-syntax' " hl warn/error
+Plug 'dzeban/vim-log-syntax'
 " Plug 'timeyyy/orchestra.nvim' " to play some music on 
 " Plug 'timeyyy/clackclack.symphony' " data to play with orchestra.vim
 
@@ -68,9 +66,9 @@ Plug 'zchee/deoplete-clang', { 'for': 'cpp' }
 Plug 'zchee/deoplete-jedi', { 'for': 'python'}
 " }}}
 
-Plug 'janko-m/vim-test' "look at the website, many examples
-Plug 'https://github.com/arakashic/chromatica.nvim', {'for': 'cpp'} " semantic color syntax
+
 Plug 'KabbAmine/vCoolor.vim', { 'on': 'VCooler' } " RGBA color picker
+Plug 'https://github.com/arakashic/chromatica.nvim' " semantic color syntax
 
 "Plug 'mattn/vim-rtags' a l'air léger
 " Plug 'shaneharper/vim-rtags' " <leader>r ou bien :RtagsFind  mais ne marche pas
@@ -106,7 +104,7 @@ Plug 'cespare/vim-toml', { 'for': 'toml'}
 " Plug 'Valloric/ListToggle' " toggling seems to fail
 Plug 'tpope/vim-obsession' ", {'on': 'Obsession', 'ObsessionStatus'}  very cool, register edited files in a Session.vim, call with :Obsession
 Plug 'mbbill/undotree'
-Plug '907th/vim-auto-save'  " mapped to F6
+Plug '907th/vim-auto-save' 
 ", { 'for': 'python' } " 
 Plug 'bfredl/nvim-miniyank' " killring alike plugin, cycling paste
 
@@ -117,7 +115,7 @@ Plug 'tommcdo/vim-exchange' " Use with cx<text object> to cut, cxx to exchange
 Plug 'tommcdo/vim-kangaroo' "  zp to push/zP to pop the position
 Plug 'tommcdo/vim-ninja-feet' " 
 " }}}
-
+"
 " {{{ To ease movements
 "Plug 'rhysd/clever-f.vim'
 "Plug 'unblevable/quick-scope'  " highlight characeters to help in f/F moves
@@ -169,6 +167,12 @@ Plug 'junegunn/vim-github-dashboard' " needs ruby support, thus won't work in ne
 Plug 'mhinz/vim-randomtag', { 'on': 'Random' } " Adds a :Random function that launches help at random
 Plug 'majutsushi/tagbar', {'on': 'TagbarToggle'}
 
+" vim-sayonara {{{2
+nnoremap <silent><leader>q  :Sayonara<cr>
+nnoremap <silent><leader>Q  :Sayonara!<cr>
+
+let g:sayonara_confirm_quit = 0
+" }}}
 
 
 "  fuzzers {{{2
@@ -185,8 +189,8 @@ Plug 'junegunn/fzf.vim' " defines :Files / :Commits for FZF
 
 
 Plug 'euclio/vim-markdown-composer' " , { 'for': 'markdown', 'do': function('BuildComposer') } " Needs rust, cargo, plenty of things :help markdown-composer
-" Plug 'Rykka/riv.vim', {'for': 'rst'} " restdown helper, commands 'Riv*'
-" Plug 'Rykka/InstantRst' {'for': 'rst'}
+Plug 'Rykka/riv.vim' " , {'for': 'rst'}
+Plug 'Rykka/InstantRst'
 "Plug 'junegunn/vim-easy-align'   " to align '=' on multiple lines for instance
 "Plug 'surround.vim'
 "Plug 'elzr/vim-json', { 'for': 'json' }
@@ -255,12 +259,6 @@ Plug 'lervag/vimtex', {'for': 'tex'} " so far the best one
 call plug#end()
 " }}}
 
-" vim-sayonara {{{2
-nnoremap <silent><leader>q  :Sayonara<cr>
-nnoremap <silent><leader>Q  :Sayonara!<cr>
-
-let g:sayonara_confirm_quit = 0
-" }}}
 
 
 " K works in vim files
@@ -285,7 +283,6 @@ set scrolloff=3
 
 set noshowmode " Show the current mode on command line
 set cursorline " highlight cursor line
-set showcmd 
 
 
 let g:lastplace_ignore = "gitcommit,svn"
@@ -422,7 +419,6 @@ set wildignore+=lib
 
 " to load plugins in ftplugin matching ftdetect
 filetype plugin on
-
 " Modeliner shortcuts  {{{
 set modeline
 set modelines=4 "number of lines checked
@@ -516,7 +512,7 @@ let g:instant_rst_additional_dirs=[ "/home/teto/mptcpweb" ]
 " Appearance {{{
 set background=dark
 
-let g:solarized_termtrans = 0
+" let g:solarized_termtrans = 0
 " let g:solarized_style     =   "dark"  
 " g:solarized_contrast  =   "normal"|   "high" or "low"
 
@@ -535,7 +531,6 @@ let g:solarized_termtrans = 0
 "nnoremap <f4> :call ToggleBackground()<cr>
 
 " colorscheme solarized
-colorscheme monokai
 "}}}
 
 " Gruvbox config {{{
@@ -747,17 +742,13 @@ let g:deoplete#enable_debug = 1
 " inoremap <silent><expr> <Tab>
 " \ pumvisible() ? "<C-n>" :
 " \ deoplete#mappings#manual_complete()
+" deoplete tab-complete
+" nnoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 " }}}
 
 " Jedi (python) completion {{{
 let g:deoplete#sources#clang#libclang_path="/usr/lib/llvm-3.8/lib/libclang.so"
 let g:jedi#auto_vim_configuration = 1 " to prevent python's help popup
-
-let g:jedi#goto_assignments_command = "<leader>pa"
-let g:jedi#goto_definitions_command = "<leader>pd"
-let g:jedi#documentation_command = "<leader>pk"
-let g:jedi#usages_command = "<leader>pu"
-let g:jedi#rename_command = "<leader>pr"
 " }}}
 
 " Airline {{{
@@ -818,12 +809,10 @@ autocmd CompleteDone * pclose " close the popup on python completion
 
 " Neomake config {{{
 let g:neomake_verbose = 1
-let g:neomake_python_enabled_makers = ['flake8']
+let g:neomake_python_enabled_makers = ['pyflakes']
 let g:neomake_logfile = '/home/teto/neomake.log'
 let g:neomake_c_gcc_args = ['-fsyntax-only', '-Wall']
 let g:neomake_open_list = 0
-
-" let g:neomake_python_flake8_maker = { 'args': ['--ignore=E501'], }
 
 let g:neomake_airline = 1
 let g:neomake_echo_current_error = 1
@@ -832,7 +821,6 @@ let g:neomake_error_sign = { 'text': '✘', 'texthl': 'ErrorSign' }
 let g:neomake_warning_sign = { 'text': ':(', 'texthl': 'WarningSign' }
 "let g:neomake_ruby_enabled_makers = ['mri']
 
-" let g:neomake_rst_enabled_makers = ['pyflakes']
 " C and CPP are handled by YCM and java usually by elim
 "let s:neomake_exclude_ft = [ 'c', 'cpp', 'java' ]
 "let g:neomake_python_pep8_maker
@@ -1191,6 +1179,9 @@ noremap             <C-k>           {
 " added 'n' to defaults to allow wrapping lines to overlap with numbers
 set cpoptions="aABceFsn"
 set matchpairs+=<:>
+
+
+
 " nvim specific configuration {{{
 
 if has("nvim")
@@ -1199,7 +1190,16 @@ if has("nvim")
   "set shada=!,'50,<1000,s100,:0,n$XDG_CACHE_HOME/nvim/shada
   let g:netrw_home=$XDG_DATA_HOME.'/nvim'
   "now ignored 
-  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+  " let $NVIM_TUI_ENABLE_TRUE_COLOR=1
   let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 endif
 " }}}
+
+" as we set termguicolors, 
+" highlight Comment gui="NONE,italic"; e
+" echom "colorscheme changed" |
+autocmd ColorScheme *  highlight Comment gui=italic
+" highlight Comment gui=italic
+
+" if you want to 
+colorscheme molokai

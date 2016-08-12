@@ -6,9 +6,6 @@
 # launch mpd in user mode
 # mpd &
 
-# need to launch daemon before i3, cos of scratchpads
-#urxvtd -q -o -f&
-
 # Enable zapping (C-A-<Bksp> kills X)
 setxkbmap -option terminate:ctrl_alt_bksp
 
@@ -36,6 +33,8 @@ parcellite&
 # network manager systray icon
 #nm-applet&
 xmodmap ~/.Xmodmap
+
+i3
 
 # if [ -a ~/.xsession_forthiscomputer.sh ];
 # then
