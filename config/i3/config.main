@@ -463,6 +463,8 @@ bindsym XF86Display exec ~/.i3/monitors.sh
 
 #exec urxvtc -name irclient -e irssi
 
-exec ~/.i3/autostart
+
+exec_always xmodmap ~/.Xmodmap
+exec_always xmodmap ~/.Xmodmap
 #https://faq.i3wm.org/question/2155/how-can-i-use-autostart-desktop-files-in-i3/
 # exec dex -ae i3

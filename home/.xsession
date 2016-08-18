@@ -3,10 +3,6 @@
 # TODO replace with compton
 #xcompmgr&
 
-# launch mpd in user mode
-mpd &
-
-dbus-launch
 
 # Enable zapping (C-A-<Bksp> kills X)
 setxkbmap -option terminate:ctrl_alt_bksp
@@ -30,11 +26,18 @@ ulimit -c unlimited
 # echo "Starting at $(date)" >> ~/.i3/logfile
 # exec /usr/bin/i3 -V -d all >> ~/.i3/logfile
 
+# Things that should be launched by dex (.config/autostart)
 # clipboard manager
-parcellite&
+# parcellite&
 # network manager systray icon
 #nm-applet&
-xmodmap ~/.Xmodmap
+# launch mpd in user mode
+# mpd &
+
+# dbus-launch
+
+# autostart applications
+dex -a -e i3
 
 i3
 
