@@ -189,8 +189,8 @@ Plug 'junegunn/fzf.vim' " defines :Files / :Commits for FZF
 
 
 Plug 'euclio/vim-markdown-composer' " , { 'for': 'markdown', 'do': function('BuildComposer') } " Needs rust, cargo, plenty of things :help markdown-composer
-" Plug 'Rykka/riv.vim' " , {'for': 'rst'}
-Plug 'Rykka/InstantRst'
+Plug 'Rykka/riv.vim' " , {'for': 'rst'}
+Plug 'Rykka/InstantRst', {'for': 'rst'} " webserver  for riv.vim
 "Plug 'junegunn/vim-easy-align'   " to align '=' on multiple lines for instance
 "Plug 'surround.vim'
 "Plug 'elzr/vim-json', { 'for': 'json' }
@@ -511,26 +511,8 @@ let g:instant_rst_additional_dirs=[ "/home/teto/mptcpweb" ]
 
 " Appearance {{{
 set background=dark
+set fillchars=vert:│,fold:>,stl:\ ,stlnc:\ ,diff:-
 
-" let g:solarized_termtrans = 0
-" let g:solarized_style     =   "dark"  
-" g:solarized_contrast  =   "normal"|   "high" or "low"
-
-" to alternate between dark and light bg
-" to alternate between dark and light bg
-"function! ToggleBackground()
- "if (w:solarized_style=="dark")
- "let w:solarized_style="light"
- "colorscheme solarized
-"else
- "let w:solarized_style="dark"
- "colorscheme solarized
-"endif
-"endfunction
-"command! Togbg call ToggleBackground()
-"nnoremap <f4> :call ToggleBackground()<cr>
-
-" colorscheme solarized
 "}}}
 
 " Gruvbox config {{{
@@ -606,7 +588,7 @@ nnoremap <Leader>w :w<CR>
 " mostly fzf mappings, use TAB to mark several files at the same time
 " https://github.com/neovim/neovim/issues/4487
 nnoremap <Leader>o :FzfFiles<CR>
-nnoremap <Leader><space> :FzfGitFiles<CR>
+nnoremap <Leader><Space> :FzfGitFiles<CR>
 nnoremap <Leader>h :FzfHistory<CR>
 nnoremap <Leader>c :FzfCommits<CR>
 nnoremap <Leader>C :FzfColors<CR>
@@ -810,19 +792,20 @@ nmap <leader>ç <Plug>AirlineSelectTab9
 " Neomake config {{{
 let g:neomake_verbose = 1
 let g:neomake_python_enabled_makers = ['pyflakes']
-let g:neomake_logfile = '/home/teto/neomake.log'
+let g:neomake_logfile = $HOME.'/neomake.log'
 let g:neomake_c_gcc_args = ['-fsyntax-only', '-Wall']
 let g:neomake_open_list = 0
 
 let g:neomake_airline = 1
 let g:neomake_echo_current_error = 1
 let g:neomake_place_signs=1
+
+
 let g:neomake_error_sign = { 'text': '✘', 'texthl': 'ErrorSign' }
-let g:neomake_warning_sign = { 'text': ':(', 'texthl': 'WarningSign' }
-"let g:neomake_ruby_enabled_makers = ['mri']
+let g:neomake_warning_sign = { 'text': '！', 'texthl': 'WarningSign' }
 
 " C and CPP are handled by YCM and java usually by elim
-"let s:neomake_exclude_ft = [ 'c', 'cpp', 'java' ]
+let s:neomake_exclude_ft = [ 'c', 'cpp', 'java' ]
 "let g:neomake_python_pep8_maker
 " }}}
 
@@ -987,7 +970,6 @@ let g:pymode_lint = 0
 " while waiting to finish my vim-listchars plugin
 "set listchars=tab:»·,eol:↲,nbsp:␣,extends:…
 "set listchars=tab:•·,trail:·,extends:❯,precedes:❮,nbsp:×
-"set fillchars=vert:│,fold:─
 " }}}
 
 " Grepper {{{
@@ -1065,6 +1047,10 @@ command! -nargs=? -complete=dir Sexplore belowright split | silent Dirvish <args
 nnoremap gx :call netrw#BrowseX(expand((exists("g:netrw_gx")? g:netrw_gx : '<cfile>')),netrw#CheckIfRemote())<cr>
 " }}}
 
+" riv restdown config {{{
+let g:riv_disable_folding=1
+let g:riv_disable_indent=0
+" }}}
 
 set hidden " you can open a new buffer even if current is unsaved (error E37)
 
