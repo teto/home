@@ -216,7 +216,7 @@ Plug 'mhinz/vim-grepper', { 'on': 'Grepper'}
 "Plug 'teto/neovim-auto-autoread' " works only in neovim, runs external checker
 "Plug 'benekastah/neomake' " async build for neovim
 Plug '~/neomake' " , {'branch': 'graphviz'}  async build for neovim
-Plug 'mhinz/vim-signify'
+Plug 'mhinz/vim-signify' " Indicate changed lines within a file using a VCS.
 " Plug 'teddywing/auditory.vim' " play sounds as you type
 
 
@@ -994,15 +994,23 @@ nnoremap <leader>pU :PlugUpgrade<CR>
 nnoremap <leader>pu :PlugUpdate<CR>
 " }}}
 
-" signify {{{
+" signify (display added/removed lines from vcs) {{{
 let g:signify_vcs_list = [ 'git']
-let g:signify_mapping_next_hunk = '<leader>gj'
+let g:signify_mapping_next_hunk = '<leader>hn' " hunk next
 let g:signify_mapping_prev_hunk = '<leader>gk' 
 let g:signify_mapping_toggle_highlight = '<leader>gh' 
+let g:signify_line_highlight = 0 " display added/removed lines in different colors
 "let g:signify_line_color_add    = 'DiffAdd'
 "let g:signify_line_color_delete = 'DiffDelete'
 "let g:signify_line_color_change = 'DiffChange' 
 let g:signify_mapping_toggle = '<leader>gt'
+" let g:signify_sign_add = 
+" let g:signify_sign_delete|
+" let g:signify_sign_delete_first_line|
+" let g:signify_sign_change|
+" let g:signify_sign_changedelete|
+" let g:signify_sign_show_count|
+
 " }}}
 
 " autosave {{{
