@@ -189,7 +189,7 @@ Plug 'junegunn/fzf.vim' " defines :Files / :Commits for FZF
 
 
 Plug 'euclio/vim-markdown-composer' " , { 'for': 'markdown', 'do': function('BuildComposer') } " Needs rust, cargo, plenty of things :help markdown-composer
-Plug 'Rykka/riv.vim' " , {'for': 'rst'}
+" Plug 'Rykka/riv.vim' " , {'for': 'rst'}
 Plug 'Rykka/InstantRst'
 "Plug 'junegunn/vim-easy-align'   " to align '=' on multiple lines for instance
 "Plug 'surround.vim'
@@ -805,7 +805,7 @@ nmap <leader>ç <Plug>AirlineSelectTab9
 
 "}}}
 
-autocmd CompleteDone * pclose " close the popup on python completion
+" autocmd CompleteDone * pclose " close the popup on python completion
 
 " Neomake config {{{
 let g:neomake_verbose = 1
