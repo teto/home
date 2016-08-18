@@ -1,0 +1,18 @@
+[Default Applications]
+video/x-matroska=mpv.desktop
+video/mp4=mpv.desktop
+text/csv=sublime_text.desktop
+video/x-msvideo=mpv.desktop
+application/x-matroska=mpv.desktop
+text/x-csrc=gedit.desktop
+text/x-chdr=sublime_text.desktop
+
+[Added Associations]
+video/x-matroska=vlc.desktop;mpv.desktop;
+video/mp4=vlc.desktop;mpv.desktop;userapp-mpv-DXOVBY.desktop;
+text/csv=sublime_text.desktop;
+video/x-msvideo=mpv.desktop;
+application/x-matroska=mpv.desktop;
+text/x-csrc=gedit.desktop;
+text/x-patch=sublime_text.desktop;
+text/x-chdr=sublime_text.desktop;
