@@ -4,7 +4,9 @@
 #xcompmgr&
 
 # launch mpd in user mode
-# mpd &
+mpd &
+
+dbus-launch
 
 # Enable zapping (C-A-<Bksp> kills X)
 setxkbmap -option terminate:ctrl_alt_bksp

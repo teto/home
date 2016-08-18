@@ -156,6 +156,9 @@ bindsym $mod+Shift+A kill
 bindsym $mod+Tab exec "rofi -modi 'run,DRun,window,ssh' -show run"
 #bindsym $mod+eacute exec j4-dmenu-desktop --dmenu='rofi -modi "run,ssh,dmenu" -dmenu'
 #dmenu_run -
+bindsym $mod+eacute i3-list-windows
+
+no_focus [class="^qutebrowser"]
 
 #for_window [title="MOC"] move scratchpad
 #for_window [Class="^Transmission"] floating enable
