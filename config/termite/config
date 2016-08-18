@@ -8,7 +8,10 @@ dynamic_title = true
 fullscreen = false
 urgent_on_bell = true
 clickable_url = true
+
+# apparently it's possible to 
 font = Inconsolata For Powerline 11
+# font = , FontAwesome 9
 scrollback_lines = 10000
 search_wrap = false
 #icon_name = terminal
@@ -21,7 +24,7 @@ cursor_blink = system
 cursor_shape = block
 
 # $BROWSER is used by default if set, with xdg-open as a fallback
-#browser = xdg-open
+browser = qutebrowser
 
 # set size hints for the window
 #size_hints = false
