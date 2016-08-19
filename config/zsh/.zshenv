@@ -60,7 +60,7 @@ export MAILDIR="$HOME/Maildir"
 export EDITOR="nvim"
 export TERMINAL="termite"
 
-export MANPAGER="nvim -c 'set ft=man' -"
+# export MANPAGER="nvim -c 'set ft=man' -"
 
 # FZF {{{
 export FZF_DEFAULT_OPTS=" --exact"

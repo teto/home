@@ -26,7 +26,7 @@
 
 # vimdiff as merge and diff tool
 [merge]
-  tool = vimdiff
+	tool = fugitive
   conflictstyle = diff3
 
 [diff]
@@ -50,3 +50,5 @@
 [mergetool "vimdiff"]
   prompt = true
   cmd = nvim -d $BASE $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+[mergetool "fugitive"]
+	cmd = nvim -f -c \"Gdiff\" \"$MERGED\"
