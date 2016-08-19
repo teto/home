@@ -104,7 +104,7 @@ Plug 'cespare/vim-toml', { 'for': 'toml'}
 " Plug 'Valloric/ListToggle' " toggling seems to fail
 Plug 'tpope/vim-obsession' ", {'on': 'Obsession', 'ObsessionStatus'}  very cool, register edited files in a Session.vim, call with :Obsession
 Plug 'mbbill/undotree'
-Plug '907th/vim-auto-save' 
+Plug '907th/vim-auto-save' " :
 ", { 'for': 'python' } " 
 Plug 'bfredl/nvim-miniyank' " killring alike plugin, cycling paste
 
@@ -155,14 +155,11 @@ Plug 'teto/vim-listchars' " to cycle between different list/listchars configurat
 "Plug 'vim-voom/VOoM' " can show tex/restDown Table of Content (ToC)
 Plug 'blueyed/vim-diminactive' " disable syntax coloring on inactive splits
 "Plug 'tpope/vim-sleuth' " Dunno what it is
-" Plug 'tpope/vim-vinegar' " Improves netrw (not needed with dirvish)
-"Plug 'brettanomyces/nvim-terminus' "edit term command in nvim
 "Plug 'justinmk/vim-gtfo' " ?
-Plug 'tpope/vim-fugitive' " to use with Git
+Plug 'tpope/vim-fugitive' " to use with Git, VERY powerful
 "Plug 'jaxbot/github-issues.vim' " works only with vim
 "Plug 'tpope/vim-surround' " don't realy know how to use yet
 Plug 'junegunn/vim-github-dashboard' " needs ruby support, thus won't work in neovim
-"Plug 'scrooloose/nerdcommenter'
 "Plug 'junegunn/vim-peekaboo' " gives a preview of buffers when pasting
 Plug 'mhinz/vim-randomtag', { 'on': 'Random' } " Adds a :Random function that launches help at random
 Plug 'majutsushi/tagbar', {'on': 'TagbarToggle'}
@@ -266,14 +263,6 @@ autocmd FileType vim setlocal keywordprg=:help
 
 
 
-set autoread " automatically reload file when it has been changed (hope they fix this damn feature one day)
-set linebreak " better display (makes sense only with wrap)
-set wrap
-set breakat=80
-set breakindent " preserve indentation on wrap
-set showbreak=">>>"  " displayed in front of wrapped lines
-filetype on                   " required!
-set backspace=indent,eol,start
 
 
 " start scrolling before reaching end of screen in order to keep more context
@@ -281,11 +270,11 @@ set scrolloff=3
 
 "  compilation option
 
-set noshowmode " Show the current mode on command line
-set cursorline " highlight cursor line
 
 
+" vim-lastplace to restore cursor position {{{
 let g:lastplace_ignore = "gitcommit,svn"
+" }}}
 
 " Indentation {{{
 set tabstop=4 " a tab takes 4 characters (local to buffer)
@@ -510,9 +499,23 @@ let g:instant_rst_additional_dirs=[ "/home/teto/mptcpweb" ]
 " }}}
 
 " Appearance {{{
-set background=dark
+set background=dark " remember: does not change the background color !
 set fillchars=vert:│,fold:>,stl:\ ,stlnc:\ ,diff:-
 
+set noshowmode " Show the current mode on command line
+set cursorline " highlight cursor line
+
+" set diffopt=filler
+
+set autoread " automatically reload file when it has been changed (hope they fix this damn feature one day)
+set linebreak " better display (makes sense only with wrap)
+set wrap
+set breakat=80
+set breakindent " preserve indentation on wrap
+set showbreak=">>>"  " displayed in front of wrapped lines
+
+filetype on                   " required! (still required in vim ?)
+set backspace=indent,eol,start
 "}}}
 
 " Gruvbox config {{{
@@ -588,7 +591,7 @@ nnoremap <Leader>w :w<CR>
 " mostly fzf mappings, use TAB to mark several files at the same time
 " https://github.com/neovim/neovim/issues/4487
 nnoremap <Leader>o :FzfFiles<CR>
-nnoremap <Leader><Space> :FzfGitFiles<CR>
+nnoremap <Space><Space> :FzfGitFiles<CR>
 nnoremap <Leader>h :FzfHistory<CR>
 nnoremap <Leader>c :FzfCommits<CR>
 nnoremap <Leader>C :FzfColors<CR>
@@ -1013,7 +1016,7 @@ let g:signify_mapping_toggle = '<leader>gt'
 
 " }}}
 
-" autosave {{{
+" autosave plugin {{{
   let g:auto_save_in_insert_mode = 0
   let g:auto_save_events = ['FocusLost']
   "let g:auto_save_events = ['CursorHold', 'FocusLost']
@@ -1049,7 +1052,7 @@ autocmd BufWritePost ~/.Xdefaults call system('xrdb ~/.Xdefaults')
 " }}}
 
 " Dirvish {{{
-let g:loaded_netrwPlugin = 1
+let g:loaded_netrwPlugin = 1 " ???
 command! -nargs=? -complete=dir Vexplore leftabove vsplit | silent Dirvish <args>
 command! -nargs=? -complete=dir Sexplore belowright split | silent Dirvish <args>
 nnoremap gx :call netrw#BrowseX(expand((exists("g:netrw_gx")? g:netrw_gx : '<cfile>')),netrw#CheckIfRemote())<cr>
@@ -1062,9 +1065,8 @@ let g:riv_disable_indent=0
 
 set hidden " you can open a new buffer even if current is unsaved (error E37)
 
-autocmd syntax markdown setlocal textwidth=80
-autocmd syntax pandoc setlocal textwidth=80
 autocmd syntax text setlocal textwidth=80 
+
 " draw a line on 80th column
 set colorcolumn=80
 
@@ -1073,8 +1075,6 @@ set diffopt=filler,vertical " default behavior for diff
 " Y behave like D or C
 nnoremap Y y$
 
-
-"nnoremap coa :AutoSaveToggle<CR>
 
 " search items in location list (per window)
 nnoremap <F1> :lprev<CR>
