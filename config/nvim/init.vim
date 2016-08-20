@@ -84,7 +84,7 @@ Plug 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
 "Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
 Plug 'nhooyr/neoman.vim' " :Nman to see manpage in vim
 
-Plug 'critiqjo/lldb.nvim' " To debug (use clang to get correct line numbers
+Plug 'critiqjo/lldb.nvim',{ 'for': 'c' } " To debug (use clang to get correct line numbers
 
 " filetypes {{{2
 Plug 'cespare/vim-toml', { 'for': 'toml'}
@@ -103,8 +103,8 @@ Plug 'cespare/vim-toml', { 'for': 'toml'}
 
 " Plug 'Valloric/ListToggle' " toggling seems to fail
 Plug 'tpope/vim-obsession' ", {'on': 'Obsession', 'ObsessionStatus'}  very cool, register edited files in a Session.vim, call with :Obsession
-Plug 'mbbill/undotree'
-Plug '907th/vim-auto-save' " :
+" Plug 'mbbill/undotree'
+Plug '907th/vim-auto-save' " :h auto-save
 ", { 'for': 'python' } " 
 Plug 'bfredl/nvim-miniyank' " killring alike plugin, cycling paste
 
@@ -119,10 +119,10 @@ Plug 'tommcdo/vim-ninja-feet' "
 " {{{ To ease movements
 "Plug 'rhysd/clever-f.vim'
 "Plug 'unblevable/quick-scope'  " highlight characeters to help in f/F moves
-Plug 'Lokaltog/vim-easymotion'
+" Plug 'Lokaltog/vim-easymotion' " careful overrides <leader><leader> mappings
 "Plug 'wellle/visual-split.vim'
 Plug 'wellle/targets.vim' " Adds new motion targets ci{
-Plug 'justinmk/vim-ipmotion' " ?
+" Plug 'justinmk/vim-ipmotion' " ?
 "Plug 'justinmk/vim-sneak' " remaps 's'
 Plug 'tpope/vim-rsi'  " maps readline bindings
 " }}}
@@ -591,7 +591,7 @@ nnoremap <Leader>w :w<CR>
 " mostly fzf mappings, use TAB to mark several files at the same time
 " https://github.com/neovim/neovim/issues/4487
 nnoremap <Leader>o :FzfFiles<CR>
-nnoremap <Space><Space> :FzfGitFiles<CR>
+nnoremap <Leader><Space> :FzfGitFiles<CR>
 nnoremap <Leader>h :FzfHistory<CR>
 nnoremap <Leader>c :FzfCommits<CR>
 nnoremap <Leader>C :FzfColors<CR>
@@ -1016,10 +1016,11 @@ let g:signify_mapping_toggle = '<leader>gt'
 
 " }}}
 
-" autosave plugin {{{
-  let g:auto_save_in_insert_mode = 0
-  let g:auto_save_events = ['FocusLost']
-  "let g:auto_save_events = ['CursorHold', 'FocusLost']
+" autosave plugin (:h auto-save) {{{
+let g:auto_save_in_insert_mode = 1
+let g:auto_save_events = ['FocusLost']
+"let g:auto_save_events = ['CursorHold', 'FocusLost']
+let g:auto_save_write_all_buffers = 1 " Setting this option to 1 will write all
 " Put this in vimrc, add custom commands in the function.
 function! AutoSaveOnLostFocus()
   " to solve pb with Airline https://github.com/vim-airline/vim-airline/issues/1030#issuecomment-183958050
@@ -1061,6 +1062,14 @@ nnoremap gx :call netrw#BrowseX(expand((exists("g:netrw_gx")? g:netrw_gx : '<cfi
 " riv restdown config {{{
 let g:riv_disable_folding=1
 let g:riv_disable_indent=0
+" }}}
+
+" easymotion {{{
+let g:EasyMotion_do_shade = 0 
+let g:EasyMotion_do_mapping = 1
+let g:EasyMotion_use_upper = 1 " display upper case letters but let u type lower case
+let g:EasyMotion_inc_highlight = 0
+let g:EasyMotion_disable_two_key_combo = 0
 " }}}
 
 set hidden " you can open a new buffer even if current is unsaved (error E37)
@@ -1171,8 +1180,8 @@ noremap             <C-k>           {
 "set shada=!,'50,<1000,s100,:0,n/home/teto/.cache/nvim/shada
 
 " added 'n' to defaults to allow wrapping lines to overlap with numbers
-set cpoptions="aABceFsn"
-set matchpairs+=<:>
+set cpoptions="aABceFsn" " vi ComPatibility options
+set matchpairs+=<:>  " Characters for which % should work
 
 
 
