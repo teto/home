@@ -293,11 +293,15 @@ let g:netrw_home=$XDG_CACHE_HOME.'/nvim'
 let g:netrw_liststyle=1 " long listing with timestamp
 " }}}
 " /quickfix
-"
+
+
+" C syntax parsing {{{
+" hoefully obsolete with clang semantic analysis (see rtags etc..)
 "let c_no_bracket_error=1
 "let c_no_curly_error=1
 "let c_comment_strings=1
 "let c_gnu=1
+" }}}
 
 set title " vim will change terminal title
 "set titlestring
