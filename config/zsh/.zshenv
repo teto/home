@@ -60,7 +60,9 @@ export MAILDIR="$HOME/Maildir"
 export EDITOR="nvim"
 export TERMINAL="termite"
 
-# export MANPAGER="nvim -c 'set ft=man' -"
+
+# can remove NORC once pb in nvim fixed
+export MANPAGER="nvim -u NORC -c 'set ft=man' -"
 
 # FZF {{{
 export FZF_DEFAULT_OPTS=" --exact"
