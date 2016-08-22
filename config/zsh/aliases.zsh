@@ -17,6 +17,9 @@ alias mp="mptcpanalyzer"
 alias mn="mptcpnumerics"
 
 
+alias :q="exit"
+
+
 ### Dictionary lookup {{{
 alias fren="dict -d fd-fra-eng"
 alias enfr="dict -d fd-eng-fra"

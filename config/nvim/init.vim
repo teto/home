@@ -1,5 +1,8 @@
 " vim: set noet fenc=utf-8 ff=unix sts=0 sw=2 ts=8 fdm=marker :
 " to debug vimscript, use :mess to display error messages
+" :scriptnames to list loaded scripts
+" and prefix you command with 'verbose' is a very good way to get info
+" like ':verbose map J' to know where it was loaded last
 " map <C-D> <C-]>
 " map <C-D> :tag<CR>
 map <D-b> :echom "hello papy"
@@ -56,7 +59,7 @@ call plug#begin(s:nvimdir.'/plugged')
 Plug 'dzeban/vim-log-syntax'
 " Plug 'timeyyy/orchestra.nvim' " to play some music on 
 " Plug 'timeyyy/clackclack.symphony' " data to play with orchestra.vim
-
+Plug 'tpope/vim-scriptease'
 " Plug 'Yggdroot/indentLine',{ 'for': 'python' }  " draw verticals indents but
 " seems greedy
 "  Autocompletion and linting {{{2
@@ -187,7 +190,7 @@ Plug 'junegunn/fzf.vim' " defines :Files / :Commits for FZF
 
 Plug 'euclio/vim-markdown-composer' " , { 'for': 'markdown', 'do': function('BuildComposer') } " Needs rust, cargo, plenty of things :help markdown-composer
 Plug 'Rykka/riv.vim' " , {'for': 'rst'}
-Plug 'Rykka/InstantRst', {'for': 'rst'} " webserver  for riv.vim
+Plug 'Rykka/InstantRst', {'for': 'rst'} " rst live preview with :InstantRst, 
 "Plug 'junegunn/vim-easy-align'   " to align '=' on multiple lines for instance
 "Plug 'surround.vim'
 "Plug 'elzr/vim-json', { 'for': 'json' }
@@ -280,7 +283,12 @@ let g:lastplace_ignore = "gitcommit,svn"
 set tabstop=4 " a tab takes 4 characters (local to buffer)
 set shiftwidth=4 " Number of spaces to use per step of (auto)indent.
 set smarttab "use shiftwidth
-set smartindent 
+set smartindent " might need to disable ?
+
+set cindent
+set cinkeys-=0# " list of keys that cause reindenting in insert mode
+set indentkeys-=0#
+
 set shiftround " round indent to multiple of 'shiftwidth' (for << and >>)
 "set softtabstop=4 " remove <Tab> symbols as it was spaces
 "set expandtab " replace <Tab with spaces
@@ -295,13 +303,6 @@ let g:netrw_liststyle=1 " long listing with timestamp
 " /quickfix
 
 
-" C syntax parsing {{{
-" hoefully obsolete with clang semantic analysis (see rtags etc..)
-"let c_no_bracket_error=1
-"let c_no_curly_error=1
-"let c_comment_strings=1
-"let c_gnu=1
-" }}}
 
 set title " vim will change terminal title
 "set titlestring
@@ -497,7 +498,7 @@ let g:markdown_composer_autostart           = 1
 "set winheight=30
 "set winminheight=5
 
-" Restdown {{{
+" instant restructured text {{{
 let g:instant_rst_browser = "qutebrowser"
 let g:instant_rst_additional_dirs=[ "/home/teto/mptcpweb" ]
 " }}}
@@ -516,7 +517,7 @@ set linebreak " better display (makes sense only with wrap)
 set wrap
 set breakat=80
 set breakindent " preserve indentation on wrap
-set showbreak=">>>"  " displayed in front of wrapped lines
+let &showbreak = '↳ '  	" displayed in front of wrapped lines
 
 filetype on                   " required! (still required in vim ?)
 set backspace=indent,eol,start
@@ -1220,3 +1221,4 @@ autocmd ColorScheme *  highlight Comment gui=italic
 
 " if you want to 
 colorscheme molokai
+

@@ -2,16 +2,18 @@ SHELL = bash
 # provide a default
 XDG_CONFIG_HOME ?= $(HOME)/.config
 XDG_CACHE_HOME ?= $(HOME)/.cache
+XDG_DATA_HOME ?= $(HOME)/.local/share
 MAILDIR ?= $(HOME)/Maildir
 
-.PHONY: config etc mail
+.PHONY: config etc mail local
 
 # http://stackoverflow.com/questions/448910/makefile-variable-assignment
 config:
 	stow -t $(XDG_CONFIG_HOME) config
 
 local:
-	#stow -t $XDG_
+	stow -t $(XDG_DATA_HOME) local
+	# mkdir -p local/share/qutebrowser/userscripts
 
 zsh:
 	chsh -s /bin/zsh ${LOGIN}
