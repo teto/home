@@ -68,7 +68,7 @@ Plug 'zchee/deoplete-jedi', { 'for': 'python'}
 
 
 Plug 'KabbAmine/vCoolor.vim', { 'on': 'VCooler' } " RGBA color picker
-Plug 'https://github.com/arakashic/chromatica.nvim' " semantic color syntax
+Plug 'arakashic/chromatica.nvim', { 'for': 'cpp' } " semantic color syntax
 
 "Plug 'mattn/vim-rtags' a l'air léger
 " Plug 'shaneharper/vim-rtags' " <leader>r ou bien :RtagsFind  mais ne marche pas
@@ -211,8 +211,8 @@ Plug 'vasconcelloslf/vim-interestingwords' " highlight the words you choose <lea
 " async grep neovim only
 Plug 'mhinz/vim-grepper', { 'on': 'Grepper'}
 "Plug 'teto/neovim-auto-autoread' " works only in neovim, runs external checker
-"Plug 'benekastah/neomake' " async build for neovim
-Plug '~/neomake' " , {'branch': 'graphviz'}  async build for neovim
+Plug 'benekastah/neomake' " async build for neovim
+" Plug '~/neomake' " , {'branch': 'graphviz'}  async build for neovim
 Plug 'mhinz/vim-signify' " Indicate changed lines within a file using a VCS.
 " Plug 'teddywing/auditory.vim' " play sounds as you type
 
@@ -606,9 +606,19 @@ nnoremap <leader>u :UndoTreeToggle<CR>
 nnoremap <leader>gfs :vertical wincmd f<CR> " open file under cursor in a split
 
 " Chromatica (needs libclang > 3.9) {{{
+" can compile_commands.json or a .clang file
 " let g:chomatica#respnsive_mode=1
 " let g:chromatica#libclang_path='/usr/local/opt/llvm/lib'
 let g:chromatica#libclang_path="/usr/lib/llvm-3.8/lib/"
+
+
+let g:chromatica#enable_at_startup=1
+let g:chromatica#enable_debug=1
+let g:chromatica#global_args= [] " prepended for each file compile args
+let g:chromatica#responsive_mode = 0 
+let g:chromatica#delay_ms = 80
+let g:chromatica#use_pch = 1
+let g:chromatica#highlight_feature_level=0
 " }}}
 
 
