@@ -1,9 +1,5 @@
 #!/bin/bash
 
-# TODO replace with compton
-#xcompmgr&
-
-
 # Enable zapping (C-A-<Bksp> kills X)
 setxkbmap -option terminate:ctrl_alt_bksp
 
@@ -27,13 +23,6 @@ ulimit -c unlimited
 # exec /usr/bin/i3 -V -d all >> ~/.i3/logfile
 
 # Things that should be launched by dex (.config/autostart)
-# clipboard manager
-# parcellite&
-# network manager systray icon
-#nm-applet&
-# launch mpd in user mode
-# mpd &
-
 # dbus-launch
 
 # autostart applications

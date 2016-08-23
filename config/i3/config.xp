@@ -27,12 +27,6 @@ bindsym --release button2 kill
 
 hide_edge_borders smart
 
-# set_from_resource $<name> <resource_name> <fallback>
-set_from_resource $black i3wm.color0 #000000
-#FFFF50
-#pink = d70a53
-set_from_resource $client_bg i3wm.color0 #d70a53 
-
 # bindsym Escape mode "default"
 # }
 
@@ -64,5 +58,6 @@ bindsym button8 move right
 # give the focused window a prefix
 # bindsym $mod+Shift+g title_format "[test] %title"
 
-#for_window [class="(?i)firefox"] title_format "<span foreground='red'>%title</span>"
+for_window [class="^qutebrowser$"] title_format "<span background='blue'>QB</span> %title"
+# for_window [name="dce"] title_format "<span background='green'>DCE</span> %title"
 #for_window [class="(?i)firefox"] title_format "<span foreground='red'>%title</span>"

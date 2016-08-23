@@ -5,10 +5,29 @@
 # backup #d70a53
 # original client.border #d72f6b 
 # client .background 
-# class                 border  backgrd text    indicator  child border
-client.focused          #C043C6 $client_bg #FFFF50
-client.focused_inactive #06090d #06090d #696f89 #090e14
-client.unfocused        #090e14 #090e14 #696f89 #090e14
+
+
+# set_from_resource $<name> <resource_name> <fallback>
+set_from_resource $black i3wm.color0 #000000
+#FFFF50
+#pink = d70a53
+# couleur orange ubuntu: #E95420 
+set_from_resource $client_bg i3wm.color0 #d70a53 
+set_from_resource $client_bg i3wm.color0 #d70a53 
+set_from_resource $focused_border i3wm.focused_border #C043C6 
+set_from_resource $unfocused_border i3wm.unfocused_border #C043C6 
+set_from_resource $focused_border_inactive i3wm.focused_border_inactive #06090d
+set_from_resource $unfocused_border i3wm.unfocused_border #605C57 
+set_from_resource $unfocused_border_bg i3wm.unfocused_border_bg #605C57 
+set_from_resource $unfocused_txt i3wm.unfocused_txt #ffffff 
+
+set_from_resource $focinac_bg i3wm.focinac_bg #06090d
+set_from_resource $focinac_txt i3wm.focinac_txt #696f89
+
+# class                 border,  backgrd,  text,    indicator,  child border
+client.focused          $focused_border $client_bg #FFFF50
+client.focused_inactive $focused_border_inactive  $focinac_bg $focinac_txt  #090e14
+client.unfocused        $unfocused_border $unfocused_border_bg $unfocused_txt #090e14
 client.urgent           #870000 #870000 #ffffff #090e14
 client.background       $client_bg
 # client.background       #66ff33
