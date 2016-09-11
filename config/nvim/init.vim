@@ -12,29 +12,39 @@ map <D-b> :echom "hello papy"
 " nvim --startuptime startup.log
 " nvim -u NONE --startuptime startup.log
 
+
+" vim-plug autoinstallation {{{
 " TODO move to XDG_DATA_HOME
-let s:nvimdir = (exists("$XDG_CONFIG_HOME") ? $XDG_CONFIG_HOME : $HOME.'/.config').'/nvim'
+" let s:nvimdir = (exists("$XDG_CONFIG_HOME") ? $XDG_CONFIG_HOME : $HOME.'/.config').'/nvim'
+" appended site to be able to use packadd (since it is in packpath)
+let s:nvimdir = (exists("$XDG_DATA_HOME") ? $XDG_DATA_HOME : $HOME.'/.local/share').'/nvim'
 let s:plugscript = s:nvimdir.'/autoload/plug.vim'
+let s:plugdir = s:nvimdir.'/site/pack'
 
 "silent echom s:plugscript
 "silent echom s:nvimdir
 
 if empty(glob(s:plugscript))
-  execute "!mkdir -p " s:nvimdir.'/autoload' s:nvimdir.'/plugged'
+  execute "!mkdir -p " s:nvimdir.'/autoload' s:plugdir
   execute "!curl -fLo" s:plugscript
 		\ "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
 		  autocmd VimEnter * PlugInstall | source $MYVIMRC
 endif
 
+"}}}
+
+
+" Dealing with pdf {{{
 " Read-only pdf through pdftotext
-autocmd BufReadPre *.pdf silent set ro
 autocmd BufReadPost *.pdf silent %!pdftotext -nopgbrk -layout -q -eol unix "%" - | fmt -w78
 
 " convert all kinds of files (but pdf) to plain text
 autocmd BufReadPost *.doc,*.docx,*.rtf,*.odp,*.odt silent %!pandoc "%" -tplain -o /dev/stdout
+" }}}
 
 " 
 let mapleader = " "
+
 " to configure vim for haskell, refer to
 " http://yannesposito.com/Scratch/en/blog/Vim-as-IDE/
 function! DoRemote(arg)
@@ -48,15 +58,18 @@ function! BuildComposer(info)
   endif
 endfunction
 
-
+" filnxtToO
+set shortmess+=I
 
 " vim-plug plugin declarations {{{1
-call plug#begin(s:nvimdir.'/plugged')
-
+call plug#begin(s:plugdir)
+Plug 'mtth/scratch.vim' " , {'on': 'Scratch'}
 "Plug 'junegunn/limelight.vim' " to highlight ucrrent paragraph only
 " Plug 'bronson/vim-trailing-whitespace' " :FixTrailingWhitespace
 " Plug 'tkhoa2711/vim-togglenumber' " by default mapped to <leader>n
 Plug 'dzeban/vim-log-syntax'
+Plug 'PotatoesMaster/i3-vim-syntax'
+
 " Plug 'timeyyy/orchestra.nvim' " to play some music on 
 " Plug 'timeyyy/clackclack.symphony' " data to play with orchestra.vim
 Plug 'tpope/vim-scriptease'
@@ -69,7 +82,7 @@ Plug 'zchee/deoplete-clang', { 'for': 'cpp' }
 Plug 'zchee/deoplete-jedi', { 'for': 'python'}
 " }}}
 
-
+Plug 'mattboehm/vim-unstack'  " to see a
 Plug 'KabbAmine/vCoolor.vim', { 'on': 'VCooler' } " RGBA color picker
 Plug 'arakashic/chromatica.nvim', { 'for': 'cpp' } " semantic color syntax
 
@@ -94,7 +107,7 @@ Plug 'cespare/vim-toml', { 'for': 'toml'}
 " }}}
 
 " Python {{{2
-" Plug 'klen/python-mode', { 'for': 'python'}
+Plug 'klen/python-mode', { 'for': 'python'} " 
 " Plug 'hynek/vim-python-pep8-indent', {'for': 'python'} " does not work
 " Plug 'mjbrownie/GetFilePlus', {'for': 'python'} " improves gf on imports
 " fails on relad
@@ -107,7 +120,9 @@ Plug 'cespare/vim-toml', { 'for': 'toml'}
 " Plug 'Valloric/ListToggle' " toggling seems to fail
 Plug 'tpope/vim-obsession' ", {'on': 'Obsession', 'ObsessionStatus'}  very cool, register edited files in a Session.vim, call with :Obsession
 " Plug 'mbbill/undotree'
-Plug '907th/vim-auto-save' " :h auto-save
+" Plug '907th/vim-auto-save' " :h auto-save
+Plug '~/vim-auto-save' " autosave :h auto-save
+" Plug '~/neovim-auto-autoread' " to check for filechanges
 ", { 'for': 'python' } " 
 Plug 'bfredl/nvim-miniyank' " killring alike plugin, cycling paste
 
@@ -122,7 +137,7 @@ Plug 'tommcdo/vim-ninja-feet' "
 " {{{ To ease movements
 "Plug 'rhysd/clever-f.vim'
 "Plug 'unblevable/quick-scope'  " highlight characeters to help in f/F moves
-" Plug 'Lokaltog/vim-easymotion' " careful overrides <leader><leader> mappings
+Plug 'Lokaltog/vim-easymotion' " careful overrides <leader><leader> mappings
 "Plug 'wellle/visual-split.vim'
 Plug 'wellle/targets.vim' " Adds new motion targets ci{
 " Plug 'justinmk/vim-ipmotion' " ?
@@ -213,12 +228,14 @@ Plug 'vim-scripts/Modeliner' " <leader>ml to setup buffer modeline
 Plug 'vasconcelloslf/vim-interestingwords' " highlight the words you choose <leader>k
 " async grep neovim only
 Plug 'mhinz/vim-grepper', { 'on': 'Grepper'}
+Plug 'ddrscott/vim-side-search' 
 "Plug 'teto/neovim-auto-autoread' " works only in neovim, runs external checker
 Plug 'benekastah/neomake' " async build for neovim
 " Plug '~/neomake' " , {'branch': 'graphviz'}  async build for neovim
 Plug 'mhinz/vim-signify' " Indicate changed lines within a file using a VCS.
 " Plug 'teddywing/auditory.vim' " play sounds as you type
 
+Plug 't9md/vim-quickhl' " hl manually selected words
 
 " colorschemes {{{
 Plug 'whatyouhide/vim-gotham'
@@ -261,18 +278,10 @@ call plug#end()
 
 
 
-" K works in vim files
-autocmd FileType vim setlocal keywordprg=:help
-
-
-
 
 
 " start scrolling before reaching end of screen in order to keep more context
 set scrolloff=3
-
-"  compilation option
-
 
 
 " vim-lastplace to restore cursor position {{{
@@ -300,7 +309,6 @@ let g:netrw_browsex_viewer="xdg-open"
 let g:netrw_home=$XDG_CACHE_HOME.'/nvim'
 let g:netrw_liststyle=1 " long listing with timestamp
 " }}}
-" /quickfix
 
 
 
@@ -358,34 +366,21 @@ set timeoutlen=400 " Quick timeouts on key combinations.
 nnoremap <C-e> 3<C-e>
 nnoremap <C-y> 3<C-y>
 
-" Regenerate database
-" map 
-"map <esc>[27;5;9~ <C-Tab>
-"map <esc>[1;5A <C-Up>
-"map <esc>[1;5B <C-Down>
-"map <esc>[1;5C <C-Right>
-"map <esc>[1;5D <C-Left>
-"map <esc>[1;2D <S-Left>
-"map <esc>[1;2C <S-Right>
-"" tabn 4. Createon
-"map <esc>[27;5;38~ <C-&>
-"map <esc>[27;5;130~ <C-é>
-"map <esc>[27;5;39~ <C-'>
-"map <esc>[27;5;34~ <C-">
-"map <esc>[27;5;40~ <C-(>
-"
-
 syntax on
 
+
+" backup files etc... {{{
+set noswapfile
 " set undodir=~/.vim/tmp/undo//     " undo files
 " set backupdir=~/.vim/tmp/backup// " backups
 " set directory=~/.vim/tmp/swap//   " swap files
+" }}}
 
 " Wildmenu completion {{{
 
-" display a menu when need t ocomplete a command 
+" display a menu when need to complete a command 
 set wildmenu
-set wildmode=full,longest:full
+set wildmode=list:full " zsh way ?!
 "Ignore these files when completing names and in Explorer
 " set wildignore=.svn,CVS,.git,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg,*.png,*.xpm,*.gif
 
@@ -513,11 +508,12 @@ set cursorline " highlight cursor line
 " set diffopt=filler
 
 set autoread " automatically reload file when it has been changed (hope they fix this damn feature one day)
-set linebreak " better display (makes sense only with wrap)
+" set noautoread " to prevent from interfering with our plugin
 set wrap
-set breakat=80
-set breakindent " preserve indentation on wrap
-let &showbreak = '↳ '  	" displayed in front of wrapped lines
+" set breakat=80 " characters at which wrap can break line
+set linebreak " better display (makes sense only with wrap)
+set breakindent " preserve or add indentation on wrap
+let &showbreak = '↳ ↳ ↳ '  	" displayed in front of wrapped lines
 
 filetype on                   " required! (still required in vim ?)
 set backspace=indent,eol,start
@@ -558,14 +554,14 @@ let g:diminactive_enable_focus = 0
 " }}}
 
 " to remove timeout when changing modes
-if ! has('gui_running')
-    set ttimeoutlen=10
-    augroup FastEscape
-        autocmd!
-        au InsertEnter * set timeoutlen=0
-        au InsertLeave * set timeoutlen=1000
-    augroup END
-endif
+" if ! has('gui_running')
+"     set ttimeoutlen=10
+"     augroup FastEscape
+"         autocmd!
+"         au InsertEnter * set timeoutlen=0
+"         au InsertLeave * set timeoutlen=1000
+"     augroup END
+" endif
 
 
 "nnoremap <leader>r :!%:p<return>
@@ -576,33 +572,34 @@ set shiftround    " round indent to multiple of 'shiftwidth'
 " auto reload vim config on save
 " Watch for changes to vimrc
 
-    augroup myvimrc
-      au!
-      au BufWritePost $MYVIMRC,.vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc,init.vim so $MYVIMRC | if has('gui_running') | so $MYGVIMRC | endif
-
-
-
-    augroup END
+augroup myvimrc
+  au!
+  au BufWritePost $MYVIMRC,.vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc,init.vim so $MYVIMRC | if has('gui_running') | so $MYGVIMRC | endif
+augroup END
 
 
 " open vimrc
 nnoremap <Leader>ev :e $MYVIMRC<CR> 
 "nnoremap <Leader>ep :vs ~/.vim/plug.vim<CR> 
-nnoremap <Leader>sv :source $MYVIMRC<CR> " reload vimrc
+" reload vimrc
+nnoremap <Leader>sv :source $MYVIMRC<CR> 
 
-nnoremap <Leader>e :Vex<CR> " open netrw
+" open netrw/dirvish split
+nnoremap <Leader>e :Vex<CR> 
 nnoremap <Leader>w :w<CR>
 
 " mostly fzf mappings, use TAB to mark several files at the same time
 " https://github.com/neovim/neovim/issues/4487
 nnoremap <Leader>o :FzfFiles<CR>
-nnoremap <Leader><Space> :FzfGitFiles<CR>
+nnoremap <Leader>g :FzfGitFiles<CR>
+nnoremap <Leader>F :FzfFiletypes<CR>
 nnoremap <Leader>h :FzfHistory<CR>
 nnoremap <Leader>c :FzfCommits<CR>
 nnoremap <Leader>C :FzfColors<CR>
 nnoremap <leader>b :FzfBuffers<CR>
 nnoremap <leader>m :FzfMarks<CR>
 nnoremap <leader>u :UndoTreeToggle<CR>
+" nnoremap <leader>t :UndoTreeToggle<CR>
 
 " fails with neovim use :te instead ?
 "nnoremap <leader>r :<C-U>RangerChooser<CR> 
@@ -625,7 +622,6 @@ let g:chromatica#delay_ms = 80
 let g:chromatica#use_pch = 1
 let g:chromatica#highlight_feature_level=0
 " }}}
-
 
 " FZF config {{{
 let g:fzf_command_prefix = 'Fzf' " prefix commands :Files become :FzfFiles, etc.
@@ -736,7 +732,7 @@ nnoremap <leader>jd :YcmCompleter GoTo<CR>
 " Deoplete {{{
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_ignore_case = 1
-let g:deoplete#disable_auto_complete = 0
+let g:deoplete#disable_auto_complete = 1
 let g:deoplete#enable_debug = 1
 " Let <Tab> also do completion
 " inoremap <silent><expr> <Tab>
@@ -762,13 +758,16 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
 "let g:airline_theme = 'solarized'
-let g:airline_section_b = ""
+" let g:airline_section_b = ""
+" section y is fileencoding , useless in neovim
+let g:airline_section_y = ""  
+ " airline#section#create(['windowswap', 'obsession', '%3p%%'.spc, 'linenr', 'maxlinenr', spc.':%3v'])
+" let g:airline_section_z = airline#section#create_right(['linenumber'])
 let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline#extensions#tabline#show_buffers = 1  
 let g:airline#extensions#tabline#buffer_min_count =2
 let g:airline#extensions#tabline#buffer_idx_mode = 1
 
-let g:airline#extensions#obsession#enabled = 1
 
 let g:airline#extensions#tabline#buffers_label = 'b'
 
@@ -776,7 +775,7 @@ let g:airline#extensions#tabline#tabs_label = 't'
 let g:airline#extensions#tabline#show_tabs = 0
 
 let g:airline#extensions#tabline#formatter = 'unique_tail'
-let g:airline_extensions = ['branch', 'tabline']
+let g:airline_extensions = ['branch', 'tabline', 'obsession']
 
 let g:airline#extensions#tagbar#enabled = 0
 
@@ -788,7 +787,9 @@ let g:airline#extensions#ycm#warning_symbol = 'W:'
 
 let g:airline#extensions#whitespace#enabled = 0
 let g:airline#extensions#whitespace#mixed_indent_algo = 2
+
 let g:airline#extensions#obsession#enabled = 1
+let g:airline#extensions#obsession#indicator_text = '$'
 " let g:airline#extensions#whitespace#checks = [ 'indent', 'trailing', 'long' ]
 "|neomake#statusline#LoclistStatus should be shown in warning section
 " let g:airline_section_z = airline#section#create(['%{ObsessionStatus(''$'', '''')}'])
@@ -805,7 +806,8 @@ nmap <leader>ç <Plug>AirlineSelectTab9
 
 "}}}
 
-" autocmd CompleteDone * pclose " close the popup on python completion
+" close the preview window on python completion
+" autocmd CompleteDone * pclose 
 
 " Neomake config {{{
 let g:neomake_verbose = 1
@@ -828,7 +830,7 @@ let s:neomake_exclude_ft = [ 'c', 'cpp', 'java' ]
 " }}}
 
 " Startify config {{{
-"nnoremap <leader>st :Startify<cr>
+nnoremap <Leader>st :Startify<cr>
 
 let g:startify_list_order = [
       \ ['   MRU '.getcwd()], 'dir',
@@ -961,22 +963,27 @@ let g:ycm_semantic_triggers.tex = [
   "augroup END
 "" }}}
 
-" Fold configuration {{{
-"set foldtext=
-set foldcolumn=1
-" }}}
-
 " Pymode {{{
 let g:pymode_python = 'python3'
 let g:pymode_warnings = 1
 let g:pymode_paths = []
+let g:pymode_indent = 1
 let g:pymode_trim_whitespaces = 1
 let g:pymode_options = 0
-let g:pymode_folding = 0
-let g:pymode_motion = 1
+let g:pymode_folding = 1
+let g:pymode_motion = 1 " C means class, M method
 let g:pymode_rope_goto_definition_bind = 'gd'
-let g:pymode_lint = 0
-" "}}}
+let g:pymode_lint = 0 " done by Neomake
+" ROpe is interesting, enables
+let g:pymode_rope = 1 " rope is for semantic analysis
+let g:pymode_rope_lookup_project = 0
+let g:pymode_rope_goto_definition_bind = '<C-c>g'
+let g:pymode_rope_show_doc_bind = '<C-c>d'
+let g:pymode_syntax = 1
+let g:pymode_rope_goto_definition_cmd = 'new'
+" " hl self keyword
+" let g:pymode_syntax_highlight_self = g:pymode_syntax_all 
+" }}}
 
 " vim-listchars config {{{
     "\"trail:·,tab:→\ ,eol:↲,precedes:<,extends:>"
@@ -991,9 +998,35 @@ let g:pymode_lint = 0
 " }}}
 
 " Grepper {{{
+" add -cword to automatically fill with the underlying word
 nnoremap <leader>git :Grepper  -tool git -open -nojump
 nnoremap <leader>ag  :Grepper -tool ag  -open -switch
+" -noswitch
+nmap gs <plug>(GrepperOperator)
+xmap gs <plug>(GrepperOperator)
 " }}}
+
+" sidesearch {{{
+" SideSearch current word and return to original window
+nnoremap <Leader>ss :SideSearch <C-r><C-w><CR> | wincmd p
+
+" Create an shorter `SS` command
+command! -complete=file -nargs=+ SS execute 'SideSearch <args>'
+
+" or command abbreviation
+cabbrev SS SideSearch" 
+" }}}
+
+" folding config {{{
+" block,hor,mark,percent,quickfix,search,tag,undo
+" set foldopen+=all
+" set foldclose=all
+"set foldtext=
+set foldcolumn=3
+" }}}
+
+" will load a .exrc or .nvimrc file if finds it current directory
+set exrc
 
 " Peekaboo config {{{
 " Default peekaboo window
@@ -1035,13 +1068,11 @@ let g:signify_mapping_toggle = '<leader>gt'
 let g:auto_save_in_insert_mode = 1
 let g:auto_save_events = ['FocusLost']
 "let g:auto_save_events = ['CursorHold', 'FocusLost']
-let g:auto_save_write_all_buffers = 1 " Setting this option to 1 will write all
+let g:auto_save_write_all_buffers = 0 " Setting this option to 1 will write all
 " Put this in vimrc, add custom commands in the function.
 function! AutoSaveOnLostFocus()
   " to solve pb with Airline https://github.com/vim-airline/vim-airline/issues/1030#issuecomment-183958050
-   
   exe ":au FocusLost ".expand("%")." :wa | :AirlineRefresh | :echom 'Focus lost'"
-
 endfunction
 " }}}
 
@@ -1080,11 +1111,20 @@ let g:riv_disable_indent=0
 " }}}
 
 " easymotion {{{
-let g:EasyMotion_do_shade = 0 
+let g:EasyMotion_do_shade = 1
 let g:EasyMotion_do_mapping = 1
 let g:EasyMotion_use_upper = 1 " display upper case letters but let u type lower case
 let g:EasyMotion_inc_highlight = 0
 let g:EasyMotion_disable_two_key_combo = 0
+
+map , <Plug>(easymotion-prefix)
+" }}}
+
+" quickhl (similar to interesting words) {{{
+" nmap <Space>m <Plug>(quickhl-manual-this)
+" xmap <Space>m <Plug>(quickhl-manual-this)
+" nmap <Space>M <Plug>(quickhl-manual-reset)
+" xmap <Space>M <Plug>(quickhl-manual-reset)
 " }}}
 
 set hidden " you can open a new buffer even if current is unsaved (error E37)
@@ -1130,8 +1170,11 @@ nnoremap <Leader>wr :set wrap! \| :set wrap?<CR>
 "nnoremap <Up> :echoe "Use k"<CR>
 "nnoremap <Down> :echoe "Use j"<CR>
 
+" flashy config {{{
 map y <Plug>(operator-flashy)
 nmap Y <Plug>(operator-flashy)$
+let g:operator#flashy#flash_time=300 " in milliseconds
+" }}}
 
 nnoremap <silent> <Leader>B :TagbarToggle<CR>
 " set vim's cwd to current file's
@@ -1143,24 +1186,20 @@ if has('nvim')
 	tnoremap <Esc> <C-\><C-n>
 endif
 
+
+" Run linting when writing file
 autocmd! BufWritePost * Neomake
+
 " Bye bye ex mode
 noremap Q <NOP>
-" space and tabs - T4 by default
-"map <Leader>s2 :set expandtab ts=2 sts=2 sw=2<CR>
-"map <Leader>s4 :set expandtab ts=4 sts=4 sw=4<CR>
-"map <Leader>s8 :set expandtab ts=8 sts=8 sw=4<CR>
-"map <Leader>t2 :set noexpandtab ts=2 sts=2 sw=2<CR>
-"map <Leader>t4 :set noexpandtab ts=4 sts=4 sw=4<CR>
-"map <Leader>t8 :set noexpandtab ts=8 sts=8 sw=8<CR>
 
 " buffers
 map <Leader>n :bnext<CR>
 map <Leader>N :bNext<CR>
 map <Leader>p :bprevious<CR>
-map <Leader>d :bdelete<CR>
+map <Leader>O :Obsession<CR>
+" map <Leader>d :bdelete<CR>
 " TODO trigger a menu in vim
-map <Leader>s :setlocal spell spelllang=en_us<CR>
 
 "http://stackoverflow.com/questions/28613190/exclude-quickfix-buffer-from-bnext-bprevious
 
@@ -1198,7 +1237,24 @@ noremap             <C-k>           {
 set cpoptions="aABceFsn" " vi ComPatibility options
 set matchpairs+=<:>  " Characters for which % should work
 
+" TODO to use j/k over 
+" set whichwrap+=<,>,h,l
 
+" Interactive menus {{{1
+" use emenu ("execute menu") to launch the command
+" disable all menus
+unmenu * 
+map <Leader>s :setlocal spell spelllang=en_us<CR>
+menu Spell.EN_US :setlocal spell spelllang=en_us<CR>
+menu Spell.FR :setlocal spell spelllang=fr_fr<CR>
+
+" tab menu {{{2
+menu Tabs.S2 :set expandtab ts=2 sts=2 sw=2<CR>
+menu Tabs.S4 :set expandtab ts=4 sts=4 sw=4<CR>
+menu Tabs.S6 :set expandtab ts=6 sts=6 sw=6<CR>
+menu Tabs.S8 :set expandtab ts=8 sts=8 sw=8<CR>
+"}}}
+" }}}
 
 " nvim specific configuration {{{
 
@@ -1213,12 +1269,23 @@ if has("nvim")
 endif
 " }}}
 
+" colorscheme stuff {{{
 " as we set termguicolors, 
 " highlight Comment gui="NONE,italic"; e
 " echom "colorscheme changed" |
-autocmd ColorScheme *  highlight Comment gui=italic
+" to underline search results instead of highlighting them
+" set to NONE not to change them
+" :help hl-IncSearch
+" MatchParen(theses)
+autocmd ColorScheme *
+      \ highlight Comment gui=italic
+      \ | highlight Search gui=undercurl
+      \ | highlight MatchParen guibg=NONE guifg=NONE gui=underline
+      " \ | highlight IncSearch guibg=NONE guifg=NONE gui=underline
 " highlight Comment gui=italic
 
-" if you want to 
+" put it after teh autocmd ColorScheme
 colorscheme molokai
+
+" }}}
 
