@@ -11,6 +11,10 @@ set $mad Super_L
 # # The middle button over a titlebar kills the window
 bindsym --release button2 kill
 
+
+# Layouts part 
+
+
 # test
 # bindsym super+right exec "xdotool getactivewindow key -clearmodifiers --window %1 Ctrl+Shit+Tab"
 # bindsym super+left exec "xdotool getactivewindow key -clearmodifiers --window %1 Ctrl+Tab"
@@ -59,5 +63,6 @@ bindsym button8 move right
 # bindsym $mod+Shift+g title_format "[test] %title"
 
 for_window [class="^qutebrowser$"] title_format "<span background='blue'>QB</span> %title"
+for_window [class="^firefox$"] title_format "<span background='#F28559'>QB</span> %title"
 # for_window [name="dce"] title_format "<span background='green'>DCE</span> %title"
 #for_window [class="(?i)firefox"] title_format "<span foreground='red'>%title</span>"

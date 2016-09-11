@@ -1,15 +1,21 @@
 #  vim: set noet fdm=manual fenc=utf-8 ff=unix sts=0 sw=4 ts=4 fdm=marker: 
-##########################################
+# vim:filetype=i3
+# ##########################################
 ### MAIN 
 ##########################################
 #
-
+#” “
 
 # font for window titles
 # prefix with pango if you want to have fancy effects
-font pango:Liberation Sans Mono 12
+# font pango:Liberation Sans Mono 12
 font pango:FontAwesome 12
 
+# -modi fb:../Examples/rofi-file-browser.sh
+# https://github.com/DaveDavenport/rofi
+# Combi mode, allow several modes to be merged into one list.
+set $launcher "rofi -modi 'run,DRun,window,ssh,Layouts:i3-list-layouts,file:/home/teto/rofi/Examples/rofi-file-browser.sh' -show run"
+# Randr:rofi-randr,Monitor:monitor_layout.sh' 
 
 # xmodmap to see the mappings for ModX etc...
 set $mod Mod1
@@ -152,7 +158,7 @@ bindsym $mod+Shift+Return exec --no-startup-id ~/.i3/fork_term.sh
 bindsym $mod+Shift+A kill
 
 # start dmenu (a program launcher)
-bindsym $mod+Tab exec "rofi -modi 'run,DRun,window,ssh' -show run"
+bindsym $mod+Tab exec $launcher
 #bindsym $mod+eacute exec j4-dmenu-desktop --dmenu='rofi -modi "run,ssh,dmenu" -dmenu'
 #dmenu_run -
 bindsym $mod+eacute i3-list-windows
@@ -428,6 +434,7 @@ bar {
 
 bindsym $mod+shift+q exec qutebrowser
 bindsym $mod+shift+p mode mouse
+bindsym $mod+shift+x exec xkill
 
 
 mode mouse {

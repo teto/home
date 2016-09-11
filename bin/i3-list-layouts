@@ -1,0 +1,22 @@
+#!/bin/bash
+
+LAYOUT="$1"
+if [ -n "$LAYOUT" ]; then
+
+  # -e 'echo $LAYOUT; sh'"
+  # coproc ( "xterm"  ) #
+
+  # this works
+		# xterm -e "echo $LAYOUT; sh"  > /dev/null &
+  		# xterm &  2>&1  
+# > /dev/null
+# exec 1>&-
+
+		"$LAYOUT" > /dev/null  &
+		
+	else
+		ls $XDG_CONFIG_HOME/i3/layouts/*.sh
+	# echo "test.json"
+	# echo "toto.json"
+	fi
+

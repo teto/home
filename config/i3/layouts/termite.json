@@ -1,0 +1,43 @@
+// vim:ts=4:sw=4:et
+{
+    "border": "normal",
+    "current_border_width": 2,
+    "floating": "auto_off",
+    "geometry": {
+       "height": 362,
+       "width": 562,
+       "x": 0,
+       "y": 0
+    },
+    "name": "i3-save-tree > ~/.i3/termite.json",
+    "percent": 0.5,
+    "swallows": [
+       {
+       "class": "^Termite$",
+       "role": "^toto"
+       }
+    ],
+    "type": "con"
+}
+
+{
+    "border": "normal",
+    "current_border_width": 2,
+    "floating": "auto_off",
+    "geometry": {
+       "height": 362,
+       "width": 562,
+       "x": 0,
+       "y": 0
+    },
+    "name": "/home/teto/dotfiles",
+    "percent": 0.5,
+    "swallows": [
+       {
+       "class": "^Termite$",
+       "role": "^caca$"
+       }
+    ],
+    "type": "con"
+}
+
