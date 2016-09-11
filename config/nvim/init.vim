@@ -313,9 +313,10 @@ let g:netrw_liststyle=1 " long listing with timestamp
 
 
 set title " vim will change terminal title
-"set titlestring
-" look at :h titlestring (follows statusbar convention
-
+" look at :h statusline to see the available 'items'
+" to count the number of buffer
+" echo len(filter(range(1, bufnr('$')), 'buflisted(v:val)'))
+let &titlestring="%t %{len(filter(range(1, bufnr('$')), 'buflisted(v:val)'))}"
 
 
 nnoremap <Leader>/ :set hlsearch! hls?<CR> " toggle search highlighting
@@ -933,12 +934,30 @@ let g:tex_flavor = "latex"
 "}}}
 
 " Vimtex configuration {{{
+" Pour le rappel 
+" <localleader>ll pour la compilation continue du pdf
+" <localleader>lv pour la preview du pdf
 let g:vimtex_quickfix_open_on_warning = 0
 let g:vimtex_index_split_pos = 'below'
 let g:vimtex_view_method = 'zathura'
 "let g:vimtex_snippets_leader = ','
 let g:vimtex_latexmk_progname = 'nvr'
 let g:latex_view_general_viewer = 'zathura'
+let g:vimtex_fold_enabled = 0
+let g:vimtex_format_enabled = 0
+let g:vimtex_complete_recursive_bib = 0
+let g:vimtex_complete_close_braces = 0
+let g:vimtex_fold_comments=1
+let g:vimtex_quickfix_autojump = 1
+let g:vimtex_quickfix_ignore_all_warnings =0
+let g:vimtex_view_use_temp_files=1 " to prevent zathura from flickering
+
+let g:vimtex_quickfix_mode = 1 " 1=> opened automatically and becomes active
+let g:vimtex_quickfix_ignored_warnings = [
+      \ 'Underfull',
+      \ 'Overfull',
+      \ 'specifier changed to',
+      \ ]
 "let g:tex_stylish = 1
 "let g:tex_flavor = 'latex'
 "let g:tex_isk='48-57,a-z,A-Z,192-255,:'

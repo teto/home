@@ -24,7 +24,8 @@ set $rmod Mod1
 #set $term rxvt-unicode
 set $term termite
 
-
+# 
+# 
 set $w1 1:
 set $w2 2:
 set $w3 3:
@@ -395,6 +396,8 @@ bindsym $mod+ctrl+minus move scratchpad
 
 set_from_resource $foc_border i3bar.foc_border #d72f6b
 set_from_resource $foc_border_bg i3bar.foc_border_bg #d70a53
+set_from_resource $bar_bg i3bar.background #090e1400 
+set_from_resource $bar_status i3bar.statusline #d70a53
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available) {{{
@@ -409,15 +412,12 @@ bar {
 	# separator_symbol "|"
 	# font pango: Liberation Sans Mono 9,  FontAwesome 12
 
-#-c /home/teto/.i3/
-	#output $output0
-	#output $output1
 	#output $output2
 	verbose 1
 #	tray_output $output15
     colors {
-        background #090e1400
-        statusline #d70a53
+        background $bar_bg
+        statusline $bar_status
 # #ffffff
 		# focused_statusline #090e1400
 		# focused_background #090e1400
@@ -433,6 +433,7 @@ bar {
 # }}}
 
 bindsym $mod+shift+q exec qutebrowser
+bindsym $mod+shift+n exec nemo
 bindsym $mod+shift+p mode mouse
 bindsym $mod+shift+x exec xkill
 
