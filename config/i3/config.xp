@@ -64,5 +64,9 @@ bindsym button8 move right
 
 for_window [class="^qutebrowser$"] title_format "<span background='blue'>QB</span> %title"
 for_window [class="^firefox$"] title_format "<span background='#F28559'>QB</span> %title"
-# for_window [name="dce"] title_format "<span background='green'>DCE</span> %title"
+for_window [title="VIM$"] title_format " %title"
+
+
+for_window [title="Thunderbird$"] title_format " %title"
+# for_window [title="dce"] title_format "<span background='green'>DCE</span> %title"
 #for_window [class="(?i)firefox"] title_format "<span foreground='red'>%title</span>"

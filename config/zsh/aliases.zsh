@@ -55,6 +55,7 @@ alias gbr='git branch'
 ##############################
 alias servethis="python -c 'import SimpleHTTPServer; SimpleHTTPServer.test()'"
 alias pypath='python -c "import sys; print sys.path" | tr "," "\n" | grep -v "egg"'
+alias shellpath='python -c "import sys; print sys.env.PATH" | tr "," "\n" | grep -v "egg"'
 alias set_time="dpkg-reconfigure tzdata"
 
 ### ls related updates {{{

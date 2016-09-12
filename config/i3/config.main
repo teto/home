@@ -435,7 +435,8 @@ bar {
 bindsym $mod+shift+q exec qutebrowser
 bindsym $mod+shift+n exec nemo
 bindsym $mod+shift+p mode mouse
-bindsym $mod+shift+x exec xkill
+
+bindsym  $mod+shift+o exec xkill
 
 
 mode mouse {

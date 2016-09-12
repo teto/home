@@ -5,6 +5,10 @@
 # add 'j' command
 . /usr/share/autojump/autojump.sh
 
+# for VTE-based terminals. In termite Ctrl + Shift + t opens terminal in cwd
+source /etc/profile.d/vte.sh
+
+
 source "$ZDOTDIR/aliases.zsh"
 # notifies when long command finishes
 source "$ZDOTDIR/zbell.zsh" 
@@ -168,7 +172,7 @@ zstyle ':vcs_info:*' actionformats '%F{5}(%f%s%F{5})%F{3}-%F{5}[%F{2}%b%F{3}|%F{
 zstyle ':vcs_info:*' formats '%F{5}(%f%s%F{5})%F{3}-%F{5}[%F{2}%b%F{5}]%f '
 zstyle ':vcs_info:*' enable git #svn cvs 
 
-add-zsh-hook preexec set_command_as_term_title
+add-zsh-hook preexec set_term_title
 #add-zsh-hook zsh_directory_name
 #add-zsh-hook precmd 
 
@@ -236,27 +240,25 @@ zstyle ':completion:*:kill:*' force-list always
 
 #${prompt_pure_git_dirty}
 
-function prompt_cmd() {
+# function prompt_cmd() {
 
-}
+# }
 
-function set_command_as_term_title (){
-    # set tmux-title to running program
-    #printf "\033k$(echo "$1" | cut -d" " -f1)\033\\"
-    # set urxvt-title to running program
-    #print "hello"
+function set_term_title (){
     print -Pn "\e]0;$(echo "$1")\a"
 }
 
 function rprompt_cmd() {
-	# get vcs info
-	vcs_info
+    # get vcs info
+    vcs_info
 
-echo "${vcs_info_msg_0_}"
+    echo "${vcs_info_msg_0_}"
 }
 
 
-precmd () {print -Pn "\e]0;$(pwd)\a"}
+# precmd () {
+#     set_term_title $(pwd)
+# }
 
 # Pour afficher la commande dans le titre du terminal
 # https://github.com/robbyrussell/oh-my-zsh/blob/master/lib/termsupport.zsh
@@ -325,4 +327,3 @@ if [ -e /home/teto/.nix-profile/etc/profile.d/nix.sh ]; then . /home/teto/.nix-p
 
 
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
