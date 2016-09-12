@@ -56,6 +56,7 @@ call plug#begin(s:nvimdir.'/plugged')
 "Plug 'junegunn/limelight.vim' " to highlight ucrrent paragraph only
 " Plug 'bronson/vim-trailing-whitespace' " :FixTrailingWhitespace
 " Plug 'tkhoa2711/vim-togglenumber' " by default mapped to <leader>n
+" Plug 'blindFS/vim-translator' " fails during launch :/
 Plug 'dzeban/vim-log-syntax'
 " Plug 'timeyyy/orchestra.nvim' " to play some music on 
 " Plug 'timeyyy/clackclack.symphony' " data to play with orchestra.vim
@@ -1182,6 +1183,10 @@ map <Leader>d :bdelete<CR>
 map <Leader>s :setlocal spell spelllang=en_us<CR>
 
 "http://stackoverflow.com/questions/28613190/exclude-quickfix-buffer-from-bnext-bprevious
+
+" todo better if it could be parsable
+" map <Leader>t :!trans :fr -no-ansi <cword><CR>
+map <Leader>t :te trans :fr <cword><CR>
 
 " Unimpaired {{{
 " advised by tpope for these remote countries that don't use qwerty

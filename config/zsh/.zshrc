@@ -320,6 +320,9 @@ source "$FZF_PATH"/completion.zsh
 source "$FZF_PATH"/key-bindings.zsh
 # }}}
 
+# _gnu_generic should work if program accepts --help
+compdef _gnu_generic qutebrowser
+
 # added by Nix installer
 if [ -e /home/teto/.nix-profile/etc/profile.d/nix.sh ]; then . /home/teto/.nix-profile/etc/profile.d/nix.sh; fi 
 
