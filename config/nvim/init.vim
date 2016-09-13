@@ -45,6 +45,11 @@ autocmd BufReadPost *.doc,*.docx,*.rtf,*.odp,*.odt silent %!pandoc "%" -tplain -
 " 
 let mapleader = " "
 
+" Appearance 1 {{{
+let s:gutter_error_sign = "✘'"
+let s:gutter_warn_sign = '！'
+" }}}
+
 " to configure vim for haskell, refer to
 " http://yannesposito.com/Scratch/en/blog/Vim-as-IDE/
 function! DoRemote(arg)
@@ -63,23 +68,23 @@ set shortmess+=I
 
 " vim-plug plugin declarations {{{1
 call plug#begin(s:plugdir)
-Plug 'mtth/scratch.vim' " , {'on': 'Scratch'}
+Plug 'mtth/scratch.vim' " , {'on': 'Scratch'} mapped to ?
 "Plug 'junegunn/limelight.vim' " to highlight ucrrent paragraph only
 " Plug 'bronson/vim-trailing-whitespace' " :FixTrailingWhitespace
 " Plug 'tkhoa2711/vim-togglenumber' " by default mapped to <leader>n
-Plug 'dzeban/vim-log-syntax'
-Plug 'PotatoesMaster/i3-vim-syntax'
+" Plug 'blindFS/vim-translator' " fails during launch :/
 
 " Plug 'timeyyy/orchestra.nvim' " to play some music on 
 " Plug 'timeyyy/clackclack.symphony' " data to play with orchestra.vim
-Plug 'tpope/vim-scriptease'
-" Plug 'Yggdroot/indentLine',{ 'for': 'python' }  " draw verticals indents but
-" seems greedy
+Plug 'tpope/vim-scriptease' " Adds command such as :Messages
+" Plug 'Yggdroot/indentLine',{ 'for': 'python' }  " draw verticals indents but seems greedy
 "  Autocompletion and linting {{{2
-" Plug 'Valloric/YouCompleteMe' , { 'frozen': 1,  'do': './install.py --system-libclang --clang-completer' }
-Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
-Plug 'zchee/deoplete-clang', { 'for': 'cpp' }
-Plug 'zchee/deoplete-jedi', { 'for': 'python'}
+"'frozen': 1,
+" Plug 'Valloric/YouCompleteMe', { 'do': ':new \| call termopen("./install.py --system-libclang --clang-completer")' }
+Plug 'Valloric/YouCompleteMe' , { 'do': './install.py --system-libclang --clang-completer' }
+" Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
+" Plug 'zchee/deoplete-clang', { 'for': 'cpp' }
+" Plug 'zchee/deoplete-jedi', { 'for': 'python'}
 " }}}
 
 Plug 'mattboehm/vim-unstack'  " to see a
@@ -93,21 +98,22 @@ Plug 'tpope/vim-unimpaired' " [<space> [e [n ]n pour gerer les conflits etc...
 Plug 'kana/vim-operator-user' " dependancy for operator-flashy
 Plug 'haya14busa/vim-operator-flashy' " Flash selection on copy
 
-" better handling of buffer closue (type :sayonara)
+" better handling of buffer closure (type :sayonara)
 Plug 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
 
 " Using a non-master branch
 "Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
-Plug 'nhooyr/neoman.vim' " :Nman to see manpage in vim
 
 Plug 'critiqjo/lldb.nvim',{ 'for': 'c' } " To debug (use clang to get correct line numbers
 
 " filetypes {{{2
 Plug 'cespare/vim-toml', { 'for': 'toml'}
+Plug 'PotatoesMaster/i3-vim-syntax'
+Plug 'dzeban/vim-log-syntax'
 " }}}
 
 " Python {{{2
-Plug 'klen/python-mode', { 'for': 'python'} " 
+" Plug 'klen/python-mode', { 'for': 'python'} " 
 " Plug 'hynek/vim-python-pep8-indent', {'for': 'python'} " does not work
 " Plug 'mjbrownie/GetFilePlus', {'for': 'python'} " improves gf on imports
 " fails on relad
@@ -177,7 +183,7 @@ Plug 'blueyed/vim-diminactive' " disable syntax coloring on inactive splits
 Plug 'tpope/vim-fugitive' " to use with Git, VERY powerful
 "Plug 'jaxbot/github-issues.vim' " works only with vim
 "Plug 'tpope/vim-surround' " don't realy know how to use yet
-Plug 'junegunn/vim-github-dashboard' " needs ruby support, thus won't work in neovim
+Plug 'junegunn/vim-github-dashboard' " needs ruby support, works in recent neovim
 "Plug 'junegunn/vim-peekaboo' " gives a preview of buffers when pasting
 Plug 'mhinz/vim-randomtag', { 'on': 'Random' } " Adds a :Random function that launches help at random
 Plug 'majutsushi/tagbar', {'on': 'TagbarToggle'}
@@ -207,10 +213,8 @@ Plug 'euclio/vim-markdown-composer' " , { 'for': 'markdown', 'do': function('Bui
 Plug 'Rykka/riv.vim' " , {'for': 'rst'}
 Plug 'Rykka/InstantRst', {'for': 'rst'} " rst live preview with :InstantRst, 
 "Plug 'junegunn/vim-easy-align'   " to align '=' on multiple lines for instance
-"Plug 'surround.vim'
 "Plug 'elzr/vim-json', { 'for': 'json' }
 Plug 'dhruvasagar/vim-table-mode', {'for': 'txt'}
-
 "Plug 'airblade/vim-gitgutter' " will show which lines changed compared to last clean state
 Plug 'kshenoy/vim-signature' " display marks in gutter, love it
 Plug 'vim-scripts/QuickFixCurrentNumber'
@@ -225,7 +229,6 @@ Plug 'vim-scripts/Modeliner' " <leader>ml to setup buffer modeline
 " This one has bindings mapped to <leader>l
 "Plug 'vimwiki/vimwiki'   " to write notes
 "Plug 'vim-scripts/DynamicSigns'
-Plug 'vasconcelloslf/vim-interestingwords' " highlight the words you choose <leader>k
 " async grep neovim only
 Plug 'mhinz/vim-grepper', { 'on': 'Grepper'}
 Plug 'ddrscott/vim-side-search' 
@@ -235,6 +238,8 @@ Plug 'benekastah/neomake' " async build for neovim
 Plug 'mhinz/vim-signify' " Indicate changed lines within a file using a VCS.
 " Plug 'teddywing/auditory.vim' " play sounds as you type
 
+" does not work seems to be better ones
+Plug 'vasconcelloslf/vim-interestingwords' " highlight the words you choose <leader>k
 Plug 't9md/vim-quickhl' " hl manually selected words
 
 " colorschemes {{{
@@ -515,7 +520,7 @@ set wrap
 " set breakat=80 " characters at which wrap can break line
 set linebreak " better display (makes sense only with wrap)
 set breakindent " preserve or add indentation on wrap
-let &showbreak = '↳ ↳ ↳ '  	" displayed in front of wrapped lines
+let &showbreak = '↳ '  	" displayed in front of wrapped lines
 
 filetype on                   " required! (still required in vim ?)
 set backspace=indent,eol,start
@@ -704,8 +709,8 @@ let g:ycm_confirm_extra_conf = 0
 let g:ycm_key_list_select_completion = ['<TAB>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<S-TAB>', '<Up>']
 let g:ycm_auto_trigger = 1
-let g:ycm_error_symbol = ">>" " used to signal errors in gutter
-let g:ycm_warning_symbol = '!' " warn in gutter TODO use unicode chars
+let g:ycm_error_symbol = s:gutter_error_sign " used to signal errors in gutter
+let g:ycm_warning_symbol = s:gutter_warn_sign " warn in gutter 
 let g:ycm_show_diagnostics_ui = 1 " show info in gutter
 "let g:ycm_server_use_vim_stdout = 1
 "let g:ycm_autoclose_preview_window_after_completion = 1
@@ -720,6 +725,11 @@ let g:ycm_semantic_triggers = {
       \  'tex'  : ['{'],
       \ 'mail' : ['@'],
       \ }
+
+
+let g:ycm_python_binary_path = '/usr/bin/python3'
+let g:ycm_autoclose_preview_window_after_completion = 0
+let g:ycm_autoclose_preview_window_after_completion = 1
 
 nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
 nnoremap <F6> :YcmDebugInfo<CR>
@@ -736,6 +746,10 @@ let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_ignore_case = 1
 let g:deoplete#disable_auto_complete = 1
 let g:deoplete#enable_debug = 1
+
+" deoplete clang {{{2
+let g:deoplete#sources#clang#libclang_path="/usr/lib/llvm-3.8/lib/libclang.so"
+
 " Let <Tab> also do completion
 " inoremap <silent><expr> <Tab>
 " \ pumvisible() ? "<C-n>" :
@@ -744,9 +758,16 @@ let g:deoplete#enable_debug = 1
 " nnoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 " }}}
 
+" deoplete jedi {{{2
+let deoplete#sources#jedi#enable_cache=1
+let deoplete#sources#jedi#show_docstring=0
+" }}}
+" }}}
+
 " Jedi (python) completion {{{
-let g:deoplete#sources#clang#libclang_path="/usr/lib/llvm-3.8/lib/libclang.so"
 let g:jedi#auto_vim_configuration = 1 " to prevent python's help popup
+let g:jedi#completions_enabled = 0 " disable when deoplete in use
+"autocmd BufWinEnter '__doc__' setlocal bufhidden=delete
 " }}}
 
 " Airline {{{
@@ -823,8 +844,8 @@ let g:neomake_echo_current_error = 1
 let g:neomake_place_signs=1
 
 
-let g:neomake_error_sign = { 'text': '✘', 'texthl': 'ErrorSign' }
-let g:neomake_warning_sign = { 'text': '！', 'texthl': 'WarningSign' }
+let g:neomake_error_sign = { 'text': s:gutter_error_sign, 'texthl': 'ErrorSign' }
+let g:neomake_warning_sign = { 'text': s:gutter_warn_sign , 'texthl': 'WarningSign' }
 
 " C and CPP are handled by YCM and java usually by elim
 let s:neomake_exclude_ft = [ 'c', 'cpp', 'java' ]
@@ -990,17 +1011,25 @@ let g:pymode_paths = []
 let g:pymode_indent = 1
 let g:pymode_trim_whitespaces = 1
 let g:pymode_options = 0
-let g:pymode_folding = 1
-let g:pymode_motion = 1 " C means class, M method
+let g:pymode_folding = 0
+let g:pymode_doc = 0
+" C means class, M method for instance
+" ]M                Jump to next class or method (normal, visual, operator modes)
+let g:pymode_motion = 1 
 let g:pymode_rope_goto_definition_bind = 'gd'
 let g:pymode_lint = 0 " done by Neomake
 " ROpe is interesting, enables
-let g:pymode_rope = 1 " rope is for semantic analysis
+let g:pymode_rope = 0 " rope is for semantic analysis jedi vim looks better
 let g:pymode_rope_lookup_project = 0
 let g:pymode_rope_goto_definition_bind = '<C-c>g'
 let g:pymode_rope_show_doc_bind = '<C-c>d'
 let g:pymode_syntax = 1
+let g:pymode_syntax_all = 1
 let g:pymode_rope_goto_definition_cmd = 'new'
+
+let g:pymode_breakpoint = 0 " consumes <Leader>b otherwise
+" let g:pymode_breakpoint_bind = '<leader>b'
+let g:pymode_virtualenv = 1
 " " hl self keyword
 " let g:pymode_syntax_highlight_self = g:pymode_syntax_all 
 " }}}
@@ -1222,6 +1251,10 @@ map <Leader>O :Obsession<CR>
 " TODO trigger a menu in vim
 
 "http://stackoverflow.com/questions/28613190/exclude-quickfix-buffer-from-bnext-bprevious
+
+" todo better if it could be parsable
+" map <Leader>t :!trans :fr -no-ansi <cword><CR>
+map <Leader>t :te trans :fr <cword><CR>
 
 " Unimpaired {{{
 " advised by tpope for these remote countries that don't use qwerty

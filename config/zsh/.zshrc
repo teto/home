@@ -174,7 +174,7 @@ zstyle ':vcs_info:*' enable git #svn cvs
 
 add-zsh-hook preexec set_term_title
 #add-zsh-hook zsh_directory_name
-#add-zsh-hook precmd 
+add-zsh-hook precmd update_term_title
 
 # completion config {{{1
 # enables autocompletion for apt
@@ -238,12 +238,8 @@ zstyle ':completion:*:kill:*' force-list always
 
 # }}}
 
-#${prompt_pure_git_dirty}
 
-# function prompt_cmd() {
-
-# }
-
+# works in termite
 function set_term_title (){
     print -Pn "\e]0;$(echo "$1")\a"
 }
@@ -256,9 +252,9 @@ function rprompt_cmd() {
 }
 
 
-# precmd () {
-#     set_term_title $(pwd)
-# }
+update_term_title () {
+    set_term_title $(pwd)
+}
 
 # Pour afficher la commande dans le titre du terminal
 # https://github.com/robbyrussell/oh-my-zsh/blob/master/lib/termsupport.zsh
@@ -322,8 +318,14 @@ source "$FZF_PATH"/completion.zsh
 source "$FZF_PATH"/key-bindings.zsh
 # }}}
 
+# _gnu_generic should work if program accepts --help
+compdef _gnu_generic qutebrowser
+compdef _gnu_generic mptcpanalyzer
+
 # added by Nix installer
 if [ -e /home/teto/.nix-profile/etc/profile.d/nix.sh ]; then . /home/teto/.nix-profile/etc/profile.d/nix.sh; fi 
 
 
 
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
