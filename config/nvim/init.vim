@@ -69,6 +69,7 @@ set shortmess+=I
 " vim-plug plugin declarations {{{1
 call plug#begin(s:plugdir)
 Plug 'mtth/scratch.vim' " , {'on': 'Scratch'} mapped to ?
+Plug 'git@github.com:junegunn/gv.vim.git' " git commit viewer :Gv
 "Plug 'junegunn/limelight.vim' " to highlight ucrrent paragraph only
 " Plug 'bronson/vim-trailing-whitespace' " :FixTrailingWhitespace
 " Plug 'tkhoa2711/vim-togglenumber' " by default mapped to <leader>n
@@ -126,8 +127,8 @@ Plug 'dzeban/vim-log-syntax'
 " Plug 'Valloric/ListToggle' " toggling seems to fail
 Plug 'tpope/vim-obsession' ", {'on': 'Obsession', 'ObsessionStatus'}  very cool, register edited files in a Session.vim, call with :Obsession
 " Plug 'mbbill/undotree'
-" Plug '907th/vim-auto-save' " :h auto-save
-Plug '~/vim-auto-save' " autosave :h auto-save
+Plug '907th/vim-auto-save' " :h auto-save
+" Plug '~/vim-auto-save' " autosave :h auto-save
 " Plug '~/neovim-auto-autoread' " to check for filechanges
 ", { 'for': 'python' } " 
 Plug 'bfredl/nvim-miniyank' " killring alike plugin, cycling paste
@@ -147,7 +148,7 @@ Plug 'Lokaltog/vim-easymotion' " careful overrides <leader><leader> mappings
 "Plug 'wellle/visual-split.vim'
 Plug 'wellle/targets.vim' " Adds new motion targets ci{
 " Plug 'justinmk/vim-ipmotion' " ?
-"Plug 'justinmk/vim-sneak' " remaps 's'
+Plug 'justinmk/vim-sneak' " remaps 's'
 Plug 'tpope/vim-rsi'  " maps readline bindings
 " }}}
 
@@ -512,6 +513,7 @@ let g:instant_rst_additional_dirs=[ "/home/teto/mptcpweb" ]
 " Appearance {{{
 set background=dark " remember: does not change the background color !
 set fillchars=vert:│,fold:>,stl:\ ,stlnc:\ ,diff:-
+" one  ▶
 
 set noshowmode " Show the current mode on command line
 set cursorline " highlight cursor line
@@ -1081,6 +1083,15 @@ set foldcolumn=3
 " will load a .exrc or .nvimrc file if finds it current directory
 set exrc
 
+" vim-sneak {{{
+    " nmap f <Plug>Sneak_s
+    " nmap F <Plug>Sneak_S
+    " xmap f <Plug>Sneak_s
+    " xmap F <Plug>Sneak_S
+    " omap f <Plug>Sneak_s
+    " omap F <Plug>Sneak_S
+" }}}
+
 " Peekaboo config {{{
 " Default peekaboo window
 let g:peekaboo_window = 'vertical botright 30new'
@@ -1229,6 +1240,13 @@ nmap Y <Plug>(operator-flashy)$
 let g:operator#flashy#flash_time=300 " in milliseconds
 " }}}
 
+" tagbar {{{
+let g:tagbar_left = 0
+
+let g:tagbar_indent = 1
+
+let g:tagbar_show_linenumbers= 1
+" }}}
 nnoremap <silent> <Leader>B :TagbarToggle<CR>
 " set vim's cwd to current file's
 nnoremap ,cd :cd %:p:h<CR>:pwd<CR>
@@ -1259,6 +1277,7 @@ map <Leader>O :Obsession<CR>
 " todo better if it could be parsable
 " map <Leader>t :!trans :fr -no-ansi <cword><CR>
 map <Leader>t :te trans :fr <cword><CR>
+map <Leader><space> :b#<CR>
 
 " Unimpaired {{{
 " advised by tpope for these remote countries that don't use qwerty
@@ -1270,6 +1289,9 @@ map <Leader>t :te trans :fr <cword><CR>
 " xmap < [
 " xmap > ]
 " }}}
+
+set showcmd " show pending command bottom right
+set showfulltag "test 
 
 " indents
 "nmap <S-Tab> <<
@@ -1304,6 +1326,8 @@ unmenu *
 map <Leader>s :setlocal spell spelllang=en_us<CR>
 menu Spell.EN_US :setlocal spell spelllang=en_us<CR>
 menu Spell.FR :setlocal spell spelllang=fr_fr<CR>
+
+menu Trans.FR :te trans :fr <cword><CR>
 
 " tab menu {{{2
 menu Tabs.S2 :set expandtab ts=2 sts=2 sw=2<CR>
