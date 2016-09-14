@@ -1,29 +1,11 @@
 # if a process takeslonger than this, display its processing time
 REPORTTIME=10
 # delay to consider when changing vi mode
-KEYTIMEOUT=1
+KEYTIMEOUT=0
 
-#include "ns3/string.h"#include "ns3/string.h"#include "ns3/string.h"<F9>
-#include "ns3/string.h"
-# powerline_path=$(get_python_pkg_dir powerline)
 powerline_path="/home/teto/powerline/powerline"
 
-echo "Powerline path ${powerline_path}"
-
-#powerline_path=""
-# if [[ $? -eq 0 && "$powerline_path" != "" ]]; then
-  # ${powerline_path}/../EGG-INFO/scripts/powerline-daemon -q
-	# ${powerline_path}/../scripts/powerline-daemon -q
-	source ${powerline_path}/bindings/zsh/powerline.zsh
-# else
-	# Setup your normal PS1 here.
-# explanations available here:
-# http://www.acm.uiuc.edu/workshops/zsh/prompt/escapes.html
-# PROMPT='%K{blue}%n@%m%k %B%F{cyan}%(4~|...|)%3~%F{white}  [%T]
-# %# %b%f%k'
-#${PR_GREEN}%n%{$reset_color%} %{$FG[239]%}at%{$reset_color%} ${PR_BOLD_BLUE}$(box_name)%{$reset_color%} %{$FG[239]%}in%{$reset_color%} ${PR_BOLD_YELLOW}$(current_pwd)%{$reset_color%} $(git_prompt_string)
-#$(prompt_char) '
-# fi
+source ${powerline_path}/bindings/zsh/powerline.zsh
 
 #RPROMPT='[%D{%L:%M:%S %p}]'
 

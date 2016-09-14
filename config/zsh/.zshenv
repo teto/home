@@ -6,7 +6,8 @@
 #PATH="/usr/lib/w3m:$PATH"
 # PATH="$PATH:/home/teto/mptcpanalyzer"
 PATH="$HOME/.local/bin:$PATH"
-PATH="$HOME/dotfiles/bin:$PATH"
+# PATH="$HOME/dotfiles/bin:$PATH"
+PATH="$HOME/rofi-scripts:$PATH"
 PATH="$XDG_DATA_HOME/fzf/bin:$PATH"
 
 # set PATH so it includes user's private bin if it  exists
@@ -63,6 +64,7 @@ export TERMINAL="termite"
 
 # can remove NORC once pb in nvim fixed
 export MANPAGER="nvim -u NORC -c 'set ft=man' -"
+# export MANPAGER="less"
 
 # FZF {{{
 export FZF_DEFAULT_OPTS=" --exact"

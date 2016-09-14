@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # to refresh the bar
-# 
+#
 # pkill -SIGUSR1 -f "python /home/user/.config/i3/pystatus.py"
 
 import logging
@@ -12,7 +12,9 @@ from i3pystatus.updates import aptget
 
 # from i3pystatus.core.netrc_backend import NetrcBackend
 
-status = Status(standalone=True, logfile="/home/teto/i3pystatus.log", click_events=True)
+status = Status(standalone=True, logfile="$HOME/i3pystatus.log", click_events=True)
+
+my_term = "termite"
 
 #status.register("text",
 
@@ -41,14 +43,15 @@ clock = status.register(
     log_level=logging.DEBUG,
 )
 
-# status.register(“xkblayout”, layouts=[“fr us”, “us”])
+# status.register("xkblayout", layouts=["fr", "us"])
 
 # clock.on_click(1)
 # print(clock.on_clicks)
 # status.register("pulseaudio")
 # Shows your CPU temperature, if you have a Intel CPU
 status.register("temp",   format="{temp:.0f}°C",)
-status.register("backlight",   format="{percentage}%",)
+# might not work with modesetting, nvidia etc...
+# status.register("backlight",   format="{percentage}%",)
 #
 # The battery monitor has many formatting options, see README for details
 
@@ -118,11 +121,6 @@ status.register("network",
 # Note: requires libpulseaudio from PyPI
 #status.register("pulseaudio",   format="♪{volume}",)
 
-#status.register("pomodoro")
-# Shows mpd status
-# Format:
-# Cloud connected▶Reroute to Remain
-
 status.register(
     "mpd",
     format="{status}{title}",
@@ -131,17 +129,17 @@ status.register(
         "play": "▶",
         "stop": "◾",
     },
-    on_rightclick=['urxvtc', '-e', 'ncmpcpp']
+    on_rightclick=['termite', '-e', 'ncmpcpp']
 
 )
 
 #print("mdp on_lclick", mpd);
 
-alsa = status.register("alsa", mixer="Headphone", format="")
+# alsa = status.register("alsa", mixer="Headphone", format="")
 dpms = status.register("dpms", format="")
 
 alsa = status.register("alsa",
-        on_leftclick=['urxvtc', '-e', 'alsamixer']
+        on_leftclick=[my_term, '-e', 'alsamixer']
         )
 
 status.register("updates",
@@ -154,12 +152,16 @@ status.register("updates",
                 log_level=logging.DEBUG
                 )
 
+status.register("khal_calendar", )
+
+# status.register("scratchpad",)
+
 # # print("alsa")
 # res = status.register(
 #     "mail",
 #     backends=[
 #         # my notmuch config is in a non standard place => I have to setup db_path
-#         notmuchmail.Notmuch(account="lip6", 
+#         notmuchmail.Notmuch(account="lip6",
 #             query="tag:inbox and tag:unread",
 #             db_path="/home/teto/Maildir",
 #             ),
