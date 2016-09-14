@@ -309,7 +309,8 @@ set title " vim will change terminal title
 " look at :h statusline to see the available 'items'
 " to count the number of buffer
 " echo len(filter(range(1, bufnr('$')), 'buflisted(v:val)'))
-let &titlestring="%t %{len(filter(range(1, bufnr('$')), 'buflisted(v:val)'))}"
+  
+let &titlestring=" %t %{len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) } - NVIM"
 
 
 nnoremap <Leader>/ :set hlsearch! hls?<CR> " toggle search highlighting
