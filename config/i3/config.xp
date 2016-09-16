@@ -63,8 +63,8 @@ bindsym button8 move right
 # bindsym $mod+Shift+g title_format "[test] %title"
 
 for_window [class="^qutebrowser$"] title_format "<span background='blue'>QB</span> %title"
-for_window [class="^firefox$"] title_format "<span background='#F28559'>QB</span> %title"
-for_window [title="VIM$"] title_format " %title"
+for_window [class="^Firefox$"] title_format "<span background='#F28559'>FF</span> %title"
+# for_window [title="VIM$"] title_format " %title"
 
 
 for_window [title="Thunderbird$"] title_format " %title"

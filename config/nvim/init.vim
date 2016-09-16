@@ -173,9 +173,7 @@ Plug 'dietsche/vim-lastplace' " restore last cursor postion
 Plug 'justinmk/vim-dirvish' " replaces netrw 
 " Plug 'justinmk/vim-gtfo' " gfo to open filemanager in cwd
 Plug 'wannesm/wmgraphviz.vim', {'for': 'dot'} " graphviz syntax highlighting
-"Plug 'CCTree'
  Plug 'tpope/vim-commentary' "gcc to comment/gcgc does not work that well
-"Plug 'showmarks2'
 Plug 'teto/vim-listchars' " to cycle between different list/listchars configurations
 "Plug 'vim-voom/VOoM' " can show tex/restDown Table of Content (ToC)
 Plug 'blueyed/vim-diminactive' " disable syntax coloring on inactive splits
@@ -187,7 +185,7 @@ Plug 'tpope/vim-fugitive' " to use with Git, VERY powerful
 Plug 'junegunn/vim-github-dashboard' " needs ruby support, works in recent neovim
 "Plug 'junegunn/vim-peekaboo' " gives a preview of buffers when pasting
 Plug 'mhinz/vim-randomtag', { 'on': 'Random' } " Adds a :Random function that launches help at random
-Plug 'majutsushi/tagbar', {'on': 'TagbarToggle'}
+Plug 'majutsushi/tagbar' " , {'on': 'TagbarToggle'}
 
 " vim-sayonara {{{2
 nnoremap <silent><leader>q  :Sayonara<cr>
@@ -214,16 +212,14 @@ Plug 'euclio/vim-markdown-composer' " , { 'for': 'markdown', 'do': function('Bui
 Plug 'Rykka/riv.vim' " , {'for': 'rst'}
 Plug 'Rykka/InstantRst', {'for': 'rst'} " rst live preview with :InstantRst, 
 "Plug 'junegunn/vim-easy-align'   " to align '=' on multiple lines for instance
-"Plug 'elzr/vim-json', { 'for': 'json' }
 Plug 'dhruvasagar/vim-table-mode', {'for': 'txt'}
-"Plug 'airblade/vim-gitgutter' " will show which lines changed compared to last clean state
 Plug 'kshenoy/vim-signature' " display marks in gutter, love it
 Plug 'vim-scripts/QuickFixCurrentNumber'
 "Plug 'tomtom/quickfixsigns_vim'
 
 Plug 'mhinz/vim-rfc', { 'on': 'RFC' }
 " can show a list of unicode characeters, with their name  :UnicodeTable etc... 
-Plug 'chrisbra/unicode.vim', { 'on': ['<plug>(UnicodeComplete)', '<plug>(UnicodeGA)', 'UnicodeTable'] } 
+Plug 'chrisbra/unicode.vim' " , { 'on': ['<plug>(UnicodeComplete)', '<plug>(UnicodeGA)', 'UnicodeTable'] } 
 "Plug 'vim-scripts/rfc-syntax', { 'for': 'rfc' } " optional syntax highlighting for 
 Plug 'vim-scripts/Modeliner' " <leader>ml to setup buffer modeline
 "Plug 'sfiera/vim-emacsmodeline' " Reads emacs modelines
@@ -232,7 +228,7 @@ Plug 'vim-scripts/Modeliner' " <leader>ml to setup buffer modeline
 "Plug 'vim-scripts/DynamicSigns'
 " async grep neovim only
 Plug 'mhinz/vim-grepper', { 'on': 'Grepper'}
-Plug 'ddrscott/vim-side-search' 
+Plug 'ddrscott/vim-side-search'  " tOdo
 "Plug 'teto/neovim-auto-autoread' " works only in neovim, runs external checker
 Plug 'benekastah/neomake' " async build for neovim
 " Plug '~/neomake' " , {'branch': 'graphviz'}  async build for neovim
@@ -240,7 +236,7 @@ Plug 'mhinz/vim-signify' " Indicate changed lines within a file using a VCS.
 " Plug 'teddywing/auditory.vim' " play sounds as you type
 
 " does not work seems to be better ones
-Plug 'vasconcelloslf/vim-interestingwords' " highlight the words you choose <leader>k
+" Plug 'vasconcelloslf/vim-interestingwords' " highlight the words you choose <leader>k (does not work in neovim)
 Plug 't9md/vim-quickhl' " hl manually selected words
 
 " colorschemes {{{
@@ -268,7 +264,7 @@ Plug 'NLKNguyen/papercolor-theme'
 Plug 'chrisbra/csv.vim', {'for': 'csv'}
 " Plug 'luochen1990/rainbow' " does it work ?
 "Plug 'eapache/rainbow_parentheses.vim'  " Display successive delimiters such as [,(... with different colors 
-
+Plug 'junegunn/rainbow_parentheses.vim'
 " {{{ Latex attempts
 " this one could not compile my program
 " "Plug 'vim-latex/vim-latex', {'for': 'tex'}
@@ -796,23 +792,27 @@ let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline#extensions#tabline#show_buffers = 1  
 let g:airline#extensions#tabline#buffer_min_count =2
 let g:airline#extensions#tabline#buffer_idx_mode = 1
-
-
 let g:airline#extensions#tabline#buffers_label = 'b'
-
 let g:airline#extensions#tabline#tabs_label = 't'
 let g:airline#extensions#tabline#show_tabs = 0
 
+
+
 let g:airline#extensions#tabline#formatter = 'unique_tail'
-let g:airline_extensions = ['branch', 'tabline', 'obsession']
+" let g:airline_extensions = ['branch', 'tabline', 'obsession']
 
-let g:airline#extensions#tagbar#enabled = 0
+" rely on tagbar plugin
+let g:airline#extensions#tagbar#enabled = 1
+let g:airline#extensions#tagbar#flags = 'f'
 
+" csv plugin
+let g:airline#extensions#csv#enabled = 1
 let g:airline_detect_spell=1
 
+" ycm integration
 let g:airline#extensions#ycm#enabled = 1
-let g:airline#extensions#ycm#error_symbol = 'E:'
-let g:airline#extensions#ycm#warning_symbol = 'W:'
+let g:airline#extensions#ycm#error_symbol = s:gutter_error_sign
+let g:airline#extensions#ycm#warning_symbol = s:gutter_warn_sign
 
 let g:airline#extensions#whitespace#enabled = 0
 let g:airline#extensions#whitespace#mixed_indent_algo = 2
