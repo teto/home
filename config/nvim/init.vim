@@ -124,7 +124,8 @@ Plug 'dzeban/vim-log-syntax'
 " Plug 'danielroseman/pygd-vim', {'for': 'python'} " provokes an error
 " }}}
 
-" Plug 'Valloric/ListToggle' " toggling seems to fail
+Plug 'Valloric/ListToggle' " toggle location/quickfix list toggling seems to fail
+" Plug 'git@github.com:milkypostman/vim-togglelist' " same
 Plug 'tpope/vim-obsession' ", {'on': 'Obsession', 'ObsessionStatus'}  very cool, register edited files in a Session.vim, call with :Obsession
 " Plug 'mbbill/undotree'
 Plug '907th/vim-auto-save' " :h auto-save
@@ -214,7 +215,9 @@ Plug 'Rykka/InstantRst', {'for': 'rst'} " rst live preview with :InstantRst,
 "Plug 'junegunn/vim-easy-align'   " to align '=' on multiple lines for instance
 Plug 'dhruvasagar/vim-table-mode', {'for': 'txt'}
 Plug 'kshenoy/vim-signature' " display marks in gutter, love it
-Plug 'vim-scripts/QuickFixCurrentNumber'
+
+Plug 'vim-scripts/QuickFixCurrentNumber' " instead of :Cnr :Cgo
+Plug 'git@github.com:vim-scripts/ingo-library.git' " DEPENDANCY of QuickFixCurrentNumber
 "Plug 'tomtom/quickfixsigns_vim'
 
 Plug 'mhinz/vim-rfc', { 'on': 'RFC' }
@@ -237,7 +240,7 @@ Plug 'mhinz/vim-signify' " Indicate changed lines within a file using a VCS.
 
 " does not work seems to be better ones
 " Plug 'vasconcelloslf/vim-interestingwords' " highlight the words you choose <leader>k (does not work in neovim)
-Plug 't9md/vim-quickhl' " hl manually selected words
+Plug 't9md/vim-quickhl' " hl manually selected words :h QuickhlManualEnable
 
 " colorschemes {{{
 Plug 'whatyouhide/vim-gotham'
@@ -388,7 +391,7 @@ set noswapfile
 
 " display a menu when need to complete a command 
 set wildmenu
-set wildmode=list:full " zsh way ?!
+set wildmode=list:longest " zsh way ?!
 "Ignore these files when completing names and in Explorer
 " set wildignore=.svn,CVS,.git,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg,*.png,*.xpm,*.gif
 
@@ -692,10 +695,6 @@ let g:Powerline_symbols = "fancy" " to use unicode symbols
     let g:csv_autocmd_arrange_size = 1024*1024
 " }}}
 
-" ToggleList config {{{
-let g:lt_location_list_toggle_map = '<F2>' " '<leader>l'
-let g:lt_quickfix_list_toggle_map = '<F3>' " '<leader>qq'
-" }}}
 
 " Search parameters {{{
 set hlsearch " highlight search terms
@@ -838,6 +837,8 @@ nmap <leader>ç <Plug>AirlineSelectTab9
 " close the preview window on python completion
 " autocmd CompleteDone * pclose 
 
+" set completeopt=menu:
+
 " Neomake config {{{
 let g:neomake_verbose = 1
 let g:neomake_python_enabled_makers = ['pyflakes']
@@ -856,6 +857,10 @@ let g:neomake_warning_sign = { 'text': s:gutter_warn_sign , 'texthl': 'WarningSi
 " C and CPP are handled by YCM and java usually by elim
 let s:neomake_exclude_ft = [ 'c', 'cpp', 'java' ]
 "let g:neomake_python_pep8_maker
+" let g:neomake_tex_checkers = [ '' ]
+" let g:neomake_tex_enabled_makers = []
+let g:neomake_tex_enabled_makers = []
+" let g:neomake_tex_enabled_makers = ['chktex']
 " }}}
 
 " Startify config {{{
@@ -976,11 +981,12 @@ let g:vimtex_format_enabled = 0
 let g:vimtex_complete_recursive_bib = 0
 let g:vimtex_complete_close_braces = 0
 let g:vimtex_fold_comments=1
-let g:vimtex_quickfix_autojump = 1
+let g:vimtex_quickfix_autojump = 0
 let g:vimtex_quickfix_ignore_all_warnings =0
 let g:vimtex_view_use_temp_files=1 " to prevent zathura from flickering
+" let g:vimtex_latexmk_options
 
-let g:vimtex_quickfix_mode = 1 " 1=> opened automatically and becomes active
+let g:vimtex_quickfix_mode = 2 " 1=> opened automatically and becomes active
 let g:vimtex_quickfix_ignored_warnings = [
       \ 'Underfull',
       \ 'Overfull',
@@ -1084,6 +1090,11 @@ set foldcolumn=3
 set exrc
 
 " vim-sneak {{{
+let g:sneak#s_next = 1 " can press 's' again to go to next result, like ';'
+let g:sneak#prompt = 'Sneak>'
+let g:sneak#prompt = 'Sneak>'
+
+let g:sneak#streak = 1
     " nmap f <Plug>Sneak_s
     " nmap F <Plug>Sneak_S
     " xmap f <Plug>Sneak_s
@@ -1111,20 +1122,29 @@ nnoremap <leader>pu :PlugUpdate<CR>
 
 " signify (display added/removed lines from vcs) {{{
 let g:signify_vcs_list = [ 'git']
-let g:signify_mapping_next_hunk = '<leader>hn' " hunk next
-let g:signify_mapping_prev_hunk = '<leader>gk' 
+" let g:signify_mapping_next_hunk = '<leader>hn' " hunk next
+" let g:signify_mapping_prev_hunk = '<leader>gk' 
 let g:signify_mapping_toggle_highlight = '<leader>gh' 
 let g:signify_line_highlight = 0 " display added/removed lines in different colors
 "let g:signify_line_color_add    = 'DiffAdd'
 "let g:signify_line_color_delete = 'DiffDelete'
 "let g:signify_line_color_change = 'DiffChange' 
-let g:signify_mapping_toggle = '<leader>gt'
-" let g:signify_sign_add = 
-" let g:signify_sign_delete|
-" let g:signify_sign_delete_first_line|
-" let g:signify_sign_change|
-" let g:signify_sign_changedelete|
+" let g:signify_mapping_toggle = '<leader>gt'
+" let g:signify_sign_add =  '+'
+let g:signify_sign_add =  "\u00a0" " unbreakable space
+let g:signify_sign_delete            = "\u00a0"
+" let g:signify_sign_delete_first_line = '‾'
+let g:signify_sign_change            = "\u00a0" 
+" let g:signify_sign_changedelete      = g:signify_sign_change
 " let g:signify_sign_show_count|
+
+let g:signify_cursorhold_insert     = 0
+let g:signify_cursorhold_normal     = 0
+let g:signify_update_on_bufenter    = 0
+let g:signify_update_on_focusgained = 1
+" hunk jumping
+nmap <leader>gj <plug>(signify-next-hunk)
+nmap <leader>gk <plug>(signify-prev-hunk)
 
 " }}}
 
@@ -1146,6 +1166,7 @@ nnoremap <LocalLeader>sv :source $MYVIMRC<CR> " reload vimrc
 " }}}
 
 " {{{ vim-scripts/QuickFixCurrentNumber
+"*:QuickhlManualEnable*		Enable.
 " }}}
 
 " Tips from vim-galore {{{
@@ -1214,7 +1235,6 @@ nnoremap <F4> :cnext<CR>
 nnoremap <F5> :Neomake<CR>
 nnoremap <F6> :AutoSaveToggle<CR>
 "nnoremap <F6> :AutoSaveOnLostFocus<CR>
-" search for  item in quickfix list
 " goto previous buffer
 nnoremap <F7> :bp<CR> 
 nnoremap <F8> :bn<CR>
@@ -1263,6 +1283,19 @@ autocmd! BufWritePost * Neomake
 
 " Bye bye ex mode
 noremap Q <NOP>
+
+" location list / quickfix config {{{
+" location list can be associated with only one window.  
+" The location list is independent of the quickfix list.
+" ListToggle config {{{
+nnoremap <kPageUp> :lprev
+nnoremap <kPageDown> :lnext
+nnoremap <kPageRight> :lnext
+nnoremap <kPageRight> :lnext
+nnoremap <k2> :echom "hello world"
+let g:lt_location_list_toggle_map = '<F2>' " '<leader>l'
+let g:lt_quickfix_list_toggle_map = '<F1>' " '<leader>qq'
+" }}}
 
 " buffers
 map <Leader>n :bnext<CR>
@@ -1370,3 +1403,5 @@ colorscheme molokai
 
 " }}}
 
+
+highlight SignifySignChange cterm=bold ctermbg=237  ctermfg=227 guibg=#F08A1F

@@ -7,8 +7,10 @@
 # PATH="$PATH:/home/teto/mptcpanalyzer"
 PATH="$HOME/.local/bin:$PATH"
 # PATH="$HOME/dotfiles/bin:$PATH"
-PATH="$HOME/rofi-scripts:$PATH"
-PATH="$XDG_DATA_HOME/fzf/bin:$PATH"
+PATH+=":$HOME/rofi-scripts"
+PATH+=":$XDG_DATA_HOME/fzf/bin"
+PATH+=":/usr/local/texlive/2016/bin/x86_64-linux"
+PATH+=":/home/teto/texlive/bin/x86_64-linux"
 
 # set PATH so it includes user's private bin if it  exists
 if [ -d "$HOME/bin" ] ; then
@@ -61,6 +63,9 @@ export MAILDIR="$HOME/Maildir"
 export EDITOR="nvim"
 export TERMINAL="termite"
 
+# careful ! it's not a classic terminfo root with /X/Xname
+# it will just look for files in this directory
+export TERMINFO="${XDG_CONFIG_HOME:-~/.config}/terminfo"
 
 # can remove NORC once pb in nvim fixed
 export MANPAGER="nvim -u NORC -c 'set ft=man' -"

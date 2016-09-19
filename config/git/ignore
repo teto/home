@@ -22,6 +22,7 @@ ls-R
 *.cbp
 *.workspace
 *.Rhistory
+Session.vim
 # }}}
 
 # Binaries {{{
@@ -83,3 +84,4 @@ Icon?
 ehthumbs.db
 Thumbs.db
 # }}}
+

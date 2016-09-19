@@ -147,7 +147,8 @@ floating_modifier $mod
 # start a terminal
 bindsym $mod+Return exec --no-startup-id $term -d "$(xcwd)"
 # -d "$(xcwd)"
-bindsym $mod+Shift+Return exec --no-startup-id ~/.i3/fork_term.sh
+# bindsym $mod+Shift+Return exec --no-startup-id ~/.i3/fork_term.sh
+bindsym $mod+Shift+Return exec --no-startup-id $term -d "$(xcwd)"
 #i3-sensible-terminal
 
 # Use mod-Control-Up and Down to rotate through the workspace list.
