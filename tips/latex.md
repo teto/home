@@ -43,3 +43,13 @@ To make sure the db was updated:
 
 to check which file is used:
 kpsewhich <file>
+
+
+Some files of importance:
+  TEXDIR: "/home/teto/texlive/2016"
+  TEXMFCONFIG: "~/.config/texlive2016/texmf-config"
+  TEXMFHOME: "~/texmf"
+  TEXMFLOCAL: "/home/teto/texlive/texmf-local"
+  TEXMFSYSCONFIG: "/home/teto/texlive/2016/texmf-config"
+  TEXMFSYSVAR: "/home/teto/texlive/2016/texmf-var"
+  TEXMFVAR: "~/.config/texlive2016/texmf-var"

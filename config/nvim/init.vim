@@ -391,7 +391,8 @@ set noswapfile
 
 " display a menu when need to complete a command 
 set wildmenu
-set wildmode=list:longest " zsh way ?!
+set wildchar=<Tab>
+set wildmode=list:longest,full " zsh way ?!
 "Ignore these files when completing names and in Explorer
 " set wildignore=.svn,CVS,.git,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg,*.png,*.xpm,*.gif
 
@@ -985,6 +986,10 @@ let g:vimtex_quickfix_autojump = 0
 let g:vimtex_quickfix_ignore_all_warnings =0
 let g:vimtex_view_use_temp_files=1 " to prevent zathura from flickering
 " let g:vimtex_latexmk_options
+let g:vimtex_syntax_minted = [
+      \ {
+      \   'lang' : 'json',
+      \ }]
 
 let g:vimtex_quickfix_mode = 2 " 1=> opened automatically and becomes active
 let g:vimtex_quickfix_ignored_warnings = [

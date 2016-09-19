@@ -9,7 +9,6 @@ PATH="$HOME/.local/bin:$PATH"
 # PATH="$HOME/dotfiles/bin:$PATH"
 PATH+=":$HOME/rofi-scripts"
 PATH+=":$XDG_DATA_HOME/fzf/bin"
-PATH+=":/usr/local/texlive/2016/bin/x86_64-linux"
 PATH+=":/home/teto/texlive/bin/x86_64-linux"
 
 # set PATH so it includes user's private bin if it  exists
