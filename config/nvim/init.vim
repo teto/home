@@ -81,8 +81,7 @@ Plug 'tpope/vim-scriptease' " Adds command such as :Messages
 " Plug 'Yggdroot/indentLine',{ 'for': 'python' }  " draw verticals indents but seems greedy
 "  Autocompletion and linting {{{2
 "'frozen': 1,
-" Plug 'Valloric/YouCompleteMe', { 'do': ':new \| call termopen("./install.py --system-libclang --clang-completer")' }
-Plug 'Valloric/YouCompleteMe' , { 'do': './install.py --system-libclang --clang-completer' }
+Plug 'Valloric/YouCompleteMe' , { 'do': ':new \| call termopen(''./install.py --system-libclang --clang-completer'')' }
 " Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
 " Plug 'zchee/deoplete-clang', { 'for': 'cpp' }
 " Plug 'zchee/deoplete-jedi', { 'for': 'python'}
@@ -186,7 +185,7 @@ Plug 'tpope/vim-fugitive' " to use with Git, VERY powerful
 Plug 'junegunn/vim-github-dashboard' " needs ruby support, works in recent neovim
 "Plug 'junegunn/vim-peekaboo' " gives a preview of buffers when pasting
 Plug 'mhinz/vim-randomtag', { 'on': 'Random' } " Adds a :Random function that launches help at random
-Plug 'majutsushi/tagbar' " , {'on': 'TagbarToggle'}
+Plug 'majutsushi/tagbar' " , {'on': 'TagbarToggle'} disabled lazyloading else it would not work with statusline
 
 " vim-sayonara {{{2
 nnoremap <silent><leader>q  :Sayonara<cr>
@@ -198,7 +197,7 @@ let g:sayonara_confirm_quit = 0
 
 "  fuzzers {{{2
 " Plug 'junegunn/fzf', { 'dir': $XDG_DATA_HOME . '/fzf', 'do': './install --completion --key-bindings --64' }
-Plug 'junegunn/fzf', { 'dir': $XDG_DATA_HOME . '/fzf', 'do': './install --all --64'}
+Plug 'junegunn/fzf', { 'dir': $XDG_DATA_HOME . '/fzf', 'do': ':term ./install --no-update-rc --bin --64'}
 
 " Many options available :
 " https://github.com/junegunn/fzf.vim

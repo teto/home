@@ -12,7 +12,8 @@ from i3pystatus.updates import aptget
 
 # from i3pystatus.core.netrc_backend import NetrcBackend
 
-status = Status(standalone=True, logfile="$HOME/i3pystatus.log", click_events=True)
+status = Status(standalone=True, logfile="$HOME/i3pystatus.log", click_events=True,
+        )
 
 my_term = "termite"
 
@@ -152,9 +153,12 @@ status.register("updates",
                 log_level=logging.DEBUG
                 )
 
-status.register("khal_calendar", )
+status.register("khal_calendar", 
+# format = '{calendar} / {nb_events}'
+         log_level=logging.DEBUG,
+        )
 
-# status.register("scratchpad",)
+status.register("scratchpad",)
 
 # # print("alsa")
 # res = status.register(
@@ -183,7 +187,7 @@ status.register("khal_calendar", )
 #          # keyring_backend="netrc",
 #          # keyring_backend=keyring.backend.netrc,
 #         # keyring_backend=backend.netrcbackend,
-#          log_level=logging.debug,
+#          log_level=logging.DEBUG,
         # )
 
 # #print("result:", res)

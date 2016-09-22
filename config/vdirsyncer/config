@@ -106,3 +106,24 @@ url = https://cloud.lip6.fr/remote.php/caldav/calendars/coudron/pro
 #url = https://owncloud.example.com/remote.php/caldav/
 username = coudron
 password.fetch = ["command", "keyring", "get", "lip6_cloud", "coudron"]
+
+
+# CALDAV => Calendar
+[pair perso_caldav]
+a = perso_local_caldav
+b = perso_remote_caldav
+#collections = ["private", "work"]
+
+[storage perso_local_caldav]
+type = filesystem
+path.fetch = ["command", "sh", "-c", "echo $XDG_DATA_HOME/calendars/perso"]
+fileext = .ics
+
+
+[storage perso_remote_caldav]
+auth=basic
+type = caldav
+url = https://cloud.lip6.fr/remote.php/caldav/calendars/coudron/pro
+#url = https://owncloud.example.com/remote.php/caldav/
+username = coudron
+password.fetch = ["command", "keyring", "get", "lip6_cloud", "coudron"]
