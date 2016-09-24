@@ -70,11 +70,13 @@ set shortmess+=I
 call plug#begin(s:plugdir)
 Plug 'mtth/scratch.vim' " , {'on': 'Scratch'} mapped to ?
 Plug 'git@github.com:junegunn/gv.vim.git' " git commit viewer :Gv
+" Plug 'git@github.com:xolox/vim-easytags.git' " 
+Plug 'git@github.com:ludovicchabant/vim-gutentags' " 
 "Plug 'junegunn/limelight.vim' " to highlight ucrrent paragraph only
 " Plug 'bronson/vim-trailing-whitespace' " :FixTrailingWhitespace
 " Plug 'tkhoa2711/vim-togglenumber' " by default mapped to <leader>n
 " Plug 'blindFS/vim-translator' " fails during launch :/
-
+Plug 'git@github.com:metakirby5/codi.vim'
 " Plug 'timeyyy/orchestra.nvim' " to play some music on 
 " Plug 'timeyyy/clackclack.symphony' " data to play with orchestra.vim
 Plug 'tpope/vim-scriptease' " Adds command such as :Messages
@@ -710,6 +712,7 @@ let g:ycm_confirm_extra_conf = 0
 let g:ycm_key_list_select_completion = ['<TAB>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<S-TAB>', '<Up>']
 let g:ycm_auto_trigger = 1
+let g:ycm_complete_in_comments = 1
 let g:ycm_error_symbol = s:gutter_error_sign " used to signal errors in gutter
 let g:ycm_warning_symbol = s:gutter_warn_sign " warn in gutter 
 let g:ycm_show_diagnostics_ui = 1 " show info in gutter
@@ -1064,6 +1067,8 @@ let g:pymode_virtualenv = 1
 
 " Grepper {{{
 " add -cword to automatically fill with the underlying word
+" example given by mhinz to search into current buffer
+" let g:grepper = { 'git': { 'grepprg': 'git grep -nI $* -- $.' }}
 nnoremap <leader>git :Grepper  -tool git -open -nojump
 nnoremap <leader>ag  :Grepper -tool ag  -open -switch
 " -noswitch
@@ -1096,9 +1101,8 @@ set exrc
 " vim-sneak {{{
 let g:sneak#s_next = 1 " can press 's' again to go to next result, like ';'
 let g:sneak#prompt = 'Sneak>'
-let g:sneak#prompt = 'Sneak>'
 
-let g:sneak#streak = 1
+let g:sneak#streak = 0
     " nmap f <Plug>Sneak_s
     " nmap F <Plug>Sneak_S
     " xmap f <Plug>Sneak_s

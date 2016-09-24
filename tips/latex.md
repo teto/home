@@ -1,3 +1,13 @@
+FAQ:
+
+
+The "Missing $ inserted" is probably caused by the underscores and bar
+http://stackoverflow.com/questions/2476831/getting-the-error-missing-inserted-in-latex
+
+Comment placer les fenetes 
+\begin{figure}[b] <- b for "bottom"
+
+
 Just follow the TDS structure (reference ?) and put your files in the folder returned by
 kpsewhich -var-value=TEXMFHOME (must be ~/texmf).
 

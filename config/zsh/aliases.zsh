@@ -15,6 +15,7 @@ alias -s pdf=zathura
 
 alias mp="mptcpanalyzer"
 alias mn="mptcpnumerics"
+alias n="ncmpcpp"
 
 
 alias :q="exit"

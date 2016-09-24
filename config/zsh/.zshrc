@@ -119,6 +119,7 @@ bindkey '^R' history-incremental-search-backward
 #bindkey "q" push-line
 #bindkey 'q' push-line-or-edit
 bindkey '^A' push-line-or-edit
+bindkey '^V' edit-command-line
 
 bindkey '^P' up-history
 bindkey '^N' down-history
