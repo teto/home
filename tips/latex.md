@@ -5,6 +5,9 @@ To install packages, one can use tlm (TexLive Manager), which on debian runs in
 usermode, aka install things in $HOME/texmf:
 
 
+\forall
+\in
+
 If you have:
 "cannot setup TLPDB in /home/teto/texmf at /usr/bin/tlmgr line 5604.", you need
 to run:
