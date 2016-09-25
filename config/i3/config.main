@@ -20,7 +20,7 @@ set $launcher "rofi -modi 'run,DRun,window,ssh,Layouts:i3-list-layouts,file:/hom
 # xmodmap to see the mappings for ModX etc...
 set $mod Mod1
 set $rmod Mod1
-
+set $BROWSER qutebrowser --backend webengine
 #set $term rxvt-unicode
 set $term termite
 
@@ -434,7 +434,7 @@ bar {
 }
 # }}}
 
-bindsym $mod+shift+q exec qutebrowser
+bindsym $mod+shift+q exec $BROWSER
 bindsym $mod+shift+n exec nemo
 bindsym $mod+shift+p mode mouse
 

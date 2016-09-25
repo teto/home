@@ -61,6 +61,8 @@ export MAILDIR="$HOME/Maildir"
 
 export EDITOR="nvim"
 export TERMINAL="termite"
+export BROWSER="x-www-browser"
+# export BROWSER="qutebrowser --backend webengine"
 
 # careful ! it's not a classic terminfo root with /X/Xname
 # it will just look for files in this directory

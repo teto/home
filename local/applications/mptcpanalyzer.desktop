@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=mptcpanalyzer
+Comment=Analyzes Multipath TCP capture files (*.pcap)
+Icon=utilities-terminal
+Terminal=true
+Exec=mptcpanalyzer
+Categories=ConsoleOnly;System;
+MimeType=

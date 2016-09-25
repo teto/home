@@ -51,3 +51,6 @@ fonts:
 
 git:
 	echo "Install git hooks for this repo"
+
+# alternatives:
+# 	sudo update-alternatives --install /usr/bin/x-www-browser x-www-browser $(which qutebrowser) 10

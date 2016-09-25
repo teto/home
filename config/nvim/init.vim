@@ -89,7 +89,7 @@ Plug 'Valloric/YouCompleteMe' , { 'do': ':new \| call termopen(''./install.py --
 " Plug 'zchee/deoplete-clang', { 'for': 'cpp' }
 " Plug 'zchee/deoplete-jedi', { 'for': 'python'}
 " }}}
-
+Plug 'beloglazov/vim-online-thesaurus' " thesaurus => dico dde synonymes
 Plug 'mattboehm/vim-unstack'  " to see a
 Plug 'KabbAmine/vCoolor.vim', { 'on': 'VCooler' } " RGBA color picker
 Plug 'arakashic/chromatica.nvim', { 'for': 'cpp' } " semantic color syntax
@@ -979,7 +979,7 @@ let g:vimtex_index_split_pos = 'below'
 let g:vimtex_view_method = 'zathura'
 "let g:vimtex_snippets_leader = ','
 let g:vimtex_latexmk_progname = 'nvr'
-let g:latex_view_general_viewer = 'zathura'
+" let g:latex_view_general_viewer = 'zathura'
 let g:vimtex_fold_enabled = 0
 let g:vimtex_format_enabled = 0
 let g:vimtex_complete_recursive_bib = 0
@@ -987,7 +987,7 @@ let g:vimtex_complete_close_braces = 0
 let g:vimtex_fold_comments=1
 let g:vimtex_quickfix_autojump = 0
 let g:vimtex_quickfix_ignore_all_warnings =0
-let g:vimtex_view_use_temp_files=1 " to prevent zathura from flickering
+let g:vimtex_view_use_temp_files=0 " to prevent zathura from flickering
 " let g:vimtex_latexmk_options
 let g:vimtex_syntax_minted = [
       \ {
@@ -1003,10 +1003,10 @@ let g:vimtex_quickfix_ignored_warnings = [
 "let g:tex_stylish = 1
 "let g:tex_flavor = 'latex'
 "let g:tex_isk='48-57,a-z,A-Z,192-255,:'
-
-if !exists('g:ycm_semantic_triggers')
-    let g:ycm_semantic_triggers = {}
-endif
+let g:vimtex_latexmk_callback= 0
+" if !exists('g:ycm_semantic_triggers')
+"     let g:ycm_semantic_triggers = {}
+" endif
 
 let g:ycm_semantic_triggers.tex = [
     \ 're!\\[A-Za-z]*(ref|cite)[A-Za-z]*([^]]*])?{([^}]*,?)*',
