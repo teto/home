@@ -22,8 +22,13 @@ alias :q="exit"
 
 
 ### Dictionary lookup {{{
-alias fren="dict -d fd-fra-eng"
-alias enfr="dict -d fd-eng-fra"
+# local commands
+alias lfren="dict -d fd-fra-eng "
+alias lenfr="dict -d fd-eng-fra "
+
+# for now require an internet access
+alias fren="trans :en "
+alias enfr="trans :fr "
 # }}}
 
 

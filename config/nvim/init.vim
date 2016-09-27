@@ -76,7 +76,6 @@ Plug 'git@github.com:ludovicchabant/vim-gutentags' "
 " Plug 'bronson/vim-trailing-whitespace' " :FixTrailingWhitespace
 " Plug 'tkhoa2711/vim-togglenumber' " by default mapped to <leader>n
 " Plug 'blindFS/vim-translator' " fails during launch :/
-Plug 'git@github.com:metakirby5/codi.vim'
 " Plug 'timeyyy/orchestra.nvim' " to play some music on 
 " Plug 'timeyyy/clackclack.symphony' " data to play with orchestra.vim
 Plug 'tpope/vim-scriptease' " Adds command such as :Messages
