@@ -83,7 +83,7 @@ Plug 'metakirby5/codi.vim' " repl
 " Plug 'Yggdroot/indentLine',{ 'for': 'python' }  " draw verticals indents but seems greedy
 "  Autocompletion and linting {{{2
 "'frozen': 1,
-Plug 'Valloric/YouCompleteMe' , { 'do': ':new \| call termopen(''./install.py --system-libclang --clang-completer'')' }
+Plug 'Valloric/YouCompleteMe' , { 'do': ':new \| call termopen(''python3 ./install.py --system-libclang --clang-completer'')' }
 " Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
 " Plug 'zchee/deoplete-clang', { 'for': 'cpp' }
 " Plug 'zchee/deoplete-jedi', { 'for': 'python'}
@@ -723,7 +723,9 @@ let g:ycm_key_detailed_diagnostics = '<leader>d'
 " several solutions available: horizontal-split, new-tab, new-or-existing tab
 let g:ycm_goto_buffer_command = 'same-buffer' 
 let g:ycm_server_log_level = 'debug'
-
+let g:ycm_server_keep_logfiles = 1
+let g:ycm_python_binary_path = '/usr/bin/python3'
+let g:ycm_server_python_interpreter =  '/usr/bin/python3'
 " Add triggers to ycm for LaTeX-Box autocompletion
 let g:ycm_semantic_triggers = {
       \  'tex'  : ['{'],
@@ -844,7 +846,11 @@ nmap <leader>ç <Plug>AirlineSelectTab9
 
 " Neomake config {{{
 let g:neomake_verbose = 1
-let g:neomake_python_enabled_makers = ['pyflakes']
+
+" pyflakes can't be disabled on a per error basis
+" also it considers everything as error => disable
+" flake8 
+let g:neomake_python_enabled_makers = ['mypy']
 let g:neomake_logfile = $HOME.'/neomake.log'
 let g:neomake_c_gcc_args = ['-fsyntax-only', '-Wall']
 let g:neomake_open_list = 0
@@ -854,8 +860,6 @@ let g:neomake_echo_current_error = 1
 let g:neomake_place_signs=1
 
 
-let g:neomake_error_sign = { 'text': s:gutter_error_sign, 'texthl': 'ErrorSign' }
-let g:neomake_warning_sign = { 'text': s:gutter_warn_sign , 'texthl': 'WarningSign' }
 
 " C and CPP are handled by YCM and java usually by elim
 let s:neomake_exclude_ft = [ 'c', 'cpp', 'java' ]
@@ -863,7 +867,16 @@ let s:neomake_exclude_ft = [ 'c', 'cpp', 'java' ]
 " let g:neomake_tex_checkers = [ '' ]
 " let g:neomake_tex_enabled_makers = []
 let g:neomake_tex_enabled_makers = []
+
+" removed chktex because of silly errors 
 " let g:neomake_tex_enabled_makers = ['chktex']
+let g:neomake_error_sign = {'text': '✖', 'texthl': 'NeomakeErrorSign'}
+let g:neomake_warning_sign = {'text': '⚠', 'texthl': 'NeomakeWarningSign'}
+let g:neomake_message_sign = {'text': '➤', 'texthl': 'NeomakeMessageSign'}
+let g:neomake_info_sign = {'text': 'ℹ', 'texthl': 'NeomakeInfoSign'}
+
+" let g:neomake_error_sign = { 'text': s:gutter_error_sign, 'texthl': 'ErrorSign' }
+" let g:neomake_warning_sign = { 'text': s:gutter_warn_sign , 'texthl': 'WarningSign' }
 " }}}
 
 " Startify config {{{
@@ -1237,6 +1250,7 @@ nnoremap Y y$
 nnoremap <F1> :lprev<CR>
 nnoremap <F2> :lnext<CR>
 " search for  item in quickfix list (global/unique)
+" TODO should be able to look for the next one from where I stand !
 nnoremap <F3> :cprev<CR>
 nnoremap <F4> :cnext<CR>
 
@@ -1246,6 +1260,7 @@ nnoremap <F6> :AutoSaveToggle<CR>
 " goto previous buffer
 nnoremap <F7> :bp<CR> 
 nnoremap <F8> :bn<CR>
+nnoremap <F9> :YcmToggleLogs<CR>
 " est mappe a autre chose pour l'instant
 "noremap <F4> exec ":emenu <tab>"
 " should become useless with neovim

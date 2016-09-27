@@ -62,6 +62,7 @@ export MAILDIR="$HOME/Maildir"
 export EDITOR="nvim"
 export TERMINAL="termite"
 export BROWSER="x-www-browser"
+# export CARGO_HOME="$XDG_DATA_HOME/cargo"
 # export BROWSER="qutebrowser --backend webengine"
 
 # careful ! it's not a classic terminfo root with /X/Xname
