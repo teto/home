@@ -1,7 +1,7 @@
 # zathurarc
 
 # colors
-set statusbar-bg "#00FF00"
+# set statusbar-bg "#00FF00"
 set statusbar-fg red
 
 

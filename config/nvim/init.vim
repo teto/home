@@ -66,6 +66,7 @@ endfunction
 " filnxtToO
 set shortmess+=I
 
+
 " vim-plug plugin declarations {{{1
 call plug#begin(s:plugdir)
 Plug 'mtth/scratch.vim' " , {'on': 'Scratch'} mapped to ?
@@ -79,7 +80,10 @@ Plug 'git@github.com:ludovicchabant/vim-gutentags' "
 " Plug 'timeyyy/orchestra.nvim' " to play some music on 
 " Plug 'timeyyy/clackclack.symphony' " data to play with orchestra.vim
 Plug 'tpope/vim-scriptease' " Adds command such as :Messages
-Plug 'metakirby5/codi.vim' " repl
+Plug 'git@github.com:metakirby5/codi.vim' " repl
+Plug 'git@github.com:SirVer/ultisnips' " handle snippets
+" Snippets are separated from the engine. Add this if you want them:
+Plug 'honza/vim-snippets'
 " Plug 'Yggdroot/indentLine',{ 'for': 'python' }  " draw verticals indents but seems greedy
 "  Autocompletion and linting {{{2
 "'frozen': 1,
@@ -548,6 +552,17 @@ let g:diminactive_use_syntax = 0
 let g:diminactive_enable_focus = 0
 "}}}
 
+" ultisnips {{{
+" g:UltiSnipsSnippetsDir
+" <FocusLost><FocusLost>
+let g:UltiSnipsExpandTrigger="<Leader>ù"
+" let g:UltiSnipsJumpForwardTrigger="<c-l>"
+" let g:UltiSnipsJumpBackwardTrigger="<c-h>"
+   " g:UltiSnipsListSnippets                <c-tab>
+   " g:UltiSnipsJumpForwardTrigger          <c-j>
+   " g:UltiSnipsJumpBackwardTrigger         <c-k>
+let g:UltiSnipsUsePythonVersion = 3
+" }}}
 " i3 autocommands {{{
 " todo when opening i3 files, set makeprg to build_config
 " augroup i3
@@ -745,6 +760,9 @@ nnoremap <F6> :YcmDebugInfo<CR>
 "The various GoTo* subcommands add entries to Vim's jumplist so you can use CTRL-O to jump back to where you where before invoking the command (and CTRL-I to jump forward; see :h jumplist for details).
 
 nnoremap <leader>jd :YcmCompleter GoTo<CR>
+nnoremap <leader>kd :YcmCompleter GoTo<CR>
+nnoremap <leader>kl :YcmCompleter GoTo <CR>
+nnoremap <leader>kh :YcmCompleter GoToInclude<CR>
 " }}}
 
 " Deoplete {{{
