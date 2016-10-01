@@ -555,7 +555,7 @@ let g:diminactive_enable_focus = 0
 " ultisnips {{{
 " g:UltiSnipsSnippetsDir
 " <FocusLost><FocusLost>
-let g:UltiSnipsExpandTrigger="<Leader>ù"
+" let g:UltiSnipsExpandTrigger="<Leader>ù"
 " let g:UltiSnipsJumpForwardTrigger="<c-l>"
 " let g:UltiSnipsJumpBackwardTrigger="<c-h>"
    " g:UltiSnipsListSnippets                <c-tab>
@@ -1004,12 +1004,12 @@ let g:tex_flavor = "latex"
 " Pour le rappel 
 " <localleader>ll pour la compilation continue du pdf
 " <localleader>lv pour la preview du pdf
-let g:vimtex_quickfix_open_on_warning = 0
+let g:vimtex_quickfix_open_on_warning = 1
 let g:vimtex_index_split_pos = 'below'
 let g:vimtex_view_method = 'zathura'
 "let g:vimtex_snippets_leader = ','
 let g:vimtex_latexmk_progname = 'nvr'
-" let g:latex_view_general_viewer = 'zathura'
+let g:latex_view_general_viewer = 'zathura'
 let g:vimtex_fold_enabled = 0
 let g:vimtex_format_enabled = 0
 let g:vimtex_complete_recursive_bib = 0
@@ -1017,14 +1017,14 @@ let g:vimtex_complete_close_braces = 0
 let g:vimtex_fold_comments=1
 let g:vimtex_quickfix_autojump = 0
 let g:vimtex_quickfix_ignore_all_warnings =0
-let g:vimtex_view_use_temp_files=0 " to prevent zathura from flickering
+let g:vimtex_view_use_temp_files=1 " to prevent zathura from flickering
 " let g:vimtex_latexmk_options
 let g:vimtex_syntax_minted = [
       \ {
       \   'lang' : 'json',
       \ }]
 
-let g:vimtex_quickfix_mode = 2 " 1=> opened automatically and becomes active
+let g:vimtex_quickfix_mode = 2 " 1=> opened automatically and becomes active (2=> inactive)
 let g:vimtex_quickfix_ignored_warnings = [
       \ 'Underfull',
       \ 'Overfull',
@@ -1378,7 +1378,7 @@ set showfulltag "test
 " azerty customizations : utilise <C-V> pour entrer le caractère utilisé {{{
 "https://www.reddit.com/r/vim/comments/2tvupe/azerty_keymapping/
 " parce que # est l'opposé de * et ù est a coté de *
-map ù %  
+" map ù %  
 noremap             <C-j>           }
 noremap             <C-k>           {
 
