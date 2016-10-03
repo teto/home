@@ -6,7 +6,7 @@ set statusbar-fg red
 
 
 set synctex true
- set synctex-editor-command "nvim --remote-silent +%{line} %{input}"
+set synctex-editor-command "nvim --remote-silent +%{line} %{input}"
 
 # settings
 set window-height 1024

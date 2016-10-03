@@ -102,7 +102,6 @@ Plug 'arakashic/chromatica.nvim', { 'for': 'cpp' } " semantic color syntax
 Plug 'lyuts/vim-rtags'  " a l'air d'etre le plus complet
 Plug 'tpope/vim-unimpaired' " [<space> [e [n ]n pour gerer les conflits etc...
 Plug 'kana/vim-operator-user' " dependancy for operator-flashy
-Plug 'haya14busa/vim-operator-flashy' " Flash selection on copy
 
 " better handling of buffer closure (type :sayonara)
 Plug 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
@@ -115,7 +114,7 @@ Plug 'critiqjo/lldb.nvim',{ 'for': 'c' } " To debug (use clang to get correct li
 " filetypes {{{2
 Plug 'cespare/vim-toml', { 'for': 'toml'}
 Plug 'PotatoesMaster/i3-vim-syntax'
-Plug 'dzeban/vim-log-syntax'
+Plug 'dzeban/vim-log-syntax' " hl some keywords like ERROR/DEBUG/WARNING
 " }}}
 
 " Python {{{2
@@ -192,13 +191,8 @@ Plug 'junegunn/vim-github-dashboard' " needs ruby support, works in recent neovi
 "Plug 'junegunn/vim-peekaboo' " gives a preview of buffers when pasting
 Plug 'mhinz/vim-randomtag', { 'on': 'Random' } " Adds a :Random function that launches help at random
 Plug 'majutsushi/tagbar' " , {'on': 'TagbarToggle'} disabled lazyloading else it would not work with statusline
-
-" vim-sayonara {{{2
-nnoremap <silent><leader>q  :Sayonara<cr>
-nnoremap <silent><leader>Q  :Sayonara!<cr>
-
-let g:sayonara_confirm_quit = 0
-" }}}
+Plug 'git@github.com:machakann/vim-highlightedyank.git' " highlit
+" Plug 'haya14busa/vim-operator-flashy' " Flash selection on copy
 
 
 "  fuzzers {{{2
@@ -215,7 +209,7 @@ Plug 'junegunn/fzf.vim' " defines :Files / :Commits for FZF
 
 
 Plug 'euclio/vim-markdown-composer' " , { 'for': 'markdown', 'do': function('BuildComposer') } " Needs rust, cargo, plenty of things :help markdown-composer
-Plug 'Rykka/riv.vim' " , {'for': 'rst'}
+Plug 'Rykka/riv.vim', {'for': 'rst'}
 Plug 'Rykka/InstantRst', {'for': 'rst'} " rst live preview with :InstantRst, 
 "Plug 'junegunn/vim-easy-align'   " to align '=' on multiple lines for instance
 Plug 'dhruvasagar/vim-table-mode', {'for': 'txt'}
@@ -236,7 +230,7 @@ Plug 'vim-scripts/Modeliner' " <leader>ml to setup buffer modeline
 "Plug 'vim-scripts/DynamicSigns'
 " async grep neovim only
 Plug 'mhinz/vim-grepper', { 'on': 'Grepper'}
-Plug 'ddrscott/vim-side-search'  " tOdo
+" Plug 'ddrscott/vim-side-search'  " tOdo
 "Plug 'teto/neovim-auto-autoread' " works only in neovim, runs external checker
 Plug 'benekastah/neomake' " async build for neovim
 " Plug '~/neomake' " , {'branch': 'graphviz'}  async build for neovim
@@ -270,9 +264,7 @@ Plug 'NLKNguyen/papercolor-theme'
 " Plug 'erezsh/erezvim' "zenburn scheme. This plugin resets some keymaps,
 " annoying
 Plug 'chrisbra/csv.vim', {'for': 'csv'}
-" Plug 'luochen1990/rainbow' " does it work ?
-"Plug 'eapache/rainbow_parentheses.vim'  " Display successive delimiters such as [,(... with different colors 
-Plug 'junegunn/rainbow_parentheses.vim'
+" Plug 'junegunn/rainbow_parentheses.vim' " the recommanded one
 " {{{ Latex attempts
 " this one could not compile my program
 " "Plug 'vim-latex/vim-latex', {'for': 'tex'}
@@ -862,6 +854,13 @@ nmap <leader>ç <Plug>AirlineSelectTab9
 
 " set completeopt=menu:
 
+" vim-sayonara {{{2
+nnoremap <silent><leader>q  :Sayonara<cr>
+nnoremap <silent><leader>Q  :Sayonara!<cr>
+
+let g:sayonara_confirm_quit = 0
+" }}}
+
 " Neomake config {{{
 let g:neomake_verbose = 1
 
@@ -1295,12 +1294,14 @@ nnoremap <Leader>wr :set wrap! \| :set wrap?<CR>
 "nnoremap <Up> :echoe "Use k"<CR>
 "nnoremap <Down> :echoe "Use j"<CR>
 
-" flashy config {{{
-map y <Plug>(operator-flashy)
-nmap Y <Plug>(operator-flashy)$
-let g:operator#flashy#flash_time=300 " in milliseconds
+" flashy config (replaced by highlightedyank) {{{
+" map y <Plug>(operator-flashy)
+" nmap Y <Plug>(operator-flashy)$
+" let g:operator#flashy#flash_time=300 " in milliseconds
 " }}}
-
+" highlightedyank {{{
+let g:highlightedyank_highlight_duration = 1000
+" }}}
 " tagbar {{{
 let g:tagbar_left = 0
 

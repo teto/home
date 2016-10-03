@@ -6,6 +6,8 @@ setxkbmap -option terminate:ctrl_alt_bksp
 export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
 source "$HOME/.zshenv"
 
+udiskie &
+
 # alsamixer in systray
 # regenerate i3 config
 "$XDG_CONFIG_HOME/i3/build_config.sh"
