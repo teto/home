@@ -1033,7 +1033,7 @@ let g:vimtex_quickfix_ignored_warnings = [
 "let g:tex_stylish = 1
 "let g:tex_flavor = 'latex'
 "let g:tex_isk='48-57,a-z,A-Z,192-255,:'
-let g:vimtex_latexmk_callback= 0
+let g:vimtex_latexmk_callback= 1 " let it to 1 else quickfix won't pop
 " if !exists('g:ycm_semantic_triggers')
 "     let g:ycm_semantic_triggers = {}
 " endif
@@ -1170,10 +1170,11 @@ let g:signify_line_highlight = 0 " display added/removed lines in different colo
 "let g:signify_line_color_change = 'DiffChange' 
 " let g:signify_mapping_toggle = '<leader>gt'
 " let g:signify_sign_add =  '+'
-let g:signify_sign_add =  "\u00a0" " unbreakable space
-let g:signify_sign_delete            = "\u00a0"
-" let g:signify_sign_delete_first_line = '‾'
-let g:signify_sign_change            = "\u00a0" 
+let g:signify_sign_show_text = 0
+" let g:signify_sign_add =  "\u00a0" " unbreakable space
+" let g:signify_sign_delete            = "\u00a0"
+" " let g:signify_sign_delete_first_line = '‾'
+" let g:signify_sign_change            = "\u00a0" 
 " let g:signify_sign_changedelete      = g:signify_sign_change
 " let g:signify_sign_show_count|
 
