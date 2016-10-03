@@ -27,7 +27,7 @@ ulimit -c unlimited
 # Things that should be launched by dex (.config/autostart)
 # dbus-launch
 
-# autostart applications
+# autostart applications (parcellite/mpd/update-notifier etc...)
 dex -a -e i3
 
 i3
