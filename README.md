@@ -11,7 +11,6 @@ This folder contains my customizations for:
 * htop
 * i3 (i3wm.org, a great if not the best tiling window manager)
 * i3pystatus (generates a status line for i3bar)
-* irssi (an IRC CLI client)
 * khard (a carddav CLI)
 * khal (a calendar CLI)
 * liquidprompt (a script to make your prompt adapt to the current context)
@@ -30,12 +29,10 @@ This folder contains my customizations for:
 * ranger (CLI file explorer)
 * rofi (a dmenu-like interactive prompt, works with clerk/i3 etc...)
 * rxvt* unicode(256)
-* sup (MUA, incomplete, I use alot instead)
 * sxiv (image viewer)
 * termite (a modal terminal)
 * tig (a git history reader)
 * tmux (terminal multiplexer)
-* vim (text editor)
 * weechat (Irc client)
 * zsh (powerful alternative to bash)
 
@@ -137,6 +134,11 @@ $ XDG_UTILS_DEBUG_LEVEL=4 xdg-mime query default application/pdf
 and finally update it with
 $ xdg-mime default zathura.desktop application/pdf
 
+
+Ranger
+===
+To enable cool file preview, install:
+ffmpegthumbnailer odt2txt pdftotext
 
 Python
 ====

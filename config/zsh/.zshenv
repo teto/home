@@ -59,11 +59,15 @@ export MUTT="$XDG_CONFIG_HOME/mutt"
 
 export MAILDIR="$HOME/Maildir" 
 
+# rust install folder
+export CARGO_HOME="$XDG_DATA_HOME/../"
+
+# default programs {{{
 export EDITOR="nvim"
 export TERMINAL="termite"
 export BROWSER="x-www-browser"
-# export CARGO_HOME="$XDG_DATA_HOME/cargo"
 # export BROWSER="qutebrowser --backend webengine"
+# }}}
 
 # careful ! it's not a classic terminfo root with /X/Xname
 # it will just look for files in this directory
