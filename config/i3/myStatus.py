@@ -155,6 +155,9 @@ status.register("updates",
 
 status.register("khal_calendar", 
 # format = '{calendar} / {nb_events}'
+# days=2,
+        # calendars=[],
+        # format="{title}",
          log_level=logging.DEBUG,
         )
 
