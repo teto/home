@@ -547,7 +547,7 @@ let g:diminactive_enable_focus = 0
 " ultisnips {{{
 " g:UltiSnipsSnippetsDir
 " <FocusLost><FocusLost>
-" let g:UltiSnipsExpandTrigger="<Leader>ù"
+let g:UltiSnipsExpandTrigger="<Leader>ù"
 " let g:UltiSnipsJumpForwardTrigger="<c-l>"
 " let g:UltiSnipsJumpBackwardTrigger="<c-h>"
    " g:UltiSnipsListSnippets                <c-tab>
