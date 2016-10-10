@@ -8,7 +8,12 @@
 # for VTE-based terminals. In termite Ctrl + Shift + t opens terminal in cwd
 source /etc/profile.d/vte.sh
 
-
+# Per folder history {{{
+# https://github.com/jimhester/per-directory-history
+# you can switch between global/local with ^G
+source "$ZDOTDIR/plugins/per-directory-history.zsh"
+# }}}
+ 
 source "$ZDOTDIR/aliases.zsh"
 # notifies when long command finishes
 source "$ZDOTDIR/zbell.zsh" 
