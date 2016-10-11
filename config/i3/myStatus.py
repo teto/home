@@ -9,6 +9,7 @@ import logging
 #import keyring.backends.netrc as backend
 from i3pystatus import Status
 from i3pystatus.updates import aptget
+# from i3pystatus.updates import aptget
 
 # from i3pystatus.core.netrc_backend import NetrcBackend
 
@@ -153,15 +154,21 @@ status.register("updates",
                 log_level=logging.DEBUG
                 )
 
-status.register("khal_calendar", 
-# format = '{calendar} / {nb_events}'
-# days=2,
-        # calendars=[],
-        # format="{title}",
+
+
+status.register("rofication", 
          log_level=logging.DEBUG,
         )
 
-status.register("scratchpad",)
+# status.register("khal_calendar", 
+# # format = '{calendar} / {nb_events}'
+# # days=2,
+#         # calendars=[],
+#         # format="{title}",
+#          log_level=logging.DEBUG,
+#         )
+
+# status.register("scratchpad",)
 
 # # print("alsa")
 # res = status.register(
