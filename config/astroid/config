@@ -1,11 +1,14 @@
 {
     "astroid": {
         "config": {
-            "version": "5"
+            "version": "6"
         },
         "notmuch_config": "\/home\/teto\/.config\/notmuch\/notmuchrc",
         "debug": {
             "dryrun_sending": "false"
+        },
+        "hints": {
+            "level": "0"
         }
     },
     "thread_index": {
@@ -18,12 +21,15 @@
             "date_length": "10",
             "message_count_length": "4",
             "authors_length": "20",
-            "tags_length": "80",
             "subject_color": "#807d74",
             "subject_color_selected": "#000000",
             "background_color_selected": "",
-            "tags_color": "#31587a",
-            "hidden_tags": "attachment,flagged,unread"
+            "tags_length": "80",
+            "tags_upper_color": "#e5e5e5",
+            "tags_lower_color": "#333333",
+            "tags_alpha": "0.5",
+            "hidden_tags": "attachment,flagged,unread",
+            "tags_color": "#31587a"
         }
     },
     "general": {
@@ -34,7 +40,7 @@
         }
     },
     "editor": {
-        "cmd": "gvim -geom 10x10 --servername %2 --socketid %3 -f -c 'set ft=mail' '+set fileencoding=utf-8' '+set ff=unix' '+set enc=utf-8' %1",
+        "cmd": "st -w %3 -e nvim %1",
         "charset": "utf-8",
         "save_draft_on_force_quit": "true",
         "gvim": {
@@ -50,7 +56,10 @@
             "quote_line": "Forwarding %1's message of %2:",
             "disposition": "inline"
         },
-        "sent_tags": "sent"
+        "sent_tags": "sent",
+        "message_id_fqdn": "",
+        "message_id_user": "",
+        "user_agent": "default"
     },
     "poll": {
         "interval": "60"
@@ -69,19 +78,27 @@
         },
         "code_prettify": {
             "enable": "true",
-            "uri_prefix": "https:\/\/google-code-prettify.googlecode.com\/svn\/loader\/",
             "for_tags": "",
             "code_tag": "```",
-            "enable_for_patches": "true"
+            "enable_for_patches": "true",
+            "uri_prefix": "https:\/\/google-code-prettify.googlecode.com\/svn\/loader\/"
         },
         "gravatar": {
             "enable": "true"
-        }
+        },
+        "mark_unread_delay": "0.5"
     },
     "crypto": {
         "gpg": {
-            "path": "gpg2"
+            "path": "gpg2",
+            "always_trust": "true"
         }
+    },
+    "saved_searches": {
+        "show_on_startup": "false",
+        "save_history": "true",
+        "history_lines_to_show": "15",
+        "history_lines": "1000"
     },
     "accounts": {
         "charlie": {
@@ -96,7 +113,8 @@
             "save_drafts_to": "\/home\/root\/Mail\/drafts\/",
             "signature_file": "",
             "signature_default_on": "true",
-            "signature_attach": "false"
+            "signature_attach": "false",
+            "always_gpg_sign": "false"
         }
     },
     "startup": {
