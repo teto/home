@@ -1,6 +1,7 @@
 #  vim: set et fenc=utf-8 ff=unix sts=0 sw=4 ts=4 fdm=marker : 
 # Suffix aliases execute a command based on a file’s extension. Suffix aliases are used with the alias -s command.  Here’s my favorite feature of aliases in zsh.  By adding this line:
 # g => global , does not depend on position on line
+# todo find a better option relying on xdg-open etc...
 alias -s html=qutebrowser
 alias -s json=nvim
 alias -s Vagrantfile=nvim
@@ -126,8 +127,10 @@ alias sv="sudo nvim"
 # vim
 alias ec='nvim $XDG_CONFIG_HOME/'
 
+# python related {{{
 alias pipu='python3.5 -mpip install -U --user '
 alias pydev='python3.5 setup.py develop --user'
+# }}}
 
 # Gestion du 'ls' : couleur & ne touche pas aux accents
 alias ls='ls --classify --tabsize=0 --literal --color=auto --show-control-chars --human-readable'
@@ -150,4 +153,6 @@ alias nm="nm -l"
 # Mail {{{
 alias ml="python2.7 -malot -n ~/.config/notmuch/notmuchrc_pro"
 alias mg="python2.7 -malot -n ~/.config/notmuch/notmuchrc"
+alias astroperso="astroid"
+alias astropro="astroid -c ~/.config/astroid/config_pro"
 # }}}

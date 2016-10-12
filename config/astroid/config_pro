@@ -3,7 +3,7 @@
         "config": {
             "version": "6"
         },
-        "notmuch_config": "\/home\/teto\/.config\/notmuch\/notmuchrc",
+        "notmuch_config": "\/home\/teto\/.config\/notmuch\/notmuchrc_pro",
         "debug": {
             "dryrun_sending": "false"
         },
