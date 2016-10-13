@@ -866,8 +866,8 @@ let g:neomake_verbose = 1
 
 " pyflakes can't be disabled on a per error basis
 " also it considers everything as error => disable
-" flake8 
-let g:neomake_python_enabled_makers = ['mypy', 'pep8']
+" use flake8 instead of pep8 because it will run either pep8 or pycodestyle
+let g:neomake_python_enabled_makers = ['mypy', 'flake8']
 let g:neomake_logfile = $HOME.'/neomake.log'
 let g:neomake_c_gcc_args = ['-fsyntax-only', '-Wall']
 let g:neomake_open_list = 0
