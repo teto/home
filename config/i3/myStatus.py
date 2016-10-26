@@ -51,7 +51,7 @@ clock = status.register(
 # print(clock.on_clicks)
 # status.register("pulseaudio")
 # Shows your CPU temperature, if you have a Intel CPU
-status.register("temp",   format="{temp:.0f}°C",)
+# status.register("temp",   format="{temp:.0f}°C",)
 # might not work with modesetting, nvidia etc...
 # status.register("backlight",   format="{percentage}%",)
 #
@@ -156,9 +156,9 @@ status.register("updates",
 
 
 
-status.register("rofication", 
-         log_level=logging.DEBUG,
-        )
+# status.register("rofication", 
+#          log_level=logging.DEBUG,
+#         )
 
 # status.register("khal_calendar", 
 # # format = '{calendar} / {nb_events}'

@@ -102,7 +102,6 @@ Plug 'arakashic/chromatica.nvim', { 'for': 'cpp' } " semantic color syntax
 Plug 'lyuts/vim-rtags'  " a l'air d'etre le plus complet
 Plug 'tpope/vim-unimpaired' " [<space> [e [n ]n pour gerer les conflits etc...
 Plug 'kana/vim-operator-user' " dependancy for operator-flashy
-
 " better handling of buffer closure (type :sayonara)
 Plug 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
 
@@ -234,7 +233,12 @@ Plug 'mhinz/vim-grepper', { 'on': 'Grepper'}
 "Plug 'teto/neovim-auto-autoread' " works only in neovim, runs external checker
 Plug 'benekastah/neomake' " async build for neovim
 " Plug '~/neomake' " , {'branch': 'graphviz'}  async build for neovim
+" Plug 'rhysd/github-complete.vim' " provides github user/repo autocompletion after @ and #
+" Plug 'rhysd/vim-clang-format' " C/CPP/C++ development
+" VCS related {{{
+Plug 'rhysd/committia.vim' " todo lazy loading
 Plug 'mhinz/vim-signify' " Indicate changed lines within a file using a VCS.
+" }}}
 " Plug 'teddywing/auditory.vim' " play sounds as you type
 
 " does not work seems to be better ones
@@ -271,6 +275,7 @@ Plug 'chrisbra/csv.vim', {'for': 'csv'}
 " " ATP author gh mirror seems to be git@github.com:coot/atp_vim.git
 " "Plug 'coot/atp_vim', {'for': 'tex'}
 Plug 'lervag/vimtex', {'for': 'tex'} " so far the best one
+" to autocomplete citations we use vim-ycm-latex-semantic-completer
 " }}}
 
 " Plug 'vim-scripts/YankRing.vim' " breaks in neovim, overrides yy as well
@@ -1004,6 +1009,13 @@ let g:tex_flavor = "latex"
 " <localleader>ll pour la compilation continue du pdf
 " <localleader>lv pour la preview du pdf
 let g:vimtex_quickfix_open_on_warning = 1
+
+" autoindent can slow down vim quite a bit 
+" to check indent parameters, run :verbose set ai? cin? cink? cino? si? inde? indk?
+let g:vimtex_indent_enabled=0
+let g:vimtex_indent_bib_enabled=1
+let g:vimtex_indent_enabled=0
+let g:vimtex_indent_bib_enabled=1
 let g:vimtex_index_split_pos = 'below'
 let g:vimtex_view_method = 'zathura'
 "let g:vimtex_snippets_leader = ','
@@ -1013,7 +1025,7 @@ let g:vimtex_fold_enabled = 0
 let g:vimtex_format_enabled = 0
 let g:vimtex_complete_recursive_bib = 0
 let g:vimtex_complete_close_braces = 0
-let g:vimtex_fold_comments=1
+let g:vimtex_fold_comments=0
 let g:vimtex_quickfix_autojump = 0
 let g:vimtex_quickfix_ignore_all_warnings =0
 let g:vimtex_view_use_temp_files=1 " to prevent zathura from flickering
@@ -1028,20 +1040,26 @@ let g:vimtex_quickfix_ignored_warnings = [
       \ 'Underfull',
       \ 'Overfull',
       \ 'specifier changed to',
+      \ 'Package biblatex Warning: Biber reported the following issues with',
+      \ "Invalid format of field 'month'"
       \ ]
 "let g:tex_stylish = 1
 "let g:tex_flavor = 'latex'
 "let g:tex_isk='48-57,a-z,A-Z,192-255,:'
 let g:vimtex_latexmk_callback= 1 " let it to 1 else quickfix won't pop
-" if !exists('g:ycm_semantic_triggers')
-"     let g:ycm_semantic_triggers = {}
-" endif
-
-let g:ycm_semantic_triggers.tex = [
-    \ 're!\\[A-Za-z]*(ref|cite)[A-Za-z]*([^]]*])?{([^}]*,?)*',
-    \ 're!\\includegraphics([^]]*])?{[^}]*',
-    \ 're!\\(include|input){[^}]*'
-    \ ]
+  if !exists('g:ycm_semantic_triggers')
+    let g:ycm_semantic_triggers = {}
+  endif
+  let g:ycm_semantic_triggers.tex = [
+        \ 're!\\[A-Za-z]*cite[A-Za-z]*(\[[^]]*\]){0,2}{[^}]*',
+        \ 're!\\[A-Za-z]*ref({[^}]*|range{([^,{}]*(}{)?))',
+        \ 're!\\hyperref\[[^]]*',
+        \ 're!\\includegraphics\*?(\[[^]]*\]){0,2}{[^}]*',
+        \ 're!\\(include(only)?|input){[^}]*',
+        \ 're!\\\a*(gls|Gls|GLS)(pl)?\a*(\s*\[[^]]*\]){0,2}\s*\{[^}]*',
+        \ 're!\\includepdf(\s*\[[^]]*\])?\s*\{[^}]*',
+        \ 're!\\includestandalone(\s*\[[^]]*\])?\s*\{[^}]*',
+        \ ]
 "<plug>(vimtex-toc-toggle)
 "<plug>(vimtex-labels-toggle)
     " autocmd FileType tex nnoremap <leader>lt <plug>(vimtex-toc-toggle)
@@ -1269,8 +1287,8 @@ nnoremap <F1> :lprev<CR>
 nnoremap <F2> :lnext<CR>
 " search for  item in quickfix list (global/unique)
 " TODO should be able to look for the next one from where I stand !
-nnoremap <F3> :cprev<CR>
-nnoremap <F4> :cnext<CR>
+nnoremap <F3> :lprev<CR>
+nnoremap <F4> :lnext<CR>
 
 nnoremap <F5> :Neomake<CR>
 nnoremap <F6> :AutoSaveToggle<CR>

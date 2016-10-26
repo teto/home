@@ -54,7 +54,7 @@ for_window [instance="pad_*"] move scratchpad
 #for_window [instance="pad_flyingterminal"] move scratchpad
 #for_window [instance="pad_flyingterminal"] move scratchpad
 #for_window [instance="pad_ircclient"] move scratchpad
-for_window [class="Navigator"] floating enable,border 1 pixel;
+# for_window [class="Navigator"] floating enable,border 1 pixel;
 # this concerns too many boxes, thus creating bugs
 for_window [class="Codeblocks" title="Global Variable Editor"] resize grow right 500;
 for_window [class="Codeblocks" title="codeblocks"] resize grow left 300;
