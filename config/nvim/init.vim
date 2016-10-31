@@ -12,6 +12,9 @@ map <D-b> :echom "hello papy"
 " nvim --startuptime startup.log
 " nvim -u NONE --startuptime startup.log
 
+" to see the difference highlights, 
+" runtime syntax/hitest.vim
+"
 
 " vim-plug autoinstallation {{{
 " TODO move to XDG_DATA_HOME
@@ -66,13 +69,32 @@ endfunction
 " filnxtToO
 set shortmess+=I
 
+" inverts the meaning of g in substitution, ie with gdefault, change all
+" occurences
+set gdefault
+" lustyjuggler plugin
+" https://github.com/sjbach/lusty
+
+
+" reminder about vim completion
+" since it's fucking complex
+" need a glossary first:
+" 
+
 
 " vim-plug plugin declarations {{{1
 call plug#begin(s:plugdir)
+Plug 'git@github.com:reedes/vim-wordy.git' " pdt la these, pr trouver la jargon :Wordy
+Plug 'git@github.com:sk1418/QFGrep.git'
 Plug 'mtth/scratch.vim' " , {'on': 'Scratch'} mapped to ?
 Plug 'git@github.com:junegunn/gv.vim.git' " git commit viewer :Gv
+" Plug 'git@github.com:rhysd/clever-f.vim.git' " use f to repeat search instead of ;
 " Plug 'git@github.com:xolox/vim-easytags.git' " 
-Plug 'git@github.com:ludovicchabant/vim-gutentags' " 
+Plug 'git@github.com:mhinz/vim-halo.git' " to hight cursor line
+Plug 'git@github.com:ludovicchabant/vim-gutentags' " automatic tag generation
+Plug 'git@github.com:junegunn/goyo.vim', {'on': 'Goyo'} "distraction free writing
+Plug 'git@github.com:junegunn/limelight.vim' " highlights 
+Plug 'git@github.com:calvinchengx/vim-aftercolors' " load after/colors
 "Plug 'junegunn/limelight.vim' " to highlight ucrrent paragraph only
 " Plug 'bronson/vim-trailing-whitespace' " :FixTrailingWhitespace
 " Plug 'tkhoa2711/vim-togglenumber' " by default mapped to <leader>n
@@ -236,7 +258,7 @@ Plug 'benekastah/neomake' " async build for neovim
 " Plug 'rhysd/github-complete.vim' " provides github user/repo autocompletion after @ and #
 " Plug 'rhysd/vim-clang-format' " C/CPP/C++ development
 " VCS related {{{
-Plug 'rhysd/committia.vim' " todo lazy loading
+Plug 'rhysd/committia.vim' " todo lazy loading, améliore les commits
 Plug 'mhinz/vim-signify' " Indicate changed lines within a file using a VCS.
 " }}}
 " Plug 'teddywing/auditory.vim' " play sounds as you type
@@ -293,6 +315,7 @@ autocmd FileType vim setlocal keywordprg=:help
 
 
 " start scrolling before reaching end of screen in order to keep more context
+" set it to a big value 
 set scrolloff=3
 
 
@@ -502,7 +525,7 @@ set splitright   " on vertical split
 " {{{ Markdown composer
 " Run with :ComposerStart
 let g:markdown_composer_open_browser        = "qutebrowser"
-let g:markdown_composer_autostart           = 1
+let g:markdown_composer_autostart           = 0
 " }}}
 "set winheight=30
 "set winminheight=5
@@ -529,6 +552,10 @@ set wrap
 set linebreak " better display (makes sense only with wrap)
 set breakindent " preserve or add indentation on wrap
 let &showbreak = '↳ '  	" displayed in front of wrapped lines
+
+" @:NonText
+" set highlight
+" ~:EndOfBuffer,z:TermCursor,
 
 filetype on                   " required! (still required in vim ?)
 set backspace=indent,eol,start
@@ -829,7 +856,7 @@ let g:airline#extensions#csv#enabled = 1
 let g:airline_detect_spell=1
 
 " ycm integration
-let g:airline#extensions#ycm#enabled = 1
+let g:airline#extensions#ycm#enabled = 0
 let g:airline#extensions#ycm#error_symbol = s:gutter_error_sign
 let g:airline#extensions#ycm#warning_symbol = s:gutter_warn_sign
 
@@ -853,6 +880,35 @@ nmap <leader>_ <Plug>AirlineSelectTab8
 nmap <leader>ç <Plug>AirlineSelectTab9
 
 "}}}
+
+" limelight {{{
+" Color name (:help cterm-colors) or ANSI code
+" let g:limelight_conceal_ctermfg = 'gray'
+" let g:limelight_conceal_ctermfg = 240
+
+" " Color name (:help gui-colors) or RGB color
+" let g:limelight_conceal_guifg = 'DarkGray'
+" let g:limelight_conceal_guifg = '#777777'
+
+" " Default: 0.5
+" let g:limelight_default_coefficient = 0.7
+
+" " Number of preceding/following paragraphs to include (default: 0)
+" let g:limelight_paragraph_span = 1
+
+" " Beginning/end of paragraph
+" "   When there's no empty line between the paragraphs
+" "   and each paragraph starts with indentation
+" let g:limelight_bop = '^\s'
+" let g:limelight_eop = '\ze\n^\s'
+
+" " Highlighting priority (default: 10)
+" "   Set it to -1 not to overrule hlsearch
+" let g:limelight_priority = -1
+" goyo.vim integration
+" autocmd! User GoyoEnter Limelight
+" autocmd! User GoyoLeave Limelight!
+" }}}
 
 " close the preview window on python completion
 " autocmd CompleteDone * pclose 
@@ -983,6 +1039,11 @@ nnoremap <silent> <Leader>gp :GitGutterPreviewHunk<CR><c-w>j
 nnoremap cog :GitGutterToggle<CR>
 " }}}
 
+" goyo {{{
+let g:goyo_linenr=1
+let g:goyo_height= '90%'
+let g:goyo_width = 120
+" }}}
 " Restor cursor position {{{
 function! ResCur()
   " $ => last line of buffer
@@ -1036,13 +1097,16 @@ let g:vimtex_syntax_minted = [
       \ }]
 
 let g:vimtex_quickfix_mode = 2 " 1=> opened automatically and becomes active (2=> inactive)
+" Package biblatex Warning: B
+" with being on anotherline
 let g:vimtex_quickfix_ignored_warnings = [
       \ 'Underfull',
       \ 'Overfull',
       \ 'specifier changed to',
-      \ 'Package biblatex Warning: Biber reported the following issues with',
+      \ 'Biber reported the following issues',  
       \ "Invalid format of field 'month'"
       \ ]
+      " 
 "let g:tex_stylish = 1
 "let g:tex_flavor = 'latex'
 "let g:tex_isk='48-57,a-z,A-Z,192-255,:'
@@ -1116,12 +1180,25 @@ let g:pymode_virtualenv = 1
 " Grepper {{{
 " add -cword to automatically fill with the underlying word
 " example given by mhinz to search into current buffer
+" https://github.com/mhinz/vim-grepper/issues/27
 " let g:grepper = { 'git': { 'grepprg': 'git grep -nI $* -- $.' }}
+" Grepper -grepprg ag --vimgrep $* $. works
 nnoremap <leader>git :Grepper  -tool git -open -nojump
 nnoremap <leader>ag  :Grepper -tool ag  -open -switch
+
+" let g:grepper.tools += "localgrep"
+let g:grepper = {
+  \ 'tools': ['git', 'localgrep', 'ag', 'rg', 'grep'],
+  \ 'localgrep': {
+      \ 'grepprg':    'ag --vimgrep $* $.',
+      \                    'grepformat': '%f:%l:%c:%m,%f:%l:%m',
+      \                    'escape':     '\^$.*+?()[]{}|' 
+    \ }
+    \}
 " -noswitch
 nmap gs <plug>(GrepperOperator)
 xmap gs <plug>(GrepperOperator)
+
 " }}}
 
 " sidesearch {{{
@@ -1240,6 +1317,11 @@ autocmd BufLeave *.h       mark H
 autocmd BufWritePost ~/.Xdefaults call system('xrdb ~/.Xdefaults')
 " }}}
 
+" vim-signature {{{
+let g:SignatureMarkTextHLDynamic=1
+let g:SignatureEnabledAtStartup=1
+" }}}
+ 
 " Dirvish {{{
 let g:loaded_netrwPlugin = 1 " ???
 command! -nargs=? -complete=dir Vexplore leftabove vsplit | silent Dirvish <args>
@@ -1339,7 +1421,7 @@ if has('nvim')
 endif
 
 
-" Run linting when writing file
+" Run linting when writing filg
 autocmd! BufWritePost * Neomake
 
 " Bye bye ex mode
@@ -1407,6 +1489,7 @@ noremap             <C-k>           {
 "set shada=!,'50,<1000,s100,:0,n/home/teto/.cache/nvim/shada
 
 " added 'n' to defaults to allow wrapping lines to overlap with numbers
+" n => ? used for wrapped lines as well
 set cpoptions="aABceFsn" " vi ComPatibility options
 set matchpairs+=<:>  " Characters for which % should work
 
@@ -1422,8 +1505,12 @@ menu Spell.EN_US :setlocal spell spelllang=en_us<CR>
 menu Spell.FR :setlocal spell spelllang=fr_fr<CR>
 
 menu Trans.FR :te trans :fr <cword><CR>
+" tabulation-related menu {{{2
+menu Search.CurrentBuffer :exe Grepper -grepprg ag --vimgrep $* $.
+menu Search.AllBuffers :exe Grepper -grepprg ag --vimgrep $* $+
+" }}}
 
-" tab menu {{{2
+" tabulation-related menu {{{2
 menu Tabs.S2 :set expandtab ts=2 sts=2 sw=2<CR>
 menu Tabs.S4 :set expandtab ts=4 sts=4 sw=4<CR>
 menu Tabs.S6 :set expandtab ts=6 sts=6 sw=6<CR>
@@ -1452,10 +1539,10 @@ endif
 " set to NONE not to change them
 " :help hl-IncSearch
 " MatchParen(theses)
-autocmd ColorScheme *
-      \ highlight Comment gui=italic
-      \ | highlight Search gui=undercurl
-      \ | highlight MatchParen guibg=NONE guifg=NONE gui=underline
+" autocmd ColorScheme *
+"       \ highlight Comment gui=italic
+"       \ | highlight Search gui=undercurl
+"       \ | highlight MatchParen guibg=NONE guifg=NONE gui=underline
       " \ | highlight IncSearch guibg=NONE guifg=NONE gui=underline
 " highlight Comment gui=italic
 
@@ -1464,5 +1551,16 @@ colorscheme molokai
 
 " }}}
 
+" vim-halo {{{
+" disabled cause creating pb for now
+" nnoremap <silent> <Esc> :<C-U>call halo#run()<CR>
+" nnoremap <silent> <C-c> :<C-U>call halo#run()<CR><C-c>
+" }}}
+
+" overwrite vimtex status mapping
+let @g="dawi\\gls{p}"
+nnoremap <Leader>lg @g
 
 highlight SignifySignChange cterm=bold ctermbg=237  ctermfg=227 guibg=#F08A1F
+" QuickFixLine
+" NonText

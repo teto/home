@@ -13,8 +13,7 @@ from i3pystatus.updates import aptget
 
 # from i3pystatus.core.netrc_backend import NetrcBackend
 
-status = Status(standalone=True, logfile="$HOME/i3pystatus.log", click_events=True,
-        )
+status = Status(standalone=True, logfile="$HOME/i3pystatus.log", click_events=True,)
 
 my_term = "termite"
 
@@ -53,7 +52,9 @@ clock = status.register(
 # Shows your CPU temperature, if you have a Intel CPU
 # status.register("temp",   format="{temp:.0f}°C",)
 # might not work with modesetting, nvidia etc...
-# status.register("backlight",   format="{percentage}%",)
+# status.register("backlight", format="{percentage}%",)
+redshift = status.register("redshift", )
+redshift.toggle_inhibit()
 #
 # The battery monitor has many formatting options, see README for details
 
@@ -140,9 +141,9 @@ status.register(
 # alsa = status.register("alsa", mixer="Headphone", format="")
 dpms = status.register("dpms", format="")
 
-alsa = status.register("alsa",
-        on_leftclick=[my_term, '-e', 'alsamixer']
-        )
+# alsa = status.register("alsa",
+#         on_leftclick=[my_term, '-e', 'alsamixer']
+#         )
 
 status.register("updates",
                 format = "Updates: {count}",
@@ -160,13 +161,13 @@ status.register("updates",
 #          log_level=logging.DEBUG,
 #         )
 
-# status.register("khal_calendar", 
+status.register("khal_calendar", 
 # # format = '{calendar} / {nb_events}'
 # # days=2,
-#         # calendars=[],
-#         # format="{title}",
-#          log_level=logging.DEBUG,
-#         )
+        # calendars=[],
+        # format="{title}",
+         log_level=logging.DEBUG,
+        )
 
 # status.register("scratchpad",)
 
