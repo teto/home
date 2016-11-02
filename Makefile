@@ -52,8 +52,7 @@ fonts:
 git:
 	echo "Install git hooks for this repo"
 
+alternatives:
+	 sudo update-alternatives --install $(which x-www-browser) x-www-browser $(which qutebrowser) 0 
 xdg:
 	# Example: xdg-mime default qutebrowser.desktop text/html
-
-# alternatives:
-# 	sudo update-alternatives --install /usr/bin/x-www-browser x-www-browser $(which qutebrowser) 10

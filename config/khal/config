@@ -23,7 +23,7 @@ color= dark green
 [[perso]]
 readonly=False
 path= "$XDG_DATA_HOME/calendars/perso"
-# color= "#D75C20"
+color= #D75C20
 # #C043C6 
 
 [view]
