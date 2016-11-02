@@ -21,10 +21,10 @@ exec --no-startup-id xautolock -time 5 -locker pixellock
 
 
  -DCMAKE_INSTALL_PREFIX:
-
+CFLAGS="-DHAVE_PCAP_DATALINK_VAL_TO_NAME -DHAVE_PCAP_DATALINK_NAME_TO_VAL"
 $ mkdir -p debug
 $ cd debug
-$ CXXFLAGS="-Wno-unused-but-set-variable" cmake \
+$ CXXFLAGS="-Wno-unsued-result -Wno-unused-but-set-variable" cmake \
         -G"Ninja" \
         -DENABLE_GTK3=0 \
         -DENABLE_PORTAUDIO=0 \

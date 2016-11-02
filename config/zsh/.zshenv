@@ -52,6 +52,9 @@ export VAGRANT_DEFAULT_PROVIDER="libvirt"
 export LD_LIBRARY_PATH="/usr/local/lib:$LD_LIBRARY_PATH"
 
 
+# to prevent a matplotlib pb
+export MPLBACKEND="Qt5Agg"
+
 #export ZDOTDIR="$HOME/.zsh"
 
 # TODO try removing ?

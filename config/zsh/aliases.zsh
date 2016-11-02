@@ -5,18 +5,24 @@
 alias -s html=qutebrowser
 alias -s json=nvim
 alias -s Vagrantfile=nvim
+alias -s py=python3
 alias -s rb=ruby
 alias -s png=sxiv
 alias -s jpg=xdg-open
 alias -s gif=xdg-open
 alias -s avi=mpv
 alias -s mp3=mocp
-alias -s pdf=zathura
+alias -s pdf=xdg-open
+alias -s doc=xdg-open
+alias -s docx=xdg-open
 
 
 alias mp="mptcpanalyzer"
 alias mn="mptcpnumerics"
 alias n="ncmpcpp"
+alias ff="find . -iname"
+# alias size="du -h --max-depth=1"
+alias latest="ls -lt |head"
 
 
 alias :q="exit"

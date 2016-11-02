@@ -6,6 +6,7 @@ video/x-msvideo=mpv.desktop
 application/x-matroska=mpv.desktop
 text/x-csrc=gedit.desktop
 text/x-chdr=sublime_text.desktop
+text/html=qutebrowser.desktop
 
 [Added Associations]
 video/x-matroska=vlc.desktop;mpv.desktop;
