@@ -143,7 +143,7 @@ Plug 'michaeljsmith/vim-indent-object'
 Plug 'tommcdo/vim-lion' " Use with gl/L<text object><character to align to>
 Plug 'tommcdo/vim-exchange' " Use with cx<text object> to cut, cxx to exchange
 Plug 'tommcdo/vim-kangaroo' "  zp to push/zP to pop the position
-Plug 'tommcdo/vim-ninja-feet' " 
+" Plug 'tommcdo/vim-ninja-feet' " care overwrites z]
 " }}}
 "
 " {{{ To ease movements
@@ -232,8 +232,9 @@ Plug 'vim-scripts/Modeliner' " <leader>ml to setup buffer modeline
 Plug 'mhinz/vim-grepper', { 'on': 'Grepper'}
 " Plug 'ddrscott/vim-side-search'  " tOdo
 "Plug 'teto/neovim-auto-autoread' " works only in neovim, runs external checker
-Plug 'benekastah/neomake' " async build for neovim
+" Plug 'benekastah/neomake' " async build for neovim
 " Plug '~/neomake' " , {'branch': 'graphviz'}  async build for neovim
+Plug '~/neomake' " , {'branch': 'pr/361'}  async build for neovim
 Plug 'mhinz/vim-signify' " Indicate changed lines within a file using a VCS.
 " Plug 'teddywing/auditory.vim' " play sounds as you type
 
@@ -371,8 +372,8 @@ set timeoutlen=400 " Quick timeouts on key combinations.
 
 
 " in order to scroll faster
-nnoremap <C-e> 3<C-e>
-nnoremap <C-y> 3<C-y>
+" nnoremap <C-e> 3<C-e>
+" nnoremap <C-y> 3<C-y>
 
 syntax on
 
@@ -547,13 +548,44 @@ let g:diminactive_enable_focus = 0
 " ultisnips {{{
 " g:UltiSnipsSnippetsDir
 " <FocusLost><FocusLost>
-let g:UltiSnipsExpandTrigger="<Leader>ù"
-" let g:UltiSnipsJumpForwardTrigger="<c-l>"
-" let g:UltiSnipsJumpBackwardTrigger="<c-h>"
-   " g:UltiSnipsListSnippets                <c-tab>
-   " g:UltiSnipsJumpForwardTrigger          <c-j>
-   " g:UltiSnipsJumpBackwardTrigger         <c-k>
-let g:UltiSnipsUsePythonVersion = 3
+let g:UltiSnipsExpandTrigger = "<C-y>"
+" " inoremap <expr> <CR> pumvisible() ? "<C-R>=UltiSnips#ExpandSnippetOrJump()<CR>" : "\<CR>"
+
+
+" " let g:endwise_no_mappings = 1
+" " inoremap <expr> <CR> pumvisible() ? "\<C-R>=ExpandSnippetOrCarriageReturn()\<CR>" : "\<CR>\<C-R>=EndwiseDiscretionary()\<CR>"
+
+" " let g:UltiSnipsExpandTrigger="<Tab>"
+" let g:UltiSnipsJumpForwardTrigger="<C-l>"
+" let g:UltiSnipsJumpBackwardTrigger="<C-h>"
+" " let g:UltiSnipsListSnippets = '<c-tab>'
+"    " g:UltiSnipsJumpForwardTrigger          <c-j>
+"    " g:UltiSnipsJumpBackwardTrigger         <c-k>
+" let g:UltiSnipsUsePythonVersion = 3
+" http://stackoverflow.com/questions/14896327/ultisnips-and-youcompleteme/18685821#18685821
+" function! g:UltiSnips_Complete()
+"     call UltiSnips#ExpandSnippet()
+"     if g:ulti_expand_res == 0
+"         if pumvisible()
+"             return "\<C-n>"
+"         else
+"             call UltiSnips#JumpForwards()
+"             if g:ulti_jump_forwards_res == 0
+"                return "\<TAB>"
+"             endif
+"         endif
+"     endif
+"     return ""
+" endfunction
+
+" au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
+" let g:UltiSnipsJumpForwardTrigger="<tab>"
+" let g:UltiSnipsListSnippets="<c-e>"
+" " this mapping Enter key to <C-y> to chose the current highlight item 
+" " and close the selection list, same as other IDEs.
+" " CONFLICT with some plugins like tpope/Endwise
+" inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
 " }}}
 " i3 autocommands {{{
 " todo when opening i3 files, set makeprg to build_config
@@ -606,7 +638,7 @@ nnoremap <Leader>ev :e $MYVIMRC<CR>
 nnoremap <Leader>sv :source $MYVIMRC<CR> 
 
 " open netrw/dirvish split
-nnoremap <Leader>e :Vex<CR> 
+" nnoremap <Leader>e :Vex<CR> 
 nnoremap <Leader>w :w<CR>
 
 " mostly fzf mappings, use TAB to mark several files at the same time
@@ -739,9 +771,8 @@ let g:ycm_semantic_triggers = {
       \ 'mail' : ['@'],
       \ }
 
-
+let g:ycm_use_ultisnips_completer = 1 " YCM shows snippets
 let g:ycm_python_binary_path = '/usr/bin/python3'
-let g:ycm_autoclose_preview_window_after_completion = 0
 let g:ycm_autoclose_preview_window_after_completion = 1
 
 nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
@@ -867,7 +898,7 @@ let g:neomake_verbose = 1
 " pyflakes can't be disabled on a per error basis
 " also it considers everything as error => disable
 " flake8 
-let g:neomake_python_enabled_makers = ['mypy', 'pep8']
+let g:neomake_python_enabled_makers = ['mypy', 'flake8']
 let g:neomake_logfile = $HOME.'/neomake.log'
 let g:neomake_c_gcc_args = ['-fsyntax-only', '-Wall']
 let g:neomake_open_list = 0
@@ -892,6 +923,16 @@ let g:neomake_warning_sign = {'text': '⚠', 'texthl': 'NeomakeWarningSign'}
 let g:neomake_message_sign = {'text': '➤', 'texthl': 'NeomakeMessageSign'}
 let g:neomake_info_sign = {'text': 'ℹ', 'texthl': 'NeomakeInfoSign'}
 
+let g:neomake_highlight_lines = 1
+
+
+" commande : highlights one can use :runtime syntax/hitest.vim for testing
+" Underlined/NeomakePerso/Error
+" let g:neomake_error_highlight = 'Error'
+let g:neomake_error_highlight = 'NeomakePerso'
+    " let g:neomake_warning_highlight = 'Warning'
+    " let g:neomake_message_highlight = 'Message'
+    " let g:neomake_informational_highlight = 'Informational'
 " let g:neomake_error_sign = { 'text': s:gutter_error_sign, 'texthl': 'ErrorSign' }
 " let g:neomake_warning_sign = { 'text': s:gutter_warn_sign , 'texthl': 'WarningSign' }
 " }}}
@@ -1051,6 +1092,9 @@ let g:ycm_semantic_triggers.tex = [
     "autocmd FileType tex nnoremap <buffer><F5> :VimtexCompile<CR>
     "autocmd FileType tex map <silent> <buffer><F8> :call vimtex#latexmk#errors_open(0)<CR>
   "augroup END
+
+" using it during
+au BufEnter *.tex exec ":setlocal spell spelllang=en_us"
 "" }}}
 
 " Pymode {{{
@@ -1282,7 +1326,7 @@ nnoremap <F9> :YcmToggleLogs<CR>
 " est mappe a autre chose pour l'instant
 "noremap <F4> exec ":emenu <tab>"
 " should become useless with neovim
-noremap <F10> :set paste!<CR>
+" noremap <F10> :set paste!<CR>
 map <F11> <Plug>(ToggleListchars)
 
 " Command to toggle line wrapping.
@@ -1352,7 +1396,11 @@ map <Leader>O :Obsession<CR>
 
 " todo better if it could be parsable
 " map <Leader>t :!trans :fr -no-ansi <cword><CR>
-map <Leader>t :te trans :fr <cword><CR>
+" todo open in a split
+map <Leader>te :te trans :en <cword><CR>
+map <Leader>tf :te trans :fr <cword><CR>
+" for thesaurus vim-thesaurus only works with English :/
+map <Leader>ttf :te trans :fr <cword><CR>
 map <Leader><space> :b#<CR>
 
 " Unimpaired {{{
@@ -1434,17 +1482,24 @@ endif
 " set to NONE not to change them
 " :help hl-IncSearch
 " MatchParen(theses)
+" "\e[9mstrikethrough\e[0m"
+" regarder dans 'guifont' y a s=strikeout
 autocmd ColorScheme *
       \ highlight Comment gui=italic
       \ | highlight Search gui=undercurl
       \ | highlight MatchParen guibg=NONE guifg=NONE gui=underline
+      \ | highlight NeomakePerso cterm=underline ctermbg=Red  ctermfg=227  gui=underline guibg=Red
       " \ | highlight IncSearch guibg=NONE guifg=NONE gui=underline
 " highlight Comment gui=italic
 
-" put it after teh autocmd ColorScheme
+" put it after teh auguibg=redtocms ColorScheme
 colorscheme molokai
 
 " }}}
 
+" command to see highlight under cursor
+map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+\ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+\ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
 highlight SignifySignChange cterm=bold ctermbg=237  ctermfg=227 guibg=#F08A1F

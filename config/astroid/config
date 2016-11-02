@@ -21,15 +21,15 @@
             "date_length": "10",
             "message_count_length": "4",
             "authors_length": "20",
-            "tags_length": "80",
             "subject_color": "#807d74",
             "subject_color_selected": "#000000",
             "background_color_selected": "",
-            "tags_color": "#31587a",
-            "hidden_tags": "attachment,flagged,unread",
+            "tags_length": "80",
             "tags_upper_color": "#e5e5e5",
             "tags_lower_color": "#333333",
-            "tags_alpha": "0.5"
+            "tags_alpha": "0.5",
+            "hidden_tags": "attachment,flagged,unread",
+            "tags_color": "#31587a"
         }
     },
     "general": {
@@ -78,10 +78,10 @@
         },
         "code_prettify": {
             "enable": "true",
-            "uri_prefix": "https:\/\/google-code-prettify.googlecode.com\/svn\/loader\/",
             "for_tags": "",
             "code_tag": "```",
-            "enable_for_patches": "true"
+            "enable_for_patches": "true",
+            "uri_prefix": "https:\/\/google-code-prettify.googlecode.com\/svn\/loader\/"
         },
         "gravatar": {
             "enable": "true"

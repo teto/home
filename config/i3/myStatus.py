@@ -13,7 +13,7 @@ from i3pystatus.updates import aptget
 
 # from i3pystatus.core.netrc_backend import NetrcBackend
 
-status = Status(standalone=True, logfile="$HOME/i3pystatus.log", click_events=True,
+status = Status(standalone=True, logfile="i3pystatus.log", click_events=True,
         )
 
 my_term = "termite"
@@ -157,8 +157,11 @@ status.register("updates",
 
 
 status.register("rofication", 
-         log_level=logging.DEBUG,
-        )
+    log_level=logging.DEBUG,
+    on_leftclick="Rofication/rofication-gui.py",
+    # on_rightclick="discard_all",
+    # on_rightclick="let through",
+)
 
 # status.register("khal_calendar", 
 # # format = '{calendar} / {nb_events}'
