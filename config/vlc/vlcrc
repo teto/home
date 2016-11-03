@@ -1,5 +1,5 @@
 ﻿###
-###  vlc 2.2.2
+###  vlc 2.2.4
 ###
 
 ###
@@ -569,20 +569,6 @@
 
 # Append to existing file (boolean)
 #demuxdump-append=0
-
-[avformat] # Avformat demuxer
-
-# Format name (string)
-#avformat-format=
-
-# Advanced options (string)
-#avformat-options=
-
-# Avformat mux (string)
-#sout-avformat-mux=
-
-# Advanced options (string)
-#sout-avformat-options=
 
 [vdpau_chroma] # VDPAU surface conversions
 
@@ -1231,7 +1217,7 @@ qt-privacy-ask=0
 #sout-avi-subject=
 
 # Encoder (string)
-#sout-avi-encoder=VLC Media Player - 2.2.2 Weatherwax
+#sout-avi-encoder=VLC Media Player - 2.2.4 Weatherwax
 
 # Keywords (string)
 #sout-avi-keywords=
@@ -1808,14 +1794,6 @@ qt-privacy-ask=0
 # DVD angle (integer)
 #dvdread-angle=1
 
-[avio] # libavformat AVIO access
-
-# Advanced options (string)
-#avio-options=
-
-# Advanced options (string)
-#sout-avio-options=
-
 [linsys_hdsdi] # HD-SDI Input
 
 # Link # (integer)
@@ -2230,7 +2208,7 @@ qt-privacy-ask=0
 #alsa-audio-channels=6
 
 # Software gain (float)
-#alsa-gain=1.000000
+alsa-gain=0.166375
 
 [amem] # Audio memory output
 
@@ -2727,6 +2705,24 @@ qt-privacy-ask=0
 
 # Advanced options (string)
 #sout-avcodec-options=
+
+# Format name (string)
+#avformat-format=
+
+# Advanced options (string)
+#avformat-options=
+
+# Avformat mux (string)
+#sout-avformat-mux=
+
+# Advanced options (string)
+#sout-avformat-options=
+
+# Advanced options (string)
+#avio-options=
+
+# Advanced options (string)
+#sout-avio-options=
 
 [svcdsub] # Philips OGT (SVCD subtitle) decoder
 

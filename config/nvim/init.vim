@@ -255,15 +255,11 @@ Plug 'mhinz/vim-grepper', { 'on': 'Grepper'}
 "Plug 'teto/neovim-auto-autoread' " works only in neovim, runs external checker
 " Plug 'benekastah/neomake' " async build for neovim
 " Plug '~/neomake' " , {'branch': 'graphviz'}  async build for neovim
-<<<<<<< HEAD
 Plug '~/neomake' " , {'branch': 'pr/361'}  async build for neovim
-||||||| merged common ancestors
-=======
 " Plug 'rhysd/github-complete.vim' " provides github user/repo autocompletion after @ and #
 " Plug 'rhysd/vim-clang-format' " C/CPP/C++ development
 " VCS related {{{
 Plug 'rhysd/committia.vim' " todo lazy loading, améliore les commits
->>>>>>> c02b895194ae224d29695efbdd7562be4d1d558c
 Plug 'mhinz/vim-signify' " Indicate changed lines within a file using a VCS.
 " }}}
 " Plug 'teddywing/auditory.vim' " play sounds as you type
@@ -962,16 +958,8 @@ let g:neomake_verbose = 1
 
 " pyflakes can't be disabled on a per error basis
 " also it considers everything as error => disable
-<<<<<<< HEAD
-" flake8 
+" flake8  or pycodestyle when supported 
 let g:neomake_python_enabled_makers = ['mypy', 'flake8']
-||||||| merged common ancestors
-" flake8 
-let g:neomake_python_enabled_makers = ['mypy', 'pep8']
-=======
-" use flake8 instead of pep8 because it will run either pep8 or pycodestyle
-let g:neomake_python_enabled_makers = ['mypy', 'flake8']
->>>>>>> c02b895194ae224d29695efbdd7562be4d1d558c
 let g:neomake_logfile = $HOME.'/neomake.log'
 let g:neomake_c_gcc_args = ['-fsyntax-only', '-Wall']
 let g:neomake_open_list = 0
