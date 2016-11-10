@@ -1,4 +1,11 @@
 
+
+NEW FLAGS for ubuntu 16.10
+
+CFLAGS=" -fPIC -mcmodel=large" LDFLAGS=" -pie -fPIC -fuse-ld=gold" ./waf configure --with-ns3=$HOME/ns3off/install
+
+
+
 Look at https://www.nsnam.org/docs/dce/manual/html/getting-started.html to see how to compile with kernel stack or 
 https://plus.google.com/+HajimeTazaki/posts/1QUmR3n3vNA
 

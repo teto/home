@@ -53,8 +53,8 @@ clock = status.register(
 # status.register("temp",   format="{temp:.0f}°C",)
 # might not work with modesetting, nvidia etc...
 # status.register("backlight", format="{percentage}%",)
-redshift = status.register("redshift", )
-redshift.toggle_inhibit()
+# redshift = status.register("redshift", )
+# redshift.toggle_inhibit()
 #
 # The battery monitor has many formatting options, see README for details
 
