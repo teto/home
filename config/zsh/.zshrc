@@ -11,7 +11,7 @@ source /etc/profile.d/vte.sh
 # Per folder history {{{
 # https://github.com/jimhester/per-directory-history
 # you can switch between global/local with ^G
-source "$ZDOTDIR/plugins/per-directory-history.zsh"
+# source "$ZDOTDIR/plugins/per-directory-history.zsh"
 # }}}
  
 source "$ZDOTDIR/aliases.zsh"
