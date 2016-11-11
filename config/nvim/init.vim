@@ -775,10 +775,15 @@ set incsearch " show search matches as you type
 set ignorecase " ignore case when searching
 set smartcase " take case into account if search entry has capitals in it
 set wrapscan " prevent from going back to the beginning of the file
+
+if has("nvim-0.2.0")
+  set inccommand=nosplit
+endif
+
 " }}}
 
 " YouCompleteMe config {{{
-let g:ycm_global_ycm_extra_conf = $XDG_CONFIG_HOME."/nvim/.ycm_extra_conf.py"
+let g:ycm_global_ycm_extra_conf = $XDG_CONFIG_HOME."/nvim/ycm_extra_conf.py"
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_key_list_select_completion = ['<TAB>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<S-TAB>', '<Up>']
@@ -799,7 +804,6 @@ let g:ycm_python_binary_path = '/usr/bin/python3'
 let g:ycm_server_python_interpreter =  '/usr/bin/python3'
 " Add triggers to ycm for LaTeX-Box autocompletion
 let g:ycm_semantic_triggers = {
-      \  'tex'  : ['{'],
       \ 'mail' : ['@'],
       \ }
 
@@ -1488,7 +1492,7 @@ let g:lt_quickfix_list_toggle_map = '<F1>' " '<leader>qq'
 map <Leader>n :bnext<CR>
 map <Leader>N :bNext<CR>
 map <Leader>p :bprevious<CR>
-map <Leader>O :Obsession<CR>
+map <Leader>$ :Obsession<CR>
 " map <Leader>d :bdelete<CR>
 " TODO trigger a menu in vim
 
