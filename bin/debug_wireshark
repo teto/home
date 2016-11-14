@@ -8,7 +8,7 @@ if [ $# -eq 0 ]; then
 fi
 
 # or break on proto_report_dissector_bug
-libtool --mode=execute gdb ./run/$1
+libtool --mode=execute gdb $HOME/wireshark/debug/run/$1
 
 
 #libtool --mode=execute ddd wireshark

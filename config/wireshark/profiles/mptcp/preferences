@@ -211,7 +211,7 @@ gui.auto_scroll_on_expand: TRUE
 
 # Packet list hidden columns
 # List all columns to hide in the packet list.
-gui.column.hidden: %At,%Cus:mptcp.stream:0:R,%Cus:mptcp.app_latency:0:R,%Cus:ip.src:1:R,%Cus:ip.dst:1:R,%Cus:mptcp.ack:0:R,%Cus:mptcp.ack:0:R,%Cus:tcp.options.mptcp.subflowseqno:0:R,%Cus:tcp.len:0:R,%Cus:tcp.options.mptcp.recvtok:0:R,%Cus:tcp.options.mptcp.expected_idsn:0:R,%Cus:tcp.options.mptcp.sendkey:0:R,%Cus:tcp.options.mptcp.datafin.flag:0:R,%Cus:tcp.options.mptcp.subflowseqno:0:R,%Cus:mptcp.stream:0:R,%p,%L,%Cus:tcp.options.mptcp.recvkey:0:R,%Cus:mptcp.analysis.mapping.reinjection:0:R
+gui.column.hidden: %At,%Cus:frame.time_delta:0:R,%Cus:mptcp.stream:0:R,%Cus:mptcp.app_latency:0:R,%Cus:ip.src:1:R,%Cus:ip.dst:1:R,%rnd,%Cus:mptcp.ack:0:R,%Cus:mptcp.ack:0:R,%Cus:tcp.options.mptcp.subflowseqno:0:R,%Cus:tcp.len:0:R,%Cus:tcp.options.mptcp.recvtok:0:R,%Cus:tcp.options.mptcp.expected_idsn:0:R,%Cus:tcp.options.mptcp.sendkey:0:R,%Cus:tcp.nxtseq:0:R,%Cus:tcp.options.mptcp.datafin.flag:0:R,%Cus:tcp.options.mptcp.subflowseqno:0:R,%Cus:mptcp.stream:0:R,%p,%L,%Cus:tcp.options.mptcp.recvkey:0:R,%Cus:mptcp.analysis.mapping.reinjection:0:R
 
 # Packet list column format
 # Each pair of strings consists of a column title and its format
@@ -301,69 +301,39 @@ gui.qt.font_name: Liberation Mono,9,-1,5,50,0,0,0,0,0
 
 ####### Filter Expressions ########
 
-gui.filter_expressions.label: tcp.options.mptcp.recvtok
-gui.filter_expressions.enabled: FALSE
-gui.filter_expressions.expr: tcp.options.mptcp.recvtok
-gui.filter_expressions.label: 2001:41d0:a:38a8::1  == ipv6.src
-gui.filter_expressions.enabled: FALSE
-gui.filter_expressions.expr: 2001:41d0:a:38a8::1  == ipv6.src
-gui.filter_expressions.label: 37.187.104.168 == ip.src
-gui.filter_expressions.enabled: FALSE
-gui.filter_expressions.expr: 37.187.104.168 == ip.src
 gui.filter_expressions.label: tcp.options.mpt…ok == 109896498
 gui.filter_expressions.enabled: FALSE
 gui.filter_expressions.expr: tcp.options.mptcp.recvtok == 109896498
 gui.filter_expressions.label: tcp.options.mptcp.datafin.flag == 1
-gui.filter_expressions.enabled: TRUE
+gui.filter_expressions.enabled: FALSE
 gui.filter_expressions.expr: tcp.options.mptcp.datafin.flag == 1
-gui.filter_expressions.label: tcp.options.mptcp.dataseqno
-gui.filter_expressions.enabled: TRUE
-gui.filter_expressions.expr: tcp.options.mptcp.dataseqno
 gui.filter_expressions.label: mptcp.analysis.unmapped
-gui.filter_expressions.enabled: TRUE
-gui.filter_expressions.expr: mptcp.analysis.unmapped
-gui.filter_expressions.label: mptcp.analysis.unmapped
-gui.filter_expressions.enabled: TRUE
+gui.filter_expressions.enabled: FALSE
 gui.filter_expressions.expr: mptcp.analysis.unmapped
 gui.filter_expressions.label: tcp.flags.fin == 1
-gui.filter_expressions.enabled: TRUE
+gui.filter_expressions.enabled: FALSE
 gui.filter_expressions.expr: tcp.flags.fin == 1
 gui.filter_expressions.label: tcp.window_size_value != 65535
-gui.filter_expressions.enabled: TRUE
+gui.filter_expressions.enabled: FALSE
 gui.filter_expressions.expr: tcp.window_size_value != 65535
-gui.filter_expressions.label: tcp.seq == 1
-gui.filter_expressions.enabled: TRUE
-gui.filter_expressions.expr: tcp.seq == 1
-gui.filter_expressions.label: tcp.seq == 1
-gui.filter_expressions.enabled: TRUE
-gui.filter_expressions.expr: tcp.seq == 1
 gui.filter_expressions.label: tcp.flags.syn == 1
 gui.filter_expressions.enabled: TRUE
 gui.filter_expressions.expr: tcp.flags.syn == 1
-gui.filter_expressions.label: tcp.flags.syn == 1
-gui.filter_expressions.enabled: TRUE
-gui.filter_expressions.expr: tcp.flags.syn == 1
-gui.filter_expressions.label: tcp.options.mptc…dataseqno > 9000
-gui.filter_expressions.enabled: TRUE
-gui.filter_expressions.expr: tcp.options.mptcp.rawdataseqno > 9000
-gui.filter_expressions.label: tcp.options.mptc…dataseqno > 9000
-gui.filter_expressions.enabled: TRUE
-gui.filter_expressions.expr: tcp.options.mptcp.rawdataseqno > 9000
 gui.filter_expressions.label: MP_JOIN
 gui.filter_expressions.enabled: TRUE
 gui.filter_expressions.expr: tcp.options.mptcp.subtype == 1
 gui.filter_expressions.label: mptcp.stream == 0
 gui.filter_expressions.enabled: TRUE
 gui.filter_expressions.expr: mptcp.stream == 0
-gui.filter_expressions.label: Apply this filter
-gui.filter_expressions.enabled: TRUE
-gui.filter_expressions.expr: ip.src == 10.1.0.1 and tcp.srcport == 49078
-gui.filter_expressions.label: addrid a lacon
-gui.filter_expressions.enabled: TRUE
-gui.filter_expressions.expr: ip.src == 10.1.0.1 and tcp.srcport == 49078
 gui.filter_expressions.label: forward
 gui.filter_expressions.enabled: TRUE
 gui.filter_expressions.expr: (ip.src eq 10.1.0.1 and ip.dst eq 10.2.0.1) and (tcp.port eq 37566 and tcp.port eq 5001)
+gui.filter_expressions.label: reinject
+gui.filter_expressions.enabled: TRUE
+gui.filter_expressions.expr: tcp.options.mptcp.rawdataseqno == 1822294653
+gui.filter_expressions.label: monodirection
+gui.filter_expressions.enabled: TRUE
+gui.filter_expressions.expr: (ip.dst eq 10.10.13.13 and ip.addr eq 10.10.12.12) and (tcp.port eq 48061 and tcp.port eq 5201)
 
 ####### Capture ########
 
@@ -455,6 +425,34 @@ capture.devices_pmode: eth0(1),any(1),lo(1),wlan0(1),bluetooth0(1),bluetooth-mon
 # Save arguments on start of capture
 # TRUE or FALSE (case-insensitive)
 #extcap.gui_save_on_start: TRUE
+
+# Max bytes in a packet
+# A string
+#extcap.randpkt.maxbytes: 5000
+
+# Number of packets
+# A string
+#extcap.randpkt.count: 1000
+
+# Random type
+# A string
+#extcap.randpkt.randomtype: false
+
+# All random packets
+# A string
+#extcap.randpkt.allrandom: false
+
+# Type of packet
+# A string
+#extcap.randpkt.type: 
+
+# Listen port
+# A string
+#extcap.udpdump.port: 5555
+
+# Payload type
+# A string
+#extcap.udpdump.payload: data
 
 ####### Name Resolution ########
 
@@ -783,6 +781,10 @@ nameres.hosts_file_handling: TRUE
 # IPv6 prefix to use for stateful address decompression.
 # A string
 #6lowpan.context15: 
+
+# Some generators incorrectly indicate long preamble when the preamble was actuallyshort. Always assume short preamble when calculating duration.
+# TRUE or FALSE (case-insensitive)
+#wlan_radio.always_short_preamble: FALSE
 
 # Radiotap has a bit to indicate whether the FCS is still on the frame or not. Some generators (e.g. AirPcap) use a non-standard radiotap flag 14 to put the FCS into the header.
 # TRUE or FALSE (case-insensitive)
@@ -1901,6 +1903,10 @@ nameres.hosts_file_handling: TRUE
 # TRUE or FALSE (case-insensitive)
 #llcgprs.autodetect_cipher_bit: FALSE
 
+# Whether the Gryphon dissector should desegment all messages spanning multiple TCP segments
+# TRUE or FALSE (case-insensitive)
+#gryphon.desegment: TRUE
+
 # No description
 # TRUE or FALSE (case-insensitive)
 #gsm_ipa.hsl_debug_in_root_tree: FALSE
@@ -2713,6 +2719,10 @@ nameres.hosts_file_handling: TRUE
 # TRUE or FALSE (case-insensitive)
 #mac-lte.show_bsr_median: FALSE
 
+# The name of the file containing the mate module's configuration
+# A path to a file
+#mate.config: 
+
 # Decode control data received on "usb.control" with an unknown interface class as MBIM
 # TRUE or FALSE (case-insensitive)
 #mbim.control_decode_unknown_itf: FALSE
@@ -2857,7 +2867,7 @@ mptcp.analyze_mappings: TRUE
 
 # You need to enable DSS mapping analysis for this option to work
 # TRUE or FALSE (case-insensitive)
-mptcp.intersubflows_retransmission: TRUE
+#mptcp.intersubflows_retransmission: FALSE
 
 # Whether the MQ dissector should reassemble messages spanning multiple TCP segments. To use this option, you must also enable "Allow subdissectors to reassemble TCP streams" in the TCP protocol settings.
 # TRUE or FALSE (case-insensitive)
@@ -3349,10 +3359,26 @@ mptcp.intersubflows_retransmission: TRUE
 # TRUE or FALSE (case-insensitive)
 #pkcs12.try_null_password: FALSE
 
+# Whether the PN-RT summary line should be shown in the protocol tree
+# TRUE or FALSE (case-insensitive)
+#pn_rt.summary_in_tree: TRUE
+
+# Reassemble PNIO Fragments and get them decoded
+# TRUE or FALSE (case-insensitive)
+#pn_rt.desegment: TRUE
+
 # Protocol payload type
 # One of: Data, Sony FeliCa, NXP MiFare, ISO 7816
 # (case-insensitive).
 #pn532.prtype532: Data
+
+# Whether the PNIO dissector is allowed to use detailed PROFIsafe dissection of cyclic data frames
+# TRUE or FALSE (case-insensitive)
+#pn_io.pnio_ps_selection: TRUE
+
+# Select your Networkpath to your GSD-Files.
+# A path to a directory
+#pn_io.pnio_ps_networkpath: 
 
 # Whether the POP dissector should reassemble RETR and TOP responses and spanning multiple TCP segments. To use this option, you must also enable "Allow subdissectors to reassemble TCP streams" in the TCP protocol settings.
 # TRUE or FALSE (case-insensitive)
@@ -4410,6 +4436,27 @@ mptcp.intersubflows_retransmission: TRUE
 # One of: No subdissection, Line based text, As json, As SIP
 # (case-insensitive).
 #websocket.text_type: No subdissection
+
+# Set the maximum Basic CID used in the Wimax decoder (if other than the default of 320).  Note: The maximum Primary CID is double the maximum Basic CID.
+# A decimal number
+#wmx.basic_cid_max: 320
+
+# Set to TRUE to use the Corrigendum 2 version of Wimax message decoding. Set to FALSE to use the 802.16e-2005  version.
+# TRUE or FALSE (case-insensitive)
+#wmx.corrigendum_2_version: FALSE
+
+# Show transaction ID direction bit separately from the rest of the transaction ID field.
+# TRUE or FALSE (case-insensitive)
+#wimaxasncp.show_transaction_id_d_bit: FALSE
+
+# Print debug output to the console.
+# TRUE or FALSE (case-insensitive)
+#wimaxasncp.debug_enabled: FALSE
+
+# Version of the NWG that the R6 protocol complies with
+# One of: R1.0 v1.0.0, R1.0 v1.2.0, R1.0 v1.2.1
+# (case-insensitive).
+#wimaxasncp.nwg_version: R1.0 v1.2.1
 
 # Whether the WINS-Replication dissector should reassemble messages spanning multiple TCP segments. To use this option, you must also enable "Allow subdissectors to reassemble TCP streams" in the TCP protocol settings.
 # TRUE or FALSE (case-insensitive)

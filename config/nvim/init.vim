@@ -7,6 +7,8 @@
 " map <C-D> :tag<CR>
 map <D-b> :echom "hello papy"
 
+set exrc
+
 "$NVIM_PYTHON_LOG_FILE
 " to test startup time
 " nvim --startuptime startup.log
@@ -81,12 +83,12 @@ set gdefault
 " need a glossary first:
 " 
 
-
 " vim-plug plugin declarations {{{1
 call plug#begin(s:plugdir)
 Plug 'git@github.com:reedes/vim-wordy.git' " pdt la these, pr trouver la jargon :Wordy
 Plug 'git@github.com:sk1418/QFGrep.git'
 Plug 'mtth/scratch.vim' " , {'on': 'Scratch'} mapped to ?
+Plug 'powerman/vim-plugin-AnsiEsc' " { to hl ESC codes
 Plug 'git@github.com:junegunn/gv.vim.git' " git commit viewer :Gv
 " Plug 'git@github.com:rhysd/clever-f.vim.git' " use f to repeat search instead of ;
 " Plug 'git@github.com:xolox/vim-easytags.git' " 
@@ -102,6 +104,7 @@ Plug 'git@github.com:calvinchengx/vim-aftercolors' " load after/colors
 " Plug 'timeyyy/orchestra.nvim' " to play some music on 
 " Plug 'timeyyy/clackclack.symphony' " data to play with orchestra.vim
 Plug 'tpope/vim-scriptease' " Adds command such as :Messages
+" Plug 'tpope/vim-eunuch' " {provides SudoEdit, SudoWrite , Unlink, Rename etc...
 Plug 'git@github.com:metakirby5/codi.vim' " repl
 Plug 'git@github.com:SirVer/ultisnips' " handle snippets
 " Snippets are separated from the engine. Add this if you want them:
@@ -972,10 +975,13 @@ let g:neomake_airline = 1
 let g:neomake_echo_current_error = 1
 let g:neomake_place_signs=1
 
+" filters out unrecognized 
+" let g:neomake_ft_maker_remove_invalid_entries = 0
 
 
 " C and CPP are handled by YCM and java usually by elim
-let s:neomake_exclude_ft = [ 'c', 'cpp', 'java' ]
+ " 'c'
+let s:neomake_exclude_ft = ['cpp', 'java' ]
 "let g:neomake_python_pep8_maker
 " let g:neomake_tex_checkers = [ '' ]
 " let g:neomake_tex_enabled_makers = []
@@ -990,6 +996,7 @@ let g:neomake_info_sign = {'text': 'ℹ', 'texthl': 'NeomakeInfoSign'}
 
 let g:neomake_highlight_lines = 1
 
+" let g:neomake_ft_test_maker_buffer_output = 0
 
 " commande : highlights one can use :runtime syntax/hitest.vim for testing
 " Underlined/NeomakePerso/Error
@@ -1000,6 +1007,18 @@ let g:neomake_error_highlight = 'NeomakePerso'
     " let g:neomake_informational_highlight = 'Informational'
 " let g:neomake_error_sign = { 'text': s:gutter_error_sign, 'texthl': 'ErrorSign' }
 " let g:neomake_warning_sign = { 'text': s:gutter_warn_sign , 'texthl': 'WarningSign' }
+" 
+autocmd! VimLeave * let g:neomake_verbose = 0
+
+function! OnNeomakeFinished()
+  echo g:neomake_hook_context
+endfunction
+
+augroup my_neomake
+    au!
+    autocmd User NeomakeFinished call OnNeomakeFinished()
+augroup END
+map <F10> :let b:neomake_c_enabled_makers=['make']<CR>
 " }}}
 
 " Startify config {{{
@@ -1027,6 +1046,10 @@ let g:startify_session_persistence = 0
 let g:startify_change_to_vcs_root = 0
 let g:startify_session_savevars = []
 let g:startify_session_delete_buffers = 1
+let g:startify_change_to_dir = 0
+
+let g:startify_relative_path = 0
+" let g:startify_skiplist=[]
 " }}}
 
 " {{{ Clever f
