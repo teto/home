@@ -1903,10 +1903,26 @@ nameres.hosts_file_handling: TRUE
 # TRUE or FALSE (case-insensitive)
 #llcgprs.autodetect_cipher_bit: FALSE
 
+<<<<<<< HEAD
 # Whether the Gryphon dissector should desegment all messages spanning multiple TCP segments
 # TRUE or FALSE (case-insensitive)
 #gryphon.desegment: TRUE
 
+||||||| merged common ancestors
+# UDP ports to be decoded as GPRS-NS (default: 2157,19999)
+# A string denoting an positive integer range (e.g., "1-20,30-40")
+#gprs-ns.udp.ports: 2157,19999
+
+# Set the port(s) for ip.access IPA (default: 3002,3003,3006,4249,4250,5000)
+# A string denoting an positive integer range (e.g., "1-20,30-40")
+#gsm_ipa.tcp_ports: 3002,3003,3006,4249,4250,5000
+
+# Set the port(s) for ip.access IPA (usually: 3006)
+# A string denoting an positive integer range (e.g., "1-20,30-40")
+#gsm_ipa.udp_ports: 0
+
+=======
+>>>>>>> d795426fe5ec3bce7f5881f30caf3a9a9e027e1e
 # No description
 # TRUE or FALSE (case-insensitive)
 #gsm_ipa.hsl_debug_in_root_tree: FALSE
@@ -2719,10 +2735,26 @@ nameres.hosts_file_handling: TRUE
 # TRUE or FALSE (case-insensitive)
 #mac-lte.show_bsr_median: FALSE
 
+<<<<<<< HEAD
 # The name of the file containing the mate module's configuration
 # A path to a file
 #mate.config: 
 
+||||||| merged common ancestors
+# MAC-Telnet UDP port if other than the default
+# A decimal number
+#mactelnet.port: 20561
+
+# Set the port for Media Agnostic Packets
+# A decimal number
+#mausb.tcp.port: 0
+
+# Set the port for Media Agnostic Packets
+# A decimal number
+#mausb.udp.port: 0
+
+=======
+>>>>>>> d795426fe5ec3bce7f5881f30caf3a9a9e027e1e
 # Decode control data received on "usb.control" with an unknown interface class as MBIM
 # TRUE or FALSE (case-insensitive)
 #mbim.control_decode_unknown_itf: FALSE
@@ -3359,6 +3391,7 @@ mptcp.analyze_mappings: TRUE
 # TRUE or FALSE (case-insensitive)
 #pkcs12.try_null_password: FALSE
 
+<<<<<<< HEAD
 # Whether the PN-RT summary line should be shown in the protocol tree
 # TRUE or FALSE (case-insensitive)
 #pn_rt.summary_in_tree: TRUE
@@ -3367,6 +3400,13 @@ mptcp.analyze_mappings: TRUE
 # TRUE or FALSE (case-insensitive)
 #pn_rt.desegment: TRUE
 
+||||||| merged common ancestors
+# Decode packets on this UDP port as PacketCable CCC
+# A decimal number
+#pkt_ccc.udp_port: 0
+
+=======
+>>>>>>> d795426fe5ec3bce7f5881f30caf3a9a9e027e1e
 # Protocol payload type
 # One of: Data, Sony FeliCa, NXP MiFare, ISO 7816
 # (case-insensitive).

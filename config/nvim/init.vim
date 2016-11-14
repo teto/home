@@ -384,6 +384,7 @@ set showmatch
 
 " Use visual bell instead of beeping when doing something wrong
 set visualbell
+set errorbells " easier to test visualbell with it
 
 " if boths are set at the same time, vim uses an hybrid mode
 " Display line numbers on the left
@@ -702,7 +703,7 @@ nnoremap <leader>gfs :vertical wincmd f<CR> " open file under cursor in a split
 let g:chromatica#libclang_path="/usr/lib/llvm-3.8/lib/"
 
 
-let g:chromatica#enable_at_startup=1
+let g:chromatica#enable_at_startup=0
 let g:chromatica#enable_debug=1
 let g:chromatica#global_args= [] " prepended for each file compile args
 let g:chromatica#responsive_mode = 0 
@@ -1258,14 +1259,14 @@ nnoremap <leader>git :Grepper  -tool git -open -nojump
 nnoremap <leader>ag  :Grepper -tool ag  -open -switch
 
 " let g:grepper.tools += "localgrep"
-let g:grepper = {
-  \ 'tools': ['git', 'localgrep', 'ag', 'rg', 'grep'],
-  \ 'localgrep': {
-      \ 'grepprg':    'ag --vimgrep $* $.',
-      \                    'grepformat': '%f:%l:%c:%m,%f:%l:%m',
-      \                    'escape':     '\^$.*+?()[]{}|' 
-    \ }
-    \}
+" let g:grepper = {
+"   \ 'tools': ['git', 'localgrep', 'ag', 'rg', 'grep'],
+"   \ 'localgrep': {
+"       \ 'grepprg':    'ag --vimgrep $* $.',
+"       \                    'grepformat': '%f:%l:%c:%m,%f:%l:%m',
+"       \                    'escape':     '\^$.*+?()[]{}|' 
+"     \ }
+"     \}
 " -noswitch
 nmap gs <plug>(GrepperOperator)
 xmap gs <plug>(GrepperOperator)
@@ -1602,7 +1603,7 @@ if has("nvim")
   let g:netrw_home=$XDG_DATA_HOME.'/nvim'
   "now ignored 
   " let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-  let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+  " let $NVIM_TUI_ENABLE_CURSOR_SHAPE=0
 endif
 " }}}
 

@@ -109,6 +109,7 @@ __gitex_author_names() {
 _git-authors() {
     _arguments  -C \
         '(--list -l)'{--list,-l}'[show authors]' \
+        '--no-email[without email]' \
 }
 
 _git-bug() {
@@ -258,7 +259,6 @@ _git-feature() {
     esac
 }
 
-
 _git-graft() {
     _arguments \
         ':src-branch-name:__gitex_branch_names' \
@@ -372,6 +372,7 @@ zstyle ':completion:*:*:git:*' user-commands \
     effort:'show effort statistics on file(s)' \
     extras:'awesome git utilities' \
     feature:'create/merge feature branch' \
+    force-clone:'overwrite local repositories with clone' \
     fork:'fork a repo on github' \
     fresh-branch:'create fresh branches' \
     gh-pages:'create the github pages branch' \
@@ -389,9 +390,11 @@ zstyle ':completion:*:*:git:*' user-commands \
     obliterate:'rewrite past commits to remove some files' \
     pr:'checks out a pull request locally' \
     psykorebase:'rebase a branch with a merge commit' \
+    pull-request:'create pull request to GitHub project' \
     rebase-patch:'rebases a patch' \
     refactor:'create refactor branch' \
     release:'commit, tag and push changes to the repository' \
+    rename-branch:'rename a branch' \
     rename-tag:'rename a tag' \
     repl:'git read-eval-print-loop' \
     reset-file:'reset one file' \
