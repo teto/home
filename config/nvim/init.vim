@@ -1108,6 +1108,13 @@ nnoremap <silent> <Leader>gp :GitGutterPreviewHunk<CR><c-w>j
 nnoremap cog :GitGutterToggle<CR>
 " }}}
 
+" wscript are python
+
+augroup wscript
+  autocmd!
+  autocmd BufWinEnter wscript set ft=python
+augroup END
+
 " goyo {{{
 let g:goyo_linenr=1
 let g:goyo_height= '90%'
