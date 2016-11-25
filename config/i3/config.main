@@ -66,8 +66,8 @@ focus_follows_mouse no
 #workspace_bar no
 
 
-# Manage monitors, enable or disable
-bindsym $mod+Shift+V exec "$HOME/.i3/manage_monitors.sh"
+# Manage monitors, enable or disable, it's in rofi-scripts
+bindsym $mod+Shift+V exec "manage_monitors.sh"
 
 # TODO should detect the number of monitors !
 bindsym $mod+m  mode "monitors"
@@ -325,11 +325,25 @@ bindsym $mod+Shift+0 move container to workspace "$w10"
 # reload the configuration file
 bindsym $mod+Shift+C  reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+R exec "$HOME/.i3/build_config.sh"; restart
+# bindsym $mod+Shift+R exec "$HOME/.i3/build_config.sh"; restart
 # exit i3 (logs you out of your X session)
 # command is 'exit'
 # bindsym $mod+Shift+E exec "$HOME/.i3/logout.py"
 
+
+set $rofi_mode rofi <b>Q</b>qutebrowser <b>b</b>uku
+bindsym $mod+Shift+R mode "$rofi_mode"
+# 
+mode --pango_markup "$rofi_mode" {
+	# rofi -modi 'run,DRun,window,ssh,Layouts:i3-list-layouts,file:/home/teto/rofi/Examples/rofi-file-browser.sh' -show run
+	bindsym w mode "default", exec rofi -modi 'window' -show
+	# TODO use my patch
+	bindsym q mode "default", exec rofi -modi 'window' -show
+	bindsym b mode "default", exec buku_run
+	
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+}
 
 mode "command" {
 

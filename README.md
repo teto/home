@@ -3,13 +3,14 @@ home
 
 This folder contains my customizations for:
 * alot (MUA: Mail User Agent, like mutt is)
-* astroid (like alot, but with a GUI interface)
+* [astroid](https://github.com/astroidmail/astroid) (like alot, but with a GUI interface)
 * bash
+* [buku](https://github.com/jarun/Buku): a bookmark manager
 * clerk (to control mpd via rofi)
 * font handling
 * git (Source control)
 * htop
-* i3 (i3wm.org, a great if not the best tiling window manager)
+* [i3](i3wm.org), a great if not the best tiling window manager)
 * i3pystatus (generates a status line for i3bar)
 * khard (a carddav CLI)
 * khal (a calendar CLI)
@@ -25,10 +26,9 @@ This folder contains my customizations for:
 * offlineimap (MRA: Mail Retriever Agent)
 * powerline (to generate a fancy prompt)
 * procmail
-* qutebrowser (vim like browser)
+* [qutebrowser](www.qutebrowser.org) (vim like browser)
 * ranger (CLI file explorer)
 * rofi (a dmenu-like interactive prompt, works with clerk/i3 etc...)
-* rxvt* unicode(256)
 * sxiv (image viewer)
 * termite (a modal terminal)
 * tig (a git history reader)
