@@ -88,6 +88,7 @@ call plug#begin(s:plugdir)
 Plug 'git@github.com:reedes/vim-wordy.git' " pdt la these, pr trouver la jargon :Wordy
 Plug 'git@github.com:sk1418/QFGrep.git'
 Plug 'mtth/scratch.vim' " , {'on': 'Scratch'} mapped to ?
+Plug 'git@github.com:tjdevries/vim-inyoface.git' "InYoFace_toggle to display only comments 
 Plug 'powerman/vim-plugin-AnsiEsc' " { to hl ESC codes
 Plug 'git@github.com:junegunn/gv.vim.git' " git commit viewer :Gv
 " Plug 'git@github.com:rhysd/clever-f.vim.git' " use f to repeat search instead of ;
@@ -948,6 +949,9 @@ nmap <leader>ç <Plug>AirlineSelectTab9
 " autocmd! User GoyoEnter Limelight
 " autocmd! User GoyoLeave Limelight!
 " }}}
+" inyoface {{{
+nmap <leader>c <Plug>(InYoFace_Toggle)<CR>
+" }}}
 
 " close the preview window on python completion
 " autocmd CompleteDone * pclose 
@@ -1622,13 +1626,14 @@ endif
 " set to NONE not to change them
 " :help hl-IncSearch
 " MatchParen(theses)
-" "\e[9mstrikethrough\e[0m"
+" echo -e "\e[9mstrikethrough\e[0m" works in termite (libvte)
 " regarder dans 'guifont' y a s=strikeout
 autocmd ColorScheme *
       \ highlight Comment gui=italic
       \ | highlight Search gui=undercurl
       \ | highlight MatchParen guibg=NONE guifg=NONE gui=underline
-      \ | highlight NeomakePerso cterm=underline ctermbg=Red  ctermfg=227  gui=underline guibg=Red
+      \ | highlight NeomakePerso cterm=underline ctermbg=Red  ctermfg=227  gui=underline 
+" guibg=Red
       " \ | highlight IncSearch guibg=NONE guifg=NONE gui=underline
 " highlight Comment gui=italic
 
