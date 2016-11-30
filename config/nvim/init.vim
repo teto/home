@@ -98,6 +98,7 @@ Plug 'git@github.com:junegunn/goyo.vim', {'on': 'Goyo'} "distraction free writin
 Plug 'git@github.com:junegunn/limelight.vim' " highlights 
 Plug 'git@github.com:calvinchengx/vim-aftercolors' " load after/colors
 "Plug 'junegunn/limelight.vim' " to highlight ucrrent paragraph only
+Plug 'git@github.com:ntpeters/vim-better-whitespace.git' " StripWhitespace
 " Plug 'bronson/vim-trailing-whitespace' " :FixTrailingWhitespace
 " Plug 'tkhoa2711/vim-togglenumber' " by default mapped to <leader>n
 " Plug 'blindFS/vim-translator' " fails during launch :/
@@ -108,7 +109,9 @@ Plug 'tpope/vim-scriptease' " Adds command such as :Messages
 Plug 'git@github.com:metakirby5/codi.vim' " repl
 Plug 'git@github.com:SirVer/ultisnips' " handle snippets
 " Snippets are separated from the engine. Add this if you want them:
-Plug 'honza/vim-snippets'
+Plug 'honza/vim-snippets' "  ultisnips compatible snippets
+Plug 'git@github.com:sjl/gundo.vim' " :GundoShow/Toggle to redo changes
+
 " Plug 'Yggdroot/indentLine',{ 'for': 'python' }  " draw verticals indents but seems greedy
 "  Autocompletion and linting {{{2
 "'frozen': 1,
@@ -1643,9 +1646,14 @@ colorscheme molokai
 " nnoremap <silent> <C-c> :<C-U>call halo#run()<CR><C-c>
 " }}}
 
+" rtags {{{
+let g:rtagsUseLocationList=1
+" let g:rtagsLog="rtags.log"
+" }}}
+
 " overwrite vimtex status mapping
-let @g="dawi\\gls{p}"
-nnoremap <Leader>lg @g
+" let @g="dawi\\gls{p}"
+" nnoremap <Leader>lg @g
 
 highlight SignifySignChange cterm=bold ctermbg=237  ctermfg=227 guibg=#F08A1F
 " QuickFixLine
