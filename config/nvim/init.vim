@@ -7,8 +7,6 @@
 " map <C-D> :tag<CR>
 map <D-b> :echom "hello papy"
 
-set exrc
-
 "$NVIM_PYTHON_LOG_FILE
 " to test startup time
 " nvim --startuptime startup.log
@@ -77,6 +75,9 @@ set gdefault
 " lustyjuggler plugin
 " https://github.com/sjbach/lusty
 
+" nvim will load any .nvimrc in the cwd; useful for per-project settings
+set exrc
+
 
 " reminder about vim completion
 " since it's fucking complex
@@ -85,6 +86,7 @@ set gdefault
 
 " vim-plug plugin declarations {{{1
 call plug#begin(s:plugdir)
+Plug 'sunaku/vim-dasht' " get documentation
 Plug 'git@github.com:reedes/vim-wordy.git' " pdt la these, pr trouver la jargon :Wordy
 Plug 'git@github.com:sk1418/QFGrep.git'
 Plug 'mtth/scratch.vim' " , {'on': 'Scratch'} mapped to ?
@@ -243,12 +245,13 @@ Plug 'Rykka/InstantRst', {'for': 'rst'} " rst live preview with :InstantRst,
 Plug 'dhruvasagar/vim-table-mode', {'for': 'txt'}
 Plug 'kshenoy/vim-signature' " display marks in gutter, love it
 
-Plug 'vim-scripts/QuickFixCurrentNumber' " instead of :Cnr :Cgo
+Plug 'Coacher/QuickFixCurrentNumber' " use :Cnr :Cgo instead of :cnext etc...
 Plug 'git@github.com:vim-scripts/ingo-library.git' " DEPENDANCY of QuickFixCurrentNumber
 "Plug 'tomtom/quickfixsigns_vim'
 
 Plug 'mhinz/vim-rfc', { 'on': 'RFC' }
 " can show a list of unicode characeters, with their name  :UnicodeTable etc... 
+" careful maps F4 by default
 Plug 'chrisbra/unicode.vim' " , { 'on': ['<plug>(UnicodeComplete)', '<plug>(UnicodeGA)', 'UnicodeTable'] } 
 "Plug 'vim-scripts/rfc-syntax', { 'for': 'rfc' } " optional syntax highlighting for 
 Plug 'vim-scripts/Modeliner' " <leader>ml to setup buffer modeline
@@ -260,9 +263,9 @@ Plug 'vim-scripts/Modeliner' " <leader>ml to setup buffer modeline
 Plug 'mhinz/vim-grepper', { 'on': 'Grepper'}
 " Plug 'ddrscott/vim-side-search'  " tOdo
 "Plug 'teto/neovim-auto-autoread' " works only in neovim, runs external checker
-" Plug 'benekastah/neomake' " async build for neovim
+Plug 'benekastah/neomake' " async build for neovim
 " Plug '~/neomake' " , {'branch': 'graphviz'}  async build for neovim
-Plug '~/neomake' " , {'branch': 'pr/361'}  async build for neovim
+" Plug '~/neomake' " , {'branch': 'pr/361'}  async build for neovim
 " Plug 'rhysd/github-complete.vim' " provides github user/repo autocompletion after @ and #
 " Plug 'rhysd/vim-clang-format' " C/CPP/C++ development
 " VCS related {{{
@@ -494,10 +497,10 @@ nmap <silent> <D-Down> :wincmd j<CR>
 nmap <silent> <D-Left> :wincmd h<CR>
 nmap <silent> <D-Right> :wincmd l<CR>
 
-nmap <silent> <M-Up> :wincmd k<CR>
-nmap <silent> <M-Down> :wincmd j<CR>
-nmap <silent> <M-Left> :wincmd h<CR>
-nmap <silent> <M-Right> :wincmd l<CR>
+" nmap <silent> <M-Up> :wincmd k<CR>
+" nmap <silent> <M-Down> :wincmd j<CR>
+" nmap <silent> <M-Left> :wincmd h<CR>
+" nmap <silent> <M-Right> :wincmd l<CR>
 
 
 " For comparison
@@ -681,16 +684,6 @@ nnoremap <Leader>sv :source $MYVIMRC<CR>
 " nnoremap <Leader>e :Vex<CR> 
 nnoremap <Leader>w :w<CR>
 
-" mostly fzf mappings, use TAB to mark several files at the same time
-" https://github.com/neovim/neovim/issues/4487
-nnoremap <Leader>o :FzfFiles<CR>
-nnoremap <Leader>g :FzfGitFiles<CR>
-nnoremap <Leader>F :FzfFiletypes<CR>
-nnoremap <Leader>h :FzfHistory<CR>
-nnoremap <Leader>c :FzfCommits<CR>
-nnoremap <Leader>C :FzfColors<CR>
-nnoremap <leader>b :FzfBuffers<CR>
-nnoremap <leader>m :FzfMarks<CR>
 nnoremap <leader>u :UndoTreeToggle<CR>
 " nnoremap <leader>t :UndoTreeToggle<CR>
 
@@ -734,6 +727,17 @@ let g:fzf_layout = { 'down': '~40%' }
 " For Commits and BCommits to customize the options used by 'git log':
 let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
 
+" mostly fzf mappings, use TAB to mark several files at the same time
+" https://github.com/neovim/neovim/issues/4487
+nnoremap <Leader>o :FzfFiles<CR>
+nnoremap <Leader>g :FzfGitFiles<CR>
+nnoremap <Leader>F :FzfFiletypes<CR>
+nnoremap <Leader>h :FzfHistory<CR>
+nnoremap <Leader>c :FzfCommits<CR>
+nnoremap <Leader>C :FzfColors<CR>
+nnoremap <leader>b :FzfBuffers<CR>
+nnoremap <leader>m :FzfMarks<CR>
+
 " Customize fzf colors to match your color scheme
 " let g:fzf_colors = \ { 'fg':      ['fg', 'Normal'],
 "   \ 'bg':      ['bg', 'Normal'],
@@ -748,11 +752,19 @@ let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %
 "   \ 'spinner': ['fg', 'Label'],
 "   \ 'header':  ['fg', 'Comment'] 
 " }
-
+let g:fzf_history_dir = $XDG_DATA_HOME.'/fzf-history'
 " Advanced customization using autoload functions
 "autocmd VimEnter * command! Colors
   "\ call fzf#vim#colors({'left': '15%', 'options': '--reverse --margin 30%,0'})
 " Advanced customization using autoload functions
+
+  " [Buffers] Jump to the existing window if possible
+  let g:fzf_buffers_jump = 1
+
+imap <c-x><c-f> <plug>(fzf-complete-path)
+
+" automatic close when htting escape
+autocmd! FileType fzf tnoremap <buffer> <Esc> <c-g>
 " }}}
 
 " Powerline config {{{
@@ -776,6 +788,10 @@ let g:Powerline_symbols = "fancy" " to use unicode symbols
     let g:csv_autocmd_arrange_size = 1024*1024
 " }}}
 
+" unicode.vim {{{
+" overrides ga
+nmap ga <Plug>(UnicodeGA)
+" }}}
 
 " Search parameters {{{
 set hlsearch " highlight search terms
@@ -969,7 +985,7 @@ let g:sayonara_confirm_quit = 0
 " }}}
 
 " Neomake config {{{
-let g:neomake_verbose = 1
+let g:neomake_verbose = 0
 
 " pyflakes can't be disabled on a per error basis
 " also it considers everything as error => disable
@@ -977,7 +993,7 @@ let g:neomake_verbose = 1
 let g:neomake_python_enabled_makers = ['mypy', 'flake8']
 let g:neomake_logfile = $HOME.'/neomake.log'
 let g:neomake_c_gcc_args = ['-fsyntax-only', '-Wall']
-let g:neomake_open_list = 0
+let g:neomake_open_list = 0 " 0 to disable/2 preserves cursor position
 
 let g:neomake_airline = 1
 let g:neomake_echo_current_error = 1
@@ -1016,17 +1032,17 @@ let g:neomake_error_highlight = 'NeomakePerso'
 " let g:neomake_error_sign = { 'text': s:gutter_error_sign, 'texthl': 'ErrorSign' }
 " let g:neomake_warning_sign = { 'text': s:gutter_warn_sign , 'texthl': 'WarningSign' }
 " 
-autocmd! VimLeave * let g:neomake_verbose = 0
+" autocmd! VimLeave * let g:neomake_verbose = 0
 
-function! OnNeomakeFinished()
-  echo g:neomake_hook_context
-endfunction
+" function! OnNeomakeFinished()
+"   echo g:neomake_hook_context
+" endfunction
 
-augroup my_neomake
-    au!
-    autocmd User NeomakeFinished call OnNeomakeFinished()
-augroup END
-map <F10> :let b:neomake_c_enabled_makers=['make']<CR>
+" augroup my_neomake
+"     au!
+"     autocmd User NeomakeFinished call OnNeomakeFinished()
+" augroup END
+" map <F10> :let b:neomake_c_enabled_makers=['make']<CR>
 " }}}
 
 " Startify config {{{
@@ -1404,8 +1420,12 @@ autocmd BufWritePost ~/.Xdefaults call system('xrdb ~/.Xdefaults')
 " }}}
 
 " vim-signature {{{
+" :SignatureListMarkers         : List all markers
 let g:SignatureMarkTextHLDynamic=1
 let g:SignatureEnabledAtStartup=1
+let g:SignatureWrapJumps=1
+let g:SignatureDeleteConfirmation=1
+let g:SignaturePeriodicRefresh=1
 " }}}
  
 " Dirvish {{{
@@ -1444,19 +1464,20 @@ autocmd syntax text setlocal textwidth=80
 " draw a line on 80th column
 set colorcolumn=80
 
-set diffopt=filler,vertical " default behavior for diff
+" default behavior for diff=filler,vertical 
+set diffopt=filler,vertical 
 
 " Y behave like D or C
 nnoremap Y y$
 
 
 " search items in location list (per window)
-nnoremap <F1> :lprev<CR>
-nnoremap <F2> :lnext<CR>
+" nnoremap <F1> :lprev<CR>
+" nnoremap <F2> :lnext<CR>
 " search for  item in quickfix list (global/unique)
 " TODO should be able to look for the next one from where I stand !
-nnoremap <F3> :lprev<CR>
-nnoremap <F4> :lnext<CR>
+nmap <F3> <Plug>(QuickFixCurrentNumberLPrev)
+nmap <F4> <Plug>(QuickFixCurrentNumberLNext)
 
 nnoremap <F5> :Neomake<CR>
 nnoremap <F6> :AutoSaveToggle<CR>
@@ -1513,17 +1534,29 @@ autocmd! BufWritePost * Neomake
 " Bye bye ex mode
 noremap Q <NOP>
 
+" qfgrep {{{ 
+" <Leader>g to filter entries (user will be asked for pattern) works only in
+" location list/quickfix similar to :QFGrep
+" <Leader>r to restore original quickfix entires.
+let g:QFG_hi_error = 'ctermbg=167 ctermfg=16 guibg=#d75f5f guifg=black'
+"}}}
+
+" QuickFixCurrentNumber {{{
+let g:no_QuickFixCurrentNumber_maps = 1
+" }}}
+
+
 " location list / quickfix config {{{
 " location list can be associated with only one window.  
 " The location list is independent of the quickfix list.
+
 " ListToggle config {{{
-nnoremap <kPageUp> :lprev
-nnoremap <kPageDown> :lnext
-nnoremap <kPageRight> :lnext
-nnoremap <kPageRight> :lnext
-nnoremap <k2> :echom "hello world"
-let g:lt_location_list_toggle_map = '<F2>' " '<leader>l'
-let g:lt_quickfix_list_toggle_map = '<F1>' " '<leader>qq'
+let g:lt_location_list_toggle_map = '<F12>' " '<leader>l'
+let g:lt_quickfix_list_toggle_map = '<F2>' " '<leader>qq'
+
+nmap <leader>l  <Plug>(ListToggleLToggle)
+nmap <F1>  <Plug>(ListToggleQToggle)
+
 " }}}
 
 " buffers
@@ -1655,6 +1688,12 @@ colorscheme molokai
 let g:rtagsUseLocationList=1
 " let g:rtagsLog="rtags.log"
 " }}}
+" TESTING only
+nnoremap <kPageUp> :lprev
+nnoremap <kPageDown> :lnext
+nnoremap <kPageRight> :lnext
+nnoremap <kPageRight> :lnext
+nnoremap <k2> :echom "hello world"
 
 " overwrite vimtex status mapping
 " let @g="dawi\\gls{p}"
