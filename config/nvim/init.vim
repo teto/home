@@ -245,7 +245,7 @@ Plug 'Rykka/InstantRst', {'for': 'rst'} " rst live preview with :InstantRst,
 Plug 'dhruvasagar/vim-table-mode', {'for': 'txt'}
 Plug 'kshenoy/vim-signature' " display marks in gutter, love it
 
-Plug 'Coacher/QuickFixCurrentNumber' " use :Cnr :Cgo instead of :cnext etc...
+Plug 'teto/QuickFixCurrentNumber' " use :Cnr :Cgo instead of :cnext etc...
 Plug 'git@github.com:vim-scripts/ingo-library.git' " DEPENDANCY of QuickFixCurrentNumber
 "Plug 'tomtom/quickfixsigns_vim'
 
@@ -1228,7 +1228,6 @@ let g:vimtex_latexmk_callback= 1 " let it to 1 else quickfix won't pop
     " autocmd FileType tex nnoremap <leader>lt <plug>(vimtex-toc-toggle)
   "augroup latex
     "autocmd!
-    "autocmd FileType tex nnoremap <buffer><F4> :VimtexView<CR>
     "autocmd FileType tex nnoremap <buffer><F5> :VimtexCompile<CR>
     "autocmd FileType tex map <silent> <buffer><F8> :call vimtex#latexmk#errors_open(0)<CR>
   "augroup END
@@ -1388,7 +1387,7 @@ nmap <leader>gk <plug>(signify-prev-hunk)
 let g:auto_save_in_insert_mode = 1
 let g:auto_save_events = ['FocusLost']
 "let g:auto_save_events = ['CursorHold', 'FocusLost']
-let g:auto_save_write_all_buffers = 0 " Setting this option to 1 will write all
+let g:auto_save_write_all_buffers = 1 " Setting this option to 1 will write all
 " Put this in vimrc, add custom commands in the function.
 function! AutoSaveOnLostFocus()
   " to solve pb with Airline https://github.com/vim-airline/vim-airline/issues/1030#issuecomment-183958050
@@ -1477,7 +1476,6 @@ nnoremap Y y$
 " search for  item in quickfix list (global/unique)
 " TODO should be able to look for the next one from where I stand !
 nmap <F3> <Plug>(QuickFixCurrentNumberLPrev)
-nmap <F4> <Plug>(QuickFixCurrentNumberLNext)
 
 nnoremap <F5> :Neomake<CR>
 nnoremap <F6> :AutoSaveToggle<CR>
@@ -1487,7 +1485,7 @@ nnoremap <F7> :bp<CR>
 nnoremap <F8> :bn<CR>
 nnoremap <F9> :YcmToggleLogs<CR>
 " est mappe a autre chose pour l'instant
-"noremap <F4> exec ":emenu <tab>"
+"noremap <F13> exec ":emenu <tab>"
 " should become useless with neovim
 " noremap <F10> :set paste!<CR>
 map <F11> <Plug>(ToggleListchars)
@@ -1650,7 +1648,7 @@ if has("nvim")
   let g:netrw_home=$XDG_DATA_HOME.'/nvim'
   "now ignored 
   " let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-  " let $NVIM_TUI_ENABLE_CURSOR_SHAPE=0
+  let $NVIM_TUI_ENABLE_CURSOR_SHAPE=0
 endif
 " }}}
 
@@ -1698,6 +1696,7 @@ nnoremap <k2> :echom "hello world"
 " overwrite vimtex status mapping
 " let @g="dawi\\gls{p}"
 " nnoremap <Leader>lg @g
+nmap <f4> <Plug>(QuickFixCurrentNumberLNext)
 
 highlight SignifySignChange cterm=bold ctermbg=237  ctermfg=227 guibg=#F08A1F
 " QuickFixLine
