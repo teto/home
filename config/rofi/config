@@ -3,7 +3,7 @@
 
 
 rofi.kb-mode-previous: Alt+Left
-rofi.kb-mode-next:	Alt+Right, Alt+Tab
+rofi.kb-mode-next:	Alt+Right,Alt+Tab
 
 !Means it is at center
 rofi.loc: 0
