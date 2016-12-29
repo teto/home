@@ -89,6 +89,7 @@ call plug#begin(s:plugdir)
 Plug 'sunaku/vim-dasht' " get documentation
 Plug 'git@github.com:reedes/vim-wordy.git' " pdt la these, pr trouver la jargon :Wordy
 Plug 'git@github.com:sk1418/QFGrep.git'
+Plug 'git@github.com:pseewald/vim-anyfold.git' " speed up folds processing
 Plug 'mtth/scratch.vim' " , {'on': 'Scratch'} mapped to ?
 Plug 'git@github.com:tjdevries/vim-inyoface.git' "InYoFace_toggle to display only comments 
 Plug 'powerman/vim-plugin-AnsiEsc' " { to hl ESC codes
@@ -370,11 +371,13 @@ nnoremap <Leader>/ :set hlsearch! hls?<CR> " toggle search highlighting
 
 
 
+" conceal configuration {{{
 " transforms some characters into their digraphs equivalent 
 " if your font supports it 
-" concealcursor
+" concealcursor " show current line unconcealed
 "let g:tex_conceal="agdms"
 "set conceallevel=2
+" }}}
 
 set showmatch
 

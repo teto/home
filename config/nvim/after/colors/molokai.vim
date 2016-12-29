@@ -13,5 +13,5 @@ hi NonText         guibg=#E5943D
 hi EndOfBuffer         guibg=#465457
 " 
 hi CursorLine                    guibg=#293739
-hi CursorLineNr    guibg=#E5943D               gui=none
+" hi CursorLineNr    guibg=#E5943D               gui=none
 hi CursorColumn                  guibg=#293739
