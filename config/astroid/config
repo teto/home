@@ -40,13 +40,10 @@
         }
     },
     "editor": {
-        "cmd": "st -w %3 -e nvim %1",
+        "cmd": "gvim -f -c 'set ft=mail' '+set fileencoding=utf-8' '+set enc=utf-8' '+set ff=unix' %1",
+        "external_editor": "true",
         "charset": "utf-8",
-        "save_draft_on_force_quit": "true",
-        "gvim": {
-            "cmd": "gvim",
-            "args": "-f -c 'set ft=mail' '+set fileencoding=utf-8' '+set ff=unix' '+set enc=utf-8'"
-        }
+        "save_draft_on_force_quit": "true"
     },
     "mail": {
         "reply": {
@@ -71,11 +68,6 @@
         "open_html_part_external": "true",
         "open_external_link": "xdg-open",
         "indent_messages": "true",
-        "mathjax": {
-            "enable": "true",
-            "uri_prefix": "https:\/\/cdn.mathjax.org\/mathjax\/latest\/",
-            "for_tags": ""
-        },
         "code_prettify": {
             "enable": "true",
             "for_tags": "",
@@ -86,7 +78,12 @@
         "gravatar": {
             "enable": "true"
         },
-        "mark_unread_delay": "0.5"
+        "mark_unread_delay": "0.5",
+        "mathjax": {
+            "enable": "true",
+            "uri_prefix": "https:\/\/cdn.mathjax.org\/mathjax\/latest\/",
+            "for_tags": ""
+        }
     },
     "crypto": {
         "gpg": {
