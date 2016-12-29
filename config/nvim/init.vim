@@ -119,7 +119,7 @@ Plug 'git@github.com:sjl/gundo.vim' " :GundoShow/Toggle to redo changes
 " Plug 'Yggdroot/indentLine',{ 'for': 'python' }  " draw verticals indents but seems greedy
 "  Autocompletion and linting {{{2
 "'frozen': 1,
-Plug 'Valloric/YouCompleteMe' , { 'do': ':new \| call termopen(''python3 ./install.py --system-libclang --clang-completer'')' }
+Plug 'Valloric/YouCompleteMe' , { 'do': ':new \| call termopen(''python3 ./install.py --system-libclang --clang-completer'')', 'frozen': 1}
 " Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
 " Plug 'zchee/deoplete-clang', { 'for': 'cpp' }
 " Plug 'zchee/deoplete-jedi', { 'for': 'python'}
@@ -246,7 +246,11 @@ Plug 'Rykka/InstantRst', {'for': 'rst'} " rst live preview with :InstantRst,
 Plug 'dhruvasagar/vim-table-mode', {'for': 'txt'}
 Plug 'kshenoy/vim-signature' " display marks in gutter, love it
 
-Plug 'teto/QuickFixCurrentNumber' " use :Cnr :Cgo instead of :cnext etc...
+" forked it to solve a bug: git@github.com:teto/QuickFixCurrentNumber.git
+" Plug '~/QuickFixCurrentNumber' " use :Cnr :Cgo instead of :cnext etc...
+" Plug 'Coacher/QuickFixCurrentNumber' " use :Cnr :Cgo instead of :cnext etc...
+" =======
+" Plug 'teto/QuickFixCurrentNumber' " use :Cnr :Cgo instead of :cnext etc...
 Plug 'git@github.com:vim-scripts/ingo-library.git' " DEPENDANCY of QuickFixCurrentNumber
 "Plug 'tomtom/quickfixsigns_vim'
 
@@ -302,6 +306,12 @@ Plug 'NLKNguyen/papercolor-theme'
 " Plug 'erezsh/erezvim' "zenburn scheme. This plugin resets some keymaps,
 " annoying
 Plug 'chrisbra/csv.vim', {'for': 'csv'}
+" 
+Plug 'editorconfig/editorconfig-vim'
+
+" editorconfig {{{
+let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
+" }}}
 " Plug 'junegunn/rainbow_parentheses.vim' " the recommanded one
 " {{{ Latex attempts
 " this one could not compile my program
@@ -313,7 +323,14 @@ Plug 'lervag/vimtex', {'for': 'tex'} " so far the best one
 " }}}
 
 " Plug 'vim-scripts/YankRing.vim' " breaks in neovim, overrides yy as well
+Plug 'brooth/far.vim' " search and replace for vim
+" far config (Find And Replace) {{{ 
+" let g:far#source='agnvim' 
+let g:far#source='vimgrep' 
+" let g:far#source='ag' 
 
+let g:far#collapse_result=1
+" }}}
 call plug#end()
 " }}}
 
@@ -799,7 +816,7 @@ nmap ga <Plug>(UnicodeGA)
 " Search parameters {{{
 set hlsearch " highlight search terms
 set incsearch " show search matches as you type
-set ignorecase " ignore case when searching
+set noignorecase " ignore case when searching
 set smartcase " take case into account if search entry has capitals in it
 set wrapscan " prevent from going back to the beginning of the file
 
@@ -1236,6 +1253,7 @@ let g:vimtex_latexmk_callback= 1 " let it to 1 else quickfix won't pop
   "augroup END
 
 " using it during
+" us histadd
 au BufEnter *.tex exec ":setlocal spell spelllang=en_us"
 "" }}}
 
@@ -1625,7 +1643,8 @@ set matchpairs+=<:>  " Characters for which % should work
 " disable all menus
 unmenu * 
 map <Leader>s :setlocal spell spelllang=en_us<CR>
-menu Spell.EN_US :setlocal spell spelllang=en_us<CR>
+" TODO use histadd
+menu Spell.EN_US :setlocal spell spelllang=en_us \| call histadd('cmd', 'setlocal spell spelllang=en_us')<CR>
 menu Spell.FR :setlocal spell spelllang=fr_fr<CR>
 
 menu Trans.FR :te trans :fr <cword><CR>
@@ -1696,6 +1715,7 @@ nnoremap <kPageRight> :lnext
 nnoremap <kPageRight> :lnext
 nnoremap <k2> :echom "hello world"
 
+nnoremap gO i<CR>
 " overwrite vimtex status mapping
 " let @g="dawi\\gls{p}"
 " nnoremap <Leader>lg @g
