@@ -45,7 +45,20 @@ autocmd BufReadPost *.pdf silent %!pdftotext -nopgbrk -layout -q -eol unix "%" -
 autocmd BufReadPost *.doc,*.docx,*.rtf,*.odp,*.odt silent %!pandoc "%" -tplain -o /dev/stdout
 " }}}
 
-" 
+" Code to display highlight groups {{{
+" https://jordanelver.co.uk/blog/2015/05/27/working-with-vim-colorschemes/
+" Once you have the name of the highlight group, you can run:
+" verbose high <Name>
+" nmap <leader>sp :call <SID>SynStack()<CR>
+function! SynStack()
+  if !exists("*synstack")
+    return
+  endif
+  echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+endfunc
+" }}}
+
+
 let mapleader = " "
 
 " Appearance 1 {{{
@@ -86,18 +99,19 @@ set exrc
 
 " vim-plug plugin declarations {{{1
 call plug#begin(s:plugdir)
-Plug 'sunaku/vim-dasht' " get documentation
-Plug 'git@github.com:reedes/vim-wordy.git' " pdt la these, pr trouver la jargon :Wordy
-Plug 'git@github.com:sk1418/QFGrep.git'
+Plug 'git@github.com:ehamberg/vim-cute-python.git' 
+" Plug 'sunaku/vim-dasht' " get documentation
+" Plug 'git@github.com:reedes/vim-wordy.git' " pdt la these, pr trouver la jargon :Wordy
+Plug 'git@github.com:sk1418/QFGrep.git' " cool 
 Plug 'git@github.com:pseewald/vim-anyfold.git' " speed up folds processing
-Plug 'mtth/scratch.vim' " , {'on': 'Scratch'} mapped to ?
-Plug 'git@github.com:tjdevries/vim-inyoface.git' "InYoFace_toggle to display only comments 
+" Plug 'mtth/scratch.vim' " , {'on': 'Scratch'} mapped to ?
+" Plug 'git@github.com:tjdevries/vim-inyoface.git' "InYoFace_toggle to display only comments 
 Plug 'powerman/vim-plugin-AnsiEsc' " { to hl ESC codes
-Plug 'git@github.com:junegunn/gv.vim.git' " git commit viewer :Gv
+" Plug 'git@github.com:junegunn/gv.vim.git' " git commit viewer :Gv
 " Plug 'git@github.com:rhysd/clever-f.vim.git' " use f to repeat search instead of ;
 " Plug 'git@github.com:xolox/vim-easytags.git' " 
 Plug 'git@github.com:mhinz/vim-halo.git' " to hight cursor line
-Plug 'git@github.com:ludovicchabant/vim-gutentags' " automatic tag generation
+Plug 'git@github.com:ludovicchabant/vim-gutentags' " automatic tag generation, very good
 Plug 'git@github.com:junegunn/goyo.vim', {'on': 'Goyo'} "distraction free writing
 Plug 'git@github.com:junegunn/limelight.vim' " highlights 
 Plug 'git@github.com:calvinchengx/vim-aftercolors' " load after/colors
@@ -111,7 +125,7 @@ Plug 'git@github.com:ntpeters/vim-better-whitespace.git' " StripWhitespace
 Plug 'tpope/vim-scriptease' " Adds command such as :Messages
 " Plug 'tpope/vim-eunuch' " {provides SudoEdit, SudoWrite , Unlink, Rename etc...
 Plug 'git@github.com:metakirby5/codi.vim' " repl
-Plug 'git@github.com:SirVer/ultisnips' " handle snippets
+" Plug 'git@github.com:SirVer/ultisnips' " handle snippets
 " Snippets are separated from the engine. Add this if you want them:
 Plug 'honza/vim-snippets' "  ultisnips compatible snippets
 Plug 'git@github.com:sjl/gundo.vim' " :GundoShow/Toggle to redo changes
@@ -194,6 +208,9 @@ Plug 'mhinz/vim-startify' " very popular, vim's homepage
 
 
 Plug 'dietsche/vim-lastplace' " restore last cursor postion
+" vim-lastplace to restore cursor position {{{
+let g:lastplace_ignore = "gitcommit,svn"
+" }}}
 " Powerline does not work in neovim hence use vim-airline instead
 "if has('nvim')
 	Plug 'bling/vim-airline'
@@ -209,7 +226,7 @@ Plug 'dietsche/vim-lastplace' " restore last cursor postion
 Plug 'justinmk/vim-dirvish' " replaces netrw 
 " Plug 'justinmk/vim-gtfo' " gfo to open filemanager in cwd
 Plug 'wannesm/wmgraphviz.vim', {'for': 'dot'} " graphviz syntax highlighting
- Plug 'tpope/vim-commentary' "gcc to comment/gcgc does not work that well
+Plug 'tpope/vim-commentary' "gcc to comment/gcgc does not work that well
 Plug 'teto/vim-listchars' " to cycle between different list/listchars configurations
 "Plug 'vim-voom/VOoM' " can show tex/restDown Table of Content (ToC)
 Plug 'blueyed/vim-diminactive' " disable syntax coloring on inactive splits
@@ -221,7 +238,7 @@ Plug 'tpope/vim-fugitive' " to use with Git, VERY powerful
 Plug 'junegunn/vim-github-dashboard' " needs ruby support, works in recent neovim
 "Plug 'junegunn/vim-peekaboo' " gives a preview of buffers when pasting
 Plug 'mhinz/vim-randomtag', { 'on': 'Random' } " Adds a :Random function that launches help at random
-Plug 'majutsushi/tagbar' " , {'on': 'TagbarToggle'} disabled lazyloading else it would not work with statusline
+" Plug 'majutsushi/tagbar' " , {'on': 'TagbarToggle'} disabled lazyloading else it would not work with statusline
 Plug 'git@github.com:machakann/vim-highlightedyank.git' " highlit
 " Plug 'haya14busa/vim-operator-flashy' " Flash selection on copy
 
@@ -311,6 +328,8 @@ Plug 'editorconfig/editorconfig-vim'
 
 " editorconfig {{{
 let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
+let g:EditorConfig_max_line_indicator = "line"
+" let g:EditorConfig_verbose = 1
 " }}}
 " Plug 'junegunn/rainbow_parentheses.vim' " the recommanded one
 " {{{ Latex attempts
@@ -348,14 +367,11 @@ autocmd FileType vim setlocal keywordprg=:help
 set scrolloff=3
 
 
-" vim-lastplace to restore cursor position {{{
-let g:lastplace_ignore = "gitcommit,svn"
-" }}}
 
 " Indentation {{{
-set tabstop=4 " a tab takes 4 characters (local to buffer)
+set tabstop=4 " a tab takes 4 characters (local to buffer) abrege en ts
 set shiftwidth=4 " Number of spaces to use per step of (auto)indent.
-set smarttab "use shiftwidth
+" set smarttab " when inserting tab in front a line, use shiftwidth
 set smartindent " might need to disable ?
 
 set cindent
@@ -363,7 +379,7 @@ set cinkeys-=0# " list of keys that cause reindenting in insert mode
 set indentkeys-=0#
 
 set shiftround " round indent to multiple of 'shiftwidth' (for << and >>)
-"set softtabstop=4 " remove <Tab> symbols as it was spaces
+set softtabstop=0 " inserts a mix of <Tab> and spaces, 0 disablres it
 "set expandtab " replace <Tab with spaces
 " }}}
 
@@ -1164,19 +1180,19 @@ let g:goyo_height= '90%'
 let g:goyo_width = 120
 " }}}
 " Restor cursor position {{{
-function! ResCur()
-  " $ => last line of buffer
-  " '" => cursor position on exit
-  if line("'\"") <= line("$")
-    normal! g`"
-    return 1
-  endif
-endfunction
+" function! ResCur()
+"   " $ => last line of buffer
+"   " '" => cursor position on exit
+"   if line("'\"") <= line("$")
+"     normal! g`"
+"     return 1
+"   endif
+" endfunction
 
-augroup resCur
-  autocmd!
-  autocmd BufWinEnter * call ResCur()
-augroup END
+" augroup resCur
+"   autocmd!
+"   autocmd BufWinEnter * call ResCur()
+" augroup END
 " }}}
 
 " Generic Tex configuration {{{
@@ -1296,6 +1312,7 @@ let g:pymode_virtualenv = 1
     "\"extends:>"
 " while waiting to finish my vim-listchars plugin
 "set listchars=tab:»·,eol:↲,nbsp:␣,extends:…
+"|
 "set listchars=tab:•·,trail:·,extends:❯,precedes:❮,nbsp:×
 " }}}
 
@@ -1654,10 +1671,11 @@ menu Search.AllBuffers :exe Grepper -grepprg ag --vimgrep $* $+
 " }}}
 
 " tabulation-related menu {{{2
-menu Tabs.S2 :set expandtab ts=2 sts=2 sw=2<CR>
-menu Tabs.S4 :set expandtab ts=4 sts=4 sw=4<CR>
-menu Tabs.S6 :set expandtab ts=6 sts=6 sw=6<CR>
-menu Tabs.S8 :set expandtab ts=8 sts=8 sw=8<CR>
+menu Tabs.S2 :set  tabstop=2 softtabstop=2 sw=2<CR>
+menu Tabs.S4 :set ts=4 sts=4 sw=4<CR>
+menu Tabs.S6 :set ts=6 sts=6 sw=6<CR>
+menu Tabs.S8 :set ts=8 sts=8 sw=8<CR>
+menu Tabs.SwitchExpandTabs :set expandtab!
 "}}}
 " }}}
 
