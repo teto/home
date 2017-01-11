@@ -135,7 +135,7 @@ Plug 'git@github.com:sjl/gundo.vim' " :GundoShow/Toggle to redo changes
 "'frozen': 1,
 Plug 'Valloric/YouCompleteMe' , { 'do': ':new \| call termopen(''python3 ./install.py --system-libclang --clang-completer'')', 'frozen': 1}
 " Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
-" Plug 'zchee/deoplete-clang', { 'for': 'cpp' }
+" Plug 'zchee/deoplete-clang', { 'for': 'c' }
 " Plug 'zchee/deoplete-jedi', { 'for': 'python'}
 " }}}
 Plug 'beloglazov/vim-online-thesaurus' " thesaurus => dico dde synonymes
@@ -145,7 +145,7 @@ Plug 'arakashic/chromatica.nvim', { 'for': 'cpp' } " semantic color syntax
 
 "Plug 'mattn/vim-rtags' a l'air léger
 " Plug 'shaneharper/vim-rtags' " <leader>r ou bien :RtagsFind  mais ne marche pas
-Plug 'lyuts/vim-rtags'  " a l'air d'etre le plus complet
+Plug 'lyuts/vim-rtags'  " a l'air d'etre le plus complet <leader>ri ('rdm' must be running) 
 Plug 'tpope/vim-unimpaired' " [<space> [e [n ]n pour gerer les conflits etc...
 Plug 'kana/vim-operator-user' " dependancy for operator-flashy
 " better handling of buffer closure (type :sayonara)
@@ -887,11 +887,20 @@ nnoremap <leader>kh :YcmCompleter GoToInclude<CR>
 " Deoplete {{{
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_ignore_case = 1
-let g:deoplete#disable_auto_complete = 1
+let g:deoplete#disable_auto_complete = 0
 let g:deoplete#enable_debug = 1
+" let g:deoplete#auto_complete_delay=150
+
+let g:deoplete#enable_refresh_always=0
 
 " deoplete clang {{{2
-let g:deoplete#sources#clang#libclang_path="/usr/lib/llvm-3.8/lib/libclang.so"
+let g:deoplete#sources#clang#libclang_path='/usr/lib/llvm-3.8/lib/libclang.so'
+let g:deoplete#sources#clang#libclang_header='/usr/include/clang/3.8.1/'
+
+let g:deoplete#sources#clang#std#cpp = 'c++11'
+let g:deoplete#sources#clang#sort_algo = 'priority'
+" let g:deoplete#sources#clang#clang_complete_database = '/home/user/code/build'`
+
 
 " Let <Tab> also do completion
 " inoremap <silent><expr> <Tab>
@@ -1726,6 +1735,48 @@ colorscheme molokai
 let g:rtagsUseLocationList=1
 " let g:rtagsLog="rtags.log"
 " }}}
+
+" http://vim.wikia.com/wiki/Show_tags_in_a_separate_preview_window {{{
+" au! CursorHold *.[ch] nested call PreviewWord()
+" CursorHold depends on updatetime
+func! PreviewWord()
+  if &previewwindow			" don't do this in the preview window
+    return
+  endif
+  let w = expand("<cword>")		" get the word under cursor
+  if w =~ '\a'			" if the word contains a letter
+
+    " Delete any existing highlight before showing another tag
+    silent! wincmd P			" jump to preview window
+    if &previewwindow			" if we really get there...
+      match none			" delete existing highlight
+      wincmd p			" back to old window
+    endif
+
+    " Try displaying a matching tag for the word under the cursor
+    try
+      exe "ptag " . w
+    catch
+      return
+    endtry
+
+    silent! wincmd P			" jump to preview window
+    if &previewwindow		" if we really get there...
+      if has("folding")
+	silent! .foldopen		" don't want a closed fold
+      endif
+      call search("$", "b")		" to end of previous line
+      let w = substitute(w, '\\', '\\\\', "")
+      call search('\<\V' . w . '\>')	" position cursor on match
+      " Add a match highlight to the word at this position
+      hi previewWord term=bold ctermbg=green guibg=green
+      exe 'match previewWord "\%' . line(".") . 'l\%' . col(".") . 'c\k*"'
+      wincmd p			" back to old window
+    endif
+  endif
+endfun
+"}}}
+
 " TESTING only
 nnoremap <kPageUp> :lprev
 nnoremap <kPageDown> :lnext
