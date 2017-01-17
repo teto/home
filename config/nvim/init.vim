@@ -133,10 +133,12 @@ Plug 'git@github.com:sjl/gundo.vim' " :GundoShow/Toggle to redo changes
 " Plug 'Yggdroot/indentLine',{ 'for': 'python' }  " draw verticals indents but seems greedy
 "  Autocompletion and linting {{{2
 "'frozen': 1,
-Plug 'Valloric/YouCompleteMe' , { 'do': ':new \| call termopen(''python3 ./install.py --system-libclang --clang-completer'')', 'frozen': 1}
-" Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
+" use deoplete for python ?
+" Plug 'Valloric/YouCompleteMe' , { 'do': ':new \| call termopen(''python3 ./install.py --system-libclang --clang-completer'')', 'frozen': 1}
+Plug 'lyuts/vim-rtags'  " a l'air d'etre le plus complet <leader>ri ('rdm' must be running) 
+Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
 " Plug 'zchee/deoplete-clang', { 'for': 'c' }
-" Plug 'zchee/deoplete-jedi', { 'for': 'python'}
+Plug 'zchee/deoplete-jedi', { 'for': 'python'}
 " }}}
 Plug 'beloglazov/vim-online-thesaurus' " thesaurus => dico dde synonymes
 Plug 'mattboehm/vim-unstack'  " to see a
@@ -145,7 +147,6 @@ Plug 'arakashic/chromatica.nvim', { 'for': 'cpp' } " semantic color syntax
 
 "Plug 'mattn/vim-rtags' a l'air léger
 " Plug 'shaneharper/vim-rtags' " <leader>r ou bien :RtagsFind  mais ne marche pas
-Plug 'lyuts/vim-rtags'  " a l'air d'etre le plus complet <leader>ri ('rdm' must be running) 
 Plug 'tpope/vim-unimpaired' " [<space> [e [n ]n pour gerer les conflits etc...
 Plug 'kana/vim-operator-user' " dependancy for operator-flashy
 " better handling of buffer closure (type :sayonara)
@@ -600,6 +601,7 @@ set wrap
 set linebreak " better display (makes sense only with wrap)
 set breakindent " preserve or add indentation on wrap
 let &showbreak = '↳ '  	" displayed in front of wrapped lines
+set signcolumn=auto " display signcolumn depending on 
 
 " @:NonText
 " set highlight
@@ -1732,8 +1734,11 @@ colorscheme molokai
 " }}}
 
 " rtags {{{
+" <leader>rw montre les différents projets ( <=> $rc -w)
 let g:rtagsUseLocationList=1
-" let g:rtagsLog="rtags.log"
+let g:rtagsUseDefaultMappings = 1
+let g:rtagsLog="rtags.log"
+" let g:rtagsExcludeSysHeaders
 " }}}
 
 " http://vim.wikia.com/wiki/Show_tags_in_a_separate_preview_window {{{
@@ -1777,6 +1782,57 @@ func! PreviewWord()
 endfun
 "}}}
 
+
+" " default value
+" " hor => horizontal
+" 	The option is a comma separated list of parts.  Each part consist of a
+" 	mode-list and an argument-list:
+" 		mode-list:argument-list,mode-list:argument-list,..
+" 	The mode-list is a dash separated list of these modes:
+" 		n	Normal mode
+" 		v	Visual mode
+" 		ve	Visual mode with 'selection' "exclusive" (same as 'v',
+" 			if not specified)
+" 		o	Operator-pending mode
+" 		i	Insert mode
+" 		r	Replace mode
+" 		c	Command-line Normal (append) mode
+" 		ci	Command-line Insert mode
+" 		cr	Command-line Replace mode
+" 		sm	showmatch in Insert mode
+" 		a	all modes
+" 	The argument-list is a dash separated list of these arguments:
+" 		hor{N}	horizontal bar, {N} percent of the character height
+" 		ver{N}	vertical bar, {N} percent of the character width
+" 		block	block cursor, fills the whole character
+" 			[only one of the above three should be present]
+" 		blinkwait{N}				*cursor-blinking*
+" 		blinkon{N}
+" 		blinkoff{N}
+" 			blink times for cursor: blinkwait is the delay before
+" 			the cursor starts blinking, blinkon is the time that
+" 			the cursor is shown and blinkoff is the time that the
+" 			cursor is not shown.  The times are in msec.  When one
+" 			of the numbers is zero, there is no blinking.  The
+" 			default is: "blinkwait700-blinkon400-blinkoff250".
+" 			These numbers are used for a missing entry.  This
+" 			means that blinking is enabled by default.  To switch
+" 			blinking off you can use "blinkon0".  The cursor only
+" 			blinks when Vim is waiting for input, not while
+" 			executing a command.
+" 			To make the cursor blink in an xterm, see
+" 			|xterm-blink|.
+" 		{group-name}
+" 			a highlight group name, that sets the color and font
+" 			for the cursor
+" 		{group-name}/{group-name}
+" 			Two highlight group names, the first is used when
+" 			no language mappings are used, the other when they
+" 			are. |language-mapping|
+" " o
+set guicursor="n-v-c:block-Cursor/lCursor, ve:ver35-Cursor, o:hor50-Cursor,i-ci:ver25-Cursor/lCursor, r-cr:hor20-Cursor/lCursor, sm:block-Cursor -blinkwait175-blinkoff150-blinkon175"
+
+
 " TESTING only
 nnoremap <kPageUp> :lprev
 nnoremap <kPageDown> :lnext
@@ -1789,6 +1845,20 @@ nnoremap gO i<CR>
 " let @g="dawi\\gls{p}"
 " nnoremap <Leader>lg @g
 nmap <f4> <Plug>(QuickFixCurrentNumberLNext)
+
+if has("folding_enhanced")
+  " echo 'enhanced folds'
+
+" EXTERN char_u *fold_chars[] INIT(= {
+"   (char_u *)"▾", /* - */
+"   /* (char_u *)"|", // ❘ │ */
+"   (char_u *)"│", // 1 characeter 3 bytes for U2052 ❘ │
+"   (char_u *)">", // FM_What
+"   (char_u *)"▸", // /* ＋  or ▾  ▸ */
+" });
+  set fillchars+=foldopen:-,foldsep:│,foldmisc:>,foldclose:▸
+  " ,foldsep:|,foldmisc
+endif
 
 highlight SignifySignChange cterm=bold ctermbg=237  ctermfg=227 guibg=#F08A1F
 " QuickFixLine
