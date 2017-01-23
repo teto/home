@@ -298,8 +298,8 @@ Plug 'mhinz/vim-signify' " Indicate changed lines within a file using a VCS.
 " Plug 'teddywing/auditory.vim' " play sounds as you type
 
 " does not work seems to be better ones
-" Plug 'vasconcelloslf/vim-interestingwords' " highlight the words you choose <leader>k (does not work in neovim)
-Plug 't9md/vim-quickhl' " hl manually selected words :h QuickhlManualEnable
+Plug 'vasconcelloslf/vim-interestingwords' " highlight the words you choose <leader>k (does not work in neovim)
+" Plug 't9md/vim-quickhl' " hl manually selected words :h QuickhlManualEnable
 
 " colorschemes {{{
 Plug 'whatyouhide/vim-gotham'
@@ -573,7 +573,7 @@ set splitright   " on vertical split
 
 " {{{ Markdown composer
 " Run with :ComposerStart
-let g:markdown_composer_open_browser        = "qutebrowser"
+" let g:markdown_composer_open_browser        = "qutebrowser"
 let g:markdown_composer_autostart           = 0
 " }}}
 "set winheight=30
@@ -1699,7 +1699,7 @@ if has("nvim")
   let g:netrw_home=$XDG_DATA_HOME.'/nvim'
   "now ignored 
   " let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-  let $NVIM_TUI_ENABLE_CURSOR_SHAPE=0
+  let $NVIM_TUI_ENABLE_CURSOR_SHAPE=2
 endif
 " }}}
 
@@ -1860,6 +1860,10 @@ if has("folding_enhanced")
   " ,foldsep:|,foldmisc
 endif
 
+" to open tag in a split
+map <A-]> :vsp<CR>:exec("tag ".expand("<cword>"))<CR>
+
 highlight SignifySignChange cterm=bold ctermbg=237  ctermfg=227 guibg=#F08A1F
 " QuickFixLine
 " NonText
+runtime init.generated.vim

@@ -2208,7 +2208,7 @@ qt-privacy-ask=0
 #alsa-audio-channels=6
 
 # Software gain (float)
-alsa-gain=0.166375
+alsa-gain=0.512000
 
 [amem] # Audio memory output
 
