@@ -6,6 +6,7 @@
 #PATH="/usr/lib/w3m:$PATH"
 # PATH="$PATH:/home/teto/mptcpanalyzer"
 PATH="$HOME/.local/bin:$PATH"
+PATH="$HOME/.cabal/bin:$PATH" # haskell
 # PATH="$HOME/dotfiles/bin:$PATH"
 PATH+=":$HOME/rofi-scripts"
 PATH+=":$XDG_DATA_HOME/fzf/bin"

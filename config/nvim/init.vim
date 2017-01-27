@@ -66,8 +66,6 @@ let s:gutter_error_sign = "✘'"
 let s:gutter_warn_sign = '！'
 " }}}
 
-" to configure vim for haskell, refer to
-" http://yannesposito.com/Scratch/en/blog/Vim-as-IDE/
 function! DoRemote(arg)
   UpdateRemotePlugins
 endfunction
@@ -144,6 +142,17 @@ Plug 'beloglazov/vim-online-thesaurus' " thesaurus => dico dde synonymes
 Plug 'mattboehm/vim-unstack'  " to see a
 Plug 'KabbAmine/vCoolor.vim', { 'on': 'VCooler' } " RGBA color picker
 Plug 'arakashic/chromatica.nvim', { 'for': 'cpp' } " semantic color syntax
+
+
+" to configure vim for haskell, refer to
+" http://yannesposito.com/Scratch/en/blog/Vim-as-IDE/
+"{{{
+Plug 'git@github.com:neovimhaskell/haskell-vim.git', {'for':'haskell'} " haskell install
+Plug 'enomsg/vim-haskellConcealPlus', {'for':'haskell'}     " unicode for haskell operators
+Plug 'eagletmt/ghcmod-vim', {'for':'haskell'}
+Plug 'eagletmt/neco-ghc', {'for':'haskell'}
+" Plug 'Twinside/vim-hoogle' , {'for':'haskell'}
+"}}}
 
 "Plug 'mattn/vim-rtags' a l'air léger
 " Plug 'shaneharper/vim-rtags' " <leader>r ou bien :RtagsFind  mais ne marche pas
@@ -730,6 +739,15 @@ nnoremap <leader>u :UndoTreeToggle<CR>
 
 "nnoremap <F8> :vertical wincmd f<CR> " open file under cursor in a split
 nnoremap <leader>gfs :vertical wincmd f<CR> " open file under cursor in a split
+" haskell-vim config {{{
+let g:haskell_enable_quantification = 1   " to enable highlighting of `forall`
+let g:haskell_enable_recursivedo = 1      " to enable highlighting of `mdo` and `rec`
+let g:haskell_enable_arrowsyntax = 1      " to enable highlighting of `proc`
+let g:haskell_enable_pattern_synonyms = 1 " to enable highlighting of `pattern`
+let g:haskell_enable_typeroles = 1        " to enable highlighting of type roles
+let g:haskell_enable_static_pointers = 1  " to enable highlighting of `static`
+let g:haskell_backpack = 1                " to enable highlighting of backpack keywords
+"}}}
 
 " Chromatica (needs libclang > 3.9) {{{
 " can compile_commands.json or a .clang file

@@ -1,0 +1,2 @@
+#!/bin/sh
+sudo gdb -p $(ps --ppid $(xprop _NET_WM_PID) -C nvim --sort=start_time -o pid |tail -n1)
