@@ -135,7 +135,7 @@ Plug 'git@github.com:sjl/gundo.vim' " :GundoShow/Toggle to redo changes
 " Plug 'Valloric/YouCompleteMe' , { 'do': ':new \| call termopen(''python3 ./install.py --system-libclang --clang-completer'')', 'frozen': 1}
 Plug 'lyuts/vim-rtags'  " a l'air d'etre le plus complet <leader>ri ('rdm' must be running) 
 Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
-" Plug 'zchee/deoplete-clang', { 'for': 'c' }
+Plug 'zchee/deoplete-clang', { 'for': 'c' }
 Plug 'zchee/deoplete-jedi', { 'for': 'python'}
 " }}}
 Plug 'beloglazov/vim-online-thesaurus' " thesaurus => dico dde synonymes
@@ -223,7 +223,8 @@ let g:lastplace_ignore = "gitcommit,svn"
 " }}}
 " Powerline does not work in neovim hence use vim-airline instead
 "if has('nvim')
-	Plug 'bling/vim-airline'
+  Plug 'vim-airline/vim-airline'
+  Plug 'vim-airline/vim-airline-themes' " creates problems if not here
 "else
 	"Plug 'Lokaltog/powerline' , {'rtp': 'powerline/bindings/vim/'}
 "endif
@@ -255,7 +256,9 @@ Plug 'git@github.com:machakann/vim-highlightedyank.git' " highlit
 
 "  fuzzers {{{2
 " Plug 'junegunn/fzf', { 'dir': $XDG_DATA_HOME . '/fzf', 'do': './install --completion --key-bindings --64' }
-Plug 'junegunn/fzf', { 'dir': $XDG_DATA_HOME . '/fzf', 'do': ':term ./install --no-update-rc --bin --64'}
+" let distribution (like nixos install fzf
+" this package only ocntains fzf#run, 
+Plug 'junegunn/fzf', " { 'dir': $XDG_DATA_HOME . '/fzf', 'do': ':term ./install --no-update-rc --bin --64'}
 
 " Many options available :
 " https://github.com/junegunn/fzf.vim
@@ -749,6 +752,20 @@ let g:haskell_enable_static_pointers = 1  " to enable highlighting of `static`
 let g:haskell_backpack = 1                " to enable highlighting of backpack keywords
 "}}}
 
+" start haskell host if required  {{{
+if has('nvim')
+  function! s:RequireHaskellHost(name)
+    " return rpcstart("/home/saep/.bin/nvim-hs-devel.sh", ['-l','/tmp/nvim-log.txt','-v','DEBUG',a:name.name])
+    return rpcstart("nvim-hs", ['-l','/home/teto/nvim-haskell.log','-v','DEBUG',a:name.name])
+  endfunction
+
+  call remote#host#Register('haskell', "*.l\?hs", function('s:RequireHaskellHost'))
+  let hc=remote#host#Require('haskell')
+" echo rpcrequest(hc, "PingNvimhs") should print Pong
+  call rpcrequest(hc, 'PingNvimhs') 
+endif
+"}}}
+
 " Chromatica (needs libclang > 3.9) {{{
 " can compile_commands.json or a .clang file
 " let g:chomatica#respnsive_mode=1
@@ -819,6 +836,8 @@ let g:fzf_history_dir = $XDG_DATA_HOME.'/fzf-history'
 
 imap <c-x><c-f> <plug>(fzf-complete-path)
 
+" }}}
+" terminal related {{{
 " automatic close when htting escape
 autocmd! FileType fzf tnoremap <buffer> <Esc> <c-g>
 " }}}
@@ -1874,10 +1893,23 @@ if has("folding_enhanced")
 "   (char_u *)">", // FM_What
 "   (char_u *)"▸", // /* ＋  or ▾  ▸ */
 " });
-  set fillchars+=foldopen:-,foldsep:│,foldmisc:>,foldclose:▸
+" foldmisc:>,f
+  set fillchars+=foldopen:▾,foldsep:│,foldclose:▸
   " ,foldsep:|,foldmisc
 endif
 
+"
+function! FzfFlipBool()
+  " let l:dict = {}
+
+  " 'source':
+  let l:dict = { \
+  'sink': 'echo' \
+  }
+  fzf#run(dict)
+endfunc
+
+"
 " to open tag in a split
 map <A-]> :vsp<CR>:exec("tag ".expand("<cword>"))<CR>
 

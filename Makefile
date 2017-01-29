@@ -13,6 +13,7 @@ config:
 
 bin:
 	stow -t $(XDG_DATA_HOME)/../bin bin
+
 local:
 	stow -t $(XDG_DATA_HOME) local
 	mkdir -p $(XDG_DATA_HOME)/fzf-history
