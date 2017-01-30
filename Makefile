@@ -5,7 +5,7 @@ XDG_CACHE_HOME ?= $(HOME)/.cache
 XDG_DATA_HOME ?= $(HOME)/.local/share
 MAILDIR ?= $(HOME)/Maildir
 
-.PHONY: config etc mail local bin
+.PHONY: config etc mail local bin haskell
 
 # http://stackoverflow.com/questions/448910/makefile-variable-assignment
 config:
@@ -24,6 +24,9 @@ zsh:
 pip:
 	wget https://bootstrap.pypa.io/get-pip.py /tmp/
 	python3.5 /tmp/get-pip.py --user
+
+haskell:
+	stow -t ${HOME}/.cabal haskell
 
 keyring:
 	echo "Setup keyrings"
