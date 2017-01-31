@@ -97,6 +97,7 @@ set exrc
 " vim-plug plugin declarations {{{1
 call plug#begin(s:plugdir)
 Plug 'git@github.com:ehamberg/vim-cute-python.git' 
+Plug 'https://github.com/dbakker/vim-projectroot.git' " projectroot#guess()
 " Plug 'sunaku/vim-dasht' " get documentation
 " Plug 'git@github.com:reedes/vim-wordy.git' " pdt la these, pr trouver la jargon :Wordy
 Plug 'git@github.com:sk1418/QFGrep.git' " cool 

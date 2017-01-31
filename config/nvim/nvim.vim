@@ -1,6 +1,7 @@
-let s:path = expand('<sfile>:p:h')
+" let s:path = expand('<sfile>:p:h')
+let s:path = projectroot#guess()
 let s:target = 'all'
-let s:error_path = s:path.'/tmp/errors.json'
+let s:error_path = s:path.'/errors.json'
 let s:errors_url = 'https://raw.githubusercontent.com/neovim/doc/gh-pages/reports/clint/errors.json'
 
 function! s:dl_handler(job, data, event) abort
@@ -55,11 +56,11 @@ endfunction
 
 let g:neomake_make_maker = {
       \ 'exe': 'make',
-      \ 'args': ['VERBOSE=1', 'dev'],
+      \ 'args': ['VERBOSE=1'],
       \ 'errorformat': '../%f:%l:%c: %t%.%#: %m',
       \ }
 
-let g:neomake_c_enabled_makers = ['nvimlint']
+let g:neomake_c_enabled_makers = [] " 'nvimlint'
 let g:neomake_c_nvimlint_maker = {
       \ 'exe': s:path.'/src/clint.py',
       \ 'append_file': 0,
