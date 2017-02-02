@@ -424,7 +424,7 @@ bar {
 	strip_workspace_numbers 1
 	id 0
 	i3bar_command i3bar -t
-	status_command python3 /home/teto/.i3/myStatus.py
+	status_command nix-shell -p i3pystatus --run "python3 /home/teto/.i3/myStatus.py"
 	# separator_symbol "|"
 	# font pango: Liberation Sans Mono 9,  FontAwesome 12
 

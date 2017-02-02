@@ -97,24 +97,24 @@ set exrc
 
 " vim-plug plugin declarations {{{1
 call plug#begin(s:plugdir)
-Plug 'git@github.com:ehamberg/vim-cute-python.git' 
+Plug 'ehamberg/vim-cute-python' 
 " Plug 'sunaku/vim-dasht' " get documentation
-" Plug 'git@github.com:reedes/vim-wordy.git' " pdt la these, pr trouver la jargon :Wordy
-Plug 'git@github.com:sk1418/QFGrep.git' " cool 
-Plug 'git@github.com:pseewald/vim-anyfold.git' " speed up folds processing
+" Plug 'reedes/vim-wordy' " pdt la these, pr trouver la jargon :Wordy
+Plug 'sk1418/QFGrep' " cool 
+Plug 'pseewald/vim-anyfold' " speed up folds processing
 " Plug 'mtth/scratch.vim' " , {'on': 'Scratch'} mapped to ?
-" Plug 'git@github.com:tjdevries/vim-inyoface.git' "InYoFace_toggle to display only comments 
+" Plug 'tjdevries/vim-inyoface' "InYoFace_toggle to display only comments 
 Plug 'powerman/vim-plugin-AnsiEsc' " { to hl ESC codes
-" Plug 'git@github.com:junegunn/gv.vim.git' " git commit viewer :Gv
-" Plug 'git@github.com:rhysd/clever-f.vim.git' " use f to repeat search instead of ;
-" Plug 'git@github.com:xolox/vim-easytags.git' " 
-Plug 'git@github.com:mhinz/vim-halo.git' " to hight cursor line
-Plug 'git@github.com:ludovicchabant/vim-gutentags' " automatic tag generation, very good
-Plug 'git@github.com:junegunn/goyo.vim', {'on': 'Goyo'} "distraction free writing
-Plug 'git@github.com:junegunn/limelight.vim' " highlights 
-Plug 'git@github.com:calvinchengx/vim-aftercolors' " load after/colors
+" Plug 'junegunn/gv.vim' " commit viewer :Gv
+" Plug 'rhysd/clever-f.vim' " use f to repeat search instead of ;
+" Plug 'xolox/vim-easytags' " 
+Plug 'mhinz/vim-halo' " to hight cursor line
+Plug 'ludovicchabant/vim-gutentags' " automatic tag generation, very good
+Plug 'junegunn/goyo.vim', {'on': 'Goyo'} "distraction free writing
+Plug 'junegunn/limelight.vim' " highlights 
+Plug 'calvinchengx/vim-aftercolors' " load after/colors
 "Plug 'junegunn/limelight.vim' " to highlight ucrrent paragraph only
-Plug 'git@github.com:ntpeters/vim-better-whitespace.git' " StripWhitespace
+Plug 'ntpeters/vim-better-whitespace' " StripWhitespace
 " Plug 'bronson/vim-trailing-whitespace' " :FixTrailingWhitespace
 " Plug 'tkhoa2711/vim-togglenumber' " by default mapped to <leader>n
 " Plug 'blindFS/vim-translator' " fails during launch :/
@@ -122,11 +122,11 @@ Plug 'git@github.com:ntpeters/vim-better-whitespace.git' " StripWhitespace
 " Plug 'timeyyy/clackclack.symphony' " data to play with orchestra.vim
 Plug 'tpope/vim-scriptease' " Adds command such as :Messages
 " Plug 'tpope/vim-eunuch' " {provides SudoEdit, SudoWrite , Unlink, Rename etc...
-Plug 'git@github.com:metakirby5/codi.vim' " repl
-" Plug 'git@github.com:SirVer/ultisnips' " handle snippets
+Plug 'metakirby5/codi.vim' " repl
+" Plug 'SirVer/ultisnips' " handle snippets
 " Snippets are separated from the engine. Add this if you want them:
 Plug 'honza/vim-snippets' "  ultisnips compatible snippets
-Plug 'git@github.com:sjl/gundo.vim' " :GundoShow/Toggle to redo changes
+Plug 'sjl/gundo.vim' " :GundoShow/Toggle to redo changes
 
 " Plug 'Yggdroot/indentLine',{ 'for': 'python' }  " draw verticals indents but seems greedy
 "  Autocompletion and linting {{{2
@@ -147,7 +147,7 @@ Plug 'arakashic/chromatica.nvim', { 'for': 'cpp' } " semantic color syntax
 " to configure vim for haskell, refer to
 " http://yannesposito.com/Scratch/en/blog/Vim-as-IDE/
 "{{{
-Plug 'git@github.com:neovimhaskell/haskell-vim.git', {'for':'haskell'} " haskell install
+Plug 'neovimhaskell/haskell-vim', {'for':'haskell'} " haskell install
 Plug 'enomsg/vim-haskellConcealPlus', {'for':'haskell'}     " unicode for haskell operators
 Plug 'eagletmt/ghcmod-vim', {'for':'haskell'}
 Plug 'eagletmt/neco-ghc', {'for':'haskell'}
@@ -184,7 +184,7 @@ Plug 'dzeban/vim-log-syntax' " hl some keywords like ERROR/DEBUG/WARNING
 " }}}
 
 Plug 'Valloric/ListToggle' " toggle location/quickfix list toggling seems to fail
-" Plug 'git@github.com:milkypostman/vim-togglelist' " same
+" Plug 'milkypostman/vim-togglelist' " same
 Plug 'tpope/vim-obsession' ", {'on': 'Obsession', 'ObsessionStatus'}  very cool, register edited files in a Session.vim, call with :Obsession
 " Plug 'mbbill/undotree'
 Plug '907th/vim-auto-save' " :h auto-save
@@ -249,13 +249,13 @@ Plug 'junegunn/vim-github-dashboard' " needs ruby support, works in recent neovi
 "Plug 'junegunn/vim-peekaboo' " gives a preview of buffers when pasting
 Plug 'mhinz/vim-randomtag', { 'on': 'Random' } " Adds a :Random function that launches help at random
 " Plug 'majutsushi/tagbar' " , {'on': 'TagbarToggle'} disabled lazyloading else it would not work with statusline
-Plug 'git@github.com:machakann/vim-highlightedyank.git' " highlit
+Plug 'machakann/vim-highlightedyank' " highlit
 " Plug 'haya14busa/vim-operator-flashy' " Flash selection on copy
 
 
 "  fuzzers {{{2
 " Plug 'junegunn/fzf', { 'dir': $XDG_DATA_HOME . '/fzf', 'do': './install --completion --key-bindings --64' }
-Plug 'junegunn/fzf', { 'dir': $XDG_DATA_HOME . '/fzf', 'do': ':term ./install --no-update-rc --bin --64'}
+Plug 'junegunn/fzf' ", { 'dir': $XDG_DATA_HOME . '/fzf', 'do': ':term ./install --no-update-rc --bin --64'}
 
 " Many options available :
 " https://github.com/junegunn/fzf.vim
@@ -610,7 +610,9 @@ set wrap
 set linebreak " better display (makes sense only with wrap)
 set breakindent " preserve or add indentation on wrap
 let &showbreak = '↳ '  	" displayed in front of wrapped lines
-set signcolumn=auto " display signcolumn depending on 
+if has("signcolumn")
+  set signcolumn=auto " display signcolumn depending on 
+endif
 
 " @:NonText
 " set highlight
@@ -778,7 +780,8 @@ let g:fzf_action = {
 " Default fzf layout
 " - down / up / left / right
 " - window (nvim only)
-let g:fzf_layout = { 'down': '~40%' }
+" 'down': '~40%'
+" let g:fzf_layout = {  }
 
 " For Commits and BCommits to customize the options used by 'git log':
 let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
@@ -826,15 +829,6 @@ autocmd! FileType fzf tnoremap <buffer> <Esc> <c-g>
 " Powerline config {{{
 
 let g:Powerline_symbols = "fancy" " to use unicode symbols
-" }}}
-
-" Ctrpl config {{{
-"Plug 'ctrlpvim/ctrlp.vim'
-"Plug 'mattn/ctrlp-mark'
-"Plug 'mattn/ctrlp-register'
-"let g:ctrlp_cmd = 'CtrlPMixed'
-"let g:ctrlp_match_window = 'results:100' " overcome limit imposed by max height
-"let g:ctrlp_extensions= ['dir','mark']
 " }}}
 
 " Csv config {{{
