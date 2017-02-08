@@ -1,6 +1,7 @@
 {
 
 	allowUnfree=true;
+	allowBroken=true;
 
 # pkgs_ is the original set of packages
 	packageOverrides = pkgs_: with pkgs_; {
@@ -8,31 +9,39 @@
 	all = with pkgs; buildEnv {
 	name = "all";
 	paths= [
+		ghc # glasgow haskell compiler
 		autojump
 		cmake
+		# dropbox
 		neovim
-		firefox 
+		firefox
 		feh
 		fzf
 		git
+		ghc
 		i3pystatus
 		khal
-		neovim
+		libreoffice
 		libnotify
 		libtermkey
 		libvterm
 		lua52Packages.luafilesystem
+		pass
 		mpv
 		moc
 		mpd
+		neovim
+		neovim-qt
 		nox
 		notmuch
 		parcellite
+		python35Packages.neovim
 		ranger
 		redshift
 		rofi
 		rofi-pass
 		silver-searcher
+		sublime3
 		stow
 		universal-ctags
 		unibilium
@@ -42,8 +51,8 @@
 		weechat
 		xsel
 		xorg.xmodmap
+		zathura
 		zsh
-
 	];
 };
 };

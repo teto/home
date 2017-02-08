@@ -156,7 +156,8 @@ export SYSCONFDIR="$XDG_CONFIG_HOME"
 
 #zle -N zle-line-init
 
-eval "`dircolors -b "$XDG_CONFIG_HOME/dircolors/solarized.ansi-dark"`"
+# eval "`dircolors -b "$XDG_CONFIG_HOME/dircolors/solarized.ansi-dark"`"
+dircolors -b "$XDG_CONFIG_HOME/dircolors/solarized.ansi-dark"
 
 
 
@@ -270,9 +271,17 @@ REPORTTIME=10
 # in hundredths of seconds (0 defaults to 0.4 ?! 1 => 10 ms)
 KEYTIMEOUT=1
 
-# powerline_path="/home/teto/powerline/powerline"
 
-# source ${powerline_path}/bindings/zsh/powerline.zsh
+# on nix it is in
+# import powerline
+# print(powerline.__path__)
+if [ -n "$NIX_CONF_DIR" ]; then
+    source "$HOME/.nix-profile/share/zsh/site-contrib/powerline.zsh"
+    source "$(autojump-share)/autojump.zsh"
+else
+    source powerline.zsh
+fi
+
 
 #RPROMPT='[%D{%L:%M:%S %p}]'
 

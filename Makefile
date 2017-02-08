@@ -5,24 +5,30 @@ XDG_CACHE_HOME ?= $(HOME)/.cache
 XDG_DATA_HOME ?= $(HOME)/.local/share
 MAILDIR ?= $(HOME)/Maildir
 
-.PHONY: config etc mail local bin
+.PHONY: config etc mail local bin haskell
 
 # http://stackoverflow.com/questions/448910/makefile-variable-assignment
 config:
-	stow -t $(XDG_CONFIG_HOME) config
+	stow -t "$(XDG_CONFIG_HOME)" config
 
 bin:
-	stow -t $(XDG_DATA_HOME)/../bin bin
+	mkdir -p "$(XDG_DATA_HOME)/../bin" 
+	stow -t "$(XDG_DATA_HOME)/../bin" bin
+
 local:
-	stow -t $(XDG_DATA_HOME) local
+	stow -t "$(XDG_DATA_HOME)" local
 	mkdir -p $(XDG_DATA_HOME)/fzf-history
 
 zsh:
+	# won't work on nix
 	chsh -s /bin/zsh ${LOGIN}
 
 pip:
 	wget https://bootstrap.pypa.io/get-pip.py /tmp/
 	python3.5 /tmp/get-pip.py --user
+
+haskell:
+	stow -t ${HOME}/.cabal haskell
 
 keyring:
 	echo "Setup keyrings"

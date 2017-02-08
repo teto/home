@@ -35,8 +35,6 @@ if empty(glob(s:plugscript))
 endif
 
 "}}}
-
-
 " Dealing with pdf {{{
 " Read-only pdf through pdftotext
 autocmd BufReadPost *.pdf silent %!pdftotext -nopgbrk -layout -q -eol unix "%" - | fmt -w78
@@ -44,7 +42,6 @@ autocmd BufReadPost *.pdf silent %!pdftotext -nopgbrk -layout -q -eol unix "%" -
 " convert all kinds of files (but pdf) to plain text
 autocmd BufReadPost *.doc,*.docx,*.rtf,*.odp,*.odt silent %!pandoc "%" -tplain -o /dev/stdout
 " }}}
-
 " Code to display highlight groups {{{
 " https://jordanelver.co.uk/blog/2015/05/27/working-with-vim-colorschemes/
 " Once you have the name of the highlight group, you can run:
@@ -57,8 +54,10 @@ function! SynStack()
   echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 endfunc
 " }}}
-
-
+" mouse {{{
+set mouse=a
+set mousemodel=popup
+" }}}
 let mapleader = " "
 
 " Appearance 1 {{{
@@ -98,6 +97,7 @@ set exrc
 " vim-plug plugin declarations {{{1
 call plug#begin(s:plugdir)
 Plug 'ehamberg/vim-cute-python' 
+Plug 'https://github.com/dbakker/vim-projectroot.git' " projectroot#guess()
 " Plug 'sunaku/vim-dasht' " get documentation
 " Plug 'reedes/vim-wordy' " pdt la these, pr trouver la jargon :Wordy
 Plug 'sk1418/QFGrep' " cool 
@@ -150,7 +150,8 @@ Plug 'arakashic/chromatica.nvim', { 'for': 'cpp' } " semantic color syntax
 Plug 'neovimhaskell/haskell-vim', {'for':'haskell'} " haskell install
 Plug 'enomsg/vim-haskellConcealPlus', {'for':'haskell'}     " unicode for haskell operators
 Plug 'eagletmt/ghcmod-vim', {'for':'haskell'}
-Plug 'eagletmt/neco-ghc', {'for':'haskell'}
+Plug 'eagletmt/neco-ghc', {'for': 'haskell'} " completion plugin for haskell
+Plug 'Shougo/vimproc.vim', {'do' : 'make'} " needed by neco-ghc
 " Plug 'Twinside/vim-hoogle' , {'for':'haskell'}
 "}}}
 
@@ -223,7 +224,8 @@ let g:lastplace_ignore = "gitcommit,svn"
 " }}}
 " Powerline does not work in neovim hence use vim-airline instead
 "if has('nvim')
-	Plug 'bling/vim-airline'
+  Plug 'vim-airline/vim-airline'
+  Plug 'vim-airline/vim-airline-themes' " creates problems if not here
 "else
 	"Plug 'Lokaltog/powerline' , {'rtp': 'powerline/bindings/vim/'}
 "endif
@@ -255,7 +257,9 @@ Plug 'machakann/vim-highlightedyank' " highlit
 
 "  fuzzers {{{2
 " Plug 'junegunn/fzf', { 'dir': $XDG_DATA_HOME . '/fzf', 'do': './install --completion --key-bindings --64' }
-Plug 'junegunn/fzf' ", { 'dir': $XDG_DATA_HOME . '/fzf', 'do': ':term ./install --no-update-rc --bin --64'}
+" let distribution (like nixos install fzf
+" this package only ocntains fzf#run, 
+Plug 'junegunn/fzf', " { 'dir': $XDG_DATA_HOME . '/fzf', 'do': ':term ./install --no-update-rc --bin --64'}
 
 " Many options available :
 " https://github.com/junegunn/fzf.vim
@@ -271,7 +275,7 @@ Plug 'Rykka/riv.vim', {'for': 'rst'}
 Plug 'Rykka/InstantRst', {'for': 'rst'} " rst live preview with :InstantRst, 
 "Plug 'junegunn/vim-easy-align'   " to align '=' on multiple lines for instance
 Plug 'dhruvasagar/vim-table-mode', {'for': 'txt'}
-Plug 'kshenoy/vim-signature' " display marks in gutter, love it
+" Plug 'kshenoy/vim-signature' " display marks in gutter, love it
 
 " forked it to solve a bug: git@github.com:teto/QuickFixCurrentNumber.git
 " Plug '~/QuickFixCurrentNumber' " use :Cnr :Cgo instead of :cnext etc...
@@ -750,6 +754,30 @@ let g:haskell_enable_typeroles = 1        " to enable highlighting of type roles
 let g:haskell_enable_static_pointers = 1  " to enable highlighting of `static`
 let g:haskell_backpack = 1                " to enable highlighting of backpack keywords
 "}}}
+" neco-ghc (haskell completion) {{{
+" slower bu t shows type
+let g:necoghc_enable_detailed_browse = 1
+let g:necoghc_debug=0
+"}}}
+" gutentags + gutenhasktags {{{
+let g:gutentags_project_info = [ {'type': 'python', 'file': 'setup.py'},
+                               \ {'type': 'ruby', 'file': 'Gemfile'},
+                               \ {'type': 'haskell', 'file': 'Setup.hs'} ]
+let g:gutentags_ctags_executable_haskell = 'gutenhasktags'
+" }}}
+" start haskell host if required  {{{
+" if has('nvim') 
+"   function! s:RequireHaskellHost(name)
+"     " return rpcstart("/home/saep/.bin/nvim-hs-devel.sh", ['-l','/tmp/nvim-log.txt','-v','DEBUG',a:name.name])
+"     return rpcstart("nvim-hs", ['-l', $HOME.'/nvim-haskell.log','-v','DEBUG',a:name.name])
+"   endfunction
+
+"   call remote#host#Register('haskell', "*.l\?hs", function('s:RequireHaskellHost'))
+"   let hc=remote#host#Require('haskell')
+" " echo rpcrequest(hc, "PingNvimhs") should print Pong
+"   call rpcrequest(hc, 'PingNvimhs') 
+" endif
+"}}}
 
 " Chromatica (needs libclang > 3.9) {{{
 " can compile_commands.json or a .clang file
@@ -822,27 +850,25 @@ let g:fzf_history_dir = $XDG_DATA_HOME.'/fzf-history'
 
 imap <c-x><c-f> <plug>(fzf-complete-path)
 
+" }}}
+" terminal related {{{
 " automatic close when htting escape
 autocmd! FileType fzf tnoremap <buffer> <Esc> <c-g>
 " }}}
-
 " Powerline config {{{
 
 let g:Powerline_symbols = "fancy" " to use unicode symbols
 " }}}
-
 " Csv config {{{
 " you can use :CsvVertFold to hide commands
 " There is the analyze command as well
     let g:csv_autocmd_arrange = 1
     let g:csv_autocmd_arrange_size = 1024*1024
 " }}}
-
 " unicode.vim {{{
 " overrides ga
 nmap ga <Plug>(UnicodeGA)
 " }}}
-
 " Search parameters {{{
 set hlsearch " highlight search terms
 set incsearch " show search matches as you type
@@ -855,7 +881,6 @@ if has("nvim-0.2.0")
 endif
 
 " }}}
-
 " YouCompleteMe config {{{
 let g:ycm_global_ycm_extra_conf = $XDG_CONFIG_HOME."/nvim/ycm_extra_conf.py"
 let g:ycm_confirm_extra_conf = 0
@@ -897,7 +922,6 @@ nnoremap <leader>kd :YcmCompleter GoTo<CR>
 nnoremap <leader>kl :YcmCompleter GoTo <CR>
 nnoremap <leader>kh :YcmCompleter GoToInclude<CR>
 " }}}
-
 " Deoplete {{{
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_ignore_case = 1
@@ -929,13 +953,11 @@ let deoplete#sources#jedi#enable_cache=1
 let deoplete#sources#jedi#show_docstring=0
 " }}}
 " }}}
-
 " Jedi (python) completion {{{
 let g:jedi#auto_vim_configuration = 1 " to prevent python's help popup
 let g:jedi#completions_enabled = 0 " disable when deoplete in use
 "autocmd BufWinEnter '__doc__' setlocal bufhidden=delete
 " }}}
-
 " Airline {{{
 let g:airline_powerline_fonts = 0
 let g:airline_left_sep = ''
@@ -946,7 +968,7 @@ let g:airline_section = '|'
 let g:airline#extensions#tabline#enabled = 1 
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
-"let g:airline_theme = 'solarized'
+let g:airline_theme = 'solarized'
 " let g:airline_section_b = ""
 " section y is fileencoding , useless in neovim
 let g:airline_section_y = ""  
@@ -998,7 +1020,6 @@ nmap <leader>_ <Plug>AirlineSelectTab8
 nmap <leader>ç <Plug>AirlineSelectTab9
 
 "}}}
-
 " limelight {{{
 " Color name (:help cterm-colors) or ANSI code
 " let g:limelight_conceal_ctermfg = 'gray'
@@ -1701,7 +1722,6 @@ menu Tabs.S8 :set ts=8 sts=8 sw=8<CR>
 menu Tabs.SwitchExpandTabs :set expandtab!
 "}}}
 " }}}
-
 " nvim specific configuration {{{
 
 if has("nvim")
@@ -1714,7 +1734,6 @@ if has("nvim")
   let $NVIM_TUI_ENABLE_CURSOR_SHAPE=2
 endif
 " }}}
-
 " colorscheme stuff {{{
 " as we set termguicolors, 
 " highlight Comment gui="NONE,italic"; e
@@ -1738,13 +1757,11 @@ autocmd ColorScheme *
 colorscheme molokai
 
 " }}}
-
 " vim-halo {{{
 " disabled cause creating pb for now
 " nnoremap <silent> <Esc> :<C-U>call halo#run()<CR>
 " nnoremap <silent> <C-c> :<C-U>call halo#run()<CR><C-c>
 " }}}
-
 " rtags {{{
 " <leader>rw montre les différents projets ( <=> $rc -w)
 let g:rtagsUseLocationList=1
@@ -1752,7 +1769,6 @@ let g:rtagsUseDefaultMappings = 1
 let g:rtagsLog="rtags.log"
 " let g:rtagsExcludeSysHeaders
 " }}}
-
 " http://vim.wikia.com/wiki/Show_tags_in_a_separate_preview_window {{{
 " au! CursorHold *.[ch] nested call PreviewWord()
 " CursorHold depends on updatetime
@@ -1868,10 +1884,24 @@ if has("folding_enhanced")
 "   (char_u *)">", // FM_What
 "   (char_u *)"▸", // /* ＋  or ▾  ▸ */
 " });
-  set fillchars+=foldopen:-,foldsep:│,foldmisc:>,foldclose:▸
+" foldmisc:>,f
+  set fillchars+=foldopen:▾,foldsep:│,foldclose:▸
   " ,foldsep:|,foldmisc
 endif
 
+" call 
+function! FzfFlipBool()
+  " let l:dict = {}
+
+  " 'source':
+  let l:dict = {
+    \ 'sink': 'echo'
+    \ }
+  call fzf#run(l:dict)
+endfunc
+command! FlipBool call FzfFlipBool()
+
+"
 " to open tag in a split
 map <A-]> :vsp<CR>:exec("tag ".expand("<cword>"))<CR>
 

@@ -1,2 +1,8 @@
 #!/bin/sh
-sudo gdb -p $(ps --ppid $(xprop _NET_WM_PID) -C nvim --sort=start_time -o pid |tail -n1)
+echo "Select X window running neovim..."
+
+ppid=$(xprop _NET_WM_PID|cut -d '=' -f2)
+echo "X window has pid=$ppid"
+nvim_pid="$(ps --ppid $ppid -C nvim --sort=start_time -o pid |tail -n1)"
+echo "nvim PID=$nvim_pid"
+sudo gdb -p "$nvim_pid"
