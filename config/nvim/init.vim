@@ -139,7 +139,7 @@ Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
 Plug 'zchee/deoplete-jedi', { 'for': 'python'}
 " }}}
 Plug 'beloglazov/vim-online-thesaurus' " thesaurus => dico dde synonymes
-Plug 'mattboehm/vim-unstack'  " to see a
+" Plug 'mattboehm/vim-unstack'  " to see a
 Plug 'KabbAmine/vCoolor.vim', { 'on': 'VCooler' } " RGBA color picker
 Plug 'arakashic/chromatica.nvim', { 'for': 'cpp' } " semantic color syntax
 
@@ -275,13 +275,15 @@ Plug 'Rykka/riv.vim', {'for': 'rst'}
 Plug 'Rykka/InstantRst', {'for': 'rst'} " rst live preview with :InstantRst, 
 "Plug 'junegunn/vim-easy-align'   " to align '=' on multiple lines for instance
 Plug 'dhruvasagar/vim-table-mode', {'for': 'txt'}
-" Plug 'kshenoy/vim-signature' " display marks in gutter, love it
+
+Plug 'mhinz/vim-signify' " Indicate changed lines within a file using a VCS.
+Plug 'kshenoy/vim-signature' " display marks in gutter, love it
 
 " forked it to solve a bug: git@github.com:teto/QuickFixCurrentNumber.git
 " Plug '~/QuickFixCurrentNumber' " use :Cnr :Cgo instead of :cnext etc...
 " Plug 'Coacher/QuickFixCurrentNumber' " use :Cnr :Cgo instead of :cnext etc...
 " =======
-" Plug 'teto/QuickFixCurrentNumber' " use :Cnr :Cgo instead of :cnext etc...
+Plug 'teto/QuickFixCurrentNumber' " use :Cnr :Cgo instead of :cnext etc...
 Plug 'git@github.com:vim-scripts/ingo-library.git' " DEPENDANCY of QuickFixCurrentNumber
 "Plug 'tomtom/quickfixsigns_vim'
 
@@ -299,14 +301,11 @@ Plug 'vim-scripts/Modeliner' " <leader>ml to setup buffer modeline
 Plug 'mhinz/vim-grepper', { 'on': 'Grepper'}
 " Plug 'ddrscott/vim-side-search'  " tOdo
 "Plug 'teto/neovim-auto-autoread' " works only in neovim, runs external checker
-Plug 'benekastah/neomake' " async build for neovim
-" Plug '~/neomake' " , {'branch': 'graphviz'}  async build for neovim
-" Plug '~/neomake' " , {'branch': 'pr/361'}  async build for neovim
+Plug 'neomake/neomake' " async build for neovim
 " Plug 'rhysd/github-complete.vim' " provides github user/repo autocompletion after @ and #
 " Plug 'rhysd/vim-clang-format' " C/CPP/C++ development
 " VCS related {{{
-Plug 'rhysd/committia.vim' " todo lazy loading, améliore les commits
-Plug 'mhinz/vim-signify' " Indicate changed lines within a file using a VCS.
+" Plug 'rhysd/committia.vim' " ne marche pas en rebase ?
 " }}}
 " Plug 'teddywing/auditory.vim' " play sounds as you type
 
@@ -364,6 +363,8 @@ let g:far#source='vimgrep'
 
 let g:far#collapse_result=1
 " }}}
+
+Plug 'tweekmonster/nvimdev.nvim' " thanks tweekmonster !
 call plug#end()
 " }}}
 
@@ -571,9 +572,9 @@ nmap <silent> <D-Right> :wincmd l<CR>
 "nmap <silent> OD :wincmd h<CR>
 
 " window nmap <leader>sw<left>  :topleft  vnew<CR>
-nmap <leader>sw<right> :botright vnew<CR>
-nmap <leader>sw<up>    :topleft  new<CR>
-nmap <leader>sw<down>  :botright new<CR>
+" nmap <leader>sw<right> :botright vnew<CR>
+" nmap <leader>sw<up>    :topleft  new<CR>
+" nmap <leader>sw<down>  :botright new<CR>
 
 " nnoremap <silent> + :exe "resize +3"
 " nnoremap <silent> - :exe "resize -3"
@@ -767,15 +768,15 @@ let g:gutentags_ctags_executable_haskell = 'gutenhasktags'
 " }}}
 " start haskell host if required  {{{
 if has('nvim')
-  function! s:RequireHaskellHost(name)
-    " return rpcstart("/home/saep/.bin/nvim-hs-devel.sh", ['-l','/tmp/nvim-log.txt','-v','DEBUG',a:name.name])
-    return rpcstart("nvim-hs", ['-l','/home/teto/nvim-haskell.log','-v','DEBUG',a:name.name])
-  endfunction
+  " function! s:RequireHaskellHost(name)
+  "   " return rpcstart("/home/saep/.bin/nvim-hs-devel.sh", ['-l','/tmp/nvim-log.txt','-v','DEBUG',a:name.name])
+  "   return rpcstart("nvim-hs", ['-l','/home/teto/nvim-haskell.log','-v','DEBUG',a:name.name])
+  " endfunction
 
-  call remote#host#Register('haskell', "*.l\?hs", function('s:RequireHaskellHost'))
-  let hc=remote#host#Require('haskell')
-" echo rpcrequest(hc, "PingNvimhs") should print Pong
-  call rpcrequest(hc, 'PingNvimhs') 
+  " call remote#host#Register('haskell', "*.l\?hs", function('s:RequireHaskellHost'))
+  " let hc=remote#host#Require('haskell')
+" " echo rpcrequest(hc, "PingNvimhs") should print Pong
+  " call rpcrequest(hc, 'PingNvimhs') 
 endif
 "}}}
 
@@ -1064,15 +1065,19 @@ nmap <leader>c <Plug>(InYoFace_Toggle)<CR>
 
 " set completeopt=menu:
 
-" vim-sayonara {{{2
+" python config {{{
+" let g:python3_host_prog = '/path/to/python3'
+let g:python3_host_skip_check = 1
+"}}}
+" vim-sayonara {{{
 nnoremap <silent><leader>q  :Sayonara<cr>
 nnoremap <silent><leader>Q  :Sayonara!<cr>
 
 let g:sayonara_confirm_quit = 0
 " }}}
-
 " Neomake config {{{
 let g:neomake_verbose = 0
+
 
 " pyflakes can't be disabled on a per error basis
 " also it considers everything as error => disable
@@ -1105,7 +1110,10 @@ let g:neomake_warning_sign = {'text': '⚠', 'texthl': 'NeomakeWarningSign'}
 let g:neomake_message_sign = {'text': '➤', 'texthl': 'NeomakeMessageSign'}
 let g:neomake_info_sign = {'text': 'ℹ', 'texthl': 'NeomakeInfoSign'}
 
-let g:neomake_highlight_lines = 1
+" don't display lines that don't match errorformat
+let g:neomake_remove_invalid_entries=1
+"
+" let g:neomake_highlight_lines = 1
 
 " let g:neomake_ft_test_maker_buffer_output = 0
 
@@ -1461,14 +1469,19 @@ let g:signify_sign_show_text = 0
 " let g:signify_sign_change            = "\u00a0" 
 " let g:signify_sign_changedelete      = g:signify_sign_change
 " let g:signify_sign_show_count|
+let g:signify_vcs_cmds = {
+      \'git': 'git diff --no-color --no-ext-diff -U0 master -- %f'
+  \}
 
 let g:signify_cursorhold_insert     = 0
 let g:signify_cursorhold_normal     = 0
-let g:signify_update_on_bufenter    = 0
+let g:signify_update_on_bufenter    = 1
 let g:signify_update_on_focusgained = 1
 " hunk jumping
-nmap <leader>gj <plug>(signify-next-hunk)
-nmap <leader>gk <plug>(signify-prev-hunk)
+" nmap <leader>wj :call sy#jump#next_hunk(v:count1)<CR>
+nmap <leader>wj <plug>(signify-next-hunk)
+" nnoremap <leader>sj :echomsg 'next-hunk'<CR>
+nnoremap <leader>sk <plug>(signify-prev-hunk)
 
 " }}}
 
@@ -1489,7 +1502,7 @@ endfunction
 nnoremap <LocalLeader>sv :source $MYVIMRC<CR> " reload vimrc
 " }}}
 
-" {{{ vim-scripts/QuickFixCurrentNumber
+" vim-scripts/QuickFixCurrentNumber {{{ 
 "*:QuickhlManualEnable*		Enable.
 " }}}
 
@@ -1509,7 +1522,7 @@ autocmd BufWritePost ~/.Xdefaults call system('xrdb ~/.Xdefaults')
 
 " vim-signature {{{
 " :SignatureListMarkers         : List all markers
-let g:SignatureMarkTextHLDynamic=1
+let g:SignatureMarkTextHLDynamic=0 
 let g:SignatureEnabledAtStartup=1
 let g:SignatureWrapJumps=1
 let g:SignatureDeleteConfirmation=1
@@ -1564,9 +1577,46 @@ nnoremap Y y$
 " nnoremap <F2> :lnext<CR>
 " search for  item in quickfix list (global/unique)
 " TODO should be able to look for the next one from where I stand !
-nmap <F3> <Plug>(QuickFixCurrentNumberLPrev)
+" tire du plugin QuickFixCurrentNumber
+" au QuickfixCmdPost nmap <F3> <Plug>(QuickFixCurrentNumberLPrev) | nmap <f4> <Plug>(QuickFixCurrentNumberLNext)
 
-nnoremap <F5> :Neomake<CR>
+" http://vim.1045645.n5.nabble.com/detect-QuickFix-window-list-or-LocationList-td4952180.html
+function! GoToNextError()
+" qf ? getqflist()
+  let list = getloclist(0)
+  let ret = len(list)
+  if len
+    " <Plug>(QuickFixCurrentNumberLNext)
+    echo 'GoToNextQF'
+  else
+
+    echo 'GoToNextLL'
+    " <Plug>(QuickFixCurrentNumberLNext)
+  endif
+endfunc
+
+" <Plug>(QuickFixCurrentNumberLPrev)
+nmap <F3> call GoToPrevError() 
+nmap <F4> call GoToNextError() 
+
+" nmap <S-F3> <Plug>(QuickFixCurrentNumberQPrev)
+" nmap <S-f4> <Plug>(QuickFixCurrentNumberQNext)
+
+
+" Neomake status.
+" let neomake_status_str = ''
+" if exists('*neomake#GetJobs')
+"   if getbufvar(bufnr, 'neomake_disabled', 0)
+"     let neomake_status_str .= ' b- '
+"   elseif get(g:, 'neomake_disabled', 0)
+"     let neomake_status_str .= ' g- '
+"   endif
+"   let neomake_status_str .= '%('.StatuslineNeomakeStatus(bufnr, '…', '✓')
+" 	\ . (a:active ? '%#StatColorHi2#' : '%*')
+" 	\ . '%)'
+" endif
+
+nnoremap <F5> :Neomake!<CR>
 nnoremap <F6> :AutoSaveToggle<CR>
 "nnoremap <F6> :AutoSaveOnLostFocus<CR>
 " goto previous buffer
@@ -1631,11 +1681,10 @@ let g:QFG_hi_error = 'ctermbg=167 ctermfg=16 guibg=#d75f5f guifg=black'
 " QuickFixCurrentNumber {{{
 let g:no_QuickFixCurrentNumber_maps = 1
 " }}}
-
-
 " location list / quickfix config {{{
 " location list can be associated with only one window.  
 " The location list is independent of the quickfix list.
+" }}}
 
 " ListToggle config {{{
 let g:lt_location_list_toggle_map = '<F12>' " '<leader>l'
@@ -1710,7 +1759,7 @@ set matchpairs+=<:>  " Characters for which % should work
 " use emenu ("execute menu") to launch the command
 " disable all menus
 unmenu * 
-map <Leader>s :setlocal spell spelllang=en_us<CR>
+" map <Leader>s :setlocal spell spelllang=en_us<CR>
 " TODO use histadd
 menu Spell.EN_US :setlocal spell spelllang=en_us \| call histadd('cmd', 'setlocal spell spelllang=en_us')<CR>
 menu Spell.FR :setlocal spell spelllang=fr_fr<CR>
@@ -1774,6 +1823,7 @@ colorscheme molokai
 let g:rtagsUseLocationList=1
 let g:rtagsUseDefaultMappings = 1
 let g:rtagsLog="rtags.log"
+let g:rtagsAutoLaunchRdm=1
 " let g:rtagsExcludeSysHeaders
 " }}}
 " http://vim.wikia.com/wiki/Show_tags_in_a_separate_preview_window {{{
@@ -1816,7 +1866,14 @@ func! PreviewWord()
   endif
 endfun
 "}}}
-
+" nvimdev {{{
+" call nvimdev#init("path/to/neovim")
+let g:nvimdev_auto_init=1
+let g:nvimdev_auto_cd=1
+" let g:nvimdev_auto_ctags=1
+" let g:nvimdev_auto_lint=1
+let g:nvimdev_build_readonly=1
+"}}}
 
 " " default value
 " " hor => horizontal
@@ -1874,26 +1931,14 @@ nnoremap <kPageDown> :lnext
 nnoremap <kPageRight> :lnext
 nnoremap <kPageRight> :lnext
 nnoremap <k2> :echom "hello world"
-
 nnoremap gO i<CR>
 " overwrite vimtex status mapping
 " let @g="dawi\\gls{p}"
 " nnoremap <Leader>lg @g
-nmap <f4> <Plug>(QuickFixCurrentNumberLNext)
 
-if has("folding_enhanced")
-  " echo 'enhanced folds'
 
-" EXTERN char_u *fold_chars[] INIT(= {
-"   (char_u *)"▾", /* - */
-"   /* (char_u *)"|", // ❘ │ */
-"   (char_u *)"│", // 1 characeter 3 bytes for U2052 ❘ │
-"   (char_u *)">", // FM_What
-"   (char_u *)"▸", // /* ＋  or ▾  ▸ */
-" });
-" foldmisc:>,f
-  set fillchars+=foldopen:▾,foldsep:│,foldclose:▸
-  " ,foldsep:|,foldmisc
+if has("folding_fillchars")
+  set fillchars+=foldopen:▾,foldsep:│,foldclose:▸,foldend:^
 endif
 
 " call 
