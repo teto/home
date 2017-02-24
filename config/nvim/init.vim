@@ -1076,7 +1076,7 @@ nnoremap <silent><leader>Q  :Sayonara!<cr>
 let g:sayonara_confirm_quit = 0
 " }}}
 " Neomake config {{{
-let g:neomake_verbose = 0
+let g:neomake_verbose = 2
 
 
 " pyflakes can't be disabled on a per error basis
@@ -1085,7 +1085,7 @@ let g:neomake_verbose = 0
 let g:neomake_python_enabled_makers = ['mypy', 'flake8']
 let g:neomake_logfile = $HOME.'/neomake.log'
 let g:neomake_c_gcc_args = ['-fsyntax-only', '-Wall']
-let g:neomake_open_list = 0 " 0 to disable/2 preserves cursor position
+let g:neomake_open_list = 2 " 0 to disable/2 preserves cursor position
 
 let g:neomake_airline = 1
 let g:neomake_echo_current_error = 1
@@ -1105,9 +1105,11 @@ let g:neomake_tex_enabled_makers = []
 
 " removed chktex because of silly errors 
 " let g:neomake_tex_enabled_makers = ['chktex']
-let g:neomake_error_sign = {'text': '✖', 'texthl': 'NeomakeErrorSign'}
-let g:neomake_warning_sign = {'text': '⚠', 'texthl': 'NeomakeWarningSign'}
-let g:neomake_message_sign = {'text': '➤', 'texthl': 'NeomakeMessageSign'}
+" let g:neomake_error_sign = {'text': '✖', 'texthl': 'NeomakeErrorSign'}
+let g:neomake_error_sign = {'text': 'X', 'texthl': 'NeomakeErrorSign'}
+" let g:neomake_warning_sign = {'text': '⚠', 'texthl': 'NeomakeWarningSign'}
+let g:neomake_warning_sign = {'text': '!', 'texthl': 'NeomakeWarningSign'}
+" let g:neomake_message_sign = {'text': '➤', 'texthl': 'NeomakeMessageSign'}
 let g:neomake_info_sign = {'text': 'ℹ', 'texthl': 'NeomakeInfoSign'}
 
 " don't display lines that don't match errorformat
@@ -1496,16 +1498,13 @@ function! AutoSaveOnLostFocus()
   exe ":au FocusLost ".expand("%")." :wa | :AirlineRefresh | :echom 'Focus lost'"
 endfunction
 " }}}
-
 " Customized commands depending on buffer type {{{
 
 nnoremap <LocalLeader>sv :source $MYVIMRC<CR> " reload vimrc
 " }}}
-
 " vim-scripts/QuickFixCurrentNumber {{{ 
 "*:QuickhlManualEnable*		Enable.
 " }}}
-
 " Tips from vim-galore {{{
 
 " to alternate between header and source file
@@ -1519,7 +1518,6 @@ autocmd BufLeave *.h       mark H
 " todo do the same for .Xresources ?
 autocmd BufWritePost ~/.Xdefaults call system('xrdb ~/.Xdefaults')
 " }}}
-
 " vim-signature {{{
 " :SignatureListMarkers         : List all markers
 let g:SignatureMarkTextHLDynamic=0 
@@ -1528,19 +1526,16 @@ let g:SignatureWrapJumps=1
 let g:SignatureDeleteConfirmation=1
 let g:SignaturePeriodicRefresh=1
 " }}}
- 
 " Dirvish {{{
 let g:loaded_netrwPlugin = 1 " ???
 command! -nargs=? -complete=dir Vexplore leftabove vsplit | silent Dirvish <args>
 command! -nargs=? -complete=dir Sexplore belowright split | silent Dirvish <args>
 nnoremap gx :call netrw#BrowseX(expand((exists("g:netrw_gx")? g:netrw_gx : '<cfile>')),netrw#CheckIfRemote())<cr>
 " }}}
-
 " riv restdown config {{{
 let g:riv_disable_folding=1
 let g:riv_disable_indent=0
 " }}}
-
 " easymotion {{{
 let g:EasyMotion_do_shade = 1
 let g:EasyMotion_do_mapping = 1
@@ -1550,13 +1545,73 @@ let g:EasyMotion_disable_two_key_combo = 0
 
 map , <Plug>(easymotion-prefix)
 " }}}
-
 " quickhl (similar to interesting words) {{{
 " nmap <Space>m <Plug>(quickhl-manual-this)
 " xmap <Space>m <Plug>(quickhl-manual-this)
 " nmap <Space>M <Plug>(quickhl-manual-reset)
 " xmap <Space>M <Plug>(quickhl-manual-reset)
 " }}}
+" vim-halo {{{
+" disabled cause creating pb for now
+" nnoremap <silent> <Esc> :<C-U>call halo#run()<CR>
+" nnoremap <silent> <C-c> :<C-U>call halo#run()<CR><C-c>
+" }}}
+" rtags {{{
+" <leader>rw montre les différents projets ( <=> $rc -w)
+let g:rtagsUseLocationList=1
+let g:rtagsUseDefaultMappings = 1
+let g:rtagsLog="rtags.log"
+let g:rtagsAutoLaunchRdm=1
+" let g:rtagsExcludeSysHeaders
+" }}}
+" http://vim.wikia.com/wiki/Show_tags_in_a_separate_preview_window {{{
+" au! CursorHold *.[ch] nested call PreviewWord()
+" CursorHold depends on updatetime
+func! PreviewWord()
+  if &previewwindow			" don't do this in the preview window
+    return
+  endif
+  let w = expand("<cword>")		" get the word under cursor
+  if w =~ '\a'			" if the word contains a letter
+
+    " Delete any existing highlight before showing another tag
+    silent! wincmd P			" jump to preview window
+    if &previewwindow			" if we really get there...
+      match none			" delete existing highlight
+      wincmd p			" back to old window
+    endif
+
+    " Try displaying a matching tag for the word under the cursor
+    try
+      exe "ptag " . w
+    catch
+      return
+    endtry
+
+    silent! wincmd P			" jump to preview window
+    if &previewwindow		" if we really get there...
+      if has("folding")
+	silent! .foldopen		" don't want a closed fold
+      endif
+      call search("$", "b")		" to end of previous line
+      let w = substitute(w, '\\', '\\\\', "")
+      call search('\<\V' . w . '\>')	" position cursor on match
+      " Add a match highlight to the word at this position
+      hi previewWord term=bold ctermbg=green guibg=green
+      exe 'match previewWord "\%' . line(".") . 'l\%' . col(".") . 'c\k*"'
+      wincmd p			" back to old window
+    endif
+  endif
+endfun
+"}}}
+" nvimdev {{{
+" call nvimdev#init("path/to/neovim")
+let g:nvimdev_auto_init=1
+let g:nvimdev_auto_cd=1
+" let g:nvimdev_auto_ctags=1
+let g:nvimdev_auto_lint=0
+let g:nvimdev_build_readonly=1
+"}}}
 
 set hidden " you can open a new buffer even if current is unsaved (error E37)
 
@@ -1813,67 +1868,6 @@ autocmd ColorScheme *
 colorscheme molokai
 
 " }}}
-" vim-halo {{{
-" disabled cause creating pb for now
-" nnoremap <silent> <Esc> :<C-U>call halo#run()<CR>
-" nnoremap <silent> <C-c> :<C-U>call halo#run()<CR><C-c>
-" }}}
-" rtags {{{
-" <leader>rw montre les différents projets ( <=> $rc -w)
-let g:rtagsUseLocationList=1
-let g:rtagsUseDefaultMappings = 1
-let g:rtagsLog="rtags.log"
-let g:rtagsAutoLaunchRdm=1
-" let g:rtagsExcludeSysHeaders
-" }}}
-" http://vim.wikia.com/wiki/Show_tags_in_a_separate_preview_window {{{
-" au! CursorHold *.[ch] nested call PreviewWord()
-" CursorHold depends on updatetime
-func! PreviewWord()
-  if &previewwindow			" don't do this in the preview window
-    return
-  endif
-  let w = expand("<cword>")		" get the word under cursor
-  if w =~ '\a'			" if the word contains a letter
-
-    " Delete any existing highlight before showing another tag
-    silent! wincmd P			" jump to preview window
-    if &previewwindow			" if we really get there...
-      match none			" delete existing highlight
-      wincmd p			" back to old window
-    endif
-
-    " Try displaying a matching tag for the word under the cursor
-    try
-      exe "ptag " . w
-    catch
-      return
-    endtry
-
-    silent! wincmd P			" jump to preview window
-    if &previewwindow		" if we really get there...
-      if has("folding")
-	silent! .foldopen		" don't want a closed fold
-      endif
-      call search("$", "b")		" to end of previous line
-      let w = substitute(w, '\\', '\\\\', "")
-      call search('\<\V' . w . '\>')	" position cursor on match
-      " Add a match highlight to the word at this position
-      hi previewWord term=bold ctermbg=green guibg=green
-      exe 'match previewWord "\%' . line(".") . 'l\%' . col(".") . 'c\k*"'
-      wincmd p			" back to old window
-    endif
-  endif
-endfun
-"}}}
-" nvimdev {{{
-" call nvimdev#init("path/to/neovim")
-let g:nvimdev_auto_init=1
-let g:nvimdev_auto_cd=1
-" let g:nvimdev_auto_ctags=1
-" let g:nvimdev_auto_lint=1
-let g:nvimdev_build_readonly=1
-"}}}
 
 " " default value
 " " hor => horizontal
@@ -1960,4 +1954,4 @@ map <A-]> :vsp<CR>:exec("tag ".expand("<cword>"))<CR>
 highlight SignifySignChange cterm=bold ctermbg=237  ctermfg=227 guibg=#F08A1F
 " QuickFixLine
 " NonText
-runtime init.generated.vim
+" runtime init.generated.vim

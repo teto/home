@@ -60,3 +60,6 @@ alternatives:
 	 sudo update-alternatives --install $(which x-www-browser) x-www-browser $(which qutebrowser) 0 
 xdg:
 	# Example: xdg-mime default qutebrowser.desktop text/html
+
+nautilus:
+	gsettings set org.gnome.desktop.background show-desktop-icons false

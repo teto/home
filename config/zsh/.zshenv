@@ -32,14 +32,9 @@ export JUPYTER_CONFIG_DIR=${XDG_CONFIG_HOME:-$HOME/.config}/jupyter
 #}}}
 
 # PYTHONPATH {{{
-
-# PYTHONPATH="$PYTHONPATH:$HOME/i3pystatus"
-# pYTHONPATH="$PYTHONPATH:$HOME/powerline"
-PYTHONPATH="$PYTHONPATH:$HOME/i3gen"
-# PYTHONPATH="$PYTHONPATH:$HOME/analyzer"
-#PYTHONPATH="$PYTHONPATH:$HOME/python-keyring-lib"
-PYTHONPATH="$PYTHONPATH:$HOME/i3ipc-python"
-export PYTHONPATH
+# no need to export, install in develop mode
+# PYTHONPATH="$PYTHONPATH:$HOME/i3ipc-python"
+# export PYTHONPATH
 
 # lldb python plugin is badly installed/setup
 # location=$(lldb -P)

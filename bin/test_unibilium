@@ -1,0 +1,4 @@
+#!/bin/sh
+# pangoterm
+# exec pangoterm -- bash -c "exec 2>&3; exec \$@" bash "$@" 3>&2
+exec termite -e 'bash -c "exec 2>&3; exec \$@" bash "$@"' 3>&2

@@ -1,0 +1,9 @@
+#!/bin/sh
+if [ $# -lt 1 ]; then
+	echo "Use $0 <character> "
+	exit 0
+fi
+
+CHARACTER="$1"
+FC_DEBUG=4 pango-view -t "'$CHARACTER'" 2>&1 | \
+    grep -o 'family: "[^"]\+' | cut -c 10- | tail -n 1
