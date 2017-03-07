@@ -1,4 +1,8 @@
 #!/bin/sh
 # pangoterm
-# exec pangoterm -- bash -c "exec 2>&3; exec \$@" bash "$@" 3>&2
+# works but does not support cursor color
+exec pangoterm -- bash -c "exec 2>&3; exec \$@" bash "$@" 3>&2
 exec termite -e 'bash -c "exec 2>&3; exec \$@" bash "$@"' 3>&2
+
+
+bash exec termite -e 'bash -c "exec 2>&3;build/bin/nvim toto 2>&3' 3>&2

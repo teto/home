@@ -3,15 +3,15 @@
 " :scriptnames to list loaded scripts
 " and prefix you command with 'verbose' is a very good way to get info
 " like ':verbose map J' to know where it was loaded last
-" map <C-D> <C-]>
-" map <C-D> :tag<CR>
+" map <C-D> <C-]>"{{{"{{{"{{{
+" map <C-D> :tag<CR>"}}}
 map <D-b> :echom "hello papy"
 
 "$NVIM_PYTHON_LOG_FILE
-" to test startup time
+" to test startup time"}}}
 " nvim --startuptime startup.log
 " nvim -u NONE --startuptime startup.log
-
+"}}}
 " to see the difference highlights, 
 " runtime syntax/hitest.vim
 "
@@ -103,7 +103,9 @@ Plug 'https://github.com/dbakker/vim-projectroot.git' " projectroot#guess()
 Plug 'git@github.com:sk1418/QFGrep.git' " cool 
 Plug 'git@github.com:pseewald/vim-anyfold.git' " speed up folds processing
 " Plug 'mtth/scratch.vim' " , {'on': 'Scratch'} mapped to ?
-" Plug 'git@github.com:tjdevries/vim-inyoface.git' "InYoFace_toggle to display only comments 
+" Plug 'tjdevries/vim-inyoface.git' "InYoFace_toggle to display only comments 
+Plug 'tjdevries/nvim-langserver-shim' " for LSP
+Plug 'autozimu/LanguageClient-neovim' " for LSP
 Plug 'powerman/vim-plugin-AnsiEsc' " { to hl ESC codes
 " Plug 'git@github.com:junegunn/gv.vim.git' " git commit viewer :Gv
 " Plug 'git@github.com:rhysd/clever-f.vim.git' " use f to repeat search instead of ;
@@ -379,7 +381,7 @@ autocmd FileType vim setlocal keywordprg=:help
 
 " start scrolling before reaching end of screen in order to keep more context
 " set it to a big value 
-set scrolloff=3
+" set scrolloff=3
 
 
 
@@ -397,7 +399,6 @@ set shiftround " round indent to multiple of 'shiftwidth' (for << and >>)
 set softtabstop=0 " inserts a mix of <Tab> and spaces, 0 disablres it
 "set expandtab " replace <Tab with spaces
 " }}}
-
 " Netrw configuration {{{
 " decide with which program to open files when typing 'gx'
 let g:netrw_browsex_viewer="xdg-open"
@@ -474,7 +475,6 @@ set noswapfile
 " set backupdir=~/.vim/tmp/backup// " backups
 " set directory=~/.vim/tmp/swap//   " swap files
 " }}}
-
 " Wildmenu completion {{{
 
 " display a menu when need to complete a command 
@@ -583,8 +583,6 @@ set splitbelow	" on horizontal splits
 set splitright   " on vertical split
 
 " }}}
-
-
 " {{{ Markdown composer
 " Run with :ComposerStart
 " let g:markdown_composer_open_browser        = "qutebrowser"
@@ -592,12 +590,10 @@ let g:markdown_composer_autostart           = 0
 " }}}
 "set winheight=30
 "set winminheight=5
-
 " instant restructured text {{{
 let g:instant_rst_browser = "qutebrowser"
 let g:instant_rst_additional_dirs=[ "/home/teto/mptcpweb" ]
 " }}}
-
 " Appearance {{{
 set background=dark " remember: does not change the background color !
 set fillchars=vert:│,fold:>,stl:\ ,stlnc:\ ,diff:-
@@ -626,14 +622,12 @@ endif
 filetype on                   " required! (still required in vim ?)
 set backspace=indent,eol,start
 "}}}
-
 " Gruvbox config {{{
 " contrast can be soft/medium/hard
 " there are other many options
 let g:gruvbox_contrast_dark="hard"
 let g:gruvbox_contrast_light="hard"
 " }}}
-
 " Diminactive config {{{
 let g:diminactive_buftype_blacklist = []
 let g:diminactive_debug = 0
@@ -641,7 +635,6 @@ let g:diminactive_use_colorcolumn = 1
 let g:diminactive_use_syntax = 0
 let g:diminactive_enable_focus = 0
 "}}}
-
 " ultisnips {{{
 " g:UltiSnipsSnippetsDir
 " <FocusLost><FocusLost>
@@ -779,14 +772,11 @@ if has('nvim')
   " call rpcrequest(hc, 'PingNvimhs') 
 endif
 "}}}
-
 " Chromatica (needs libclang > 3.9) {{{
 " can compile_commands.json or a .clang file
 " let g:chomatica#respnsive_mode=1
 " let g:chromatica#libclang_path='/usr/local/opt/llvm/lib'
 let g:chromatica#libclang_path="/usr/lib/llvm-3.8/lib/"
-
-
 let g:chromatica#enable_at_startup=0
 let g:chromatica#enable_debug=1
 let g:chromatica#global_args= [] " prepended for each file compile args
@@ -795,7 +785,6 @@ let g:chromatica#delay_ms = 80
 let g:chromatica#use_pch = 1
 let g:chromatica#highlight_feature_level=0
 " }}}
-
 " FZF config {{{
 let g:fzf_command_prefix = 'Fzf' " prefix commands :Files become :FzfFiles, etc.
 let g:fzf_nvim_statusline = 0 " disable statusline overwriting
@@ -1092,7 +1081,6 @@ let g:neomake_echo_current_error = 1
 let g:neomake_place_signs=1
 
 " filters out unrecognized 
-" let g:neomake_ft_maker_remove_invalid_entries = 0
 
 
 " C and CPP are handled by YCM and java usually by elim
@@ -1105,16 +1093,16 @@ let g:neomake_tex_enabled_makers = []
 
 " removed chktex because of silly errors 
 " let g:neomake_tex_enabled_makers = ['chktex']
-" let g:neomake_error_sign = {'text': '✖', 'texthl': 'NeomakeErrorSign'}
+" let g:neomake_error_sign = {'text': '✖ ', 'texthl': 'NeomakeErrorSign'}
 let g:neomake_error_sign = {'text': 'X', 'texthl': 'NeomakeErrorSign'}
-" let g:neomake_warning_sign = {'text': '⚠', 'texthl': 'NeomakeWarningSign'}
-let g:neomake_warning_sign = {'text': '!', 'texthl': 'NeomakeWarningSign'}
+let g:neomake_warning_sign = {'text': '⚠ ', 'texthl': 'NeomakeWarningSign'}
+" let g:neomake_warning_sign = {'text': '!', 'texthl': 'NeomakeWarningSign'}
 " let g:neomake_message_sign = {'text': '➤', 'texthl': 'NeomakeMessageSign'}
 let g:neomake_info_sign = {'text': 'ℹ', 'texthl': 'NeomakeInfoSign'}
 
 " don't display lines that don't match errorformat
 let g:neomake_remove_invalid_entries=1
-"
+"g:neomake_enabled_makers
 " let g:neomake_highlight_lines = 1
 
 " let g:neomake_ft_test_maker_buffer_output = 0
@@ -1123,6 +1111,8 @@ let g:neomake_remove_invalid_entries=1
 " Underlined/NeomakePerso/Error
 " let g:neomake_error_highlight = 'Error'
 let g:neomake_error_highlight = 'NeomakePerso'
+
+let g:neomake_c_enabled_makers = ['make']
     " let g:neomake_warning_highlight = 'Warning'
     " let g:neomake_message_highlight = 'Message'
     " let g:neomake_informational_highlight = 'Informational'
@@ -1131,15 +1121,16 @@ let g:neomake_error_highlight = 'NeomakePerso'
 " 
 " autocmd! VimLeave * let g:neomake_verbose = 0
 
-" function! OnNeomakeFinished()
-"   echo g:neomake_hook_context
-" endfunction
+function! OnNeomakeFinished()
+  echo 'exit value='.g:neomake_hook_context.jobinfo.exit_code
+  " TODO if notifier available use it
+  " if 
+endfunction
 
-" augroup my_neomake
-"     au!
-"     autocmd User NeomakeFinished call OnNeomakeFinished()
-" augroup END
-" map <F10> :let b:neomake_c_enabled_makers=['make']<CR>
+augroup my_neomake
+    au!
+    autocmd User NeomakeJobFinished call OnNeomakeFinished()
+augroup END
 " }}}
 
 " Startify config {{{
@@ -1172,18 +1163,15 @@ let g:startify_change_to_dir = 0
 let g:startify_relative_path = 0
 " let g:startify_skiplist=[]
 " }}}
-
 " {{{ Clever f
 "
 " }}}
-
 " {{{ Quickscope config
 "let g:qs_first_occurrence_highlight_color = 155
 "let g:qs_second_occurrence_highlight_color = 81
 "let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 "nmap <leader>q <plug>(QuickScopeToggle)
 " }}}
-
 " Rainbow parentheses {{{
 let g:rbpt_colorpairs = [
     \ ['red',         'RoyalBlue3'],
@@ -1212,7 +1200,6 @@ let g:bold_parentheses = 1      " Default on
 "au Syntax * RainbowParenthesesLoadSquare
 "au Syntax * RainbowParenthesesLoadBraces
 " }}}
-
 " Gitgutter config {{{
 
 let g:gitgutter_enabled = 0
@@ -1226,6 +1213,18 @@ nmap <silent> [h :GitGutterPrevHunk<CR>
 nnoremap <silent> <Leader>gu :GitGutterRevertHunk<CR>
 nnoremap <silent> <Leader>gp :GitGutterPreviewHunk<CR><c-w>j
 nnoremap cog :GitGutterToggle<CR>
+" }}}
+" lsp {{{
+let g:langserver_executables = {
+      \ 'go': {
+	\ 'name': 'sourcegraph/langserver-go',
+	\ 'cmd': ['langserver-go', '-trace', '-logfile', expand('~/Desktop/langserver-go.log')],
+	\ },
+      \ 'c': {
+	\ 'name': 'vscode',
+	\ 'cmd': [],
+	\ }
+      \ }
 " }}}
 
 " wscript are python
@@ -1255,12 +1254,10 @@ let g:goyo_width = 120
 "   autocmd BufWinEnter * call ResCur()
 " augroup END
 " }}}
-
 " Generic Tex configuration {{{
 " See :help ft-tex-plugin
 let g:tex_flavor = "latex"
 "}}}
-
 " Vimtex configuration {{{
 " Pour le rappel 
 " <localleader>ll pour la compilation continue du pdf
@@ -1363,7 +1360,6 @@ let g:pymode_virtualenv = 1
 " " hl self keyword
 " let g:pymode_syntax_highlight_self = g:pymode_syntax_all 
 " }}}
-
 " vim-listchars config {{{
     "\"trail:·,tab:→\ ,eol:↲,precedes:<,extends:>"
 "let g:listchar_formats=[ 
@@ -1376,7 +1372,6 @@ let g:pymode_virtualenv = 1
 "|
 "set listchars=tab:•·,trail:·,extends:❯,precedes:❮,nbsp:×
 " }}}
-
 " Grepper {{{
 " add -cword to automatically fill with the underlying word
 " example given by mhinz to search into current buffer
@@ -1385,6 +1380,7 @@ let g:pymode_virtualenv = 1
 " Grepper -grepprg ag --vimgrep $* $. works
 nnoremap <leader>git :Grepper  -tool git -open -nojump
 nnoremap <leader>ag  :Grepper -tool ag  -open -switch
+nnoremap <leader>rg  :Grepper -tool rg  -open -switch
 
 " let g:grepper.tools += "localgrep"
 " let g:grepper = {
@@ -1396,8 +1392,8 @@ nnoremap <leader>ag  :Grepper -tool ag  -open -switch
 "     \ }
 "     \}
 " -noswitch
-nmap gs <plug>(GrepperOperator)
-xmap gs <plug>(GrepperOperator)
+" nmap gs <plug>(GrepperOperator)
+" xmap gs <plug>(GrepperOperator)
 
 " }}}
 
@@ -1411,13 +1407,20 @@ command! -complete=file -nargs=+ SS execute 'SideSearch <args>'
 " or command abbreviation
 cabbrev SS SideSearch" 
 " }}}
-
 " folding config {{{
 " block,hor,mark,percent,quickfix,search,tag,undo
-" set foldopen+=all
+" set foldopen+=all " specifies commands for which folds should open
 " set foldclose=all
 "set foldtext=
 set foldcolumn=3
+
+if has("folding_fillchars")
+	" removed to test default values
+  " set fillchars+=foldopen:▾,foldsep:│,foldclose:▸,foldend:^
+  " echo "doing it"
+  " set fdc=-1
+  set fdc=0
+endif
 " }}}
 
 " will load a .exrc or .nvimrc file if finds it current directory
@@ -1435,7 +1438,6 @@ let g:sneak#streak = 0
     " omap f <Plug>Sneak_s
     " omap F <Plug>Sneak_S
 " }}}
-
 " Peekaboo config {{{
 " Default peekaboo window
 let g:peekaboo_window = 'vertical botright 30new'
@@ -1446,13 +1448,11 @@ let g:peekaboo_delay = 750
 " Compact display; do not display the names of the register groups
 let g:peekaboo_compact = 1
 " }}}
-
 " vimplug bindings {{{
 nnoremap <leader>pi :PlugInstall<CR>
 nnoremap <leader>pU :PlugUpgrade<CR>
 nnoremap <leader>pu :PlugUpdate<CR>
 " }}}
-
 " signify (display added/removed lines from vcs) {{{
 let g:signify_vcs_list = [ 'git']
 " let g:signify_mapping_next_hunk = '<leader>hn' " hunk next
@@ -1486,7 +1486,6 @@ nmap <leader>wj <plug>(signify-next-hunk)
 nnoremap <leader>sk <plug>(signify-prev-hunk)
 
 " }}}
-
 " autosave plugin (:h auto-save) {{{
 let g:auto_save_in_insert_mode = 1
 let g:auto_save_events = ['FocusLost']
@@ -1520,7 +1519,7 @@ autocmd BufWritePost ~/.Xdefaults call system('xrdb ~/.Xdefaults')
 " }}}
 " vim-signature {{{
 " :SignatureListMarkers         : List all markers
-let g:SignatureMarkTextHLDynamic=0 
+let g:SignatureMarkTextHLDynamic=0
 let g:SignatureEnabledAtStartup=1
 let g:SignatureWrapJumps=1
 let g:SignatureDeleteConfirmation=1
@@ -1537,13 +1536,21 @@ let g:riv_disable_folding=1
 let g:riv_disable_indent=0
 " }}}
 " easymotion {{{
-let g:EasyMotion_do_shade = 1
-let g:EasyMotion_do_mapping = 1
-let g:EasyMotion_use_upper = 1 " display upper case letters but let u type lower case
-let g:EasyMotion_inc_highlight = 0
-let g:EasyMotion_disable_two_key_combo = 0
+" let g:EasyMotion_do_shade = 1
+" let g:EasyMotion_do_mapping = 1
+" let g:EasyMotion_use_upper = 1 " display upper case letters but let u type lower case
+" let g:EasyMotion_inc_highlight = 0
+" let g:EasyMotion_disable_two_key_combo = 0
 
-map , <Plug>(easymotion-prefix)
+" map , <Plug>(easymotion-prefix)
+" Easymotion settings {{{
+" nmap s <Plug>(easymotion-s2)
+let g:EasyMotion_do_mapping = 0
+let g:EasyMotion_smartcase = 1
+let g:EasyMotion_verbose = 0
+" }}}
+
+
 " }}}
 " quickhl (similar to interesting words) {{{
 " nmap <Space>m <Plug>(quickhl-manual-this)
@@ -1560,7 +1567,9 @@ map , <Plug>(easymotion-prefix)
 " <leader>rw montre les différents projets ( <=> $rc -w)
 let g:rtagsUseLocationList=1
 let g:rtagsUseDefaultMappings = 1
-let g:rtagsLog="rtags.log"
+let g:rtagsLog=$HOME."/rtags.log"
+
+let g:rtagsExcludeSysHeaders=0
 let g:rtagsAutoLaunchRdm=1
 " let g:rtagsExcludeSysHeaders
 " }}}
@@ -1611,7 +1620,17 @@ let g:nvimdev_auto_cd=1
 " let g:nvimdev_auto_ctags=1
 let g:nvimdev_auto_lint=0
 let g:nvimdev_build_readonly=1
+
+        " \ 'remove_invalid_entries': get(g:, 'neomake_remove_invalid_entries', 0),
 "}}}
+" lsp {{{
+let g:LanguageClient_serverCommands = {
+    \ }
+    " \ 'rust': ['cargo', 'run', '--release', '--manifest-path=/opt/rls/Cargo.toml'],
+    " \ 'javascript': ['/opt/javascript-typescript-langserver/lib/language-server-stdio.js' ],
+
+" }}}
+
 
 set hidden " you can open a new buffer even if current is unsaved (error E37)
 
@@ -1640,13 +1659,15 @@ function! GoToNextError()
 " qf ? getqflist()
   let list = getloclist(0)
   let ret = len(list)
-  if len
-    " <Plug>(QuickFixCurrentNumberLNext)
-    echo 'GoToNextQF'
+echomsg ret
+  if ret == 0
+    echomsg 'GoToNextQF'
+    execute "normal \<Plug>(QuickFixCurrentNumberQNext)"
   else
 
-    echo 'GoToNextLL'
-    " <Plug>(QuickFixCurrentNumberLNext)
+    echomsg 'GoToNextLL'
+    " call <Plug>(QuickFixCurrentNumberLNext)
+    execute "normal \<Plug>(QuickFixCurrentNumberLNext)"
   endif
 endfunc
 
@@ -1671,7 +1692,7 @@ nmap <F4> call GoToNextError()
 " 	\ . '%)'
 " endif
 
-nnoremap <F5> :Neomake!<CR>
+nnoremap <F5> :Neomake! make<CR>
 nnoremap <F6> :AutoSaveToggle<CR>
 "nnoremap <F6> :AutoSaveOnLostFocus<CR>
 " goto previous buffer
@@ -1916,8 +1937,10 @@ colorscheme molokai
 " 			no language mappings are used, the other when they
 " 			are. |language-mapping|
 " " o
-set guicursor="n-v-c:block-Cursor/lCursor, ve:ver35-Cursor, o:hor50-Cursor,i-ci:ver25-Cursor/lCursor, r-cr:hor20-Cursor/lCursor, sm:block-Cursor -blinkwait175-blinkoff150-blinkon175"
+" set guicursor="n-v-c:block-Cursor/lCursor, ve:ver35-Cursor, o:hor50-Cursor,i-ci:ver25-Cursor/lCursor, r-cr:hor20-Cursor/lCursor, sm:block-Cursor -blinkwait175-blinkoff150-blinkon175"
 
+set guicursor=i:ver3,n:block-blinkon10-Cursor,r:hor50
+highl Cursor ctermfg=16 ctermbg=253 guifg=#000000 guibg=#00FF00
 
 " TESTING only
 nnoremap <kPageUp> :lprev
@@ -1931,10 +1954,9 @@ nnoremap gO i<CR>
 " nnoremap <Leader>lg @g
 
 
-if has("folding_fillchars")
-  set fillchars+=foldopen:▾,foldsep:│,foldclose:▸,foldend:^
+if has("signcolumnwidth")
+    set signcolumnwidth=6
 endif
-
 " call 
 function! FzfFlipBool()
   " let l:dict = {}

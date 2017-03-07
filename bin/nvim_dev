@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
-DEV=$PWD
+# thanks tweekmonster and mhinz !
+DEV="$PWD"
 VIMRUNTIME="$DEV/runtime" "$DEV/build/bin/nvim" "$@"
