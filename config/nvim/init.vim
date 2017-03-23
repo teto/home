@@ -14,7 +14,6 @@ map <D-b> :echom "hello papy"
 "}}}
 " to see the difference highlights, 
 " runtime syntax/hitest.vim
-"
 
 " vim-plug autoinstallation {{{
 " TODO move to XDG_DATA_HOME
@@ -69,12 +68,6 @@ function! DoRemote(arg)
   UpdateRemotePlugins
 endfunction
 
-function! BuildComposer(info)
-  if a:info.status != 'unchanged' || a:info.force
-    !cargo build --release
-    UpdateRemotePlugins
-  endif
-endfunction
 
 " filnxtToO
 set shortmess+=I
@@ -88,35 +81,45 @@ set gdefault
 " nvim will load any .nvimrc in the cwd; useful for per-project settings
 set exrc
 
-
-" reminder about vim completion
-" since it's fucking complex
-" need a glossary first:
-" 
-
 " vim-plug plugin declarations {{{1
 call plug#begin(s:plugdir)
-Plug 'git@github.com:ehamberg/vim-cute-python.git' 
-Plug 'https://github.com/dbakker/vim-projectroot.git' " projectroot#guess()
+
+" provider dependant {{{
+Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
+" Plug 'autozimu/LanguageClient-neovim' " for LSP
+" Plug '~/vim-config'
+Plug '~/nvim-palette'
+Plug 'editorconfig/editorconfig-vim' " not remote but involves python
+" provider
+Plug 'brooth/far.vim' " search and replace for vim
+" Plug 'junegunn/vim-github-dashboard' " needs ruby support, works in recent neovim
+" Plug 'fmoralesc/vim-pad'
+"}}}
+Plug 'vim-scripts/coq-syntax', {'for': 'coq'}
+Plug 'the-lambda-church/coquille', {'branch': 'pathogen-bundle', 'for': 'coq'}
+Plug 'let-def/vimbufsync', {'for': 'coq'}
+" Plug 'kassio/neoterm' " some kind of REPL
+Plug 'ehamberg/vim-cute-python' " display unicode characters
+Plug 'dbakker/vim-projectroot' " projectroot#guess()
 " Plug 'sunaku/vim-dasht' " get documentation
 " Plug 'git@github.com:reedes/vim-wordy.git' " pdt la these, pr trouver la jargon :Wordy
-Plug 'git@github.com:sk1418/QFGrep.git' " cool 
-Plug 'git@github.com:pseewald/vim-anyfold.git' " speed up folds processing
+Plug 'sk1418/QFGrep' " Filter quickfix
+" Plug 'git@github.com:pseewald/vim-anyfold.git' " speed up folds processing
+" (upstreamd already or ?)
 " Plug 'mtth/scratch.vim' " , {'on': 'Scratch'} mapped to ?
 " Plug 'tjdevries/vim-inyoface.git' "InYoFace_toggle to display only comments 
-Plug 'tjdevries/nvim-langserver-shim' " for LSP
-Plug 'autozimu/LanguageClient-neovim' " for LSP
-Plug 'powerman/vim-plugin-AnsiEsc' " { to hl ESC codes
+" Plug 'tjdevries/nvim-langserver-shim' " for LSP
+" Plug 'powerman/vim-plugin-AnsiEsc' " { to hl ESC codes
 " Plug 'git@github.com:junegunn/gv.vim.git' " git commit viewer :Gv
 " Plug 'git@github.com:rhysd/clever-f.vim.git' " use f to repeat search instead of ;
 " Plug 'git@github.com:xolox/vim-easytags.git' " 
-Plug 'git@github.com:mhinz/vim-halo.git' " to hight cursor line
-Plug 'git@github.com:ludovicchabant/vim-gutentags' " automatic tag generation, very good
-Plug 'git@github.com:junegunn/goyo.vim', {'on': 'Goyo'} "distraction free writing
-Plug 'git@github.com:junegunn/limelight.vim' " highlights 
-Plug 'git@github.com:calvinchengx/vim-aftercolors' " load after/colors
+" Plug 'mhinz/vim-halo' " to hight cursor line
+Plug 'ludovicchabant/vim-gutentags' " automatic tag generation, very good
+Plug 'junegunn/goyo.vim', {'on': 'Goyo'} "distraction free writing
+Plug 'junegunn/limelight.vim' " highlights 
+Plug 'calvinchengx/vim-aftercolors' " load after/colors
 "Plug 'junegunn/limelight.vim' " to highlight ucrrent paragraph only
-Plug 'git@github.com:ntpeters/vim-better-whitespace.git' " StripWhitespace
+Plug 'ntpeters/vim-better-whitespace' " StripWhitespace
 " Plug 'bronson/vim-trailing-whitespace' " :FixTrailingWhitespace
 " Plug 'tkhoa2711/vim-togglenumber' " by default mapped to <leader>n
 " Plug 'blindFS/vim-translator' " fails during launch :/
@@ -124,35 +127,35 @@ Plug 'git@github.com:ntpeters/vim-better-whitespace.git' " StripWhitespace
 " Plug 'timeyyy/clackclack.symphony' " data to play with orchestra.vim
 Plug 'tpope/vim-scriptease' " Adds command such as :Messages
 " Plug 'tpope/vim-eunuch' " {provides SudoEdit, SudoWrite , Unlink, Rename etc...
-Plug 'git@github.com:metakirby5/codi.vim' " repl
+Plug 'metakirby5/codi.vim', {'on': 'Codi'} " repl
 " Plug 'git@github.com:SirVer/ultisnips' " handle snippets
 " Snippets are separated from the engine. Add this if you want them:
-Plug 'honza/vim-snippets' "  ultisnips compatible snippets
-Plug 'git@github.com:sjl/gundo.vim' " :GundoShow/Toggle to redo changes
-
+" Plug 'honza/vim-snippets' "  ultisnips compatible snippets
+Plug 'sjl/gundo.vim' " :GundoShow/Toggle to redo changes
+" Plug 'vim-scripts/DrawIt' " to draw diagrams
 " Plug 'Yggdroot/indentLine',{ 'for': 'python' }  " draw verticals indents but seems greedy
 "  Autocompletion and linting {{{2
 "'frozen': 1,
 " use deoplete for python ?
 " Plug 'Valloric/YouCompleteMe' , { 'do': ':new \| call termopen(''python3 ./install.py --system-libclang --clang-completer'')', 'frozen': 1}
-Plug 'lyuts/vim-rtags'  " a l'air d'etre le plus complet <leader>ri ('rdm' must be running) 
-Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
+Plug 'lyuts/vim-rtags'  " a l'air d'etre le plus complet <leader>ri  
 " Plug 'zchee/deoplete-clang', { 'for': 'c' }
 Plug 'zchee/deoplete-jedi', { 'for': 'python'}
 " }}}
-Plug 'beloglazov/vim-online-thesaurus' " thesaurus => dico dde synonymes
+" Plug 'beloglazov/vim-online-thesaurus' " thesaurus => dico dde synonymes
 " Plug 'mattboehm/vim-unstack'  " to see a
-Plug 'KabbAmine/vCoolor.vim', { 'on': 'VCooler' } " RGBA color picker
-Plug 'arakashic/chromatica.nvim', { 'for': 'cpp' } " semantic color syntax
+" Plug 'KabbAmine/vCoolor.vim', { 'on': 'VCooler' } " RGBA color picker
+" Plug 'arakashic/chromatica.nvim', { 'for': 'cpp' } " semantic color syntax
 
 
 " to configure vim for haskell, refer to
 " http://yannesposito.com/Scratch/en/blog/Vim-as-IDE/
 "{{{
-" Plug 'git@github.com:neovimhaskell/haskell-vim.git', {'for':'haskell'} " haskell install
+Plug 'neovimhaskell/haskell-vim', {'for':'haskell'} " haskell install
 " Plug 'enomsg/vim-haskellConcealPlus', {'for':'haskell'}     " unicode for haskell operators
 Plug 'eagletmt/ghcmod-vim', {'do': 'cabal install ghc-mod', 'for': 'haskell'} " requires 
-Plug 'eagletmt/neco-ghc', {'for': 'haskell'} " completion plugin for haskell
+" Plug 'bitc/vim-hdevtools'
+Plug 'eagletmt/neco-ghc', {'for': 'haskell'} " completion plugin for haskell + deoplete ?
 Plug 'Shougo/vimproc.vim', {'do' : 'make'} " needed by neco-ghc
 " Plug 'Twinside/vim-hoogle' , {'for':'haskell'}
 "}}}
@@ -165,7 +168,6 @@ Plug 'kana/vim-operator-user' " dependancy for operator-flashy
 Plug 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
 
 " Using a non-master branch
-"Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
 
 Plug 'critiqjo/lldb.nvim',{ 'for': 'c' } " To debug (use clang to get correct line numbers
 
@@ -190,8 +192,8 @@ Plug 'Valloric/ListToggle' " toggle location/quickfix list toggling seems to fai
 " Plug 'git@github.com:milkypostman/vim-togglelist' " same
 Plug 'tpope/vim-obsession' ", {'on': 'Obsession', 'ObsessionStatus'}  very cool, register edited files in a Session.vim, call with :Obsession
 " Plug 'mbbill/undotree'
-Plug '907th/vim-auto-save' " :h auto-save
-" Plug '~/vim-auto-save' " autosave :h auto-save
+" Plug '907th/vim-auto-save' " :h auto-save
+Plug '~/vim-auto-save' " autosave :h auto-save
 " Plug '~/neovim-auto-autoread' " to check for filechanges
 ", { 'for': 'python' } " 
 Plug 'bfredl/nvim-miniyank' " killring alike plugin, cycling paste
@@ -249,7 +251,6 @@ Plug 'blueyed/vim-diminactive' " disable syntax coloring on inactive splits
 Plug 'tpope/vim-fugitive' " to use with Git, VERY powerful
 "Plug 'jaxbot/github-issues.vim' " works only with vim
 "Plug 'tpope/vim-surround' " don't realy know how to use yet
-Plug 'junegunn/vim-github-dashboard' " needs ruby support, works in recent neovim
 "Plug 'junegunn/vim-peekaboo' " gives a preview of buffers when pasting
 Plug 'mhinz/vim-randomtag', { 'on': 'Random' } " Adds a :Random function that launches help at random
 " Plug 'majutsushi/tagbar' " , {'on': 'TagbarToggle'} disabled lazyloading else it would not work with statusline
@@ -272,7 +273,8 @@ Plug 'junegunn/fzf.vim' " defines :Files / :Commits for FZF
 
 
 
-Plug 'euclio/vim-markdown-composer' " , { 'for': 'markdown', 'do': function('BuildComposer') } " Needs rust, cargo, plenty of things :help markdown-composer
+" , { 'for': 'markdown', 'do': function('BuildComposer') } " Needs rust, cargo, plenty of things :help markdown-composer
+Plug 'euclio/vim-markdown-composer' 
 Plug 'Rykka/riv.vim', {'for': 'rst'}
 Plug 'Rykka/InstantRst', {'for': 'rst'} " rst live preview with :InstantRst, 
 "Plug 'junegunn/vim-easy-align'   " to align '=' on multiple lines for instance
@@ -331,15 +333,11 @@ Plug 'NLKNguyen/papercolor-theme'
 " and it's not possible in neovim yet
 " color_coded requires vim to be compiled with -lua
 "Plug 'jeaye/color_coded'
-"
 " Plug 'bbchung/clighter'
 " YCM generator is not really a plugin is it ?
-" Plug 'rdnetto/YCM-Generator'
 " Plug 'erezsh/erezvim' "zenburn scheme. This plugin resets some keymaps,
 " annoying
 Plug 'chrisbra/csv.vim', {'for': 'csv'}
-" 
-Plug 'editorconfig/editorconfig-vim'
 
 " editorconfig {{{
 let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
@@ -357,7 +355,6 @@ Plug 'lervag/vimtex', {'for': 'tex'} " so far the best one
 " }}}
 
 " Plug 'vim-scripts/YankRing.vim' " breaks in neovim, overrides yy as well
-Plug 'brooth/far.vim' " search and replace for vim
 " far config (Find And Replace) {{{ 
 " let g:far#source='agnvim' 
 let g:far#source='vimgrep' 
@@ -370,19 +367,9 @@ Plug 'tweekmonster/nvimdev.nvim' " thanks tweekmonster !
 call plug#end()
 " }}}
 
-
-
-" K works in vim files
-autocmd FileType vim setlocal keywordprg=:help
-
-
-
-
-
 " start scrolling before reaching end of screen in order to keep more context
 " set it to a big value 
 " set scrolloff=3
-
 
 
 " Indentation {{{
@@ -407,18 +394,11 @@ let g:netrw_liststyle=1 " long listing with timestamp
 " }}}
 
 
-
 set title " vim will change terminal title
 " look at :h statusline to see the available 'items'
 " to count the number of buffer
 " echo len(filter(range(1, bufnr('$')), 'buflisted(v:val)'))
 let &titlestring=" %t %{len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) } - NVIM"
-
-
-nnoremap <Leader>/ :set hlsearch! hls?<CR> " toggle search highlighting
-
-
-
 
 " conceal configuration {{{
 " transforms some characters into their digraphs equivalent 
@@ -431,16 +411,6 @@ nnoremap <Leader>/ :set hlsearch! hls?<CR> " toggle search highlighting
 set showmatch
 
 " set autochdir
-" 
-" " When on, Vim will change the current working directory
-" " whenever you open a file, switch buffers, delete a buffer
-" " or open/close a window.
-" " It will change to the directory containing the file which
-" " was opened or selected.
-" " Note: When this option is on some plugins may not work.
-
-
-
 " Use visual bell instead of beeping when doing something wrong
 set visualbell
 set errorbells " easier to test visualbell with it
@@ -457,15 +427,14 @@ map <C-N><C-N> :set invnumber<CR>
 " Display unprintable characters with '^' and
 " set nolist to disable or set list!
 
-
 set timeoutlen=400 " Quick timeouts on key combinations.
-
-
 
 " in order to scroll faster
 " nnoremap <C-e> 3<C-e>
 " nnoremap <C-y> 3<C-y>
 
+" to load plugins in ftplugin matching ftdetect
+filetype plugin on
 syntax on
 
 
@@ -505,32 +474,21 @@ set wildignore+=classes
 set wildignore+=lib
 
 " }}}
-
-" to load plugins in ftplugin matching ftdetect
-filetype plugin on
 " Modeliner shortcuts  {{{
 set modeline
 set modelines=4 "number of lines checked
 nmap <leader>ml :Modeliner<Enter>
 let g:Modeliner_format = 'et ff= fenc= sts= sw= ts= fdm=marker'
 " }}}
-
+"clipboard {{{
 " X clipboard gets aliased to +
 set clipboard=unnamedplus
 " copy to external clipboard
 noremap gp "+p 
 noremap gy "+y 
-
+"}}}
 " Easy window navigation
 " noremap <F3> :Tlist<Enter>
-
-
-
-" todo enable rainbow parentheses
-"nnoremap <leader>R :CtrlP<CR>
-" est deja mappe :/
-
-"
 imap <silent> <C-k> <Up>
 imap <silent> <C-j> <Down>
 
@@ -686,7 +644,10 @@ let g:UltiSnipsExpandTrigger = "<C-y>"
 " augroup END
 
 " }}}
-
+" vim-plug config {{{
+let g:plug_shallow=1
+" let g:plug_threads
+"}}}
 " interesting words {{{
 "nnoremap <silent> <leader>k :call InterestingWords('n')<cr>
 "nnoremap <silent> <leader>K :call UncolorAllWords()<cr>
@@ -705,21 +666,21 @@ let g:UltiSnipsExpandTrigger = "<C-y>"
 "         au InsertLeave * set timeoutlen=1000
 "     augroup END
 " endif
-
-
 "nnoremap <leader>r :!%:p<return>
-
 
 set shiftround    " round indent to multiple of 'shiftwidth'
 
 " auto reload vim config on save
 " Watch for changes to vimrc
-
 augroup myvimrc
   au!
   au BufWritePost $MYVIMRC,.vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc,init.vim so $MYVIMRC | if has('gui_running') | so $MYGVIMRC | endif
 augroup END
 
+" augroup onnewsocket
+"   au!
+"   autocmd! OnNewSocket * echom 'New client from init'
+" augroup END
 
 " open vimrc
 nnoremap <Leader>ev :e $MYVIMRC<CR> 
@@ -731,28 +692,12 @@ nnoremap <Leader>sv :source $MYVIMRC<CR>
 " nnoremap <Leader>e :Vex<CR> 
 nnoremap <Leader>w :w<CR>
 
-nnoremap <leader>u :UndoTreeToggle<CR>
-" nnoremap <leader>t :UndoTreeToggle<CR>
 
 " fails with neovim use :te instead ?
 "nnoremap <leader>r :<C-U>RangerChooser<CR> 
 
 "nnoremap <F8> :vertical wincmd f<CR> " open file under cursor in a split
 nnoremap <leader>gfs :vertical wincmd f<CR> " open file under cursor in a split
-" haskell-vim config {{{
-let g:haskell_enable_quantification = 1   " to enable highlighting of `forall`
-let g:haskell_enable_recursivedo = 1      " to enable highlighting of `mdo` and `rec`
-let g:haskell_enable_arrowsyntax = 1      " to enable highlighting of `proc`
-let g:haskell_enable_pattern_synonyms = 1 " to enable highlighting of `pattern`
-let g:haskell_enable_typeroles = 1        " to enable highlighting of type roles
-let g:haskell_enable_static_pointers = 1  " to enable highlighting of `static`
-let g:haskell_backpack = 1                " to enable highlighting of backpack keywords
-"}}}
-" neco-ghc (haskell completion) {{{
-" slower bu t shows type
-let g:necoghc_enable_detailed_browse = 1
-let g:necoghc_debug=0
-"}}}
 " gutentags + gutenhasktags {{{
 let g:gutentags_project_info = [ {'type': 'python', 'file': 'setup.py'},
                                \ {'type': 'ruby', 'file': 'Gemfile'},
@@ -771,6 +716,9 @@ if has('nvim')
 " " echo rpcrequest(hc, "PingNvimhs") should print Pong
   " call rpcrequest(hc, 'PingNvimhs') 
 endif
+"}}}
+" hdevtools {{{
+" let g:hdevtools_options = '-g-isrc -g-Wall'
 "}}}
 " Chromatica (needs libclang > 3.9) {{{
 " can compile_commands.json or a .clang file
@@ -845,16 +793,7 @@ imap <c-x><c-f> <plug>(fzf-complete-path)
 autocmd! FileType fzf tnoremap <buffer> <Esc> <c-g>
 " }}}
 " Powerline config {{{
-
 let g:Powerline_symbols = "fancy" " to use unicode symbols
-" }}}
-" Ctrpl config {{{
-"Plug 'ctrlpvim/ctrlp.vim'
-"Plug 'mattn/ctrlp-mark'
-"Plug 'mattn/ctrlp-register'
-"let g:ctrlp_cmd = 'CtrlPMixed'
-"let g:ctrlp_match_window = 'results:100' " overcome limit imposed by max height
-"let g:ctrlp_extensions= ['dir','mark']
 " }}}
 " Csv config {{{
 " you can use :CsvVertFold to hide commands
@@ -876,6 +815,8 @@ set wrapscan " prevent from going back to the beginning of the file
 if has("nvim-0.2.0")
   set inccommand=nosplit
 endif
+
+nnoremap <Leader>/ :set hlsearch! hls?<CR> " toggle search highlighting
 
 " }}}
 " YouCompleteMe config {{{
@@ -965,7 +906,7 @@ let g:airline_section = '|'
 let g:airline#extensions#tabline#enabled = 1 
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
-let g:airline_theme = 'solarized'
+let g:airline_theme = 'molokai'
 " let g:airline_section_b = ""
 " section y is fileencoding , useless in neovim
 let g:airline_section_y = ""  
@@ -1004,6 +945,7 @@ let g:airline#extensions#obsession#enabled = 1
 let g:airline#extensions#obsession#indicator_text = '$'
 " let g:airline#extensions#whitespace#checks = [ 'indent', 'trailing', 'long' ]
 "|neomake#statusline#LoclistStatus should be shown in warning section
+" let &statusline .= ' %{grepper#statusline()}'
 " let g:airline_section_z = airline#section#create(['%{ObsessionStatus(''$'', '''')}'])
 nmap <leader>& <Plug>AirlineSelectTab1
 nmap <leader>é <Plug>AirlineSelectTab2
@@ -1045,15 +987,13 @@ nmap <leader>ç <Plug>AirlineSelectTab9
 " autocmd! User GoyoEnter Limelight
 " autocmd! User GoyoLeave Limelight!
 " }}}
-" inyoface {{{
+" inyoface (highlight only comments) {{{
 nmap <leader>c <Plug>(InYoFace_Toggle)<CR>
 " }}}
-
-" close the preview window on python completion
+" close the preview window on python completion {{{
 " autocmd CompleteDone * pclose 
-
-" set completeopt=menu:
-
+set completeopt=menu,longest
+" }}}
 " python config {{{
 " let g:python3_host_prog = '/path/to/python3'
 let g:python3_host_skip_check = 1
@@ -1065,7 +1005,7 @@ nnoremap <silent><leader>Q  :Sayonara!<cr>
 let g:sayonara_confirm_quit = 0
 " }}}
 " Neomake config {{{
-let g:neomake_verbose = 2
+let g:neomake_verbose = 1
 
 
 " pyflakes can't be disabled on a per error basis
@@ -1122,17 +1062,36 @@ let g:neomake_c_enabled_makers = ['make']
 " autocmd! VimLeave * let g:neomake_verbose = 0
 
 function! OnNeomakeFinished()
-  echo 'exit value='.g:neomake_hook_context.jobinfo.exit_code
+  " echo 'exit value='.g:neomake_hook_context.jobinfo.exit_code
   " TODO if notifier available use it
-  " if 
 endfunction
 
 augroup my_neomake
     au!
+
+    " Run linting when writing filg
+    autocmd BufWritePost * Neomake
     autocmd User NeomakeJobFinished call OnNeomakeFinished()
 augroup END
 " }}}
-
+" haskell-vim config {{{
+let g:haskell_enable_quantification = 1   " to enable highlighting of `forall`
+let g:haskell_enable_recursivedo = 1      " to enable highlighting of `mdo` and `rec`
+let g:haskell_enable_arrowsyntax = 1      " to enable highlighting of `proc`
+let g:haskell_enable_pattern_synonyms = 1 " to enable highlighting of `pattern`
+let g:haskell_enable_typeroles = 1        " to enable highlighting of type roles
+let g:haskell_enable_static_pointers = 1  " to enable highlighting of `static`
+let g:haskell_backpack = 1                " to enable highlighting of backpack keywords
+let g:haskell_indent_disable=1
+"}}}
+" neco-ghc (haskell completion) {{{
+" slower bu t shows type
+let g:necoghc_enable_detailed_browse = 1
+let g:necoghc_debug=0
+"}}}
+" ghcmod ( all :GhcMod* commands) {{{
+" let g:ghcmod_ghc_options=[]
+" }}}
 " Startify config {{{
 nnoremap <Leader>st :Startify<cr>
 
@@ -1149,7 +1108,8 @@ let g:startify_bookmarks = [
       \ {'i': $XDG_CONFIG_HOME.'/i3/config.main'},
       \ {'z': $XDG_CONFIG_HOME.'/zsh/'},
       \ {'m': $XDG_CONFIG_HOME.'/mptcpanalyzer/config'},
-      \ {'n': $XDG_CONFIG_HOME.'/ncmpcpp/config'},
+      \ {'n': $XDG_CONFIG_HOME.'/nvim/config'},
+      \ {'N': $XDG_CONFIG_HOME.'/ncmpcpp/config'},
       \ ]
       " \ {'q': $XDG_CONFIG_HOME.'/qutebrowser/qutebrowser.conf'},
 let g:startify_files_number = 10
@@ -1162,9 +1122,6 @@ let g:startify_change_to_dir = 0
 
 let g:startify_relative_path = 0
 " let g:startify_skiplist=[]
-" }}}
-" {{{ Clever f
-"
 " }}}
 " {{{ Quickscope config
 "let g:qs_first_occurrence_highlight_color = 155
@@ -1226,33 +1183,10 @@ let g:langserver_executables = {
 	\ }
       \ }
 " }}}
-
-" wscript are python
-
-augroup wscript
-  autocmd!
-  autocmd BufWinEnter wscript set ft=python
-augroup END
-
 " goyo {{{
 let g:goyo_linenr=1
 let g:goyo_height= '90%'
 let g:goyo_width = 120
-" }}}
-" Restor cursor position {{{
-" function! ResCur()
-"   " $ => last line of buffer
-"   " '" => cursor position on exit
-"   if line("'\"") <= line("$")
-"     normal! g`"
-"     return 1
-"   endif
-" endfunction
-
-" augroup resCur
-"   autocmd!
-"   autocmd BufWinEnter * call ResCur()
-" augroup END
 " }}}
 " Generic Tex configuration {{{
 " See :help ft-tex-plugin
@@ -1330,7 +1264,6 @@ let g:vimtex_latexmk_callback= 1 " let it to 1 else quickfix won't pop
 " us histadd
 au BufEnter *.tex exec ":setlocal spell spelllang=en_us"
 "" }}}
-
 " Pymode {{{
 let g:pymode_python = 'python3'
 let g:pymode_warnings = 1
@@ -1378,10 +1311,18 @@ let g:pymode_virtualenv = 1
 " https://github.com/mhinz/vim-grepper/issues/27
 " let g:grepper = { 'git': { 'grepprg': 'git grep -nI $* -- $.' }}
 " Grepper -grepprg ag --vimgrep $* $. works
+runtime autoload/grepper.vim
 nnoremap <leader>git :Grepper  -tool git -open -nojump
 nnoremap <leader>ag  :Grepper -tool ag  -open -switch
 nnoremap <leader>rg  :Grepper -tool rg  -open -switch
 
+
+" let g:grepper.side = 0
+" let g:grepper.switch = 1
+
+" let g:grepper.rgall = copy(g:grepper.rg)
+" let g:grepper.rgall.grepprg .= ' --no-ignore'
+" let g:grepper.tools += ['rgall']
 " let g:grepper.tools += "localgrep"
 " let g:grepper = {
 "   \ 'tools': ['git', 'localgrep', 'ag', 'rg', 'grep'],
@@ -1396,7 +1337,6 @@ nnoremap <leader>rg  :Grepper -tool rg  -open -switch
 " xmap gs <plug>(GrepperOperator)
 
 " }}}
-
 " sidesearch {{{
 " SideSearch current word and return to original window
 nnoremap <Leader>ss :SideSearch <C-r><C-w><CR> | wincmd p
@@ -1422,10 +1362,6 @@ if has("folding_fillchars")
   set fdc=0
 endif
 " }}}
-
-" will load a .exrc or .nvimrc file if finds it current directory
-set exrc
-
 " vim-sneak {{{
 let g:sneak#s_next = 1 " can press 's' again to go to next result, like ';'
 let g:sneak#prompt = 'Sneak>'
@@ -1492,10 +1428,11 @@ let g:auto_save_events = ['FocusLost']
 "let g:auto_save_events = ['CursorHold', 'FocusLost']
 let g:auto_save_write_all_buffers = 1 " Setting this option to 1 will write all
 " Put this in vimrc, add custom commands in the function.
-function! AutoSaveOnLostFocus()
-  " to solve pb with Airline https://github.com/vim-airline/vim-airline/issues/1030#issuecomment-183958050
-  exe ":au FocusLost ".expand("%")." :wa | :AirlineRefresh | :echom 'Focus lost'"
-endfunction
+" 
+" function! AutoSaveOnLostFocus()
+"   " to solve pb with Airline https://github.com/vim-airline/vim-airline/issues/1030#issuecomment-183958050
+"   exe ":au FocusLost ".expand("%")." :wa | :AirlineRefresh | :echom 'Focus lost'"
+" endfunction
 " }}}
 " Customized commands depending on buffer type {{{
 
@@ -1507,15 +1444,15 @@ nnoremap <LocalLeader>sv :source $MYVIMRC<CR> " reload vimrc
 " Tips from vim-galore {{{
 
 " to alternate between header and source file
-autocmd BufLeave *.{c,cpp} mark C
-autocmd BufLeave *.h       mark H
+" autocmd BufLeave *.{c,cpp} mark C
+" autocmd BufLeave *.h       mark H
 
 " Don't lose selection when shifting sidewards
 "xnoremap <  <gv
 "xnoremap >  >gv
-
 " todo do the same for .Xresources ?
 autocmd BufWritePost ~/.Xdefaults call system('xrdb ~/.Xdefaults')
+
 " }}}
 " vim-signature {{{
 " :SignatureListMarkers         : List all markers
@@ -1558,7 +1495,7 @@ let g:EasyMotion_verbose = 0
 " nmap <Space>M <Plug>(quickhl-manual-reset)
 " xmap <Space>M <Plug>(quickhl-manual-reset)
 " }}}
-" vim-halo {{{
+" vim-halo (to show cursor) {{{
 " disabled cause creating pb for now
 " nnoremap <silent> <Esc> :<C-U>call halo#run()<CR>
 " nnoremap <silent> <C-c> :<C-U>call halo#run()<CR><C-c>
@@ -1618,7 +1555,7 @@ endfun
 let g:nvimdev_auto_init=1
 let g:nvimdev_auto_cd=1
 " let g:nvimdev_auto_ctags=1
-let g:nvimdev_auto_lint=0
+let g:nvimdev_auto_lint=1
 let g:nvimdev_build_readonly=1
 
         " \ 'remove_invalid_entries': get(g:, 'neomake_remove_invalid_entries', 0),
@@ -1630,11 +1567,17 @@ let g:LanguageClient_serverCommands = {
     " \ 'javascript': ['/opt/javascript-typescript-langserver/lib/language-server-stdio.js' ],
 
 " }}}
+" vim-pad {{{
+let g:pad#silent_on_mappings_fail=1
 
-
+let g:pad#default_format = "markdown"
+"}}}
+"coquille{{{
+" Maps Coquille commands to <F2> (Undo), <F3> (Next), <F4> (ToCursor)
+au FileType coq call coquille#FNMapping()
+let g:coquille_auto_move=1
+" }}}
 set hidden " you can open a new buffer even if current is unsaved (error E37)
-
-autocmd syntax text setlocal textwidth=80 
 
 " draw a line on 80th column
 set colorcolumn=80
@@ -1741,8 +1684,6 @@ if has('nvim')
 endif
 
 
-" Run linting when writing filg
-autocmd! BufWritePost * Neomake
 
 " Bye bye ex mode
 noremap Q <NOP>
@@ -1753,7 +1694,6 @@ noremap Q <NOP>
 " <Leader>r to restore original quickfix entires.
 let g:QFG_hi_error = 'ctermbg=167 ctermfg=16 guibg=#d75f5f guifg=black'
 "}}}
-
 " QuickFixCurrentNumber {{{
 let g:no_QuickFixCurrentNumber_maps = 1
 " }}}
@@ -1761,7 +1701,6 @@ let g:no_QuickFixCurrentNumber_maps = 1
 " location list can be associated with only one window.  
 " The location list is independent of the quickfix list.
 " }}}
-
 " ListToggle config {{{
 let g:lt_location_list_toggle_map = '<F12>' " '<leader>l'
 let g:lt_quickfix_list_toggle_map = '<F2>' " '<leader>qq'
@@ -1774,22 +1713,22 @@ nmap <F1>  <Plug>(ListToggleQToggle)
 " buffers
 map <Leader>n :bnext<CR>
 map <Leader>N :bNext<CR>
-map <Leader>p :bprevious<CR>
+" map <Leader>p :bprevious<CR>
 map <Leader>$ :Obsession<CR>
 " map <Leader>d :bdelete<CR>
 " TODO trigger a menu in vim
 
 "http://stackoverflow.com/questions/28613190/exclude-quickfix-buffer-from-bnext-bprevious
 
+" spell config {{{
 " todo better if it could be parsable
 " map <Leader>t :!trans :fr -no-ansi <cword><CR>
-" todo open in a split
 map <Leader>te :te trans :en <cword><CR>
 map <Leader>tf :te trans :fr <cword><CR>
 " for thesaurus vim-thesaurus only works with English :/
 map <Leader>ttf :te trans :fr <cword><CR>
 map <Leader><space> :b#<CR>
-
+"}}}
 " Unimpaired {{{
 " advised by tpope for these remote countries that don't use qwerty
 " https://github.com/tpope/vim-unimpaired
@@ -1831,6 +1770,18 @@ set matchpairs+=<:>  " Characters for which % should work
 " TODO to use j/k over 
 " set whichwrap+=<,>,h,l
 
+" nvim-palette{{{
+let g:palette_histadd=1
+" let g:palette_fzf_opts={
+" 	\ 'options': ' --prompt "Palette>"',
+" 	\ 'down': '50%',
+" 	\ }
+
+
+" nmap <Leader>p :Palette<CR>
+nmap <Leader>x <Plug>(PaletteRun)
+"}}}
+
 " Interactive menus {{{1
 " use emenu ("execute menu") to launch the command
 " disable all menus
@@ -1842,10 +1793,9 @@ menu Spell.FR :setlocal spell spelllang=fr_fr<CR>
 
 menu Trans.FR :te trans :fr <cword><CR>
 " tabulation-related menu {{{2
-menu Search.CurrentBuffer :exe Grepper -grepprg ag --vimgrep $* $.
-menu Search.AllBuffers :exe Grepper -grepprg ag --vimgrep $* $+
+menu Search.CurrentBuffer :exe Grepper -grepprg rg --vimgrep $* $.
+menu Search.AllBuffers :exe Grepper -grepprg rg --vimgrep $* $+
 " }}}
-
 " tabulation-related menu {{{2
 menu Tabs.S2 :set  tabstop=2 softtabstop=2 sw=2<CR>
 menu Tabs.S4 :set ts=4 sts=4 sw=4<CR>
@@ -1863,7 +1813,7 @@ if has("nvim")
   let g:netrw_home=$XDG_DATA_HOME.'/nvim'
   "now ignored 
   " let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-  let $NVIM_TUI_ENABLE_CURSOR_SHAPE=2
+  " let $NVIM_TUI_ENABLE_CURSOR_SHAPE=0
 endif
 " }}}
 " colorscheme stuff {{{
@@ -1889,54 +1839,6 @@ autocmd ColorScheme *
 colorscheme molokai
 
 " }}}
-
-" " default value
-" " hor => horizontal
-" 	The option is a comma separated list of parts.  Each part consist of a
-" 	mode-list and an argument-list:
-" 		mode-list:argument-list,mode-list:argument-list,..
-" 	The mode-list is a dash separated list of these modes:
-" 		n	Normal mode
-" 		v	Visual mode
-" 		ve	Visual mode with 'selection' "exclusive" (same as 'v',
-" 			if not specified)
-" 		o	Operator-pending mode
-" 		i	Insert mode
-" 		r	Replace mode
-" 		c	Command-line Normal (append) mode
-" 		ci	Command-line Insert mode
-" 		cr	Command-line Replace mode
-" 		sm	showmatch in Insert mode
-" 		a	all modes
-" 	The argument-list is a dash separated list of these arguments:
-" 		hor{N}	horizontal bar, {N} percent of the character height
-" 		ver{N}	vertical bar, {N} percent of the character width
-" 		block	block cursor, fills the whole character
-" 			[only one of the above three should be present]
-" 		blinkwait{N}				*cursor-blinking*
-" 		blinkon{N}
-" 		blinkoff{N}
-" 			blink times for cursor: blinkwait is the delay before
-" 			the cursor starts blinking, blinkon is the time that
-" 			the cursor is shown and blinkoff is the time that the
-" 			cursor is not shown.  The times are in msec.  When one
-" 			of the numbers is zero, there is no blinking.  The
-" 			default is: "blinkwait700-blinkon400-blinkoff250".
-" 			These numbers are used for a missing entry.  This
-" 			means that blinking is enabled by default.  To switch
-" 			blinking off you can use "blinkon0".  The cursor only
-" 			blinks when Vim is waiting for input, not while
-" 			executing a command.
-" 			To make the cursor blink in an xterm, see
-" 			|xterm-blink|.
-" 		{group-name}
-" 			a highlight group name, that sets the color and font
-" 			for the cursor
-" 		{group-name}/{group-name}
-" 			Two highlight group names, the first is used when
-" 			no language mappings are used, the other when they
-" 			are. |language-mapping|
-" " o
 " set guicursor="n-v-c:block-Cursor/lCursor, ve:ver35-Cursor, o:hor50-Cursor,i-ci:ver25-Cursor/lCursor, r-cr:hor20-Cursor/lCursor, sm:block-Cursor -blinkwait175-blinkoff150-blinkon175"
 
 set guicursor=i:ver3,n:block-blinkon10-Cursor,r:hor50
@@ -1952,7 +1854,6 @@ nnoremap gO i<CR>
 " overwrite vimtex status mapping
 " let @g="dawi\\gls{p}"
 " nnoremap <Leader>lg @g
-
 
 if has("signcolumnwidth")
     set signcolumnwidth=6
@@ -1974,6 +1875,28 @@ command! FlipBool call FzfFlipBool()
 map <A-]> :vsp<CR>:exec("tag ".expand("<cword>"))<CR>
 
 highlight SignifySignChange cterm=bold ctermbg=237  ctermfg=227 guibg=#F08A1F
+
+" MATT to test 
+let g:python_host_tcp=1
+
+function! ExportMenus(path)
+	let m = export_menus(a:path)
+	let r =  json_encode(m)
+	" put =r " to display in current buffer
+	call writefile([r], "menus.txt")
+endfunc
+
+
+function! Genmpack(file)
+	let t = readfile(a:file)
+	let j = json_decode(t)
+	" echo 'Decoded json'.string(j)
+	let m = msgpackdump(j)
+
+	call writefile(m, 'fname.mpack', 'b')
+endfunc
+
+
 " QuickFixLine
 " NonText
 " runtime init.generated.vim

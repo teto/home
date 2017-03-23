@@ -1,6 +1,6 @@
 " set commentstring=-
 "
-
+" setlocal formatprg=hindent
 setlocal keywordprg=hoogle\ --count=10
 setlocal expandtab                   " expand tabs to spaces
 " setlocal foldmethod=marker

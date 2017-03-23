@@ -11,6 +11,8 @@ PATH="$HOME/.cabal/bin:$PATH" # haskell
 PATH+=":$HOME/rofi-scripts"
 PATH+=":$XDG_DATA_HOME/fzf/bin"
 PATH+=":/home/teto/texlive/bin/x86_64-linux"
+PATH+=":/home/teto/dasht/bin"
+
 
 # set PATH so it includes user's private bin if it  exists
 if [ -d "$HOME/bin" ] ; then
@@ -56,8 +58,9 @@ export MPLBACKEND="Qt5Agg"
 # TODO try removing ?
 export MUTT="$XDG_CONFIG_HOME/mutt"
 
-export MAILDIR="$HOME/Maildir" 
+export MAILDIR="$HOME/Maildir"
 
+# export DASHT_DOCSETS_DIR
 # rust install folder
 export CARGO_HOME="$XDG_DATA_HOME/../"
 
@@ -75,6 +78,7 @@ export TERMINFO="${XDG_CONFIG_HOME:-~/.config}/terminfo"
 # can remove NORC once pb in nvim fixed
 export MANPAGER="nvim -u NORC -c 'set ft=man' -"
 # export MANPAGER="less"
+export MANPATH="$HOME/dasht/man:$MANPATH"
 
 # FZF {{{
 export FZF_DEFAULT_OPTS=" --exact"

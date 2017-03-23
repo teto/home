@@ -24,3 +24,4 @@ rofi.fixed-num-lines: false
 rofi.hmode: false
 rofi.terminal: termite
 rofi.ssh-set-title: true
+rofi.theme: /usr/local/share/rofi/themes//android_notification.rasi
