@@ -702,7 +702,7 @@ nnoremap <leader>gfs :vertical wincmd f<CR> " open file under cursor in a split
 let g:gutentags_project_info = [ {'type': 'python', 'file': 'setup.py'},
                                \ {'type': 'ruby', 'file': 'Gemfile'},
                                \ {'type': 'haskell', 'file': 'Setup.hs'} ]
-let g:gutentags_ctags_executable_haskell = 'gutenhasktags'
+let g:gutentags_ctags_executable_haskell = 'hasktags'
 " }}}
 " start haskell host if required  {{{
 if has('nvim')
