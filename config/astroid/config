@@ -1,7 +1,7 @@
 {
     "astroid": {
         "config": {
-            "version": "6"
+            "version": "7"
         },
         "notmuch_config": "\/home\/teto\/.config\/notmuch\/notmuchrc",
         "debug": {
@@ -44,11 +44,13 @@
         "external_editor": "true",
         "charset": "utf-8",
         "save_draft_on_force_quit": "true",
-        "attachment_words": "attach"
+        "attachment_words": "attach",
+        "attachment_directory": "~"
     },
     "mail": {
         "reply": {
-            "quote_line": "Excerpts from %1's message of %2:"
+            "quote_line": "Excerpts from %1's message of %2:",
+            "mailinglist_reply_to_sender": "true"
         },
         "forward": {
             "quote_line": "Forwarding %1's message of %2:",
@@ -57,7 +59,8 @@
         "sent_tags": "sent",
         "message_id_fqdn": "",
         "message_id_user": "",
-        "user_agent": "default"
+        "user_agent": "default",
+        "send_delay": "2"
     },
     "poll": {
         "interval": "60"
@@ -68,6 +71,7 @@
     "thread_view": {
         "open_html_part_external": "true",
         "open_external_link": "xdg-open",
+        "default_save_directory": "~",
         "indent_messages": "true",
         "code_prettify": {
             "enable": "true",

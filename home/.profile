@@ -14,3 +14,5 @@ export XDG_CACHE_HOME="$HOME/.cache"
 # }}}
 
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+
+export PATH="/home/teto/.local/share/..//bin:$PATH"

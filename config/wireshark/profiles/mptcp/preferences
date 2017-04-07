@@ -136,11 +136,11 @@ gui.geometry.save.maximized: FALSE
 # (case-insensitive).
 #gui.version_placement: BOTH
 
-# Automatically scroll the recently expanded item
+# When selecting a new packet, automatically scrollto the packet detail item that matches the mostrecently selected item
 # TRUE or FALSE (case-insensitive)
 gui.auto_scroll_on_expand: TRUE
 
-# The percentage down the view the recently expanded item should be scrolled
+# The percentage down the view the recently expanded detail item should be scrolled
 # A decimal number
 #gui.auto_scroll_percentage: 0
 
@@ -343,7 +343,7 @@ capture.device: eth0
 
 # Interface link-layer header types (Ex: en0(1),en1(143),...)
 # A string
-capture.devices_linktypes: bluetooth0(201)
+#capture.devices_linktypes: 
 
 # Interface descriptions (Ex: eth0(eth0 descr),eth1(eth1 descr),...)
 # A string
@@ -359,15 +359,15 @@ capture.devices_linktypes: bluetooth0(201)
 
 # Interface buffer size (Ex: en0(1),en1(143),...)
 # A string
-capture.devices_buffersize: eth0(2),any(2),lo(2),wlan0(2),bluetooth0(2),bluetooth-monitor(2),nflog(2),nfqueue(2),usbmon1(2),usbmon2(2),usbmon3(2),usbmon4(2)
+capture.devices_buffersize: eth0(2),any(2),lo(2),nflog(2),nfqueue(2),usbmon1(2),usbmon2(2),usbmon3(2),usbmon4(2)
 
 # Interface snap length (Ex: en0(65535),en1(1430),...)
 # A string
-capture.devices_snaplen: eth0:0(262144),any:0(262144),lo:0(262144),wlan0:0(262144),bluetooth0:0(262144),bluetooth-monitor:0(262144),nflog:0(262144),nfqueue:0(262144),usbmon1:0(262144),usbmon2:0(262144),usbmon3:0(262144),usbmon4:0(262144)
+capture.devices_snaplen: eth0:0(262144),any:0(262144),lo:0(262144),nflog:0(262144),nfqueue:0(262144),usbmon1:0(262144),usbmon2:0(262144),usbmon3:0(262144),usbmon4:0(262144)
 
 # Interface promiscuous mode (Ex: en0(0),en1(1),...)
 # A string
-capture.devices_pmode: eth0(1),any(1),lo(1),wlan0(1),bluetooth0(1),bluetooth-monitor(1),nflog(1),nfqueue(1),usbmon1(1),usbmon2(1),usbmon3(1),usbmon4(1)
+capture.devices_pmode: eth0(1),any(1),lo(1),nflog(1),nfqueue(1),usbmon1(1),usbmon2(1),usbmon3(1),usbmon4(1)
 
 # Capture in promiscuous mode?
 # TRUE or FALSE (case-insensitive)
@@ -426,37 +426,9 @@ capture.devices_pmode: eth0(1),any(1),lo(1),wlan0(1),bluetooth0(1),bluetooth-mon
 # TRUE or FALSE (case-insensitive)
 #extcap.gui_save_on_start: TRUE
 
-# Max bytes in a packet
-# A string
-#extcap.randpkt.maxbytes: 5000
-
-# Number of packets
-# A string
-#extcap.randpkt.count: 1000
-
-# Random type
-# A string
-#extcap.randpkt.randomtype: false
-
-# All random packets
-# A string
-#extcap.randpkt.allrandom: false
-
-# Type of packet
-# A string
-#extcap.randpkt.type: 
-
-# Listen port
-# A string
-#extcap.udpdump.port: 5555
-
-# Payload type
-# A string
-#extcap.udpdump.payload: data
-
 ####### Name Resolution ########
 
-# Resolve Ethernet MAC address to manufacturer names
+# Resolve Ethernet MAC addresses to host names from the preferences or system's Ethers file, or to a manufacturer based name.
 # TRUE or FALSE (case-insensitive)
 #nameres.mac_name: TRUE
 
@@ -484,19 +456,19 @@ nameres.use_external_name_resolver: FALSE
 # TRUE or FALSE (case-insensitive)
 #nameres.hosts_file_handling: FALSE
 
-# Resolve VLAN IDs to describing names. To do so you need a file called vlans in your user preference directory. Format of the file is:  "ID<Tab>Name" One line per VLAN.
+# Resolve VLAN IDs to network names from the preferences "vlans" file. Format of the file is: "ID<Tab>Name". One line per VLAN, e.g.: 1 Management
 # TRUE or FALSE (case-insensitive)
 #nameres.vlan_name: FALSE
 
-# Resolve SS7 Point Codes to describing names. To do so you need a file called ss7pcs in your user preference directory. Format of the file is:  "Network_Indicator<Dash>PC_Decimal<Tab>Name" One line per Point Code. e.g.: 2-1234 MyPointCode1
+# Resolve SS7 Point Codes to node names from the profiles "ss7pcs" file. Format of the file is: "Network_Indicator<Dash>PC_Decimal<Tab>Name". One line per Point Code, e.g.: 2-1234 MyPointCode1
 # TRUE or FALSE (case-insensitive)
 #nameres.ss7_pc_name: FALSE
 
-# You must restart Wireshark for this change to take effect
+# Resolve Object IDs to object names from the MIB and PIB modules defined below. You must restart Wireshark for this change to take effect
 # TRUE or FALSE (case-insensitive)
 #nameres.load_smi_modules: FALSE
 
-# Some errors can be ignored. If unsure, set to false.
+# While loading MIB or PIB modules errors may be detected, which are reported. Some errors can be ignored. If unsure, set to false.
 # TRUE or FALSE (case-insensitive)
 #nameres.suppress_smi_errors: FALSE
 
@@ -1342,6 +1314,10 @@ nameres.use_external_name_resolver: FALSE
 # TRUE or FALSE (case-insensitive)
 #couchbase.desegment_pdus: TRUE
 
+# The port used for communicating with the data service via ssl/tls
+# A decimal number
+#couchbase.ssl_port: 11207
+
 # Whether the SEL Protocol dissector should automatically pre-process Telnet data to remove IAC bytes
 # TRUE or FALSE (case-insensitive)
 #cp2179.telnetclean: TRUE
@@ -1724,40 +1700,6 @@ nameres.use_external_name_resolver: FALSE
 # A decimal number
 #fc.max_frame_size: 1024
 
-# When this option is enabled Wireshark will attempt to identify FCoIB packets automatically based on some common features (may generate false positives)
-# TRUE or FALSE (case-insensitive)
-#fcoib.heur_en: TRUE
-
-# Enables dissecting packets between the manually configured source/destination as FCoIB traffic
-# TRUE or FALSE (case-insensitive)
-#fcoib.manual_en: FALSE
-
-# Type of address specified
-# One of: LID, GID
-# (case-insensitive).
-#fcoib.addr_a_type: LID
-
-# LID/GID of address A
-# A string
-#fcoib.addr_a_id: 
-
-# QP Number for address A
-# A decimal number
-#fcoib.addr_a_qp: 0
-
-# Type of address specified
-# One of: LID, GID
-# (case-insensitive).
-#fcoib.addr_b_type: LID
-
-# LID/GID of address B
-# A string
-#fcoib.addr_b_id: 
-
-# QP Number for address B
-# A decimal number
-#fcoib.addr_b_qp: 0
-
 # Whether the FDDI dissector should add 3-byte padding to all captured FDDI packets (useful with e.g. Tru64 UNIX tcpdump)
 # TRUE or FALSE (case-insensitive)
 #fddi.padding: FALSE
@@ -1902,10 +1844,6 @@ nameres.use_external_name_resolver: FALSE
 # Whether to autodetect the cipher bit (because it might be set on unciphered data)
 # TRUE or FALSE (case-insensitive)
 #llcgprs.autodetect_cipher_bit: FALSE
-
-# Whether the Gryphon dissector should desegment all messages spanning multiple TCP segments
-# TRUE or FALSE (case-insensitive)
-#gryphon.desegment: TRUE
 
 # No description
 # TRUE or FALSE (case-insensitive)
@@ -2089,17 +2027,13 @@ nameres.use_external_name_resolver: FALSE
 # A string denoting an positive integer range (e.g., "1-20,30-40")
 #http.ssl.port: 443
 
-# When set, dissector will attempt to identify unknown IBA payloads as containing an encapsulated ethertype, and parse them accordingly
-# TRUE or FALSE (case-insensitive)
-#infiniband.identify_payload: TRUE
-
-# When set, dissector will attempt to identify and parse Mellanox Ethernet-over-InfiniBand packets
-# TRUE or FALSE (case-insensitive)
-#infiniband.dissect_eoib: TRUE
-
-# when set the Analyser will consider this as RRoce UDP Port and parse it accordingly
+# The UDP port for RROCE messages (default 4791)
 # A decimal number
 #infiniband.rroce.port: 4791
+
+# Try to decode a packet using an heuristic sub-dissector before using Decode As
+# TRUE or FALSE (case-insensitive)
+#infiniband.try_heuristic_first: TRUE
 
 # Maximum number of batch requests allowed
 # A decimal number
@@ -2191,36 +2125,6 @@ nameres.use_external_name_resolver: FALSE
 # A string denoting an positive integer range (e.g., "1-20,30-40")
 #inap.ssn: 106,241
 
-# Check to treat all traffic between the configured source/destination as SDP
-# TRUE or FALSE (case-insensitive)
-#infiniband_sdp.manual_en: FALSE
-
-# Type of address specified
-# One of: LID, GID
-# (case-insensitive).
-#infiniband_sdp.addr_a_type: LID
-
-# LID/GID of address A
-# A string
-#infiniband_sdp.addr_a_id: 
-
-# QP Number for address A
-# A decimal number
-#infiniband_sdp.addr_a_qp: 0
-
-# Type of address specified
-# One of: LID, GID
-# (case-insensitive).
-#infiniband_sdp.addr_b_type: LID
-
-# LID/GID of address B
-# A string
-#infiniband_sdp.addr_b_id: 
-
-# QP Number for address B
-# A decimal number
-#infiniband_sdp.addr_b_qp: 0
-
 # Whether the IPDC dissector should reassemble messages spanning multiple TCP segments. To use this option, you must also enable "Allow subdissectors to reassemble TCP streams" in the TCP protocol settings.
 # TRUE or FALSE (case-insensitive)
 #ipdc.desegment_ipdc_messages: TRUE
@@ -2291,7 +2195,7 @@ nameres.use_external_name_resolver: FALSE
 # TRUE or FALSE (case-insensitive)
 #ipv6.use_geoip: TRUE
 
-# Whether to check that all RPL Source Routed packets do not visit a node more than once
+# Check that all RPL Source Routed packets conform to RFC 6554 and do not visit a node more than once
 # TRUE or FALSE (case-insensitive)
 #ipv6.perform_strict_rpl_srh_rfc_checking: FALSE
 
@@ -2340,36 +2244,6 @@ nameres.use_external_name_resolver: FALSE
 # One of: LAPD, DPNSS
 # (case-insensitive).
 #isdn.dchannel_protocol: LAPD
-
-# Check to treat all traffic between the configured source/destination as iSER
-# TRUE or FALSE (case-insensitive)
-#iser.manual_en: FALSE
-
-# Type of address specified
-# One of: LID, GID
-# (case-insensitive).
-#iser.addr_a_type: LID
-
-# LID/GID of address A
-# A string
-#iser.addr_a_id: 
-
-# QP Number for address A
-# A decimal number
-#iser.addr_a_qp: 0
-
-# Type of address specified
-# One of: LID, GID
-# (case-insensitive).
-#iser.addr_b_type: LID
-
-# LID/GID of address B
-# A string
-#iser.addr_b_id: 
-
-# QP Number for address B
-# A decimal number
-#iser.addr_b_qp: 0
 
 # Range of iSER target ports(default 3260)
 # A string denoting an positive integer range (e.g., "1-20,30-40")
@@ -2533,6 +2407,10 @@ nameres.use_external_name_resolver: FALSE
 # Whether the JXTA dissector should reassemble messages spanning multiple UDP/TCP/SCTP segments. To use this option you must also enable "Allow subdissectors to reassemble TCP streams" in the TCP protocol settings  and enable "Reassemble fragmented IP datagrams" in the IP protocol settings.
 # TRUE or FALSE (case-insensitive)
 #jxta.desegment: TRUE
+
+# No description
+# TRUE or FALSE (case-insensitive)
+#kafka.show_string_bytes_lengths: FALSE
 
 # Set the SCTP port for kNet messages
 # A decimal number
@@ -2719,10 +2597,6 @@ nameres.use_external_name_resolver: FALSE
 # TRUE or FALSE (case-insensitive)
 #mac-lte.show_bsr_median: FALSE
 
-# The name of the file containing the mate module's configuration
-# A path to a file
-#mate.config: 
-
 # Decode control data received on "usb.control" with an unknown interface class as MBIM
 # TRUE or FALSE (case-insensitive)
 #mbim.control_decode_unknown_itf: FALSE
@@ -2884,6 +2758,14 @@ mptcp.intersubflows_retransmission: TRUE
 # When dissecting a parameter of a PCFm, if it is a StringList, IntegerList or Integer64 List,  You can limit the number of elements displayed, before it continues with the next Parameter.
 # A decimal number
 #mqpcf.maxlst: 20000
+
+# The TCP port numbers for MessagePack-RPC
+# A string denoting an positive integer range (e.g., "1-20,30-40")
+msgpack-rpc.tcp_ports: 6666
+
+# The WebSocket port numbers for MessagePack-RPC
+# A string denoting an positive integer range (e.g., "1-20,30-40")
+#msgpack-rpc.ws_ports: 9005-9009
 
 # Specifies that the raw text of the MSRP message should be displayed in addition to the dissection tree
 # TRUE or FALSE (case-insensitive)
@@ -3146,6 +3028,10 @@ mptcp.intersubflows_retransmission: TRUE
 # A string
 #ntlmssp.nt_password: 
 
+# Range of NVMe Subsystem ports(default 4220)
+# A string denoting an positive integer range (e.g., "1-20,30-40")
+#nvme-rdma.subsystem_ports: 4220
+
 # Dissect custom olsr.org message types (compatible with rfc routing agents)
 # TRUE or FALSE (case-insensitive)
 #olsr.ff_olsrorg: TRUE
@@ -3359,26 +3245,10 @@ mptcp.intersubflows_retransmission: TRUE
 # TRUE or FALSE (case-insensitive)
 #pkcs12.try_null_password: FALSE
 
-# Whether the PN-RT summary line should be shown in the protocol tree
-# TRUE or FALSE (case-insensitive)
-#pn_rt.summary_in_tree: TRUE
-
-# Reassemble PNIO Fragments and get them decoded
-# TRUE or FALSE (case-insensitive)
-#pn_rt.desegment: TRUE
-
 # Protocol payload type
 # One of: Data, Sony FeliCa, NXP MiFare, ISO 7816
 # (case-insensitive).
 #pn532.prtype532: Data
-
-# Whether the PNIO dissector is allowed to use detailed PROFIsafe dissection of cyclic data frames
-# TRUE or FALSE (case-insensitive)
-#pn_io.pnio_ps_selection: TRUE
-
-# Select your Networkpath to your GSD-Files.
-# A path to a directory
-#pn_io.pnio_ps_networkpath: 
 
 # Whether the POP dissector should reassemble RETR and TOP responses and spanning multiple TCP segments. To use this option, you must also enable "Allow subdissectors to reassemble TCP streams" in the TCP protocol settings.
 # TRUE or FALSE (case-insensitive)
@@ -3412,10 +3282,6 @@ mptcp.intersubflows_retransmission: TRUE
 # Show values of tags and lengths of data fields
 # TRUE or FALSE (case-insensitive)
 #pppoed.show_tags_and_lengths: FALSE
-
-# Enable this dissector (default is false)
-# TRUE or FALSE (case-insensitive)
-#prp.enable: FALSE
 
 # Properly translates vendor specific opcodes
 # One of: Unknown vendor, Eastman Kodak, Canon, Nikon, Casio EX-F1, Microsoft / MTP, Olympus E series
@@ -3586,40 +3452,6 @@ mptcp.intersubflows_retransmission: TRUE
 # Default link-layer type to use if an Open Reply packet has not been received.
 # A decimal number
 #rpcap.linktype: 4294967295
-
-# Check to treat all traffic between the configured source/destination as RPCoRDMA
-# TRUE or FALSE (case-insensitive)
-#rpcordma.manual_en: FALSE
-
-# Type of address specified
-# One of: LID, GID
-# (case-insensitive).
-#rpcordma.addr_a_type: LID
-
-# LID/GID of address A
-# A string
-#rpcordma.addr_a_id: 
-
-# QP Number for address A
-# A decimal number
-#rpcordma.addr_a_qp: 0
-
-# Type of address specified
-# One of: LID, GID
-# (case-insensitive).
-#rpcordma.addr_b_type: LID
-
-# LID/GID of address B
-# A string
-#rpcordma.addr_b_id: 
-
-# QP Number for address B
-# A decimal number
-#rpcordma.addr_b_qp: 0
-
-# Range of RPCoRDMA server ports(default 20049,2050)
-# A string denoting an positive integer range (e.g., "1-20,30-40")
-#rpcordma.target_ports: 20049,2050
 
 # RPKI-Router Protocol TCP TLS port if other than the default
 # A decimal number
@@ -3928,7 +3760,11 @@ mptcp.intersubflows_retransmission: TRUE
 # TRUE or FALSE (case-insensitive)
 #sip.delay_sdp_changes: FALSE
 
-# Whether the SCCP dissector should reassemble messages spanning multiple TCP segments. To use this option, you must also enable "Allow subdissectors to reassemble TCP streams" in the TCP protocol settings.
+# Validate SIP authorizations with known credentials
+# TRUE or FALSE (case-insensitive)
+#sip.validate_authorization: FALSE
+
+# Whether the SKINNY dissector should reassemble messages spanning multiple TCP segments. To use this option, you must also enable "Allow subdissectors to reassemble TCP streams" in the TCP protocol settings.
 # TRUE or FALSE (case-insensitive)
 #skinny.desegment: TRUE
 
@@ -4003,6 +3839,31 @@ mptcp.intersubflows_retransmission: TRUE
 # ON - display dissected variables inside SNMP tree, OFF - display dissected variables in root tree after SNMP
 # TRUE or FALSE (case-insensitive)
 #snmp.var_in_tree: TRUE
+
+# Set whether dissector should run Snort itself or use user packet comments
+# One of: Not looking for Snort alerts, From running Snort, From user comments
+# (case-insensitive).
+#snort.alerts_source: Not looking for Snort alerts
+
+# The name of the snort binary file to run
+# A path to a file
+#snort.binary: /usr/sbin/snort
+
+# The name of the file containing the snort IDS configuration.  Typically snort.conf
+# A path to a file
+#snort.config: /etc/snort/snort.conf
+
+# Whether or not information about the rule set and detected alerts should be shown in the tree of every snort PDU tree
+# TRUE or FALSE (case-insensitive)
+#snort.show_rule_set_stats: FALSE
+
+# Whether or not expert info should be used to highlight fired alerts
+# TRUE or FALSE (case-insensitive)
+#snort.show_alert_expert_info: FALSE
+
+# Attempt to show alert in reassembled frame where possible
+# TRUE or FALSE (case-insensitive)
+#snort.show_alert_in_reassembled_frame: FALSE
 
 # Whether the SoulSeek dissector should reassemble messages spanning multiple TCP segments. To use this option, you must also enable "Allow subdissectors to reassemble TCP streams" in the TCP protocol settings.
 # TRUE or FALSE (case-insensitive)
@@ -4412,6 +4273,16 @@ mptcp.intersubflows_retransmission: TRUE
 # A hexadecimal number
 #vlan.qinq_ethertype: 0x9100
 
+# IEEE 802.1Q specification version used (802.1Q-1998 uses 802.1D-2004 for PRI values)
+# One of: IEEE 802.1Q-1998, IEEE 802.1Q-2005, IEEE 802.1Q-2011
+# (case-insensitive).
+#vlan.version: IEEE 802.1Q-2011
+
+# Number of priorities supported, and number of those drop eligible (not used for 802.1Q-1998)
+# One of: 8 Priorities, 0 Drop Eligible, 7 Priorities, 1 Drop Eligible, 6 Priorities, 2 Drop Eligible, 5 Priorities, 3 Drop Eligible
+# (case-insensitive).
+#vlan.priority_drop: 8 Priorities, 0 Drop Eligible
+
 # Whether the VNC dissector should reassemble messages spanning multiple TCP segments.  To use this option, you must also enable "Allow subdissectors to reassemble TCP streams" in the TCP protocol settings.
 # TRUE or FALSE (case-insensitive)
 #vnc.desegment: TRUE
@@ -4436,27 +4307,6 @@ mptcp.intersubflows_retransmission: TRUE
 # One of: No subdissection, Line based text, As json, As SIP
 # (case-insensitive).
 #websocket.text_type: No subdissection
-
-# Set the maximum Basic CID used in the Wimax decoder (if other than the default of 320).  Note: The maximum Primary CID is double the maximum Basic CID.
-# A decimal number
-#wmx.basic_cid_max: 320
-
-# Set to TRUE to use the Corrigendum 2 version of Wimax message decoding. Set to FALSE to use the 802.16e-2005  version.
-# TRUE or FALSE (case-insensitive)
-#wmx.corrigendum_2_version: FALSE
-
-# Show transaction ID direction bit separately from the rest of the transaction ID field.
-# TRUE or FALSE (case-insensitive)
-#wimaxasncp.show_transaction_id_d_bit: FALSE
-
-# Print debug output to the console.
-# TRUE or FALSE (case-insensitive)
-#wimaxasncp.debug_enabled: FALSE
-
-# Version of the NWG that the R6 protocol complies with
-# One of: R1.0 v1.0.0, R1.0 v1.2.0, R1.0 v1.2.1
-# (case-insensitive).
-#wimaxasncp.nwg_version: R1.0 v1.2.1
 
 # Whether the WINS-Replication dissector should reassemble messages spanning multiple TCP segments. To use this option, you must also enable "Allow subdissectors to reassemble TCP streams" in the TCP protocol settings.
 # TRUE or FALSE (case-insensitive)

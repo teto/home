@@ -340,6 +340,8 @@ mode --pango_markup "$rofi_mode" {
 	# TODO use my patch
 	bindsym q mode "default", exec rofi -modi 'window' -show
 	bindsym b mode "default", exec buku_run
+	# TODO to use with Qtpass
+	bindsym r mode "default", exec rofi-pass
 	
 	bindsym Return mode "default"
 	bindsym Escape mode "default"

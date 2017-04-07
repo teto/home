@@ -41,7 +41,7 @@ clock = status.register(
     #     'upscroll': ["next_format", 1],
     #     'downscroll': ["next_format", -1]
     # },
-    log_level=logging.DEBUG,
+    # log_level=logging.DEBUG,
 )
 
 # status.register("xkblayout", layouts=["fr", "us"])
@@ -152,7 +152,7 @@ status.register("updates",
                 # on_leftclick=["urxvtc", '-e', 'zsh' , '-c' , 'sudo apt upgrade; zsh'],
                 on_rightclick="run",
                 backends = [aptget.AptGet()],
-                log_level=logging.DEBUG
+                # log_level=logging.DEBUG
                 )
 
 
@@ -166,7 +166,7 @@ status.register("khal_calendar",
 # # days=2,
         # calendars=[],
         # format="{title}",
-         log_level=logging.DEBUG,
+         # log_level=logging.DEBUG,
         )
 
 # status.register("scratchpad",)

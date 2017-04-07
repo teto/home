@@ -11,7 +11,6 @@ clickable_url = true
 
 # apparently it's possible to 
 font = Inconsolata For Powerline 11
-/* font = FontAwesome 11 */
 scrollback_lines = 10000
 search_wrap = false
 #icon_name = terminal
