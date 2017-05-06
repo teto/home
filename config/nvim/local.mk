@@ -65,7 +65,8 @@
 #
 # The gtest output provider shows verbose details
 # that can be useful to diagnose hung tests
-CMAKE_EXTRA_FLAGS += -DBUSTED_OUTPUT_TYPE=gtest
+# CMAKE_EXTRA_FLAGS += -DBUSTED_OUTPUT_TYPE=gtest
+CMAKE_EXTRA_FLAGS += -DBUSTED_OUTPUT_TYPE=nvim
 
 .DEFAULT_GOAL := nvim
 #

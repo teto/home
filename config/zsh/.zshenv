@@ -49,6 +49,7 @@ fi
 export VAGRANT_DEFAULT_PROVIDER="libvirt"
 export LD_LIBRARY_PATH="/usr/local/lib:$LD_LIBRARY_PATH"
 
+export GOPATH="$HOME/go"
 
 # to prevent a matplotlib pb
 export MPLBACKEND="Qt5Agg"

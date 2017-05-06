@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # Enable zapping (C-A-<Bksp> kills X)
 setxkbmap -option terminate:ctrl_alt_bksp
@@ -6,7 +6,7 @@ setxkbmap -option terminate:ctrl_alt_bksp
 export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
 source "$HOME/.zshenv"
 
-udiskie &
+# udiskie &
 
 # alsamixer in systray
 # regenerate i3 config

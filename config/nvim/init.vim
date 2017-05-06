@@ -58,6 +58,7 @@ set mouse=a
 set mousemodel=popup
 " }}}
 let mapleader = " "
+let maplocalleader = ","
 
 " Appearance 1 {{{
 let s:gutter_error_sign = "✘'"
@@ -69,8 +70,16 @@ function! DoRemote(arg)
 endfunction
 
 
+
+" GIT DIFF http://vimcasts.org/episodes/fugitive-vim-resolving-merge-conflicts-with-vimdiff/ {{{
+" the left window contains the version from the target branch
+" the middle window contains the working copy of the file, complete with conflict markers
+" the right window contains the version from the merge branch
+" }}}
+
 " filnxtToO
 set shortmess+=I
+set cmdheight=2
 
 " inverts the meaning of g in substitution, ie with gdefault, change all
 " occurences
@@ -89,15 +98,29 @@ Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
 " Plug 'autozimu/LanguageClient-neovim' " for LSP
 " Plug '~/vim-config'
 Plug '~/nvim-palette'
+" Plug 'gelguy/Cmd2.vim' " test
 Plug 'editorconfig/editorconfig-vim' " not remote but involves python
 " provider
 Plug 'brooth/far.vim' " search and replace for vim
 " Plug 'junegunn/vim-github-dashboard' " needs ruby support, works in recent neovim
 " Plug 'fmoralesc/vim-pad'
 "}}}
-Plug 'vim-scripts/coq-syntax', {'for': 'coq'}
+" to test https://github.com/neovim/neovim/issues/3688
+Plug 'haya14busa/incsearch.vim' " just to test
+" while waiting for my neovim notification provider...
+Plug 'tjdevries/descriptive_maps.vim', {'do': function('DoRemote') } " :call DescriptiveStart()
+Plug 'gianarb/notify.vim' " call notify#emitNotification('Title', 'Body')
+" Plug 'vim-scripts/coq-syntax', {'for': 'coq'}
 Plug 'the-lambda-church/coquille', {'branch': 'pathogen-bundle', 'for': 'coq'}
-Plug 'let-def/vimbufsync', {'for': 'coq'}
+Plug 'let-def/vimbufsync', {'for': 'coq'} " for coq
+" Plug 'vim-scripts/ProportionalResize'
+Plug 'inside/vim-search-pulse' " Search related
+
+" vim-search-pulse {{{
+let g:vim_search_pulse_mode = 'cursor_line'
+let g:vim_search_pulse_duration = 400
+"}}}
+
 " Plug 'kassio/neoterm' " some kind of REPL
 Plug 'ehamberg/vim-cute-python' " display unicode characters
 Plug 'dbakker/vim-projectroot' " projectroot#guess()
@@ -127,7 +150,38 @@ Plug 'ntpeters/vim-better-whitespace' " StripWhitespace
 " Plug 'timeyyy/clackclack.symphony' " data to play with orchestra.vim
 Plug 'tpope/vim-scriptease' " Adds command such as :Messages
 " Plug 'tpope/vim-eunuch' " {provides SudoEdit, SudoWrite , Unlink, Rename etc...
+
+" REPL (Read Execute Present Loop) {{{
 Plug 'metakirby5/codi.vim', {'on': 'Codi'} " repl
+Plug 'hkupty/iron.nvim'
+  " Plug 'jalvesaq/vimcmdline'
+" vimcmdline mappings{{{
+let cmdline_map_start          = "<LocalLeader>s"
+let cmdline_map_send           = "<Space>"
+let cmdline_map_source_fun     = "<LocalLeader>f"
+let cmdline_map_send_paragraph = "<LocalLeader>p"
+let cmdline_map_send_block     = "<LocalLeader>b"
+let cmdline_map_quit           = "<LocalLeader>q"
+
+" vimcmdline options
+let cmdline_vsplit             = 1      " Split the window vertically
+let cmdline_esc_term           = 1      " Remap <Esc> to :stopinsert in Neovim terminal
+let cmdline_in_buffer          = 1      " Start the interpreter in a Neovim buffer
+let cmdline_term_height        = 15     " Initial height of interpreter window or pane
+let cmdline_term_width         = 80     " Initial width of interpreter window or pane
+let cmdline_tmp_dir            = '/tmp' " Temporary directory to save files
+let cmdline_outhl              = 1      " Syntax highlight the output
+
+" configure interpreters
+let cmdline_app           = {}
+let cmdline_app["python"] = "ptipython3"
+let cmdline_app["ruby"]   = "pry"
+let cmdline_app["sh"]     = "bash"
+
+let cmdline_follow_colorscheme = 1
+let cmdline_external_term_cmd = "xterm -e '%s' &"
+"}}}
+"}}}
 " Plug 'git@github.com:SirVer/ultisnips' " handle snippets
 " Snippets are separated from the engine. Add this if you want them:
 " Plug 'honza/vim-snippets' "  ultisnips compatible snippets
@@ -220,16 +274,14 @@ Plug 'tpope/vim-rsi'  " maps readline bindings
 "Plug 'fisadev/vim-ctrlp-cmdpalette' " sublime text like palette
 "Plug 'osyo-manga/vim-anzu' " to improve internal search
 Plug 'mhinz/vim-startify' " very popular, vim's homepage
-
-
 Plug 'dietsche/vim-lastplace' " restore last cursor postion
 " vim-lastplace to restore cursor position {{{
 let g:lastplace_ignore = "gitcommit,svn"
 " }}}
 " Powerline does not work in neovim hence use vim-airline instead
 "if has('nvim')
-  Plug 'vim-airline/vim-airline'
-  Plug 'vim-airline/vim-airline-themes' " creates problems if not here
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes' " creates problems if not here
 "else
 	"Plug 'Lokaltog/powerline' , {'rtp': 'powerline/bindings/vim/'}
 "endif
@@ -253,7 +305,7 @@ Plug 'tpope/vim-fugitive' " to use with Git, VERY powerful
 "Plug 'tpope/vim-surround' " don't realy know how to use yet
 "Plug 'junegunn/vim-peekaboo' " gives a preview of buffers when pasting
 Plug 'mhinz/vim-randomtag', { 'on': 'Random' } " Adds a :Random function that launches help at random
-" Plug 'majutsushi/tagbar' " , {'on': 'TagbarToggle'} disabled lazyloading else it would not work with statusline
+Plug 'majutsushi/tagbar' " , {'on': 'TagbarToggle'} disabled lazyloading else it would not work with statusline
 Plug 'git@github.com:machakann/vim-highlightedyank.git' " highlit
 " Plug 'haya14busa/vim-operator-flashy' " Flash selection on copy
 
@@ -290,7 +342,7 @@ Plug 'kshenoy/vim-signature' " display marks in gutter, love it
 Plug 'teto/QuickFixCurrentNumber' " use :Cnr :Cgo instead of :cnext etc...
 Plug 'git@github.com:vim-scripts/ingo-library.git' " DEPENDANCY of QuickFixCurrentNumber
 "Plug 'tomtom/quickfixsigns_vim'
-
+Plug 'vim-scripts/a.vim' " :A
 Plug 'mhinz/vim-rfc', { 'on': 'RFC' }
 " can show a list of unicode characeters, with their name  :UnicodeTable etc... 
 " careful maps F4 by default
@@ -703,6 +755,7 @@ let g:gutentags_project_info = [ {'type': 'python', 'file': 'setup.py'},
                                \ {'type': 'ruby', 'file': 'Gemfile'},
                                \ {'type': 'haskell', 'file': 'Setup.hs'} ]
 let g:gutentags_ctags_executable_haskell = 'hasktags'
+let g:gutentags_ctags_exclude = ['.vim-src', 'build']
 " }}}
 " start haskell host if required  {{{
 if has('nvim')
@@ -999,8 +1052,8 @@ set completeopt=menu,longest
 let g:python3_host_skip_check = 1
 "}}}
 " vim-sayonara {{{
-nnoremap <silent><leader>q  :Sayonara<cr>
-nnoremap <silent><leader>Q  :Sayonara!<cr>
+nnoremap <silent><leader>Q  :Sayonara<cr>
+nnoremap <silent><leader>q  :Sayonara!<cr>
 
 let g:sayonara_confirm_quit = 0
 " }}}
@@ -1014,7 +1067,7 @@ let g:neomake_verbose = 1
 let g:neomake_python_enabled_makers = ['mypy', 'flake8']
 let g:neomake_logfile = $HOME.'/neomake.log'
 let g:neomake_c_gcc_args = ['-fsyntax-only', '-Wall']
-let g:neomake_open_list = 2 " 0 to disable/2 preserves cursor position
+let g:neomake_open_list = 0 " 0 to disable/2 preserves cursor position
 
 let g:neomake_airline = 1
 let g:neomake_echo_current_error = 1
@@ -1197,27 +1250,26 @@ let g:tex_flavor = "latex"
 " <localleader>ll pour la compilation continue du pdf
 " <localleader>lv pour la preview du pdf
 let g:vimtex_quickfix_open_on_warning = 1
-
+let g:vimtex_view_automatic=1
 " autoindent can slow down vim quite a bit 
 " to check indent parameters, run :verbose set ai? cin? cink? cino? si? inde? indk?
 let g:vimtex_indent_enabled=0
 let g:vimtex_indent_bib_enabled=1
+let g:vimtex_compiler_enabled=1 " enable new style vimtex
+let g:vimtex_compiler_progname='nvr'
+" let g:vimtex_compiler_method=
+" g:vimtex_quickfix_method=
 let g:vimtex_indent_enabled=0
 let g:vimtex_indent_bib_enabled=1
 let g:vimtex_index_split_pos = 'below'
 let g:vimtex_view_method = 'zathura'
 "let g:vimtex_snippets_leader = ','
-let g:vimtex_latexmk_progname = 'nvr'
-let g:latex_view_general_viewer = 'zathura'
 let g:vimtex_fold_enabled = 0
 let g:vimtex_format_enabled = 0
 let g:vimtex_complete_recursive_bib = 0
 let g:vimtex_complete_close_braces = 0
 let g:vimtex_fold_comments=0
-let g:vimtex_quickfix_autojump = 0
-let g:vimtex_quickfix_ignore_all_warnings =0
 let g:vimtex_view_use_temp_files=1 " to prevent zathura from flickering
-" let g:vimtex_latexmk_options
 let g:vimtex_syntax_minted = [
       \ {
       \   'lang' : 'json',
@@ -1226,6 +1278,7 @@ let g:vimtex_syntax_minted = [
 let g:vimtex_quickfix_mode = 2 " 1=> opened automatically and becomes active (2=> inactive)
 " Package biblatex Warning: B
 " with being on anotherline
+" deprecated by g:vimtex_quickfix_latexlog|)
 let g:vimtex_quickfix_ignored_warnings = [
       \ 'Underfull',
       \ 'Overfull',
@@ -1234,10 +1287,6 @@ let g:vimtex_quickfix_ignored_warnings = [
       \ "Invalid format of field 'month'"
       \ ]
       " 
-"let g:tex_stylish = 1
-"let g:tex_flavor = 'latex'
-"let g:tex_isk='48-57,a-z,A-Z,192-255,:'
-let g:vimtex_latexmk_callback= 1 " let it to 1 else quickfix won't pop
   if !exists('g:ycm_semantic_triggers')
     let g:ycm_semantic_triggers = {}
   endif
@@ -1356,7 +1405,7 @@ set foldcolumn=3
 
 if has("folding_fillchars")
 	" removed to test default values
-  " set fillchars+=foldopen:▾,foldsep:│,foldclose:▸,foldend:^
+  set fillchars+=foldopen:▾,foldsep:│,foldclose:▸,foldend:^
   " echo "doing it"
   " set fdc=-1
   set fdc=0
@@ -1555,7 +1604,7 @@ endfun
 let g:nvimdev_auto_init=1
 let g:nvimdev_auto_cd=1
 " let g:nvimdev_auto_ctags=1
-let g:nvimdev_auto_lint=1
+let g:nvimdev_auto_lint=0
 let g:nvimdev_build_readonly=1
 
         " \ 'remove_invalid_entries': get(g:, 'neomake_remove_invalid_entries', 0),
@@ -1582,8 +1631,8 @@ set hidden " you can open a new buffer even if current is unsaved (error E37)
 " draw a line on 80th column
 set colorcolumn=80
 
-" default behavior for diff=filler,vertical 
-set diffopt=filler,vertical 
+" default behavior for diff=filler,vertical
+set diffopt=filler,vertical
 
 " Y behave like D or C
 nnoremap Y y$
@@ -1786,22 +1835,24 @@ nmap <Leader>x <Plug>(PaletteRun)
 " use emenu ("execute menu") to launch the command
 " disable all menus
 unmenu * 
-" map <Leader>s :setlocal spell spelllang=en_us<CR>
-" TODO use histadd
-menu Spell.EN_US :setlocal spell spelllang=en_us \| call histadd('cmd', 'setlocal spell spelllang=en_us')<CR>
-menu Spell.FR :setlocal spell spelllang=fr_fr<CR>
+" menu Spell.EN_US :setlocal spell spelllang=en_us \| call histadd('cmd', 'setlocal spell spelllang=en_us')<CR>
+menu Spell.&FR :setlocal spell spelllang=fr_fr<CR>
+" menu Spell.EN_US :setlocal spell spelllang=en_us<CR>
+menu <script> Spell.&EN_US :setlocal spell spelllang=en_us<CR>
+menu ]Spell.hidden should be hidden
 
 menu Trans.FR :te trans :fr <cword><CR>
+tmenu Trans.FR Traduire vers le francais
 " tabulation-related menu {{{2
-menu Search.CurrentBuffer :exe Grepper -grepprg rg --vimgrep $* $.
-menu Search.AllBuffers :exe Grepper -grepprg rg --vimgrep $* $+
+" menu Search.CurrentBuffer :exe Grepper -grepprg rg --vimgrep $* $.
+" menu Search.AllBuffers :exe Grepper -grepprg rg --vimgrep $* $+
 " }}}
 " tabulation-related menu {{{2
-menu Tabs.S2 :set  tabstop=2 softtabstop=2 sw=2<CR>
-menu Tabs.S4 :set ts=4 sts=4 sw=4<CR>
-menu Tabs.S6 :set ts=6 sts=6 sw=6<CR>
-menu Tabs.S8 :set ts=8 sts=8 sw=8<CR>
-menu Tabs.SwitchExpandTabs :set expandtab!
+" menu Tabs.S2 :set  tabstop=2 softtabstop=2 sw=2<CR>
+" menu Tabs.S4 :set ts=4 sts=4 sw=4<CR>
+" menu Tabs.S6 :set ts=6 sts=6 sw=6<CR>
+" menu Tabs.S8 :set ts=8 sts=8 sw=8<CR>
+" menu Tabs.SwitchExpandTabs :set expandtab!
 "}}}
 " }}}
 " nvim specific configuration {{{
@@ -1841,7 +1892,7 @@ colorscheme molokai
 " }}}
 " set guicursor="n-v-c:block-Cursor/lCursor, ve:ver35-Cursor, o:hor50-Cursor,i-ci:ver25-Cursor/lCursor, r-cr:hor20-Cursor/lCursor, sm:block-Cursor -blinkwait175-blinkoff150-blinkon175"
 
-set guicursor=i:ver3,n:block-blinkon10-Cursor,r:hor50
+" set guicursor=i:ver3,n:block-blinkon10-Cursor,r:hor50
 highl Cursor ctermfg=16 ctermbg=253 guifg=#000000 guibg=#00FF00
 
 " TESTING only
@@ -1879,8 +1930,9 @@ highlight SignifySignChange cterm=bold ctermbg=237  ctermfg=227 guibg=#F08A1F
 " MATT to test 
 let g:python_host_tcp=1
 
-function! ExportMenus(path)
-	let m = export_menus(a:path)
+function! ExportMenus(path, modes)
+	" export all for now
+	let m = menu_get(a:path, a:modes)
 	let r =  json_encode(m)
 	" put =r " to display in current buffer
 	call writefile([r], "menus.txt")

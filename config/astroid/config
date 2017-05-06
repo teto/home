@@ -84,6 +84,7 @@
             "enable": "true"
         },
         "mark_unread_delay": "0.5",
+        "expand_flagged": "true",
         "mathjax": {
             "enable": "true",
             "uri_prefix": "https:\/\/cdn.mathjax.org\/mathjax\/latest\/",
