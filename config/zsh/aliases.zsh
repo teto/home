@@ -19,6 +19,7 @@ alias -s docx=xdg-open
 
 alias mp="mptcpanalyzer"
 alias mn="mptcpnumerics"
+# autres players a tester eventuellement
 alias n="ncmpcpp"
 alias ff="find . -iname"
 # alias size="du -h --max-depth=1"
@@ -90,7 +91,8 @@ alias r="ranger"
 # view uses vim as a pager
 alias l="nvim +view"
 alias s="sxiv" 
-alias z="zathura"
+# parce que apvlv est plus libre que zathura
+alias z="apvlv"
 alias q="qutebrowser"
 # }}}
 

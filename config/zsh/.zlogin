@@ -13,6 +13,7 @@ uptime
 # Accepte les messages d'autres utilisateurs
 mesg y
 
+echo "^a pour editer la commande courante"
 
 # Pour les ordinateurs avec un pavé numérique...
 # Active le pavé numérique quand on se loggue en console

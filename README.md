@@ -5,10 +5,11 @@ This folder contains my customizations for:
 * alot (MUA: Mail User Agent, like mutt is)
 * [astroid](https://github.com/astroidmail/astroid) (like alot, but with a GUI interface)
 * bash
-* [buku](https://github.com/jarun/Buku): a bookmark manager
+* [buku](https://github.com/jarun/Buku): a cli bookmark manager
 * clerk (to control mpd via rofi)
 * font handling
 * git (Source control)
+* greenclip (clipboard history, works with rofi, contender of roficlip)
 * htop
 * [i3](i3wm.org), a great if not the best tiling window manager)
 * i3pystatus (generates a status line for i3bar)
@@ -33,6 +34,8 @@ This folder contains my customizations for:
 * termite (a modal terminal)
 * tig (a git history reader)
 * tmux (terminal multiplexer)
+* vifm (ranger-like, file explorer)
+* vimus (or vimpc ? mpd player)
 * weechat (Irc client)
 * zsh (powerful alternative to bash)
 

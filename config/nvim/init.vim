@@ -12,7 +12,7 @@ map <D-b> :echom "hello papy"
 " nvim --startuptime startup.log
 " nvim -u NONE --startuptime startup.log
 "}}}
-" to see the difference highlights, 
+" to see the difference highlights,
 " runtime syntax/hitest.vim
 
 " vim-plug autoinstallation {{{
@@ -95,14 +95,15 @@ call plug#begin(s:plugdir)
 
 " provider dependant {{{
 Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
-" Plug 'autozimu/LanguageClient-neovim' " for LSP
 " Plug '~/vim-config'
 Plug '~/nvim-palette'
+Plug 'romainl/vim-qf' " can create pb with neomake
 " Plug 'gelguy/Cmd2.vim' " test
 Plug 'editorconfig/editorconfig-vim' " not remote but involves python
 " provider
-Plug 'brooth/far.vim' " search and replace for vim
-" Plug 'junegunn/vim-github-dashboard' " needs ruby support, works in recent neovim
+Plug 'brooth/far.vim' " search and replace across files
+" needs ruby support, works in recent neovim
+Plug 'junegunn/vim-github-dashboard', { 'do': function('DoRemote') } 
 " Plug 'fmoralesc/vim-pad'
 "}}}
 " to test https://github.com/neovim/neovim/issues/3688
@@ -111,7 +112,8 @@ Plug 'haya14busa/incsearch.vim' " just to test
 Plug 'tjdevries/descriptive_maps.vim', {'do': function('DoRemote') } " :call DescriptiveStart()
 Plug 'gianarb/notify.vim' " call notify#emitNotification('Title', 'Body')
 " Plug 'vim-scripts/coq-syntax', {'for': 'coq'}
-Plug 'the-lambda-church/coquille', {'branch': 'pathogen-bundle', 'for': 'coq'}
+" Plug 'the-lambda-church/coquille', {'branch': 'matt', 'for': 'coq'}
+Plug 'teto/coquille', {'branch': 'matt', 'for': 'coq'}
 Plug 'let-def/vimbufsync', {'for': 'coq'} " for coq
 " Plug 'vim-scripts/ProportionalResize'
 Plug 'inside/vim-search-pulse' " Search related
@@ -131,6 +133,7 @@ Plug 'sk1418/QFGrep' " Filter quickfix
 " (upstreamd already or ?)
 " Plug 'mtth/scratch.vim' " , {'on': 'Scratch'} mapped to ?
 " Plug 'tjdevries/vim-inyoface.git' "InYoFace_toggle to display only comments 
+Plug 'autozimu/LanguageClient-neovim' " :h LanguageClientUsage
 " Plug 'tjdevries/nvim-langserver-shim' " for LSP
 " Plug 'powerman/vim-plugin-AnsiEsc' " { to hl ESC codes
 " Plug 'git@github.com:junegunn/gv.vim.git' " git commit viewer :Gv
@@ -245,12 +248,13 @@ Plug 'dzeban/vim-log-syntax' " hl some keywords like ERROR/DEBUG/WARNING
 Plug 'Valloric/ListToggle' " toggle location/quickfix list toggling seems to fail
 " Plug 'git@github.com:milkypostman/vim-togglelist' " same
 Plug 'tpope/vim-obsession' ", {'on': 'Obsession', 'ObsessionStatus'}  very cool, register edited files in a Session.vim, call with :Obsession
-" Plug 'mbbill/undotree'
+Plug 'mbbill/undotree' " replaces gundo
 " Plug '907th/vim-auto-save' " :h auto-save
 Plug '~/vim-auto-save' " autosave :h auto-save
 " Plug '~/neovim-auto-autoread' " to check for filechanges
-", { 'for': 'python' } " 
-Plug 'bfredl/nvim-miniyank' " killring alike plugin, cycling paste
+", { 'for': 'python' } "
+" Plug 'bfredl/nvim-miniyank' " killring alike plugin, cycling paste careful
+" hangs with big strings
 
 " Text objects {{{
 Plug 'michaeljsmith/vim-indent-object'
@@ -274,7 +278,7 @@ Plug 'tpope/vim-rsi'  " maps readline bindings
 "Plug 'fisadev/vim-ctrlp-cmdpalette' " sublime text like palette
 "Plug 'osyo-manga/vim-anzu' " to improve internal search
 Plug 'mhinz/vim-startify' " very popular, vim's homepage
-Plug 'dietsche/vim-lastplace' " restore last cursor postion
+Plug 'dietsche/vim-lastplace' " restore last cursor postion (is it still needed ?)
 " vim-lastplace to restore cursor position {{{
 let g:lastplace_ignore = "gitcommit,svn"
 " }}}
@@ -291,7 +295,7 @@ Plug 'vim-airline/vim-airline-themes' " creates problems if not here
 " }}}
 
 "
-Plug 'justinmk/vim-dirvish' " replaces netrw 
+Plug 'justinmk/vim-dirvish' " replaces netrw
 " Plug 'justinmk/vim-gtfo' " gfo to open filemanager in cwd
 Plug 'wannesm/wmgraphviz.vim', {'for': 'dot'} " graphviz syntax highlighting
 Plug 'tpope/vim-commentary' "gcc to comment/gcgc does not work that well
@@ -301,6 +305,7 @@ Plug 'blueyed/vim-diminactive' " disable syntax coloring on inactive splits
 "Plug 'tpope/vim-sleuth' " Dunno what it is
 "Plug 'justinmk/vim-gtfo' " ?
 Plug 'tpope/vim-fugitive' " to use with Git, VERY powerful
+Plug 'tpope/vim-rhubarb' " fugitive plugin to support github
 "Plug 'jaxbot/github-issues.vim' " works only with vim
 "Plug 'tpope/vim-surround' " don't realy know how to use yet
 "Plug 'junegunn/vim-peekaboo' " gives a preview of buffers when pasting
@@ -339,10 +344,11 @@ Plug 'kshenoy/vim-signature' " display marks in gutter, love it
 " Plug '~/QuickFixCurrentNumber' " use :Cnr :Cgo instead of :cnext etc...
 " Plug 'Coacher/QuickFixCurrentNumber' " use :Cnr :Cgo instead of :cnext etc...
 " =======
+Plug 'Shougo/echodoc.vim' " display signature in cmdline after v:completed_item
 Plug 'teto/QuickFixCurrentNumber' " use :Cnr :Cgo instead of :cnext etc...
 Plug 'git@github.com:vim-scripts/ingo-library.git' " DEPENDANCY of QuickFixCurrentNumber
 "Plug 'tomtom/quickfixsigns_vim'
-Plug 'vim-scripts/a.vim' " :A
+Plug 'nacitar/a.vim' " :A
 Plug 'mhinz/vim-rfc', { 'on': 'RFC' }
 " can show a list of unicode characeters, with their name  :UnicodeTable etc... 
 " careful maps F4 by default
@@ -354,7 +360,7 @@ Plug 'vim-scripts/Modeliner' " <leader>ml to setup buffer modeline
 "Plug 'vimwiki/vimwiki'   " to write notes
 "Plug 'vim-scripts/DynamicSigns'
 " async grep neovim only
-Plug 'mhinz/vim-grepper', { 'on': 'Grepper'}
+Plug 'mhinz/vim-grepper' " , { 'on': 'Grepper'}
 " Plug 'ddrscott/vim-side-search'  " tOdo
 "Plug 'teto/neovim-auto-autoread' " works only in neovim, runs external checker
 Plug 'neomake/neomake' " async build for neovim
@@ -374,7 +380,7 @@ Plug 'whatyouhide/vim-gotham'
 Plug 'sickill/vim-monokai'
 Plug 'justinmk/molokai'
 Plug 'mhinz/vim-janah'
-Plug 'Solarized'
+Plug 'vim-scripts/Solarized'
 Plug 'morhetz/gruvbox'
 Plug 'romainl/flattened'
 Plug 'joshdick/onedark.vim'
@@ -949,125 +955,31 @@ let g:jedi#auto_vim_configuration = 1 " to prevent python's help popup
 let g:jedi#completions_enabled = 0 " disable when deoplete in use
 "autocmd BufWinEnter '__doc__' setlocal bufhidden=delete
 " }}}
-" Airline {{{
-let g:airline_powerline_fonts = 0
-let g:airline_left_sep = ''
-let g:airline_right_sep = ''
-let g:airline_section = '|'
-" display buffers as tabs if no split
-" see :h airline-tabline
-let g:airline#extensions#tabline#enabled = 1 
-let g:airline#extensions#tabline#left_sep = ' '
-let g:airline#extensions#tabline#left_alt_sep = '|'
-let g:airline_theme = 'molokai'
-" let g:airline_section_b = ""
-" section y is fileencoding , useless in neovim
-let g:airline_section_y = ""  
- " airline#section#create(['windowswap', 'obsession', '%3p%%'.spc, 'linenr', 'maxlinenr', spc.':%3v'])
-" let g:airline_section_z = airline#section#create_right(['linenumber'])
-let g:airline#extensions#tabline#buffer_nr_show = 1
-let g:airline#extensions#tabline#show_buffers = 1  
-let g:airline#extensions#tabline#buffer_min_count =2
-let g:airline#extensions#tabline#buffer_idx_mode = 1
-let g:airline#extensions#tabline#buffers_label = 'b'
-let g:airline#extensions#tabline#tabs_label = 't'
-let g:airline#extensions#tabline#show_tabs = 0
-
-
-
-let g:airline#extensions#tabline#formatter = 'unique_tail'
-" let g:airline_extensions = ['branch', 'tabline', 'obsession']
-
-" rely on tagbar plugin
-let g:airline#extensions#tagbar#enabled = 1
-let g:airline#extensions#tagbar#flags = 'f'
-
-" csv plugin
-let g:airline#extensions#csv#enabled = 1
-let g:airline_detect_spell=1
-
-" ycm integration
-let g:airline#extensions#ycm#enabled = 0
-let g:airline#extensions#ycm#error_symbol = s:gutter_error_sign
-let g:airline#extensions#ycm#warning_symbol = s:gutter_warn_sign
-
-let g:airline#extensions#whitespace#enabled = 0
-let g:airline#extensions#whitespace#mixed_indent_algo = 2
-
-let g:airline#extensions#obsession#enabled = 1
-let g:airline#extensions#obsession#indicator_text = '$'
-" let g:airline#extensions#whitespace#checks = [ 'indent', 'trailing', 'long' ]
-"|neomake#statusline#LoclistStatus should be shown in warning section
-" let &statusline .= ' %{grepper#statusline()}'
-" let g:airline_section_z = airline#section#create(['%{ObsessionStatus(''$'', '''')}'])
-nmap <leader>& <Plug>AirlineSelectTab1
-nmap <leader>é <Plug>AirlineSelectTab2
-nmap <leader>" <Plug>AirlineSelectTab3
-nmap <leader>' <Plug>AirlineSelectTab4
-nmap <leader>( <Plug>AirlineSelectTab5
-nmap <leader>- <Plug>AirlineSelectTab6
-nmap <leader>è <Plug>AirlineSelectTab7
-nmap <leader>è <Plug>AirlineSelectTab7
-nmap <leader>_ <Plug>AirlineSelectTab8
-nmap <leader>ç <Plug>AirlineSelectTab9
-
-"}}}
-" limelight {{{
-" Color name (:help cterm-colors) or ANSI code
-" let g:limelight_conceal_ctermfg = 'gray'
-" let g:limelight_conceal_ctermfg = 240
-
-" " Color name (:help gui-colors) or RGB color
-" let g:limelight_conceal_guifg = 'DarkGray'
-" let g:limelight_conceal_guifg = '#777777'
-
-" " Default: 0.5
-" let g:limelight_default_coefficient = 0.7
-
-" " Number of preceding/following paragraphs to include (default: 0)
-" let g:limelight_paragraph_span = 1
-
-" " Beginning/end of paragraph
-" "   When there's no empty line between the paragraphs
-" "   and each paragraph starts with indentation
-" let g:limelight_bop = '^\s'
-" let g:limelight_eop = '\ze\n^\s'
-
-" " Highlighting priority (default: 10)
-" "   Set it to -1 not to overrule hlsearch
-" let g:limelight_priority = -1
-" goyo.vim integration
-" autocmd! User GoyoEnter Limelight
-" autocmd! User GoyoLeave Limelight!
-" }}}
-" inyoface (highlight only comments) {{{
-nmap <leader>c <Plug>(InYoFace_Toggle)<CR>
-" }}}
-" close the preview window on python completion {{{
-" autocmd CompleteDone * pclose 
-set completeopt=menu,longest
-" }}}
-" python config {{{
-" let g:python3_host_prog = '/path/to/python3'
-let g:python3_host_skip_check = 1
-"}}}
-" vim-sayonara {{{
-nnoremap <silent><leader>Q  :Sayonara<cr>
-nnoremap <silent><leader>q  :Sayonara!<cr>
-
-let g:sayonara_confirm_quit = 0
-" }}}
 " Neomake config {{{
+" @return {String}
+"  toadd in statusline
+function! NeomakeJobs() abort
+" s:winnr != winnr()
+  return 1
+        \ || !exists('*neomake#GetJobs')
+        \ || empty(neomake#GetJobs())
+        \ ? ''
+        \ : 'make'
+endfunction
+
 let g:neomake_verbose = 1
 
 
 " pyflakes can't be disabled on a per error basis
 " also it considers everything as error => disable
 " flake8  or pycodestyle when supported 
-let g:neomake_python_enabled_makers = ['mypy', 'flake8']
+let g:neomake_list_height=5
+
+" how to let 'mypy' ignore warning/errors as pycodestyle does ?
+let g:neomake_python_enabled_makers = ['pycodestyle', ]
 let g:neomake_logfile = $HOME.'/neomake.log'
 let g:neomake_c_gcc_args = ['-fsyntax-only', '-Wall']
-let g:neomake_open_list = 0 " 0 to disable/2 preserves cursor position
+let g:neomake_open_list = 2 " 0 to disable/2 preserves cursor position
 
 let g:neomake_airline = 1
 let g:neomake_echo_current_error = 1
@@ -1126,6 +1038,123 @@ augroup my_neomake
     autocmd BufWritePost * Neomake
     autocmd User NeomakeJobFinished call OnNeomakeFinished()
 augroup END
+" }}}
+" Airline {{{
+let g:airline_powerline_fonts = 0
+let g:airline_left_sep = ''
+let g:airline_right_sep = ''
+let g:airline_section = '|'
+" display buffers as tabs if no split
+" see :h airline-tabline
+let g:airline_theme = 'molokai'
+let g:airline_section_b = '%#TermCursor#' . NeomakeJobs()
+let g:airline#extensions#default#layout = [
+      \ [ 'a', 'b', 'c' ],
+      \ [ 'x', 'y', 'z', 'error', 'warning' ]
+      \ ]
+" section y is fileencoding , useless in neovim
+let g:airline_section_y = ""  
+ " airline#section#create(['windowswap', 'obsession', '%3p%%'.spc, 'linenr', 'maxlinenr', spc.':%3v'])
+" let g:airline_section_z = airline#section#create_right(['linenumber'])
+" airline extensions {{{
+let g:airline#extensions#tabline#enabled = 1 
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline#extensions#vimtex#enabled=1
+let g:airline#extensions#tabline#buffer_nr_show = 1
+let g:airline#extensions#tabline#show_buffers = 1  
+let g:airline#extensions#tabline#buffer_min_count =2
+let g:airline#extensions#tabline#buffer_idx_mode = 1
+let g:airline#extensions#tabline#buffers_label = 'b'
+let g:airline#extensions#tabline#tabs_label = 't'
+let g:airline#extensions#tabline#show_tabs = 0
+
+
+
+let g:airline#extensions#tabline#formatter = 'unique_tail'
+" let g:airline_extensions = ['branch', 'tabline', 'obsession']
+
+" rely on tagbar plugin
+let g:airline#extensions#tagbar#enabled = 1
+let g:airline#extensions#tagbar#flags = 'f'
+
+" csv plugin
+let g:airline#extensions#csv#enabled = 1
+let g:airline_detect_spell=1
+
+" ycm integration
+let g:airline#extensions#ycm#enabled = 0
+let g:airline#extensions#ycm#error_symbol = s:gutter_error_sign
+let g:airline#extensions#ycm#warning_symbol = s:gutter_warn_sign
+
+let g:airline#extensions#whitespace#enabled = 0
+let g:airline#extensions#whitespace#mixed_indent_algo = 2
+
+let g:airline#extensions#obsession#enabled = 1
+let g:airline#extensions#obsession#indicator_text = '$'
+"}}}
+
+" let g:airline#extensions#whitespace#checks = [ 'indent', 'trailing', 'long' ]
+"|neomake#statusline#LoclistStatus should be shown in warning section
+" let &statusline .= ' %{grepper#statusline()}'
+" let g:airline_section_z = airline#section#create(['%{ObsessionStatus(''$'', '''')}'])
+" airline mappings {{{
+nmap <leader>& <Plug>AirlineSelectTab1
+nmap <leader>é <Plug>AirlineSelectTab2
+nmap <leader>" <Plug>AirlineSelectTab3
+nmap <leader>' <Plug>AirlineSelectTab4
+nmap <leader>( <Plug>AirlineSelectTab5
+nmap <leader>- <Plug>AirlineSelectTab6
+nmap <leader>è <Plug>AirlineSelectTab7
+nmap <leader>è <Plug>AirlineSelectTab7
+nmap <leader>_ <Plug>AirlineSelectTab8
+nmap <leader>ç <Plug>AirlineSelectTab9
+"}}}
+"}}}
+" limelight {{{
+" Color name (:help cterm-colors) or ANSI code
+" let g:limelight_conceal_ctermfg = 'gray'
+" let g:limelight_conceal_ctermfg = 240
+
+" " Color name (:help gui-colors) or RGB color
+" let g:limelight_conceal_guifg = 'DarkGray'
+" let g:limelight_conceal_guifg = '#777777'
+
+" " Default: 0.5
+" let g:limelight_default_coefficient = 0.7
+
+" " Number of preceding/following paragraphs to include (default: 0)
+" let g:limelight_paragraph_span = 1
+
+" " Beginning/end of paragraph
+" "   When there's no empty line between the paragraphs
+" "   and each paragraph starts with indentation
+" let g:limelight_bop = '^\s'
+" let g:limelight_eop = '\ze\n^\s'
+
+" " Highlighting priority (default: 10)
+" "   Set it to -1 not to overrule hlsearch
+" let g:limelight_priority = -1
+" goyo.vim integration
+" autocmd! User GoyoEnter Limelight
+" autocmd! User GoyoLeave Limelight!
+" }}}
+" inyoface (highlight only comments) {{{
+nmap <leader>c <Plug>(InYoFace_Toggle)<CR>
+" }}}
+" close the preview window on python completion {{{
+" autocmd CompleteDone * pclose 
+set completeopt=menu,longest
+" }}}
+" python config {{{
+" let g:python3_host_prog = '/path/to/python3'
+let g:python3_host_skip_check = 1
+"}}}
+" vim-sayonara {{{
+nnoremap <silent><leader>Q  :Sayonara<cr>
+nnoremap <silent><leader>q  :Sayonara!<cr>
+
+let g:sayonara_confirm_quit = 0
 " }}}
 " haskell-vim config {{{
 let g:haskell_enable_quantification = 1   " to enable highlighting of `forall`
@@ -1224,18 +1253,38 @@ nnoremap <silent> <Leader>gu :GitGutterRevertHunk<CR>
 nnoremap <silent> <Leader>gp :GitGutterPreviewHunk<CR><c-w>j
 nnoremap cog :GitGutterToggle<CR>
 " }}}
-" lsp {{{
+" tjdevries lsp {{{
 let g:langserver_executables = {
-      \ 'go': {
+	\ 'go': {
 	\ 'name': 'sourcegraph/langserver-go',
 	\ 'cmd': ['langserver-go', '-trace', '-logfile', expand('~/Desktop/langserver-go.log')],
 	\ },
-      \ 'c': {
-	\ 'name': 'vscode',
-	\ 'cmd': [],
-	\ }
+	\ 'c': {
+	\ 'name': 'clangd',
+	\ 'cmd': ['/mnt/ext4/llvm/build/bin/clangd', ],
+	\ },
+	\ 'python': {
+	\ 'name': 'pyls',
+	\ 'cmd': ['pyls', '--log-file' , expand('~/lsp_python.log')],
+	\ },
       \ }
 " }}}
+" autozimu's lsp {{{
+" by default logs in /tmp/LanguageClient.log.
+let g:LanguageClient_autoStart=0
+let g:LanguageClient_selectionUI='fzf'
+" let g:LanguageClient_trace=
+" call LanguageClient_setLoggingLevel('DEBUG')
+let g:LanguageClient_serverCommands = {
+    \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
+    \ 'c': ['/mnt/ext4/llvm/build/bin/clangd', ],
+    \ 'cpp': ['/mnt/ext4/llvm/build/bin/clangd', ],
+    \ 'python': ['pyls', '--log-file' , expand('~/lsp_python.log')]
+    \ }
+
+" Automatically start language servers.
+" let g:LanguageClient_autoStart = 1
+"}}}
 " goyo {{{
 let g:goyo_linenr=1
 let g:goyo_height= '90%'
@@ -1360,11 +1409,15 @@ let g:pymode_virtualenv = 1
 " https://github.com/mhinz/vim-grepper/issues/27
 " let g:grepper = { 'git': { 'grepprg': 'git grep -nI $* -- $.' }}
 " Grepper -grepprg ag --vimgrep $* $. works
-runtime autoload/grepper.vim
-nnoremap <leader>git :Grepper  -tool git -open -nojump
+runtime autoload/grepper.vim  " init grepper with defaults
+let g:grepper.tools += ["rgall"]
+let g:grepper.rgall = g:grepper.rg
+let g:grepper.rgall.grepprg .= ' --no-ignore'
+nnoremap <leader>git :Grepper -tool git -open -nojump
 nnoremap <leader>ag  :Grepper -tool ag  -open -switch
-nnoremap <leader>rg  :Grepper -tool rg  -open -switch
+nnoremap <leader>rg  :Grepper -tool rg -open -switch
 
+" autocmd User Grepper launch notif
 
 " let g:grepper.side = 0
 " let g:grepper.switch = 1
@@ -1382,8 +1435,8 @@ nnoremap <leader>rg  :Grepper -tool rg  -open -switch
 "     \ }
 "     \}
 " -noswitch
-" nmap gs <plug>(GrepperOperator)
-" xmap gs <plug>(GrepperOperator)
+nmap gs <plug>(GrepperOperator)
+xmap gs <plug>(GrepperOperator)
 
 " }}}
 " sidesearch {{{
@@ -1604,18 +1657,11 @@ endfun
 let g:nvimdev_auto_init=1
 let g:nvimdev_auto_cd=1
 " let g:nvimdev_auto_ctags=1
-let g:nvimdev_auto_lint=0
+let g:nvimdev_auto_lint=1
 let g:nvimdev_build_readonly=1
 
         " \ 'remove_invalid_entries': get(g:, 'neomake_remove_invalid_entries', 0),
 "}}}
-" lsp {{{
-let g:LanguageClient_serverCommands = {
-    \ }
-    " \ 'rust': ['cargo', 'run', '--release', '--manifest-path=/opt/rls/Cargo.toml'],
-    " \ 'javascript': ['/opt/javascript-typescript-langserver/lib/language-server-stdio.js' ],
-
-" }}}
 " vim-pad {{{
 let g:pad#silent_on_mappings_fail=1
 
@@ -1672,6 +1718,7 @@ nmap <F4> call GoToNextError()
 
 
 " Neomake status.
+" let bufnr = winbufnr(a:winnr)
 " let neomake_status_str = ''
 " if exists('*neomake#GetJobs')
 "   if getbufvar(bufnr, 'neomake_disabled', 0)
@@ -1848,11 +1895,11 @@ tmenu Trans.FR Traduire vers le francais
 " menu Search.AllBuffers :exe Grepper -grepprg rg --vimgrep $* $+
 " }}}
 " tabulation-related menu {{{2
-" menu Tabs.S2 :set  tabstop=2 softtabstop=2 sw=2<CR>
-" menu Tabs.S4 :set ts=4 sts=4 sw=4<CR>
-" menu Tabs.S6 :set ts=6 sts=6 sw=6<CR>
-" menu Tabs.S8 :set ts=8 sts=8 sw=8<CR>
-" menu Tabs.SwitchExpandTabs :set expandtab!
+menu Tabs.S2 :set  tabstop=2 softtabstop=2 sw=2<CR>
+menu Tabs.S4 :set ts=4 sts=4 sw=4<CR>
+menu Tabs.S6 :set ts=6 sts=6 sw=6<CR>
+menu Tabs.S8 :set ts=8 sts=8 sw=8<CR>
+menu Tabs.SwitchExpandTabs :set expandtab!
 "}}}
 " }}}
 " nvim specific configuration {{{
@@ -1890,8 +1937,8 @@ autocmd ColorScheme *
 colorscheme molokai
 
 " }}}
-" set guicursor="n-v-c:block-Cursor/lCursor, ve:ver35-Cursor, o:hor50-Cursor,i-ci:ver25-Cursor/lCursor, r-cr:hor20-Cursor/lCursor, sm:block-Cursor -blinkwait175-blinkoff150-blinkon175"
-
+" set guicursor="n-v-c:block-Cursor/lCursor,ve:ver35-Cursor,o:hor50-Cursor,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor,sm:block-Cursor"
+set guicursor=n-v-c:block-Cursor/lCursor,ve:ver35-Cursor,o:hor50-Cursor,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor
 " set guicursor=i:ver3,n:block-blinkon10-Cursor,r:hor50
 highl Cursor ctermfg=16 ctermbg=253 guifg=#000000 guibg=#00FF00
 

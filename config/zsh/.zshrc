@@ -13,15 +13,21 @@ source /etc/profile.d/vte.sh
 # you can switch between global/local with ^G
 # source "$ZDOTDIR/plugins/per-directory-history.zsh"
 # }}}
- 
-source "$ZDOTDIR/aliases.zsh"
+
+. "$ZDOTDIR/aliases.zsh"
 # notifies when long command finishes
-source "$ZDOTDIR/zbell.zsh" 
+. "$ZDOTDIR/zbell.zsh" 
 
 #source $ZDOTDIR/hooks.zsh
 
 # adds a transfer function to upload a file & display its url
-source "$ZDOTDIR/transfer.zsh"
+. "$ZDOTDIR/transfer.zsh"
+
+
+
+
+
+# TODO make it a function cat some.json | python -m json.tool
 
 
 # Mail check {{{
@@ -185,6 +191,11 @@ add-zsh-hook precmd update_term_title
 # completion config {{{1
 # enables autocompletion for apt
 compdef apt=apt-get
+
+# mnual completions
+. "$ZDOTDIR/git-extras-completion.zsh"
+. "$ZDOTDIR/translate-shell.plugin.zsh"
+. "$ZDOTDIR/alot-completion.zsh"
 
 # zsh searches $fpath for completion files
 fpath=( $ZDOTDIR/completions $fpath )
@@ -350,8 +361,9 @@ SPROMPT="Correct $fg[red]%R$reset_color to $fg[green]%r$reset_color [(y)es (n)o 
 
 # Enable FZF fuzzy matcher {{{
 FZF_PATH="$XDG_DATA_HOME/fzf/shell/"
-source "$FZF_PATH"/completion.zsh
-source "$FZF_PATH"/key-bindings.zsh
+. "$FZF_PATH"/completion.zsh
+. "$FZF_PATH"/key-bindings.zsh
+. "$ZDOTDIR"/fzf.zsh
 # }}}
 
 # _gnu_generic should work if program accepts --help
@@ -362,6 +374,3 @@ compdef _gnu_generic mptcpanalyzer
 if [ -e /home/teto/.nix-profile/etc/profile.d/nix.sh ]; then . /home/teto/.nix-profile/etc/profile.d/nix.sh; fi 
 
 
-
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

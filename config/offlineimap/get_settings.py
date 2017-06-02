@@ -1,4 +1,4 @@
-import subprocess 
+import subprocess
 
 # mattator@gmail.com
 def get_user (service):
