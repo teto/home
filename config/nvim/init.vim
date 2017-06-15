@@ -92,6 +92,7 @@ set exrc
 
 " vim-plug plugin declarations {{{1
 call plug#begin(s:plugdir)
+Plug 'mhinz/vim-signify' " Indicate changed lines within a file using a VCS.
 
 " provider dependant {{{
 Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
@@ -126,7 +127,7 @@ let g:vim_search_pulse_duration = 400
 " Plug 'kassio/neoterm' " some kind of REPL
 Plug 'ehamberg/vim-cute-python' " display unicode characters
 Plug 'dbakker/vim-projectroot' " projectroot#guess()
-" Plug 'sunaku/vim-dasht' " get documentation
+Plug 'sunaku/vim-dasht' " get documentation (zeavim is also a contender KabbAmine/zeavim.vim)
 " Plug 'git@github.com:reedes/vim-wordy.git' " pdt la these, pr trouver la jargon :Wordy
 Plug 'sk1418/QFGrep' " Filter quickfix
 " Plug 'git@github.com:pseewald/vim-anyfold.git' " speed up folds processing
@@ -156,8 +157,8 @@ Plug 'tpope/vim-scriptease' " Adds command such as :Messages
 
 " REPL (Read Execute Present Loop) {{{
 Plug 'metakirby5/codi.vim', {'on': 'Codi'} " repl
-Plug 'hkupty/iron.nvim'
-  " Plug 'jalvesaq/vimcmdline'
+" Plug 'hkupty/iron.nvim'
+Plug 'jalvesaq/vimcmdline'
 " vimcmdline mappings{{{
 let cmdline_map_start          = "<LocalLeader>s"
 let cmdline_map_send           = "<Space>"
@@ -177,12 +178,12 @@ let cmdline_outhl              = 1      " Syntax highlight the output
 
 " configure interpreters
 let cmdline_app           = {}
-let cmdline_app["python"] = "ptipython3"
+let cmdline_app["python"] = "ptipython3" " prompt toolkit + ipython
 let cmdline_app["ruby"]   = "pry"
 let cmdline_app["sh"]     = "bash"
 
 let cmdline_follow_colorscheme = 1
-let cmdline_external_term_cmd = "xterm -e '%s' &"
+let cmdline_external_term_cmd = "termite -e '%s' &"
 "}}}
 "}}}
 " Plug 'git@github.com:SirVer/ultisnips' " handle snippets
@@ -197,6 +198,8 @@ Plug 'sjl/gundo.vim' " :GundoShow/Toggle to redo changes
 " Plug 'Valloric/YouCompleteMe' , { 'do': ':new \| call termopen(''python3 ./install.py --system-libclang --clang-completer'')', 'frozen': 1}
 Plug 'lyuts/vim-rtags'  " a l'air d'etre le plus complet <leader>ri  
 " Plug 'zchee/deoplete-clang', { 'for': 'c' }
+Plug 'tweekmonster/deoplete-clang2', { 'for': 'c' }
+" 
 Plug 'zchee/deoplete-jedi', { 'for': 'python'}
 " }}}
 " Plug 'beloglazov/vim-online-thesaurus' " thesaurus => dico dde synonymes
@@ -337,7 +340,6 @@ Plug 'Rykka/InstantRst', {'for': 'rst'} " rst live preview with :InstantRst,
 "Plug 'junegunn/vim-easy-align'   " to align '=' on multiple lines for instance
 Plug 'dhruvasagar/vim-table-mode', {'for': 'txt'}
 
-Plug 'mhinz/vim-signify' " Indicate changed lines within a file using a VCS.
 Plug 'kshenoy/vim-signature' " display marks in gutter, love it
 
 " forked it to solve a bug: git@github.com:teto/QuickFixCurrentNumber.git
@@ -446,9 +448,17 @@ set softtabstop=0 " inserts a mix of <Tab> and spaces, 0 disablres it
 " }}}
 " Netrw configuration {{{
 " decide with which program to open files when typing 'gx'
+" let g:netrw_gx
 let g:netrw_browsex_viewer="xdg-open"
 let g:netrw_home=$XDG_CACHE_HOME.'/nvim'
 let g:netrw_liststyle=1 " long listing with timestamp
+" nnoremap gx :call netrw#BrowseX(expand((exists("g:netrw_gx")? g:netrw_gx : '<cfile>')),netrw#CheckIfRemote())<cr>
+nnoremap gx :call netrw#BrowseX(expand((exists("g:netrw_gx")? g:netrw_gx : '<cfile>')),netrw#CheckIfRemote())<cr>
+" }}}
+" Dirvish {{{
+let g:loaded_netrwPlugin = 1 " ???
+command! -nargs=? -complete=dir Vexplore leftabove vsplit | silent Dirvish <args>
+command! -nargs=? -complete=dir Sexplore belowright split | silent Dirvish <args>
 " }}}
 
 
@@ -485,7 +495,7 @@ map <C-N><C-N> :set invnumber<CR>
 " Display unprintable characters with '^' and
 " set nolist to disable or set list!
 
-set timeoutlen=400 " Quick timeouts on key combinations.
+" set timeoutlen=400 " Quick timeouts on key combinations.
 
 " in order to scroll faster
 " nnoremap <C-e> 3<C-e>
@@ -1270,11 +1280,14 @@ let g:langserver_executables = {
       \ }
 " }}}
 " autozimu's lsp {{{
+" call LanguageClient_textDocument_hover
 " by default logs in /tmp/LanguageClient.log.
-let g:LanguageClient_autoStart=0
+let g:LanguageClient_autoStart=0 " Run :LanguageClientStart when disabled
+
 let g:LanguageClient_selectionUI='fzf'
-" let g:LanguageClient_trace=
+" let g:LanguageClient_trace="verbose"
 " call LanguageClient_setLoggingLevel('DEBUG')
+"let g:LanguageClient_diagnosticsList="quickfix"
 let g:LanguageClient_serverCommands = {
     \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
     \ 'c': ['/mnt/ext4/llvm/build/bin/clangd', ],
@@ -1282,8 +1295,10 @@ let g:LanguageClient_serverCommands = {
     \ 'python': ['pyls', '--log-file' , expand('~/lsp_python.log')]
     \ }
 
-" Automatically start language servers.
-" let g:LanguageClient_autoStart = 1
+nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
+nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
+
 "}}}
 " goyo {{{
 let g:goyo_linenr=1
@@ -1411,7 +1426,7 @@ let g:pymode_virtualenv = 1
 " Grepper -grepprg ag --vimgrep $* $. works
 runtime autoload/grepper.vim  " init grepper with defaults
 let g:grepper.tools += ["rgall"]
-let g:grepper.rgall = g:grepper.rg
+let g:grepper.rgall = copy(g:grepper.rg)
 let g:grepper.rgall.grepprg .= ' --no-ignore'
 nnoremap <leader>git :Grepper -tool git -open -nojump
 nnoremap <leader>ag  :Grepper -tool ag  -open -switch
@@ -1521,7 +1536,7 @@ let g:signify_update_on_focusgained = 1
 " nmap <leader>wj :call sy#jump#next_hunk(v:count1)<CR>
 nmap <leader>wj <plug>(signify-next-hunk)
 " nnoremap <leader>sj :echomsg 'next-hunk'<CR>
-nnoremap <leader>sk <plug>(signify-prev-hunk)
+nmap <leader>sk <plug>(signify-prev-hunk)
 
 " }}}
 " autosave plugin (:h auto-save) {{{
@@ -1563,12 +1578,6 @@ let g:SignatureEnabledAtStartup=1
 let g:SignatureWrapJumps=1
 let g:SignatureDeleteConfirmation=1
 let g:SignaturePeriodicRefresh=1
-" }}}
-" Dirvish {{{
-let g:loaded_netrwPlugin = 1 " ???
-command! -nargs=? -complete=dir Vexplore leftabove vsplit | silent Dirvish <args>
-command! -nargs=? -complete=dir Sexplore belowright split | silent Dirvish <args>
-nnoremap gx :call netrw#BrowseX(expand((exists("g:netrw_gx")? g:netrw_gx : '<cfile>')),netrw#CheckIfRemote())<cr>
 " }}}
 " riv restdown config {{{
 let g:riv_disable_folding=1
@@ -1672,6 +1681,19 @@ let g:pad#default_format = "markdown"
 au FileType coq call coquille#FNMapping()
 let g:coquille_auto_move=1
 " }}}
+
+" dasht{{{
+
+" When in Python, also search NumPy, SciPy, and Pandas:
+let g:dasht_filetype_docsets = {} " filetype => list of docset name regexp
+let g:dasht_filetype_docsets['python'] = ['(num|sci)py', 'pandas']
+
+" search related docsets
+nnoremap <Leader>k :Dasht<Space>
+
+" search ALL the docsets
+nnoremap <Leader><Leader>k :Dasht!<Space>
+"}}}
 set hidden " you can open a new buffer even if current is unsaved (error E37)
 
 " draw a line on 80th column

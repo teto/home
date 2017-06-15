@@ -47,8 +47,13 @@
   lg2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
   lg = !"git lg1"
 
+  # look at https://github.com/fcsonline/dotfiles/blob/master/git/gitconfig
+  # for fzf+git aliases
+  pamfix= !HASH=`git log --pretty=oneline | head -50 | fzf` && git fixit `echo ${HASH} | awk '{ print $1 }'`
+
 [mergetool "vimdiff"]
   prompt = true
   cmd = nvim -d $BASE $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+
 [mergetool "fugitive"]
 	cmd = nvim -f -c \"Gdiff\" \"$MERGED\"

@@ -14,7 +14,7 @@ font pango:FontAwesome 12
 # -modi fb:../Examples/rofi-file-browser.sh
 # https://github.com/DaveDavenport/rofi
 # Combi mode, allow several modes to be merged into one list.
-set $launcher "rofi -modi 'run,DRun,window,ssh,Layouts:i3-list-layouts,file:/home/teto/rofi/Examples/rofi-file-browser.sh' -show run"
+set $launcher "rofi -modi 'run,drun,window,ssh,Layouts:i3-list-layouts,file:/home/teto/rofi/Examples/rofi-file-browser.sh' -show run"
 # Randr:rofi-randr,Monitor:monitor_layout.sh' 
 set $greenclip "rofi -modi 'clipboard:greenclip print' -show clipboard"
 bindsym $mod+ctrl+h exec $greenclip
