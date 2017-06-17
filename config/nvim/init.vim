@@ -831,6 +831,39 @@ nnoremap <Leader>C :FzfColors<CR>
 nnoremap <leader>b :FzfBuffers<CR>
 nnoremap <leader>m :FzfMarks<CR>
 
+
+function! SeeLineHistory()
+
+  let file=expand('%')
+  let line=line('.')
+  let cmd= 'git log --format=format:%H '.file.' | xargs -L 1 git blame '.file.' -L '.line.','.line
+  call termopen(cmd)
+endfunc
+
+let s:opts = {
+	\ 'source': "git branch -a",
+	\ 'options': ' --prompt "Palette>"',
+	\ 'down': '50%',
+	\ }
+	" \ 'sink': function('s:processResult'),
+
+
+" FzfBranches
+function! UpdateSignifyBranch(branch)
+  echom 'chosen branch='.a:branch
+  let g:signify_vcs_cmds = {
+	\'git': 'git diff --no-color --no-ext-diff -U0 '.a:branch.' -- %f'
+    \}
+
+endfunc
+
+function! ChooseSignifyGitCommit()
+
+  let l:dict = s:opts
+  let l:dict.sink = funcref('UpdateSignifyBranch')
+  call fzf#run(s:opts)
+endfunction
+
 " Customize fzf colors to match your color scheme
 " let g:fzf_colors = \ { 'fg':      ['fg', 'Normal'],
 "   \ 'bg':      ['bg', 'Normal'],
@@ -852,7 +885,7 @@ let g:fzf_history_dir = $XDG_DATA_HOME.'/fzf-history'
 " Advanced customization using autoload functions
 
   " [Buffers] Jump to the existing window if possible
-  let g:fzf_buffers_jump = 1
+let g:fzf_buffers_jump = 1
 
 imap <c-x><c-f> <plug>(fzf-complete-path)
 
@@ -1524,9 +1557,13 @@ let g:signify_sign_show_text = 0
 " let g:signify_sign_change            = "\u00a0" 
 " let g:signify_sign_changedelete      = g:signify_sign_change
 " let g:signify_sign_show_count|
+" master
+
+ " foire dans le commit suivant
 let g:signify_vcs_cmds = {
-      \'git': 'git diff --no-color --no-ext-diff -U0 master -- %f'
+      \'git': 'git diff --no-color --no-ext-diff -U0 e2b7b5a -- %f'
   \}
+" git log --format=format:%H $FILE | xargs -L 1 git blame $FILE -L $LINE,$LINE
 
 let g:signify_cursorhold_insert     = 0
 let g:signify_cursorhold_normal     = 0
