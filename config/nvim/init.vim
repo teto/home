@@ -268,7 +268,7 @@ Plug 'tommcdo/vim-kangaroo' "  zp to push/zP to pop the position
 " }}}
 "
 " {{{ To ease movements
-"Plug 'rhysd/clever-f.vim'
+Plug 'rhysd/clever-f.vim'
 "Plug 'unblevable/quick-scope'  " highlight characeters to help in f/F moves
 Plug 'Lokaltog/vim-easymotion' " careful overrides <leader><leader> mappings
 "Plug 'wellle/visual-split.vim'
@@ -1718,6 +1718,10 @@ let g:pad#default_format = "markdown"
 au FileType coq call coquille#FNMapping()
 let g:coquille_auto_move=1
 " }}}
+" deoplete-clang2 config {{{
+let g:deoplete#sources#clang#executable="/usr/bin/clang"
+let g:deoplete#sources#clang#autofill_neomake=1
+"}}}
 
 " dasht{{{
 
@@ -1730,7 +1734,7 @@ nnoremap <Leader>k :Dasht<Space>
 
 " search ALL the docsets
 nnoremap <Leader><Leader>k :Dasht!<Space>
-"}}}
+"}}}}}}
 set hidden " you can open a new buffer even if current is unsaved (error E37)
 
 " draw a line on 80th column
