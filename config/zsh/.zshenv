@@ -1,6 +1,12 @@
 # vim: set foldmethod=marker:
 # See https://wiki.archlinux.org/index.php/XDG_Base_Directory_support#Partial to get aound
 #  non XDG conformant programs
+
+
+export GTK_IM_MODULE=fcitx
+export QT_IM_MODULE=fcitx
+export XMODIFIERS=@im=fcitx
+
 # PATH {{{
 #PATH="/usr/lib/w3m:$PATH"
 # PATH="$PATH:/home/teto/mptcpanalyzer"

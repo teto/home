@@ -23,7 +23,6 @@ footer = "\n"
 localrepository = lip6-local
 remoterepository = lip6-remote
 maxage=10
-status_backend = sqlite
 # presynchook=imapfilter
 # TODO notify user run a script that will launch tag
 postsynchook= notmuch --config=$XDG_CONFIG_HOME/notmuch/notmuchrc_pro new
@@ -36,7 +35,7 @@ localfolders = ~/Maildir/lip6
 type = IMAP
 remotehost = tibre.lip6.fr
 ssl=yes
-remoteuser = coudron 
+remoteuser = coudron
 realdelete = no
 # on gmail just remove tags, you really need to move files to trash folder
 maxconnections = 3
@@ -56,7 +55,6 @@ maxsize=2000000
 # in daysA
 maxage=10
 synclabels= yes
-status_backend = sqlite
 # presynchook=imapfilter
 # TODO notify user
 postsynchook= notmuch --config=$XDG_CONFIG_HOME/notmuch/notmuchrc new

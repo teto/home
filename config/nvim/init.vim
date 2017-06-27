@@ -967,7 +967,7 @@ let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_ignore_case = 1
 let g:deoplete#disable_auto_complete = 0
 let g:deoplete#enable_debug = 1
-" let g:deoplete#auto_complete_delay=150
+let g:deoplete#auto_complete_delay=50
 
 let g:deoplete#enable_refresh_always=0
 
@@ -1457,7 +1457,7 @@ let g:pymode_virtualenv = 1
 " https://github.com/mhinz/vim-grepper/issues/27
 " let g:grepper = { 'git': { 'grepprg': 'git grep -nI $* -- $.' }}
 " Grepper -grepprg ag --vimgrep $* $. works
-runtime autoload/grepper.vim  " init grepper with defaults
+runtime plugin/grepper.vim  " init grepper with defaults
 let g:grepper.tools += ["rgall"]
 let g:grepper.rgall = copy(g:grepper.rg)
 let g:grepper.rgall.grepprg .= ' --no-ignore'
@@ -1561,7 +1561,7 @@ let g:signify_sign_show_text = 0
 
  " foire dans le commit suivant
 let g:signify_vcs_cmds = {
-      \'git': 'git diff --no-color --no-ext-diff -U0 e2b7b5a -- %f'
+      \'git': 'git diff --no-color --no-ext-diff -U0 bfb9cf1 -- %f'
   \}
 " git log --format=format:%H $FILE | xargs -L 1 git blame $FILE -L $LINE,$LINE
 
@@ -1703,7 +1703,7 @@ endfun
 let g:nvimdev_auto_init=1
 let g:nvimdev_auto_cd=1
 " let g:nvimdev_auto_ctags=1
-let g:nvimdev_auto_lint=1
+let g:nvimdev_auto_lint=0
 let g:nvimdev_build_readonly=1
 
         " \ 'remove_invalid_entries': get(g:, 'neomake_remove_invalid_entries', 0),
