@@ -75,6 +75,8 @@ export BROWSER="x-www-browser"
 # careful ! it's not a classic terminfo root with /X/Xname
 # it will just look for files in this directory
 export TERMINFO="${XDG_CONFIG_HOME:-~/.config}/terminfo"
+# see :h $NVIM_LOG_FILE
+export NVIM_LOG_FILE="~/.nvimlog"
 # can remove NORC once pb in nvim fixed
 export MANPAGER="nvim -u NORC -c 'set ft=man' -"
 # export MANPAGER="less"

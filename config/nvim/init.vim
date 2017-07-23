@@ -1529,7 +1529,7 @@ let g:sneak#streak = 0
 let g:peekaboo_window = 'vertical botright 30new'
 
 " Delay opening of peekaboo window (in ms. default: 0)
-let g:peekaboo_delay = 750
+let g:peekaboo_delay = 0
 
 " Compact display; do not display the names of the register groups
 let g:peekaboo_compact = 1
@@ -1560,8 +1560,9 @@ let g:signify_sign_show_text = 0
 " master
 
  " foire dans le commit suivant
+ " \'git': 'git diff --no-color --no-ext-diff -U0 bfb9cf1 -- %f'
 let g:signify_vcs_cmds = {
-      \'git': 'git diff --no-color --no-ext-diff -U0 bfb9cf1 -- %f'
+      \'git': 'git diff --no-color --no-ext-diff -U0 master -- %f'
   \}
 " git log --format=format:%H $FILE | xargs -L 1 git blame $FILE -L $LINE,$LINE
 
@@ -1703,9 +1704,21 @@ endfun
 let g:nvimdev_auto_init=1
 let g:nvimdev_auto_cd=1
 " let g:nvimdev_auto_ctags=1
-let g:nvimdev_auto_lint=0
+let g:nvimdev_auto_lint=1
 let g:nvimdev_build_readonly=1
 
+function! VarToggle(key)
+  " hopefully neomake should enable/disable that on a per buffer basis
+  let l:val = eval(a:key)
+  if l:val
+    exec "let ".a:key."=0"
+  else
+
+    exec "let ".a:key."=1"
+    " let g:nvimdev_auto_lint=1
+  endif
+endfunc
+command! NvimLintToggle :call VarToggle("g:nvimdev_auto_lint")
         " \ 'remove_invalid_entries': get(g:, 'neomake_remove_invalid_entries', 0),
 "}}}
 " vim-pad {{{
@@ -1930,7 +1943,10 @@ set matchpairs+=<:>  " Characters for which % should work
 " set whichwrap+=<,>,h,l
 
 " nvim-palette{{{
+let g:palette_debug=1
 let g:palette_histadd=1
+" overrides default
+" let g:palette_descriptions_file='/home/teto/neovim2/build/runtime/data/options.mpack'
 " let g:palette_fzf_opts={
 " 	\ 'options': ' --prompt "Palette>"',
 " 	\ 'down': '50%',
