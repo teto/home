@@ -229,7 +229,9 @@ Plug 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
 
 " Using a non-master branch
 
-Plug 'critiqjo/lldb.nvim',{ 'for': 'c' } " To debug (use clang to get correct line numbers
+Plug 'dbgx/lldb.nvim',{ 'for': 'c' } " To debug (use clang to get correct line numbers
+" Plug 'dbgx/gdb.nvim',{ 'for': 'c' } " To debug (use clang to get correct line numbers
+" Plug 'powerman/vim-plugin-viewdoc' " looks interesting
 
 " filetypes {{{2
 Plug 'cespare/vim-toml', { 'for': 'toml'}
@@ -1328,9 +1330,10 @@ let g:LanguageClient_serverCommands = {
     \ 'python': ['pyls', '--log-file' , expand('~/lsp_python.log')]
     \ }
 
-nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
-nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
-nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
+" todo provide a fallback if lsp not available
+" nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
+" nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
+" nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
 
 "}}}
 " goyo {{{
