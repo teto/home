@@ -12,7 +12,7 @@ map <D-b> :echom "hello papy"
 " nvim --startuptime startup.log
 " nvim -u NONE --startuptime startup.log
 "}}}
-" to see the difference highlights, 
+" to see the difference highlights,
 " runtime syntax/hitest.vim
 
 " vim-plug autoinstallation {{{
@@ -58,6 +58,7 @@ set mouse=a
 set mousemodel=popup
 " }}}
 let mapleader = " "
+let maplocalleader = ","
 
 " Appearance 1 {{{
 let s:gutter_error_sign = "✘'"
@@ -69,8 +70,16 @@ function! DoRemote(arg)
 endfunction
 
 
+
+" GIT DIFF http://vimcasts.org/episodes/fugitive-vim-resolving-merge-conflicts-with-vimdiff/ {{{
+" the left window contains the version from the target branch
+" the middle window contains the working copy of the file, complete with conflict markers
+" the right window contains the version from the merge branch
+" }}}
+
 " filnxtToO
 set shortmess+=I
+set cmdheight=2
 
 " inverts the meaning of g in substitution, ie with gdefault, change all
 " occurences
@@ -83,31 +92,49 @@ set exrc
 
 " vim-plug plugin declarations {{{1
 call plug#begin(s:plugdir)
+Plug 'mhinz/vim-signify' " Indicate changed lines within a file using a VCS.
 
 " provider dependant {{{
 Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
-" Plug 'autozimu/LanguageClient-neovim' " for LSP
 " Plug '~/vim-config'
 Plug '~/nvim-palette'
+Plug 'romainl/vim-qf' " can create pb with neomake
+" Plug 'gelguy/Cmd2.vim' " test
 Plug 'editorconfig/editorconfig-vim' " not remote but involves python
 " provider
-Plug 'brooth/far.vim' " search and replace for vim
-" Plug 'junegunn/vim-github-dashboard' " needs ruby support, works in recent neovim
+Plug 'brooth/far.vim' " search and replace across files
+" needs ruby support, works in recent neovim
+Plug 'junegunn/vim-github-dashboard', { 'do': function('DoRemote') } 
 " Plug 'fmoralesc/vim-pad'
 "}}}
-Plug 'vim-scripts/coq-syntax', {'for': 'coq'}
-Plug 'the-lambda-church/coquille', {'branch': 'pathogen-bundle', 'for': 'coq'}
-Plug 'let-def/vimbufsync', {'for': 'coq'}
+" to test https://github.com/neovim/neovim/issues/3688
+Plug 'haya14busa/incsearch.vim' " just to test
+" while waiting for my neovim notification provider...
+Plug 'tjdevries/descriptive_maps.vim', {'do': function('DoRemote') } " :call DescriptiveStart()
+Plug 'gianarb/notify.vim' " call notify#emitNotification('Title', 'Body')
+" Plug 'vim-scripts/coq-syntax', {'for': 'coq'}
+" Plug 'the-lambda-church/coquille', {'branch': 'matt', 'for': 'coq'}
+Plug 'teto/coquille', {'branch': 'matt', 'for': 'coq'}
+Plug 'let-def/vimbufsync', {'for': 'coq'} " for coq
+" Plug 'vim-scripts/ProportionalResize'
+Plug 'inside/vim-search-pulse' " Search related
+
+" vim-search-pulse {{{
+let g:vim_search_pulse_mode = 'cursor_line'
+let g:vim_search_pulse_duration = 400
+"}}}
+
 " Plug 'kassio/neoterm' " some kind of REPL
 Plug 'ehamberg/vim-cute-python' " display unicode characters
 Plug 'dbakker/vim-projectroot' " projectroot#guess()
-" Plug 'sunaku/vim-dasht' " get documentation
+Plug 'sunaku/vim-dasht' " get documentation (zeavim is also a contender KabbAmine/zeavim.vim)
 " Plug 'git@github.com:reedes/vim-wordy.git' " pdt la these, pr trouver la jargon :Wordy
 Plug 'sk1418/QFGrep' " Filter quickfix
 " Plug 'git@github.com:pseewald/vim-anyfold.git' " speed up folds processing
 " (upstreamd already or ?)
 " Plug 'mtth/scratch.vim' " , {'on': 'Scratch'} mapped to ?
 " Plug 'tjdevries/vim-inyoface.git' "InYoFace_toggle to display only comments 
+Plug 'autozimu/LanguageClient-neovim' " :h LanguageClientUsage
 " Plug 'tjdevries/nvim-langserver-shim' " for LSP
 " Plug 'powerman/vim-plugin-AnsiEsc' " { to hl ESC codes
 " Plug 'git@github.com:junegunn/gv.vim.git' " git commit viewer :Gv
@@ -127,7 +154,38 @@ Plug 'ntpeters/vim-better-whitespace' " StripWhitespace
 " Plug 'timeyyy/clackclack.symphony' " data to play with orchestra.vim
 Plug 'tpope/vim-scriptease' " Adds command such as :Messages
 " Plug 'tpope/vim-eunuch' " {provides SudoEdit, SudoWrite , Unlink, Rename etc...
+
+" REPL (Read Execute Present Loop) {{{
 Plug 'metakirby5/codi.vim', {'on': 'Codi'} " repl
+" Plug 'hkupty/iron.nvim'
+Plug 'jalvesaq/vimcmdline'
+" vimcmdline mappings{{{
+let cmdline_map_start          = "<LocalLeader>s"
+let cmdline_map_send           = "<Space>"
+let cmdline_map_source_fun     = "<LocalLeader>f"
+let cmdline_map_send_paragraph = "<LocalLeader>p"
+let cmdline_map_send_block     = "<LocalLeader>b"
+let cmdline_map_quit           = "<LocalLeader>q"
+
+" vimcmdline options
+let cmdline_vsplit             = 1      " Split the window vertically
+let cmdline_esc_term           = 1      " Remap <Esc> to :stopinsert in Neovim terminal
+let cmdline_in_buffer          = 1      " Start the interpreter in a Neovim buffer
+let cmdline_term_height        = 15     " Initial height of interpreter window or pane
+let cmdline_term_width         = 80     " Initial width of interpreter window or pane
+let cmdline_tmp_dir            = '/tmp' " Temporary directory to save files
+let cmdline_outhl              = 1      " Syntax highlight the output
+
+" configure interpreters
+let cmdline_app           = {}
+let cmdline_app["python"] = "ptipython3" " prompt toolkit + ipython
+let cmdline_app["ruby"]   = "pry"
+let cmdline_app["sh"]     = "bash"
+
+let cmdline_follow_colorscheme = 1
+let cmdline_external_term_cmd = "termite -e '%s' &"
+"}}}
+"}}}
 " Plug 'git@github.com:SirVer/ultisnips' " handle snippets
 " Snippets are separated from the engine. Add this if you want them:
 " Plug 'honza/vim-snippets' "  ultisnips compatible snippets
@@ -140,6 +198,8 @@ Plug 'sjl/gundo.vim' " :GundoShow/Toggle to redo changes
 " Plug 'Valloric/YouCompleteMe' , { 'do': ':new \| call termopen(''python3 ./install.py --system-libclang --clang-completer'')', 'frozen': 1}
 Plug 'lyuts/vim-rtags'  " a l'air d'etre le plus complet <leader>ri  
 " Plug 'zchee/deoplete-clang', { 'for': 'c' }
+Plug 'tweekmonster/deoplete-clang2', { 'for': 'c' }
+" 
 Plug 'zchee/deoplete-jedi', { 'for': 'python'}
 " }}}
 " Plug 'beloglazov/vim-online-thesaurus' " thesaurus => dico dde synonymes
@@ -169,7 +229,9 @@ Plug 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
 
 " Using a non-master branch
 
-Plug 'critiqjo/lldb.nvim',{ 'for': 'c' } " To debug (use clang to get correct line numbers
+Plug 'dbgx/lldb.nvim',{ 'for': 'c' } " To debug (use clang to get correct line numbers
+" Plug 'dbgx/gdb.nvim',{ 'for': 'c' } " To debug (use clang to get correct line numbers
+" Plug 'powerman/vim-plugin-viewdoc' " looks interesting
 
 " filetypes {{{2
 Plug 'cespare/vim-toml', { 'for': 'toml'}
@@ -191,12 +253,13 @@ Plug 'dzeban/vim-log-syntax' " hl some keywords like ERROR/DEBUG/WARNING
 Plug 'Valloric/ListToggle' " toggle location/quickfix list toggling seems to fail
 " Plug 'git@github.com:milkypostman/vim-togglelist' " same
 Plug 'tpope/vim-obsession' ", {'on': 'Obsession', 'ObsessionStatus'}  very cool, register edited files in a Session.vim, call with :Obsession
-" Plug 'mbbill/undotree'
+Plug 'mbbill/undotree' " replaces gundo
 " Plug '907th/vim-auto-save' " :h auto-save
 Plug '~/vim-auto-save' " autosave :h auto-save
 " Plug '~/neovim-auto-autoread' " to check for filechanges
-", { 'for': 'python' } " 
-Plug 'bfredl/nvim-miniyank' " killring alike plugin, cycling paste
+", { 'for': 'python' } "
+" Plug 'bfredl/nvim-miniyank' " killring alike plugin, cycling paste careful
+" hangs with big strings
 
 " Text objects {{{
 Plug 'michaeljsmith/vim-indent-object'
@@ -207,7 +270,7 @@ Plug 'tommcdo/vim-kangaroo' "  zp to push/zP to pop the position
 " }}}
 "
 " {{{ To ease movements
-"Plug 'rhysd/clever-f.vim'
+Plug 'rhysd/clever-f.vim'
 "Plug 'unblevable/quick-scope'  " highlight characeters to help in f/F moves
 Plug 'Lokaltog/vim-easymotion' " careful overrides <leader><leader> mappings
 "Plug 'wellle/visual-split.vim'
@@ -220,16 +283,14 @@ Plug 'tpope/vim-rsi'  " maps readline bindings
 "Plug 'fisadev/vim-ctrlp-cmdpalette' " sublime text like palette
 "Plug 'osyo-manga/vim-anzu' " to improve internal search
 Plug 'mhinz/vim-startify' " very popular, vim's homepage
-
-
-Plug 'dietsche/vim-lastplace' " restore last cursor postion
+Plug 'dietsche/vim-lastplace' " restore last cursor postion (is it still needed ?)
 " vim-lastplace to restore cursor position {{{
 let g:lastplace_ignore = "gitcommit,svn"
 " }}}
 " Powerline does not work in neovim hence use vim-airline instead
 "if has('nvim')
-  Plug 'vim-airline/vim-airline'
-  Plug 'vim-airline/vim-airline-themes' " creates problems if not here
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes' " creates problems if not here
 "else
 	"Plug 'Lokaltog/powerline' , {'rtp': 'powerline/bindings/vim/'}
 "endif
@@ -239,7 +300,7 @@ let g:lastplace_ignore = "gitcommit,svn"
 " }}}
 
 "
-Plug 'justinmk/vim-dirvish' " replaces netrw 
+Plug 'justinmk/vim-dirvish' " replaces netrw
 " Plug 'justinmk/vim-gtfo' " gfo to open filemanager in cwd
 Plug 'wannesm/wmgraphviz.vim', {'for': 'dot'} " graphviz syntax highlighting
 Plug 'tpope/vim-commentary' "gcc to comment/gcgc does not work that well
@@ -249,11 +310,12 @@ Plug 'blueyed/vim-diminactive' " disable syntax coloring on inactive splits
 "Plug 'tpope/vim-sleuth' " Dunno what it is
 "Plug 'justinmk/vim-gtfo' " ?
 Plug 'tpope/vim-fugitive' " to use with Git, VERY powerful
+Plug 'tpope/vim-rhubarb' " fugitive plugin to support github
 "Plug 'jaxbot/github-issues.vim' " works only with vim
 "Plug 'tpope/vim-surround' " don't realy know how to use yet
 "Plug 'junegunn/vim-peekaboo' " gives a preview of buffers when pasting
 Plug 'mhinz/vim-randomtag', { 'on': 'Random' } " Adds a :Random function that launches help at random
-" Plug 'majutsushi/tagbar' " , {'on': 'TagbarToggle'} disabled lazyloading else it would not work with statusline
+Plug 'majutsushi/tagbar' " , {'on': 'TagbarToggle'} disabled lazyloading else it would not work with statusline
 Plug 'git@github.com:machakann/vim-highlightedyank.git' " highlit
 " Plug 'haya14busa/vim-operator-flashy' " Flash selection on copy
 
@@ -280,17 +342,17 @@ Plug 'Rykka/InstantRst', {'for': 'rst'} " rst live preview with :InstantRst,
 "Plug 'junegunn/vim-easy-align'   " to align '=' on multiple lines for instance
 Plug 'dhruvasagar/vim-table-mode', {'for': 'txt'}
 
-Plug 'mhinz/vim-signify' " Indicate changed lines within a file using a VCS.
 Plug 'kshenoy/vim-signature' " display marks in gutter, love it
 
 " forked it to solve a bug: git@github.com:teto/QuickFixCurrentNumber.git
 " Plug '~/QuickFixCurrentNumber' " use :Cnr :Cgo instead of :cnext etc...
 " Plug 'Coacher/QuickFixCurrentNumber' " use :Cnr :Cgo instead of :cnext etc...
 " =======
+Plug 'Shougo/echodoc.vim' " display signature in cmdline after v:completed_item
 Plug 'teto/QuickFixCurrentNumber' " use :Cnr :Cgo instead of :cnext etc...
 Plug 'git@github.com:vim-scripts/ingo-library.git' " DEPENDANCY of QuickFixCurrentNumber
 "Plug 'tomtom/quickfixsigns_vim'
-
+Plug 'nacitar/a.vim' " :A
 Plug 'mhinz/vim-rfc', { 'on': 'RFC' }
 " can show a list of unicode characeters, with their name  :UnicodeTable etc... 
 " careful maps F4 by default
@@ -302,7 +364,7 @@ Plug 'vim-scripts/Modeliner' " <leader>ml to setup buffer modeline
 "Plug 'vimwiki/vimwiki'   " to write notes
 "Plug 'vim-scripts/DynamicSigns'
 " async grep neovim only
-Plug 'mhinz/vim-grepper', { 'on': 'Grepper'}
+Plug 'mhinz/vim-grepper' " , { 'on': 'Grepper'}
 " Plug 'ddrscott/vim-side-search'  " tOdo
 "Plug 'teto/neovim-auto-autoread' " works only in neovim, runs external checker
 Plug 'neomake/neomake' " async build for neovim
@@ -322,7 +384,7 @@ Plug 'whatyouhide/vim-gotham'
 Plug 'sickill/vim-monokai'
 Plug 'justinmk/molokai'
 Plug 'mhinz/vim-janah'
-Plug 'Solarized'
+Plug 'vim-scripts/Solarized'
 Plug 'morhetz/gruvbox'
 Plug 'romainl/flattened'
 Plug 'joshdick/onedark.vim'
@@ -388,9 +450,17 @@ set softtabstop=0 " inserts a mix of <Tab> and spaces, 0 disablres it
 " }}}
 " Netrw configuration {{{
 " decide with which program to open files when typing 'gx'
+" let g:netrw_gx
 let g:netrw_browsex_viewer="xdg-open"
 let g:netrw_home=$XDG_CACHE_HOME.'/nvim'
 let g:netrw_liststyle=1 " long listing with timestamp
+" nnoremap gx :call netrw#BrowseX(expand((exists("g:netrw_gx")? g:netrw_gx : '<cfile>')),netrw#CheckIfRemote())<cr>
+nnoremap gx :call netrw#BrowseX(expand((exists("g:netrw_gx")? g:netrw_gx : '<cfile>')),netrw#CheckIfRemote())<cr>
+" }}}
+" Dirvish {{{
+let g:loaded_netrwPlugin = 1 " ???
+command! -nargs=? -complete=dir Vexplore leftabove vsplit | silent Dirvish <args>
+command! -nargs=? -complete=dir Sexplore belowright split | silent Dirvish <args>
 " }}}
 
 
@@ -427,7 +497,7 @@ map <C-N><C-N> :set invnumber<CR>
 " Display unprintable characters with '^' and
 " set nolist to disable or set list!
 
-set timeoutlen=400 " Quick timeouts on key combinations.
+" set timeoutlen=400 " Quick timeouts on key combinations.
 
 " in order to scroll faster
 " nnoremap <C-e> 3<C-e>
@@ -703,6 +773,7 @@ let g:gutentags_project_info = [ {'type': 'python', 'file': 'setup.py'},
                                \ {'type': 'ruby', 'file': 'Gemfile'},
                                \ {'type': 'haskell', 'file': 'Setup.hs'} ]
 let g:gutentags_ctags_executable_haskell = 'hasktags'
+let g:gutentags_ctags_exclude = ['.vim-src', 'build']
 " }}}
 " start haskell host if required  {{{
 if has('nvim')
@@ -762,6 +833,39 @@ nnoremap <Leader>C :FzfColors<CR>
 nnoremap <leader>b :FzfBuffers<CR>
 nnoremap <leader>m :FzfMarks<CR>
 
+
+function! SeeLineHistory()
+
+  let file=expand('%')
+  let line=line('.')
+  let cmd= 'git log --format=format:%H '.file.' | xargs -L 1 git blame '.file.' -L '.line.','.line
+  call termopen(cmd)
+endfunc
+
+let s:opts = {
+	\ 'source': "git branch -a",
+	\ 'options': ' --prompt "Palette>"',
+	\ 'down': '50%',
+	\ }
+	" \ 'sink': function('s:processResult'),
+
+
+" FzfBranches
+function! UpdateSignifyBranch(branch)
+  echom 'chosen branch='.a:branch
+  let g:signify_vcs_cmds = {
+	\'git': 'git diff --no-color --no-ext-diff -U0 '.a:branch.' -- %f'
+    \}
+
+endfunc
+
+function! ChooseSignifyGitCommit()
+
+  let l:dict = s:opts
+  let l:dict.sink = funcref('UpdateSignifyBranch')
+  call fzf#run(s:opts)
+endfunction
+
 " Customize fzf colors to match your color scheme
 " let g:fzf_colors = \ { 'fg':      ['fg', 'Normal'],
 "   \ 'bg':      ['bg', 'Normal'],
@@ -783,7 +887,7 @@ let g:fzf_history_dir = $XDG_DATA_HOME.'/fzf-history'
 " Advanced customization using autoload functions
 
   " [Buffers] Jump to the existing window if possible
-  let g:fzf_buffers_jump = 1
+let g:fzf_buffers_jump = 1
 
 imap <c-x><c-f> <plug>(fzf-complete-path)
 
@@ -865,7 +969,7 @@ let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_ignore_case = 1
 let g:deoplete#disable_auto_complete = 0
 let g:deoplete#enable_debug = 1
-" let g:deoplete#auto_complete_delay=150
+let g:deoplete#auto_complete_delay=50
 
 let g:deoplete#enable_refresh_always=0
 
@@ -896,122 +1000,28 @@ let g:jedi#auto_vim_configuration = 1 " to prevent python's help popup
 let g:jedi#completions_enabled = 0 " disable when deoplete in use
 "autocmd BufWinEnter '__doc__' setlocal bufhidden=delete
 " }}}
-" Airline {{{
-let g:airline_powerline_fonts = 0
-let g:airline_left_sep = ''
-let g:airline_right_sep = ''
-let g:airline_section = '|'
-" display buffers as tabs if no split
-" see :h airline-tabline
-let g:airline#extensions#tabline#enabled = 1 
-let g:airline#extensions#tabline#left_sep = ' '
-let g:airline#extensions#tabline#left_alt_sep = '|'
-let g:airline_theme = 'molokai'
-" let g:airline_section_b = ""
-" section y is fileencoding , useless in neovim
-let g:airline_section_y = ""  
- " airline#section#create(['windowswap', 'obsession', '%3p%%'.spc, 'linenr', 'maxlinenr', spc.':%3v'])
-" let g:airline_section_z = airline#section#create_right(['linenumber'])
-let g:airline#extensions#tabline#buffer_nr_show = 1
-let g:airline#extensions#tabline#show_buffers = 1  
-let g:airline#extensions#tabline#buffer_min_count =2
-let g:airline#extensions#tabline#buffer_idx_mode = 1
-let g:airline#extensions#tabline#buffers_label = 'b'
-let g:airline#extensions#tabline#tabs_label = 't'
-let g:airline#extensions#tabline#show_tabs = 0
-
-
-
-let g:airline#extensions#tabline#formatter = 'unique_tail'
-" let g:airline_extensions = ['branch', 'tabline', 'obsession']
-
-" rely on tagbar plugin
-let g:airline#extensions#tagbar#enabled = 1
-let g:airline#extensions#tagbar#flags = 'f'
-
-" csv plugin
-let g:airline#extensions#csv#enabled = 1
-let g:airline_detect_spell=1
-
-" ycm integration
-let g:airline#extensions#ycm#enabled = 0
-let g:airline#extensions#ycm#error_symbol = s:gutter_error_sign
-let g:airline#extensions#ycm#warning_symbol = s:gutter_warn_sign
-
-let g:airline#extensions#whitespace#enabled = 0
-let g:airline#extensions#whitespace#mixed_indent_algo = 2
-
-let g:airline#extensions#obsession#enabled = 1
-let g:airline#extensions#obsession#indicator_text = '$'
-" let g:airline#extensions#whitespace#checks = [ 'indent', 'trailing', 'long' ]
-"|neomake#statusline#LoclistStatus should be shown in warning section
-" let &statusline .= ' %{grepper#statusline()}'
-" let g:airline_section_z = airline#section#create(['%{ObsessionStatus(''$'', '''')}'])
-nmap <leader>& <Plug>AirlineSelectTab1
-nmap <leader>é <Plug>AirlineSelectTab2
-nmap <leader>" <Plug>AirlineSelectTab3
-nmap <leader>' <Plug>AirlineSelectTab4
-nmap <leader>( <Plug>AirlineSelectTab5
-nmap <leader>- <Plug>AirlineSelectTab6
-nmap <leader>è <Plug>AirlineSelectTab7
-nmap <leader>è <Plug>AirlineSelectTab7
-nmap <leader>_ <Plug>AirlineSelectTab8
-nmap <leader>ç <Plug>AirlineSelectTab9
-
-"}}}
-" limelight {{{
-" Color name (:help cterm-colors) or ANSI code
-" let g:limelight_conceal_ctermfg = 'gray'
-" let g:limelight_conceal_ctermfg = 240
-
-" " Color name (:help gui-colors) or RGB color
-" let g:limelight_conceal_guifg = 'DarkGray'
-" let g:limelight_conceal_guifg = '#777777'
-
-" " Default: 0.5
-" let g:limelight_default_coefficient = 0.7
-
-" " Number of preceding/following paragraphs to include (default: 0)
-" let g:limelight_paragraph_span = 1
-
-" " Beginning/end of paragraph
-" "   When there's no empty line between the paragraphs
-" "   and each paragraph starts with indentation
-" let g:limelight_bop = '^\s'
-" let g:limelight_eop = '\ze\n^\s'
-
-" " Highlighting priority (default: 10)
-" "   Set it to -1 not to overrule hlsearch
-" let g:limelight_priority = -1
-" goyo.vim integration
-" autocmd! User GoyoEnter Limelight
-" autocmd! User GoyoLeave Limelight!
-" }}}
-" inyoface (highlight only comments) {{{
-nmap <leader>c <Plug>(InYoFace_Toggle)<CR>
-" }}}
-" close the preview window on python completion {{{
-" autocmd CompleteDone * pclose 
-set completeopt=menu,longest
-" }}}
-" python config {{{
-" let g:python3_host_prog = '/path/to/python3'
-let g:python3_host_skip_check = 1
-"}}}
-" vim-sayonara {{{
-nnoremap <silent><leader>q  :Sayonara<cr>
-nnoremap <silent><leader>Q  :Sayonara!<cr>
-
-let g:sayonara_confirm_quit = 0
-" }}}
 " Neomake config {{{
+" @return {String}
+"  toadd in statusline
+function! NeomakeJobs() abort
+" s:winnr != winnr()
+  return 1
+        \ || !exists('*neomake#GetJobs')
+        \ || empty(neomake#GetJobs())
+        \ ? ''
+        \ : 'make'
+endfunction
+
 let g:neomake_verbose = 1
 
 
 " pyflakes can't be disabled on a per error basis
 " also it considers everything as error => disable
 " flake8  or pycodestyle when supported 
-let g:neomake_python_enabled_makers = ['mypy', 'flake8']
+let g:neomake_list_height=5
+
+" how to let 'mypy' ignore warning/errors as pycodestyle does ?
+let g:neomake_python_enabled_makers = ['pycodestyle', ]
 let g:neomake_logfile = $HOME.'/neomake.log'
 let g:neomake_c_gcc_args = ['-fsyntax-only', '-Wall']
 let g:neomake_open_list = 2 " 0 to disable/2 preserves cursor position
@@ -1073,6 +1083,123 @@ augroup my_neomake
     autocmd BufWritePost * Neomake
     autocmd User NeomakeJobFinished call OnNeomakeFinished()
 augroup END
+" }}}
+" Airline {{{
+let g:airline_powerline_fonts = 0
+let g:airline_left_sep = ''
+let g:airline_right_sep = ''
+let g:airline_section = '|'
+" display buffers as tabs if no split
+" see :h airline-tabline
+let g:airline_theme = 'molokai'
+let g:airline_section_b = '%#TermCursor#' . NeomakeJobs()
+let g:airline#extensions#default#layout = [
+      \ [ 'a', 'b', 'c' ],
+      \ [ 'x', 'y', 'z', 'error', 'warning' ]
+      \ ]
+" section y is fileencoding , useless in neovim
+let g:airline_section_y = ""  
+ " airline#section#create(['windowswap', 'obsession', '%3p%%'.spc, 'linenr', 'maxlinenr', spc.':%3v'])
+" let g:airline_section_z = airline#section#create_right(['linenumber'])
+" airline extensions {{{
+let g:airline#extensions#tabline#enabled = 1 
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline#extensions#vimtex#enabled=1
+let g:airline#extensions#tabline#buffer_nr_show = 1
+let g:airline#extensions#tabline#show_buffers = 1  
+let g:airline#extensions#tabline#buffer_min_count =2
+let g:airline#extensions#tabline#buffer_idx_mode = 1
+let g:airline#extensions#tabline#buffers_label = 'b'
+let g:airline#extensions#tabline#tabs_label = 't'
+let g:airline#extensions#tabline#show_tabs = 0
+
+
+
+let g:airline#extensions#tabline#formatter = 'unique_tail'
+" let g:airline_extensions = ['branch', 'tabline', 'obsession']
+
+" rely on tagbar plugin
+let g:airline#extensions#tagbar#enabled = 1
+let g:airline#extensions#tagbar#flags = 'f'
+
+" csv plugin
+let g:airline#extensions#csv#enabled = 1
+let g:airline_detect_spell=1
+
+" ycm integration
+let g:airline#extensions#ycm#enabled = 0
+let g:airline#extensions#ycm#error_symbol = s:gutter_error_sign
+let g:airline#extensions#ycm#warning_symbol = s:gutter_warn_sign
+
+let g:airline#extensions#whitespace#enabled = 0
+let g:airline#extensions#whitespace#mixed_indent_algo = 2
+
+let g:airline#extensions#obsession#enabled = 1
+let g:airline#extensions#obsession#indicator_text = '$'
+"}}}
+
+" let g:airline#extensions#whitespace#checks = [ 'indent', 'trailing', 'long' ]
+"|neomake#statusline#LoclistStatus should be shown in warning section
+" let &statusline .= ' %{grepper#statusline()}'
+" let g:airline_section_z = airline#section#create(['%{ObsessionStatus(''$'', '''')}'])
+" airline mappings {{{
+nmap <leader>& <Plug>AirlineSelectTab1
+nmap <leader>é <Plug>AirlineSelectTab2
+nmap <leader>" <Plug>AirlineSelectTab3
+nmap <leader>' <Plug>AirlineSelectTab4
+nmap <leader>( <Plug>AirlineSelectTab5
+nmap <leader>- <Plug>AirlineSelectTab6
+nmap <leader>è <Plug>AirlineSelectTab7
+nmap <leader>è <Plug>AirlineSelectTab7
+nmap <leader>_ <Plug>AirlineSelectTab8
+nmap <leader>ç <Plug>AirlineSelectTab9
+"}}}
+"}}}
+" limelight {{{
+" Color name (:help cterm-colors) or ANSI code
+" let g:limelight_conceal_ctermfg = 'gray'
+" let g:limelight_conceal_ctermfg = 240
+
+" " Color name (:help gui-colors) or RGB color
+" let g:limelight_conceal_guifg = 'DarkGray'
+" let g:limelight_conceal_guifg = '#777777'
+
+" " Default: 0.5
+" let g:limelight_default_coefficient = 0.7
+
+" " Number of preceding/following paragraphs to include (default: 0)
+" let g:limelight_paragraph_span = 1
+
+" " Beginning/end of paragraph
+" "   When there's no empty line between the paragraphs
+" "   and each paragraph starts with indentation
+" let g:limelight_bop = '^\s'
+" let g:limelight_eop = '\ze\n^\s'
+
+" " Highlighting priority (default: 10)
+" "   Set it to -1 not to overrule hlsearch
+" let g:limelight_priority = -1
+" goyo.vim integration
+" autocmd! User GoyoEnter Limelight
+" autocmd! User GoyoLeave Limelight!
+" }}}
+" inyoface (highlight only comments) {{{
+nmap <leader>c <Plug>(InYoFace_Toggle)<CR>
+" }}}
+" close the preview window on python completion {{{
+" autocmd CompleteDone * pclose 
+set completeopt=menu,longest
+" }}}
+" python config {{{
+" let g:python3_host_prog = '/path/to/python3'
+let g:python3_host_skip_check = 1
+"}}}
+" vim-sayonara {{{
+nnoremap <silent><leader>Q  :Sayonara<cr>
+nnoremap <silent><leader>q  :Sayonara!<cr>
+
+let g:sayonara_confirm_quit = 0
 " }}}
 " haskell-vim config {{{
 let g:haskell_enable_quantification = 1   " to enable highlighting of `forall`
@@ -1171,18 +1298,44 @@ nnoremap <silent> <Leader>gu :GitGutterRevertHunk<CR>
 nnoremap <silent> <Leader>gp :GitGutterPreviewHunk<CR><c-w>j
 nnoremap cog :GitGutterToggle<CR>
 " }}}
-" lsp {{{
+" tjdevries lsp {{{
 let g:langserver_executables = {
-      \ 'go': {
+	\ 'go': {
 	\ 'name': 'sourcegraph/langserver-go',
 	\ 'cmd': ['langserver-go', '-trace', '-logfile', expand('~/Desktop/langserver-go.log')],
 	\ },
-      \ 'c': {
-	\ 'name': 'vscode',
-	\ 'cmd': [],
-	\ }
+	\ 'c': {
+	\ 'name': 'clangd',
+	\ 'cmd': ['/mnt/ext4/llvm/build/bin/clangd', ],
+	\ },
+	\ 'python': {
+	\ 'name': 'pyls',
+	\ 'cmd': ['pyls', '--log-file' , expand('~/lsp_python.log')],
+	\ },
       \ }
 " }}}
+" autozimu's lsp {{{
+" call LanguageClient_textDocument_hover
+" by default logs in /tmp/LanguageClient.log.
+let g:LanguageClient_autoStart=0 " Run :LanguageClientStart when disabled
+
+let g:LanguageClient_selectionUI='fzf'
+" let g:LanguageClient_trace="verbose"
+" call LanguageClient_setLoggingLevel('DEBUG')
+"let g:LanguageClient_diagnosticsList="quickfix"
+let g:LanguageClient_serverCommands = {
+    \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
+    \ 'c': ['/mnt/ext4/llvm/build/bin/clangd', ],
+    \ 'cpp': ['/mnt/ext4/llvm/build/bin/clangd', ],
+    \ 'python': ['pyls', '--log-file' , expand('~/lsp_python.log')]
+    \ }
+
+" todo provide a fallback if lsp not available
+" nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
+" nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
+" nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
+
+"}}}
 " goyo {{{
 let g:goyo_linenr=1
 let g:goyo_height= '90%'
@@ -1197,27 +1350,26 @@ let g:tex_flavor = "latex"
 " <localleader>ll pour la compilation continue du pdf
 " <localleader>lv pour la preview du pdf
 let g:vimtex_quickfix_open_on_warning = 1
-
+let g:vimtex_view_automatic=1
 " autoindent can slow down vim quite a bit 
 " to check indent parameters, run :verbose set ai? cin? cink? cino? si? inde? indk?
 let g:vimtex_indent_enabled=0
 let g:vimtex_indent_bib_enabled=1
+let g:vimtex_compiler_enabled=1 " enable new style vimtex
+let g:vimtex_compiler_progname='nvr'
+" let g:vimtex_compiler_method=
+" g:vimtex_quickfix_method=
 let g:vimtex_indent_enabled=0
 let g:vimtex_indent_bib_enabled=1
 let g:vimtex_index_split_pos = 'below'
 let g:vimtex_view_method = 'zathura'
 "let g:vimtex_snippets_leader = ','
-let g:vimtex_latexmk_progname = 'nvr'
-let g:latex_view_general_viewer = 'zathura'
 let g:vimtex_fold_enabled = 0
 let g:vimtex_format_enabled = 0
 let g:vimtex_complete_recursive_bib = 0
 let g:vimtex_complete_close_braces = 0
 let g:vimtex_fold_comments=0
-let g:vimtex_quickfix_autojump = 0
-let g:vimtex_quickfix_ignore_all_warnings =0
 let g:vimtex_view_use_temp_files=1 " to prevent zathura from flickering
-" let g:vimtex_latexmk_options
 let g:vimtex_syntax_minted = [
       \ {
       \   'lang' : 'json',
@@ -1226,6 +1378,7 @@ let g:vimtex_syntax_minted = [
 let g:vimtex_quickfix_mode = 2 " 1=> opened automatically and becomes active (2=> inactive)
 " Package biblatex Warning: B
 " with being on anotherline
+" deprecated by g:vimtex_quickfix_latexlog|)
 let g:vimtex_quickfix_ignored_warnings = [
       \ 'Underfull',
       \ 'Overfull',
@@ -1234,10 +1387,6 @@ let g:vimtex_quickfix_ignored_warnings = [
       \ "Invalid format of field 'month'"
       \ ]
       " 
-"let g:tex_stylish = 1
-"let g:tex_flavor = 'latex'
-"let g:tex_isk='48-57,a-z,A-Z,192-255,:'
-let g:vimtex_latexmk_callback= 1 " let it to 1 else quickfix won't pop
   if !exists('g:ycm_semantic_triggers')
     let g:ycm_semantic_triggers = {}
   endif
@@ -1311,11 +1460,15 @@ let g:pymode_virtualenv = 1
 " https://github.com/mhinz/vim-grepper/issues/27
 " let g:grepper = { 'git': { 'grepprg': 'git grep -nI $* -- $.' }}
 " Grepper -grepprg ag --vimgrep $* $. works
-runtime autoload/grepper.vim
-nnoremap <leader>git :Grepper  -tool git -open -nojump
+runtime plugin/grepper.vim  " init grepper with defaults
+let g:grepper.tools += ["rgall"]
+let g:grepper.rgall = copy(g:grepper.rg)
+let g:grepper.rgall.grepprg .= ' --no-ignore'
+nnoremap <leader>git :Grepper -tool git -open -nojump
 nnoremap <leader>ag  :Grepper -tool ag  -open -switch
-nnoremap <leader>rg  :Grepper -tool rg  -open -switch
+nnoremap <leader>rg  :Grepper -tool rg -open -switch
 
+" autocmd User Grepper launch notif
 
 " let g:grepper.side = 0
 " let g:grepper.switch = 1
@@ -1333,8 +1486,8 @@ nnoremap <leader>rg  :Grepper -tool rg  -open -switch
 "     \ }
 "     \}
 " -noswitch
-" nmap gs <plug>(GrepperOperator)
-" xmap gs <plug>(GrepperOperator)
+nmap gs <plug>(GrepperOperator)
+xmap gs <plug>(GrepperOperator)
 
 " }}}
 " sidesearch {{{
@@ -1356,7 +1509,7 @@ set foldcolumn=3
 
 if has("folding_fillchars")
 	" removed to test default values
-  " set fillchars+=foldopen:▾,foldsep:│,foldclose:▸,foldend:^
+  set fillchars+=foldopen:▾,foldsep:│,foldclose:▸,foldend:^
   " echo "doing it"
   " set fdc=-1
   set fdc=0
@@ -1379,7 +1532,7 @@ let g:sneak#streak = 0
 let g:peekaboo_window = 'vertical botright 30new'
 
 " Delay opening of peekaboo window (in ms. default: 0)
-let g:peekaboo_delay = 750
+let g:peekaboo_delay = 0
 
 " Compact display; do not display the names of the register groups
 let g:peekaboo_compact = 1
@@ -1407,9 +1560,14 @@ let g:signify_sign_show_text = 0
 " let g:signify_sign_change            = "\u00a0" 
 " let g:signify_sign_changedelete      = g:signify_sign_change
 " let g:signify_sign_show_count|
+" master
+
+ " foire dans le commit suivant
+ " \'git': 'git diff --no-color --no-ext-diff -U0 bfb9cf1 -- %f'
 let g:signify_vcs_cmds = {
       \'git': 'git diff --no-color --no-ext-diff -U0 master -- %f'
   \}
+" git log --format=format:%H $FILE | xargs -L 1 git blame $FILE -L $LINE,$LINE
 
 let g:signify_cursorhold_insert     = 0
 let g:signify_cursorhold_normal     = 0
@@ -1419,7 +1577,7 @@ let g:signify_update_on_focusgained = 1
 " nmap <leader>wj :call sy#jump#next_hunk(v:count1)<CR>
 nmap <leader>wj <plug>(signify-next-hunk)
 " nnoremap <leader>sj :echomsg 'next-hunk'<CR>
-nnoremap <leader>sk <plug>(signify-prev-hunk)
+nmap <leader>sk <plug>(signify-prev-hunk)
 
 " }}}
 " autosave plugin (:h auto-save) {{{
@@ -1461,12 +1619,6 @@ let g:SignatureEnabledAtStartup=1
 let g:SignatureWrapJumps=1
 let g:SignatureDeleteConfirmation=1
 let g:SignaturePeriodicRefresh=1
-" }}}
-" Dirvish {{{
-let g:loaded_netrwPlugin = 1 " ???
-command! -nargs=? -complete=dir Vexplore leftabove vsplit | silent Dirvish <args>
-command! -nargs=? -complete=dir Sexplore belowright split | silent Dirvish <args>
-nnoremap gx :call netrw#BrowseX(expand((exists("g:netrw_gx")? g:netrw_gx : '<cfile>')),netrw#CheckIfRemote())<cr>
 " }}}
 " riv restdown config {{{
 let g:riv_disable_folding=1
@@ -1558,15 +1710,20 @@ let g:nvimdev_auto_cd=1
 let g:nvimdev_auto_lint=1
 let g:nvimdev_build_readonly=1
 
+function! VarToggle(key)
+  " hopefully neomake should enable/disable that on a per buffer basis
+  let l:val = eval(a:key)
+  if l:val
+    exec "let ".a:key."=0"
+  else
+
+    exec "let ".a:key."=1"
+    " let g:nvimdev_auto_lint=1
+  endif
+endfunc
+command! NvimLintToggle :call VarToggle("g:nvimdev_auto_lint")
         " \ 'remove_invalid_entries': get(g:, 'neomake_remove_invalid_entries', 0),
 "}}}
-" lsp {{{
-let g:LanguageClient_serverCommands = {
-    \ }
-    " \ 'rust': ['cargo', 'run', '--release', '--manifest-path=/opt/rls/Cargo.toml'],
-    " \ 'javascript': ['/opt/javascript-typescript-langserver/lib/language-server-stdio.js' ],
-
-" }}}
 " vim-pad {{{
 let g:pad#silent_on_mappings_fail=1
 
@@ -1577,13 +1734,30 @@ let g:pad#default_format = "markdown"
 au FileType coq call coquille#FNMapping()
 let g:coquille_auto_move=1
 " }}}
+" deoplete-clang2 config {{{
+let g:deoplete#sources#clang#executable="/usr/bin/clang"
+let g:deoplete#sources#clang#autofill_neomake=1
+"}}}
+
+" dasht{{{
+
+" When in Python, also search NumPy, SciPy, and Pandas:
+let g:dasht_filetype_docsets = {} " filetype => list of docset name regexp
+let g:dasht_filetype_docsets['python'] = ['(num|sci)py', 'pandas']
+
+" search related docsets
+nnoremap <Leader>k :Dasht<Space>
+
+" search ALL the docsets
+nnoremap <Leader><Leader>k :Dasht!<Space>
+"}}}}}}
 set hidden " you can open a new buffer even if current is unsaved (error E37)
 
 " draw a line on 80th column
 set colorcolumn=80
 
-" default behavior for diff=filler,vertical 
-set diffopt=filler,vertical 
+" default behavior for diff=filler,vertical
+set diffopt=filler,vertical
 
 " Y behave like D or C
 nnoremap Y y$
@@ -1623,6 +1797,7 @@ nmap <F4> call GoToNextError()
 
 
 " Neomake status.
+" let bufnr = winbufnr(a:winnr)
 " let neomake_status_str = ''
 " if exists('*neomake#GetJobs')
 "   if getbufvar(bufnr, 'neomake_disabled', 0)
@@ -1771,7 +1946,10 @@ set matchpairs+=<:>  " Characters for which % should work
 " set whichwrap+=<,>,h,l
 
 " nvim-palette{{{
+let g:palette_debug=1
 let g:palette_histadd=1
+" overrides default
+" let g:palette_descriptions_file='/home/teto/neovim2/build/runtime/data/options.mpack'
 " let g:palette_fzf_opts={
 " 	\ 'options': ' --prompt "Palette>"',
 " 	\ 'down': '50%',
@@ -1786,15 +1964,17 @@ nmap <Leader>x <Plug>(PaletteRun)
 " use emenu ("execute menu") to launch the command
 " disable all menus
 unmenu * 
-" map <Leader>s :setlocal spell spelllang=en_us<CR>
-" TODO use histadd
-menu Spell.EN_US :setlocal spell spelllang=en_us \| call histadd('cmd', 'setlocal spell spelllang=en_us')<CR>
-menu Spell.FR :setlocal spell spelllang=fr_fr<CR>
+" menu Spell.EN_US :setlocal spell spelllang=en_us \| call histadd('cmd', 'setlocal spell spelllang=en_us')<CR>
+menu Spell.&FR :setlocal spell spelllang=fr_fr<CR>
+" menu Spell.EN_US :setlocal spell spelllang=en_us<CR>
+menu <script> Spell.&EN_US :setlocal spell spelllang=en_us<CR>
+menu ]Spell.hidden should be hidden
 
 menu Trans.FR :te trans :fr <cword><CR>
+tmenu Trans.FR Traduire vers le francais
 " tabulation-related menu {{{2
-menu Search.CurrentBuffer :exe Grepper -grepprg rg --vimgrep $* $.
-menu Search.AllBuffers :exe Grepper -grepprg rg --vimgrep $* $+
+" menu Search.CurrentBuffer :exe Grepper -grepprg rg --vimgrep $* $.
+" menu Search.AllBuffers :exe Grepper -grepprg rg --vimgrep $* $+
 " }}}
 " tabulation-related menu {{{2
 menu Tabs.S2 :set  tabstop=2 softtabstop=2 sw=2<CR>
@@ -1839,9 +2019,9 @@ autocmd ColorScheme *
 colorscheme molokai
 
 " }}}
-" set guicursor="n-v-c:block-Cursor/lCursor, ve:ver35-Cursor, o:hor50-Cursor,i-ci:ver25-Cursor/lCursor, r-cr:hor20-Cursor/lCursor, sm:block-Cursor -blinkwait175-blinkoff150-blinkon175"
-
-set guicursor=i:ver3,n:block-blinkon10-Cursor,r:hor50
+" set guicursor="n-v-c:block-Cursor/lCursor,ve:ver35-Cursor,o:hor50-Cursor,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor,sm:block-Cursor"
+set guicursor=n-v-c:block-Cursor/lCursor,ve:ver35-Cursor,o:hor50-Cursor,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor
+" set guicursor=i:ver3,n:block-blinkon10-Cursor,r:hor50
 highl Cursor ctermfg=16 ctermbg=253 guifg=#000000 guibg=#00FF00
 
 " TESTING only
@@ -1879,8 +2059,9 @@ highlight SignifySignChange cterm=bold ctermbg=237  ctermfg=227 guibg=#F08A1F
 " MATT to test 
 let g:python_host_tcp=1
 
-function! ExportMenus(path)
-	let m = export_menus(a:path)
+function! ExportMenus(path, modes)
+	" export all for now
+	let m = menu_get(a:path, a:modes)
 	let r =  json_encode(m)
 	" put =r " to display in current buffer
 	call writefile([r], "menus.txt")

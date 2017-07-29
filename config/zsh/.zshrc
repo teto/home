@@ -11,15 +11,21 @@
 # you can switch between global/local with ^G
 # source "$ZDOTDIR/plugins/per-directory-history.zsh"
 # }}}
- 
-source "$ZDOTDIR/aliases.zsh"
+
+. "$ZDOTDIR/aliases.zsh"
 # notifies when long command finishes
-source "$ZDOTDIR/zbell.zsh" 
+. "$ZDOTDIR/zbell.zsh" 
 
 #source $ZDOTDIR/hooks.zsh
 
 # adds a transfer function to upload a file & display its url
-source "$ZDOTDIR/transfer.zsh"
+. "$ZDOTDIR/transfer.zsh"
+
+
+
+
+
+# TODO make it a function cat some.json | python -m json.tool
 
 
 # Mail check {{{
@@ -175,7 +181,7 @@ zmodload -i zsh/complist
 # man zshcontrib
 zstyle ':vcs_info:*' actionformats '%F{5}(%f%s%F{5})%F{3}-%F{5}[%F{2}%b%F{3}|%F{1}%a%F{5}]%f '
 zstyle ':vcs_info:*' formats '%F{5}(%f%s%F{5})%F{3}-%F{5}[%F{2}%b%F{5}]%f '
-zstyle ':vcs_info:*' enable git #svn cvs 
+zstyle ':vcs_info:*' enable git #svn cvs
 
 add-zsh-hook preexec set_term_title
 #add-zsh-hook zsh_directory_name
@@ -184,6 +190,11 @@ add-zsh-hook precmd update_term_title
 # completion config {{{1
 # enables autocompletion for apt
 compdef apt=apt-get
+
+# mnual completions
+. "$ZDOTDIR/git-extras-completion.zsh"
+. "$ZDOTDIR/translate-shell.plugin.zsh"
+# . "$ZDOTDIR/alot-completion.zsh" # this one is buggy
 
 # zsh searches $fpath for completion files
 fpath=( $ZDOTDIR/completions $fpath )
@@ -246,7 +257,13 @@ zstyle ':completion:*:kill:*' force-list always
 
 # works in termite
 function set_term_title (){
-    print -Pn "\e]0;$(echo "$1")\a"
+# -n Do not add a newline to the output.
+
+    # print -Pn "\e]0;$(echo "$1")\a"
+    print -n '\e]0;'
+    print -n "$1"
+    print -nrD "@$PWD"
+    print -n '\a'
 }
 
 function rprompt_cmd() {
@@ -302,7 +319,6 @@ SPROMPT="Correct $fg[red]%R$reset_color to $fg[green]%r$reset_color [(y)es (n)o 
 
 #PS1=%K{blue}%n@%m%k %B%F{cyan}%(4~|...|)%3~%F{white} %# %b%f%k
 #}}}
-
 # prompt config {{{1
 #PROMPT='$(prompt_cmd)' # single quotes to prevent immediate execution
 # 
@@ -356,9 +372,10 @@ SPROMPT="Correct $fg[red]%R$reset_color to $fg[green]%r$reset_color [(y)es (n)o 
 #source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # Enable FZF fuzzy matcher {{{
-# FZF_PATH="$XDG_DATA_HOME/fzf/shell/"
-# source "$FZF_PATH"/completion.zsh
-# source "$FZF_PATH"/key-bindings.zsh
+FZF_PATH="$XDG_DATA_HOME/fzf/shell/"
+# . "$FZF_PATH"/completion.zsh
+# . "$FZF_PATH"/key-bindings.zsh
+# . "$ZDOTDIR"/fzf.zsh
 # }}}
 
 # _gnu_generic should work if program accepts --help
@@ -375,6 +392,3 @@ if [ -e /home/teto/.nix-profile/etc/profile.d/nix.sh ]; then
 fi 
 
 
-
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

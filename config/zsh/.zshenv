@@ -2,6 +2,11 @@
 # See https://wiki.archlinux.org/index.php/XDG_Base_Directory_support#Partial to get aound
 #  non XDG conformant programs
 
+
+export GTK_IM_MODULE=fcitx
+export QT_IM_MODULE=fcitx
+export XMODIFIERS=@im=fcitx
+
 # PATH {{{
 #PATH="/usr/lib/w3m:$PATH"
 # PATH="$PATH:/home/teto/mptcpanalyzer"
@@ -21,7 +26,6 @@ fi
 #echo $PATH
 export PATH
 # }}}
-
 # simulate XDG for some apps {{{
 export WEECHAT_HOME="$XDG_CONFIG_HOME/weechat"
 export INPUTRC="$XDG_CONFIG_HOME/readline"
@@ -32,7 +36,6 @@ export INPUTRC="$XDG_CONFIG_HOME/inputrc"
 export IPYTHONDIR="$XDG_CONFIG_HOME/ipython"
 export JUPYTER_CONFIG_DIR=${XDG_CONFIG_HOME:-$HOME/.config}/jupyter
 #}}}
-
 # PYTHONPATH {{{
 # no need to export, install in develop mode
 # PYTHONPATH="$PYTHONPATH:$HOME/i3ipc-python"
@@ -48,16 +51,14 @@ export JUPYTER_CONFIG_DIR=${XDG_CONFIG_HOME:-$HOME/.config}/jupyter
 
 export VAGRANT_DEFAULT_PROVIDER="libvirt"
 export LD_LIBRARY_PATH="/usr/local/lib:$LD_LIBRARY_PATH"
-
+export GOPATH="$HOME/go"
 
 # to prevent a matplotlib pb
 export MPLBACKEND="Qt5Agg"
-
 #export ZDOTDIR="$HOME/.zsh"
 
 # TODO try removing ?
 export MUTT="$XDG_CONFIG_HOME/mutt"
-
 export MAILDIR="$HOME/Maildir"
 
 # export DASHT_DOCSETS_DIR
@@ -74,18 +75,19 @@ export BROWSER="x-www-browser"
 # careful ! it's not a classic terminfo root with /X/Xname
 # it will just look for files in this directory
 export TERMINFO="${XDG_CONFIG_HOME:-~/.config}/terminfo"
-
+# see :h $NVIM_LOG_FILE
+export NVIM_LOG_FILE="~/.nvimlog"
 # can remove NORC once pb in nvim fixed
 export MANPAGER="nvim -u NORC -c 'set ft=man' -"
 # export MANPAGER="less"
 export MANPATH="$HOME/dasht/man:$MANPATH"
 
 # FZF {{{
+export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
+# export FZF_DEFAULT_OPTS=" --exact"
 export FZF_DEFAULT_OPTS=" --exact"
 #--color=
 # }}}
-
-
 # for DCE/ns3 experiments {{{
 # remove automatic access to kernel since we may want to look at it
 # in $HOME/libos-tools

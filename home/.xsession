@@ -1,12 +1,12 @@
-#!/bin/bash
+#!/bin/sh
 
 # Enable zapping (C-A-<Bksp> kills X)
 setxkbmap -option terminate:ctrl_alt_bksp
 
 export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
-source "$HOME/.zshenv"
+. "$HOME/.zshenv"
 
-udiskie &
+# udiskie &
 
 # alsamixer in systray
 # regenerate i3 config
@@ -18,7 +18,7 @@ xrdb -I"$HOME" "$HOME/.Xresources"
 xsetroot -solid "#333333"
 
 # Enable core dumps in case something goes wrong
-ulimit -c unlimited
+# ulimit -c unlimited
 
 # Start i3 and log to ~/.i3/logfile
 # echo "Starting at $(date)" >> ~/.i3/logfile
@@ -28,6 +28,7 @@ ulimit -c unlimited
 # dbus-launch
 
 # autostart applications (parcellite/mpd/update-notifier etc...)
+# do dex -ad -e i3 -v to debug
 dex -a -e i3
 
 i3

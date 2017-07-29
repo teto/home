@@ -1,0 +1,5 @@
+xterm*Background:               black
+xterm*Foreground:               green
+xterm*cursorColor:              LightBlue
+xterm*pointerShape:             arrow
+xterm*pointerColor:             blue

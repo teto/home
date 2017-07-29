@@ -65,12 +65,40 @@
 #
 # The gtest output provider shows verbose details
 # that can be useful to diagnose hung tests
-CMAKE_EXTRA_FLAGS += -DBUSTED_OUTPUT_TYPE=gtest
+# CMAKE_EXTRA_FLAGS += -DBUSTED_OUTPUT_TYPE=gtest
+CMAKE_EXTRA_FLAGS += -DBUSTED_OUTPUT_TYPE=nvim
+	CPP_EXTRA_ARGS:="/usr/bin/cc -DINCLUDE_GENERATED_DECLARATIONS -D_GNU_SOURCE -Iconfig -I../src -isystem ../.deps/usr/include -Isrc/nvim/auto -Iinclude	 -Wconversion -DNVIM_MSGPACK_HAS_FLOAT32 -g		-Wall -Wextra -pedantic -Wno-unused-parameter -Wstrict-prototypes -std=gnu99 -Wvla -fstack-protector-strong -fdiagnostics-color=auto -I/usr/lib/gcc/x86_64-linux-gnu/6/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/6/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include"
 
 .DEFAULT_GOAL := nvim
+
+INTERMEDIATE_FILES := $(shell find build/ -type f -name '*.i')
 #
 # Run doxygen over the source code.
 # Output will be in build/doxygen
 #
 doxygen:
 	doxygen src/Doxyfile
+
+frama-c:
+
+	# No. support for pre-processing in Frama-C is quite basic. That said,
+	# it is possible to do something like
+	# frama-c -ocode file1.i -cpp-command cmd1 -print file1.c -then -ocode
+	# file2.i -cpp-command cmd2 -print file2.c [...] -then -ocode="" file1.i
+	# file2.i [analysis options]
+
+	# or of course
+	# frama-c -ocode file1.i -cpp-command cmd1 -print file1.c
+	# frama-c -ocode file2.i -cpp-command cmd2 -print file2.c
+	# ...
+	# frama-c file1.i file2.i ...
+
+	# As an aside, unless you really want to change the whole pre-processor,
+	# it's usually better to use -cpp-extra-args="-Iinclude-lib -DFOO ..."
+	# rather than -cpp-command.
+	# or one can use
+	# https://lists.gforge.inria.fr/pipermail/frama-c-discuss/2008-October/000600.html
+	# frama-c build/*.i
+	# -cpp-extra-args="-Iinclude-lib
+	# frama-c -cpp-extra-args="$(CPP_EXTRA_ARGS)" $(INTERMEDIATE_FILES)
+	frama-c -cpp-command=$(CPP_EXTRA_ARGS) $(INTERMEDIATE_FILES)

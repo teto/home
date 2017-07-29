@@ -19,5 +19,8 @@ hi CursorColumn                  guibg=#293739
 
 " for coq.vim
 " CheckedByCoq and SentToCoq
-highlight CheckedByCoq ctermbg=17 guibg=LightGreen
-hi SentToCoq ctermbg=60 guibg=LimeGreen
+" highlight CheckedByCoq ctermbg=17 guibg=LightGreen
+" hi SentToCoq ctermbg=60 guibg=LimeGreen
+"
+hi link CheckedByCoq EndOfBuffer
+hi link SentToCoq Question
