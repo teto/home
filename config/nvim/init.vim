@@ -97,7 +97,8 @@ Plug 'mhinz/vim-signify' " Indicate changed lines within a file using a VCS.
 " provider dependant {{{
 Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
 " Plug '~/vim-config'
-Plug '~/nvim-palette'
+Plug '~/nvim-palette', { 'do': function('DoRemote') }
+Plug 'LnL7/vim-nix', {'for': 'nix'}
 Plug 'romainl/vim-qf' " can create pb with neomake
 " Plug 'gelguy/Cmd2.vim' " test
 Plug 'editorconfig/editorconfig-vim' " not remote but involves python

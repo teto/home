@@ -6,6 +6,10 @@
 # for VTE-based terminals. In termite Ctrl + Shift + t opens terminal in cwd
 # source /etc/profile.d/vte.sh
 
+# check we are on nixos
+# ON_NIXOS=$(test ! -n "$NIX_CONF_DIR")
+ON_NIXOS=true
+
 # Per folder history {{{
 # https://github.com/jimhester/per-directory-history
 # you can switch between global/local with ^G
@@ -38,7 +42,6 @@
 	  #mailpath+=("${i}?You have new mail in ${i:h:t}.")
 #done
 # }}}
-
 # History parameters {{{
 HISTSIZE=10000
 SAVEHIST=9000
@@ -292,7 +295,7 @@ KEYTIMEOUT=1
 # on nix it is in
 # import powerline
 # print(powerline.__path__)
-if [ -n "$NIX_CONF_DIR" ]; then
+if [  $ON_NIXOS = true ]; then
     source "$HOME/.nix-profile/share/zsh/site-contrib/powerline.zsh"
     source "$(autojump-share)/autojump.zsh"
 else
@@ -373,8 +376,11 @@ SPROMPT="Correct $fg[red]%R$reset_color to $fg[green]%r$reset_color [(y)es (n)o 
 
 # Enable FZF fuzzy matcher {{{
 FZF_PATH="$XDG_DATA_HOME/fzf/shell/"
-# . "$FZF_PATH"/completion.zsh
-# . "$FZF_PATH"/key-bindings.zsh
+if [ $ON_NIXOS = true ]; then
+    FZF_PATH="$(fzf-share)"
+fi
+. "$FZF_PATH"/completion.zsh
+. "$FZF_PATH"/key-bindings.zsh
 # . "$ZDOTDIR"/fzf.zsh
 # }}}
 
@@ -382,13 +388,13 @@ FZF_PATH="$XDG_DATA_HOME/fzf/shell/"
 compdef _gnu_generic qutebrowser
 compdef _gnu_generic mptcpanalyzer
 
-# added by Nix installer
-if [ -e /home/teto/.nix-profile/etc/profile.d/nix.sh ]; then 
-    . /home/teto/.nix-profile/etc/profile.d/nix.sh; 
+# added by Nix installer (on ubuntu)
+if [ -e /home/teto/.nix-profile/etc/profile.d/nix.sh ]; then
+    . /home/teto/.nix-profile/etc/profile.d/nix.sh;
 # add 'j' command
 # todo if on nix, use autojump-share
 # . $which/usr/share/autojump/autojump.sh
 
-fi 
+fi
 
 
