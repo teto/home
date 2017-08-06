@@ -8,6 +8,7 @@
 
 [core]
   whitespace = space-before-tab
+	compression = 0
 
 #trailing-space
 [color]
