@@ -118,7 +118,7 @@ Plug 'gianarb/notify.vim' " call notify#emitNotification('Title', 'Body')
 Plug 'teto/coquille', {'branch': 'matt', 'for': 'coq'}
 Plug 'let-def/vimbufsync', {'for': 'coq'} " for coq
 " Plug 'vim-scripts/ProportionalResize'
-Plug 'inside/vim-search-pulse' " Search related
+" Plug 'inside/vim-search-pulse' " Search related
 
 " vim-search-pulse {{{
 let g:vim_search_pulse_mode = 'cursor_line'
@@ -135,7 +135,7 @@ Plug 'sk1418/QFGrep' " Filter quickfix
 " (upstreamd already or ?)
 " Plug 'mtth/scratch.vim' " , {'on': 'Scratch'} mapped to ?
 " Plug 'tjdevries/vim-inyoface.git' "InYoFace_toggle to display only comments 
-Plug 'autozimu/LanguageClient-neovim' " :h LanguageClientUsage
+Plug 'autozimu/LanguageClient-neovim', { 'do': function('DoRemote') } " :h LanguageClientUsage
 " Plug 'tjdevries/nvim-langserver-shim' " for LSP
 " Plug 'powerman/vim-plugin-AnsiEsc' " { to hl ESC codes
 " Plug 'git@github.com:junegunn/gv.vim.git' " git commit viewer :Gv
