@@ -378,4 +378,6 @@ compdef _gnu_generic mptcpanalyzer
 # added by Nix installer
 if [ -e /home/teto/.nix-profile/etc/profile.d/nix.sh ]; then . /home/teto/.nix-profile/etc/profile.d/nix.sh; fi 
 
-
+ if [ -d "$HOME/adb-fastboot" ] ; then
+     export PATH="$HOME/adb-fastboot:$PATH"
+ fi
