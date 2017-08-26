@@ -32,7 +32,9 @@ keyring:
 	echo "Setup keyrings"
 	#keyring set
 	keyring set gmail mattator
-	keyring set lip6_cloud coudron
+	keyring set gmail client_secret
+	keyring set zaclys login
+	keyring set zaclys password
 
 cache:
 	#mkdir -p $(shell echo "${XDG_CACHE_HOME:-$HOME/.cache}/less")
@@ -41,23 +43,23 @@ cache:
 mail:
 	mkdir -p ${MAILDIR}/lip6/.notmuch
 	mkdir -p ${MAILDIR}/gmail/.notmuch
-	ln -s ${HOME}/dotfiles/hooks_pro ${MAILDIR}/lip6/.notmuch/hooks 
-	ln -s ${HOME}/dotfiles/hooks_perso ${MAILDIR}/gmail/.notmuch/hooks 
-	notmuch --config=${XDG_CONFIG_HOME}/notmuch/notmuchrc new 
-	notmuch --config=${XDG_CONFIG_HOME}/notmuch/notmuchrc_pro new 
+	ln -s ${HOME}/dotfiles/hooks_pro ${MAILDIR}/lip6/.notmuch/hooks
+	ln -s ${HOME}/dotfiles/hooks_perso ${MAILDIR}/gmail/.notmuch/hooks
+	notmuch --config=${XDG_CONFIG_HOME}/notmuch/notmuchrc new
+	notmuch --config=${XDG_CONFIG_HOME}/notmuch/notmuchrc_pro new
 etc:
 	sudo cp etc/profile.d/* /etc/profile.d/
 
 fonts:
 	echo "Regenerating cache"
 	echo "list fonts with fc-list"
-	fc-cache -vf 
+	fc-cache -vf
 
 git:
 	echo "Install git hooks for this repo"
 
-alternatives:
-	 sudo update-alternatives --install $(which x-www-browser) x-www-browser $(which qutebrowser) 0 
+# alternatives:
+# 	 sudo update-alternatives --install $(which x-www-browser) x-www-browser $(which qutebrowser) 0
 xdg:
 	# Example: xdg-mime default qutebrowser.desktop text/html
 

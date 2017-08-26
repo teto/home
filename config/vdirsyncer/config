@@ -1,129 +1,88 @@
+#  vim: set noet fdm=marker fenc=utf-8 ff=unix sts=0 sw=4 ts=4 :
 # An example configuration for vdirsyncer.
 
-# Optional parameters are commented out.
 # This file doesn't document all available parameters, see
 # http://vdirsyncer.readthedocs.org/ for the rest of them.
 
 [general]
 # A folder where vdirsyncer can store some metadata about each pair.
-status_path = ~/.cache/vdirsyncer/status/
+status_path = "$XDG_CACHE_HOME/vdirsyncer/status/"
 
-# CARDDAV
-#[pair bob_contacts]
-# A `[pair <name>]` block defines two storages `a` and `b` that should be
-# synchronized. The definition of these storages follows in `[storage <name>]`
-# blocks. This is similar to accounts in OfflineIMAP.
-#a = bob_contacts_local
-#b = bob_contacts_remote
-
-
-# Synchronize all collections available on "side B" (in this case the server).
-# You need to run `vdirsyncer discover` if new calendars/addressbooks are added
-# on the server.
-
-# Omitting this parameter implies that the given path and URL in the
-# corresponding `[storage <name>]` blocks are already directly pointing to a
-# collection each.
-
-#collections = ["from b"]
-
-# To resolve a conflict the following values are possible:
-#   `null` - abort when collisions occur (default)
-#   `"a wins"` - assume a's items to be more up-to-date
-#   `"b wins"` - assume b's items to be more up-to-date
-#conflict_resolution = null
-
-#[storage bob_contacts_local]
-## A storage references actual data on a remote server or on the local disk.
-## Similar to repositories in OfflineIMAP.
-#type = filesystem
-#path = ~/.contacts/
-#fileext = .vcf
-
-#[storage bob_contacts_remote]
-#type = carddav
-#url = https://owncloud.example.com/remote.php/carddav/
-#username =
-# The password can also be fetched from the system password storage, netrc or a
-# custom command. See http://vdirsyncer.readthedocs.org/en/stable/keyring.html
-#password =
+# TODO setup a zaclys config
+[pair gmail_carddav]
+a = "gmail_local_carddav"
+b = "gmail_remote_carddav"
+# or vimdiff
+collections = ["from a", "from b"]
+conflict_resolution = ["command", "nvim -d"]
 
 
-
-# CARDDAV => Contacts
-[pair lip6_carddav]
-a = lip6_local_carddav
-b = lip6_remote_carddav
-collections = ["from b"]
-#collections = ["private", "work"]
-
-[storage lip6_local_carddav]
-type = filesystem
+[storage gmail_local_carddav]
+type = "filesystem"
 path.fetch = ["command", "sh", "-c", "echo $XDG_DATA_HOME/contacts"]
-fileext = .vcf
+fileext = ".vcf"
 
-[storage lip6_remote_carddav]
-auth=basic
-type = carddav
-url = https://cloud.lip6.fr/remote.php/carddav/addressbooks/coudron/pro
-username = coudron
-password.fetch = ["command", "keyring", "get", "lip6_cloud", "coudron"]
+[storage gmail_remote_carddav]
+type = "google_contacts"
+client_id= "1040176666032-jtmq7o63ddo2r2oo298fso7rdl7li6j9.apps.googleusercontent.com"
+client_secret.fetch = ["command", "keyring", "get", "gmail", "client_secret"]
+token_file.fetch = ["command", "sh", "-c", "echo $XDG_CACHE_HOME/vdirsyncer/gmail_token"]
 
 
-# Need oauth and also gmail kharddav seems broken
-# [storage perso_local_carddav]
+[pair zaclys_caldav] # {{{
+a = "zaclys_local_caldav"
+b = "zaclys_remote_caldav"
+collections = ["from a", "from b"]
+
+[storage zaclys_local_caldav]
+type = "filesystem"
+path.fetch = ["command", "sh", "-c", "echo $XDG_DATA_HOME/calendars/zaclys"]
+fileext = ".ics"
+
+
+[storage zaclys_remote_caldav]
+auth = "basic"
+type = "caldav"
+url = "https://ncloud.zaclys.com/remote.php/dav/calendars/22780/personal/"
+username.fetch = ["command", "keyring", "get", "zaclys", "login"]
+password.fetch = ["command", "keyring", "get", "zaclys", "password"]
+# }}}
+
+# [pair lip6_carddav] {{{
+# a = lip6_local_carddav
+# b = lip6_remote_carddav
+# collections = ["from b"]
+# #collections = ["private", "work"]
+
+# [storage lip6_local_carddav]
 # type = filesystem
 # path.fetch = ["command", "sh", "-c", "echo $XDG_DATA_HOME/contacts"]
 # fileext = .vcf
 
-
-# [storage perso_remote_carddav]
+# [storage lip6_remote_carddav]
 # auth=basic
 # type = carddav
-# url = google.com
-# username = mattator
-# password.fetch = ["command", "keyring", "get", "gmail", "coudron"]
+# url = https://cloud.lip6.fr/remote.php/carddav/addressbooks/coudron/pro
+# username = coudron
+# password.fetch = ["command", "keyring", "get", "lip6_cloud", "coudron"]
+# }}}
+
+# [pair perso_lip6_caldav] {{{
+# a = perso_local_caldav
+# b = perso_remote_caldav
+# #collections = ["private", "work"]
+
+# [storage perso_local_caldav]
+# type = filesystem
+# path.fetch = ["command", "sh", "-c", "echo $XDG_DATA_HOME/calendars/perso"]
+# fileext = .ics
 
 
-
-
-# CALDAV => Calendar
-[pair lip6_caldav]
-a = lip6_local_caldav
-b = lip6_remote_caldav
-#collections = ["private", "work"]
-
-[storage lip6_local_caldav]
-type = filesystem
-path.fetch = ["command", "sh", "-c", "echo $XDG_DATA_HOME/calendars/lip6"]
-fileext = .ics
-
-
-[storage lip6_remote_caldav]
-auth=basic
-type = caldav
-url = https://cloud.lip6.fr/remote.php/caldav/calendars/coudron/pro
-#url = https://owncloud.example.com/remote.php/caldav/
-username = coudron
-password.fetch = ["command", "keyring", "get", "lip6_cloud", "coudron"]
-
-
-# CALDAV => Calendar
-[pair perso_caldav]
-a = perso_local_caldav
-b = perso_remote_caldav
-#collections = ["private", "work"]
-
-[storage perso_local_caldav]
-type = filesystem
-path.fetch = ["command", "sh", "-c", "echo $XDG_DATA_HOME/calendars/perso"]
-fileext = .ics
-
-
-[storage perso_remote_caldav]
-auth=basic
-type = caldav
-url = https://cloud.lip6.fr/remote.php/caldav/calendars/coudron/pro
-#url = https://owncloud.example.com/remote.php/caldav/
-username = coudron
-password.fetch = ["command", "keyring", "get", "lip6_cloud", "coudron"]
+# [storage perso_remote_caldav]
+# auth=basic
+# type = caldav
+# url = https://cloud.lip6.fr/remote.php/caldav/calendars/coudron/pro
+# #url = https://owncloud.example.com/remote.php/caldav/
+# username = coudron
+# password.fetch = ["command", "keyring", "get", "lip6_cloud", "coudron"]
+# }}}
