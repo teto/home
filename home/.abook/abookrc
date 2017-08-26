@@ -1,0 +1,50 @@
+#---------------------------
+#--        abookrc        --
+#--      by lgaggini      --
+#--      CC BY-SA 3.0     --
+#---------------------------
+#
+# Declare a few custom fields
+field company = Company,string
+
+# Define how fields should be displayed in tabs
+view CONTACT = name, email, company
+view ADDRESS = address, address2, city, state, zip, country
+view PHONE = phone, workphone, mobile, fax
+view OTHER = nick, url, notes, anniversary
+
+# Automatically save database on exit 
+set autosave=true
+
+# Show all email addresses in list 
+set show_all_emails=true
+
+# Format of entries lines in list
+set index_format=" {name:22} {company:22} {email:40}"
+
+# Command used to start mutt 
+set mutt_command=mutt
+
+# Return all email addresses to a mutt query 
+set mutt_return_all_emails=true
+
+# Command used to print 
+set print_command=lpr
+
+# Command used to start the web browser 
+set www_command=w3m
+
+# address style [eu|us|uk] 
+set address_style=eu
+
+# use ASCII characters only 
+set use_ascii_only=false
+
+# Prevent double entry 
+set add_email_prevent_duplicates=true
+
+# field to be used with "sort by field" command 
+set sort_field=nick
+
+# show cursor in main display 
+set show_cursor=true
