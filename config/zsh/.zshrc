@@ -9,7 +9,8 @@
 # check we are on nixos
 #########################################
 # true if file exists, aka if we are on nixos
-ON_NIXOS=$(test ! -f /etc/NIXOS)
+test ! -f /etc/NIXOS
+ON_NIXOS=$?
 
 # Per folder history {{{
 # https://github.com/jimhester/per-directory-history
