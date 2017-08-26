@@ -143,15 +143,15 @@ alias pydev='python3.5 setup.py develop --user'
 # Gestion du 'ls' : couleur & ne touche pas aux accents
 alias ls='ls --classify --tabsize=0 --literal --color=auto --show-control-chars --human-readable'
 
-if [ -x /usr/bin/dircolors ]; then
-#    eval "`dircolors -b`"
-    alias dir='dir --color=auto'
-    alias vdir='vdir --color=auto'
+# if [ -x /usr/bin/dircolors ]; then
+# #    eval "`dircolors -b`"
+#     alias dir='dir --color=auto'
+#     alias vdir='vdir --color=auto'
 
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
-fi
+#     alias grep='grep --color=auto'
+#     alias fgrep='fgrep --color=auto'
+#     alias egrep='egrep --color=auto'
+# fi
 
 ### compilation related {{{
 alias makej="make -j4"

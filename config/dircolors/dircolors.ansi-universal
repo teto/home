@@ -1,12 +1,11 @@
-# Exact Solarized Dark color theme for the color GNU ls utility.
+# Exact Solarized color theme for the color GNU ls utility.
 # Designed for dircolors (GNU coreutils) 5.97
 #
 # This simple theme was simultaneously designed for these terminal color schemes:
 # - Solarized dark  (best)
-# - Solarized light
+# - Solarized light (best)
 # - default dark
 # - default light
-# with a slight optimization for Solarized Dark.
 #
 # How the colors were selected:
 # - Terminal emulators often have an option typically enabled by default that makes
@@ -98,8 +97,8 @@ TERM screen-256color-bce-s
 TERM screen-256color-italic
 TERM screen-bce
 TERM screen-w
-TERM screen.linux
 TERM screen.xterm-256color
+TERM screen.linux
 TERM screen.xterm-new
 TERM st
 TERM st-meta
@@ -117,7 +116,6 @@ TERM xterm-88color
 TERM xterm-color
 TERM xterm-debian
 TERM xterm-termite
-TERM vte
 
 # EIGHTBIT, followed by '1' for on, '0' for off. (8-bit output)
 EIGHTBIT 1
@@ -165,9 +163,7 @@ NORMAL 00
 # normal file
 FILE 00
 # directory
-DIR 34
-# 777 directory
-OTHER_WRITABLE 34;40
+DIR 36
 # symbolic link
 LINK 35
 
@@ -435,34 +431,34 @@ EXEC 01;31  # Unix
 # Unimportant non-text files
 # For universal scheme, use brightcyan 01;36
 # For optimal on dark bg (but too prominent on light bg), change to 01;33
-#.bak 01;36
-#.BAK 01;36
-#.old 01;36
-#.OLD 01;36
-#.org_archive 01;36
-#.off 01;36
-#.OFF 01;36
-#.dist 01;36
-#.DIST 01;36
-#.orig 01;36
-#.ORIG 01;36
-#.swp 01;36
-#.swo 01;36
-#*,v 01;36
-.bak 01;33
-.BAK 01;33
-.old 01;33
-.OLD 01;33
-.org_archive 01;33
-.off 01;33
-.OFF 01;33
-.dist 01;33
-.DIST 01;33
-.orig 01;33
-.ORIG 01;33
-.swp 01;33
-.swo 01;33
-*,v 01;33
+.bak 01;36
+.BAK 01;36
+.old 01;36
+.OLD 01;36
+.org_archive 01;36
+.off 01;36
+.OFF 01;36
+.dist 01;36
+.DIST 01;36
+.orig 01;36
+.ORIG 01;36
+.swp 01;36
+.swo 01;36
+*,v 01;36
+#.bak 01;33
+#.BAK 01;33
+#.old 01;33
+#.OLD 01;33
+#.org_archive 01;33
+#.off 01;33
+#.OFF 01;33
+#.dist 01;33
+#.DIST 01;33
+#.orig 01;33
+#.ORIG 01;33
+#.swp 01;33
+#.swo 01;33
+#*,v 01;33
 
 # The brightmagenta (Solarized: purple) color is free for you to use for your
 # custom file type

@@ -79,7 +79,7 @@ endfunction
 
 " filnxtToO
 set shortmess+=I
-set cmdheight=2
+set cmdheight=2 " for echodoc
 
 " inverts the meaning of g in substitution, ie with gdefault, change all
 " occurences
@@ -93,11 +93,13 @@ set exrc
 " vim-plug plugin declarations {{{1
 call plug#begin(s:plugdir)
 Plug 'mhinz/vim-signify' " Indicate changed lines within a file using a VCS.
+" Plug 'moznion/github-commit-comment.vim' " last update from 2014
+Plug 'dhruvasagar/vim-open-url' " gB/gW to open browser
 
 " provider dependant {{{
-Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 " Plug '~/vim-config'
-Plug '~/nvim-palette', { 'do': function('DoRemote') }
+Plug '~/nvim-palette', { 'do': ':UpdateRemotePlugins' } 
 Plug 'LnL7/vim-nix', {'for': 'nix'}
 Plug 'romainl/vim-qf' " can create pb with neomake
 " Plug 'gelguy/Cmd2.vim' " test
@@ -105,13 +107,13 @@ Plug 'editorconfig/editorconfig-vim' " not remote but involves python
 " provider
 Plug 'brooth/far.vim' " search and replace across files
 " needs ruby support, works in recent neovim
-Plug 'junegunn/vim-github-dashboard', { 'do': function('DoRemote') } 
+Plug 'junegunn/vim-github-dashboard', { 'do': ':UpdateRemotePlugins' } 
 " Plug 'fmoralesc/vim-pad'
 "}}}
 " to test https://github.com/neovim/neovim/issues/3688
 Plug 'haya14busa/incsearch.vim' " just to test
 " while waiting for my neovim notification provider...
-Plug 'tjdevries/descriptive_maps.vim', {'do': function('DoRemote') } " :call DescriptiveStart()
+Plug 'tjdevries/descriptive_maps.vim', {'do': ':UpdateRemotePlugins' } " :call DescriptiveStart()
 Plug 'gianarb/notify.vim' " call notify#emitNotification('Title', 'Body')
 " Plug 'vim-scripts/coq-syntax', {'for': 'coq'}
 " Plug 'the-lambda-church/coquille', {'branch': 'matt', 'for': 'coq'}
@@ -126,7 +128,7 @@ let g:vim_search_pulse_duration = 400
 "}}}
 
 " Plug 'kassio/neoterm' " some kind of REPL
-Plug 'ehamberg/vim-cute-python' " display unicode characters
+Plug 'ehamberg/vim-cute-python' " display unicode characters, kinda looks bad on vim grid
 Plug 'dbakker/vim-projectroot' " projectroot#guess()
 Plug 'sunaku/vim-dasht' " get documentation (zeavim is also a contender KabbAmine/zeavim.vim)
 " Plug 'git@github.com:reedes/vim-wordy.git' " pdt la these, pr trouver la jargon :Wordy
@@ -135,7 +137,7 @@ Plug 'sk1418/QFGrep' " Filter quickfix
 " (upstreamd already or ?)
 " Plug 'mtth/scratch.vim' " , {'on': 'Scratch'} mapped to ?
 " Plug 'tjdevries/vim-inyoface.git' "InYoFace_toggle to display only comments 
-Plug 'autozimu/LanguageClient-neovim', { 'do': function('DoRemote') } " :h LanguageClientUsage
+Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' } " :h LanguageClientUsage
 " Plug 'tjdevries/nvim-langserver-shim' " for LSP
 " Plug 'powerman/vim-plugin-AnsiEsc' " { to hl ESC codes
 " Plug 'git@github.com:junegunn/gv.vim.git' " git commit viewer :Gv
@@ -218,6 +220,9 @@ Plug 'eagletmt/ghcmod-vim', {'do': 'cabal install ghc-mod', 'for': 'haskell'} " 
 " Plug 'bitc/vim-hdevtools'
 Plug 'eagletmt/neco-ghc', {'for': 'haskell'} " completion plugin for haskell + deoplete ?
 Plug 'Shougo/vimproc.vim', {'do' : 'make'} " needed by neco-ghc
+Plug 'SevereOverfl0w/deoplete-github' " completion on commit issues
+Plug 'zchee/deoplete-zsh'
+Plug 'fszymanski/deoplete-abook'
 " Plug 'Twinside/vim-hoogle' , {'for':'haskell'}
 "}}}
 
@@ -311,7 +316,7 @@ Plug 'blueyed/vim-diminactive' " disable syntax coloring on inactive splits
 "Plug 'tpope/vim-sleuth' " Dunno what it is
 "Plug 'justinmk/vim-gtfo' " ?
 Plug 'tpope/vim-fugitive' " to use with Git, VERY powerful
-Plug 'tpope/vim-rhubarb' " fugitive plugin to support github
+Plug 'tpope/vim-rhubarb' " github support in fugitive, use |i_CTRL-X_CTRL-O|
 "Plug 'jaxbot/github-issues.vim' " works only with vim
 "Plug 'tpope/vim-surround' " don't realy know how to use yet
 "Plug 'junegunn/vim-peekaboo' " gives a preview of buffers when pasting
@@ -349,7 +354,9 @@ Plug 'kshenoy/vim-signature' " display marks in gutter, love it
 " Plug '~/QuickFixCurrentNumber' " use :Cnr :Cgo instead of :cnext etc...
 " Plug 'Coacher/QuickFixCurrentNumber' " use :Cnr :Cgo instead of :cnext etc...
 " =======
-Plug 'Shougo/echodoc.vim' " display signature in cmdline after v:completed_item
+" display signature in cmdline after v:completed_item, needs to customize
+" cmdheight
+Plug 'Shougo/echodoc.vim' 
 Plug 'teto/QuickFixCurrentNumber' " use :Cnr :Cgo instead of :cnext etc...
 Plug 'git@github.com:vim-scripts/ingo-library.git' " DEPENDANCY of QuickFixCurrentNumber
 "Plug 'tomtom/quickfixsigns_vim'
@@ -359,8 +366,7 @@ Plug 'mhinz/vim-rfc', { 'on': 'RFC' }
 " careful maps F4 by default
 Plug 'chrisbra/unicode.vim' " , { 'on': ['<plug>(UnicodeComplete)', '<plug>(UnicodeGA)', 'UnicodeTable'] } 
 "Plug 'vim-scripts/rfc-syntax', { 'for': 'rfc' } " optional syntax highlighting for 
-Plug 'vim-scripts/Modeliner' " <leader>ml to setup buffer modeline
-"Plug 'sfiera/vim-emacsmodeline' " Reads emacs modelines
+Plug 'teto/Modeliner' " <leader>ml to setup buffer modeline
 " This one has bindings mapped to <leader>l
 "Plug 'vimwiki/vimwiki'   " to write notes
 "Plug 'vim-scripts/DynamicSigns'
@@ -456,7 +462,7 @@ let g:netrw_browsex_viewer="xdg-open"
 let g:netrw_home=$XDG_CACHE_HOME.'/nvim'
 let g:netrw_liststyle=1 " long listing with timestamp
 " nnoremap gx :call netrw#BrowseX(expand((exists("g:netrw_gx")? g:netrw_gx : '<cfile>')),netrw#CheckIfRemote())<cr>
-nnoremap gx :call netrw#BrowseX(expand((exists("g:netrw_gx")? g:netrw_gx : '<cfile>')),netrw#CheckIfRemote())<cr>
+" nnoremap gx :call netrw#BrowseX(expand((exists("g:netrw_gx")? g:netrw_gx : '<cfile>')),netrw#CheckIfRemote())<cr>
 " }}}
 " Dirvish {{{
 let g:loaded_netrwPlugin = 1 " ???
@@ -549,7 +555,7 @@ set wildignore+=lib
 set modeline
 set modelines=4 "number of lines checked
 nmap <leader>ml :Modeliner<Enter>
-let g:Modeliner_format = 'et ff= fenc= sts= sw= ts= fdm=marker'
+let g:Modeliner_format = 'et ff= fenc= sts= sw= ts= fdm='
 " }}}
 "clipboard {{{
 " X clipboard gets aliased to +
@@ -845,7 +851,7 @@ endfunc
 
 let s:opts = {
 	\ 'source': "git branch -a",
-	\ 'options': ' --prompt "Palette>"',
+	\ 'options': ' --prompt "Misc>"',
 	\ 'down': '50%',
 	\ }
 	" \ 'sink': function('s:processResult'),
@@ -860,11 +866,74 @@ function! UpdateSignifyBranch(branch)
 
 endfunc
 
-function! ChooseSignifyGitCommit()
+function! FzfChooseSignifyGitCommit()
 
-  let l:dict = s:opts
+  let l:dict = copy(s:opts)
   let l:dict.sink = funcref('UpdateSignifyBranch')
-  call fzf#run(s:opts)
+  call fzf#run(d)
+endfunction
+
+" function! GetQfHistory()
+
+"   " let s:res = 
+"   redir => cout
+"   silent chistory
+"   redir END
+"   let qfs = split(cout, "\n")
+"   " TODO set jump to do
+"   let current_qf = -1
+"   let i = 0
+"   for item in qfs
+"     if item[0] == ">"
+"       current_qf = i
+"     endif
+"     i = i + 1
+"   endfor
+"   " map(list[1:], 's:format_mark(v:val)')),
+"   return qfs
+"   " return extend(list[0:0], map(list[1:], 's:format_mark(v:val)')),
+" endfunction
+
+function! UpdateQfList(res)
+  " TODO compute newer/older count for going to 
+  " TODO if 
+  echo a:res
+
+  " get jump id
+  " if ljump < 0
+  "   colder -ljump
+  " else
+  "   cnewer ljump
+
+endfunction
+
+" TODO be able to fzf lhistory/chistory
+function! FzfChooseQfList()
+
+  let d = copy(s:opts)
+  let d.source = GetQfHistory()
+  " let d.source = ["test 1", "test 2"]
+  let d.sink = function('UpdateQfList')
+  call fzf#run(d)
+endfunction
+
+function! NeomakeToggleMaker(maker_name)
+  " set(g:, 'neomake_'.&ft.'_enabled_makers', [])
+
+  "   :call filter(list, 'v:val !~ "x"')  " remove items with an 'x'
+
+endfunc
+
+function! FzfNeomake()
+
+  let d = copy(s:opts)
+
+  let d.source = get(g:, 'neomake_'.&ft.'_enabled_makers', [])
+  " let d.prompt = &ft." makers"
+  let d.options = '--prompt "'.&ft.' Makers>"'
+  " let d.source = ["test 1", "test 2"]
+  let d.sink = function('UpdateQfList')
+  call fzf#run(d)
 endfunction
 
 " Customize fzf colors to match your color scheme
@@ -881,7 +950,8 @@ endfunction
 "   \ 'spinner': ['fg', 'Label'],
 "   \ 'header':  ['fg', 'Comment'] 
 " }
-let g:fzf_history_dir = $XDG_DATA_HOME.'/fzf-history'
+
+let g:fzf_history_dir = $XDG_CACHE_HOME.'/fzf-history'
 " Advanced customization using autoload functions
 "autocmd VimEnter * command! Colors
   "\ call fzf#vim#colors({'left': '15%', 'options': '--reverse --margin 30%,0'})
@@ -891,6 +961,8 @@ let g:fzf_history_dir = $XDG_DATA_HOME.'/fzf-history'
 let g:fzf_buffers_jump = 1
 
 imap <c-x><c-f> <plug>(fzf-complete-path)
+
+"
 
 " }}}
 " terminal related {{{
@@ -973,7 +1045,13 @@ let g:deoplete#enable_debug = 1
 let g:deoplete#auto_complete_delay=50
 
 let g:deoplete#enable_refresh_always=0
+let g:deoplete#keyword_patterns = {}
+let g:deoplete#keyword_patterns.gitcommit = '.+'
 
+" fails
+" call deoplete#util#set_pattern(
+"   \ g:deoplete#omni#input_patterns,
+"   \ 'gitcommit', [g:deoplete#keyword_patterns.gitcommit])
 " deoplete clang {{{2
 let g:deoplete#sources#clang#libclang_path='/usr/lib/llvm-3.8/lib/libclang.so'
 let g:deoplete#sources#clang#libclang_header='/usr/include/clang/3.8.1/'
@@ -990,7 +1068,6 @@ let g:deoplete#sources#clang#sort_algo = 'priority'
 " deoplete tab-complete
 " nnoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 " }}}
-
 " deoplete jedi {{{2
 let deoplete#sources#jedi#enable_cache=1
 let deoplete#sources#jedi#show_docstring=0
@@ -1708,7 +1785,7 @@ endfun
 let g:nvimdev_auto_init=1
 let g:nvimdev_auto_cd=1
 " let g:nvimdev_auto_ctags=1
-let g:nvimdev_auto_lint=1
+let g:nvimdev_auto_lint=0
 let g:nvimdev_build_readonly=1
 
 function! VarToggle(key)
@@ -1722,6 +1799,8 @@ function! VarToggle(key)
     " let g:nvimdev_auto_lint=1
   endif
 endfunc
+
+" does not work as neomake won"'t take into account
 command! NvimLintToggle :call VarToggle("g:nvimdev_auto_lint")
         " \ 'remove_invalid_entries': get(g:, 'neomake_remove_invalid_entries', 0),
 "}}}
@@ -1960,7 +2039,6 @@ let g:palette_histadd=1
 " nmap <Leader>p :Palette<CR>
 nmap <Leader>x <Plug>(PaletteRun)
 "}}}
-
 " Interactive menus {{{1
 " use emenu ("execute menu") to launch the command
 " disable all menus
@@ -2024,6 +2102,7 @@ colorscheme molokai
 set guicursor=n-v-c:block-Cursor/lCursor,ve:ver35-Cursor,o:hor50-Cursor,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor
 " set guicursor=i:ver3,n:block-blinkon10-Cursor,r:hor50
 highl Cursor ctermfg=16 ctermbg=253 guifg=#000000 guibg=#00FF00
+" highl lCursor ctermfg=16 ctermbg=253 guifg=#000000 guibg=#00FF00
 
 " TESTING only
 nnoremap <kPageUp> :lprev

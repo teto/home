@@ -7,8 +7,9 @@
 # source /etc/profile.d/vte.sh
 
 # check we are on nixos
-# ON_NIXOS=$(test ! -n "$NIX_CONF_DIR")
-ON_NIXOS=true
+#########################################
+# true if file exists, aka if we are on nixos
+ON_NIXOS=$(test ! -f /etc/NIXOS)
 
 # Per folder history {{{
 # https://github.com/jimhester/per-directory-history
@@ -18,19 +19,13 @@ ON_NIXOS=true
 
 . "$ZDOTDIR/aliases.zsh"
 # notifies when long command finishes
-. "$ZDOTDIR/zbell.zsh" 
-
+# . "$ZDOTDIR/zbell.zsh"
 #source $ZDOTDIR/hooks.zsh
-
 # adds a transfer function to upload a file & display its url
 . "$ZDOTDIR/transfer.zsh"
 
 
-
-
-
 # TODO make it a function cat some.json | python -m json.tool
-
 
 # Mail check {{{
 #MAILDIR="$HOME/Maildir"
@@ -166,7 +161,8 @@ export SYSCONFDIR="$XDG_CONFIG_HOME"
 #zle -N zle-line-init
 
 # eval "`dircolors -b "$XDG_CONFIG_HOME/dircolors/solarized.ansi-dark"`"
-dircolors -b "$XDG_CONFIG_HOME/dircolors/solarized.ansi-dark"
+# TODO use the universal 
+eval $(dircolors -b "$XDG_CONFIG_HOME/dircolors/dircolors.ansi-universal")
 
 
 
@@ -292,14 +288,12 @@ REPORTTIME=10
 KEYTIMEOUT=1
 
 
-# on nix it is in
-# import powerline
-# print(powerline.__path__)
-if [  $ON_NIXOS = true ]; then
+if [ $ON_NIXOS ]; then
     source "$HOME/.nix-profile/share/zsh/site-contrib/powerline.zsh"
     source "$(autojump-share)/autojump.zsh"
 else
-    source powerline.zsh
+    # todo find a better way
+    source "$ZDOTDIR/powerline.zsh"
 fi
 
 
@@ -376,7 +370,7 @@ SPROMPT="Correct $fg[red]%R$reset_color to $fg[green]%r$reset_color [(y)es (n)o 
 
 # Enable FZF fuzzy matcher {{{
 FZF_PATH="$XDG_DATA_HOME/fzf/shell/"
-if [ $ON_NIXOS = true ]; then
+if [ $ON_NIXOS ]; then
     FZF_PATH="$(fzf-share)"
 fi
 . "$FZF_PATH"/completion.zsh
@@ -397,4 +391,7 @@ if [ -e /home/teto/.nix-profile/etc/profile.d/nix.sh ]; then
 
 fi
 
-
+# for android/lineage os developement
+# if [ -d "$HOME/adb-fastboot" ] ; then
+#     export PATH="$HOME/adb-fastboot:$PATH"
+# fi
