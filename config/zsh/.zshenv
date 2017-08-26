@@ -43,10 +43,10 @@ export JUPYTER_CONFIG_DIR=${XDG_CONFIG_HOME:-$HOME/.config}/jupyter
 
 # lldb python plugin is badly installed/setup
 # location=$(lldb -P)
-location="/usr/lib/x86_64-linux-gnu/python2.7/site-packages:/usr/lib/python2.7/dist-packages/lldb-3.8"
-if [ $? -eq 0 ]; then
-	PYTHONPATH="${location}:$PYTHONPATH"
-fi
+# location="/usr/lib/x86_64-linux-gnu/python2.7/site-packages:/usr/lib/python2.7/dist-packages/lldb-3.8"
+# if [ $? -eq 0 ]; then
+# 	PYTHONPATH="${location}:$PYTHONPATH"
+# fi
 # }}}
 
 export VAGRANT_DEFAULT_PROVIDER="libvirt"

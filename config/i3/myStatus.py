@@ -124,17 +124,16 @@ status.register("network",
 # Note: requires libpulseaudio from PyPI
 #status.register("pulseaudio",   format="♪{volume}",)
 
-status.register(
-    "mpd",
-    format="{status}{title}",
-    status={
-        "pause": "▷",
-        "play": "▶",
-        "stop": "◾",
-    },
-    on_rightclick=['termite', '-e', 'ncmpcpp']
-
-)
+# status.register(
+#     "mpd",
+#     format="{status}{title}",
+#     status={
+#         "pause": "▷",
+#         "play": "▶",
+#         "stop": "◾",
+#     },
+# on_rightclick=['termite', '-e', 'ncmpcpp']
+# )
 
 #print("mdp on_lclick", mpd);
 

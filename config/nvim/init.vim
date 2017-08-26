@@ -100,6 +100,7 @@ Plug 'dhruvasagar/vim-open-url' " gB/gW to open browser
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 " Plug '~/vim-config'
 Plug '~/nvim-palette', { 'do': ':UpdateRemotePlugins' } 
+Plug 'LnL7/vim-nix', {'for': 'nix'}
 Plug 'romainl/vim-qf' " can create pb with neomake
 " Plug 'gelguy/Cmd2.vim' " test
 Plug 'editorconfig/editorconfig-vim' " not remote but involves python
@@ -200,7 +201,7 @@ Plug 'sjl/gundo.vim' " :GundoShow/Toggle to redo changes
 " Plug 'Valloric/YouCompleteMe' , { 'do': ':new \| call termopen(''python3 ./install.py --system-libclang --clang-completer'')', 'frozen': 1}
 Plug 'lyuts/vim-rtags'  " a l'air d'etre le plus complet <leader>ri  
 " Plug 'zchee/deoplete-clang', { 'for': 'c' }
-Plug 'tweekmonster/deoplete-clang2', { 'for': 'c' }
+" Plug 'tweekmonster/deoplete-clang2', { 'for': 'c' }
 " 
 Plug 'zchee/deoplete-jedi', { 'for': 'python'}
 " }}}
@@ -2132,6 +2133,7 @@ command! FlipBool call FzfFlipBool()
 "
 " to open tag in a split
 map <A-]> :vsp<CR>:exec("tag ".expand("<cword>"))<CR>
+map <C-5> :Neomake! make<CR>
 
 highlight SignifySignChange cterm=bold ctermbg=237  ctermfg=227 guibg=#F08A1F
 

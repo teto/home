@@ -14,7 +14,8 @@ font pango:FontAwesome 12
 # -modi fb:../Examples/rofi-file-browser.sh
 # https://github.com/DaveDavenport/rofi
 # Combi mode, allow several modes to be merged into one list.
-set $launcher "rofi -modi 'run,drun,window,ssh,Layouts:i3-list-layouts,file:/home/teto/rofi/Examples/rofi-file-browser.sh' -show run"
+# ,Layouts:i3-list-layouts,file:/home/teto/rofi/Examples/rofi-file-browser.sh'
+set $launcher "rofi -modi 'run,drun,window,ssh' -show run"
 # Randr:rofi-randr,Monitor:monitor_layout.sh' 
 set $greenclip "rofi -modi 'clipboard:greenclip print' -show clipboard"
 bindsym $mod+ctrl+h exec $greenclip
@@ -428,8 +429,10 @@ bar {
 	position top
 	strip_workspace_numbers 1
 	id 0
-	i3bar_command i3bar -t
-	status_command python3 /home/teto/.i3/myStatus.py
+	# -t => transparent, available only in i3gaps
+	# i3bar_command i3bar -t
+	i3bar_command i3bar
+	status_command nix-shell -p i3pystatus python35Packages.pytz python35Packages.keyring --run "python3 $XDG_CONFIG_HOME/i3/myStatus.py"
 	# separator_symbol "|"
 	# font pango: Liberation Sans Mono 9,  FontAwesome 12
 

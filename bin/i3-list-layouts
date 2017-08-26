@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 LAYOUT="$1"
 if [ -n "$LAYOUT" ]; then
