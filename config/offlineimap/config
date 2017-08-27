@@ -70,7 +70,7 @@ type = Gmail
 # remotepasseval = get_pwd ("gmail")
 # for now rely on .netrc
 user = mattator
-
+remotepasseval = keyring.get_password("gmail", "password")
 realdelete = yes
 maxconnections = 3
 ssl= yes

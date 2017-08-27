@@ -39,12 +39,14 @@
      defaultLocale = "fr_FR.UTF-8";
      inputMethod = {
        enabled = "fcitx";
-       fcitx.engines = with pkgs.fcitx-engines; [ 
-         # mozc 
+       fcitx.engines = with pkgs.fcitx-engines; [
+         mozc
        # hangul m17n
      ];
      };
    };
+
+
 
   # Set your time zone.
   time.timeZone = "Europe/Amsterdam";
@@ -52,18 +54,18 @@
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
+    astroid
      automake
      autoconf
      autojump
      cmake
-     dex # 
+     dex
 	 dunst
 	 fzf
-     # fcitx-mozc
      # lgogdownloader
      libtool
      libreoffice
-     libnotify # use via {pkgs.libnotify}/bin/notify-send 
+     libnotify # use via {pkgs.libnotify}/bin/notify-send
 	 gawk
      git
 	 # git-extras # does not find it (yet)
@@ -75,11 +77,13 @@
      offlineimap
      neovim
      pkgconfig
+     # pypi2nix # to convert
 	 python3
 	 pythonPackages.neovim
 	 pythonPackages.pandas
 	 pythonPackages.keyring
 	 # pythonPackages.matplotlib
+     # qutebrowser
 	 neovim-remote
 	 qtpass
      ranger
@@ -132,10 +136,8 @@
   # services.xserver.displayManager.kdm.enable = true;
   # services.xserver.desktopManager.xterm.enable = false;
   # extraSessionCommands / configFile
-  # this option has no effect => remove it
-  services.xserver.windowManager.i3-gaps.enable = true;
-  # services.xserver.windowManager.i3.enable = true;
-  services.xserver.windowManager.i3.package = pkgs.i3;
+  services.xserver.windowManager.i3.enable = true;
+  services.xserver.windowManager.i3.package = pkgs.i3-gaps;
 
   programs.zsh.enable = true;
   programs.zsh.enableCompletion = true;
@@ -153,6 +155,9 @@
   };
   nixpkgs.config = {
 	allowUnfree = true;
+    permittedInsecurePackages = [
+          "webkitgtk-2.4.11"
+            ];
   };
 
   # pkgs.lib.mkBefore
