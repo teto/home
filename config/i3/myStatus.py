@@ -9,6 +9,7 @@ import logging
 #import keyring.backends.netrc as backend
 from i3pystatus import Status
 from i3pystatus.updates import aptget
+from i3pystatus.calendar.khal_calendar import Khal
 # from i3pystatus.updates import aptget
 
 # from i3pystatus.core.netrc_backend import NetrcBackend
@@ -28,8 +29,9 @@ clock = status.register(
     format=[
         # ("%a %-d Format 1",'Europe/Dublin'),
         # "%a %-d %b %X ",
-        (" %a %-d %b %X", 'Europe/Paris'),
-        (" Format 0", 'Europe/London'),
+        # 
+        (" %a %-d %X", 'Asia/Tokyo'),
+        (" %a %-d %X", 'Europe/Paris'),
     ],
     on_leftclick="termite -e ikhal",
     # on_leftclick="xmessage toto",
@@ -144,15 +146,15 @@ dpms = status.register("dpms", format="")
 #         on_leftclick=[my_term, '-e', 'alsamixer']
 #         )
 
-status.register("updates",
-                format = "Updates: {count}",
-                format_working = "In progress",
-                format_no_updates = "No updates",
-                # on_leftclick=["urxvtc", '-e', 'zsh' , '-c' , 'sudo apt upgrade; zsh'],
-                on_rightclick="run",
-                backends = [aptget.AptGet()],
-                # log_level=logging.DEBUG
-                )
+# status.register("updates",
+#                 format = "Updates: {count}",
+#                 format_working = "In progress",
+#                 format_no_updates = "No updates",
+#                 # on_leftclick=["urxvtc", '-e', 'zsh' , '-c' , 'sudo apt upgrade; zsh'],
+#                 on_rightclick="run",
+#                 backends = [aptget.AptGet()],
+#                 # log_level=logging.DEBUG
+#                 )
 
 
 
@@ -160,7 +162,10 @@ status.register("updates",
 #          log_level=logging.DEBUG,
 #         )
 
-status.register("khal_calendar", 
+# '~/.config/khal/config'
+status.register("calendar",  backend=Khal(config_path=None,
+   calendars=['lip6']
+   )
 # # format = '{calendar} / {nb_events}'
 # # days=2,
         # calendars=[],

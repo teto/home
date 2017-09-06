@@ -69,6 +69,7 @@
 	 gawk
      git
 	 # git-extras # does not find it (yet)
+     gnome3.gnome_keyring
      gnum4
 	 mpv
 	 ncmpcpp
@@ -81,10 +82,10 @@
 	 python3
 	 pythonPackages.neovim
 	 pythonPackages.pandas
-	 pythonPackages.keyring
+	 # python36Packages.keyring
 	 # pythonPackages.matplotlib
-     # qutebrowser
 	 neovim-remote
+     # qutebrowser
 	 qtpass
      ranger
      rofi
@@ -97,6 +98,7 @@
      vifm
 	 # vlc
      xorg.xmodmap
+     # xauth # for 'startx'
      wget
      weechat
 	 xclip
@@ -109,15 +111,22 @@
 
 
   # List services that you want to enable:
+  services = {
+    gnome3 = {
+      gnome-keyring.enable = true;
+      seahorse.enable = false;
+      # at-spi2-core.enable = true;
+    };
 
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
+    # Enable CUPS to print documents.
+    printing = {
+      enable = true;
+      drivers = [ pkgs.gutenprint ];
+    };
 
-  # Enable CUPS to print documents.
-  services.printing = {
-	enable = true;
-	drivers = [ pkgs.gutenprint ];
+    openssh.enable = false;
   };
+
   # Enable the X11 windowing system.
   services.xserver.enable = true;
   services.xserver.autorun = true;

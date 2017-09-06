@@ -18,6 +18,7 @@ font pango:FontAwesome 12
 set $launcher "rofi -modi 'run,drun,window,ssh' -show run"
 # Randr:rofi-randr,Monitor:monitor_layout.sh' 
 set $greenclip "rofi -modi 'clipboard:greenclip print' -show clipboard"
+
 bindsym $mod+ctrl+h exec $greenclip
 bindsym $mod+ctrl+b exec buku_run
 
@@ -27,6 +28,7 @@ set $rmod Mod1
 set $BROWSER qutebrowser --backend webengine
 #set $term rxvt-unicode
 set $term termite
+set $status_command nix-shell -p i3pystatus-dev -p python36Packages.pytz -p khal -p python36Packages.keyring --run "python3 $XDG_CONFIG_HOME/i3/myStatus.py"
 
 # 
 # 
@@ -432,7 +434,7 @@ bar {
 	# -t => transparent, available only in i3gaps
 	# i3bar_command i3bar -t
 	i3bar_command i3bar
-	status_command nix-shell -p i3pystatus python35Packages.pytz python35Packages.keyring --run "python3 $XDG_CONFIG_HOME/i3/myStatus.py"
+	status_command $status_command
 	# separator_symbol "|"
 	# font pango: Liberation Sans Mono 9,  FontAwesome 12
 

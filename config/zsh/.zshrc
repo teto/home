@@ -6,11 +6,6 @@
 # for VTE-based terminals. In termite Ctrl + Shift + t opens terminal in cwd
 # source /etc/profile.d/vte.sh
 
-# check we are on nixos
-#########################################
-# true if file exists, aka if we are on nixos
-test ! -f /etc/NIXOS
-ON_NIXOS=$?
 
 # Per folder history {{{
 # https://github.com/jimhester/per-directory-history
@@ -126,7 +121,7 @@ bindkey '^R' history-incremental-search-backward
 
 #bindkey "q" push-line
 #bindkey 'q' push-line-or-edit
-bindkey '^A' push-line-or-edit
+bindkey '^q' push-line-or-edit
 bindkey '^V' edit-command-line
 
 bindkey '^P' up-history
@@ -161,8 +156,6 @@ export SYSCONFDIR="$XDG_CONFIG_HOME"
 
 #zle -N zle-line-init
 
-# eval "`dircolors -b "$XDG_CONFIG_HOME/dircolors/solarized.ansi-dark"`"
-# TODO use the universal 
 eval $(dircolors -b "$XDG_CONFIG_HOME/dircolors/dircolors.ansi-universal")
 
 

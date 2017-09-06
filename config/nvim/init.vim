@@ -161,7 +161,7 @@ Plug 'tpope/vim-scriptease' " Adds command such as :Messages
 " REPL (Read Execute Present Loop) {{{
 Plug 'metakirby5/codi.vim', {'on': 'Codi'} " repl
 " Plug 'hkupty/iron.nvim'
-Plug 'jalvesaq/vimcmdline'
+" Plug 'jalvesaq/vimcmdline'
 " vimcmdline mappings{{{
 let cmdline_map_start          = "<LocalLeader>s"
 let cmdline_map_send           = "<Space>"
