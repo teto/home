@@ -49,7 +49,8 @@
 
 
   # Set your time zone.
-  time.timeZone = "Europe/Amsterdam";
+  # time.timeZone = "Europe/Amsterdam";
+  time.timeZone = "Asia/Tokyo";
 
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
@@ -64,13 +65,15 @@
 	 fzf
      # lgogdownloader
      libtool
-     libreoffice
+     # libreoffice # too long to compile
      libnotify # use via {pkgs.libnotify}/bin/notify-send
 	 gawk
      git
 	 # git-extras # does not find it (yet)
      gnome3.gnome_keyring
-     gnum4
+     gnome3.dconf # seems super important for dbus (https://github.com/NixOS/nixpkgs/issues/2448)
+     gnum4 # hum
+     gpg
 	 mpv
 	 ncmpcpp
      networkmanager
@@ -86,6 +89,7 @@
 	 # pythonPackages.matplotlib
 	 neovim-remote
      # qutebrowser
+     pass
 	 qtpass
      ranger
      rofi
@@ -114,8 +118,8 @@
   services = {
     gnome3 = {
       gnome-keyring.enable = true;
-      seahorse.enable = false;
-      # at-spi2-core.enable = true;
+      seahorse.enable = true;
+      at-spi2-core.enable = true; # for keyring it seems
     };
 
     # Enable CUPS to print documents.

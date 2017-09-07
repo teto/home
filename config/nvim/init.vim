@@ -65,12 +65,6 @@ let s:gutter_error_sign = "✘'"
 let s:gutter_warn_sign = '！'
 " }}}
 
-function! DoRemote(arg)
-  UpdateRemotePlugins
-endfunction
-
-
-
 " GIT DIFF http://vimcasts.org/episodes/fugitive-vim-resolving-merge-conflicts-with-vimdiff/ {{{
 " the left window contains the version from the target branch
 " the middle window contains the working copy of the file, complete with conflict markers

@@ -12,7 +12,7 @@
 #
 
 [database]
-path=/home/teto/Maildir/lip6
+path=/home/teto/Maildir/iij
 
 # User configuration
 #
@@ -32,7 +32,7 @@ path=/home/teto/Maildir/lip6
 
 [user]
 name=Matthieu Coudron
-primary_email=matthieu.coudron@lip6.fr;
+primary_email=matthieu.coudron@iij.ad.jp;
 other_email=mattator@gmail.com;
 
 # Configuration for "notmuch new"

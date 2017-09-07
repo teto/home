@@ -18,4 +18,8 @@ self: super:
 	  name = "khal-dev";
 	  src = ~/khal;
 	});
+
+  offlineimap = super.offlineimap.overrideAttrs (oldAttrs: {
+    propagatedBuildInputs = with super.pythonPackages; oldAttrs.propagatedBuildInputs ++ [ keyring secretstorage pygobject3 pygobject2 ];
+  });
 }
