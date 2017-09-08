@@ -10,9 +10,23 @@ self: super:
       propagatedBuildInputs = with self.python3Packages; oldAttrs.propagatedBuildInputs ++ [ pytz ];
 	});
     #
-  neovim-dev = super.neovim.overrideAttrs (oldAttrs: {
-	  name = "neovim-dev";
+  neovim-local = super.neovim.overrideAttrs (oldAttrs: {
+	  name = "neovim-local";
 	  src = ~/neovim;
+	});
+
+  neovim-master = super.neovim.overrideAttrs (oldAttrs: {
+	  name = "neovim-master";
+	  version = "nightly";
+
+      src = super.fetchFromGitHub {
+        owner = "neovim";
+        repo = "neovim";
+        rev = "nightly";
+        sha256 = "1kr80q7fgndy36j7gxb9hkypjvss3l4zkakl86p5b6si9hazdjrv";
+      };
+
+      meta.priority=0;
 	});
   khal-dev = super.khal.overrideAttrs (oldAttrs: {
 	  name = "khal-dev";
@@ -20,6 +34,6 @@ self: super:
 	});
 
   offlineimap = super.offlineimap.overrideAttrs (oldAttrs: {
-    propagatedBuildInputs = with super.pythonPackages; oldAttrs.propagatedBuildInputs ++ [ keyring secretstorage pygobject3 pygobject2 ];
+    propagatedBuildInputs = with super.pythonPackages; oldAttrs.propagatedBuildInputs ++ [ keyring pygobject2 ];
   });
 }

@@ -83,7 +83,7 @@ unsetopt menu_complete # do not autoselect the first completion entry
 #setopt correctall # spelling correction for arguments
 
 # Prompt {{{2
-setopt prompt_subst # Enable parameter expansion, command substitution, and arithmetic expansion in the prompt
+# setopt prompt_subst # Enable parameter expansion, command substitution, and arithmetic expansion in the prompt
 #setopt checkwinsize # redraw window if changes size
 # setopt transient_rprompt # only show the rprompt on the current prompt
 # }}}
@@ -283,11 +283,11 @@ KEYTIMEOUT=1
 
 
 if [ $ON_NIXOS ]; then
-    source "$HOME/.nix-profile/share/zsh/site-contrib/powerline.zsh"
+#     source "$HOME/.nix-profile/share/zsh/site-contrib/powerline.zsh"
     source "$(autojump-share)/autojump.zsh"
 else
-    # todo find a better way
-    source "$ZDOTDIR/powerline.zsh"
+#     # todo find a better way
+#     source "$ZDOTDIR/powerline.zsh"
 fi
 
 

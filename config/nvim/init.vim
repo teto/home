@@ -89,7 +89,7 @@ call plug#begin(s:plugdir)
 Plug 'mhinz/vim-signify' " Indicate changed lines within a file using a VCS.
 " Plug 'moznion/github-commit-comment.vim' " last update from 2014
 Plug 'dhruvasagar/vim-open-url' " gB/gW to open browser
-
+Plug 'mattn/gist-vim' " to gist 
 " provider dependant {{{
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 " Plug '~/vim-config'
@@ -111,7 +111,7 @@ Plug 'tjdevries/descriptive_maps.vim', {'do': ':UpdateRemotePlugins' } " :call D
 Plug 'gianarb/notify.vim' " call notify#emitNotification('Title', 'Body')
 " Plug 'vim-scripts/coq-syntax', {'for': 'coq'}
 " Plug 'the-lambda-church/coquille', {'branch': 'matt', 'for': 'coq'}
-Plug 'teto/coquille', {'branch': 'matt', 'for': 'coq'}
+" Plug 'teto/coquille', {'branch': 'matt', 'for': 'coq'}
 Plug 'let-def/vimbufsync', {'for': 'coq'} " for coq
 " Plug 'vim-scripts/ProportionalResize'
 " Plug 'inside/vim-search-pulse' " Search related
@@ -154,8 +154,9 @@ Plug 'tpope/vim-scriptease' " Adds command such as :Messages
 
 " REPL (Read Execute Present Loop) {{{
 Plug 'metakirby5/codi.vim', {'on': 'Codi'} " repl
-" Plug 'hkupty/iron.nvim'
-" Plug 'jalvesaq/vimcmdline'
+Plug 'hkupty/iron.nvim', {'do': ':UpdateRemotePlugins'}
+" Plug 'jalvesaq/vimcmdline' " no help files, mappings clunky 
+Plug 'https://gitlab.com/HiPhish/repl.nvim' 
 " vimcmdline mappings{{{
 let cmdline_map_start          = "<LocalLeader>s"
 let cmdline_map_send           = "<Space>"
@@ -238,7 +239,6 @@ Plug 'cespare/vim-toml', { 'for': 'toml'}
 Plug 'PotatoesMaster/i3-vim-syntax'
 Plug 'dzeban/vim-log-syntax' " hl some keywords like ERROR/DEBUG/WARNING
 " }}}
-
 " Python {{{2
 " Plug 'klen/python-mode', { 'for': 'python'} " 
 " Plug 'hynek/vim-python-pep8-indent', {'for': 'python'} " does not work
@@ -255,7 +255,8 @@ Plug 'Valloric/ListToggle' " toggle location/quickfix list toggling seems to fai
 Plug 'tpope/vim-obsession' ", {'on': 'Obsession', 'ObsessionStatus'}  very cool, register edited files in a Session.vim, call with :Obsession
 Plug 'mbbill/undotree' " replaces gundo
 " Plug '907th/vim-auto-save' " :h auto-save
-Plug '~/vim-auto-save' " autosave :h auto-save
+Plug '907th/vim-auto-save' " autosave :h auto-save
+" Plug 'teto/vim-auto-save' " autosave :h auto-save
 " Plug '~/neovim-auto-autoread' " to check for filechanges
 ", { 'for': 'python' } "
 " Plug 'bfredl/nvim-miniyank' " killring alike plugin, cycling paste careful
@@ -268,7 +269,6 @@ Plug 'tommcdo/vim-exchange' " Use with cx<text object> to cut, cxx to exchange
 Plug 'tommcdo/vim-kangaroo' "  zp to push/zP to pop the position
 " Plug 'tommcdo/vim-ninja-feet' " care overwrites z]
 " }}}
-"
 " {{{ To ease movements
 Plug 'rhysd/clever-f.vim'
 "Plug 'unblevable/quick-scope'  " highlight characeters to help in f/F moves
@@ -1958,6 +1958,15 @@ nmap <leader>l  <Plug>(ListToggleLToggle)
 nmap <F1>  <Plug>(ListToggleQToggle)
 
 " }}}
+" iron.nvim {{{
+" cp = repeat the previous command
+" ctr send a chunk of text with motion
+" nmap <localleader>t <Plug>(iron-send-motion)
+let g:iron_repl_open_cmd="vsplit"
+" let g:iron_new_repl_hooks
+" let g:iron_new_lua_repl_hooks
+"let g:iron_map_defaults
+"}}}
 
 " buffers
 map <Leader>n :bnext<CR>
@@ -2019,6 +2028,14 @@ set matchpairs+=<:>  " Characters for which % should work
 " TODO to use j/k over 
 " set whichwrap+=<,>,h,l
 
+" repl.nvim (from hiphish) {{{
+" let g:repl['lua'] = {
+"     \ 'bin': 'lua',
+"     \ 'args': [],
+"     \ 'syntax': '',
+"     \ 'title': 'Lua REPL'
+" \ }
+" }}}
 " nvim-palette{{{
 let g:palette_debug=1
 let g:palette_histadd=1
