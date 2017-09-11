@@ -5,12 +5,17 @@ highlight_event_days = True
 show_all_days = False
 # timedelta = "2d"
 
+[locale]
+# default_timezone = Asia/Tokyo
+# local_timezone= Asia/Tokyo
+unicode_symbols=True
+
 [highlight_days]
 
 
 [keybindings]
 
-	
+
 [calendars]
 
 
@@ -24,7 +29,7 @@ color= dark green
 readonly=False
 path= "$XDG_DATA_HOME/calendars/perso"
 color= #D75C20
-# #C043C6 
+# #C043C6
 
 [view]
 

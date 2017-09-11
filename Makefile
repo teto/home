@@ -33,7 +33,8 @@ home:
 keyring:
 	echo "Setup keyrings"
 	#keyring set
-	keyring set gmail mattator
+	keyring set gmail login
+	keyring set gmail password
 	keyring set gmail client_secret
 	keyring set zaclys login
 	keyring set zaclys password

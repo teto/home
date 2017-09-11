@@ -1,13 +1,13 @@
+# vim: set noet fdm=marker fenc=utf-8 ff=unix sts=0 sw=4 ts=4 :
 [general]
 accounts = gmail
 maxsyncaccounts= 4
-socktimeout = 60
-python_file = get_settings.py
+socktimeout = 10
+pythonfile = $XDG_CONFIG_HOME/offlineimap/get_settings.py
 
 metadata = $XDG_DATA_HOME/offlineimap
 # choose one from machineui, blinkenlights, quiet, ttyui, basic
 ui = ttyui
-#lip6
 
 [mbnames]
 #generate mailboxes file for mutt
@@ -19,46 +19,45 @@ sep = "\n"
 footer = "\n"
 
 
-[Account lip6]
-localrepository = lip6-local
-remoterepository = lip6-remote
+[Account iij] # {{{
+localrepository = iij-local
+remoterepository = iij-remote
 maxage=10
 # presynchook=imapfilter
 # TODO notify user run a script that will launch tag
-postsynchook= notmuch --config=$XDG_CONFIG_HOME/notmuch/notmuchrc_pro new
+postsynchook=notmuch --config=$XDG_CONFIG_HOME/notmuch/notmuchrc_pro new
 
-[Repository lip6-local]
+[Repository iij-local]
 type = Maildir
-localfolders = ~/Maildir/lip6
+localfolders = ~/Maildir/iij
 
-[Repository lip6-remote]
+[Repository iij-remote]
 type = IMAP
-remotehost = tibre.lip6.fr
-ssl=yes
-remoteuser = coudron
+# imap-tyo.iiji.jp
+# imap911.iiji.jp
+remotehost = imap-tyo.iiji.jp
+# ssl=yes
+remoteuser = coudron@iij.ad.jp
 realdelete = no
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
 # on gmail just remove tags, you really need to move files to trash folder
 maxconnections = 3
-cert_fingerprint = 2e8c0587d5d7416f69da73eaae7dc208e2a7dfb5 
+# }}}
 
-
-
-
-
-[Account gmail]
+[Account gmail]# {{{
 localrepository = gmail-local
 remoterepository = gmail-remote
 # interval between updates (in minutes)
 autorefresh=0
 # in bytes
-maxsize=2000000 
+maxsize=2000000
 # in daysA
 maxage=10
 synclabels= yes
 # presynchook=imapfilter
 # TODO notify user
 postsynchook= notmuch --config=$XDG_CONFIG_HOME/notmuch/notmuchrc new
-
+# labelsheader = X-Keywords
 
 [Repository gmail-local]
 type = GmailMaildir
@@ -66,11 +65,8 @@ localfolders = ~/Maildir/gmail
 
 [Repository gmail-remote]
 type = Gmail
-# remoteusereval = get_user ("gmail")
-# remotepasseval = get_pwd ("gmail")
-# for now rely on .netrc
-user = mattator
-remotepasseval = keyring.get_password("gmail", "password")
+remoteusereval = get_pass("gmail", "login")
+remotepasseval = get_pass("gmail", "password")
 realdelete = yes
 maxconnections = 3
 ssl= yes
@@ -82,3 +78,5 @@ sslcacertfile= /etc/ssl/certs/ca-certificates.crt
 # prevent sync with All mail folder since it duplicates mail
 folderfilter = lambda foldername: foldername not in ['[Gmail]/All Mail','[Gmail]/Spam','[Gmail]/Important']
 
+
+# }}}

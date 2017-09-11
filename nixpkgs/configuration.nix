@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, options, ... }:
 
 {
   imports =
@@ -55,7 +55,6 @@
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
-    astroid
      automake
      autoconf
      autojump
@@ -73,7 +72,9 @@
      gnome3.gnome_keyring
      gnome3.dconf # seems super important for dbus (https://github.com/NixOS/nixpkgs/issues/2448)
      gnum4 # hum
-     gpg
+     gnupg
+     libertine # font
+     google-fonts
 	 mpv
 	 ncmpcpp
      networkmanager
@@ -109,7 +110,15 @@
      xdg-user-dirs
      # xdg-utils
      zsh
-  ];
+   ];
+   # ++ [
+  # # TODO put some of the packages into an "extraPackages" set
+  # # or pin it to a binary version
+   #  # astroid # might require a rebuild of webkit => too big
+   #  # gnomecontrolcenter
+   #  # cups-pk-helper # to add printer through gnome control center
+   # ];
+
 
   environment.variables.EDITOR="nvim";
 
@@ -132,18 +141,33 @@
   };
 
   # Enable the X11 windowing system.
-  services.xserver.enable = true;
-  services.xserver.autorun = true;
-  services.xserver.synaptics.enable = true;
-  services.xserver.synaptics.twoFingerScroll = true;
-  services.xserver.displayManager = {
-	auto = {
-		enable = false;
-		user = "teto";
-	};
+  services.xserver = {
+    enable = true;
+    autorun = true;
+    displayManager = {
+      auto = {
+        enable = false;
+        user = "teto";
+      };
+    };
+    layout = "fr";
+    # TODO swap esc/shift
+    xkbOptions = "eurosign:e";
+
+    synaptics = {
+      enable = true;
+      twoFingerScroll = true;
+      buttonsMap = [ 1 3 2 ];
+      accelFactor = "0.0055";
+      minSpeed = "0.95";
+      maxSpeed = "1.55";
+      palmDetect = true;
+    };
+    # ${pkgs.xorg.xset}/bin/xset r rate 200 50
+    displayManager.sessionCommands = ''
+    ${pkgs.networkmanagerapplet}/bin/nm-applet &
+    '';
   };
-  services.xserver.layout = "fr";
-  services.xserver.xkbOptions = "eurosign:e";
 
   # Enable the KDE Desktop Environment.
   # services.xserver.displayManager.kdm.enable = true;
@@ -174,7 +198,9 @@
   };
 
   # pkgs.lib.mkBefore
-  nix.nixPath =  [
+  # options.nix.nixPath.default
+  # options.nix.nixPath.default ++
+  nix.nixPath =   [
     "nixpkgs=/home/teto/nixpkgs"
     "nixos-config=/home/teto/dotfiles/nixpkgs/configuration.nix:/nix/var/nix/profiles/per-user/root/channels"
   ] ;

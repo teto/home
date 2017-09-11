@@ -34,6 +34,7 @@ self: super:
 	});
 
   offlineimap = super.offlineimap.overrideAttrs (oldAttrs: {
-    propagatedBuildInputs = with super.pythonPackages; oldAttrs.propagatedBuildInputs ++ [ keyring pygobject2 ];
+    # pygobject2
+    propagatedBuildInputs = with super.pythonPackages; oldAttrs.propagatedBuildInputs ++ [ keyring pygobject3  ];
   });
 }

@@ -68,8 +68,8 @@ setopt pushd_ignore_dups # don't push multiple copies of the same directory onto
 #setopt noextended_glob # treat #, ~, and ^ as part of patterns for filename generation
 
 
-# ===== Completion 
-setopt always_to_end # When completing from the middle of a word, move the cursor to the end of the word    
+# ===== Completion
+setopt always_to_end # When completing from the middle of a word, move the cursor to the end of the word
 setopt auto_menu # show completion menu on successive tab press. needs unsetop menu_complete to work
 setopt auto_name_dirs # any parameter that is set to the absolute name of a directory immediately becomes a name for that directory
 setopt complete_in_word # Allow completion from within a word/phrase
@@ -98,12 +98,13 @@ zle -N self-insert url-quote-magic
 
 # Bindings ZLE commands {{{1
 # To see the key combo you want to use just do:
+# Don't try to bind CTRL Q / CTRL S !!
 # cat > /dev/null
 # And press it
 
 bindkey "^K"      kill-whole-line                      # ctrl-k
 bindkey "^R"      history-incremental-search-backward  # ctrl-r
-bindkey "^A"      beginning-of-line                    # ctrl-a  
+bindkey "^A"      beginning-of-line                    # ctrl-a
 bindkey "^E"      end-of-line                          # ctrl-e
 bindkey "[B"      history-search-forward               # down arrow
 bindkey "[A"      history-search-backward              # up arrow
@@ -117,12 +118,12 @@ zle -N edit-command-line
 
 # Press ESC-v to edit current line in your favorite $editor
 bindkey -M vicmd v edit-command-line
+# bindkey '^V' edit-command-line
 bindkey '^R' history-incremental-search-backward
 
 #bindkey "q" push-line
 #bindkey 'q' push-line-or-edit
-bindkey '^q' push-line-or-edit
-bindkey '^V' edit-command-line
+bindkey '^G' push-line-or-edit
 
 bindkey '^P' up-history
 bindkey '^N' down-history
@@ -215,10 +216,10 @@ zstyle ':completion:*' menu select=1 _complete _ignored _approximate
 
 # insert all expansions for expand completer
 # zstyle ':completion:*:expand:*' tag-order all-expansions
- 
+
 # match uppercase from lowercase
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
- 
+
 # offer indexes before parameters in subscripts
 zstyle ':completion:*:*:-subscript-:*' tag-order indexes parameters
 
@@ -229,7 +230,7 @@ zstyle ':completion:*:messages' format '%d'
 zstyle ':completion:*:warnings' format 'No matches for: %d'
 zstyle ':completion:*:corrections' format '%B%d (errors: %e)%b'
 zstyle ':completion:*' group-name ''
- 
+
 # ignore completion functions (until the _ignored completer)
 zstyle ':completion:*:functions' ignored-patterns '_*'
 zstyle ':completion:*:scp:*' tag-order files users 'hosts:-host hosts:-domain:domain hosts:-ipaddr"IP\ Address *'
@@ -312,7 +313,7 @@ SPROMPT="Correct $fg[red]%R$reset_color to $fg[green]%r$reset_color [(y)es (n)o 
 #}}}
 # prompt config {{{1
 #PROMPT='$(prompt_cmd)' # single quotes to prevent immediate execution
-# 
+#
 #PROMPT="%{$fg[red]%}%n%{$reset_color%}@%{$fg[blue]%}%m %{$fg_no_bold[yellow]%}%1~ %{$reset_color%}%#"
 #RPROMPT='' # no initial prompt, set dynamically
 
