@@ -121,9 +121,7 @@ bindkey -M vicmd v edit-command-line
 # bindkey '^V' edit-command-line
 bindkey '^R' history-incremental-search-backward
 
-#bindkey "q" push-line
-#bindkey 'q' push-line-or-edit
-bindkey '^G' push-line-or-edit
+# bindkey '^G' push-line-or-edit
 
 bindkey '^P' up-history
 bindkey '^N' down-history
@@ -370,7 +368,8 @@ if [ $ON_NIXOS ]; then
 fi
 . "$FZF_PATH"/completion.zsh
 . "$FZF_PATH"/key-bindings.zsh
-# . "$ZDOTDIR"/fzf.zsh
+. "$ZDOTDIR"/fzf_git.zsh
+. "$ZDOTDIR/fzf_git_keybindings.zsh"
 # }}}
 
 # _gnu_generic should work if program accepts --help
@@ -385,6 +384,20 @@ if [ -e /home/teto/.nix-profile/etc/profile.d/nix.sh ]; then
 # . $which/usr/share/autojump/autojump.sh
 
 fi
+
+# todo only when on $NIXOS
+nix-env() {
+    local hasF=""
+    for arg in "$@"
+    do
+        [[ arg = "-f" ]] && hasF=1
+    done
+    if [[ -n "$hasF" ]]
+    then command nix-env "$@"
+    else command nix-env -f '<nixpkgs>' "$@"
+    fi
+}
+
 
 # for android/lineage os developement
 # if [ -d "$HOME/adb-fastboot" ] ; then

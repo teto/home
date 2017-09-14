@@ -1,7 +1,7 @@
-#  vim: set noet fdm=manual fenc=utf-8 ff=unix sts=0 sw=4 ts=4 fdm=marker: 
+#  vim: set noet fdm=manual fenc=utf-8 ff=unix sts=0 sw=4 ts=4 fdm=marker:
 # vim:filetype=i3
 # ##########################################
-### MAIN 
+### MAIN
 ##########################################
 #
 #” “
@@ -16,7 +16,7 @@ font pango:FontAwesome 12
 # Combi mode, allow several modes to be merged into one list.
 # ,Layouts:i3-list-layouts,file:/home/teto/rofi/Examples/rofi-file-browser.sh'
 set $launcher "rofi -modi 'run,drun,window,ssh' -show run"
-# Randr:rofi-randr,Monitor:monitor_layout.sh' 
+# Randr:rofi-randr,Monitor:monitor_layout.sh'
 set $greenclip "rofi -modi 'clipboard:greenclip print' -show clipboard"
 
 bindsym $mod+ctrl+h exec $greenclip
@@ -78,12 +78,13 @@ bindsym $mod+Shift+V exec "manage_monitors.sh"
 # TODO should detect the number of monitors !
 bindsym $mod+m  mode "monitors"
 mode "monitors" {
-	
+
+	# todo should work with hjkl too
 	bindsym $mod+Left move workspace to output left
 	bindsym $mod+Right move workspace to output right
 	bindsym $mod+Up move workspace to output top
 	bindsym $mod+Down move workspace to output down
-                
+
 	bindsym $mod+Shift+Left workspace prev_on_output
 	bindsym $mod+Shift+Right workspace next_on_output
 
@@ -151,7 +152,7 @@ workspace_auto_back_and_forth yes
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec --no-startup-id $term 
+bindsym $mod+Return exec --no-startup-id $term
 # -d "$(
 # bindsym $mod+Shift+Return exec --no-startup-id ~/.i3/fork_term.sh
 bindsym $mod+Shift+Return exec --no-startup-id $term -d "$(xcwd)"
@@ -235,7 +236,7 @@ bindsym $mod+b split h
 
 # split in vertical orientation
 # needs i3next
-bindsym $mod+v split toggle 
+bindsym $mod+v split toggle
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen
@@ -273,7 +274,7 @@ mode "programs" {
     bindsym Escape mode "default"
 }
 
-            
+
 
 # focus the parent container
 bindsym $mod+p focus parent
@@ -317,7 +318,7 @@ bindsym $mod+Shift+F4 move container to workspace "$w4"
 
 # move focused container to workspace {{{
 bindsym $mod+Shift+1 move container to workspace "$w1"
-bindsym $mod+Shift+2 move container to workspace "$w2" 
+bindsym $mod+Shift+2 move container to workspace "$w2"
 bindsym $mod+Shift+3 move container to workspace "$w3"
 bindsym $mod+Shift+4 move container to workspace "$w4"
 bindsym $mod+Shift+5 move container to workspace "$w5"
@@ -339,7 +340,7 @@ bindsym $mod+Shift+C  reload
 
 set $rofi_mode rofi <b>Q</b>qutebrowser <b>b</b>uku
 bindsym $mod+Shift+R mode "$rofi_mode"
-# 
+#
 mode --pango_markup "$rofi_mode" {
 	# rofi -modi 'run,DRun,window,ssh,Layouts:i3-list-layouts,file:/home/teto/rofi/Examples/rofi-file-browser.sh' -show run
 	bindsym w mode "default", exec rofi -modi 'window' -show
@@ -348,7 +349,7 @@ mode --pango_markup "$rofi_mode" {
 	bindsym b mode "default", exec buku_run
 	# TODO to use with Qtpass
 	bindsym r mode "default", exec rofi-pass
-	
+
 	bindsym Return mode "default"
 	bindsym Escape mode "default"
 }
@@ -367,7 +368,7 @@ mode "command" {
 # resize window (you can also use the mouse for that) {{{
 bindsym $mod+r mode "resize"
 mode "resize" {
-        
+
        # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
@@ -389,7 +390,7 @@ mode "resize" {
         #bindsym Down resize shrink height 10 px or 10 ppt
         #bindsym Left resize grow width 10 px or 10 ppt
         bindsym Left resize grow left 10 px or 10 ppt
-        bindsym Shift+Left resize shrink left 10 px or 10 ppt        
+        bindsym Shift+Left resize shrink left 10 px or 10 ppt
 
         bindsym Up resize shrink up  10 px or 10 ppt
         bindsym Shift+Up resize grow up 10 px or 10 ppt
@@ -420,7 +421,7 @@ bindsym $mod+ctrl+minus move scratchpad
 
 set_from_resource $foc_border i3bar.foc_border #d72f6b
 set_from_resource $foc_border_bg i3bar.foc_border_bg #d70a53
-set_from_resource $bar_bg i3bar.background #090e1400 
+set_from_resource $bar_bg i3bar.background #090e1400
 set_from_resource $bar_status i3bar.statusline #d70a53
 
 # Start i3bar to display a workspace bar (plus the system information i3status
@@ -488,17 +489,18 @@ floating_maximum_size -1 x -1
 ### display error in case it does not launch
 # Provide command to send to a specific scratchpad (rename title) or use mark ?
 #
-#exec_always urxvtc -name pad_audioplayer -e "mocp; $SHELL"; 
+#exec_always urxvtc -name pad_audioplayer -e "mocp; $SHELL";
 #exec_always urxvtc -name pad_flyingterminal
-#exec_always urxvtc -name pad_ncmpcpp -e sh ncmpcpp;$SHELL 
+#exec_always urxvtc -name pad_ncmpcpp -e sh ncmpcpp;$SHELL
 #exec_always urxvtc -name pad_term4
 #exec_always urxvtc -name pad_term5
 
 # DP3 & LVDS1
 # to move
-# TODO ca ca plante si j'en ai 
+# TODO ca ca plante si j'en ai
 bindsym XF86Display exec ~/.i3/monitors.sh
 
+# xrandr --output LVDS1 --primary --auto --output DP1 --auto --right-of LVDS1
 #exec_always xrandr --output $output1 --auto --output $output2 --right-of $output1
 
 #exec urxvtc -name irclient -e irssi

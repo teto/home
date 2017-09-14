@@ -88,12 +88,13 @@ set exrc
 call plug#begin(s:plugdir)
 Plug 'mhinz/vim-signify' " Indicate changed lines within a file using a VCS.
 " Plug 'moznion/github-commit-comment.vim' " last update from 2014
-Plug 'dhruvasagar/vim-open-url' " gB/gW to open browser
-Plug 'mattn/gist-vim' " to gist 
+" Plug 'dhruvasagar/vim-open-url' " gB/gW to open browser
+Plug 'Carpetsmoker/xdg_open.vim' " overrides gx
+" Plug 'mattn/gist-vim' " to gist
 " provider dependant {{{
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 " Plug '~/vim-config'
-Plug '~/nvim-palette', { 'do': ':UpdateRemotePlugins' } 
+Plug '~/nvim-palette', { 'do': ':UpdateRemotePlugins' }
 Plug 'LnL7/vim-nix', {'for': 'nix'}
 Plug 'romainl/vim-qf' " can create pb with neomake
 " Plug 'gelguy/Cmd2.vim' " test
@@ -101,7 +102,7 @@ Plug 'editorconfig/editorconfig-vim' " not remote but involves python
 " provider
 Plug 'brooth/far.vim' " search and replace across files
 " needs ruby support, works in recent neovim
-Plug 'junegunn/vim-github-dashboard', { 'do': ':UpdateRemotePlugins' } 
+Plug 'junegunn/vim-github-dashboard', { 'do': ':UpdateRemotePlugins' }
 " Plug 'fmoralesc/vim-pad'
 "}}}
 " to test https://github.com/neovim/neovim/issues/3688
@@ -130,24 +131,24 @@ Plug 'sk1418/QFGrep' " Filter quickfix
 " Plug 'git@github.com:pseewald/vim-anyfold.git' " speed up folds processing
 " (upstreamd already or ?)
 " Plug 'mtth/scratch.vim' " , {'on': 'Scratch'} mapped to ?
-" Plug 'tjdevries/vim-inyoface.git' "InYoFace_toggle to display only comments 
+" Plug 'tjdevries/vim-inyoface.git' "InYoFace_toggle to display only comments
 Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' } " :h LanguageClientUsage
 " Plug 'tjdevries/nvim-langserver-shim' " for LSP
 " Plug 'powerman/vim-plugin-AnsiEsc' " { to hl ESC codes
 " Plug 'git@github.com:junegunn/gv.vim.git' " git commit viewer :Gv
 " Plug 'git@github.com:rhysd/clever-f.vim.git' " use f to repeat search instead of ;
-" Plug 'git@github.com:xolox/vim-easytags.git' " 
+" Plug 'git@github.com:xolox/vim-easytags.git' "
 " Plug 'mhinz/vim-halo' " to hight cursor line
 Plug 'ludovicchabant/vim-gutentags' " automatic tag generation, very good
 Plug 'junegunn/goyo.vim', {'on': 'Goyo'} "distraction free writing
-Plug 'junegunn/limelight.vim' " highlights 
+Plug 'junegunn/limelight.vim' " highlights
 Plug 'calvinchengx/vim-aftercolors' " load after/colors
 "Plug 'junegunn/limelight.vim' " to highlight ucrrent paragraph only
 Plug 'ntpeters/vim-better-whitespace' " StripWhitespace
 " Plug 'bronson/vim-trailing-whitespace' " :FixTrailingWhitespace
 " Plug 'tkhoa2711/vim-togglenumber' " by default mapped to <leader>n
 " Plug 'blindFS/vim-translator' " fails during launch :/
-" Plug 'timeyyy/orchestra.nvim' " to play some music on 
+" Plug 'timeyyy/orchestra.nvim' " to play some music on
 " Plug 'timeyyy/clackclack.symphony' " data to play with orchestra.vim
 Plug 'tpope/vim-scriptease' " Adds command such as :Messages
 " Plug 'tpope/vim-eunuch' " {provides SudoEdit, SudoWrite , Unlink, Rename etc...
@@ -155,8 +156,8 @@ Plug 'tpope/vim-scriptease' " Adds command such as :Messages
 " REPL (Read Execute Present Loop) {{{
 Plug 'metakirby5/codi.vim', {'on': 'Codi'} " repl
 Plug 'hkupty/iron.nvim', {'do': ':UpdateRemotePlugins'}
-" Plug 'jalvesaq/vimcmdline' " no help files, mappings clunky 
-Plug 'https://gitlab.com/HiPhish/repl.nvim' 
+" Plug 'jalvesaq/vimcmdline' " no help files, mappings clunky
+Plug 'https://gitlab.com/HiPhish/repl.nvim'
 " vimcmdline mappings{{{
 let cmdline_map_start          = "<LocalLeader>s"
 let cmdline_map_send           = "<Space>"
@@ -194,10 +195,10 @@ Plug 'sjl/gundo.vim' " :GundoShow/Toggle to redo changes
 "'frozen': 1,
 " use deoplete for python ?
 " Plug 'Valloric/YouCompleteMe' , { 'do': ':new \| call termopen(''python3 ./install.py --system-libclang --clang-completer'')', 'frozen': 1}
-Plug 'lyuts/vim-rtags'  " a l'air d'etre le plus complet <leader>ri  
+Plug 'lyuts/vim-rtags'  " a l'air d'etre le plus complet <leader>ri
 " Plug 'zchee/deoplete-clang', { 'for': 'c' }
 " Plug 'tweekmonster/deoplete-clang2', { 'for': 'c' }
-" 
+"
 Plug 'zchee/deoplete-jedi', { 'for': 'python'}
 " }}}
 " Plug 'beloglazov/vim-online-thesaurus' " thesaurus => dico dde synonymes
@@ -211,7 +212,7 @@ Plug 'zchee/deoplete-jedi', { 'for': 'python'}
 "{{{
 Plug 'neovimhaskell/haskell-vim', {'for':'haskell'} " haskell install
 " Plug 'enomsg/vim-haskellConcealPlus', {'for':'haskell'}     " unicode for haskell operators
-Plug 'eagletmt/ghcmod-vim', {'do': 'cabal install ghc-mod', 'for': 'haskell'} " requires 
+Plug 'eagletmt/ghcmod-vim', {'do': 'cabal install ghc-mod', 'for': 'haskell'} " requires
 " Plug 'bitc/vim-hdevtools'
 Plug 'eagletmt/neco-ghc', {'for': 'haskell'} " completion plugin for haskell + deoplete ?
 Plug 'Shougo/vimproc.vim', {'do' : 'make'} " needed by neco-ghc
@@ -240,7 +241,7 @@ Plug 'PotatoesMaster/i3-vim-syntax'
 Plug 'dzeban/vim-log-syntax' " hl some keywords like ERROR/DEBUG/WARNING
 " }}}
 " Python {{{2
-" Plug 'klen/python-mode', { 'for': 'python'} " 
+" Plug 'klen/python-mode', { 'for': 'python'} "
 " Plug 'hynek/vim-python-pep8-indent', {'for': 'python'} " does not work
 " Plug 'mjbrownie/GetFilePlus', {'for': 'python'} " improves gf on imports
 " fails on relad
@@ -323,7 +324,7 @@ Plug 'git@github.com:machakann/vim-highlightedyank.git' " highlit
 "  fuzzers {{{2
 " Plug 'junegunn/fzf', { 'dir': $XDG_DATA_HOME . '/fzf', 'do': './install --completion --key-bindings --64' }
 " let distribution (like nixos install fzf
-" this package only ocntains fzf#run, 
+" this package only ocntains fzf#run,
 Plug 'junegunn/fzf', " { 'dir': $XDG_DATA_HOME . '/fzf', 'do': ':term ./install --no-update-rc --bin --64'}
 
 " Many options available :
@@ -336,9 +337,9 @@ Plug 'junegunn/fzf.vim' " defines :Files / :Commits for FZF
 
 
 " , { 'for': 'markdown', 'do': function('BuildComposer') } " Needs rust, cargo, plenty of things :help markdown-composer
-Plug 'euclio/vim-markdown-composer' 
+Plug 'euclio/vim-markdown-composer'
 Plug 'Rykka/riv.vim', {'for': 'rst'}
-Plug 'Rykka/InstantRst', {'for': 'rst'} " rst live preview with :InstantRst, 
+Plug 'Rykka/InstantRst', {'for': 'rst'} " rst live preview with :InstantRst,
 "Plug 'junegunn/vim-easy-align'   " to align '=' on multiple lines for instance
 Plug 'dhruvasagar/vim-table-mode', {'for': 'txt'}
 
@@ -350,16 +351,16 @@ Plug 'kshenoy/vim-signature' " display marks in gutter, love it
 " =======
 " display signature in cmdline after v:completed_item, needs to customize
 " cmdheight
-Plug 'Shougo/echodoc.vim' 
+Plug 'Shougo/echodoc.vim'
 Plug 'teto/QuickFixCurrentNumber' " use :Cnr :Cgo instead of :cnext etc...
 Plug 'git@github.com:vim-scripts/ingo-library.git' " DEPENDANCY of QuickFixCurrentNumber
 "Plug 'tomtom/quickfixsigns_vim'
 Plug 'nacitar/a.vim' " :A
 Plug 'mhinz/vim-rfc', { 'on': 'RFC' }
-" can show a list of unicode characeters, with their name  :UnicodeTable etc... 
+" can show a list of unicode characeters, with their name  :UnicodeTable etc...
 " careful maps F4 by default
-Plug 'chrisbra/unicode.vim' " , { 'on': ['<plug>(UnicodeComplete)', '<plug>(UnicodeGA)', 'UnicodeTable'] } 
-"Plug 'vim-scripts/rfc-syntax', { 'for': 'rfc' } " optional syntax highlighting for 
+Plug 'chrisbra/unicode.vim' " , { 'on': ['<plug>(UnicodeComplete)', '<plug>(UnicodeGA)', 'UnicodeTable'] }
+"Plug 'vim-scripts/rfc-syntax', { 'for': 'rfc' } " optional syntax highlighting for
 Plug 'teto/Modeliner' " <leader>ml to setup buffer modeline
 " This one has bindings mapped to <leader>l
 "Plug 'vimwiki/vimwiki'   " to write notes
@@ -418,10 +419,10 @@ Plug 'lervag/vimtex', {'for': 'tex'} " so far the best one
 " }}}
 
 " Plug 'vim-scripts/YankRing.vim' " breaks in neovim, overrides yy as well
-" far config (Find And Replace) {{{ 
-" let g:far#source='agnvim' 
-let g:far#source='vimgrep' 
-" let g:far#source='ag' 
+" far config (Find And Replace) {{{
+" let g:far#source='agnvim'
+let g:far#source='vimgrep'
+" let g:far#source='ag'
 
 let g:far#collapse_result=1
 " }}}
@@ -431,7 +432,7 @@ call plug#end()
 " }}}
 
 " start scrolling before reaching end of screen in order to keep more context
-" set it to a big value 
+" set it to a big value
 " set scrolloff=3
 
 
@@ -472,8 +473,8 @@ set title " vim will change terminal title
 let &titlestring=" %t %{len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) } - NVIM"
 
 " conceal configuration {{{
-" transforms some characters into their digraphs equivalent 
-" if your font supports it 
+" transforms some characters into their digraphs equivalent
+" if your font supports it
 " concealcursor " show current line unconcealed
 "let g:tex_conceal="agdms"
 "set conceallevel=2
@@ -517,7 +518,7 @@ set noswapfile
 " }}}
 " Wildmenu completion {{{
 
-" display a menu when need to complete a command 
+" display a menu when need to complete a command
 set wildmenu
 set wildchar=<Tab>
 set wildmode=list:longest,full " zsh way ?!
@@ -555,8 +556,8 @@ let g:Modeliner_format = 'et ff= fenc= sts= sw= ts= fdm='
 " X clipboard gets aliased to +
 set clipboard=unnamedplus
 " copy to external clipboard
-noremap gp "+p 
-noremap gy "+y 
+noremap gp "+p
+noremap gy "+y
 "}}}
 " Easy window navigation
 " noremap <F3> :Tlist<Enter>
@@ -566,7 +567,7 @@ imap <silent> <C-j> <Down>
 
 " Window / splits {{{
 "cmap w!! w !sudo tee % >/dev/null
-" vim: set noet fenc=utf-8 ff=unix sts=0 sw=4 ts=4 : 
+" vim: set noet fenc=utf-8 ff=unix sts=0 sw=4 ts=4 :
 nmap <silent> <C-Up> :wincmd k<CR>
 nmap <silent> <C-Down> :wincmd j<CR>
 nmap <silent> <C-Left> :wincmd h<CR>
@@ -640,8 +641,8 @@ set wrap
 set linebreak " better display (makes sense only with wrap)
 set breakindent " preserve or add indentation on wrap
 let &showbreak = '↳ '  	" displayed in front of wrapped lines
-if has ("signcolumn") 
-  set signcolumn=auto " display signcolumn depending on 
+if has ("signcolumn")
+  set signcolumn=auto " display signcolumn depending on
 endif
 
 " @:NonText
@@ -663,6 +664,7 @@ let g:diminactive_debug = 0
 let g:diminactive_use_colorcolumn = 1
 let g:diminactive_use_syntax = 0
 let g:diminactive_enable_focus = 0
+
 "}}}
 " ultisnips {{{
 " g:UltiSnipsSnippetsDir
@@ -700,7 +702,7 @@ let g:UltiSnipsExpandTrigger = "<C-y>"
 " au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
 " let g:UltiSnipsJumpForwardTrigger="<tab>"
 " let g:UltiSnipsListSnippets="<c-e>"
-" " this mapping Enter key to <C-y> to chose the current highlight item 
+" " this mapping Enter key to <C-y> to chose the current highlight item
 " " and close the selection list, same as other IDEs.
 " " CONFLICT with some plugins like tpope/Endwise
 " inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
@@ -709,7 +711,7 @@ let g:UltiSnipsExpandTrigger = "<C-y>"
 " i3 autocommands {{{
 " todo when opening i3 files, set makeprg to build_config
 " augroup i3
-" autcmd! 
+" autcmd!
 
 "   autocmd BufWinEnter  call ResCur()
 " augroup END
@@ -754,18 +756,18 @@ augroup END
 " augroup END
 
 " open vimrc
-nnoremap <Leader>ev :e $MYVIMRC<CR> 
-"nnoremap <Leader>ep :vs ~/.vim/plug.vim<CR> 
+nnoremap <Leader>ev :e $MYVIMRC<CR>
+"nnoremap <Leader>ep :vs ~/.vim/plug.vim<CR>
 " reload vimrc
-nnoremap <Leader>sv :source $MYVIMRC<CR> 
+nnoremap <Leader>sv :source $MYVIMRC<CR>
 
 " open netrw/dirvish split
-" nnoremap <Leader>e :Vex<CR> 
+" nnoremap <Leader>e :Vex<CR>
 nnoremap <Leader>w :w<CR>
 
 
 " fails with neovim use :te instead ?
-"nnoremap <leader>r :<C-U>RangerChooser<CR> 
+"nnoremap <leader>r :<C-U>RangerChooser<CR>
 
 "nnoremap <F8> :vertical wincmd f<CR> " open file under cursor in a split
 nnoremap <leader>gfs :vertical wincmd f<CR> " open file under cursor in a split
@@ -786,7 +788,7 @@ if has('nvim')
   " call remote#host#Register('haskell', "*.l\?hs", function('s:RequireHaskellHost'))
   " let hc=remote#host#Require('haskell')
 " " echo rpcrequest(hc, "PingNvimhs") should print Pong
-  " call rpcrequest(hc, 'PingNvimhs') 
+  " call rpcrequest(hc, 'PingNvimhs')
 endif
 "}}}
 " hdevtools {{{
@@ -800,7 +802,7 @@ let g:chromatica#libclang_path="/usr/lib/llvm-3.8/lib/"
 let g:chromatica#enable_at_startup=0
 let g:chromatica#enable_debug=1
 let g:chromatica#global_args= [] " prepended for each file compile args
-let g:chromatica#responsive_mode = 0 
+let g:chromatica#responsive_mode = 0
 let g:chromatica#delay_ms = 80
 let g:chromatica#use_pch = 1
 let g:chromatica#highlight_feature_level=0
@@ -869,7 +871,7 @@ endfunction
 
 " function! GetQfHistory()
 
-"   " let s:res = 
+"   " let s:res =
 "   redir => cout
 "   silent chistory
 "   redir END
@@ -889,8 +891,8 @@ endfunction
 " endfunction
 
 function! UpdateQfList(res)
-  " TODO compute newer/older count for going to 
-  " TODO if 
+  " TODO compute newer/older count for going to
+  " TODO if
   echo a:res
 
   " get jump id
@@ -942,7 +944,7 @@ endfunction
 "   \ 'pointer': ['fg', 'Exception'],
 "   \ 'marker':  ['fg', 'Keyword'],
 "   \ 'spinner': ['fg', 'Label'],
-"   \ 'header':  ['fg', 'Comment'] 
+"   \ 'header':  ['fg', 'Comment']
 " }
 
 let g:fzf_history_dir = $XDG_CACHE_HOME.'/fzf-history'
@@ -998,14 +1000,14 @@ let g:ycm_key_list_previous_completion = ['<S-TAB>', '<Up>']
 let g:ycm_auto_trigger = 1
 let g:ycm_complete_in_comments = 1
 let g:ycm_error_symbol = s:gutter_error_sign " used to signal errors in gutter
-let g:ycm_warning_symbol = s:gutter_warn_sign " warn in gutter 
+let g:ycm_warning_symbol = s:gutter_warn_sign " warn in gutter
 let g:ycm_show_diagnostics_ui = 1 " show info in gutter
 "let g:ycm_server_use_vim_stdout = 1
 "let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_key_invoke_completion = '<C-Space>'
 let g:ycm_key_detailed_diagnostics = '<leader>d'
 " several solutions available: horizontal-split, new-tab, new-or-existing tab
-let g:ycm_goto_buffer_command = 'same-buffer' 
+let g:ycm_goto_buffer_command = 'same-buffer'
 let g:ycm_server_log_level = 'debug'
 let g:ycm_server_keep_logfiles = 1
 let g:ycm_python_binary_path = '/usr/bin/python3'
@@ -1089,7 +1091,7 @@ let g:neomake_verbose = 1
 
 " pyflakes can't be disabled on a per error basis
 " also it considers everything as error => disable
-" flake8  or pycodestyle when supported 
+" flake8  or pycodestyle when supported
 let g:neomake_list_height=5
 
 " how to let 'mypy' ignore warning/errors as pycodestyle does ?
@@ -1102,7 +1104,7 @@ let g:neomake_airline = 1
 let g:neomake_echo_current_error = 1
 let g:neomake_place_signs=1
 
-" filters out unrecognized 
+" filters out unrecognized
 
 
 " C and CPP are handled by YCM and java usually by elim
@@ -1113,7 +1115,7 @@ let s:neomake_exclude_ft = ['cpp', 'java' ]
 " let g:neomake_tex_enabled_makers = []
 let g:neomake_tex_enabled_makers = []
 
-" removed chktex because of silly errors 
+" removed chktex because of silly errors
 " let g:neomake_tex_enabled_makers = ['chktex']
 " let g:neomake_error_sign = {'text': '✖ ', 'texthl': 'NeomakeErrorSign'}
 let g:neomake_error_sign = {'text': 'X', 'texthl': 'NeomakeErrorSign'}
@@ -1140,7 +1142,7 @@ let g:neomake_c_enabled_makers = ['make']
     " let g:neomake_informational_highlight = 'Informational'
 " let g:neomake_error_sign = { 'text': s:gutter_error_sign, 'texthl': 'ErrorSign' }
 " let g:neomake_warning_sign = { 'text': s:gutter_warn_sign , 'texthl': 'WarningSign' }
-" 
+"
 " autocmd! VimLeave * let g:neomake_verbose = 0
 
 function! OnNeomakeFinished()
@@ -1170,16 +1172,16 @@ let g:airline#extensions#default#layout = [
       \ [ 'x', 'y', 'z', 'error', 'warning' ]
       \ ]
 " section y is fileencoding , useless in neovim
-let g:airline_section_y = ""  
+let g:airline_section_y = ""
  " airline#section#create(['windowswap', 'obsession', '%3p%%'.spc, 'linenr', 'maxlinenr', spc.':%3v'])
 " let g:airline_section_z = airline#section#create_right(['linenumber'])
 " airline extensions {{{
-let g:airline#extensions#tabline#enabled = 1 
+let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline#extensions#vimtex#enabled=1
 let g:airline#extensions#tabline#buffer_nr_show = 1
-let g:airline#extensions#tabline#show_buffers = 1  
+let g:airline#extensions#tabline#show_buffers = 1
 let g:airline#extensions#tabline#buffer_min_count =2
 let g:airline#extensions#tabline#buffer_idx_mode = 1
 let g:airline#extensions#tabline#buffers_label = 'b'
@@ -1260,7 +1262,7 @@ nmap <leader>ç <Plug>AirlineSelectTab9
 nmap <leader>c <Plug>(InYoFace_Toggle)<CR>
 " }}}
 " close the preview window on python completion {{{
-" autocmd CompleteDone * pclose 
+" autocmd CompleteDone * pclose
 set completeopt=menu,longest
 " }}}
 " python config {{{
@@ -1418,12 +1420,12 @@ let g:goyo_width = 120
 let g:tex_flavor = "latex"
 "}}}
 " Vimtex configuration {{{
-" Pour le rappel 
+" Pour le rappel
 " <localleader>ll pour la compilation continue du pdf
 " <localleader>lv pour la preview du pdf
 let g:vimtex_quickfix_open_on_warning = 1
 let g:vimtex_view_automatic=1
-" autoindent can slow down vim quite a bit 
+" autoindent can slow down vim quite a bit
 " to check indent parameters, run :verbose set ai? cin? cink? cino? si? inde? indk?
 let g:vimtex_indent_enabled=0
 let g:vimtex_indent_bib_enabled=1
@@ -1455,10 +1457,10 @@ let g:vimtex_quickfix_ignored_warnings = [
       \ 'Underfull',
       \ 'Overfull',
       \ 'specifier changed to',
-      \ 'Biber reported the following issues',  
+      \ 'Biber reported the following issues',
       \ "Invalid format of field 'month'"
       \ ]
-      " 
+      "
   if !exists('g:ycm_semantic_triggers')
     let g:ycm_semantic_triggers = {}
   endif
@@ -1496,7 +1498,7 @@ let g:pymode_folding = 0
 let g:pymode_doc = 0
 " C means class, M method for instance
 " ]M                Jump to next class or method (normal, visual, operator modes)
-let g:pymode_motion = 1 
+let g:pymode_motion = 1
 let g:pymode_rope_goto_definition_bind = 'gd'
 let g:pymode_lint = 0 " done by Neomake
 " ROpe is interesting, enables
@@ -1512,11 +1514,11 @@ let g:pymode_breakpoint = 0 " consumes <Leader>b otherwise
 " let g:pymode_breakpoint_bind = '<leader>b'
 let g:pymode_virtualenv = 1
 " " hl self keyword
-" let g:pymode_syntax_highlight_self = g:pymode_syntax_all 
+" let g:pymode_syntax_highlight_self = g:pymode_syntax_all
 " }}}
 " vim-listchars config {{{
     "\"trail:·,tab:→\ ,eol:↲,precedes:<,extends:>"
-"let g:listchar_formats=[ 
+"let g:listchar_formats=[
    "\"trail:·",
     "\"trail:>"
    "\]
@@ -1554,7 +1556,7 @@ nnoremap <leader>rg  :Grepper -tool rg -open -switch
 "   \ 'localgrep': {
 "       \ 'grepprg':    'ag --vimgrep $* $.',
 "       \                    'grepformat': '%f:%l:%c:%m,%f:%l:%m',
-"       \                    'escape':     '\^$.*+?()[]{}|' 
+"       \                    'escape':     '\^$.*+?()[]{}|'
 "     \ }
 "     \}
 " -noswitch
@@ -1570,7 +1572,7 @@ nnoremap <Leader>ss :SideSearch <C-r><C-w><CR> | wincmd p
 command! -complete=file -nargs=+ SS execute 'SideSearch <args>'
 
 " or command abbreviation
-cabbrev SS SideSearch" 
+cabbrev SS SideSearch"
 " }}}
 " folding config {{{
 " block,hor,mark,percent,quickfix,search,tag,undo
@@ -1617,19 +1619,19 @@ nnoremap <leader>pu :PlugUpdate<CR>
 " signify (display added/removed lines from vcs) {{{
 let g:signify_vcs_list = [ 'git']
 " let g:signify_mapping_next_hunk = '<leader>hn' " hunk next
-" let g:signify_mapping_prev_hunk = '<leader>gk' 
-let g:signify_mapping_toggle_highlight = '<leader>gh' 
+" let g:signify_mapping_prev_hunk = '<leader>gk'
+let g:signify_mapping_toggle_highlight = '<leader>gh'
 let g:signify_line_highlight = 0 " display added/removed lines in different colors
 "let g:signify_line_color_add    = 'DiffAdd'
 "let g:signify_line_color_delete = 'DiffDelete'
-"let g:signify_line_color_change = 'DiffChange' 
+"let g:signify_line_color_change = 'DiffChange'
 " let g:signify_mapping_toggle = '<leader>gt'
 " let g:signify_sign_add =  '+'
 let g:signify_sign_show_text = 0
 " let g:signify_sign_add =  "\u00a0" " unbreakable space
 " let g:signify_sign_delete            = "\u00a0"
 " " let g:signify_sign_delete_first_line = '‾'
-" let g:signify_sign_change            = "\u00a0" 
+" let g:signify_sign_change            = "\u00a0"
 " let g:signify_sign_changedelete      = g:signify_sign_change
 " let g:signify_sign_show_count|
 " master
@@ -1658,7 +1660,7 @@ let g:auto_save_events = ['FocusLost']
 "let g:auto_save_events = ['CursorHold', 'FocusLost']
 let g:auto_save_write_all_buffers = 1 " Setting this option to 1 will write all
 " Put this in vimrc, add custom commands in the function.
-" 
+"
 " function! AutoSaveOnLostFocus()
 "   " to solve pb with Airline https://github.com/vim-airline/vim-airline/issues/1030#issuecomment-183958050
 "   exe ":au FocusLost ".expand("%")." :wa | :AirlineRefresh | :echom 'Focus lost'"
@@ -1668,7 +1670,7 @@ let g:auto_save_write_all_buffers = 1 " Setting this option to 1 will write all
 
 nnoremap <LocalLeader>sv :source $MYVIMRC<CR> " reload vimrc
 " }}}
-" vim-scripts/QuickFixCurrentNumber {{{ 
+" vim-scripts/QuickFixCurrentNumber {{{
 "*:QuickhlManualEnable*		Enable.
 " }}}
 " Tips from vim-galore {{{
@@ -1863,8 +1865,8 @@ echomsg ret
 endfunc
 
 " <Plug>(QuickFixCurrentNumberLPrev)
-nmap <F3> call GoToPrevError() 
-nmap <F4> call GoToNextError() 
+nmap <F3> call GoToPrevError()
+nmap <F4> call GoToNextError()
 
 " nmap <S-F3> <Plug>(QuickFixCurrentNumberQPrev)
 " nmap <S-f4> <Plug>(QuickFixCurrentNumberQNext)
@@ -1888,7 +1890,7 @@ nnoremap <F5> :Neomake! make<CR>
 nnoremap <F6> :AutoSaveToggle<CR>
 "nnoremap <F6> :AutoSaveOnLostFocus<CR>
 " goto previous buffer
-nnoremap <F7> :bp<CR> 
+nnoremap <F7> :bp<CR>
 nnoremap <F8> :bn<CR>
 nnoremap <F9> :YcmToggleLogs<CR>
 " est mappe a autre chose pour l'instant
@@ -1937,7 +1939,10 @@ endif
 " Bye bye ex mode
 noremap Q <NOP>
 
-" qfgrep {{{ 
+" vim-open-url {{{
+let g:open_url_browser_default="qutebrowser"
+"}}}
+" qfgrep {{{
 " <Leader>g to filter entries (user will be asked for pattern) works only in
 " location list/quickfix similar to :QFGrep
 " <Leader>r to restore original quickfix entires.
@@ -1947,7 +1952,7 @@ let g:QFG_hi_error = 'ctermbg=167 ctermfg=16 guibg=#d75f5f guifg=black'
 let g:no_QuickFixCurrentNumber_maps = 1
 " }}}
 " location list / quickfix config {{{
-" location list can be associated with only one window.  
+" location list can be associated with only one window.
 " The location list is independent of the quickfix list.
 " }}}
 " ListToggle config {{{
@@ -1999,7 +2004,7 @@ map <Leader><space> :b#<CR>
 " }}}
 
 set showcmd " show pending command bottom right
-set showfulltag "test 
+set showfulltag "test
 
 " indents
 "nmap <S-Tab> <<
@@ -2012,7 +2017,7 @@ set showfulltag "test
 " azerty customizations : utilise <C-V> pour entrer le caractère utilisé {{{
 "https://www.reddit.com/r/vim/comments/2tvupe/azerty_keymapping/
 " parce que # est l'opposé de * et ù est a coté de *
-" map ù %  
+" map ù %
 noremap             <C-j>           }
 noremap             <C-k>           {
 
@@ -2025,7 +2030,7 @@ noremap             <C-k>           {
 set cpoptions="aABceFsn" " vi ComPatibility options
 set matchpairs+=<:>  " Characters for which % should work
 
-" TODO to use j/k over 
+" TODO to use j/k over
 " set whichwrap+=<,>,h,l
 
 " repl.nvim (from hiphish) {{{
@@ -2053,7 +2058,7 @@ nmap <Leader>x <Plug>(PaletteRun)
 " Interactive menus {{{1
 " use emenu ("execute menu") to launch the command
 " disable all menus
-unmenu * 
+unmenu *
 " menu Spell.EN_US :setlocal spell spelllang=en_us \| call histadd('cmd', 'setlocal spell spelllang=en_us')<CR>
 menu Spell.&FR :setlocal spell spelllang=fr_fr<CR>
 " menu Spell.EN_US :setlocal spell spelllang=en_us<CR>
@@ -2081,13 +2086,13 @@ if has("nvim")
   set termguicolors
   "set shada=!,'50,<1000,s100,:0,n$XDG_CACHE_HOME/nvim/shada
   let g:netrw_home=$XDG_DATA_HOME.'/nvim'
-  "now ignored 
+  "now ignored
   " let $NVIM_TUI_ENABLE_TRUE_COLOR=1
   " let $NVIM_TUI_ENABLE_CURSOR_SHAPE=0
 endif
 " }}}
 " colorscheme stuff {{{
-" as we set termguicolors, 
+" as we set termguicolors,
 " highlight Comment gui="NONE,italic"; e
 " echom "colorscheme changed" |
 " to underline search results instead of highlighting them
@@ -2100,7 +2105,7 @@ autocmd ColorScheme *
       \ highlight Comment gui=italic
       \ | highlight Search gui=undercurl
       \ | highlight MatchParen guibg=NONE guifg=NONE gui=underline
-      \ | highlight NeomakePerso cterm=underline ctermbg=Red  ctermfg=227  gui=underline 
+      \ | highlight NeomakePerso cterm=underline ctermbg=Red  ctermfg=227  gui=underline
 " guibg=Red
       " \ | highlight IncSearch guibg=NONE guifg=NONE gui=underline
 " highlight Comment gui=italic
@@ -2129,7 +2134,7 @@ nnoremap gO i<CR>
 if has("signcolumnwidth")
     set signcolumnwidth=6
 endif
-" call 
+" call
 function! FzfFlipBool()
   " let l:dict = {}
 
@@ -2148,7 +2153,7 @@ map <C-5> :Neomake! make<CR>
 
 highlight SignifySignChange cterm=bold ctermbg=237  ctermfg=227 guibg=#F08A1F
 
-" MATT to test 
+" MATT to test
 let g:python_host_tcp=1
 
 function! ExportMenus(path, modes)

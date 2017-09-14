@@ -26,6 +26,7 @@
 
   # see https://github.com/NixOS/nixpkgs/issues/15293
   # boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages_mptcp;
 
 
   networking.hostName = "jedha"; # Define your hostname.
@@ -46,6 +47,17 @@
      };
    };
 
+   # inspired by https://gist.github.com/539h/8144b5cabf97b5b206da
+   fonts = {
+      enableFontDir = true; # ?
+      fonts = with pkgs; [
+        ubuntu_font_family
+        inconsolata
+      ];
+      # fontconfig= {
+      #   enable=true;
+      # }
+   };
 
 
   # Set your time zone.
@@ -59,6 +71,7 @@
      autoconf
      autojump
      cmake
+     curl
      dex
 	 dunst
 	 fzf
@@ -78,46 +91,41 @@
 	 mpv
 	 ncmpcpp
      networkmanager
+     # networkmanager_l2tp
      networkmanagerapplet
-     offlineimap
-     neovim
+     # neovim
      pkgconfig
      # pypi2nix # to convert
-	 python3
-	 pythonPackages.neovim
-	 pythonPackages.pandas
-	 # python36Packages.keyring
-	 # pythonPackages.matplotlib
-	 neovim-remote
-     # qutebrowser
      pass
 	 qtpass
      ranger
      rofi
      ripgrep
-     silver-searcher
      stow
+     sudo
      termite
 	 tmux
 	 unzip
+     vim
      vifm
 	 # vlc
      xorg.xmodmap
      # xauth # for 'startx'
      wget
-     weechat
 	 xclip
      xdg-user-dirs
      # xdg-utils
      zsh
+   ] ++ [
+  # TODO put some of the packages into an "extraPackages" set
+  # or pin it to a binary version
+    # astroid # might require a rebuild of webkit => too big
+    # gnomecontrolcenter
+    # cups-pk-helper # to add printer through gnome control center
+   # ncdu
+     # qutebrowser
+     # python36Packages.jupyter_console
    ];
-   # ++ [
-  # # TODO put some of the packages into an "extraPackages" set
-  # # or pin it to a binary version
-   #  # astroid # might require a rebuild of webkit => too big
-   #  # gnomecontrolcenter
-   #  # cups-pk-helper # to add printer through gnome control center
-   # ];
 
 
   environment.variables.EDITOR="nvim";
@@ -153,6 +161,7 @@
     layout = "fr";
     # TODO swap esc/shift
     xkbOptions = "eurosign:e";
+    # xkbOptions = "eurosign:e, caps:swapescape";
 
     synaptics = {
       enable = true;
@@ -174,7 +183,7 @@
   # services.xserver.desktopManager.xterm.enable = false;
   # extraSessionCommands / configFile
   services.xserver.windowManager.i3.enable = true;
-  services.xserver.windowManager.i3.package = pkgs.i3-gaps;
+  services.xserver.windowManager.i3.package = pkgs.i3;
 
   programs.zsh.enable = true;
   programs.zsh.enableCompletion = true;
@@ -206,6 +215,12 @@
   ] ;
 
   # The NixOS release to be compatible with for stateful data such as databases.
-  system.stateVersion = "17.03";
+  # system.stateVersion = "17.03";
+  # literal example
+  # system.requiredKernelConfig = with config.lib.kernelConfig; [
+  #         (isYes "MODULES")
+  #         (isEnabled "FB_CON_DECOR")
+  #         (isEnabled "BLK_DEV_INITRD")
+  #       ]
 
 }
