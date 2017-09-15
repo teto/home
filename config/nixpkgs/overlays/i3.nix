@@ -14,11 +14,12 @@ self: super:
   neovim = super.neovim.override ( {
     vimAlias = false;
     extraPython3Packages = [ (super.pkgs.python36.withPackages (ps: [
-      ps.neovim ps.pandas ps.pycodestyle super.pkgs.neovim-remote ]))];
+      ps.neovim ps.pandas ps.pycodestyle super.pkgs.neovim-remote ps.python ]))];
     });
 
   neovim-local = self.neovim.overrideAttrs (oldAttrs: {
 	  name = "neovim-local";
+      # unpackPhase = 
 	  src = super.lib.cleanSource ~/neovim;
 	});
 
@@ -30,7 +31,7 @@ self: super:
         owner = "neovim";
         repo = "neovim";
         rev = "nightly";
-        sha256 = "1kr80q7fgndy36j7gxb9hkypjvss3l4zkakl86p5b6si9hazdjrv";
+        sha256 = "1a85l83akqr8zjrhl8y8axsjg71g7c8kh4177qdsyfmjkj6siq4c";
       };
 
       meta.priority=0;
@@ -52,6 +53,12 @@ self: super:
     # propagatedBuildInputs = with super.pythonPackages; oldAttrs.propagatedBuildInputs ++ [ keyring pygobject3  ];
   });
 
+  networkmanager-dev = super.networkmanager.overrideAttrs (oldAttrs: {
+    # pygobject2
+    name = "networkmanager-dev";
+    src = super.lib.cleanSource ~/NetworkManager;
+    # propagatedBuildInputs = with super.pythonPackages; oldAttrs.propagatedBuildInputs ++ [ keyring pygobject3  ];
+  });
 
   # fcitx = super.fcitx.overrideAttrs (oldAttrs: {
   #   # todo optional

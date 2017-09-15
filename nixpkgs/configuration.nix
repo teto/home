@@ -15,7 +15,7 @@
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.efi.canTouchEfiVariables = true; # allows to run $ efi...
 
   # just to generate the entry used by ubuntu's grub
   # boot.loader.grub.enable = true;
@@ -25,8 +25,16 @@
   boot.loader.grub.device = "/dev/sda";
 
   # see https://github.com/NixOS/nixpkgs/issues/15293
-  # boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.kernelPackages = pkgs.linuxPackages_mptcp;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelModules = [
+    "af_key" # for ipsec/vpn support
+  ];
+  boot.kernel.sysctl = {
+      # "net.ipv4.tcp_keepalive_time" = 60;
+      # "net.core.rmem_max" = 4194304;
+      # "net.core.wmem_max" = 1048576;
+    };
+  # boot.kernelPackages = pkgs.linuxPackages_mptcp;
 
 
   networking.hostName = "jedha"; # Define your hostname.
@@ -86,6 +94,7 @@
      gnome3.dconf # seems super important for dbus (https://github.com/NixOS/nixpkgs/issues/2448)
      gnum4 # hum
      gnupg
+     ipsecTools # does it provide ipsec ?
      libertine # font
      google-fonts
 	 mpv
@@ -146,7 +155,9 @@
     };
 
     openssh.enable = false;
+    locate.enable = true;
   };
+
 
   # Enable the X11 windowing system.
   services.xserver = {
@@ -214,6 +225,14 @@
     "nixos-config=/home/teto/dotfiles/nixpkgs/configuration.nix:/nix/var/nix/profiles/per-user/root/channels"
   ] ;
 
+  system = {
+    # stateVersion = "17.03"; # why would I want to keep that ?
+    copySystemConfiguration = true;
+    autoUpgrade = {
+      channel= "https://nixos.org/channels/nixos-unstable";
+      enable = false;
+    };
+  };
   # The NixOS release to be compatible with for stateful data such as databases.
   # system.stateVersion = "17.03";
   # literal example

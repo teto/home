@@ -1,3 +1,0 @@
-:0
-* ^(From|To|Cc).*ietf.org.*
-$MAILDIR/ietf/
