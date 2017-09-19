@@ -42,19 +42,19 @@ alias enfr="trans :fr "
 
 ### Git {{{
 alias ga='git add'
-alias gp='git push'
-alias gl='git log'
+# alias gp='git push'
+# alias gl='git log'
 alias gst="git status"
-alias gs='git status'
-alias gd='git diff'
-alias gc='git commit'
+# alias gs='git status'
+# alias gd='git diff'
+# alias gc='git commit'
 alias gcm='git commit -m'
 alias gca='git commit -a'
-alias gb='git branch'
+# alias gb='git branch'
 alias gbl="git branch --list" # todo add all ?
 alias gch='git checkout'
 alias gra='git remote add'
-alias grr='git remote rm'
+# alias grr='git remote rm'
 alias grv='git remote -v'
 alias gpu='git pull'
 alias gcl='git clone'
