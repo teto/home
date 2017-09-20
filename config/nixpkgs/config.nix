@@ -24,7 +24,7 @@
       paths = [
         dropbox
         fzf
-        greenclip
+        greenclip # todo get from haskell
         libreoffice
         mendeley
         nautilus

@@ -120,7 +120,7 @@ zle -N edit-command-line
 bindkey -M vicmd v edit-command-line
 # bindkey '^V' edit-command-line
 bindkey '^R' history-incremental-search-backward
-
+bindkey -r "^G" # was bound to list-expand I don't know where/why
 # bindkey '^G' push-line-or-edit
 
 bindkey '^P' up-history
@@ -139,6 +139,11 @@ fancy-ctrl-z () {
 }
 zle -N fancy-ctrl-z
 bindkey '^Z' fancy-ctrl-z
+# }}}
+
+# to get more focused Ctrl W {{{
+# http://zshwiki.org/home/zle/bindkeys
+# export WORDCHARS=''
 # }}}
 
 # Why did I put that ?
@@ -366,10 +371,12 @@ FZF_PATH="$XDG_DATA_HOME/fzf/shell/"
 if [ $ON_NIXOS ]; then
     FZF_PATH="$(fzf-share)"
 fi
-. "$FZF_PATH"/completion.zsh
-. "$FZF_PATH"/key-bindings.zsh
-. "$ZDOTDIR"/fzf_git.zsh
-. "$ZDOTDIR/fzf_git_keybindings.zsh"
+. "$FZF_PATH/completion.zsh"
+. "$FZF_PATH/key-bindings.zsh"
+# https://junegunn.kr/2016/07/fzf-git
+. "$HOME/fzf-gems/fzf_git_functions.sh"
+# you can list the actually bound keys with bindkey -M viins
+. "$HOME/fzf-gems/fzf_git_keybindings.zsh"
 # }}}
 
 # _gnu_generic should work if program accepts --help

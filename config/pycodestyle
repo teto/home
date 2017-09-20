@@ -1,3 +1,3 @@
 [pycodestyle]
-ignore = E226,E302,E41
+ignore = E226,E302,E41,E265
 max-line-length = 100

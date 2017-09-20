@@ -8,6 +8,7 @@ This folder contains my customizations for:
 * [buku](https://github.com/jarun/Buku): a cli bookmark manager
 * clerk (to control mpd via rofi)
 * font handling
+* fcitx (input method mechanims)
 * git (Source control)
 * greenclip (clipboard history, works with rofi, contender of roficlip)
 * htop

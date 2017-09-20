@@ -18,6 +18,9 @@ unicode_symbols=True
 
 [calendars]
 
+[[japon_feries]]
+readonly=False
+path= "$XDG_DATA_HOME/calendars/japon_feries"
 
 [[lip6]]
 readonly=False

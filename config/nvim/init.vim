@@ -132,7 +132,7 @@ Plug 'sk1418/QFGrep' " Filter quickfix
 " (upstreamd already or ?)
 " Plug 'mtth/scratch.vim' " , {'on': 'Scratch'} mapped to ?
 " Plug 'tjdevries/vim-inyoface.git' "InYoFace_toggle to display only comments
-Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' } " :h LanguageClientUsage
+" Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' } " :h LanguageClientUsage
 " Plug 'tjdevries/nvim-langserver-shim' " for LSP
 " Plug 'powerman/vim-plugin-AnsiEsc' " { to hl ESC codes
 " Plug 'git@github.com:junegunn/gv.vim.git' " git commit viewer :Gv
@@ -231,7 +231,7 @@ Plug 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
 
 " Using a non-master branch
 
-Plug 'dbgx/lldb.nvim',{ 'for': 'c' } " To debug (use clang to get correct line numbers
+" Plug 'dbgx/lldb.nvim',{ 'for': 'c' } " To debug (use clang to get correct line numbers
 " Plug 'dbgx/gdb.nvim',{ 'for': 'c' } " To debug (use clang to get correct line numbers
 " Plug 'powerman/vim-plugin-viewdoc' " looks interesting
 
@@ -1077,14 +1077,22 @@ let g:jedi#completions_enabled = 0 " disable when deoplete in use
 " Neomake config {{{
 " @return {String}
 "  toadd in statusline
-function! NeomakeJobs() abort
-" s:winnr != winnr()
-  return 1
-        \ || !exists('*neomake#GetJobs')
-        \ || empty(neomake#GetJobs())
-        \ ? ''
-        \ : 'make'
-endfunction
+" function! NeomakeJobs() abort
+" " s:winnr != winnr()
+"   return 1
+"         \ || !exists('*neomake#GetJobs')
+"         \ || empty(neomake#GetJobs())
+"         \ ? ''
+"         \ : 'make'
+" endfunction
+
+
+" let g:neomake_make_maker = {
+"     \ 'exe': 'make',
+"     \ 'args': [],
+"     \ 'cwd': getcwd().'/build',
+"     \ 'errorformat': '%f:%l:%c: %m',
+"     \ }
 
 let g:neomake_verbose = 1
 
@@ -1096,8 +1104,10 @@ let g:neomake_list_height=5
 
 " how to let 'mypy' ignore warning/errors as pycodestyle does ?
 let g:neomake_python_enabled_makers = ['pycodestyle', ]
+let g:neomake_c_maker = []
+let g:neomake_c_enabled_makers = []
 let g:neomake_logfile = $HOME.'/neomake.log'
-let g:neomake_c_gcc_args = ['-fsyntax-only', '-Wall']
+" let g:neomake_c_gcc_args = ['-fsyntax-only', '-Wall']
 let g:neomake_open_list = 2 " 0 to disable/2 preserves cursor position
 
 let g:neomake_airline = 1
@@ -1105,6 +1115,19 @@ let g:neomake_echo_current_error = 1
 let g:neomake_place_signs=1
 
 " filters out unrecognized
+function! NeomakeStatusLine()
+
+let bufnr = winbufnr(winnr())
+let neomake_status_str = neomake#statusline#get(bufnr, {
+	\ 'format_running': '… ({{running_job_names}})',
+	\ 'format_ok': (a:active ? '%#NeomakeStatusGood#' : '%*').'✓',
+	\ 'format_quickfix_ok': '',
+	\ 'format_quickfix_issues': (a:active ? '%s' : ''),
+	\ 'format_status': '%%(%s'
+	\   .(a:active ? '%%#StatColorHi2#' : '%%*')
+	\   .'%%)',
+	\ })
+endfunction
 
 
 " C and CPP are handled by YCM and java usually by elim
@@ -1126,7 +1149,6 @@ let g:neomake_info_sign = {'text': 'ℹ', 'texthl': 'NeomakeInfoSign'}
 
 " don't display lines that don't match errorformat
 let g:neomake_remove_invalid_entries=1
-"g:neomake_enabled_makers
 " let g:neomake_highlight_lines = 1
 
 " let g:neomake_ft_test_maker_buffer_output = 0
@@ -1136,29 +1158,43 @@ let g:neomake_remove_invalid_entries=1
 " let g:neomake_error_highlight = 'Error'
 let g:neomake_error_highlight = 'NeomakePerso'
 
-let g:neomake_c_enabled_makers = ['make']
+" this lists directory makers to use when no file or no maker for ft
+" by default 'makeprg'
+" let g:neomake_enabled_makers = ['make']
     " let g:neomake_warning_highlight = 'Warning'
     " let g:neomake_message_highlight = 'Message'
     " let g:neomake_informational_highlight = 'Informational'
 " let g:neomake_error_sign = { 'text': s:gutter_error_sign, 'texthl': 'ErrorSign' }
 " let g:neomake_warning_sign = { 'text': s:gutter_warn_sign , 'texthl': 'WarningSign' }
 "
-" autocmd! VimLeave * let g:neomake_verbose = 0
 
-function! OnNeomakeFinished()
-  " echo 'exit value='.g:neomake_hook_context.jobinfo.exit_code
-  " TODO if notifier available use it
-endfunction
+call neomake#configure#automake('w')
+" augroup my_neomake
+"     au!
 
-augroup my_neomake
-    au!
-
-    " Run linting when writing filg
-    autocmd BufWritePost * Neomake
-    autocmd User NeomakeJobFinished call OnNeomakeFinished()
-augroup END
+"     " Run linting when writing filg
+"     autocmd BufWritePost * Neomake
+"     autocmd User NeomakeJobFinished call OnNeomakeFinished()
+" augroup END
 " }}}
 " Airline {{{
+let g:airline_extensions = ['obsession', 'tabline'] " to speed up things
+let g:airline#extensions#default#layout = [
+    \ [ 'a', 'b', 'c' ],
+    \ [ 'x', 'y', 'z', 'error', 'warning' ]
+    \ ]
+
+" control which sections get truncated and at what width. >
+let g:airline#extensions#default#section_truncate_width = {
+      \ 'b': 79,
+      \ 'x': 60,
+      \ 'y': 88,
+      \ 'z': 45,
+      \ 'warning': 80,
+      \ 'error': 80,
+      \ }
+
+let g:airline_highlighting_cache = 1 " to speed up things
 let g:airline_powerline_fonts = 0
 let g:airline_left_sep = ''
 let g:airline_right_sep = ''
@@ -1166,13 +1202,15 @@ let g:airline_section = '|'
 " display buffers as tabs if no split
 " see :h airline-tabline
 let g:airline_theme = 'molokai'
-let g:airline_section_b = '%#TermCursor#' . NeomakeJobs()
+" let g:airline_section_b = '%#TermCursor#' . NeomakeJobs()
 let g:airline#extensions#default#layout = [
       \ [ 'a', 'b', 'c' ],
       \ [ 'x', 'y', 'z', 'error', 'warning' ]
       \ ]
 " section y is fileencoding , useless in neovim
-let g:airline_section_y = ""
+
+" call airline#parts#define_function('neomake', 'NeomakeStatusLine')
+" let g:airline_section_y = airline#section#create_right(['neomake','ffenc'])
  " airline#section#create(['windowswap', 'obsession', '%3p%%'.spc, 'linenr', 'maxlinenr', spc.':%3v'])
 " let g:airline_section_z = airline#section#create_right(['linenumber'])
 " airline extensions {{{

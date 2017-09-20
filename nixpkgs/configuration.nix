@@ -40,6 +40,7 @@
   networking.hostName = "jedha"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true;
+  networking.firewall.checkReversePath = false; # for nixops
 
   # Select internationalisation properties.
   i18n = {
@@ -202,12 +203,21 @@
   # for nix-shell
   programs.bash.enableCompletion = true;
 
+  programs.adb.enable = true;
+
+  # for nixops
+  virtualisation.libvirtd.enable = true;
+
+
+  # programs.wireshark.enable = true; # installs setuid
+  # programs.wireshark.package = ; # which one
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.defaultUserShell = "/run/current-system/sw/bin/zsh";
   users.extraUsers.teto = {
      isNormalUser = true;
      uid = 1000;
-     extraGroups = ["wheel" "networkmanager"];
+     extraGroups = ["wheel" "networkmanager" "libvirtd" "adbusers"];
 	 shell = pkgs.zsh;
   };
   nixpkgs.config = {
