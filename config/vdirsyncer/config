@@ -8,6 +8,9 @@
 # A folder where vdirsyncer can store some metadata about each pair.
 status_path = "$XDG_CACHE_HOME/vdirsyncer/status/"
 
+# not accepted yet
+# status_path.fetch = ["command", "sh", "-c", "$XDG_CACHE_HOME/vdirsyncer/status/"]
+
 # https://calendar.google.com/calendar/ical/fr.japanese%23holiday%40group.v.calendar.google.com/public/basic.ics
 [pair japon_ferie]
 a = "japon_ferie_remote"

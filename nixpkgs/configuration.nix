@@ -83,6 +83,7 @@
      curl
      dex
 	 dunst
+     fd # replaces 'find'
 	 fzf
      # lgogdownloader
      libtool

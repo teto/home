@@ -38,18 +38,18 @@ self: super:
       meta.priority=0;
 	});
 
-   haskellPackages.yst = super.haskellPackages.yst.overrideAttrs (oldAttrs: {
-	  name = "yst";
-      src = super.fetchFromGitHub {
-        owner = "jgm";
-        repo = "yst";
-        rev = "0.5.1.2";
-        sha256 = "1105gp38pbds46bgwj28qhdaz0cxn0y7lfqvgbgfs05kllbiri0h";
-      };
+#    haskellPackages.yst = super.haskellPackages.yst.overrideAttrs (oldAttrs: {
+# 	  name = "yst";
+#       src = super.fetchFromGitHub {
+#         owner = "jgm";
+#         repo = "yst";
+#         rev = "0.5.1.2";
+#         sha256 = "1105gp38pbds46bgwj28qhdaz0cxn0y7lfqvgbgfs05kllbiri0h";
+#       };
 
-      # TODO remove current aeson and override it
-      # executableHaskellDepends = [ ];
-	});
+#       # TODO remove current aeson and override it
+#       # executableHaskellDepends = [ ];
+# 	});
 
   khal-dev = super.khal.overrideAttrs (oldAttrs: {
 	  name = "khal-dev";
@@ -118,31 +118,22 @@ self: super:
 
   vdirsyncer-custom = super.vdirsyncer.overrideAttrs(oldAttrs: rec {
 
-
-    doCheck=false;
+    doCheck=false; # doesn't work, checkPhase still happens
+    checkPhase="echo 'ignored'";
     # we need keyring to retreive passwords etc
     propagatedBuildInputs = oldAttrs.propagatedBuildInputs
-    ++ [ (super.pkgs.python3.withPackages (ps: [  ps.requests_oauthlib ps.keyring ps.secretstorage  ])) ];
+    ++ (with super.pkgs.python3Packages; [ requests_oauthlib keyring secretstorage ]) ++ [ super.pkgs.liboauth ];
+      # (super.pkgs.python3.withPackages (ps: [  ps.requests_oauthlib ps.keyring ps.secretstorage  ])) ];
   });
 
-  # self.fcitx = self.fcitx-master;
   # fcitx = super.fcitx.overrideAttrs (oldAttrs: {
-  # #   # todo optional
-  # #   # super.stdenv.lib.optionalString "${super.xkeyboard_config}"
-  # #   # XKB_RULES_XML_FILE
+  # # #   # todo optional
+  # # #   # super.stdenv.lib.optionalString "${super.xkeyboard_config}"
+  # # #   # XKB_RULES_XML_FILE
   #   src= /home/teto/fcitx;
-  # # cmakeFlags = ''
-  # #   -D_DEBUG
-  # #   '' + oldAttrs.cmakeFlags;
-  #   extraCmds = ''
-  #   export CFLAGS="-D_DEBUG"
-  # '';
+  # # # cmakeFlags = ''
+  # # #   -D_DEBUG
+  # # #   '' + oldAttrs.cmakeFlags;
 
-  #   prePatch = ''
-  #     substituteInPlace src/module/xkb/xkb.c \
-  #       --replace /usr/share/X11/xkb/rules/evdev.xml ${super.xkeyboard_config}/share/X11/xkb/rules/evdev.xml;
-  #     '';
-
-  #   cmakeFlags = builtins.concatStringsSep  "" [oldAttrs.cmakeFlags "-DXKB_RULES_XML_FILE=" "${super.xkeyboard_config}/share/X11/xkb/rules/evdev.xml\n"];
   # });
 }

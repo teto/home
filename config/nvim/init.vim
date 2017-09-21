@@ -729,6 +729,9 @@ let g:plug_shallow=1
 " let g:interestingWordsTermColors = ['#aeee00', '#ff0000', '#0000ff', '#b88823', '#ffa724', '#ff2c4b']
 
 " }}}
+" dirvish {{{
+let g:dirvish_mode=1
+"}}}
 
 " to remove timeout when changing modes
 " if ! has('gui_running')
@@ -1106,6 +1109,7 @@ let g:neomake_list_height=5
 let g:neomake_python_enabled_makers = ['pycodestyle', ]
 let g:neomake_c_maker = []
 let g:neomake_c_enabled_makers = []
+let g:neomake_cpp_enabled_makers = []
 let g:neomake_logfile = $HOME.'/neomake.log'
 " let g:neomake_c_gcc_args = ['-fsyntax-only', '-Wall']
 let g:neomake_open_list = 2 " 0 to disable/2 preserves cursor position
@@ -1909,20 +1913,6 @@ nmap <F4> call GoToNextError()
 " nmap <S-F3> <Plug>(QuickFixCurrentNumberQPrev)
 " nmap <S-f4> <Plug>(QuickFixCurrentNumberQNext)
 
-
-" Neomake status.
-" let bufnr = winbufnr(a:winnr)
-" let neomake_status_str = ''
-" if exists('*neomake#GetJobs')
-"   if getbufvar(bufnr, 'neomake_disabled', 0)
-"     let neomake_status_str .= ' b- '
-"   elseif get(g:, 'neomake_disabled', 0)
-"     let neomake_status_str .= ' g- '
-"   endif
-"   let neomake_status_str .= '%('.StatuslineNeomakeStatus(bufnr, '…', '✓')
-" 	\ . (a:active ? '%#StatColorHi2#' : '%*')
-" 	\ . '%)'
-" endif
 
 nnoremap <F5> :Neomake! make<CR>
 nnoremap <F6> :AutoSaveToggle<CR>
