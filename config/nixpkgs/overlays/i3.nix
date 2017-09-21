@@ -64,7 +64,9 @@ self: super:
   wireshark-dev = super.wireshark.overrideAttrs (oldAttrs: {
     # pygobject2
     name = "wireshark-dev";
-	  src = super.lib.cleanSource ~/wireshark;
+    src = super.lib.cleanSource ~/wireshark;
+    # useless, __nixè
+    # preUnpack = "echo 'hello world'; rm -rf __nix_qt5__";
     # propagatedBuildInputs = with super.pythonPackages; oldAttrs.propagatedBuildInputs ++ [ keyring pygobject3  ];
   });
 
