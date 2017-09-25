@@ -15,7 +15,7 @@ self: super:
     vimAlias = false;
     withPython = false;
     extraPython3Packages = [ (super.pkgs.python36.withPackages (ps: [
-       ps.pandas ps.python ]))];
+       ps.pandas ps.python ps.jedi ]))];
     });
 
   neovim-local = self.neovim.overrideAttrs (oldAttrs: {
@@ -37,6 +37,12 @@ self: super:
 
       meta.priority=0;
 	});
+
+
+   # older versions are so broken that
+   nixops-local = super.nixops.overrideAttrs( oldAttrs: {
+     src = super.lib.cleanSource ~/nixops;
+   });
 
 #    haskellPackages.yst = super.haskellPackages.yst.overrideAttrs (oldAttrs: {
 # 	  name = "yst";
@@ -65,6 +71,10 @@ self: super:
     # pygobject2
     name = "wireshark-dev";
     src = super.lib.cleanSource ~/wireshark;
+    # TODO
+    postBuild = ''
+      export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:./run"
+      '';
     # useless, __nixè
     # preUnpack = "echo 'hello world'; rm -rf __nix_qt5__";
     # propagatedBuildInputs = with super.pythonPackages; oldAttrs.propagatedBuildInputs ++ [ keyring pygobject3  ];
