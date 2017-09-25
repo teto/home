@@ -17,7 +17,7 @@ bin:
 
 local:
 	stow -t "$(XDG_DATA_HOME)" local
-	mkdir -p $(XDG_DATA_HOME)/fzf-history
+	mkdir -p $(XDG_DATA_HOME)/fzf-history $(XDG_DATA_HOME)/newsbeuter
 
 zsh:
 	# won't work on nix
