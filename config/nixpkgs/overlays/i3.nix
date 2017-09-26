@@ -40,8 +40,13 @@ self: super:
 
 
    # older versions are so broken that
-   nixops-local = super.nixops.overrideAttrs( oldAttrs: {
-     src = super.lib.cleanSource ~/nixops;
+   nixops-local = super.nixopsUnstable.overrideAttrs( oldAttrs: rec {
+
+     # version = "2017-09-24";
+     version = "1.6.2";
+     name = "nixops-${version}";
+     # it should be
+     # src = super.lib.cleanSource ~/nixops;
    });
 
 #    haskellPackages.yst = super.haskellPackages.yst.overrideAttrs (oldAttrs: {
@@ -105,7 +110,7 @@ self: super:
   #   # todo optional
   #   # super.stdenv.lib.optionalString "${super.xkeyboard_config}"
   #   # XKB_RULES_XML_FILE
-  version = "master";
+    version = "master";
     src = super.pkgs.fetchFromGitHub {
       owner = "fcitx";
       repo = "fcitx";
@@ -135,7 +140,6 @@ self: super:
     # we need keyring to retreive passwords etc
     propagatedBuildInputs = oldAttrs.propagatedBuildInputs
     ++ (with super.pkgs.python3Packages; [ requests_oauthlib keyring secretstorage ]) ++ [ super.pkgs.liboauth ];
-      # (super.pkgs.python3.withPackages (ps: [  ps.requests_oauthlib ps.keyring ps.secretstorage  ])) ];
   });
 
   # fcitx = super.fcitx.overrideAttrs (oldAttrs: {

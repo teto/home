@@ -199,6 +199,7 @@ Plug 'lyuts/vim-rtags'  " a l'air d'etre le plus complet <leader>ri
 " Plug 'zchee/deoplete-clang', { 'for': 'c' }
 " Plug 'tweekmonster/deoplete-clang2', { 'for': 'c' }
 "
+Plug 'poppyschmo/deoplete-latex', {'for': 'latex'} " not a serious one
 Plug 'zchee/deoplete-jedi', { 'for': 'python'}
 " }}}
 " Plug 'beloglazov/vim-online-thesaurus' " thesaurus => dico dde synonymes
@@ -1109,6 +1110,8 @@ let g:neomake_list_height=5
 let g:neomake_python_enabled_makers = ['pycodestyle', ]
 let g:neomake_c_maker = []
 let g:neomake_c_enabled_makers = []
+" let g:neomake_cpp_gcc_args = ['aosdifjoasidjfoiasjdfs']
+" let g:neomake_cpp_append_file = 0
 let g:neomake_cpp_enabled_makers = []
 let g:neomake_logfile = $HOME.'/neomake.log'
 " let g:neomake_c_gcc_args = ['-fsyntax-only', '-Wall']
@@ -1122,15 +1125,17 @@ let g:neomake_place_signs=1
 function! NeomakeStatusLine()
 
 let bufnr = winbufnr(winnr())
+let active=0
 let neomake_status_str = neomake#statusline#get(bufnr, {
 	\ 'format_running': '… ({{running_job_names}})',
-	\ 'format_ok': (a:active ? '%#NeomakeStatusGood#' : '%*').'✓',
+	\ 'format_ok': (active ? '%#NeomakeStatusGood#' : '%*').'✓',
 	\ 'format_quickfix_ok': '',
-	\ 'format_quickfix_issues': (a:active ? '%s' : ''),
+	\ 'format_quickfix_issues': (active ? '%s' : ''),
 	\ 'format_status': '%%(%s'
-	\   .(a:active ? '%%#StatColorHi2#' : '%%*')
+	\   .(active ? '%%#StatColorHi2#' : '%%*')
 	\   .'%%)',
 	\ })
+  return neomake_status_str
 endfunction
 
 
@@ -1212,9 +1217,10 @@ let g:airline#extensions#default#layout = [
       \ [ 'x', 'y', 'z', 'error', 'warning' ]
       \ ]
 " section y is fileencoding , useless in neovim
-
-" call airline#parts#define_function('neomake', 'NeomakeStatusLine')
+call airline#parts#define_function('neomake_custom', 'NeomakeStatusLine')
+let g:airline_section_y = airline#section#create_right(['neomake_custom','ffenc'])
 " let g:airline_section_y = airline#section#create_right(['neomake','ffenc'])
+
  " airline#section#create(['windowswap', 'obsession', '%3p%%'.spc, 'linenr', 'maxlinenr', spc.':%3v'])
 " let g:airline_section_z = airline#section#create_right(['linenumber'])
 " airline extensions {{{

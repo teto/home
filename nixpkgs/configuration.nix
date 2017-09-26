@@ -4,10 +4,15 @@
 
 { config, pkgs, options, ... }:
 
+let
+  # hopefully it can be generated as dirname <nixos-config>
+  configDir = /home/teto/dotfiles/nixpkgs;
+in
 {
   imports =
     [ # Include the results of the hardware scan.
       /etc/nixos/hardware-configuration.nix
+      ./mptcp-kernel.nix
     ];
 
   hardware.opengl.driSupport32Bit = true;
@@ -75,72 +80,21 @@
 
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
-  environment.systemPackages = with pkgs; [
-     automake
-     autoconf
-     autojump
-     cmake
-     curl
-     dex
-	 dunst
-     fd # replaces 'find'
-	 fzf
-     # lgogdownloader
-     libtool
-     # libreoffice # too long to compile
-     libnotify # use via {pkgs.libnotify}/bin/notify-send
-	 gawk
-     git
-	 # git-extras # does not find it (yet)
-     gnome3.gnome_keyring
-     gnome3.dconf # seems super important for dbus (https://github.com/NixOS/nixpkgs/issues/2448)
-     gnum4 # hum
-     gnupg
-     ipsecTools # does it provide ipsec ?
-     libertine # font
-     google-fonts
-	 mpv
-	 ncmpcpp
-     networkmanager
-     # networkmanager_l2tp
-     networkmanagerapplet
-     # neovim
-     pkgconfig
-     # pypi2nix # to convert
-     pass
-	 qtpass
-     ranger
-     rofi
-     ripgrep
-     stow
-     sudo
-     termite
-	 tmux
-	 unzip
-     vim
-     vifm
-	 # vlc
-     xorg.xmodmap
-     # xauth # for 'startx'
-     wget
-	 xclip
-     xdg-user-dirs
-     # xdg-utils
-     zsh
-   ] ++ [
+  environment.systemPackages = let
+    basePkgs = import "${configDir}/basetools.nix" pkgs;
+    desktopPkgs = import "${configDir}/desktopPkgs.nix" pkgs;
+    # networkPkgs = import "${configDir}/desktopPkgs.nix";
+  in basePkgs ++ desktopPkgs ++ [
   # TODO put some of the packages into an "extraPackages" set
   # or pin it to a binary version
     # astroid # might require a rebuild of webkit => too big
     # gnomecontrolcenter
     # cups-pk-helper # to add printer through gnome control center
-   # ncdu
-     # qutebrowser
-     # python36Packages.jupyter_console
+    pkgs.ncdu
+    pkgs.qutebrowser
    ];
 
-
   environment.variables.EDITOR="nvim";
-
 
   # List services that you want to enable:
   services = {
@@ -208,8 +162,6 @@
 
   # for nixops
   virtualisation.libvirtd.enable = true;
-
-
   # programs.wireshark.enable = true; # installs setuid
   # programs.wireshark.package = ; # which one
 
