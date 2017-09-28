@@ -155,7 +155,9 @@ floating_modifier $mod
 bindsym $mod+Return exec --no-startup-id $term
 # -d "$(
 # bindsym $mod+Shift+Return exec --no-startup-id ~/.i3/fork_term.sh
+# found in https://github.com/schischi/xcwd
 bindsym $mod+Shift+Return exec --no-startup-id $term -d "$(xcwd)"
+
 #i3-sensible-terminal
 
 # Use mod-Control-Up and Down to rotate through the workspace list.
@@ -498,14 +500,14 @@ floating_maximum_size -1 x -1
 # DP3 & LVDS1
 # to move
 # TODO ca ca plante si j'en ai
-bindsym XF86Display exec ~/.i3/monitors.sh
+bindsym XF86Display exec ~/.config/i3/monitors.sh
 
 # xrandr --output LVDS1 --primary --auto --output DP1 --auto --right-of LVDS1
 #exec_always xrandr --output $output1 --auto --output $output2 --right-of $output1
-
 #exec urxvtc -name irclient -e irssi
+exec greenclip daemon
 
-
-exec_always xmodmap ~/.Xmodmap
+# not valid on nixos
+# exec_always xmodmap ~/.Xmodmap
 #https://faq.i3wm.org/question/2155/how-can-i-use-autostart-desktop-files-in-i3/
 # exec dex -ae i3

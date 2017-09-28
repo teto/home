@@ -13,6 +13,8 @@ in
     [ # Include the results of the hardware scan.
       /etc/nixos/hardware-configuration.nix
       ./mptcp-kernel.nix
+      ./basetools.nix
+      ./desktopPkgs.nix
     ];
 
   hardware.opengl.driSupport32Bit = true;
@@ -80,11 +82,12 @@ in
 
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
-  environment.systemPackages = let
-    basePkgs = import "${configDir}/basetools.nix" pkgs;
-    desktopPkgs = import "${configDir}/desktopPkgs.nix" pkgs;
-    # networkPkgs = import "${configDir}/desktopPkgs.nix";
-  in basePkgs ++ desktopPkgs ++ [
+  environment.systemPackages = [
+  # let
+  #   # basePkgs = import "${configDir}/basetools.nix" pkgs;
+  #   desktopPkgs = import "${configDir}/desktopPkgs.nix" pkgs;
+  #   # networkPkgs = import "${configDir}/desktopPkgs.nix";
+  # in desktopPkgs ++ [
   # TODO put some of the packages into an "extraPackages" set
   # or pin it to a binary version
     # astroid # might require a rebuild of webkit => too big

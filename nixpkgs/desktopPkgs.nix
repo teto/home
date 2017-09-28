@@ -1,5 +1,6 @@
-{ config, lib, pkgs, ... }: with pkgs;
-[
+{ config, lib, pkgs, ... }:
+{
+environment.systemPackages = with pkgs; [
     dex
     dunst
     # lgogdownloader
@@ -13,7 +14,7 @@
     gnupg
     libertine # font
     google-fonts
-    mpv
+    mpv  # media player
     ncmpcpp
     networkmanager
     # networkmanager_l2tp
@@ -22,8 +23,9 @@
     # pypi2nix # to convert
     pass
     qtpass
-    ranger
-    termite
+    ranger  # file explorer
+    rofi  # very cool fuzzy searcher
+    termite  # terminal for tile based WMs
     tmux
     vifm
     # vlc
@@ -31,5 +33,7 @@
     # xauth # for 'startx'
     xclip
     xdg-user-dirs
+    xcwd  # returns working directory of focused applications
     # xdg-utils
-]
+];
+}

@@ -200,7 +200,7 @@ Plug 'lyuts/vim-rtags'  " a l'air d'etre le plus complet <leader>ri
 " Plug 'tweekmonster/deoplete-clang2', { 'for': 'c' }
 "
 Plug 'poppyschmo/deoplete-latex', {'for': 'latex'} " not a serious one
-Plug 'zchee/deoplete-jedi', { 'for': 'python'}
+" Plug 'zchee/deoplete-jedi', { 'for': 'python'}
 " }}}
 " Plug 'beloglazov/vim-online-thesaurus' " thesaurus => dico dde synonymes
 " Plug 'mattboehm/vim-unstack'  " to see a
@@ -733,6 +733,10 @@ let g:plug_shallow=1
 " dirvish {{{
 let g:dirvish_mode=1
 "}}}
+" echodoc {{{
+let g:echodoc#enable_at_startup=1
+" g:echodoc#type " only for gonvim
+"}}}
 
 " to remove timeout when changing modes
 " if ! has('gui_running')
@@ -868,9 +872,9 @@ endfunc
 
 function! FzfChooseSignifyGitCommit()
 
-  let l:dict = copy(s:opts)
-  let l:dict.sink = funcref('UpdateSignifyBranch')
-  call fzf#run(d)
+  let dict = copy(s:opts)
+  let dict.sink = funcref('UpdateSignifyBranch')
+  call fzf#run(dict)
 endfunction
 
 " function! GetQfHistory()
@@ -1048,6 +1052,9 @@ let g:deoplete#enable_refresh_always=0
 let g:deoplete#keyword_patterns = {}
 let g:deoplete#keyword_patterns.gitcommit = '.+'
 
+" call deoplete#custom#set('jedi', 'debug_enabled', 1)
+" call deoplete#enable_logging('DEBUG', '/tmp/deoplete.log')
+
 " fails
 " call deoplete#util#set_pattern(
 "   \ g:deoplete#omni#input_patterns,
@@ -1146,6 +1153,7 @@ let s:neomake_exclude_ft = ['cpp', 'java' ]
 " let g:neomake_tex_checkers = [ '' ]
 " let g:neomake_tex_enabled_makers = []
 let g:neomake_tex_enabled_makers = []
+let g:neomake_python_enabled_makers = ['mypy']
 
 " removed chktex because of silly errors
 " let g:neomake_tex_enabled_makers = ['chktex']
@@ -1188,10 +1196,10 @@ call neomake#configure#automake('w')
 " }}}
 " Airline {{{
 let g:airline_extensions = ['obsession', 'tabline'] " to speed up things
-let g:airline#extensions#default#layout = [
-    \ [ 'a', 'b', 'c' ],
-    \ [ 'x', 'y', 'z', 'error', 'warning' ]
-    \ ]
+" let g:airline#extensions#default#layout = [
+"     \ [ 'a', 'b', 'c' ],
+"     \ [ 'x', 'y', 'z', 'error', 'warning' ]
+"     \ ]
 
 " control which sections get truncated and at what width. >
 let g:airline#extensions#default#section_truncate_width = {
@@ -1220,7 +1228,9 @@ let g:airline#extensions#default#layout = [
 call airline#parts#define_function('neomake_custom', 'NeomakeStatusLine')
 let g:airline_section_y = airline#section#create_right(['neomake_custom','ffenc'])
 " let g:airline_section_y = airline#section#create_right(['neomake','ffenc'])
-
+call airline#parts#define_function('grepper', 'grepper#statusline')
+let g:airline_section_x = airline#section#create_right(['grepper'])
+" grepper#statusline()
  " airline#section#create(['windowswap', 'obsession', '%3p%%'.spc, 'linenr', 'maxlinenr', spc.':%3v'])
 " let g:airline_section_z = airline#section#create_right(['linenumber'])
 " airline extensions {{{
@@ -1586,28 +1596,29 @@ runtime plugin/grepper.vim  " init grepper with defaults
 let g:grepper.tools += ["rgall"]
 let g:grepper.rgall = copy(g:grepper.rg)
 let g:grepper.rgall.grepprg .= ' --no-ignore'
+let g:grepper.highlight = 1
+let g:grepper.open = 0
+let g:grepper.switch = 1
+
 nnoremap <leader>git :Grepper -tool git -open -nojump
 nnoremap <leader>ag  :Grepper -tool ag  -open -switch
 nnoremap <leader>rg  :Grepper -tool rg -open -switch
 
-" autocmd User Grepper launch notif
 
-" let g:grepper.side = 0
-" let g:grepper.switch = 1
 
-" let g:grepper.rgall = copy(g:grepper.rg)
-" let g:grepper.rgall.grepprg .= ' --no-ignore'
-" let g:grepper.tools += ['rgall']
-" let g:grepper.tools += "localgrep"
-" let g:grepper = {
-"   \ 'tools': ['git', 'localgrep', 'ag', 'rg', 'grep'],
-"   \ 'localgrep': {
-"       \ 'grepprg':    'ag --vimgrep $* $.',
-"       \                    'grepformat': '%f:%l:%c:%m,%f:%l:%m',
-"       \                    'escape':     '\^$.*+?()[]{}|'
-"     \ }
-"     \}
-" -noswitch
+" highlight! link QuickFixLine Normal
+
+
+function! OnGrepperCompletion()
+  copen
+  hi link GrepperNormal   StatusLineNC
+  " guibg=lightblue
+  setlocal winhl=Normal:GrepperNormal
+" call notify#emitNotification('grepper', 'Search finished') | 
+endfunction
+
+autocmd User Grepper call OnGrepperCompletion()
+
 nmap gs <plug>(GrepperOperator)
 xmap gs <plug>(GrepperOperator)
 
@@ -1686,9 +1697,9 @@ let g:signify_sign_show_text = 0
 
  " foire dans le commit suivant
  " \'git': 'git diff --no-color --no-ext-diff -U0 bfb9cf1 -- %f'
-let g:signify_vcs_cmds = {
-      \'git': 'git diff --no-color --no-ext-diff -U0 master -- %f'
-  \}
+" let g:signify_vcs_cmds = {
+"       \'git': 'git diff --no-color --no-ext-diff -U0 master -- %f'
+"   \}
 " git log --format=format:%H $FILE | xargs -L 1 git blame $FILE -L $LINE,$LINE
 
 let g:signify_cursorhold_insert     = 0
@@ -1878,7 +1889,7 @@ nnoremap <Leader><Leader>k :Dasht!<Space>
 set hidden " you can open a new buffer even if current is unsaved (error E37)
 
 " draw a line on 80th column
-set colorcolumn=80
+set colorcolumn=80,100
 
 " default behavior for diff=filler,vertical
 set diffopt=filler,vertical
@@ -2013,7 +2024,6 @@ map <Leader>N :bNext<CR>
 " map <Leader>p :bprevious<CR>
 map <Leader>$ :Obsession<CR>
 " map <Leader>d :bdelete<CR>
-" TODO trigger a menu in vim
 
 "http://stackoverflow.com/questions/28613190/exclude-quickfix-buffer-from-bnext-bprevious
 
@@ -2101,6 +2111,13 @@ menu ]Spell.hidden should be hidden
 
 menu Trans.FR :te trans :fr <cword><CR>
 tmenu Trans.FR Traduire vers le francais
+
+" upstream those to grepper
+menu Grepper.Search\ in\ current\ Buffer :Grepper -switch -buffer
+menu Grepper.Search\ across\ Buffers :Grepper -switch -buffers
+menu Grepper.Search\ across\ directory :Grepper 
+menu Grepper.Autoopen\ results :let g:grepper.open=1<CR>
+
 " tabulation-related menu {{{2
 " menu Search.CurrentBuffer :exe Grepper -grepprg rg --vimgrep $* $.
 " menu Search.AllBuffers :exe Grepper -grepprg rg --vimgrep $* $+

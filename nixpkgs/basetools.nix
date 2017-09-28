@@ -1,5 +1,6 @@
-pkgs: with pkgs;
-[
+{ pkgs, ... }:
+{
+environment.systemPackages = with pkgs; [
      automake
      autoconf
      autojump
@@ -26,4 +27,5 @@ pkgs: with pkgs;
      vim
      wget
      zsh
-]
+];
+}

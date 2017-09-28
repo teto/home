@@ -1,4 +1,10 @@
 self: super:
+let
+  # see https://github.com/NixOS/nixpkgs/issues/29605#issuecomment-332474682
+  # In lib/sources.nix we have "cleanSource = builtins.filterSource cleanSourceFilter;"
+  # TODO builtins.filterSource (p: t: lib.cleanSourceFilter p t && baseNameOf p != "build")
+  filter-cmake = builtins.filterSource (p: t: super.lib.cleanSourceFilter p t && baseNameOf p != "build");
+in
 {
   i3dev = super.i3.overrideAttrs (oldAttrs: {
 	  name = "i3-dev";
@@ -14,8 +20,7 @@ self: super:
   neovim = super.neovim.override ( {
     vimAlias = false;
     withPython = false;
-    extraPython3Packages = [ (super.pkgs.python36.withPackages (ps: [
-       ps.pandas ps.python ps.jedi ]))];
+    extraPython3Packages = with super.python3Packages;[ pandas python jedi];
     });
 
   neovim-local = self.neovim.overrideAttrs (oldAttrs: {
@@ -75,7 +80,7 @@ self: super:
   wireshark-dev = super.wireshark.overrideAttrs (oldAttrs: {
     # pygobject2
     name = "wireshark-dev";
-    src = super.lib.cleanSource ~/wireshark;
+    src = filter-cmake ~/wireshark;
     # TODO
     postBuild = ''
       export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:./run"
@@ -84,6 +89,18 @@ self: super:
     # preUnpack = "echo 'hello world'; rm -rf __nix_qt5__";
     # propagatedBuildInputs = with super.pythonPackages; oldAttrs.propagatedBuildInputs ++ [ keyring pygobject3  ];
   });
+
+
+  tshark-local = super.tshark.overrideAttrs (oldAttrs: {
+    # pygobject2
+    name = "tshark-dev";
+    src = filter-cmake ~/wireshark;
+    # TODO
+    postBuild = ''
+      export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:./run"
+      '';
+  });
+
 
   # tshark-dev = super.tshark.overrideAttrs (oldAttrs: {
   #   # pygobject2
