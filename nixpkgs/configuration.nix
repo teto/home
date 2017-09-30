@@ -8,7 +8,7 @@ let
   # hopefully it can be generated as dirname <nixos-config>
   configDir = /home/teto/dotfiles/nixpkgs;
 in
-{
+rec {
   imports =
     [ # Include the results of the hardware scan.
       /etc/nixos/hardware-configuration.nix
@@ -97,7 +97,39 @@ in
     pkgs.qutebrowser
    ];
 
-  environment.variables.EDITOR="nvim";
+   # TODO it appears in /etc/bashrc !
+   # TODO look up $ZDOTDIR/aliases.sh
+   environment.shellAliases = {
+      gl="git log";
+      gs="git status";
+      gd="git diff";
+      gc="git commit";
+      gcm="git commit -m";
+      gca="git commit -a";
+      gb="git branch";
+      gch="git checkout";
+   };
+
+   # variables set by PAM
+  environment.sessionVariables = {};
+  # TODO checj where it's set
+  environment.variables = {
+    EDITOR="nvim";
+    BROWSER="qutebrowser";
+    XDG_CONFIG_HOME="$HOME/.config";
+    ZDOTDIR="$XDG_CONFIG_HOME/zsh";
+    # XDG_CONFIG_HOME=""; # TODO can we use HOME ?
+    # ZDOTDIR would be cool too
+    # LESSHISTFILE
+    # INPUTRC
+    # TODO install mpd service
+    # MPD_HOST = "${config.passwords.mpd}@infinisil.io";
+# MPD_PORT = "${toString config.mpd.port}";
+  };
+  # stick to sh as it's shell independant
+  environment.extraInit = ''
+    # TODO source fzf
+    '';
 
   # List services that you want to enable:
   services = {
@@ -157,6 +189,25 @@ in
 
   programs.zsh.enable = true;
   programs.zsh.enableCompletion = true;
+  programs.zsh.syntaxHighlighting.enable = false;
+  # programs.zsh.shellAliases
+  programs.zsh.shellAliases= environment.shellAliases // {
+    se="sudoedit";
+  # ++ [
+# alias -s html=qutebrowser
+# alias -s json=nvim
+# alias -s Vagrantfile=nvim
+# alias -s py=python3
+# alias -s rb=ruby
+# alias -s png=sxiv
+# alias -s jpg=xdg-open
+# alias -s gif=xdg-open
+# alias -s avi=mpv
+# alias -s mp3=mocp
+# alias -s pdf=xdg-open
+# alias -s doc=xdg-open
+# alias -s docx=xdg-open
+  };
 
   # for nix-shell
   programs.bash.enableCompletion = true;

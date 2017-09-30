@@ -9,30 +9,30 @@ if (( ! $+commands[curl] )); then
   return 1
 fi
 
-transfer() { 
+transfer() {
     # check arguments
-    if [ $# -eq 0 ]; 
-    then 
+    if [ $# -eq 0 ];
+    then
         echo "No arguments specified. Usage:\necho transfer /tmp/test.md\ncat /tmp/test.md | transfer test.md"
         return 1
     fi
 
     # get temporarily filename, output is written to this file show progress can be showed
     tmpfile=$( mktemp -t transferXXX )
-    
+
     # upload stdin or file
     file=$1
 
-    if tty -s; 
-    then 
-        basefile=$(basename "$file" | sed -e 's/[^a-zA-Z0-9._-]/-/g') 
+    if tty -s;
+    then
+        basefile=$(basename "$file" | sed -e 's/[^a-zA-Z0-9._-]/-/g')
 
         if [ ! -e $file ];
         then
             echo "File $file doesn't exists."
             return 1
         fi
-        
+
         if [ -d $file ];
         then
             # zip directory and transfer
@@ -44,15 +44,15 @@ transfer() {
             # transfer file
             curl --progress-bar --upload-file "$file" "https://transfer.sh/$basefile" >> $tmpfile
         fi
-    else 
+    else
         # transfer pipe
         curl --progress-bar --upload-file "-" "https://transfer.sh/$file" >> $tmpfile
     fi
-   
-    # cat output link
-    cat $tmpfile
+
+    # cat has problem with encoding, doesn't display the content :s
+    more "$tmpfile"
 
     # cleanup
-    rm -f $tmpfile
+    rm -f "$tmpfile"
 }
 

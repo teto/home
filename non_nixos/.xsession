@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# TODO move to nixosconfig
+
 # Enable zapping (C-A-<Bksp> kills X)
 setxkbmap -option terminate:ctrl_alt_bksp
 

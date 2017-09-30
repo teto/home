@@ -22,7 +22,7 @@ delay=2
 # EDITOR='gvim -f'
 
 # Browser
-BROWSER='chromium'
+# BROWSER='chromium'
 
 ## Misc settings
 

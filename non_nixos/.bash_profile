@@ -3,13 +3,13 @@
 # PATH {{{
 #PATH="/usr/lib/w3m:$PATH"
 # PATH="$PATH:/home/teto/mptcpanalyzer"
-PATH="$HOME/.local/bin:$PATH"
-PATH="$HOME/.cabal/bin:$PATH" # haskell
+# PATH="$HOME/.local/bin:$PATH"
+# PATH="$HOME/.cabal/bin:$PATH" # haskell
 # PATH="$HOME/dotfiles/bin:$PATH"
 PATH+=":$HOME/rofi-scripts"
-PATH+=":$XDG_DATA_HOME/fzf/bin"
-PATH+=":/home/teto/texlive/bin/x86_64-linux"
-PATH+=":/home/teto/dasht/bin"
+# PATH+=":$XDG_DATA_HOME/fzf/bin"
+# PATH+=":/home/teto/texlive/bin/x86_64-linux"
+# PATH+=":/home/teto/dasht/bin"
 
 
 # set PATH so it includes user's private bin if it  exists
@@ -21,7 +21,6 @@ export PATH
 # }}}
 # simulate XDG for some apps {{{
 export WEECHAT_HOME="$XDG_CONFIG_HOME/weechat"
-export INPUTRC="$XDG_CONFIG_HOME/readline"
 export TIGRC_USER="$XDG_CONFIG_HOME/tig/tigrc"
 export LESSHISTFILE="$XDG_CACHE_HOME/less/history"
 export NOTMUCH_CONFIG="$XDG_CONFIG_HOME/notmuch/notmuchrc"
@@ -42,8 +41,7 @@ export JUPYTER_CONFIG_DIR=${XDG_CONFIG_HOME:-$HOME/.config}/jupyter
 # fi
 # }}}
 
-export VAGRANT_DEFAULT_PROVIDER="libvirt"
-export LD_LIBRARY_PATH="/usr/local/lib:$LD_LIBRARY_PATH"
+# export LD_LIBRARY_PATH="/usr/local/lib:$LD_LIBRARY_PATH"
 export GOPATH="$HOME/go"
 
 # to prevent a matplotlib pb
@@ -59,9 +57,9 @@ export MAILDIR="$HOME/Maildir"
 export CARGO_HOME="$XDG_DATA_HOME/../"
 
 # default programs {{{
-export EDITOR="nvim"
+# export EDITOR="nvim"
 export TERMINAL="termite"
-export BROWSER="x-www-browser"
+# export BROWSER="x-www-browser"
 # export BROWSER="qutebrowser --backend webengine"
 # }}}
 
@@ -77,8 +75,8 @@ export MANPATH="$HOME/dasht/man:$MANPATH"
 
 # FZF {{{
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
-# export FZF_DEFAULT_OPTS=" --exact"
 export FZF_DEFAULT_OPTS=" --exact"
+# export FZF_DEFAULT_OPTS=" --exact"
 #--color=
 # }}}
 # for DCE/ns3 experiments {{{

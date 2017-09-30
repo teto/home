@@ -54,6 +54,8 @@ in
      # src = super.lib.cleanSource ~/nixops;
    });
 
+   # super.callPackage mptcpanalyzer.nix
+
 #    haskellPackages.yst = super.haskellPackages.yst.overrideAttrs (oldAttrs: {
 # 	  name = "yst";
 #       src = super.fetchFromGitHub {

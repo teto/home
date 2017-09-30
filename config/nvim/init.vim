@@ -90,7 +90,7 @@ Plug 'mhinz/vim-signify' " Indicate changed lines within a file using a VCS.
 " Plug 'moznion/github-commit-comment.vim' " last update from 2014
 " Plug 'dhruvasagar/vim-open-url' " gB/gW to open browser
 Plug 'Carpetsmoker/xdg_open.vim' " overrides gx
-" Plug 'mattn/gist-vim' " to gist
+" Plug 'mattn/gist-vim' " to gist requires webapi
 " provider dependant {{{
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 " Plug '~/vim-config'
