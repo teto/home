@@ -103,12 +103,35 @@ rec {
       gl="git log";
       gs="git status";
       gd="git diff";
+      ga="git add";
       gc="git commit";
       gcm="git commit -m";
       gca="git commit -a";
       gb="git branch";
       gch="git checkout";
+      grv="git remote -v";
+      gpu="git pull";
+      gcl="git clone";
+      gta="git tag -a -m";
+      gbr="git branch";
+      nxi="nix-env -iA";
+      nxu="nix-env -e";
+      nxs="nix-shell -A";
+      nxp="nixops ";
+
+# Mail {{{
+# todo use nix-shell
+#  ml="python2.7 -malot -n ~/.config/notmuch/notmuchrc_pro"
+#  mg="python2.7 -malot -n ~/.config/notmuch/notmuchrc"
+#  astroperso="astroid"
+#  astropro="astroid -c ~/.config/astroid/config_pro"
+# }}}
+
    };
+
+
+   # let's be fucking crazy
+   environment.enableDebugInfo = true;
 
    # variables set by PAM
   environment.sessionVariables = {};
@@ -117,7 +140,10 @@ rec {
     EDITOR="nvim";
     BROWSER="qutebrowser";
     XDG_CONFIG_HOME="$HOME/.config";
+    XDG_CACHE_HOME="$HOME/.cache";
+    XDG_DATA_HOME="$HOME/.local/share";
     ZDOTDIR="$XDG_CONFIG_HOME/zsh";
+    # FZF_PATH="";  # can be done via FZF_PATH="$(fzf-share)" too but po
     # XDG_CONFIG_HOME=""; # TODO can we use HOME ?
     # ZDOTDIR would be cool too
     # LESSHISTFILE
@@ -147,8 +173,10 @@ rec {
 
     openssh.enable = false;
     locate.enable = true;
+
   };
 
+  services.udisks2.enable = true;
 
   # Enable the X11 windowing system.
   services.xserver = {
@@ -187,6 +215,12 @@ rec {
   services.xserver.windowManager.i3.enable = true;
   services.xserver.windowManager.i3.package = pkgs.i3;
 
+
+  services.mpd = {
+    enable = true;
+    # musicDirectory
+  };
+
   programs.zsh.enable = true;
   programs.zsh.enableCompletion = true;
   programs.zsh.syntaxHighlighting.enable = false;
@@ -216,23 +250,28 @@ rec {
 
   # for nixops
   virtualisation.libvirtd.enable = true;
-  # programs.wireshark.enable = true; # installs setuid
-  # programs.wireshark.package = ; # which one
+  programs.wireshark.enable = true; # installs setuid
+  programs.wireshark.package = pkgs.wireshark; # which one
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.defaultUserShell = "/run/current-system/sw/bin/zsh";
   users.extraUsers.teto = {
      isNormalUser = true;
      uid = 1000;
-     extraGroups = ["wheel" "networkmanager" "libvirtd" "adbusers"];
+     extraGroups = ["wheel" "networkmanager" "libvirtd" "adbusers" "wireshark" ];
 	 shell = pkgs.zsh;
   };
   nixpkgs.config = {
 	allowUnfree = true;
-    permittedInsecurePackages = [
-          "webkitgtk-2.4.11"
-            ];
+    # permittedInsecurePackages = [
+    #       "webkitgtk-2.4.11"
+    #         ];
+    firefox.enableAdobeFlash = true;
+    chromium.enablePepperFlash = true;
+    # programs.chromium.enableAdobeFlash = true; # for Chromium
+
   };
+
 
   # pkgs.lib.mkBefore
   # options.nix.nixPath.default
@@ -241,6 +280,7 @@ rec {
     "nixpkgs=/home/teto/nixpkgs"
     "nixos-config=/home/teto/dotfiles/nixpkgs/configuration.nix:/nix/var/nix/profiles/per-user/root/channels"
   ] ;
+
 
   system = {
     # stateVersion = "17.03"; # why would I want to keep that ?

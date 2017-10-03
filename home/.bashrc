@@ -73,7 +73,8 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # Alias definitions.
-source "$ZDOTDIR/aliases.sh"
+# problematic when in --pure mode
+# source "$ZDOTDIR/aliases.sh"
 
 # FZF_PATH="$XDG_DATA_HOME/fzf/shell/"
 # if [ "$ON_NIXOS" ]; then
@@ -82,6 +83,4 @@ source "$ZDOTDIR/aliases.sh"
 source "$FZF_PATH/completion.bash"
 source "$FZF_PATH/key-bindings.bash"
 
-# source /usr/share/autojump/autojump.sh
 
-# [ -f ~/.fzf.bash ] && source ~/.fzf.bash

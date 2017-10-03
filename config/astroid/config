@@ -1,7 +1,7 @@
 {
     "astroid": {
         "config": {
-            "version": "7"
+            "version": "9"
         },
         "notmuch_config": "\/home\/teto\/.config\/notmuch\/notmuchrc",
         "debug": {
@@ -117,7 +117,9 @@
             "signature_file": "",
             "signature_default_on": "true",
             "signature_attach": "false",
-            "always_gpg_sign": "false"
+            "always_gpg_sign": "false",
+            "signature_separate": "false",
+            "select_query": ""
         }
     },
     "startup": {

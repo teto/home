@@ -2,7 +2,7 @@
 # See https://wiki.archlinux.org/index.php/XDG_Base_Directory_support#Partial to get aound
 #  non XDG conformant programs
 
-emulate sh -c "source ~/.bash_profile"
+# emulate sh -c "source ~/.bash_profile"
 
 # check we are on nixos
 #########################################
