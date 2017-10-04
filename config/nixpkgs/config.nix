@@ -6,50 +6,51 @@
 	allowBroken = true;
 	allowUnfree = true;
 
-    nvimEnv = with pkgs; buildEnv {
-      name = "nvim";
-      paths = [
-        neovim
-        neovim-remote
-        python3Packages.neovim
-        python3Packages.neovim-remote
-        universal-ctags
-        zeal
-        # or xclip
-      ];
-    };
+    packageOverrides = pkgs: with pkgs; {
+      nvimEnv =  buildEnv {
+        name = "nvim";
+        paths = [
+          neovim
+          neovim-remote
+          python3Packages.neovim
+          python3Packages.neovim-remote
+          universal-ctags
+          zeal
+          # or xclip
+        ];
+      };
 
-    mainEnv = with pkgs;buildEnv {
-      name = "dev";
-      paths = [
-        dropbox
-        fzf
-        greenclip # todo get from haskell
-        libreoffice
-        mendeley
-        nautilus
-        xev
-        qtpass
-        #
+      mainEnv = with pkgs;buildEnv {
+        name = "dev";
+        paths = [
+          dropbox
+          fzf
+          pkgs.haskellPackages.greenclip # todo get from haskell
+          libreoffice
+          mendeley
+          gnome3.nautilus
+          xorg.xev
+          qtpass
+          #
 
-        xclip
-        zathura
-        zotero
-        # offlineimap # python 2 only
-        # alot # python 2 only
-      ];
-    };
-    devEnv = with pkgs;buildEnv {
-      name = "dev";
-      paths = [
+          xclip
+          zathura
+          zotero
+          # offlineimap # python 2 only
+          # alot # python 2 only
+        ];
+      };
+      devEnv = with pkgs;buildEnv {
+        name = "dev";
+        paths = [
 
-        wireshark
-        # offlineimap # python 2 only
-        # alot # python 2 only
-        # leafnode dovecot22 dovecot_pigeonhole fetchmail procmail w3m
-        # mairix mutt msmtp lbdb contacts spamassassin
-      ];
-    };
+          wireshark
+          # offlineimap # python 2 only
+          # alot # python 2 only
+          # leafnode dovecot22 dovecot_pigeonhole fetchmail procmail w3m
+          # mairix mutt msmtp lbdb contacts spamassassin
+        ];
+      };
     imEnv = pkgs.buildEnv {
       name = "im";
       paths = with pkgs.python27Packages; [
@@ -75,4 +76,5 @@
     #     # mairix mutt msmtp lbdb contacts spamassassin
     #   ];
     # };
+  };
 }
