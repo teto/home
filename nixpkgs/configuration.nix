@@ -162,6 +162,7 @@ rec {
       gnome-keyring.enable = true;
       seahorse.enable = true;
       at-spi2-core.enable = true; # for keyring it seems
+	  gnome-disks.enable = false;
     };
 
     # Enable CUPS to print documents.
@@ -176,7 +177,6 @@ rec {
   };
 
   # udisks2 GUI
-  services.gnome3.gnome-disks.enable = true;
   services.udisks2.enable = true;
 
   # Enable the X11 windowing system.

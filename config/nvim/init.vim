@@ -318,7 +318,7 @@ Plug 'tpope/vim-rhubarb' " github support in fugitive, use |i_CTRL-X_CTRL-O|
 "Plug 'junegunn/vim-peekaboo' " gives a preview of buffers when pasting
 Plug 'mhinz/vim-randomtag', { 'on': 'Random' } " Adds a :Random function that launches help at random
 Plug 'majutsushi/tagbar' " , {'on': 'TagbarToggle'} disabled lazyloading else it would not work with statusline
-Plug 'git@github.com:machakann/vim-highlightedyank.git' " highlit
+Plug 'achakann/vim-highlightedyank' " highlit
 " Plug 'haya14busa/vim-operator-flashy' " Flash selection on copy
 
 
@@ -354,7 +354,7 @@ Plug 'kshenoy/vim-signature' " display marks in gutter, love it
 " cmdheight
 Plug 'Shougo/echodoc.vim'
 Plug 'teto/QuickFixCurrentNumber' " use :Cnr :Cgo instead of :cnext etc...
-Plug 'git@github.com:vim-scripts/ingo-library.git' " DEPENDANCY of QuickFixCurrentNumber
+Plug 'vim-scripts/ingo-library' " DEPENDANCY of QuickFixCurrentNumber
 "Plug 'tomtom/quickfixsigns_vim'
 Plug 'nacitar/a.vim' " :A
 Plug 'mhinz/vim-rfc', { 'on': 'RFC' }
