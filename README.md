@@ -53,6 +53,23 @@ Some packages will need you to set a specific target with stow -t <TARGET> <PKG>
 You may also need to copy (sensitive) files from the "examples" folder and update their content, for instance the xdg config.
 Same for the "etc" folder that reminds you of some interesting configurations for "/etc" files.
 
+
+
+Install on nixos
+====
+Nixos.org is a tough but really cool distribution that I've adopted.
+The goal is to have nix bootstrap the config.
+For now it mostly boostrap the system part.
+
+$ git clone https://github.com/teto/home.git dotfiles
+\# nixos-rebuild switch --upgrade -I
+nixos-config=$PWD/dotfiles/nixpkgs/configuration.nix
+
+
+The rest of the instructions is more relevant for other distributions like
+Ubuntu.
+
+
 To change your shell to zsh:
 ====
 chsh -s /bin/zsh <login>

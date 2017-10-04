@@ -83,6 +83,7 @@ rec {
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   environment.systemPackages = [
+    pkgs.gnumake
   # let
   #   # basePkgs = import "${configDir}/basetools.nix" pkgs;
   #   desktopPkgs = import "${configDir}/desktopPkgs.nix" pkgs;
@@ -254,12 +255,16 @@ rec {
   programs.wireshark.package = pkgs.wireshark; # which one
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
+  # per-user package is quite cool too
+  # https://github.com/NixOS/nixpkgs/pull/25712/files
   users.defaultUserShell = "/run/current-system/sw/bin/zsh";
   users.extraUsers.teto = {
      isNormalUser = true;
      uid = 1000;
      extraGroups = ["wheel" "networkmanager" "libvirtd" "adbusers" "wireshark" ];
 	 shell = pkgs.zsh;
+     # TODO import it from desktopPkgs for instance ?
+     packages = [ pkgs.termite pkgs.sxiv pkgs.firefox ];
   };
   nixpkgs.config = {
 	allowUnfree = true;
