@@ -194,14 +194,12 @@ rec {
     xkbOptions = "eurosign:e";
     # xkbOptions = "eurosign:e, caps:swapescape";
 
-    synaptics = {
+    libinput = {
       enable = true;
-      twoFingerScroll = true;
-      buttonsMap = [ 1 3 2 ];
-      accelFactor = "0.0055";
-      minSpeed = "0.95";
-      maxSpeed = "1.55";
-      palmDetect = true;
+      # twoFingerScroll = true;
+      disableWhileTyping = true;
+      naturalScrolling = true;
+      # accelSpeed = "1.55";
     };
     # ${pkgs.xorg.xset}/bin/xset r rate 200 50
     displayManager.sessionCommands = ''
@@ -254,12 +252,18 @@ rec {
   programs.wireshark.enable = true; # installs setuid
   programs.wireshark.package = pkgs.wireshark; # which one
 
+
+  # seemingly working for chromium only, check for firefox
+  programs.browserpass.enable = true;
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   # per-user package is quite cool too
   # https://github.com/NixOS/nixpkgs/pull/25712/files
   users.defaultUserShell = "/run/current-system/sw/bin/zsh";
+  # when set to false, /etc/passwd and /etc/group will be congruent to your NixOS configuration
+  # users.mutableUsers = false;
   users.extraUsers.teto = {
-     isNormalUser = true;
+     isNormalUser = true; # creates home/ sets default shell
      uid = 1000;
      extraGroups = [
        "wheel" # for sudo
@@ -269,6 +273,8 @@ rec {
        "wireshark"
        "plugdev" # for udiskie
      ];
+     # once can set initialHashedPassword too
+     initialPassword = "test";
 	 shell = pkgs.zsh;
      # TODO import it from desktopPkgs for instance ?
      packages = [

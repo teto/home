@@ -101,6 +101,11 @@ in
     postBuild = ''
       export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:./run"
       '';
+      # write in .nvimrc
+    nvimrc = super.pkgs.writeText "_nvimrc" ''
+        " to deal with cmake build folder
+        let &makeprg="make -C build"
+      '';
   });
 
 
