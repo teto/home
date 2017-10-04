@@ -16,6 +16,7 @@ environment.systemPackages = with pkgs; [
 	 # git-extras # does not find it (yet)
      gnum4 # hum
      gnupg
+     gnumake
      ipsecTools # does it provide ipsec ?
      neovim
      pkgconfig

@@ -14,6 +14,7 @@ rec {
       /etc/nixos/hardware-configuration.nix
       ./mptcp-kernel.nix
       ./basetools.nix
+      ./extraTools.nix
       ./desktopPkgs.nix
     ];
 
@@ -83,7 +84,6 @@ rec {
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   environment.systemPackages = [
-    pkgs.gnumake
   # let
   #   # basePkgs = import "${configDir}/basetools.nix" pkgs;
   #   desktopPkgs = import "${configDir}/desktopPkgs.nix" pkgs;
@@ -94,8 +94,6 @@ rec {
     # astroid # might require a rebuild of webkit => too big
     # gnomecontrolcenter
     # cups-pk-helper # to add printer through gnome control center
-    pkgs.ncdu
-    pkgs.qutebrowser
    ];
 
    # TODO it appears in /etc/bashrc !
@@ -177,6 +175,8 @@ rec {
 
   };
 
+  # udisks2 GUI
+  services.gnome3.gnome-disks.enable = true;
   services.udisks2.enable = true;
 
   # Enable the X11 windowing system.
@@ -261,10 +261,20 @@ rec {
   users.extraUsers.teto = {
      isNormalUser = true;
      uid = 1000;
-     extraGroups = ["wheel" "networkmanager" "libvirtd" "adbusers" "wireshark" ];
+     extraGroups = [
+       "wheel" # for sudo
+       "networkmanager"
+       "libvirtd" # for nixops
+       "adbusers" # for android tools
+       "wireshark"
+       "plugdev" # for udiskie
+     ];
 	 shell = pkgs.zsh;
      # TODO import it from desktopPkgs for instance ?
-     packages = [ pkgs.termite pkgs.sxiv pkgs.firefox ];
+     packages = [
+       pkgs.termite pkgs.sxiv pkgs.firefox
+        pkgs.qutebrowser
+     ];
   };
   nixpkgs.config = {
 	allowUnfree = true;
