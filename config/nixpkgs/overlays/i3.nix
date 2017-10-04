@@ -131,15 +131,16 @@ in
   });
 
   fcitx-master = super.fcitx.overrideAttrs (oldAttrs: rec {
-  #   # todo optional
-  #   # super.stdenv.lib.optionalString "${super.xkeyboard_config}"
-  #   # XKB_RULES_XML_FILE
+    # this one is treacherous see
+    # https://github.com/fcitx/fcitx/issues/367#event-1277674192
+    # eg; it will try to download some files while building
+    # see target spell-en-download
     version = "master";
     src = super.pkgs.fetchFromGitHub {
       owner = "fcitx";
       repo = "fcitx";
       rev = "${version}";
-      sha256 = "0d6scbs7drsj4lmvl8y9gignrnzkgr34c61694l3japmvq590nd3";
+      sha256 = "0ndz5ipimfpymhx3vf4rijw3166ygk3jv4np1nahrynlxpkmf027";
     };
 
     # nativeBuildInputs = [ super.pkgs.xkeyboard_config ] + oldAttrs.nativeBuildInputs;
