@@ -145,7 +145,7 @@ in
     };
 
     # nativeBuildInputs = [ super.pkgs.xkeyboard_config ] + oldAttrs.nativeBuildInputs;
-    nativeBuildInputs = oldAttrs.nativeBuildInputs ++  [ super.pkgs.xkeyboard_config ];
+    nativeBuildInputs = oldAttrs.nativeBuildInputs ++  [ super.pkgs.xkeyboard_config super.pkgs.curl super.pkgs.cacert ];
 
     extraCmds = ''
     export CFLAGS="-D_DEBUG"

@@ -7,58 +7,54 @@
 	allowUnfree = true;
 
     packageOverrides = pkgs: with pkgs; {
-      nvimEnv =  buildEnv {
-        name = "nvim";
+      desktopEnv =  buildEnv {
+        name = "desktop-env";
         paths = [
-          neovim
-          neovim-remote
-          python3Packages.neovim
-          python3Packages.neovim-remote
-          universal-ctags
-          zeal
           # or xclip
-        ];
-      };
-
-      mainEnv = with pkgs;buildEnv {
-        name = "dev";
-        paths = [
+          buku
           dropbox
-          fzf
-          pkgs.haskellPackages.greenclip # todo get from haskell
+          haskellPackages.greenclip # todo get from haskell
           libreoffice
           mendeley
           gnome3.nautilus
-          xorg.xev
+          gnome3.gnome_control_center
+          transmission_gtk
           qtpass
-          #
-
+          qutebrowser
+          xorg.xev
           xclip
           zathura
           zotero
-          # offlineimap # python 2 only
-          # alot # python 2 only
+          qtcreator
+          zeal
         ];
       };
-      devEnv = with pkgs;buildEnv {
-        name = "dev";
-        paths = [
 
-          wireshark
-          # offlineimap # python 2 only
-          # alot # python 2 only
-          # leafnode dovecot22 dovecot_pigeonhole fetchmail procmail w3m
-          # mairix mutt msmtp lbdb contacts spamassassin
+      devEnv = with pkgs;buildEnv {
+        name = "dev-env";
+        paths = [
+          gdb
+          gitAndTools.git-extras
+          mypy
+          neovim
+          neovim-remote
+          nix-prefetch-scripts
+          nix-index
+          python3Packages.neovim
+          python3Packages.pycodestyle
+          pstree
+          slack
+          universal-ctags
         ];
       };
     imEnv = pkgs.buildEnv {
-      name = "im";
-      paths = with pkgs.python27Packages; [
+      name = "im-env";
+      paths = with pkgs; [
         astroid
         offlineimap # python 2 only
-        alot # python 2 only
-        python3Packages.khal
-        python3Packages.khard
+        python27Packages.alot # python 2 only
+        khal
+        khard
         msmtp
         newsbeuter
         notmuch
@@ -67,7 +63,6 @@
         # mairix mutt msmtp lbdb contacts spamassassin
       ];
     };
-    # # qutebrowser
     # internetEnv = pkgs.buildEnv {
     #   name = "internet";
     #   paths = [
