@@ -24,6 +24,7 @@ environment.systemPackages = with pkgs; [
      ripgrep
      stow
      sudo
+     tig
 	 unzip
      vim
      wget

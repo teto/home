@@ -62,8 +62,9 @@ The goal is to have nix bootstrap the config.
 For now it mostly boostrap the system part.
 
 $ git clone https://github.com/teto/home.git dotfiles
+$ make nixpkgs
 \# nixos-rebuild switch --upgrade -I
-nixos-config=$PWD/dotfiles/nixpkgs/configuration.nix
+nixos-config=$PWD/dotfiles/nixpkgs/configuration.nix -I nixpkgs=$HOME/nixpkgs
 
 
 The rest of the instructions is more relevant for other distributions like
