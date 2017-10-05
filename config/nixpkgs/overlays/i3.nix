@@ -27,6 +27,7 @@ in
 	  name = "neovim-local";
       # unpackPhase = ":"; # cf https://nixos.wiki/wiki/Packaging_Software
 	  src = super.lib.cleanSource ~/neovim;
+      meta.priority=0;
 	});
 
   neovim-master = self.neovim.overrideAttrs (oldAttrs: {

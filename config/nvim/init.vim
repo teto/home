@@ -157,7 +157,8 @@ Plug 'tpope/vim-scriptease' " Adds command such as :Messages
 Plug 'metakirby5/codi.vim', {'on': 'Codi'} " repl
 Plug 'hkupty/iron.nvim', {'do': ':UpdateRemotePlugins'}
 " Plug 'jalvesaq/vimcmdline' " no help files, mappings clunky
-Plug 'https://gitlab.com/HiPhish/repl.nvim'
+" github mirror of Plug 'http://gitlab.com/HiPhish/repl.nvim'
+" Plug 'HiPhish/repl.nvim'
 " vimcmdline mappings{{{
 let cmdline_map_start          = "<LocalLeader>s"
 let cmdline_map_send           = "<Space>"
@@ -318,7 +319,7 @@ Plug 'tpope/vim-rhubarb' " github support in fugitive, use |i_CTRL-X_CTRL-O|
 "Plug 'junegunn/vim-peekaboo' " gives a preview of buffers when pasting
 Plug 'mhinz/vim-randomtag', { 'on': 'Random' } " Adds a :Random function that launches help at random
 Plug 'majutsushi/tagbar' " , {'on': 'TagbarToggle'} disabled lazyloading else it would not work with statusline
-Plug 'achakann/vim-highlightedyank' " highlit
+Plug 'machakann/vim-highlightedyank' " highlit
 " Plug 'haya14busa/vim-operator-flashy' " Flash selection on copy
 
 

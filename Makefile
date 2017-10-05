@@ -9,6 +9,8 @@ DCE_FOLDER = "${HOME}/dce"
 NIXOPS_FOLDER = "${HOME}/nixops"
 WIRESHARK_FOLDER = "${HOME}/wireshark"
 KERNEL_FOLDER = "${HOME}/mptcp"
+NIXPKGS_FOLDER = "${HOME}/nixpkgs"
+NEOVIM_FOLDER = "${HOME}/neovim"
 
 
 
@@ -90,6 +92,15 @@ $(WIRESHARK_FOLDER):
 	git remote add upstream https://code.wireshark.org/review/p/wireshark.git
 	cd -
 
+nixpkgs: | $(NIXPKGS_FOLDER)
+$(NIXPKGS_FOLDER):
+	git clone https://github.com/NixOS/nixpkgs.git "${NIXPKGS_FOLDER}"
+	cd "${NIXPKGS_FOLDER}"
+ 	git remote add channels git://github.com/NixOS/nixpkgs-channels.git
+	git remote update channels
+ 	git remote add gh git://github.com/teto/nixpkgs.git
+	cd -
+
 nixops: | $(NIXOPS_FOLDER)
 $(NIXOPS_FOLDER):
 	git clone git@github.com:teto/nixops.git "${NIXOPS_FOLDER}"
@@ -101,11 +112,10 @@ $(KERNEL_FOLDER):
 	git remote add upstream https://github.com/multipath-tcp/mptcp.git
 	cd -
 
-neovim:
-	if [ ! -d "${HOME}/neovim" ]; then
-		git clone git@github.com:teto/neovim.git ${HOME}/neovim
-		# todo add remotes
-	fi
+neovim: | $(NEOVIM_FOLDER)
+$(NEOVIM_FOLDER):
+	git clone git@github.com:teto/neovim.git "${NEOVIM_FOLDER}"
+
 repositories: dce ns3 neovim wireshark
 	# git clone git@github.com:teto/ns-3-dce.git dce
 	# git clone git@github.com:teto/ns-3-dce.git 
