@@ -11,12 +11,6 @@ PATH+=":$HOME/rofi-scripts"
 # PATH+=":/home/teto/texlive/bin/x86_64-linux"
 # PATH+=":/home/teto/dasht/bin"
 
-
-# set PATH so it includes user's private bin if it  exists
-if [ -d "$HOME/bin" ] ; then
-    PATH="$HOME/bin:$PATH"
-fi
-#echo $PATH
 export PATH
 # }}}
 # simulate XDG for some apps {{{
@@ -26,27 +20,14 @@ export LESSHISTFILE="$XDG_CACHE_HOME/less/history"
 export NOTMUCH_CONFIG="$XDG_CONFIG_HOME/notmuch/notmuchrc"
 export INPUTRC="$XDG_CONFIG_HOME/inputrc"
 export IPYTHONDIR="$XDG_CONFIG_HOME/ipython"
-export JUPYTER_CONFIG_DIR=${XDG_CONFIG_HOME:-$HOME/.config}/jupyter
+export JUPYTER_CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/jupyter"
 #}}}
-# PYTHONPATH {{{
-# no need to export, install in develop mode
-# PYTHONPATH="$PYTHONPATH:$HOME/i3ipc-python"
-# export PYTHONPATH
-
-# lldb python plugin is badly installed/setup
-# location=$(lldb -P)
-# location="/usr/lib/x86_64-linux-gnu/python2.7/site-packages:/usr/lib/python2.7/dist-packages/lldb-3.8"
-# if [ $? -eq 0 ]; then
-# 	PYTHONPATH="${location}:$PYTHONPATH"
-# fi
-# }}}
 
 # export LD_LIBRARY_PATH="/usr/local/lib:$LD_LIBRARY_PATH"
 export GOPATH="$HOME/go"
 
 # to prevent a matplotlib pb
 export MPLBACKEND="Qt5Agg"
-#export ZDOTDIR="$HOME/.zsh"
 
 # TODO try removing ?
 export MUTT="$XDG_CONFIG_HOME/mutt"

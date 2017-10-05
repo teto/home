@@ -34,7 +34,7 @@ let
           universal-ctags
           ];
     imPkgs = with pkgs; [
-        astroid
+        # astroid
         offlineimap # python 2 only
         python27Packages.alot # python 2 only
         khal
@@ -62,14 +62,36 @@ in
   };
 
   # TODO doesn't find ZDOTDIR (yet)
-  # programs.zsh = {
-  #   enable = true;
-  # };
+  # TODO maybe we can add to PATH 
+  # - https://github.com/carnager/rofi-scripts.git
+  # https://github.com/carnager/buku_run
+  home.sessionVariables = {
+
+    WEECHAT_HOME="$XDG_CONFIG_HOME/weechat";
+    TIGRC_USER="$XDG_CONFIG_HOME/tig/tigrc";
+    LESSHISTFILE="$XDG_CACHE_HOME/less/history";
+    NOTMUCH_CONFIG="$XDG_CONFIG_HOME/notmuch/notmuchrc";
+    INPUTRC="$XDG_CONFIG_HOME/inputrc";
+    IPYTHONDIR="$XDG_CONFIG_HOME/ipython";
+    JUPYTER_CONFIG_DIR="$XDG_CONFIG_HOME/jupyter";
+    # PATH+=":$HOME/rofi-scripts";
+    MUTT="$XDG_CONFIG_HOME/mutt";
+    MAILDIR="$HOME/Maildir";
+  };
+
+  programs.zsh = {
+    enable = true;
+    shellAliases = {
+      #mostly for testin
+      dfh="df --human-readable";
+      duh="du --human-readable";
+    };
+  };
   # programs.git = {
-  #   enable = true;
-  #   userName = "Jane Doe";
-  #   userEmail = "jane.doe@example.org";
-  # };
+    #   enable = true;
+    #   userName = "Jane Doe";
+    #   userEmail = "jane.doe@example.org";
+    # };
 
   # tray is enabled by default
   services.udiskie = {
