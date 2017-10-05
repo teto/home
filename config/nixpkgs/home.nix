@@ -9,7 +9,9 @@ let
           mendeley
           gnome3.nautilus
           # gnome3.gnome_control_center
+          scrot
           transmission_gtk
+          translate-shell
           qtpass
           qutebrowser
           xorg.xev
@@ -20,6 +22,7 @@ let
           zeal
   ];
   devPkgs = with pkgs; [
+          editorconfig-core-c
           gdb
           gitAndTools.git-extras
           mypy
@@ -30,6 +33,7 @@ let
           python3Packages.neovim
           python3Packages.pycodestyle
           pstree
+          rpl
           slack
           universal-ctags
           ];
@@ -42,6 +46,7 @@ let
         msmtp
         newsbeuter
         notmuch
+        vdirsyncer
         weechat
         # leafnode dovecot22 dovecot_pigeonhole fetchmail procmail w3m
         # mairix mutt msmtp lbdb contacts spamassassin
