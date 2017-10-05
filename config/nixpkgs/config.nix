@@ -25,6 +25,8 @@
           xclip
           zathura
           zotero
+          qtcreator
+          zeal
         ];
       };
 
@@ -40,11 +42,9 @@
           nix-index
           python3Packages.neovim
           python3Packages.pycodestyle
-          qtcreator
           pstree
           slack
           universal-ctags
-          zeal
         ];
       };
     imEnv = pkgs.buildEnv {
