@@ -168,14 +168,6 @@ in
     ++ (with super.pkgs.python3Packages; [ requests_oauthlib keyring secretstorage ]) ++ [ super.pkgs.liboauth ];
   });
 
-  # fcitx = super.fcitx.overrideAttrs (oldAttrs: {
-  # # #   # todo optional
-  # # #   # super.stdenv.lib.optionalString "${super.xkeyboard_config}"
-  # # #   # XKB_RULES_XML_FILE
-  #   src= /home/teto/fcitx;
-  # # # cmakeFlags = ''
-  # # #   -D_DEBUG
-  # # #   '' + oldAttrs.cmakeFlags;
-
-  # });
+  dce = super.callPackage /home/teto/dce {};
+  mptcpanalyzer = super.callPackage /home/teto/mptcpanalyzer {};
 }
