@@ -374,9 +374,9 @@ fi
 . "$FZF_PATH/completion.zsh"
 . "$FZF_PATH/key-bindings.zsh"
 # https://junegunn.kr/2016/07/fzf-git
-. "$HOME/fzf-gems/fzf_git_functions.sh"
+. "$XDG_CONFIG_HOME/fzf-gems/fzf_git_functions.sh"
 # you can list the actually bound keys with bindkey -M viins
-. "$HOME/fzf-gems/fzf_git_keybindings.zsh"
+. "$XDG_CONFIG_HOME/fzf-gems/fzf_git_keybindings.zsh"
 # }}}
 
 # _gnu_generic should work if program accepts --help

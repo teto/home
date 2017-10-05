@@ -21,7 +21,7 @@ config:
 	stow -t "$(XDG_CONFIG_HOME)" config
 
 bin:
-	mkdir -p "$(XDG_DATA_HOME)/../bin" 
+	mkdir -p "$(XDG_DATA_HOME)/../bin"
 	stow -t "$(XDG_DATA_HOME)/../bin" bin
 
 local:
@@ -66,12 +66,7 @@ fonts:
 	echo "list fonts with fc-list"
 	fc-cache -vf
 
-git:
-	echo "Install git hooks for this repo"
-
-# alternatives:
-# 	 sudo update-alternatives --install $(which x-www-browser) x-www-browser $(which qutebrowser) 0
-xdg:
+# xdg:
 	# Example: xdg-mime default qutebrowser.desktop text/html
 
 nautilus:
@@ -85,6 +80,7 @@ $(DCE_FOLDER):
 	git clone git@github.com:teto/ns-3-dce.git "${DCE_FOLDER}"
 
 wireshark: | $(WIRESHARK_FOLDER)
+
 $(WIRESHARK_FOLDER):
 	git clone git@github.com:teto/wireshark.git "${WIRESHARK_FOLDER}"
 	cd "${WIRESHARK_FOLDER}"
@@ -93,12 +89,13 @@ $(WIRESHARK_FOLDER):
 	cd -
 
 nixpkgs: | $(NIXPKGS_FOLDER)
+
 $(NIXPKGS_FOLDER):
 	git clone https://github.com/NixOS/nixpkgs.git "${NIXPKGS_FOLDER}"
 	cd "${NIXPKGS_FOLDER}"
- 	git remote add channels git://github.com/NixOS/nixpkgs-channels.git
+	git remote add channels git://github.com/NixOS/nixpkgs-channels.git
 	git remote update channels
- 	git remote add gh git://github.com/teto/nixpkgs.git
+	git remote add gh git://github.com/teto/nixpkgs.git
 	cd -
 
 nixops: | $(NIXOPS_FOLDER)
