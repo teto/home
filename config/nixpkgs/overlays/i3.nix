@@ -171,6 +171,6 @@ in
 
   # define it only if ns3 exists
   # dce = super.stdenv.lib.optional (super.pkgs.ns3 != null) super.callPackage /home/teto/dce { pkgs = super;  };
-  dce = if (super.pkgs ? ns3) then super.callPackage /home/teto/dce { pkgs = super.pkgs;  } else null;
-  mptcpanalyzer = super.callPackage /home/teto/mptcpanalyzer { pkgs = super.pkgs;  };
+  dce = if (super.pkgs ? ns3) then super.callPackage ../dce.nix { pkgs = super.pkgs;  } else null;
+  mptcpanalyzer = super.callPackage ../mptcpanalyzer.nix { pkgs = super.pkgs;  };
 }

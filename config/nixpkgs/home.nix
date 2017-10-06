@@ -1,12 +1,16 @@
 { pkgs, ... }:
 
 let
+  # extraPackages = with pkgs; [
+  #   alacritty
+  #   ];
   desktopPkgs = with pkgs; [
           buku
           dropbox
           haskellPackages.greenclip # todo get from haskell
           libreoffice
           mendeley
+          nox
           gnome3.nautilus
           # gnome3.gnome_control_center
           qtpass
@@ -24,12 +28,14 @@ let
   ];
   devPkgs = with pkgs; [
           editorconfig-core-c
+          exa
           gdb
           gitAndTools.git-extras
           mypy
           neovim
           neovim-remote
           nix-prefetch-scripts
+          nix-repl
           nix-index
           python3Packages.neovim
           python3Packages.pycodestyle

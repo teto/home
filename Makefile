@@ -78,7 +78,10 @@ dce: | $(DCE_FOLDER)
 	@echo "cloning dce"
 
 $(DCE_FOLDER):
-	git clone git@github.com:teto/ns-3-dce.git "${DCE_FOLDER}"
+	git clone -o gh git@github.com:teto/ns-3-dce.git "${DCE_FOLDER}"
+	cd "${DCE_FOLDER}"
+	git remote add upstream git@github.com:direct-code-execution/ns-3-dce.git
+	cd -
 
 wireshark: | $(WIRESHARK_FOLDER)
 
