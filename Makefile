@@ -53,9 +53,10 @@ cache:
 	mkdir -p ${XDG_CACHE_HOME}/less ${XDG_CACHE_HOME}/mptcpanalyzer
 
 mail:
-	mkdir -p ${MAILDIR}/pro/.notmuch
 	mkdir -p ${MAILDIR}/gmail/.notmuch
-	ln -s ${HOME}/dotfiles/hooks_pro ${MAILDIR}/lip6/.notmuch/hooks
+	mkdir -p ${MAILDIR}/iij/.notmuch
+	ln -s ${MAILDIR}/pro ${MAILDIR}/iij
+	ln -s ${HOME}/dotfiles/hooks_pro ${MAILDIR}/pro/.notmuch/hooks
 	ln -s ${HOME}/dotfiles/hooks_perso ${MAILDIR}/gmail/.notmuch/hooks
 	notmuch --config=${XDG_CONFIG_HOME}/notmuch/notmuchrc new
 	notmuch --config=${XDG_CONFIG_HOME}/notmuch/notmuchrc_pro new

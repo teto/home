@@ -140,21 +140,18 @@ rec {
 
   # variables set by PAM
   environment.sessionVariables = {};
-  # TODO checj where it's set
+
   environment.variables = {
     EDITOR="nvim";
     BROWSER="qutebrowser";
     XDG_CONFIG_HOME="$HOME/.config";
     XDG_CACHE_HOME="$HOME/.cache";
     XDG_DATA_HOME="$HOME/.local/share";
+  # TODO Move to user config aka homemanager
     ZDOTDIR="$XDG_CONFIG_HOME/zsh";
     HISTFILE="$XDG_CACHE_HOME/bash_history";
     INPUTRC="$XDG_CONFIG_HOME/inputrc";
     LESS=""; # options to pass to less automatically
-    # MAILCHECK
-    # FZF_PATH="";  # can be done via FZF_PATH="$(fzf-share)" too but po
-    LESSHISTFILE="$XDG_CACHE_HOME/lesshst";
-    NOTMUCH_CONFIG="$XDG_CONFIG_HOME/notmuch/notmuchrc"
   };
   # stick to sh as it's shell independant
   # load fzf-share

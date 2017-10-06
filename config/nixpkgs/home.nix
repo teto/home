@@ -83,6 +83,7 @@ in
     # PATH+=":$HOME/rofi-scripts";
     MUTT="$XDG_CONFIG_HOME/mutt";
     MAILDIR="$HOME/Maildir";
+    PATH="$HOME/rofi-scripts:$HOME/buku_run:$PATH";
   };
 
   programs.zsh = {
