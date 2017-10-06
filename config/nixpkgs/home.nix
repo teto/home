@@ -57,9 +57,9 @@ in
   #     epkgs.magit
   #   ];
   # };
-  programs.rofi = {
-    enable = true;
-  };
+  # programs.rofi = {
+  #   enable = true;
+  # };
 
   # TODO doesn't find ZDOTDIR (yet)
   # programs.zsh = {
