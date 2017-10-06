@@ -9,16 +9,17 @@ let
           mendeley
           gnome3.nautilus
           # gnome3.gnome_control_center
+          qtpass
+          qutebrowser
+          qtcreator
+          sublime3
           scrot
           transmission_gtk
           translate-shell
-          qtpass
-          qutebrowser
           xorg.xev
           xclip
           zathura
           zotero
-          qtcreator
           zeal
   ];
   devPkgs = with pkgs; [

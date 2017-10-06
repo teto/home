@@ -1614,7 +1614,9 @@ function! OnGrepperCompletion()
   copen
   hi link GrepperNormal   StatusLineNC
   " guibg=lightblue
-  setlocal winhl=Normal:GrepperNormal
+  if exists("winhl")
+    setlocal winhl=Normal:GrepperNormal
+  endif
 " call notify#emitNotification('grepper', 'Search finished') | 
 endfunction
 
