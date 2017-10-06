@@ -169,6 +169,6 @@ in
     ++ (with super.pkgs.python3Packages; [ requests_oauthlib keyring secretstorage ]) ++ [ super.pkgs.liboauth ];
   });
 
-  dce = super.callPackage /home/teto/dce {};
-  mptcpanalyzer = super.callPackage /home/teto/mptcpanalyzer {};
+  # dce = super.callPackage /home/teto/dce {};
+  # mptcpanalyzer = super.callPackage /home/teto/mptcpanalyzer {};
 }

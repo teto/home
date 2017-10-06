@@ -1,3 +1,4 @@
+#  vim: set et fdm=marker fenc=utf-8 ff=unix sts=2 sw=2 ts=4 :
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
@@ -99,6 +100,7 @@ rec {
    # TODO it appears in /etc/bashrc !
    # TODO look up $ZDOTDIR/aliases.sh
    environment.shellAliases = {
+      # git variables {{{
       gl="git log";
       gs="git status";
       gd="git diff";
@@ -113,10 +115,14 @@ rec {
       gcl="git clone";
       gta="git tag -a -m";
       gbr="git branch";
+      # }}}
+
+      # nix aliases {{{
       nxi="nix-env -iA";
       nxu="nix-env -e";
       nxs="nix-shell -A";
       nxp="nixops ";
+      # }}}
 
 # Mail {{{
 # todo use nix-shell
@@ -132,7 +138,7 @@ rec {
    # let's be fucking crazy
    environment.enableDebugInfo = true;
 
-   # variables set by PAM
+  # variables set by PAM
   environment.sessionVariables = {};
   # TODO checj where it's set
   environment.variables = {
@@ -142,16 +148,16 @@ rec {
     XDG_CACHE_HOME="$HOME/.cache";
     XDG_DATA_HOME="$HOME/.local/share";
     ZDOTDIR="$XDG_CONFIG_HOME/zsh";
+    HISTFILE="$XDG_CACHE_HOME/bash_history";
+    INPUTRC="$XDG_CONFIG_HOME/inputrc";
+    LESS=""; # options to pass to less automatically
+    # MAILCHECK
     # FZF_PATH="";  # can be done via FZF_PATH="$(fzf-share)" too but po
-    # XDG_CONFIG_HOME=""; # TODO can we use HOME ?
-    # ZDOTDIR would be cool too
-    # LESSHISTFILE
-    # INPUTRC
-    # TODO install mpd service
-    # MPD_HOST = "${config.passwords.mpd}@infinisil.io";
-# MPD_PORT = "${toString config.mpd.port}";
+    LESSHISTFILE="$XDG_CACHE_HOME/lesshst";
+    NOTMUCH_CONFIG="$XDG_CONFIG_HOME/notmuch/notmuchrc"
   };
   # stick to sh as it's shell independant
+  # load fzf-share
   environment.extraInit = ''
     # TODO source fzf
     '';
