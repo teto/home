@@ -41,6 +41,7 @@ home:
 
 keyring:
 	echo "Setup keyrings"
+	echo " nix-shell -p python36Packages.secretstorage -p python36Packages.keyring -p python36Packages.pygobject3"
 	#keyring set
 	keyring set gmail login
 	keyring set gmail password

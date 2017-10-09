@@ -8,6 +8,16 @@
 let
   # hopefully it can be generated as dirname <nixos-config>
   configDir = /home/teto/dotfiles/nixpkgs;
+
+  # TODO to get
+  # mynixpkgs = import nixRepo {};
+  # nixRepo = pkgs.fetchFromGitHub {
+  #   owner = "teto";
+  #   repo = "teto";
+  #   rev = "aa3535cee57479a8f0721c3e05c4e91966ecdcd6";
+  #   sha256 = "0h9x8vdw0rrnkrnhljc8mm3zbi27nk8f9q7nkm9rv5mjkrzn67ng";
+  # };
+  # then install mynixpkgs.pkg
 in
 rec {
   imports =
@@ -100,6 +110,8 @@ rec {
    # TODO it appears in /etc/bashrc !
    # TODO look up $ZDOTDIR/aliases.sh
    environment.shellAliases = {
+    nixpaste="curl -F 'text=<-' http://nixpaste.lbr.uno";
+
       # git variables {{{
       gl="git log";
       gs="git status";
@@ -201,7 +213,7 @@ rec {
       enable = true;
       # twoFingerScroll = true;
       disableWhileTyping = true;
-      naturalScrolling = true;
+      naturalScrolling = false;
       # accelSpeed = "1.55";
     };
     # ${pkgs.xorg.xset}/bin/xset r rate 200 50
@@ -225,6 +237,7 @@ rec {
 
   programs.zsh.enable = true;
   programs.zsh.enableCompletion = true;
+  programs.zsh.enableAutosuggestions = true;
   programs.zsh.syntaxHighlighting.enable = false;
   # programs.zsh.shellAliases
   programs.zsh.shellAliases= environment.shellAliases // {
