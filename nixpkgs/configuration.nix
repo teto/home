@@ -20,6 +20,10 @@ let
   # then install mynixpkgs.pkg
 in
 rec {
+
+
+  networking.hostName = "jedha"; # Define your hostname.
+
   imports =
     [ # Include the results of the hardware scan.
       /etc/nixos/hardware-configuration.nix
@@ -27,6 +31,8 @@ rec {
       ./basetools.nix
       ./extraTools.nix
       ./desktopPkgs.nix
+      # symlink towards a config
+      ./machine-specific.nix
     ];
 
   hardware.opengl.driSupport32Bit = true;
@@ -56,7 +62,6 @@ rec {
   # boot.kernelPackages = pkgs.linuxPackages_mptcp;
 
 
-  networking.hostName = "jedha"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true;
   networking.firewall.checkReversePath = false; # for nixops
@@ -203,7 +208,13 @@ rec {
         enable = false;
         user = "teto";
       };
+      # job.logXsession = true; # writes into ~/.xsessions-errors
+      # enableCtrlAltBackspace = false;
+      # exportConfiguration = false;
+      # for the smaller setup setup the favorite mode to 1920 x 1080
+       # screenSection = '' '';
     };
+
     layout = "fr";
     # TODO swap esc/shift
     xkbOptions = "eurosign:e";
@@ -216,6 +227,8 @@ rec {
       naturalScrolling = false;
       # accelSpeed = "1.55";
     };
+
+    # todo run greenclip 
     # ${pkgs.xorg.xset}/bin/xset r rate 200 50
     displayManager.sessionCommands = ''
     ${pkgs.networkmanagerapplet}/bin/nm-applet &
