@@ -179,7 +179,10 @@ rec {
       drivers = [ pkgs.gutenprint ];
     };
 
-    openssh.enable = false;
+    openssh = {
+      permitRootLogin = false;
+    enable = false;
+    };
     locate.enable = true;
 
   };
@@ -298,6 +301,12 @@ rec {
         pkgs.qutebrowser
      ];
   };
+
+  nix.sshServe = {
+    enable  = true;
+    keys = [ "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDmt8RlXKAn7zryenWl8e8RDLZ+WLzIsdqwDMbvynF/Eg3zraxWpm80cXlIrGAayHf8eTjmWXoDnWBuS3MHjv9nTWHliJVyHC5/aImrGflkGpWWpBvxg79bIz06QusqBx4Vfq6NKn/GS6L8KevhtMToLmEOyRuB3Gs1FWsHb/EbqKp5hzDYS3yVMjVkF+cubQiK/DEvcio/G/vSDrBcPE8kUZcf3ibsBruUa3tCh4RTmaLnoIbkOX/ColTWPIOhMlnYeOOzZ22ln6cgBgarjU/DEpb4iu0qSjTArNV58mUpqzEUU0sTq2sunK0hdEDkxWw/3qpv6MI276AQ4QrY2wTN teto@jedha" ];
+  };
+
   nixpkgs.config = {
 	allowUnfree = true;
     # permittedInsecurePackages = [
@@ -323,8 +332,8 @@ rec {
     # stateVersion = "17.03"; # why would I want to keep that ?
     copySystemConfiguration = true;
     autoUpgrade = {
-      channel= "https://nixos.org/channels/nixos-unstable";
-      enable = false;
+      channel= "https://nixos.org/channels/nixpkgs-unstable";
+      enable = true;
     };
   };
   # The NixOS release to be compatible with for stateful data such as databases.
