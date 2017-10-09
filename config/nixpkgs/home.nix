@@ -53,6 +53,7 @@ let
         msmtp
         newsbeuter
         notmuch
+        slack
         vdirsyncer
         weechat
         # leafnode dovecot22 dovecot_pigeonhole fetchmail procmail w3m

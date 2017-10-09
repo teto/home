@@ -144,23 +144,15 @@ in
       sha256 = "0ndz5ipimfpymhx3vf4rijw3166ygk3jv4np1nahrynlxpkmf027";
     };
 
-    # nativeBuildInputs = [ super.pkgs.xkeyboard_config ] + oldAttrs.nativeBuildInputs;
-    # cabundle
     nativeBuildInputs = oldAttrs.nativeBuildInputs ++  [ super.pkgs.xkeyboard_config super.pkgs.wget super.pkgs.cacert ];
 
     extraCmds = ''
     export CFLAGS="-D_DEBUG"
     '';
 
-  #   prePatch = ''
-  #     substituteInPlace src/module/xkb/xkb.c \
-  #       --replace /usr/share/X11/xkb/rules/evdev.xml ${super.xkeyboard_config}/share/X11/xkb/rules/evdev.xml;
-  #     '';
-
-  #   cmakeFlags = builtins.concatStringsSep  "" [oldAttrs.cmakeFlags "-DXKB_RULES_XML_FILE=" "${super.xkeyboard_config}/share/X11/xkb/rules/evdev.xml\n"];
   });
 
-  vdirsyncer-custom = super.vdirsyncer.overrideAttrs(oldAttrs: rec {
+  vdirsyncer = super.vdirsyncer.overrideAttrs(oldAttrs: rec {
 
     doCheck=false; # doesn't work, checkPhase still happens
     checkPhase="echo 'ignored'";

@@ -3,17 +3,28 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, options, ... }:
+{ config, pkgs, options, lib, ... }:
 
 let
   # hopefully it can be generated as dirname <nixos-config>
   configDir = /home/teto/dotfiles/nixpkgs;
+
+  # TODO to get
+  # mynixpkgs = import nixRepo {};
+  # nixRepo = pkgs.fetchFromGitHub {
+  #   owner = "teto";
+  #   repo = "teto";
+  #   rev = "aa3535cee57479a8f0721c3e05c4e91966ecdcd6";
+  #   sha256 = "0h9x8vdw0rrnkrnhljc8mm3zbi27nk8f9q7nkm9rv5mjkrzn67ng";
+  # };
+  # then install mynixpkgs.pkg
 in
 rec {
 
 
   networking.hostName = "jedha"; # Define your hostname.
 
+  
   imports =
     [ # Include the results of the hardware scan.
       /etc/nixos/hardware-configuration.nix
@@ -22,8 +33,7 @@ rec {
       ./extraTools.nix
       ./desktopPkgs.nix
       # symlink towards a config
-      ./machine-specific.nix
-    ];
+    ] ++ lib.optionals (builtins.pathExists ./machine-specific.nix) [ ./machine-specific.nix ];
 
   hardware.opengl.driSupport32Bit = true;
   hardware.pulseaudio.support32Bit = true;
@@ -105,6 +115,9 @@ rec {
    # TODO it appears in /etc/bashrc !
    # TODO look up $ZDOTDIR/aliases.sh
    environment.shellAliases = {
+     # TODO won't work in bash
+    # nixpaste="curl -F 'text=<-' http://nixpaste.lbr.uno";
+
       # git variables {{{
       gl="git log";
       gs="git status";
@@ -215,7 +228,7 @@ rec {
       enable = true;
       # twoFingerScroll = true;
       disableWhileTyping = true;
-      naturalScrolling = true;
+      naturalScrolling = false;
       # accelSpeed = "1.55";
     };
 
@@ -241,6 +254,7 @@ rec {
 
   programs.zsh.enable = true;
   programs.zsh.enableCompletion = true;
+  programs.zsh.enableAutosuggestions = true;
   programs.zsh.syntaxHighlighting.enable = false;
   # programs.zsh.shellAliases
   programs.zsh.shellAliases= environment.shellAliases // {

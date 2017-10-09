@@ -96,7 +96,7 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 " Plug '~/vim-config'
 Plug '~/nvim-palette', { 'do': ':UpdateRemotePlugins' }
 Plug 'LnL7/vim-nix', {'for': 'nix'}
-Plug 'romainl/vim-qf' " can create pb with neomake
+" Plug 'romainl/vim-qf' " can create pb with neomake
 " Plug 'gelguy/Cmd2.vim' " test
 Plug 'editorconfig/editorconfig-vim' " not remote but involves python
 " provider
@@ -1366,6 +1366,8 @@ let g:startify_disable_at_vimenter = 0
 let g:startify_session_dir = $XDG_DATA_HOME.'/nvim/sessions'
 let g:startify_bookmarks = [
       \ {'i': $XDG_CONFIG_HOME.'/i3/config.main'},
+      \ {'h': $XDG_CONFIG_HOME.'/nixpkgs/home.nix'},
+      \ {'c': 'dotfiles/home/configuration.nix'},
       \ {'z': $XDG_CONFIG_HOME.'/zsh/'},
       \ {'m': $XDG_CONFIG_HOME.'/mptcpanalyzer/config'},
       \ {'n': $XDG_CONFIG_HOME.'/nvim/config'},
