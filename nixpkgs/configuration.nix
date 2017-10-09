@@ -3,7 +3,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, options, ... }:
+{ config, pkgs, options, lib, ... }:
 
 let
   # hopefully it can be generated as dirname <nixos-config>
@@ -24,6 +24,7 @@ rec {
 
   networking.hostName = "jedha"; # Define your hostname.
 
+  
   imports =
     [ # Include the results of the hardware scan.
       /etc/nixos/hardware-configuration.nix
@@ -32,8 +33,7 @@ rec {
       ./extraTools.nix
       ./desktopPkgs.nix
       # symlink towards a config
-      ./machine-specific.nix
-    ];
+    ] ++ lib.optionals (builtins.pathExists ./machine-specific.nix) [ ./machine-specific.nix ];
 
   hardware.opengl.driSupport32Bit = true;
   hardware.pulseaudio.support32Bit = true;
@@ -115,7 +115,8 @@ rec {
    # TODO it appears in /etc/bashrc !
    # TODO look up $ZDOTDIR/aliases.sh
    environment.shellAliases = {
-    nixpaste="curl -F 'text=<-' http://nixpaste.lbr.uno";
+     # TODO won't work in bash
+    # nixpaste="curl -F 'text=<-' http://nixpaste.lbr.uno";
 
       # git variables {{{
       gl="git log";
