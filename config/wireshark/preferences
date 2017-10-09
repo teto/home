@@ -1,4 +1,4 @@
-# Configuration file for Wireshark 2.5.0.
+# Configuration file for Wireshark 2.4.1.
 #
 # This file is regenerated each time preferences are saved within
 # Wireshark. Making manual changes should be safe, however.
@@ -211,7 +211,7 @@ gui.color_filter_bg.deprecated: ffffaf
 
 # Packet list hidden columns
 # List all columns to hide in the packet list.
-gui.column.hidden: %Cus:ip.src:1:R,%Cus:ip.dst:1:R,%Cus:ip.dst:1:R
+gui.column.hidden: %Cus:ip.src:1:R,%Cus:ip.dst:1:R
 
 # Packet list column format
 # Each pair of strings consists of a column title and its format
@@ -263,14 +263,6 @@ gui.layout_type: 2
 # Enable Packet List Separator
 # TRUE or FALSE (case-insensitive)
 #gui.packet_list_separator.enabled: FALSE
-
-# Show selected packet in the Status Bar
-# TRUE or FALSE (case-insensitive)
-#gui.show_selected_packet.enabled: FALSE
-
-# Show file load time in the Status Bar
-# TRUE or FALSE (case-insensitive)
-#gui.show_file_load_time.enabled: FALSE
 
 # Show related packet indicators in the first column
 # TRUE or FALSE (case-insensitive)
@@ -370,6 +362,98 @@ console.log.level: 64
 # Save arguments on start of capture
 # TRUE or FALSE (case-insensitive)
 #extcap.gui_save_on_start: TRUE
+
+# Remote SSH server address
+# A string
+#extcap.ssh.remotehost: 
+
+# Remote SSH server port
+# A string
+#extcap.ssh.remoteport: 22
+
+# Remote SSH server username
+# A string
+#extcap.ssh.remoteusername: teto
+
+# Path to SSH private key
+# A string
+#extcap.ssh.sshkey: 
+
+# Remote interface
+# A string
+#extcap.ssh.remoteinterface: eth0
+
+# Remote capture command
+# A string
+#extcap.ssh.remotecapturecommand: 
+
+# Use sudo on the remote machine
+# A string
+#extcap.ssh.remotesudo: 
+
+# Remote capture filter
+# A string
+#extcap.ssh.remotefilter: not ((host fe80::a526:bf7:4811:7e4 or host 192.168.122.1 or host 192.168.0.129) and port 22)
+
+# Packets to capture
+# A string
+#extcap.ssh.remotecount: 0
+
+# Max bytes in a packet
+# A string
+#extcap.randpkt.maxbytes: 5000
+
+# Number of packets
+# A string
+#extcap.randpkt.count: 1000
+
+# Random type
+# A string
+#extcap.randpkt.randomtype: false
+
+# All random packets
+# A string
+#extcap.randpkt.allrandom: false
+
+# Type of packet
+# A string
+#extcap.randpkt.type: 
+
+# Listen port
+# A string
+#extcap.udpdump.port: 5555
+
+# Payload type
+# A string
+#extcap.udpdump.payload: data
+
+# Remote SSH server address
+# A string
+#extcap.cisco.remotehost: 
+
+# Remote SSH server port
+# A string
+#extcap.cisco.remoteport: 22
+
+# Remote SSH server username
+# A string
+#extcap.cisco.remoteusername: teto
+
+# Path to SSH private key
+# A string
+#extcap.cisco.sshkey: 
+
+# Remote interface
+# A string
+#extcap.cisco.remoteinterface: 
+
+# Remote capture filter
+# A string
+#extcap.cisco.remotefilter: deny tcp host fe80::a526:bf7:4811:7e4 any eq 22, deny tcp any eq 22 host fe80::a526:bf7:4811:7e4, deny tcp host 192.168.122.1 any eq 22, deny tcp any eq 22 host 192.168.122.1, deny tcp host 192.168.0.129 any eq 22, deny tcp any eq 22 host 192.168.0.129, permit ip any any
+
+# Packets to capture
+# A string
+#extcap.cisco.remotecount: 
 
 ####### Name Resolution ########
 
@@ -1175,10 +1259,6 @@ console.log.level: 64
 # A decimal number
 #cflow.max_template_fields: 60
 
-# Whether the Netflow/Ipfix dissector should reassemble messages spanning multiple TCP segments.  To use this option, you must also enable "Allow subdissectors to reassemble TCP streams" in the TCP protocol settings.
-# TRUE or FALSE (case-insensitive)
-#cflow.desegment: TRUE
-
 # The type of CHDLC frame checksum (none, 16-bit, 32-bit)
 # One of: None, 16-Bit, 32-Bit
 # (case-insensitive).
@@ -1439,6 +1519,10 @@ console.log.level: 64
 # Whether the DNS dissector should reassemble messages spanning multiple TCP segments. To use this option, you must also enable "Allow subdissectors to reassemble TCP streams" in the TCP protocol settings.
 # TRUE or FALSE (case-insensitive)
 #dns.desegment_dns_messages: TRUE
+
+# Whether or not to validate the Header Check Sequence
+# TRUE or FALSE (case-insensitive)
+#docsis.check_fcs: TRUE
 
 # Specifies that decryption should be attempted on all packets, even if the session initialization wasn't captured.
 # TRUE or FALSE (case-insensitive)
@@ -1818,9 +1902,9 @@ console.log.level: 64
 # TRUE or FALSE (case-insensitive)
 #llcgprs.autodetect_cipher_bit: FALSE
 
-# Help for debug...
+# Whether the Gryphon dissector should desegment all messages spanning multiple TCP segments
 # TRUE or FALSE (case-insensitive)
-#gquic.debug.quic: FALSE
+#gryphon.desegment: TRUE
 
 # No description
 # TRUE or FALSE (case-insensitive)
@@ -2338,10 +2422,6 @@ console.log.level: 64
 # (case-insensitive).
 #iso8583.binencode: Bin data represented as Hex Ascii characters
 
-# File containing a translation from object ID to string
-# A path to a file
-#isobus.vt.object_ids: 
-
 # Note national variants may not be fully supported
 # One of: ITU Standard, French National Standard, Israeli National Standard, Russian National Standard, Japan National Standard, Japan National Standard (TTC)
 # (case-insensitive).
@@ -2576,6 +2656,10 @@ console.log.level: 64
 # TRUE or FALSE (case-insensitive)
 #mac-lte.show_bsr_median: FALSE
 
+# The name of the file containing the mate module's configuration
+# A path to a file
+#mate.config: 
+
 # Decode control data received on "usb.control" with an unknown interface class as MBIM
 # TRUE or FALSE (case-insensitive)
 #mbim.control_decode_unknown_itf: FALSE
@@ -2718,11 +2802,11 @@ console.log.level: 64
 # TRUE or FALSE (case-insensitive)
 #mptcp.relative_sequence_numbers: TRUE
 
-# Scales logarithmically with the number of packetsYou need to capture the handshake for this to work."Map TCP subflows to their respective MPTCP connections"
+# You need to capture the handshake for this to work."Map TCP subflows to their respective MPTCP connections"
 # TRUE or FALSE (case-insensitive)
 mptcp.analyze_mappings: TRUE
 
-# (Greedy algorithm: Scales linearly with number of subflows and logarithmic scaling with number of packets)You need to enable DSS mapping analysis for this option to work
+# You need to enable DSS mapping analysis for this option to work
 # TRUE or FALSE (case-insensitive)
 mptcp.intersubflows_retransmission: TRUE
 
@@ -2741,6 +2825,14 @@ mptcp.intersubflows_retransmission: TRUE
 # When dissecting a parameter of a PCFm, if it is a StringList, IntegerList or Integer64 List,  You can limit the number of elements displayed, before it continues with the next Parameter.
 # A decimal number
 #mqpcf.maxlst: 20000
+
+# The TCP port numbers for MessagePack-RPC
+# A string denoting an positive integer range (e.g., "1-20,30-40")
+#msgpack-rpc.tcp_ports: 9003-9004,37800
+
+# The WebSocket port numbers for MessagePack-RPC
+# A string denoting an positive integer range (e.g., "1-20,30-40")
+#msgpack-rpc.ws_ports: 9005-9009
 
 # Specifies that the raw text of the MSRP message should be displayed in addition to the dissection tree
 # TRUE or FALSE (case-insensitive)
@@ -3087,10 +3179,6 @@ mptcp.intersubflows_retransmission: TRUE
 # TRUE or FALSE (case-insensitive)
 #opensafety.classify_transport: TRUE
 
-# Port used by the openSAFETY over UDP data transport
-# A decimal number
-#opensafety_udp.network_udp_port: 9877
-
 # If tls-auth detection fails, you can choose to override detection and set tls-auth yourself
 # TRUE or FALSE (case-insensitive)
 #openvpn.tls_auth_detection_override: FALSE
@@ -3240,10 +3328,26 @@ mptcp.intersubflows_retransmission: TRUE
 # TRUE or FALSE (case-insensitive)
 #pkcs12.try_null_password: FALSE
 
+# Whether the PN-RT summary line should be shown in the protocol tree
+# TRUE or FALSE (case-insensitive)
+#pn_rt.summary_in_tree: TRUE
+
+# Reassemble PNIO Fragments and get them decoded
+# TRUE or FALSE (case-insensitive)
+#pn_rt.desegment: TRUE
+
 # Protocol payload type
 # One of: Data, Sony FeliCa, NXP MiFare, ISO 7816
 # (case-insensitive).
 #pn532.prtype532: Data
+
+# Whether the PNIO dissector is allowed to use detailed PROFIsafe dissection of cyclic data frames
+# TRUE or FALSE (case-insensitive)
+#pn_io.pnio_ps_selection: TRUE
+
+# Select your Networkpath to your GSD-Files.
+# A path to a directory
+#pn_io.pnio_ps_networkpath: 
 
 # Whether the POP dissector should reassemble RETR and TOP responses and spanning multiple TCP segments. To use this option, you must also enable "Allow subdissectors to reassemble TCP streams" in the TCP protocol settings.
 # TRUE or FALSE (case-insensitive)
@@ -3312,6 +3416,10 @@ mptcp.intersubflows_retransmission: TRUE
 # A decimal number
 #quake3.udp.master_port: 27950
 
+# Help for debug...
+# TRUE or FALSE (case-insensitive)
+#quic.debug.quic: FALSE
+
 # Shared secret used to decode User Passwords and validate Response Authenticators
 # A string
 #radius.shared_secret: 
@@ -3364,15 +3472,11 @@ mptcp.intersubflows_retransmission: TRUE
 # TRUE or FALSE (case-insensitive)
 #rlc.header_only_mode: FALSE
 
-# When enabled, RLC will ignore sequence numbers reported in 'Security Mode Command'/'Security Mode Complete' (RRC) messages when checking if frames are ciphered
-# TRUE or FALSE (case-insensitive)
-#rlc.ignore_rrc_cipher_indication: FALSE
-
-# When enabled, RLC will assume all payloads in RLC frames are ciphered
+# When enabled, rlc will assume all data is ciphered
 # TRUE or FALSE (case-insensitive)
 #rlc.ciphered_data: FALSE
 
-# When enabled, RLC will try to decipher data. (Experimental)
+# When enabled, rlc will try to decipher data. (Experimental)
 # TRUE or FALSE (case-insensitive)
 #rlc.try_decipher: FALSE
 
@@ -3471,10 +3575,6 @@ mptcp.intersubflows_retransmission: TRUE
 # Use ipaccess nanoBTS specific definitions for RSL
 # TRUE or FALSE (case-insensitive)
 #gsm_abis_rsl.use_ipaccess_rsl: FALSE
-
-# The Physical Context Information field is not specified This information should be not be analysed by BSC, but merely forwarded from one TRX/channel to another.
-# TRUE or FALSE (case-insensitive)
-#gsm_abis_rsl.dissect_phy_ctx_inf: TRUE
 
 # Specifies whether Wireshark should decode and display sub-messages within BUNDLE messages
 # TRUE or FALSE (case-insensitive)
@@ -4157,30 +4257,6 @@ mptcp.intersubflows_retransmission: TRUE
 # TRUE or FALSE (case-insensitive)
 #thread.thr_auto_acq_thr_seq_ctr: TRUE
 
-# Try the default RSA key in use by nearly all Open Tibia servers
-# TRUE or FALSE (case-insensitive)
-#tibia.try_otserv_key: TRUE
-
-# Shows active character for every packet
-# TRUE or FALSE (case-insensitive)
-#tibia.show_char_name: TRUE
-
-# Shows account name/password or session key for every packet
-# TRUE or FALSE (case-insensitive)
-#tibia.show_acc_info: TRUE
-
-# Shows which XTEA key was applied for a packet
-# TRUE or FALSE (case-insensitive)
-#tibia.show_xtea_key: FALSE
-
-# Only decrypt packets and dissect login packets. Pass game commands to the data dissector
-# TRUE or FALSE (case-insensitive)
-#tibia.dissect_game_commands: FALSE
-
-# Whether the Tibia dissector should reassemble packets spanning multiple TCP segments. To use this option, you must also enable "Allow subdissectors to reassemble TCP streams" in the TCP protocol settings.
-# TRUE or FALSE (case-insensitive)
-#tibia.reassemble_tcp_segments: TRUE
-
 # Time display type
 # One of: UTC, Local
 # (case-insensitive).
@@ -4234,6 +4310,46 @@ mptcp.intersubflows_retransmission: TRUE
 # No description
 # A decimal number
 #tpncp.udp.trunkpack_port: 2424
+
+# Position of the capture unit that produced this trace.  This setting affects the way TRANSUM handles TCP Retransmissions.  See the manual for details.
+# One of: Client, Intermediate, Service
+# (case-insensitive).
+#transum.capture_position: Client
+
+# Set this to match to the TCP subdissector reassembly setting
+# TRUE or FALSE (case-insensitive)
+#transum.reassembly: TRUE
+
+# Add and remove ports numbers separated by commas
+# Ranges are supported e.g. 25,80,2000-3000,5432
+# A string denoting an positive integer range (e.g., "1-20,30-40")
+#transum.tcp_port_ranges: 25,80,443,1433
+
+# Add and remove ports numbers separated by commas
+# Ranges are supported e.g. 123,137-139,520-521,2049
+# A string denoting an positive integer range (e.g., "1-20,30-40")
+#transum.udp_port_ranges: 137-139
+
+# Set this to discard any packet in the direction client to service,
+# with a 1-byte payload of 0x00 and the ACK flag set
+# TRUE or FALSE (case-insensitive)
+#transum.orphan_ka_discard: FALSE
+
+# RTE data will be added to the first request packet
+# TRUE or FALSE (case-insensitive)
+#transum.rte_on_first_req: FALSE
+
+# RTE data will be added to the last request packet
+# TRUE or FALSE (case-insensitive)
+#transum.rte_on_last_req: TRUE
+
+# RTE data will be added to the first response packet
+# TRUE or FALSE (case-insensitive)
+#transum.rte_on_first_rsp: FALSE
+
+# RTE data will be added to the last response packet
+# TRUE or FALSE (case-insensitive)
+#transum.rte_on_last_rsp: FALSE
 
 # Critical Traffic Mask (base hex)
 # A hexadecimal number
@@ -4303,6 +4419,11 @@ mptcp.intersubflows_retransmission: TRUE
 # TRUE or FALSE (case-insensitive)
 #usb.try_heuristics: TRUE
 
+# How commands from the PC to the reader are interpreted
+# One of: Data, Generic ISO 7816, GSM SIM, NXP PN532, ACR122 PN532
+# (case-insensitive).
+#usbccid.prtype: Data
+
 # Whether the vlan summary line should be shown in the protocol tree
 # TRUE or FALSE (case-insensitive)
 #vlan.summary_in_tree: TRUE
@@ -4345,6 +4466,27 @@ mptcp.intersubflows_retransmission: TRUE
 # One of: No subdissection, Line based text, As json, As SIP
 # (case-insensitive).
 #websocket.text_type: No subdissection
+
+# Set the maximum Basic CID used in the Wimax decoder (if other than the default of 320).  Note: The maximum Primary CID is double the maximum Basic CID.
+# A decimal number
+#wmx.basic_cid_max: 320
+
+# Set to TRUE to use the Corrigendum 2 version of Wimax message decoding. Set to FALSE to use the 802.16e-2005  version.
+# TRUE or FALSE (case-insensitive)
+#wmx.corrigendum_2_version: FALSE
+
+# Show transaction ID direction bit separately from the rest of the transaction ID field.
+# TRUE or FALSE (case-insensitive)
+#wimaxasncp.show_transaction_id_d_bit: FALSE
+
+# Print debug output to the console.
+# TRUE or FALSE (case-insensitive)
+#wimaxasncp.debug_enabled: FALSE
+
+# Version of the NWG that the R6 protocol complies with
+# One of: R1.0 v1.0.0, R1.0 v1.2.0, R1.0 v1.2.1
+# (case-insensitive).
+#wimaxasncp.nwg_version: R1.0 v1.2.1
 
 # Whether the WINS-Replication dissector should reassemble messages spanning multiple TCP segments. To use this option, you must also enable "Allow subdissectors to reassemble TCP streams" in the TCP protocol settings.
 # TRUE or FALSE (case-insensitive)
