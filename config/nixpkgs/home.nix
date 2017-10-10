@@ -18,6 +18,7 @@ let
           qtcreator
           sublime3
           scrot
+          system_config_printer
           transmission_gtk
           translate-shell
           xorg.xev

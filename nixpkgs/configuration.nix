@@ -198,6 +198,7 @@ rec {
     };
     locate.enable = true;
 
+    # dbus.packages = [ ];
   };
 
   # udisks2 GUI
