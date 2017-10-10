@@ -1,6 +1,6 @@
 { stdenv, pkgs, fetchPypi, pythonPackages }:
 
-pythonPackages.buildPythonApplication rec {
+pythonPackages.buildPythonPackage rec {
   name = "${pname}-${version}";
   pname = "pygccxml";
   version = "1.9.1";
