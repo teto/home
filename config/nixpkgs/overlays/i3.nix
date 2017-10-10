@@ -163,6 +163,15 @@ in
 
   # define it only if ns3 exists
   # dce = super.stdenv.lib.optional (super.pkgs.ns3 != null) super.callPackage /home/teto/dce { pkgs = super;  };
+
+  castxml = if (super.pkgs ? castxml) then null else super.callPackage ../castxml.nix { pkgs = super.pkgs;  };
+
+  ns3 = if (super.pkgs ? ns3) then super.callPackage ../ns3.nix {
+    pkgs = super.pkgs;
+    python = super.pkgs.python3Packages.python;
+    withTests = true;
+    withExamples = true;
+  } else null;
   dce = if (super.pkgs ? ns3) then super.callPackage ../dce.nix { pkgs = super.pkgs;  } else null;
   mptcpanalyzer = super.callPackage ../mptcpanalyzer.nix { pkgs = super.pkgs;  };
 }
