@@ -5,7 +5,7 @@ let
   # TODO builtins.filterSource (p: t: lib.cleanSourceFilter p t && baseNameOf p != "build")
   filter-cmake = builtins.filterSource (p: t: super.lib.cleanSourceFilter p t && baseNameOf p != "build");
 in
-{
+rec {
   i3dev = super.i3.overrideAttrs (oldAttrs: {
 	  name = "i3-dev";
 	  src = super.lib.cleanSource ~/i3;
@@ -166,8 +166,10 @@ in
 
   castxml = if (super.pkgs ? castxml) then null else super.callPackage ../castxml.nix { pkgs = super.pkgs;  };
 
+
+
   # nix-shell -p python.pkgs.my_stuff
-  pythonPackages = super.pythonPackages.override {
+  python = super.python.override {
      # Careful, we're using a different self and super here!
     packageOverrides = self: super: {
       # if (super.pkgs ? pygccxml) then null else
@@ -177,6 +179,8 @@ in
       };
     };
   };
+
+  pythonPackages = python.pkgs;
 
   ns3 = if (super.pkgs ? ns3) then super.callPackage ../ns3.nix {
     pkgs = self.pkgs;

@@ -60,7 +60,6 @@ stdenv.mkDerivation rec {
 
   meta = {
     homepage = https://www.nsnam.org/overview/projects/direct-code-execution;
-    license = stdenv.licenses.gpl2;
     license = stdenv.licenses.gpl3;
     description = "Run real applications/network stacks in the simulator ns-3";
     platforms = with stdenv.lib.platforms; unix;
