@@ -3,7 +3,7 @@
 
 theme = "solarized_dark"
 auto_remove_unread = True
-ask_subject = True
+ask_subject = False
 #auto_replyto_mailinglist
 # launch sequence of commands separated by ;
 initial_command = search tag:inbox AND NOT tag:killed AND NOT tag:ietf ; 
@@ -15,8 +15,12 @@ mailinglists = lisp@ietf.org, taps@ietf.org
 prefer_plaintext = True
 #search_threads_sort_order
 #terminal_cmd
+#editor_spawn
 #template_dir=
-prompt_suffix = Yes master ?
+prompt_suffix = "§"
+
+# notmuch related
+# search.exclude_tags
 
 # String prepended to line when quoting
 quote_prefix = "> "
@@ -121,18 +125,31 @@ Q = call myhook
 
 [accounts]
 
-[[lip6]]
-address = matthieu.coudron@lip6.fr
+[[iij]]
+address = coudron@iij.ad.jp
 realname = Matthieu Coudron
-signature = ~/signature_pro.txt
+# signature_filename = ~/signature_pro.txt
+# signature_as_attachment
+# gpg_key = D7D6C5AA
+# sign_by_default = false
+# encrypt_by_default
 sendmail_command = msmtp --account=pro -t
+
 
 [[perso]]
 realname = Matt
 address = mattator@gmail.com
-signature = ~/signature_perso.txt
+# aliases batman@batmobile.org,
+#         sent_box = maildir:///home/bruce/mail/work/Sent
+# draft_box = maildir:///home/bruce/mail/work/Drafts
+# alias_regexp = b.wayne\+.+@wayneenterprises.com
+# signature = ~/signature_perso.txt
 # -t => will look for addresses into the mail
 sendmail_command = msmtp --account=gmail -t
+# or use notmuch one
+# command = 'notmuch address --format=json --output=recipients date:1Y.. AND from:my@address.org'
+# regexp = '\[?{"name": "(?P<name>.*)", "address": "(?P<email>.+)", "name-addr": ".*"}[,\]]?'
+# shellcommand_external_filtering = False
 
 	[[[abook]]]
 	type = shellcommand
