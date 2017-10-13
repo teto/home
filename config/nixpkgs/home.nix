@@ -8,6 +8,7 @@ let
           buku
           dropbox
           gnome3.nautilus
+          ffmpegthumbnailer # to preview videos in ranger
           haskellPackages.greenclip # todo get from haskell
           libreoffice
           mendeley
@@ -22,6 +23,7 @@ let
           system_config_printer
           transmission_gtk
           translate-shell
+          w3m # for preview in ranger w3mimgdisplay
           xorg.xev
           xclip
           zathura
@@ -96,6 +98,15 @@ in
 
   };
 
+  programs.bash = {
+    enable = true;
+enableAutojump
+    shellAliases = {
+      #mostly for testin
+      dfh="df --human-readable";
+      duh="du --human-readable";
+    };
+  };
   programs.zsh = {
     enable = true;
     sessionVariables = {

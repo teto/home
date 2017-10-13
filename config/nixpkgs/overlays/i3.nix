@@ -5,7 +5,7 @@ let
   # TODO builtins.filterSource (p: t: lib.cleanSourceFilter p t && baseNameOf p != "build")
   filter-cmake = builtins.filterSource (p: t: super.lib.cleanSourceFilter p t && baseNameOf p != "build");
 in
-{
+rec {
   i3-local = super.i3.overrideAttrs (oldAttrs: {
 	  name = "i3-dev";
 	  src = super.lib.cleanSource ~/i3;
@@ -124,12 +124,12 @@ in
   # });
 
 
-  networkmanager-dev = super.networkmanager.overrideAttrs (oldAttrs: {
-    # pygobject2
-    name = "networkmanager-dev";
-    src = super.lib.cleanSource ~/NetworkManager;
-    # propagatedBuildInputs = with super.pythonPackages; oldAttrs.propagatedBuildInputs ++ [ keyring pygobject3  ];
-  });
+  # networkmanager-dev = super.networkmanager.overrideAttrs (oldAttrs: {
+  #   # pygobject2
+  #   name = "networkmanager-dev";
+  #   src = super.lib.cleanSource ~/NetworkManager;
+  #   # propagatedBuildInputs = with super.pythonPackages; oldAttrs.propagatedBuildInputs ++ [ keyring pygobject3  ];
+  # });
 
   fcitx-master = super.fcitx.overrideAttrs (oldAttrs: rec {
     # this one is treacherous see
@@ -163,6 +163,34 @@ in
 
   # define it only if ns3 exists
   # dce = super.stdenv.lib.optional (super.pkgs.ns3 != null) super.callPackage /home/teto/dce { pkgs = super;  };
+
+  castxml = if (super.pkgs ? castxml) then null else super.callPackage ../castxml.nix { pkgs = super.pkgs;  };
+
+
+
+  # nix-shell -p python.pkgs.my_stuff
+  python = super.python.override {
+     # Careful, we're using a different self and super here!
+    packageOverrides = self: super: {
+      # if (super.pkgs ? pygccxml) then null else
+        pygccxml =  super.callPackage ../pygccxml.nix {
+        # pkgs = super.pkgs;
+        # pythonPackages = self.pkgs.python3Packages;
+      };
+    };
+  };
+
+  pythonPackages = python.pkgs;
+
+  ns3 = if (super.pkgs ? ns3) then super.callPackage ../ns3.nix {
+    pkgs = self.pkgs;
+    python = self.pkgs.pythonPackages.python;
+    withTests = true;
+    generateBindings = true;
+    withExamples = true;
+    pygccxml = self.pythonPackages.pygccxml;
+  } else null;
   dce = if (super.pkgs ? ns3) then super.callPackage ../dce.nix { pkgs = super.pkgs;  } else null;
+
   mptcpanalyzer = super.callPackage ../mptcpanalyzer.nix { pkgs = super.pkgs;  };
 }
