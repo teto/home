@@ -7,6 +7,7 @@ let
   desktopPkgs = with pkgs; [
           buku
           dropbox
+          ffmpegthumbnailer # to preview videos in ranger
           haskellPackages.greenclip # todo get from haskell
           libreoffice
           mendeley
@@ -21,6 +22,7 @@ let
           system_config_printer
           transmission_gtk
           translate-shell
+          w3m # for preview in ranger w3mimgdisplay
           xorg.xev
           xclip
           zathura
@@ -94,6 +96,15 @@ in
     PATH="$HOME/rofi-scripts:$HOME/buku_run:$PATH";
   };
 
+  programs.bash = {
+    enable = true;
+enableAutojump
+    shellAliases = {
+      #mostly for testin
+      dfh="df --human-readable";
+      duh="du --human-readable";
+    };
+  };
   programs.zsh = {
     enable = true;
     shellAliases = {

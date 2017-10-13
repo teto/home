@@ -1367,7 +1367,7 @@ let g:startify_session_dir = $XDG_DATA_HOME.'/nvim/sessions'
 let g:startify_bookmarks = [
       \ {'i': $XDG_CONFIG_HOME.'/i3/config.main'},
       \ {'h': $XDG_CONFIG_HOME.'/nixpkgs/home.nix'},
-      \ {'c': 'dotfiles/home/configuration.nix'},
+      \ {'c': 'dotfiles/nixpkgs/configuration.nix'},
       \ {'z': $XDG_CONFIG_HOME.'/zsh/'},
       \ {'m': $XDG_CONFIG_HOME.'/mptcpanalyzer/config'},
       \ {'n': $XDG_CONFIG_HOME.'/nvim/config'},

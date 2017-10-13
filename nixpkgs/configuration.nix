@@ -8,6 +8,7 @@
 let
   # hopefully it can be generated as dirname <nixos-config>
   configDir = /home/teto/dotfiles/nixpkgs;
+  userNixpkgs = /home/teto/nixpkgs;
 
   # TODO to get
   # mynixpkgs = import nixRepo {};
@@ -100,6 +101,10 @@ rec {
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   environment.systemPackages = [
+
+    pkgs.strongswan
+    # networkmanager_strongswan
+      # wrapProgram $out/bin/dnschain --suffix PATH : ${openssl.bin}/bin
   # let
   #   # basePkgs = import "${configDir}/basetools.nix" pkgs;
   #   desktopPkgs = import "${configDir}/desktopPkgs.nix" pkgs;
@@ -167,8 +172,7 @@ rec {
     XDG_DATA_HOME="$HOME/.local/share";
   # TODO Move to user config aka homemanager
     ZDOTDIR="$XDG_CONFIG_HOME/zsh";
-    HISTFILE="$XDG_CACHE_HOME/bash_history";
-    INPUTRC="$XDG_CONFIG_HOME/inputrc";
+    # HISTFILE="$XDG_CACHE_HOME/bash_history";
     LESS=""; # options to pass to less automatically
   };
   # stick to sh as it's shell independant
@@ -204,6 +208,11 @@ rec {
   # udisks2 GUI
   services.udisks2.enable = true;
 
+  services.openntpd = {
+    enable = true;
+    # add iij ntp servers
+    # servers
+  };
   # Enable the X11 windowing system.
   services.xserver = {
     enable = true;
@@ -337,12 +346,15 @@ rec {
 
   # pkgs.lib.mkBefore
   # options.nix.nixPath.default
-  # options.nix.nixPath.default ++
+  # todo set it only if path exists
   nix.nixPath =   [
-    "nixpkgs=/home/teto/nixpkgs"
     "nixos-config=/home/teto/dotfiles/nixpkgs/configuration.nix:/nix/var/nix/profiles/per-user/root/channels"
-  ] ;
+  ]
+  ++ lib.optionals (builtins.pathExists userNixpkgs)  [ "nixpkgs=${builtins.toString userNixpkgs}" ]
+  ;
 
+  # handy to hack/fix around
+  # nix.readOnlyStore = false;
 
   system = {
     # stateVersion = "17.03"; # why would I want to keep that ?

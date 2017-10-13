@@ -34,12 +34,12 @@
 #done
 # }}}
 # History parameters {{{
-HISTSIZE=10000
-SAVEHIST=9000
-HISTFILE="$XDG_CACHE_HOME/zsh_history.tmp"
+# HISTSIZE=10000
+# SAVEHIST=9000
+# HISTFILE="$XDG_CACHE_HOME/zsh_history.tmp"
 
 # make some commands not show up in history
-export HISTIGNORE="ls:ll:cd:cd -:pwd:exit:date:* --help"
+# export HISTIGNORE="ls:ll:cd:cd -:pwd:exit:date:* --help"
 
 # multiple zsh sessions will append to the same history file (incrementally, after each command is executed)
 # setopt inc_append_history

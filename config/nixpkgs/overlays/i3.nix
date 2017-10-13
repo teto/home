@@ -70,10 +70,10 @@ rec {
 #       # executableHaskellDepends = [ ];
 # 	});
 
-  khal-dev = super.khal.overrideAttrs (oldAttrs: {
-	  name = "khal-dev";
-	  src = ~/khal;
-	});
+  # khal-dev = super.khal.overrideAttrs (oldAttrs: {
+	  # name = "khal-dev";
+	  # src = ~/khal;
+	# });
 
   offlineimap = super.offlineimap.overrideAttrs (oldAttrs: {
     # pygobject2
@@ -124,12 +124,12 @@ rec {
   # });
 
 
-  networkmanager-dev = super.networkmanager.overrideAttrs (oldAttrs: {
-    # pygobject2
-    name = "networkmanager-dev";
-    src = super.lib.cleanSource ~/NetworkManager;
-    # propagatedBuildInputs = with super.pythonPackages; oldAttrs.propagatedBuildInputs ++ [ keyring pygobject3  ];
-  });
+  # networkmanager-dev = super.networkmanager.overrideAttrs (oldAttrs: {
+  #   # pygobject2
+  #   name = "networkmanager-dev";
+  #   src = super.lib.cleanSource ~/NetworkManager;
+  #   # propagatedBuildInputs = with super.pythonPackages; oldAttrs.propagatedBuildInputs ++ [ keyring pygobject3  ];
+  # });
 
   fcitx-master = super.fcitx.overrideAttrs (oldAttrs: rec {
     # this one is treacherous see
