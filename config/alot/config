@@ -124,13 +124,13 @@ Q = call myhook
 [[lip6]]
 address = matthieu.coudron@lip6.fr
 realname = Matthieu Coudron
-signature = ~/signature_pro.txt
+# signature = ~/signature_pro.txt
 sendmail_command = msmtp --account=pro -t
 
 [[perso]]
 realname = Matt
 address = mattator@gmail.com
-signature = ~/signature_perso.txt
+# signature = ~/signature_perso.txt
 # -t => will look for addresses into the mail
 sendmail_command = msmtp --account=gmail -t
 

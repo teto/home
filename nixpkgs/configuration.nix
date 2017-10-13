@@ -116,7 +116,6 @@ rec {
    # TODO look up $ZDOTDIR/aliases.sh
    environment.shellAliases = {
      # TODO won't work in bash
-    # nixpaste="curl -F 'text=<-' http://nixpaste.lbr.uno";
 
       # git variables {{{
       gl="git log";

@@ -95,8 +95,9 @@ alias nm="nm -l"
 # }}}
 
 # Mail {{{
-# alias ml="python2.7 -malot -n ~/.config/notmuch/notmuchrc_pro"
-# alias mg="python2.7 -malot -n ~/.config/notmuch/notmuchrc"
-# alias astroperso="astroid"
-# alias astropro="astroid -c ~/.config/astroid/config_pro"
+# alias ml="nix-shell -p python2.7  -n ~/.config/notmuch/notmuchrc_pro"
+alias mg="python2.7 -malot -n ~/.config/notmuch/notmuchrc"
+alias mg="nix-shell -p 'python.withPackages(ps: with ps; [ alot ])' --show-trace --run \"alot -n \$XDG_CONFIG_HOME/notmuch/notmuchrc\""
+alias astroperso="astroid"
+alias astropro="astroid -c ~/.config/astroid/config_pro"
 # }}}

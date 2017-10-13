@@ -7,12 +7,13 @@ let
   desktopPkgs = with pkgs; [
           buku
           dropbox
+          gnome3.nautilus
           haskellPackages.greenclip # todo get from haskell
           libreoffice
           mendeley
           nox
-          gnome3.nautilus
           # gnome3.gnome_control_center
+          pinta
           qtpass
           qutebrowser
           qtcreator
@@ -92,14 +93,19 @@ in
     MUTT="$XDG_CONFIG_HOME/mutt";
     MAILDIR="$HOME/Maildir";
     PATH="$HOME/rofi-scripts:$HOME/buku_run:$PATH";
+
   };
 
   programs.zsh = {
     enable = true;
+    sessionVariables = {
+      # HISTFILE="";
+    };
     shellAliases = {
       #mostly for testin
       dfh="df --human-readable";
       duh="du --human-readable";
+    nixpaste="curl -F 'text=<-' http://nixpaste.lbr.uno";
     };
   };
   # programs.git = {

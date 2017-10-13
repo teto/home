@@ -200,7 +200,6 @@ Plug 'lyuts/vim-rtags'  " a l'air d'etre le plus complet <leader>ri
 " Plug 'zchee/deoplete-clang', { 'for': 'c' }
 " Plug 'tweekmonster/deoplete-clang2', { 'for': 'c' }
 "
-Plug 'poppyschmo/deoplete-latex', {'for': 'latex'} " not a serious one
 " Plug 'zchee/deoplete-jedi', { 'for': 'python'}
 " }}}
 " Plug 'beloglazov/vim-online-thesaurus' " thesaurus => dico dde synonymes

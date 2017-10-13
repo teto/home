@@ -6,12 +6,12 @@ let
   filter-cmake = builtins.filterSource (p: t: super.lib.cleanSourceFilter p t && baseNameOf p != "build");
 in
 {
-  i3dev = super.i3.overrideAttrs (oldAttrs: {
+  i3-local = super.i3.overrideAttrs (oldAttrs: {
 	  name = "i3-dev";
 	  src = super.lib.cleanSource ~/i3;
 	});
 
-   i3pystatus-dev = super.i3pystatus.overrideAttrs (oldAttrs: {
+   i3pystatus-local = super.i3pystatus.overrideAttrs (oldAttrs: {
 	  name = "i3pystatus-dev";
 	  src = super.lib.cleanSource ~/i3pystatus;
       propagatedBuildInputs = with self.python3Packages; oldAttrs.propagatedBuildInputs ++ [ pytz ];
@@ -70,7 +70,7 @@ in
 #       # executableHaskellDepends = [ ];
 # 	});
 
-  khal-dev = super.khal.overrideAttrs (oldAttrs: {
+  khal-local = super.khal.overrideAttrs (oldAttrs: {
 	  name = "khal-dev";
 	  src = ~/khal;
 	});
@@ -80,7 +80,7 @@ in
     propagatedBuildInputs = with super.pythonPackages; oldAttrs.propagatedBuildInputs ++ [ keyring pygobject3  ];
   });
 
-  wireshark-dev = super.wireshark.overrideAttrs (oldAttrs: {
+  wireshark-local = super.wireshark.overrideAttrs (oldAttrs: {
     # pygobject2
     name = "wireshark-dev";
     src = filter-cmake ~/wireshark;
