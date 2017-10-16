@@ -102,7 +102,7 @@ rec {
   # $ nix-env -qaP | grep wget
   environment.systemPackages = [
 
-    pkgs.strongswan
+    pkgs.strongswan # to get ipsec in path
     # networkmanager_strongswan
       # wrapProgram $out/bin/dnschain --suffix PATH : ${openssl.bin}/bin
   # let
@@ -171,7 +171,7 @@ rec {
     XDG_DATA_HOME="$HOME/.local/share";
   # TODO Move to user config aka homemanager
     ZDOTDIR="$XDG_CONFIG_HOME/zsh";
-    # HISTFILE="$XDG_CACHE_HOME/bash_history";
+    HISTFILE="$XDG_CACHE_HOME/bash_history";
     LESS=""; # options to pass to less automatically
   };
   # stick to sh as it's shell independant
@@ -237,7 +237,7 @@ rec {
       enable = true;
       # twoFingerScroll = true;
       disableWhileTyping = true;
-      naturalScrolling = false;
+      naturalScrolling = true;
       # accelSpeed = "1.55";
     };
 
@@ -259,6 +259,14 @@ rec {
   services.mpd = {
     enable = true;
     # musicDirectory
+  };
+
+  services.strongswan = {
+    enable = true;
+    # 
+    secrets = [ "/etc/ipsec.d"
+  # "${networkmanager_l2tp}/etc/ipsec.d"
+  ]; # folder for l2tp
   };
 
   programs.zsh.enable = true;
@@ -320,8 +328,7 @@ rec {
 	 shell = pkgs.zsh;
      # TODO import it from desktopPkgs for instance ?
      packages = [
-       pkgs.termite pkgs.sxiv pkgs.firefox
-        pkgs.qutebrowser
+       pkgs.termite pkgs.sxiv
      ];
   };
 
@@ -336,17 +343,32 @@ rec {
     # permittedInsecurePackages = [
     #       "webkitgtk-2.4.11"
     #         ];
-    firefox.enableAdobeFlash = true;
-    chromium.enablePepperFlash = true;
+    # firefox.enableAdobeFlash = true;
+    # chromium.enablePepperFlash = true;
     # programs.chromium.enableAdobeFlash = true; # for Chromium
 
   };
 
+  # IRC recommanded to 
+    environment.etc."ipsec.secrets".text = ''
+      # this is checked by l2tp
+      include /etc/ipsec.d/*.secrets
+      '';
+      environment.etc."ipsec.d/stub".text = ''
+        stub file to create ipsec.d
+      '';
 
-  # pkgs.lib.mkBefore
+  # for ppp when it creates its resolv.conf
+  # maybe it should create it in /var/run
+  environment.etc."ppp/stub".text = ''
+  '';
+
   # options.nix.nixPath.default
   # todo set it only if path exists
-  nix.nixPath =   [
+  #  options.nix.nixPath.default ++ TODO mkMerge/mkBefore etc
+  # convert set back to list
+  nix.nixPath = 
+  [
     "nixos-config=/home/teto/dotfiles/nixpkgs/configuration.nix:/nix/var/nix/profiles/per-user/root/channels"
   ]
   ++ lib.optionals (builtins.pathExists userNixpkgs)  [ "nixpkgs=${builtins.toString userNixpkgs}" ]

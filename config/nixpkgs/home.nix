@@ -36,7 +36,7 @@ let
           gdb
           gitAndTools.git-extras
           mypy
-          neovim
+          # neovim
           neovim-remote
           nix-prefetch-scripts
           nix-repl
@@ -51,7 +51,7 @@ let
     imPkgs = with pkgs; [
         # astroid
         offlineimap # python 2 only
-        python27Packages.alot # python 2 only
+        # python27Packages.alot # python 2 only
         khal
         khard
         msmtp
@@ -100,25 +100,27 @@ in
 
   programs.bash = {
     enable = true;
-enableAutojump
+    enableAutojump = true;
+    sessionVariables = {
+      HISTFILE="$XDG_CACHE_HOME/bash_history";
+    };
     shellAliases = {
       #mostly for testin
       dfh="df --human-readable";
       duh="du --human-readable";
     };
   };
+
   programs.zsh = {
     enable = true;
     sessionVariables = {
-      # HISTFILE="";
+      HISTFILE="$XDG_CACHE_HOME/zsh_history";
     };
     shellAliases = {
-      #mostly for testin
-      dfh="df --human-readable";
-      duh="du --human-readable";
     nixpaste="curl -F 'text=<-' http://nixpaste.lbr.uno";
     };
   };
+
   # programs.git = {
     #   enable = true;
     #   userName = "Jane Doe";
@@ -131,10 +133,10 @@ enableAutojump
     notify = false;
     automount = false;
   };
-  programs.firefox = {
-    enable = true;
-    enableAdobeFlash = true;
-  };
+  # programs.firefox = {
+  #   enable = true;
+  #   enableAdobeFlash = true;
+  # };
 
   services.gpg-agent = {
     enable = true;

@@ -166,31 +166,39 @@ rec {
 
   castxml = if (super.pkgs ? castxml) then null else super.callPackage ../castxml.nix { pkgs = super.pkgs;  };
 
+  msmtp = super.msmtp.overrideAttrs(oldAttrs: rec {
+
+    # postBuild
+# makeWrapper $out/bin/foo $wrapperfile --set FOOBAR baz
+    # we need keyring to retreive passwords etc
+    propagatedBuildInputs = with super.pkgs.python3Packages; [ requests_oauthlib keyring secretstorage ] ++ [ super.pkgs.liboauth ];
+  });
+
 
 
   # nix-shell -p python.pkgs.my_stuff
-  python = super.python.override {
-     # Careful, we're using a different self and super here!
-    packageOverrides = self: super: {
-      # if (super.pkgs ? pygccxml) then null else
-        pygccxml =  super.callPackage ../pygccxml.nix {
-        # pkgs = super.pkgs;
-        # pythonPackages = self.pkgs.python3Packages;
-      };
-    };
-  };
+  # python = super.python.override {
+  #    # Careful, we're using a different self and super here!
+  #   packageOverrides = self: super: {
+  #     # if (super.pkgs ? pygccxml) then null else
+  #       pygccxml =  super.callPackage ../pygccxml.nix {
+  #       # pkgs = super.pkgs;
+  #       # pythonPackages = self.pkgs.python3Packages;
+  #     };
+  #   };
+  # };
 
-  pythonPackages = python.pkgs;
+  # pythonPackages = python.pkgs;
 
-  ns3 = if (super.pkgs ? ns3) then super.callPackage ../ns3.nix {
-    pkgs = self.pkgs;
-    python = self.pkgs.pythonPackages.python;
-    withTests = true;
-    generateBindings = true;
-    withExamples = true;
-    pygccxml = self.pythonPackages.pygccxml;
-  } else null;
-  dce = if (super.pkgs ? ns3) then super.callPackage ../dce.nix { pkgs = super.pkgs;  } else null;
+  # ns3 = if (super.pkgs ? ns3) then super.callPackage ../ns3.nix {
+  #   pkgs = self.pkgs;
+  #   python = self.pkgs.pythonPackages.python;
+  #   withTests = true;
+  #   generateBindings = true;
+  #   withExamples = true;
+  #   pygccxml = self.pythonPackages.pygccxml;
+  # } else null;
+  # dce = if (super.pkgs ? ns3) then super.callPackage ../dce.nix { pkgs = super.pkgs;  } else null;
 
   mptcpanalyzer = super.callPackage ../mptcpanalyzer.nix { pkgs = super.pkgs;  };
 }

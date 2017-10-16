@@ -34,12 +34,12 @@
 #done
 # }}}
 # History parameters {{{
-HISTSIZE=10000
-SAVEHIST=9000
-HISTFILE="$XDG_CACHE_HOME/zsh_history.tmp"
+# HISTSIZE=10000
+# SAVEHIST=9000
+# HISTFILE="$XDG_CACHE_HOME/zsh_history.tmp"
 
 # make some commands not show up in history
-export HISTIGNORE="ls:ll:cd:cd -:pwd:exit:date:* --help"
+# export HISTIGNORE="ls:ll:cd:cd -:pwd:exit:date:* --help"
 
 # multiple zsh sessions will append to the same history file (incrementally, after each command is executed)
 # setopt inc_append_history
@@ -82,6 +82,11 @@ unsetopt menu_complete # do not autoselect the first completion entry
 #setopt correct # spelling correction for commands
 #setopt correctall # spelling correction for arguments
 
+# Prompt {{{2
+# setopt prompt_subst # Enable parameter expansion, command substitution, and arithmetic expansion in the prompt
+#setopt checkwinsize # redraw window if changes size
+# setopt transient_rprompt # only show the rprompt on the current prompt
+# }}}
 
 # Scripts and Functions
 #setopt multios # perform implicit tees or cats when multiple redirections are attempted
@@ -141,12 +146,19 @@ bindkey '^Z' fancy-ctrl-z
 # export WORDCHARS=''
 # }}}
 
-# Why did I put that ?
-# export SYSCONFDIR="$XDG_CONFIG_HOME"
+# Setup zsh-autosuggestions
+#source /home/teto/zsh-autosuggestions/autosuggestions.zsh
+
+## Enable autosuggestions automatically
+#zle-line-init() {
+    #zle autosuggest-start
+#}
 
 #zle -N zle-line-init
 
 eval $(dircolors -b "$XDG_CONFIG_HOME/dircolors/dircolors.ansi-universal")
+
+
 
 # Look if zsh autosuggestions improve things
 #autoload predict-on
@@ -159,11 +171,14 @@ autoload -z edit-command-line
 zmodload -i zsh/complist
 
 
-# vcsinfo config {{{
-zstyle ':vcs_info:*' actionformats '%F{5}(%f%s%F{5})%F{3}-%F{5}[%F{2}%b%F{3}|%F{1}%a%F{5}]%f '
-zstyle ':vcs_info:*' formats '%F{5}(%f%s%F{5})%F{3}-%F{5}[%F{2}%b%F{5}]%f '
-zstyle ':vcs_info:*' enable git 
-# }}}
+# man zshcontrib
+# zstyle ':vcs_info:*' actionformats '%F{5}(%f%s%F{5})%F{3}-%F{5}[%F{2}%b%F{3}|%F{1}%a%F{5}]%f '
+# zstyle ':vcs_info:*' formats '%F{5}(%f%s%F{5})%F{3}-%F{5}[%F{2}%b%F{5}]%f '
+# zstyle ':vcs_info:*' enable git #svn cvs
+
+add-zsh-hook preexec set_term_title
+#add-zsh-hook zsh_directory_name
+add-zsh-hook precmd update_term_title
 
 # completion config {{{1
 # enables autocompletion for apt
@@ -174,6 +189,8 @@ compdef apt=apt-get
 . "$ZDOTDIR/translate-shell.plugin.zsh"
 # . "$ZDOTDIR/alot-completion.zsh" # this one is buggy
 
+# zsh searches $fpath for completion files
+fpath=( $ZDOTDIR/completions $fpath )
 
 # Enable completion caching, use rehash to clear
 zstyle ':completion::complete:*' use-cache on
@@ -230,12 +247,7 @@ zstyle ':completion:*:kill:*' force-list always
 
 # }}}
 
-# Prompt
-# setopt prompt_subst # Enable parameter expansion, command substitution, and arithmetic expansion in the prompt
-#setopt checkwinsize # redraw window if changes size
-# setopt transient_rprompt # only show the rprompt on the current prompt
 
-# set term title {{{
 # works in termite
 function set_term_title (){
 # -n Do not add a newline to the output.
@@ -247,70 +259,108 @@ function set_term_title (){
     print -n '\a'
 }
 
+function rprompt_cmd() {
+    # get vcs info
+    # vcs_info
+
+    # echo "${vcs_info_msg_0_}"
+}
+
+
 update_term_title () {
     set_term_title $(pwd)
 }
 
-
-add-zsh-hook preexec set_term_title
-#add-zsh-hook zsh_directory_name
-# add-zsh-hook precmd update_term_title
-add-zsh-hook precmd update_term_title
-# }}}
+# Pour afficher la commande dans le titre du terminal
+# https://github.com/robbyrussell/oh-my-zsh/blob/master/lib/termsupport.zsh
+# source "$ZDOTDIR/prompt.zsh"
 # Prompt {{{
 # if a process takeslonger than this, display its processing time
 REPORTTIME=10
 # delay to consider when changing vi mode
 # in hundredths of seconds (0 defaults to 0.4 ?! 1 => 10 ms)
 KEYTIMEOUT=1
-autoload -Uz async && async
-# function rprompt_cmd() {
-#     # get vcs info
-#     vcs_info
-#     echo "${vcs_info_msg_0_}"
-# }
-
-function foo() {
-    echo "foo "
-}
-
-function precmd() {
-    async_job lprompt foo
-}
 
 
-# /!\ ALL FUNCTIONS you want to use use must be defined BEFORE starting the worker
-async_start_worker lprompt -n
-# get_prompt_info() {
-#     cd -q $1         # Enter the current directory
-#     git_prompt_info  # Print git info
-# }
-lprompt_complete() {
-    PS1="> $3"
-    zle && zle reset-prompt
-}
+if [ $ON_NIXOS ]; then
+#     source "$HOME/.nix-profile/share/zsh/site-contrib/powerline.zsh"
+    source "$(autojump-share)/autojump.zsh"
+else
+#     # todo find a better way
+#     source "$ZDOTDIR/powerline.zsh"
+fi
 
-async_register_callback lprompt lprompt_complete
-
-PS1=''
 
 #RPROMPT='[%D{%L:%M:%S %p}]'
 
+# this code makes the prompt blink which is bad
+# TRAPALRM is called every TMOUT, in our case it will reset the prompt
+#http://stackoverflow.com/questions/2187829/constantly-updated-clock-in-zsh-prompt
+#TMOUT=1
+
+# TRAPALRM() {
+    #zle reset-prompt
+#}
+
 
 # prompt called in case of error
-# SPROMPT="Correct $fg[red]%R$reset_color to $fg[green]%r$reset_color [(y)es (n)o (a)bort (e)dit]? "
+SPROMPT="Correct $fg[red]%R$reset_color to $fg[green]%r$reset_color [(y)es (n)o (a)bort (e)dit]? "
+
 #RPROMPT='${PR_GREEN}$(virtualenv_info)%{$reset_color%} ${PR_RED}${ruby_version}%{$reset_color%}'
+
 #PS1=%K{blue}%n@%m%k %B%F{cyan}%(4~|...|)%3~%F{white} %# %b%f%k
 #}}}
-
-# zsh-syntax-highlighting {{{
+# prompt config {{{1
+#PROMPT='$(prompt_cmd)' # single quotes to prevent immediate execution
 #
+#PROMPT="%{$fg[red]%}%n%{$reset_color%}@%{$fg[blue]%}%m %{$fg_no_bold[yellow]%}%1~ %{$reset_color%}%#"
+#RPROMPT='' # no initial prompt, set dynamically
+
+
+## trying to get async update of git in case repo is big
+## http://www.anishathalye.com/2015/02/07/an-asynchronous-shell-prompt/
+#ASYNC_PROC=0
+#function precmd() {
+    #function async() {
+        ## save to temp file
+        #printf "%s" "$(rprompt_cmd)" > "${HOME}/.zsh_tmp_prompt"
+
+        ## signal parent
+        #kill -s USR1 $$
+    #}
+
+    ## do not clear RPROMPT, let it persist
+
+    ## kill child if necessary
+    #if [[ "${ASYNC_PROC}" != 0 ]]; then
+        #kill -s HUP $ASYNC_PROC >/dev/null 2>&1 || :
+    #fi
+
+    ## start background computation
+    #async &!
+    #ASYNC_PROC=$!
+
+    ## update title
+    #printf '\e]0;%s@%s: %s\a' "toto" "${prompt_host}" "${prompt_char}"
+#}
+
+#function TRAPUSR1() {
+    ## read from temp file
+    #RPROMPT="$(cat ${HOME}/.zsh_tmp_prompt)"
+
+    ## reset proc number
+    #ASYNC_PROC=0
+
+    ## redisplay
+    #zle && zle reset-prompt
+#}
+## }}}
+
 ## use ctrl+t to toggle autosuggestions(hopefully this wont be needed as
 ## zsh-autosuggestions is designed to be unobtrusive)
 #bindkey '^T' autosuggest-toggle
 #install it first
-#source zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-# }}}
+#source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # Enable FZF fuzzy matcher {{{
 FZF_PATH="$XDG_DATA_HOME/fzf/shell/"
@@ -320,36 +370,25 @@ fi
 . "$FZF_PATH/completion.zsh"
 . "$FZF_PATH/key-bindings.zsh"
 # https://junegunn.kr/2016/07/fzf-git
-. "$HOME/fzf-gems/fzf_git_functions.sh"
+. "$XDG_CONFIG_HOME/fzf-gems/fzf_git_functions.sh"
 # you can list the actually bound keys with bindkey -M viins
-. "$HOME/fzf-gems/fzf_git_keybindings.zsh"
+. "$XDG_CONFIG_HOME/fzf-gems/fzf_git_keybindings.zsh"
 # }}}
-
-# autojump config {{{
-if [ $ON_NIXOS ]; then
-#     source "$HOME/.nix-profile/share/zsh/site-contrib/powerline.zsh"
-    source "$(autojump-share)/autojump.zsh"
-else
-#     # todo find a better way
-#     source "$ZDOTDIR/powerline.zsh"
-fi
-# }}}
-
 
 # _gnu_generic should work if program accepts --help
 compdef _gnu_generic qutebrowser
 compdef _gnu_generic mptcpanalyzer
 
 # added by Nix installer (on ubuntu)
-# if [ -e /home/teto/.nix-profile/etc/profile.d/nix.sh ]; then
-#     . /home/teto/.nix-profile/etc/profile.d/nix.sh;
-# # add 'j' command
-# # todo if on nix, use autojump-share
-# # . $which/usr/share/autojump/autojump.sh
+if [ -e /home/teto/.nix-profile/etc/profile.d/nix.sh ]; then
+    . /home/teto/.nix-profile/etc/profile.d/nix.sh;
+# add 'j' command
+# todo if on nix, use autojump-share
+# . $which/usr/share/autojump/autojump.sh
 
-# fi
+fi
 
-#  $NIXOS specific {{{
+# todo only when on $NIXOS
 nix-env() {
     local hasF=""
     for arg in "$@"
@@ -361,4 +400,9 @@ nix-env() {
     else command nix-env -f '<nixpkgs>' "$@"
     fi
 }
-# }}}
+
+
+# for android/lineage os developement
+# if [ -d "$HOME/adb-fastboot" ] ; then
+#     export PATH="$HOME/adb-fastboot:$PATH"
+# fi
