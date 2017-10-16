@@ -54,6 +54,8 @@ rec {
   boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.kernelModules = [
     "af_key" # for ipsec/vpn support
+    "kvm"  # for virtualisation
+     "kvm-intel"
   ];
   boot.kernel.sysctl = {
       # "net.ipv4.tcp_keepalive_time" = 60;
@@ -320,6 +322,7 @@ rec {
        "adbusers" # for android tools
        "wireshark"
        "plugdev" # for udiskie
+       # "kvm" # don't think that's needed 
      ];
      # once can set initialHashedPassword too
      initialPassword = "test";

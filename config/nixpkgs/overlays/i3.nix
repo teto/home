@@ -135,7 +135,7 @@ rec {
   # define it only if ns3 exists
   # dce = super.stdenv.lib.optional (super.pkgs.ns3 != null) super.callPackage /home/teto/dce { pkgs = super;  };
 
-  castxml = if (super.pkgs ? castxml) then null else super.callPackage ../castxml.nix { pkgs = super.pkgs;  };
+  # castxml = super.stdenv.lib.optional (!(super.pkgs ? castxml)) super.callPackage ../castxml.nix { pkgs = super.pkgs;  };
 
   msmtp = super.msmtp.overrideAttrs(oldAttrs: rec {
 
