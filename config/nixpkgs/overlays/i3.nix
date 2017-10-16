@@ -80,35 +80,6 @@ rec {
     propagatedBuildInputs = with super.pythonPackages; oldAttrs.propagatedBuildInputs ++ [ keyring pygobject3  ];
   });
 
-  wireshark-local = super.wireshark.overrideAttrs (oldAttrs: {
-    # pygobject2
-    name = "wireshark-dev";
-    src = filter-cmake ~/wireshark;
-    # TODO
-    postBuild = ''
-      export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:./run"
-      '';
-    # useless, __nixè
-    # preUnpack = "echo 'hello world'; rm -rf __nix_qt5__";
-    # propagatedBuildInputs = with super.pythonPackages; oldAttrs.propagatedBuildInputs ++ [ keyring pygobject3  ];
-  });
-
-
-  tshark-local = super.tshark.overrideAttrs (oldAttrs: {
-    # pygobject2
-    name = "tshark-dev";
-    src = filter-cmake ~/wireshark;
-    # TODO
-    postBuild = ''
-      export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:./run"
-      '';
-      # write in .nvimrc
-    nvimrc = super.pkgs.writeText "_nvimrc" ''
-        " to deal with cmake build folder
-        let &makeprg="make -C build"
-      '';
-  });
-
 
   # tshark-dev = super.tshark.overrideAttrs (oldAttrs: {
   #   # pygobject2

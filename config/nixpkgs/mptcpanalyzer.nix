@@ -1,7 +1,8 @@
 { pkgs ? import <nixpkgs> {}
+, pythonPackages
 }:
 
-with pkgs.python36Packages;
+with pkgs.python3Packages;
 buildPythonPackage rec {
 	name = "mptcpanalyzer-${version}";
 	version = "0.1";
@@ -12,7 +13,7 @@ buildPythonPackage rec {
 	# buildInputs = [  stevedore pandas matplotlib  ];
     # to build the doc sphinx
     # TODO package tshark
-    propagatedBuildInputs =  [ stevedore cmd2 pyperclip pandas matplotlib pyqt5
+    propagatedBuildInputs = with pythonPackages; [ stevedore cmd2 pyperclip pandas matplotlib pyqt5
     pkgs.tshark-local pyperclip ];
 	/* propagatedBuildInputs =  [ stevedore pandas matplotlib pyqt5 ]; */
 }

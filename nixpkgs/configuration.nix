@@ -29,7 +29,7 @@ rec {
   imports =
     [ # Include the results of the hardware scan.
       /etc/nixos/hardware-configuration.nix
-      ./mptcp-kernel.nix
+      # ./mptcp-kernel.nix
       ./basetools.nix
       ./extraTools.nix
       ./desktopPkgs.nix
@@ -260,14 +260,12 @@ rec {
     enable = true;
     # musicDirectory
   };
-
-  services.strongswan = {
-    enable = true;
-    # 
-    secrets = [ "/etc/ipsec.d"
   # "${networkmanager_l2tp}/etc/ipsec.d"
-  ]; # folder for l2tp
-  };
+
+  # services.strongswan = {
+  #   enable = true;
+  #   secrets = [ "/etc/ipsec.d" ];
+  # };
 
   programs.zsh.enable = true;
   programs.zsh.enableCompletion = true;
