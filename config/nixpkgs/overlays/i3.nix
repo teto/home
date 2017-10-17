@@ -136,6 +136,10 @@ rec {
   # dce = super.stdenv.lib.optional (super.pkgs.ns3 != null) super.callPackage /home/teto/dce { pkgs = super;  };
 
   # castxml = super.stdenv.lib.optional (!(super.pkgs ? castxml)) super.callPackage ../castxml.nix { pkgs = super.pkgs;  };
+  xl2tpd = super.xl2tpd.overrideAttrs ( oldAttrs : rec {
+    makeFlags = [ "PREFIX=$(out)" ];
+    # -DUSE_KERNEL
+  });
 
   msmtp = super.msmtp.overrideAttrs(oldAttrs: rec {
 

@@ -1,4 +1,4 @@
-# Configuration file for Wireshark 2.3.0.
+# Configuration file for Wireshark 2.4.1.
 #
 # This file is regenerated each time preferences are saved within
 # Wireshark. Making manual changes should be safe, however.
@@ -84,7 +84,7 @@ gui.geometry.save.size: FALSE
 # TRUE or FALSE (case-insensitive)
 gui.geometry.save.maximized: FALSE
 
-# Use OS X style (OS X with native GTK only)?
+# Use macOS style (macOS with native GTK only)?
 # TRUE or FALSE (case-insensitive)
 #gui.macosx_style: TRUE
 
@@ -211,7 +211,7 @@ gui.auto_scroll_on_expand: TRUE
 
 # Packet list hidden columns
 # List all columns to hide in the packet list.
-gui.column.hidden: %At,%Cus:frame.time_delta:0:R,%Cus:mptcp.stream:0:R,%Cus:mptcp.app_latency:0:R,%Cus:ip.src:1:R,%Cus:ip.dst:1:R,%rnd,%Cus:mptcp.ack:0:R,%Cus:mptcp.ack:0:R,%Cus:tcp.options.mptcp.subflowseqno:0:R,%Cus:tcp.len:0:R,%Cus:tcp.options.mptcp.recvtok:0:R,%Cus:tcp.options.mptcp.expected_idsn:0:R,%Cus:tcp.options.mptcp.sendkey:0:R,%Cus:tcp.nxtseq:0:R,%Cus:tcp.options.mptcp.datafin.flag:0:R,%Cus:tcp.options.mptcp.subflowseqno:0:R,%Cus:mptcp.stream:0:R,%p,%L,%Cus:tcp.options.mptcp.recvkey:0:R,%Cus:mptcp.analysis.mapping.reinjection:0:R
+gui.column.hidden: %At,%Cus:frame.time_delta:0:R,%Cus:mptcp.stream:0:R,%Cus:mptcp.app_latency:0:R,%Cus:ip.src:1:R,%Cus:ip.dst:1:R,%Cus:mptcp.ack:0:R,%Cus:mptcp.ack:0:R,%Cus:tcp.options.mptcp.subflowseqno:0:R,%Cus:tcp.len:0:R,%Cus:tcp.options.mptcp.recvtok:0:R,%Cus:tcp.options.mptcp.expected_idsn:0:R,%Cus:tcp.options.mptcp.sendkey:0:R,%Cus:tcp.nxtseq:0:R,%Cus:tcp.options.mptcp.datafin.flag:0:R,%Cus:tcp.options.mptcp.subflowseqno:0:R,%Cus:mptcp.stream:0:R,%p,%L,%Cus:tcp.options.mptcp.recvkey:0:R,%Cus:mptcp.analysis.mapping.reinjection:0:R
 
 # Packet list column format
 # Each pair of strings consists of a column title and its format
@@ -426,6 +426,98 @@ capture.devices_pmode: eth0(1),any(1),lo(1),nflog(1),nfqueue(1),usbmon1(1),usbmo
 # TRUE or FALSE (case-insensitive)
 #extcap.gui_save_on_start: TRUE
 
+# Remote SSH server address
+# A string
+#extcap.ssh.remotehost: 
+
+# Remote SSH server port
+# A string
+#extcap.ssh.remoteport: 22
+
+# Remote SSH server username
+# A string
+#extcap.ssh.remoteusername: teto
+
+# Path to SSH private key
+# A string
+#extcap.ssh.sshkey: 
+
+# Remote interface
+# A string
+#extcap.ssh.remoteinterface: eth0
+
+# Remote capture command
+# A string
+#extcap.ssh.remotecapturecommand: 
+
+# Use sudo on the remote machine
+# A string
+#extcap.ssh.remotesudo: 
+
+# Remote capture filter
+# A string
+#extcap.ssh.remotefilter: not ((host fe80::fc54:ff:fe16:9921 or host fe80::fc54:ff:fe02:d9f9 or host fe80::a526:bf7:4811:7e4 or host 10.166.94.249 or host 192.168.122.1 or host 192.168.0.129) and port 22)
+
+# Packets to capture
+# A string
+#extcap.ssh.remotecount: 0
+
+# Max bytes in a packet
+# A string
+#extcap.randpkt.maxbytes: 5000
+
+# Number of packets
+# A string
+#extcap.randpkt.count: 1000
+
+# Random type
+# A string
+#extcap.randpkt.randomtype: false
+
+# All random packets
+# A string
+#extcap.randpkt.allrandom: false
+
+# Type of packet
+# A string
+#extcap.randpkt.type: 
+
+# Listen port
+# A string
+#extcap.udpdump.port: 5555
+
+# Payload type
+# A string
+#extcap.udpdump.payload: data
+
+# Remote SSH server address
+# A string
+#extcap.cisco.remotehost: 
+
+# Remote SSH server port
+# A string
+#extcap.cisco.remoteport: 22
+
+# Remote SSH server username
+# A string
+#extcap.cisco.remoteusername: teto
+
+# Path to SSH private key
+# A string
+#extcap.cisco.sshkey: 
+
+# Remote interface
+# A string
+#extcap.cisco.remoteinterface: 
+
+# Remote capture filter
+# A string
+#extcap.cisco.remotefilter: deny tcp host fe80::fc54:ff:fe16:9921 any eq 22, deny tcp any eq 22 host fe80::fc54:ff:fe16:9921, deny tcp host fe80::fc54:ff:fe02:d9f9 any eq 22, deny tcp any eq 22 host fe80::fc54:ff:fe02:d9f9, deny tcp host fe80::a526:bf7:4811:7e4 any eq 22, deny tcp any eq 22 host fe80::a526:bf7:4811:7e4, deny tcp host 10.166.94.249 any eq 22, deny tcp any eq 22 host 10.166.94.249, deny tcp host 192.168.122.1 any eq 22, deny tcp any eq 22 host 192.168.122.1, deny tcp host 192.168.0.129 any eq 22, deny tcp any eq 22 host 192.168.0.129, permit ip any any
+
+# Packets to capture
+# A string
+#extcap.cisco.remotecount: 
+
 ####### Name Resolution ########
 
 # Resolve Ethernet MAC addresses to host names from the preferences or system's Ethers file, or to a manufacturer based name.
@@ -463,14 +555,6 @@ nameres.use_external_name_resolver: FALSE
 # Resolve SS7 Point Codes to node names from the profiles "ss7pcs" file. Format of the file is: "Network_Indicator<Dash>PC_Decimal<Tab>Name". One line per Point Code, e.g.: 2-1234 MyPointCode1
 # TRUE or FALSE (case-insensitive)
 #nameres.ss7_pc_name: FALSE
-
-# Resolve Object IDs to object names from the MIB and PIB modules defined below. You must restart Wireshark for this change to take effect
-# TRUE or FALSE (case-insensitive)
-#nameres.load_smi_modules: FALSE
-
-# While loading MIB or PIB modules errors may be detected, which are reported. Some errors can be ignored. If unsure, set to false.
-# TRUE or FALSE (case-insensitive)
-#nameres.suppress_smi_errors: FALSE
 
 ####### Printing ########
 
@@ -757,6 +841,14 @@ nameres.use_external_name_resolver: FALSE
 # Some generators incorrectly indicate long preamble when the preamble was actuallyshort. Always assume short preamble when calculating duration.
 # TRUE or FALSE (case-insensitive)
 #wlan_radio.always_short_preamble: FALSE
+
+# Some generators timestamp the end of the PPDU rather than the start of the (A)MPDU.
+# TRUE or FALSE (case-insensitive)
+#wlan_radio.tsf_at_end: TRUE
+
+# Enables an additional panel for navigating through packets
+# TRUE or FALSE (case-insensitive)
+#wlan_radio.timeline: FALSE
 
 # Radiotap has a bit to indicate whether the FCS is still on the frame or not. Some generators (e.g. AirPcap) use a non-standard radiotap flag 14 to put the FCS into the header.
 # TRUE or FALSE (case-insensitive)
@@ -1491,6 +1583,10 @@ nameres.use_external_name_resolver: FALSE
 # TRUE or FALSE (case-insensitive)
 #dns.desegment_dns_messages: TRUE
 
+# Whether or not to validate the Header Check Sequence
+# TRUE or FALSE (case-insensitive)
+#docsis.check_fcs: TRUE
+
 # Specifies that decryption should be attempted on all packets, even if the session initialization wasn't captured.
 # TRUE or FALSE (case-insensitive)
 #dof.custom_dof_decrypt_all: FALSE
@@ -1597,6 +1693,26 @@ nameres.use_external_name_resolver: FALSE
 # For analysis purposes one might want to show the command layer even if the dissectore assumes a duplicated frame
 # TRUE or FALSE (case-insensitive)
 #epl.show_duplicated_command_layer: FALSE
+
+# For analysis purposes one might want to see how long the current mapping has been active for and what OD write caused it
+# TRUE or FALSE (case-insensitive)
+#epl.show_pdo_meta_info: FALSE
+
+# Partition PDOs according to ObjectMappings sent via SDO
+# TRUE or FALSE (case-insensitive)
+#epl.use_sdo_mappings: TRUE
+
+# If you want to parse the defaultValue (XDD) and actualValue (XDC) attributes for ObjectMappings in order to detect default PDO mappings, which may not be sent over SDO 
+# TRUE or FALSE (case-insensitive)
+#epl.use_xdc_mappings: TRUE
+
+# If a data field has untyped data under 8 byte long, interpret it as unsigned little endian integer and show decimal and hexadecimal representation thereof. Otherwise use stock data dissector
+# TRUE or FALSE (case-insensitive)
+#epl.interpret_untyped_as_le: TRUE
+
+# If you have a capture without IdentResponse and many nodes, it's easier to set a default profile here than to add entries for all MAC address or Node IDs
+# A path to a file
+#epl.default_profile: 
 
 # Protocol encapsulated in HDLC records
 # One of: Cisco HDLC, PPP serial, Frame Relay, SS7 MTP2, Attempt to guess
@@ -1756,6 +1872,10 @@ nameres.use_external_name_resolver: FALSE
 # TRUE or FALSE (case-insensitive)
 #fp.header_checksum: TRUE
 
+# For each PCH data frame, Try to show the paging indications bitmap found in the previous frame
+# TRUE or FALSE (case-insensitive)
+#fp.track_paging_indications: TRUE
+
 # Encapsulation
 # One of: FRF 3.2/Cisco HDLC, GPRS Network Service, Raw Ethernet
 # (case-insensitive).
@@ -1845,6 +1965,10 @@ nameres.use_external_name_resolver: FALSE
 # TRUE or FALSE (case-insensitive)
 #llcgprs.autodetect_cipher_bit: FALSE
 
+# Whether the Gryphon dissector should desegment all messages spanning multiple TCP segments
+# TRUE or FALSE (case-insensitive)
+#gryphon.desegment: TRUE
+
 # No description
 # TRUE or FALSE (case-insensitive)
 #gsm_ipa.hsl_debug_in_root_tree: FALSE
@@ -1856,6 +1980,10 @@ nameres.use_external_name_resolver: FALSE
 # Whether the dissector should reassemble SMS spanning multiple packets
 # TRUE or FALSE (case-insensitive)
 #gsm_sms.reassemble: TRUE
+
+# Whether the dissector should take into account info coming from lower layers (like GSM-MAP) to perform SMS reassembly
+# TRUE or FALSE (case-insensitive)
+#gsm_sms.reassemble_with_lower_layers_info: TRUE
 
 # Always decode a GSM Short Message as Connectionless WSP if a Port Number Information Element is present in the SMS User Data Header.
 # TRUE or FALSE (case-insensitive)
@@ -1918,6 +2046,12 @@ nameres.use_external_name_resolver: FALSE
 # Track GTP session
 # TRUE or FALSE (case-insensitive)
 #gtp.track_gtp_session: FALSE
+
+# Use this setting to decode the Transparent Containers in the SRVCC PS-to-CS messages.
+# This is needed until there's a reliable way to determine the contents of the transparent containers.
+# One of: Don't decode, Assume UTRAN target
+# (case-insensitive).
+#gtpv2.decode_srvcc_p2c_trans_cont_target: Don't decode
 
 # H.225 Server TLS Port
 # A decimal number
@@ -2091,10 +2225,6 @@ nameres.use_external_name_resolver: FALSE
 # Dissect payload only if FCS is valid.
 # TRUE or FALSE (case-insensitive)
 #wpan.802154_fcs_ok: TRUE
-
-# 128-bit decryption key in hexadecimal format
-# A string
-#wpan.802154_key: 
 
 # Specifies the security suite to use for 802.15.4-2003 secured frames (only supported suites are listed). Option ignored for 802.15.4-2006 and unsecured frames.
 # One of: AES-128 Encryption, 128-bit Integrity Protection, AES-128 Encryption, 64-bit Integrity Protection, AES-128 Encryption, 32-bit Integrity Protection
@@ -2424,14 +2554,6 @@ nameres.use_external_name_resolver: FALSE
 # TRUE or FALSE (case-insensitive)
 #kerberos.desegment: TRUE
 
-# Whether the dissector should try to decrypt encrypted Kerberos blobs. This requires that the proper keytab file is installed as well.
-# TRUE or FALSE (case-insensitive)
-#kerberos.decrypt: FALSE
-
-# The keytab file containing all the secrets
-# A path to a file
-#kerberos.file: 
-
 # KT allows binary values in keys and values. Attempt to show an ASCII representation anyway (which might be prematurely terminated by a NULL!
 # TRUE or FALSE (case-insensitive)
 #kt.present_key_val_as_ascii: FALSE
@@ -2597,6 +2719,10 @@ nameres.use_external_name_resolver: FALSE
 # TRUE or FALSE (case-insensitive)
 #mac-lte.show_bsr_median: FALSE
 
+# The name of the file containing the mate module's configuration
+# A path to a file
+#mate.config: 
+
 # Decode control data received on "usb.control" with an unknown interface class as MBIM
 # TRUE or FALSE (case-insensitive)
 #mbim.control_decode_unknown_itf: FALSE
@@ -2669,6 +2795,10 @@ nameres.use_external_name_resolver: FALSE
 # Remove any base64 content-transfer encoding from bodies. This supports export of the body and its further dissection.
 # TRUE or FALSE (case-insensitive)
 #mime_multipart.remove_base64_encoding: FALSE
+
+# Dissect payload only if MIC is valid.
+# TRUE or FALSE (case-insensitive)
+#mle.meshlink_mic_ok: FALSE
 
 # Register Format
 # One of: UINT16     , INT16      , UINT32     , INT32      , IEEE FLT   , MODICON FLT
@@ -3024,13 +3154,17 @@ msgpack-rpc.tcp_ports: 6666
 # TRUE or FALSE (case-insensitive)
 #nlm.msg_res_matching: FALSE
 
+# In the standard the Source Node Identifier is the first byte and the Control Bit Vector is the second byte. Using this parameter they can be swapped
+# TRUE or FALSE (case-insensitive)
+#nm.swap_ctrl_and_src: TRUE
+
 # NT Password (used to decrypt payloads)
 # A string
 #ntlmssp.nt_password: 
 
-# Range of NVMe Subsystem ports(default 4220)
+# Range of NVMe Subsystem ports(default 4420)
 # A string denoting an positive integer range (e.g., "1-20,30-40")
-#nvme-rdma.subsystem_ports: 4220
+#nvme-rdma.subsystem_ports: 4420
 
 # Dissect custom olsr.org message types (compatible with rfc routing agents)
 # TRUE or FALSE (case-insensitive)
@@ -3059,6 +3193,14 @@ msgpack-rpc.tcp_ports: 6666
 # Automatically assign a detected SCM UDID (by reading SNMT->SNTM_assign_UDID_SCM) and set it for the file
 # TRUE or FALSE (case-insensitive)
 #opensafety.scm_udid_autoset: TRUE
+
+# A comma-separated list of nodes to be filtered during dissection
+# A string
+#opensafety.filter_nodes: 
+
+# If set to true, only nodes in the list will be shown, otherwise they will be hidden
+# TRUE or FALSE (case-insensitive)
+#opensafety.filter_show_nodes_in_filterlist: TRUE
 
 # Port used by any UDP demo implementation to transport data
 # A decimal number
@@ -3221,6 +3363,10 @@ msgpack-rpc.tcp_ports: 6666
 # TRUE or FALSE (case-insensitive)
 #pdcp-lte.verify_integrity: TRUE
 
+# Ignore the LTE RRC security algorithm configuration, to be used when PDCP is already deciphered in the capture
+# TRUE or FALSE (case-insensitive)
+#pdcp-lte.ignore_rrc_sec_params: FALSE
+
 # Whether the dissector should put the internal PER data in the tree or if it should hide it
 # TRUE or FALSE (case-insensitive)
 #per.display_internal_per_fields: FALSE
@@ -3245,10 +3391,26 @@ msgpack-rpc.tcp_ports: 6666
 # TRUE or FALSE (case-insensitive)
 #pkcs12.try_null_password: FALSE
 
+# Whether the PN-RT summary line should be shown in the protocol tree
+# TRUE or FALSE (case-insensitive)
+#pn_rt.summary_in_tree: TRUE
+
+# Reassemble PNIO Fragments and get them decoded
+# TRUE or FALSE (case-insensitive)
+#pn_rt.desegment: TRUE
+
 # Protocol payload type
 # One of: Data, Sony FeliCa, NXP MiFare, ISO 7816
 # (case-insensitive).
 #pn532.prtype532: Data
+
+# Whether the PNIO dissector is allowed to use detailed PROFIsafe dissection of cyclic data frames
+# TRUE or FALSE (case-insensitive)
+#pn_io.pnio_ps_selection: TRUE
+
+# Select your Networkpath to your GSD-Files.
+# A path to a directory
+#pn_io.pnio_ps_networkpath: 
 
 # Whether the POP dissector should reassemble RETR and TOP responses and spanning multiple TCP segments. To use this option, you must also enable "Allow subdissectors to reassemble TCP streams" in the TCP protocol settings.
 # TRUE or FALSE (case-insensitive)
@@ -3332,6 +3494,10 @@ msgpack-rpc.tcp_ports: 6666
 # Whether to add or not to the tree the AVP's payload length
 # TRUE or FALSE (case-insensitive)
 #radius.show_length: FALSE
+
+# Whether to interpret 241-246 as extended attributes according to RFC 6929
+# TRUE or FALSE (case-insensitive)
+#radius.disable_extended_attributes: FALSE
 
 # The SCCP SubSystem Number for RANAP (default 142)
 # A decimal number
@@ -4138,6 +4304,22 @@ msgpack-rpc.tcp_ports: 6666
 # TRUE or FALSE (case-insensitive)
 #tetra.include_carrier_number: TRUE
 
+# Try to decode CoAP for Thread
+# TRUE or FALSE (case-insensitive)
+#thread.thr_coap_decode: FALSE
+
+# 32-bit sequence counter for hash
+# A string
+#thread.thr_seq_ctr: 
+
+# Set if the PAN ID should be used as the first two octets of the master key (PAN ID LSB), (PAN ID MSB), Key[2]...
+# TRUE or FALSE (case-insensitive)
+#thread.thr_use_pan_id_in_key: FALSE
+
+# Set if the Thread sequence counter should be automatically acquired from Key ID mode 2 MLE messages.
+# TRUE or FALSE (case-insensitive)
+#thread.thr_auto_acq_thr_seq_ctr: TRUE
+
 # Time display type
 # One of: UTC, Local
 # (case-insensitive).
@@ -4191,6 +4373,46 @@ msgpack-rpc.tcp_ports: 6666
 # No description
 # A decimal number
 #tpncp.udp.trunkpack_port: 2424
+
+# Position of the capture unit that produced this trace.  This setting affects the way TRANSUM handles TCP Retransmissions.  See the manual for details.
+# One of: Client, Intermediate, Service
+# (case-insensitive).
+#transum.capture_position: Client
+
+# Set this to match to the TCP subdissector reassembly setting
+# TRUE or FALSE (case-insensitive)
+#transum.reassembly: TRUE
+
+# Add and remove ports numbers separated by commas
+# Ranges are supported e.g. 25,80,2000-3000,5432
+# A string denoting an positive integer range (e.g., "1-20,30-40")
+#transum.tcp_port_ranges: 25,80,443,1433
+
+# Add and remove ports numbers separated by commas
+# Ranges are supported e.g. 123,137-139,520-521,2049
+# A string denoting an positive integer range (e.g., "1-20,30-40")
+#transum.udp_port_ranges: 137-139
+
+# Set this to discard any packet in the direction client to service,
+# with a 1-byte payload of 0x00 and the ACK flag set
+# TRUE or FALSE (case-insensitive)
+#transum.orphan_ka_discard: FALSE
+
+# RTE data will be added to the first request packet
+# TRUE or FALSE (case-insensitive)
+#transum.rte_on_first_req: FALSE
+
+# RTE data will be added to the last request packet
+# TRUE or FALSE (case-insensitive)
+#transum.rte_on_last_req: TRUE
+
+# RTE data will be added to the first response packet
+# TRUE or FALSE (case-insensitive)
+#transum.rte_on_first_rsp: FALSE
+
+# RTE data will be added to the last response packet
+# TRUE or FALSE (case-insensitive)
+#transum.rte_on_last_rsp: FALSE
 
 # Critical Traffic Mask (base hex)
 # A hexadecimal number
@@ -4307,6 +4529,27 @@ msgpack-rpc.tcp_ports: 6666
 # One of: No subdissection, Line based text, As json, As SIP
 # (case-insensitive).
 #websocket.text_type: No subdissection
+
+# Set the maximum Basic CID used in the Wimax decoder (if other than the default of 320).  Note: The maximum Primary CID is double the maximum Basic CID.
+# A decimal number
+#wmx.basic_cid_max: 320
+
+# Set to TRUE to use the Corrigendum 2 version of Wimax message decoding. Set to FALSE to use the 802.16e-2005  version.
+# TRUE or FALSE (case-insensitive)
+#wmx.corrigendum_2_version: FALSE
+
+# Show transaction ID direction bit separately from the rest of the transaction ID field.
+# TRUE or FALSE (case-insensitive)
+#wimaxasncp.show_transaction_id_d_bit: FALSE
+
+# Print debug output to the console.
+# TRUE or FALSE (case-insensitive)
+#wimaxasncp.debug_enabled: FALSE
+
+# Version of the NWG that the R6 protocol complies with
+# One of: R1.0 v1.0.0, R1.0 v1.2.0, R1.0 v1.2.1
+# (case-insensitive).
+#wimaxasncp.nwg_version: R1.0 v1.2.1
 
 # Whether the WINS-Replication dissector should reassemble messages spanning multiple TCP segments. To use this option, you must also enable "Allow subdissectors to reassemble TCP streams" in the TCP protocol settings.
 # TRUE or FALSE (case-insensitive)
