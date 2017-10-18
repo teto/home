@@ -156,6 +156,8 @@ rec {
 #  astropro="astroid -c ~/.config/astroid/config_pro"
 # }}}
 
+      nixpaste="curl -F 'text=<-' http://nixpaste.lbr.uno";
+
    };
 
 
@@ -368,6 +370,7 @@ rec {
   # todo set it only if path exists
   #  options.nix.nixPath.default ++ TODO mkMerge/mkBefore etc
   # convert set back to list
+  # pkgs.lib.mkBefore
   nix.nixPath = 
   [
     "nixos-config=/home/teto/dotfiles/nixpkgs/configuration.nix:/nix/var/nix/profiles/per-user/root/channels"

@@ -111,15 +111,15 @@ in
     };
   };
 
-  programs.zsh = {
-    enable = true;
-    sessionVariables = {
-      HISTFILE="$XDG_CACHE_HOME/zsh_history";
-    };
-    shellAliases = {
-    nixpaste="curl -F 'text=<-' http://nixpaste.lbr.uno";
-    };
-  };
+  # programs.zsh = {
+  #   enable = true;
+  #   sessionVariables = {
+  #     HISTFILE="$XDG_CACHE_HOME/zsh_history";
+  #   };
+  #   shellAliases = {
+  #   nixpaste="curl -F 'text=<-' http://nixpaste.lbr.uno";
+  #   };
+  # };
 
   # programs.git = {
     #   enable = true;
