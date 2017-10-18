@@ -2,7 +2,7 @@
 self: super:
 let
   filter-cmake = builtins.filterSource (p: t: super.lib.cleanSourceFilter p t && baseNameOf p != "build");
-  wiresharkFolder = ~/wireshark;
+  wiresharkFolder = file:///home/teto/wireshark;
 in
   {
   wireshark-local = super.wireshark.overrideAttrs (oldAttrs: {
