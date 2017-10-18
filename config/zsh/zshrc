@@ -39,7 +39,7 @@
 # HISTFILE="$XDG_CACHE_HOME/zsh_history.tmp"
 
 # make some commands not show up in history
-# export HISTIGNORE="ls:ll:cd:cd -:pwd:exit:date:* --help"
+export HISTIGNORE="ls:ll:cd -:pwd:exit:date"
 
 # multiple zsh sessions will append to the same history file (incrementally, after each command is executed)
 # setopt inc_append_history
@@ -60,7 +60,7 @@ setopt beep # (no_)beep don't beep on error
 setopt interactive_comments # Allow comments even in interactive shells (especially for Muness)
 
 # ===== Changing Directories
-setopt auto_cd # If you type foo, and it isn't a command, and it is a directory in your cdpath, go there
+setopt auto_cd
 setopt cdablevarS # if argument to cd is the name of a parameter whose value is a valid directory, it will become the current directory
 setopt pushd_ignore_dups # don't push multiple copies of the same directory onto the directory stack
 

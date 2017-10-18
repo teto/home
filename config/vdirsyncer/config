@@ -21,9 +21,11 @@ conflict_resolution = ["command", "nvim -d"]
 
 [storage japon_ferie_remote]
 type = "google_calendar"
-token_file = "..."
-client_id = "..."
-client_secret = "..."
+# hopefully we can use env variables
+# todo put it into readonly
+token_file = "~/.local/vdirsyncer"
+client_id = "1040176666032-jtmq7o63ddo2r2oo298fso7rdl7li6j9.apps.googleusercontent.com"
+client_secret = "~/.config/vdirsyncer/client_secret_1040176666032-jtmq7o63ddo2r2oo298fso7rdl7li6j9.apps.googleusercontent.com.json"
 
 [storage japon_ferie_local]
 type = "filesystem"

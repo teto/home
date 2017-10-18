@@ -137,8 +137,7 @@ rec {
 
   # castxml = super.stdenv.lib.optional (!(super.pkgs ? castxml)) super.callPackage ../castxml.nix { pkgs = super.pkgs;  };
   xl2tpd = super.xl2tpd.overrideAttrs ( oldAttrs : rec {
-    makeFlags = [ "PREFIX=$(out)" ];
-    # -DUSE_KERNEL
+    makeFlags = oldAttrs ++ [ "-DUSE_KERNEL" ];
   });
 
   msmtp = super.msmtp.overrideAttrs(oldAttrs: rec {
