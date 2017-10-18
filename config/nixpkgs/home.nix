@@ -1,23 +1,25 @@
 { pkgs, ... }:
 
 let
-  # extraPackages = with pkgs; [
-  #   alacritty
-  #   ];
+  # the kind of packages u don't want to compile
+  extraPackages = with pkgs;[
+          libreoffice
+          qutebrowser
+          qtcreator
+          zotero
+        # astroid # always compiles webkit so needs 1 full day
+  ];
   desktopPkgs = with pkgs; [
           buku
           dropbox
           gnome3.nautilus
           ffmpegthumbnailer # to preview videos in ranger
           haskellPackages.greenclip # todo get from haskell
-          libreoffice
           mendeley
           nox
           # gnome3.gnome_control_center
           pinta
           qtpass
-          qutebrowser
-          qtcreator
           sublime3
           scrot
           system_config_printer
@@ -27,7 +29,6 @@ let
           xorg.xev
           xclip
           zathura
-          zotero
           zeal
   ];
   devPkgs = with pkgs; [
@@ -43,13 +44,10 @@ let
           nix-index
           python3Packages.neovim
           python3Packages.pycodestyle
-          pstree
           rpl
-          slack
           universal-ctags
           ];
     imPkgs = with pkgs; [
-        # astroid
         offlineimap # python 2 only
         # python27Packages.alot # python 2 only
         khal

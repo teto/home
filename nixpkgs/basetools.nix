@@ -20,6 +20,7 @@ environment.systemPackages = with pkgs; [
      ipsecTools # does it provide ipsec ?
      neovim
      pkgconfig
+     pstree
      ranger
      ripgrep
      stow
