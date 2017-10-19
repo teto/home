@@ -196,7 +196,7 @@ Plug 'sjl/gundo.vim' " :GundoShow/Toggle to redo changes
 "'frozen': 1,
 " use deoplete for python ?
 " Plug 'Valloric/YouCompleteMe' , { 'do': ':new \| call termopen(''python3 ./install.py --system-libclang --clang-completer'')', 'frozen': 1}
-Plug 'lyuts/vim-rtags'  " a l'air d'etre le plus complet <leader>ri
+" Plug 'lyuts/vim-rtags'  " a l'air d'etre le plus complet <leader>ri
 " Plug 'zchee/deoplete-clang', { 'for': 'c' }
 " Plug 'tweekmonster/deoplete-clang2', { 'for': 'c' }
 "
@@ -217,7 +217,8 @@ Plug 'eagletmt/ghcmod-vim', {'do': 'cabal install ghc-mod', 'for': 'haskell'} " 
 " Plug 'bitc/vim-hdevtools'
 Plug 'eagletmt/neco-ghc', {'for': 'haskell'} " completion plugin for haskell + deoplete ?
 Plug 'Shougo/vimproc.vim', {'do' : 'make'} " needed by neco-ghc
-Plug 'SevereOverfl0w/deoplete-github' " completion on commit issues
+" Plug 'SevereOverfl0w/deoplete-github' " completion on commit issues (just
+" crashes without netrc
 Plug 'zchee/deoplete-zsh'
 Plug 'fszymanski/deoplete-abook'
 " Plug 'Twinside/vim-hoogle' , {'for':'haskell'}

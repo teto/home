@@ -52,6 +52,8 @@ rec {
 
   # see https://github.com/NixOS/nixpkgs/issues/15293
   boot.kernelPackages = pkgs.linuxPackages_latest;
+  # kernelModules are forcibly loaded C
+  # availableKernelModules are just available, and udev will auto-load them as needed
   boot.kernelModules = [
     "af_key" # for ipsec/vpn support
     "kvm"  # for virtualisation
@@ -270,6 +272,8 @@ rec {
   #   enable = true;
   #   secrets = [ "/etc/ipsec.d" ];
   # };
+
+  programs.man.enable = true;
 
   programs.zsh.enable = true;
   programs.zsh.enableCompletion = true;
