@@ -161,18 +161,17 @@ rec {
   #     };
   #   };
   # };
-
   # pythonPackages = python.pkgs;
 
-  # ns3 = if (super.pkgs ? ns3) then super.callPackage ../ns3.nix {
-  #   pkgs = self.pkgs;
-  #   python = self.pkgs.pythonPackages.python;
-  #   withTests = true;
-  #   generateBindings = true;
-  #   withExamples = true;
-  #   pygccxml = self.pythonPackages.pygccxml;
-  # } else null;
-  # dce = if (super.pkgs ? ns3) then super.callPackage ../dce.nix { pkgs = super.pkgs;  } else null;
+  ns3 = if (super.pkgs ? ns3) then super.callPackage ../ns3.nix {
+    pkgs = self.pkgs;
+    python = self.pkgs.pythonPackages.python;
+    # withTests = true;
+    # generateBindings = true;
+    # withExamples = true;
+    # pygccxml = self.pythonPackages.pygccxml;
+  } else null;
+  dce = if (super.pkgs ? ns3) then super.callPackage ../dce.nix { pkgs = super.pkgs;  } else null;
 
   mptcpanalyzer = super.callPackage ../mptcpanalyzer.nix { pkgs = super.pkgs;  };
 }

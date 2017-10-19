@@ -6,7 +6,6 @@
 , withExamples ? false
 , withTests ? false
 , withLibOS ? false
-, modules ? [ "core" ]
 }:
 
 stdenv.mkDerivation rec {

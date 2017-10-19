@@ -2,7 +2,7 @@
 , fetchFromGitHub, fetchurl
 , python
 # TODO remove once merged upstream
-, pygccxml
+, pygccxml ? null
 
 , withNetanim ? false
 , withDoc ? false
@@ -17,7 +17,8 @@
 , generateBindings ? false
 
 # All modules can be enabled by choosing 'all_modules'.
-, modules ? [ "core" ]
+# included here the DCE mandatory ones
+, modules ? [ "core" "network" "internet" "point-to-point"]
 , pkgs
 , lib
 }:
@@ -60,7 +61,7 @@ stdenv.mkDerivation rec {
     # make configure
     # TODO limit modules so that it gets faster
     ./waf configure --prefix=$out \
-      --enable-modules=core \
+      --enable-modules="${stdenv.lib.concatStringsSep "," modules}" \
       '' + stdenv.lib.optionalString withExamples " --enable-examples "
       + stdenv.lib.optionalString withTests " --enable-tests " + ''
 
