@@ -42,6 +42,8 @@ home:
 keyring:
 	echo "Setup keyrings"
 	echo " nix-shell -p python36Packages.secretstorage -p python36Packages.keyring -p python36Packages.pygobject3"
+	# or one can use secret-tool to store data
+	# secret-tool store --label msmtp host smtp.gmail.com service smtp user mattator
 	#keyring set
 	keyring set gmail login
 	keyring set gmail password

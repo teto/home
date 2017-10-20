@@ -2,10 +2,14 @@
 
 let
   # the kind of packages u don't want to compile
-  extraPackages = with pkgs;[
+  # TODO les prendres depuis un channel avec des binaires ?
+  heavyPackages = with pkgs;[
           libreoffice
           qutebrowser
+          mendeley # requiert qtwebengine
+          pinta
           qtcreator
+          zeal
           zotero
         # astroid # always compiles webkit so needs 1 full day
   ];
@@ -15,10 +19,8 @@ let
           gnome3.nautilus
           ffmpegthumbnailer # to preview videos in ranger
           haskellPackages.greenclip # todo get from haskell
-          mendeley
           nox
           # gnome3.gnome_control_center
-          pinta
           qtpass
           sublime3
           scrot
@@ -29,7 +31,6 @@ let
           xorg.xev
           xclip
           zathura
-          zeal
   ];
   devPkgs = with pkgs; [
           editorconfig-core-c
@@ -61,6 +62,9 @@ let
         # leafnode dovecot22 dovecot_pigeonhole fetchmail procmail w3m
         # mairix mutt msmtp lbdb contacts spamassassin
       ];
+      # TODO add heavyPackages only if available ?
+      # or set binary-cache
+    # nixos= import '<nixos-unstable>' 
 in
 {
   home.packages = desktopPkgs ++ devPkgs ++ imPkgs;

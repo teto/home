@@ -140,13 +140,13 @@ rec {
     makeFlags = oldAttrs ++ [ "-DUSE_KERNEL" ];
   });
 
-  msmtp = super.msmtp.overrideAttrs(oldAttrs: rec {
+  # msmtp = super.msmtp.overrideAttrs(oldAttrs: rec {
 
-    # postBuild
-# makeWrapper $out/bin/foo $wrapperfile --set FOOBAR baz
-    # we need keyring to retreive passwords etc
-    propagatedBuildInputs = with super.pkgs.python3Packages; [ requests_oauthlib keyring secretstorage ] ++ [ super.pkgs.liboauth ];
-  });
+  #   # postBuild
+# # makeWrapper $out/bin/foo $wrapperfile --set FOOBAR baz
+  #   # we need keyring to retreive passwords etc
+  #   propagatedBuildInputs = with super.pkgs.python3Packages; [ requests_oauthlib keyring secretstorage ] ++ [ super.pkgs.liboauth ];
+  # });
 
 
 
