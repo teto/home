@@ -383,7 +383,8 @@ rec {
   ;
   #  to keep build-time dependencies around => rebuild while being offline
   # build-use-sandbox = true
-nix.extraOptions = ''
+  nix.extraOptions = ''
+    build-use-sandbox = true
     gc-keep-outputs = true
     gc-keep-derivations = true
   '';
