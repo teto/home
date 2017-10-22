@@ -6,6 +6,7 @@ let
   heavyPackages = with pkgs;[
           libreoffice
           qutebrowser
+          gnome3.nautilus # demande webkit
           mendeley # requiert qtwebengine
           pinta
           qtcreator
@@ -16,7 +17,6 @@ let
   desktopPkgs = with pkgs; [
           buku
           dropbox
-          gnome3.nautilus
           ffmpegthumbnailer # to preview videos in ranger
           haskellPackages.greenclip # todo get from haskell
           nox
@@ -53,7 +53,7 @@ let
         # python27Packages.alot # python 2 only
         khal
         khard
-        msmtp
+        # msmtp
         newsbeuter
         notmuch
         slack
