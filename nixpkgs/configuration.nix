@@ -24,8 +24,10 @@ rec {
 
 
   networking.hostName = "jedha"; # Define your hostname.
+  networking.extraHosts = ''
+    202.214.86.52 iij_vm
+  '';
 
-  
   imports =
     [ # Include the results of the hardware scan.
       /etc/nixos/hardware-configuration.nix
@@ -216,7 +218,7 @@ rec {
   services.openntpd = {
     enable = true;
     # add iij ntp servers
-    # servers
+    servers = [ "" ];
   };
   # Enable the X11 windowing system.
   services.xserver = {
