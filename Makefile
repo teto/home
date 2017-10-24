@@ -91,15 +91,15 @@ wireshark: | $(WIRESHARK_FOLDER)
 $(WIRESHARK_FOLDER):
 	git clone git@github.com:teto/wireshark.git "${WIRESHARK_FOLDER}"
 	cd "${WIRESHARK_FOLDER}"
-	git remote add gh_upstream http://github.com/wireshark/wireshark.git
-	git remote add upstream https://code.wireshark.org/review/p/wireshark.git
+	$(shell git remote add gh_upstream http://github.com/wireshark/wireshark.git)
+	$(shell git remote add upstream https://code.wireshark.org/review/p/wireshark.git)
 	cd -
 
 nixpkgs: | $(NIXPKGS_FOLDER)
 
 $(NIXPKGS_FOLDER):
-	git clone https://github.com/NixOS/nixpkgs.git "${NIXPKGS_FOLDER}"
-	cd "${NIXPKGS_FOLDER}"
+	git clone https://github.com/NixOS/nixpkgs.git "$(NIXPKGS_FOLDER)"
+	cd "$(NIXPKGS_FOLDER)"
 	git remote add channels git://github.com/NixOS/nixpkgs-channels.git
 	git remote update channels
 	git remote add gh git://github.com/teto/nixpkgs.git

@@ -53,7 +53,7 @@ let
         # python27Packages.alot # python 2 only
         khal
         khard
-        msmtp
+        # msmtp
         newsbeuter
         notmuch
         slack

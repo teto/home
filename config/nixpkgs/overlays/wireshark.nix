@@ -2,7 +2,8 @@
 self: super:
 let
   filter-cmake = builtins.filterSource (p: t: super.lib.cleanSourceFilter p t && baseNameOf p != "build");
-  wiresharkFolder = file:///home/teto/wireshark;
+  # won't work on sandboxed
+  wiresharkFolder = /home/teto/wireshark;
 in
   {
   wireshark-local = super.wireshark.overrideAttrs (oldAttrs: {
@@ -20,8 +21,8 @@ in
     name = "wireshark-local-stable";
     src = super.pkgs.fetchgit {
       url = wiresharkFolder;
-      rev = "e3e9e8841e117171f84c9b9689f203ba33ec0e8a" ;
-      sha256 = "0zp9ji7wgrvzkjkfj6a51r56bq677n2wjkq0phhky81v1g7fbqd7";
+      rev = "mptcp_reinject_stable";
+      sha256 = "0pbmdwphmz4c6g9rvi58kmjhkvhy5ys5y8dzl2cfh8w00jc62cn0";
     };
     # TODO
     postBuild = ''

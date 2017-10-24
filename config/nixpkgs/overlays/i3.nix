@@ -154,17 +154,20 @@ rec {
 
 
   # nix-shell -p python.pkgs.my_stuff
-  # python = super.python.override {
-  #    # Careful, we're using a different self and super here!
-  #   packageOverrides = self: super: {
-  #     # if (super.pkgs ? pygccxml) then null else
-  #       pygccxml =  super.callPackage ../pygccxml.nix {
-  #       # pkgs = super.pkgs;
-  #       # pythonPackages = self.pkgs.python3Packages;
-  #     };
-  #   };
-  # };
-  # pythonPackages = python.pkgs;
+  python = super.python.override {
+     # Careful, we're using a different self and super here!
+    packageOverrides = self: super: {
+      # if (super.pkgs ? pygccxml) then null else
+        pygccxml =  super.callPackage ../pygccxml.nix {
+        # pkgs = super.pkgs;
+        # pythonPackages = self.pkgs.python3Packages;
+        pandas = super.pkgs.pythonPackages.pandas.overrideAttrs {
+          doCheck = false;
+        };
+      };
+    };
+  };
+  pythonPackages = python.pkgs;
 
   ns3 = if (super.pkgs ? ns3) then super.callPackage ../ns3.nix {
     pkgs = self.pkgs;
@@ -176,5 +179,7 @@ rec {
   } else null;
   dce = if (super.pkgs ? ns3) then super.callPackage ../dce.nix { pkgs = super.pkgs;  } else null;
 
-  mptcpanalyzer = super.callPackage ../mptcpanalyzer.nix { pkgs = super.pkgs;  };
+
+  # pkgs = super.pkgs;
+  mptcpanalyzer = super.callPackage ../mptcpanalyzer.nix {};
 }

@@ -211,7 +211,7 @@ gui.auto_scroll_on_expand: TRUE
 
 # Packet list hidden columns
 # List all columns to hide in the packet list.
-gui.column.hidden: %At,%Cus:frame.time_delta:0:R,%Cus:mptcp.stream:0:R,%Cus:mptcp.app_latency:0:R,%Cus:ip.src:1:R,%Cus:ip.dst:1:R,%Cus:mptcp.ack:0:R,%Cus:mptcp.ack:0:R,%Cus:tcp.options.mptcp.subflowseqno:0:R,%Cus:tcp.len:0:R,%Cus:tcp.options.mptcp.recvtok:0:R,%Cus:tcp.options.mptcp.expected_idsn:0:R,%Cus:tcp.options.mptcp.sendkey:0:R,%Cus:tcp.nxtseq:0:R,%Cus:tcp.options.mptcp.datafin.flag:0:R,%Cus:tcp.options.mptcp.subflowseqno:0:R,%Cus:mptcp.stream:0:R,%p,%L,%Cus:tcp.options.mptcp.recvkey:0:R,%Cus:mptcp.analysis.mapping.reinjection:0:R
+gui.column.hidden: %Cus:frame.time_delta:0:R,%Cus:mptcp.stream:0:R,%Cus:mptcp.app_latency:0:R,%Cus:ip.src:1:R,%Cus:ip.dst:1:R,%Cus:mptcp.ack:0:R,%Cus:mptcp.ack:0:R,%Cus:tcp.options.mptcp.subflowseqno:0:R,%Cus:tcp.len:0:R,%Cus:tcp.options.mptcp.recvtok:0:R,%Cus:tcp.options.mptcp.expected_idsn:0:R,%Cus:tcp.options.mptcp.sendkey:0:R,%Cus:tcp.nxtseq:0:R,%Cus:tcp.options.mptcp.datafin.flag:0:R,%Cus:tcp.options.mptcp.subflowseqno:0:R,%Cus:mptcp.stream:0:R,%p,%L,%Cus:tcp.options.mptcp.recvkey:0:R,%Cus:mptcp.analysis.mapping.reinjection:0:R
 
 # Packet list column format
 # Each pair of strings consists of a column title and its format
@@ -456,7 +456,7 @@ capture.devices_pmode: eth0(1),any(1),lo(1),nflog(1),nfqueue(1),usbmon1(1),usbmo
 
 # Remote capture filter
 # A string
-#extcap.ssh.remotefilter: not ((host fe80::fc54:ff:fe16:9921 or host fe80::fc54:ff:fe02:d9f9 or host fe80::a526:bf7:4811:7e4 or host 10.166.94.249 or host 192.168.122.1 or host 192.168.0.129) and port 22)
+#extcap.ssh.remotefilter: not ((host fe80::fc54:ff:fe7a:ebf4 or host fe80::fc54:ff:fe23:667d or host fe80::fc54:ff:fe63:3c4a or host fe80::fc54:ff:fe32:989e or host fe80::a526:bf7:4811:7e4 or host 192.168.122.1 or host 192.168.0.129) and port 22)
 
 # Packets to capture
 # A string
@@ -512,7 +512,7 @@ capture.devices_pmode: eth0(1),any(1),lo(1),nflog(1),nfqueue(1),usbmon1(1),usbmo
 
 # Remote capture filter
 # A string
-#extcap.cisco.remotefilter: deny tcp host fe80::fc54:ff:fe16:9921 any eq 22, deny tcp any eq 22 host fe80::fc54:ff:fe16:9921, deny tcp host fe80::fc54:ff:fe02:d9f9 any eq 22, deny tcp any eq 22 host fe80::fc54:ff:fe02:d9f9, deny tcp host fe80::a526:bf7:4811:7e4 any eq 22, deny tcp any eq 22 host fe80::a526:bf7:4811:7e4, deny tcp host 10.166.94.249 any eq 22, deny tcp any eq 22 host 10.166.94.249, deny tcp host 192.168.122.1 any eq 22, deny tcp any eq 22 host 192.168.122.1, deny tcp host 192.168.0.129 any eq 22, deny tcp any eq 22 host 192.168.0.129, permit ip any any
+#extcap.cisco.remotefilter: deny tcp host fe80::fc54:ff:fe7a:ebf4 any eq 22, deny tcp any eq 22 host fe80::fc54:ff:fe7a:ebf4, deny tcp host fe80::fc54:ff:fe23:667d any eq 22, deny tcp any eq 22 host fe80::fc54:ff:fe23:667d, deny tcp host fe80::fc54:ff:fe63:3c4a any eq 22, deny tcp any eq 22 host fe80::fc54:ff:fe63:3c4a, deny tcp host fe80::fc54:ff:fe32:989e any eq 22, deny tcp any eq 22 host fe80::fc54:ff:fe32:989e, deny tcp host fe80::a526:bf7:4811:7e4 any eq 22, deny tcp any eq 22 host fe80::a526:bf7:4811:7e4, deny tcp host 192.168.122.1 any eq 22, deny tcp any eq 22 host 192.168.122.1, deny tcp host 192.168.0.129 any eq 22, deny tcp any eq 22 host 192.168.0.129, permit ip any any
 
 # Packets to capture
 # A string
