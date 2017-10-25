@@ -1,5 +1,6 @@
-{ pkgs ? import <nixpkgs> {}
-, pythonPackages
+{ 
+  pkgs ? import <nixpkgs> {}
+# , buildPythonApplication
 }:
 
 with pkgs.python3Packages;
@@ -13,7 +14,7 @@ buildPythonPackage rec {
 	# buildInputs = [  stevedore pandas matplotlib  ];
     # to build the doc sphinx
     # TODO package tshark
-    propagatedBuildInputs = with pythonPackages; [ stevedore cmd2 pyperclip pandas matplotlib pyqt5
-    pkgs.wireshark-local-stable pyperclip ];
+    propagatedBuildInputs = [ stevedore cmd2 pyperclip pandas matplotlib pyqt5
+    pkgs.tshark-local-stable pyperclip ];
 	/* propagatedBuildInputs =  [ stevedore pandas matplotlib pyqt5 ]; */
 }

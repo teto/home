@@ -24,8 +24,10 @@ rec {
 
 
   networking.hostName = "jedha"; # Define your hostname.
+  networking.extraHosts = ''
+    202.214.86.52 iij_vm
+  '';
 
-  
   imports =
     [ # Include the results of the hardware scan.
       /etc/nixos/hardware-configuration.nix
@@ -68,8 +70,15 @@ rec {
 
 
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  networking.networkmanager.enable = true;
+  networking.networkmanager = {
+    enable = true;
+    # logLevel = WARN;
+    # dispatcherScripts
+    # packages = [];
+  };
   networking.firewall.checkReversePath = false; # for nixops
+networking.firewall.allowedUDPPorts = [ 631 ];
+networking.firewall.allowedTCPPorts = [ 631 ];
 
   # Select internationalisation properties.
   i18n = {
@@ -83,18 +92,22 @@ rec {
        # hangul m17n
      ];
      };
+
+     # see https://github.com/NixOS/nixpkgs/issues/22895
+     # consoleUseXkbConfig = "fr";
    };
 
    # inspired by https://gist.github.com/539h/8144b5cabf97b5b206da
+   # todo find a good japanese font
    fonts = {
       enableFontDir = true; # ?
       fonts = with pkgs; [
         ubuntu_font_family
         inconsolata
       ];
-      # fontconfig= {
-      #   enable=true;
-      # }
+      fontconfig= {
+        enable=true;
+      };
    };
 
 
@@ -106,6 +119,7 @@ rec {
   # $ nix-env -qaP | grep wget
   environment.systemPackages = [
 
+    pkgs.manpages  # because man tcp should always be available
     pkgs.strongswan # to get ipsec in path
     # networkmanager_strongswan
       # wrapProgram $out/bin/dnschain --suffix PATH : ${openssl.bin}/bin
@@ -196,8 +210,10 @@ rec {
     };
 
     # Enable CUPS to print documents.
+    # https://nixos.wiki/wiki/Printing
     printing = {
       enable = true;
+browsing = true;
       drivers = [ pkgs.gutenprint ];
     };
 
@@ -210,13 +226,19 @@ rec {
     # dbus.packages = [ ];
   };
 
+    # Enable automatic discovery of the printer (from other linux systems with avahi running)
+    services.avahi.enable = true;
+    services.avahi.publish.enable = true;
+    services.avahi.publish.userServices = true;
+
+
   # udisks2 GUI
   services.udisks2.enable = true;
 
   services.openntpd = {
     enable = true;
     # add iij ntp servers
-    # servers
+    # servers = [ "" ];
   };
   # Enable the X11 windowing system.
   services.xserver = {
@@ -234,7 +256,8 @@ rec {
        # screenSection = '' '';
     };
 
-    layout = "fr";
+    # allow for more layout
+    layout = "fr,us";  # you can switch from cli with xkb-switch
     # TODO swap esc/shift
     xkbOptions = "eurosign:e";
     # xkbOptions = "eurosign:e, caps:swapescape";
@@ -243,7 +266,9 @@ rec {
       enable = true;
       # twoFingerScroll = true;
       disableWhileTyping = true;
-      naturalScrolling = true;
+      # Natural scrolling is about moving in the same direction as the page
+      # I hate that so set to no
+      naturalScrolling = false;
       # accelSpeed = "1.55";
     };
 
@@ -357,18 +382,18 @@ rec {
   };
 
   # IRC recommanded to 
-    environment.etc."ipsec.secrets".text = ''
-      # this is checked by l2tp
-      include /etc/ipsec.d/*.secrets
-      '';
-      environment.etc."ipsec.d/stub".text = ''
-        stub file to create ipsec.d
-      '';
+    # environment.etc."ipsec.secrets".text = ''
+    #   # this is checked by l2tp
+    #   include /etc/ipsec.d/*.secrets
+    #   '';
+    #   environment.etc."ipsec.d/stub".text = ''
+    #     stub file to create ipsec.d
+    #   '';
 
-  # for ppp when it creates its resolv.conf
-  # maybe it should create it in /var/run
-  environment.etc."ppp/stub".text = ''
-  '';
+  # # for ppp when it creates its resolv.conf
+  # # maybe it should create it in /var/run
+  # environment.etc."ppp/stub".text = ''
+  # '';
 
   # options.nix.nixPath.default
   # todo set it only if path exists
@@ -379,14 +404,15 @@ rec {
   nix.nixPath = 
   [
     "nixos-config=/home/teto/dotfiles/nixpkgs/configuration.nix"
-    # :/nix/var/nix/profiles/per-user/root/channels"
+     "/nix/var/nix/profiles/per-user/root/channels"
   ]
   ++ lib.optionals (builtins.pathExists userNixpkgs)  [ "nixpkgs=${builtins.toString userNixpkgs}" ]
   ;
   #  to keep build-time dependencies around => rebuild while being offline
   # build-use-sandbox = true
   nix.extraOptions = ''
-    build-use-sandbox = true
+    # careful will prevent from fetching local git !
+    build-use-sandbox = false
     gc-keep-outputs = true
     gc-keep-derivations = true
   '';
