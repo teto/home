@@ -92,6 +92,9 @@ networking.firewall.allowedTCPPorts = [ 631 ];
        # hangul m17n
      ];
      };
+
+     # see https://github.com/NixOS/nixpkgs/issues/22895
+     # consoleUseXkbConfig = "fr";
    };
 
    # inspired by https://gist.github.com/539h/8144b5cabf97b5b206da
@@ -102,9 +105,9 @@ networking.firewall.allowedTCPPorts = [ 631 ];
         ubuntu_font_family
         inconsolata
       ];
-      # fontconfig= {
-      #   enable=true;
-      # }
+      fontconfig= {
+        enable=true;
+      };
    };
 
 
@@ -116,6 +119,7 @@ networking.firewall.allowedTCPPorts = [ 631 ];
   # $ nix-env -qaP | grep wget
   environment.systemPackages = [
 
+    pkgs.manpages  # because man tcp should always be available
     pkgs.strongswan # to get ipsec in path
     # networkmanager_strongswan
       # wrapProgram $out/bin/dnschain --suffix PATH : ${openssl.bin}/bin
@@ -253,7 +257,7 @@ browsing = true;
     };
 
     # allow for more layout
-    layout = "fr,us";
+    layout = "fr,us";  # you can switch from cli with xkb-switch
     # TODO swap esc/shift
     xkbOptions = "eurosign:e";
     # xkbOptions = "eurosign:e, caps:swapescape";
@@ -397,7 +401,7 @@ browsing = true;
   # convert set back to list
   # pkgs.lib.mkBefore
   nix.nixPath = 
-  [
+    [
     "nixos-config=/home/teto/dotfiles/nixpkgs/configuration.nix:/nix/var/nix/profiles/per-user/root/channels"
   ]
   ++ lib.optionals (builtins.pathExists userNixpkgs)  [ "nixpkgs=${builtins.toString userNixpkgs}" ]

@@ -2,9 +2,12 @@
 , fetchFromGitHub, fetchurl
 , python
 # TODO remove once merged upstream
-, pygccxml ? null
+, castxml ? null, pygccxml ? null
+# for documentation
+, doxygen ? null, graphviz ? null, imagemagick ? null
+# for manual
+, dia
 
-, withNetanim ? false
 , withDoc ? false
 , withManual ? false
 , withGsl ? false
@@ -13,7 +16,7 @@
 , withExamples ? false
 
 # --enable-tests
-, withTests ? false
+, withTests ? true
 , generateBindings ? false
 
 # All modules can be enabled by choosing 'all_modules'.
@@ -28,11 +31,7 @@ stdenv.mkDerivation rec {
   version = "27";
 
   # the all in one fetches netanim etc.
-  # src = fetchurl {
-  #   url = https://www.nsnam.org/release/ns-allinone-3.27.tar.bz2;
-  #   sha256 = "0988rxaxw9lykm9igxk9ignd76pq3pi5xrqhm34rngpayksm6b0r";
-  # };
-  # in case we fetch form github
+  # https://www.nsnam.org/release/ns-allinone-3.27.tar.bz2;
   src = fetchFromGitHub {
     owner  = "nsnam";
     repo   = "ns-3-dev-git";
@@ -40,26 +39,17 @@ stdenv.mkDerivation rec {
     sha256 = "1w25qazsi4n35wzpxrfc1pdrid43gan3166c0bif196apras5phd";
   };
 
-  # src = /home/teto/ns-3-dev-git;
-
-  # buildInputs = lib.optionals generateBindings [ pkgs.castxml pygccxml ];
-  propagatedBuildInputs = with python.pythonPackages; with pkgs; [ gcc6 python ]
-    ++ lib.optionals generateBindings [ pkgs.castxml pygccxml ]
+  buildInputs = lib.optionals generateBindings [ pkgs.castxml pygccxml ]
     ++ stdenv.lib.optional withDoc [ doxygen graphviz imagemagick ]
-    ++ stdenv.lib.optional withManual [ python-sphinx dia ]
+    ++ stdenv.lib.optional withManual [ python.pkgs.sphinx dia ];
+
+  propagatedBuildInputs = with python.pythonPackages; with pkgs; [ gcc6 python ]
     ++ stdenv.lib.optional withGsl [ gsl-bin libgsl2 libgsl ]
     ;
 
-    # withNetanim ? [ qt4-dev-tools libqt4-dev ]
-    #
-    # sqlite sqlite3 libsqlite3-dev
-    # todo configure
-    # --enable-examples --enable-tests --enable-modules=core
-    # ${stdenv.lib.optionalString withExamples "--enable-examples"}
   configurePhase = ''
     runHook preConfigure
-    # make configure
-    # TODO limit modules so that it gets faster
+
     ./waf configure --prefix=$out \
       --enable-modules="${stdenv.lib.concatStringsSep "," modules}" \
       '' + stdenv.lib.optionalString withExamples " --enable-examples "
@@ -68,13 +58,14 @@ stdenv.mkDerivation rec {
     runHook preConfigure
   '' ;
 
-  # buildFlags = [ "CFLAGS=-Wno-error" ];
+  postBuild = with stdenv.lib; ''
+    '' + builtins.toString(builtins.concatStringsSep "\\" [ optionalString generateBindings "./waf --apiscan=all "
+       stdenv.lib.optionalString withDoc "./waf doxygen"
+       stdenv.lib.optionalString withManual "./waf sphinx"
+       " toto "
+      ])
+    ;
 
-  # todo add hooks
-  postBuild = stdenv.lib.optionalString generateBindings "./waf --apiscan=all";
-  # ''
-    
-  #   '';
   checkPhase =  ''
     ./test.py
     '';

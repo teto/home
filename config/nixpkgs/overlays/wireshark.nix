@@ -46,4 +46,14 @@ in
       '';
   });
 
+  tshark-local-stable = self.tshark-local.overrideAttrs (oldAttrs: {
+    # pygobject2
+    name = "tshark-local-stable";
+    src = super.pkgs.fetchgit {
+      url = wiresharkFolder;
+      rev = "mptcp_reinject_stable";
+      sha256 = "0pbmdwphmz4c6g9rvi58kmjhkvhy5ys5y8dzl2cfh8w00jc62cn0";
+    };
+  });
+
 }

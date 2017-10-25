@@ -15,6 +15,6 @@ buildPythonPackage rec {
     # to build the doc sphinx
     # TODO package tshark
     propagatedBuildInputs = [ stevedore cmd2 pyperclip pandas matplotlib pyqt5
-    pkgs.wireshark-local-stable pyperclip ];
+    pkgs.tshark-local-stable pyperclip ];
 	/* propagatedBuildInputs =  [ stevedore pandas matplotlib pyqt5 ]; */
 }

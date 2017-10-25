@@ -172,7 +172,9 @@ rec {
   ns3 = if (super.pkgs ? ns3) then super.callPackage ../ns3.nix {
     pkgs = self.pkgs;
     python = self.pkgs.pythonPackages.python;
-    # withTests = true;
+    withTests = true;
+    withDoc = true;
+    withManual = true;
     # generateBindings = true;
     # withExamples = true;
     # pygccxml = self.pythonPackages.pygccxml;
