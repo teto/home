@@ -8,7 +8,7 @@ import logging
 # from i3pystatus.mail import maildir
 #import keyring.backends.netrc as backend
 from i3pystatus import Status
-from i3pystatus.updates import aptget
+# from i3pystatus.updates import aptget
 from i3pystatus.calendar.khal_calendar import Khal
 # from i3pystatus.updates import aptget
 
@@ -107,11 +107,11 @@ status.register("battery",
 # (defaults of format_down and color_down)
 #
 # Note: the network module requires PyPI package netifaces-py3
-status.register("network",
-                format_up="{v4cidr}",
-                hints= {"markup": "pango"},
-                on_leftclick="ip addr show dev {interface} | xmessage -file -",
-                )
+# status.register("network",
+#                 format_up="{v4cidr}",
+#                 hints= {"markup": "pango"},
+#                 on_leftclick="ip addr show dev {interface} | xmessage -file -",
+#                 )
 
 # Has all the options of the normal network and adds some wireless specific things
 # like quality and network names.
@@ -163,9 +163,9 @@ dpms = status.register("dpms", format="")
 #         )
 
 # '~/.config/khal/config'
-status.register("calendar",  backend=Khal(config_path=None,
-   calendars=['lip6']
-   )
+# status.register("calendar",  backend=Khal(config_path=None,
+#    calendars=['lip6']
+#    )
 # # format = '{calendar} / {nb_events}'
 # # days=2,
         # calendars=[],

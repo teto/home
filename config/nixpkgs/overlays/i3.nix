@@ -113,12 +113,15 @@ rec {
     src = super.pkgs.fetchFromGitHub {
       owner = "fcitx";
       repo = "fcitx";
-      rev = "${version}";
-      sha256 = "0ndz5ipimfpymhx3vf4rijw3166ygk3jv4np1nahrynlxpkmf027";
+      rev = "b2143f10426ee5115cfa655abfa497b57c2c0fdb";
+      sha256 = "0pf0dvmm0xiyzdhj67wizi7wczm7dvlznn6r9kp10zpy0v7g7gg3";
     };
 
+    # doxygen for doc 
     nativeBuildInputs = oldAttrs.nativeBuildInputs ++  [ super.pkgs.xkeyboard_config super.pkgs.wget super.pkgs.cacert ];
-
+    # fails when building dbus error :/
+# /tmp/nix-build-fcitx-4.2.9.1.drv-0/fcitx-b2143f10426ee5115cfa655abfa497b57c2c0fdb-src/cmake/fcitx-cmake-helper.sh
+    SSL_CERT_FILE="${super.pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
     extraCmds = ''
     export CFLAGS="-D_DEBUG"
     '';
