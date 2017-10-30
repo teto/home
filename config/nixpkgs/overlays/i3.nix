@@ -70,10 +70,10 @@ rec {
 #       # executableHaskellDepends = [ ];
 # 	});
 
-  khal-local = super.khal.overrideAttrs (oldAttrs: {
-	  name = "khal-dev";
-	  src = ~/khal;
-	});
+  # khal-local = super.khal.overrideAttrs (oldAttrs: {
+	  # name = "khal-dev";
+	  # src = ~/khal;
+	# });
 
   offlineimap = super.offlineimap.overrideAttrs (oldAttrs: {
     # pygobject2
@@ -139,9 +139,9 @@ rec {
   # dce = super.stdenv.lib.optional (super.pkgs.ns3 != null) super.callPackage /home/teto/dce { pkgs = super;  };
 
   # castxml = super.stdenv.lib.optional (!(super.pkgs ? castxml)) super.callPackage ../castxml.nix { pkgs = super.pkgs;  };
-  xl2tpd = super.xl2tpd.overrideAttrs ( oldAttrs : rec {
-    makeFlags = oldAttrs ++ [ "-DUSE_KERNEL" ];
-  });
+  # xl2tpd = super.xl2tpd.overrideAttrs ( oldAttrs : rec {
+  #   makeFlags = oldAttrs ++ [ "-DUSE_KERNEL" ];
+  # });
 
   # msmtp = super.msmtp.overrideAttrs(oldAttrs: rec {
 

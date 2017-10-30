@@ -293,10 +293,10 @@ browsing = true;
   };
   # "${networkmanager_l2tp}/etc/ipsec.d"
 
-  # services.strongswan = {
-  #   enable = true;
-  #   secrets = [ "/etc/ipsec.d" ];
-  # };
+  services.strongswan = {
+    enable = true;
+    secrets = [ "/etc/ipsec.d/*.secrets" "/etc/ipsec.d" ];
+  };
 
   programs.man.enable = true;
 

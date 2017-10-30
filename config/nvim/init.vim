@@ -1143,6 +1143,13 @@ let neomake_status_str = neomake#statusline#get(bufnr, {
 	\   .(active ? '%%#StatColorHi2#' : '%%*')
 	\   .'%%)',
 	\ })
+
+    " let neomake_status_str = neomake#statusline#get(bufnr, {
+    "       \ 'format_running': '… ({{running_job_names}})',
+    "       \ 'format_ok': '✓',
+    "       \ 'format_quickfix_ok': '',
+    "       \ 'format_quickfix_issues': '%s',
+    "       \ })
   return neomake_status_str
 endfunction
 
@@ -1228,7 +1235,7 @@ let g:airline#extensions#default#layout = [
       \ [ 'x', 'y', 'z', 'error', 'warning' ]
       \ ]
 " section y is fileencoding , useless in neovim
-call airline#parts#define_function('neomake_custom', 'NeomakeStatusLine')
+call airline#parts#define_raw('neomake_custom', 'NeomakeStatusLine')
 let g:airline_section_y = airline#section#create_right(['neomake_custom','ffenc'])
 " let g:airline_section_y = airline#section#create_right(['neomake','ffenc'])
 call airline#parts#define_function('grepper', 'grepper#statusline')

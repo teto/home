@@ -93,6 +93,8 @@ in
     INPUTRC="$XDG_CONFIG_HOME/inputrc";
     IPYTHONDIR="$XDG_CONFIG_HOME/ipython";
     JUPYTER_CONFIG_DIR="$XDG_CONFIG_HOME/jupyter";
+    # testing if we can avoid having to symlink XDG_CONFIG_HOME
+    XDG_CONFIG_DIRS="$XDG_CONFIG_HOME:$HOME/dotfiles";
     # PATH+=":$HOME/rofi-scripts";
     MUTT="$XDG_CONFIG_HOME/mutt";
     MAILDIR="$HOME/Maildir";
