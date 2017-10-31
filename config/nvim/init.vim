@@ -1202,6 +1202,8 @@ let g:airline_extensions = ['obsession', 'tabline'] " to speed up things
 "     \ [ 'x', 'y', 'z', 'error', 'warning' ]
 "     \ ]
 
+let g:airline_highlighting_cache = 1
+let g:airline_exclude_preview = 0
 " control which sections get truncated and at what width. >
 let g:airline#extensions#default#section_truncate_width = {
       \ 'b': 79,
@@ -1287,7 +1289,23 @@ nmap <leader>è <Plug>AirlineSelectTab7
 nmap <leader>è <Plug>AirlineSelectTab7
 nmap <leader>_ <Plug>AirlineSelectTab8
 nmap <leader>ç <Plug>AirlineSelectTab9
+
+" qwerty version
+  nmap <leader>1 <Plug>AirlineSelectTab1
+  nmap <leader>2 <Plug>AirlineSelectTab2
+  nmap <leader>3 <Plug>AirlineSelectTab3
+  nmap <leader>4 <Plug>AirlineSelectTab4
+  nmap <leader>5 <Plug>AirlineSelectTab5
+  nmap <leader>6 <Plug>AirlineSelectTab6
+  nmap <leader>7 <Plug>AirlineSelectTab7
+  nmap <leader>8 <Plug>AirlineSelectTab8
+  nmap <leader>9 <Plug>AirlineSelectTab9
+  nmap <leader>- <Plug>AirlineSelectPrevTab
+  nmap <leader>+ <Plug>AirlineSelectNextTab
+
 "}}}
+" one could change the formatter with 
+  " let g:airline#extensions#tabline#formatter = 'default'
 "}}}
 " limelight {{{
 " Color name (:help cterm-colors) or ANSI code

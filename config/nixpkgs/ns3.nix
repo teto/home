@@ -1,12 +1,15 @@
 { stdenv
 , fetchFromGitHub, fetchurl
 , python
-# TODO remove once merged upstream
+
+# for binding generation
 , castxml ? null, pygccxml ? null
+
 # for documentation
 , doxygen ? null, graphviz ? null, imagemagick ? null
-# for manual
-, dia
+
+# for manual, tetex is used to get the eps2pdf binary
+, dia, tetex ? null, ghostscript ? null
 
 , withDoc ? false
 , withManual ? false
@@ -40,12 +43,16 @@ stdenv.mkDerivation rec {
   };
 
   buildInputs = lib.optionals generateBindings [ pkgs.castxml pygccxml ]
-    ++ stdenv.lib.optional withDoc [ doxygen graphviz imagemagick ]
-    ++ stdenv.lib.optional withManual [ python.pkgs.sphinx dia ];
+    ++ stdenv.lib.optional withDoc [ doxygen graphviz imagemagick python ]
+    ++ stdenv.lib.optional withManual [ python.pkgs.sphinx dia tetex ];
 
   propagatedBuildInputs = with python.pythonPackages; with pkgs; [ gcc6 python ]
     ++ stdenv.lib.optional withGsl [ gsl-bin libgsl2 libgsl ]
     ;
+
+  postPatch = ''
+    patchShebangs doc/ns3_html_theme/get_version.sh
+  '';
 
   configurePhase = ''
     runHook preConfigure
@@ -58,12 +65,12 @@ stdenv.mkDerivation rec {
     runHook preConfigure
   '' ;
 
-  postBuild = with stdenv.lib; ''
-    '' + builtins.toString(builtins.concatStringsSep "\\" [ optionalString generateBindings "./waf --apiscan=all "
-       stdenv.lib.optionalString withDoc "./waf doxygen"
-       stdenv.lib.optionalString withManual "./waf sphinx"
-       " toto "
-      ])
+  postBuild = with stdenv.lib; let flags = concatStringsSep ";" (
+       optional generateBindings "./waf --apiscan=all "
+       ++ optional withDoc "./waf doxygen"
+       ++ optional withManual "./waf sphinx"
+      );
+      in "${flags}"
     ;
 
   checkPhase =  ''
@@ -85,7 +92,7 @@ stdenv.mkDerivation rec {
   meta = {
     homepage = http://www.nsnam.org;
     license = stdenv.lib.licenses.gpl3;
-    description = "Steam Locomotive runs across your terminal when you type 'sl'";
+    description = "A discrete time event network simulator";
     platforms = with stdenv.lib.platforms; unix;
   };
 }
