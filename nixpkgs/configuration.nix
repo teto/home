@@ -288,7 +288,7 @@ browsing = true;
 
 
   services.mpd = {
-    enable = true;
+    enable = false; # TODO move to userspace
     # musicDirectory
   };
   # "${networkmanager_l2tp}/etc/ipsec.d"

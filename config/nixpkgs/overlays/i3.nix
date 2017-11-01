@@ -20,13 +20,16 @@ rec {
   neovim = super.neovim.override ( {
     vimAlias = false;
     withPython = false;
-    withPython3 = false; # pour les tests ?
+    withPython3 = true; # pour les tests ?
     withRuby = false;
     });
 
   neovim-local = self.neovim.overrideAttrs (oldAttrs: {
 	  name = "neovim-local";
-      extraPython3Packages = with super.python3Packages;[ pandas python jedi];
+      extraPython3Packages = with super.python3Packages;[ pandas python jedi]
+      ++ super.stdenv.lib.optionals ( python-language-server != null) [ python-language-server ]
+      ;
+      # todo generate a file with the path to python-language-server ?
       # unpackPhase = ":"; # cf https://nixos.wiki/wiki/Packaging_Software
 	  src = super.lib.cleanSource ~/neovim;
       meta.priority=0;

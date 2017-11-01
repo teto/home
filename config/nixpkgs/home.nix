@@ -154,6 +154,18 @@ in
   #   enableAdobeFlash = true;
   # };
 
+  programs.vim = {
+    enable = true;
+    settings = {
+      number = true;
+    };
+    extraConfig = ''
+      " TODO set different paths accordingly, to language server especially
+      '';
+  };
+
+  # todo configure mocp
+  # todo configure neovim
   services.gpg-agent = {
     enable = true;
     defaultCacheTtl = 1800;
@@ -162,6 +174,10 @@ in
 
   # services.xserver.enable = true;
 
-  # xsession.enable = true;
+  # i3 now available !
+  xsession.enable = true;
   # xsession.windowManager.command = "…";
+
+  # as long as there is no better way to configure i3
+  xsession.windowManager.command = "${pkgs.i3}/bin/i3";
 }
