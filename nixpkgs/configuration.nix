@@ -288,15 +288,15 @@ browsing = true;
 
 
   services.mpd = {
-    enable = true;
+    enable = false; # TODO move to userspace
     # musicDirectory
   };
   # "${networkmanager_l2tp}/etc/ipsec.d"
 
-  # services.strongswan = {
-  #   enable = true;
-  #   secrets = [ "/etc/ipsec.d" ];
-  # };
+  services.strongswan = {
+    enable = true;
+    secrets = [ "/etc/ipsec.d/*.secrets" "/etc/ipsec.d" ];
+  };
 
   programs.man.enable = true;
 

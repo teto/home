@@ -7,6 +7,7 @@ environment.systemPackages = with pkgs; [
      cmake
      curl
      fd # replaces 'find'
+     file
 	 fzf
      # lgogdownloader
      libtool

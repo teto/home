@@ -20,13 +20,16 @@ rec {
   neovim = super.neovim.override ( {
     vimAlias = false;
     withPython = false;
-    withPython3 = false; # pour les tests ?
+    withPython3 = true; # pour les tests ?
     withRuby = false;
     });
 
   neovim-local = self.neovim.overrideAttrs (oldAttrs: {
 	  name = "neovim-local";
-      extraPython3Packages = with super.python3Packages;[ pandas python jedi];
+      extraPython3Packages = with super.python3Packages;[ pandas python jedi]
+      ++ super.stdenv.lib.optionals ( python-language-server != null) [ python-language-server ]
+      ;
+      # todo generate a file with the path to python-language-server ?
       # unpackPhase = ":"; # cf https://nixos.wiki/wiki/Packaging_Software
 	  src = super.lib.cleanSource ~/neovim;
       meta.priority=0;
@@ -72,10 +75,10 @@ rec {
 #       # executableHaskellDepends = [ ];
 # 	});
 
-  khal-local = super.khal.overrideAttrs (oldAttrs: {
-	  name = "khal-dev";
-	  src = ~/khal;
-	});
+  # khal-local = super.khal.overrideAttrs (oldAttrs: {
+	  # name = "khal-dev";
+	  # src = ~/khal;
+	# });
 
   offlineimap = super.offlineimap.overrideAttrs (oldAttrs: {
     # pygobject2
@@ -144,9 +147,9 @@ rec {
   # dce = super.stdenv.lib.optional (super.pkgs.ns3 != null) super.callPackage /home/teto/dce { pkgs = super;  };
 
   # castxml = super.stdenv.lib.optional (!(super.pkgs ? castxml)) super.callPackage ../castxml.nix { pkgs = super.pkgs;  };
-  xl2tpd = super.xl2tpd.overrideAttrs ( oldAttrs : rec {
-    makeFlags = oldAttrs ++ [ "-DUSE_KERNEL" ];
-  });
+  # xl2tpd = super.xl2tpd.overrideAttrs ( oldAttrs : rec {
+  #   makeFlags = oldAttrs ++ [ "-DUSE_KERNEL" ];
+  # });
 
   # msmtp = super.msmtp.overrideAttrs(oldAttrs: rec {
 
