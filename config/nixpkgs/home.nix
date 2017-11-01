@@ -6,6 +6,7 @@ let
   heavyPackages = with pkgs;[
           libreoffice
           qutebrowser
+          gnome3.nautilus # demande webkit
           mendeley # requiert qtwebengine
           pinta
           qtcreator
@@ -16,7 +17,6 @@ let
   desktopPkgs = with pkgs; [
           buku
           dropbox
-          gnome3.nautilus
           ffmpegthumbnailer # to preview videos in ranger
           haskellPackages.greenclip # todo get from haskell
           nox
@@ -102,6 +102,17 @@ in
 
   };
 
+  programs.home-manager = {
+    enable = true;
+    path = https://github.com/rycee/home-manager/archive/master.tar.gz;
+  };
+
+  # programs.termite
+
+  xdg = {
+    enable = true;
+  };
+
   programs.bash = {
     enable = true;
     enableAutojump = true;
@@ -109,6 +120,7 @@ in
       HISTFILE="$XDG_CACHE_HOME/bash_history";
     };
     shellAliases = {
+      hm="home-manager";
       #mostly for testin
       dfh="df --human-readable";
       duh="du --human-readable";
@@ -147,4 +159,9 @@ in
     defaultCacheTtl = 1800;
     enableSshSupport = true;
   };
+
+  # services.xserver.enable = true;
+
+  # xsession.enable = true;
+  # xsession.windowManager.command = "…";
 }

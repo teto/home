@@ -399,10 +399,12 @@ browsing = true;
   # todo set it only if path exists
   #  options.nix.nixPath.default ++ TODO mkMerge/mkBefore etc
   # convert set back to list
-  # pkgs.lib.mkBefore
+
+  # lib.options.mergeDefaultOption
   nix.nixPath = 
-    [
-    "nixos-config=/home/teto/dotfiles/nixpkgs/configuration.nix:/nix/var/nix/profiles/per-user/root/channels"
+  [
+    "nixos-config=/home/teto/dotfiles/nixpkgs/configuration.nix"
+     "/nix/var/nix/profiles/per-user/root/channels"
   ]
   ++ lib.optionals (builtins.pathExists userNixpkgs)  [ "nixpkgs=${builtins.toString userNixpkgs}" ]
   ;
