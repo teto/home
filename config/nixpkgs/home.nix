@@ -109,6 +109,9 @@ in
 
   xdg = {
     enable = true;
+    configFile."nvim/toto".text = ''
+      hello world
+    '';
   };
 
   programs.bash = {
