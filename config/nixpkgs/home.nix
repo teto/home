@@ -101,6 +101,7 @@ in
     PATH="$HOME/rofi-scripts:$HOME/buku_run:$PATH";
 
   };
+  # home.folder.".wgetrc".source = dotfiles/home/.wgetrc;
 
   programs.home-manager = {
     enable = true;
@@ -112,6 +113,8 @@ in
   xdg = {
     enable = true;
   };
+  # xdg.configFile.".config/mpv/input.conf".source = dotfiles/mpv-input.conf;
+  # xdg.configFile.".config/mpv/mpv.conf".source = dotfiles/mpv-mpv.conf;
 
   programs.bash = {
     enable = true;
