@@ -4,3 +4,9 @@
 [submodule "config/fzf-gems"]
 	path = config/fzf-gems
 	url = https://github.com/teto/fzf-gems.git
+[submodule "rofi-scripts"]
+	path = rofi-scripts
+	url = /home/teto/rofi-scripts
+[submodule "buku_run"]
+	path = buku_run
+	url = /home/teto/buku_run

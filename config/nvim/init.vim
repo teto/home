@@ -92,7 +92,10 @@ Plug 'mhinz/vim-signify' " Indicate changed lines within a file using a VCS.
 Plug 'Carpetsmoker/xdg_open.vim' " overrides gx
 " Plug 'mattn/gist-vim' " to gist requires webapi
 " provider dependant {{{
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" new deoplete relies on yarp :
+Plug 'Shougo/deoplete.nvim' ", { 'do': ':UpdateRemotePlugins' }
+Plug 'roxma/nvim-yarp'
+Plug 'roxma/vim-hug-neovim-rpc'
 " Plug '~/vim-config'
 Plug '~/nvim-palette', { 'do': ':UpdateRemotePlugins' }
 Plug 'LnL7/vim-nix', {'for': 'nix'}
@@ -132,7 +135,7 @@ Plug 'sk1418/QFGrep' " Filter quickfix
 " (upstreamd already or ?)
 " Plug 'mtth/scratch.vim' " , {'on': 'Scratch'} mapped to ?
 " Plug 'tjdevries/vim-inyoface.git' "InYoFace_toggle to display only comments
-" Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' } " :h LanguageClientUsage
+Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' } " :h LanguageClientUsage
 " Plug 'tjdevries/nvim-langserver-shim' " for LSP
 " Plug 'powerman/vim-plugin-AnsiEsc' " { to hl ESC codes
 " Plug 'git@github.com:junegunn/gv.vim.git' " git commit viewer :Gv
@@ -1108,6 +1111,7 @@ let g:jedi#completions_enabled = 0 " disable when deoplete in use
 
 let g:neomake_verbose = 1
 
+call neomake#quickfix#enable()
 
 " pyflakes can't be disabled on a per error basis
 " also it considers everything as error => disable
@@ -1477,7 +1481,7 @@ let g:langserver_executables = {
 " autozimu's lsp {{{
 " call LanguageClient_textDocument_hover
 " by default logs in /tmp/LanguageClient.log.
-let g:LanguageClient_autoStart=0 " Run :LanguageClientStart when disabled
+let g:LanguageClient_autoStart=1 " Run :LanguageClientStart when disabled
 
 let g:LanguageClient_selectionUI='fzf'
 " let g:LanguageClient_trace="verbose"
@@ -1491,8 +1495,8 @@ let g:LanguageClient_serverCommands = {
     \ }
 
 " todo provide a fallback if lsp not available
-" nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
-" nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
+nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
 " nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
 
 "}}}

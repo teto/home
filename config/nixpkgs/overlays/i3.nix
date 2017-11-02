@@ -16,7 +16,7 @@ rec {
 	  src = super.lib.cleanSource ~/i3pystatus;
       propagatedBuildInputs = with self.python3Packages; oldAttrs.propagatedBuildInputs ++ [ pytz ];
 	});
-    #
+
   neovim = super.neovim.override ( {
     vimAlias = false;
     withPython = false;
@@ -26,8 +26,8 @@ rec {
 
   neovim-local = self.neovim.overrideAttrs (oldAttrs: {
 	  name = "neovim-local";
-      extraPython3Packages = with super.python3Packages;[ pandas python jedi]
-      ++ super.stdenv.lib.optionals ( python-language-server != null) [ python-language-server ]
+      extraPython3Packages = with self.python3Packages;[ pandas python jedi]
+      ++ super.stdenv.lib.optionals ( self.pkgs ? python-language-server) [ self.pkgs.python-language-server ]
       ;
       # todo generate a file with the path to python-language-server ?
       # unpackPhase = ":"; # cf https://nixos.wiki/wiki/Packaging_Software
@@ -51,14 +51,11 @@ rec {
 
 
    # older versions are so broken that
-   nixops-local = super.nixopsUnstable.overrideAttrs( oldAttrs: rec {
-
-     # version = "2017-09-24";
-     version = "1.6.2";
-     name = "nixops-${version}";
-     # it should be
-     # src = super.lib.cleanSource ~/nixops;
-   });
+   # nixops-local = super.nixopsUnstable.overrideAttrs( oldAttrs: rec {
+   #   # version = "2017-09-24";
+   #   version = "1.6.2";
+   #   name = "nixops-${version}";
+   # });
 
    # super.callPackage mptcpanalyzer.nix
 

@@ -1,4 +1,5 @@
-{ pkgs, ... }:
+{ pkgs, lib,  ... }:
+
 
 let
   # the kind of packages u don't want to compile
@@ -101,13 +102,15 @@ in
     PATH="$HOME/rofi-scripts:$HOME/buku_run:$PATH";
 
   };
-  # home.folder.".wgetrc".source = dotfiles/home/.wgetrc;
+
+  # source file name can't start with .
+  # home.file.".wgetrc".source = dotfiles/home/.wgetrc;
 
   programs.home-manager = {
     enable = true;
     # path = https://github.com/rycee/home-manager/archive/master.tar.gz;
     # failshome.folder +
-    # path =  /home/teto/dotfiles;
+    path =  "/home/teto/dotfiles/home-manager";
   };
 
   # programs.termite
@@ -171,7 +174,7 @@ in
     withPython = false;
     withRuby = false;
     extraPython3Packages = with pkgs.python3Packages;[ pandas python jedi]
-      ++ super.stdenv.lib.optionals ( python-language-server != null) [ python-language-server ]
+      ++ lib.optionals ( pkgs ? python-language-server) [ pkgs.python-language-server ]
 
 
       ;
