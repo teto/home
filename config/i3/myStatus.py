@@ -9,7 +9,9 @@ import logging
 #import keyring.backends.netrc as backend
 from i3pystatus import Status
 # from i3pystatus.updates import aptget
-from i3pystatus.calendar.khal_calendar import Khal
+
+# TODO conditionnal import
+# from i3pystatus.calendar.khal_calendar import Khal
 # from i3pystatus.updates import aptget
 
 # from i3pystatus.core.netrc_backend import NetrcBackend
@@ -171,7 +173,7 @@ dpms = status.register("dpms", format="")
         # calendars=[],
         # format="{title}",
          # log_level=logging.DEBUG,
-        )
+        # )
 
 # status.register("scratchpad",)
 

@@ -28,7 +28,7 @@ set $rmod Mod1
 set $BROWSER qutebrowser --backend webengine
 #set $term rxvt-unicode
 set $term termite
-set $status_command nix-shell -p i3pystatus-dev -p python36Packages.pytz -p khal -p python36Packages.keyring --run "python3 $XDG_CONFIG_HOME/i3/myStatus.py"
+set $status_command nix-shell -p i3pystatus -p python36Packages.pytz -p khal -p python36Packages.keyring --run "python3 $XDG_CONFIG_HOME/i3/myStatus.py"
 
 # 
 # 
