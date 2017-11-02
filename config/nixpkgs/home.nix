@@ -112,6 +112,9 @@ in
 
   xdg = {
     enable = true;
+    configFile."nvim/toto".text = ''
+      hello world
+    '';
   };
   # xdg.configFile.".config/mpv/input.conf".source = dotfiles/mpv-input.conf;
   # xdg.configFile.".config/mpv/mpv.conf".source = dotfiles/mpv-mpv.conf;
@@ -152,10 +155,24 @@ in
     notify = false;
     automount = false;
   };
+
+  # TODO prefix with stable
   # programs.firefox = {
   #   enable = true;
   #   enableAdobeFlash = true;
   # };
+
+  programs.neovim = {
+    enable = true;
+    vimAlias = false;
+    withPython3 = true;
+    withPython = false;
+    withRuby = false;
+    extraPython3Packages = [ ];
+    extraConfig = ''
+      " TODO set different paths accordingly, to language server especially
+      '';
+  };
 
   programs.vim = {
     enable = true;
