@@ -105,7 +105,9 @@ in
 
   programs.home-manager = {
     enable = true;
-    path = https://github.com/rycee/home-manager/archive/master.tar.gz;
+    # path = https://github.com/rycee/home-manager/archive/master.tar.gz;
+    # failshome.folder +
+    # path =  /home/teto/dotfiles;
   };
 
   # programs.termite
@@ -168,7 +170,11 @@ in
     withPython3 = true;
     withPython = false;
     withRuby = false;
-    extraPython3Packages = [ ];
+    extraPython3Packages = with pkgs.python3Packages;[ pandas python jedi]
+      ++ super.stdenv.lib.optionals ( python-language-server != null) [ python-language-server ]
+
+
+      ;
     extraConfig = ''
       " TODO set different paths accordingly, to language server especially
       '';
