@@ -54,16 +54,15 @@ stdenv.mkDerivation rec {
     patchShebangs doc/ns3_html_theme/get_version.sh
   '';
 
-  configurePhase = ''
-    runHook preConfigure
+  configureScript = "./waf configure";
 
-    ./waf configure --prefix=$out \
-      --enable-modules="${stdenv.lib.concatStringsSep "," modules}" \
-      '' + stdenv.lib.optionalString withExamples " --enable-examples "
-      + stdenv.lib.optionalString withTests " --enable-tests " + ''
+  configureFlags=[
+      "--enable-modules=${stdenv.lib.concatStringsSep "," modules}"
+      ]
+      ++ stdenv.lib.optional withExamples " --enable-examples "
+      ++ stdenv.lib.optional withTests " --enable-tests "
+      ;
 
-    runHook preConfigure
-  '' ;
 
   postBuild = with stdenv.lib; let flags = concatStringsSep ";" (
        optional generateBindings "./waf --apiscan=all "

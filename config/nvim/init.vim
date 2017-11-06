@@ -1111,7 +1111,7 @@ let g:jedi#completions_enabled = 0 " disable when deoplete in use
 
 let g:neomake_verbose = 1
 
-call neomake#quickfix#enable()
+" call neomake#quickfix#enable()
 
 " pyflakes can't be disabled on a per error basis
 " also it considers everything as error => disable

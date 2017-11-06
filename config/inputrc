@@ -1,10 +1,19 @@
 # https://wiki.archlinux.org/index.php/readline
-set editing-mode vi
+# set editing-mode vi
+$include /etc/inputrc
 
 # to enable case-insensitive tab completion
 set completion-ignore-case On
 
-
+set show-all-if-unmodified on
+set show-all-if-ambiguous on
+# Mark symlinked directories
+set mark-symlinked-directories On
+# Color the common prefix
+set colored-completion-prefix On
+# Color the common prefix in menu-complete
+set menu-complete-display-prefix On
+# set echo-control-characters off
 # use per filetype completion colors 
 set colored-stats On
 

@@ -32,7 +32,7 @@ set $status_command nix-shell -p i3pystatus -p python36Packages.pytz -p khal -p 
 
 # to easily swap between i3/vim mode
 set $kleft h
-set $down j
+set $kdown j
 set $kup k
 set $kright l
 
