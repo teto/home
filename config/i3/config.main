@@ -25,10 +25,16 @@ bindsym $mod+ctrl+b exec buku_run
 # xmodmap to see the mappings for ModX etc...
 set $mod Mod1
 set $rmod Mod1
-set $BROWSER qutebrowser --backend webengine
+set $BROWSER qutebrowser
 #set $term rxvt-unicode
 set $term termite
 set $status_command nix-shell -p i3pystatus -p python36Packages.pytz -p khal -p python36Packages.keyring --run "python3 $XDG_CONFIG_HOME/i3/myStatus.py"
+
+# to easily swap between i3/vim mode
+set $kleft h
+set $down j
+set $kup k
+set $kright l
 
 # 
 # 
@@ -197,10 +203,10 @@ bindsym $mod+shift+e exec /home/teto/i3-easyfocus/i3-easyfocus
 
 # This may be slow since script involves a few steps
 # change focus
-bindsym $mod+h focus left
-bindsym $mod+j focus down
-bindsym $mod+k focus up
-bindsym $mod+l focus right
+bindsym $mod+$kleft focus left
+bindsym $mod+$kdown focus down
+bindsym $mod+$kup focus up
+bindsym $mod+$kright focus right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left  exec /home/teto/bin/i3dispatch left
@@ -245,12 +251,12 @@ bindsym $mod+f fullscreen
 bindsym $mod+Shift+f fullscreen global
 
 # change container layout (stacked, tabbed, default)
-bindsym $mod+ampersand layout toggle
+bindsym Group1+$mod+ampersand layout toggle
 #bindsym $mod+s layout stacking
 #bindsym $mod+z layout tabbed
 #bindsym $mod+e layout default
 
-# to lock screen
+# to lock screen (relied on a fork)
 bindsym $mod+Ctrl+L exec "i3lock -i ~/Images/route66.png"
 
 # toggle tiling / floating
@@ -299,15 +305,21 @@ bindsym $mod+apostrophe mode "programs"
 #bindsym $mod+underscore workspace 8
 #bindsym $mod+ccedilla workspace 9
 #bindsym $mod+agrave workspace 10
-bindsym $mod+a workspace "$w1"
-bindsym $mod+z workspace "$w2"
-bindsym $mod+e workspace "$w3"
-bindsym $rmod+q workspace "$w4"
-bindsym $rmod+s workspace "$w5"
-bindsym $mod+d workspace "$w6"
-bindsym $mod+w workspace "$w7"
-bindsym $mod+x workspace "$w8"
-bindsym $mod+c workspace "$w9"
+bindsym Group1+$mod+a workspace "$w1"
+bindsym Group1+$mod+z workspace "$w2"
+bindsym Group1+$mod+e workspace "$w3"
+bindsym Group1+$mod+q workspace "$w4"
+bindsym Group1+$mod+s workspace "$w5"
+bindsym Group1+$mod+d workspace "$w6"
+bindsym Group1+$mod+x workspace "$w8"
+bindsym Group1+$mod+c workspace "$w9"
+
+# bindcode $mod+24 workspace "$w1"
+# bindcode $mod+25 workspace "$w2"
+# bindcode $mod+26 workspace "$w3"
+# bindcode $mod+38 workspace "$w4"
+# bindcode $mod+52 workspace "$w7"
+
 #bindsym $mod+x workspace 10
 
 for_window [con_mark="^pad_*"] move scratchpad

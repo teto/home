@@ -1,5 +1,0 @@
-#! /usr/bin/env bash
-echo "nixos-version=$(nixos-version)"
-echo "nix version: $(nix-env --version)"
-echo "Nixpkgs version: $(nix-instantiate --eval '<nixpkgs>' -A lib.nixpkgsVersion)"
-echo "sandboxing disabled"

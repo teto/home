@@ -70,6 +70,8 @@ in
 {
   home.packages = desktopPkgs ++ devPkgs ++ imPkgs;
 
+  home.keyboard.layout = "fr,us";  # you can switch from cli with xkb-switch
+
   # programs.emacs = {
   #   enable = true;
   #   extraPackages = epkgs: [
@@ -99,6 +101,8 @@ in
     # PATH+=":$HOME/rofi-scripts";
     MUTT="$XDG_CONFIG_HOME/mutt";
     MAILDIR="$HOME/Maildir";
+
+    # TODO add symlinks instead towards $XDG_DATA_HOME/bin ?
     PATH="$HOME/rofi-scripts:$HOME/buku_run:$PATH";
 
   };
@@ -167,21 +171,19 @@ in
   #   enableAdobeFlash = true;
   # };
 
-  programs.neovim = {
-    enable = true;
-    vimAlias = false;
-    withPython3 = true;
-    withPython = false;
-    withRuby = false;
-    extraPython3Packages = with pkgs.python3Packages;[ pandas python jedi]
-      ++ lib.optionals ( pkgs ? python-language-server) [ pkgs.python-language-server ]
-
-
-      ;
-    extraConfig = ''
-      " TODO set different paths accordingly, to language server especially
-      '';
-  };
+  # programs.neovim = {
+  #   enable = true;
+  #   vimAlias = false;
+  #   withPython3 = true;
+  #   withPython = false;
+  #   withRuby = false;
+  #   extraPython3Packages = with pkgs.python3Packages;[ pandas python jedi]
+  #     ++ lib.optionals ( pkgs ? python-language-server) [ pkgs.python-language-server ]
+  #     ;
+  #   extraConfig = ''
+  #     " TODO set different paths accordingly, to language server especially
+  #     '';
+  # };
 
   programs.vim = {
     enable = true;
@@ -209,4 +211,8 @@ in
 
   # as long as there is no better way to configure i3
   xsession.windowManager.command = "${pkgs.i3}/bin/i3";
+  xsession.initExtra = ''
+    # ${pkgs.feh}
+    feh --bg-fill ~/dotfiles/wallpapers/nebula.jpg
+  '';
 }

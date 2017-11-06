@@ -110,12 +110,13 @@ rec {
     # eg; it will try to download some files while building
     # see target spell-en-download
     version = "master";
-    src = super.pkgs.fetchFromGitHub {
-      owner = "fcitx";
-      repo = "fcitx";
-      rev = "b2143f10426ee5115cfa655abfa497b57c2c0fdb";
-      sha256 = "0pf0dvmm0xiyzdhj67wizi7wczm7dvlznn6r9kp10zpy0v7g7gg3";
-    };
+    # src = super.pkgs.fetchFromGitHub {
+    #   owner = "fcitx";
+    #   repo = "fcitx";
+    #   rev = "b2143f10426ee5115cfa655abfa497b57c2c0fdb";
+    #   sha256 = "0pf0dvmm0xiyzdhj67wizi7wczm7dvlznn6r9kp10zpy0v7g7gg3";
+    # };
+    src = /home/teto/fcitx;
 
     # doxygen for doc 
     nativeBuildInputs = oldAttrs.nativeBuildInputs ++  [ super.pkgs.xkeyboard_config super.pkgs.wget super.pkgs.cacert ];
