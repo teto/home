@@ -46,7 +46,7 @@ alias enfr="trans :fr "
 # alias gcl="git clone"
 # alias gta="git tag -a -m"
 # alias gf="git reflog"
-alias gbr="git branch"
+# alias gbr="git branch"
 # }}}
 
 
@@ -59,7 +59,7 @@ alias shellpath='python -c "import sys; print sys.env.PATH" | tr "," "\n" | grep
 alias set_time="dpkg-reconfigure tzdata"
 
 
-### ls related updates {{{
+# ls related updates {{{
 # I also export TIME_STYLE to change the output of this
 alias ls="ls --color=auto --time-style=iso"
 alias ll="ls -l"
@@ -70,7 +70,7 @@ alias llt="ls -ltr"
 # }}}
 
 # oftenly used programs {{{
-alias c="cat"
+# alias c="cat"
 alias v="nvim"
 #alias n="nvim"
 alias m="mutt -F \"\$XDG_CONFIG_HOME/mutt/muttrc\""

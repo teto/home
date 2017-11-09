@@ -90,10 +90,10 @@ wireshark: | $(WIRESHARK_FOLDER)
 
 $(WIRESHARK_FOLDER):
 	git clone git@github.com:teto/wireshark.git "${WIRESHARK_FOLDER}"
-	cd "${WIRESHARK_FOLDER}"
-	$(shell git remote add gh_upstream http://github.com/wireshark/wireshark.git)
+	# it has to be on one line else cwd is reset
+	cd "${WIRESHARK_FOLDER}" \
+	$(shell git remote add gh_upstream http://github.com/wireshark/wireshark.git) \
 	$(shell git remote add upstream https://code.wireshark.org/review/p/wireshark.git)
-	cd -
 
 nixpkgs: | $(NIXPKGS_FOLDER)
 
