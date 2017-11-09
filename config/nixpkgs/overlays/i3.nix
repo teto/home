@@ -175,15 +175,16 @@ rec {
   };
   pythonPackages = python.pkgs;
 
-  ns3 = if (super.pkgs ? ns3) then super.callPackage ../ns3.nix {
-    pkgs = self.pkgs;
+  ns-3-perso = if (super.pkgs ? ns-3) then super.ns-3.override {
+  #   pkgs = self.pkgs;
     python = self.pkgs.pythonPackages.python;
-    withTests = true;
-    withDoc = true;
+    enableDoxygen = true;
     withManual = true;
-    # generateBindings = true;
-    # withExamples = true;
-    # pygccxml = self.pythonPackages.pygccxml;
+    build_profile = "optimized";
+    withGsl = true;
+  #   # generateBindings = true;
+  #   # withExamples = true;
+  #   # pygccxml = self.pythonPackages.pygccxml;
   } else null;
   dce = if (super.pkgs ? ns3) then super.callPackage ../dce.nix { pkgs = super.pkgs;  } else null;
 

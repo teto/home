@@ -130,7 +130,7 @@ Plug 'ehamberg/vim-cute-python' " display unicode characters, kinda looks bad on
 Plug 'dbakker/vim-projectroot' " projectroot#guess()
 Plug 'sunaku/vim-dasht' " get documentation (zeavim is also a contender KabbAmine/zeavim.vim)
 " Plug 'git@github.com:reedes/vim-wordy.git' " pdt la these, pr trouver la jargon :Wordy
-Plug 'sk1418/QFGrep' " Filter quickfix
+" Plug 'sk1418/QFGrep' " Filter quickfix
 " Plug 'git@github.com:pseewald/vim-anyfold.git' " speed up folds processing
 " (upstreamd already or ?)
 " Plug 'mtth/scratch.vim' " , {'on': 'Scratch'} mapped to ?
@@ -256,7 +256,7 @@ Plug 'dzeban/vim-log-syntax' " hl some keywords like ERROR/DEBUG/WARNING
 " Plug 'danielroseman/pygd-vim', {'for': 'python'} " provokes an error
 " }}}
 
-Plug 'Valloric/ListToggle' " toggle location/quickfix list toggling seems to fail
+" Plug 'Valloric/ListToggle' " toggle location/quickfix list toggling seems to fail
 " Plug 'git@github.com:milkypostman/vim-togglelist' " same
 Plug 'tpope/vim-obsession' ", {'on': 'Obsession', 'ObsessionStatus'}  very cool, register edited files in a Session.vim, call with :Obsession
 Plug 'mbbill/undotree' " replaces gundo
@@ -867,7 +867,7 @@ let s:opts = {
 
 " FzfBranches
 function! UpdateSignifyBranch(branch)
-  echom 'chosen branch='.a:branch
+  " echom 'chosen branch='.a:branch
   let g:signify_vcs_cmds = {
 	\'git': 'git diff --no-color --no-ext-diff -U0 '.a:branch.' -- %f'
     \}
@@ -906,13 +906,11 @@ function! UpdateQfList(res)
   " TODO compute newer/older count for going to
   " TODO if
   echo a:res
-
   " get jump id
   " if ljump < 0
   "   colder -ljump
   " else
   "   cnewer ljump
-
 endfunction
 
 " TODO be able to fzf lhistory/chistory

@@ -140,6 +140,9 @@ in
       dfh="df --human-readable";
       duh="du --human-readable";
     };
+
+    # extra
+    # ${ranger}/share/doc/ranger/examples/bash_automatic_cd.sh
   };
 
   # programs.zsh = {
