@@ -31,7 +31,7 @@ alias -s docx=xdg-open
 # alias -g vpu="vagrant plugin uninstall"
 # alias -g vpl="vagrant plugin list"
 # # }}}
-### package managmeent related {{{
+# apt related {{{
 # alias -g agi="sudo apt install"
 # alias -g agr="sudo apt remove"
 # alias -g agy="sudo apt -y install"
@@ -43,9 +43,6 @@ alias -s docx=xdg-open
 # alias -g agf="sudo apt update && sudo apt full-upgrade"
 # }}}
 
-# debian specifix {{{
-# }}}
-
 alias dfh="df --human-readable"
 alias duh="du --human-readable"
 
@@ -53,10 +50,6 @@ alias duh="du --human-readable"
 # alias se="sudoedit"
 alias ec='$EDITOR $XDG_CONFIG_HOME/'
 
-# python related {{{
-# alias pipu='python3.5 -mpip install -U --user '
-# alias pydev='python3.5 setup.py develop --user'
-# }}}
 
 # Gestion du 'ls' : couleur & ne touche pas aux accents
 # alias ls='ls --classify --tabsize=0 --literal --color=auto --show-control-chars --human-readable'

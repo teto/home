@@ -172,8 +172,14 @@ networking.firewall.allowedTCPPorts = [ 631 ];
 #  astropro="astroid -c ~/.config/astroid/config_pro"
 # }}}
 
-      nixpaste="curl -F 'text=<-' http://nixpaste.lbr.uno";
+# lib.escapeShellArg fails
+      nixpaste="curl -F \"text=<-\" http://nixpaste.lbr.uno";
 
+# oftenly used programs {{{
+      v="nvim";
+      c="cat";
+      r="ranger";
+# }}}
    };
 
 
@@ -186,6 +192,8 @@ networking.firewall.allowedTCPPorts = [ 631 ];
   environment.variables = {
     EDITOR="nvim";
     BROWSER="qutebrowser";
+
+    # todo 
     XDG_CONFIG_HOME="$HOME/.config";
     XDG_CACHE_HOME="$HOME/.cache";
     XDG_DATA_HOME="$HOME/.local/share";
@@ -300,28 +308,37 @@ browsing = true;
 
   programs.man.enable = true;
 
-  programs.zsh.enable = true;
-  programs.zsh.enableCompletion = true;
-  programs.zsh.enableAutosuggestions = true;
-  programs.zsh.syntaxHighlighting.enable = false;
+  programs.zsh = {
+    enable= true;
+    enableCompletion = true;
+    enableAutosuggestions = true;
+    syntaxHighlighting.enable = false;
   # programs.zsh.shellAliases
-  programs.zsh.shellAliases= environment.shellAliases // {
-    se="sudoedit";
-  # ++ [
-# alias -s html=qutebrowser
-# alias -s json=nvim
-# alias -s Vagrantfile=nvim
-# alias -s py=python3
-# alias -s rb=ruby
-# alias -s png=sxiv
-# alias -s jpg=xdg-open
-# alias -s gif=xdg-open
-# alias -s avi=mpv
-# alias -s mp3=mocp
-# alias -s pdf=xdg-open
-# alias -s doc=xdg-open
-# alias -s docx=xdg-open
-  };
+    shellAliases= environment.shellAliases // {
+      se="sudoedit";
+    # ++ [
+  # alias -s html=qutebrowser
+  # alias -s json=nvim
+  # alias -s Vagrantfile=nvim
+  # alias -s py=python3
+  # alias -s rb=ruby
+  # alias -s png=sxiv
+  # alias -s jpg=xdg-open
+  # alias -s gif=xdg-open
+  # alias -s avi=mpv
+  # alias -s mp3=mocp
+  # alias -s pdf=xdg-open
+  # alias -s doc=xdg-open
+  # alias -s docx=xdg-open
+    };
+  shellInit = ''
+    FZF_PATH="$(fzf-share)"
+    . "$FZF_PATH/completion.zsh"
+    . "$FZF_PATH/key-bindings.zsh"
+
+    . "$ZDOTDIR/transfer.zsh"
+  '';
+};
 
   # for nix-shell
   programs.bash.enableCompletion = true;

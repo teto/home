@@ -18,7 +18,6 @@
 # . "$ZDOTDIR/zbell.zsh"
 #source $ZDOTDIR/hooks.zsh
 # adds a transfer function to upload a file & display its url
-. "$ZDOTDIR/transfer.zsh"
 
 
 # TODO make it a function cat some.json | python -m json.tool
@@ -33,6 +32,7 @@
 	  #mailpath+=("${i}?You have new mail in ${i:h:t}.")
 #done
 # }}}
+#
 # History parameters {{{
 # HISTSIZE=10000
 # SAVEHIST=9000
@@ -364,11 +364,14 @@ SPROMPT="Correct $fg[red]%R$reset_color to $fg[green]%r$reset_color [(y)es (n)o 
 
 # Enable FZF fuzzy matcher {{{
 FZF_PATH="$XDG_DATA_HOME/fzf/shell/"
+
 if [ $ON_NIXOS ]; then
     FZF_PATH="$(fzf-share)"
+else
+ . "$FZF_PATH/completion.zsh"
+ . "$FZF_PATH/key-bindings.zsh"
 fi
-. "$FZF_PATH/completion.zsh"
-. "$FZF_PATH/key-bindings.zsh"
+
 # https://junegunn.kr/2016/07/fzf-git
 . "$XDG_CONFIG_HOME/fzf-gems/fzf_git_functions.sh"
 # you can list the actually bound keys with bindkey -M viins
