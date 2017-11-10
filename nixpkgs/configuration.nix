@@ -9,6 +9,7 @@ let
   # hopefully it can be generated as dirname <nixos-config>
   configDir = /home/teto/dotfiles/nixpkgs;
   userNixpkgs = /home/teto/nixpkgs;
+  fzf = pkgs.fzf;
 
   # TODO to get
   # mynixpkgs = import nixRepo {};
@@ -280,19 +281,20 @@ browsing = true;
       # accelSpeed = "1.55";
     };
 
-    # todo run greenclip 
-    # ${pkgs.xorg.xset}/bin/xset r rate 200 50
-    displayManager.sessionCommands = ''
-    ${pkgs.networkmanagerapplet}/bin/nm-applet &
-    '';
+    # Enable the KDE Desktop Environment.
+    # services.xserver.displayManager.kdm.enable = true;
+    # services.xserver.desktopManager.xterm.enable = false;
+    # extraSessionCommands / configFile
+    # windowManager.i3.enable = true;
+    # windowManager.i3.package = pkgs.i3;
+
+    # # todo run greenclip 
+    # # ${pkgs.xorg.xset}/bin/xset r rate 200 50
+    # displayManager.sessionCommands = ''
+    # ${pkgs.networkmanagerapplet}/bin/nm-applet &
+    # '';
   };
 
-  # Enable the KDE Desktop Environment.
-  # services.xserver.displayManager.kdm.enable = true;
-  # services.xserver.desktopManager.xterm.enable = false;
-  # extraSessionCommands / configFile
-  services.xserver.windowManager.i3.enable = true;
-  services.xserver.windowManager.i3.package = pkgs.i3;
 
 
   services.mpd = {
@@ -331,13 +333,19 @@ browsing = true;
   # alias -s doc=xdg-open
   # alias -s docx=xdg-open
     };
+    # goes to /etc/zshenv
   shellInit = ''
-    FZF_PATH="$(fzf-share)"
-    . "$FZF_PATH/completion.zsh"
-    . "$FZF_PATH/key-bindings.zsh"
+    '';
 
-    . "$ZDOTDIR/transfer.zsh"
+  # todo make available for zsh too
+  # use FZF_PATH="$(fzf-share)" to do it dynamically
+  interactiveShellInit = ''
+    . "${fzf}/share/fzf/completion.zsh"
+    . "${fzf}/share/fzf/key-bindings.zsh"
+
+    # . "$ZDOTDIR/transfer.zsh"
   '';
+
 };
 
   # for nix-shell

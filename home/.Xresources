@@ -5,6 +5,6 @@
 !You need to install https://github.com/DaveDavenport/rofi-themes/ */
 !#include "Xresources.d/solarized.dark"
 ! #include "Xresources.d/urxvt" */
-*color0: #d70a53 
-#include "rofi-themes/Themes/lb.theme"
+/* *color0: #d70a53 */ 
+/* #include "rofi-themes/Themes/lb.theme" */
 

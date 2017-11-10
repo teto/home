@@ -211,11 +211,13 @@ in
   # i3 now available !
   xsession.enable = true;
   # xsession.windowManager.command = "…";
+    # ${pkgs.networkmanagerapplet}/bin/nm-applet &
 
   # as long as there is no better way to configure i3
   xsession.windowManager.command = "${pkgs.i3}/bin/i3";
   xsession.initExtra = ''
     # ${pkgs.feh}
     feh --bg-fill ~/dotfiles/wallpapers/nebula.jpg
+    ${pkgs.networkmanagerapplet}/bin/nm-applet &
   '';
 }
