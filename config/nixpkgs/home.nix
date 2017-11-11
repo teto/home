@@ -174,19 +174,19 @@ in
   #   enableAdobeFlash = true;
   # };
 
-  # programs.neovim = {
-  #   enable = true;
-  #   vimAlias = false;
-  #   withPython3 = true;
-  #   withPython = false;
-  #   withRuby = false;
-  #   extraPython3Packages = with pkgs.python3Packages;[ pandas python jedi]
-  #     ++ lib.optionals ( pkgs ? python-language-server) [ pkgs.python-language-server ]
-  #     ;
-  #   extraConfig = ''
-  #     " TODO set different paths accordingly, to language server especially
-  #     '';
-  # };
+  programs.neovim = {
+    enable = true;
+    vimAlias = false;
+    withPython3 = true;
+    withPython = false;
+    withRuby = false;
+    extraPython3Packages = with pkgs.python3Packages;[ pandas python jedi ]
+      ++ lib.optionals ( pkgs ? python-language-server) [ pkgs.python-language-server ]
+      ;
+    extraConfig = ''
+      " TODO set different paths accordingly, to language server especially
+      '';
+  };
 
   programs.vim = {
     enable = true;
