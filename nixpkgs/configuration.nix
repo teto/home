@@ -118,21 +118,12 @@ networking.firewall.allowedTCPPorts = [ 631 ];
 
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
-  environment.systemPackages = [
+  environment.systemPackages = with pkgs; [
 
-    pkgs.manpages  # because man tcp should always be available
-    pkgs.strongswan # to get ipsec in path
-    # networkmanager_strongswan
-      # wrapProgram $out/bin/dnschain --suffix PATH : ${openssl.bin}/bin
-  # let
-  #   # basePkgs = import "${configDir}/basetools.nix" pkgs;
-  #   desktopPkgs = import "${configDir}/desktopPkgs.nix" pkgs;
-  #   # networkPkgs = import "${configDir}/desktopPkgs.nix";
-  # in desktopPkgs ++ [
-  # TODO put some of the packages into an "extraPackages" set
-  # or pin it to a binary version
-    # astroid # might require a rebuild of webkit => too big
-    # gnomecontrolcenter
+    manpages  # because man tcp should always be available
+    strongswan # to get ipsec in path
+    luarocks   # for testing luafix
+    # wrapProgram $out/bin/dnschain --suffix PATH : ${openssl.bin}/bin
     # cups-pk-helper # to add printer through gnome control center
    ];
 
@@ -340,6 +331,8 @@ browsing = true;
   # todo make available for zsh too
   # use FZF_PATH="$(fzf-share)" to do it dynamically
   interactiveShellInit = ''
+
+    # TODO doesn't work because it s overriden afterwards apparently
     . "${fzf}/share/fzf/completion.zsh"
     . "${fzf}/share/fzf/key-bindings.zsh"
 

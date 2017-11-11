@@ -103,7 +103,6 @@ zle -N self-insert url-quote-magic
 # And press it
 
 bindkey "^K"      kill-whole-line                      # ctrl-k
-bindkey "^R"      history-incremental-search-backward  # ctrl-r
 bindkey "^A"      beginning-of-line                    # ctrl-a
 bindkey "^E"      end-of-line                          # ctrl-e
 bindkey "[B"      history-search-forward               # down arrow
@@ -119,7 +118,6 @@ zle -N edit-command-line
 # Press ESC-v to edit current line in your favorite $editor
 bindkey -M vicmd v edit-command-line
 # bindkey '^V' edit-command-line
-bindkey '^R' history-incremental-search-backward
 bindkey -r "^G" # was bound to list-expand I don't know where/why
 # bindkey '^G' push-line-or-edit
 
