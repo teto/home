@@ -10,3 +10,6 @@
 [submodule "buku_run"]
 	path = buku_run
 	url = /home/teto/buku_run
+[submodule "rofi-themes"]
+	path = rofi-themes
+	url = /home/teto/rofi-themes
