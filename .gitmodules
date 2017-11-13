@@ -6,10 +6,10 @@
 	url = https://github.com/teto/fzf-gems.git
 [submodule "rofi-scripts"]
 	path = rofi-scripts
-	url = /home/teto/rofi-scripts
+	url = https://github.com/carnager/rofi-scripts.git
 [submodule "buku_run"]
 	path = buku_run
-	url = /home/teto/buku_run
+	url = https://github.com/carnager/buku_run.git
 [submodule "rofi-themes"]
 	path = rofi-themes
-	url = /home/teto/rofi-themes
+	url = https://github.com/DaveDavenport/rofi-themes

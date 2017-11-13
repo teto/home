@@ -180,9 +180,8 @@ rec {
   #   pkgs = self.pkgs;
     python = self.pkgs.pythonPackages.python;
     enableDoxygen = true;
-    withManual = true;
     build_profile = "optimized";
-    withGsl = true;
+    # withManual = true;
   #   # generateBindings = true;
   #   # withExamples = true;
   #   # pygccxml = self.pythonPackages.pygccxml;
@@ -192,4 +191,10 @@ rec {
 
   # pkgs = super.pkgs;
   mptcpanalyzer = super.callPackage ../mptcpanalyzer.nix {};
+
+
+  mptcp-local = super.pkgs.linux_mptcp.overrideAttrs (old: {
+    NIX_DEBUG=8;
+    src= super.lib.cleanSource /home/teto/mptcp;
+  });
 }

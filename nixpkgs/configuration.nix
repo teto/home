@@ -86,13 +86,14 @@ networking.firewall.allowedTCPPorts = [ 631 ];
      consoleFont = "Lat2-Terminus16";
      consoleKeyMap = "fr";
      defaultLocale = "fr_FR.UTF-8";
-     inputMethod = {
-       enabled = "fcitx";
-       fcitx.engines = with pkgs.fcitx-engines; [
-         mozc
-       # hangul m17n
-     ];
-     };
+     # can generate problems for wireshark with Qt versions
+     # inputMethod = {
+     #   enabled = "fcitx";
+     #   fcitx.engines = with pkgs.fcitx-engines; [
+     #     mozc
+     #   # hangul m17n
+     # ];
+     # };
 
      # see https://github.com/NixOS/nixpkgs/issues/22895
      # consoleUseXkbConfig = "fr";
@@ -276,7 +277,7 @@ browsing = true;
     # services.xserver.displayManager.kdm.enable = true;
     # services.xserver.desktopManager.xterm.enable = false;
     # extraSessionCommands / configFile
-    # windowManager.i3.enable = true;
+    windowManager.i3.enable = true;
     # windowManager.i3.package = pkgs.i3;
 
     # # todo run greenclip 
