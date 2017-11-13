@@ -135,10 +135,11 @@ rec {
     checkPhase="echo 'ignored'";
     # we need keyring to retreive passwords etc
     # ython3.withPackages( ps: [ps.pygobject3 ])
+    
     propagatedBuildInputs = oldAttrs.propagatedBuildInputs
     ++ (with super.pkgs.python3Packages;
             [ requests_oauthlib keyring secretstorage pygobject3 ])
-    ++ [ super.pkgs.liboauth ];
+    ++ [ super.pkgs.liboauth super.pkgs.gobjectIntrospection];
   });
 
   # define it only if ns3 exists
