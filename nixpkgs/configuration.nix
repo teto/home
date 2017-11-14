@@ -40,7 +40,10 @@ rec {
     ] ++ lib.optionals (builtins.pathExists ./machine-specific.nix) [ ./machine-specific.nix ];
 
   hardware.opengl.driSupport32Bit = true;
-  hardware.pulseaudio.support32Bit = true;
+  hardware.pulseaudio = {
+    enable = true;
+    support32Bit = true;
+  };
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -366,6 +369,7 @@ browsing = true;
      isNormalUser = true; # creates home/ sets default shell
      uid = 1000;
      extraGroups = [
+       "audio" # for pulseaudio 
        "wheel" # for sudo
        "networkmanager"
        "libvirtd" # for nixops
@@ -440,7 +444,7 @@ browsing = true;
   # nix.binaryCaches = [ http://hydra.nixos.org/ ];
 
   # handy to hack/fix around
-  # nix.readOnlyStore = false;
+  nix.readOnlyStore = false;
 
   system = {
     # stateVersion = "17.03"; # why would I want to keep that ?

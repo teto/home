@@ -2,6 +2,15 @@
 
 
 let
+  i3extraConfig = lib.concatStrings [
+    (builtins.readFile ../i3/config.header)
+    (builtins.readFile ../i3/config.main)
+    (builtins.readFile ../i3/config.mediakeys)
+    (builtins.readFile ../i3/config.xp)
+    (builtins.readFile ../i3/config.audio)
+    (builtins.readFile ../i3/config.colors)
+  ];
+
   # the kind of packages u don't want to compile
   # TODO les prendres depuis un channel avec des binaires ?
   heavyPackages = with pkgs;[
@@ -14,6 +23,7 @@ let
           zeal
           zotero
         # astroid # always compiles webkit so needs 1 full day
+        taiginijisho # japanse dict; like zkanji
   ];
   desktopPkgs = with pkgs; [
           buku
@@ -219,11 +229,12 @@ in
   # xsession.windowManager.command = "${pkgs.i3}/bin/i3";
   xsession.windowManager.i3 = {
     enable = true;
-
+    extraConfig = i3extraConfig;
+    config = null;
   };
-  xsession.initExtra = ''
-    # ${pkgs.feh}
-    feh --bg-fill ~/dotfiles/wallpapers/nebula.jpg
-    ${pkgs.networkmanagerapplet}/bin/nm-applet &
-  '';
+  # xsession.initExtra = ''
+  #   # ${pkgs.feh}
+  #   feh --bg-fill ~/dotfiles/wallpapers/nebula.jpg
+  #   ${pkgs.networkmanagerapplet}/bin/nm-applet &
+  # '';
 }
