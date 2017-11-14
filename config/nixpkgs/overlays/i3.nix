@@ -186,15 +186,20 @@ rec {
   #   # withExamples = true;
   #   # pygccxml = self.pythonPackages.pygccxml;
   } else null;
-  dce = if (super.pkgs ? ns3) then super.callPackage ../dce.nix { pkgs = super.pkgs;  } else null;
+  dce = if (super.pkgs ? ns-3) then super.callPackage ../dce.nix { pkgs = super.pkgs;  } else null;
 
 
   # pkgs = super.pkgs;
   mptcpanalyzer = super.callPackage ../mptcpanalyzer.nix {};
 
 
-  mptcp-local = super.pkgs.linux_mptcp.overrideAttrs (old: {
-    NIX_DEBUG=8;
-    src= super.lib.cleanSource /home/teto/mptcp;
+  mptcp-local = super.pkgs.linux_mptcp.override ({
+    # NIX_DEBUG=8;
+    argsOverride = {
+      # supposed  to always work
+      modDirVersion="4.9.60+";
+      # src= super.lib.cleanSource /home/teto/mptcp;
+    };
+    # src=pkgs.lib.cleanSource /home/teto/mptcp;
   });
 }

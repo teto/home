@@ -1,10 +1,9 @@
 { pkgs
 , stdenv, fetchFromGitHub, autoreconfHook, libtool, intltool, pkgconfig
-, ns3, gcc
+, ns-3, gcc
 , withDoc ? false
 , withManual ? false
 , withExamples ? false
-, withTests ? false
 , withLibOS ? false
 }:
 
@@ -21,7 +20,7 @@ stdenv.mkDerivation rec {
   # };
   src = /home/teto/dce;
 
-  buildInputs = [ ns3 gcc ]
+  buildInputs = [ ns-3 gcc ]
     # ++ stdenv.lib.optionals 
     ;
 
@@ -29,15 +28,16 @@ stdenv.mkDerivation rec {
   # autoreconfHook libtool
 
   # with-ns3 should be install folder
+  doCheck=false;
   configurePhase = ''
     runHook preConfigure
 
     # make configure
     # TODO limit modules so that it gets faster
     ./waf configure --prefix=$out \
-    --with-ns3=${ns3} \
+    --with-ns3=${ns-3} \
       ${stdenv.lib.optionalString withExamples "--enable-examples"}
-      '' + stdenv.lib.optionalString withTests " --enable-tests \\" + ''
+      '' + stdenv.lib.optionalString doCheck " --enable-tests \\" + ''
 
     runHook preConfigure
   '' ;
