@@ -44,7 +44,7 @@ let
           nix-prefetch-scripts
           nix-repl
           nix-index
-          python3Packages.neovim
+          # python3Packages.neovim it s included
           python3Packages.pycodestyle
           rpl
           universal-ctags
@@ -182,9 +182,11 @@ in
     extraPython3Packages = with pkgs.python3Packages;[ pandas jedi ]
       ++ lib.optionals ( pkgs ? python-language-server) [ pkgs.python-language-server ]
       ;
-    # extraConfig = ''
-    #   " TODO set different paths accordingly, to language server especially
-    #   '';
+    extraConfig = ''
+      " TODO set different paths accordingly, to language server especially
+      let g:clangd_binary = '${pkgs.clang}'
+      # let g:pyls = '${pkgs.clang}'
+      '';
   };
 
 # home.activation.setXDGbrowser = dagEntryBefore [ "linkGeneration" ] ''

@@ -1,10 +1,10 @@
-{ pkgs
-, stdenv, fetchFromGitHub, autoreconfHook, libtool, intltool, pkgconfig
+{ stdenv, fetchFromGitHub, autoreconfHook, libtool, intltool, pkgconfig
 , ns-3, gcc
 , withDoc ? false
 , withManual ? false
 , withExamples ? false
 , withLibOS ? false
+, ...
 }:
 
 stdenv.mkDerivation rec {
@@ -39,7 +39,7 @@ stdenv.mkDerivation rec {
       ${stdenv.lib.optionalString withExamples "--enable-examples"}
       '' + stdenv.lib.optionalString doCheck " --enable-tests \\" + ''
 
-    runHook preConfigure
+    runHook postConfigure
   '' ;
 
   # postPatch = ''

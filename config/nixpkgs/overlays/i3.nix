@@ -190,11 +190,20 @@ rec {
 
 
   # pkgs = super.pkgs;
-  mptcpanalyzer = super.callPackage ../mptcpanalyzer.nix {};
+  mptcpanalyzer = super.callPackage ../mptcpanalyzer.nix {
+    inherit (super.python3Packages) buildPythonApplication pandas cmd2 pyperclip matplotlib pyqt5 stevedore;
+    tshark = self.pkgs.tshark-local-stable;
+  };
 
 
   mptcp-local = super.pkgs.linux_mptcp.override ({
     # NIX_DEBUG=8;
+    # maybe that works
+    # configfile = /path/to/my/config
+    extraConfig=''
+      INFINIBAND n
+
+      '';
     argsOverride = {
       # supposed  to always work
       modDirVersion="4.9.60+";
@@ -202,4 +211,5 @@ rec {
     };
     # src=pkgs.lib.cleanSource /home/teto/mptcp;
   });
+
 }
