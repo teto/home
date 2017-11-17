@@ -77,9 +77,16 @@ let
       # or set binary-cache
     # nixos= import '<nixos-unstable>' 
 in
-{
+rec {
   home.packages = desktopPkgs ++ devPkgs ++ imPkgs;
 
+  home.mailAccounts = [
+    {
+      username = "mattator@gmail.com";
+      address = "mattator@gmail.com";
+      store = home.folder."Maildir/gmail";
+    }
+    ];
   home.keyboard.layout = "fr,us";  # you can switch from cli with xkb-switch
 
   # programs.emacs = {
@@ -178,10 +185,15 @@ in
     automount = false;
   };
 
+  programs.notmuch = {
+    enable = true;
+  };
+
   # TODO prefix with stable
   # programs.firefox = {
   #   enable = true;
-  #   enableAdobeFlash = true;
+  #   package = ; # set ff57
+  #   enableAdobeFlash = false;
   # };
 
   programs.neovim = {
@@ -232,9 +244,9 @@ in
     extraConfig = i3extraConfig;
     config = null;
   };
-  # xsession.initExtra = ''
-  #   # ${pkgs.feh}
-  #   feh --bg-fill ~/dotfiles/wallpapers/nebula.jpg
-  #   ${pkgs.networkmanagerapplet}/bin/nm-applet &
-  # '';
+  xsession.initExtra = ''
+    # ${pkgs.feh}
+    feh --bg-fill ~/dotfiles/wallpapers/nebula.jpg
+    ${pkgs.networkmanagerapplet}/bin/nm-applet &
+  '';
 }

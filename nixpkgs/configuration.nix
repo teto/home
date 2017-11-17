@@ -280,7 +280,7 @@ browsing = true;
     # services.xserver.displayManager.kdm.enable = true;
     # services.xserver.desktopManager.xterm.enable = false;
     # extraSessionCommands / configFile
-    windowManager.i3.enable = true;
+    # windowManager.i3.enable = true;
     # windowManager.i3.package = pkgs.i3;
 
     # # todo run greenclip 
@@ -445,6 +445,9 @@ browsing = true;
 
   # handy to hack/fix around
   nix.readOnlyStore = false;
+
+  # to install as a user service
+  services.offlineimap.install = true;
 
   system = {
     # stateVersion = "17.03"; # why would I want to keep that ?

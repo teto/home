@@ -19,6 +19,13 @@ set $launcher "rofi -modi 'run,drun,window,ssh' -show run"
 # Randr:rofi-randr,Monitor:monitor_layout.sh'
 set $greenclip "rofi -modi 'clipboard:greenclip print' -show clipboard"
 
+# todo use other mod
+# bindsym $mod+g exec $greenclip
+# bindsym $mod+b exec buku_run
+
+bindsym $mad+h exec $greenclip
+bindsym $mad+b exec buku_run
+bindsym $mad+r exec rofi_pass
 bindsym $mod+ctrl+h exec $greenclip
 bindsym $mod+ctrl+b exec buku_run
 
@@ -28,7 +35,7 @@ set $rmod Mod1
 set $BROWSER qutebrowser
 #set $term rxvt-unicode
 set $term termite
-set $status_command nix-shell -p i3pystatus -p python36Packages.pytz -p khal -p python36Packages.keyring --run "python3 $XDG_CONFIG_HOME/i3/myStatus.py"
+set $status_command nix-shell -p i3pystatus -p python3Packages.pytz -p khal -p python3Packages.keyring --run "python3 $XDG_CONFIG_HOME/i3/myStatus.py"
 
 # to easily swap between i3/vim mode
 set $kleft h
