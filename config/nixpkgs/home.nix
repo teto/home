@@ -44,21 +44,22 @@ let
           zathura
   ];
   devPkgs = with pkgs; [
-          editorconfig-core-c
-          exa
-          gdb
-          gitAndTools.git-extras
-          mypy
-          # neovim
-          neovim-remote
-          nix-prefetch-scripts
-          nix-repl
-          nix-index
-          python3Packages.neovim
-          python3Packages.pycodestyle
-          rpl
-          universal-ctags
-          ];
+    ccache
+    editorconfig-core-c
+    exa
+    gdb
+    gitAndTools.git-extras
+    mypy
+    # neovim
+    neovim-remote
+    nix-prefetch-scripts
+    nix-repl
+    nix-index
+    # python3Packages.neovim it s included
+    python3Packages.pycodestyle
+    rpl
+    universal-ctags
+  ];
     imPkgs = with pkgs; [
         offlineimap # python 2 only
         # python27Packages.alot # python 2 only
@@ -210,9 +211,11 @@ rec {
     extraPython3Packages = with pkgs.python3Packages;[ pandas jedi ]
       ++ lib.optionals ( pkgs ? python-language-server) [ pkgs.python-language-server ]
       ;
-    # extraConfig = ''
-    #   " TODO set different paths accordingly, to language server especially
-    #   '';
+    extraConfig = ''
+      " TODO set different paths accordingly, to language server especially
+      let g:clangd_binary = '${pkgs.clang}'
+      # let g:pyls = '${pkgs.clang}'
+      '';
   };
 
 # home.activation.setXDGbrowser = dagEntryBefore [ "linkGeneration" ] ''

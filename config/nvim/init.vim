@@ -902,33 +902,33 @@ endfunction
 "   " return extend(list[0:0], map(list[1:], 's:format_mark(v:val)')),
 " endfunction
 
-function! UpdateQfList(res)
-  " TODO compute newer/older count for going to
-  " TODO if
-  echo a:res
-  " get jump id
-  " if ljump < 0
-  "   colder -ljump
-  " else
-  "   cnewer ljump
-endfunction
+" function! UpdateQfList(res)
+"   " TODO compute newer/older count for going to
+"   " TODO if
+"   echo a:res
+"   " get jump id
+"   " if ljump < 0
+"   "   colder -ljump
+"   " else
+"   "   cnewer ljump
+" endfunction
 
 " TODO be able to fzf lhistory/chistory
-function! FzfChooseQfList()
+" function! FzfChooseQfList()
 
-  let d = copy(s:opts)
-  let d.source = GetQfHistory()
-  " let d.source = ["test 1", "test 2"]
-  let d.sink = function('UpdateQfList')
-  call fzf#run(d)
-endfunction
+"   let d = copy(s:opts)
+"   let d.source = GetQfHistory()
+"   " let d.source = ["test 1", "test 2"]
+"   let d.sink = function('UpdateQfList')
+"   call fzf#run(d)
+" endfunction
 
 function! NeomakeToggleMaker(maker_name)
   " set(g:, 'neomake_'.&ft.'_enabled_makers', [])
 
   "   :call filter(list, 'v:val !~ "x"')  " remove items with an 'x'
 
-endfunc
+endfunction
 
 function! FzfNeomake()
 
@@ -1136,22 +1136,22 @@ function! NeomakeStatusLine()
 
 let bufnr = winbufnr(winnr())
 let active=0
-let neomake_status_str = neomake#statusline#get(bufnr, {
-	\ 'format_running': '… ({{running_job_names}})',
-	\ 'format_ok': (active ? '%#NeomakeStatusGood#' : '%*').'✓',
-	\ 'format_quickfix_ok': '',
-	\ 'format_quickfix_issues': (active ? '%s' : ''),
-	\ 'format_status': '%%(%s'
-	\   .(active ? '%%#StatColorHi2#' : '%%*')
-	\   .'%%)',
-	\ })
+" let neomake_status_str = neomake#statusline#get(bufnr, {
+" 	\ 'format_running': '… ({{running_job_names}})',
+" 	\ 'format_ok': (active ? '%#NeomakeStatusGood#' : '%*').'✓',
+" 	\ 'format_quickfix_ok': '',
+" 	\ 'format_quickfix_issues': (active ? '%s' : ''),
+" 	\ 'format_status': '%%(%s'
+" 	\   .(active ? '%%#StatColorHi2#' : '%%*')
+" 	\   .'%%)',
+" 	\ })
 
-    " let neomake_status_str = neomake#statusline#get(bufnr, {
-    "       \ 'format_running': '… ({{running_job_names}})',
-    "       \ 'format_ok': '✓',
-    "       \ 'format_quickfix_ok': '',
-    "       \ 'format_quickfix_issues': '%s',
-    "       \ })
+    let neomake_status_str = neomake#statusline#get(bufnr, {
+          \ 'format_running': '… ({{running_job_names}})',
+          \ 'format_ok': '✓',
+          \ 'format_quickfix_ok': '',
+          \ 'format_quickfix_issues': '%s',
+          \ })
   return neomake_status_str
 endfunction
 
@@ -1237,7 +1237,8 @@ let g:airline#extensions#default#layout = [
       \ [ 'x', 'y', 'z', 'error', 'warning' ]
       \ ]
 " section y is fileencoding , useless in neovim
-call airline#parts#define_raw('neomake_custom', 'NeomakeStatusLine')
+" define_raw
+call airline#parts#define_function('neomake_custom', 'NeomakeStatusLine')
 let g:airline_section_y = airline#section#create_right(['neomake_custom','ffenc'])
 " let g:airline_section_y = airline#section#create_right(['neomake','ffenc'])
 call airline#parts#define_function('grepper', 'grepper#statusline')
@@ -1468,7 +1469,7 @@ let g:langserver_executables = {
 	\ },
 	\ 'c': {
 	\ 'name': 'clangd',
-	\ 'cmd': ['/mnt/ext4/llvm/build/bin/clangd', ],
+	\ 'cmd': ['clangd', ],
 	\ },
 	\ 'python': {
 	\ 'name': 'pyls',
@@ -1485,10 +1486,11 @@ let g:LanguageClient_selectionUI='fzf'
 " let g:LanguageClient_trace="verbose"
 " call LanguageClient_setLoggingLevel('DEBUG')
 "let g:LanguageClient_diagnosticsList="quickfix"
+
+" \ 'c': ['clangd', ],
 let g:LanguageClient_serverCommands = {
     \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
-    \ 'c': ['/mnt/ext4/llvm/build/bin/clangd', ],
-    \ 'cpp': ['/mnt/ext4/llvm/build/bin/clangd', ],
+    \ 'cpp': ['clangd', ],
     \ 'python': ['pyls', '--log-file' , expand('~/lsp_python.log')]
     \ }
 

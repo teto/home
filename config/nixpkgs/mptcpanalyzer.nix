@@ -1,13 +1,40 @@
-{ 
-  pkgs ? import <nixpkgs> {}
-# , buildPythonApplication
+{
+  # pkgs ? import <nixpkgs> {}
+lib
+, fetchFromGitHub
+, buildPythonApplication
+, stevedore, cmd2
+# might be useless ? depends on cmd2
+, pyperclip
+, pandas, matplotlib, pyqt5
+
+# can be overriden with the one of your choice
+, tshark
 }:
 
-with pkgs.python3Packages;
-buildPythonPackage rec {
+# with pkgs.python3Packages;
+let
+
+  filter-src =  builtins.filterSource (name: type:
+    let baseName = baseNameOf (toString name); in
+    lib.cleanSourceFilter name type && !(
+    lib.hasSuffix ".pcap" baseName
+    || lib.hasSuffix ".csv" baseName
+    || baseName == "tags"
+    ));
+
+in
+buildPythonApplication rec {
 	name = "mptcpanalyzer-${version}";
 	version = "0.1";
-	src = /home/teto/mptcpanalyzer;
+    # src = fetchFromGitHub {
+    #   owner = "teto";
+    #   repo = "mptcpanalyzer";
+    #   rev = "${version}";
+    #   # sha256 = ;
+    # };
+    # todo filter
+	src = filter-src /home/teto/mptcpanalyzer;
     # enableCheckPhase=false;
     doCheck = false;
     /* skipCheck */
@@ -15,6 +42,10 @@ buildPythonPackage rec {
     # to build the doc sphinx
     # TODO package tshark
     propagatedBuildInputs = [ stevedore cmd2 pyperclip pandas matplotlib pyqt5
-    pkgs.tshark-local-stable pyperclip ];
+    tshark pyperclip ];
 	/* propagatedBuildInputs =  [ stevedore pandas matplotlib pyqt5 ]; */
+
+    meta = {
+      # licences = 
+    };
 }
