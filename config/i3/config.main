@@ -259,6 +259,7 @@ bindsym $mod+Shift+f fullscreen global
 
 # change container layout (stacked, tabbed, default)
 bindsym Group1+$mod+ampersand layout toggle
+bindsym Group2+$mod+1 layout toggle
 #bindsym $mod+s layout stacking
 #bindsym $mod+z layout tabbed
 #bindsym $mod+e layout default
@@ -312,15 +313,25 @@ bindsym $mod+apostrophe mode "programs"
 #bindsym $mod+underscore workspace 8
 #bindsym $mod+ccedilla workspace 9
 #bindsym $mod+agrave workspace 10
-bindsym Group1+$mod+a workspace "$w1"
-bindsym Group1+$mod+z workspace "$w2"
-bindsym Group1+$mod+e workspace "$w3"
-bindsym Group1+$mod+q workspace "$w4"
-bindsym Group1+$mod+s workspace "$w5"
-bindsym Group1+$mod+d workspace "$w6"
-bindsym Group1+$mod+x workspace "$w8"
-bindsym Group1+$mod+c workspace "$w9"
+bindsym $mod+a workspace "$w1"
+bindsym $mod+z workspace "$w2"
+bindsym $mod+e workspace "$w3"
+bindsym $mod+q workspace "$w4"
+bindsym $mod+s workspace "$w5"
+bindsym $mod+d workspace "$w6"
+bindsym $mod+w workspace "$w7"
+bindsym $mod+x workspace "$w8"
+bindsym $mod+c workspace "$w9"
 
+bindsym Group2+$mod+q workspace "$w1"
+bindsym Group2+$mod+w workspace "$w2"
+bindsym Group2+$mod+e workspace "$w3"
+bindsym Group2+$mod+a workspace "$w4"
+bindsym Group2+$mod+s workspace "$w5"
+bindsym Group2+$mod+d workspace "$w6"
+bindsym Group2+$mod+z workspace "$w7"
+bindsym Group2+$mod+x workspace "$w8"
+bindsym Group2+$mod+c workspace "$w9"
 # bindcode $mod+24 workspace "$w1"
 # bindcode $mod+25 workspace "$w2"
 # bindcode $mod+26 workspace "$w3"

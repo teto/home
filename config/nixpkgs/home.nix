@@ -87,7 +87,13 @@ rec {
       store = home.folder."Maildir/gmail";
     }
     ];
-  home.keyboard.layout = "fr,us";  # you can switch from cli with xkb-switch
+
+  # you can switch from cli with xkb-switch
+  # or xkblayout-state
+  home.keyboard.layout = "fr,us";
+
+  # symlink machine specific config there
+  import = lib.optionals (builtins.pathExists ./machine-specific.nix) [ ./machine-specific.nix ];
 
   # programs.emacs = {
   #   enable = true;
