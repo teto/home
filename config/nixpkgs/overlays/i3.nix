@@ -4,6 +4,39 @@ let
   # In lib/sources.nix we have "cleanSource = builtins.filterSource cleanSourceFilter;"
   # TODO builtins.filterSource (p: t: lib.cleanSourceFilter p t && baseNameOf p != "build")
   filter-cmake = builtins.filterSource (p: t: super.lib.cleanSourceFilter p t && baseNameOf p != "build");
+
+  # fetchGitHashless = args: super.stdenv.lib.overrideDerivation
+  #   # Use a dummy hash, to appease fetchgit's assertions
+  #   (super.fetchgit (args // { sha256 = super.hashString "sha256" args.url; }))
+
+  #   # Remove the hash-checking
+  #   (old: {
+  #     outputHash     = null;
+  #     outputHashAlgo = null;
+  #     outputHashMode = null;
+  #     sha256         = null;
+  #   });
+
+
+  # Get the commit ID for the given ref in the given repo
+  # latestGitCommit = { url, ref ? "HEAD" }:
+  #   runCommand "repo-${sanitiseName ref}-${sanitiseName url}"
+  #     {
+  #       # Avoids caching. This is a cheap operation and needs to be up-to-date
+  #       version = toString currentTime;
+  #       # Required for SSL
+  #       GIT_SSL_CAINFO = "${cacert}/etc/ssl/certs/ca-bundle.crt";
+  #       buildInputs = [ git gnused ];
+  #     }
+  #     ''
+  #       REV=$(git ls-remote "${url}" "${ref}") || exit 1
+  #       printf '"%s"' $(echo "$REV"        |
+  #                       head -n1           |
+  #                       sed -e 's/\s.*//g' ) > "$out"
+  #     '';
+  # fetchLatestGit = { url, ref ? "HEAD" }@args:
+  #   with { rev = import (latestGitCommit { inherit url ref; }); };
+  #   fetchGitHashless (removeAttrs (args // { inherit rev; }) [ "ref" ]);
 in
 rec {
   i3-local = super.i3.overrideAttrs (oldAttrs: {
@@ -195,21 +228,42 @@ rec {
     tshark = self.pkgs.tshark-local-stable;
   };
 
-
-  mptcp-local = super.pkgs.linux_mptcp.override ({
+  # to improve the config
+  # make localmodconfig
+  mptcp93 = super.pkgs.linux_mptcp.override ({
     # NIX_DEBUG=8;
     # maybe that works
     # configfile = /path/to/my/config
     extraConfig=''
       INFINIBAND n
-
+      MMC_SDHCI n
       '';
     argsOverride = {
       # supposed  to always work
       modDirVersion="4.9.60+";
-      # src= super.lib.cleanSource /home/teto/mptcp;
     };
-    # src=pkgs.lib.cleanSource /home/teto/mptcp;
   });
 
+  mptcp-local =
+  let
+    # todo remove tags
+    filter-src = builtins.filterSource (p: t: 
+    let baseName = baseNameOf p;
+    in super.lib.cleanSourceFilter p t && baseName != "build" && baseName != "tags");
+  in
+  mptcp93.override ({
+      # src= super.lib.cleanSource /home/teto/mptcp;
+      name="mptcp-local";
+      # src= filter-src /home/teto/mptcp;
+      src= super.fetchgitLocal /home/teto/mptcp;
+      # src = fetchGitHashless {
+      #   rev="master";
+      #   url= /home/teto/mptcp;
+      # };
+      enableParallelBuilding=true;
+
+  });
+
+  # linuxPackages_mptcp = linuxPackagesFor pkgs.linux_mptcp;
+  linuxPackages_mptcp-local = super.pkgs.linuxPackagesFor mptcp-local;
 }

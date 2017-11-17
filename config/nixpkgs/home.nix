@@ -34,21 +34,22 @@ let
           zathura
   ];
   devPkgs = with pkgs; [
-          editorconfig-core-c
-          exa
-          gdb
-          gitAndTools.git-extras
-          mypy
-          # neovim
-          neovim-remote
-          nix-prefetch-scripts
-          nix-repl
-          nix-index
-          # python3Packages.neovim it s included
-          python3Packages.pycodestyle
-          rpl
-          universal-ctags
-          ];
+    ccache
+    editorconfig-core-c
+    exa
+    gdb
+    gitAndTools.git-extras
+    mypy
+    # neovim
+    neovim-remote
+    nix-prefetch-scripts
+    nix-repl
+    nix-index
+    # python3Packages.neovim it s included
+    python3Packages.pycodestyle
+    rpl
+    universal-ctags
+  ];
     imPkgs = with pkgs; [
         offlineimap # python 2 only
         # python27Packages.alot # python 2 only
