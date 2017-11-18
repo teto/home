@@ -34,7 +34,8 @@ buildPythonApplication rec {
     #   # sha256 = ;
     # };
     # todo filter
-	src = filter-src /home/teto/mptcpanalyzer;
+    # filter-src
+	src =  builtins.filterSource (name: type: true) /home/teto/mptcpanalyzer;
     # enableCheckPhase=false;
     doCheck = false;
     /* skipCheck */
@@ -45,7 +46,9 @@ buildPythonApplication rec {
     tshark pyperclip ];
 	/* propagatedBuildInputs =  [ stevedore pandas matplotlib pyqt5 ]; */
 
-    meta = {
-      # licences = 
+    meta = with lib; {
+      description = "pcap analysis tool specialized for multipath TCP";
+      maintainer = [ maintainers.teto ];
+      licences = licences.gpl3;
     };
 }

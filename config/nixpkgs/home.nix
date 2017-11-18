@@ -9,39 +9,48 @@ let
     (builtins.readFile ../i3/config.xp)
     (builtins.readFile ../i3/config.audio)
     (builtins.readFile ../i3/config.colors)
-  ];
+  ]
+  # TODO check depending on if pulseaudio or alsa is enabled
+  # + lib.optional false ''
+  # # Pulse Audio controls
+  # bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
+  # bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
+  # bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
+  # ''
+  ;
 
   # the kind of packages u don't want to compile
   # TODO les prendres depuis un channel avec des binaires ?
   heavyPackages = with pkgs;[
-          libreoffice
-          qutebrowser
-          gnome3.nautilus # demande webkit
-          mendeley # requiert qtwebengine
-          pinta
-          qtcreator
-          zeal
-          zotero
-        # astroid # always compiles webkit so needs 1 full day
-        taiginijisho # japanse dict; like zkanji
+    anki
+    libreoffice
+    qutebrowser
+    gnome3.nautilus # demande webkit/todo replace by nemo ?
+    mendeley # requiert qtwebengine
+    pinta    # photo editing
+    qtcreator  # for wireshark
+    zeal       #
+    zotero     #
+    # astroid # always compiles webkit so needs 1 full day
+    taiginijisho # japanse dict; like zkanji Qt based
   ];
   desktopPkgs = with pkgs; [
-          buku
-          dropbox
-          ffmpegthumbnailer # to preview videos in ranger
-          haskellPackages.greenclip # todo get from haskell
-          nox
-          # gnome3.gnome_control_center
-          qtpass
-          sublime3
-          scrot
-          system_config_printer
-          transmission_gtk
-          translate-shell
-          w3m # for preview in ranger w3mimgdisplay
-          xorg.xev
-          xclip
-          zathura
+    buku
+    dropbox
+    ffmpegthumbnailer # to preview videos in ranger
+    haskellPackages.greenclip # todo get from haskell
+    nox
+    # gnome3.gnome_control_center
+    qtpass
+    sublime3
+    scrot
+    system_config_printer
+    transmission_gtk
+    translate-shell
+    w3m # for preview in ranger w3mimgdisplay
+    xorg.xev
+    xclip
+    zathura
   ];
   devPkgs = with pkgs; [
     ccache
@@ -60,30 +69,31 @@ let
     rpl
     universal-ctags
   ];
-    imPkgs = with pkgs; [
-        offlineimap # python 2 only
-        # python27Packages.alot # python 2 only
-        khal
-        khard
-        # msmtp
-        newsbeuter
-        notmuch
-        slack
-        vdirsyncer
-        weechat
-        # leafnode dovecot22 dovecot_pigeonhole fetchmail procmail w3m
-        # mairix mutt msmtp lbdb contacts spamassassin
-      ];
-      # TODO add heavyPackages only if available ?
-      # or set binary-cache
-    # nixos= import '<nixos-unstable>' 
+  imPkgs = with pkgs; [
+    offlineimap # python 2 only
+    # python27Packages.alot # python 2 only
+    khal
+    khard
+    msmtp
+    newsbeuter
+    notmuch
+    slack
+    vdirsyncer
+    weechat
+    # leafnode dovecot22 dovecot_pigeonhole fetchmail procmail w3m
+    # mairix mutt msmtp lbdb contacts spamassassin
+  ];
+  # TODO add heavyPackages only if available ?
+  # or set binary-cache
+  # nixos= import '<nixos-unstable>' 
 in
 rec {
   home.packages = desktopPkgs ++ devPkgs ++ imPkgs;
 
   home.mailAccounts = [
     {
-      username = "mattator@gmail.com";
+      userName = "mattator@gmail.com";
+      realname = "Like skywalker";
       address = "mattator@gmail.com";
       store = home.folder."Maildir/gmail";
     }
@@ -94,7 +104,7 @@ rec {
   home.keyboard.layout = "fr,us";
 
   # symlink machine specific config there
-  import = lib.optionals (builtins.pathExists ./machine-specific.nix) [ ./machine-specific.nix ];
+  imports = lib.optionals (builtins.pathExists ./machine-specific.nix) [ ./machine-specific.nix ];
 
   # programs.emacs = {
   #   enable = true;
@@ -103,6 +113,7 @@ rec {
   #     epkgs.magit
   #   ];
   # };
+
   # programs.rofi = {
   #   enable = true;
   # };
@@ -127,6 +138,7 @@ rec {
     MAILDIR="$HOME/Maildir";
 
     # TODO add symlinks instead towards $XDG_DATA_HOME/bin ?
+    # now these are submoudles of dotfiles To re;ove
     PATH="$HOME/rofi-scripts:$HOME/buku_run:$PATH";
 
   };
@@ -196,6 +208,16 @@ rec {
     enable = true;
   };
 
+  programs.alot = {
+    enable = true;
+  };
+
+  # 
+  # programs.offlineimap = {
+  #   enable = true;
+  # };
+
+
   # TODO prefix with stable
   # programs.firefox = {
   #   enable = true;
@@ -211,11 +233,11 @@ rec {
     extraPython3Packages = with pkgs.python3Packages;[ pandas jedi ]
       ++ lib.optionals ( pkgs ? python-language-server) [ pkgs.python-language-server ]
       ;
-    extraConfig = ''
-      " TODO set different paths accordingly, to language server especially
-      let g:clangd_binary = '${pkgs.clang}'
-      # let g:pyls = '${pkgs.clang}'
-      '';
+    # extraConfig = ''
+    #   " TODO set different paths accordingly, to language server especially
+    #   let g:clangd_binary = '${pkgs.clang}'
+    #   # let g:pyls = '${pkgs.clang}'
+    #   '' ;
   };
 
 # home.activation.setXDGbrowser = dagEntryBefore [ "linkGeneration" ] ''

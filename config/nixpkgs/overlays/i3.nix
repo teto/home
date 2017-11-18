@@ -5,6 +5,8 @@ let
   # TODO builtins.filterSource (p: t: lib.cleanSourceFilter p t && baseNameOf p != "build")
   filter-cmake = builtins.filterSource (p: t: super.lib.cleanSourceFilter p t && baseNameOf p != "build");
 
+  fetchgitLocal = super.fetchgitLocal;
+
   # fetchGitHashless = args: super.stdenv.lib.overrideDerivation
   #   # Use a dummy hash, to appease fetchgit's assertions
   #   (super.fetchgit (args // { sha256 = super.hashString "sha256" args.url; }))
@@ -227,6 +229,12 @@ rec {
     inherit (super.python3Packages) buildPythonApplication pandas cmd2 pyperclip matplotlib pyqt5 stevedore;
     tshark = self.pkgs.tshark-local-stable;
   };
+
+  mptcpanalyzer-test = mptcpanalyzer.overrideAttrs (old: {
+    # todo be careful 
+    src = fetchgitLocal old.src;
+    # src = fetchgitLocal "/home/teto/mptcpanalyzer";
+  });
 
   # to improve the config
   # make localmodconfig

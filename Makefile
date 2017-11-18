@@ -8,6 +8,7 @@ MAILDIR ?= $(HOME)/Maildir
 DCE_FOLDER = "${HOME}/dce"
 NIXOPS_FOLDER = "${HOME}/nixops"
 WIRESHARK_FOLDER = "${HOME}/wireshark"
+MPTCPANALYZER_FOLDER = "${HOME}/mptcpanalyzer"
 KERNEL_FOLDER = "${HOME}/mptcp"
 NIXPKGS_FOLDER = "${HOME}/nixpkgs"
 NEOVIM_FOLDER = "${HOME}/neovim"
@@ -53,6 +54,7 @@ keyring:
 
 cache:
 	#mkdir -p $(shell echo "${XDG_CACHE_HOME:-$HOME/.cache}/less")
+	# todo should be done 
 	mkdir -p ${XDG_CACHE_HOME}/less ${XDG_CACHE_HOME}/mptcpanalyzer
 
 mail:
@@ -81,29 +83,35 @@ dce: | $(DCE_FOLDER)
 	@echo "cloning dce"
 
 $(DCE_FOLDER):
-	git clone -o gh git@github.com:teto/ns-3-dce.git "${DCE_FOLDER}"
-	cd "${DCE_FOLDER}"
-	git remote add upstream git@github.com:direct-code-execution/ns-3-dce.git
-	cd -
+	git clone -o gh git@github.com:teto/ns-3-dce.git "${DCE_FOLDER}"; \
+	cd "${DCE_FOLDER}"; \
+	git remote add upstream git@github.com:direct-code-execution/ns-3-dce.git;
+
+mptcpanalyzer: | $(MPTCPANALYZER_FOLDER)
+
+$(MPTCPANALYZER_FOLDER):
+	git clone git@github.com:teto/mptcpanalyzer.git "${MPTCPANALYZER_FOLDER}"; \
+		cd "${MPTCPANALYZER_FOLDER}"; \
+		git remote add iij gitolite@iij_vm:mptcpanalyzer.git
+
 
 wireshark: | $(WIRESHARK_FOLDER)
 
 $(WIRESHARK_FOLDER):
-	git clone git@github.com:teto/wireshark.git "${WIRESHARK_FOLDER}"
+	git clone git@github.com:teto/wireshark.git "${WIRESHARK_FOLDER}"; \
 	# it has to be on one line else cwd is reset
-	cd "${WIRESHARK_FOLDER}" \
-	$(shell git remote add gh_upstream http://github.com/wireshark/wireshark.git) \
-	$(shell git remote add upstream https://code.wireshark.org/review/p/wireshark.git)
+	cd "${WIRESHARK_FOLDER}"; \
+	git remote add gh_upstream http://github.com/wireshark/wireshark.git); \
+	git remote add upstream https://code.wireshark.org/review/p/wireshark.git);
 
 nixpkgs: | $(NIXPKGS_FOLDER)
 
 $(NIXPKGS_FOLDER):
 	git clone https://github.com/NixOS/nixpkgs.git "$(NIXPKGS_FOLDER)"
-	cd "$(NIXPKGS_FOLDER)"
-	git remote add channels git://github.com/NixOS/nixpkgs-channels.git
-	git remote update channels
-	git remote add gh git://github.com/teto/nixpkgs.git
-	cd -
+	cd "$(NIXPKGS_FOLDER)"; \
+	git remote add channels git://github.com/NixOS/nixpkgs-channels.git; \
+	git remote update channels; \
+	git remote add gh git://github.com/teto/nixpkgs.git;
 
 nixops: | $(NIXOPS_FOLDER)
 $(NIXOPS_FOLDER):
@@ -112,13 +120,14 @@ $(NIXOPS_FOLDER):
 mptcp: | $(KERNEL_FOLDER)
 $(KERNEL_FOLDER):
 	git clone git@github.com:teto/mptcp.git "${KERNEL_FOLDER}"
-	cd "${KERNEL_FOLDER}"
+	cd "${KERNEL_FOLDER}"; \
 	git remote add upstream https://github.com/multipath-tcp/mptcp.git
-	cd -
 
 neovim: | $(NEOVIM_FOLDER)
 $(NEOVIM_FOLDER):
 	git clone git@github.com:teto/neovim.git "${NEOVIM_FOLDER}"
+	cd "${NEOVIM_FOLDER}" \
+		git remote add upstream git@github.com:teto/neovim.git
 
 repositories: dce ns3 neovim wireshark
 	# git clone git@github.com:teto/ns-3-dce.git dce
