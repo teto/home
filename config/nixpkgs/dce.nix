@@ -1,12 +1,24 @@
 { stdenv, fetchFromGitHub, autoreconfHook, libtool, intltool, pkgconfig
 , ns-3, gcc
+, lib
 , withDoc ? false
 , withManual ? false
 , withExamples ? false
 , withLibOS ? false
+, withBindings ? false
 , ...
 }:
 
+let
+  # doesn't exist in dce yet, just allows to understand inputs better
+  withScripts = true;
+  modules = [ "core" "network" "internet" "point-to-point" "fd-net-device"
+  "point-to-point-layout" "netanim"]
+  ++ lib.optionals withScripts [ "tap-bridge" "mobility" "flow-monitor"]
+  ++ lib.optionals withExamples []
+  ;
+  ns3forDce = ns-3.override( { inherit modules; });
+in
 stdenv.mkDerivation rec {
   name    = "${pname}-${version}";
   pname   = "direct-code-execution";
@@ -20,7 +32,7 @@ stdenv.mkDerivation rec {
   # };
   src = /home/teto/dce;
 
-  buildInputs = [ ns-3 gcc ]
+  buildInputs = [ ns3forDce gcc ]
     # ++ stdenv.lib.optionals 
     ;
 
@@ -29,14 +41,16 @@ stdenv.mkDerivation rec {
 
   # with-ns3 should be install folder
   doCheck=false;
+
+  # TODO set --with-python if bindings enabled
   configurePhase = ''
     runHook preConfigure
 
     # make configure
     # TODO limit modules so that it gets faster
     ./waf configure --prefix=$out \
-    --with-ns3=${ns-3} \
-      ${stdenv.lib.optionalString withExamples "--enable-examples"}
+    --with-ns3=${ns3forDce} \
+      ${stdenv.lib.optionalString (!withExamples) "--disable-examples"}
       '' + stdenv.lib.optionalString doCheck " --enable-tests \\" + ''
 
     runHook postConfigure

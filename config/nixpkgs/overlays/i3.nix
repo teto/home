@@ -228,6 +228,7 @@ rec {
   mptcpanalyzer = super.callPackage ../mptcpanalyzer.nix {
     inherit (super.python3Packages) buildPythonApplication pandas cmd2 pyperclip matplotlib pyqt5 stevedore;
     tshark = self.pkgs.tshark-local-stable;
+    inherit (super) lib;
   };
 
   mptcpanalyzer-test = mptcpanalyzer.overrideAttrs (old: {
@@ -262,13 +263,16 @@ rec {
   mptcp93.override ({
       # src= super.lib.cleanSource /home/teto/mptcp;
       name="mptcp-local";
-      # src= filter-src /home/teto/mptcp;
-      src= super.fetchgitLocal /home/teto/mptcp;
+      src= filter-src /home/teto/mptcp;
+      # src= super.fetchgitLocal /home/teto/mptcp;
       # src = fetchGitHashless {
       #   rev="master";
       #   url= /home/teto/mptcp;
       # };
       enableParallelBuilding=true;
+
+      # if we dont want to have to regenerate it
+      # configfile=
 
   });
 

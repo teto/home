@@ -49,6 +49,7 @@ buildPythonApplication rec {
     meta = with lib; {
       description = "pcap analysis tool specialized for multipath TCP";
       maintainer = [ maintainers.teto ];
-      licences = licences.gpl3;
+      # dunno why but taht fails
+      # licence = licences.gpl3;
     };
 }
