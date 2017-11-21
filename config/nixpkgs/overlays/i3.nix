@@ -263,6 +263,7 @@ rec {
   mptcp93.override ({
       # src= super.lib.cleanSource /home/teto/mptcp;
       name="mptcp-local";
+      configfile = /home/teto/dotfiles/kernel_config.mptcp;
       src= filter-src /home/teto/mptcp;
       # src= super.fetchgitLocal /home/teto/mptcp;
       # src = fetchGitHashless {

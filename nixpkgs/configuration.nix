@@ -243,6 +243,7 @@ browsing = true;
     enable = true;
     # add iij ntp servers
     # servers = [ "" ];
+    servers = [ "0.nixos.pool.ntp.org" "1.nixos.pool.ntp.org" "2.nixos.pool.ntp.org" "3.nixos.pool.ntp.org" ];
   };
   # Enable the X11 windowing system.
   services.xserver = {
@@ -424,6 +425,7 @@ browsing = true;
   # convert set back to list
 
   # lib.options.mergeDefaultOption
+  nix.buildCores=4;
   nix.nixPath = 
   [
     "nixos-config=/home/teto/dotfiles/nixpkgs/configuration.nix"
