@@ -243,13 +243,26 @@ rec {
     # NIX_DEBUG=8;
     # maybe that works
     # configfile = /path/to/my/config
+    # TODO reuse old value of extraConfig
+    # check because that line is strange
+
+    # it will append then overwrite itself ;/
+  # '' + (args.extraConfig or "");
+# } // args // (args.argsOverride or {}))
     extraConfig=''
       INFINIBAND n
       MMC_SDHCI n
-      '';
+
+      DEBUG_KERNEL y
+      FRAME_POINTER y
+      KGDB y
+      KGDB_SERIAL_CONSOLE y
+      DEBUG_INFO y
+    '';
     argsOverride = {
       # supposed  to always work
       modDirVersion="4.9.60+";
+      kernelAutoModules = false;
     };
   });
 

@@ -352,7 +352,16 @@ browsing = true;
   programs.adb.enable = true;
 
   # for nixops
-  virtualisation.libvirtd.enable = true;
+  virtualisation.libvirtd = {
+    enable = true;
+    qemuVerbatimConfig = ''
+      namespaces = []
+
+      # Whether libvirt should dynamically change file ownership
+      dynamic_ownership = 1
+      '';
+  };
+  systemd.services.libvirtd.restartIfChanged = lib.mkForce true;
   programs.wireshark.enable = true; # installs setuid
   programs.wireshark.package = pkgs.wireshark; # which one
 
