@@ -249,6 +249,7 @@ rec {
     # it will append then overwrite itself ;/
   # '' + (args.extraConfig or "");
 # } // args // (args.argsOverride or {}))
+    kernelAutoModules = false;
     extraConfig=''
       INFINIBAND n
       MMC_SDHCI n
@@ -259,11 +260,12 @@ rec {
       KGDB_SERIAL_CONSOLE y
       DEBUG_INFO y
     '';
-    argsOverride = {
-      # supposed  to always work
-      modDirVersion="4.9.60+";
-      kernelAutoModules = false;
-    };
+
+    # useless on the kernel branch
+    # argsOverride = {
+    #   # supposed  to always work
+    #   modDirVersion="4.9.60+";
+    # };
   });
 
   mptcp-local =
@@ -275,6 +277,7 @@ rec {
   in
   mptcp93.override ({
       # src= super.lib.cleanSource /home/teto/mptcp;
+      modDirVersion="4.9.60+";
       name="mptcp-local";
       configfile = /home/teto/dotfiles/kernel_config.mptcp;
       src= filter-src /home/teto/mptcp;
