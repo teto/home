@@ -5,7 +5,7 @@ let
   i3extraConfig = lib.concatStrings [
     (builtins.readFile ../i3/config.header)
     (builtins.readFile ../i3/config.main)
-    (builtins.readFile ../i3/config.mediakeys)
+    # (builtins.readFile ../i3/config.mediakeys)
     (builtins.readFile ../i3/config.xp)
     (builtins.readFile ../i3/config.audio)
     (builtins.readFile ../i3/config.colors)
@@ -96,6 +96,7 @@ rec {
       realname = "Like skywalker";
       address = "mattator@gmail.com";
       store = home.folder."Maildir/gmail";
+      # sendHost = "smtp.gmail.com";
     }
     ];
 
@@ -273,7 +274,43 @@ rec {
   xsession.windowManager.i3 = {
     enable = true;
     extraConfig = i3extraConfig;
-    config = null;
+    # config = null;
+    config = {
+      bars = [];
+      keycodebindings= {
+      };
+      # colors = {
+      #   focused = {
+      #     border = "#03a9f4";
+      #     background = "#03a9f4";
+      #     text = "#eceff1";
+      #     indicator = "#ff9800";
+      #     childBorder = "#03a9f4";
+      #   };
+        # };
+        keybindings = {
+
+  # XF86AudioNext="exec ${mpc} next; exec notify-send 'Audio next'";
+  # XF86AudioPrev exec mpc prev; exec notify-send "Audio prev"
+  # XF86AudioPause exec mpc toggle; exec notify-send "Audio Pause"
+
+
+      # } // {
+        # alsa version
+  # XF86AudioRaiseVolume=if home.packages ?  exec amixer -q set Master 2dB+ unmute; exec notify-send "Audio Raised volume"
+  # XF86AudioLowerVolume exec amixer -q set Master 2dB- unmute; exec notify-send Audio lowered
+  # XF86AudioMute exec amixer -q set Master toggle; exec notify-send "Mute toggle"
+        "XF86AudioRaiseVolume"="exec --no-startup-id pactl set-sink-volume 0 +5%;exec notify-send 'Audio Raised volume'";
+        "XF86AudioLowerVolume"="exec --no-startup-id pactl set-sink-volume 0 -5%;exec notify-send 'Audio lowered'";
+        "XF86AudioMute"="exec --no-startup-id pactl set-sink-mute 0 toggle;";
+      };
+    };
+
+# Media player controls
+# bindsym XF86AudioPlay exec playerctl play
+# bindsym XF86AudioPause exec playerctl pause
+# bindsym XF86AudioNext exec playerctl next
+# bindsym XF86AudioPrev exec playerctl previous
   };
   xsession.initExtra = ''
     # ${pkgs.feh}

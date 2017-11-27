@@ -55,7 +55,7 @@ keyring:
 cache:
 	#mkdir -p $(shell echo "${XDG_CACHE_HOME:-$HOME/.cache}/less")
 	# todo should be done 
-	mkdir -p ${XDG_CACHE_HOME}/less ${XDG_CACHE_HOME}/mptcpanalyzer
+	mkdir -p ${XDG_CACHE_HOME}/less ${XDG_CACHE_HOME}/mptcpanalyzer ${XDG_CACHE_HOME}/vdirsyncer
 
 mail:
 	mkdir -p ${MAILDIR}/gmail/.notmuch
@@ -101,8 +101,9 @@ $(WIRESHARK_FOLDER):
 	git clone git@github.com:teto/wireshark.git "${WIRESHARK_FOLDER}"; \
 	# it has to be on one line else cwd is reset
 	cd "${WIRESHARK_FOLDER}"; \
-	git remote add gh_upstream http://github.com/wireshark/wireshark.git); \
-	git remote add upstream https://code.wireshark.org/review/p/wireshark.git);
+	git remote add gh_upstream http://github.com/wireshark/wireshark.git; \
+	git remote add upstream https://code.wireshark.org/review/p/wireshark.git; \
+	git remote add iij gitolite@iij_vm:wireshark.git
 
 nixpkgs: | $(NIXPKGS_FOLDER)
 

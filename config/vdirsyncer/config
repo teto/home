@@ -12,28 +12,28 @@ status_path = "$XDG_CACHE_HOME/vdirsyncer/status/"
 # status_path.fetch = ["command", "sh", "-c", "$XDG_CACHE_HOME/vdirsyncer/status/"]
 
 # https://calendar.google.com/calendar/ical/fr.japanese%23holiday%40group.v.calendar.google.com/public/basic.ics
-[pair japon_ferie]
-a = "japon_ferie_remote"
-b = "japon_ferie_local"
-# or vimdiff
-collections = ["from a", "from b"]
-conflict_resolution = ["command", "nvim -d"]
+# [pair japon_ferie]{{{
+# a = "japon_ferie_remote"
+# b = "japon_ferie_local"
+# # or vimdiff
+# collections = ["from a", "from b"]
+# conflict_resolution = ["command", "nvim -d"]
 
-[storage japon_ferie_remote]
-type = "google_calendar"
-# hopefully we can use env variables
-# todo put it into readonly
-token_file = "~/.local/vdirsyncer"
-client_id = "1040176666032-jtmq7o63ddo2r2oo298fso7rdl7li6j9.apps.googleusercontent.com"
-client_secret = "~/.config/vdirsyncer/client_secret_1040176666032-jtmq7o63ddo2r2oo298fso7rdl7li6j9.apps.googleusercontent.com.json"
+# [storage japon_ferie_remote]
+# type = "google_calendar"
+# # hopefully we can use env variables
+# # todo put it into readonly
+# token_file = "~/.local/vdirsyncer"
+# client_id = "1040176666032-jtmq7o63ddo2r2oo298fso7rdl7li6j9.apps.googleusercontent.com"
+# client_secret = "~/.config/vdirsyncer/client_secret_1040176666032-jtmq7o63ddo2r2oo298fso7rdl7li6j9.apps.googleusercontent.com.json"
 
-[storage japon_ferie_local]
-type = "filesystem"
-path.fetch = ["command", "sh", "-c", "echo $XDG_DATA_HOME/calendars/japon_ferie"]
-fileext = ".ics"
+# [storage japon_ferie_local]
+# type = "filesystem"
+# path.fetch = ["command", "sh", "-c", "echo $XDG_DATA_HOME/calendars/japon_ferie"]
+# fileext = ".ics"}}}
 
-# TODO setup a zaclys config
-[pair gmail_carddav]# {{{
+# {{{
+[pair gmail_carddav]
 a = "gmail_local_carddav"
 b = "gmail_remote_carddav"
 # or vimdiff
@@ -72,24 +72,6 @@ username.fetch = ["command", "keyring", "get", "zaclys", "login"]
 password.fetch = ["command", "keyring", "get", "zaclys", "password"]
 # }}}
 
-# [pair lip6_carddav] {{{
-# a = lip6_local_carddav
-# b = lip6_remote_carddav
-# collections = ["from b"]
-# #collections = ["private", "work"]
-
-# [storage lip6_local_carddav]
-# type = filesystem
-# path.fetch = ["command", "sh", "-c", "echo $XDG_DATA_HOME/contacts"]
-# fileext = .vcf
-
-# [storage lip6_remote_carddav]
-# auth=basic
-# type = carddav
-# url = https://cloud.lip6.fr/remote.php/carddav/addressbooks/coudron/pro
-# username = coudron
-# password.fetch = ["command", "keyring", "get", "lip6_cloud", "coudron"]
-# }}}
 
 # [pair perso_lip6_caldav] {{{
 # a = perso_local_caldav

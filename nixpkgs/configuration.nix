@@ -81,8 +81,8 @@ rec {
     # packages = [];
   };
   networking.firewall.checkReversePath = false; # for nixops
-networking.firewall.allowedUDPPorts = [ 631 ];
-networking.firewall.allowedTCPPorts = [ 631 ];
+  networking.firewall.allowedUDPPorts = [ 631 ];
+  networking.firewall.allowedTCPPorts = [ 631 ];
 
   # Select internationalisation properties.
   i18n = {
@@ -109,6 +109,7 @@ networking.firewall.allowedTCPPorts = [ 631 ];
       fonts = with pkgs; [
         ubuntu_font_family
         inconsolata
+        noto-fonts-cjk
       ];
       fontconfig= {
         enable=true;
@@ -301,7 +302,9 @@ browsing = true;
 
   services.strongswan = {
     enable = true;
-    secrets = [ "/etc/ipsec.d/*.secrets" "/etc/ipsec.d" ];
+    secrets = [ 
+      # "/etc/ipsec.d/*.secrets" "/etc/ipsec.d" 
+    ];
   };
 
   programs.man.enable = true;
