@@ -259,7 +259,10 @@ rec {
       KGDB y
       KGDB_SERIAL_CONSOLE y
       DEBUG_INFO y
-    '';
+
+      # else qemu can't see the root filesystem when launched with -kenel
+      EXT4_FS y
+      '';
 
     # useless on the kernel branch
     # argsOverride = {
@@ -281,7 +284,7 @@ rec {
       name="mptcp-local";
       configfile = /home/teto/dotfiles/kernel_config.mptcp;
       src= filter-src /home/teto/mptcp;
-      # src= super.fetchgitLocal /home/teto/mptcp;
+      # src= super.fetchgitLocal "/home/teto/mptcp";
       # src = fetchGitHashless {
       #   rev="master";
       #   url= /home/teto/mptcp;
