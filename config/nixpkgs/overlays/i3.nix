@@ -7,17 +7,17 @@ let
 
   fetchgitLocal = super.fetchgitLocal;
 
-  # fetchGitHashless = args: super.stdenv.lib.overrideDerivation
-  #   # Use a dummy hash, to appease fetchgit's assertions
-  #   (super.fetchgit (args // { sha256 = super.hashString "sha256" args.url; }))
+  fetchGitHashless = args: super.stdenv.lib.overrideDerivation
+    # Use a dummy hash, to appease fetchgit's assertions
+    (super.fetchgit (args // { sha256 = super.hashString "sha256" args.url; }))
 
-  #   # Remove the hash-checking
-  #   (old: {
-  #     outputHash     = null;
-  #     outputHashAlgo = null;
-  #     outputHashMode = null;
-  #     sha256         = null;
-  #   });
+    # Remove the hash-checking
+    (old: {
+      outputHash     = null;
+      outputHashAlgo = null;
+      outputHashMode = null;
+      sha256         = null;
+    });
 
 
   # Get the commit ID for the given ref in the given repo
@@ -52,15 +52,18 @@ rec {
       propagatedBuildInputs = with self.python3Packages; oldAttrs.propagatedBuildInputs ++ [ pytz ];
 	});
 
-  neovim = super.neovim.override ( {
-    vimAlias = false;
-    withPython = false;
-    withPython3 = true; # pour les tests ?
-    withRuby = false;
-    });
+  # else nixops keeps recompiling it
+  # neovim = super.neovim.override ( {
+  #   vimAlias = false;
+  #   withPython = false;
+  #   withPython3 = true; # pour les tests ?
+  #   withRuby = false;
+  #   });
 
   neovim-local = self.neovim.overrideAttrs (oldAttrs: {
 	  name = "neovim-local";
+      withPython = false;
+      withPython3 = true; # pour les tests ?
       extraPython3Packages = with self.python3Packages;[ pandas python jedi]
       ++ super.stdenv.lib.optionals ( self.pkgs ? python-language-server) [ self.pkgs.python-language-server ]
       ;
@@ -84,28 +87,19 @@ rec {
       meta.priority=0;
 	});
 
+   yst = super.haskellPackages.yst.overrideAttrs (oldAttrs: {
+     jailbreak = true; 
+     # name = "yst";
+      # src = super.fetchFromGitHub {
+      #   owner = "jgm";
+      #   repo = "yst";
+      #   rev = "0.5.1.2";
+      #   sha256 = "1105gp38pbds46bgwj28qhdaz0cxn0y7lfqvgbgfs05kllbiri0h";
+      # };
 
-   # older versions are so broken that
-   # nixops-local = super.nixopsUnstable.overrideAttrs( oldAttrs: rec {
-   #   # version = "2017-09-24";
-   #   version = "1.6.2";
-   #   name = "nixops-${version}";
-   # });
-
-   # super.callPackage mptcpanalyzer.nix
-
-#    haskellPackages.yst = super.haskellPackages.yst.overrideAttrs (oldAttrs: {
-# 	  name = "yst";
-#       src = super.fetchFromGitHub {
-#         owner = "jgm";
-#         repo = "yst";
-#         rev = "0.5.1.2";
-#         sha256 = "1105gp38pbds46bgwj28qhdaz0cxn0y7lfqvgbgfs05kllbiri0h";
-#       };
-
-#       # TODO remove current aeson and override it
-#       # executableHaskellDepends = [ ];
-# 	});
+      # TODO remove current aeson and override it
+      # executableHaskellDepends = [ ];
+	});
 
   # khal-local = super.khal.overrideAttrs (oldAttrs: {
 	  # name = "khal-dev";
@@ -249,7 +243,9 @@ rec {
     # it will append then overwrite itself ;/
   # '' + (args.extraConfig or "");
 # } // args // (args.argsOverride or {}))
-    kernelAutoModules = false;
+    # kernelAutoModules = false;
+    # TODO make a new configuration light ?
+    hostPlatform=super.lib.platforms.pc64_simplekernel;
     extraConfig=''
       INFINIBAND n
       MMC_SDHCI n
@@ -262,6 +258,13 @@ rec {
 
       # else qemu can't see the root filesystem when launched with -kenel
       EXT4_FS y
+      VIRTIO_PCI
+
+ VIRTIO_PCI=y
+ VIRTIO_PCI_LEGACY=y
+ VIRTIO_BALLOON=m
+ VIRTIO_INPUT=m
+ VIRTIO_MMIO=m
       '';
 
     # useless on the kernel branch
@@ -271,30 +274,42 @@ rec {
     # };
   });
 
+  # mptcp-local-stable =
   mptcp-local =
   let
     # todo remove tags
-    filter-src = builtins.filterSource (p: t: 
+    filter-src = builtins.filterSource (p: t:
     let baseName = baseNameOf p;
     in super.lib.cleanSourceFilter p t && baseName != "build" && baseName != "tags");
   in
   mptcp93.override ({
       # src= super.lib.cleanSource /home/teto/mptcp;
-      modDirVersion="4.9.60+";
+      modDirVersion="4.9.60";
       name="mptcp-local";
-      configfile = /home/teto/dotfiles/kernel_config.mptcp;
-      src= filter-src /home/teto/mptcp;
+      # TODO testing...
+      hostPlatform=super.lib.platforms.pc64_simplekernel;
+
+      # TODO might need to revisit
+      ignoreConfigErrors=true;
+
+      # configfilename = /home/teto/dotfiles/kernel_config.mptcp;
+      # src= filter-src /home/teto/mptcp;
+      # src= fetchgit  /home/teto/mptcp;
       # src= super.fetchgitLocal "/home/teto/mptcp";
-      # src = fetchGitHashless {
-      #   rev="master";
-      #   url= /home/teto/mptcp;
-      # };
+      src = fetchGitHashless {
+        # rev="owd93";
+        branchName="owd93";
+        # url= file:///home/teto/mptcp;
+        url= "/home/teto/mptcp";
+      };
       enableParallelBuilding=true;
 
       # if we dont want to have to regenerate it
       # configfile=
 
   });
+
+  # mptcp-head = mptcp93.override ({
 
   # linuxPackages_mptcp = linuxPackagesFor pkgs.linux_mptcp;
   linuxPackages_mptcp-local = super.pkgs.linuxPackagesFor mptcp-local;
