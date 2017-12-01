@@ -231,6 +231,37 @@ rec {
     # src = fetchgitLocal "/home/teto/mptcpanalyzer";
   });
 
+  # TODO use this platform to build the various kernels
+  # this won t be used by nixops ?
+  test-platform = super.platforms.pc64_simplekernel // {
+    kernelAutoModules = false;
+    extraConfig = super.platforms.pc64_simplekernel + ''
+      DEBUG_KERNEL y
+      FRAME_POINTER y
+      KGDB y
+      KGDB_SERIAL_CONSOLE y
+      DEBUG_INFO y
+
+      # else qemu can't see the root filesystem when launched with -kenel
+      EXT4_FS y
+
+      VIRTIO_PCI y
+      VIRTIO_PCI_LEGACY y
+      VIRTIO_BALLOON m
+      VIRTIO_INPUT m
+      VIRTIO_MMIO m
+
+      VIRTIO_BLK y
+    '';
+  };
+
+
+
+
+  linux_4_9 = super.linux_4_9.override({
+    hostPlatform=test-platform;
+  });
+
   # to improve the config
   # make localmodconfig
   mptcp93 = super.pkgs.linux_mptcp.override ({
@@ -258,13 +289,15 @@ rec {
 
       # else qemu can't see the root filesystem when launched with -kenel
       EXT4_FS y
-      VIRTIO_PCI
 
- VIRTIO_PCI=y
- VIRTIO_PCI_LEGACY=y
- VIRTIO_BALLOON=m
- VIRTIO_INPUT=m
- VIRTIO_MMIO=m
+ VIRTIO_PCI y
+ VIRTIO_PCI_LEGACY y
+ VIRTIO_BALLOON m
+ VIRTIO_INPUT m
+ VIRTIO_MMIO m
+
+VIRTIO_BLK y
+
       '';
 
     # useless on the kernel branch
@@ -284,7 +317,7 @@ rec {
   in
   mptcp93.override ({
       # src= super.lib.cleanSource /home/teto/mptcp;
-      modDirVersion="4.9.60";
+      modDirVersion="4.9.60+";
       name="mptcp-local";
       # TODO testing...
       hostPlatform=super.lib.platforms.pc64_simplekernel;
