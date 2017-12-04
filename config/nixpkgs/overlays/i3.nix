@@ -287,6 +287,16 @@ rec {
       KGDB_SERIAL_CONSOLE y
       DEBUG_INFO y
 
+      MPTCP_SCHED_ADVANCED y
+      MPTCP_ROUNDROBIN m
+      MPTCP_REDUNDANT m
+
+      # TODO perso ? l activer ?
+      NETWORK_PHY_TIMESTAMPING n
+
+      NET_SWITCHDEV y
+      NET_TCPPROBE m
+
       # else qemu can't see the root filesystem when launched with -kenel
       EXT4_FS y
 
