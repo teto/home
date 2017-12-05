@@ -234,13 +234,17 @@ rec {
   # TODO use this platform to build the various kernels
   # this won t be used by nixops ?
   test-platform = super.platforms.pc64_simplekernel // {
-    kernelAutoModules = false;
+    kernelAutoModules = true;
     extraConfig = super.platforms.pc64_simplekernel + ''
       DEBUG_KERNEL y
       FRAME_POINTER y
       KGDB y
       KGDB_SERIAL_CONSOLE y
       DEBUG_INFO y
+
+      PATA_MARVELL y
+      SATA_SIS y
+      MD_RAID0 y
 
       # else qemu can't see the root filesystem when launched with -kenel
       EXT4_FS y
@@ -276,7 +280,8 @@ rec {
 # } // args // (args.argsOverride or {}))
     # kernelAutoModules = false;
     # TODO make a new configuration light ?
-    hostPlatform=super.lib.platforms.pc64_simplekernel;
+    # hostPlatform=super.lib.platforms.pc64_simplekernel;
+    hostPlatform=test-platform;
     extraConfig=''
       INFINIBAND n
       MMC_SDHCI n
@@ -307,6 +312,10 @@ rec {
  VIRTIO_MMIO m
 
 VIRTIO_BLK y
+
+# when run as -kernel, need to get an ip
+IP_PNP y
+IP_PNP_DHCP y
 
       '';
 

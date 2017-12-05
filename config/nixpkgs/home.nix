@@ -2,6 +2,11 @@
 
 
 let
+  includeFzf= let fzf="${pkgs.fzf}/share/fzf"; in ''
+    . "${fzf}/completion.zsh"
+    . "${fzf}/key-bindings.zsh"
+    '';
+
   i3extraConfig = lib.concatStrings [
     (builtins.readFile ../i3/config.header)
     (builtins.readFile ../i3/config.main)
@@ -102,7 +107,10 @@ rec {
 
   # you can switch from cli with xkb-switch
   # or xkblayout-state
-  home.keyboard.layout = "fr,us";
+  home.keyboard = {
+    layout = "fr,us";
+    # options = [ "grp:caps_toggle" "grp_led:scroll" ];
+  };
 
   # symlink machine specific config there
   imports = lib.optionals (builtins.pathExists ./machine-specific.nix) [ ./machine-specific.nix ];
@@ -171,6 +179,13 @@ rec {
     sessionVariables = {
       HISTFILE="$XDG_CACHE_HOME/bash_history";
     };
+    # historyControl=["erasedups", "ignoredups", "ignorespace"]
+    historyIgnore=["ls"];
+    initExtra=''
+      '';
+      # profileExtra=''
+      #   '';
+      # shellOptions=
     shellAliases = {
       hm="home-manager";
       #mostly for testin
@@ -220,11 +235,11 @@ rec {
 
 
   # TODO prefix with stable
-  # programs.firefox = {
-  #   enable = true;
+  programs.firefox = {
+    enable = true;
   #   package = ; # set ff57
   #   enableAdobeFlash = false;
-  # };
+  };
 
   programs.neovim = {
     enable = true;
@@ -253,6 +268,11 @@ rec {
     extraConfig = ''
       " TODO set different paths accordingly, to language server especially
       '';
+  };
+
+  programs.browserpass = {
+    enable=true;
+    browsers = ["firefox"];
   };
 
   # todo configure mocp

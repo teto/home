@@ -71,6 +71,7 @@ rec {
       # "net.core.wmem_max" = 1048576;
     };
   # boot.kernelPackages = pkgs.linuxPackages_mptcp;
+  # boot.kernel.extraConfig
 
 
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -362,6 +363,8 @@ browsing = true;
 
       # Whether libvirt should dynamically change file ownership
       dynamic_ownership = 1
+      user="teto"
+      group="libvirtd"
       '';
   };
   systemd.services.libvirtd.restartIfChanged = lib.mkForce true;
