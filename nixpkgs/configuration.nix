@@ -25,6 +25,7 @@ rec {
 
 
   networking.hostName = "jedha"; # Define your hostname.
+  networking.dnsExtensionMechanism = false; # creates problem with buffalo check if it blocks requests or what
   networking.extraHosts = ''
     202.214.86.52 iij_vm
   '';
@@ -127,7 +128,7 @@ rec {
 
     manpages  # because man tcp should always be available
     strongswan # to get ipsec in path
-    luarocks   # for testing luafix
+    # luarocks   # for testing luafix
     # wrapProgram $out/bin/dnschain --suffix PATH : ${openssl.bin}/bin
     # cups-pk-helper # to add printer through gnome control center
    ];
