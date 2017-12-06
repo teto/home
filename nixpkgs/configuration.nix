@@ -46,16 +46,19 @@ rec {
     support32Bit = true;
   };
 
+  boot.cleanTmpDir = true; # to clean /tmp on reboot
   # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true; # allows to run $ efi...
+  boot.loader ={
+    systemd-boot.enable = true;
+    efi.canTouchEfiVariables = true; # allows to run $ efi...
 
   # just to generate the entry used by ubuntu's grub
   # boot.loader.grub.enable = true;
   # boot.loader.grub.version = 2;
   # install to none, we just need the generated config
   # for ubuntu grub to discover
-  boot.loader.grub.device = "/dev/sda";
+    grub.device = "/dev/sda";
+  };
 
   # see https://github.com/NixOS/nixpkgs/issues/15293
   boot.kernelPackages = pkgs.linuxPackages_latest;
@@ -66,6 +69,7 @@ rec {
     "kvm"  # for virtualisation
      "kvm-intel"
   ];
+  # TODO boot.supportedFilesystems
   boot.kernel.sysctl = {
       # "net.ipv4.tcp_keepalive_time" = 60;
       # "net.core.rmem_max" = 4194304;
@@ -364,6 +368,7 @@ browsing = true;
 
       # Whether libvirt should dynamically change file ownership
       dynamic_ownership = 1
+      # be careful for network teto might make if fail
       user="teto"
       group="libvirtd"
       '';
