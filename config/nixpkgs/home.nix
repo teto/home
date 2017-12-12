@@ -2,9 +2,9 @@
 
 
 let
-  includeFzf= let fzf="${pkgs.fzf}/share/fzf"; in ''
-    . "${fzf}/completion.zsh"
-    . "${fzf}/key-bindings.zsh"
+  includeFzf= let fzfContrib="${pkgs.fzf}/share/fzf"; in ''
+    . "${fzfContrib}/completion.bash"
+    . "${fzfContrib}/key-bindings.bash"
     '';
 
   i3extraConfig = lib.concatStrings [
@@ -176,12 +176,17 @@ rec {
   programs.bash = {
     enable = true;
     enableAutojump = true;
+
+    # goes to .profile
     sessionVariables = {
-      HISTFILE="$XDG_CACHE_HOME/bash_history";
+      HISTTIMEFORMAT="%d.%m.%y %T ";
+      # HISTFILE="$XDG_CACHE_HOME/bash_history";
     };
     # historyControl=["erasedups", "ignoredups", "ignorespace"]
     historyIgnore=["ls"];
     initExtra=''
+      HISTFILE="$XDG_CACHE_HOME/bash_history";
+      ${includeFzf}
       '';
       # profileExtra=''
       #   '';
@@ -199,6 +204,7 @@ rec {
 
   # programs.zsh = {
   #   enable = true;
+  #   dotDir = 
   #   sessionVariables = {
   #     HISTFILE="$XDG_CACHE_HOME/zsh_history";
   #   };
@@ -272,7 +278,7 @@ rec {
 
   programs.browserpass = {
     enable=true;
-    browsers = ["firefox"];
+    browsers = ["firefox" "chromium" ];
   };
 
   # todo configure mocp
@@ -299,6 +305,12 @@ rec {
       bars = [];
       keycodebindings= {
       };
+      startup=[
+        { command= "xkblayout-state set +1"; always = false; notification = false; }
+        ];
+      modes = {
+        # resize = { Down="resize ..." }
+      };
       # colors = {
       #   focused = {
       #     border = "#03a9f4";
@@ -308,7 +320,22 @@ rec {
       #     childBorder = "#03a9f4";
       #   };
         # };
-        keybindings = {
+        #
+# set $mod Mod1
+# il ne comprend pas Super_L
+      keybindings = let mad="Mod4"; mod="Mod1"; in {
+        # todo use i3lock-fancy instead
+        "${mod}+Ctrl+L"="exec ${pkgs.i3lock}";
+        "${mad}+h"="rofi -modi 'clipboard:greenclip print' -show clipboard";
+
+# set $greenclip "rofi -modi 'clipboard:greenclip print' -show clipboard"
+#       bindsym $mad+h exec $greenclip
+        # TODO let i3dispatch
+# bindsym $mod+Left  exec /home/teto/bin/i3dispatch left
+# bindsym $mod+Down  exec /home/teto/bin/i3dispatch down
+# bindsym $mod+Up    exec /home/teto/bin/i3dispatch up
+# bindsym $mod+Right exec /home/teto/bin/i3dispatch right
+
 
   # XF86AudioNext="exec ${mpc} next; exec notify-send 'Audio next'";
   # XF86AudioPrev exec mpc prev; exec notify-send "Audio prev"

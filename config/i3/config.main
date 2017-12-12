@@ -265,7 +265,7 @@ bindsym Group2+$mod+1 layout toggle
 #bindsym $mod+e layout default
 
 # to lock screen (relied on a fork)
-bindsym $mod+Ctrl+L exec "i3lock -i ~/Images/route66.png"
+# bindsym $mod+Ctrl+L exec "i3lock -i ~/Images/route66.png"
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
@@ -535,7 +535,7 @@ bindsym XF86Display exec ~/.config/i3/monitors.sh
 # xrandr --output LVDS1 --primary --auto --output DP1 --auto --right-of LVDS1
 #exec_always xrandr --output $output1 --auto --output $output2 --right-of $output1
 #exec urxvtc -name irclient -e irssi
-exec greenclip daemon
+# exec greenclip daemon
 
 # not valid on nixos
 # exec_always xmodmap ~/.Xmodmap

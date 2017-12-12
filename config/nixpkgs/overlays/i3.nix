@@ -167,13 +167,13 @@ rec {
   #   repo="vdirsyncer";
   #   sha256="1gfp2h7qdwa7k5dm0y6flsa19d5pqd6rrkxm42y3pbdmxf931aj0";
 
-  src = super.pkgs.fetchgit {
-    fetchSubmodules = false;
-    leaveDotGit= true;
-  #   # setuptools-scm was unable to detect version for
-    url="https://github.com/pimutils/vdirsyncer.git";
-    sha256="1lsksg2iw7cma0c4nhh1glvcf6219ly4cchygqpji2198mab8dpa";
-  };
+  # src = super.pkgs.fetchgit {
+  #   fetchSubmodules = false;
+  #   leaveDotGit= true;
+  # #   # setuptools-scm was unable to detect version for
+  #   url="https://github.com/pimutils/vdirsyncer.git";
+  #   sha256="1lsksg2iw7cma0c4nhh1glvcf6219ly4cchygqpji2198mab8dpa";
+  # };
     doCheck=true; # doesn't work, checkPhase still happens
     # checkPhase="echo 'ignored'";
     # we need keyring to retreive passwords etc

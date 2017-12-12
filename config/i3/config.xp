@@ -1,6 +1,6 @@
 # experimental part about 
 # Mod4 => window key
-set $mad Super_L 
+set $mad Super_L
 # Mod4
 
 # https://faq.i3wm.org/question/5942/using-modifer-key-as-a-binding/
@@ -11,7 +11,6 @@ set $mad Super_L
 # # The middle button over a titlebar kills the window
 bindsym --release button2 kill
 
-set $mad Super_L
 
 # Layouts part 
 
