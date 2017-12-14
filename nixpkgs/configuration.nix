@@ -417,9 +417,10 @@ browsing = true;
 
   nixpkgs.config = {
 	allowUnfree = true;
-    # permittedInsecurePackages = [
-    #       "webkitgtk-2.4.11"
-    #         ];
+    permittedInsecurePackages = [
+          # "webkitgtk-2.4.11"
+         "linux-4.13.16"
+            ];
     # firefox.enableAdobeFlash = true;
     # chromium.enablePepperFlash = true;
     # programs.chromium.enableAdobeFlash = true; # for Chromium
@@ -458,7 +459,7 @@ browsing = true;
   # build-use-sandbox = true
   nix.extraOptions = ''
     # careful will prevent from fetching local git !
-    build-use-sandbox = false
+    build-use-sandbox = true
     gc-keep-outputs = true
     gc-keep-derivations = true
   '';

@@ -204,20 +204,34 @@ rec {
 
 
   # nix-shell -p python.pkgs.my_stuff
-  python = super.python.override {
+  python = super.python3.override {
      # Careful, we're using a different self and super here!
-    packageOverrides = self: super: {
+    packageOverrides = python-self: python-super: {
       # if (super.pkgs ? pygccxml) then null else
-        pygccxml =  super.callPackage ../pygccxml.nix {
+        # now that s wird
+        # pygccxml =  super.callPackage ../pygccxml.nix {
         # pkgs = super.pkgs;
         # pythonPackages = self.pkgs.python3Packages;
-        pandas = super.pkgs.pythonPackages.pandas.overrideAttrs {
-          doCheck = false;
-        };
-      };
+        pygccxml = python-super.pythonPackages.pygccxml.overrideAttrs (oldAttrs: {
+          src=fetchGitHashless {
+            url=file:///home/teto/pygccxml;
+          };
+        });
+        # pandas = super.pkgs.pythonPackages.pandas.overrideAttrs {
+        #   doCheck = false;
+        # };
+      # };
     };
   };
   pythonPackages = python.pkgs;
+
+  # clang = super.clang.overrideAttrs(oldAttrs: {
+  #   doCheck=false;
+  # });
+
+  # llvm_4 = super.clang.overrideAttrs(oldAttrs: {
+  #   doCheck=false;
+  # });
 
   ns-3-perso = if (super.pkgs ? ns-3) then super.ns-3.override {
   #   pkgs = self.pkgs;
@@ -239,6 +253,7 @@ rec {
     inherit (super) lib;
   };
 
+  
   mptcpanalyzer-test = mptcpanalyzer.overrideAttrs (old: {
     # todo be careful 
     src = fetchgitLocal old.src;
