@@ -1,7 +1,8 @@
 { pkgs, ... }:
 {
 environment.systemPackages = with pkgs; [
-    ncdu
+    pciutils # for lspci
+    ncdu  # to see disk usage
     bridge-utils # pour  brctl
 #    udiskie
 ];

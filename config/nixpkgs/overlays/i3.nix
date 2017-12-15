@@ -192,19 +192,20 @@ rec {
   # xl2tpd = super.xl2tpd.overrideAttrs ( oldAttrs : rec {
   #   makeFlags = oldAttrs ++ [ "-DUSE_KERNEL" ];
   # });
+  castxml = super.castxml.overrideAttrs (old: {
 
-  # msmtp = super.msmtp.overrideAttrs(oldAttrs: rec {
+    src = super.fetchFromGitHub {
+      repo="castxml";
+      owner="teto";
+      # branch="nixos";
+      rev="801b9528183eb11b8af78ced65a973dc8a2f3922";
+      sha256="07w8l8fj10v2dmhb6pix9w1jix1rwk7y10x4mgp3p19g98c69mxb";
 
-  #   # postBuild
-# # makeWrapper $out/bin/foo $wrapperfile --set FOOBAR baz
-  #   # we need keyring to retreive passwords etc
-  #   propagatedBuildInputs = with super.pkgs.python3Packages; [ requests_oauthlib keyring secretstorage ] ++ [ super.pkgs.liboauth ];
-  # });
-
-
+    };
+  });
 
   # nix-shell -p python.pkgs.my_stuff
-  python = super.python3.override {
+  python = super.python.override {
      # Careful, we're using a different self and super here!
     packageOverrides = python-self: python-super: {
       # if (super.pkgs ? pygccxml) then null else
@@ -213,9 +214,11 @@ rec {
         # pkgs = super.pkgs;
         # pythonPackages = self.pkgs.python3Packages;
         pygccxml = python-super.pythonPackages.pygccxml.overrideAttrs (oldAttrs: {
-          src=fetchGitHashless {
-            url=file:///home/teto/pygccxml;
-          };
+          # src=fetchGitHashless {
+          #   url=file:///home/teto/pygccxml;
+          # };
+
+          src=/home/teto/pygccxml;
         });
         # pandas = super.pkgs.pythonPackages.pandas.overrideAttrs {
         #   doCheck = false;
@@ -224,6 +227,29 @@ rec {
     };
   };
   pythonPackages = python.pkgs;
+
+  python3 = super.python3.override {
+     # Careful, we're using a different self and super here!
+    packageOverrides = pythonself: pythonsuper: {
+      # if (super.pkgs ? pygccxml) then null else
+        # now that s wird
+        # pygccxml =  super.callPackage ../pygccxml.nix {
+        # pkgs = super.pkgs;
+        # pythonPackages = self.pkgs.python3Packages;
+        pygccxml = pythonsuper.pygccxml.overrideAttrs (oldAttrs: {
+          # src=fetchGitHashless {
+          #   url=file:///home/teto/pygccxml;
+          # };
+
+          src=/home/teto/pygccxml;
+        });
+        # pandas = super.pkgs.pythonPackages.pandas.overrideAttrs {
+        #   doCheck = false;
+        # };
+      # };
+    };
+  };
+  python3Packages = python3.pkgs;
 
   # clang = super.clang.overrideAttrs(oldAttrs: {
   #   doCheck=false;
