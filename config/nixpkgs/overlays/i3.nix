@@ -112,20 +112,6 @@ rec {
   });
 
 
-  # tshark-dev = super.tshark.overrideAttrs (oldAttrs: {
-  #   # pygobject2
-  #   name = "wireshark-dev";
-	  # src = super.lib.cleanSource ~/wireshark;
-  #   # propagatedBuildInputs = with super.pythonPackages; oldAttrs.propagatedBuildInputs ++ [ keyring pygobject3  ];
-  # });
-  # wireshark-master = super.wireshark.overrideAttrs (oldAttrs: {
-  #   # pygobject2
-  #   name = "wireshark-master";
-  #   src = fetchFromGitHub {
-  #   };
-  # });
-
-
   # networkmanager-dev = super.networkmanager.overrideAttrs (oldAttrs: {
   #   # pygobject2
   #   name = "networkmanager-dev";
