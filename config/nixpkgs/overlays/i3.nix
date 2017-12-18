@@ -192,7 +192,7 @@ rec {
   # xl2tpd = super.xl2tpd.overrideAttrs ( oldAttrs : rec {
   #   makeFlags = oldAttrs ++ [ "-DUSE_KERNEL" ];
   # });
-  castxml = super.castxml.overrideAttrs (old: {
+  castxml = if super?castxml then super.castxml.overrideAttrs (old: {
 
     src = super.fetchFromGitHub {
       repo="castxml";
@@ -202,7 +202,7 @@ rec {
       sha256="07w8l8fj10v2dmhb6pix9w1jix1rwk7y10x4mgp3p19g98c69mxb";
 
     };
-  });
+  }) else null;
 
   # nix-shell -p python.pkgs.my_stuff
   python = super.python.override {
@@ -267,9 +267,9 @@ rec {
     # withManual = true;
   #   # generateBindings = true;
   #   # withExamples = true;
-  #   # pygccxml = self.pythonPackages.pygccxml;
   } else null;
-  dce = if (super.pkgs ? ns-3) then super.callPackage ../dce.nix { pkgs = super.pkgs;  } else null;
+
+  # dce = if (super.pkgs ? ns-3) then super.callPackage ../dce.nix { pkgs = super.pkgs;  } else null;
 
 
   # pkgs = super.pkgs;
