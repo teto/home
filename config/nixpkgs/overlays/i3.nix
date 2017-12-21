@@ -229,6 +229,13 @@ rec {
 
           src=/home/teto/pygccxml;
         });
+
+        pelican = pythonsuper.pelican.overrideAttrs (oldAttrs: {
+          # src=fetchGitHashless {
+          #   url=file:///home/teto/pygccxml;
+          # };
+          propagatedBuildInputs = oldAttrs.propagatedBuildInputs ++ [ pythonself.markdown];
+        });
         # pandas = super.pkgs.pythonPackages.pandas.overrideAttrs {
         #   doCheck = false;
         # };
@@ -438,4 +445,7 @@ IP_PNP_DHCP y
 
   # linuxPackages_mptcp = linuxPackagesFor pkgs.linux_mptcp;
   linuxPackages_mptcp-local = super.pkgs.linuxPackagesFor mptcp-local;
+
+  # iperf3_lkl = super.iperf3.overrideAttrs(old: {
+  # });
 }
