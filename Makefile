@@ -10,8 +10,10 @@ NIXOPS_FOLDER = "${HOME}/nixops"
 WIRESHARK_FOLDER = "${HOME}/wireshark"
 MPTCPANALYZER_FOLDER = "${HOME}/mptcpanalyzer"
 KERNEL_FOLDER = "${HOME}/mptcp"
+BLOG_FOLDER = "${HOME}/blog"
 NIXPKGS_FOLDER = "${HOME}/nixpkgs"
 NEOVIM_FOLDER = "${HOME}/neovim"
+LKL_FOLDER = "${HOME}/lkl"
 
 
 
@@ -54,7 +56,7 @@ keyring:
 
 cache:
 	#mkdir -p $(shell echo "${XDG_CACHE_HOME:-$HOME/.cache}/less")
-	# todo should be done 
+	# todo should be done
 	mkdir -p ${XDG_CACHE_HOME}/less ${XDG_CACHE_HOME}/mptcpanalyzer ${XDG_CACHE_HOME}/vdirsyncer
 
 mail:
@@ -85,7 +87,8 @@ dce: | $(DCE_FOLDER)
 $(DCE_FOLDER):
 	git clone -o gh git@github.com:teto/ns-3-dce.git "${DCE_FOLDER}"; \
 	cd "${DCE_FOLDER}"; \
-	git remote add upstream git@github.com:direct-code-execution/ns-3-dce.git;
+	git remote add upstream git@github.com:direct-code-execution/ns-3-dce.git; \
+	git remote add iij gitolite@iij_vm:dce.git
 
 mptcpanalyzer: | $(MPTCPANALYZER_FOLDER)
 
@@ -123,6 +126,18 @@ $(KERNEL_FOLDER):
 	git clone git@github.com:teto/mptcp.git "${KERNEL_FOLDER}"
 	cd "${KERNEL_FOLDER}"; \
 	git remote add upstream https://github.com/multipath-tcp/mptcp.git
+
+blog: | $(BLOG_FOLDER)
+$(BLOG_FOLDER):
+	git clone gitolite@iij_vm:blog.git "${BLOG_FOLDER}"
+
+lkl: | $(LKL_FOLDER)
+$(LKL_FOLDER):
+	git clone git@github.com:teto/neovim.git "${LKL_FOLDER}"
+	cd "${LKL_FOLDER}" \
+		git remote add upstream it@github.com:lkl/linux.git \
+		git remote add gh git@github.com:teto/linux.git \
+		git remote add iij gitolite@iij_vm:lkl.git
 
 neovim: | $(NEOVIM_FOLDER)
 $(NEOVIM_FOLDER):

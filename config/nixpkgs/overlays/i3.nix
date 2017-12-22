@@ -254,11 +254,11 @@ rec {
 
   ns-3-perso = if (super.pkgs ? ns-3) then super.ns-3.override {
   #   pkgs = self.pkgs;
-    python = self.pkgs.pythonPackages.python;
+    python = self.python3;
     enableDoxygen = true;
     build_profile = "optimized";
     # withManual = true;
-  #   # generateBindings = true;
+    generateBindings = true;
   #   # withExamples = true;
   } else null;
 
@@ -406,7 +406,7 @@ IP_PNP_DHCP y
     # };
   });
 
-  # mptcp-local-stable =
+  # sandbox doesn't like 
   mptcp-local =
   let
     # todo remove tags
@@ -425,15 +425,14 @@ IP_PNP_DHCP y
       ignoreConfigErrors=true;
 
       # configfilename = /home/teto/dotfiles/kernel_config.mptcp;
-      # src= filter-src /home/teto/mptcp;
-      # src= fetchgit  /home/teto/mptcp;
       # src= super.fetchgitLocal "/home/teto/mptcp";
-      src = fetchGitHashless {
-        # rev="owd93";
-        branchName="owd93";
-        # url= file:///home/teto/mptcp;
-        url= "/home/teto/mptcp";
-      };
+
+      # src = fetchGitHashless {
+      #   # rev="owd93";
+      #   branchName="owd93";
+      #   # url= file:///home/teto/mptcp;
+      #   url= "/home/teto/mptcp";
+      # };
       enableParallelBuilding=true;
 
       # if we dont want to have to regenerate it

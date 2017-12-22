@@ -28,6 +28,7 @@ rec {
   networking.dnsExtensionMechanism = false; # creates problem with buffalo check if it blocks requests or what
   networking.extraHosts = ''
     202.214.86.52 iij_vm
+    202.214.86.51 iij_hajime
   '';
 
   imports =
@@ -230,7 +231,7 @@ browsing = true;
 
     openssh = {
       permitRootLogin = "no";
-    enable = false;
+      enable = false;
     };
     locate.enable = true;
 
