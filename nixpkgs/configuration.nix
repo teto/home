@@ -25,7 +25,9 @@ rec {
 
 
   networking.hostName = "jedha"; # Define your hostname.
-  networking.dnsExtensionMechanism = false; # creates problem with buffalo check if it blocks requests or what
+  # creates problem with buffalo check if it blocks requests or what
+  # it is necessary to use dnssec though :(
+  networking.dnsExtensionMechanism = false;
   networking.extraHosts = ''
     202.214.86.52 iij_vm
     202.214.86.51 iij_hajime
@@ -246,7 +248,8 @@ browsing = true;
 
   # udisks2 GUI
   services.udisks2.enable = true;
-
+  # allow-downgrade falls back when dnssec fails, "true" foces dnssec
+  services.resolved.dnssec = "allow-downgrade";
   services.openntpd = {
     enable = true;
     # add iij ntp servers

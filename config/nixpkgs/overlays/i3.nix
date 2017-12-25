@@ -41,16 +41,19 @@ let
   #   fetchGitHashless (removeAttrs (args // { inherit rev; }) [ "ref" ]);
 in
 rec {
-  i3-local = super.i3.overrideAttrs (oldAttrs: {
+  i3-local = let i3path = ~/i3; in 
+  if (builtins.pathExists i3path) then
+    super.i3.overrideAttrs (oldAttrs: {
 	  name = "i3-dev";
-	  src = super.lib.cleanSource ~/i3;
-	});
+	  src = super.lib.cleanSource i3path;
+    })
+    else null;
 
-   i3pystatus-local = super.i3pystatus.overrideAttrs (oldAttrs: {
-	  name = "i3pystatus-dev";
-	  src = super.lib.cleanSource ~/i3pystatus;
-      propagatedBuildInputs = with self.python3Packages; oldAttrs.propagatedBuildInputs ++ [ pytz ];
-	});
+   # i3pystatus-local = super.i3pystatus.overrideAttrs (oldAttrs: {
+	  # name = "i3pystatus-dev";
+	  # src = null; # super.lib.cleanSource ~/i3pystatus;
+   #    propagatedBuildInputs = with self.python3Packages; oldAttrs.propagatedBuildInputs ++ [ pytz ];
+	# });
 
   # else nixops keeps recompiling it
   # neovim = super.neovim.override ( {
@@ -125,22 +128,27 @@ rec {
     # eg; it will try to download some files while building
     # see target spell-en-download
     version = "master";
-    # src = super.pkgs.fetchFromGitHub {
-    #   owner = "fcitx";
-    #   repo = "fcitx";
+    # src = fetchGitHashless {
+    #   url="git@github.com:fcitx/fcitx5.git";
     #   rev = "b2143f10426ee5115cfa655abfa497b57c2c0fdb";
     #   sha256 = "0pf0dvmm0xiyzdhj67wizi7wczm7dvlznn6r9kp10zpy0v7g7gg3";
-    # };
-    src = /home/teto/fcitx;
+      src = super.pkgs.fetchFromGitHub {
+      owner = "fcitx";
+      repo = "fcitx";
+      rev = "master";
+      sha256 = "1j5wqj1zcihf171p3zc8g6sn4xy5jpcxg3wmiqn32cc6226n19kb";
+    };
+    # src = /home/teto/fcitx;
 
     # doxygen for doc 
-    nativeBuildInputs = oldAttrs.nativeBuildInputs ++  [ super.pkgs.xkeyboard_config super.pkgs.wget super.pkgs.cacert ];
+    # nativeBuildInputs = oldAttrs.nativeBuildInputs ++  [ super.pkgs.xkeyboard_config super.pkgs.wget super.pkgs.cacert ];
     # fails when building dbus error :/
 # /tmp/nix-build-fcitx-4.2.9.1.drv-0/fcitx-b2143f10426ee5115cfa655abfa497b57c2c0fdb-src/cmake/fcitx-cmake-helper.sh
+    # SSL_CERT_FILE="${super.pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
+    # extraCmds = ''
+    # export CFLAGS="-D_DEBUG"
+    # '';
     SSL_CERT_FILE="${super.pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
-    extraCmds = ''
-    export CFLAGS="-D_DEBUG"
-    '';
 
   });
 

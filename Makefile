@@ -133,10 +133,10 @@ $(BLOG_FOLDER):
 
 lkl: | $(LKL_FOLDER)
 $(LKL_FOLDER):
-	git clone git@github.com:teto/neovim.git "${LKL_FOLDER}"
-	cd "${LKL_FOLDER}" \
-		git remote add upstream it@github.com:lkl/linux.git \
-		git remote add gh git@github.com:teto/linux.git \
+	git clone git@github.com:lkl/linux.git "${LKL_FOLDER}"
+	cd "${LKL_FOLDER}"; \
+		git remote rename origin upstream; \
+		git remote add gh git@github.com:teto/linux.git; \
 		git remote add iij gitolite@iij_vm:lkl.git
 
 neovim: | $(NEOVIM_FOLDER)
