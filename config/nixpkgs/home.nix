@@ -306,7 +306,10 @@ rec {
       keycodebindings= {
       };
       startup=[
+        # TODO improve config/config specific
         { command= "xkblayout-state set +1"; always = false; notification = false; }
+        # todo convert to a HM stuff
+        { command= "greenclip daemon"; always = false; notification = false; }
         ];
       modes = {
         # resize = { Down="resize ..." }
@@ -325,7 +328,7 @@ rec {
 # il ne comprend pas Super_L
       keybindings = let mad="Mod4"; mod="Mod1"; in {
         # todo use i3lock-fancy instead
-        "${mod}+Ctrl+L"="exec ${pkgs.i3lock}";
+        "${mod}+Ctrl+L"="exec ${pkgs.i3lock-fancy}/bin/i3lock";
         "${mad}+h"="rofi -modi 'clipboard:greenclip print' -show clipboard";
 
 # set $greenclip "rofi -modi 'clipboard:greenclip print' -show clipboard"
