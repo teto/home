@@ -280,12 +280,11 @@ rec {
     inherit (super) lib;
   };
 
-  
-  mptcpanalyzer-test = mptcpanalyzer.overrideAttrs (old: {
-    # todo be careful 
-    src = fetchgitLocal old.src;
-    # src = fetchgitLocal "/home/teto/mptcpanalyzer";
-  });
+  # mptcpanalyzer-test = mptcpanalyzer.overrideAttrs (old: {
+  #   # todo be careful 
+  #   src = fetchgitLocal old.src;
+  #   # src = fetchgitLocal "/home/teto/mptcpanalyzer";
+  # });
 
   # TODO use this platform to build the various kernels
   # this won t be used by nixops ?

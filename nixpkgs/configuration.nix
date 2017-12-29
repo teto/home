@@ -99,13 +99,18 @@ rec {
      consoleKeyMap = "fr";
      defaultLocale = "fr_FR.UTF-8";
      # can generate problems for wireshark with Qt versions
-     # inputMethod = {
-     #   enabled = "fcitx";
-     #   fcitx.engines = with pkgs.fcitx-engines; [
-     #     mozc
-     #   # hangul m17n
-     # ];
-     # };
+     inputMethod = {
+       enabled = "fcitx";
+       fcitx.engines = with pkgs.fcitx-engines; [
+         mozc
+         hangul
+         m17n
+         libpinyin
+        chewing
+        unikey
+        anthy
+     ];
+     };
 
      # see https://github.com/NixOS/nixpkgs/issues/22895
      # consoleUseXkbConfig = "fr";
