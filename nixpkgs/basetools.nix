@@ -4,6 +4,7 @@ environment.systemPackages = with pkgs; [
      automake
      autoconf
      autojump
+     binutils
      cmake
      curl
      fd # replaces 'find'
