@@ -79,9 +79,9 @@ rec {
       # "net.core.wmem_max" = 1048576;
     };
   # boot.kernelPackages = pkgs.linuxPackages_mptcp;
-  boot.kernel.extraConfig = ''
-    TCP_PROBE y
-    '';
+  # boot.kernel.extraConfig = ''
+  #   TCP_PROBE y
+  #   '';
 
 
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
