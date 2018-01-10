@@ -1,6 +1,20 @@
 { pkgs, ... }:
 {
-environment.systemPackages = with pkgs; [
+  environment.systemPackages = with pkgs; 
+  let neovim-custom = neovim.override {
+       configure = {
+         customRC = ''
+          # here your custom configuration goes!
+         '';
+         # packages.myVimPackage = with pkgs.vimPlugins; {
+         #   # see examples below how to use custom packages
+         #   # loaded on launch
+         #   start = [ fugitive ];
+         #   # manually loadable by calling `:packadd $plugin-name`
+         #   opt = [ ];
+         # };
+       };
+     }; in [
      automake
      autoconf
      autojump
@@ -20,7 +34,7 @@ environment.systemPackages = with pkgs; [
      gnupg
      gnumake
      ipsecTools # does it provide ipsec ?
-     neovim
+     neovim-custom
      pkgconfig
      pstree
      ranger
