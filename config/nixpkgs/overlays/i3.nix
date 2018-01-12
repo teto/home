@@ -2,7 +2,7 @@ self: super:
 let
 
   # must be used with ignoreConfigErrors in kernels
-  kernelExtraConfig=builtins.readFile "../extraConfig.nix";
+  kernelExtraConfig=builtins.readFile ../extraConfig.nix;
 
   # see https://github.com/NixOS/nixpkgs/issues/29605#issuecomment-332474682
   # In lib/sources.nix we have "cleanSource = builtins.filterSource cleanSourceFilter;"
