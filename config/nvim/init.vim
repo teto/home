@@ -406,7 +406,7 @@ Plug 'NLKNguyen/papercolor-theme'
 " YCM generator is not really a plugin is it ?
 " Plug 'erezsh/erezvim' "zenburn scheme. This plugin resets some keymaps,
 " annoying
-Plug 'chrisbra/csv.vim', {'for': 'csv'}
+" Plug 'chrisbra/csv.vim', {'for': 'csv'}
 
 " editorconfig {{{
 let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']

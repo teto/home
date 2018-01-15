@@ -61,4 +61,4 @@ IP_PNP_DHCP y
 8139TOO_8129 y
 # CONFIG_8139_OLD_RX_RESET is not set
 
-    TCP_PROBE y
+    # TCP_PROBE y
