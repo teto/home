@@ -1,3 +1,4 @@
+# sudo nixos-rebuild  -I nixos-config=/home/teto/configuration.nix switch
 #  vim: set et fdm=marker fenc=utf-8 ff=unix sts=2 sw=2 ts=4 :
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
@@ -359,7 +360,13 @@ browsing = true;
 };
 
   # for nix-shell
-  programs.bash.enableCompletion = true;
+  programs.bash = {
+    enableCompletion = true;
+    shellInit=''
+      # set -o vi
+    '';
+
+  };
 
   programs.adb.enable = true;
 
@@ -376,9 +383,10 @@ browsing = true;
       group="libvirtd"
       '';
   };
-  systemd.services.libvirtd.restartIfChanged = lib.mkForce true;
+  # systemd.services.libvirtd.restartIfChanged = lib.mkForce true;
+
   programs.wireshark.enable = true; # installs setuid
-  programs.wireshark.package = pkgs.wireshark; # which one
+  programs.wireshark.package = pkgs.tshark; # which one
 
 
   # seemingly working for chromium only, check for firefox

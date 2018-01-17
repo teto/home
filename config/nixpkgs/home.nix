@@ -27,15 +27,15 @@ let
   # the kind of packages u don't want to compile
   # TODO les prendres depuis un channel avec des binaires ?
   heavyPackages = with pkgs;[
-    anki
+    anki          # spaced repetition system
     libreoffice
-    qutebrowser
+    qutebrowser  # keyboard driven fantastic browser
     gnome3.nautilus # demande webkit/todo replace by nemo ?
     mendeley # requiert qtwebengine
     pinta    # photo editing
     qtcreator  # for wireshark
-    zeal       #
-    zotero     #
+    zeal       # doc for developers
+    # zotero     # doc software
     # astroid # always compiles webkit so needs 1 full day
     taiginijisho # japanse dict; like zkanji Qt based
   ];
