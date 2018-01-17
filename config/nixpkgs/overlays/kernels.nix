@@ -110,7 +110,7 @@ in rec {
     # kernelAutoModules = false;
     # TODO make a new configuration light ?
     # hostPlatform=super.lib.platforms.pc64_simplekernel;
-    hostPlatform=test-platform;
+    # hostPlatform=test-platform;
     # extraConfig=kernelExtraConfig;
 
     # useless on the kernel branch
@@ -133,11 +133,12 @@ in rec {
       modDirVersion="4.9.60+";
       name="mptcp-local";
       # TODO testing...
-      hostPlatform=super.platforms.pc64_simplekernel;
+      # hostPlatform=super.platforms.pc64_simplekernel;
 
       # TODO might need to revisit
       ignoreConfigErrors=true;
 
+      configfile = "/home/teto/mptcp/config.tpl";
       # configfilename = /home/teto/dotfiles/kernel_config.mptcp;
       # src= super.fetchgitLocal "/home/teto/mptcp";
 
@@ -159,5 +160,8 @@ in rec {
   # linuxPackages_mptcp = linuxPackagesFor pkgs.linux_mptcp;
   linuxPackages_mptcp-local = super.pkgs.linuxPackagesFor mptcp-local;
 
+  # hostPlatform = super.hostPlatform.overrideAttrs(old: {
+    # platform = test-platform;
+  # });
 }
 
