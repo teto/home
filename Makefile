@@ -119,7 +119,9 @@ $(NIXPKGS_FOLDER):
 
 nixops: | $(NIXOPS_FOLDER)
 $(NIXOPS_FOLDER):
-	git clone git@github.com:teto/nixops.git "${NIXOPS_FOLDER}"
+	git clone --origin gh git@github.com:teto/nixops.git "${NIXOPS_FOLDER}" \
+	cd "${NIXOPS_FOLDER}"; \
+	git remote add upstream http://github.com/nixos/nixops.git;
 
 mptcp: | $(KERNEL_FOLDER)
 $(KERNEL_FOLDER):

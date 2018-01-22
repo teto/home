@@ -125,8 +125,13 @@ rec {
       enableFontDir = true; # ?
       fonts = with pkgs; [
         ubuntu_font_family
-        inconsolata
-        noto-fonts-cjk
+        inconsolata # monospace
+        noto-fonts-cjk # asiatic
+        nerdfonts
+
+        # Adobe Source Han Sans
+        sourceHanSansPackages.japanese
+        # noto-fonts
       ];
       fontconfig= {
         enable=true;
@@ -235,12 +240,14 @@ rec {
     # https://nixos.wiki/wiki/Printing
     printing = {
       enable = true;
-browsing = true;
+      browsing = true;
       drivers = [ pkgs.gutenprint ];
     };
 
     openssh = {
       permitRootLogin = "no";
+      passwordAuthentication = false;
+      forwardX11 = true;
       enable = false;
     };
     locate.enable = true;
@@ -248,10 +255,13 @@ browsing = true;
     # dbus.packages = [ ];
   };
 
-    # Enable automatic discovery of the printer (from other linux systems with avahi running)
-    services.avahi.enable = true;
-    services.avahi.publish.enable = true;
-    services.avahi.publish.userServices = true;
+  # security.initialRootPassword = "!";
+  # programs.ssh.startAgent = true;
+
+  # Enable automatic discovery of the printer (from other linux systems with avahi running)
+  services.avahi.enable = true;
+  services.avahi.publish.enable = true;
+  services.avahi.publish.userServices = true;
 
 
   # udisks2 GUI
@@ -394,7 +404,7 @@ browsing = true;
   # systemd.services.libvirtd.restartIfChanged = lib.mkForce true;
 
   programs.wireshark.enable = true; # installs setuid
-  programs.wireshark.package = pkgs.tshark; # which one
+  programs.wireshark.package = pkgs.wireshark; # which one
 
 
   # seemingly working for chromium only, check for firefox
