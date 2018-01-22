@@ -42,6 +42,7 @@ let
   desktopPkgs = with pkgs; [
     buku
     dropbox
+    feh
     ffmpegthumbnailer # to preview videos in ranger
     haskellPackages.greenclip # todo get from haskell
     nox
@@ -363,8 +364,7 @@ rec {
 # bindsym XF86AudioPrev exec playerctl previous
   };
   xsession.initExtra = ''
-    # ${pkgs.feh}
-    feh --bg-fill ~/dotfiles/wallpapers/nebula.jpg
+    ${pkgs.feh} --bg-fill ~/dotfiles/wallpapers/nebula.jpg
     ${pkgs.networkmanagerapplet}/bin/nm-applet &
   '';
 }

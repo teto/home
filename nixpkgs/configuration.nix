@@ -37,6 +37,8 @@ rec {
   imports =
     [ # Include the results of the hardware scan.
       /etc/nixos/hardware-configuration.nix
+    # Not tracked, so doesn't need to go in per-machine subdir
+      ./passwd.nix
       # ./mptcp-kernel.nix
       ./basetools.nix
       ./extraTools.nix
@@ -88,6 +90,8 @@ rec {
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager = {
     enable = true;
+    # not sure what it does https://github.com/NixOS/nixpkgs/pull/32216
+    enableStrongSwan = true;
     # logLevel = WARN;
     # dispatcherScripts
     # packages = [];
@@ -410,6 +414,10 @@ rec {
   # seemingly working for chromium only, check for firefox
   programs.browserpass.enable = true;
 
+  # use with nix-locate to find a file across packages
+  # DOES NOT EXIST YET :'(
+  # programs.nix-index.enable = true;
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   # per-user package is quite cool too
   # https://github.com/NixOS/nixpkgs/pull/25712/files
@@ -454,6 +462,12 @@ rec {
     # programs.chromium.enableAdobeFlash = true; # for Chromium
 
   };
+
+  # to load custom kernels ?userNixpkgs
+  nixpkgs.overlays = let p = /home/teto/dotfiles/config/nixpkgs/overlays/kernels.nix;
+  in lib.optionals (builtins.pathExists p) [
+    (import p)
+  ];
 
   # IRC recommanded to 
     # environment.etc."ipsec.secrets".text = ''

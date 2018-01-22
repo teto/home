@@ -82,42 +82,40 @@ in rec {
   #   hostPlatform=test-platform;
   # });
 
+  # Thanks <3 ericson1234 for this command that overrides the current localSystem platform in order
+  # to compile a custom kernel
+  # nix-build -A linux_mptcp --arg 'localSystem' 'let top = (import <nixpkgs> { overlays= [ (import /home/teto/dotfiles/config/nixpkgs/overlays/kernels.nix)]; } ); in top.lib.recursiveUpdate (top.lib.systems.elaborate { system = builtins.currentSystem; }) { platform = top.test-platform; }' '<nixpkgs>' --show-trace
+
   # TODO use this platform to build the various kernels
   # this won t be used by nixops ?
-  test-platform = super.platforms.pc64_simplekernel // {
+  # 
+  test-platform =  {
     kernelAutoModules = false;
-    extraConfig = super.platforms.pc64_simplekernel
-      + kvmConfig
+    # super.platforms.pc64_simplekernel
+    # todo get system.platform.extraConfig ?
+    extraConfig = kvmConfig
       + mptcpConfig
       + debugConfig
       ;
+      ignoreConfigErrors=true;
+    # preferBui
+
+    kernelPreferBuiltin = true;
   };
 
+  # builtins.currentSystem returns "x86_64-linux"
+  test-localSystem = let system = super.lib.systems.elaborate { system = builtins.currentSystem; };
+   in super.lib.recursiveUpdate (system) { platform = system.platform // test-platform; };
 
   # to improve the config
   # make localmodconfig
   mptcp93 = super.pkgs.linux_mptcp.override ({
     kernelPatches=[];
-    # NIX_DEBUG=8;
     # maybe that works
-    # configfile = /path/to/my/config
-    # TODO reuse old value of extraConfig
-    # check because that line is strange
-
-    # it will append then overwrite itself ;/
-  # '' + (args.extraConfig or "");
-# } // args // (args.argsOverride or {}))
     # kernelAutoModules = false;
     # TODO make a new configuration light ?
-    # hostPlatform=super.lib.platforms.pc64_simplekernel;
-    # hostPlatform=test-platform;
     # extraConfig=kernelExtraConfig;
 
-    # useless on the kernel branch
-    # argsOverride = {
-    #   # supposed  to always work
-    #   modDirVersion="4.9.60+";
-    # };
   });
 
   # sandbox doesn't like 
@@ -130,10 +128,10 @@ in rec {
   in
   mptcp93.override ({
       # src= super.lib.cleanSource /home/teto/mptcp;
-      modDirVersion="4.9.60+";
+      # modDirVersion="4.9.60+";
       name="mptcp-local";
       # TODO testing...
-      # hostPlatform=super.platforms.pc64_simplekernel;
+      hostPlatform=test-localSystem;
 
       # TODO might need to revisit
       ignoreConfigErrors=true;
