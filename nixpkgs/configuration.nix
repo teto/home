@@ -26,7 +26,9 @@ rec {
 
 
   networking.hostName = "jedha"; # Define your hostname.
-  networking.dnsExtensionMechanism = false; # creates problem with buffalo check if it blocks requests or what
+  # creates problem with buffalo check if it blocks requests or what
+  # it is necessary to use dnssec though :(
+  networking.dnsExtensionMechanism = false;
   networking.extraHosts = ''
     202.214.86.52 iij_vm
     202.214.86.51 iij_hajime
@@ -100,13 +102,18 @@ rec {
      consoleKeyMap = "fr";
      defaultLocale = "fr_FR.UTF-8";
      # can generate problems for wireshark with Qt versions
-     # inputMethod = {
-     #   enabled = "fcitx";
-     #   fcitx.engines = with pkgs.fcitx-engines; [
-     #     mozc
-     #   # hangul m17n
-     # ];
-     # };
+     inputMethod = {
+       enabled = "fcitx";
+       fcitx.engines = with pkgs.fcitx-engines; [
+         mozc
+         hangul
+         m17n
+         libpinyin
+        chewing
+        unikey
+        anthy
+     ];
+     };
 
      # see https://github.com/NixOS/nixpkgs/issues/22895
      # consoleUseXkbConfig = "fr";
@@ -118,8 +125,13 @@ rec {
       enableFontDir = true; # ?
       fonts = with pkgs; [
         ubuntu_font_family
-        inconsolata
-        noto-fonts-cjk
+        inconsolata # monospace
+        noto-fonts-cjk # asiatic
+        nerdfonts
+
+        # Adobe Source Han Sans
+        sourceHanSansPackages.japanese
+        # noto-fonts
       ];
       fontconfig= {
         enable=true;
@@ -228,12 +240,14 @@ rec {
     # https://nixos.wiki/wiki/Printing
     printing = {
       enable = true;
-browsing = true;
+      browsing = true;
       drivers = [ pkgs.gutenprint ];
     };
 
     openssh = {
       permitRootLogin = "no";
+      passwordAuthentication = false;
+      forwardX11 = true;
       enable = false;
     };
     locate.enable = true;
@@ -241,15 +255,19 @@ browsing = true;
     # dbus.packages = [ ];
   };
 
-    # Enable automatic discovery of the printer (from other linux systems with avahi running)
-    services.avahi.enable = true;
-    services.avahi.publish.enable = true;
-    services.avahi.publish.userServices = true;
+  # security.initialRootPassword = "!";
+  # programs.ssh.startAgent = true;
+
+  # Enable automatic discovery of the printer (from other linux systems with avahi running)
+  services.avahi.enable = true;
+  services.avahi.publish.enable = true;
+  services.avahi.publish.userServices = true;
 
 
   # udisks2 GUI
   services.udisks2.enable = true;
-
+  # allow-downgrade falls back when dnssec fails, "true" foces dnssec
+  services.resolved.dnssec = "allow-downgrade";
   services.openntpd = {
     enable = true;
     # add iij ntp servers
@@ -386,7 +404,7 @@ browsing = true;
   # systemd.services.libvirtd.restartIfChanged = lib.mkForce true;
 
   programs.wireshark.enable = true; # installs setuid
-  programs.wireshark.package = pkgs.tshark; # which one
+  programs.wireshark.package = pkgs.wireshark; # which one
 
 
   # seemingly working for chromium only, check for firefox

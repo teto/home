@@ -1,4 +1,4 @@
-# Configuration file for Wireshark 2.4.1.
+# Configuration file for Wireshark 2.4.4.
 #
 # This file is regenerated each time preferences are saved within
 # Wireshark. Making manual changes should be safe, however.
@@ -211,7 +211,7 @@ gui.color_filter_bg.deprecated: ffffaf
 
 # Packet list hidden columns
 # List all columns to hide in the packet list.
-gui.column.hidden: %Cus:ip.src:1:R,%Cus:ip.dst:1:R
+gui.column.hidden: %Cus:ip.src:1:R,%Cus:ip.dst:1:R,%Cus:ip.dst:1:R
 
 # Packet list column format
 # Each pair of strings consists of a column title and its format
@@ -280,7 +280,7 @@ gui.layout_type: 2
 
 # Interface link-layer header types (Ex: en0(1),en1(143),...)
 # A string
-capture.devices_linktypes: ssh(147),randpkt(147),bluetooth0(201)
+capture.devices_linktypes: any(113),lo(1),wlp60s0(1),virbr0(1),nflog(239),nfqueue(228)
 
 # Interface descriptions (Ex: eth0(eth0 descr),eth1(eth1 descr),...)
 # A string
@@ -296,15 +296,15 @@ capture.devices_linktypes: ssh(147),randpkt(147),bluetooth0(201)
 
 # Interface buffer size (Ex: en0(1),en1(143),...)
 # A string
-capture.devices_buffersize: ssh(2),randpkt(2),any(2),lo(2),eth0(2),wlan0(2),bluetooth0(2),bluetooth-monitor(2),nflog(2),nfqueue(2),usbmon1(2),usbmon2(2),usbmon3(2),usbmon4(2),enx025202013962(2)
+capture.devices_buffersize: any(2),lo(2),wlp60s0(2),virbr0(2),nflog(2),nfqueue(2),usbmon1(2),usbmon2(2),cisco(2),randpkt(2),ssh(2),udpdump(2)
 
 # Interface snap length (Ex: en0(65535),en1(1430),...)
 # A string
-capture.devices_snaplen: ssh:0(262144),randpkt:0(262144),any:0(262144),lo:0(262144),eth0:0(262144),wlan0:0(262144),bluetooth0:0(262144),bluetooth-monitor:0(262144),nflog:0(262144),nfqueue:0(262144),usbmon1:0(262144),usbmon2:0(262144),usbmon3:0(262144),usbmon4:0(262144),enx025202013962:0(262144)
+capture.devices_snaplen: any:0(262144),lo:0(262144),wlp60s0:0(262144),virbr0:0(262144),nflog:0(262144),nfqueue:0(262144),usbmon1:0(262144),usbmon2:0(262144),cisco:0(262144),randpkt:0(262144),ssh:0(262144),udpdump:0(262144)
 
 # Interface promiscuous mode (Ex: en0(0),en1(1),...)
 # A string
-capture.devices_pmode: ssh(1),randpkt(1),any(1),lo(1),eth0(1),wlan0(1),bluetooth0(1),bluetooth-monitor(1),nflog(1),nfqueue(1),usbmon1(1),usbmon2(1),usbmon3(1),usbmon4(1),enx025202013962(1)
+capture.devices_pmode: any(1),lo(1),wlp60s0(1),virbr0(1),nflog(1),nfqueue(1),usbmon1(1),usbmon2(1),cisco(1),randpkt(1),ssh(1),udpdump(1)
 
 # Capture in promiscuous mode?
 # TRUE or FALSE (case-insensitive)
@@ -373,7 +373,7 @@ console.log.level: 64
 
 # Remote SSH server username
 # A string
-#extcap.ssh.remoteusername: teto
+#extcap.ssh.remoteusername: root
 
 # Path to SSH private key
 # A string
@@ -391,9 +391,13 @@ console.log.level: 64
 # A string
 #extcap.ssh.remotesudo: 
 
+# No promiscuous mode
+# A string
+#extcap.ssh.remotenoprom: 
+
 # Remote capture filter
 # A string
-#extcap.ssh.remotefilter: not ((host fe80::a526:bf7:4811:7e4 or host 192.168.122.1 or host 192.168.0.129) and port 22)
+#extcap.ssh.remotefilter: not ((host fe80::4b43:346d:afd7:555 or host 192.168.122.1 or host 192.168.20.29) and port 22)
 
 # Packets to capture
 # A string
@@ -437,7 +441,7 @@ console.log.level: 64
 
 # Remote SSH server username
 # A string
-#extcap.cisco.remoteusername: teto
+#extcap.cisco.remoteusername: root
 
 # Path to SSH private key
 # A string
@@ -449,7 +453,7 @@ console.log.level: 64
 
 # Remote capture filter
 # A string
-#extcap.cisco.remotefilter: deny tcp host fe80::a526:bf7:4811:7e4 any eq 22, deny tcp any eq 22 host fe80::a526:bf7:4811:7e4, deny tcp host 192.168.122.1 any eq 22, deny tcp any eq 22 host 192.168.122.1, deny tcp host 192.168.0.129 any eq 22, deny tcp any eq 22 host 192.168.0.129, permit ip any any
+#extcap.cisco.remotefilter: deny tcp host fe80::4b43:346d:afd7:555 any eq 22, deny tcp any eq 22 host fe80::4b43:346d:afd7:555, deny tcp host 192.168.122.1 any eq 22, deny tcp any eq 22 host 192.168.122.1, deny tcp host 192.168.20.29 any eq 22, deny tcp any eq 22 host 192.168.20.29, permit ip any any
 
 # Packets to capture
 # A string
@@ -785,7 +789,7 @@ console.log.level: 64
 
 # Enables an additional panel for navigating through packets
 # TRUE or FALSE (case-insensitive)
-#wlan_radio.timeline: FALSE
+wlan_radio.timeline: TRUE
 
 # Radiotap has a bit to indicate whether the FCS is still on the frame or not. Some generators (e.g. AirPcap) use a non-standard radiotap flag 14 to put the FCS into the header.
 # TRUE or FALSE (case-insensitive)
@@ -1166,6 +1170,10 @@ console.log.level: 64
 # One of: Off, Sent is AG, Rcvd is HS, Sent is HS, Rcvd is AG
 # (case-insensitive).
 #bthsp.hsp.hsp_role: Off
+
+# Detect retransmission based on SN (Sequence Number)
+# TRUE or FALSE (case-insensitive)
+#btle.detect_retransmit: TRUE
 
 # Turn on/off decode by next rules
 # TRUE or FALSE (case-insensitive)
@@ -1548,6 +1556,10 @@ console.log.level: 64
 # 
 # A path to a file
 #dtls.debug_file: 
+
+# Semicolon-separated list of private RSA keys used for DTLS decryption. Used by versions of Wireshark prior to 1.6
+# A string
+#dtls.keys_list: 
 
 # Pre-Shared-Key as HEX string. Should be 0 to 16 bytes.
 # A string
@@ -2826,14 +2838,6 @@ mptcp.intersubflows_retransmission: TRUE
 # A decimal number
 #mqpcf.maxlst: 20000
 
-# The TCP port numbers for MessagePack-RPC
-# A string denoting an positive integer range (e.g., "1-20,30-40")
-#msgpack-rpc.tcp_ports: 9003-9004,37800
-
-# The WebSocket port numbers for MessagePack-RPC
-# A string denoting an positive integer range (e.g., "1-20,30-40")
-#msgpack-rpc.ws_ports: 9005-9009
-
 # Specifies that the raw text of the MSRP message should be displayed in addition to the dissection tree
 # TRUE or FALSE (case-insensitive)
 #msrp.display_raw_text: TRUE
@@ -4016,6 +4020,10 @@ mptcp.intersubflows_retransmission: TRUE
 # Redirect SSL debug to the file specified. Leave empty to disable debugging or use "-" to redirect output to stderr.
 # A path to a file
 #ssl.debug_file: 
+
+# Semicolon-separated list of private RSA keys used for SSL decryption. Used by versions of Wireshark prior to 1.6
+# A string
+#ssl.keys_list: 
 
 # Whether the SSL dissector should reassemble SSL records spanning multiple TCP segments. To use this option, you must also enable "Allow subdissectors to reassemble TCP streams" in the TCP protocol settings.
 # TRUE or FALSE (case-insensitive)

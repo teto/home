@@ -119,7 +119,9 @@ $(NIXPKGS_FOLDER):
 
 nixops: | $(NIXOPS_FOLDER)
 $(NIXOPS_FOLDER):
-	git clone git@github.com:teto/nixops.git "${NIXOPS_FOLDER}"
+	git clone --origin gh git@github.com:teto/nixops.git "${NIXOPS_FOLDER}" \
+	cd "${NIXOPS_FOLDER}"; \
+	git remote add upstream http://github.com/nixos/nixops.git;
 
 mptcp: | $(KERNEL_FOLDER)
 $(KERNEL_FOLDER):
@@ -133,10 +135,10 @@ $(BLOG_FOLDER):
 
 lkl: | $(LKL_FOLDER)
 $(LKL_FOLDER):
-	git clone git@github.com:teto/neovim.git "${LKL_FOLDER}"
-	cd "${LKL_FOLDER}" \
-		git remote add upstream it@github.com:lkl/linux.git \
-		git remote add gh git@github.com:teto/linux.git \
+	git clone git@github.com:lkl/linux.git "${LKL_FOLDER}"
+	cd "${LKL_FOLDER}"; \
+		git remote rename origin upstream; \
+		git remote add gh git@github.com:teto/linux.git; \
 		git remote add iij gitolite@iij_vm:lkl.git
 
 neovim: | $(NEOVIM_FOLDER)
