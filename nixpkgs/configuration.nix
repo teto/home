@@ -423,14 +423,13 @@ browsing = true;
   # you can use http instead
   # nix.sshServe = {
   #   enable  = true;
-  #   keys = [ "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDmt8RlXKAn7zryenWl8e8RDLZ+WLzIsdqwDMbvynF/Eg3zraxWpm80cXlIrGAayHf8eTjmWXoDnWBuS3MHjv9nTWHliJVyHC5/aImrGflkGpWWpBvxg79bIz06QusqBx4Vfq6NKn/GS6L8KevhtMToLmEOyRuB3Gs1FWsHb/EbqKp5hzDYS3yVMjVkF+cubQiK/DEvcio/G/vSDrBcPE8kUZcf3ibsBruUa3tCh4RTmaLnoIbkOX/ColTWPIOhMlnYeOOzZ22ln6cgBgarjU/DEpb4iu0qSjTArNV58mUpqzEUU0sTq2sunK0hdEDkxWw/3qpv6MI276AQ4QrY2wTN teto@jedha" ];
+  #   keys = [ "ssh-rsa xxx user@host" ];
   # };
 
   nixpkgs.config = {
 	allowUnfree = true;
     permittedInsecurePackages = [
           # "webkitgtk-2.4.11"
-         "linux-4.13.16"
             ];
     # firefox.enableAdobeFlash = true;
     # chromium.enablePepperFlash = true;

@@ -2,6 +2,20 @@
 set editing-mode vi
 $include /etc/inputrc
 
+# history-search-backward
+set keymap vi-command
+
+# these are for vi-command mode
+
+Control-l: clear-screen
+set keymap vi-insert
+# these are for vi-insert mode
+Control-l: clear-screen
+Control-p: previous-history
+Control-n: next-history
+
+
+
 # to enable case-insensitive tab completion
 set completion-ignore-case On
 

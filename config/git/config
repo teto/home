@@ -58,3 +58,5 @@
 
 [mergetool "fugitive"]
 	cmd = nvim -f -c \"Gdiff\" \"$MERGED\"
+[rebase]
+	autosquash = true
