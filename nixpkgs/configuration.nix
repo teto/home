@@ -376,7 +376,7 @@ rec {
     . "${fzf}/share/fzf/completion.zsh"
     . "${fzf}/share/fzf/key-bindings.zsh"
 
-    # . "$ZDOTDIR/transfer.zsh"
+    . "$ZDOTDIR/transfer.zsh"
   '';
 
 };

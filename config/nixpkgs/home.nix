@@ -81,7 +81,7 @@ let
     khal
     khard
     msmtp
-    newsbeuter
+    newsboat
     notmuch
     slack
     vdirsyncer

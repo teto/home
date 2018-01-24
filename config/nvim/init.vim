@@ -25,12 +25,13 @@ let s:plugdir = s:nvimdir.'/site/pack'
 
 "silent echom s:plugscript
 "silent echom s:nvimdir
-
+" to allow line-continuation in vim otherwise plug autoinstall fails
+set nocompatible
 if empty(glob(s:plugscript))
   execute "!mkdir -p " s:nvimdir.'/autoload' s:plugdir
-  execute "!curl -fLo" s:plugscript
-		\ "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
-		  autocmd VimEnter * PlugInstall | source $MYVIMRC
+  execute "!curl -fLo" s:plugscript --create-dirs
+		\ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+		  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
 "}}}

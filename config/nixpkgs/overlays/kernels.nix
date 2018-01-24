@@ -8,6 +8,7 @@ let
       VIRTIO_MMIO y
       VIRTIO_BLK y
 
+
       # when run as -kernel, an embedded DHCP client is needed
       # need to get an ip
       IP_PNP y
@@ -85,19 +86,20 @@ in rec {
   # Thanks <3 ericson1234 for this command that overrides the current localSystem platform in order
   # to compile a custom kernel
   # nix-build -A linux_mptcp --arg 'localSystem' 'let top = (import <nixpkgs> { overlays= [ (import /home/teto/dotfiles/config/nixpkgs/overlays/kernels.nix)]; } ); in top.lib.recursiveUpdate (top.lib.systems.elaborate { system = builtins.currentSystem; }) { platform = top.test-platform; }' '<nixpkgs>' --show-trace
-
-  # TODO use this platform to build the various kernels
-  # this won t be used by nixops ?
-  # 
-  test-platform =  {
-    kernelAutoModules = false;
-    # super.platforms.pc64_simplekernel
-    # todo get system.platform.extraConfig ?
-    extraConfig = kvmConfig
+  mptcpKernelExtraConfig = kvmConfig
       + mptcpConfig
       + debugConfig
       ;
-      ignoreConfigErrors=true;
+
+  # TODO use this platform to build the various kernels
+  # this won t be used by nixops ?
+  test-platform =  {
+    name="zizou";
+    kernelAutoModules = false;
+    # super.platforms.pc64_simplekernel
+    # todo get system.platform.extraConfig ?
+    kernelExtraConfig = mptcpKernelExtraConfig ;
+    ignoreConfigErrors = true;
     # preferBui
 
     kernelPreferBuiltin = true;
@@ -119,6 +121,7 @@ in rec {
   });
 
   # sandbox doesn't like 
+  # in a repl I see mptcp-local.stdenv.hostPlatform.platform
   mptcp-local =
   let
     # todo remove tags
@@ -129,6 +132,7 @@ in rec {
   mptcp93.override ({
       # src= super.lib.cleanSource /home/teto/mptcp;
       # modDirVersion="4.9.60+";
+      modDirVersion="4.9.60-00010-g5a1ca10181c6";
       name="mptcp-local";
       # TODO testing...
       hostPlatform=test-localSystem;
@@ -136,7 +140,7 @@ in rec {
       # TODO might need to revisit
       ignoreConfigErrors=true;
 
-      configfile = "/home/teto/mptcp/config.tpl";
+      # configfile = "/home/teto/mptcp/config.tpl";
       # configfilename = /home/teto/dotfiles/kernel_config.mptcp;
       # src= super.fetchgitLocal "/home/teto/mptcp";
 
@@ -147,6 +151,8 @@ in rec {
       #   url= "/home/teto/mptcp";
       # };
       enableParallelBuilding=true;
+
+      # extraConfig=mptcpKernelExtraConfig;
 
       # if we dont want to have to regenerate it
       # configfile=
