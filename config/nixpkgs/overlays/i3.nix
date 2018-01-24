@@ -187,17 +187,17 @@ rec {
   # xl2tpd = super.xl2tpd.overrideAttrs ( oldAttrs : rec {
   #   makeFlags = oldAttrs ++ [ "-DUSE_KERNEL" ];
   # });
-  castxml = if super?castxml then super.castxml.overrideAttrs (old: {
+  # castxml = if super?castxml then super.castxml.overrideAttrs (old: {
 
-    src = super.fetchFromGitHub {
-      repo="castxml";
-      owner="teto";
-      # branch="nixos";
-      rev="801b9528183eb11b8af78ced65a973dc8a2f3922";
-      sha256="07w8l8fj10v2dmhb6pix9w1jix1rwk7y10x4mgp3p19g98c69mxb";
+  #   src = super.fetchFromGitHub {
+  #     repo="castxml";
+  #     owner="teto";
+  #     # branch="nixos";
+  #     rev="801b9528183eb11b8af78ced65a973dc8a2f3922";
+  #     sha256="07w8l8fj10v2dmhb6pix9w1jix1rwk7y10x4mgp3p19g98c69mxb";
 
-    };
-  }) else null;
+  #   };
+  # }) else null;
 
   # nix-shell -p python.pkgs.my_stuff
   python = super.python.override {
@@ -270,9 +270,6 @@ rec {
     generateBindings = true;
   #   # withExamples = true;
   } else null;
-
-  # dce = if (super.pkgs ? ns-3) then super.callPackage ../dce.nix { pkgs = super.pkgs;  } else null;
-
 
   # pkgs = super.pkgs;
   mptcpanalyzer = super.callPackage ../mptcpanalyzer.nix {

@@ -13,6 +13,8 @@ set keymap vi-insert
 Control-l: clear-screen
 Control-p: previous-history
 Control-n: next-history
+Control-a: beginning-of-line
+Control-e: end-of-line
 
 
 

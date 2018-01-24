@@ -185,8 +185,9 @@ rec {
     };
     # historyControl=["erasedups", "ignoredups", "ignorespace"]
     historyIgnore=["ls"];
+    historyFile = "${xdg.cacheHome}/bash_history";
+    # HISTFILE="$XDG_CACHE_HOME/bash_history";
     initExtra=''
-      HISTFILE="$XDG_CACHE_HOME/bash_history";
       ${includeFzf}
       '';
       # profileExtra=''
@@ -314,6 +315,10 @@ rec {
         ];
       modes = {
         # resize = { Down="resize ..." }
+      };
+
+      window = {
+        hideEdgeBorders = true;
       };
       # colors = {
       #   focused = {
