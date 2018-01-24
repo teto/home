@@ -3,16 +3,20 @@ set editing-mode vi
 $include /etc/inputrc
 
 # history-search-backward
+# these are for vi-command mode
 set keymap vi-command
 
-# these are for vi-command mode
-
+Control-a: beginning-of-line
 Control-l: clear-screen
-set keymap vi-insert
+Control-e: end-of-line
+
 # these are for vi-insert mode
+set keymap vi-insert
 Control-l: clear-screen
 Control-p: previous-history
 Control-n: next-history
+Control-a: beginning-of-line
+Control-e: end-of-line
 
 
 
