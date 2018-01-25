@@ -42,7 +42,7 @@ let
   desktopPkgs = with pkgs; [
     buku
     dropbox
-    feh
+    # feh
     ffmpegthumbnailer # to preview videos in ranger
     haskellPackages.greenclip # todo get from haskell
     nox
@@ -94,6 +94,7 @@ let
   # nixos= import '<nixos-unstable>' 
 in
 rec {
+  news.display = "silent";
   home.packages = desktopPkgs ++ devPkgs ++ imPkgs;
 
   home.mailAccounts = [
@@ -111,11 +112,13 @@ rec {
   home.keyboard = {
     layout = "fr,us";
     # options = [ "grp:caps_toggle" "grp_led:scroll" ];
+    options = [ "add Mod1 Alt_R" ];
   };
 
   # symlink machine specific config there
   imports = lib.optionals (builtins.pathExists ./machine-specific.nix) [ ./machine-specific.nix ];
 
+  programs.feh.enable = true;
   # programs.emacs = {
   #   enable = true;
   #   extraPackages = epkgs: [
@@ -185,7 +188,7 @@ rec {
     };
     # historyControl=["erasedups", "ignoredups", "ignorespace"]
     historyIgnore=["ls"];
-    historyFile = "${xdg.cacheHome}/bash_history";
+    # historyFile = "${xdg.cacheHome}/bash_history";
     # HISTFILE="$XDG_CACHE_HOME/bash_history";
     initExtra=''
       ${includeFzf}
@@ -318,7 +321,7 @@ rec {
       };
 
       window = {
-        hideEdgeBorders = true;
+        hideEdgeBorders = "smart";
       };
       # colors = {
       #   focused = {
