@@ -91,6 +91,8 @@ Plug 'mhinz/vim-signify' " Indicate changed lines within a file using a VCS.
 " Plug 'moznion/github-commit-comment.vim' " last update from 2014
 " Plug 'dhruvasagar/vim-open-url' " gB/gW to open browser
 Plug 'Carpetsmoker/xdg_open.vim' " overrides gx
+Plug 'tweekmonster/nvim-api-viewer', {'on': 'NvimAPI'} " see nvim api
+Plug 'tweekmonster/startuptime.vim', {'on': 'StartupTime'} " see startup time per script
 " Plug 'mattn/gist-vim' " to gist requires webapi
 " provider dependant {{{
 " new deoplete relies on yarp :
