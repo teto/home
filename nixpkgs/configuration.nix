@@ -490,7 +490,7 @@ rec {
 
   # lib.options.mergeDefaultOption
   nix.buildCores=4;
-  nix.nixPath = 
+  nix.nixPath =
   [
     "nixos-config=/home/teto/dotfiles/nixpkgs/configuration.nix"
      "/nix/var/nix/profiles/per-user/root/channels"

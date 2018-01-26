@@ -98,7 +98,7 @@ in rec {
     kernelAutoModules = false;
     # super.platforms.pc64_simplekernel
     # todo get system.platform.extraConfig ?
-    kernelExtraConfig = mptcpKernelExtraConfig ;
+    kernelExtraConfig = mptcpKernelExtraConfig;
     ignoreConfigErrors = true;
     # preferBui
 
@@ -111,7 +111,9 @@ in rec {
 
   # to improve the config
   # make localmodconfig
-  mptcp93 = super.pkgs.linux_mptcp.override ({
+  # builtins.trace "test"
+  # 
+  mptcp93 = super.pkgs.linux_mptcp.override (  {
     kernelPatches=[];
     # maybe that works
     # kernelAutoModules = false;
@@ -135,15 +137,15 @@ in rec {
       modDirVersion="4.9.60-00010-g5a1ca10181c6";
       name="mptcp-local";
       # TODO testing...
-      hostPlatform=test-localSystem;
+      # hostPlatform=test-localSystem;
 
       # TODO might need to revisit
       ignoreConfigErrors=true;
+      autoModules = false;
 
       # configfile = "/home/teto/mptcp/config.tpl";
       # configfilename = /home/teto/dotfiles/kernel_config.mptcp;
       # src= super.fetchgitLocal "/home/teto/mptcp";
-
       # src = fetchGitHashless {
       #   # rev="owd93";
       #   branchName="owd93";
@@ -157,7 +159,7 @@ in rec {
       # if we dont want to have to regenerate it
       # configfile=
 
-  });
+    });
 
   # mptcp-head = mptcp93.override ({
 

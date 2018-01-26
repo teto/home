@@ -45,11 +45,13 @@ let
     # feh
     ffmpegthumbnailer # to preview videos in ranger
     haskellPackages.greenclip # todo get from haskell
+    moc
     nox
     # gnome3.gnome_control_center
     qtpass
     sublime3
     scrot
+    sxiv
     system_config_printer
     transmission_gtk
     translate-shell
@@ -231,6 +233,7 @@ rec {
     automount = false;
   };
 
+  # TODO conditionnally define these
   programs.notmuch = {
     enable = true;
   };
@@ -256,7 +259,9 @@ rec {
     enable = true;
     withPython3 = true;
     withPython = false;
-    withRuby = false;
+    withRuby = true; # for vim-rfc/GhDashboard etc.
+
+    # hopefully these can be added automatically once I use vim_configurable
     extraPython3Packages = with pkgs.python3Packages;[ pandas jedi ]
       ++ lib.optionals ( pkgs ? python-language-server) [ pkgs.python-language-server ]
       ;
