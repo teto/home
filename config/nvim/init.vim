@@ -364,11 +364,11 @@ Plug 'teto/QuickFixCurrentNumber' " use :Cnr :Cgo instead of :cnext etc...
 Plug 'vim-scripts/ingo-library' " DEPENDANCY of QuickFixCurrentNumber
 "Plug 'tomtom/quickfixsigns_vim'
 Plug 'nacitar/a.vim' " :A
-Plug 'mhinz/vim-rfc', { 'on': 'RFC' }
+Plug 'mhinz/vim-rfc', { 'on': 'RFC' } " requires nokigiri gem
+Plug 'vim-scripts/rfc-syntax', { 'for': 'rfc' } " optional syntax highlighting for RFC files
 " can show a list of unicode characeters, with their name  :UnicodeTable etc...
 " careful maps F4 by default
 Plug 'chrisbra/unicode.vim' " , { 'on': ['<plug>(UnicodeComplete)', '<plug>(UnicodeGA)', 'UnicodeTable'] }
-"Plug 'vim-scripts/rfc-syntax', { 'for': 'rfc' } " optional syntax highlighting for
 Plug 'teto/Modeliner' " <leader>ml to setup buffer modeline
 " This one has bindings mapped to <leader>l
 "Plug 'vimwiki/vimwiki'   " to write notes
