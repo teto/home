@@ -1,5 +1,6 @@
 { pkgs, lib,  ... }:
 
+# nix-shell -p 'python3.withPackages( ps : [ ps.scikitlearn ] )' ~/nixpkgs
 
 let
   includeFzf= let fzfContrib="${pkgs.fzf}/share/fzf"; in ''
@@ -37,7 +38,6 @@ let
     zeal       # doc for developers
     # zotero     # doc software
     # astroid # always compiles webkit so needs 1 full day
-    taiginijisho # japanse dict; like zkanji Qt based
   ];
   desktopPkgs = with pkgs; [
     buku
@@ -53,6 +53,7 @@ let
     scrot
     sxiv
     system_config_printer
+    taiginijisho # japanse dict; like zkanji Qt based
     transmission_gtk
     translate-shell
     w3m # for preview in ranger w3mimgdisplay

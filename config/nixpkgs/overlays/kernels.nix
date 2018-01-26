@@ -112,7 +112,6 @@ in rec {
   # to improve the config
   # make localmodconfig
   # builtins.trace "test"
-  # 
   mptcp93 = super.pkgs.linux_mptcp.override (  {
     kernelPatches=[];
     # maybe that works
@@ -122,7 +121,7 @@ in rec {
 
   });
 
-  # sandbox doesn't like 
+  # sandbox doesn't like
   # in a repl I see mptcp-local.stdenv.hostPlatform.platform
   mptcp-local =
   let
@@ -134,7 +133,7 @@ in rec {
   mptcp93.override ({
       # src= super.lib.cleanSource /home/teto/mptcp;
       # modDirVersion="4.9.60+";
-      modDirVersion="4.9.60-00010-g5a1ca10181c6";
+      # modDirVersion="4.9.60-00010-g5a1ca10181c6";
       name="mptcp-local";
       # TODO testing...
       # hostPlatform=test-localSystem;
@@ -142,6 +141,7 @@ in rec {
       # TODO might need to revisit
       ignoreConfigErrors=true;
       autoModules = false;
+      kernelPreferBuiltin = true;
 
       # configfile = "/home/teto/mptcp/config.tpl";
       # configfilename = /home/teto/dotfiles/kernel_config.mptcp;
