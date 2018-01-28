@@ -32,20 +32,29 @@ let
     libreoffice
     qutebrowser  # keyboard driven fantastic browser
     gnome3.nautilus # demande webkit/todo replace by nemo ?
+    mcomix # manga reader
     mendeley # requiert qtwebengine
     pinta    # photo editing
     qtcreator  # for wireshark
     zeal       # doc for developers
     # zotero     # doc software
+    # wavemon
     # astroid # always compiles webkit so needs 1 full day
+  ];
+  networksPkgs = with pkgs; [
+    aircrack-ng
+    bind # for dig
+    # wireshark # may cause pb because of Qt
   ];
   desktopPkgs = with pkgs; [
     buku
     dropbox
     # feh
+    fileroller # for GUI archive handling
     ffmpegthumbnailer # to preview videos in ranger
     haskellPackages.greenclip # todo get from haskell
     moc
+    # mdp # markdown CLI presenter
     nox
     # gnome3.gnome_control_center
     qtpass
@@ -53,7 +62,7 @@ let
     scrot
     sxiv
     system_config_printer
-    taiginijisho # japanse dict; like zkanji Qt based
+    # taiginijisho # japanse dict; like zkanji Qt based
     transmission_gtk
     translate-shell
     w3m # for preview in ranger w3mimgdisplay
@@ -63,6 +72,7 @@ let
   ];
   devPkgs = with pkgs; [
     ccache
+    diff-so-fancy
     editorconfig-core-c
     exa
     gdb
@@ -98,7 +108,7 @@ let
 in
 rec {
   news.display = "silent";
-  home.packages = desktopPkgs ++ devPkgs ++ imPkgs;
+  home.packages = desktopPkgs ++ devPkgs ++ imPkgs ++ networksPkgs;
 
   home.mailAccounts = [
     {

@@ -64,10 +64,11 @@ rec {
   #   withRuby = false;
   #   });
 
-  neovim-local = self.neovim.overrideAttrs (oldAttrs: {
+  neovim-local = self.neovim-unwrapped.overrideAttrs (oldAttrs: {
 	  name = "neovim-local";
       withPython = false;
       withPython3 = true; # pour les tests ?
+      withRuby = true; # pour les tests ?
       extraPython3Packages = with self.python3Packages;[ pandas python jedi]
       ++ super.stdenv.lib.optionals ( self.pkgs ? python-language-server) [ self.pkgs.python-language-server ]
       ;
@@ -77,15 +78,18 @@ rec {
       meta.priority=0;
 	});
 
-  neovim-master = self.neovim.overrideAttrs (oldAttrs: {
+  neovim-master = self.neovim-unwrapped.overrideAttrs (oldAttrs: {
 	  name = "neovim-master";
 	  version = "nightly";
 
-      src = super.fetchFromGitHub {
-        owner = "neovim";
-        repo = "neovim";
-        rev = "nightly";
-        sha256 = "1a85l83akqr8zjrhl8y8axsjg71g7c8kh4177qdsyfmjkj6siq4c";
+      src = fetchGitHashless {
+        rev = "master";
+        url = "git@github.com:neovim/neovim.git";
+      # src = super.fetchFromGitHub {
+      #   owner = "neovim";
+      #   repo = "neovim";
+      #   rev = "nightly";
+      #   sha256 = "1a85l83akqr8zjrhl8y8axsjg71g7c8kh4177qdsyfmjkj6siq4c";
       };
 
       meta.priority=0;
