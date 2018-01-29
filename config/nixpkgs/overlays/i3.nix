@@ -56,14 +56,6 @@ rec {
    #    propagatedBuildInputs = with self.python3Packages; oldAttrs.propagatedBuildInputs ++ [ pytz ];
 	# });
 
-  # else nixops keeps recompiling it
-  # neovim = super.neovim.override ( {
-  #   vimAlias = false;
-  #   withPython = false;
-  #   withPython3 = true; # pour les tests ?
-  #   withRuby = false;
-  #   });
-
   neovim-local = self.neovim-unwrapped.overrideAttrs (oldAttrs: {
 	  name = "neovim-local";
       withPython = false;
@@ -119,7 +111,6 @@ rec {
     propagatedBuildInputs = with super.pythonPackages; oldAttrs.propagatedBuildInputs ++ [ keyring pygobject3  ];
   });
 
-
   # networkmanager-dev = super.networkmanager.overrideAttrs (oldAttrs: {
   #   # pygobject2
   #   name = "networkmanager-dev";
@@ -127,37 +118,23 @@ rec {
   #   # propagatedBuildInputs = with super.pythonPackages; oldAttrs.propagatedBuildInputs ++ [ keyring pygobject3  ];
   # });
 
-  fcitx-master = super.fcitx.overrideAttrs (oldAttrs: rec {
-    # this one is treacherous see
-    # https://github.com/fcitx/fcitx/issues/367#event-1277674192
-    # eg; it will try to download some files while building
-    # see target spell-en-download
-    version = "master";
-    # src = fetchGitHashless {
-    #   url="git@github.com:fcitx/fcitx5.git";
-    #   rev = "b2143f10426ee5115cfa655abfa497b57c2c0fdb";
-    #   sha256 = "0pf0dvmm0xiyzdhj67wizi7wczm7dvlznn6r9kp10zpy0v7g7gg3";
-      src = super.pkgs.fetchFromGitHub {
-      owner = "fcitx";
-      repo = "fcitx";
-      rev = "master";
-      sha256 = "1j5wqj1zcihf171p3zc8g6sn4xy5jpcxg3wmiqn32cc6226n19kb";
-    };
-    # src = /home/teto/fcitx;
+  # fcitx-master = super.fcitx.overrideAttrs (oldAttrs: rec {
+  #   # https://github.com/fcitx/fcitx/issues/367#event-1277674192
+  #   version = "master";
+  #   # src = fetchGitHashless {
+  #   #   url="git@github.com:fcitx/fcitx5.git";
+  #   #   rev = "b2143f10426ee5115cfa655abfa497b57c2c0fdb";
+  #   #   sha256 = "0pf0dvmm0xiyzdhj67wizi7wczm7dvlznn6r9kp10zpy0v7g7gg3";
+  #     src = super.pkgs.fetchFromGitHub {
+  #     owner = "fcitx";
+  #     repo = "fcitx";
+  #     rev = "master";
+  #     sha256 = "1j5wqj1zcihf171p3zc8g6sn4xy5jpcxg3wmiqn32cc6226n19kb";
+  #   };
+  #   SSL_CERT_FILE="${super.pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
+  # });
 
-    # doxygen for doc 
-    # nativeBuildInputs = oldAttrs.nativeBuildInputs ++  [ super.pkgs.xkeyboard_config super.pkgs.wget super.pkgs.cacert ];
-    # fails when building dbus error :/
-# /tmp/nix-build-fcitx-4.2.9.1.drv-0/fcitx-b2143f10426ee5115cfa655abfa497b57c2c0fdb-src/cmake/fcitx-cmake-helper.sh
-    # SSL_CERT_FILE="${super.pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
-    # extraCmds = ''
-    # export CFLAGS="-D_DEBUG"
-    # '';
-    SSL_CERT_FILE="${super.pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
-
-  });
-
-  vdirsyncer = super.vdirsyncer.overrideAttrs(oldAttrs: rec {
+  vdirsyncer-custom = super.vdirsyncer.overrideAttrs(oldAttrs: rec {
 
 # fetchGitHashless
   # src = super.pkgs.fetchFromGitHub {
@@ -183,25 +160,6 @@ rec {
             [  keyring secretstorage pygobject3 ])
     ++ [ super.pkgs.liboauth super.pkgs.gobjectIntrospection];
   });
-
-  # define it only if ns3 exists
-  # dce = super.stdenv.lib.optional (super.pkgs.ns3 != null) super.callPackage /home/teto/dce { pkgs = super;  };
-
-  # castxml = super.stdenv.lib.optional (!(super.pkgs ? castxml)) super.callPackage ../castxml.nix { pkgs = super.pkgs;  };
-  # xl2tpd = super.xl2tpd.overrideAttrs ( oldAttrs : rec {
-  #   makeFlags = oldAttrs ++ [ "-DUSE_KERNEL" ];
-  # });
-  # castxml = if super?castxml then super.castxml.overrideAttrs (old: {
-
-  #   src = super.fetchFromGitHub {
-  #     repo="castxml";
-  #     owner="teto";
-  #     # branch="nixos";
-  #     rev="801b9528183eb11b8af78ced65a973dc8a2f3922";
-  #     sha256="07w8l8fj10v2dmhb6pix9w1jix1rwk7y10x4mgp3p19g98c69mxb";
-
-  #   };
-  # }) else null;
 
   # nix-shell -p python.pkgs.my_stuff
   python = super.python.override {
@@ -281,13 +239,6 @@ rec {
     tshark = self.pkgs.tshark-local-stable;
     inherit (super) lib;
   };
-
-  # luarocks-perso = super.luarocks.overrideAttrs(old: {
-  #   src=
-
-  # })
-
-
 
   # iperf3_lkl = super.iperf3.overrideAttrs(old: {
   # });

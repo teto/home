@@ -110,12 +110,13 @@ rec {
        enabled = "fcitx";
        fcitx.engines = with pkgs.fcitx-engines; [
          mozc
-         hangul
-         m17n
-         libpinyin
-        chewing
-        unikey
-        anthy
+         # hangul
+         # m17n
+         # libpinyin
+        # chewing
+        # unikey
+        # anthy
+        # cloudpinyin
      ];
      };
 
@@ -152,7 +153,7 @@ rec {
   environment.systemPackages = with pkgs; [
 
     manpages  # because man tcp should always be available
-    strongswan # to get ipsec in path
+    # strongswan # to get ipsec in path
     # luarocks   # for testing luafix
     # wrapProgram $out/bin/dnschain --suffix PATH : ${openssl.bin}/bin
     # cups-pk-helper # to add printer through gnome control center
@@ -220,7 +221,7 @@ rec {
     XDG_CONFIG_HOME="$HOME/.config";
     XDG_CACHE_HOME="$HOME/.cache";
     XDG_DATA_HOME="$HOME/.local/share";
-  # TODO Move to user config aka homemanager
+    # TODO Move to user config aka homemanager
     ZDOTDIR="$XDG_CONFIG_HOME/zsh";
     HISTFILE="$XDG_CACHE_HOME/bash_history";
     LESS=""; # options to pass to less automatically
@@ -254,6 +255,8 @@ rec {
       forwardX11 = true;
       enable = false;
     };
+
+    # just locate
     locate.enable = true;
 
     # dbus.packages = [ ];
@@ -263,9 +266,11 @@ rec {
   # programs.ssh.startAgent = true;
 
   # Enable automatic discovery of the printer (from other linux systems with avahi running)
-  services.avahi.enable = true;
-  services.avahi.publish.enable = true;
-  services.avahi.publish.userServices = true;
+  # services.avahi = {
+  #   enable = true;
+  #   publish.enable = true;
+  #   publish.userServices = true;
+  # };
 
 
   # udisks2 GUI
@@ -334,8 +339,8 @@ rec {
 
   services.strongswan = {
     enable = true;
-    secrets = [ 
-      # "/etc/ipsec.d/*.secrets" "/etc/ipsec.d" 
+    secrets = [
+      # "/etc/ipsec.d/*.secrets" "/etc/ipsec.d"
     ];
   };
 

@@ -19,7 +19,7 @@ application/x-extension-xhtml=firefox.desktop
 application/x-extension-xht=firefox.desktop
 application/pdf=zathura.desktop
 image/png=sxiv.desktop
-text/plain=org.gnome.FileRoller.desktop
+text/plain=sublime_text.desktop
 
 [Added Associations]
 video/x-matroska=vlc.desktop;mpv.desktop;

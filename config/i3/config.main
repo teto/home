@@ -19,6 +19,9 @@ set $launcher "rofi -modi 'run,drun,window,ssh' -show run"
 # Randr:rofi-randr,Monitor:monitor_layout.sh'
 set $greenclip "rofi -modi 'clipboard:greenclip print' -show clipboard"
 
+set $GroupUs Group1
+set $GroupFr Group2
+
 # todo use other mod
 # bindsym $mod+g exec $greenclip
 # bindsym $mod+b exec buku_run
@@ -258,8 +261,9 @@ bindsym $mod+f fullscreen
 bindsym $mod+Shift+f fullscreen global
 
 # change container layout (stacked, tabbed, default)
-bindsym Group1+$mod+ampersand layout toggle
-bindsym Group2+$mod+1 layout toggle
+bindsym $GroupFr+$mod+ampersand layout toggle
+bindsym $GroupUs+$mod+1 layout toggle
+
 #bindsym $mod+s layout stacking
 #bindsym $mod+z layout tabbed
 #bindsym $mod+e layout default
@@ -313,25 +317,25 @@ bindsym $mod+apostrophe mode "programs"
 #bindsym $mod+underscore workspace 8
 #bindsym $mod+ccedilla workspace 9
 #bindsym $mod+agrave workspace 10
-bindsym $mod+a workspace "$w1"
-bindsym $mod+z workspace "$w2"
-bindsym $mod+e workspace "$w3"
-bindsym $mod+q workspace "$w4"
-bindsym $mod+s workspace "$w5"
-bindsym $mod+d workspace "$w6"
-bindsym $mod+w workspace "$w7"
-bindsym $mod+x workspace "$w8"
-bindsym $mod+c workspace "$w9"
+bindsym $GroupFr+$mod+a workspace "$w1"
+bindsym $GroupFr+$mod+z workspace "$w2"
+bindsym $GroupFr+$mod+e workspace "$w3"
+bindsym $GroupFr+$mod+q workspace "$w4"
+bindsym $GroupFr+$mod+s workspace "$w5"
+bindsym $GroupFr+$mod+d workspace "$w6"
+bindsym $GroupFr+$mod+w workspace "$w7"
+bindsym $GroupFr+$mod+x workspace "$w8"
+bindsym $GroupFr+$mod+c workspace "$w9"
 
-bindsym Group2+$mod+q workspace "$w1"
-bindsym Group2+$mod+w workspace "$w2"
-bindsym Group2+$mod+e workspace "$w3"
-bindsym Group2+$mod+a workspace "$w4"
-bindsym Group2+$mod+s workspace "$w5"
-bindsym Group2+$mod+d workspace "$w6"
-bindsym Group2+$mod+z workspace "$w7"
-bindsym Group2+$mod+x workspace "$w8"
-bindsym Group2+$mod+c workspace "$w9"
+bindsym $GroupUs+$mod+q workspace "$w1"
+bindsym $GroupUs+$mod+w workspace "$w2"
+bindsym $GroupUs+$mod+e workspace "$w3"
+bindsym $GroupUs+$mod+a workspace "$w4"
+bindsym $GroupUs+$mod+s workspace "$w5"
+bindsym $GroupUs+$mod+d workspace "$w6"
+bindsym $GroupUs+$mod+z workspace "$w7"
+bindsym $GroupUs+$mod+x workspace "$w8"
+bindsym $GroupUs+$mod+c workspace "$w9"
 # bindcode $mod+24 workspace "$w1"
 # bindcode $mod+25 workspace "$w2"
 # bindcode $mod+26 workspace "$w3"

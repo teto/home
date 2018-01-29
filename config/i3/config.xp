@@ -1,4 +1,4 @@
-# experimental part about 
+# experimental part about
 # Mod4 => window key
 set $mad Super_L
 # Mod4
@@ -12,27 +12,7 @@ set $mad Super_L
 bindsym --release button2 kill
 
 
-# Layouts part 
-
-
-# test
-# bindsym super+right exec "xdotool getactivewindow key -clearmodifiers --window %1 Ctrl+Shit+Tab"
-# bindsym super+left exec "xdotool getactivewindow key -clearmodifiers --window %1 Ctrl+Tab"
-#bindsym control+h exec "xdotool getactivewindow key -clearmodifiers --window %1 BackSpace"
-
-# bindym $mod+shift+b mode border
-# bindsym $mod+shift+q exec dotfiles/bin/i3-list-windows --filter qutebrowser
-
-# for_window [urgent=latest] exec notify-send "Hello world"
-
 # bindsym $mod+shift+e exec /home/teto/i3-easyfocus/easyfocus
-# mode border {
-
-
-hide_edge_borders smart
-
-# bindsym Escape mode "default"
-# }
 
 # The right button toggles floating
 bindsym button3 floating toggle
@@ -42,21 +22,6 @@ bindsym $mod+button3 floating toggle
 bindsym button9 move left
 bindsym button8 move right
 
-#mode xp {
-	#bindsym Mod4+a [con_mark="a"] focus; mode "default";exec notify-send "a focused"; exec $set_mark --unmark
-	#bindsym Mod4+b [con_mark="b"] focus; mode "default";exec notify-send "b focused"; exec $set_mark  --unmark
-	#bindsym Mod4+c [con_mark="c"] focus; mode "default";exec notify-send "c focused"; exec $set_mark  --unmark
-	#bindsym Mod4+d [con_mark="d"] focus; mode "default";exec notify-send "d focused"; exec $set_mark  --unmark
-	#bindsym Mod4+e [con_mark="e"] focus; mode "default";exec notify-send "e focused"; exec $set_mark  --unmark
-	
-	## for some unknown reason, releasing $mad does not always work, especially the first time. 
-	#bindsym --release $mad  exec notify-send "removing mode"; mode "default"; exec $set_mark --unmark
-
-	## keep as backup when 
-	#bindsym Escape mode "default"; exec $set_mark --unmark
-#}
-
-# only available on i3-next
 
 # Tests for title_format
 # give the focused window a prefix
@@ -64,9 +29,4 @@ bindsym button8 move right
 
 for_window [class="^qutebrowser$"] title_format "<span background='blue'>QB</span> %title"
 for_window [class="^Firefox$"] title_format "<span background='#F28559'>FF</span> %title"
-# for_window [title="VIM$"] title_format " %title"
-
-
 for_window [title="Thunderbird$"] title_format " %title"
-# for_window [title="dce"] title_format "<span background='green'>DCE</span> %title"
-#for_window [class="(?i)firefox"] title_format "<span foreground='red'>%title</span>"
