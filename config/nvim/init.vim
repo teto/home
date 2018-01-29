@@ -142,7 +142,6 @@ Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' } " :h Lan
 " Plug 'tjdevries/nvim-langserver-shim' " for LSP
 " Plug 'powerman/vim-plugin-AnsiEsc' " { to hl ESC codes
 " Plug 'git@github.com:junegunn/gv.vim.git' " git commit viewer :Gv
-" Plug 'git@github.com:rhysd/clever-f.vim.git' " use f to repeat search instead of ;
 " Plug 'git@github.com:xolox/vim-easytags.git' "
 " Plug 'mhinz/vim-halo' " to hight cursor line
 Plug 'ludovicchabant/vim-gutentags' " automatic tag generation, very good
@@ -266,9 +265,7 @@ Plug 'mbbill/undotree' " replaces gundo
 " Plug '907th/vim-auto-save' " :h auto-save
 Plug '907th/vim-auto-save' " autosave :h auto-save
 " Plug 'teto/vim-auto-save' " autosave :h auto-save
-" Plug '~/neovim-auto-autoread' " to check for filechanges
-", { 'for': 'python' } "
-" Plug 'bfredl/nvim-miniyank' " killring alike plugin, cycling paste careful
+Plug 'bfredl/nvim-miniyank' " killring alike plugin, cycling paste careful
 " hangs with big strings
 
 " Text objects {{{
@@ -279,9 +276,9 @@ Plug 'tommcdo/vim-kangaroo' "  zp to push/zP to pop the position
 " Plug 'tommcdo/vim-ninja-feet' " care overwrites z]
 " }}}
 " {{{ To ease movements
-Plug 'rhysd/clever-f.vim'
+" Plug 'rhysd/clever-f.vim'
 "Plug 'unblevable/quick-scope'  " highlight characeters to help in f/F moves
-Plug 'Lokaltog/vim-easymotion' " careful overrides <leader><leader> mappings
+" Plug 'Lokaltog/vim-easymotion' " careful overrides <leader><leader> mappings
 "Plug 'wellle/visual-split.vim'
 Plug 'wellle/targets.vim' " Adds new motion targets ci{
 " Plug 'justinmk/vim-ipmotion' " ?
@@ -289,20 +286,14 @@ Plug 'justinmk/vim-sneak' " remaps 's'
 Plug 'tpope/vim-rsi'  " maps readline bindings
 " }}}
 
-"Plug 'fisadev/vim-ctrlp-cmdpalette' " sublime text like palette
-"Plug 'osyo-manga/vim-anzu' " to improve internal search
 Plug 'mhinz/vim-startify' " very popular, vim's homepage
 Plug 'dietsche/vim-lastplace' " restore last cursor postion (is it still needed ?)
 " vim-lastplace to restore cursor position {{{
 let g:lastplace_ignore = "gitcommit,svn"
 " }}}
 " Powerline does not work in neovim hence use vim-airline instead
-"if has('nvim')
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes' " creates problems if not here
-"else
-	"Plug 'Lokaltog/powerline' , {'rtp': 'powerline/bindings/vim/'}
-"endif
 "
 " Text objects {{{
 " Plug 'kana/vim-textobj-fold' " ability to do yaz
@@ -310,7 +301,7 @@ Plug 'vim-airline/vim-airline-themes' " creates problems if not here
 
 "
 Plug 'justinmk/vim-dirvish' " replaces netrw
-" Plug 'justinmk/vim-gtfo' " gfo to open filemanager in cwd
+Plug 'justinmk/vim-gtfo' " gfo to open filemanager in cwd
 Plug 'wannesm/wmgraphviz.vim', {'for': 'dot'} " graphviz syntax highlighting
 Plug 'tpope/vim-commentary' "gcc to comment/gcgc does not work that well
 Plug 'teto/vim-listchars' " to cycle between different list/listchars configurations
