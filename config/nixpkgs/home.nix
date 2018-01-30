@@ -50,12 +50,12 @@ let
     buku
     dropbox
     # feh
-    fileroller # for GUI archive handling
+    gnome3.file-roller # for GUI archive handling
     ffmpegthumbnailer # to preview videos in ranger
     haskellPackages.greenclip # todo get from haskell
     moc
     # mdp # markdown CLI presenter
-    nox
+    nox # helps with reviewing and to install files
     # gnome3.gnome_control_center
     qtpass
     sublime3
@@ -72,7 +72,8 @@ let
   ];
   devPkgs = with pkgs; [
     ccache
-    diff-so-fancy
+    gitAndTools.diff-so-fancy
+    gitAndTools.git-recent
     editorconfig-core-c
     exa
     gdb

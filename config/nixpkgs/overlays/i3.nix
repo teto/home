@@ -70,22 +70,22 @@ rec {
   #     meta.priority=0;
   # });
 
-  neovim-master = self.neovim-unwrapped.overrideAttrs (oldAttrs: {
-	  name = "neovim-master";
-	  version = "nightly";
+  # neovim-master = (self.neovim-unwrapped.overrideAttrs (oldAttrs: {
+	  # name = "neovim-master";
+	  # version = "nightly";
 
-      src = fetchGitHashless {
-        rev = "master";
-        url = "git@github.com:neovim/neovim.git";
-      # src = super.fetchFromGitHub {
-      #   owner = "neovim";
-      #   repo = "neovim";
-      #   rev = "nightly";
-      #   sha256 = "1a85l83akqr8zjrhl8y8axsjg71g7c8kh4177qdsyfmjkj6siq4c";
-      };
+  #     src = fetchGitHashless {
+  #       rev = "master";
+  #       url = "git@github.com:neovim/neovim.git";
+  #     # src = super.fetchFromGitHub {
+  #     #   owner = "neovim";
+  #     #   repo = "neovim";
+  #     #   rev = "nightly";
+  #     #   sha256 = "1a85l83akqr8zjrhl8y8axsjg71g7c8kh4177qdsyfmjkj6siq4c";
+  #     };
 
-      meta.priority=0;
-	});
+  #     meta.priority=0;
+	# })) or null;
 
    yst = super.haskellPackages.yst.overrideAttrs (oldAttrs: {
      jailbreak = true; 
