@@ -112,34 +112,34 @@ mode "monitors" {
 
 mode "focused" {
 
-                # hardcoded focus keybindings
-                bindsym b [class="(?i)firefox"] focus; mode "default"
-                bindsym w [class="(?i)terminal" title="weechat"] focus
-                bindsym m [class="(?i)thunderbird"] focus
-                bindsym f [class="(?i)terminal" title="mc"] focus
-                bindsym z [class="(?i)zathura"] focus
+	# hardcoded focus keybindings
+	bindsym b [class="(?i)firefox"] focus; mode "default"
+	bindsym w [class="(?i)terminal" title="weechat"] focus
+	bindsym m [class="(?i)thunderbird"] focus
+	bindsym f [class="(?i)terminal" title="mc"] focus
+	bindsym z [class="(?i)zathura"] focus
 
-                # keybindings for marking and jumping to clients
-                bindsym a exec i3-input -F 'mark %s' -P 'Mark name: '
-                bindsym g exec i3-input -F '[con_mark=%s] focus' -P 'Go to mark: '
+	# keybindings for marking and jumping to clients
+	bindsym a exec i3-input -F 'mark %s' -P 'Mark name: '
+	bindsym g exec i3-input -F '[con_mark=%s] focus' -P 'Go to mark: '
 
-                # Assign marks to keys 1-5
-                bindsym Shift+1 mark mark1
-                bindsym Shift+2 mark mark2
-                bindsym Shift+3 mark mark3
-                bindsym Shift+4 mark mark4
-                bindsym Shift+5 mark mark5
+	# Assign marks to keys 1-5
+	bindsym Shift+1 mark mark1
+	bindsym Shift+2 mark mark2
+	bindsym Shift+3 mark mark3
+	bindsym Shift+4 mark mark4
+	bindsym Shift+5 mark mark5
 
-               # Jump to clients marked 1-5
-                bindsym 1 [con_mark="mark1"] focus
-                bindsym 2 [con_mark="mark2"] focus
-                bindsym 3 [con_mark="mark3"] focus
-                bindsym 4 [con_mark="mark4"] focus
-                bindsym 5 [con_mark="mark5"] focus
+	# Jump to clients marked 1-5
+	bindsym 1 [con_mark="mark1"] focus
+	bindsym 2 [con_mark="mark2"] focus
+	bindsym 3 [con_mark="mark3"] focus
+	bindsym 4 [con_mark="mark4"] focus
+	bindsym 5 [con_mark="mark5"] focus
 
-                # Exit to the default mode
-                bindsym Return mode "default"
-                bindsym Escape mode "default"
+	# Exit to the default mode
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
 }
 
 bindsym $mod+shift+s sticky toggle
@@ -151,8 +151,6 @@ bindsym $mod+t exec floating toggle
 #bindsym XF86AudioRaiseVolume exec "amixer -q set Master 2dB+ unmute; notify-send Audio Raised volume"
 #bindsym XF86AudioLowerVolume exec "amixer -q set Master 2dB- unmute; notify-send Audio lowered"
 #bindsym XF86AudioMute exec "amixer -q set Master toggle"
-
-
 
 workspace_auto_back_and_forth yes
 # Go into hibernation
@@ -169,27 +167,22 @@ floating_modifier $mod
 
 # start a terminal
 bindsym $mod+Return exec --no-startup-id $term
-# -d "$(
 # bindsym $mod+Shift+Return exec --no-startup-id ~/.i3/fork_term.sh
 # found in https://github.com/schischi/xcwd
 bindsym $mod+Shift+Return exec --no-startup-id $term -d "$(xcwd)"
 
-#i3-sensible-terminal
 
 # Use mod-Control-Up and Down to rotate through the workspace list.
 
-
-
-
-
 # kill focused window
-bindsym $mod+Shift+A kill
+bindsym $GroupFr+$mod+Shift+A kill
+bindsym $GroupUs+$mod+Shift+Q kill
 
 # start dmenu (a program launcher)
 bindsym $mod+Tab exec $launcher
 #bindsym $mod+eacute exec j4-dmenu-desktop --dmenu='rofi -modi "run,ssh,dmenu" -dmenu'
-#dmenu_run -
-bindsym $mod+eacute i3-list-windows
+bindsym $GroupFr+$mod+eacute i3-list-windows
+bindsym $GroupUs+$mod+2 i3-list-windows
 
 no_focus [class="^qutebrowser"]
 
@@ -207,8 +200,8 @@ bindsym $mod+F3 [instance="pad_(?!ncmpcpp)"] move scratchpad; [instance="pad_ncm
 #bindsym $mod+w exec python ~/.i3/runorfocus.py "Firefox" firefox
 
 
-bindsym $mod+oe exec /home/teto/i3-easyfocus/i3-easyfocus
-
+bindsym $GroupFr+$mod+oe exec i3-easyfocus
+# bindsym $GroupUs+$mod+oe exec i3-easyfocus
 bindsym $mod+shift+e exec /home/teto/i3-easyfocus/i3-easyfocus
 
 # This may be slow since script involves a few steps
@@ -238,10 +231,17 @@ bindsym $mod+Right exec /home/teto/bin/i3dispatch right
 #bindsym $mod+Right exec ~/.i3//home/teto/i3dispatch/i3dispatch.py right
 
 # move focused window
-bindsym $mod+Shift+J move left
-bindsym $mod+Shift+K move down
-bindsym $mod+Shift+L move up
-bindsym $mod+Shift+M move right
+bindsym $GroupFr+$mod+Shift+J move left
+bindsym $GroupFr+$mod+Shift+K move down
+bindsym $GroupFr+$mod+Shift+L move up
+bindsym $GroupFr+$mod+Shift+M move right
+
+# move focused window
+bindsym $GroupUs+$mod+Shift+J move left
+bindsym $GroupUs+$mod+Shift+K move down
+bindsym $GroupUs+$mod+Shift+L move up
+bindsym $GroupUs+$mod+Shift+semicolumn right
+
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
@@ -417,8 +417,11 @@ mode "resize" {
         bindsym l resize grow down 10 px or 10 ppt
         bindsym Shift+l resize shrink down 10 px or 10 ppt
 
-        bindsym m resize grow right 10 px or 10 ppt
-        bindsym Shift+m resize shrink right 10 px or 10 ppt
+        bindsym $GroupFr+m resize grow right 10 px or 10 ppt
+        bindsym $GroupFr+Shift+m resize shrink right 10 px or 10 ppt
+
+        bindsym $GroupUs+semicolumn resize grow right 10 px or 10 ppt
+        bindsym $GroupUs+Shift+semicolumn resize shrink right 10 px or 10 ppt
 
         # same bindings, but for the arrow keys
         #bindsym Right resize shrink width 10 px or 10 ppt

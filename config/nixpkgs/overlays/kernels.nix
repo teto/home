@@ -1,5 +1,7 @@
 self: super:
 let
+  # potentially interesting
+  # CONFIG_NLMON is not set
   kvmConfig = ''
       VIRTIO_PCI y
       VIRTIO_PCI_LEGACY y
@@ -132,7 +134,7 @@ in rec {
   in
   mptcp93.override ({
       # src= super.lib.cleanSource /home/teto/mptcp;
-      # modDirVersion="4.9.60+";
+      modDirVersion="4.9.60+";
       # modDirVersion="4.9.60-00010-g5a1ca10181c6";
       name="mptcp-local";
       # TODO testing...
@@ -154,7 +156,7 @@ in rec {
       # };
       enableParallelBuilding=true;
 
-      # extraConfig=mptcpKernelExtraConfig;
+      extraConfig=mptcpKernelExtraConfig;
 
       # if we dont want to have to regenerate it
       # configfile=
