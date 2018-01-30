@@ -215,14 +215,6 @@ rec {
   };
   python3Packages = python3.pkgs;
 
-  # clang = super.clang.overrideAttrs(oldAttrs: {
-  #   doCheck=false;
-  # });
-
-  # llvm_4 = super.clang.overrideAttrs(oldAttrs: {
-  #   doCheck=false;
-  # });
-
   ns-3-perso = if (super.pkgs ? ns-3) then super.ns-3.override {
   #   pkgs = self.pkgs;
     python = self.python3;
