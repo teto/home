@@ -88,6 +88,8 @@ set exrc
 " vim-plug plugin declarations {{{1
 call plug#begin(s:plugdir)
 Plug 'mhinz/vim-signify' " Indicate changed lines within a file using a VCS.
+Plug 'vim-pandoc/vim-pandoc'
+Plug 'vim-pandoc/vim-pandoc-syntax'
 " Plug 'moznion/github-commit-comment.vim' " last update from 2014
 " Plug 'dhruvasagar/vim-open-url' " gB/gW to open browser
 Plug 'Carpetsmoker/xdg_open.vim' " overrides gx
@@ -106,10 +108,10 @@ Plug 'LnL7/vim-nix', {'for': 'nix'}
 " Plug 'gelguy/Cmd2.vim' " test
 Plug 'editorconfig/editorconfig-vim' " not remote but involves python
 " provider
-Plug 'brooth/far.vim' " search and replace across files
+Plug 'brooth/far.vim', { 'on': 'Far'} " search and replace across files
 " needs ruby support, works in recent neovim
 Plug 'junegunn/vim-github-dashboard', { 'do': ':UpdateRemotePlugins' }
-" Plug 'fmoralesc/vim-pad'
+Plug 'fmoralesc/vim-pad' " :Pad new, note taking
 "}}}
 " to test https://github.com/neovim/neovim/issues/3688
 Plug 'haya14busa/incsearch.vim' " just to test
@@ -777,6 +779,10 @@ nnoremap <Leader>w :w<CR>
 
 "nnoremap <F8> :vertical wincmd f<CR> " open file under cursor in a split
 nnoremap <leader>gfs :vertical wincmd f<CR> " open file under cursor in a split
+" vim-pad {{{
+let g:pad#dir=$XDG_DATA_HOME."/notes"
+" let g:pad#rename_files = 0
+"}}}
 " gutentags + gutenhasktags {{{
 let g:gutentags_project_info = [ {'type': 'python', 'file': 'setup.py'},
                                \ {'type': 'ruby', 'file': 'Gemfile'},

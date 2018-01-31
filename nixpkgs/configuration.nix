@@ -469,10 +469,10 @@ rec {
   };
 
   # to load custom kernels ?userNixpkgs
-  nixpkgs.overlays = let p = /home/teto/dotfiles/config/nixpkgs/overlays/kernels.nix;
-  in lib.optionals (builtins.pathExists p) [
-    (import p)
-  ];
+  # nixpkgs.overlays = let p = /home/teto/dotfiles/config/nixpkgs/overlays/kernels.nix;
+  # in lib.optionals (builtins.pathExists p) [
+  #   (import p)
+  # ];
 
   # IRC recommanded to 
     # environment.etc."ipsec.secrets".text = ''
@@ -494,28 +494,28 @@ rec {
   # convert set back to list
 
   # lib.options.mergeDefaultOption
-  nix.buildCores=4;
-  nix.nixPath =
-  [
-    "nixos-config=/home/teto/dotfiles/nixpkgs/configuration.nix"
-     "/nix/var/nix/profiles/per-user/root/channels"
-  ]
-  ++ lib.optionals (builtins.pathExists userNixpkgs)  [ "nixpkgs=${builtins.toString userNixpkgs}" ]
-  ;
-  #  to keep build-time dependencies around => rebuild while being offline
-  # build-use-sandbox = true
-  nix.extraOptions = ''
-    # careful will prevent from fetching local git !
-    build-use-sandbox = true
-    gc-keep-outputs = true
-    gc-keep-derivations = true
-  '';
+  nix = {
+    buildCores=4;
+    nixPath = [
+      "nixos-config=/home/teto/dotfiles/nixpkgs/configuration.nix"
+      "/nix/var/nix/profiles/per-user/root/channels"
+    ]
+    ++ lib.optionals (builtins.pathExists userNixpkgs)  [ "nixpkgs=${builtins.toString userNixpkgs}" ]
+    ;
+    #  to keep build-time dependencies around => rebuild while being offline
+    # build-use-sandbox = true
+    extraOptions = ''
+      # careful will prevent from fetching local git !
+      build-use-sandbox = true
+      gc-keep-outputs = true
+      gc-keep-derivations = true
+    '';
 
-  # either use --option extra-binary-caches http://hydra.nixos.org/
-  # nix.binaryCaches = [ http://hydra.nixos.org/ ];
-
-  # handy to hack/fix around
-  nix.readOnlyStore = false;
+    # either use --option extra-binary-caches http://hydra.nixos.org/
+    # nix.binaryCaches = [ http://hydra.nixos.org/ ];
+    # handy to hack/fix around
+    readOnlyStore = false;
+  };
 
   # to install as a user service
   services.offlineimap.install = true;

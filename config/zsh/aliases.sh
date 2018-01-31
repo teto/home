@@ -19,12 +19,16 @@ alias latest="ls -lt |head"
 
 ### Dictionary lookup {{{
 # local commands
-alias lfren="dict -d fd-fra-eng "
-alias lenfr="dict -d fd-eng-fra "
+# alias lfren="dict -d fd-fra-eng "
+# alias lenfr="dict -d fd-eng-fra "
 
 # for now require an internet access
-alias fren="trans :en "
-alias enfr="trans :fr "
+alias fren="trans -from fr -to en "
+alias enfr="trans -from en -to fr "
+alias jpfr="trans -from jp -to fr "
+alias frjp="trans -from jp -to fr "
+alias jpen="trans -from jp -to en "
+alias enjp="trans -from en -to jp "
 # }}}
 
 ### Git {{{
