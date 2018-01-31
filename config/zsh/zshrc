@@ -183,10 +183,8 @@ add-zsh-hook precmd update_term_title
 # enables autocompletion for apt
 compdef apt=apt-get
 
-# mnual completions
+# manual completions
 . "$ZDOTDIR/git-extras-completion.zsh"
-. "$ZDOTDIR/translate-shell.plugin.zsh"
-# . "$ZDOTDIR/alot-completion.zsh" # this one is buggy
 
 # zsh searches $fpath for completion files
 fpath=( $ZDOTDIR/completions $fpath )
