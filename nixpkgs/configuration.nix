@@ -391,6 +391,12 @@ rec {
     enableCompletion = true;
     shellInit=''
       # set -o vi
+      # what's for already ?
+      # export CONCURRENCY_LEVEL=4
+
+      # check the window size after each command and, if necessary,
+      # update the values of LINES and COLUMNS.
+      shopt -s checkwinsize
     '';
 
   };
