@@ -95,11 +95,13 @@ Plug 'vim-pandoc/vim-pandoc-syntax'
 Plug 'Carpetsmoker/xdg_open.vim' " overrides gx
 Plug 'tweekmonster/nvim-api-viewer', {'on': 'NvimAPI'} " see nvim api
 Plug 'tweekmonster/startuptime.vim', {'on': 'StartupTime'} " see startup time per script
+" Plug 'jamessan/vim-gnupg'
 " Plug 'mattn/gist-vim' " to gist requires webapi
 " provider dependant {{{
 " new deoplete relies on yarp :
+Plug 'AndrewRadev/splitjoin.vim' " gS/gJ to 
 Plug 'Shougo/deoplete.nvim' ", { 'do': ':UpdateRemotePlugins' }
-Plug 'roxma/nvim-yarp'
+Plug 'roxma/nvim-yarp' " required for deoplete
 Plug 'roxma/vim-hug-neovim-rpc'
 " Plug '~/vim-config'
 Plug '~/nvim-palette', { 'do': ':UpdateRemotePlugins' }
@@ -111,7 +113,7 @@ Plug 'editorconfig/editorconfig-vim' " not remote but involves python
 Plug 'brooth/far.vim', { 'on': 'Far'} " search and replace across files
 " needs ruby support, works in recent neovim
 Plug 'junegunn/vim-github-dashboard', { 'do': ':UpdateRemotePlugins' }
-Plug 'fmoralesc/vim-pad' " :Pad new, note taking
+Plug 'fmoralesc/vim-pad', {'branch': 'devel'} " :Pad new, note taking
 "}}}
 " to test https://github.com/neovim/neovim/issues/3688
 Plug 'haya14busa/incsearch.vim' " just to test
@@ -131,9 +133,9 @@ let g:vim_search_pulse_duration = 400
 "}}}
 
 " Plug 'kassio/neoterm' " some kind of REPL
-Plug 'ehamberg/vim-cute-python' " display unicode characters, kinda looks bad on vim grid
+" Plug 'ehamberg/vim-cute-python' " display unicode characters, kinda looks bad on vim grid
 Plug 'dbakker/vim-projectroot' " projectroot#guess()
-Plug 'sunaku/vim-dasht' " get documentation (zeavim is also a contender KabbAmine/zeavim.vim)
+" Plug 'sunaku/vim-dasht' " get documentation (zeavim is also a contender KabbAmine/zeavim.vim)
 " Plug 'git@github.com:reedes/vim-wordy.git' " pdt la these, pr trouver la jargon :Wordy
 " Plug 'sk1418/QFGrep' " Filter quickfix
 " Plug 'git@github.com:pseewald/vim-anyfold.git' " speed up folds processing

@@ -1,0 +1,288 @@
+# sudo nixos-rebuild  -I nixos-config=/home/teto/configuration.nix switch
+#  vim: set et fdm=marker fenc=utf-8 ff=unix sts=2 sw=2 ts=4 :
+# Edit this configuration file to define what should be installed on
+# your system.  Help is available in the configuration.nix(5) man page
+# and in the NixOS manual (accessible by running ‘nixos-help’).
+
+{ config, pkgs, options, lib, ... }:
+
+let
+  userNixpkgs = /home/teto/nixpkgs;
+  fzf = pkgs.fzf;
+in
+rec {
+
+  imports = [
+    # Include the results of the hardware scan.
+      /etc/nixos/hardware-configuration.nix
+    # Not tracked, so doesn't need to go in per-machine subdir
+      ./account-teto.nix
+      # ./mptcp-kernel.nix
+      ./basetools.nix
+    ];
+
+
+  boot.cleanTmpDir = true; # to clean /tmp on reboot
+  # Use the systemd-boot EFI boot loader.
+  # boot.loader ={
+  #   systemd-boot.enable = true;
+  #   efi.canTouchEfiVariables = true; # allows to run $ efi...
+  # # just to generate the entry used by ubuntu's grub
+  # # boot.loader.grub.enable = true;
+  # # boot.loader.grub.version = 2;
+  # # install to none, we just need the generated config
+  # # for ubuntu grub to discover
+  #   grub.device = "/dev/sda";
+  # };
+
+  # see https://github.com/NixOS/nixpkgs/issues/15293
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+  # kernelModules are forcibly loaded C
+  # availableKernelModules are just available, and udev will auto-load them as needed
+  boot.kernelModules = [
+    "af_key" # for ipsec/vpn support
+    "kvm"  # for virtualisation
+     "kvm-intel"
+  ];
+  # TODO boot.supportedFilesystems
+  boot.kernel.sysctl = {
+      # "net.ipv4.tcp_keepalive_time" = 60;
+      # "net.core.rmem_max" = 4194304;
+      # "net.core.wmem_max" = 1048576;
+    };
+  # boot.kernelPackages = pkgs.linuxPackages_mptcp;
+
+  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  networking.networkmanager = {
+    enable = true;
+    # logLevel = WARN;
+    # dispatcherScripts
+    # packages = [];
+  };
+  networking.firewall.checkReversePath = false; # for nixops
+  networking.firewall.allowedUDPPorts = [ 631 ];
+  networking.firewall.allowedTCPPorts = [ 631 ];
+
+
+  # Set your time zone.
+  # time.timeZone = "Europe/Amsterdam";
+  time.timeZone = "Asia/Tokyo";
+
+  environment.systemPackages = with pkgs; [
+    manpages  # because man tcp should always be available
+   ];
+
+   # TODO it appears in /etc/bashrc !
+   environment.shellAliases = {
+      # git variables {{{
+      gl="git log";
+      gs="git status";
+      gd="git diff";
+      ga="git add";
+      gc="git commit";
+      gcm="git commit -m";
+      gca="git commit -a";
+      gb="git branch";
+      gch="git checkout";
+      grv="git remote -v";
+      gpu="git pull";
+      gcl="git clone";
+      gta="git tag -a -m";
+      gbr="git branch";
+      # }}}
+      # nix aliases {{{
+      nxi="nix-env -iA";
+      nxu="nix-env -e";
+      nxs="nix-shell -A";
+      nxp="nixops ";
+      # }}}
+# Mail {{{
+# todo use nix-shell
+#  ml="python2.7 -malot -n ~/.config/notmuch/notmuchrc_pro"
+#  mg="python2.7 -malot -n ~/.config/notmuch/notmuchrc"
+#  astroperso="astroid"
+#  astropro="astroid -c ~/.config/astroid/config_pro"
+# }}}
+
+# lib.escapeShellArg fails
+      nixpaste="curl -F \"text=<-\" http://nixpaste.lbr.uno";
+
+# oftenly used programs {{{
+      v="nvim";
+      c="cat";
+      r="ranger";
+# }}}
+   };
+
+
+  # variables set by PAM
+  environment.sessionVariables = {};
+
+  environment.variables = {
+    EDITOR="nvim";
+    BROWSER="qutebrowser";
+
+    # todo 
+    XDG_CONFIG_HOME="$HOME/.config";
+    XDG_CACHE_HOME="$HOME/.cache";
+    XDG_DATA_HOME="$HOME/.local/share";
+    # TODO Move to user config aka homemanager
+    ZDOTDIR="$XDG_CONFIG_HOME/zsh";
+    HISTFILE="$XDG_CACHE_HOME/bash_history";
+    LESS=""; # options to pass to less automatically
+  };
+  # stick to sh as it's shell independant
+  # load fzf-share
+  environment.extraInit = ''
+    # TODO source fzf
+  '';
+
+  services.openssh = {
+      permitRootLogin = "no";
+      passwordAuthentication = false;
+      forwardX11 = true;
+      enable = false;
+    };
+
+  # security.initialRootPassword = "!";
+  # programs.ssh.startAgent = true;
+
+  # Enable automatic discovery of the printer (from other linux systems with avahi running)
+  # services.avahi = {
+  #   enable = true;
+  #   publish.enable = true;
+  #   publish.userServices = true;
+  # };
+
+
+  # allow-downgrade falls back when dnssec fails, "true" foces dnssec
+  services.resolved.dnssec = "allow-downgrade";
+  services.openntpd = {
+    enable = true;
+    # add iij ntp servers
+    # servers = [ "" ];
+    servers = [ "0.nixos.pool.ntp.org" "1.nixos.pool.ntp.org" "2.nixos.pool.ntp.org" "3.nixos.pool.ntp.org" ];
+  };
+
+  programs.man.enable = true;
+
+  programs.zsh = {
+    enable= true;
+    enableCompletion = true;
+    enableAutosuggestions = true;
+    syntaxHighlighting.enable = false;
+  # programs.zsh.shellAliases
+    shellAliases= environment.shellAliases // {
+      se="sudoedit";
+    # ++ [
+  # alias -s html=qutebrowser
+  # alias -s json=nvim
+  # alias -s Vagrantfile=nvim
+  # alias -s py=python3
+  # alias -s rb=ruby
+  # alias -s png=sxiv
+  # alias -s jpg=xdg-open
+  # alias -s gif=xdg-open
+  # alias -s avi=mpv
+  # alias -s mp3=mocp
+  # alias -s pdf=xdg-open
+  # alias -s doc=xdg-open
+  # alias -s docx=xdg-open
+    };
+    # goes to /etc/zshenv
+  shellInit = ''
+    '';
+
+  # todo make available for zsh too
+  # use FZF_PATH="$(fzf-share)" to do it dynamically
+  interactiveShellInit = ''
+
+    # TODO doesn't work because it s overriden afterwards apparently
+    . "${fzf}/share/fzf/completion.zsh"
+    . "${fzf}/share/fzf/key-bindings.zsh"
+
+  '';
+
+};
+
+  # for nix-shell
+  programs.bash = {
+    enableCompletion = true;
+    shellInit=''
+      # set -o vi
+    '';
+
+  };
+
+
+
+  # use with nix-locate to find a file across packages
+  # DOES NOT EXIST YET :'(
+  # programs.nix-index.enable = true;
+
+  # Define a user account. Don't forget to set a password with ‘passwd’.
+  # per-user package is quite cool too
+  # https://github.com/NixOS/nixpkgs/pull/25712/files
+  users.defaultUserShell = "/run/current-system/sw/bin/zsh";
+  # when set to false, /etc/passwd and /etc/group will be congruent to your NixOS configuration
+  # users.mutableUsers = false;
+
+  # you can use http instead
+  # nix.sshServe = {
+  #   enable  = true;
+  #   keys = [ "ssh-rsa xxx user@host" ];
+  # };
+
+  nixpkgs.config = {
+	allowUnfree = true;
+    permittedInsecurePackages = [
+          # "webkitgtk-2.4.11"
+            ];
+  };
+
+  # to load custom kernels ?userNixpkgs
+  # nixpkgs.overlays = let p = /home/teto/dotfiles/config/nixpkgs/overlays/kernels.nix;
+  # in lib.optionals (builtins.pathExists p) [
+  #   (import p)
+  # ];
+
+  # IRC recommanded to 
+    # environment.etc."ipsec.secrets".text = ''
+    #   # this is checked by l2tp
+    #   include /etc/ipsec.d/*.secrets
+    #   '';
+    #   environment.etc."ipsec.d/stub".text = ''
+    #     stub file to create ipsec.d
+    #   '';
+
+  # # for ppp when it creates its resolv.conf
+  # # maybe it should create it in /var/run
+  # environment.etc."ppp/stub".text = ''
+  # '';
+
+  # options.nix.nixPath.default
+  # todo set it only if path exists
+  #  options.nix.nixPath.default ++ TODO mkMerge/mkBefore etc
+  # convert set back to list
+
+  # lib.options.mergeDefaultOption
+
+  system = {
+    # stateVersion = "17.03"; # why would I want to keep that ?
+    copySystemConfiguration = true;
+    # autoUpgrade = {
+    #   channel= "https://nixos.org/channels/nixpkgs-unstable";
+    #   enable = true;
+    # };
+  };
+  # The NixOS release to be compatible with for stateful data such as databases.
+  # system.stateVersion = "17.03";
+  # literal example
+  # system.requiredKernelConfig = with config.lib.kernelConfig; [
+  #         (isYes "MODULES")
+  #         (isEnabled "FB_CON_DECOR")
+  #         (isEnabled "BLK_DEV_INITRD")
+  #       ]
+
+}
+
