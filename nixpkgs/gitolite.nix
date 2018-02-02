@@ -1,6 +1,6 @@
 { config, pkgs, lib, ... }:
 let
-  secrets = import ./secrets.nix;
+  secrets = import <custom/secrets.nix>;
 in
 {
   # enable gitolite
