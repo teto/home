@@ -137,12 +137,12 @@ rec {
     # TODO source fzf
   '';
 
-  services.openssh = {
-      permitRootLogin = "no";
-      passwordAuthentication = false;
-      forwardX11 = true;
-      enable = false;
-    };
+  # services.openssh = {
+  #     permitRootLogin = "no";
+  #     passwordAuthentication = false;
+  #     forwardX11 = true;
+  #     enable = false;
+  #   };
 
   # security.initialRootPassword = "!";
   # programs.ssh.startAgent = true;
