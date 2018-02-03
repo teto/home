@@ -1,5 +1,5 @@
 # home-manager specific config from
-{ config, lib, touchegg, ... }:
+{ lib, touchegg,  ... }:
 {
   imports = [
     # Include the results of the hardware scan.
@@ -9,12 +9,11 @@
       # symlink towards a config
   ];
 
-
   home.pkgs = [ touchegg ];
   # we want us,fr !
   # home.keyboard.layout = "fr,us";
-  home.keyboard.options = [ 
-    # "grp:caps_toggle" "grp_led:scroll" 
+  home.keyboard.options = [
+    # "grp:caps_toggle" "grp_led:scroll"
   ];
 
   programs.adb.enable = true;

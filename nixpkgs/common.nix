@@ -10,6 +10,17 @@ let
   userNixpkgs = /home/teto/nixpkgs;
   fzf = pkgs.fzf;
 in
+  # Check if custom vars are set
+  # assert mySecrets.user            != "";
+  # assert mySecrets.passwd          != "";
+  # assert mySecrets.hashedpasswd    != "";
+  # assert mySecrets.cifs            != "";
+  # assert mySecrets.hostname        != "";
+  # assert mySecrets.smbhome         != "";
+  # assert mySecrets.smboffice       != "";
+  # assert mySecrets.ibsuser         != "";
+  # assert mySecrets.ibspass         != "";
+  # assert mySecrets.ibsip != "";
 rec {
 
   imports = [

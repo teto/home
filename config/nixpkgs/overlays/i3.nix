@@ -73,7 +73,6 @@ rec {
   # neovim-master = (self.neovim-unwrapped.overrideAttrs (oldAttrs: {
 	  # name = "neovim-master";
 	  # version = "nightly";
-
   #     src = fetchGitHashless {
   #       rev = "master";
   #       url = "git@github.com:neovim/neovim.git";
@@ -88,7 +87,7 @@ rec {
 	# })) or null;
 
    yst = super.haskellPackages.yst.overrideAttrs (oldAttrs: {
-     jailbreak = true; 
+     jailbreak = true;
      # name = "yst";
       # src = super.fetchFromGitHub {
       #   owner = "jgm";

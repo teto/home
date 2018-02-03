@@ -1,1 +1,0 @@
-/home/teto/dotfiles/nixpkgs/configuration-xps.nix
