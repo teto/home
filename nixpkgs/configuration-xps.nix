@@ -158,10 +158,11 @@ let
   programs.wireshark.enable = true; # installs setuid
   programs.wireshark.package = pkgs.wireshark; # which one
 
+  # services.xserver.xrandrHeads = ;
 
   # seemingly working for chromium only, check for firefox
   programs.browserpass.enable = true;
 
-   # let's be fucking crazy
-   environment.enableDebugInfo = true;
+  # let's be fucking crazy
+  environment.enableDebugInfo = true;
 }

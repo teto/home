@@ -4,11 +4,13 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, options, lib, ... }:
+{ config, pkgs, options, lib, ... } @ mainArgs:
 
 let
   userNixpkgs = /home/teto/nixpkgs;
   fzf = pkgs.fzf;
+  load-packages = file:
+    import file (removeAttrs mainArgs [ "config" ]);
 in
   # Check if custom vars are set
   # assert mySecrets.user            != "";
@@ -22,6 +24,21 @@ in
   # assert mySecrets.ibspass         != "";
   # assert mySecrets.ibsip != "";
 rec {
+  # environment.systemPackages = with pkgs; 
+  # let neovim-custom = neovim.override {
+  #      configure = {
+  #        customRC = ''
+  #         # here your custom configuration goes!
+  #        '';
+  #        # packages.myVimPackage = with pkgs.vimPlugins; {
+  #        #   # see examples below how to use custom packages
+  #        #   # loaded on launch
+  #        #   start = [ fugitive ];
+  #        #   # manually loadable by calling `:packadd $plugin-name`
+  #        #   opt = [ ];
+  #        # };
+  #      };
+  #    }; in
 
   imports = [
     # Include the results of the hardware scan.
@@ -29,8 +46,7 @@ rec {
     # Not tracked, so doesn't need to go in per-machine subdir
       ./account-teto.nix
       # ./mptcp-kernel.nix
-      ./basetools.nix
-    ];
+  ];
 
 
   boot.cleanTmpDir = true; # to clean /tmp on reboot
@@ -81,7 +97,9 @@ rec {
 
   environment.systemPackages = with pkgs; [
     manpages  # because man tcp should always be available
-   ];
+  ]
+  # ++ (load-packages ./basetools.nix)
+  ;
 
    # TODO it appears in /etc/bashrc !
    environment.shellAliases = {
