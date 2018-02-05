@@ -8,7 +8,7 @@
 	 # shell = pkgs.zsh;
      # TODO import it from desktopPkgs for instance ?
      # import basetools
-     openssh.authorizedKeys.keyFiles = [ "keys/root_gitolite.pub" ];
+     openssh.authorizedKeys.keyFiles = [ ./keys/root_gitolite.pub ];
   };
 }
 

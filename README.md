@@ -61,6 +61,7 @@ Install on nixos
 Nixos.org is a tough but really cool distribution that I've adopted.
 You need to symlink nixpkgs/configuration.nix and config/nixpkgs/home.nix.
 
+Use rsync to download ./secrets
 
 $ git clone https://github.com/teto/home.git dotfiles
 $ make nixpkgs
