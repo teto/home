@@ -1,12 +1,15 @@
 { config, pkgs, lib, ... }:
 let
-  secrets = import <custom>/secrets.nix;
+  secrets = import ./secrets.nix;
 in
 {
 
   imports =
     [ # Include the results of the hardware scan.
       /etc/nixos/hardware-configuration.nix
+      ./common.nix
+      ./openssh.nix
+      ./account-root.nix
     ];
 
   boot.loader.grub.enable = true;

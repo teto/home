@@ -1,5 +1,11 @@
 { config, pkgs, options, lib, ... }:
 {
+  imports = [
+
+    ./extraTools.nix
+    # ./desktopPkgs.nix
+  ];
+
   users.extraUsers.teto = {
      isNormalUser = true; # creates home/ sets default shell
      uid = 1000;
@@ -17,8 +23,13 @@
      initialPassword = "test";
 	 shell = pkgs.zsh;
      # TODO import it from desktopPkgs for instance ?
-     packages = [
-       pkgs.termite pkgs.sxiv
-     ];
+     # import basetools
+     # packages = with pkgs; [
+     #   (import ./extraTools.nix)
+     #   # termite sxiv
+     # ];
+
+     openssh.authorizedKeys.keyFiles = [ "keys/iij_rsa.pub" ];
+     # openssh.authorizedKeys.keys = 
   };
 }

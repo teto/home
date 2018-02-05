@@ -243,19 +243,6 @@ rec {
 
   };
 
-
-
-  # use with nix-locate to find a file across packages
-  # DOES NOT EXIST YET :'(
-  # programs.nix-index.enable = true;
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  # per-user package is quite cool too
-  # https://github.com/NixOS/nixpkgs/pull/25712/files
-  users.defaultUserShell = "/run/current-system/sw/bin/zsh";
-  # when set to false, /etc/passwd and /etc/group will be congruent to your NixOS configuration
-  # users.mutableUsers = false;
-
   # you can use http instead
   # nix.sshServe = {
   #   enable  = true;
@@ -275,19 +262,6 @@ rec {
   #   (import p)
   # ];
 
-  # IRC recommanded to 
-    # environment.etc."ipsec.secrets".text = ''
-    #   # this is checked by l2tp
-    #   include /etc/ipsec.d/*.secrets
-    #   '';
-    #   environment.etc."ipsec.d/stub".text = ''
-    #     stub file to create ipsec.d
-    #   '';
-
-  # # for ppp when it creates its resolv.conf
-  # # maybe it should create it in /var/run
-  # environment.etc."ppp/stub".text = ''
-  # '';
 
   # options.nix.nixPath.default
   # todo set it only if path exists

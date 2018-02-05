@@ -18,8 +18,8 @@ with pkgs; [
      gnum4 # hum
      gnupg
      gnumake
-     ipsecTools # does it provide ipsec ?
-     neovim-custom
+     # ipsecTools # does it provide ipsec ?
+     # neovim-custom # TODO remake a custom one
      pkgconfig
      pstree
      ranger

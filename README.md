@@ -8,29 +8,30 @@ This folder contains my customizations for:
 * [buku](https://github.com/jarun/Buku): a cli bookmark manager
 * clerk (to control mpd via rofi)
 * font handling
-* fcitx (input method mechanims)
+* [fcitx]() (input method mechanims)
 * git (Source control)
 * greenclip (clipboard history, works with rofi, contender of roficlip)
+* [home-manager]()
 * htop
-* [i3](i3wm.org), a great if not the best tiling window manager)
-* i3pystatus (generates a status line for i3bar)
-* khard (a carddav CLI)
-* khal (a calendar CLI)
+* [i3](www.i3wm.org), a great if not the best tiling window manager)
+* [i3pystatus](https://github.com/) (generates a status line for i3bar)
+* [khard](https://github.com/pimutils/khard) (a carddav CLI)
+* [khal](https://github.com/pimutils/khal) (a calendar CLI)
 * liquidprompt (a script to make your prompt adapt to the current context)
 * mpd (configuration files to run this music server as a user)
 * msmtp (MSA: Mail Sending Agent)
 * mutt / mutt-kz (Mail User Agent, incomplete config)
 * ncmpcpp (mpd console player)
-* neovim (fork of vim)
+* [neovim](https://github.com/neovim/neovim) (fork of vim)
 * netrc (template only, password database)
-* newbeuter (RSS reader)
-* notmuch (to tag mails)
+* newboat (RSS reader, fork of newsbeuter)
+* [notmuch](www.notmuch.org) (to tag mails)
 * offlineimap (MRA: Mail Retriever Agent)
 * powerline (to generate a fancy prompt)
 * procmail
 * [qutebrowser](www.qutebrowser.org) (vim like browser)
-* ranger (CLI file explorer)
-* rofi (a dmenu-like interactive prompt, works with clerk/i3 etc...)
+* [ranger](https://github.com/ranger/ranger) (CLI file explorer)
+* [rofi](https://github.com/DaveDavenport/rofi) (a dmenu-like interactive prompt, works with clerk/i3 etc...)
 * sxiv (image viewer)
 * termite (a modal terminal)
 * tig (a git history reader)
@@ -58,8 +59,8 @@ Same for the "etc" folder that reminds you of some interesting configurations fo
 Install on nixos
 ====
 Nixos.org is a tough but really cool distribution that I've adopted.
-The goal is to have nix bootstrap the config.
-For now it mostly boostrap the system part.
+You need to symlink nixpkgs/configuration.nix and config/nixpkgs/home.nix.
+
 
 $ git clone https://github.com/teto/home.git dotfiles
 $ make nixpkgs

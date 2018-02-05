@@ -11,12 +11,6 @@ in
 
 
  # type = types.enum ["yes" "without-password" "prohibit-password" "forced-commands-only" "no"];
-  services.openssh = {
-    permitRootLogin = "no";
-    passwordAuthentication = false;
-    forwardX11 = true;
-    enable = false;
-  };
 
   boot.loader.grub.enable = true;
   boot.loader.grub.version = 2;

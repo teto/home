@@ -12,8 +12,9 @@ let
     ./xserver.nix
     ./libvirtd.nix
 
+    # for user teto
     ./extraTools.nix
-    ./desktopPkgs.nix
+    # ./desktopPkgs.nix
   ];
 
   boot.loader ={
@@ -66,10 +67,11 @@ let
     # dbus.packages = [ ];
   };
 
-  environment.systemPackages = with pkgs; [
+  environment.systemPackages = with pkgs; 
+    (import ./basetools.nix { inherit pkgs;})
     # strongswan # to get ipsec in path
     # cups-pk-helper # to add printer through gnome control center
-  ];
+  ;
 
   # Select internationalisation properties.
   i18n = {
@@ -162,6 +164,20 @@ let
 
   # seemingly working for chromium only, check for firefox
   programs.browserpass.enable = true;
+
+  # use with nix-locate to find a file across packages
+  # DOES NOT EXIST YET :'(
+  # programs.nix-index.enable = true;
+
+  # Define a user account. Don't forget to set a password with ‘passwd’.
+  # per-user package is quite cool too
+  # https://github.com/NixOS/nixpkgs/pull/25712/files
+  # This can be either a full system path or a shell package
+  # "/run/current-system/sw/bin/zsh"
+  users.defaultUserShell = pkgs.zsh;
+
+  # when set to false, /etc/passwd and /etc/group will be congruent to your NixOS configuration
+  # users.mutableUsers = false;
 
   # let's be fucking crazy
   environment.enableDebugInfo = true;

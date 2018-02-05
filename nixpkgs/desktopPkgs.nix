@@ -1,6 +1,5 @@
-{ pkgs ? import <nixpkgs> }:
-{
-desktop = with pkgs; [
+{ pkgs, ... }:
+with pkgs; [
           buku
           dropbox
           haskellPackages.greenclip # todo get from haskell
@@ -17,5 +16,4 @@ desktop = with pkgs; [
           zotero
           qtcreator
           zeal
-];
-}
+]
