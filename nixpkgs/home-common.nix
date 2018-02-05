@@ -137,9 +137,26 @@ rec {
   #   ];
   # };
 
-  # programs.rofi = {
-  #   enable = true;
-  # };
+  programs.rofi = {
+    enable = true;
+    terminal = "${pkgs.termite}/bin/termite";
+    # rofi.font: SourceCodePro 9
+    # font = 
+    extraConfig=''
+      !Means it is at center
+      rofi.loc: 0
+      !rofi.opacity: 90
+      !rofi.width: 50
+      rofi.columns: 1
+      rofi.fuzzy: true
+      rofi.modi:       run,DRun,window,ssh,Layouts:/home/teto/.i3/list_layouts.sh
+      /* see to integrate teiler */
+      rofi.sidebar-mode: true
+
+      rofi.kb-mode-previous: Alt+Left
+      rofi.kb-mode-next:	Alt+Right,Alt+Tab
+    '';
+  };
 
   # TODO doesn't find ZDOTDIR (yet)
   # TODO maybe we can add to PATH 
@@ -177,7 +194,6 @@ rec {
     path =  "/home/teto/dotfiles/home-manager";
   };
 
-  # programs.termite
   xdg = {
     enable = true;
     configFile."nvim/toto".text = ''

@@ -8,6 +8,10 @@ let
   in
 {
   imports = [
+    # todo renommer en workstation
+    # ./hardware-dell.nix
+    /etc/nixos/hardware-configuration.nix
+
     ./common.nix
     ./xserver.nix
     ./libvirtd.nix
@@ -28,6 +32,11 @@ let
   # for ubuntu grub to discover
     grub.device = "/dev/sda";
   };
+
+  boot.kernelModules = [
+    "af_key" # for ipsec/vpn support
+    "kvm" "kvm-intel" # for virtualisation
+  ];
 
   networking.hostName = "jedha"; # Define your hostname.
   networking.networkmanager.enableStrongSwan = true;

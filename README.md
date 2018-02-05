@@ -33,7 +33,7 @@ This folder contains my customizations for:
 * [ranger](https://github.com/ranger/ranger) (CLI file explorer)
 * [rofi](https://github.com/DaveDavenport/rofi) (a dmenu-like interactive prompt, works with clerk/i3 etc...)
 * sxiv (image viewer)
-* termite (a modal terminal)
+* [termite](https://github.com/thestinger/termite) (a modal terminal)
 * tig (a git history reader)
 * tmux (terminal multiplexer)
 * vifm (ranger-like, file explorer)

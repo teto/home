@@ -2,15 +2,15 @@
 { lib, pkgs,  ... }:
 {
   imports = [
-    # Include the results of the hardware scan.
     # Not tracked, so doesn't need to go in per-machine subdir
       ./home-common.nix
       # ./mptcp-kernel.nix
       # symlink towards a config
   ];
 
-  home.packages = [
-    pkgs.touchegg
+  home.packages = with pkgs; [
+    touchegg
+    rofi
   ];
   # we want us,fr !
   # home.keyboard.layout = "fr,us";

@@ -41,9 +41,6 @@ rec {
   #    }; in
 
   imports = [
-    # Include the results of the hardware scan.
-      /etc/nixos/hardware-configuration.nix
-    # Not tracked, so doesn't need to go in per-machine subdir
       ./account-teto.nix
       # ./mptcp-kernel.nix
   ];
@@ -67,9 +64,9 @@ rec {
   # kernelModules are forcibly loaded C
   # availableKernelModules are just available, and udev will auto-load them as needed
   boot.kernelModules = [
-    "af_key" # for ipsec/vpn support
-    "kvm"  # for virtualisation
-     "kvm-intel"
+    # "af_key" # for ipsec/vpn support
+    # "kvm"  # for virtualisation
+    #  "kvm-intel"
   ];
   # TODO boot.supportedFilesystems
   boot.kernel.sysctl = {

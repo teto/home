@@ -6,7 +6,7 @@ in
 
   imports =
     [ # Include the results of the hardware scan.
-      /etc/nixos/hardware-configuration.nix
+      ./hardware-iij-mptcp.nix
       ./common.nix
       ./openssh.nix
       ./account-root.nix

@@ -1,5 +1,9 @@
-{ config, lib,  ... }:
+{ config, lib,  pkgs, ... }:
 {
+
+  environment.systemPackages = with pkgs; [
+    termite
+  ];
 
   # Enable the X11 windowing system.
   services.xserver = {
