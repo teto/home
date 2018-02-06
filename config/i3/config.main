@@ -175,8 +175,8 @@ bindsym $mod+Shift+Return exec --no-startup-id $term -d "$(xcwd)"
 # Use mod-Control-Up and Down to rotate through the workspace list.
 
 # kill focused window
-bindsym $GroupFr+$mod+Shift+A kill
-bindsym $GroupUs+$mod+Shift+Q kill
+# bindsym $GroupFr+$mod+Shift+A kill
+# bindsym $GroupUs+$mod+Shift+Q kill
 
 # start dmenu (a program launcher)
 bindsym $mod+Tab exec $launcher

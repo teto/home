@@ -435,6 +435,8 @@ keybindings = let mad="Mod4"; mod="Mod1";
   # XF86AudioRaiseVolume=if home.packages ?  exec amixer -q set Master 2dB+ unmute; exec notify-send "Audio Raised volume"
   # XF86AudioLowerVolume exec amixer -q set Master 2dB- unmute; exec notify-send Audio lowered
   # XF86AudioMute exec amixer -q set Master toggle; exec notify-send "Mute toggle"
+      "$GroupFr+$mod+apostrophe"="kill";
+      "$GroupUs+$mod+4"="kill";
         "XF86AudioRaiseVolume"="exec --no-startup-id pactl set-sink-volume 0 +5%;exec notify-send 'Audio Raised volume'";
         "XF86AudioLowerVolume"="exec --no-startup-id pactl set-sink-volume 0 -5%;exec notify-send 'Audio lowered'";
         "XF86AudioMute"="exec --no-startup-id pactl set-sink-mute 0 toggle;";

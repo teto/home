@@ -10,6 +10,10 @@ in
   ];
 
 
+  environment.systemPackages = with pkgs; [
+    tmux
+    weechat
+  ];
  # type = types.enum ["yes" "without-password" "prohibit-password" "forced-commands-only" "no"];
 
   boot.loader.grub.enable = true;

@@ -88,7 +88,7 @@ set exrc
 " vim-plug plugin declarations {{{1
 call plug#begin(s:plugdir)
 Plug 'mhinz/vim-signify' " Indicate changed lines within a file using a VCS.
-Plug 'vim-pandoc/vim-pandoc'
+" Plug 'vim-pandoc/vim-pandoc'
 Plug 'vim-pandoc/vim-pandoc-syntax'
 " Plug 'moznion/github-commit-comment.vim' " last update from 2014
 " Plug 'dhruvasagar/vim-open-url' " gB/gW to open browser

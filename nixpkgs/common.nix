@@ -163,15 +163,7 @@ rec {
     # TODO source fzf
   '';
 
-  # services.openssh = {
-  #     permitRootLogin = "no";
-  #     passwordAuthentication = false;
-  #     forwardX11 = true;
-  #     enable = false;
-  #   };
-
   # security.initialRootPassword = "!";
-  # programs.ssh.startAgent = true;
 
   # Enable automatic discovery of the printer (from other linux systems with avahi running)
   # services.avahi = {
@@ -253,19 +245,12 @@ rec {
             ];
   };
 
-  # to load custom kernels ?userNixpkgs
-  # nixpkgs.overlays = let p = /home/teto/dotfiles/config/nixpkgs/overlays/kernels.nix;
-  # in lib.optionals (builtins.pathExists p) [
-  #   (import p)
-  # ];
-
+  environment.etc."inputrc".source = ../config/inputrc;
 
   # options.nix.nixPath.default
   # todo set it only if path exists
   #  options.nix.nixPath.default ++ TODO mkMerge/mkBefore etc
   # convert set back to list
-
-  # lib.options.mergeDefaultOption
 
   system = {
     # stateVersion = "17.03"; # why would I want to keep that ?
