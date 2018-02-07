@@ -1,7 +1,7 @@
 # https://wiki.archlinux.org/index.php/readline
 set editing-mode vi
-$include /etc/inputrc
 
+# include /etc/inputrc when from user file
 # history-search-backward
 # these are for vi-command mode
 set keymap vi-command

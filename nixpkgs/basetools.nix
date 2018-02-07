@@ -22,12 +22,13 @@ with pkgs; [
      # neovim-custom # TODO remake a custom one
      pkgconfig
      pstree
-     ranger
+     # ranger
      ripgrep
      stow
      sudo
      tig
 	 unzip
+     vifm
      vim
      wget
      zsh

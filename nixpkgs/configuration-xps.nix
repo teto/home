@@ -182,12 +182,12 @@ let
   # per-user package is quite cool too
   # https://github.com/NixOS/nixpkgs/pull/25712/files
   # This can be either a full system path or a shell package
-  # "/run/current-system/sw/bin/zsh"
+  # users.defaultUserShell = "/run/current-system/sw/bin/zsh";
   users.defaultUserShell = pkgs.zsh;
 
   # when set to false, /etc/passwd and /etc/group will be congruent to your NixOS configuration
   # users.mutableUsers = false;
 
   # let's be fucking crazy
-  environment.enableDebugInfo = true;
+  # environment.enableDebugInfo = true;
 }

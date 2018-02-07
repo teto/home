@@ -45,16 +45,19 @@ let
   networksPkgs = with pkgs; [
     aircrack-ng
     bind # for dig
+    gnome3.networkmanagerapplet
     # wireshark # may cause pb because of Qt
   ];
   desktopPkgs = with pkgs; [
     buku
     dropbox
     # feh
+    evince # succeed where zathura/mupdf fail
     gnome3.file-roller # for GUI archive handling
     ffmpegthumbnailer # to preview videos in ranger
     haskellPackages.greenclip # todo get from haskell
     moc
+    mupdf # evince does better too
     # mdp # markdown CLI presenter
     nox # helps with reviewing and to install files
     # gnome3.gnome_control_center
@@ -63,6 +66,7 @@ let
     scrot
     sxiv
     system_config_printer
+    shared_mime_info # temporary fix for nautilus to find the correct files
     # taiginijisho # japanse dict; like zkanji Qt based
     transmission_gtk
     translate-shell
@@ -110,7 +114,10 @@ let
 in
 rec {
   news.display = "silent";
-  home.packages = desktopPkgs ++ devPkgs ++ imPkgs ++ networksPkgs;
+  home.packages = desktopPkgs ++ devPkgs ++ imPkgs ++ networksPkgs ++ [
+    pkgs.ranger
+    pkgs.vifm
+  ];
 
 
   # you can switch from cli with xkb-switch

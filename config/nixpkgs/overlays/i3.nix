@@ -56,6 +56,7 @@ rec {
    #    propagatedBuildInputs = with self.python3Packages; oldAttrs.propagatedBuildInputs ++ [ pytz ];
 	# });
 
+  ranger = super.ranger.override ( { pythonPackages=super.python3Packages; });
 
    yst = super.haskellPackages.yst.overrideAttrs (oldAttrs: {
      jailbreak = true;
