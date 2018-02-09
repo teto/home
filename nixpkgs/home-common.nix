@@ -73,6 +73,7 @@ let
     w3m # for preview in ranger w3mimgdisplay
     xorg.xev
     xclip
+    xcwd
     zathura
   ];
   devPkgs = with pkgs; [

@@ -49,10 +49,14 @@ in
   tshark-local-stable = self.tshark-local.overrideAttrs (oldAttrs: {
     # pygobject2
     name = "tshark-local-stable";
-    src = super.pkgs.fetchgit {
-      url = wiresharkFolder;
-      rev = "mptcp_reinject_stable";
-      sha256 = "0pbmdwphmz4c6g9rvi58kmjhkvhy5ys5y8dzl2cfh8w00jc62cn0";
+    src = self.fetchFromGitHub {
+      # name = "tshark_local_stable_src";
+      # url = filter-cmake wiresharkFolder;
+      repo="wireshark";
+      owner="teto";
+      rev = "reinject_stable";
+      # rev = "mptcp_reinject_stable";
+      sha256 = "10l3yhvvdpn65la4464zz8bc960y72swvcgwps05d4v9lkxyjy50";
     };
   });
 

@@ -77,12 +77,6 @@ rec {
   # boot.kernelPackages = pkgs.linuxPackages_mptcp;
 
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  networking.networkmanager = {
-    enable = true;
-    # logLevel = WARN;
-    # dispatcherScripts
-    # packages = [];
-  };
   networking.firewall.checkReversePath = false; # for nixops
   networking.firewall.allowedUDPPorts = [ 631 ];
   networking.firewall.allowedTCPPorts = [ 631 ];
