@@ -12,7 +12,7 @@
      extraGroups = [
        "audio" # for pulseaudio 
        "wheel" # for sudo
-       "networkmanager"
+       "networkmanager" # not necessary for nixpos
        "libvirtd" # for nixops
        "adbusers" # for android tools
        "wireshark"

@@ -8,17 +8,6 @@ let
 
   fetchgitLocal = super.fetchgitLocal;
 
-  fetchGitHashless = args: super.stdenv.lib.overrideDerivation
-    # Use a dummy hash, to appease fetchgit's assertions
-    (super.fetchgit (args // { sha256 = super.hashString "sha256" args.url; }))
-
-    # Remove the hash-checking
-    (old: {
-      outputHash     = null;
-      outputHashAlgo = null;
-      outputHashMode = null;
-      sha256         = null;
-    });
 
 
   # Get the commit ID for the given ref in the given repo
@@ -42,6 +31,18 @@ let
   #   fetchGitHashless (removeAttrs (args // { inherit rev; }) [ "ref" ]);
 in
 rec {
+
+  fetchGitHashless = args: super.stdenv.lib.overrideDerivation
+    # Use a dummy hash, to appease fetchgit's assertions
+    (super.fetchgit (args // { sha256 = super.hashString "sha256" args.url; }))
+    # Remove the hash-checking
+    (old: {
+      outputHash     = null;
+      outputHashAlgo = null;
+      outputHashMode = null;
+      sha256         = null;
+    });
+
   i3-local = let i3path = ~/i3; in 
   if (builtins.pathExists i3path) then
     super.i3.overrideAttrs (oldAttrs: {
@@ -142,12 +143,10 @@ rec {
         # pkgs = super.pkgs;
         # pythonPackages = self.pkgs.python3Packages;
         pygccxml = python-super.pythonPackages.pygccxml.overrideAttrs (oldAttrs: {
-          # src=fetchGitHashless {
-          #   url=file:///home/teto/pygccxml;
-          # };
-
           src=/home/teto/pygccxml;
         });
+
+
         # pandas = super.pkgs.pythonPackages.pandas.overrideAttrs {
         #   doCheck = false;
         # };
@@ -171,6 +170,11 @@ rec {
 
           src=/home/teto/pygccxml;
         });
+
+        # TODO write a nix-shell instead
+        # protocol = pythonsuper.protocol.overrideAttrs (oldAttrs: {
+        #   src=/home/teto/protocol;
+        # });
 
         pelican = pythonsuper.pelican.overrideAttrs (oldAttrs: {
           # src=fetchGitHashless {
@@ -197,16 +201,16 @@ rec {
   } else null;
 
   # pkgs = super.pkgs;
-  mptcpanalyzer = super.callPackage ../mptcpanalyzer.nix {
-    inherit (super.python3Packages) buildPythonApplication pandas cmd2 pyperclip matplotlib pyqt5 stevedore;
+  mptcpanalyzer = super.python3Packages.callPackage ../mptcpanalyzer.nix {
+    # inherit (super.python3Packages) buildPythonApplication pandas cmd2 pyperclip matplotlib pyqt5 stevedore;
     tshark = self.pkgs.tshark-local-stable;
     inherit (super) lib;
   };
 
   # to help debug a neovim crash
-  unibilium = super.unibilium.overrideAttrs (old: {
-    separateDebugInfo = true;
-  });
+  # unibilium = super.unibilium.overrideAttrs (old: {
+  #   separateDebugInfo = true;
+  # });
   # iperf3_lkl = super.iperf3.overrideAttrs(old: {
   # });
 }
