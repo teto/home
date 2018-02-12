@@ -324,7 +324,17 @@ rec {
     enable = true;
     extraConfig = i3extraConfig;
     config = {
-      bars = [];
+      bars = let
+        i3pystatus-custom = pkgs.i3pystatus.overrideAttrs (oldAttrs: {
+      propagatedBuildInputs = with pkgs.python3Packages; oldAttrs.propagatedBuildInputs ++ [ pytz ];
+	});
+    in [
+        {
+          position="top";
+          workspaceButtons=true;
+          statusCommand="${i3pystatus-custom}/bin/i3pystatus-python-interpreter $XDG_CONFIG_HOME/i3/myStatus.py";
+        }
+      ];
       keycodebindings= { };
       startup=[
         # TODO improve config/config specific
@@ -370,6 +380,12 @@ rec {
         // move_to_output "down" "down" "down"
         // move_to_output "down" "l" "l"
         ;
+        # mouse= {
+	# bindsym $mod+Left exec	$(xdotool mousemove_relative --sync -- -15 0)
+	# bindsym $mod+Right exec $(xdotool mousemove_relative --sync -- 15 0)
+	# bindsym $mod+Down exec  $(xdotool mousemove_relative --sync -- 0 15)
+	# bindsym $mod+Up   exec  $(xdotool mousemove_relative --sync -- 0 -15)
+  # }
 
           # resize ..." 
       };
@@ -394,7 +410,7 @@ keybindings = let mad="Mod4"; mod="Mod1";
         # todo use i3lock-fancy instead
         "${mod}+Ctrl+L"="exec ${pkgs.i3lock-fancy}/bin/i3lock";
         "${mad}+h"="rofi -modi 'clipboard:greenclip print' -show clipboard";
-
+        "${mod}+shift+n"="exec ${pkgs.gnome3.nautilus}/bin/nautilus";
 # set $greenclip "rofi -modi 'clipboard:greenclip print' -show clipboard"
 #       bindsym $mad+h exec $greenclip
         # TODO let i3dispatch

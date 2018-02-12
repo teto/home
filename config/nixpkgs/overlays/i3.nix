@@ -51,11 +51,11 @@ rec {
     })
     else null;
 
-   # i3pystatus-local = super.i3pystatus.overrideAttrs (oldAttrs: {
-	  # name = "i3pystatus-dev";
+   i3pystatus-perso = super.i3pystatus.overrideAttrs (oldAttrs: {
+	  name = "i3pystatus-dev";
 	  # src = null; # super.lib.cleanSource ~/i3pystatus;
-   #    propagatedBuildInputs = with self.python3Packages; oldAttrs.propagatedBuildInputs ++ [ pytz ];
-	# });
+      propagatedBuildInputs = with self.python3Packages; oldAttrs.propagatedBuildInputs ++ [ pytz ];
+	});
 
   ranger = super.ranger.override ( { pythonPackages=super.python3Packages; });
 

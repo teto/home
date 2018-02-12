@@ -71,6 +71,8 @@ rec {
   # Set your time zone.
   # time.timeZone = "Europe/Amsterdam";
   time.timeZone = "Asia/Tokyo";
+  time.hardwareClockInLocalTime = false; # by default false
+  # services.tzupdate.enable = true;
 
   environment.systemPackages = with pkgs; [
     manpages  # because man tcp should always be available

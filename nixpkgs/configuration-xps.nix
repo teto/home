@@ -15,6 +15,7 @@ let
     ./common.nix
     ./xserver.nix
     ./libvirtd.nix
+    ./network-manager.nix
 
     # for user teto
     ./extraTools.nix
@@ -39,13 +40,13 @@ let
   ];
 
   networking.hostName = "jedha"; # Define your hostname.
-  networking.networkmanager.enableStrongSwan = true;
 
   # creates problem with buffalo check if it blocks requests or what
   # it is necessary to use dnssec though :(
   networking.dnsExtensionMechanism = false;
   networking.extraHosts = secrets.extraHosts;
 
+  # this is for gaming
   hardware.opengl.driSupport32Bit = true;
   hardware.pulseaudio = {
     enable = true;
@@ -56,7 +57,7 @@ let
   services = {
     gnome3 = {
       gnome-keyring.enable = true;
-      seahorse.enable = true;
+      seahorse.enable = true; # UI to manage keyrings
       at-spi2-core.enable = true; # for keyring it seems
 	  gnome-disks.enable = false;
     };
@@ -76,7 +77,7 @@ let
     # dbus.packages = [ ];
   };
 
-  environment.systemPackages = with pkgs; 
+  environment.systemPackages = with pkgs;
     (import ./basetools.nix { inherit pkgs;})
     # strongswan # to get ipsec in path
     # cups-pk-helper # to add printer through gnome control center
@@ -129,6 +130,7 @@ let
   services.udisks2.enable = true;
 
   # to install as a user service
+  # maybe remove ?
   services.offlineimap.install = true;
 
   nix = {
@@ -165,6 +167,7 @@ let
     enable = false; # TODO move to userspace
     # musicDirectory
   };
+
 
   programs.wireshark.enable = true; # installs setuid
   programs.wireshark.package = pkgs.wireshark; # which one

@@ -28,6 +28,8 @@ my_term = "termite"
 # TODO click should refresh it !
 clock = status.register(
     "clock",
+    # %a => day
+    # %X => time without date
     format=[
         # ("%a %-d Format 1",'Europe/Dublin'),
         # "%a %-d %b %X ",
