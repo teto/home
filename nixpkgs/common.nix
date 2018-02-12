@@ -25,20 +25,6 @@ in
   # assert mySecrets.ibsip != "";
 rec {
   # environment.systemPackages = with pkgs; 
-  # let neovim-custom = neovim.override {
-  #      configure = {
-  #        customRC = ''
-  #         # here your custom configuration goes!
-  #        '';
-  #        # packages.myVimPackage = with pkgs.vimPlugins; {
-  #        #   # see examples below how to use custom packages
-  #        #   # loaded on launch
-  #        #   start = [ fugitive ];
-  #        #   # manually loadable by calling `:packadd $plugin-name`
-  #        #   opt = [ ];
-  #        # };
-  #      };
-  #    }; in
 
   imports = [
       ./account-teto.nix

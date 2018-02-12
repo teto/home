@@ -629,7 +629,7 @@ let g:instant_rst_additional_dirs=[ "/home/teto/mptcpweb" ]
 " }}}
 " Appearance {{{
 set background=dark " remember: does not change the background color !
-set fillchars=vert:│,fold:>,stl:\ ,stlnc:\ ,diff:-
+" set fillchars=vert:│,fold:>,stl:\ ,stlnc:\ ,diff:-
 " one  ▶
 
 set noshowmode " Show the current mode on command line
@@ -1876,7 +1876,7 @@ endfun
 let g:nvimdev_auto_init=1
 let g:nvimdev_auto_cd=1
 " let g:nvimdev_auto_ctags=1
-let g:nvimdev_auto_lint=0
+let g:nvimdev_auto_lint=1
 let g:nvimdev_build_readonly=1
 
 function! VarToggle(key)
