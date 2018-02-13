@@ -3,7 +3,7 @@ highlight SignifySignChange cterm=bold ctermbg=237  ctermfg=227 guibg=#F08A1F
 
 " 
 " todo overwrite 
-hi CursorLine               ctermbg=236   cterm=none
+" hi CursorLine               ctermbg=236   cterm=none
 
 
 
@@ -11,8 +11,8 @@ hi CursorLine               ctermbg=236   cterm=none
 hi NonText         guibg=#E5943D
 " in upstream molokai, EndOfBuffer n'est pas defini
 hi EndOfBuffer         guibg=#465457
-" 
-hi CursorLine                    guibg=#293739
+" guifg=None is important here
+hi CursorLine                    guibg=#293739 guifg=None
 " hi CursorLineNr    guibg=#E5943D               gui=none
 hi CursorColumn                  guibg=#293739
 
