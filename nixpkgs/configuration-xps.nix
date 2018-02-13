@@ -116,7 +116,8 @@ let
         inconsolata # monospace
         noto-fonts-cjk # asiatic
         nerdfonts
-
+        corefonts # microsoft fonts 
+        dejavu_fonts
         # Adobe Source Han Sans
         sourceHanSansPackages.japanese
         # noto-fonts
