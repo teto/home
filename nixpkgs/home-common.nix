@@ -452,7 +452,8 @@ keybindings = let mad="Mod4"; mod="Mod1";
 # bindsym XF86AudioPrev exec playerctl previous
   };
   xsession.initExtra = ''
-    ${pkgs.feh} --bg-fill /home/teto/dotfiles/wallpapers/nebula.jpg
+    ${pkgs.feh}/bin/feh --bg-fill /home/teto/dotfiles/wallpapers/nebula.jpg
+    # maybe it could autolaunch ?
     ${pkgs.networkmanagerapplet}/bin/nm-applet &
   '';
 }

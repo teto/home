@@ -30,6 +30,9 @@ rec {
       ./account-teto.nix
       # ./mptcp-kernel.nix
   ];
+  # boot.kernelPackages = pkgs.linuxPackages_latest;
+  # kernelModules are forcibly loaded C
+  # availableKernelModules are just available, and udev will auto-load them as needed
 
 
   boot.cleanTmpDir = true; # to clean /tmp on reboot
@@ -46,21 +49,6 @@ rec {
   # };
 
   # see https://github.com/NixOS/nixpkgs/issues/15293
-  boot.kernelPackages = pkgs.linuxPackages_latest;
-  # kernelModules are forcibly loaded C
-  # availableKernelModules are just available, and udev will auto-load them as needed
-  boot.kernelModules = [
-    # "af_key" # for ipsec/vpn support
-    # "kvm"  # for virtualisation
-    #  "kvm-intel"
-  ];
-  # TODO boot.supportedFilesystems
-  boot.kernel.sysctl = {
-      # "net.ipv4.tcp_keepalive_time" = 60;
-      # "net.core.rmem_max" = 4194304;
-      # "net.core.wmem_max" = 1048576;
-    };
-  # boot.kernelPackages = pkgs.linuxPackages_mptcp;
 
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.firewall.checkReversePath = false; # for nixops
