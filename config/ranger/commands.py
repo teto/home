@@ -77,6 +77,7 @@
 # ===================================================================
 
 from ranger.api.commands import *
+import re
 
 class alias(Command):
     """:alias <newcommand> <oldcommand>
