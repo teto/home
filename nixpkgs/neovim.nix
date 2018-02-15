@@ -38,7 +38,7 @@
         packages.myVimPackage = with pkgs.vimPlugins; {
           # see examples below how to use custom packages
           # loaded on launch
-          start = [ fugitive ];
+          start = [ fugitive vimtex ];
           # manually loadable by calling `:packadd $plugin-name`
           opt = [ ];
         };

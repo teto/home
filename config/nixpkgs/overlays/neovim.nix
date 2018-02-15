@@ -14,20 +14,21 @@ self: super:
   #     meta.priority=0;
   # });
 
-  # neovim-master = (self.neovim-unwrapped.overrideAttrs (oldAttrs: {
-	  # name = "neovim-master";
-	  # version = "nightly";
-  #     src = fetchGitHashless {
-  #       rev = "master";
-  #       url = "git@github.com:neovim/neovim.git";
-  #     # src = super.fetchFromGitHub {
-  #     #   owner = "neovim";
-  #     #   repo = "neovim";
-  #     #   rev = "nightly";
-  #     #   sha256 = "1a85l83akqr8zjrhl8y8axsjg71g7c8kh4177qdsyfmjkj6siq4c";
-  #     };
+  neovim-unwrapped = (super.neovim-unwrapped).overrideAttrs (oldAttrs: {
+	  name = "neovim";
+	  version = "nightly";
+      # src = self.fetchGitHashless {
+      #   rev = "master";
+      #   url = "git@github.com:neovim/neovim.git";
+      src = super.fetchFromGitHub {
+        owner = "neovim";
+        repo = "neovim";
+        rev = "674cb2afde0d82557c8e3afdf706cd6f75195fa5";
+        sha256 = "13cyfvhxjfc3h50vhfdfifi2zxm15w0mda67nxvlj6ksvcjy4020";
+      };
 
-  #     meta.priority=0;
-	# })) or null;
+      meta.priority=0;
+    });
+    # or null;
 
   }

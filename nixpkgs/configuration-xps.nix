@@ -50,6 +50,8 @@ let
   hardware.opengl.driSupport32Bit = true;
   hardware.pulseaudio = {
     enable = true;
+    systemWide = false;
+    # daemon.config
     support32Bit = true;
   };
 
