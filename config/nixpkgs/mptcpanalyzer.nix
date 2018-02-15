@@ -25,7 +25,7 @@ let
 
 in
 buildPythonApplication rec {
-	name = "mptcpanalyzer-${version}";
+	pname = "mptcpanalyzer";
 	version = "0.1";
     # src = fetchFromGitHub {
     #   owner = "teto";

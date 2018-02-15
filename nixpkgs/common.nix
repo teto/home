@@ -65,7 +65,7 @@ rec {
   environment.systemPackages = with pkgs; [
     manpages  # because man tcp should always be available
   ]
-  # ++ (load-packages ./basetools.nix)
+  ++ (load-packages ./basetools.nix)
   ;
 
    # TODO it appears in /etc/bashrc !
