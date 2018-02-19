@@ -141,6 +141,8 @@ let
     nixPath = [
       "nixos-config=/home/teto/dotfiles/nixpkgs/configuration.nix"
       "/nix/var/nix/profiles/per-user/root/channels"
+      "/nix/var/nix/profiles/per-user/teto/channels"
+      ""
     ]
     ++ lib.optionals (builtins.pathExists userNixpkgs)  [ "nixpkgs=${builtins.toString userNixpkgs}" ]
     ;
@@ -161,9 +163,8 @@ let
 
   services.strongswan = {
     enable = true;
-    secrets = [
       # "/etc/ipsec.d/*.secrets" "/etc/ipsec.d"
-    ];
+    secrets = ["/etc/ipsec.d"];
   };
 
   services.mpd = {

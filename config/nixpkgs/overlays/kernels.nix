@@ -12,7 +12,6 @@ let
       VIRTIO_MMIO y
       VIRTIO_BLK y
 
-
       # when run as -kernel, an embedded DHCP client is needed
       # need to get an ip
       IP_PNP y
@@ -42,8 +41,10 @@ let
 
     '';
 
+    # For the tests don't forget to disable syn cooki
     mptcpConfig = ''
 
+      SYN_COOKIES n
       MPTCP y
       MPTCP_SCHED_ADVANCED y
       MPTCP_ROUNDROBIN m
@@ -79,6 +80,15 @@ let
       DEBUG_INFO y
     '';
 
+    # don't use the module
+    # worried about
+# warning: unused option: SQUASHFS_ZLIB
+# warning: unused option: UBIFS_FS_ADVANCED_COMPR
+# warning: unused option: USB_SERIAL_GENERIC
+
+    persoConfig=''
+      L2TP_IP m
+      '';
   # must be used with ignoreConfigErrors in kernels
   # kernelExtraConfig=builtins.readFile ../extraConfig.nix;
 

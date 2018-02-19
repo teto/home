@@ -4,6 +4,8 @@
 # nix-shell -p 'python3.withPackages( ps : [ ps.scikitlearn ] )' ~/nixpkgs
 
 let
+  stable = import <nixos> {}; # https://nixos.org/channels/nixos
+  unstable = import <nixos-unstable> {}; # https://nixos.org/channels/nixos-unstable
   includeFzf= let fzfContrib="${pkgs.fzf}/share/fzf"; in ''
     . "${fzfContrib}/completion.bash"
     . "${fzfContrib}/key-bindings.bash"
@@ -29,15 +31,15 @@ let
   # the kind of packages u don't want to compile
   # TODO les prendres depuis un channel avec des binaires ?
   heavyPackages = with pkgs;[
-    anki          # spaced repetition system
-    libreoffice
-    qutebrowser  # keyboard driven fantastic browser
-    gnome3.nautilus # demande webkit/todo replace by nemo ?
+    # anki          # spaced repetition system
+    unstable.libreoffice
+    unstable.qutebrowser  # keyboard driven fantastic browser
+    unstable.gnome3.nautilus # demande webkit/todo replace by nemo ?
     mcomix # manga reader
-    mendeley # requiert qtwebengine
-    pinta    # photo editing
-    qtcreator  # for wireshark
-    zeal       # doc for developers
+    unstable.mendeley # requiert qtwebengine
+    unstable.pinta    # photo editing
+    unstable.qtcreator  # for wireshark
+    unstable.zeal       # doc for developers
     # zotero     # doc software
     # wavemon
     # astroid # always compiles webkit so needs 1 full day
@@ -74,7 +76,7 @@ let
     xorg.xev
     xclip
     xcwd
-    zathura
+    # zathura
   ];
   devPkgs = with pkgs; [
     ccache
@@ -270,7 +272,7 @@ rec {
   # TODO prefix with stable
   programs.firefox = {
     enable = true;
-  #   package = ; # set ff57
+    package = stable.firefox;
   #   enableAdobeFlash = false;
   };
 

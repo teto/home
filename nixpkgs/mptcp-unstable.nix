@@ -10,7 +10,9 @@
 
   boot.consoleLogLevel=1;
   boot.kernel.sysctl = {
-      "net.ipv4.tcp_timestamps" = 3;
+    # VERY IMPORTANT to disable syncookies since it will change the timestamp
+    "net.ipv4.tcp_syncookies" = 0;
+    "net.ipv4.tcp_timestamps" = 3;
       "net.mptcp.mptcp_debug" = 1;
       "net.mptcp.mptcp_checksum" = 0;
       "net.mptcp.mptcp_enabled" = 1;

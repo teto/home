@@ -31,9 +31,13 @@
           let $MYVIMRC='/home/teto/.config/nvim/init.vim'
           " or alternatively
         " expand(‘<sfile>’)
-          let $MYVIMRC=fnamemodify(expand('<sfile>'), ":p")
+          let $MYVIMRC=/home/teto/.config/nvim/init.vim
+        " let $MYVIMRC=fnamemodify(expand('<sfile>'), ":p")
+ 
+        source $MYVIMRC
 
-        source /home/teto/.config/nvim/init.vim
+        " todo do the same for pyls/vimtex etc
+        let g:vimtex_compiler_latexmk.executable=${pkgs.texlive.combined.scheme-basic}
         '';
         packages.myVimPackage = with pkgs.vimPlugins; {
           # see examples below how to use custom packages

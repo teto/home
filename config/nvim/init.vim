@@ -1528,7 +1528,8 @@ let g:vimtex_compiler_progname='nvr'
 let g:vimtex_indent_enabled=0
 let g:vimtex_indent_bib_enabled=1
 let g:vimtex_index_split_pos = 'below'
-let g:vimtex_view_method = 'zathura'
+" or zathura ?
+let g:vimtex_view_method = 'mupdf'
 "let g:vimtex_snippets_leader = ','
 let g:vimtex_fold_enabled = 0
 let g:vimtex_format_enabled = 0
@@ -1553,19 +1554,19 @@ let g:vimtex_quickfix_ignored_warnings = [
       \ "Invalid format of field 'month'"
       \ ]
       "
-  if !exists('g:ycm_semantic_triggers')
-    let g:ycm_semantic_triggers = {}
-  endif
-  let g:ycm_semantic_triggers.tex = [
-        \ 're!\\[A-Za-z]*cite[A-Za-z]*(\[[^]]*\]){0,2}{[^}]*',
-        \ 're!\\[A-Za-z]*ref({[^}]*|range{([^,{}]*(}{)?))',
-        \ 're!\\hyperref\[[^]]*',
-        \ 're!\\includegraphics\*?(\[[^]]*\]){0,2}{[^}]*',
-        \ 're!\\(include(only)?|input){[^}]*',
-        \ 're!\\\a*(gls|Gls|GLS)(pl)?\a*(\s*\[[^]]*\]){0,2}\s*\{[^}]*',
-        \ 're!\\includepdf(\s*\[[^]]*\])?\s*\{[^}]*',
-        \ 're!\\includestandalone(\s*\[[^]]*\])?\s*\{[^}]*',
-        \ ]
+  " if !exists('g:ycm_semantic_triggers')
+  "   let g:ycm_semantic_triggers = {}
+  " endif
+  " let g:ycm_semantic_triggers.tex = [
+  "       \ 're!\\[A-Za-z]*cite[A-Za-z]*(\[[^]]*\]){0,2}{[^}]*',
+  "       \ 're!\\[A-Za-z]*ref({[^}]*|range{([^,{}]*(}{)?))',
+  "       \ 're!\\hyperref\[[^]]*',
+  "       \ 're!\\includegraphics\*?(\[[^]]*\]){0,2}{[^}]*',
+  "       \ 're!\\(include(only)?|input){[^}]*',
+  "       \ 're!\\\a*(gls|Gls|GLS)(pl)?\a*(\s*\[[^]]*\]){0,2}\s*\{[^}]*',
+  "       \ 're!\\includepdf(\s*\[[^]]*\])?\s*\{[^}]*',
+  "       \ 're!\\includestandalone(\s*\[[^]]*\])?\s*\{[^}]*',
+  "       \ ]
 "<plug>(vimtex-toc-toggle)
 "<plug>(vimtex-labels-toggle)
     " autocmd FileType tex nnoremap <leader>lt <plug>(vimtex-toc-toggle)
@@ -1577,7 +1578,7 @@ let g:vimtex_quickfix_ignored_warnings = [
 
 " using it during
 " us histadd
-au BufEnter *.tex exec ":setlocal spell spelllang=en_us"
+" au BufEnter *.tex exec ":setlocal spell spelllang=en_us"
 "" }}}
 " Pymode {{{
 let g:pymode_python = 'python3'
