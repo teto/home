@@ -4,7 +4,7 @@
     enable=true;
     enableStrongSwan = true;
     # one of "OFF", "ERR", "WARN", "INFO", "DEBUG", "TRACE"
-    # logLevel="INFO";
+    logLevel="DEBUG";
     wifi.scanRandMacAddress = true;
 
     # networking.resolvconfOptions

@@ -52,10 +52,10 @@ let
   ];
   desktopPkgs = with pkgs; [
     buku
-    dropbox
+    unstable.dropbox
     # feh
-    evince # succeed where zathura/mupdf fail
-    gnome3.file-roller # for GUI archive handling
+    unstable.evince # succeed where zathura/mupdf fail
+    unstable.gnome3.file-roller # for GUI archive handling
     ffmpegthumbnailer # to preview videos in ranger
     haskellPackages.greenclip # todo get from haskell
     moc
@@ -63,14 +63,14 @@ let
     # mdp # markdown CLI presenter
     nox # helps with reviewing and to install files
     # gnome3.gnome_control_center
-    qtpass
+    unstable.qtpass
     sublime3
     scrot
     sxiv
-    system_config_printer
+    unstable.system_config_printer
     shared_mime_info # temporary fix for nautilus to find the correct files
     # taiginijisho # japanse dict; like zkanji Qt based
-    transmission_gtk
+    unstable.transmission_gtk
     translate-shell
     w3m # for preview in ranger w3mimgdisplay
     xorg.xev
@@ -297,6 +297,16 @@ rec {
     browsers = ["firefox" "chromium" ];
   };
 
+  services.gnome-keyring = {
+    enable=true;
+  };
+
+  services.network-manager-applet.enable = true;
+
+  services.dunst = {
+    enable=true;
+  };
+
   services.gpg-agent = {
     enable = true;
     defaultCacheTtl = 1800;
@@ -459,7 +469,5 @@ keybindings = let mad="Mod4"; mod="Mod1";
   };
   xsession.initExtra = ''
     ${pkgs.feh}/bin/feh --bg-fill /home/teto/dotfiles/wallpapers/nebula.jpg
-    # maybe it could autolaunch ?
-    ${pkgs.networkmanagerapplet}/bin/nm-applet &
   '';
 }
