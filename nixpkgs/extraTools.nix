@@ -7,6 +7,7 @@
     bridge-utils # pour  brctl
     wirelesstools # to get iwconfig
     gitAndTools.diff-so-fancy
+    pass
     # aircrack-ng
 #    udiskie
 ];
