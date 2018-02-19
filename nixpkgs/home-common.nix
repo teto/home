@@ -332,6 +332,10 @@ rec {
         {
           position="top";
           workspaceButtons=true;
+          workspaceNumbers=false;
+          id="0";
+
+          # command="";
           statusCommand="${i3pystatus-custom}/bin/i3pystatus-python-interpreter $XDG_CONFIG_HOME/i3/myStatus.py";
         }
       ];
