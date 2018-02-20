@@ -35,9 +35,53 @@
  
         source $MYVIMRC
 
+        " Failed to start language server: No such file or directory: 'pyls'
         " todo do the same for pyls/vimtex etc
         let g:vimtex_compiler_latexmk = {}
-        let g:vimtex_compiler_latexmk.executable='${pkgs.texlive.combined.scheme-basic}/bin/latexmk'
+        " latexmk is not in combined.small/basic
+        let g:vimtex_compiler_latexmk.executable='${pkgs.texlive.combined.scheme-medium}/bin/latexmk'
+        let g:vimtex_compiler_latexmk.executable='${pkgs.texlive.combined.scheme-medium}/bin/latexmk'
+
+        " Todo add pyls to neovim deps ?
+        " tjdevries lsp {{{
+        let g:langserver_executables = {
+            \ 'go': {
+            \ 'name': 'sourcegraph/langserver-go',
+            \ 'cmd': ['langserver-go', '-trace', '-logfile', expand('~/Desktop/langserver-go.log')],
+            \ },
+            \ 'c': {
+            \ 'name': 'clangd',
+            \ 'cmd': ['clangd', ],
+            \ },
+            \ 'python': {
+            \ 'name': 'pyls',
+            \ 'cmd': ['pyls', '--log-file' , expand('~/lsp_python.log')],
+            \ },
+              \ }
+        " }}}
+        " autozimu's lsp {{{
+        " call LanguageClient_textDocument_hover
+        " by default logs in /tmp/LanguageClient.log.
+        let g:LanguageClient_autoStart=1 " Run :LanguageClientStart when disabled
+
+        let g:LanguageClient_selectionUI='fzf'
+        " let g:LanguageClient_trace="verbose"
+        " call LanguageClient_setLoggingLevel('DEBUG')
+        "let g:LanguageClient_diagnosticsList="quickfix"
+
+        " \ 'c': ['clangd', ],
+        let g:LanguageClient_serverCommands = {
+            \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
+            \ 'cpp': ['clangd', ],
+            \ 'python': ['pyls', '--log-file' , expand('~/lsp_python.log')]
+            \ }
+
+        " todo provide a fallback if lsp not available
+        nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
+        nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
+        " nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
+
+        "}}}
         '';
         packages.myVimPackage = with pkgs.vimPlugins; {
           # see examples below how to use custom packages

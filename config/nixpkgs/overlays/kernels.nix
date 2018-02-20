@@ -43,6 +43,7 @@ let
 
     # For the tests don't forget to disable syn cooki
     mptcpConfig = ''
+      LOCALVERSION -matt
 
       SYN_COOKIES n
       MPTCP y
@@ -110,11 +111,8 @@ in rec {
   test-platform =  {
     name="zizou";
     kernelAutoModules = false;
-    # super.platforms.pc64_simplekernel
-    # todo get system.platform.extraConfig ?
     kernelExtraConfig = mptcpKernelExtraConfig;
     ignoreConfigErrors = true;
-    # preferBui
 
     kernelPreferBuiltin = true;
   };
@@ -146,10 +144,9 @@ in rec {
   in
   mptcp93.override ({
       # src= super.lib.cleanSource /home/teto/mptcp;
-      modDirVersion="4.9.60+";
+      modDirVersion="4.9.60-matt+";
       # modDirVersion="4.9.60-00010-g5a1ca10181c6";
       name="mptcp-local";
-      # TODO testing...
       # hostPlatform=test-localSystem;
 
       # TODO might need to revisit

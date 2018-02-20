@@ -48,6 +48,7 @@ let
     aircrack-ng
     bind # for dig
     gnome3.networkmanagerapplet
+    netcat-gnu # plain 'netcat' is the bsd one
     # wireshark # may cause pb because of Qt
   ];
   desktopPkgs = with pkgs; [
