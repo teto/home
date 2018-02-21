@@ -34,6 +34,9 @@ let
     grub.device = "/dev/sda";
   };
 
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+
+  # TODO we need nouveau 
   boot.kernelModules = [
     "af_key" # for ipsec/vpn support
     "kvm" "kvm-intel" # for virtualisation

@@ -30,7 +30,6 @@ rec {
       ./account-teto.nix
       # ./mptcp-kernel.nix
   ];
-  # boot.kernelPackages = pkgs.linuxPackages_latest;
   # kernelModules are forcibly loaded C
   # availableKernelModules are just available, and udev will auto-load them as needed
 
