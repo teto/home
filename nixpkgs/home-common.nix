@@ -246,16 +246,6 @@ rec {
     # ${ranger}/share/doc/ranger/examples/bash_automatic_cd.sh
   };
 
-  # programs.zsh = {
-  #   enable = true;
-  #   dotDir =
-  #   sessionVariables = {
-  #     HISTFILE="$XDG_CACHE_HOME/zsh_history";
-  #   };
-  #   shellAliases = {
-  #   nixpaste="curl -F 'text=<-' http://nixpaste.lbr.uno";
-  #   };
-  # };
 
   # programs.git = {
     #   enable = true;
