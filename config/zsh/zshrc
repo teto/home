@@ -406,5 +406,33 @@ nix-env() {
  setopt prompt_sp
 # for android/lineage os developement
 # if [ -d "$HOME/adb-fastboot" ] ; then
-#     export PATH="$HOME/adb-fastboot:$PATH"
+#     expot PATH="$HOME/adb-fastboot:$PATH"
 # fi
+#
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

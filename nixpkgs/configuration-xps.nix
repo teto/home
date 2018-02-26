@@ -42,6 +42,10 @@ let
     "kvm" "kvm-intel" # for virtualisation
   ];
 
+  # environment.variables = {
+      # HTTP_PROXY="http://proxy.iiji.ad.jp:8080";
+  # };
+
   networking.hostName = "jedha"; # Define your hostname.
 
   # creates problem with buffalo check if it blocks requests or what

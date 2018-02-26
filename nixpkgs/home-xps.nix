@@ -21,7 +21,6 @@
   programs.bash = {
     # goes to .profile
     sessionVariables = {
-      # HTTP_PROXY="http://
       # HISTFILE="$XDG_CACHE_HOME/bash_history";
     };
 
