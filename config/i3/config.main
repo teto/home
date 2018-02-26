@@ -31,6 +31,7 @@ set $GroupFr Group2
 # bindsym $mad+r exec rofi_pass
 bindsym $mod+ctrl+h exec $greenclip
 bindsym $mod+ctrl+b exec buku_run
+bindsym $mod+ctrl+v exec ~/.vim-anywhere/bin/run"
 
 # xmodmap to see the mappings for ModX etc...
 set $mod Mod1

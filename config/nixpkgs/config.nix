@@ -1,11 +1,14 @@
 { pkgs }:
 {
 	permittedInsecurePackages = [
-		"webkitgtk-2.4.11"
-         "linux-4.13.16"
+		# "webkitgtk-2.4.11"
+         # "linux-4.13.16"
 	];
 	allowBroken = true;
 	allowUnfree = true;
+
+    # to replicate grahamOfBorgerros
+    checkMeta=true;
 
     packageOverrides = pkgs: with pkgs; {
       desktopEnv =  buildEnv {
