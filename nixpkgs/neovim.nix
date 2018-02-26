@@ -73,7 +73,7 @@
         let g:LanguageClient_serverCommands = {
             \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
             \ 'cpp': ['clangd', ],
-            \ 'python': ['pyls', '--log-file' , expand('~/lsp_python.log')]
+            \ 'python': ['${pkgs.python-language-server or ""}/bin/pyls', '--log-file' , expand('~/lsp_python.log')]
             \ }
 
         " todo provide a fallback if lsp not available

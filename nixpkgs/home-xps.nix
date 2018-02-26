@@ -18,6 +18,13 @@
     # "grp:caps_toggle" "grp_led:scroll"
   ];
 
+  programs.bash = {
+    # goes to .profile
+    sessionVariables = {
+      # HTTP_PROXY="http://
+      # HISTFILE="$XDG_CACHE_HOME/bash_history";
+    };
+
   # does not exist
   # programs.adb.enable = true;
 
