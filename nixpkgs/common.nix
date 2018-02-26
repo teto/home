@@ -102,6 +102,8 @@ rec {
 
 # lib.escapeShellArg fails
       nixpaste="curl -F \"text=<-\" http://nixpaste.lbr.uno";
+    ".."="cd ..";
+    "..."="cd ../..";
 
 # oftenly used programs {{{
       v="nvim";

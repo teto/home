@@ -32,6 +32,16 @@
     xrandr --output  eDP1 --mode 1600x900
     '';
 
+  programs.zsh = {
+    enable = true;
+    # dotDir =
+    sessionVariables = {
+      HISTFILE="$XDG_CACHE_HOME/zsh_history";
+    };
+    shellAliases = {
+    nixpaste="curl -F 'text=<-' http://nixpaste.lbr.uno";
+    };
+  };
 
     # TODO add to zsh config
     # . "$ZDOTDIR/transfer.zsh"

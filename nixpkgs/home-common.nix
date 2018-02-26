@@ -30,16 +30,19 @@ let
 
   # the kind of packages u don't want to compile
   # TODO les prendres depuis un channel avec des binaires ?
-  heavyPackages = with pkgs;[
+  heavyPackages = with unstable.pkgs;[
     # anki          # spaced repetition system
-    unstable.libreoffice
-    unstable.qutebrowser  # keyboard driven fantastic browser
-    unstable.gnome3.nautilus # demande webkit/todo replace by nemo ?
+    # hopefully we can remove this from the environment
+    # it's just that I can't setup latex correctly
+    texlive.combined.scheme-medium
+    libreoffice
+    qutebrowser  # keyboard driven fantastic browser
+    gnome3.nautilus # demande webkit/todo replace by nemo ?
     mcomix # manga reader
-    unstable.mendeley # requiert qtwebengine
-    unstable.pinta    # photo editing
-    unstable.qtcreator  # for wireshark
-    unstable.zeal       # doc for developers
+    mendeley # requiert qtwebengine
+    pinta    # photo editing
+    qtcreator  # for wireshark
+    zeal       # doc for developers
     # zotero     # doc software
     # wavemon
     # astroid # always compiles webkit so needs 1 full day
@@ -61,7 +64,7 @@ let
     ffmpegthumbnailer # to preview videos in ranger
     haskellPackages.greenclip # todo get from haskell
     moc
-    mupdf # evince does better too
+    mupdf.bin # evince does better too
     # mdp # markdown CLI presenter
     nox # helps with reviewing and to install files
     # gnome3.gnome_control_center
@@ -75,10 +78,11 @@ let
     unstable.transmission_gtk
     translate-shell
     w3m # for preview in ranger w3mimgdisplay
+    xdotool # needed for vimtex + zathura
     xorg.xev
     xclip
     xcwd
-    # zathura
+    zathura
   ];
   devPkgs = with pkgs; [
     ccache
@@ -95,8 +99,9 @@ let
     nix-repl
     nix-index
     # python3Packages.neovim it s included
+    pcalc
     python3Packages.pycodestyle
-    rpl
+    rpl # to replace strings across files
     universal-ctags
   ];
   imPkgs = with pkgs; [
@@ -122,7 +127,8 @@ rec {
   home.packages = desktopPkgs ++ devPkgs ++ imPkgs ++ networksPkgs ++ [
     pkgs.ranger
     pkgs.vifm
-  ];
+  ]
+  ++ heavyPackages;
 
 
   # you can switch from cli with xkb-switch
@@ -240,22 +246,24 @@ rec {
       #mostly for testin
       dfh="df --human-readable";
       duh="du --human-readable";
+      latest="ls -lt |head";
+      fren="trans -from fr -to en ";
+      enfr="trans -from en -to fr ";
+      jpfr="trans -from jp -to fr ";
+      frjp="trans -from jp -to fr ";
+      jpen="trans -from jp -to en ";
+      enjp="trans -from en -to jp ";
     };
+    # TODO
+# alias mg="python2.7 -malot -n ~/.config/notmuch/notmuchrc"
+# alias mg="nix-shell -p 'python.withPackages(ps: with ps; [ alot ])' --show-trace --run \"alot -n \$XDG_CONFIG_HOME/notmuch/notmuchrc\""
+# alias astroperso="astroid"
+# alias astropro="astroid -c ~/.config/astroid/config_pro"
 
     # extra
     # ${ranger}/share/doc/ranger/examples/bash_automatic_cd.sh
   };
 
-  # programs.zsh = {
-  #   enable = true;
-  #   dotDir =
-  #   sessionVariables = {
-  #     HISTFILE="$XDG_CACHE_HOME/zsh_history";
-  #   };
-  #   shellAliases = {
-  #   nixpaste="curl -F 'text=<-' http://nixpaste.lbr.uno";
-  #   };
-  # };
 
   # programs.git = {
     #   enable = true;

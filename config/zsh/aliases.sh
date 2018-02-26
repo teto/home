@@ -23,44 +23,22 @@ alias latest="ls -lt |head"
 # alias lenfr="dict -d fd-eng-fra "
 
 # for now require an internet access
-alias fren="trans -from fr -to en "
-alias enfr="trans -from en -to fr "
-alias jpfr="trans -from jp -to fr "
-alias frjp="trans -from jp -to fr "
-alias jpen="trans -from jp -to en "
-alias enjp="trans -from en -to jp "
+# alias fren="trans -from fr -to en "
+# alias enfr="trans -from en -to fr "
+# alias jpfr="trans -from jp -to fr "
+# alias frjp="trans -from jp -to fr "
+# alias jpen="trans -from jp -to en "
+# alias enjp="trans -from en -to jp "
 # }}}
 
-### Git {{{
-# alias ga="git add"
-# alias gl="git log"
-# alias gst="git status"
-# alias gs="git status"
-# alias gd="git diff"
-# alias gc="git commit"
-# alias gcm="git commit -m"
-# alias gca="git commit -a"
-# alias gb="git branch"
-# alias gbl="git branch --list" # todo add all ?
-# alias gch="git checkout"
-# alias gra="git remote add"
-# alias grr="git remote rm"
-# alias grv="git remote -v"
-# alias gpu="git pull"
-# alias gcl="git clone"
-# alias gta="git tag -a -m"
-# alias gf="git reflog"
-# alias gbr="git branch"
-# }}}
 
 
 # not always needed ?
 # alias rake="rake1.9.1"
 ##############################
 alias servethis="python -c 'import SimpleHTTPServer; SimpleHTTPServer.test()'"
-alias pypath='python -c "import sys; print sys.path" | tr "," "\n" | grep -v "egg"'
-alias shellpath='python -c "import sys; print sys.env.PATH" | tr "," "\n" | grep -v "egg"'
-alias set_time="dpkg-reconfigure tzdata"
+# alias pypath='python -c "import sys; print sys.path" | tr "," "\n" | grep -v "egg"'
+# alias shellpath='python -c "import sys; print sys.env.PATH" | tr "," "\n" | grep -v "egg"'
 
 
 # ls related updates {{{
@@ -75,10 +53,10 @@ alias llt="ls -ltr"
 
 # oftenly used programs {{{
 # alias c="cat"
-alias v="nvim"
+# alias v="nvim"
 #alias n="nvim"
 alias m="mutt -F \"\$XDG_CONFIG_HOME/mutt/muttrc\""
-alias r="ranger"
+# alias r="ranger"
 # view uses vim as a pager
 alias l="nvim +view"
 alias s="sxiv"
@@ -86,12 +64,6 @@ alias s="sxiv"
 alias z="apvlv"
 alias q="qutebrowser"
 # }}}
-
-# Movement aliases {{{
-alias ..="cd .."
-alias ...="cd ../.."
-#}}}
-
 
 ### compilation related {{{
 alias makej="make -j4"

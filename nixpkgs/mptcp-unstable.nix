@@ -10,6 +10,9 @@
 
   boot.consoleLogLevel=1;
   boot.kernel.sysctl = {
+    # https://lwn.net/Articles/542642/
+    "net.ipv4.tcp_early_retrans" = 3;
+
     # VERY IMPORTANT to disable syncookies since it will change the timestamp
     "net.ipv4.tcp_syncookies" = 0;
     "net.ipv4.tcp_timestamps" = 3;
