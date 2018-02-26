@@ -473,7 +473,7 @@ set title " vim will change terminal title
 " look at :h statusline to see the available 'items'
 " to count the number of buffer
 " echo len(filter(range(1, bufnr('$')), 'buflisted(v:val)'))
-let &titlestring=" %t %{len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) } - NVIM"
+" let &titlestring=" %t %{len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) } - NVIM"
 
 " conceal configuration {{{
 " transforms some characters into their digraphs equivalent
@@ -709,15 +709,6 @@ let g:UltiSnipsExpandTrigger = "<C-y>"
 " " and close the selection list, same as other IDEs.
 " " CONFLICT with some plugins like tpope/Endwise
 " inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-
-" }}}
-" i3 autocommands {{{
-" todo when opening i3 files, set makeprg to build_config
-" augroup i3
-" autcmd!
-
-"   autocmd BufWinEnter  call ResCur()
-" augroup END
 
 " }}}
 " vim-plug config {{{
@@ -1064,8 +1055,6 @@ let g:deoplete#keyword_patterns.gitcommit = '.+'
 "   \ g:deoplete#omni#input_patterns,
 "   \ 'gitcommit', [g:deoplete#keyword_patterns.gitcommit])
 " deoplete clang {{{2
-let g:deoplete#sources#clang#libclang_path='/usr/lib/llvm-3.8/lib/libclang.so'
-let g:deoplete#sources#clang#libclang_header='/usr/include/clang/3.8.1/'
 
 let g:deoplete#sources#clang#std#cpp = 'c++11'
 let g:deoplete#sources#clang#sort_algo = 'priority'
@@ -1354,10 +1343,6 @@ nmap <leader>c <Plug>(InYoFace_Toggle)<CR>
 " autocmd CompleteDone * pclose
 set completeopt=menu,longest
 " }}}
-" python config {{{
-" let g:python3_host_prog = '/path/to/python3'
-let g:python3_host_skip_check = 1
-"}}}
 " vim-sayonara {{{
 nnoremap <silent><leader>Q  :Sayonara<cr>
 nnoremap <silent><leader>q  :Sayonara!<cr>
@@ -1489,8 +1474,7 @@ let g:vimtex_compiler_progname='nvr'
 let g:vimtex_indent_enabled=0
 let g:vimtex_indent_bib_enabled=1
 let g:vimtex_index_split_pos = 'below'
-" or zathura ?
-let g:vimtex_view_method = 'mupdf'
+let g:vimtex_view_method = 'zathura'
 "let g:vimtex_snippets_leader = ','
 let g:vimtex_fold_enabled = 0
 let g:vimtex_format_enabled = 0

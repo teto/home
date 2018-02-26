@@ -32,15 +32,18 @@
           " or alternatively
         " expand(‘<sfile>’)
         " let $MYVIMRC=fnamemodify(expand('<sfile>'), ":p")
- 
+
         source $MYVIMRC
 
         " Failed to start language server: No such file or directory: 'pyls'
         " todo do the same for pyls/vimtex etc
         let g:vimtex_compiler_latexmk = {}
         " latexmk is not in combined.small/basic
+        " vimtex won't let us setup paths to bibtex etc, we can do it in .latexmk ?
         let g:vimtex_compiler_latexmk.executable='${pkgs.texlive.combined.scheme-medium}/bin/latexmk'
-        let g:vimtex_compiler_latexmk.executable='${pkgs.texlive.combined.scheme-medium}/bin/latexmk'
+
+        let g:deoplete#sources#clang#libclang_path='${pkgs.llvmPackages.libclang}'
+        " let g:deoplete#sources#clang#libclang_header='/usr/include/clang/3.8.1/'
 
         " Todo add pyls to neovim deps ?
         " tjdevries lsp {{{
@@ -69,12 +72,18 @@
         " call LanguageClient_setLoggingLevel('DEBUG')
         "let g:LanguageClient_diagnosticsList="quickfix"
 
-        " \ 'c': ['clangd', ],
         let g:LanguageClient_serverCommands = {
-            \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
-            \ 'cpp': ['clangd', ],
-            \ 'python': ['pyls', '--log-file' , expand('~/lsp_python.log')]
-            \ }
+            \ 'rust': ['rustup', 'run', 'nightly', 'rls']
+          ''
+          # TODO check if it is 
+          # + lib.optionalString (pkgs.clangd) ''
+          #   \ , 'cpp': ['clangd', ]
+          # ''
+          + lib.optionalString (pkgs.python3Packages ? language-server-protocol) ''
+            \ , 'python': ['pyls', '--log-file' , expand('~/lsp_python.log')]
+            ''
+        + ''
+          \ }
 
         " todo provide a fallback if lsp not available
         nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
