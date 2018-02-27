@@ -1,7 +1,7 @@
 { pkgs }:
 {
 	permittedInsecurePackages = [
-		# "webkitgtk-2.4.11"
+		"webkitgtk-2.4.11"
          # "linux-4.13.16"
 	];
 	allowBroken = true;

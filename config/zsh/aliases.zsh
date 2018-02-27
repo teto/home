@@ -27,7 +27,7 @@ alias duh="du --human-readable"
 
 
 # alias se="sudoedit"
-alias ec='$EDITOR $XDG_CONFIG_HOME/'
+# alias ec='$EDITOR $XDG_CONFIG_HOME/'
 
 
 # Gestion du 'ls' : couleur & ne touche pas aux accents

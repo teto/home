@@ -145,7 +145,7 @@ let
 
   # to install as a user service
   # maybe remove ?
-  services.offlineimap.install = true;
+  # services.offlineimap.install = false;
 
   nix = {
     buildCores=4;

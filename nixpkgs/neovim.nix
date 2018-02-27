@@ -3,6 +3,7 @@
     enable = true;
     withPython3 = true;
     withPython = false;
+    # ln: failed to create symbolic link '/nix/store/hnr5cvavqcd12iiclcpqy2vvwz2pry7d-neovim-ruby-env/bin/bundle': File exists
     withRuby = true; # for vim-rfc/GhDashboard etc.
 
     #   # works but puts the config in store

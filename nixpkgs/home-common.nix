@@ -85,7 +85,7 @@ let
     zathura
   ];
   devPkgs = with pkgs; [
-    ccache
+    # ccache # breaks some builds ?
     gitAndTools.diff-so-fancy
     gitAndTools.git-recent
     editorconfig-core-c
@@ -109,6 +109,7 @@ let
     # python27Packages.alot # python 2 only
     khal
     khard
+    libsecret
     msmtp
     newsboat
     notmuch
@@ -282,7 +283,7 @@ rec {
   # TODO prefix with stable
   programs.firefox = {
     enable = true;
-    package = stable.firefox;
+    # package = unstable.firefox;
   #   enableAdobeFlash = false;
   };
 
@@ -431,11 +432,11 @@ rec {
         #
 # set $mod Mod1
 # il ne comprend pas Super_L
-keybindings = let mad="Mod4"; mod="Mod1"; 
+    keybindings = let mad="Mod4"; mod="Mod1"; 
     in {
         # todo use i3lock-fancy instead
-        "${mod}+Ctrl+L"="exec ${pkgs.i3lock-fancy}/bin/i3lock";
-        "${mad}+h"="rofi -modi 'clipboard:greenclip print' -show clipboard";
+        "${mod}+Ctrl+L"="exec ${pkgs.i3lock-fancy}/bin/i3lock-fancy";
+        "${mad}+h"="${pkgs.rofi} -modi 'clipboard:greenclip print' -show clipboard";
         "${mod}+shift+n"="exec ${pkgs.gnome3.nautilus}/bin/nautilus";
 # set $greenclip "rofi -modi 'clipboard:greenclip print' -show clipboard"
 #       bindsym $mad+h exec $greenclip

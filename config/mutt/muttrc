@@ -3,6 +3,21 @@
 #
 #
 ## Format de date
+
+# This option specifies timeout for Notmuch database. Default is 5 seconds.
+set nm_open_timeout = 5
+# This variable specifies notmuch query type, supported types: 'threads' and
+# 'messages'.
+set nm_query_type = messages
+# This variable specifies notmuch query limit.
+set nm_db_limit = 0
+
+# This variable specifies the default Notmuch database in format:
+# notmuch://<absolute path>
+set nm_default_uri = "notmuch:///home/teto/"
+
+
+
 set date_format="%A %d %b %Y à %H:%M:%S (%Z)"
 
 # assign an application to an attachement type (pdf/word etc..)
@@ -159,7 +174,7 @@ set status_format = "───[ Folder: %f ]───[%r%m messages%?n? (%n new)
 # }}}
 
 # Index Key Bindings  {{{
-bind index gg       first-entry
+# bind index gg       first-entry
 bind index G        last-entry
 
 # }}}

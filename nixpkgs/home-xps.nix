@@ -38,11 +38,33 @@
     enable = true;
     # dotDir =
     sessionVariables = {
-      HISTFILE="$XDG_CACHE_HOME/zsh_history";
+      # HISTFILE="$XDG_CACHE_HOME/zsh_history";
     };
+    history.save = 10000;
+    history.ignoreDups = true;
+    history.path = "$XDG_CACHE_HOME/zsh_history";
+    history.share = true;
+    history.size = 10000;
     shellAliases = {
-    nixpaste="curl -F 'text=<-' http://nixpaste.lbr.uno";
+      nixpaste="curl -F 'text=<-' http://nixpaste.lbr.uno";
     };
+    # plugins = 
+    # loginExtra=
+    initExtra = ''
+      alias -s html=qutebrowser
+      alias -s json=nvim
+      alias -s Vagrantfile=nvim
+      alias -s py=python3
+      alias -s rb=ruby
+      alias -s png=sxiv
+      alias -s jpg=xdg-open
+      alias -s gif=xdg-open
+      alias -s avi=mpv
+      alias -s mp3=mocp
+      alias -s pdf=xdg-open
+      alias -s doc=xdg-open
+      alias -s docx=xdg-open
+    '';
   };
 
     # TODO add to zsh config

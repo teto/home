@@ -1,7 +1,7 @@
 {
     "astroid": {
         "config": {
-            "version": "6"
+            "version": "9"
         },
         "notmuch_config": "\/home\/teto\/.config\/notmuch\/notmuchrc_pro",
         "debug": {
@@ -21,15 +21,15 @@
             "date_length": "10",
             "message_count_length": "4",
             "authors_length": "20",
-            "tags_length": "80",
             "subject_color": "#807d74",
             "subject_color_selected": "#000000",
             "background_color_selected": "",
-            "tags_color": "#31587a",
-            "hidden_tags": "attachment,flagged,unread",
+            "tags_length": "80",
             "tags_upper_color": "#e5e5e5",
             "tags_lower_color": "#333333",
-            "tags_alpha": "0.5"
+            "tags_alpha": "0.5",
+            "hidden_tags": "attachment,flagged,unread",
+            "tags_color": "#31587a"
         }
     },
     "general": {
@@ -41,8 +41,11 @@
     },
     "editor": {
         "cmd": "st -w %3 -e nvim %1",
+        "external_editor": "false",
         "charset": "utf-8",
         "save_draft_on_force_quit": "true",
+        "attachment_words": "attach",
+        "attachment_directory": "~",
         "gvim": {
             "cmd": "gvim",
             "args": "-f -c 'set ft=mail' '+set fileencoding=utf-8' '+set ff=unix' '+set enc=utf-8'"
@@ -50,7 +53,8 @@
     },
     "mail": {
         "reply": {
-            "quote_line": "Excerpts from %1's message of %2:"
+            "quote_line": "Excerpts from %1's message of %2:",
+            "mailinglist_reply_to_sender": "true"
         },
         "forward": {
             "quote_line": "Forwarding %1's message of %2:",
@@ -59,7 +63,8 @@
         "sent_tags": "sent",
         "message_id_fqdn": "",
         "message_id_user": "",
-        "user_agent": "default"
+        "user_agent": "default",
+        "send_delay": "2"
     },
     "poll": {
         "interval": "60"
@@ -70,23 +75,25 @@
     "thread_view": {
         "open_html_part_external": "true",
         "open_external_link": "xdg-open",
+        "default_save_directory": "~",
         "indent_messages": "true",
-        "mathjax": {
-            "enable": "true",
-            "uri_prefix": "https:\/\/cdn.mathjax.org\/mathjax\/latest\/",
-            "for_tags": ""
-        },
         "code_prettify": {
             "enable": "true",
-            "uri_prefix": "https:\/\/google-code-prettify.googlecode.com\/svn\/loader\/",
             "for_tags": "",
             "code_tag": "```",
-            "enable_for_patches": "true"
+            "enable_for_patches": "true",
+            "uri_prefix": "https:\/\/google-code-prettify.googlecode.com\/svn\/loader\/"
         },
         "gravatar": {
             "enable": "true"
         },
-        "mark_unread_delay": "0.5"
+        "mark_unread_delay": "0.5",
+        "expand_flagged": "true",
+        "mathjax": {
+            "enable": "true",
+            "uri_prefix": "https:\/\/cdn.mathjax.org\/mathjax\/latest\/",
+            "for_tags": ""
+        }
     },
     "crypto": {
         "gpg": {
@@ -114,7 +121,9 @@
             "signature_file": "",
             "signature_default_on": "true",
             "signature_attach": "false",
-            "always_gpg_sign": "false"
+            "always_gpg_sign": "false",
+            "signature_separate": "false",
+            "select_query": ""
         }
     },
     "startup": {

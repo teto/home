@@ -1,6 +1,5 @@
 { config, lib, pkgs, ... }:
 {
-  # on 
   # boot.kernelPackages = pkgs.linuxPackages_mptcp-local;
 
   boot.kernelModules = [
@@ -22,6 +21,7 @@
       "net.mptcp.mptcp_enabled" = 1;
       # https://unix.stackexchange.com/questions/13019/description-of-kernel-printk-values
       "kernel.printk" = "0	0	0	0";
+      "net.ipv4.tcp_no_metrics_save"=1;
 # kernel.printk_delay = 0
 # kernel.printk_devkmsg = ratelimit
 # kernel.printk_ratelimit = 5
