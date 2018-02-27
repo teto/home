@@ -6,7 +6,9 @@
       ./home-common.nix
       # ./mptcp-kernel.nix
       # symlink towards a config
-  ];
+    ]
+    ++ lib.optional (true) ./home-mail.nix
+    ;
 
   home.packages = with pkgs; [
     touchegg
@@ -23,6 +25,7 @@
     sessionVariables = {
       # HISTFILE="$XDG_CACHE_HOME/bash_history";
     };
+  };
 
   # does not exist
   # programs.adb.enable = true;

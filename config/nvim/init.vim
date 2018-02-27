@@ -110,7 +110,7 @@ Plug 'LnL7/vim-nix', {'for': 'nix'}
 " Plug 'gelguy/Cmd2.vim' " test
 Plug 'editorconfig/editorconfig-vim' " not remote but involves python
 " provider
-Plug 'brooth/far.vim', { 'on': 'Far'} " search and replace across files
+Plug 'brooth/far.vim', { 'on': 'Far','do': ':UpdateRemotePlugins' } " search and replace across files
 " needs ruby support, works in recent neovim
 Plug 'junegunn/vim-github-dashboard', { 'do': ':UpdateRemotePlugins' }
 Plug 'fmoralesc/vim-pad', {'branch': 'devel'} " :Pad new, note taking
@@ -203,13 +203,8 @@ Plug 'sjl/gundo.vim' " :GundoShow/Toggle to redo changes
 " Plug 'Yggdroot/indentLine',{ 'for': 'python' }  " draw verticals indents but seems greedy
 "  Autocompletion and linting {{{2
 "'frozen': 1,
-" use deoplete for python ?
-" Plug 'Valloric/YouCompleteMe' , { 'do': ':new \| call termopen(''python3 ./install.py --system-libclang --clang-completer'')', 'frozen': 1}
 " Plug 'lyuts/vim-rtags'  " a l'air d'etre le plus complet <leader>ri
-" Plug 'zchee/deoplete-clang', { 'for': 'c' }
-" Plug 'tweekmonster/deoplete-clang2', { 'for': 'c' }
 "
-" Plug 'zchee/deoplete-jedi', { 'for': 'python'}
 " }}}
 " Plug 'beloglazov/vim-online-thesaurus' " thesaurus => dico dde synonymes
 " Plug 'mattboehm/vim-unstack'  " to see a
@@ -424,9 +419,9 @@ Plug 'lervag/vimtex', {'for': 'tex'} " so far the best one
 " Plug 'vim-scripts/YankRing.vim' " breaks in neovim, overrides yy as well
 " far config (Find And Replace) {{{
 " let g:far#source='agnvim'
-let g:far#source='vimgrep'
+" let g:far#source='vimgrep'
 " let g:far#source='ag'
-
+" let g:far#limit
 let g:far#collapse_result=1
 " }}}
 
@@ -1037,7 +1032,7 @@ nnoremap <leader>kl :YcmCompleter GoTo <CR>
 nnoremap <leader>kh :YcmCompleter GoToInclude<CR>
 " }}}
 " Deoplete {{{
-let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_at_startup = 0
 let g:deoplete#enable_ignore_case = 1
 let g:deoplete#disable_auto_complete = 0
 let g:deoplete#enable_debug = 1

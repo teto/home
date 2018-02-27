@@ -30,7 +30,7 @@ set folder= $MAILDIR
 #folder-hook lip6
 
 # use postfix instead ?
-set sendmail="/usr/bin/msmtp"
+# set sendmail="/usr/bin/msmtp"
 
 #set use_envelope_from
 # Interactive questions {{{
@@ -210,7 +210,7 @@ bind index <space> 	next-unread
 # should be useless since I use an external pager (aka less)
 bind pager k  previous-line
 bind pager j  next-line
-bind pager gg top
+# bind pager gg top
 bind pager G  bottom
 
 bind pager R  group-reply

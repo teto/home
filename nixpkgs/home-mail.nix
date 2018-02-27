@@ -20,8 +20,7 @@
      enable = true;
    };
 
-
-   programs.offlineimap = {
-     enable = true;
-   };
+   # programs.offlineimap = {
+   #   enable = true;
+   # };
 }
