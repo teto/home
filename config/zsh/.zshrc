@@ -1,2 +1,1 @@
-
-source $ZDOTDIR/zshrc
+/nix/store/xmc0f1px6pzwx7g43kjlb6hyhrxxlp1b-home-manager-files/.config/zsh/.zshrc

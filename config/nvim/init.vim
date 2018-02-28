@@ -153,7 +153,8 @@ Plug 'junegunn/goyo.vim', {'on': 'Goyo'} "distraction free writing
 Plug 'junegunn/limelight.vim' " highlights
 Plug 'calvinchengx/vim-aftercolors' " load after/colors
 "Plug 'junegunn/limelight.vim' " to highlight ucrrent paragraph only
-Plug 'ntpeters/vim-better-whitespace' " StripWhitespace
+" Plug 'ntpeters/vim-better-whitespace' " StripWhitespace care it stole my
+" leader
 " Plug 'bronson/vim-trailing-whitespace' " :FixTrailingWhitespace
 " Plug 'tkhoa2711/vim-togglenumber' " by default mapped to <leader>n
 " Plug 'blindFS/vim-translator' " fails during launch :/

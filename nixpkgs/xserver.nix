@@ -3,6 +3,8 @@
 
   environment.systemPackages = with pkgs; [
     termite
+    xautolock
+    i3lock-fancy
   ];
 
   # Enable the X11 windowing system.

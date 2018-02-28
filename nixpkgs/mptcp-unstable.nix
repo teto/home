@@ -7,6 +7,9 @@
     "tcpprobe"
     ];
 
+  # should I load with the initrd
+  # boot.initrd.supportedFilesystems = [ ];
+
   boot.consoleLogLevel=1;
   boot.kernel.sysctl = {
     # https://lwn.net/Articles/542642/

@@ -14,7 +14,7 @@ set nm_db_limit = 0
 
 # This variable specifies the default Notmuch database in format:
 # notmuch://<absolute path>
-set nm_default_uri = "notmuch:///home/teto/"
+set nm_default_uri = "notmuch:///home/teto/maildir"
 
 
 

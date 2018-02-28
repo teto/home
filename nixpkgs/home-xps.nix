@@ -1,5 +1,5 @@
 # home-manager specific config from
-{ lib, pkgs,  ... }:
+{ config, lib, pkgs,  ... }:
 {
   imports = [
     # Not tracked, so doesn't need to go in per-machine subdir
@@ -11,8 +11,10 @@
     ;
 
   home.packages = with pkgs; [
-    touchegg
+    # touchegg # won't work anymore apparently
+    # libinput-gestures
     rofi
+    netperf # check for man; netserver to start
   ];
   # we want us,fr !
   # home.keyboard.layout = "fr,us";
@@ -36,7 +38,8 @@
 
   programs.zsh = {
     enable = true;
-    # dotDir =
+    # dotDir = "${config.xdg.configHome}/zsh";
+    dotDir = ".config/zsh";
     sessionVariables = {
       # HISTFILE="$XDG_CACHE_HOME/zsh_history";
     };
@@ -46,8 +49,7 @@
     history.share = true;
     history.size = 10000;
     shellAliases = {
-      nixpaste="curl -F 'text=<-' http://nixpaste.lbr.uno";
-    };
+    } // config.programs.bash.shellAliases;
     # plugins = 
     # loginExtra=
     initExtra = ''
@@ -64,6 +66,8 @@
       alias -s pdf=xdg-open
       alias -s doc=xdg-open
       alias -s docx=xdg-open
+
+      source $ZDOTDIR/zshrc
     '';
   };
 

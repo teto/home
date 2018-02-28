@@ -254,7 +254,13 @@ rec {
       frja="trans -from fr -to ja ";
       jaen="trans -from ja -to en ";
       enja="trans -from en -to ja ";
+
+      # TODO move to root level ?
+      nixpaste="curl -F \"text=<-\" http://nixpaste.lbr.uno";
     };
+
+# fonts.fontconfig.enableProfileFonts
+
     # TODO
 # alias mg="python2.7 -malot -n ~/.config/notmuch/notmuchrc"
 # alias mg="nix-shell -p 'python.withPackages(ps: with ps; [ alot ])' --show-trace --run \"alot -n \$XDG_CONFIG_HOME/notmuch/notmuchrc\""
@@ -325,7 +331,13 @@ rec {
   };
 
   # i3 now available !
-  xsession.enable = true;
+  xsession = {
+    enable = true;
+    # export ZDOTDIR
+    profileExtra = ''
+      # export ZDOTDIR=
+    '';
+  };
   # xsession.windowManager.command = "…";
     # ${pkgs.networkmanagerapplet}/bin/nm-applet &
 
