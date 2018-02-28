@@ -250,10 +250,10 @@ rec {
       latest="ls -lt |head";
       fren="trans -from fr -to en ";
       enfr="trans -from en -to fr ";
-      jpfr="trans -from jp -to fr ";
-      frjp="trans -from jp -to fr ";
-      jpen="trans -from jp -to en ";
-      enjp="trans -from en -to jp ";
+      jafr="trans -from ja -to fr ";
+      frja="trans -from fr -to ja ";
+      jaen="trans -from ja -to en ";
+      enja="trans -from en -to ja ";
     };
     # TODO
 # alias mg="python2.7 -malot -n ~/.config/notmuch/notmuchrc"
