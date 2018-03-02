@@ -24,7 +24,9 @@
 # autoload .gdbinit in subfolders of
 add-auto-load-safe-path /home/teto/
 
-source ~/.gdb/printers.py
+# hide Thread exit with LKL
+set print thread-events off
+# source ~/.gdb/printers.py
 
 
 # When debugging lispmob, ignore those signals
