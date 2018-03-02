@@ -1,11 +1,12 @@
-{ pkgs, lib,  ... }:
+{ pkgs, lib, config, ... }:
 {
   home.mailAccounts = [
     {
       userName = "mattator@gmail.com";
       realname = "Like skywalker";
       address = "mattator@gmail.com";
-      # store = home.folder."Maildir/gmail";
+      # todo make it optional ?
+      store = "maildir/gmail";
       # sendHost = "smtp.gmail.com";
     }
     ];

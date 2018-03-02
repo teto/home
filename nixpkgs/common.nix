@@ -115,7 +115,7 @@ rec {
 
   # variables set by PAM
   environment.sessionVariables = {};
-
+  environment.extraOutputsToInstall = [ "man" ];
   environment.variables = {
     EDITOR="nvim";
     BROWSER="qutebrowser";
