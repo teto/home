@@ -4,6 +4,7 @@
   imports = [
     # Not tracked, so doesn't need to go in per-machine subdir
       ./home-common.nix
+      ./home-mail.nix
       # ./mptcp-kernel.nix
       # symlink towards a config
     ]

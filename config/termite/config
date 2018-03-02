@@ -7,11 +7,11 @@ allow_bold = true
 dynamic_title = true
 fullscreen = false
 urgent_on_bell = true
-clickable_url = true
+clickable_url = false
 
 # apparently it's possible to
 font = Inconsolata For Powerline 11
-scrollback_lines = 10000
+scrollback_lines = 1000000
 search_wrap = false
 #icon_name = terminal
 #geometry = 640x480
