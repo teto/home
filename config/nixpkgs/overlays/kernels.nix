@@ -180,5 +180,10 @@ in rec {
   # hostPlatform = super.hostPlatform.overrideAttrs(old: {
     # platform = test-platform;
   # });
+
+  lkl_mptcp = super.pkgs.lkl.overrideAttrs(old: {
+    src=builtins.fetchGit file:///home/teto/lkl;
+  });
+
 }
 

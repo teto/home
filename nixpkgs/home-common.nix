@@ -1,5 +1,5 @@
 # home-manager specific config from
-{ pkgs, lib,  ... }:
+{ config, pkgs, lib,  ... }:
 
 # nix-shell -p 'python3.withPackages( ps : [ ps.scikitlearn ] )' ~/nixpkgs
 
@@ -131,6 +131,12 @@ rec {
   ]
   ++ heavyPackages;
 
+  # home.file.".gdbinit".source = ../config/gdbinit_simple;
+  home.file.".gdbinit".text = ''
+    # ../config/gdbinit_simple;
+    # gdb doesn't accept environment variable except via python
+    source ${config.xdg.configHome}/gdb/gdbinit_simple
+  '';
 
   # you can switch from cli with xkb-switch
   # or xkblayout-state
@@ -490,6 +496,10 @@ rec {
 # bindsym XF86AudioNext exec playerctl next
 # bindsym XF86AudioPrev exec playerctl previous
   };
+
+  # xresources.properties = {
+  # };
+
   xsession.initExtra = ''
     ${pkgs.feh}/bin/feh --bg-fill /home/teto/dotfiles/wallpapers/nebula.jpg
   '';

@@ -187,6 +187,9 @@ let
   # just to test for now
   nix.package = pkgs.nixUnstable;
 
+  # to change owner of setuid binaries like ping 
+  # security.wrappers
+
   # services.xserver.xrandrHeads = ;
 
   # seemingly working for chromium only, check for firefox
