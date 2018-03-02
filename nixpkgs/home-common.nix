@@ -40,6 +40,7 @@ let
     gnome3.nautilus # demande webkit/todo replace by nemo ?
     mcomix # manga reader
     mendeley # requiert qtwebengine
+    mpv
     pinta    # photo editing
     qtcreator  # for wireshark
     zeal       # doc for developers
