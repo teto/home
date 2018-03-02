@@ -187,8 +187,6 @@ add-zsh-hook preexec set_term_title
 add-zsh-hook precmd update_term_title
 
 # completion config {{{1
-# enables autocompletion for apt
-compdef apt=apt-get
 
 # manual completions
 . "$ZDOTDIR/git-extras-completion.zsh"
@@ -285,16 +283,6 @@ REPORTTIME=10
 # in hundredths of seconds (0 defaults to 0.4 ?! 1 => 10 ms)
 KEYTIMEOUT=1
 
-
-if [ $ON_NIXOS ]; then
-#     source "$HOME/.nix-profile/share/zsh/site-contrib/powerline.zsh"
-    source "$(autojump-share)/autojump.zsh"
-else
-#     # todo find a better way
-#     source "$ZDOTDIR/powerline.zsh"
-fi
-
-
 #RPROMPT='[%D{%L:%M:%S %p}]'
 
 # this code makes the prompt blink which is bad
@@ -383,14 +371,6 @@ FZF_PATH="$(fzf-share)"
 compdef _gnu_generic qutebrowser
 compdef _gnu_generic mptcpanalyzer
 
-# added by Nix installer (on ubuntu)
-if [ -e /home/teto/.nix-profile/etc/profile.d/nix.sh ]; then
-    . /home/teto/.nix-profile/etc/profile.d/nix.sh;
-# add 'j' command
-# todo if on nix, use autojump-share
-# . $which/usr/share/autojump/autojump.sh
-
-fi
 
 # todo only when on $NIXOS
 nix-env() {
@@ -406,37 +386,8 @@ nix-env() {
 }
 
 
-# VERY IMPORTANT else zsh can eat last line
- setopt prompt_sp
 # for android/lineage os developement
 # if [ -d "$HOME/adb-fastboot" ] ; then
 #     expot PATH="$HOME/adb-fastboot:$PATH"
 # fi
 #
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

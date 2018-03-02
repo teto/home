@@ -67,6 +67,10 @@
       alias -s doc=xdg-open
       alias -s docx=xdg-open
 
+      source ${pkgs.autojump}/share/autojump/autojump.zsh
+
+      # VERY IMPORTANT else zsh can eat last line
+      setopt prompt_sp
       source $ZDOTDIR/zshrc
     '';
   };

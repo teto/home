@@ -19,6 +19,7 @@ let
 
     # for user teto
     ./extraTools.nix
+    ./wireshark.nix
     # ./desktopPkgs.nix
   ];
 
@@ -183,9 +184,8 @@ let
     # musicDirectory
   };
 
-
-  programs.wireshark.enable = true; # installs setuid
-  programs.wireshark.package = pkgs.wireshark; # which one
+  # just to test for now
+  nix.package = pkgs.nixUnstable;
 
   # services.xserver.xrandrHeads = ;
 

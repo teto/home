@@ -49,10 +49,13 @@ keyring:
 	# or one can use secret-tool to store data
 	# secret-tool store --label msmtp host smtp.gmail.com service smtp user mattator
 	#keyring set
-	keyring set gmail login
-	keyring set gmail password
-	keyring set gmail client_secret
-	keyring set zaclys login
+	nix-shell -p 'python.withPackages(ps: with ps; [secretstorage keyring pygobject3])' '<nixpkgs>' \
+	keyring set gmail login \
+	keyring set gmail password \
+	keyring set gmail client_secret  \
+	keyring set iij login \
+	keyring set iij password \
+	keyring set zaclys login \
 	keyring set zaclys password
 
 cache:

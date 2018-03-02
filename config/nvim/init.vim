@@ -426,6 +426,7 @@ Plug 'lervag/vimtex', {'for': 'tex'} " so far the best one
 let g:far#collapse_result=1
 " }}}
 
+Plug 'gregsexton/gitv'
 Plug 'tweekmonster/nvimdev.nvim' " thanks tweekmonster !
 call plug#end()
 " }}}

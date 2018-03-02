@@ -29,7 +29,7 @@ postsynchook=notmuch --config=$XDG_CONFIG_HOME/notmuch/notmuchrc_pro new
 
 [Repository iij-local]
 type = Maildir
-localfolders = ~/Maildir/iij
+localfolders = ~/maildir/iij
 
 [Repository iij-remote]
 type = IMAP
@@ -61,7 +61,7 @@ postsynchook= notmuch --config=$XDG_CONFIG_HOME/notmuch/notmuchrc new
 
 [Repository gmail-local]
 type = GmailMaildir
-localfolders = ~/Maildir/gmail
+localfolders = ~/maildir/gmail
 
 [Repository gmail-remote]
 type = Gmail
