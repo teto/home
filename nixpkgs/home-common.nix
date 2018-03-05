@@ -2,6 +2,7 @@
 { config, pkgs, lib,  ... }:
 
 # nix-shell -p 'python3.withPackages( ps : [ ps.scikitlearn ] )' ~/nixpkgs
+      # ./latex.nix
 
 let
   stable = import <nixos> {}; # https://nixos.org/channels/nixos
@@ -10,6 +11,10 @@ let
     . "${fzfContrib}/completion.bash"
     . "${fzfContrib}/key-bindings.bash"
     '';
+
+  texliveEnv = pkgs.texlive.combine {
+     inherit (pkgs.texlive) scheme-small cleveref latexmk algorithms cm-super;
+   };
 
   i3extraConfig = lib.concatStrings [
     (builtins.readFile ../config/i3/config.header)
@@ -34,13 +39,11 @@ let
     # anki          # spaced repetition system
     # hopefully we can remove this from the environment
     # it's just that I can't setup latex correctly
-    texlive.combined.scheme-medium
     libreoffice
     qutebrowser  # keyboard driven fantastic browser
     gnome3.nautilus # demande webkit/todo replace by nemo ?
     mcomix # manga reader
     mendeley # requiert qtwebengine
-    mpv
     pinta    # photo editing
     qtcreator  # for wireshark
     zeal       # doc for developers
@@ -59,6 +62,7 @@ let
   desktopPkgs = with pkgs; [
     buku
     unstable.dropbox
+    mpv
     # feh
     unstable.evince # succeed where zathura/mupdf fail
     unstable.gnome3.file-roller # for GUI archive handling
@@ -300,7 +304,9 @@ rec {
   #   enableAdobeFlash = false;
   };
 
-  programs.neovim = import ./neovim.nix { inherit pkgs lib; };
+  programs.neovim = import ./neovim.nix {
+    inherit pkgs lib texliveEnv; 
+  };
 
   # home.activation.setXDGbrowser = dagEntryBefore [ "linkGeneration" ] ''
   # xdg-settings set default-web-browser firefox.desktop
