@@ -13,7 +13,9 @@ let
     '';
 
   texliveEnv = pkgs.texlive.combine {
-     inherit (pkgs.texlive) scheme-small cleveref latexmk algorithms cm-super;
+    # tabularx is not available
+    inherit (pkgs.texlive) scheme-small cleveref latexmk bibtex algorithms cm-super
+    csvsimple subfigure  glossaries biblatex logreq xstring biblatex-ieee subfiles mfirstuc;
    };
 
   i3extraConfig = lib.concatStrings [
@@ -509,6 +511,10 @@ rec {
 
   # xresources.properties = {
   # };
+
+  home.file.".latexmkrc".text =  ''
+    $bibtex="${texliveEnv}/bin/bibtex"
+    '';
 
   xsession.initExtra = ''
     ${pkgs.feh}/bin/feh --bg-fill /home/teto/dotfiles/wallpapers/nebula.jpg
