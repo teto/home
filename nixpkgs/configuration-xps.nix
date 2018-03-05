@@ -20,6 +20,7 @@ let
     # for user teto
     ./extraTools.nix
     ./wireshark.nix
+    ./wifi.nix
     # ./desktopPkgs.nix
   ];
 
@@ -56,6 +57,7 @@ let
   # creates problem with buffalo check if it blocks requests or what
   # it is necessary to use dnssec though :(
   networking.dnsExtensionMechanism = false;
+  networking.dnsSingleRequest = false;
   networking.extraHosts = secrets.extraHosts;
 
   # this is for gaming
@@ -95,6 +97,9 @@ let
     (import ./basetools.nix { inherit pkgs;})
     # strongswan # to get ipsec in path
     # cups-pk-helper # to add printer through gnome control center
+    # 
+    ++ [
+      ]
   ;
 
   # Select internationalisation properties.
@@ -160,11 +165,16 @@ let
     ;
     #  to keep build-time dependencies around => rebuild while being offline
     # build-use-sandbox = true
+    # 
     extraOptions = ''
       # careful will prevent from fetching local git !
       build-use-sandbox = true
       gc-keep-outputs = true
-      gc-keep-derivations = true
+      # http-connections = 25 is the default
+      http2 = true
+      keep-derivations = true
+      keep-failed = true
+      show-trace = true
     '';
 
     # either use --option extra-binary-caches http://hydra.nixos.org/

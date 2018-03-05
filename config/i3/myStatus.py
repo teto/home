@@ -34,7 +34,6 @@ clock = status.register(
         # ("%a %-d Format 1",'Europe/Dublin'),
         # "%a %-d %b %X ",
         # 
-        " %a %-d %X",
         (" %a %-d %X (Tokyo)", 'Asia/Tokyo'),
         (" %a %-d %X (Paris)", 'Europe/Paris'),
     ],

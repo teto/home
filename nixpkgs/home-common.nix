@@ -451,7 +451,10 @@ rec {
         #
 # set $mod Mod1
 # il ne comprend pas Super_L
-    keybindings = let mad="Mod4"; mod="Mod1"; 
+    keybindings = 
+    let 
+      mad="Mod4"; mod="Mod1"; 
+      notify-send = "${pkgs.libnotify}/bin/notify-send";
     in {
         # todo use i3lock-fancy instead
         "${mod}+Ctrl+L"="exec ${pkgs.i3lock-fancy}/bin/i3lock-fancy";
@@ -475,8 +478,8 @@ rec {
   # XF86AudioMute exec amixer -q set Master toggle; exec notify-send "Mute toggle"
       "$GroupFr+$mod+apostrophe"="kill";
       "$GroupUs+$mod+4"="kill";
-        "XF86AudioRaiseVolume"="exec --no-startup-id pactl set-sink-volume 0 +5%;exec notify-send 'Audio Raised volume'";
-        "XF86AudioLowerVolume"="exec --no-startup-id pactl set-sink-volume 0 -5%;exec notify-send 'Audio lowered'";
+        "XF86AudioRaiseVolume"="exec --no-startup-id pactl set-sink-volume 0 +5%;exec ${notify-send} 'Audio Raised volume'";
+        "XF86AudioLowerVolume"="exec --no-startup-id pactl set-sink-volume 0 -5%;exec ${notify-send} 'Audio lowered'";
         "XF86AudioMute"="exec --no-startup-id pactl set-sink-mute 0 toggle;";
       }
       // bind_ws 1 "a" "q"
