@@ -64,6 +64,7 @@ rec {
   environment.systemPackages = with pkgs; [
     manpages  # because man tcp should always be available
     termite.terminfo # to be able to edit over ssh
+    dhcp # to have dhclient in PATH
   ]
   ++ (load-packages ./basetools.nix)
   ;
