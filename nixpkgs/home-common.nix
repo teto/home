@@ -463,7 +463,9 @@ rec {
     let 
       mad="Mod4"; mod="Mod1"; 
       notify-send = "${pkgs.libnotify}/bin/notify-send";
-    in {
+    in 
+    # lib.mkOptionDefault 
+    {
         # todo use i3lock-fancy instead
         "${mod}+Ctrl+L"="exec ${pkgs.i3lock-fancy}/bin/i3lock-fancy";
         "${mad}+h"="${pkgs.rofi} -modi 'clipboard:greenclip print' -show clipboard";
