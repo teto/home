@@ -1488,38 +1488,31 @@ let g:vimtex_quickfix_mode = 2 " 1=> opened automatically and becomes active (2=
 " Package biblatex Warning: B
 " with being on anotherline
 " deprecated by g:vimtex_quickfix_latexlog|)
+"
+      " \ 'Biber reported the following issues',
+      " \ "Invalid format of field 'month'"
 let g:vimtex_quickfix_ignored_warnings = [
       \ 'Underfull',
       \ 'Overfull',
       \ 'specifier changed to',
-      \ 'Biber reported the following issues',
-      \ "Invalid format of field 'month'"
       \ ]
+    let g:vimtex_compiler_latexmk = {
+        \ 'background' : 1,
+        \ 'build_dir' : '',
+        \ 'callback' : 1,
+        \ 'continuous' : 1,
+        \ 'executable' : 'latexmk',
+        \ 'options' : [
+        \   '-pdf',
+        \   '-verbose',
+        \   '-file-line-error',
+        \   '-synctex=1',
+        \   '-interaction=nonstopmode',
+        \   '-biber'
+        \ ],
+        \}
       "
-  " if !exists('g:ycm_semantic_triggers')
-  "   let g:ycm_semantic_triggers = {}
-  " endif
-  " let g:ycm_semantic_triggers.tex = [
-  "       \ 're!\\[A-Za-z]*cite[A-Za-z]*(\[[^]]*\]){0,2}{[^}]*',
-  "       \ 're!\\[A-Za-z]*ref({[^}]*|range{([^,{}]*(}{)?))',
-  "       \ 're!\\hyperref\[[^]]*',
-  "       \ 're!\\includegraphics\*?(\[[^]]*\]){0,2}{[^}]*',
-  "       \ 're!\\(include(only)?|input){[^}]*',
-  "       \ 're!\\\a*(gls|Gls|GLS)(pl)?\a*(\s*\[[^]]*\]){0,2}\s*\{[^}]*',
-  "       \ 're!\\includepdf(\s*\[[^]]*\])?\s*\{[^}]*',
-  "       \ 're!\\includestandalone(\s*\[[^]]*\])?\s*\{[^}]*',
-  "       \ ]
 "<plug>(vimtex-toc-toggle)
-"<plug>(vimtex-labels-toggle)
-    " autocmd FileType tex nnoremap <leader>lt <plug>(vimtex-toc-toggle)
-  "augroup latex
-    "autocmd!
-    "autocmd FileType tex nnoremap <buffer><F5> :VimtexCompile<CR>
-    "autocmd FileType tex map <silent> <buffer><F8> :call vimtex#latexmk#errors_open(0)<CR>
-  "augroup END
-
-" using it during
-" us histadd
 " au BufEnter *.tex exec ":setlocal spell spelllang=en_us"
 "" }}}
 " Pymode {{{

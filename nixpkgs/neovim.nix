@@ -25,6 +25,7 @@
 
     # hopefully the 'configure' variable will be improved to set $MYVIMRC
     # adopt neovim path etc
+    # " let g:vimtex_compiler_latexmk.executable='${texliveEnv}/bin/latexmk'
     configure = {
         customRC = ''
         " here your custom configuration goes!
@@ -41,7 +42,6 @@
         let g:vimtex_compiler_latexmk = {}
         " latexmk is not in combined.small/basic
         " vimtex won't let us setup paths to bibtex etc, we can do it in .latexmk ?
-        let g:vimtex_compiler_latexmk.executable='${texliveEnv}/bin/latexmk'
 
         let g:deoplete#sources#clang#libclang_path='${pkgs.llvmPackages.libclang}'
         " let g:deoplete#sources#clang#libclang_header='/usr/include/clang/3.8.1/'

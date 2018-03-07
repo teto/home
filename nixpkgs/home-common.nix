@@ -307,7 +307,9 @@ rec {
   };
 
   programs.neovim = import ./neovim.nix {
-    inherit pkgs lib texliveEnv; 
+    inherit pkgs lib 
+    texliveEnv
+    ; 
   };
 
   # home.activation.setXDGbrowser = dagEntryBefore [ "linkGeneration" ] ''
@@ -514,17 +516,17 @@ rec {
   # xresources.properties = {
   # };
 
-  home.file.".latexmkrc".text =  ''
-    $bibtex="${texliveEnv}/bin/bibtex"
-    # c'est du perl à priori
-    $pdflatex = 'pdflatex -shell-escape -file-line-error -synctex=1 %O %S';
-    # How to make the PDF viewer update its display when the PDF file changes.  See the man page for a description of each method.
-    # $pdf_update_method = 2;
+  # home.file.".latexmkrc".text =  ''
+  #   $bibtex="${texliveEnv}/bin/bibtex"
+  #   # c'est du perl à priori
+  #   $pdflatex = 'pdflatex -shell-escape -file-line-error -synctex=1 %O %S';
+  #   # How to make the PDF viewer update its display when the PDF file changes.  See the man page for a description of each method.
+  #   # $pdf_update_method = 2;
 
-    # When PDF update method 2 is used, the number of the Unix signal to send
-    # $pdf_update_signal = 'SIGHUP';
+  #   # When PDF update method 2 is used, the number of the Unix signal to send
+  #   # $pdf_update_signal = 'SIGHUP';
 
-  '';
+  # '';
   home.file.".mailcap".text =  ''
     text/html;  ${pkgs.w3m}/bin/w3m -dump -o document_charset=%{charset} '%s'; nametemplate=%s.html; copiousoutput
   '';
