@@ -525,6 +525,9 @@ rec {
     # $pdf_update_signal = 'SIGHUP';
 
   '';
+  home.file.".mailcap".text =  ''
+    text/html;  ${pkgs.w3m}/bin/w3m -dump -o document_charset=%{charset} '%s'; nametemplate=%s.html; copiousoutput
+  '';
 
   xsession.initExtra = ''
     ${pkgs.feh}/bin/feh --bg-fill /home/teto/dotfiles/wallpapers/nebula.jpg

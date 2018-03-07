@@ -1,19 +1,27 @@
 { pkgs, lib, config, ... }:
 {
+  # todo give it a name
   home.mailAccounts = [
     {
-      userName = "mattator@gmail.com";
-      realname = "Like skywalker";
+      name = "gmail";
+      userName = "mattator";
+      realname = "Luke skywalker";
       address = "mattator@gmail.com";
       # todo make it optional ?
       store = "maildir/gmail";
-      # sendHost = "smtp.gmail.com";
+      sendHost = "smtp.gmail.com";
+      # getLogin = "";
+      # getPass = "";
     }
     ];
 
 
    # TODO conditionnally define these
    programs.notmuch = {
+     enable = true;
+   };
+
+   programs.msmtp = {
      enable = true;
    };
 
