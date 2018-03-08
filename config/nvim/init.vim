@@ -770,7 +770,14 @@ nnoremap <Leader>w :w<CR>
 "nnoremap <F8> :vertical wincmd f<CR> " open file under cursor in a split
 nnoremap <leader>gfs :vertical wincmd f<CR> " open file under cursor in a split
 " vim-pad {{{
-let g:pad#dir=$XDG_DATA_HOME."/notes"
+let g:pad#dir=$XDG_DATA_HOME"/notes"
+let g:pad#set_mappings=0
+let g:pad#silent_on_mappings_fail=1
+let g:pad#default_format = "markdown"
+nmap <leader>pl <Plug>(pad-list)
+nmap <leader>ps <Plug>(pad-search)
+nmap <leader>pn <Plug>(pad-new)
+
 " let g:pad#rename_files = 0
 "}}}
 " gutentags + gutenhasktags {{{
@@ -1597,13 +1604,13 @@ xmap gs <plug>(GrepperOperator)
 " }}}
 " sidesearch {{{
 " SideSearch current word and return to original window
-nnoremap <Leader>ss :SideSearch <C-r><C-w><CR> | wincmd p
+" nnoremap <Leader>ss :SideSearch <C-r><C-w><CR> | wincmd p
 
-" Create an shorter `SS` command
-command! -complete=file -nargs=+ SS execute 'SideSearch <args>'
+" " Create an shorter `SS` command
+" command! -complete=file -nargs=+ SS execute 'SideSearch <args>'
 
-" or command abbreviation
-cabbrev SS SideSearch"
+" " or command abbreviation
+" cabbrev SS SideSearch"
 " }}}
 " folding config {{{
 " block,hor,mark,percent,quickfix,search,tag,undo
@@ -1830,11 +1837,6 @@ endfunc
 " does not work as neomake won"'t take into account
 command! NvimLintToggle :call VarToggle("g:nvimdev_auto_lint")
         " \ 'remove_invalid_entries': get(g:, 'neomake_remove_invalid_entries', 0),
-"}}}
-" vim-pad {{{
-let g:pad#silent_on_mappings_fail=1
-
-let g:pad#default_format = "markdown"
 "}}}
 "coquille{{{
 " Maps Coquille commands to <F2> (Undo), <F3> (Next), <F4> (ToCursor)
