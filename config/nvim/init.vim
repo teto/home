@@ -1490,7 +1490,7 @@ let g:vimtex_syntax_minted = [
       \ {
       \   'lang' : 'json',
       \ }]
-
+let g:vimtex_log_verbose= 0
 let g:vimtex_quickfix_mode = 2 " 1=> opened automatically and becomes active (2=> inactive)
 " Package biblatex Warning: B
 " with being on anotherline

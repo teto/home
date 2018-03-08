@@ -47,6 +47,7 @@ let
   boot.kernel.sysctl = {
     # to not provoke the kernel into crashing
     "net.ipv4.tcp_timestamps" = 0;
+    "net.ipv4.ipv4.ip_forward" = 1;
     # "net.ipv4.tcp_keepalive_time" = 60;
     # "net.core.rmem_max" = 4194304;
     # "net.core.wmem_max" = 1048576;
@@ -54,6 +55,8 @@ let
 
   networking.hostName = "jedha"; # Define your hostname.
 
+  # TODO add the chromecast
+  networking.firewall.allowedUDPPorts = [ ];
   # creates problem with buffalo check if it blocks requests or what
   # it is necessary to use dnssec though :(
   networking.dnsExtensionMechanism = false;
