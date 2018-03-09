@@ -13,6 +13,17 @@
       # getLogin = "";
       # getPass = "";
     }
+    {
+      name = "test";
+      userName = "mattator";
+      realname = "Luke skywalker";
+      address = "test@testjj.ad.jp";
+      # todo make it optional ?
+      store = "maildir/test";
+      sendHost = "smtp.gmail.com";
+      # getLogin = "";
+      # getPass = "";
+    }
     ];
 
 

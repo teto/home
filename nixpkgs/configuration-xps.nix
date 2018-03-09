@@ -37,6 +37,7 @@ let
     grub.device = "/dev/sda";
   };
 
+  boot.kernelParams = [ " console=ttyS0" ];
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
   # TODO we need nouveau 
