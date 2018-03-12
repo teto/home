@@ -40,7 +40,7 @@ set history save
 #target remote :1234
 set directories $
 # enable pretty
-enable pretty-printers
+# enable pretty-printers
 set print pretty on
 set print array on
 set print object on
@@ -70,17 +70,8 @@ end
 # enters python mode
 python
 import os
-dirs = [
-"/home/teto/iperf3/src",
-"/home/teto/ns3off/src",
-"/home/teto/iperf2/src"
-]
-
-
-gdb.execute('directory ' + ' '.join(dirs))
-
-gdb.execute("set history filename " + os.environ['XDG_CACHE_HOME'] + "gdb_history")
-
-gdb.execute("show directories")
+# dirs = [ ]
+# gdb.execute('directory ' + ' '.join(dirs))
+# gdb.execute("show directories")
 end 
 # returend to normal mode

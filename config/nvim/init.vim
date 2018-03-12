@@ -87,6 +87,8 @@ set exrc
 
 " vim-plug plugin declarations {{{1
 call plug#begin(s:plugdir)
+" branch v2-integration
+Plug 'joonty/vdebug' " to add breakpoints etc
 Plug 'mhinz/vim-signify' " Indicate changed lines within a file using a VCS.
 " Plug 'vim-pandoc/vim-pandoc'
 Plug 'vim-pandoc/vim-pandoc-syntax'
