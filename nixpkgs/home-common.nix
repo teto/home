@@ -145,6 +145,7 @@ rec {
     # ../config/gdbinit_simple;
     # gdb doesn't accept environment variable except via python
     source ${config.xdg.configHome}/gdb/gdbinit_simple
+    set history filename ${config.xdg.cacheHome}/gdb_history
   '';
 
   # you can switch from cli with xkb-switch
