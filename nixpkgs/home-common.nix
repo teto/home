@@ -63,6 +63,7 @@ let
   ];
   desktopPkgs = with pkgs; [
     buku
+    # gcalc
     unstable.dropbox
     mpv
     # feh
@@ -87,6 +88,7 @@ let
     w3m # for preview in ranger w3mimgdisplay
     xdotool # needed for vimtex + zathura
     xorg.xev
+    xorg.xbacklight
     xclip
     xcwd
     zathura
@@ -275,11 +277,6 @@ rec {
 
 # fonts.fontconfig.enableProfileFonts
 
-    # TODO
-# alias mg="python2.7 -malot -n ~/.config/notmuch/notmuchrc"
-# alias mg="nix-shell -p 'python.withPackages(ps: with ps; [ alot ])' --show-trace --run \"alot -n \$XDG_CONFIG_HOME/notmuch/notmuchrc\""
-# alias astroperso="astroid"
-# alias astropro="astroid -c ~/.config/astroid/config_pro"
 
     # extra
     # ${ranger}/share/doc/ranger/examples/bash_automatic_cd.sh

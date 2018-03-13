@@ -21,6 +21,7 @@ let
     ./extraTools.nix
     ./wireshark.nix
     ./wifi.nix
+    ./tor.nix
     # ./desktopPkgs.nix
   ];
 

@@ -1,8 +1,1 @@
-import keyring
-
-def get_pass (service, name):
-    v = keyring.get_password(service, name)
-    # print("TEEESSTTT", v)
-    # print("type", type(v))
-    return v
-
+/nix/store/qi583i3f3n60n3zh9zddijqnk478y29g-home-manager-files/.config/offlineimap/get_settings.py
