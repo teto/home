@@ -1,35 +1,55 @@
 { pkgs, lib, config, ... }:
 {
   # todo give it a name
-  home.mailAccounts = [
+  mail = {
+    accounts = [
     {
       name = "gmail";
       userName = "mattator";
       realname = "Luke skywalker";
       address = "mattator@gmail.com";
       # todo make it optional ?
-      store = "maildir/gmail";
+      # store = home.homeDirectory + ./maildir/gmail;
       sendHost = "smtp.gmail.com";
+
+      # generate wrappers
+      # mta = {
+      # };
+      # postSyncHook = ''
+      #   # TODO je veux pouvoir ajouter mes tags
+      # '';
+      # filters = [ { from = ""; } { } ];
+      # mua= "notmuch";
+      # mra= "notmuch";
+      # mta= "notmuch";
+
+      # postSyncHookExtra=''
+      #   notmuch tag --batch --input="~/.notmuch/tag_ietf
+      # '';
       # getLogin = "";
       # getPass = "";
     }
-    {
-      name = "test";
-      userName = "mattator";
-      realname = "Luke skywalker";
-      address = "test@testjj.ad.jp";
-      # todo make it optional ?
-      store = "maildir/test";
-      sendHost = "smtp.gmail.com";
-      # getLogin = "";
-      # getPass = "";
-    }
+
+    # {
+    #   name = "test";
+    #   userName = "mattator";
+    #   realname = "Luke skywalker";
+    #   address = "test@testjj.ad.jp";
+    #   # todo make it optional ?
+    #   store = "maildir/test";
+    #   sendHost = "smtp.gmail.com";
+    #   # getLogin = "";
+    #   # getPass = "";
+    # }
     ];
 
+  };
 
    # TODO conditionnally define these
    programs.notmuch = {
      enable = true;
+     contactCompletion = "notmuch address";
+     postSyncHook=" ";
    };
 
    programs.msmtp = {
@@ -38,9 +58,28 @@
 
    programs.alot = {
      enable = true;
+      # createAliases=true;
+     # generate alias
+     # TODO test http://alot.readthedocs.io/en/latest/configuration/key_bindings.html
+     # w = pipeto urlscan 2> /dev/null
+     extraConfig=''
+      # see https://github.com/pazz/alot/wiki/Tips,-Tricks-and-other-cool-Hacks for more ideas
+      initial_command = bufferlist; taglist; search foo; search bar; buffer 0
+
+      mailinglists = lisp@ietf.org, taps@ietf.org 
+
+      [bindings]
+        [[thread]]
+          ' ' = fold; untag unread; move next unfolded
+    '';
    };
 
-   # programs.offlineimap = {
-   #   enable = true;
-   # };
+   programs.offlineimap = {
+     enable = true;
+     # postSyncHook=''
+     #  notmuch --config=$XDG_CONFIG_HOME/notmuch/notmuchrc new
+     #   '';
+     # extraConfig = account: section: "toto";
+     # pass 
+   };
 }

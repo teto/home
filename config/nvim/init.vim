@@ -1041,7 +1041,7 @@ nnoremap <leader>kl :YcmCompleter GoTo <CR>
 nnoremap <leader>kh :YcmCompleter GoToInclude<CR>
 " }}}
 " Deoplete {{{
-let g:deoplete#enable_at_startup = 0
+let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_ignore_case = 1
 let g:deoplete#disable_auto_complete = 0
 let g:deoplete#enable_debug = 1

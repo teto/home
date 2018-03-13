@@ -84,29 +84,6 @@ rec {
     propagatedBuildInputs = with super.pythonPackages; oldAttrs.propagatedBuildInputs ++ [ secretstorage keyring pygobject3  ];
   });
 
-  # networkmanager-dev = super.networkmanager.overrideAttrs (oldAttrs: {
-  #   # pygobject2
-  #   name = "networkmanager-dev";
-  #   src = super.lib.cleanSource ~/NetworkManager;
-  #   # propagatedBuildInputs = with super.pythonPackages; oldAttrs.propagatedBuildInputs ++ [ keyring pygobject3  ];
-  # });
-
-  # fcitx-master = super.fcitx.overrideAttrs (oldAttrs: rec {
-  #   # https://github.com/fcitx/fcitx/issues/367#event-1277674192
-  #   version = "master";
-  #   # src = fetchGitHashless {
-  #   #   url="git@github.com:fcitx/fcitx5.git";
-  #   #   rev = "b2143f10426ee5115cfa655abfa497b57c2c0fdb";
-  #   #   sha256 = "0pf0dvmm0xiyzdhj67wizi7wczm7dvlznn6r9kp10zpy0v7g7gg3";
-  #     src = super.pkgs.fetchFromGitHub {
-  #     owner = "fcitx";
-  #     repo = "fcitx";
-  #     rev = "master";
-  #     sha256 = "1j5wqj1zcihf171p3zc8g6sn4xy5jpcxg3wmiqn32cc6226n19kb";
-  #   };
-  #   SSL_CERT_FILE="${super.pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
-  # });
-
   vdirsyncer-custom = super.vdirsyncer.overrideAttrs(oldAttrs: rec {
 
 # fetchGitHashless

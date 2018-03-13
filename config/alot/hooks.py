@@ -45,6 +45,8 @@ def pre_search_refineprompt(ui, dbm, cmd, **kwargs):
     sbuffer.querystring = oldquery
     return ui.apply_command
 
+
+# could be added to HM hooks
 def pre_global_refresh(**kwargs):
     logging.info('Syncing mail with offlineimap')
     
