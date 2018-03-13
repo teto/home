@@ -23,7 +23,7 @@
       "net.mptcp.mptcp_checksum" = 0;
       "net.mptcp.mptcp_enabled" = 1;
       # https://unix.stackexchange.com/questions/13019/description-of-kernel-printk-values
-      "kernel.printk" = "0	0	0	0";
+      "kernel.printk" = "7	7	7	7";
       "net.ipv4.tcp_no_metrics_save"=1;
 # kernel.printk_delay = 0
 # kernel.printk_devkmsg = ratelimit

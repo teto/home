@@ -75,6 +75,9 @@ let
     debugConfig = ''
       GDB_SCRIPTS y
       PRINTK_TIMES y
+      # dynamic debug takes precedence over DEBUG_KERNEL http://blog.listnukira.com/Linux-Kernel-pr-debug-display/
+      DYNAMIC_DEBUG n
+      PREEMPT y
       DEBUG_KERNEL y
       FRAME_POINTER y
       KGDB y
