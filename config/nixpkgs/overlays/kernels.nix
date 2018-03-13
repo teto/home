@@ -73,6 +73,7 @@ let
     '';
 
     debugConfig = ''
+      GDB_SCRIPTS y
       PRINTK_TIMES y
       DEBUG_KERNEL y
       FRAME_POINTER y
