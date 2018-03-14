@@ -204,7 +204,6 @@ rec {
     WEECHAT_HOME="$XDG_CONFIG_HOME/weechat";
     TIGRC_USER="$XDG_CONFIG_HOME/tig/tigrc";
     LESSHISTFILE="$XDG_CACHE_HOME/less/history";
-    NOTMUCH_CONFIG="$XDG_CONFIG_HOME/notmuch/notmuchrc";
     INPUTRC="$XDG_CONFIG_HOME/inputrc";
     IPYTHONDIR="$XDG_CONFIG_HOME/ipython";
     JUPYTER_CONFIG_DIR="$XDG_CONFIG_HOME/jupyter";
@@ -212,7 +211,7 @@ rec {
     XDG_CONFIG_DIRS="$XDG_CONFIG_HOME:$HOME/dotfiles";
     # PATH+=":$HOME/rofi-scripts";
     MUTT="$XDG_CONFIG_HOME/mutt";
-    MAILDIR="$HOME/Maildir";
+    # MAILDIR="$HOME/Maildir";
 
     # TODO add symlinks instead towards $XDG_DATA_HOME/bin ?
     # now these are submoudles of dotfiles To re;ove
