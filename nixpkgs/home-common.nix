@@ -76,6 +76,7 @@ let
     # mdp # markdown CLI presenter
     nox # helps with reviewing and to install files
     # gnome3.gnome_control_center
+    unstable.gnome3.gnome-calculator
     unstable.qtpass
     sublime3
     scrot

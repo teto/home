@@ -846,6 +846,9 @@ nnoremap <Leader>c :FzfCommits<CR>
 nnoremap <Leader>C :FzfColors<CR>
 nnoremap <leader>b :FzfBuffers<CR>
 nnoremap <leader>m :FzfMarks<CR>
+nnoremap <leader>l :FzfLines<CR>
+nnoremap <leader>t :FzfTags<CR>
+nnoremap <leader>T :FzfBTags<CR>
 
 
 function! SeeLineHistory()
