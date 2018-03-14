@@ -30,17 +30,19 @@
       # getPass = "";
     }
 
-    # {
-    #   name = "test";
-    #   userName = "mattator";
-    #   realname = "Luke skywalker";
-    #   address = "test@testjj.ad.jp";
+    {
+      name = "iij";
+      userName = "coudron@iij.ad.jp";
+      realname = "Matthieu Coudron";
+      address = "test@testjj.ad.jp";
     #   # todo make it optional ?
     #   store = "maildir/test";
+        imapHost = "imap-tyo.iiji.jp";
+      sendHost = "mbox.iiji.jp";
     #   sendHost = "smtp.gmail.com";
     #   # getLogin = "";
     #   # getPass = "";
-    # }
+    }
     ];
 
   };
