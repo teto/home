@@ -12,12 +12,14 @@
       # store = home.homeDirectory + ./maildir/gmail;
       sendHost = "smtp.gmail.com";
 
+
       # generate wrappers
       # mta = {
       # };
-      # postSyncHook = ''
-      #   # TODO je veux pouvoir ajouter mes tags
-      # '';
+      postSyncHook = ''
+        # TODO je veux pouvoir ajouter mes tags
+        echo "hello world"
+      '';
       # filters = [ { from = ""; } { } ];
       # mua= "notmuch";
       # mra= "notmuch";
@@ -51,7 +53,6 @@
    programs.notmuch = {
      enable = true;
      contactCompletion = "notmuch address";
-     postSyncHook=" ";
    };
 
    programs.msmtp = {
@@ -81,7 +82,32 @@
      # postSyncHook=''
      #  notmuch --config=$XDG_CONFIG_HOME/notmuch/notmuchrc new
      #   '';
-     # extraConfig = account: section: "toto";
-     # pass 
+     # extraConfig = ''
+
+# [Account iij] # {{{
+# localrepository = iij-local
+# remoterepository = iij-remote
+# maxage=10
+# # presynchook=imapfilter
+# # TODO notify user run a script that will launch tag
+# postsynchook=notmuch --config=$XDG_CONFIG_HOME/notmuch/notmuchrc_pro new
+
+# [Repository iij-local]
+# type = Maildir
+# localfolders = ~/maildir/iij
+
+# [Repository iij-remote]
+# type = IMAP
+# # imap-tyo.iiji.jp
+# # imap911.iiji.jp
+# remotehost = imap-tyo.iiji.jp
+# # ssl=yes
+# remoteuser = coudron@iij.ad.jp
+# realdelete = no
+# sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+# # on gmail just remove tags, you really need to move files to trash folder
+# maxconnections = 3
+# # }}}
+     #   '';
    };
 }
