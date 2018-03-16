@@ -220,7 +220,8 @@ Plug 'sjl/gundo.vim' " :GundoShow/Toggle to redo changes
 "{{{
 Plug 'neovimhaskell/haskell-vim', {'for':'haskell'} " haskell install
 " Plug 'enomsg/vim-haskellConcealPlus', {'for':'haskell'}     " unicode for haskell operators
-Plug 'eagletmt/ghcmod-vim', {'do': 'cabal install ghc-mod', 'for': 'haskell'} " requires
+" Plug 'eagletmt/ghcmod-vim', {'do': 'cabal install ghc-mod', 'for': 'haskell'} " requires
+Plug 'parsonsmatt/intero-neovim' " replaces ghcmod
 " Plug 'bitc/vim-hdevtools'
 Plug 'eagletmt/neco-ghc', {'for': 'haskell'} " completion plugin for haskell + deoplete ?
 Plug 'Shougo/vimproc.vim', {'do' : 'make'} " needed by neco-ghc
@@ -791,15 +792,17 @@ let g:gutentags_ctags_exclude = ['.vim-src', 'build']
 " }}}
 " start haskell host if required  {{{
 if has('nvim')
-  " function! s:RequireHaskellHost(name)
-  "   " return rpcstart("/home/saep/.bin/nvim-hs-devel.sh", ['-l','/tmp/nvim-log.txt','-v','DEBUG',a:name.name])
-  "   return rpcstart("nvim-hs", ['-l','/home/teto/nvim-haskell.log','-v','DEBUG',a:name.name])
-  " endfunction
+  function! s:RequireHaskellHost(name)
+      " It is important that the current working directory (cwd) is where
+      " your configuration files are.
+      " 'nix-shell', '-p',
+      return jobstart([ 'stack', 'exec', 'nvim-hs', a:name.name], {'rpc': v:true, 'cwd': expand('$HOME') . '/.config/nvim'})
+    " return jobstart("nvim-hs", ['-l','/home/teto/nvim-haskell.log','-v','DEBUG',a:name.name])
+  endfunction
 
-  " call remote#host#Register('haskell', "*.l\?hs", function('s:RequireHaskellHost'))
+  call remote#host#Register('haskell', "*.l\?hs", function('s:RequireHaskellHost'))
   " let hc=remote#host#Require('haskell')
 " " echo rpcrequest(hc, "PingNvimhs") should print Pong
-  " call rpcrequest(hc, 'PingNvimhs')
 endif
 "}}}
 " hdevtools {{{

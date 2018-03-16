@@ -190,6 +190,26 @@ rec {
     inherit (super) lib;
   };
 
+
+  rt-tests = super.stdenv.mkDerivation {
+    name = "re-tests";
+    version = "1.0";
+    src = super.fetchurl {
+      url = https://mirrors.edge.kernel.org/pub/linux/utils/rt-tests/rt-tests-1.0.tar.gz;
+      sha256="0zzyyl5wwvq621gwjfdrpj9mf3gy003hrhqry81s1qmv7m138v5v";
+    };
+
+    nativeBuildInputs = with super.pkgs; [ numactl ];
+    # prefix is not passed when installing apparently
+
+    meta = with super.stdenv.lib; {
+      homepage = https://wiki.linuxfoundation.org/realtime/documentation/howto/tools/rt-tests;
+      description = "Linux latency analysis";
+      license = licenses.gpl2;
+      maintainers = [maintainers.teto];
+      platforms = platforms.linux;
+    };
+  };
   # to help debug a neovim crash
   # unibilium = super.unibilium.overrideAttrs (old: {
   #   separateDebugInfo = true;
