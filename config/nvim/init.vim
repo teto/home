@@ -88,7 +88,8 @@ set exrc
 " vim-plug plugin declarations {{{1
 call plug#begin(s:plugdir)
 " branch v2-integration
-Plug 'joonty/vdebug' " to add breakpoints etc
+" Plug 'joonty/vdebug' " to add breakpoints etc
+Plug 'andymass/vim-matchup' " to replace matchit
 Plug 'mhinz/vim-signify' " Indicate changed lines within a file using a VCS.
 " Plug 'vim-pandoc/vim-pandoc'
 Plug 'vim-pandoc/vim-pandoc-syntax'
@@ -118,7 +119,7 @@ Plug 'junegunn/vim-github-dashboard', { 'do': ':UpdateRemotePlugins' }
 Plug 'fmoralesc/vim-pad', {'branch': 'devel'} " :Pad new, note taking
 "}}}
 " to test https://github.com/neovim/neovim/issues/3688
-Plug 'haya14busa/incsearch.vim' " just to test
+" Plug 'haya14busa/incsearch.vim' " just to test
 " while waiting for my neovim notification provider...
 Plug 'tjdevries/descriptive_maps.vim', {'do': ':UpdateRemotePlugins' } " :call DescriptiveStart()
 Plug 'gianarb/notify.vim' " call notify#emitNotification('Title', 'Body')

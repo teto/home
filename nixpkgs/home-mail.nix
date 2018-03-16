@@ -67,7 +67,7 @@
      # w = pipeto urlscan 2> /dev/null
      extraConfig=''
       # see https://github.com/pazz/alot/wiki/Tips,-Tricks-and-other-cool-Hacks for more ideas
-      initial_command = bufferlist; taglist; search foo; search bar; buffer 0
+      # initial_command = bufferlist; taglist; search foo; search bar; buffer 0
 
       mailinglists = lisp@ietf.org, taps@ietf.org 
 
