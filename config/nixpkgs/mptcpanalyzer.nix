@@ -42,7 +42,10 @@ buildPythonApplication rec {
 	# buildInputs = [  stevedore pandas matplotlib  ];
     # to build the doc sphinx
     # TODO package tshark
-    propagatedBuildInputs = [ stevedore cmd2 pyperclip pandas matplotlib pyqt5
+    propagatedBuildInputs = [ stevedore cmd2 pyperclip pandas 
+    # we want gtk because qt is so annying on nixos
+    (matplotlib.override { enableGtk3=true;})
+    pyqt5
     tshark pyperclip ];
 	/* propagatedBuildInputs =  [ stevedore pandas matplotlib pyqt5 ]; */
 

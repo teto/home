@@ -224,6 +224,8 @@ rec {
   # todo set it only if path exists
   #  options.nix.nixPath.default ++ TODO mkMerge/mkBefore etc
   # convert set back to list
+  security.sudo.enable = true;
+  security.sudo.wheelNeedsPassword = true;
 
   system = {
     # stateVersion = "17.03"; # why would I want to keep that ?

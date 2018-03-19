@@ -221,7 +221,8 @@ Plug 'sjl/gundo.vim' " :GundoShow/Toggle to redo changes
 "{{{
 Plug 'neovimhaskell/haskell-vim', {'for':'haskell'} " haskell install
 " Plug 'enomsg/vim-haskellConcealPlus', {'for':'haskell'}     " unicode for haskell operators
-Plug 'eagletmt/ghcmod-vim', {'do': 'cabal install ghc-mod', 'for': 'haskell'} " requires
+" Plug 'eagletmt/ghcmod-vim', {'do': 'cabal install ghc-mod', 'for': 'haskell'} " requires
+Plug 'parsonsmatt/intero-neovim' " replaces ghcmod
 " Plug 'bitc/vim-hdevtools'
 Plug 'eagletmt/neco-ghc', {'for': 'haskell'} " completion plugin for haskell + deoplete ?
 Plug 'Shougo/vimproc.vim', {'do' : 'make'} " needed by neco-ghc
@@ -438,7 +439,6 @@ call plug#end()
 " set it to a big value
 " set scrolloff=3
 
-
 " Indentation {{{
 set tabstop=4 " a tab takes 4 characters (local to buffer) abrege en ts
 set shiftwidth=4 " Number of spaces to use per step of (auto)indent.
@@ -467,7 +467,6 @@ let g:loaded_netrwPlugin = 1 " ???
 command! -nargs=? -complete=dir Vexplore leftabove vsplit | silent Dirvish <args>
 command! -nargs=? -complete=dir Sexplore belowright split | silent Dirvish <args>
 " }}}
-
 
 set title " vim will change terminal title
 " look at :h statusline to see the available 'items'
@@ -498,7 +497,6 @@ set relativenumber
 " TODO do a macro that cycles throught show/hide absolute/relative line numbers
 map <C-N><C-N> :set invnumber<CR>
 
-
 " Display unprintable characters with '^' and
 " set nolist to disable or set list!
 
@@ -511,7 +509,6 @@ map <C-N><C-N> :set invnumber<CR>
 " to load plugins in ftplugin matching ftdetect
 filetype plugin on
 syntax on
-
 
 " backup files etc... {{{
 set noswapfile
@@ -562,12 +559,6 @@ set clipboard=unnamedplus
 noremap gp "+p
 noremap gy "+y
 "}}}
-" Easy window navigation
-" noremap <F3> :Tlist<Enter>
-imap <silent> <C-k> <Up>
-imap <silent> <C-j> <Down>
-
-
 " Window / splits {{{
 "cmap w!! w !sudo tee % >/dev/null
 " vim: set noet fenc=utf-8 ff=unix sts=0 sw=4 ts=4 :
@@ -792,15 +783,17 @@ let g:gutentags_ctags_exclude = ['.vim-src', 'build']
 " }}}
 " start haskell host if required  {{{
 if has('nvim')
-  " function! s:RequireHaskellHost(name)
-  "   " return rpcstart("/home/saep/.bin/nvim-hs-devel.sh", ['-l','/tmp/nvim-log.txt','-v','DEBUG',a:name.name])
-  "   return rpcstart("nvim-hs", ['-l','/home/teto/nvim-haskell.log','-v','DEBUG',a:name.name])
-  " endfunction
+  function! s:RequireHaskellHost(name)
+      " It is important that the current working directory (cwd) is where
+      " your configuration files are.
+      " 'nix-shell', '-p',
+      return jobstart([ 'stack', 'exec', 'nvim-hs', a:name.name], {'rpc': v:true, 'cwd': expand('$HOME') . '/.config/nvim'})
+    " return jobstart("nvim-hs", ['-l','/home/teto/nvim-haskell.log','-v','DEBUG',a:name.name])
+  endfunction
 
-  " call remote#host#Register('haskell', "*.l\?hs", function('s:RequireHaskellHost'))
+  call remote#host#Register('haskell', "*.l\?hs", function('s:RequireHaskellHost'))
   " let hc=remote#host#Require('haskell')
 " " echo rpcrequest(hc, "PingNvimhs") should print Pong
-  " call rpcrequest(hc, 'PingNvimhs')
 endif
 "}}}
 " hdevtools {{{
