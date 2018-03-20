@@ -4,6 +4,8 @@ let
   # CONFIG_NLMON is not set
   # KERN_DEFAULT "d" The default kernel loglevel
   # KERN_CONT "" "continued" line of log printout (only done after a line that had no enclosing)
+  # todo we could use isYes
+  # system.requiredKernelConfig
   kvmConfig = ''
       VIRTIO_PCI y
       VIRTIO_PCI_LEGACY y

@@ -337,6 +337,22 @@ rec {
 
   services.dunst = {
     enable=true;
+    settings = {
+      global={
+        markup=full;
+        sticky_history = true;
+    # # Maximum amount of notifications kept in history
+    # history_length = 20
+
+    # # Display indicators for URLs (U) and actions (A).
+        show_indicators = true;
+        # TODO move it to module
+        # browser = "";
+        # dmenu = /usr/local/bin/rofi -dmenu -p dunst:
+        alignment = "left";
+
+      };
+    };
   };
 
   services.gpg-agent = {

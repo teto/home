@@ -22,7 +22,7 @@
     fsType = "ntfs";
     options = [ "rw" "data=ordered" "relatime" ];
   };
-  swapDevices = [ ];
+  # swapDevices = [ ];
 
   nix.maxJobs = lib.mkDefault 4;
   powerManagement.cpuFreqGovernor = "powersave";

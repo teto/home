@@ -12,6 +12,9 @@
       user="teto"
       group="libvirtd"
       '';
+      # extraOptions
+      # extraConfig
+      # qemuPackage
   };
   systemd.services.libvirtd.restartIfChanged = lib.mkForce true;
 }

@@ -23,7 +23,19 @@ let
     ./wifi.nix
     ./tor.nix
     # ./desktopPkgs.nix
+
+    # just to test
+    ./modules/qemu-guest-agent.nix
   ];
+
+  # it apparently still is quite an important thing to have
+  boot.devSize = "5g";
+  swapDevices = [{
+    # label = "dartagnan";
+    device = "/fucking_swap";
+    # size = 8192; # in MB
+    size = 16000; # in MB
+  } ];
 
   boot.loader ={
     systemd-boot.enable = true;
@@ -200,7 +212,7 @@ let
   };
 
   # just to test for now
-  nix.package = pkgs.nixUnstable;
+  # nix.package = pkgs.nixUnstable;
 
   # to change owner of setuid binaries like ping 
   # security.wrappers
