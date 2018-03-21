@@ -12,6 +12,9 @@ in
       ./account-root.nix
     ];
 
+  # install mosh-server
+  programs.mosh.enable = true;
+
   boot.loader.grub.enable = true;
   boot.loader.grub.version = 2;
   boot.loader.grub.device = "/dev/sda";
