@@ -339,7 +339,7 @@ rec {
     enable=true;
     settings = {
       global={
-        markup=full;
+        markup="full";
         sticky_history = true;
     # # Maximum amount of notifications kept in history
     # history_length = 20
