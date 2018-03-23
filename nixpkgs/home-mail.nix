@@ -11,25 +11,16 @@
       # todo make it optional ?
       # store = home.homeDirectory + ./maildir/gmail;
       sendHost = "smtp.gmail.com";
+      contactCompletion = "notmuch address";
 
-
-      # generate wrappers
-      # mta = {
-      # };
-      postSyncHook = ''
-        # TODO je veux pouvoir ajouter mes tags
-        echo "hello world"
-      '';
-      # filters = [ { from = ""; } { } ];
-      # mua= "notmuch";
-      # mra= "notmuch";
-      # mta= "notmuch";
-
-      # postSyncHookExtra=''
-      #   notmuch tag --batch --input="~/.notmuch/tag_ietf
+      configStore = "$HOME/dotfiles/hooks_perso";
+      # postSyncHook = ''hooks_perso/post-new 
+      #   # TODO je veux pouvoir ajouter mes tags
+      #   echo "hello world"
+      #   notmuch tag --input="$XDG_CONFIG_HOME/notmuch/ietf"
+      #   notmuch tag --input="$XDG_CONFIG_HOME/notmuch/foss"
       # '';
-      # getLogin = "";
-      # getPass = "";
+
     }
 
     {
@@ -52,7 +43,6 @@
    # TODO conditionnally define these
    programs.notmuch = {
      enable = true;
-     contactCompletion = "notmuch address";
    };
 
    programs.msmtp = {

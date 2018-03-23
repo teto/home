@@ -212,7 +212,7 @@ let
   };
 
   # just to test for now
-  # nix.package = pkgs.nixUnstable;
+  nix.package = pkgs.nixUnstable;
 
   # to change owner of setuid binaries like ping 
   # security.wrappers
