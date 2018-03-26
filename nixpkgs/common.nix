@@ -244,5 +244,9 @@ rec {
   #         (isEnabled "BLK_DEV_INITRD")
   #       ]
 
+  services.xserver.windowManager.awesome = {
+    enable = true;
+    luaModules = [];
+  };
 }
 

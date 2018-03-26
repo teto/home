@@ -222,6 +222,8 @@ let
   # seemingly working for chromium only, check for firefox
   programs.browserpass.enable = true;
 
+  programs.ccache.enable = true;
+
   # use with nix-locate to find a file across packages
   # DOES NOT EXIST YET :'(
   # programs.nix-index.enable = true;
