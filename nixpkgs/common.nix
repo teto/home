@@ -54,6 +54,15 @@ rec {
   networking.firewall.allowedUDPPorts = [ 631 ];
   networking.firewall.allowedTCPPorts = [ 631 ];
 
+  # only if exists !
+  # services.jupyter = {
+  #   enable = true;
+  #   # port = 8123; # 8888 by default
+  #   # notebookDir = "/var/www/jupyter"; # ~ by default
+  #   # password is 'test'
+  #   password = "'sha1:1b961dc713fb:88483270a63e57d18d43cf337e629539de1436ba'";
+  #   kernels = 
+  # };
 
   # Set your time zone.
   # time.timeZone = "Europe/Amsterdam";

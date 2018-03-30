@@ -22,7 +22,6 @@ let
     ./wireshark.nix
     ./wifi.nix
     # ./desktopPkgs.nix
-    ./tor.nix
 
     # just to test
     ./modules/qemu-guest-agent.nix

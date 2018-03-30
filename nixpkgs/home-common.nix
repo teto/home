@@ -138,6 +138,8 @@ rec {
   home.packages = desktopPkgs ++ devPkgs ++ imPkgs ++ networksPkgs ++ [
     pkgs.ranger
     pkgs.vifm
+
+    pkgs.python3Packages.powerline
   ]
   ++ heavyPackages;
 

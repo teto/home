@@ -2,11 +2,11 @@
 
 c = get_config()
 # https://bitbucket.org/joon/color-schemes-for-ipython-qt-console
-color_theme = 'solarizedlight'  # specify color theme
+# color_theme = 'solarizedlight'  # specify color theme
 # monokai/ solarizeddark / zenburn
-import pkg_resources
-c.JupyterQtConsoleApp.stylesheet = pkg_resources.resource_filename(
-     "jupyter_qtconsole_colorschemes", "{}.css".format(color_theme))
+# import pkg_resources
+# c.JupyterQtConsoleApp.stylesheet = pkg_resources.resource_filename(
+#      "jupyter_qtconsole_colorschemes", "{}.css".format(color_theme))
 
 
 #------------------------------------------------------------------------------
