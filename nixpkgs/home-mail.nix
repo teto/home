@@ -1,8 +1,6 @@
 { pkgs, lib, config, ... }:
-{
-  # todo give it a name
-  mail = {
-    accounts = [
+let 
+  gmailAccount = 
     {
       name = "gmail";
       userName = "mattator";
@@ -21,8 +19,13 @@
       #   notmuch tag --input="$XDG_CONFIG_HOME/notmuch/foss"
       # '';
 
-    }
-
+    };
+in
+{
+  # todo give it a name
+  mail = {
+    accounts = [
+    gmailAccount
     {
       name = "iij";
       userName = "coudron@iij.ad.jp";
@@ -61,6 +64,11 @@
      # generate alias
      # TODO test http://alot.readthedocs.io/en/latest/configuration/key_bindings.html
      # w = pipeto urlscan 2> /dev/null
+     bindings = let
+        fetchGmail = "shellescape '${gmailAccount.mra.fetchMailCommand gmailAccount}' ; refresh";
+       in {
+        "%" = fetchGmail;
+     };
      extraConfig = {
         auto_remove_unread = "True";
         ask_subject = "False";

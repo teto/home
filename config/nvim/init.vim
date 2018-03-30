@@ -1094,12 +1094,12 @@ let g:jedi#completions_enabled = 0 " disable when deoplete in use
 " endfunction
 
 
-" let g:neomake_make_maker = {
-"     \ 'exe': 'make',
-"     \ 'args': [],
-"     \ 'cwd': getcwd().'/build',
-"     \ 'errorformat': '%f:%l:%c: %m',
-"     \ }
+let g:neomake_make_maker = {
+    \ 'exe': 'make',
+    \ 'args': [],
+    \ 'cwd': getcwd().'/build',
+    \ 'errorformat': '%f:%l:%c: %m',
+    \ }
 
 let g:neomake_verbose = 1
 
@@ -1620,7 +1620,8 @@ set foldcolumn=3
 
 if has("folding_fillchars")
 	" removed to test default values
-  set fillchars+=foldopen:▾,foldsep:│,foldclose:▸,foldend:^
+	" ,foldend:^
+  set fillchars+=foldopen:▾,foldsep:│,foldclose:▸
   " echo "doing it"
   " set fdc=-1
   set fdc=0
