@@ -161,8 +161,15 @@ rec {
     enable = true;
     # add iij ntp servers
     # servers = [ "" ];
+    # extraConfig="";
+    # extraOptions="";
     servers = [ "0.nixos.pool.ntp.org" "1.nixos.pool.ntp.org" "2.nixos.pool.ntp.org" "3.nixos.pool.ntp.org" ];
   };
+
+  # option to explore ?
+  # services.opensmtpd = {
+  #   enable= false;
+  # };
 
   programs.man.enable = true;
 
@@ -253,5 +260,9 @@ rec {
   #         (isEnabled "BLK_DEV_INITRD")
   #       ]
 
+  services.xserver.windowManager.awesome = {
+    enable = true;
+    luaModules = [];
+  };
 }
 

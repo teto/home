@@ -1,8 +1,6 @@
 { pkgs, lib, config, ... }:
-{
-  # todo give it a name
-  mail = {
-    accounts = [
+let 
+  gmailAccount = 
     {
       name = "gmail";
       userName = "mattator";
@@ -21,8 +19,13 @@
       #   notmuch tag --input="$XDG_CONFIG_HOME/notmuch/foss"
       # '';
 
-    }
-
+    };
+in
+{
+  # todo give it a name
+  mail = {
+    accounts = [
+    gmailAccount
     {
       name = "iij";
       userName = "coudron@iij.ad.jp";
@@ -43,10 +46,16 @@
    # TODO conditionnally define these
    programs.notmuch = {
      enable = true;
+     # extraConfig = {
+     #   maildir = {
+     #   };
+     # };
    };
 
    programs.msmtp = {
      enable = true;
+     extraConfig = ''
+     '';
    };
 
    programs.alot = {
@@ -55,16 +64,26 @@
      # generate alias
      # TODO test http://alot.readthedocs.io/en/latest/configuration/key_bindings.html
      # w = pipeto urlscan 2> /dev/null
-     extraConfig=''
-      # see https://github.com/pazz/alot/wiki/Tips,-Tricks-and-other-cool-Hacks for more ideas
-      # initial_command = bufferlist; taglist; search foo; search bar; buffer 0
+     bindings = let
+        fetchGmail = "shellescape '${gmailAccount.mra.fetchMailCommand gmailAccount}' ; refresh";
+       in {
+        "%" = fetchGmail;
+     };
+     extraConfig = {
+        auto_remove_unread = "True";
+        ask_subject = "False";
+        handle_mouse = "True";
+     };
+     # extraConfig=''
+     #  # see https://github.com/pazz/alot/wiki/Tips,-Tricks-and-other-cool-Hacks for more ideas
+     #  # initial_command = bufferlist; taglist; search foo; search bar; buffer 0
 
-      mailinglists = lisp@ietf.org, taps@ietf.org 
+     #  mailinglists = lisp@ietf.org, taps@ietf.org 
 
-      [bindings]
-        [[thread]]
-          ' ' = fold; untag unread; move next unfolded
-    '';
+     #  [bindings]
+     #    [[thread]]
+     #      ' ' = fold; untag unread; move next unfolded
+    # '';
    };
 
    programs.offlineimap = {

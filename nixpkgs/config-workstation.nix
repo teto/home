@@ -7,5 +7,10 @@
     gnome3
   ];
 
+  services.xserver.displayManager.slim = { 
+      enable = true;
+      defaultUser = "teto";
+      autoLogin = true;
+    };  
 
 }

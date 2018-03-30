@@ -66,11 +66,13 @@ let
     # gcalc
     unstable.dropbox
     mpv
+    libnotify
     # feh
     unstable.evince # succeed where zathura/mupdf fail
     unstable.gnome3.file-roller # for GUI archive handling
     ffmpegthumbnailer # to preview videos in ranger
-    haskellPackages.greenclip # todo get from haskell
+    # todo try sthg else
+    # haskellPackages.greenclip # todo get from haskell
     moc
     mupdf.bin # evince does better too
     # mdp # markdown CLI presenter
@@ -325,7 +327,14 @@ rec {
       " TODO set different paths accordingly, to language server especially
       '';
   };
-
+  programs.fzf = {
+    enable = true;
+    enableZshIntegration=true;
+    # defaultOptions
+    # changeDirWidgetOptions
+    # programs.fzf.fileWidgetOptions
+    # programs.fzf.historyWidgetOptions
+  };
   programs.browserpass = {
     enable=true;
     browsers = ["firefox" "chromium" ];
