@@ -1502,7 +1502,7 @@ let g:vimtex_quickfix_ignored_warnings = [
       \ 'Overfull',
       \ 'specifier changed to',
       \ ]
-    let g:vimtex_compiler_latexmk = {
+let g:vimtex_compiler_latexmk = {
         \ 'background' : 1,
         \ 'build_dir' : '',
         \ 'callback' : 1,
