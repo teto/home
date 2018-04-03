@@ -274,6 +274,8 @@ REPORTTIME=10
 # in hundredths of seconds (0 defaults to 0.4 ?! 1 => 10 ms)
 KEYTIMEOUT=1
 
+# POWERLINE_COMMAND
+#
 #RPROMPT='[%D{%L:%M:%S %p}]'
 
 # this code makes the prompt blink which is bad

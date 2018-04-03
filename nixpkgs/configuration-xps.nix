@@ -224,6 +224,9 @@ let
 
   programs.ccache.enable = true;
 
+  # https://github.com/NixOS/nixpkgs/issues/20548#issuecomment-377655713
+  programs.zsh.enable = true;
+
   # use with nix-locate to find a file across packages
   # DOES NOT EXIST YET :'(
   # programs.nix-index.enable = true;

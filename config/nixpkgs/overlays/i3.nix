@@ -168,10 +168,9 @@ rec {
   };
   python3Packages = python3.pkgs;
 
-  # 
-  protocol-local = super.protocol.overrideAttrs (oldAttrs: {
-    src=/home/teto/protocol;
-  });
+  # protocol-local = super.protocol.overrideAttrs (oldAttrs: {
+  #   src=/home/teto/protocol;
+  # });
 
   ns-3-perso = if (super.pkgs ? ns-3) then super.ns-3.override {
   #   pkgs = self.pkgs;
@@ -188,6 +187,39 @@ rec {
     # inherit (super.python3Packages) buildPythonApplication pandas cmd2 pyperclip matplotlib pyqt5 stevedore;
     tshark = self.pkgs.tshark-local-stable;
     inherit (super) lib;
+  };
+  mptcpnumerics = super.python3Packages.buildPythonApplication {
+	pname = "mptcpnumerics";
+	version = "0.1";
+    # src = fetchFromGitHub {
+    #   owner = "teto";
+    #   repo = "mptcpanalyzer";
+    #   rev = "${version}";
+    #   # sha256 = ;
+    # };
+    # todo filter
+    # filter-src
+	src =  builtins.filterSource (name: type: true) /home/teto/mptcpnumerics;
+    # enableCheckPhase=false;
+    doCheck = false;
+    /* skipCheck */
+	# buildInputs = [  stevedore pandas matplotlib  ];
+    # to build the doc sphinx
+    # TODO package tshark
+    propagatedBuildInputs = with super.python3Packages; [ stevedore cmd2 
+     pandas 
+     sortedcontainers
+    # we want gtk because qt is so annying on nixos
+    (matplotlib.override { enableGtk3=true;})
+    pulp
+    pyqt5
+      ];
+	/* propagatedBuildInputs =  [ stevedore pandas matplotlib pyqt5 ]; */
+
+    meta = with super.stdenv.lib; {
+      description = "tool specialized for multipath TCP";
+      maintainers = [ maintainers.teto ];
+    };
   };
 
 

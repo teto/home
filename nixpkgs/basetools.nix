@@ -19,7 +19,7 @@ with pkgs; [
      gnupg
      gnumake
      # ipsecTools # does it provide ipsec ?
-     # neovim-custom # TODO remake a custom one
+     neovim # TODO remake a custom one
      pkgconfig
      pstree
      # ranger
