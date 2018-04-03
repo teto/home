@@ -44,6 +44,7 @@ let
     libreoffice
     qutebrowser  # keyboard driven fantastic browser
     gnome3.nautilus # demande webkit/todo replace by nemo ?
+    shutter # screenshot utility
     mcomix # manga reader
     mendeley # requiert qtwebengine
     pinta    # photo editing
