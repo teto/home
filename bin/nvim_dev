@@ -3,4 +3,4 @@
 #  you have to run to generate the doc
 # :helptags $VIMRUNTIME/doc
 DEV=${DEV:-${PWD}}
-VIMRUNTIME="$DEV/build/runtime" "$DEV/build/bin/nvim" "$@"
+VIMRUNTIME="$DEV/runtime" "$DEV/bin/nvim" "$@"

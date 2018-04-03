@@ -72,6 +72,8 @@ let s:gutter_warn_sign = '！'
 " the right window contains the version from the merge branch
 " }}}
 
+" from FAQ https://github.com/neovim/neovim/wiki/FAQ
+vnoremap <LeftRelease> "*ygv
 " filnxtToO
 set shortmess+=I
 set cmdheight=2 " for echodoc
