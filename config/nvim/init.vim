@@ -91,7 +91,7 @@ set exrc
 call plug#begin(s:plugdir)
 " branch v2-integration
 " Plug 'joonty/vdebug' " to add breakpoints etc
-Plug 'andymass/vim-matchup' " to replace matchit
+" Plug 'andymass/vim-matchup' " to replace matchit
 Plug 'mhinz/vim-signify' " Indicate changed lines within a file using a VCS.
 " Plug 'vim-pandoc/vim-pandoc'
 Plug 'vim-pandoc/vim-pandoc-syntax'
@@ -1491,7 +1491,8 @@ let g:vimtex_syntax_minted = [
       \ {
       \   'lang' : 'json',
       \ }]
-let g:vimtex_log_verbose= 0
+" let g:vimtex_log_ignore = 
+let g:vimtex_log_verbose= 1
 let g:vimtex_quickfix_mode = 2 " 1=> opened automatically and becomes active (2=> inactive)
 " Package biblatex Warning: B
 " with being on anotherline
@@ -1937,6 +1938,7 @@ nnoremap <Leader>wr :set wrap! \| :set wrap?<CR>
 " }}}
 " highlightedyank {{{
 let g:highlightedyank_highlight_duration = 1000
+" let g:highlightedyank_max_linesr=
 " }}}
 " tagbar {{{
 let g:tagbar_left = 0
