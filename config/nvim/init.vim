@@ -1096,11 +1096,14 @@ let g:jedi#completions_enabled = 0 " disable when deoplete in use
 " endfunction
 
 
+" TODO replace with getroot of directory ?
 let g:neomake_make_maker = {
     \ 'exe': 'make',
     \ 'args': [],
     \ 'cwd': getcwd().'/build',
     \ 'errorformat': '%f:%l:%c: %m',
+    \ 'remove_invalid_entries': 1,
+    \ 'buffer_output': 0
     \ }
 
 let g:neomake_verbose = 1
@@ -1110,7 +1113,7 @@ let g:neomake_verbose = 1
 " pyflakes can't be disabled on a per error basis
 " also it considers everything as error => disable
 " flake8  or pycodestyle when supported
-let g:neomake_list_height=5
+" let g:neomake_list_height=5
 
 " how to let 'mypy' ignore warning/errors as pycodestyle does ?
 let g:neomake_python_enabled_makers = ['pycodestyle', ]
