@@ -27,7 +27,7 @@ let
     # just to test
     ./modules/qemu-guest-agent.nix
   ]
-  ++ lib.optional (services ? jupyter) [ ./jupyter.nix ];
+  # ++ lib.optional (services ? jupyter)  ./jupyter.nix
   ;
 
   # it apparently still is quite an important thing to have
