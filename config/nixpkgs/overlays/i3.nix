@@ -172,17 +172,17 @@ rec {
     src=/home/teto/protocol;
   });
 
-  nixVeryUnstable = super.nixUnstable.overrideAttrs(o: {
+  # nixVeryUnstable = super.nixUnstable.overrideAttrs(o: {
 
-    src = fetchGit https://github.com/NixOS/nix;
+  #   src = fetchGit https://github.com/NixOS/nix;
 
-    nativeBuildInputs = (o.nativeBuildInputs or []) ++ [
-      autoreconfHook autoconf-archive bison flex libxml2 libxslt
-      docbook5 docbook5_xsl
-    ];
+  #   nativeBuildInputs = with super.pkgs; (o.nativeBuildInputs or []) ++ [
+  #     autoreconfHook autoconf-archive bison flex libxml2 libxslt
+  #     docbook5 docbook5_xsl
+  #   ];
 
-    buildInputs = (o.buildInputs or []) ++ [ boost ];
-  });
+  #   buildInputs = (o.buildInputs or []) ++ [ boost ];
+  # });
 
   ns-3-perso = if (super.pkgs ? ns-3) then super.ns-3.override {
   #   pkgs = self.pkgs;
