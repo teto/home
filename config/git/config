@@ -7,7 +7,7 @@
   default = simple
 
 [core]
-  whitespace = space-before-tab
+  ; whitespace = space-before-tab
 	compression = 0
 
 #trailing-space

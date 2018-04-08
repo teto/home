@@ -26,7 +26,9 @@ let
 
     # just to test
     ./modules/qemu-guest-agent.nix
-  ];
+  ]
+  # ++ lib.optional (services ? jupyter)  ./jupyter.nix
+  ;
 
   # it apparently still is quite an important thing to have
   boot.devSize = "5g";

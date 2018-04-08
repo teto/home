@@ -211,7 +211,18 @@ let
   };
 
   # just to test for now
-  nix.package = pkgs.nixUnstable;
+  # nix.package = pkgs.nixVeryUnstable;
+  nix.package = pkgs.nixUnstable.overrideAttrs(o: {
+
+    src = fetchGit https://github.com/NixOS/nix;
+
+    nativeBuildInputs = with pkgs; (o.nativeBuildInputs or []) ++ [
+      autoreconfHook autoconf-archive bison flex libxml2 libxslt
+      docbook5 docbook5_xsl
+    ];
+
+    buildInputs = with pkgs; (o.buildInputs or []) ++ [ boost ];
+  });
 
   # to change owner of setuid binaries like ping 
   # security.wrappers
