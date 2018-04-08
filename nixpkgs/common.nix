@@ -203,8 +203,19 @@ rec {
 
   programs.man.enable = true;
 
+  programs.light.enable = true;
+
+  programs.less= {
+    enable = true;
+    envVariables = {
+      LESS = "-R";
+      # LESSHISTFILE = 
+      # LESSHISTSIZE = /
+  };
+
   programs.zsh = {
     enable= true;
+    zsh-autoenv.enable = false;
     enableCompletion = true;
     enableAutosuggestions = true;
     syntaxHighlighting.enable = false;
