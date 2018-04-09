@@ -75,6 +75,10 @@ let
   networking.dnsExtensionMechanism = false;
   networking.dnsSingleRequest = false;
   networking.extraHosts = secrets.extraHosts;
+  # networking.interfaces = {
+  #     eth0 = { name = "eth0"; useDHCP=true; macAddress = "3B-0B-B5-6A-ED-91"; mtu=1500;};
+  #     eth1 = { name = "eth1"; useDHCP=true; };
+  # };
 
   # this is for gaming
   hardware.opengl.driSupport32Bit = true;
@@ -155,6 +159,7 @@ let
         dejavu_fonts
         # Adobe Source Han Sans
         sourceHanSansPackages.japanese
+        fira-code-symbols # for ligatures in neovim-gtk
         # noto-fonts
       ];
       fontconfig= {
@@ -170,6 +175,20 @@ let
   # services.offlineimap.install = false;
 
   nix = {
+    # # just to test for now
+    # # nix.package = pkgs.nixVeryUnstable;
+    # nix.package = pkgs.nixUnstable.overrideAttrs(o: {
+
+    #   src = fetchGit https://github.com/NixOS/nix;
+
+    #   nativeBuildInputs = with pkgs; (o.nativeBuildInputs or []) ++ [
+    #     autoreconfHook autoconf-archive bison flex libxml2 libxslt
+    #     docbook5 docbook5_xsl
+    #   ];
+
+    #   buildInputs = with pkgs; (o.buildInputs or []) ++ [ boost ];
+    # });
+    package = pkgs.nix1;
     buildCores=4;
     nixPath = [
       "nixos-config=/home/teto/dotfiles/nixpkgs/configuration.nix"
@@ -210,19 +229,6 @@ let
     # musicDirectory
   };
 
-  # just to test for now
-  # nix.package = pkgs.nixVeryUnstable;
-  nix.package = pkgs.nixUnstable.overrideAttrs(o: {
-
-    src = fetchGit https://github.com/NixOS/nix;
-
-    nativeBuildInputs = with pkgs; (o.nativeBuildInputs or []) ++ [
-      autoreconfHook autoconf-archive bison flex libxml2 libxslt
-      docbook5 docbook5_xsl
-    ];
-
-    buildInputs = with pkgs; (o.buildInputs or []) ++ [ boost ];
-  });
 
   # to change owner of setuid binaries like ping 
   # security.wrappers
