@@ -2,7 +2,7 @@
 {
   config = {
     # boot.kernelParams = [ "console=ttyS0" ];  ## Unclear if I can't see the console in the web UI because I'm missing this, or some other reason.
-    environment.systemPackages = [ pkgs.qemu ];
+    # environment.systemPackages = [ pkgs.qemu ];
     # systemd.services.qemu-guest-agent = {
     #   description = "Run the QEMU Guest Agent";
     #   path = [ pkgs.qemu ];

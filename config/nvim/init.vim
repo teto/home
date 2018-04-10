@@ -1253,12 +1253,14 @@ let g:airline#extensions#vimtex#enabled=1
 let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline#extensions#tabline#show_buffers = 1
 let g:airline#extensions#tabline#buffer_min_count =2
+let g:airline#extensions#tabline#tab_min_count = 0
 let g:airline#extensions#tabline#buffer_idx_mode = 1
 let g:airline#extensions#tabline#buffers_label = 'b'
 let g:airline#extensions#tabline#tabs_label = 't'
 let g:airline#extensions#tabline#show_tabs = 0
-
-
+let airline#extensions#tabline#current_first = 0
+" to rely on badd only ?
+" let airline#extensions#tabline#disable_refresh = 0
 
 let g:airline#extensions#tabline#formatter = 'unique_tail'
 " let g:airline_extensions = ['branch', 'tabline', 'obsession']

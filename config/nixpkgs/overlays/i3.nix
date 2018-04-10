@@ -184,8 +184,7 @@ rec {
   #   buildInputs = (o.buildInputs or []) ++ [ boost ];
   # });
 
-  ns-3-perso = if (super.pkgs ? ns-3) then super.ns-3.override {
-  #   pkgs = self.pkgs;
+  ns3-local = if (super.pkgs ? ns-3) then super.ns-3.override {
     python = self.python3;
     enableDoxygen = true;
     build_profile = "optimized";
@@ -193,6 +192,21 @@ rec {
     generateBindings = true;
   #   # withExamples = true;
   } else null;
+
+  dce-local = if (super.pkgs ? dce) then (super.dce.override {
+    python = self.python3;
+    enableDoxygen = true;
+    # withManual = true;
+    generateBindings = true;
+    withExamples = true;
+  }).overrideAttrs(old: {
+    src = super.stdenv.lib.cleanSourceWith {
+      filter = p: t: super.stdenv.lib.cleanSourceFilter p t && baseNameOf p != "build";
+      src=/home/teto/dce; 
+    };
+    
+  }) else null;
+
 
   # pkgs = super.pkgs;
   mptcpanalyzer = super.python3Packages.callPackage ../mptcpanalyzer.nix {
