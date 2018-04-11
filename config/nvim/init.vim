@@ -29,8 +29,8 @@ let s:plugdir = s:nvimdir.'/site/pack'
 set nocompatible
 if empty(glob(s:plugscript))
   execute "!mkdir -p " s:nvimdir.'/autoload' s:plugdir
-  execute "!curl -fLo" s:plugscript --create-dirs
-		\ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  execute "!curl -fLo" s:plugscript '--create-dirs'
+		\ 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 		  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
