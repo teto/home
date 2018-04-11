@@ -14,6 +14,7 @@ with pkgs; [
      # libreoffice # too long to compile
 	 gawk
      git
+     gitAttributes.git-crypt
 	 # git-extras # does not find it (yet)
      gnum4 # hum
      gnupg

@@ -28,6 +28,7 @@ rec {
 
   imports = [
       ./account-teto.nix
+      ./ntp.nix
       # ./mptcp-kernel.nix
   ];
   # kernelModules are forcibly loaded C
@@ -149,14 +150,6 @@ rec {
 
   # allow-downgrade falls back when dnssec fails, "true" foces dnssec
   services.resolved.dnssec = "allow-downgrade";
-  services.openntpd = {
-    enable = true;
-    # add iij ntp servers
-    # servers = [ "" ];
-    # extraConfig="";
-    # extraOptions="";
-    servers = [ "0.nixos.pool.ntp.org" "1.nixos.pool.ntp.org" "2.nixos.pool.ntp.org" "3.nixos.pool.ntp.org" ];
-  };
 
   # option to explore ?
   # services.opensmtpd = {
@@ -175,6 +168,7 @@ rec {
       LESS = "-R";
       # LESSHISTFILE = 
       # LESSHISTSIZE = /
+    };
   };
 
   programs.zsh = {
@@ -270,4 +264,3 @@ rec {
     luaModules = [];
   };
 }
-

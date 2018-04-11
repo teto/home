@@ -2,9 +2,13 @@
 {
 
   environment.systemPackages = with pkgs; [
+    # haskellPackages.greenclip # todo get from haskell
+    mupdf.bin # evince does better too
+    rofi
     termite
     xautolock
     i3lock-fancy
+    gksu # to run graphical apps as root
   ];
 
   # Enable the X11 windowing system.

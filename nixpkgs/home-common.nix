@@ -50,6 +50,7 @@ let
     pinta    # photo editing
     qtcreator  # for wireshark
     zeal       # doc for developers
+    vifm
     # zotero     # doc software
     # wavemon
     # astroid # always compiles webkit so needs 1 full day
@@ -77,7 +78,6 @@ let
     moc
     mupdf.bin # evince does better too
     # mdp # markdown CLI presenter
-    nox # helps with reviewing and to install files
     # gnome3.gnome_control_center
     unstable.gnome3.gnome-calculator
     unstable.qtpass
@@ -98,6 +98,7 @@ let
     zathura
   ];
   devPkgs = with pkgs; [
+    nox # helps with reviewing and to install files
     # ccache # breaks some builds ?
     gitAndTools.diff-so-fancy
     gitAndTools.git-recent
@@ -140,7 +141,6 @@ rec {
   news.display = "silent";
   home.packages = desktopPkgs ++ devPkgs ++ imPkgs ++ networksPkgs ++ [
     pkgs.ranger
-    pkgs.vifm
 
     pkgs.python3Packages.powerline
   ]

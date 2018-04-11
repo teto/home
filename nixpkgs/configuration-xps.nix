@@ -173,6 +173,10 @@ let
   # services.offlineimap.install = false;
 
   nix = {
+
+    # just to test for now
+    package = pkgs.nixUnstable;
+
     buildCores=4;
     nixPath = [
       "nixos-config=/home/teto/dotfiles/nixpkgs/configuration.nix"
@@ -212,9 +216,6 @@ let
     enable = false; # TODO move to userspace
     # musicDirectory
   };
-
-  # just to test for now
-  nix.package = pkgs.nixUnstable;
 
   # to change owner of setuid binaries like ping 
   # security.wrappers
