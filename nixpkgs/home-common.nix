@@ -367,10 +367,24 @@ rec {
     };
   };
 
+
+  services.random-background = {
+    enable = false;
+    # imageDirectory = 
+    # interval = 
+  };
+
+  # services.screen-locker.enable = true;
+
+  # while waiting to fix greenclip related problems
+  services.parcellite.enable = true;
+
   services.gpg-agent = {
     enable = true;
     defaultCacheTtl = 1800;
     enableSshSupport = true;
+    # grabKeyboardAndMouse= false;
+    verbose = true;
   };
 
   # i3 now available !
