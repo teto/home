@@ -120,9 +120,9 @@ rec {
         # pygccxml =  super.callPackage ../pygccxml.nix {
         # pkgs = super.pkgs;
         # pythonPackages = self.pkgs.python3Packages;
-        pygccxml = python-super.pythonPackages.pygccxml.overrideAttrs (oldAttrs: {
-          src=/home/teto/pygccxml;
-        });
+        # pygccxml = python-super.pythonPackages.pygccxml.overrideAttrs (oldAttrs: {
+        #   src=/home/teto/pygccxml;
+        # });
 
 
         # pandas = super.pkgs.pythonPackages.pandas.overrideAttrs {
@@ -141,13 +141,13 @@ rec {
         # pygccxml =  super.callPackage ../pygccxml.nix {
         # pkgs = super.pkgs;
         # pythonPackages = self.pkgs.python3Packages;
-        pygccxml = pythonsuper.pygccxml.overrideAttrs (oldAttrs: {
-          # src=fetchGitHashless {
-          #   url=file:///home/teto/pygccxml;
-          # };
+        # pygccxml = pythonsuper.pygccxml.overrideAttrs (oldAttrs: {
+        #   # src=fetchGitHashless {
+        #   #   url=file:///home/teto/pygccxml;
+        #   # };
 
-          src=/home/teto/pygccxml;
-        });
+        #   src=/home/teto/pygccxml;
+        # });
 
         # TODO write a nix-shell instead
         # protocol = pythonsuper.protocol.overrideAttrs (oldAttrs: {
@@ -200,10 +200,15 @@ rec {
     generateBindings = true;
     withExamples = true;
   }).overrideAttrs(old: {
-    src = super.stdenv.lib.cleanSourceWith {
-      filter = p: t: super.stdenv.lib.cleanSourceFilter p t && baseNameOf p != "build";
-      src=/home/teto/dce; 
-    };
+    # .lock-waf_linux_build
+    # { filter, src }
+    # filter is a function path: type:
+    # ould keep the current one, but I kn ould keep the current one, but I kn
+    # builtins.match "^\\.sw[a-z]$" baseName != null ||
+    src =  super.stdenv.lib.cleanSourceWith { filter= p: t: super.stdenv.lib.cleanSourceFilter p t && baseNameOf p != "build"; src=
+        (super.stdenv.lib.cleanSourceWith { filter=p: t: baseNameOf p != ".lock-waf_linux_build"; src= /home/teto/dce;});
+    
+      };
     
   }) else null;
 

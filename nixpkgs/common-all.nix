@@ -28,7 +28,7 @@ rec {
 
   imports = [
       ./account-teto.nix
-      ./ntp.nix
+      ./modules/ntp.nix
       # ./mptcp-kernel.nix
   ];
   # kernelModules are forcibly loaded C
@@ -220,6 +220,8 @@ rec {
 
   };
 
+  users.defaultUserShell = pkgs.zsh;
+
   # you can use http instead
   # nix.sshServe = {
   #   enable  = true;
@@ -232,6 +234,7 @@ rec {
           # "webkitgtk-2.4.11"
             ];
   };
+
 
   environment.etc."inputrc".source = ../config/inputrc;
 

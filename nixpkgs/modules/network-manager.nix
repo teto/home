@@ -13,16 +13,16 @@
     wifi.scanRandMacAddress = true;
 
     # TODO reestablish with the correct nixpkgs !
-    # dispatcherScripts = [
-    #   {
-    #     source = /home/teto/testbed/mptcp_up ;
-    #     type = "up";
-    #   }
-    #   {
-    #     source = /home/teto/testbed/mptcp_down ;
-    #     type = "post-down";
-    #   }
-    #   ];
+    dispatcherScripts = [
+      {
+        source = ./mptcp_up ;
+        type = "up";
+      }
+      {
+        source = ./mptcp_down ;
+        type = "down";
+      }
+      ];
 
     # networking.resolvconfOptions
     # wifi.powersave=false;

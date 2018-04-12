@@ -25,6 +25,7 @@
 
   programs.bash = {
     # goes to .profile
+    enableAutojump = true;
     sessionVariables = {
       # HISTFILE="$XDG_CACHE_HOME/bash_history";
     };

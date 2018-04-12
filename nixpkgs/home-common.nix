@@ -71,7 +71,8 @@ let
     libnotify
     # feh
     unstable.evince # succeed where zathura/mupdf fail
-    unstable.gnome3.file-roller # for GUI archive handling
+    # conflicts with nautilus
+    # unstable.gnome3.file-roller # for GUI archive handling
     ffmpegthumbnailer # to preview videos in ranger
     # todo try sthg else
     # haskellPackages.greenclip # todo get from haskell

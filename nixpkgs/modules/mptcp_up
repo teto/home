@@ -1,0 +1,43 @@
+#!/bin/sh
+# A script for setting up routing tables for MPTCP in the N950.
+
+# can check with (ins)[root@client:~]# journalctl -b -u NetworkManager-dispatcher.service 
+# Copy this script into /etc/network/if-up.d/
+
+set -ex
+
+env > /tmp/if_up_env
+
+if [ "$IFACE" = lo ] || [ "$MODE" != start ]; then
+
+	logger "if localhost or $MODE then abort "
+	exit 0
+fi
+
+if [ -z "$DEVICE_IFACE" ]; then
+
+	logger "invalid \$DEVICE_IFACE"
+	exit 0
+fi
+
+mkdir -p /etc/iproute2
+# FIRST, make a table-alias
+if [ `grep "$DEVICE_IFACE" /etc/iproute2/rt_tables | wc -l` -eq 0 ]; then
+	logger "Adding to iproute2/rt_tables \$DEVICE_IFACE"
+	NUM=$(wc -l < /etc/iproute2/rt_tables)
+	echo "$NUM  $DEVICE_IFACE" >> /etc/iproute2/rt_tables
+
+fi
+
+if [ "$DHCP4_IP_ADDRESS" ]; then
+	SUBNET=`echo $IP4_ADDRESS_0 | cut -d \   -f 1 | cut -d / -f 2`
+	ip route add table "$DEVICE_IFACE" to "$DHCP4_NETWORK_NUMBER/$SUBNET" dev "$DEVICE_IFACE" scope link
+	ip route add table "$DEVICE_IFACE" default via $DHCP4_ROUTERS dev "$DEVICE_IFACE"
+	ip rule add from $DHCP4_IP_ADDRESS table "$DEVICE_IFACE"
+else
+	# PPP-interface
+	IPADDR=`echo $IP4_ADDRESS_0 | cut -d \   -f 1 | cut -d / -f 1`
+	ip route add table $DEVICE_IFACE default dev $DEVICE_IP_IFACE scope link
+	ip rule add from $IPADDR table $DEVICE_IFACE
+fi
+
