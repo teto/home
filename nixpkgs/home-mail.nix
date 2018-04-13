@@ -69,7 +69,11 @@ in
         fetchGmail = "shellescape '${gmailAccount.mra.fetchMailCommand gmailAccount}' ; refresh";
        in {
         "%" = fetchGmail;
+        # seems like alot understands it as `\` instead :s
         "/" = "prompt search";
+        # format filepath can be good too
+        # --shell cat > patch.txt";
+        "x" = "prompt pipeto --format filepath git am > X.patch";
      };
      extraConfig = {
         auto_remove_unread = "True";

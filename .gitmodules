@@ -13,3 +13,6 @@
 [submodule "rofi-themes"]
 	path = rofi-themes
 	url = https://github.com/DaveDavenport/rofi-themes
+[submodule "notmuch-extract-patch"]
+	path = notmuch-extract-patch
+	url = https://github.com/aaptel/notmuch-extract-patch.git
