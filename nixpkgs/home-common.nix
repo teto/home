@@ -568,7 +568,22 @@ rec {
   #   # $pdf_update_signal = 'SIGHUP';
 
   # '';
+
+  # order matters
+  # TODO export MSMTP_QUEUE
   home.file.".mailcap".text =  ''
+applmcation/pdf; evince '%s';
+# pdftotext
+# wordtotext
+# ppt2text 
+# downlaod script mutt_bgrun
+#application/pdf; pdftohtml -q -stdout %s | w3m -T text/html; copiousoutput 
+#application/msword; wvWare -x /usr/lib/wv/wvHtml.xml %s 2>/dev/null | w3m -T text/html; copiousoutput
+text/calendar; khal import '%s'
+text/*; less '%s';
+# khal import [-a CALENDAR] [--batch] [--random-uid|-r] ICSFILE
+image/*; eog '%s';
+
     text/html;  ${pkgs.w3m}/bin/w3m -dump -o document_charset=%{charset} '%s'; nametemplate=%s.html; copiousoutput
   '';
 

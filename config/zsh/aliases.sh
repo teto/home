@@ -1,5 +1,8 @@
 #!/usr/bin/env sh
 # vim: set et fenc=utf-8 ff=unix sts=0 sw=4 ts=4 fdm=marker :
+# TODO remove
+    export MSMTP_QUEUE="$XDG_DATA_HOME/msmtp/";
+    export MSMTP_LOG="$XDG_DATA_HOME/msmtp/log";
 
 # nix aliases{{{
 alias nxi="nix-env -iA"

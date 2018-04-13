@@ -22,6 +22,7 @@ with pkgs; [
      neovim # TODO remake a custom one
      pkgconfig
      pstree
+     pv # monitor copy progress
      # ranger
      rsync
      ripgrep

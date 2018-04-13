@@ -1,4 +1,8 @@
 #! /usr/bin/env nix-shell 
+#! nix-shell -p 'python.withPackages(ps:with ps;[secretstorage keyring ])' ~/nixpkgs -i sh --show-trace
+
+
+
 #! nix-shell -p 'python.withPackages(ps: with ps; [secretstorage keyring ])' ~/nixpkgs -i sh --show-trace
 
 # TODO use getopt to just input some

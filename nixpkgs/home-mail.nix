@@ -35,6 +35,7 @@ in
     #   store = "maildir/test";
         imapHost = "imap-tyo.iiji.jp";
       sendHost = "mbox.iiji.jp";
+      gpgKey = "964F62803989289BA07EA632A0AC3958A0362E2F";
     #   sendHost = "smtp.gmail.com";
     #   # getLogin = "";
     #   # getPass = "";
@@ -68,11 +69,14 @@ in
         fetchGmail = "shellescape '${gmailAccount.mra.fetchMailCommand gmailAccount}' ; refresh";
        in {
         "%" = fetchGmail;
+        "/" = "prompt search";
      };
      extraConfig = {
         auto_remove_unread = "True";
         ask_subject = "False";
         handle_mouse = "True";
+        sign_by_default = "True";
+        encrypt_by_default = "False";
      };
      # extraConfig=''
      #  # see https://github.com/pazz/alot/wiki/Tips,-Tricks-and-other-cool-Hacks for more ideas
