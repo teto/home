@@ -14,6 +14,7 @@ let
     ./common-all.nix
     ./common-desktop.nix
     ./modules/network-manager.nix
+    ./modules/libvirtd.nix
 
     # for user teto
     ./extraTools.nix
@@ -25,6 +26,16 @@ let
 
   # it apparently still is quite an important thing to have
   boot.devSize = "5g";
+
+  # TODO look at 
+  # boot.specialFileSystems.
+
+  # necessary for qemu  to prevent
+# client> qemu-img: Error while writing to COW image: No space left on device
+#   * client: command ‘['qemu-img', 'rebase', '-f', 'qcow2', '-b', '', '/run/user/1000/nixops-tmpV3FOyf/disk-client.qcow2']’ failed on machine ‘client’ (exit code 1)
+  # NOTE: this doesn't change the size of /run/user see https://nixos.org/nix-dev/2015-July/017657.html
+  boot.runSize = "10g";
+
   swapDevices = [{
     # label = "dartagnan";
     device = "/fucking_swap";
