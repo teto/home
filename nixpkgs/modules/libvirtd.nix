@@ -6,6 +6,9 @@
 
   # see https://nixos.org/nix-dev/2015-July/017657.html for problems 
   # with /run/user/1000 size
+  services.logind.extraConfig = ''
+    RuntimeDirectorySize=5G
+  '';
 
   virtualisation.libvirtd = {
     enable = true;
@@ -15,7 +18,9 @@
 
       # Whether libvirt should dynamically change file ownership
       dynamic_ownership = 1
+
       # be careful for network teto might make if fail
+      # same when creating the pool
       user="teto"
       group="libvirtd"
       '';

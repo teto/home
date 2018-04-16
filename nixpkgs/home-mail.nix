@@ -67,14 +67,25 @@ in
      # w = pipeto urlscan 2> /dev/null
      bindings = let
         fetchGmail = "shellescape '${gmailAccount.mra.fetchMailCommand gmailAccount}' ; refresh";
-       in {
-        "%" = fetchGmail;
-        # seems like alot understands it as `\` instead :s
-        "/" = "prompt search";
-        # format filepath can be good too
-        # --shell cat > patch.txt";
-        "x" = "prompt pipeto --format filepath git am > X.patch";
-     };
+      in
+      ''
+      % = ${fetchGmail}
+      / = prompt search
+      [[thread]]
+      a = call hooks.apply_patch(ui)
+      '';
+      # {
+      #   "%" = fetchGmail;
+      #   # seems like alot understands it as `\` instead :s
+      #   "/" = "prompt search";
+      #   # format filepath can be good too
+      #   # --shell cat > patch.txt";
+      #   "x" = "prompt pipeto --format filepath git am > X.patch";
+      #   # [bindings]
+      #   # [[thread]]
+      #   #     a = call hooks.apply_patch(ui)
+     # };
+
      extraConfig = {
         auto_remove_unread = "True";
         ask_subject = "False";
@@ -82,16 +93,15 @@ in
         sign_by_default = "True";
         encrypt_by_default = "False";
      };
-     # extraConfig=''
-     #  # see https://github.com/pazz/alot/wiki/Tips,-Tricks-and-other-cool-Hacks for more ideas
-     #  # initial_command = bufferlist; taglist; search foo; search bar; buffer 0
-
+     # see https://github.com/pazz/alot/wiki/Tips,-Tricks-and-other-cool-Hacks for more ideas
+     extraBindings=''
+     # initial_command = bufferlist; taglist; search foo; search bar; buffer 0
      #  mailinglists = lisp@ietf.org, taps@ietf.org 
 
-     #  [bindings]
-     #    [[thread]]
-     #      ' ' = fold; untag unread; move next unfolded
-    # '';
+      [bindings]
+        [[thread]]
+          ' ' = fold; untag unread; move next unfolded
+    '';
    };
 
    programs.offlineimap = {

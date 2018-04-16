@@ -1,4 +1,7 @@
 { config, pkgs, options, lib, ... }:
+let 
+  secrets = import ./secrets.nix;
+in
 {
   imports = [
 
@@ -21,7 +24,7 @@
        # "kvm" # don't think that's needed 
      ];
      # once can set initialHashedPassword too
-     initialPassword = "test";
+     initialPassword = secrets.tetoInitialPassword;
 	 shell = pkgs.zsh;
      # TODO import it from desktopPkgs for instance ?
      # import basetools
