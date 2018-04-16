@@ -226,8 +226,8 @@ Plug 'neovimhaskell/haskell-vim', {'for':'haskell'} " haskell install
 " Plug 'eagletmt/ghcmod-vim', {'do': 'cabal install ghc-mod', 'for': 'haskell'} " requires
 Plug 'parsonsmatt/intero-neovim' " replaces ghcmod
 " Plug 'bitc/vim-hdevtools'
-Plug 'eagletmt/neco-ghc', {'for': 'haskell'} " completion plugin for haskell + deoplete ?
-Plug 'Shougo/vimproc.vim', {'do' : 'make'} " needed by neco-ghc
+" Plug 'eagletmt/neco-ghc', {'for': 'haskell'} " completion plugin for haskell + deoplete ?
+" Plug 'Shougo/vimproc.vim', {'do' : 'make'} " needed by neco-ghc
 " Plug 'SevereOverfl0w/deoplete-github' " completion on commit issues (just
 " crashes without netrc
 Plug 'zchee/deoplete-zsh'

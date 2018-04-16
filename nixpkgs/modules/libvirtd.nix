@@ -1,6 +1,12 @@
-{ config, lib, touchegg, ... }:
+{ config, lib, ... }:
 {
+  # see https://nixos.org/nixops/manual/#idm140737318329504
   # for nixops
+  networking.firewall.checkReversePath = false;
+
+  # see https://nixos.org/nix-dev/2015-July/017657.html for problems 
+  # with /run/user/1000 size
+
   virtualisation.libvirtd = {
     enable = true;
     # templates = /home/teto/testbed/templates;
