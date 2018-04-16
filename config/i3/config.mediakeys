@@ -8,5 +8,8 @@ bindsym XF86AudioRaiseVolume exec amixer -q set Master 2dB+ unmute; exec notify-
 bindsym XF86AudioLowerVolume exec amixer -q set Master 2dB- unmute; exec notify-send Audio lowered
 bindsym XF86AudioMute exec amixer -q set Master toggle; exec notify-send "Mute toggle"
 
+# "XF86MonBrightnessUp" = "exec ${pkgs.xbacklight}/bin/xbacklight -inc 20";
+
+
 
 
