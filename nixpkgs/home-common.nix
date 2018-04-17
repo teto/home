@@ -437,7 +437,7 @@ rec {
         # TODO improve config/config specific
         # { command= "xkblayout-state set +1"; always = false; notification = false; }
         # todo convert to a HM stuff
-        { command= "${haskellPackages.greenclip}/bin/greenclip daemon"; always = false; notification = false; }
+        { command= "${pkgs.haskellPackages.greenclip}/bin/greenclip daemon"; always = false; notification = false; }
         ];
 
 # bindsym $mod+m  mode "monitors"

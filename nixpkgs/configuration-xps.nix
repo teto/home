@@ -13,7 +13,7 @@ let
     /etc/nixos/hardware-configuration.nix
 
     ./common-all.nix
-    ./common-
+    ./common-desktop.nix
     ./modules/libvirtd.nix
 
     # for user teto
