@@ -23,6 +23,9 @@ let
   ]
   # ++ lib.optional (services ? jupyter)  ./jupyter.nix
   ;
+  
+  # TODO conditionnally enable it
+  # networking.proxy.default
 
   # it apparently still is quite an important thing to have
   boot.devSize = "5g";
