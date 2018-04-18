@@ -9,7 +9,7 @@
     # "tcpprobe"
     ];
 
-  boot.consoleLogLevel=1;
+  boot.consoleLogLevel=4;
   boot.kernel.sysctl = {
       # "net.ipv4.tcp_timestamps" = 3;
       # "net.ipv4.tcp_keepalive_time" = 60;

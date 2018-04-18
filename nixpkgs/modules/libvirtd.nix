@@ -13,20 +13,31 @@
   virtualisation.libvirtd = {
     enable = true;
     # templates = /home/teto/testbed/templates;
-    qemuVerbatimConfig = ''
-      namespaces = []
-
-      # Whether libvirt should dynamically change file ownership
-      dynamic_ownership = 1
-
-      # be careful for network teto might make if fail
-      # same when creating the pool
-      user="teto"
-      group="libvirtd"
-      '';
+    # See 1:qemu.qemu_agent 1:qemu.qemu_monitor
+    # See https://wiki.libvirt.org/page/DebugLogs
       # extraOptions
       # extraConfig
       # qemuPackage
+    extraConfig=''
+      log_level = 1
+      # no filter for now
+      log_filters="1:qemu.qemu_agent 1:qemu.qemu_monitor"
+      # log_filters="3:remote 4:event 3:json 3:rpc"
+      log_outputs="1:file:/var/log/libvirt/libvirtd.log"
+    '';
+      # qemuVerbatim
+      # namespaces = []
+      # # Whether libvirt should dynamically change file ownership
+      # # dynamic_ownership = 1
+      # # be careful for network teto might make if fail
+      # # same when creating the pool
+      # user="teto"
+      # group="libvirtd"
+    qemuVerbatimConfig = ''
+    '';
+
+      extraOptions= [ "--verbose" ];
+
 
 
     # TODO automate creation of networks

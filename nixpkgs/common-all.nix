@@ -95,13 +95,6 @@ rec {
       nxs="nix-shell -A";
       nxp="nixops ";
       # }}}
-# Mail {{{
-# todo use nix-shell
-#  ml="python2.7 -malot -n ~/.config/notmuch/notmuchrc_pro"
-#  mg="python2.7 -malot -n ~/.config/notmuch/notmuchrc"
-#  astroperso="astroid"
-#  astropro="astroid -c ~/.config/astroid/config_pro"
-# }}}
 
 # lib.escapeShellArg fails
       nixpaste="curl -F \"text=<-\" http://nixpaste.lbr.uno";
@@ -160,9 +153,9 @@ rec {
   # on master it is
   # documentation.man.enable = true;
 
-  programs.light.enable = true;
+  # programs.light.enable = true;
 
-  programs.less= {
+  programs.less = {
     enable = true;
     envVariables = {
       LESS = "-R";

@@ -43,10 +43,12 @@ let
     size = 16000; # in MB
   } ];
 
+  boot.consoleLogLevel=6;
   boot.loader ={
     systemd-boot.enable = true;
     efi.canTouchEfiVariables = true; # allows to run $ efi...
-
+    systemd-boot.editor = true; # allow to edit command line
+    timeout = 5;
   # just to generate the entry used by ubuntu's grub
   # boot.loader.grub.enable = true;
   # boot.loader.grub.version = 2;
@@ -55,7 +57,8 @@ let
     grub.device = "/dev/sda";
   };
 
-  boot.extraKernelParams = [ "earlycon=ttyS0" "console=ttyS0" ];
+  # hide messages !
+  # boot.kernelParams = [ "earlycon=ttyS0" "console=ttyS0" ];
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
   # TODO we need nouveau 

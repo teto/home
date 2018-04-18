@@ -10,8 +10,8 @@
   # should I load with the initrd
   # boot.initrd.supportedFilesystems = [ ];
 
-  # should print everything
-  boot.consoleLogLevel=0;
+  # should print everything (more than 8 should be useless)
+  boot.consoleLogLevel=8;
   boot.kernel.sysctl = {
     # https://lwn.net/Articles/542642/
     "net.ipv4.tcp_early_retrans" = 3;
