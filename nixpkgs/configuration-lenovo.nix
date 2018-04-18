@@ -19,9 +19,6 @@ let
     # for user teto
     ./extraTools.nix
     # ./desktopPkgs.nix
-
-    # just to test
-    ./modules/qemu-guest-agent.nix
   ];
 
   # it apparently still is quite an important thing to have
@@ -114,6 +111,11 @@ let
 
     # dbus.packages = [ ];
   };
+
+  # just for testing
+  services.qemu-guest-agent.enable = true;
+
+
 
   environment.systemPackages = with pkgs;
     (import ./basetools.nix { inherit pkgs;})

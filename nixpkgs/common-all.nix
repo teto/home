@@ -149,9 +149,9 @@ rec {
   #   enable= false;
   # };
 
-  programs.man.enable = true;
+  # programs.man.enable = true;
   # on master it is
-  # documentation.man.enable = true;
+  documentation.man.enable = true;
 
   # programs.light.enable = true;
 
@@ -173,6 +173,9 @@ rec {
   # programs.zsh.shellAliases
     shellAliases= environment.shellAliases // {
       se="sudoedit";
+      # to delete files
+      # todo escape it else it fails
+      # clean_orig="find . -name '*.orig' -delete";
     # ++ [
   # alias -s html=qutebrowser
   # alias -s json=nvim

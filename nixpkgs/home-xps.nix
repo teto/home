@@ -42,6 +42,7 @@
     enable = true;
     dotDir = "${config.xdg.configHome}/zsh";
     # dotDir = ".config/zsh";
+    enableZshIntegration = true;
     sessionVariables = {
       # HISTFILE="$XDG_CACHE_HOME/zsh_history";
     };

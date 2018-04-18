@@ -17,7 +17,7 @@ let
     ./modules/wireshark.nix
     ./modules/wifi.nix
     # ./desktopPkgs.nix
-    ./modules/tor.nix
+    # ./modules/tor.nix
 
   ];
 
