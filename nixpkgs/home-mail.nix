@@ -65,14 +65,21 @@ in
      # generate alias
      # TODO test http://alot.readthedocs.io/en/latest/configuration/key_bindings.html
      # w = pipeto urlscan 2> /dev/null
+
+     # initial_command = bufferlist; taglist; search foo; search bar; buffer 0
+     #  mailinglists = lisp@ietf.org, taps@ietf.org 
+     # see https://github.com/pazz/alot/wiki/Tips,-Tricks-and-other-cool-Hacks for more ideas
      bindings = let
-        fetchGmail = "shellescape '${gmailAccount.mra.fetchMailCommand gmailAccount}' ; refresh";
+        fetchGmail = "refresh";
+        # TODO mra doesn't exist 
+        # fetchGmail = "shellescape '${gmailAccount.mra.fetchMailCommand gmailAccount}' ; refresh";
       in
       ''
       % = ${fetchGmail}
       / = prompt search
       [[thread]]
       a = call hooks.apply_patch(ui)
+      ' ' = fold; untag unread; move next unfolded
       '';
       # {
       #   "%" = fetchGmail;
@@ -93,15 +100,6 @@ in
         sign_by_default = "True";
         encrypt_by_default = "False";
      };
-     # see https://github.com/pazz/alot/wiki/Tips,-Tricks-and-other-cool-Hacks for more ideas
-     extraBindings=''
-     # initial_command = bufferlist; taglist; search foo; search bar; buffer 0
-     #  mailinglists = lisp@ietf.org, taps@ietf.org 
-
-      [bindings]
-        [[thread]]
-          ' ' = fold; untag unread; move next unfolded
-    '';
    };
 
    programs.offlineimap = {

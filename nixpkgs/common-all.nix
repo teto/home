@@ -51,9 +51,6 @@ rec {
   # see https://github.com/NixOS/nixpkgs/issues/15293
 
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  networking.firewall.checkReversePath = false; # for nixops
-  networking.firewall.allowedUDPPorts = [ 631 ];
-  networking.firewall.allowedTCPPorts = [ 631 ];
 
   
 
@@ -66,7 +63,6 @@ rec {
   environment.systemPackages = with pkgs; [
     manpages  # because man tcp should always be available
     termite.terminfo # to be able to edit over ssh
-    dhcp # to have dhclient in PATH
   ]
   ++ (load-packages ./basetools.nix)
   ;
@@ -141,8 +137,6 @@ rec {
   # };
 
 
-  # allow-downgrade falls back when dnssec fails, "true" foces dnssec
-  services.resolved.dnssec = "allow-downgrade";
 
   # option to explore ?
   # services.opensmtpd = {
@@ -170,7 +164,6 @@ rec {
     enableCompletion = true;
     enableAutosuggestions = true;
     syntaxHighlighting.enable = false;
-  # programs.zsh.shellAliases
     shellAliases= environment.shellAliases // {
       se="sudoedit";
       # to delete files
@@ -218,12 +211,6 @@ rec {
 
   users.defaultUserShell = pkgs.zsh;
 
-  # you can use http instead
-  # nix.sshServe = {
-  #   enable  = true;
-  #   keys = [ "ssh-rsa xxx user@host" ];
-  # };
-
   nixpkgs.config = {
 	allowUnfree = true;
     permittedInsecurePackages = [
@@ -249,17 +236,5 @@ rec {
     #   enable = true;
     # };
   };
-  # The NixOS release to be compatible with for stateful data such as databases.
-  # system.stateVersion = "17.03";
-  # literal example
-  # system.requiredKernelConfig = with config.lib.kernelConfig; [
-  #         (isYes "MODULES")
-  #         (isEnabled "FB_CON_DECOR")
-  #         (isEnabled "BLK_DEV_INITRD")
-  #       ]
 
-  services.xserver.windowManager.awesome = {
-    enable = true;
-    luaModules = [];
-  };
 }
