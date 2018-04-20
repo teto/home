@@ -289,11 +289,12 @@ rec {
   };
 
 
+  # use mailProfiles ?
   # programs.git = {
-    #   enable = true;
-    #   userName = "Jane Doe";
-    #   userEmail = "jane.doe@example.org";
-    # };
+  #   enable = true;
+  #   userName = "Jane Doe";
+  #   userEmail = "jane.doe@example.org";
+  # };
 
   # tray is enabled by default
   services.udiskie = {

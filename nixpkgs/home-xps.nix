@@ -38,11 +38,14 @@
     xrandr --output  eDP1 --mode 1600x900
     '';
 
+  programs.fzf = {
+    enableZshIntegration = true;
+  };
+
   programs.zsh = {
     enable = true;
     dotDir = "${config.xdg.configHome}/zsh";
     # dotDir = ".config/zsh";
-    enableZshIntegration = true;
     sessionVariables = {
       # HISTFILE="$XDG_CACHE_HOME/zsh_history";
     };

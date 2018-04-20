@@ -12,6 +12,7 @@ let
     # ./hardware-dell.nix
     /etc/nixos/hardware-configuration.nix
 
+    ./modules/ntp.nix
     ./modules/network-manager.nix
     ./modules/xserver.nix
     ./modules/wireshark.nix
@@ -20,6 +21,13 @@ let
     # ./modules/tor.nix
 
   ];
+
+  networking.firewall.checkReversePath = false; # for nixops
+  networking.firewall.allowedUDPPorts = [ 631 ];
+  networking.firewall.allowedTCPPorts = [ 631 ];
+
+  # allow-downgrade falls back when dnssec fails, "true" foces dnssec
+  services.resolved.dnssec = "allow-downgrade";
 
   # this is for gaming
   hardware.opengl.driSupport32Bit = true;
@@ -90,6 +98,11 @@ let
     # musicDirectory
   };
 
+  services.xserver.windowManager.awesome = {
+    enable = true;
+    luaModules = [];
+  };
+
   # to change owner of setuid binaries like ping 
   # security.wrappers
 
@@ -97,6 +110,11 @@ let
 
   # seemingly working for chromium only, check for firefox
   programs.browserpass.enable = true;
+
+
+  # environment.systemPackages = with pkgs; [
+  #   dhcp # to have dhclient in PATH
+  # ];
 
   nix = {
 
