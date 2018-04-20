@@ -2,7 +2,7 @@
 {
 
   services.tor = {
-    enable = true;
+    enable = false;
     client.enable = true;
   };
 }

@@ -19,8 +19,6 @@ let
     # for user teto
     ./extraTools.nix
 
-    # just to test
-    ./modules/qemu-guest-agent.nix
   ]
   # ++ lib.optional (services ? jupyter)  ./jupyter.nix
   ;

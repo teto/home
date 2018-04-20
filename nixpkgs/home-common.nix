@@ -515,8 +515,8 @@ rec {
         "${mod}+Ctrl+L"="exec ${pkgs.i3lock-fancy}/bin/i3lock-fancy";
         "${mad}+h"="${pkgs.rofi} -modi 'clipboard:greenclip print' -show clipboard";
         "${mod}+shift+n"="exec ${pkgs.gnome3.nautilus}/bin/nautilus";
-        "XF86MonBrightnessUp" = "exec ${pkgs.xbacklight}/bin/xbacklight -inc 20";
-        "XF86MonBrightnessDown" = "exec ${pkgs.xbacklight}/bin/xbacklight -dec 20";
+        "XF86MonBrightnessUp" = "exec ${pkgs.xorg.xbacklight}/bin/xbacklight -inc 20";
+        "XF86MonBrightnessDown" = "exec ${pkgs.xorg.xbacklight}/bin/xbacklight -dec 20";
 # set $greenclip "rofi -modi 'clipboard:greenclip print' -show clipboard"
 #       bindsym $mad+h exec $greenclip
         # TODO let i3dispatch
