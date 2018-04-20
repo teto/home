@@ -64,7 +64,7 @@ let
     # wireshark # may cause pb because of Qt
   ];
   desktopPkgs = with pkgs; [
-    buku
+    # buku # generates error
     # gcalc
     unstable.dropbox
     mpv
@@ -207,6 +207,7 @@ rec {
   # https://github.com/carnager/buku_run
   home.sessionVariables = {
 
+    ZDOTDIR="$XDG_CONFIG_HOME/zsh";
     WEECHAT_HOME="$XDG_CONFIG_HOME/weechat";
     TIGRC_USER="$XDG_CONFIG_HOME/tig/tigrc";
     LESSHISTFILE="$XDG_CACHE_HOME/less/history";
@@ -219,8 +220,7 @@ rec {
     MUTT="$XDG_CONFIG_HOME/mutt";
     # MAILDIR="$HOME/Maildir";
 
-    # TODO add symlinks instead towards $XDG_DATA_HOME/bin ?
-    # now these are submoudles of dotfiles To re;ove
+    # TODO package these instead now these are submoudles of dotfiles To remove
     PATH="$HOME/rofi-scripts:$HOME/buku_run:$PATH";
 
   };
@@ -290,10 +290,16 @@ rec {
 
 
   # use mailProfiles ?
-  # programs.git = {
-  #   enable = true;
-  #   userName = "Jane Doe";
-  #   userEmail = "jane.doe@example.org";
+  programs.git = {
+    enable = true;
+    userName = "Matthieu Coudron";
+    userEmail = "coudron@iij.ad.jp";
+	includes = [
+	  { path = config.xdg.configHome + "/git/config.inc"; }
+	];
+  };
+
+  # programs.autorandr = {
   # };
 
   # tray is enabled by default

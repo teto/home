@@ -3,12 +3,10 @@
     enable = true;
     withPython3 = true;
     withPython = false;
-    # ln: failed to create symbolic link '/nix/store/hnr5cvavqcd12iiclcpqy2vvwz2pry7d-neovim-ruby-env/bin/bundle': File exists
     withRuby = true; # for vim-rfc/GhDashboard etc.
 
     #   # works but puts the config in store
     #   # might be best in config/init.vim
-    #   # exec -a "$0" "/nix/store/9cscr6bwvpzglnbdfrdvnf24zmk6kkm3-neovim/bin/.nvim-wrapped"  -u /nix/store/smivig5i5b605mm1z2ny9nxzj6g8qn0k-vimrc "${extraFlagsArray[@]}" "$@"
     #   packages.myVimPackage = with pkgs.vimPlugins; {
     #       # see examples below how to use custom packages
     #       start = [ fugitive ];

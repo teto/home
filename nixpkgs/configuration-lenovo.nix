@@ -113,7 +113,7 @@ let
   };
 
   # just for testing
-  services.qemu-guest-agent.enable = true;
+  # services.qemu-guest-agent.enable = true;
 
 
 

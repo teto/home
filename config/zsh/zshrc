@@ -340,11 +340,11 @@ SPROMPT="Correct $fg[red]%R$reset_color to $fg[green]%r$reset_color [(y)es (n)o 
 #source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # Enable FZF fuzzy matcher {{{
-FZF_PATH="$XDG_DATA_HOME/fzf/shell/"
+# FZF_PATH="$XDG_DATA_HOME/fzf/shell/"
 
-FZF_PATH="$(fzf-share)"
-. "$FZF_PATH/completion.zsh"
-. "$FZF_PATH/key-bindings.zsh"
+# FZF_PATH="$(fzf-share)"
+# . "$FZF_PATH/completion.zsh"
+# . "$FZF_PATH/key-bindings.zsh"
 
 # https://junegunn.kr/2016/07/fzf-git
 . "$XDG_CONFIG_HOME/fzf-gems/fzf_git_functions.sh"

@@ -117,7 +117,6 @@ rec {
     XDG_CACHE_HOME="$HOME/.cache";
     XDG_DATA_HOME="$HOME/.local/share";
     # TODO Move to user config aka homemanager
-    ZDOTDIR="$XDG_CONFIG_HOME/zsh";
     HISTFILE="$XDG_CACHE_HOME/bash_history";
     LESS=""; # options to pass to less automatically
   };
@@ -164,6 +163,10 @@ rec {
     enableCompletion = true;
     enableAutosuggestions = true;
     syntaxHighlighting.enable = false;
+	ohMyZsh = {
+		enable = false;
+	  # theme
+	};
     shellAliases= environment.shellAliases // {
       se="sudoedit";
       # to delete files
@@ -191,6 +194,32 @@ rec {
   # todo make available for zsh too
   # use FZF_PATH="$(fzf-share)" to do it dynamically
   interactiveShellInit = ''
+# To see the key combo you want to use just do:
+# Don't try to bind CTRL Q / CTRL S !!
+# cat > /dev/null
+# And press it
+
+bindkey "^K"      kill-whole-line                      # ctrl-k
+bindkey "^A"      beginning-of-line                    # ctrl-a
+bindkey "^E"      end-of-line                          # ctrl-e
+bindkey "[B"      history-search-forward               # down arrow
+bindkey "[A"      history-search-backward              # up arrow
+bindkey "^D"      delete-char                          # ctrl-d
+bindkey "^F"      forward-char                         # ctrl-f
+bindkey "^B"      backward-char                        # ctrl-b
+
+bindkey -v   # Default to standard vi bindings, regardless of editor string
+
+zle -N edit-command-line
+
+# Press ESC-v to edit current line in your favorite $editor
+bindkey -M vicmd v edit-command-line
+# bindkey '^V' edit-command-line
+bindkey -r "^G" # was bound to list-expand I don't know where/why
+# bindkey '^G' push-line-or-edit
+
+bindkey '^P' up-history
+bindkey '^N' down-history
 
     # TODO doesn't work because it s overriden afterwards apparently
     . "${fzf}/share/fzf/completion.zsh"

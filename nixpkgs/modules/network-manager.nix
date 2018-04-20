@@ -13,16 +13,16 @@
     wifi.scanRandMacAddress = true;
 
     # TODO reestablish with the correct nixpkgs !
-    dispatcherScripts = [
-      {
-        source = ./mptcp_up ;
-        type = "up";
-      }
-      {
-        source = ./mptcp_down ;
-        type = "down";
-      }
-      ];
+    # dispatcherScripts = [
+    #   {
+    #     source = ./mptcp_up ;
+    #     type = "up";
+    #   }
+    #   {
+    #     source = ./mptcp_down ;
+    #     type = "down";
+    #   }
+    #   ];
 
     # networking.resolvconfOptions
     # wifi.powersave=false;
