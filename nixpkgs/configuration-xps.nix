@@ -131,12 +131,6 @@ let
   # DOES NOT EXIST YET :'(
   # programs.nix-index.enable = true;
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  # per-user package is quite cool too
-  # https://github.com/NixOS/nixpkgs/pull/25712/files
-  # This can be either a full system path or a shell package
-  # users.defaultUserShell = "/run/current-system/sw/bin/zsh";
-
   # when set to false, /etc/passwd and /etc/group will be congruent to your NixOS configuration
   # users.mutableUsers = false;
 

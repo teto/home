@@ -1,6 +1,7 @@
 { config, lib, pkgs, ... }:
 {
   # boot.kernelPackages = pkgs.linuxPackages_mptcp-local;
+  boot.kernelPackages = pkgs.linuxPackages_mptcp;
 
   boot.kernelModules = [
     # "kvm"  # for virtualisation
@@ -12,6 +13,8 @@
 
   # should print everything (more than 8 should be useless)
   boot.consoleLogLevel=8;
+
+  # Look at http://multipath-tcp.org/pmwiki.php/Users/ConfigureMPTCP
   boot.kernel.sysctl = {
     # https://lwn.net/Articles/542642/
     "net.ipv4.tcp_early_retrans" = 3;
@@ -23,6 +26,12 @@
       "net.mptcp.mptcp_debug" = 1;
       "net.mptcp.mptcp_checksum" = 0;
       "net.mptcp.mptcp_enabled" = 1;
+
+      # default/roundrobin/redundant
+      # "net.mptcp.mptcp_scheduler" = "redundant";
+      # ndiffports/fullmesh
+      # "net.mptcp.mptcp_path_manager" = "redundant";
+
       # https://unix.stackexchange.com/questions/13019/description-of-kernel-printk-values
       "kernel.printk" = "7	7	7	7";
       "net.ipv4.tcp_no_metrics_save"=1;
