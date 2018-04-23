@@ -73,9 +73,12 @@ in
         fetchGmail = "refresh";
         # TODO mra doesn't exist 
         # fetchGmail = "shellescape '${gmailAccount.mra.fetchMailCommand gmailAccount}' ; refresh";
+
+      # % = ${fetchGmail}
       in
       ''
-      % = ${fetchGmail}
+      # reload config
+      % = reload
       / = prompt search
       [[thread]]
       a = call hooks.apply_patch(ui)

@@ -34,6 +34,13 @@
       # user="teto"
       # group="libvirtd"
     qemuVerbatimConfig = ''
+      namespaces = []
+      # # Whether libvirt should dynamically change file ownership
+      # # dynamic_ownership = 1
+      # # be careful for network teto might make if fail
+      # # same when creating the pool
+      user="teto"
+      group="libvirtd"
     '';
 
       extraOptions= [ "--verbose" ];
