@@ -444,7 +444,7 @@ rec {
         # TODO improve config/config specific
         # { command= "xkblayout-state set +1"; always = false; notification = false; }
         # todo convert to a HM stuff
-        { command= "${pkgs.haskellPackages.greenclip}/bin/greenclip daemon"; always = false; notification = false; }
+        # { command= "${pkgs.haskellPackages.greenclip}/bin/greenclip daemon"; always = false; notification = false; }
         ];
 
 # bindsym $mod+m  mode "monitors"
@@ -519,7 +519,7 @@ rec {
         # todo use i3lock-fancy instead
         # alternative is "light"
         "${mod}+Ctrl+L"="exec ${pkgs.i3lock-fancy}/bin/i3lock-fancy";
-        "${mad}+h"="${pkgs.rofi} -modi 'clipboard:greenclip print' -show clipboard";
+        # "${mad}+h"="${pkgs.rofi} -modi 'clipboard:greenclip print' -show clipboard";
         "${mod}+shift+n"="exec ${pkgs.gnome3.nautilus}/bin/nautilus";
         "XF86MonBrightnessUp" = "exec ${pkgs.xorg.xbacklight}/bin/xbacklight -inc 20";
         "XF86MonBrightnessDown" = "exec ${pkgs.xorg.xbacklight}/bin/xbacklight -dec 20";
