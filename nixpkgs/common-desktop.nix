@@ -119,7 +119,8 @@ let
   nix = {
 
     # just to test for now
-    package = pkgs.nixUnstable;
+    package = pkgs.nixStable;
+    # package = pkgs.nixUnstable;
 
     buildCores=4;
     nixPath = [

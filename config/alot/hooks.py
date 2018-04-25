@@ -1,5 +1,3 @@
-#!/usr/bin/python2
-
 # READ http://alot.readthedocs.org/en/docs/configuration/index.html#hooks
 import logging
 import subprocess

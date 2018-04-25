@@ -10,6 +10,8 @@ if [ "$IFACE" = lo -o "$MODE" != stop ]; then
         exit 0
 fi
 
-ip rule del table $DEVICE_IFACE
-ip route flush table $DEVICE_IFACE 
+IP=${IP:-ip}
+
+$IP rule del table $DEVICE_IFACE
+$IP route flush table $DEVICE_IFACE 
 
