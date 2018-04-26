@@ -116,6 +116,12 @@ let
   # services.qemu-guest-agent.enable = true;
 
 
+  # see
+  # systemctl edit NetworkManager-dispatcher.service
+  # NetworkManager-dispatcher.service.d
+  # environment.etc."systemd/system/NetworkManager-dispatcher.service.d/override.conf".text = ''
+  #   Environment="PATH=${pkgs.iproute}/bin:${pkgs.coreutils}/bin"
+  # '';
 
   environment.systemPackages = with pkgs;
     (import ./basetools.nix { inherit pkgs;})
