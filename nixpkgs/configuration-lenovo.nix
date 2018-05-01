@@ -126,6 +126,11 @@ let
   #   Environment="PATH=${pkgs.iproute}/bin:${pkgs.coreutils}/bin"
   # '';
 
+  # will install openvswitch
+  programs.mininet = {
+    enable = true;
+  };
+
   environment.systemPackages = with pkgs;
     (import ./basetools.nix { inherit pkgs;})
     # strongswan # to get ipsec in path
