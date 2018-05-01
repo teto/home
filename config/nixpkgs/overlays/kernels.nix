@@ -43,11 +43,15 @@ let
 
     '';
 
+    localConfig = ''
+
+      LOCALVERSION -matt
+      SYN_COOKIES n
+    '';
+
     # For the tests don't forget to disable syn cooki
     mptcpConfig = ''
-      LOCALVERSION -matt
 
-      SYN_COOKIES n
       MPTCP y
       MPTCP_SCHED_ADVANCED y
       MPTCP_ROUNDROBIN m
@@ -61,8 +65,8 @@ let
       MPTCP_NDIFFPORTS y
       # ... but use none by default.
       # The default is safer if source policy routing is not setup.
-      DEFAULT_DUMMY y
-      DEFAULT_MPTCP_PM default
+      # DEFAULT_DUMMY y
+      DEFAULT_MPTCP_PM fullmesh
 
       # MPTCP scheduler selection.
       # Disabled as the only non-default is the useless round-robin.
@@ -95,7 +99,7 @@ let
 
     persoConfig=''
       L2TP_IP m
-      '';
+    '';
   # must be used with ignoreConfigErrors in kernels
   # kernelExtraConfig=builtins.readFile ../extraConfig.nix;
 
@@ -127,20 +131,28 @@ in rec {
   test-localSystem = let system = super.lib.systems.elaborate { system = builtins.currentSystem; };
    in super.lib.recursiveUpdate (system) { platform = system.platform // test-platform; };
 
-  # to improve the config
-  # make localmodconfig
-  # builtins.trace "test"
-  mptcp93 = super.pkgs.linux_mptcp.override (  {
+  mptcp-custom = mptcp93;
+   # super.pkgs.linux_mptcp.override (  {
+  #  });
+
+  # improve the default mptcp config
+  mptcp93  = super.pkgs.linux_mptcp.override (  {
     kernelPatches=[];
-    # maybe that works
-    # kernelAutoModules = false;
-    # TODO make a new configuration light ?
-    # extraConfig=kernelExtraConfig;
+    # name="mptcp-override";
+      # modDirVersion="4.9.60-matt";
+
+      ignoreConfigErrors=true;
+      autoModules = false;
+      kernelPreferBuiltin = true;
+
+      extraConfig=mptcpKernelExtraConfig;
 
   });
 
   # sandbox doesn't like
   # in a repl I see mptcp-local.stdenv.hostPlatform.platform
+  mptcp93-local = mptcp-local;
+
   mptcp-local =
   let
     # todo remove tags
@@ -171,7 +183,7 @@ in rec {
       # };
       enableParallelBuilding=true;
 
-      extraConfig=mptcpKernelExtraConfig;
+      extraConfig=mptcpKernelExtraConfig + localConfig;
 
       # if we dont want to have to regenerate it
       # configfile=

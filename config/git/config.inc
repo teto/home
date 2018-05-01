@@ -58,9 +58,5 @@
 
 [mergetool "fugitive"]
 	cmd = nvim -f -c \"Gdiff\" \"$MERGED\"
-[rebase]
-	autosquash = true
-[stash]
-	showPatch = 1
 [mergetool]
 	keepBackup = false

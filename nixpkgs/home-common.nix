@@ -297,6 +297,12 @@ rec {
 	includes = [
 	  { path = config.xdg.configHome + "/git/config.inc"; }
 	];
+    extraConfig=''
+      [rebase]
+          autosquash = true
+      [stash]
+          showPatch = 1
+      '';
   };
 
   # programs.autorandr = {

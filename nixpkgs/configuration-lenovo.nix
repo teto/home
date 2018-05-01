@@ -113,9 +113,23 @@ let
   };
 
   # just for testing
-  # services.qemu-guest-agent.enable = true;
+  # services.qemuGuest.enable = true;
 
+  # to prevent
+  # The VirtualBox Linux kernel driver (vboxdrv) is either not loaded or there is a permission problem with /dev/vboxdrv. Please reinstall the kernel module by executing '/sbin/vboxconfig' as root.
+  virtualisation.virtualbox.host.enable = true;
 
+  # see
+  # systemctl edit NetworkManager-dispatcher.service
+  # NetworkManager-dispatcher.service.d
+  # environment.etc."systemd/system/NetworkManager-dispatcher.service.d/override.conf".text = ''
+  #   Environment="PATH=${pkgs.iproute}/bin:${pkgs.coreutils}/bin"
+  # '';
+
+  # will install openvswitch
+  programs.mininet = {
+    enable = true;
+  };
 
   environment.systemPackages = with pkgs;
     (import ./basetools.nix { inherit pkgs;})
