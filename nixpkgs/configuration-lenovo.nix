@@ -113,8 +113,11 @@ let
   };
 
   # just for testing
-  # services.qemu-guest-agent.enable = true;
+  # services.qemuGuest.enable = true;
 
+  # to prevent
+  # The VirtualBox Linux kernel driver (vboxdrv) is either not loaded or there is a permission problem with /dev/vboxdrv. Please reinstall the kernel module by executing '/sbin/vboxconfig' as root.
+  virtualisation.virtualbox.host.enable = true;
 
   # see
   # systemctl edit NetworkManager-dispatcher.service

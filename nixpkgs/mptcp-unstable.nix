@@ -1,7 +1,9 @@
 { config, lib, pkgs, ... }:
 {
   # boot.kernelPackages = pkgs.linuxPackages_mptcp-local;
-  boot.kernelPackages = pkgs.linuxPackages_mptcp;
+  # linuxPackagesFor
+  # boot.kernelPackages = pkgs.linuxPackages_mptcp;
+  boot.kernelPackages = pkgs.linuxPackagesFor pkgs.mptcp-custom;
 
   boot.kernelModules = [
     # "kvm"  # for virtualisation
@@ -28,9 +30,9 @@
       "net.mptcp.mptcp_enabled" = 1;
 
       # default/roundrobin/redundant
-      # "net.mptcp.mptcp_scheduler" = "redundant";
+      "net.mptcp.mptcp_scheduler" = "redundant";
       # ndiffports/fullmesh
-      # "net.mptcp.mptcp_path_manager" = "redundant";
+      "net.mptcp.mptcp_path_manager" = "fullmesh";
 
       # https://unix.stackexchange.com/questions/13019/description-of-kernel-printk-values
       "kernel.printk" = "7	7	7	7";
