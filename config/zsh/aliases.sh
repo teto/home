@@ -1,8 +1,7 @@
-#!/usr/bin/env sh
 # vim: set et fenc=utf-8 ff=unix sts=0 sw=4 ts=4 fdm=marker :
-# TODO remove
-    export MSMTP_QUEUE="$XDG_DATA_HOME/msmtp/";
-    export MSMTP_LOG="$XDG_DATA_HOME/msmtp/log";
+# TODO move to home-manager ?
+# export MSMTP_QUEUE="$XDG_DATA_HOME/msmtp/";
+# export MSMTP_LOG="$XDG_DATA_HOME/msmtp/log";
 
 # nix aliases{{{
 alias nxi="nix-env -iA"
@@ -10,8 +9,9 @@ alias nxu="nix-env -e"
 alias nxs="nix-shell -iA"
 alias nxp="nixops "
 
+# rename mptcp ?
 alias mp="mptcpanalyzer"
-alias mn="mptcpnumerics"
+
 # autres players a tester eventuellement
 alias n="ncmpcpp"
 # alias ff="find . -iname" # use fd instead
@@ -34,16 +34,10 @@ alias latest="ls -lt |head"
 # alias enjp="trans -from en -to jp "
 # }}}
 
-
-
-# not always needed ?
-# alias rake="rake1.9.1"
-##############################
 alias servethis="python -c 'import SimpleHTTPServer; SimpleHTTPServer.test()'"
-# alias pypath='python -c "import sys; print sys.path" | tr "," "\n" | grep -v "egg"'
-# alias shellpath='python -c "import sys; print sys.env.PATH" | tr "," "\n" | grep -v "egg"'
 
 
+# todo use exa instead
 # ls related updates {{{
 # I also export TIME_STYLE to change the output of this
 alias ls="ls --color=auto --time-style=iso"
@@ -73,10 +67,10 @@ alias makej="make -j4"
 alias nm="nm -l"
 # }}}
 
-# Mail {{{
+# Mail (remove/being replaced by home-manager) {{{
 # alias ml="nix-shell -p python2.7  -n ~/.config/notmuch/notmuchrc_pro"
-alias mg="alot -n $XDG_CONFIG_HOME/notmuchrc"
-alias mg="nix-shell -p 'python.withPackages(ps: with ps; [ alot ])' --show-trace --run \"alot -n \$XDG_CONFIG_HOME/notmuch/notmuchrc\""
+# alias mg="alot -n $XDG_CONFIG_HOME/notmuchrc"
+# alias mg="nix-shell -p 'python.withPackages(ps: with ps; [ alot ])' --show-trace --run \"alot -n \$XDG_CONFIG_HOME/notmuch/notmuchrc\""
 # alias astroperso="astroid"
 # alias astropro="astroid -c ~/.config/astroid/config_pro"
 # }}}

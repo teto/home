@@ -33,26 +33,20 @@ buildPythonApplication rec {
     #   rev = "${version}";
     #   # sha256 = ;
     # };
-    # todo filter
     # filter-src
 	src =  builtins.filterSource (name: type: true) /home/teto/mptcpanalyzer;
-    # enableCheckPhase=false;
     doCheck = false;
-    /* skipCheck */
-	# buildInputs = [  stevedore pandas matplotlib  ];
     # to build the doc sphinx
-    # TODO package tshark
     propagatedBuildInputs = [ stevedore cmd2 pyperclip pandas 
     # we want gtk because qt is so annying on nixos
     (matplotlib.override { enableGtk3=true;})
     pyqt5
     tshark pyperclip ];
-	/* propagatedBuildInputs =  [ stevedore pandas matplotlib pyqt5 ]; */
 
     meta = with lib; {
       description = "pcap analysis tool specialized for multipath TCP";
       maintainers = [ maintainers.teto ];
       # dunno why but taht fails
-      # licence = licences.gpl3;
+      licences = licences.gpl3;
     };
 }
