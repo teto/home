@@ -16,10 +16,18 @@ let
     ./modules/network-manager.nix
     ./modules/libvirtd.nix
 
+
     # for user teto
     ./extraTools.nix
     # ./desktopPkgs.nix
-  ];
+  ] 
+  # while developing
+  # builtins.pathExists (<nixpkgs> + ./modules/programs/mininet.nix))
+  ++ lib.optionals (true)
+  [
+    ./modules/mininet.nix
+  ]
+  ;
 
   # it apparently still is quite an important thing to have
   boot.devSize = "5g";
@@ -119,16 +127,9 @@ let
   # The VirtualBox Linux kernel driver (vboxdrv) is either not loaded or there is a permission problem with /dev/vboxdrv. Please reinstall the kernel module by executing '/sbin/vboxconfig' as root.
   virtualisation.virtualbox.host.enable = true;
 
-  # see
-  # systemctl edit NetworkManager-dispatcher.service
-  # NetworkManager-dispatcher.service.d
-  # environment.etc."systemd/system/NetworkManager-dispatcher.service.d/override.conf".text = ''
-  #   Environment="PATH=${pkgs.iproute}/bin:${pkgs.coreutils}/bin"
-  # '';
-
-  # will install openvswitch
-  programs.mininet = {
+  services.telnet = {
     enable = true;
+    # port = ;
   };
 
   environment.systemPackages = with pkgs;
