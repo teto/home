@@ -135,4 +135,14 @@ let
 
   # let's be fucking crazy
   # environment.enableDebugInfo = true;
+# } ++ lib.optionalAttrs (config.programs ? mininet) {
+
+  # programs.mininet.enable = true;
+  services.telnet = {
+    enable = true;
+    # port = ;
+  };
+
+  # installed for paste experiment
+  virtualisation.virtualbox.host.enable = true;
 }
