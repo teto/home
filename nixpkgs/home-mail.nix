@@ -100,9 +100,33 @@ in
         auto_remove_unread = "True";
         ask_subject = "False";
         handle_mouse = "True";
-        sign_by_default = "True";
-        encrypt_by_default = "False";
+        # per account values !
+        # sign_by_default = "True";
+        # encrypt_by_default = "False";
      };
+    teto@jedha> chmod u+w config
+
+# TODO add as a string  extraConfigStr
+# [tags]
+#   [[inbox]]
+#     translated = 📥
+#   [[unread]]
+#     translated = ✉
+#   [[replied]]
+#     translated = ⏎
+#   [[sent]]
+#     translated = ↗
+#   [[attachment]]
+#     translated = 📎
+#   [[lists]]
+#     translated = 📃
+#   [[bug]]
+#     translated = 🐜
+#     normal = "", "", "dark red", "", "light red", ""
+#   [[encrypted]]
+#     translated = 🔒
+#   [[spam]]
+# translated = ♻
    };
 
    programs.offlineimap = {

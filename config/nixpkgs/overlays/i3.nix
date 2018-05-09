@@ -98,15 +98,17 @@ rec {
   python = super.python.override {
      # Careful, we're using a different self and super here!
     packageOverrides = python-self: python-super: {
-      # if (super.pkgs ? pygccxml) then null else
-        # now that s wird
-        # pygccxml =  super.callPackage ../pygccxml.nix {
-        # pkgs = super.pkgs;
-        # pythonPackages = self.pkgs.python3Packages;
-        # pygccxml = python-super.pythonPackages.pygccxml.overrideAttrs (oldAttrs: {
-        #   src=/home/teto/pygccxml;
-        # });
 
+        # alot = python-super.alot.overrideAttrs (oldAttrs: {
+        #   version = "0.9";
+        #   src = /home/teto/alot;
+        #   # src = super.pkgs.fetchFromGitHub {
+        #   #   owner = "pazz";
+        #   #   repo = "alot";
+        #   #   rev = "08438d56ef695883f8beb8c7515b261015c676f0";
+        #   #   sha256 = "0fc0ix468n2s97p9nfdl3bxi3i9hwf60j4k0mabrnxfhladsygzm";
+        #   # };
+        # });
 
         # pandas = super.pkgs.pythonPackages.pandas.overrideAttrs {
         #   doCheck = false;
@@ -217,7 +219,7 @@ rec {
   };
 
   mptcpanalyzer = super.python3Packages.callPackage ../mptcpanalyzer.nix {
-    tshark = self.pkgs.tshark-local;
+    tshark = self.pkgs.tshark-local-stable;
     inherit (super) stdenv;
   };
   mptcpnumerics = super.python3Packages.buildPythonApplication {

@@ -11,9 +11,9 @@ in
     name = "wireshark-dev";
     src = filter-cmake wiresharkFolder;
     # TODO
-    postBuild = ''
-      export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:./run"
-      '';
+    shellHook = ''
+      export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$PWD/build/run"
+    '';
   });
 
   wireshark-local-stable = super.wireshark.overrideAttrs (oldAttrs: {
@@ -25,9 +25,9 @@ in
       # sha256 = "0pbmdwphmz4c6g9rvi58kmjhkvhy5ys5y8dzl2cfh8w00jc62cn0";
     };
     # TODO
-    postBuild = ''
-      export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:./run"
-      '';
+    shellHook = ''
+      export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:./build/run"
+    '';
   });
 
 
@@ -41,11 +41,7 @@ in
     #   # sha256 = "0pbmdwphmz4c6g9rvi58kmjhkvhy5ys5y8dzl2cfh8w00jc62cn0";
     # };
 
-    # TODO
-    postBuild = ''
-      export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:./run"
-      '';
-      # write in .nvimrc
+    # write in .nvimrc
     nvimrc = super.pkgs.writeText "_nvimrc" ''
         " to deal with cmake build folder
         let &makeprg="make -C build"
@@ -58,7 +54,7 @@ in
       repo="wireshark";
       owner="teto";
       rev = "reinject_stable";
-      sha256 = "10l3yhvvdpn65la4464zz8bc960y72swvcgwps05d4v9lkxyjy50";
+      sha256 = "0q1lqh2zbjz0bgppy3bc6dlravifja49arv1m4yd3jz55ify3anv";
     };
   });
 

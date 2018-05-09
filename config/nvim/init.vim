@@ -1097,7 +1097,7 @@ let g:jedi#completions_enabled = 0 " disable when deoplete in use
 
 
 " TODO replace with getroot of directory ?
-let g:neomake_make_maker = {
+let g:neomake_cmake_maker = {
     \ 'exe': 'make',
     \ 'args': [],
     \ 'cwd': getcwd().'/build',

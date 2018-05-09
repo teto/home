@@ -1,8 +1,9 @@
+# -*- encoding: utf-8 -*-
 # READ http://alot.readthedocs.org/en/docs/configuration/index.html#hooks
 import logging
 import subprocess
 
-from alot.settings import settings
+# from alot.settings import settings
 
 #run offlineimaponexit
 # def pre_global_exit(**kwargs):

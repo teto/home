@@ -7,6 +7,7 @@ allow_bold = true
 dynamic_title = true
 fullscreen = false
 urgent_on_bell = true
+scrollbar=right
 clickable_url = false
 
 # apparently it's possible to
