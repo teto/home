@@ -19,10 +19,10 @@ in
   wireshark-local-stable = super.wireshark.overrideAttrs (oldAttrs: {
     # pygobject2
     name = "wireshark-local-stable";
-    src = super.pkgs.fetchgit {
+    src = builtins.fetchgit {
       url = wiresharkFolder;
-      rev = "mptcp_reinject_stable";
-      sha256 = "0pbmdwphmz4c6g9rvi58kmjhkvhy5ys5y8dzl2cfh8w00jc62cn0";
+      rev = "reinject_stable";
+      # sha256 = "0pbmdwphmz4c6g9rvi58kmjhkvhy5ys5y8dzl2cfh8w00jc62cn0";
     };
     # TODO
     postBuild = ''
@@ -35,6 +35,12 @@ in
     # pygobject2
     name = "tshark-dev";
     src = filter-cmake wiresharkFolder;
+    # src = builtins.fetchgit {
+    #   url = wiresharkFolder;
+    #   rev = "reinject_stable";
+    #   # sha256 = "0pbmdwphmz4c6g9rvi58kmjhkvhy5ys5y8dzl2cfh8w00jc62cn0";
+    # };
+
     # TODO
     postBuild = ''
       export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:./run"
@@ -47,15 +53,11 @@ in
   });
 
   tshark-local-stable = self.tshark-local.overrideAttrs (oldAttrs: {
-    # pygobject2
     name = "tshark-local-stable";
     src = self.fetchFromGitHub {
-      # name = "tshark_local_stable_src";
-      # url = filter-cmake wiresharkFolder;
       repo="wireshark";
       owner="teto";
       rev = "reinject_stable";
-      # rev = "mptcp_reinject_stable";
       sha256 = "10l3yhvvdpn65la4464zz8bc960y72swvcgwps05d4v9lkxyjy50";
     };
   });

@@ -216,11 +216,9 @@ rec {
     '';
   };
 
-  # pkgs = super.pkgs;
   mptcpanalyzer = super.python3Packages.callPackage ../mptcpanalyzer.nix {
-    # inherit (super.python3Packages) buildPythonApplication pandas cmd2 pyperclip matplotlib pyqt5 stevedore;
-    tshark = self.pkgs.tshark-local-stable;
-    inherit (super) lib;
+    tshark = self.pkgs.tshark-local;
+    inherit (super) stdenv;
   };
   mptcpnumerics = super.python3Packages.buildPythonApplication {
 	pname = "mptcpnumerics";

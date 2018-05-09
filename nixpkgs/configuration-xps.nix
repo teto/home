@@ -138,6 +138,7 @@ let
 # } ++ lib.optionalAttrs (config.programs ? mininet) {
 
   # programs.mininet.enable = true;
+
   services.telnet = {
     enable = true;
     # port = ;
