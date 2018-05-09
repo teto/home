@@ -76,6 +76,7 @@ let
     ffmpegthumbnailer # to preview videos in ranger
     # todo try sthg else
     # haskellPackages.greenclip # todo get from haskell
+    unstable.gnome3.eog
     moc
     mupdf.bin # evince does better too
     # mdp # markdown CLI presenter
@@ -83,8 +84,8 @@ let
     unstable.gnome3.gnome-calculator
     unstable.qtpass
     sublime3
-    scrot
-    sxiv
+    scrot # screenshot app
+    sxiv # simple image viewer
     unstable.system_config_printer
     shared_mime_info # temporary fix for nautilus to find the correct files
     # taiginijisho # japanse dict; like zkanji Qt based
