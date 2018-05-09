@@ -1,6 +1,7 @@
 {
   # pkgs ? import <nixpkgs> {}
-lib
+stdenv
+, lib
 , fetchFromGitHub
 , buildPythonApplication
 , stevedore, cmd2
@@ -15,7 +16,7 @@ lib
 # with pkgs.python3Packages;
 let
 
-  filter-src =  builtins.filterSource (name: type:
+  filter-src =  with stdenv; builtins.filterSource (name: type:
     let baseName = baseNameOf (toString name); in
     lib.cleanSourceFilter name type && !(
     lib.hasSuffix ".pcap" baseName
@@ -43,10 +44,10 @@ buildPythonApplication rec {
     pyqt5
     tshark pyperclip ];
 
-    meta = with lib; {
+    meta = with stdenv.lib; {
       description = "pcap analysis tool specialized for multipath TCP";
       maintainers = [ maintainers.teto ];
       # dunno why but taht fails
-      licences = licences.gpl3;
+      license = licenses.gpl3;
     };
 }
