@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 {
   services.openntpd = {
-    enable = false;
+    enable = true;
     # add iij ntp servers
     # servers = [ "" ];
     # extraConfig="";

@@ -30,6 +30,9 @@
 	tool = fugitive
   conflictstyle = diff3
 
+# useful when merging from kernel
+renamelimit = 7000
+
 [diff]
   tool = nvim -d
 [difftool]

@@ -31,7 +31,7 @@ rec {
       ./modules/ntp.nix
       # ./mptcp-kernel.nix
   ];
-  # kernelModules are forcibly loaded C
+  # kernelModules are forcibly loaded
   # availableKernelModules are just available, and udev will auto-load them as needed
 
 

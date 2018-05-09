@@ -23,7 +23,7 @@ let
   ] 
   # while developing
   # builtins.pathExists (<nixpkgs> + ./modules/programs/mininet.nix))
-  ++ lib.optionals (true)
+  ++ lib.optionals (false)
   [
     ./modules/mininet.nix
   ]
@@ -66,10 +66,12 @@ let
   # boot.kernelParams = [ "earlycon=ttyS0" "console=ttyS0" ];
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
-  # TODO we need nouveau 
-  boot.kernelModules = [
+  # TODO we need nouveau  ?
+  # lib.mkMerge
+  boot.kernelModules =  [
     "af_key" # for ipsec/vpn support
-    "kvm" "kvm-intel" # for virtualisation
+    "kvm" 
+    "kvm-intel" # for virtualisation
   ];
 
   boot.kernel.sysctl = {
@@ -125,12 +127,13 @@ let
 
   # to prevent
   # The VirtualBox Linux kernel driver (vboxdrv) is either not loaded or there is a permission problem with /dev/vboxdrv. Please reinstall the kernel module by executing '/sbin/vboxconfig' as root.
-  virtualisation.virtualbox.host.enable = true;
+  # virtualisation.virtualbox.host.enable = true;
 
-  services.telnet = {
-    enable = true;
-    # port = ;
-  };
+  # services.telnet = {
+  #   enable = true;
+  #   openFirewall = true;
+  #   # port = ;
+  # };
 
   environment.systemPackages = with pkgs;
     (import ./basetools.nix { inherit pkgs;})
