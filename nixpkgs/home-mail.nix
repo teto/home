@@ -104,7 +104,6 @@ in
         # sign_by_default = "True";
         # encrypt_by_default = "False";
      };
-    teto@jedha> chmod u+w config
 
 # TODO add as a string  extraConfigStr
 # [tags]

@@ -82,14 +82,16 @@ def _get_config():
     return read_config(configpath=config_path)
 
 
-CONFIG = _get_config()
 
 
 def apply_patch(ui):
+    CONFIG = _get_config()
     message = ui.current_buffer.get_selected_message()
     filename = message.get_filename()
 
     for tag in message.get_tags():
+        ui.notify("looking for tag %s!" % tag)
+        #, priority='error')
         if tag in CONFIG:
             config = CONFIG[tag]
             break
