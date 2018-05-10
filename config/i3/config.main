@@ -15,9 +15,9 @@ font pango:FontAwesome 12
 # https://github.com/DaveDavenport/rofi
 # Combi mode, allow several modes to be merged into one list.
 # ,Layouts:i3-list-layouts,file:/home/teto/rofi/Examples/rofi-file-browser.sh'
-set $launcher "rofi -modi 'run,drun,window,ssh' -show run"
+# set $launcher "rofi -modi 'run,drun,window,ssh' -show run"
 # Randr:rofi-randr,Monitor:monitor_layout.sh'
-set $greenclip "rofi -modi 'clipboard:greenclip print' -show clipboard"
+# set $greenclip "rofi -modi 'clipboard:greenclip print' -show clipboard"
 
 set $GroupUs Group1
 set $GroupFr Group2
@@ -29,8 +29,8 @@ set $GroupFr Group2
 # bindsym $mad+h exec $greenclip
 # bindsym $mad+b exec buku_run
 # bindsym $mad+r exec rofi_pass
-bindsym $mod+ctrl+h exec $greenclip
-bindsym $mod+ctrl+b exec buku_run
+# bindsym $mod+ctrl+h exec $greenclip
+# bindsym $mod+ctrl+b exec buku_run
 bindsym $mod+ctrl+v exec ~/.vim-anywhere/bin/run"
 
 # xmodmap to see the mappings for ModX etc...
@@ -40,7 +40,6 @@ set $BROWSER qutebrowser
 #set $term rxvt-unicode
 set $term termite
 # tODO move to nix generator ?
-set $status_command nix-shell -p i3pystatus -p python3Packages.pytz -p khal -p python3Packages.keyring --run "python3 $XDG_CONFIG_HOME/i3/myStatus.py"
 
 # to easily swap between i3/vim mode
 set $kleft h
@@ -181,10 +180,8 @@ bindsym $mod+Shift+Return exec --no-startup-id $term -d "$(xcwd)"
 # bindsym $GroupUs+$mod+Shift+Q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+Tab exec $launcher
+# bindsym $mod+Tab exec $launcher
 #bindsym $mod+eacute exec j4-dmenu-desktop --dmenu='rofi -modi "run,ssh,dmenu" -dmenu'
-bindsym $GroupFr+$mod+eacute i3-list-windows
-bindsym $GroupUs+$mod+2 i3-list-windows
 
 no_focus [class="^qutebrowser"]
 
@@ -204,7 +201,7 @@ bindsym $mod+F3 [instance="pad_(?!ncmpcpp)"] move scratchpad; [instance="pad_ncm
 
 bindsym $GroupFr+$mod+oe exec i3-easyfocus
 # bindsym $GroupUs+$mod+oe exec i3-easyfocus
-bindsym $mod+shift+e exec /home/teto/i3-easyfocus/i3-easyfocus
+# bindsym $mod+shift+e exec /home/teto/i3-easyfocus/i3-easyfocus
 
 # This may be slow since script involves a few steps
 # change focus
@@ -305,46 +302,7 @@ bindsym $mod+quotedbl  focus child
 bindsym $mod+apostrophe mode "programs"
 
 #bindsym $mod+q exec nemo
-
 # focus the child container
-
-# switch to workspace
-#bindsym $mod+ampersand workspace "$w1"
-#bindsym $mod+eacute workspace "$w2"
-#bindsym $mod+quotedbl workspace "$w3"
-#bindsym $mod+apostrophe workspace "$w4"
-#bindsym $mod+parenleft workspace "$w5"
-#bindsym $mod+minus workspace 6
-#bindsym $mod+egrave workspace 7
-#bindsym $mod+underscore workspace 8
-#bindsym $mod+ccedilla workspace 9
-#bindsym $mod+agrave workspace 10
-# bindsym $GroupFr+$mod+a workspace "$w1"
-# bindsym $GroupFr+$mod+z workspace "$w2"
-# bindsym $GroupFr+$mod+e workspace "$w3"
-# bindsym $GroupFr+$mod+q workspace "$w4"
-# bindsym $GroupFr+$mod+s workspace "$w5"
-# bindsym $GroupFr+$mod+d workspace "$w6"
-# bindsym $GroupFr+$mod+w workspace "$w7"
-# bindsym $GroupFr+$mod+x workspace "$w8"
-# bindsym $GroupFr+$mod+c workspace "$w9"
-
-# bindsym $GroupUs+$mod+q workspace "$w1"
-# bindsym $GroupUs+$mod+w workspace "$w2"
-# bindsym $GroupUs+$mod+e workspace "$w3"
-# bindsym $GroupUs+$mod+a workspace "$w4"
-# bindsym $GroupUs+$mod+s workspace "$w5"
-# bindsym $GroupUs+$mod+d workspace "$w6"
-# bindsym $GroupUs+$mod+z workspace "$w7"
-# bindsym $GroupUs+$mod+x workspace "$w8"
-# bindsym $GroupUs+$mod+c workspace "$w9"
-# bindcode $mod+24 workspace "$w1"
-# bindcode $mod+25 workspace "$w2"
-# bindcode $mod+26 workspace "$w3"
-# bindcode $mod+38 workspace "$w4"
-# bindcode $mod+52 workspace "$w7"
-
-#bindsym $mod+x workspace 10
 
 for_window [con_mark="^pad_*"] move scratchpad
 
@@ -452,9 +410,6 @@ mode "resize" {
 # }}}
 
 
-
-#bindsym $mod+w exec "~/.i3/choose_wallpaper.sh"
-
 bindsym $mod+shift+b border toggle
 bindsym $mod+ctrl+minus move scratchpad
 #
@@ -465,42 +420,8 @@ set_from_resource $foc_border_bg i3bar.foc_border_bg #d70a53
 set_from_resource $bar_bg i3bar.background #090e1400
 set_from_resource $bar_status i3bar.statusline #d70a53
 
-# Start i3bar to display a workspace bar (plus the system information i3status
-# bar {{{
-# Toggle between hide state and show state
-# bindsym $mod+m bar hidden_state toggle
-#bar {
-#	position top
-#	strip_workspace_numbers 1
-#	id 0
-#	# -t => transparent, available only in i3gaps
-#	# i3bar_command i3bar -t
-#	i3bar_command i3bar
-#	status_command $status_command
-#	# separator_symbol "|"
-#	# font pango: Liberation Sans Mono 9,  FontAwesome 12
 
-#	#output $output2
-#	verbose 1
-##	tray_output $output15
-#    colors {
-#        background $bar_bg
-#        statusline $bar_status
-## #ffffff
-#		# focused_statusline #090e1400
-#		# focused_background #090e1400
 
-#        # class            border  backgrd text
-#        focused_workspace  $foc_border $foc_border_bg #FFFF50
-#        active_workspace   #06090d #06090d #696f89
-#        inactive_workspace #06090d #06090d #696f89
-#        urgent_workspace   #d72f6b #d70a53 #FFFF50
-#		binding_mode       #rrrrrr #rrffrr #ffffff
-#    }
-#}
-# }}}
-
-bindsym $mod+shift+q exec $BROWSER
 # bindsym $mod+shift+n exec nemo
 bindsym $mod+shift+p mode mouse
 
@@ -539,7 +460,7 @@ floating_maximum_size -1 x -1
 # DP3 & LVDS1
 # to move
 # TODO ca ca plante si j'en ai
-bindsym XF86Display exec ~/.config/i3/monitors.sh
+# bindsym XF86Display exec ~/.config/i3/monitors.sh
 
 # xrandr --output LVDS1 --primary --auto --output DP1 --auto --right-of LVDS1
 #exec_always xrandr --output $output1 --auto --output $output2 --right-of $output1

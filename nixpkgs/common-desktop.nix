@@ -106,7 +106,6 @@ in
   # udisks2 GUI
   services.udisks2.enable = true;
 
-
   services.strongswan = {
     enable = true;
       # "/etc/ipsec.d/*.secrets" "/etc/ipsec.d"
@@ -123,22 +122,13 @@ in
     luaModules = [];
   };
 
-  # to change owner of setuid binaries like ping 
-  # security.wrappers
-
   # services.xserver.xrandrHeads = ;
 
   # seemingly working for chromium only, check for firefox
   programs.browserpass.enable = true;
 
-
-  # environment.systemPackages = with pkgs; [
-  #   dhcp # to have dhclient in PATH
-  # ];
-
   nix = {
 
-    # just to test for now
     package = pkgs.nixStable;
     # package = pkgs.nixUnstable;
 

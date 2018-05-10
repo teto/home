@@ -233,7 +233,8 @@ rec {
     enable = true;
     # path = https://github.com/rycee/home-manager/archive/master.tar.gz;
     # failshome.folder +
-    path =  "/home/teto/dotfiles/home-manager";
+    # must be a string
+    path =  "/home/teto/home-manager";
   };
 
   xdg = {
@@ -394,8 +395,9 @@ rec {
   # while waiting to fix greenclip related problems
   services.parcellite.enable = true;
 
+  # might trigger nm-applet crash ?
   services.gpg-agent = {
-    enable = true;
+    enable = false;
     defaultCacheTtl = 1800;
     enableSshSupport = true;
     # grabKeyboardAndMouse= false;
@@ -475,8 +477,8 @@ rec {
         let
           move_to_output = dir: fr: us:
           {
-            "$GroupFr+$mod+${fr}"="move workspace to output \"${dir}";
-            "$GroupUs+$mod+${us}"="move workspace to output \"${dir}";
+            "$GroupFr+$mod+${fr}"="move workspace to output ${dir}";
+            "$GroupUs+$mod+${us}"="move workspace to output ${dir}";
           };
         in
         {
@@ -525,11 +527,43 @@ rec {
     {
         # todo use i3lock-fancy instead
         # alternative is "light"
+        # set $greenclip "rofi -modi 'clipboard:greenclip print' -show clipboard"
+        # bindsym $mod+ctrl+v exec ~/.vim-anywhere/bin/run"
+# switch to workspace
+#bindsym $mod+ampersand workspace "$w1"
+#bindsym $mod+eacute workspace "$w2"
+#bindsym $mod+quotedbl workspace "$w3"
+#bindsym $mod+apostrophe workspace "$w4"
+#bindsym $mod+parenleft workspace "$w5"
+#bindsym $mod+minus workspace 6
+#bindsym $mod+egrave workspace 7
+#bindsym $mod+underscore workspace 8
+#bindsym $mod+ccedilla workspace 9
+#bindsym $mod+agrave workspace 10
+        "${mod}+Tab"="exec \"${pkgs.rofi}/bin/rofi -modi 'run,drun,window,ssh' -show run\"";
         "${mod}+Ctrl+L"="exec ${pkgs.i3lock-fancy}/bin/i3lock-fancy";
-        # "${mad}+h"="${pkgs.rofi} -modi 'clipboard:greenclip print' -show clipboard";
-        "${mod}+shift+n"="exec ${pkgs.gnome3.nautilus}/bin/nautilus";
-        "XF86MonBrightnessUp" = "exec ${pkgs.xorg.xbacklight}/bin/xbacklight -inc 20";
-        "XF86MonBrightnessDown" = "exec ${pkgs.xorg.xbacklight}/bin/xbacklight -dec 20";
+        "${mod}+Ctrl+h" = ''exec "${pkgs.rofi}/bin/rofi -modi 'clipboard:greenclip print' -show clipboard"'';
+        "${mod}+ctrl+b" = "exec " + ../buku_run/buku_run;
+        "${mod}+shift+n" = "exec ${pkgs.gnome3.nautilus}/bin/nautilus";
+        "${mod}+quotedbl" =  "exec ${pkgs.qutebrowser}/bin/qutebrowser";
+
+# bindsym $mod+shift+q exec $BROWSER
+# TODO
+# bindsym $mod+Shift+Return exec --no-startup-id $term -d "$(xcwd)"
+# bindsym $GroupFr+$mod+eacute i3-list-windows
+# bindsym $GroupUs+$mod+2 i3-list-windows
+
+        # "${mod}+shift+q"="exec ${pkgs.gnome3.nautilus}/bin/nautilus";
+        "XF86MonBrightnessUp" = "exec ${pkgs.xorg.xbacklight}/bin/xbacklight -inc 10";
+        "XF86MonBrightnessDown" = "exec ${pkgs.xorg.xbacklight}/bin/xbacklight -dec 10";
+
+        # TODO use i3
+        # test rofi-randr
+        "XF86Display" = "exec " + ../rofi-scripts/monitor_layout.sh ;
+
+# bindsym $mod+ctrl+h exec $greenclip
+# bindsym $mod+ctrl+v exec ~/.vim-anywhere/bin/run"
+
 # set $greenclip "rofi -modi 'clipboard:greenclip print' -show clipboard"
 #       bindsym $mad+h exec $greenclip
         # TODO let i3dispatch
