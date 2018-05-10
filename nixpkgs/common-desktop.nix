@@ -2,7 +2,8 @@
 let
   userNixpkgs = /home/teto/nixpkgs;
   nixosConfig = /home/teto/dotfiles/configuration.nix;
-  in
+  nixosOverlay = /home/teto/dotfiles/nixpkgs/overlays;
+in
 {
 
 
@@ -22,6 +23,9 @@ let
 
   ];
 
+  boot.kernelModules = [
+    "tcpprobe"
+  ];
 
   # kernelModules
   # lib.mkMerge
@@ -145,6 +149,7 @@ let
     ]
     ++ lib.optionals (builtins.pathExists userNixpkgs)  [ "nixpkgs=${builtins.toString userNixpkgs}" ]
     ++ lib.optionals (builtins.pathExists nixosConfig)  [ "nixos-config=${builtins.toString nixosConfig}" ]
+    ++ lib.optionals (builtins.pathExists nixosOverlay)  [ "nixpkgs-overlays=${builtins.toString nixosOverlay}" ]
     ;
     #  to keep build-time dependencies around => rebuild while being offline
     # build-use-sandbox = true

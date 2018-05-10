@@ -23,10 +23,10 @@ let
   ] 
   # while developing
   # builtins.pathExists (<nixpkgs> + ./modules/programs/mininet.nix))
-  ++ lib.optionals (false)
-  [
-    ./modules/mininet.nix
-  ]
+  # ++ lib.optionals (false)
+  # [
+  #   ./modules/mininet.nix
+  # ]
   ;
 
   # it apparently still is quite an important thing to have
@@ -125,6 +125,10 @@ let
   # just for testing
   # services.qemuGuest.enable = true;
 
+  security.sudo.extraConfig = ''
+    Defaults        timestamp_timeout=30
+  '';
+
   # to prevent
   # The VirtualBox Linux kernel driver (vboxdrv) is either not loaded or there is a permission problem with /dev/vboxdrv. Please reinstall the kernel module by executing '/sbin/vboxconfig' as root.
   # virtualisation.virtualbox.host.enable = true;
@@ -134,6 +138,8 @@ let
   #   openFirewall = true;
   #   # port = ;
   # };
+
+  programs.mininet.enable = true;
 
   environment.systemPackages = with pkgs;
     (import ./basetools.nix { inherit pkgs;})

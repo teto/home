@@ -6,7 +6,7 @@
 
   boot.kernelModules = [
     # "kvm"  # for virtualisation
-    # "tcpprobe"
+    "tcpprobe"
     ];
 
   boot.consoleLogLevel=4;

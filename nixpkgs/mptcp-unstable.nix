@@ -1,8 +1,8 @@
 { config, lib, pkgs, ... }:
 {
-  # boot.kernelPackages = pkgs.linuxPackages_mptcp-local;
+  boot.kernelPackages = pkgs.linuxPackages_mptcp-local;
   # linuxPackagesFor
-  boot.kernelPackages = pkgs.linuxPackages_mptcp;
+  # boot.kernelPackages = pkgs.linuxPackages_mptcp;
   # boot.kernelPackages = pkgs.linuxPackagesFor pkgs.mptcp-custom;
 
   boot.kernelModules = [

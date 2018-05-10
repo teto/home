@@ -45,7 +45,7 @@ let
 
     localConfig = ''
 
-      LOCALVERSION -matt
+      # LOCALVERSION -matt
       SYN_COOKIES n
     '';
 
@@ -76,6 +76,13 @@ let
       TCP_CONG_OLIA m
       TCP_CONG_WVEGAS m
       TCP_CONG_BALIA m
+
+      # tool to generate packets at very high speed in the kerne
+      # NET_PKTGEN y
+      NET_TCPPROBE y
+
+      # http://www.draconyx.net/articles/net_drop_monitor-monitoring-packet-loss-in-the-linux-kernel.html
+      # NET_DROP_MONITOR y
     '';
 
     debugConfig = ''
@@ -136,7 +143,7 @@ in rec {
   #  });
 
   # improve the default mptcp config
-  mptcp93  = super.pkgs.linux_mptcp.override (  {
+  mptcp93 = super.pkgs.linux_mptcp.override (  {
     kernelPatches=[];
     # name="mptcp-override";
       # modDirVersion="4.9.60-matt";
@@ -162,7 +169,7 @@ in rec {
   in
   mptcp93.override ({
       # src= super.lib.cleanSource /home/teto/mptcp;
-      modDirVersion="4.9.60-matt+";
+      # modDirVersion="4.9.60-matt+";
       # modDirVersion="4.9.60-00010-g5a1ca10181c6";
       name="mptcp-local";
       # hostPlatform=test-localSystem;
