@@ -139,10 +139,12 @@ let
 
   # programs.mininet.enable = true;
 
-  services.telnet = {
-    enable = true;
-    # port = ;
-  };
+  # services.telnet = {
+  #   enable = true;
+  #   # port = ;
+  # };
+
+  systemd.coredump.enable = true;
 
   # installed for paste experiment
   virtualisation.virtualbox.host.enable = true;

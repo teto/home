@@ -78,7 +78,7 @@ in
       in
       ''
       # reload config
-      % = reload
+      R = reload
       / = prompt search
       [[thread]]
       a = call hooks.apply_patch(ui)
