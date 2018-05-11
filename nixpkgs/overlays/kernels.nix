@@ -13,6 +13,12 @@ let
       VIRTIO_INPUT y
       VIRTIO_MMIO y
       VIRTIO_BLK y
+      VIRTIO_NET y
+      VIRTIO_CONSOLE y
+      HW_RANDOM_VIRTIO y
+      # VIRTIO_MMIO_CMDLINE_DEVICES
+      NLMON y
+      TUN y
 
       # when run as -kernel, an embedded DHCP client is needed
       # need to get an ip

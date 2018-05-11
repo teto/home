@@ -200,7 +200,7 @@ rec {
   # python3Packages.buildPythonApplication
   notmuch-extract-patch = super.pkgs.python36.callPackage ../notmuch-extract-patch.nix {};
 
-  mptcpanalyzer = super.python3Packages.callPackage ../mptcpanalyzer.nix {
+  mptcpanalyzer = super.python3Packages.callPackage ../programs/mptcpanalyzer.nix {
     tshark = self.pkgs.tshark-local-stable;
     inherit (super) stdenv;
   };
