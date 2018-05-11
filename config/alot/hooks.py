@@ -83,6 +83,13 @@ def _get_config():
 
 
 
+#        thread_id = message.get_thread_id()
+#        logging.debug("Extracting patches ! %r" % thread_id)
+#        ui.notify("Extracting patches ! %r" % thread_id, priority='normal')
+
+# or message ?
+# notmuch show --format=mbox thread:thread_id
+
 def apply_patch(ui):
     CONFIG = _get_config()
     message = ui.current_buffer.get_selected_message()
@@ -100,44 +107,14 @@ def apply_patch(ui):
         return
 
     try:
-
-        thread_id = message.get_thread_id()
-        logging.debug("Extracting patches ! %r" % thread_id)
-        ui.notify("Extracting patches ! %r" % thread_id, priority='normal')
-        # > feature.patchset
+        # 
+        dest = os.path.expanduser(config['directory'])
+        logging.debug("run git am from %s/%s" % (dest, filename))
         subprocess.check_output(
-            ["notmuch-extract-patch", "thread:%s" % thread_id ],
-            # ['git', '-C', os.path.expanduser(config['directory']), 'am', '-3', filename],
+            ['git', '-C', dest, 'am', '-3', filename],
             stderr=subprocess.STDOUT)
     except Exception as e:
-        ui.notify('Failed to apply patch. Reason:' + str(e), timeout=-1, priority='error')
+        ui.notify('Failed to apply patch. Reason:' + str(e), priority='error', timeout=-1)
         logging.debug('git am output: ' + str(e))
     else:
         ui.notify('Patch applied.')
-
-
-#def apply_patch2(ui):
-#    CONFIG = _get_config()
-#    message = ui.current_buffer.get_selected_message()
-#    filename = message.get_filename()
-
-#    for tag in message.get_tags():
-#        ui.notify("looking for tag %s!" % tag)
-#        #, priority='error')
-#        if tag in CONFIG:
-#            config = CONFIG[tag]
-#            break
-#    else:
-#        logging.debug('found: ' + ', '.join(message.get_tags()))
-#        ui.notify('No tags matched a config rule!', priority='error')
-#        return
-
-#    try:
-#        subprocess.check_output(
-#            ['git', '-C', os.path.expanduser(config['directory']), 'am', '-3', filename],
-#            stderr=subprocess.STDOUT)
-#    except Exception as e:
-#        ui.notify('Failed to apply patch. Reason:' + str(e), priority='error')
-#        logging.debug('git am output: ' + str(e))
-#    else:
-#        ui.notify('Patch applied.')

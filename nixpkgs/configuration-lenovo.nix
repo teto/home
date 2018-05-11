@@ -139,7 +139,10 @@ let
   #   # port = ;
   # };
 
-  programs.mininet.enable = true;
+  # programs.mininet.enable = true;
+
+  # 
+  # networking.iproute2.enable = true;
 
   environment.systemPackages = with pkgs;
     (import ./basetools.nix { inherit pkgs;})

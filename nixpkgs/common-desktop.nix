@@ -141,12 +141,14 @@ in
     ++ lib.optionals (builtins.pathExists nixosConfig)  [ "nixos-config=${builtins.toString nixosConfig}" ]
     ++ lib.optionals (builtins.pathExists nixosOverlay)  [ "nixpkgs-overlays=${builtins.toString nixosOverlay}" ]
     ;
+
+    sshServe.enable = false;
+
+    # careful will prevent from fetching local git !
+    useSandbox = true;
+
     #  to keep build-time dependencies around => rebuild while being offline
-    # build-use-sandbox = true
-    # 
     extraOptions = ''
-      # careful will prevent from fetching local git !
-      build-use-sandbox = true
       gc-keep-outputs = true
       # http-connections = 25 is the default
       http2 = true
