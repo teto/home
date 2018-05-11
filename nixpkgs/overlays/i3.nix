@@ -197,32 +197,14 @@ rec {
     
   }) else null;
 
-  notmuch-extract-patch = super.pkgs.python36.callPackage ../notmuch-extract-patch.nix {}
-  # super.pkgs.stdenv.mkDerivation {
-  #   name = "notmuch-extract-patch";
-  #   src = super.fetchFromGitHub {
-  #     owner = "aaptel";
-  #     repo = "notmuch-extract-patch";
-  #     rev = "f6b282d91af581178150e36369e7fe03a9c813d4";
-  #     sha256="0b8gzyv3lp9qxy2z94ncmh2k8yzwl91ws3m7v2cp232fyx6s7wp7";
-  #   };
-  #   buildInputs = [
-  #     super.pkgs.notmuch
-  #     (super.pkgs.python36.withPackages (pythonPackages: with pythonPackages; [
-  #     ]))
-  #   ];
-  #   # unpackPhase = "true";
-  #   installPhase = ''
-  #     mkdir -p $out/bin
-  #     cp ./notmuch-extract-patch $out/bin/
-  #     # TODO eventually patchShebang
-  #   '';
-  # };
+  # python3Packages.buildPythonApplication
+  notmuch-extract-patch = super.pkgs.python36.callPackage ../notmuch-extract-patch.nix {};
 
   mptcpanalyzer = super.python3Packages.callPackage ../mptcpanalyzer.nix {
     tshark = self.pkgs.tshark-local-stable;
     inherit (super) stdenv;
   };
+
   mptcpnumerics = super.python3Packages.buildPythonApplication {
 	pname = "mptcpnumerics";
 	version = "0.1";
