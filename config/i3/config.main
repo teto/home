@@ -31,7 +31,7 @@ set $GroupFr Group2
 # bindsym $mad+r exec rofi_pass
 # bindsym $mod+ctrl+h exec $greenclip
 # bindsym $mod+ctrl+b exec buku_run
-bindsym $mod+ctrl+v exec ~/.vim-anywhere/bin/run"
+bindsym $mod+ctrl+v exec ~/vim-anywhere/bin/run"
 
 # xmodmap to see the mappings for ModX etc...
 set $mod Mod1
@@ -60,14 +60,6 @@ set $w8 8
 set $w9 9
 
 
-# workspace "$w1" output $output1
-# workspace "$w2" output $output2
-# workspace "$w3" output $output2
-# workspace "$w4" output $output2
-# workspace "$w4" output $output2
-# workspace "$w9" output $output2
-
-
 # default border size
 #new_window  pixel 2
 new_float pixel 2
@@ -75,9 +67,7 @@ new_float pixel 2
 #for_window [instance="audioplayer"] move to scratchpad
 for_window [instance="pad_*"] move scratchpad
 #for_window [instance="pad_flyingterminal"] move scratchpad
-#for_window [instance="pad_flyingterminal"] move scratchpad
 #for_window [instance="pad_ircclient"] move scratchpad
-# for_window [class="Navigator"] floating enable,border 1 pixel;
 # this concerns too many boxes, thus creating bugs
 for_window [class="Codeblocks" title="Global Variable Editor"] resize grow right 500;
 for_window [class="Codeblocks" title="codeblocks"] resize grow left 300;
@@ -143,15 +133,12 @@ mode "focused" {
 	bindsym Escape mode "default"
 }
 
-bindsym $mod+shift+s sticky toggle
+# bindsym $mod+shift+s sticky toggle
 
 # TODO remove since it is used by Dunst ?
 bindsym $mod+n mode "focused"
 #bindsym $mod+c exec "~/.i3/misc_commands.py"
 bindsym $mod+t exec floating toggle
-#bindsym XF86AudioRaiseVolume exec "amixer -q set Master 2dB+ unmute; notify-send Audio Raised volume"
-#bindsym XF86AudioLowerVolume exec "amixer -q set Master 2dB- unmute; notify-send Audio lowered"
-#bindsym XF86AudioMute exec "amixer -q set Master toggle"
 
 workspace_auto_back_and_forth yes
 # Go into hibernation
@@ -169,20 +156,10 @@ floating_modifier $mod
 # start a terminal
 bindsym $mod+Return exec --no-startup-id $term
 # bindsym $mod+Shift+Return exec --no-startup-id ~/.i3/fork_term.sh
-# found in https://github.com/schischi/xcwd
 bindsym $mod+Shift+Return exec --no-startup-id $term -d "$(xcwd)"
 
 
 # Use mod-Control-Up and Down to rotate through the workspace list.
-
-# kill focused window
-# bindsym $GroupFr+$mod+Shift+A kill
-# bindsym $GroupUs+$mod+Shift+Q kill
-
-# start dmenu (a program launcher)
-# bindsym $mod+Tab exec $launcher
-#bindsym $mod+eacute exec j4-dmenu-desktop --dmenu='rofi -modi "run,ssh,dmenu" -dmenu'
-
 no_focus [class="^qutebrowser"]
 
 #for_window [title="MOC"] move scratchpad
@@ -211,6 +188,7 @@ bindsym $mod+$kup focus up
 bindsym $mod+$kright focus right
 
 # alternatively, you can use the cursor keys:
+# TODO rewrite dispatch in lua
 bindsym $mod+Left  exec /home/teto/bin/i3dispatch left
 bindsym $mod+Down  exec /home/teto/bin/i3dispatch down
 bindsym $mod+Up    exec /home/teto/bin/i3dispatch up
@@ -230,16 +208,16 @@ bindsym $mod+Right exec /home/teto/bin/i3dispatch right
 #bindsym $mod+Right exec ~/.i3//home/teto/i3dispatch/i3dispatch.py right
 
 # move focused window
-bindsym $GroupFr+$mod+Shift+J move left
-bindsym $GroupFr+$mod+Shift+K move down
-bindsym $GroupFr+$mod+Shift+L move up
-bindsym $GroupFr+$mod+Shift+M move right
+# bindsym $GroupFr+$mod+Shift+J move left
+# bindsym $GroupFr+$mod+Shift+K move down
+# bindsym $GroupFr+$mod+Shift+L move up
+# bindsym $GroupFr+$mod+Shift+M move right
 
-# move focused window
-bindsym $GroupUs+$mod+Shift+J move left
-bindsym $GroupUs+$mod+Shift+K move down
-bindsym $GroupUs+$mod+Shift+L move up
-bindsym $GroupUs+$mod+Shift+semicolumn right
+# # move focused window
+# bindsym $GroupUs+$mod+Shift+J move left
+# bindsym $GroupUs+$mod+Shift+K move down
+# bindsym $GroupUs+$mod+Shift+L move up
+# bindsym $GroupUs+$mod+Shift+semicolumn right
 
 
 # alternatively, you can use the cursor keys:

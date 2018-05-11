@@ -9,6 +9,7 @@ set -ex
 echo $PATH
 env > /tmp/if_up_env
 
+RT_TABLE=/run/iproute2/rt_tables
 
 # || [ "$MODE" != start ]; 
 if [ "$DEVICE_IFACE" = lo ]; then
@@ -22,13 +23,13 @@ if [ -z "$DEVICE_IFACE" ]; then
 	exit 0
 fi
 
-mkdir -p /etc/iproute2
+
 # FIRST, make a table-alias
 echo "making table alias"
-if [ `grep "$DEVICE_IFACE" /etc/iproute2/rt_tables | wc -l` -eq 0 ]; then
-	logger "Adding to iproute2/rt_tables \$DEVICE_IFACE"
-	NUM=$(wc -l < /etc/iproute2/rt_tables)
-	echo "$NUM  $DEVICE_IFACE" >> /etc/iproute2/rt_tables
+if [ `grep "$DEVICE_IFACE" "$RT_TABLE" | wc -l` -eq 0 ]; then
+	logger "Adding new routing table \$DEVICE_IFACE"
+	NUM=$(wc -l < "$RT_TABLE")
+	echo "$NUM  $DEVICE_IFACE" >> "$RT_TABLE"
 
 fi
 

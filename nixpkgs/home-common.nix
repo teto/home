@@ -425,8 +425,8 @@ rec {
       {
         "$GroupFr+$mod+${fr}"="workspace \"$w${ws}";
         "$GroupUs+$mod+${us}"="workspace \"$w${ws}";
-        "$GroupFr+Shift+$mod+${fr}"="move container to workspace \"$w${ws}";
-        "$GroupUs+Shift+$mod+${us}"="move container to workspace \"$w${ws}";
+        "$GroupFr+Shift+$mod+${fr}"=''move container to workspace "$w${ws}"'';
+        "$GroupUs+Shift+$mod+${us}"=''move container to workspace "$w${ws}"'';
       };
     in
   {
@@ -522,13 +522,19 @@ rec {
     let 
       mad="Mod4"; mod="Mod1"; 
       notify-send = "${pkgs.libnotify}/bin/notify-send";
+
+      move_focused_wnd = dir: fr: us:
+      {
+        "$GroupFr+$mod+Shift+${fr}"="move ${dir}";
+        "$GroupUs+$mod+Shift+${us}"="move ${dir}";
+      };
     in 
     # lib.mkOptionDefault 
     {
         # todo use i3lock-fancy instead
         # alternative is "light"
         # set $greenclip "rofi -modi 'clipboard:greenclip print' -show clipboard"
-        # bindsym $mod+ctrl+v exec ~/.vim-anywhere/bin/run"
+        "${mod}+ctrl+v" = "exec ${pkgs.bash}/bin/bash ~/vim-anywhere/bin/run";
 # switch to workspace
 #bindsym $mod+ampersand workspace "$w1"
 #bindsym $mod+eacute workspace "$w2"
@@ -544,12 +550,10 @@ rec {
         "${mod}+Ctrl+L"="exec ${pkgs.i3lock-fancy}/bin/i3lock-fancy";
         "${mod}+Ctrl+h" = ''exec "${pkgs.rofi}/bin/rofi -modi 'clipboard:greenclip print' -show clipboard"'';
         "${mod}+ctrl+b" = "exec " + ../buku_run/buku_run;
-        "${mod}+shift+n" = "exec ${pkgs.gnome3.nautilus}/bin/nautilus";
-        "${mod}+quotedbl" =  "exec ${pkgs.qutebrowser}/bin/qutebrowser";
+        "${mod}+shift+n" = "exec ${unstable.gnome3.nautilus}/bin/nautilus";
+        "${mod}+quotedbl" =  "exec ${unstable.qutebrowser}/bin/qutebrowser";
 
-# bindsym $mod+shift+q exec $BROWSER
-# TODO
-# bindsym $mod+Shift+Return exec --no-startup-id $term -d "$(xcwd)"
+      # "${mod}+Shift+Return" = "exec --no-startup-id ${pkgs.termite -d "$(xcwd)"
 # bindsym $GroupFr+$mod+eacute i3-list-windows
 # bindsym $GroupUs+$mod+2 i3-list-windows
 
@@ -585,6 +589,12 @@ rec {
         "XF86AudioRaiseVolume"="exec --no-startup-id pactl set-sink-volume 0 +5%;exec ${notify-send} 'Audio Raised volume'";
         "XF86AudioLowerVolume"="exec --no-startup-id pactl set-sink-volume 0 -5%;exec ${notify-send} 'Audio lowered'";
         "XF86AudioMute"="exec --no-startup-id pactl set-sink-mute 0 toggle;";
+        "XF86AudioPlay" = "exec ${pkgs.vlc}/bin/vlc";
+# Media player controls
+# bindsym XF86AudioPlay exec playerctl play
+# bindsym XF86AudioPause exec playerctl pause
+# bindsym XF86AudioNext exec playerctl next
+# bindsym XF86AudioPrev exec playerctl previous
       }
       // bind_ws 1 "a" "q"
       // bind_ws 2 "z" "w"
@@ -595,14 +605,14 @@ rec {
       // bind_ws 7 "w" "z"
       // bind_ws 8 "x" "x"
       // bind_ws 9 "c" "c"
+      // move_focused_wnd "left" "h" "h"
+      // move_focused_wnd "down" "j" "j"
+      // move_focused_wnd "up" "k" "k"
+      # semicolumn
+      // move_focused_wnd "right" "l" "l" 
       ;
     };
 
-# Media player controls
-# bindsym XF86AudioPlay exec playerctl play
-# bindsym XF86AudioPause exec playerctl pause
-# bindsym XF86AudioNext exec playerctl next
-# bindsym XF86AudioPrev exec playerctl previous
   };
 
   # xresources.properties = {
