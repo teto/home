@@ -1,5 +1,10 @@
 self: super:
 let
+    # todo remove tags
+    filter-src = builtins.filterSource (p: t:
+    let baseName = baseNameOf p;
+    in super.lib.cleanSourceFilter p t && baseName != "build" && baseName != "tags");
+
   # potentially interesting
   # CONFIG_NLMON is not set
   # KERN_DEFAULT "d" The default kernel loglevel
@@ -47,7 +52,24 @@ let
       # else qemu can't see the root filesystem when launched with -kenel
       EXT4_FS y
 
+CRYPTO_USER_API_HASH y
+SYSFS y
+DEVTMPFS y
+INOTIFY_USER y
+SIGNALFD y
+TIMERFD y
+    EPOLL y
+CRYPTO_SHA256 y
+CRYPTO_HMAC y
+TMPFS_POSIX_ACL y
+SECCOMP y
     '';
+    # system.requiredKernelConfig = map config.lib.kernelConfig.isEnabled
+    #   [ "DEVTMPFS" "CGROUPS" "INOTIFY_USER" "SIGNALFD" "TIMERFD" "EPOLL" "NET"
+    #     "SYSFS" "PROC_FS" "FHANDLE" "CRYPTO_USER_API_HASH" "CRYPTO_HMAC"
+    #     "CRYPTO_SHA256" "DMIID" "AUTOFS4_FS" "TMPFS_POSIX_ACL"
+    #     "TMPFS_XATTR" "SECCOMP"
+    #   ];
 
     localConfig = ''
 
@@ -57,6 +79,9 @@ let
 
     # For the tests don't forget to disable syn cooki
     mptcpConfig = ''
+      
+      # don't always exist !
+      MPTCP_NETLINK y
 
       MPTCP y
       MPTCP_SCHED_ADVANCED y
@@ -167,14 +192,10 @@ in rec {
   mptcp93-local = mptcp-local;
 
   mptcp-local =
-  let
-    # todo remove tags
-    filter-src = builtins.filterSource (p: t:
-    let baseName = baseNameOf p;
-    in super.lib.cleanSourceFilter p t && baseName != "build" && baseName != "tags");
-  in
   mptcp93.override ({
-      # src= super.lib.cleanSource /home/teto/mptcp;
+      src= super.lib.cleanSource /home/teto/mptcp;
+      # modDirVersion="4.9.87";
+      modVersion="4.9.87";
       # modDirVersion="4.9.60-matt+";
       # modDirVersion="4.9.60-00010-g5a1ca10181c6";
       name="mptcp-local";
@@ -203,6 +224,25 @@ in rec {
 
     });
 
+  mptcp-manual = super.linuxManualConfig {
+    inherit (super) stdenv hostPlatform;
+    # inherit (linux_4_9) src;
+    inherit (super.linux_mptcp) version;
+    # version = "${linux_4_9.version}-linuxkit";
+    # configfile = fetchurl {
+    #   url = https://raw.githubusercontent.com/linuxkit/linuxkit/cb1c74977297b326638daeb824983f0a2e13fdf2/kernel/kernel_config-4.9.x-x86_64;
+    #   sha256 = "1lpz2q5mhvq7g5ys2s2zynibbxczqzscxbwxfbhb4mkkpps8dv08";
+    # };
+
+    modDirVersion="4.9.87";
+    # modVersion="4.9.87";
+
+    # or config.tpl
+    configfile = /home/teto/mptcp/config_off;
+
+    src= filter-src /home/teto/mptcp;
+    allowImportFromDerivation = true;
+  };
   # mptcp-head = mptcp93.override ({
 
   # linuxPackages_mptcp = linuxPackagesFor pkgs.linux_mptcp;

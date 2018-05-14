@@ -146,7 +146,7 @@ let
   # 
   networking.iproute2 = {
     enable = true;
-    # so that we can use cache
+    # so that we can use cache, won't work for nixops though
     confDir = "/etc/iproute2"; 
   };
 

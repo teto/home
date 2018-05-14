@@ -3,7 +3,14 @@
 # export MSMTP_QUEUE="$XDG_DATA_HOME/msmtp/";
 # export MSMTP_LOG="$XDG_DATA_HOME/msmtp/log";
 
-# nix aliases{{{
+
+# to edit nixos kernel config
+# then type $ make menuconfig
+# make menuconfig KCONFIG_CONFIG=config_off
+alias makeconfig="nix-shell -E 'with import <nixpkgs> {}; mptcp-manual.overrideAttrs (o: {nativeBuildInputs=o.nativeBuildInputs ++ [ pkgconfig ncurses ];})'"
+
+# nix aliases {{{
+# todo fix completion accordingly
 alias nxi="nix-env -iA"
 alias nxu="nix-env -e"
 alias nxs="nix-shell -iA"
@@ -20,24 +27,12 @@ alias latest="ls -lt |head"
 # alias :q="exit"
 #}}}
 
-### Dictionary lookup {{{
-# local commands
-# alias lfren="dict -d fd-fra-eng "
-# alias lenfr="dict -d fd-eng-fra "
-
-# for now require an internet access
-# alias fren="trans -from fr -to en "
-# alias enfr="trans -from en -to fr "
-# alias jpfr="trans -from jp -to fr "
-# alias frjp="trans -from jp -to fr "
-# alias jpen="trans -from jp -to en "
-# alias enjp="trans -from en -to jp "
-# }}}
 
 alias servethis="python -c 'import SimpleHTTPServer; SimpleHTTPServer.test()'"
 
 
 # todo use exa instead
+
 # ls related updates {{{
 # I also export TIME_STYLE to change the output of this
 alias ls="ls --color=auto --time-style=iso"
@@ -65,12 +60,4 @@ alias q="qutebrowser"
 ### compilation related {{{
 alias makej="make -j4"
 alias nm="nm -l"
-# }}}
-
-# Mail (remove/being replaced by home-manager) {{{
-# alias ml="nix-shell -p python2.7  -n ~/.config/notmuch/notmuchrc_pro"
-# alias mg="alot -n $XDG_CONFIG_HOME/notmuchrc"
-# alias mg="nix-shell -p 'python.withPackages(ps: with ps; [ alot ])' --show-trace --run \"alot -n \$XDG_CONFIG_HOME/notmuch/notmuchrc\""
-# alias astroperso="astroid"
-# alias astropro="astroid -c ~/.config/astroid/config_pro"
 # }}}

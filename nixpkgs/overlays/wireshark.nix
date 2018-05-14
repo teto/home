@@ -48,7 +48,7 @@ in
       '';
   });
 
-  tshark-local-stable = self.tshark-local.overrideAttrs (oldAttrs: {
+  tshark-reinject-stable = self.tshark-local.overrideAttrs (oldAttrs: {
     name = "tshark-local-stable";
     src = self.fetchFromGitHub {
       repo="wireshark";
