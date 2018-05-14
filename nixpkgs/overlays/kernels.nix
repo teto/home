@@ -75,6 +75,11 @@ SECCOMP y
 
       # LOCALVERSION -matt
       SYN_COOKIES n
+
+      # poses problems see https://unix.stackexchange.com/questions/308870/how-to-load-compressed-kernel-modules-in-ubuntu
+      # https://github.com/NixOS/nixpkgs/issues/40485
+      MODULE_COMPRESS n
+      MODULE_COMPRESS_XZ n 
     '';
 
     # For the tests don't forget to disable syn cooki
