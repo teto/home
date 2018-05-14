@@ -142,7 +142,11 @@ let
   # programs.mininet.enable = true;
 
   # 
-  # networking.iproute2.enable = true;
+  networking.iproute2 = {
+    enable = true;
+    # so that we can use cache
+    confDir = "/etc/iproute2"; 
+  };
 
   environment.systemPackages = with pkgs;
     (import ./basetools.nix { inherit pkgs;})
