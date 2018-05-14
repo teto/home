@@ -102,6 +102,7 @@ let
   devPkgs = with pkgs; [
     nox # helps with reviewing and to install files
     # ccache # breaks some builds ?
+    ncurses.dev # for infocmp
     gitAndTools.diff-so-fancy
     gitAndTools.git-recent
     editorconfig-core-c

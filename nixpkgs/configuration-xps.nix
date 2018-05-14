@@ -144,6 +144,13 @@ let
   #   # port = ;
   # };
 
+  # use default
+  # networking.iproute2.confDir = "/run/iproute33";
+  # networking.iproute2.enable = true;
+
+  # nixpkgs.config = {
+  # };
+
   systemd.coredump.enable = true;
 
   # installed for paste experiment

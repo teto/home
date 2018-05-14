@@ -48,6 +48,8 @@ let
     size = 16000; # in MB
   } ];
 
+  boot.blacklistedKernelModules = ["nouveau"];
+
   boot.consoleLogLevel=6;
   boot.loader ={
     systemd-boot.enable = true;
