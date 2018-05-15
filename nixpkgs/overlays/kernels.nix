@@ -248,6 +248,11 @@ in rec {
     src= filter-src /home/teto/mptcp;
     allowImportFromDerivation = true;
   };
+
+  mptcp-manual-dev = mptcp-manual.override {
+ 
+    modDirVersion="4.9.87+";
+  };
   # mptcp-head = mptcp93.override ({
 
   # linuxPackages_mptcp = linuxPackagesFor pkgs.linux_mptcp;

@@ -19,11 +19,11 @@
       # extraConfig
       # qemuPackage
     extraConfig=''
-      log_level = 1
-      # no filter for now
-      log_filters="1:qemu.qemu_agent 1:qemu.qemu_monitor"
-      # log_filters="3:remote 4:event 3:json 3:rpc"
-      log_outputs="1:file:/var/log/libvirt/libvirtd.log"
+      # log_level = 1
+      # # no filter for now
+      # log_filters="1:qemu.qemu_agent 1:qemu.qemu_monitor"
+      # # log_filters="3:remote 4:event 3:json 3:rpc"
+      # log_outputs="1:file:/var/log/libvirt/libvirtd.log"
     '';
       # qemuVerbatim
       # namespaces = []

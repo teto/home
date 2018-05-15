@@ -19,9 +19,9 @@ in
   wireshark-local-stable = super.wireshark.overrideAttrs (oldAttrs: {
     # pygobject2
     name = "wireshark-local-stable";
-    src = builtins.fetchgit {
+    src = builtins.fetchGit {
       url = wiresharkFolder;
-      rev = "reinject_stable";
+      # rev = "reinject_stable";
       # sha256 = "0pbmdwphmz4c6g9rvi58kmjhkvhy5ys5y8dzl2cfh8w00jc62cn0";
     };
     # TODO
