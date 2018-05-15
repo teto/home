@@ -142,6 +142,13 @@ let
      host.headless = false;
   };
 
+  # test with mininet VM
+  fileSystems."/virtualbox" = {
+    fsType = "vboxsf";
+    device = "tschlenk";
+    options = "rw,uid=1000,gid=100";
+  };
+
   # services.telnet = {
   #   enable = true;
   #   openFirewall = true;
