@@ -6,6 +6,8 @@
 
 set -ex
 
+STATUS=$2
+
 echo $PATH
 env > /tmp/if_up_env
 
@@ -23,6 +25,11 @@ if [ -z "$DEVICE_IFACE" ]; then
 	exit 0
 fi
 
+#dhcp4-change 
+# if [ "$STATUS" != "up" ]; then
+# 	logger "giving up since event is $STATUS"
+# 	exit 0
+# fi
 
 # FIRST, make a table-alias
 echo "making table alias"
@@ -30,7 +37,6 @@ if [ `grep "$DEVICE_IFACE" "$RT_TABLE" | wc -l` -eq 0 ]; then
 	logger "Adding new routing table \$DEVICE_IFACE"
 	NUM=$(wc -l < "$RT_TABLE")
 	echo "$NUM  $DEVICE_IFACE" >> "$RT_TABLE"
-
 fi
 
 if [ "$DHCP4_IP_ADDRESS" ]; then

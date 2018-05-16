@@ -22,6 +22,9 @@ let
       VIRTIO_CONSOLE y
       HW_RANDOM_VIRTIO y
       # VIRTIO_MMIO_CMDLINE_DEVICES
+
+      # allow to capture netlink packets with wireshark !!
+      # https://jvns.ca/blog/2017/09/03/debugging-netlink-requests/
       NLMON y
       TUN y
 
@@ -87,7 +90,6 @@ SECCOMP y
       
       # don't always exist !
       MPTCP_NETLINK y
-
       MPTCP y
       MPTCP_SCHED_ADVANCED y
       MPTCP_ROUNDROBIN m
@@ -141,6 +143,9 @@ SECCOMP y
 # warning: unused option: USB_SERIAL_GENERIC
 
     persoConfig=''
+
+      NET_SCH_NETEM y
+      NETLINK_DIAG y
       L2TP_IP m
     '';
   # must be used with ignoreConfigErrors in kernels

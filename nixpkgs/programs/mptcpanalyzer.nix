@@ -42,7 +42,8 @@ buildPythonApplication rec {
     # we want gtk because qt is so annying on nixos
     (matplotlib.override { enableGtk3=true;})
     pyqt5
-    tshark pyperclip ];
+    tshark 
+    ];
 
     meta = with stdenv.lib; {
       description = "pcap analysis tool specialized for multipath TCP";

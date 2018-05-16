@@ -1,9 +1,7 @@
 #!/bin/sh
-# A script for setting up routing tables for MPTCP in the N950.
-
-# Copy this script into /etc/network/if-post-down.d/
-
 set -ex
+
+EVENT="$2"
 
 env > /tmp/if_down_env
 
@@ -11,8 +9,10 @@ if [ "$IFACE" = lo -o "$MODE" != stop ]; then
         exit 0
 fi
 
-# IP=${IP:-ip}
+if [ "$EVENT" != "down" ]; then
+	logger "exit $EVENT != down"
+fi
 
-ip rule del table $DEVICE_IFACE
-ip route flush table $DEVICE_IFACE 
+ip rule del table "$DEVICE_IFACE"
+ip route flush table "$DEVICE_IFACE"
 
