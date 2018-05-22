@@ -781,7 +781,7 @@ let g:gutentags_project_info = [ {'type': 'python', 'file': 'setup.py'},
                                \ {'type': 'ruby', 'file': 'Gemfile'},
                                \ {'type': 'haskell', 'file': 'Setup.hs'} ]
 let g:gutentags_ctags_executable_haskell = 'hasktags'
-let g:gutentags_ctags_exclude = ['.vim-src', 'build']
+let g:gutentags_ctags_exclude = ['.vim-src', 'build', '.mypy_cache']
 " }}}
 " start haskell host if required  {{{
 if has('nvim')
@@ -1852,8 +1852,8 @@ au FileType coq call coquille#FNMapping()
 let g:coquille_auto_move=1
 " }}}
 " deoplete-clang2 config {{{
-let g:deoplete#sources#clang#executable="/usr/bin/clang"
-let g:deoplete#sources#clang#autofill_neomake=1
+" let g:deoplete#sources#clang#executable="/usr/bin/clang"
+" let g:deoplete#sources#clang#autofill_neomake=1
 "}}}
 
 " dasht{{{
