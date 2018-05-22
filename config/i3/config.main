@@ -31,7 +31,7 @@ set $GroupFr Group2
 # bindsym $mad+r exec rofi_pass
 # bindsym $mod+ctrl+h exec $greenclip
 # bindsym $mod+ctrl+b exec buku_run
-bindsym $mod+ctrl+v exec ~/vim-anywhere/bin/run"
+# bindsym $mod+ctrl+v exec ~/vim-anywhere/bin/run"
 
 # xmodmap to see the mappings for ModX etc...
 set $mod Mod1
@@ -83,21 +83,21 @@ focus_follows_mouse no
 bindsym $mod+Shift+V exec "manage_monitors.sh"
 
 # TODO should detect the number of monitors !
-bindsym $mod+m  mode "monitors"
-mode "monitors" {
+# bindsym $mod+m  mode "monitors"
+# mode "monitors" {
 
-	# todo should work with hjkl too
-	bindsym $mod+Left move workspace to output left
-	bindsym $mod+Right move workspace to output right
-	bindsym $mod+Up move workspace to output top
-	bindsym $mod+Down move workspace to output down
+# 	# todo should work with hjkl too
+# 	bindsym $mod+Left move workspace to output left
+# 	bindsym $mod+Right move workspace to output right
+# 	bindsym $mod+Up move workspace to output top
+# 	bindsym $mod+Down move workspace to output down
 
-	bindsym $mod+Shift+Left workspace prev_on_output
-	bindsym $mod+Shift+Right workspace next_on_output
+# 	bindsym $mod+Shift+Left workspace prev_on_output
+# 	bindsym $mod+Shift+Right workspace next_on_output
 
-	bindsym Return mode "default"
-	bindsym Escape mode "default"
-}
+# 	bindsym Return mode "default"
+# 	bindsym Escape mode "default"
+# }
 
 
 
@@ -275,7 +275,7 @@ mode "programs" {
 
 # focus the parent container
 bindsym $mod+p focus parent
-bindsym $mod+quotedbl  focus child
+# bindsym $mod+quotedbl  focus child
 #bindsym $mod+quotedbl workspace "$w3"
 bindsym $mod+apostrophe mode "programs"
 

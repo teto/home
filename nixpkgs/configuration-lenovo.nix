@@ -48,7 +48,9 @@ let
     size = 16000; # in MB
   } ];
 
-  boot.blacklistedKernelModules = ["nouveau"];
+  boot.blacklistedKernelModules = [
+    # "nouveau"
+  ];
 
   boot.consoleLogLevel=6;
   boot.loader ={
@@ -133,21 +135,21 @@ let
 
   # to prevent
   # The VirtualBox Linux kernel driver (vboxdrv) is either not loaded or there is a permission problem with /dev/vboxdrv. Please reinstall the kernel module by executing '/sbin/vboxconfig' as root.
-  virtualisation.virtualbox = {
-    host.enable = true;
-    host.enableExtensionPack = true;
-    host.addNetworkInterface = true; # adds vboxnet0
-    # Enable hardened VirtualBox, which ensures that only the binaries in the system path get access to the devices exposed by the kernel modules instead of all users in the vboxusers group.
-     host.enableHardening = true;
-     host.headless = false;
-  };
+  # virtualisation.virtualbox = {
+  #   host.enable = true;
+  #   host.enableExtensionPack = true;
+  #   host.addNetworkInterface = true; # adds vboxnet0
+  #   # Enable hardened VirtualBox, which ensures that only the binaries in the system path get access to the devices exposed by the kernel modules instead of all users in the vboxusers group.
+  #    host.enableHardening = true;
+  #    host.headless = false;
+  # };
 
   # test with mininet VM
-  fileSystems."/virtualbox" = {
-    fsType = "vboxsf";
-    device = "tschlenk";
-    options = "rw,uid=1000,gid=100";
-  };
+  # fileSystems."/virtualbox" = {
+     # fsType = "vboxsf";
+  #   device = "tschlenk";
+  #   options = "rw,uid=1000,gid=100";
+  # };
 
   # services.telnet = {
   #   enable = true;
@@ -155,14 +157,9 @@ let
   #   # port = ;
   # };
 
-  # programs.mininet.enable = true;
+  programs.mininet.enable = true;
 
-  # 
-  # networking.iproute2 = {
-  #   enable = true;
-  #   # so that we can use cache, won't work for nixops though
-  #   confDir = "/etc/iproute2"; 
-  # };
+  networking.iproute2.enable = true;
 
   environment.systemPackages = with pkgs;
     (import ./basetools.nix { inherit pkgs;})
@@ -172,4 +169,5 @@ let
     ++ [
       ]
   ;
+
 }

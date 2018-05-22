@@ -10,6 +10,10 @@
 alias makeconfig="nix-shell -E 'with import <nixpkgs> {}; mptcp-manual.overrideAttrs (o: {nativeBuildInputs=o.nativeBuildInputs ++ [ pkgconfig ncurses ];})'"
 
 # nix aliases {{{
+
+# no
+alias nixos-fast="nixos-rebuild  --no-build-nix --fast"
+
 # todo fix completion accordingly
 alias nxi="nix-env -iA"
 alias nxu="nix-env -e"
