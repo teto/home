@@ -157,14 +157,9 @@ let
   #   # port = ;
   # };
 
-  # programs.mininet.enable = true;
+  programs.mininet.enable = true;
 
-  # 
-  # networking.iproute2 = {
-  #   enable = true;
-  #   # so that we can use cache, won't work for nixops though
-  #   # confDir = "/etc/iproute2"; 
-  # };
+  networking.iproute2.enable = true;
 
   environment.systemPackages = with pkgs;
     (import ./basetools.nix { inherit pkgs;})
