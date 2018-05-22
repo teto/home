@@ -14,15 +14,14 @@ self: super:
   #     meta.priority=0;
   # });
 
-  neovim-unwrapped-local = super.pkgs.neovim-unwrapped.overrideAttrs (oldAttrs: {
-	  name = "neovim-unwrapped-local";
-	  src = super.lib.cleanSource ~/neovim;
+  # neovim-unwrapped-local = super.pkgs.neovim-unwrapped.overrideAttrs (oldAttrs: {
+	  # name = "neovim-unwrapped-local";
+	  # src = super.lib.cleanSource ~/neovim;
+      # cmakeBuildType="debug";
+      # meta.priority=0;
+  # });
 
-      cmakeBuildType="debug";
-      meta.priority=0;
-  });
-
-  neovim-unwrapped-master = (super.neovim-unwrapped).overrideAttrs (oldAttrs: {
+  # neovim-unwrapped-master = (super.neovim-unwrapped).overrideAttrs (oldAttrs: {
 	  # name = "neovim";
 	  # version = "nightly";
       # src = self.fetchGitHashless {
@@ -36,7 +35,7 @@ self: super:
       #   sha256 = "13cyfvhxjfc3h50vhfdfifi2zxm15w0mda67nxvlj6ksvcjy4020";
       # };
   #     meta.priority=1;
-    });
+    # });
     # or null;
 
   }

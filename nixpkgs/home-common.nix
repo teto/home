@@ -145,7 +145,7 @@ rec {
   home.packages = desktopPkgs ++ devPkgs ++ imPkgs ++ networksPkgs ++ [
     pkgs.ranger
 
-    pkgs.python3Packages.powerline
+    # pkgs.python3Packages.powerline
   ]
   ++ heavyPackages;
 

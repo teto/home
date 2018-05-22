@@ -228,6 +228,7 @@ rec {
      pandas 
      sortedcontainers
     # we want gtk because qt is so annying on nixos
+    # at the same time "The Gtk3 backend requires PyGObject or pgi"
     (matplotlib.override { enableGtk3=true;})
     pulp
     pyqt5
