@@ -83,6 +83,7 @@ let
     # gnome3.gnome_control_center
     unstable.gnome3.gnome-calculator
     unstable.qtpass
+    pass
     sublime3
     scrot # screenshot app
     sxiv # simple image viewer

@@ -137,16 +137,14 @@ let
   # environment.enableDebugInfo = true;
 # } ++ lib.optionalAttrs (config.programs ? mininet) {
 
-  # programs.mininet.enable = true;
+  programs.mininet.enable = true;
 
   # services.telnet = {
   #   enable = true;
   #   # port = ;
   # };
 
-  # use default
-  # networking.iproute2.confDir = "/run/iproute33";
-  # networking.iproute2.enable = true;
+  networking.iproute2.enable = true;
 
   # nixpkgs.config = {
   # };

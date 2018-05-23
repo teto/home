@@ -35,14 +35,6 @@ in
     # # ndiffports/fullmesh
     # "net.mptcp.mptcp_path_manager" = "fullmesh";
 
-    # confDir = mkOption {
-    #   type = types.str;
-    #   default = "/run/iproute2";
-    #   description = ''
-    #     Path where to copy iproute2's etc/iproute2 folder. Useful if you want to add
-    #     new routing table aliases, for multihoming/source routing for instance.
-    #   '';
-    # };
   };
 
   # TODO add the hooks
@@ -100,6 +92,6 @@ in
         # '';
       };
     })
-    })
+    # })
    ]);
 }
