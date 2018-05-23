@@ -4,6 +4,10 @@ with lib;
 
 let
   cfg = config.networking.mptcp;
+
+  # todo provide as a side module
+  mptcpUp =   /home/teto/dotfiles/nixpkgs/hooks/mptcp_up_raw;
+  # mptcpDown =  /home/teto/dotfiles/nixpkgs/hooks/mptcp_down_raw;
 in
 {
   options.networking.mptcp = {
@@ -12,9 +16,11 @@ in
 
     debug = mkEnableOption "Enable debug support";
 
-    kernel = mkOption {
+    package = mkOption {
       type = types.package;
+      # default = pkgs.linuxPackages_mptcp;
       default = pkgs.linux_mptcp;
+      # example = literalExample ''pkgs.linuxPackagesFor pkgs.linux_mptcp'';
       description = ''
         Default mptcp kernel to use.
       '';
@@ -35,18 +41,15 @@ in
         Subflow creation strategy.
       '';
     };
-
-    # # default/roundrobin/redundant
-    # "net.mptcp.mptcp_scheduler" = "redundant";
-    # # ndiffports/fullmesh
-    # "net.mptcp.mptcp_path_manager" = "fullmesh";
-
   };
 
-  config = mkIf cfg.enable (mkMerge [ 
+  config = lib.mkIf cfg.enable (mkMerge [ 
     {
       # to name routing tables
-      config.networking.iproute2.enable = true;
+      networking.iproute2.enable = true;
+
+      boot.kernelPackages = pkgs.linuxPackagesFor cfg.package;
+
       boot.kernel.sysctl = {
         "net.mptcp.mptcp_scheduler" = cfg.scheduler;
         "net.mptcp.mptcp_path_manager" = cfg.pathManager;
@@ -54,24 +57,18 @@ in
     }
 
     # if networkmanager is enabled, handle routing tables
-    (mkIf config.networking.networkmanager.enable {
-      # merging it ?
-      config.networking.networkmanager = {
-        # one of "OFF", "ERR", "WARN", "INFO", "DEBUG", "TRACE"
-        logLevel = "DEBUG";
+    # rather assert if it is not enabled ?
+    # (mkIf config.networking.networkmanager.enable {
+    #   # merging it ?
+    #   config.networking.networkmanager = {
+    #     # one of "OFF", "ERR", "WARN", "INFO", "DEBUG", "TRACE"
+    #     logLevel = "DEBUG";
 
-        dispatcherScripts = [
-          {
-            source = mptcpUp;
-            type = "up";
-          }
-          {
-            source = mptcpDown;
-            type = "down";
-          }
-        ];
-      };
-    })
+    #     dispatcherScripts = [
+    #       { source = mptcpUp; }
+    #     ];
+    #   };
+    # })
 
 
 

@@ -30,9 +30,9 @@
       "net.mptcp.mptcp_enabled" = 1;
 
       # default/roundrobin/redundant
-      "net.mptcp.mptcp_scheduler" = "redundant";
+      # "net.mptcp.mptcp_scheduler" = "redundant";
       # ndiffports/fullmesh
-      "net.mptcp.mptcp_path_manager" = "fullmesh";
+      # "net.mptcp.mptcp_path_manager" = "fullmesh";
 
       # https://unix.stackexchange.com/questions/13019/description-of-kernel-printk-values
       "kernel.printk" = "7	7	7	7";
