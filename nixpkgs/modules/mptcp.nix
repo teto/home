@@ -12,7 +12,13 @@ in
 
     debug = mkEnableOption "Enable debug support";
 
-    experimental = mkEnableOption "Enable experimental features";
+    kernel = mkOption {
+      type = types.package;
+      default = pkgs.linux_mptcp;
+      description = ''
+        Default mptcp kernel to use.
+      '';
+    };
 
     scheduler = mkOption {
       type = types.enum [ "redundant" "lowrtt" "roundrobin" "default" ];
@@ -37,14 +43,14 @@ in
 
   };
 
-  # TODO add the hooks
-  # inspired by virtualbox guest module
-    # assertions = [{
-    #   assertion = pkgs.stdenv.isi686 || pkgs.stdenv.isx86_64;
-    #   message = "Mptcp not currently supported on ${pkgs.stdenv.system}";
-    # }];
-  config = mkIf cfg.enable (mkMerge [ {
+  config = mkIf cfg.enable (mkMerge [ 
+    {
+      # to name routing tables
       config.networking.iproute2.enable = true;
+      boot.kernel.sysctl = {
+        "net.mptcp.mptcp_scheduler" = cfg.scheduler;
+        "net.mptcp.mptcp_path_manager" = cfg.pathManager;
+      };
     }
 
     # if networkmanager is enabled, handle routing tables
@@ -52,7 +58,7 @@ in
       # merging it ?
       config.networking.networkmanager = {
         # one of "OFF", "ERR", "WARN", "INFO", "DEBUG", "TRACE"
-        logLevel="DEBUG";
+        logLevel = "DEBUG";
 
         dispatcherScripts = [
           {
@@ -67,31 +73,7 @@ in
       };
     })
 
-    # (mkIf cfg.experimental {
-    # if 
-    (mkIf cfg.experimental {
-      boot.kernelModules = [
-        # "kvm"  # for virtualisation
-        "tcpprobe"
-        ];
 
-      boot.kernel.sysctl = {
-        # default/roundrobin/redundant
-        "net.mptcp.mptcp_scheduler" = "redundant";
-        # ndiffports/fullmesh
-        "net.mptcp.mptcp_path_manager" = "fullmesh";
 
-        # "net.mptcp.mptcp_debug" = 1;
-        # "net.mptcp.mptcp_checksum" = 0;
-        # "net.mptcp.mptcp_enabled" = 1;
-      # (mkIf cfg.enable {
-        # system.activationScripts.iproute2 = ''
-        #   cp -R ${pkgs.iproute}/etc/iproute2 ${cfg.confDir}
-        #   chmod -R 664 ${cfg.confDir}
-        #   chmod +x ${cfg.confDir}
-        # '';
-      };
-    })
-    # })
    ]);
 }

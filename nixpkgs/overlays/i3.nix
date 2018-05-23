@@ -139,6 +139,7 @@ rec {
         #   src=/home/teto/protocol;
         # });
 
+
         pelican = pythonsuper.pelican.overrideAttrs (oldAttrs: {
           # src=fetchGitHashless {
           #   url=file:///home/teto/pygccxml;
@@ -198,7 +199,7 @@ rec {
   }) else null;
 
   # python3Packages.buildPythonApplication
-  notmuch-extract-patch = super.pkgs.python36.callPackage ../notmuch-extract-patch.nix {};
+  # notmuch-extract-patch = super.pkgs.python36.callPackage ../notmuch-extract-patch.nix {};
 
   mptcpanalyzer = super.python3Packages.callPackage ../programs/mptcpanalyzer.nix {
     # tshark = self.pkgs.tshark-reinject-stable; 
