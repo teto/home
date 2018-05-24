@@ -73,10 +73,10 @@ SECCOMP y
       # repeated question:   9P Virtio Transport at /nix/store/l6m0lgcrls587pz0i644jhfjk6lyj55s-generate-config.pl line 8
       # NET_9P_VIRTIO y
       NET_9P_DEBUG y
+      9P_FS y
 
       # unsure
       # 9P_FS_SECURITY
-      # 9P_FS
       # 9P_FSCACHE
 
     '';
