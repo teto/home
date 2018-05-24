@@ -4,6 +4,16 @@ let
   # hopefully it can be generated as dirname <nixos-config>
   configDir = /home/teto/dotfiles/nixpkgs;
 
+  linux_latest_9p = pkgs.linux_latest.override({
+    # to be able to run as
+    preferBuiltin=true;
+    extraConfig = ''
+      NET_9P y
+      # NET_9P_VIRTIO y
+      NET_9P_DEBUG y
+    '';
+  });
+
   in
 {
   imports = [
@@ -68,8 +78,9 @@ let
 
   # hide messages !
   # boot.kernelParams = [ "earlycon=ttyS0" "console=ttyS0" ];
-  # boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.kernelPackages = pkgs.linuxPackages_mptcp;
+
+  boot.kernelPackages = pkgs.linuxPackagesFor linux_latest_9p;
+  # boot.kernelPackages = pkgs.linuxPackages_mptcp;
 
   # TODO we need nouveau  ?
   # lib.mkMerge

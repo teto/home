@@ -66,6 +66,19 @@ CRYPTO_SHA256 y
 CRYPTO_HMAC y
 TMPFS_POSIX_ACL y
 SECCOMP y
+
+      # for qemu/libvirt shared folders
+      NET_9P y
+      # generates 
+      # repeated question:   9P Virtio Transport at /nix/store/l6m0lgcrls587pz0i644jhfjk6lyj55s-generate-config.pl line 8
+      # NET_9P_VIRTIO y
+      NET_9P_DEBUG y
+
+      # unsure
+      # 9P_FS_SECURITY
+      # 9P_FS
+      # 9P_FSCACHE
+
     '';
     # system.requiredKernelConfig = map config.lib.kernelConfig.isEnabled
     #   [ "DEVTMPFS" "CGROUPS" "INOTIFY_USER" "SIGNALFD" "TIMERFD" "EPOLL" "NET"
@@ -234,6 +247,8 @@ in rec {
 
     });
 
+
+  # linuxManualConfig is buggy see tracker
   mptcp-manual = super.linuxManualConfig {
     inherit (super) stdenv hostPlatform;
     # inherit (linux_4_9) src;
@@ -270,6 +285,15 @@ in rec {
   lkl_mptcp = super.pkgs.lkl.overrideAttrs(old: {
     src=builtins.fetchGit file:///home/teto/lkl;
   });
+
+
+  # linux_latest_9p = super.pkgs.linux_latest.override({
+  #   extraConfig = ''
+  #     NET_9P y
+  #     NET_9P_VIRTIO y
+  #     NET_9P_DEBUG y
+  #   '';
+  # });
 
 }
 
