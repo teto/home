@@ -11,6 +11,16 @@ let
   # KERN_CONT "" "continued" line of log printout (only done after a line that had no enclosing)
   # todo we could use isYes
   # system.requiredKernelConfig
+
+  mininetConfig = ''
+    VETH y
+    NET_NS y
+
+    # Can't be embedded; must be a module !?
+    OPENVSWITCH y
+  '';
+
+
   kvmConfig = ''
       VIRTIO_PCI y
       VIRTIO_PCI_LEGACY y
@@ -240,7 +250,7 @@ in rec {
       # };
       enableParallelBuilding=true;
 
-      extraConfig=mptcpKernelExtraConfig + localConfig;
+      extraConfig=mptcpKernelExtraConfig + localConfig + mininetConfig;
 
       # if we dont want to have to regenerate it
       # configfile=
