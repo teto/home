@@ -12,13 +12,24 @@ let
   # todo we could use isYes
   # system.requiredKernelConfig
 
-  mininetConfig = ''
-    VETH y
-    NET_NS y
 
-    # Can't be embedded; must be a module !?
-    OPENVSWITCH y
-  '';
+  
+	# depends on !NF_CONNTRACK || \
+	# 	   (NF_CONNTRACK && ((!NF_DEFRAG_IPV6 || NF_DEFRAG_IPV6) && \
+	# 			     (!NF_NAT || NF_NAT) && \
+	# 			     (!NF_NAT_IPV4 || NF_NAT_IPV4) && \
+	# 			     (!NF_NAT_IPV6 || NF_NAT_IPV6)))
+
+  # logic of kernel config 
+  # my $answer = "";
+  # # Build everything as a module if possible.
+  # $answer = "m" if $autoModules && $alts =~ /\/m/ && !($preferBuiltin && $alts =~ /Y/);
+  # $answer = $answers{$name} if defined $answers{$name};
+
+  # in common-config.nix mark it as an optional one with `?` suffix,
+  mininetConfig = super.pkgs.mininet.kernelExtraConfig;
+  ovsConfig = super.pkgs.openvswitch.kernelExtraConfig;
+    # NET_CLS_ACT y
 
 
   kvmConfig = ''
@@ -81,7 +92,7 @@ SECCOMP y
       NET_9P y
       # generates 
       # repeated question:   9P Virtio Transport at /nix/store/l6m0lgcrls587pz0i644jhfjk6lyj55s-generate-config.pl line 8
-      # NET_9P_VIRTIO y
+      NET_9P_VIRTIO y
       NET_9P_DEBUG y
       9P_FS y
 
@@ -169,7 +180,6 @@ SECCOMP y
 
       NET_SCH_NETEM y
       NETLINK_DIAG y
-      L2TP_IP m
     '';
   # must be used with ignoreConfigErrors in kernels
   # kernelExtraConfig=builtins.readFile ../extraConfig.nix;
@@ -226,7 +236,7 @@ in rec {
 
   mptcp-local =
   mptcp93.override ({
-      src= super.lib.cleanSource /home/teto/mptcp;
+      src=filter-src /home/teto/mptcp;
       # modDirVersion="4.9.87";
       modVersion="4.9.87";
       # modDirVersion="4.9.60-matt+";
@@ -250,7 +260,7 @@ in rec {
       # };
       enableParallelBuilding=true;
 
-      extraConfig=mptcpKernelExtraConfig + localConfig + mininetConfig;
+      extraConfig=mptcpKernelExtraConfig + localConfig + mininetConfig + ovsConfig;
 
       # if we dont want to have to regenerate it
       # configfile=
@@ -273,6 +283,7 @@ in rec {
     # modVersion="4.9.87";
 
     # or config.tpl
+    # openvswitch won't work because of a mix between N/m
     configfile = /home/teto/mptcp/config_off;
 
     src= filter-src /home/teto/mptcp;
