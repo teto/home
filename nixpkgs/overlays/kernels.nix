@@ -179,6 +179,8 @@ in rec {
   #   hostPlatform=test-platform;
   # });
 
+  # need to override 
+
   # Thanks <3 ericson1234 for this command that overrides the current localSystem platform in order
   # to compile a custom kernel
   # nix-build -A linux_mptcp --arg 'localSystem' 'let top = (import <nixpkgs> { overlays= [ (import /home/teto/dotfiles/config/nixpkgs/overlays/kernels.nix)]; } ); in top.lib.recursiveUpdate (top.lib.systems.elaborate { system = builtins.currentSystem; }) { platform = top.test-platform; }' '<nixpkgs>' --show-trace

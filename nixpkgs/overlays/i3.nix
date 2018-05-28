@@ -170,33 +170,6 @@ rec {
   #   buildInputs = (o.buildInputs or []) ++ [ boost ];
   # });
 
-  ns3-local = if (super.pkgs ? ns-3) then super.ns-3.override {
-    python = self.python3;
-    enableDoxygen = true;
-    build_profile = "optimized";
-    # withManual = true;
-    generateBindings = true;
-  #   # withExamples = true;
-  } else null;
-
-  dce-local = if (super.pkgs ? dce) then (super.dce.override {
-    python = self.python3;
-    enableDoxygen = true;
-    # withManual = true;
-    generateBindings = true;
-    withExamples = true;
-  }).overrideAttrs(old: {
-    # .lock-waf_linux_build
-    # { filter, src }
-    # filter is a function path: type:
-    # ould keep the current one, but I kn ould keep the current one, but I kn
-    # builtins.match "^\\.sw[a-z]$" baseName != null ||
-    src =  super.stdenv.lib.cleanSourceWith { filter= p: t: super.stdenv.lib.cleanSourceFilter p t && baseNameOf p != "build"; src=
-        (super.stdenv.lib.cleanSourceWith { filter=p: t: baseNameOf p != ".lock-waf_linux_build"; src= /home/teto/dce;});
-    
-      };
-    
-  }) else null;
 
   # python3Packages.buildPythonApplication
   # notmuch-extract-patch = super.pkgs.python36.callPackage ../notmuch-extract-patch.nix {};

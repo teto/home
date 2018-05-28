@@ -139,6 +139,15 @@ let
 
   programs.mininet.enable = true;
 
+  # virtualisation.virtualbox = {
+  #   host.enable = true;
+  #   host.enableExtensionPack = true;
+  #   host.addNetworkInterface = true; # adds vboxnet0
+  #   # Enable hardened VirtualBox, which ensures that only the binaries in the system path get access to the devices exposed by the kernel modules instead of all users in the vboxusers group.
+  #    host.enableHardening = true;
+  #    host.headless = false;
+  # };
+
   # services.telnet = {
   #   enable = true;
   #   # port = ;
@@ -151,6 +160,4 @@ let
 
   systemd.coredump.enable = true;
 
-  # installed for paste experiment
-  virtualisation.virtualbox.host.enable = true;
 }
