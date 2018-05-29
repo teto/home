@@ -129,8 +129,17 @@ let
     # dbus.packages = [ ];
   };
 
-  nixpkgs.overlays = [ (import ./overlays) ];
-# <nixos-overlay>
+      # overlays =
+      # let path = ../overlays; in with builtins;
+      # map (n: import (path + ("/" + n)))
+      #     (filter (n: match ".*\\.nix" n != null ||
+      #                 pathExists (path + ("/" + n + "/default.nix")))
+      #             (attrNames (readDir path)))
+      # ++ [ (import ./envs.nix) ];
+
+  nixpkgs.overlays = [ (import ./overlays/kernels.nix) ];
+
+  # <nixos-overlay>
   # just for testing
   # services.qemuGuest.enable = true;
 

@@ -1,9 +1,11 @@
-self: super:
+# TODO rewrite as non overlay
+{ config, lib, pkgs, ... }:
+# self: 
 let
     # todo remove tags
     filter-src = builtins.filterSource (p: t:
     let baseName = baseNameOf p;
-    in super.lib.cleanSourceFilter p t && baseName != "build" && baseName != "tags");
+    in lib.cleanSourceFilter p t && baseName != "build" && baseName != "tags");
 
   # potentially interesting
   # CONFIG_NLMON is not set
@@ -27,9 +29,9 @@ let
   # $answer = $answers{$name} if defined $answers{$name};
 
   # in common-config.nix mark it as an optional one with `?` suffix,
-  mininetConfig = super.pkgs.mininet.kernelExtraConfig;
-  ovsConfig = super.pkgs.openvswitch.kernelExtraConfig;
-  bpfConfig = super.pkgs.linuxPackages.bcc.kernelExtraConfig;
+  mininetConfig = pkgs.mininet.kernelExtraConfig;
+  ovsConfig = pkgs.openvswitch.kernelExtraConfig;
+  bpfConfig = pkgs.linuxPackages.bcc.kernelExtraConfig;
 
     # NET_CLS_ACT y
 
@@ -43,6 +45,9 @@ let
       VIRTIO_BLK y
       VIRTIO_NET y
       VIRTIO_CONSOLE y
+
+      NET_9P_VIRTIO? y
+
       HW_RANDOM_VIRTIO y
       # VIRTIO_MMIO_CMDLINE_DEVICES
 
@@ -104,7 +109,6 @@ SECCOMP y
       NET_9P y
       # generates 
       # repeated question:   9P Virtio Transport at /nix/store/l6m0lgcrls587pz0i644jhfjk6lyj55s-generate-config.pl line 8
-      NET_9P_VIRTIO y
       NET_9P_DEBUG y
 
       9P_FS y
@@ -191,7 +195,7 @@ SECCOMP y
   # kernelExtraConfig=builtins.readFile ../extraConfig.nix;
 
 in rec {
-  # linux_4_9 = super.linux_4_9.override({
+  # linux_4_9 = linux_4_9.override({
   #   hostPlatform=test-platform;
   # });
 
@@ -216,15 +220,15 @@ in rec {
   };
 
   # builtins.currentSystem returns "x86_64-linux"
-  test-localSystem = let system = super.lib.systems.elaborate { system = builtins.currentSystem; };
-   in super.lib.recursiveUpdate (system) { platform = system.platform // test-platform; };
+  test-localSystem = let system = lib.systems.elaborate { system = builtins.currentSystem; };
+   in lib.recursiveUpdate (system) { platform = system.platform // test-platform; };
 
   mptcp-custom = mptcp93;
-   # super.pkgs.linux_mptcp.override (  {
+   # pkgs.linux_mptcp.override (  {
   #  });
 
   # improve the default mptcp config
-  mptcp93 = super.pkgs.linux_mptcp.override (  {
+  mptcp93 = pkgs.linux_mptcp.override (  {
     kernelPatches=[];
     # name="mptcp-override";
       # modDirVersion="4.9.60-matt";
@@ -258,7 +262,7 @@ in rec {
 
       # configfile = "/home/teto/mptcp/config.tpl";
       # configfilename = /home/teto/dotfiles/kernel_config.mptcp;
-      # src= super.fetchgitLocal "/home/teto/mptcp";
+      # src= fetchgitLocal "/home/teto/mptcp";
       # src = fetchGitHashless {
       #   # rev="owd93";
       #   branchName="owd93";
@@ -276,10 +280,10 @@ in rec {
 
 
   # linuxManualConfig is buggy see tracker
-  mptcp-manual = super.linuxManualConfig {
-    inherit (super) stdenv hostPlatform;
+  mptcp-manual = linuxManualConfig {
+    inherit ( stdenv hostPlatform;
     # inherit (linux_4_9) src;
-    inherit (super.linux_mptcp) version;
+    inherit (linux_mptcp) version;
     # version = "${linux_4_9.version}-linuxkit";
     # configfile = fetchurl {
     #   url = https://raw.githubusercontent.com/linuxkit/linuxkit/cb1c74977297b326638daeb824983f0a2e13fdf2/kernel/kernel_config-4.9.x-x86_64;
@@ -304,23 +308,23 @@ in rec {
   # mptcp-head = mptcp93.override ({
 
   # linuxPackages_mptcp = linuxPackagesFor pkgs.linux_mptcp;
-  linuxPackages_mptcp-local = super.pkgs.linuxPackagesFor mptcp-local;
+  linuxPackages_mptcp-local = pkgs.linuxPackagesFor mptcp-local;
 
-  # hostPlatform = super.hostPlatform.overrideAttrs(old: {
+  # hostPlatform = hostPlatform.overrideAttrs(old: {
     # platform = test-platform;
   # });
 
-  lkl_mptcp = super.pkgs.lkl.overrideAttrs(old: {
+  lkl_mptcp = pkgs.lkl.overrideAttrs(old: {
     src=builtins.fetchGit file:///home/teto/lkl;
   });
 
-  my_lenovo_kernel = super.pkgs.linux_latest.override({
+  my_lenovo_kernel = pkgs.linux_latest.override({
     # to be able to run as
     # preferBuiltin=true;
     extraConfig = bpfConfig + net9pConfig;
   });
 
-  # linux_latest_9p = super.pkgs.linux_latest.override({
+  # linux_latest_9p = pkgs.linux_latest.override({
   #   extraConfig = ''
   #     NET_9P y
   #     NET_9P_VIRTIO y
