@@ -29,6 +29,8 @@ let
   # in common-config.nix mark it as an optional one with `?` suffix,
   mininetConfig = super.pkgs.mininet.kernelExtraConfig;
   ovsConfig = super.pkgs.openvswitch.kernelExtraConfig;
+  bpfConfig = super.pkgs.linuxPackages.bcc.kernelExtraConfig;
+
     # NET_CLS_ACT y
 
 
@@ -88,17 +90,6 @@ CRYPTO_HMAC y
 TMPFS_POSIX_ACL y
 SECCOMP y
 
-      # for qemu/libvirt shared folders
-      NET_9P y
-      # generates 
-      # repeated question:   9P Virtio Transport at /nix/store/l6m0lgcrls587pz0i644jhfjk6lyj55s-generate-config.pl line 8
-      NET_9P_VIRTIO y
-      NET_9P_DEBUG y
-      9P_FS y
-
-      # unsure
-      # 9P_FS_SECURITY
-      # 9P_FSCACHE
 
     '';
     # system.requiredKernelConfig = map config.lib.kernelConfig.isEnabled
@@ -107,6 +98,21 @@ SECCOMP y
     #     "CRYPTO_SHA256" "DMIID" "AUTOFS4_FS" "TMPFS_POSIX_ACL"
     #     "TMPFS_XATTR" "SECCOMP"
     #   ];
+    net9pConfig = ''
+
+      # for qemu/libvirt shared folders
+      NET_9P y
+      # generates 
+      # repeated question:   9P Virtio Transport at /nix/store/l6m0lgcrls587pz0i644jhfjk6lyj55s-generate-config.pl line 8
+      NET_9P_VIRTIO y
+      NET_9P_DEBUG y
+
+      9P_FS y
+
+      # unsure
+      # 9P_FS_SECURITY
+      # 9P_FSCACHE
+    '';
 
     localConfig = ''
 
@@ -126,8 +132,8 @@ SECCOMP y
       MPTCP_NETLINK y
       MPTCP y
       MPTCP_SCHED_ADVANCED y
-      MPTCP_ROUNDROBIN m
-      MPTCP_REDUNDANT m
+      MPTCP_ROUNDROBIN y
+      MPTCP_REDUNDANT y
 
       IP_MULTIPLE_TABLES y
 
@@ -144,10 +150,10 @@ SECCOMP y
       # Disabled as the only non-default is the useless round-robin.
 
       # Smarter TCP congestion controllers
-      TCP_CONG_LIA m
-      TCP_CONG_OLIA m
-      TCP_CONG_WVEGAS m
-      TCP_CONG_BALIA m
+      TCP_CONG_LIA y
+      TCP_CONG_OLIA y
+      TCP_CONG_WVEGAS y
+      TCP_CONG_BALIA y
 
       # tool to generate packets at very high speed in the kerne
       # NET_PKTGEN y
@@ -195,6 +201,7 @@ in rec {
   mptcpKernelExtraConfig = kvmConfig
       + mptcpConfig
       + debugConfig
+      + net9pConfig
       ;
 
   # TODO use this platform to build the various kernels
@@ -307,6 +314,11 @@ in rec {
     src=builtins.fetchGit file:///home/teto/lkl;
   });
 
+  my_lenovo_kernel = super.pkgs.linux_latest.override({
+    # to be able to run as
+    # preferBuiltin=true;
+    extraConfig = bpfConfig + net9pConfig;
+  });
 
   # linux_latest_9p = super.pkgs.linux_latest.override({
   #   extraConfig = ''

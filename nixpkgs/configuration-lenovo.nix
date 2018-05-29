@@ -4,15 +4,6 @@ let
   # hopefully it can be generated as dirname <nixos-config>
   configDir = /home/teto/dotfiles/nixpkgs;
 
-  linux_latest_9p = pkgs.linux_latest.override({
-    # to be able to run as
-    preferBuiltin=true;
-    extraConfig = ''
-      NET_9P y
-      # NET_9P_VIRTIO y
-      NET_9P_DEBUG y
-    '';
-  });
 
   in
 {
@@ -63,7 +54,7 @@ let
   ];
 
   boot.consoleLogLevel=6;
-  boot.loader ={
+  boot.loader = {
     systemd-boot.enable = true;
     efi.canTouchEfiVariables = true; # allows to run $ efi...
     systemd-boot.editor = true; # allow to edit command line
@@ -79,7 +70,7 @@ let
   # hide messages !
   # boot.kernelParams = [ "earlycon=ttyS0" "console=ttyS0" ];
 
-  boot.kernelPackages = pkgs.linuxPackagesFor linux_latest_9p;
+  boot.kernelPackages = pkgs.linuxPackagesFor pkgs.my_lenovo_kernel;
   # boot.kernelPackages = pkgs.linuxPackages_mptcp;
 
   # TODO we need nouveau  ?
@@ -138,6 +129,8 @@ let
     # dbus.packages = [ ];
   };
 
+  nixpkgs.overlays = [ (import ./overlays) ];
+# <nixos-overlay>
   # just for testing
   # services.qemuGuest.enable = true;
 
@@ -147,14 +140,15 @@ let
 
   # to prevent
   # The VirtualBox Linux kernel driver (vboxdrv) is either not loaded or there is a permission problem with /dev/vboxdrv. Please reinstall the kernel module by executing '/sbin/vboxconfig' as root.
-  virtualisation.virtualbox = {
-    host.enable = true;
-    host.enableExtensionPack = true;
-    host.addNetworkInterface = true; # adds vboxnet0
-    # Enable hardened VirtualBox, which ensures that only the binaries in the system path get access to the devices exposed by the kernel modules instead of all users in the vboxusers group.
-     host.enableHardening = true;
-     host.headless = false;
-  };
+
+  # virtualisation.virtualbox = {
+  #   host.enable = true;
+  #   host.enableExtensionPack = true;
+  #   host.addNetworkInterface = true; # adds vboxnet0
+  #   # Enable hardened VirtualBox, which ensures that only the binaries in the system path get access to the devices exposed by the kernel modules instead of all users in the vboxusers group.
+  #    host.enableHardening = true;
+  #    host.headless = false;
+  # };
 
   # test with mininet VM
   # fileSystems."/virtualbox" = {
@@ -174,6 +168,8 @@ let
   # test with sudo mn --switch ovsk -v debug
 
   networking.iproute2.enable = true;
+
+  programs.bcc.enable = true;
 
   environment.systemPackages = with pkgs;
     (import ./basetools.nix { inherit pkgs;})

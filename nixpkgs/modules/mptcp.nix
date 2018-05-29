@@ -56,19 +56,23 @@ in
       };
     }
 
+    (mkIf (!config.networking.networkmanager.enable) {
+      warnings = "You have `networkmanager` disabled. Expect things to break.";
+    })
+
     # if networkmanager is enabled, handle routing tables
     # rather assert if it is not enabled ?
-    # (mkIf config.networking.networkmanager.enable {
-    #   # merging it ?
-    #   config.networking.networkmanager = {
-    #     # one of "OFF", "ERR", "WARN", "INFO", "DEBUG", "TRACE"
-    #     logLevel = "DEBUG";
+    (mkIf config.networking.networkmanager.enable {
+      # merging it ?
+      networking.networkmanager = {
+        # one of "OFF", "ERR", "WARN", "INFO", "DEBUG", "TRACE"
+        logLevel = mkDefault "DEBUG";
 
-    #     dispatcherScripts = [
-    #       { source = mptcpUp; }
-    #     ];
-    #   };
-    # })
+        dispatcherScripts = [
+          { source = mptcpUp; }
+        ];
+      };
+    })
 
 
 
