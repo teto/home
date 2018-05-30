@@ -4,15 +4,6 @@ let
   # hopefully it can be generated as dirname <nixos-config>
   configDir = /home/teto/dotfiles/nixpkgs;
 
-  linux_latest_9p = pkgs.linux_latest.override({
-    # to be able to run as
-    preferBuiltin=true;
-    extraConfig = ''
-      NET_9P y
-      # NET_9P_VIRTIO y
-      NET_9P_DEBUG y
-    '';
-  });
 
   in
 {
@@ -25,7 +16,6 @@ let
     ./common-desktop.nix
     ./modules/network-manager.nix
     ./modules/libvirtd.nix
-
 
     # for user teto
     ./extraTools.nix
@@ -63,7 +53,7 @@ let
   ];
 
   boot.consoleLogLevel=6;
-  boot.loader ={
+  boot.loader = {
     systemd-boot.enable = true;
     efi.canTouchEfiVariables = true; # allows to run $ efi...
     systemd-boot.editor = true; # allow to edit command line
@@ -79,7 +69,7 @@ let
   # hide messages !
   # boot.kernelParams = [ "earlycon=ttyS0" "console=ttyS0" ];
 
-  boot.kernelPackages = pkgs.linuxPackagesFor linux_latest_9p;
+  boot.kernelPackages = pkgs.linuxPackagesFor pkgs.my_lenovo_kernel;
   # boot.kernelPackages = pkgs.linuxPackages_mptcp;
 
   # TODO we need nouveau  ?
@@ -103,6 +93,7 @@ let
 
   # TODO add the chromecast
   networking.firewall.allowedUDPPorts = [ ];
+  networking.firewall.allowedTCPPorts = [ 8080 ];
   # creates problem with buffalo check if it blocks requests or what
   # it is necessary to use dnssec though :(
   networking.dnsExtensionMechanism = false;
@@ -138,6 +129,19 @@ let
     # dbus.packages = [ ];
   };
 
+      # overlays =
+      # let path = ../overlays; in with builtins;
+      # map (n: import (path + ("/" + n)))
+      #     (filter (n: match ".*\\.nix" n != null ||
+      #                 pathExists (path + ("/" + n + "/default.nix")))
+      #             (attrNames (readDir path)))
+      # ++ [ (import ./envs.nix) ];
+
+  nixpkgs.overlays = [
+    (import ./overlays/kernels.nix) 
+  ];
+
+  # <nixos-overlay>
   # just for testing
   # services.qemuGuest.enable = true;
 
@@ -147,14 +151,15 @@ let
 
   # to prevent
   # The VirtualBox Linux kernel driver (vboxdrv) is either not loaded or there is a permission problem with /dev/vboxdrv. Please reinstall the kernel module by executing '/sbin/vboxconfig' as root.
-  virtualisation.virtualbox = {
-    host.enable = true;
-    host.enableExtensionPack = true;
-    host.addNetworkInterface = true; # adds vboxnet0
-    # Enable hardened VirtualBox, which ensures that only the binaries in the system path get access to the devices exposed by the kernel modules instead of all users in the vboxusers group.
-     host.enableHardening = true;
-     host.headless = false;
-  };
+
+  # virtualisation.virtualbox = {
+  #   host.enable = true;
+  #   host.enableExtensionPack = true;
+  #   host.addNetworkInterface = true; # adds vboxnet0
+  #   # Enable hardened VirtualBox, which ensures that only the binaries in the system path get access to the devices exposed by the kernel modules instead of all users in the vboxusers group.
+  #    host.enableHardening = true;
+  #    host.headless = false;
+  # };
 
   # test with mininet VM
   # fileSystems."/virtualbox" = {
@@ -169,11 +174,19 @@ let
   #   # port = ;
   # };
 
+  nix.sshServe = {
+    enable = false;
+    protocol = "ssh";
+    keys = [ secrets.gitolitePublicKey ];
+  };
+
   # will fial until openflowswitch is fixed
   programs.mininet.enable = true;
   # test with sudo mn --switch ovsk -v debug
 
   networking.iproute2.enable = true;
+
+  programs.bcc.enable = true;
 
   environment.systemPackages = with pkgs;
     (import ./basetools.nix { inherit pkgs;})

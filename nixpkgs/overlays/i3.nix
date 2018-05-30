@@ -8,8 +8,6 @@ let
 
   fetchgitLocal = super.fetchgitLocal;
 
-
-
   # Get the commit ID for the given ref in the given repo
   # latestGitCommit = { url, ref ? "HEAD" }:
   #   runCommand "repo-${sanitiseName ref}-${sanitiseName url}"

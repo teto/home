@@ -12,13 +12,26 @@ let
   # todo we could use isYes
   # system.requiredKernelConfig
 
-  mininetConfig = ''
-    VETH y
-    NET_NS y
 
-    # Can't be embedded; must be a module !?
-    OPENVSWITCH y
-  '';
+  
+	# depends on !NF_CONNTRACK || \
+	# 	   (NF_CONNTRACK && ((!NF_DEFRAG_IPV6 || NF_DEFRAG_IPV6) && \
+	# 			     (!NF_NAT || NF_NAT) && \
+	# 			     (!NF_NAT_IPV4 || NF_NAT_IPV4) && \
+	# 			     (!NF_NAT_IPV6 || NF_NAT_IPV6)))
+
+  # logic of kernel config 
+  # my $answer = "";
+  # # Build everything as a module if possible.
+  # $answer = "m" if $autoModules && $alts =~ /\/m/ && !($preferBuiltin && $alts =~ /Y/);
+  # $answer = $answers{$name} if defined $answers{$name};
+
+  # in common-config.nix mark it as an optional one with `?` suffix,
+  mininetConfig = super.pkgs.mininet.kernelExtraConfig;
+  ovsConfig = super.pkgs.openvswitch.kernelExtraConfig;
+  bpfConfig = super.pkgs.linuxPackages.bcc.kernelExtraConfig;
+
+  # NET_CLS_ACT y
 
 
   kvmConfig = ''
@@ -30,6 +43,9 @@ let
       VIRTIO_BLK y
       VIRTIO_NET y
       VIRTIO_CONSOLE y
+
+      NET_9P_VIRTIO? y
+
       HW_RANDOM_VIRTIO y
       # VIRTIO_MMIO_CMDLINE_DEVICES
 
@@ -77,25 +93,21 @@ CRYPTO_HMAC y
 TMPFS_POSIX_ACL y
 SECCOMP y
 
+
+    '';
+    net9pConfig = ''
+
       # for qemu/libvirt shared folders
       NET_9P y
       # generates 
       # repeated question:   9P Virtio Transport at /nix/store/l6m0lgcrls587pz0i644jhfjk6lyj55s-generate-config.pl line 8
-      # NET_9P_VIRTIO y
       NET_9P_DEBUG y
       9P_FS y
 
       # unsure
       # 9P_FS_SECURITY
       # 9P_FSCACHE
-
     '';
-    # system.requiredKernelConfig = map config.lib.kernelConfig.isEnabled
-    #   [ "DEVTMPFS" "CGROUPS" "INOTIFY_USER" "SIGNALFD" "TIMERFD" "EPOLL" "NET"
-    #     "SYSFS" "PROC_FS" "FHANDLE" "CRYPTO_USER_API_HASH" "CRYPTO_HMAC"
-    #     "CRYPTO_SHA256" "DMIID" "AUTOFS4_FS" "TMPFS_POSIX_ACL"
-    #     "TMPFS_XATTR" "SECCOMP"
-    #   ];
 
     localConfig = ''
 
@@ -115,8 +127,8 @@ SECCOMP y
       MPTCP_NETLINK y
       MPTCP y
       MPTCP_SCHED_ADVANCED y
-      MPTCP_ROUNDROBIN m
-      MPTCP_REDUNDANT m
+      MPTCP_ROUNDROBIN y
+      MPTCP_REDUNDANT y
 
       IP_MULTIPLE_TABLES y
 
@@ -133,10 +145,10 @@ SECCOMP y
       # Disabled as the only non-default is the useless round-robin.
 
       # Smarter TCP congestion controllers
-      TCP_CONG_LIA m
-      TCP_CONG_OLIA m
-      TCP_CONG_WVEGAS m
-      TCP_CONG_BALIA m
+      TCP_CONG_LIA y
+      TCP_CONG_OLIA y
+      TCP_CONG_WVEGAS y
+      TCP_CONG_BALIA y
 
       # tool to generate packets at very high speed in the kerne
       # NET_PKTGEN y
@@ -169,7 +181,6 @@ SECCOMP y
 
       NET_SCH_NETEM y
       NETLINK_DIAG y
-      L2TP_IP m
     '';
   # must be used with ignoreConfigErrors in kernels
   # kernelExtraConfig=builtins.readFile ../extraConfig.nix;
@@ -187,6 +198,7 @@ in rec {
   mptcpKernelExtraConfig = kvmConfig
       + mptcpConfig
       + debugConfig
+      + net9pConfig
       ;
 
   # TODO use this platform to build the various kernels
@@ -226,38 +238,52 @@ in rec {
   # in a repl I see mptcp-local.stdenv.hostPlatform.platform
   mptcp93-local = mptcp-local;
 
-  mptcp-local =
+  mptcp-local-stable =
   mptcp93.override ({
-      src= super.lib.cleanSource /home/teto/mptcp;
-      # modDirVersion="4.9.87";
-      modVersion="4.9.87";
-      # modDirVersion="4.9.60-matt+";
-      # modDirVersion="4.9.60-00010-g5a1ca10181c6";
-      name="mptcp-local";
-      # hostPlatform=test-localSystem;
 
-      # TODO might need to revisit
-      ignoreConfigErrors=true;
-      autoModules = false;
-      kernelPreferBuiltin = true;
+    # generates too many problems with nixops
+    # src = builtins.fetchGit {
+    #   url = /home/teto/mptcp;
+    #   rev = "de77de05db08c6a76fe6dcea69c63a3ec563ee6f";
+    # };
 
-      # configfile = "/home/teto/mptcp/config.tpl";
-      # configfilename = /home/teto/dotfiles/kernel_config.mptcp;
-      # src= super.fetchgitLocal "/home/teto/mptcp";
-      # src = fetchGitHashless {
-      #   # rev="owd93";
-      #   branchName="owd93";
-      #   # url= file:///home/teto/mptcp;
-      #   url= "/home/teto/mptcp";
-      # };
-      enableParallelBuilding=true;
+    src = super.fetchFromGitHub {
+      owner = "teto";
+      repo = "mptcp";
+      # url = /home/teto/mptcp;
+      rev = "de77de05db08c6a76fe6dcea69c63a3ec563ee6f";
+      sha256 = "07xrlpvl3hp5vypgzvnpz9m9wrjz51iqpgdi56jvqlzvhcymch7l";
+    };
 
-      extraConfig=mptcpKernelExtraConfig + localConfig + mininetConfig;
+    # src = super.fetchgitPrivate {
+    #   # url = git://gitolite@iij_vm:mptcp.git;
+    #   url = "ssh://gitolite@202.214.86.52:mptcp.git";
+    #   rev = "de77de05db08c6a76fe6dcea69c63a3ec563ee6f";
+    #   sha256 = "9999999999999999999999999999999999999999999999999999999999999999";
+    # };
+
+    modDirVersion="4.9.87+";
+    # modVersion="4.9.87";
+    # modDirVersion="4.9.60-matt+";
+    # modDirVersion="4.9.60-00010-g5a1ca10181c6";
+    name="mptcp-local";
+
+    # TODO might need to revisit
+    ignoreConfigErrors=true;
+    autoModules = false;
+    kernelPreferBuiltin = true;
+
+    extraConfig=mptcpKernelExtraConfig + localConfig + mininetConfig
+      + ovsConfig + bpfConfig + net9pConfig;
 
       # if we dont want to have to regenerate it
       # configfile=
 
-    });
+  });
+
+  mptcp-local = mptcp-local-stable.override ({
+      src=filter-src /home/teto/mptcp;
+  });
 
 
   # linuxManualConfig is buggy see tracker
@@ -275,6 +301,7 @@ in rec {
     # modVersion="4.9.87";
 
     # or config.tpl
+    # openvswitch won't work because of a mix between N/m
     configfile = /home/teto/mptcp/config_off;
 
     src= filter-src /home/teto/mptcp;
@@ -298,6 +325,11 @@ in rec {
     src=builtins.fetchGit file:///home/teto/lkl;
   });
 
+  my_lenovo_kernel = super.linux_latest.override({
+    # to be able to run as
+    # preferBuiltin=true;
+    extraConfig = bpfConfig + net9pConfig;
+  });
 
   # linux_latest_9p = super.pkgs.linux_latest.override({
   #   extraConfig = ''
