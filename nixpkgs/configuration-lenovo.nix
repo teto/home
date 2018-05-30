@@ -17,7 +17,6 @@ let
     ./modules/network-manager.nix
     ./modules/libvirtd.nix
 
-
     # for user teto
     ./extraTools.nix
     # ./desktopPkgs.nix
@@ -94,6 +93,7 @@ let
 
   # TODO add the chromecast
   networking.firewall.allowedUDPPorts = [ ];
+  networking.firewall.allowedTCPPorts = [ 8080 ];
   # creates problem with buffalo check if it blocks requests or what
   # it is necessary to use dnssec though :(
   networking.dnsExtensionMechanism = false;
@@ -137,7 +137,9 @@ let
       #             (attrNames (readDir path)))
       # ++ [ (import ./envs.nix) ];
 
-  nixpkgs.overlays = [ (import ./overlays/kernels.nix) ];
+  nixpkgs.overlays = [
+    (import ./overlays/kernels.nix) 
+  ];
 
   # <nixos-overlay>
   # just for testing
@@ -171,6 +173,12 @@ let
   #   openFirewall = true;
   #   # port = ;
   # };
+
+  nix.sshServe = {
+    enable = false;
+    protocol = "ssh";
+    keys = [ secrets.gitolitePublicKey ];
+  };
 
   # will fial until openflowswitch is fixed
   programs.mininet.enable = true;

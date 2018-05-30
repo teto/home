@@ -3,6 +3,7 @@ let
   userNixpkgs = /home/teto/nixpkgs;
   nixosConfig = /home/teto/dotfiles/configuration.nix;
   nixosOverlay = /home/teto/dotfiles/nixpkgs/overlays;
+  sshFolder = /home/teto/.ssh/config;
 in
 {
 
@@ -139,10 +140,11 @@ in
     ]
     ++ lib.optionals (builtins.pathExists userNixpkgs)  [ "nixpkgs=${builtins.toString userNixpkgs}" ]
     ++ lib.optionals (builtins.pathExists nixosConfig)  [ "nixos-config=${builtins.toString nixosConfig}" ]
-    ++ lib.optionals (builtins.pathExists nixosOverlay)  [ "nixpkgs-overlays=${builtins.toString nixosOverlay}" ]
+    ++ lib.optionals (builtins.pathExists nixosOverlay) [ "nixpkgs-overlays=${builtins.toString nixosOverlay}" ]
+    ++ lib.optionals (builtins.pathExists nixosOverlay) [ "ssh-config-file=${builtins.toString sshFolder}" ]
     ;
 
-    sshServe.enable = false;
+    # sshServe.enable = false;
 
     # careful will prevent from fetching local git !
     useSandbox = true;

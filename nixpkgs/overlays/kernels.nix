@@ -1,11 +1,9 @@
-# TODO rewrite as non overlay
-{ config, lib, pkgs, ... }:
-# self: 
+self: super:
 let
     # todo remove tags
     filter-src = builtins.filterSource (p: t:
     let baseName = baseNameOf p;
-    in lib.cleanSourceFilter p t && baseName != "build" && baseName != "tags");
+    in super.lib.cleanSourceFilter p t && baseName != "build" && baseName != "tags");
 
   # potentially interesting
   # CONFIG_NLMON is not set
@@ -29,11 +27,11 @@ let
   # $answer = $answers{$name} if defined $answers{$name};
 
   # in common-config.nix mark it as an optional one with `?` suffix,
-  mininetConfig = pkgs.mininet.kernelExtraConfig;
-  ovsConfig = pkgs.openvswitch.kernelExtraConfig;
-  bpfConfig = pkgs.linuxPackages.bcc.kernelExtraConfig;
+  mininetConfig = super.pkgs.mininet.kernelExtraConfig;
+  ovsConfig = super.pkgs.openvswitch.kernelExtraConfig;
+  bpfConfig = super.pkgs.linuxPackages.bcc.kernelExtraConfig;
 
-    # NET_CLS_ACT y
+  # NET_CLS_ACT y
 
 
   kvmConfig = ''
@@ -97,12 +95,6 @@ SECCOMP y
 
 
     '';
-    # system.requiredKernelConfig = map config.lib.kernelConfig.isEnabled
-    #   [ "DEVTMPFS" "CGROUPS" "INOTIFY_USER" "SIGNALFD" "TIMERFD" "EPOLL" "NET"
-    #     "SYSFS" "PROC_FS" "FHANDLE" "CRYPTO_USER_API_HASH" "CRYPTO_HMAC"
-    #     "CRYPTO_SHA256" "DMIID" "AUTOFS4_FS" "TMPFS_POSIX_ACL"
-    #     "TMPFS_XATTR" "SECCOMP"
-    #   ];
     net9pConfig = ''
 
       # for qemu/libvirt shared folders
@@ -110,7 +102,6 @@ SECCOMP y
       # generates 
       # repeated question:   9P Virtio Transport at /nix/store/l6m0lgcrls587pz0i644jhfjk6lyj55s-generate-config.pl line 8
       NET_9P_DEBUG y
-
       9P_FS y
 
       # unsure
@@ -195,7 +186,7 @@ SECCOMP y
   # kernelExtraConfig=builtins.readFile ../extraConfig.nix;
 
 in rec {
-  # linux_4_9 = linux_4_9.override({
+  # linux_4_9 = super.linux_4_9.override({
   #   hostPlatform=test-platform;
   # });
 
@@ -220,15 +211,15 @@ in rec {
   };
 
   # builtins.currentSystem returns "x86_64-linux"
-  test-localSystem = let system = lib.systems.elaborate { system = builtins.currentSystem; };
-   in lib.recursiveUpdate (system) { platform = system.platform // test-platform; };
+  test-localSystem = let system = super.lib.systems.elaborate { system = builtins.currentSystem; };
+   in super.lib.recursiveUpdate (system) { platform = system.platform // test-platform; };
 
   mptcp-custom = mptcp93;
-   # pkgs.linux_mptcp.override (  {
+   # super.pkgs.linux_mptcp.override (  {
   #  });
 
   # improve the default mptcp config
-  mptcp93 = pkgs.linux_mptcp.override (  {
+  mptcp93 = super.pkgs.linux_mptcp.override (  {
     kernelPatches=[];
     # name="mptcp-override";
       # modDirVersion="4.9.60-matt";
@@ -245,45 +236,59 @@ in rec {
   # in a repl I see mptcp-local.stdenv.hostPlatform.platform
   mptcp93-local = mptcp-local;
 
-  mptcp-local =
+  mptcp-local-stable =
   mptcp93.override ({
-      src=filter-src /home/teto/mptcp;
-      # modDirVersion="4.9.87";
-      modVersion="4.9.87";
-      # modDirVersion="4.9.60-matt+";
-      # modDirVersion="4.9.60-00010-g5a1ca10181c6";
-      name="mptcp-local";
-      # hostPlatform=test-localSystem;
 
-      # TODO might need to revisit
-      ignoreConfigErrors=true;
-      autoModules = false;
-      kernelPreferBuiltin = true;
+    # generates too many problems with nixops
+    # src = builtins.fetchGit {
+    #   url = /home/teto/mptcp;
+    #   rev = "de77de05db08c6a76fe6dcea69c63a3ec563ee6f";
+    # };
 
-      # configfile = "/home/teto/mptcp/config.tpl";
-      # configfilename = /home/teto/dotfiles/kernel_config.mptcp;
-      # src= fetchgitLocal "/home/teto/mptcp";
-      # src = fetchGitHashless {
-      #   # rev="owd93";
-      #   branchName="owd93";
-      #   # url= file:///home/teto/mptcp;
-      #   url= "/home/teto/mptcp";
-      # };
-      enableParallelBuilding=true;
+    src = super.fetchFromGitHub {
+      owner = "teto";
+      repo = "mptcp";
+      # url = /home/teto/mptcp;
+      rev = "de77de05db08c6a76fe6dcea69c63a3ec563ee6f";
+      sha256 = "07xrlpvl3hp5vypgzvnpz9m9wrjz51iqpgdi56jvqlzvhcymch7l";
+    };
 
-      extraConfig=mptcpKernelExtraConfig + localConfig + mininetConfig + ovsConfig;
+    # src = super.fetchgitPrivate {
+    #   # url = git://gitolite@iij_vm:mptcp.git;
+    #   url = "ssh://gitolite@202.214.86.52:mptcp.git";
+    #   rev = "de77de05db08c6a76fe6dcea69c63a3ec563ee6f";
+    #   sha256 = "9999999999999999999999999999999999999999999999999999999999999999";
+    # };
+
+    modDirVersion="4.9.87+";
+    # modVersion="4.9.87";
+    # modDirVersion="4.9.60-matt+";
+    # modDirVersion="4.9.60-00010-g5a1ca10181c6";
+    name="mptcp-local";
+
+    # TODO might need to revisit
+    ignoreConfigErrors=true;
+    autoModules = false;
+    kernelPreferBuiltin = true;
+
+    extraConfig=mptcpKernelExtraConfig + localConfig + mininetConfig
+      + ovsConfig + bpfConfig + net9pConfig;
 
       # if we dont want to have to regenerate it
       # configfile=
 
-    });
+  });
+
+  mptcp-local = mptcp-local-stable.override ({
+      src=filter-src /home/teto/mptcp;
+  });
 
 
   # linuxManualConfig is buggy see tracker
-  mptcp-manual = linuxManualConfig {
-    inherit ( stdenv hostPlatform;
+  mptcp-manual = super.linuxManualConfig {
+    inherit (super) stdenv hostPlatform;
     # inherit (linux_4_9) src;
-    inherit (linux_mptcp) version;
+    inherit (super.linux_mptcp) version;
     # version = "${linux_4_9.version}-linuxkit";
     # configfile = fetchurl {
     #   url = https://raw.githubusercontent.com/linuxkit/linuxkit/cb1c74977297b326638daeb824983f0a2e13fdf2/kernel/kernel_config-4.9.x-x86_64;
@@ -308,23 +313,23 @@ in rec {
   # mptcp-head = mptcp93.override ({
 
   # linuxPackages_mptcp = linuxPackagesFor pkgs.linux_mptcp;
-  linuxPackages_mptcp-local = pkgs.linuxPackagesFor mptcp-local;
+  linuxPackages_mptcp-local = super.pkgs.linuxPackagesFor mptcp-local;
 
-  # hostPlatform = hostPlatform.overrideAttrs(old: {
+  # hostPlatform = super.hostPlatform.overrideAttrs(old: {
     # platform = test-platform;
   # });
 
-  lkl_mptcp = pkgs.lkl.overrideAttrs(old: {
+  lkl_mptcp = super.pkgs.lkl.overrideAttrs(old: {
     src=builtins.fetchGit file:///home/teto/lkl;
   });
 
-  my_lenovo_kernel = pkgs.linux_latest.override({
+  my_lenovo_kernel = super.linux_latest.override({
     # to be able to run as
     # preferBuiltin=true;
     extraConfig = bpfConfig + net9pConfig;
   });
 
-  # linux_latest_9p = pkgs.linux_latest.override({
+  # linux_latest_9p = super.pkgs.linux_latest.override({
   #   extraConfig = ''
   #     NET_9P y
   #     NET_9P_VIRTIO y
