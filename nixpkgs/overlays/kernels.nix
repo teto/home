@@ -274,7 +274,12 @@ in rec {
     kernelPreferBuiltin = true;
 
     extraConfig=mptcpKernelExtraConfig + localConfig + mininetConfig
-      + ovsConfig + bpfConfig + net9pConfig;
+    + ovsConfig + bpfConfig + net9pConfig 
+    # to prevent the "+" from being added to modDirVersion
+    # + ''
+    #   LOCALVERSION 
+    # ''
+    ;
 
       # if we dont want to have to regenerate it
       # configfile=

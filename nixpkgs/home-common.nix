@@ -82,7 +82,7 @@ let
     # mdp # markdown CLI presenter
     # gnome3.gnome_control_center
     unstable.gnome3.gnome-calculator
-    unstable.qtpass
+    qtpass
     pass
     sublime3
     scrot # screenshot app

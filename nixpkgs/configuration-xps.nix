@@ -16,6 +16,8 @@ let
     ./common-desktop.nix
     ./modules/libvirtd.nix
 
+    # ./modules/tor.nix
+
     # for user teto
     ./extraTools.nix
 
