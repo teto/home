@@ -27,9 +27,36 @@ let
   # $answer = $answers{$name} if defined $answers{$name};
 
   # in common-config.nix mark it as an optional one with `?` suffix,
-  mininetConfig = super.pkgs.mininet.kernelExtraConfig;
-  ovsConfig = super.pkgs.openvswitch.kernelExtraConfig;
-  bpfConfig = super.pkgs.linuxPackages.bcc.kernelExtraConfig;
+  mininetConfig = super.pkgs.mininet.kernelExtraConfig or ''
+    BPF y
+    BPF_SYSCALL y
+    NET_CLS_BPF y
+    NET_ACT_BPF y
+    BPF_JIT y
+    BPF_EVENTS y
+  '';
+
+  ovsConfig = super.pkgs.openvswitch.kernelExtraConfig or ''
+    # Can't be embedded; must be a module !?
+    NF_INET y
+    NF_CONNTRACK y
+
+    NF_NAT y
+    NF_NAT_IPV4 y
+
+    # force it to yes as otherwise generate-config.pl seems to ignore it ?
+    OPENVSWITCH y
+  '';
+
+  bpfConfig = super.pkgs.linuxPackages.bcc.kernelExtraConfig or ''
+    BPF y
+    BPF_SYSCALL y
+    NET_CLS_BPF y
+    NET_ACT_BPF y
+    BPF_JIT y
+    BPF_EVENTS y
+  '';
+
 
   # NET_CLS_ACT y
 
@@ -158,6 +185,7 @@ SECCOMP y
       # NET_DROP_MONITOR y
     '';
 
+    # if not set it is converted to  https://lwn.net/Articles/434833/
     debugConfig = ''
       GDB_SCRIPTS y
       PRINTK_TIMES y
@@ -251,6 +279,9 @@ in rec {
       owner = "teto";
       repo = "mptcp";
       # url = /home/teto/mptcp;
+      # rev = "c0b411996da32bf013af7ba39bd502eff60ac3ad";
+      # sha256 = "07xrlpvl3hp5vypgzvnpz9m9wrjz51iqpgdi56jvqlzvhcymch7l";
+
       rev = "de77de05db08c6a76fe6dcea69c63a3ec563ee6f";
       sha256 = "07xrlpvl3hp5vypgzvnpz9m9wrjz51iqpgdi56jvqlzvhcymch7l";
     };
