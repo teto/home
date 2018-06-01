@@ -1,6 +1,6 @@
 self: super:
 let
-
+	# src =  builtins.filterSource (name: type: true) /home/teto/mptcpanalyzer;
   # see https://github.com/NixOS/nixpkgs/issues/29605#issuecomment-332474682
   # In lib/sources.nix we have "cleanSource = builtins.filterSource cleanSourceFilter;"
   # TODO builtins.filterSource (p: t: lib.cleanSourceFilter p t && baseNameOf p != "build")
@@ -30,17 +30,6 @@ let
 in
 rec {
 
-  fetchGitHashless = args: super.stdenv.lib.overrideDerivation
-    # Use a dummy hash, to appease fetchgit's assertions
-    (super.fetchgit (args // { sha256 = super.hashString "sha256" args.url; }))
-    # Remove the hash-checking
-    (old: {
-      outputHash     = null;
-      outputHashAlgo = null;
-      outputHashMode = null;
-      sha256         = null;
-    });
-
   i3-local = let i3path = ~/i3; in 
   if (builtins.pathExists i3path) then
     super.i3.overrideAttrs (oldAttrs: {
@@ -59,22 +48,7 @@ rec {
 
    yst = super.haskellPackages.yst.overrideAttrs (oldAttrs: {
      jailbreak = true;
-     # name = "yst";
-      # src = super.fetchFromGitHub {
-      #   owner = "jgm";
-      #   repo = "yst";
-      #   rev = "0.5.1.2";
-      #   sha256 = "1105gp38pbds46bgwj28qhdaz0cxn0y7lfqvgbgfs05kllbiri0h";
-      # };
-
-      # TODO remove current aeson and override it
-      # executableHaskellDepends = [ ];
-	});
-
-  # khal-local = super.khal.overrideAttrs (oldAttrs: {
-	  # name = "khal-dev";
-	  # src = ~/khal;
-	# });
+  });
 
   offlineimap = super.offlineimap.overrideAttrs (oldAttrs: {
     # pygobject2
@@ -157,82 +131,30 @@ rec {
   });
 
   # nixVeryUnstable = super.nixUnstable.overrideAttrs(o: {
-
   #   src = fetchGit https://github.com/NixOS/nix;
-
   #   nativeBuildInputs = with super.pkgs; (o.nativeBuildInputs or []) ++ [
   #     autoreconfHook autoconf-archive bison flex libxml2 libxslt
   #     docbook5 docbook5_xsl
   #   ];
-
   #   buildInputs = (o.buildInputs or []) ++ [ boost ];
   # });
 
 
-  # python3Packages.buildPythonApplication
-  # notmuch-extract-patch = super.pkgs.python36.callPackage ../notmuch-extract-patch.nix {};
 
-  mptcpanalyzer = super.python3Packages.callPackage ../programs/mptcpanalyzer.nix {
-    # tshark = self.pkgs.tshark-reinject-stable; 
-    tshark = self.pkgs.tshark-local;
-    inherit (super) stdenv;
-  };
-
-  mptcpnumerics = super.python3Packages.buildPythonApplication {
-	pname = "mptcpnumerics";
-	version = "0.1";
-    # src = fetchFromGitHub {
+  nixops-dev = super.nixops.overrideAttrs ( src: {
+    # src = super.fetchFromGitHub {
     #   owner = "teto";
-    #   repo = "mptcpanalyzer";
-    #   rev = "${version}";
-    #   # sha256 = ;
+    #   repo = "nixops";
+    #   rev = "7c71333a3ff6dc636d0b2547f07b105571a3027b";
+    #   sha256 = "0fc0ix468n2s97p9nfdl3bxi3i9hwf60j4k2mabrnxfhladsygzm";
     # };
-    # todo filter
-    # filter-src
-	src =  builtins.filterSource (name: type: true) /home/teto/mptcpnumerics;
-    # enableCheckPhase=false;
-    doCheck = false;
-    /* skipCheck */
-	# buildInputs = [  stevedore pandas matplotlib  ];
-    # to build the doc sphinx
-    # TODO package tshark
-    propagatedBuildInputs = with super.python3Packages; [ stevedore cmd2 
-     pandas 
-     sortedcontainers
-    # we want gtk because qt is so annying on nixos
-    # at the same time "The Gtk3 backend requires PyGObject or pgi"
-    (matplotlib.override { enableGtk3=true;})
-    pulp
-    pyqt5
-      ];
-	/* propagatedBuildInputs =  [ stevedore pandas matplotlib pyqt5 ]; */
 
-    meta = with super.stdenv.lib; {
-      description = "tool specialized for multipath TCP";
-      maintainers = [ maintainers.teto ];
+    src = builtins.fetchGit {
+      url = /home/teto/nixops;
+      rev = "7c71333a3ff6dc636d0b2547f07b105571a3027b";
     };
-  };
+  });
 
-
-  rt-tests = super.stdenv.mkDerivation {
-    name = "re-tests";
-    version = "1.0";
-    src = super.fetchurl {
-      url = https://mirrors.edge.kernel.org/pub/linux/utils/rt-tests/rt-tests-1.0.tar.gz;
-      sha256="0zzyyl5wwvq621gwjfdrpj9mf3gy003hrhqry81s1qmv7m138v5v";
-    };
-
-    nativeBuildInputs = with super.pkgs; [ numactl ];
-    # prefix is not passed when installing apparently
-
-    meta = with super.stdenv.lib; {
-      homepage = https://wiki.linuxfoundation.org/realtime/documentation/howto/tools/rt-tests;
-      description = "Linux latency analysis";
-      license = licenses.gpl2;
-      maintainers = [maintainers.teto];
-      platforms = platforms.linux;
-    };
-  };
   # to help debug a neovim crash
   # unibilium = super.unibilium.overrideAttrs (old: {
   #   separateDebugInfo = true;

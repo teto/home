@@ -1,4 +1,3 @@
-
 self: super:
 let
   filter-cmake = builtins.filterSource (p: t: super.lib.cleanSourceFilter p t && baseNameOf p != "build");
@@ -7,13 +6,8 @@ let
 in
   {
   wireshark-local = super.wireshark.overrideAttrs (oldAttrs: {
-    # pygobject2
     name = "wireshark-dev";
     src = filter-cmake wiresharkFolder;
-    # TODO
-    shellHook = ''
-      export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$PWD/build/run"
-    '';
   });
 
   wireshark-local-stable = super.wireshark.overrideAttrs (oldAttrs: {
@@ -24,10 +18,6 @@ in
       # rev = "reinject_stable";
       # sha256 = "0pbmdwphmz4c6g9rvi58kmjhkvhy5ys5y8dzl2cfh8w00jc62cn0";
     };
-    # TODO
-    shellHook = ''
-      export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:./build/run"
-    '';
   });
 
 
@@ -57,5 +47,4 @@ in
       sha256 = "0q1lqh2zbjz0bgppy3bc6dlravifja49arv1m4yd3jz55ify3anv";
     };
   });
-
 }
