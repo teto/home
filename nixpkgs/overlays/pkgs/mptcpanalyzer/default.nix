@@ -1,7 +1,5 @@
 {
-  # pkgs ? import <nixpkgs> {}
 stdenv
-, lib
 , fetchFromGitHub
 , buildPythonApplication
 , stevedore, cmd2
@@ -13,30 +11,19 @@ stdenv
 , tshark
 }:
 
-# with pkgs.python3Packages;
-let
-
-  filter-src =  with stdenv; builtins.filterSource (name: type:
-    let baseName = baseNameOf (toString name); in
-    lib.cleanSourceFilter name type && !(
-    lib.hasSuffix ".pcap" baseName
-    || lib.hasSuffix ".csv" baseName
-    || baseName == "tags"
-    ));
-
-in
 buildPythonApplication rec {
 	pname = "mptcpanalyzer";
 	version = "0.1";
-    # src = fetchFromGitHub {
-    #   owner = "teto";
-    #   repo = "mptcpanalyzer";
-    #   rev = "${version}";
-    #   # sha256 = ;
-    # };
-    # filter-src
-	src =  builtins.filterSource (name: type: true) /home/teto/mptcpanalyzer;
+
+    src = fetchFromGitHub {
+      owner = "teto";
+      repo = "mptcpanalyzer";
+      rev = "${version}";
+      # sha256 = ;
+    };
+
     doCheck = false;
+
     # to build the doc sphinx
     propagatedBuildInputs = [ stevedore cmd2 pyperclip pandas 
     # we want gtk because qt is so annying on nixos
@@ -48,7 +35,6 @@ buildPythonApplication rec {
     meta = with stdenv.lib; {
       description = "pcap analysis tool specialized for multipath TCP";
       maintainers = [ maintainers.teto ];
-      # dunno why but taht fails
       license = licenses.gpl3;
     };
 }
