@@ -1,9 +1,9 @@
-self: super:
+self: prev:
 let
     # todo remove tags
     filter-src = builtins.filterSource (p: t:
     let baseName = baseNameOf p;
-    in super.lib.cleanSourceFilter p t && baseName != "build" && baseName != "tags");
+    in prev.lib.cleanSourceFilter p t && baseName != "build" && baseName != "tags");
 
   # potentially interesting
   # CONFIG_NLMON is not set
@@ -27,7 +27,7 @@ let
   # $answer = $answers{$name} if defined $answers{$name};
 
   # in common-config.nix mark it as an optional one with `?` suffix,
-  mininetConfig = super.pkgs.mininet.kernelExtraConfig or ''
+  mininetConfig = prev.pkgs.mininet.kernelExtraConfig or ''
     BPF y
     BPF_SYSCALL y
     NET_CLS_BPF y
@@ -36,7 +36,7 @@ let
     BPF_EVENTS y
   '';
 
-  ovsConfig = super.pkgs.openvswitch.kernelExtraConfig or ''
+  ovsConfig = prev.pkgs.openvswitch.kernelExtraConfig or ''
     # Can't be embedded; must be a module !?
     NF_INET y
     NF_CONNTRACK y
@@ -48,7 +48,7 @@ let
     OPENVSWITCH y
   '';
 
-  bpfConfig = super.pkgs.linuxPackages.bcc.kernelExtraConfig or ''
+  bpfConfig = prev.pkgs.linuxPackages.bcc.kernelExtraConfig or ''
     BPF y
     BPF_SYSCALL y
     NET_CLS_BPF y
@@ -214,7 +214,7 @@ SECCOMP y
   # kernelExtraConfig=builtins.readFile ../extraConfig.nix;
 
 in rec {
-  # linux_4_9 = super.linux_4_9.override({
+  # linux_4_9 = prev.linux_4_9.override({
   #   hostPlatform=test-platform;
   # });
 
@@ -241,15 +241,15 @@ in rec {
   };
 
   # builtins.currentSystem returns "x86_64-linux"
-  test-localSystem = let system = super.lib.systems.elaborate { system = builtins.currentSystem; };
-   in super.lib.recursiveUpdate (system) { platform = system.platform // test-platform; };
+  test-localSystem = let system = prev.lib.systems.elaborate { system = builtins.currentSystem; };
+   in prev.lib.recursiveUpdate (system) { platform = system.platform // test-platform; };
 
   mptcp-custom = mptcp93;
-   # super.pkgs.linux_mptcp.override (  {
+   # prev.pkgs.linux_mptcp.override (  {
   #  });
 
   # improve the default mptcp config
-  mptcp93 = super.pkgs.linux_mptcp.override (  {
+  mptcp93 = prev.pkgs.linux_mptcp.override (  {
     kernelPatches=[];
     # name="mptcp-override";
       # modDirVersion="4.9.60-matt";
@@ -275,7 +275,7 @@ in rec {
     #   rev = "de77de05db08c6a76fe6dcea69c63a3ec563ee6f";
     # };
 
-    src = super.fetchFromGitHub {
+    src = prev.fetchFromGitHub {
       owner = "teto";
       repo = "mptcp";
       # url = /home/teto/mptcp;
@@ -286,7 +286,7 @@ in rec {
       sha256 = "07xrlpvl3hp5vypgzvnpz9m9wrjz51iqpgdi56jvqlzvhcymch7l";
     };
 
-    # src = super.fetchgitPrivate {
+    # src = prev.fetchgitPrivate {
     #   # url = git://gitolite@iij_vm:mptcp.git;
     #   url = "ssh://gitolite@202.214.86.52:mptcp.git";
     #   rev = "de77de05db08c6a76fe6dcea69c63a3ec563ee6f";
@@ -323,10 +323,10 @@ in rec {
 
 
   # linuxManualConfig is buggy see tracker
-  mptcp-manual = super.linuxManualConfig {
-    inherit (super) stdenv hostPlatform;
+  mptcp-manual = prev.linuxManualConfig {
+    inherit (prev) stdenv hostPlatform;
     # inherit (linux_4_9) src;
-    inherit (super.linux_mptcp) version;
+    inherit (prev.linux_mptcp) version;
     # version = "${linux_4_9.version}-linuxkit";
     # configfile = fetchurl {
     #   url = https://raw.githubusercontent.com/linuxkit/linuxkit/cb1c74977297b326638daeb824983f0a2e13fdf2/kernel/kernel_config-4.9.x-x86_64;
@@ -351,23 +351,41 @@ in rec {
   # mptcp-head = mptcp93.override ({
 
   # linuxPackages_mptcp = linuxPackagesFor pkgs.linux_mptcp;
-  linuxPackages_mptcp-local = super.pkgs.linuxPackagesFor mptcp-local;
+  linuxPackages_mptcp-local = prev.pkgs.linuxPackagesFor mptcp-local;
 
-  # hostPlatform = super.hostPlatform.overrideAttrs(old: {
+  # hostPlatform = prev.hostPlatform.overrideAttrs(old: {
     # platform = test-platform;
   # });
 
-  lkl_mptcp = super.pkgs.lkl.overrideAttrs(old: {
+  lkl_mptcp = prev.pkgs.lkl.overrideAttrs(old: {
     src=builtins.fetchGit file:///home/teto/lkl;
   });
 
-  my_lenovo_kernel = super.linux_latest.override({
+  my_lenovo_kernel = prev.linux_latest.override({
     # to be able to run as
     # preferBuiltin=true;
     extraConfig = bpfConfig + net9pConfig;
   });
 
-  # linux_latest_9p = super.pkgs.linux_latest.override({
+  linux_test = prev.linux_4_16.override {
+    ignoreConfigErrors=true;
+    autoModules = false;
+    kernelPreferBuiltin = true;
+
+    buildLinux = prev.buildLinuxExp;
+    # kernelPatches =
+    #   [ kernelPatches.bridge_stp_helper
+    #     # See pkgs/os-specific/linux/kernel/cpu-cgroup-v2-patches/README.md
+    #     # when adding a new linux version
+    #     # kernelPatches.cpu-cgroup-v2."4.11"
+    #     kernelPatches.modinst_arg_list_too_long
+    #     kernelPatches.bcm2835_mmal_v4l2_camera_driver # Only needed for 4.16!
+    #   ];
+  };
+
+
+
+  # linux_latest_9p = prev.pkgs.linux_latest.override({
   #   extraConfig = ''
   #     NET_9P y
   #     NET_9P_VIRTIO y

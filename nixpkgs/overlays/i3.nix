@@ -151,7 +151,7 @@ rec {
 
     src = builtins.fetchGit {
       url = /home/teto/nixops;
-      rev = "7c71333a3ff6dc636d0b2547f07b105571a3027b";
+      # rev = "7c71333a3ff6dc636d0b2547f07b105571a3027b";
     };
   });
 

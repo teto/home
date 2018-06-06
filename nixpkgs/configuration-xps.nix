@@ -80,10 +80,18 @@ let
   # this is for gaming
   hardware.opengl.driSupport32Bit = true;
   hardware.pulseaudio = {
-    enable = true;
-    systemWide = false;
-    # daemon.config
-    support32Bit = true;
+  #  enable = true;
+   # systemWide = false;
+  #  # 
+  #  support32Bit = true;
+  #  # daemon.config = ''
+  #  #   load-module module-switch-on-connect
+  #  #   '';
+    extraConfig = ''
+      load-module module-switch-on-connect
+    '';
+    # only this one has bluetooth
+    package = pkgs.pulseaudioFull;
   };
 
   # List services that you want to enable:
@@ -139,7 +147,7 @@ let
   # environment.enableDebugInfo = true;
 # } ++ lib.optionalAttrs (config.programs ? mininet) {
 
-  programs.mininet.enable = true;
+  # programs.mininet.enable = true;
 
   # virtualisation.virtualbox = {
   #   host.enable = true;
@@ -154,6 +162,11 @@ let
   #   enable = true;
   #   # port = ;
   # };
+
+  hardware.bluetooth.enable = true;
+  hardware.bluetooth.powerOnBoot = true;
+  # hardware.bluetooth.extraConfig = ;
+  # extraConfig
 
   networking.iproute2.enable = true;
 
