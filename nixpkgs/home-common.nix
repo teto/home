@@ -56,11 +56,11 @@ let
     # astroid # always compiles webkit so needs 1 full day
   ];
   networksPkgs = with pkgs; [
-    aircrack-ng
+    # aircrack-ng
     bind # for dig
-    gnome3.networkmanagerapplet
+    gnome3.networkmanagerapplet # should 
     netcat-gnu # plain 'netcat' is the bsd one
-    iperf3
+    # iperf3
     # wireshark # may cause pb because of Qt
   ];
   desktopPkgs = with pkgs; [

@@ -167,6 +167,11 @@ rec {
     
   }) else null;
 
+  # owamp-local = prev.owamp.overrideAttrs(oa: {
+  # patchPhase=''
+  #   substituteInPlace owamp/time.c --replace '#ifdef        STA_NANO' '#if 0'
+  # '';
+  # });
 
   nixops-dev = super.nixops.overrideAttrs ( src: {
     # src = super.fetchFromGitHub {
