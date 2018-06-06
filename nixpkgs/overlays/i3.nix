@@ -140,6 +140,11 @@ rec {
   # });
 
 
+  # owamp-local = prev.owamp.overrideAttrs(oa: {
+  # patchPhase=''
+  #   substituteInPlace owamp/time.c --replace '#ifdef        STA_NANO' '#if 0'
+  # '';
+  # });
 
   nixops-dev = super.nixops.overrideAttrs ( src: {
     # src = super.fetchFromGitHub {
@@ -148,7 +153,9 @@ rec {
     #   rev = "7c71333a3ff6dc636d0b2547f07b105571a3027b";
     #   sha256 = "0fc0ix468n2s97p9nfdl3bxi3i9hwf60j4k2mabrnxfhladsygzm";
     # };
-
+    # version = "1.7";
+    name = "nixops-dev";
+    # version = "
     src = builtins.fetchGit {
       url = /home/teto/nixops;
       # rev = "7c71333a3ff6dc636d0b2547f07b105571a3027b";

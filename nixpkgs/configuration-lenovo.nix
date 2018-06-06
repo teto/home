@@ -186,6 +186,8 @@ let
 
   networking.iproute2.enable = true;
 
+  services.owamp.enable = true;
+
   programs.bcc.enable = true;
 
   environment.systemPackages = with pkgs;

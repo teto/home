@@ -15,7 +15,7 @@
     # touchegg # won't work anymore apparently
     # libinput-gestures
     rofi
-    netperf # check for man; netserver to start
+    # netperf # check for man; netserver to start
   ];
   # we want us,fr !
   # home.keyboard.layout = "fr,us";
