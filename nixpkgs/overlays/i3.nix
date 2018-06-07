@@ -162,9 +162,10 @@ rec {
     };
   });
 
-  flent-local = super.nixops.overrideAttrs ( oa: {
+  flent-local = super.flent.overrideAttrs ( oa: {
 
     src = /home/teto/flent;
+    doCheck = false;
   });
 
   # to help debug a neovim crash
