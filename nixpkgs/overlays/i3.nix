@@ -146,7 +146,7 @@ rec {
   # '';
   # });
 
-  nixops-dev = super.nixops.overrideAttrs ( src: {
+  nixops-dev = super.nixops.overrideAttrs ( oa: {
     # src = super.fetchFromGitHub {
     #   owner = "teto";
     #   repo = "nixops";
@@ -160,6 +160,11 @@ rec {
       url = /home/teto/nixops;
       # rev = "7c71333a3ff6dc636d0b2547f07b105571a3027b";
     };
+  });
+
+  flent-local = super.nixops.overrideAttrs ( oa: {
+
+    src = /home/teto/flent;
   });
 
   # to help debug a neovim crash
