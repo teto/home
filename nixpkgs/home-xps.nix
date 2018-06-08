@@ -22,6 +22,9 @@
   home.keyboard.options = [
     # "grp:caps_toggle" "grp_led:scroll"
   ];
+  
+  # for blue tooth applet; must be installed systemwide
+  services.blueman-applet.enable = true;
 
   programs.bash = {
     # goes to .profile

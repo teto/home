@@ -109,7 +109,6 @@ let
     gdb
     gitAndTools.git-extras
     mypy
-    # neovim
     neovim-remote
     nix-prefetch-scripts
     nix-repl
