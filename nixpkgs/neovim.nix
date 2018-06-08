@@ -42,54 +42,7 @@
         " vimtex won't let us setup paths to bibtex etc, we can do it in .latexmk ?
 
         let g:deoplete#sources#clang#libclang_path='${pkgs.llvmPackages.libclang}'
-        " let g:deoplete#sources#clang#libclang_header='/usr/include/clang/3.8.1/'
 
-        " Todo add pyls to neovim deps ?
-        " tjdevries lsp {{{
-        let g:langserver_executables = {
-            \ 'go': {
-            \ 'name': 'sourcegraph/langserver-go',
-            \ 'cmd': ['langserver-go', '-trace', '-logfile', expand('~/Desktop/langserver-go.log')],
-            \ },
-            \ 'c': {
-            \ 'name': 'clangd',
-            \ 'cmd': ['clangd', ],
-            \ },
-            \ 'python': {
-            \ 'name': 'pyls',
-            \ 'cmd': ['pyls', '--log-file' , expand('~/lsp_python.log')],
-            \ },
-              \ }
-        " }}}
-        " autozimu's lsp {{{
-        " call LanguageClient_textDocument_hover
-        " by default logs in /tmp/LanguageClient.log.
-        let g:LanguageClient_autoStart=1 " Run :LanguageClientStart when disabled
-
-        let g:LanguageClient_selectionUI='fzf'
-        " let g:LanguageClient_trace="verbose"
-        " call LanguageClient_setLoggingLevel('DEBUG')
-        "let g:LanguageClient_diagnosticsList="quickfix"
-
-        let g:LanguageClient_serverCommands = {
-            \ 'rust': ['rustup', 'run', 'nightly', 'rls']
-          ''
-          # TODO check if it is 
-          # + lib.optionalString (pkgs.clangd) ''
-          #   \ , 'cpp': ['clangd', ]
-          # ''
-          + lib.optionalString (pkgs.python3Packages ? language-server-protocol) ''
-            \ , 'python': ['pyls', '--log-file' , expand('~/lsp_python.log')]
-            ''
-        + ''
-          \ }
-
-        " todo provide a fallback if lsp not available
-        nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
-        nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
-        " nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
-
-        "}}}
         '';
         packages.myVimPackage = with pkgs.vimPlugins; {
           # see examples below how to use custom packages
