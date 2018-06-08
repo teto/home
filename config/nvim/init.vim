@@ -717,7 +717,7 @@ let g:plug_shallow=1
 
 " }}}
 " dirvish {{{
-let g:dirvish_mode=1
+let g:dirvish_mode=2
 "}}}
 " echodoc {{{
 let g:echodoc#enable_at_startup=1

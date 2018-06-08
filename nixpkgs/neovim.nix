@@ -16,9 +16,9 @@
 
     # hopefully these can be added automatically once I use vim_configurable
     extraPython3Packages = with pkgs.python3Packages;[
-      pandas jedi urllib3
+      pandas jedi urllib3  pyls-mypy 
     ]
-      ++ lib.optionals ( pkgs ? python-language-server) [ pkgs.python-language-server ]
+      # ++ lib.optionals ( pkgs ? pyls-mypy) [ pyls-mypy ]
     ;
 
     # hopefully the 'configure' variable will be improved to set $MYVIMRC
