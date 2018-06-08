@@ -1875,22 +1875,25 @@ let g:langserver_executables = {
 " call LanguageClient_textDocument_hover
 " by default logs in /tmp/LanguageClient.log.
 let g:LanguageClient_autoStart=1 " Run :LanguageClientStart when disabled
-
+let g:LanguageClient_settingsPath=$MYVIMRC
+" pyls.configurationSources
+let g:LanguageClient_loadSettings=$XDG_CONFIG_HOME."/nvim/settings.json"
 let g:LanguageClient_selectionUI='fzf'
 " let g:LanguageClient_trace="verbose"
 " call LanguageClient_setLoggingLevel('DEBUG')
 "let g:LanguageClient_diagnosticsList="quickfix"
 
+" hardcoded for now
+"fnamemodify( g:python3_host_prog, ':p:h').
 let g:LanguageClient_serverCommands = {
     \ 'rust': ['rustup', 'run', 'nightly', 'rls']
-    \ , 'python': ['pyls', '--log-file' , expand('~/lsp_python.log')]
+    \ , 'python': [ '/nix/store/811vahmvwab4i2q5mhrxyvdp3yv0fhfd-python3-3.6.5-env/bin/pyls', '--log-file' , expand('~/lsp_python.log')]
     \ }
 
 " todo provide a fallback if lsp not available
-nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
+" nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
 nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
 " nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
-
 "}}}
 
 

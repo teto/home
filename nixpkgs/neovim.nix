@@ -43,6 +43,9 @@
 
         let g:deoplete#sources#clang#libclang_path='${pkgs.llvmPackages.libclang}'
 
+        # how cna I get the PATH to pyls ?
+# let g:LanguageClient_serverCommands.python = ['pyls', '--log-file' , expand('~/lsp_python.log')]
+
         '';
         packages.myVimPackage = with pkgs.vimPlugins; {
           # see examples below how to use custom packages
