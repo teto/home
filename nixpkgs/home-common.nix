@@ -62,7 +62,7 @@ let
     netcat-gnu # plain 'netcat' is the bsd one
   ];
   desktopPkgs = with pkgs; [
-    # buku # generates error
+    buku # generates error
     # gcalc
     unstable.dropbox
     mpv

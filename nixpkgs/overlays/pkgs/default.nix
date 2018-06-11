@@ -15,7 +15,7 @@ final: prev:
     tshark = final.pkgs.tshark-local;
   };
 
-  http-getter = prev.python3Packages.callPackage ./http-getter { } ;
+  # http-getter = prev.python3Packages.callPackage ./http-getter { } ;
 
   mptcpnumerics = prev.python3Packages.callPackage ./mptcpnumerics.nix {};
 
