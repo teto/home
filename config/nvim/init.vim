@@ -1874,10 +1874,11 @@ let g:langserver_executables = {
 " autozimu's lsp {{{
 " call LanguageClient_textDocument_hover
 " by default logs in /tmp/LanguageClient.log.
-let g:LanguageClient_autoStart=1 " Run :LanguageClientStart when disabled
+let g:LanguageClient_autoStart=0 " Run :LanguageClientStart when disabled
 let g:LanguageClient_settingsPath=$MYVIMRC
 " pyls.configurationSources
-let g:LanguageClient_loadSettings=$XDG_CONFIG_HOME."/nvim/settings.json"
+" my settings.json generates errors so remove it
+" let g:LanguageClient_loadSettings=$XDG_CONFIG_HOME."/nvim/settings.json"
 let g:LanguageClient_selectionUI='fzf'
 " let g:LanguageClient_trace="verbose"
 " call LanguageClient_setLoggingLevel('DEBUG')

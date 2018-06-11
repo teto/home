@@ -168,6 +168,13 @@ rec {
     doCheck = false;
   });
 
+  netperf-local =super.netperf.overrideAttrs ( oa: {
+
+    # src = /home/teto/flent;
+    patches = [ ./nixpkgs/overlays/pkgs/netperf.diff ];
+    doCheck = false;
+  });
+
   # to help debug a neovim crash
   # unibilium = super.unibilium.overrideAttrs (old: {
   #   separateDebugInfo = true;
