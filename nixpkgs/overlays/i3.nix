@@ -112,6 +112,18 @@ rec {
         # });
 
 
+        # look for matching wcwidth
+        cmd2-next = pythonsuper.cmd2.overrideAttrs (oldAttrs: {
+          version = "0.9.1";
+          src = super.fetchFromGitHub {
+            owner = "python-cmd2";
+            repo = "cmd2";
+            rev = "0.9.1";
+            sha256 = "1v1isbx9sb828nazcn4k1wd279s6swhcv8mj9fspx0frqlfq0pcy";
+          };
+        });
+
+
         pelican = pythonsuper.pelican.overrideAttrs (oldAttrs: {
           # src=fetchGitHashless {
           #   url=file:///home/teto/pygccxml;

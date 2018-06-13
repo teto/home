@@ -108,14 +108,11 @@ let
     exa
     gdb
     gitAndTools.git-extras
-    mypy
+    mypy # TODO move it to neovim dependency (but need to fetch the pythonEnv path then)
     neovim-remote
     nix-prefetch-scripts
-    nix-repl
     nix-index
-    # python3Packages.neovim it s included
     pcalc
-    python3Packages.pycodestyle
     rpl # to replace strings across files
     universal-ctags
   ];

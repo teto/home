@@ -16,7 +16,7 @@
 
     # hopefully these can be added automatically once I use vim_configurable
     extraPython3Packages = with pkgs.python3Packages;[
-      pandas jedi urllib3  pyls-mypy 
+      pandas jedi urllib3 pyls-mypy pycodestyle
     ]
       # ++ lib.optionals ( pkgs ? pyls-mypy) [ pyls-mypy ]
     ;
@@ -24,6 +24,10 @@
     # hopefully the 'configure' variable will be improved to set $MYVIMRC
     # adopt neovim path etc
     # " let g:vimtex_compiler_latexmk.executable='${texliveEnv}/bin/latexmk'
+
+    #  TODO I need to get the python env
+    # I would need to get access to 
+    # let g:neomake_python_mypy_maker.exe = 
     configure = {
         customRC = ''
         " here your custom configuration goes!
@@ -43,8 +47,9 @@
 
         let g:deoplete#sources#clang#libclang_path='${pkgs.llvmPackages.libclang}'
 
-        # how cna I get the PATH to pyls ?
-# let g:LanguageClient_serverCommands.python = ['pyls', '--log-file' , expand('~/lsp_python.log')]
+        " how cna I get the PATH to pyls ?
+        " let g:LanguageClient_serverCommands.python = ['pyls', '--log-file' , expand('~/lsp_python.log')]
+
 
         '';
         packages.myVimPackage = with pkgs.vimPlugins; {
