@@ -161,7 +161,7 @@ rec {
     enable= true;
     zsh-autoenv.enable = false;
     enableCompletion = true;
-    enableAutosuggestions = true;
+    autosuggestions.enable = true;
     syntaxHighlighting.enable = false;
 	ohMyZsh = {
 		enable = false;

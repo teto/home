@@ -53,6 +53,7 @@ in
       boot.kernel.sysctl = {
         "net.mptcp.mptcp_scheduler" = cfg.scheduler;
         "net.mptcp.mptcp_path_manager" = cfg.pathManager;
+        "net.ipv4.tcp_congestion_control" = "olia";
       };
     }
 
