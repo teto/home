@@ -5,10 +5,12 @@ in
 rec {
 
   ns3-dev = super.ns-3.overrideAttrs(old: {
+    name = "ns3-dev";
     src = builtins.fetchGit 
-    super.fetchFromGitHub {
+    # super.fetchFromGitHub 
+    {
       url = git://github.com/nsnam/ns-3-dev-git;
-      rev    = "master";
+      rev    = "75f6501d4dbbb57ecc0a3907c8428f8ffafb96bd";
       # sha256 = "1qdyrpdn9d5ii9ihvw38nidln7mgnsxwfz2gyl44cgj32syi9m8x";
     };
   });
@@ -18,11 +20,11 @@ rec {
     enableDoxygen = true;
     build_profile = "optimized";
     # withManual = true;
-    generateBindings = true;
+    # generateBindings = true;
   #   # withExamples = true;
   };
 
-  dce-quagga-dev =  if (super.pkgs ? dce) then (super.dce-quagga.overrideAttrs( oa: {
+  dce-quagga-dev =  if (super.pkgs ? dce-quagga) then (super.dce-quagga.overrideAttrs( oa: {
     srcs = [
       (builtins.fetchGit {
         url  = git://github.com/direct-code-execution/ns-3-dce;

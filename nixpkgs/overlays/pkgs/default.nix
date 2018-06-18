@@ -21,5 +21,5 @@ final: prev:
 
   rt-tests = prev.callPackage ./rt-test.nix {};
 
-  linux_mptcp_4_94 = prev.callPackage ./mptcp {};
+  # linux_mptcp_4_94 = prev.callPackage ./mptcp {};
 }

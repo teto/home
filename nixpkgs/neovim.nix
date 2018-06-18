@@ -50,8 +50,10 @@
         " how cna I get the PATH to pyls ?
         " let g:LanguageClient_serverCommands.python = ['pyls', '--log-file' , expand('~/lsp_python.log')]
 
+        let g:gutentags_ctags_executable_haskell='${pkgs.haskell.lib.dontCheck pkgs.haskellPackages.hasktags}/bin/hasktags'
 
         '';
+
         packages.myVimPackage = with pkgs.vimPlugins; {
           # see examples below how to use custom packages
           # loaded on launch
