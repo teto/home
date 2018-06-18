@@ -358,7 +358,7 @@ in rec {
   # });
 
   lkl_mptcp = prev.pkgs.lkl.overrideAttrs(old: {
-    src=builtins.fetchGit file:///home/teto/lkl;
+    src = builtins.fetchGit file:///home/teto/lkl;
   });
 
   my_lenovo_kernel = prev.linux_latest.override({

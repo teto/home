@@ -183,7 +183,7 @@ rec {
   netperf-local =super.netperf.overrideAttrs ( oa: {
 
     # src = /home/teto/flent;
-    patches = [ ./nixpkgs/overlays/pkgs/netperf.diff ];
+    patches = [ ./pkgs/netperf.diff ];
     doCheck = false;
   });
 

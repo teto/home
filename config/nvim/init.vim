@@ -782,7 +782,8 @@ nmap <leader>pn <Plug>(pad-new)
 let g:gutentags_project_info = [ {'type': 'python', 'file': 'setup.py'},
                                \ {'type': 'ruby', 'file': 'Gemfile'},
                                \ {'type': 'haskell', 'file': 'Setup.hs'} ]
-let g:gutentags_ctags_executable_haskell = 'hasktags'
+" produce tags for haskell http://hackage.haskell.org/package/hasktags
+" let g:gutentags_ctags_executable_haskell = 'hasktags'
 let g:gutentags_ctags_exclude = ['.vim-src', 'build', '.mypy_cache']
 " }}}
 " start haskell host if required  {{{

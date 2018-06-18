@@ -99,6 +99,8 @@ let
     zathura
   ];
   devPkgs = with pkgs; [
+    cabal-install
+    cabal2nix
     nox # helps with reviewing and to install files
     # ccache # breaks some builds ?
     ncurses.dev # for infocmp
