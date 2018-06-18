@@ -323,31 +323,31 @@ in rec {
 
 
   # linuxManualConfig is buggy see tracker
-  mptcp-manual = prev.linuxManualConfig {
-    inherit (prev) stdenv hostPlatform;
-    # inherit (linux_4_9) src;
-    inherit (prev.linux_mptcp) version;
-    # version = "${linux_4_9.version}-linuxkit";
-    # configfile = fetchurl {
-    #   url = https://raw.githubusercontent.com/linuxkit/linuxkit/cb1c74977297b326638daeb824983f0a2e13fdf2/kernel/kernel_config-4.9.x-x86_64;
-    #   sha256 = "1lpz2q5mhvq7g5ys2s2zynibbxczqzscxbwxfbhb4mkkpps8dv08";
-    # };
+  # mptcp-manual = prev.linuxManualConfig {
+  #   inherit (prev) stdenv hostPlatform;
+  #   # inherit (linux_4_9) src;
+  #   inherit (prev.linux_mptcp) version;
+  #   # version = "${linux_4_9.version}-linuxkit";
+  #   # configfile = fetchurl {
+  #   #   url = https://raw.githubusercontent.com/linuxkit/linuxkit/cb1c74977297b326638daeb824983f0a2e13fdf2/kernel/kernel_config-4.9.x-x86_64;
+  #   #   sha256 = "1lpz2q5mhvq7g5ys2s2zynibbxczqzscxbwxfbhb4mkkpps8dv08";
+  #   # };
 
-    modDirVersion="4.9.87";
-    # modVersion="4.9.87";
+  #   modDirVersion="4.9.87";
+  #   # modVersion="4.9.87";
 
-    # or config.tpl
-    # openvswitch won't work because of a mix between N/m
-    configfile = /home/teto/mptcp/config_off;
+  #   # or config.tpl
+  #   # openvswitch won't work because of a mix between N/m
+  #   configfile = /home/teto/mptcp/config_off;
 
-    src= filter-src /home/teto/mptcp;
-    allowImportFromDerivation = true;
-  };
+  #   src= filter-src /home/teto/mptcp;
+  #   allowImportFromDerivation = true;
+  # };
 
-  mptcp-manual-dev = mptcp-manual.override {
+  # mptcp-manual-dev = mptcp-manual.override {
  
-    modDirVersion="4.9.87+";
-  };
+  #   modDirVersion="4.9.87+";
+  # };
   # mptcp-head = mptcp93.override ({
 
   # linuxPackages_mptcp = linuxPackagesFor pkgs.linux_mptcp;
@@ -372,7 +372,11 @@ in rec {
     autoModules = false;
     kernelPreferBuiltin = true;
 
-    buildLinux = prev.buildLinuxExp;
+    # buildLinux = prev.buildLinuxExp;
+
+    # TODO test this
+    # structuredExtraConfig
+
     # kernelPatches =
     #   [ kernelPatches.bridge_stp_helper
     #     # See pkgs/os-specific/linux/kernel/cpu-cgroup-v2-patches/README.md

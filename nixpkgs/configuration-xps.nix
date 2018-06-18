@@ -149,6 +149,12 @@ let
 
   # programs.mininet.enable = true;
 
+  services.xserver.displayManager.slim = {
+    # theme = 
+    autoLogin = false;
+    defaultUser = "teto";
+  };
+  
   # virtualisation.virtualbox = {
   #   host.enable = true;
   #   host.enableExtensionPack = true;

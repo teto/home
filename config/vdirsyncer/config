@@ -32,25 +32,25 @@ status_path = "$XDG_CACHE_HOME/vdirsyncer/status/"
 # path.fetch = ["command", "sh", "-c", "echo $XDG_DATA_HOME/calendars/japon_ferie"]
 # fileext = ".ics"}}}
 
-# {{{
-[pair gmail_carddav]
-a = "gmail_local_carddav"
-b = "gmail_remote_carddav"
-# or vimdiff
-collections = ["from a", "from b"]
-conflict_resolution = ["command", "nvim -d"]
+# gmail {{{
+# [pair gmail_carddav]
+# a = "gmail_local_carddav"
+# b = "gmail_remote_carddav"
+# # or vimdiff
+# collections = ["from a", "from b"]
+# conflict_resolution = ["command", "nvim -d"]
 
 
-[storage gmail_local_carddav]
-type = "filesystem"
-path.fetch = ["command", "sh", "-c", "echo $XDG_DATA_HOME/contacts"]
-fileext = ".vcf"
+# [storage gmail_local_carddav]
+# type = "filesystem"
+# path.fetch = ["command", "sh", "-c", "echo $XDG_DATA_HOME/contacts"]
+# fileext = ".vcf"
 
-[storage gmail_remote_carddav]
-type = "google_contacts"
-client_id= "1040176666032-jtmq7o63ddo2r2oo298fso7rdl7li6j9.apps.googleusercontent.com"
-client_secret.fetch = ["command", "keyring", "get", "gmail", "client_secret"]
-token_file.fetch = ["command", "sh", "-c", "echo $XDG_CACHE_HOME/vdirsyncer/gmail_token"]
+# [storage gmail_remote_carddav]
+# type = "google_contacts"
+# client_id= "1040176666032-jtmq7o63ddo2r2oo298fso7rdl7li6j9.apps.googleusercontent.com"
+# client_secret.fetch = ["command", "keyring", "get", "gmail", "client_secret"]
+# token_file.fetch = ["command", "sh", "-c", "echo $XDG_CACHE_HOME/vdirsyncer/gmail_token"]
 # }}}
 
 [pair zaclys_caldav] # {{{

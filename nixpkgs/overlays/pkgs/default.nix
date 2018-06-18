@@ -17,7 +17,9 @@ final: prev:
 
   # http-getter = prev.python3Packages.callPackage ./http-getter { } ;
 
-  mptcpnumerics = prev.python3Packages.callPackage ./mptcpnumerics.nix {};
+  # mptcpnumerics = prev.python3Packages.callPackage ./mptcpnumerics.nix {};
 
   rt-tests = prev.callPackage ./rt-test {};
+
+  linux_mptcp_4_94 = prev.callPackage ./mptcp {};
 }

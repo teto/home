@@ -173,6 +173,10 @@ let
   #   openFirewall = true;
   #   # port = ;
   # };
+  services.xserver.displayManager.slim = {
+    autoLogin = true;
+    defaultUser = "teto";
+  };
 
   nix.sshServe = {
     enable = false;
