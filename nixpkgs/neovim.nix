@@ -50,7 +50,7 @@
         " how cna I get the PATH to pyls ?
         " let g:LanguageClient_serverCommands.python = ['pyls', '--log-file' , expand('~/lsp_python.log')]
 
-        let g:gutentags_ctags_executable_haskell='${pkgs.haskell.lib.dontCheck pkgs.haskellPackages.hasktags}/bin/hasktags'
+        let g:gutentags_ctags_executable_haskell = '${pkgs.haskell.lib.dontCheck pkgs.haskellPackages.hasktags}/bin/hasktags'
 
         '';
 
