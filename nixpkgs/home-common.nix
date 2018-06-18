@@ -41,7 +41,7 @@ let
     # anki          # spaced repetition system
     # hopefully we can remove this from the environment
     # it's just that I can't setup latex correctly
-    libreoffice
+    stable.libreoffice
     qutebrowser  # keyboard driven fantastic browser
     gnome3.nautilus # demande webkit/todo replace by nemo ?
     shutter # screenshot utility
@@ -151,6 +151,9 @@ rec {
     source ${config.xdg.configHome}/gdb/gdbinit_simple
     set history filename ${config.xdg.cacheHome}/gdb_history
   '';
+
+
+  home.file.".ghc/ghci.conf".source = ../home/ghci.conf;
 
   # you can switch from cli with xkb-switch
   # or xkblayout-state

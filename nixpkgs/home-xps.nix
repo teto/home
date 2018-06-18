@@ -65,8 +65,6 @@
       alias -s html=qutebrowser
       alias -s json=nvim
       alias -s Vagrantfile=nvim
-      alias -s py=python3
-      alias -s rb=ruby
       alias -s png=sxiv
       alias -s jpg=xdg-open
       alias -s gif=xdg-open
