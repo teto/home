@@ -779,11 +779,22 @@ nmap <leader>pn <Plug>(pad-new)
 " let g:pad#rename_files = 0
 "}}}
 " gutentags + gutenhasktags {{{
+" to keep logs GutentagsToggleTrace
+" some commands/functions are not available by default !!
+" https://github.com/ludovicchabant/vim-gutentags/issues/152
+let g:gutentags_define_advanced_commands=1
+" let g:gutentags_project_root
+" to ease with debug
+let g:gutentags_trace=0
+let g:gutentags_enabled = 1 " dynamic loading
+let g:gutentags_dont_load=0 " kill once and for all
 let g:gutentags_project_info = [ {'type': 'python', 'file': 'setup.py'},
                                \ {'type': 'ruby', 'file': 'Gemfile'},
                                \ {'type': 'haskell', 'file': 'Setup.hs'} ]
 " produce tags for haskell http://hackage.haskell.org/package/hasktags
 " let g:gutentags_ctags_executable_haskell = 'hasktags'
+" let g:gutentags_ctags_extra_args
+let g:gutentags_file_list_command = 'rg --files'
 let g:gutentags_ctags_exclude = ['.vim-src', 'build', '.mypy_cache']
 " }}}
 " start haskell host if required  {{{

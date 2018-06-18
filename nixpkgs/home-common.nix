@@ -1,6 +1,8 @@
 # home-manager specific config from
 { config, pkgs, lib,  ... }:
 
+# TODO to use cachix see https://cachix.org/
+
 # nix-shell -p 'python3.withPackages( ps : [ ps.scikitlearn ] )' ~/nixpkgs
       # ./latex.nix
 

@@ -4,16 +4,17 @@ let
 in
 rec {
 
-  ns3-dev = super.ns-3.overrideAttrs(old: {
-    name = "ns3-dev";
-    src = builtins.fetchGit 
-    # super.fetchFromGitHub 
-    {
-      url = git://github.com/nsnam/ns-3-dev-git;
-      rev    = "75f6501d4dbbb57ecc0a3907c8428f8ffafb96bd";
-      # sha256 = "1qdyrpdn9d5ii9ihvw38nidln7mgnsxwfz2gyl44cgj32syi9m8x";
-    };
-  });
+  # TODO will loop indefinitely
+  # ns3-dev = super.ns-3.overrideAttrs(old: {
+  #   name = "ns3-dev";
+  #   src = builtins.fetchGit 
+  #   # super.fetchFromGitHub 
+  #   {
+  #     url = git://github.com/nsnam/ns-3-dev-git;
+  #     rev    = "75f6501d4dbbb57ecc0a3907c8428f8ffafb96bd";
+  #     # sha256 = "1qdyrpdn9d5ii9ihvw38nidln7mgnsxwfz2gyl44cgj32syi9m8x";
+  #   };
+  # });
 
   ns3-local = super.ns-3.override {
     python = self.python3;
