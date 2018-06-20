@@ -1,0 +1,2 @@
+
+hi CursorLine    guifg=None

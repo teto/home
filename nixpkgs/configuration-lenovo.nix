@@ -29,6 +29,13 @@ let
   # ]
   ;
 
+
+  fileSystems."/mnt/ext" =
+    { device = "/dev/sda4";
+    options = [ "user" ];
+    };
+
+
   # it apparently still is quite an important thing to have
   boot.devSize = "5g";
 

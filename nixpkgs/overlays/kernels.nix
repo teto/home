@@ -27,7 +27,9 @@ let
   # $answer = $answers{$name} if defined $answers{$name};
 
   # in common-config.nix mark it as an optional one with `?` suffix,
-  mininetConfig = prev.pkgs.mininet.kernelExtraConfig or ''
+  mininetConfig = 
+  # prev.pkgs.mininet.kernelExtraConfig or 
+  ''
     BPF y
     BPF_SYSCALL y
     NET_CLS_BPF y
@@ -36,7 +38,9 @@ let
     BPF_EVENTS y
   '';
 
-  ovsConfig = prev.pkgs.openvswitch.kernelExtraConfig or ''
+  ovsConfig = 
+    #prev.pkgs.openvswitch.kernelExtraConfig or 
+    ''
     # Can't be embedded; must be a module !?
     NF_INET y
     NF_CONNTRACK y
@@ -48,13 +52,23 @@ let
     OPENVSWITCH y
   '';
 
-  bpfConfig = prev.pkgs.linuxPackages.bcc.kernelExtraConfig or ''
+  # CONFIG_BPF_JIT_ALWAYS_ON
+  bpfConfig = 
+    #prev.pkgs.linuxPackages.bcc.kernelExtraConfig or
+  ''
     BPF y
     BPF_SYSCALL y
     NET_CLS_BPF y
     NET_ACT_BPF y
     BPF_JIT y
     BPF_EVENTS y
+    KPROBE_EVENTS y
+    BPF_EVENTS y
+    KPROBES                y
+    KPROBES_ON_FTRACE      y
+    HAVE_KPROBES           y
+    HAVE_KPROBES_ON_FTRACE y
+    KPROBE_EVENTS          y
   '';
 
 

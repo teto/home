@@ -226,7 +226,7 @@ Plug 'sjl/gundo.vim' " :GundoShow/Toggle to redo changes
 Plug 'neovimhaskell/haskell-vim', {'for':'haskell'} " haskell install
 " Plug 'enomsg/vim-haskellConcealPlus', {'for':'haskell'}     " unicode for haskell operators
 " Plug 'eagletmt/ghcmod-vim', {'do': 'cabal install ghc-mod', 'for': 'haskell'} " requires
-Plug 'parsonsmatt/intero-neovim' " replaces ghcmod
+Plug 'parsonsmatt/intero-neovim' " replaces ghcmod, open REPL with :InteroOpen
 " Plug 'bitc/vim-hdevtools'
 " Plug 'eagletmt/neco-ghc', {'for': 'haskell'} " completion plugin for haskell + deoplete ?
 " Plug 'Shougo/vimproc.vim', {'do' : 'make'} " needed by neco-ghc
@@ -279,8 +279,8 @@ Plug 'bfredl/nvim-miniyank' " killring alike plugin, cycling paste careful
 " Text objects {{{
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'tommcdo/vim-lion' " Use with gl/L<text object><character to align to>
-Plug 'tommcdo/vim-exchange' " Use with cx<text object> to cut, cxx to exchange
-Plug 'tommcdo/vim-kangaroo' "  zp to push/zP to pop the position
+" Plug 'tommcdo/vim-exchange' " Use with cx<text object> to cut, cxx to exchange
+" Plug 'tommcdo/vim-kangaroo' "  zp to push/zP to pop the position
 " Plug 'tommcdo/vim-ninja-feet' " care overwrites z]
 " }}}
 " {{{ To ease movements
@@ -321,7 +321,7 @@ Plug 'tpope/vim-fugitive' " to use with Git, VERY powerful
 Plug 'tpope/vim-rhubarb' " github support in fugitive, use |i_CTRL-X_CTRL-O|
 "Plug 'jaxbot/github-issues.vim' " works only with vim
 "Plug 'tpope/vim-surround' " don't realy know how to use yet
-"Plug 'junegunn/vim-peekaboo' " gives a preview of buffers when pasting
+Plug 'junegunn/vim-peekaboo' " gives a preview of buffers when pasting
 Plug 'mhinz/vim-randomtag', { 'on': 'Random' } " Adds a :Random function that launches help at random
 Plug 'majutsushi/tagbar' " , {'on': 'TagbarToggle'} disabled lazyloading else it would not work with statusline
 Plug 'machakann/vim-highlightedyank' " highlit
@@ -434,7 +434,7 @@ Plug 'lervag/vimtex', {'for': 'tex'} " so far the best one
 let g:far#collapse_result=1
 " }}}
 
-Plug 'gregsexton/gitv'
+" Plug 'gregsexton/gitv'
 Plug 'tweekmonster/nvimdev.nvim' " thanks tweekmonster !
 call plug#end()
 " }}}
@@ -796,6 +796,7 @@ let g:gutentags_project_info = [ {'type': 'python', 'file': 'setup.py'},
 " let g:gutentags_ctags_extra_args
 let g:gutentags_file_list_command = 'rg --files'
 " produce tags for haskell http://hackage.haskell.org/package/hasktags
+
 " let g:gutentags_ctags_executable_haskell = 'hasktags'
 let g:gutentags_ctags_exclude = ['.vim-src', 'build', '.mypy_cache']
 " }}}
@@ -1912,7 +1913,19 @@ let g:LanguageClient_serverCommands = {
 nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
 " nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
 "}}}
-
+"{{{
+" Intero starts automatically. Set this if you'd like to prevent that.
+let g:intero_start_immediately = 0
+" Enable type information on hover (when holding cursor at point for ~1 second).
+let g:intero_type_on_hover = 1
+" let g:intero_use_neomake=1
+" Change the intero window size; default is 10.
+let g:intero_window_size = 15
+" seems like a good idea
+" let g:intero_backend=
+" Sets the intero window to split vertically; default is horizontal
+let g:intero_vertical_split = 1
+"}}}
 
 " dasht{{{
 
