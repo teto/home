@@ -1147,6 +1147,12 @@ let g:neomake_airline = 1
 let g:neomake_echo_current_error = 1
 let g:neomake_place_signs=1
 
+" Tuto to configure haskell on neovim
+" https://mendo.zone/fun/neovim-setup-haskell/
+" by default ghc-mod, hlint, and hdevtools
+" let g:neomake_haskell_enabled_makers=[]
+
+
 " filters out unrecognized
 function! NeomakeStatusLine()
 

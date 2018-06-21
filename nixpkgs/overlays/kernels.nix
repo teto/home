@@ -38,15 +38,20 @@ let
     BPF_EVENTS y
   '';
 
+
+  # might be needed for newer kernels to embed the module
+  # NF_DEFRAG_IPV6 y
+  # NF_NAT_IPV4 y
+  # NF_NAT_IPV6 y
   ovsConfig = 
     #prev.pkgs.openvswitch.kernelExtraConfig or 
     ''
     # Can't be embedded; must be a module !?
     NF_INET y
     NF_CONNTRACK y
+      IPV6 y 
 
     NF_NAT y
-    NF_NAT_IPV4 y
 
     # force it to yes as otherwise generate-config.pl seems to ignore it ?
     OPENVSWITCH y
@@ -136,6 +141,7 @@ SECCOMP y
 
 
     '';
+
     net9pConfig = ''
 
       # for qemu/libvirt shared folders
@@ -378,7 +384,11 @@ in rec {
   my_lenovo_kernel = prev.linux_latest.override({
     # to be able to run as
     # preferBuiltin=true;
-    extraConfig = bpfConfig + net9pConfig;
+
+    # I don't really care here if openvswitch is as a module or not
+    extraConfig = bpfConfig + net9pConfig + mininetConfig + ''
+      OPENVSWITCH m
+    '' ;
   });
 
   linux_test = prev.linux_4_16.override {

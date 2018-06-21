@@ -54,7 +54,7 @@ clock = status.register(
 
 # clock.on_click(1)
 # print(clock.on_clicks)
-# status.register("pulseaudio")
+status.register("pulseaudio")
 # Shows your CPU temperature, if you have a Intel CPU
 # status.register("temp",   format="{temp:.0f}°C",)
 # might not work with modesetting, nvidia etc...
