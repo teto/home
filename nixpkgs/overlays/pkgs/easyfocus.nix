@@ -1,8 +1,7 @@
 { stdenv, fetchFromGitHub, pkgconfig, xproto, libxcb, xcbutilkeysyms
-, xlibs
-, i3ipc-glib
-, glib
+, xlibs , i3ipc-glib , glib
 }:
+
 stdenv.mkDerivation rec {
   name = "i3easyfocus-${version}";
   version = "20180622";
@@ -15,23 +14,7 @@ stdenv.mkDerivation rec {
   };
 
   nativeBuildInputs = [ pkgconfig ];
-  buildInputs = [ libxcb xcbutilkeysyms
-    xproto
-    xlibs.libX11.dev
-    i3ipc-glib
-    glib.dev
-
-
-    # xcbutilimage 
-    # libev cairo libxkbcommon libxkbfile 
-    ];
-
-  # makeFlags = "all";
-  # installFlags = "PREFIX=\${out} SYSCONFDIR=\${out}/etc";
-  # postInstall = ''
-  #   mkdir -p $out/share/man/man1
-  #   cp *.1 $out/share/man/man1
-  # '';
+  buildInputs = [ libxcb xcbutilkeysyms xproto xlibs.libX11.dev i3ipc-glib glib.dev ];
 
   # Makefile has no rule for 'install'
   installPhase = ''
@@ -46,5 +29,4 @@ stdenv.mkDerivation rec {
     license = licenses.gpl3;
     platforms = platforms.linux;
   };
-
 }

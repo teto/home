@@ -1,11 +1,8 @@
 { stdenv, fetchFromGitHub, pkgconfig, xproto, libxcb
 , autoreconfHook, json-glib, gtk-doc, which
 , gobjectIntrospection
-#, xcbutilkeysyms 
 }:
 
-# sr/share/gtk-doc/data/gtk-doc.make`
-# should do the trick.
 stdenv.mkDerivation rec {
 
   name = "i3ipc-glib-${version}";
@@ -20,22 +17,12 @@ stdenv.mkDerivation rec {
 
   nativeBuildInputs = [ autoreconfHook which pkgconfig ];
 
-# share/gtk-doc/data/gtk-doc.make
-  buildInputs = [ libxcb json-glib gtk-doc
-    xproto gobjectIntrospection
-    # xcbutilimage 
-    # libev cairo libxkbcommon libxkbfile 
-    ];
+  buildInputs = [ libxcb json-glib gtk-doc xproto gobjectIntrospection ];
 
 
-  # TODO pass flags here ?
-# autoreconf --force --install --verbose || exit $?
   preAutoreconf = ''
     gtkdocize
   '';
-  # autoreconfPhase = ''
-  #   ./autogen.sh
-  #   '';
 
   meta = with stdenv.lib; {
     description = "A C interface library to i3wm";
