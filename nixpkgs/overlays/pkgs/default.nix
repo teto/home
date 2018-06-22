@@ -21,5 +21,8 @@ final: prev:
 
   rt-tests = prev.callPackage ./rt-test.nix {};
 
+  i3ipc-glib = prev.callPackage ./i3ipc-glib.nix {}; 
+
+  i3-easyfocus = prev.callPackage ./easyfocus.nix {}; 
   # linux_mptcp_4_94 = prev.callPackage ./mptcp {};
 }
