@@ -106,6 +106,7 @@ let
     nox # helps with reviewing and to install files
     # ccache # breaks some builds ?
     ncurses.dev # for infocmp
+    git-review # to contribute to wireshark
     gitAndTools.diff-so-fancy
     gitAndTools.git-recent
     editorconfig-core-c
@@ -195,7 +196,7 @@ rec {
       !rofi.width: 50
       rofi.columns: 1
       rofi.fuzzy: true
-      rofi.modi:       run,DRun,window,ssh,Layouts:/home/teto/.i3/list_layouts.sh
+      rofi.modi:       run,drun,window,ssh,Layouts:/home/teto/.i3/list_layouts.sh
       /* see to integrate teiler */
       rofi.sidebar-mode: true
 

@@ -58,7 +58,7 @@ status.register("pulseaudio")
 # Shows your CPU temperature, if you have a Intel CPU
 # status.register("temp",   format="{temp:.0f}°C",)
 # might not work with modesetting, nvidia etc...
-# status.register("backlight", format="{percentage}%",)
+status.register("backlight", format="{percentage}%",)
 # redshift = status.register("redshift", )
 # redshift.toggle_inhibit()
 #
