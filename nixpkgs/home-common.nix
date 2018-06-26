@@ -43,14 +43,14 @@ let
     # anki          # spaced repetition system
     # hopefully we can remove this from the environment
     # it's just that I can't setup latex correctly
-    stable.libreoffice
+    unstable.libreoffice
     qutebrowser  # keyboard driven fantastic browser
     gnome3.nautilus # demande webkit/todo replace by nemo ?
     shutter # screenshot utility
     mcomix # manga reader
     mendeley # requiert qtwebengine
     pinta    # photo editing
-    qtcreator  # for wireshark
+    stable.qtcreator  # for wireshark
     zeal       # doc for developers
     vifm
     # zotero     # doc software

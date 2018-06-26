@@ -408,7 +408,8 @@ Plug 'NLKNguyen/papercolor-theme'
 " YCM generator is not really a plugin is it ?
 " Plug 'erezsh/erezvim' "zenburn scheme. This plugin resets some keymaps,
 " annoying
-" Plug 'chrisbra/csv.vim', {'for': 'csv'}
+" do not run it automatically, can be boring
+Plug 'chrisbra/csv.vim' " , {'for': 'csv'}
 
 " editorconfig {{{
 let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
@@ -1911,7 +1912,7 @@ let g:LanguageClient_selectionUI='fzf'
 "fnamemodify( g:python3_host_prog, ':p:h').
 let g:LanguageClient_serverCommands = {
     \ 'rust': ['rustup', 'run', 'nightly', 'rls']
-    \ , 'python': [ '/nix/store/811vahmvwab4i2q5mhrxyvdp3yv0fhfd-python3-3.6.5-env/bin/pyls', '--log-file' , expand('~/lsp_python.log')]
+    \ , 'python': [ fnamemodify( g:python3_host_prog, ':p:h').'/pyls', '--log-file' , expand('~/lsp_python.log')]
     \ }
 
 " todo provide a fallback if lsp not available

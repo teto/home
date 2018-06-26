@@ -7,7 +7,6 @@ let
 
   # todo provide as a side module
   mptcpUp =   /home/teto/dotfiles/nixpkgs/hooks/mptcp_up_raw;
-  # mptcpDown =  /home/teto/dotfiles/nixpkgs/hooks/mptcp_down_raw;
 in
 {
   options.networking.mptcp = {
