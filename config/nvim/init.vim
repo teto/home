@@ -321,7 +321,7 @@ Plug 'tpope/vim-fugitive' " to use with Git, VERY powerful
 Plug 'tpope/vim-rhubarb' " github support in fugitive, use |i_CTRL-X_CTRL-O|
 "Plug 'jaxbot/github-issues.vim' " works only with vim
 "Plug 'tpope/vim-surround' " don't realy know how to use yet
-Plug 'junegunn/vim-peekaboo' " gives a preview of buffers when pasting
+" Plug 'junegunn/vim-peekaboo' " gives a preview of buffers when pasting
 Plug 'mhinz/vim-randomtag', { 'on': 'Random' } " Adds a :Random function that launches help at random
 Plug 'majutsushi/tagbar' " , {'on': 'TagbarToggle'} disabled lazyloading else it would not work with statusline
 Plug 'machakann/vim-highlightedyank' " highlit
