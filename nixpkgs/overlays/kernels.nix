@@ -382,7 +382,6 @@ in rec {
     src = builtins.fetchGit file:///home/teto/lkl;
   });
 
-  # my_lenovo_kernel = prev.linux_latest.override({
   linux_mptcp_with_netlink = prev.linux_mptcp.override({
     src = prev.fetchFromGitHub {
       owner = "teto";
@@ -393,9 +392,12 @@ in rec {
     # kernelPatches = [];
   });
 
-  my_lenovo_kernel = self.linux_mptcp_with_netlink.override({
+  # my_lenovo_kernel = prev.linux_latest.override({
+  my_lenovo_kernel = prev.linux_mptcp.override({
+  # my_lenovo_kernel = self.linux_mptcp_with_netlink.override({
     # to be able to run as
     # preferBuiltin=true;
+    ignoreConfigErrors=true;
 
     # I don't really care here if openvswitch is as a module or not
     extraConfig = bpfConfig + net9pConfig + mininetConfig + ''

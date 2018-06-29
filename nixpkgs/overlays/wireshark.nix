@@ -43,8 +43,8 @@ in
     src = self.fetchFromGitHub {
       repo="wireshark";
       owner="teto";
-      rev = "reinject_stable";
-      sha256 = "0q1lqh2zbjz0bgppy3bc6dlravifja49arv1m4yd3jz55ify3anv";
+      rev = "mptcp_fix";
+      sha256 = "0q1lqh0zbjz0bgppy3bc6dlravifja49arv1m4yd3jz55ify3anv";
     };
   });
 }
