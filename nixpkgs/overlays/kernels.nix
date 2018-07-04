@@ -27,16 +27,19 @@ let
   # $answer = $answers{$name} if defined $answers{$name};
 
   # in common-config.nix mark it as an optional one with `?` suffix,
-  mininetConfig = 
+  # VETH mandatory because of things like "ip link add name h1-eth0 address de:73:c3:f9:49:73 type veth peer name s1-eth1 address ca:80:83:c9:8b:3c netns"
+  # TODO import 
+  mininetConfig = with import <nixpkgs>/lib/kernel.nix { };
   # prev.pkgs.mininet.kernelExtraConfig or 
-  ''
-    BPF y
-    BPF_SYSCALL y
-    NET_CLS_BPF y
-    NET_ACT_BPF y
-    BPF_JIT y
-    BPF_EVENTS y
-  '';
+  {
+    BPF = yes;
+    BPF_SYSCALL = yes;
+    NET_CLS_BPF = yes;
+    NET_ACT_BPF = yes;
+    BPF_JIT = yes;
+    BPF_EVENTS = yes;
+    VETH  = yes;
+  };
 
 
   # might be needed for newer kernels to embed the module
@@ -399,8 +402,10 @@ in rec {
     # preferBuiltin=true;
     ignoreConfigErrors=true;
 
+    structuredExtraConfig = mininetConfig;
+
     # I don't really care here if openvswitch is as a module or not
-    extraConfig = bpfConfig + net9pConfig + mininetConfig + ''
+    extraConfig = bpfConfig + net9pConfig + ''
       OPENVSWITCH m
     '' ;
   });
