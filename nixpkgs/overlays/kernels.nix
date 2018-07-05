@@ -29,16 +29,22 @@ let
   # in common-config.nix mark it as an optional one with `?` suffix,
   # VETH mandatory because of things like "ip link add name h1-eth0 address de:73:c3:f9:49:73 type veth peer name s1-eth1 address ca:80:83:c9:8b:3c netns"
   # TODO import 
-  mininetConfig = with import <nixpkgs>/lib/kernel.nix { };
+  mininetConfig = 
+  # with import /home/teto/nixpkgs/lib/kernel.nix { inherit (prev) lib; version = 40; };
   # prev.pkgs.mininet.kernelExtraConfig or 
+  with prev.lib.kernel;
   {
-    BPF = yes;
+    # test = {
+    BPF         = yes;
     BPF_SYSCALL = yes;
+    USER_NS     = yes;
+    NET_NS      = yes;
     NET_CLS_BPF = yes;
     NET_ACT_BPF = yes;
-    BPF_JIT = yes;
-    BPF_EVENTS = yes;
-    VETH  = yes;
+    BPF_JIT     = yes;
+    BPF_EVENTS  = yes;
+    VETH        = yes;
+  # };
   };
 
 
@@ -181,6 +187,9 @@ SECCOMP y
       MPTCP_ROUNDROBIN y
       MPTCP_REDUNDANT y
 
+      # this is a kernel I devised myself (hence the optional)
+      MPTCP_PREVENANT? y
+
       IP_MULTIPLE_TABLES y
 
       # Enable advanced path-managers...
@@ -232,6 +241,7 @@ SECCOMP y
     persoConfig=''
 
       NET_SCH_NETEM y
+      # netling debug/diagnostic
       NETLINK_DIAG y
     '';
   # must be used with ignoreConfigErrors in kernels
@@ -273,7 +283,7 @@ in rec {
   #  });
 
   # improve the default mptcp config
-  mptcp93 = prev.pkgs.linux_mptcp.override (  {
+  mptcp93 = prev.pkgs.linux_mptcp_93.override ({
     kernelPatches=[];
     # name="mptcp-override";
       # modDirVersion="4.9.60-matt";
@@ -290,8 +300,7 @@ in rec {
   # in a repl I see mptcp-local.stdenv.hostPlatform.platform
   mptcp93-local = mptcp-local;
 
-  mptcp-local-stable =
-  mptcp93.override ({
+  mptcp-local-stable = mptcp93.override ({
 
     # generates too many problems with nixops
     # src = builtins.fetchGit {
@@ -328,7 +337,8 @@ in rec {
     autoModules = false;
     kernelPreferBuiltin = true;
 
-    extraConfig=mptcpKernelExtraConfig + localConfig + mininetConfig
+    structuredExtraConfig = mininetConfig;
+    extraConfig = mptcpKernelExtraConfig + localConfig 
     + ovsConfig + bpfConfig + net9pConfig 
     # to prevent the "+" from being added to modDirVersion
     # + ''

@@ -21,6 +21,9 @@ final: prev:
 
   rt-tests = prev.callPackage ./rt-test.nix {};
 
+  # 
+  netbee = prev.callPackage ./netbee {};
+
   # i3ipc-glib = prev.callPackage ./i3ipc-glib.nix {}; 
 
   # i3-easyfocus = prev.callPackage ./easyfocus.nix {}; 
