@@ -1,4 +1,6 @@
 self: prev:
+
+  with prev.lib.kernel;
 let
     # todo remove tags
     filter-src = builtins.filterSource (p: t:
@@ -29,24 +31,26 @@ let
   # in common-config.nix mark it as an optional one with `?` suffix,
   # VETH mandatory because of things like "ip link add name h1-eth0 address de:73:c3:f9:49:73 type veth peer name s1-eth1 address ca:80:83:c9:8b:3c netns"
   # TODO import 
-  mininetConfig = 
-  # with import /home/teto/nixpkgs/lib/kernel.nix { inherit (prev) lib; version = 40; };
-  # prev.pkgs.mininet.kernelExtraConfig or 
-  with prev.lib.kernel;
-  {
-    # test = {
-    BPF         = yes;
-    BPF_SYSCALL = yes;
-    USER_NS     = yes;
-    NET_NS      = yes;
-    NET_CLS_BPF = yes;
-    NET_ACT_BPF = yes;
-    BPF_JIT     = yes;
-    BPF_EVENTS  = yes;
-    VETH        = yes;
-  # };
-  };
+  mininetConfig = ''
+    BPF y
+    BPF_SYSCALL y
+    NET_CLS_BPF y
+    NET_ACT_BPF y
+    BPF_JIT y
+    BPF_EVENTS y
+  '';
 
+  # mininetConfigStructured = with prev.lib.kernel; {
+  #   BPF         = yes;
+  #   BPF_SYSCALL = yes;
+  #   USER_NS     = yes;
+  #   NET_NS      = yes;
+  #   NET_CLS_BPF = yes;
+  #   NET_ACT_BPF = yes;
+  #   BPF_JIT     = yes;
+  #   BPF_EVENTS  = yes;
+  #   VETH        = yes;
+  # } 
 
   # might be needed for newer kernels to embed the module
   # NF_DEFRAG_IPV6 y
@@ -326,7 +330,7 @@ in rec {
     #   sha256 = "9999999999999999999999999999999999999999999999999999999999999999";
     # };
 
-    modDirVersion="4.9.87+";
+    modDirVersion="4.9.87";
     # modVersion="4.9.87";
     # modDirVersion="4.9.60-matt+";
     # modDirVersion="4.9.60-00010-g5a1ca10181c6";
@@ -337,9 +341,9 @@ in rec {
     autoModules = false;
     kernelPreferBuiltin = true;
 
-    structuredExtraConfig = mininetConfig;
+    # structuredExtraConfig = mininetConfigStructured;
     extraConfig = mptcpKernelExtraConfig + localConfig 
-    + ovsConfig + bpfConfig + net9pConfig 
+    + ovsConfig + bpfConfig + net9pConfig + mininetConfig
     # to prevent the "+" from being added to modDirVersion
     # + ''
     #   LOCALVERSION 
@@ -395,7 +399,7 @@ in rec {
     src = builtins.fetchGit file:///home/teto/lkl;
   });
 
-  linux_mptcp_with_netlink = prev.linux_mptcp.override({
+  linux_mptcp_with_netlink = prev.linux_mptcp_93.override({
     src = prev.fetchFromGitHub {
       owner = "teto";
       repo = "mptcp";
@@ -412,7 +416,7 @@ in rec {
     # preferBuiltin=true;
     ignoreConfigErrors=true;
 
-    structuredExtraConfig = mininetConfig;
+    # structuredExtraConfig = mininetConfigStructured;
 
     # I don't really care here if openvswitch is as a module or not
     extraConfig = bpfConfig + net9pConfig + ''
@@ -425,10 +429,8 @@ in rec {
     autoModules = false;
     kernelPreferBuiltin = true;
 
-    # buildLinux = prev.buildLinuxExp;
+    # structuredExtraConfig = mininetConfigStructured;
 
-    # TODO test this
-    # structuredExtraConfig
 
     # kernelPatches =
     #   [ kernelPatches.bridge_stp_helper
