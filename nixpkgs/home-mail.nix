@@ -23,26 +23,26 @@ let
 in
 {
   # todo give it a name
-  mail = {
-    accounts = [
-    gmailAccount
-    {
-      name = "iij";
-      userName = "coudron@iij.ad.jp";
-      realname = "Matthieu Coudron";
-      address = "test@testjj.ad.jp";
-    #   # todo make it optional ?
-    #   store = "maildir/test";
-        imapHost = "imap-tyo.iiji.jp";
-      sendHost = "mbox.iiji.jp";
-      gpgKey = "964F62803989289BA07EA632A0AC3958A0362E2F";
-    #   sendHost = "smtp.gmail.com";
-    #   # getLogin = "";
-    #   # getPass = "";
-    }
-    ];
+  # mail = {
+  #   accounts = [
+  #   gmailAccount
+  #   {
+  #     name = "iij";
+  #     userName = "coudron@iij.ad.jp";
+  #     realname = "Matthieu Coudron";
+  #     address = "test@testjj.ad.jp";
+  #   #   # todo make it optional ?
+  #   #   store = "maildir/test";
+  #       imapHost = "imap-tyo.iiji.jp";
+  #     sendHost = "mbox.iiji.jp";
+  #     gpgKey = "964F62803989289BA07EA632A0AC3958A0362E2F";
+  #   #   sendHost = "smtp.gmail.com";
+  #   #   # getLogin = "";
+  #   #   # getPass = "";
+  #   }
+  #   ];
 
-  };
+  # };
 
    # TODO conditionnally define these
    programs.notmuch = {
@@ -61,6 +61,9 @@ in
 
    programs.alot = {
      enable = true;
+
+     sendCommand = config.programs.msmtp.sendCommand;
+      # contactCompletionCommand
       # createAliases=true;
      # generate alias
      # TODO test http://alot.readthedocs.io/en/latest/configuration/key_bindings.html
@@ -69,14 +72,7 @@ in
      # initial_command = bufferlist; taglist; search foo; search bar; buffer 0
      #  mailinglists = lisp@ietf.org, taps@ietf.org 
      # see https://github.com/pazz/alot/wiki/Tips,-Tricks-and-other-cool-Hacks for more ideas
-     bindings = let
-        fetchGmail = "refresh";
-        # TODO mra doesn't exist 
-        # fetchGmail = "shellescape '${gmailAccount.mra.fetchMailCommand gmailAccount}' ; refresh";
-
-      # % = ${fetchGmail}
-      in
-      ''
+     bindings = ''
       # reload config
       R = reload
       / = prompt search
@@ -84,17 +80,6 @@ in
       a = call hooks.apply_patch(ui)
       ' ' = fold; untag unread; move next unfolded
       '';
-      # {
-      #   "%" = fetchGmail;
-      #   # seems like alot understands it as `\` instead :s
-      #   "/" = "prompt search";
-      #   # format filepath can be good too
-      #   # --shell cat > patch.txt";
-      #   "x" = "prompt pipeto --format filepath git am > X.patch";
-      #   # [bindings]
-      #   # [[thread]]
-      #   #     a = call hooks.apply_patch(ui)
-     # };
 
      extraConfig = {
         auto_remove_unread = "True";
@@ -128,12 +113,15 @@ in
 # translated = ♻
    };
 
-   programs.offlineimap = {
-     enable = true;
-     # postSyncHook=''
-     #  notmuch --config=$XDG_CONFIG_HOME/notmuch/notmuchrc new
-     #   '';
-     # extraConfig = ''
+
+   # disabled for now, use mbsync instead
+   # programs.offlineimap = {
+   #   enable = true;
+   #   # postSyncHook=''
+   #   #  notmuch --config=$XDG_CONFIG_HOME/notmuch/notmuchrc new
+   #   #   '';
+   #   # extraConfig = ''
+   # };
 
 # [Account iij] # {{{
 # localrepository = iij-local
@@ -160,5 +148,4 @@ in
 # maxconnections = 3
 # # }}}
      #   '';
-   };
 }

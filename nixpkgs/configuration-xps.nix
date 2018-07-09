@@ -147,7 +147,7 @@ let
   # environment.enableDebugInfo = true;
 # } ++ lib.optionalAttrs (config.programs ? mininet) {
 
-  # programs.mininet.enable = true;
+  programs.mininet.enable = true;
 
   services.xserver.displayManager.slim = {
     # theme = 
@@ -170,7 +170,7 @@ let
   # };
 
   hardware.bluetooth.enable = true;
-  hardware.bluetooth.powerOnBoot = true;
+  hardware.bluetooth.powerOnBoot = false;
   # hardware.bluetooth.extraConfig = ;
   # extraConfig
 

@@ -117,7 +117,7 @@ Plug 'LnL7/vim-nix', {'for': 'nix'}
 " Plug 'gelguy/Cmd2.vim' " test
 Plug 'editorconfig/editorconfig-vim' " not remote but involves python
 " provider
-Plug 'brooth/far.vim', { 'on': 'Far','do': ':UpdateRemotePlugins' } " search and replace across files
+Plug 'brooth/far.vim', { 'do': ':UpdateRemotePlugins' } " search and replace across files
 " needs ruby support, works in recent neovim
 Plug 'junegunn/vim-github-dashboard', { 'do': ':UpdateRemotePlugins' }
 Plug 'fmoralesc/vim-pad', {'branch': 'devel'} " :Pad new, note taking
@@ -1115,7 +1115,7 @@ let g:jedi#completions_enabled = 0 " disable when deoplete in use
 
 
 " TODO replace with getroot of directory ?
-let g:neomake_cmake_maker = {
+let g:neomake_build_folder_maker = {
     \ 'exe': 'make',
     \ 'args': [],
     \ 'cwd': getcwd().'/build',
