@@ -49,6 +49,7 @@
     };
 
     iij = {
+      notmuch.enable = true;
       userName = "coudron@iij.ad.jp";
       realName = "Matthieu Coudron";
       address = "test@testjj.ad.jp";

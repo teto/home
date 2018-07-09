@@ -63,8 +63,9 @@ in
      enable = true;
 
      sendCommand = config.programs.msmtp.sendCommand;
-      # contactCompletionCommand
-      # createAliases=true;
+     # mta type
+     # contactCompletionCommand
+     # createAliases=true;
      # generate alias
      # TODO test http://alot.readthedocs.io/en/latest/configuration/key_bindings.html
      # w = pipeto urlscan 2> /dev/null
