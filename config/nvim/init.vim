@@ -152,7 +152,7 @@ Plug 'dbakker/vim-projectroot' " projectroot#guess()
 Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' } " :h LanguageClientUsage
 " Plug 'tjdevries/nvim-langserver-shim' " for LSP
 " Plug 'powerman/vim-plugin-AnsiEsc' " { to hl ESC codes
-" Plug 'git@github.com:junegunn/gv.vim.git' " git commit viewer :Gv
+Plug 'junegunn/gv.vim' " git commit viewer :Gv
 " Plug 'git@github.com:xolox/vim-easytags.git' "
 " Plug 'mhinz/vim-halo' " to hight cursor line
 Plug 'ludovicchabant/vim-gutentags' " automatic tag generation, very good

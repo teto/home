@@ -149,6 +149,18 @@ rec {
   ]
   ++ heavyPackages;
 
+
+  # works only because TIGRC_USER is set
+  # if file exists vim.tigrc
+  home.file."${config.xdg.configHome}/tig/tigrc".text = let 
+    tigrc = "${pkgs.tig}/etc/vim.tigrc";
+  in 
+  # if (builtins.pathExists tigrc) then 
+  (builtins.readFile tigrc) 
+  # else ""
+  ;
+
+
   # home.file.".gdbinit".source = ../config/gdbinit_simple;
   home.file.".gdbinit".text = ''
     # ../config/gdbinit_simple;

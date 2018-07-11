@@ -12,7 +12,7 @@ let
     # ./hardware-dell.nix
     /etc/nixos/hardware-configuration.nix
 
-    ./common-all.nix
+    ./config-all.nix
     ./common-desktop.nix
     ./modules/libvirtd.nix
 
