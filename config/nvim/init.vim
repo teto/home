@@ -1124,6 +1124,15 @@ let g:neomake_build_folder_maker = {
     \ 'buffer_output': 0
     \ }
 
+" will run nix-shell
+let g:neomake_buildPhase_maker = {
+    \ 'exe': 'nix-shell',
+    \ 'args': [],
+    \ 'errorformat': '%f:%l:%c: %m',
+    \ 'remove_invalid_entries': 1,
+    \ 'buffer_output': 0
+    \ }
+
 let g:neomake_verbose = 1
 
 " call neomake#quickfix#enable()

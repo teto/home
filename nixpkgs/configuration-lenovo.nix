@@ -195,7 +195,7 @@ let
   hardware.bluetooth.powerOnBoot = true;
 
   # will fial until openflowswitch is fixed
-  programs.mininet.enable = true;
+  # programs.mininet.enable = true;
   # test with sudo mn --switch ovsk -v debug
 
   networking.iproute2.enable = true;

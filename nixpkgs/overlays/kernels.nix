@@ -38,6 +38,17 @@ let
     NET_ACT_BPF y
     BPF_JIT y
     BPF_EVENTS y
+    USER_NS y
+    VETH y
+    NET_SCH_HTB y
+    NET_SCH_RED y
+    NET_SCH_SFB y
+    NET_SCH_SFQ y
+    NET_SCH_TBF y
+    NET_SCH_GRED y
+    NET_SCH_NETEM y
+    NET_SCH_INGRESS y
+    NET_CLS y
   '';
 
   # mininetConfigStructured = with prev.lib.kernel; {
@@ -243,8 +254,6 @@ SECCOMP y
 # warning: unused option: USB_SERIAL_GENERIC
 
     persoConfig=''
-
-      NET_SCH_NETEM y
       # netling debug/diagnostic
       NETLINK_DIAG y
     '';
@@ -356,7 +365,7 @@ in rec {
   });
 
   mptcp-local = mptcp-local-stable.override ({
-      src=filter-src /home/teto/mptcp;
+      src = filter-src /home/teto/mptcp;
   });
 
 
@@ -424,23 +433,12 @@ in rec {
     '' ;
   });
 
-  linux_test = prev.linux_4_16.override {
-    ignoreConfigErrors=true;
-    autoModules = false;
-    kernelPreferBuiltin = true;
-
-    # structuredExtraConfig = mininetConfigStructured;
-
-
-    # kernelPatches =
-    #   [ kernelPatches.bridge_stp_helper
-    #     # See pkgs/os-specific/linux/kernel/cpu-cgroup-v2-patches/README.md
-    #     # when adding a new linux version
-    #     # kernelPatches.cpu-cgroup-v2."4.11"
-    #     kernelPatches.modinst_arg_list_too_long
-    #     kernelPatches.bcm2835_mmal_v4l2_camera_driver # Only needed for 4.16!
-    #   ];
-  };
+  # linux_test = prev.linux_4_12.override {
+  #   ignoreConfigErrors=true;
+  #   autoModules = false;
+  #   kernelPreferBuiltin = true;
+  #   structuredExtraConfig = mininetConfigStructured;
+  # };
 
 
 

@@ -1,27 +1,74 @@
 { pkgs, lib, config, ... }:
 let 
-  gmailAccount = 
-    {
-      name = "gmail";
-      userName = "mattator";
-      realname = "Luke skywalker";
-      address = "mattator@gmail.com";
-      # todo make it optional ?
-      # store = home.homeDirectory + ./maildir/gmail;
-      sendHost = "smtp.gmail.com";
-      contactCompletion = "notmuch address";
+  gmailAccount = "toto";
+    # {
+    #   name = "gmail";
+    #   userName = "mattator";
+    #   realname = "Luke skywalker";
+    #   address = "mattator@gmail.com";
+    #   # todo make it optional ?
+    #   # store = home.homeDirectory + ./maildir/gmail;
+    #   sendHost = "smtp.gmail.com";
+    #   contactCompletion = "notmuch address";
 
-      configStore = "$HOME/dotfiles/hooks_perso";
-      # postSyncHook = ''hooks_perso/post-new 
-      #   # TODO je veux pouvoir ajouter mes tags
-      #   echo "hello world"
-      #   notmuch tag --input="$XDG_CONFIG_HOME/notmuch/ietf"
-      #   notmuch tag --input="$XDG_CONFIG_HOME/notmuch/foss"
-      # '';
+    #   configStore = "$HOME/dotfiles/hooks_perso";
+    #   # postSyncHook = ''hooks_perso/post-new 
+    #   #   # TODO je veux pouvoir ajouter mes tags
+    #   #   echo "hello world"
+    #   #   notmuch tag --input="$XDG_CONFIG_HOME/notmuch/ietf"
+    #   #   notmuch tag --input="$XDG_CONFIG_HOME/notmuch/foss"
+    #   # '';
 
-    };
+    # };
 in
 {
+  accounts.email.accounts = {
+    gmail = {
+
+      notmuch.enable = true;
+      # name = "gmail";
+      primary = true;
+      userName = "mattator";
+      realName = "Luke skywalker";
+      address = "mattator@gmail.com";
+      imap = {
+        host = "imap.gmail.com";
+        # port = 
+        # tls = 
+      };
+
+      smtp = {
+        host = "smtp.gmail.com";
+        port =  465 ; # or 25
+# Gmail SMTP port (TLS): 587
+# Gmail SMTP port (SSL): 465
+        # tls = 
+
+      };
+      
+      # TODO this should be made default
+      # maildirModule.path = "gmail";
+
+      # passwordCommand = "secret-tool lookup email me@example.org";
+      # maildir = 
+
+      # todo make it optional ?
+      # store = home.homeDirectory + ./maildir/gmail;
+      # contactCompletion = "notmuch address";
+    };
+
+    iij = {
+      notmuch.enable = true;
+      userName = "coudron@iij.ad.jp";
+      realName = "Matthieu Coudron";
+      address = "test@testjj.ad.jp";
+      imap = { host = "imap-tyo.iiji.jp"; };
+      smtp = { host = "mbox.iiji.jp"; };
+    #   # getLogin = "";
+    #   # getPass = "";
+    };
+
+  };
   # todo give it a name
   # mail = {
   #   accounts = [
@@ -43,6 +90,16 @@ in
   #   ];
 
   # };
+
+   # disabled for now, use mbsync instead
+   programs.offlineimap = {
+     enable = true;
+     # postSyncHook=''
+     #  notmuch --config=$XDG_CONFIG_HOME/notmuch/notmuchrc new
+     #   '';
+     # extraConfig = ''
+   };
+
 
    # TODO conditionnally define these
    programs.notmuch = {
@@ -114,15 +171,6 @@ in
 # translated = ♻
    };
 
-
-   # disabled for now, use mbsync instead
-   # programs.offlineimap = {
-   #   enable = true;
-   #   # postSyncHook=''
-   #   #  notmuch --config=$XDG_CONFIG_HOME/notmuch/notmuchrc new
-   #   #   '';
-   #   # extraConfig = ''
-   # };
 
 # [Account iij] # {{{
 # localrepository = iij-local

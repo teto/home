@@ -13,53 +13,6 @@
   # on home-manager master
   # home.accounts.mail.maildirModule
   
-  accounts.email.accounts = {
-    gmail = {
-
-      notmuch.enable = true;
-      # name = "gmail";
-      primary = true;
-      userName = "mattator";
-      realName = "Luke skywalker";
-      address = "mattator@gmail.com";
-      imap = {
-        host = "imap.gmail.com";
-        # port = 
-        # tls = 
-      };
-
-      smtp = {
-        host = "smtp.gmail.com";
-        port =  465 ; # or 25
-# Gmail SMTP port (TLS): 587
-# Gmail SMTP port (SSL): 465
-        # tls = 
-
-      };
-      
-      # TODO this should be made default
-      # maildirModule.path = "gmail";
-
-      # passwordCommand = "secret-tool lookup email me@example.org";
-      # maildir = 
-
-      # todo make it optional ?
-      # store = home.homeDirectory + ./maildir/gmail;
-      # contactCompletion = "notmuch address";
-    };
-
-    iij = {
-      notmuch.enable = true;
-      userName = "coudron@iij.ad.jp";
-      realName = "Matthieu Coudron";
-      address = "test@testjj.ad.jp";
-      imap = { host = "imap-tyo.iiji.jp"; };
-      smtp = { host = "mbox.iiji.jp"; };
-    #   # getLogin = "";
-    #   # getPass = "";
-    };
-
-  };
 
 
   home.packages = with pkgs; [
