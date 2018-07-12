@@ -1,5 +1,15 @@
 # home-manager specific config from
 { config, lib, pkgs,  ... }:
+let 
+
+  mbsyncConfig = {
+    enable = true;
+    # extraConfig = ''
+    #   '';
+
+    create = "maildir";
+  };
+  in
 {
   imports = [
     # Not tracked, so doesn't need to go in per-machine subdir
@@ -16,7 +26,14 @@
   accounts.email.accounts = {
     gmail = {
 
+      mbsync = mbsyncConfig;
+      alot.enable = true;
       notmuch.enable = true;
+      offlineimap = {
+        enable = true;
+        # postSyncHookCommand = ;
+      };
+
       # name = "gmail";
       primary = true;
       userName = "mattator";
@@ -48,16 +65,16 @@
       # contactCompletion = "notmuch address";
     };
 
-    iij = {
-      notmuch.enable = true;
-      userName = "coudron@iij.ad.jp";
-      realName = "Matthieu Coudron";
-      address = "test@testjj.ad.jp";
-      imap = { host = "imap-tyo.iiji.jp"; };
-      smtp = { host = "mbox.iiji.jp"; };
+    # iij = {
+    #   notmuch.enable = true;
+    #   userName = "coudron@iij.ad.jp";
+    #   realName = "Matthieu Coudron";
+    #   address = "test@testjj.ad.jp";
+    #   passwordCommand = "";
+    #   imap = { host = "imap-tyo.iiji.jp"; };
+    #   smtp = { host = "mbox.iiji.jp"; };
     #   # getLogin = "";
-    #   # getPass = "";
-    };
+    # };
 
   };
 

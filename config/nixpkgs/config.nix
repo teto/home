@@ -55,13 +55,13 @@
       name = "im-env";
       paths = with pkgs; [
         astroid
-        offlineimap # python 2 only
+        # offlineimap # python 2 only
         python27Packages.alot # python 2 only
         khal
         khard
-        msmtp
+        # msmtp
         newsbeuter
-        notmuch
+        # notmuch
         weechat
         # leafnode dovecot22 dovecot_pigeonhole fetchmail procmail w3m
         # mairix mutt msmtp lbdb contacts spamassassin
