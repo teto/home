@@ -1,6 +1,7 @@
 { pkgs, lib, config, ... }:
 let 
-  gmailAccount = "toto";
+# <<<<<<< HEAD
+  # gmailAccount = "toto";
     # {
     #   name = "gmail";
     #   userName = "mattator";
@@ -20,6 +21,8 @@ let
     #   # '';
 
     # };
+
+  keyringProg = pkgs.python3.withPackages(ps: with ps; [ secretstorage keyring pygobject3]);
 in
 {
   accounts.email.accounts = {
@@ -28,6 +31,11 @@ in
       notmuch.enable = true;
       # name = "gmail";
       primary = true;
+      name = "gmail";
+
+  gmailAccount = 
+    {
+      name = "gmail";
       userName = "mattator";
       realName = "Luke skywalker";
       address = "mattator@gmail.com";
@@ -36,7 +44,6 @@ in
         # port = 
         # tls = 
       };
-
       smtp = {
         host = "smtp.gmail.com";
         port =  465 ; # or 25
@@ -52,6 +59,7 @@ in
       # passwordCommand = "secret-tool lookup email me@example.org";
       # maildir = 
 
+      passwordCommand = "${keyringProg} get gmail pass";
       # todo make it optional ?
       # store = home.homeDirectory + ./maildir/gmail;
       # contactCompletion = "notmuch address";
@@ -171,6 +179,15 @@ in
 # translated = ♻
    };
 
+
+   # disabled for now, use mbsync instead
+   programs.offlineimap = {
+     enable = true;
+   #   # postSyncHook=''
+   #   #  notmuch --config=$XDG_CONFIG_HOME/notmuch/notmuchrc new
+   #   #   '';
+   #   # extraConfig = ''
+   };
 
 # [Account iij] # {{{
 # localrepository = iij-local

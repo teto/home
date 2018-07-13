@@ -433,6 +433,8 @@ in rec {
     '' ;
   });
 
+  # hardenedPackages = hardenedLinuxPackagesFor prev.linux_mptcp;
+
   # linux_test = prev.linux_4_12.override {
   #   ignoreConfigErrors=true;
   #   autoModules = false;

@@ -122,7 +122,7 @@ let
     universal-ctags
   ];
   imPkgs = with pkgs; [
-    offlineimap # python 2 only
+    # offlineimap # python 2 only
     # python27Packages.alot # python 2 only
     khal
     khard
@@ -195,6 +195,11 @@ rec {
   #     epkgs.magit
   #   ];
   # };
+
+  programs.mbsync = {
+
+    enable = true;
+  };
 
   programs.rofi = {
     enable = true;
