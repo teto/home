@@ -1,26 +1,12 @@
 { pkgs, lib, config, ... }:
 let 
-# <<<<<<< HEAD
-  # gmailAccount = "toto";
-    # {
-    #   name = "gmail";
-    #   userName = "mattator";
-    #   realname = "Luke skywalker";
-    #   address = "mattator@gmail.com";
-    #   # todo make it optional ?
-    #   # store = home.homeDirectory + ./maildir/gmail;
-    #   sendHost = "smtp.gmail.com";
-    #   contactCompletion = "notmuch address";
+  mbsyncConfig = {
+    enable = true;
+    # extraConfig = ''
+    #   '';
 
-    #   configStore = "$HOME/dotfiles/hooks_perso";
-    #   # postSyncHook = ''hooks_perso/post-new 
-    #   #   # TODO je veux pouvoir ajouter mes tags
-    #   #   echo "hello world"
-    #   #   notmuch tag --input="$XDG_CONFIG_HOME/notmuch/ietf"
-    #   #   notmuch tag --input="$XDG_CONFIG_HOME/notmuch/foss"
-    #   # '';
-
-    # };
+    create = "maildir";
+  };
 
   keyringProg = pkgs.python3.withPackages(ps: with ps; [ secretstorage keyring pygobject3]);
 in
@@ -28,14 +14,16 @@ in
   accounts.email.accounts = {
     gmail = {
 
+      mbsync = mbsyncConfig;
+      alot.enable = true;
       notmuch.enable = true;
+      offlineimap = {
+        enable = true;
+        # postSyncHookCommand = ;
+      };
+
       # name = "gmail";
       primary = true;
-      name = "gmail";
-
-  gmailAccount = 
-    {
-      name = "gmail";
       userName = "mattator";
       realName = "Luke skywalker";
       address = "mattator@gmail.com";
@@ -44,6 +32,7 @@ in
         # port = 
         # tls = 
       };
+
       smtp = {
         host = "smtp.gmail.com";
         port =  465 ; # or 25
@@ -59,54 +48,24 @@ in
       # passwordCommand = "secret-tool lookup email me@example.org";
       # maildir = 
 
-      passwordCommand = "${keyringProg} get gmail pass";
       # todo make it optional ?
       # store = home.homeDirectory + ./maildir/gmail;
       # contactCompletion = "notmuch address";
     };
 
-    iij = {
-      notmuch.enable = true;
-      userName = "coudron@iij.ad.jp";
-      realName = "Matthieu Coudron";
-      address = "test@testjj.ad.jp";
-      imap = { host = "imap-tyo.iiji.jp"; };
-      smtp = { host = "mbox.iiji.jp"; };
+    # iij = {
+    #   notmuch.enable = true;
+    #   userName = "coudron@iij.ad.jp";
+    #   realName = "Matthieu Coudron";
+    #   address = "test@testjj.ad.jp";
+    #   passwordCommand = "";
+    #   imap = { host = "imap-tyo.iiji.jp"; };
+    #   smtp = { host = "mbox.iiji.jp"; };
     #   # getLogin = "";
-    #   # getPass = "";
-    };
+    # };
 
   };
-  # todo give it a name
-  # mail = {
-  #   accounts = [
-  #   gmailAccount
-  #   {
-  #     name = "iij";
-  #     userName = "coudron@iij.ad.jp";
-  #     realname = "Matthieu Coudron";
-  #     address = "test@testjj.ad.jp";
-  #   #   # todo make it optional ?
-  #   #   store = "maildir/test";
-  #       imapHost = "imap-tyo.iiji.jp";
-  #     sendHost = "mbox.iiji.jp";
-  #     gpgKey = "964F62803989289BA07EA632A0AC3958A0362E2F";
-  #   #   sendHost = "smtp.gmail.com";
-  #   #   # getLogin = "";
-  #   #   # getPass = "";
-  #   }
-  #   ];
 
-  # };
-
-   # disabled for now, use mbsync instead
-   programs.offlineimap = {
-     enable = true;
-     # postSyncHook=''
-     #  notmuch --config=$XDG_CONFIG_HOME/notmuch/notmuchrc new
-     #   '';
-     # extraConfig = ''
-   };
 
 
    # TODO conditionnally define these
