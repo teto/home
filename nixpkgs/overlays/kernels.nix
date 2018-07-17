@@ -1,4 +1,4 @@
-self: prev:
+stlf: prev:
 
   with prev.lib.kernel;
 let
@@ -14,6 +14,8 @@ let
   # todo we could use isYes
   # system.requiredKernelConfig
 
+  # don't forget to suppress LOCALVERSION 
+  # LOCALVERSION_AUTO
 
   
 	# depends on !NF_CONNTRACK || \
@@ -181,9 +183,13 @@ SECCOMP y
       # 9P_FSCACHE
     '';
 
+    # to prevent kernel from adding a `+` when in a git repository
     localConfig = ''
 
       # LOCALVERSION -matt
+      LOCALVERSION ""
+      LOCALVERSION_AUTO n
+      EXTRAVERSION ""
       SYN_COOKIES n
 
       # poses problems see https://unix.stackexchange.com/questions/308870/how-to-load-compressed-kernel-modules-in-ubuntu
@@ -328,8 +334,8 @@ in rec {
       # rev = "c0b411996da32bf013af7ba39bd502eff60ac3ad";
       # sha256 = "07xrlpvl3hp5vypgzvnpz9m9wrjz51iqpgdi56jvqlzvhcymch7l";
 
-      rev = "de77de05db08c6a76fe6dcea69c63a3ec563ee6f";
-      sha256 = "07xrlpvl3hp5vypgzvnpz9m9wrjz51iqpgdi56jvqlzvhcymch7l";
+      rev = "c1f91c32ebd1d4bf38fc17756c61441c925135cb";
+      sha256 = "061zzlkjm3i1nhgnz3dfhbshjicrjc5ydwy6hr5l6y8cl2ps2iwf";
     };
 
     # src = prev.fetchgitPrivate {
@@ -342,7 +348,6 @@ in rec {
     modDirVersion="4.9.87";
     # modVersion="4.9.87";
     # modDirVersion="4.9.60-matt+";
-    # modDirVersion="4.9.60-00010-g5a1ca10181c6";
     name="mptcp-local";
 
     # TODO might need to revisit

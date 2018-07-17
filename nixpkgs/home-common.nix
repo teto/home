@@ -312,17 +312,23 @@ rec {
   };
 
 
-  # use mailProfiles ?
   programs.git = {
     enable = true;
+    # use accounts.email ?
     userName = "Matthieu Coudron";
     userEmail = "coudron@iij.ad.jp";
 	includes = [
 	  { path = config.xdg.configHome + "/git/config.inc"; }
 	];
+
     extraConfig=''
       [rebase]
-          autosquash = true
+        autosquash = true
+        autoStash = true
+
+      [pull]
+        rebase = true        
+
       [stash]
           showPatch = 1
       '';
