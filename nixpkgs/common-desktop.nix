@@ -165,5 +165,10 @@ in
     readOnlyStore = false;
   };
 
+
+  users.users.teto = {
+    shell = pkgs.zsh;
+  };
+
 }
 

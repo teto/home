@@ -187,9 +187,9 @@ SECCOMP y
     localConfig = ''
 
       # LOCALVERSION -matt
-      LOCALVERSION ""
+      # LOCALVERSION ""
       LOCALVERSION_AUTO n
-      EXTRAVERSION ""
+      # EXTRAVERSION ""
       SYN_COOKIES n
 
       # poses problems see https://unix.stackexchange.com/questions/308870/how-to-load-compressed-kernel-modules-in-ubuntu
@@ -210,6 +210,7 @@ SECCOMP y
 
       # this is a kernel I devised myself (hence the optional)
       MPTCP_PREVENANT? y
+      MPTCP_OWD_COMPENSATE? y
 
       IP_MULTIPLE_TABLES y
 
@@ -346,7 +347,7 @@ in rec {
     # };
 
     modDirVersion="4.9.87";
-    # modVersion="4.9.87";
+    modVersion="4.9.87";
     # modDirVersion="4.9.60-matt+";
     name="mptcp-local";
 

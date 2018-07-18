@@ -15,36 +15,49 @@ in
     gmail = {
 
       mbsync = mbsyncConfig;
-      alot.enable = true;
+      alot = {
+        enable = true;
+        extraConfig = ''
+          '';
+      };
       notmuch.enable = true;
       offlineimap = {
         enable = true;
         # postSyncHookCommand = ;
+
+        # extraConfig = 
+        # seens to work without it ?
+        # sslcacertfile= /etc/ssl/certs/ca-certificates.crt
+        # newer offlineimap > 6.5.4 needs this
+        # cert_fingerprint = 89091347184d41768bfc0da9fad94bfe882dd358
+        # name translations would need to be done in both repositories, but reverse
+        # prevent sync with All mail folder since it duplicates mail
+        # folderfilter = lambda foldername: foldername not in ['[Gmail]/All Mail','[Gmail]/Spam','[Gmail]/Important']
       };
 
-      # name = "gmail";
+
       primary = true;
       userName = "mattator";
       realName = "Luke skywalker";
       address = "mattator@gmail.com";
       imap = {
         host = "imap.gmail.com";
-        # port = 
-        # tls = 
+        tls = {
+          enable = true;
+          certificatesFile = "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
+        };
       };
 
       smtp = {
         host = "smtp.gmail.com";
-        port =  465 ; # or 25
-# Gmail SMTP port (TLS): 587
-# Gmail SMTP port (SSL): 465
-        # tls = 
-
+        port =  465 ;
       };
       
       # TODO this should be made default
       # maildirModule.path = "gmail";
 
+      # keyring get gmail login
+      # loginCommand = 
       # passwordCommand = "secret-tool lookup email me@example.org";
       # maildir = 
 
@@ -146,6 +159,15 @@ in
    #   #  notmuch --config=$XDG_CONFIG_HOME/notmuch/notmuchrc new
    #   #   '';
    #   # extraConfig = ''
+
+     pythonFile = ''
+		  import subprocess
+		  import keyring
+
+		  def get_pass (service, name):
+			  v = keyring.get_password(service, name)
+			  return v
+    '';
    };
 
 # [Account iij] # {{{

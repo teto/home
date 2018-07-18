@@ -9,7 +9,7 @@ in
     # ./desktopPkgs.nix
   ];
 
-  users.extraUsers.teto = {
+  users.users.teto = {
      isNormalUser = true; # creates home/ sets default shell
      uid = 1000;
      extraGroups = [
@@ -26,7 +26,7 @@ in
      ];
      # once can set initialHashedPassword too
      initialPassword = secrets.tetoInitialPassword;
-	 shell = pkgs.zsh;
+
      # TODO import it from desktopPkgs for instance ?
      # import basetools
      # packages = with pkgs; [
