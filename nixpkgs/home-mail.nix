@@ -7,7 +7,11 @@ let
 
     create = "maildir";
   };
-
+  my_tls = {
+	enable = true;
+	# certificatesFile = "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
+	certificatesFile = "/etc/ssl/certs/ca-certificates.crt";
+  };
   keyringProg = pkgs.python3.withPackages(ps: with ps; [ secretstorage keyring pygobject3]);
 in
 {
@@ -18,6 +22,7 @@ in
       alot = {
         enable = true;
         extraConfig = ''
+          # alot per-account extraConfig
           '';
       };
       notmuch.enable = true;
@@ -42,15 +47,13 @@ in
       address = "mattator@gmail.com";
       imap = {
         host = "imap.gmail.com";
-        tls = {
-          enable = true;
-          certificatesFile = "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
-        };
+        tls = my_tls;
       };
 
       smtp = {
         host = "smtp.gmail.com";
-        port =  465 ;
+        port =  587;
+        tls = my_tls;
       };
       
       # TODO this should be made default
@@ -58,7 +61,7 @@ in
 
       # keyring get gmail login
       # loginCommand = 
-      # passwordCommand = "secret-tool lookup email me@example.org";
+      passwordCommand = "${pkgs.libsecret}/bin/secret-tool lookup gmail password";
       # maildir = 
 
       # todo make it optional ?
@@ -114,12 +117,19 @@ in
       # reload config
       R = reload
       / = prompt search
-      [[thread]]
-      a = call hooks.apply_patch(ui)
-      ' ' = fold; untag unread; move next unfolded
+
+	  [[thread]]
+	  a = call hooks.apply_patch(ui)
+	  ' ' = fold; untag unread; move next unfolded
+
       '';
 
      extraConfig = {
+# editor_command
+# editor_spawn
+# attachment_prefix = ~/Downloads
+		# theme = "solarized";
+		editor_in_thread = "True";
         auto_remove_unread = "True";
         ask_subject = "False";
         handle_mouse = "True";
@@ -158,16 +168,25 @@ in
    #   # postSyncHook=''
    #   #  notmuch --config=$XDG_CONFIG_HOME/notmuch/notmuchrc new
    #   #   '';
-   #   # extraConfig = ''
 
-     pythonFile = ''
-		  import subprocess
-		  import keyring
+     extraConfig = ''
+# interval between updates (in minutes)
+autorefresh=0
+# in bytes
+maxsize=2000000
+# in daysA
+maxage=30
+synclabels= yes
+'';
 
-		  def get_pass (service, name):
-			  v = keyring.get_password(service, name)
-			  return v
-    '';
+  # pythonFile = ''
+# import subprocess
+# import keyring
+
+# def get_pass (service, name):
+	# v = keyring.get_password(service, name)
+	# return v
+    # '';
    };
 
 # [Account iij] # {{{
@@ -191,7 +210,7 @@ in
 # remoteuser = coudron@iij.ad.jp
 # realdelete = no
 # sslcacertfile = /etc/ssl/certs/ca-certificates.crt
-# # on gmail just remove tags, you really need to move files to trash folder
+#/bin/secret-tool # on gmail just remove tags, you really need to move files to trash folder
 # maxconnections = 3
 # # }}}
      #   '';

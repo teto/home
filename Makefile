@@ -47,7 +47,8 @@ keyring:
 	# echo " nix-shell -p python3Packages.secretstorage -p python36Packages.keyring -p python36Packages.pygobject3"
 	echo " nix-shell -p 'python.withPackages(ps: with ps; [secretstorage keyring pygobject3])' "
 	# or one can use secret-tool to store data
-	# secret-tool store --label msmtp host smtp.gmail.com service smtp user mattator
+	# records a list of attributes/value
+	# secret-tool store --label msmtp host smtp.gmail.com service smtp user mattator password XXXXX
 	#keyring set
 	nix-shell -p 'python.withPackages(ps: with ps; [secretstorage keyring pygobject3])' '<nixpkgs>' \
 	keyring set gmail login \
