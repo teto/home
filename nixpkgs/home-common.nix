@@ -113,6 +113,8 @@ let
     exa
     gdb
     gitAndTools.git-extras
+    htop
+    gitAndTools.git-crypt
     mypy # TODO move it to neovim dependency (but need to fetch the pythonEnv path then)
     neovim-remote
     nix-prefetch-scripts
@@ -122,8 +124,6 @@ let
     universal-ctags
   ];
   imPkgs = with pkgs; [
-    # offlineimap # python 2 only
-    # python27Packages.alot # python 2 only
     khal
     khard
     libsecret
@@ -177,7 +177,9 @@ rec {
   home.keyboard = {
     # layout = "fr,us";
     # options = [ "grp:caps_toggle" "grp_led:scroll" ];
+    # TODO can add Mod4 
     options = [ "add Mod1 Alt_R" ];
+    # options = [ "add Mod1 Alt_R" ];
   };
 
   # symlink machine specific config there
@@ -232,7 +234,6 @@ rec {
     ZDOTDIR="$XDG_CONFIG_HOME/zsh";
     WEECHAT_HOME="$XDG_CONFIG_HOME/weechat";
     TIGRC_USER="$XDG_CONFIG_HOME/tig/tigrc";
-    LESSHISTFILE="$XDG_CACHE_HOME/less/history";
     INPUTRC="$XDG_CONFIG_HOME/inputrc";
     IPYTHONDIR="$XDG_CONFIG_HOME/ipython";
     JUPYTER_CONFIG_DIR="$XDG_CONFIG_HOME/jupyter";
@@ -280,7 +281,6 @@ rec {
     historyIgnore=["ls"];
     # historyFile = "${xdg.cacheHome}/bash_history";
     historyFile = "$XDG_CACHE_HOME/bash_history";
-    # HISTFILE="$XDG_CACHE_HOME/bash_history";
     initExtra=''
       ${includeFzf}
       '';
