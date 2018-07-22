@@ -8,9 +8,9 @@ let
     create = "maildir";
   };
   my_tls = {
-	enable = true;
-	# certificatesFile = "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
-	certificatesFile = "/etc/ssl/certs/ca-certificates.crt";
+    enable = true;
+    # certificatesFile = "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
+    certificatesFile = "/etc/ssl/certs/ca-certificates.crt";
   };
   keyringProg = pkgs.python3.withPackages(ps: with ps; [ secretstorage keyring pygobject3]);
 in
@@ -21,17 +21,17 @@ in
       mbsync = mbsyncConfig;
       alot = {
         enable = true;
+      };
+      notmuch.enable = true;
+      offlineimap = {
+        enable = true;
+        # postSyncHookCommand = ;
         extraConfig = ''
           # alot per-account extraConfig
           # The startdate option expects a date in the format yyyy-mm-dd.
           # can't be used with maxage
           # startdate = 2018-04-01
           '';
-      };
-      notmuch.enable = true;
-      offlineimap = {
-        enable = true;
-        # postSyncHookCommand = ;
 
         # extraConfig = 
         # seens to work without it ?
@@ -58,7 +58,7 @@ in
         port =  587;
         tls = my_tls;
       };
-      
+
       # TODO this should be made default
       # maildirModule.path = "gmail";
 
@@ -105,7 +105,7 @@ in
    programs.alot = {
      enable = true;
 
-     sendCommand = config.programs.msmtp.sendCommand;
+     # sendCommand = config.programs.msmtp.sendCommand;
      # mta type
      # contactCompletionCommand
      # createAliases=true;
@@ -117,29 +117,25 @@ in
      #  mailinglists = lisp@ietf.org, taps@ietf.org 
      # see https://github.com/pazz/alot/wiki/Tips,-Tricks-and-other-cool-Hacks for more ideas
      bindings = ''
-      # reload config
-      R = reload
-      / = prompt search
+# reload config
+R = reload
+/ = prompt search
 
-	  [[thread]]
-	  a = call hooks.apply_patch(ui)
-	  ' ' = fold; untag unread; move next unfolded
+[[thread]]
+a = call hooks.apply_patch(ui)
+' ' = fold; untag unread; move next unfolded
+'';
 
-      '';
-
-     extraConfig = {
 # editor_command
 # editor_spawn
 # attachment_prefix = ~/Downloads
-		# theme = "solarized";
-		editor_in_thread = "True";
-        auto_remove_unread = "True";
-        ask_subject = "False";
-        handle_mouse = "True";
-        # per account values !
-        # sign_by_default = "True";
-        # encrypt_by_default = "False";
-     };
+        # theme = "solarized";
+     extraConfig = ''
+        editor_in_thread = True
+        auto_remove_unread = True
+        ask_subject = False
+        handle_mouse = True
+     '';
 
 # TODO add as a string  extraConfigStr
 # [tags]
@@ -192,8 +188,8 @@ synclabels= yes
 # import keyring
 
 # def get_pass (service, name):
-	# v = keyring.get_password(service, name)
-	# return v
+    # v = keyring.get_password(service, name)
+    # return v
     # '';
    };
 

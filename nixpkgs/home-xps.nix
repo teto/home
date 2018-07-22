@@ -17,7 +17,6 @@ let
       # ./mptcp-kernel.nix
       # symlink towards a config
     ]
-    ++ lib.optional (true) ./home-mail.nix
     ;
 
   # on home-manager master

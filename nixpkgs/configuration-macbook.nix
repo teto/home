@@ -14,13 +14,8 @@ let
 
     ./common-desktop.nix
     # ./modules/libvirtd.nix
-    ./config-all.nix
-    ./common-desktop.nix
     ./modules/network-manager.nix
     ./modules/libvirtd.nix
-
-    # for user teto
-    ./extraTools.nix
 
     # for user teto
     ./extraTools.nix
@@ -51,14 +46,14 @@ let
     "kvm" "kvm-intel" # for virtualisation
   ];
 
-  boot.kernel.sysctl = {
-    # to not provoke the kernel into crashing
-    "net.ipv4.tcp_timestamps" = 0;
-    "net.ipv4.ipv4.ip_forward" = 1;
-    # "net.ipv4.tcp_keepalive_time" = 60;
-    # "net.core.rmem_max" = 4194304;
-    # "net.core.wmem_max" = 1048576;
-  };
+  # boot.kernel.sysctl = {
+  #   # to not provoke the kernel into crashing
+  #   "net.ipv4.tcp_timestamps" = 0;
+  #   "net.ipv4.ipv4.ip_forward" = 1;
+  #   # "net.ipv4.tcp_keepalive_time" = 60;
+  #   # "net.core.rmem_max" = 4194304;
+  #   # "net.core.wmem_max" = 1048576;
+  # };
 
   networking.hostName = "jedha"; # Define your hostname.
 

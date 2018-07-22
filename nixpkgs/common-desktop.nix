@@ -12,7 +12,8 @@ in
   imports = [
     # todo renommer en workstation
     # ./hardware-dell.nix
-    /etc/nixos/hardware-configuration.nix
+    # /etc/nixos/hardware-configuration.nix
+    ./config-all.nix
 
     ./modules/ntp.nix
     ./modules/network-manager.nix

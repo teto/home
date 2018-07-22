@@ -183,11 +183,12 @@ rec {
   };
 
   # symlink machine specific config there
-  # imports = [
-  #     ./basetools.nix
-  #     ./extraTools.nix
-  #     ./desktopPkgs.nix
-  #     ];
+  imports = [
+    ./home-mail.nix
+    # ./basetools.nix
+    #   ./extraTools.nix
+    #   ./desktopPkgs.nix
+      ];
 
   programs.feh.enable = true;
   # programs.emacs = {
