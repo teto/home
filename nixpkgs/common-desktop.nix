@@ -91,8 +91,8 @@ in
         ubuntu_font_family
         inconsolata # monospace
         noto-fonts-cjk # asiatic
-        nerdfonts
-        corefonts # microsoft fonts 
+        # nerdfonts
+        # corefonts # microsoft fonts  UNFREE 
         dejavu_fonts
         # Adobe Source Han Sans
         sourceHanSansPackages.japanese
@@ -127,6 +127,10 @@ in
 
   # seemingly working for chromium only, check for firefox
   programs.browserpass.enable = true;
+
+  nixpkgs.config = {
+    allowUnfree = true;
+  };
 
   nix = {
 
