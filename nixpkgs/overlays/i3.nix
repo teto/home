@@ -174,19 +174,6 @@ rec {
     };
   });
 
-  flent-local = super.flent.overrideAttrs ( oa: {
-
-    src = /home/teto/flent;
-    doCheck = false;
-  });
-
-  netperf-local =super.netperf.overrideAttrs ( oa: {
-
-    # src = /home/teto/flent;
-    patches = [ ./pkgs/netperf.diff ];
-    doCheck = false;
-  });
-
   # to help debug a neovim crash
   # unibilium = super.unibilium.overrideAttrs (old: {
   #   separateDebugInfo = true;

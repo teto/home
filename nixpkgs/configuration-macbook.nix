@@ -14,7 +14,13 @@ let
 
     ./common-desktop.nix
     # ./modules/libvirtd.nix
+    ./config-all.nix
+    ./common-desktop.nix
     ./modules/network-manager.nix
+    ./modules/libvirtd.nix
+
+    # for user teto
+    ./extraTools.nix
 
     # for user teto
     ./extraTools.nix

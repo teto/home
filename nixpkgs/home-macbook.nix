@@ -3,5 +3,5 @@
   imports = [
     ./home-common.nix
   ];
-  home.keyboard.layout = "fr,us";
+  # home.keyboard.layout = "fr,us";
 }
