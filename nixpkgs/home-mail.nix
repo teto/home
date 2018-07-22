@@ -23,6 +23,9 @@ in
         enable = true;
         extraConfig = ''
           # alot per-account extraConfig
+          # The startdate option expects a date in the format yyyy-mm-dd.
+          # can't be used with maxage
+          # startdate = 2018-04-01
           '';
       };
       notmuch.enable = true;
@@ -172,10 +175,15 @@ in
      extraConfig = ''
 # interval between updates (in minutes)
 autorefresh=0
+
+[DEFAULT]
 # in bytes
+# The startdate option expects a date in the format yyyy-mm-dd.
+# can't be used with maxage
+# startdate = 2018-04-01
 maxsize=2000000
-# in daysA
-maxage=30
+# works only with local folders of type maildir in daysA
+# maxage=30
 synclabels= yes
 '';
 
