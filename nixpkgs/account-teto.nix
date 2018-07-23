@@ -4,6 +4,7 @@ let
 in
 {
   imports = [
+    "${builtins.fetchTarball https://github.com/rycee/home-manager/archive/master.tar.gz}/nixos"
 
     ./extraTools.nix
     # ./desktopPkgs.nix
@@ -39,4 +40,12 @@ in
   };
 
   # TODO add a group teto ?
+
+  # kinda experimental
+  # see https://github.com/rycee/home-manager/issues/252 for why it should be a function
+  # home-manager.users.teto = { ... }:
+  # {
+    # fails for now
+    # imports = [ ./home-common.nix ];
+  # };
 }

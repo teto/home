@@ -193,6 +193,10 @@ synclabels= yes
     # '';
    };
 
+  programs.mbsync = {
+    enable = true;
+  };
+
 # [Account iij] # {{{
 # localrepository = iij-local
 # remoterepository = iij-remote

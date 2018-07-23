@@ -18,6 +18,8 @@ with pkgs; [
      gnum4 # hum
      gnupg
      gnumake
+     htop
+
      # ipsecTools # does it provide ipsec ?
      neovim # TODO remake a custom one
      pkgconfig

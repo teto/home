@@ -13,89 +13,59 @@ let
 {
   imports = [
     # Not tracked, so doesn't need to go in per-machine subdir
-      ./home-common.nix
-      # ./mptcp-kernel.nix
+      # ./home-common-headless.nix
+      ./home-desktop.nix
+
+      ./home-mail.nix
       # symlink towards a config
     ]
     ;
 
   # on home-manager master
   # home.accounts.mail.maildirModule
-  
+  programs.feh.enable = true;
 
   home.packages = with pkgs; [
     # touchegg # won't work anymore apparently
     # libinput-gestures
-    rofi
+    # rofi
     # netperf # check for man; netserver to start
   ];
-  # we want us,fr !
-  # home.keyboard.layout = "fr,us";
-  home.keyboard.options = [
-    # "grp:caps_toggle" "grp_led:scroll"
-  ];
+
+  # you can switch from cli with xkb-switch
+  # or xkblayout-state
+  home.keyboard = {
+    # layout = "fr,us";
+    # options = [ "grp:caps_toggle" "grp_led:scroll" ];
+    # TODO can add Mod4 
+    options = [ "add Mod1 Alt_R" ];
+    # options = [ "add Mod1 Alt_R" ];
+  };
+
+  programs.home-manager = {
+    enable = true;
+    # path = https://github.com/rycee/home-manager/archive/master.tar.gz;
+    # failshome.folder +
+    # must be a string
+    path =  "/home/teto/home-manager";
+  };
   
   # for blue tooth applet; must be installed systemwide
   services.blueman-applet.enable = true;
 
-  programs.bash = {
-    # goes to .profile
-    enableAutojump = true;
-    sessionVariables = {
-      # HISTFILE="$XDG_CACHE_HOME/bash_history";
-    };
-  };
+  # programs.bash = {
+  #   # goes to .profile
+  #   sessionVariables = {
+  #     # HISTFILE="$XDG_CACHE_HOME/bash_history";
+  #   };
+  # };
 
   # does not exist
   # programs.adb.enable = true;
 
   xsession.initExtra = ''
     xrandr --output  eDP1 --mode 1600x900
-    '';
-
-  programs.fzf = {
-    enableZshIntegration = true;
-  };
-
-  programs.zsh = {
-    enable = true;
-    dotDir = "${config.xdg.configHome}/zsh";
-    # dotDir = ".config/zsh";
-    sessionVariables = {
-      # HISTFILE="$XDG_CACHE_HOME/zsh_history";
-    };
-    history.save = 10000;
-    history.ignoreDups = true;
-    history.path = "$XDG_CACHE_HOME/zsh_history";
-    history.share = true;
-    history.size = 10000;
-    shellAliases = {
-    } // config.programs.bash.shellAliases;
-    # plugins = 
-    # loginExtra=
-    initExtra = ''
-      alias -s html=qutebrowser
-      alias -s json=nvim
-      alias -s Vagrantfile=nvim
-      alias -s png=sxiv
-      alias -s jpg=xdg-open
-      alias -s gif=xdg-open
-      alias -s avi=mpv
-      alias -s mp3=mocp
-      alias -s pdf=xdg-open
-      alias -s doc=xdg-open
-      alias -s docx=xdg-open
-
-      source ${pkgs.autojump}/share/autojump/autojump.zsh
-
-      # VERY IMPORTANT else zsh can eat last line
-      setopt prompt_sp
-      source $ZDOTDIR/zshrc
-    '';
-  };
-
-    # TODO add to zsh config
-    # . "$ZDOTDIR/transfer.zsh"
+  '';
 
 }
 

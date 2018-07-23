@@ -1,4 +1,4 @@
-{ pkgs, lib, texliveEnv, ...} @ args:
+{ pkgs, lib, ...} @ args:
 {
     enable = true;
     withPython3 = true;
