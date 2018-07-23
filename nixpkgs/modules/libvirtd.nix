@@ -33,14 +33,21 @@
       # # same when creating the pool
       # user="teto"
       # group="libvirtd"
+
     qemuVerbatimConfig = ''
+      # https://github.com/libvirt/libvirt/blob/master/src/qemu/qemu.conf
       namespaces = []
       # # Whether libvirt should dynamically change file ownership
       # # dynamic_ownership = 1
       # # be careful for network teto might make if fail
       # # same when creating the pool
       user="teto"
-      group="libvirtd"
+      group="users"
+      
+      # Whether libvirt should dynamically change file ownership
+      # to match the configured user/group above. Defaults to 1.
+      # Set to 0 to disable file ownership changes.
+      dynamic_ownership = 0
     '';
 
       extraOptions= [ "--verbose" ];

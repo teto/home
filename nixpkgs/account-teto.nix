@@ -22,7 +22,6 @@ in
        "wireshark"
        "plugdev" # for udiskie
        "jupyter"
-       "mininet"
        # "kvm" # don't think that's needed 
      ];
      # once can set initialHashedPassword too
