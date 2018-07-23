@@ -109,6 +109,15 @@ let
     secrets = ["/etc/ipsec.d"];
   };
 
+  services.nfs.server = {
+    enable = true;
+    # nproc
+    # statdPort
+    # hostName = 
+    # extraNfsdConfig = 
+    # createMountPoints = 
+    # exports = 
+  };
 
 
 }
