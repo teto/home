@@ -21,18 +21,21 @@ let
   devPkgs = with pkgs; [
     cabal-install
     cabal2nix
-    nox # helps with reviewing and to install files
-    # ccache # breaks some builds ?
-    ncurses.dev # for infocmp
-    git-review # to contribute to wireshark
-    gitAndTools.diff-so-fancy
-    gitAndTools.git-recent
     editorconfig-core-c
     exa
     gdb
+    git-review # to contribute to wireshark
+    gitAndTools.diff-so-fancy
+    # https://github.com/felipec/git-remote-hg
+    gitAndTools.git-remote-hg
+    gitAndTools.git-recent
+    gitAndTools.git-annex
     gitAndTools.git-extras
     gitAndTools.git-crypt
     mypy # TODO move it to neovim dependency (but need to fetch the pythonEnv path then)
+    nox # helps with reviewing and to install files
+    # ccache # breaks some builds ?
+    ncurses.dev # for infocmp
     neovim-remote
     nix-prefetch-scripts
     nix-index
@@ -117,7 +120,7 @@ in
   ];
 
   home.packages = desktopPkgs ++ devPkgs ++ heavyPackages
-   # ++ imPkgs
+   ++ imPkgs
    ;
 
   programs.neovim = import ./neovim.nix {
