@@ -85,6 +85,7 @@ let
     # taiginijisho # japanse dict; like zkanji Qt based
     unstable.transmission_gtk
     xdotool # needed for vimtex + zathura
+    xarchiver # to unpack/pack files
     xorg.xev
     xorg.xbacklight
     xclip
@@ -364,7 +365,7 @@ in
 #bindsym $mod+agrave workspace 10
         "${mod}+Tab"="exec \"${pkgs.rofi}/bin/rofi -modi 'run,drun,window,ssh' -show run\"";
         "${mod}+Ctrl+L"="exec ${pkgs.i3lock-fancy}/bin/i3lock-fancy";
-        "${mod}+Ctrl+h" = ''exec "${pkgs.rofi}/bin/rofi -modi 'clipboard:greenclip print' -show clipboard"'';
+        # "${mod}+Ctrl+h" = ''exec "${pkgs.rofi}/bin/rofi -modi 'clipboard:greenclip print' -show clipboard"'';
         "${mod}+ctrl+b" = "exec " + ../buku_run/buku_run;
         # "${mod}+shift+n" = "exec ${unstable.gnome3.nautilus}/bin/nautilus";
         # "${mod}+quotedbl" =  "exec ${unstable.qutebrowser}/bin/qutebrowser";

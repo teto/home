@@ -127,11 +127,7 @@ rec {
       nixpaste="curl -F \"text=<-\" http://nixpaste.lbr.uno";
     };
 
-# fonts.fontconfig.enableProfileFonts
 
-
-    # extra
-    # ${ranger}/share/doc/ranger/examples/bash_automatic_cd.sh
   };
 
 

@@ -52,7 +52,6 @@ alias llt="ls -ltr"
 # alias v="nvim"
 #alias n="nvim"
 alias m="mutt -F \"\$XDG_CONFIG_HOME/mutt/muttrc\""
-# alias r="ranger"
 # view uses vim as a pager
 alias l="nvim +view"
 alias s="sxiv"

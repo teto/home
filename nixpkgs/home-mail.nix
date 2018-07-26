@@ -116,15 +116,16 @@ in
      # initial_command = bufferlist; taglist; search foo; search bar; buffer 0
      #  mailinglists = lisp@ietf.org, taps@ietf.org 
      # see https://github.com/pazz/alot/wiki/Tips,-Tricks-and-other-cool-Hacks for more ideas
-     bindings = ''
-# reload config
-R = reload
-/ = prompt search
-
-[[thread]]
-a = call hooks.apply_patch(ui)
-' ' = fold; untag unread; move next unfolded
-'';
+     bindings = {
+        global = {
+          R = "reload";
+          "/" = "prompt search ";
+        };
+        thread = {
+          a = "call hooks.apply_patch(ui)";
+          "' '" = "fold; untag unread; move next unfolded";
+        };
+      };
 
 # editor_command
 # editor_spawn

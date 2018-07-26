@@ -6,7 +6,7 @@ with pkgs; [
      binutils
      cmake
      curl
-     fd # replaces 'find'
+     fd  # replaces 'find'
      file
 	 fzf
      # lgogdownloader
@@ -30,7 +30,7 @@ with pkgs; [
      # https://unix.stackexchange.com/questions/107885/busy-device-on-umount
      psmisc
      pv # monitor copy progress
-     # ranger
+     ranger
      rsync
      ripgrep
      stow
