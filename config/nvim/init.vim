@@ -998,8 +998,11 @@ let g:Powerline_symbols = "fancy" " to use unicode symbols
 " Csv config {{{
 " you can use :CsvVertFold to hide commands
 " There is the analyze command as well
-    let g:csv_autocmd_arrange = 1
-    let g:csv_autocmd_arrange_size = 1024*1024
+let g:csv_autocmd_arrange = 0
+let g:csv_autocmd_arrange_size = 1024*1024
+
+" call InitCSV after changing this value
+" :let g:csv_delim=','
 " }}}
 " unicode.vim {{{
 " overrides ga

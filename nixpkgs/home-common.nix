@@ -204,20 +204,26 @@ rec {
 
   programs.zsh = {
     enable = true;
-    dotDir = "${config.xdg.configHome}/zsh";
-    # dotDir = ".config/zsh";
+    # dotDir = "${config.xdg.configHome}/zsh";
+    dotDir = ".config/zsh";
     sessionVariables = {
       # HISTFILE="$XDG_CACHE_HOME/zsh_history";
     };
-    history.save = 10000;
-    history.ignoreDups = true;
-    history.path = "$XDG_CACHE_HOME/zsh_history";
-    history.share = true;
-    history.size = 10000;
+    history = {
+        save = 10000000;
+        ignoreDups = true;
+        # defined as HISTFILE="$HOME/${cfg.history.path}"
+        # https://github.com/nsnam/bake-git
+        # TODO fix
+        path = ".cache/zsh_history";
+        share = true;
+        extended = true; # save timestamp
+    };
     shellAliases = {
     } // config.programs.bash.shellAliases;
     # plugins = 
     # loginExtra=
+    # profileExtra
     initExtra = ''
       alias -s html=qutebrowser
       alias -s json=nvim

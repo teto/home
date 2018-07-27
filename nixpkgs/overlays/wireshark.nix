@@ -3,8 +3,26 @@ let
   filter-cmake = builtins.filterSource (p: t: super.lib.cleanSourceFilter p t && baseNameOf p != "build");
   # won't work on sandboxed
   wiresharkFolder = /home/teto/wireshark;
+
+  src = self.fetchFromGitHub {
+      repo   ="wireshark";
+      owner  ="teto";
+      rev    = "9ca8a9f87c4e340f7e4d44c4c32dfc74afec29fa";
+      sha256 = "1wqqk63y8zfbfgih99pvwf8za03wj005f0icf1knp94d720m76ka";
+    };
 in
   {
+
+  wireshark-dev-stable = super.wireshark.overrideAttrs (oldAttrs: {
+    name = "wireshark-dev-stable";
+    inherit src;
+  });
+
+  tshark-dev-stable = super.tshark.overrideAttrs (oldAttrs: {
+    name = "wireshark-dev-stable";
+    inherit src;
+  });
+
   wireshark-local = super.wireshark.overrideAttrs (oldAttrs: {
     name = "wireshark-dev";
     src = filter-cmake wiresharkFolder;

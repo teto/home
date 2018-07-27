@@ -12,7 +12,7 @@ final: prev:
 
   mptcpanalyzer = prev.python3Packages.callPackage ./mptcpanalyzer {
     # tshark = self.pkgs.tshark-reinject-stable; 
-    tshark = final.pkgs.tshark-local;
+    tshark = final.pkgs.tshark-dev-stable;
   };
 
   # http-getter = prev.python3Packages.callPackage ./http-getter { } ;
