@@ -32,7 +32,7 @@ let
 
   fileSystems."/mnt/ext" =
     { device = "/dev/sda4";
-    options = [ "user" ];
+    options = [ "user" "exec" ];
     };
 
 

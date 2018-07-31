@@ -242,6 +242,14 @@ rec {
       # VERY IMPORTANT else zsh can eat last line
       setopt prompt_sp
       source $ZDOTDIR/zshrc
+
+      # used to compile bpf stuff
+      __bcc() {
+              clang -O2 -emit-llvm -c $1 -o - | \
+              llc -march=bpf -filetype=obj -o "`basename $1 .c`.o"
+      }
+
+      # alias bcc=__bcc
     '';
   };
 
