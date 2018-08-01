@@ -201,7 +201,7 @@ SECCOMP y
     VIRTIO_NET        = yes;
     VIRTIO_CONSOLE    = yes;
 
-    NET_9P_VIRTIO = optional yes;
+    NET_9P_VIRTIO = option yes;
 
       HW_RANDOM_VIRTIO     = yes;
       # VIRTIO_MMIO_CMDLINE_DEVICES
@@ -266,6 +266,21 @@ SECCOMP y
       # 9P_FSCACHE
     '';
 
+    net9pConfigStructured = {
+
+      # for qemu/libvirt shared folders
+      NET_9P = yes;
+      # generates 
+      # repeated question:   9P Virtio Transport at /nix/store/l6m0lgcrls587pz0i644jhfjk6lyj55s-generate-config.pl line 8
+      NET_9P_DEBUG = yes;
+      "9P_FS" = yes;
+      "9P_FS_POSIX_ACL" = yes;
+
+      # unsur 
+      # 9P_FS_SECURITY
+      # 9P_FSCACHE
+    };
+
     # to prevent kernel from adding a `+` when in a git repository
     localConfig = ''
 
@@ -282,6 +297,10 @@ SECCOMP y
     '';
 
     localConfigStructured = {
+
+      # needed for tc-bpf
+      CRYPTO_USER_API=yes;
+      CRYPTO_USER_API_HASH=yes;
 
       # LOCALVERSION -matt
       # LOCALVERSION ""
@@ -436,16 +455,13 @@ in rec {
       + net9pConfig
       ;
 
-  # TODO use this platform to build the various kernels
-  # this won t be used by nixops ?
-  test-platform =  {
-    name="zizou";
-    kernelAutoModules = false;
-    kernelExtraConfig = mptcpKernelExtraConfig;
-    ignoreConfigErrors = true;
 
-    kernelPreferBuiltin = true;
-  };
+  mptcpStructuredExtraConfig = mkMerge [
+    kvmConfigStructured
+    debugConfigStructured
+    net9pConfig
+  ];
+
 
   # builtins.currentSystem returns "x86_64-linux"
   test-localSystem = let system = prev.lib.systems.elaborate { system = builtins.currentSystem; };
@@ -465,7 +481,7 @@ in rec {
       autoModules = false;
       kernelPreferBuiltin = true;
 
-      extraConfig=mptcpKernelExtraConfig;
+      extraConfig = mptcpKernelExtraConfig;
 
   });
 

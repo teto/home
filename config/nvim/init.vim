@@ -1128,12 +1128,15 @@ let g:neomake_build_folder_maker = {
     \ 'buffer_output': 0
     \ }
 
+" let g:neomake_open_list=2
+
 " will run nix-shell
+" source $stdenv/setup
 let g:neomake_buildPhase_maker = {
-    \ 'exe': 'nix-shell',
+    \ 'exe': '/home/teto/dotfiles/bin/nix-shell-maker.sh',
     \ 'args': [],
     \ 'errorformat': '%f:%l:%c: %m',
-    \ 'remove_invalid_entries': 1,
+    \ 'remove_invalid_entries': 0,
     \ 'buffer_output': 0
     \ }
 
@@ -2240,7 +2243,7 @@ colorscheme molokai
 
 " }}}
 " set guicursor="n-v-c:block-Cursor/lCursor,ve:ver35-Cursor,o:hor50-Cursor,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor,sm:block-Cursor"
-set guicursor=n-v-c:block-Cursor/lCursor,ve:ver35-Cursor,o:hor50-Cursor,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor
+set guicursor=n-v-c:block-blinkon250-Cursor/lCursor,ve:ver35-Cursor,o:hor50-Cursor,i-ci:ver25-blinkon250-Cursor/lCursor,r-cr:hor20-Cursor/lCursor
 " set guicursor=i:ver3,n:block-blinkon10-Cursor,r:hor50
 highl Cursor ctermfg=16 ctermbg=253 guifg=#000000 guibg=#00FF00
 " highl lCursor ctermfg=16 ctermbg=253 guifg=#000000 guibg=#00FF00
