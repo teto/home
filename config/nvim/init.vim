@@ -19,7 +19,9 @@ map <D-b> :echom "hello papy"
 " TODO move to XDG_DATA_HOME
 " let s:nvimdir = (exists("$XDG_CONFIG_HOME") ? $XDG_CONFIG_HOME : $HOME.'/.config').'/nvim'
 " appended site to be able to use packadd (since it is in packpath)
-let s:nvimdir = (exists("$XDG_DATA_HOME") ? $XDG_DATA_HOME : $HOME.'/.local/share').'/nvim'
+" TODO use stdpath now
+let s:nvimdir = stdpath('data')
+" (exists("$XDG_DATA_HOME") ? $XDG_DATA_HOME : $HOME.'/.local/share').'/nvim'
 let s:plugscript = s:nvimdir.'/autoload/plug.vim'
 let s:plugdir = s:nvimdir.'/site/pack'
 
@@ -897,6 +899,7 @@ function! FzfChooseSignifyGitCommit()
   let dict.sink = funcref('UpdateSignifyBranch')
   call fzf#run(dict)
 endfunction
+command! SignifyChooseBranch call FzfChooseSignifyGitCommit()
 
 " function! GetQfHistory()
 
@@ -1132,6 +1135,7 @@ let g:neomake_build_folder_maker = {
 
 " will run nix-shell
 " source $stdenv/setup
+" \ 'cwd': getcwd().'/build',
 let g:neomake_buildPhase_maker = {
     \ 'exe': '/home/teto/dotfiles/bin/nix-shell-maker.sh',
     \ 'args': [],
@@ -1139,6 +1143,19 @@ let g:neomake_buildPhase_maker = {
     \ 'remove_invalid_entries': 0,
     \ 'buffer_output': 0
     \ }
+
+function! RunBuildPhase()
+
+  if isdirectory("build")
+    let g:neomake_buildPhase_maker.cwd = getcwd().'/build'
+  else 
+    unlet g:neomake_buildPhase_maker.cwd
+  endif
+  Neomake! buildPhase
+
+endfunc 
+
+command! BuildPhase call RunBuildPhase()
 
 let g:neomake_verbose = 1
 
