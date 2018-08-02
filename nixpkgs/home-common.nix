@@ -24,22 +24,16 @@ let
 in
 rec {
   news.display = "silent";
-  # home.packages = [
-  #   pkgs.ranger 
-  # ]
-  # ++ cliUtils
-  # ;
-
 
   # works only because TIGRC_USER is set
   # if file exists vim.tigrc
   home.file."${config.xdg.configHome}/tig/tigrc".text = let 
-    tigrc = "${pkgs.tig}/etc/vim.tigrc";
+    vimTigrc = "${pkgs.tig}/etc/vim.tigrc";
   in 
-  # if (builtins.pathExists tigrc) then 
-  (builtins.readFile tigrc) 
-  # else ""
-  ;
+  lib.concatStrings [
+    (builtins.readFile vimTigrc) 
+    (builtins.readFile "${pkgs.tig}/tig/contrib/large-repo.tigrc") 
+  ];
 
 
   # home.file.".gdbinit".source = ../config/gdbinit_simple;

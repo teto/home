@@ -156,7 +156,6 @@ Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' } " :h Lan
 " Plug 'tjdevries/nvim-langserver-shim' " for LSP
 " Plug 'powerman/vim-plugin-AnsiEsc' " { to hl ESC codes
 Plug 'junegunn/gv.vim' " git commit viewer :Gv
-" Plug 'git@github.com:xolox/vim-easytags.git' "
 " Plug 'mhinz/vim-halo' " to hight cursor line
 Plug 'ludovicchabant/vim-gutentags' " automatic tag generation, very good
 Plug 'junegunn/goyo.vim', {'on': 'Goyo'} "distraction free writing

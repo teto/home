@@ -281,6 +281,18 @@ SECCOMP y
       # 9P_FSCACHE
     };
 
+    lklConfig = {
+      # make ARCH=lkl 
+      LKL_HOST = yes;
+      LKL_STATIC = yes;
+      LKL_SHARED = yes;
+      # LKL example tools
+      LKL_FUSE = yes;
+      LKL_CPTOFS = yes;
+      LKL_FS2TAR = yes;
+      LKL_HIJACK = yes;
+    };
+
     # to prevent kernel from adding a `+` when in a git repository
     localConfig = ''
 
