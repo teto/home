@@ -45,12 +45,12 @@ let
   ];
 
   imPkgs = with pkgs; [
-    khal
+    # khal # => vdirsyncer !
     khard
     libsecret
     newsboat
     slack
-    vdirsyncer
+    # vdirsyncer
     weechat
     # leafnode dovecot22 dovecot_pigeonhole fetchmail procmail w3m
     # mairix mutt msmtp lbdb contacts spamassassin
@@ -142,6 +142,8 @@ in
     enable = true;
     # package = unstable.firefox;
   #   enableAdobeFlash = false;
+
+    # enableBukubrow = true;
   };
 
   programs.browserpass = {

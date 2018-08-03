@@ -50,11 +50,11 @@ rec {
      jailbreak = true;
   });
 
-  offlineimap = super.offlineimap.overrideAttrs (oldAttrs: {
-    # pygobject2
-    # USERNAME 	echo " nix-shell -p python3Packages.secretstorage -p python36Packages.keyring -p python36Packages.pygobject3"
-    propagatedBuildInputs = with super.pythonPackages; oldAttrs.propagatedBuildInputs ++ [ secretstorage keyring pygobject3  ];
-  });
+  # offlineimap = super.offlineimap.overrideAttrs (oldAttrs: {
+  #   # pygobject2
+  #   # USERNAME 	echo " nix-shell -p python3Packages.secretstorage -p python36Packages.keyring -p python36Packages.pygobject3"
+  #   propagatedBuildInputs = with super.pythonPackages; oldAttrs.propagatedBuildInputs ++ [ secretstorage keyring pygobject3  ];
+  # });
 
   vdirsyncer-custom = super.vdirsyncer.overrideAttrs(oldAttrs: rec {
 

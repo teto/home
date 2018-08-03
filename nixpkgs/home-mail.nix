@@ -12,7 +12,7 @@ let
     # certificatesFile = "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
     certificatesFile = "/etc/ssl/certs/ca-certificates.crt";
   };
-  keyringProg = pkgs.python3.withPackages(ps: with ps; [ secretstorage keyring pygobject3]);
+  # keyringProg = pkgs.python3.withPackages(ps: with ps; [ secretstorage keyring pygobject3]);
 in
 {
   accounts.email.accounts = {
@@ -48,6 +48,7 @@ in
       userName = "mattator";
       realName = "Luke skywalker";
       address = "mattator@gmail.com";
+      flavor = "gmail";
       imap = {
         # host = "imap.gmail.com";
         tls = my_tls;

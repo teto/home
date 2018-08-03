@@ -129,6 +129,13 @@ in
   # seemingly working for chromium only, check for firefox
   programs.browserpass.enable = true;
 
+  # programs.firefox = {
+  #   enable = true;
+  #   # package = unstable.firefox;
+  # #   enableAdobeFlash = false;
+  #   enableBukubrow = true;
+  # };
+
   nixpkgs.config = {
     allowUnfree = true;
   };

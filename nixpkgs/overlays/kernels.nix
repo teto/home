@@ -468,11 +468,11 @@ in rec {
       ;
 
 
-  mptcpStructuredExtraConfig = mkMerge [
-    kvmConfigStructured
-    debugConfigStructured
-    net9pConfig
-  ];
+  # mptcpStructuredExtraConfig = mkMerge [
+  #   kvmConfigStructured
+  #   debugConfigStructured
+  #   net9pConfig
+  # ];
 
 
   # builtins.currentSystem returns "x86_64-linux"
