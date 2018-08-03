@@ -32,7 +32,9 @@ rec {
   in 
   lib.concatStrings [
     (builtins.readFile vimTigrc) 
-    (builtins.readFile "${pkgs.tig}/tig/contrib/large-repo.tigrc") 
+    # TODO reestablish when the package gets updated
+    # (builtins.readFile "${pkgs.tig}/tig/contrib/large-repo.tigrc") 
+    (builtins.readFile ../large-repo.tigrc) 
   ];
 
 

@@ -49,13 +49,13 @@ in
       realName = "Luke skywalker";
       address = "mattator@gmail.com";
       imap = {
-        host = "imap.gmail.com";
+        # host = "imap.gmail.com";
         tls = my_tls;
       };
 
       smtp = {
-        host = "smtp.gmail.com";
-        port =  587;
+        # host = "smtp.gmail.com";
+        # port =  587;
         tls = my_tls;
       };
 

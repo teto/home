@@ -9,6 +9,11 @@ final: prev:
   #   # ./modules/services/gnome3.nix
   #   ./kernels.nix
   # ];
+  vdirsyncer = prev.vdirsyncer.overrideAttrs ( oa: {
+    src = fetchGit {
+      url = https://github.com/pimutils/vdirsyncer.git;
+    };
+  });
 
   mptcpanalyzer = prev.python3Packages.callPackage ./mptcpanalyzer {
     # tshark = self.pkgs.tshark-reinject-stable; 
