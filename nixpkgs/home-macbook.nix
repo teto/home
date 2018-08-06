@@ -3,6 +3,8 @@
   imports = [
     ./home-common.nix
     ./home-desktop.nix
+
+    ./home-mail.nix
   ];
   # home.keyboard.layout = "fr,us";
 
