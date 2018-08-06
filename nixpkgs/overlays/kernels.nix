@@ -2,10 +2,27 @@ stlf: prev:
 
   with prev.lib.kernel;
 let
-    # todo remove tags
-    filter-src = builtins.filterSource (p: t:
-    let baseName = baseNameOf p;
-    in prev.lib.cleanSourceFilter p t && baseName != "build" && baseName != "tags");
+
+  # TODO tester ce qui fait flipper/ peut foirer
+# EXT4_ENCRYPTION
+# /home/teto/nixpkgs3/lib/kernel.nix
+
+  kernelPatch0 = rec {
+    name = "xen-netfront_update_features_after_registering_netdev";
+    extraStructuredConfig = {
+      MMC_BLOCK_MINORS   = freeform "44";
+      # EXT4_ENCRYPTION   = option ((if (versionOlder version "4.8") then module else yes));
+      EXT4_ENCRYPTION   = option ((if (versionOlder version "4.8") then module else yes));
+
+      # FS_ENCRYPTION   = mkMerge [ { optional = true; } (whenAtLeast "4.9" module) ];
+    };
+    patch = null;
+  };
+
+  # todo remove tags
+  filter-src = builtins.filterSource (p: t:
+  let baseName = baseNameOf p;
+  in prev.lib.cleanSourceFilter p t && baseName != "build" && baseName != "tags");
 
   # potentially interesting
   # CONFIG_NLMON is not set
@@ -622,12 +639,17 @@ in rec {
 
   # hardenedPackages = hardenedLinuxPackagesFor prev.linux_mptcp;
 
-  # linux_test = prev.linux_4_12.override {
-  #   ignoreConfigErrors=true;
-  #   autoModules = false;
-  #   kernelPreferBuiltin = true;
-  #   structuredExtraConfig = mininetConfigStructured;
-  # };
+  linux_test = prev.linux_latest.override {
+    # ignoreConfigErrors=true;
+    # autoModules = false;
+    kernelPreferBuiltin = true;
+    structuredExtraConfig = mininetConfigStructured;
+
+    kernelPatches = [ kernelPatch0 ];
+
+      # TODO pass fun things
+      # MMC_BLOCK_MINORS   = freeform "32";
+  };
 
 
 
