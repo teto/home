@@ -101,6 +101,9 @@ in
    programs.msmtp = {
      enable = true;
      extraConfig = ''
+      syslog         on
+
+      defaults
      '';
    };
 
