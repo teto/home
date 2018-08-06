@@ -22,6 +22,7 @@ in
       alot = {
         enable = true;
       };
+      msmtp.enable = true;
       notmuch.enable = true;
       offlineimap = {
         enable = true;
@@ -133,7 +134,8 @@ in
 # attachment_prefix = ~/Downloads
         # theme = "solarized";
      extraConfig = ''
-        editor_in_thread = True
+       # foireux comme option
+        editor_in_thread = False
         auto_remove_unread = True
         ask_subject = False
         handle_mouse = True

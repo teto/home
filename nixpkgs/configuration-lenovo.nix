@@ -29,6 +29,8 @@ let
   # ]
   ;
 
+  # nesting clones can be useful to prevent GC of some packages
+  # https://nixos.org/nix-dev/2017-June/023967.html
 
   fileSystems."/mnt/ext" =
     { device = "/dev/sda4";
