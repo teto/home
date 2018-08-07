@@ -138,6 +138,13 @@ in
 
   nixpkgs.config = {
     allowUnfree = true;
+    firefox.enableBukubrow = true;
+  };
+
+  services.hoogle = {
+    enable = true;
+    packages = (hpkgs: with hpkgs; [netlink-hs]);
+    # haskellPackages = pkgs.haskellPackages;
   };
 
   nix = {

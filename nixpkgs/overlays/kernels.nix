@@ -2,7 +2,11 @@ stlf: prev:
 
   with prev.lib.kernel;
 let
+# pkgs.haskell.lib.doJailbreak
+  myHaskellOverlay = selfHaskell: prevHaskell: {
 
+    # TODO
+  };
   # TODO tester ce qui fait flipper/ peut foirer
 # EXT4_ENCRYPTION
 # /home/teto/nixpkgs3/lib/kernel.nix
@@ -652,7 +656,10 @@ in rec {
   };
 
 
-
+  haskellPackages = super.haskellPackages.extend myHaskellOverlay;
+  # haskell overlay pkgs.haskell.lib.doJailbreak
+# pkgs.haskell.lib.doJailbreak
+#   jailbreak = true;
   # linux_latest_9p = prev.pkgs.linux_latest.override({
   #   extraConfig = ''
   #     NET_9P y
