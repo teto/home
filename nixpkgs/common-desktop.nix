@@ -143,7 +143,7 @@ in
 
   services.hoogle = {
     enable = true;
-    packages = (hpkgs: with hpkgs; [netlink-hs]);
+    packages = (hpkgs: with hpkgs; [netlink]);
     # haskellPackages = pkgs.haskellPackages;
   };
 

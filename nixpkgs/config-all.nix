@@ -91,7 +91,7 @@ rec {
       nxs="nix-shell -A";
       nxp="nixops ";
       # }}}
-
+      nix-stray-roots=''nix-store --gc --print-roots | egrep -v "^(/nix/var|/run/\w+-system|\{memory)"'';
 # lib.escapeShellArg fails
       nixpaste="curl -F \"text=<-\" http://nixpaste.lbr.uno";
     ".."="cd ..";
