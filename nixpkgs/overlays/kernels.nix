@@ -11,6 +11,7 @@ let
   # TODO tester ce qui fait flipper/ peut foirer
 # EXT4_ENCRYPTION
 # /home/teto/nixpkgs3/lib/kernel.nix
+  structuredConfigs = import ../structured.nix { inherit (prev) lib; };
 
   kernelPatch0 = rec {
     name = "xen-netfront_update_features_after_registering_netdev";
@@ -73,6 +74,7 @@ let
     NET_SCH_NETEM y
     NET_SCH_INGRESS y
     NET_CLS y
+    CFS_BANDWIDTH y
   '';
 
     net9pConfig = ''
@@ -192,6 +194,7 @@ let
     #prev.pkgs.linuxPackages.bcc.kernelExtraConfig or
   ''
     BPF y
+    BPF_JIT_ALWAYS_ON y
     BPF_SYSCALL y
     NET_CLS_BPF y
     NET_ACT_BPF y
@@ -433,9 +436,9 @@ in rec {
   # hardenedPackages = hardenedLinuxPackagesFor prev.linux_mptcp;
 
     linux_test = let 
-      # mininetConfigStructured = with import ./structured.nix { inherit (prev) lib; }; {
-      # };
-      mininetConfigStructured = {};
+      # mininetConfigStructured = {};
+      mininetConfigStructured = structuredConfigs.kvmConfigStructured
+      // structuredConfigs.bpfConfigStructured;
     in
       prev.linux_latest.override {
     # ignoreConfigErrors=true;
@@ -449,6 +452,15 @@ in rec {
       # MMC_BLOCK_MINORS   = freeform "32";
   };
 
+    linux_test2 = linux_test.override {
+      # TODO 
+      structuredExtraConfig = with prev.lib.modules; mkMerge [
+        # linux_test.passthru.commonStructuredConfig
+        structuredConfigs.mininetConfigStructured 
+        { USB_DEBUG = optional yes; }
+        { USB_DEBUG = yes; }
+      ];
+    };
 
   # haskellPackages = prev.haskellPackages.extend myHaskellOverlay;
   # haskell overlay pkgs.haskell.lib.doJailbreak

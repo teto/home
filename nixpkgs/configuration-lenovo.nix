@@ -78,7 +78,7 @@ let
   # hide messages !
   # boot.kernelParams = [ "earlycon=ttyS0" "console=ttyS0" ];
 
-  # boot.kernelPackages = pkgs.linuxPackagesFor pkgs.my_lenovo_kernel;
+  boot.kernelPackages = pkgs.linuxPackagesFor pkgs.my_lenovo_kernel;
   # boot.kernelPackages = pkgs.linuxPackages_mptcp;
 
   # TODO we need nouveau  ?
@@ -91,7 +91,7 @@ let
 
   boot.kernel.sysctl = {
     # to not provoke the kernel into crashing
-    "net.ipv4.tcp_timestamps" = 0;
+    # "net.ipv4.tcp_timestamps" = 0;
     "net.ipv4.ipv4.ip_forward" = 1;
     # "net.ipv4.tcp_keepalive_time" = 60;
     # "net.core.rmem_max" = 4194304;

@@ -20,6 +20,7 @@ with lib.kernel;
     NET_SCH_NETEM = yes;
     NET_SCH_INGRESS = yes;
     NET_CLS = yes;
+    CFS_BANDWIDTH = yes;
   };
 
 
