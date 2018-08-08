@@ -19,8 +19,8 @@ let
   ];
 
   devPkgs = with pkgs; [
-    cabal-install
-    cabal2nix
+    # cabal-install
+    # cabal2nix
     editorconfig-core-c
     exa
     gdb

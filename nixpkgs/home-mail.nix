@@ -112,7 +112,9 @@ in
 
      # sendCommand = config.programs.msmtp.sendCommand;
      # mta type
-     # contactCompletionCommand
+     # contactCompletionCommand = ''
+     # '';
+
      # createAliases=true;
      # generate alias
      # TODO test http://alot.readthedocs.io/en/latest/configuration/key_bindings.html

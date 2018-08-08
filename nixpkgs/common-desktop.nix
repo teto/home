@@ -23,6 +23,9 @@ in
     # ./desktopPkgs.nix
     # ./modules/tor.nix
 
+    # only if available
+    ./modules/jupyter.nix
+
   ];
 
   boot.kernelModules = [

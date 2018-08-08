@@ -1,0 +1,6 @@
+# see https://docs.haskellstack.org/en/stable/nix_integration/#configuration
+# for confiugration options
+nix:
+  enable: true
+  # true by default but will cause problems such as https://github.com/jaspervdj/hakyll/issues/614
+  pure: false

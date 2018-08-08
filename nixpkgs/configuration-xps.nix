@@ -22,7 +22,6 @@ let
     ./extraTools.nix
 
   ]
-  # ++ lib.optional (services ? jupyter)  ./jupyter.nix
   ;
   
   # TODO conditionnally enable it

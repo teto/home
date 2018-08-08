@@ -49,6 +49,10 @@ rec {
 
   home.file.".ghc/ghci.conf".source = ../home/ghci.conf;
 
+  # useful to prevent some problems with nix
+  # https://github.com/commercialhaskell/stack/issues/2358
+  home.file.".stack/config.yaml".source = ../home/stack.yaml;
+
 
   # TODO doesn't find ZDOTDIR (yet)
   # TODO maybe we can add to PATH 
