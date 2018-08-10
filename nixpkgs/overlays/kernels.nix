@@ -449,7 +449,7 @@ in rec {
 
     linux_test2 = linux_test.override {
       # TODO 
-      structuredExtraConfig = with prev.lib.modules; mkMerge [
+      structuredExtraConfig = with prev.lib.modules; [
         # linux_test.passthru.commonStructuredConfig
         structuredConfigs.mininetConfigStructured 
         { USB_DEBUG = optional yes; }
