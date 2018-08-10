@@ -14,18 +14,20 @@ self: prev:
 # haskellPackages.callCabal2nix to nixpkgs which means anyone can easily pull in GitHub packages and hackage packages that aren't in nixpkgs. 
 
 # pkgs.haskell.lib.dontCheck
-  haskellPackages = prev.haskellPackages.override {
-    overrides = hself: hsuper: rec {  
-      # cabal-helper = prev.haskell.lib.doJailbreak hsuper.cabal-helper;
-      cabal-helper = hsuper.callCabal2nix "cabal-helper" (prev.fetchFromGitHub {
-        owner  = "DanielG";
-        repo   = "cabal-helper";
-        rev    = "5e2eb803e82e663caa6cd1252a790ba4a1c43adb";
-        sha256 = "...";
-      }) {};
-    };
 
-  };
+  # haskellPackages = prev.haskellPackages.override {
+  #   overrides = hself: hsuper: rec {  
+  #     # cabal-helper = prev.haskell.lib.doJailbreak hsuper.cabal-helper;
+  #     cabal-helper = hsuper.callCabal2nix "cabal-helper" (prev.fetchFromGitHub {
+  #       owner  = "DanielG";
+  #       repo   = "cabal-helper";
+  #       rev    = "5e2eb803e82e663caa6cd1252a790ba4a1c43adb";
+  #       # TODO fillup the sha
+  #       sha256 = "0b3qahifb42vx0s0h43lqznmykmgii268jc2d0rc5l6haiq610kd";
+  #     }) {};
+  #   };
+
+  # };
 
 
 

@@ -432,21 +432,33 @@ in rec {
 
     linux_test = let 
       # mininetConfigStructured = {};
-      mininetConfigStructured = [ 
-        structuredConfigs.kvmConfigStructured
+      configStructured = with prev.lib.kernel; [ 
+        # structuredConfigs.kvmConfigStructured
         structuredConfigs.bpfConfigStructured
+        # just try to contradict common-config settings
+        # { USB_DEBUG = optional yes; }
+
+        # common-config.nix default is 32, shouldn't trigger any error
+        # { MMC_BLOCK_MINORS   = freeform "32"; }
+        # The option `settings.MMC_BLOCK_MINORS.freeform' has conflicting definitions, in `<unknown-file>' and `<unknown-file>'
+        { MMC_BLOCK_MINORS   = freeform "32"; }
+        # { MMC_BLOCK_MINORS   = freeform "64"; }
+
+        # mandatory should win by default
+        { USB_DEBUG = option yes;}
+        # { USB_DEBUG = yes;}
+
+        # default for "8139TOO_PIO" is no
+        { "8139TOO_PIO"  = yes; }
+
+# CONFIG_MEDIA_RADIO_SUPPORT is not set
+        # test how two different tristates would conflict
+
       ];
     in
-      prev.linux_latest.override {
-    # ignoreConfigErrors=true;
-    # autoModules = false;
-    kernelPreferBuiltin = true;
-    structuredExtraConfig = mininetConfigStructured;
-
-    # kernelPatches = [ kernelPatch0 ];
-
-      # TODO pass fun things
-      # MMC_BLOCK_MINORS   = freeform "32";
+    prev.linux_latest.override {
+      kernelPreferBuiltin = true;
+      structuredExtraConfig = configStructured;
   };
 
     linux_test2 = linux_test.override {
