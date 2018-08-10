@@ -16,8 +16,15 @@ self: prev:
 # pkgs.haskell.lib.dontCheck
   haskellPackages = prev.haskellPackages.override {
     overrides = hself: hsuper: rec {  
-      cabal-helper = prev.haskell.lib.doJailbreak hsuper.cabal-helper;
+      # cabal-helper = prev.haskell.lib.doJailbreak hsuper.cabal-helper;
+      cabal-helper = hsuper.callCabal2nix "cabal-helper" (prev.fetchFromGitHub {
+        owner  = "DanielG";
+        repo   = "cabal-helper";
+        rev    = "5e2eb803e82e663caa6cd1252a790ba4a1c43adb";
+        sha256 = "...";
+      }) {};
     };
+
   };
 
 

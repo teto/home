@@ -53,6 +53,8 @@ rec {
   # https://github.com/commercialhaskell/stack/issues/2358
   home.file.".stack/config.yaml".source = ../home/stack.yaml;
 
+  home.file.".cabal/config".text = "nix: True";
+
 
   # TODO doesn't find ZDOTDIR (yet)
   # TODO maybe we can add to PATH 
