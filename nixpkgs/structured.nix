@@ -30,6 +30,7 @@ with lib.kernel;
     BPF_SYSCALL = yes;
     NET_CLS_BPF = yes;
     NET_ACT_BPF = yes;
+    HAVE_EBPF_JIT = yes;
     BPF_JIT = yes;
     BPF_EVENTS = yes;
     KPROBES                = yes;
@@ -85,7 +86,7 @@ with lib.kernel;
       DEBUG_INFO           = yes;
 
       PATA_MARVELL         = yes;
-      SATA_SIS             = yes;
+      # SATA_SIS             = yes;
       MD_RAID0             = yes;
 
       # else qemu can't see the root filesystem when launched with -kenel

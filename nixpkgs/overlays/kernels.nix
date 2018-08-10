@@ -244,7 +244,7 @@ let
       DEBUG_INFO y
 
       PATA_MARVELL y
-      SATA_SIS y
+      SATA_SIS y # might cause problems with more recent kernels
       MD_RAID0 y
 
       # else qemu can't see the root filesystem when launched with -kenel
@@ -432,8 +432,10 @@ in rec {
 
     linux_test = let 
       # mininetConfigStructured = {};
-      mininetConfigStructured = structuredConfigs.kvmConfigStructured
-      // structuredConfigs.bpfConfigStructured;
+      mininetConfigStructured = [ 
+        structuredConfigs.kvmConfigStructured
+        structuredConfigs.bpfConfigStructured
+      ];
     in
       prev.linux_latest.override {
     # ignoreConfigErrors=true;

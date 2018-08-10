@@ -142,6 +142,7 @@ rec {
 	includes = [
 	  { path = config.xdg.configHome + "/git/config.inc"; }
 	];
+G_DEBUG("MATT " << this << " "<< GetInstanceTypeId());
 
     extraConfig=''
       [rebase]
