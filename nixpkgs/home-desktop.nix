@@ -121,7 +121,9 @@ in
   ];
 
   home.packages = desktopPkgs ++ devPkgs ++ heavyPackages
-   ++ imPkgs
+  ++ imPkgs ++ [
+    pkgs.cachix
+    ]
    ;
 
   programs.neovim = import ./neovim.nix {
