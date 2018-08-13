@@ -85,6 +85,10 @@ in
     #   # getLogin = "";
     # };
 
+
+    # for vdirsyncer
+    # zaclys = {
+    # }
   };
 
 
