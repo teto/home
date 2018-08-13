@@ -795,10 +795,9 @@ let g:gutentags_project_info = [ {'type': 'python', 'file': 'setup.py'},
                                \ {'type': 'ruby', 'file': 'Gemfile'},
                                \ {'type': 'haskell', 'file': 'Setup.hs'} ]
 " produce tags for haskell http://hackage.haskell.org/package/hasktags
-" let g:gutentags_ctags_executable_haskell = 'hasktags'
+let g:gutentags_ctags_executable_haskell = 'hasktags'
 " let g:gutentags_ctags_extra_args
 let g:gutentags_file_list_command = 'rg --files'
-" produce tags for haskell http://hackage.haskell.org/package/hasktags
 
 " let g:gutentags_ctags_executable_haskell = 'hasktags'
 let g:gutentags_ctags_exclude = ['.vim-src', 'build', '.mypy_cache']

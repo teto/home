@@ -19,30 +19,31 @@ self: prev:
   #     http-types = super.callHackage "http-types" "0.11" {};
   #   };
   # });
-  all-cabal-hashes = prev.fetchurl {
-    # https://github.com/commercialhaskell/all-cabal-hashes/tree/hackage
-    url    = "https://github.com/commercialhaskell/all-cabal-hashes/archive/d174ccaf2ea069c83f1d816bfee7b429c5c70c15.tar.gz";
-    # sha256 = "0qbzdngm4q8cmwydnrg7jvipw39nb1mjxw95vw6f789874002kn2";
-    sha256 = "19rgwff6l423xyml6gbhjllznwmrv6x7g46j863i7fgps3ni96sy";
-  };
+
+  # all-cabal-hashes = prev.fetchurl {
+  #   # https://github.com/commercialhaskell/all-cabal-hashes/tree/hackage
+  #   url    = "https://github.com/commercialhaskell/all-cabal-hashes/archive/d174ccaf2ea069c83f1d816bfee7b429c5c70c15.tar.gz";
+  #   # sha256 = "0qbzdngm4q8cmwydnrg7jvipw39nb1mjxw95vw6f789874002kn2";
+  #   sha256 = "19rgwff6l423xyml6gbhjllznwmrv6x7g46j863i7fgps3ni96sy";
+  # };
 
 
-  haskell = prev.haskell // {
-    packageOverrides = hself: hsuper: rec {  
-      # useful to fetch newer libraries with callHackage
+  # haskell = prev.haskell // {
+  #   packageOverrides = hself: hsuper: rec {  
+  #     # useful to fetch newer libraries with callHackage
 
-      #       servant = super.callHackage "servant" "0.12.1" {};
-      cabal-helper = prev.haskell.lib.doJailbreak (hsuper.callHackage "cabal-helper" "0.8.1.0" {});
-      ghc-syb-utils = hsuper.callHackage "ghc-syb-utils" "0.3.0.0" {};
-      cabal-plan = hsuper.callHackage "cabal-plan" "0.4.0.0" {};
+  #     #       servant = super.callHackage "servant" "0.12.1" {};
+  #     cabal-helper = prev.haskell.lib.doJailbreak (hsuper.callHackage "cabal-helper" "0.8.1.0" {});
+  #     ghc-syb-utils = hsuper.callHackage "ghc-syb-utils" "0.3.0.0" {};
+  #     cabal-plan = hsuper.callHackage "cabal-plan" "0.4.0.0" {};
 
-      # cabal-helper = hsuper.callCabal2nix "cabal-helper" (prev.fetchFromGitHub {
-      #   owner  = "DanielG";
-      #   repo   = "cabal-helper";
-      #   rev    = "e2a41086c2b044f4d9c1276a920bba8e3eeb501c";
-      #   sha256 = "1vgrb2pgm1891n4m2kdl0kp9l52fh2gn6a6z0gb1c9njad52bh4m";
-      # }) {};
-    };
-  };
+  #     # cabal-helper = hsuper.callCabal2nix "cabal-helper" (prev.fetchFromGitHub {
+  #     #   owner  = "DanielG";
+  #     #   repo   = "cabal-helper";
+  #     #   rev    = "e2a41086c2b044f4d9c1276a920bba8e3eeb501c";
+  #     #   sha256 = "1vgrb2pgm1891n4m2kdl0kp9l52fh2gn6a6z0gb1c9njad52bh4m";
+  #     # }) {};
+  #   };
+  # };
 
 }
