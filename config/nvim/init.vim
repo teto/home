@@ -892,13 +892,13 @@ function! UpdateSignifyBranch(branch)
 
 endfunc
 
-function! FzfChooseSignifyGitCommit()
+function! ChooseSignifyGitCommit()
 
   let dict = copy(s:opts)
   let dict.sink = funcref('UpdateSignifyBranch')
   call fzf#run(dict)
 endfunction
-command! SignifyChooseBranch call FzfChooseSignifyGitCommit()
+command! FzfSignifyChooseBranch call ChooseSignifyGitCommit()
 
 " function! GetQfHistory()
 
@@ -1119,42 +1119,6 @@ let g:jedi#completions_enabled = 0 " disable when deoplete in use
 "         \ : 'make'
 " endfunction
 
-
-" TODO replace with getroot of directory ?
-let g:neomake_build_folder_maker = {
-    \ 'exe': 'make',
-    \ 'args': [],
-    \ 'cwd': getcwd().'/build',
-    \ 'errorformat': '%f:%l:%c: %m',
-    \ 'remove_invalid_entries': 1,
-    \ 'buffer_output': 0
-    \ }
-
-" let g:neomake_open_list=2
-
-" will run nix-shell
-" source $stdenv/setup
-" \ 'cwd': getcwd().'/build',
-let g:neomake_buildPhase_maker = {
-    \ 'exe': '/home/teto/dotfiles/bin/nix-shell-maker.sh',
-    \ 'args': [],
-    \ 'errorformat': '%f:%l:%c: %m',
-    \ 'remove_invalid_entries': 0,
-    \ 'buffer_output': 0
-    \ }
-
-function! RunBuildPhase()
-
-  if isdirectory("build")
-    let g:neomake_buildPhase_maker.cwd = getcwd().'/build'
-  else 
-    unlet g:neomake_buildPhase_maker.cwd
-  endif
-  Neomake! buildPhase
-
-endfunc 
-
-command! BuildPhase call RunBuildPhase()
 
 let g:neomake_verbose = 1
 
@@ -2023,6 +1987,8 @@ nmap <F4> call GoToNextError()
 " nmap <S-f4> <Plug>(QuickFixCurrentNumberQNext)
 
 
+" todo pass a flag to call configure ?
+nnoremap <F4> :BuildPhase<CR>
 nnoremap <F5> :Neomake! make<CR>
 nnoremap <F6> :AutoSaveToggle<CR>
 "nnoremap <F6> :AutoSaveOnLostFocus<CR>
@@ -2317,6 +2283,55 @@ function! Genmpack(file)
 
 	call writefile(m, 'fname.mpack', 'b')
 endfunc
+
+" TODO replace with getroot of directory ?
+let g:neomake_build_folder_maker = {
+    \ 'exe': 'make',
+    \ 'args': [],
+    \ 'cwd': getcwd().'/build',
+    \ 'errorformat': '%f:%l:%c: %m',
+    \ 'remove_invalid_entries': 0,
+    \ 'buffer_output': 0
+    \ }
+
+let g:neomake_open_list=2
+
+" called like this let returned_maker = call(maker.fn, [options], maker)
+function! Check_build_folder(opts, ) abort dict
+
+  " todo check for nix-shell
+  if isdirectory("build")
+    let self.cwd = getcwd().'/build'
+  endif
+
+  return self
+endfunction
+
+" will run nix-shell
+" source $stdenv/setup
+" \ 'cwd': getcwd().'/build',
+" fn is not well documented
+let g:neomake_buildPhase_maker = {
+    \ 'exe': '/home/teto/dotfiles/bin/nix-shell-maker.sh',
+    \ 'args': [],
+    \ 'errorformat': '%f:%l:%c: %m',
+    \ 'remove_invalid_entries': 0,
+    \ 'buffer_output': 0,
+    \ 'fn': function('Check_build_folder')
+    \ }
+
+function! RunBuildPhase()
+
+  " if isdirectory("build")
+  "   let g:neomake_buildPhase_maker.cwd = getcwd().'/build'
+  " else 
+  "   unlet g:neomake_buildPhase_maker.cwd
+  " endif
+  Neomake! buildPhase
+
+endfunc 
+
+command! BuildPhase call RunBuildPhase()
 
 
 " QuickFixLine
