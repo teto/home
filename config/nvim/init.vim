@@ -174,7 +174,8 @@ Plug 'tpope/vim-scriptease' " Adds command such as :Messages
 
 " REPL (Read Execute Present Loop) {{{
 Plug 'metakirby5/codi.vim', {'on': 'Codi'} " repl
-Plug 'hkupty/iron.nvim', {'do': ':UpdateRemotePlugins'}
+" Plug 'hkupty/iron.nvim', {'do': ':UpdateRemotePlugins'}
+Plug 'vigemus/iron.nvim', { 'branch': 'lua/replace' }
 " Plug 'jalvesaq/vimcmdline' " no help files, mappings clunky
 " github mirror of Plug 'http://gitlab.com/HiPhish/repl.nvim'
 " Plug 'HiPhish/repl.nvim'
@@ -2303,6 +2304,10 @@ function! Check_build_folder(opts, ) abort dict
     let self.cwd = getcwd().'/build'
   endif
 
+  if !exists("$IN_NIX_SHELL")
+    echom "You are not in a nix-shell" 
+  endif
+
   return self
 endfunction
 
@@ -2319,19 +2324,7 @@ let g:neomake_buildPhase_maker = {
     \ 'fn': function('Check_build_folder')
     \ }
 
-function! RunBuildPhase()
-
-  " if isdirectory("build")
-  "   let g:neomake_buildPhase_maker.cwd = getcwd().'/build'
-  " else 
-  "   unlet g:neomake_buildPhase_maker.cwd
-  " endif
-  Neomake! buildPhase
-
-endfunc 
-
-command! BuildPhase call RunBuildPhase()
-
+command! BuildPhase Neomake! buildPhase
 
 " QuickFixLine
 " NonText

@@ -34,6 +34,8 @@
       # user="teto"
       # group="libvirtd"
 
+    qemuRunAsRoot=false;
+
     qemuVerbatimConfig = ''
       # https://github.com/libvirt/libvirt/blob/master/src/qemu/qemu.conf
       namespaces = []

@@ -147,6 +147,7 @@ in
   services.hoogle = {
     enable = true;
     packages = (hpkgs: with hpkgs; [netlink]);
+    port = 8090; # let 8080 for nix-serve
     # haskellPackages = pkgs.haskellPackages;
   };
 

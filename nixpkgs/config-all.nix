@@ -259,7 +259,7 @@ bindkey '^N' down-history
   };
 
   system = {
-    nixos.stateVersion = "18.03"; # why would I want to keep that ?
+    stateVersion = "18.03"; # why would I want to keep that ?
     copySystemConfiguration = true;
     # autoUpgrade = {
     #   channel= "https://nixos.org/channels/nixpkgs-unstable";
