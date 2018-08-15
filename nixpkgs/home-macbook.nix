@@ -28,7 +28,10 @@
     # layout = "fr,us";
     # options = [ "grp:caps_toggle" "grp_led:scroll" ];
     # TODO can add Mod4 
-    options = [ "add Mod1 Super_L" ];
+    options = [ 
+      "add Mod1 Super_L"
+      "keysym XF86Eject = Delete"
+  ];
     # options = [ "add Mod1 Alt_R" ];
   };
 }
