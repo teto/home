@@ -34,7 +34,7 @@
       # user="teto"
       # group="libvirtd"
 
-    qemuRunAsRoot=false;
+    # qemuRunAsRoot=false;
 
     qemuVerbatimConfig = ''
       # https://github.com/libvirt/libvirt/blob/master/src/qemu/qemu.conf
@@ -52,7 +52,9 @@
       dynamic_ownership = 0
     '';
 
-      extraOptions= [ "--verbose" ];
+    extraOptions= [
+      # "--verbose"
+    ];
 
 
 

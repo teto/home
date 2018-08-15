@@ -123,6 +123,7 @@ in
   home.packages = desktopPkgs ++ devPkgs ++ heavyPackages
   ++ imPkgs ++ [
     pkgs.cachix
+    pkgs.translate-shell
     ]
    ;
 

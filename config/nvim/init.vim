@@ -175,7 +175,8 @@ Plug 'tpope/vim-scriptease' " Adds command such as :Messages
 " REPL (Read Execute Present Loop) {{{
 Plug 'metakirby5/codi.vim', {'on': 'Codi'} " repl
 " Plug 'hkupty/iron.nvim', {'do': ':UpdateRemotePlugins'}
-Plug 'vigemus/iron.nvim', { 'branch': 'lua/replace' }
+" careful it maps cl by default
+" Plug 'vigemus/iron.nvim', { 'branch': 'lua/replace' }
 " Plug 'jalvesaq/vimcmdline' " no help files, mappings clunky
 " github mirror of Plug 'http://gitlab.com/HiPhish/repl.nvim'
 " Plug 'HiPhish/repl.nvim'
