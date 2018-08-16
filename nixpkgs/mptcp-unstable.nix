@@ -35,7 +35,11 @@
       # "net.mptcp.mptcp_path_manager" = "fullmesh";
 
       # https://unix.stackexchange.com/questions/13019/description-of-kernel-printk-values
-      "kernel.printk" = "7	7	7	7";
+      # echo 8 > /proc/sys/kernel/printk
+      # https://elinux.org/Debugging_by_printing
+      # or you can use dmesg -n 8
+      # "kernel.printk" = "7	7	7	7";
+      "kernel.printk" = "8";
       "net.ipv4.tcp_no_metrics_save"=1;
 # kernel.printk_delay = 0
 # kernel.printk_devkmsg = ratelimit
