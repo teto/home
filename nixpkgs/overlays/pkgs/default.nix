@@ -15,6 +15,12 @@ final: prev:
     # };
   # });
 
+  ebpfdropper = prev.callPackage ./ebpfdropper.nix {
+    stdenv=prev.clangStdenv;
+    llvm=prev.llvm_5;
+    kernel_headers=prev.linux_mptcp.dev;
+  };
+
   mptcpanalyzer = prev.python3Packages.callPackage ./mptcpanalyzer {
     # tshark = self.pkgs.tshark-reinject-stable; 
     tshark = final.pkgs.tshark-dev-stable;
@@ -26,11 +32,7 @@ final: prev:
 
   rt-tests = prev.callPackage ./rt-test.nix {};
 
-  # 
   netbee = prev.callPackage ./netbee {};
 
-  # i3ipc-glib = prev.callPackage ./i3ipc-glib.nix {}; 
-
-  # i3-easyfocus = prev.callPackage ./easyfocus.nix {}; 
   # linux_mptcp_4_94 = prev.callPackage ./mptcp {};
 }
