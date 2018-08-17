@@ -7,8 +7,8 @@ let
   src = self.fetchFromGitHub {
       repo   ="wireshark";
       owner  ="teto";
-      rev    = "9ca8a9f87c4e340f7e4d44c4c32dfc74afec29fa";
-      sha256 = "1wqqk63y8zfbfgih99pvwf8za03wj005f0icf1knp94d720m76ka";
+      rev    = "64b95dcb205842e4e8a9cc18cd5283ebdba2c48f";
+      sha256 = "13aax31gryfbc4fmhpi7xv8q5macpbdr2093jz52l44zm4gh3i46";
     };
 in
   {
@@ -16,6 +16,7 @@ in
   wireshark-dev-stable = super.wireshark.overrideAttrs (oldAttrs: {
     name = "wireshark-dev-stable";
     inherit src;
+     hardeningDisable = ["all"];
   });
 
   tshark-dev-stable = super.tshark.overrideAttrs (oldAttrs: {

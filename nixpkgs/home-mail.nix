@@ -23,7 +23,19 @@ in
         enable = true;
       };
       msmtp.enable = true;
-      notmuch.enable = true;
+      notmuch = { 
+        enable = true;
+          hooks = {
+
+            # postInsert = 
+            preNew = ''
+              '';
+            postNew = lib.concatStrings [ 
+              (builtins.readFile ../hooks_perso/post-new)
+              (builtins.readFile ../hooks_pro/post-new)
+            ];
+          };
+      };
       offlineimap = {
         enable = true;
         # postSyncHookCommand = ;

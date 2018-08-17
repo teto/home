@@ -21,6 +21,7 @@ export LANG=C
 
 if [ -z "$buildPhase" ]; then
 	echo "build from function"
+	echo "CWD: $PWD"
 	buildPhase
 else
 	$buildPhase

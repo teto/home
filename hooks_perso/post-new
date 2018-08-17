@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 # --input implies --batch
 # look at notmuch search terms attachment:
 notmuch tag --input="$XDG_CONFIG_HOME/notmuch/ietf"
