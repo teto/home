@@ -430,59 +430,49 @@ in rec {
 
   # hardenedPackages = hardenedLinuxPackagesFor prev.linux_mptcp;
 
-    linux_test = let 
-      # mininetConfigStructured = {};
-      configStructured = with prev.lib.kernel; [ 
-        # structuredConfigs.kvmConfigStructured
-        structuredConfigs.bpfConfigStructured
-        # just try to contradict common-config settings
-        # { USB_DEBUG = optional yes; }
+    # linux_test = let 
+    #   # mininetConfigStructured = {};
+    #   configStructured = with prev.lib.kernel; [ 
+    #     # structuredConfigs.kvmConfigStructured
+    #     structuredConfigs.bpfConfigStructured
+    #     # just try to contradict common-config settings
+    #     # { USB_DEBUG = optional yes; }
 
-        # common-config.nix default is 32, shouldn't trigger any error
-        # { MMC_BLOCK_MINORS   = freeform "32"; }
-        # The option `settings.MMC_BLOCK_MINORS.freeform' has conflicting definitions, in `<unknown-file>' and `<unknown-file>'
-        { MMC_BLOCK_MINORS   = freeform "32"; }
-        # { MMC_BLOCK_MINORS   = freeform "64"; }
+    #     # common-config.nix default is 32, shouldn't trigger any error
+    #     # { MMC_BLOCK_MINORS   = freeform "32"; }
+    #     # The option `settings.MMC_BLOCK_MINORS.freeform' has conflicting definitions, in `<unknown-file>' and `<unknown-file>'
+    #     { MMC_BLOCK_MINORS   = freeform "32"; }
+    #     # { MMC_BLOCK_MINORS   = freeform "64"; }
 
-        # mandatory should win by default
-        { USB_DEBUG = option yes;}
-        # { USB_DEBUG = yes;}
+    #     # mandatory should win by default
+    #     { USB_DEBUG = option yes;}
+    #     # { USB_DEBUG = yes;}
 
-        # default for "8139TOO_PIO" is no
-        { "8139TOO_PIO"  = yes; }
-
-# CONFIG_MEDIA_RADIO_SUPPORT is not set
-        # test how two different tristates would conflict
-
-      ];
-    in
-    prev.linux_latest.override {
-      kernelPreferBuiltin = true;
-      structuredExtraConfig = configStructured;
-  };
-
-    linux_test2 = linux_test.override {
-      # TODO 
-      structuredExtraConfig = with prev.lib.modules;
+    #     # default for "8139TOO_PIO" is no
+    #     { "8139TOO_PIO"  = yes; }
 
 
-      # just to tests
-      # mkMerge 
-      [
-        # linux_test.passthru.commonStructuredConfig
-        structuredConfigs.mininetConfigStructured 
-        { USB_DEBUG = optional yes; }
-        { USB_DEBUG = yes; }
-      ];
-    };
+    #   ];
+    # in
+    # prev.linux_latest.override {
+    #   kernelPreferBuiltin = true;
+    #   structuredExtraConfig = configStructured;
+  # };
 
-  # linux_latest_9p = prev.pkgs.linux_latest.override({
-  #   extraConfig = ''
-  #     NET_9P y
-  #     NET_9P_VIRTIO y
-  #     NET_9P_DEBUG y
-  #   '';
-  # });
+    # linux_test2 = linux_test.override {
+    #   # TODO 
+    #   structuredExtraConfig = with prev.lib.modules;
+
+
+    #   # just to tests
+    #   # mkMerge 
+    #   [
+    #     # linux_test.passthru.commonStructuredConfig
+    #     structuredConfigs.mininetConfigStructured 
+    #     { USB_DEBUG = optional yes; }
+    #     { USB_DEBUG = yes; }
+    #   ];
+    # };
 
 }
 
