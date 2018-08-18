@@ -52,7 +52,6 @@ keyring:
 	# with my custom commands:
 	# secret-tool store --label gmail gmail password
 	#keyring set
-	nix-shell -p 'python.withPackages(ps: with ps; [secretstorage keyring pygobject3])' '<nixpkgs>' \
 	keyring set gmail login \
 	keyring set gmail password \
 	keyring set gmail client_secret  \

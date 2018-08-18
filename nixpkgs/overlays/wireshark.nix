@@ -27,6 +27,7 @@ in
   wireshark-local = super.wireshark.overrideAttrs (oldAttrs: {
     name = "wireshark-dev";
     src = filter-cmake wiresharkFolder;
+     hardeningDisable = ["all"];
   });
 
   wireshark-local-stable = super.wireshark.overrideAttrs (oldAttrs: {

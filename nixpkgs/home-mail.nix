@@ -25,16 +25,16 @@ in
       msmtp.enable = true;
       notmuch = { 
         enable = true;
-          hooks = {
+          # hooks = {
 
-            # postInsert = 
-            preNew = ''
-              '';
-            postNew = lib.concatStrings [ 
-              (builtins.readFile ../hooks_perso/post-new)
-              (builtins.readFile ../hooks_pro/post-new)
-            ];
-          };
+          #   # postInsert = 
+          #   preNew = ''
+          #     '';
+          #   postNew = lib.concatStrings [ 
+          #     (builtins.readFile ../hooks_perso/post-new)
+          #     (builtins.readFile ../hooks_pro/post-new)
+          #   ];
+          # };
       };
       offlineimap = {
         enable = true;
@@ -86,16 +86,43 @@ in
       # contactCompletion = "notmuch address";
     };
 
-    # iij = {
-    #   notmuch.enable = true;
-    #   userName = "coudron@iij.ad.jp";
-    #   realName = "Matthieu Coudron";
-    #   address = "test@testjj.ad.jp";
-    #   passwordCommand = "";
-    #   imap = { host = "imap-tyo.iiji.jp"; };
-    #   smtp = { host = "mbox.iiji.jp"; };
-    #   # getLogin = "";
-    # };
+    iij = {
+      mbsync = mbsyncConfig;
+      alot = {
+        enable = true;
+      };
+      msmtp.enable = true;
+      notmuch = { 
+        enable = true;
+      };
+      offlineimap = {
+        enable = true;
+        # postSyncHookCommand = ;
+        extraConfig = ''
+          # alot per-account extraConfig
+          # The startdate option expects a date in the format yyyy-mm-dd.
+          # can't be used with maxage
+          # startdate = 2018-04-01
+          '';
+
+        # extraConfig = 
+        # seens to work without it ?
+        # sslcacertfile= /etc/ssl/certs/ca-certificates.crt
+        # newer offlineimap > 6.5.4 needs this
+        # cert_fingerprint = 89091347184d41768bfc0da9fad94bfe882dd358
+        # name translations would need to be done in both repositories, but reverse
+        # prevent sync with All mail folder since it duplicates mail
+        # folderfilter = lambda foldername: foldername not in ['[Gmail]/All Mail','[Gmail]/Spam','[Gmail]/Important']
+      };
+
+      userName = "coudron@iij.ad.jp";
+      realName = "Matthieu Coudron";
+      address = "coudron@iij.ad.jp";
+      passwordCommand = "${pkgs.libsecret}/bin/secret-tool lookup iij password";
+      imap = { host = "imap-tyo.iiji.jp"; tls = my_tls; };
+      smtp = { host = "mbox.iiji.jp"; tls = my_tls; };
+      # getLogin = "";
+    };
 
 
     # for vdirsyncer
@@ -108,6 +135,17 @@ in
    # TODO conditionnally define these
    programs.notmuch = {
      enable = true;
+     # hopefully hooks should be per-account
+     hooks = {
+
+        # postInsert = 
+        preNew = ''
+          '';
+        postNew = lib.concatStrings [ 
+          (builtins.readFile ../hooks_perso/post-new)
+          (builtins.readFile ../hooks_pro/post-new)
+        ];
+      };
      # extraConfig = {
      #   maildir = {
      #   };
