@@ -7,8 +7,8 @@ let
   src = self.fetchFromGitHub {
       repo   ="wireshark";
       owner  ="teto";
-      rev    = "64b95dcb205842e4e8a9cc18cd5283ebdba2c48f";
-      sha256 = "13aax31gryfbc4fmhpi7xv8q5macpbdr2093jz52l44zm4gh3i46";
+      rev    = "45efb048808d794f53cc431864c9ddfa99952b49";
+      sha256 = "1i0gqf8n8fsz3sqzkhcg05pf0krngnm335pnnlp94yzdkzzg3jyr";
     };
 in
   {
