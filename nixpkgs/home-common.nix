@@ -124,7 +124,7 @@ rec {
       frja="trans -from fr -to ja ";
       jaen="trans -from ja -to en ";
       enja="trans -from en -to ja ";
-      dmesg="dmsg --color=always|less";
+      dmesg="dmesg --color=always|less";
 
       # TODO move to root level ?
       nixpaste="curl -F \"text=<-\" http://nixpaste.lbr.uno";
