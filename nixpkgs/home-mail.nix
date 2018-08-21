@@ -61,7 +61,7 @@ in
       userName = "mattator";
       realName = "Luke skywalker";
       address = "mattator@gmail.com";
-      flavor = "gmail";
+      flavor = "gmail.com";
       imap = {
         # host = "imap.gmail.com";
         tls = my_tls;

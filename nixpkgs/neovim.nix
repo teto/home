@@ -16,7 +16,12 @@
 
     # hopefully these can be added automatically once I use vim_configurable
     extraPython3Packages = with pkgs.python3Packages;[
-      pandas jedi urllib3 pyls-mypy pycodestyle
+      pandas
+      jedi
+      urllib3 
+      # pyls-mypy # on le desactive sinon il genere des
+      python-language-server
+      pycodestyle
     ]
       # ++ lib.optionals ( pkgs ? pyls-mypy) [ pyls-mypy ]
     ;
@@ -57,7 +62,15 @@
         packages.myVimPackage = with pkgs.vimPlugins; {
           # see examples below how to use custom packages
           # loaded on launch
-          start = [ fugitive vimtex ];
+          start = [
+            fugitive
+            vimtex
+            LanguageClient-neovim
+            vim-signify
+            vim-startify
+            vim-scriptease
+            vim-grepper-git
+          ];
           # manually loadable by calling `:packadd $plugin-name`
           opt = [ ];
         };

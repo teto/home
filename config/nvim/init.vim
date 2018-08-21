@@ -152,7 +152,9 @@ Plug 'dbakker/vim-projectroot' " projectroot#guess()
 " (upstreamd already or ?)
 " Plug 'mtth/scratch.vim' " , {'on': 'Scratch'} mapped to ?
 " Plug 'tjdevries/vim-inyoface.git' "InYoFace_toggle to display only comments
-Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' } " :h LanguageClientUsage
+" todo depend de rust
+" Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next' }
+" 'do': ':UpdateRemotePlugins' } " :h LanguageClientUsage
 " Plug 'tjdevries/nvim-langserver-shim' " for LSP
 " Plug 'powerman/vim-plugin-AnsiEsc' " { to hl ESC codes
 Plug 'junegunn/gv.vim' " git commit viewer :Gv
@@ -169,7 +171,7 @@ Plug 'calvinchengx/vim-aftercolors' " load after/colors
 " Plug 'blindFS/vim-translator' " fails during launch :/
 " Plug 'timeyyy/orchestra.nvim' " to play some music on
 " Plug 'timeyyy/clackclack.symphony' " data to play with orchestra.vim
-Plug 'tpope/vim-scriptease' " Adds command such as :Messages
+" Plug 'tpope/vim-scriptease' " Adds command such as :Messages
 " Plug 'tpope/vim-eunuch' " {provides SudoEdit, SudoWrite , Unlink, Rename etc...
 
 " REPL (Read Execute Present Loop) {{{
@@ -1661,12 +1663,12 @@ let g:sneak#s_next = 1 " can press 's' again to go to next result, like ';'
 let g:sneak#prompt = 'Sneak>'
 
 let g:sneak#streak = 0
-    " nmap f <Plug>Sneak_s
-    " nmap F <Plug>Sneak_S
-    " xmap f <Plug>Sneak_s
-    " xmap F <Plug>Sneak_S
-    " omap f <Plug>Sneak_s
-    " omap F <Plug>Sneak_S
+
+map f <Plug>Sneak_f
+map F <Plug>Sneak_F
+map t <Plug>Sneak_t
+map T <Plug>Sneak_T
+
 " }}}
 " Peekaboo config {{{
 " Default peekaboo window
@@ -1895,18 +1897,20 @@ let g:langserver_executables = {
 " autozimu's lsp {{{
 " call LanguageClient_textDocument_hover
 " by default logs in /tmp/LanguageClient.log.
-let g:LanguageClient_autoStart=0 " Run :LanguageClientStart when disabled
-let g:LanguageClient_settingsPath=$MYVIMRC
+let g:LanguageClient_autoStart=1 " Run :LanguageClientStart when disabled
+" let g:LanguageClient_settingsPath=stdpath('config')."/settings.json"
 " pyls.configurationSources
 " my settings.json generates errors so remove it
 " let g:LanguageClient_loadSettings=$XDG_CONFIG_HOME."/nvim/settings.json"
 let g:LanguageClient_selectionUI='fzf'
-" let g:LanguageClient_trace="verbose"
+" or off / messages
+let g:LanguageClient_trace="verbose"
 " call LanguageClient_setLoggingLevel('DEBUG')
 "let g:LanguageClient_diagnosticsList="quickfix"
-
+" let g:LanguageClient_loggingLevel
+"
+let g:LanguageClient_diagnosticsEnable=0
 " hardcoded for now
-"fnamemodify( g:python3_host_prog, ':p:h').
 let g:LanguageClient_serverCommands = {
     \ 'rust': ['rustup', 'run', 'nightly', 'rls']
     \ , 'python': [ fnamemodify( g:python3_host_prog, ':p:h').'/pyls', '--log-file' , expand('~/lsp_python.log')]
@@ -2322,7 +2326,7 @@ let g:neomake_buildPhase_maker = {
     \ 'errorformat': '%f:%l:%c: %m',
     \ 'remove_invalid_entries': 0,
     \ 'buffer_output': 0,
-    \ 'fn': function('Check_build_folder')
+    \ 'InitForJob': function('Check_build_folder')
     \ }
 
 command! BuildPhase Neomake! buildPhase

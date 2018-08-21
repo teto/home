@@ -124,7 +124,9 @@ let
 
     # For the tests don't forget to disable syn cooki
     mptcpConfig = ''
-      
+      # increase ring kernel buffer size
+      CONFIG_LOG_BUF_SHIFT=22
+
       # don't always exist !
       MPTCP_NETLINK y
       MPTCP y
