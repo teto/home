@@ -181,6 +181,7 @@ Plug 'metakirby5/codi.vim', {'on': 'Codi'} " repl
 " Plug 'vigemus/iron.nvim', { 'branch': 'lua/replace' }
 " Plug 'jalvesaq/vimcmdline' " no help files, mappings clunky
 " github mirror of Plug 'http://gitlab.com/HiPhish/repl.nvim'
+Plug 'http://gitlab.com/HiPhish/repl.nvim'
 " Plug 'HiPhish/repl.nvim'
 " vimcmdline mappings{{{
 let cmdline_map_start          = "<LocalLeader>s"
@@ -1917,7 +1918,7 @@ let g:LanguageClient_serverCommands = {
     \ }
 
 " todo provide a fallback if lsp not available
-" nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
+nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
 nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
 " nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
 "}}}
