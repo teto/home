@@ -148,6 +148,7 @@ let
 
   nixpkgs.overlays = [
     (import ./overlays/kernels.nix) 
+    (import ./overlays/haskell.nix) 
   ];
 
   # <nixos-overlay>

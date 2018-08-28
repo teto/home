@@ -96,6 +96,7 @@ call plug#begin(s:plugdir)
 " Plug 'andymass/vim-matchup' " to replace matchit
 " call :NR on a region than :w . coupled with b:nrrw_aucmd_create, 
 Plug 'chrisbra/NrrwRgn' " to help with multi-ft files
+Plug 'chrisbra/vim-diff-enhanced' " 
 Plug 'mhinz/vim-signify' " Indicate changed lines within a file using a VCS.
 " Plug 'vim-pandoc/vim-pandoc'
 Plug 'vim-pandoc/vim-pandoc-syntax'

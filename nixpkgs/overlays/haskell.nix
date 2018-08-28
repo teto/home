@@ -1,7 +1,11 @@
 # List of tips https://nixos.org/nix-dev/2015-January/015608.html
+# we can find an exaple of an overlay in
+# https://github.com/typeable/nixpkgs-stackage/blob/master/default.nix
+# https://github.com/NixOS/nixpkgs/issues/44718
 self: prev:
 {
-# pkgs.haskell.lib.doJailbreak
+  # haskell.lib.dontCheck
+  # pkgs.haskell.lib.doJailbreak
   # myHaskellOverlay = selfHaskell: prevHaskell: {
   # haskellPackages = prev.haskellPackages.extend myHaskellOverlay;
   # haskell overlay pkgs.haskell.lib.doJailbreak
@@ -28,10 +32,11 @@ self: prev:
   # };
 
 
-  # haskell = prev.haskell // {
-  #   packageOverrides = hself: hsuper: rec {  
-  #     # useful to fetch newer libraries with callHackage
+  haskell = prev.haskell // {
+    packageOverrides = hself: hprev: rec {  
+      # useful to fetch newer libraries with callHackage
 
+      zeromq4-haskell = prev.haskell.lib.dontCheck hprev.zeromq4-haskell;
   #     #       servant = super.callHackage "servant" "0.12.1" {};
   #     cabal-helper = prev.haskell.lib.doJailbreak (hsuper.callHackage "cabal-helper" "0.8.1.0" {});
   #     ghc-syb-utils = hsuper.callHackage "ghc-syb-utils" "0.3.0.0" {};
@@ -43,7 +48,8 @@ self: prev:
   #     #   rev    = "e2a41086c2b044f4d9c1276a920bba8e3eeb501c";
   #     #   sha256 = "1vgrb2pgm1891n4m2kdl0kp9l52fh2gn6a6z0gb1c9njad52bh4m";
   #     # }) {};
-  #   };
-  # };
+
+    };
+  };
 
 }
