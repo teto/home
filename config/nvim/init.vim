@@ -161,7 +161,7 @@ Plug 'dbakker/vim-projectroot' " projectroot#guess()
 Plug 'junegunn/gv.vim' " git commit viewer :Gv
 " Plug 'mhinz/vim-halo' " to hight cursor line
 Plug 'ludovicchabant/vim-gutentags' " automatic tag generation, very good
-Plug 'junegunn/goyo.vim', {'on': 'Goyo'} "distraction free writing
+Plug 'junegunn/goyo.vim', {'on': 'Goyo'} "distraction free writing focus
 Plug 'junegunn/limelight.vim' " highlights
 Plug 'calvinchengx/vim-aftercolors' " load after/colors
 "Plug 'junegunn/limelight.vim' " to highlight ucrrent paragraph only
@@ -2293,14 +2293,14 @@ function! Genmpack(file)
 endfunc
 
 " TODO replace with getroot of directory ?
-let g:neomake_build_folder_maker = {
-    \ 'exe': 'make',
-    \ 'args': [],
-    \ 'cwd': getcwd().'/build',
-    \ 'errorformat': '%f:%l:%c: %m',
-    \ 'remove_invalid_entries': 0,
-    \ 'buffer_output': 0
-    \ }
+" let g:neomake_build_folder_maker = {
+"     \ 'exe': 'make',
+"     \ 'args': [],
+"     \ 'cwd': getcwd().'/build',
+"     \ 'errorformat': '%f:%l:%c: %m',
+"     \ 'remove_invalid_entries': 0,
+"     \ 'buffer_output': 0
+"     \ }
 
 let g:neomake_open_list=2
 
@@ -2333,6 +2333,7 @@ let g:neomake_buildPhase_maker = {
     \ }
 
 command! BuildPhase Neomake! buildPhase
+command! BuildPhaseTest call neomake#makers#nix#nix() 
 
 " QuickFixLine
 " NonText
