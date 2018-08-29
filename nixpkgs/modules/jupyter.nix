@@ -45,6 +45,7 @@
           (pkgs.haskell.lib.doJailbreak self.ihaskell-blaze)
           (pkgs.haskell.lib.doJailbreak self.ihaskell-diagrams)
           (pkgs.haskell.lib.doJailbreak self.ihaskell-display)
+          self.netlink
           ]);
 
           # ihaskellSh = pkgs.writeScriptBin "ihaskell-wrapper" ''

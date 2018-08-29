@@ -1897,6 +1897,7 @@ let g:langserver_executables = {
     \ },
       \ }
 " }}}
+
 " autozimu's lsp {{{
 " call LanguageClient_textDocument_hover
 " by default logs in /tmp/LanguageClient.log.
@@ -1911,12 +1912,13 @@ let g:LanguageClient_trace="verbose"
 " call LanguageClient_setLoggingLevel('DEBUG')
 "let g:LanguageClient_diagnosticsList="quickfix"
 " let g:LanguageClient_loggingLevel
-"
+"let g:LanguageClient_rootMarkers
 let g:LanguageClient_diagnosticsEnable=0
 " hardcoded for now
 let g:LanguageClient_serverCommands = {
     \ 'rust': ['rustup', 'run', 'nightly', 'rls']
     \ , 'python': [ fnamemodify( g:python3_host_prog, ':p:h').'/pyls', '--log-file' , expand('~/lsp_python.log')]
+    \ , 'haskell': ['hie-wrapper']
     \ }
 
 " todo provide a fallback if lsp not available
