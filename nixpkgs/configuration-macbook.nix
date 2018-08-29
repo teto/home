@@ -8,8 +8,6 @@ let
   in
 {
   imports = [
-    # todo renommer en workstation
-    # ./hardware-dell.nix
     /etc/nixos/hardware-configuration.nix
 
     ./common-desktop.nix
@@ -17,12 +15,8 @@ let
     ./modules/network-manager.nix
     ./modules/libvirtd.nix
 
-    # for user teto
-    ./extraTools.nix
-    ./modules/wireshark.nix
-    # ./wifi.nix
+    # ./extraTools.nix
     ./modules/tor.nix
-    # ./desktopPkgs.nix
   ];
 
   boot.loader ={
@@ -37,7 +31,7 @@ let
     grub.device = "/dev/sda";
   };
 
-  boot.kernelParams = [ " console=ttyS0" ];
+  # boot.kernelParams = [ " console=ttyS0" ];
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
   # TODO we need nouveau 
@@ -45,15 +39,6 @@ let
     "af_key" # for ipsec/vpn support
     "kvm" "kvm-intel" # for virtualisation
   ];
-
-  # boot.kernel.sysctl = {
-  #   # to not provoke the kernel into crashing
-  #   "net.ipv4.tcp_timestamps" = 0;
-  #   "net.ipv4.ipv4.ip_forward" = 1;
-  #   # "net.ipv4.tcp_keepalive_time" = 60;
-  #   # "net.core.rmem_max" = 4194304;
-  #   # "net.core.wmem_max" = 1048576;
-  # };
 
   networking.hostName = "jedha"; # Define your hostname.
 
@@ -91,7 +76,6 @@ let
       drivers = [ pkgs.gutenprint ];
     };
 
-
     # just locate
     locate.enable = true;
 
@@ -107,27 +91,23 @@ let
   #   noProxy="localhost,127.0.0.1";
   # };
 
-  # networking.resolvconfOptions
+  programs.ccache.enable = true;
+  services.xserver.displayManager.slim = {
+    # theme = 
+    autoLogin = true;
+    defaultUser = "teto";
+  };
+  
+  nixpkgs.overlays = [
+    (import ./overlays/kernels.nix) 
+    (import ./overlays/haskell.nix) 
+  ];
 
-  # to install as a user service
-  # maybe remove ?
-  # services.offlineimap.install = false;
 
   services.strongswan = {
     enable = true;
       # "/etc/ipsec.d/*.secrets" "/etc/ipsec.d"
     secrets = ["/etc/ipsec.d"];
   };
-
-  services.nfs.server = {
-    enable = true;
-    # nproc
-    # statdPort
-    # hostName = 
-    # extraNfsdConfig = 
-    # createMountPoints = 
-    # exports = 
-  };
-
 
 }

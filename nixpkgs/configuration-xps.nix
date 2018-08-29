@@ -16,13 +16,9 @@ let
     ./common-desktop.nix
     ./modules/libvirtd.nix
 
-    # ./modules/tor.nix
-
     # for user teto
     ./extraTools.nix
-
-  ]
-  ;
+  ] ;
   
   # TODO conditionnally enable it
   # networking.proxy.default
@@ -126,12 +122,6 @@ let
       ]
   ;
 
-
-  # to install as a user service
-  # maybe remove ?
-  # services.offlineimap.install = false;
-
-
   programs.ccache.enable = true;
 
 
@@ -163,10 +153,11 @@ let
   #    host.headless = false;
   # };
 
-  # services.telnet = {
-  #   enable = true;
-  #   # port = ;
-  # };
+  nixpkgs.overlays = [
+    (import ./overlays/kernels.nix) 
+    (import ./overlays/haskell.nix) 
+  ];
+
 
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = false;
@@ -174,9 +165,6 @@ let
   # extraConfig
 
   networking.iproute2.enable = true;
-
-  # nixpkgs.config = {
-  # };
 
   systemd.coredump.enable = true;
 

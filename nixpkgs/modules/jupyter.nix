@@ -1,6 +1,8 @@
 { config, pkgs, options, lib, ... } @ mainArgs:
 {
 # only if exists !
+# 
+# journalctl -b -u jupyter.service 
   services.jupyter = {
     enable = true;
     # port = 8123; # 8888 by default
@@ -46,10 +48,17 @@
           ]);
         in {
           displayName = "Haskell for machine learning";
-          # look
+          # https://github.com/gibiansky/IHaskell/issues/920
           argv = [
             "${ihaskellEnv}/bin/runhaskell"
+            # "kernel"
             "{connection_file}"
+            "--ghclib"
+            "${ihaskellEnv}/lib/ghc-8.4.3"
+            "+RTS"
+            "-M3g"
+            # "-N2" # requires the program to be compiled with threaded
+            "-RTS"
           ];
           language = "haskell";
           # env = 
@@ -60,7 +69,7 @@
 
       # sage = let 
       #   # readFile
-      #   kernel= builtins.fromJSON (builtins.readFile (pkgs.sage + "/share/jupyter/kernels/sagemath/kernel.json")) // {
+    #   kernel= builtins.fromJSON (builtins.readFile (pkgs.sage + "/share/jupyter/kernels/sagemath/kernel.json")) // {
       #     language="python";
       #   };
       #     env = (pkgs.python3.withPackages (pythonPackages: with pythonPackages; [
