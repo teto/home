@@ -1229,11 +1229,12 @@ call neomake#configure#automake('w')
 " augroup END
 " }}}
 " Airline {{{
-let g:airline_extensions = ['obsession', 'tabline'] " to speed up things
+let g:airline_extensions = ['obsession', 'tabline', 'wordcount'] " to speed up things
 " let g:airline#extensions#default#layout = [
 "     \ [ 'a', 'b', 'c' ],
 "     \ [ 'x', 'y', 'z', 'error', 'warning' ]
 "     \ ]
+" let g:airline#extensions#wordcount#filetypes = ...
 
 let g:airline_highlighting_cache = 1
 let g:airline_exclude_preview = 0

@@ -1,7 +1,7 @@
 { config, pkgs, options, lib, ... } @ mainArgs:
 {
 # only if exists !
-# 
+# enableDebugging
 # journalctl -b -u jupyter.service 
   services.jupyter = {
     enable = true;
@@ -46,12 +46,36 @@
           (pkgs.haskell.lib.doJailbreak self.ihaskell-diagrams)
           (pkgs.haskell.lib.doJailbreak self.ihaskell-display)
           ]);
+
+          # ihaskellSh = pkgs.writeScriptBin "ihaskell-wrapper" ''
+          ihaskellSh = pkgs.writeScript "ihaskell-wrapper" ''
+            #! ${pkgs.stdenv.shell}
+            export GHC_PACKAGE_PATH="$(echo ${ihaskellEnv}/lib/*/package.conf.d| tr ' ' ':'):$GHC_PACKAGE_PATH"
+            export PATH="${pkgs.stdenv.lib.makeBinPath ([ ihaskellEnv ])}''${PATH:+:}$PATH"
+            ${ihaskellEnv}/bin/ihaskell ''$@
+          '';
+
+          # finalEnv = pkgs.buildEnv {
+          #   name = "ihaskell-finalEnv";
+          #   buildInputs = [ pkgs.makeWrapper ];
+          #   # paths to symlink
+          #   paths = [ ihaskellEnv ];
+          #   postBuild = ''
+          #     echo PWD $PWD
+          #     ls -lR $PWD
+          #     echo out $out
+          #     wrapProgram $PWD/bin/ihaskell --prefix GHC_PACKAGE_PATH ":" "$(echo ${ihaskellEnv}/lib/*/package.conf.d| tr ' ' ':')" --prefix  PATH ":" "${lib.makeBinPath ([ ihaskellEnv ])}"
+
+          #   '';
+          # };
+
         in {
           displayName = "Haskell for machine learning";
           # https://github.com/gibiansky/IHaskell/issues/920
           argv = [
-            "${ihaskellEnv}/bin/runhaskell"
-            # "kernel"
+            # "${finalEnv}/bin/ihaskell"
+            "${ihaskellSh}"
+            "kernel"
             "{connection_file}"
             "--ghclib"
             "${ihaskellEnv}/lib/ghc-8.4.3"
