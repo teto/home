@@ -1909,16 +1909,21 @@ let g:LanguageClient_autoStart=1 " Run :LanguageClientStart when disabled
 let g:LanguageClient_selectionUI='fzf'
 " or off / messages
 let g:LanguageClient_trace="verbose"
+" let g:LanguageClient_windowLogMessageLevel
 " call LanguageClient_setLoggingLevel('DEBUG')
 "let g:LanguageClient_diagnosticsList="quickfix"
-" let g:LanguageClient_loggingLevel
+" 'DEBUG' | 'INFO' | 'WARN' | 'ERROR'
+let g:LanguageClient_loggingLevel='DEBUG'
 "let g:LanguageClient_rootMarkers
+"let g:LanguageClient_hoverPreview
 let g:LanguageClient_diagnosticsEnable=0
 " hardcoded for now
+" hie-wrapper is not available in domenkazar version
+" see $RUNTIME/rplugin/python3/LanguageClient/wrapper.sh for logging
+" \ 'rust': ['rustup', 'run', 'nightly', 'rls']
 let g:LanguageClient_serverCommands = {
-    \ 'rust': ['rustup', 'run', 'nightly', 'rls']
-    \ , 'python': [ fnamemodify( g:python3_host_prog, ':p:h').'/pyls', '--log-file' , expand('~/lsp_python.log')]
-    \ , 'haskell': ['hie-wrapper']
+    \ 'python': [ fnamemodify( g:python3_host_prog, ':p:h').'/pyls', '--log-file' , expand('~/lsp_python.log')]
+    \ , 'haskell': ['hie', '--lsp', '-d', '--logfile', '/tmp/lsp_haskell.log' ]
     \ }
 
 " todo provide a fallback if lsp not available

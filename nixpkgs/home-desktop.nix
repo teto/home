@@ -104,7 +104,7 @@ let
     gnome3.nautilus # demande webkit/todo replace by nemo ?
     shutter # screenshot utility
     mcomix # manga reader
-    mendeley # requiert qtwebengine
+    # mendeley # requiert qtwebengine
     pinta    # photo editing
     stable.qtcreator  # for wireshark
     zeal       # doc for developers

@@ -115,6 +115,7 @@ SEC("action") int handle_ingress(struct __sk_buff *skb)
 	if(!tcp)
 		return TC_ACT_OK;
 	__u16 *addr = (__u16 *) (&(tcp -> ack_seq) + 1);
+	/* tcp_flag_byte */
 	__u64 flags = (__u64) load_byte(skb, ETH_HLEN + sizeof(struct iphdr) + offsetof(struct tcphdr, ack_seq) + 4 + 1);
 	//__u16 flags = *addr;//*((__u16 *) ((0 + 1)));
 	if( get_flag(flags, SYN)) {

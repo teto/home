@@ -40,7 +40,7 @@
 
       # haskell kernel
         haskell = let 
-          ihaskellEnv = pkgs.haskellPackages.ghcWithPackages (self: [
+          ihaskellEnv = pkgs.haskellPackages.ghcWithHoogle (self: [
           self.ihaskell
           (pkgs.haskell.lib.doJailbreak self.ihaskell-blaze)
           (pkgs.haskell.lib.doJailbreak self.ihaskell-diagrams)
@@ -55,26 +55,10 @@
             export PATH="${pkgs.stdenv.lib.makeBinPath ([ ihaskellEnv ])}''${PATH:+:}$PATH"
             ${ihaskellEnv}/bin/ihaskell ''$@
           '';
-
-          # finalEnv = pkgs.buildEnv {
-          #   name = "ihaskell-finalEnv";
-          #   buildInputs = [ pkgs.makeWrapper ];
-          #   # paths to symlink
-          #   paths = [ ihaskellEnv ];
-          #   postBuild = ''
-          #     echo PWD $PWD
-          #     ls -lR $PWD
-          #     echo out $out
-          #     wrapProgram $PWD/bin/ihaskell --prefix GHC_PACKAGE_PATH ":" "$(echo ${ihaskellEnv}/lib/*/package.conf.d| tr ' ' ':')" --prefix  PATH ":" "${lib.makeBinPath ([ ihaskellEnv ])}"
-
-          #   '';
-          # };
-
         in {
           displayName = "Haskell for machine learning";
           # https://github.com/gibiansky/IHaskell/issues/920
           argv = [
-            # "${finalEnv}/bin/ihaskell"
             "${ihaskellSh}"
             "kernel"
             "{connection_file}"
@@ -86,9 +70,6 @@
             "-RTS"
           ];
           language = "haskell";
-          # env = 
-          # logo32 = "$ {env.sitePackages}/ipykernel/resources/logo-32x32.png";
-          # logo64 = "$ {env.sitePackages}/ipykernel/resources/logo-64x64.png";
         };
 
 

@@ -15,13 +15,12 @@ let
   # keyringProg = pkgs.python3.withPackages(ps: with ps; [ secretstorage keyring pygobject3]);
 in
 {
+  accounts.email.maildirBasePath = "${config.home.homeDirectory}/maildir";
   accounts.email.accounts = {
     gmail = {
 
       mbsync = mbsyncConfig;
-      alot = {
-        enable = true;
-      };
+      # alot = { enable = true; };
       msmtp.enable = true;
       notmuch = { 
         enable = true;
@@ -38,13 +37,14 @@ in
       };
       offlineimap = {
         enable = true;
-        # postSyncHookCommand = ;
-        extraConfig = ''
+        extraConfig.local = {
           # alot per-account extraConfig
           # The startdate option expects a date in the format yyyy-mm-dd.
           # can't be used with maxage
           # startdate = 2018-04-01
-          '';
+        };
+        extraConfig.remote = {};
+        # postSyncHookCommand = ''
 
         # extraConfig = 
         # seens to work without it ?
@@ -88,32 +88,23 @@ in
 
     iij = {
       mbsync = mbsyncConfig;
-      alot = {
-        enable = true;
-      };
+      # alot = { enable = true; };
       msmtp.enable = true;
       notmuch = { 
         enable = true;
       };
-      offlineimap = {
-        enable = true;
-        # postSyncHookCommand = ;
-        extraConfig = ''
-          # alot per-account extraConfig
-          # The startdate option expects a date in the format yyyy-mm-dd.
-          # can't be used with maxage
-          # startdate = 2018-04-01
-          '';
+      # offlineimap = {
+      #   enable = true;
+      #   extraConfig.local = ''
+      #     # alot per-account extraConfig
+      #     # The startdate option expects a date in the format yyyy-mm-dd.
+      #     # can't be used with maxage
+      #     # startdate = 2018-04-01
+      #     '';
 
-        # extraConfig = 
-        # seens to work without it ?
-        # sslcacertfile= /etc/ssl/certs/ca-certificates.crt
-        # newer offlineimap > 6.5.4 needs this
-        # cert_fingerprint = 89091347184d41768bfc0da9fad94bfe882dd358
-        # name translations would need to be done in both repositories, but reverse
-        # prevent sync with All mail folder since it duplicates mail
-        # folderfilter = lambda foldername: foldername not in ['[Gmail]/All Mail','[Gmail]/Spam','[Gmail]/Important']
-      };
+      #   # postSyncHookCommand = ''
+      #   #   '';
+      # };
 
       userName = "coudron@iij.ad.jp";
       realName = "Matthieu Coudron";
@@ -161,67 +152,67 @@ in
      '';
    };
 
-   programs.alot = {
-     enable = true;
+   # programs.alot = {
+   #   enable = true;
 
-     # sendCommand = config.programs.msmtp.sendCommand;
-     # mta type
-     # contactCompletionCommand = ''
-     # '';
+   #   # sendCommand = config.programs.msmtp.sendCommand;
+   #   # mta type
+   #   # contactCompletionCommand = ''
+   #   # '';
 
-     # createAliases=true;
-     # generate alias
-     # TODO test http://alot.readthedocs.io/en/latest/configuration/key_bindings.html
-     # w = pipeto urlscan 2> /dev/null
+   #   # createAliases=true;
+   #   # generate alias
+   #   # TODO test http://alot.readthedocs.io/en/latest/configuration/key_bindings.html
+   #   # w = pipeto urlscan 2> /dev/null
 
-     # initial_command = bufferlist; taglist; search foo; search bar; buffer 0
-     #  mailinglists = lisp@ietf.org, taps@ietf.org 
-     # see https://github.com/pazz/alot/wiki/Tips,-Tricks-and-other-cool-Hacks for more ideas
-     bindings = {
-        global = {
-          R = "reload";
-          "/" = "prompt search ";
-        };
-        thread = {
-          a = "call hooks.apply_patch(ui)";
-          "' '" = "fold; untag unread; move next unfolded";
-        };
-      };
+   #   # initial_command = bufferlist; taglist; search foo; search bar; buffer 0
+   #   #  mailinglists = lisp@ietf.org, taps@ietf.org 
+   #   # see https://github.com/pazz/alot/wiki/Tips,-Tricks-and-other-cool-Hacks for more ideas
+   #   bindings = {
+   #      global = {
+   #        R = "reload";
+   #        "/" = "prompt search ";
+   #      };
+   #      thread = {
+   #        a = "call hooks.apply_patch(ui)";
+   #        "' '" = "fold; untag unread; move next unfolded";
+   #      };
+   #    };
 
-# editor_command
-# editor_spawn
-# attachment_prefix = ~/Downloads
-        # theme = "solarized";
-     extraConfig = ''
-       # foireux comme option
-        editor_in_thread = False
-        auto_remove_unread = True
-        ask_subject = False
-        handle_mouse = True
-     '';
+# # editor_command
+# # editor_spawn
+# # attachment_prefix = ~/Downloads
+   #      # theme = "solarized";
+   #   extraConfig = ''
+   #     # foireux comme option
+   #      editor_in_thread = False
+   #      auto_remove_unread = True
+   #      ask_subject = False
+   #      handle_mouse = True
+   #   '';
 
-# TODO add as a string  extraConfigStr
-# [tags]
-#   [[inbox]]
-#     translated = 📥
-#   [[unread]]
-#     translated = ✉
-#   [[replied]]
-#     translated = ⏎
-#   [[sent]]
-#     translated = ↗
-#   [[attachment]]
-#     translated = 📎
-#   [[lists]]
-#     translated = 📃
-#   [[bug]]
-#     translated = 🐜
-#     normal = "", "", "dark red", "", "light red", ""
-#   [[encrypted]]
-#     translated = 🔒
-#   [[spam]]
-# translated = ♻
-   };
+# # TODO add as a string  extraConfigStr
+# # [tags]
+# #   [[inbox]]
+# #     translated = 📥
+# #   [[unread]]
+# #     translated = ✉
+# #   [[replied]]
+# #     translated = ⏎
+# #   [[sent]]
+# #     translated = ↗
+# #   [[attachment]]
+# #     translated = 📎
+# #   [[lists]]
+# #     translated = 📃
+# #   [[bug]]
+# #     translated = 🐜
+# #     normal = "", "", "dark red", "", "light red", ""
+# #   [[encrypted]]
+# #     translated = 🔒
+# #   [[spam]]
+# # translated = ♻
+   # };
 
 
    # disabled for now, use mbsync instead
@@ -231,20 +222,25 @@ in
    #   #  notmuch --config=$XDG_CONFIG_HOME/notmuch/notmuchrc new
    #   #   '';
 
-     extraConfig = ''
-# interval between updates (in minutes)
-autorefresh=0
+   # pythonFile = {
+   # }
 
-[DEFAULT]
+   extraConfig.general = {
+      # interval between updates (in minutes)
+      autorefresh="0";
+    };
+
+  extraConfig.default = {
+
 # in bytes
 # The startdate option expects a date in the format yyyy-mm-dd.
 # can't be used with maxage
 # startdate = 2018-04-01
-maxsize=2000000
+maxsize="2000000";
 # works only with local folders of type maildir in daysA
 # maxage=30
-synclabels= yes
-'';
+synclabels= "yes";
+};
 
   # pythonFile = ''
 # import subprocess
