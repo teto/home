@@ -148,7 +148,6 @@ in
      enable = true;
      extraConfig = ''
       syslog         on
-
       defaults
      '';
    };
@@ -180,10 +179,10 @@ in
    #      };
    #    };
 
-# # editor_command
-# # editor_spawn
-# # attachment_prefix = ~/Downloads
-   #      # theme = "solarized";
+# editor_command
+# editor_spawn
+# attachment_prefix = ~/Downloads
+        # theme = "solarized";
      extraConfig = {
        # foireux comme option
        # convertir

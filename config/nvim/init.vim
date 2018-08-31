@@ -1902,7 +1902,8 @@ let g:langserver_executables = {
 " call LanguageClient_textDocument_hover
 " by default logs in /tmp/LanguageClient.log.
 let g:LanguageClient_autoStart=1 " Run :LanguageClientStart when disabled
-" let g:LanguageClient_settingsPath=stdpath('config')."/settings.json"
+let g:LanguageClient_loadSettings = 1
+let g:LanguageClient_settingsPath=stdpath('config')."/settings.json"
 " pyls.configurationSources
 " my settings.json generates errors so remove it
 " let g:LanguageClient_loadSettings=$XDG_CONFIG_HOME."/nvim/settings.json"
@@ -1913,7 +1914,7 @@ let g:LanguageClient_trace="verbose"
 " call LanguageClient_setLoggingLevel('DEBUG')
 "let g:LanguageClient_diagnosticsList="quickfix"
 " 'DEBUG' | 'INFO' | 'WARN' | 'ERROR'
-let g:LanguageClient_loggingLevel='DEBUG'
+" let g:LanguageClient_loggingLevel='DEBUG'
 "let g:LanguageClient_rootMarkers
 "let g:LanguageClient_hoverPreview
 let g:LanguageClient_diagnosticsEnable=0
@@ -1924,11 +1925,21 @@ let g:LanguageClient_diagnosticsEnable=0
 let g:LanguageClient_serverCommands = {
     \ 'python': [ fnamemodify( g:python3_host_prog, ':p:h').'/pyls', '--log-file' , expand('~/lsp_python.log')]
     \ , 'haskell': ['hie', '--lsp', '-d', '--logfile', '/tmp/lsp_haskell.log' ]
+    \ , 'cpp': ['cquery', '--log-file=/tmp/cq.log']
+    \ , 'c': ['cquery', '--log-file=/tmp/cq.log']
     \ }
 
+set completefunc=LanguageClient#complete
+set formatexpr=LanguageClient_textDocument_rangeFormatting()
+
 " todo provide a fallback if lsp not available
-nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
-nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
+" nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
+
+nnoremap <silent> gh :call LanguageClient#textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+nnoremap <silent> gr :call LanguageClient#textDocument_references()<CR>
+nnoremap <silent> gs :call LanguageClient#textDocument_documentSymbol()<CR>
+nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
 " nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
 "}}}
 "{{{

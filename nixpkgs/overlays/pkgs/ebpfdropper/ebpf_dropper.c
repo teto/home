@@ -106,6 +106,8 @@ struct bpf_elf_map SEC("maps") map = {
 /* 	return flags & (1 << flag); */
 /* } */
 
+/* TCPHDR_FIN */
+
 SEC("action") int handle_ingress(struct __sk_buff *skb)
 {
 

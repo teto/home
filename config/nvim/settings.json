@@ -2,5 +2,8 @@
     "languageServerHaskell": {
         "hlintOn": false,
         "maxNumberOfProblems": 10
-    }
+    },
+	"initializationOptions": {
+		"cacheDirectory": "/tmp/cquery"
+	}
 }
