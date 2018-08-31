@@ -20,9 +20,12 @@ stdenv.mkDerivation  {
   unpackPhase = ":";
 
   buildPhase = ''
-    clang -O2 -emit-llvm -c $src/test_ebpf_tc.c -o - | llc -march=bpf -filetype=obj -o bpf.o
+    clang -O2 -emit-llvm -c $src/ebpf_dropper.c -o - | llc -march=bpf -filetype=obj -o ebpf_dropper.o
   '';
 
+  shellHook = ''
+    echo $buildPhase
+  '';
   installPhase = ''
 
     echo $PWD

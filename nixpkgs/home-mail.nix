@@ -20,7 +20,8 @@ in
     gmail = {
 
       mbsync = mbsyncConfig;
-      # alot = { enable = true; };
+      alot = { enable = true; };
+      # astroid = { enable = true; };
       msmtp.enable = true;
       notmuch = { 
         enable = true;
@@ -152,8 +153,8 @@ in
      '';
    };
 
-   # programs.alot = {
-   #   enable = true;
+   programs.alot = {
+     enable = true;
 
    #   # sendCommand = config.programs.msmtp.sendCommand;
    #   # mta type
@@ -183,13 +184,14 @@ in
 # # editor_spawn
 # # attachment_prefix = ~/Downloads
    #      # theme = "solarized";
-   #   extraConfig = ''
-   #     # foireux comme option
-   #      editor_in_thread = False
-   #      auto_remove_unread = True
-   #      ask_subject = False
-   #      handle_mouse = True
-   #   '';
+     extraConfig = {
+       # foireux comme option
+       # convertir
+        editor_in_thread = false;
+        auto_remove_unread = true;
+        ask_subject = false;
+        handle_mouse = true;
+      };
 
 # # TODO add as a string  extraConfigStr
 # # [tags]
@@ -212,44 +214,27 @@ in
 # #     translated = 🔒
 # #   [[spam]]
 # # translated = ♻
-   # };
+   };
 
 
    # disabled for now, use mbsync instead
    programs.offlineimap = {
-     enable = true;
-   #   # postSyncHook=''
-   #   #  notmuch --config=$XDG_CONFIG_HOME/notmuch/notmuchrc new
-   #   #   '';
+      enable = true;
+      extraConfig.general = {
+        # interval between updates (in minutes)
+        autorefresh=0;
+      };
+      extraConfig.default = {
 
-   # pythonFile = {
-   # }
-
-   extraConfig.general = {
-      # interval between updates (in minutes)
-      autorefresh="0";
-    };
-
-  extraConfig.default = {
-
-# in bytes
-# The startdate option expects a date in the format yyyy-mm-dd.
-# can't be used with maxage
-# startdate = 2018-04-01
-maxsize="2000000";
-# works only with local folders of type maildir in daysA
-# maxage=30
-synclabels= "yes";
-};
-
-  # pythonFile = ''
-# import subprocess
-# import keyring
-
-# def get_pass (service, name):
-    # v = keyring.get_password(service, name)
-    # return v
-    # '';
+        # in bytes
+        # The startdate option expects a date in the format yyyy-mm-dd.
+        # can't be used with maxage
+        startdate = "2018-04-01";
+        maxsize=2000000;
+        # works only with local folders of type maildir in daysA
+        # maxage=30
+        synclabels= true;
+      };
    };
 
   programs.mbsync = {

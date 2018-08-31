@@ -14,8 +14,19 @@
  THIS WORKED !!!
 nix-shell -p llvm_4 clang
 clang  -O2 -emit-llvm -c test_ebpf_tc.c -v -I${dev}/build/dest -I${dev}/build/include -I${dev}/build/arch/x86/include/uapi -I${dev}/arch/x86/include| llc -march=bpf -filetype=obj -o bpf.o
+ *
+ * Supported 32 bit action return codes from the C program and their meanings ( linux/pkt_cls.h ):
+           TC_ACT_OK (0) , will terminate the packet processing pipeline and
+           allows the packet to proceed
+           TC_ACT_SHOT (2) , will terminate the packet processing pipeline
+           and drops the packet
+           TC_ACT_UNSPEC (-1) , will use the default action configured from
+           tc (similarly as returning -1 from a classifier)
+           TC_ACT_PIPE (3) , will iterate to the next action, if available
+           TC_ACT_RECLASSIFY (1) , will terminate the packet processing
+           pipeline and start classification from the beginning
+           else , everything else is an unspecified return code<Paste>
  */
-#define KBUILD_MODNAME "foo"
 
 #include <linux/bpf.h>
 #include <linux/if_ether.h>
@@ -36,13 +47,11 @@ clang  -O2 -emit-llvm -c test_ebpf_tc.c -v -I${dev}/build/dest -I${dev}/build/in
 /* for offsetof */
 #include <stddef.h> 
 
-#define IP_TCP 	6
-#define ETH_HLEN 14
-
 
 
 #define SEC(NAME) __attribute__((section(NAME), used))
 #define PIN_GLOBAL_NS		2
+
 struct bpf_elf_map {
 	__u32 type;
 	__u32 size_key;
@@ -54,11 +63,11 @@ struct bpf_elf_map {
 };
 
 /* copy of 'struct ethhdr' without __packed */
-struct eth_hdr {
-	unsigned char   h_dest[ETH_ALEN];
-	unsigned char   h_source[ETH_ALEN];
-	unsigned short  h_proto;
-};
+/* struct eth_hdr { */
+/* 	unsigned char   h_dest[ETH_ALEN]; */
+/* 	unsigned char   h_source[ETH_ALEN]; */
+/* 	unsigned short  h_proto; */
+/* }; */
 
 
 struct bpf_elf_map SEC("maps") map = {
@@ -84,22 +93,28 @@ struct bpf_elf_map SEC("maps") map = {
 #define bpf_debug(fmt, ...) { } while (0)
 #endif
 
-#define FIN 0
-#define SYN 1
-#define RST 2
-#define PSH 3
-#define ACK 4
-#define URG 5
-#define ECE 6
-#define CWR 7
+/* #define FIN 0 */
+/* #define SYN 1 */
+/* #define RST 2 */
+/* #define PSH 3 */
+/* #define ACK 4 */
+/* #define URG 5 */
+/* #define ECE 6 */
+/* #define CWR 7 */
 
-int get_flag(__u8 flags, int flag) {
-	return flags & (1 << flag);
-}
+/* int get_flag(__u8 flags, int flag) { */
+/* 	return flags & (1 << flag); */
+/* } */
 
 SEC("action") int handle_ingress(struct __sk_buff *skb)
 {
-	struct tcphdr *tcp = (struct tcphdr *) skb + (ETH_HLEN + sizeof(struct iphdr));
+
+	void *data = (void *)(long)skb->data;
+	/* void *data_end = (void *)(long)skb->data_end; */
+	/* struct eth_hdr *eth = data; */
+	/* struct iphdr *iph = data + sizeof(*eth); */
+	/* TODO rename into th */
+	struct tcphdr *tcp = (struct tcphdr *) skb + (sizeof(struct eth_hdr) + sizeof(struct iphdr));
 	int key = 0, key2 = 1;
 	__u32 *seen;
 	seen = bpf_map_lookup_elem(&map, &key);
@@ -115,10 +130,15 @@ SEC("action") int handle_ingress(struct __sk_buff *skb)
 	if(!tcp)
 		return TC_ACT_OK;
 	__u16 *addr = (__u16 *) (&(tcp -> ack_seq) + 1);
-	/* tcp_flag_byte */
-	__u64 flags = (__u64) load_byte(skb, ETH_HLEN + sizeof(struct iphdr) + offsetof(struct tcphdr, ack_seq) + 4 + 1);
-	//__u16 flags = *addr;//*((__u16 *) ((0 + 1)));
-	if( get_flag(flags, SYN)) {
+	/* tcp_flag_byte TCP_FLAG_PSH used with tcp_flag_word */
+	/* tcp_flag_byte() */
+	__be32 flags = tcp_flag_word(tcp);
+	__u64 flags2 = (__u64) load_byte(skb, ETH_HLEN + sizeof(struct iphdr) + offsetof(struct tcphdr, ack_seq) + 4 + 1);
+	bpf_debug("flag_word gives %x while flags2 gives\n", flags, flags2);
+	/* __u64 flags = (__u64) load_byte(skb, ETH_HLEN + sizeof(struct iphdr) ); */
+	
+
+	if( flags & TCP_FLAG_SYN) {
 		__u32 val = 0;
 		*seen = 0;
 		bpf_debug("RESET SEEN\n");
@@ -128,18 +148,18 @@ SEC("action") int handle_ingress(struct __sk_buff *skb)
 	// We here only handle the little endian case
         
         // fin is at the 1st position of the byte in little endian
-	if (0 && get_flag(flags, FIN)) { // tail drop
-		bpf_debug("DROP, PSH: %x\n", get_flag(flags, PSH));
-                bpf_debug("DROP, FIN: %x\n", get_flag(flags, FIN));
+	if (0 && (flags & TCP_FLAG_FIN)) { // tail drop
+		bpf_debug("DROP, PSH: %x\n", flags & TCP_FLAG_PSH);
+                bpf_debug("DROP, FIN: %x\n", flags & TCP_FLAG_FIN);
 
 		return TC_ACT_SHOT;
 	}
-	if (!get_flag(flags, SYN) && !*seen) {
+	if (!(flags & TCP_FLAG_SYN) && !*seen) {
 		__u8 off = ((__u8) load_byte(skb, ETH_HLEN + sizeof(struct iphdr) + offsetof(struct tcphdr, ack_seq) + 4) & 0xF0) >> 4;
 		int header_size = off*4;
 		int packet_len = skb -> len - (ETH_HLEN + sizeof(struct iphdr) + header_size);
 		//bpf_debug("HERE, LEN = %d\n", packet_len);
-		if(get_flag(flags, PSH)) {
+		if(flags & TCP_FLAG_PSH) {
 			bpf_debug("POTENTIALLY TAIL\n");
 			// this is potentially the tail
 			// check that is is the tail by analyzing the end of the packet to find the DROPME tag

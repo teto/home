@@ -22,9 +22,9 @@
 
     # VERY IMPORTANT to disable syncookies since it will change the timestamp
     "net.ipv4.tcp_syncookies" = 0;
-    # set it to full OWD
-    # for now disable it
-    "net.ipv4.tcp_timestamps" = 4;
+
+    # seems to generate problems when connecting via ssh; for now disable it
+    "net.ipv4.tcp_timestamps" = 1;
       "net.mptcp.mptcp_debug" = 1;
       "net.mptcp.mptcp_checksum" = 0;
       "net.mptcp.mptcp_enabled" = 1;
