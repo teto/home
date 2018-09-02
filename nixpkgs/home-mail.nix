@@ -4,7 +4,12 @@ let
     enable = true;
     # extraConfig = ''
     #   '';
-
+    extraConfig.channel = {
+      MaxMessages = "10000";
+      # size[k|m][b]
+      MaxSize = "1m";
+    };
+    # postSyncHookCommand = "notmuch new";
     create = "maildir";
   };
   my_tls = {
@@ -13,6 +18,32 @@ let
     certificatesFile = "/etc/ssl/certs/ca-certificates.crt";
   };
   # keyringProg = pkgs.python3.withPackages(ps: with ps; [ secretstorage keyring pygobject3]);
+
+
+  customMbsync = pkgs.writeScript ''
+
+      # start 
+      ${pkgs.mbsync}/bin/mbsync $@
+      notmuch 
+
+    '';
+  
+  # stdenv.mkDerivation {
+  #     name = "mbsync-with-hooks";
+
+  #     buildInputs = [ pkgs.makeWrapper ];
+
+  #     unpackPhase = "true";
+
+  #     installPhase = ''
+  #       mkdir -p $out/bin
+  #       cp ${./scripts}/* $out/bin
+
+  #       # for f in $out/bin/*; do
+  #         wrapProgram $f --prefix PATH : ${stdenv.lib.makeBinPath [ coreutils gawk gnused nix diffutils ]}
+  #       done
+  #     '';
+  # };
 in
 {
   accounts.email.maildirBasePath = "${config.home.homeDirectory}/maildir";
@@ -45,7 +76,8 @@ in
           # startdate = 2018-04-01
         };
         extraConfig.remote = {};
-        # postSyncHookCommand = ''
+        postSyncHookCommand = "notmuch new";
+
 
         # extraConfig = 
         # seens to work without it ?
@@ -127,11 +159,20 @@ in
    # TODO conditionnally define these
    programs.notmuch = {
      enable = true;
+
+     # extraConfig = {
+     #   maildir = { synchronize_flags = "false"; };
+     #  };
      # hopefully hooks should be per-account
      hooks = {
 
         # postInsert = 
+
+        # this is a trick since mbsync doesn't support 
+        # https://github.com/rycee/home-manager/issues/365
+        # https://github.com/rycee/home-manager/pull/363
         preNew = ''
+          mbsync --all
           '';
         postNew = lib.concatStrings [ 
           (builtins.readFile ../hooks_perso/post-new)
@@ -155,41 +196,35 @@ in
    programs.alot = {
      enable = true;
 
-   #   # sendCommand = config.programs.msmtp.sendCommand;
-   #   # mta type
-   #   # contactCompletionCommand = ''
-   #   # '';
-
-   #   # createAliases=true;
-   #   # generate alias
    #   # TODO test http://alot.readthedocs.io/en/latest/configuration/key_bindings.html
    #   # w = pipeto urlscan 2> /dev/null
 
-   #   # initial_command = bufferlist; taglist; search foo; search bar; buffer 0
-   #   #  mailinglists = lisp@ietf.org, taps@ietf.org 
    #   # see https://github.com/pazz/alot/wiki/Tips,-Tricks-and-other-cool-Hacks for more ideas
-   #   bindings = {
-   #      global = {
-   #        R = "reload";
-   #        "/" = "prompt search ";
-   #      };
+     bindings = {
+        global = {
+          R = "reload";
+          "/" = "prompt search ";
+        };
    #      thread = {
    #        a = "call hooks.apply_patch(ui)";
    #        "' '" = "fold; untag unread; move next unfolded";
    #      };
-   #    };
+      };
 
-# editor_command
-# editor_spawn
-# attachment_prefix = ~/Downloads
-        # theme = "solarized";
      extraConfig = {
+      # editor_command
+      # editor_spawn
+      # attachment_prefix = ~/Downloads
+        # theme = "solarized";
        # foireux comme option
        # convertir
+       # on a per account ?
+      #  mailinglists = lisp@ietf.org, taps@ietf.org 
         editor_in_thread = false;
         auto_remove_unread = true;
         ask_subject = false;
         handle_mouse = true;
+        # initial_command = "bufferlist; taglist; search foo; search bar; buffer 0";
       };
 
 # # TODO add as a string  extraConfigStr
@@ -238,31 +273,8 @@ in
 
   programs.mbsync = {
     enable = true;
+    # package = pkgs.writeScript ''
+    # '';
   };
 
-# [Account iij] # {{{
-# localrepository = iij-local
-# remoterepository = iij-remote
-# maxage=10
-# # presynchook=imapfilter
-# # TODO notify user run a script that will launch tag
-# postsynchook=notmuch --config=$XDG_CONFIG_HOME/notmuch/notmuchrc_pro new
-
-# [Repository iij-local]
-# type = Maildir
-# localfolders = ~/maildir/iij
-
-# [Repository iij-remote]
-# type = IMAP
-# # imap-tyo.iiji.jp
-# # imap911.iiji.jp
-# remotehost = imap-tyo.iiji.jp
-# # ssl=yes
-# remoteuser = coudron@iij.ad.jp
-# realdelete = no
-# sslcacertfile = /etc/ssl/certs/ca-certificates.crt
-#/bin/secret-tool # on gmail just remove tags, you really need to move files to trash folder
-# maxconnections = 3
-# # }}}
-     #   '';
 }

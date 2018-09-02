@@ -3,7 +3,7 @@
         "config": {
             "version": "11"
         },
-        "notmuch_config": "\/home\/teto\/maildir\/.notmuch-config",
+        "notmuch_config": "\/home\/teto\/.config\/notmuch\/notmuchrc",
         "debug": {
             "dryrun_sending": "false"
         },
@@ -19,13 +19,15 @@
     "accounts": {
         "charlie": {
             "name": "Charlie Root",
-            "email": "mattator@gmail.com",
+            "email": "root@localhost",
             "gpgkey": "",
             "always_gpg_sign": "false",
-            "sendmail": "msmtp -t",
+            "sendmail": "msmtp -i -t",
             "default": "true",
             "save_sent": "false",
+            "save_sent_to": "\/home\/root\/Mail\/sent\/cur\/",
             "additional_sent_tags": "",
+            "save_drafts_to": "\/home\/root\/Mail\/drafts\/",
             "signature_separate": "false",
             "signature_file": "",
             "signature_file_markdown": "",

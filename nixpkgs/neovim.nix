@@ -42,7 +42,6 @@
         " expand(‘<sfile>’)
         " let $MYVIMRC=fnamemodify(expand('<sfile>'), ":p")
 
-        source $MYVIMRC
 
         " Failed to start language server: No such file or directory: 'pyls'
         " todo do the same for pyls/vimtex etc
@@ -52,11 +51,17 @@
 
         let g:deoplete#sources#clang#libclang_path='${pkgs.llvmPackages.libclang}'
 
-        " how cna I get the PATH to pyls ?
-        " let g:LanguageClient_serverCommands.python = ['pyls', '--log-file' , expand('~/lsp_python.log')]
-
         let g:gutentags_ctags_executable_haskell = '${pkgs.haskell.lib.dontCheck pkgs.haskellPackages.hasktags}/bin/hasktags'
 
+
+        let g:LanguageClient_serverCommands = {
+             \ 'python': [ fnamemodify( g:python3_host_prog, ':p:h').'/pyls', '--log-file' , expand('~/lsp_python.log')]
+             \ , 'haskell': ['hie', '--lsp', '-d', '--logfile', '/tmp/lsp_haskell.log' ]
+             \ , 'cpp': ['${pkgs.cquery}/bin/cquery', '--log-file=/tmp/cq.log']
+             \ , 'c': ['${pkgs.cquery}/bin/cquery', '--log-file=/tmp/cq.log']
+             \ }
+
+        source $MYVIMRC
         '';
 
         packages.myVimPackage = with pkgs.vimPlugins; {

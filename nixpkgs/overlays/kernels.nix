@@ -128,7 +128,7 @@ let
       LOG_BUF_SHIFT 22
 
       # don't always exist !
-      MPTCP_NETLINK y
+      MPTCP_NETLINK? y
       MPTCP y
       MPTCP_SCHED_ADVANCED y
       MPTCP_ROUNDROBIN y
@@ -206,6 +206,7 @@ let
   '';
 
   kvmConfig = ''
+      VIRTIO y
       VIRTIO_PCI y
       VIRTIO_PCI_LEGACY y
       VIRTIO_BALLOON y
@@ -215,7 +216,7 @@ let
       VIRTIO_NET y
       VIRTIO_CONSOLE y
 
-      NET_9P_VIRTIO? y
+      NET_9P_VIRTIO? m
 
       HW_RANDOM_VIRTIO y
       # VIRTIO_MMIO_CMDLINE_DEVICES
@@ -245,9 +246,9 @@ let
       KGDB_SERIAL_CONSOLE y
       DEBUG_INFO y
 
-      PATA_MARVELL y
-      SATA_SIS y # might cause problems with more recent kernels
-      MD_RAID0 y
+      # PATA_MARVELL y # needs SATA_SIS
+      # SATA_SIS y # might cause problems with more recent kernels
+      # MD_RAID0 y
 
       # else qemu can't see the root filesystem when launched with -kenel
       EXT4_FS y
@@ -405,7 +406,8 @@ in rec {
     src = builtins.fetchGit file:///home/teto/lkl;
   });
 
-  linux_mptcp_with_netlink = prev.linux_mptcp_93.override({
+  # "cc10d7c54daa1dd6bd00d24619ed4eb6be8f5691";
+  linux_mptcp_with_netlink = prev.linux_mptcp_94.override({
     src = prev.fetchFromGitHub {
       owner = "teto";
       repo = "mptcp";
@@ -413,6 +415,12 @@ in rec {
       sha256 = "198ms07jm0kcg8m69y2fghvy6hdd5b4af4p2gjar3ibkxca1s6az";
     };
     # kernelPatches = [];
+    # netlink won't load as a module
+    # kernelPreferBuiltin = true;
+    # extraConfig = mptcpKernelExtraConfig;
+    # structuredExtraConfig = {
+    #   MPTCP_NETLINK = yes;
+    # };
   });
 
   # my_lenovo_kernel = prev.linux_latest.override({
@@ -429,6 +437,10 @@ in rec {
       OPENVSWITCH m
     '' ;
   });
+
+  
+  
+
 
   # hardenedPackages = hardenedLinuxPackagesFor prev.linux_mptcp;
 

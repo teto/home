@@ -25,12 +25,9 @@ in
 
     # only if available
     ./modules/jupyter.nix
-
   ];
 
-  boot.kernelModules = [
-    "tcpprobe"
-  ];
+  # boot.kernelModules = [ ];
 
   # kernelModules
   # lib.mkMerge
@@ -144,16 +141,16 @@ in
     firefox.enableBukubrow = true;
   };
 
-  services.hoogle = {
-    enable = true;
-    packages = (hpkgs: with hpkgs; [netlink]);
-    port = 8090; # let 8080 for nix-serve
-    # haskellPackages = pkgs.haskellPackages;
-  };
+  # services.hoogle = {
+  #   enable = true;
+  #   packages = (hpkgs: with hpkgs; [netlink]);
+  #   port = 8090; # let 8080 for nix-serve
+  #   # haskellPackages = pkgs.haskellPackages;
+  # };
 
   nix = {
 
-    package = pkgs.nixStable;
+    # package = pkgs.nixStable;
     # package = pkgs.nixUnstable;
 
     buildCores=4;
@@ -182,12 +179,30 @@ in
       show-trace = true
     '';
 
+  # generated via cachix use hie-nix
+    binaryCaches = [
+      "https://cache.nixos.org/"
+      "https://hie-nix.cachix.org"
+    ];
+    binaryCachePublicKeys = [
+      "hie-nix.cachix.org-1:EjBSHzF6VmDnzqlldGXbi0RM3HdjfTU3yDRi9Pd0jTY="
+    ];
+    trustedUsers = [ "root" "teto" ];
+
     # either use --option extra-binary-caches http://hydra.nixos.org/
     # nix.binaryCaches = [ http://hydra.nixos.org/ ];
     # handy to hack/fix around
-    readOnlyStore = false;
+    # readOnlyStore = false;
   };
 
+  # don't forget to run ulimit -c unlimited to get the actual coredump
+  # then coredumpctl debug will launch gdb !
+  systemd.coredump.enable = true;
+  # security.pam.loginLimits
+
+
+  # in master
+  # xdg.autostart.enable
 
   users.users.teto = {
     shell = pkgs.zsh;

@@ -13,10 +13,8 @@ let
   cliUtils = with pkgs; [
     netcat-gnu # plain 'netcat' is the bsd one
     bind # for dig
-    pass
-    translate-shell
     w3m # for preview in ranger w3mimgdisplay
-    ];
+  ];
 
   # TODO add heavyPackages only if available ?
   # or set binary-cache
@@ -157,14 +155,7 @@ rec {
       '';
   };
 
-  programs.neovim =
-      # import ./neovim.nix {
-      # inherit pkgs lib 
-      # # texliveEnv
-      # ; 
-    # };
-
-    {
+  programs.neovim = {
     enable = true;
     withPython3 = true;
     withPython = false;

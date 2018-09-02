@@ -76,6 +76,7 @@ let
     # mdp # markdown CLI presenter
     # gnome3.gnome_control_center
     unstable.gnome3.gnome-calculator
+    pass
     qtpass
     sublime3
     scrot # screenshot app
@@ -83,6 +84,7 @@ let
     unstable.system_config_printer
     shared_mime_info # temporary fix for nautilus to find the correct files
     # taiginijisho # japanse dict; like zkanji Qt based
+    translate-shell
     unstable.transmission_gtk
     xdotool # needed for vimtex + zathura
     xarchiver # to unpack/pack files
@@ -123,7 +125,6 @@ in
   home.packages = desktopPkgs ++ devPkgs ++ heavyPackages
   ++ imPkgs ++ [
     pkgs.cachix
-    pkgs.translate-shell
     ]
    ;
 

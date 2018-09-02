@@ -1029,51 +1029,10 @@ endif
 nnoremap <Leader>/ :set hlsearch! hls?<CR> " toggle search highlighting
 
 " }}}
-" YouCompleteMe config {{{
-let g:ycm_global_ycm_extra_conf = $XDG_CONFIG_HOME."/nvim/ycm_extra_conf.py"
-let g:ycm_confirm_extra_conf = 0
-let g:ycm_key_list_select_completion = ['<TAB>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<S-TAB>', '<Up>']
-let g:ycm_auto_trigger = 1
-let g:ycm_complete_in_comments = 1
-let g:ycm_error_symbol = s:gutter_error_sign " used to signal errors in gutter
-let g:ycm_warning_symbol = s:gutter_warn_sign " warn in gutter
-let g:ycm_show_diagnostics_ui = 1 " show info in gutter
-"let g:ycm_server_use_vim_stdout = 1
-"let g:ycm_autoclose_preview_window_after_completion = 1
-let g:ycm_key_invoke_completion = '<C-Space>'
-let g:ycm_key_detailed_diagnostics = '<leader>d'
-" several solutions available: horizontal-split, new-tab, new-or-existing tab
-let g:ycm_goto_buffer_command = 'same-buffer'
-let g:ycm_server_log_level = 'debug'
-let g:ycm_server_keep_logfiles = 1
-let g:ycm_python_binary_path = '/usr/bin/python3'
-let g:ycm_server_python_interpreter =  '/usr/bin/python3'
-" Add triggers to ycm for LaTeX-Box autocompletion
-let g:ycm_semantic_triggers = {
-      \ 'mail' : ['@'],
-      \ }
-
-let g:ycm_use_ultisnips_completer = 1 " YCM shows snippets
-let g:ycm_python_binary_path = '/usr/bin/python3'
-let g:ycm_autoclose_preview_window_after_completion = 1
-
-nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
-nnoremap <F6> :YcmDebugInfo<CR>
-
-"You may also want to map the subcommands to something less verbose; for instance, nnoremap <leader>jd :YcmCompleter GoTo<CR> maps the <leader>jd sequence to the longer subcommand invocation.
-
-"The various GoTo* subcommands add entries to Vim's jumplist so you can use CTRL-O to jump back to where you where before invoking the command (and CTRL-I to jump forward; see :h jumplist for details).
-
-nnoremap <leader>jd :YcmCompleter GoTo<CR>
-nnoremap <leader>kd :YcmCompleter GoTo<CR>
-nnoremap <leader>kl :YcmCompleter GoTo <CR>
-nnoremap <leader>kh :YcmCompleter GoToInclude<CR>
-" }}}
 " Deoplete {{{
-let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_at_startup = 0 " prefers lsp for now
 let g:deoplete#enable_ignore_case = 1
-let g:deoplete#disable_auto_complete = 0
+let g:deoplete#disable_auto_complete = 1
 let g:deoplete#enable_debug = 1
 let g:deoplete#auto_complete_delay=50
 
@@ -1917,17 +1876,21 @@ let g:LanguageClient_trace="verbose"
 " let g:LanguageClient_loggingLevel='DEBUG'
 "let g:LanguageClient_rootMarkers
 "let g:LanguageClient_hoverPreview
-let g:LanguageClient_diagnosticsEnable=0
+let g:LanguageClient_diagnosticsEnable=1
 " hardcoded for now
 " hie-wrapper is not available in domenkazar version
 " see $RUNTIME/rplugin/python3/LanguageClient/wrapper.sh for logging
 " \ 'rust': ['rustup', 'run', 'nightly', 'rls']
-let g:LanguageClient_serverCommands = {
-    \ 'python': [ fnamemodify( g:python3_host_prog, ':p:h').'/pyls', '--log-file' , expand('~/lsp_python.log')]
-    \ , 'haskell': ['hie', '--lsp', '-d', '--logfile', '/tmp/lsp_haskell.log' ]
-    \ , 'cpp': ['cquery', '--log-file=/tmp/cq.log']
-    \ , 'c': ['cquery', '--log-file=/tmp/cq.log']
-    \ }
+" you can use call extend() to merge 2 dicts
+" 
+    " \ 'python': 
+  " '-v',
+let g:LanguageClient_serverCommands.haskell = ['hie', '--lsp', '-d',  '--logfile', '/tmp/lsp_haskell.log' ]
+let g:LanguageClient_serverCommands.python = [ fnamemodify( g:python3_host_prog, ':p:h').'/pyls', '--log-file' , expand('~/lsp_python.log')]
+" delete it ?
+" del g:LanguageClient_serverCommands.cpp = ['cquery', '--log-file=/tmp/cq.log']
+unlet! g:LanguageClient_serverCommands.cpp
+unlet! g:LanguageClient_serverCommands.c
 
 set completefunc=LanguageClient#complete
 set formatexpr=LanguageClient_textDocument_rangeFormatting()
@@ -2353,6 +2316,19 @@ let g:neomake_buildPhase_maker = {
 command! BuildPhase Neomake! buildPhase
 command! BuildPhaseTest call neomake#makers#nix#nix() 
 
+" function which starts a nvim-hs instance with the supplied name
+function! s:RequireHaskellHost(name)
+    " It is important that the current working directory (cwd) is where
+    " your configuration files are.
+    return jobstart(['stack', 'exec', 'nvim-hs', a:name.name], {'rpc': v:true, 'cwd': expand('$HOME') . '/.config/nvim'})
+endfunction
+
+" Register a plugin host that is started when a haskell file is opened
+call remote#host#Register('haskell', "*.l\?hs", function('s:RequireHaskellHost'))
+
+" But if you need it for other files as well, you may just start it
+" forcefully by requiring it
+let hc=remote#host#Require('haskell')
 " QuickFixLine
 " NonText
 " runtime init.generated.vim

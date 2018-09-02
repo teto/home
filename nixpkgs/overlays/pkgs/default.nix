@@ -15,6 +15,8 @@ final: prev:
     # };
   # });
 
+  astroid = prev.enableDebugging prev.astroid;
+
   ebpfdropper = prev.callPackage ./ebpfdropper.nix {
     stdenv=prev.clangStdenv;
     llvm=prev.llvm_5;

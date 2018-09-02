@@ -16,7 +16,7 @@ let
     ./modules/libvirtd.nix
 
     # ./extraTools.nix
-    ./modules/tor.nix
+    # ./modules/tor.nix
   ];
 
   boot.loader ={
@@ -31,8 +31,7 @@ let
     grub.device = "/dev/sda";
   };
 
-  # boot.kernelParams = [ " console=ttyS0" ];
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_mptcp_with_netlink;
 
   # TODO we need nouveau 
   boot.kernelModules = [

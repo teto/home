@@ -38,7 +38,9 @@ self: prev:
 
       zeromq4-haskell = prev.haskell.lib.dontCheck hprev.zeromq4-haskell;
   #     #       servant = super.callHackage "servant" "0.12.1" {};
-  #     cabal-helper = prev.haskell.lib.doJailbreak (hsuper.callHackage "cabal-helper" "0.8.1.0" {});
+
+      cabal-helper = prev.haskell.lib.doJailbreak (hprev.cabal-helper);
+
   #     ghc-syb-utils = hsuper.callHackage "ghc-syb-utils" "0.3.0.0" {};
   #     cabal-plan = hsuper.callHackage "cabal-plan" "0.4.0.0" {};
 
