@@ -1,0 +1,13 @@
+diff --git b/Setup.hs a/Setup.hs
+index 9a5b036..9749de8 100644
+--- b/Setup.hs
++++ a/Setup.hs
+@@ -91,6 +91,8 @@ fudgePackageDesc lbi p = p
+ blackList =
+     [ -- Requires the "func" type:
+       "FilterDataset"
++    , "BatchFunction"
++    , "StatefulPartitionedCall"
+     , "FlatMapDataset"
+     , "For"
+     , "GeneratorDataset"

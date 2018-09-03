@@ -41,6 +41,8 @@ self: prev:
 
       cabal-helper = prev.haskell.lib.doJailbreak (hprev.cabal-helper);
 
+      tensorflow-core-ops = prev.haskell.lib.appendPatch (hprev.tensorflow-core-ops) ../../tensorflow.patch;
+
   #     ghc-syb-utils = hsuper.callHackage "ghc-syb-utils" "0.3.0.0" {};
   #     cabal-plan = hsuper.callHackage "cabal-plan" "0.4.0.0" {};
 

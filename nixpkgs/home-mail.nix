@@ -5,7 +5,7 @@ let
     # extraConfig = ''
     #   '';
     extraConfig.channel = {
-      MaxMessages = "10000";
+      MaxMessages = 1000;
       # size[k|m][b]
       MaxSize = "1m";
     };
@@ -20,13 +20,13 @@ let
   # keyringProg = pkgs.python3.withPackages(ps: with ps; [ secretstorage keyring pygobject3]);
 
 
-  customMbsync = pkgs.writeScript ''
+  # customMbsync = pkgs.writeScript ''
 
-      # start 
-      ${pkgs.mbsync}/bin/mbsync $@
-      notmuch 
+  #     # start 
+  #     ${pkgs.mbsync}/bin/mbsync -c /$@
+  #     notmuch 
 
-    '';
+  #   '';
   
   # stdenv.mkDerivation {
   #     name = "mbsync-with-hooks";
@@ -172,8 +172,9 @@ in
         # https://github.com/rycee/home-manager/issues/365
         # https://github.com/rycee/home-manager/pull/363
         # mbsync --all
+        # while waiting to fix the real one !
         preNew = ''
-          mbsync gmail
+          mbsync -c /home/teto/dotfiles/config/mbsync/mbsyncrc gmail
           '';
         postNew = lib.concatStrings [ 
           (builtins.readFile ../hooks_perso/post-new)
@@ -204,12 +205,27 @@ in
      bindings = {
         global = {
           R = "reload";
-          "/" = "prompt search ";
+          # look for ctrl+l
+          "ctrl l" = "refresh";
+          "/" = "prompt 'search '";
+          t = "taglist";
+          Q = "exit";
+          q = "bclose";
+          "." = "repeat";
+          # n = "compose";
+          n = "namedqueries";
+          "ctrl f" = "move halfpage down";
+          "ctrl b" = "move halfpage up";
         };
    #      thread = {
    #        a = "call hooks.apply_patch(ui)";
    #        "' '" = "fold; untag unread; move next unfolded";
    #      };
+        search = {
+          t = "toggletags todo";
+          # star it
+          # s = "toggletags todo";
+        };
       };
 
      extraConfig = {

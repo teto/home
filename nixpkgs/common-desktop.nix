@@ -200,6 +200,7 @@ in
   systemd.coredump.enable = true;
   # security.pam.loginLimits
 
+  system.copySystemConfiguration = true;
 
   # in master
   # xdg.autostart.enable
