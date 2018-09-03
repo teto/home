@@ -67,9 +67,11 @@ fileext = ".ics"
 [storage zaclys_remote_caldav]
 auth = "basic"
 type = "caldav"
+# https://ncloud.zaclys.com/remote.php/dav/calendars/22780/personal/
 url = "https://ncloud.zaclys.com/remote.php/dav/calendars/22780/personal/"
-username.fetch = ["command", "secret-tool", "get", "zaclys", "login"]
-password.fetch = ["command", "pass", "", "zaclys", "password"]
+# username.fetch = ["command", "secret-tool", "get", "zaclys", "login"]
+username = "22780"
+password.fetch = ["command", "~/dotfiles/bin/pass-show", "zaclys"]
 # }}}
 
 
