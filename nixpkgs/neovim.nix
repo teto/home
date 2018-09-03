@@ -75,6 +75,8 @@
             vim-startify
             vim-scriptease
             vim-grepper-git
+            vim-nix
+            # vim-obsession
           ];
           # manually loadable by calling `:packadd $plugin-name`
           opt = [ ];

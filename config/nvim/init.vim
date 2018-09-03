@@ -112,12 +112,12 @@ Plug 'tweekmonster/startuptime.vim', {'on': 'StartupTime'} " see startup time pe
 Plug 'AndrewRadev/splitjoin.vim' " gS/gJ to 
 Plug 'Shougo/deoplete.nvim' ", { 'do': ':UpdateRemotePlugins' }
 Plug 'roxma/nvim-yarp' " required for deoplete
-Plug 'roxma/vim-hug-neovim-rpc'
+Plug 'roxma/vim-hug-neovim-rpc' " what is that ?
 " Plug '~/vim-config'
 Plug '~/nvim-palette', { 'do': ':UpdateRemotePlugins' }
 Plug 'LnL7/vim-nix', {'for': 'nix'}
+
 " Plug 'romainl/vim-qf' " can create pb with neomake
-" Plug 'gelguy/Cmd2.vim' " test
 Plug 'editorconfig/editorconfig-vim' " not remote but involves python
 " provider
 Plug 'msrose/vim-perpetuloc'
@@ -143,20 +143,15 @@ let g:vim_search_pulse_mode = 'cursor_line'
 let g:vim_search_pulse_duration = 400
 "}}}
 
-" Plug 'kassio/neoterm' " some kind of REPL
 " Plug 'ehamberg/vim-cute-python' " display unicode characters, kinda looks bad on vim grid
 Plug 'dbakker/vim-projectroot' " projectroot#guess()
 " Plug 'sunaku/vim-dasht' " get documentation (zeavim is also a contender KabbAmine/zeavim.vim)
-" Plug 'git@github.com:reedes/vim-wordy.git' " pdt la these, pr trouver la jargon :Wordy
 " Plug 'sk1418/QFGrep' " Filter quickfix
 " Plug 'git@github.com:pseewald/vim-anyfold.git' " speed up folds processing
 " (upstreamd already or ?)
 " Plug 'mtth/scratch.vim' " , {'on': 'Scratch'} mapped to ?
 " Plug 'tjdevries/vim-inyoface.git' "InYoFace_toggle to display only comments
 " todo depend de rust
-" Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next' }
-" 'do': ':UpdateRemotePlugins' } " :h LanguageClientUsage
-" Plug 'tjdevries/nvim-langserver-shim' " for LSP
 " Plug 'powerman/vim-plugin-AnsiEsc' " { to hl ESC codes
 Plug 'junegunn/gv.vim' " git commit viewer :Gv
 " Plug 'mhinz/vim-halo' " to hight cursor line
@@ -164,12 +159,9 @@ Plug 'ludovicchabant/vim-gutentags' " automatic tag generation, very good
 Plug 'junegunn/goyo.vim', {'on': 'Goyo'} "distraction free writing focus
 Plug 'junegunn/limelight.vim' " highlights
 Plug 'calvinchengx/vim-aftercolors' " load after/colors
-"Plug 'junegunn/limelight.vim' " to highlight ucrrent paragraph only
 " Plug 'ntpeters/vim-better-whitespace' " StripWhitespace care it stole my
 " leader
 " Plug 'bronson/vim-trailing-whitespace' " :FixTrailingWhitespace
-" Plug 'tkhoa2711/vim-togglenumber' " by default mapped to <leader>n
-" Plug 'blindFS/vim-translator' " fails during launch :/
 " Plug 'timeyyy/orchestra.nvim' " to play some music on
 " Plug 'timeyyy/clackclack.symphony' " data to play with orchestra.vim
 " Plug 'tpope/vim-scriptease' " Adds command such as :Messages
@@ -213,7 +205,6 @@ let cmdline_external_term_cmd = "termite -e '%s' &"
 "}}}
 " Plug 'git@github.com:SirVer/ultisnips' " handle snippets
 " Snippets are separated from the engine. Add this if you want them:
-" Plug 'honza/vim-snippets' "  ultisnips compatible snippets
 Plug 'sjl/gundo.vim' " :GundoShow/Toggle to redo changes
 " Plug 'vim-scripts/DrawIt' " to draw diagrams
 " Plug 'Yggdroot/indentLine',{ 'for': 'python' }  " draw verticals indents but seems greedy
@@ -233,16 +224,11 @@ Plug 'sjl/gundo.vim' " :GundoShow/Toggle to redo changes
 "{{{
 Plug 'neovimhaskell/haskell-vim', {'for':'haskell'} " haskell install
 " Plug 'enomsg/vim-haskellConcealPlus', {'for':'haskell'}     " unicode for haskell operators
-" Plug 'eagletmt/ghcmod-vim', {'do': 'cabal install ghc-mod', 'for': 'haskell'} " requires
-Plug 'parsonsmatt/intero-neovim' " replaces ghcmod, open REPL with :InteroOpen
 " Plug 'bitc/vim-hdevtools'
-" Plug 'eagletmt/neco-ghc', {'for': 'haskell'} " completion plugin for haskell + deoplete ?
-" Plug 'Shougo/vimproc.vim', {'do' : 'make'} " needed by neco-ghc
 " Plug 'SevereOverfl0w/deoplete-github' " completion on commit issues (just
 " crashes without netrc
 Plug 'zchee/deoplete-zsh'
 Plug 'fszymanski/deoplete-abook'
-" Plug 'Twinside/vim-hoogle' , {'for':'haskell'}
 "}}}
 
 "Plug 'mattn/vim-rtags' a l'air léger
@@ -382,15 +368,12 @@ Plug 'teto/Modeliner' " <leader>ml to setup buffer modeline
 "Plug 'vim-scripts/DynamicSigns'
 " async grep neovim only
 Plug 'mhinz/vim-grepper' " , { 'on': 'Grepper'}
-" Plug 'ddrscott/vim-side-search'  " tOdo
 "Plug 'teto/neovim-auto-autoread' " works only in neovim, runs external checker
 Plug 'neomake/neomake' " async build for neovim
 " Plug 'rhysd/github-complete.vim' " provides github user/repo autocompletion after @ and #
-" Plug 'rhysd/vim-clang-format' " C/CPP/C++ development
 " VCS related {{{
 " Plug 'rhysd/committia.vim' " ne marche pas en rebase ?
 " }}}
-" Plug 'teddywing/auditory.vim' " play sounds as you type
 
 " does not work seems to be better ones
 Plug 'vasconcelloslf/vim-interestingwords' " highlight the words you choose <leader>k (does not work in neovim)
@@ -412,10 +395,6 @@ Plug 'NLKNguyen/papercolor-theme'
 " and it's not possible in neovim yet
 " color_coded requires vim to be compiled with -lua
 "Plug 'jeaye/color_coded'
-" Plug 'bbchung/clighter'
-" YCM generator is not really a plugin is it ?
-" Plug 'erezsh/erezvim' "zenburn scheme. This plugin resets some keymaps,
-" annoying
 " do not run it automatically, can be boring
 Plug 'chrisbra/csv.vim' " , {'for': 'csv'}
 
@@ -434,7 +413,6 @@ Plug 'lervag/vimtex', {'for': 'tex'} " so far the best one
 " to autocomplete citations we use vim-ycm-latex-semantic-completer
 " }}}
 
-" Plug 'vim-scripts/YankRing.vim' " breaks in neovim, overrides yy as well
 " far config (Find And Replace) {{{
 " let g:far#source='agnvim'
 " let g:far#source='vimgrep'
@@ -1030,7 +1008,7 @@ nnoremap <Leader>/ :set hlsearch! hls?<CR> " toggle search highlighting
 
 " }}}
 " Deoplete {{{
-let g:deoplete#enable_at_startup = 0 " prefers lsp for now
+let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_ignore_case = 1
 let g:deoplete#disable_auto_complete = 1
 let g:deoplete#enable_debug = 1
@@ -1889,8 +1867,10 @@ let g:LanguageClient_serverCommands.haskell = ['hie', '--lsp', '-d',  '--logfile
 let g:LanguageClient_serverCommands.python = [ fnamemodify( g:python3_host_prog, ':p:h').'/pyls', '--log-file' , expand('~/lsp_python.log')]
 " delete it ?
 " del g:LanguageClient_serverCommands.cpp = ['cquery', '--log-file=/tmp/cq.log']
-unlet! g:LanguageClient_serverCommands.cpp
-unlet! g:LanguageClient_serverCommands.c
+" silent unlet! g:LanguageClient_serverCommands.cpp
+" silent unlet! g:LanguageClient_serverCommands.c
+silent! call remove(g:LanguageClient_serverCommands, 'cpp')
+silent! call remove(g:LanguageClient_serverCommands, 'c')
 
 set completefunc=LanguageClient#complete
 set formatexpr=LanguageClient_textDocument_rangeFormatting()
@@ -2314,13 +2294,15 @@ let g:neomake_buildPhase_maker = {
     \ }
 
 command! BuildPhase Neomake! buildPhase
-command! BuildPhaseTest call neomake#makers#nix#nix() 
+command! BuildPhaseTest Neomake! nix
 
 " function which starts a nvim-hs instance with the supplied name
 function! s:RequireHaskellHost(name)
     " It is important that the current working directory (cwd) is where
     " your configuration files are.
-    return jobstart(['stack', 'exec', 'nvim-hs', a:name.name], {'rpc': v:true, 'cwd': expand('$HOME') . '/.config/nvim'})
+    " return jobstart(['stack', 'exec', 'nvim-hs', a:name.name], {'rpc': v:true, 'cwd': expand('$HOME') . '/.config/nvim'})
+    " we don't want to run stack !
+    return jobstart(['nvim-hs', a:name.name], {'rpc': v:true, 'cwd': expand('$HOME') . '/.config/nvim'})
 endfunction
 
 " Register a plugin host that is started when a haskell file is opened
@@ -2329,6 +2311,3 @@ call remote#host#Register('haskell', "*.l\?hs", function('s:RequireHaskellHost')
 " But if you need it for other files as well, you may just start it
 " forcefully by requiring it
 let hc=remote#host#Require('haskell')
-" QuickFixLine
-" NonText
-" runtime init.generated.vim

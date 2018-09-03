@@ -95,16 +95,16 @@ in
       realName = "Luke skywalker";
       address = "mattator@gmail.com";
       flavor = "gmail.com";
-      imap = {
-        # host = "imap.gmail.com";
-        tls = my_tls;
-      };
+      # imap = {
+      #   # host = "imap.gmail.com";
+      #   tls = my_tls;
+      # };
 
-      smtp = {
-        # host = "smtp.gmail.com";
-        # port =  587;
-        tls = my_tls;
-      };
+      # smtp = {
+      #   # host = "smtp.gmail.com";
+      #   # port =  587;
+      #   tls = my_tls;
+      # };
 
       # TODO this should be made default
       # maildirModule.path = "gmail";
@@ -112,7 +112,7 @@ in
       # keyring get gmail login
       # loginCommand = 
       passwordCommand = "${pkgs.libsecret}/bin/secret-tool lookup gmail password";
-      # maildir = 
+      # passwordCommand = "pass show gmail -c1";
 
       # todo make it optional ?
       # store = home.homeDirectory + ./maildir/gmail;
@@ -171,8 +171,9 @@ in
         # this is a trick since mbsync doesn't support 
         # https://github.com/rycee/home-manager/issues/365
         # https://github.com/rycee/home-manager/pull/363
+        # mbsync --all
         preNew = ''
-          mbsync --all
+          mbsync gmail
           '';
         postNew = lib.concatStrings [ 
           (builtins.readFile ../hooks_perso/post-new)
@@ -258,13 +259,26 @@ in
         # interval between updates (in minutes)
         autorefresh=0;
       };
+
+      # TODO get the version for keyring
+      # remotepasseval
+      pythonFile = ''
+      from subprocess import check_output
+
+      def get_pass(service, cmd):
+          return subprocess.check_output(cmd, ).splitlines()[0]
+
+      # def get_pass(account):
+      #     return check_output("pass Mail/" + account, shell=True).splitlines()[0]
+      '';
+
       extraConfig.default = {
 
         # in bytes
         # The startdate option expects a date in the format yyyy-mm-dd.
         # can't be used with maxage
         startdate = "2018-04-01";
-        maxsize=2000000;
+        maxsize=20000;
         # works only with local folders of type maildir in daysA
         # maxage=30
         synclabels= true;

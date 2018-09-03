@@ -1,13 +1,14 @@
 self: super:
 {
 
-  neovim-test = (super.pkgs.neovim-unwrapped.override  {
-    name = "neovim-test";
-    doCheck=true;
-}).overrideAttrs(oa:{
-  cmakeBuildType="debug";
-    # -DMIN_LOG_LEVEL
-});
+  # neovim-test = (super.pkgs.neovim-unwrapped.override  {
+  #   # name = "neovim-test";
+  #   doCheck=true;
+# }).overrideAttrs(oa:{
+  # cmakeBuildType="debug";
+  #   # -DMIN_LOG_LEVEL
+# });
+
   #     # withPython = false;
   #     # withPython3 = false; # pour les tests ?
   #     # withRuby = false; # pour les tests ?
