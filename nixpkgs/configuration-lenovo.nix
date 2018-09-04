@@ -16,6 +16,7 @@ let
     ./common-desktop.nix
     ./modules/network-manager.nix
     ./modules/libvirtd.nix
+    ./modules/owamp.nix
 
     # for user teto
     ./extraTools.nix

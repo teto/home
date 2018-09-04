@@ -27,6 +27,10 @@
        # screenSection = '' '';
     };
 
+    # required to make localectl work
+    # see https://github.com/NixOS/nixpkgs/issues/19629
+    exportConfiguration = true;
+
     # allow for more layout
     layout = "us,fr";  # you can switch from cli with xkb-switch
     # TODO swap esc/shift

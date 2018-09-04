@@ -69,7 +69,7 @@ let
     # unstable.gnome3.file-roller # for GUI archive handling
     ffmpegthumbnailer # to preview videos in ranger
     # todo try sthg else
-    # haskellPackages.greenclip # todo get from haskell
+    unstable.haskellPackages.greenclip # todo get from haskell
     unstable.gnome3.eog
     moc
     mupdf.bin # evince does better too
