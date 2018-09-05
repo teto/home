@@ -36,6 +36,7 @@
     # TODO swap esc/shift
     xkbOptions = "eurosign:e";
     # xkbOptions = "eurosign:e, caps:swapescape";
+    # xbkDir
 
     libinput = {
       enable = true;

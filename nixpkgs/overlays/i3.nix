@@ -155,12 +155,6 @@ rec {
   # });
 
 
-  # owamp-local = prev.owamp.overrideAttrs(oa: {
-  # patchPhase=''
-  #   substituteInPlace owamp/time.c --replace '#ifdef        STA_NANO' '#if 0'
-  # '';
-  # });
-
   nixops-dev = super.nixops.overrideAttrs ( oa: {
     # src = super.fetchFromGitHub {
     #   owner = "teto";
@@ -177,10 +171,6 @@ rec {
     };
   });
 
-  # to help debug a neovim crash
-  # unibilium = super.unibilium.overrideAttrs (old: {
-  #   separateDebugInfo = true;
-  # });
   # iperf3_lkl = super.iperf3.overrideAttrs(old: {
   # });
 }

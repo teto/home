@@ -1072,7 +1072,7 @@ let g:neomake_verbose = 1
 " let g:neomake_list_height=5
 
 " how to let 'mypy' ignore warning/errors as pycodestyle does ?
-let g:neomake_python_enabled_makers = ['pycodestyle', ]
+" 'pycodestyle'
 let g:neomake_c_maker = []
 let g:neomake_c_enabled_makers = []
 " let g:neomake_cpp_gcc_args = ['aosdifjoasidjfoiasjdfs']
@@ -1120,11 +1120,11 @@ endfunction
 " C and CPP are handled by YCM and java usually by elim
  " 'c'
 let s:neomake_exclude_ft = ['cpp', 'java' ]
-"let g:neomake_python_pep8_maker
 " let g:neomake_tex_checkers = [ '' ]
 " let g:neomake_tex_enabled_makers = []
 let g:neomake_tex_enabled_makers = []
-let g:neomake_python_enabled_makers = ['mypy']
+" 'mypy'
+let g:neomake_python_enabled_makers = []
 
 " removed chktex because of silly errors
 " let g:neomake_tex_enabled_makers = ['chktex']
@@ -1834,7 +1834,9 @@ let g:langserver_executables = {
     \ },
       \ }
 " }}}
-
+" miniyank {{{
+let g:miniyank_delete_maxlines=1000
+"}}}
 " autozimu's lsp {{{
 " call LanguageClient_textDocument_hover
 " by default logs in /tmp/LanguageClient.log.
@@ -1847,6 +1849,7 @@ let g:LanguageClient_settingsPath=stdpath('config')."/settings.json"
 let g:LanguageClient_selectionUI='fzf'
 " or off / messages
 let g:LanguageClient_trace="verbose"
+"Error" | "Warning" | "Info" | "Log"
 " let g:LanguageClient_windowLogMessageLevel
 " call LanguageClient_setLoggingLevel('DEBUG')
 "let g:LanguageClient_diagnosticsList="quickfix"
@@ -2295,6 +2298,8 @@ let g:neomake_buildPhase_maker = {
 
 command! BuildPhase Neomake! buildPhase
 command! BuildPhaseTest Neomake! nix
+" provides a list of everything possible
+command! FzfLSP call LanguageClient_contextMenu()
 
 " function which starts a nvim-hs instance with the supplied name
 function! s:RequireHaskellHost(name)

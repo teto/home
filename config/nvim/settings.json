@@ -1,5 +1,8 @@
 {
-    "languageServerHaskell": {
+	"pyls": {
+		"configurationSources": []
+	},
+	"languageServerHaskell": {
         "hlintOn": false,
         "maxNumberOfProblems": 10
     },
