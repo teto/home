@@ -21,7 +21,7 @@ rec {
     enableDoxygen = false;
     build_profile = "optimized";
     # withManual = true;
-    generateBindings = true;
+    pythonSupport = true;
   #   # withExamples = true;
   };
 

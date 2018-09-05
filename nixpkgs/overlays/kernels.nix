@@ -192,6 +192,7 @@ let
   ''
     BPF y
     BPF_JIT_ALWAYS_ON y
+    NETFILTER_XT_MATCH_BPF y
     BPF_SYSCALL y
     NET_CLS_BPF y
     NET_ACT_BPF y

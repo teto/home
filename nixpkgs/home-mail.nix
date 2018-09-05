@@ -121,7 +121,7 @@ in
 
     iij = {
       mbsync = mbsyncConfig;
-      # alot = { enable = true; };
+      alot = { enable = true; };
       msmtp.enable = true;
       notmuch = { 
         enable = true;
