@@ -18,10 +18,10 @@ rec {
 
   ns3-local = super.ns-3.override {
     python = self.python3;
-    enableDoxygen = true;
+    enableDoxygen = false;
     build_profile = "optimized";
     # withManual = true;
-    # generateBindings = true;
+    generateBindings = true;
   #   # withExamples = true;
   };
 

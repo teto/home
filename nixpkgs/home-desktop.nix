@@ -69,7 +69,8 @@ let
     # unstable.gnome3.file-roller # for GUI archive handling
     ffmpegthumbnailer # to preview videos in ranger
     # todo try sthg else
-    unstable.haskellPackages.greenclip # todo get from haskell
+    # requires xdmcp https://github.com/freedesktop/libXdmcp
+    # haskellPackages.greenclip # todo get from haskell
     unstable.gnome3.eog
     moc
     mupdf.bin # evince does better too
@@ -274,6 +275,7 @@ in
       keycodebindings= { };
       startup=[
         # TODO improve config/config specific
+        { command= "setxkbmap -layout us,fr"; always = true; notification = false; }
         # { command= "xkblayout-state set +1"; always = false; notification = false; }
         # todo convert to a HM stuff
         # { command= "${pkgs.haskellPackages.greenclip}/bin/greenclip daemon"; always = false; notification = false; }

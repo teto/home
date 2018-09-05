@@ -25,7 +25,7 @@
   # xev -event keyboard to retreive key symbols
   # xmodmap will show the modifiers list
   home.keyboard = {
-    # layout = "fr,us";
+    layout = "us,fr";
     # options = [ "grp:caps_toggle" "grp_led:scroll" ];
     # TODO can add Mod4 
     options = [ 
