@@ -12,6 +12,13 @@
     logLevel="DEBUG";
     wifi.scanRandMacAddress = true;
 
+    unmanaged = [
+      "interface-name:r?-*"
+      "interface-name:r?-*"
+      "interface-name:client-*"
+      "interface-name:server-*"
+      ];
+
     # TODO reestablish with the correct nixpkgs !
     # dispatcherScripts = [
     #   {

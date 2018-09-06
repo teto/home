@@ -31,6 +31,15 @@ in
 rec {
 
   
+  termite-unwrapped = super.termite-unwrapped.overrideAttrs(oa: {
+
+    
+    postBuild = ''
+      substituteInPlace termite.terminfo \
+        --replace "smcup=\E[?1049h," "smcup=\E[?1049h\E[22;0;0t," \
+        --replace "rmcup=\E[?1049l," "rmcup=\E[?1049l\E[23;0;0t"
+    '';
+  });
 
 
   i3-local = let i3path = ~/i3; in 

@@ -158,10 +158,10 @@ in
       "nixos-unstable=https://github.com/nixos/nixpkgs-channels/archive/nixos-unstable.tar.gz"
       "nixos=https://github.com/nixos/nixpkgs-channels/archive/nixos-18.03.tar.gz"
     ]
-    ++ lib.optionals (builtins.pathExists userNixpkgs)  [ "nixpkgs=${builtins.toString userNixpkgs}" ]
-    ++ lib.optionals (builtins.pathExists nixosConfig)  [ "nixos-config=${builtins.toString nixosConfig}" ]
-    ++ lib.optionals (builtins.pathExists nixosOverlay) [ "nixpkgs-overlays=${builtins.toString nixosOverlay}" ]
-    ++ lib.optionals (builtins.pathExists nixosOverlay) [ "ssh-config-file=${builtins.toString sshFolder}" ]
+    ++ lib.optional (builtins.pathExists userNixpkgs)  "nixpkgs=${builtins.toString userNixpkgs}" 
+    ++ lib.optional (builtins.pathExists nixosConfig)  "nixos-config=${builtins.toString nixosConfig}" 
+    ++ lib.optional (builtins.pathExists nixosOverlay) "nixpkgs-overlays=${builtins.toString nixosOverlay}" 
+    ++ lib.optional (builtins.pathExists nixosOverlay) "ssh-config-file=${builtins.toString sshFolder}"
     ;
 
     # sshServe.enable = false;
