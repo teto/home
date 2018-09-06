@@ -1010,7 +1010,7 @@ nnoremap <Leader>/ :set hlsearch! hls?<CR> " toggle search highlighting
 " Deoplete {{{
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_ignore_case = 1
-let g:deoplete#disable_auto_complete = 1
+let g:deoplete#disable_auto_complete = 0
 let g:deoplete#enable_debug = 1
 let g:deoplete#auto_complete_delay=50
 
@@ -1866,6 +1866,7 @@ let g:LanguageClient_diagnosticsEnable=1
 " 
     " \ 'python': 
   " '-v',
+" let g:LanguageClient_serverCommands.nix = ['nix-lsp']
 let g:LanguageClient_serverCommands.haskell = ['hie', '--lsp', '-d',  '--logfile', '/tmp/lsp_haskell.log' ]
 let g:LanguageClient_serverCommands.python = [ fnamemodify( g:python3_host_prog, ':p:h').'/pyls', '--log-file' , expand('~/lsp_python.log')]
 " delete it ?

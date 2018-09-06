@@ -107,6 +107,7 @@ struct bpf_elf_map SEC("maps") map = {
 /* } */
 
 /* TCPHDR_FIN */
+/* ETH_HLEN defined in libc */
 
 SEC("action") int handle_ingress(struct __sk_buff *skb)
 {
@@ -116,7 +117,7 @@ SEC("action") int handle_ingress(struct __sk_buff *skb)
 	/* struct eth_hdr *eth = data; */
 	/* struct iphdr *iph = data + sizeof(*eth); */
 	/* TODO rename into th */
-	struct tcphdr *tcp = (struct tcphdr *) skb + (sizeof(struct eth_hdr) + sizeof(struct iphdr));
+	struct tcphdr *tcp = (struct tcphdr *) skb + (ETH_HLEN + sizeof(struct iphdr));
 	int key = 0, key2 = 1;
 	__u32 *seen;
 	seen = bpf_map_lookup_elem(&map, &key);
