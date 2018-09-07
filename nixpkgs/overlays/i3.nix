@@ -83,6 +83,7 @@ rec {
      # Careful, we're using a different self and super here!
     packageOverrides = python-self: python-super: {
 
+
         # alot = python-super.alot.overrideAttrs (oldAttrs: {
         #   version = "0.9";
         #   src = /home/teto/alot;
@@ -121,6 +122,17 @@ rec {
         # TODO write a nix-shell instead
         # protocol = pythonsuper.protocol.overrideAttrs (oldAttrs: {
         #   src=/home/teto/protocol;
+        # });
+
+        # alot = pythonsuper.alot.overrideAttrs (oldAttrs: {
+        #   version = "0.8.1";
+        #   src = super.fetchFromGitHub {
+        #     owner = "pazz";
+        #     repo = "alot";
+        #     rev = "5b00a4ecd30d21ceeebb16eefbed4c48cfe3ba4a";
+        #     sha256 = "05rg8igg64kyamd35ds1f7rixgk48dffj0xsn3wgyq7h7g3pjrnf";
+        #   };
+        #   disabled = false;
         # });
 
 

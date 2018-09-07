@@ -34,9 +34,14 @@
             "{connection_file}"
           ];
           language = "python";
-          # logo32 = builtins.toPath "${env.sitePackages}/ipykernel/resources/logo-32x32.png";
+          logo32 = builtins.toPath "${env}/${env.sitePackages}/ipykernel/resources/logo-32x32.png";
           # logo64 = builtins.toPath "${env.sitePackages}/ipykernel/resources/logo-64x64.png";
         };
+
+        # just need to run
+        # ihaskell install  --debug --prefix .
+        # then we can read share/jupyter/kernels/haskell/kernel.json
+        # ihaskell-kernel = builtins.toPath
 
       # haskell kernel
         haskell = let 

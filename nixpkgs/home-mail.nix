@@ -207,6 +207,7 @@ in
           R = "reload";
           # look for ctrl+l
           "ctrl l" = "refresh";
+          # "ctrl l" = "flush";
           "/" = "prompt 'search '";
           t = "taglist";
           Q = "exit";
@@ -216,11 +217,15 @@ in
           n = "namedqueries";
           "ctrl f" = "move halfpage down";
           "ctrl b" = "move halfpage up";
+          l = "select";
+          d = "toggletags killed";
         };
-   #      thread = {
-   #        a = "call hooks.apply_patch(ui)";
-   #        "' '" = "fold; untag unread; move next unfolded";
-   #      };
+        thread = {
+          a = "call hooks.apply_patch(ui)";
+          "' '" = "fold; untag unread; move next unfolded";
+
+          "z a" = "fold *";
+        };
         search = {
           t = "toggletags todo";
           # star it
