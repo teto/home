@@ -31,18 +31,18 @@ in
 
   # kernelModules
   # lib.mkMerge
-  boot.initrd.availableKernelModules =  [
+  # boot.initrd.availableKernelModules =  [
     # TODO make them default
         # Support USB keyboards, in case the boot fails and we only have
         # a USB keyboard.
-        "uhci_hcd"
-        "ehci_hcd"
-        "ehci_pci"
-        "ohci_hcd"
-        "xhci_hcd"
-        "usbhid"
-        "hid_generic" 
-  ];
+        # "uhci_hcd"
+        # "ehci_hcd"
+        # "ehci_pci"
+        # "ohci_hcd"
+        # "xhci_hcd"
+        # "usbhid"
+        # "hid_generic" 
+  # ];
 
   networking.firewall.checkReversePath = false; # for nixops
   networking.firewall.allowedUDPPorts = [ 631 ];
