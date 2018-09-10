@@ -1,4 +1,33 @@
 { config, pkgs, options, lib, ... } @ mainArgs:
+let
+
+  #ihaskellEnv = ghcWithPackages (self: [
+  #  self.ihaskell
+  #  (haskell.lib.doJailbreak self.ihaskell-blaze)
+  #  (haskell.lib.doJailbreak self.ihaskell-diagrams)
+  #  (haskell.lib.doJailbreak self.ihaskell-display)
+  #] ++ packages self);
+  #ihaskellSh = writeScriptBin "ihaskell-notebook" ''
+  #  #! ${stdenv.shell}
+  #  export GHC_PACKAGE_PATH="$(echo ${ihaskellEnv}/lib/*/package.conf.d| tr ' ' ':'):$GHC_PACKAGE_PATH"
+  #  export PATH="${stdenv.lib.makeBinPath ([ ihaskellEnv jupyter ])}\${PATH:+':'}$PATH"
+  #  ${ihaskellEnv}/bin/ihaskell install -l $(${ihaskellEnv}/bin/ghc --print-libdir) && ${jupyter}/bin/jupyter notebook
+  #'';
+  haskellEnv = pkgs.haskellPackages.ghcWithHoogle (self: [
+          self.ihaskell
+          (pkgs.haskell.lib.doJailbreak self.ihaskell-blaze)
+          (pkgs.haskell.lib.doJailbreak self.ihaskell-diagrams)
+          (pkgs.haskell.lib.doJailbreak self.ihaskell-display)
+          # self.netlink
+        ]);  
+        
+  ihaskellKernel = pkgs.runCommand "ihaskellKernel" {
+        buildInputs = [ pkgs.jupyter]; } ''
+    export HOME=/tmp
+    ${haskellEnv}/bin/ihaskell install --prefix=$out 
+  '';
+
+in
 {
 # only if exists !
 # enableDebugging
@@ -13,7 +42,6 @@
     notebookConfig = ''
 
       '';
-
 
     password = "'sha1:1b961dc713fb:88483270a63e57d18d43cf337e629539de1436ba'";
     kernels= {
@@ -45,37 +73,34 @@
 
       # haskell kernel
         haskell = let 
-          ihaskellEnv = pkgs.haskellPackages.ghcWithHoogle (self: [
-          self.ihaskell
-          (pkgs.haskell.lib.doJailbreak self.ihaskell-blaze)
-          (pkgs.haskell.lib.doJailbreak self.ihaskell-diagrams)
-          (pkgs.haskell.lib.doJailbreak self.ihaskell-display)
-          # self.netlink
-          ]);
 
           # ihaskellSh = pkgs.writeScriptBin "ihaskell-wrapper" ''
-          ihaskellSh = pkgs.writeScript "ihaskell-wrapper" ''
-            #! ${pkgs.stdenv.shell}
-            export GHC_PACKAGE_PATH="$(echo ${ihaskellEnv}/lib/*/package.conf.d| tr ' ' ':'):$GHC_PACKAGE_PATH"
-            export PATH="${pkgs.stdenv.lib.makeBinPath ([ ihaskellEnv ])}''${PATH:+:}$PATH"
-            ${ihaskellEnv}/bin/ihaskell ''$@
-          '';
-        in {
-          displayName = "Haskell for machine learning";
-          # https://github.com/gibiansky/IHaskell/issues/920
-          argv = [
-            "${ihaskellSh}"
-            "kernel"
-            "{connection_file}"
-            "--ghclib"
-            "${ihaskellEnv}/lib/ghc-8.4.3"
-            "+RTS"
-            "-M3g"
-            # "-N2" # requires the program to be compiled with threaded
-            "-RTS"
-          ];
-          language = "haskell";
-        };
+          #ihaskellSh = pkgs.writeScript "ihaskell-wrapper" ''
+          #  #! ${pkgs.stdenv.shell}
+          #  export GHC_PACKAGE_PATH="$(echo ${ihaskellEnv}/lib/*/package.conf.d| tr ' ' ':'):$GHC_PACKAGE_PATH"
+          #  export PATH="${pkgs.stdenv.lib.makeBinPath ([ ihaskellEnv ])}''${PATH:+:}$PATH"
+          #  ${ihaskellEnv}/bin/ihaskell ''$@
+          #'';
+          # share/jupyter/kernels/haskell/
+          content = builtins.fromJSON (builtins.readFile "${ihaskellKernel}/share/jupyter/kernels/haskell/kernel.json");
+        in 
+            content;
+        # {
+          # displayName = "Haskell for machine learning";
+          # # https://github.com/gibiansky/IHaskell/issues/920
+          # argv = [
+            # "${ihaskellSh}"
+            # "kernel"
+            # "{connection_file}"
+            # "--ghclib"
+            # "${ihaskellEnv}/lib/ghc-8.4.3"
+            # "+RTS"
+            # "-M3g"
+            # # "-N2" # requires the program to be compiled with threaded
+            # "-RTS"
+          # ];
+          # language = "haskell";
+        # };
 
 
       # sage = let 
@@ -105,7 +130,6 @@
             # logo64 = "$ {env.sitePackages}/ipykernel/resources/logo-64x64.png";
           # };
 
-      };
-
+    };
   };
 }

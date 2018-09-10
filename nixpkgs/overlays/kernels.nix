@@ -409,7 +409,7 @@ in rec {
   });
 
   # "cc10d7c54daa1dd6bd00d24619ed4eb6be8f5691";
-  linux_mptcp_with_netlink = prev.linux_mptcp_94.override({
+  linux_mptcp_with_netlink = prev.linux_mptcp.override({
     src = prev.fetchFromGitHub {
       owner = "teto";
       repo = "mptcp";

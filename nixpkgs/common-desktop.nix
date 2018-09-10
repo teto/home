@@ -102,6 +102,7 @@ in
       ];
       fontconfig= {
         enable=true;
+        antialias=true; # some fonts can be disgusting else
       };
    };
 

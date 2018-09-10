@@ -217,22 +217,33 @@ in
           n = "namedqueries";
           "ctrl f" = "move halfpage down";
           "ctrl b" = "move halfpage up";
-          l = "select";
           d = "toggletags killed";
         };
         thread = {
           a = "call hooks.apply_patch(ui)";
           "' '" = "fold; untag unread; move next unfolded";
 
-          "z a" = "fold *";
+          R = "reply --all";
+          "z C" = "fold *";
+          "z c" = "fold";
+          "z o" = "unfold";
+          "z O" = "unfold *";
         };
         search = {
           t = "toggletags todo";
+          # t = "toggletags todo";
+          l = "select";
+          right = "select";
           # star it
           # s = "toggletags todo";
         };
       };
 
+      tags = {
+        replied = {
+          translated = "⏎";
+        };
+      };
      extraConfig = {
       # editor_command
       # editor_spawn
@@ -246,6 +257,9 @@ in
         auto_remove_unread = true;
         ask_subject = false;
         handle_mouse = true;
+      # terminal_cmd
+      # taglist_statusbar
+        thread_authors_replace_me = true;
         # initial_command = "bufferlist; taglist; search foo; search bar; buffer 0";
       };
 

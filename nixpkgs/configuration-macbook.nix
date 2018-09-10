@@ -31,13 +31,13 @@ let
     grub.device = "/dev/sda";
   };
 
-  boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_mptcp_with_netlink;
+  # boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_mptcp_with_netlink;
 
   # TODO we need nouveau 
-  boot.kernelModules = [
-    "af_key" # for ipsec/vpn support
-    "kvm" "kvm-intel" # for virtualisation
-  ];
+  # boot.kernelModules = [
+  #   "af_key" # for ipsec/vpn support
+  #   "kvm" "kvm-intel" # for virtualisation
+  # ];
 
   networking.hostName = "jedha"; # Define your hostname.
 

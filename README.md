@@ -7,7 +7,7 @@ This folder contains my customizations for:
 * bash
 * [buku](https://github.com/jarun/Buku): a cli bookmark manager
 * clerk (to control mpd via rofi)
-* font handling
+* font handling font-manager
 * [fcitx]() (input method mechanims)
 * git (Source control)
 * greenclip (clipboard history, works with rofi, contender of roficlip)
@@ -20,7 +20,7 @@ This folder contains my customizations for:
 * liquidprompt (a script to make your prompt adapt to the current context)
 * mpd (configuration files to run this music server as a user)
 * msmtp (MSA: Mail Sending Agent)
-* mutt / mutt-kz (Mail User Agent, incomplete config)
+* neomutt (Mail User Agent, incomplete config)
 * ncmpcpp (mpd console player)
 * [neovim](https://github.com/neovim/neovim) (fork of vim)
 * netrc (template only, password database)

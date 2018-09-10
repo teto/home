@@ -83,7 +83,7 @@ let
     scrot # screenshot app
     sxiv # simple image viewer
     unstable.system_config_printer
-    shared_mime_info # temporary fix for nautilus to find the correct files
+    # shared_mime_info # temporary fix for nautilus to find the correct files
     # taiginijisho # japanse dict; like zkanji Qt based
     translate-shell
     unstable.transmission_gtk
@@ -247,8 +247,8 @@ in
     let ws = builtins.toString workspace_id;
     in
       {
-        "$GroupFr+$mod+${fr}"="workspace \"$w${ws}";
-        "$GroupUs+$mod+${us}"="workspace \"$w${ws}";
+        "$GroupFr+$mod+${fr}"="workspace \"$w${ws}\"";
+        "$GroupUs+$mod+${us}"="workspace \"$w${ws}\"";
         "$GroupFr+Shift+$mod+${fr}"=''move container to workspace "$w${ws}"'';
         "$GroupUs+Shift+$mod+${us}"=''move container to workspace "$w${ws}"'';
       };
