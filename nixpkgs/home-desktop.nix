@@ -396,10 +396,6 @@ in
 # set $greenclip "rofi -modi 'clipboard:greenclip print' -show clipboard"
 #       bindsym $mad+h exec $greenclip
         # TODO let i3dispatch
-# bindsym $mod+Left  exec /home/teto/bin/i3dispatch left
-# bindsym $mod+Down  exec /home/teto/bin/i3dispatch down
-# bindsym $mod+Up    exec /home/teto/bin/i3dispatch up
-# bindsym $mod+Right exec /home/teto/bin/i3dispatch right
 
   # XF86AudioNext="exec ${mpc} next; exec notify-send 'Audio next'";
   # XF86AudioPrev exec mpc prev; exec notify-send "Audio prev"
@@ -435,7 +431,13 @@ in
       // move_focused_wnd "up" "k" "k"
       # semicolumn
       // move_focused_wnd "right" "l" "l" 
-      ;
+      # just trying to overwrite previous bindings with i3dispatch
+      # // {
+      # "$mod+Left" = "exec i3dispatch left";
+# bindsym $mod+Down  exec /home/teto/bin/i3dispatch down
+# bindsym $mod+Up    exec /home/teto/bin/i3dispatch up
+# bindsym $mod+Right exec /home/teto/bin/i3dispatch right
+    ;
     };
 
   };

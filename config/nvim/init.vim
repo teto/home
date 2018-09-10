@@ -405,12 +405,8 @@ let g:EditorConfig_max_line_indicator = "line"
 " }}}
 " Plug 'junegunn/rainbow_parentheses.vim' " the recommanded one
 " {{{ Latex attempts
-" this one could not compile my program
-" "Plug 'vim-latex/vim-latex', {'for': 'tex'}
-" " ATP author gh mirror seems to be git@github.com:coot/atp_vim.git
-" "Plug 'coot/atp_vim', {'for': 'tex'}
-Plug 'lervag/vimtex', {'for': 'tex'} " so far the best one
-" to autocomplete citations we use vim-ycm-latex-semantic-completer
+" lazyload creates problems
+Plug 'lervag/vimtex'
 " }}}
 
 " far config (Find And Replace) {{{
@@ -1436,6 +1432,7 @@ let g:tex_flavor = "latex"
 " <localleader>lv pour la preview du pdf
 let g:vimtex_quickfix_open_on_warning = 1
 let g:vimtex_view_automatic=1
+let g:vimtex_toc_config={}
 " autoindent can slow down vim quite a bit
 " to check indent parameters, run :verbose set ai? cin? cink? cino? si? inde? indk?
 let g:vimtex_indent_enabled=0
@@ -1462,6 +1459,7 @@ let g:vimtex_syntax_minted = [
 " let g:vimtex_log_ignore = 
 let g:vimtex_log_verbose= 1
 let g:vimtex_quickfix_mode = 2 " 1=> opened automatically and becomes active (2=> inactive)
+let g:vimtex_complete_img_use_tail=1
 " Package biblatex Warning: B
 " with being on anotherline
 " deprecated by g:vimtex_quickfix_latexlog|)
@@ -1485,10 +1483,13 @@ let g:vimtex_compiler_latexmk = {
         \   '-file-line-error',
         \   '-synctex=1',
         \   '-interaction=nonstopmode',
-        \   '-biber'
         \ ],
         \}
-      "
+
+if !exists('g:deoplete#omni#input_patterns')
+    let g:deoplete#omni#input_patterns = {}
+endif
+" let g:deoplete#omni#input_patterns.tex = g:vimtex#re#deoplete
 "<plug>(vimtex-toc-toggle)
 " au BufEnter *.tex exec ":setlocal spell spelllang=en_us"
 "" }}}

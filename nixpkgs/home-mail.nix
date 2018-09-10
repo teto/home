@@ -12,6 +12,43 @@ let
     # postSyncHookCommand = "notmuch new";
     create = "maildir";
   };
+
+
+  mbsyncWrapper = 
+      # stdenv.mkDerivation {
+  # name = "mbsync-posthook";
+
+  # buildInputs = [ makeWrapper ];
+
+  # unpackPhase = "true";
+
+  # installPhase = ''
+    # mkdir -p $out/bin
+    # cp ${./scripts}/* $out/bin
+
+    # for f in $out/bin/*; do
+      # wrapProgram $f --prefix PATH : ${stdenv.lib.makeBinPath [ coreutils gawk gnused nix diffutils ]}
+    # done
+  # '';
+# }
+# --run 
+# postSyncHook = 
+# optionalAttrs (mbsync.postSyncHookCommand != "") {
+        # postsynchook =
+          pkgs.writeShellScriptBin
+            "mbsync"
+            # mbsync.postSyncHookCommand
+            # + 
+            ''
+              ${pkgs.isync}/bin/mbsync $@
+              notmuch new
+            '';
+      # };
+
+  # temporary solution since it's not portable
+  getPassword = account:
+    "/home/teto/dotfiles/bin/pass-show ${account}";
+
   my_tls = {
     enable = true;
     # certificatesFile = "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
@@ -21,24 +58,18 @@ let
 
 
   # customMbsync = pkgs.writeScript ''
-
   #     # start 
   #     ${pkgs.mbsync}/bin/mbsync -c /$@
   #     notmuch 
-
   #   '';
   
   # stdenv.mkDerivation {
   #     name = "mbsync-with-hooks";
-
   #     buildInputs = [ pkgs.makeWrapper ];
-
   #     unpackPhase = "true";
-
   #     installPhase = ''
   #       mkdir -p $out/bin
   #       cp ${./scripts}/* $out/bin
-
   #       # for f in $out/bin/*; do
   #         wrapProgram $f --prefix PATH : ${stdenv.lib.makeBinPath [ coreutils gawk gnused nix diffutils ]}
   #       done
@@ -76,7 +107,8 @@ in
           # startdate = 2018-04-01
         };
         extraConfig.remote = {};
-        postSyncHookCommand = "notmuch new";
+        # for now remove since it will generate 
+        # postSyncHookCommand = "notmuch new";
 
 
         # extraConfig = 
@@ -95,27 +127,15 @@ in
       realName = "Luke skywalker";
       address = "mattator@gmail.com";
       flavor = "gmail.com";
-      # imap = {
-      #   # host = "imap.gmail.com";
-      #   tls = my_tls;
-      # };
-
-      # smtp = {
-      #   # host = "smtp.gmail.com";
-      #   # port =  587;
-      #   tls = my_tls;
-      # };
 
       # TODO this should be made default
       # maildirModule.path = "gmail";
 
       # keyring get gmail login
       # loginCommand = 
-      passwordCommand = "${pkgs.libsecret}/bin/secret-tool lookup gmail password";
-      # passwordCommand = "pass show gmail -c1";
+      # passwordCommand = "${pkgs.libsecret}/bin/secret-tool lookup gmail password";
+      passwordCommand = getPassword "gmail";
 
-      # todo make it optional ?
-      # store = home.homeDirectory + ./maildir/gmail;
       # contactCompletion = "notmuch address";
     };
 
@@ -134,7 +154,6 @@ in
       #     # can't be used with maxage
       #     # startdate = 2018-04-01
       #     '';
-
       #   # postSyncHookCommand = ''
       #   #   '';
       # };
@@ -142,16 +161,12 @@ in
       userName = "coudron@iij.ad.jp";
       realName = "Matthieu Coudron";
       address = "coudron@iij.ad.jp";
-      passwordCommand = "${pkgs.libsecret}/bin/secret-tool lookup iij password";
+      # passwordCommand = "${pkgs.libsecret}/bin/secret-tool lookup iij password";
+
+      passwordCommand = getPassword "iij/mail";
       imap = { host = "imap-tyo.iiji.jp"; tls = my_tls; };
       smtp = { host = "mbox.iiji.jp"; tls = my_tls; };
-      # getLogin = "";
     };
-
-
-    # for vdirsyncer
-    # zaclys = {
-    # }
   };
 
 
@@ -173,9 +188,9 @@ in
         # https://github.com/rycee/home-manager/pull/363
         # mbsync --all
         # while waiting to fix the real one !
-        preNew = ''
-          mbsync -c /home/teto/dotfiles/config/mbsync/mbsyncrc gmail
-          '';
+        # preNew = ''
+        #   mbsync -c /home/teto/dotfiles/config/mbsync/mbsyncrc gmail
+        #   '';
         postNew = lib.concatStrings [ 
           (builtins.readFile ../hooks_perso/post-new)
           (builtins.readFile ../hooks_pro/post-new)
@@ -322,6 +337,7 @@ in
 
   programs.mbsync = {
     enable = true;
+    package = mbsyncWrapper;
     # package = pkgs.writeScript ''
     # '';
   };

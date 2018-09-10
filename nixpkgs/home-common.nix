@@ -71,7 +71,6 @@ rec {
     XDG_CONFIG_DIRS="$XDG_CONFIG_HOME:$HOME/dotfiles";
     # PATH+=":$HOME/rofi-scripts";
     MUTT="$XDG_CONFIG_HOME/mutt";
-    # MAILDIR="$HOME/Maildir";
 
     # TODO package these instead now these are submoudles of dotfiles To remove
     PATH="$HOME/rofi-scripts:$HOME/buku_run:$PATH";

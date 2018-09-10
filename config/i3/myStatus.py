@@ -186,7 +186,7 @@ dpms = status.register("dpms", format="")
 #         # my notmuch config is in a non standard place => I have to setup db_path
 #         notmuchmail.Notmuch(account="lip6",
 #             query="tag:inbox and tag:unread",
-#             db_path="/home/teto/Maildir",
+#             db_path="/home/teto/maildir",
 #             ),
 #         # # notmuchmail.Notmuch(account="gmail", query="tag:inbox and tag:unread"),
 #     # maildir.MaildirMail(directory="/home/teto/Maildir/gmail/INBOX"),
