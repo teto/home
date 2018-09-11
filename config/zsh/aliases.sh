@@ -1,7 +1,5 @@
 # vim: set et fenc=utf-8 ff=unix sts=0 sw=4 ts=4 fdm=marker :
 # TODO move to home-manager ?
-# export MSMTP_QUEUE="$XDG_DATA_HOME/msmtp/";
-# export MSMTP_LOG="$XDG_DATA_HOME/msmtp/log";
 
 
 # to edit nixos kernel config

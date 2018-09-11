@@ -75,11 +75,17 @@ let
   #       done
   #     '';
   # };
+  gpgModule = {
+
+    key = "64BB678705EF85ABF7345F69BD024BD9C261596D";
+    signByDefault = true;
+  };
 in
 {
   accounts.email.maildirBasePath = "${config.home.homeDirectory}/maildir";
   accounts.email.accounts = {
     gmail = {
+      gpg = gpgModule;
 
       mbsync = mbsyncConfig;
       alot = { enable = true; };
