@@ -1,4 +1,4 @@
-{ stdenv, runCommand, llvm, clang, kernel_headers }:
+{ stdenv, runCommand, llvm, clang }:
 
 
 # this stdenv belongs to clang
@@ -7,7 +7,6 @@ stdenv.mkDerivation  {
   version = "0.1";
 
   buildInputs =  [ 
-    # kernel_headers
     llvm # for llc
   ]; 
 

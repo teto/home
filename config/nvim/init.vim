@@ -1432,7 +1432,9 @@ let g:tex_flavor = "latex"
 " <localleader>lv pour la preview du pdf
 let g:vimtex_quickfix_open_on_warning = 1
 let g:vimtex_view_automatic=1
-let g:vimtex_toc_config={}
+" was only necessary with vimtex lazy loaded
+" let g:vimtex_toc_config={}
+" let g:vimtex_complete_img_use_tail=1
 " autoindent can slow down vim quite a bit
 " to check indent parameters, run :verbose set ai? cin? cink? cino? si? inde? indk?
 let g:vimtex_indent_enabled=0
@@ -1459,7 +1461,6 @@ let g:vimtex_syntax_minted = [
 " let g:vimtex_log_ignore = 
 let g:vimtex_log_verbose= 1
 let g:vimtex_quickfix_mode = 2 " 1=> opened automatically and becomes active (2=> inactive)
-let g:vimtex_complete_img_use_tail=1
 " Package biblatex Warning: B
 " with being on anotherline
 " deprecated by g:vimtex_quickfix_latexlog|)

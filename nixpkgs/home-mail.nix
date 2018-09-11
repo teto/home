@@ -14,36 +14,10 @@ let
   };
 
 
-  mbsyncWrapper = 
-      # stdenv.mkDerivation {
-  # name = "mbsync-posthook";
-
-  # buildInputs = [ makeWrapper ];
-
-  # unpackPhase = "true";
-
-  # installPhase = ''
-    # mkdir -p $out/bin
-    # cp ${./scripts}/* $out/bin
-
-    # for f in $out/bin/*; do
-      # wrapProgram $f --prefix PATH : ${stdenv.lib.makeBinPath [ coreutils gawk gnused nix diffutils ]}
-    # done
-  # '';
-# }
-# --run 
-# postSyncHook = 
-# optionalAttrs (mbsync.postSyncHookCommand != "") {
-        # postsynchook =
-          pkgs.writeShellScriptBin
-            "mbsync"
-            # mbsync.postSyncHookCommand
-            # + 
-            ''
-              ${pkgs.isync}/bin/mbsync $@
-              notmuch new
-            '';
-      # };
+  mbsyncWrapper = pkgs.writeShellScriptBin "mbsync" ''
+        ${pkgs.isync}/bin/mbsync $@
+        notmuch new
+      '';
 
   # temporary solution since it's not portable
   getPassword = account:
@@ -344,8 +318,6 @@ in
   programs.mbsync = {
     enable = true;
     package = mbsyncWrapper;
-    # package = pkgs.writeScript ''
-    # '';
   };
 
 }

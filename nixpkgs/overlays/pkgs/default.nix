@@ -17,11 +17,10 @@ final: prev:
 
   astroid = prev.enableDebugging prev.astroid;
 
-  ebpfdropper = prev.callPackage ./ebpfdropper.nix {
-    stdenv=prev.clangStdenv;
-    llvm=prev.llvm_5;
-    kernel_headers=prev.linux_mptcp.dev;
-  };
+  # ebpfdropper = prev.callPackage ./ebpfdropper.nix {
+  #   stdenv=prev.clangStdenv;
+  #   llvm=prev.llvm_5;
+  # };
 
   mptcpanalyzer = prev.python3Packages.callPackage ./mptcpanalyzer {
     # tshark = self.pkgs.tshark-reinject-stable; 
