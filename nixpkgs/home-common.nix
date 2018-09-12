@@ -63,14 +63,14 @@ rec {
 
     ZDOTDIR="$XDG_CONFIG_HOME/zsh";
     WEECHAT_HOME="$XDG_CONFIG_HOME/weechat";
-    TIGRC_USER="$XDG_CONFIG_HOME/tig/tigrc";
     INPUTRC="$XDG_CONFIG_HOME/inputrc";
     IPYTHONDIR="$XDG_CONFIG_HOME/ipython";
     JUPYTER_CONFIG_DIR="$XDG_CONFIG_HOME/jupyter";
     # testing if we can avoid having to symlink XDG_CONFIG_HOME
-    XDG_CONFIG_DIRS="$XDG_CONFIG_HOME:$HOME/dotfiles";
+    # XDG_CONFIG_DIRS="$XDG_CONFIG_HOME:$HOME/dotfiles";
     # PATH+=":$HOME/rofi-scripts";
-    MUTT="$XDG_CONFIG_HOME/mutt";
+    # should be setup by neomutt module
+    # MUTT="$XDG_CONFIG_HOME/mutt";
 
     # TODO package these instead now these are submoudles of dotfiles To remove
     PATH="$HOME/rofi-scripts:$HOME/buku_run:$PATH";

@@ -2,7 +2,7 @@
   name = Matthieu Coudron
   email = mattator@gmail.com
   signingkey = E1B768A0
-
+compactionHeuristic
 [push]
   default = simple
 

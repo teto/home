@@ -172,7 +172,7 @@ add-zsh-hook precmd update_term_title
 # completion config {{{1
 
 # manual completions
-. "$ZDOTDIR/git-extras-completion.zsh"
+# . "$ZDOTDIR/git-extras-completion.zsh"
 
 # zsh searches $fpath for completion files
 fpath=( $ZDOTDIR/completions $fpath )
@@ -337,20 +337,8 @@ SPROMPT="Correct $fg[red]%R$reset_color to $fg[green]%r$reset_color [(y)es (n)o 
 ## zsh-autosuggestions is designed to be unobtrusive)
 #bindkey '^T' autosuggest-toggle
 #install it first
-#source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+#source zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-# Enable FZF fuzzy matcher {{{
-# FZF_PATH="$XDG_DATA_HOME/fzf/shell/"
-
-# FZF_PATH="$(fzf-share)"
-# . "$FZF_PATH/completion.zsh"
-# . "$FZF_PATH/key-bindings.zsh"
-
-# https://junegunn.kr/2016/07/fzf-git
-. "$XDG_CONFIG_HOME/fzf-gems/fzf_git_functions.sh"
-# you can list the actually bound keys with bindkey -M viins
-. "$XDG_CONFIG_HOME/fzf-gems/fzf_git_keybindings.zsh"
-# }}}
 
 # _gnu_generic should work if program accepts --help
 compdef _gnu_generic qutebrowser
@@ -370,6 +358,16 @@ nix-env() {
     fi
 }
 
+# Enable FZF fuzzy matcher {{{
+
+# FZF_PATH="$(fzf-share)"
+# need zle to be active
+
+# https://junegunn.kr/2016/07/fzf-git
+. "$XDG_CONFIG_HOME/fzf-gems/fzf_git_functions.sh"
+# you can list the actually bound keys with bindkey -M viins
+. "$XDG_CONFIG_HOME/fzf-gems/fzf_git_keybindings.zsh"
+# }}}
 
 # for android/lineage os developement
 # if [ -d "$HOME/adb-fastboot" ] ; then
