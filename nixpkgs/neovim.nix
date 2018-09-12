@@ -15,10 +15,11 @@
     # };
 
     # hopefully these can be added automatically once I use vim_configurable
-    extraPython3Packages = with pkgs.python3Packages;[
+    extraPython3Packages = ps: with ps; [
       pandas
       jedi
       urllib3 
+      # pygments # for pygmentize and minted in latex
       # pyls-mypy # on le desactive sinon il genere des
       python-language-server
       pycodestyle

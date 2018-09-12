@@ -1472,7 +1472,10 @@ let g:vimtex_quickfix_ignored_warnings = [
       \ 'Overfull',
       \ 'specifier changed to',
       \ ]
+
+" shell-escape is mandatory for minted
 let g:vimtex_compiler_latexmk = {
+        \ 'backend' : 'nvim',
         \ 'background' : 1,
         \ 'build_dir' : '',
         \ 'callback' : 1,
@@ -1484,6 +1487,7 @@ let g:vimtex_compiler_latexmk = {
         \   '-file-line-error',
         \   '-synctex=1',
         \   '-interaction=nonstopmode',
+        \   '-shell-escape',
         \ ],
         \}
 

@@ -13,6 +13,12 @@ let
     create = "maildir";
   };
 
+  accountExtra = {
+    astroid = {
+      enable = true;
+    };
+  };
+
 
   mbsyncWrapper = pkgs.writeShellScriptBin "mbsync" ''
         ${pkgs.isync}/bin/mbsync $@
@@ -58,8 +64,12 @@ in
 {
   accounts.email.maildirBasePath = "${config.home.homeDirectory}/maildir";
   accounts.email.accounts = {
-    gmail = {
+    gmail = accountExtra // {
+    # gmail = {
       gpg = gpgModule;
+      # astroid = {
+      #   enable = true;
+      # };
 
       mbsync = mbsyncConfig;
       alot = { enable = true; };
@@ -117,7 +127,7 @@ in
       passwordCommand = getPassword "gmail";
 
       # contactCompletion = "notmuch address";
-    };
+    }; 
 
     iij = {
       mbsync = mbsyncConfig;
@@ -186,7 +196,6 @@ in
      enable = true;
      extraConfig = ''
       syslog         on
-      defaults
      '';
    };
 
@@ -318,6 +327,10 @@ in
   programs.mbsync = {
     enable = true;
     package = mbsyncWrapper;
+  };
+
+  programs.astroid = {
+    enable = true;
   };
 
 }
