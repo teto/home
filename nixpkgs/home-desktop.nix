@@ -360,21 +360,11 @@ in
         # alternative is "light"
         # set $greenclip "rofi -modi 'clipboard:greenclip print' -show clipboard"
         "${mod}+ctrl+v" = "exec ${pkgs.bash}/bin/bash ~/vim-anywhere/bin/run";
-# switch to workspace
-#bindsym $mod+ampersand workspace "$w1"
-#bindsym $mod+eacute workspace "$w2"
-#bindsym $mod+quotedbl workspace "$w3"
-#bindsym $mod+apostrophe workspace "$w4"
-#bindsym $mod+parenleft workspace "$w5"
-#bindsym $mod+minus workspace 6
-#bindsym $mod+egrave workspace 7
-#bindsym $mod+underscore workspace 8
-#bindsym $mod+ccedilla workspace 9
-#bindsym $mod+agrave workspace 10
         "${mod}+Tab"="exec \"${pkgs.rofi}/bin/rofi -modi 'run,drun,window,ssh' -show run\"";
         "${mod}+Ctrl+L"="exec ${pkgs.i3lock-fancy}/bin/i3lock-fancy";
         # "${mod}+Ctrl+h" = ''exec "${pkgs.rofi}/bin/rofi -modi 'clipboard:greenclip print' -show clipboard"'';
         "${mod}+ctrl+b" = "exec " + ../buku_run/buku_run;
+        "${mod}+g" = "exec ${pkgs.i3-easyfocus}/bin/i3-easyfocus";
         # "${mod}+shift+n" = "exec ${unstable.gnome3.nautilus}/bin/nautilus";
         # "${mod}+quotedbl" =  "exec ${unstable.qutebrowser}/bin/qutebrowser";
 
