@@ -19,6 +19,8 @@
     path =  "/home/teto/home-manager";
   };
 
+  # for blue tooth applet; must be installed systemwide
+  services.blueman-applet.enable = true;
 
   # you can switch from cli with xkb-switch
   # or xkblayout-state

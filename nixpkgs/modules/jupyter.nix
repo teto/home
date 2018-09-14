@@ -21,11 +21,34 @@ let
           # self.netlink
         ]);  
         
+  # le tric la c que c pas le ihhaskell de all-packages.nix mais celui du haskell set 
+  # apparemment le global peut se configurer via nixpkgs.config.ihaskell.packages.
+  # faut s'en inspirer
   ihaskellKernel = pkgs.runCommand "ihaskellKernel" {
         buildInputs = [ pkgs.jupyter]; } ''
     export HOME=/tmp
     ${haskellEnv}/bin/ihaskell install --prefix=$out 
   '';
+  # 
+  # buildEnv {
+  #   name = "ihaskell-with-packages";
+  #   buildInputs = [ makeWrapper ];
+  #   paths = [ ihaskellEnv jupyter ];
+  #   # export PATH="${pkgs.stdenv.lib.makeBinPath ([ ihaskellEnv ])}''${PATH:+:}$PATH"
+  #   # export GHC_PACKAGE_PATH="$(echo ${ihaskellEnv}/lib/*/package.conf.d| tr ' ' ':'):$GHC_PACKAGE_PATH"
+  #   # export PATH="${stdenv.lib.makeBinPath ([ ihaskellEnv jupyter ])}''${PATH:+:}$PATH"
+  #   # to find ghc_pkg/hoogle doc etc
+  #   postBuild = ''
+  #     for prg in $out/bin"/"*;do
+  #       if [[ -f $prg && -x $prg ]]; then
+  # ca on en aura plus besoin ?!
+  #         wrapProgram $prg --set PYTHONPATH "$(echo ${jupyter}/lib/*/site-packages)" \
+  #           --prefix GHC_PACKAGE_PATH ':' "$(echo ${ihaskellEnv}/lib/*/package.conf.d| tr ' ' ':')" \
+  #           --prefix PATH ':'  "${stdenv.lib.makeBinPath ([ ihaskellEnv jupyter ])}"
+  #       fi
+  #     done
+  #   '';
+  # }
 
 in
 {

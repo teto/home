@@ -45,6 +45,7 @@ let
   ];
 
   imPkgs = with pkgs; [
+    gnome3.california
     khal # => vdirsyncer !
     khard
     libsecret
@@ -52,6 +53,7 @@ let
     slack
     vdirsyncer
     weechat
+
     # leafnode dovecot22 dovecot_pigeonhole fetchmail procmail w3m
     # mairix mutt msmtp lbdb contacts spamassassin
   ];
@@ -61,6 +63,7 @@ let
     # gcalc
     unstable.dropbox
     gnome3.networkmanagerapplet # should 
+    gnome3.defaultIconTheme # else nothing appears
     mpv
     libnotify
     # feh

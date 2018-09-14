@@ -51,12 +51,6 @@ let
 
   # this is for gaming
   hardware.opengl.driSupport32Bit = true;
-  hardware.pulseaudio = {
-    enable = true;
-    systemWide = false;
-    # daemon.config
-    support32Bit = true;
-  };
 
   # List services that you want to enable:
   services = {
@@ -105,6 +99,21 @@ let
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = false;
 
+  hardware.pulseaudio = {
+    enable = true;
+
+    systemWide = false;
+    # daemon.config
+    support32Bit = true;
+
+    # Replace built in pulseaudio modules with enhanced bluetooth ones
+    package = with pkgs; pulseaudioFull.overrideAttrs(oldAttrs: {
+      postInstall = oldAttrs.postInstall + ''
+
+        cp -a ${pulseaudio-modules-bt}/* $out/
+      '';
+    });
+  };
 
   services.strongswan = {
     enable = true;
