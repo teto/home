@@ -75,7 +75,7 @@
             vim-signify
             vim-startify
             vim-scriptease
-            vim-grepper-git
+            vim-grepper
             vim-nix
             # vim-obsession
           ];

@@ -168,16 +168,20 @@ in
   programs.rofi = {
     enable = true;
     terminal = "${pkgs.termite}/bin/termite";
+    borderWidth = 1;
+    theme = "solarized-alternate";
+    # lines= ;
+    location = "center";
+
     # rofi.font: SourceCodePro 9
     # font = 
     extraConfig=''
-      !Means it is at center
-      rofi.loc: 0
       !rofi.opacity: 90
       !rofi.width: 50
       rofi.columns: 1
       rofi.fuzzy: true
-      rofi.modi:       run,drun,window,ssh,Layouts:/home/teto/.i3/list_layouts.sh
+      ! cd window
+      rofi.modi:       run,drun,window,ssh,Layouts:${../bin/i3-list-layouts}
       /* see to integrate teiler */
       rofi.sidebar-mode: true
 
@@ -200,7 +204,7 @@ in
         # TODO move it to module
         # browser = "";
         # dmenu = /usr/local/bin/rofi -dmenu -p dunst:
-        alignment = "left";
+        alignment = "right";
 
       };
     };

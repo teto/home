@@ -4,6 +4,6 @@
     # todo renommer en workstation
     # ./hardware-dell.nix
     # /etc/nixos/hardware-configuration.nix
-    ./config-all.nix
+    ../config-all.nix
   ];
 }

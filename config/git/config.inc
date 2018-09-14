@@ -12,7 +12,20 @@ compactionHeuristic
 
 #trailing-space
 [color]
-  ui = auto
+  ui = true
+
+# diff-highlight.oldNormal    "red bold"
+# diff-highlight.oldHighlight "red bold 52"
+# diff-highlight.newNormal    "green bold"
+# diff-highlight.newHighlight "green bold 22"
+# 
+# diff.meta       "yellow"
+# diff.frag       "magenta bold"
+# diff.commit     "yellow bold"
+# diff.old        "red bold"
+# diff.new        "green bold"
+# diff.whitespace "red reverse"
+
 [sendemail]
   chainreplyto = false
 
@@ -35,10 +48,14 @@ renamelimit = 7000
 
 [diff]
   tool = nvim -d
+
+# git diff --no-prefix
+
 [difftool]
   prompt = false
 
 [alias]
+  cdiff = diff --word-diff=color
   ci=commit
   co=checkout
   st=status

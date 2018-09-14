@@ -8,6 +8,7 @@
     passwordAuthentication = false;
     forwardX11 = true;
     enable = true;
+    challengeResponseAuthentication = false;
     # authorizedKeysFiles
     # authorizedKeys = { }
   };

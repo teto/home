@@ -1,15 +1,15 @@
 { config, pkgs, lib, ... }:
 let
-  secrets = import ./secrets.nix;
+  secrets = import ../secrets.nix;
 in
 {
 
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-iij-mptcp.nix
-      ./common.nix
-      ./openssh.nix
-      ./account-root.nix
+      ../common.nix
+      ../openssh.nix
+      ../account-root.nix
     ];
 
   # install mosh-server

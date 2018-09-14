@@ -1,12 +1,14 @@
 { config, pkgs, lib, ... }:
 let
-  secrets = import <custom/secrets.nix>;
+  secrets = import ../secrets.nix;
 in
 {
 
   imports = [
-      ./common.nix
-      ./gitolite.nix
+
+      ./hardware-iij-gitolite.nix
+      ./common-server.nix
+      ../modules/gitolite.nix
   ];
 
 
@@ -14,7 +16,9 @@ in
     tmux
     weechat
   ];
+
  # type = types.enum ["yes" "without-password" "prohibit-password" "forced-commands-only" "no"];
+  services.gitolite.adminPubkey = secrets.gitolitePublicKey;
 
   boot.loader.grub.enable = true;
   boot.loader.grub.version = 2;
