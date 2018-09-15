@@ -1895,7 +1895,7 @@ nnoremap <silent> gs :call LanguageClient#textDocument_documentSymbol()<CR>
 nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
 " nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
 "}}}
-"{{{
+" intero {{{
 " Intero starts automatically. Set this if you'd like to prevent that.
 let g:intero_start_immediately = 0
 " Enable type information on hover (when holding cursor at point for ~1 second).

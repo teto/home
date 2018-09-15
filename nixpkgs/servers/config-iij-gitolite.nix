@@ -9,6 +9,7 @@ in
       ./hardware-iij-gitolite.nix
       ./common-server.nix
       ../modules/gitolite.nix
+      ../modules/openssh.nix
   ];
 
 

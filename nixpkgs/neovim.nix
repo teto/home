@@ -20,7 +20,7 @@
       jedi
       urllib3 
       # pygments # for pygmentize and minted in latex
-      # pyls-mypy # on le desactive sinon il genere des
+      pyls-mypy # on le desactive sinon il genere des
       python-language-server
       pycodestyle
     ]

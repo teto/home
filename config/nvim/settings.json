@@ -1,6 +1,14 @@
 {
 	"pyls": {
-		"configurationSources": []
+		"configurationSources": [],
+		"plugins": {
+            "pyflakes": {
+                "enabled": false
+            },
+            "pydocstyle": {
+                "enabled": true
+            }
+        }
 	},
 	"languageServerHaskell": {
         "hlintOn": false,
