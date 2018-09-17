@@ -56,6 +56,7 @@ renamelimit = 7000
 
 [alias]
   cdiff = diff --word-diff=color
+  ia = !git add $(git ls-files --modified --others --exclude-standard | fzf -m)
   ci=commit
   co=checkout
   st=status

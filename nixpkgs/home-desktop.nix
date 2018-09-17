@@ -169,7 +169,7 @@ in
     enable = true;
     terminal = "${pkgs.termite}/bin/termite";
     borderWidth = 1;
-    theme = "solarized-alternate";
+    theme = "solarized_alternate";
     # lines= ;
     location = "center";
 

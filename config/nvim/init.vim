@@ -365,7 +365,6 @@ Plug 'chrisbra/unicode.vim' " , { 'on': ['<plug>(UnicodeComplete)', '<plug>(Unic
 Plug 'teto/Modeliner' " <leader>ml to setup buffer modeline
 " This one has bindings mapped to <leader>l
 "Plug 'vimwiki/vimwiki'   " to write notes
-"Plug 'vim-scripts/DynamicSigns'
 " async grep neovim only
 Plug 'mhinz/vim-grepper' " , { 'on': 'Grepper'}
 "Plug 'teto/neovim-auto-autoread' " works only in neovim, runs external checker
@@ -418,7 +417,7 @@ let g:far#collapse_result=1
 " }}}
 
 " Plug 'gregsexton/gitv'
-Plug 'tweekmonster/nvimdev.nvim' " thanks tweekmonster !
+Plug 'neovim/nvimdev.nvim' " thanks tweekmonster !
 call plug#end()
 " }}}
 
@@ -1855,6 +1854,9 @@ let g:LanguageClient_settingsPath=stdpath('config')."/settings.json"
 let g:LanguageClient_selectionUI='fzf'
 " or off / messages
 let g:LanguageClient_trace="verbose"
+let g:LanguageClient_loggingFile = "/tmp/lsp.log"
+let g:LanguageClient_serverStderr = '/tmp/lsp_err.log'
+let g:LanguageClient_loggingLevel = 'Warning'
 "Error" | "Warning" | "Info" | "Log"
 " let g:LanguageClient_windowLogMessageLevel
 " call LanguageClient_setLoggingLevel('DEBUG')
@@ -1862,7 +1864,8 @@ let g:LanguageClient_trace="verbose"
 " 'DEBUG' | 'INFO' | 'WARN' | 'ERROR'
 " let g:LanguageClient_loggingLevel='DEBUG'
 "let g:LanguageClient_rootMarkers
-"let g:LanguageClient_hoverPreview
+" let g:LanguageClient_hoverPreview=
+let g:LanguageClient_completionPreferTextEdit=1
 let g:LanguageClient_diagnosticsEnable=1
 " hardcoded for now
 " hie-wrapper is not available in domenkazar version

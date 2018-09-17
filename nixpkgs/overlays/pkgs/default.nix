@@ -15,7 +15,8 @@ final: prev:
     # };
   # });
 
-  astroid = prev.enableDebugging prev.astroid;
+  # astroid = prev.astroid;
+  # astroid = prev.enableDebugging prev.astroid;
 
   # ebpfdropper = prev.callPackage ./ebpfdropper.nix {
   #   stdenv=prev.clangStdenv;
@@ -35,6 +36,8 @@ final: prev:
   rt-tests = prev.callPackage ./rt-test.nix {};
 
   netbee = prev.callPackage ./netbee {};
+
+  gImageReader = prev.libsForQt5.callPackage ./gImageReader {};
 
   i3-dispatch = prev.python3Packages.callPackage ./i3-dispatch {};
   # linux_mptcp_4_94 = prev.callPackage ./mptcp {};

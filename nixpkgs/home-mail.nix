@@ -21,9 +21,9 @@ let
 
 
   mbsyncWrapper = pkgs.writeShellScriptBin "mbsync" ''
-        ${pkgs.isync}/bin/mbsync $@
-        notmuch new
-      '';
+      ${pkgs.isync}/bin/mbsync $@
+      notmuch new
+    '';
 
   # temporary solution since it's not portable
   getPassword = account:
@@ -331,6 +331,9 @@ in
 
   programs.astroid = {
     enable = true;
+    externalEditor = ''
+      termite -e "nvim -c 'set ft=mail' '+set fileencoding=utf-8' '+set ff=unix' '+set enc=utf-8' '+set fo+=w' %1"
+    '';
   };
 
 }
