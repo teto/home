@@ -1,5 +1,5 @@
 [default]
-default_calendar=lip6
+default_calendar=perso
 
 highlight_event_days = True
 show_all_days = False
@@ -19,19 +19,13 @@ unicode_symbols=True
 [calendars]
 
 [[japon_feries]]
-readonly=False
+readonly=True
 path= "$XDG_DATA_HOME/calendars/japon_feries"
-
-[[lip6]]
-readonly=False
-path= "$XDG_DATA_HOME/calendars/lip6"
-color= dark green
-
 
 [[perso]]
 readonly=False
 path= "$XDG_DATA_HOME/calendars/perso"
-color= #D75C20
+color= dark green
 # #C043C6
 
 [view]
