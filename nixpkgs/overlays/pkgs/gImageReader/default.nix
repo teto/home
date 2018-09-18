@@ -6,7 +6,9 @@
 , podofo
 , libjpeg
 , djvulibre
-
+, libxmlxx3
+, libzip
+, tesseract
 
 # , libsForQt5
 , withQt ? false
@@ -17,6 +19,8 @@
 # , qtmultimedia
 # , qttools
 
+# needs to be python3
+, python
 , enchant
 , intltool
 
@@ -32,6 +36,7 @@ assert withQt  -> !withGtk && qtbase  != null;
 
 let
   variant = if withGtk then "gtk" else if withQt then "qt" else "cli";
+  pythonEnv = python.withPackages( ps: with ps;[ pygobject3 ] );
 
 in
 stdenv.mkDerivation rec {
@@ -44,18 +49,27 @@ stdenv.mkDerivation rec {
     sha256 = "19dbxq83j77lbvi10a8x0xxgw5hbsqyc852c196zzvmwk3km6pnc";
   };
   buildInputs = [
+    pythonEnv
     cmake
     enchant
     intltool
+    libxmlxx3
+    libzip
+    pkgs.libuuid
     pkgconfig
     sane-backends
     podofo
     libjpeg
     djvulibre
+    pkgs.gobjectIntrospection 
+    tesseract
+    pkgs.wrapGAppsHook
   ] 
   ++ stdenv.lib.optionals withGtk  ( with pkgs;[
-    gnome3.gtksourceviewmm
+    gnome3.gtkmm
+    gtkspell3
     gtkspellmm
+    gnome3.gtksourceview
     gnome3.gtksourceviewmm
     cairomm
     poppler.dev
@@ -72,7 +86,9 @@ stdenv.mkDerivation rec {
   ];
 
   # interface type can be where <type> is either gtk, qt5, qt4
-  configurePhase = "cmake -DCMAKE_INSTALL_PREFIX=$out -DINTERFACE_TYPE=${variant} .";
+  # "-DCMAKE_INSTALL_PREFIX=$(out)"
+  cmakeFlags = [  "-DINTERFACE_TYPE=${variant}" ];
+  # configurePhase = "cmake .";
 
   meta = with stdenv.lib; {
     description = "A collaborative drawing program that allows multiple users to sketch on the same canvas simultaneously";

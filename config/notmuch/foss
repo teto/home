@@ -3,3 +3,4 @@
 +github -- from:notifications@github.com
 +nix -- subject:[NixOS/
 +wireshark -- from:wireshark-dev@wireshark.org
++mininet -- to:mininet-discuss@lists.stanford.edu

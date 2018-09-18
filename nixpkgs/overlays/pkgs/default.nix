@@ -37,7 +37,10 @@ final: prev:
 
   netbee = prev.callPackage ./netbee {};
 
-  gImageReader = prev.libsForQt5.callPackage ./gImageReader {};
+  gImageReader = prev.libsForQt5.callPackage ./gImageReader {
+    # must be python3
+      python = prev.python3;
+  };
 
   i3-dispatch = prev.python3Packages.callPackage ./i3-dispatch {};
   # linux_mptcp_4_94 = prev.callPackage ./mptcp {};

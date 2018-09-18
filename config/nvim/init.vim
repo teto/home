@@ -1119,7 +1119,7 @@ let s:neomake_exclude_ft = ['cpp', 'java' ]
 " let g:neomake_tex_enabled_makers = []
 let g:neomake_tex_enabled_makers = []
 " 'mypy'
-let g:neomake_python_enabled_makers = []
+let g:neomake_python_enabled_makers = ['mypy']
 
 " removed chktex because of silly errors
 " let g:neomake_tex_enabled_makers = ['chktex']

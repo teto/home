@@ -189,6 +189,17 @@ let
     defaultUser = "teto";
   };
 
+  services.xserver.displayManager.lightdm = {
+    autoLogin = {
+      enable = true;
+      user = "teto";
+
+    };
+
+    # background = ;
+  };
+
+
   nix.sshServe = {
     enable = false;
     protocol = "ssh";
