@@ -134,6 +134,7 @@ rec {
         #   };
         #   disabled = false;
         # });
+        rfc-bibtex = pythonsuper.callPackage ./pkgs/rfc-bibtex {};
 
 
         # look for matching wcwidth

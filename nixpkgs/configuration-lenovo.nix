@@ -108,7 +108,6 @@ let
   # it is necessary to use dnssec though :(
   networking.dnsExtensionMechanism = false;
   networking.dnsSingleRequest = false;
-  networking.extraHosts = secrets.extraHosts;
   # networking.interfaces = {
   #     eth0 = { name = "eth0"; useDHCP=true; macAddress = "3B-0B-B5-6A-ED-91"; mtu=1500;};
   #     eth1 = { name = "eth1"; useDHCP=true; };
@@ -199,6 +198,8 @@ let
     # background = ;
   };
 
+  # services.xserver.displayManager.gdm = {
+  # };
 
   nix.sshServe = {
     enable = false;

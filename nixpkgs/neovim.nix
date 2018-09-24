@@ -65,10 +65,10 @@
         source $MYVIMRC
         '';
 
-        packages.myVimPackage = with pkgs.vimPlugins; {
-          # see examples below how to use custom packages
-          # loaded on launch
-          start = [
+        # packages.myVimPackage
+        plug.plugins = with pkgs.vimPlugins; 
+        [
+
             fugitive
             vimtex
             LanguageClient-neovim
@@ -77,11 +77,25 @@
             vim-scriptease
             vim-grepper
             vim-nix
-            # vim-obsession
-          ];
-          # manually loadable by calling `:packadd $plugin-name`
-          opt = [ ];
-        };
+            vim-obsession
+        ];
+        # {
+        #   # see examples below how to use custom packages
+        #   # loaded on launch
+        #   start = [
+        #     fugitive
+        #     vimtex
+        #     LanguageClient-neovim
+        #     vim-signify
+        #     vim-startify
+        #     vim-scriptease
+        #     vim-grepper
+        #     vim-nix
+        #     # vim-obsession
+        #   ];
+        #   # manually loadable by calling `:packadd $plugin-name`
+        #   opt = [ ];
+        # };
       };
 
     # extraConfig = ''

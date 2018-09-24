@@ -31,7 +31,7 @@ let
     grub.device = "/dev/sda";
   };
 
-  # boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_mptcp_with_netlink;
+  boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_mptcp_with_netlink;
 
   # TODO we need nouveau 
   # boot.kernelModules = [
@@ -83,6 +83,8 @@ let
   #   rsyncProxy = ftpProxy;
   #   noProxy="localhost,127.0.0.1";
   # };
+  hardware.bluetooth.enable = true;
+  hardware.bluetooth.powerOnBoot = true;
 
   programs.ccache.enable = true;
   services.xserver.displayManager.slim = {
@@ -96,8 +98,25 @@ let
     (import ./overlays/haskell.nix) 
   ];
 
-  hardware.bluetooth.enable = true;
-  hardware.bluetooth.powerOnBoot = false;
+  nix = {
+
+    buildMachines = [ 
+      {
+      hostName = "iij_mptcp";
+      # todo move it to secrets
+      sshUser = "teto";
+      sshKey = "/home/teto/.ssh/iij_rsa";
+      system = "x86_64-linux";
+      maxJobs = 2;
+      speedFactor = 2;
+      supportedFeatures = [ "kvm" ];
+      mandatoryFeatures = [ "perf" ];
+      }
+    ];
+    distributedBuilds = true;
+
+
+  };
 
   hardware.pulseaudio = {
     enable = true;

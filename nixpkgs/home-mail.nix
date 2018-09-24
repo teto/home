@@ -331,6 +331,20 @@ in
 
   programs.astroid = {
     enable = true;
+    #
+    # offlineimap || exit $?
+    # 
+    # notmuch new || exit $?
+    # polling = {
+    # };
+    pollScript = ''
+      mbsync gmail
+    '';
+
+    extraConfig = {
+      poll.interval = 300;
+    };
+
     externalEditor = ''
       termite -e "nvim -c 'set ft=mail' '+set fileencoding=utf-8' '+set ff=unix' '+set enc=utf-8' '+set fo+=w' %1"
     '';

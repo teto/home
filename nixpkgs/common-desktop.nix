@@ -1,5 +1,6 @@
 { config, lib, pkgs,  ... }:
 let
+  secrets = import ./secrets.nix;
   userNixpkgs = /home/teto/nixpkgs;
   nixosConfig = /home/teto/dotfiles/configuration.nix;
   nixosOverlay = /home/teto/dotfiles/nixpkgs/overlays;
@@ -200,6 +201,8 @@ in
   # then coredumpctl debug will launch gdb !
   systemd.coredump.enable = true;
   # security.pam.loginLimits
+
+  networking.extraHosts = secrets.extraHosts;
 
   system.copySystemConfiguration = true;
 
