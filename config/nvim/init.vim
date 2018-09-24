@@ -16,17 +16,11 @@ map <D-b> :echom "hello papy"
 " runtime syntax/hitest.vim
 
 " vim-plug autoinstallation {{{
-" TODO move to XDG_DATA_HOME
-" let s:nvimdir = (exists("$XDG_CONFIG_HOME") ? $XDG_CONFIG_HOME : $HOME.'/.config').'/nvim'
-" appended site to be able to use packadd (since it is in packpath)
 " TODO use stdpath now
 let s:nvimdir = stdpath('data')
-" (exists("$XDG_DATA_HOME") ? $XDG_DATA_HOME : $HOME.'/.local/share').'/nvim'
 let s:plugscript = s:nvimdir.'/autoload/plug.vim'
-let s:plugdir = s:nvimdir.'/site/pack'
+let s:plugdir = s:nvimdir.'/site'
 
-"silent echom s:plugscript
-"silent echom s:nvimdir
 " to allow line-continuation in vim otherwise plug autoinstall fails
 set nocompatible
 if empty(glob(s:plugscript))
