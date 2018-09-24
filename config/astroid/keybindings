@@ -21,7 +21,7 @@
 # main_window.show_log=z # Show log window, default: z
 # main_window.undo=u # Undo last action, default: u
 # main_window.new_mail=m # Compose new mail, default: m
-# main_window.poll=P # Start manual poll, default: P
+main_window.poll=P # Start manual poll, default: P
 # main_window.toggle_auto_poll=M-p # Toggle auto poll, default: M-p
 # main_window.cancel_poll=C-c # Cancel ongoing poll, default: C-c
 # main_window.open_new_window=C-o # Open new main window, default: C-o

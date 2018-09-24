@@ -341,8 +341,10 @@ in
       mbsync gmail
     '';
 
+    # I don't want it to trigger
+    # P => main_window.poll
     extraConfig = {
-      poll.interval = 300;
+      poll.interval = 0;
     };
 
     externalEditor = ''
