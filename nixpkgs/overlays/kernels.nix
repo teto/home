@@ -126,6 +126,7 @@ let
     mptcpConfig = ''
       # increase ring kernel buffer size
       LOG_BUF_SHIFT 22
+      IPV6 y 
 
       # don't always exist !
       MPTCP_NETLINK? y
@@ -171,7 +172,6 @@ let
   # NF_DEFRAG_IPV6 y
   # NF_NAT_IPV4 y
   # NF_NAT_IPV6 y
-  # IPV6 y 
   ovsConfig = 
     #prev.pkgs.openvswitch.kernelExtraConfig or 
     ''
@@ -431,11 +431,19 @@ in rec {
   });
 
   # my_lenovo_kernel = prev.linux_latest.override({
-  my_lenovo_kernel = self.linux_mptcp_with_netlink.override({
+  my_lenovo_kernel = self.linux_mptcp_94.override({
   # my_lenovo_kernel = self.linux_mptcp_with_netlink.override({
     # to be able to run as
     # preferBuiltin=true;
-    ignoreConfigErrors=true;
+    # ignoreConfigErrors=true;
+    src = prev.fetchFromGitHub {
+      owner = "teto";
+      repo = "mptcp";
+      rev = "a7bdd7a8e6ebae940d6a38d023c31746979260a2";
+      sha256 = "198ms07jm0kcg8m69y2fghvy6hdd5b4af4p2gjar3ibkxca1s6az";
+
+      # fetchSubmodules = true;
+    };
 
     # structuredExtraConfig = mininetConfigStructured;
 

@@ -350,6 +350,8 @@ in
         #
 # set $mod Mod1
 # il ne comprend pas Super_L
+
+  # consider using lib.mkOptionDefault according to help
     keybindings = 
     let 
       mad="Mod4"; mod="Mod1"; 
@@ -361,7 +363,6 @@ in
         "$GroupUs+$mod+Shift+${us}"="move ${dir}";
       };
     in 
-    # lib.mkOptionDefault 
     {
         # todo use i3lock-fancy instead
         # alternative is "light"
@@ -408,6 +409,11 @@ in
         "XF86AudioLowerVolume"="exec --no-startup-id pactl set-sink-volume 0 -5%;exec ${notify-send} 'Audio lowered'";
         "XF86AudioMute"="exec --no-startup-id pactl set-sink-mute 0 toggle;";
         "XF86AudioPlay" = "exec ${pkgs.vlc}/bin/vlc";
+        "--release Print" = "exec ${pkgs.scrot}/bin/scrot -s '/tmp/%s_%H%M_%d.%m.%Y_$wx$h.png'";
+        # bindsym --release Print exec "scrot -m '/home/user/Pictures/screenshots/%s_%H%M_%d.%m.%Y_$wx$h.png'"
+        # bindsym --release Shift+Print exec "scrot -s '/home/user/Pictures/screenshots/%s_%H%M_%d%m%Y_$wx$h.png'"
+        # bindsym --release $mod+Shift+Print exec "scrot -u -d 4 '/home/user/Pictures/screenshots/%s_%H%M_%d%m%Y_$wx$h.png'"
+
 # Media player controls
 # bindsym XF86AudioPlay exec playerctl play
 # bindsym XF86AudioPause exec playerctl pause
