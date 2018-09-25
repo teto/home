@@ -28,7 +28,8 @@ stdenv.mkDerivation rec {
 
   # has no install phase
   installPhase = ''
-    #
+    mkdir -p $out/bin
+    install -D Bin/*/* $out/bin/
   '';
 
   meta = with stdenv.lib; {

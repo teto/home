@@ -42,7 +42,9 @@ final: prev:
   #     python = prev.python3;
   # };
 
-  stab = prev.callPackage ./stab.nix {};
+  stab = prev.callPackage ./stab.nix {
+    inherit (prev.pkgs.gnome2) libgnome libgnomeui;
+  };
 
   i3-dispatch = prev.python3Packages.callPackage ./i3-dispatch {};
   # linux_mptcp_4_94 = prev.callPackage ./mptcp {};
