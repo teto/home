@@ -7,13 +7,13 @@ in
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-iij-mptcp.nix
-      ../common.nix
-      ../openssh.nix
+      ./common-server.nix
+      ../modules/openssh.nix
       ../account-root.nix
     ];
 
   # install mosh-server
-  programs.mosh.enable = true;
+  # programs.mosh.enable = true;
 
   boot.loader.grub.enable = true;
   boot.loader.grub.version = 2;
@@ -24,7 +24,9 @@ in
   networking.defaultGateway = secrets.gateway;
   networking.nameservers = secrets.nameservers;
 
-  networking.interfaces.ens3.ip4 = [ secrets.mptcp_server.ip4 ];
+  networking.interfaces.ens3 =  secrets.mptcp_server;
   # networking.interfaces.ens3.ip6 = [ secrets.mptcp_server.ip6 ];
+
+  nix.trustedUsers = [ "root" "teto" ];
 
 }

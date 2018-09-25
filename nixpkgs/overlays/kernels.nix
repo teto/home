@@ -418,6 +418,8 @@ in rec {
       repo = "mptcp";
       rev = "a7bdd7a8e6ebae940d6a38d023c31746979260a2";
       sha256 = "198ms07jm0kcg8m69y2fghvy6hdd5b4af4p2gjar3ibkxca1s6az";
+
+      # fetchSubmodules = true;
     };
     # kernelPatches = [];
     # netlink won't load as a module
@@ -438,7 +440,8 @@ in rec {
     # structuredExtraConfig = mininetConfigStructured;
 
     # I don't really care here if openvswitch is as a module or not
-    extraConfig = bpfConfig + net9pConfig + ''
+    # kvmConfig +
+    extraConfig =  mptcpConfig + bpfConfig + net9pConfig + ''
       OPENVSWITCH m
     '' ;
   });
