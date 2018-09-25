@@ -248,7 +248,7 @@ in
           translated = "⏎";
         };
       };
-     extraConfig = {
+     extraConfig.structured = {
       # editor_command
       # editor_spawn
       # attachment_prefix = ~/Downloads
@@ -266,6 +266,10 @@ in
         thread_authors_replace_me = true;
         # initial_command = "bufferlist; taglist; search foo; search bar; buffer 0";
       };
+
+      extraConfig.text = ''
+
+        '';
 
 # # TODO add as a string  extraConfigStr
 # # [tags]
@@ -288,6 +292,46 @@ in
 # #     translated = 🔒
 # #   [[spam]]
 # # translated = ♻
+
+# [tags]
+
+#   [[flagged]]
+#       translated = ⚑
+#       normal = "","","light red","","dark red",""
+#   # [[inbox]]
+#   #   translated = ➤#📨●◉↘
+#   #   normal = "", "", "", "", "", ""
+#   [[sent]]
+#     translated =  ↗#⇗
+#     normal = "","", "dark blue", "", "dark blue", ""
+#   [[unread]]
+#     translated = ""
+#   [[replied]]
+#     translated = ⏎
+#     normal = "","", "dark cyan", "default", "dark blue", "default"
+#   # [[encrypted]]
+#   #   translated = 🔒#🔑#⚷
+# #    normal = "", "", "", "", "#0ff", "#006"
+#   # [[signed]]
+#   #   translated = ®
+#   #   normal = "", "", "", "", "", ""
+#   # [[ring]]
+#   #   translated = 💍#◉
+#   # [[killed]]
+#   #   translated = τ  # ☠
+# # #    normal = "", "", "", "", g70, g27
+#   # [[lists]]
+#   #   translated = 📃#⎎
+
+#   # [[attachment]]
+#   #   translated = 📎
+#   #   normal = "", "", "light blue", "", "light blue", ""
+  
+#   # [[bug]]
+#   #   translated = 🐜
+#   #   normal = "", "", "dark red", "", "light red", ""
+#   [[todo]]
+#     normal = "", "", white, "dark magenta", white, "dark magenta"
    };
 
 
