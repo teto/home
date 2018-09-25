@@ -429,7 +429,7 @@ in rec {
   });
 
   # my_lenovo_kernel = prev.linux_latest.override({
-  my_lenovo_kernel = prev.linux_mptcp.override({
+  my_lenovo_kernel = self.linux_mptcp_with_netlink.override({
   # my_lenovo_kernel = self.linux_mptcp_with_netlink.override({
     # to be able to run as
     # preferBuiltin=true;
