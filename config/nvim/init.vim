@@ -213,7 +213,7 @@ Plug 'sjl/gundo.vim' " :GundoShow/Toggle to redo changes
 " Plug 'arakashic/chromatica.nvim', { 'for': 'cpp' } " semantic color syntax
 
 " Plug 'fszymanski/deoplete-abook' " replaced with the khard one
-Plug 'paretje/deoplete-notmuch', {'for': 'mail'}
+Plug 'paretje/deoplete-notmuch', {'for': 'mail', 'do': ':UpdateRemotePlugins'}
 " Plug 'adborden/vim-notmuch-address' " does not work yet
 " Plug 'nicoe/deoplete-khard', {'for': 'mail'}
 
@@ -1871,7 +1871,8 @@ let g:LanguageClient_selectionUI='fzf'
 let g:LanguageClient_trace="verbose"
 let g:LanguageClient_loggingFile = "/tmp/lsp.log"
 let g:LanguageClient_serverStderr = '/tmp/lsp_err.log'
-let g:LanguageClient_loggingLevel = 'Warning'
+" expected one of `OFF`, `ERROR`, `WARN`, `INFO`, `DEBUG`, `TRACE`
+let g:LanguageClient_loggingLevel = 'INFO'
 "Error" | "Warning" | "Info" | "Log"
 " let g:LanguageClient_windowLogMessageLevel
 " call LanguageClient_setLoggingLevel('DEBUG')

@@ -129,7 +129,7 @@ let
       IPV6 y 
 
       # don't always exist !
-      MPTCP_NETLINK? y
+      MPTCP_NETLINK? m
       MPTCP y
       MPTCP_SCHED_ADVANCED y
       MPTCP_ROUNDROBIN y

@@ -132,23 +132,6 @@ Powerline & Fonts
 * regenerate cache with fc-cache -vf : it will look into the directories defined in your $HOME/.fonts.conf
 Make sure (append ~/.fonts for local fonts only)
 
-
-system config tips/tricks /etc
-===
-In /etc/sysctl.conf you may want to add
-
-# choose core filename
-kernel.core_pattern = core.%e.%p
-
-# for HDD, you may want to set a lower swappiness
-vm.swappiness = 20
-
-# Uncomment the following to stop low-level messages on console
-#kernel.printk = 3 4 1 3
-
-$sudo sysctl -p to reload the config.
-To enable automatic coredumps, look at /etc/security/limits.conf
-
 Set default applications
 ====
 Run 
@@ -176,3 +159,9 @@ Automatically setup some important scripts so that they run in rams:
  sudo vmtouch -dl /usr/bin/python3.4
  sudo vmtouch -dl ~/.i3/i3dispatch.py
  ulimit -a|grep locked to check the user limit
+
+Nix 
+===
+/nix/var/nix/profiles/system
+/run/current-system/sw/bin/
+/var/run/booted-system

@@ -1,4 +1,19 @@
 { pkgs, lib, ...} @ args:
+let
+
+  startPlugins = with pkgs.vimPlugins; [
+            fugitive
+            vimtex
+            LanguageClient-neovim
+            vim-signify
+            vim-startify
+            vim-scriptease
+            vim-grepper
+            vim-nix
+            vim-obsession
+            deoplete-khard
+        ];
+in
 {
     enable = true;
     withPython3 = true;
@@ -52,7 +67,7 @@
 
         let g:deoplete#sources#clang#libclang_path='${pkgs.llvmPackages.libclang}'
 
-        let g:gutentags_ctags_executable_haskell = '${pkgs.haskell.lib.dontCheck pkgs.haskellPackages.hasktags}/bin/hasktags'
+        " let g:gutentags_ctags_executable_haskell = '${pkgs.haskell.lib.dontCheck pkgs.haskellPackages.hasktags}/bin/hasktags'
 
 
         let g:LanguageClient_serverCommands = {
@@ -65,38 +80,17 @@
         source $MYVIMRC
         '';
 
-        # packages.myVimPackage
-        plug.plugins = with pkgs.vimPlugins; 
-        [
+        # using this breaks my userplugins
+        # plug.plugins = startPlugins;
 
-            fugitive
-            vimtex
-            LanguageClient-neovim
-            vim-signify
-            vim-startify
-            vim-scriptease
-            vim-grepper
-            vim-nix
-            vim-obsession
-            deoplete-khard
-        ];
-        # {
-        #   # see examples below how to use custom packages
-        #   # loaded on launch
-        #   start = [
-        #     fugitive
-        #     vimtex
-        #     LanguageClient-neovim
-        #     vim-signify
-        #     vim-startify
-        #     vim-scriptease
-        #     vim-grepper
-        #     vim-nix
-        #     # vim-obsession
-        #   ];
-        #   # manually loadable by calling `:packadd $plugin-name`
-        #   opt = [ ];
-        # };
+        packages.myVimPackage =
+        {
+          # see examples below how to use custom packages
+          # loaded on launch
+          start = startPlugins;
+          # manually loadable by calling `:packadd $plugin-name`
+          opt = [ ];
+        };
       };
 
     # extraConfig = ''
