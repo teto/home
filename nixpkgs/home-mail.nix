@@ -129,7 +129,7 @@ in
       # contactCompletion = "notmuch address";
     }; 
 
-    iij = {
+    iij = accountExtra // {
       mbsync = mbsyncConfig;
       alot = { enable = true; };
       msmtp.enable = true;

@@ -78,6 +78,7 @@
             vim-grepper
             vim-nix
             vim-obsession
+            deoplete-khard
         ];
         # {
         #   # see examples below how to use custom packages

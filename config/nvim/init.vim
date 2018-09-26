@@ -104,7 +104,7 @@ Plug 'tweekmonster/startuptime.vim', {'on': 'StartupTime'} " see startup time pe
 " provider dependant {{{
 " new deoplete relies on yarp :
 Plug 'AndrewRadev/splitjoin.vim' " gS/gJ to 
-Plug 'Shougo/deoplete.nvim' ", { 'do': ':UpdateRemotePlugins' }
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'roxma/nvim-yarp' " required for deoplete
 Plug 'roxma/vim-hug-neovim-rpc' " what is that ?
 " Plug '~/vim-config'
@@ -212,6 +212,10 @@ Plug 'sjl/gundo.vim' " :GundoShow/Toggle to redo changes
 " Plug 'KabbAmine/vCoolor.vim', { 'on': 'VCooler' } " RGBA color picker
 " Plug 'arakashic/chromatica.nvim', { 'for': 'cpp' } " semantic color syntax
 
+" Plug 'fszymanski/deoplete-abook' " replaced with the khard one
+Plug 'paretje/deoplete-notmuch', {'for': 'mail'}
+" Plug 'adborden/vim-notmuch-address' " does not work yet
+" Plug 'nicoe/deoplete-khard', {'for': 'mail'}
 
 " to configure vim for haskell, refer to
 " http://yannesposito.com/Scratch/en/blog/Vim-as-IDE/
@@ -222,7 +226,7 @@ Plug 'neovimhaskell/haskell-vim', {'for':'haskell'} " haskell install
 " Plug 'SevereOverfl0w/deoplete-github' " completion on commit issues (just
 " crashes without netrc
 Plug 'zchee/deoplete-zsh'
-Plug 'fszymanski/deoplete-abook'
+"
 "}}}
 
 "Plug 'mattn/vim-rtags' a l'air léger
@@ -768,7 +772,9 @@ let g:gutentags_project_info = [ {'type': 'python', 'file': 'setup.py'},
                                \ {'type': 'ruby', 'file': 'Gemfile'},
                                \ {'type': 'haskell', 'file': 'Setup.hs'} ]
 " produce tags for haskell http://hackage.haskell.org/package/hasktags
-let g:gutentags_ctags_executable_haskell = 'hasktags'
+" it will fail without a wrapper https://github.com/rob-b/gutenhasktags
+" looks brittle, hie might be better
+" let g:gutentags_ctags_executable_haskell = 'hasktags'
 " let g:gutentags_ctags_extra_args
 let g:gutentags_file_list_command = 'rg --files'
 
@@ -1004,8 +1010,8 @@ let g:deoplete#enable_debug = 1
 let g:deoplete#auto_complete_delay=50
 
 let g:deoplete#enable_refresh_always=0
-let g:deoplete#keyword_patterns = {}
-let g:deoplete#keyword_patterns.gitcommit = '.+'
+" let g:deoplete#keyword_patterns = {}
+" let g:deoplete#keyword_patterns.gitcommit = '.+'
 
 " call deoplete#custom#set('jedi', 'debug_enabled', 1)
 " call deoplete#enable_logging('DEBUG', '/tmp/deoplete.log')
@@ -1032,6 +1038,21 @@ let g:deoplete#sources#clang#sort_algo = 'priority'
 let deoplete#sources#jedi#enable_cache=1
 let deoplete#sources#jedi#show_docstring=0
 " }}}
+" deoplete github (disabled for now won't work) {{{
+" let g:deoplete#sources = {}
+" let g:deoplete#sources.gitcommit=['github']
+" " let g:deoplete#keyword_patterns = {}
+" let g:deoplete#keyword_patterns.gitcommit = '.+'
+
+" call deoplete#util#set_pattern(
+"   \ g:deoplete#omni#input_patterns,
+"   \ 'gitcommit', [g:deoplete#keyword_patterns.gitcommit])
+
+"}}}
+" deoplete notmuch 
+" notmuch address command to fetch completions
+" NOTE: --format=sexp is required
+let g:deoplete#sources#notmuch#command = ['notmuch', 'address', '--format=sexp', '--output=recipients', '--deduplicate=address', 'tag:inbox']
 " }}}
 " Jedi (python) completion {{{
 let g:jedi#auto_vim_configuration = 1 " to prevent python's help popup
@@ -1879,7 +1900,9 @@ let g:LanguageClient_serverCommands.python = [ fnamemodify( g:python3_host_prog,
 silent! call remove(g:LanguageClient_serverCommands, 'cpp')
 silent! call remove(g:LanguageClient_serverCommands, 'c')
 
-set completefunc=LanguageClient#complete
+" we use deoplete instead !!
+" set completefunc=LanguageClient#complete
+" this should be done only for filetypes supported by LanguageClient !!!
 set formatexpr=LanguageClient_textDocument_rangeFormatting()
 
 " todo provide a fallback if lsp not available
