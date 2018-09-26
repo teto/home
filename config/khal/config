@@ -24,7 +24,7 @@ path= "$XDG_DATA_HOME/calendars/japon_feries"
 
 [[perso]]
 readonly=False
-path= "$XDG_DATA_HOME/calendars/perso"
+path= "$XDG_DATA_HOME/calendars/zaclys/personal"
 color= dark green
 # #C043C6
 

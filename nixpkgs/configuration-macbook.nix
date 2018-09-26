@@ -32,6 +32,7 @@ let
   };
 
   boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_mptcp_with_netlink;
+# boot.kernelPackages = pkgs.linuxPackagesFor pkgs.my_lenovo_kernel;
 
   # TODO we need nouveau 
   # boot.kernelModules = [
@@ -109,8 +110,8 @@ let
       system = "x86_64-linux";
       maxJobs = 2;
       speedFactor = 2;
-      supportedFeatures = [ "kvm" ];
-      mandatoryFeatures = [ "perf" ];
+      # supportedFeatures = [ "kvm" ];
+      # mandatoryFeatures = [ "perf" ];
       }
     ];
     distributedBuilds = true;
