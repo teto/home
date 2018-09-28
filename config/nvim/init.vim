@@ -1105,8 +1105,8 @@ let g:neomake_place_signs=1
 " filters out unrecognized
 function! NeomakeStatusLine()
 
-let bufnr = winbufnr(winnr())
-let active=0
+  let bufnr = winbufnr(winnr())
+  let active=0
 " let neomake_status_str = neomake#statusline#get(bufnr, {
 " 	\ 'format_running': '… ({{running_job_names}})',
 " 	\ 'format_ok': (active ? '%#NeomakeStatusGood#' : '%*').'✓',
@@ -1176,12 +1176,15 @@ call neomake#configure#automake('w')
 " augroup END
 " }}}
 " Airline {{{
-let g:airline_extensions = ['obsession', 'tabline', 'wordcount'] " to speed up things
+" to speed up things
+let g:airline_extensions = ['obsession', 'tabline', 'wordcount', 'neomake'] 
 " let g:airline#extensions#default#layout = [
 "     \ [ 'a', 'b', 'c' ],
 "     \ [ 'x', 'y', 'z', 'error', 'warning' ]
 "     \ ]
 " let g:airline#extensions#wordcount#filetypes = ...
+let g:airline#extensions#neomake#enabled = 1
+let g:airline#extensions#languageclient#enabled = 1
 
 let g:airline_highlighting_cache = 1
 let g:airline_exclude_preview = 0
@@ -1204,17 +1207,27 @@ let g:airline_section = '|'
 " see :h airline-tabline
 let g:airline_theme = 'molokai'
 " let g:airline_section_b = '%#TermCursor#' . NeomakeJobs()
+
+" first array is left-side, followed by right side
 let g:airline#extensions#default#layout = [
       \ [ 'a', 'b', 'c' ],
       \ [ 'x', 'y', 'z', 'error', 'warning' ]
       \ ]
 " section y is fileencoding , useless in neovim
 " define_raw
-call airline#parts#define_function('neomake_custom', 'NeomakeStatusLine')
-let g:airline_section_y = airline#section#create_right(['neomake_custom','ffenc'])
+" call airline#parts#define_function('neomake_custom', 'NeomakeStatusLine')
+" let g:airline_section_y = airline#section#create_right(['neomake_custom','ffenc'])
+
+" let g:airline_section_y = airline#section#create_right(['neomake'])
 " let g:airline_section_y = airline#section#create_right(['neomake','ffenc'])
 call airline#parts#define_function('grepper', 'grepper#statusline')
+" see :h airline-default-sections
 let g:airline_section_x = airline#section#create_right(['grepper'])
+let g:airline_section_y = airline#section#create_right(['neomake_error_count', 'neomake_warning_count'])
+" let g:airline_section_z = airline#section#create_right(['neomake_error_count', 'neomake_warning_count'])
+let g:airline_section_error = airline#section#create_right(['neomake_error_count', 'languageclient_error_count'])
+" let g:airline_section_warning (ycm_warning_count, syntastic-warn,
+
 " grepper#statusline()
  " airline#section#create(['windowswap', 'obsession', '%3p%%'.spc, 'linenr', 'maxlinenr', spc.':%3v'])
 " let g:airline_section_z = airline#section#create_right(['linenumber'])
