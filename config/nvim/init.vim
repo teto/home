@@ -1902,7 +1902,7 @@ silent! call remove(g:LanguageClient_serverCommands, 'cpp')
 silent! call remove(g:LanguageClient_serverCommands, 'c')
 
 " we use deoplete instead !!
-" set completefunc=LanguageClient#complete
+set completefunc=LanguageClient#complete
 " this should be done only for filetypes supported by LanguageClient !!!
 set formatexpr=LanguageClient_textDocument_rangeFormatting()
 

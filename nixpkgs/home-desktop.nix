@@ -29,7 +29,7 @@ let
     # https://github.com/felipec/git-remote-hg
     gitAndTools.git-remote-hg
     gitAndTools.git-recent
-    gitAndTools.git-annex
+    # gitAndTools.git-annex # fails on unstable
     gitAndTools.git-extras
     gitAndTools.git-crypt
     mypy # TODO move it to neovim dependency (but need to fetch the pythonEnv path then)
@@ -59,6 +59,7 @@ let
   ];
 
   desktopPkgs = with pkgs; [
+    apvlv
     buku # generates error
     # gcalc
     unstable.dropbox
@@ -96,7 +97,9 @@ let
     xorg.xbacklight
     xclip
     xcwd
-    zathura
+    # zathura # fails https://github.com/NixOS/nixpkgs/pull/47033
+
+
   ];
 
   # the kind of packages u don't want to compile

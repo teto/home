@@ -129,7 +129,12 @@ let
       IPV6 y 
 
       # don't always exist !
-      MPTCP_NETLINK? m
+      # netlink can't be compiled as a module for 0.94 else it triggers
+      # ERROR: "tcp_send_active_reset" [net/mptcp/mptcp_netlink.ko] undefined!
+      # ERROR: "tcp_reset" [net/mptcp/mptcp_netlink.ko] undefined!
+      # ERROR: "mptcp_send_active_reset" [net/mptcp/mptcp_netlink.ko] undefined!
+      # ERROR: "mptcp_hash_find" [net/mptcp/mptcp_netlink.ko] undefined!
+      MPTCP_NETLINK? y
       MPTCP y
       MPTCP_SCHED_ADVANCED y
       MPTCP_ROUNDROBIN y
