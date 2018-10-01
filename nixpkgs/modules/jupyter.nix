@@ -64,9 +64,11 @@ in
 
     # raw jupyter config
       # jupyter notebook --generate-config
+      # 
+#c.MappingKernelManager.kernel_info_timeout = 60
     notebookConfig = ''
-      Application.log_level = 'DEBUG'
-      Session.debug = True
+      c.Application.log_level = 'DEBUG'
+      c.Session.debug = True
       c.KernelManager.debug_kernel = True
     '';
 
@@ -111,7 +113,15 @@ in
           # share/jupyter/kernels/haskell/
           content = builtins.fromJSON (builtins.readFile "${ihaskellKernel}/share/jupyter/kernels/haskell/kernel.json");
         in 
-            content;
+        builtins.trace 
+        content
+        # todo 
+        # // {
+        #   content.
+          
+        # }
+        ;
+
         # {
           # displayName = "Haskell for machine learning";
           # # https://github.com/gibiansky/IHaskell/issues/920

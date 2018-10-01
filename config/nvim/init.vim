@@ -594,6 +594,7 @@ set splitright   " on vertical split
 " {{{ Markdown composer
 " Run with :ComposerStart
 " let g:markdown_composer_open_browser        = "qutebrowser"
+" if set to false then run ComposerStart
 let g:markdown_composer_autostart           = 0
 " }}}
 "set winheight=30

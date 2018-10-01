@@ -11,7 +11,9 @@ let
             vim-grepper
             vim-nix
             vim-obsession
-            deoplete-khard
+            # deoplete-khard
+            vim-markdown-composer
+# vim-highlightedyank
         ];
 in
 {
