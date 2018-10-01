@@ -307,7 +307,7 @@ in rec {
   # ];
 
   # improve the default mptcp config
-  mptcp93 = prev.pkgs.linux_mptcp_93.override ({
+  mptcp93 = prev.linux_mptcp_93.override ({
       kernelPatches=[];
       ignoreConfigErrors=true;
       autoModules = false;

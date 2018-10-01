@@ -102,6 +102,10 @@ let
 
   ];
 
+  home.sessionVariables = {
+    # JUPYTER_CONFIG_DIR= 
+  };
+
   # the kind of packages u don't want to compile
   # TODO les prendres depuis un channel avec des binaires ?
   heavyPackages = with unstable.pkgs;[
@@ -447,4 +451,22 @@ in
     };
 
   };
+
+    systemd.user.services.vdirsyncer = {
+      Unit = {
+        After = [ "network.target" ];
+        Description = "Vdirsyncer Daemon";
+      };
+
+      Install = {
+        WantedBy = [ "default.target" ];
+      };
+
+      Service = {
+        Environment = "PATH=${config.home.profileDirectory}/bin";
+        ExecStart = "${pkgs.vdirsyncer}/bin/vdirsyncer sync";
+        Type = "notify";
+        # ExecStartPre = ''${pkgs.bash}/bin/bash -c "${pkgs.coreutils}/bin/mkdir -p '${cfg.dataDir}' '${cfg.playlistDirectory}'"'';
+      };
+    };
 }

@@ -72,7 +72,6 @@ in
       # };
 
       mbsync = mbsyncConfig;
-      alot = { enable = true; };
       # astroid = { enable = true; };
       msmtp.enable = true;
       notmuch = { 
@@ -130,8 +129,8 @@ in
     }; 
 
     iij = accountExtra // {
+      # juste pour tester, a supprimer
       mbsync = mbsyncConfig;
-      alot = { enable = true; };
       msmtp.enable = true;
       notmuch = { 
         enable = true;
@@ -200,7 +199,7 @@ in
    };
 
    programs.alot = {
-     enable = true;
+     enable = false;
 
    #   # TODO test http://alot.readthedocs.io/en/latest/configuration/key_bindings.html
    #   # w = pipeto urlscan 2> /dev/null
@@ -243,31 +242,37 @@ in
         };
       };
 
-      tags = {
-        replied = {
-          translated = "⏎";
-        };
-      };
-     extraConfig.structured = {
-      # editor_command
-      # editor_spawn
-      # attachment_prefix = ~/Downloads
-        # theme = "solarized";
-       # foireux comme option
-       # convertir
-       # on a per account ?
-      #  mailinglists = lisp@ietf.org, taps@ietf.org 
-        editor_in_thread = false;
-        auto_remove_unread = true;
-        ask_subject = false;
-        handle_mouse = true;
-      # terminal_cmd
-      # taglist_statusbar
-        thread_authors_replace_me = true;
-        # initial_command = "bufferlist; taglist; search foo; search bar; buffer 0";
-      };
+      # tags = {
+      #   replied = {
+      #     translated = "⏎";
+      #   };
+      # };
 
-      extraConfig.text = ''
+
+     # extraConfig.structured = {
+     #  # attachment_prefix = ~/Downloads
+     #    # theme = "solarized";
+     #  #  mailinglists = lisp@ietf.org, taps@ietf.org 
+     #    editor_in_thread = false;
+     #    auto_remove_unread = true;
+     #    ask_subject = false;
+     #    handle_mouse = true;
+     #    thread_authors_replace_me = true;
+     #    # initial_command = "bufferlist; taglist; search foo; search bar; buffer 0";
+     #  };
+
+     # .text
+      extraConfig = ''
+       # attachment_prefix = ~/Downloads
+         # theme = "solarized";
+       #  mailinglists = lisp@ietf.org, taps@ietf.org 
+         editor_in_thread = false;
+         editor_in_thread = false;
+         auto_remove_unread = true;
+         ask_subject = false;
+         handle_mouse = true;
+         thread_authors_replace_me = true;
+         # initial_command = "bufferlist; taglist; search foo; search bar; buffer 0";
 
         '';
 
@@ -375,12 +380,6 @@ in
 
   programs.astroid = {
     enable = true;
-    #
-    # offlineimap || exit $?
-    # 
-    # notmuch new || exit $?
-    # polling = {
-    # };
     pollScript = ''
       mbsync gmail
     '';
@@ -389,6 +388,13 @@ in
     # P => main_window.poll
     extraConfig = {
       poll.interval = 0;
+      startup.queries = {
+            "INBOX"= "tag:unread and not tag:deleted and not tag:muted and not tag:ietf";
+            "TODO"= "tag:flagged";
+            "Drafts"= "tag:draft";
+            "ietf"= "tag:ietf";
+            # "gh"= "tag:gh";
+      };
     };
 
     externalEditor = ''

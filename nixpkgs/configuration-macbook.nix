@@ -100,6 +100,10 @@ let
   ];
 
   nix = {
+    # might be useful to fetch from private repositories even in sandboxed mode ?!
+    # fetchGit is run as user so no
+    envVars = {
+    };
 
     buildMachines = [ 
       {
@@ -114,7 +118,7 @@ let
       # mandatoryFeatures = [ "perf" ];
       }
     ];
-    distributedBuilds = true;
+    distributedBuilds = false;
 
 
   };

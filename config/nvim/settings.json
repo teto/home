@@ -1,12 +1,14 @@
 {
 	"pyls": {
-		"configurationSources": [],
+		"configurationSources": [
+			"pycodestyle"
+		],
 		"plugins": {
             "pyflakes": {
                 "enabled": false
             },
             "pydocstyle": {
-                "enabled": true
+                "enabled": false
             }
         }
 	},

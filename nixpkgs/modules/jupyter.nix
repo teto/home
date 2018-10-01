@@ -24,10 +24,11 @@ let
   # le tric la c que c pas le ihhaskell de all-packages.nix mais celui du haskell set 
   # apparemment le global peut se configurer via nixpkgs.config.ihaskell.packages.
   # faut s'en inspirer
+  # by default --use-rtsopts=""
   ihaskellKernel = pkgs.runCommand "ihaskellKernel" {
         buildInputs = [ pkgs.jupyter]; } ''
     export HOME=/tmp
-    ${haskellEnv}/bin/ihaskell install --prefix=$out 
+    ${haskellEnv}/bin/ihaskell install --prefix=$out --use-rtsopts=""
   '';
   # 
   # buildEnv {
@@ -62,9 +63,12 @@ in
     # password is 'test'
 
     # raw jupyter config
+      # jupyter notebook --generate-config
     notebookConfig = ''
-
-      '';
+      Application.log_level = 'DEBUG'
+      Session.debug = True
+      c.KernelManager.debug_kernel = True
+    '';
 
     password = "'sha1:1b961dc713fb:88483270a63e57d18d43cf337e629539de1436ba'";
     kernels= {
