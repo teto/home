@@ -315,9 +315,54 @@ in rec {
       extraConfig = mptcpKernelExtraConfig;
   });
 
-  # sandbox doesn't like
+  # mptcp94 = prev.linux_mptcp_94.override ({
+  #     kernelPatches=[];
+  #     ignoreConfigErrors=true;
+  #     autoModules = false;
+  #     kernelPreferBuiltin = true;
+  #     extraConfig = mptcpKernelExtraConfig;
+  # });
+
+# sandbox doesn't like
   # in a repl I see mptcp-local.stdenv.hostPlatform.platform
-  mptcp93-local = mptcp-local;
+
+  mptcp94-local-stable = prev.linux_mptcp_94.override ({
+    # TODO try to use in private mode
+    # generates too many problems with nixops
+    # src = builtins.fetchGit {
+    #   url = "ssh://gitolite@202.214.86.52:mptcp.git";
+    # url = /home/teto/mptcp;
+    #   rev = "de77de05db08c6a76fe6dcea69c63a3ec563ee6f";
+    # };
+
+    # src = prev.fetchFromGitHub {
+    #   owner = "teto";
+    #   repo = "mptcp";
+    #   rev = "c1f91c32ebd1d4bf38fc17756c61441c925135cb";
+    #   sha256 = "061zzlkjm3i1nhgnz3dfhbshjicrjc5ydwy6hr5l6y8cl2ps2iwf";
+    # };
+
+    # modDirVersion="4.9.87";
+    # modVersion="4.9.87";
+    # modDirVersion="4.9.60-matt+";
+    name="mptcp94-local";
+
+    # TODO might need to revisit
+    ignoreConfigErrors = true;
+    autoModules = false;
+    kernelPreferBuiltin = true;
+
+    # structuredExtraConfig = mininetConfigStructured;
+    extraConfig = mptcpKernelExtraConfig + localConfig 
+    + ovsConfig + bpfConfig + net9pConfig + mininetConfig
+    # to prevent the "+" from being added to modDirVersion
+    # + ''
+    #   LOCALVERSION 
+    # ''
+    ;
+     # if we dont want to have to regenerate it
+      # configfile=
+  });
 
   mptcp-local-stable = mptcp93.override ({
 
@@ -363,10 +408,8 @@ in rec {
     #   LOCALVERSION 
     # ''
     ;
-
      # if we dont want to have to regenerate it
       # configfile=
-
   });
 
   mptcp-local = mptcp-local-stable.override ({
