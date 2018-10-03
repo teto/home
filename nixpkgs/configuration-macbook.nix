@@ -31,7 +31,7 @@ let
     grub.device = "/dev/sda";
   };
 
-  boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_mptcp_with_netlink;
+  # boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_mptcp_with_netlink;
 # boot.kernelPackages = pkgs.linuxPackagesFor pkgs.my_lenovo_kernel;
 
   # TODO we need nouveau 
@@ -114,11 +114,11 @@ let
       system = "x86_64-linux";
       maxJobs = 2;
       speedFactor = 2;
-      # supportedFeatures = [ "kvm" ];
+      supportedFeatures = [ "big-parallel" "kvm" ];
       # mandatoryFeatures = [ "perf" ];
       }
     ];
-    distributedBuilds = false;
+    distributedBuilds = true;
 
 
   };

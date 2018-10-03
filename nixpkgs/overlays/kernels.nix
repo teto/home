@@ -121,6 +121,13 @@ let
       MODULE_COMPRESS_XZ n 
     '';
 
+    # since 4.14 we have L2TP  replace:
+    # L2TP_V3                     = yes;
+    # L2TP_IP                     = module;
+    # L2TP_ETH                    = module;
+    vpnConfig = ''
+      L2TP y
+    '';
 
     # For the tests don't forget to disable syn cooki
     mptcpConfig = ''
@@ -315,18 +322,20 @@ in rec {
       extraConfig = mptcpKernelExtraConfig;
   });
 
-  # mptcp94 = prev.linux_mptcp_94.override ({
-  #     kernelPatches=[];
-  #     ignoreConfigErrors=true;
-  #     autoModules = false;
-  #     kernelPreferBuiltin = true;
-  #     extraConfig = mptcpKernelExtraConfig;
-  # });
+  mptcp94 = prev.linux_mptcp_94.override ({
+      kernelPatches=[];
+      ignoreConfigErrors=true;
+      autoModules = false;
+      kernelPreferBuiltin = true;
+      extraConfig = mptcpKernelExtraConfig;
+  }).overrideAttrs(o: {
+    nativeBuildInputs=o.nativeBuildInputs ++ (with prev.pkgs; [ pkgconfig ncurses qt5.qtbase ]);
+  });
 
 # sandbox doesn't like
   # in a repl I see mptcp-local.stdenv.hostPlatform.platform
 
-  mptcp94-local-stable = prev.linux_mptcp_94.override ({
+  mptcp94-local-stable = mptcp94.override ({
     # TODO try to use in private mode
     # generates too many problems with nixops
     # src = builtins.fetchGit {

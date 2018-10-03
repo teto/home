@@ -32,7 +32,7 @@ alias latest="ls -lt |head"
 #}}}
 
 
-alias servethis="python -c 'import SimpleHTTPServer; SimpleHTTPServer.test()'"
+alias servethis="nix-shell -ppython3 --command \'python -c 'import SimpleHTTPServer; SimpleHTTPServer.test()'\""
 
 
 # todo use exa instead

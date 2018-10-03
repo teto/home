@@ -113,7 +113,7 @@ in
           # share/jupyter/kernels/haskell/
           content = builtins.fromJSON (builtins.readFile "${ihaskellKernel}/share/jupyter/kernels/haskell/kernel.json");
         in 
-        builtins.trace 
+        # builtins.trace 
         content
         # todo 
         # // {
