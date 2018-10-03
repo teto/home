@@ -2,6 +2,15 @@ self: prev:
   # with prev.lib.kernel;
 
 let
+  # TODO I could use this to discrimanate between branches ?
+    # let res = builtins.tryEval (
+    #   if isDerivation value then
+    #     value.meta.isBuildPythonPackage or []
+    #   else if value.recurseForDerivations or false || value.recurseForRelease or false then
+    #     packagePython value
+    #   else
+    #     []);
+    # in if res.success then res.value else []
 
   # TODO tester ce qui fait flipper/ peut foirer
 # EXT4_ENCRYPTION
@@ -322,13 +331,13 @@ in rec {
       extraConfig = mptcpKernelExtraConfig;
   });
 
-  mptcp94 = prev.linux_mptcp_94.override ({
+  mptcp94 = (prev.linux_mptcp_94.override ({
       kernelPatches=[];
       ignoreConfigErrors=true;
       autoModules = false;
       kernelPreferBuiltin = true;
       extraConfig = mptcpKernelExtraConfig;
-  }).overrideAttrs(o: {
+  })).overrideAttrs(o: {
     nativeBuildInputs=o.nativeBuildInputs ++ (with prev.pkgs; [ pkgconfig ncurses qt5.qtbase ]);
   });
 
@@ -493,20 +502,18 @@ in rec {
     # to be able to run as
     # preferBuiltin=true;
     # ignoreConfigErrors=true;
-    src = prev.fetchFromGitHub {
-      owner = "teto";
-      repo = "mptcp";
-      rev = "a7bdd7a8e6ebae940d6a38d023c31746979260a2";
-      sha256 = "198ms07jm0kcg8m69y2fghvy6hdd5b4af4p2gjar3ibkxca1s6az";
-
-      # fetchSubmodules = true;
-    };
+    # src = prev.fetchFromGitHub {
+    #   owner = "teto";
+    #   repo = "mptcp";
+    #   rev = "a7bdd7a8e6ebae940d6a38d023c31746979260a2";
+    #   sha256 = "198ms07jm0kcg8m69y2fghvy6hdd5b4af4p2gjar3ibkxca1s6az";
+    # };
 
     # structuredExtraConfig = mininetConfigStructured;
 
     # I don't really care here if openvswitch is as a module or not
     # kvmConfig +
-    extraConfig =  mptcpConfig + bpfConfig + net9pConfig + ''
+    extraConfig = mptcpConfig + bpfConfig + net9pConfig + ''
       OPENVSWITCH m
     '' ;
   });
@@ -517,34 +524,37 @@ in rec {
 
   # hardenedPackages = hardenedLinuxPackagesFor prev.linux_mptcp;
 
-    # linux_test = let 
-    #   # mininetConfigStructured = {};
-    #   configStructured = with prev.lib.kernel; [ 
-    #     # structuredConfigs.kvmConfigStructured
-    #     structuredConfigs.bpfConfigStructured
-    #     # just try to contradict common-config settings
-    #     # { USB_DEBUG = optional yes; }
+    linux_test = let 
+      # mininetConfigStructured = {};
+      configStructured = with prev.lib.kernel; with structuredConfigs; prev.lib.mkMerge [ 
+        # structuredConfigs.kvmConfigStructured
+        bpfConfigStructured
+        debugConfigStructured 
+        mininetConfigStructured 
+        # kvmConfigStructured 
+        mptcpConfigStructured 
+        # just try to contradict common-config settings
+        # { USB_DEBUG = optional yes; }
 
-    #     # common-config.nix default is 32, shouldn't trigger any error
-    #     # { MMC_BLOCK_MINORS   = freeform "32"; }
-    #     # The option `settings.MMC_BLOCK_MINORS.freeform' has conflicting definitions, in `<unknown-file>' and `<unknown-file>'
-    #     { MMC_BLOCK_MINORS   = freeform "32"; }
-    #     # { MMC_BLOCK_MINORS   = freeform "64"; }
+        # common-config.nix default is 32, shouldn't trigger any error
+        # The option `settings.MMC_BLOCK_MINORS.freeform' has conflicting definitions, in `<unknown-file>' and `<unknown-file>'
+        # { MMC_BLOCK_MINORS   = freeform "32"; }
+        # { MMC_BLOCK_MINORS   = freeform "64"; }
 
-    #     # mandatory should win by default
-    #     { USB_DEBUG = option yes;}
-    #     # { USB_DEBUG = yes;}
+        # mandatory should win by default
+        # { USB_DEBUG = option yes;}
+        # { USB_DEBUG = yes;}
 
-    #     # default for "8139TOO_PIO" is no
-    #     { "8139TOO_PIO"  = yes; }
+        # default for "8139TOO_PIO" is no
+        # { "8139TOO_PIO"  = yes; }
 
 
-    #   ];
-    # in
-    # prev.linux_latest.override {
-    #   kernelPreferBuiltin = true;
-    #   structuredExtraConfig = configStructured;
-  # };
+      ];
+    in
+    prev.linux_latest.override {
+      kernelPreferBuiltin = true;
+      structuredExtraConfig = configStructured;
+  };
 
     # linux_test2 = linux_test.override {
     #   # TODO 

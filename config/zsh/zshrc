@@ -33,6 +33,15 @@ zbell_ignore=($EDITOR $PAGER v)
 . "/etc/zinputrc"
 
 
+# powerline {{{
+# try with powerline-hs instead
+# or look into 
+# ~/.nix-profile/share/zsh/site-contrib/powerline.zsh
+# /run/current-system/sw/share/
+export POWERLINE_COMMAND=$HOME/.local/bin/powerline-hs
+# }}}
+
+
 # TODO make it a function cat some.json | python -m json.tool
 
 # History parameters {{{

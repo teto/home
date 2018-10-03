@@ -1,5 +1,6 @@
 { lib }:
 with lib.kernel;
+with lib.modules;
 {
   mininetConfigStructured =  {
     BPF         = yes;
@@ -46,13 +47,15 @@ with lib.kernel;
 
 
   kvmConfigStructured = {
+
+    VIRTIO            = mkForce yes;
     VIRTIO_PCI        = yes;
     VIRTIO_PCI_LEGACY = yes;
     VIRTIO_BALLOON    = yes;
     VIRTIO_INPUT      = yes;
     VIRTIO_MMIO       = yes;
     VIRTIO_BLK        = yes;
-    VIRTIO_NET        = yes;
+    VIRTIO_NET        = module;
     VIRTIO_CONSOLE    = yes;
 
     NET_9P_VIRTIO = option yes;
@@ -85,9 +88,9 @@ with lib.kernel;
       KGDB_SERIAL_CONSOLE  = yes;
       DEBUG_INFO           = yes;
 
-      PATA_MARVELL         = yes;
+      # PATA_MARVELL         = yes;
       # SATA_SIS             = yes;
-      MD_RAID0             = yes;
+      # MD_RAID0             = yes;
 
       # else qemu can't see the root filesystem when launched with -kenel
       EXT4_FS              = yes;
@@ -138,6 +141,9 @@ with lib.kernel;
       CRYPTO_USER_API=yes;
       CRYPTO_USER_API_HASH=yes;
 
+      # TODO works only if > 4.14
+      L2TP = yes;
+
       # LOCALVERSION -matt
       # LOCALVERSION ""
       LOCALVERSION_AUTO = no;
@@ -160,8 +166,8 @@ with lib.kernel;
       MPTCP_REDUNDANT = yes;
 
       # this is a kernel I devised myself (hence the optional)
-      MPTCP_PREVENANT = optional yes;
-      MPTCP_OWD_COMPENSATE = optional yes;
+      MPTCP_PREVENANT = option yes;
+      MPTCP_OWD_COMPENSATE = option yes;
 
       IP_MULTIPLE_TABLES = yes;
 
@@ -172,7 +178,7 @@ with lib.kernel;
       # ... but use none by default.
       # The default is safer if source policy routing is not setup.
       # DEFAULT_DUMMY = yes;
-      DEFAULT_MPTCP_PM = "fullmesh";
+      DEFAULT_MPTCP_PM.freeform = "fullmesh";
 
       # MPTCP scheduler selection.
       # Disabled as the only non-default is the useless round-robin.

@@ -23,6 +23,23 @@ final: prev:
   #   llvm=prev.llvm_5;
   # };
 
+
+  buku_run = prev.stdenv.mkDerivation rec {
+    name = "buku_run";
+    version = "0.1.1";
+    src = prev.fetchFromGitHub {
+      owner = "carnager";
+      repo = "buku_run";
+      rev =  version;
+      sha256 = "1zyjjf3b8g3dnymcrg683rbnc6qrvx8ravfm833n7kjrqky3bczn";
+    };
+    
+    buildInputs = with prev.pkgs; [ rofi gawk gnused buku bash ];
+    # propagatedBuildInputs = [ rofi ];
+
+    # meta
+  };
+
   mptcpanalyzer = prev.python3Packages.callPackage ./mptcpanalyzer {
     # tshark = self.pkgs.tshark-reinject-stable; 
     # inherit (prev.pkgs) tshark;
