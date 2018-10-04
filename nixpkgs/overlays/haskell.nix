@@ -33,7 +33,7 @@ self: prev:
 
 
   haskell = prev.haskell // {
-    packageOverrides = hself: hprev: rec {  
+    packageOverrides = hself: hprev: with prev.haskell.lib; rec {  
       # useful to fetch newer libraries with callHackage
 
       zeromq4-haskell = prev.haskell.lib.dontCheck hprev.zeromq4-haskell;
@@ -41,7 +41,12 @@ self: prev:
 
       cabal-helper = prev.haskell.lib.doJailbreak (hprev.cabal-helper);
 
-      tensorflow-core-ops = prev.haskell.lib.appendPatch (hprev.tensorflow-core-ops) ./pkgs/tensorflow.patch;
+      tensorflow-core-ops = appendPatch (hprev.tensorflow-core-ops) ./pkgs/tensorflow.patch;
+
+      ihaskell = overrideCabal (dontCheck hprev.ihaskell) ( drv: {
+        executableToolDepends = [ prev.pkgs.jupyter ];
+        executableHaskellDepends = [ prev.pkgs.jupyter ];
+      });
 
   #     ghc-syb-utils = hsuper.callHackage "ghc-syb-utils" "0.3.0.0" {};
   #     cabal-plan = hsuper.callHackage "cabal-plan" "0.4.0.0" {};

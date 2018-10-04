@@ -10,11 +10,9 @@ let
    };
 
   i3extraConfig = lib.concatStrings [
-    (builtins.readFile ../config/i3/config.header)
     (builtins.readFile ../config/i3/config.main)
     # (builtins.readFile ../i3/config.mediakeys)
     (builtins.readFile ../config/i3/config.xp)
-    (builtins.readFile ../config/i3/config.audio)
     (builtins.readFile ../config/i3/config.colors)
   ];
 
@@ -32,7 +30,7 @@ let
     # gitAndTools.git-annex # fails on unstable
     gitAndTools.git-extras
     gitAndTools.git-crypt
-    mypy # TODO move it to neovim dependency (but need to fetch the pythonEnv path then)
+    # mypy # TODO move it to neovim dependency (but need to fetch the pythonEnv path then)
     nox # helps with reviewing and to install files
     # ccache # breaks some builds ?
     ncurses.dev # for infocmp
@@ -41,7 +39,7 @@ let
     nix-index
     pcalc
     rpl # to replace strings across files
-    universal-ctags
+    universal-ctags  # there are many different ctags, be careful !
   ];
 
   imPkgs = with pkgs; [
@@ -88,7 +86,7 @@ let
     sxiv # simple image viewer
     unstable.system_config_printer
     # shared_mime_info # temporary fix for nautilus to find the correct files
-    # taiginijisho # japanse dict; like zkanji Qt based
+    taiginijisho # japanse dict; like zkanji Qt based
     translate-shell
     unstable.transmission_gtk
     xdotool # needed for vimtex + zathura
@@ -98,8 +96,6 @@ let
     xclip
     xcwd
     # zathura # fails https://github.com/NixOS/nixpkgs/pull/47033
-
-
   ];
 
   home.sessionVariables = {
@@ -410,8 +406,8 @@ in
   # XF86AudioRaiseVolume=if home.packages ?  exec amixer -q set Master 2dB+ unmute; exec notify-send "Audio Raised volume"
   # XF86AudioLowerVolume exec amixer -q set Master 2dB- unmute; exec notify-send Audio lowered
   # XF86AudioMute exec amixer -q set Master toggle; exec notify-send "Mute toggle"
-      "$GroupFr+$mod+apostrophe"="kill";
-      "$GroupUs+$mod+4"="kill";
+        "$GroupFr+$mod+apostrophe"="kill";
+        "$GroupUs+$mod+4"="kill";
         "XF86AudioRaiseVolume"="exec --no-startup-id pactl set-sink-volume 0 +5%;exec ${notify-send} 'Audio Raised volume'";
         "XF86AudioLowerVolume"="exec --no-startup-id pactl set-sink-volume 0 -5%;exec ${notify-send} 'Audio lowered'";
         "XF86AudioMute"="exec --no-startup-id pactl set-sink-mute 0 toggle;";

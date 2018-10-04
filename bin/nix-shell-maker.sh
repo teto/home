@@ -22,7 +22,7 @@ source $stdenv/setup
 # to get gcc messages in English
 export LANG=C
 
-set -x
+# set -x
 if [ -z "$buildPhase" ]; then
 	echo "build from function"
 	echo "CWD: $PWD"

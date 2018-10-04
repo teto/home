@@ -81,14 +81,17 @@ let
     CFS_BANDWIDTH y
   '';
 
+
+    # NET_9P_DEBUG y
     net9pConfig = ''
 
       # for qemu/libvirt shared folders
       NET_9P y
       # generates 
       # repeated question:   9P Virtio Transport at /nix/store/l6m0lgcrls587pz0i644jhfjk6lyj55s-generate-config.pl line 8
-      NET_9P_DEBUG y
       9P_FS y
+
+      # POSIX might slow down the whole thing
       9P_FS_POSIX_ACL y
 
       # unsur 
