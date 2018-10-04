@@ -25,7 +25,7 @@ final: prev:
 
 
   buku_run = prev.stdenv.mkDerivation rec {
-    name = "buku_run";
+    name = "buku_run-${version}";
     version = "0.1.1";
     src = prev.fetchFromGitHub {
       owner = "carnager";
@@ -34,6 +34,11 @@ final: prev:
       sha256 = "1zyjjf3b8g3dnymcrg683rbnc6qrvx8ravfm833n7kjrqky3bczn";
     };
     
+    buildPhase = "";
+
+    postUnpack = ''
+      patchShebangs ./buku_run
+    '';
     buildInputs = with prev.pkgs; [ rofi gawk gnused buku bash ];
     # propagatedBuildInputs = [ rofi ];
 
