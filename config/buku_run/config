@@ -5,7 +5,7 @@ _rofi () {
 }
 
 # keybindings
-switch_view="Alt+Tab"
+switch_view="Alt+o"
 new_bookmark="Alt+n"
 actions="Alt+a"
 

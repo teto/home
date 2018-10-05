@@ -86,7 +86,7 @@ let
     sxiv # simple image viewer
     unstable.system_config_printer
     # shared_mime_info # temporary fix for nautilus to find the correct files
-    taiginijisho # japanse dict; like zkanji Qt based
+    tagainijisho # japanse dict; like zkanji Qt based
     translate-shell
     unstable.transmission_gtk
     xdotool # needed for vimtex + zathura

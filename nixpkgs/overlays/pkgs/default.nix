@@ -24,6 +24,10 @@ final: prev:
   # };
 
 
+  dualsub = prev.callPackage ./dualsubtitles { };
+
+  subtitles-rs = prev.callPackage ./subtitles-rs { };
+
   buku_run = prev.stdenv.mkDerivation rec {
     name = "buku_run-${version}";
     version = "0.1.1";
