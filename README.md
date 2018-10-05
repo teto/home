@@ -41,20 +41,6 @@ This folder contains my customizations for:
 * weechat (Irc client)
 * zsh (powerful alternative to bash)
 
-Configurations & install
-====
-
-New but uncomplete method: run make with the appropriate target
-
-Install each package via GNU stow:
-	dotfiles$ stow <PKG>
-
-Some packages will need you to set a specific target with stow -t <TARGET> <PKG>
-
-You may also need to copy (sensitive) files from the "examples" folder and update their content, for instance the xdg config.
-Same for the "etc" folder that reminds you of some interesting configurations for "/etc" files.
-
-
 
 Install on nixos
 ====
@@ -67,32 +53,29 @@ $ git clone https://github.com/teto/home.git dotfiles
 $ make nixpkgs
 \# nixos-rebuild switch --upgrade -I
 nixos-config=$PWD/dotfiles/nixpkgs/configuration.nix -I nixpkgs=$HOME/nixpkgs
+$ home-manager switch
 
+You will need git-encrypt do decypher some
 
 The rest of the instructions is more relevant for other distributions like
 Ubuntu.
+
+How to cypher some files
+====
+Look at .gitattributes, you will need git-encrypt installed
 
 
 To change your shell to zsh:
 ====
 chsh -s /bin/zsh <login>
 
-boostrap.sh shows also some specific command
-
-The "scripts" folder contains :
-<!***  a bootstrap script to install everything.**>
-<!*** git hooks that generates the list of installed python packages**>
 
 then copy files from the "examples" folder and adapt them.
 You can also copy some programs I use to the bin folder:
 	dotfiles$ cp -R bin ~/bin
 
-You will also find cronjobs to load via 'crontab -e' or 'crontab <file>' i nthe cron folder. For instance there is one cronjob that runs 'offlineimap -a <account>'.
-
 There might be additional more specific READMEs in subfolders.
 
-
-The folder "compilation" is an example of how to ./configure certain programs
 
 Neovim
 ====
@@ -115,13 +98,6 @@ http://tex.stackexchange.com/questions/63852/question-mark-instead-of-citation-n
 Python packages
 ====
 
-Instead of install system wide packages (requiring higher privileges), you may want to install python packages using:
-$ pip3 install --user -r requirements.txt
-
-A requirements.txt example was generated with $ pip3 freeze and saved in the examples folder.
-
-The matching binaries are then put in ~/.local/bin  thus you may want to add it to the $PATH
-
 Packages can also be installed from HEAD
 for instance pip3 install git+https://github.com/geier/khal
 
@@ -135,12 +111,13 @@ Make sure (append ~/.fonts for local fonts only)
 Set default applications
 ====
 Run 
+```
 $ xdg-mime query filetype ~/Téléchargements/coflow-scheduling.pdf
 to get the name of the mime/type. You can then ask the default with:
 $ XDG_UTILS_DEBUG_LEVEL=4 xdg-mime query default application/pdf
 and finally update it with
 $ xdg-mime default zathura.desktop application/pdf
-
+```
 
 Ranger
 ===
@@ -153,14 +130,7 @@ To install as user
 wget https://bootstrap.pypa.io/get-pip.py
 python3.X get-pip.py --user
 
-TODO
-====
-Automatically setup some important scripts so that they run in rams:
- sudo vmtouch -dl /usr/bin/python3.4
- sudo vmtouch -dl ~/.i3/i3dispatch.py
- ulimit -a|grep locked to check the user limit
-
-Nix 
+Nix paths I forget
 ===
 /nix/var/nix/profiles/system
 /run/current-system/sw/bin/

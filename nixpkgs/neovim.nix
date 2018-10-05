@@ -12,7 +12,7 @@ let
             vim-nix
             vim-obsession
             # deoplete-khard
-            vim-markdown-composer
+            vim-markdown-composer  # WIP
 # vim-highlightedyank
         ];
 in
@@ -37,6 +37,7 @@ in
       jedi
       urllib3 
       # pygments # for pygmentize and minted in latex
+      mypy
       pyls-mypy # on le desactive sinon il genere des
       python-language-server
       pycodestyle

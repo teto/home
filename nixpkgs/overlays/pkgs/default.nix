@@ -84,6 +84,6 @@ final: prev:
     inherit (prev.pkgs.gnome2) libgnome libgnomeui;
   };
 
-  i3-dispatch = prev.python3Packages.callPackage ./i3-dispatch {};
+  i3dispatch = prev.python3Packages.callPackage ./i3-dispatch {};
   # linux_mptcp_4_94 = prev.callPackage ./mptcp {};
 }

@@ -171,14 +171,6 @@ bindsym $mod+F1 [con_mark="pad_1"] scratchpad show
 bindsym $mod+F2 [instance="pad_(?!audioplayer)"] move scratchpad ; [instance="pad_audioplayer"] scratchpad show
 bindsym $mod+F3 [instance="pad_(?!ncmpcpp)"] move scratchpad; [instance="pad_ncmpcpp"] scratchpad show
 
-#pad_audioplayer
-# class followed by command
-#bindsym $mod+w exec python ~/.i3/runorfocus.py "Firefox" firefox
-
-
-bindsym $GroupFr+$mod+oe exec i3-easyfocus
-# bindsym $GroupUs+$mod+oe exec i3-easyfocus
-# bindsym $mod+shift+e exec /home/teto/i3-easyfocus/i3-easyfocus
 
 # This may be slow since script involves a few steps
 # change focus
@@ -189,36 +181,10 @@ bindsym $mod+$kright focus right
 
 # alternatively, you can use the cursor keys:
 # TODO rewrite dispatch in lua
-bindsym $mod+Left  exec /home/teto/bin/i3dispatch left
-bindsym $mod+Down  exec /home/teto/bin/i3dispatch down
-bindsym $mod+Up    exec /home/teto/bin/i3dispatch up
-bindsym $mod+Right exec /home/teto/bin/i3dispatch right
-
-# This may be slow since script involves a few steps
-# change focus
-#bindsym $mod+h exec ~/.i3//home/teto/i3dispatch/i3dispatch.py left
-#bindsym $mod+j exec ~/.i3//home/teto/i3dispatch/i3dispatch.py down
-#bindsym $mod+k exec ~/.i3//home/teto/i3dispatch/i3dispatch.py up
-#bindsym $mod+l exec ~/.i3//home/teto/i3dispatch/i3dispatch.py right
-
-## alternatively, you can use the cursor keys:
-#bindsym $mod+Left exec ~/.i3//home/teto/i3dispatch/i3dispatch.py left
-#bindsym $mod+Down exec ~/.i3//home/teto/i3dispatch/i3dispatch.py down
-#bindsym $mod+Up   exec ~/.i3//home/teto/i3dispatch/i3dispatch.py up
-#bindsym $mod+Right exec ~/.i3//home/teto/i3dispatch/i3dispatch.py right
-
-# move focused window
-# bindsym $GroupFr+$mod+Shift+J move left
-# bindsym $GroupFr+$mod+Shift+K move down
-# bindsym $GroupFr+$mod+Shift+L move up
-# bindsym $GroupFr+$mod+Shift+M move right
-
-# # move focused window
-# bindsym $GroupUs+$mod+Shift+J move left
-# bindsym $GroupUs+$mod+Shift+K move down
-# bindsym $GroupUs+$mod+Shift+L move up
-# bindsym $GroupUs+$mod+Shift+semicolumn right
-
+# bindsym $mod+Left  exec /home/teto/bin/i3dispatch left
+# bindsym $mod+Down  exec /home/teto/bin/i3dispatch down
+# bindsym $mod+Up    exec /home/teto/bin/i3dispatch up
+# bindsym $mod+Right exec /home/teto/bin/i3dispatch right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
@@ -227,7 +193,7 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $mod+b split h
+# bindsym $mod+b split h
 
 # split in vertical orientation
 # needs i3next
@@ -273,8 +239,6 @@ mode "programs" {
 
 
 
-# focus the parent container
-bindsym $mod+p focus parent
 # bindsym $mod+quotedbl  focus child
 #bindsym $mod+quotedbl workspace "$w3"
 bindsym $mod+apostrophe mode "programs"
@@ -290,18 +254,6 @@ bindsym $mod+Shift+F2 floating toggle
 bindsym $mod+Shift+F3 move container to workspace "$w3"
 bindsym $mod+Shift+F4 move container to workspace "$w4"
 
-# move focused container to workspace {{{
-# bindsym $mod+Shift+1 move container to workspace "$w1"
-# bindsym $mod+Shift+2 move container to workspace "$w2"
-# bindsym $mod+Shift+3 move container to workspace "$w3"
-# bindsym $mod+Shift+4 move container to workspace "$w4"
-# bindsym $mod+Shift+5 move container to workspace "$w5"
-# bindsym $mod+Shift+6 move container to workspace "$w6"
-# bindsym $mod+Shift+7 move container to workspace "$w7"
-# bindsym $mod+Shift+8 move container to workspace "$w8"
-# bindsym $mod+Shift+9 move container to workspace "$w9"
-# bindsym $mod+Shift+0 move container to workspace "$w10"
-# }}}
 
 # reload the configuration file
 bindsym $mod+Shift+C  reload

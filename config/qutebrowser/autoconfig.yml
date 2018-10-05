@@ -29,7 +29,14 @@ settings:
     global: null
   session.lazy_restore:
     global: true
+  tabs.position:
+    global: left
   tabs.tabs_are_windows:
-    global: true
+    global: false
+  url.default_page:
+    global: /home/teto/dotfiles/homepage.html
+  url.searchengines:
+    global:
+      DEFAULT: https://www.google.com/?q={}
   url.start_pages:
     global: /home/teto/dotfiles/homepage.html

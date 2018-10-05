@@ -1,6 +1,9 @@
 self: prev:
   # with prev.lib.kernel;
 
+
+# DYNAMIC_DEBUG n is important !!
+
 let
   # TODO I could use this to discrimanate between branches ?
     # let res = builtins.tryEval (
@@ -100,6 +103,8 @@ let
     '';
 
     # if not set it is converted to  https://lwn.net/Articles/434833/
+    # CONSOLE_LOGLEVEL_DEFAULT=7
+    # CONFIG_MESSAGE_LOGLEVEL_DEFAULT=4
     debugConfig = ''
       GDB_SCRIPTS y
       PRINTK_TIMES y

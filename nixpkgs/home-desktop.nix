@@ -11,7 +11,6 @@ let
 
   i3extraConfig = lib.concatStrings [
     (builtins.readFile ../config/i3/config.main)
-    # (builtins.readFile ../i3/config.mediakeys)
     (builtins.readFile ../config/i3/config.xp)
     (builtins.readFile ../config/i3/config.colors)
   ];
@@ -376,6 +375,12 @@ in
         # "${mod}+Ctrl+h" = ''exec "${pkgs.rofi}/bin/rofi -modi 'clipboard:greenclip print' -show clipboard"'';
         "${mod}+ctrl+b" = "exec " + ../buku_run/buku_run;
         "${mod}+g" = "exec ${pkgs.i3-easyfocus}/bin/i3-easyfocus";
+        "${mod}+2" = "exec ${pkgs.i3-easyfocus}/bin/i3-easyfocus";
+        "${mod}+3" = "exec ${pkgs.buku_run}/bin/buku_run";
+        "${mod}+b" = "exec ${pkgs.buku_run}/bin/buku_run";
+        "${mod}+p" = "exec ${pkgs.rofi-pass}/bin/rofi-pass";
+        # "${mod}+shift+p" = "focus parent";
+
         # "${mod}+shift+n" = "exec ${unstable.gnome3.nautilus}/bin/nautilus";
         # "${mod}+quotedbl" =  "exec ${unstable.qutebrowser}/bin/qutebrowser";
 
@@ -438,11 +443,12 @@ in
       # semicolumn
       // move_focused_wnd "right" "l" "l" 
       # just trying to overwrite previous bindings with i3dispatch
-      # // {
-      # "$mod+Left" = "exec i3dispatch left";
-# bindsym $mod+Down  exec /home/teto/bin/i3dispatch down
-# bindsym $mod+Up    exec /home/teto/bin/i3dispatch up
-# bindsym $mod+Right exec /home/teto/bin/i3dispatch right
+      // lib.optionalAttrs true {
+      "${mod}+Left" = "exec ${pkgs.i3dispatch}/bin/i3dispatch left";
+      "${mod}+Right" = "exec ${pkgs.i3dispatch}/bin/i3dispatch right";
+      "${mod}+Down" = "exec ${pkgs.i3dispatch}/bin/i3dispatch down";
+      "${mod}+Up" = "exec ${pkgs.i3dispatch}/bin/i3dispatch up";
+      }
     ;
     };
 
