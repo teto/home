@@ -37,6 +37,6 @@ settings:
     global: /home/teto/dotfiles/homepage.html
   url.searchengines:
     global:
-      DEFAULT: https://www.google.com/?q={}
+      DEFAULT: https://www.google.com/search?oq={}
   url.start_pages:
     global: /home/teto/dotfiles/homepage.html

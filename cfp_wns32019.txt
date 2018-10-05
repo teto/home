@@ -1,0 +1,72 @@
+CALL FOR PAPERS
+
+The Workshop on ns-3 (WNS3) is a one and one-half day workshop to be held on June 29-20, 2019, hosted by the University of Florence, Florence, Italy. The objective of the workshop is to gather ns-3 users and developers, together with networking simulation practitioners and users, and developers of other network simulation tools, to discuss the ns-3 simulator and related activities.
+As in past years, the accepted papers will be published in the [ACM ICPS series|https://www.acm.org/publications/icps-series] (DSA: Still the case?). 
+WNS3 invites authors to submit original high quality papers presenting different aspects of developing and using ns-3. In such papers, reproducibility and methodology will be a key reviewing criteria, as explained below. Topics of interest include, but are not limited to, the following:
+	• 		new models, devices, protocols and applications for ns-3
+	• 		using ns-3 in modern networking research
+	• 		comparison with other network simulators and emulators
+	• 		speed and scalability issues for ns-3
+	• 		multiprocessor and distributed simulation with ns-3, including the use of GPUs
+	• 		validation of ns-3 models
+	• 		credibility and reproducibility issues for ns-3 simulations
+	• 		user experience issues of ns-3
+	• 		frameworks for the definition and automation of ns-3 simulations
+	• 		post-processing, visualisation and statistical analysis tools for ns-3
+	• 		models ported from other simulators to ns-3
+	• 		using real code for simulation with ns-3 and using ns-3 code in network applications
+	• 		integration of ns-3 with testbeds, emulators, and other simulators or tools
+	• 		using ns-3 API from programming languages other than C++ or Python
+	• 		porting ns-3 to unsupported platforms
+	• 		network emulation with ns-3
+	• 		using ns-3 in education and teaching
+We also solicit novel papers with a focus on an industrial application of ns-3 (use of ns-3 within industry). Papers in this category must address these questions:
+	• 		What specific R&D questions did you or do you want to answer by simulation?
+	• 		Why and how did you choose ns-3 as the appropriate tool for your application?
+	• 		What surprises did you find, in correctness/behavior? in implementation? in learning curve?
+	• 		What are the remaining barriers to addressing fully your R&D questions?
+	• 		What general capabilities would have made your work easier/faster?
+Papers must be written in English and must not exceed 8 pages. Every paper will be peer-reviewed. At least one author of each accepted paper must register and present the work at the workshop.
+
+Submission instructions
+Authors should submit papers through [EasyChair|https://easychair.org/my/conference.cgi?a=13941876;conf=wns32019]  in PDF format, complying with [ACM “sigconf” Proceedings format|http://www.acm.org/publications/proceedings-template]. Submitted papers must not have been submitted for review or published (partially or completely) elsewhere.
+
+Acceptance Criteria
+Papers will be accepted based on the relevance, novelty, and impact of the contribution, as well as the quality of writing and presentation.
+Authors presenting new ns-3 models, frameworks, integration setups, etc. are encouraged to include all traditional parts of a scientific paper: introduction, motivation, related work, assumptions, verification and validation, conclusions and references. As a general rule, papers that only document source code will be rejected.
+Authors presenting networking research using ns-3 are encouraged to follow best simulation practices and focus particularly on the credibility and [reproducibility|http://www.nsnam.org/wiki/Reproducible_papers] of simulation results.
+We strongly encourage authors of all papers, demonstrations, and posters to include links to relevant source code and instructions on how to use it. This will make contributions more useful for the ns-3 community. For papers presenting new ns-3 models, a link to the respective code review issue will be a plus.
+Please do not hesitate to contact the workshop chairs if you are uncertain whether your submission falls within the scope of the workshop.
+
+Copyright Policy
+Authors will have their paper published in the ACM Digital Library, which will require copyright transfer to ACM under their [normal terms and conditions|http://www.acm.org/publications/policies/copyright_policy/]. In the spirit of open source, we encourage authors of published papers to exercise their right to publish author-prepared versions on their respective home page, or on a publicly accessible server of their employer. We will provide links from the WNS3 program on the ns-3 web site to the author-prepared version.
+
+Plagiarism Policy
+We follow the [ACM standards and conduct|http://www.acm.org/publications/policies/plagiarism_policy] regarding plagiarism.
+
+Reviewing Process Conflict of Interest Policy
+Reviewers will follow the [IEEE/ACM Transactions on Networking Conflict-of-Interest Guidelines|https://ton.lids.mit.edu/people.html#coi]. Authors are requested to identify potential conflicts-of-interest among the workshop’s technical program committee.
+
+Demonstrations and Posters
+In addition to the regular paper track, we are organizing an exhibition-style demonstration and poster session, not to be published on the conference proceedings. The aim is to foster interactive discussions on work-in-progress, new problem statements, ideas for future development related to ns-3, and display innovative prototypes.
+Please visit the Cal for Posters, Demos, and Works-In-Progress page regarding such submissions.
+Accepted poster and demo abstracts will be published on the ns-3 web site. At least one author of each accepted demo/poster must register and present the work at the conference.
+
+Awards
+One Best Paper will be selected by the TPC chairs and will be announced at the workshop.
+
+Registration
+Registration fees have not been confirmed but will be posted at a later date, and are expected to cover the cost of conducting the event.
+
+Other Events
+We are planning additional events during this week:
+	• 		Training on ns-3 will be offered on June 17-18; more details forthcoming.
+	• 		The annual ns-3 Consortium meeting and developer meetings will be held on June 20 (?) afternoon following WNS3; more details forthcoming.
+	• 		Friday June 21 is reserved for a wireless-focused workshop; more details forthcoming.
+More information on these will be announced at a future date.
+
+Important Dates
+Paper submission deadline : Sunday, February 10, 2019, 17:00 PST.
+Notification of acceptance : Sunday, March 17, 2019.
+Demos and posters proposal deadline : Sunday, April 7, 2019.
+Workshop at University of Florence: June 19-20, 2019.
