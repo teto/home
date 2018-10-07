@@ -180,13 +180,6 @@ bindsym $mod+$kup focus up
 bindsym $mod+$kright focus right
 
 # alternatively, you can use the cursor keys:
-# TODO rewrite dispatch in lua
-# bindsym $mod+Left  exec /home/teto/bin/i3dispatch left
-# bindsym $mod+Down  exec /home/teto/bin/i3dispatch down
-# bindsym $mod+Up    exec /home/teto/bin/i3dispatch up
-# bindsym $mod+Right exec /home/teto/bin/i3dispatch right
-
-# alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
 bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up

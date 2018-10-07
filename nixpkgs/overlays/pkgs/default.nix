@@ -69,6 +69,8 @@ final: prev:
 
   # http-getter = prev.python3Packages.callPackage ./http-getter { } ;
 
+  oni = prev.callPackage ./oni/default.nix {};
+
   mptcpnumerics = prev.python3Packages.callPackage ./mptcpnumerics.nix {};
 
   rt-tests = prev.callPackage ./rt-test.nix {};

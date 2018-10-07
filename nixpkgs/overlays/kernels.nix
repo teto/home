@@ -339,15 +339,16 @@ in rec {
       extraConfig = mptcpKernelExtraConfig;
   });
 
-  mptcp94 = (prev.linux_mptcp_94.override ({
+  mptcp94 = (prev.linux_mptcp.override ({
       kernelPatches=[];
       ignoreConfigErrors=true;
       autoModules = false;
       kernelPreferBuiltin = true;
       extraConfig = mptcpKernelExtraConfig;
-  })).overrideAttrs(o: {
-    nativeBuildInputs=o.nativeBuildInputs ++ (with prev.pkgs; [ pkgconfig ncurses qt5.qtbase ]);
-  });
+    }));
+    # .overrideAttrs(o: {
+    # nativeBuildInputs=o.nativeBuildInputs ++ (with prev.pkgs; [ pkgconfig ncurses qt5.qtbase ]);
+  # });
 
 # sandbox doesn't like
   # in a repl I see mptcp-local.stdenv.hostPlatform.platform

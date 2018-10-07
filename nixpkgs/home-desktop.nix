@@ -42,7 +42,7 @@ let
   ];
 
   imPkgs = with pkgs; [
-    gnome3.california
+    # gnome3.california # fails
     khal # => vdirsyncer !
     khard
     libsecret

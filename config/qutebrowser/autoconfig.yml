@@ -13,6 +13,8 @@ settings:
     - -e
     - nvim
     - '{}'
+  fonts.tabs:
+    global: 14pt monospace
   input.insert_mode.auto_load:
     global: true
   new_instance_open_target:
@@ -29,14 +31,22 @@ settings:
     global: null
   session.lazy_restore:
     global: true
+  tabs.background:
+    global: true
+  tabs.close_mouse_button:
+    global: middle
+  tabs.indicator.width:
+    global: 5
   tabs.position:
     global: left
+  tabs.show:
+    global: multiple
   tabs.tabs_are_windows:
     global: false
   url.default_page:
     global: /home/teto/dotfiles/homepage.html
   url.searchengines:
     global:
-      DEFAULT: https://www.google.com/search?oq={}
+      DEFAULT: https://www.google.com/search?source=hp&q={}
   url.start_pages:
     global: /home/teto/dotfiles/homepage.html
