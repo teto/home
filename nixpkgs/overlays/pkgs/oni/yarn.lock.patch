@@ -1,0 +1,13 @@
+diff --git a/yarn.lock b/yarn.lock
+index 15d7705b..1acc38fa 100644
+--- a/yarn.lock
++++ b/yarn.lock
+@@ -2247,7 +2247,7 @@ class-utils@^0.3.5:
+ 
+ classnames@JedWatson/classnames, classnames@^2.2.3, classnames@^2.2.5:
+   version "2.2.5"
+-  resolved "https://codeload.github.com/JedWatson/classnames/tar.gz/34a05a53d31d35879ec7088949ae5a1b2224043a"
++  resolved "https://codeload.github.com/JedWatson/classnames/tar.gz/34a05a53d31d35879ec7088949ae5a1b2224043a#dc5d48c08eeffc4406102736457dac2273d6e389"
+ 
+ clean-css@4.1.x:
+   version "4.1.11"
