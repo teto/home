@@ -3,10 +3,19 @@
 
 config_version: 2
 settings:
+  aliases:
+    global:
+      mpv: spawn --userscript view_in_mpv
+      q: quit
+      w: session-save
+      wq: quit --save
   auto_save.session:
     global: false
   backend:
     global: webengine
+  confirm_quit:
+    global:
+    - never
   editor.command:
     global:
     - termite
@@ -39,6 +48,8 @@ settings:
     global: 5
   tabs.position:
     global: left
+  tabs.select_on_remove:
+    global: last-used
   tabs.show:
     global: multiple
   tabs.tabs_are_windows:
