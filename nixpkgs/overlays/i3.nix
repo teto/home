@@ -83,7 +83,6 @@ rec {
      # Careful, we're using a different self and super here!
     packageOverrides = python-self: python-super: {
 
-
         # alot = python-super.alot.overrideAttrs (oldAttrs: {
         #   version = "0.9";
         #   src = /home/teto/alot;
@@ -136,16 +135,17 @@ rec {
         # });
         rfc-bibtex = pythonsuper.callPackage ./pkgs/rfc-bibtex {};
 
-
         # look for matching wcwidth
-        cmd2-next = pythonsuper.cmd2.overrideAttrs (oldAttrs: {
-          version = "0.9.1";
-          src = super.fetchFromGitHub {
-            owner = "python-cmd2";
-            repo = "cmd2";
-            rev = "0.9.1";
-            sha256 = "1v1isbx9sb828nazcn4k1wd279s6swhcv8mj9fspx0frqlfq0pcy";
+        cmd2 = pythonsuper.cmd2.overrideAttrs (oa: {
+          installFlags = [ "--ignore-installed" ];
+          nativeBuildInputs = oa.nativeBuildInputs ++ [ super.git ];
+          src = super.fetchgit {
+            url=https://github.com/python-cmd2/cmd2.git;
+            rev = "f38e100fd77f4a136a4883d23b2f4f8b3cd934b7";
+            sha256 = "0nc15i1628y66030d0b2g3xriyhxps5v8s9y1d6kx8jp1ccwvyfz";
+            leaveDotGit = true;
           };
+          doCheck = false;
         });
 
 
