@@ -876,6 +876,7 @@ function! ChooseSignifyGitCommit()
   let dict = copy(s:opts)
   let dict.sink = funcref('UpdateSignifyBranch')
   call fzf#run(dict)
+  SignifyRefresh
 endfunction
 command! FzfSignifyChooseBranch call ChooseSignifyGitCommit()
 
@@ -1136,6 +1137,9 @@ let s:neomake_exclude_ft = ['cpp', 'java' ]
 let g:neomake_tex_enabled_makers = []
 " 'mypy'
 let g:neomake_python_enabled_makers = ['mypy']
+
+" let g:neomake_python_mypy_maker.exe = g:python3_host_prog
+" let g:neomake_python_mypy_maker.args = '-mmypy'
 
 " removed chktex because of silly errors
 " let g:neomake_tex_enabled_makers = ['chktex']
@@ -1896,7 +1900,7 @@ let g:LanguageClient_loggingLevel = 'INFO'
 "let g:LanguageClient_rootMarkers
 " let g:LanguageClient_hoverPreview=
 let g:LanguageClient_completionPreferTextEdit=1
-let g:LanguageClient_diagnosticsEnable=1
+let g:LanguageClient_diagnosticsEnable=0
 " hardcoded for now
 " hie-wrapper is not available in domenkazar version
 " see $RUNTIME/rplugin/python3/LanguageClient/wrapper.sh for logging
