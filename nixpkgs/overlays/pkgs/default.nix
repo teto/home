@@ -82,6 +82,8 @@ final: prev:
   #     python = prev.python3;
   # };
 
+  mptcptrace = prev.callPackage ./mptcptrace {};
+
   stab = prev.callPackage ./stab.nix {
     inherit (prev.pkgs.gnome2) libgnome libgnomeui;
   };

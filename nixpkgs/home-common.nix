@@ -44,6 +44,8 @@ rec {
     set history filename ${config.xdg.cacheHome}/gdb_history
   '';
 
+  # home.file."${config.xdg.configHome}/rg.conf".text = ''
+  # '';
 
   home.file.".ghc/ghci.conf".source = ../home/ghci.conf;
 
@@ -60,7 +62,7 @@ rec {
   # - https://github.com/carnager/rofi-scripts.git
   # https://github.com/carnager/buku_run
   home.sessionVariables = {
-
+    RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/rg.conf";
     ZDOTDIR="$XDG_CONFIG_HOME/zsh";
     WEECHAT_HOME="$XDG_CONFIG_HOME/weechat";
     INPUTRC="$XDG_CONFIG_HOME/inputrc";

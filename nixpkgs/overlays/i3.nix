@@ -102,6 +102,8 @@ rec {
   };
   pythonPackages = python.pkgs;
 
+  rfc-bibtex = (super.rfx-bibtex  or (super.python3Packages.callPackage ./pkgs/rfc-bibtex {}));
+
   python3 = super.python3.override {
      # Careful, we're using a different self and super here!
     packageOverrides = pythonself: pythonsuper: {
@@ -133,18 +135,20 @@ rec {
         #   };
         #   disabled = false;
         # });
-        rfc-bibtex = pythonsuper.callPackage ./pkgs/rfc-bibtex {};
 
         # look for matching wcwidth
         cmd2 = pythonsuper.cmd2.overrideAttrs (oa: {
-          installFlags = [ "--ignore-installed" ];
+          # installFlags = [ "--ignore-installed" ];
+          version = "1.0";
           nativeBuildInputs = oa.nativeBuildInputs ++ [ super.git ];
-          src = super.fetchgit {
-            url=https://github.com/python-cmd2/cmd2.git;
-            rev = "f38e100fd77f4a136a4883d23b2f4f8b3cd934b7";
-            sha256 = "0nc15i1628y66030d0b2g3xriyhxps5v8s9y1d6kx8jp1ccwvyfz";
-            leaveDotGit = true;
-          };
+          src = /home/teto/cmd2;
+          # src = super.fetchgit {
+          #   url=https://github.com/python-cmd2/cmd2.git;
+          #   rev = "f38e100fd77f4a136a4883d23b2f4f8b3cd934b7";
+          #   sha256 = "0nc15i1628y66030d0b2g3xriyhxps5v8s9y1d6kx8jp1ccwvyfz";
+          #   leaveDotGit = true;
+          #   deepClone = true;
+          # };
           doCheck = false;
         });
 
