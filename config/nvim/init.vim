@@ -263,8 +263,7 @@ Plug 'dzeban/vim-log-syntax' " hl some keywords like ERROR/DEBUG/WARNING
 Plug 'tpope/vim-obsession' ", {'on': 'Obsession', 'ObsessionStatus'}  very cool, register edited files in a Session.vim, call with :Obsession
 Plug 'mbbill/undotree' " replaces gundo
 " Plug '907th/vim-auto-save' " :h auto-save
-Plug '907th/vim-auto-save' " autosave :h auto-save
-" Plug 'teto/vim-auto-save' " autosave :h auto-save
+Plug 'teto/vim-auto-save' " autosave :h auto-save
 Plug 'bfredl/nvim-miniyank' " killring alike plugin, cycling paste careful
 " hangs with big strings
 
