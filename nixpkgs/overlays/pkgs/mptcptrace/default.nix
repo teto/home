@@ -3,14 +3,14 @@
 }:
 
 stdenv.mkDerivation rec {
-  name = "http-getter";
+  name = "mptcptrace";
   version = "20180606";
 
   src = fetchFromBitbucket {
     owner = "bhesmans";
     repo = "mptcptrace";
     rev = "${version}";
-    sha256 = "00q5ma5rvl10rkc6cdw8d69bddgrmvy0ckqj3hbisy65l4idj2zm";
+    sha256 = "00q4ma5rvl10rkc6cdw8d69bddgrmvy0ckqj3hbisy65l4idj2zm";
   };
 
   buildInputs = [ pkgconfig ];
