@@ -20,7 +20,7 @@ in
   });
 
   tshark-dev-stable = super.tshark.overrideAttrs (oldAttrs: {
-    name = "wireshark-dev-stable";
+    name = "tshark-dev-stable";
     inherit src;
   });
 
