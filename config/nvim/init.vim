@@ -1496,17 +1496,15 @@ let g:vimtex_syntax_minted = [
 " let g:vimtex_log_ignore = 
 let g:vimtex_log_verbose= 1
 let g:vimtex_quickfix_mode = 2 " 1=> opened automatically and becomes active (2=> inactive)
-" Package biblatex Warning: B
 " with being on anotherline
-" deprecated by g:vimtex_quickfix_latexlog|)
-"
       " \ 'Biber reported the following issues',
       " \ "Invalid format of field 'month'"
-let g:vimtex_quickfix_ignored_warnings = [
-      \ 'Underfull',
-      \ 'Overfull',
-      \ 'specifier changed to',
-      \ ]
+" todo update default instead with extend ? 
+let g:vimtex_quickfix_latexlog = {
+      \ 'underfull': 0,
+      \ 'overfull': 0,
+      \ 'specifier changed to': 0,
+      \ }
 
 " shell-escape is mandatory for minted
 let g:vimtex_compiler_latexmk = {

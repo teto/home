@@ -93,6 +93,7 @@ let
       # generates 
       # repeated question:   9P Virtio Transport at /nix/store/l6m0lgcrls587pz0i644jhfjk6lyj55s-generate-config.pl line 8
       9P_FS y
+      9P_VIRTIO y
 
       # POSIX might slow down the whole thing
       9P_FS_POSIX_ACL y
@@ -247,7 +248,7 @@ let
       VIRTIO_NET y
       VIRTIO_CONSOLE y
 
-      NET_9P_VIRTIO? m
+      NET_9P_VIRTIO? y
 
       HW_RANDOM_VIRTIO y
       # VIRTIO_MMIO_CMDLINE_DEVICES
@@ -506,7 +507,7 @@ in rec {
   });
 
   # my_lenovo_kernel = prev.linux_latest.override({
-  my_lenovo_kernel = self.linux_mptcp_94.override({
+  my_lenovo_kernel = prev.linux_mptcp_94.override({
   # my_lenovo_kernel = self.linux_mptcp_with_netlink.override({
     # to be able to run as
     # preferBuiltin=true;

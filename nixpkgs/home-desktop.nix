@@ -95,7 +95,7 @@ let
     xorg.xbacklight
     xclip
     xcwd
-    # zathura # fails https://github.com/NixOS/nixpkgs/pull/47033
+    zathura
   ];
 
   home.sessionVariables = {
