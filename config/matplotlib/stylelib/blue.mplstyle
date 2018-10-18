@@ -9,7 +9,7 @@ lines.markersize  : 10            # markersize, in points
 
 
 axes.titlesize : 10
-axes.labelsize : 20
+axes.labelsize : 15
 
 
 grid.color       :   black   # grid color

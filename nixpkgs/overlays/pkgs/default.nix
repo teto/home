@@ -84,6 +84,8 @@ final: prev:
 
   mptcptrace = prev.callPackage ./mptcptrace {};
 
+  mptcpplot = prev.callPackage ./mptcpplot {};
+
   stab = prev.callPackage ./stab.nix {
     inherit (prev.pkgs.gnome2) libgnome libgnomeui;
   };
