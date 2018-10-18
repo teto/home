@@ -17,7 +17,8 @@ stdenv.mkDerivation rec {
     rev = "1e4ac42";
     sha256 = "10claj0x5gqmbn0zjz251hns43zl92d9rsrri2hx28p31l23pfg0";
 
-    leaveDotGit = true;
+    # leaveDotGit = true;
+
     #  deepClone = true;
 
     # dvlp branch => ne compile pas
