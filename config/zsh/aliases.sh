@@ -34,6 +34,7 @@ alias latest="ls -lt |head"
 
 alias servethis="nix-shell -ppython3 --command \'python -c 'import SimpleHTTPServer; SimpleHTTPServer.test()'\""
 
+alias testneovim=" nix-shell -E 'with import <nixpkgs> {}; neovim-unwrapped.overrideAttrs(oa: { doCheck=true;})'"
 
 # todo use exa instead
 
