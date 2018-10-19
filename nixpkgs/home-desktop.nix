@@ -149,13 +149,13 @@ in
   };
 
   # TODO prefix with stable
-  programs.firefox = {
-    enable = true;
-    # package = unstable.firefox;
-  #   enableAdobeFlash = false;
+  # programs.firefox = {
+  #   enable = true;
+  #   # package = unstable.firefox;
+  # #   enableAdobeFlash = false;
 
-    # enableBukubrow = true;
-  };
+  #   # enableBukubrow = true;
+  # };
 
   programs.browserpass = {
     enable=true;

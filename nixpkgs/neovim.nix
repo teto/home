@@ -12,7 +12,8 @@ let
             vim-nix
             vim-obsession
             # deoplete-khard
-            vim-markdown-composer  # WIP
+            # TODO this one will be ok once we patch it
+            # vim-markdown-composer  # WIP
 # vim-highlightedyank
         ];
 in

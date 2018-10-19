@@ -13,6 +13,9 @@ let
 in
   {
 
+# TODO add htis in shell_hook of my wireshakr
+#     export QT_PLUGIN_PATH=${qt5.qtbase.bin}/${qt5.qtbase.qtPluginPrefix}
+
   wireshark-dev-stable = super.wireshark.overrideAttrs (oldAttrs: {
     name = "wireshark-dev-stable";
     inherit src;
