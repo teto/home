@@ -93,7 +93,7 @@ let
       # generates 
       # repeated question:   9P Virtio Transport at /nix/store/l6m0lgcrls587pz0i644jhfjk6lyj55s-generate-config.pl line 8
       9P_FS y
-      9P_VIRTIO y
+      9P_VIRTIO? y
 
       # POSIX might slow down the whole thing
       9P_FS_POSIX_ACL y

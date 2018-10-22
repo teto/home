@@ -17,7 +17,7 @@ settings:
     global:
     - never
   content.proxy:
-    global: http://proxy.iiji.ad.jp
+    global: none
   editor.command:
     global:
     - termite

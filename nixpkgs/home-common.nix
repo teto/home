@@ -220,7 +220,6 @@ rec {
     # loginExtra=
     # profileExtra
     initExtra = ''
-      alias -s html=qutebrowser
       alias -s json=nvim
       alias -s Vagrantfile=nvim
       alias -s png=sxiv
@@ -232,6 +231,7 @@ rec {
       alias -s doc=xdg-open
       alias -s docx=xdg-open
 
+      # there must be a module for this
       source ${pkgs.autojump}/share/autojump/autojump.zsh
 
       # VERY IMPORTANT else zsh can eat last line

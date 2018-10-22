@@ -60,7 +60,7 @@ let
     buku # generates error
     # gcalc
     unstable.dropbox
-    gnome3.eog # eye of gnome = image viewer
+    # gnome3.eog # eye of gnome = image viewer / creates a collision
     gnome3.networkmanagerapplet # should 
     gnome3.defaultIconTheme # else nothing appears
     mpv
