@@ -16,6 +16,8 @@ settings:
   confirm_quit:
     global:
     - never
+  content.proxy:
+    global: http://proxy.iiji.ad.jp
   editor.command:
     global:
     - termite

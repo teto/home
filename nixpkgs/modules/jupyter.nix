@@ -26,7 +26,9 @@ let
   # faut s'en inspirer
   # by default --use-rtsopts=""
   ihaskellKernel = pkgs.runCommand "ihaskellKernel" {
-        buildInputs = [ pkgs.jupyter]; } ''
+    # haskellEnv is a trick that should not be needed !
+    # https://github.com/NixOS/nixpkgs/issues/47135#issuecomment-431495187
+    buildInputs = [ pkgs.jupyter haskellEnv ]; } ''
     export HOME=/tmp
     ${haskellEnv}/bin/ihaskell install --prefix=$out --use-rtsopts=""
   '';

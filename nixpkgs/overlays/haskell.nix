@@ -43,7 +43,7 @@ self: prev:
 
       tensorflow-core-ops = appendPatch (hprev.tensorflow-core-ops) ./pkgs/tensorflow.patch;
 
-      ihaskell = overrideCabal (dontCheck hprev.ihaskell) ( drv: {
+      ihaskell = builtins.trace "overrideCABAL !!" overrideCabal (dontCheck hprev.ihaskell) ( drv: {
         executableToolDepends = [ prev.pkgs.jupyter ];
         executableHaskellDepends = [ prev.pkgs.jupyter ];
       });
