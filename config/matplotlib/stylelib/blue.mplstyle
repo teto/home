@@ -6,7 +6,7 @@ lines.markersize  : 10            # markersize, in points
 # lines.markerfacecolor  : red
 
 
-
+axes.prop_cycle    : cycler(color='bgrcmyk')
 
 axes.titlesize : 10
 axes.labelsize : 15
