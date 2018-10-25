@@ -157,9 +157,10 @@ in
     # package = pkgs.nixUnstable;
 
     buildCores=4;
+    # TODO let it be set via channels ?
     nixPath = [
       "nixos-unstable=https://github.com/nixos/nixpkgs-channels/archive/nixos-unstable.tar.gz"
-      "nixos=https://github.com/nixos/nixpkgs-channels/archive/nixos-18.03.tar.gz"
+      "nixos=https://github.com/nixos/nixpkgs-channels/archive/nixos-18.09.tar.gz"
     ]
     ++ lib.optional (builtins.pathExists userNixpkgs)  "nixpkgs=${builtins.toString userNixpkgs}" 
     ++ lib.optional (builtins.pathExists nixosConfig)  "nixos-config=${builtins.toString nixosConfig}" 
