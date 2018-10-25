@@ -9,6 +9,7 @@ in
       ./hardware-iij-mptcp.nix
       ./common-server.nix
       ../modules/openssh.nix
+      ../modules/nextcloud.nix
       ../account-root.nix
     ];
 

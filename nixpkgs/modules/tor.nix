@@ -2,10 +2,10 @@
 {
 
   services.tor = {
-    enable = false;
+    enable = true;
     client.enable = true;
+    client.dns.enable = false; # default false
     enableGeoIP = true;
-    dns.enable = false; # default false
     relay.enable = false;
 
     hiddenServices = { "my-hidden-service-example".map = [

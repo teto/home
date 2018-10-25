@@ -1626,7 +1626,7 @@ xmap gs <plug>(GrepperOperator)
 " set foldopen+=all " specifies commands for which folds should open
 " set foldclose=all
 "set foldtext=
-set foldcolumn=2
+set foldcolumn=1
 
 if has("folding_fillchars")
 	" removed to test default values

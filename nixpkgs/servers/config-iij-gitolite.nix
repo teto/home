@@ -9,6 +9,7 @@ in
       ./common-server.nix
       ../modules/gitolite.nix
       ../modules/openssh.nix
+      ../modules/nextcloud.nix
   ];
 
 

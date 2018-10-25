@@ -1,24 +1,17 @@
 { config, lib, pkgs,  ... }:
 let
-  secrets = import ./secrets.nix;
+  secrets = import ../secrets.nix;
 in
 {
 
   services.nextcloud = {
     enable = true;
-    # inherit hostName;
+    # TODO update later
+    hostName = "toto.com";
     # nginx.enable = true;
-    # https = true;
-    autoconfig = {
-      dbtype = "pgsql";
-      dbname = "nextcloud";
-      dbuser = "nextcloud";
-      dbhost = "localhost";
-      inherit (secrets.services.nextcloud.autoconfig) dbpass;
-      adminlogin = "nextcloud-admin";
-      adminpassFile = "/run/keys/nextcloud-adminpass-file";
+    config = {
+      adminpass = secrets.nextcloud.password;
     };
     maxUploadSize = "512M";
-    home = "/data/var/lib/nextcloud";
   };
 }
