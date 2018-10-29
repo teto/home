@@ -44,7 +44,7 @@ set enable-bracketed-paste On
 set enable-keypad On
 
 set horizontal-scroll-mode Off
-set show-mode-in-prompt Off
+set show-mode-in-prompt On
 # set vi-ins-mode-string
 
 # Ctrl X + Ctrl E opens vim with cmd

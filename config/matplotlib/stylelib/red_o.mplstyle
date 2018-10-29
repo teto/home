@@ -24,6 +24,14 @@ axes.labelsize : 15
 axes.prop_cycle    :  cycler('color', 'bgrcymkc') + cycler('linestyle', ["-", '--', '-', ':', '-.', "-.", "-", "-"]) + cycler('marker', ['.', 'o', '>', 'x', '*', '+', ",", "<"])
 # + cycler('linewidth', ['1', '1', '1', '2', '1', '2', '1', '2'])
 
+axes.prop_cycle    :  cycler('color', 'bgrc') + cycler('linestyle', ['None', ' ', ':', '-.']) + cycler('marker', ['.', '.', 'x', 'x'])
+
+# '-' or 'solid' 	solid line
+# https://matplotlib.org/api/markers_api.html
+# axes.prop_cycle    :  cycler('color', 'bgrc') + cycler('linestyle', [':', ':', '-.', '-.']) + cycler('marker', ['.', 'o', 'x', 'x'])
+# cycler = mpl.cycler(marker=['s', 'o', 'x', '+', '.'], color=['r', 'g', 'b', 'y', 'c' ], 
+#         linestyle=['-', '--', '-.', ':', '-'])
+# axes.prop_cycle    :  (cycler('color', 'bgrcbgrc') + cycler('linestyle', ['-', ':', ':', '-.', '-', '-', ':', '-.']) + cycler('marker', ['o', 'x', '|', '>', '.', 'o', '<', 'x'])) + cycler('lw', [1, 2, 3, 4, 1, 2, 3, 4]) 
 
 grid.color       :   black   # grid color
 grid.linestyle   :   :       # dotted
