@@ -1,13 +1,19 @@
 self: super:
 {
 
-  # neovim-test = (super.pkgs.neovim-unwrapped.override  {
-  #   # name = "neovim-test";
-  #   doCheck=true;
-# }).overrideAttrs(oa:{
-  # cmakeBuildType="debug";
-  #   # -DMIN_LOG_LEVEL
-# });
+  neovim-test = (super.pkgs.neovim-unwrapped.override  {
+    # name = "neovim-test";
+    doCheck=true;
+  }).overrideAttrs(oa:{
+    cmakeBuildType="debug";
+      # -DMIN_LOG_LEVEL
+
+    shellHook = ''
+      export NVIM_PYTHON_LOG_LEVEL=DEBUG
+      export NVIM_LOG_FILE=/tmp/log
+      # export NVIM_PYTHON_LOG_FILE=/tmp/log
+    '';
+  });
 
   #     # withPython = false;
   #     # withPython3 = false; # pour les tests ?

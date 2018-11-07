@@ -38,21 +38,22 @@ rec {
   #   # withExamples = true;
   };
 
-  dce-quagga-dev =  if (super.pkgs ? dce-quagga) then (super.dce-quagga.overrideAttrs( oa: {
-    srcs = [
-      (builtins.fetchGit {
-        url  = git://github.com/direct-code-execution/ns-3-dce;
-        rev    = "master";
-        name = "dce";
-      })
-      (builtins.fetchGit {
-        url  = git://github.com/direct-code-execution/ns-3-dce-quagga;
-        rev    = "master";
-        name   = "dce-quagga";
-      })
-    ];
+  dce = super.pkgs.dce or super.callPackage ./pkgs/dce.nix;
 
-  })) else null;
+  # dce-quagga-dev =  if (super.pkgs ? dce-quagga) then (super.dce-quagga.overrideAttrs( oa: {
+  #   srcs = [
+  #     (builtins.fetchGit {
+  #       url  = git://github.com/direct-code-execution/ns-3-dce;
+  #       rev    = "master";
+  #       name = "dce";
+  #     })
+  #     (builtins.fetchGit {
+  #       url  = git://github.com/direct-code-execution/ns-3-dce-quagga;
+  #       rev    = "master";
+  #       name   = "dce-quagga";
+  #     })
+  #   ];
+  # })) else null;
 
   dce-local = if (super.pkgs ? dce) then (super.dce.override {
     python = self.python3;
