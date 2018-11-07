@@ -26,7 +26,7 @@ in
     # ./modules/tor.nix
 
     # only if available
-    ./modules/jupyter.nix
+    # ./modules/jupyter.nix
   ];
 
   # boot.kernelModules = [ ];

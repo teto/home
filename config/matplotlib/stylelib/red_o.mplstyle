@@ -1,23 +1,28 @@
 # vim: set filetype=xdefaults :
-lines.linewidth   : 0.0     # line width in points
-lines.linestyle   : None  # cycler('linestyle', ['--','-'])       # solid line
-lines.color       : red    # has no affect on plot(); see axes.prop_cycle
+# lines.linewidth   : 0.0     # line width in points
+# lines.linestyle   : None  # cycler('linestyle', ['--','-'])       # solid line
+# lines.color       : red    # has no affect on plot(); see axes.prop_cycle
 # lines.marker      : x    # the default marker
 # lines.markersize  : 10            # markersize, in points
 # lines.markerfacecolor  : red */
 
+# When True, automatically adjust subplot
+figure.autolayout : True  
 
 # legend
 legend.fancybox    : True
 
 axes.titlesize : 10
-axes.labelsize : 20
+axes.labelsize : 15
 
 # you can set several cyclers !!!
 # cycler('color', 'rgb') + cycler('lw', [1, 2, 3])
 #  cycler('linestyle', ['-', '--', ':', '-.'])
 # WARN: cyclers have to be of the same length !
-axes.prop_cycle    :  cycler('color', 'bgrc') + cycler('linestyle', ['None', ' ', ':', '-.']) + cycler('marker', ['.', '.', 'x', 'x'])
+# https://matplotlib.org/gallery/lines_bars_and_markers/line_styles_reference.html
+# colors https://matplotlib.org/api/_as_gen/matplotlib.pyplot.colors.html
+axes.prop_cycle    :  cycler('color', 'bgrcymkc') + cycler('linestyle', ["-", '--', '-', ':', '-.', "-.", "-", "-"]) + cycler('marker', ['.', 'o', '>', 'x', '*', '+', ",", "<"])
+# + cycler('linewidth', ['1', '1', '1', '2', '1', '2', '1', '2'])
 
 
 grid.color       :   black   # grid color

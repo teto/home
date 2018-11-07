@@ -8,7 +8,7 @@ in
     enable = true;
     # TODO update later
     hostName = "toto.com";
-    # nginx.enable = true;
+    nginx.enable = true;
     config = {
       adminpass = secrets.nextcloud.password;
     };

@@ -5,6 +5,15 @@ self: prev:
 # DYNAMIC_DEBUG n is important !!
 
 let
+
+
+
+
+  # shellHook = ''
+  #   alias xconfig="make xconfig KCONFIG_CONFIG=build/.config"
+  #   alias menuconfig="make menuconfig KCONFIG_CONFIG=build/.config"
+  # '';
+
   # TODO I could use this to discrimanate between branches ?
     # let res = builtins.tryEval (
     #   if isDerivation value then

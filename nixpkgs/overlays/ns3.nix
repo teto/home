@@ -3,6 +3,19 @@ let
   fetchgitLocal = super.fetchgitLocal;
 in
 rec {
+  # src = fetchFromGitHub {
+  #   owner = "gjcarneiro";
+  #   repo = "pybindgen";
+  #   rev = "ef30ba23dd23afe41aef5bc9aced71c112ccc22e";
+  #   sha256 = "1x6paa2r7brmfi4wpx9vvjs64n71k4viy8rq91x9ri0fss1666vj";
+  # };
+
+  # src = fetchgit {
+  #   url = git://github.com/gjcarneiro/pybindgen;
+  #   rev = "ef30ba23dd23afe41aef5bc9aced71c112ccc22e";
+  #   sha256 = "02z49igcms4jhrrxjbcwjqlaxx8vsqsmprjr7zmnal3m0v8v45nv";
+  #   leaveDotGit = true;
+  # };
 
   # TODO will loop indefinitely
   ns3-dev = super.ns-3.overrideAttrs(old: {
@@ -44,6 +57,7 @@ rec {
   dce-local = if (super.pkgs ? dce) then (super.dce.override {
     python = self.python3;
     enableDoxygen = true;
+    withQuagga  = true;
     # withManual = true;
     generateBindings = true;
     withExamples = true;

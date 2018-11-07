@@ -32,7 +32,11 @@ let
   };
 
   # boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_mptcp_with_netlink;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 # boot.kernelPackages = pkgs.linuxPackagesFor pkgs.my_lenovo_kernel;
+
+
+  programs.mininet.enable = true;
 
   # TODO we need nouveau 
   # boot.kernelModules = [
@@ -105,19 +109,19 @@ let
     envVars = {
     };
 
-    buildMachines = [ 
-      {
-      hostName = "iij_mptcp";
-      # todo move it to secrets
-      sshUser = "teto";
-      sshKey = "/home/teto/.ssh/iij_rsa";
-      system = "x86_64-linux";
-      maxJobs = 2;
-      speedFactor = 2;
-      supportedFeatures = [ "big-parallel" "kvm" ];
-      # mandatoryFeatures = [ "perf" ];
-      }
-    ];
+    # buildMachines = [ 
+    #   {
+    #   hostName = "iij_mptcp";
+    #   # todo move it to secrets
+    #   sshUser = "teto";
+    #   sshKey = "/home/teto/.ssh/iij_rsa";
+    #   system = "x86_64-linux";
+    #   maxJobs = 2;
+    #   speedFactor = 2;
+    #   supportedFeatures = [ "big-parallel" "kvm" ];
+    #   # mandatoryFeatures = [ "perf" ];
+    #   }
+    # ];
     distributedBuilds = true;
 
 
@@ -130,13 +134,16 @@ let
     # daemon.config
     support32Bit = true;
 
-    # Replace built in pulseaudio modules with enhanced bluetooth ones
-    package = with pkgs; pulseaudioFull.overrideAttrs(oldAttrs: {
-      postInstall = oldAttrs.postInstall + ''
+    extraModules = [ pkgs.pulseaudio-modules-bt ];
 
-        cp -a ${pulseaudio-modules-bt}/* $out/
-      '';
-    });
+    package = pkgs.pulseaudioFull;
+    # Replace built in pulseaudio modules with enhanced bluetooth ones
+    # package = with pkgs; pulseaudioFull.overrideAttrs(oldAttrs: {
+    #   postInstall = oldAttrs.postInstall + ''
+
+    #     cp -a ${pulseaudio-modules-bt}/* $out/
+    #   '';
+    # });
   };
 
   services.strongswan = {
@@ -144,5 +151,7 @@ let
       # "/etc/ipsec.d/*.secrets" "/etc/ipsec.d"
     secrets = ["/etc/ipsec.d"];
   };
+
+  programs.adb.enable = true;
 
 }
