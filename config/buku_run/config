@@ -4,6 +4,9 @@ _rofi () {
     rofi -dmenu -i -no-levenshtein-sort -width 1000 "$@"
 }
 
+# set to 1 to display url instead
+display_type=0
+
 # keybindings
 switch_view="Alt+o"
 new_bookmark="Alt+n"

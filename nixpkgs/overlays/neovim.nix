@@ -1,13 +1,14 @@
 self: super:
 {
 
-  neovim-test = (super.pkgs.neovim-unwrapped.override  {
+  neovim-dev = (super.pkgs.neovim-unwrapped.override  {
     # name = "neovim-test";
     doCheck=true;
   }).overrideAttrs(oa:{
     cmakeBuildType="debug";
-      # -DMIN_LOG_LEVEL
+      # -DMN_LOG_LEVEL
 
+    nativeBuildInputs = oa.nativeBuildInputs ++ [ self.pkgs.valgrind ];
     shellHook = ''
       export NVIM_PYTHON_LOG_LEVEL=DEBUG
       export NVIM_LOG_FILE=/tmp/log

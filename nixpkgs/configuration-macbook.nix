@@ -15,6 +15,9 @@ let
     ./modules/network-manager.nix
     ./modules/libvirtd.nix
 
+    # just for testing
+    ./modules/nextcloud.nix
+
     # ./extraTools.nix
     # ./modules/tor.nix
   ];
@@ -36,7 +39,7 @@ let
 # boot.kernelPackages = pkgs.linuxPackagesFor pkgs.my_lenovo_kernel;
 
 
-  programs.mininet.enable = true;
+  # programs.mininet.enable = true;
 
   # TODO we need nouveau 
   # boot.kernelModules = [
