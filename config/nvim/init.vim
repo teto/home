@@ -414,6 +414,7 @@ let g:far#collapse_result=1
 " }}}
 
 " Plug 'gregsexton/gitv'
+Plug 'jeffwilliams/basejump' " to alt+click on file:line and go to it
 Plug 'neovim/nvimdev.nvim' " thanks tweekmonster !
 call plug#end()
 " }}}

@@ -128,8 +128,8 @@ let
     # https://nixos.wiki/wiki/Printing
     printing = {
       enable = true;
-      browsing = true;
-      drivers = [ pkgs.gutenprint ];
+      browsing = false;
+      drivers = [ pkgs.gutenprint pkgs.gutenprintBin ];
     };
 
 
@@ -151,6 +151,8 @@ let
     (import ./overlays/kernels.nix) 
     (import ./overlays/haskell.nix) 
   ];
+
+  nixpkgs.config.allowUnfree = true;
 
   # <nixos-overlay>
   # just for testing
