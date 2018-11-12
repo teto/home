@@ -13,6 +13,8 @@ in
       ../account-root.nix
     ];
 
+  services.nextcloud.hostName = secrets.mptcp_server.hostName;
+
   # install mosh-server
   # programs.mosh.enable = true;
 

@@ -4,7 +4,7 @@ let
   nixos-remote = { config, pkgs, ... }:
   {
     
-    deployment.targetHost = (builtins.head secrets.mptcp_server.ipv4.addresses).address;
+    deployment.targetHost = (builtins.head secrets.mptcp_server.interfaces.ipv4.addresses).address;
     deployment.targetEnv = "none";
 
     # without this, it seems 

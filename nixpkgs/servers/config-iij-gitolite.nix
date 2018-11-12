@@ -13,6 +13,8 @@ in
   ];
 
 
+  services.nextcloud.hostName = secrets.gitolite_server.hostname;
+
   environment.systemPackages = with pkgs; [
     tmux
     weechat
@@ -30,6 +32,6 @@ in
   networking.defaultGateway = secrets.gateway;
   networking.nameservers = secrets.nameservers;
 
-  networking.interfaces.ens3 = secrets.gitolite_server;
+  networking.interfaces.ens3 = secrets.gitolite_server.interfaces;
 
 }

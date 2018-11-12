@@ -6,12 +6,14 @@ in
 
   services.nextcloud = {
     enable = true;
-    # TODO update later
-    hostName = "toto.com";
+    # machine specific
+    # hostName = "toto.com";
     nginx.enable = true;
     config = {
       adminpass = secrets.nextcloud.password;
     };
     maxUploadSize = "512M";
   };
+
+  networking.firewall.allowedTCPPorts = [ 80 443 ];
 }

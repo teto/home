@@ -54,27 +54,48 @@ fileext = ".ics"
 # token_file.fetch = ["command", "sh", "-c", "echo $XDG_CACHE_HOME/vdirsyncer/gmail_token"]
 # }}}
 
-[pair zaclys_caldav] # {{{
-a = "zaclys_local_caldav"
-b = "zaclys_remote_caldav"
+# [pair zaclys_caldav] # {{{
+# a = "zaclys_local_caldav"
+# b = "zaclys_remote_caldav"
+# collections = ["from a", "from b"]
+
+# [storage zaclys_local_caldav]
+# type = "filesystem"
+# path.fetch = ["command", "sh", "-c", "echo $XDG_DATA_HOME/calendars/zaclys"]
+# fileext = ".ics"
+
+
+# [storage zaclys_remote_caldav]
+# auth = "basic"
+# type = "caldav"
+# # https://ncloud.zaclys.com/remote.php/dav/calendars/22780/personal/
+# url = "https://ncloud.zaclys.com/remote.php/dav/calendars/22780/personal/"
+# # username.fetch = ["command", "secret-tool", "get", "zaclys", "login"]
+# username = "22780"
+# password.fetch = ["command", "~/dotfiles/bin/pass-show", "zaclys"]
+# # }}}
+
+[pair iij_caldav] # {{{
+a = "iij_local_caldav"
+b = "iij_remote_caldav"
 collections = ["from a", "from b"]
 
-[storage zaclys_local_caldav]
+[storage iij_local_caldav]
 type = "filesystem"
-path.fetch = ["command", "sh", "-c", "echo $XDG_DATA_HOME/calendars/zaclys"]
+path.fetch = ["command", "sh", "-c", "echo $XDG_DATA_HOME/calendars/perso"]
 fileext = ".ics"
 
 
-[storage zaclys_remote_caldav]
+[storage iij_remote_caldav]
 auth = "basic"
 type = "caldav"
 # https://ncloud.zaclys.com/remote.php/dav/calendars/22780/personal/
-url = "https://ncloud.zaclys.com/remote.php/dav/calendars/22780/personal/"
+# http://nixos.iijlab.net/remote.php/dav/calendars/root/personal/
+url = "http://nixos.iijlab.net/remote.php/dav/calendars/root/personal/"
 # username.fetch = ["command", "secret-tool", "get", "zaclys", "login"]
-username = "22780"
-password.fetch = ["command", "~/dotfiles/bin/pass-show", "zaclys"]
+username = "root"
+password.fetch = ["command", "~/dotfiles/bin/pass-show", "iij/nextcloud"]
 # }}}
-
 
 # [pair perso_lip6_caldav] {{{
 # a = perso_local_caldav
