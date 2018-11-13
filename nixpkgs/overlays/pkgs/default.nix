@@ -71,6 +71,8 @@ final: prev:
 
   oni = prev.callPackage ./oni/default.nix {};
 
+  mda-lite = prev.pythonPackages.callPackage ./mda-lite {};
+
   mptcpnumerics = prev.python3Packages.callPackage ./mptcpnumerics.nix {};
 
   rt-tests = prev.callPackage ./rt-test.nix {};

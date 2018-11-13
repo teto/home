@@ -38,7 +38,7 @@ rec {
   #   # withExamples = true;
   };
 
-  dce = super.pkgs.dce or super.callPackage ./pkgs/dce.nix;
+  dce = if (super.pkgs ? dce) then super.pkgs.dce else super.callPackage ./pkgs/dce.nix;
 
   # dce-quagga-dev =  if (super.pkgs ? dce-quagga) then (super.dce-quagga.overrideAttrs( oa: {
   #   srcs = [
@@ -55,7 +55,7 @@ rec {
   #   ];
   # })) else null;
 
-  dce-local = if (super.pkgs ? dce) then (super.dce.override {
+  dce-local = if (self.pkgs ? dce) then (self.dce.override {
     python = self.python3;
     enableDoxygen = true;
     withQuagga  = true;

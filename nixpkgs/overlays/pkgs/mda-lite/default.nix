@@ -1,15 +1,21 @@
-{ stdenv, fetchFromBitbucket
+{ stdenv
+, fetchFromGitLab
 , pkgconfig 
 , autoreconfHook
 , check
-, openssl # for libcrypto
-, libpcap
+# , openssl # for libcrypto
+# , libpcap
+, scapy
+, netifaces
+, python
+, buildPythonApplication
 }:
 
 let
-  pythonEnv = python.withPackages(ps: [ ps.scapy ]);
+  pythonEnv = python.withPackages(ps: with ps; [ scapy netifaces ]);
 in
-stdenv.mkDerivation rec {
+  # stdenv.mkDerivation rec 
+  buildPythonApplication {
   name = "mda-lite";
   version = "20180606";
 
@@ -19,8 +25,8 @@ stdenv.mkDerivation rec {
     domain = "gitlab.planet-lab.eu";
     owner = "cartography";
     repo = "multilevel-mda-lite";
-    rev = "1e4ac42";
-    sha256 = "10claj0x5gqmbn0zjz251hns43zl92d9rsrri2hx28p31l23pfg0";
+    rev = "3bf432efed9610f49416dfb4754669e541171c38";
+    sha256 = "1ryv1c4cj6zw19z027wrrzbaya0l94f1yfc72kjrb3liw7x7my91";
 
     # leaveDotGit = true;
 
@@ -31,12 +37,14 @@ stdenv.mkDerivation rec {
     # sha256 = "0ii78gna06gkkkw3qb774lfxxdh478ab8qligyglmiy6hxl4w00k";
   };
 
-  nativeBuildInputs = [ autoreconfHook pkgconfig check openssl libpcap ];
+  nativeBuildInputs = [ pkgconfig ];
+
+  buildInputs = [ pythonEnv ];
 
   meta = with stdenv.lib; {
 
-    homepage = https://bitbucket.org/bhesmans/mptcptrace.git;
-    description = "Analyze MPTCP traces";
+    homepage =  https://gitlab.planet-lab.eu/cartography/multilevel-mda-lite;
+    description = "Multipath traceroute";
     platforms = platforms.unix;
     license = licenses.gpl3;
   };

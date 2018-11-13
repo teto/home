@@ -24,7 +24,7 @@ axes.labelsize : 15
 axes.prop_cycle    :  cycler('color', 'bgrcymkc') + cycler('linestyle', ["-", '--', '-', ':', '-.', "-.", "-", "-"]) + cycler('marker', ['.', 'o', '>', 'x', '*', '+', ",", "<"])
 # + cycler('linewidth', ['1', '1', '1', '2', '1', '2', '1', '2'])
 
-axes.prop_cycle    :  cycler('color', 'bgrc') + cycler('linestyle', ['None', ' ', ':', '-.']) + cycler('marker', ['.', '.', 'x', 'x'])
+# axes.prop_cycle    :  cycler('color', 'bgrc') + cycler('linestyle', ['None', ' ', ':', '-.']) + cycler('marker', ['.', '.', 'x', 'x'])
 
 # '-' or 'solid' 	solid line
 # https://matplotlib.org/api/markers_api.html
