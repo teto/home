@@ -238,7 +238,7 @@ bindkey '^N' down-history
 
   };
 
-  # users.defaultUserShell = pkgs.zsh;
+  users.defaultUserShell = pkgs.zsh;
 
   nixpkgs.config = {
 	allowUnfree = true;

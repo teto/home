@@ -127,6 +127,7 @@ in
 
   imports = [
     ./home-common.nix
+    ./modules/home-tor.nix
   ];
 
   home.packages = desktopPkgs ++ devPkgs ++ heavyPackages

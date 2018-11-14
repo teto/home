@@ -1,6 +1,7 @@
 self: super:
 {
 
+  # TODO do a version with clang
   neovim-dev = (super.pkgs.neovim-unwrapped.override  {
     # name = "neovim-test";
     doCheck=true;
@@ -13,6 +14,18 @@ self: super:
       export NVIM_PYTHON_LOG_LEVEL=DEBUG
       export NVIM_LOG_FILE=/tmp/log
       # export NVIM_PYTHON_LOG_FILE=/tmp/log
+      export VALGRIND_LOG="$PWD/valgrind.log"
+
+      echo "To run tests:"
+      echo "VALGRIND=1 TEST_FILE=test/functional/core/job_spec.lua TEST_TAG=env make functionaltest"
+    '';
+  });
+
+  neovim-dev-clang = (self.neovim-dev.override { 
+    stdenv = super.clangStdenv;
+  }).overrideAttrs(oa:{
+    shellHook = oa.shellHook + ''
+      export CLANG_SANITIZER=ASAN_UBSAN
     '';
   });
 
