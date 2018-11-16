@@ -34,4 +34,15 @@ in
 
   networking.interfaces.ens3 = secrets.gitolite_server.interfaces;
 
+  # allow to fetch mininet from the host machine
+
+  nix = {
+    binaryCaches =  [ "main" ];
+    trustedUsers = [ "root" "teto" ];
+  };
+  # nix.  = ''
+  #   require-sigs = false
+  #   trusted-substituters = s3://<bucket>?region=us-west-1
+  #   extra-substituters = s3://<bucket>?region=us-west-1
+  # '';
 }

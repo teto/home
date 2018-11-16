@@ -3,16 +3,20 @@
 , pkgconfig 
 , autoreconfHook
 , check
+, graph-tool
 # , openssl # for libcrypto
 # , libpcap
 , scapy
+, setuptools
 , netifaces
 , python
 , buildPythonApplication
 }:
 
 let
-  pythonEnv = python.withPackages(ps: with ps; [ scapy netifaces ]);
+  pythonEnv = python.withPackages(ps: with ps; [ 
+    scapy netifaces setuptools graph-tool
+  ]);
 in
   # stdenv.mkDerivation rec 
   buildPythonApplication {

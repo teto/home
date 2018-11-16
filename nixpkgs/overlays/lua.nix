@@ -1,11 +1,22 @@
 self: prev:
-{
+rec {
 
-  # lua
-  # lua = prev.lua // {
-  #   packageOverrides = hself: hprev: with prev.haskell.lib; rec {  
-  #     # useful to fetch newer libraries with callHackage
-  #   }
-  # };
+  lua = prev.lua.override {
 
+    packageOverrides = luaself: luaprev: {
+
+      # TODO use my fork
+      nvim-client  = luaprev.nvim-client.overrideAttrs (oa: {
+        src = /home/teto/lua-client;
+        # src = prev.fetchFromGitHub {
+        #   repo = "lua-client";
+        #   owner = "teto";
+        #   rev = "ffe21016d4ac2de810cc89a4f686fd72065214c0";
+        #   sha256= "";
+
+        # };
+      });
+
+    };
+  };
 }

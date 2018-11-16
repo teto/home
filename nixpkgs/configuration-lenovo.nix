@@ -16,7 +16,9 @@ let
     ./common-desktop.nix
     ./modules/network-manager.nix
     ./modules/libvirtd.nix
-    ./modules/owamp.nix
+    # ./modules/owamp.nix
+
+    ./modules/jupyter.nix
 
     # for user teto
     ./extraTools.nix
@@ -220,7 +222,7 @@ let
   hardware.bluetooth.powerOnBoot = true;
 
   # will fial until openflowswitch is fixed
-  programs.mininet.enable = true;
+  programs.mininet.enable = false;
   # test with sudo mn --switch ovsk -v debug
 
   networking.iproute2.enable = true;

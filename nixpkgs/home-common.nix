@@ -197,7 +197,7 @@ rec {
   #   # $pdf_update_signal = 'SIGHUP';
   # '';
 
-  programs.zsh = {
+  programs.zsh = rec {
     enable = true;
     # dotDir = "${config.xdg.configHome}/zsh";
     dotDir = ".config/zsh";
@@ -236,7 +236,6 @@ rec {
 
       # VERY IMPORTANT else zsh can eat last line
       setopt prompt_sp
-      source $ZDOTDIR/zshrc
 
       # used to compile bpf stuff
       __bcc() {
@@ -245,7 +244,13 @@ rec {
       }
 
       # alias bcc=__bcc
-    '';
+
+      # TODO remove and include it ?
+      source $ZDOTDIR/zshrc
+    '' 
+      # + builtins.readFile dotDir + ./zshrc
+      ;
+
   };
 
   # order matters

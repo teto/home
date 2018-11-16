@@ -378,7 +378,6 @@ in rec {
     #   rev = "c1f91c32ebd1d4bf38fc17756c61441c925135cb";
     #   sha256 = "061zzlkjm3i1nhgnz3dfhbshjicrjc5ydwy6hr5l6y8cl2ps2iwf";
     # };
-
     # modDirVersion="4.9.87";
     # modVersion="4.9.87";
     # modDirVersion="4.9.60-matt+";
@@ -516,11 +515,13 @@ in rec {
   });
 
   # my_lenovo_kernel = prev.linux_latest.override({
-  my_lenovo_kernel = prev.linux_mptcp_94.override({
-  # my_lenovo_kernel = self.linux_mptcp_with_netlink.override({
+  # my_lenovo_kernel = prev.linux_mptcp_94.override({
+  my_lenovo_kernel = self.linux_mptcp_with_netlink.override({
+
+    modDirVersion="4.14.24";
     # to be able to run as
     # preferBuiltin=true;
-    # ignoreConfigErrors=true;
+    ignoreConfigErrors=true;
     # src = prev.fetchFromGitHub {
     #   owner = "teto";
     #   repo = "mptcp";
