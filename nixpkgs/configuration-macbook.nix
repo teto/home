@@ -16,10 +16,10 @@ let
     ./modules/libvirtd.nix
 
     # just for testing
-    ./modules/nextcloud.nix
+    # ./modules/nextcloud.nix
 
     # ./extraTools.nix
-    # ./modules/tor.nix
+    ./modules/tor.nix
   ];
 
   boot.loader ={
