@@ -41,12 +41,18 @@ self: prev:
 
       cabal-helper = prev.haskell.lib.doJailbreak (hprev.cabal-helper);
 
+      # should not be needed anymore right ?
       tensorflow-core-ops = appendPatch (hprev.tensorflow-core-ops) ./pkgs/tensorflow.patch;
 
       ihaskell = builtins.trace "overrideCABAL !!" overrideCabal (dontCheck hprev.ihaskell) ( drv: {
         executableToolDepends = [ prev.pkgs.jupyter ];
         executableHaskellDepends = [ prev.pkgs.jupyter ];
       });
+
+      netlink-pm = hprev.callPackage ./pkgs/netlink-pm-haskell.nix {};
+
+      # does not seem to work
+      # netlink-pm = hprev.callCabal2nix "netlink-pm" /home/teto/mptcpnetlink/hs {};
 
   #     ghc-syb-utils = hsuper.callHackage "ghc-syb-utils" "0.3.0.0" {};
   #     cabal-plan = hsuper.callHackage "cabal-plan" "0.4.0.0" {};

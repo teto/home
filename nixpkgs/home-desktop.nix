@@ -460,7 +460,7 @@ in
 
   home.file.".pypirc".source = ../home/pypirc;
 
-  #
+  # TODO make sure it works
   systemd.user.services.vdirsyncer = {
     Unit = {
       After = [ "network.target" ];
