@@ -55,7 +55,7 @@ rec {
   #   ];
   # })) else null;
 
-  dce-local = if (self.pkgs ? dce) then (self.dce.override {
+  dce-local = (self.dce.override {
     python = self.python3;
     enableDoxygen = true;
     withQuagga  = true;
@@ -73,5 +73,5 @@ rec {
     
       };
     
-  }) else null;
+  });
 }

@@ -89,7 +89,7 @@ call plug#begin(s:plugdir)
 " Plug 'joonty/vdebug' " to add breakpoints etc
 " Plug 'andymass/vim-matchup' " to replace matchit
 " call :NR on a region than :w . coupled with b:nrrw_aucmd_create, 
-Plug 'AGhost-7/critiq.vim' " :h critiq
+" Plug 'AGhost-7/critiq.vim' " :h critiq
 Plug 'chrisbra/NrrwRgn' " to help with multi-ft files
 Plug 'chrisbra/vim-diff-enhanced' " 
 Plug 'mhinz/vim-signify' " Indicate changed lines within a file using a VCS.
@@ -1903,7 +1903,7 @@ let g:LanguageClient_loggingLevel = 'INFO'
 "let g:LanguageClient_rootMarkers
 " let g:LanguageClient_hoverPreview=
 let g:LanguageClient_completionPreferTextEdit=1
-let g:LanguageClient_diagnosticsEnable=0
+let g:LanguageClient_diagnosticsEnable=1
 " hardcoded for now
 " hie-wrapper is not available in domenkazar version
 " see $RUNTIME/rplugin/python3/LanguageClient/wrapper.sh for logging
@@ -1913,7 +1913,8 @@ let g:LanguageClient_diagnosticsEnable=0
     " \ 'python': 
   " '-v',
 " let g:LanguageClient_serverCommands.nix = ['nix-lsp']
-let g:LanguageClient_serverCommands.haskell = ['hie', '--lsp', '-d',  '--logfile', '/tmp/lsp_haskell.log' ]
+" https://github.com/teto/ns-3-dce/pull/6
+let g:LanguageClient_serverCommands.haskell = ['hie-wrapper', '--lsp', '-d', '--vomit',  '--logfile', '/tmp/lsp_haskell.log' ]
 let g:LanguageClient_serverCommands.python = [ fnamemodify( g:python3_host_prog, ':p:h').'/pyls', '--log-file' , expand('~/lsp_python.log')]
 " delete it ?
 " del g:LanguageClient_serverCommands.cpp = ['cquery', '--log-file=/tmp/cq.log']
@@ -2360,8 +2361,8 @@ function! s:RequireHaskellHost(name)
 endfunction
 
 " Register a plugin host that is started when a haskell file is opened
-call remote#host#Register('haskell', "*.l\?hs", function('s:RequireHaskellHost'))
+" call remote#host#Register('haskell', "*.l\?hs", function('s:RequireHaskellHost'))
 
 " But if you need it for other files as well, you may just start it
 " forcefully by requiring it
-let hc=remote#host#Require('haskell')
+" let hc=remote#host#Require('haskell')

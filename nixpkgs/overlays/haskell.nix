@@ -49,7 +49,12 @@ self: prev:
         executableHaskellDepends = [ prev.pkgs.jupyter ];
       });
 
-      netlink-pm = hprev.callPackage ./pkgs/netlink-pm-haskell.nix {};
+      netlink-pm = let 
+        orig = hprev.callPackage ./pkgs/netlink-pm-haskell.nix {};
+      in
+        orig
+        # pkgs.haskell.lib.overrideCabal orig (oa: {})
+        ;
 
       # does not seem to work
       # netlink-pm = hprev.callCabal2nix "netlink-pm" /home/teto/mptcpnetlink/hs {};

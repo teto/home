@@ -95,7 +95,7 @@ let
     xorg.xbacklight
     xclip
     xcwd
-    # zathura
+    zathura
   ];
 
   home.sessionVariables = {
