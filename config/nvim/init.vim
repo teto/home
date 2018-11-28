@@ -417,6 +417,7 @@ let g:far#collapse_result=1
 " Plug 'gregsexton/gitv'
 Plug 'jeffwilliams/basejump' " to alt+click on file:line and go to it
 Plug 'neovim/nvimdev.nvim' " thanks tweekmonster !
+Plug 'jceb/vim-orgmode' " orgmode
 call plug#end()
 " }}}
 
@@ -1914,7 +1915,7 @@ let g:LanguageClient_diagnosticsEnable=1
   " '-v',
 " let g:LanguageClient_serverCommands.nix = ['nix-lsp']
 " https://github.com/teto/ns-3-dce/pull/6
-let g:LanguageClient_serverCommands.haskell = ['hie-wrapper', '--lsp', '-d', '--vomit',  '--logfile', '/tmp/lsp_haskell.log' ]
+let g:LanguageClient_serverCommands.haskell = ['hie', '--lsp', '-d', '--vomit',  '--logfile', '/tmp/lsp_haskell.log' ]
 let g:LanguageClient_serverCommands.python = [ fnamemodify( g:python3_host_prog, ':p:h').'/pyls', '--log-file' , expand('~/lsp_python.log')]
 " delete it ?
 " del g:LanguageClient_serverCommands.cpp = ['cquery', '--log-file=/tmp/cq.log']

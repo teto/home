@@ -2,9 +2,11 @@
 , ghc-mod, hindent, hlint
 , optparse-applicative
 , hasktags
+, haskdogs
 , Cabal
 , Cabal_2_4_0_1
 , cabal-install
+, codex
 }:
 mkDerivation {
   pname = "netlink-pm";
@@ -14,7 +16,9 @@ mkDerivation {
   isExecutable = true;
   # libraryHaskellDepends = [ ];
   buildTools = [
+    haskdogs # seems to build on hasktags/ recursively import things
     hasktags
+    # codex # doesn't work
     Cabal_2_4_0_1
     # cabal-install
   ];
