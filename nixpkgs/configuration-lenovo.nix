@@ -218,6 +218,9 @@ let
 
   };
 
+  # kind of a test
+  security.pam.services.lightdm.enableGnomeKeyring = true;
+
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = true;
 

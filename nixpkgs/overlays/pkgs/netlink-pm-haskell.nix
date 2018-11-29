@@ -4,9 +4,9 @@
 , hasktags
 , haskdogs
 , Cabal
-, Cabal_2_4_0_1
+# , Cabal_2_4_0_1
 , cabal-install
-, codex
+# , codex
 }:
 mkDerivation {
   pname = "netlink-pm";
@@ -19,7 +19,7 @@ mkDerivation {
     haskdogs # seems to build on hasktags/ recursively import things
     hasktags
     # codex # doesn't work
-    Cabal_2_4_0_1
+    # Cabal_2_4_0_1
     # cabal-install
   ];
 

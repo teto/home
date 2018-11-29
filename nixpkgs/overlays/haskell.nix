@@ -26,7 +26,8 @@ self: prev:
 
   haskell = prev.haskell // {
 
-    compiler = prev.haskell.compiler // { ghc802 = prev.haskell.compiler.ghc844; };
+    # to work around a stack bug (stack ghc is hardcoded)
+    # compiler = prev.haskell.compiler // { ghc802 = prev.haskell.compiler.ghc844; };
 
     packageOverrides = hself: hprev: with prev.haskell.lib; rec {  
       # useful to fetch newer libraries with callHackage
@@ -35,7 +36,7 @@ self: prev:
       zeromq4-haskell = prev.haskell.lib.dontCheck hprev.zeromq4-haskell;
   #     #       servant = super.callHackage "servant" "0.12.1" {};
 
-      cabal-helper = prev.haskell.lib.doJailbreak (hprev.cabal-helper);
+      # cabal-helper = prev.haskell.lib.doJailbreak (hprev.cabal-helper);
 
       # should not be needed anymore right ?
       tensorflow-core-ops = appendPatch (hprev.tensorflow-core-ops) ./pkgs/tensorflow.patch;

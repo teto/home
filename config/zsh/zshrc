@@ -367,6 +367,21 @@ nix-env() {
     fi
 }
 
+mpsched() {
+    _fast_sysctl "$1" 
+}
+
+_fast_sysctl() {
+    sysctl net/mptcp/mptcp_scheduler
+# TODO move to bash, should work everywhere
+    sched="$1"
+    if [ -z "$1" ]; then
+	cmd="";
+    else
+	cmd="sysctl -w net/mptcp/mptcp_scheduler";
+    fi
+}
+
 # Enable FZF fuzzy matcher {{{
 
 # FZF_PATH="$(fzf-share)"

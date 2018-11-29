@@ -47,13 +47,17 @@ rec {
   # home.file."${config.xdg.configHome}/rg.conf".text = ''
   # '';
 
-  home.file.".ghc/ghci.conf".source = ../home/ghci.conf;
+  # home.file.".ghc/ghci.conf".source = ../home/ghci.conf;
 
   # useful to prevent some problems with nix
   # https://github.com/commercialhaskell/stack/issues/2358
   home.file.".stack/config.yaml".source = ../home/stack.yaml;
 
-  home.file.".cabal/config".text = "nix: True";
+  # see tips/haskell.md, an incomplete cabal config can be a pain
+  # - absence of repostiory will make cabal update fail
+  # is needed with new-build ?
+  # "nix: True"; 
+  # home.file.".cabal/config".text = ../home/cabal;
 
 
   # TODO doesn't find ZDOTDIR (yet)
@@ -124,6 +128,7 @@ rec {
       jaen="trans -from ja -to en ";
       enja="trans -from en -to ja ";
       dmesg="dmesg --color=always|less";
+
       tcp_netstat="netstat -ltnp";
       # TODO move to root level ?
       nixpaste="curl -F \"text=<-\" http://nixpaste.lbr.uno";
@@ -230,6 +235,7 @@ rec {
       alias -s pdf=xdg-open
       alias -s doc=xdg-open
       alias -s docx=xdg-open
+
 
       # there must be a module for this
       source ${pkgs.autojump}/share/autojump/autojump.zsh

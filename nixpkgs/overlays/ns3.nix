@@ -55,12 +55,12 @@ rec {
   #   ];
   # })) else null;
 
-  dce-local = (self.dce.override {
+  dce-local = (super.dce.override {
     python = self.python3;
     enableDoxygen = true;
     withQuagga  = true;
     # withManual = true;
-    generateBindings = true;
+    generateBindings = false;
     withExamples = true;
   }).overrideAttrs(old: {
     # .lock-waf_linux_build
