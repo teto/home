@@ -368,17 +368,20 @@ nix-env() {
 }
 
 mpsched() {
-    _fast_sysctl "$1" 
+    _fast_sysctl "net/mptcp/mptcp_scheduler" $@ 
 }
 
 _fast_sysctl() {
-    sysctl net/mptcp/mptcp_scheduler
+    
 # TODO move to bash, should work everywhere
-    sched="$1"
-    if [ -z "$1" ]; then
-	cmd="";
+    key="$1"
+    shift 1
+    arg="$@"
+    # echo "Sched [$sched]"
+    if [ -z "$arg" ]; then
+	sysctl $key
     else
-	cmd="sysctl -w net/mptcp/mptcp_scheduler";
+	sysctl -w $key=$arg
     fi
 }
 

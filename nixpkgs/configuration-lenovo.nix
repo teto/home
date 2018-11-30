@@ -203,6 +203,14 @@ let
     # background = ;
   };
 
+  # docker pull mattator/dce-dockerfiles
+  virtualisation.docker = {
+    enable = true;
+    enableOnBoot = true;
+    # logDriver = 
+    # liveRestore
+  };
+
   # services.xserver.displayManager.gdm = {
   # };
 

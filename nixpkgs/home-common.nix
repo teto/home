@@ -249,9 +249,8 @@ rec {
               llc -march=bpf -filetype=obj -o "`basename $1 .c`.o"
       }
 
-      # alias bcc=__bcc
-
       # TODO remove and include it ?
+      
       source $ZDOTDIR/zshrc
     '' 
       # + builtins.readFile dotDir + ./zshrc

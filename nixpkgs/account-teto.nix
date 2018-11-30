@@ -22,6 +22,7 @@ in
        "wireshark"
        "plugdev" # for udiskie
        "jupyter"
+       "docker"   # to access docker socket
        # "kvm" # don't think that's needed 
      ];
      # once can set initialHashedPassword too
