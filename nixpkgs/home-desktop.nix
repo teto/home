@@ -461,7 +461,7 @@ in
   home.file.".pypirc".source = ../home/pypirc;
 
   # readline equivalent but in haskell for ghci
-  home.file.".haskeline".source = ../home/haskeline;
+  # home.file.".haskeline".source = ../home/haskeline;
 
   #  TODO newsboat
   # programs.newsboat.urls = 

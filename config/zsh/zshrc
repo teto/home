@@ -120,6 +120,17 @@ bindkey "[A"      history-search-backward              # up arrow
 bindkey "^D"      delete-char                          # ctrl-d
 bindkey "^F"      forward-char                         # ctrl-f
 bindkey "^B"      backward-char                        # ctrl-b
+# expand aliases, useful when running aliases in a sudo command
+# http://www.math.cmu.edu/~gautam/sj/blog/20140625-zsh-expand-alias.html
+# function expand-ealias()
+# {
+#     zle _expand_alias
+# }
+# zle -N expand-ealias
+# my-expand() BUFFER=${(e)BUFFER} CURSOR=$#BUFFER
+# zle -N my-expand
+# bindkey '\e^E' my-expand
+# bindkey "^F"   expand-alias
 
 bindkey -v   # Default to standard vi bindings, regardless of editor string
 
@@ -371,6 +382,11 @@ mpsched() {
     _fast_sysctl "net/mptcp/mptcp_scheduler" $@ 
 }
 
+mppm() {
+    _fast_sysctl "net/mptcp/mptcp_path_manager" $@ 
+}
+
+
 _fast_sysctl() {
     
 # TODO move to bash, should work everywhere
@@ -381,7 +397,7 @@ _fast_sysctl() {
     if [ -z "$arg" ]; then
 	sysctl $key
     else
-	sysctl -w $key=$arg
+	sudo sysctl -w $key=$arg
     fi
 }
 
