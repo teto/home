@@ -47,7 +47,10 @@ self: prev:
       });
 
 
+      # TODO should generate it from the cabal file
       netlink-pm = let 
+        # stack2nix 
+        # cabal2nix
         orig = hprev.callPackage ./pkgs/netlink-pm-haskell.nix {};
       in
         orig

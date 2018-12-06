@@ -18,7 +18,7 @@ let
     ./modules/libvirtd.nix
     # ./modules/owamp.nix
 
-    ./modules/jupyter.nix
+    # ./modules/jupyter.nix
 
     # for user teto
     ./extraTools.nix

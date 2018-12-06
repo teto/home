@@ -1,6 +1,7 @@
 { mkDerivation, stack, base, netlink, stdenv
 , ghc-mod, hindent, hlint
 , optparse-applicative
+, bytestring-conversion
 , hasktags
 , haskdogs
 , Cabal
@@ -27,6 +28,7 @@ mkDerivation {
     base 
     netlink 
     optparse-applicative
+    bytestring-conversion
     # ghc-mod
     # stack
   ];
