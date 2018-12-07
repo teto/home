@@ -53,6 +53,7 @@ in
     #  TODO I need to get the python env
     # I would need to get access to 
     # let g:neomake_python_mypy_maker.exe = 
+    # let g:gutentags_ctags_executable_haskell = '${pkgs.haskell.lib.dontCheck pkgs.haskellPackages.hasktags}/bin/hasktags'
     configure = {
         customRC = ''
         " here your custom configuration goes!
@@ -71,7 +72,6 @@ in
 
         let g:deoplete#sources#clang#libclang_path='${pkgs.llvmPackages.libclang}'
 
-        " let g:gutentags_ctags_executable_haskell = '${pkgs.haskell.lib.dontCheck pkgs.haskellPackages.hasktags}/bin/hasktags'
 
 
         let g:LanguageClient_serverCommands = {

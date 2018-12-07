@@ -4,6 +4,7 @@
 , bytestring-conversion
 , hasktags
 , haskdogs
+, binary
 , Cabal
 # , Cabal_2_4_0_1
 , cabal-install
@@ -28,7 +29,13 @@ mkDerivation {
     base 
     netlink 
     optparse-applicative
+
+    # 
+    binary
+
+    # 
     bytestring-conversion
+
     # ghc-mod
     # stack
   ];

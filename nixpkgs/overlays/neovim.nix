@@ -2,9 +2,8 @@ self: super:
 {
 
 
-  neovim-unwrapped = super.pkgs.neovim-unwrapped.override({
-
-  });
+  # neovim-unwrapped = super.pkgs.neovim-unwrapped.override({
+  # });
 
   # TODO do a version with clang
   neovim-dev = (super.pkgs.neovim-unwrapped.override  {
