@@ -1,9 +1,31 @@
 self: super:
 {
 
+  neovim-unwrapped-master = (super.neovim-unwrapped).overrideAttrs (oldAttrs: {
+	  name = "neovim";
+	  version = "nightly";
 
-  # neovim-unwrapped = super.pkgs.neovim-unwrapped.override({
-  # });
+      src = builtins.fetchGit {
+        # url = git@github.com:neovim/neovim.git;
+        url = https://github.com/neovim/neovim.git;
+        # ref = "master";
+        # rev = "";
+      };
+
+      # src = super.fetchFromGitHub {
+      #   owner = "neovim";
+      #   repo = "neovim";
+
+      #   # rev = "674cb2afde0d82557c8e3afdf706cd6f75195fa5";
+      #   # sha256 = "13cyfvhxjfc3h50vhfdfifi2zxm15w0mda67nxvlj6ksvcjy4020";
+      # };
+
+  });
+    # or null;
+
+
+  neovim-unwrapped = self.neovim-unwrapped-master;
+
 
   # TODO do a version with clang
   neovim-dev = (super.pkgs.neovim-unwrapped.override  {
@@ -50,23 +72,6 @@ self: super:
       # cmakeBuildType="debug";
       # meta.priority=0;
   # });
-
-  # neovim-unwrapped-master = (super.neovim-unwrapped).overrideAttrs (oldAttrs: {
-	  # name = "neovim";
-	  # version = "nightly";
-      # src = self.fetchGitHashless {
-      #   rev = "master";
-      #   url = "git@github.com:neovim/neovim.git";
-
-      # src = super.fetchFromGitHub {
-      #   owner = "neovim";
-      #   repo = "neovim";
-      #   rev = "674cb2afde0d82557c8e3afdf706cd6f75195fa5";
-      #   sha256 = "13cyfvhxjfc3h50vhfdfifi2zxm15w0mda67nxvlj6ksvcjy4020";
-      # };
-  #     meta.priority=1;
-    # });
-    # or null;
 
   }
 
