@@ -1073,8 +1073,24 @@ let g:ale_completion_enabled = 1
 " g:ale_set_balloons gcc
 " ALEGoToDefinition
 "" Set this. Airline will handle the rest.
+
 let g:airline#extensions#ale#enabled = 1
 let g:ale_lint_on_text_changed = 'never'
+let g:ale_virtualtext_cursor = 1
+" let g:ale_virtualtext_delay = 10                               
+
+let g:ale_sign_error='✖'
+let g:ale_sign_warn='⚠'
+let g:ale_sign_info='ℹ'
+let g:ale_sign_style_error='E'
+let g:ale_sign_style_warning='W'
+
+nnoremap <silent> gh :ALEGoToDefinition<CR>
+nnoremap <silent> gd :ALEGoToDefinition<CR>
+nnoremap <silent> gr :ALEFindReferences<CR>
+nnoremap <silent> gs :ALESymbolSearch<CR>
+" nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
+
 " nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 " nmap <silent> <C-j> <Plug>(ale_next_wrap)
 " ale#linter#Define(filetype, linter)
@@ -1208,7 +1224,7 @@ let g:neomake_error_highlight = 'NeomakePerso'
 " }}}
 " Airline {{{
 " to speed up things
-let g:airline_extensions = ['obsession', 'tabline', 'wordcount', 'neomake'] 
+let g:airline_extensions = ['obsession', 'tabline', 'wordcount'] 
 " let g:airline#extensions#default#layout = [
 "     \ [ 'a', 'b', 'c' ],
 "     \ [ 'x', 'y', 'z', 'error', 'warning' ]
@@ -1630,8 +1646,8 @@ endfunction
 
 autocmd User Grepper call OnGrepperCompletion()
 
-nmap gs <plug>(GrepperOperator)
-xmap gs <plug>(GrepperOperator)
+" nmap gs <plug>(GrepperOperator)
+" xmap gs <plug>(GrepperOperator)
 
 " }}}
 " sidesearch {{{
@@ -1952,11 +1968,11 @@ set formatexpr=LanguageClient_textDocument_rangeFormatting()
 " todo provide a fallback if lsp not available
 " nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
 
-nnoremap <silent> gh :call LanguageClient#textDocument_hover()<CR>
-nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
-nnoremap <silent> gr :call LanguageClient#textDocument_references()<CR>
-nnoremap <silent> gs :call LanguageClient#textDocument_documentSymbol()<CR>
-nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
+" nnoremap <silent> gh :call LanguageClient#textDocument_hover()<CR>
+" nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+" nnoremap <silent> gr :call LanguageClient#textDocument_references()<CR>
+" nnoremap <silent> gs :call LanguageClient#textDocument_documentSymbol()<CR>
+" nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
 " nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
 "}}}
 " intero {{{
