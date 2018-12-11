@@ -1,4 +1,4 @@
-{ stdenv, buildPythonApplication, fetchFromGitHub, xdotool, psutil, neovim }:
+{ stdenv, buildPythonApplication, fetchFromGitHub, xdotool, psutil, pynvim }:
 
 buildPythonApplication rec {
   name = "i3dispatch-${version}";
@@ -24,7 +24,7 @@ buildPythonApplication rec {
   #   sha256 ="0f4blz90pjfr3ylpkg3fb7lls5kfizfyz7sismqaflg11z698911";
   # };
 
-  propagatedBuildInputs = [ xdotool psutil neovim ];
+  propagatedBuildInputs = [ xdotool psutil pynvim ];
 
   meta = with stdenv.lib; {
     description = "tool to move around in i3";

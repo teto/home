@@ -4,7 +4,8 @@ let
   startPlugins = with pkgs.vimPlugins; [
             fugitive
             vimtex
-            LanguageClient-neovim
+            # replaced by ale ?
+            # LanguageClient-neovim
             vim-signify
             vim-startify
             vim-scriptease
@@ -82,7 +83,14 @@ in
              \ }
 
         source $MYVIMRC
-        '';
+        ''
+        # + optionalString ()
+        # ''
+        # call neomake#configure#automake('w')
+        #   ''
+        
+        
+        ;
 
         # using this breaks my userplugins
         # plug.plugins = startPlugins;

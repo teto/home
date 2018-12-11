@@ -366,7 +366,8 @@ Plug 'teto/Modeliner' " <leader>ml to setup buffer modeline
 " async grep neovim only
 Plug 'mhinz/vim-grepper' " , { 'on': 'Grepper'}
 "Plug 'teto/neovim-auto-autoread' " works only in neovim, runs external checker
-Plug 'neomake/neomake' " async build for neovim
+" Plug 'neomake/neomake' " async build for neovim
+Plug 'w0rp/ale' 
 " Plug 'rhysd/github-complete.vim' " provides github user/repo autocompletion after @ and #
 " VCS related {{{
 " Plug 'rhysd/committia.vim' " ne marche pas en rebase ?
@@ -1064,6 +1065,21 @@ let g:jedi#auto_vim_configuration = 1 " to prevent python's help popup
 let g:jedi#completions_enabled = 0 " disable when deoplete in use
 "autocmd BufWinEnter '__doc__' setlocal bufhidden=delete
 " }}}
+" ALE {{{
+let g:ale_completion_enabled = 1
+" let g:ale_completion_delay= 
+" g:ale_completion_max_suggestions
+" g:ale_completion_excluded_words or b:ale_completion_excluded_words
+" g:ale_set_balloons gcc
+" ALEGoToDefinition
+"" Set this. Airline will handle the rest.
+let g:airline#extensions#ale#enabled = 1
+let g:ale_lint_on_text_changed = 'never'
+" nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+" nmap <silent> <C-j> <Plug>(ale_next_wrap)
+" ale#linter#Define(filetype, linter)
+"}}}
+"
 " Neomake config {{{
 " @return {String}
 "  toadd in statusline
@@ -1076,7 +1092,8 @@ let g:jedi#completions_enabled = 0 " disable when deoplete in use
 "         \ : 'make'
 " endfunction
 
-
+let g:neomake_virtualtext_current_error=1
+let g:neomake_virtualtext_prefix=1
 let g:neomake_verbose = 1
 
 " call neomake#quickfix#enable()
@@ -1178,7 +1195,9 @@ let g:neomake_error_highlight = 'NeomakePerso'
 " let g:neomake_warning_sign = { 'text': s:gutter_warn_sign , 'texthl': 'WarningSign' }
 "
 
-call neomake#configure#automake('w')
+" todo only if neomake loaded
+" call neomake#configure#automake('w')
+
 " augroup my_neomake
 "     au!
 
@@ -1880,7 +1899,7 @@ let g:langserver_executables = {
 " miniyank {{{
 let g:miniyank_delete_maxlines=1000
 "}}}
-" autozimu's lsp {{{
+" autozimu's lsp LanguageClient-neovim {{{
 " call LanguageClient_textDocument_hover
 " by default logs in /tmp/LanguageClient.log.
 let g:LanguageClient_autoStart=1 " Run :LanguageClientStart when disabled
