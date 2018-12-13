@@ -5,7 +5,7 @@ let
             fugitive
             vimtex
             # replaced by ale ?
-            # LanguageClient-neovim
+            LanguageClient-neovim
             vim-signify
             vim-startify
             vim-scriptease
