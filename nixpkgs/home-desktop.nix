@@ -41,7 +41,18 @@ let
     universal-ctags  # there are many different ctags, be careful !
   ];
 
-  imPkgs = with pkgs; [
+  imPkgs = with pkgs; let
+      customWeechat = weechat.override {
+        configure = { availablePlugins, ... }: {
+          scripts = with pkgs.weechatScripts; [
+            # weechat-xmpp weechat-matrix-bridge 
+            wee-slack
+          ];
+          init = ''
+            /set plugins.var.python.jabber.key "val"
+          '':
+        };
+  in [
     # gnome3.california # fails
     khal # => vdirsyncer !
     khard
@@ -49,8 +60,7 @@ let
     newsboat
     slack
     vdirsyncer
-    weechat
-
+    customWeechat
     # leafnode dovecot22 dovecot_pigeonhole fetchmail procmail w3m
     # mairix mutt msmtp lbdb contacts spamassassin
   ];

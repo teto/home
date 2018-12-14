@@ -782,6 +782,8 @@ let g:gutentags_project_info = [ {'type': 'python', 'file': 'setup.py'},
 " let g:gutentags_ctags_executable_haskell = 'hasktags'
 " let g:gutentags_ctags_extra_args
 let g:gutentags_file_list_command = 'rg --files'
+" gutenhasktags/ haskdogs/ hasktags/hothasktags
+let g:gutentags_ctags_executable_haskell = 'gutenhasktags'
 
 " let g:gutentags_ctags_executable_haskell = 'hasktags'
 let g:gutentags_ctags_exclude = ['.vim-src', 'build', '.mypy_cache']
@@ -1103,10 +1105,12 @@ let g:ale_sign_style_warning='W'
 
 hi ALEVirtualTextError guisp=undercurl
 
-nnoremap <silent> gh :ALEGoToDefinition<CR>
-nnoremap <silent> gd :ALEGoToDefinition<CR>
-nnoremap <silent> gr :ALEFindReferences<CR>
-nnoremap <silent> gs :ALESymbolSearch<CR>
+" if get(g:, LanguageClient_loaded, 0)
+
+" nnoremap <silent> gh :ALEGoToDefinition<CR>
+" nnoremap <silent> gd :ALEGoToDefinition<CR>
+" nnoremap <silent> gr :ALEFindReferences<CR>
+" nnoremap <silent> gs :ALESymbolSearch<CR>
 " nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
 
 " nmap <silent> <C-k> <Plug>(ale_previous_wrap)
@@ -1984,14 +1988,16 @@ set completefunc=LanguageClient#complete
 set formatexpr=LanguageClient_textDocument_rangeFormatting()
 
 " todo provide a fallback if lsp not available
-" nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
+" if get(g:, 'LanguageClient_loaded', 0)
+  " nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
 
-" nnoremap <silent> gh :call LanguageClient#textDocument_hover()<CR>
-" nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
-" nnoremap <silent> gr :call LanguageClient#textDocument_references()<CR>
-" nnoremap <silent> gs :call LanguageClient#textDocument_documentSymbol()<CR>
-" nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
-" nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
+  nnoremap <silent> gh :call LanguageClient#textDocument_hover()<CR>
+  nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+  nnoremap <silent> gr :call LanguageClient#textDocument_references()<CR>
+  nnoremap <silent> gs :call LanguageClient#textDocument_documentSymbol()<CR>
+  nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
+  nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
+" endif
 "}}}
 " intero {{{
 " Intero starts automatically. Set this if you'd like to prevent that.
