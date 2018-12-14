@@ -38,7 +38,7 @@ rec {
   #   # withExamples = true;
   };
 
-  dce = if (super.pkgs ? dce) then super.pkgs.dce else super.callPackage ./pkgs/dce.nix;
+  # dce = if (super.pkgs ? dce) then super.pkgs.dce else super.callPackage ./pkgs/dce.nix;
 
   # dce-quagga-dev =  if (super.pkgs ? dce-quagga) then (super.dce-quagga.overrideAttrs( oa: {
   #   srcs = [
@@ -55,23 +55,23 @@ rec {
   #   ];
   # })) else null;
 
-  dce-local = (super.dce.override {
-    python = self.python3;
-    enableDoxygen = true;
-    withQuagga  = true;
-    # withManual = true;
-    generateBindings = false;
-    withExamples = true;
-  }).overrideAttrs(old: {
-    # .lock-waf_linux_build
-    # { filter, src }
-    # filter is a function path: type:
-    # ould keep the current one, but I kn ould keep the current one, but I kn
-    # builtins.match "^\\.sw[a-z]$" baseName != null ||
-    src =  super.stdenv.lib.cleanSourceWith { filter= p: t: super.stdenv.lib.cleanSourceFilter p t && baseNameOf p != "build"; src=
-        (super.stdenv.lib.cleanSourceWith { filter=p: t: baseNameOf p != ".lock-waf_linux_build"; src= /home/teto/dce;});
+  # dce-local = (super.dce.override {
+  #   python = self.python3;
+  #   enableDoxygen = true;
+  #   withQuagga  = true;
+  #   # withManual = true;
+  #   generateBindings = false;
+  #   withExamples = true;
+  # }).overrideAttrs(old: {
+  #   # .lock-waf_linux_build
+  #   # { filter, src }
+  #   # filter is a function path: type:
+  #   # ould keep the current one, but I kn ould keep the current one, but I kn
+  #   # builtins.match "^\\.sw[a-z]$" baseName != null ||
+  #   src =  super.stdenv.lib.cleanSourceWith { filter= p: t: super.stdenv.lib.cleanSourceFilter p t && baseNameOf p != "build"; src=
+  #       (super.stdenv.lib.cleanSourceWith { filter=p: t: baseNameOf p != ".lock-waf_linux_build"; src= /home/teto/dce;});
     
-      };
+  #     };
     
-  });
+  # });
 }

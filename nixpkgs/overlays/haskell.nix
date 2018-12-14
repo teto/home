@@ -32,7 +32,7 @@ self: prev:
     packageOverrides = hself: hprev: with prev.haskell.lib; rec {  
       # useful to fetch newer libraries with callHackage
       # ghc802 = hprev.ghc844;
-      gutenhasktags = hprev.callPackage ./pkgs/gutenhasktags {};
+      gutenhasktags = dontCheck (hprev.callPackage ./pkgs/gutenhasktags {});
 
       zeromq4-haskell = prev.haskell.lib.dontCheck hprev.zeromq4-haskell;
   #     #       servant = super.callHackage "servant" "0.12.1" {};

@@ -41,7 +41,8 @@ let
     universal-ctags  # there are many different ctags, be careful !
   ];
 
-  imPkgs = with pkgs; let
+  imPkgs = with pkgs; 
+    let
       customWeechat = weechat.override {
         configure = { availablePlugins, ... }: {
           scripts = with pkgs.weechatScripts; [
@@ -50,8 +51,9 @@ let
           ];
           init = ''
             /set plugins.var.python.jabber.key "val"
-          '':
+          '';
         };
+      };
   in [
     # gnome3.california # fails
     khal # => vdirsyncer !
