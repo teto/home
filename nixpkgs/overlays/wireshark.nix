@@ -16,10 +16,19 @@ in
 # TODO add htis in shell_hook of my wireshakr
 #     export QT_PLUGIN_PATH=${qt5.qtbase.bin}/${qt5.qtbase.qtPluginPrefix}
 
+  wireshark-master = (super.wireshark.override({
+    python = super.python3;
+  })).overrideAttrs (oa: {
+    nativeBuildInputs = oa.nativeBuildInputs ++ [ super.doxygen ];
+    shellHook = oa.shellHook + ''
+      export QT_PLUGIN_PATH=${super.qt5.qtbase.bin}/${super.qt5.qtbase.qtPluginPrefix}
+    '';
+  });
+
   wireshark-dev-stable = super.wireshark.overrideAttrs (oldAttrs: {
     name = "wireshark-dev-stable";
     inherit src;
-     hardeningDisable = ["all"];
+    hardeningDisable = ["all"];
   });
 
   tshark-dev-stable = super.tshark.overrideAttrs (oldAttrs: {

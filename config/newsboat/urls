@@ -1,3 +1,10 @@
+https://github.com/NixOS/nixpkgs/commits/master.atom
+https://github.com/neovim/neovim/commits/master.atom
+https://github.com/equalsraf/neovim-qt/commits/master.atom
+https://github.com/enkore/i3pystatus/commits/master.atom
+https://lwn.net/headlines/rss
+https://github.com/enkore/i3pystatus/commits/master.atom
+http://www.phoronix.com/rss.php
 http://www.layer9.org/feeds/posts/default
 https://nixos.org/news-rss.xml
 http://feeds.feedburner.com/HighScalability?format=xml
@@ -14,3 +21,8 @@ http://neovim.org/news.xml
 http://www.bortzmeyer.org/feed-full.atom
 https://www.kotoba.fr/feed/
 https://blog.apnic.net/feed/
+https://ccronline.sigcomm.org/feed/
+https://www.usenix.org/upcoming-conferences-feed
+http://planet.haskell.org/rss20.xml
+http://www.sciencescope.org/feed/
+https://ccronline.sigcomm.org/feed
