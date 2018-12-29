@@ -101,10 +101,16 @@ let
     defaultUser = "teto";
   };
   
-  nixpkgs.overlays = [
-    (import ./overlays/kernels.nix) 
-    (import ./overlays/haskell.nix) 
-  ];
+  nixpkgs = {
+    overlays = [
+      (import ./overlays/kernels.nix) 
+      (import ./overlays/haskell.nix) 
+    ];
+
+    config = {
+      android_sdk.accept_license = true;
+    };
+  };
 
   nix = {
     # might be useful to fetch from private repositories even in sandboxed mode ?!

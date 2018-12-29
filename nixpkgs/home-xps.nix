@@ -61,8 +61,6 @@ let
   #   };
   # };
 
-  # does not exist
-  # programs.adb.enable = true;
 
   xsession.initExtra = ''
     xrandr --output  eDP1 --mode 1600x900
