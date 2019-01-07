@@ -24,7 +24,7 @@ self: super:
     # or null;
 
 
-  neovim-unwrapped = self.neovim-unwrapped-master;
+  # neovim-unwrapped = self.neovim-unwrapped-master;
 
 
   # TODO do a version with clang

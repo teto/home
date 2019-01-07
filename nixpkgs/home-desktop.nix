@@ -144,7 +144,8 @@ in
 
   home.packages = desktopPkgs ++ devPkgs ++ heavyPackages
   ++ imPkgs ++ [
-    pkgs.cachix
+    # does not work
+    # pkgs.cachix
     ]
    ;
 

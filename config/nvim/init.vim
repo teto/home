@@ -1011,7 +1011,7 @@ nnoremap <Leader>/ :set hlsearch! hls?<CR> " toggle search highlighting
 
 " }}}
 " Deoplete {{{
-let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_at_startup = 0
 let g:deoplete#enable_ignore_case = 1
 let g:deoplete#disable_auto_complete = 0
 let g:deoplete#enable_debug = 1
@@ -2213,7 +2213,6 @@ noremap             <C-k>           {
 
 " added 'n' to defaults to allow wrapping lines to overlap with numbers
 " n => ? used for wrapped lines as well
-set cpoptions="aABceFsn" " vi ComPatibility options
 set matchpairs+=<:>  " Characters for which % should work
 
 " TODO to use j/k over
@@ -2420,6 +2419,9 @@ function! s:RequireHaskellHost(name)
     " we don't want to run stack !
     return jobstart(['nvim-hs', a:name.name], {'rpc': v:true, 'cwd': expand('$HOME') . '/.config/nvim'})
 endfunction
+set cpoptions="aABceFsn" " vi ComPatibility options
+
+" set display+=lastline
 
 " Register a plugin host that is started when a haskell file is opened
 " call remote#host#Register('haskell', "*.l\?hs", function('s:RequireHaskellHost'))

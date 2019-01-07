@@ -9,17 +9,6 @@ rec {
         #   src = /home/teto/mininet2;
         # });
 
-        # alot = python-super.alot.overrideAttrs (oldAttrs: {
-        #   version = "0.9";
-        #   src = /home/teto/alot;
-        #   # src = super.pkgs.fetchFromGitHub {
-        #   #   owner = "pazz";
-        #   #   repo = "alot";
-        #   #   rev = "08438d56ef695883f8beb8c7515b261015c676f0";
-        #   #   sha256 = "0fc0ix468n2s97p9nfdl3bxi3i9hwf60j4k0mabrnxfhladsygzm";
-        #   # };
-        # });
-
         # pandas = super.pkgs.pythonPackages.pandas.overrideAttrs {
         #   doCheck = false;
         # };
@@ -49,16 +38,17 @@ rec {
         #   src=/home/teto/protocol;
         # });
 
-        # alot = pythonsuper.alot.overrideAttrs (oldAttrs: {
-        #   version = "0.8.1";
-        #   src = super.fetchFromGitHub {
-        #     owner = "pazz";
-        #     repo = "alot";
-        #     rev = "ac3129c80d72825464eb018c7f9a02f31fc68d98";
-        #     sha256 = "05rg8igg64kyamd35ds1f7rixgk48dffj0xsn2wgyq7h7g3pjrnf";
-        #   };
-        #   disabled = false;
-        # });
+        alot = pythonsuper.alot.overrideAttrs (oldAttrs: {
+          name = "alot-dev";
+          version = "0.9-dev";
+          src = super.fetchFromGitHub {
+            owner = "pazz";
+            repo = "alot";
+            rev = "6bb18fa97c78b3cb1fcb60ce5d850602b55e358f";
+            sha256 = "1l8b32ly0fvzwsy3f3ywwi0plckm31y269xxckmgi02sdwisq1ah";
+          };
+          # disabled = false;
+        });
 
         # look for matching wcwidth
         # cmd2 = pythonsuper.cmd2.overrideAttrs (oa: {
@@ -93,7 +83,20 @@ rec {
       # };
     };
   };
+
   python3Packages = python3.pkgs;
+
+  # alot = super.alot.overrideAttrs (oldAttrs: {
+  #   name = "alot-exp";
+  #   version = "0.9-dev";
+  #   src = super.fetchFromGitHub {
+  #     owner = "pazz";
+  #     repo = "alot";
+  #     rev = "6bb18fa97c78b3cb1fcb60ce5d850602b55e358f";
+  #     sha256 = "1l8b32ly0fvzwsy3f3ywwi0plckm31y269xxckmgi02sdwisq1ah";
+  #   };
+  #   # disabled = false;
+  # });
 
 }
 
