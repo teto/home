@@ -18,7 +18,8 @@ import os
 import subprocess
 
 from alot.settings.utils import read_config
-from alot.commands.completion import PathCompleter
+# .completion
+from alot.completion import PathCompleter
 
 
 
@@ -34,7 +35,7 @@ CONFIG = _get_config()
 
 # todo creer un completer depuis le fichier de config
 
-def apply_patch(ui):
+async def apply_patch(ui):
     message = ui.current_buffer.get_selected_message()
     filename = message.get_filename()
 
@@ -55,8 +56,10 @@ def apply_patch(ui):
     try:
         cmpl = PathCompleter()
         # TODO add/filter paths
-        fromaddress = await ui.prompt('Git repository', completer=cmpl,
-                                        tab=1, history=ui.senderhistory)
+        # await 
+        fromaddress = yield ui.prompt('Git repository', 
+                # completer=cmpl, tab=1, history=ui.senderhistory
+                )
         # ui.prompt("")
 
         ui.notify('selected path :' + str(e), priority='error')
