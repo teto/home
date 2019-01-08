@@ -26,7 +26,6 @@ let
   programs.feh.enable = true;
 
   home.packages = with pkgs; [
-    # cachix # to upload binaries
     # touchegg # won't work anymore apparently
     # libinput-gestures
     # rofi

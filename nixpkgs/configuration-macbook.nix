@@ -8,7 +8,7 @@ let
   in
 {
   imports = [
-    /etc/nixos/hardware-configuration.nix
+    ./hardware-macbook.nix
 
     ./common-desktop.nix
     # ./modules/libvirtd.nix
@@ -36,6 +36,7 @@ let
 
   # boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_mptcp_with_netlink;
   boot.kernelPackages = pkgs.linuxPackages_latest;
+  # boot.kernelPackages = pkgs.linuxPackages_4_14;
 # boot.kernelPackages = pkgs.linuxPackagesFor pkgs.my_lenovo_kernel;
 
 
@@ -50,13 +51,15 @@ let
   networking.hostName = "jedha"; # Define your hostname.
 
   # TODO add the chromecast
-  networking.firewall.allowedUDPPorts = [ ];
+  # networking.firewall.allowedUDPPorts = [ ];
   # creates problem with buffalo check if it blocks requests or what
   # it is necessary to use dnssec though :(
   networking.dnsExtensionMechanism = false;
-  networking.dnsSingleRequest = false;
+  # networking.dnsSingleRequest = false;
   # networking.extraHosts = secrets.extraHosts;
-
+  # networking.extraResolvconfConf=''
+  #   libc=NO
+  #   '';
   # this is for gaming
   hardware.opengl.driSupport32Bit = true;
 
@@ -160,6 +163,8 @@ let
       # "/etc/ipsec.d/*.secrets" "/etc/ipsec.d"
     secrets = ["/etc/ipsec.d"];
   };
+
+  networking.enableB43Firmware = true;
 
   programs.adb.enable = true;
 
