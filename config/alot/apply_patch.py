@@ -35,9 +35,17 @@ CONFIG = _get_config()
 
 # todo creer un completer depuis le fichier de config
 
+# def apply_patch(ui):
+    # asyncio.run(apply_patch_async)
+
 async def apply_patch(ui):
-    message = ui.current_buffer.get_selected_message()
-    filename = message.get_filename()
+
+    ui.notify('expecting prompt launched !', priority='error')
+    fromaddress = yield ui.prompt('Git repository')
+
+    ui.notify('HOOK launched !', priority='error')
+    # message = ui.current_buffer.get_selected_message()
+    # filename = message.get_filename()
 
     # for tag in message.get_tags():
     #     if tag in CONFIG:
@@ -53,21 +61,19 @@ async def apply_patch(ui):
     #     name = await ui.prompt('pls enter your name')
     #     ui.notify('your name is: ' + name)
 
-    try:
-        cmpl = PathCompleter()
-        # TODO add/filter paths
-        # await 
-        fromaddress = yield ui.prompt('Git repository', 
-                # completer=cmpl, tab=1, history=ui.senderhistory
-                )
-        # ui.prompt("")
+    # try:
+    #     cmpl = PathCompleter()
+    #     # TODO add/filter paths
+    #     # await 
+    #             # completer=cmpl, tab=1, history=ui.senderhistory
+    #     # ui.prompt("")
 
-        ui.notify('selected path :' + str(e), priority='error')
-        subprocess.check_output(
-            ['git', '-C', os.path.expanduser(config['directory']), 'am', '-3', filename],
-            stderr=subprocess.STDOUT)
-    except Exception as e:
-        ui.notify('Failed to apply patch. Reason:' + str(e), priority='error')
-        logging.debug('git am output: ' + e.output)
-    else:
-        ui.notify('Patch applied.')
+    #     ui.notify('selected path :' + str(e), priority='error')
+    #     subprocess.check_output(
+    #         ['git', '-C', os.path.expanduser(config['directory']), 'am', '-3', filename],
+    #         stderr=subprocess.STDOUT)
+    # except Exception as e:
+    #     ui.notify('Failed to apply patch. Reason:' + str(e), priority='error')
+    #     logging.debug('git am output: ' + e.output)
+    # else:
+    #     ui.notify('Patch applied.', priority='error')

@@ -222,7 +222,7 @@ let
     };
 
     buildMachines = secrets.buildMachines;
-    distributedBuilds = true;
+    distributedBuilds = false;
 
   };
 
