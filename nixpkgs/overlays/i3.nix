@@ -96,6 +96,15 @@ rec {
   #   buildInputs = (o.buildInputs or []) ++ [ boost ];
   # });
 
+  xdg_utils = super.xdg_utils.overrideAttrs(oa: {
+    patches = [ 
+      # (super.fetchpatch {
+      #   url = 
+      #   sha256 = fakeSha256;
+      # )
+      ../../patches/xdg_utils_symlink.diff
+    ];
+  });
 
   nixops-dev = super.nixops.overrideAttrs ( oa: {
     # src = super.fetchFromGitHub {
