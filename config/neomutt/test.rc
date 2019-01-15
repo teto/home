@@ -1,11 +1,19 @@
+# vim: set noet fdm=marker fenc=utf-8 ff=unix sts=0 sw=4 ts=4 ft=neomuttrc :
+# http://www.davep.org/mutt/muttrc/
 # how to debug explained here https://neomutt.org/dev/debug
+# :exec what-key to find the name of the key
 # run :set ?option to see the value of a command
 set debug_level = 2
+set move = no
+
 # set debug_file = neolog
 
 # TODO fix folder hooks
 source ~/.config/neomutt/neomuttrc
-# source ~/share/doc/neomutt/vim-keys/vim-keys.rc
+
+# read-thread
+bind index <Return> display-message
+
 
 # locales FR pour les nom des jours et mois
 # set locale="fr_FR"
@@ -27,3 +35,31 @@ source ~/.config/neomutt/neomuttrc
 # set ispell="aspell -e -c"
 # <Enter>             select-entry                   sélectionner l'entrée courante 
 # collapse_unread
+
+
+# Configure header displays {{{
+
+# Ignore all headers
+ignore *
+
+# Then un-ignore the ones I want to see
+unignore From:
+unignore To:
+unignore Reply-To:
+unignore Mail-Followup-To:
+unignore Subject:
+unignore Date:
+unignore Organization:
+unignore Newsgroups:
+unignore CC:
+unignore BCC:
+unignore Message-ID:
+unignore X-Mailer:
+unignore User-Agent:
+unignore X-Junked-Because:
+unignore X-SpamProbe:
+unignore X-Virus-hagbard:
+
+# Now order the visable header lines
+hdr_order From: Subject: To: CC: BCC: Reply-To: Mail-Followup-To: Date: Organization: User-Agent: X-Mailer:
+# }}}
