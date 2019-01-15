@@ -1,4 +1,29 @@
+# how to debug explained here https://neomutt.org/dev/debug
+# run :set ?option to see the value of a command
+set debug_level = 2
+# set debug_file = neolog
 
 # TODO fix folder hooks
 source ~/.config/neomutt/neomuttrc
-source ~/share/doc/neomutt/vim-keys/vim-keys.rc
+# source ~/share/doc/neomutt/vim-keys/vim-keys.rc
+
+# locales FR pour les nom des jours et mois
+# set locale="fr_FR"
+
+# Format de date
+# set date_format="%A %d %b %Y à %H:%M:%S (%Z)"
+
+# phrase d'intro pour réponse quotée
+# set attribution="Le %d, %n a écrit :"
+# set forward_format="[Fwd: %s]"
+# set forward_quote
+#set pager_index_lines=7
+#set pager_stop
+# set edit_headers=yes
+
+# set sig_dashes=yes
+# set pager_stop
+# Correcteur d'orthographe
+# set ispell="aspell -e -c"
+# <Enter>             select-entry                   sélectionner l'entrée courante 
+# collapse_unread
