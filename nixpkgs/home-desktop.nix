@@ -68,8 +68,8 @@ let
   ];
 
   desktopPkgs = with pkgs; [
-    apvlv
-    buku # generates error
+    # apvlv # broken
+    buku
     # gcalc
     unstable.dropbox
     # gnome3.eog # eye of gnome = image viewer / creates a collision

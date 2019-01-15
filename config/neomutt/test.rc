@@ -1,0 +1,4 @@
+
+# TODO fix folder hooks
+source ~/.config/neomutt/neomuttrc
+source ~/share/doc/neomutt/vim-keys/vim-keys.rc
