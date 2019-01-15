@@ -34,6 +34,8 @@ let
     grub.device = "/dev/sda";
   };
 
+  boot.blacklistedKernelModules = [ "wl" ];
+
   # boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_mptcp_with_netlink;
   boot.kernelPackages = pkgs.linuxPackages_latest;
   # boot.kernelPackages = pkgs.linuxPackages_4_14;

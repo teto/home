@@ -96,6 +96,24 @@ rec {
   #   buildInputs = (o.buildInputs or []) ++ [ boost ];
   # });
 
+  msmtp = super.msmtp.overrideAttrs(oa: {
+    # src = super.fetchFromGitLab {
+    #   rev = "9f9948732a0153a54f7324873fdb5cafbcd9d2d6";
+    #   # rev = "master";
+    #   domain = "gitlab.marlam.de";
+    #   # group
+    #   owner = "marlam";
+    #   repo = "msmtp";
+    #   sha256 = "17f9qq8gnim6glqlrg7187my4d5y40v76cbpaqgpvrhpyc7z9vf6";
+    # };
+    buildInputs = [ super.pkgs.texinfo ];
+
+    src = builtins.fetchurl {
+      url = "https://gitlab.marlam.de/marlam/msmtp/repository/archive.tar.gz?ref=9f9948732a0153a54f7324873fdb5cafbcd9d2d6"; 
+      sha256 = "1b0062h1ik5i78wv26vmfsgk4bl434dlci62l6pz148hvw6nkpjp";
+    };
+  });
+
   xdg_utils = super.xdg_utils.overrideAttrs(oa: {
     patches = [ 
       # (super.fetchpatch {
