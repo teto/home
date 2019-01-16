@@ -30,7 +30,7 @@ def _get_config():
         'alot', 'patch.config')
     return read_config(configpath=config_path)
 
-async def write_mail(ui): 
+async def save_mail(ui): 
     # inspired by https://github.com/pazz/alot/issues/1310
     # get msg content 
     msg = ui.current_buffer.get_selected_message()
@@ -43,7 +43,7 @@ async def write_mail(ui):
         # or use bytes() in binary mode ?
         out.write(str(eml))
 
-        ui.notify("saved to %s" % out.name, priority='error')
+        ui.notify("saved to %s" % out.name, priority='normal', timeout=15)
 
 CONFIG = _get_config()
 

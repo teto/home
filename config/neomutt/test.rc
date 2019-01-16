@@ -6,6 +6,8 @@
 set debug_level = 2
 set move = no
 
+# exec change-vfolder
+#
 # set debug_file = neolog
 
 # TODO fix folder hooks
@@ -14,12 +16,36 @@ source ~/.config/neomutt/neomuttrc
 # read-thread
 bind index <Return> display-message
 
+# in order to do http://flavioleitner.blogspot.com/2011/03/patch-workflow-with-mutt-and-git.html
+set pipe_split=yes
+
+# only available in neomutt
+set new_mail_command="notify-send --icon='/home/teto/.config/neomutt/mutt-48x48.png' \
+'New Email' '%n new messages, %u unread.' &"
+
+# set hidden_tags = "unread,draft,flagged,passed,replied,attachment,signed,encrypted"
+
+# https://neomutt.org/feature/notmuch
+
+# index,pager 	<change-vfolder> 	switch to another virtual folder, a new folder maybe be specified by vfolder description (see virtual-mailboxes) or URI. the default is next vfolder with unread messages
+# index,pager 	<entire-thread> 	read entire thread of the current message
+# index,pager 	<sidebar-toggle-virtual> 	toggle between mailboxes and virtual mailboxes
+# index,pager 	<vfolder-from-query> 	generate virtual folder from notmuch search query. Note: TAB completion of 'tag:' names is available.
+# index 	<vfolder-window-forward> 	generate virtual folder by moving the query's time window forward
+# index 	<vfolder-window-backward> 	generate virtual folder by moving the query's time window backward
+
 
 # locales FR pour les nom des jours et mois
 # set charset
 
 # Format de date
 # set date_format="%A %d %b %Y à %H:%M:%S (%Z)"
+
+# Replace some tags with icons
+# https://neomutt.org/feature/custom-tags#commands
+# tag-transforms
+
+# https://neomutt.org/feature/global-hooks
 
 # phrase d'intro pour réponse quotée
 # set attribution="Le %d, %n a écrit :"

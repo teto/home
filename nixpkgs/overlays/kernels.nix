@@ -576,6 +576,21 @@ in rec {
       structuredExtraConfig = configStructured;
   };
 
+  linux_mptcp_trunk = prev.callPackage ./pkgs/kernels/linux-mptcp-trunk.nix {
+    kernelPatches = prev.linux_4_19.kernelPatches;
+  };
+
+  # linux_mptcp_trunk_test = self.linux_mptcp_trunk.overrideAttrs(oa: {
+
+  #   src = prev.fetchFromGitHub {
+  #     owner = "teto";
+  #     repo = "mptcp";
+  #     rev = "abc4f13f871965b9bf4726f832b2dbce2e1a2cc9";
+  #     sha256 = "061zzlkjm3i1nhgnz3dfhbshjicrjc5ydwy6hr3l6y8cl2ps2iwf";
+  #   };
+
+  # });
+
     # linux_test2 = linux_test.override {
     #   # TODO 
     #   structuredExtraConfig = with prev.lib.modules;

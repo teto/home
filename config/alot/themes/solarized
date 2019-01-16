@@ -45,6 +45,10 @@
 256_cyan = '#0aa'		#00afaf
 256_green = 'dark green'
 
+#name    mono fg     mono bg   16c fg                        16c bg         256c fg                 256c bg
+#        |                 |   |                             |              |                             |
+#        v                 v   v                             v              v                             v
+# footer = 'bold,underline', '', 'light red, bold, underline', 'light green', 'light red, bold, underline', '#8f6'
 # This is the actual alot theme
 [global]
     footer = 'standout','default','%(16_base01)s','%(16_base2)s','%(256_base01)s','%(256_base2)s'
@@ -70,7 +74,7 @@
     attachment = 'default','default','%(16_base00)s','%(16_base3)s','%(256_base00)s','%(256_base3)s'
     attachment_focus = 'underline','default','%(16_base2)s','%(16_yellow)s','%(256_base2)s','%(256_yellow)s'
     body = 'default','default','%(16_base00)s','%(16_base3)s','%(256_base00)s','%(256_base3)s'
-    body_focus = 'default','default','%(16_base00)s','%(16_base3)s','%(256_base00)s','%(256_base2)s'
+    body_focus = 'bold,underline','default','%(16_base00)s','%(16_base3)s','%(256_base00)s','%(256_base2)s'
     arrow_bars = 'default','default','%(16_yellow)s','%(16_base3)s','%(256_yellow)s','%(256_base3)s'
     arrow_heads = 'default','default','%(16_yellow)s','%(16_base3)s','%(256_yellow)s','%(256_base3)s'
     header = 'default','default','%(16_base00)s','%(16_base2)s','%(256_base00)s','%(256_base2)s'

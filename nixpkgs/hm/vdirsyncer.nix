@@ -1,5 +1,6 @@
 { config, pkgs, lib,  ... }:
 
+# TODO vdirsyncer package provides its own unit
 {
   systemd.user.services.vdirsyncer = {
     Unit = {
