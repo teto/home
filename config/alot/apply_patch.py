@@ -16,6 +16,7 @@
 import logging
 import os
 import subprocess
+import tempfile
 
 from alot.settings.utils import read_config
 # .completion
@@ -29,6 +30,20 @@ def _get_config():
         'alot', 'patch.config')
     return read_config(configpath=config_path)
 
+async def write_mail(ui): 
+    # inspired by https://github.com/pazz/alot/issues/1310
+    # get msg content 
+    msg = ui.current_buffer.get_selected_message()
+    # this is an alot.db.Message
+    eml = msg.get_email() # this is an email.Message
+    # open file and write str(eml)..
+    # with tempfile.NamedTemporaryFile
+
+    with tempfile.NamedTemporaryFile(mode='w+', prefix="alot-", delete=False) as out:
+        # or use bytes() in binary mode ?
+        out.write(str(eml))
+
+        ui.notify("saved to %s" % out.name, priority='error')
 
 CONFIG = _get_config()
 

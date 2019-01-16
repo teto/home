@@ -16,7 +16,7 @@ bind index <Return> display-message
 
 
 # locales FR pour les nom des jours et mois
-# set locale="fr_FR"
+# set charset
 
 # Format de date
 # set date_format="%A %d %b %Y à %H:%M:%S (%Z)"
