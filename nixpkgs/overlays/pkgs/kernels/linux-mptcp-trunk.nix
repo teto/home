@@ -39,6 +39,10 @@ buildLinux (rec {
 
 
   extraConfig = ''
+    CRYPTO_DEV_CHELSIO_TLS? n
+    CRYPTO_DEV_CHELSIO? n
+    CRYPTO_HW n
+
     IPV6 y
     MPTCP y
     IP_MULTIPLE_TABLES y

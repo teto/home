@@ -28,6 +28,7 @@ let
   ihaskellKernel = pkgs.runCommand "ihaskellKernel" {
     # haskellEnv is a trick that should not be needed !
     # https://github.com/NixOS/nixpkgs/issues/47135#issuecomment-431495187
+    # haskellEnv.env ?
     buildInputs = [ pkgs.jupyter haskellEnv ]; } ''
     export HOME=/tmp
     ${haskellEnv}/bin/ihaskell install --prefix=$out --use-rtsopts=""
