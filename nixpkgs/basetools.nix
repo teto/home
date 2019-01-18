@@ -14,7 +14,7 @@ with pkgs; [
      lsof
      # libreoffice # too long to compile
 	 gawk
-     git
+     gitAndTools.gitFull # to get send-email
 	 # git-extras # does not find it (yet)
      gnum4 # hum
      gnupg

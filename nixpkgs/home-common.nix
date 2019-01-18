@@ -142,6 +142,7 @@ rec {
     enable = true;
     # use accounts.email ?
     # load it from secrets ?
+    package = pkgs.gitAndTools.gitFull;    # to get send-email
     userName = "Matthieu Coudron";
     userEmail = "coudron@iij.ad.jp";
 	includes = [
@@ -260,6 +261,6 @@ rec {
 
   # order matters
   # TODO export MSMTP_QUEUE
-  home.file.".mailcap".source = ./home/mailcap;
+  home.file.".mailcap".source = ../home/mailcap;
 
 }
