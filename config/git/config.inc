@@ -14,6 +14,22 @@ compactionHeuristic
 [color]
   ui = true
 
+
+
+# [sendemail.iij]
+# envelopeSender
+# from = coudn@iij.ad.jp
+# 	smtpEncryption = tls
+# 	smtpServer = smtp.gmail.com
+# 	smtpUser = coudn@iij.ad.jp
+# 	smtpServerPort = 587
+# 
+# [sendemail.gmail]
+# smtpEncryption = tls
+# smtpServer = smtp.gmail.com
+# smtpUser = mattat@gmail.com
+# smtpServerPort = 587
+
 # diff-highlight.oldNormal    "red bold"
 # diff-highlight.oldHighlight "red bold 52"
 # diff-highlight.newNormal    "green bold"

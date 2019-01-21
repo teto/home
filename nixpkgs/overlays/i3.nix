@@ -51,10 +51,17 @@ rec {
     })
     else null;
 
+    # TODO override extraLibs instead
    i3pystatus-perso = super.i3pystatus.overrideAttrs (oldAttrs: {
 	  name = "i3pystatus-dev";
 	  # src = null; # super.lib.cleanSource ~/i3pystatus;
-      propagatedBuildInputs = with self.python3Packages; oldAttrs.propagatedBuildInputs ++ [ pytz ];
+      # propagatedBuildInputs = with self.python3Packages; oldAttrs.propagatedBuildInputs ++ [ pytz ];
+      src = super.fetchFromGitHub {
+        repo = "i3pystatus";
+        owner = "teto";
+        rev="0597577a21761fe5d0ce66082137c65c13354d15";
+        sha256 = "0fbcj3ps83n7v8ybihc6wk8x61l8rkqg6077zh9v58gk4j6wdyhq";
+      };
 	});
 
   # ranger = super.ranger.override ( { pythonPackages=super.python3Packages; });

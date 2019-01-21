@@ -240,12 +240,17 @@ bindkey '^N' down-history
 
   users.defaultUserShell = pkgs.zsh;
 
-  nixpkgs.config = {
-	allowUnfree = true;
-    permittedInsecurePackages = [
-          # "webkitgtk-2.4.11"
-            ];
+  nixpkgs = {
+    config = {
+      allowUnfree = true;
+      permittedInsecurePackages = [
+            # "webkitgtk-2.4.11"
+              ];
 
+    };
+
+    # stdenv.userHook = ''
+    #   '';
   };
 
 

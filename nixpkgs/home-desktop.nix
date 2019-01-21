@@ -283,10 +283,13 @@ in
     extraConfig = i3extraConfig;
     config = {
       bars = let
-        i3pystatus-custom = pkgs.i3pystatus.overrideAttrs (oldAttrs: {
-      propagatedBuildInputs = with pkgs.python3Packages; oldAttrs.propagatedBuildInputs ++ [ pytz ];
-	});
-    in [
+        # i3pystatus-custom = pkgs.i3pystatus.overrideAttrs (oldAttrs: {
+        #   propagatedBuildInputs = with pkgs.python3Packages; oldAttrs.propagatedBuildInputs ++ [ pytz ];
+        # });
+        i3pystatus-custom = pkgs.i3pystatus-perso.override ({ extraLibs = with pkgs.python3Packages; [ pytz notmuch dbus-python ]; });
+          # propagatedBuildInputs = with pkgs.python3Packages; oldAttrs.propagatedBuildInputs ++ [ pytz ];
+        # });
+      in [
         {
           position="top";
           workspaceButtons=true;

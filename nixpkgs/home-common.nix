@@ -159,6 +159,9 @@ rec {
 
       [stash]
           showPatch = 1
+
+      [credential "https://github.com"]
+        username = teto
       '';
   };
 

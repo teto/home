@@ -90,6 +90,7 @@ call plug#begin(s:plugdir)
 " Plug 'andymass/vim-matchup' " to replace matchit
 " call :NR on a region than :w . coupled with b:nrrw_aucmd_create, 
 " Plug 'AGhost-7/critiq.vim' " :h critiq
+" Plug 'eagletmt/neco-ghc' " haskell completion for deoplete
 Plug 'neomutt/neomutt.vim' " syntax file for neomutt
 Plug 'chrisbra/NrrwRgn' " to help with multi-ft files
 Plug 'chrisbra/vim-diff-enhanced' " 
@@ -1131,8 +1132,8 @@ hi ALEVirtualTextError guisp=undercurl
 "         \ : 'make'
 " endfunction
 
-let g:neomake_virtualtext_current_error=1
-let g:neomake_virtualtext_prefix=1
+" let g:neomake_virtualtext_current_error=1
+" let g:neomake_virtualtext_prefix=">>"
 let g:neomake_verbose = 1
 
 " call neomake#quickfix#enable()
@@ -1235,7 +1236,7 @@ let g:neomake_error_highlight = 'NeomakePerso'
 "
 
 " todo only if neomake loaded
-" call neomake#configure#automake('w')
+call neomake#configure#automake('w')
 
 " augroup my_neomake
 "     au!
@@ -2421,6 +2422,11 @@ function! s:RequireHaskellHost(name)
     return jobstart(['nvim-hs', a:name.name], {'rpc': v:true, 'cwd': expand('$HOME') . '/.config/nvim'})
 endfunction
 set cpoptions="aABceFsn" " vi ComPatibility options
+
+
+" let it jump to 
+nnoremap <C-LeftMouse> :call LanguageClient#textDocument_definition()<CR>
+nnoremap <C-RightMouse> :call SynStack()<CR>
 
 " set display+=lastline
 
