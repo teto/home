@@ -151,9 +151,9 @@ rec {
   programs.less = {
     enable = true;
     envVariables = {
-      LESS = "-R";
-      # LESSHISTFILE = 
-      # LESSHISTSIZE = /
+      LESS = "-R --quit-if-one-screen";
+      LESSHISTFILE = "$XDG_CACHE_HOME/less.hst";
+      LESSHISTSIZE = "1000";
     };
   };
 

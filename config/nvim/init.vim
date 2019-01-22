@@ -91,6 +91,7 @@ call plug#begin(s:plugdir)
 " call :NR on a region than :w . coupled with b:nrrw_aucmd_create, 
 " Plug 'AGhost-7/critiq.vim' " :h critiq
 " Plug 'eagletmt/neco-ghc' " haskell completion for deoplete
+Plug 'neovimhaskell/nvim-hs.vim' " to help with nvim-hs
 Plug 'bfredl/nvim-lspmirror'
 " Plug 'bfredl/nvim-lspext' " extension
 Plug 'neomutt/neomutt.vim' " syntax file for neomutt
@@ -2021,7 +2022,9 @@ let g:intero_window_size = 15
 " Sets the intero window to split vertically; default is horizontal
 let g:intero_vertical_split = 1
 "}}}
-
+" nvim-hs haskell stuff {{{
+let g:nvimhsPluginStarter=nvimhs#stack#pluginstarter()
+"}}}
 " dasht{{{
 
 " When in Python, also search NumPy, SciPy, and Pandas:
