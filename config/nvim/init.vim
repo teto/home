@@ -91,6 +91,8 @@ call plug#begin(s:plugdir)
 " call :NR on a region than :w . coupled with b:nrrw_aucmd_create, 
 " Plug 'AGhost-7/critiq.vim' " :h critiq
 " Plug 'eagletmt/neco-ghc' " haskell completion for deoplete
+Plug 'bfredl/nvim-lspmirror'
+" Plug 'bfredl/nvim-lspext' " extension
 Plug 'neomutt/neomutt.vim' " syntax file for neomutt
 Plug 'chrisbra/NrrwRgn' " to help with multi-ft files
 Plug 'chrisbra/vim-diff-enhanced' " 
@@ -800,7 +802,7 @@ if has('nvim')
     " return jobstart("nvim-hs", ['-l','/home/teto/nvim-haskell.log','-v','DEBUG',a:name.name])
   endfunction
 
-  call remote#host#Register('haskell', "*.l\?hs", function('s:RequireHaskellHost'))
+call remote#host#Register('haskell', "*.l\?hs", function('s:RequireHaskellHost'))
   " let hc=remote#host#Require('haskell')
 " " echo rpcrequest(hc, "PingNvimhs") should print Pong
 endif
@@ -1935,6 +1937,11 @@ let g:langserver_executables = {
     \ 'cmd': ['pyls', '--log-file' , expand('~/lsp_python.log')],
     \ },
       \ }
+
+" extracted from
+" https://github.com/bfredl/nvim-lspmirror
+  " call lsp#server#add(['c', 'c++'], ['clangd'], {})
+  " call lsp#server#add(['rust'], ['rls'], {})
 " }}}
 " miniyank {{{
 let g:miniyank_delete_maxlines=1000
