@@ -194,32 +194,32 @@ rec {
   # todo make available for zsh too
   # use FZF_PATH="$(fzf-share)" to do it dynamically
   interactiveShellInit = ''
-# To see the key combo you want to use just do:
-# Don't try to bind CTRL Q / CTRL S !!
-# cat > /dev/null
-# And press it
+    # To see the key combo you want to use just do:
+    # Don't try to bind CTRL Q / CTRL S !!
+    # cat > /dev/null
+    # And press it
 
-bindkey "^K"      kill-whole-line                      # ctrl-k
-bindkey "^A"      beginning-of-line                    # ctrl-a
-bindkey "^E"      end-of-line                          # ctrl-e
-bindkey "[B"      history-search-forward               # down arrow
-bindkey "[A"      history-search-backward              # up arrow
-bindkey "^D"      delete-char                          # ctrl-d
-bindkey "^F"      forward-char                         # ctrl-f
-bindkey "^B"      backward-char                        # ctrl-b
+    bindkey "^K"      kill-whole-line                      # ctrl-k
+    bindkey "^A"      beginning-of-line                    # ctrl-a
+    bindkey "^E"      end-of-line                          # ctrl-e
+    bindkey "[B"      history-search-forward               # down arrow
+    bindkey "[A"      history-search-backward              # up arrow
+    bindkey "^D"      delete-char                          # ctrl-d
+    bindkey "^F"      forward-char                         # ctrl-f
+    bindkey "^B"      backward-char                        # ctrl-b
 
-bindkey -v   # Default to standard vi bindings, regardless of editor string
+    bindkey -v   # Default to standard vi bindings, regardless of editor string
 
-zle -N edit-command-line
+    zle -N edit-command-line
 
-# Press ESC-v to edit current line in your favorite $editor
-bindkey -M vicmd v edit-command-line
-# bindkey '^V' edit-command-line
-bindkey -r "^G" # was bound to list-expand I don't know where/why
-# bindkey '^G' push-line-or-edit
+    # Press ESC-v to edit current line in your favorite $editor
+    bindkey -M vicmd v edit-command-line
+    # bindkey '^V' edit-command-line
+    bindkey -r "^G" # was bound to list-expand I don't know where/why
+    # bindkey '^G' push-line-or-edit
 
-bindkey '^P' up-history
-bindkey '^N' down-history
+    bindkey '^P' up-history
+    bindkey '^N' down-history
 
     # TODO doesn't work because it s overriden afterwards apparently
     . "${fzf}/share/fzf/completion.zsh"
