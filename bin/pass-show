@@ -1,2 +1,2 @@
-#!/usr/bin/env bash
-/usr/bin/env pass show "$@" | head -n 1
+#!/bin/sh
+pass show "$@" | head -n 1

@@ -216,10 +216,14 @@ let
     ''
     # Can't be embedded; must be a module !?
     NF_INET y
-    NF_CONNTRACK y
+    NF_CONNTRACK n
 
     NF_NAT y
     NF_NAT_IPV4 y
+
+    # added for mptcp trunk
+    NF_NAT_IPV6 y
+    NETFILTER_CONNCOUNT n
 
     # force it to yes as otherwise generate-config.pl seems to ignore it ?
     OPENVSWITCH y
@@ -247,52 +251,52 @@ let
   '';
 
   kvmConfig = ''
-      VIRTIO y
-      VIRTIO_PCI y
-      VIRTIO_PCI_LEGACY y
-      VIRTIO_BALLOON y
-      VIRTIO_INPUT y
-      VIRTIO_MMIO y
-      VIRTIO_BLK y
-      VIRTIO_NET y
-      VIRTIO_CONSOLE y
+VIRTIO_PCI y
+VIRTIO_MMIO y
+VIRTIO y
+VIRTIO_PCI_LEGACY y
+VIRTIO_BALLOON y
+VIRTIO_INPUT y
+VIRTIO_BLK y
+VIRTIO_NET y
+VIRTIO_CONSOLE y
 
-      NET_9P_VIRTIO? y
+NET_9P_VIRTIO? y
 
-      HW_RANDOM_VIRTIO y
-      # VIRTIO_MMIO_CMDLINE_DEVICES
+HW_RANDOM_VIRTIO y
+# VIRTIO_MMIO_CMDLINE_DEVICES
 
-      # allow to capture netlink packets with wireshark !!
-      # https://jvns.ca/blog/2017/09/03/debugging-netlink-requests/
-      NLMON y
-      TUN y
+# allow to capture netlink packets with wireshark !!
+# https://jvns.ca/blog/2017/09/03/debugging-netlink-requests/
+NLMON y
+TUN y
 
-      # when run as -kernel, an embedded DHCP client is needed
-      # need to get an ip
-      IP_PNP y
-      IP_PNP_DHCP y
+# when run as -kernel, an embedded DHCP client is needed
+# need to get an ip
+IP_PNP y
+IP_PNP_DHCP y
 
-      # this is the default NIC used by Qemu so we include it
-      # not to have to set Qemu to e1000
-      8139CP y
-      8139TOO y
-      8139TOO_PIO y
-      # CONFIG_8139TOO_TUNE_TWISTER is not set
-      8139TOO_8129 y
-      # CONFIG_8139_OLD_RX_RESET is not set
+# this is the default NIC used by Qemu so we include it
+# not to have to set Qemu to e1000
+8139CP y
+8139TOO y
+8139TOO_PIO y
+# CONFIG_8139TOO_TUNE_TWISTER is not set
+8139TOO_8129 y
+# CONFIG_8139_OLD_RX_RESET is not set
 
-      DEBUG_KERNEL y
-      FRAME_POINTER y
-      KGDB y
-      KGDB_SERIAL_CONSOLE y
-      DEBUG_INFO y
+DEBUG_KERNEL y
+FRAME_POINTER y
+KGDB y
+KGDB_SERIAL_CONSOLE y
+DEBUG_INFO y
 
-      # PATA_MARVELL y # needs SATA_SIS
-      # SATA_SIS y # might cause problems with more recent kernels
-      # MD_RAID0 y
+# PATA_MARVELL y # needs SATA_SIS
+# SATA_SIS y # might cause problems with more recent kernels
+# MD_RAID0 y
 
-      # else qemu can't see the root filesystem when launched with -kenel
-      EXT4_FS y
+# else qemu can't see the root filesystem when launched with -kenel
+EXT4_FS y
 
 CRYPTO_USER_API_HASH y
 SYSFS y
@@ -300,7 +304,7 @@ DEVTMPFS y
 INOTIFY_USER y
 SIGNALFD y
 TIMERFD y
-    EPOLL y
+EPOLL y
 CRYPTO_SHA256 y
 CRYPTO_HMAC y
 TMPFS_POSIX_ACL y
@@ -345,7 +349,7 @@ in rec {
       kernelPatches=[];
       ignoreConfigErrors=true;
       autoModules = false;
-      kernelPreferBuiltin = true;
+      preferBuiltin = true;
       extraConfig = mptcpKernelExtraConfig;
   });
 
@@ -353,7 +357,7 @@ in rec {
       kernelPatches=[];
       ignoreConfigErrors=true;
       autoModules = false;
-      kernelPreferBuiltin = true;
+      preferBuiltin = true;
       extraConfig = mptcpKernelExtraConfig;
     }));
     # .overrideAttrs(o: {
@@ -576,9 +580,16 @@ in rec {
       structuredExtraConfig = configStructured;
   };
 
-  linux_mptcp_trunk = prev.callPackage ./pkgs/kernels/linux-mptcp-trunk.nix {
+  linux_mptcp_trunk = (prev.callPackage ./pkgs/kernels/linux-mptcp-trunk.nix {
+
     kernelPatches = prev.linux_4_19.kernelPatches;
-  };
+  # }).override({
+    kernelPreferBuiltin = true;
+    ignoreConfigErrors=true;
+
+    extraConfig = mptcpKernelExtraConfig + localConfig 
+    + ovsConfig + bpfConfig + net9pConfig + mininetConfig;
+  });
 
   # linux_mptcp_trunk_test = self.linux_mptcp_trunk.overrideAttrs(oa: {
 

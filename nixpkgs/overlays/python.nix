@@ -20,6 +20,9 @@ rec {
   python3 = super.python3.override {
      # Careful, we're using a different self and super here!
     packageOverrides = pythonself: pythonsuper: {
+
+
+        Kconfiglib =  pythonsuper.callPackage ./pkgs/kconfiglib.nix { };
       # if (super.pkgs ? pygccxml) then null else
         # now that s wird
         # pygccxml =  super.callPackage ../pygccxml.nix {
