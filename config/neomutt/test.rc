@@ -3,7 +3,7 @@
 # how to debug explained here https://neomutt.org/dev/debug
 # :exec what-key to find the name of the key
 # run :set ?option to see the value of a command
-set debug_level = 2
+# set debug_level = 2
 set move = no
 
 # exec change-vfolder
@@ -11,9 +11,21 @@ set move = no
 # set debug_file = neolog
 
 # TODO fix folder hooks
-source ~/.config/neomutt/neomuttrc
+# source ~/.config/neomutt/neomuttrc
+#
+# Plenty of space
+# set sidebar_divider_char = '│'
+set sort_aux = reverse-last-date-received
+
+# source theme
+source $XDG_CONFIG_HOME/neomutt/dracula.muttrc
+
+# ultimate trick to
+# https://unix.stackexchange.com/questions/60838/saving-email-as-file-in-mutt
+alternative_order text/plain text text/enriched 
 
 # read-thread
+# work around a bug in vimrc config
 bind index <Return> display-message
 
 # in order to do http://flavioleitner.blogspot.com/2011/03/patch-workflow-with-mutt-and-git.html

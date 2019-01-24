@@ -266,4 +266,5 @@ rec {
   # TODO export MSMTP_QUEUE
   home.file.".mailcap".source = ../home/mailcap;
 
+  programs.lesspipe.enable = true;
 }
