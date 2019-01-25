@@ -235,8 +235,10 @@ rec {
     shellInit=''
       # set -o vi
     '';
-
   };
+
+  # to get manpages 
+  documentation.enable = true;
 
   users.defaultUserShell = pkgs.zsh;
 

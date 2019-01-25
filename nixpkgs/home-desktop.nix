@@ -223,8 +223,38 @@ in
         # browser = "";
         # dmenu = /usr/local/bin/rofi -dmenu -p dunst:
         alignment = "right";
+        geometry = "300x5-30+20";
 
       };
+
+      shortcuts = {
+
+    # Redisplay last message(s).
+    # On the US keyboard layout "grave" is normally above TAB and left
+    # of "1". Make sure this key actually exists on your keyboard layout,
+    # e.g. check output of 'xmodmap -pke'
+    history = "ctrl+grave";
+      };
+
+
+# [shortcuts]
+
+#     # Shortcuts are specified as [modifier+][modifier+]...key
+#     # Available modifiers are "ctrl", "mod1" (the alt-key), "mod2",
+#     # "mod3" and "mod4" (windows-key).
+#     # Xev might be helpful to find names for keys.
+
+#     # Close notification.
+#     close = ctrl+space
+
+#     # Close all notifications.
+#     close_all = ctrl+shift+space
+
+#     # Redisplay last message(s).
+#     # On the US keyboard layout "grave" is normally above TAB and left
+#     # of "1". Make sure this key actually exists on your keyboard layout,
+#     # e.g. check output of 'xmodmap -pke'
+#     history = ctrl+grave
     };
   };
 

@@ -11,7 +11,7 @@ STATUS=$2
 echo $PATH
 env > /tmp/if_up_env
 
-RT_TABLE=/run/iproute2/rt_tables
+RT_TABLE=/etc/iproute2/rt_tables
 
 # || [ "$MODE" != start ]; 
 if [ "$DEVICE_IFACE" = lo ]; then

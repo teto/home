@@ -27,6 +27,7 @@ alternative_order text/plain text text/enriched
 # read-thread
 # work around a bug in vimrc config
 bind index <Return> display-message
+bind pager,index R group-reply
 
 # in order to do http://flavioleitner.blogspot.com/2011/03/patch-workflow-with-mutt-and-git.html
 set pipe_split=yes

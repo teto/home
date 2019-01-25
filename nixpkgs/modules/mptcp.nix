@@ -69,7 +69,7 @@ in
         logLevel = mkDefault "DEBUG";
 
         dispatcherScripts = [
-          { source = mptcpUp; }
+          { source = mptcpUp; type = "basic"; }
         ];
       };
     })
