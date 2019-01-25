@@ -2023,7 +2023,7 @@ let g:intero_window_size = 15
 let g:intero_vertical_split = 1
 "}}}
 " nvim-hs haskell stuff {{{
-let g:nvimhsPluginStarter=nvimhs#stack#pluginstarter()
+" let g:nvimhsPluginStarter=nvimhs#stack#pluginstarter()
 "}}}
 " dasht{{{
 

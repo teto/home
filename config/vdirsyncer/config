@@ -87,7 +87,7 @@ fileext = ".ics"
 
 
 [storage iij_remote_caldav]
-auth = "basic"
+# auth = "basic"
 type = "caldav"
 # https://ncloud.zaclys.com/remote.php/dav/calendars/22780/personal/
 # http://nixos.iijlab.net/remote.php/dav/calendars/root/personal/

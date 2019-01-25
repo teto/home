@@ -5,10 +5,14 @@
     ./home-desktop.nix
 
     ./home-mail.nix
+
+    # while waiting for it to land upstream
+    # ./neomutt.nix
   ];
   # home.keyboard.layout = "fr,us";
 
   home.packages = with pkgs; [
+    dunst
   ];
 
   home.file.".digrc".text = ''
