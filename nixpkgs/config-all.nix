@@ -97,6 +97,15 @@ rec {
     ".."="cd ..";
     "..."="cd ../..";
 
+
+    # kernel aliases {{{
+kernel_makeconfig="nix-shell -E 'with import <nixpkgs> {}; mptcp-manual.overrideAttrs (o: {nativeBuildInputs=o.nativeBuildInputs ++ [ pkgconfig ncurses ];})' --command 'make menuconfig KCONFIG_CONFIG=build/.config";
+kernel_xconfig=''
+  nix-shell -E 'with import <nixpkgs> {}; linux.overrideAttrs (o: {nativeBuildInputs=o.nativeBuildInputs ++ [ pkgconfig qt5.qtbase ];})' --command 'make menuconfig KCONFIG_CONFIG=build/.config'
+'';
+# kernel_xconfig="make xconfig KCONFIG_CONFIG=build/.config"
+# }}}
+
 # oftenly used programs {{{
       v="nvim";
       c="cat";
@@ -142,7 +151,7 @@ rec {
   #   enable= false;
   # };
 
-  # programs.man.enable = true;
+  # 
   # on master it is
   documentation.man.enable = true;
 

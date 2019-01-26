@@ -28,6 +28,9 @@ zbell_ignore=($EDITOR $PAGER v)
 # adds a transfer function to upload a file & display its url
 . "$ZDOTDIR/transfer.zsh"
 
+# zsh.enableSuggestions right handside color
+# see https://github.com/zsh-users/zsh-autosuggestions for suggestions 
+AUTOSUGGESTION_HIGHLIGHT_COLOR="fg=cyan"
 
 # move it to HM maybe
 . "/etc/zinputrc"

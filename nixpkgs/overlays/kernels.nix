@@ -583,7 +583,6 @@ in rec {
   linux_mptcp_trunk_raw = (prev.callPackage ./pkgs/kernels/linux-mptcp-trunk.nix {
 
     kernelPatches = prev.linux_4_19.kernelPatches;
-  # }).override({
     kernelPreferBuiltin = true;
     ignoreConfigErrors=true;
 

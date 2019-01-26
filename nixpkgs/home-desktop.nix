@@ -462,9 +462,10 @@ in
   # XF86AudioMute exec amixer -q set Master toggle; exec notify-send "Mute toggle"
         "$GroupFr+$mod+apostrophe"="kill";
         "$GroupUs+$mod+4"="kill";
-        "XF86AudioRaiseVolume"="exec --no-startup-id pactl set-sink-volume 0 +5%;exec ${notify-send} 'Audio Raised volume'";
-        "XF86AudioLowerVolume"="exec --no-startup-id pactl set-sink-volume 0 -5%;exec ${notify-send} 'Audio lowered'";
-        "XF86AudioMute"="exec --no-startup-id pactl set-sink-mute 0 toggle;";
+        "XF86AudioRaiseVolume"=
+          "exec --no-startup-id pactl set-sink-volume 0 +5%;exec ${notify-send} --icon=speaker_no_sound -u low -t 1000 'Audio Raised volume'";
+        "XF86AudioLowerVolume"="exec --no-startup-id pactl set-sink-volume 0 -5%;exec ${notify-send} -u low 'Audio lowered'";
+        "XF86AudioMute"="exec --no-startup-id pactl set-sink-mute 0 toggle;exec ${notify-send} --icon=speaker_no_sound -u low 'test'";
         "XF86AudioPlay" = "exec ${pkgs.vlc}/bin/vlc";
         "--release Print" = "exec ${pkgs.scrot}/bin/scrot -s '/tmp/%s_%H%M_%d.%m.%Y_$wx$h.png'";
         # bindsym --release Print exec "scrot -m '/home/user/Pictures/screenshots/%s_%H%M_%d.%m.%Y_$wx$h.png'"

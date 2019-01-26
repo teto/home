@@ -23,6 +23,9 @@ in
 rec {
   news.display = "silent";
 
+  # home.extraOutputsToInstall = [ "man" "doc" ];
+  programs.man.enable = true;
+
   # works only because TIGRC_USER is set
   # if file exists vim.tigrc
   home.file."${config.xdg.configHome}/tig/tigrc".text = let 
