@@ -14,8 +14,9 @@ buildPythonPackage rec {
 
   meta = with stdenv.lib; {
     description = "A flexible Python 2/3 Kconfig implementation and library";
-    homepage = https://github.com/ulfalizer/Kconfiglib;
+    homepage = https://github.com/nichoski/kergen;
     maintainers = with maintainers; [ teto ];
+    # license = 
   };
 }
 

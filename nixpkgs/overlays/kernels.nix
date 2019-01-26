@@ -583,8 +583,9 @@ in rec {
   linux_mptcp_trunk_raw = (prev.callPackage ./pkgs/kernels/linux-mptcp-trunk.nix {
 
     kernelPatches = prev.linux_4_19.kernelPatches;
-    kernelPreferBuiltin = true;
+    preferBuiltin = true;
     ignoreConfigErrors=true;
+      autoModules = false;
 
     extraConfig = mptcpKernelExtraConfig + localConfig 
     + ovsConfig + bpfConfig + net9pConfig + mininetConfig;
