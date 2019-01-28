@@ -44,12 +44,13 @@ buildLinux (rec {
     #   sha256 = "1r89hjc2p6v9dw57bj9bhh17cg60f7mpsywf9swbryna72m7z3pi";
     # };
 
+    # VIRTIO y
 
   extraConfig = ''
-    VIRTIO y
     CRYPTO_DEV_CHELSIO_TLS? n
     CRYPTO_DEV_CHELSIO? n
-    CRYPTO_HW n
+    CHELSIO_T4? n
+    NET_VENDOR_CHELSIO n
 
     IPV6 y
     MPTCP y

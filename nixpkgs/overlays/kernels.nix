@@ -251,15 +251,27 @@ let
   '';
 
   kvmConfig = ''
+
+# all the VIRTIO that appears in "selected by" when you open
+# make menuconfig
+VOP? n
+SCIF_BUS? n
+CAIF? n
+INTEL_MIC_CARD? y
+REMOTEPROC? y
+PCI y
+VIRTIO_MENU y
 VIRTIO_PCI y
-VIRTIO_MMIO y
-VIRTIO y
 VIRTIO_PCI_LEGACY y
+VIRTIO_MMIO N
+VIRTIO y
 VIRTIO_BALLOON y
-VIRTIO_INPUT y
+VIRTIO_INPUT N
 VIRTIO_BLK y
 VIRTIO_NET y
+RPMSG_VIRTIO? y
 VIRTIO_CONSOLE y
+# SCSI_VIRTIO y
 
 NET_9P_VIRTIO? y
 
@@ -313,30 +325,13 @@ SECCOMP y
 
 
 
-    # don't use the module
-    # worried about
-# warning: unused option: SQUASHFS_ZLIB
-# warning: unused option: UBIFS_FS_ADVANCED_COMPR
-# warning: unused option: USB_SERIAL_GENERIC
-  # must be used with ignoreConfigErrors in kernels
-  # kernelExtraConfig=builtins.readFile ../extraConfig.nix;
-
 in rec {
-  # linux_4_9 = prev.linux_4_9.override({
-  #   hostPlatform=test-platform;
-  # });
 
-  # need to override 
-
-  # Thanks <3 ericson1234 for this command that overrides the current localSystem platform in order
-  # to compile a custom kernel
-  # nix-build -A linux_mptcp --arg 'localSystem' 'let top = (import <nixpkgs> { overlays= [ (import /home/teto/dotfiles/config/nixpkgs/overlays/kernels.nix)]; } ); in top.lib.recursiveUpdate (top.lib.systems.elaborate { system = builtins.currentSystem; }) { platform = top.test-platform; }' '<nixpkgs>' --show-trace
   mptcpKernelExtraConfig = kvmConfig
       + mptcpConfig
       + debugConfig
       + net9pConfig
       ;
-
 
   # mptcpStructuredExtraConfig = mkMerge [
   #   kvmConfigStructured
@@ -573,7 +568,9 @@ in rec {
     kernelPatches = prev.linux_4_19.kernelPatches;
     preferBuiltin = true;
     ignoreConfigErrors=true;
-      autoModules = false;
+    # autoModules = true;
+    # boot.debug1device
+    # modDirVersion="4.19.0";
 
     extraConfig = mptcpKernelExtraConfig + localConfig 
     + ovsConfig + bpfConfig + net9pConfig + mininetConfig;
