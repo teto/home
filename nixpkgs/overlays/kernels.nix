@@ -522,18 +522,6 @@ in rec {
   my_lenovo_kernel = linux_mptcp_trunk;
   # my_lenovo_kernel = self.linux_mptcp_with_netlink.override({
 
-  #   modDirVersion="4.14.24";
-  #   # to be able to run as
-  #   # preferBuiltin=true;
-  #   ignoreConfigErrors=true;
-  #   # src = prev.fetchFromGitHub {
-  #   #   owner = "teto";
-  #   #   repo = "mptcp";
-  #   #   rev = "a7bdd7a8e6ebae940d6a38d023c31746979260a2";
-  #   #   sha256 = "198ms07jm0kcg8m69y2fghvy6hdd5b4af4p2gjar3ibkxca1s6az";
-  #   # };
-
-  #   # structuredExtraConfig = mininetConfigStructured;
 
   #   # I don't really care here if openvswitch is as a module or not
   #   # kvmConfig +
