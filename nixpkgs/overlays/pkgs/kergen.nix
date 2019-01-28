@@ -13,7 +13,7 @@ buildPythonPackage rec {
   doCheck = false;
 
   meta = with stdenv.lib; {
-    description = "A flexible Python 2/3 Kconfig implementation and library";
+    description = "Linux kernel config generator";
     homepage = https://github.com/nichoski/kergen;
     maintainers = with maintainers; [ teto ];
     # license = 
