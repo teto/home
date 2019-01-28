@@ -47,10 +47,6 @@ buildLinux (rec {
     # VIRTIO y
 
   extraConfig = ''
-    CRYPTO_DEV_CHELSIO_TLS? n
-    CRYPTO_DEV_CHELSIO? n
-    CHELSIO_T4? n
-    NET_VENDOR_CHELSIO n
 
     IPV6 y
     MPTCP y

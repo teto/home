@@ -93,6 +93,21 @@ let
     CFS_BANDWIDTH y
   '';
 
+  noChelsio = ''
+
+    CRYPTO_DEV_CHELSIO_TLS? n
+    CRYPTO_DEV_CHELSIO? n
+    # CHELSIO_T4? n
+    NET_VENDOR_CHELSIO n
+    # CHELSIO_T1? no
+    # CHELSIO_T2? no
+    # CHELSIO_T3? no
+    # CHELSIO_T4? no
+    CHELSIO_LIB n
+    # to prevent selection of NET_VENDOR_CHELSIO 
+    SCSI_LOWLEVEL n 
+    CHELSIO_TLS n
+  '';
 
     # NET_9P_DEBUG y
     net9pConfig = ''
@@ -135,6 +150,7 @@ let
 
     # to prevent kernel from adding a `+` when in a git repository
     localConfig = ''
+      
 
       # LOCALVERSION -matt
       # LOCALVERSION ""
@@ -573,7 +589,7 @@ in rec {
     # modDirVersion="4.19.0";
 
     extraConfig = mptcpKernelExtraConfig + localConfig 
-    + ovsConfig + bpfConfig + net9pConfig + mininetConfig;
+    + ovsConfig + bpfConfig + net9pConfig + mininetConfig + noChelsio;
   });
 
   # see https://nixos.wiki/wiki/Linux_Kernel
@@ -596,21 +612,17 @@ in rec {
   });
 
   # linux_mptcp_trunk_test = self.linux_mptcp_trunk.overrideAttrs(oa: {
-
   #   src = prev.fetchFromGitHub {
   #     owner = "teto";
   #     repo = "mptcp";
   #     rev = "abc4f13f871965b9bf4726f832b2dbce2e1a2cc9";
   #     sha256 = "061zzlkjm3i1nhgnz3dfhbshjicrjc5ydwy6hr3l6y8cl2ps2iwf";
   #   };
-
   # });
 
     # linux_test2 = linux_test.override {
     #   # TODO 
     #   structuredExtraConfig = with prev.lib.modules;
-
-
     #   # just to tests
     #   # mkMerge 
     #   [
