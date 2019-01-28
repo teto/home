@@ -19,12 +19,18 @@ buildLinux (rec {
   #};
   # I think that it's lost
 
-  # GIT_TRACE=2;
+  # src = fetchFromGitHub {
+  #   owner = "multipath-tcp";
+  #   repo = "mptcp";
+  #   rev = "4ea5dee9786aea30fad9fa9fa32f6ac1e5300623";
+  #   sha256 = "0laaw4xnpllm3lkb90b336mzihzw6j09ygrz9jcbcm91sgb12lfa";
+  # };
+
   src = fetchFromGitHub {
-    owner = "multipath-tcp";
+    owner = "teto";
     repo = "mptcp";
-    rev = "4ea5dee9786aea30fad9fa9fa32f6ac1e5300623";
-    sha256 = "0laaw4xnpllm3lkb90b336mzihzw6j09ygrz9jcbcm91sgb12lfa";
+    rev = "d60de4e248b0fbe7cebaa3e7efeda04c1f64cc72";
+    sha256 = "19fmfpgwl7jkxyr3d628adwczsndl9ichv5acdghygw55fjdfjrm";
   };
 
   # src = builtins.fetchGit {
