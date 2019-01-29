@@ -16,6 +16,7 @@ let
     ./common-desktop.nix
     ./modules/network-manager.nix
     ./modules/libvirtd.nix
+    ./modules/mptcp.nix
     # ./modules/owamp.nix
 
     # ./modules/jupyter.nix
@@ -237,7 +238,9 @@ let
   programs.mininet.enable = false;
   # test with sudo mn --switch ovsk -v debug
 
-  networking.iproute2.enable = true;
+  # networking.iproute2.enable = true;
+
+  networking.mptcp.enable = true;
 
   # services.owamp.enable = true;
 

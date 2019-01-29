@@ -35,7 +35,7 @@ in
 
   networking.mptcp = {
     enable = true;
-    # debug = true;
+    debug = true;
   };
 
   networking.interfaces.ens3 =  secrets.mptcp_server.interfaces;

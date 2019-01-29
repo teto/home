@@ -26,22 +26,26 @@ buildLinux (rec {
   #   sha256 = "0laaw4xnpllm3lkb90b336mzihzw6j09ygrz9jcbcm91sgb12lfa";
   # };
 
-  src = fetchFromGitHub {
-    owner = "teto";
-    repo = "mptcp";
-    rev = "d60de4e248b0fbe7cebaa3e7efeda04c1f64cc72";
-    sha256 = "19fmfpgwl7jkxyr3d628adwczsndl9ichv5acdghygw55fjdfjrm";
-  };
+  # src = fetchFromGitHub {
+  #   owner = "teto";
+  #   repo = "mptcp";
+  #   rev = "d60de4e248b0fbe7cebaa3e7efeda04c1f64cc72";
+  #   sha256 = "19fmfpgwl7jkxyr3d628adwczsndl9ichv5acdghygw55fjdfjrm";
+  # };
 
-  # src = builtins.fetchGit {
-  #   url = "gitolite@nixos.iijlab.net:mptcp.git";
+  src = builtins.fetchGit {
+    # url = "gitolite@nixos.iijlab.net:mptcp.git";
+    url = "git@github.com:teto/mptcp.git";
+    # ref = "dbc16ee030d76df43d11c3de4cc084c61060f13b";
+    # ref = "993605d4ee781311249b60dde267d2200d80c805";
+    ref = "trunk_v8";
 # # url The URL of the repo. 
 # # name The name of the directory the repo should be exported to in the store. Defaults to the basename of the URL. 
 # # rev The git revision to fetch. Defaults to the tip of ref. 
 # # ref The git ref to look for the requested revision under. This is often a branch or tag name. Defaults to HEAD. 
   #   # ref = "mptcp_trunk";
   #   ref = "netlink_pm_trunk";
-  # };
+  };
 
     # src = fetchFromGitHub {
     #   owner = "teto";

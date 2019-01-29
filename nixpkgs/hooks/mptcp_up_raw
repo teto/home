@@ -13,7 +13,6 @@ env > /tmp/if_up_env
 
 RT_TABLE=/etc/iproute2/rt_tables
 
-# || [ "$MODE" != start ]; 
 if [ "$DEVICE_IFACE" = lo ]; then
 
 	logger -t mptcp_up "if localhost or $MODE then abort "
@@ -25,11 +24,6 @@ if [ -z "$DEVICE_IFACE" ]; then
 	exit 0
 fi
 
-#dhcp4-change 
-# if [ "$STATUS" != "up" ]; then
-# 	logger "giving up since event is $STATUS"
-# 	exit 0
-# fi
 
 # FIRST, make a table-alias
 echo "making table alias"

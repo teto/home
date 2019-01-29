@@ -17,9 +17,7 @@ in
 
     package = mkOption {
       type = types.package;
-      # default = pkgs.linuxPackages_mptcp;
       default = pkgs.linux_mptcp;
-      # example = literalExample ''pkgs.linuxPackagesFor pkgs.linux_mptcp'';
       description = ''
         Default mptcp kernel to use.
       '';
@@ -37,7 +35,7 @@ in
       type = types.enum [ "fullmesh" "ndiffports" "netlink" ];
       default = "fullmesh";
       description = ''
-        Subflow creation strategy.
+        Subflow creation strategy. Netlink is only available in the development version of mptcp.
       '';
     };
   };
@@ -61,18 +59,11 @@ in
     })
 
     # if networkmanager is enabled, handle routing tables
-    # rather assert if it is not enabled ?
     (mkIf config.networking.networkmanager.enable {
-      # merging it ?
-      networking.networkmanager = {
-        # one of "OFF", "ERR", "WARN", "INFO", "DEBUG", "TRACE"
-        logLevel = mkDefault "DEBUG";
-
-        dispatcherScripts = [
+      networking.networkmanager.dispatcherScripts = [
           { source = mptcpUp; type = "basic"; }
         ];
-      };
-    })
+     })
 
    ]);
 }

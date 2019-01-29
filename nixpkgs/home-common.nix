@@ -26,6 +26,8 @@ rec {
   # home.extraOutputsToInstall = [ "man" "doc" ];
   programs.man.enable = true;
 
+
+
   # works only because TIGRC_USER is set
   # if file exists vim.tigrc
   home.file."${config.xdg.configHome}/tig/tigrc".text = let 
@@ -151,6 +153,12 @@ rec {
 	includes = [
 	  { path = config.xdg.configHome + "/git/config.inc"; }
 	];
+
+    # https://git-scm.com/book/en/v2/Git-Tools-Signing-Your-Work
+    signing = {
+      signByDefault = false;
+      key = "64BB6787";
+    };
 
     extraConfig=''
       [rebase]
