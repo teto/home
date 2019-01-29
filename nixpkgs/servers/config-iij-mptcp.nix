@@ -9,12 +9,12 @@ in
       ./hardware-iij-mptcp.nix
       ./common-server.nix
       ../modules/openssh.nix
-      ../modules/nextcloud.nix
+      # ../modules/nextcloud.nix
       ../modules/mptcp.nix
       ../account-root.nix
     ];
 
-  services.nextcloud.hostName = secrets.mptcp_server.hostname;
+  # services.nextcloud.hostName = secrets.mptcp_server.hostname;
 
   # install mosh-server
   # programs.mosh.enable = true;
