@@ -8,10 +8,10 @@ let
     deployment.targetEnv = "none";
 
     # without this, it seems 
-    deployment.keys.my-secret.text = "shhh this is a secret";
-    deployment.keys.my-secret.user = "myuser";
-    deployment.keys.my-secret.group = "wheel";
-    deployment.keys.my-secret.permissions = "0640";
+    # deployment.keys.my-secret.text = "shhh this is a secret";
+    # deployment.keys.my-secret.user = "myuser";
+    # deployment.keys.my-secret.group = "wheel";
+    # deployment.keys.my-secret.permissions = "0640";
   };
 in
 {

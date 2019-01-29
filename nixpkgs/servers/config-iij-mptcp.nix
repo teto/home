@@ -10,13 +10,19 @@ in
       ./common-server.nix
       ../modules/openssh.nix
       ../modules/nextcloud.nix
+      ../modules/mptcp.nix
       ../account-root.nix
     ];
 
-  services.nextcloud.hostName = secrets.mptcp_server.hostName;
+  services.nextcloud.hostName = secrets.mptcp_server.hostname;
 
   # install mosh-server
   # programs.mosh.enable = true;
+
+  environment.systemPackages = with pkgs; [
+    iperf
+  ];
+
 
   boot.loader.grub.enable = true;
   boot.loader.grub.version = 2;
@@ -27,7 +33,12 @@ in
   networking.defaultGateway = secrets.gateway;
   networking.nameservers = secrets.nameservers;
 
-  networking.interfaces.ens3 =  secrets.mptcp_server;
+  networking.mptcp = {
+    enable = true;
+    # debug = true;
+  };
+
+  networking.interfaces.ens3 =  secrets.mptcp_server.interfaces;
   # networking.interfaces.ens3.ip6 = [ secrets.mptcp_server.ip6 ];
 
   nix.trustedUsers = [ "root" "teto" ];

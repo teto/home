@@ -6,7 +6,7 @@ let
   cfg = config.networking.mptcp;
 
   # todo provide as a side module
-  mptcpUp =   /home/teto/dotfiles/nixpkgs/hooks/mptcp_up_raw;
+  mptcpUp =   ../hooks/mptcp_up_raw;
 in
 {
   options.networking.mptcp = {
@@ -57,7 +57,7 @@ in
     }
 
     (mkIf (!config.networking.networkmanager.enable) {
-      warnings = "You have `networkmanager` disabled. Expect things to break.";
+      warnings = [ "You have `networkmanager` disabled. Expect things to break." ];
     })
 
     # if networkmanager is enabled, handle routing tables
@@ -73,8 +73,6 @@ in
         ];
       };
     })
-
-
 
    ]);
 }
