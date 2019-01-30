@@ -19,6 +19,12 @@
         inherit pkgs;
       };
     };
+
+
+    # this proved necessary to call  nix-build -A linux_hardkernel_4_14  ~/nixpkgs3
+    allowUnsupportedSystem = true; 
+
+
     # internetEnv = pkgs.buildEnv {
     #   name = "internet";
     #   paths = [

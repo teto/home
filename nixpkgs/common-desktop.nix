@@ -124,7 +124,7 @@ in
 
   services.xserver.windowManager.awesome = {
     enable = true;
-    luaModules = [];
+    luaModules = [ pkgs.luaPackages.lpeg ];
   };
 
   # services.xserver.xrandrHeads = ;

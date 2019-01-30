@@ -242,6 +242,10 @@ let
 
   networking.mptcp.enable = true;
 
+
+  # once available
+  # services.greenclip.enable = true;
+
   # services.owamp.enable = true;
 
   # ebpf ?

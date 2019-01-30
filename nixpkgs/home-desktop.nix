@@ -97,6 +97,7 @@ let
     scrot # screenshot app
     sxiv # simple image viewer
     unstable.system_config_printer
+    # vimiv # image viewer
     # shared_mime_info # temporary fix for nautilus to find the correct files
     tagainijisho # japanse dict; like zkanji Qt based
     translate-shell
@@ -272,7 +273,7 @@ in
 
   # might trigger nm-applet crash ?
   services.gpg-agent = {
-    enable = false;
+    enable = true;
     defaultCacheTtl = 1800;
     enableSshSupport = true;
     # grabKeyboardAndMouse= false;
