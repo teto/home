@@ -70,6 +70,7 @@ buildLinux (rec {
     MPTCP_PM_ADVANCED y
     MPTCP_FULLMESH y
     MPTCP_NDIFFPORTS y
+    MPTCP_NETLINK m
     # ... but use none by default.
     # The default is safer if source policy routing is not setup.
     DEFAULT_DUMMY y

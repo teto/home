@@ -184,7 +184,7 @@ let
       # ERROR: "tcp_reset" [net/mptcp/mptcp_netlink.ko] undefined!
       # ERROR: "mptcp_send_active_reset" [net/mptcp/mptcp_netlink.ko] undefined!
       # ERROR: "mptcp_hash_find" [net/mptcp/mptcp_netlink.ko] undefined!
-      MPTCP_NETLINK? y
+      MPTCP_NETLINK? m
       MPTCP y
       MPTCP_SCHED_ADVANCED y
       MPTCP_ROUNDROBIN y

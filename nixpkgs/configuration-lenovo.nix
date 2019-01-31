@@ -16,7 +16,7 @@ let
     ./common-desktop.nix
     ./modules/network-manager.nix
     ./modules/libvirtd.nix
-    ./modules/mptcp.nix
+    # ./modules/mptcp.nix
     # ./modules/owamp.nix
 
     # ./modules/jupyter.nix
@@ -240,7 +240,11 @@ let
 
   # networking.iproute2.enable = true;
 
-  networking.mptcp.enable = true;
+  networking.mptcp = {
+    enable = true;
+    debug = true;
+    pathManager = "netlink";
+  };
 
 
   # once available

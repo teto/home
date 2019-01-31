@@ -164,7 +164,7 @@ in
 
   # TODO prefix with stable
   programs.firefox = {
-    enable = true;
+    enable = false;
     # package = unstable.firefox;
   #   enableAdobeFlash = false;
 

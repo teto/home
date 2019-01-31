@@ -1983,7 +1983,8 @@ let g:LanguageClient_diagnosticsEnable=1
   " '-v',
 " let g:LanguageClient_serverCommands.nix = ['nix-lsp']
 " https://github.com/teto/ns-3-dce/pull/6
-let g:LanguageClient_serverCommands.haskell = ['hie', '--lsp', '-d', '--vomit',  '--logfile', '/tmp/lsp_haskell.log' ]
+" best to use hie-wrapper since it will select the correct ghc
+let g:LanguageClient_serverCommands.haskell = ['hie-wrapper', '--lsp', '-d', '--vomit',  '--logfile', '/tmp/lsp_haskell.log' ]
 let g:LanguageClient_serverCommands.python = [ fnamemodify( g:python3_host_prog, ':p:h').'/pyls', '--log-file' , expand('~/lsp_python.log')]
 " delete it ?
 " del g:LanguageClient_serverCommands.cpp = ['cquery', '--log-file=/tmp/cq.log']
@@ -2437,6 +2438,40 @@ set cpoptions="aABceFsn" " vi ComPatibility options
 " let it jump to 
 nnoremap <C-LeftMouse> :call LanguageClient#textDocument_definition()<CR>
 nnoremap <C-RightMouse> :call SynStack()<CR>
+
+" Automatic Hover
+"function! DoNothingHandler(output)
+"endfunction
+
+"function! IsDifferentHoverLineFromLast()
+"  if !exists('b:last_hover_line')
+"    return 1
+"  endif
+
+"  return b:last_hover_line !=# line('.') || b:last_hover_col !=# col('.')
+"endfunction
+
+"function! GetHoverInfo()
+"  " Only call hover if the cursor position changed.
+"  "
+"  " This is needed to prevent infinite loops, because hover info is displayed
+"  " in a popup window via nvim_buf_set_lines() which puts the cursor into the
+"  " popup window and back, which in turn calls CursorMoved again.
+"  if mode() == 'n' && IsDifferentHoverLineFromLast()
+"    let b:last_hover_line = line('.')
+"    let b:last_hover_col = col('.')
+
+"    call LanguageClient_textDocument_hover({'handle': v:true}, 'DoNothingHandler')
+"    call LanguageClient_clearDocumentHighlight()
+"    call LanguageClient_textDocument_documentHighlight({'handle': v:true}, 'DoNothingHandler')
+"  endif
+"endfunction
+
+"augroup LanguageClient_config
+"  autocmd!
+"  autocmd CursorMoved * call GetHoverInfo()
+"  autocmd CursorMovedI * call LanguageClient_clearDocumentHighlight()
+"augroup end
 
 " set display+=lastline
 
