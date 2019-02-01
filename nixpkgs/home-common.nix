@@ -33,12 +33,17 @@ rec {
   home.file."${config.xdg.configHome}/tig/tigrc".text = let 
     vimTigrc = "${pkgs.tig}/etc/vim.tigrc";
   in 
-  lib.concatStrings [
-    (builtins.readFile vimTigrc) 
-    # TODO reestablish when the package gets updated
-    # (builtins.readFile "${pkgs.tig}/tig/contrib/large-repo.tigrc") 
-    (builtins.readFile ../large-repo.tigrc) 
-  ];
+    ''
+      source ${pkgs.tig}/etc/vim.tigrc
+      source ${pkgs.tig}/tig/contrib/large-repo.tigrc
+      source ./custom.tigrc
+    '';
+  # lib.concatStrings [
+  #   (builtins.readFile vimTigrc) 
+  #   # TODO reestablish when the package gets updated
+  #   # (builtins.readFile "${pkgs.tig}/tig/contrib/large-repo.tigrc") 
+  #   (builtins.readFile ../large-repo.tigrc) 
+  # ];
 
 
   # home.file.".gdbinit".source = ../config/gdbinit_simple;

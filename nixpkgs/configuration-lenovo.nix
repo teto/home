@@ -261,6 +261,7 @@ let
     # cups-pk-helper # to add printer through gnome control center
     # 
     ++ [
+    firefox
       ]
   ;
 

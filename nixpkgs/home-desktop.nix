@@ -224,7 +224,7 @@ in
         # browser = "";
         # dmenu = /usr/local/bin/rofi -dmenu -p dunst:
         alignment = "right";
-        geometry = "300x5-30+20";
+        geometry = "500x30-30+20";
 
       };
 
@@ -385,6 +385,22 @@ in
   # }
 
           # resize ..." 
+
+        # # Enter papis mode
+        papis = {
+          # open documents
+          "$mod+o" = "exec python3 -m papis.main --pick-lib --set picktool dmenu open";
+          # edit documents
+          "$mod+e" = "exec python3 -m papis.main --pick-lib --set picktool dmenu --set editor gvim edit";
+          # open document's url
+           "$mod+b" = "exec python3 -m papis.main --pick-lib --set picktool dmenu browse";
+
+        #   # return to default mode
+        #   bindsym Ctrl+c mode "default"
+        #   Return mode "default"
+          "Escape" = ''mode "default"'';
+
+        };
       };
 
       window = {
@@ -429,6 +445,8 @@ in
         "${mod}+3" = "exec ${pkgs.buku_run}/bin/buku_run";
         "${mod}+b" = "exec ${pkgs.buku_run}/bin/buku_run";
         "${mod}+p" = "exec ${pkgs.rofi-pass}/bin/rofi-pass";
+
+        "$mod+Ctrl+p" = ''mode "papis"'';
         # "${mod}+shift+p" = "focus parent";
 
         # "${mod}+shift+n" = "exec ${unstable.gnome3.nautilus}/bin/nautilus";

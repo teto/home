@@ -1016,7 +1016,7 @@ nnoremap <Leader>/ :set hlsearch! hls?<CR> " toggle search highlighting
 
 " }}}
 " Deoplete {{{
-let g:deoplete#enable_at_startup = v:true
+let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_ignore_case = 1
 let g:deoplete#disable_auto_complete = 0
 let g:deoplete#enable_debug = 1
@@ -1962,6 +1962,7 @@ let g:LanguageClient_trace="verbose"
 let g:LanguageClient_loggingFile = "/tmp/lsp.log"
 let g:LanguageClient_serverStderr = '/tmp/lsp_err.log'
 " expected one of `OFF`, `ERROR`, `WARN`, `INFO`, `DEBUG`, `TRACE`
+let g:LanguageClient_debug = 1
 let g:LanguageClient_loggingLevel = 'INFO'
 "Error" | "Warning" | "Info" | "Log"
 " let g:LanguageClient_windowLogMessageLevel

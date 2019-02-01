@@ -2,7 +2,7 @@
 {
   home.packages = with pkgs; [
     nyx
-    firefoxPackages.tor-browser
+    # firefoxPackages.tor-browser
   ];
 
 }

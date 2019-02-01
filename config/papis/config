@@ -1,5 +1,5 @@
 [papers]
-dir = ~/Documents/papers
+dir = /mnt/ext/Zotero/Documents
 
 [settings]
 default-library = papers
