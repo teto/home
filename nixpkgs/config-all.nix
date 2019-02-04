@@ -99,9 +99,12 @@ rec {
 
 
     # kernel aliases {{{
-kernel_makeconfig="nix-shell -E 'with import <nixpkgs> {}; mptcp-manual.overrideAttrs (o: {nativeBuildInputs=o.nativeBuildInputs ++ [ pkgconfig ncurses ];})' --command 'make menuconfig KCONFIG_CONFIG=build/.config";
+      # nix messes up the escaping I think
+      kernel_makeconfig=''
+        nix-shell -E 'with import <nixpkgs> {}; mptcp-manual.overrideAttrs (o: {nativeBuildInputs=o.nativeBuildInputs ++ [ pkgconfig ncurses ];})' --command "make menuconfig KCONFIG_CONFIG=$PWD/build/.config"
+        '';
 kernel_xconfig=''
-  nix-shell -E 'with import <nixpkgs> {}; linux.overrideAttrs (o: {nativeBuildInputs=o.nativeBuildInputs ++ [ pkgconfig qt5.qtbase ];})' --command 'make menuconfig KCONFIG_CONFIG=build/.config'
+  nix-shell -E 'with import <nixpkgs> {}; linux.overrideAttrs (o: {nativeBuildInputs=o.nativeBuildInputs ++ [ pkgconfig qt5.qtbase ];})' --command 'make menuconfig KCONFIG_CONFIG=$PWD/build/.config'
 '';
 # kernel_xconfig="make xconfig KCONFIG_CONFIG=build/.config"
 # }}}

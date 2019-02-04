@@ -83,7 +83,9 @@ let
   # boot.kernelParams = [ "earlycon=ttyS0" "console=ttyS0" ];
 
   # boot.kernelPackages = pkgs.linuxPackagesFor pkgs.my_lenovo_kernel;
+
   boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_mptcp_trunk_raw;
+
   # boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_latest;
   # boot.kernelPackages = pkgs.linuxPackages_mptcp;
 

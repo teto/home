@@ -33,6 +33,8 @@ in
     #     };
     # };
 
+    package = pkgs.neovim-unwrapped-float;
+
     # hopefully these can be added automatically once I use vim_configurable
     extraPython3Packages = ps: with ps; [
       pandas

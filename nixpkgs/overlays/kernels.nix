@@ -176,7 +176,6 @@ let
     mptcpConfig = ''
       # increase ring kernel buffer size
       LOG_BUF_SHIFT 22
-      IPV6 y 
 
       # don't always exist !
       # netlink can't be compiled as a module for 0.94 else it triggers
@@ -232,16 +231,24 @@ let
     ''
     # Can't be embedded; must be a module !?
     NF_INET y
-    NF_CONNTRACK n
+    NF_CONNTRACK y
 
     NF_NAT y
     NF_NAT_IPV4 y
 
     # added for mptcp trunk
-    NF_NAT_IPV6 y
-    NETFILTER_CONNCOUNT n
+    IPV6 n
+    NF_NAT_IPV6 n
+    NETFILTER y
+    NETFILTER_CONNCOUNT y
+    NETFILTER_ADVANCED y
+
+    NFT_CONNLIMIT y
+    NF_NAT y
+    NF_TABLES y
 
     # force it to yes as otherwise generate-config.pl seems to ignore it ?
+    # NET_NSH y
     OPENVSWITCH y
   '';
 
@@ -582,6 +589,7 @@ in rec {
   linux_mptcp_trunk_raw = (prev.callPackage ./pkgs/kernels/linux-mptcp-trunk.nix {
 
     kernelPatches = prev.linux_4_19.kernelPatches;
+    # does not seem true anymore
     preferBuiltin = true;
     ignoreConfigErrors=true;
     # autoModules = true;
@@ -589,7 +597,7 @@ in rec {
     # modDirVersion="4.19.0";
 
     extraConfig = mptcpKernelExtraConfig + localConfig 
-    + ovsConfig + bpfConfig + net9pConfig + mininetConfig + noChelsio;
+     + bpfConfig + net9pConfig + mininetConfig + noChelsio + ovsConfig;
   });
 
   # see https://nixos.wiki/wiki/Linux_Kernel

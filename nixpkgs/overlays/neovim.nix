@@ -12,16 +12,20 @@ self: super:
         # rev = "";
       };
 
-      # src = super.fetchFromGitHub {
-      #   owner = "neovim";
-      #   repo = "neovim";
-
-      #   # rev = "674cb2afde0d82557c8e3afdf706cd6f75195fa5";
-      #   # sha256 = "13cyfvhxjfc3h50vhfdfifi2zxm15w0mda67nxvlj6ksvcjy4020";
-      # };
-
   });
-    # or null;
+
+  neovim-unwrapped-float = (super.neovim-unwrapped).overrideAttrs (oldAttrs: {
+	  name = "neovim";
+	  version = "float";
+
+      src = builtins.fetchGit {
+        # url = git@github.com:neovim/neovim.git;
+        url = https://github.com/neovim/neovim.git;
+        ref = "+refs/pull/6619/head";
+        # ref = "master";
+        # rev = "";
+      };
+  });
 
 
   # neovim-unwrapped = self.neovim-unwrapped-master;
