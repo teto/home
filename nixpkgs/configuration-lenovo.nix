@@ -257,6 +257,8 @@ let
   # ebpf ?
   programs.bcc.enable = true;
 
+  services.xl2tpd.enable = true;
+
   environment.systemPackages = with pkgs;
     (import ./basetools.nix { inherit pkgs;})
     # strongswan # to get ipsec in path

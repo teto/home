@@ -4,10 +4,10 @@
   # boot.kernelPackages = pkgs.linuxPackages_mptcp;
   # boot.kernelPackages = pkgs.linuxPackagesFor pkgs.mptcp-custom;
 
-  boot.kernelModules = [
-    # "kvm"  # for virtualisation
-    "tcpprobe"
-    ];
+  # boot.kernelModules = [
+  #   # "kvm"  # for virtualisation
+  #   "tcpprobe"
+  #   ];
 
   # should I load with the initrd
   # boot.initrd.supportedFilesystems = [ ];

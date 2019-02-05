@@ -91,6 +91,7 @@ call plug#begin(s:plugdir)
 " call :NR on a region than :w . coupled with b:nrrw_aucmd_create, 
 " Plug 'AGhost-7/critiq.vim' " :h critiq
 " Plug 'eagletmt/neco-ghc' " haskell completion for deoplete
+Plug 'ndmitchell/ghcid', { 'rtp': 'plugins/nvim' }
 Plug 'neovimhaskell/nvim-hs.vim' " to help with nvim-hs
 Plug 'bfredl/nvim-lspmirror'
 " Plug 'bfredl/nvim-lspext' " extension
@@ -231,7 +232,10 @@ Plug 'neovimhaskell/haskell-vim', {'for':'haskell'} " haskell install
 " Plug 'bitc/vim-hdevtools'
 " Plug 'SevereOverfl0w/deoplete-github' " completion on commit issues (just
 " crashes without netrc
-Plug 'zchee/deoplete-zsh'
+" Plug 'deoplete-plugins/deoplete-make' " empty !
+Plug 'deoplete-plugins/deoplete-zsh'
+" Plug 'deoplete-plugins/deoplete-jedi'
+" Plug 'deoplete-plugins/deoplete-clang'
 "
 "}}}
 

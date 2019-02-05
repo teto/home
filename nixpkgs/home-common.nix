@@ -271,6 +271,7 @@ rec {
 
       # TODO remove and include it ?
       
+      source $ZDOTDIR/zshrc.generated
       source $ZDOTDIR/zshrc
     '' 
       # + builtins.readFile dotDir + ./zshrc
@@ -288,13 +289,18 @@ rec {
       '';
   };
 
+  xdg.configFile."zsh/zshrc.generated".source = ../config/zsh/zshrc;
+  # home.activation.copyZshrc = dagEntryBefore [ "linkGeneration" ] ''
+  #   cp $
+  #   '';
+
   # order matters
   home.file.".mailcap".text =  ''
 applmcation/pdf; evince '%s';
 # pdftotext
 # wordtotext
 # ppt2text 
-# downlaod script mutt_bgrun
+# download script mutt_bgrun
 #application/pdf; pdftohtml -q -stdout %s | w3m -T text/html; copiousoutput 
 #application/msword; wvWare -x /usr/lib/wv/wvHtml.xml %s 2>/dev/null | w3m -T text/html; copiousoutput
 text/calendar; khal import '%s'
