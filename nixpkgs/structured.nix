@@ -1,7 +1,37 @@
-{ lib }:
-with lib.kernel;
-with lib.modules;
+{ lib, libk }:
+
+with libk;
+# with lib.kernel;
+# with lib.modules;
 {
+
+  strongswanStructured = {
+    XFRM_USER                = yes;
+    NET_KEY                  = yes;
+    INET                     = yes;
+    IP_ADVANCED_ROUTER       = yes;
+    IP_MULTIPLE_TABLES       = yes;
+    INET_AH                  = yes;
+    INET_ESP                 = yes;
+    INET_IPCOMP              = yes;
+    INET_XFRM_MODE_TRANSPORT = yes;
+    INET_XFRM_MODE_TUNNEL    = yes;
+    INET_XFRM_MODE_BEET      = yes;
+
+    # IPV6
+    # INET6_AH
+    # INET6_ESP
+    # INET6_IPCOMP
+    # INET6_XFRM_MODE_TRANSPORT
+    # INET6_XFRM_MODE_TUNNEL
+    # INET6_XFRM_MODE_BEET
+    # IPV6_MULTIPLE_TABLES
+
+    NETFILTER = yes;
+    NETFILTER_XTABLES = yes;
+    NETFILTER_XT_MATCH_POLICY = yes;
+  };
+
   mininetConfigStructured =  {
     BPF         = yes;
     BPF_SYSCALL = yes;
@@ -24,10 +54,37 @@ with lib.modules;
     CFS_BANDWIDTH = yes;
   };
 
+  ovsConfigStructured = {
+    #prev.pkgs.openvswitch.kernelExtraConfig or 
+    # Can't be embedded; must be a module !?
+    NF_INET = yes;
+    NF_CONNTRACK = yes;
+
+    NF_NAT = yes;
+    NF_NAT_IPV4 = yes;
+
+    # added for mptcp trunk
+    # IPV6  = no;
+    # NF_NAT_IPV6 = no;
+    NETFILTER = yes;
+    NETFILTER_CONNCOUNT = yes;
+    NETFILTER_ADVANCED = yes;
+
+    NFT_CONNLIMIT = yes;
+    NF_TABLES = yes;
+
+    # force it to = yes;es as otherwise generate-config.pl seems to ignore it ?
+    # NET_NSH = yes;
+    OPENVSWITCH = yes;
+  };
+
 
   bpfConfigStructured = {
     #prev.pkgs.linuxPackages.bcc.kernelExtraConfig or
     BPF = yes;
+    BPF_JIT_ALWAYS_ON = yes;
+    NETFILTER_XTABLES = yes;
+    NETFILTER_XT_MATCH_BPF = yes;
     BPF_SYSCALL = yes;
     NET_CLS_BPF = yes;
     NET_ACT_BPF = yes;
@@ -41,12 +98,35 @@ with lib.modules;
     KPROBE_EVENTS          = yes;
   };
 
-  # NET_CLS_ACT y
 
+  noChelsio = {
+
+    CRYPTO_DEV_CHELSIO_TLS = option no;
+    CRYPTO_DEV_CHELSIO = option no;
+    # CHELSIO_T4? n
+    NET_VENDOR_CHELSIO = no;
+    # CHELSIO_T1? no
+    # CHELSIO_T2? no
+    # CHELSIO_T3? no
+    # CHELSIO_T4? no
+    CHELSIO_LIB  = no;
+    # to prevent selection of NET_VENDOR_CHELSIO 
+    SCSI_LOWLEVEL = no;
+    CHELSIO_TLS  = no;
+  };
 
 
 
   kvmConfigStructured = {
+    # all the VIRTIO that appears in "selected by" when you open
+    # make menuconfig
+    VOP = option no;
+    SCIF_BUS = option no;
+    CAIF = option no; # stands for "Communication CPU to Application CPU Interface"
+    INTEL_MIC_CARD = option  yes;
+    REMOTEPROC = option yes;
+    # PCI y
+    # VIRTIO_MENU y
 
     VIRTIO            = mkForce yes;
     VIRTIO_PCI        = yes;
@@ -54,10 +134,11 @@ with lib.modules;
     VIRTIO_BALLOON    = yes;
     VIRTIO_INPUT      = yes;
     VIRTIO_MMIO       = yes;
+    # VIRTIO_MMIO = no;
     VIRTIO_BLK        = yes;
     VIRTIO_NET        = module;
+    RPMSG_VIRTIO      = option yes;
     VIRTIO_CONSOLE    = yes;
-
     NET_9P_VIRTIO = option yes;
 
       HW_RANDOM_VIRTIO     = yes;
@@ -70,6 +151,7 @@ with lib.modules;
 
       # when run as -kernel, an embedded DHCP client is needed
       # need to get an ip
+      # should not be necessary anymore now that we have a qemu agent in nixops
       IP_PNP               = yes;
       IP_PNP_DHCP          = yes;
 
@@ -82,11 +164,6 @@ with lib.modules;
       "8139TOO_8129"       = yes;
       # CONFIG_8139_OLD_RX_RESET is not set
 
-      DEBUG_KERNEL         = yes;
-      FRAME_POINTER        = yes;
-      KGDB                 = yes;
-      KGDB_SERIAL_CONSOLE  = yes;
-      DEBUG_INFO           = yes;
 
       # PATA_MARVELL         = yes;
       # SATA_SIS             = yes;
@@ -114,8 +191,11 @@ with lib.modules;
       NET_9P = yes;
       # generates 
       # repeated question:   9P Virtio Transport at /nix/store/l6m0lgcrls587pz0i644jhfjk6lyj55s-generate-config.pl line 8
-      NET_9P_DEBUG = yes;
       "9P_FS" = yes;
+      "9P_VIRTIO" = option yes;
+      NET_9P_DEBUG = yes;
+
+      # POSIX might slow down the whole thing
       "9P_FS_POSIX_ACL" = yes;
 
       # unsur 
@@ -150,6 +230,7 @@ with lib.modules;
       # EXTRAVERSION ""
       SYN_COOKIES = no;
 
+      # TODO reenable ?
       # poses problems see https://unix.stackexchange.com/questions/308870/how-to-load-compressed-kernel-modules-in-ubuntu
       # https://github.com/NixOS/nixpkgs/issues/40485
       MODULE_COMPRESS = no;
@@ -191,7 +272,6 @@ with lib.modules;
 
       # tool to generate packets at very high speed in the kerne
       # NET_PKTGEN = yes;
-      NET_TCPPROBE = yes;
 
       # http://www.draconyx.net/articles/net_drop_monitor-monitoring-packet-loss-in-the-linux-kernel.html
       # NET_DROP_MONITOR = yes;
@@ -208,5 +288,10 @@ with lib.modules;
       KGDB                = yes;
       KGDB_SERIAL_CONSOLE = yes;
       DEBUG_INFO          = yes;
+    };
+
+    persoConfig = {
+      # netling debug/diagnostic
+      NETLINK_DIAG = yes;
     };
   }

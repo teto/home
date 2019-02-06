@@ -30,13 +30,14 @@ rec {
 
   # works only because TIGRC_USER is set
   # if file exists vim.tigrc
-  home.file."${config.xdg.configHome}/tig/tigrc".text = let 
+  home.file."${config.xdg.configHome}/tig/config".text = let 
     vimTigrc = "${pkgs.tig}/etc/vim.tigrc";
   in 
     ''
       source ${pkgs.tig}/etc/vim.tigrc
-      source ${pkgs.tig}/tig/contrib/large-repo.tigrc
-      source ./custom.tigrc
+      # not provided
+      # source ${pkgs.tig}/tig/contrib/large-repo.tigrc
+      source ${config.xdg.configHome}/tig/custom.tigrc
     '';
   # lib.concatStrings [
   #   (builtins.readFile vimTigrc) 

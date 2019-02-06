@@ -1,18 +1,15 @@
 self: prev:
-  # with prev.lib.kernel;
+# with prev.lib.kernel;
 
 
 # DYNAMIC_DEBUG n is important !!
 
 let
 
+  # level of indirection while waiting for a better solution
+  # callPackage ?
+  libk = import <nixpkgs/lib/kernel.nix> { inherit (prev.stdenv) lib; version = 4; };
 
-
-
-  # shellHook = ''
-  #   alias xconfig="make xconfig KCONFIG_CONFIG=build/.config"
-  #   alias menuconfig="make menuconfig KCONFIG_CONFIG=build/.config"
-  # '';
 
   # TODO I could use this to discrimanate between branches ?
     # let res = builtins.tryEval (
@@ -27,7 +24,43 @@ let
   # TODO tester ce qui fait flipper/ peut foirer
 # EXT4_ENCRYPTION
 # /home/teto/nixpkgs3/lib/kernel.nix
-  structuredConfigs = import ../structured.nix { inherit (prev) lib; };
+
+
+#  strongswan required configuration
+# https://wiki.strongswan.org/projects/strongswan/wiki/KernelModules
+  structuredConfigs = import ../structured.nix { inherit (prev) lib; inherit libk;};
+
+    # extraConfig = mptcpKernelExtraConfig + localConfig 
+    #  + bpfConfig + net9pConfig + mininetConfig + noChelsio + ovsConfig;
+  defaultConfigStructured = with prev.lib.kernel; with structuredConfigs; prev.lib.mkMerge [ 
+    # structuredConfigs.kvmConfigStructured
+    bpfConfigStructured
+    debugConfigStructured 
+    mininetConfigStructured 
+    # kvmConfigStructured 
+    mptcpConfigStructured 
+    localConfigStructured
+    net9pConfigStructured
+    strongswanStructured  # to get VPN working
+
+    noChelsio # because of mptcp trunk
+
+    # just try to contradict common-config settings
+    # { USB_DEBUG = optional yes; }
+
+    # common-config.nix default is 32, shouldn't trigger any error
+    # The option `settings.MMC_BLOCK_MINORS.freeform' has conflicting definitions, in `<unknown-file>' and `<unknown-file>'
+    # { MMC_BLOCK_MINORS   = freeform "32"; }
+    # { MMC_BLOCK_MINORS   = freeform "64"; }
+
+    # mandatory should win by default
+    # { USB_DEBUG = option yes;}
+    # { USB_DEBUG = yes;}
+
+    # default for "8139TOO_PIO" is no
+    # { "8139TOO_PIO"  = yes; }
+  ];
+
 
   kernelPatch0 = rec {
     name = "xen-netfront_update_features_after_registering_netdev";
@@ -71,98 +104,95 @@ let
 
   # in common-config.nix mark it as an optional one with `?` suffix,
   # VETH mandatory because of things like "ip link add name h1-eth0 address de:73:c3:f9:49:73 type veth peer name s1-eth1 address ca:80:83:c9:8b:3c netns"
-  # TODO import 
-  mininetConfig = ''
-    BPF y
-    BPF_SYSCALL y
-    NET_CLS_BPF y
-    NET_ACT_BPF y
-    BPF_JIT y
-    BPF_EVENTS y
-    USER_NS y
-    VETH y
-    NET_SCH_HTB y
-    NET_SCH_RED y
-    NET_SCH_SFB y
-    NET_SCH_SFQ y
-    NET_SCH_TBF y
-    NET_SCH_GRED y
-    NET_SCH_NETEM y
-    NET_SCH_INGRESS y
-    NET_CLS y
-    CFS_BANDWIDTH y
-  '';
 
-  noChelsio = ''
+  # # TODO import 
+  # mininetConfig = ''
+  #   BPF y
+  #   BPF_SYSCALL y
+  #   NET_CLS_BPF y
+  #   NET_ACT_BPF y
+  #   BPF_JIT y
+  #   BPF_EVENTS y
+  #   USER_NS y
+  #   VETH y
+  #   NET_SCH_HTB y
+  #   NET_SCH_RED y
+  #   NET_SCH_SFB y
+  #   NET_SCH_SFQ y
+  #   NET_SCH_TBF y
+  #   NET_SCH_GRED y
+  #   NET_SCH_NETEM y
+  #   NET_SCH_INGRESS y
+  #   NET_CLS y
+  #   CFS_BANDWIDTH y
+  # '';
 
-    CRYPTO_DEV_CHELSIO_TLS? n
-    CRYPTO_DEV_CHELSIO? n
-    # CHELSIO_T4? n
-    NET_VENDOR_CHELSIO n
-    # CHELSIO_T1? no
-    # CHELSIO_T2? no
-    # CHELSIO_T3? no
-    # CHELSIO_T4? no
-    CHELSIO_LIB n
-    # to prevent selection of NET_VENDOR_CHELSIO 
-    SCSI_LOWLEVEL n 
-    CHELSIO_TLS n
-  '';
+  # noChelsio = ''
+  #   CRYPTO_DEV_CHELSIO_TLS? n
+  #   CRYPTO_DEV_CHELSIO? n
+  #   # CHELSIO_T4? n
+  #   NET_VENDOR_CHELSIO n
+  #   # CHELSIO_T1? no
+  #   # CHELSIO_T2? no
+  #   # CHELSIO_T3? no
+  #   # CHELSIO_T4? no
+  #   CHELSIO_LIB n
+  #   # to prevent selection of NET_VENDOR_CHELSIO 
+  #   SCSI_LOWLEVEL n 
+  #   CHELSIO_TLS n
+  # '';
 
     # NET_9P_DEBUG y
-    net9pConfig = ''
+    # net9pConfig = ''
+    #   # for qemu/libvirt shared folders
+    #   NET_9P y
+    #   # generates 
+    #   # repeated question:   9P Virtio Transport at /nix/store/l6m0lgcrls587pz0i644jhfjk6lyj55s-generate-config.pl line 8
+    #   9P_FS y
+    #   9P_VIRTIO? y
 
-      # for qemu/libvirt shared folders
-      NET_9P y
-      # generates 
-      # repeated question:   9P Virtio Transport at /nix/store/l6m0lgcrls587pz0i644jhfjk6lyj55s-generate-config.pl line 8
-      9P_FS y
-      9P_VIRTIO? y
+    #   # POSIX might slow down the whole thing
+    #   9P_FS_POSIX_ACL y
 
-      # POSIX might slow down the whole thing
-      9P_FS_POSIX_ACL y
-
-      # unsur 
-      # 9P_FS_SECURITY
-      # 9P_FSCACHE
-    '';
+    #   # unsur 
+    #   # 9P_FS_SECURITY
+    #   # 9P_FSCACHE
+    # '';
 
     # if not set it is converted to  https://lwn.net/Articles/434833/
     # CONSOLE_LOGLEVEL_DEFAULT=7
     # CONFIG_MESSAGE_LOGLEVEL_DEFAULT=4
-    debugConfig = ''
-      GDB_SCRIPTS y
-      PRINTK_TIMES y
-      # dynamic debug takes precedence over DEBUG_KERNEL http://blog.listnukira.com/Linux-Kernel-pr-debug-display/
-      DYNAMIC_DEBUG n
-      PREEMPT y
-      DEBUG_KERNEL y
-      FRAME_POINTER y
-      KGDB y
-      KGDB_SERIAL_CONSOLE y
-      DEBUG_INFO y
-    '';
+    # debugConfig = ''
+    #   GDB_SCRIPTS y
+    #   PRINTK_TIMES y
+    #   # dynamic debug takes precedence over DEBUG_KERNEL http://blog.listnukira.com/Linux-Kernel-pr-debug-display/
+    #   DYNAMIC_DEBUG n
+    #   PREEMPT y
+    #   DEBUG_KERNEL y
+    #   FRAME_POINTER y
+    #   KGDB y
+    #   KGDB_SERIAL_CONSOLE y
+    #   DEBUG_INFO y
+    # '';
 
-    persoConfig=''
-      # netling debug/diagnostic
-      NETLINK_DIAG y
-    '';
+    # persoConfig=''
+    #   # netling debug/diagnostic
+    #   NETLINK_DIAG y
+    # '';
 
     # to prevent kernel from adding a `+` when in a git repository
-    localConfig = ''
-      
+    # localConfig = ''
+    #   # LOCALVERSION -matt
+    #   # LOCALVERSION ""
+    #   LOCALVERSION_AUTO n
+    #   # EXTRAVERSION ""
+    #   SYN_COOKIES n
 
-      # LOCALVERSION -matt
-      # LOCALVERSION ""
-      LOCALVERSION_AUTO n
-      # EXTRAVERSION ""
-      SYN_COOKIES n
-
-      # poses problems see https://unix.stackexchange.com/questions/308870/how-to-load-compressed-kernel-modules-in-ubuntu
-      # https://github.com/NixOS/nixpkgs/issues/40485
-      MODULE_COMPRESS n
-      MODULE_COMPRESS_XZ n 
-    '';
+    #   # poses problems see https://unix.stackexchange.com/questions/308870/how-to-load-compressed-kernel-modules-in-ubuntu
+    #   # https://github.com/NixOS/nixpkgs/issues/40485
+    #   MODULE_COMPRESS n
+    #   MODULE_COMPRESS_XZ n 
+    # '';
 
     # since 4.14 we have L2TP  replace:
     # L2TP_V3                     = yes;
@@ -226,52 +256,52 @@ let
   # NF_DEFRAG_IPV6 y
   # NF_NAT_IPV4 y
   # NF_NAT_IPV6 y
-  ovsConfig = 
-    #prev.pkgs.openvswitch.kernelExtraConfig or 
-    ''
-    # Can't be embedded; must be a module !?
-    NF_INET y
-    NF_CONNTRACK y
+  #ovsConfig = 
+  #  #prev.pkgs.openvswitch.kernelExtraConfig or 
+  #  ''
+  #  # Can't be embedded; must be a module !?
+  #  NF_INET y
+  #  NF_CONNTRACK y
 
-    NF_NAT y
-    NF_NAT_IPV4 y
+  #  NF_NAT y
+  #  NF_NAT_IPV4 y
 
-    # added for mptcp trunk
-    IPV6 n
-    NF_NAT_IPV6 n
-    NETFILTER y
-    NETFILTER_CONNCOUNT y
-    NETFILTER_ADVANCED y
+  #  # added for mptcp trunk
+  #  IPV6 n
+  #  NF_NAT_IPV6 n
+  #  NETFILTER y
+  #  NETFILTER_CONNCOUNT y
+  #  NETFILTER_ADVANCED y
 
-    NFT_CONNLIMIT y
-    NF_NAT y
-    NF_TABLES y
+  #  NFT_CONNLIMIT y
+  #  NF_NAT y
+  #  NF_TABLES y
 
-    # force it to yes as otherwise generate-config.pl seems to ignore it ?
-    # NET_NSH y
-    OPENVSWITCH y
-  '';
+  #  # force it to yes as otherwise generate-config.pl seems to ignore it ?
+  #  # NET_NSH y
+  #  OPENVSWITCH y
+  #'';
 
   # CONFIG_BPF_JIT_ALWAYS_ON
-  bpfConfig = 
-    #prev.pkgs.linuxPackages.bcc.kernelExtraConfig or
-  ''
-    BPF y
-    BPF_JIT_ALWAYS_ON y
-    NETFILTER_XTABLES y
-    NETFILTER_XT_MATCH_BPF y
-    BPF_SYSCALL y
-    NET_CLS_BPF y
-    NET_ACT_BPF y
-    BPF_JIT y
-    BPF_EVENTS y
-    KPROBE_EVENTS y
-    KPROBES                y
-    KPROBES_ON_FTRACE      y
-    HAVE_KPROBES           y
-    HAVE_KPROBES_ON_FTRACE y
-    KPROBE_EVENTS          y
-  '';
+  #bpfConfig = 
+  #  #prev.pkgs.linuxPackages.bcc.kernelExtraConfig or
+  #''
+  #  BPF y
+  #  BPF_JIT_ALWAYS_ON y
+  #  NETFILTER_XTABLES y
+  #  NETFILTER_XT_MATCH_BPF y
+  #  BPF_SYSCALL y
+  #  NET_CLS_BPF y
+  #  NET_ACT_BPF y
+  #  BPF_JIT y
+  #  BPF_EVENTS y
+  #  KPROBE_EVENTS y
+  #  KPROBES                y
+  #  KPROBES_ON_FTRACE      y
+  #  HAVE_KPROBES           y
+  #  HAVE_KPROBES_ON_FTRACE y
+  #  KPROBE_EVENTS          y
+  #'';
 
   kvmConfig = ''
 
@@ -350,11 +380,11 @@ SECCOMP y
 
 in rec {
 
-  mptcpKernelExtraConfig = kvmConfig
-      + mptcpConfig
-      + debugConfig
-      + net9pConfig
-      ;
+  # mptcpKernelExtraConfig = kvmConfig
+  #     + mptcpConfig
+  #     + debugConfig
+  #     + net9pConfig
+  #     ;
 
   # mptcpStructuredExtraConfig = mkMerge [
   #   kvmConfigStructured
@@ -363,36 +393,27 @@ in rec {
   # ];
 
   # improve the default mptcp config
-  mptcp93 = prev.linux_mptcp_93.override ({
-      kernelPatches=[];
-      ignoreConfigErrors=true;
-      autoModules = false;
-      preferBuiltin = true;
-      extraConfig = mptcpKernelExtraConfig;
-  });
+  # mptcp93 = prev.linux_mptcp_93.override ({
+  #     kernelPatches=[];
+  #     ignoreConfigErrors=true;
+  #     autoModules = false;
+  #     preferBuiltin = true;
+  #     extraConfig = mptcpKernelExtraConfig;
+  # });
 
   mptcp94 = (prev.linux_mptcp.override ({
       kernelPatches=[];
       ignoreConfigErrors=true;
       autoModules = false;
       preferBuiltin = true;
-      extraConfig = mptcpKernelExtraConfig;
+      structuredExtraConfig = defaultConfigStructured;
+      # extraConfig = mptcpKernelExtraConfig;
     }));
     # .overrideAttrs(o: {
     # nativeBuildInputs=o.nativeBuildInputs ++ (with prev.pkgs; [ pkgconfig ncurses qt5.qtbase ]);
   # });
 
-# sandbox doesn't like
-  # in a repl I see mptcp-local.stdenv.hostPlatform.platform
-
   mptcp94-local-stable = mptcp94.override ({
-    # TODO try to use in private mode
-    # generates too many problems with nixops
-    # src = builtins.fetchGit {
-    #   url = "ssh://gitolite@202.214.86.52:mptcp.git";
-    # url = /home/teto/mptcp;
-    #   rev = "de77de05db08c6a76fe6dcea69c63a3ec563ee6f";
-    # };
 
     # src = prev.fetchFromGitHub {
     #   owner = "teto";
@@ -410,69 +431,63 @@ in rec {
     autoModules = false;
     kernelPreferBuiltin = true;
 
-    # structuredExtraConfig = mininetConfigStructured;
-    extraConfig = mptcpKernelExtraConfig + localConfig 
-    + ovsConfig + bpfConfig + net9pConfig + mininetConfig
-    # to prevent the "+" from being added to modDirVersion
-    # + ''
-    #   LOCALVERSION 
-    # ''
-    ;
-     # if we dont want to have to regenerate it
-      # configfile=
+    structuredExtraConfig = defaultConfigStructured;
+    # extraConfig = mptcpKernelExtraConfig + localConfig 
+    # + ovsConfig + bpfConfig + net9pConfig + mininetConfig
+    # ;
   });
 
-  mptcp-local-stable = mptcp93.override ({
+  # mptcp-local-stable = mptcp93.override ({
 
-    # generates too many problems with nixops
-    # src = builtins.fetchGit {
-    #   url = /home/teto/mptcp;
-    #   rev = "de77de05db08c6a76fe6dcea69c63a3ec563ee6f";
-    # };
+  #   # generates too many problems with nixops
+  #   # src = builtins.fetchGit {
+  #   #   url = /home/teto/mptcp;
+  #   #   rev = "de77de05db08c6a76fe6dcea69c63a3ec563ee6f";
+  #   # };
 
-    src = prev.fetchFromGitHub {
-      owner = "teto";
-      repo = "mptcp";
-      # url = /home/teto/mptcp;
-      # rev = "c0b411996da32bf013af7ba39bd502eff60ac3ad";
-      # sha256 = "07xrlpvl3hp5vypgzvnpz9m9wrjz51iqpgdi56jvqlzvhcymch7l";
+  #   src = prev.fetchFromGitHub {
+  #     owner = "teto";
+  #     repo = "mptcp";
+  #     # url = /home/teto/mptcp;
+  #     # rev = "c0b411996da32bf013af7ba39bd502eff60ac3ad";
+  #     # sha256 = "07xrlpvl3hp5vypgzvnpz9m9wrjz51iqpgdi56jvqlzvhcymch7l";
 
-      rev = "c1f91c32ebd1d4bf38fc17756c61441c925135cb";
-      sha256 = "061zzlkjm3i1nhgnz3dfhbshjicrjc5ydwy6hr5l6y8cl2ps2iwf";
-    };
+  #     rev = "c1f91c32ebd1d4bf38fc17756c61441c925135cb";
+  #     sha256 = "061zzlkjm3i1nhgnz3dfhbshjicrjc5ydwy6hr5l6y8cl2ps2iwf";
+  #   };
 
-    # src = prev.fetchgitPrivate {
-    #   # url = git://gitolite@iij_vm:mptcp.git;
-    #   url = "ssh://gitolite@202.214.86.52:mptcp.git";
-    #   rev = "de77de05db08c6a76fe6dcea69c63a3ec563ee6f";
-    #   sha256 = "9999999999999999999999999999999999999999999999999999999999999999";
-    # };
+  #   # src = prev.fetchgitPrivate {
+  #   #   # url = git://gitolite@iij_vm:mptcp.git;
+  #   #   url = "ssh://gitolite@202.214.86.52:mptcp.git";
+  #   #   rev = "de77de05db08c6a76fe6dcea69c63a3ec563ee6f";
+  #   #   sha256 = "9999999999999999999999999999999999999999999999999999999999999999";
+  #   # };
 
-    modDirVersion="4.9.87";
-    modVersion="4.9.87";
-    # modDirVersion="4.9.60-matt+";
-    name="mptcp-local";
+  #   modDirVersion="4.9.87";
+  #   modVersion="4.9.87";
+  #   # modDirVersion="4.9.60-matt+";
+  #   name="mptcp-local";
 
-    # TODO might need to revisit
-    ignoreConfigErrors=true;
-    autoModules = false;
-    kernelPreferBuiltin = true;
+  #   # TODO might need to revisit
+  #   ignoreConfigErrors=true;
+  #   autoModules = false;
+  #   kernelPreferBuiltin = true;
 
-    # structuredExtraConfig = mininetConfigStructured;
-    extraConfig = mptcpKernelExtraConfig + localConfig 
-    + ovsConfig + bpfConfig + net9pConfig + mininetConfig
-    # to prevent the "+" from being added to modDirVersion
-    # + ''
-    #   LOCALVERSION 
-    # ''
-    ;
-     # if we dont want to have to regenerate it
-      # configfile=
-  });
+  #   # structuredExtraConfig = mininetConfigStructured;
+  #   extraConfig = mptcpKernelExtraConfig + localConfig 
+  #   + ovsConfig + bpfConfig + net9pConfig + mininetConfig
+  #   # to prevent the "+" from being added to modDirVersion
+  #   # + ''
+  #   #   LOCALVERSION 
+  #   # ''
+  #   ;
+  #    # if we dont want to have to regenerate it
+  #     # configfile=
+  # });
 
-  mptcp-local = mptcp-local-stable.override ({
-      src = filter-src /home/teto/mptcp;
-  });
+  # mptcp-local = mptcp-local-stable.override ({
+  #     src = filter-src /home/teto/mptcp;
+  # });
 
 
   # linuxManualConfig is buggy see tracker
@@ -504,7 +519,7 @@ in rec {
   # mptcp-head = mptcp93.override ({
 
   # linuxPackages_mptcp = linuxPackagesFor pkgs.linux_mptcp;
-  linuxPackages_mptcp-local = prev.pkgs.linuxPackagesFor mptcp-local;
+  # linuxPackages_mptcp-local = prev.pkgs.linuxPackagesFor mptcp-local;
 
   # hostPlatform = prev.hostPlatform.overrideAttrs(old: {
     # platform = test-platform;
@@ -596,12 +611,13 @@ in rec {
     # boot.debug1device
     # modDirVersion="4.19.0";
 
-    extraConfig = mptcpKernelExtraConfig + localConfig 
-     + bpfConfig + net9pConfig + mininetConfig + noChelsio + ovsConfig;
+    structuredExtraConfig = defaultConfigStructured;
+    # extraConfig = mptcpKernelExtraConfig + localConfig 
+    #  + bpfConfig + net9pConfig + mininetConfig + noChelsio + ovsConfig;
   });
 
   # see https://nixos.wiki/wiki/Linux_Kernel
-    linux_mptcp_trunk = (prev.linuxManualConfig {
+  linux_mptcp_trunk = (prev.linuxManualConfig {
     inherit (prev) stdenv;
     inherit (linux_mptcp_trunk_raw) src version modDirVersion;
     # version = linux_mptcp_94.version;

@@ -7,19 +7,26 @@ stdenv
 , pyperclip
 , pandas, matplotlib, pyqt5
 
+, fetchPypi
+
 # can be overriden with the one of your choice
 , tshark
 }:
 
 buildPythonApplication rec {
 	pname = "mptcpanalyzer";
-	version = "0.1";
+	version = "0.3.0";
+
+    # for testing just
+    # src = fetchPypi {
+    #   inherit pname version;
+    # };
 
     src = fetchFromGitHub {
       owner = "teto";
       repo = "mptcpanalyzer";
       rev = "${version}";
-      # sha256 = ;
+      sha256 = "1s74gigsfm0wa065vqczlf7x14shw1q9x311fcsidsglfk25ndbg";
     };
 
     doCheck = false;
