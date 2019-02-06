@@ -257,7 +257,8 @@ let
   # ebpf ?
   programs.bcc.enable = true;
 
-  services.xl2tpd.enable = true;
+  # en fait non ils vont etre en concurrence
+  # services.xl2tpd.enable = true;
 
   environment.systemPackages = with pkgs;
     (import ./basetools.nix { inherit pkgs;})
