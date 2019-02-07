@@ -1221,6 +1221,9 @@ let g:neomake_warning_sign = {'text': '⚠ ', 'texthl': 'NeomakeWarningSign'}
 " let g:neomake_message_sign = {'text': '➤', 'texthl': 'NeomakeMessageSign'}
 let g:neomake_info_sign = {'text': 'ℹ', 'texthl': 'NeomakeInfoSign'}
 
+hi NeomakeError guibg=red
+hi NeomakeWarning guibg=blue
+
 " don't display lines that don't match errorformat
 let g:neomake_remove_invalid_entries=1
 " let g:neomake_highlight_lines = 1
@@ -2444,6 +2447,8 @@ set cpoptions="aABceFsn" " vi ComPatibility options
 nnoremap <C-LeftMouse> :call LanguageClient#textDocument_definition()<CR>
 nnoremap <C-RightMouse> :call SynStack()<CR>
 
+hi CursorLine guibg=NONE cterm=underline gui=undercurl guifg=NONE guisp=fg
+"
 " Automatic Hover
 "function! DoNothingHandler(output)
 "endfunction

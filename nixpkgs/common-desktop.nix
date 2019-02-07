@@ -155,9 +155,18 @@ in
 
     # package = pkgs.nixStable;
     # package = pkgs.nixUnstable;
+    # allowedUsers = [];
 
     buildCores=4;
+    # checkConfig = true;
+
+    # This priority propagates to build processes. 0 is the default Unix process I/O priority, 7 is the lowest
+    daemonIONiceLevel = 3;
+
+    # distributedBuilds = true;
+
     # TODO let it be set via channels ?
+    # now with nix build -f channel:nixos-unstable
     nixPath = [
       "nixos-unstable=https://github.com/nixos/nixpkgs-channels/archive/nixos-unstable.tar.gz"
       "nixos=https://github.com/nixos/nixpkgs-channels/archive/nixos-18.09.tar.gz"
@@ -181,6 +190,7 @@ in
       keep-derivations = true
       keep-failed = true
       show-trace = true
+      builders-use-substitutes = true
     '';
 
   # generated via cachix use hie-nix
@@ -191,8 +201,12 @@ in
     binaryCachePublicKeys = [
       "hie-nix.cachix.org-1:EjBSHzF6VmDnzqlldGXbi0RM3HdjfTU3yDRi9Pd0jTY="
     ];
+
     trustedUsers = [ "root" "teto" ];
 
+    # builders = [
+    #   ];
+    # maxJobs = [ 4];
     # either use --option extra-binary-caches http://hydra.nixos.org/
     # nix.binaryCaches = [ http://hydra.nixos.org/ ];
     # handy to hack/fix around

@@ -61,7 +61,7 @@ in
         customRC = ''
         " here your custom configuration goes!
         " hopefully we can soon do without it
-          let $MYVIMRC='/home/teto/.config/nvim/init.vim'
+        " let $MYVIMRC='/home/teto/.config/nvim/init.vim'
           " or alternatively
         " expand(‘<sfile>’)
         " let $MYVIMRC=fnamemodify(expand('<sfile>'), ":p")
@@ -84,7 +84,7 @@ in
              \ , 'c': ['${pkgs.cquery}/bin/cquery', '--log-file=/tmp/cq.log']
              \ }
 
-        source $MYVIMRC
+        " source $MYVIMRC
         ''
         # + optionalString ()
         # ''

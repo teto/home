@@ -120,25 +120,13 @@ let
   nix = {
     # might be useful to fetch from private repositories even in sandboxed mode ?!
     # fetchGit is run as user so no
-    envVars = {
-    };
-
-    # buildMachines = [ 
-    #   {
-    #   hostName = "iij_mptcp";
-    #   # todo move it to secrets
-    #   sshUser = "teto";
-    #   sshKey = "/home/teto/.ssh/iij_rsa";
-    #   system = "x86_64-linux";
-    #   maxJobs = 2;
-    #   speedFactor = 2;
-    #   supportedFeatures = [ "big-parallel" "kvm" ];
-    #   # mandatoryFeatures = [ "perf" ];
-    #   }
-    # ];
+    # envVars = {
+    # };
+    extraConfig = '' 
+      
+    '';
+    buildMachines = secrets.buildMachines;
     distributedBuilds = true;
-
-
   };
 
   hardware.pulseaudio = {

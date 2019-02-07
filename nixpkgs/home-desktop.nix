@@ -3,6 +3,8 @@ let
   stable = import <nixos> {}; # https://nixos.org/channels/nixos
   unstable = import <nixos-unstable> {}; # https://nixos.org/channels/nixos-unstable
 
+  terminalCommand = pkgs.termite;
+
   texliveEnv = pkgs.texlive.combine {
     # tabularx is not available
     inherit (pkgs.texlive) scheme-small cleveref latexmk bibtex algorithms cm-super
@@ -76,6 +78,7 @@ let
     gnome3.networkmanagerapplet # should 
     gnome3.defaultIconTheme # else nothing appears
     mpv
+    kitty
     libnotify
     # feh
     unstable.evince # succeed where zathura/mupdf fail
