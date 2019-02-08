@@ -6,15 +6,16 @@
 
 stdenv.mkDerivation rec {
   name = "mptcpplot";
-  version = "20180606";
+  version = "20190207";
 
   # FATAL we need to keep a git repo
-  src = /home/teto/mptcpplot;
-  # src = fetchFromGitHub {
-  #   owner = "nasa";
-  #   repo = "multipath-tcp-tools";
-  #   rev = "9efc6619910537d6705fa9cb97996ddb4dbebf7d";
-  #   sha256 = "0f5zpb555mipp7224amhf59hg61cg61nscm6qw2p2k1yqbdqzxz2";
+  # src = /home/teto/mptcpplot;
+
+  src = fetchFromGitHub {
+    owner = "nasa";
+    repo = "multipath-tcp-tools";
+    rev = "57998fd9d1b03466ad75d601cfa585a18a4b0c6c";
+    sha256 = "1wy7lkh8d1a64ihh75yq7r6hajzrwylpccxcjkzmv8np9ycdmxg6";
 
   #   # leaveDotGit = true;
   #   #  deepClone = true;
@@ -22,7 +23,7 @@ stdenv.mkDerivation rec {
   #   # dvlp branch => ne compile pas
   #   # rev = "19ef5c6ecf3e25844a53d2980e0cb9aea8841b34";
   #   # sha256 = "0ii78gna06gkkkw3qb774lfxxdh478ab8qligyglmiy6hxl4w00k";
-  # };
+  };
 
   setSourceRoot = "export sourceRoot=$(echo */network-traffic-analysis-tools)";
   # sourceRoot="*/network-traffic-analysis-tools";

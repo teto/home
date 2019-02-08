@@ -38,10 +38,13 @@ buildLinux (rec {
 
     # ref = "dbc16ee030d76df43d11c3de4cc084c61060f13b";
     # ref = "993605d4ee781311249b60dde267d2200d80c805";
+    # 
+      # 
     src = builtins.fetchGit { 
-      url = "ssh://git@github.com/teto/mptcp.git";
-      # url = https://github.com/teto/mptcp.git;
+      # url = "ssh://git@github.com/teto/mptcp.git";
+      url = https://github.com/teto/mptcp.git;
       ref = "trunk_v8"; 
+      # sha256= "00000000000000000000000000000000";
     };
 # # url The URL of the repo. 
 # # name The name of the directory the repo should be exported to in the store. Defaults to the basename of the URL. 

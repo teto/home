@@ -1167,11 +1167,10 @@ let g:neomake_place_signs=1
 
 let g:neomake_python_mypy_exe = g:python3_host_prog
 let g:neomake_python_mypy_args = ['-m', 'mypy'] 
+"
+" let g:neomake_python_mypymatt_maker = neomake#makers#ft#python#mypy()
 " + neomake#makers#ft#python#mypy().args
 
-" Tuto to configure haskell on neovim
-" https://mendo.zone/fun/neovim-setup-haskell/
-" by default ghc-mod, hlint, and hdevtools
 " let g:neomake_haskell_enabled_makers=[]
 
 
@@ -1221,8 +1220,8 @@ let g:neomake_warning_sign = {'text': '⚠ ', 'texthl': 'NeomakeWarningSign'}
 " let g:neomake_message_sign = {'text': '➤', 'texthl': 'NeomakeMessageSign'}
 let g:neomake_info_sign = {'text': 'ℹ', 'texthl': 'NeomakeInfoSign'}
 
-hi NeomakeError guibg=red
-hi NeomakeWarning guibg=blue
+hi NeomakeError guibg=red gui=undercurl
+hi NeomakeWarning guibg=blue  gui=undercurl
 
 " don't display lines that don't match errorformat
 let g:neomake_remove_invalid_entries=1
@@ -1248,12 +1247,24 @@ let g:neomake_error_highlight = 'NeomakePerso'
 " todo only if neomake loaded
 call neomake#configure#automake('w')
 
-" augroup my_neomake
-"     au!
+" func update_mypy_maker
+  " Hook into NeomakeJobInit.
+" function! s:NeomakeTestJobInit(context) abort
+"   AssertEqual keys(a:context), ['jobinfo']
 
-"     " Run linting when writing filg
-"     autocmd BufWritePost * Neomake
-"     autocmd User NeomakeJobFinished call OnNeomakeFinished()
+"   let jobinfo = a:context.jobinfo
+"   AssertEqual jobinfo.maker.name, 'mypy-matt'
+
+"   " argv can be a list or string.
+"   if type(jobinfo.argv) == type([])
+"     let jobinfo.argv = ['nice', '-n18'] + jobinfo.argv
+"   else
+"     let jobinfo.argv = 'nice -n 18 '.jobinfo.argv
+"   endif
+" endfunction
+" augroup neomake_tests
+"     au User NeomakeJobInit call s:NeomakeTestJobInit(g:neomake_hook_context)
+"     " autocmd User NeomakeJobFinished call OnNeomakeFinished()
 " augroup END
 " }}}
 " Airline {{{
@@ -2491,3 +2502,10 @@ hi CursorLine guibg=NONE cterm=underline gui=underline guifg=NONE guisp=fg
 " But if you need it for other files as well, you may just start it
 " forcefully by requiring it
 " let hc=remote#host#Require('haskell')
+
+function! UpdatePythonHost(prog)
+  let g:python3_host_prog = a:prog
+  " Update mypy as well
+  let g:neomake_python_mypy_exe = g:python3_host_prog
+endfunc
+
