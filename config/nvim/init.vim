@@ -2507,5 +2507,6 @@ function! UpdatePythonHost(prog)
   let g:python3_host_prog = a:prog
   " Update mypy as well
   let g:neomake_python_mypy_exe = g:python3_host_prog
+  let g:LanguageClient_serverCommands.python = [ fnamemodify( g:python3_host_prog, ':p:h').'/pyls', '--log-file' , expand('~/lsp_python.log')]
 endfunc
 
