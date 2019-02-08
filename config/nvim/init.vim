@@ -2447,7 +2447,7 @@ set cpoptions="aABceFsn" " vi ComPatibility options
 nnoremap <C-LeftMouse> :call LanguageClient#textDocument_definition()<CR>
 nnoremap <C-RightMouse> :call SynStack()<CR>
 
-hi CursorLine guibg=NONE cterm=underline gui=undercurl guifg=NONE guisp=fg
+hi CursorLine guibg=NONE cterm=underline gui=underline guifg=NONE guisp=fg
 "
 " Automatic Hover
 "function! DoNothingHandler(output)
