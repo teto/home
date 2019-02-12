@@ -30,6 +30,15 @@ self: super:
 
   # neovim-unwrapped = self.neovim-unwrapped-master;
 
+  neovim-test = super.neovim.override {
+          # extraPython3Packages withPython3
+          # extraPythonPackages withPython
+          # withNodeJs withRuby 
+          viAlias=false;
+          vimAlias=true;
+          # configure;
+  };
+
 
   # TODO do a version with clang
   neovim-dev = (super.pkgs.neovim-unwrapped.override  {
@@ -51,7 +60,7 @@ self: super:
     '';
   });
 
-  neovim-dev-clang = (self.neovim-dev.override { 
+  neovim-dev-clang = (self.neovim-dev.override {
     stdenv = super.clangStdenv;
   }).overrideAttrs(oa:{
     shellHook = oa.shellHook + ''

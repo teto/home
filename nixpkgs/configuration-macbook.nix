@@ -122,9 +122,8 @@ let
     # fetchGit is run as user so no
     # envVars = {
     # };
-    extraConfig = '' 
-      
-    '';
+    # extraConfig = ''
+    # '';
     buildMachines = secrets.buildMachines;
     distributedBuilds = true;
   };

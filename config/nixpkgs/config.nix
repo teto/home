@@ -14,7 +14,7 @@
       nur = import (builtins.fetchTarball {
         # url = "https://github.com/nix-community/NUR/archive/master.tar.gz";
         url = "https://github.com/nix-community/NUR/archive/84c7b0826bf0050b3851bef3252724c43f6736a7.tar.gz";
-        sha256 = "04386gzgl8y555b3lkz9aiw9xsldfg4zmzp930m62qw8zbrvrshd"; 
+        sha256 = "0cgsgfszx9zarlqyp4l1dxzr1xq4w8yap1g8k59rl2mzimdbk644"; 
       }) {
         inherit pkgs;
       };

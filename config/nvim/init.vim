@@ -162,7 +162,7 @@ Plug 'junegunn/limelight.vim' " highlights
 Plug 'calvinchengx/vim-aftercolors' " load after/colors
 " Plug 'ntpeters/vim-better-whitespace' " StripWhitespace care it stole my
 " leader
-" Plug 'bronson/vim-trailing-whitespace' " :FixTrailingWhitespace
+Plug 'bronson/vim-trailing-whitespace' " :FixTrailingWhitespace
 " Plug 'timeyyy/orchestra.nvim' " to play some music on
 " Plug 'timeyyy/clackclack.symphony' " data to play with orchestra.vim
 " Plug 'tpope/vim-scriptease' " Adds command such as :Messages
