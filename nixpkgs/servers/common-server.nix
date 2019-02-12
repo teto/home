@@ -9,6 +9,5 @@
 
   environment.systemPackages = with pkgs; [
     host.dnsutils
-    tshark
   ];
 }

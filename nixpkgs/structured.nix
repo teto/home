@@ -120,15 +120,15 @@ with libk;
   kvmConfigStructured = {
     # all the VIRTIO that appears in "selected by" when you open
     # make menuconfig
+    PCI = yes;
     VOP = option no;
     SCIF_BUS = option no;
     CAIF = option no; # stands for "Communication CPU to Application CPU Interface"
     INTEL_MIC_CARD = option  yes;
     REMOTEPROC = option yes;
-    # PCI y
     # VIRTIO_MENU y
 
-    VIRTIO            = mkForce yes;
+    VIRTIO            = yes;
     VIRTIO_PCI        = yes;
     VIRTIO_PCI_LEGACY = yes;
     VIRTIO_BALLOON    = yes;
@@ -136,10 +136,9 @@ with libk;
     VIRTIO_MMIO       = yes;
     # VIRTIO_MMIO = no;
     VIRTIO_BLK        = yes;
-    VIRTIO_NET        = module;
+    VIRTIO_NET        = yes;
     RPMSG_VIRTIO      = option yes;
     VIRTIO_CONSOLE    = yes;
-    NET_9P_VIRTIO = option yes;
 
       HW_RANDOM_VIRTIO     = yes;
       # VIRTIO_MMIO_CMDLINE_DEVICES
@@ -178,7 +177,7 @@ with libk;
       INOTIFY_USER         = yes;
       SIGNALFD             = yes;
       TIMERFD              = yes;
-          EPOLL            = yes;
+      EPOLL                = yes;
       CRYPTO_SHA256        = yes;
       CRYPTO_HMAC          = yes;
       TMPFS_POSIX_ACL      = yes;
@@ -189,17 +188,17 @@ with libk;
 
       # for qemu/libvirt shared folders
       NET_9P = yes;
-      # generates 
       # repeated question:   9P Virtio Transport at /nix/store/l6m0lgcrls587pz0i644jhfjk6lyj55s-generate-config.pl line 8
       "9P_FS" = yes;
       "9P_VIRTIO" = option yes;
       NET_9P_DEBUG = yes;
 
+      NET_9P_VIRTIO = yes; # depends on VIRTIO
       # POSIX might slow down the whole thing
       "9P_FS_POSIX_ACL" = yes;
 
-      # unsur 
-      # 9P_FS_SECURITY
+      # to be able to use capabilities on shared folders
+      "9P_FS_SECURITY" = yes;
       # 9P_FSCACHE
     };
 
@@ -277,6 +276,9 @@ with libk;
       # NET_DROP_MONITOR = yes;
     };
 
+    # if not set it is converted to  https://lwn.net/Articles/434833/
+    # CONSOLE_LOGLEVEL_DEFAULT=7
+    # CONFIG_MESSAGE_LOGLEVEL_DEFAULT=4
     debugConfigStructured = {
       GDB_SCRIPTS         = yes;
       PRINTK_TIMES        = yes;
@@ -293,5 +295,8 @@ with libk;
     persoConfig = {
       # netling debug/diagnostic
       NETLINK_DIAG = yes;
+
+      # increase ring kernel buffer size
+      LOG_BUF_SHIFT  = freeform 22;
     };
   }

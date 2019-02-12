@@ -47,15 +47,22 @@ self: prev:
         executableHaskellDepends = [ prev.pkgs.jupyter ];
       });
 
+      "netlink-hs" = hprev.overrideAttrs (oa: {
+
+        src = prev.fetchFromGitHub {
+          owner = "ongy";
+          repo = "netlink-hs";
+          rev = "8e7a285f7e4cee0a7f908e431559c87c2f228783";
+          sha256 = "00000000000000000000000000000000";
+        };
+      });
 
       # TODO should generate it from the cabal file
-      netlink-pm = let 
-        # stack2nix 
-        # cabal2nix
-        orig = hprev.callPackage ./pkgs/netlink-pm-haskell.nix {};
-      in
-        orig
-        ;
+      # netlink-pm = let 
+      #   orig = hprev.callPackage ./pkgs/netlink-pm-haskell.nix {};
+      # in
+      #   orig
+      #   ;
 
     };
   };
