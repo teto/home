@@ -79,26 +79,13 @@ rec {
           # };
           propagatedBuildInputs = oldAttrs.propagatedBuildInputs ++ [ pythonself.markdown];
         });
-        # pandas = super.pkgs.pythonPackages.pandas.overrideAttrs {
-        #   doCheck = false;
-        # };
-      # };
+
+        pandas = pythonsuper.pandas.overrideAttrs (oa: {
+          doCheck = false;
+        });
     };
   };
 
   python3Packages = python3.pkgs;
-
-  # alot = super.alot.overrideAttrs (oldAttrs: {
-  #   name = "alot-exp";
-  #   version = "0.9-dev";
-  #   src = super.fetchFromGitHub {
-  #     owner = "pazz";
-  #     repo = "alot";
-  #     rev = "6bb18fa97c78b3cb1fcb60ce5d850602b55e358f";
-  #     sha256 = "1l8b32ly0fvzwsy3f3ywwi0plckm31y269xxckmgi02sdwisq1ah";
-  #   };
-  #   # disabled = false;
-  # });
-
 }
 

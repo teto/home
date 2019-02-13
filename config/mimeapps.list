@@ -32,3 +32,4 @@ text/x-patch=sublime_text.desktop;
 text/x-chdr=sublime_text.desktop;
 text/plain=sublime_text.desktop;feh.desktop;zathura.desktop;sxiv.desktop;org.gnome.FileRoller.desktop;
 application/binary=sublime_text.desktop;
+application/pdf=org.pwmt.zathura-pdf-mupdf.desktop

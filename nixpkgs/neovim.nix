@@ -33,7 +33,7 @@ in
     #     };
     # };
 
-    package = pkgs.neovim-unwrapped-float;
+    # package = pkgs.neovim-unwrapped-float;
 
     # hopefully these can be added automatically once I use vim_configurable
     extraPython3Packages = ps: with ps; [
@@ -57,25 +57,21 @@ in
     # I would need to get access to 
     # let g:neomake_python_mypy_maker.exe = 
     # let g:gutentags_ctags_executable_haskell = '${pkgs.haskell.lib.dontCheck pkgs.haskellPackages.hasktags}/bin/hasktags'
+    # let g:deoplete#sources#clang#libclang_path='${pkgs.llvmPackages.libclang}'
     configure = {
         customRC = ''
         " here your custom configuration goes!
-        " hopefully we can soon do without it
-        " let $MYVIMRC='/home/teto/.config/nvim/init.vim'
-          " or alternatively
-        " expand(‘<sfile>’)
         " let $MYVIMRC=fnamemodify(expand('<sfile>'), ":p")
 
+
+          " always see at least 10 lines
+          set scrolloff=10
 
         " Failed to start language server: No such file or directory: 'pyls'
         " todo do the same for pyls/vimtex etc
         let g:vimtex_compiler_latexmk = {}
         " latexmk is not in combined.small/basic
         " vimtex won't let us setup paths to bibtex etc, we can do it in .latexmk ?
-
-        let g:deoplete#sources#clang#libclang_path='${pkgs.llvmPackages.libclang}'
-
-
 
         let g:LanguageClient_serverCommands = {
              \ 'python': [ fnamemodify( g:python3_host_prog, ':p:h').'/pyls', '--log-file' , expand('~/lsp_python.log')]
@@ -86,12 +82,6 @@ in
 
         " source $MYVIMRC
         ''
-        # + optionalString ()
-        # ''
-        # call neomake#configure#automake('w')
-        #   ''
-        
-        
         ;
 
         # using this breaks my userplugins
