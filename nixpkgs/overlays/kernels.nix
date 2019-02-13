@@ -34,13 +34,14 @@ let
 
   # see wiki
   addMenuConfig = kernel:
-  kernel.overrideAttrs (o: {
+    # kernel;
+    (kernel.overrideAttrs (o: {
     nativeBuildInputs=o.nativeBuildInputs ++ [ prev.pkgconfig prev.qt5.qtbase prev.ncurses ];
     shellHook = o.shellHook + ''
       echo "make menuconfig KCONFIG_CONFIG=$PWD/build/.config"
       echo "make menuconfig KCONFIG_CONFIG=$PWD/build/.config"
     '';
-  });
+  }));
 
     # extraConfig = mptcpKernelExtraConfig + localConfig 
     #  + bpfConfig + net9pConfig + mininetConfig + noChelsio + ovsConfig;
@@ -169,7 +170,12 @@ in rec {
 
 
 
-  linux_mptcp_trunk_raw = addMenuConfig (prev.callPackage ./pkgs/kernels/linux-mptcp-trunk.nix {
+    # strange: if I add this I get
+    # addMenuConfig
+#Failed assertions:
+#- CONFIG_DEVTMPFS is not enabled!
+#- CONFIG_CGROUPS is not enabled!
+  linux_mptcp_trunk_raw = (addMenuConfig (prev.callPackage ./pkgs/kernels/linux-mptcp-trunk.nix {
 
     kernelPatches = prev.linux_4_19.kernelPatches;
     # does not seem true anymore
@@ -180,9 +186,7 @@ in rec {
     # modDirVersion="4.19.0";
 
     structuredExtraConfig = defaultConfigStructured;
-    # extraConfig = mptcpKernelExtraConfig + localConfig 
-    #  + bpfConfig + net9pConfig + mininetConfig + noChelsio + ovsConfig;
-  });
+  }));
 
   # see https://nixos.wiki/wiki/Linux_Kernel
   linux_mptcp_trunk = (prev.linuxManualConfig {

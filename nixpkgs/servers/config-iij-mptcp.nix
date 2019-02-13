@@ -10,7 +10,9 @@ in
       ./common-server.nix
       ../modules/openssh.nix
       # ../modules/nextcloud.nix
-      ../modules/mptcp.nix
+
+      # wait until it gets upstreamd o/
+      # ../modules/mptcp.nix
       ../account-root.nix
     ];
 

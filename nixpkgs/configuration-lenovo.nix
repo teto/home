@@ -24,7 +24,7 @@ let
     # for user teto
     ./extraTools.nix
     # ./desktopPkgs.nix
-  ] 
+  ]
   # while developing
   # builtins.pathExists (<nixpkgs> + ./modules/programs/mininet.nix))
   # ++ lib.optionals (false)
@@ -45,7 +45,7 @@ let
   # it apparently still is quite an important thing to have
   boot.devSize = "5g";
 
-  # TODO look at 
+  # TODO look at
   # boot.specialFileSystems.
 
   # necessary for qemu  to prevent
@@ -248,7 +248,6 @@ let
     pathManager = "netlink";
   };
 
-
   # once available
   # services.greenclip.enable = true;
 
@@ -264,7 +263,6 @@ let
     (import ./basetools.nix { inherit pkgs;})
     # strongswan # to get ipsec in path
     # cups-pk-helper # to add printer through gnome control center
-    # 
     ++ [
     firefox
       ]
