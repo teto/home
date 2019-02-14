@@ -1,4 +1,4 @@
-{ stdenv, buildPythonPackage, fetchFromGitHub, rofi, papis, fetchPypi}:
+{ stdenv, buildPythonPackage, fetchFromGitHub, rofi, papis, python-rofi, fetchPypi}:
 buildPythonPackage rec {
   pname = "papis-python-rofi";
   version = "1.0.2";
@@ -14,7 +14,7 @@ buildPythonPackage rec {
   #   sha256 = "0iy6r29ncpca7v4ibnig2mh93nkrqvy4nhmzkq6flxmryghfzhwn";
   # };
 
-  buildInputs = [ rofi papis ];
+  buildInputs = [ rofi papis python-rofi ];
 
   doCheck = false;
 

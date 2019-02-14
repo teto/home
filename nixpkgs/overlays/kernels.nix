@@ -175,7 +175,9 @@ in rec {
 #Failed assertions:
 #- CONFIG_DEVTMPFS is not enabled!
 #- CONFIG_CGROUPS is not enabled!
-  linux_mptcp_trunk_raw = (addMenuConfig (prev.callPackage ./pkgs/kernels/linux-mptcp-trunk.nix {
+linux_mptcp_trunk_raw = (
+  # addMenuConfig
+    (prev.callPackage ./pkgs/kernels/linux-mptcp-trunk.nix {
 
     kernelPatches = prev.linux_4_19.kernelPatches;
     # does not seem true anymore

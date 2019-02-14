@@ -75,7 +75,7 @@ final: prev:
 
   mptcpnumerics = prev.python3Packages.callPackage ./mptcpnumerics.nix {};
 
-  papis-rofi = prev.python3Packages.callPackage ./papis-rofi.nix {};
+  papis-python-rofi = prev.python3Packages.callPackage ./papis-rofi.nix {};
 
   rt-tests = prev.callPackage ./rt-test.nix {};
 

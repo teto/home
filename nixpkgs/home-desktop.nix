@@ -93,6 +93,7 @@ let
     mupdf.bin # evince does better too
     # mdp # markdown CLI presenter
     # gnome3.gnome_control_center
+    papis # library manager
     unstable.gnome3.gnome-calculator
     pass
     qtpass
