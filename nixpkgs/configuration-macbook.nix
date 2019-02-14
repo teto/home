@@ -34,10 +34,10 @@ let
     grub.device = "/dev/sda";
   };
 
-  boot.blacklistedKernelModules = [ "wl" ];
+  # boot.blacklistedKernelModules = [ "wl" ];
 
   # boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_mptcp_with_netlink;
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages;
   # boot.kernelPackages = pkgs.linuxPackages_4_14;
 # boot.kernelPackages = pkgs.linuxPackagesFor pkgs.my_lenovo_kernel;
 
@@ -145,6 +145,11 @@ let
     #     cp -a ${pulseaudio-modules-bt}/* $out/
     #   '';
     # });
+  };
+
+  services.xl2tpd = {
+    enable = true;
+    # serverIP =
   };
 
   services.strongswan = {

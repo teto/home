@@ -330,6 +330,8 @@ text/*; less '%s';
 image/*; eog '%s';
 
     text/html;  ${pkgs.w3m}/bin/w3m -dump -o document_charset=%{charset} '%s'; nametemplate=%s.html; copiousoutput
+    application/*; xdg-open "%s"
+    */*; xdg-open "%s"
   '';
 
   programs.lesspipe.enable = true;
