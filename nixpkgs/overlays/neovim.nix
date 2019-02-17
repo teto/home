@@ -59,6 +59,24 @@ in
           # configure;
   };
 
+  neovimHaskellConfig = {
+
+    withHaskell = true;
+    # haskellPackages = [
+          # hie
+    #   haskellPackages.haskdogs # seems to build on hasktags/ recursively import things
+    #   haskellPackages.hasktags
+    #   haskellPackages.nvim-hs
+    #   haskellPackages.nvim-hs-ghcid
+    # ];
+    # customRC = ''
+    #     let g:LanguageClient_serverCommands = {
+    #       'haskell': ['hie', '--lsp', '-d', '--logfile', '/tmp/lsp_haskell.log' ]
+    #     }
+    #   '';
+
+  };
+
   neovimDefaultConfig = {
         withPython3 = true;
         withPython = false;

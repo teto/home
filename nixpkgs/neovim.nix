@@ -39,7 +39,7 @@ in
     extraPython3Packages = ps: with ps; [
       pandas
       jedi
-      urllib3 
+      urllib3
       # pygments # for pygmentize and minted in latex
       mypy
       pyls-mypy # on le desactive sinon il genere des

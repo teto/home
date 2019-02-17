@@ -153,10 +153,11 @@ in
     ]
    ;
 
+  # test
   programs.neovim = import ./neovim.nix {
-    inherit pkgs lib 
+    inherit pkgs lib
     # texliveEnv
-    ; 
+    ;
   };
 
   # tray is enabled by default

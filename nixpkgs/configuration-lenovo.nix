@@ -16,6 +16,11 @@ let
     ./common-desktop.nix
     ./modules/network-manager.nix
     ./modules/libvirtd.nix
+    ({ config, lib, ... }:
+    {
+      boot.enforceRequiredConfig = true;
+
+    })
     # ./modules/mptcp.nix
     # ./modules/owamp.nix
 
@@ -23,7 +28,6 @@ let
 
     # for user teto
     ./extraTools.nix
-    # ./desktopPkgs.nix
   ]
   # while developing
   # builtins.pathExists (<nixpkgs> + ./modules/programs/mininet.nix))

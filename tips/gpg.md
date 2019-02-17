@@ -13,3 +13,8 @@ gpg --list-keys
 gpg-agent --debug-all --no-detach --log-file
 
 gpg-agent.conf contains:
+
+
+# To trust a key:
+gpg --edit-key peerKey.asc
+gpg > trust

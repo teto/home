@@ -22,7 +22,6 @@ in
     ./modules/xserver.nix
     ./modules/wireshark.nix
     ./modules/wifi.nix
-    # ./desktopPkgs.nix
     # ./modules/tor.nix
 
     # only if available
@@ -96,15 +95,25 @@ in
         noto-fonts-cjk # asiatic
         # nerdfonts
         # corefonts # microsoft fonts  UNFREE 
+        font-awesome_5
+        source-code-pro
         dejavu_fonts
         # Adobe Source Han Sans
         sourceHanSansPackages.japanese
         fira-code-symbols # for ligatures in neovim-gtk
         # noto-fonts
       ];
+
       fontconfig= {
         enable=true;
         antialias=true; # some fonts can be disgusting else
+        allowBitmaps = false; # ugly
+        includeUserConf = true;
+        defaultFonts = {
+          # monospace = [ "" ];
+          # serif = [ "" ];
+          # sansSerif = 
+        };
       };
    };
 

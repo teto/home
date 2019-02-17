@@ -1361,7 +1361,7 @@ let g:airline#extensions#whitespace#enabled = 0
 let g:airline#extensions#whitespace#mixed_indent_algo = 2
 
 let g:airline#extensions#obsession#enabled = 1
-let g:airline#extensions#obsession#indicator_text = '$'
+let g:airline#extensions#obsession#indicator_text = ''
 "}}}
 
 " let g:airline#extensions#whitespace#checks = [ 'indent', 'trailing', 'long' ]
