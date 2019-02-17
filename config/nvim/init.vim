@@ -1165,8 +1165,9 @@ let g:neomake_airline = 1
 let g:neomake_echo_current_error = 1
 let g:neomake_place_signs=1
 
-let g:neomake_python_mypy_exe = g:python3_host_prog
-let g:neomake_python_mypy_args = ['-m', 'mypy'] 
+" let g:neomake_python_mypy_exe = g:python3_host_prog
+let g:neomake_python_mypy_exe = fnamemodify( g:python3_host_prog, ':p:h').'/mypy'
+" let g:neomake_python_mypy_args = ['-m', 'mypy'] 
 "
 " let g:neomake_python_mypymatt_maker = neomake#makers#ft#python#mypy()
 " + neomake#makers#ft#python#mypy().args
@@ -2013,7 +2014,7 @@ silent! call remove(g:LanguageClient_serverCommands, 'cpp')
 silent! call remove(g:LanguageClient_serverCommands, 'c')
 
 " we use deoplete instead !!
-set completefunc=LanguageClient#complete
+" set completefunc=LanguageClient#complete
 " this should be done only for filetypes supported by LanguageClient !!!
 set formatexpr=LanguageClient_textDocument_rangeFormatting()
 
@@ -2021,12 +2022,11 @@ set formatexpr=LanguageClient_textDocument_rangeFormatting()
 " if get(g:, 'LanguageClient_loaded', 0)
   " nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
 
-  nnoremap <silent> gh :call LanguageClient#textDocument_hover()<CR>
-  nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
-  nnoremap <silent> gr :call LanguageClient#textDocument_references()<CR>
-  nnoremap <silent> gs :call LanguageClient#textDocument_documentSymbol()<CR>
+  nnoremap <silent> lh :call LanguageClient#textDocument_hover()<CR>
+  nnoremap <silent> ld :call LanguageClient#textDocument_definition()<CR>
+  nnoremap <silent> lr :call LanguageClient#textDocument_references()<CR>
+  nnoremap <silent> ls :call LanguageClient#textDocument_documentSymbol()<CR>
   nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
-  nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
 " endif
 "}}}
 " intero {{{
@@ -2506,7 +2506,7 @@ hi CursorLine guibg=NONE cterm=underline gui=underline guifg=NONE guisp=fg
 function! UpdatePythonHost(prog)
   let g:python3_host_prog = a:prog
   " Update mypy as well
-  let g:neomake_python_mypy_exe = g:python3_host_prog
+  let g:neomake_python_mypy_exe = fnamemodify( g:python3_host_prog, ':p:h').'/mypy'
   let g:LanguageClient_serverCommands.python = [ fnamemodify( g:python3_host_prog, ':p:h').'/pyls', '--log-file' , expand('~/lsp_python.log')]
 endfunc
 

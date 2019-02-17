@@ -97,9 +97,4 @@ in
         };
       };
 
-    # extraConfig = ''
-    #   " TODO set different paths accordingly, to language server especially
-    #   let g:clangd_binary = '${pkgs.clang}'
-    #   # let g:pyls = '${pkgs.clang}'
-    #   '' ;
 }
