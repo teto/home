@@ -93,12 +93,15 @@ in
         " vimtex won't let us setup paths to bibtex etc, we can do it in .latexmk ?
 
         let g:LanguageClient_serverCommands = {
-             \ 'python': [ fnamemodify( g:python3_host_prog, ':p:h').'/pyls', '--log-file' , expand('~/lsp_python.log')]
-             \ , 'haskell': ['hie', '--lsp', '-d', '--logfile', '/tmp/lsp_haskell.log' ]
+             \ 'python': [ fnamemodify( g:python3_host_prog, ':p:h').'/pyls', '-vv', '--log-file' , '/tmp/lsp_python.log']
+             \ , 'haskell': ['hie-wrapper', '--lsp', '-d', '--vomit', '--logfile', '/tmp/lsp_haskell.log' ]
              \ , 'cpp': ['${super.pkgs.cquery}/bin/cquery', '--log-file=/tmp/cq.log']
              \ , 'c': ['${super.pkgs.cquery}/bin/cquery', '--log-file=/tmp/cq.log']
              \ }
 
+        let g:neomake_python_mypy_exe = fnamemodify( g:python3_host_prog, ':p:h').'/mypy'
+
+        autocmd BufReadPost *.pdf silent %!${self.pkgs.xpdf}/bin/pdftotext -nopgbrk -layout -q -eol unix "%" - | fmt -w78
         ''
         ;
 

@@ -17,6 +17,8 @@ let
     (builtins.readFile ../config/i3/config.colors)
   ];
 
+  neovim-xp = pkgs.wrapNeovim pkgs.neovim-unwrapped-master (pkgs.neovimDefaultConfig);
+
   devPkgs = with pkgs; [
     # cabal-install
     # cabal2nix
@@ -32,9 +34,10 @@ let
     gitAndTools.git-extras
     gitAndTools.git-crypt
     # mypy # TODO move it to neovim dependency (but need to fetch the pythonEnv path then)
-    nox # helps with reviewing and to install files
+    # nox # replaced by nix-review ?
     # ccache # breaks some builds ?
     ncurses.dev # for infocmp
+    neovim-xp
     neovim-remote
     nix-prefetch-scripts
     nix-index
@@ -153,12 +156,14 @@ in
     ]
    ;
 
-  # test
-  programs.neovim = import ./neovim.nix {
-    inherit pkgs lib
-    # texliveEnv
-    ;
-  };
+   # with my version 
+  # programs.neovim = pkgs.neovimDefaultConfig;
+  # # test
+  # programs.neovim = import ./neovim.nix {
+  #   inherit pkgs lib
+  #   # texliveEnv
+  #   ;
+  # };
 
   # tray is enabled by default
   services.udiskie = {

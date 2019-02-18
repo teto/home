@@ -182,11 +182,11 @@ rec {
       '';
   };
 
-  programs.neovim = {
-    enable = true;
-    withPython3 = true;
-    withPython = false;
-  };
+  # programs.neovim = {
+  #   enable = true;
+  #   withPython3 = true;
+  #   withPython = false;
+  # };
 
   # home.activation.setXDGbrowser = dagEntryBefore [ "linkGeneration" ] ''
   # xdg-settings set default-web-browser firefox.desktop

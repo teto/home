@@ -215,7 +215,6 @@ Plug 'sjl/gundo.vim' " :GundoShow/Toggle to redo changes
 "
 " }}}
 " Plug 'beloglazov/vim-online-thesaurus' " thesaurus => dico dde synonymes
-" Plug 'mattboehm/vim-unstack'  " to see a
 " Plug 'KabbAmine/vCoolor.vim', { 'on': 'VCooler' } " RGBA color picker
 " Plug 'arakashic/chromatica.nvim', { 'for': 'cpp' } " semantic color syntax
 
@@ -326,7 +325,6 @@ Plug 'tpope/vim-rhubarb' " github support in fugitive, use |i_CTRL-X_CTRL-O|
 Plug 'mhinz/vim-randomtag', { 'on': 'Random' } " Adds a :Random function that launches help at random
 Plug 'majutsushi/tagbar' " , {'on': 'TagbarToggle'} disabled lazyloading else it would not work with statusline
 Plug 'machakann/vim-highlightedyank' " highlit
-" Plug 'haya14busa/vim-operator-flashy' " Flash selection on copy
 
 
 "  fuzzers {{{2
@@ -345,6 +343,7 @@ Plug 'junegunn/fzf.vim' " defines :Files / :Commits for FZF
 
 
 " , { 'for': 'markdown', 'do': function('BuildComposer') } " Needs rust, cargo, plenty of things :help markdown-composer
+" move to nix
 Plug 'euclio/vim-markdown-composer'
 Plug 'Rykka/riv.vim', {'for': 'rst'}
 Plug 'Rykka/InstantRst', {'for': 'rst'} " rst live preview with :InstantRst,
@@ -364,6 +363,7 @@ Plug 'teto/QuickFixCurrentNumber' " use :Cnr :Cgo instead of :cnext etc...
 Plug 'vim-scripts/ingo-library' " DEPENDANCY of QuickFixCurrentNumber
 "Plug 'tomtom/quickfixsigns_vim'
 Plug 'nacitar/a.vim' " :A
+Plug 'mhinz/vim-tree' " test
 Plug 'mhinz/vim-rfc', { 'on': 'RFC' } " requires nokigiri gem
 Plug 'vim-scripts/rfc-syntax', { 'for': 'rfc' } " optional syntax highlighting for RFC files
 " can show a list of unicode characeters, with their name  :UnicodeTable etc...
@@ -378,9 +378,6 @@ Plug 'mhinz/vim-grepper' " , { 'on': 'Grepper'}
 Plug 'neomake/neomake' " async build for neovim
 " Plug 'w0rp/ale' 
 " Plug 'rhysd/github-complete.vim' " provides github user/repo autocompletion after @ and #
-" VCS related {{{
-" Plug 'rhysd/committia.vim' " ne marche pas en rebase ?
-" }}}
 
 " does not work seems to be better ones
 Plug 'vasconcelloslf/vim-interestingwords' " highlight the words you choose <leader>k (does not work in neovim)
@@ -1166,7 +1163,7 @@ let g:neomake_echo_current_error = 1
 let g:neomake_place_signs=1
 
 " let g:neomake_python_mypy_exe = g:python3_host_prog
-let g:neomake_python_mypy_exe = fnamemodify( g:python3_host_prog, ':p:h').'/mypy'
+" let g:neomake_python_mypy_exe = fnamemodify( g:python3_host_prog, ':p:h').'/mypy'
 " let g:neomake_python_mypy_args = ['-m', 'mypy'] 
 "
 " let g:neomake_python_mypymatt_maker = neomake#makers#ft#python#mypy()
@@ -1996,11 +1993,6 @@ let g:LanguageClient_diagnosticsEnable=1
 " hardcoded for now
 " hie-wrapper is not available in domenkazar version
 " see $RUNTIME/rplugin/python3/LanguageClient/wrapper.sh for logging
-" \ 'rust': ['rustup', 'run', 'nightly', 'rls']
-" you can use call extend() to merge 2 dicts
-" 
-    " \ 'python': 
-  " '-v',
 " let g:LanguageClient_serverCommands.nix = ['nix-lsp']
 " https://github.com/teto/ns-3-dce/pull/6
 " best to use hie-wrapper since it will select the correct ghc
@@ -2008,13 +2000,11 @@ let g:LanguageClient_diagnosticsEnable=1
 " let g:LanguageClient_serverCommands.python = [ fnamemodify( g:python3_host_prog, ':p:h').'/pyls', '-vv', '--log-file' , '/tmp/lsp_python.log']
 " delete it ?
 " del g:LanguageClient_serverCommands.cpp = ['cquery', '--log-file=/tmp/cq.log']
-" silent unlet! g:LanguageClient_serverCommands.cpp
-" silent unlet! g:LanguageClient_serverCommands.c
 silent! call remove(g:LanguageClient_serverCommands, 'cpp')
 silent! call remove(g:LanguageClient_serverCommands, 'c')
 
 " we use deoplete instead !!
-" set completefunc=LanguageClient#complete
+set completefunc=LanguageClient#complete
 " this should be done only for filetypes supported by LanguageClient !!!
 set formatexpr=LanguageClient_textDocument_rangeFormatting()
 
@@ -2022,10 +2012,10 @@ set formatexpr=LanguageClient_textDocument_rangeFormatting()
 " if get(g:, 'LanguageClient_loaded', 0)
   " nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
 
-  nnoremap <silent> lh :call LanguageClient#textDocument_hover()<CR>
-  nnoremap <silent> ld :call LanguageClient#textDocument_definition()<CR>
-  nnoremap <silent> lr :call LanguageClient#textDocument_references()<CR>
-  nnoremap <silent> ls :call LanguageClient#textDocument_documentSymbol()<CR>
+  nnoremap <silent> ,h :call LanguageClient#textDocument_hover()<CR>
+  nnoremap <silent> ,d :call LanguageClient#textDocument_definition()<CR>
+  nnoremap <silent> ,r :call LanguageClient#textDocument_references()<CR>
+  nnoremap <silent> ,s :call LanguageClient#textDocument_documentSymbol()<CR>
   nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
 " endif
 "}}}
@@ -2310,9 +2300,6 @@ if has("nvim")
   set termguicolors
   "set shada=!,'50,<1000,s100,:0,n$XDG_CACHE_HOME/nvim/shada
   let g:netrw_home=$XDG_DATA_HOME.'/nvim'
-  "now ignored
-  " let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-  " let $NVIM_TUI_ENABLE_CURSOR_SHAPE=0
 endif
 " }}}
 " colorscheme stuff {{{

@@ -17,11 +17,6 @@ buildPythonApplication rec {
 	pname = "mptcpanalyzer";
 	version = "0.3.0";
 
-    # for testing just
-    # src = fetchPypi {
-    #   inherit pname version;
-    # };
-
     src = fetchFromGitHub {
       owner = "teto";
       repo = "mptcpanalyzer";
@@ -33,11 +28,11 @@ buildPythonApplication rec {
 
     # to build the doc sphinx
     propagatedBuildInputs = [
-      stevedore cmd2 pyperclip pandas 
+      stevedore cmd2 pyperclip pandas
       # we want gtk because qt is so annying on nixos
       (matplotlib.override { enableGtk3=true;})
       pyqt5
-      tshark 
+      tshark
     ];
 
     meta = with stdenv.lib; {
