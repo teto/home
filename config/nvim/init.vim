@@ -32,7 +32,7 @@ endif
 
 "}}}
 " Dealing with pdf {{{
-" Read-only pdf through pdftotext
+" Read-only pdf through pdftotext / arf kinda fails silently on CJK documents
 autocmd BufReadPost *.pdf silent %!pdftotext -nopgbrk -layout -q -eol unix "%" - | fmt -w78
 
 " convert all kinds of files (but pdf) to plain text
@@ -93,7 +93,7 @@ call plug#begin(s:plugdir)
 " Plug 'eagletmt/neco-ghc' " haskell completion for deoplete
 Plug 'ndmitchell/ghcid', { 'rtp': 'plugins/nvim' }
 Plug 'neovimhaskell/nvim-hs.vim' " to help with nvim-hs
-Plug 'bfredl/nvim-lspmirror'
+" Plug 'bfredl/nvim-lspmirror'
 " Plug 'bfredl/nvim-lspext' " extension
 Plug 'neomutt/neomutt.vim' " syntax file for neomutt
 Plug 'chrisbra/NrrwRgn' " to help with multi-ft files
@@ -2004,8 +2004,8 @@ let g:LanguageClient_diagnosticsEnable=1
 " let g:LanguageClient_serverCommands.nix = ['nix-lsp']
 " https://github.com/teto/ns-3-dce/pull/6
 " best to use hie-wrapper since it will select the correct ghc
-let g:LanguageClient_serverCommands.haskell = ['hie-wrapper', '--lsp', '-d', '--vomit',  '--logfile', '/tmp/lsp_haskell.log' ]
-let g:LanguageClient_serverCommands.python = [ fnamemodify( g:python3_host_prog, ':p:h').'/pyls', '--log-file' , expand('~/lsp_python.log')]
+" let g:LanguageClient_serverCommands.haskell = ['hie-wrapper', '--lsp', '-d', '--vomit',  '--logfile', '/tmp/lsp_haskell.log' ]
+" let g:LanguageClient_serverCommands.python = [ fnamemodify( g:python3_host_prog, ':p:h').'/pyls', '-vv', '--log-file' , '/tmp/lsp_python.log']
 " delete it ?
 " del g:LanguageClient_serverCommands.cpp = ['cquery', '--log-file=/tmp/cq.log']
 " silent unlet! g:LanguageClient_serverCommands.cpp
@@ -2507,6 +2507,6 @@ function! UpdatePythonHost(prog)
   let g:python3_host_prog = a:prog
   " Update mypy as well
   let g:neomake_python_mypy_exe = fnamemodify( g:python3_host_prog, ':p:h').'/mypy'
-  let g:LanguageClient_serverCommands.python = [ fnamemodify( g:python3_host_prog, ':p:h').'/pyls', '--log-file' , expand('~/lsp_python.log')]
+  " let g:LanguageClient_serverCommands.python = [ fnamemodify( g:python3_host_prog, ':p:h').'/pyls', '-vv', '--log-file' , '/tmp/lsp_python.log']
 endfunc
 

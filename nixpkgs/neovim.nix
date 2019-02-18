@@ -54,8 +54,8 @@ in
     # " let g:vimtex_compiler_latexmk.executable='${texliveEnv}/bin/latexmk'
 
     #  TODO I need to get the python env
-    # I would need to get access to 
-    # let g:neomake_python_mypy_maker.exe = 
+    # I would need to get access to
+    # let g:neomake_python_mypy_maker.exe =
     # let g:gutentags_ctags_executable_haskell = '${pkgs.haskell.lib.dontCheck pkgs.haskellPackages.hasktags}/bin/hasktags'
     # let g:deoplete#sources#clang#libclang_path='${pkgs.llvmPackages.libclang}'
     configure = {
@@ -74,13 +74,15 @@ in
         " vimtex won't let us setup paths to bibtex etc, we can do it in .latexmk ?
 
         let g:LanguageClient_serverCommands = {
-             \ 'python': [ fnamemodify( g:python3_host_prog, ':p:h').'/pyls', '--log-file' , expand('~/lsp_python.log')]
-             \ , 'haskell': ['hie', '--lsp', '-d', '--logfile', '/tmp/lsp_haskell.log' ]
+             \ 'python': [ fnamemodify( g:python3_host_prog, ':p:h').'/pyls', '-vv', '--log-file' , '/tmp/lsp_python.log']
+             \ , 'haskell': ['hie-wrapper', '--lsp', '-d', '--vomit', '--logfile', '/tmp/lsp_haskell.log' ]
              \ , 'cpp': ['${pkgs.cquery}/bin/cquery', '--log-file=/tmp/cq.log']
              \ , 'c': ['${pkgs.cquery}/bin/cquery', '--log-file=/tmp/cq.log']
              \ }
 
         " source $MYVIMRC
+
+        autocmd BufReadPost *.pdf silent %!${pkgs.xpdf}/bin/pdftotext -nopgbrk -layout -q -eol unix "%" - | fmt -w78
         ''
         ;
 

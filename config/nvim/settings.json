@@ -8,6 +8,9 @@
             },
             "pydocstyle": {
                 "enabled": false
+            },
+            "pycodestyle": {
+                "enabled": false
             }
         }
 	},

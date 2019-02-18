@@ -24,6 +24,8 @@ final: prev:
   # };
 
 
+  neovim-gtk = prev.callPackage ./neovim-gtk { };
+
   dualsub = prev.callPackage ./dualsubtitles { };
 
   # subtitles-rs = prev.subtitles-rs or (prev.callPackage ./subtitles-rs { });

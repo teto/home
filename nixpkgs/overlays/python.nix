@@ -53,13 +53,12 @@ rec {
         });
 
         # papis = pythonsuper.papis.overrideAttrs (oldAttrs: {
-        #   name = "alot-dev";
-        #   version = "0.9-dev";
+        #   version = "0.8-dev";
         #   src = super.fetchFromGitHub {
-        #     owner = "pazz";
-        #     repo = "alot";
-        #     rev = "6bb18fa97c78b3cb1fcb60ce5d850602b55e358f";
-        #     sha256 = "1l8b32ly0fvzwsy3f3ywwi0plckm31y269xxckmgi02sdwisq1ah";
+        #     owner = "papis";
+        #     repo = "papis";
+        #     rev = "11e368cf437f90ce4835f486eda8d946c84eb577";
+        #     sha256 = "0l8b32ly0fvzwsy3f3ywwi0plckm31y269xxckmgi02sdwisq2ah";
         #   };
         # });
 

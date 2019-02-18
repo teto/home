@@ -1,39 +1,14 @@
 self: super:
 let
-	# src =  builtins.filterSource (name: type: true) /home/teto/mptcpanalyzer;
   # see https://github.com/NixOS/nixpkgs/issues/29605#issuecomment-332474682
   # In lib/sources.nix we have "cleanSource = builtins.filterSource cleanSourceFilter;"
   # TODO builtins.filterSource (p: t: lib.cleanSourceFilter p t && baseNameOf p != "build")
   filter-cmake = builtins.filterSource (p: t: super.lib.cleanSourceFilter p t && baseNameOf p != "build");
 
   fetchgitLocal = super.fetchgitLocal;
-
-  # Get the commit ID for the given ref in the given repo
-  # latestGitCommit = { url, ref ? "HEAD" }:
-  #   runCommand "repo-${sanitiseName ref}-${sanitiseName url}"
-  #     {
-  #       # Avoids caching. This is a cheap operation and needs to be up-to-date
-  #       version = toString currentTime;
-  #       # Required for SSL
-  #       GIT_SSL_CAINFO = "${cacert}/etc/ssl/certs/ca-bundle.crt";
-  #       buildInputs = [ git gnused ];
-  #     }
-  #     ''
-  #       REV=$(git ls-remote "${url}" "${ref}") || exit 1
-  #       printf '"%s"' $(echo "$REV"        |
-  #                       head -n1           |
-  #                       sed -e 's/\s.*//g' ) > "$out"
-  #     '';
-  # fetchLatestGit = { url, ref ? "HEAD" }@args:
-  #   with { rev = import (latestGitCommit { inherit url ref; }); };
-  #   fetchGitHashless (removeAttrs (args // { inherit rev; }) [ "ref" ]);
 in
 rec {
 
-  # mininet = super.mininet.overrideAttrs(oa: {
-  #     src = /home/teto/mininet2;
-  # });
-  
   termite-unwrapped = super.termite-unwrapped.overrideAttrs(oa: {
     postBuild = ''
       substituteInPlace termite.terminfo \
@@ -42,6 +17,24 @@ rec {
     '';
   });
 
+        papis = super.papis.overrideAttrs (oa: {
+          version = "0.8-dev";
+          src = super.fetchFromGitHub {
+            owner = "papis";
+            repo = "papis";
+            rev = "11e368cf437f90ce4835f486eda8d946c84eb577";
+            sha256 = "1sjr9fb9mw7ib82yamg672ihj8f5bdcmc2np9jsqjqb91x3ixhzv";
+            fetchSubmodules = true;
+          };
+          patches = [];
+          # install -D misc/__khal $out/share/zsh/site-functions/__khal
+          postInstall = oa.postInstall + ''
+
+            echo $PWD
+            ls scripts/
+            install -D "scripts/shell_completion/click/papis.zsh" $out/share/zsh/site-functions/_papis
+            '';
+        });
 
   i3-local = let i3path = ~/i3; in 
   if (builtins.pathExists i3path) then
