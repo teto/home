@@ -286,6 +286,7 @@ rec {
     # tmuxinator.enable = false;
     # tmuxp
 
+    # see if we can't get https://github.com/tmux-plugins/vim-tmux-focus-events in
     # plugins = with pkgs; [
     #              tmuxPlugins.cpu
     #              {

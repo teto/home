@@ -113,7 +113,7 @@ Plug 'tweekmonster/startuptime.vim', {'on': 'StartupTime'} " see startup time pe
 Plug 'AndrewRadev/splitjoin.vim' " gS/gJ to 
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'roxma/nvim-yarp' " required for deoplete
-Plug 'roxma/vim-hug-neovim-rpc' " what is that ?
+Plug 'roxma/vim-hug-neovim-rpc' " what is that ? required for deoplete
 " Plug '~/vim-config'
 Plug '~/nvim-palette', { 'do': ':UpdateRemotePlugins' }
 Plug 'LnL7/vim-nix', {'for': 'nix'}
@@ -314,7 +314,7 @@ Plug 'wannesm/wmgraphviz.vim', {'for': 'dot'} " graphviz syntax highlighting
 Plug 'tpope/vim-commentary' "gcc to comment/gcgc does not work that well
 Plug 'teto/vim-listchars' " to cycle between different list/listchars configurations
 "Plug 'vim-voom/VOoM' " can show tex/restDown Table of Content (ToC)
-Plug 'blueyed/vim-diminactive' " disable syntax coloring on inactive splits
+" Plug 'blueyed/vim-diminactive' " disable syntax coloring on inactive splits use winhl
 "Plug 'tpope/vim-sleuth' " Dunno what it is
 "Plug 'justinmk/vim-gtfo' " ?
 Plug 'tpope/vim-fugitive' " to use with Git, VERY powerful
@@ -729,6 +729,9 @@ let g:echodoc#enable_at_startup=1
 
 set shiftround    " round indent to multiple of 'shiftwidth'
 
+" window-local
+set winhl=NormalNC:CursorColumn
+
 " auto reload vim config on save
 " Watch for changes to vimrc
 augroup myvimrc
@@ -1019,7 +1022,7 @@ nnoremap <Leader>/ :set hlsearch! hls?<CR> " toggle search highlighting
 " Deoplete {{{
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_ignore_case = 1
-let g:deoplete#disable_auto_complete = 0
+let g:deoplete#disable_auto_complete = 1
 let g:deoplete#enable_debug = 1
 let g:deoplete#auto_complete_delay=0
 
@@ -1990,21 +1993,16 @@ let g:LanguageClient_loggingLevel = 'INFO'
 " let g:LanguageClient_hoverPreview=
 let g:LanguageClient_completionPreferTextEdit=1
 let g:LanguageClient_diagnosticsEnable=1
-" hardcoded for now
-" hie-wrapper is not available in domenkazar version
 " see $RUNTIME/rplugin/python3/LanguageClient/wrapper.sh for logging
 " let g:LanguageClient_serverCommands.nix = ['nix-lsp']
-" https://github.com/teto/ns-3-dce/pull/6
-" best to use hie-wrapper since it will select the correct ghc
-" let g:LanguageClient_serverCommands.haskell = ['hie-wrapper', '--lsp', '-d', '--vomit',  '--logfile', '/tmp/lsp_haskell.log' ]
-" let g:LanguageClient_serverCommands.python = [ fnamemodify( g:python3_host_prog, ':p:h').'/pyls', '-vv', '--log-file' , '/tmp/lsp_python.log']
-" delete it ?
 " del g:LanguageClient_serverCommands.cpp = ['cquery', '--log-file=/tmp/cq.log']
 silent! call remove(g:LanguageClient_serverCommands, 'cpp')
 silent! call remove(g:LanguageClient_serverCommands, 'c')
 
 " we use deoplete instead !!
+" there is also omnifunc ?
 set completefunc=LanguageClient#complete
+
 " this should be done only for filetypes supported by LanguageClient !!!
 set formatexpr=LanguageClient_textDocument_rangeFormatting()
 
@@ -2142,8 +2140,6 @@ if has('nvim')
  " when launching term
 	tnoremap <Esc> <C-\><C-n>
 endif
-
-
 
 " Bye bye ex mode
 noremap Q <NOP>
@@ -2328,6 +2324,7 @@ colorscheme molokai
 " set guicursor="n-v-c:block-Cursor/lCursor,ve:ver35-Cursor,o:hor50-Cursor,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor,sm:block-Cursor"
 set guicursor=n-v-c:block-blinkon250-Cursor/lCursor,ve:ver35-Cursor,o:hor50-Cursor,i-ci:ver25-blinkon250-Cursor/lCursor,r-cr:hor20-Cursor/lCursor
 " set guicursor=i:ver3,n:block-blinkon10-Cursor,r:hor50
+" try reverse ?
 highl Cursor ctermfg=16 ctermbg=253 guifg=#000000 guibg=#00FF00
 " highl lCursor ctermfg=16 ctermbg=253 guifg=#000000 guibg=#00FF00
 
@@ -2342,6 +2339,7 @@ nnoremap gO i<CR>
 " let @g="dawi\\gls{p}"
 " nnoremap <Leader>lg @g
 
+" testing my PR
 if has("signcolumnwidth")
     set signcolumnwidth=6
 endif
