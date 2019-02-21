@@ -29,6 +29,7 @@ buildPythonApplication rec {
     # to build the doc sphinx
     propagatedBuildInputs = [
       stevedore cmd2 pyperclip pandas
+
       # we want gtk because qt is so annying on nixos
       (matplotlib.override { enableGtk3=true;})
       pyqt5
