@@ -17,23 +17,23 @@ rec {
     '';
   });
 
-    # papis = super.papis.overrideAttrs (oa: {
-    #   version = "0.8-dev";
-    #   src = super.fetchFromGitHub {
-    #     owner = "papis";
-    #     repo = "papis";
-    #     rev = "11e368cf437f90ce4835f486eda8d946c84eb577";
-    #     sha256 = "1sjr9fb9mw7ib82yamg672ihj8f5bdcmc2np9jsqjqb91x3ixhzv";
-    #     fetchSubmodules = true;
-    #   };
-    #   patches = [];
-    #   # install -D misc/__khal $out/share/zsh/site-functions/__khal
-    #   postInstall = oa.postInstall + ''
-    #     echo $PWD
-    #     ls scripts/
-    #     install -D "scripts/shell_completion/click/papis.zsh" $out/share/zsh/site-functions/_papis
-    #     '';
-    # });
+    papis = super.papis.overridePythonAttrs (oa: {
+      version = "0.8-dev";
+      src = super.fetchFromGitHub {
+        owner = "papis";
+        repo = "papis";
+        rev = "cc45ca87a0b9a4d1d67b62d8c55680f936e6e966";
+        sha256 = "00kxp8565pn607z27fdh2rmiblaarmc1vxj9h739isgqck1di9aa";
+        fetchSubmodules = true;
+      };
+      patches = [];
+      # install -D misc/__khal $out/share/zsh/site-functions/__khal
+      postInstall = oa.postInstall + ''
+        echo $PWD
+        ls scripts/
+        install -D "scripts/shell_completion/click/papis.zsh" $out/share/zsh/site-functions/_papis
+        '';
+    });
 
   i3-local = let i3path = ~/i3; in 
   if (builtins.pathExists i3path) then

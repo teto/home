@@ -1,21 +1,27 @@
 self: super:
 let
   startPlugins = with super.pkgs.vimPlugins; [
-            fugitive
-            vimtex
-            # replaced by ale ?
-            LanguageClient-neovim
-            vim-signify
-            vim-startify
-            vim-scriptease
-            vim-grepper
-            vim-nix
-            vim-obsession
-            # deoplete-khard
-            # TODO this one will be ok once we patch it
-            # vim-markdown-composer  # WIP
-# vim-highlightedyank
-        ];
+      # echodoc-vim
+      deoplete-nvim
+      fugitive
+      vimtex
+      # replaced by ale ?
+      LanguageClient-neovim
+      tagbar
+      # targets-vim
+      vim-fugitive
+      vim-signify
+      vim-startify
+      vim-scriptease
+      vim-grepper
+      vim-nix
+      vim-obsession
+      # deoplete-khard
+      # TODO this one will be ok once we patch it
+      # vim-markdown-composer  # WIP
+      vim-highlightedyank
+      vim-commentary
+    ];
 
 in
 {
