@@ -311,13 +311,13 @@ Plug 'vim-airline/vim-airline-themes' " creates problems if not here
 Plug 'justinmk/vim-dirvish' " replaces netrw
 Plug 'justinmk/vim-gtfo' " gfo to open filemanager in cwd
 Plug 'wannesm/wmgraphviz.vim', {'for': 'dot'} " graphviz syntax highlighting
-Plug 'tpope/vim-commentary' "gcc to comment/gcgc does not work that well
+" Plug 'tpope/vim-commentary' "gcc to comment/gcgc does not work that well
 Plug 'teto/vim-listchars' " to cycle between different list/listchars configurations
 "Plug 'vim-voom/VOoM' " can show tex/restDown Table of Content (ToC)
 " Plug 'blueyed/vim-diminactive' " disable syntax coloring on inactive splits use winhl
 "Plug 'tpope/vim-sleuth' " Dunno what it is
 "Plug 'justinmk/vim-gtfo' " ?
-Plug 'tpope/vim-fugitive' " to use with Git, VERY powerful
+" Plug 'tpope/vim-fugitive' " to use with Git, VERY powerful
 Plug 'tpope/vim-rhubarb' " github support in fugitive, use |i_CTRL-X_CTRL-O|
 "Plug 'jaxbot/github-issues.vim' " works only with vim
 "Plug 'tpope/vim-surround' " don't realy know how to use yet
@@ -344,7 +344,7 @@ Plug 'junegunn/fzf.vim' " defines :Files / :Commits for FZF
 
 " , { 'for': 'markdown', 'do': function('BuildComposer') } " Needs rust, cargo, plenty of things :help markdown-composer
 " move to nix
-Plug 'euclio/vim-markdown-composer'
+" Plug 'euclio/vim-markdown-composer'
 Plug 'Rykka/riv.vim', {'for': 'rst'}
 Plug 'Rykka/InstantRst', {'for': 'rst'} " rst live preview with :InstantRst,
 "Plug 'junegunn/vim-easy-align'   " to align '=' on multiple lines for instance
@@ -1663,13 +1663,13 @@ let g:pymode_virtualenv = 1
 " https://github.com/mhinz/vim-grepper/issues/27
 " let g:grepper = { 'git': { 'grepprg': 'git grep -nI $* -- $.' }}
 " Grepper -grepprg ag --vimgrep $* $. works
-runtime plugin/grepper.vim  " init grepper with defaults
-let g:grepper.tools += ["rgall"]
-let g:grepper.rgall = copy(g:grepper.rg)
-let g:grepper.rgall.grepprg .= ' --no-ignore'
-let g:grepper.highlight = 1
-let g:grepper.open = 0
-let g:grepper.switch = 1
+" runtime plugin/grepper.vim  " init grepper with defaults
+" let g:grepper.tools += ["rgall"]
+" let g:grepper.rgall = copy(g:grepper.rg)
+" let g:grepper.rgall.grepprg .= ' --no-ignore'
+" let g:grepper.highlight = 1
+" let g:grepper.open = 0
+" let g:grepper.switch = 1
 
 nnoremap <leader>git :Grepper -tool git -open -nojump
 nnoremap <leader>ag  :Grepper -tool ag  -open -switch
@@ -2001,7 +2001,7 @@ silent! call remove(g:LanguageClient_serverCommands, 'c')
 
 " we use deoplete instead !!
 " there is also omnifunc ?
-" set completefunc=LanguageClient#complete
+set completefunc=LanguageClient#complete
 
 " this should be done only for filetypes supported by LanguageClient !!!
 set formatexpr=LanguageClient_textDocument_rangeFormatting()
