@@ -111,7 +111,7 @@ Plug 'tweekmonster/startuptime.vim', {'on': 'StartupTime'} " see startup time pe
 " provider dependant {{{
 " new deoplete relies on yarp :
 Plug 'AndrewRadev/splitjoin.vim' " gS/gJ to 
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'roxma/nvim-yarp' " required for deoplete
 Plug 'roxma/vim-hug-neovim-rpc' " what is that ? required for deoplete
 " Plug '~/vim-config'
@@ -373,7 +373,7 @@ Plug 'teto/Modeliner' " <leader>ml to setup buffer modeline
 " This one has bindings mapped to <leader>l
 "Plug 'vimwiki/vimwiki'   " to write notes
 " async grep neovim only
-Plug 'mhinz/vim-grepper' " , { 'on': 'Grepper'}
+" Plug 'mhinz/vim-grepper' " , { 'on': 'Grepper'}
 "Plug 'teto/neovim-auto-autoread' " works only in neovim, runs external checker
 Plug 'neomake/neomake' " async build for neovim
 " Plug 'w0rp/ale' 
@@ -410,7 +410,7 @@ let g:EditorConfig_max_line_indicator = "line"
 " Plug 'junegunn/rainbow_parentheses.vim' " the recommanded one
 " {{{ Latex attempts
 " lazyload creates problems
-Plug 'lervag/vimtex'
+" Plug 'lervag/vimtex'
 " }}}
 
 " far config (Find And Replace) {{{
@@ -2001,7 +2001,7 @@ silent! call remove(g:LanguageClient_serverCommands, 'c')
 
 " we use deoplete instead !!
 " there is also omnifunc ?
-set completefunc=LanguageClient#complete
+" set completefunc=LanguageClient#complete
 
 " this should be done only for filetypes supported by LanguageClient !!!
 set formatexpr=LanguageClient_textDocument_rangeFormatting()

@@ -16,11 +16,13 @@ let
       vim-grepper
       vim-nix
       vim-obsession
+      vim-markdown-composer 
       # deoplete-khard
       # TODO this one will be ok once we patch it
       # vim-markdown-composer  # WIP
       vim-highlightedyank
       vim-commentary
+      vimtex
     ];
 
 in
