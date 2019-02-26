@@ -13,6 +13,7 @@ in
       adminpass = secrets.nextcloud.password;
     };
     maxUploadSize = "512M";
+    logLevel = 0;
   };
 
   networking.firewall.allowedTCPPorts = [ 80 443 ];

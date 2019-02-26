@@ -22,9 +22,9 @@ rec {
       src = super.fetchFromGitHub {
         owner = "papis";
         repo = "papis";
-        rev = "cc45ca87a0b9a4d1d67b62d8c55680f936e6e966";
-        sha256 = "00kxp8565pn607z27fdh2rmiblaarmc1vxj9h739isgqck1di9aa";
-        fetchSubmodules = true;
+        rev = "101e83a7014e2ed7d17ceb009a433881354fa0fc";
+        sha256 = "0hw8f62qri62lg1wi37n0nvw1dw6pcmrbs66zbrzwf54rpl33462";
+        # fetchSubmodules = true;
       };
       patches = [];
       # install -D misc/__khal $out/share/zsh/site-functions/__khal
