@@ -95,10 +95,11 @@ Plug 'ndmitchell/ghcid', { 'rtp': 'plugins/nvim' }
 Plug 'neovimhaskell/nvim-hs.vim' " to help with nvim-hs
 " Plug 'bfredl/nvim-lspmirror'
 " Plug 'bfredl/nvim-lspext' " extension
+" Plug 'neoclide/coc.nvim'
 Plug 'neomutt/neomutt.vim' " syntax file for neomutt
 Plug 'chrisbra/NrrwRgn' " to help with multi-ft files
 Plug 'chrisbra/vim-diff-enhanced' " 
-Plug 'mhinz/vim-signify' " Indicate changed lines within a file using a VCS.
+" Plug 'mhinz/vim-signify' " Indicate changed lines within a file using a VCS.
 " Plug 'vim-pandoc/vim-pandoc'
 Plug 'vim-pandoc/vim-pandoc-syntax'
 " Plug 'moznion/github-commit-comment.vim' " last update from 2014
@@ -135,7 +136,7 @@ Plug 'gianarb/notify.vim' " call notify#emitNotification('Title', 'Body')
 " Plug 'vim-scripts/coq-syntax', {'for': 'coq'}
 " Plug 'the-lambda-church/coquille', {'branch': 'matt', 'for': 'coq'}
 " Plug 'teto/coquille', {'branch': 'matt', 'for': 'coq'}
-Plug 'let-def/vimbufsync', {'for': 'coq'} " for coq
+" Plug 'let-def/vimbufsync', {'for': 'coq'} " for coq
 " Plug 'vim-scripts/ProportionalResize'
 " Plug 'inside/vim-search-pulse' " Search related
 
@@ -169,13 +170,13 @@ Plug 'bronson/vim-trailing-whitespace' " :FixTrailingWhitespace
 " Plug 'tpope/vim-eunuch' " {provides SudoEdit, SudoWrite , Unlink, Rename etc...
 
 " REPL (Read Execute Present Loop) {{{
-Plug 'metakirby5/codi.vim', {'on': 'Codi'} " repl
+" Plug 'metakirby5/codi.vim', {'on': 'Codi'} " repl
 " Plug 'hkupty/iron.nvim', {'do': ':UpdateRemotePlugins'}
 " careful it maps cl by default
 " Plug 'vigemus/iron.nvim', { 'branch': 'lua/replace' }
 " Plug 'jalvesaq/vimcmdline' " no help files, mappings clunky
 " github mirror of Plug 'http://gitlab.com/HiPhish/repl.nvim'
-Plug 'http://gitlab.com/HiPhish/repl.nvim'
+" Plug 'http://gitlab.com/HiPhish/repl.nvim'
 " Plug 'HiPhish/repl.nvim'
 " vimcmdline mappings{{{
 let cmdline_map_start          = "<LocalLeader>s"
@@ -243,7 +244,7 @@ Plug 'deoplete-plugins/deoplete-zsh'
 Plug 'tpope/vim-unimpaired' " [<space> [e [n ]n pour gerer les conflits etc...
 Plug 'kana/vim-operator-user' " dependancy for operator-flashy
 " better handling of buffer closure (type :sayonara)
-Plug 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
+" Plug 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
 
 " Using a non-master branch
 
@@ -252,9 +253,9 @@ Plug 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
 " Plug 'powerman/vim-plugin-viewdoc' " looks interesting
 
 " filetypes {{{2
-Plug 'cespare/vim-toml', { 'for': 'toml'}
+" Plug 'cespare/vim-toml', { 'for': 'toml'}
 Plug 'PotatoesMaster/i3-vim-syntax'
-Plug 'dzeban/vim-log-syntax' " hl some keywords like ERROR/DEBUG/WARNING
+" Plug 'dzeban/vim-log-syntax' " hl some keywords like ERROR/DEBUG/WARNING
 " }}}
 " Python {{{2
 " Plug 'klen/python-mode', { 'for': 'python'} "
@@ -269,10 +270,10 @@ Plug 'dzeban/vim-log-syntax' " hl some keywords like ERROR/DEBUG/WARNING
 
 " Plug 'Valloric/ListToggle' " toggle location/quickfix list toggling seems to fail
 " Plug 'git@github.com:milkypostman/vim-togglelist' " same
-Plug 'tpope/vim-obsession' ", {'on': 'Obsession', 'ObsessionStatus'}  very cool, register edited files in a Session.vim, call with :Obsession
+" Plug 'tpope/vim-obsession' ", {'on': 'Obsession', 'ObsessionStatus'}  very cool, register edited files in a Session.vim, call with :Obsession
 Plug 'mbbill/undotree' " replaces gundo
-" Plug '907th/vim-auto-save' " :h auto-save
-Plug 'teto/vim-auto-save' " autosave :h auto-save
+Plug '907th/vim-auto-save' " :h auto-save
+" Plug 'teto/vim-auto-save' " autosave :h auto-save
 Plug 'bfredl/nvim-miniyank' " killring alike plugin, cycling paste careful
 " hangs with big strings
 
@@ -294,7 +295,7 @@ Plug 'justinmk/vim-sneak' " remaps 's'
 Plug 'tpope/vim-rsi'  " maps readline bindings
 " }}}
 
-Plug 'mhinz/vim-startify' " very popular, vim's homepage
+" Plug 'mhinz/vim-startify' " very popular, vim's homepage
 Plug 'dietsche/vim-lastplace' " restore last cursor postion (is it still needed ?)
 " vim-lastplace to restore cursor position {{{
 let g:lastplace_ignore = "gitcommit,svn"
@@ -308,7 +309,7 @@ Plug 'vim-airline/vim-airline-themes' " creates problems if not here
 " }}}
 
 "
-Plug 'justinmk/vim-dirvish' " replaces netrw
+" Plug 'justinmk/vim-dirvish' " replaces netrw
 Plug 'justinmk/vim-gtfo' " gfo to open filemanager in cwd
 Plug 'wannesm/wmgraphviz.vim', {'for': 'dot'} " graphviz syntax highlighting
 " Plug 'tpope/vim-commentary' "gcc to comment/gcgc does not work that well
@@ -323,7 +324,7 @@ Plug 'tpope/vim-rhubarb' " github support in fugitive, use |i_CTRL-X_CTRL-O|
 "Plug 'tpope/vim-surround' " don't realy know how to use yet
 " Plug 'junegunn/vim-peekaboo' " gives a preview of buffers when pasting
 Plug 'mhinz/vim-randomtag', { 'on': 'Random' } " Adds a :Random function that launches help at random
-Plug 'majutsushi/tagbar' " , {'on': 'TagbarToggle'} disabled lazyloading else it would not work with statusline
+" Plug 'majutsushi/tagbar' " , {'on': 'TagbarToggle'} disabled lazyloading else it would not work with statusline
 " Plug 'machakann/vim-highlightedyank' " moved to nix
 
 
@@ -350,7 +351,7 @@ Plug 'Rykka/InstantRst', {'for': 'rst'} " rst live preview with :InstantRst,
 "Plug 'junegunn/vim-easy-align'   " to align '=' on multiple lines for instance
 Plug 'dhruvasagar/vim-table-mode', {'for': 'txt'}
 
-Plug 'kshenoy/vim-signature' " display marks in gutter, love it
+" Plug 'kshenoy/vim-signature' " display marks in gutter, love it
 
 " forked it to solve a bug: git@github.com:teto/QuickFixCurrentNumber.git
 " Plug '~/QuickFixCurrentNumber' " use :Cnr :Cgo instead of :cnext etc...
@@ -358,7 +359,7 @@ Plug 'kshenoy/vim-signature' " display marks in gutter, love it
 " =======
 " display signature in cmdline after v:completed_item, needs to customize
 " cmdheight
-Plug 'Shougo/echodoc.vim'
+" Plug 'Shougo/echodoc.vim' " removed in favor of others
 Plug 'teto/QuickFixCurrentNumber' " use :Cnr :Cgo instead of :cnext etc...
 Plug 'vim-scripts/ingo-library' " DEPENDANCY of QuickFixCurrentNumber
 "Plug 'tomtom/quickfixsigns_vim'
@@ -368,7 +369,7 @@ Plug 'mhinz/vim-rfc', { 'on': 'RFC' } " requires nokigiri gem
 Plug 'vim-scripts/rfc-syntax', { 'for': 'rfc' } " optional syntax highlighting for RFC files
 " can show a list of unicode characeters, with their name  :UnicodeTable etc...
 " careful maps F4 by default
-Plug 'chrisbra/unicode.vim' " , { 'on': ['<plug>(UnicodeComplete)', '<plug>(UnicodeGA)', 'UnicodeTable'] }
+" Plug 'chrisbra/unicode.vim' " , { 'on': ['<plug>(UnicodeComplete)', '<plug>(UnicodeGA)', 'UnicodeTable'] }
 Plug 'teto/Modeliner' " <leader>ml to setup buffer modeline
 " This one has bindings mapped to <leader>l
 "Plug 'vimwiki/vimwiki'   " to write notes
@@ -400,7 +401,7 @@ Plug 'NLKNguyen/papercolor-theme'
 " color_coded requires vim to be compiled with -lua
 "Plug 'jeaye/color_coded'
 " do not run it automatically, can be boring
-Plug 'chrisbra/csv.vim' " , {'for': 'csv'}
+" Plug 'chrisbra/csv.vim' " , {'for': 'csv'}
 
 " editorconfig {{{
 let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
@@ -422,11 +423,14 @@ let g:far#collapse_result=1
 " }}}
 
 " Plug 'gregsexton/gitv'
-Plug 'jeffwilliams/basejump' " to alt+click on file:line and go to it
+" Plug 'jeffwilliams/basejump' " to alt+click on file:line and go to it
 Plug 'neovim/nvimdev.nvim' " thanks tweekmonster !
 Plug 'jceb/vim-orgmode' " orgmode
 call plug#end()
 " }}}
+
+" TODO autoload etc
+" if globpath(&runtimepath, 'autoload/LanguageClient.vim') !=# ''
 
 " start scrolling before reaching end of screen in order to keep more context
 " set it to a big value
@@ -712,7 +716,7 @@ let g:plug_shallow=1
 let g:dirvish_mode=2
 "}}}
 " echodoc {{{
-let g:echodoc#enable_at_startup=1
+" let g:echodoc#enable_at_startup=1
 " g:echodoc#type " only for gonvim
 "}}}
 
@@ -1020,7 +1024,7 @@ nnoremap <Leader>/ :set hlsearch! hls?<CR> " toggle search highlighting
 
 " }}}
 " Deoplete {{{
-let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_at_startup = 0
 let g:deoplete#enable_ignore_case = 1
 let g:deoplete#disable_auto_complete = 1
 let g:deoplete#enable_debug = 1
@@ -1031,7 +1035,6 @@ let g:deoplete#enable_refresh_always=0
 " let g:deoplete#keyword_patterns.gitcommit = '.+'
 
 " call deoplete#custom#set('jedi', 'debug_enabled', 1)
-" call deoplete#enable_logging('DEBUG', '/tmp/deoplete.log')
 
 " fails
 " call deoplete#util#set_pattern(
@@ -1070,11 +1073,6 @@ let deoplete#sources#jedi#show_docstring=0
 " notmuch address command to fetch completions
 " NOTE: --format=sexp is required
 let g:deoplete#sources#notmuch#command = ['notmuch', 'address', '--format=sexp', '--output=recipients', '--deduplicate=address', 'tag:inbox']
-" }}}
-" Jedi (python) completion {{{
-let g:jedi#auto_vim_configuration = 1 " to prevent python's help popup
-let g:jedi#completions_enabled = 0 " disable when deoplete in use
-"autocmd BufWinEnter '__doc__' setlocal bufhidden=delete
 " }}}
 " ALE {{{
 " let deoplete handle completion
@@ -1126,7 +1124,6 @@ hi ALEVirtualTextError guisp=undercurl
 " nmap <silent> <C-j> <Plug>(ale_next_wrap)
 " ale#linter#Define(filetype, linter)
 "}}}
-"
 " Neomake config {{{
 " @return {String}
 "  toadd in statusline
@@ -1448,14 +1445,6 @@ let g:haskell_enable_static_pointers = 1  " to enable highlighting of `static`
 let g:haskell_backpack = 1                " to enable highlighting of backpack keywords
 let g:haskell_indent_disable=1
 "}}}
-" neco-ghc (haskell completion) {{{
-" slower bu t shows type
-let g:necoghc_enable_detailed_browse = 1
-let g:necoghc_debug=0
-"}}}
-" ghcmod ( all :GhcMod* commands) {{{
-" let g:ghcmod_ghc_options=[]
-" }}}
 " Startify config {{{
 nnoremap <Leader>st :Startify<cr>
 
@@ -1488,12 +1477,6 @@ let g:startify_change_to_dir = 0
 
 let g:startify_relative_path = 0
 " let g:startify_skiplist=[]
-" }}}
-" {{{ Quickscope config
-"let g:qs_first_occurrence_highlight_color = 155
-"let g:qs_second_occurrence_highlight_color = 81
-"let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
-"nmap <leader>q <plug>(QuickScopeToggle)
 " }}}
 " Rainbow parentheses {{{
 let g:rbpt_colorpairs = [

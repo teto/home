@@ -17,9 +17,12 @@ let
     (builtins.readFile ../config/i3/config.colors)
   ];
 
-  neovim-xp = pkgs.wrapNeovim pkgs.neovim-unwrapped-master (pkgs.neovimDefaultConfig);
 
-  devPkgs = with pkgs; [
+  devPkgs = with pkgs; let
+      # float to use coc.nvim
+      neovim-xp = pkgs.wrapNeovim pkgs.neovim-unwrapped-float (pkgs.neovimDefaultConfig);
+    in
+    [
     # cabal-install
     # cabal2nix
     editorconfig-core-c

@@ -2,16 +2,23 @@
 let
 
   startPlugins = with pkgs.vimPlugins; [
+    #########################
+    ### OUTDATED look at neovimDefaultConfig in the overlay
+      csv-vim
             fugitive
             vimtex
             # replaced by ale ?
             LanguageClient-neovim
+            tagbar
+            vim-dirvish
             vim-signify
             vim-startify
             vim-scriptease
             vim-grepper
             vim-nix
             vim-obsession
+            vim-sayonara
+            unicode-vim
             # deoplete-khard
             # TODO this one will be ok once we patch it
             # vim-markdown-composer  # WIP
@@ -33,7 +40,7 @@ in
     #     };
     # };
 
-    # package = pkgs.neovim-unwrapped-float;
+    package = pkgs.neovim-unwrapped-float;
 
     # hopefully these can be added automatically once I use vim_configurable
     extraPython3Packages = ps: with ps; [

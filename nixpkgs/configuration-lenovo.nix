@@ -45,12 +45,14 @@ let
     options = [ "user" "exec" ];
     };
 
-
   # it apparently still is quite an important thing to have
   boot.devSize = "5g";
 
   # TODO look at
   # boot.specialFileSystems.
+
+  # NEW
+  # hardware.printers = 
 
   # necessary for qemu  to prevent
 # client> qemu-img: Error while writing to COW image: No space left on device
