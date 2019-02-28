@@ -90,9 +90,10 @@ let
 
   # boot.kernelPackages = pkgs.linuxPackagesFor pkgs.my_lenovo_kernel;
 
-  boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_mptcp_trunk_raw;
+  # boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_mptcp_trunk_raw;
 
-  # boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_latest;
+  boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_latest;
+
   # boot.kernelPackages = pkgs.linuxPackages_mptcp;
 
   # TODO we need nouveau  ?
