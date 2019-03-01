@@ -175,8 +175,7 @@ Plug 'bronson/vim-trailing-whitespace' " :FixTrailingWhitespace
 " Plug 'vigemus/iron.nvim', { 'branch': 'lua/replace' }
 " Plug 'jalvesaq/vimcmdline' " no help files, mappings clunky
 " github mirror of Plug 'http://gitlab.com/HiPhish/repl.nvim'
-" Plug 'http://gitlab.com/HiPhish/repl.nvim'
-" Plug 'HiPhish/repl.nvim'
+Plug 'http://gitlab.com/HiPhish/repl.nvim'
 " vimcmdline mappings{{{
 let cmdline_map_start          = "<LocalLeader>s"
 let cmdline_map_send           = "<Space>"
@@ -1146,7 +1145,7 @@ hi ALEVirtualTextError guisp=undercurl
 " endfunction
 
 " let g:neomake_virtualtext_current_error=1
-" let g:neomake_virtualtext_prefix=">>"
+let g:neomake_virtualtext_prefix="     >> "
 let g:neomake_verbose = 1
 
 " call neomake#quickfix#enable()
@@ -2235,6 +2234,13 @@ set matchpairs+=<:>  " Characters for which % should work
 "     \ 'syntax': '',
 "     \ 'title': 'Lua REPL'
 " \ }
+" Send the text of a motion to the REPL
+nmap <leader>rs  <Plug>(ReplSend)
+" Send the current line to the REPL
+nmap <leader>rss <Plug>(ReplSendLine)
+nmap <leader>rs_ <Plug>(ReplSendLine)
+" Send the selected text to the REPL
+vmap <leader>rs  <Plug>(ReplSend)
 " }}}
 " nvim-palette{{{
 let g:palette_debug=1
