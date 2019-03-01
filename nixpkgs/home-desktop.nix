@@ -155,7 +155,7 @@ in
 
   home.packages = desktopPkgs ++ devPkgs ++ heavyPackages
   ++ imPkgs ++ [
-    # pkgs.cachix
+    stable.pkgs.cachix
     ]
    ;
 

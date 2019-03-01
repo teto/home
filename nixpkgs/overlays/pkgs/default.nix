@@ -24,6 +24,8 @@ final: prev:
   # };
 
 
+  gnvim = prev.callPackage ./gnvim { };
+
   neovim-gtk = prev.callPackage ./neovim-gtk { };
 
   dualsub = prev.callPackage ./dualsubtitles { };
