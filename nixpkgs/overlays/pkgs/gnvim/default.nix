@@ -3,6 +3,7 @@
 , webkitgtk24x-gtk3
 , git
 , fetchgit
+, gnome3
 }:
 
 with rustPlatform;
@@ -12,34 +13,21 @@ buildRustPackage rec {
   version = "0.1.1";
 
   src = fetchgit rec {
-    postFetch = ''
-      set -x
-      pwd
-      cd $out
-      ls -la
-      git fetch -vv --tags
-      exit 1
-    '';
     url = "https://github.com/vhakulinen/gnvim";
     rev = "b279ea69bf280aa2f8f57a10e408d6810f55ef82";
-    sha256 = "1r1c2g07qy40xs0h8vaimjd5x4q95cgw3mc0kgv8n7lyghsrjyp4";
-    leaveDotGit = true;
-  };
+    sha256 = "1hbjqx544y997w4b46xhr7r94idxfn12nnddaq5v6m213q6lyzq3";
 
-  # src = fetchFromGitHub {
-  #   owner = "vhakulinen";
-  #   repo = "gnvim";
-  #   rev = "b279ea69bf280aa2f8f57a10e408d6810f55ef82";
-  #   sha256 = "1g1icmp1ykpx56xkyqmnfsf9r1ry25pwwhk4z3j4g5b7xl1p4rcz";
-  #   leaveDotGit = true;
-  #   # fetchSubmodules = true;
-  # };
+    # gnvim detects its version from tags
+    leaveDotGit = true;
+    postFetch = ''
+      git fetch -vv --tags ${url}
+    '';
+  };
 
   # TODO might need to wrap with this
   # GNVIM_RUNTIME_PATH=./runtime
 
-  # webkitgtk24x-gtk3
-  buildInputs = [ gtk3 webkitgtk24x-gtk3 ];
+  buildInputs = [ gtk3 gnome3.webkitgtk.dev];
 
   nativeBuildInputs = [ pkgconfig wrapGAppsHook git ];
 

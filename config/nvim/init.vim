@@ -90,7 +90,6 @@ call plug#begin(s:plugdir)
 " Plug 'andymass/vim-matchup' " to replace matchit
 " call :NR on a region than :w . coupled with b:nrrw_aucmd_create, 
 " Plug 'AGhost-7/critiq.vim' " :h critiq
-" Plug 'eagletmt/neco-ghc' " haskell completion for deoplete
 Plug 'ndmitchell/ghcid', { 'rtp': 'plugins/nvim' }
 Plug 'neovimhaskell/nvim-hs.vim' " to help with nvim-hs
 " Plug 'bfredl/nvim-lspmirror'
@@ -234,7 +233,7 @@ Plug 'neovimhaskell/haskell-vim', {'for':'haskell'} " haskell install
 " crashes without netrc
 " Plug 'deoplete-plugins/deoplete-make' " empty !
 Plug 'deoplete-plugins/deoplete-zsh'
-" Plug 'deoplete-plugins/deoplete-jedi'
+Plug 'deoplete-plugins/deoplete-jedi'
 " Plug 'deoplete-plugins/deoplete-clang'
 "
 "}}}
@@ -341,6 +340,8 @@ Plug 'junegunn/fzf.vim' " defines :Files / :Commits for FZF
 
 "}}}
 
+
+Plug 'vhakulinen/gnvim-lsp' " load it only for gnvim
 
 
 " , { 'for': 'markdown', 'do': function('BuildComposer') } " Needs rust, cargo, plenty of things :help markdown-composer
@@ -1034,6 +1035,10 @@ let g:deoplete#enable_refresh_always=0
 " let g:deoplete#keyword_patterns = {}
 " let g:deoplete#keyword_patterns.gitcommit = '.+'
 
+" call deoplete#custom#option('profile', v:true)
+" call deoplete#enable_logging('DEBUG', '/tmp/deoplete.log')
+" call deoplete#custom#source('jedi', 'is_debug_enabled', 1)
+
 " call deoplete#custom#set('jedi', 'debug_enabled', 1)
 
 " fails
@@ -1057,6 +1062,10 @@ let g:deoplete#sources#clang#sort_algo = 'priority'
 " deoplete jedi {{{2
 let deoplete#sources#jedi#enable_cache=1
 let deoplete#sources#jedi#show_docstring=0
+" slow down completion
+let g:deoplete#sources#jedi#enable_typeinfo=1
+" show docstring in completion window
+let g:deoplete#sources#jedi#show_docstring=1
 " }}}
 " deoplete github (disabled for now won't work) {{{
 " let g:deoplete#sources = {}
