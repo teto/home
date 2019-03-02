@@ -92,6 +92,8 @@ call plug#begin(s:plugdir)
 " Plug 'AGhost-7/critiq.vim' " :h critiq
 Plug 'ndmitchell/ghcid', { 'rtp': 'plugins/nvim' }
 Plug 'neovimhaskell/nvim-hs.vim' " to help with nvim-hs
+Plug 'KabbAmine/vCoolor.vim' " :Vcooler
+Plug 'rickhowe/diffchar.vim'
 " Plug 'bfredl/nvim-lspmirror'
 " Plug 'bfredl/nvim-lspext' " extension
 " Plug 'neoclide/coc.nvim'
@@ -1026,11 +1028,32 @@ nnoremap <Leader>/ :set hlsearch! hls?<CR> " toggle search highlighting
 " Deoplete {{{
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_ignore_case = 1
-let g:deoplete#disable_auto_complete = 0
+" let g:deoplete#disable_auto_complete = 0
 let g:deoplete#enable_debug = 1
-let g:deoplete#auto_complete_delay=0
+" let g:deoplete#auto_complete_delay=0
 
-let g:deoplete#enable_refresh_always=0
+" call deoplete#custom#option({
+" \ 'auto_complete': v:true,
+" \ 'auto_complete_delay': 0,
+" \ 'smart_case': v:true,
+" \ 'refresh_always': v:true,
+" \ })
+
+" " source 
+" call deoplete#custom#var('around', {
+" \   'range_above': 15,
+" \   'range_below': 15,
+" \   'mark_above': '[↑]',
+" \   'mark_below': '[↓]',
+" \   'mark_changes': '[*]',
+" \})
+
+" " deoplete#toggle()
+" call deoplete#custom#source('perso', { 'matt' : 'mattator@gmail.com' })
+
+" call deoplete#custom#source('_', 'matchers', ['matcher_cpsm'])
+" call deoplete#custom#source('_', 'sorters', [])
+
 " let g:deoplete#keyword_patterns = {}
 " let g:deoplete#keyword_patterns.gitcommit = '.+'
 
@@ -1956,6 +1979,9 @@ let g:langserver_executables = {
 " }}}
 " miniyank {{{
 let g:miniyank_delete_maxlines=1000
+let g:miniyank_filename = $XDG_CACHE_HOME."/miniyank.mpack"
+map p <Plug>(miniyank-autoput)
+map P <Plug>(miniyank-autoPut)
 "}}}
 " autozimu's lsp LanguageClient-neovim {{{
 " call LanguageClient_textDocument_hover
@@ -1984,6 +2010,8 @@ let g:LanguageClient_loggingLevel = 'INFO'
 " let g:LanguageClient_hoverPreview=
 let g:LanguageClient_completionPreferTextEdit=1
 let g:LanguageClient_diagnosticsEnable=1
+" else it erases grepper results
+let g:LanguageClient_diagnosticsList='Location'
 " see $RUNTIME/rplugin/python3/LanguageClient/wrapper.sh for logging
 " let g:LanguageClient_serverCommands.nix = ['nix-lsp']
 " del g:LanguageClient_serverCommands.cpp = ['cquery', '--log-file=/tmp/cq.log']
@@ -2486,6 +2514,18 @@ hi CursorLine guibg=NONE cterm=underline gui=underline guifg=NONE guisp=fg
 " forcefully by requiring it
 " let hc=remote#host#Require('haskell')
 
+
+func! ReadExCommandOutput(newbuf, cmd) abort
+  redir => l:message
+  silent! execute a:cmd
+  redir END
+  if a:newbuf | wincmd n | endif
+  silent put=l:message
+endf
+command! -nargs=+ -bang -complete=command R call ReadExCommandOutput(<bang>0, <q-args>)
+
+
+" was supposed to be called from
 function! UpdatePythonHost(prog)
   let g:python3_host_prog = a:prog
   " Update mypy as well

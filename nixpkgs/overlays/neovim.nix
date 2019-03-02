@@ -4,6 +4,7 @@ let
       # echodoc-vim
       deoplete-nvim
       fugitive
+      far-vim
       vimtex
       # replaced by ale ?
       LanguageClient-neovim

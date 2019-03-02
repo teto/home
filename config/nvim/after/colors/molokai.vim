@@ -1,7 +1,12 @@
 highlight Comment gui=italic
 highlight SignifySignChange cterm=bold ctermbg=237  ctermfg=227 guibg=#F08A1F
 
-" 
+
+" guifg=#465457 guibg=#232526
+" TODO should be less obvious
+" hi LineNr guifg=#FD971F
+hi CursorLineNr guibg=#FD971F guifg=#232526
+" #FD971F
 " todo overwrite 
 " hi CursorLine               ctermbg=236   cterm=none
 
