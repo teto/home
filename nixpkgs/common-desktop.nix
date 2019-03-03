@@ -118,7 +118,8 @@ in
    };
 
   # udisks2 GUI
-  services.udisks2.enable = true;
+  # fails to compile
+  services.udisks2.enable = false;
 
   services.strongswan = {
     enable = true;

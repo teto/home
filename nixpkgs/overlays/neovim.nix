@@ -5,7 +5,6 @@ let
       deoplete-nvim
       fugitive
       far-vim
-      vimtex
       # replaced by ale ?
       LanguageClient-neovim
       tagbar
@@ -26,7 +25,9 @@ let
       # vim-markdown-composer  # WIP
       vim-highlightedyank
       vim-commentary
-      vimtex
+
+      # reuse once https://github.com/neovim/neovim/issues/9390 is fixed
+      # vimtex
       unicode-vim
     ];
 

@@ -413,7 +413,8 @@ let g:EditorConfig_max_line_indicator = "line"
 " Plug 'junegunn/rainbow_parentheses.vim' " the recommanded one
 " {{{ Latex attempts
 " lazyload creates problems
-" Plug 'lervag/vimtex'
+" TODO move to nix once https://github.com/neovim/neovim/issues/9390 is fixed
+Plug 'lervag/vimtex'
 " }}}
 
 " far config (Find And Replace) {{{
@@ -2184,7 +2185,7 @@ let g:no_QuickFixCurrentNumber_maps = 1
 let g:lt_location_list_toggle_map = '<F12>' " '<leader>l'
 let g:lt_quickfix_list_toggle_map = '<F2>' " '<leader>qq'
 
-nmap <leader>l  <Plug>(ListToggleLToggle)
+" nmap <leader>l  <Plug>(ListToggleLToggle)
 nmap <F1>  <Plug>(ListToggleQToggle)
 
 " }}}

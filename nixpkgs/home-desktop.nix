@@ -170,7 +170,7 @@ in
 
   # tray is enabled by default
   services.udiskie = {
-    enable = true;
+    enable = false;
     notify = false;
     automount = false;
   };

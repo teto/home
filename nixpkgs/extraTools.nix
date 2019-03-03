@@ -8,6 +8,5 @@
     wirelesstools # to get iwconfig
     gitAndTools.diff-so-fancy
     # aircrack-ng
-#    udiskie
 ];
 }
