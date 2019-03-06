@@ -261,7 +261,8 @@ let
   # services.owamp.enable = true;
 
   # ebpf ?
-  programs.bcc.enable = true;
+  # broken in https://github.com/NixOS/nixpkgs/issues/56724
+  programs.bcc.enable = false;
 
   # en fait non ils vont etre en concurrence
   # services.xl2tpd.enable = true;

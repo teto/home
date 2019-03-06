@@ -46,25 +46,19 @@ in
       };
 
   });
-  
+
   # the one to use with coc.nvim
   # https://github.com/neoclide/coc.nvim/wiki/F.A.Q#how-to-make-preview-window-shown-aside-with-pum
-  neovim-unwrapped-float = (super.neovim-unwrapped).overrideAttrs (oldAttrs: {
-	  name = "neovim";
-	  version = "float";
+  # neovim-unwrapped-float = (super.neovim-unwrapped).overrideAttrs (oldAttrs: {
+	  # name = "neovim";
+	  # version = "float";
 
-      # src = builtins.fetchGit {
-      #   url = https://github.com/chemzqm/neovim.git;
-      #   rev = "293ce565ada9d8bc6f1d6e4f61b787cfd554ecd9";
-      #   # ref = "+refs/pull/6619/head";
-      # };
-      
-      src = builtins.fetchGit {
-        url = https://github.com/neovim/neovim.git;
-        ref = "+refs/pull/6619/head";
-      };
-      
-  });
+  #     # src = builtins.fetchGit {
+  #     #   url = https://github.com/chemzqm/neovim.git;
+  #     #   rev = "293ce565ada9d8bc6f1d6e4f61b787cfd554ecd9";
+  #     #   # ref = "+refs/pull/6619/head";
+  #     # };
+  # });
 
 
   # neovim-unwrapped = self.neovim-unwrapped-master;

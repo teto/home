@@ -7,7 +7,6 @@ in
     "${builtins.fetchTarball https://github.com/rycee/home-manager/archive/master.tar.gz}/nixos"
 
     ./extraTools.nix
-    # ./desktopPkgs.nix
   ];
 
   users.users.teto = {
@@ -28,7 +27,6 @@ in
      # once can set initialHashedPassword too
      initialPassword = secrets.tetoInitialPassword;
 
-     # TODO import it from desktopPkgs for instance ?
      # import basetools
      # packages = with pkgs; [
      #   (import ./extraTools.nix)

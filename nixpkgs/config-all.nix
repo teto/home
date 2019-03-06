@@ -185,7 +185,6 @@ kernel_xconfig=''
       # todo escape it else it fails
       # clean_orig="find . -name '*.orig' -delete";
     # ++ [
-  # alias -s html=qutebrowser
   # alias -s json=nvim
   # alias -s Vagrantfile=nvim
   # alias -s py=python3

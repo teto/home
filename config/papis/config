@@ -1,6 +1,39 @@
+# see https://papis.readthedocs.io/en/latest/configuration.html?highlight=doi
+# for an example
 [papers]
 dir = /mnt/ext/Zotero/Documents
 
 [settings]
 default-library = papers
 
+# Use ranger as a file browser, too a  nice python package
+# file-browser = ranger
+# Ask for confirmation when doing papis add ...
+add-confirm = True
+# Edit the info.yaml file before adding a doc into the library
+# papis add --edit
+add-edit = True
+# Open the files before adding a document into the library
+# papis add --open
+add-open = True
+
+# /* papis configuration */
+# from dois
+# cache-dir 
+
+# skip user conflict (year conflict) Replace '2018' by '2018'
+
+[tui]
+editmode = vi
+options_list.selected_margin_style = bg:ansigreen fg:ansired
+options_list.unselected_margin_style =
+
+# default is {selected_index}/{number_of_documents} F1:help c-l:redraw
+status_line_format = "F1: Help"
+# use rofi/dmenu/fzf
+# papis.pick 
+
+status_line_style = bg:ansiwhite fg:ansiblack
+message_toolbar_style = bg:ansiyellow fg:ansiblack
+
+error_toolbar_style = bg:ansired fg:ansiblack

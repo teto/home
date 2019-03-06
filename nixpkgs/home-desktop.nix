@@ -20,7 +20,7 @@ let
 
   devPkgs = with pkgs; let
       # float to use coc.nvim
-      neovim-xp = pkgs.wrapNeovim pkgs.neovim-unwrapped-float (pkgs.neovimDefaultConfig);
+      neovim-xp = pkgs.wrapNeovim pkgs.neovim-unwrapped-master (pkgs.neovimDefaultConfig);
     in
     [
     # cabal-install
@@ -170,7 +170,7 @@ in
 
   # tray is enabled by default
   services.udiskie = {
-    enable = false;
+    enable = true;
     notify = false;
     automount = false;
   };

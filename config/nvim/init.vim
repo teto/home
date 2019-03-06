@@ -94,6 +94,7 @@ Plug 'ndmitchell/ghcid', { 'rtp': 'plugins/nvim' }
 Plug 'neovimhaskell/nvim-hs.vim' " to help with nvim-hs
 Plug 'KabbAmine/vCoolor.vim' " :Vcooler
 Plug 'rickhowe/diffchar.vim'
+Plug 'prabirshrestha/vim-lsp'
 " Plug 'bfredl/nvim-lspmirror'
 " Plug 'bfredl/nvim-lspext' " extension
 " Plug 'neoclide/coc.nvim'
@@ -1033,13 +1034,13 @@ let g:deoplete#enable_ignore_case = 1
 let g:deoplete#enable_debug = 1
 " let g:deoplete#auto_complete_delay=0
 
-call deoplete#custom#option({
-\ 'auto_complete': v:true,
-\ 'auto_complete_delay': 0,
-\ 'smart_case': v:true,
-\ 'refresh_always': v:true,
-\ 'dup': v:false
-\ })
+" call deoplete#custom#option({
+" \ 'auto_complete': v:true,
+" \ 'auto_complete_delay': 0,
+" \ 'smart_case': v:true,
+" \ 'refresh_always': v:true,
+" \ 'dup': v:false
+" \ })
 
 " " source 
 " call deoplete#custom#var('around', {
@@ -2471,7 +2472,7 @@ set cpoptions="aABceFsn" " vi ComPatibility options
 nnoremap <C-LeftMouse> :call LanguageClient#textDocument_definition()<CR>
 nnoremap <C-RightMouse> :call SynStack()<CR>
 
-hi CursorLine guibg=NONE cterm=underline gui=underline guifg=NONE guisp=fg
+" hi CursorLine guibg=NONE cterm=underline gui=underline guifg=NONE guisp=fg
 "
 " Automatic Hover
 "function! DoNothingHandler(output)
