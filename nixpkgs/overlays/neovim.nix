@@ -9,6 +9,7 @@ let
       LanguageClient-neovim
       tagbar
       # targets-vim
+      # vCoolor-vim
       vim-dirvish
       vim-fugitive
       vim-signature

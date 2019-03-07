@@ -367,7 +367,7 @@ Plug 'teto/QuickFixCurrentNumber' " use :Cnr :Cgo instead of :cnext etc...
 Plug 'vim-scripts/ingo-library' " DEPENDANCY of QuickFixCurrentNumber
 "Plug 'tomtom/quickfixsigns_vim'
 Plug 'nacitar/a.vim' " :A
-Plug 'mhinz/vim-tree' " test
+" Plug 'mhinz/vim-tree' " test
 Plug 'mhinz/vim-rfc', { 'on': 'RFC' } " requires nokigiri gem
 Plug 'vim-scripts/rfc-syntax', { 'for': 'rfc' } " optional syntax highlighting for RFC files
 " can show a list of unicode characeters, with their name  :UnicodeTable etc...
