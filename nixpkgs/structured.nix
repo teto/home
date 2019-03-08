@@ -78,6 +78,21 @@ with libk;
     OPENVSWITCH = yes;
   };
 
+  soundConfig = {
+    SND_HWDEP = yes;
+    SND_OSSEMUL = yes;
+    SND_MIXER_OSS.tristate = "m";
+    SND_PCM_OSS.tristate = "m";
+    SND_PCM_OSS_PLUGINS= yes;
+    SND_PCM_TIMER= yes;
+    SND_HRTIMER.tristate = "m";
+    SND_DYNAMIC_MINORS= yes;
+    # SND_MAX_CARDS=32
+    SND_SUPPORT_OLD_API= yes;
+    SND_PROC_FS= yes;
+    SND_VERBOSE_PROCFS= yes;
+
+  };
 
   bpfConfigStructured = {
     #prev.pkgs.linuxPackages.bcc.kernelExtraConfig or

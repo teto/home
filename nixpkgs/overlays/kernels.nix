@@ -49,6 +49,7 @@ let
     # structuredConfigs.kvmConfigStructured
     bpfConfigStructured
     debugConfigStructured
+    soundConfig
     mininetConfigStructured
     kvmConfigStructured
     mptcpConfigStructured

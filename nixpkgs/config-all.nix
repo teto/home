@@ -52,8 +52,6 @@ rec {
 
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
-  
-
   # Set your time zone.
   # time.timeZone = "Europe/Amsterdam";
   time.timeZone = "Asia/Tokyo";
@@ -147,14 +145,11 @@ kernel_xconfig=''
   #   publish.userServices = true;
   # };
 
-
-
   # option to explore ?
   # services.opensmtpd = {
   #   enable= false;
   # };
 
-  # 
   # on master it is
   documentation.man.enable = true;
 

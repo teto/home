@@ -203,7 +203,7 @@ in
       builders-use-substitutes = true
     '';
 
-  # generated via cachix use hie-nix
+    # generated via cachix use hie-nix
     binaryCaches = [
       "https://cache.nixos.org/"
       "https://hie-nix.cachix.org"

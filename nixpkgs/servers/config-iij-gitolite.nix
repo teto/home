@@ -12,7 +12,6 @@ in
       ../modules/nextcloud.nix
   ];
 
-
   services.nextcloud.hostName = secrets.gitolite_server.hostname;
 
   environment.systemPackages = with pkgs; [
@@ -37,8 +36,12 @@ in
   # allow to fetch mininet from the host machine
 
   nix = {
-    binaryCaches =  [ "main" ];
     trustedUsers = [ "root" "teto" ];
+    binaryCaches = [
+      "https://cache.nixos.org/"
+      "https://hie-nix.cachix.org"
+    ];
+
   };
   # nix.  = ''
   #   require-sigs = false

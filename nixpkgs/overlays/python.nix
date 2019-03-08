@@ -87,25 +87,6 @@ rec {
           propagatedBuildInputs = oldAttrs.propagatedBuildInputs ++ [ pythonself.markdown];
         });
 
-        pandas = pythonsuper.pandas.overridePythonAttrs (oa: {
-
-          src = super.fetchFromGitHub {
-            owner = "teto";
-            repo = "pandas";
-            rev = "5d3e6912a15a83a39d5e854fa2a67da14e7ea8af";
-            sha256 = "0szkhmsndy3spvf5vg7mil68bnf5xg9pdzk75y9n8fhslj0v0j4v";
-          };
-
-          # src = super.fetchFromGitHub {
-          #   owner = "pandas-dev";
-          #   repo = "pandas";
-          #   rev = "9c0f6a8d703b6bee48918f2c5d16418a7ff736e3";
-          #   sha256 = "0czdfn82sp2mnw46n90xkfvfk7r0zgfyhfk0npnglp1jpfndpj3i";
-          # };
-
-          doCheck = false;
-          installCheckPhase = false;
-        });
     };
   };
 

@@ -1,29 +1,29 @@
 { pkgs, lib, ...} @ args:
 let
 
-  startPlugins = with pkgs.vimPlugins; [
-    #########################
-    ### OUTDATED look at neovimDefaultConfig in the overlay
-      csv-vim
-            fugitive
-            vimtex
-            # replaced by ale ?
-            LanguageClient-neovim
-            tagbar
-            vim-dirvish
-            vim-signify
-            vim-startify
-            vim-scriptease
-            vim-grepper
-            vim-nix
-            vim-obsession
-            vim-sayonara
-            unicode-vim
-            # deoplete-khard
-            # TODO this one will be ok once we patch it
-            # vim-markdown-composer  # WIP
-# vim-highlightedyank
-        ];
+  #startPlugins = with pkgs.vimPlugins; [
+  #  #########################
+  #  ### OUTDATED look at neovimDefaultConfig in the overlay
+  #    csv-vim
+  #          fugitive
+  #          vimtex
+  #          # replaced by ale ?
+  #          LanguageClient-neovim
+  #          tagbar
+  #          vim-dirvish
+  #          vim-signify
+  #          vim-startify
+  #          vim-scriptease
+  #          vim-grepper
+  #          vim-nix
+  #          vim-obsession
+  #          vim-sayonara
+  #          unicode-vim
+  #          # deoplete-khard
+  #          # TODO this one will be ok once we patch it
+  #          # vim-markdown-composer  # WIP
+## vim-highlightedyank
+  #      ];
 in
 {
     enable = true;
@@ -65,45 +65,46 @@ in
     # let g:neomake_python_mypy_maker.exe =
     # let g:gutentags_ctags_executable_haskell = '${pkgs.haskell.lib.dontCheck pkgs.haskellPackages.hasktags}/bin/hasktags'
     # let g:deoplete#sources#clang#libclang_path='${pkgs.llvmPackages.libclang}'
-    configure = {
-        customRC = ''
-        " here your custom configuration goes!
-        " let $MYVIMRC=fnamemodify(expand('<sfile>'), ":p")
+    configure = pkgs.neovimDefaultConfig.configure;
+    # {
+    #     customRC = ''
+    #     " here your custom configuration goes!
+    #     " let $MYVIMRC=fnamemodify(expand('<sfile>'), ":p")
 
 
-          " always see at least 10 lines
-          set scrolloff=10
+    #       " always see at least 10 lines
+    #       set scrolloff=10
 
-        " Failed to start language server: No such file or directory: 'pyls'
-        " todo do the same for pyls/vimtex etc
-        let g:vimtex_compiler_latexmk = {}
-        " latexmk is not in combined.small/basic
-        " vimtex won't let us setup paths to bibtex etc, we can do it in .latexmk ?
+    #     " Failed to start language server: No such file or directory: 'pyls'
+    #     " todo do the same for pyls/vimtex etc
+    #     let g:vimtex_compiler_latexmk = {}
+    #     " latexmk is not in combined.small/basic
+    #     " vimtex won't let us setup paths to bibtex etc, we can do it in .latexmk ?
 
-        let g:LanguageClient_serverCommands = {
-             \ 'python': [ fnamemodify( g:python3_host_prog, ':p:h').'/pyls', '-vv', '--log-file' , '/tmp/lsp_python.log']
-             \ , 'haskell': ['hie-wrapper', '--lsp', '-d', '--vomit', '--logfile', '/tmp/lsp_haskell.log' ]
-             \ , 'cpp': ['${pkgs.cquery}/bin/cquery', '--log-file=/tmp/cq.log']
-             \ , 'c': ['${pkgs.cquery}/bin/cquery', '--log-file=/tmp/cq.log']
-             \ }
+    #     let g:LanguageClient_serverCommands = {
+    #          \ 'python': [ fnamemodify( g:python3_host_prog, ':p:h').'/pyls', '-vv', '--log-file' , '/tmp/lsp_python.log']
+    #          \ , 'haskell': ['hie-wrapper', '--lsp', '-d', '--vomit', '--logfile', '/tmp/lsp_haskell.log' ]
+    #          \ , 'cpp': ['${pkgs.cquery}/bin/cquery', '--log-file=/tmp/cq.log']
+    #          \ , 'c': ['${pkgs.cquery}/bin/cquery', '--log-file=/tmp/cq.log']
+    #          \ }
 
-        " source $MYVIMRC
+    #     " source $MYVIMRC
 
-        autocmd BufReadPost *.pdf silent %!${pkgs.xpdf}/bin/pdftotext -nopgbrk -layout -q -eol unix "%" - | fmt -w78
-        ''
-        ;
+    #     autocmd BufReadPost *.pdf silent %!${pkgs.xpdf}/bin/pdftotext -nopgbrk -layout -q -eol unix "%" - | fmt -w78
+    #     ''
+    #     ;
 
-        # using this breaks my userplugins
-        # plug.plugins = startPlugins;
+    #     # using this breaks my userplugins
+    #     # plug.plugins = startPlugins;
 
-        packages.myVimPackage =
-        {
-          # see examples below how to use custom packages
-          # loaded on launch
-          start = startPlugins;
-          # manually loadable by calling `:packadd $plugin-name`
-          opt = [ ];
-        };
-      };
+    #     packages.myVimPackage =
+    #     {
+    #       # see examples below how to use custom packages
+    #       # loaded on launch
+    #       start = startPlugins;
+    #       # manually loadable by calling `:packadd $plugin-name`
+    #       opt = [ ];
+    #     };
+    #   };
 
 }

@@ -1808,7 +1808,7 @@ nmap <leader>sk <plug>(signify-prev-hunk)
 let g:auto_save_in_insert_mode = 1
 let g:auto_save_events = ['FocusLost']
 "let g:auto_save_events = ['CursorHold', 'FocusLost']
-let g:auto_save_write_all_buffers = 1 " Setting this option to 1 will write all
+let g:auto_save_write_all_buffers = 0 " Setting this option to 1 will write all
 " Put this in vimrc, add custom commands in the function.
 "
 " function! AutoSaveOnLostFocus()
@@ -2517,6 +2517,8 @@ nnoremap <C-RightMouse> :call SynStack()<CR>
 " forcefully by requiring it
 " let hc=remote#host#Require('haskell')
 
+" printer configuration
+" set printexpr
 
 func! ReadExCommandOutput(newbuf, cmd) abort
   redir => l:message
