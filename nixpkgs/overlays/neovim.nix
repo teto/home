@@ -16,6 +16,7 @@ let
       vim-signify
       vim-startify
       vim-scriptease
+      vim-sneak
       vim-grepper
       vim-nix
       vim-obsession
@@ -32,8 +33,33 @@ let
       unicode-vim
     ];
 
+  /* for compatibility with passing extraPythonPackages as a list; added 2018-07-11 */
+  compatFun = funOrList: (if builtins.isList funOrList then (_: funOrList) else funOrList);
+
 in
-{
+rec {
+
+  # this generates a config appropriate to work with the passed derivations
+  genNeovim = drvs: userConfig:
+    with super;
+    let
+      # neovim =
+      generatedConfig = {
+        extraPython3Packages = compatFun (super.python3Packages.requiredPythonModules drvs);
+        # extraPythonPackages = super.requiredPythonModules drvs;
+        # haskellPackages
+        # TODO do the same for python2 / haskell
+      };
+
+      finalConfig = super.neovimConfig (super.lib.mkMerge [
+        userConfig
+        self.neovimDefaultConfig
+        generatedConfig
+      ]);
+    in
+      # wrapNeovim neovim-unwrapped
+      wrapNeovim neovim-unwrapped (finalConfig);
+
 
   neovim-unwrapped-master = (super.neovim-unwrapped).overrideAttrs (oldAttrs: {
 	  name = "neovim";
@@ -95,7 +121,7 @@ in
   neovimDefaultConfig = {
         withPython3 = true;
         withPython = false;
-        withRuby = true; # for vim-rfc/GhDashboard etc.
+        withRuby = false; # for vim-rfc/GhDashboard etc.
         customRC = ''
           " always see at least 10 lines
           set scrolloff=10
@@ -120,6 +146,7 @@ in
         ''
         ;
 
+    # TODO provide an upper level
     configure = {
         packages.myVimPackage = {
           # see examples below how to use custom packages
@@ -133,7 +160,7 @@ in
     extraPython3Packages = ps: with ps; [
       pandas
       jedi
-      urllib3 
+      urllib3
       # pygments # for pygmentize and minted in latex
       mypy
       pyls-mypy # on le desactive sinon il genere des

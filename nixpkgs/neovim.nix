@@ -1,29 +1,5 @@
 { pkgs, lib, ...} @ args:
 let
-
-  #startPlugins = with pkgs.vimPlugins; [
-  #  #########################
-  #  ### OUTDATED look at neovimDefaultConfig in the overlay
-  #    csv-vim
-  #          fugitive
-  #          vimtex
-  #          # replaced by ale ?
-  #          LanguageClient-neovim
-  #          tagbar
-  #          vim-dirvish
-  #          vim-signify
-  #          vim-startify
-  #          vim-scriptease
-  #          vim-grepper
-  #          vim-nix
-  #          vim-obsession
-  #          vim-sayonara
-  #          unicode-vim
-  #          # deoplete-khard
-  #          # TODO this one will be ok once we patch it
-  #          # vim-markdown-composer  # WIP
-## vim-highlightedyank
-  #      ];
 in
 {
     enable = true;
@@ -39,22 +15,6 @@ in
     #       opt = [ ];
     #     };
     # };
-
-    package = pkgs.neovim-unwrapped-float;
-
-    # hopefully these can be added automatically once I use vim_configurable
-    extraPython3Packages = ps: with ps; [
-      pandas
-      jedi
-      urllib3
-      # pygments # for pygmentize and minted in latex
-      mypy
-      pyls-mypy # on le desactive sinon il genere des
-      python-language-server
-      pycodestyle
-    ]
-      # ++ lib.optionals ( pkgs ? pyls-mypy) [ pyls-mypy ]
-    ;
 
     # hopefully the 'configure' variable will be improved to set $MYVIMRC
     # adopt neovim path etc

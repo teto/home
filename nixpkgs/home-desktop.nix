@@ -77,6 +77,7 @@ let
 
   desktopPkgs = with pkgs; [
     # apvlv # broken
+    # alsa-utils # for alsamixer
     buku
     # gcalc
     unstable.dropbox
@@ -99,6 +100,7 @@ let
     mupdf.bin # evince does better too
     # mdp # markdown CLI presenter
     # gnome3.gnome_control_center
+    ncpamixer
     papis # library manager
     unstable.gnome3.gnome-calculator
     pass
