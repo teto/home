@@ -312,6 +312,7 @@ with libk;
       NETLINK_DIAG = yes;
 
       # increase ring kernel buffer size
-      LOG_BUF_SHIFT  = freeform 22;
+      LOG_BUF_SHIFT  = freeform "22";
+      I2C_NVIDIA_GPU = yes;
     };
   }

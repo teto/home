@@ -33,11 +33,11 @@ let
       unicode-vim
     ];
 
-  /* for compatibility with passing extraPythonPackages as a list; added 2018-07-11 */
-  compatFun = funOrList: (if builtins.isList funOrList then (_: funOrList) else funOrList);
 
 in
 rec {
+  /* for compatibility with passing extraPythonPackages as a list; added 2018-07-11 */
+  compatFun = funOrList: (if builtins.isList funOrList then (_: funOrList) else funOrList);
 
   # this generates a config appropriate to work with the passed derivations
   genNeovim = drvs: userConfig:

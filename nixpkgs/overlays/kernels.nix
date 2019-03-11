@@ -56,6 +56,7 @@ let
     localConfigStructured
     net9pConfigStructured
     strongswanStructured  # to get VPN working
+    persoConfig
 
     noChelsio # because of mptcp trunk
 
