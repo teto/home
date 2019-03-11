@@ -49,6 +49,15 @@ rec {
           };
         });
 
+
+        vdirsyncer = pythonsuper.alot.overrideAttrs (oldAttrs: {
+          patches = [ (super.fetchpatch {
+            url = https://github.com/pimutils/vdirsyncer/pull/788.patch;
+            sha256 = "0vl942ii5iad47y63v0ngmhfp37n30nxyk4j7h64b95fk38vfwx9";
+          })
+          ];
+        });
+
         # papis = pythonsuper.papis.overrideAttrs (oldAttrs: {
         #   version = "0.8-dev";
         #   src = super.fetchFromGitHub {
