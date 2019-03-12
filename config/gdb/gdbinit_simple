@@ -68,10 +68,10 @@ define hook-quit
 end
 
 # enters python mode
-python
-import os
+# python
+# import os
 # dirs = [ ]
 # gdb.execute('directory ' + ' '.join(dirs))
 # gdb.execute("show directories")
-end 
+# end
 # returend to normal mode

@@ -3,6 +3,8 @@
 [papers]
 dir = /mnt/ext/Zotero/Documents
 
+database-backend = whoosh
+
 [settings]
 default-library = papers
 
@@ -17,6 +19,7 @@ add-edit = True
 # papis add --open
 add-open = True
 
+ref-format = {doc[author_list][0][surname]}{doc[year]}
 # /* papis configuration */
 # from dois
 # cache-dir 
