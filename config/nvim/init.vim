@@ -271,6 +271,7 @@ Plug 'PotatoesMaster/i3-vim-syntax'
 
 " Plug 'Valloric/ListToggle' " toggle location/quickfix list toggling seems to fail
 " Plug 'git@github.com:milkypostman/vim-togglelist' " same
+" still problems with airline when installed via nix
 " Plug 'tpope/vim-obsession' ", {'on': 'Obsession', 'ObsessionStatus'}  very cool, register edited files in a Session.vim, call with :Obsession
 Plug 'mbbill/undotree' " replaces gundo
 Plug '907th/vim-auto-save' " :h auto-save

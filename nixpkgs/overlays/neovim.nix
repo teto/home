@@ -52,9 +52,9 @@ rec {
       };
 
       finalConfig = super.neovimConfig (super.lib.mkMerge [
-        userConfig
+        # userConfig
         self.neovimDefaultConfig
-        generatedConfig
+        # generatedConfig
       ]);
     in
       # wrapNeovim neovim-unwrapped

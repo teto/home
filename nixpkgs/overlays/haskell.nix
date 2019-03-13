@@ -48,13 +48,17 @@ self: prev:
       });
 
       "netlink" = prev.haskell.lib.overrideSrc hprev.netlink {
-         src = prev.fetchFromGitHub {
-          owner = "ongy";
-          repo = "netlink-hs";
-          rev = "8e7a285f7e4cee0a7f908e431559c87c2f228783";
+        src = builtins.fetchGit {
+          url = https://github.com/ongy/netlink-hs;
 
-          sha256 = "05hq41zh5msm06gfgfjvf1lq1qnqg1l2ng1ywiikkck8msc3mmx1";
         };
+
+        # src = prev.fetchFromGitHub {
+        #   owner = "ongy";
+        #   repo = "netlink-hs";
+        #   rev = "8e7a285f7e4cee0a7f908e431559c87c2f228783";
+        #   sha256 = "05hq41zh5msm06gfgfjvf1lq1qnqg1l2ng1ywiikkck8msc3mmx1";
+        # };
       };
 
       hie_remote = builtins.fetchTarball {

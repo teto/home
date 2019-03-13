@@ -100,8 +100,8 @@ let
     mupdf.bin # evince does better too
     # mdp # markdown CLI presenter
     # gnome3.gnome_control_center
-    ncpamixer
-    papis # library manager
+    ncpamixer # pulseaudio TUI mixer
+    # papis # library manager
     unstable.gnome3.gnome-calculator
     pass
     qtpass

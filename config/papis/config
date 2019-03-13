@@ -5,6 +5,10 @@ dir = /mnt/ext/Zotero/Documents
 
 database-backend = whoosh
 
+# see https://github.com/papis/papis/issues/140 for an explanation
+# without it, there is no result for an empty query with whoosh backend
+default-query-string = '*'
+
 [settings]
 default-library = papers
 
