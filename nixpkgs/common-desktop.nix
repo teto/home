@@ -42,7 +42,7 @@ in
         # "ohci_hcd"
         # "xhci_hcd"
         # "usbhid"
-        # "hid_generic" 
+        # "hid_generic"
   # ];
 
   networking.firewall.checkReversePath = false; # for nixops
@@ -94,7 +94,7 @@ in
         inconsolata # monospace
         noto-fonts-cjk # asiatic
         # nerdfonts
-        # corefonts # microsoft fonts  UNFREE 
+        # corefonts # microsoft fonts  UNFREE
         font-awesome_5
         source-code-pro
         dejavu_fonts
@@ -112,7 +112,7 @@ in
         defaultFonts = {
           # monospace = [ "" ];
           # serif = [ "" ];
-          # sansSerif = 
+          # sansSerif =
         };
       };
    };
@@ -181,9 +181,9 @@ in
       "nixos-unstable=https://github.com/nixos/nixpkgs-channels/archive/nixos-unstable.tar.gz"
       "nixos=https://github.com/nixos/nixpkgs-channels/archive/nixos-18.09.tar.gz"
     ]
-    ++ lib.optional (builtins.pathExists userNixpkgs)  "nixpkgs=${builtins.toString userNixpkgs}" 
-    ++ lib.optional (builtins.pathExists nixosConfig)  "nixos-config=${builtins.toString nixosConfig}" 
-    ++ lib.optional (builtins.pathExists nixosOverlay) "nixpkgs-overlays=${builtins.toString nixosOverlay}" 
+    ++ lib.optional (builtins.pathExists userNixpkgs)  "nixpkgs=${builtins.toString userNixpkgs}"
+    ++ lib.optional (builtins.pathExists nixosConfig)  "nixos-config=${builtins.toString nixosConfig}"
+    ++ lib.optional (builtins.pathExists nixosOverlay) "nixpkgs-overlays=${builtins.toString nixosOverlay}"
     ++ lib.optional (builtins.pathExists nixosOverlay) "ssh-config-file=${builtins.toString sshFolder}"
     ;
 
@@ -214,11 +214,7 @@ in
 
     trustedUsers = [ "root" "teto" ];
 
-    # builders = [
-    #   ];
-    # maxJobs = [ 4];
     # either use --option extra-binary-caches http://hydra.nixos.org/
-    # nix.binaryCaches = [ http://hydra.nixos.org/ ];
     # handy to hack/fix around
     # readOnlyStore = false;
   };

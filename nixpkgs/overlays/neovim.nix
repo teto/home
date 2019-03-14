@@ -2,7 +2,13 @@ self: super:
 let
   startPlugins = with super.pkgs.vimPlugins; [
       # echodoc-vim
+      # 
+# Plug 'deoplete-plugins/deoplete-zsh'
+# Plug 'deoplete-plugins/deoplete-jedi'
       deoplete-nvim
+      deoplete-jedi
+      # deoplete-zsh # not available just yet
+      # echodoc-vim
       fugitive
       far-vim
       # replaced by ale ?
@@ -44,23 +50,25 @@ rec {
     with super;
     let
       # neovim =
+      requiredPythonModules = lib.debug.traceVal (super.python3Packages.requiredPythonModules drvs);
       generatedConfig = {
-        extraPython3Packages = compatFun (super.python3Packages.requiredPythonModules drvs);
+        extraPython3Packages = compatFun (requiredPythonModules);
         # extraPythonPackages = super.requiredPythonModules drvs;
         # haskellPackages
         # TODO do the same for python2 / haskell
       };
 
+      # propagatedBuildInputs 
       finalConfig = super.neovimConfig (
         super.lib.mkMerge [
-        # userConfig
+        userConfig
         self.neovimDefaultConfig
-        # generatedConfig
+        generatedConfig
       ]
       );
     in
       # wrapNeovim neovim-unwrapped
-      wrapNeovim neovim-unwrapped (finalConfig);
+      wrapNeovim neovim-unwrapped-master (finalConfig);
 
 
   neovim-unwrapped-master = (super.neovim-unwrapped).overrideAttrs (oldAttrs: {
@@ -96,7 +104,7 @@ rec {
   neovim-test = super.neovim.override {
           # extraPython3Packages withPython3
           # extraPythonPackages withPython
-          # withNodeJs withRuby 
+          # withNodeJs withRuby
           viAlias=false;
           vimAlias=true;
           # configure;
@@ -135,8 +143,9 @@ rec {
         " latexmk is not in combined.small/basic
         " vimtex won't let us setup paths to bibtex etc, we can do it in .latexmk ?
 
+        " fnamemodify( g:python3_host_prog, ':p:h')
         let g:LanguageClient_serverCommands = {
-             \ 'python': [ fnamemodify( g:python3_host_prog, ':p:h').'/pyls', '-vv', '--log-file' , '/tmp/lsp_python.log']
+             \ 'python': [ g:python3_host_prog, '-mpyls', '-vv', '--log-file' , '/tmp/lsp_python.log']
              \ , 'haskell': ['hie-wrapper', '--lsp', '-d', '--vomit', '--logfile', '/tmp/lsp_haskell.log' ]
              \ , 'cpp': ['${super.pkgs.cquery}/bin/cquery', '--log-file=/tmp/cq.log']
              \ , 'c': ['${super.pkgs.cquery}/bin/cquery', '--log-file=/tmp/cq.log']
@@ -165,7 +174,7 @@ rec {
       urllib3
       # pygments # for pygmentize and minted in latex
       mypy
-      pyls-mypy # on le desactive sinon il genere des
+      # pyls-mypy # can't find imports :s
       python-language-server
       pycodestyle
     ]

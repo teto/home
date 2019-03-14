@@ -5,9 +5,11 @@ dir = ~/Nextcloud/zotero
 
 database-backend = whoosh
 
+include = papis.local
+
 # see https://github.com/papis/papis/issues/140 for an explanation
 # without it, there is no result for an empty query with whoosh backend
-default-query-string = '*'
+# default-query-string = '*'
 
 [settings]
 default-library = papers

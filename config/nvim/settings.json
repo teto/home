@@ -6,6 +6,9 @@
             "pyflakes": {
                 "enabled": false
             },
+            "autopep8": {
+                "enabled": false
+            },
             "pydocstyle": {
                 "enabled": false
             },

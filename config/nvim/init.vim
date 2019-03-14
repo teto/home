@@ -88,7 +88,7 @@ call plug#begin(s:plugdir)
 " branch v2-integration
 " Plug 'joonty/vdebug' " to add breakpoints etc
 " Plug 'andymass/vim-matchup' " to replace matchit
-" call :NR on a region than :w . coupled with b:nrrw_aucmd_create, 
+" call :NR on a region than :w . coupled with b:nrrw_aucmd_create,
 " Plug 'AGhost-7/critiq.vim' " :h critiq
 Plug 'ndmitchell/ghcid', { 'rtp': 'plugins/nvim' }
 Plug 'neovimhaskell/nvim-hs.vim' " to help with nvim-hs
@@ -100,7 +100,7 @@ Plug 'prabirshrestha/vim-lsp'
 " Plug 'neoclide/coc.nvim'
 Plug 'neomutt/neomutt.vim' " syntax file for neomutt
 Plug 'chrisbra/NrrwRgn' " to help with multi-ft files
-Plug 'chrisbra/vim-diff-enhanced' " 
+Plug 'chrisbra/vim-diff-enhanced' "
 " Plug 'mhinz/vim-signify' " Indicate changed lines within a file using a VCS.
 " Plug 'vim-pandoc/vim-pandoc'
 Plug 'vim-pandoc/vim-pandoc-syntax'
@@ -113,7 +113,7 @@ Plug 'tweekmonster/startuptime.vim', {'on': 'StartupTime'} " see startup time pe
 " Plug 'mattn/gist-vim' " to gist requires webapi
 " provider dependant {{{
 " new deoplete relies on yarp :
-Plug 'AndrewRadev/splitjoin.vim' " gS/gJ to 
+Plug 'AndrewRadev/splitjoin.vim' " gS/gJ to
 " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'roxma/nvim-yarp' " required for deoplete
 Plug 'roxma/vim-hug-neovim-rpc' " what is that ? required for deoplete
@@ -235,7 +235,7 @@ Plug 'neovimhaskell/haskell-vim', {'for':'haskell'} " haskell install
 " crashes without netrc
 " Plug 'deoplete-plugins/deoplete-make' " empty !
 Plug 'deoplete-plugins/deoplete-zsh'
-Plug 'deoplete-plugins/deoplete-jedi'
+" Plug 'deoplete-plugins/deoplete-jedi'
 " Plug 'deoplete-plugins/deoplete-clang'
 "
 "}}}
@@ -381,7 +381,7 @@ Plug 'teto/Modeliner' " <leader>ml to setup buffer modeline
 " Plug 'mhinz/vim-grepper' " , { 'on': 'Grepper'}
 "Plug 'teto/neovim-auto-autoread' " works only in neovim, runs external checker
 Plug 'neomake/neomake' " async build for neovim
-" Plug 'w0rp/ale' 
+" Plug 'w0rp/ale'
 " Plug 'rhysd/github-complete.vim' " provides github user/repo autocompletion after @ and #
 
 " does not work seems to be better ones
@@ -1043,7 +1043,7 @@ let g:deoplete#enable_debug = 1
 " \ 'dup': v:false
 " \ })
 
-" " source 
+" " source
 " call deoplete#custom#var('around', {
 " \   'range_above': 15,
 " \   'range_below': 15,
@@ -1104,7 +1104,7 @@ let g:deoplete#sources#jedi#show_docstring=1
 "   \ 'gitcommit', [g:deoplete#keyword_patterns.gitcommit])
 
 "}}}
-" deoplete notmuch 
+" deoplete notmuch
 " notmuch address command to fetch completions
 " NOTE: --format=sexp is required
 let g:deoplete#sources#notmuch#command = ['notmuch', 'address', '--format=sexp', '--output=recipients', '--deduplicate=address', 'tag:inbox']
@@ -1112,7 +1112,7 @@ let g:deoplete#sources#notmuch#command = ['notmuch', 'address', '--format=sexp',
 " ALE {{{
 " let deoplete handle completion
 let g:ale_completion_enabled = 0
-" let g:ale_completion_delay= 
+" let g:ale_completion_delay=
 " g:ale_completion_max_suggestions
 " g:ale_completion_excluded_words or b:ale_completion_excluded_words
 " g:ale_set_balloons gcc
@@ -1130,7 +1130,7 @@ let g:airline#extensions#ale#enabled = 1
 " let g:ale_lint_on_enter=
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_virtualtext_cursor = 1
-" let g:ale_virtualtext_delay = 10                               
+" let g:ale_virtualtext_delay = 10
 
 let g:ale_sign_error='✖'
 let g:ale_sign_warn='⚠'
@@ -1199,7 +1199,7 @@ let g:neomake_place_signs=1
 
 " let g:neomake_python_mypy_exe = g:python3_host_prog
 " let g:neomake_python_mypy_exe = fnamemodify( g:python3_host_prog, ':p:h').'/mypy'
-" let g:neomake_python_mypy_args = ['-m', 'mypy'] 
+" let g:neomake_python_mypy_args = ['-m', 'mypy']
 "
 " let g:neomake_python_mypymatt_maker = neomake#makers#ft#python#mypy()
 " + neomake#makers#ft#python#mypy().args
@@ -1238,9 +1238,9 @@ let s:neomake_exclude_ft = ['cpp', 'java' ]
 " let g:neomake_tex_checkers = [ '' ]
 " let g:neomake_tex_enabled_makers = []
 let g:neomake_tex_enabled_makers = []
-" 'mypy'
+"'mypy'
 " disabled 'mypy' since it was generating errors
-let g:neomake_python_enabled_makers = []
+let g:neomake_python_enabled_makers = ['mypy']
 
 " let g:neomake_python_mypy_maker.exe = g:python3_host_prog
 " let g:neomake_python_mypy_maker.args = '-mmypy'
@@ -1303,7 +1303,7 @@ call neomake#configure#automake('w')
 " }}}
 " Airline {{{
 " to speed up things
-let g:airline_extensions = ['obsession', 'tabline', 'wordcount'] 
+let g:airline_extensions = ['obsession', 'quickfix', 'tabline', 'wordcount']
 " let g:airline#extensions#default#layout = [
 "     \ [ 'a', 'b', 'c' ],
 "     \ [ 'x', 'y', 'z', 'error', 'warning' ]
@@ -1323,6 +1323,10 @@ let g:airline#extensions#default#section_truncate_width = {
       \ 'warning': 80,
       \ 'error': 80,
       \ }
+
+
+let g:airline#extensions#quickfix#quickfix_text = 'Quickfix'
+let g:airline#extensions#quickfix#location_text = 'Location'
 
 let g:airline_highlighting_cache = 1 " to speed up things
 let g:airline_powerline_fonts = 0
@@ -1349,7 +1353,7 @@ let g:airline#extensions#default#layout = [
 call airline#parts#define_function('grepper', 'grepper#statusline')
 " see :h airline-default-sections
 let g:airline_section_x = airline#section#create_right(['grepper'])
-let g:airline_section_y = airline#section#create_right(['neomake_error_count', 'neomake_warning_count'])
+" let g:airline_section_y = airline#section#create_right(['neomake_error_count', 'neomake_warning_count'])
 " let g:airline_section_z = airline#section#create_right(['neomake_error_count', 'neomake_warning_count'])
 let g:airline_section_error = airline#section#create_right(['neomake_error_count', 'languageclient_error_count'])
 " let g:airline_section_warning (ycm_warning_count, syntastic-warn,
@@ -1427,7 +1431,7 @@ nmap <leader>ç <Plug>AirlineSelectTab9
   nmap <leader>+ <Plug>AirlineSelectNextTab
 
 "}}}
-" one could change the formatter with 
+" one could change the formatter with
   " let g:airline#extensions#tabline#formatter = 'default'
 "}}}
 " limelight {{{
@@ -1597,13 +1601,13 @@ let g:vimtex_syntax_minted = [
       \ {
       \   'lang' : 'json',
       \ }]
-" let g:vimtex_log_ignore = 
+" let g:vimtex_log_ignore =
 let g:vimtex_log_verbose= 1
 let g:vimtex_quickfix_mode = 2 " 1=> opened automatically and becomes active (2=> inactive)
 " with being on anotherline
       " \ 'Biber reported the following issues',
       " \ "Invalid format of field 'month'"
-" todo update default instead with extend ? 
+" todo update default instead with extend ?
 let g:vimtex_quickfix_latexlog = {
       \ 'underfull': 0,
       \ 'overfull': 0,
@@ -1706,7 +1710,7 @@ function! OnGrepperCompletion()
   if exists("winhl")
     setlocal winhl=Normal:GrepperNormal
   endif
-" call notify#emitNotification('grepper', 'Search finished') | 
+" call notify#emitNotification('grepper', 'Search finished') |
 endfunction
 
 autocmd User Grepper call OnGrepperCompletion()
@@ -2305,7 +2309,7 @@ tmenu Trans.FR Traduire vers le francais
 " upstream those to grepper
 menu Grepper.Search\ in\ current\ Buffer :Grepper -switch -buffer
 menu Grepper.Search\ across\ Buffers :Grepper -switch -buffers
-menu Grepper.Search\ across\ directory :Grepper 
+menu Grepper.Search\ across\ directory :Grepper
 menu Grepper.Autoopen\ results :let g:grepper.open=1<CR>
 
 " tabulation-related menu {{{2
@@ -2435,7 +2439,7 @@ function! Check_build_folder(opts, ) abort dict
   endif
 
   if !exists("$IN_NIX_SHELL")
-    echom "You are not in a nix-shell" 
+    echom "You are not in a nix-shell"
   endif
 
   return self
@@ -2470,7 +2474,7 @@ endfunction
 set cpoptions="aABceFsn" " vi ComPatibility options
 
 
-" let it jump to 
+" let it jump to
 nnoremap <C-LeftMouse> :call LanguageClient#textDocument_definition()<CR>
 nnoremap <C-RightMouse> :call SynStack()<CR>
 
