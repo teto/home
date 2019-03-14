@@ -1,7 +1,7 @@
 # see https://papis.readthedocs.io/en/latest/configuration.html?highlight=doi
 # for an example
 [papers]
-dir = /mnt/ext/Zotero/Documents
+dir = ~/Nextcloud/zotero
 
 database-backend = whoosh
 

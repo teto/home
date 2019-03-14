@@ -51,11 +51,13 @@ rec {
         # TODO do the same for python2 / haskell
       };
 
-      finalConfig = super.neovimConfig (super.lib.mkMerge [
+      finalConfig = super.neovimConfig (
+        super.lib.mkMerge [
         # userConfig
         self.neovimDefaultConfig
         # generatedConfig
-      ]);
+      ]
+      );
     in
       # wrapNeovim neovim-unwrapped
       wrapNeovim neovim-unwrapped (finalConfig);

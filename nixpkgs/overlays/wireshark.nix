@@ -17,7 +17,7 @@ in
 #     export QT_PLUGIN_PATH=${qt5.qtbase.bin}/${qt5.qtbase.qtPluginPrefix}
 
   wireshark-master = (super.wireshark.override({
-    python = super.python3;
+    python3 = super.python3;
   })).overrideAttrs (oa: {
     nativeBuildInputs = oa.nativeBuildInputs ++ [ super.doxygen ];
     shellHook = oa.shellHook + ''

@@ -1239,7 +1239,8 @@ let s:neomake_exclude_ft = ['cpp', 'java' ]
 " let g:neomake_tex_enabled_makers = []
 let g:neomake_tex_enabled_makers = []
 " 'mypy'
-let g:neomake_python_enabled_makers = ['mypy']
+" disabled 'mypy' since it was generating errors
+let g:neomake_python_enabled_makers = []
 
 " let g:neomake_python_mypy_maker.exe = g:python3_host_prog
 " let g:neomake_python_mypy_maker.args = '-mmypy'

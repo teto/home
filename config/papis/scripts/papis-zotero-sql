@@ -2,6 +2,7 @@
 # papis-short-help: Convert zotero library to papis library using sqlite
 # Copyright Felix Hummel 2017 GPLv3
 # -*- coding: utf-8 -*-
+# TODO nix run nixpkgs.sqlitebrowser
 # nix-shell -p 'python3.withPackages(ps: with ps;[ sqlite pyyaml dateutil ])' ~/nixpkgs
 import sqlite3
 import yaml
@@ -11,7 +12,7 @@ import glob
 import dateutil.parser
 
 # path to zotero SQLite database "zoter.sqlite" and "storage" to be imported
-inputPath = "/mnt/ext/Zotero"
+inputPath = "."
 
 # path where all items will be exported to
 # created if not existing
