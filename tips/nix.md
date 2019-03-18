@@ -12,3 +12,6 @@ https://nixos.wiki/wiki/Distributed_build
 
 https://discourse.nixos.org/t/remote-builders-operation-addtostore-is-not-supported-by-store/2115/2
 env NIX_REMOTE='ssh-ng://my.machine?compress=true' nix-build
+
+find reverse dependencies
+nix-store --query --referrers $(which xdg-mime)

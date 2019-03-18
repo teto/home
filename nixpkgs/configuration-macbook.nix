@@ -37,14 +37,15 @@ let
   # boot.blacklistedKernelModules = [ "wl" ];
 
   # boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_mptcp_with_netlink;
-  boot.kernelPackages = pkgs.linuxPackages;
+  # boot.kernelPackages = pkgs.linuxPackages;
+  # boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_mptcp_trunk_raw;
   # boot.kernelPackages = pkgs.linuxPackages_4_14;
 # boot.kernelPackages = pkgs.linuxPackagesFor pkgs.my_lenovo_kernel;
 
 
   # programs.mininet.enable = true;
 
-  # TODO we need nouveau 
+  # TODO we need nouveau
   # boot.kernelModules = [
   #   "af_key" # for ipsec/vpn support
   #   "kvm" "kvm-intel" # for virtualisation
@@ -101,15 +102,17 @@ let
 
   programs.ccache.enable = true;
   services.xserver.displayManager.slim = {
-    # theme = 
+    # theme =
     autoLogin = true;
     defaultUser = "teto";
   };
-  
+
   nixpkgs = {
     overlays = [
-      (import ./overlays/kernels.nix) 
-      (import ./overlays/haskell.nix) 
+      (import ./overlays/kernels.nix)
+      (import ./overlays/haskell.nix)
+      # to get xdg_utils
+      # (import ./overlays/i3.nix)
     ];
 
     config = {
@@ -124,6 +127,11 @@ let
     # };
     # extraConfig = ''
     # '';
+
+    # 0 = default/highest vs 7 lowest
+    daemonIONiceLevel = 3;
+    # 0 = max (default) vs 19 lowest
+    daemonNiceLevel = 2;
     buildMachines = secrets.buildMachines;
     distributedBuilds = true;
   };
@@ -146,6 +154,11 @@ let
     #   '';
     # });
   };
+
+  # # Just for the sake of testing
+  # environment.systemPackages = [
+  #   pkgs.openvswitch
+  # ];
 
   services.xl2tpd = {
     enable = true;

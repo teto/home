@@ -1,13 +1,27 @@
 diff --git a/scripts/xdg-mime.in b/scripts/xdg-mime.in
-index e85fd62..8fb6866 100644
+index 0e567c7..0038b0b 100644
 --- a/scripts/xdg-mime.in
 +++ b/scripts/xdg-mime.in
-@@ -241,7 +241,7 @@ make_default_generic()
-     # Add $2=$1 to XDG_CONFIG_HOME/mimeapps.list
+@@ -245,9 +245,13 @@ make_default_generic()
      xdg_config_home="$XDG_CONFIG_HOME"
      [ -n "$xdg_config_home" ] || xdg_config_home="$HOME/.config"
--    default_file="$xdg_config_home/mimeapps.list"
-+    default_file=$(readlink -f -- $xdg_config_home/mimeapps.list)
+     default_file="$xdg_config_home/mimeapps.list"
++    out_file="$default_file"
      DEBUG 2 "make_default_generic $1 $2"
      DEBUG 1 "Updating $default_file"
      [ -f "$default_file" ] || touch "$default_file"
++	if [ -L "$default_file" ]; then out_file=$(readlink -f "$default_file"); fi
++
++    DEBUG 2 "Writing to $out_file"
+     awk -v mimetype="$2" -v application="$1" '
+     BEGIN {
+         prefix=mimetype "="
+@@ -295,7 +299,7 @@ make_default_generic()
+             blanks--
+         }
+     }
+-' "$default_file" > "${default_file}.new" && mv "${default_file}.new" "$default_file"
++' "$default_file" > "${default_file}.new" && mv "${default_file}.new" "$out_file"
+ }
+ 
+ search_desktop_file()

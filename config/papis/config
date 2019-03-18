@@ -1,18 +1,19 @@
 # see https://papis.readthedocs.io/en/latest/configuration.html?highlight=doi
 # for an example
 [papers]
-dir = ~/Nextcloud/zotero
+dir = ~/papis_db
 
 database-backend = whoosh
-
-include = papis.local
-
 # see https://github.com/papis/papis/issues/140 for an explanation
 # without it, there is no result for an empty query with whoosh backend
-# default-query-string = '*'
+
+# [include]
+# test = papis.local
+
 
 [settings]
 default-library = papers
+default-query-string = '*'
 
 # Use ranger as a file browser, too a  nice python package
 # file-browser = ranger

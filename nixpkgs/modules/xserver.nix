@@ -22,7 +22,6 @@
       };
       # job.logXsession = true; # writes into ~/.xsessions-errors
       # enableCtrlAltBackspace = false;
-      # exportConfiguration = false;
       # for the smaller setup setup the favorite mode to 1920 x 1080
        # screenSection = '' '';
     };

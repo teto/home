@@ -46,28 +46,34 @@ rec {
   compatFun = funOrList: (if builtins.isList funOrList then (_: funOrList) else funOrList);
 
   # this generates a config appropriate to work with the passed derivations
+  # for instance to develop on a software from a nix-shell
   genNeovim = drvs: userConfig:
     with super;
     let
-      # neovim =
       requiredPythonModules = lib.debug.traceVal (super.python3Packages.requiredPythonModules drvs);
+
+      # Here we generate a neovim config that allows to work with the passed 'drvs'
+      # for instance adding the python propagatedBuildInputs if needed
+      # or haskell ones if it's a haskell project etc.
       generatedConfig = {
         extraPython3Packages = compatFun (requiredPythonModules);
-        # extraPythonPackages = super.requiredPythonModules drvs;
         # haskellPackages
-        # TODO do the same for python2 / haskell
+        # TODO do the same for ruby / haskell
       };
 
-      # propagatedBuildInputs 
       finalConfig = super.neovimConfig (
         super.lib.mkMerge [
-        userConfig
-        self.neovimDefaultConfig
-        generatedConfig
-      ]
+          # project specific user config
+          userConfig
+          # my miniimal global config, when I am out of a nix-shell
+          # the plugins/environments I always want available
+          self.neovimDefaultConfig
+          # a config generated from the input 'drvs' with an appropriate development
+          # environment.
+          generatedConfig
+        ]
       );
     in
-      # wrapNeovim neovim-unwrapped
       wrapNeovim neovim-unwrapped-master (finalConfig);
 
 

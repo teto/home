@@ -91,7 +91,7 @@ fileext = ".ics"
 type = "caldav"
 # https://ncloud.zaclys.com/remote.php/dav/calendars/22780/personal/
 # http://nixos.iijlab.net/remote.php/dav/calendars/root/personal/
-url = "http://nixos.iijlab.net/remote.php/dav/calendars/root/personal/"
+url = "http://nixos.iijlab.net/remote.php/dav/"
 # username.fetch = ["command", "secret-tool", "get", "zaclys", "login"]
 username = "root"
 password.fetch = ["command", "~/dotfiles/bin/pass-show", "iij/nextcloud"]

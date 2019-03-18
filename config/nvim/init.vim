@@ -524,9 +524,6 @@ set noswapfile
 set wildmenu
 set wildchar=<Tab>
 set wildmode=list:longest,full " zsh way ?!
-"Ignore these files when completing names and in Explorer
-" set wildignore=.svn,CVS,.git,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg,*.png,*.xpm,*.gif
-
 
 set wildignore+=.hg,.git,.svn                    " Version control
 set wildignore+=*.aux,*.out,*.toc                " LaTeX intermediate files
@@ -546,6 +543,8 @@ set wildignore+=*.orig                           " Merge resolution files
 " Clojure/Leiningen
 set wildignore+=classes
 set wildignore+=lib
+
+set wildoptions+=pum
 
 " }}}
 " Modeliner shortcuts  {{{

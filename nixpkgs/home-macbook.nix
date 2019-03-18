@@ -13,6 +13,7 @@
 
   home.packages = with pkgs; [
     dunst
+    xdg_utils
   ];
 
   home.file.".digrc".text = ''
@@ -40,8 +41,8 @@
   home.keyboard = {
     layout = "us,fr";
     # options = [ "grp:caps_toggle" "grp_led:scroll" ];
-    # TODO can add Mod4 
-    options = [ 
+    # TODO can add Mod4
+    options = [
       "add Mod1 Super_L"
       "keysym XF86Eject = Delete"
   ];
