@@ -52,6 +52,13 @@ rec {
     let
       requiredPythonModules = lib.debug.traceVal (super.python3Packages.requiredPythonModules drvs);
 
+      requiredHaskellPackages = [
+        haskellPackages.gutenhasktags
+        haskellPackages.haskdogs # seems to build on hasktags/ recursively import things
+        haskellPackages.hasktags
+      ];
+
+
       # Here we generate a neovim config that allows to work with the passed 'drvs'
       # for instance adding the python propagatedBuildInputs if needed
       # or haskell ones if it's a haskell project etc.
@@ -59,6 +66,7 @@ rec {
         extraPython3Packages = compatFun (requiredPythonModules);
         # haskellPackages
         # TODO do the same for ruby / haskell
+
       };
 
       finalConfig = super.neovimConfig (
@@ -137,6 +145,7 @@ rec {
   neovimDefaultConfig = {
         withPython3 = true;
         withPython = false;
+        withHaskell = false;
         withRuby = false; # for vim-rfc/GhDashboard etc.
         customRC = ''
           " always see at least 10 lines

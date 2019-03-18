@@ -27,8 +27,14 @@ rec {
     papis = super.papis.overridePythonAttrs (oa: {
       version = "0.8-dev";
 
+      # datautil
+      # super.python3Packages.sqlite
+      propagatedBuildInputs = with super.python3Packages; oa.propagatedBuildInputs ++  ( [
+         pyyaml dateutil
+      ]);
       # src = /home/teto/papis;
       doCheck = false;
+
       src = builtins.fetchGit {
         url = https://github.com/teto/papis;
         ref = "zsh_completion";

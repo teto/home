@@ -235,6 +235,7 @@ Plug 'neovimhaskell/haskell-vim', {'for':'haskell'} " haskell install
 " crashes without netrc
 " Plug 'deoplete-plugins/deoplete-make' " empty !
 Plug 'deoplete-plugins/deoplete-zsh'
+Plug 'ncm2/float-preview.nvim'
 " Plug 'deoplete-plugins/deoplete-jedi'
 " Plug 'deoplete-plugins/deoplete-clang'
 "
@@ -768,6 +769,9 @@ nnoremap <Leader>w :w<CR>
 
 "nnoremap <F8> :vertical wincmd f<CR> " open file under cursor in a split
 nnoremap <leader>gfs :vertical wincmd f<CR> " open file under cursor in a split
+" float-preview {{{
+let g:float_preview#docked = 0
+"}}}
 " vim-pad {{{
 let g:pad#dir=$XDG_DATA_HOME"/notes"
 let g:pad#set_mappings=0
