@@ -524,7 +524,8 @@ set noswapfile
 " display a menu when need to complete a command
 set wildmenu
 set wildchar=<Tab>
-set wildmode=list:longest,full " zsh way ?!
+" list:longest, " list breaks the pum
+set wildmode=full " zsh way ?!
 
 set wildignore+=.hg,.git,.svn                    " Version control
 set wildignore+=*.aux,*.out,*.toc                " LaTeX intermediate files
@@ -1576,6 +1577,9 @@ let g:tex_flavor = "latex"
 " Pour le rappel
 " <localleader>ll pour la compilation continue du pdf
 " <localleader>lv pour la preview du pdf
+" see https://github.com/lervag/vimtex/issues/1058
+" let g:vimtex_log_ignore 
+let g:vimtex_log_verbose=0
 let g:vimtex_quickfix_open_on_warning = 1
 let g:vimtex_view_automatic=1
 " was only necessary with vimtex lazy loaded
@@ -1604,8 +1608,6 @@ let g:vimtex_syntax_minted = [
       \ {
       \   'lang' : 'json',
       \ }]
-" let g:vimtex_log_ignore =
-let g:vimtex_log_verbose= 1
 let g:vimtex_quickfix_mode = 2 " 1=> opened automatically and becomes active (2=> inactive)
 " with being on anotherline
       " \ 'Biber reported the following issues',
@@ -1779,20 +1781,23 @@ nnoremap <leader>pu :PlugUpdate<CR>
 let g:signify_vcs_list = [ 'git']
 " let g:signify_mapping_next_hunk = '<leader>hn' " hunk next
 " let g:signify_mapping_prev_hunk = '<leader>gk'
-let g:signify_mapping_toggle_highlight = '<leader>gh'
+" let g:signify_mapping_toggle_highlight = '<leader>gh'
 let g:signify_line_highlight = 0 " display added/removed lines in different colors
 "let g:signify_line_color_add    = 'DiffAdd'
 "let g:signify_line_color_delete = 'DiffDelete'
 "let g:signify_line_color_change = 'DiffChange'
 " let g:signify_mapping_toggle = '<leader>gt'
 " let g:signify_sign_add =  '+'
-let g:signify_sign_show_text = 0
-" let g:signify_sign_add =  "\u00a0" " unbreakable space
-" let g:signify_sign_delete            = "\u00a0"
+let g:signify_sign_show_text = 1
+"\u00a0  " unbreakable space
+
+" let g:signify_sign_add =  "▎"
+let g:signify_sign_add =  "▊"
+let g:signify_sign_delete            = g:signify_sign_add
 " " let g:signify_sign_delete_first_line = '‾'
-" let g:signify_sign_change            = "\u00a0"
-" let g:signify_sign_changedelete      = g:signify_sign_change
-" let g:signify_sign_show_count|
+let g:signify_sign_change            = g:signify_sign_add
+let g:signify_sign_changedelete      = g:signify_sign_change
+let g:signify_sign_show_count= 0
 " master
 
  " foire dans le commit suivant
@@ -2398,7 +2403,9 @@ command! FlipBool call FzfFlipBool()
 map <A-]> :vsp<CR>:exec("tag ".expand("<cword>"))<CR>
 map <C-5> :Neomake! make<CR>
 
-highlight SignifySignChange cterm=bold ctermbg=237  ctermfg=227 guibg=#F08A1F
+highlight SignifySignChange cterm=bold ctermbg=237  ctermfg=227 guibg=NONE guifg=#F08A1F
+highlight SignifySignAdd cterm=bold ctermbg=237  ctermfg=227 guibg=NONE guifg=green
+highlight SignifySignDelete cterm=bold ctermbg=237  ctermfg=227 guibg=NONE guifg=red
 
 " MATT to test
 let g:python_host_tcp=1
