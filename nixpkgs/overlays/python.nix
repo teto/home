@@ -68,8 +68,8 @@ rec {
           # src = /home/teto/cmd2;
           src = super.fetchgit {
             url=https://github.com/python-cmd2/cmd2.git;
-            rev = "92ab34edff5cdb4481233cbd49c80b91194570ce";
-            sha256 = "1n7w07x9m24xvii3p8g4f13am5lgg5kg5zpq04kn0sy93g4f7052";
+            rev = "9f5906a5cc1128652f1b43545ae4c948e9a0fe2b";
+            sha256 = "12gkdyp2xgdi2a3aan7ifl16mp5dac8z5fhjy3i8yjl1hdsj74qp";
             leaveDotGit = true;
             deepClone = true;
           };
