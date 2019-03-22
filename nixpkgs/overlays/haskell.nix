@@ -48,10 +48,13 @@ self: prev:
       });
 
       "netlink" = prev.haskell.lib.overrideSrc hprev.netlink {
-        src = builtins.fetchGit {
-          url = https://github.com/ongy/netlink-hs;
 
-        };
+        # src = builtins.fetchGit {
+        #   # url = https://github.com/ongy/netlink-hs;
+        #   url = https://github.com/teto/netlink-hs;
+        # };
+
+        src = /home/teto/netlink-hs;
 
         # src = prev.fetchFromGitHub {
         #   owner = "ongy";
@@ -63,12 +66,13 @@ self: prev:
 
       hie_remote = builtins.fetchTarball {
         url    = https://github.com/domenkozar/hie-nix/tarball/master;
+        # url    = https://github.com/teto/hie-nix/tarball/dev;
         # "https://github.com/NixOS/nixpkgs/archive/3389f23412877913b9d22a58dfb241684653d7e9.tar.gz";
         # sha256 = "0wgm7sk9fca38a50hrsqwz6q79z35gqgb9nw80xz7pfdr4jy9pf7";
       };
 
       # todo make it automatic depending on nixpkgs' ghc
-      hie = (import hie_remote {} ).hie86;
+      # hie = (import hie_remote {} ).hie86;
 
 
     };

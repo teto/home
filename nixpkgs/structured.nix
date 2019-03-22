@@ -252,7 +252,7 @@ with libk;
     };
 
     mptcpConfigStructured = {
-      
+
       # don't always exist !
       MPTCP_NETLINK = yes;
       MPTCP = yes;

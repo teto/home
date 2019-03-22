@@ -90,8 +90,7 @@ let
 
   # boot.kernelPackages = pkgs.linuxPackagesFor pkgs.my_lenovo_kernel;
 
-  boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_mptcp_trunk_raw;
-
+  # boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_mptcp_trunk_raw;
   # boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_latest;
 
   # boot.kernelPackages = pkgs.linuxPackages_mptcp;
@@ -100,9 +99,10 @@ let
   # lib.mkMerge
   boot.kernelModules =  [
     "af_key" # for ipsec/vpn support
-    "kvm" 
+    "kvm"
     "kvm-intel" # for virtualisation
   ];
+  # boot.extraModulePackages = with config.boot.kernelPackages; [ wireguard ];
 
   boot.kernel.sysctl = {
     # to not provoke the kernel into crashing
@@ -233,7 +233,7 @@ let
     };
 
     buildMachines = secrets.buildMachines;
-    distributedBuilds = true;
+    distributedBuilds = false;
 
   };
 
@@ -253,6 +253,7 @@ let
     enable = true;
     debug = true;
     pathManager = "netlink";
+    package = pkgs.linux_mptcp_trunk_raw;
   };
 
   # once available

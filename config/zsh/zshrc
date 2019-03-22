@@ -395,7 +395,7 @@ mppm() {
 
 
 _fast_sysctl() {
-    
+
 # TODO move to bash, should work everywhere
     key="$1"
     shift 1

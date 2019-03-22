@@ -25,23 +25,23 @@ rec {
 # import shutil
 # import glob
     papis = super.papis.overridePythonAttrs (oa: {
-      version = "0.8-dev";
+      version = "0.9-dev";
 
       # datautil
       # super.python3Packages.sqlite
       propagatedBuildInputs = with super.python3Packages; oa.propagatedBuildInputs ++  ( [
          pyyaml dateutil
       ]);
-      # src = /home/teto/papis;
+      src = /home/teto/papis;
       doCheck = false;
 
-      src = builtins.fetchGit {
-        url = https://github.com/teto/papis;
-        ref = "zsh_completion";
-        # rev = "101e83a7014e2ed7d17ceb009a433881354fa0fc";
-        # sha256 = "0hw8f62qri62lg1wi37n0nvw1dw6pcmrbs66zbrzwf54rpl33462";
-        # fetchSubmodules = true;
-      };
+      # src = builtins.fetchGit {
+      #   url = https://github.com/teto/papis;
+      #   ref = "zsh_completion";
+      #   # rev = "101e83a7014e2ed7d17ceb009a433881354fa0fc";
+      #   # sha256 = "0hw8f62qri62lg1wi37n0nvw1dw6pcmrbs66zbrzwf54rpl33462";
+      #   # fetchSubmodules = true;
+      # };
 
       # propagatedBuildInputs = oa.propagatedBuildInputs ++ (with super.python3Packages; [
       #   yaml
