@@ -56,6 +56,7 @@ rec {
         haskellPackages.gutenhasktags
         haskellPackages.haskdogs # seems to build on hasktags/ recursively import things
         haskellPackages.hasktags
+
       ];
 
 
@@ -66,7 +67,10 @@ rec {
         extraPython3Packages = compatFun (requiredPythonModules);
         # haskellPackages
         # TODO do the same for ruby / haskell
+      } // lib.optionalAttrs (requiredPythonModules == [])  {
 
+        withHaskell = true;
+        extraHaskellPackages = requiredHaskellPackages;
       };
 
       finalConfig = super.neovimConfig (
@@ -145,8 +149,10 @@ rec {
   neovimDefaultConfig = {
         withPython3 = true;
         withPython = false;
-        withHaskell = false;
+        # withHaskell = false;
         withRuby = false; # for vim-rfc/GhDashboard etc.
+
+        # TODO use them only if 
         customRC = ''
           " always see at least 10 lines
           set scrolloff=10
@@ -164,6 +170,7 @@ rec {
              \ , 'haskell': ['hie-wrapper', '--lsp', '-d', '--vomit', '--logfile', '/tmp/lsp_haskell.log' ]
              \ , 'cpp': ['${super.pkgs.cquery}/bin/cquery', '--log-file=/tmp/cq.log']
              \ , 'c': ['${super.pkgs.cquery}/bin/cquery', '--log-file=/tmp/cq.log']
+             \ , 'nix': ['nix-lsp']
              \ }
 
         let g:neomake_python_mypy_exe = fnamemodify( g:python3_host_prog, ':p:h').'/mypy'

@@ -2386,10 +2386,10 @@ nnoremap gO i<CR>
 " nnoremap <Leader>lg @g
 
 " testing my PR
-if has("signcolumnwidth")
-    set signcolumnwidth=6
+if has("nvim-0.4.0")
+  set signcolumn=auto:3
 endif
-" call
+
 function! FzfFlipBool()
   " let l:dict = {}
 
