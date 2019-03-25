@@ -64,7 +64,10 @@ self: prev:
         #   rev = "8e7a285f7e4cee0a7f908e431559c87c2f228783";
         #   sha256 = "05hq41zh5msm06gfgfjvf1lq1qnqg1l2ng1ywiikkck8msc3mmx1";
         # };
-      }) [ hprev.fast-logger (doJailbreak hprev.logger) ] ;
+      }) [
+        hprev.fast-logger
+        # (doJailbreak hprev.logger)
+      ] ;
 
       hie_remote = builtins.fetchTarball {
         # url    = https://github.com/domenkozar/hie-nix/tarball/master;
