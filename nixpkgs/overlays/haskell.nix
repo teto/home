@@ -82,7 +82,7 @@ self: prev:
       # } ).hie86;
 
       hie = (import "${hie_remote}/ghc-8.6.nix" {
-        inherit compiler;
+        # inherit compiler = nixpkgs.haskell.packages.ghc864
       } ).haskell-ide-engine;
 
 

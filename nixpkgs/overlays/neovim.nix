@@ -52,10 +52,11 @@ rec {
     let
       requiredPythonModules = lib.debug.traceVal (super.python3Packages.requiredPythonModules drvs);
 
-      requiredHaskellPackages = [
-        haskellPackages.gutenhasktags
-        haskellPackages.haskdogs # seems to build on hasktags/ recursively import things
-        haskellPackages.hasktags
+      requiredHaskellPackages = hs: with hs; [
+        hie
+        gutenhasktags
+        haskdogs # seems to build on hasktags/ recursively import things
+        hasktags
 
       ];
 

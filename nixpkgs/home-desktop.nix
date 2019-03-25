@@ -158,6 +158,9 @@ in
 
   home.packages = desktopPkgs ++ devPkgs ++ heavyPackages
   ++ imPkgs ++ [
+    pkgs.up # live preview of pipes
+    pkgs.peek # GIF recorder
+
     stable.pkgs.cachix
     ]
    ;
@@ -182,7 +185,7 @@ in
   programs.firefox = {
     enable = false;
     # package = unstable.firefox;
-  #   enableAdobeFlash = false;
+    # enableAdobeFlash = false;
 
     # Not accepted. we should find another way to enable it
     # pass package for instance
@@ -190,12 +193,12 @@ in
   };
 
   programs.browserpass = {
-    enable=true;
+    enable = true;
     browsers = ["firefox" "chromium" ];
   };
 
   services.gnome-keyring = {
-    enable=true;
+    enable = true;
   };
 
   services.network-manager-applet.enable = true;
