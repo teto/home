@@ -66,6 +66,7 @@ self: prev:
         # };
       }) [
         hprev.fast-logger
+        # hprev.hsc2hs
         # (doJailbreak hprev.logger)
       ] ;
 

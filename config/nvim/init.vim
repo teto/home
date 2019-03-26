@@ -1284,6 +1284,8 @@ let g:neomake_error_highlight = 'NeomakePerso'
 
 " todo only if neomake loaded
 call neomake#configure#automake('w')
+" call neomake#configure#automake('')
+" NeomakeDisable
 
 " func update_mypy_maker
   " Hook into NeomakeJobInit.

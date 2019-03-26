@@ -50,15 +50,42 @@ rec {
   genNeovim = drvs: userConfig:
     with super;
     let
+      # isHaskellPkg
       requiredPythonModules = lib.debug.traceVal (super.python3Packages.requiredPythonModules drvs);
 
-      requiredHaskellPackages = hs: with hs; [
+      # Get list of required Python modules given a list of derivations.
+      # TODO look into compiler.shellFor { packages= } to see how to get deps
+      # from pkgs/development/haskell-modules/make-package-set.nix
+    # Returns a derivation whose environment contains a GHC with only
+    # the dependencies of packages listed in `packages`, not the
+    # packages themselves. Using nix-shell on this derivation will
+    # give you an environment suitable for developing the listed
+    # packages with an incremental tool like cabal-install.
+      requiredHaskellPackages = drvs: let
+        # modules = lib.filter (x: x.isHaskellLibrary or false) drvs;
+      # # TODO foireux
+      # in lib.unique (lib.concatLists (lib.catAttrs "requiredPythonModules" modules));
+  # haskellPackages = pkgs.callPackage makePackageSet {
+  #   package-set = initialPackages;
+  #   inherit stdenv haskellLib ghc buildHaskellPackages extensible-self all-cabal-hashes;
+  # };
+
+        selected = drvs haskellPackages;
+
+        packageInputs = map getBuildInputs selected;
+      in
+        # might be possible to further refine
+        packageInputs;
+
+
+      extraHaskellPackages = hs: with hs; [
         hie
         gutenhasktags
         haskdogs # seems to build on hasktags/ recursively import things
         hasktags
-
-      ];
+      ] 
+      # ++ requiredHaskellPackages drvs
+      ;
 
 
       # Here we generate a neovim config that allows to work with the passed 'drvs'
@@ -68,10 +95,10 @@ rec {
         extraPython3Packages = compatFun (requiredPythonModules);
         # haskellPackages
         # TODO do the same for ruby / haskell
-      } // lib.optionalAttrs (requiredPythonModules == [])  {
+      } // lib.optionalAttrs (requiredHaskellPackages != [])  {
 
         withHaskell = true;
-        extraHaskellPackages = requiredHaskellPackages;
+        inherit extraHaskellPackages;
       };
 
       finalConfig = super.neovimConfig (
