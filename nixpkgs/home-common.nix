@@ -135,10 +135,10 @@ rec {
       latest="ls -lt |head";
       fren="trans -from fr -to en ";
       enfr="trans -from en -to fr ";
-      jafr="trans -from ja -to fr ";
-      frja="trans -from fr -to ja ";
-      jaen="trans -from ja -to en ";
-      enja="trans -from en -to ja ";
+      jpfr="trans -from ja -to fr ";
+      frjp="trans -from fr -to ja ";
+      jpen="trans -from ja -to en ";
+      enjp="trans -from en -to ja ";
       dmesg="dmesg --color=always|less";
 
       tcp_netstat="netstat -ltnp";

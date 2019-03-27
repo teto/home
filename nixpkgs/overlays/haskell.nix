@@ -49,26 +49,30 @@ self: prev:
 
       # or "logger"
       # http://hackage.haskell.org/package/logger
-      "netlink" = prev.haskell.lib.addBuildDepends  (prev.haskell.lib.overrideSrc hprev.netlink {
+      # "netlink" = prev.haskell.lib.addBuildDepends  (prev.haskell.lib.overrideSrc hprev.netlink {
 
-        # src = builtins.fetchGit {
-        #   # url = https://github.com/ongy/netlink-hs;
-        #   url = https://github.com/teto/netlink-hs;
-        # };
+      #   # src = builtins.fetchGit {
+      #   #   # url = https://github.com/ongy/netlink-hs;
+      #   #   url = https://github.com/teto/netlink-hs;
+      #   # };
 
-        src = /home/teto/netlink-hs;
+      #   src = /home/teto/netlink-hs;
 
-        # src = prev.fetchFromGitHub {
-        #   owner = "ongy";
-        #   repo = "netlink-hs";
-        #   rev = "8e7a285f7e4cee0a7f908e431559c87c2f228783";
-        #   sha256 = "05hq41zh5msm06gfgfjvf1lq1qnqg1l2ng1ywiikkck8msc3mmx1";
-        # };
-      }) [
-        hprev.fast-logger
-        # hprev.hsc2hs
-        # (doJailbreak hprev.logger)
-      ] ;
+      #   # src = prev.fetchFromGitHub {
+      #   #   owner = "ongy";
+      #   #   repo = "netlink-hs";
+      #   #   rev = "8e7a285f7e4cee0a7f908e431559c87c2f228783";
+      #   #   sha256 = "05hq41zh5msm06gfgfjvf1lq1qnqg1l2ng1ywiikkck8msc3mmx1";
+      #   # };
+      # }) [
+      #   hprev.fast-logger
+      #   # hprev.hsc2hs
+      #   # (doJailbreak hprev.logger)
+      # ];
+
+      # test = hprev.ghcWithPackages(hs: [ hs.fast-logger ]).override({ makeWrapperArgs = [
+      #   ''--set TOTO "hello world" ''
+      # ];});
 
       hie_remote = builtins.fetchTarball {
         # url    = https://github.com/domenkozar/hie-nix/tarball/master;
