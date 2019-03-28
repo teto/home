@@ -62,7 +62,7 @@ world-file: /home/teto/.cabal/world
 -- cid:
 -- extra-lib-dirs:
 -- extra-framework-dirs:
-extra-prog-path: /home/teto/.cabal/bin
+-- extra-prog-path: /home/teto/.cabal/bin
 -- instantiate-with:
 -- tests: False
 -- coverage: False
