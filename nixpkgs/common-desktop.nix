@@ -71,6 +71,8 @@ in
        enabled = "fcitx";
        fcitx.engines = with pkgs.fcitx-engines; [
          mozc
+         table-other # for arabic
+         table-extra # for arabic
          # hangul
          # m17n
          # libpinyin
