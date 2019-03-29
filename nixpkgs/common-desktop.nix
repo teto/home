@@ -3,7 +3,7 @@ let
   secrets = import ./secrets.nix;
   userNixpkgs = /home/teto/nixpkgs;
   nixosConfig = /home/teto/dotfiles/configuration.nix;
-  nixosOverlay = /home/teto/dotfiles/nixpkgs/overlays;
+  # nixosOverlay = /home/teto/dotfiles/nixpkgs/overlays;
   # with builtims.fetchGit , no need for that anymore ?
   sshFolder = /home/teto/.ssh/config;
 in
@@ -74,7 +74,7 @@ in
          table-other # for arabic
          table-extra # for arabic
          # hangul
-         # m17n
+         m17n
          # libpinyin
         # chewing
         # unikey
@@ -150,9 +150,16 @@ in
   #   enableBukubrow = true;
   # };
 
-  nixpkgs.config = {
-    allowUnfree = true;
-    firefox.enableBukubrow = true;
+  nixpkgs = {
+    config = {
+      allowUnfree = true;
+      firefox.enableBukubrow = true;
+    };
+
+    overlays = [
+      (import <nixpkgs-overlays/kernels.nix>)
+      # (import <nixpkgs-overlays/haskell.nix>)
+    ];
   };
 
   # services.hoogle = {
@@ -180,12 +187,12 @@ in
     # now with nix build -f channel:nixos-unstable
     nixPath = [
       "nixos-unstable=https://github.com/nixos/nixpkgs-channels/archive/nixos-unstable.tar.gz"
-      "nixos=https://github.com/nixos/nixpkgs-channels/archive/nixos-18.09.tar.gz"
+      "nixos=https://github.com/nixos/nixpkgs-channels/archive/nixos-19.03.tar.gz"
     ]
     ++ lib.optional (builtins.pathExists userNixpkgs)  "nixpkgs=${builtins.toString userNixpkgs}"
     ++ lib.optional (builtins.pathExists nixosConfig)  "nixos-config=${builtins.toString nixosConfig}"
-    ++ lib.optional (builtins.pathExists nixosOverlay) "nixpkgs-overlays=${builtins.toString nixosOverlay}"
-    ++ lib.optional (builtins.pathExists nixosOverlay) "ssh-config-file=${builtins.toString sshFolder}"
+    # ++ lib.optional (builtins.pathExists nixosOverlay) "nixpkgs-overlays=${builtins.toString nixosOverlay}"
+    # ++ lib.optional (builtins.pathExists nixosOverlay) "ssh-config-file=${builtins.toString sshFolder}"
     ;
 
     # sshServe.enable = false;
@@ -237,4 +244,3 @@ in
   };
 
 }
-

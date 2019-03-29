@@ -29,7 +29,7 @@ let
 
 #  strongswan required configuration
 # https://wiki.strongswan.org/projects/strongswan/wiki/KernelModules
-  structuredConfigs = import ../structured.nix { inherit (prev) lib; inherit libk;};
+  structuredConfigs = import ./kernels/structured.nix { inherit (prev) lib; inherit libk;};
 
 
   # see wiki
@@ -177,7 +177,7 @@ in rec {
 #Failed assertions:
 #- CONFIG_DEVTMPFS is not enabled!
 #- CONFIG_CGROUPS is not enabled!
-linux_mptcp_trunk_raw = (
+  linux_mptcp_trunk_raw = (
   # addMenuConfig
     (prev.callPackage ./pkgs/kernels/linux-mptcp-trunk.nix {
 

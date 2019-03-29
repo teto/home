@@ -53,9 +53,15 @@ $ git clone https://github.com/teto/home.git dotfiles
 $ make nixpkgs
 \# nixos-rebuild switch --upgrade -I
 nixos-config=$PWD/dotfiles/nixpkgs/configuration.nix -I nixpkgs=$HOME/nixpkgs
-$ home-manager switch
 
-You will need git-encrypt do decypher some
+```
+$ git submodules update --init
+$ make config
+# TODO pass my own fork NIX_PATH=home-manager=https://github.com/teto/home-manager/archive/master.tar.gz nix-shell <home-manager> -A install
+$ home-manager switch
+```
+
+You will need `nix run nixpkgs.git nixpkgs.gitAndTools.git-crypt` do decypher some
 
 The rest of the instructions is more relevant for other distributions like
 Ubuntu.
@@ -110,7 +116,7 @@ Make sure (append ~/.fonts for local fonts only)
 
 Set default applications
 ====
-Run 
+Run
 ```
 $ xdg-mime query filetype ~/Téléchargements/coflow-scheduling.pdf
 to get the name of the mime/type. You can then ask the default with:
@@ -123,12 +129,6 @@ Ranger
 ===
 To enable cool file preview, install:
 ffmpegthumbnailer odt2txt pdftotext
-
-Python
-====
-To install as user
-wget https://bootstrap.pypa.io/get-pip.py
-python3.X get-pip.py --user
 
 Nix paths I forget
 ===

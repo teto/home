@@ -160,10 +160,10 @@ let
       #             (attrNames (readDir path)))
       # ++ [ (import ./envs.nix) ];
 
-  nixpkgs.overlays = [
-    (import ./overlays/kernels.nix) 
-    (import ./overlays/haskell.nix) 
-  ];
+  # nixpkgs.overlays = [
+    # (import <nixpkgs-overlays>/kernels.nix)
+    # (import ./overlays/haskell.nix) 
+  # ];
 
   nixpkgs.config.allowUnfree = true;
 

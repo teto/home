@@ -153,10 +153,10 @@ let
   #    host.headless = false;
   # };
 
-  nixpkgs.overlays = [
-    (import ./overlays/kernels.nix) 
-    (import ./overlays/haskell.nix) 
-  ];
+  # nixpkgs.overlays = [
+  #   (import ./overlays/kernels.nix) 
+  #   (import ./overlays/haskell.nix) 
+  # ];
 
 
   hardware.bluetooth.enable = true;

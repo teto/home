@@ -458,7 +458,7 @@ in
         "${mod}+Tab"="exec \"${pkgs.rofi}/bin/rofi -modi 'run,drun,window,ssh' -show run\"";
         "${mod}+Ctrl+L"="exec ${pkgs.i3lock-fancy}/bin/i3lock-fancy";
         # "${mod}+Ctrl+h" = ''exec "${pkgs.rofi}/bin/rofi -modi 'clipboard:greenclip print' -show clipboard"'';
-        "${mod}+ctrl+b" = "exec " + ../buku_run/buku_run;
+        # "${mod}+ctrl+b" = "exec " + ../buku_run/buku_run;
         "${mod}+g" = "exec ${pkgs.i3-easyfocus}/bin/i3-easyfocus";
         "${mod}+2" = "exec ${pkgs.i3-easyfocus}/bin/i3-easyfocus";
         # "${mod}+3" = "exec ${pkgs.buku_run}/bin/buku_run";
