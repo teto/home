@@ -15,7 +15,10 @@ buildPythonApplication rec {
   #   sha256 ="0f4blz91pjfr3ylpkg3fb7lls5kfizfyz7sismqaflg11z698911";
   # };
 
-  src = /home/teto/i3-dispatch;
+  src = builtins.fetchGit {
+    url = https://github.com/teto/i3-dispatch.git;
+  };
+
 
   # src = fetchFromGitHub {
   #   owner = "krlanguet";
