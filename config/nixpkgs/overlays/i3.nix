@@ -168,7 +168,7 @@ rec {
       #   url =
       #   sha256 = fakeSha256;
       # )
-      ../../patches/xdg_utils_symlink.diff
+      ./pkgs/xdg_utils_symlink.diff
     ];
   });
 
