@@ -16,7 +16,7 @@ let
       # ./home-common-headless.nix
       ./home-desktop.nix
 
-      ./home-mail.nix
+      # ./home-mail.nix
       # symlink towards a config
     ]
     ;

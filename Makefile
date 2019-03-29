@@ -12,6 +12,7 @@ MPTCPANALYZER_FOLDER = "${HOME}/mptcpanalyzer"
 KERNEL_FOLDER = "${HOME}/mptcp"
 BLOG_FOLDER = "${HOME}/blog"
 NIXPKGS_FOLDER = "${HOME}/nixpkgs"
+HOME_MANAGER_FOLDER = "${HOME}/hm"
 NEOVIM_FOLDER = "${HOME}/neovim"
 LKL_FOLDER = "${HOME}/lkl"
 
@@ -113,6 +114,9 @@ $(WIRESHARK_FOLDER):
 	git remote add gh_upstream http://github.com/wireshark/wireshark.git; \
 	git remote add upstream https://code.wireshark.org/review/p/wireshark.git; \
 	git remote add iij gitolite@iij_vm:wireshark.git
+
+hm: | $(HOME_MANAGER_FOLDER)
+
 
 nixpkgs: | $(NIXPKGS_FOLDER)
 

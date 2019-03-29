@@ -461,8 +461,8 @@ in
         "${mod}+ctrl+b" = "exec " + ../buku_run/buku_run;
         "${mod}+g" = "exec ${pkgs.i3-easyfocus}/bin/i3-easyfocus";
         "${mod}+2" = "exec ${pkgs.i3-easyfocus}/bin/i3-easyfocus";
-        "${mod}+3" = "exec ${pkgs.buku_run}/bin/buku_run";
-        "${mod}+b" = "exec ${pkgs.buku_run}/bin/buku_run";
+        # "${mod}+3" = "exec ${pkgs.buku_run}/bin/buku_run";
+        # "${mod}+b" = "exec ${pkgs.buku_run}/bin/buku_run";
         "${mod}+p" = "exec ${pkgs.rofi-pass}/bin/rofi-pass";
 
         "$mod+Ctrl+p" = ''mode "papis"'';
