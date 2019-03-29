@@ -1,0 +1,44 @@
+diff --git a/ii-web.cabal b/ii-web.cabal
+index ebb3e7e..e34711d 100644
+--- a/ii-web.cabal
++++ b/ii-web.cabal
+@@ -6,6 +6,6 @@ cabal-version:      >= 1.10
+ executable site
+   main-is:          site.hs
+   build-depends:    base == 4.*
+-                  , hakyll == 4.9.*
++                  , hakyll == 4.*
+   ghc-options:      -threaded
+   default-language: Haskell2010
+diff --git a/stack.yaml b/stack.yaml
+index cb7f27b..c0f721f 100644
+--- a/stack.yaml
++++ b/stack.yaml
+@@ -18,7 +18,7 @@
+ #
+ # resolver: ./custom-snapshot.yaml
+ # resolver: https://example.com/snapshots/2018-01-01.yaml
+-resolver: lts-9.21
++resolver: lts-12.19
+ 
+ # User packages to be built.
+ # Various formats can be used as shown in the example below.
+@@ -47,7 +47,10 @@ packages:
+ # extra-package-dbs: []
+ 
+ # Control whether we use the GHC we find on the path
+-# system-ghc: true
++system-ghc: true
++skip-ghc-check: true
++install-ghc: false
++
+ #
+ # Require a specific version of stack, using version ranges
+ # require-stack-version: -any # Default
+@@ -62,4 +65,4 @@ packages:
+ # extra-lib-dirs: [/path/to/dir]
+ #
+ # Allow a newer minor version of GHC than the snapshot specifies
+-# compiler-check: newer-minor
+\ No newline at end of file
++# compiler-check: newer-minor
