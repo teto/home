@@ -143,13 +143,6 @@ in
   # seemingly working for chromium only, check for firefox
   programs.browserpass.enable = true;
 
-  # programs.firefox = {
-  #   enable = true;
-  #   # package = unstable.firefox;
-  # #   enableAdobeFlash = false;
-  #   enableBukubrow = true;
-  # };
-
   nixpkgs = {
     config = {
       allowUnfree = true;
@@ -157,7 +150,7 @@ in
     };
 
     overlays = [
-      (import <nixpkgs-overlays/kernels.nix>)
+      # (import <nixpkgs-overlays/kernels.nix>)
       # (import <nixpkgs-overlays/haskell.nix>)
     ];
   };
@@ -232,7 +225,7 @@ in
   systemd.coredump.enable = true;
   # security.pam.loginLimits
 
-  networking.extraHosts = secrets.extraHosts;
+  # networking.extraHosts = secrets.extraHosts;
 
   system.copySystemConfiguration = true;
 

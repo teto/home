@@ -273,7 +273,7 @@ let
     # strongswan # to get ipsec in path
     # cups-pk-helper # to add printer through gnome control center
     ++ [
-    firefox
+    # firefox
       ]
   ;
 

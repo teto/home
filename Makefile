@@ -158,7 +158,7 @@ $(LKL_FOLDER):
 neovim: | $(NEOVIM_FOLDER)
 $(NEOVIM_FOLDER):
 	git clone git@github.com:teto/neovim.git "${NEOVIM_FOLDER}"
-	cd "${NEOVIM_FOLDER}" \
+	cd "${NEOVIM_FOLDER}"; \
 		git remote add upstream git@github.com:teto/neovim.git
 
 repositories: dce ns3 neovim wireshark

@@ -1,9 +1,8 @@
 { config, lib, pkgs,  ... }:
 let
-  secrets = import ./secrets.nix;
+  #secrets = import ./secrets.nix;
   # hopefully it can be generated as dirname <nixos-config>
-  configDir = /home/teto/dotfiles/nixpkgs;
-  userNixpkgs = /home/teto/nixpkgs;
+  # configDir = /home/teto/dotfiles/nixpkgs;
 
   in
 {
@@ -25,12 +24,12 @@ let
 
   # it apparently still is quite an important thing to have
   boot.devSize = "5g";
-  swapDevices = [{
+  # swapDevices = [{
     # label = "dartagnan";
-    device = "/fucking_swap";
+    # device = "/fucking_swap";
     # size = 8192; # in MB
-    size = 16000; # in MB
-  } ];
+    # size = 16000; # in MB
+  # } ];
 
   boot.loader ={
     systemd-boot.enable = true;
@@ -70,21 +69,24 @@ let
   # it is necessary to use dnssec though :(
   networking.dnsExtensionMechanism = false;
   networking.dnsSingleRequest = false;
-  networking.extraHosts = secrets.extraHosts;
 
   # this is for gaming
   hardware.opengl.driSupport32Bit = true;
   hardware.pulseaudio = {
-  #  enable = true;
+    enable = true;
    # systemWide = false;
-  #  # 
   #  support32Bit = true;
   #  # daemon.config = ''
   #  #   load-module module-switch-on-connect
   #  #   '';
+
+    # as per https://nixos.wiki/wiki/Bluetooth recommendation
     extraConfig = ''
-      load-module module-switch-on-connect
+      [General]
+      Enable=Source,Sink,Media,Socket
     '';
+    # adds out-of-tree support for AAC, APTX, APTX-HD and LDAC.
+    extraModules = [ pkgs.pulseaudio-modules-bt ];
     # only this one has bluetooth
     package = pkgs.pulseaudioFull;
   };
@@ -117,7 +119,6 @@ let
     (import ./basetools.nix { inherit pkgs;})
     # strongswan # to get ipsec in path
     # cups-pk-helper # to add printer through gnome control center
-    # 
     ++ [
       ]
   ;
@@ -139,7 +140,6 @@ let
   programs.mininet.enable = true;
 
   services.xserver.displayManager.slim = {
-    # theme = 
     autoLogin = false;
     defaultUser = "teto";
   };
@@ -158,11 +158,17 @@ let
   #   (import ./overlays/haskell.nix) 
   # ];
 
+  # j'hesite
+  services.xl2tpd = {
+    enable = true;
+    # serverIP =
+  };
 
-  hardware.bluetooth.enable = true;
-  hardware.bluetooth.powerOnBoot = false;
-  # hardware.bluetooth.extraConfig = ;
-  # extraConfig
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = false;
+  };
+
 
   networking.iproute2.enable = true;
 
