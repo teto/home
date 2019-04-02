@@ -95,11 +95,13 @@ rec {
         extraPython3Packages = compatFun (requiredPythonModules);
         # haskellPackages
         # TODO do the same for ruby / haskell
-      } // lib.optionalAttrs (requiredHaskellPackages != [])  {
+      } 
+      # // lib.optionalAttrs (requiredHaskellPackages != [])  {
 
-        withHaskell = true;
-        inherit extraHaskellPackages;
-      };
+      #   withHaskell = true;
+      #   inherit extraHaskellPackages;
+      # }
+      ;
 
       finalConfig = super.neovimConfig (
         super.lib.mkMerge [
@@ -158,7 +160,7 @@ rec {
 
   neovimHaskellConfig = {
 
-    withHaskell = true;
+    # withHaskell = true;
     # haskellPackages = [
           # hie
     #   haskellPackages.haskdogs # seems to build on hasktags/ recursively import things

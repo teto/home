@@ -1,7 +1,7 @@
 { stdenv, buildPackages, fetchFromGitHub, perl, buildLinux, ... } @ args:
 
 buildLinux (rec {
-  mptcpVersion = "0.94.1";
+  mptcpVersion = "0.94.3";
   modDirVersion = "4.19.0";
   version = "${modDirVersion}-mptcp_v${mptcpVersion}";
   # autoModules= true;
@@ -26,7 +26,14 @@ buildLinux (rec {
   #   sha256 = "19fmfpgwl7jkxyr3d628adwczsndl9ichv5acdghygw55fjdfjrm";
   # };
 
-    src = builtins.fetchGit { 
+    # src = builtins.fetchurl {
+    #   # url = "ssh://git@github.com/teto/mptcp.git";
+    #   url = https://github.com/teto/mptcp.git;
+    #   ref = "trunk_v8";
+    #   # sha256= "00000000000000000000000000000000";
+    # };
+
+    src = builtins.fetchGit {
       # url = "ssh://git@github.com/teto/mptcp.git";
       url = https://github.com/teto/mptcp.git;
       ref = "trunk_v8";

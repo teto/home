@@ -11,5 +11,8 @@
     challengeResponseAuthentication = false;
     # authorizedKeysFiles
     # authorizedKeys = { }
+
+    # hostKeys to generate keys
+    # 
   };
 }

@@ -4,6 +4,10 @@
 # without it, there is no result for an empty query with whoosh backend
 
 [include]
+
+
+# typically this file should contain
+#
 test = ~/.config/papis/papis.local
 
 

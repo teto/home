@@ -1,4 +1,7 @@
 { pkgs, lib,  ... }:
+let
+  secrets = import ./secrets.nix;
+in
 {
   imports = [
     ./home-common.nix

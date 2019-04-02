@@ -29,7 +29,8 @@ rec {
 
       # datautil
       # super.python3Packages.sqlite
-      propagatedBuildInputs = with super.python3Packages; oa.propagatedBuildInputs ++  ( [
+      propagatedBuildInputs = with super.python3Packages; oa.propagatedBuildInputs ++  ([
+        # useful for zotero script
          pyyaml dateutil
       ]);
       src = /home/teto/papis;

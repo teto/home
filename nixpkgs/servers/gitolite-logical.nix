@@ -1,3 +1,3 @@
 {
-  gitolite-server = import /home/teto/dotfiles/nixpkgs/servers/config-iij-gitolite.nix;
+  gitolite-server = import ./config-iij-gitolite.nix;
 }

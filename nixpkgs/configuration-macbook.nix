@@ -14,6 +14,8 @@ let
     # ./modules/libvirtd.nix
     ./modules/network-manager.nix
     ./modules/libvirtd.nix
+    ./modules/vpn.nix
+    ./modules/distributedBuilds.nix
 
     # just for testing
     # ./modules/nextcloud.nix
@@ -132,7 +134,6 @@ let
     daemonIONiceLevel = 3;
     # 0 = max (default) vs 19 lowest
     daemonNiceLevel = 2;
-    buildMachines = secrets.buildMachines;
     distributedBuilds = true;
   };
 
@@ -159,17 +160,6 @@ let
   # environment.systemPackages = [
   #   pkgs.openvswitch
   # ];
-
-  services.xl2tpd = {
-    enable = true;
-    # serverIP =
-  };
-
-  services.strongswan = {
-    enable = true;
-      # "/etc/ipsec.d/*.secrets" "/etc/ipsec.d"
-    secrets = ["/etc/ipsec.d"];
-  };
 
   networking.enableB43Firmware = true;
 

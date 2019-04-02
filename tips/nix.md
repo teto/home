@@ -15,3 +15,5 @@ env NIX_REMOTE='ssh-ng://my.machine?compress=true' nix-build
 
 find reverse dependencies
 nix-store --query --referrers $(which xdg-mime)
+
+Mention `--max-jobs 0` to build remotely only

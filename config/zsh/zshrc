@@ -35,11 +35,6 @@ AUTOSUGGESTION_HIGHLIGHT_COLOR="fg=cyan"
 # move it to HM maybe
 . "/etc/zinputrc"
 
-
-# TODO remove once fixed in nixpkgs 
-# https://github.com/NixOS/nixpkgs/pull/56463#issuecomment-468022758
-# eval "$(_PAPIS_COMPLETE=source_zsh papis)"
-
 # powerline {{{
 # try with powerline-hs instead
 # or look into 

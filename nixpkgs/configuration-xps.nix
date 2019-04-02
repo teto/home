@@ -13,7 +13,9 @@ let
 
     ./config-all.nix
     ./common-desktop.nix
-    ./modules/libvirtd.nix
+    # ./modules/libvirtd.nix
+    ./modules/distributedBuilds.nix
+    ./modules/vpn.nix
 
     # for user teto
     ./extraTools.nix
@@ -40,13 +42,16 @@ let
   # boot.loader.grub.version = 2;
   # install to none, we just need the generated config
   # for ubuntu grub to discover
-    grub.device = "/dev/sda";
+    # grub.device = "/dev/sda";
   };
 
   boot.kernelParams = [ " console=ttyS0" ];
-  boot.kernelPackages = pkgs.linuxPackages_latest;
 
-  # TODO we need nouveau 
+  # TODO use the mptcp one ?
+  boot.kernelPackages = pkgs.linuxPackages;
+  # boot.kernelPackages = pkgs.linuxPackages_latest;
+
+  # TODO we need nouveau
   boot.kernelModules = [
     "af_key" # for ipsec/vpn support
     "kvm" "kvm-intel" # for virtualisation
@@ -74,22 +79,33 @@ let
   hardware.opengl.driSupport32Bit = true;
   hardware.pulseaudio = {
     enable = true;
-   # systemWide = false;
+    systemWide = false;
   #  support32Bit = true;
   #  # daemon.config = ''
   #  #   load-module module-switch-on-connect
   #  #   '';
+
+    # adds out-of-tree support for AAC, APTX, APTX-HD and LDAC.
+    # SBC / AAC
+    extraModules = [ pkgs.pulseaudio-modules-bt ];
+
+    # extraConfig = 
+    # extraClientConf = 
+    # only this one has bluetooth
+    package = pkgs.pulseaudioFull;
+  };
+
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = false;
 
     # as per https://nixos.wiki/wiki/Bluetooth recommendation
     extraConfig = ''
       [General]
       Enable=Source,Sink,Media,Socket
     '';
-    # adds out-of-tree support for AAC, APTX, APTX-HD and LDAC.
-    extraModules = [ pkgs.pulseaudio-modules-bt ];
-    # only this one has bluetooth
-    package = pkgs.pulseaudioFull;
   };
+
 
   # List services that you want to enable:
   services = {
@@ -162,11 +178,6 @@ let
   services.xl2tpd = {
     enable = true;
     # serverIP =
-  };
-
-  hardware.bluetooth = {
-    enable = true;
-    powerOnBoot = false;
   };
 
 

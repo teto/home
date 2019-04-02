@@ -69,7 +69,7 @@ rec {
           src = super.fetchgit {
             url=https://github.com/python-cmd2/cmd2.git;
             rev = "9f5906a5cc1128652f1b43545ae4c948e9a0fe2b";
-            sha256 = "12gkdyp2xgdi2a3aan7ifl16mp5dac8z5fhjy3i8yjl1hdsj74qp";
+            sha256 = "1lhkjafrc5ypanjrflfbpwzr53wi63l0yjxw8zq540dy9jncmvps";
             leaveDotGit = true;
             deepClone = true;
           };
