@@ -20,7 +20,7 @@ let
     # for user teto
     ./extraTools.nix
   ] ;
-  
+
   # TODO conditionnally enable it
   # networking.proxy.default
 
@@ -153,7 +153,7 @@ let
   # environment.enableDebugInfo = true;
 # } ++ lib.optionalAttrs (config.programs ? mininet) {
 
-  programs.mininet.enable = true;
+  # programs.mininet.enable = true;
 
   services.xserver.displayManager.slim = {
     autoLogin = false;
@@ -173,12 +173,6 @@ let
   #   (import ./overlays/kernels.nix) 
   #   (import ./overlays/haskell.nix) 
   # ];
-
-  # j'hesite
-  services.xl2tpd = {
-    enable = true;
-    # serverIP =
-  };
 
 
   networking.iproute2.enable = true;

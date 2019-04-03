@@ -9,8 +9,11 @@
     enable=true;
     # enableStrongSwan = true;
     # one of "OFF", "ERR", "WARN", "INFO", "DEBUG", "TRACE"
-    logLevel="DEBUG";
+    logLevel="TRACE";
     wifi.scanRandMacAddress = true;
+
+    # for vpn dns
+    # appendNameServers = [ ];
 
     unmanaged = [
       "interface-name:r?-*"
