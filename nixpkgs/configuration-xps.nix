@@ -89,8 +89,8 @@ let
     # SBC / AAC
     extraModules = [ pkgs.pulseaudio-modules-bt ];
 
-    # extraConfig = 
-    # extraClientConf = 
+    # extraConfig =
+    # extraClientConf =
     # only this one has bluetooth
     package = pkgs.pulseaudioFull;
   };
@@ -159,7 +159,7 @@ let
     autoLogin = false;
     defaultUser = "teto";
   };
-  
+
   # virtualisation.virtualbox = {
   #   host.enable = true;
   #   host.enableExtensionPack = true;
@@ -170,8 +170,8 @@ let
   # };
 
   # nixpkgs.overlays = [
-  #   (import ./overlays/kernels.nix) 
-  #   (import ./overlays/haskell.nix) 
+  #   (import ./overlays/kernels.nix)
+  #   (import ./overlays/haskell.nix)
   # ];
 
 

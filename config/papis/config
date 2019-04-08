@@ -14,6 +14,7 @@ test = ~/.config/papis/papis.local
 [settings]
 default-library = papers
 default-query-string = '*'
+document-description-format = {doc[ref]} - {doc[title]}
 
 # Use ranger as a file browser, too a  nice python package
 # file-browser = ranger

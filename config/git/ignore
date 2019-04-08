@@ -71,6 +71,8 @@ Session.vim
 *.db
 *.out
 *.drift
+*.bcf
+*.ist
 *.bbl
 *.blg
 # }}}

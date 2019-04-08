@@ -49,12 +49,12 @@ let
     universal-ctags  # there are many different ctags, be careful !
   ];
 
-  imPkgs = with pkgs; 
+  imPkgs = with pkgs;
     let
       customWeechat = weechat.override {
         configure = { availablePlugins, ... }: {
           scripts = with pkgs.weechatScripts; [
-            # weechat-xmpp weechat-matrix-bridge 
+            # weechat-xmpp weechat-matrix-bridge
             wee-slack
           ];
           init = ''
@@ -82,7 +82,7 @@ let
     # gcalc
     unstable.dropbox
     # gnome3.eog # eye of gnome = image viewer / creates a collision
-    gnome3.networkmanagerapplet # should 
+    gnome3.networkmanagerapplet # should
     gnome3.defaultIconTheme # else nothing appears
     mpv
     kitty
@@ -124,7 +124,7 @@ let
   ];
 
   home.sessionVariables = {
-    # JUPYTER_CONFIG_DIR= 
+    # JUPYTER_CONFIG_DIR=
   };
 
   # the kind of packages u don't want to compile
@@ -165,7 +165,7 @@ in
     ]
    ;
 
-   # with my version 
+   # with my version
   # programs.neovim = pkgs.neovimDefaultConfig;
   # # test
   # programs.neovim = import ./neovim.nix {
@@ -212,7 +212,7 @@ in
     location = "center";
 
     # rofi.font: SourceCodePro 9
-    # font = 
+    # font =
     extraConfig=''
       !rofi.opacity: 90
       !rofi.width: 50
@@ -279,10 +279,17 @@ in
   };
 
 
+  services.mpd = {
+    enable = true;
+    # dataDir = xdg.dataDir
+    # musicDirectory = 
+    # extraConfig = 
+  };
+
   services.random-background = {
     enable = false;
-    # imageDirectory = 
-    # interval = 
+    # imageDirectory =
+    # interval =
   };
 
   # services.screen-locker.enable = true;
@@ -403,7 +410,7 @@ in
 	# bindsym $mod+Up   exec  $(xdotool mousemove_relative --sync -- 0 -15)
   # }
 
-          # resize ..." 
+          # resize ..."
 
         # # Enter papis mode
         papis = {
@@ -439,9 +446,9 @@ in
 # il ne comprend pas Super_L
 
   # consider using lib.mkOptionDefault according to help
-    keybindings = 
-    let 
-      mad="Mod4"; mod="Mod1"; 
+    keybindings =
+    let
+      mad="Mod4"; mod="Mod1";
       notify-send = "${pkgs.libnotify}/bin/notify-send";
 
       move_focused_wnd = dir: fr: us:
@@ -449,7 +456,7 @@ in
         "$GroupFr+$mod+Shift+${fr}"="move ${dir}";
         "$GroupUs+$mod+Shift+${us}"="move ${dir}";
       };
-    in 
+    in
     {
         # todo use i3lock-fancy instead
         # alternative is "light"
@@ -529,7 +536,7 @@ in
       // move_focused_wnd "down" "j" "j"
       // move_focused_wnd "up" "k" "k"
       # semicolumn
-      // move_focused_wnd "right" "l" "l" 
+      // move_focused_wnd "right" "l" "l"
       # just trying to overwrite previous bindings with i3dispatch
       // lib.optionalAttrs true {
       "${mod}+Left" = "exec ${pkgs.i3dispatch}/bin/i3dispatch left";
@@ -548,7 +555,7 @@ in
   # home.file.".haskeline".source = ../home/haskeline;
 
   #  TODO newsboat
-  # programs.newsboat.urls = 
+  # programs.newsboat.urls =
 
 
   # TODO make sure it works

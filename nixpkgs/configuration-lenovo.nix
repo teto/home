@@ -12,6 +12,7 @@ let
     # ./hardware-dell.nix
     /etc/nixos/hardware-configuration.nix
 
+    ./modules/distributedBuilds.nix
     ./config-all.nix
     ./common-desktop.nix
     ./modules/network-manager.nix
@@ -160,10 +161,10 @@ let
       #             (attrNames (readDir path)))
       # ++ [ (import ./envs.nix) ];
 
-  # nixpkgs.overlays = [
-    # (import <nixpkgs-overlays>/kernels.nix)
+  nixpkgs.overlays = [
+    (import <nixpkgs-overlays/kernels.nix>)
     # (import ./overlays/haskell.nix) 
-  # ];
+  ];
 
   nixpkgs.config.allowUnfree = true;
 
@@ -232,9 +233,7 @@ let
       keys = [ secrets.gitolitePublicKey ];
     };
 
-    buildMachines = secrets.buildMachines;
     distributedBuilds = false;
-
   };
 
   # kind of a test
@@ -253,7 +252,8 @@ let
     enable = true;
     debug = true;
     pathManager = "netlink";
-    package = pkgs.linux_mptcp_trunk_raw;
+    # package = pkgs.linux_mptcp_trunk_raw;
+    package = pkgs.linux_mptcp;
   };
 
   # once available

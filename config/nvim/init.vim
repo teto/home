@@ -772,6 +772,7 @@ nnoremap <Leader>w :w<CR>
 nnoremap <leader>gfs :vertical wincmd f<CR> " open file under cursor in a split
 " float-preview {{{
 let g:float_preview#docked = 0
+" let g:float_preview#win
 "}}}
 " vim-pad {{{
 let g:pad#dir=$XDG_DATA_HOME"/notes"

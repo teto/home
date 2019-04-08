@@ -56,6 +56,8 @@ in
     buildMachines = [
       localMachine
     ];
-    distributedBuilds = true;
+
+    # set it on a per-machine basis
+    # distributedBuilds = true;
   };
 }
