@@ -24,45 +24,6 @@ rec {
 # import os
 # import shutil
 # import glob
-    papis = super.papis.overridePythonAttrs (oa: {
-      version = "0.9-dev";
-
-      # datautil
-      # super.python3Packages.sqlite
-      propagatedBuildInputs = with super.python3Packages; oa.propagatedBuildInputs ++  ([
-        # useful for zotero script
-         pyyaml dateutil
-      ]);
-      src = /home/teto/papis;
-      doCheck = false;
-
-      # src = builtins.fetchGit {
-      #   url = https://github.com/teto/papis;
-      #   ref = "zsh_completion";
-      #   # rev = "101e83a7014e2ed7d17ceb009a433881354fa0fc";
-      #   # sha256 = "0hw8f62qri62lg1wi37n0nvw1dw6pcmrbs66zbrzwf54rpl33462";
-      #   # fetchSubmodules = true;
-      # };
-
-      # propagatedBuildInputs = oa.propagatedBuildInputs ++ (with super.python3Packages; [
-      #   yaml
-      #   ]);
-
-      # src = super.fetchFromGitHub {
-      #   owner = "papis";
-      #   repo = "papis";
-      #   rev = "101e83a7014e2ed7d17ceb009a433881354fa0fc";
-      #   sha256 = "0hw8f62qri62lg1wi37n0nvw1dw6pcmrbs66zbrzwf54rpl33462";
-      #   # fetchSubmodules = true;
-      # };
-
-      # install -D misc/__khal $out/share/zsh/site-functions/__khal
-      # postInstall = oa.postInstall + ''
-      #   echo $PWD
-      #   ls scripts/
-      #   install -D "scripts/shell_completion/click/papis.zsh" $out/share/zsh/site-functions/_papis
-      #   '';
-    });
 
   # papis-dev = 
 

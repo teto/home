@@ -49,16 +49,35 @@ rec {
           };
         });
 
+        papis = pythonsuper.papis.overridePythonAttrs (oa: {
+          version = "0.9-dev";
 
-        # papis = pythonsuper.papis.overrideAttrs (oldAttrs: {
-        #   version = "0.8-dev";
-        #   src = super.fetchFromGitHub {
-        #     owner = "papis";
-        #     repo = "papis";
-        #     rev = "11e368cf437f90ce4835f486eda8d946c84eb577";
-        #     sha256 = "0l8b32ly0fvzwsy3f3ywwi0plckm31y269xxckmgi02sdwisq2ah";
-        #   };
-        # });
+          # datautil
+          # super.python3Packages.sqlite
+          propagatedBuildInputs = with super.python3Packages; oa.propagatedBuildInputs ++  ([
+            # useful for zotero script
+            pyyaml dateutil
+          ]);
+          src = /home/teto/papis;
+          doCheck = false;
+
+          # src = builtins.fetchGit {
+          #   url = https://github.com/teto/papis;
+          #   ref = "zsh_completion";
+          #   # rev = "101e83a7014e2ed7d17ceb009a433881354fa0fc";
+          #   # sha256 = "0hw8f62qri62lg1wi37n0nvw1dw6pcmrbs66zbrzwf54rpl33462";
+          #   # fetchSubmodules = true;
+          # };
+
+          # src = super.fetchFromGitHub {
+          #   owner = "papis";
+          #   repo = "papis";
+          #   rev = "101e83a7014e2ed7d17ceb009a433881354fa0fc";
+          #   sha256 = "0hw8f62qri62lg1wi37n0nvw1dw6pcmrbs66zbrzwf54rpl33462";
+          #   # fetchSubmodules = true;
+          # };
+
+        });
 
         # look for matching wcwidth
         cmd2 = pythonsuper.cmd2.overrideAttrs (oa: {

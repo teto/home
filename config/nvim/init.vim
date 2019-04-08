@@ -235,7 +235,7 @@ Plug 'neovimhaskell/haskell-vim', {'for':'haskell'} " haskell install
 " crashes without netrc
 " Plug 'deoplete-plugins/deoplete-make' " empty !
 Plug 'deoplete-plugins/deoplete-zsh'
-Plug 'ncm2/float-preview.nvim'
+" Plug 'ncm2/float-preview.nvim'
 " Plug 'deoplete-plugins/deoplete-jedi'
 " Plug 'deoplete-plugins/deoplete-clang'
 "
