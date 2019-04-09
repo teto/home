@@ -17,6 +17,8 @@ let
     ./common-desktop.nix
     ./modules/network-manager.nix
     ./modules/libvirtd.nix
+    ./modules/vpn.nix
+
     ({ config, lib, ... }:
     {
       boot.enforceRequiredConfig = true;
@@ -264,9 +266,6 @@ let
   # ebpf ?
   # broken in https://github.com/NixOS/nixpkgs/issues/56724
   programs.bcc.enable = false;
-
-  # en fait non ils vont etre en concurrence
-  # services.xl2tpd.enable = true;
 
   environment.systemPackages = with pkgs;
     (import ./basetools.nix { inherit pkgs;})

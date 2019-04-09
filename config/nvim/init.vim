@@ -90,6 +90,7 @@ call plug#begin(s:plugdir)
 " Plug 'andymass/vim-matchup' " to replace matchit
 " call :NR on a region than :w . coupled with b:nrrw_aucmd_create,
 " Plug 'AGhost-7/critiq.vim' " :h critiq
+Plug 'chrisbra/Colorizer'
 Plug 'ndmitchell/ghcid', { 'rtp': 'plugins/nvim' }
 Plug 'neovimhaskell/nvim-hs.vim' " to help with nvim-hs
 Plug 'KabbAmine/vCoolor.vim' " :Vcooler
@@ -811,24 +812,6 @@ let g:gutentags_ctags_executable_haskell = 'gutenhasktags'
 " let g:gutentags_ctags_executable_haskell = 'hasktags'
 let g:gutentags_ctags_exclude = ['.vim-src', 'build', '.mypy_cache']
 " }}}
-" start haskell host if required  {{{
-if has('nvim')
-  function! s:RequireHaskellHost(name)
-      " It is important that the current working directory (cwd) is where
-      " your configuration files are.
-      " 'nix-shell', '-p',
-      return jobstart([ 'stack', 'exec', 'nvim-hs', a:name.name], {'rpc': v:true, 'cwd': expand('$HOME') . '/.config/nvim'})
-    " return jobstart("nvim-hs", ['-l','/home/teto/nvim-haskell.log','-v','DEBUG',a:name.name])
-  endfunction
-
-call remote#host#Register('haskell', "*.l\?hs", function('s:RequireHaskellHost'))
-  " let hc=remote#host#Require('haskell')
-" " echo rpcrequest(hc, "PingNvimhs") should print Pong
-endif
-"}}}
-" hdevtools {{{
-" let g:hdevtools_options = '-g-isrc -g-Wall'
-"}}}
 " Chromatica (needs libclang > 3.9) {{{
 " can compile_commands.json or a .clang file
 " let g:chomatica#respnsive_mode=1
@@ -1002,9 +985,6 @@ imap <c-x><c-f> <plug>(fzf-complete-path)
 " terminal related {{{
 " automatic close when htting escape
 autocmd! FileType fzf tnoremap <buffer> <Esc> <c-g>
-" }}}
-" Powerline config {{{
-let g:Powerline_symbols = "fancy" " to use unicode symbols
 " }}}
 " Csv config {{{
 " you can use :CsvVertFold to hide commands
@@ -1470,7 +1450,7 @@ nmap <leader>ç <Plug>AirlineSelectTab9
 " autocmd! User GoyoLeave Limelight!
 " }}}
 " inyoface (highlight only comments) {{{
-nmap <leader>c <Plug>(InYoFace_Toggle)<CR>
+nnoremap <leader>c <Plug>(InYoFace_Toggle)<CR>
 " }}}
 " close the preview window on python completion {{{
 " autocmd CompleteDone * pclose
@@ -1650,31 +1630,31 @@ endif
 " au BufEnter *.tex exec ":setlocal spell spelllang=en_us"
 "" }}}
 " Pymode {{{
-let g:pymode_python = 'python3'
-let g:pymode_warnings = 1
-let g:pymode_paths = []
-let g:pymode_indent = 1
-let g:pymode_trim_whitespaces = 1
-let g:pymode_options = 0
-let g:pymode_folding = 0
-let g:pymode_doc = 0
-" C means class, M method for instance
-" ]M                Jump to next class or method (normal, visual, operator modes)
-let g:pymode_motion = 1
-let g:pymode_rope_goto_definition_bind = 'gd'
-let g:pymode_lint = 0 " done by Neomake
-" ROpe is interesting, enables
-let g:pymode_rope = 0 " rope is for semantic analysis jedi vim looks better
-let g:pymode_rope_lookup_project = 0
-let g:pymode_rope_goto_definition_bind = '<C-c>g'
-let g:pymode_rope_show_doc_bind = '<C-c>d'
-let g:pymode_syntax = 1
-let g:pymode_syntax_all = 1
-let g:pymode_rope_goto_definition_cmd = 'new'
+" let g:pymode_python = 'python3'
+" let g:pymode_warnings = 1
+" let g:pymode_paths = []
+" let g:pymode_indent = 1
+" let g:pymode_trim_whitespaces = 1
+" let g:pymode_options = 0
+" let g:pymode_folding = 0
+" let g:pymode_doc = 0
+" " C means class, M method for instance
+" " ]M                Jump to next class or method (normal, visual, operator modes)
+" let g:pymode_motion = 1
+" let g:pymode_rope_goto_definition_bind = 'gd'
+" let g:pymode_lint = 0 " done by Neomake
+" " ROpe is interesting, enables
+" let g:pymode_rope = 0 " rope is for semantic analysis jedi vim looks better
+" let g:pymode_rope_lookup_project = 0
+" let g:pymode_rope_goto_definition_bind = '<C-c>g'
+" let g:pymode_rope_show_doc_bind = '<C-c>d'
+" let g:pymode_syntax = 1
+" let g:pymode_syntax_all = 1
+" let g:pymode_rope_goto_definition_cmd = 'new'
 
-let g:pymode_breakpoint = 0 " consumes <Leader>b otherwise
-" let g:pymode_breakpoint_bind = '<leader>b'
-let g:pymode_virtualenv = 1
+" let g:pymode_breakpoint = 0 " consumes <Leader>b otherwise
+" " let g:pymode_breakpoint_bind = '<leader>b'
+" let g:pymode_virtualenv = 1
 " " hl self keyword
 " let g:pymode_syntax_highlight_self = g:pymode_syntax_all
 " }}}
@@ -2030,7 +2010,7 @@ let g:LanguageClient_loggingLevel = 'INFO'
 " 'DEBUG' | 'INFO' | 'WARN' | 'ERROR'
 " let g:LanguageClient_loggingLevel='DEBUG'
 "let g:LanguageClient_rootMarkers
-" let g:LanguageClient_hoverPreview=
+let g:LanguageClient_hoverPreview='Always'
 let g:LanguageClient_completionPreferTextEdit=1
 let g:LanguageClient_diagnosticsEnable=1
 " else it erases grepper results
@@ -2058,19 +2038,6 @@ set formatexpr=LanguageClient_textDocument_rangeFormatting()
   nnoremap <silent> ,s :call LanguageClient#textDocument_documentSymbol()<CR>
   nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
 " endif
-"}}}
-" intero {{{
-" Intero starts automatically. Set this if you'd like to prevent that.
-let g:intero_start_immediately = 0
-" Enable type information on hover (when holding cursor at point for ~1 second).
-let g:intero_type_on_hover = 1
-" let g:intero_use_neomake=1
-" Change the intero window size; default is 10.
-let g:intero_window_size = 15
-" seems like a good idea
-" let g:intero_backend=
-" Sets the intero window to split vertically; default is horizontal
-let g:intero_vertical_split = 1
 "}}}
 " nvim-hs haskell stuff {{{
 " let g:nvimhsPluginStarter=nvimhs#stack#pluginstarter()
