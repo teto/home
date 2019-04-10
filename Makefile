@@ -161,6 +161,10 @@ $(NEOVIM_FOLDER):
 	cd "${NEOVIM_FOLDER}"; \
 		git remote add upstream git@github.com:teto/neovim.git
 
+cachix:
+	cachix use teto
+	cachix use hie-nix
+
 repositories: dce ns3 neovim wireshark
 	# git clone git@github.com:teto/ns-3-dce.git dce
 	# git clone git@github.com:teto/ns-3-dce.git 
