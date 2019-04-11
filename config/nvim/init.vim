@@ -2032,7 +2032,7 @@ set formatexpr=LanguageClient_textDocument_rangeFormatting()
 " if get(g:, 'LanguageClient_loaded', 0)
   " nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
 
-  nnoremap <silent> ,h :call LanguageClient#textDocument_hover()<CR>
+  nnoremap  ,h :call LanguageClient#textDocument_hover()<CR>
   nnoremap <silent> ,d :call LanguageClient#textDocument_definition()<CR>
   nnoremap <silent> ,r :call LanguageClient#textDocument_references()<CR>
   nnoremap <silent> ,s :call LanguageClient#textDocument_documentSymbol()<CR>
