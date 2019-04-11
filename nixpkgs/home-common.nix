@@ -100,9 +100,9 @@ rec {
 
   xdg = {
     enable = true;
-    configFile."nvim/toto".text = ''
-      hello world
-    '';
+    # configFile."nvim/toto".text = ''
+    #   hello world
+    # '';
   };
 
   # xdg.configFile.".config/mpv/input.conf".source = dotfiles/mpv-input.conf;

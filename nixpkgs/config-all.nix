@@ -243,7 +243,7 @@ kernel_xconfig=''
     '';
   };
 
-  # to get manpages 
+  # to get manpages
   documentation.enable = true;
 
   users.defaultUserShell = pkgs.zsh;

@@ -43,6 +43,14 @@ in
     ];
 
   };
+
+  home-manager.users.teto = { ... }:
+  {
+    # fails for now
+    imports = [ ../home-common.nix ];
+    xdg.configFile."weechat/irc.conf".source = ../../config/weechat/irc.conf;
+  };
+
   # nix.  = ''
   #   require-sigs = false
   #   trusted-substituters = s3://<bucket>?region=us-west-1
