@@ -23,6 +23,10 @@ self: prev:
   #     http-types = super.callHackage "http-types" "0.11" {};
   #   };
   # });
+  yst = prev.haskellPackages.yst.overrideAttrs (oldAttrs: {
+     jailbreak = true;
+  });
+
 
   haskell = prev.haskell // {
 

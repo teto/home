@@ -38,6 +38,8 @@ rec {
         #   src=/home/teto/protocol;
         # });
 
+        python-doi = pythonsuper.callPackage ./pkgs/python-doi {};
+
         alot = pythonsuper.alot.overrideAttrs (oldAttrs: {
           name = "alot-dev";
           version = "0.9-dev";
@@ -56,7 +58,7 @@ rec {
           # super.python3Packages.sqlite
           propagatedBuildInputs = with super.python3Packages; oa.propagatedBuildInputs ++  ([
             # useful for zotero script
-            pyyaml dateutil
+            pyyaml dateutil python-doi
           ]);
           src = /home/teto/papis;
           doCheck = false;

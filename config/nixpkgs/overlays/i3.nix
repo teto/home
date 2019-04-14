@@ -25,7 +25,6 @@ rec {
 # import shutil
 # import glob
 
-  # papis-dev = 
 
   i3-local = let i3path = ~/i3; in 
   if (builtins.pathExists i3path) then
@@ -49,10 +48,9 @@ rec {
 	});
 
   # ranger = super.ranger.override ( { pythonPackages=super.python3Packages; });
-
-   yst = super.haskellPackages.yst.overrideAttrs (oldAttrs: {
-     jailbreak = true;
-  });
+  # khal = super.khal.overrideAttrs (oldAttrs: {
+  #    src = /home/teto/khal;
+  # });
 
   # offlineimap = super.offlineimap.overrideAttrs (oldAttrs: {
   #   # pygobject2

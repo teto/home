@@ -38,7 +38,8 @@ let
     # layout = "fr,us";
     # options = [ "grp:caps_toggle" "grp_led:scroll" ];
     # TODO can add Mod4 
-    options = [ "add Mod1 Alt_R" ];
+    # grp:alt_shift_toggle,ctrl:nocaps,grp_led:scroll
+    options = [ "add Mod1 Alt_R" "ctrl:nocaps"];
     # options = [ "add Mod1 Alt_R" ];
   };
 

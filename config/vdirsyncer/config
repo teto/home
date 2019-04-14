@@ -20,7 +20,7 @@ collections = ["from a", "from b"]
 conflict_resolution = ["command", "nvim -d"]
 
 [storage japon_ferie_remote]
-type = "google_calendar"
+oype = "google_calendar"
 # hopefully we can use env variables
 # todo put it into readonly
 # token_file = "~/.local/vdirsyncer"
