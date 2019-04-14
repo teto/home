@@ -254,8 +254,8 @@ let
     enable = true;
     debug = true;
     pathManager = "netlink";
-    # package = pkgs.linux_mptcp_trunk_raw;
-    package = pkgs.linux_mptcp;
+    package = pkgs.linux_mptcp_trunk_raw;
+    # package = pkgs.linux_mptcp;
   };
 
   # once available

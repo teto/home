@@ -101,6 +101,7 @@ let
     # mdp # markdown CLI presenter
     # gnome3.gnome_control_center
     ncpamixer # pulseaudio TUI mixer
+    noti # send notifications when a command finishes
     # papis # library manager
     unstable.gnome3.gnome-calculator
     pass

@@ -19,7 +19,7 @@ let
 
   # TODO add heavyPackages only if available ?
   # or set binary-cache
-  # nixos= import '<nixos-unstable>' 
+  # nixos= import '<nixos-unstable>'
 in
 rec {
   news.display = "silent";
@@ -27,13 +27,13 @@ rec {
   # home.extraOutputsToInstall = [ "man" "doc" ];
   programs.man.enable = true;
 
-
+  home.packages = [];
 
   # works only because TIGRC_USER is set
   # if file exists vim.tigrc
-  home.file."${config.xdg.configHome}/tig/config".text = let 
+  home.file."${config.xdg.configHome}/tig/config".text = let
     vimTigrc = "${pkgs.tig}/etc/vim.tigrc";
-  in 
+  in
     ''
       source ${pkgs.tig}/etc/vim.tigrc
       # not provided
@@ -41,10 +41,10 @@ rec {
       source ${config.xdg.configHome}/tig/custom.tigrc
     '';
   # lib.concatStrings [
-  #   (builtins.readFile vimTigrc) 
+  #   (builtins.readFile vimTigrc)
   #   # TODO reestablish when the package gets updated
-  #   # (builtins.readFile "${pkgs.tig}/tig/contrib/large-repo.tigrc") 
-  #   (builtins.readFile ../large-repo.tigrc) 
+  #   # (builtins.readFile "${pkgs.tig}/tig/contrib/large-repo.tigrc")
+  #   (builtins.readFile ../large-repo.tigrc)
   # ];
 
 
@@ -68,12 +68,12 @@ rec {
   # see tips/haskell.md, an incomplete cabal config can be a pain
   # - absence of repostiory will make cabal update fail
   # is needed with new-build ?
-  # "nix: True"; 
+  # "nix: True";
   # home.file.".cabal/config".text = ../home/cabal;
 
 
   # TODO doesn't find ZDOTDIR (yet)
-  # TODO maybe we can add to PATH 
+  # TODO maybe we can add to PATH
   # TODO use xdg.configFile ?
   # - https://github.com/carnager/rofi-scripts.git
   # https://github.com/carnager/buku_run
@@ -173,7 +173,7 @@ rec {
         autoStash = true
 
       [pull]
-        rebase = true        
+        rebase = true
 
       [stash]
           showPatch = 1
@@ -243,7 +243,7 @@ rec {
     };
     shellAliases = {
     } // config.programs.bash.shellAliases;
-    # plugins = 
+    # plugins =
     # loginExtra=
     # profileExtra
     initExtra = ''
@@ -272,10 +272,10 @@ rec {
       }
 
       # TODO remove and include it ?
-      
+
       source $ZDOTDIR/zshrc.generated
       source $ZDOTDIR/zshrc
-    '' 
+    ''
       # + builtins.readFile dotDir + ./zshrc
       ;
 
@@ -322,9 +322,9 @@ rec {
 applmcation/pdf; evince '%s';
 # pdftotext
 # wordtotext
-# ppt2text 
+# ppt2text
 # download script mutt_bgrun
-#application/pdf; pdftohtml -q -stdout %s | w3m -T text/html; copiousoutput 
+#application/pdf; pdftohtml -q -stdout %s | w3m -T text/html; copiousoutput
 #application/msword; wvWare -x /usr/lib/wv/wvHtml.xml %s 2>/dev/null | w3m -T text/html; copiousoutput
 text/calendar; khal import '%s'
 text/*; less '%s';

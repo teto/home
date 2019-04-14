@@ -197,7 +197,7 @@ with libk;
       CRYPTO_HMAC          = yes;
       TMPFS_POSIX_ACL      = yes;
       SECCOMP              = yes;
-};
+    };
 
     net9pConfigStructured = {
 
@@ -310,6 +310,7 @@ with libk;
     persoConfig = {
       # netling debug/diagnostic
       NETLINK_DIAG = yes;
+      INET_DIAG    = yes;
 
       # increase ring kernel buffer size
       LOG_BUF_SHIFT  = freeform "22";
