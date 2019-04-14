@@ -41,6 +41,7 @@ let
   # boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_mptcp_with_netlink;
   # boot.kernelPackages = pkgs.linuxPackages;
   # boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_mptcp_trunk_raw;
+  boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_mptcp;
   # boot.kernelPackages = pkgs.linuxPackages_4_14;
 # boot.kernelPackages = pkgs.linuxPackagesFor pkgs.my_lenovo_kernel;
 
@@ -131,9 +132,9 @@ let
     # '';
 
     # 0 = default/highest vs 7 lowest
-    daemonIONiceLevel = 3;
+    # daemonIONiceLevel = 3;
     # 0 = max (default) vs 19 lowest
-    daemonNiceLevel = 2;
+    # daemonNiceLevel = 2;
     distributedBuilds = true;
   };
 

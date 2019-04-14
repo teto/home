@@ -163,19 +163,13 @@ in
   # };
 
   nix = {
-
-    # package = pkgs.nixStable;
-    # package = pkgs.nixUnstable;
     # allowedUsers = [];
 
     buildCores=4;
-    # checkConfig = true;
 
     # This priority propagates to build processes. 0 is the default Unix process I/O priority, 7 is the lowest
     # daemonIONiceLevel = 3;
-
     # distributedBuilds = true;
-
     # TODO let it be set via channels ?
     # now with nix build -f channel:nixos-unstable
     nixPath = [

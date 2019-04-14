@@ -5,16 +5,6 @@
  #    Importing a top-level default.nix file, if it is a directory. 
 final: prev:
 {
-  # imports = [
-  #   # ./modules/services/gnome3.nix
-  #   ./kernels.nix
-  # ];
-  # vdirsyncer = prev.vdirsyncer.overrideAttrs ( oa: {
-  #   src = fetchGit {
-      # url = https://github.com/pimutils/vdirsyncer.git;
-    # };
-  # });
-
   # astroid = prev.astroid;
   # astroid = prev.enableDebugging prev.astroid;
 
@@ -65,20 +55,13 @@ final: prev:
 
   mptcpanalyzer = prev.python3Packages.callPackage ./mptcpanalyzer {
     # tshark = self.pkgs.tshark-reinject-stable; 
-    # inherit (prev.pkgs) tshark;
-    # tshark = final.pkgs.tshark-dev-stable;
   };
 
   # http-getter = prev.python3Packages.callPackage ./http-getter { } ;
   packetdrill-mptcp = prev.packetdrill.overrideAttrs ( oa: {
-    # oa
-    # src = super.fetchFromGitHub {
-
-    # };
-
   });
 
-  oni = prev.callPackage ./oni/default.nix {};
+  # oni = prev.callPackage ./oni/default.nix {};
 
   mda-lite = prev.pythonPackages.callPackage ./mda-lite {};
 
@@ -88,12 +71,7 @@ final: prev:
 
   rt-tests = prev.callPackage ./rt-test.nix {};
 
-  netbee = prev.callPackage ./netbee {};
-
-  # gImageReader = prev.gImageReader or prev.libsForQt5.callPackage ./gImageReader {
-  #   # must be python3
-  #     python = prev.python3;
-  # };
+  # netbee = prev.callPackage ./netbee {};
 
   mptcptrace = prev.callPackage ./mptcptrace {};
 
@@ -104,5 +82,4 @@ final: prev:
   };
 
   i3dispatch = prev.python3Packages.callPackage ./i3-dispatch {};
-  # linux_mptcp_4_94 = prev.callPackage ./mptcp {};
 }
