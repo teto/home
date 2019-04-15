@@ -125,7 +125,8 @@ rec {
 
       src = builtins.fetchGit {
         # url = git@github.com:neovim/neovim.git;
-        url = https://github.com/neovim/neovim.git;
+        # url = https://github.com/neovim/neovim.git;
+        url = https://github.com/teto/neovim.git;
         # ref = "master";
         # rev = "";
       };
