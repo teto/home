@@ -295,8 +295,8 @@ Plug 'tommcdo/vim-lion' " Use with gl/L<text object><character to align to>
 "Plug 'wellle/visual-split.vim'
 Plug 'wellle/targets.vim' " Adds new motion targets ci{
 " Plug 'justinmk/vim-ipmotion' " ?
-Plug 'justinmk/vim-sneak' " remaps 's'
-Plug 'tpope/vim-rsi'  " maps readline bindings
+" Plug 'justinmk/vim-sneak' " remaps 's'
+" Plug 'tpope/vim-rsi'  " maps readline bindings
 " }}}
 
 " Plug 'mhinz/vim-startify' " very popular, vim's homepage
@@ -378,7 +378,7 @@ Plug 'vim-scripts/rfc-syntax', { 'for': 'rfc' } " optional syntax highlighting f
 " Plug 'chrisbra/unicode.vim' " , { 'on': ['<plug>(UnicodeComplete)', '<plug>(UnicodeGA)', 'UnicodeTable'] }
 Plug 'teto/Modeliner' " <leader>ml to setup buffer modeline
 " This one has bindings mapped to <leader>l
-"Plug 'vimwiki/vimwiki'   " to write notes
+Plug 'vimwiki/vimwiki'   " to write notes
 " async grep neovim only
 " Plug 'mhinz/vim-grepper' " , { 'on': 'Grepper'}
 "Plug 'teto/neovim-auto-autoread' " works only in neovim, runs external checker
@@ -2013,6 +2013,7 @@ let g:LanguageClient_loggingLevel = 'INFO'
 let g:LanguageClient_hoverPreview='Always'
 let g:LanguageClient_completionPreferTextEdit=1
 let g:LanguageClient_diagnosticsEnable=1
+let g:LanguageClient_useFloatingHover=1
 " else it erases grepper results
 let g:LanguageClient_diagnosticsList='Location'
 " see $RUNTIME/rplugin/python3/LanguageClient/wrapper.sh for logging

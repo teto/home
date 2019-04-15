@@ -37,7 +37,7 @@ let
     # kernel;
     (kernel.overrideAttrs (o: {
     nativeBuildInputs=o.nativeBuildInputs ++ [ prev.pkgconfig prev.qt5.qtbase prev.ncurses ];
-    shellHook = o.shellHook + ''
+    shellHook = (o.shellHook or "") + ''
       echo "make menuconfig KCONFIG_CONFIG=$PWD/build/.config"
       echo "make menuconfig KCONFIG_CONFIG=$PWD/build/.config"
     '';
@@ -178,7 +178,6 @@ in rec {
 #- CONFIG_DEVTMPFS is not enabled!
 #- CONFIG_CGROUPS is not enabled!
   linux_mptcp_trunk_raw = (
-  # addMenuConfig
     (prev.callPackage ./pkgs/kernels/linux-mptcp-trunk.nix {
 
     kernelPatches = prev.linux_4_19.kernelPatches;
@@ -191,6 +190,8 @@ in rec {
 
     structuredExtraConfig = defaultConfigStructured;
   }));
+
+  linux_mptcp_trunk_dev = addMenuConfig linux_mptcp_trunk_raw ;
 
   # see https://nixos.wiki/wiki/Linux_Kernel
   linux_mptcp_trunk = (prev.linuxManualConfig {

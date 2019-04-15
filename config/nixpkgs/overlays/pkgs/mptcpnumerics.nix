@@ -8,8 +8,6 @@ buildPythonApplication {
     #   rev = "${version}";
     #   # sha256 = ;
     # };
-    # todo filter
-    # filter-src
 	src =  builtins.filterSource (name: type: true) /home/teto/mptcpnumerics;
     # enableCheckPhase=false;
     doCheck = false;
@@ -17,9 +15,10 @@ buildPythonApplication {
 	# buildInputs = [  stevedore pandas matplotlib  ];
     # to build the doc sphinx
     # TODO package tshark
-    propagatedBuildInputs = [ stevedore cmd2 
-     pandas 
-     sortedcontainers
+    propagatedBuildInputs = [
+      stevedore cmd2
+      pandas
+      sortedcontainers
       # we want gtk because qt is so annying on nixos
       # at the same time "The Gtk3 backend requires PyGObject or pgi"
       (matplotlib.override { enableGtk3=true;})

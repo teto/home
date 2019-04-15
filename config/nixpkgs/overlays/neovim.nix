@@ -26,6 +26,7 @@ let
       vim-grepper
       vim-nix
       vim-obsession
+      vim-rsi
       vim-sayonara
       vim-markdown-composer
       # deoplete-khard
