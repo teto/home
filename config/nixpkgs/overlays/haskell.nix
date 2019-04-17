@@ -90,13 +90,12 @@ self: prev:
       #   # compiler = pkgs.haskell.compiler.ghc864;
       # } ).hie86;
 
-      hie = (import "${hie_remote}/ghc-8.6.nix" {
-        # inherit compiler = nixpkgs.haskell.packages.ghc864
-      } ).haskell-ide-engine;
-
+      # hie = (import "${hie_remote}/ghc-8.6.nix" {
+      #   # inherit compiler = nixpkgs.haskell.packages.ghc864
+      # } ).haskell-ide-engine;
 
       # todo make it automatic depending on nixpkgs' ghc
-      # hie = (import hie_remote {} ).hie86;
+      hie = (import hie_remote {} ).hie86;
 
 
     };
