@@ -13,7 +13,7 @@ let
       far-vim
       fzf-vim
       # defined in overrides: TODO this should be easier: like fzf-vim should be enough
-      # fzfWrapper
+      fzfWrapper
 
       # replaced by ale ?
       LanguageClient-neovim
