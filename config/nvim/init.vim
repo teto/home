@@ -110,6 +110,7 @@ Plug 'vim-pandoc/vim-pandoc-syntax'
 Plug 'Carpetsmoker/xdg_open.vim' " overrides gx
 Plug 'tweekmonster/nvim-api-viewer', {'on': 'NvimAPI'} " see nvim api
 Plug 'tweekmonster/startuptime.vim', {'on': 'StartupTime'} " see startup time per script
+Plug 'vim-scripts/vis'
 " Plug 'jamessan/vim-gnupg'
 " Plug 'mattn/gist-vim' " to gist requires webapi
 " provider dependant {{{
@@ -336,12 +337,12 @@ Plug 'mhinz/vim-randomtag', { 'on': 'Random' } " Adds a :Random function that la
 " Plug 'junegunn/fzf', { 'dir': $XDG_DATA_HOME . '/fzf', 'do': './install --completion --key-bindings --64' }
 " let distribution (like nixos install fzf
 " this package only ocntains fzf#run,
-Plug 'junegunn/fzf', " { 'dir': $XDG_DATA_HOME . '/fzf', 'do': ':term ./install --no-update-rc --bin --64'}
+" Plug 'junegunn/fzf', " { 'dir': $XDG_DATA_HOME . '/fzf', 'do': ':term ./install --no-update-rc --bin --64'}
 
 " Many options available :
 " https://github.com/junegunn/fzf.vim
 " Most commands support CTRL-T / CTRL-X / CTRL-V key bindings to open in a new tab, a new split, or in a new vertical split
-Plug 'junegunn/fzf.vim' " defines :Files / :Commits for FZF
+" Plug 'junegunn/fzf.vim' " defines :Files / :Commits for FZF
 
 "}}}
 
@@ -2528,3 +2529,5 @@ function! UpdatePythonHost(prog)
   " let g:LanguageClient_serverCommands.python = [ fnamemodify( g:python3_host_prog, ':p:h').'/pyls', '-vv', '--log-file' , '/tmp/lsp_python.log']
 endfunc
 
+au BufWinLeave,BufLeave * if &buftype != 'nofile' | silent! mkview | endif
+au BufWinEnter * if &buftype != 'nofile' | silent! loadview | endif

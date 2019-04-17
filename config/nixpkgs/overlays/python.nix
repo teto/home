@@ -81,6 +81,12 @@ rec {
 
         });
 
+
+        pycurl = pythonsuper.pycurl.overrideAttrs (oa: {
+          doCheck = false;
+          installCheckPhase = false;
+        });
+
         # look for matching wcwidth
         cmd2 = pythonsuper.cmd2.overrideAttrs (oa: {
           # installFlags = [ "--ignore-installed" ];

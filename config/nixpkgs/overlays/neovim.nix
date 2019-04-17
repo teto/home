@@ -11,11 +11,13 @@ let
       # echodoc-vim
       fugitive
       far-vim
+      fzf-vim
       # replaced by ale ?
       LanguageClient-neovim
       tagbar
       # targets-vim
       # vCoolor-vim
+      vim-dirvish
       vim-dirvish
       vim-fugitive
       vim-signature
