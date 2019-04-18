@@ -130,7 +130,7 @@ let
 
   # the kind of packages u don't want to compile
   # TODO les prendres depuis un channel avec des binaires ?
-  heavyPackages = with unstable.pkgs;[
+  heavyPackages = with pkgs;[
     # anki          # spaced repetition system
     # hopefully we can remove this from the environment
     # it's just that I can't setup latex correctly
@@ -139,10 +139,10 @@ let
     unstable.qutebrowser  # keyboard driven fantastic browser
     gnome3.nautilus # demande webkit/todo replace by nemo ?
     shutter # screenshot utility
-    mcomix # manga reader
+    # mcomix # manga reader
     # mendeley # requiert qtwebengine
     pinta    # photo editing
-    stable.qtcreator  # for wireshark
+    # unstable.qtcreator  # for wireshark
     zeal       # doc for developers
     vifm
     # zotero     # doc software
@@ -162,7 +162,7 @@ in
     pkgs.up # live preview of pipes
     pkgs.peek # GIF recorder
 
-    stable.pkgs.cachix
+    unstable.pkgs.cachix
     ]
    ;
 
