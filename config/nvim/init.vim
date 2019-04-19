@@ -94,7 +94,7 @@ Plug 'chrisbra/Colorizer'
 Plug 'ndmitchell/ghcid', { 'rtp': 'plugins/nvim' }
 Plug 'neovimhaskell/nvim-hs.vim' " to help with nvim-hs
 Plug 'KabbAmine/vCoolor.vim' " :Vcooler
-Plug 'rickhowe/diffchar.vim'
+Plug 'rickhowe/diffchar.vim' " per char diff
 " Plug 'prabirshrestha/vim-lsp'
 " Plug 'bfredl/nvim-lspmirror'
 " Plug 'bfredl/nvim-lspext' " extension
@@ -121,13 +121,14 @@ Plug 'roxma/nvim-yarp' " required for deoplete
 " Plug 'roxma/vim-hug-neovim-rpc' " what is that ? required for deoplete
 " Plug '~/vim-config'
 Plug '~/nvim-palette', { 'do': ':UpdateRemotePlugins' }
-Plug 'LnL7/vim-nix', {'for': 'nix'}
+
+" Plug 'LnL7/vim-nix', {'for': 'nix'}
 
 " Plug 'romainl/vim-qf' " can create pb with neomake
 Plug 'editorconfig/editorconfig-vim' " not remote but involves python
 " provider
 Plug 'msrose/vim-perpetuloc'
-Plug 'brooth/far.vim', { 'do': ':UpdateRemotePlugins' } " search and replace across files
+" Plug 'brooth/far.vim', { 'do': ':UpdateRemotePlugins' } " search and replace across files
 " needs ruby support, works in recent neovim
 Plug 'junegunn/vim-github-dashboard', { 'do': ':UpdateRemotePlugins' }
 Plug 'fmoralesc/vim-pad', {'branch': 'devel'} " :Pad new, note taking
@@ -219,7 +220,6 @@ Plug 'sjl/gundo.vim' " :GundoShow/Toggle to redo changes
 "
 " }}}
 " Plug 'beloglazov/vim-online-thesaurus' " thesaurus => dico dde synonymes
-" Plug 'KabbAmine/vCoolor.vim', { 'on': 'VCooler' } " RGBA color picker
 " Plug 'arakashic/chromatica.nvim', { 'for': 'cpp' } " semantic color syntax
 
 " Plug 'fszymanski/deoplete-abook' " replaced with the khard one
@@ -1290,8 +1290,10 @@ call neomake#configure#automake('w')
 " augroup END
 " }}}
 " Airline {{{
+" debug with :AirlineExtensions
 " to speed up things
-let g:airline_extensions = ['obsession', 'quickfix', 'tabline', 'wordcount']
+
+let g:airline_extensions = ['obsession', 'quickfix', 'tabline', 'wordcount', 'languageclient' ]
 " let g:airline#extensions#default#layout = [
 "     \ [ 'a', 'b', 'c' ],
 "     \ [ 'x', 'y', 'z', 'error', 'warning' ]
