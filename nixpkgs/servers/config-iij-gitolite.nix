@@ -44,11 +44,31 @@ in
 
   };
 
+  nixpkgs.overlays = [
+    import ../../config/nixpkgs/overlays/neovim.nix
+  ];
+
   home-manager.users.teto = { ... }:
   {
     # fails for now
     imports = [ ../home-common.nix ];
     xdg.configFile."weechat/irc.conf".source = ../../config/weechat/irc.conf;
+
+    programs.zsh.shellInit = ''
+      ZSH_DISABLE_COMPFIX=true
+    '';
+  };
+
+  # Fix problem with sudo
+  # https://github.com/NixOS/nixops/issues/931
+  system.activationScripts.nixops-vm-fix-931 = {
+    text = ''
+      if ls -l /nix/store | grep sudo | grep -q nogroup; then
+        mount -o remount,rw  /nix/store
+        chown -R root:nixbld /nix/store
+      fi
+    '';
+    deps = [];
   };
 
   # nix.  = ''

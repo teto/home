@@ -172,6 +172,7 @@ in
     # distributedBuilds = true;
     # TODO let it be set via channels ?
     # now with nix build -f channel:nixos-unstable
+    # TODO use options.nix.nixPath.default ++
     nixPath = [
       "nixos-unstable=https://github.com/nixos/nixpkgs-channels/archive/nixos-unstable.tar.gz"
       "nixos=https://github.com/nixos/nixpkgs-channels/archive/nixos-19.03.tar.gz"
