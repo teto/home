@@ -35,8 +35,13 @@ rec {
   #   # inherit compiler = nixpkgs.haskell.packages.ghc864
   # } ).haskell-ide-engine;
 
+
+  hie_remote_matt = builtins.fetchTarball {
+    url    = https://github.com/teto/hie-nix/tarball/hie-master;
+  };
+  hie = (import hie_remote_matt {} ).hie86;
   # todo make it automatic depending on nixpkgs' ghc
-  hie = (import hie_remote {} ).hie86;
+  # hie = (import hie_remote {} ).hie86;
 
 
   i3-local = let i3path = ~/i3; in 

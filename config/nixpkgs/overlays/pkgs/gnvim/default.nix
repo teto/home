@@ -13,17 +13,22 @@ buildRustPackage rec {
   version = "0.1.1";
 
   src = fetchgit rec {
-    url = "https://github.com/vhakulinen/gnvim";
-    rev = "cff6810bc91514a8fd56c8923f01ad937d8c766a";
-    sha256 = "0g968ycdzljq6d9q99wngj16ak783az357c2ns0hbcfm7awiw8k1";
+    url = https://github.com/vhakulinen/gnvim;
+    rev = "fd50f791a5004eb7ea6c29c8d10452f3609da06a";
+    sha256 = "0lndpgmpzzq257n1nh7a72a1dfvkcfz8p0ax411ygjpp76zxjrp9";
 
     # gnvim detects its version from tags
     leaveDotGit = true;
     postFetch = ''
+      set -x
       cd $out
+      echo $PWD
       git fetch -vv --tags ${url}
+      set +x
     '';
   };
+
+  RUST_BACKTRACE=1;
 
   # TODO might need to wrap with this
   # GNVIM_RUNTIME_PATH=./runtime

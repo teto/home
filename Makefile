@@ -16,7 +16,8 @@ HOME_MANAGER_FOLDER = "${HOME}/hm"
 NEOVIM_FOLDER = "${HOME}/neovim"
 LKL_FOLDER = "${HOME}/lkl"
 
-
+mkfile_path := $(abspath $(lastword $(MAKEFILE_LIST)))
+mkfile_dir := $(dir $(mkfile_path))
 
 .PHONY: config etc mail local bin home
 
@@ -70,8 +71,8 @@ mail:
 	mkdir -p ${MAILDIR}/gmail/.notmuch
 	mkdir -p ${MAILDIR}/iij/.notmuch
 	ln -s ${MAILDIR}/pro ${MAILDIR}/iij
-	ln -s ${HOME}/dotfiles/hooks_pro ${MAILDIR}/pro/.notmuch/hooks
-	ln -s ${HOME}/dotfiles/hooks_perso ${MAILDIR}/gmail/.notmuch/hooks
+	ln -s ${mkfile_dir}/hooks_pro ${MAILDIR}/pro/.notmuch/hooks
+	ln -s ${mkfile_dir}/hooks_perso ${MAILDIR}/gmail/.notmuch/hooks
 	notmuch --config=${XDG_CONFIG_HOME}/notmuch/notmuchrc new
 	notmuch --config=${XDG_CONFIG_HOME}/notmuch/notmuchrc_pro new
 
