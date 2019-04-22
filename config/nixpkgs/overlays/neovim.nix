@@ -57,7 +57,8 @@ rec {
     with super;
     let
       # isHaskellPkg
-      requiredPythonModules = lib.debug.traceVal (super.python3Packages.requiredPythonModules drvs);
+      # lib.debug.traceVal
+      requiredPythonModules =  (super.python3Packages.requiredPythonModules drvs);
 
       # Get list of required Python modules given a list of derivations.
       # TODO look into compiler.shellFor { packages= } to see how to get deps
