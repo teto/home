@@ -17,4 +17,11 @@ in
   };
 
   networking.firewall.allowedTCPPorts = [ 80 443 ];
+
+  services.nginx.virtualHosts = { 
+    # "cloud.acelpb.com" = {... }
+    "${secrets.gitolite_server.hostname}" = {
+      forceSSL = true;
+    };
+  };
 }

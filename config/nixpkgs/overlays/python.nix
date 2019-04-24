@@ -88,20 +88,20 @@ rec {
         });
 
         # look for matching wcwidth
-        cmd2 = pythonsuper.cmd2.overrideAttrs (oa: {
-          # installFlags = [ "--ignore-installed" ];
-          version = "1.0";
-          nativeBuildInputs = oa.nativeBuildInputs ++ [ super.git ];
-          # src = /home/teto/cmd2;
-          src = super.fetchgit {
-            url=https://github.com/python-cmd2/cmd2.git;
-            rev = "f5c904cda48c03a30b3476f3a40224226391deea";
-            sha256 = "1226izysk99r2q8gdvi53rclfckcd5gh0qmrnvm5ycgc6qwk0li3";
-            leaveDotGit = true;
-            deepClone = true;
-          };
-          doCheck = false;
-        });
+        # cmd2 = pythonsuper.cmd2.overrideAttrs (oa: {
+        #   # installFlags = [ "--ignore-installed" ];
+        #   version = "1.0";
+        #   nativeBuildInputs = oa.nativeBuildInputs ++ [ super.git ];
+        #   # src = /home/teto/cmd2;
+        #   src = super.fetchgit {
+        #     url=https://github.com/python-cmd2/cmd2.git;
+        #     rev = "f5c904cda48c03a30b3476f3a40224226391deea";
+        #     sha256 = "1226izysk99r2q8gdvi53rclfckcd5gh0qmrnvm5ycgc6qwk0li3";
+        #     leaveDotGit = true;
+        #     deepClone = true;
+        #   };
+        #   doCheck = false;
+        # });
 
         # praw = pythonsuper.praw.overrideAttrs (oldAttrs: {
         #   doCheck = false;

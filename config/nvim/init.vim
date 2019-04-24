@@ -154,7 +154,6 @@ let g:vim_search_pulse_duration = 400
 Plug 'dbakker/vim-projectroot' " projectroot#guess()
 " Plug 'sunaku/vim-dasht' " get documentation (zeavim is also a contender KabbAmine/zeavim.vim)
 " Plug 'sk1418/QFGrep' " Filter quickfix
-" Plug 'git@github.com:pseewald/vim-anyfold.git' " speed up folds processing
 " (upstreamd already or ?)
 " Plug 'mtth/scratch.vim' " , {'on': 'Scratch'} mapped to ?
 " Plug 'tjdevries/vim-inyoface.git' "InYoFace_toggle to display only comments
@@ -169,8 +168,6 @@ Plug 'calvinchengx/vim-aftercolors' " load after/colors
 " Plug 'ntpeters/vim-better-whitespace' " StripWhitespace care it stole my
 " leader
 Plug 'bronson/vim-trailing-whitespace' " :FixTrailingWhitespace
-" Plug 'timeyyy/orchestra.nvim' " to play some music on
-" Plug 'timeyyy/clackclack.symphony' " data to play with orchestra.vim
 " Plug 'tpope/vim-scriptease' " Adds command such as :Messages
 " Plug 'tpope/vim-eunuch' " {provides SudoEdit, SudoWrite , Unlink, Rename etc...
 
@@ -209,16 +206,11 @@ let cmdline_follow_colorscheme = 1
 let cmdline_external_term_cmd = "termite -e '%s' &"
 "}}}
 "}}}
-" Plug 'git@github.com:SirVer/ultisnips' " handle snippets
+Plug 'SirVer/ultisnips' " handle snippets
 " Snippets are separated from the engine. Add this if you want them:
 Plug 'sjl/gundo.vim' " :GundoShow/Toggle to redo changes
 " Plug 'vim-scripts/DrawIt' " to draw diagrams
 " Plug 'Yggdroot/indentLine',{ 'for': 'python' }  " draw verticals indents but seems greedy
-"  Autocompletion and linting {{{2
-"'frozen': 1,
-" Plug 'lyuts/vim-rtags'  " a l'air d'etre le plus complet <leader>ri
-"
-" }}}
 " Plug 'beloglazov/vim-online-thesaurus' " thesaurus => dico dde synonymes
 " Plug 'arakashic/chromatica.nvim', { 'for': 'cpp' } " semantic color syntax
 
@@ -246,9 +238,6 @@ Plug 'deoplete-plugins/deoplete-zsh'
 "Plug 'mattn/vim-rtags' a l'air léger
 " Plug 'shaneharper/vim-rtags' " <leader>r ou bien :RtagsFind  mais ne marche pas
 Plug 'tpope/vim-unimpaired' " [<space> [e [n ]n pour gerer les conflits etc...
-Plug 'kana/vim-operator-user' " dependancy for operator-flashy
-" better handling of buffer closure (type :sayonara)
-" Plug 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
 
 " Using a non-master branch
 
@@ -275,11 +264,10 @@ Plug 'PotatoesMaster/i3-vim-syntax'
 " Plug 'Valloric/ListToggle' " toggle location/quickfix list toggling seems to fail
 " Plug 'git@github.com:milkypostman/vim-togglelist' " same
 " still problems with airline when installed via nix
-" Plug 'tpope/vim-obsession' ", {'on': 'Obsession', 'ObsessionStatus'}  very cool, register edited files in a Session.vim, call with :Obsession
 Plug 'mbbill/undotree' " replaces gundo
 Plug '907th/vim-auto-save' " :h auto-save
 " Plug 'teto/vim-auto-save' " autosave :h auto-save
-Plug 'bfredl/nvim-miniyank' " killring alike plugin, cycling paste careful
+Plug 'bfredl/nvim-miniyank' " killring alike plugin, cycling paste careful search for :Yank commands
 " hangs with big strings
 
 " Text objects {{{
@@ -296,8 +284,6 @@ Plug 'tommcdo/vim-lion' " Use with gl/L<text object><character to align to>
 "Plug 'wellle/visual-split.vim'
 Plug 'wellle/targets.vim' " Adds new motion targets ci{
 " Plug 'justinmk/vim-ipmotion' " ?
-" Plug 'justinmk/vim-sneak' " remaps 's'
-" Plug 'tpope/vim-rsi'  " maps readline bindings
 " }}}
 
 " Plug 'mhinz/vim-startify' " very popular, vim's homepage
@@ -308,29 +294,18 @@ let g:lastplace_ignore = "gitcommit,svn"
 " Powerline does not work in neovim hence use vim-airline instead
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes' " creates problems if not here
-"
-" Text objects {{{
-" Plug 'kana/vim-textobj-fold' " ability to do yaz
-" }}}
 
-"
-" Plug 'justinmk/vim-dirvish' " replaces netrw
 Plug 'justinmk/vim-gtfo' " gfo to open filemanager in cwd
 Plug 'wannesm/wmgraphviz.vim', {'for': 'dot'} " graphviz syntax highlighting
-" Plug 'tpope/vim-commentary' "gcc to comment/gcgc does not work that well
 Plug 'teto/vim-listchars' " to cycle between different list/listchars configurations
 "Plug 'vim-voom/VOoM' " can show tex/restDown Table of Content (ToC)
-" Plug 'blueyed/vim-diminactive' " disable syntax coloring on inactive splits use winhl
 "Plug 'tpope/vim-sleuth' " Dunno what it is
 "Plug 'justinmk/vim-gtfo' " ?
-" Plug 'tpope/vim-fugitive' " to use with Git, VERY powerful
 Plug 'tpope/vim-rhubarb' " github support in fugitive, use |i_CTRL-X_CTRL-O|
 "Plug 'jaxbot/github-issues.vim' " works only with vim
 "Plug 'tpope/vim-surround' " don't realy know how to use yet
 " Plug 'junegunn/vim-peekaboo' " gives a preview of buffers when pasting
 Plug 'mhinz/vim-randomtag', { 'on': 'Random' } " Adds a :Random function that launches help at random
-" Plug 'majutsushi/tagbar' " , {'on': 'TagbarToggle'} disabled lazyloading else it would not work with statusline
-" Plug 'machakann/vim-highlightedyank' " moved to nix
 
 
 "  fuzzers {{{2
@@ -1958,10 +1933,6 @@ command! NvimLintToggle :call VarToggle("g:nvimdev_auto_lint")
 au FileType coq call coquille#FNMapping()
 let g:coquille_auto_move=1
 " }}}
-" deoplete-clang2 config {{{
-" let g:deoplete#sources#clang#executable="/usr/bin/clang"
-" let g:deoplete#sources#clang#autofill_neomake=1
-"}}}
 " tjdevries lsp {{{
 let g:langserver_executables = {
     \ 'go': {
@@ -1983,11 +1954,48 @@ let g:langserver_executables = {
   " call lsp#server#add(['c', 'c++'], ['clangd'], {})
   " call lsp#server#add(['rust'], ['rls'], {})
 " }}}
-" miniyank {{{
+" miniyank (from bfredl) {{{
 let g:miniyank_delete_maxlines=1000
 let g:miniyank_filename = $XDG_CACHE_HOME."/miniyank.mpack"
 map p <Plug>(miniyank-autoput)
 map P <Plug>(miniyank-autoPut)
+
+
+function! FZFYankList() abort
+  function! KeyValue(key, val)
+    let line = join(a:val[0], '\n')
+    if (a:val[1] ==# 'V')
+      let line = '\n'.line
+    endif
+    return a:key.' '.line
+  endfunction
+  return map(miniyank#read(), function('KeyValue'))
+endfunction
+
+function! FZFYankHandler(opt, line) abort
+  let key = substitute(a:line, ' .*', '', '')
+  if !empty(a:line)
+    let yanks = miniyank#read()[key]
+    call miniyank#drop(yanks, a:opt)
+  endif
+endfunction
+
+command! YanksAfter call fzf#run(fzf#wrap('YanksAfter', {
+\ 'source':  FZFYankList(),
+\ 'sink':    function('FZFYankHandler', ['p']),
+\ 'options': '--no-sort --prompt="Yanks-p> "',
+\ }))
+
+command! YanksBefore call fzf#run(fzf#wrap('YanksBefore', {
+\ 'source':  FZFYankList(),
+\ 'sink':    function('FZFYankHandler', ['P']),
+\ 'options': '--no-sort --prompt="Yanks-P> "',
+\ }))
+
+map <A-p> :YanksAfter<CR>
+map <A-P> :YanksBefore<CR>
+
+:
 "}}}
 " autozimu's lsp LanguageClient-neovim {{{
 " call LanguageClient_textDocument_hover
@@ -2007,7 +2015,11 @@ let g:LanguageClient_serverStderr = '/tmp/lsp_err.log'
 let g:LanguageClient_debug = 1
 let g:LanguageClient_loggingLevel = 'INFO'
 "Error" | "Warning" | "Info" | "Log"
-" let g:LanguageClient_windowLogMessageLevel
+let g:LanguageClient_windowLogMessageLevel='Error'
+" to override default
+let g:LanguageClient_hasSnippetSupport=1
+
+" let g:LanguageClient_documentHighlightDisplay =
 " call LanguageClient_setLoggingLevel('DEBUG')
 "let g:LanguageClient_diagnosticsList="quickfix"
 " 'DEBUG' | 'INFO' | 'WARN' | 'ERROR'

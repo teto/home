@@ -11,6 +11,10 @@ let
       # echodoc-vim
       fugitive
       far-vim
+
+      # fails with   python module. Run `pip install neovim` to fix. For more info, :he nvim-python"
+      # floobits-neovim
+
       fzf-vim
       # defined in overrides: TODO this should be easier: like fzf-vim should be enough
       fzfWrapper
@@ -20,7 +24,6 @@ let
       tagbar
       # targets-vim
       # vCoolor-vim
-      vim-dirvish
       vim-dirvish
       vim-fugitive
       vim-signature

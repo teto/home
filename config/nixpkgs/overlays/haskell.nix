@@ -78,12 +78,12 @@ self: prev:
       #   ''--set TOTO "hello world" ''
       # ];});
 
-      hie_remote = builtins.fetchTarball {
-        url    = https://github.com/domenkozar/hie-nix/tarball/master;
-        # url    = https://github.com/teto/hie-nix/tarball/dev;
-        # "https://github.com/NixOS/nixpkgs/archive/3389f23412877913b9d22a58dfb241684653d7e9.tar.gz";
-        # sha256 = "0wgm7sk9fca38a50hrsqwz6q79z35gqgb9nw80xz7pfdr4jy9pf7";
-      };
+      # hie_remote = builtins.fetchTarball {
+      #   url    = https://github.com/domenkozar/hie-nix/tarball/master;
+      # };
+
+      # https://github.com/domenkozar/hie-nix/issues/61
+      hie = (import self.hie_remote_matt {} ).hie86;
 
       # TODO how to retrieve the compiler there
       # hie = (import hie_remote {
@@ -95,7 +95,7 @@ self: prev:
       # } ).haskell-ide-engine;
 
       # todo make it automatic depending on nixpkgs' ghc
-      hie = (import hie_remote {} ).hie86;
+      # hie = (import hie_remote {} ).hie86;
 
 
     };

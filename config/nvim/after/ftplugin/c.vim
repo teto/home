@@ -6,3 +6,6 @@
 "let c_comment_strings=1
 "let c_gnu=1
 " }}}
+
+
+LanguageClientStop

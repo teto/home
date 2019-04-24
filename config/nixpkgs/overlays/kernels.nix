@@ -32,6 +32,8 @@ let
   structuredConfigs = import ./kernels/structured.nix { inherit (prev) lib; inherit libk;};
 
 
+  # TODO for dev shellHook
+  # silent! call remove(g:LanguageClient_serverCommands, 'c')
   # see wiki
   addMenuConfig = kernel:
     # kernel;

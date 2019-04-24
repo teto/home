@@ -133,6 +133,7 @@ in
     # musicDirectory
   };
 
+  # TODO modify it to pass a function instead ?!
   services.xserver.windowManager.awesome = {
     enable = true;
     luaModules = [ pkgs.luaPackages.lpeg ];

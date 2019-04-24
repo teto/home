@@ -23,7 +23,7 @@ final: prev:
   # subtitles-rs = prev.subtitles-rs or (prev.callPackage ./subtitles-rs { });
 
   buku_run = prev.stdenv.mkDerivation rec {
-    name = "buku_run-${version}";
+    pname = "buku_run";
     version = "0.1.1";
 
     # src = /home/teto/buku_run;
