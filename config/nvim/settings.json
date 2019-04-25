@@ -9,6 +9,12 @@
             "autopep8": {
                 "enabled": false
             },
+            "pylint": {
+                "enabled": false
+            },
+            "mccabe_lint": {
+                "enabled": false
+            },
             "pydocstyle": {
                 "enabled": false
             },

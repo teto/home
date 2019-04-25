@@ -206,8 +206,12 @@ let cmdline_follow_colorscheme = 1
 let cmdline_external_term_cmd = "termite -e '%s' &"
 "}}}
 "}}}
-Plug 'SirVer/ultisnips' " handle snippets
-" Snippets are separated from the engine. Add this if you want them:
+" Plug 'SirVer/ultisnips' " handle snippets
+" " Snippets are separated from the engine. Add this if you want them:
+" Plug 'honza/vim-snippets'
+Plug 'Shougo/neosnippet.vim'
+Plug 'Shougo/neosnippet-snippets'
+
 Plug 'sjl/gundo.vim' " :GundoShow/Toggle to redo changes
 " Plug 'vim-scripts/DrawIt' " to draw diagrams
 " Plug 'Yggdroot/indentLine',{ 'for': 'python' }  " draw verticals indents but seems greedy
@@ -644,14 +648,14 @@ let g:diminactive_enable_focus = 0
 " ultisnips {{{
 " g:UltiSnipsSnippetsDir
 " <FocusLost><FocusLost>
-let g:UltiSnipsExpandTrigger = "<C-y>"
-" " inoremap <expr> <CR> pumvisible() ? "<C-R>=UltiSnips#ExpandSnippetOrJump()<CR>" : "\<CR>"
+" let g:UltiSnipsExpandTrigger = "<C-y>"
+let g:UltiSnipsExpandTrigger="<Tab>"
+" inoremap <expr> <CR> pumvisible() ? "<C-R>=UltiSnips#ExpandSnippetOrJump()<CR>" : "\<CR>"
 
 
 " " let g:endwise_no_mappings = 1
-" " inoremap <expr> <CR> pumvisible() ? "\<C-R>=ExpandSnippetOrCarriageReturn()\<CR>" : "\<CR>\<C-R>=EndwiseDiscretionary()\<CR>"
+" inoremap <expr> <CR> pumvisible() ? "\<C-R>=ExpandSnippetOrCarriageReturn()\<CR>" : "\<CR>\<C-R>=EndwiseDiscretionary()\<CR>"
 
-" " let g:UltiSnipsExpandTrigger="<Tab>"
 " let g:UltiSnipsJumpForwardTrigger="<C-l>"
 " let g:UltiSnipsJumpBackwardTrigger="<C-h>"
 " " let g:UltiSnipsListSnippets = '<c-tab>'
@@ -2070,6 +2074,11 @@ nnoremap <Leader>k :Dasht<Space>
 " search ALL the docsets
 nnoremap <Leader><Leader>k :Dasht!<Space>
 "}}}}}}
+" neosnippet {{{
+let g:neosnippet#enable_completed_snippet = 1
+let g:neosnippet#enable_snipmate_compatibility = 1
+"}}}
+
 set hidden " you can open a new buffer even if current is unsaved (error E37)
 
 " draw a line on 80th column

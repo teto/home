@@ -100,7 +100,7 @@ gui.fileopen.dir: /home/teto/pcaps
 
 # The path to the webbrowser (Ex: mozilla)
 # A string
-gui.webbrowser: xdg-open %s
+# gui.webbrowser: xdg-open %s
 
 # Check for updates (Windows only)
 # TRUE or FALSE (case-insensitive)
