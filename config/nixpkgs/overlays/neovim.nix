@@ -39,7 +39,7 @@ let
       vim-markdown-composer
       # deoplete-khard
       # TODO this one will be ok once we patch it
-      # vim-markdown-composer  # WIP
+      vim-markdown-composer  # WIP
       vim-highlightedyank
       vim-commentary
 
