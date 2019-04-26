@@ -293,7 +293,8 @@ Plug 'wellle/targets.vim' " Adds new motion targets ci{
 " Plug 'mhinz/vim-startify' " very popular, vim's homepage
 Plug 'dietsche/vim-lastplace' " restore last cursor postion (is it still needed ?)
 " vim-lastplace to restore cursor position {{{
-let g:lastplace_ignore = "gitcommit,svn"
+let g:lastplace_ignore = "gitcommit,gitrebase,svn,hgcommit"
+let g:lastplace_ignore_buftype = "quickfix,nofile,help"
 " }}}
 " Powerline does not work in neovim hence use vim-airline instead
 Plug 'vim-airline/vim-airline'
@@ -331,7 +332,9 @@ Plug 'vhakulinen/gnvim-lsp' " load it only for gnvim
 
 " , { 'for': 'markdown', 'do': function('BuildComposer') } " Needs rust, cargo, plenty of things :help markdown-composer
 " move to nix
-" Plug 'euclio/vim-markdown-composer'
+" euclio
+Plug '~/vim-markdown-composer'
+" Plug 'JamshedVesuna/vim-markdown-preview'
 Plug 'Rykka/riv.vim', {'for': 'rst'}
 Plug 'Rykka/InstantRst', {'for': 'rst'} " rst live preview with :InstantRst,
 "Plug 'junegunn/vim-easy-align'   " to align '=' on multiple lines for instance
@@ -596,7 +599,14 @@ set splitright   " on vertical split
 " let g:markdown_composer_open_browser        = "qutebrowser"
 " if set to false then run ComposerStart
 let g:markdown_composer_autostart           = 0
+" from my fork
+let g:markdown_composer_binary = "/nix/store/vham27qv1d8gab5xh4vvpbyal3vgfs8d-vim-markdown-composer-vim/bin/markdown-composer"
 " }}}
+" markdown preview {{{
+let g:vim_markdown_preview_github=1
+let g:vim_markdown_preview_use_xdg_open=1
+"}}}
+"
 "set winheight=30
 "set winminheight=5
 " instant restructured text {{{
@@ -2086,6 +2096,9 @@ set colorcolumn=80,100
 
 " default behavior for diff=filler,vertical
 set diffopt=filler,vertical
+set diffopt+=hiddenoff " neovim > change to default ?
+set diffopt+=iwhiteall
+set diffopt+=internal,algorithm:patience
 
 " Y behave like D or C
 nnoremap Y y$

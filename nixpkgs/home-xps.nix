@@ -28,7 +28,6 @@ let
   home.packages = with pkgs; [
     # touchegg # won't work anymore apparently
     # libinput-gestures
-    # rofi
     # netperf # check for man; netserver to start
   ];
 

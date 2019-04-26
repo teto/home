@@ -219,6 +219,7 @@ in
       !rofi.width: 50
       rofi.columns: 1
       rofi.fuzzy: true
+      rofi.show-icons: true
       ! cd window
       rofi.modi:       run,drun,window,ssh,Layouts:${../bin/i3-list-layouts}
       /* see to integrate teiler */
@@ -226,6 +227,7 @@ in
 
       rofi.kb-mode-previous: Alt+Left
       rofi.kb-mode-next:	Alt+Right,Alt+Tab
+
     '';
   };
 

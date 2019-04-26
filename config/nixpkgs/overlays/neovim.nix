@@ -36,12 +36,14 @@ let
       vim-obsession
       vim-rsi
       vim-sayonara
-      vim-markdown-composer
       # deoplete-khard
       # TODO this one will be ok once we patch it
-      vim-markdown-composer  # WIP
+      # vim-markdown-composer  # WIP
+      vim-markdown-preview  # WIP
       vim-highlightedyank
       vim-commentary
+
+      # vimwiki
 
       # reuse once https://github.com/neovim/neovim/issues/9390 is fixed
       # vimtex

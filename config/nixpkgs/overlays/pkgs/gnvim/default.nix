@@ -13,9 +13,15 @@ buildRustPackage rec {
   version = "0.1.1";
 
   src = fetchgit rec {
-    url = https://github.com/vhakulinen/gnvim;
-    rev = "fd50f791a5004eb7ea6c29c8d10452f3609da06a";
-    sha256 = "0lndpgmpzzq257n1nh7a72a1dfvkcfz8p0ax411ygjpp76zxjrp9";
+
+    # url = https://github.com/vhakulinen/gnvim;
+    # rev = "fd50f791a5004eb7ea6c29c8d10452f3609da06a";
+    # sha256 = "0lndpgmpzzq257n1nh7a72a1dfvkcfz8p0ax411ygjpp76zxjrp9";
+
+
+    url = https://github.com/teto/gnvim;
+    rev = "c98cb99cb4009c82c45c41f668b468659595083d";
+    sha256 = "0f1jir837dxps0b807y88akjbgr3rg911qhjzgp19wj2nqn69q1a";
 
     # gnvim detects its version from tags
     leaveDotGit = true;
