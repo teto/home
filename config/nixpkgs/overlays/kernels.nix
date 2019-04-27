@@ -201,7 +201,7 @@ in rec {
     inherit (linux_mptcp_trunk_raw) src version modDirVersion;
     # version = linux_mptcp_94.version;
 
-    configfile = /home/teto/dotfiles/kernels/mptcp_trunk_netlink.config;
+    configfile = ./kernels/mptcp_trunk_netlink.config;
     # we need this to true else the kernel can't parse the config and 
     # detect if modules are in used
     allowImportFromDerivation = true;

@@ -19,6 +19,11 @@ let
     ./modules/libvirtd.nix
     ./modules/vpn.nix
 
+    # ihaskell marked as broken :'(
+    # ./modules/jupyter.nix
+  #   ./modules/mininet.nix
+
+    # extra module not upstreamed yet
     ({ config, lib, ... }:
     {
       boot.enforceRequiredConfig = true;
@@ -27,17 +32,9 @@ let
     # ./modules/mptcp.nix
     # ./modules/owamp.nix
 
-    # ./modules/jupyter.nix
-
     # for user teto
     ./extraTools.nix
   ]
-  # while developing
-  # builtins.pathExists (<nixpkgs> + ./modules/programs/mininet.nix))
-  # ++ lib.optionals (false)
-  # [
-  #   ./modules/mininet.nix
-  # ]
   ;
 
   # nesting clones can be useful to prevent GC of some packages

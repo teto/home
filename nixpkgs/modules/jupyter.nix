@@ -19,9 +19,9 @@ let
           (pkgs.haskell.lib.doJailbreak self.ihaskell-diagrams)
           (pkgs.haskell.lib.doJailbreak self.ihaskell-display)
           # self.netlink
-        ]);  
-        
-  # le tric la c que c pas le ihhaskell de all-packages.nix mais celui du haskell set 
+        ]);
+
+  # le tric la c que c pas le ihhaskell de all-packages.nix mais celui du haskell set
   # apparemment le global peut se configurer via nixpkgs.config.ihaskell.packages.
   # faut s'en inspirer
   # by default --use-rtsopts=""
@@ -33,7 +33,7 @@ let
     export HOME=/tmp
     ${haskellEnv}/bin/ihaskell install --prefix=$out --use-rtsopts=""
   '';
-  # 
+  #
   # buildEnv {
   #   name = "ihaskell-with-packages";
   #   buildInputs = [ makeWrapper ];
@@ -58,7 +58,7 @@ in
 {
 # only if exists !
 # enableDebugging
-# journalctl -b -u jupyter.service 
+# journalctl -b -u jupyter.service
   services.jupyter = {
     enable = true;
     # port = 8123; # 8888 by default
@@ -67,7 +67,7 @@ in
 
     # raw jupyter config
       # jupyter notebook --generate-config
-      # 
+      #
 #c.MappingKernelManager.kernel_info_timeout = 60
     notebookConfig = ''
       c.Application.log_level = 'DEBUG'
@@ -104,7 +104,7 @@ in
         # ihaskell-kernel = builtins.toPath
 
       # haskell kernel
-        haskell = let 
+        haskell = let
 
           # ihaskellSh = pkgs.writeScriptBin "ihaskell-wrapper" ''
           #ihaskellSh = pkgs.writeScript "ihaskell-wrapper" ''
@@ -115,13 +115,12 @@ in
           #'';
           # share/jupyter/kernels/haskell/
           content = builtins.fromJSON (builtins.readFile "${ihaskellKernel}/share/jupyter/kernels/haskell/kernel.json");
-        in 
-        # builtins.trace 
+        in
+        # builtins.trace
         content
-        # todo 
+        # todo
         # // {
         #   content.
-          
         # }
         ;
 
@@ -143,7 +142,7 @@ in
         # };
 
 
-      # sage = let 
+      # sage = let
       #   # readFile
     #   kernel= builtins.fromJSON (builtins.readFile (pkgs.sage + "/share/jupyter/kernels/sagemath/kernel.json")) // {
       #     language="python";
@@ -154,7 +153,7 @@ in
       #               scikitlearn
       #               # qtconsole
       #             ]));
-      #   in 
+      #   in
       #   kernel;
                 # {
             # displayName = "Python 3 for sage";
