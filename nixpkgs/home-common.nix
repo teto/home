@@ -85,8 +85,6 @@ rec {
     IPYTHONDIR="$XDG_CONFIG_HOME/ipython";
     JUPYTER_CONFIG_DIR="$XDG_CONFIG_HOME/jupyter";
     # testing if we can avoid having to symlink XDG_CONFIG_HOME
-    # XDG_CONFIG_DIRS="$XDG_CONFIG_HOME:$HOME/dotfiles";
-    # PATH+=":$HOME/rofi-scripts";
     # should be setup by neomutt module
     # MUTT="$XDG_CONFIG_HOME/mutt";
 
@@ -96,7 +94,7 @@ rec {
   };
 
   # source file name can't start with .
-  # home.file.".wgetrc".source = dotfiles/home/.wgetrc;
+  # home.file.".wgetrc".source = dotfiles/home/wgetrc;
 
   xdg = {
     enable = true;

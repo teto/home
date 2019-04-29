@@ -9,19 +9,19 @@
 with rustPlatform;
 
 buildRustPackage rec {
-  name = "gnvim-${version}";
-  version = "0.1.1";
+  pname = "gnvim";
+  version = "0.1.2";
 
+  # GNVIM_RUNTIME_PATH="
   src = fetchgit rec {
 
-    # url = https://github.com/vhakulinen/gnvim;
-    # rev = "fd50f791a5004eb7ea6c29c8d10452f3609da06a";
-    # sha256 = "0lndpgmpzzq257n1nh7a72a1dfvkcfz8p0ax411ygjpp76zxjrp9";
+    url = https://github.com/vhakulinen/gnvim;
+    rev = "d1b19d6169c06507e9a6c8f9755064b6772b32b9";
+    sha256 = "062dm6ifm3k4w9d0lhkjrv6vnjwzs1229grza6s9vi4v73nialf5";
 
-
-    url = https://github.com/teto/gnvim;
-    rev = "c98cb99cb4009c82c45c41f668b468659595083d";
-    sha256 = "0f1jir837dxps0b807y88akjbgr3rg911qhjzgp19wj2nqn69q1a";
+    # url = https://github.com/teto/gnvim;
+    # rev = "c98cb99cb4009c82c45c41f668b468659595083d";
+    # sha256 = "0y4yi4w3bdswnfw73n4yn68bx5kl3ikkp21yahgp3hnxx12abv6d";
 
     # gnvim detects its version from tags
     leaveDotGit = true;
@@ -43,7 +43,13 @@ buildRustPackage rec {
 
   nativeBuildInputs = [ pkgconfig wrapGAppsHook git ];
 
-  cargoSha256 = "020dl38jv7pskks9dxj0y7mfjdx5sl77k2bhpccqdk63ihdscx92";
+  cargoSha256 = "0y4yi4w3bdswnfw73n4yn68bx5kl3ikkp21yahgp3hnxx12abv6d";
+
+  # export GNVIM_RUNTIME_PATH=/nix/store/i0z9jkx4hak08hikdksnf0w487lfxkdp-gnvim-0.1.2/share/gnvim/runtime 
+  postInstall= ''
+    make install PREFIX=$out
+    wrapProgram $out/bin/gnvim --set GNVIM_RUNTIME_PATH $out/share/gnvim/runtime
+  '';
 
   meta = with stdenv.lib; {
     description = "GUI for neovim, without any web bloat";

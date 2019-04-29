@@ -20,7 +20,7 @@ let
     # for user teto
     ./extraTools.nix
 
-      <nixos-harware/dell/xps/13-9360>
+      <nixos-hardware/dell/xps/13-9360>
   ] ;
 
   # TODO conditionnally enable it

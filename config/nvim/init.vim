@@ -95,7 +95,7 @@ Plug 'ndmitchell/ghcid', { 'rtp': 'plugins/nvim' }
 Plug 'neovimhaskell/nvim-hs.vim' " to help with nvim-hs
 Plug 'KabbAmine/vCoolor.vim' " :Vcooler
 Plug 'rickhowe/diffchar.vim' " per char diff
-" Plug 'prabirshrestha/vim-lsp'
+Plug 'prabirshrestha/vim-lsp'
 " Plug 'bfredl/nvim-lspmirror'
 " Plug 'bfredl/nvim-lspext' " extension
 " Plug 'neoclide/coc.nvim'
@@ -2031,7 +2031,7 @@ let g:LanguageClient_loggingLevel = 'INFO'
 "Error" | "Warning" | "Info" | "Log"
 let g:LanguageClient_windowLogMessageLevel='Error'
 " to override default
-let g:LanguageClient_hasSnippetSupport=1
+" let g:LanguageClient_hasSnippetSupport=1
 
 " let g:LanguageClient_documentHighlightDisplay =
 " call LanguageClient_setLoggingLevel('DEBUG')
@@ -2087,6 +2087,16 @@ nnoremap <Leader><Leader>k :Dasht!<Space>
 " neosnippet {{{
 let g:neosnippet#enable_completed_snippet = 1
 let g:neosnippet#enable_snipmate_compatibility = 1
+let g:neosnippet#enable_complete_done = 1
+imap <C-k>     <expr><Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <expr><Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+" inoremap <expr><C-q> pumvisible() ? deoplete#mappings#close_popup() : "\<CR>"
+" inoremap <expr><C-j> pumvisible() ? "\<C-n>" : "\<Tab>"
+" inoremap <expr><C-k> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+" inoremap <expr><C-o> deoplete#mappings#manual_complete()
+" autocmd CompleteDone * call neosnippet#complete_done()
 "}}}
 
 set hidden " you can open a new buffer even if current is unsaved (error E37)

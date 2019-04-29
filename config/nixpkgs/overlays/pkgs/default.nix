@@ -20,7 +20,7 @@ final: prev:
 
   dualsub = prev.callPackage ./dualsubtitles { };
 
-  # subtitles-rs = prev.subtitles-rs or (prev.callPackage ./subtitles-rs { });
+  subtitles-rs = prev.callPackage ./subtitles-rs { };
 
   buku_run = prev.stdenv.mkDerivation rec {
     pname = "buku_run";
@@ -53,9 +53,7 @@ final: prev:
 
   };
 
-  mptcpanalyzer = prev.python3Packages.callPackage ./mptcpanalyzer {
-    # tshark = self.pkgs.tshark-reinject-stable; 
-  };
+  mptcpanalyzer = prev.python3Packages.callPackage ./mptcpanalyzer { };
 
   # http-getter = prev.python3Packages.callPackage ./http-getter { } ;
   packetdrill-mptcp = prev.packetdrill.overrideAttrs ( oa: {

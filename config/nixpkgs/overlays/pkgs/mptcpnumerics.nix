@@ -4,7 +4,7 @@ buildPythonApplication {
 	version = "0.1";
     # src = fetchFromGitHub {
     #   owner = "teto";
-    #   repo = "mptcpanalyzer";
+    #   repo = "mptcpnumerics";
     #   rev = "${version}";
     #   # sha256 = ;
     # };

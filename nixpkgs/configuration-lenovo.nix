@@ -1,10 +1,6 @@
 { config, lib, pkgs,  ... }:
 let
   secrets = import ./secrets.nix;
-  # hopefully it can be generated as dirname <nixos-config>
-  configDir = /home/teto/dotfiles/nixpkgs;
-
-
   in
 {
   imports = [

@@ -2,7 +2,7 @@
 let
   secrets = import ./secrets.nix;
   userNixpkgs = /home/teto/nixpkgs;
-  nixosConfig = /home/teto/dotfiles/configuration.nix;
+  nixosConfig = ./configuration.nix;
   # nixosOverlay = /home/teto/dotfiles/nixpkgs/overlays;
   # with builtims.fetchGit , no need for that anymore ?
   sshFolder = /home/teto/.ssh/config;
