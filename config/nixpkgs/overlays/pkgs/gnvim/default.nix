@@ -17,7 +17,7 @@ buildRustPackage rec {
 
     url = https://github.com/vhakulinen/gnvim;
     rev = "d1b19d6169c06507e9a6c8f9755064b6772b32b9";
-    sha256 = "062dm6ifm3k4w9d0lhkjrv6vnjwzs1229grza6s9vi4v73nialf5";
+    sha256 = "05kdqxbihi71qavy02j1hdwk5569qgxyk618x214wdqwa16lzbg7";
 
     # url = https://github.com/teto/gnvim;
     # rev = "c98cb99cb4009c82c45c41f668b468659595083d";
