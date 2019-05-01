@@ -90,6 +90,7 @@ call plug#begin(s:plugdir)
 " Plug 'andymass/vim-matchup' " to replace matchit
 " call :NR on a region than :w . coupled with b:nrrw_aucmd_create,
 " Plug 'AGhost-7/critiq.vim' " :h critiq
+Plug 'voldikss/vim-translate-me' " floawting windows for neovim
 Plug 'chrisbra/Colorizer'
 Plug 'ndmitchell/ghcid', { 'rtp': 'plugins/nvim' }
 Plug 'neovimhaskell/nvim-hs.vim' " to help with nvim-hs
@@ -2098,7 +2099,19 @@ xmap <C-k>     <Plug>(neosnippet_expand_target)
 " inoremap <expr><C-o> deoplete#mappings#manual_complete()
 " autocmd CompleteDone * call neosnippet#complete_done()
 "}}}
-
+"{{{ vim-translate-me / vtm 
+let g:vtm_default_to_lang='en'
+let g:vtm_default_api='bing'
+" Type <Leader>t to translate the text under the cursor, print in the cmdline
+nmap <silent> <Leader>t <Plug>Translate
+vmap <silent> <Leader>t <Plug>TranslateV
+" Type <Leader>w to translate the text under the cursor, display in the popup window
+nmap <silent> <Leader>w <Plug>TranslateW
+vmap <silent> <Leader>w <Plug>TranslateWV
+" Type <Leader>r to translate the text under the cursor and replace the text with the translation
+nmap <silent> <Leader>r <Plug>TranslateR
+vmap <silent> <Leader>r <Plug>TranslateRV
+"}}}
 set hidden " you can open a new buffer even if current is unsaved (error E37)
 
 " draw a line on 80th column
