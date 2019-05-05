@@ -138,8 +138,16 @@ let
     # strongswan # to get ipsec in path
     # cups-pk-helper # to add printer through gnome control center
     ++ [
+      pkgs.libinput-gestures
       ]
   ;
+
+  services.xserver.resolutions = [ { x= 1600; y = 900;} ];
+  services.xserver.libinput.enable = true;
+
+  # service to update bios etc
+  # managed to get this problem https://github.com/NixOS/nixpkgs/issues/47640
+  # services.fwupd.enable = true;
 
   programs.ccache.enable = true;
 

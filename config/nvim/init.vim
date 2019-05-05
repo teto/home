@@ -15,6 +15,7 @@ map <D-b> :echom "hello papy"
 " to see the difference highlights,
 " runtime syntax/hitest.vim
 
+
 " vim-plug autoinstallation {{{
 " TODO use stdpath now
 let s:nvimdir = stdpath('data')
@@ -2395,7 +2396,10 @@ autocmd ColorScheme *
 " highlight Comment gui=italic
 
 " put it after teh auguibg=redtocms ColorScheme
-colorscheme molokai
+" colorscheme molokai
+colorscheme gruvbox
+
+set bg=light
 
 " }}}
 " set guicursor="n-v-c:block-Cursor/lCursor,ve:ver35-Cursor,o:hor50-Cursor,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor,sm:block-Cursor"

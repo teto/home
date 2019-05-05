@@ -138,10 +138,10 @@ mptcp: | $(KERNEL_FOLDER)
 $(KERNEL_FOLDER):
 	git clone git@github.com:teto/mptcp.git "${KERNEL_FOLDER}"
 	cd "${KERNEL_FOLDER}"; \
-	git remote add upstream https://github.com/multipath-tcp/mptcp.git \
-	git remote add linus git@github.com:torvalds/linux.git \
-	git remote add gh git@github.com:teto/mptcp.git \
-	git remote add iij gitolite@iij_vm:mptcp.git \
+	git remote add upstream https://github.com/multipath-tcp/mptcp.git; \
+	git remote add linus git@github.com:torvalds/linux.git; \
+	git remote add gh git@github.com:teto/mptcp.git; \
+	git remote add iij gitolite@iij_vm:mptcp.git; \
 	git remote add lkl git@github.com:libos-nuse/lkl-linux.git
 
 blog: | $(BLOG_FOLDER)

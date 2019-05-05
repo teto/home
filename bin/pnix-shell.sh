@@ -26,10 +26,10 @@
 
 # https://gist.github.com/aherrmann/51b56283f9ed5853747908fbab907316
 
-pnix-shell() {
+nix-shellp() {
   _usage() {
     cat >&2 <<EOF
-pnix-shell generates and opens a persistent nix-shell
+nix-shellp generates and opens a persistent nix-shell
 
 Usage: pnix-shell [-h|--help] [-c|--clean] [<shellfile>]
 

@@ -14,14 +14,15 @@ in
      uid = 1000;
      extraGroups = [
        "audio" # for pulseaudio 
-       "wheel" # for sudo
-       "networkmanager" # not necessary for nixpos
+       "docker"   # to access docker socket
+       "input"    # for libinput-gestures
        "libvirtd" # for nixops
+       "networkmanager" # not necessary for nixpos
        "adbusers" # for android tools
        "wireshark"
        "plugdev" # for udiskie
        "jupyter"
-       "docker"   # to access docker socket
+       "wheel" # for sudo
        # "kvm" # don't think that's needed 
      ];
      # once can set initialHashedPassword too

@@ -60,6 +60,8 @@ let
   #   };
   # };
 
+  services.nextcloud-client.enable = true;
+
 
   xsession.initExtra = ''
     xrandr --output  eDP1 --mode 1600x900

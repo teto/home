@@ -1,3 +1,36 @@
+[colors]
+# If both of these are unset, cursor falls back to the foreground color,
+# and cursor_foreground falls back to the background color.
+cursor = #16A085
+cursor_foreground = #ECF0F1
+
+foreground = #ECF0F1
+foreground_bold = #ECF0F1
+
+# 20% background transparency (requires a compositor)
+background = rgba(31, 45, 58, 0.8)
+
+# If unset, will reverse foreground and background
+highlight = #2980B9
+
+# Colors from color0 to color254 can be set
+color0 = #1F2D3A
+color1 = #C0392B
+color2 = #27AE60
+color3 = #F39C12
+color4 = #2980B9
+color5 = #8E44AD
+color6 = #16A085
+color7 = #84888B
+color8 = #2C3E50
+color9 = #E74C3C
+color10 = #2ECC71
+color11 = #F1C40F
+color12 = #3498DB
+color13 = #9B59B6
+color14 = #2AA198
+color15 = #ECF0F1
+
 [options]
 scroll_on_output = false
 scroll_on_keystroke = true
@@ -40,31 +73,3 @@ filter_unmatched_urls = true
 
 # Solarized dark color scheme
 
-[colors]
-foreground = #839496
-foreground_bold = #eee8d5
-#foreground_dim = #888888
-# background = #002b36
-# cursor = #93a1a1
-# cursor_foreground = red
-
-# if unset, will reverse foreground and background
-#highlight = #839496
-
-# colors from color0 to color254 can be set
-color0 = #073642
-color1 = #dc322f
-color2 = #859900
-color3 = #b58900
-color4 = #268bd2
-color5 = #d33682
-color6 = #2aa198
-color7 = #eee8d5
-color8 = #002b36
-color9 = #cb4b16
-color10 = #586e75
-color11 = #657b83
-color12 = #839496
-color13 = #6c71c4
-color14 = #93a1a1
-color15 = #fdf6e3
