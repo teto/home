@@ -98,6 +98,11 @@ self: prev:
       # hie = (import hie_remote {} ).hie86;
 
 
+      # "fork" by infinisil
+      all-hies = import (fetchTarball "https://github.com/infinisil/all-hies/tarball/master") {};
+
+      # https://github.com/Infinisil/all-hies
+      # all-hies.versions.ghc864
     };
   };
 

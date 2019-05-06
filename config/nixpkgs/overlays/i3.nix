@@ -108,6 +108,8 @@ rec {
     src=/home/teto/protocol;
   });
 
+  all-hies = import (fetchTarball "https://github.com/infinisil/all-hies/tarball/master") {};
+
   # nixVeryUnstable = super.nixUnstable.overrideAttrs(o: {
   #   src = fetchGit https://github.com/NixOS/nix;
   #   nativeBuildInputs = with super.pkgs; (o.nativeBuildInputs or []) ++ [

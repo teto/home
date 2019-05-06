@@ -392,7 +392,7 @@ Plug 'NLKNguyen/papercolor-theme'
 " color_coded requires vim to be compiled with -lua
 "Plug 'jeaye/color_coded'
 " do not run it automatically, can be boring
-" Plug 'chrisbra/csv.vim' " , {'for': 'csv'}
+" Plug 'chrisbra/csv.vim'
 
 " editorconfig {{{
 let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
@@ -982,7 +982,7 @@ autocmd! FileType fzf tnoremap <buffer> <Esc> <c-g>
 " you can use :CsvVertFold to hide commands
 " There is the analyze command as well
 let g:csv_autocmd_arrange = 0
-let g:csv_autocmd_arrange_size = 1024*1024
+" let g:csv_autocmd_arrange_size = 1024*1024
 
 " call InitCSV after changing this value
 " :let g:csv_delim=','

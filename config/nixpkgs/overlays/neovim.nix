@@ -5,6 +5,7 @@ let
       # 
 # Plug 'deoplete-plugins/deoplete-zsh'
 # Plug 'deoplete-plugins/deoplete-jedi'
+      csv-vim
       deoplete-nvim
       deoplete-jedi
       # deoplete-zsh # not available just yet
