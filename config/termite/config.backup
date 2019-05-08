@@ -43,7 +43,7 @@ clickable_url = false
 # apparently it's possible to
 font = Inconsolata 11
 # font = FontAwesome 11
-scrollback_lines = 1000000
+scrollback_lines = 100000
 search_wrap = false
 #icon_name = terminal
 #geometry = 640x480
@@ -66,7 +66,4 @@ filter_unmatched_urls = true
 # emit escape sequences for other keys modified by Control
 #modify_other_keys = false
 
-
-
-# Solarized dark color scheme
 

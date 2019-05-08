@@ -91,6 +91,7 @@ call plug#begin(s:plugdir)
 " Plug 'andymass/vim-matchup' " to replace matchit
 " call :NR on a region than :w . coupled with b:nrrw_aucmd_create,
 " Plug 'AGhost-7/critiq.vim' " :h critiq
+Plug 'rhysd/git-messenger.vim' " to show git message 
 Plug 'voldikss/vim-translate-me' " floawting windows for neovim
 Plug 'chrisbra/Colorizer'
 Plug 'ndmitchell/ghcid', { 'rtp': 'plugins/nvim' }
@@ -1558,9 +1559,10 @@ let g:tex_flavor = "latex"
 " let g:vimtex_log_ignore 
 " taken from https://castel.dev/post/lecture-notes-1/
 let g:tex_conceal='abdmg'
-let g:vimtex_log_verbose=0
+let g:vimtex_log_verbose=1
 let g:vimtex_quickfix_open_on_warning = 1
 let g:vimtex_view_automatic=1
+let g:vimtex_view_enabled=1
 " was only necessary with vimtex lazy loaded
 " let g:vimtex_toc_config={}
 " let g:vimtex_complete_img_use_tail=1
@@ -1571,7 +1573,18 @@ let g:vimtex_indent_bib_enabled=1
 let g:vimtex_compiler_enabled=1 " enable new style vimtex
 let g:vimtex_compiler_progname='nvr'
 " let g:vimtex_compiler_method=
-" g:vimtex_quickfix_method=
+" possibility between pplatex/pulp/latexlog
+let g:vimtex_quickfix_method="latexlog"
+" todo update default instead with extend ?
+" let g:vimtex_quickfix_latexlog = {
+"       \ 'underfull': 0,
+"       \ 'overfull': 0,
+"       \ 'specifier changed to': 0,
+"       \ }
+" let g:vimtex_quickfix_blgparser=
+" g:vimtex_quickfix_autojump
+
+let g:vimtex_quickfix_mode = 2 " 1=> opened automatically and becomes active (2=> inactive)
 let g:vimtex_indent_enabled=0
 let g:vimtex_indent_bib_enabled=1
 let g:vimtex_index_split_pos = 'below'
@@ -1587,17 +1600,9 @@ let g:vimtex_syntax_minted = [
       \ {
       \   'lang' : 'json',
       \ }]
-let g:vimtex_quickfix_mode = 2 " 1=> opened automatically and becomes active (2=> inactive)
 " with being on anotherline
       " \ 'Biber reported the following issues',
       " \ "Invalid format of field 'month'"
-" todo update default instead with extend ?
-let g:vimtex_quickfix_latexlog = {
-      \ 'underfull': 0,
-      \ 'overfull': 0,
-      \ 'specifier changed to': 0,
-      \ }
-
 " shell-escape is mandatory for minted
 let g:vimtex_compiler_latexmk = {
         \ 'backend' : 'nvim',
@@ -1608,13 +1613,13 @@ let g:vimtex_compiler_latexmk = {
         \ 'executable' : 'latexmk',
         \ 'options' : [
         \   '-pdf',
-        \   '-verbose',
         \   '-file-line-error',
         \   '-synctex=1',
         \   '-interaction=nonstopmode',
         \   '-shell-escape',
         \ ],
         \}
+        " \   '-verbose',
 
 if !exists('g:deoplete#omni#input_patterns')
     let g:deoplete#omni#input_patterns = {}
@@ -2104,8 +2109,8 @@ xmap <C-k>     <Plug>(neosnippet_expand_target)
 let g:vtm_default_to_lang='en'
 let g:vtm_default_api='bing'
 " Type <Leader>t to translate the text under the cursor, print in the cmdline
-nmap <silent> <Leader>t <Plug>Translate
-vmap <silent> <Leader>t <Plug>TranslateV
+" nmap <silent> <Leader>t <Plug>Translate
+" vmap <silent> <Leader>t <Plug>TranslateV
 " Type <Leader>w to translate the text under the cursor, display in the popup window
 nmap <silent> <Leader>w <Plug>TranslateW
 vmap <silent> <Leader>w <Plug>TranslateWV
@@ -2396,10 +2401,9 @@ autocmd ColorScheme *
 " highlight Comment gui=italic
 
 " put it after teh auguibg=redtocms ColorScheme
-" colorscheme molokai
-colorscheme gruvbox
-
-set bg=light
+colorscheme molokai
+" colorscheme gruvbox
+" set bg=light
 
 " }}}
 " set guicursor="n-v-c:block-Cursor/lCursor,ve:ver35-Cursor,o:hor50-Cursor,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor,sm:block-Cursor"

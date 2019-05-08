@@ -560,6 +560,24 @@ in
   #  TODO newsboat
   # programs.newsboat.urls =
 
+  programs.termite = {
+    enable = true;
+    clickableUrl = false;
+    cursorBlink = "system";
+    cursorShape = "block";
+    font = "Inconsolata 11";
+    scrollOnKeystroke = true;
+    scrollOnOutput = false;
+    scrollbar = "right";
+    searchWrap = false;
+    scrollbackLines = 10000;
+    optionsExtra = ''
+    '';
+
+    # read a different file depending on computer
+    # colorsExtra = '' '';
+  };
+
 
   # TODO make sure it works
   systemd.user.services.vdirsyncer = {

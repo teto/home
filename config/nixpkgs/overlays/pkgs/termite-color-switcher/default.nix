@@ -5,13 +5,14 @@ stdenv.mkDerivation  {
   name = "termite-color-switcher";
   version = "05052019";
 
-  # src = fetchFromGitHub {
-  #   owner = "NearHuscarl";
-  #   repo = "termite-color-switcher";
-  #   rev = "7e05c162e25bfa5ca51dd92c3e341549ce6cfcc5";
-  #   sha256 = "08phwcbp6yrfxqbn58scmxnwqgn8i0xp2srxcxk6693svb90plhp";
-  # };
-  src = /home/teto/termite-color-switcher;
+  src = fetchFromGitHub {
+    owner = "NearHuscarl";
+    repo = "termite-color-switcher";
+    rev = "7e05c162e25bfa5ca51dd92c3e341549ce6cfcc5";
+    sha256 = "08phwcbp6yrfxqbn58scmxnwqgn8i0xp2srxcxk6693svb90plhp";
+  };
+
+  # src = /home/teto/termite-color-switcher;
 
   # https://github.com/NearHuscarl/termite-color-switcher
 

@@ -335,4 +335,5 @@ image/*; eog '%s';
   '';
 
   programs.lesspipe.enable = true;
+
 }

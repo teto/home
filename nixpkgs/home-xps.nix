@@ -62,6 +62,10 @@ let
 
   services.nextcloud-client.enable = true;
 
+  programs.termite = {
+    enable = true;
+    colorsExtra = builtins.readFile "config/termite/solarized-dark";
+  };
 
   xsession.initExtra = ''
     xrandr --output  eDP1 --mode 1600x900
