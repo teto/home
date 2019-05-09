@@ -61,6 +61,8 @@ rec {
   environment.systemPackages = with pkgs; [
     manpages  # because man tcp should always be available
     termite.terminfo # to be able to edit over ssh
+    ncurses.dev # for infocmp
+    utillinux # for lsns (namespace listing)
   ]
   ++ (load-packages ./basetools.nix)
   ;

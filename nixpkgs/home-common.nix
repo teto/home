@@ -270,8 +270,7 @@ rec {
       }
 
       # TODO remove and include it ?
-
-      source $ZDOTDIR/zshrc.generated
+      # source $ZDOTDIR/zshrc.generated
       source $ZDOTDIR/zshrc
     ''
       # + builtins.readFile dotDir + ./zshrc
@@ -306,7 +305,8 @@ rec {
       # Status Bar
       # -----------------------
       set-option -g status on                # turn the status bar on
-      source-file $XDG_CONFIG_HOME/tmux/config
+      if-shell -b '[ head $XDG_CONFIG_HOME/tmux/config ]' \
+        "source-file $XDG_CONFIG_HOME/tmux/config"
       '';
   };
 

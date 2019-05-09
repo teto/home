@@ -10,7 +10,10 @@ in
       ../modules/gitolite.nix
       ../modules/openssh.nix
       ../modules/nextcloud.nix
+      ../modules/blog.nix
+
   ];
+
 
   services.nextcloud.hostName = secrets.gitolite_server.hostname;
 

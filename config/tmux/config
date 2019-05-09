@@ -40,7 +40,6 @@ set -sg escape-time 1
 #bind k select-pane -U
 #bind l select-pane -R
 
-# 
 # Swap panes around using Vim movement commands.
  bind -n M-h select-pane -L
  bind -n M-j select-pane -D

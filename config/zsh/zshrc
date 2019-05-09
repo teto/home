@@ -32,7 +32,7 @@ zbell_ignore=("$EDITOR" "$PAGER" v)
 # see https://github.com/zsh-users/zsh-autosuggestions for suggestions 
 AUTOSUGGESTION_HIGHLIGHT_COLOR="fg=cyan"
 
-# move it to HM maybe
+# TODO move it to HM maybe
 . "/etc/zinputrc"
 
 # powerline {{{
