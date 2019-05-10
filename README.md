@@ -41,7 +41,6 @@ This folder contains my customizations for:
 * weechat (Irc client)
 * zsh (powerful alternative to bash)
 
-
 Install on nixos
 ====
 Nixos.org is a tough but really cool distribution that I've adopted.

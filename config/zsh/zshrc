@@ -29,7 +29,7 @@ zbell_ignore=("$EDITOR" "$PAGER" v)
 . "$ZDOTDIR/transfer.zsh"
 
 # zsh.enableSuggestions right handside color
-# see https://github.com/zsh-users/zsh-autosuggestions for suggestions 
+# see https://github.com/zsh-users/zsh-autosuggestions for suggestions
 AUTOSUGGESTION_HIGHLIGHT_COLOR="fg=cyan"
 
 # TODO move it to HM maybe
@@ -37,7 +37,7 @@ AUTOSUGGESTION_HIGHLIGHT_COLOR="fg=cyan"
 
 # powerline {{{
 # try with powerline-hs instead
-# or look into 
+# or look into
 # ~/.nix-profile/share/zsh/site-contrib/powerline.zsh
 # /run/current-system/sw/share/
 export POWERLINE_COMMAND=$HOME/.local/bin/powerline-hs
@@ -381,11 +381,11 @@ nix-env() {
 }
 
 mpsched() {
-    _fast_sysctl "net/mptcp/mptcp_scheduler" $@ 
+    _fast_sysctl "net/mptcp/mptcp_scheduler" $@
 }
 
 mppm() {
-    _fast_sysctl "net/mptcp/mptcp_path_manager" $@ 
+    _fast_sysctl "net/mptcp/mptcp_path_manager" $@
 }
 
 
@@ -408,6 +408,7 @@ _fast_sysctl() {
 # FZF_PATH="$(fzf-share)"
 # need zle to be active
 
+# TODO package
 # https://junegunn.kr/2016/07/fzf-git
 . "$XDG_CONFIG_HOME/fzf-gems/fzf_git_functions.sh"
 # you can list the actually bound keys with bindkey -M viins

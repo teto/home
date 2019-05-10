@@ -6,3 +6,4 @@ XDG_UTILS_DEBUG_LEVEL=2 xdg-mime query default image/png
 
 xdg-mime default vlc.desktop video/mp4
 xdg-mime default eog.desktop video/mp4
+

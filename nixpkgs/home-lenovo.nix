@@ -62,6 +62,11 @@ let
 
   services.nextcloud-client.enable = true;
 
+  home.sessionVariables = {
+    DASHT_DOCSETS_DIR="/mnt/ext/docsets";
+    # $HOME/.local/share/Zeal/Zeal/docsets
+  };
+
   xsession.initExtra = ''
   '';
 
