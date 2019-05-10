@@ -144,10 +144,6 @@ rec {
     name = "xdg-utils-custom-matt";
     # version = "matt";
     patches = [
-      # (super.fetchpatch {
-      #   url =
-      #   sha256 = fakeSha256;
-      # )
       ./pkgs/xdg_utils_symlink.diff
     ];
   });

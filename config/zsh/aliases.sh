@@ -19,7 +19,7 @@ alias nixos-fast="nixos-rebuild  --no-build-nix --fast"
 # todo fix completion accordingly
 alias nxi="nix-env -iA"
 alias nxu="nix-env -e"
-alias nxs="nix-shell -iA"
+alias nxs="nix-shell"
 alias nxp="nixops "
 
 # rename mptcp ?
@@ -33,6 +33,9 @@ alias latest="ls -lt |head"
 # alias :q="exit"
 #}}}
 
+function rfw(){
+    readlink -f $(which "$1")
+}
 
 alias servethis="nix-shell -ppython3 --command \'python -c 'import SimpleHTTPServer; SimpleHTTPServer.test()'\""
 
