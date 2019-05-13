@@ -92,14 +92,6 @@ let
     # dbus.packages = [ ];
   };
 
-  # my proxy
-  # networking.proxy = rec {
-  #   ftpProxy = "http://proxy.iiji.jp:8080/";
-  #   httpProxy = ftpProxy;
-  #   httpsProxy = ftpProxy;
-  #   rsyncProxy = ftpProxy;
-  #   noProxy="localhost,127.0.0.1";
-  # };
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = true;
 

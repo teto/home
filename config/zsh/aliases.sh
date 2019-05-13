@@ -26,7 +26,8 @@ alias nxp="nixops "
 alias mp="mptcpanalyzer"
 
 # autres players a tester eventuellement
-alias n="ncmpcpp"
+# alias n="ncmpcpp"
+alias n="nix-shell"
 # alias ff="find . -iname" # use fd instead
 alias latest="ls -lt |head"
 

@@ -22,6 +22,8 @@ final: prev:
 
   subtitles-rs = prev.callPackage ./subtitles-rs { };
 
+  hunter = prev.callPackage ./hunter { };
+
   buku_run = prev.stdenv.mkDerivation rec {
     pname = "buku_run";
     version = "0.1.1";

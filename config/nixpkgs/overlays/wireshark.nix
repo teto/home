@@ -22,9 +22,7 @@ in
 # TODO add htis in shell_hook of my wireshakr
 #     export QT_PLUGIN_PATH=${qt5.qtbase.bin}/${qt5.qtbase.qtPluginPrefix}
 
-  wireshark-master = (super.wireshark.override({
-    python3 = super.python3;
-  })).overrideAttrs (oa: {
+  wireshark-master = (super.wireshark.override({ })).overrideAttrs (oa: {
     nativeBuildInputs = oa.nativeBuildInputs ++ [ super.doxygen ];
     shellHook = oa.shellHook + ''
       export QT_PLUGIN_PATH=${super.qt5.qtbase.bin}/${super.qt5.qtbase.qtPluginPrefix}
@@ -32,10 +30,11 @@ in
   });
 
   wireshark-local = (super.wireshark.override({
-    stdenv = super.clangStdenv;
-  })).overrideAttrs (oa: {
+    # stdenv = super.clangStdenv;
+  })).
+  overrideAttrs (oa: {
     name = "wireshark-local";
-    # src = filter-cmake wiresharkFolder;
+    src = filter-cmake wiresharkFolder;
     # hardeningDisable = ["all"];
     cmakeFlags = [ "-DCMAKE_EXPORT_COMPILE_COMMANDS=YES" ];
 

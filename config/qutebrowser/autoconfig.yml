@@ -17,7 +17,7 @@ settings:
     global:
     - never
   content.proxy:
-    global: none
+    global: system
   editor.command:
     global:
     - termite

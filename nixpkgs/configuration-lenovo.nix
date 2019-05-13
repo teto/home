@@ -14,6 +14,7 @@ let
     ./modules/network-manager.nix
     ./modules/libvirtd.nix
     ./modules/vpn.nix
+    ./modules/proxy.nix
 
     # ihaskell marked as broken :'(
     # ./modules/jupyter.nix
@@ -211,12 +212,12 @@ let
   };
 
   # docker pull mattator/dce-dockerfiles
-  virtualisation.docker = {
-    enable = true;
-    enableOnBoot = true;
-    # logDriver = 
-    # liveRestore
-  };
+  # virtualisation.docker = {
+  #   enable = true;
+  #   enableOnBoot = true;
+  #   # logDriver = 
+  #   # liveRestore
+  # };
 
   # services.xserver.displayManager.gdm = {
   # };
