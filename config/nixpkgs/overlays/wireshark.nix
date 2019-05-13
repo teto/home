@@ -4,12 +4,19 @@ let
   # won't work on sandboxed
   wiresharkFolder = /home/teto/wireshark;
 
-  src = self.fetchFromGitHub {
-      repo   ="wireshark";
-      owner  ="teto";
-      rev    = "45efb048808d794f53cc431864c9ddfa99952b49";
-      sha256 = "1i0gqf8n8fsz3sqzkhcg05pf0krngnm335pnnlp94yzdkzzg3jyr";
-    };
+  srcSockDiag = builtins.fetchGit {
+      url = https://github.com/teto/wireshark;
+      ref = "sock_diag";
+      # rev    = "45efb048808d794f53cc431864c9ddfa99952b49";
+      # sha256 = "1i0gqf8n8fsz3sqzkhcg05pf0krngnm335pnnlp94yzdkzzg3jyr";
+  };
+
+  # src = self.fetchFromGitHub {
+  #     repo   ="wireshark";
+  #     owner  ="teto";
+  #     rev    = "45efb048808d794f53cc431864c9ddfa99952b49";
+  #     sha256 = "1i0gqf8n8fsz3sqzkhcg05pf0krngnm335pnnlp94yzdkzzg3jyr";
+  #   };
 
   # write in .nvimrc
   nvimrc = super.pkgs.writeText "_nvimrc" ''
@@ -29,12 +36,10 @@ in
     '';
   });
 
-  wireshark-local = (super.wireshark.override({
-    # stdenv = super.clangStdenv;
-  })).
-  overrideAttrs (oa: {
+  wireshark-local = super.wireshark.overrideAttrs (oa: {
     name = "wireshark-local";
-    src = filter-cmake wiresharkFolder;
+    # src = filter-cmake wiresharkFolder;
+    src = srcSockDiag;
     # hardeningDisable = ["all"];
     cmakeFlags = [ "-DCMAKE_EXPORT_COMPILE_COMMANDS=YES" ];
 
