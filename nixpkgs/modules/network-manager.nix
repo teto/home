@@ -10,17 +10,22 @@
     # enableStrongSwan = true;
     # one of "OFF", "ERR", "WARN", "INFO", "DEBUG", "TRACE"
     logLevel="TRACE";
-    wifi.scanRandMacAddress = true;
+
+    # may generate problems
+    wifi.scanRandMacAddress = false;
+    wifi.powersave = false;
 
     # for vpn dns
     # appendNameServers = [ ];
 
-    unmanaged = [
-      "interface-name:r?-*"
-      "interface-name:r?-*"
-      "interface-name:client-*"
-      "interface-name:server-*"
-      ];
+
+
+    # unmanaged = [
+    #   "interface-name:r?-*"
+    #   "interface-name:r?-*"
+    #   "interface-name:client-*"
+    #   "interface-name:server-*"
+    #   ];
 
     # TODO reestablish with the correct nixpkgs !
     # dispatcherScripts = [

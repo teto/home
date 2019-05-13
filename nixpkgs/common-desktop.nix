@@ -120,8 +120,9 @@ in
    };
 
   # udisks2 GUI
-  services.udisks2.enable = true;
+  # services.udisks2.enable = true;
 
+  # TODO check
   services.strongswan = {
     enable = true;
       # "/etc/ipsec.d/*.secrets" "/etc/ipsec.d"
