@@ -17,33 +17,6 @@ rec {
     '';
   });
 
-  # TODO run with 
-  # nix-shell -p 'python3.withPackages(ps: with ps; [ yaml ])'
-# import sqlite3
-# import yaml
-# import os
-# import shutil
-# import glob
-  # hie_remote = builtins.fetchTarball {
-  #   url    = https://github.com/domenkozar/hie-nix/tarball/master;
-  #   # url    = https://github.com/teto/hie-nix/tarball/dev;
-  #   # "https://github.com/NixOS/nixpkgs/archive/3389f23412877913b9d22a58dfb241684653d7e9.tar.gz";
-  #   # sha256 = "0wgm7sk9fca38a50hrsqwz6q79z35gqgb9nw80xz7pfdr4jy9pf7";
-  # };
-
-  # hie = (import "${hie_remote}/ghc-8.6.nix" {
-  #   # inherit compiler = nixpkgs.haskell.packages.ghc864
-  # } ).haskell-ide-engine;
-
-
-  hie_remote_matt = builtins.fetchTarball {
-    url    = https://github.com/teto/hie-nix/tarball/hie-master;
-  };
-  hie = (import hie_remote_matt {} ).hie86;
-  # todo make it automatic depending on nixpkgs' ghc
-  # hie = (import hie_remote {} ).hie86;
-
-
   i3-local = let i3path = ~/i3; in 
   if (builtins.pathExists i3path) then
     super.i3.overrideAttrs (oldAttrs: {

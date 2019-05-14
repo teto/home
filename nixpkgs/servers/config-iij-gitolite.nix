@@ -42,7 +42,6 @@ in
     trustedUsers = [ "root" "teto" ];
     binaryCaches = [
       "https://cache.nixos.org/"
-      "https://hie-nix.cachix.org"
     ];
 
   };

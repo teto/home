@@ -78,26 +78,6 @@ self: prev:
       #   ''--set TOTO "hello world" ''
       # ];});
 
-      # hie_remote = builtins.fetchTarball {
-      #   url    = https://github.com/domenkozar/hie-nix/tarball/master;
-      # };
-
-      # https://github.com/domenkozar/hie-nix/issues/61
-      hie = (import self.hie_remote_matt {} ).hie86;
-
-      # TODO how to retrieve the compiler there
-      # hie = (import hie_remote {
-      #   # compiler = pkgs.haskell.compiler.ghc864;
-      # } ).hie86;
-
-      # hie = (import "${hie_remote}/ghc-8.6.nix" {
-      #   # inherit compiler = nixpkgs.haskell.packages.ghc864
-      # } ).haskell-ide-engine;
-
-      # todo make it automatic depending on nixpkgs' ghc
-      # hie = (import hie_remote {} ).hie86;
-
-
       # "fork" by infinisil
       all-hies = import (fetchTarball "https://github.com/infinisil/all-hies/tarball/master") {};
 

@@ -1574,7 +1574,10 @@ let g:vimtex_compiler_enabled=1 " enable new style vimtex
 let g:vimtex_compiler_progname='nvr'
 " let g:vimtex_compiler_method=
 " possibility between pplatex/pulp/latexlog
-let g:vimtex_quickfix_method="latexlog"
+" Note: `pplatex` and `pulp` require that `-file-line-error` is NOT passed to the LaTeX
+  " compiler. |g:vimtex_compiler_latexmk| will be updated automatically if one
+" let g:vimtex_quickfix_method="latexlog"
+let g:vimtex_quickfix_method="pplatex"
 " todo update default instead with extend ?
 " let g:vimtex_quickfix_latexlog = {
 "       \ 'underfull': 0,
@@ -1603,7 +1606,9 @@ let g:vimtex_syntax_minted = [
 " with being on anotherline
       " \ 'Biber reported the following issues',
       " \ "Invalid format of field 'month'"
+
 " shell-escape is mandatory for minted
+" check that '-file-line-error' is properly removed with pplatex
 let g:vimtex_compiler_latexmk = {
         \ 'backend' : 'nvim',
         \ 'background' : 1,

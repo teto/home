@@ -23,28 +23,25 @@ let
       neovim-xp = pkgs.wrapNeovim pkgs.neovim-unwrapped-master (pkgs.neovimDefaultConfig);
     in
     [
-    # cabal-install
-    # cabal2nix
     editorconfig-core-c
-    exa
+    exa  # to list files
     gdb
     git-review # to contribute to wireshark
     gitAndTools.diff-so-fancy
     # https://github.com/felipec/git-remote-hg
-    gitAndTools.git-remote-hg
+    # gitAndTools.git-remote-hg
     gitAndTools.git-recent
     # gitAndTools.git-annex # fails on unstable
     gitAndTools.git-extras
     gitAndTools.git-crypt
-    # mypy # TODO move it to neovim dependency (but need to fetch the pythonEnv path then)
     # nox # replaced by nix-review ?
     # ccache # breaks some builds ?
     ncurses.dev # for infocmp
-    neovim-xp
-    neovim-remote
+    neovim-xp   # hum remove ?
+    neovim-remote # for latex etc
     nix-prefetch-scripts
-    nix-index
-    pcalc
+    nix-index # to list package contents
+    pcalc  # cool calc
     rpl # to replace strings across files
     universal-ctags  # there are many different ctags, be careful !
   ];
