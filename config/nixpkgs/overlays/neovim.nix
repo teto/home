@@ -48,6 +48,7 @@ let
 
       # reuse once https://github.com/neovim/neovim/issues/9390 is fixed
       # vimtex
+      ultisnips 
       unicode-vim
     ];
 

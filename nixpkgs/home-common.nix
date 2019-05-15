@@ -1,5 +1,5 @@
 # home-manager specific config from
-{ config, pkgs, lib,  ... }:
+{ config, pkgs, lib,  ... } @ args:
 # TODO to use cachix see https://cachix.org/
 # nix-shell -p 'python3.withPackages( ps : [ ps.scikitlearn ] )' ~/nixpkgs
 let
@@ -92,6 +92,10 @@ rec {
     PATH="$HOME/rofi-scripts:$HOME/buku_run:$PATH";
 
   };
+
+  # TODO
+  # (import <nixpkgs/nixos> {}).config
+  # systemd.user.sessionVariables = args.nixos.config.networking.proxy.envVars;
 
   # source file name can't start with .
   # home.file.".wgetrc".source = dotfiles/home/wgetrc;

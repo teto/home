@@ -114,6 +114,7 @@ Plug 'Carpetsmoker/xdg_open.vim' " overrides gx
 Plug 'tweekmonster/nvim-api-viewer', {'on': 'NvimAPI'} " see nvim api
 Plug 'tweekmonster/startuptime.vim', {'on': 'StartupTime'} " see startup time per script
 Plug 'vim-scripts/vis'
+Plug 'Konfekt/vim-CtrlXA'
 " Plug 'jamessan/vim-gnupg'
 " Plug 'mattn/gist-vim' " to gist requires webapi
 " provider dependant {{{
@@ -209,11 +210,11 @@ let cmdline_follow_colorscheme = 1
 let cmdline_external_term_cmd = "termite -e '%s' &"
 "}}}
 "}}}
-" Plug 'SirVer/ultisnips' " handle snippets
+Plug 'SirVer/ultisnips' " handle snippets
 " " Snippets are separated from the engine. Add this if you want them:
 " Plug 'honza/vim-snippets'
-Plug 'Shougo/neosnippet.vim'
-Plug 'Shougo/neosnippet-snippets'
+" Plug 'Shougo/neosnippet.vim'
+" Plug 'Shougo/neosnippet-snippets'
 
 Plug 'sjl/gundo.vim' " :GundoShow/Toggle to redo changes
 " Plug 'vim-scripts/DrawIt' " to draw diagrams
@@ -719,6 +720,14 @@ let g:dirvish_mode=2
 " let g:echodoc#enable_at_startup=1
 " g:echodoc#type " only for gonvim
 "}}}
+
+" ctrlXA - to alternate between words {{{
+" can also be \ let b:CtrlXA_Toggles = [
+" let g:CtrlXA_Toggles += [ 
+"   \ [ 'MPTCP', '\gls{mptcp}' ]
+"   \ ]
+"}}}
+" g:CtrlXA_Toggles
 
 " to remove timeout when changing modes
 " if ! has('gui_running')
@@ -2111,18 +2120,23 @@ xmap <C-k>     <Plug>(neosnippet_expand_target)
 " autocmd CompleteDone * call neosnippet#complete_done()
 "}}}
 "{{{ vim-translate-me / vtm 
+" Which language that the text will be translated
 let g:vtm_default_to_lang='en'
 let g:vtm_default_api='bing'
 " Type <Leader>t to translate the text under the cursor, print in the cmdline
 " nmap <silent> <Leader>t <Plug>Translate
 " vmap <silent> <Leader>t <Plug>TranslateV
 " Type <Leader>w to translate the text under the cursor, display in the popup window
-nmap <silent> <Leader>w <Plug>TranslateW
-vmap <silent> <Leader>w <Plug>TranslateWV
+nmap <silent> ,te <Plug>TranslateW
+vmap <silent> ,te <Plug>TranslateWV
 " Type <Leader>r to translate the text under the cursor and replace the text with the translation
 nmap <silent> <Leader>r <Plug>TranslateR
 vmap <silent> <Leader>r <Plug>TranslateRV
 "}}}
+
+
+
+
 set hidden " you can open a new buffer even if current is unsaved (error E37)
 
 " draw a line on 80th column
