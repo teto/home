@@ -6,13 +6,13 @@
 	url = https://github.com/teto/fzf-gems.git
 [submodule "rofi-scripts"]
 	path = rofi-scripts
-	url = https://github.com/carnager/rofi-scripts.git
+	url = https://github.com/davatorium/rofi-scripts.git
 [submodule "buku_run"]
 	path = buku_run
 	url = https://github.com/carnager/buku_run.git
 [submodule "rofi-themes"]
 	path = rofi-themes
-	url = https://github.com/DaveDavenport/rofi-themes
+	url = https://github.com/davatorium/rofi-themes
 [submodule "notmuch-extract-patch"]
 	path = notmuch-extract-patch
 	url = https://github.com/aaptel/notmuch-extract-patch.git
