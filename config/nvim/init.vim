@@ -721,13 +721,6 @@ let g:dirvish_mode=2
 " g:echodoc#type " only for gonvim
 "}}}
 
-" ctrlXA - to alternate between words {{{
-" can also be \ let b:CtrlXA_Toggles = [
-" let g:CtrlXA_Toggles += [ 
-"   \ [ 'MPTCP', '\gls{mptcp}' ]
-"   \ ]
-"}}}
-" g:CtrlXA_Toggles
 
 " to remove timeout when changing modes
 " if ! has('gui_running')

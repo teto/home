@@ -427,6 +427,18 @@ in
           "Escape" = ''mode "default"'';
 
         };
+
+        rofi-scripts = {
+          # open documents
+          "$mod+l" = "sh j";
+          # "$mod+e" = "exec python3 -m papis.main --pick-lib --set picktool dmenu --set editor gvim edit";
+
+        #   # return to default mode
+        #   bindsym Ctrl+c mode "default"
+          "Return" = ''mode "default"'';
+          "Escape" = ''mode "default"'';
+
+        };
       };
 
       window = {
