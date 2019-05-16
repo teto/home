@@ -7,7 +7,7 @@ let
 # Plug 'deoplete-plugins/deoplete-jedi'
       csv-vim
       deoplete-nvim
-      deoplete-jedi
+      # deoplete-jedi # keeps crashing
       # deoplete-zsh # not available just yet
       # echodoc-vim
       fugitive

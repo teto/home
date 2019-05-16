@@ -210,7 +210,7 @@ let cmdline_follow_colorscheme = 1
 let cmdline_external_term_cmd = "termite -e '%s' &"
 "}}}
 "}}}
-Plug 'SirVer/ultisnips' " handle snippets
+" Plug 'SirVer/ultisnips' " handle snippets
 " " Snippets are separated from the engine. Add this if you want them:
 " Plug 'honza/vim-snippets'
 " Plug 'Shougo/neosnippet.vim'
@@ -2589,6 +2589,12 @@ nnoremap <C-RightMouse> :call SynStack()<CR>
 
 " printer configuration
 " set printexpr
+
+
+if &wildoptions == "pum"
+    cnoremap <expr> <up>   pumvisible() ? "<C-p>" : "\<up>"
+    cnoremap <expr> <down> pumvisible() ? "<C-n>" : "\<down>"
+  endif
 
 func! ReadExCommandOutput(newbuf, cmd) abort
   redir => l:message
