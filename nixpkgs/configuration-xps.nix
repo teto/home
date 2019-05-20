@@ -15,10 +15,17 @@ let
     ./common-desktop.nix
     # ./modules/libvirtd.nix
     ./modules/distributedBuilds.nix
+    # ./modules/mptcp.nix
     ./modules/vpn.nix
+    ./modules/jupyter2.nix
 
     # for user teto
     ./extraTools.nix
+    # ( {config, lib, pkgs, ...}:
+    #   {
+  # boot.kernelPackages = pkgs.linuxPackages_latest;
+
+# })
 
       <nixos-hardware/dell/xps/13-9360>
   ] ;
@@ -123,6 +130,12 @@ let
     '';
   };
 
+  # TODO move to laptop
+  # see https://github.com/NixOS/nixpkgs/issues/57053
+  hardware.firmware = with pkgs; [ wireless-regdb ];
+  boot.extraModprobeConfig = ''
+    options cfg80211 ieee80211_regdom="GB"
+  '';
 
   # List services that you want to enable:
   services = {
@@ -203,6 +216,8 @@ let
   #   (import ./overlays/kernels.nix)
   #   (import ./overlays/haskell.nix)
   # ];
+
+
 
 
   networking.iproute2.enable = true;

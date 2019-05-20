@@ -15,7 +15,7 @@ bindsym --release button2 kill
 # bindsym $mod+shift+e exec /home/teto/i3-easyfocus/easyfocus
 
 # The right button toggles floating
-bindsym button3 floating toggle
+# bindsym button3 floating toggle
 bindsym $mod+button3 floating toggle
 #
 # # The side buttons move the window around

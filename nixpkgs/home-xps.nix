@@ -16,6 +16,7 @@ let
       # ./home-common-headless.nix
       ./home-desktop.nix
 
+      ./modules/tablet.nix
       ./home-mail.nix
       # symlink towards a config
     ]
@@ -25,10 +26,13 @@ let
   # home.accounts.mail.maildirModule
   programs.feh.enable = true;
 
+  # add a service for tablet
+  # https://github.com/ssmolkin1/i3touchmenu
   home.packages = with pkgs; [
     # touchegg # won't work anymore apparently
     # libinput-gestures
     # netperf # check for man; netserver to start
+
   ];
 
   # you can switch from cli with xkb-switch
@@ -64,12 +68,22 @@ let
 
   programs.termite = {
     enable = true;
-    colorsExtra = builtins.readFile "config/termite/solarized-dark";
+    # TODO the light in fact
+    colorsExtra = builtins.readFile ../config/termite/solarized-dark;
   };
 
   xsession.initExtra = ''
     xrandr --output  eDP1 --mode 1600x900
   '';
+
+  # programs.vscode = {
+  #   enable = true;
+  #   haskell.enable = true;
+  #   haskell.hie.enable = true;
+  # };
+    # xrandr --output  eDP1 --mode 1600x900
+  # '';
+
 
 }
 

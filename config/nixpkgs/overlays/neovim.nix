@@ -93,7 +93,8 @@ rec {
 
 
       extraHaskellPackages = hs: with hs; [
-        hie
+        # hie
+        all-hies.versions.ghc864
         gutenhasktags
         haskdogs # seems to build on hasktags/ recursively import things
         hasktags
