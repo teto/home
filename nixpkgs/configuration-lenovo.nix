@@ -270,4 +270,19 @@ let
       ]
   ;
 
+  # see https://github.com/NixOS/nixpkgs/pull/45345
+  nesting.clone = [
+      {
+
+        import = [ ./modules/proxy.nix ];
+              boot.loader.grub.configurationName = "with proxy";
+              # networking.proxy.default = "http://proxy.work.com:80";
+              # networking.proxy.noProxy = "127.0.0.1,localhost,work.com";
+              # nix.binaryCaches = [
+              #         "http://nixcache.work.com"
+              #         "https://cache.nixos.org"
+              # ];
+      }
+  ];
+
 }

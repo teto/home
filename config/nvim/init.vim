@@ -91,6 +91,7 @@ call plug#begin(s:plugdir)
 " Plug 'andymass/vim-matchup' " to replace matchit
 " call :NR on a region than :w . coupled with b:nrrw_aucmd_create,
 " Plug 'AGhost-7/critiq.vim' " :h critiq
+Plug 'neoclide/coc.nvim' " 
 Plug 'rhysd/git-messenger.vim' " to show git message 
 Plug 'voldikss/vim-translate-me' " floawting windows for neovim
 Plug 'chrisbra/Colorizer'
@@ -1106,7 +1107,6 @@ let g:ale_echo_cursor = 1
 let g:ale_history_enabled = 1
 
 
-let g:airline#extensions#ale#enabled = 1
 " let g:ale_lint_on_enter=
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_virtualtext_cursor = 1
@@ -1287,12 +1287,15 @@ call neomake#configure#automake('w')
 " debug with :AirlineExtensions
 " to speed up things
 
+" 'neomake', 
 let g:airline_extensions = ['obsession', 'quickfix', 'tabline', 'wordcount', 'languageclient' ]
 " let g:airline#extensions#default#layout = [
 "     \ [ 'a', 'b', 'c' ],
 "     \ [ 'x', 'y', 'z', 'error', 'warning' ]
 "     \ ]
 " let g:airline#extensions#wordcount#filetypes = ...
+
+let g:airline#extensions#ale#enabled = 0
 let g:airline#extensions#neomake#enabled = 1
 let g:airline#extensions#languageclient#enabled = 1
 
@@ -1339,7 +1342,7 @@ call airline#parts#define_function('grepper', 'grepper#statusline')
 let g:airline_section_x = airline#section#create_right(['grepper'])
 " let g:airline_section_y = airline#section#create_right(['neomake_error_count', 'neomake_warning_count'])
 " let g:airline_section_z = airline#section#create_right(['neomake_error_count', 'neomake_warning_count'])
-let g:airline_section_error = airline#section#create_right(['neomake_error_count', 'languageclient_error_count'])
+" let g:airline_section_error = airline#section#create_right(['neomake_error_count', 'languageclient_error_count'])
 " let g:airline_section_warning (ycm_warning_count, syntastic-warn,
 
 " grepper#statusline()
@@ -2128,8 +2131,38 @@ vmap <silent> ,te <Plug>TranslateWV
 nmap <silent> <Leader>r <Plug>TranslateR
 vmap <silent> <Leader>r <Plug>TranslateRV
 "}}}
+" coc.nvim {{{
+" Note: yarn is not required if you want to manage extensions using a vim
+" plugin manager such as vim-plug.
+" set by nix
+" let g:coc_node_path=
 
+" Use `[c` and `]c` to navigate diagnostics
+nmap <silent> [c <Plug>(coc-diagnostic-prev)
+nmap <silent> ]c <Plug>(coc-diagnostic-next)
+" Remap keys for gotos
+" nmap <silent> gd <Plug>(coc-definition)
+" nmap <silent> gy <Plug>(coc-type-definition)
+" nmap <silent> gi <Plug>(coc-implementation)
+" nmap <silent> gr <Plug>(coc-references)
+" function! s:show_documentation()
+"   if (index(['vim','help'], &filetype) >= 0)
+"     execute 'h '.expand('<cword>')
+"   else
+"     call CocAction('doHover')
+"   endif
+" endfunction
+" 
+" Highlight symbol under cursor on CursorHold
+" autocmd CursorHold * silent call CocActionAsync('highlight')
 
+" " Remap for rename current word
+" nmap <leader>rn <Plug>(coc-rename)
+
+" " Remap for format selected region
+" xmap <leader>f  <Plug>(coc-format-selected)
+" nmap <leader>f  <Plug>(coc-format-selected)
+"}}}
 
 
 set hidden " you can open a new buffer even if current is unsaved (error E37)

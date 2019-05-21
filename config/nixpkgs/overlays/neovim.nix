@@ -221,9 +221,14 @@ rec {
              \ , 'nix': ['nix-lsp']
              \ }
 
+
         let g:neomake_python_mypy_exe = fnamemodify( g:python3_host_prog, ':p:h').'/mypy'
 
         autocmd BufReadPost *.pdf silent %!${self.pkgs.xpdf}/bin/pdftotext -nopgbrk -layout -q -eol unix "%" - | fmt -w78
+        ''
+        # if we support coc.nvim
+        + ''
+          let g:coc_node_path = '${self.pkgs.nodejs}/bin/node'
         ''
         ;
 

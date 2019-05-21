@@ -123,9 +123,9 @@ rec {
     historyIgnore=["ls"];
     # historyFile = "${xdg.cacheHome}/bash_history";
     historyFile = "$XDG_CACHE_HOME/bash_history";
-    initExtra=''
-      ${includeFzf}
-    '';
+    # initExtra=''
+    #   ${includeFzf}
+    # '';
       # profileExtra=''
       #   '';
       # shellOptions=
