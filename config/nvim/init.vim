@@ -1063,7 +1063,6 @@ let g:deoplete#sources#clang#sort_algo = 'priority'
 " inoremap <silent><expr> <Tab>
 " \ pumvisible() ? "<C-n>" :
 " \ deoplete#mappings#manual_complete()
-" deoplete tab-complete
 " nnoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 " }}}
 " deoplete jedi {{{2
@@ -1452,10 +1451,7 @@ nmap <leader>ç <Plug>AirlineSelectTab9
 " inyoface (highlight only comments) {{{
 nnoremap <leader>c <Plug>(InYoFace_Toggle)<CR>
 " }}}
-" close the preview window on python completion {{{
-" autocmd CompleteDone * pclose
 set completeopt=menu,longest
-" }}}
 " vim-sayonara {{{
 nnoremap <silent><leader>Q  :Sayonara<cr>
 nnoremap <silent><leader>q  :Sayonara!<cr>
@@ -1720,16 +1716,6 @@ autocmd User Grepper call OnGrepperCompletion()
 " nmap gs <plug>(GrepperOperator)
 " xmap gs <plug>(GrepperOperator)
 
-" }}}
-" sidesearch {{{
-" SideSearch current word and return to original window
-" nnoremap <Leader>ss :SideSearch <C-r><C-w><CR> | wincmd p
-
-" " Create an shorter `SS` command
-" command! -complete=file -nargs=+ SS execute 'SideSearch <args>'
-
-" " or command abbreviation
-" cabbrev SS SideSearch"
 " }}}
 " folding config {{{
 " block,hor,mark,percent,quickfix,search,tag,undo
@@ -2031,67 +2017,67 @@ map <A-P> :YanksBefore<CR>
 :
 "}}}
 " autozimu's lsp LanguageClient-neovim {{{
-" call LanguageClient_textDocument_hover
-" by default logs in /tmp/LanguageClient.log.
-let g:LanguageClient_autoStart=0 " Run :LanguageClientStart when disabled
-let g:LanguageClient_loadSettings = 1
-let g:LanguageClient_settingsPath=stdpath('config')."/settings.json"
-" pyls.configurationSources
-" my settings.json generates errors so remove it
-" let g:LanguageClient_loadSettings=$XDG_CONFIG_HOME."/nvim/settings.json"
-let g:LanguageClient_selectionUI='fzf'
-" or off / messages
-let g:LanguageClient_trace="verbose"
-let g:LanguageClient_loggingFile = "/tmp/lsp.log"
-let g:LanguageClient_serverStderr = '/tmp/lsp_err.log'
-" expected one of `OFF`, `ERROR`, `WARN`, `INFO`, `DEBUG`, `TRACE`
-let g:LanguageClient_debug = 1
-let g:LanguageClient_loggingLevel = 'INFO'
-"Error" | "Warning" | "Info" | "Log"
-let g:LanguageClient_windowLogMessageLevel='Error'
-" to override default
-" let g:LanguageClient_hasSnippetSupport=1
+"" call LanguageClient_textDocument_hover
+"" by default logs in /tmp/LanguageClient.log.
+"let g:LanguageClient_autoStart=0 " Run :LanguageClientStart when disabled
+"let g:LanguageClient_loadSettings = 1
+"let g:LanguageClient_settingsPath=stdpath('config')."/settings.json"
+"" pyls.configurationSources
+"" my settings.json generates errors so remove it
+"" let g:LanguageClient_loadSettings=$XDG_CONFIG_HOME."/nvim/settings.json"
+"let g:LanguageClient_selectionUI='fzf'
+"" or off / messages
+"let g:LanguageClient_trace="verbose"
+"let g:LanguageClient_loggingFile = "/tmp/lsp.log"
+"let g:LanguageClient_serverStderr = '/tmp/lsp_err.log'
+"" expected one of `OFF`, `ERROR`, `WARN`, `INFO`, `DEBUG`, `TRACE`
+"let g:LanguageClient_debug = 1
+"let g:LanguageClient_loggingLevel = 'INFO'
+""Error" | "Warning" | "Info" | "Log"
+"let g:LanguageClient_windowLogMessageLevel='Error'
+"" to override default
+"" let g:LanguageClient_hasSnippetSupport=1
 
-" let g:LanguageClient_documentHighlightDisplay =
-" call LanguageClient_setLoggingLevel('DEBUG')
-"let g:LanguageClient_diagnosticsList="quickfix"
-" 'DEBUG' | 'INFO' | 'WARN' | 'ERROR'
-" let g:LanguageClient_loggingLevel='DEBUG'
-"let g:LanguageClient_rootMarkers
-let g:LanguageClient_hoverPreview='Always'
-let g:LanguageClient_completionPreferTextEdit=1
-let g:LanguageClient_diagnosticsEnable=1
-let g:LanguageClient_useFloatingHover=1
-" else it erases grepper results
-let g:LanguageClient_diagnosticsList='Location'
-" see $RUNTIME/rplugin/python3/LanguageClient/wrapper.sh for logging
-" let g:LanguageClient_serverCommands.nix = ['nix-lsp']
-" del g:LanguageClient_serverCommands.cpp = ['cquery', '--log-file=/tmp/cq.log']
-silent! call remove(g:LanguageClient_serverCommands, 'cpp')
-silent! call remove(g:LanguageClient_serverCommands, 'c')
+"" let g:LanguageClient_documentHighlightDisplay =
+"" call LanguageClient_setLoggingLevel('DEBUG')
+""let g:LanguageClient_diagnosticsList="quickfix"
+"" 'DEBUG' | 'INFO' | 'WARN' | 'ERROR'
+"" let g:LanguageClient_loggingLevel='DEBUG'
+""let g:LanguageClient_rootMarkers
+"let g:LanguageClient_hoverPreview='Always'
+"let g:LanguageClient_completionPreferTextEdit=1
+"let g:LanguageClient_diagnosticsEnable=1
+"let g:LanguageClient_useFloatingHover=1
+"" else it erases grepper results
+"let g:LanguageClient_diagnosticsList='Location'
+"" see $RUNTIME/rplugin/python3/LanguageClient/wrapper.sh for logging
+"" let g:LanguageClient_serverCommands.nix = ['nix-lsp']
+"" del g:LanguageClient_serverCommands.cpp = ['cquery', '--log-file=/tmp/cq.log']
+"silent! call remove(g:LanguageClient_serverCommands, 'cpp')
+"silent! call remove(g:LanguageClient_serverCommands, 'c')
 
-" we use deoplete instead !!
-" there is also omnifunc ?
-set completefunc=LanguageClient#complete
+"" we use deoplete instead !!
+"" there is also omnifunc ?
+"set completefunc=LanguageClient#complete
 
-" this should be done only for filetypes supported by LanguageClient !!!
-set formatexpr=LanguageClient_textDocument_rangeFormatting()
+"" this should be done only for filetypes supported by LanguageClient !!!
+"set formatexpr=LanguageClient_textDocument_rangeFormatting()
 
-" todo provide a fallback if lsp not available
-" if get(g:, 'LanguageClient_loaded', 0)
-  " nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
+"" todo provide a fallback if lsp not available
+"" if get(g:, 'LanguageClient_loaded', 0)
+"  " nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
 
-  nnoremap  ,h :call LanguageClient#textDocument_hover()<CR>
-  nnoremap <silent> ,d :call LanguageClient#textDocument_definition()<CR>
-  nnoremap <silent> ,r :call LanguageClient#textDocument_references()<CR>
-  nnoremap <silent> ,s :call LanguageClient#textDocument_documentSymbol()<CR>
-  nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
+"nnoremap  ,h :call LanguageClient#textDocument_hover()<CR>
+"nnoremap <silent> ,d :call LanguageClient#textDocument_definition()<CR>
+"nnoremap <silent> ,r :call LanguageClient#textDocument_references()<CR>
+"nnoremap <silent> ,s :call LanguageClient#textDocument_documentSymbol()<CR>
+"nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
 
-" provides a list of everything possible
-command! FzfLSP call LanguageClient_contextMenu()
+"" provides a list of everything possible
+"command! FzfLSP call LanguageClient_contextMenu()
 
-" let it jump to
-nnoremap <C-LeftMouse> :call LanguageClient#textDocument_definition()<CR>
+"" let it jump to
+"nnoremap <C-LeftMouse> :call LanguageClient#textDocument_definition()<CR>
 
 " endif
 "}}}

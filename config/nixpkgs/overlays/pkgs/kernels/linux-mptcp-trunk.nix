@@ -22,8 +22,9 @@ buildLinux (rec {
 
     src = builtins.fetchGit {
       # url = "ssh://git@github.com/teto/mptcp.git";
-      url = https://github.com/teto/mptcp.git;
-      ref = "trunk_v8";
+      # url = https://github.com/teto/mptcp.git;
+      url = "ssh://gitolite@nixos.iijlab.net:mptcp.git";
+      ref = "trunk_v8_wip";
       # sha256= "00000000000000000000000000000000";
     };
 

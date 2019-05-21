@@ -179,6 +179,8 @@ in rec {
 #Failed assertions:
 #- CONFIG_DEVTMPFS is not enabled!
 #- CONFIG_CGROUPS is not enabled!
+
+# TODO fetch with nix build linux_mptcp_trunk_raw.src -f ~/nixpkgs
   linux_mptcp_trunk_raw = (
     (prev.callPackage ./pkgs/kernels/linux-mptcp-trunk.nix {
 
