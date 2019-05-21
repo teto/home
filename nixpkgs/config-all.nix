@@ -132,12 +132,11 @@ kernel_xconfig=''
     HISTFILE="$XDG_CACHE_HOME/bash_history";
     LESS=""; # options to pass to less automatically
   };
-  # stick to sh as it's shell independant
-  # load fzf-share
-  environment.extraInit = ''
-    # TODO source fzf
-  '';
 
+  # stick to sh as it's shell independant
+  environment.extraInit = builtins.readFile ../config/zsh/init.sh;
+
+  # environment.gnome3.excludePackages = [];
   # security.initialRootPassword = "!";
 
   # Enable automatic discovery of the printer (from other linux systems with avahi running)

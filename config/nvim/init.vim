@@ -1611,6 +1611,7 @@ let g:vimtex_syntax_minted = [
 
 " shell-escape is mandatory for minted
 " check that '-file-line-error' is properly removed with pplatex
+" executable The name/path to the latexmk executable. 
 let g:vimtex_compiler_latexmk = {
         \ 'backend' : 'nvim',
         \ 'background' : 1,
@@ -1621,6 +1622,7 @@ let g:vimtex_compiler_latexmk = {
         \ 'options' : [
         \   '-pdf',
         \   '-file-line-error',
+        \   '-bibtex',
         \   '-synctex=1',
         \   '-interaction=nonstopmode',
         \   '-shell-escape',
@@ -2591,10 +2593,10 @@ nnoremap <C-RightMouse> :call SynStack()<CR>
 " set printexpr
 
 
-if &wildoptions == "pum"
-    cnoremap <expr> <up>   pumvisible() ? "<C-p>" : "\<up>"
-    cnoremap <expr> <down> pumvisible() ? "<C-n>" : "\<down>"
-  endif
+" if &wildoptions == "pum"
+"     cnoremap <expr> <up>   pumvisible() ? "<C-p>" : "\<up>"
+"     cnoremap <expr> <down> pumvisible() ? "<C-n>" : "\<down>"
+"   endif
 
 func! ReadExCommandOutput(newbuf, cmd) abort
   redir => l:message

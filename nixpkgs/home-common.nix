@@ -5,10 +5,10 @@
 let
   stable = import <nixos> {}; # https://nixos.org/channels/nixos
   unstable = import <nixos-unstable> {}; # https://nixos.org/channels/nixos-unstable
-  includeFzf= let fzfContrib="${pkgs.fzf}/share/fzf"; in ''
-    . "${fzfContrib}/completion.bash"
-    . "${fzfContrib}/key-bindings.bash"
-    '';
+  # includeFzf= let fzfContrib="${pkgs.fzf}/share/fzf"; in ''
+  #   . "${fzfContrib}/completion.bash"
+  #   . "${fzfContrib}/key-bindings.bash"
+  #   '';
 
   cliUtils = with pkgs; [
     netcat-gnu # plain 'netcat' is the bsd one
@@ -125,7 +125,7 @@ rec {
     historyFile = "$XDG_CACHE_HOME/bash_history";
     initExtra=''
       ${includeFzf}
-      '';
+    '';
       # profileExtra=''
       #   '';
       # shellOptions=

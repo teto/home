@@ -26,7 +26,8 @@
 	"languageServerHaskell": {
         "hlintOn": false,
         "maxNumberOfProblems": 10,
-		"trace.server": "verbose"
+		"trace.server": "verbose",
+		"completionSnippetsOn": true
     },
 	"initializationOptions": {
 		"cacheDirectory": "/tmp/cquery"

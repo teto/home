@@ -61,6 +61,8 @@ final: prev:
   packetdrill-mptcp = prev.packetdrill.overrideAttrs ( oa: {
   });
 
+  dig = final.bind.dnsutils;
+
   # oni = prev.callPackage ./oni/default.nix {};
 
   mda-lite = prev.pythonPackages.callPackage ./mda-lite {};
