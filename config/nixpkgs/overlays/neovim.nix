@@ -5,8 +5,10 @@ let
       # 
 # Plug 'deoplete-plugins/deoplete-zsh'
 # Plug 'deoplete-plugins/deoplete-jedi'
+      coc-nvim
       csv-vim
-      deoplete-nvim
+      # replaced by coc
+      # deoplete-nvim
       # deoplete-jedi # keeps crashing
       # deoplete-zsh # not available just yet
       # echodoc-vim
@@ -20,8 +22,7 @@ let
       # defined in overrides: TODO this should be easier: like fzf-vim should be enough
       fzfWrapper
 
-      # replaced by ale ?
-      LanguageClient-neovim
+      # LanguageClient-neovim
       tagbar
       # targets-vim
       # vCoolor-vim
@@ -199,6 +200,7 @@ rec {
         withPython = false;
         # withHaskell = false;
         withRuby = false; # for vim-rfc/GhDashboard etc.
+        withNodeJs = true; # used by coc.vim
 
         # TODO use them only if 
         customRC = ''

@@ -1,0 +1,38 @@
+{
+	"coc.preferences.diagnostic.enable": true,
+	"coc.preferences.snippets.enable": true,
+	"coc.source.around.enable": true,
+	"coc": {
+		"source": {
+			"vimtex": {
+				"enable": true
+			}
+		}
+	},
+	"languageserver": {
+		"haskell": {
+			"command": "hie-wrapper",
+			"args": ["--lsp", "-d", "--vomit", "--logfile", "/tmp/lsp_haskell.log"],
+			"rootPatterns": [".stack.yaml", "cabal.config", "package.yaml"],
+			"filetypes": ["hs", "lhs", "haskell"],
+			"trace.server": "verbose",
+			"initializationOptions": {},
+			"settings": {
+				"languageServerHaskell": {
+					"hlintOn": false,
+					"maxNumberOfProblems": 10,
+					"completionSnippetsOn": true
+				}
+			}
+		},
+		"lua": {
+			"command": "lua-lsp",
+			"filetypes": ["lua"]
+		},
+		"python": {
+             "command": "python",
+			 "args": [ "-mpyls", "-vv", "--log-file" , "/tmp/lsp_python.log"],
+				"filetypes": ["python"]
+		}
+	}
+}

@@ -91,7 +91,7 @@ call plug#begin(s:plugdir)
 " Plug 'andymass/vim-matchup' " to replace matchit
 " call :NR on a region than :w . coupled with b:nrrw_aucmd_create,
 " Plug 'AGhost-7/critiq.vim' " :h critiq
-Plug 'neoclide/coc.nvim' " 
+" Plug 'neoclide/coc.nvim' " 
 Plug 'rhysd/git-messenger.vim' " to show git message 
 Plug 'voldikss/vim-translate-me' " floawting windows for neovim
 Plug 'chrisbra/Colorizer'
@@ -2033,7 +2033,7 @@ map <A-P> :YanksBefore<CR>
 " autozimu's lsp LanguageClient-neovim {{{
 " call LanguageClient_textDocument_hover
 " by default logs in /tmp/LanguageClient.log.
-let g:LanguageClient_autoStart=1 " Run :LanguageClientStart when disabled
+let g:LanguageClient_autoStart=0 " Run :LanguageClientStart when disabled
 let g:LanguageClient_loadSettings = 1
 let g:LanguageClient_settingsPath=stdpath('config')."/settings.json"
 " pyls.configurationSources
@@ -2086,6 +2086,13 @@ set formatexpr=LanguageClient_textDocument_rangeFormatting()
   nnoremap <silent> ,r :call LanguageClient#textDocument_references()<CR>
   nnoremap <silent> ,s :call LanguageClient#textDocument_documentSymbol()<CR>
   nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
+
+" provides a list of everything possible
+command! FzfLSP call LanguageClient_contextMenu()
+
+" let it jump to
+nnoremap <C-LeftMouse> :call LanguageClient#textDocument_definition()<CR>
+
 " endif
 "}}}
 " nvim-hs haskell stuff {{{
@@ -2559,8 +2566,6 @@ let g:neomake_buildPhase_maker = {
 
 command! BuildPhase Neomake! buildPhase
 command! BuildPhaseTest Neomake! nix
-" provides a list of everything possible
-command! FzfLSP call LanguageClient_contextMenu()
 
 " function which starts a nvim-hs instance with the supplied name
 function! s:RequireHaskellHost(name)
@@ -2572,9 +2577,6 @@ function! s:RequireHaskellHost(name)
 endfunction
 set cpoptions="aABceFsn" " vi ComPatibility options
 
-
-" let it jump to
-nnoremap <C-LeftMouse> :call LanguageClient#textDocument_definition()<CR>
 nnoremap <C-RightMouse> :call SynStack()<CR>
 
 " hi CursorLine guibg=NONE cterm=underline gui=underline guifg=NONE guisp=fg

@@ -254,7 +254,7 @@ with libk;
     mptcpConfigStructured = {
 
       # don't always exist !
-      MPTCP_NETLINK = yes;
+      MPTCP_NETLINK = module;
       MPTCP = yes;
       MPTCP_SCHED_ADVANCED = yes;
       MPTCP_ROUNDROBIN = yes;
