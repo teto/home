@@ -92,6 +92,12 @@ To install .desktop entries
 Put them in
 ~/.local/share/applications
 
+
+Coc.nvim extensions
+====
+Install coc-vimtex / coc-ultisnips / coc-json
+
+
 Latex
 ====
 God I hate latex...
