@@ -2,9 +2,12 @@ self: super:
 let
   startPlugins = with super.pkgs.vimPlugins; [
       # echodoc-vim
-      # 
-# Plug 'deoplete-plugins/deoplete-zsh'
-# Plug 'deoplete-plugins/deoplete-jedi'
+
+      # to install manually with coc.nvim:
+      # - coc-vimtex  coc-snippets 
+      # use coc-yank for yank history
+
+      #  
       coc-nvim
       csv-vim
       # replaced by coc
@@ -66,7 +69,7 @@ rec {
     let
       # isHaskellPkg
       # lib.debug.traceVal
-      requiredPythonModules =  (super.python3Packages.requiredPythonModules drvs);
+      requiredPythonModules =  (super.python3Packages.requiredPythonModules drvs );
 
       # Get list of required Python modules given a list of derivations.
       # TODO look into compiler.shellFor { packages= } to see how to get deps
