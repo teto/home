@@ -213,7 +213,7 @@ let cmdline_external_term_cmd = "termite -e '%s' &"
 "}}}
 " Plug 'SirVer/ultisnips' " handle snippets
 " " Snippets are separated from the engine. Add this if you want them:
-" Plug 'honza/vim-snippets'
+Plug 'honza/vim-snippets'
 " Plug 'Shougo/neosnippet.vim'
 " Plug 'Shougo/neosnippet-snippets'
 
@@ -363,7 +363,6 @@ Plug 'mhinz/vim-rfc', { 'on': 'RFC' } " requires nokigiri gem
 Plug 'vim-scripts/rfc-syntax', { 'for': 'rfc' } " optional syntax highlighting for RFC files
 " can show a list of unicode characeters, with their name  :UnicodeTable etc...
 " careful maps F4 by default
-" Plug 'chrisbra/unicode.vim' " , { 'on': ['<plug>(UnicodeComplete)', '<plug>(UnicodeGA)', 'UnicodeTable'] }
 Plug 'teto/Modeliner' " <leader>ml to setup buffer modeline
 " This one has bindings mapped to <leader>l
 Plug 'vimwiki/vimwiki'   " to write notes
@@ -662,7 +661,8 @@ let g:diminactive_enable_focus = 0
 " g:UltiSnipsSnippetsDir
 " <FocusLost><FocusLost>
 " let g:UltiSnipsExpandTrigger = "<C-y>"
-let g:UltiSnipsExpandTrigger="<Tab>"
+" let g:UltiSnipsExpandTrigger="<Tab>"
+" let g:UltiSnipsListSnippets="<leader>ls"
 " inoremap <expr> <CR> pumvisible() ? "<C-R>=UltiSnips#ExpandSnippetOrJump()<CR>" : "\<CR>"
 
 
@@ -1123,13 +1123,11 @@ let g:ale_sign_style_warning='W'
 
 hi ALEVirtualTextError guisp=undercurl
 
-" if get(g:, LanguageClient_loaded, 0)
 
 " nnoremap <silent> gh :ALEGoToDefinition<CR>
 " nnoremap <silent> gd :ALEGoToDefinition<CR>
 " nnoremap <silent> gr :ALEFindReferences<CR>
 " nnoremap <silent> gs :ALESymbolSearch<CR>
-" nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
 
 " nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 " nmap <silent> <C-j> <Plug>(ale_next_wrap)
@@ -1891,12 +1889,12 @@ nnoremap <Leader>k :Dasht<Space>
 nnoremap <Leader><Leader>k :Dasht!<Space>
 "}}}}}}
 " neosnippet {{{
-let g:neosnippet#enable_completed_snippet = 1
-let g:neosnippet#enable_snipmate_compatibility = 1
-let g:neosnippet#enable_complete_done = 1
-imap <C-k>     <expr><Plug>(neosnippet_expand_or_jump)
-smap <C-k>     <expr><Plug>(neosnippet_expand_or_jump)
-xmap <C-k>     <Plug>(neosnippet_expand_target)
+" let g:neosnippet#enable_completed_snippet = 1
+" let g:neosnippet#enable_snipmate_compatibility = 1
+" let g:neosnippet#enable_complete_done = 1
+" imap <C-k>     <expr><Plug>(neosnippet_expand_or_jump)
+" smap <C-k>     <expr><Plug>(neosnippet_expand_or_jump)
+" xmap <C-k>     <Plug>(neosnippet_expand_target)
 
 " inoremap <expr><C-q> pumvisible() ? deoplete#mappings#close_popup() : "\<CR>"
 " inoremap <expr><C-j> pumvisible() ? "\<C-n>" : "\<Tab>"
@@ -2409,7 +2407,6 @@ function! UpdatePythonHost(prog)
   let g:python3_host_prog = a:prog
   " Update mypy as well
   let g:neomake_python_mypy_exe = fnamemodify( g:python3_host_prog, ':p:h').'/mypy'
-  " let g:LanguageClient_serverCommands.python = [ fnamemodify( g:python3_host_prog, ':p:h').'/pyls', '-vv', '--log-file' , '/tmp/lsp_python.log']
 endfunc
 
 au BufWinLeave,BufLeave * if &buftype != 'nofile' | silent! mkview | endif
