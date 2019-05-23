@@ -140,3 +140,49 @@ call neomake#configure#automake('w')
 "     " autocmd User NeomakeJobFinished call OnNeomakeFinished()
 " augroup END
 
+" command! BuildPhase Neomake! buildPhase
+" command! BuildPhaseTest Neomake! nix
+
+" todo pass a flag to call configure ?
+" nnoremap <F4> :BuildPhase<CR>
+" nnoremap <F5> :Neomake! make<CR>
+"
+
+" TODO replace with getroot of directory ?
+" let g:neomake_build_folder_maker = {
+"     \ 'exe': 'make',
+"     \ 'args': [],
+"     \ 'cwd': getcwd().'/build',
+"     \ 'errorformat': '%f:%l:%c: %m',
+"     \ 'remove_invalid_entries': 0,
+"     \ 'buffer_output': 0
+"     \ }
+
+
+" called like this let returned_maker = call(maker.fn, [options], maker)
+function! Check_build_folder(opts, ) abort dict
+
+  " todo check for nix-shell
+  if isdirectory("build")
+    let self.cwd = getcwd().'/build'
+  endif
+
+  if !exists("$IN_NIX_SHELL")
+    echom "You are not in a nix-shell"
+  endif
+
+  return self
+endfunction
+
+" will run nix-shell
+" source $stdenv/setup
+" \ 'cwd': getcwd().'/build',
+" fn is not well documented
+let g:neomake_buildPhase_maker = {
+    \ 'exe': '/home/teto/dotfiles/bin/nix-shell-maker.sh',
+    \ 'args': [],
+    \ 'errorformat': '%f:%l:%c: %m',
+    \ 'remove_invalid_entries': 0,
+    \ 'buffer_output': 0,
+    \ 'InitForJob': function('Check_build_folder')
+    \ }

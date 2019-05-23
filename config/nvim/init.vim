@@ -71,9 +71,6 @@ let s:gutter_warn_sign = '！'
 
 " from FAQ https://github.com/neovim/neovim/wiki/FAQ
 vnoremap <LeftRelease> "*ygv
-" filnxtToO
-set shortmess+=I
-set cmdheight=2 " for echodoc
 
 " inverts the meaning of g in substitution, ie with gdefault, change all
 " occurences
@@ -87,23 +84,20 @@ set exrc
 " vim-plug plugin declarations {{{1
 call plug#begin(s:plugdir)
 " branch v2-integration
-" Plug 'joonty/vdebug' " to add breakpoints etc
 " Plug 'andymass/vim-matchup' " to replace matchit
-" call :NR on a region than :w . coupled with b:nrrw_aucmd_create,
 " Plug 'AGhost-7/critiq.vim' " :h critiq
-" Plug 'neoclide/coc.nvim' " 
 Plug 'rhysd/git-messenger.vim' " to show git message 
 Plug 'voldikss/vim-translate-me' " floawting windows for neovim
 Plug 'chrisbra/Colorizer'
 Plug 'ndmitchell/ghcid', { 'rtp': 'plugins/nvim' }
 Plug 'neovimhaskell/nvim-hs.vim' " to help with nvim-hs
-Plug 'KabbAmine/vCoolor.vim' " :Vcooler
+" Plug 'KabbAmine/vCoolor.vim' " :Vcooler
 Plug 'rickhowe/diffchar.vim' " per char diff
-Plug 'prabirshrestha/vim-lsp'
+" Plug 'prabirshrestha/vim-lsp'
 " Plug 'bfredl/nvim-lspmirror'
 " Plug 'bfredl/nvim-lspext' " extension
-" Plug 'neoclide/coc.nvim'
 Plug 'neomutt/neomutt.vim' " syntax file for neomutt
+" call :NR on a region than :w . coupled with b:nrrw_aucmd_create,
 Plug 'chrisbra/NrrwRgn' " to help with multi-ft files
 Plug 'chrisbra/vim-diff-enhanced' "
 " Plug 'mhinz/vim-signify' " Indicate changed lines within a file using a VCS.
@@ -114,8 +108,8 @@ Plug 'vim-pandoc/vim-pandoc-syntax'
 Plug 'Carpetsmoker/xdg_open.vim' " overrides gx
 Plug 'tweekmonster/nvim-api-viewer', {'on': 'NvimAPI'} " see nvim api
 Plug 'tweekmonster/startuptime.vim', {'on': 'StartupTime'} " see startup time per script
-Plug 'vim-scripts/vis'
-Plug 'Konfekt/vim-CtrlXA'
+Plug 'vim-scripts/vis' " ?
+Plug 'Konfekt/vim-CtrlXA' " use ctrl a/xto cycle between different words
 " Plug 'jamessan/vim-gnupg'
 " Plug 'mattn/gist-vim' " to gist requires webapi
 " provider dependant {{{
@@ -295,7 +289,6 @@ Plug 'wellle/targets.vim' " Adds new motion targets ci{
 " Plug 'justinmk/vim-ipmotion' " ?
 " }}}
 
-" Plug 'mhinz/vim-startify' " very popular, vim's homepage
 Plug 'dietsche/vim-lastplace' " restore last cursor postion (is it still needed ?)
 " vim-lastplace to restore cursor position {{{
 let g:lastplace_ignore = "gitcommit,gitrebase,svn,hgcommit"
@@ -308,13 +301,12 @@ Plug 'vim-airline/vim-airline-themes' " creates problems if not here
 Plug 'justinmk/vim-gtfo' " gfo to open filemanager in cwd
 Plug 'wannesm/wmgraphviz.vim', {'for': 'dot'} " graphviz syntax highlighting
 Plug 'teto/vim-listchars' " to cycle between different list/listchars configurations
-"Plug 'vim-voom/VOoM' " can show tex/restDown Table of Content (ToC)
 "Plug 'tpope/vim-sleuth' " Dunno what it is
 "Plug 'justinmk/vim-gtfo' " ?
 Plug 'tpope/vim-rhubarb' " github support in fugitive, use |i_CTRL-X_CTRL-O|
 "Plug 'jaxbot/github-issues.vim' " works only with vim
 "Plug 'tpope/vim-surround' " don't realy know how to use yet
-" Plug 'junegunn/vim-peekaboo' " gives a preview of buffers when pasting
+" Plug 'junegunn/vim-peekaboo' " gives a preview of buffers when pasting, need ruby ?
 Plug 'mhinz/vim-randomtag', { 'on': 'Random' } " Adds a :Random function that launches help at random
 
 
@@ -350,10 +342,6 @@ Plug 'dhruvasagar/vim-table-mode', {'for': 'txt'}
 " forked it to solve a bug: git@github.com:teto/QuickFixCurrentNumber.git
 " Plug '~/QuickFixCurrentNumber' " use :Cnr :Cgo instead of :cnext etc...
 " Plug 'Coacher/QuickFixCurrentNumber' " use :Cnr :Cgo instead of :cnext etc...
-" =======
-" display signature in cmdline after v:completed_item, needs to customize
-" cmdheight
-" Plug 'Shougo/echodoc.vim' " removed in favor of others
 Plug 'teto/QuickFixCurrentNumber' " use :Cnr :Cgo instead of :cnext etc...
 Plug 'vim-scripts/ingo-library' " DEPENDANCY of QuickFixCurrentNumber
 "Plug 'tomtom/quickfixsigns_vim'
@@ -366,11 +354,7 @@ Plug 'vim-scripts/rfc-syntax', { 'for': 'rfc' } " optional syntax highlighting f
 Plug 'teto/Modeliner' " <leader>ml to setup buffer modeline
 " This one has bindings mapped to <leader>l
 Plug 'vimwiki/vimwiki'   " to write notes
-" async grep neovim only
-" Plug 'mhinz/vim-grepper' " , { 'on': 'Grepper'}
 "Plug 'teto/neovim-auto-autoread' " works only in neovim, runs external checker
-" Plug 'neomake/neomake' " async build for neovim
-" Plug 'w0rp/ale'
 " Plug 'rhysd/github-complete.vim' " provides github user/repo autocompletion after @ and #
 
 " does not work seems to be better ones
@@ -407,7 +391,6 @@ let g:EditorConfig_max_line_indicator = "line"
 " TODO move to nix once https://github.com/neovim/neovim/issues/9390 is fixed
 Plug 'lervag/vimtex'
 " }}}
-
 " far config (Find And Replace) {{{
 " let g:far#source='agnvim'
 " let g:far#source='vimgrep'
@@ -720,51 +703,6 @@ let g:dirvish_mode=2
 " g:echodoc#type " only for gonvim
 "}}}
 
-
-" to remove timeout when changing modes
-" if ! has('gui_running')
-"     set ttimeoutlen=10
-"     augroup FastEscape
-"         autocmd!
-"         au InsertEnter * set timeoutlen=0
-"         au InsertLeave * set timeoutlen=1000
-"     augroup END
-" endif
-"nnoremap <leader>r :!%:p<return>
-
-set shiftround    " round indent to multiple of 'shiftwidth'
-
-" window-local
-set winhl=NormalNC:CursorColumn
-
-" auto reload vim config on save
-" Watch for changes to vimrc
-augroup myvimrc
-  au!
-  au BufWritePost $MYVIMRC,.vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc,init.vim so $MYVIMRC | if has('gui_running') | so $MYGVIMRC | endif
-augroup END
-
-" augroup onnewsocket
-"   au!
-"   autocmd! OnNewSocket * echom 'New client from init'
-" augroup END
-
-" open vimrc
-nnoremap <Leader>ev :e $MYVIMRC<CR>
-"nnoremap <Leader>ep :vs ~/.vim/plug.vim<CR>
-" reload vimrc
-nnoremap <Leader>sv :source $MYVIMRC<CR>
-
-" open netrw/dirvish split
-" nnoremap <Leader>e :Vex<CR>
-nnoremap <Leader>w :w<CR>
-
-
-" fails with neovim use :te instead ?
-"nnoremap <leader>r :<C-U>RangerChooser<CR>
-
-"nnoremap <F8> :vertical wincmd f<CR> " open file under cursor in a split
-nnoremap <leader>gfs :vertical wincmd f<CR> " open file under cursor in a split
 " float-preview {{{
 let g:float_preview#docked = 0
 " let g:float_preview#win
@@ -1305,7 +1243,6 @@ nmap <leader>ç <Plug>AirlineSelectTab9
 " inyoface (highlight only comments) {{{
 nnoremap <leader>c <Plug>(InYoFace_Toggle)<CR>
 " }}}
-set completeopt=menu,longest
 " vim-sayonara {{{
 nnoremap <silent><leader>Q  :Sayonara<cr>
 nnoremap <silent><leader>q  :Sayonara!<cr>
@@ -1921,7 +1858,11 @@ vmap <silent> <Leader>r <Plug>TranslateRV
 " plugin manager such as vim-plug.
 " set by nix
 " let g:coc_node_path=
-
+" Some servers have issues with backup files, see #649
+set nobackup
+set nowritebackup
+" don't give |ins-completion-menu| messages.
+set shortmess+=c
 " coc.nvim uses its custom json that accepts comments like //
 autocmd FileType json syntax match Comment +\/\/.\+$+
 
@@ -1929,31 +1870,113 @@ autocmd FileType json syntax match Comment +\/\/.\+$+
 nmap <silent> [c <Plug>(coc-diagnostic-prev)
 nmap <silent> ]c <Plug>(coc-diagnostic-next)
 " Remap keys for gotos
-" nmap <silent> gd <Plug>(coc-definition)
-" nmap <silent> gy <Plug>(coc-type-definition)
-" nmap <silent> gi <Plug>(coc-implementation)
-" nmap <silent> gr <Plug>(coc-references)
-" function! s:show_documentation()
-"   if (index(['vim','help'], &filetype) >= 0)
-"     execute 'h '.expand('<cword>')
-"   else
-"     call CocAction('doHover')
-"   endif
-" endfunction
-" 
-" Highlight symbol under cursor on CursorHold
-" autocmd CursorHold * silent call CocActionAsync('highlight')
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
 
-" " Remap for rename current word
-" nmap <leader>rn <Plug>(coc-rename)
+" Use K to show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Highlight symbol under cursor on CursorHold
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Remap for rename current word
+nmap <leader>rn <Plug>(coc-rename)
 
 " " Remap for format selected region
-" xmap <leader>f  <Plug>(coc-format-selected)
-" nmap <leader>f  <Plug>(coc-format-selected)
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
+" Use `:Format` to format current buffer
+command! -nargs=0 Format :call CocAction('format')
+
+" Use `:Fold` to fold current buffer
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+"}}}
+" repl.nvim (from hiphish) {{{
+" let g:repl['lua'] = {
+"     \ 'bin': 'lua',
+"     \ 'args': [],
+"     \ 'syntax': '',
+"     \ 'title': 'Lua REPL'
+" \ }
+" Send the text of a motion to the REPL
+nmap <leader>rs  <Plug>(ReplSend)
+" Send the current line to the REPL
+nmap <leader>rss <Plug>(ReplSendLine)
+nmap <leader>rs_ <Plug>(ReplSendLine)
+" Send the selected text to the REPL
+vmap <leader>rs  <Plug>(ReplSend)
+" }}}
+" nvim-palette{{{
+let g:palette_debug=1
+let g:palette_histadd=1
+" overrides default
+" let g:palette_descriptions_file='/home/teto/neovim2/build/runtime/data/options.mpack'
+" let g:palette_fzf_opts={
+" 	\ 'options': ' --prompt "Palette>"',
+" 	\ 'down': '50%',
+" 	\ }
+
+
+" nmap <Leader>p :Palette<CR>
+nmap <Leader>x <Plug>(PaletteRun)
+"}}}
+" highlightedyank {{{
+let g:highlightedyank_highlight_duration = 1000
+" let g:highlightedyank_max_linesr=
+" }}}
+" tagbar {{{
+let g:tagbar_left = 0
+let g:tagbar_indent = 1
+let g:tagbar_show_linenumbers= 1
+" }}}
+" vim-open-url {{{
+let g:open_url_browser_default="qutebrowser"
+"}}}
+" qfgrep {{{
+" <Leader>g to filter entries (user will be asked for pattern) works only in
+" location list/quickfix similar to :QFGrep
+" <Leader>r to restore original quickfix entires.
+let g:QFG_hi_error = 'ctermbg=167 ctermfg=16 guibg=#d75f5f guifg=black'
+"}}}
+" QuickFixCurrentNumber {{{
+let g:no_QuickFixCurrentNumber_maps = 1
+" }}}
+" location list / quickfix config {{{
+" location list can be associated with only one window.
+" The location list is independent of the quickfix list.
+" }}}
+" ListToggle config {{{
+let g:lt_location_list_toggle_map = '<F12>' " '<leader>l'
+let g:lt_quickfix_list_toggle_map = '<F2>' " '<leader>qq'
+
+" nmap <leader>l  <Plug>(ListToggleLToggle)
+nmap <F1>  <Plug>(ListToggleQToggle)
+
+" }}}
+" iron.nvim {{{
+" cp = repeat the previous command
+" ctr send a chunk of text with motion
+" nmap <localleader>t <Plug>(iron-send-motion)
+let g:iron_repl_open_cmd="vsplit"
+" let g:iron_new_repl_hooks
+" let g:iron_new_lua_repl_hooks
+"let g:iron_map_defaults
 "}}}
 
 
 set hidden " you can open a new buffer even if current is unsaved (error E37)
+set completeopt=menu,longest
 
 " draw a line on 80th column
 set colorcolumn=80,100
@@ -2000,16 +2023,11 @@ nmap <F4> call GoToNextError()
 " nmap <S-F3> <Plug>(QuickFixCurrentNumberQPrev)
 " nmap <S-f4> <Plug>(QuickFixCurrentNumberQNext)
 
-
-" todo pass a flag to call configure ?
-nnoremap <F4> :BuildPhase<CR>
-nnoremap <F5> :Neomake! make<CR>
 nnoremap <F6> :AutoSaveToggle<CR>
 "nnoremap <F6> :AutoSaveOnLostFocus<CR>
 " goto previous buffer
 nnoremap <F7> :bp<CR>
 nnoremap <F8> :bn<CR>
-nnoremap <F9> :YcmToggleLogs<CR>
 " est mappe a autre chose pour l'instant
 "noremap <F13> exec ":emenu <tab>"
 " should become useless with neovim
@@ -2019,29 +2037,12 @@ map <F11> <Plug>(ToggleListchars)
 " Command to toggle line wrapping.
 nnoremap <Leader>wr :set wrap! \| :set wrap?<CR>
 
-" vim:foldmethod=marker:foldlevel=0
 " Get off my lawn
 "noremap <Left> :echoe "Use h"<CR>
 "nnoremap <Right> :echoe "Use l"<CR>
 "nnoremap <Up> :echoe "Use k"<CR>
 "nnoremap <Down> :echoe "Use j"<CR>
 
-" flashy config (replaced by highlightedyank) {{{
-" map y <Plug>(operator-flashy)
-" nmap Y <Plug>(operator-flashy)$
-" let g:operator#flashy#flash_time=300 " in milliseconds
-" }}}
-" highlightedyank {{{
-let g:highlightedyank_highlight_duration = 1000
-" let g:highlightedyank_max_linesr=
-" }}}
-" tagbar {{{
-let g:tagbar_left = 0
-
-let g:tagbar_indent = 1
-
-let g:tagbar_show_linenumbers= 1
-" }}}
 nnoremap <silent> <Leader>B :TagbarToggle<CR>
 " set vim's cwd to current file's
 nnoremap ,cd :cd %:p:h<CR>:pwd<CR>
@@ -2054,40 +2055,6 @@ endif
 
 " Bye bye ex mode
 noremap Q <NOP>
-
-" vim-open-url {{{
-let g:open_url_browser_default="qutebrowser"
-"}}}
-" qfgrep {{{
-" <Leader>g to filter entries (user will be asked for pattern) works only in
-" location list/quickfix similar to :QFGrep
-" <Leader>r to restore original quickfix entires.
-let g:QFG_hi_error = 'ctermbg=167 ctermfg=16 guibg=#d75f5f guifg=black'
-"}}}
-" QuickFixCurrentNumber {{{
-let g:no_QuickFixCurrentNumber_maps = 1
-" }}}
-" location list / quickfix config {{{
-" location list can be associated with only one window.
-" The location list is independent of the quickfix list.
-" }}}
-" ListToggle config {{{
-let g:lt_location_list_toggle_map = '<F12>' " '<leader>l'
-let g:lt_quickfix_list_toggle_map = '<F2>' " '<leader>qq'
-
-" nmap <leader>l  <Plug>(ListToggleLToggle)
-nmap <F1>  <Plug>(ListToggleQToggle)
-
-" }}}
-" iron.nvim {{{
-" cp = repeat the previous command
-" ctr send a chunk of text with motion
-" nmap <localleader>t <Plug>(iron-send-motion)
-let g:iron_repl_open_cmd="vsplit"
-" let g:iron_new_repl_hooks
-" let g:iron_new_lua_repl_hooks
-"let g:iron_map_defaults
-"}}}
 
 " buffers
 map <Leader>n :bnext<CR>
@@ -2126,8 +2093,6 @@ set showfulltag "test
 "nmap <Tab> >>
 "vmap <S-Tab> <gv
 "vmap <Tab> >gv
-" call orchestra#prelude()
-" call orchestra#set_tune('clackclack')
 
 " azerty customizations : utilise <C-V> pour entrer le caractère utilisé {{{
 "https://www.reddit.com/r/vim/comments/2tvupe/azerty_keymapping/
@@ -2147,35 +2112,6 @@ set matchpairs+=<:>  " Characters for which % should work
 " TODO to use j/k over
 " set whichwrap+=<,>,h,l
 
-" repl.nvim (from hiphish) {{{
-" let g:repl['lua'] = {
-"     \ 'bin': 'lua',
-"     \ 'args': [],
-"     \ 'syntax': '',
-"     \ 'title': 'Lua REPL'
-" \ }
-" Send the text of a motion to the REPL
-nmap <leader>rs  <Plug>(ReplSend)
-" Send the current line to the REPL
-nmap <leader>rss <Plug>(ReplSendLine)
-nmap <leader>rs_ <Plug>(ReplSendLine)
-" Send the selected text to the REPL
-vmap <leader>rs  <Plug>(ReplSend)
-" }}}
-" nvim-palette{{{
-let g:palette_debug=1
-let g:palette_histadd=1
-" overrides default
-" let g:palette_descriptions_file='/home/teto/neovim2/build/runtime/data/options.mpack'
-" let g:palette_fzf_opts={
-" 	\ 'options': ' --prompt "Palette>"',
-" 	\ 'down': '50%',
-" 	\ }
-
-
-" nmap <Leader>p :Palette<CR>
-nmap <Leader>x <Plug>(PaletteRun)
-"}}}
 " Interactive menus {{{1
 " use emenu ("execute menu") to launch the command
 " disable all menus
@@ -2247,6 +2183,9 @@ set guicursor=n-v-c:block-blinkon250-Cursor/lCursor,ve:ver35-Cursor,o:hor50-Curs
 " try reverse ?
 highl Cursor ctermfg=16 ctermbg=253 guifg=#000000 guibg=#00FF00
 " highl lCursor ctermfg=16 ctermbg=253 guifg=#000000 guibg=#00FF00
+highlight SignifySignChange cterm=bold ctermbg=237  ctermfg=227 guibg=NONE guifg=#F08A1F
+highlight SignifySignAdd cterm=bold ctermbg=237  ctermfg=227 guibg=NONE guifg=green
+highlight SignifySignDelete cterm=bold ctermbg=237  ctermfg=227 guibg=NONE guifg=red
 
 " TESTING only
 nnoremap <kPageUp> :lprev
@@ -2278,11 +2217,7 @@ command! FlipBool call FzfFlipBool()
 "
 " to open tag in a split
 map <A-]> :vsp<CR>:exec("tag ".expand("<cword>"))<CR>
-map <C-5> :Neomake! make<CR>
 
-highlight SignifySignChange cterm=bold ctermbg=237  ctermfg=227 guibg=NONE guifg=#F08A1F
-highlight SignifySignAdd cterm=bold ctermbg=237  ctermfg=227 guibg=NONE guifg=green
-highlight SignifySignDelete cterm=bold ctermbg=237  ctermfg=227 guibg=NONE guifg=red
 
 " MATT to test
 let g:python_host_tcp=1
@@ -2305,48 +2240,6 @@ function! Genmpack(file)
 	call writefile(m, 'fname.mpack', 'b')
 endfunc
 
-" TODO replace with getroot of directory ?
-" let g:neomake_build_folder_maker = {
-"     \ 'exe': 'make',
-"     \ 'args': [],
-"     \ 'cwd': getcwd().'/build',
-"     \ 'errorformat': '%f:%l:%c: %m',
-"     \ 'remove_invalid_entries': 0,
-"     \ 'buffer_output': 0
-"     \ }
-
-let g:neomake_open_list=2
-
-" called like this let returned_maker = call(maker.fn, [options], maker)
-function! Check_build_folder(opts, ) abort dict
-
-  " todo check for nix-shell
-  if isdirectory("build")
-    let self.cwd = getcwd().'/build'
-  endif
-
-  if !exists("$IN_NIX_SHELL")
-    echom "You are not in a nix-shell"
-  endif
-
-  return self
-endfunction
-
-" will run nix-shell
-" source $stdenv/setup
-" \ 'cwd': getcwd().'/build',
-" fn is not well documented
-let g:neomake_buildPhase_maker = {
-    \ 'exe': '/home/teto/dotfiles/bin/nix-shell-maker.sh',
-    \ 'args': [],
-    \ 'errorformat': '%f:%l:%c: %m',
-    \ 'remove_invalid_entries': 0,
-    \ 'buffer_output': 0,
-    \ 'InitForJob': function('Check_build_folder')
-    \ }
-
-command! BuildPhase Neomake! buildPhase
-command! BuildPhaseTest Neomake! nix
 
 " function which starts a nvim-hs instance with the supplied name
 function! s:RequireHaskellHost(name)
@@ -2362,18 +2255,6 @@ nnoremap <C-RightMouse> :call SynStack()<CR>
 
 " hi CursorLine guibg=NONE cterm=underline gui=underline guifg=NONE guisp=fg
 "
-" Automatic Hover
-"function! DoNothingHandler(output)
-"endfunction
-
-"function! IsDifferentHoverLineFromLast()
-"  if !exists('b:last_hover_line')
-"    return 1
-"  endif
-
-"  return b:last_hover_line !=# line('.') || b:last_hover_col !=# col('.')
-"endfunction
-
 " set display+=lastline
 
 " Register a plugin host that is started when a haskell file is opened
@@ -2387,11 +2268,37 @@ nnoremap <C-RightMouse> :call SynStack()<CR>
 " set printexpr
 
 
-" if &wildoptions == "pum"
-"     cnoremap <expr> <up>   pumvisible() ? "<C-p>" : "\<up>"
-"     cnoremap <expr> <down> pumvisible() ? "<C-n>" : "\<down>"
-"   endif
+set shiftround    " round indent to multiple of 'shiftwidth'
 
+" window-local
+set winhl=NormalNC:CursorColumn
+
+" auto reload vim config on save
+" Watch for changes to vimrc
+augroup myvimrc
+  au!
+  au BufWritePost $MYVIMRC,.vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc,init.vim so $MYVIMRC | if has('gui_running') | so $MYGVIMRC | endif
+augroup END
+
+" augroup onnewsocket
+"   au!
+"   autocmd! OnNewSocket * echom 'New client from init'
+" augroup END
+
+" open vimrc
+nnoremap <Leader>ev :e $MYVIMRC<CR>
+" reload vimrc
+nnoremap <Leader>sv :source $MYVIMRC<CR>
+
+" open netrw/dirvish split
+" nnoremap <Leader>e :Vex<CR>
+nnoremap <Leader>w :w<CR>
+
+"nnoremap <F8> :vertical wincmd f<CR> " open file under cursor in a split
+nnoremap <leader>gfs :vertical wincmd f<CR> " open file under cursor in a split
+
+
+" from justinmk
 func! ReadExCommandOutput(newbuf, cmd) abort
   redir => l:message
   silent! execute a:cmd
