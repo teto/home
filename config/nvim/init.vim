@@ -125,6 +125,7 @@ Plug '~/nvim-palette', { 'do': ':UpdateRemotePlugins' }
 
 " Plug 'romainl/vim-qf' " can create pb with neomake
 Plug 'editorconfig/editorconfig-vim' " not remote but involves python
+Plug 'neomake/neomake' " just for nix
 " provider
 Plug 'msrose/vim-perpetuloc'
 " Plug 'brooth/far.vim', { 'do': ':UpdateRemotePlugins' } " search and replace across files
@@ -865,13 +866,6 @@ command! FzfSignifyChooseBranch call ChooseSignifyGitCommit()
 "   call fzf#run(d)
 " endfunction
 
-function! NeomakeToggleMaker(maker_name)
-  " set(g:, 'neomake_'.&ft.'_enabled_makers', [])
-
-  "   :call filter(list, 'v:val !~ "x"')  " remove items with an 'x'
-
-endfunction
-
 function! FzfNeomake()
 
   let d = copy(s:opts)
@@ -943,136 +937,6 @@ endif
 
 nnoremap <Leader>/ :set hlsearch! hls?<CR> " toggle search highlighting
 
-" }}}
-" Deoplete {{{
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#enable_ignore_case = 1
-" let g:deoplete#disable_auto_complete = 0
-let g:deoplete#enable_debug = 1
-" let g:deoplete#auto_complete_delay=0
-
-" call deoplete#custom#option({
-" \ 'auto_complete': v:true,
-" \ 'auto_complete_delay': 0,
-" \ 'smart_case': v:true,
-" \ 'refresh_always': v:true,
-" \ 'dup': v:false
-" \ })
-
-" " source
-" call deoplete#custom#var('around', {
-" \   'range_above': 15,
-" \   'range_below': 15,
-" \   'mark_above': '[↑]',
-" \   'mark_below': '[↓]',
-" \   'mark_changes': '[*]',
-" \})
-
-" " deoplete#toggle()
-" call deoplete#custom#source('perso', { 'matt' : 'mattator@gmail.com' })
-
-" call deoplete#custom#source('_', 'matchers', ['matcher_cpsm'])
-" call deoplete#custom#source('_', 'sorters', [])
-
-" let g:deoplete#keyword_patterns = {}
-" let g:deoplete#keyword_patterns.gitcommit = '.+'
-
-" call deoplete#custom#option('profile', v:true)
-" call deoplete#enable_logging('DEBUG', '/tmp/deoplete.log')
-" call deoplete#custom#source('jedi', 'is_debug_enabled', 1)
-
-" call deoplete#custom#set('jedi', 'debug_enabled', 1)
-
-" fails
-" call deoplete#util#set_pattern(
-"   \ g:deoplete#omni#input_patterns,
-"   \ 'gitcommit', [g:deoplete#keyword_patterns.gitcommit])
-" deoplete clang {{{2
-
-let g:deoplete#sources#clang#std#cpp = 'c++11'
-let g:deoplete#sources#clang#sort_algo = 'priority'
-" let g:deoplete#sources#clang#clang_complete_database = '/home/user/code/build'`
-
-
-" Let <Tab> also do completion
-" inoremap <silent><expr> <Tab>
-" \ pumvisible() ? "<C-n>" :
-" \ deoplete#mappings#manual_complete()
-" nnoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
-" }}}
-" deoplete jedi {{{2
-let deoplete#sources#jedi#enable_cache=1
-let deoplete#sources#jedi#show_docstring=0
-" slow down completion
-let g:deoplete#sources#jedi#enable_typeinfo=1
-" show docstring in completion window
-let g:deoplete#sources#jedi#show_docstring=1
-" }}}
-" deoplete github (disabled for now won't work) {{{
-" let g:deoplete#sources = {}
-" let g:deoplete#sources.gitcommit=['github']
-" " let g:deoplete#keyword_patterns = {}
-" let g:deoplete#keyword_patterns.gitcommit = '.+'
-
-" call deoplete#util#set_pattern(
-"   \ g:deoplete#omni#input_patterns,
-"   \ 'gitcommit', [g:deoplete#keyword_patterns.gitcommit])
-
-"}}}
-" deoplete notmuch
-" notmuch address command to fetch completions
-" NOTE: --format=sexp is required
-let g:deoplete#sources#notmuch#command = ['notmuch', 'address', '--format=sexp', '--output=recipients', '--deduplicate=address', 'tag:inbox']
-" }}}
-" ALE {{{
-" let deoplete handle completion
-let g:ale_completion_enabled = 0
-" let g:ale_completion_delay=
-" g:ale_completion_max_suggestions
-" g:ale_completion_excluded_words or b:ale_completion_excluded_words
-" g:ale_set_balloons gcc
-" ALEGoToDefinition
-"" Set this. Airline will handle the rest.
-" Only run linters named in ale_linters settings.
-" let g:ale_linters_explicit = 1
-
-let g:ale_set_loclist=1
-let g:ale_echo_cursor = 1
-let g:ale_history_enabled = 1
-
-
-" let g:ale_lint_on_enter=
-let g:ale_lint_on_text_changed = 'never'
-let g:ale_virtualtext_cursor = 1
-" let g:ale_virtualtext_delay = 10
-
-let g:ale_sign_error='✖'
-let g:ale_sign_warn='⚠'
-let g:ale_sign_info='ℹ'
-let g:ale_sign_style_error='E'
-let g:ale_sign_style_warning='W'
-  " |ALEVirtualTextError|        - Items with `'type': 'E'`
-  " |ALEVirtualTextWarning|      - Items with `'type': 'W'`
-  " |ALEVirtualTextInfo|         - Items with `'type': 'I'`
-  " |ALEVirtualTextStyleError|   - Items with `'type': 'E'` and `'sub_type': 'style'`
-  " |ALEVirtualTextStyleWarning| - Items with `'type': 'W'` and `'sub_type': 'style'`
-
-" let g:ale_linters = {'haskell': ['eslint']}
-
-hi ALEVirtualTextError guisp=undercurl
-
-
-" nnoremap <silent> gh :ALEGoToDefinition<CR>
-" nnoremap <silent> gd :ALEGoToDefinition<CR>
-" nnoremap <silent> gr :ALEFindReferences<CR>
-" nnoremap <silent> gs :ALESymbolSearch<CR>
-
-" nmap <silent> <C-k> <Plug>(ale_previous_wrap)
-" nmap <silent> <C-j> <Plug>(ale_next_wrap)
-" ale#linter#Define(filetype, linter)
-"}}}
-" Neomake config {{{
-" source neomake.vim
 " }}}
 " Airline {{{
 " debug with :AirlineExtensions
@@ -1664,16 +1528,6 @@ let g:EasyMotion_verbose = 0
 " nnoremap <silent> <Esc> :<C-U>call halo#run()<CR>
 " nnoremap <silent> <C-c> :<C-U>call halo#run()<CR><C-c>
 " }}}
-" rtags {{{
-" <leader>rw montre les différents projets ( <=> $rc -w)
-let g:rtagsUseLocationList=1
-let g:rtagsUseDefaultMappings = 1
-let g:rtagsLog=$HOME."/rtags.log"
-
-let g:rtagsExcludeSysHeaders=0
-let g:rtagsAutoLaunchRdm=1
-" let g:rtagsExcludeSysHeaders
-" }}}
 " http://vim.wikia.com/wiki/Show_tags_in_a_separate_preview_window {{{
 " au! CursorHold *.[ch] nested call PreviewWord()
 " CursorHold depends on updatetime
@@ -1807,9 +1661,6 @@ map <A-P> :YanksBefore<CR>
 
 :
 "}}}
-" autozimu's lsp LanguageClient-neovim {{{
-" source 'LanguageClient-neovim'
-"}}}
 " nvim-hs haskell stuff {{{
 " let g:nvimhsPluginStarter=nvimhs#stack#pluginstarter()
 "}}}
@@ -1852,55 +1703,6 @@ vmap <silent> ,te <Plug>TranslateWV
 " Type <Leader>r to translate the text under the cursor and replace the text with the translation
 nmap <silent> <Leader>r <Plug>TranslateR
 vmap <silent> <Leader>r <Plug>TranslateRV
-"}}}
-" coc.nvim {{{
-" Note: yarn is not required if you want to manage extensions using a vim
-" plugin manager such as vim-plug.
-" set by nix
-" let g:coc_node_path=
-" Some servers have issues with backup files, see #649
-set nobackup
-set nowritebackup
-" don't give |ins-completion-menu| messages.
-set shortmess+=c
-" coc.nvim uses its custom json that accepts comments like //
-autocmd FileType json syntax match Comment +\/\/.\+$+
-
-" Use `[c` and `]c` to navigate diagnostics
-nmap <silent> [c <Plug>(coc-diagnostic-prev)
-nmap <silent> ]c <Plug>(coc-diagnostic-next)
-" Remap keys for gotos
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-
-" Use K to show documentation in preview window
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
-
-" Highlight symbol under cursor on CursorHold
-autocmd CursorHold * silent call CocActionAsync('highlight')
-
-" Remap for rename current word
-nmap <leader>rn <Plug>(coc-rename)
-
-" " Remap for format selected region
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
-
-" Use `:Format` to format current buffer
-command! -nargs=0 Format :call CocAction('format')
-
-" Use `:Fold` to fold current buffer
-command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 "}}}
 " repl.nvim (from hiphish) {{{
 " let g:repl['lua'] = {
@@ -2315,6 +2117,10 @@ function! UpdatePythonHost(prog)
   " Update mypy as well
   let g:neomake_python_mypy_exe = fnamemodify( g:python3_host_prog, ':p:h').'/mypy'
 endfunc
+
+
+hi CursorLine                    guibg=#293739 guifg=None
+
 
 au BufWinLeave,BufLeave * if &buftype != 'nofile' | silent! mkview | endif
 au BufWinEnter * if &buftype != 'nofile' | silent! loadview | endif

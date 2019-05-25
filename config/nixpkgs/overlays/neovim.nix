@@ -7,14 +7,9 @@ let
       # - coc-vimtex  coc-snippets 
       # use coc-yank for yank history
 
-      #  
       coc-nvim
       csv-vim
       # replaced by coc
-      # deoplete-nvim
-      # deoplete-jedi # keeps crashing
-      # deoplete-zsh # not available just yet
-      # echodoc-vim
       fugitive
       far-vim
 
@@ -24,6 +19,8 @@ let
       fzf-vim
       # defined in overrides: TODO this should be easier: like fzf-vim should be enough
       fzfWrapper
+
+      # neomake
 
       # LanguageClient-neovim
       tagbar
@@ -54,7 +51,14 @@ let
       # vimtex
       ultisnips
       unicode-vim
-    ];
+    ]
+    # ++ [
+    #   deoplete-nvim
+    #   deoplete-jedi # keeps crashing
+    #   deoplete-zsh # not available just yet
+    #   echodoc-vim
+    # ]
+    ;
 
 
 in
@@ -252,7 +256,8 @@ rec {
       urllib3
       # pygments # for pygmentize and minted in latex
       mypy
-      # pyls-mypy # can't find imports :s
+      # generates https://github.com/tomv564/pyls-mypy/issues/22
+      pyls-mypy # can't find imports :s
       python-language-server
       pycodestyle
     ]

@@ -51,6 +51,7 @@ self: prev:
         executableHaskellDepends = [ prev.pkgs.jupyter ];
       });
 
+      # TODO enable profiling ?
       # or "logger"
       # http://hackage.haskell.org/package/logger
       # "netlink" = prev.haskell.lib.addBuildDepends  (prev.haskell.lib.overrideSrc hprev.netlink {

@@ -69,6 +69,12 @@ final: prev:
 
   mptcpnumerics = prev.python3Packages.callPackage ./mptcpnumerics.nix {};
 
+  # rustNightlyPlatform = prev.recurseIntoAttrs (prev.makeRustPlatform rust-nightly);
+
+  # nix-lsp = prev.callPackage ./nix-lsp {
+  #   inherit rustNightlyPlatform;
+  # };
+
   papis-python-rofi = prev.python3Packages.callPackage ./papis-rofi.nix {};
 
   rt-tests = prev.callPackage ./rt-test.nix {};

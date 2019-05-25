@@ -13,13 +13,6 @@
 let g:neomake_virtualtext_prefix="     >> "
 let g:neomake_verbose = 1
 
-" call neomake#quickfix#enable()
-
-" pyflakes can't be disabled on a per error basis
-" also it considers everything as error => disable
-" flake8  or pycodestyle when supported
-" let g:neomake_list_height=5
-
 " how to let 'mypy' ignore warning/errors as pycodestyle does ?
 " 'pycodestyle'
 let g:neomake_c_maker = []
@@ -45,38 +38,7 @@ let g:neomake_place_signs=1
 " let g:neomake_haskell_enabled_makers=[]
 
 
-" filters out unrecognized
-function! NeomakeStatusLine()
-
-  let bufnr = winbufnr(winnr())
-  let active=0
-" let neomake_status_str = neomake#statusline#get(bufnr, {
-" 	\ 'format_running': '… ({{running_job_names}})',
-" 	\ 'format_ok': (active ? '%#NeomakeStatusGood#' : '%*').'✓',
-" 	\ 'format_quickfix_ok': '',
-" 	\ 'format_quickfix_issues': (active ? '%s' : ''),
-" 	\ 'format_status': '%%(%s'
-" 	\   .(active ? '%%#StatColorHi2#' : '%%*')
-" 	\   .'%%)',
-" 	\ })
-
-    let neomake_status_str = neomake#statusline#get(bufnr, {
-          \ 'format_running': '… ({{running_job_names}})',
-          \ 'format_ok': '✓',
-          \ 'format_quickfix_ok': '',
-          \ 'format_quickfix_issues': '%s',
-          \ })
-  return neomake_status_str
-endfunction
-
-
-" C and CPP are handled by YCM and java usually by elim
- " 'c'
-let s:neomake_exclude_ft = ['cpp', 'java' ]
-" let g:neomake_tex_checkers = [ '' ]
-" let g:neomake_tex_enabled_makers = []
 let g:neomake_tex_enabled_makers = []
-"'mypy'
 " disabled 'mypy' since it was generating errors
 let g:neomake_python_enabled_makers = ['mypy']
 
@@ -104,7 +66,7 @@ let g:neomake_remove_invalid_entries=1
 " commande : highlights one can use :runtime syntax/hitest.vim for testing
 " Underlined/NeomakePerso/Error
 " let g:neomake_error_highlight = 'Error'
-let g:neomake_error_highlight = 'NeomakePerso'
+" let g:neomake_error_highlight = 'NeomakePerso'
 
 " this lists directory makers to use when no file or no maker for ft
 " by default 'makeprg'
@@ -118,7 +80,7 @@ let g:neomake_error_highlight = 'NeomakePerso'
 
 " todo only if neomake loaded
 call neomake#configure#automake('w')
-" NeomakeDisable
+silent NeomakeDisable
 
 " func update_mypy_maker
   " Hook into NeomakeJobInit.
