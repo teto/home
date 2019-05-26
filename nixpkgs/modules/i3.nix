@@ -234,7 +234,7 @@ in
       # semicolumn
       // move_focused_wnd "right" "l" "l"
       # just trying to overwrite previous bindings with i3dispatch
-      // lib.optionalAttrs true {
+      // lib.optionalAttrs (pkgs ? i3dispatch ) {
       "${mod}+Left" = "exec ${pkgs.i3dispatch}/bin/i3dispatch left";
       "${mod}+Right" = "exec ${pkgs.i3dispatch}/bin/i3dispatch right";
       "${mod}+Down" = "exec ${pkgs.i3dispatch}/bin/i3dispatch down";
