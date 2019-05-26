@@ -22,6 +22,7 @@ in
        "wireshark"
        "plugdev" # for udiskie
        "jupyter"
+       "video" # to control brightness
        "wheel" # for sudo
        # "kvm" # don't think that's needed 
      ];

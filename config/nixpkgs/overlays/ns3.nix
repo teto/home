@@ -34,7 +34,7 @@ rec {
     enableDoxygen = false;
     build_profile = "optimized";
     # withManual = true;
-    pythonSupport = true;
+    # pythonSupport = true;
   #   # withExamples = true;
   };
 

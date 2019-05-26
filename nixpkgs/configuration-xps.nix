@@ -17,7 +17,7 @@ let
     ./modules/distributedBuilds.nix
     # ./modules/mptcp.nix
     ./modules/vpn.nix
-    ./modules/jupyter2.nix
+    # ./modules/jupyter2.nix
 
     # for user teto
     ./extraTools.nix
@@ -175,8 +175,6 @@ let
       ]
   ;
 
-  services.xserver.resolutions = [ { x= 1600; y = 900;} ];
-  services.xserver.libinput.enable = true;
 
   # service to update bios etc
   # managed to get this problem https://github.com/NixOS/nixpkgs/issues/47640
@@ -198,9 +196,23 @@ let
 
   # programs.mininet.enable = true;
 
-  services.xserver.displayManager.slim = {
-    autoLogin = false;
-    defaultUser = "teto";
+  services.xserver = {
+    displayManager.slim = {
+      autoLogin = false;
+      defaultUser = "teto";
+    };
+    resolutions = [ { x= 1600; y = 900;} ];
+    libinput.enable = true;
+
+    # to properly run xbacklight 
+    # https://askubuntu.com/questions/715306/xbacklight-no-outputs-have-backlight-property-no-sys-class-backlight-folder
+    config = ''
+    Section "Device"
+        Identifier  "Intel Graphics"
+        Driver      "intel"
+        Option      "Backlight"  "intel_backlight"
+    EndSection
+      '';
   };
 
   # virtualisation.virtualbox = {
@@ -219,6 +231,9 @@ let
 
 
 
+  hardware.acpilight.enable = true;
+  # -- ?
+  hardware.brightnessctl.enable = true; 
 
   networking.iproute2.enable = true;
 

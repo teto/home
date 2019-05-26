@@ -14,6 +14,10 @@
 //	"diagnostic.hintSign": ">>",
 	"coc.preferences.snippets.enable": true,
 	"coc.source.around.enable": true,
+	// use https://github.com/neoclide/coc.nvim/wiki/Completion-with-sources#improve-completion-experience
+	"coc.source.around.shortcut": "around",
+	"suggest.snippetIndicator": "►",
+	"suggest.noselect": false,
 	"languageserver": {
 		"haskell": {
 			"command": "hie-wrapper",

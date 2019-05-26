@@ -318,6 +318,7 @@ rec {
   # home.activation.copyZshrc = dagEntryBefore [ "linkGeneration" ] ''
   #   cp $
   #   '';
+  home.file.".digrc".source =  ./home/digrc;
 
   # order matters
   home.file.".mailcap".text =  ''
