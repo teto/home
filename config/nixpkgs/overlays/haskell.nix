@@ -41,7 +41,6 @@ self: prev:
       ip = dontCheck hprev.ip;
 
       zeromq4-haskell = prev.haskell.lib.dontCheck hprev.zeromq4-haskell;
-      #       servant = super.callHackage "servant" "0.12.1" {};
 
       # cabal-helper = prev.haskell.lib.doJailbreak (hprev.cabal-helper);
 

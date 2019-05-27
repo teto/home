@@ -16,8 +16,8 @@ buildRustPackage rec {
   src = fetchgit rec {
 
     url = https://github.com/vhakulinen/gnvim;
-    rev = "d1b19d6169c06507e9a6c8f9755064b6772b32b9";
-    sha256 = "05kdqxbihi71qavy02j1hdwk5569qgxyk618x214wdqwa16lzbg7";
+    rev = "4b248cda4a6858544c6dbe9a4ad79796a7008247";
+    sha256 = "1f5vfi5nxn9zscad2cgjdm5sdgi0jrnmhswyhr05h55y6iqcnnb4";
 
     # url = https://github.com/teto/gnvim;
     # rev = "c98cb99cb4009c82c45c41f668b468659595083d";
