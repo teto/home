@@ -1291,35 +1291,6 @@ endif
 "<plug>(vimtex-toc-toggle)
 " au BufEnter *.tex exec ":setlocal spell spelllang=en_us"
 "" }}}
-" Pymode {{{
-" let g:pymode_python = 'python3'
-" let g:pymode_warnings = 1
-" let g:pymode_paths = []
-" let g:pymode_indent = 1
-" let g:pymode_trim_whitespaces = 1
-" let g:pymode_options = 0
-" let g:pymode_folding = 0
-" let g:pymode_doc = 0
-" " C means class, M method for instance
-" " ]M                Jump to next class or method (normal, visual, operator modes)
-" let g:pymode_motion = 1
-" let g:pymode_rope_goto_definition_bind = 'gd'
-" let g:pymode_lint = 0 " done by Neomake
-" " ROpe is interesting, enables
-" let g:pymode_rope = 0 " rope is for semantic analysis jedi vim looks better
-" let g:pymode_rope_lookup_project = 0
-" let g:pymode_rope_goto_definition_bind = '<C-c>g'
-" let g:pymode_rope_show_doc_bind = '<C-c>d'
-" let g:pymode_syntax = 1
-" let g:pymode_syntax_all = 1
-" let g:pymode_rope_goto_definition_cmd = 'new'
-
-" let g:pymode_breakpoint = 0 " consumes <Leader>b otherwise
-" " let g:pymode_breakpoint_bind = '<leader>b'
-" let g:pymode_virtualenv = 1
-" " hl self keyword
-" let g:pymode_syntax_highlight_self = g:pymode_syntax_all
-" }}}
 " vim-listchars config {{{
     "\"trail:·,tab:→\ ,eol:↲,precedes:<,extends:>"
 "let g:listchar_formats=[

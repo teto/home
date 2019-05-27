@@ -16,6 +16,7 @@
 	"coc.source.around.enable": true,
 	// use https://github.com/neoclide/coc.nvim/wiki/Completion-with-sources#improve-completion-experience
 	"coc.source.around.shortcut": "around",
+	"coc.source.buffer.shortcut": "buf",
 	"suggest.snippetIndicator": "►",
 	"suggest.noselect": false,
 	"languageserver": {

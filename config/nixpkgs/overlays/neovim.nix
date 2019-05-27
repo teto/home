@@ -257,7 +257,7 @@ rec {
       # pygments # for pygmentize and minted in latex
       mypy
       # generates https://github.com/tomv564/pyls-mypy/issues/22
-      pyls-mypy # can't find imports :s
+      # pyls-mypy # can't find imports :s
       python-language-server
       pycodestyle
     ]
