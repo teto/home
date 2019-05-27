@@ -11,7 +11,7 @@ self: prev:
   # haskell overlay pkgs.haskell.lib.doJailbreak
 # pkgs.haskell.lib.doJailbreak
 #   jailbreak = true;
-# haskellPackages.callCabal2nix to nixpkgs which means anyone can easily pull in GitHub packages and hackage packages that aren't in nixpkgs. 
+# haskellPackages.callCabal2nix to nixpkgs which means anyone can easily pull in GitHub packages and hackage packages that aren't in nixpkgs.
 # pkgs.haskell.lib.dontCheck
 
   # haskellPkgs = pkgs.haskell.packages.ghc822.override(oldAttrs: {
@@ -33,13 +33,15 @@ self: prev:
     # to work around a stack bug (stack ghc is hardcoded)
     # compiler = prev.haskell.compiler // { ghc802 = prev.haskell.compiler.ghc844; };
 
-    packageOverrides = hself: hprev: with prev.haskell.lib; rec {  
+    packageOverrides = hself: hprev: with prev.haskell.lib; rec {
       # useful to fetch newer libraries with callHackage
       # ghc802 = hprev.ghc844;
       gutenhasktags = dontCheck (hprev.callPackage ./pkgs/gutenhasktags {});
 
+      ip = dontCheck hprev.ip;
+
       zeromq4-haskell = prev.haskell.lib.dontCheck hprev.zeromq4-haskell;
-  #     #       servant = super.callHackage "servant" "0.12.1" {};
+      #       servant = super.callHackage "servant" "0.12.1" {};
 
       # cabal-helper = prev.haskell.lib.doJailbreak (hprev.cabal-helper);
 
