@@ -17,8 +17,8 @@ let
       ./home-desktop.nix
 
       ./modules/tablet.nix
-      ./modules/hm-experimental.nix
-      # ./modules/vdirsyncer.nix
+      # ./modules/hm-experimental.nix
+      ./modules/vdirsyncer.nix
       ./home-mail.nix
       # symlink towards a config
     ]
