@@ -226,7 +226,7 @@ let
     sshServe = {
       enable = false;
       protocol = "ssh";
-      keys = [ secrets.gitolitePublicKey ];
+      # keys = [ secrets.gitolitePublicKey ];
     };
 
     distributedBuilds = false;

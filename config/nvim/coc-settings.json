@@ -20,6 +20,12 @@
 	"suggest.snippetIndicator": "►",
 	"suggest.noselect": false,
 	"languageserver": {
+		"bash": {
+		"command": "bash-language-server",
+		"args": ["start"],
+		"filetypes": ["sh"],
+		"ignoredRootPaths": ["~"]
+		},
 		"haskell": {
 			"command": "hie-wrapper",
 			"args": ["--lsp", "-d", "--vomit", "--logfile", "/tmp/lsp_haskell.log"],

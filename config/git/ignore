@@ -38,7 +38,6 @@ Session.vim
 *.pcap
 # }}}
 
-
 # Backup files {{{
 *.bak
 *.odp#
@@ -48,7 +47,6 @@ Session.vim
 *.~lock*
 *.tmp
 # }}}
-
 
 # Packages #
 ############

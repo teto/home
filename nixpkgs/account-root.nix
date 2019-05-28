@@ -7,7 +7,7 @@
      initialPassword = "test";
 	 # shell = pkgs.zsh;
      # import basetools
-     openssh.authorizedKeys.keyFiles = [ ./keys/root_gitolite.pub ];
+     # openssh.authorizedKeys.keyFiles = [ ./keys/root_gitolite.pub ];
   };
 }
 

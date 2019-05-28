@@ -1,4 +1,4 @@
-# Configuration file for Wireshark 3.0.1.
+# Configuration file for Wireshark 3.1.0.
 #
 # This file is regenerated each time preferences are saved within
 # Wireshark. Making manual changes should be safe, however.
@@ -283,7 +283,7 @@ gui.qt.font_name: Liberation Mono,9,-1,5,50,0,0,0,0,0
 
 # Interface link-layer header types (Ex: en0(1),en1(143),...)
 # A string
-#capture.devices_linktypes: 
+capture.devices_linktypes: virbr0(1),vnet0(1),nlmon0(253),eno1(1),lo(1),any(113),enp3s0(1),enp4s0(1),virbr1(1),ciscodump(147),dpauxmon(275),randpkt(147),sdjournal(147),sshdump(147),udpdump(252)
 
 # Interface descriptions (Ex: eth0(eth0 descr),eth1(eth1 descr),...)
 # A string
@@ -299,15 +299,15 @@ gui.qt.font_name: Liberation Mono,9,-1,5,50,0,0,0,0,0
 
 # Interface buffer size (Ex: en0(1),en1(143),...)
 # A string
-#capture.devices_buffersize: 
+capture.devices_buffersize: virbr0(2),vnet0(2),nlmon0(2),eno1(2),lo(2),any(2),enp3s0(2),enp4s0(2),virbr1(2),nflog(2),nfqueue(2),sit0(2),ip6tnl0(2),usbmon0(2),usbmon1(2),usbmon2(2),virbr0-nic(2),virbr1-nic(2),ciscodump(2),dpauxmon(2),randpkt(2),sdjournal(2),sshdump(2),udpdump(2)
 
 # Interface snap length (Ex: en0(65535),en1(1430),...)
 # A string
-#capture.devices_snaplen: 
+capture.devices_snaplen: virbr0:0(262144),vnet0:0(262144),nlmon0:0(262144),eno1:0(262144),lo:0(262144),any:0(262144),enp3s0:0(262144),enp4s0:0(262144),virbr1:0(262144),nflog:0(262144),nfqueue:0(262144),sit0:0(262144),ip6tnl0:0(262144),usbmon0:0(262144),usbmon1:0(262144),usbmon2:0(262144),virbr0-nic:0(262144),virbr1-nic:0(262144),ciscodump:0(262144),dpauxmon:0(262144),randpkt:0(262144),sdjournal:0(262144),sshdump:0(262144),udpdump:0(262144)
 
 # Interface promiscuous mode (Ex: en0(0),en1(1),...)
 # A string
-#capture.devices_pmode: 
+capture.devices_pmode: virbr0(1),vnet0(1),nlmon0(1),eno1(1),lo(1),any(1),enp3s0(1),enp4s0(1),virbr1(1),nflog(1),nfqueue(1),sit0(1),ip6tnl0(1),usbmon0(1),usbmon1(1),usbmon2(1),virbr0-nic(1),virbr1-nic(1),ciscodump(1),dpauxmon(1),randpkt(1),sdjournal(1),sshdump(1),udpdump(1)
 
 # Capture in promiscuous mode?
 # TRUE or FALSE (case-insensitive)
@@ -373,6 +373,170 @@ gui.qt.font_name: Liberation Mono,9,-1,5,50,0,0,0,0,0
 # Save arguments on start of capture
 # TRUE or FALSE (case-insensitive)
 #extcap.gui_save_on_start: TRUE
+
+# Starting position
+# A string
+#extcap.sdjournal.startfrom: 
+
+# Run in debug mode
+# A string
+#extcap.sdjournal.debug: false
+
+# Use a file for debug
+# A string
+#extcap.sdjournal.debugfile: 
+
+# Remote SSH server address
+# A string
+#extcap.sshdump.remotehost: 
+
+# Remote SSH server port
+# A string
+#extcap.sshdump.remoteport: 
+
+# Remote SSH server username
+# A string
+#extcap.sshdump.remoteusername: 
+
+# Path to SSH private key
+# A string
+#extcap.sshdump.sshkey: 
+
+# ProxyCommand
+# A string
+#extcap.sshdump.proxycommand: 
+
+# Remote interface
+# A string
+#extcap.sshdump.remoteinterface: 
+
+# Remote capture command
+# A string
+#extcap.sshdump.remotecapturecommand: 
+
+# Use sudo on the remote machine
+# A string
+#extcap.sshdump.remotesudo: 
+
+# No promiscuous mode
+# A string
+#extcap.sshdump.remotenoprom: 
+
+# Remote capture filter
+# A string
+#extcap.sshdump.remotefilter: not ((host fe80::fc54:ff:fe3e:da5f or host fe80::42ce:f1cf:f3a1:4d77 or host 2001:240:168:a04a::1:178b or host 192.168.128.1 or host 192.168.122.1 or host 10.206.117.145) and port 22)
+
+# Packets to capture
+# A string
+#extcap.sshdump.remotecount: 0
+
+# Run in debug mode
+# A string
+#extcap.sshdump.debug: false
+
+# Use a file for debug
+# A string
+#extcap.sshdump.debugfile: 
+
+# Listen port
+# A string
+#extcap.udpdump.port: 5555
+
+# Payload type
+# A string
+#extcap.udpdump.payload: data
+
+# Run in debug mode
+# A string
+#extcap.udpdump.debug: false
+
+# Use a file for debug
+# A string
+#extcap.udpdump.debugfile: 
+
+# Interface index
+# A string
+#extcap.dpauxmon.interface_id: 0
+
+# Run in debug mode
+# A string
+#extcap.dpauxmon.debug: false
+
+# Use a file for debug
+# A string
+#extcap.dpauxmon.debugfile: 
+
+# Remote SSH server address
+# A string
+#extcap.ciscodump.remotehost: 
+
+# Remote SSH server port
+# A string
+#extcap.ciscodump.remoteport: 22
+
+# Remote SSH server username
+# A string
+#extcap.ciscodump.remoteusername: teto
+
+# Path to SSH private key
+# A string
+#extcap.ciscodump.sshkey: 
+
+# ProxyCommand
+# A string
+#extcap.ciscodump.proxycommand: 
+
+# Remote interface
+# A string
+#extcap.ciscodump.remoteinterface: 
+
+# Remote capture filter
+# A string
+#extcap.ciscodump.remotefilter: deny tcp host fe80::fc54:ff:fe3e:da5f any eq 0, deny tcp any eq 0 host fe80::fc54:ff:fe3e:da5f, deny tcp host fe80::42ce:f1cf:f3a1:4d77 any eq 0, deny tcp any eq 0 host fe80::42ce:f1cf:f3a1:4d77, deny tcp host 2001:240:168:a04a::1:178b any eq 0, deny tcp any eq 0 host 2001:240:168:a04a::1:178b, deny tcp host 192.168.128.1 any eq 0, deny tcp any eq 0 host 192.168.128.1, deny tcp host 192.168.122.1 any eq 0, deny tcp any eq 0 host 192.168.122.1, deny tcp host 10.206.117.145 any eq 0, deny tcp any eq 0 host 10.206.117.145, permit ip any any
+
+# Packets to capture
+# A string
+#extcap.ciscodump.remotecount: 
+
+# Run in debug mode
+# A string
+#extcap.ciscodump.debug: false
+
+# Use a file for debug
+# A string
+#extcap.ciscodump.debugfile: 
+
+# Max bytes in a packet
+# A string
+#extcap.randpkt.maxbytes: 5000
+
+# Number of packets
+# A string
+#extcap.randpkt.count: 1000
+
+# Packet delay (ms)
+# A string
+#extcap.randpkt.delay: 0
+
+# Random type
+# A string
+#extcap.randpkt.randomtype: false
+
+# All random packets
+# A string
+#extcap.randpkt.allrandom: false
+
+# Type of packet
+# A string
+#extcap.randpkt.type: 
+
+# Run in debug mode
+# A string
+#extcap.randpkt.debug: false
+
+# Use a file for debug
+# A string
+#extcap.randpkt.debugfile: 
 
 ####### Name Resolution ########
 
@@ -1040,7 +1204,7 @@ gui.qt.font_name: Liberation Mono,9,-1,5,50,0,0,0,0,0
 #bta2dp.a2dp.content_protection.scms_t: FALSE
 
 # Force decoding stream as A2DP with specified codec
-# One of: Default, SBC, MPEG12 AUDIO, MPEG24 AAC, aptX, aptX HD
+# One of: Default, SBC, MPEG12 AUDIO, MPEG24 AAC, aptX, aptX HD, LDAC
 # (case-insensitive).
 #bta2dp.a2dp.codec: Default
 
@@ -1171,6 +1335,10 @@ gui.qt.font_name: Liberation Mono,9,-1,5,50,0,0,0,0,0
 # Whether the CAN ID/flags field should be byte-swapped
 # TRUE or FALSE (case-insensitive)
 #can.byte_swap: FALSE
+
+# Try to decode a packet using an heuristic sub-dissector before using a sub-dissector registered to "decode as"
+# TRUE or FALSE (case-insensitive)
+#can.try_heuristic_first: FALSE
 
 # Enable support of Cisco Wireless Controller (based on old 8 draft revision).
 # TRUE or FALSE (case-insensitive)
@@ -1435,7 +1603,7 @@ gui.qt.font_name: Liberation Mono,9,-1,5,50,0,0,0,0,0
 # A decimal number
 #dicom.export_minsize: 4096
 
-# Create a node for sequences and items, and show children in a hierarchy. Deselect this option, if you prefer a flat display or e.g. when using TShark to create a text output.
+# Create a node for sequences and items, and show children in a hierarchy. De-select this option, if you prefer a flat display or e.g. when using TShark to create a text output.
 # TRUE or FALSE (case-insensitive)
 #dicom.seq_tree: TRUE
 
@@ -1447,7 +1615,7 @@ gui.qt.font_name: Liberation Mono,9,-1,5,50,0,0,0,0,0
 # TRUE or FALSE (case-insensitive)
 #dicom.cmd_details: TRUE
 
-# Decode all DICOM tags in the last PDV. This will ensure the proper reassembly. When not set, the decoding may fail and the exports may become corrupt.
+# Decode all DICOM tags in the last PDV. This will ensure the proper reassembly. De-select, to troubleshoot PDU length issues, or to understand PDV fragmentation. When not set, the decoding may fail and the exports may become corrupt.
 # TRUE or FALSE (case-insensitive)
 #dicom.pdv_reassemble: TRUE
 
@@ -1564,6 +1732,10 @@ gui.qt.font_name: Liberation Mono,9,-1,5,50,0,0,0,0,0
 # Allow only packets with Major=0x03//Minor=0xFF as DVMRP V3 packets
 # TRUE or FALSE (case-insensitive)
 #dvmrp.strict_v3: FALSE
+
+# Decode the Message Types according to eCPRI Specification V1.2
+# TRUE or FALSE (case-insensitive)
+#ecpri.ecpripref.msg.decoding: TRUE
 
 # Whether the eDonkey dissector should reassemble messages spanning multiple TCP segments. To use this option, you must also enable "Allow subdissectors to reassemble TCP streams" in the TCP protocol settings.
 # TRUE or FALSE (case-insensitive)
@@ -1824,7 +1996,7 @@ gui.qt.font_name: Liberation Mono,9,-1,5,50,0,0,0,0,0
 #fp_mux.call_heur_fp: TRUE
 
 # Encapsulation
-# One of: FRF 3.2/Cisco HDLC, GPRS Network Service, Raw Ethernet
+# One of: FRF 3.2/Cisco HDLC, GPRS Network Service, Raw Ethernet, LAPB (T1.617a-1994 Annex G)
 # (case-insensitive).
 #fr.encap: FRF 3.2/Cisco HDLC
 
@@ -1924,6 +2096,10 @@ gui.qt.font_name: Liberation Mono,9,-1,5,50,0,0,0,0,0
 # TRUE or FALSE (case-insensitive)
 #grpc.detect_json_automaticlly: TRUE
 
+# Whether the Gryphon dissector should desegment all messages spanning multiple TCP segments
+# TRUE or FALSE (case-insensitive)
+#gryphon.desegment: TRUE
+
 # No description
 # TRUE or FALSE (case-insensitive)
 #gsm_ipa.hsl_debug_in_root_tree: FALSE
@@ -1980,6 +2156,10 @@ gui.qt.font_name: Liberation Mono,9,-1,5,50,0,0,0,0,0
 # Whether or not to try reassembling GSSAPI blobs spanning multiple (SMB/SessionSetup) PDUs
 # TRUE or FALSE (case-insensitive)
 #gss-api.gssapi_reassembly: TRUE
+
+# Show GSUP Source/Destination names as text in the Packet Details pane
+# TRUE or FALSE (case-insensitive)
+#gsup.show_name_as_text: TRUE
 
 # GTPv0 and GTP' port (default 3386)
 # A decimal number
@@ -2156,6 +2336,21 @@ gui.qt.font_name: Liberation Mono,9,-1,5,50,0,0,0,0,0
 # TRUE or FALSE (case-insensitive)
 #icmp.favor_icmp_mpls: FALSE
 
+# Length of the Cause of Transmission Field, configurable in '101 and fixed at 2 octets with '104
+# One of: 1 octet, 2 octet
+# (case-insensitive).
+#iec60870_101.cot_len: 1 octet
+
+# Length of the Common ASDU Address Field, configurable in '101 and fixed at 2 octets with '104
+# One of: 1 octet, 2 octet
+# (case-insensitive).
+#iec60870_101.asdu_addr_len: 1 octet
+
+# Length of the Information Object Address Field, configurable in '101 and fixed at 3 octets with '104
+# One of: 2 octet, 3 octet
+# (case-insensitive).
+#iec60870_101.asdu_ioa_len: 2 octet
+
 # Whether fragmented 802.11 datagrams should be reassembled
 # TRUE or FALSE (case-insensitive)
 #wlan.defragment: TRUE
@@ -2242,6 +2437,10 @@ gui.qt.font_name: Liberation Mono,9,-1,5,50,0,0,0,0,0
 # Whether the IPDC dissector should reassemble messages spanning multiple TCP segments. To use this option, you must also enable "Allow subdissectors to reassemble TCP streams" in the TCP protocol settings.
 # TRUE or FALSE (case-insensitive)
 #ipdc.desegment_ipdc_messages: TRUE
+
+# Range of session IDs to be decoded as SAMIS-TYPE-1 records
+# A string denoting an positive integer range (e.g., "1-20,30-40")
+#ipdr.sessions.samis_type_1: 
 
 # Dissect IPMB commands
 # TRUE or FALSE (case-insensitive)
@@ -2775,6 +2974,15 @@ gui.qt.font_name: Liberation Mono,9,-1,5,50,0,0,0,0,0
 # TRUE or FALSE (case-insensitive)
 #mac-nr.attempt_rrc_decode: TRUE
 
+# Set whether LCID -> drb Table is taken from static table (below) or from info learned from control protocol (i.e. RRC)
+# One of: From static table, From configuration protocol
+# (case-insensitive).
+#mac-nr.lcid_to_drb_mapping_source: From static table
+
+# The name of the file containing the mate module's configuration
+# A path to a file
+#mate.config: 
+
 # Decode control data received on "usb.control" with an unknown interface class as MBIM
 # TRUE or FALSE (case-insensitive)
 #mbim.control_decode_unknown_itf: FALSE
@@ -2960,6 +3168,10 @@ gui.qt.font_name: Liberation Mono,9,-1,5,50,0,0,0,0,0
 # Whether the MTP2 dissector should use extended sequence numbers as described in Q.703, Annex A as a default.
 # TRUE or FALSE (case-insensitive)
 #mtp2.use_extended_sequence_numbers: FALSE
+
+# Some SS7 capture hardware includes the FCS at the end of the packet, others do not.
+# TRUE or FALSE (case-insensitive)
+#mtp2.capture_contains_frame_check_sequence: FALSE
 
 # Reverse the bit order inside bytes specified in Q.703.
 # TRUE or FALSE (case-insensitive)
@@ -3511,10 +3723,26 @@ gui.qt.font_name: Liberation Mono,9,-1,5,50,0,0,0,0,0
 # TRUE or FALSE (case-insensitive)
 #pkcs12.try_null_password: FALSE
 
+# Whether the PN-RT summary line should be shown in the protocol tree
+# TRUE or FALSE (case-insensitive)
+#pn_rt.summary_in_tree: TRUE
+
+# Reassemble PNIO Fragments and get them decoded
+# TRUE or FALSE (case-insensitive)
+#pn_rt.desegment: TRUE
+
 # Protocol payload type
 # One of: Data, Sony FeliCa, NXP MiFare, ISO 7816
 # (case-insensitive).
 #pn532.prtype532: Data
+
+# Whether the PNIO dissector is allowed to use detailed PROFIsafe dissection of cyclic data frames
+# TRUE or FALSE (case-insensitive)
+#pn_io.pnio_ps_selection: TRUE
+
+# Select your Networkpath to your GSD-Files.
+# A path to a directory
+#pn_io.pnio_ps_networkpath: 
 
 # Whether the POP dissector should reassemble RETR and TOP responses and spanning multiple TCP segments. To use this option, you must also enable "Allow subdissectors to reassemble TCP streams" in the TCP protocol settings.
 # TRUE or FALSE (case-insensitive)
@@ -3704,12 +3932,12 @@ gui.qt.font_name: Liberation Mono,9,-1,5,50,0,0,0,0,0
 #rlc-nr.call_pdcp_for_srb: TRUE
 
 # Call PDCP dissector for UL user-plane PDUs.  Note that without reassembly, it canonly be called for complete PDUs (i.e. not segmented over RLC)
-# One of: Off, 12-bit SN, 18-bit SN
+# One of: Off, 12-bit SN, 18-bit SN, Use signalled value
 # (case-insensitive).
 #rlc-nr.call_pdcp_for_ul_drb: Off
 
 # Call PDCP dissector for DL user-plane PDUs.  Note that without reassembly, it canonly be called for complete PDUs (i.e. not segmented over RLC)
-# One of: Off, 12-bit SN, 18-bit SN
+# One of: Off, 12-bit SN, 18-bit SN, Use signalled value
 # (case-insensitive).
 #rlc-nr.call_pdcp_for_dl_drb: Off
 
@@ -4568,6 +4796,50 @@ gui.qt.font_name: Liberation Mono,9,-1,5,50,0,0,0,0,0
 # A decimal number
 #tpncp.udp.trunkpack_port: 2424
 
+# Position of the capture unit that produced this trace.  This setting affects the way TRANSUM handles TCP Retransmissions.  See the manual for details.
+# One of: Client, Intermediate, Service
+# (case-insensitive).
+#transum.capture_position: Client
+
+# Set this to match to the TCP subdissector reassembly setting
+# TRUE or FALSE (case-insensitive)
+#transum.reassembly: TRUE
+
+# Add and remove ports numbers separated by commas
+# Ranges are supported e.g. 25,80,2000-3000,5432
+# A string denoting an positive integer range (e.g., "1-20,30-40")
+#transum.tcp_port_ranges: 25,80,443,1433
+
+# Add and remove ports numbers separated by commas
+# Ranges are supported e.g. 123,137-139,520-521,2049
+# A string denoting an positive integer range (e.g., "1-20,30-40")
+#transum.udp_port_ranges: 137-139
+
+# Set this to discard any packet in the direction client to service,
+# with a 1-byte payload of 0x00 and the ACK flag set
+# TRUE or FALSE (case-insensitive)
+#transum.orphan_ka_discard: FALSE
+
+# RTE data will be added to the first request packet
+# TRUE or FALSE (case-insensitive)
+#transum.rte_on_first_req: FALSE
+
+# RTE data will be added to the last request packet
+# TRUE or FALSE (case-insensitive)
+#transum.rte_on_last_req: TRUE
+
+# RTE data will be added to the first response packet
+# TRUE or FALSE (case-insensitive)
+#transum.rte_on_first_rsp: FALSE
+
+# RTE data will be added to the last response packet
+# TRUE or FALSE (case-insensitive)
+#transum.rte_on_last_rsp: FALSE
+
+# Set this only to troubleshoot problems
+# TRUE or FALSE (case-insensitive)
+#transum.debug_enabled: FALSE
+
 # Critical Traffic Mask (base hex)
 # A hexadecimal number
 #tte.ct_mask_value: 0
@@ -4690,6 +4962,27 @@ gui.qt.font_name: Liberation Mono,9,-1,5,50,0,0,0,0,0
 # No description
 # TRUE or FALSE (case-insensitive)
 #websocket.decompress: TRUE
+
+# Set the maximum Basic CID used in the Wimax decoder (if other than the default of 320).  Note: The maximum Primary CID is double the maximum Basic CID.
+# A decimal number
+#wmx.basic_cid_max: 320
+
+# Set to TRUE to use the Corrigendum 2 version of Wimax message decoding. Set to FALSE to use the 802.16e-2005  version.
+# TRUE or FALSE (case-insensitive)
+#wmx.corrigendum_2_version: FALSE
+
+# Show transaction ID direction bit separately from the rest of the transaction ID field.
+# TRUE or FALSE (case-insensitive)
+#wimaxasncp.show_transaction_id_d_bit: FALSE
+
+# Print debug output to the console.
+# TRUE or FALSE (case-insensitive)
+#wimaxasncp.debug_enabled: FALSE
+
+# Version of the NWG that the R6 protocol complies with
+# One of: R1.0 v1.0.0, R1.0 v1.2.0, R1.0 v1.2.1
+# (case-insensitive).
+#wimaxasncp.nwg_version: R1.0 v1.2.1
 
 # Whether the WINS-Replication dissector should reassemble messages spanning multiple TCP segments. To use this option, you must also enable "Allow subdissectors to reassemble TCP streams" in the TCP protocol settings.
 # TRUE or FALSE (case-insensitive)

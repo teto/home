@@ -273,7 +273,6 @@ function rprompt_cmd() {
     # echo "${vcs_info_msg_0_}"
 }
 
-
 update_term_title () {
     set_term_title $(pwd)
 }
@@ -368,40 +367,17 @@ compdef _gnu_generic mptcpanalyzer
 
 
 # todo only when on $NIXOS
-nix-env() {
-    local hasF=""
-    for arg in "$@"
-    do
-        [[ arg = "-f" ]] && hasF=1
-    done
-    if [[ -n "$hasF" ]]
-    then command nix-env "$@"
-    else command nix-env -f '<nixpkgs>' "$@"
-    fi
-}
-
-mpsched() {
-    _fast_sysctl "net/mptcp/mptcp_scheduler" $@
-}
-
-mppm() {
-    _fast_sysctl "net/mptcp/mptcp_path_manager" $@
-}
-
-
-_fast_sysctl() {
-
-# TODO move to bash, should work everywhere
-    key="$1"
-    shift 1
-    arg="$@"
-    # echo "Sched [$sched]"
-    if [ -z "$arg" ]; then
-	sysctl $key
-    else
-	sudo sysctl -w $key=$arg
-    fi
-}
+# nix-env() {
+#     local hasF=""
+#     for arg in "$@"
+#     do
+#         [[ arg = "-f" ]] && hasF=1
+#     done
+#     if [[ -n "$hasF" ]]
+#     then command nix-env "$@"
+#     else command nix-env -f '<nixpkgs>' "$@"
+#     fi
+# }
 
 # Enable FZF fuzzy matcher {{{
 
@@ -414,9 +390,3 @@ _fast_sysctl() {
 # you can list the actually bound keys with bindkey -M viins
 . "$XDG_CONFIG_HOME/fzf-gems/fzf_git_keybindings.zsh"
 # }}}
-
-# for android/lineage os developement
-# if [ -d "$HOME/adb-fastboot" ] ; then
-#     expot PATH="$HOME/adb-fastboot:$PATH"
-# fi
-#

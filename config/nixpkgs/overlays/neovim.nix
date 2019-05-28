@@ -202,6 +202,9 @@ rec {
 
   };
 
+  # TODO pass args to the wrapper to get access to :
+  # - bash-language-server
+  # - digestif ?
   neovimDefaultConfig = {
         withPython3 = true;
         withPython = false;
