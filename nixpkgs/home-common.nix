@@ -27,7 +27,11 @@ rec {
   # home.extraOutputsToInstall = [ "man" "doc" ];
   programs.man.enable = true;
 
-  home.packages = [];
+  home.packages = [
+    pkgs.nodePackages.bash-language-server
+    # just in my branch :'(
+    pkgs.lua53Packages.lua-lsp
+  ];
 
   # works only because TIGRC_USER is set
   # if file exists vim.tigrc

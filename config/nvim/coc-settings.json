@@ -37,9 +37,16 @@
 				"languageServerHaskell": {
 					"hlintOn": false,
 					"maxNumberOfProblems": 10,
-					"completionSnippetsOn": true
+					"completionSnippetsOn": true,
+					"liquidOn": false
+					// "formatOnImportOn"
+					// "formattingProvider":
 				}
 			}
+		},
+		"latex": {
+			"command": "digestif",
+			"filetypes": ["latex"]
 		},
 		"lua": {
 			"command": "lua-lsp",

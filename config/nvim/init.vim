@@ -88,7 +88,7 @@ call plug#begin(s:plugdir)
 " Plug 'AGhost-7/critiq.vim' " :h critiq
 Plug 'iamcco/markdown-preview.nvim' " test , most recent
 Plug 'rhysd/git-messenger.vim' " to show git message 
-Plug 'voldikss/vim-translate-me' " floawting windows for neovim
+" Plug 'voldikss/vim-translate-me' " floawting windows for neovim
 Plug 'chrisbra/Colorizer'
 Plug 'ndmitchell/ghcid', { 'rtp': 'plugins/nvim' }
 Plug 'neovimhaskell/nvim-hs.vim' " to help with nvim-hs
@@ -111,7 +111,7 @@ Plug 'tweekmonster/nvim-api-viewer', {'on': 'NvimAPI'} " see nvim api
 Plug 'tweekmonster/startuptime.vim', {'on': 'StartupTime'} " see startup time per script
 Plug 'vim-scripts/vis' " ?
 Plug 'Konfekt/vim-CtrlXA' " use ctrl a/xto cycle between different words
-" Plug 'jamessan/vim-gnupg'
+" Plug 'jamessan/vim-gnupg' " does not support neovim yet ?
 " Plug 'mattn/gist-vim' " to gist requires webapi
 " provider dependant {{{
 " new deoplete relies on yarp :
@@ -143,7 +143,6 @@ Plug 'gianarb/notify.vim' " call notify#emitNotification('Title', 'Body')
 " Plug 'the-lambda-church/coquille', {'branch': 'matt', 'for': 'coq'}
 " Plug 'teto/coquille', {'branch': 'matt', 'for': 'coq'}
 " Plug 'let-def/vimbufsync', {'for': 'coq'} " for coq
-" Plug 'vim-scripts/ProportionalResize'
 " Plug 'inside/vim-search-pulse' " Search related
 
 " vim-search-pulse {{{
@@ -369,7 +368,7 @@ Plug 'sickill/vim-monokai'
 Plug 'justinmk/molokai'
 Plug 'mhinz/vim-janah'
 Plug 'vim-scripts/Solarized'
-Plug 'morhetz/gruvbox'
+Plug 'gruvbox-community/gruvbox'
 Plug 'romainl/flattened'
 Plug 'joshdick/onedark.vim'
 Plug 'NLKNguyen/papercolor-theme'
@@ -928,7 +927,7 @@ nmap ga <Plug>(UnicodeGA)
 " Search parameters {{{
 set hlsearch " highlight search terms
 set incsearch " show search matches as you type
-set noignorecase " ignore case when searching
+set ignorecase " ignore case when searching
 set smartcase " take case into account if search entry has capitals in it
 set wrapscan " prevent from going back to the beginning of the file
 
@@ -1747,7 +1746,7 @@ let g:iron_repl_open_cmd="vsplit"
 " let g:iron_new_lua_repl_hooks
 "let g:iron_map_defaults
 "}}}
-"{{{
+" mardown-preview.nvim {{{
 " set to 1, nvim will open the preview window after entering the markdown buffer default: 0
 let g:mkdp_auto_start = 0
 " set to 1, the nvim will auto close current preview window when change
@@ -2181,11 +2180,11 @@ command! -nargs=+ -bang -complete=command R call ReadExCommandOutput(<bang>0, <q
 
 
 " was supposed to be called from
-function! UpdatePythonHost(prog)
-  let g:python3_host_prog = a:prog
-  " Update mypy as well
-  let g:neomake_python_mypy_exe = fnamemodify( g:python3_host_prog, ':p:h').'/mypy'
-endfunc
+" function! UpdatePythonHost(prog)
+"   let g:python3_host_prog = a:prog
+"   " Update mypy as well
+"   let g:neomake_python_mypy_exe = fnamemodify( g:python3_host_prog, ':p:h').'/mypy'
+" endfunc
 
 
 hi CursorLine                    guibg=#293739 guifg=None

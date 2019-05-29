@@ -60,8 +60,9 @@ rec {
 
   environment.systemPackages = with pkgs; [
     manpages  # because man tcp should always be available
-    termite.terminfo # to be able to edit over ssh
+    moreutils # contains errno binary that can translate errnos
     ncurses.dev # for infocmp
+    termite.terminfo # to be able to edit over ssh
     utillinux # for lsns (namespace listing)
   ]
   ++ (load-packages ./basetools.nix)

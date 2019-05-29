@@ -14,6 +14,7 @@ let
 
   devPkgs = with pkgs; let
       # float to use coc.nvim
+      # TODO pass extraMakeWrapperArgs
       neovim-xp = pkgs.wrapNeovim pkgs.neovim-unwrapped-master (pkgs.neovimDefaultConfig);
     in
     [
@@ -159,14 +160,6 @@ in
     ]
    ;
 
-   # with my version
-  # programs.neovim = pkgs.neovimDefaultConfig;
-  # # test
-  # programs.neovim = import ./neovim.nix {
-  #   inherit pkgs lib
-  #   # texliveEnv
-  #   ;
-  # };
 
   # tray is enabled by default
   services.udiskie = {

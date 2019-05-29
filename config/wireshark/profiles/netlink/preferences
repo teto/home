@@ -225,6 +225,7 @@ gui.column.format:
 	"Length", "%L",
 	"Link-layer address type", "%Cus:netlink.hatype:0:R",
 	"Family", "%Cus:netlink.family:0:R",
+	"Message type", "%Cus:netlink.hdr_type:0:R",
 	"Error code", "%Cus:netlink.error:0:R",
 	"Info", "%i"
 

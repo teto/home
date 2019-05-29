@@ -59,7 +59,7 @@ let
     # grub.device = "/dev/sda";
   };
 
-  boot.kernelParams = [ " console=ttyS0" ];
+  boot.kernelParams = [ " console=ttyS0" "acpi_backlight=vendor" ];
 
   # TODO use the mptcp one ?
   # boot.kernelPackages = pkgs.linuxPackages;

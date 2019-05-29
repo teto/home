@@ -31,10 +31,23 @@ asysctl() {
 # 3. start the new one
 reload_mod() {
     newMod="$1"
+
+	if [ -z "${newMod}" ]; then
+		echo "Use: <path to new module>" 
+		echo "possibly /home/teto/mptcp2/build/net/mptcp/mptcp_netlink.ko"
+	fi
 # 1. change to another scheduler
     mppm "fullmesh"
+	sleep 1
 # 2. rmmod the current one
-    rmmod "mptcp_netlink"
-    insmod "$1"
+    sudo rmmod "mptcp_netlink"
+
+# 3. Insert our new module
+	sleep 1
+    sudo insmod "$1"
+
+# 4. restore path manager
+	mppm "netlink"
+
 }
 
