@@ -14,10 +14,10 @@
   boot.extraModulePackages = [ ];
 
   # TODO update/ generate locally ?
-  # fileSystems."/" =
-  #   { device = "/dev/disk/by-uuid/c7b61720-50ca-44df-bddd-5927cfe74342";
-  #     fsType = "ext4";
-  #   };
+  fileSystems."/" =
+    { device = "/dev/sda1";
+      fsType = "ext4";
+    };
 
   swapDevices = [ ];
 

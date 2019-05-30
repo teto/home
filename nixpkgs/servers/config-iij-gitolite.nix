@@ -10,7 +10,7 @@ in
       ../modules/gitolite.nix
       ../modules/openssh.nix
       ../modules/nextcloud.nix
-      ../modules/blog.nix
+      # ../modules/blog.nix
 
   ];
 
@@ -46,20 +46,20 @@ in
 
   };
 
-  nixpkgs.overlays = [
-    import ../../config/nixpkgs/overlays/neovim.nix
-  ];
+  # nixpkgs.overlays = [
+  #   import ../../config/nixpkgs/overlays/neovim.nix
+  # ];
 
-  home-manager.users.teto = { ... }:
-  {
-    # fails for now
-    imports = [ ../home-common.nix ];
-    xdg.configFile."weechat/irc.conf".source = ../../config/weechat/irc.conf;
+  # home-manager.users.teto = { ... }:
+  # {
+  #   # fails for now
+  #   imports = [ ../home-common.nix ];
+  #   xdg.configFile."weechat/irc.conf".source = ../../config/weechat/irc.conf;
 
-    programs.zsh.shellInit = ''
-      ZSH_DISABLE_COMPFIX=true
-    '';
-  };
+  #   programs.zsh.shellInit = ''
+  #     ZSH_DISABLE_COMPFIX=true
+  #   '';
+  # };
 
   # Fix problem with sudo
   # https://github.com/NixOS/nixops/issues/931

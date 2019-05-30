@@ -807,18 +807,17 @@ let s:opts = {
 
 
 " FzfBranches
-function! UpdateSignifyBranch(branch)
+function! SignifyUpdateBranch(branch)
   " echom 'chosen branch='.a:branch
   let g:signify_vcs_cmds = {
 	\'git': 'git diff --no-color --no-ext-diff -U0 '.a:branch.' -- %f'
     \}
-
 endfunc
 
 function! ChooseSignifyGitCommit()
 
   let dict = copy(s:opts)
-  let dict.sink = funcref('UpdateSignifyBranch')
+  let dict.sink = funcref('SignifyUpdateBranch')
   call fzf#run(dict)
   SignifyRefresh
 endfunction

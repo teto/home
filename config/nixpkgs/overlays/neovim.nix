@@ -139,7 +139,11 @@ rec {
         ]
       );
     in
-      wrapNeovim neovim-unwrapped-master (finalConfig);
+    wrapNeovim neovim-unwrapped-master {
+      # extraMakeWrapperArgs
+      # rename configure ?
+      structuredConfigure = finalConfig;
+    };
 
 
   neovim-unwrapped-master = (super.neovim-unwrapped).overrideAttrs (oldAttrs: {
@@ -252,6 +256,11 @@ rec {
           opt = [ ];
         };
       };
+
+    plugins = {
+      vim-obsession = { customRC = ''This is a test'';};
+
+    };
 
     extraPython3Packages = ps: with ps; [
       pandas
