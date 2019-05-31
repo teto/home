@@ -86,6 +86,7 @@ call plug#begin(s:plugdir)
 " branch v2-integration
 " Plug 'andymass/vim-matchup' " to replace matchit
 " Plug 'AGhost-7/critiq.vim' " :h critiq
+Plug 'alok/notational-fzf-vim' " to take notes
 Plug 'iamcco/markdown-preview.nvim' " test , most recent
 Plug 'rhysd/git-messenger.vim' " to show git message 
 " Plug 'voldikss/vim-translate-me' " floawting windows for neovim
@@ -1837,11 +1838,10 @@ let g:mkdp_page_title = '「${name}」'
 " " Stop the preview"
 " :MarkdownPreviewStop
 "}}}
-
-
-
-
-
+" alok/notational-fzf-vim{{{
+" let g:nv_search_paths = []
+let g:nv_search_paths = ['~/wiki', '~/writing', '~/code', 'docs.md' , './notes.md']
+"}}}
 
 set hidden " you can open a new buffer even if current is unsaved (error E37)
 set completeopt=menu,longest

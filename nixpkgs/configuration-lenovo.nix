@@ -214,6 +214,8 @@ let
   # unfree drivers
   services.xserver.videoDrivers = [ "nvidia" ];
 
+# hardware.nvidia.package
+
   # docker pull mattator/dce-dockerfiles
   # virtualisation.docker = {
   #   enable = true;

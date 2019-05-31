@@ -299,7 +299,9 @@ with libk;
       PRINTK_TIMES        = yes;
       # dynamic debug takes precedence over DEBUG_KERNEL http://blog.listnukira.com/Linux-Kernel-pr-debug-display/
       DYNAMIC_DEBUG       = no;
-      PREEMPT             = yes;
+      # PREEMPT caused a problem when trying to insert modules
+      # let's keep the  default here
+      # PREEMPT             = yes;
       DEBUG_KERNEL        = yes;
       FRAME_POINTER       = yes;
       KGDB                = yes;

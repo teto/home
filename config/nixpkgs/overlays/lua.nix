@@ -1,7 +1,7 @@
 self: prev:
 rec {
 
-  lua5_1 = prev.lua5_1.override {
+  lua = prev.lua.override {
 
 
   #     # TODO use my fork
@@ -18,10 +18,14 @@ rec {
 
     packageOverrides = luaself: luaprev: {
 
-      # luarocks-nix = luaprev.luarocks-nix.overrideAttrs(oa: {
-      #   pname = "toto";
-      #   src = /home/teto/luarocks2;
-      # });
+      luarocks-nix = luaprev.luarocks-nix.overrideAttrs(oa: {
+        pname = "luarocks-toto";
+        # src = /home/teto/luarocks;
+        src = builtins.fetchGit {
+          url = https://github.com/teto/luarocks/;
+          ref = "nix";
+        };
+      });
 
       # prev.lib.traceValSeq 
       cqueues = ( luaprev.cqueues.override({
@@ -33,5 +37,6 @@ rec {
 
   };
 
-  lua51Packages = lua5_1.pkgs;
+  # lua51Packages = lua5_1.pkgs;
+  luaPackages = lua.pkgs;
 }
