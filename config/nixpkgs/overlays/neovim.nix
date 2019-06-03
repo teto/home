@@ -19,6 +19,7 @@ let
       fzf-vim
       # defined in overrides: TODO this should be easier: like fzf-vim should be enough
       fzfWrapper
+      gruvbox
 
       # neomake
 

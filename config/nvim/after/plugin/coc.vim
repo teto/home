@@ -3,6 +3,7 @@
 " plugin manager such as vim-plug.
 " set by nix
 " let g:coc_node_path=
+" coc-yank / coc-vimtex / coc-lua
 " Some servers have issues with backup files, see #649
 set nobackup
 set nowritebackup

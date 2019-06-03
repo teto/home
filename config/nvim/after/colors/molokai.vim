@@ -12,8 +12,7 @@ hi CursorLineNr guibg=#FD971F guifg=#232526
 
 
 " otherwise a bit dark
-hi Pmenu guibg=#232526
-
+" hi Pmenu guibg=#232526
 
 " showbreak and EndOfFile
 hi NonText         guibg=#E5943D

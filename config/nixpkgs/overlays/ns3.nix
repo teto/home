@@ -18,18 +18,22 @@ rec {
   # };
 
   # TODO will loop indefinitely
-  ns3-dev = super.ns-3.overrideAttrs(old: {
+  ns-3-dev = (super.ns-3.override({
+    enableDoxygen = false;
+    build_profile = "optimized";
+    # withManual = true;
+    pythonSupport = true;
+  })).overrideAttrs(old: {
     name = "ns3-dev";
-    src = builtins.fetchGit 
-    # super.fetchFromGitHub 
-    {
-      url = git://github.com/nsnam/ns-3-dev-git;
-      # rev    = "75f6501d4dbbb57ecc0a3907c8428f8ffafb96bd";
-      # sha256 = "1qdyrpdn9d5ii9ihvw38nidln7mgnsxwfz2gyl44cgj32syi9m8x";
+    src = super.fetchFromGitLab {
+      owner = "tomhenderson";
+      repo   = "ns-3-dev";
+      rev    = "6670ff8d48f69c605d33185febd37d13175599a8";
+      sha256 = "0xmqq2pkadnspzv509azc93g4f5a3g5snqwhaldiaiidzirk9gwi";
     };
   });
 
-  ns3-local = super.ns-3.override {
+  ns-3-local = super.ns-3.override {
     python = self.python3;
     enableDoxygen = false;
     build_profile = "optimized";

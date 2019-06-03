@@ -62,11 +62,8 @@ rec {
     ];
   });
 
-
   # vdirsyncer-custom = super.vdirsyncer.overrideAttrs(oldAttrs: rec {
-
   #   doCheck=true; # doesn't work, checkPhase still happens
- 
   #   propagatedBuildInputs = oldAttrs.propagatedBuildInputs
   #   ++ (with super.pkgs.python3Packages;
   #           [  keyring secretstorage pygobject3 ])

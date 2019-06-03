@@ -184,8 +184,6 @@ dpms = status.register("dpms", format="")
 
 # status.register("scratchpad",)
 
-
-# 
 res = status.register(
     "mail",
     backends=[
