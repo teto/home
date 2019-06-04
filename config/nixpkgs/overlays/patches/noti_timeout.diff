@@ -1,0 +1,13 @@
+diff --git a/internal/command/local.go b/internal/command/local.go
+index 5fa8f48..67b7cac 100644
+--- a/internal/command/local.go
++++ b/internal/command/local.go
+@@ -15,7 +15,7 @@ func getBanner(title, message string, v *viper.Viper) notification {
+ 	return &freedesktop.Notification{
+ 		Summary:       title,
+ 		Body:          message,
+-		ExpireTimeout: 500,
++		ExpireTimeout: 5000,
+ 		AppIcon:       "utilities-terminal",
+ 	}
+ }

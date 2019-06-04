@@ -28,9 +28,10 @@ rec {
   programs.man.enable = true;
 
   home.packages = [
+    # TODO set in vim makeWrapperArgs
     pkgs.nodePackages.bash-language-server
     # just in my branch :'(
-    pkgs.lua53Packages.lua-lsp
+    # pkgs.lua53Packages.lua-lsp
   ];
 
   # works only because TIGRC_USER is set

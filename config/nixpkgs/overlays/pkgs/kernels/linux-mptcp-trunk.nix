@@ -1,13 +1,13 @@
 { stdenv, buildPackages, fetchFromGitHub, perl, buildLinux, ... } @ args:
 
 buildLinux (rec {
-  mptcpVersion = "0.94.4";
-  modDirVersion = "4.19.0";
+  mptcpVersion = "0.95.0";
+  modDirVersion = "5.0.0";
   version = "${modDirVersion}-mptcp_v${mptcpVersion}";
   # autoModules= true;
 
   extraMeta = {
-    branch = "4.19";
+    branch = "5.0";
     maintainers = with stdenv.lib.maintainers; [ teto layus ];
   };
 

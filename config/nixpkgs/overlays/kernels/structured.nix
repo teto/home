@@ -242,7 +242,7 @@ with libk;
       # LOCALVERSION ""
       LOCALVERSION_AUTO = no;
       # EXTRAVERSION ""
-      SYN_COOKIES = no;
+      SYN_COOKIES = lib.modules.mkForce no;
 
       # TODO reenable ?
       # poses problems see https://unix.stackexchange.com/questions/308870/how-to-load-compressed-kernel-modules-in-ubuntu
@@ -301,7 +301,7 @@ with libk;
       DYNAMIC_DEBUG       = no;
       # PREEMPT caused a problem when trying to insert modules
       # let's keep the  default here
-      # PREEMPT             = yes;
+      PREEMPT             = yes;
       DEBUG_KERNEL        = yes;
       FRAME_POINTER       = yes;
       KGDB                = yes;
@@ -313,6 +313,12 @@ with libk;
       # netling debug/diagnostic
       NETLINK_DIAG = yes;
       INET_DIAG    = yes;
+
+      # else I get an error with current mptcp 0.95
+      HSA_AMD = lib.modules.mkForce no;
+
+
+      # DRM_AMDGPU = yes; # generates another error, implies DRM ?
 
       # increase ring kernel buffer size
       LOG_BUF_SHIFT  = freeform "22";

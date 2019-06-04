@@ -18,13 +18,13 @@ rec {
 
     packageOverrides = luaself: luaprev: {
 
-      luarocks-nix = luaprev.luarocks-nix.overrideAttrs(oa: {
+      luarocks-nix-dev = luaprev.luarocks-nix.overrideAttrs(oa: {
         pname = "luarocks-toto";
-        # src = /home/teto/luarocks;
-        src = builtins.fetchGit {
-          url = https://github.com/teto/luarocks/;
-          ref = "nix";
-        };
+        src = /home/teto/luarocks;
+        # src = builtins.fetchGit {
+        #   url = https://github.com/teto/luarocks/;
+        #   ref = "nix";
+        # };
       });
 
       # prev.lib.traceValSeq 

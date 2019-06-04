@@ -60,7 +60,7 @@ let
     strongswanStructured  # to get VPN working
     persoConfig
 
-    noChelsio # because of mptcp trunk
+    # noChelsio # because of mptcp trunk
 
   ];
 
@@ -181,10 +181,34 @@ in rec {
 #- CONFIG_CGROUPS is not enabled!
 
 # TODO fetch with nix build linux_mptcp_trunk_raw.src -f ~/nixpkgs
-  linux_mptcp_trunk_raw = (
-    (prev.callPackage ./pkgs/kernels/linux-mptcp-trunk.nix {
+# prev.linux_mptcp_95.override(
 
-    kernelPatches = prev.linux_4_19.kernelPatches;
+    # {
+    #   # else I get an error with current mptcp 0.95
+    #   HSA_AMD = stdenv.lib.modules.mkForce { tristate = "n"; };
+    # }
+  # linux_mptcp_trunk_official = prev.callPackage ./pkgs/kernels/linux-mptcp-trunk.nix {
+
+  #   kernelPatches = prev.linux_5_0.kernelPatches;
+  #   # does not seem true anymore
+  #   # preferBuiltin = true;
+  #   # ignoreConfigErrors=true;
+  #   # autoModules = true;
+  #   # boot.debug1device
+  #   # modDirVersion="4.19.0";
+  #   structuredExtraConfig = defaultConfigStructured;
+  # });
+
+  linux_mptcp_trunk_raw = (prev.callPackage ./pkgs/kernels/linux-mptcp-trunk.nix
+    {
+
+
+    # kernelPatches =
+    #   [ prev.kernelPatches.bridge_stp_helper
+    #     prev.kernelPatches.modinst_arg_list_too_long
+    #     # kernelPatches.export_kernel_fpu_functions
+    #   ];
+    kernelPatches = prev.linux_5_0.kernelPatches;
     # does not seem true anymore
     preferBuiltin = true;
     ignoreConfigErrors=true;
@@ -193,7 +217,7 @@ in rec {
     # modDirVersion="4.19.0";
 
     structuredExtraConfig = defaultConfigStructured;
-  }));
+  });
 
   linux_mptcp_trunk_dev = addMenuConfig linux_mptcp_trunk_raw ;
 

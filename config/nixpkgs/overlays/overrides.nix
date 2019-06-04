@@ -114,8 +114,12 @@ rec {
     name = "xdg-utils-custom-matt";
     # version = "matt";
     patches = [
-      ./pkgs/xdg_utils_symlink.diff
+      ./patches/xdg_utils_symlink.diff
     ];
+  });
+
+  noti = super.noti.overrideAttrs(oa: {
+    patches = [ ./patches/noti_timeout.diff ];
   });
 
   nixops-dev = super.nixops.overrideAttrs ( oa: {

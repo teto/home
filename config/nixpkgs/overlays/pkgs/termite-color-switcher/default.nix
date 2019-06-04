@@ -2,7 +2,7 @@
 with pkgs;
 stdenv.mkDerivation  {
 
-  name = "termite-color-switcher";
+  pname = "termite-color-switcher";
   version = "05052019";
 
   src = fetchFromGitHub {

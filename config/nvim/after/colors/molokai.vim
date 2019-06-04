@@ -16,6 +16,10 @@ hi CursorLineNr guibg=#FD971F guifg=#232526
 
 " showbreak and EndOfFile
 hi NonText         guibg=#E5943D
+
+" use for "nbsp", "space", "tab" and "trail".
+hi Whitespace         guibg=NONE
+
 " in upstream molokai, EndOfBuffer n'est pas defini
 hi EndOfBuffer         guibg=#465457
 " guifg=None is important here
