@@ -196,23 +196,34 @@ let
   #   openFirewall = true;
   #   # port = ;
   # };
-  services.xserver.displayManager.slim = {
-    autoLogin = true;
-    defaultUser = "teto";
-  };
+  services.xserver = {
+    displayManager.lightdm = {
+      autoLogin = {
+        enable = true;
+        user = "teto";
 
-  services.xserver.displayManager.lightdm = {
-    autoLogin = {
-      enable = true;
-      user = "teto";
-
+      };
+      # background = ;
+    };
+    displayManager.slim = {
+        autoLogin = true;
+        defaultUser = "teto";
     };
 
-    # background = ;
+    # set the correct primary monitor
+    xrandrHeads = [
+      {
+        primary = true;
+        # monitorConfig = ''
+        #   '';
+
+        output = "DP-2";
+      }
+    ];
+
+    videoDrivers = [ "nvidia" ];
   };
 
-  # unfree drivers
-  services.xserver.videoDrivers = [ "nvidia" ];
 
 # hardware.nvidia.package
 
@@ -288,5 +299,6 @@ let
         # ];
       }
   ];
+
 
 }
