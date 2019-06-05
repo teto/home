@@ -82,6 +82,8 @@ let g:neomake_remove_invalid_entries=1
 call neomake#configure#automake('w')
 silent NeomakeDisable
 
+autocmd FileType nix call neomake#configure#automake_for_buffer('w')
+
 " func update_mypy_maker
   " Hook into NeomakeJobInit.
 " function! s:NeomakeTestJobInit(context) abort

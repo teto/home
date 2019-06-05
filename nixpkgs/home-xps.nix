@@ -71,7 +71,8 @@ let
   programs.termite = {
     enable = true;
     # TODO the light in fact
-    colorsExtra = builtins.readFile ../config/termite/solarized-dark;
+    # check if it exists
+    # colorsExtra = builtins.readFile ../config/termite/solarized-dark;
   };
 
   xsession.initExtra = ''

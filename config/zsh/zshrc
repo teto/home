@@ -18,6 +18,8 @@
 # source "$ZDOTDIR/plugins/per-directory-history.zsh"
 # }}}
 
+. "$ZDOTDIR/init.sh"
+
 . "$ZDOTDIR/aliases.zsh"
 # notifies when long command finishes
 # zbell should recognize aliases
@@ -381,10 +383,7 @@ compdef _gnu_generic mptcpanalyzer
 
 # Enable FZF fuzzy matcher {{{
 
-# FZF_PATH="$(fzf-share)"
 # need zle to be active
-
-# TODO package
 # https://junegunn.kr/2016/07/fzf-git
 . "$XDG_CONFIG_HOME/fzf-gems/fzf_git_functions.sh"
 # you can list the actually bound keys with bindkey -M viins

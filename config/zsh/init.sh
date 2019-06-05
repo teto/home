@@ -27,13 +27,13 @@ asysctl() {
 }
 
 
-# we need to 
+# we need to
 # 3. start the new one
 reload_mod() {
     newMod="$1"
 
 	if [ -z "${newMod}" ]; then
-		echo "Use: <path to new module>" 
+		echo "Use: <path to new module>"
 		echo "possibly /home/teto/mptcp2/build/net/mptcp/mptcp_netlink.ko"
 	fi
 # 1. change to another scheduler

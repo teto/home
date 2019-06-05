@@ -94,7 +94,7 @@ Plug 'chrisbra/Colorizer'
 Plug 'ndmitchell/ghcid', { 'rtp': 'plugins/nvim' }
 Plug 'neovimhaskell/nvim-hs.vim' " to help with nvim-hs
 " Plug 'KabbAmine/vCoolor.vim' " :Vcooler
-Plug 'rickhowe/diffchar.vim' " per char diff
+" Plug 'rickhowe/diffchar.vim' " per char diff buggy
 " Plug 'prabirshrestha/vim-lsp'
 " Plug 'bfredl/nvim-lspmirror'
 " Plug 'bfredl/nvim-lspext' " extension
@@ -118,7 +118,7 @@ Plug 'Konfekt/vim-CtrlXA' " use ctrl a/xto cycle between different words
 " new deoplete relies on yarp :
 Plug 'AndrewRadev/splitjoin.vim' " gS/gJ to
 " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'roxma/nvim-yarp' " required for deoplete
+" Plug 'roxma/nvim-yarp' " required for deoplete
 " Plug 'roxma/vim-hug-neovim-rpc' " what is that ? required for deoplete
 " Plug '~/vim-config'
 Plug '~/nvim-palette', { 'do': ':UpdateRemotePlugins' }
@@ -220,7 +220,7 @@ Plug 'sjl/gundo.vim' " :GundoShow/Toggle to redo changes
 " Plug 'arakashic/chromatica.nvim', { 'for': 'cpp' } " semantic color syntax
 
 " Plug 'fszymanski/deoplete-abook' " replaced with the khard one
-Plug 'paretje/deoplete-notmuch', {'for': 'mail', 'do': ':UpdateRemotePlugins'}
+" Plug 'paretje/deoplete-notmuch', {'for': 'mail', 'do': ':UpdateRemotePlugins'}
 " Plug 'adborden/vim-notmuch-address' " does not work yet
 " Plug 'nicoe/deoplete-khard', {'for': 'mail'}
 
@@ -233,7 +233,7 @@ Plug 'neovimhaskell/haskell-vim', {'for':'haskell'} " haskell install
 " Plug 'SevereOverfl0w/deoplete-github' " completion on commit issues (just
 " crashes without netrc
 " Plug 'deoplete-plugins/deoplete-make' " empty !
-Plug 'deoplete-plugins/deoplete-zsh'
+" Plug 'deoplete-plugins/deoplete-zsh'
 " Plug 'ncm2/float-preview.nvim'
 " Plug 'deoplete-plugins/deoplete-jedi'
 " Plug 'deoplete-plugins/deoplete-clang'

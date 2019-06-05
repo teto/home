@@ -73,7 +73,7 @@ let
 
   programs.termite = {
     enable = true;
-    colorsExtra = builtins.readFile ../config/termite/solarized-dark;
+    # colorsExtra = builtins.readFile ../config/termite/solarized-dark;
   };
 }
 

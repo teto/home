@@ -231,6 +231,11 @@ rec {
   #   # $pdf_update_signal = 'SIGHUP';
   # '';
 
+  # qt = {
+  #   enable = true;
+  #   platformTheme = "gnome";
+  # };
+
   programs.zsh = rec {
     enable = true;
     # dotDir = "${config.xdg.configHome}/zsh";
@@ -250,6 +255,8 @@ rec {
     };
     shellAliases = {
     } // config.programs.bash.shellAliases;
+
+    autocd = true;
     # plugins =
     # loginExtra=
     # profileExtra

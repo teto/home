@@ -3,6 +3,9 @@
 # to list families
 genl ctrl list
 
+# to identify a family
+genl ctrl get id 0x1F
+genl ctrl get name mptcp
 
 ip tcp_metrics show
 
