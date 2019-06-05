@@ -1838,9 +1838,15 @@ let g:mkdp_page_title = '「${name}」'
 " " Stop the preview"
 " :MarkdownPreviewStop
 "}}}
-" alok/notational-fzf-vim{{{
+" alok/notational-fzf-vim {{{
+" use c-x to create the note
 " let g:nv_search_paths = []
 let g:nv_search_paths = ['~/wiki', '~/writing', '~/code', 'docs.md' , './notes.md']
+let g:nv_default_extension = '.md'
+
+" String. Default is first directory found in `g:nv_search_paths`. Error thrown
+"if no directory found and g:nv_main_directory is not specified
+"let g:nv_main_directory = g:nv_main_directory or (first directory in g:nv_search_paths)
 "}}}
 
 set hidden " you can open a new buffer even if current is unsaved (error E37)

@@ -153,8 +153,8 @@ rec {
 
       src = builtins.fetchGit {
         # url = git@github.com:neovim/neovim.git;
-        # url = https://github.com/neovim/neovim.git;
-        url = https://github.com/teto/neovim.git;
+        url = https://github.com/neovim/neovim.git;
+        # url = https://github.com/teto/neovim.git;
         # ref = "master";
         # rev = "";
         # rev = "d81b510ecf1890828caa653ebb2fa053131f3265";
@@ -163,31 +163,8 @@ rec {
 
   });
 
-  # the one to use with coc.nvim
-  # https://github.com/neoclide/coc.nvim/wiki/F.A.Q#how-to-make-preview-window-shown-aside-with-pum
-  # neovim-unwrapped-float = (super.neovim-unwrapped).overrideAttrs (oldAttrs: {
-	  # name = "neovim";
-	  # version = "float";
-
-  #     # src = builtins.fetchGit {
-  #     #   url = https://github.com/chemzqm/neovim.git;
-  #     #   rev = "293ce565ada9d8bc6f1d6e4f61b787cfd554ecd9";
-  #     #   # ref = "+refs/pull/6619/head";
-  #     # };
-  # });
-
 
   # neovim-unwrapped = self.neovim-unwrapped-master;
-
-  # test on nixos unstable
-  neovim-test = super.neovim.override {
-          # extraPython3Packages withPython3
-          # extraPythonPackages withPython
-          # withNodeJs withRuby
-          viAlias=false;
-          vimAlias=true;
-          # configure;
-  };
 
   neovimHaskellConfig = {
 
