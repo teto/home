@@ -279,9 +279,9 @@ with libk;
       # Disabled as the only non-default is the useless round-robin.
 
       # Smarter TCP congestion controllers
-      TCP_CONG_LIA = yes;
-      TCP_CONG_OLIA = yes;
-      TCP_CONG_WVEGAS = yes;
+      TCP_CONG_LIA = module;
+      TCP_CONG_OLIA = module;
+      TCP_CONG_WVEGAS = module;
       TCP_CONG_BALIA = yes;
 
       # tool to generate packets at very high speed in the kerne
@@ -289,6 +289,14 @@ with libk;
 
       # http://www.draconyx.net/articles/net_drop_monitor-monitoring-packet-loss-in-the-linux-kernel.html
       # NET_DROP_MONITOR = yes;
+    };
+
+    # remove some superfluous
+    minimalConfig = {
+
+      INPUT_TOUCHSCREEN=no;
+      INFINIBAND = no;
+      DRM_RADEON = no;
     };
 
     # if not set it is converted to  https://lwn.net/Articles/434833/

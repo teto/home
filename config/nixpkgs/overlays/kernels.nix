@@ -58,6 +58,7 @@ let
     strongswanStructured  # to get VPN working
     persoConfig
 
+    minimalConfig
     # noChelsio # because of mptcp trunk
 
   ];
@@ -75,7 +76,6 @@ in rec {
       autoModules = false;
       preferBuiltin = true;
       structuredExtraConfig = defaultConfigStructured;
-      # extraConfig = mptcpKernelExtraConfig;
   }));
 
   mptcp94-local-stable = mptcp94.override ({
@@ -88,9 +88,6 @@ in rec {
     kernelPreferBuiltin = true;
 
     structuredExtraConfig = defaultConfigStructured;
-    # extraConfig = mptcpKernelExtraConfig + localConfig 
-    # + ovsConfig + bpfConfig + net9pConfig + mininetConfig
-    # ;
   });
 
   my_lenovo_kernel = linux_mptcp_trunk_raw;
@@ -107,22 +104,19 @@ in rec {
   #   structuredExtraConfig = defaultConfigStructured;
   # });
 
+
+  # TODO try make localmodconfig
   linux_mptcp_trunk_raw = (prev.callPackage ./pkgs/kernels/linux-mptcp-trunk.nix
     {
 
-
-    # kernelPatches =
-    #   [ prev.kernelPatches.bridge_stp_helper
-    #     prev.kernelPatches.modinst_arg_list_too_long
-    #     # kernelPatches.export_kernel_fpu_functions
-    #   ];
+    # triggers can't exec "lsmod"
+    # defconfig = "localmodconfig";
     kernelPatches = prev.linux_5_0.kernelPatches;
     # does not seem true anymore
     preferBuiltin = true;
     ignoreConfigErrors=true;
     # autoModules = true;
     # boot.debug1device
-    # modDirVersion="4.19.0";
 
     structuredExtraConfig = defaultConfigStructured;
   });
@@ -157,18 +151,18 @@ in rec {
   #   };
   # });
 
-    # linux_test2 = linux_test.override {
-    #   # TODO 
-    #   structuredExtraConfig = with prev.lib.modules;
-    #   # just to tests
-    #   # mkMerge 
-    #   [
-    #     # linux_test.passthru.commonStructuredConfig
-    #     structuredConfigs.mininetConfigStructured 
-    #     { USB_DEBUG = optional yes; }
-    #     { USB_DEBUG = yes; }
-    #   ];
-    # };
+  # linux_test2 = linux_test.override {
+  #   # TODO 
+  #   structuredExtraConfig = with prev.lib.modules;
+  #   # just to tests
+  #   # mkMerge 
+  #   [
+  #     # linux_test.passthru.commonStructuredConfig
+  #     structuredConfigs.mininetConfigStructured 
+  #     { USB_DEBUG = optional yes; }
+  #     { USB_DEBUG = yes; }
+  #   ];
+  # };
 
 }
 
