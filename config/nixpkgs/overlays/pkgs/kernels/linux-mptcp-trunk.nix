@@ -11,22 +11,17 @@ buildLinux (rec {
     maintainers = with stdenv.lib.maintainers; [ teto layus ];
   };
 
-  #src = fetchFromGitHub {
-  #  owner = "multipath-tcp";
-  #  repo = "mptcp";
-  #  rev = "v${mptcpVersion}";
-  #  sha256 = "13mi672jr1x463kzig1hi9cpdi8x6nqdfd4bqlrjn8zca48f4ln4";
-  #};
+  src = fetchFromGitHub {
+    owner = "teto";
+    repo = "mptcp";
+    rev = "ff14eb2e60b5c8143a6b29244249396eeb6c06f3";
+    sha256 = "13mi671jr1x463kzig1hi9cpdi8x6nqdfd4bqlrjn8zca48f4ln4";
+  };
   # I think that it's lost
-
-
-    src = builtins.fetchGit {
-      # url = "ssh://git@github.com/teto/mptcp.git";
-      url = https://github.com/teto/mptcp.git;
-      # url = "gitolite@nixos.iijlab.net:mptcp.git";
-      ref = "trunk_v8_wip";
-      # url = https://github.com/teto/mptcp.git;
-      # sha256= "00000000000000000000000000000000";
-    };
+  # src = builtins.fetchGit {
+  #   url = https://github.com/teto/mptcp.git;
+  #   # url = "gitolite@nixos.iijlab.net:mptcp.git";
+  #   ref = "trunk_v8_wip";
+  # };
 
 } // args)
