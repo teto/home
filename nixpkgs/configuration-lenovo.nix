@@ -14,7 +14,7 @@ let
     ./modules/network-manager.nix
     ./modules/libvirtd.nix
     ./modules/vpn.nix
-    ./modules/proxy.nix
+    # ./modules/proxy.nix
 
     # ihaskell marked as broken :'(
     # ./modules/jupyter.nix

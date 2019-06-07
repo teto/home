@@ -15,7 +15,7 @@ buildLinux (rec {
     owner = "teto";
     repo = "mptcp";
     rev = "ff14eb2e60b5c8143a6b29244249396eeb6c06f3";
-    sha256 = "13mi671jr1x463kzig1hi9cpdi8x6nqdfd4bqlrjn8zca48f4ln4";
+    sha256 = "08844y56jpbrxwjly8m47d279b1qkp8gngzw9hwx6qps9sfvvwf0";
   };
   # I think that it's lost
   # src = builtins.fetchGit {

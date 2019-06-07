@@ -297,6 +297,8 @@ with libk;
       INPUT_TOUCHSCREEN=no;
       INFINIBAND = no;
       DRM_RADEON = no;
+      # mkForce ?
+      # IPV6 = no;
     };
 
     # if not set it is converted to  https://lwn.net/Articles/434833/
