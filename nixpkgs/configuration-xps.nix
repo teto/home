@@ -15,7 +15,7 @@ let
     ./common-desktop.nix
     # ./modules/libvirtd.nix
     ./modules/distributedBuilds.nix
-    # ./modules/mptcp.nix
+    ./modules/mptcp.nix
     ./modules/vpn.nix
     # ./modules/jupyter2.nix
 
@@ -64,7 +64,7 @@ let
   # TODO use the mptcp one ?
   # boot.kernelPackages = pkgs.linuxPackages;
   # boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_4_14;
+  # boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_4_14;
 
   # boot.extraModprobeConfig = ''
     # options iwlwifi bt_coex_active=0

@@ -79,8 +79,8 @@ let g:neomake_remove_invalid_entries=1
 "
 
 " todo only if neomake loaded
-call neomake#configure#automake('w')
-silent NeomakeDisable
+" call neomake#configure#automake('w')
+" silent NeomakeDisable
 
 autocmd FileType nix call neomake#configure#automake_for_buffer('w')
 

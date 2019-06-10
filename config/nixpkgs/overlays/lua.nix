@@ -18,8 +18,8 @@ rec {
 
     packageOverrides = luaself: luaprev: {
 
-      luarocks-nix-dev = luaprev.luarocks-nix.overrideAttrs(oa: {
-        pname = "luarocks-toto";
+      luarocks-nix = luaprev.luarocks-nix.overrideAttrs(oa: {
+        pname = "luarocks-local";
         src = /home/teto/luarocks;
         # src = builtins.fetchGit {
         #   url = https://github.com/teto/luarocks/;
