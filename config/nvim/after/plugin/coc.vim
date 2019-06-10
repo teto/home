@@ -31,6 +31,8 @@ function! s:show_documentation()
     execute 'h '.expand('<cword>')
   else
     call CocAction('doHover')
+	" Answer I got on gitter:
+	" no return value for now, you can use coc#util#echo_line() to check echo message.
   endif
 endfunction
 

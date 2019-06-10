@@ -14,6 +14,7 @@ in
       # wait until it gets upstreamd o/
       # ../modules/mptcp.nix
       ../account-root.nix
+      ../account-teto.nix
     ];
 
   # services.nextcloud.hostName = secrets.mptcp_server.hostname;
@@ -38,10 +39,19 @@ in
   networking.mptcp = {
     enable = true;
     debug = true;
+    package = pkgs.linux_mptcp_94;
   };
 
-  networking.interfaces.ens3 =  secrets.mptcp_server.interfaces;
-  # networking.interfaces.ens3.ip6 = [ secrets.mptcp_server.ip6 ];
+  services.iperf3 = {
+    enable = true;
+    port = 6000;
+    bind = (builtins.head secrets.mptcp_server.interfaces.ipv4.addresses).address;
+    # debug = 
+    # extraFlags = 
+    # authorizedUsersFile
+  };
+
+  networking.interfaces.ens192 =  secrets.mptcp_server.interfaces;
 
   nix.trustedUsers = [ "root" "teto" ];
 

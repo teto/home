@@ -37,7 +37,7 @@ in
      #   # termite sxiv
      # ];
 
-     # openssh.authorizedKeys.keyFiles = [ ./keys/iij_rsa.pub ];
+     openssh.authorizedKeys.keyFiles = [ ./keys/iij_rsa.pub ];
      # openssh.authorizedKeys.keys = 
   };
 

@@ -153,7 +153,7 @@ let g:vim_search_pulse_duration = 400
 
 " Plug 'ehamberg/vim-cute-python' " display unicode characters, kinda looks bad on vim grid
 Plug 'dbakker/vim-projectroot' " projectroot#guess()
-" Plug 'sunaku/vim-dasht' " get documentation (zeavim is also a contender KabbAmine/zeavim.vim)
+Plug 'sunaku/vim-dasht' " get documentation (zeavim is also a contender KabbAmine/zeavim.vim)
 " Plug 'sk1418/QFGrep' " Filter quickfix
 " (upstreamd already or ?)
 " Plug 'mtth/scratch.vim' " , {'on': 'Scratch'} mapped to ?
@@ -217,8 +217,6 @@ Plug 'sjl/gundo.vim' " :GundoShow/Toggle to redo changes
 " Plug 'vim-scripts/DrawIt' " to draw diagrams
 " Plug 'Yggdroot/indentLine',{ 'for': 'python' }  " draw verticals indents but seems greedy
 " Plug 'beloglazov/vim-online-thesaurus' " thesaurus => dico dde synonymes
-" Plug 'arakashic/chromatica.nvim', { 'for': 'cpp' } " semantic color syntax
-
 " Plug 'fszymanski/deoplete-abook' " replaced with the khard one
 " Plug 'paretje/deoplete-notmuch', {'for': 'mail', 'do': ':UpdateRemotePlugins'}
 " Plug 'adborden/vim-notmuch-address' " does not work yet
@@ -234,10 +232,10 @@ Plug 'neovimhaskell/haskell-vim', {'for':'haskell'} " haskell install
 " crashes without netrc
 " Plug 'deoplete-plugins/deoplete-make' " empty !
 " Plug 'deoplete-plugins/deoplete-zsh'
-" Plug 'ncm2/float-preview.nvim'
 " Plug 'deoplete-plugins/deoplete-jedi'
 " Plug 'deoplete-plugins/deoplete-clang'
 "
+" Plug 'ncm2/float-preview.nvim'
 "}}}
 
 "Plug 'mattn/vim-rtags' a l'air léger
@@ -248,7 +246,6 @@ Plug 'tpope/vim-unimpaired' " [<space> [e [n ]n pour gerer les conflits etc...
 
 " Plug 'dbgx/lldb.nvim',{ 'for': 'c' } " To debug (use clang to get correct line numbers
 " Plug 'dbgx/gdb.nvim',{ 'for': 'c' } " To debug (use clang to get correct line numbers
-" Plug 'powerman/vim-plugin-viewdoc' " looks interesting
 
 " filetypes {{{2
 " Plug 'cespare/vim-toml', { 'for': 'toml'}
