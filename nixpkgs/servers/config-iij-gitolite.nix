@@ -34,7 +34,7 @@ in
   networking.defaultGateway = secrets.gateway;
   networking.nameservers = secrets.nameservers;
 
-  networking.interfaces.ens3 = secrets.gitolite_server.interfaces;
+  networking.interfaces.ens192 = secrets.gitolite_server.interfaces;
 
   # allow to fetch mininet from the host machine
 

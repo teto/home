@@ -4,6 +4,7 @@ let
   nixos-remote = { config, pkgs, ... }:
   {
     deployment.targetHost = (builtins.head secrets.gitolite_server.interfaces.ipv4.addresses).address;
+    # deployment.targetHost = builtins.head secrets.gitolite_server.hostname;
     deployment.targetEnv = "none";
 
     # deployment.keys.my-secret.text = builtins.readFile ./secret-mptcp;

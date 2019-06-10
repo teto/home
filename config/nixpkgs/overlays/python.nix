@@ -19,7 +19,10 @@ rec {
     packageOverrides = pythonself: pythonsuper: {
 
         kergen = pythonsuper.callPackage ./pkgs/kergen.nix { };
-        Kconfiglib =  pythonsuper.callPackage ./pkgs/kconfiglib.nix { };
+
+
+        # Kconfiglib =  pythonsuper.callPackage ./pkgs/kconfiglib.nix { };
+
       # if (super.pkgs ? pygccxml) then null else
         # now that s wird
         # pygccxml =  super.callPackage ../pygccxml.nix {

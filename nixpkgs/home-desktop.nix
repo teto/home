@@ -160,7 +160,7 @@ in
     pkgs.up # live preview of pipes
     pkgs.peek # GIF recorder
 
-    unstable.pkgs.cachix
+    pkgs.cachix
     ]
    ;
 
