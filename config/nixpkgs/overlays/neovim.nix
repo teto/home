@@ -154,6 +154,7 @@ rec {
       src = builtins.fetchGit {
         # url = git@github.com:neovim/neovim.git;
         url = https://github.com/neovim/neovim.git;
+        rev = "3e58e60568c2acc765f3ee72295e2f15baa3cf52";
         # url = https://github.com/teto/neovim.git;
         # ref = "master";
         # rev = "";
@@ -235,10 +236,10 @@ rec {
         };
       };
 
-    plugins = {
-      vim-obsession = { customRC = ''This is a test'';};
+    # plugins = {
+    #   vim-obsession = { customRC = ''This is a test'';};
 
-    };
+    # };
 
     extraPython3Packages = ps: with ps; [
       pandas

@@ -8,7 +8,7 @@ with lib;
     debug = true;
     pathManager = "netlink";
 
-    package =  pkgs.linux_mptcp_trunk_raw;
+    # package =  pkgs.linux_mptcp_trunk_raw;
     # package = pkgs.linux_mptcp;
   };
 }

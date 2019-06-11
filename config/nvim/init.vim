@@ -105,6 +105,8 @@ Plug 'chrisbra/vim-diff-enhanced' "
 " Plug 'mhinz/vim-signify' " Indicate changed lines within a file using a VCS.
 " Plug 'vim-pandoc/vim-pandoc'
 Plug 'vim-pandoc/vim-pandoc-syntax'
+Plug 'idanarye/vim-merginal'
+Plug 'tveskag/nvim-blame-line' " ToggleBlameLine
 " Plug 'moznion/github-commit-comment.vim' " last update from 2014
 " Plug 'dhruvasagar/vim-open-url' " gB/gW to open browser
 Plug 'Carpetsmoker/xdg_open.vim' " overrides gx
