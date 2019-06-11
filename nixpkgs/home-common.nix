@@ -96,6 +96,7 @@ rec {
     # TODO package these instead now these are submoudles of dotfiles To remove
     PATH="$HOME/rofi-scripts:$HOME/buku_run:$PATH";
     VIFM="$XDG_CONFIG_HOME";
+    WWW_HOME="$XDG_CONFIG_HOME/w3m";
   };
 
   # TODO

@@ -2190,6 +2190,7 @@ command! -nargs=+ -bang -complete=command R call ReadExCommandOutput(<bang>0, <q
 "   let g:neomake_python_mypy_exe = fnamemodify( g:python3_host_prog, ':p:h').'/mypy'
 " endfunc
 
+nnoremap <S-CR> i<CR><Esc>
 
 hi CursorLine                    guibg=#293739 guifg=None
 " hi CocErrorFloat
