@@ -5,6 +5,9 @@ let
     (builtins.readFile ../../config/i3/config.xp)
     (builtins.readFile ../../config/i3/config.colors)
   ];
+
+
+  unstable = import <nixos-unstable> {}; # https://nixos.org/channels/nixos-unstable
 in
 {
   xsession.windowManager.i3 =
@@ -138,10 +141,10 @@ in
       #   };
         # };
         #
-# set $mod Mod1
-# il ne comprend pas Super_L
+    # set $mod Mod1
+    # il ne comprend pas Super_L
 
-  # consider using lib.mkOptionDefault according to help
+    # consider using lib.mkOptionDefault according to help
     keybindings =
     let
       mad="Mod4"; mod="Mod1";
@@ -163,16 +166,16 @@ in
         # "${mod}+Ctrl+h" = ''exec "${pkgs.rofi}/bin/rofi -modi 'clipboard:greenclip print' -show clipboard"'';
         # "${mod}+ctrl+b" = "exec " + ../buku_run/buku_run;
         "${mod}+g" = "exec ${pkgs.i3-easyfocus}/bin/i3-easyfocus";
-        "${mod}+2" = "exec ${pkgs.i3-easyfocus}/bin/i3-easyfocus";
         # "${mod}+3" = "exec ${pkgs.buku_run}/bin/buku_run";
         # "${mod}+b" = "exec ${pkgs.buku_run}/bin/buku_run";
         "${mod}+p" = "exec ${pkgs.rofi-pass}/bin/rofi-pass";
 
+        "$mod+Ctrl+1" = ''mode "papis"'';
         "$mod+Ctrl+p" = ''mode "papis"'';
         # "${mod}+shift+p" = "focus parent";
 
         # "${mod}+shift+n" = "exec ${unstable.gnome3.nautilus}/bin/nautilus";
-        # "${mod}+quotedbl" =  "exec ${unstable.qutebrowser}/bin/qutebrowser";
+        "${mod}+Shift+1" =  "exec ${pkgs.qutebrowser}/bin/qutebrowser";
 
       # "${mod}+Shift+Return" = "exec --no-startup-id ${pkgs.termite -d "$(xcwd)"
 # bindsym $GroupFr+$mod+eacute i3-list-windows

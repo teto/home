@@ -1,0 +1,2 @@
+#! /usr/bin/env nix-shell
+curl https://ipinfo.io/ip

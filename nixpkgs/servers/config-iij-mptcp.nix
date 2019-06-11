@@ -9,6 +9,7 @@ in
       ./hardware-iij-mptcp.nix
       ./common-server.nix
       ../modules/openssh.nix
+      ../modules/wireshark.nix
       # ../modules/nextcloud.nix
 
       # wait until it gets upstreamd o/
@@ -22,9 +23,9 @@ in
   # install mosh-server
   # programs.mosh.enable = true;
 
-  environment.systemPackages = with pkgs; [
-    iperf
-  ];
+  # environment.systemPackages = with pkgs; [
+  #   iperf
+  # ];
 
 
   boot.loader.grub.enable = true;
@@ -44,12 +45,24 @@ in
 
   services.iperf3 = {
     enable = true;
-    port = 6000;
+    # firewall configured to let pass .51:5201
+    # port = 6000;
     bind = (builtins.head secrets.mptcp_server.interfaces.ipv4.addresses).address;
-    # debug = 
-    # extraFlags = 
+    # openFirewall = true;
+    # debug =
+    # extraFlags =
     # authorizedUsersFile
   };
+
+  # for soc
+  # 
+# 
+    # 
+  networking.firewall.extraCommands = let 
+    desktopIp = (builtins.head secrets.lenovoDesktop.interfaces.ipv4.addresses).address;
+  in ''
+    iptables -A INPUT -p tcp --dport 5201 -s ${desktopIp} -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT
+  '';
 
   networking.interfaces.ens192 =  secrets.mptcp_server.interfaces;
 
