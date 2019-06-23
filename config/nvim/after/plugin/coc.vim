@@ -30,18 +30,14 @@ function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
     execute 'h '.expand('<cword>')
   else
-    call CocAction('doHover')
-	" Answer I got on gitter:
-	" no return value for now, you can use coc#util#echo_line() to check echo message.
-	" let tpl= '[coc.nvim] No definition found.'
-
-	" if &ft == "haskell"
+    if (CocAction('doHover')) == v:false && &ft == "haskell"
 	" 	let result=coc#util#echo_line()
 	" 	echom result
 	" 	if result == tpl
 	" 		echom "haskell fallback"
 	" 	endif
-	" endif
+		execute '!hoogle '.expand('<cword>')
+	endif
   endif
 endfunction
 

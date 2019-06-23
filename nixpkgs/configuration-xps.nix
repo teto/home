@@ -231,7 +231,8 @@ let
 
 
 
-  hardware.acpilight.enable = true;
+  # need to be root
+  # hardware.acpilight.enable = true;
   # -- ?
   hardware.brightnessctl.enable = true; 
 

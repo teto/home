@@ -1,32 +1,43 @@
-# Solarized light color scheme
-
 [colors]
-foreground = #657b83
-foreground_bold = #073642
-#foreground_dim = #888888
-background = #fdf6e3
-cursor = #586e75
 
-# if unset, will reverse foreground and background
-#highlight = #839496
+# special
+foreground        = #f8f8f2
+foreground_bold   = #f8f8f2
+cursor            = #f8f8f2
+cursor_foreground = #272822
+background        = rgba(39, 40, 34, 0.8)
 
-# colors from color0 to color254 can be set
-color0 = #073642
-color1 = #dc322f
-color2 = #859900
-color3 = #b58900
-color4 = #268bd2
-color5 = #d33682
-color6 = #2aa198
-color7 = #eee8d5
-color8 = #002b36
-color9 = #cb4b16
-color10 = #586e75
-color11 = #657b83
-color12 = #839496
-color13 = #6c71c4
-color14 = #93a1a1
-color15 = #fdf6e3
+# black
+color0  = #272822
+color8  = #75715e
+
+# red
+color1  = #f92672
+color9  = #f92672
+
+# green
+color2  = #a6e22e
+color10 = #a6e22e
+
+# yellow
+color3  = #f4bf75
+color11 = #f4bf75
+
+# blue
+color4  = #66d9ef
+color12 = #66d9ef
+
+# magenta
+color5  = #ae81ff
+color13 = #ae81ff
+
+# cyan
+color6  = #a1efe4
+color14 = #a1efe4
+
+# white
+color7  = #f8f8f2
+color15 = #f9f8f5
 
 [options]
 scroll_on_output = false
@@ -43,7 +54,7 @@ clickable_url = false
 # apparently it's possible to
 font = Inconsolata 11
 # font = FontAwesome 11
-scrollback_lines = 100000
+scrollback_lines = 1000000
 search_wrap = false
 #icon_name = terminal
 #geometry = 640x480
@@ -66,4 +77,7 @@ filter_unmatched_urls = true
 # emit escape sequences for other keys modified by Control
 #modify_other_keys = false
 
+
+
+# Solarized dark color scheme
 
