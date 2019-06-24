@@ -55,10 +55,7 @@ in
   };
 
   # for soc
-  # 
-# 
-    # 
-  networking.firewall.extraCommands = let 
+  networking.firewall.extraCommands = let
     desktopIp = (builtins.head secrets.lenovoDesktop.interfaces.ipv4.addresses).address;
   in ''
     iptables -A INPUT -p tcp --dport 5201 -s ${desktopIp} -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT

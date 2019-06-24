@@ -4,6 +4,8 @@ tags
 TAGS
 build/
 
+__pad__
+
 # Compiled source {{{
 *.com
 *.class
@@ -19,7 +21,8 @@ __pycache__/
 *.mo
 *.fls
 *.fdb_latexmk
-ls-R
+package.cache*
+.mypy_cache/
 # }}}
 
 # Editor specific {{{
@@ -76,7 +79,6 @@ Session.vim
 *.blg
 # }}}
 
-
 # OS generated files {{{
 # IPC socks for instance
 *.sock
@@ -89,4 +91,3 @@ Icon?
 ehthumbs.db
 Thumbs.db
 # }}}
-

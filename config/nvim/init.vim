@@ -1232,7 +1232,7 @@ let g:vimtex_compiler_progname='nvr'
 " Note: `pplatex` and `pulp` require that `-file-line-error` is NOT passed to the LaTeX
   " compiler. |g:vimtex_compiler_latexmk| will be updated automatically if one
 " let g:vimtex_quickfix_method="latexlog"
-let g:vimtex_quickfix_method="pplatex"
+let g:vimtex_quickfix_method="latexlog"
 " todo update default instead with extend ?
 " let g:vimtex_quickfix_latexlog = {
 "       \ 'underfull': 0,
