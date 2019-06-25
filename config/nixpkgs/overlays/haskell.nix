@@ -39,6 +39,7 @@ self: prev:
       gutenhasktags = dontCheck (hprev.callPackage ./pkgs/gutenhasktags {});
 
       ip = dontCheck hprev.ip;
+      c2hsc = dontCheck hprev.c2hsc;
 
       zeromq4-haskell = prev.haskell.lib.dontCheck hprev.zeromq4-haskell;
 

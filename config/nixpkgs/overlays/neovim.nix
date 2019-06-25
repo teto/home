@@ -150,9 +150,7 @@ rec {
   neovim-unwrapped-master = (super.neovim-unwrapped).overrideAttrs (oldAttrs: {
 	  name = "neovim";
 	  version = "nightly";
-
       src = builtins.fetchGit {
-        # url = git@github.com:neovim/neovim.git;
         url = https://github.com/neovim/neovim.git;
         rev = "3e58e60568c2acc765f3ee72295e2f15baa3cf52";
         # url = https://github.com/teto/neovim.git;
@@ -160,6 +158,16 @@ rec {
         # rev = "";
         # rev = "d81b510ecf1890828caa653ebb2fa053131f3265";
         # checksum = "1prmibvr5v1cri71miy08qd1pvbnxmy04irnrxan2ynv95w0q0qm";
+      };
+  });
+
+  neovim-unwrapped-treesitter = (super.neovim-unwrapped).overrideAttrs (oldAttrs: {
+	  name = "neovim";
+	  version = "nightly";
+
+      src = builtins.fetchGit {
+        url = https://github.com/teto/neovim.git;
+        ref = "treesitter";
       };
 
   });
@@ -285,17 +293,6 @@ rec {
       export CLANG_SANITIZER=ASAN_UBSAN
     '';
   });
-
-  #     # withPython = false;
-  #     # withPython3 = false; # pour les tests ?
-  #     # withRuby = false; # pour les tests ?
-  #     # extraPython3Packages = with self.python3Packages;[ pandas python jedi]
-  #     # ++ super.stdenv.lib.optionals ( self.pkgs ? python-language-server) [ self.pkgs.python-language-server ] ;
-  #     # todo generate a file with the path to python-language-server ?
-  #     # unpackPhase = ":"; # cf https://nixos.wiki/wiki/Packaging_Software
-	  # src = super.lib.cleanSource ~/neovim;
-  #     meta.priority=0;
-  # });
 
   # neovim-unwrapped-local = super.pkgs.neovim-unwrapped.overrideAttrs (oldAttrs: {
 	  # name = "neovim-unwrapped-local";
