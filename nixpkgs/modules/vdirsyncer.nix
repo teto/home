@@ -21,7 +21,8 @@
   # };
 
   accounts.calendar = {
-    basePath = "$HOME/.calendars";
+    basePath = "${config.home.homeDirectory}/calendars";
+    # basePath = "$HOME/calendars";
     accounts.iij = {
       khal.enable = true;
 
@@ -29,14 +30,16 @@
         enable = true;
         collections = null;
         metadata = ["color" "displayname"];
-        local = {
-          type = "filesystem";
-          fileExt = ".ics";
-        };
+      };
 
-        remote = {
-          type = "caldav";
-          url = "http://nixos.iijlab.net/remote.php/dav/calendars/root/personal/";
+      local = {
+        type = "filesystem";
+        fileExt = ".ics";
+      };
+
+      remote = {
+        type = "caldav";
+        url = "http://nixos.iijlab.net/remote.php/dav/calendars/root/personal/";
           # url = "https://dav.mailbox.org/caldav/<some hash>";
           # userName = "<my email address>";
         # password.fetch = ["command", "~/dotfiles/bin/pass-show", "iij/nextcloud"]
@@ -46,7 +49,6 @@
         };
       };
     };
-  };
 
   # accounts.contact = {
   #   basePath = "$HOME/.contacts";
@@ -70,7 +72,7 @@
 
   programs.vdirsyncer = {
     enable = true;
-    # package = pkgs.vdirsyncerStable;
+    # package = pkgs.vdirsyncerStable;  # can conflict
 
   };
 }

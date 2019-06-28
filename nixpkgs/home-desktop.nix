@@ -65,7 +65,7 @@ let
     libsecret
     newsboat
     slack
-    vdirsyncer
+    # vdirsyncer
     customWeechat
     # leafnode dovecot22 dovecot_pigeonhole fetchmail procmail w3m
     # mairix mutt msmtp lbdb contacts spamassassin
@@ -346,21 +346,21 @@ in
 
 
   # TODO make sure it works
-  systemd.user.services.vdirsyncer = {
-    Unit = {
-      After = [ "network.target" ];
-      Description = "Vdirsyncer Daemon";
-    };
+  # systemd.user.services.vdirsyncer = {
+  #   Unit = {
+  #     After = [ "network.target" ];
+  #     Description = "Vdirsyncer Daemon";
+  #   };
 
-    Install = {
-      WantedBy = [ "default.target" ];
-    };
+  #   Install = {
+  #     WantedBy = [ "default.target" ];
+  #   };
 
-    Service = {
-      Environment = "PATH=${config.home.profileDirectory}/bin";
-      ExecStart = "${pkgs.vdirsyncer}/bin/vdirsyncer sync";
-      Type = "notify";
-      # ExecStartPre = ''${pkgs.bash}/bin/bash -c "${pkgs.coreutils}/bin/mkdir -p '${cfg.dataDir}' '${cfg.playlistDirectory}'"'';
-    };
-  };
+  #   Service = {
+  #     Environment = "PATH=${config.home.profileDirectory}/bin";
+  #     ExecStart = "${pkgs.vdirsyncer}/bin/vdirsyncer sync";
+  #     Type = "notify";
+  #     # ExecStartPre = ''${pkgs.bash}/bin/bash -c "${pkgs.coreutils}/bin/mkdir -p '${cfg.dataDir}' '${cfg.playlistDirectory}'"'';
+  #   };
+  # };
 }
