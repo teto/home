@@ -4,10 +4,16 @@
 //	"diagnostic.warningSign": "⚠",
 //	"diagnostic.infoSign": ">>",
 //	"diagnostic.hintSign": ">>",
-	"python.jediEnabled": false,
+	// "python.jediEnabled": false,
+	"git.enableGutters": false,
+	"git.addGlameToVirtualText": false,
+	//"git.changeRemovedSign.hlGroup": ,
+	// enable completion from github #
+	"coc.source.issues.enable": false,
 //	"python.linting.pep8Enabled": true,
 //	"python.linting.mypyEnabled": true,
 	"coc.preferences.snippets.enable": true,
+	"translator.toLang": "fr",
 	"coc.source.around.enable": true,
 	// use https://github.com/neoclide/coc.nvim/wiki/Completion-with-sources#improve-completion-experience
 	"coc.source.around.shortcut": "around",

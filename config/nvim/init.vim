@@ -1661,7 +1661,7 @@ nnoremap <Leader><Leader>k :Dasht!<Space>
 " inoremap <expr><C-o> deoplete#mappings#manual_complete()
 " autocmd CompleteDone * call neosnippet#complete_done()
 "}}}
-"{{{ vim-translate-me / vtm 
+" vim-translate-me / vtm {{{
 " Which language that the text will be translated
 let g:vtm_default_to_lang='en'
 let g:vtm_default_api='bing'
@@ -1675,6 +1675,11 @@ vmap <silent> ,te <Plug>TranslateWV
 nmap <silent> <Leader>r <Plug>TranslateR
 vmap <silent> <Leader>r <Plug>TranslateRV
 "}}}
+" coc-translate {{{
+nmap <Leader>t <Plug>(coc-translator-p)
+" echo 
+nmap <Leader>e <Plug>(coc-translator-e)
+" }}}
 " repl.nvim (from hiphish) {{{
 " let g:repl['lua'] = {
 "     \ 'bin': 'lua',

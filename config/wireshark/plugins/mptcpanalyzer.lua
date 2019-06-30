@@ -1,0 +1,15 @@
+-- TODO add a menu https://wiki.wireshark.org/Lua/Examples#Using_Lua_to_register_protocols_to_more_ports
+-- optional 3rd parameter to register_menu. 
+-- See http://www.wireshark.org/docs/wsug_html_chunked/wsluarm_modules.html 
+-- If omitted, defaults to MENU_STAT_GENERIC. Other options include:
+-- MENU_STAT_UNSORTED (Statistics), 
+-- MENU_STAT_GENERIC (Statistics, first section), 
+-- MENU_STAT_CONVERSATION (Statistics/Conversation List), 
+-- MENU_STAT_ENDPOINT (Statistics/Endpoint List), 
+-- MENU_STAT_RESPONSE (Statistics/Service Response Time), 
+-- MENU_STAT_TELEPHONY (Telephony), 
+-- MENU_ANALYZE_UNSORTED (Analyze), 
+-- MENU_ANALYZE_CONVERSATION (Analyze/Conversation Filter), 
+-- MENU_TOOLS_UNSORTED (Tools)
+
+-- register_menu("Lua Dialog Test",dialog_menu,MENU_TOOLS_UNSORTED)
