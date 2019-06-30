@@ -240,4 +240,13 @@ let
 
   systemd.coredump.enable = true;
 
+
+  services.logind = {
+
+    # see https://bbs.archlinux.org/viewtopic.php?id=225977 for problems with LID
+    lidSwitch = "suspend";
+    lidSwitchDocked = "suspend";
+    lidSwitchExternalPower = "ignore";
+  };
+
 }
