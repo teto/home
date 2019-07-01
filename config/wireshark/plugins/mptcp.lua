@@ -1,13 +1,6 @@
 -- taken from my own project
 -- reload via Analyze -> Reload
 -- lua api https://www.wireshark.org/docs/wsdg_html_chunked/wsluarm_modules.html
--- trivial postdissector example
--- declare some Fields to be read
--- ip_src_f = Field.new("ip.src")
--- ip_dst_f = Field.new("ip.dst")
--- tcp_src_f = Field.new("tcp.srcport")
--- tcp_dst_f = Field.new("tcp.dstport")
--- declare our (pseudo) protocol
 
 local my_info = {
 	version     = "0.0.1",                                               -- required
@@ -38,22 +31,22 @@ local MptcpAttr = {
 }
 
 local MptcpGenlEvent = { "unspec"
-                    ,"MPTCP_EVENT_CREATED"
-                    ,"MPTCP_EVENT_ESTABLISHED"
-                    ,"MPTCP_EVENT_CLOSED"
+                    ,"Created"
+                    ,"Established"
+                    ,"Closed"
                     ,"MPTCP_CMD_ANNOUNCE"
                     ,"MPTCP_CMD_REMOVE"
                     ,"MPTCP_EVENT_ANNOUNCED"
                     ,"MPTCP_EVENT_REMOVED"
-                    ,"MPTCP_CMD_SUB_CREATE"
-                    ,"MPTCP_CMD_SUB_DESTROY"
-                    ,"MPTCP_EVENT_SUB_ESTABLISHED"
-                    ,"MPTCP_EVENT_SUB_CLOSED"
+                    ,"Subflow Created"
+                    ,"Subflow destroyed"
+                    ,"Subflow established"
+                    ,"Subflow closed"
                     ,"MPTCP_CMD_SUB_PRIORITY"
                     ,"MPTCP_EVENT_SUB_PRIORITY"
-                    ,"MPTCP_CMD_SET_FILTER"
-                    ,"MPTCP_CMD_EXIST"
-                    ,"MPTCP_CMD_SND_CLAMP_WINDOW"
+                    ,"Set filter"
+                    ,"Exist"
+                    ,"Clamped window"
                     ,"MPTCP_CMD_AFTER_LAST"
 				}
 
@@ -107,10 +100,6 @@ function mptcp_proto.dissector(tvb,pinfo,tree)
 	subtree:add_packet_field(reserved_f, tvb(2,2), 0)
 	-- subtree:add(cmd_f, cmd, "Command"..MptcpGenlEvent[cmd])
        -- subtree:add(genl_cmd, "This is a test")
---        -- subtree:add(conv_F,conv)
-    -- end
-	--
-	-- pinfo.cols.info:append(" " .. tostring(pinfo.dst).." -> "..tostring(pinfo.src))
 	-- then it's a tlv protocol
 end
 
