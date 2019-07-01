@@ -8,7 +8,6 @@ export no_proxy="localhost,127.0.0.1"
 # otherwise won't work
 export NIX_REMOTE=
 
-# 
 # export http_proxy=proxy.iiji.jp:8080
 # export https_proxy=proxy.iiji.jp:8080
 # export no_proxy="127.0.0.1,localhost,.iiji.jp,.iijprj.net,iijgio.jp"

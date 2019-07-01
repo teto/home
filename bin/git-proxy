@@ -1,0 +1,17 @@
+#!/usr/bin/env nix-shell
+#!nix-shell -p socat -i sh
+# pass git:// connections through http proxy 
+# https://www.emilsit.net/blog/archives/how-to-use-the-git-protocol-through-a-http-connect-proxy/
+# $ git config –global core.gitproxy gitproxy
+# https://gist.github.com/sit/49288
+# otherwise git config --global url.https://github.com/.insteadOf git://github.com/
+# _proxy=your_proxy_domain
+# _proxyport=your_proxy_port
+# _user=username
+# _passwd=password
+# exec socat STDIO PROXY:$_proxy:$1:$2,proxyport=$_proxyport,proxyauth=_user:_passwd
+# TODO make it depend from
+_proxy=proxy.iiji.jp
+_proxyport=8080
+
+exec socat STDIO PROXY:$_proxy:$1:$2,proxyport=$_proxyport

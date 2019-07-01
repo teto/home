@@ -3,16 +3,20 @@
   email = mattator@gmail.com
   signingkey = E1B768A0
 compactionHeuristic
+
 [push]
   default = simple
 
 [core]
-  ; whitespace = space-before-tab
-	compression = 0
+  # whitespace = space-before-tab
+compression = 0
+gitproxy  = git-proxy
 
 #trailing-space
+
 [color]
   ui = true
+
 
 
 
@@ -41,6 +45,11 @@ compactionHeuristic
 # diff.old        "red bold"
 # diff.new        "green bold"
 # diff.whitespace "red reverse"
+
+
+# url.https://github.com/.insteadOf git://github.com/
+# [url "https://github"]
+# insteadOf = git://github
 
 [sendemail]
   chainreplyto = false

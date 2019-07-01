@@ -14,7 +14,7 @@ let
     ./modules/network-manager.nix
     ./modules/libvirtd.nix
     ./modules/vpn.nix
-    # ./modules/proxy.nix
+    ./modules/proxy.nix
 
     # ihaskell marked as broken :'(
     # ./modules/jupyter.nix
@@ -293,11 +293,18 @@ let
 
   # };
 
+  # services.squid.enable = true;
+  # proxyPort
+
   # see https://github.com/NixOS/nixpkgs/pull/45345
+  # switch to it via
+  # sudo /run/current-system/fine-tune/child-1/bin/switch-to-configuration test
   nesting.clone = [
       {
 
-        imports = [ ./modules/proxy.nix ];
+        imports = [
+          ./modules/proxy.nix 
+        ];
         boot.loader.grub.configurationName = "with proxy";
         # networking.proxy.default = "http://proxy.work.com:80";
         # networking.proxy.noProxy = "127.0.0.1,localhost,work.com";
