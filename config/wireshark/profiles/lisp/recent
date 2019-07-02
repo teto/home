@@ -1,4 +1,4 @@
-# Recent settings file for Wireshark 1.10.6.
+# Recent settings file for Wireshark 3.0.1.
 #
 # This file is regenerated each time Wireshark is quit
 # and when changing configuration profile.
@@ -16,10 +16,6 @@ gui.filter_toolbar_show: TRUE
 # Wireless Settings Toolbar show (hide).
 # TRUE or FALSE (case-insensitive).
 gui.wireless_toolbar_show: FALSE
-
-# Show (hide) old AirPcap driver warning dialog box.
-# TRUE or FALSE (case-insensitive).
-gui.airpcap_driver_check_show: TRUE
 
 # Packet list show (hide).
 # TRUE or FALSE (case-insensitive).
@@ -42,7 +38,7 @@ gui.statusbar_show: TRUE
 gui.packet_list_colorize: TRUE
 
 # Timestamp display format.
-# One of: RELATIVE, ABSOLUTE, ABSOLUTE_WITH_DATE, DELTA, DELTA_DIS, EPOCH, UTC, UTC_WITH_DATE
+# One of: RELATIVE, ABSOLUTE, ABSOLUTE_WITH_YMD, ABSOLUTE_WITH_YDOY, ABSOLUTE_WITH_DATE, DELTA, DELTA_DIS, EPOCH, UTC, UTC_WITH_YMD, UTC_WITH_YDOY, UTC_WITH_DATE
 gui.time_format: RELATIVE
 
 # Timestamp display precision.
@@ -57,9 +53,13 @@ gui.seconds_format: SECONDS
 # A decimal number.
 gui.zoom_level: 0
 
-# Bytes view.
-# A decimal number.
-gui.bytes_view: 0
+# Bytes view display type.
+# One of: HEX, BITS
+gui.bytes_view: HEX
+
+# Bytes view text encoding.
+# One of: FROM_PACKET, ASCII, EBCDIC
+gui.bytes_encoding: FROM_PACKET
 
 # Main window upper (or leftmost) pane size.
 # Decimal number.
@@ -71,7 +71,33 @@ gui.geometry_main_lower_pane: 308
 
 # Packet list column pixel widths.
 # Each pair of strings consists of a column format and its pixel width.
-column.width: %m, 117, %t, 94, %Cus:ip.src, 211, %Cus:ip.dst, 132, %Cus:ip.src, 211, %Cus:ip.dst, 132, %p, 74, %L, 58, %i, 726
+column.width:
+        %m, 117,
+        %t, 94,
+        "%Cus:ip.src", 211,
+        "%Cus:ip.dst", 132,
+        "%Cus:ip.src", 211,
+        "%Cus:ip.dst", 132,
+        %p, 74,
+        %L, 58,
+        %i, 726
 
-# Last directory navigated to in File Open dialog.
-gui.fileopen_remembered_dir: /home/teto/ns3/
+# Open conversation dialog tabs.
+# List of conversation names, e.g. "TCP", "IPv6".
+gui.conversation_tabs: 
+
+# Open endpoint dialog tabs.
+# List of endpoint names, e.g. "TCP", "IPv6".
+gui.endpoint_tabs: 
+
+# For RLC stats, whether to use RLC PDUs found inside MAC frames.
+# TRUE or FALSE (case-insensitive).
+gui.rlc_pdus_from_mac_frames: FALSE
+
+# Additional Toolbars shown
+# List of additional toolbars to show.
+gui.additional_toolbar_show: 
+
+# Interface Toolbars show.
+# List of interface toolbars to show.
+gui.interface_toolbar_show: 
