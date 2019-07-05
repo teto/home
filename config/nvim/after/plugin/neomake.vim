@@ -40,7 +40,7 @@ let g:neomake_place_signs=1
 
 let g:neomake_tex_enabled_makers = []
 " disabled 'mypy' since it was generating errors
-let g:neomake_python_enabled_makers = ['mypy']
+let g:neomake_python_enabled_makers = []
 
 " let g:neomake_python_mypy_maker.exe = g:python3_host_prog
 " let g:neomake_python_mypy_maker.args = '-mmypy'

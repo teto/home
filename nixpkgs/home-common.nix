@@ -352,6 +352,9 @@ image/*; eog '%s';
     */*; xdg-open "%s"
   '';
 
+  # for colors etc.
   programs.lesspipe.enable = true;
+
+  manual.json.enable = true;
 
 }
