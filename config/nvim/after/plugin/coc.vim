@@ -78,3 +78,12 @@ let g:coc_snippet_prev = '<c-k>'
 " Use <C-j> for both expand and jump (make expand higher priority.)
 imap <C-j> <Plug>(coc-snippets-expand-jump)
 " }}}
+"
+" coc-translator {{{
+" popup
+nmap <Leader>te <Plug>(coc-translator-p)
+" echo 
+" nmap <Leader>te <Plug>(coc-translator-e)
+" " replace
+" nmap <Leader>ter <Plug>(coc-translator-r)
+"}}}

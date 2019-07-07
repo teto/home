@@ -97,7 +97,7 @@ let
   # creates problem with buffalo check if it blocks requests or what
   # it is necessary to use dnssec though :(
   networking.dnsExtensionMechanism = false;
-  networking.dnsSingleRequest = false;
+  networking.dnsSingleRequest = true; # juste pour test
 
   # this is for gaming
   hardware.opengl.driSupport32Bit = true;
