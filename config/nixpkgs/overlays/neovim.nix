@@ -149,7 +149,7 @@ rec {
 
   neovim-unwrapped-master = (super.neovim-unwrapped).overrideAttrs (oldAttrs: {
 	  name = "neovim";
-	  version = "nightly";
+	  version = "official-master";
       src = builtins.fetchGit {
         url = https://github.com/neovim/neovim.git;
         rev = "3e58e60568c2acc765f3ee72295e2f15baa3cf52";
@@ -163,7 +163,7 @@ rec {
 
   neovim-unwrapped-treesitter = (super.neovim-unwrapped).overrideAttrs (oldAttrs: {
 	  name = "neovim";
-	  version = "nightly";
+	  version = "treesitter";
 
       # see https://discourse.nixos.org/t/announcing-tree-sitter-nix/2483/10
       # https://github.com/neovim/neovim/pull/10124

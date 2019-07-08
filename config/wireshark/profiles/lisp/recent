@@ -1,4 +1,4 @@
-# Recent settings file for Wireshark 3.0.1.
+# Recent settings file for Wireshark 3.0.2.
 #
 # This file is regenerated each time Wireshark is quit
 # and when changing configuration profile.
@@ -80,7 +80,7 @@ column.width:
         "%Cus:ip.dst", 132,
         %p, 74,
         %L, 58,
-        %i, 726
+        %i, 818
 
 # Open conversation dialog tabs.
 # List of conversation names, e.g. "TCP", "IPv6".
