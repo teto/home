@@ -1675,11 +1675,6 @@ vmap <silent> ,te <Plug>TranslateWV
 nmap <silent> <Leader>r <Plug>TranslateR
 vmap <silent> <Leader>r <Plug>TranslateRV
 "}}}
-" coc-translate {{{
-nmap <Leader>t <Plug>(coc-translator-p)
-" echo 
-nmap <Leader>e <Plug>(coc-translator-e)
-" }}}
 " repl.nvim (from hiphish) {{{
 " let g:repl['lua'] = {
 "     \ 'bin': 'lua',

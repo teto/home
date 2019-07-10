@@ -7,13 +7,13 @@
 # lines.markerfacecolor  : red */
 
 # When True, automatically adjust subplot
-figure.autolayout : True  
+figure.autolayout : True
 
 # legend
 legend.fancybox    : True
 
 axes.titlesize : 10
-axes.labelsize : 15
+axes.labelsize : 12
 
 # you can set several cyclers !!!
 # cycler('color', 'rgb') + cycler('lw', [1, 2, 3])
@@ -38,6 +38,6 @@ grid.linestyle   :   :       # dotted
 grid.linewidth   :   0.5     # in points
 #grid.alpha       :   1.0     # transparency, between 0.0 and 1.0
 
-xtick.labelsize : 16
-ytick.labelsize : 16
+xtick.labelsize : 12
+ytick.labelsize : 10
 

@@ -12,7 +12,7 @@
 	// "coc.source.issues.enable": false,
 //	"python.linting.pep8Enabled": true,
 //	"python.linting.mypyEnabled": true,
-	"coc.preferences.snippets.enable": true,
+	"coc.preferences.snippets.enable": false,
 	"translator.toLang": "fr",
 	// "bing", "ciba",
 	"translator.engines": [ "google"],
