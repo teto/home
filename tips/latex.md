@@ -1,5 +1,14 @@
 FAQ:
 
+TODO move this to my blog
+
+Font size:
+https://texblog.org/2012/08/29/changing-the-font-size-in-latex/
+
+can cleanup files with latexmk
+
+Bibliography:
+I utilize the biber backend
 
 The "Missing $ inserted" is probably caused by the underscores and bar
 http://stackoverflow.com/questions/2476831/getting-the-error-missing-inserted-in-latex
@@ -45,8 +54,6 @@ Use \ldots instead of ...
 
 Using tex once a year, here are the few notes worth remembering to stop researching the same intel every year :)
 
-Many things exist in repositories, packages:
-- apt install texlive-publishers
 
 To know where is your personal directories
 $ kpsewhich -var-value=TEXMFHOME
