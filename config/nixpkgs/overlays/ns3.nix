@@ -23,6 +23,8 @@ rec {
     build_profile = "optimized";
     # withManual = true;
     pythonSupport = true;
+    python = super.python3;
+    wafHook = super.wafHook.override({python = super.python3;});
   })).overrideAttrs(old: {
     name = "ns3-dev";
     src = super.fetchFromGitLab {

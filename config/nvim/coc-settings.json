@@ -13,6 +13,8 @@
 //	"python.linting.pep8Enabled": true,
 //	"python.linting.mypyEnabled": true,
 	"coc.preferences.snippets.enable": false,
+	"coc.source.vimtex.disableSyntaxes": true,
+	"coc.source.vimtex.enable": false,
 	"translator.toLang": "fr",
 	// "bing", "ciba",
 	"translator.engines": [ "google"],

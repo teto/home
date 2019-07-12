@@ -95,7 +95,7 @@ gui.endpoint_tabs:
 gui.rlc_pdus_from_mac_frames: FALSE
 
 # Last directory navigated to in File Open dialog.
-gui.fileopen_remembered_dir: /home/teto/mptcpanalyzer/examples/
+gui.fileopen_remembered_dir: /home/teto/
 
 # Additional Toolbars shown
 # List of additional toolbars to show.
