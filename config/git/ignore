@@ -23,6 +23,7 @@ __pycache__/
 *.fdb_latexmk
 package.cache*
 .mypy_cache/
+.eggs/
 # }}}
 
 # Editor specific {{{

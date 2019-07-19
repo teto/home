@@ -298,6 +298,7 @@ rec {
   programs.tmux = {
     enable = true;
     sensibleOnTop = true;
+    secureSocket = false;
     # tmuxinator.enable = false;
     # tmuxp
 
@@ -322,7 +323,7 @@ rec {
       # Status Bar
       # -----------------------
       set-option -g status on                # turn the status bar on
-      if-shell -b '[ head $XDG_CONFIG_HOME/tmux/config ]' \
+      if-shell -b 'head $XDG_CONFIG_HOME/tmux/config' \
         "source-file $XDG_CONFIG_HOME/tmux/config"
       '';
   };

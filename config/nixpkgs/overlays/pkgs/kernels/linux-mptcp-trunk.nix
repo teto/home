@@ -1,21 +1,21 @@
 { stdenv, buildPackages, fetchFromGitHub, perl, buildLinux, ... } @ args:
 
 buildLinux (rec {
-  mptcpVersion = "0.95.0";
-  modDirVersion = "5.0.0";
+  mptcpVersion = "0.96.0";
+  modDirVersion = "5.1.0";
   version = "${modDirVersion}-mptcp_v${mptcpVersion}";
   # autoModules= true;
 
   extraMeta = {
-    branch = "5.0";
+    branch = "5.1";
     maintainers = with stdenv.lib.maintainers; [ teto layus ];
   };
 
   src = fetchFromGitHub {
     owner = "teto";
     repo = "mptcp";
-    rev = "ff14eb2e60b5c8143a6b29244249396eeb6c06f3";
-    sha256 = "08844y56jpbrxwjly8m47d279b1qkp8gngzw9hwx6qps9sfvvwf0";
+    rev = "8185ea4b9a4cdd42c68e9acdaae3fd9ce37b02ad";
+    sha256 = "0rfrn3n9c0sksk5xqbi8nbzp8rb1vmckb44jzcli01cpdx35p98b";
   };
   # I think that it's lost
   # src = builtins.fetchGit {

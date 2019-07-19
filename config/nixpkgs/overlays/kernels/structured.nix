@@ -62,7 +62,6 @@ with libk;
 
     NF_NAT = yes;
     NF_NAT_IPV4 = yes;
-
     # added for mptcp trunk
     # IPV6  = no;
     # NF_NAT_IPV6 = no;
@@ -311,7 +310,7 @@ with libk;
       DYNAMIC_DEBUG       = no;
       # PREEMPT caused a problem when trying to insert modules
       # let's keep the  default here
-      PREEMPT             = yes;
+      # PREEMPT             = yes;
       DEBUG_KERNEL        = yes;
       FRAME_POINTER       = yes;
       KGDB                = yes;
@@ -321,8 +320,15 @@ with libk;
 
     persoConfig = {
       # netling debug/diagnostic
+      NET_DEVLINK = yes;   # can be used with userspace program "dl"
       NETLINK_DIAG = yes;
       INET_DIAG    = yes;
+      CPU_IDLE_GOV_TEO = no;
+      GNSS = no;
+      MTD_SPI_NOR = no;
+      INTEL_MEI_HDCP = no;
+      HABANA_AI = no;
+      NET_VENDOR_TI = no;
 
       # else I get an error with current mptcp 0.95
       HSA_AMD = lib.modules.mkForce no;

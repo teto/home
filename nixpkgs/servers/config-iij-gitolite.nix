@@ -9,6 +9,7 @@ in
       ./common-server.nix
       ../modules/gitolite.nix
       ../modules/openssh.nix
+      ../modules/hercules-ci-agents.nix
       ../modules/nextcloud.nix
       # ../modules/blog.nix
 
@@ -43,7 +44,6 @@ in
     binaryCaches = [
       "https://cache.nixos.org/"
     ];
-
   };
 
   # nixpkgs.overlays = [

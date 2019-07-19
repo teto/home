@@ -1,5 +1,8 @@
 
 let
+  # hercules-ci-agent =
+  #     builtins.fetchTarball "https://github.com/hercules-ci/hercules-ci-agent/archive/stable.tar.gz";
+
   secrets = import ../secrets.nix;
   nixos-remote = { config, pkgs, ... }:
   {

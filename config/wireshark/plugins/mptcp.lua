@@ -5,7 +5,7 @@
 local my_info = {
 	version     = "0.0.1",                                               -- required
 	description = "MPTCP netlink decoded",                           -- optional
-	author      = "Matthieu Coudron ",                                    -- optional
+	-- author      = "Matthieu Coudron ",                                    -- optional
 	-- repository  = "https://github.com/linear-rpc/msgpack-rpc-dissector", -- optional
 }
 set_plugin_info(my_info)
@@ -52,14 +52,9 @@ local MptcpGenlEvent = { "unspec"
 
 -- these Field must already exist !
 local genl_cmd_f = Field.new("genl.cmd")
--- local genl_family_f = Field.new("genl.family_id")
-
-
 local mptcp_proto = Proto("matt", "test")
 
 -- create the fields for our "protocol"
--- TODO should be a string ?
--- TODO load it from string
 cmd_f = ProtoField.uint8("genl.mptcp.cmd","Command", base.DEC)
 version_f = ProtoField.uint8("genl.mptcp.version","MPTCP genl version", base.DEC)
 reserved_f = ProtoField.uint16("genl.mptcp.reserved","Reserved", base.DEC)
@@ -72,23 +67,12 @@ mptcp_proto.fields = {
 	reserved_f
 }
 
--- create a function to "postdissect" each frame
---
--- treeitem:add_packet_field(protofield, [tvbrange], encoding, [label])
--- tvb(offset, len)
 function mptcp_proto.dissector(tvb,pinfo,tree)
---     -- obtain the current values the protocol fields
+    -- obtain the current values the protocol fields
     local mptcp_cmd = genl_cmd_f()
-	print(mptcp_cmd)
-	-- tvb:offset()
-	-- tvb:uint
-    -- if genl_cmd then
 	local b = tvb:bytes()
 	local subtree = tree:add(mptcp_proto, b, "MPTCP netlink")
-	-- local offset = 0
 
--- :uint8())
-	-- il a ete appele plusieurs fois
 	-- treeitem:add([protofield], [tvbrange], [value], [label])
 	local cmd = tvb(0,1):uint()
 	print("cmd value=", cmd, type(cmd))
@@ -108,11 +92,13 @@ end
 -- load the udp.port table
 -- genl.family ("string" table)
 -- ou bien netlink.protocol
-udp_table = DissectorTable.get("genl.family")
-print("toto")
-print(udp_table)
--- -- en general c 31
-local ret = udp_table:add("mptcp", mptcp_proto)
+-- accessible via the GUI: View -> Internals -> Dissector Table
+netlink_table = DissectorTable.get("genl.family")
+-- print("toto")
+print(netlink_table)
+-- en general c 31
+local ret = netlink_table:add("mptcp", mptcp_proto)
+print(ret)
 
 
 

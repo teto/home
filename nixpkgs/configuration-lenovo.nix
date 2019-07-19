@@ -14,7 +14,9 @@ let
     ./modules/network-manager.nix
     ./modules/libvirtd.nix
     ./modules/vpn.nix
-    ./modules/proxy.nix
+
+    # see clone for that
+    # ./modules/proxy.nix
 
     # ihaskell marked as broken :'(
     # ./modules/jupyter.nix
@@ -119,10 +121,25 @@ let
   # it is necessary to use dnssec though :(
   networking.dnsExtensionMechanism = false;
   networking.dnsSingleRequest = false;
-  # networking.interfaces = {
-  #     eth0 = { name = "eth0"; useDHCP=true; macAddress = "3B-0B-B5-6A-ED-91"; mtu=1500;};
-  #     eth1 = { name = "eth1"; useDHCP=true; };
-  # };
+  networking.interfaces = {
+      # macAddress = "3B-0B-B5-6A-ED-91";
+      eno1 = {
+        name = "proxy"; useDHCP=true;  mtu=1500;
+        # I just want to use 
+        ipv4.routes = [
+          { address = "10.0.0.0"; prefixLength = 16; }
+          # { address = "192.168.2.0"; prefixLength = 24; via = "192.168.1.1"; }
+        ];
+      };
+      # eth1 = { name = "eth1"; useDHCP=true; };
+  };
+
+
+  # to allow wireshark to capture from netlink
+  networking.localCommands = ''
+    ip link add nlmon0 type nlmon
+    ip link set dev nlmon0 up
+  '';
 
 
   # List services that you want to enable:
@@ -267,6 +284,7 @@ let
     package = pkgs.linux_mptcp_trunk_raw;
   };
 
+  
   # once available
   # services.greenclip.enable = true;
 
@@ -303,7 +321,7 @@ let
       {
 
         imports = [
-          ./modules/proxy.nix 
+          ./modules/proxy.nix
         ];
         boot.loader.grub.configurationName = "with proxy";
         # networking.proxy.default = "http://proxy.work.com:80";

@@ -1865,6 +1865,10 @@ set diffopt+=internal,algorithm:patience
 nnoremap Y y$
 
 
+" let undos persist across open/close
+let &undodir=stdpath('data').'/undo/'
+set undofile
+
 " search items in location list (per window)
 " nnoremap <F1> :lprev<CR>
 " nnoremap <F2> :lnext<CR>
