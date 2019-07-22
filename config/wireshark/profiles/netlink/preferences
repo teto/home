@@ -1,4 +1,4 @@
-# Configuration file for Wireshark 3.0.2.
+# Configuration file for Wireshark 3.0.3.
 #
 # This file is regenerated each time preferences are saved within
 # Wireshark. Making manual changes should be safe, however.
@@ -286,7 +286,7 @@ gui.qt.font_name: Liberation Mono,9,-1,5,50,0,0,0,0,0
 
 # Interface link-layer header types (Ex: en0(1),en1(143),...)
 # A string
-capture.devices_linktypes: enp3s0(1),enp4s0(1),virbr0(1),vnet0(1),nlmon0(253),lo(1),any(113),virbr1(1)
+capture.devices_linktypes: enp3s0(1),virbr0(1),vnet0(1),nlmon0(253),lo(1),any(113),virbr1(1)
 
 # Interface descriptions (Ex: eth0(eth0 descr),eth1(eth1 descr),...)
 # A string
@@ -302,15 +302,15 @@ capture.devices_linktypes: enp3s0(1),enp4s0(1),virbr0(1),vnet0(1),nlmon0(253),lo
 
 # Interface buffer size (Ex: en0(1),en1(143),...)
 # A string
-capture.devices_buffersize: enp3s0(2),enp4s0(2),virbr0(2),vnet0(2),nlmon0(2),lo(2),any(2),virbr1(2),nflog(2),nfqueue(2),sit0(2),ip6tnl0(2),usbmon0(2),usbmon1(2),usbmon2(2),virbr0-nic(2),virbr1-nic(2),eno1(2)
+capture.devices_buffersize: enp3s0(2),virbr0(2),vnet0(2),nlmon0(2),lo(2),any(2),virbr1(2),nflog(2),nfqueue(2),sit0(2),ip6tnl0(2),usbmon0(2),usbmon1(2),usbmon2(2),virbr0-nic(2),virbr1-nic(2),enp4s0(2),eno1(2)
 
 # Interface snap length (Ex: en0(65535),en1(1430),...)
 # A string
-capture.devices_snaplen: enp3s0:0(262144),enp4s0:0(262144),virbr0:0(262144),vnet0:0(262144),nlmon0:0(262144),lo:0(262144),any:0(262144),virbr1:0(262144),nflog:0(262144),nfqueue:0(262144),sit0:0(262144),ip6tnl0:0(262144),usbmon0:0(262144),usbmon1:0(262144),usbmon2:0(262144),virbr0-nic:0(262144),virbr1-nic:0(262144),eno1:0(262144)
+capture.devices_snaplen: enp3s0:0(262144),virbr0:0(262144),vnet0:0(262144),nlmon0:0(262144),lo:0(262144),any:0(262144),virbr1:0(262144),nflog:0(262144),nfqueue:0(262144),sit0:0(262144),ip6tnl0:0(262144),usbmon0:0(262144),usbmon1:0(262144),usbmon2:0(262144),virbr0-nic:0(262144),virbr1-nic:0(262144),enp4s0:0(262144),eno1:0(262144)
 
 # Interface promiscuous mode (Ex: en0(0),en1(1),...)
 # A string
-capture.devices_pmode: enp3s0(1),enp4s0(1),virbr0(1),vnet0(1),nlmon0(1),lo(1),any(1),virbr1(1),nflog(1),nfqueue(1),sit0(1),ip6tnl0(1),usbmon0(1),usbmon1(1),usbmon2(1),virbr0-nic(1),virbr1-nic(1),eno1(1)
+capture.devices_pmode: enp3s0(1),virbr0(1),vnet0(1),nlmon0(1),lo(1),any(1),virbr1(1),nflog(1),nfqueue(1),sit0(1),ip6tnl0(1),usbmon0(1),usbmon1(1),usbmon2(1),virbr0-nic(1),virbr1-nic(1),enp4s0(1),eno1(1)
 
 # Capture in promiscuous mode?
 # TRUE or FALSE (case-insensitive)
@@ -1538,6 +1538,10 @@ capture.devices_pmode: enp3s0(1),enp4s0(1),virbr0(1),vnet0(1),nlmon0(1),lo(1),an
 # Whether the DSI dissector should reassemble messages spanning multiple TCP segments. To use this option, you must also enable "Allow subdissectors to reassemble TCP streams" in the TCP protocol settings.
 # TRUE or FALSE (case-insensitive)
 #dsi.desegment: TRUE
+
+# Semicolon-separated list of private RSA keys used for DTLS decryption. Used by versions of Wireshark prior to 1.6
+# A string
+#dtls.keys_list: 
 
 # redirect dtls debug to file name; leave empty to disable debug, use "-" to redirect output to stderr
 # 
@@ -4507,6 +4511,10 @@ capture.devices_pmode: enp3s0(1),enp4s0(1),virbr0(1),vnet0(1),nlmon0(1),lo(1),an
 # Whether the TIPC-over-TCP dissector should reassemble messages spanning multiple TCP segments. To use this option, you must also enable "Allow subdissectors to reassemble TCP streams" in the TCP protocol settings.
 # TRUE or FALSE (case-insensitive)
 #tipc.desegment: TRUE
+
+# Semicolon-separated list of private RSA keys used for TLS decryption. Used by versions of Wireshark prior to 1.6
+# A string
+#tls.keys_list: 
 
 # Redirect TLS debug to the file specified. Leave empty to disable debugging or use "-" to redirect output to stderr.
 # A path to a file

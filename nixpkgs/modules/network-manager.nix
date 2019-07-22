@@ -9,7 +9,7 @@
     enable=true;
     # enableStrongSwan = true;
     # one of "OFF", "ERR", "WARN", "INFO", "DEBUG", "TRACE"
-    logLevel="TRACE";
+    logLevel = "TRACE";
 
     # may generate problems
     wifi.scanRandMacAddress = false;

@@ -284,9 +284,8 @@ let
     package = pkgs.linux_mptcp_trunk_raw;
   };
 
-  
   # once available
-  # services.greenclip.enable = true;
+  services.greenclip.enable = true;
 
   # services.owamp.enable = true;
 
@@ -302,6 +301,12 @@ let
     # firefox
       ]
   ;
+
+  # pour l'instant je les ai mis dans conf.d direct pour les tests
+  # networking.networkmanager = {
+  #   extraConfig = ''
+  #     '';
+  # };
 
   # programs.ccache = {
   #   enable = false;
