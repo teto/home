@@ -644,46 +644,6 @@ let g:diminactive_enable_focus = 0
 "}}}
 " ultisnips {{{
 " g:UltiSnipsSnippetsDir
-" <FocusLost><FocusLost>
-" let g:UltiSnipsExpandTrigger = "<C-y>"
-" let g:UltiSnipsExpandTrigger="<Tab>"
-" let g:UltiSnipsListSnippets="<leader>ls"
-" inoremap <expr> <CR> pumvisible() ? "<C-R>=UltiSnips#ExpandSnippetOrJump()<CR>" : "\<CR>"
-
-
-" " let g:endwise_no_mappings = 1
-" inoremap <expr> <CR> pumvisible() ? "\<C-R>=ExpandSnippetOrCarriageReturn()\<CR>" : "\<CR>\<C-R>=EndwiseDiscretionary()\<CR>"
-
-" let g:UltiSnipsJumpForwardTrigger="<C-l>"
-" let g:UltiSnipsJumpBackwardTrigger="<C-h>"
-" " let g:UltiSnipsListSnippets = '<c-tab>'
-"    " g:UltiSnipsJumpForwardTrigger          <c-j>
-"    " g:UltiSnipsJumpBackwardTrigger         <c-k>
-" let g:UltiSnipsUsePythonVersion = 3
-" http://stackoverflow.com/questions/14896327/ultisnips-and-youcompleteme/18685821#18685821
-" function! g:UltiSnips_Complete()
-"     call UltiSnips#ExpandSnippet()
-"     if g:ulti_expand_res == 0
-"         if pumvisible()
-"             return "\<C-n>"
-"         else
-"             call UltiSnips#JumpForwards()
-"             if g:ulti_jump_forwards_res == 0
-"                return "\<TAB>"
-"             endif
-"         endif
-"     endif
-"     return ""
-" endfunction
-
-" au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
-" let g:UltiSnipsJumpForwardTrigger="<tab>"
-" let g:UltiSnipsListSnippets="<c-e>"
-" " this mapping Enter key to <C-y> to chose the current highlight item
-" " and close the selection list, same as other IDEs.
-" " CONFLICT with some plugins like tpope/Endwise
-" inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-
 " }}}
 " vim-plug config {{{
 let g:plug_shallow=1
@@ -1499,46 +1459,6 @@ let g:EasyMotion_verbose = 0
 " nnoremap <silent> <Esc> :<C-U>call halo#run()<CR>
 " nnoremap <silent> <C-c> :<C-U>call halo#run()<CR><C-c>
 " }}}
-" http://vim.wikia.com/wiki/Show_tags_in_a_separate_preview_window {{{
-" au! CursorHold *.[ch] nested call PreviewWord()
-" CursorHold depends on updatetime
-func! PreviewWord()
-  if &previewwindow			" don't do this in the preview window
-    return
-  endif
-  let w = expand("<cword>")		" get the word under cursor
-  if w =~ '\a'			" if the word contains a letter
-
-    " Delete any existing highlight before showing another tag
-    silent! wincmd P			" jump to preview window
-    if &previewwindow			" if we really get there...
-      match none			" delete existing highlight
-      wincmd p			" back to old window
-    endif
-
-    " Try displaying a matching tag for the word under the cursor
-    try
-      exe "ptag " . w
-    catch
-      return
-    endtry
-
-    silent! wincmd P			" jump to preview window
-    if &previewwindow		" if we really get there...
-      if has("folding")
-	silent! .foldopen		" don't want a closed fold
-      endif
-      call search("$", "b")		" to end of previous line
-      let w = substitute(w, '\\', '\\\\', "")
-      call search('\<\V' . w . '\>')	" position cursor on match
-      " Add a match highlight to the word at this position
-      hi previewWord term=bold ctermbg=green guibg=green
-      exe 'match previewWord "\%' . line(".") . 'l\%' . col(".") . 'c\k*"'
-      wincmd p			" back to old window
-    endif
-  endif
-endfun
-"}}}
 " nvimdev {{{
 " call nvimdev#init("path/to/neovim")
 let g:nvimdev_auto_init=1
