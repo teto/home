@@ -692,7 +692,7 @@ let g:gutentags_enabled = 1 " dynamic loading
 let g:gutentags_dont_load=0 " kill once and for all
 let g:gutentags_project_info = [ {'type': 'python', 'file': 'setup.py'},
                                \ {'type': 'ruby', 'file': 'Gemfile'},
-                               \ {'type': 'haskell', 'file': 'Setup.hs'} ]
+                               \ {'type': 'haskell', 'glob': '*.cabal'} ]
 " produce tags for haskell http://hackage.haskell.org/package/hasktags
 " it will fail without a wrapper https://github.com/rob-b/gutenhasktags
 " looks brittle, hie might be better
