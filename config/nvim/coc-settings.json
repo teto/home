@@ -18,6 +18,7 @@
 	"translator.toLang": "fr",
 	// "bing", "ciba",
 	"translator.engines": [ "google"],
+	"coc.preferences.extensionUpdateCheck": "never",
 	// history size
 	"translator.maxsize": 5000, 
 	"coc.source.around.enable": true,
@@ -125,12 +126,12 @@
 		"cquery": {
 			"command": "cquery",
 			"args": ["--log-file=/tmp/cq.log"],
-			"filetypes": [],
+			"filetypes": ["c"],
 			"trace.server": "verbose",
-			"rootPatterns": ["compile_flags.txt", "compile_commands.json", ".vim/", ".git/", ".hg/"],
+			"rootPatterns": ["compile_flags.txt", "compile_commands.json"],
 			"initializationOptions": {
 			"cacheDirectory": "/tmp/cquery"
 			}
 		}
-	}
+  },
 }

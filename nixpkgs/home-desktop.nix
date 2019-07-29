@@ -33,8 +33,7 @@ let
     # gitAndTools.git-annex # fails on unstable
     gitAndTools.git-extras
     gitAndTools.git-crypt
-    # nox # replaced by nix-review ?
-    # ccache # breaks some builds ?
+    # ccache # breaks some builds ? has to be configured via program, use ccacheStdEnv instead ?
     ncurses.dev # for infocmp
     neovim-xp   # hum remove ?
     neovim-remote # for latex etc

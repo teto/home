@@ -152,7 +152,7 @@ rec {
 	  version = "official-master";
       src = builtins.fetchGit {
         url = https://github.com/neovim/neovim.git;
-        rev = "3e58e60568c2acc765f3ee72295e2f15baa3cf52";
+        # rev = "3e58e60568c2acc765f3ee72295e2f15baa3cf52";
         # url = https://github.com/teto/neovim.git;
         # ref = "master";
         # rev = "";

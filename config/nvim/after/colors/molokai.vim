@@ -35,3 +35,11 @@ hi CursorColumn                  guibg=#293739
 "
 hi link CheckedByCoq EndOfBuffer
 hi link SentToCoq Question
+
+
+" we want the warning par defaut links to CocUnderline
+hi CocUnderline gui=undercurl
+"  guibg=yellow 
+hi CocWarningHighlight gui=undercurl
+
+" srcIp

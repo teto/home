@@ -60,8 +60,7 @@ let
   # networking.firewall.allowedUDPPorts = [ ];
   # creates problem with buffalo check if it blocks requests or what
   # it is necessary to use dnssec though :(
-  networking.dnsExtensionMechanism = false;
-  # networking.dnsSingleRequest = false;
+  networking.resolvconf.dnsExtensionMechanism = false;
   # networking.extraHosts = secrets.extraHosts;
   # networking.extraResolvconfConf=''
   #   libc=NO

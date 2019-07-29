@@ -119,8 +119,8 @@ let
   networking.firewall.allowedTCPPorts = [ 8080 ];
   # creates problem with buffalo check if it blocks requests or what
   # it is necessary to use dnssec though :(
-  networking.dnsExtensionMechanism = false;
-  networking.dnsSingleRequest = false;
+  networking.resolvconf.dnsExtensionMechanism = false;
+  networking.resolvconf.dnsSingleRequest = false;
   networking.interfaces = {
       # macAddress = "3B-0B-B5-6A-ED-91";
       eno1 = {

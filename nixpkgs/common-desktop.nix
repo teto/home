@@ -67,21 +67,16 @@ in
      consoleKeyMap = "fr";
      defaultLocale = "fr_FR.UTF-8";
      # can generate problems for wireshark with Qt versions
-     inputMethod = {
-       enabled = "fcitx";
-       fcitx.engines = with pkgs.fcitx-engines; [
-         mozc
-         table-other # for arabic
-         table-extra # for arabic
-         # hangul
-         m17n
-         # libpinyin
-        # chewing
-        # unikey
-        # anthy
-        # cloudpinyin
-     ];
-     };
+     # inputMethod = {
+     #   enabled = "fcitx";
+     #   fcitx.engines = with pkgs.fcitx-engines; [
+     #     mozc
+     #     table-other # for arabic
+     #     table-extra # for arabic
+     #     # hangul
+     #     m17n
+     # ];
+     # };
 
      # see https://github.com/NixOS/nixpkgs/issues/22895
      # consoleUseXkbConfig = "fr";

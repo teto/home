@@ -96,8 +96,8 @@ let
   networking.firewall.allowedUDPPorts = [ ];
   # creates problem with buffalo check if it blocks requests or what
   # it is necessary to use dnssec though :(
-  networking.dnsExtensionMechanism = false;
-  networking.dnsSingleRequest = true; # juste pour test
+  networking.resolvconf.dnsExtensionMechanism = false;
+  networking.resolvconf.dnsSingleRequest = true; # juste pour test
 
   # this is for gaming
   hardware.opengl.driSupport32Bit = true;

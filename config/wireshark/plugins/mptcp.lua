@@ -30,25 +30,26 @@ local MptcpAttr = {
 	," MPTCP_ATTR_CWND"
 }
 
-local MptcpGenlEvent = { "unspec"
-                    ,"Created"
-                    ,"Established"
-                    ,"Closed"
-                    ,"MPTCP_CMD_ANNOUNCE"
-                    ,"MPTCP_CMD_REMOVE"
-                    ,"MPTCP_EVENT_ANNOUNCED"
-                    ,"MPTCP_EVENT_REMOVED"
-                    ,"Subflow Created"
-                    ,"Subflow destroyed"
-                    ,"Subflow established"
-                    ,"Subflow closed"
-                    ,"MPTCP_CMD_SUB_PRIORITY"
-                    ,"MPTCP_EVENT_SUB_PRIORITY"
-                    ,"Set filter"
-                    ,"Exist"
-                    ,"Clamped window"
-                    ,"MPTCP_CMD_AFTER_LAST"
-				}
+local MptcpGenlEvent = {
+   	"unspec"
+	,"Created"
+	,"Established"
+	,"Closed"
+	,"MPTCP_CMD_ANNOUNCE"
+	,"MPTCP_CMD_REMOVE"
+	,"MPTCP_EVENT_ANNOUNCED"
+	,"MPTCP_EVENT_REMOVED"
+	,"Subflow Created"
+	,"Subflow destroyed"
+	,"Subflow established"
+	,"Subflow closed"
+	,"MPTCP_CMD_SUB_PRIORITY"
+	,"MPTCP_EVENT_SUB_PRIORITY"
+	,"Set filter"
+	,"Exist"
+	,"Clamped window"
+	,"MPTCP_CMD_AFTER_LAST"
+}
 
 
 -- these Field must already exist !
@@ -80,7 +81,7 @@ function mptcp_proto.dissector(tvb,pinfo,tree)
 	-- local netlink_proto_id = netlink_proto_id_f()
 	local genl_family_id = genl_family_id_f()
 	-- print ("netlink_proto: ", genl_family_id , " vs ", 0x20)
-	if (not genl_family_id) or genl_family_id.value < 0x1f then 
+	if (not genl_family_id) or genl_family_id.value < 0x1f then
 		return
 	end
 
@@ -100,7 +101,8 @@ function mptcp_proto.dissector(tvb,pinfo,tree)
 	-- subtree:add_packet_field(version_f, tvb(1,1), 0)
 	-- subtree:add_packet_field(reserved_f, tvb(2,2), 0)
 
-	subtree:add(cmd_f, cmd, "Command"..MptcpGenlEvent[cmd.value + 1])
+	cmd_str = MptcpGenlEvent[cmd.value + 1]
+	subtree:add(cmd_f, cmd_str)
        -- subtree:add(genl_cmd, "This is a test")
 	-- then it's a tlv protocol
 end

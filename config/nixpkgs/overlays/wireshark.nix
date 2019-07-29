@@ -23,6 +23,7 @@ let
       " to deal with cmake build folder
       let &makeprg="make -C build"
     '';
+  # add a nix with cquery ?
 in
   {
 
@@ -36,21 +37,22 @@ in
     '';
   });
 
-  wireshark-local = super.wireshark.overrideAttrs (oa: {
-    name = "wireshark-local";
-    # src = filter-cmake wiresharkFolder;
-    src = srcSockDiag;
+  wireshark-dev = super.wireshark.overrideAttrs (oa: {
+    name = "wireshark-dev";
+    # src = srcSockDiag;
     # hardeningDisable = ["all"];
     cmakeFlags = [ "-DCMAKE_EXPORT_COMPILE_COMMANDS=YES" ];
 
-    # TODO add a neovim with cqueyr lsp
-    shellHook = oa.shellHook + ''
+    buildInputs = oa.buildInputs ++ [ super.cquery ];
+
+    # TODO add a neovim with cquery lsp
+    shellHook = (oa.shellHook or "") + ''
       export QT_PLUGIN_PATH=${super.qt5.qtbase.bin}/${super.qt5.qtbase.qtPluginPrefix}
       echo "rm -rf build && cmakeConfigurePhase"
       echo "ln -s build/compile_commands.json"
     '';
 
-    inherit nvimrc;
+    # inherit nvimrc;
   });
 
   # wireshark-local-stable = super.wireshark.overrideAttrs (oldAttrs: {
