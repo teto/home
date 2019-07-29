@@ -77,7 +77,7 @@ let
     arandr  # to move screens/monitors around
     buku
     # gcalc
-    unstable.dropbox
+    # unstable.dropbox
     # gnome3.eog # eye of gnome = image viewer / creates a collision
     gnome3.networkmanagerapplet # should
     gnome3.defaultIconTheme # else nothing appears
@@ -105,6 +105,7 @@ let
     qtpass
     sublime3
     scrot # screenshot app
+    smplayer # GUI around mpv
     sxiv # simple image viewer
     unstable.system_config_printer
     # vimiv # image viewer
@@ -157,7 +158,7 @@ in
 
   home.packages = desktopPkgs ++ devPkgs ++ heavyPackages
   ++ imPkgs ++ [
-    pkgs.up # live preview of pipes
+    # pkgs.up # live preview of pipes
     pkgs.peek # GIF recorder
 
     pkgs.cachix

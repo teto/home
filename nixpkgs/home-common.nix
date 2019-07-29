@@ -97,6 +97,8 @@ rec {
     PATH="$HOME/rofi-scripts:$HOME/buku_run:$PATH";
     VIFM="$XDG_CONFIG_HOME/vifm";
     WWW_HOME="$XDG_CONFIG_HOME/w3m";
+    # used by ranger
+    TERMCMD="termite";
   };
 
   # TODO

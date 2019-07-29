@@ -79,8 +79,8 @@ function mptcp_proto.dissector(tvb,pinfo,tree)
 
 	-- local netlink_proto_id = netlink_proto_id_f()
 	local genl_family_id = genl_family_id_f()
-	print ("netlink_proto: ", genl_family_id.value , " vs ", 0x20)
-	if genl_family_id and genl_family_id.value < 0x20 then 
+	-- print ("netlink_proto: ", genl_family_id , " vs ", 0x20)
+	if (not genl_family_id) or genl_family_id.value < 0x1f then 
 		return
 	end
 

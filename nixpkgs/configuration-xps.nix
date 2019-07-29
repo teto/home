@@ -244,7 +244,7 @@ let
   services.logind = {
 
     # see https://bbs.archlinux.org/viewtopic.php?id=225977 for problems with LID
-    lidSwitch = "suspend";
+    lidSwitch = "ignore";
     lidSwitchDocked = "suspend";
     lidSwitchExternalPower = "ignore";
   };
