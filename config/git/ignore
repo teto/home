@@ -24,6 +24,8 @@ __pycache__/
 package.cache*
 .mypy_cache/
 .eggs/
+# haskell
+dist/*
 # }}}
 
 # Editor specific {{{

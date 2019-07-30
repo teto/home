@@ -42,6 +42,7 @@ in
     # src = srcSockDiag;
     # hardeningDisable = ["all"];
     cmakeFlags = [ "-DCMAKE_EXPORT_COMPILE_COMMANDS=YES" ];
+    cmakeBuildType="debug";
 
     buildInputs = oa.buildInputs ++ [ super.cquery ];
 

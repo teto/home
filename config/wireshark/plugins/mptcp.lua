@@ -9,6 +9,23 @@ local my_info = {
 	-- repository  = "https://github.com/linear-rpc/msgpack-rpc-dissector", -- optional
 }
 set_plugin_info(my_info)
+  -- fromEnum MPTCP_ATTR_UNSPEC = 0
+  -- fromEnum MPTCP_ATTR_TOKEN = 1
+  -- fromEnum MPTCP_ATTR_FAMILY = 2
+  -- fromEnum MPTCP_ATTR_LOC_ID = 3
+  -- fromEnum MPTCP_ATTR_REM_ID = 4
+  -- fromEnum MPTCP_ATTR_SADDR4 = 5
+  -- fromEnum MPTCP_ATTR_SADDR6 = 6
+  -- fromEnum MPTCP_ATTR_DADDR4 = 7
+  -- fromEnum MPTCP_ATTR_DADDR6 = 8
+  -- fromEnum MPTCP_ATTR_SPORT = 9
+  -- fromEnum MPTCP_ATTR_DPORT = 10
+  -- fromEnum MPTCP_ATTR_BACKUP = 11
+  -- fromEnum MPTCP_ATTR_ERROR = 12
+  -- fromEnum MPTCP_ATTR_FLAGS = 13
+  -- fromEnum MPTCP_ATTR_TIMEOUT = 14
+  -- fromEnum MPTCP_ATTR_IF_IDX = 15
+  -- fromEnum MPTCP_ATTR_CWND = 16
 
 local MptcpAttr = {
    	"unspec "
