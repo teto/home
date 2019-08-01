@@ -8,6 +8,8 @@ let
 
 
   unstable = import <nixos-unstable> {}; # https://nixos.org/channels/nixos-unstable
+
+  # qutebrowser = unstable.qutebrowser;
 in
 {
   xsession.windowManager.i3 =
@@ -175,7 +177,7 @@ in
         # "${mod}+shift+p" = "focus parent";
 
         # "${mod}+shift+n" = "exec ${unstable.gnome3.nautilus}/bin/nautilus";
-        "${mod}+Shift+1" =  "exec ${pkgs.qutebrowser}/bin/qutebrowser";
+        "${mod}+Shift+1" =  "exec qutebrowser";
 
       # "${mod}+Shift+Return" = "exec --no-startup-id ${pkgs.termite -d "$(xcwd)"
 # bindsym $GroupFr+$mod+eacute i3-list-windows

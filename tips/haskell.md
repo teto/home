@@ -13,10 +13,8 @@ pour savoir d'ou le pkg est importe:
 Fun website
 https://haskell-code-explorer.mfix.io/package/optparse-applicative-0.14.2.0/show/Options/Applicative/BashCompletion.hs
 
-https://ghcguide.haskell.jp/8.4.3/users_guide/packages.html#package-databases
 
 in ghci :
-
 :show paths
 
 

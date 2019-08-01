@@ -1,4 +1,4 @@
-# Configuration file for Wireshark 3.0.2.
+# Configuration file for Wireshark 3.0.3.
 #
 # This file is regenerated each time preferences are saved within
 # Wireshark. Making manual changes should be safe, however.
@@ -134,7 +134,7 @@
 # 8 = External Capture,
 # 9 = Virtual
 # A string
-#gui.interfaces_hidden_types: 
+gui.interfaces_hidden_types: 7
 
 ####### User Interface: Colors ########
 
