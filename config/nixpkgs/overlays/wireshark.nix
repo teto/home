@@ -41,7 +41,10 @@ in
     name = "wireshark-dev";
     # src = srcSockDiag;
     # hardeningDisable = ["all"];
-    cmakeFlags = [ "-DCMAKE_EXPORT_COMPILE_COMMANDS=YES" ];
+    cmakeFlags = [
+      "-DCMAKE_EXPORT_COMPILE_COMMANDS=YES"
+      "-DBUILD_androiddump=OFF"
+    ];
     cmakeBuildType="debug";
 
     buildInputs = oa.buildInputs ++ [ super.cquery ];
