@@ -16,11 +16,15 @@
 	"coc.source.vimtex.disableSyntaxes": true,
 	"coc.source.vimtex.enable": false,
 	"translator.toLang": "fr",
-	// "bing", "ciba",
+	"yank.enableCompletion": false,
+	// best left to another plugin
+	"yank.highlight.enable": false,
+	"yank.priority": 200,
 	"translator.engines": [ "google"],
 	"coc.preferences.extensionUpdateCheck": "never",
-	// history size
 	"translator.maxsize": 5000, 
+	"coc.preferences.colorSupport": false,
+	"highlight.disableLanguages": [ "c"],
 	"coc.source.around.enable": true,
 	// use https://github.com/neoclide/coc.nvim/wiki/Completion-with-sources#improve-completion-experience
 	"coc.source.around.shortcut": "around",
@@ -47,8 +51,6 @@
 					"maxNumberOfProblems": 10,
 					"completionSnippetsOn": true,
 					"liquidOn": false
-					// "formatOnImportOn"
-					// "formattingProvider":
 				}
 			}
 		},

@@ -66,7 +66,7 @@ gitproxy  = git-proxy
 # vimdiff as merge and diff tool
 [merge]
 	tool = fugitive
-  conflictstyle = diff3
+	conflictstyle = diff3
 
 # useful when merging from kernel
 renamelimit = 7000
@@ -103,6 +103,8 @@ renamelimit = 7000
   cmd = nvim -d $BASE $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
 
 [mergetool "fugitive"]
-	cmd = nvim -f -c \"Gdiff\" \"$MERGED\"
+; Use :Gdiffsplit! for 3 way diff
+	cmd = nvim -f -c \"Gdiffsplit!\" \"$MERGED\"
+
 [mergetool]
 	keepBackup = false

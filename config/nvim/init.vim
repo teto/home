@@ -697,8 +697,8 @@ let g:gutentags_project_info = [ {'type': 'python', 'file': 'setup.py'},
 " it will fail without a wrapper https://github.com/rob-b/gutenhasktags
 " looks brittle, hie might be better
 " or haskdogs
-let g:gutentags_ctags_executable_haskell = 'gutenhasktags'
-" let g:gutentags_ctags_executable_haskell = 'hasktags'
+" let g:gutentags_ctags_executable_haskell = 'gutenhasktags'
+let g:gutentags_ctags_executable_haskell = 'hasktags'
 " let g:gutentags_ctags_extra_args
 let g:gutentags_file_list_command = 'rg --files'
 " gutenhasktags/ haskdogs/ hasktags/hothasktags

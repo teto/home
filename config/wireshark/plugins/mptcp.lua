@@ -49,14 +49,14 @@ local MptcpAttr = {
 
 local MptcpGenlEvent = {
    	"unspec"
-	,"Created"
-	,"Established"
+	,"Created master"
+	,"Established master"
 	,"Closed"
 	,"MPTCP_CMD_ANNOUNCE"
 	,"MPTCP_CMD_REMOVE"
 	,"MPTCP_EVENT_ANNOUNCED"
 	,"MPTCP_EVENT_REMOVED"
-	,"Subflow Created"
+	,"Create a subflow"
 	,"Subflow destroyed"
 	,"Subflow established"
 	,"Subflow closed"
@@ -64,7 +64,7 @@ local MptcpGenlEvent = {
 	,"MPTCP_EVENT_SUB_PRIORITY"
 	,"Set filter"
 	,"Exist"
-	,"Clamped window"
+	,"Clamp window"
 	,"MPTCP_CMD_AFTER_LAST"
 }
 
