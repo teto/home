@@ -178,7 +178,7 @@ let
 
   # service to update bios etc
   # managed to get this problem https://github.com/NixOS/nixpkgs/issues/47640
-  # services.fwupd.enable = true;
+  services.fwupd.enable = true;
 
   programs.ccache.enable = true;
 

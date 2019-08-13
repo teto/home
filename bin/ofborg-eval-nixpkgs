@@ -1,0 +1,3 @@
+#!/bin/sh
+# --argstr system thesystem
+HOME=/homeless-shelter NIX_PATH=nixpkgs=$(pwd) nix-instantiate ./pkgs/top-level/release.nix -A manual --option restrict-eval true --option build-timeout 1800 --show-trace

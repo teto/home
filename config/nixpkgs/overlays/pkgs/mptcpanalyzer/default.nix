@@ -15,13 +15,13 @@ stdenv
 
 buildPythonApplication rec {
 	pname = "mptcpanalyzer";
-	version = "0.3.0";
+	version = "0.3.2";
 
     src = fetchFromGitHub {
       owner = "teto";
       repo = "mptcpanalyzer";
       rev = "${version}";
-      sha256 = "1s74gigsfm0wa065vqczlf7x14shw1q9x311fcsidsglfk25ndbg";
+      sha256 = "1s70gigsfm0wa065vqczlf7x14shw1q9x311fcsidsglfk25ndbg";
     };
 
     doCheck = false;
