@@ -10,14 +10,14 @@ with rustPlatform;
 
 buildRustPackage rec {
   pname = "gnvim";
-  version = "0.1.2";
+  version = "0.1.5";
 
   # GNVIM_RUNTIME_PATH="
   src = fetchgit rec {
 
     url = https://github.com/vhakulinen/gnvim;
-    rev = "4b248cda4a6858544c6dbe9a4ad79796a7008247";
-    sha256 = "1f5vfi5nxn9zscad2cgjdm5sdgi0jrnmhswyhr05h55y6iqcnnb4";
+    rev = "68e3fc8d2e8f6f7bbdd73641b00031c16004e8cc";
+    sha256 = "07pikcq8zh61mdv793jqx75lsq20bwf9b67d6nvw3crnjppd0g03";
 
     # url = https://github.com/teto/gnvim;
     # rev = "c98cb99cb4009c82c45c41f668b468659595083d";
@@ -43,7 +43,7 @@ buildRustPackage rec {
 
   nativeBuildInputs = [ pkgconfig wrapGAppsHook git ];
 
-  cargoSha256 = "0y4yi4w3bdswnfw73n4yn68bx5kl3ikkp21yahgp3hnxx12abv6d";
+  cargoSha256 = "15jhbirqnyrwdk53aqg44rdb8sja9fjhil7p21c9dx1hfg1p3f3n";
 
   # export GNVIM_RUNTIME_PATH=/nix/store/i0z9jkx4hak08hikdksnf0w487lfxkdp-gnvim-0.1.2/share/gnvim/runtime 
   postInstall= ''

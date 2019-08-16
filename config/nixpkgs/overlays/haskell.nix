@@ -44,6 +44,7 @@ self: prev:
       zeromq4-haskell = prev.haskell.lib.dontCheck hprev.zeromq4-haskell;
 
       # cabal-helper = prev.haskell.lib.doJailbreak (hprev.cabal-helper);
+      wide-word = prev.haskell.lib.doJailbreak (hprev.wide-word);
 
       # should not be needed anymore right ?
       tensorflow-core-ops = appendPatch (hprev.tensorflow-core-ops) ./pkgs/tensorflow.patch;

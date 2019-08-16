@@ -45,7 +45,8 @@ let
     '';
   }));
 
-  defaultConfigStructured = with prev.lib.kernel; with structuredConfigs; prev.lib.mkMerge [
+  # prev.lib.mkForce 
+  defaultConfigStructured = with prev.lib.kernel; with structuredConfigs; (prev.lib.mkMerge [
     # structuredConfigs.kvmConfigStructured
     bpfConfigStructured
     debugConfigStructured
@@ -61,7 +62,7 @@ let
     minimalConfig
     # noChelsio # because of mptcp trunk
 
-  ];
+  ]);
 
   # todo remove tags
   filter-src = builtins.filterSource (p: t:
@@ -70,39 +71,24 @@ let
 
 in rec {
 
-  mptcp94 = (prev.linux_mptcp.override ({
-      kernelPatches=[];
-      ignoreConfigErrors=true;
-      autoModules = false;
-      preferBuiltin = true;
-      structuredExtraConfig = defaultConfigStructured;
-  }));
+  # mptcp94 = (prev.linux_mptcp.override ({
+  #     kernelPatches=[];
+  #     ignoreConfigErrors=true;
+  #     autoModules = false;
+  #     preferBuiltin = true;
+  #     structuredExtraConfig = defaultConfigStructured;
+  # }));
 
-  mptcp94-local-stable = mptcp94.override ({
-
-    name="mptcp94-local";
-
-    # TODO might need to revisit
-    ignoreConfigErrors = true;
-    autoModules = false;
-    kernelPreferBuiltin = true;
-
-    structuredExtraConfig = defaultConfigStructured;
-  });
-
-  my_lenovo_kernel = linux_mptcp_trunk_raw;
-
-
-  # linux_mptcp_trunk_official = prev.callPackage ./pkgs/kernels/linux-mptcp-trunk.nix {
-  #   kernelPatches = prev.linux_5_0.kernelPatches;
-  #   # does not seem true anymore
-  #   # preferBuiltin = true;
-  #   # ignoreConfigErrors=true;
-  #   # autoModules = true;
-  #   # boot.debug1device
-  #   # modDirVersion="4.19.0";
+  # mptcp94-local-stable = mptcp94.override ({
+  #   name="mptcp94-local";
+  #   # TODO might need to revisit
+  #   ignoreConfigErrors = true;
+  #   autoModules = false;
+  #   kernelPreferBuiltin = true;
   #   structuredExtraConfig = defaultConfigStructured;
   # });
+
+  my_lenovo_kernel = linux_mptcp_trunk_raw;
 
 
   # TODO try make localmodconfig
@@ -113,9 +99,9 @@ in rec {
     # defconfig = "localmodconfig";
     kernelPatches = prev.linux_5_1.kernelPatches;
     # does not seem true anymore
-    preferBuiltin = true;
+    preferBuiltin = false;
     ignoreConfigErrors=true;
-    # autoModules = true;
+    autoModules = true;
     # boot.debug1device
 
     structuredExtraConfig = defaultConfigStructured;

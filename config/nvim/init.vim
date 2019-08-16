@@ -95,7 +95,7 @@ Plug 'ndmitchell/ghcid', { 'rtp': 'plugins/nvim' }
 Plug 'neovimhaskell/nvim-hs.vim' " to help with nvim-hs
 " Plug 'KabbAmine/vCoolor.vim' " :Vcooler
 " Plug 'rickhowe/diffchar.vim' " per char diff buggy
-" Plug 'prabirshrestha/vim-lsp'
+Plug 'prabirshrestha/vim-lsp'
 " Plug 'bfredl/nvim-lspmirror'
 " Plug 'bfredl/nvim-lspext' " extension
 Plug 'neomutt/neomutt.vim' " syntax file for neomutt

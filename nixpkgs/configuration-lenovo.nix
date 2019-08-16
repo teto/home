@@ -28,7 +28,7 @@ let
       boot.enforceRequiredConfig = true;
 
     })
-    # ./modules/mptcp.nix
+    ./modules/mptcp.nix
     # ./modules/owamp.nix
 
     # for user teto
@@ -137,8 +137,11 @@ let
 
   # to allow wireshark to capture from netlink
   networking.localCommands = ''
-    ip link add nlmon0 type nlmon
-    ip link set dev nlmon0 up
+    ip link show nlmon0
+    if [ $? -ne 0 ]; then
+      ip link add nlmon0 type nlmon
+      ip link set dev nlmon0 up
+    fi
   '';
 
 
@@ -291,7 +294,7 @@ let
 
   # ebpf ?
   # broken in https://github.com/NixOS/nixpkgs/issues/56724
-  programs.bcc.enable = false;
+  programs.bcc.enable = true;
 
   environment.systemPackages = with pkgs;
     (import ./basetools.nix { inherit pkgs;})

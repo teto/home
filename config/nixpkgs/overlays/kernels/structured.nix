@@ -2,8 +2,9 @@
 
 with libk;
 # with lib.kernel;
-# with lib.modules;
+with lib.modules;
 {
+  _file = "toto";
 
   strongswanStructured = {
     XFRM_USER                = yes;
@@ -35,8 +36,8 @@ with libk;
   mininetConfigStructured =  {
     BPF         = yes;
     BPF_SYSCALL = yes;
-    NET_CLS_BPF = yes;
-    NET_ACT_BPF = yes;
+    # NET_CLS_BPF = yes;
+    # NET_ACT_BPF = yes;
     BPF_JIT     = yes;
     USER_NS     = yes;
     NET_NS      = yes;
@@ -100,8 +101,8 @@ with libk;
     NETFILTER_XTABLES = yes;
     NETFILTER_XT_MATCH_BPF = yes;
     BPF_SYSCALL = yes;
-    NET_CLS_BPF = yes;
-    NET_ACT_BPF = yes;
+    # NET_CLS_BPF = yes;
+    # NET_ACT_BPF = yes;
     HAVE_EBPF_JIT = yes;
     BPF_JIT = yes;
     BPF_EVENTS = yes;
@@ -154,7 +155,7 @@ with libk;
     RPMSG_VIRTIO      = option yes;
     VIRTIO_CONSOLE    = yes;
 
-      HW_RANDOM_VIRTIO     = yes;
+      HW_RANDOM_VIRTIO     = enable;  # Means module or yes
       # VIRTIO_MMIO_CMDLINE_DEVICES
 
       # allow to capture netlink packets with wireshark !!
@@ -165,14 +166,14 @@ with libk;
       # when run as -kernel, an embedded DHCP client is needed
       # need to get an ip
       # should not be necessary anymore now that we have a qemu agent in nixops
-      IP_PNP               = yes;
+      IP_PNP               = mkForce yes;
       IP_PNP_DHCP          = yes;
 
       # this is the default NIC used by Qemu so we include it
       # not to have to set Qemu to e1000
       "8139CP"             = yes;
       "8139TOO"            = yes;
-      "8139TOO_PIO"        = yes;
+      # "8139TOO_PIO"        = yes;  # default is no
       # CONFIG_8139TOO_TUNE_TWISTER is not set
       "8139TOO_8129"       = yes;
       # CONFIG_8139_OLD_RX_RESET is not set
@@ -246,8 +247,8 @@ with libk;
       # TODO reenable ?
       # poses problems see https://unix.stackexchange.com/questions/308870/how-to-load-compressed-kernel-modules-in-ubuntu
       # https://github.com/NixOS/nixpkgs/issues/40485
-      MODULE_COMPRESS = no;
-      MODULE_COMPRESS_XZ = no;
+      # MODULE_COMPRESS = no;
+      # MODULE_COMPRESS_XZ = no;
     };
 
     mptcpConfigStructured = {
@@ -297,7 +298,7 @@ with libk;
       INFINIBAND = no;
       DRM_RADEON = no;
       # mkForce ?
-      # IPV6 = no;
+      IPV6 = no;
     };
 
     # if not set it is converted to  https://lwn.net/Articles/434833/
@@ -307,7 +308,7 @@ with libk;
       GDB_SCRIPTS         = yes;
       PRINTK_TIMES        = yes;
       # dynamic debug takes precedence over DEBUG_KERNEL http://blog.listnukira.com/Linux-Kernel-pr-debug-display/
-      DYNAMIC_DEBUG       = no;
+      # DYNAMIC_DEBUG       = lib.mkForce no;
       # PREEMPT caused a problem when trying to insert modules
       # let's keep the  default here
       # PREEMPT             = yes;
@@ -315,7 +316,7 @@ with libk;
       FRAME_POINTER       = yes;
       KGDB                = yes;
       KGDB_SERIAL_CONSOLE = yes;
-      DEBUG_INFO          = yes;
+      DEBUG_INFO          = lib.mkForce yes;
     };
 
     persoConfig = {

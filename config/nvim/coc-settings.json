@@ -68,6 +68,24 @@
 			 "trace.server": "verbose",
 			 "filetypes": ["python"],
 			 "settings": {
+				"MPLS": {
+					"command": "dotnet",
+					"args": [
+						"exec",
+						"/home/$USER/.local/share/microsoft-python-language-server/Microsoft.Python.LanguageServer.dll"
+					],
+					"filetypes": [
+					],
+					"initializationOptions": {
+						"interpreter": {
+							"properties": {
+//								"InterpreterPath": "/bin/python3",
+								//"UseDefaultDatabase": true,
+								//"Version": "3.7.2"
+							}
+						}
+					}
+				},
 				"pyls": {
 					"enable": true,
 					"trace": {
