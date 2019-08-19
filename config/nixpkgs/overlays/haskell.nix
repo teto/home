@@ -54,6 +54,13 @@ self: prev:
         executableHaskellDepends = [ prev.pkgs.jupyter ];
       });
 
+      bitset = overrideSrc hprev.bitset { src = prev.fetchFromGitHub {
+        owner = "teto";
+        repo = "bitset";
+        rev = "upgrade";
+        sha256 = "1bbxav9fxpmpjmd1grwz8wx759kxdmp9lw7rrbd11mx8qj7kwpqx";
+      }; };
+
       # TODO enable profiling ?
       # or "logger"
       # http://hackage.haskell.org/package/logger

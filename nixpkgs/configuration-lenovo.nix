@@ -28,7 +28,7 @@ let
       boot.enforceRequiredConfig = true;
 
     })
-    ./modules/mptcp.nix
+    # ./modules/mptcp.nix
     # ./modules/owamp.nix
 
     # for user teto
@@ -86,13 +86,9 @@ let
 
   # hide messages !
   # boot.kernelParams = [ "earlycon=ttyS0" "console=ttyS0" ];
-
   # boot.kernelPackages = pkgs.linuxPackagesFor pkgs.my_lenovo_kernel;
-
-  # boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_mptcp_trunk_raw;
   # boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_latest;
 
-  # boot.kernelPackages = pkgs.linuxPackages_mptcp;
 
   # TODO we need nouveau  ?
   # lib.mkMerge
@@ -341,5 +337,9 @@ let
       }
   ];
 
+  # see https://www.mail-archive.com/nix-commits-bounces@lists.science.uu.nl/msg04507.html
+  system.extraSystemBuilderCmds = ''
+    ln -s ${config.boot.kernelPackages.kernel.dev}/vmlinux $out/vmlinux
+  '';
 
 }
