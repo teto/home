@@ -337,7 +337,14 @@ let
       }
   ];
 
+       # system.replaceRuntimeDependencies
+       #     List of packages to override without doing a full rebuild. The original derivation and replacement derivation must have the same name length, and ideally should have close-to-identical directory layout.
+
+# system.userActivationScripts
+  # system.copySystemConfiguration = true;
   # see https://www.mail-archive.com/nix-commits-bounces@lists.science.uu.nl/msg04507.html
+
+  # marked as internal
   system.extraSystemBuilderCmds = ''
     ln -s ${config.boot.kernelPackages.kernel.dev}/vmlinux $out/vmlinux
   '';

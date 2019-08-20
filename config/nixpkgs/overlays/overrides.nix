@@ -118,10 +118,6 @@ rec {
     ];
   });
 
-  noti = super.noti.overrideAttrs(oa: {
-    patches = [ ./patches/noti_timeout.diff ];
-  });
-
   nixops-dev = super.nixops.overrideAttrs ( oa: {
     # src = super.fetchFromGitHub {
     #   owner = "teto";

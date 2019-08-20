@@ -99,9 +99,9 @@ in rec {
     # defconfig = "localmodconfig";
     kernelPatches = prev.linux_5_1.kernelPatches;
     # does not seem true anymore
-    preferBuiltin = false;
+    # preferBuiltin = false;
     ignoreConfigErrors=true;
-    autoModules = true;
+    # autoModules = true;
     # boot.debug1device
 
     structuredExtraConfig = defaultConfigStructured;

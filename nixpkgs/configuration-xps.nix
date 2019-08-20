@@ -137,13 +137,15 @@ let
     options cfg80211 ieee80211_regdom="GB"
   '';
 
+
+  programs.gnome-disks.enable = false;
+
   # List services that you want to enable:
   services = {
     gnome3 = {
       gnome-keyring.enable = true;
       seahorse.enable = true; # UI to manage keyrings
       at-spi2-core.enable = true; # for keyring it seems
-	  gnome-disks.enable = false;
     };
 
     # Enable CUPS to print documents.

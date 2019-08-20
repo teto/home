@@ -231,6 +231,9 @@ with lib.modules;
 
     localConfigStructured = {
 
+      #
+      DRM_NOUVEAU = no;
+
       # needed for tc-bpf
       CRYPTO_USER_API=yes;
       CRYPTO_USER_API_HASH=yes;
@@ -247,8 +250,9 @@ with lib.modules;
       # TODO reenable ?
       # poses problems see https://unix.stackexchange.com/questions/308870/how-to-load-compressed-kernel-modules-in-ubuntu
       # https://github.com/NixOS/nixpkgs/issues/40485
-      # MODULE_COMPRESS = no;
-      # MODULE_COMPRESS_XZ = no;
+      MODULE_COMPRESS = mkForce no;
+      MODULE_COMPRESS_XZ = mkForce no;
+      KERNEL_XZ          = mkForce no;
     };
 
     mptcpConfigStructured = {
