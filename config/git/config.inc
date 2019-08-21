@@ -83,6 +83,8 @@ renamelimit = 7000
   cdiff = diff --word-diff=color
   ia = !git add $(git ls-files --modified --others --exclude-standard | fzf -m)
   ci=commit
+  ci=commit
+  cp=cherry-pick
   co=checkout
   st=status
   br=branch

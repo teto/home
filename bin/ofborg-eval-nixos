@@ -1,3 +1,5 @@
 #!/bin/sh
 # --argstr system thesystem 
-HOME=/homeless-shelter NIX_PATH=nixpkgs=$(pwd) nix-instantiate ./nixos/release.nix -A manual --option restrict-eval true --option build-timeout 1800 --show-trace
+# HOME=/homeless-shelter NIX_PATH=nixpkgs=$(pwd) nix-instantiate ./nixos/release.nix -A manual --option restrict-eval true --option build-timeout 1800 --show-trace
+# https://twitter.com/i/status/1162688307211300866
+nix-instantiate --arg nixpkgs '{ outPath=./.; revCount=999999; shortRev="ofborg"; }' ./nixos/release-combined.nix -A tested
