@@ -1,7 +1,8 @@
 { config, lib, pkgs,  ... }:
 let
   secrets = import ./secrets.nix;
-  in
+  unstable = import <nixos-unstable> {}; # https://nixos.org/channels/nixos-unstable
+in
 {
   imports = [
     # todo renommer en workstation
@@ -29,7 +30,6 @@ let
 
     })
     # ./modules/mptcp.nix
-    # ./modules/owamp.nix
 
     # for user teto
     ./extraTools.nix
@@ -262,6 +262,7 @@ let
     };
 
     distributedBuilds = false;
+    package = pkgs.nixFlakes;
   };
 
   # kind of a test
@@ -276,12 +277,12 @@ let
 
   # networking.iproute2.enable = true;
 
-  networking.mptcp = {
-    enable = true;
-    debug = true;
-    pathManager = "netlink";
-    package = pkgs.linux_mptcp_trunk_raw;
-  };
+  # networking.mptcp = {
+  #   enable = true;
+  #   debug = true;
+  #   pathManager = "netlink";
+  #   package = pkgs.linux_mptcp_trunk_raw;
+  # };
 
   # once available
   services.greenclip.enable = true;
@@ -345,6 +346,7 @@ let
   # see https://www.mail-archive.com/nix-commits-bounces@lists.science.uu.nl/msg04507.html
 
   # marked as internal
+  # $out here is the profile generation
   system.extraSystemBuilderCmds = ''
     ln -s ${config.boot.kernelPackages.kernel.dev}/vmlinux $out/vmlinux
   '';

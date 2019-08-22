@@ -75,6 +75,7 @@ let
     # alsa-utils # for alsamixer
     arandr  # to move screens/monitors around
     buku
+    dynamic-colors
     # gcalc
     # unstable.dropbox
     # gnome3.eog # eye of gnome = image viewer / creates a collision

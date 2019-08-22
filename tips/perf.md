@@ -12,3 +12,14 @@ machine__create_modules
 Use vmlinux: /nix/store/5am9gvlr7wkcwy48kibhvq16l624iw6h-linux-5.1.0-mptcp_v0.96.0-dev/vmlinux
 map_groups__set_modules_path_dir: cannot open /lib/modules/5.1.0 dir
 Problems setting modules path maps, continuing anyway...
+
+
+
+cat /proc/kallsyms
+0000000000000000 T tcp_cong_avoid_ai
+
+
+perf script -s perf-script.py
+
+
+perf script -s ~/mptcp/tools/perf/scripts/python/net_dropmonitor.py

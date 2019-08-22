@@ -95,6 +95,10 @@ in rec {
   linux_mptcp_trunk_raw = (prev.callPackage ./pkgs/kernels/linux-mptcp-trunk.nix
     {
 
+
+    # will set INSTALL_MOD_STRIP=1
+    dontStrip = true;
+
     # triggers can't exec "lsmod"
     # defconfig = "localmodconfig";
     kernelPatches = prev.linux_5_1.kernelPatches;
@@ -106,6 +110,8 @@ in rec {
 
     structuredExtraConfig = defaultConfigStructured;
   });
+
+  linuxPackages_mptcp_trunk = prev.linuxPackagesFor linux_mptcp_trunk_raw;
 
   linux_mptcp_trunk_dev = addMenuConfig linux_mptcp_trunk_raw ;
 

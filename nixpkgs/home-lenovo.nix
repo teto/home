@@ -15,7 +15,8 @@ let
     # Not tracked, so doesn't need to go in per-machine subdir
       # ./home-common-headless.nix
       ./home-desktop.nix
-      ./modules/vdirsyncer.nix
+
+      # ./modules/vdirsyncer.nix
 
       ./home-mail.nix
       # symlink towards a config

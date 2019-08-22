@@ -13,6 +13,7 @@ final: prev:
   #   llvm=prev.llvm_5;
   # };
 
+  colr = prev.callPackage ./colr {};
 
   gnvim = prev.callPackage ./gnvim { };
 
