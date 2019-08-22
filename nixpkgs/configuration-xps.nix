@@ -15,8 +15,10 @@ let
     ./common-desktop.nix
     # ./modules/libvirtd.nix
     ./modules/distributedBuilds.nix
-    ./modules/mptcp.nix
+
+    # ./modules/mptcp.nix
     ./modules/vpn.nix
+
     # ./modules/jupyter2.nix
 
     # for user teto
@@ -62,7 +64,7 @@ let
   boot.kernelParams = [ " console=ttyS0" "acpi_backlight=vendor" ];
 
   # TODO use the mptcp one ?
-  # boot.kernelPackages = pkgs.linuxPackages;
+  boot.kernelPackages = pkgs.linuxPackages;
   # boot.kernelPackages = pkgs.linuxPackages_latest;
   # boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_4_14;
 
@@ -231,17 +233,14 @@ let
   #   (import ./overlays/haskell.nix)
   # ];
 
-
-
   # need to be root
   # hardware.acpilight.enable = true;
   # -- ?
-  hardware.brightnessctl.enable = true; 
+  hardware.brightnessctl.enable = true;
 
   networking.iproute2.enable = true;
 
   systemd.coredump.enable = true;
-
 
   services.logind = {
 
