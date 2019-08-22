@@ -139,9 +139,6 @@ let
     options cfg80211 ieee80211_regdom="GB"
   '';
 
-
-  programs.gnome-disks.enable = false;
-
   # List services that you want to enable:
   services = {
     gnome3 = {

@@ -1,5 +1,6 @@
 { config, pkgs, lib, ... }:
 {
+
   # enable gitolite
   services.gitolite = {
     enable = true;

@@ -74,7 +74,6 @@ let
       gnome-keyring.enable = true;
       seahorse.enable = true; # UI to manage keyrings
       at-spi2-core.enable = true; # for keyring it seems
-	  gnome-disks.enable = false;
     };
 
     # Enable CUPS to print documents.
@@ -111,6 +110,11 @@ let
 
     config = {
       android_sdk.accept_license = true;
+
+      permittedInsecurePackages = [ ];
+
+      # allowBroken = true;
+      allowUnfree = true;  # for nvidia drivers
     };
   };
 
@@ -128,6 +132,7 @@ let
     # daemonNiceLevel = 2;
     distributedBuilds = true;
   };
+
 
   hardware.pulseaudio = {
     enable = true;

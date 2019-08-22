@@ -1,7 +1,7 @@
 { config, lib, pkgs,  ... }:
 let
   secrets = import ./secrets.nix;
-  unstable = import <nixos-unstable> {}; # https://nixos.org/channels/nixos-unstable
+  unstable = import <nixos-unstable> { inherit config; }; # https://nixos.org/channels/nixos-unstable
 in
 {
   imports = [
@@ -87,10 +87,9 @@ in
   # hide messages !
   # boot.kernelParams = [ "earlycon=ttyS0" "console=ttyS0" ];
   # boot.kernelPackages = pkgs.linuxPackagesFor pkgs.my_lenovo_kernel;
-  # boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_latest;
+  boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_latest;
+  # boot.kernelPackages = unstable.pkgs.linuxPackages;
 
-
-  # TODO we need nouveau  ?
   # lib.mkMerge
   boot.kernelModules =  [
     "af_key" # for ipsec/vpn support
@@ -147,7 +146,6 @@ in
       gnome-keyring.enable = true;
       seahorse.enable = true; # UI to manage keyrings
       at-spi2-core.enable = true; # for keyring it seems
-	  gnome-disks.enable = false;
     };
 
     # Enable CUPS to print documents.
@@ -313,7 +311,6 @@ in
   #   # cacheDir = 
   #   # packageNames = [ "wxGTK30" "qt48" "ffmpeg_3_3" "libav_all" ];
   #   packageNames = ["linux_mptcp_trunk_raw"];
-
   # };
 
   # services.squid.enable = true;

@@ -13,7 +13,12 @@ in
       ../modules/nextcloud.nix
       # ../modules/blog.nix
 
+      # just to help someone on irc
+       # <nixpkgs/nixos/modules/profiles/hardened.nix>
+
   ];
+
+  # boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_latest;
 
 
   services.nextcloud.hostName = secrets.gitolite_server.hostname;
@@ -44,6 +49,9 @@ in
     binaryCaches = [
       "https://cache.nixos.org/"
     ];
+
+    # turn off to use hardened profile
+    useSandbox = false;
   };
 
   # nixpkgs.overlays = [

@@ -211,7 +211,11 @@ in
     # either use --option extra-binary-caches http://hydra.nixos.org/
     # handy to hack/fix around
     # readOnlyStore = false;
+
+    # package = pkgs.nixFlakes;
   };
+
+  programs.gnome-disks.enable = false;
 
   # don't forget to run ulimit -c unlimited to get the actual coredump
   # then coredumpctl debug will launch gdb !
