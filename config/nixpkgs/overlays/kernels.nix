@@ -32,6 +32,7 @@ let
   structuredConfigs = import ./kernels/structured.nix { inherit (prev) lib; inherit libk;};
 
 
+
   # TODO for dev shellHook
   # silent! call remove(g:LanguageClient_serverCommands, 'c')
   # see wiki
@@ -71,22 +72,10 @@ let
 
 in rec {
 
-  # mptcp94 = (prev.linux_mptcp.override ({
-  #     kernelPatches=[];
-  #     ignoreConfigErrors=true;
-  #     autoModules = false;
-  #     preferBuiltin = true;
-  #     structuredExtraConfig = defaultConfigStructured;
-  # }));
+  linux_latest_debug = prev.linux_latest.override {
 
-  # mptcp94-local-stable = mptcp94.override ({
-  #   name="mptcp94-local";
-  #   # TODO might need to revisit
-  #   ignoreConfigErrors = true;
-  #   autoModules = false;
-  #   kernelPreferBuiltin = true;
-  #   structuredExtraConfig = defaultConfigStructured;
-  # });
+    structuredExtraConfig = structuredConfigs.debugConfigStructured ;
+  };
 
   my_lenovo_kernel = linux_mptcp_trunk_raw;
 

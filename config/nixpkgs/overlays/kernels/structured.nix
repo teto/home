@@ -321,6 +321,9 @@ with lib.modules;
       KGDB                = yes;
       KGDB_SERIAL_CONSOLE = yes;
       DEBUG_INFO          = lib.mkForce yes;
+
+# CONFIG_DEBUG_INFO_REDUCED is not set
+# CONFIG_DEBUG_INFO_SPLIT is not set
     };
 
     persoConfig = {
