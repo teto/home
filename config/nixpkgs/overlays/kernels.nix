@@ -72,8 +72,9 @@ let
 
 in rec {
 
-  linux_latest_debug = prev.linux_latest.override {
 
+  # TODO maybe I should modify linuxPackagesFor instead ?
+  linux_latest_debug = prev.linux_latest.override {
     structuredExtraConfig = structuredConfigs.debugConfigStructured ;
   };
 

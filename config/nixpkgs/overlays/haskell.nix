@@ -14,15 +14,6 @@ self: prev:
 # haskellPackages.callCabal2nix to nixpkgs which means anyone can easily pull in GitHub packages and hackage packages that aren't in nixpkgs.
 # pkgs.haskell.lib.dontCheck
 
-  # haskellPkgs = pkgs.haskell.packages.ghc822.override(oldAttrs: {
-  #   overrides = self: super: {
-  #     nix-miso-template = super.callCabal2nix "nix-miso-template" nix-miso-template-src {};
-  #     servant = super.callHackage "servant" "0.12.1" {};
-  #     servant-server = super.callHackage "servant-server" "0.12" {};
-  #     resourcet = super.callHackage "resourcet" "1.1.11" {};
-  #     http-types = super.callHackage "http-types" "0.11" {};
-  #   };
-  # });
   yst = prev.haskellPackages.yst.overrideAttrs (oldAttrs: {
      jailbreak = true;
   });
@@ -65,14 +56,10 @@ self: prev:
       # or "logger"
       # http://hackage.haskell.org/package/logger
       # "netlink" = prev.haskell.lib.addBuildDepends  (prev.haskell.lib.overrideSrc hprev.netlink {
-
       #   # src = builtins.fetchGit {
       #   #   # url = https://github.com/ongy/netlink-hs;
       #   #   url = https://github.com/teto/netlink-hs;
       #   # };
-
-      #   src = /home/teto/netlink-hs;
-
       #   # src = prev.fetchFromGitHub {
       #   #   owner = "ongy";
       #   #   repo = "netlink-hs";
@@ -80,6 +67,7 @@ self: prev:
       #   #   sha256 = "05hq41zh5msm06gfgfjvf1lq1qnqg1l2ng1ywiikkck8msc3mmx1";
       #   # };
       # }) [
+
       #   hprev.fast-logger
       #   # hprev.hsc2hs
       #   # (doJailbreak hprev.logger)
@@ -91,7 +79,6 @@ self: prev:
 
       # "fork" by infinisil
       all-hies = import (fetchTarball "https://github.com/infinisil/all-hies/tarball/master") {};
-
       # https://github.com/Infinisil/all-hies
       # all-hies.versions.ghc864
     };

@@ -87,7 +87,7 @@ in
   # hide messages !
   # boot.kernelParams = [ "earlycon=ttyS0" "console=ttyS0" ];
   # boot.kernelPackages = pkgs.linuxPackagesFor pkgs.my_lenovo_kernel;
-  boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_latest;
+  # boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_latest_debug;
   # boot.kernelPackages = unstable.pkgs.linuxPackages;
 
   # lib.mkMerge
@@ -275,12 +275,12 @@ in
 
   # networking.iproute2.enable = true;
 
-  # networking.mptcp = {
-  #   enable = true;
-  #   debug = true;
-  #   pathManager = "netlink";
-  #   package = pkgs.linux_mptcp_trunk_raw;
-  # };
+  networking.mptcp = {
+    enable = true;
+    debug = true;
+    pathManager = "netlink";
+    package = pkgs.linux_mptcp_trunk_raw;
+  };
 
   # once available
   services.greenclip.enable = true;

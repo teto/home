@@ -7,6 +7,7 @@ let
       # - coc-vimtex  coc-snippets 
       # use coc-yank for yank history
 
+      coc-git
       coc-nvim
       csv-vim
       # replaced by coc
@@ -175,25 +176,20 @@ rec {
   });
 
 
-  # neovim-unwrapped = self.neovim-unwrapped-master;
-
-  neovimHaskellConfig = {
-
-    # withHaskell = true;
-    # haskellPackages = [
-          # hie
-    #   haskellPackages.haskdogs # seems to build on hasktags/ recursively import things
-    #   haskellPackages.hasktags
-    #   haskellPackages.nvim-hs
-    #   haskellPackages.nvim-hs-ghcid
-    # ];
-    # customRC = ''
-    #     let g:LanguageClient_serverCommands = {
-    #       'haskell': ['hie', '--lsp', '-d', '--logfile', '/tmp/lsp_haskell.log' ]
-    #     }
-    #   '';
-
-  };
+  # neovimHaskellConfig = {
+  #   withHaskell = true;
+  #   haskellPackages = [
+  #     haskellPackages.haskdogs # seems to build on hasktags/ recursively import things
+  #     haskellPackages.hasktags
+  #     haskellPackages.nvim-hs
+  #     haskellPackages.nvim-hs-ghcid
+  #   ];
+  #   customRC = ''
+  #       let g:LanguageClient_serverCommands = {
+  #         'haskell': ['hie', '--lsp', '-d', '--logfile', '/tmp/lsp_haskell.log' ]
+  #       }
+  #     '';
+  # };
 
   # TODO pass args to the wrapper to get access to :
   # - bash-language-server
@@ -246,7 +242,9 @@ rec {
         };
       };
 
-    plugins = {
+    plugins = startPlugins;
+
+    pluginsExperimental = {
       vim-obsession = {
         customRC = ''This is a test'';
       };
