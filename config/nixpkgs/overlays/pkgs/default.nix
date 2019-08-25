@@ -12,19 +12,6 @@ final: prev:
   #   stdenv=prev.clangStdenv;
   #   llvm=prev.llvm_5;
   # };
-
-  colr = prev.callPackage ./colr {};
-
-  gnvim = prev.callPackage ./gnvim { };
-
-  neovim-gtk = prev.callPackage ./neovim-gtk { };
-
-  dualsub = prev.callPackage ./dualsubtitles { };
-
-  subtitles-rs = prev.callPackage ./subtitles-rs { };
-
-  hunter = prev.callPackage ./hunter { };
-
   buku_run = prev.stdenv.mkDerivation rec {
     pname = "buku_run";
     version = "0.1.1";
@@ -55,6 +42,23 @@ final: prev:
     # propagatedBuildInputs = [ rofi ];
 
   };
+
+
+  colr = prev.callPackage ./colr {};
+
+  dualsub = prev.callPackage ./dualsubtitles { };
+
+  # fzf-extras = prev.callPackage ./fzf-extras.nix {};
+
+  gnvim = prev.callPackage ./gnvim { };
+
+  hunter = prev.callPackage ./hunter { };
+
+  neovim-gtk = prev.callPackage ./neovim-gtk { };
+
+
+  subtitles-rs = prev.callPackage ./subtitles-rs { };
+
 
   mptcpanalyzer = prev.python3Packages.callPackage ./mptcpanalyzer { };
 

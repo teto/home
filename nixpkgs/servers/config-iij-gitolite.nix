@@ -51,7 +51,7 @@ in
     ];
 
     # turn off to use hardened profile
-    useSandbox = false;
+    useSandbox = true;
   };
 
   # nixpkgs.overlays = [

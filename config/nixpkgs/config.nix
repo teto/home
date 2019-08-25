@@ -9,6 +9,7 @@
 
     # to replicate grahamOfBorgerros
     checkMeta=true;
+    doCheckByDefault = true;
 
     packageOverrides = pkgs: {
       # fetchGit ?
