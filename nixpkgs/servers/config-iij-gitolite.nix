@@ -21,6 +21,10 @@ in
   # boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_latest;
 
 
+  # TODO
+  # services.automysqlbackup.config
+
+
   services.nextcloud.hostName = secrets.gitolite_server.hostname;
 
   environment.systemPackages = with pkgs; [
@@ -53,6 +57,8 @@ in
     # turn off to use hardened profile
     useSandbox = true;
   };
+
+
 
   # nixpkgs.overlays = [
   #   import ../../config/nixpkgs/overlays/neovim.nix

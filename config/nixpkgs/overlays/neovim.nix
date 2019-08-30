@@ -128,6 +128,8 @@ rec {
       # }
       ;
 
+      # buildInputs = []
+
       finalConfig = super.neovimConfig (
         super.lib.mkMerge [
           # project specific user config
@@ -144,6 +146,7 @@ rec {
     wrapNeovim neovim-unwrapped-master {
       # extraMakeWrapperArgs
       # rename configure ?
+      # TODO should be able to add some packages in PATH like jq
       structuredConfigure = finalConfig;
     };
 
@@ -160,6 +163,7 @@ rec {
         # rev = "d81b510ecf1890828caa653ebb2fa053131f3265";
         # checksum = "1prmibvr5v1cri71miy08qd1pvbnxmy04irnrxan2ynv95w0q0qm";
       };
+
   });
 
   neovim-unwrapped-treesitter = (super.neovim-unwrapped).overrideAttrs (oldAttrs: {

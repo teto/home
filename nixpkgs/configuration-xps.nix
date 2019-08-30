@@ -100,6 +100,8 @@ let
   # it is necessary to use dnssec though :(
   networking.resolvconf.dnsExtensionMechanism = false;
   networking.resolvconf.dnsSingleRequest = true; # juste pour test
+  # not merged yet
+  networking.wireless.iwd.enable = true;
 
   # this is for gaming
   hardware.opengl.driSupport32Bit = true;

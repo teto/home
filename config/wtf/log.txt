@@ -1,0 +1,1 @@
+2019/08/29 16:12:17 log.go:25: [~/.config/wtf/config.yml]
