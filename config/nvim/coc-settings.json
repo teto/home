@@ -31,6 +31,12 @@
 	"coc.source.buffer.shortcut": "buf",
 	"suggest.snippetIndicator": "►",
 	"suggest.noselect": false,
+	"git.realtimeGutters": false,
+	"git.changedSign.text": " ",
+	"git.changedSign.hlGroup": "SignifySignChange",
+	// "git.addedSign.text": ,
+	// "git.addedSign.hlGroup": ,
+	"coc.source.issues.enable": true,
 	"languageserver": {
 		"bash": {
 		"command": "bash-language-server",

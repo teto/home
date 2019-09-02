@@ -48,7 +48,8 @@ final: prev:
 
   dualsub = prev.callPackage ./dualsubtitles { };
 
-  # fzf-extras = prev.callPackage ./fzf-extras.nix {};
+  fzf-extras =  # prev.callPackage ./fzf-extras.nix {};
+    builtins.fetchurl https://github.com/atweiden/fzf-extras/blob/master/fzf-extras.zsh;
 
   gnvim = prev.callPackage ./gnvim { };
 

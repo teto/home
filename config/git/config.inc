@@ -71,7 +71,7 @@ gitproxy  = git-proxy
 	conflictstyle = diff3
 
 # useful when merging from kernel
-renamelimit = 7000
+renamelimit = 14000
 
 [diff]
   tool = nvim -d
@@ -80,7 +80,6 @@ renamelimit = 7000
 
 [difftool]
   prompt = false
-
 [alias]
   cdiff = diff --word-diff=color
   ia = !git add $(git ls-files --modified --others --exclude-standard | fzf -m)

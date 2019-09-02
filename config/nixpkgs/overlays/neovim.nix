@@ -9,6 +9,7 @@ let
 
       coc-git
       coc-nvim
+      # coc-translator  # not available yet
       csv-vim
       # replaced by coc
       fugitive
