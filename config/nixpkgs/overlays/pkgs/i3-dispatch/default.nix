@@ -1,4 +1,6 @@
-{ stdenv, buildPythonApplication, fetchFromGitHub, xdotool, psutil, pynvim }:
+{ stdenv, buildPythonApplication, fetchFromGitHub, xdotool, psutil
+, pynvim
+}:
 
 buildPythonApplication rec {
   name = "i3dispatch-${version}";

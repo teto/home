@@ -9,7 +9,7 @@
 with rustPlatform;
 
 buildRustPackage rec {
-  pname = "gnvim";
+  name = "gnvim-${version}";
   version = "0.1.5";
 
   # GNVIM_RUNTIME_PATH="

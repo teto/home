@@ -17,8 +17,8 @@ wtf:
           odd: "white"
       enabled: true
       locations:
-        Vancouver: "America/Vancouver"
-        Toronto: "America/Toronto"
+        Vancouver: "Tokyo/Japan"
+        Toronto: "Tunis/Tunisia"
       position:
         top: 0
         left: 1

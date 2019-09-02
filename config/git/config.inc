@@ -18,7 +18,9 @@ gitproxy  = git-proxy
   ui = true
 
 
-
+[pager]
+	diff = diff-so-fancy | less --tabs=1,5 -RFX
+	show = diff-so-fancy | less --tabs=1,5 -RFX
 
 # [sendemail.iij]
 # envelopeSender

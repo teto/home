@@ -82,6 +82,8 @@ final: prev:
 
   papis-python-rofi = prev.python3Packages.callPackage ./papis-rofi.nix {};
 
+  ping = prev.prettyping;
+
   rt-tests = prev.callPackage ./rt-test.nix {};
 
   termite-color-switcher = prev.callPackage ./termite-color-switcher {};

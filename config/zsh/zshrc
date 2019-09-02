@@ -21,6 +21,7 @@
 . "$ZDOTDIR/init.sh"
 
 . "$ZDOTDIR/aliases.zsh"
+
 # notifies when long command finishes
 # zbell should recognize aliases
 zbell_ignore=("$EDITOR" "$PAGER" v)

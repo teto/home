@@ -101,7 +101,9 @@ let
   networking.resolvconf.dnsExtensionMechanism = false;
   networking.resolvconf.dnsSingleRequest = true; # juste pour test
   # not merged yet
-  networking.wireless.iwd.enable = true;
+  # networking.wireless.iwd.enable = true;
+
+  # networking.networkmanager.wifi.backend = "iwd";
 
   # this is for gaming
   hardware.opengl.driSupport32Bit = true;

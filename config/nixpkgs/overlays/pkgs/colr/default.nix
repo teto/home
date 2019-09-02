@@ -1,7 +1,7 @@
 { stdenv, buildGoPackage, fetchFromGitHub }:
 
 buildGoPackage rec {
-  pname = "colr";
+  name = "colr-${version}";
   version = "0.3.0";
 
   goPackagePath = "github.com/k1LoW/colr";

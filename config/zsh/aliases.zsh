@@ -24,6 +24,10 @@ alias dfh="df --human-readable"
 alias duh="du --human-readable"
 
 
+alias preview="fzf --preview 'bat --color \"always\" {}'"
+# add support for ctrl+o to open selected file in VS Code
+export FZF_DEFAULT_OPTS="--bind='ctrl-o:execute(code {})+abort'"
+
 # alias se="sudoedit"
 # alias ec='$EDITOR $XDG_CONFIG_HOME/'
 
