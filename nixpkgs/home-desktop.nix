@@ -74,7 +74,7 @@ let
     # apvlv # broken
     # alsa-utils # for alsamixer
     arandr  # to move screens/monitors around
-    buku
+    # buku
     dynamic-colors
     # gcalc
     # unstable.dropbox
@@ -105,7 +105,7 @@ let
     qtpass
     sublime3
     scrot # screenshot app
-    smplayer # GUI around mpv
+    # smplayer # GUI around mpv
     sxiv # simple image viewer
     unstable.system_config_printer
     # vimiv # image viewer

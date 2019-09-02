@@ -91,6 +91,8 @@ renamelimit = 7000
   st=status
   br=branch
   di=diff
+  mg=mergetool
+  mt=mergetool
 
   tree = log --graph --oneline --decorate --all
 

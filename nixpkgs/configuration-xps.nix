@@ -86,6 +86,7 @@ let
   boot.kernel.sysctl = {
     # to not provoke the kernel into crashing
     "net.ipv4.tcp_timestamps" = 0;
+    "net.ipv4.tcp_allowed_congestion_control" = 0;
     # "net.ipv4.ipv4.ip_forward" = 1;
     # "net.ipv4.tcp_keepalive_time" = 60;
     # "net.core.rmem_max" = 4194304;

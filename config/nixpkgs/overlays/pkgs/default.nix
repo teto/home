@@ -56,6 +56,10 @@ final: prev:
 
   neovim-gtk = prev.callPackage ./neovim-gtk { };
 
+  # nix-dev = prev.nix.overrideAttrs(oa: {
+  #   dontStrip = true;
+  #  enableDebugging = true;
+  # }
 
   subtitles-rs = prev.callPackage ./subtitles-rs { };
 

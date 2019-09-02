@@ -56,7 +56,7 @@
 		},
 		"latex": {
 			"command": "digestif",
-			"filetypes": ["latex"]
+			"filetypes": ["tex"]
 		},
 		"lua": {
 			"command": "lua-lsp",
