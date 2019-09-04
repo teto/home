@@ -13,14 +13,14 @@ let
 
 
   # TODO I could use this to discrimanate between branches ?
-    # let res = builtins.tryEval (
-    #   if isDerivation value then
-    #     value.meta.isBuildPythonPackage or []
-    #   else if value.recurseForDerivations or false || value.recurseForRelease or false then
-    #     packagePython value
-    #   else
-    #     []);
-    # in if res.success then res.value else []
+  # let res = builtins.tryEval (
+  #   if isDerivation value then
+  #     value.meta.isBuildPythonPackage or []
+  #   else if value.recurseForDerivations or false || value.recurseForRelease or false then
+  #     packagePython value
+  #   else
+  #     []);
+  # in if res.success then res.value else []
 
   # TODO tester ce qui fait flipper/ peut foirer
 # EXT4_ENCRYPTION
@@ -78,13 +78,22 @@ in rec {
     structuredExtraConfig = structuredConfigs.debugConfigStructured ;
   };
 
+
+  # used to check https://github.com/NixOS/nixpkgs/pull/55755/files
+  linux_latest_without_ns = prev.linux_latest.override {
+    # That works
+    # defconfig = "x86_64_defconfig kvmconfig";
+    structuredExtraConfig = {
+
+      NET_NS      = libk.no;
+    };
+  };
+
   my_lenovo_kernel = linux_mptcp_trunk_raw;
 
 
   # TODO try make localmodconfig
-  linux_mptcp_trunk_raw = (prev.callPackage ./pkgs/kernels/linux-mptcp-trunk.nix
-    {
-
+  linux_mptcp_trunk_raw = (prev.callPackage ./pkgs/kernels/linux-mptcp-trunk.nix {
 
     # will set INSTALL_MOD_STRIP=1
     dontStrip = true;

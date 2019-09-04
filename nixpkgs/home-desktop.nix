@@ -59,7 +59,7 @@ let
       };
   in [
     # gnome3.california # fails
-    khal # => vdirsyncer !
+    # khal # => vdirsyncer !
     khard
     libsecret
     newsboat

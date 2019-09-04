@@ -45,7 +45,7 @@
       # # same when creating the pool
       user="teto"
       group="users"
-      
+
       # Whether libvirt should dynamically change file ownership
       # to match the configured user/group above. Defaults to 1.
       # Set to 0 to disable file ownership changes.

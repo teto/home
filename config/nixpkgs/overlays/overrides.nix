@@ -38,38 +38,6 @@ rec {
       };
 	});
 
-  # ranger = super.ranger.override ( { pythonPackages=super.python3Packages; });
-  # khal = super.khal.overrideAttrs (oldAttrs: {
-  #    src = /home/teto/khal;
-  # });
-
-  # offlineimap = super.offlineimap.overrideAttrs (oldAttrs: {
-  #   # pygobject2
-  #   # USERNAME 	echo " nix-shell -p python3Packages.secretstorage -p python36Packages.keyring -p python36Packages.pygobject3"
-  #   propagatedBuildInputs = with super.pythonPackages; oldAttrs.propagatedBuildInputs ++ [ secretstorage keyring pygobject3  ];
-  # });
-
-  # vdirsyncer = super.vdirsyncer.overridePythonAttrs (oldAttrs: {
-  #   patches = [
-  #     (super.fetchpatch {
-  #       url = https://github.com/pimutils/vdirsyncer/pull/788.patch;
-  #       sha256 = "0vl942ii5iad47y63v0ngmhfp37n30nxyk4j7h64b95fk38vfwx9";
-  #     })
-  #     (super.fetchpatch {
-  #       url = https://github.com/pimutils/vdirsyncer/pull/779.patch;
-  #       sha256 = "1s89h9a1635dx9sji2kavlczqdbnapa1y23svfzqglvblwr63900";
-  #     })
-  #   ];
-  # });
-
-  # vdirsyncer-custom = super.vdirsyncer.overrideAttrs(oldAttrs: rec {
-  #   doCheck=true; # doesn't work, checkPhase still happens
-  #   propagatedBuildInputs = oldAttrs.propagatedBuildInputs
-  #   ++ (with super.pkgs.python3Packages;
-  #           [  keyring secretstorage pygobject3 ])
-  #   ++ [ super.pkgs.liboauth super.pkgs.gobjectIntrospection];
-  # });
-
   # nix-shell -p python.pkgs.my_stuff
 
   rfc-bibtex = (super.rfx-bibtex  or (super.python3Packages.callPackage ./pkgs/rfc-bibtex {}));

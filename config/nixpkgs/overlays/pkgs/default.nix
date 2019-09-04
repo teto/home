@@ -106,4 +106,8 @@ final: prev:
   i3dispatch = prev.python3Packages.callPackage ./i3-dispatch {};
 
   rofi-scripts = prev.callPackage ./rofi-scripts {};
+
+  texlab = prev.callPackage ./texlab {};
+
+
 }

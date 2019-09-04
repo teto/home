@@ -130,7 +130,13 @@ with lib.modules;
     CHELSIO_TLS  = no;
   };
 
+  # CONFIG_INITRAMFS_SOURCE=""
+  # TODO https://www.oipapio.com/question-3244544
+  bzimage = {
+    VIRTIO_PCI = yes;
 
+    # VIRTIO_BLK_SCSI
+  };
 
   kvmConfigStructured = {
     # all the VIRTIO that appears in "selected by" when you open
@@ -154,6 +160,8 @@ with lib.modules;
     VIRTIO_NET        = yes;
     RPMSG_VIRTIO      = option yes;
     VIRTIO_CONSOLE    = yes;
+    SCSI_VIRTIO    = yes;
+    DRM_VIRTIO_GPU = yes;
 
       HW_RANDOM_VIRTIO     = enable;  # Means module or yes
       # VIRTIO_MMIO_CMDLINE_DEVICES

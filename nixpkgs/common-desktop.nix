@@ -219,7 +219,7 @@ in
 
   # don't forget to run ulimit -c unlimited to get the actual coredump
   # then coredumpctl debug will launch gdb !
-  systemd.coredump.enable = true;
+  # boot.kernel.sysctl."kernel.core_pattern" = "core"; to disable.
   # security.pam.loginLimits
 
   # networking.extraHosts = secrets.extraHosts;

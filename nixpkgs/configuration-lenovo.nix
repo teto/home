@@ -26,8 +26,8 @@ in
     # extra module not upstreamed yet
     ({ config, lib, ... }:
     {
-      boot.enforceRequiredConfig = true;
-
+      # boot.enforceRequiredConfig = true;
+      boot.kernel.checkPackageConfig = true;
     })
     # ./modules/mptcp.nix
 
@@ -38,6 +38,9 @@ in
 
   # nesting clones can be useful to prevent GC of some packages
   # https://nixos.org/nix-dev/2017-June/023967.html
+
+
+  # system.requiredKernelConfig 
 
   fileSystems."/mnt/ext" =
     { device = "/dev/sda4";
@@ -88,7 +91,12 @@ in
   # boot.kernelParams = [ "earlycon=ttyS0" "console=ttyS0" ];
   # boot.kernelPackages = pkgs.linuxPackagesFor pkgs.my_lenovo_kernel;
   # boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_latest_debug;
+
+  # DOES NOT WORK !
   # boot.kernelPackages = unstable.pkgs.linuxPackages;
+
+  # 
+  boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_latest_without_ns;
 
   # lib.mkMerge
   boot.kernelModules =  [
@@ -275,12 +283,12 @@ in
 
   # networking.iproute2.enable = true;
 
-  networking.mptcp = {
-    enable = true;
-    debug = true;
-    pathManager = "netlink";
-    package = pkgs.linux_mptcp_trunk_raw;
-  };
+  # networking.mptcp = {
+  #   enable = true;
+  #   debug = true;
+  #   pathManager = "netlink";
+  #   package = pkgs.linux_mptcp_trunk_raw;
+  # };
 
   # once available
   services.greenclip.enable = true;
