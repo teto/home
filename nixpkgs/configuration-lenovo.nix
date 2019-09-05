@@ -7,7 +7,7 @@ in
   imports = [
     # todo renommer en workstation
     # ./hardware-dell.nix
-    /etc/nixos/hardware-configuration.nix
+    ./hardware-lenovo.nix
 
     ./modules/distributedBuilds.nix
     ./config-all.nix
@@ -95,8 +95,9 @@ in
   # DOES NOT WORK !
   # boot.kernelPackages = unstable.pkgs.linuxPackages;
 
-  # 
   boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_latest_without_ns;
+
+  # boot.extraModulePackages
 
   # lib.mkMerge
   boot.kernelModules =  [
