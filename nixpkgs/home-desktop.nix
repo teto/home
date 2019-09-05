@@ -26,7 +26,8 @@ let
     exa  # to list files
     gdb
     git-review # to contribute to wireshark
-    gitAndTools.diff-so-fancy
+
+    gitAndTools.diff-so-fancy # todo install it via the git config instead
     # https://github.com/felipec/git-remote-hg
     # gitAndTools.git-remote-hg
     gitAndTools.git-recent
@@ -75,10 +76,9 @@ let
     # alsa-utils # for alsamixer
     arandr  # to move screens/monitors around
     # buku
-    dynamic-colors
+    dynamic-colors # to change the terminal colors ("dynamic-colors switch solarized-dark")
     # gcalc
     # unstable.dropbox
-    # gnome3.eog # eye of gnome = image viewer / creates a collision
     gnome3.networkmanagerapplet # should
     gnome3.defaultIconTheme # else nothing appears
     mpv
@@ -92,8 +92,8 @@ let
     # todo try sthg else
     # requires xdmcp https://github.com/freedesktop/libXdmcp
     # haskellPackages.greenclip # todo get from haskell
-    unstable.gnome3.eog
-    moc
+    unstable.gnome3.eog # eye of gnome = image viewer / creates a collision
+    moc  # music player
     mupdf.bin # evince does better too
     # mdp # markdown CLI presenter
     # gnome3.gnome_control_center
