@@ -4,7 +4,7 @@ buildGoPackage rec {
   pname = "gitbatch";
   version = "0.5.0";
 
-  goPackagePath = "https://github.com/isacikgoz/gitbatch";
+  goPackagePath = "github.com/isacikgoz/gitbatch";
 
   subPackages = [ "." ];
 
@@ -12,7 +12,7 @@ buildGoPackage rec {
     owner = "isacikgoz";
     repo = pname;
     rev = "v${version}";
-    sha256 = "0zynw5gr96a59x1qshzhhvld883ndf1plnw6l9dbhmff0wcfv6l1";
+    sha256 = "sha256-vmxaZbwb98gZMm4CVEWC7AUn1Tvdxgqw6416jOAB7eQ=";
   };
 
   meta = with stdenv.lib; {

@@ -1,3 +1,4 @@
+# https://github.com/tmux/tmux/wiki/FAQ
 # use UTF8
 # set -g utf8
 #set-window-option -g utf8 on
@@ -19,6 +20,12 @@ bind C-a send-prefix
 
 # shorten command delay
 set -sg escape-time 1
+
+# for true color
+set -as terminal-overrides ",gnome*:RGB"
+
+set -g default-terminal "tmux"
+set -as terminal-overrides ",*:U8=0"
 
 # set window and pane index to 1 (0 by default)
 #set-option -g base-index 1
