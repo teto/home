@@ -11,7 +11,6 @@ let
     csvsimple subfigure  glossaries biblatex logreq xstring biblatex-ieee subfiles mfirstuc;
    };
 
-
   devPkgs = with pkgs; let
       # float to use coc.nvim
       # TODO pass extraMakeWrapperArgs

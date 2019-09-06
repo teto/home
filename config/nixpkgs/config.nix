@@ -5,7 +5,7 @@
          # "linux-4.13.16"
 	];
 	# allowBroken = true;
-	# allowUnfree = true;
+	allowUnfree = true;
 
     # to replicate grahamOfBorgerros
     checkMeta=true;

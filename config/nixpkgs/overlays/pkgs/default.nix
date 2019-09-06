@@ -46,10 +46,14 @@ final: prev:
 
   colr = prev.callPackage ./colr {};
 
+  dig = final.bind.dnsutils;
+
   dualsub = prev.callPackage ./dualsubtitles { };
 
   fzf-extras =  # prev.callPackage ./fzf-extras.nix {};
     builtins.fetchurl https://github.com/atweiden/fzf-extras/blob/master/fzf-extras.zsh;
+
+  gitbatch = prev.callPackage ./gitbatch { };
 
   gnvim = prev.callPackage ./gnvim { };
 
@@ -71,7 +75,6 @@ final: prev:
   packetdrill-mptcp = prev.packetdrill.overrideAttrs ( oa: {
   });
 
-  dig = final.bind.dnsutils;
 
   # oni = prev.callPackage ./oni/default.nix {};
 
