@@ -123,6 +123,9 @@ let
 
   home.sessionVariables = {
     # JUPYTER_CONFIG_DIR=
+
+    # this variable is used by i3-sensible-terminal to determine the basic terminal
+    TERMINAL = "kitty";
   };
 
   # the kind of packages u don't want to compile
@@ -345,22 +348,4 @@ in
   };
 
 
-  # TODO make sure it works
-  # systemd.user.services.vdirsyncer = {
-  #   Unit = {
-  #     After = [ "network.target" ];
-  #     Description = "Vdirsyncer Daemon";
-  #   };
-
-  #   Install = {
-  #     WantedBy = [ "default.target" ];
-  #   };
-
-  #   Service = {
-  #     Environment = "PATH=${config.home.profileDirectory}/bin";
-  #     ExecStart = "${pkgs.vdirsyncer}/bin/vdirsyncer sync";
-  #     Type = "notify";
-  #     # ExecStartPre = ''${pkgs.bash}/bin/bash -c "${pkgs.coreutils}/bin/mkdir -p '${cfg.dataDir}' '${cfg.playlistDirectory}'"'';
-  #   };
-  # };
 }

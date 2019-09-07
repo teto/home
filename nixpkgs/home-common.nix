@@ -102,6 +102,7 @@ rec {
     WWW_HOME="$XDG_CONFIG_HOME/w3m";
     # used by ranger
     TERMCMD="termite";
+    # TERMINAL # used by i3-sensible-terminal
   };
 
   # TODO
@@ -180,20 +181,28 @@ rec {
       key = "64BB6787";
     };
 
-    extraConfig=''
-      [rebase]
-        autosquash = true
-        autoStash = true
+    extraConfig= {
+      rebase = {
+        autosquash = true;
+        autoStash = true;
+      };
 
-      [pull]
-        rebase = true
+      pull = {
+        rebase = true;
+      };
 
-      [stash]
-          showPatch = 1
+      stash = {
+          showPatch = 1;
+      };
+      color = {
+        ui = true;
+      };
 
-      [credential "https://github.com"]
-        username = teto
-      '';
+    # pager = {
+	# diff = diff-so-fancy | less --tabs=1,5 -RFX
+	# show = diff-so-fancy | less --tabs=1,5 -RFX
+  # };
+    };
   };
 
   # programs.neovim = {

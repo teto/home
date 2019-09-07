@@ -144,11 +144,12 @@ let
     options cfg80211 ieee80211_regdom="GB"
   '';
 
+  programs.seahorse.enable = true; # UI to manage keyrings
+
   # List services that you want to enable:
   services = {
     gnome3 = {
       gnome-keyring.enable = true;
-      seahorse.enable = true; # UI to manage keyrings
       at-spi2-core.enable = true; # for keyring it seems
     };
 
@@ -241,8 +242,6 @@ let
   hardware.brightnessctl.enable = true;
 
   networking.iproute2.enable = true;
-
-  systemd.coredump.enable = true;
 
   services.logind = {
 

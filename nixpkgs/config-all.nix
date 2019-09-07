@@ -266,7 +266,7 @@ kernel_xconfig=''
   boot.kernel.sysctl = {
     # to not provoke the kernel into crashing
     # "net.ipv4.tcp_timestamps" = 0;
-    "net.ipv4.tcp_allowed_congestion_control" = "reno cubic";
+    # "net.ipv4.tcp_allowed_congestion_control" = "reno cubic";
     
   };
 

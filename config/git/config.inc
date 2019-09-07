@@ -1,7 +1,9 @@
+# TODO this should be generated
 [user]
   name = Matthieu Coudron
   email = mattator@gmail.com
   signingkey = E1B768A0
+
 compactionHeuristic
 
 [push]
@@ -12,7 +14,6 @@ compactionHeuristic
 compression = 0
 gitproxy  = git-proxy
 
-#trailing-space
 
 [color]
   ui = true
@@ -21,6 +22,10 @@ gitproxy  = git-proxy
 [pager]
 	diff = diff-so-fancy | less --tabs=1,5 -RFX
 	show = diff-so-fancy | less --tabs=1,5 -RFX
+
+
+[credential "https://github.com"]
+	username = teto
 
 # [sendemail.iij]
 # envelopeSender
