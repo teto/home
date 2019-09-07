@@ -1,20 +1,18 @@
 { config, pkgs, lib,  ... }:
 let
-  i3extraConfig = lib.concatStrings [
-    (builtins.readFile ../../config/i3/config.main)
-    (builtins.readFile ../../config/i3/config.xp)
-    (builtins.readFile ../../config/i3/config.colors)
-  ];
-
+  # i3extraConfig = 
 
   unstable = import <nixos-unstable> {}; # https://nixos.org/channels/nixos-unstable
 
-  # qutebrowser = unstable.qutebrowser;
+  # or use {pkgs.kitty}/bin/kitty
+  term = "kitty";
+  # term = "termite";
 in
 {
   xsession.windowManager.i3 =
   let
     bind_ws = workspace_id: fr: us:
+
     let ws = builtins.toString workspace_id;
     in
       {
@@ -26,8 +24,34 @@ in
     in
   {
     enable = true;
-    extraConfig = i3extraConfig;
+    extraConfig = (lib.concatStrings [
+      (builtins.readFile ../../config/i3/config.main)
+      (builtins.readFile ../../config/i3/config.xp)
+      (builtins.readFile ../../config/i3/config.colors)
+    ])
+    + ''
+      set $term ${term}
+
+      workspace_auto_back_and_forth true;
+      show_marks yes
+
+      set $w1 1:
+      set $w2 2:
+      set $w3 3:
+      set $w4 4:qemu
+      set $w5 5:misc
+      set $w6 6:irc
+      set $w7 7
+      set $w8 8
+      set $w9 9
+    ''
+    ;
+
+    # prefix with pango if you want to have fancy effects
     config = {
+
+      focus.followMouse = true;
+      fonts = [ "pango:FontAwesome 12" "Terminus 10" ];
       bars = let
         # i3pystatus-custom = pkgs.i3pystatus.overrideAttrs (oldAttrs: {
         #   propagatedBuildInputs = with pkgs.python3Packages; oldAttrs.propagatedBuildInputs ++ [ pytz ];
@@ -47,6 +71,7 @@ in
         }
       ];
       keycodebindings= { };
+      # todo use assigns instead
       startup=[
         # TODO improve config/config specific
         { command= "setxkbmap -layout us"; always = true; notification = false; }
@@ -159,6 +184,10 @@ in
       };
     in
     {
+      "$mod+f" = "fullscreen";
+      "$mod+Shift+f" = "fullscreen global";
+    }
+    // {
         # todo use i3lock-fancy instead
         # alternative is "light"
         # set $greenclip "rofi -modi 'clipboard:greenclip print' -show clipboard"

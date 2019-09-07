@@ -6,11 +6,6 @@
 #
 #” “
 
-# font for window titles
-# prefix with pango if you want to have fancy effects
-# font pango:Liberation Sans Mono 12
-font pango:FontAwesome 12
-
 # -modi fb:../Examples/rofi-file-browser.sh
 # https://github.com/DaveDavenport/rofi
 # Combi mode, allow several modes to be merged into one list.
@@ -38,7 +33,6 @@ set $mod Mod1
 set $rmod Mod1
 set $BROWSER qutebrowser
 #set $term rxvt-unicode
-set $term termite
 # tODO move to nix generator ?
 
 # to easily swap between i3/vim mode
@@ -49,15 +43,15 @@ set $kright l
 
 # 
 # 
-set $w1 1:
-set $w2 2:
-set $w3 3:
-set $w4 4:qemu
-set $w5 5:misc
-set $w6 6:irc
-set $w7 7
-set $w8 8
-set $w9 9
+# set $w1 1:
+# set $w2 2:
+# set $w3 3:
+# set $w4 4:qemu
+# set $w5 5:misc
+# set $w6 6:irc
+# set $w7 7
+# set $w8 8
+# set $w9 9
 
 
 # default border size
@@ -72,12 +66,6 @@ for_window [instance="pad_*"] move scratchpad
 for_window [class="Codeblocks" title="Global Variable Editor"] resize grow right 500;
 for_window [class="Codeblocks" title="codeblocks"] resize grow left 300;
 for_window [class="Codeblocks" title="Multiple matches"] resize grow right 300;
-
-show_marks yes
-
-focus_follows_mouse no
-#workspace_bar no
-
 
 # Manage monitors, enable or disable, it's in rofi-scripts
 bindsym $mod+Shift+V exec "manage_monitors.sh"
@@ -140,7 +128,6 @@ bindsym $mod+n mode "focused"
 #bindsym $mod+c exec "~/.i3/misc_commands.py"
 bindsym $mod+t exec floating toggle
 
-workspace_auto_back_and_forth yes
 # Go into hibernation
 #bindsym Mod4+Shift+F9 exec sudo hibernate -F /etc/hibernate/tuxonice.conf
 
@@ -193,8 +180,8 @@ bindsym $mod+Shift+Right move right
 bindsym $mod+v split toggle
 
 # enter fullscreen mode for the focused container
-bindsym $mod+f fullscreen
-bindsym $mod+Shift+f fullscreen global
+# bindsym $mod+f fullscreen
+# bindsym $mod+Shift+f fullscreen global
 
 # change container layout (stacked, tabbed, default)
 bindsym $GroupFr+$mod+ampersand layout toggle

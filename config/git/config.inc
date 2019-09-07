@@ -12,7 +12,7 @@ compactionHeuristic
 [core]
   # whitespace = space-before-tab
 compression = 0
-gitproxy  = git-proxy
+# gitproxy  = git-proxy
 
 
 [color]
