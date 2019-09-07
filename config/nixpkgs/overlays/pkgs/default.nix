@@ -59,7 +59,15 @@ final: prev:
 
   hunter = prev.callPackage ./hunter { };
 
+  mda-lite = prev.pythonPackages.callPackage ./mda-lite {};
+
+  mptcpnumerics = prev.python3Packages.callPackage ./mptcpnumerics.nix {};
+
+  mptcpanalyzer = prev.python3Packages.callPackage ./mptcpanalyzer { };
+
   neovim-gtk = prev.callPackage ./neovim-gtk { };
+
+  nushell = prev.callPackage ./nushell { };
 
   # nix-dev = prev.nix.overrideAttrs(oa: {
   #   dontStrip = true;
@@ -69,8 +77,6 @@ final: prev:
   subtitles-rs = prev.callPackage ./subtitles-rs { };
 
 
-  mptcpanalyzer = prev.python3Packages.callPackage ./mptcpanalyzer { };
-
   # http-getter = prev.python3Packages.callPackage ./http-getter { } ;
   packetdrill-mptcp = prev.packetdrill.overrideAttrs ( oa: {
   });
@@ -78,9 +84,6 @@ final: prev:
 
   # oni = prev.callPackage ./oni/default.nix {};
 
-  mda-lite = prev.pythonPackages.callPackage ./mda-lite {};
-
-  mptcpnumerics = prev.python3Packages.callPackage ./mptcpnumerics.nix {};
 
   # rustNightlyPlatform = prev.recurseIntoAttrs (prev.makeRustPlatform rust-nightly);
 

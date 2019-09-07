@@ -390,3 +390,5 @@ compdef _gnu_generic mptcpanalyzer
 # you can list the actually bound keys with bindkey -M viins
 . "$XDG_CONFIG_HOME/fzf-gems/fzf_git_keybindings.zsh"
 # }}}
+
+eval "$(starship init zsh)"
