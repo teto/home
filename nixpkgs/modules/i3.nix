@@ -32,7 +32,7 @@ in
     + ''
       set $term ${term}
 
-      workspace_auto_back_and_forth true;
+      workspace_auto_back_and_forth true
       show_marks yes
 
       set $w1 1:

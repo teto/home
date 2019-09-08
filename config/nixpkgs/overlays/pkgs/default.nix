@@ -67,7 +67,7 @@ final: prev:
 
   neovim-gtk = prev.callPackage ./neovim-gtk { };
 
-  nushell = prev.callPackage ./nushell { };
+  # nushell = prev.callPackage ./nushell { };
 
   # nix-dev = prev.nix.overrideAttrs(oa: {
   #   dontStrip = true;

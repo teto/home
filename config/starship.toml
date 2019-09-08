@@ -14,3 +14,19 @@ disabled = true
 use_name = true
 impure_msg = "impure shell"
 pure_msg = "pure shell"
+
+
+[jobs]
+symbol = "+ "
+threshold = 4
+
+
+[cmd_duration]
+min_time = 4
+
+
+
+[battery]
+full_symbol = "🔋"
+charging_symbol = "⚡️"
+discharging_symbol = "💀"
