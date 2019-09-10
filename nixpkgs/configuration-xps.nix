@@ -19,15 +19,6 @@ let
     # ./modules/mptcp.nix
     ./modules/vpn.nix
 
-    # ./modules/jupyter2.nix
-
-    # for user teto
-    ./extraTools.nix
-    # ( {config, lib, pkgs, ...}:
-    #   {
-  # boot.kernelPackages = pkgs.linuxPackages_latest;
-
-# })
 
       <nixos-hardware/dell/xps/13-9360>
   ] ;

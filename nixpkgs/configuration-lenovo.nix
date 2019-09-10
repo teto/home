@@ -24,17 +24,26 @@ in
   #   ./modules/mininet.nix
 
     # extra module not upstreamed yet
-    ({ config, lib, ... }:
-    {
-      # boot.enforceRequiredConfig = true;
-      boot.kernel.checkPackageConfig = true;
-    })
+    # makes it crash
+    # ({ config, lib, ... }:
+    # {
+    #   _file = "matt";
+    #   # boot.enforceRequiredConfig = true;
+    #   # boot.kernel.checkPackageConfig = true;
+    # })
     # ./modules/mptcp.nix
 
-    # for user teto
-    ./extraTools.nix
   ]
   ;
+
+  users.extraUsers.teto.packages = with pkgs; [
+    pciutils # for lspci
+    ncdu  # to see disk usage
+    bridge-utils # pour  brctl
+    wirelesstools # to get iwconfig
+    gitAndTools.diff-so-fancy
+    # aircrack-ng
+  ];
 
   # nesting clones can be useful to prevent GC of some packages
   # https://nixos.org/nix-dev/2017-June/023967.html
@@ -124,30 +133,31 @@ in
   # it is necessary to use dnssec though :(
   networking.resolvconf.dnsExtensionMechanism = false;
   networking.resolvconf.dnsSingleRequest = false;
-  networking.interfaces = {
-      # macAddress = "3B-0B-B5-6A-ED-91";
-      eno1 = {
-        name = "proxy"; useDHCP=true;  mtu=1500;
-        # I just want to use 
-        ipv4.routes = [
-          { address = "10.0.0.0"; prefixLength = 16; }
-          # { address = "192.168.2.0"; prefixLength = 24; via = "192.168.1.1"; }
-        ];
-      };
-      # eth1 = { name = "eth1"; useDHCP=true; };
-  };
+
+  # networking.interfaces = {
+  #     # macAddress = "3B-0B-B5-6A-ED-91";
+  #     eno1 = {
+  #       name = "proxy"; useDHCP=true;  mtu=1500;
+  #       # I just want to use 
+  #       ipv4.routes = [
+  #         { address = "10.0.0.0"; prefixLength = 16; }
+  #         # { address = "192.168.2.0"; prefixLength = 24; via = "192.168.1.1"; }
+  #       ];
+  #     };
+  #     # eth1 = { name = "eth1"; useDHCP=true; };
+  # };
 
 
   # to allow wireshark to capture from netlink
-  networking.localCommands = ''
-    ip link show nlmon0
-    if [ $? -ne 0 ]; then
-      ip link add nlmon0 type nlmon
-      ip link set dev nlmon0 up
-    fi
-  '';
+  # networking.localCommands = ''
+  #   ip link show nlmon0
+  #   if [ $? -ne 0 ]; then
+  #     ip link add nlmon0 type nlmon
+  #     ip link set dev nlmon0 up
+  #   fi
+  # '';
 
-  programs.seahorse.enable = true; # UI to manage keyrings
+  # programs.seahorse.enable = false; # UI to manage keyrings
 
   # List services that you want to enable:
   services = {
@@ -164,10 +174,8 @@ in
       drivers = [ pkgs.gutenprint pkgs.gutenprintBin ];
     };
 
-
     # just locate
     locate.enable = true;
-
     # dbus.packages = [ ];
   };
 
@@ -179,12 +187,13 @@ in
       #             (attrNames (readDir path)))
       # ++ [ (import ./envs.nix) ];
 
-  nixpkgs.overlays = [
-    # (import <nixpkgs-overlays/kernels.nix>)
-    # (import ./overlays/haskell.nix) 
-  ];
+  # nixpkgs.overlays = [
+  #   # (import <nixpkgs-overlays/kernels.nix>)
+  #   # (import ./overlays/haskell.nix) 
+  # ];
 
-  nixpkgs.config.allowUnfree = true;
+  # for sublime text
+  # nixpkgs.config.allowUnfree = true;
 
   # <nixos-overlay>
   # just for testing
@@ -193,31 +202,6 @@ in
   security.sudo.extraConfig = ''
     Defaults        timestamp_timeout=30
   '';
-
-  # to prevent
-  # The VirtualBox Linux kernel driver (vboxdrv) is either not loaded or there is a permission problem with /dev/vboxdrv. Please reinstall the kernel module by executing '/sbin/vboxconfig' as root.
-
-  # virtualisation.virtualbox = {
-  #   host.enable = true;
-  #   host.enableExtensionPack = true;
-  #   host.addNetworkInterface = true; # adds vboxnet0
-  #   # Enable hardened VirtualBox, which ensures that only the binaries in the system path get access to the devices exposed by the kernel modules instead of all users in the vboxusers group.
-  #    host.enableHardening = true;
-  #    host.headless = false;
-  # };
-
-  # test with mininet VM
-  # fileSystems."/virtualbox" = {
-     # fsType = "vboxsf";
-  #   device = "tschlenk";
-  #   options = "rw,uid=1000,gid=100";
-  # };
-
-  # services.telnet = {
-  #   enable = true;
-  #   openFirewall = true;
-  #   # port = ;
-  # };
 
   # services.xserver.desktopManager.default = "none";
   # services.xserver.desktopManager.xterm.enable = true;
@@ -229,41 +213,38 @@ in
   services.xserver = {
     enable = true;
     autorun = true;
-    exportConfiguration = true;
+    # exportConfiguration = true;
     desktopManager.default = "none";
     desktopManager.xterm.enable = true;
     enableCtrlAltBackspace = true;
 
-    # displayManager.lightdm = {
-    #   autoLogin = {
-    #     enable = false;
-    #     user = "teto";
-
-    #   };
-    #   # background = ;
-    # };
-
+    displayManager.lightdm = {
+      autoLogin = {
+        enable = false;
+        user = "teto";
+      };
+      # background = ;
+    };
     # displayManager.slim = {
     #     autoLogin = true;
     #     defaultUser = "teto";
     # };
 
     # set the correct primary monitor
-    xrandrHeads = [
-      {
-        primary = true;
-        # monitorConfig = ''
-        #   '';
+    # xrandrHeads = [
+    #   {
+    #     primary = true;
+    #     # monitorConfig = ''
+    #     #   '';
 
-        output = "DP-2";
-      }
-    ];
+    #     output = "DP-2";
+    #   }
+    # ];
 
     videoDrivers = [ "nvidia" ];
   };
 
-
-# hardware.nvidia.package
+  # hardware.nvidia.package
 
   # docker pull mattator/dce-dockerfiles
   # virtualisation.docker = {
@@ -271,9 +252,6 @@ in
   #   enableOnBoot = true;
   #   # logDriver = 
   #   # liveRestore
-  # };
-
-  # services.xserver.displayManager.gdm = {
   # };
 
   nix = {
@@ -284,20 +262,19 @@ in
     };
 
     distributedBuilds = false;
-    package = pkgs.nixFlakes;
+    # package = pkgs.nixFlakes;
   };
 
   # kind of a test
-  security.pam.services.lightdm.enableGnomeKeyring = true;
+  # security.pam.services.lightdm.enableGnomeKeyring = true;
 
-  hardware.bluetooth.enable = true;
-  hardware.bluetooth.powerOnBoot = true;
+  # hardware.bluetooth.enable = true;
+  # hardware.bluetooth.powerOnBoot = true;
 
   # will fial until openflowswitch is fixed
   programs.mininet.enable = false;
   # test with sudo mn --switch ovsk -v debug
 
-  # networking.iproute2.enable = true;
 
   # networking.mptcp = {
   #   enable = true;
@@ -307,13 +284,13 @@ in
   # };
 
   # once available
-  services.greenclip.enable = true;
+  # services.greenclip.enable = true;
 
   # services.owamp.enable = true;
 
   # ebpf ?
   # broken in https://github.com/NixOS/nixpkgs/issues/56724
-  programs.bcc.enable = true;
+  # programs.bcc.enable = true;
 
   environment.systemPackages = with pkgs;
     (import ./basetools.nix { inherit pkgs;})
@@ -324,40 +301,26 @@ in
       ]
   ;
 
-  # pour l'instant je les ai mis dans conf.d direct pour les tests
-  # networking.networkmanager = {
-  #   extraConfig = ''
-  #     '';
-  # };
-
-  # programs.ccache = {
-  #   enable = false;
-  #   # cacheDir = 
-  #   # packageNames = [ "wxGTK30" "qt48" "ffmpeg_3_3" "libav_all" ];
-  #   packageNames = ["linux_mptcp_trunk_raw"];
-  # };
-
   # services.squid.enable = true;
   # proxyPort
 
   # see https://github.com/NixOS/nixpkgs/pull/45345
   # switch to it via
   # sudo /run/current-system/fine-tune/child-1/bin/switch-to-configuration test
-  nesting.clone = [
-      {
-
-        imports = [
-          ./modules/proxy.nix
-        ];
-        boot.loader.grub.configurationName = "with proxy";
-        # networking.proxy.default = "http://proxy.work.com:80";
-        # networking.proxy.noProxy = "127.0.0.1,localhost,work.com";
-        # nix.binaryCaches = [
-        #         "http://nixcache.work.com"
-        #         "https://cache.nixos.org"
-        # ];
-      }
-  ];
+  # nesting.clone = [
+  #     {
+  #       imports = [
+  #         ./modules/proxy.nix
+  #       ];
+  #       boot.loader.grub.configurationName = "with proxy";
+  #       # networking.proxy.default = "http://proxy.work.com:80";
+  #       # networking.proxy.noProxy = "127.0.0.1,localhost,work.com";
+  #       # nix.binaryCaches = [
+  #       #         "http://nixcache.work.com"
+  #       #         "https://cache.nixos.org"
+  #       # ];
+  #     }
+  # ];
 
   # security.sudo.wheelNeedsPassword = ;
 

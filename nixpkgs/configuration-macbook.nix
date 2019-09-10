@@ -20,7 +20,6 @@ let
     # just for testing
     # ./modules/nextcloud.nix
 
-    # ./extraTools.nix
     ./modules/tor.nix
   ];
 

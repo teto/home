@@ -1,12 +1,11 @@
 { config, pkgs, options, lib, ... }:
-let 
+let
   secrets = import ./secrets.nix;
 in
 {
   imports = [
     "${builtins.fetchTarball https://github.com/rycee/home-manager/archive/master.tar.gz}/nixos"
 
-    ./extraTools.nix
   ];
 
   users.users.teto = {
@@ -31,14 +30,18 @@ in
      # generated with nix run nixpkgs.mkpasswd mkpasswd -m sha-512
      hashedPassword = "$6$T/5zYuCMI$U45oW0D6cPKsXtETwlNFpsit924HElAYtXPsGTpj0XS/ITUz39xpPxnL.kzUWqeqQmRxvEOAHBeKm5/xHDrvs1";
 
-     # import basetools
-     # packages = with pkgs; [
-     #   (import ./extraTools.nix)
-     #   # termite sxiv
-     # ];
 
      openssh.authorizedKeys.keyFiles = [ ./keys/iij_rsa.pub ];
      # openssh.authorizedKeys.keys = 
+     packages = with pkgs; [
+       pciutils # for lspci
+       ncdu  # to see disk usage
+       bridge-utils # pour  brctl
+       wirelesstools # to get iwconfig
+       gitAndTools.diff-so-fancy
+        # aircrack-ng
+      ];
+
   };
 
   # TODO add a group teto ?
