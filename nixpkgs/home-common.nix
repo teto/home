@@ -27,14 +27,15 @@ rec {
   # home.extraOutputsToInstall = [ "man" "doc" ];
   programs.man.enable = true;
 
-  home.packages = [
+  home.packages = with pkgs; [
+    pkgs.starship
     # TODO pass to vim makeWrapperArgs
     pkgs.nodePackages.bash-language-server
     # just in my branch :'(
     pkgs.luaPackages.lua-lsp
 
     # to be used in i3
-    pkgs.i3dispatch
+    # pkgs.i3dispatch
   ];
 
   # works only because TIGRC_USER is set

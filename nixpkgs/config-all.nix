@@ -276,7 +276,7 @@ kernel_xconfig=''
   # convert set back to list
   security.sudo = {
     enable = true;
-    wheelNeedsPassword = true;
+    # wheelNeedsPassword = true;
   };
 
   system = {

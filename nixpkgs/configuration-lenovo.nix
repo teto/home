@@ -95,9 +95,8 @@ in
   # DOES NOT WORK !
   # boot.kernelPackages = unstable.pkgs.linuxPackages;
 
-  boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_latest_without_ns;
+  # boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_latest_without_ns;
 
-  # boot.extraModulePackages
 
   # lib.mkMerge
   boot.kernelModules =  [
@@ -148,12 +147,12 @@ in
     fi
   '';
 
+  programs.seahorse.enable = true; # UI to manage keyrings
 
   # List services that you want to enable:
   services = {
     gnome3 = {
       gnome-keyring.enable = true;
-      seahorse.enable = true; # UI to manage keyrings
       at-spi2-core.enable = true; # for keyring it seems
     };
 
@@ -181,7 +180,7 @@ in
       # ++ [ (import ./envs.nix) ];
 
   nixpkgs.overlays = [
-    (import <nixpkgs-overlays/kernels.nix>)
+    # (import <nixpkgs-overlays/kernels.nix>)
     # (import ./overlays/haskell.nix) 
   ];
 
@@ -219,19 +218,35 @@ in
   #   openFirewall = true;
   #   # port = ;
   # };
-  services.xserver = {
-    displayManager.lightdm = {
-      autoLogin = {
-        enable = true;
-        user = "teto";
 
-      };
-      # background = ;
-    };
-    displayManager.slim = {
-        autoLogin = true;
-        defaultUser = "teto";
-    };
+  # services.xserver.desktopManager.default = "none";
+  # services.xserver.desktopManager.xterm.enable = true;
+  # # services.xserver.desktopManager.x
+  # # services.xserver.windowManager.default = "none";
+  # services.xserver.windowManager.i3.enable = true;
+  # # xserver.displayManager.auto.enable = "teto";
+  # # boot.extraModulePackages
+  services.xserver = {
+    enable = true;
+    autorun = true;
+    exportConfiguration = true;
+    desktopManager.default = "none";
+    desktopManager.xterm.enable = true;
+    enableCtrlAltBackspace = true;
+
+    # displayManager.lightdm = {
+    #   autoLogin = {
+    #     enable = false;
+    #     user = "teto";
+
+    #   };
+    #   # background = ;
+    # };
+
+    # displayManager.slim = {
+    #     autoLogin = true;
+    #     defaultUser = "teto";
+    # };
 
     # set the correct primary monitor
     xrandrHeads = [
@@ -343,6 +358,8 @@ in
         # ];
       }
   ];
+
+  # security.sudo.wheelNeedsPassword = ;
 
        # system.replaceRuntimeDependencies
        #     List of packages to override without doing a full rebuild. The original derivation and replacement derivation must have the same name length, and ideally should have close-to-identical directory layout.

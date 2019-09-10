@@ -53,6 +53,9 @@ rec {
         #   SETUPTOOLS_SCM_PRETEND_VERSION="1.10.5";
         # });
 
+        mininet = pythonsuper.alot.overrideAttrs (oldAttrs: {
+        });
+
         alot = pythonsuper.alot.overrideAttrs (oldAttrs: {
           name = "alot-dev";
           version = "0.9-dev";
