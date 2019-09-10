@@ -25,12 +25,12 @@ in
 
     # extra module not upstreamed yet
     # makes it crash
-    # ({ config, lib, ... }:
-    # {
-    #   _file = "matt";
-    #   # boot.enforceRequiredConfig = true;
-    #   # boot.kernel.checkPackageConfig = true;
-    # })
+    ({ config, lib, ... }:
+    {
+      _file = "matt";
+      # boot.enforceRequiredConfig = true;
+      boot.kernel.checkPackageConfig = true;
+    })
     # ./modules/mptcp.nix
 
   ]

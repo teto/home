@@ -199,6 +199,12 @@ rec {
         ui = true;
       };
 
+      pager = {
+        # diff-so-fancy | less --tabs=1,5 -RFX
+        diff = "${pkgs.diff-so-fancy}/bin/diff-so-fancy | less --tabs=1,5 -RFX";
+        show = "${pkgs.diff-so-fancy}/bin/diff-so-fancy | less --tabs=1,5 -RFX";
+      };
+
     # pager = {
 	# diff = diff-so-fancy | less --tabs=1,5 -RFX
 	# show = diff-so-fancy | less --tabs=1,5 -RFX

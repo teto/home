@@ -160,10 +160,15 @@ with lib.modules;
     VIRTIO_NET        = yes;
     RPMSG_VIRTIO      = option yes;
     VIRTIO_CONSOLE    = yes;
+
+    IDE = mkForce yes;
+    IDE_GENERIC = mkForce yes;
+    SCSI    = yes;
     SCSI_VIRTIO    = yes;
     DRM_VIRTIO_GPU = yes;
 
-      HW_RANDOM_VIRTIO     = enable;  # Means module or yes
+      HW_RANDOM     = yes;  # Means module or yes
+      HW_RANDOM_VIRTIO     = yes;  # Means module or yes
       # VIRTIO_MMIO_CMDLINE_DEVICES
 
       # allow to capture netlink packets with wireshark !!
@@ -213,7 +218,7 @@ with lib.modules;
       NET_9P = yes;
       # repeated question:   9P Virtio Transport at /nix/store/l6m0lgcrls587pz0i644jhfjk6lyj55s-generate-config.pl line 8
       "9P_FS" = yes;
-      "9P_VIRTIO" = option yes;
+      # "9P_VIRTIO" = option yes;
       NET_9P_DEBUG = yes;
 
       NET_9P_VIRTIO = yes; # depends on VIRTIO
@@ -222,7 +227,8 @@ with lib.modules;
 
       # to be able to use capabilities on shared folders
       "9P_FS_SECURITY" = yes;
-      # 9P_FSCACHE
+      "9P_FSCACHE" = yes;
+      FSCACHE = yes;
     };
 
     lklConfig = {

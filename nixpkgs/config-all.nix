@@ -63,6 +63,7 @@ rec {
     moreutils # contains errno binary that can translate errnos
     ncurses.dev # for infocmp
     termite.terminfo # to be able to edit over ssh
+    kitty.terminfo # to be able to edit over ssh
     utillinux # for lsns (namespace listing)
   ]
   ++ (load-packages ./basetools.nix)
