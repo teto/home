@@ -160,9 +160,14 @@ with lib.modules;
     VIRTIO_NET        = yes;
     RPMSG_VIRTIO      = option yes;
     VIRTIO_CONSOLE    = yes;
+    # DRM_VIRTIO_GPU    = yes;
 
     IDE = mkForce yes;
     IDE_GENERIC = mkForce yes;
+    BLK_DEV_IDE_SATA = yes;
+    BLK_DEV_GENERIC = yes;
+    PARIDE = mkForce yes;
+
     SCSI    = yes;
     SCSI_VIRTIO    = yes;
     DRM_VIRTIO_GPU = yes;

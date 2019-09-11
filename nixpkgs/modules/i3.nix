@@ -50,7 +50,7 @@ in
     # prefix with pango if you want to have fancy effects
     config = {
 
-      focus.followMouse = true;
+      focus.followMouse = false;
       fonts = [ "pango:FontAwesome 12" "Terminus 10" ];
       bars = let
         # i3pystatus-custom = pkgs.i3pystatus.overrideAttrs (oldAttrs: {

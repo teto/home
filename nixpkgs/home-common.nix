@@ -201,8 +201,8 @@ rec {
 
       pager = {
         # diff-so-fancy | less --tabs=1,5 -RFX
-        diff = "${pkgs.diff-so-fancy}/bin/diff-so-fancy | less --tabs=1,5 -RFX";
-        show = "${pkgs.diff-so-fancy}/bin/diff-so-fancy | less --tabs=1,5 -RFX";
+        diff = "${pkgs.gitAndTools.diff-so-fancy}/bin/diff-so-fancy | less --tabs=1,5 -RFX";
+        show = "${pkgs.gitAndTools.diff-so-fancy}/bin/diff-so-fancy | less --tabs=1,5 -RFX";
       };
 
     # pager = {
@@ -310,6 +310,9 @@ rec {
       # TODO remove and include it ?
       # source $ZDOTDIR/zshrc.generated
       source $ZDOTDIR/zshrc
+
+
+      eval "$(${pkgs.starship}/bin/starship init zsh)"
     ''
       # + builtins.readFile dotDir + ./zshrc
       ;

@@ -382,6 +382,7 @@ compdef _gnu_generic mptcpanalyzer
 #     fi
 # }
 
+# TODO replace with fzf-extras
 # Enable FZF fuzzy matcher {{{
 
 # need zle to be active
@@ -391,4 +392,4 @@ compdef _gnu_generic mptcpanalyzer
 . "$XDG_CONFIG_HOME/fzf-gems/fzf_git_keybindings.zsh"
 # }}}
 
-eval "$(starship init zsh)"
+# eval "$(starship init zsh)"
