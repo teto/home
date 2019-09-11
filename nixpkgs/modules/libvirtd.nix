@@ -70,9 +70,9 @@
 #   <forward mode='nat'/>
 #   <bridge name='virbr1' stp='on' delay='0'/>
 #   <mac address='52:54:00:ce:91:92'/>
-#   <ip address='192.168.128.1' netmask='255.255.255.0'>
+#   <ip address='192.168.148.1' netmask='255.255.255.0'>
 #     <dhcp>
-#       <range start='192.168.128.2' end='192.168.128.254'/>
+#       <range start='192.168.148.2' end='192.168.148.254'/>
 #     </dhcp>
 #   </ip>
 # </network>
