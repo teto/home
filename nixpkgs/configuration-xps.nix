@@ -9,16 +9,15 @@ let
   imports = [
     # todo renommer en workstation
     # ./hardware-dell.nix
-    /etc/nixos/hardware-configuration.nix
+    ./hardware-xps.nix
 
     ./config-all.nix
     ./common-desktop.nix
-    # ./modules/libvirtd.nix
+    ./modules/libvirtd.nix
     ./modules/distributedBuilds.nix
 
     # ./modules/mptcp.nix
     ./modules/vpn.nix
-
 
       <nixos-hardware/dell/xps/13-9360>
   ] ;

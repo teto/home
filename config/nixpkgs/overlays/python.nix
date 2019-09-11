@@ -103,6 +103,8 @@ rec {
           installCheckPhase = false;
         });
 
+        pymupdf = pythonsuper.callPackage ./pkgs/pymupdf { };
+
         # look for matching wcwidth
         # cmd2 = pythonsuper.cmd2.overrideAttrs (oa: {
         #   # installFlags = [ "--ignore-installed" ];

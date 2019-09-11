@@ -162,11 +162,12 @@ with lib.modules;
     VIRTIO_CONSOLE    = yes;
     # DRM_VIRTIO_GPU    = yes;
 
+    # if we go for paravirtualized then we dont need ide/sata
     IDE = mkForce yes;
     IDE_GENERIC = mkForce yes;
     BLK_DEV_IDE_SATA = yes;
     BLK_DEV_GENERIC = yes;
-    PARIDE = mkForce yes;
+    # PARIDE = mkForce yes;
 
     SCSI    = yes;
     SCSI_VIRTIO    = yes;

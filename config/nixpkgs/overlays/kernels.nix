@@ -110,6 +110,13 @@ in rec {
     structuredExtraConfig = defaultConfigStructured;
   });
 
+  linux_latest_with_virtio = (prev.linux_latest.override {
+
+    structuredExtraConfig = with structuredConfigs; [
+      kvmConfigStructured
+    ];
+  });
+
   linuxPackages_mptcp_trunk = prev.linuxPackagesFor linux_mptcp_trunk_raw;
 
   linux_mptcp_trunk_dev = addMenuConfig linux_mptcp_trunk_raw ;

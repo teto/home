@@ -74,6 +74,7 @@ final: prev:
   #  enableDebugging = true;
   # }
 
+
   subtitles-rs = prev.callPackage ./subtitles-rs { };
 
 
@@ -108,6 +109,8 @@ final: prev:
   stab = prev.callPackage ./stab.nix {
     inherit (prev.pkgs.gnome2) libgnome libgnomeui;
   };
+
+  termpdfpy = prev.python3Packages.callPackage ./termpdf {};
 
   i3dispatch = prev.python3Packages.callPackage ./i3-dispatch {};
 
