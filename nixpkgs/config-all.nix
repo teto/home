@@ -280,7 +280,7 @@ kernel_xconfig=''
   };
 
   system = {
-    stateVersion = "18.03"; # why would I want to keep that ?
+    stateVersion = "19.03"; # why would I want to keep that ?
     copySystemConfiguration = true;
     # autoUpgrade = {
     #   channel= "https://nixos.org/channels/nixpkgs-unstable";

@@ -1,0 +1,6 @@
+
+
+./dev-shell --arg p "(p: [ (p.callPackage ~/nixops-libvirtd/release.nix {})])"
+
+nixops create -d mn ~/testbed/mininet-logical.nix ~/testbed/mininet-physical.nix
+nixops deploy -d mn -I nixos-config=$HOME/dotfiles/nixpkgs/configuration-lenovo.nix
