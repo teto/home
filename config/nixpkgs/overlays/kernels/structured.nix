@@ -167,7 +167,16 @@ with lib.modules;
     IDE_GENERIC = mkForce yes;
     BLK_DEV_IDE_SATA = yes;
     BLK_DEV_GENERIC = yes;
+    IDE_GD_ATAPI = yes;
+    BLK_DEV_SR = yes;
+    # MD=> MULTI device
+    PCMCIA= yes;
+
+    BLK_DEV_MD = no;
     # PARIDE = mkForce yes;
+
+    # DM => DEVICE MAPPER (lvm
+    BLK_DEV_DM_BUILTIN= no;
 
     SCSI    = yes;
     SCSI_VIRTIO    = yes;

@@ -32,7 +32,7 @@ in
 
 
      openssh.authorizedKeys.keyFiles = [ ./keys/iij_rsa.pub ];
-     # openssh.authorizedKeys.keys = 
+
      packages = with pkgs; [
        pciutils # for lspci
        ncdu  # to see disk usage

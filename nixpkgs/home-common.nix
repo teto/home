@@ -1,14 +1,7 @@
-# home-manager specific config from
 { config, pkgs, lib,  ... } @ args:
-# TODO to use cachix see https://cachix.org/
-# nix-shell -p 'python3.withPackages( ps : [ ps.scikitlearn ] )' ~/nixpkgs
 let
-  stable = import <nixos> {}; # https://nixos.org/channels/nixos
-  unstable = import <nixos-unstable> {}; # https://nixos.org/channels/nixos-unstable
-  # includeFzf= let fzfContrib="${pkgs.fzf}/share/fzf"; in ''
-  #   . "${fzfContrib}/completion.bash"
-  #   . "${fzfContrib}/key-bindings.bash"
-  #   '';
+  stable = import <nixos> {};
+  unstable = import <nixos-unstable> {};
 
   cliUtils = with pkgs; [
     netcat-gnu # plain 'netcat' is the bsd one
@@ -17,9 +10,6 @@ let
     xdg_utils
   ];
 
-  # TODO add heavyPackages only if available ?
-  # or set binary-cache
-  # nixos= import '<nixos-unstable>'
 in
 rec {
   news.display = "silent";

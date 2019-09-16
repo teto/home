@@ -15,6 +15,7 @@ in
     ./modules/network-manager.nix
     ./modules/libvirtd.nix
     ./modules/vpn.nix
+    ./modules/openssh.nix
 
     # see clone for that
     # ./modules/proxy.nix
@@ -28,8 +29,7 @@ in
     ({ config, lib, ... }:
     {
       _file = "matt";
-      # boot.enforceRequiredConfig = true;
-      boot.kernel.checkPackageConfig = true;
+      # boot.kernel.checkPackageConfig = true;
     })
     # ./modules/mptcp.nix
 
@@ -103,6 +103,7 @@ in
 
   # DOES NOT WORK !
   # boot.kernelPackages = unstable.pkgs.linuxPackages;
+  boot.kernelPackages = pkgs.linuxPackages;
 
   # boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_latest_without_ns;
 
@@ -330,6 +331,8 @@ in
 # system.userActivationScripts
   # system.copySystemConfiguration = true;
   # see https://www.mail-archive.com/nix-commits-bounces@lists.science.uu.nl/msg04507.html
+
+  # services.openssh.banner = "SALUT MATT";
 
   # marked as internal
   # $out here is the profile generation

@@ -162,5 +162,28 @@ in rec {
   #   ];
   # };
 
+
+  /*
+  simple convenience to just test the code faster
+  */
+  checkKernelConfigTest = let
+    # alread flattened
+    # genericCfg = import ../os-specific/linux/kernel/common-config.nix {
+    #   inherit (linux_latest) stdenv version ;
+    #   # otherwise common-config crashes
+    #   features = { xen_dom0 = false; };
+    # };
+
+    # this one has been processed yet
+    # genericCfg = linux_latest.configfile.passthru.structuredConfig;
+    genericCfg = prev.linux_latest.configfile.outPath;
+    requiredConfig = with prev.lib.kernel; {
+      IDE = yes;
+      HAVE_IDE = yes;
+    };
+  in
+    # prev.lib.kernel.checkKernelConfig (builtins.trace "hello" genericCfg) requiredConfig;
+    prev.checkKernelConfig (builtins.trace "hello" genericCfg) requiredConfig;
+
 }
 
