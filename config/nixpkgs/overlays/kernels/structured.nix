@@ -132,13 +132,45 @@ with lib.modules;
 
   # CONFIG_INITRAMFS_SOURCE=""
   # TODO https://www.oipapio.com/question-3244544
-  bzimage = {
-    VIRTIO_PCI = yes;
 
-    # VIRTIO_BLK_SCSI
+  # really good reference
+  # https://www.linux-kvm.org/page/Tuning_Kernel
+
+  # Useful options for the kernel of the host
+  paravirtualization_host = {
+    KVM_INTEL = option module;
+    KVM_AMD = option module;
+
+    VHOST_NET = module;
+    HPET = yes;  # High Precision Event Timer
+    TRANSPARENT_HUGEPAGE = yes;
+    CGROUPS = yes;
+    COMPACTION = yes;  # compact of memory for the allocation of huge pages
   };
 
+  paravirtualization_guest = {
+      VIRTIO = yes;
+      VIRTIO_PCI = yes;
+      VIRTIO_PCI_LEGACY = yes;
+      VIRTIO_BALLOON    = yes;
+      VIRTIO_INPUT      = yes;
+      VIRTIO_MMIO       = yes;
+      # VIRTIO_MMIO = no;
+      VIRTIO_BLK        = yes;
+      VIRTIO_NET        = yes;
+      RPMSG_VIRTIO      = option yes;
+      VIRTIO_CONSOLE    = yes;
+
+      PARAVIRT_GUEST = yes;
+      PARAVIRT_DEBUG = yes;
+  };
+
+  # TODO cleanup to retain kvm specific config
   kvmConfigStructured = {
+    KVM_CLOCK = yes;
+    KVM_GUEST = yes;
+    MEMORY_HOTREMOVE = yes;
+
     # all the VIRTIO that appears in "selected by" when you open
     # make menuconfig
     PCI = yes;
@@ -158,7 +190,7 @@ with lib.modules;
     # VIRTIO_MMIO = no;
     VIRTIO_BLK        = yes;
     VIRTIO_NET        = yes;
-    RPMSG_VIRTIO      = option yes;
+    RPMSG_VIRTIO      = option yes;  # Remote Processor Messaging
     VIRTIO_CONSOLE    = yes;
     # DRM_VIRTIO_GPU    = yes;
 

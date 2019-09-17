@@ -385,6 +385,7 @@ compdef _gnu_generic mptcpanalyzer
 # TODO replace with fzf-extras
 # Enable FZF fuzzy matcher {{{
 
+# TODO work 
 # need zle to be active
 # https://junegunn.kr/2016/07/fzf-git
 . "$XDG_CONFIG_HOME/fzf-gems/fzf_git_functions.sh"

@@ -46,7 +46,8 @@ let
     '';
   }));
 
-  # prev.lib.mkForce 
+
+  # prev.lib.mkForce
   defaultConfigStructured = with prev.lib.kernel; with structuredConfigs; (prev.lib.mkMerge [
     # structuredConfigs.kvmConfigStructured
     bpfConfigStructured
@@ -72,6 +73,17 @@ let
 
 in rec {
 
+  /*
+    Setups the kernel config to use virtio as a guest
+   */
+  kernelConfigureAsGuest = kernel:
+    (kernel.override {
+
+      # structuredConfigs.debugConfigStructured 
+      # structuredExtraConfig = with structuredConfigs; (prev.lib.mkMerge [
+      #   kernel.passthru.
+      # ]);
+    });
 
   # TODO maybe I should modify linuxPackagesFor instead ?
   linux_latest_debug = prev.linux_latest.override {

@@ -17,6 +17,9 @@ in
     ./modules/vpn.nix
     ./modules/openssh.nix
 
+    # not needed ?
+    # ./modules/hwrng.nix
+
     # see clone for that
     # ./modules/proxy.nix
 
@@ -332,7 +335,9 @@ in
   # system.copySystemConfiguration = true;
   # see https://www.mail-archive.com/nix-commits-bounces@lists.science.uu.nl/msg04507.html
 
+  # kinda experimental
   # services.openssh.banner = "SALUT MATT";
+  services.hwrng.enable = true;
 
   # marked as internal
   # $out here is the profile generation
