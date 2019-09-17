@@ -16,3 +16,6 @@ $ lsblk --fs /dev/nbd0
 NAME     FSTYPE LABEL UUID                                 FSAVAIL FSUSE% MOUNTPOINT
 nbd0
 └─nbd0p1 ext4   nixos 5803335e-f1d2-415e-8cf6-47f654f89b6e
+
+# Entropy regarder scurity.rngd
+On peut voir les sources via /sys/devices/virtual/misc/hw_random/rng_available

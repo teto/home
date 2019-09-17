@@ -163,6 +163,9 @@ with lib.modules;
 
       PARAVIRT_GUEST = yes;
       PARAVIRT_DEBUG = yes;
+
+      HW_RANDOM     = yes;  # Means module or yes
+      HW_RANDOM_VIRTIO     = yes;  # Means module or yes
   };
 
   # TODO cleanup to retain kvm specific config

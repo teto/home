@@ -337,7 +337,8 @@ in
 
   # kinda experimental
   # services.openssh.banner = "SALUT MATT";
-  services.hwrng.enable = true;
+  security.rngd.enable = true;
+  security.rngd.debug = true;
 
   # marked as internal
   # $out here is the profile generation

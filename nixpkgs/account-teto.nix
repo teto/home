@@ -44,6 +44,8 @@ in
 
   };
 
+  # TODO find a way to accomplish this
+  nix.trustedUsers = ["teto"];
   # TODO add a group teto ?
 
   # kinda experimental
