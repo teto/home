@@ -123,10 +123,9 @@ in rec {
   });
 
   linux_latest_with_virtio = (prev.linux_latest.override {
-
-    structuredExtraConfig = with structuredConfigs; [
+    structuredExtraConfig = with structuredConfigs; (prev.lib.mkMerge [
       kvmConfigStructured
-    ];
+    ]);
   });
 
   linuxPackages_mptcp_trunk = prev.linuxPackagesFor linux_mptcp_trunk_raw;
