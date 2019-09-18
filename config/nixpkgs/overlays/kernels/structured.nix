@@ -160,6 +160,9 @@ with lib.modules;
       VIRTIO_NET        = yes;
       RPMSG_VIRTIO      = option yes;
       VIRTIO_CONSOLE    = yes;
+      #
+      PACKET = yes;
+      PACKET_DIAG = yes;
 
       PARAVIRT_GUEST = yes;
       PARAVIRT_DEBUG = yes;
