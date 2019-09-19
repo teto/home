@@ -53,6 +53,17 @@ with lib.modules;
     NET_SCH_INGRESS = yes;
     NET_CLS = yes;
     CFS_BANDWIDTH = yes;
+    IP_ADVANCED_ROUTER = yes; # to enable net.ipv4.ip_forward
+    IP_ROUTE_VERBOSE = yes;
+
+    # INET_XFRMODE_BEET= yes;
+    PACKET_DIAG = yes;
+    UNIX = yes;
+    INET_DIAG= yes;
+    INET_TCP_DIAG= yes;
+    INET_UDP_DIAG= yes;
+    INET_RAW_DIAG= yes;
+    # CONFIG_INET_DIAG_DESTROY is not set
   };
 
   ovsConfigStructured = {
@@ -322,6 +333,7 @@ with lib.modules;
       KERNEL_XZ          = mkForce no;
     };
 
+
     mptcpConfigStructured = {
 
       # don't always exist !
@@ -336,6 +348,7 @@ with lib.modules;
       MPTCP_OWD_COMPENSATE = option yes;
 
       IP_MULTIPLE_TABLES = yes;
+      IP_ROUTE_MULTIPATH = yes;
 
       # Enable advanced path-managers...
       MPTCP_PM_ADVANCED = yes;

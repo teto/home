@@ -1,13 +1,13 @@
 { stdenv, buildPythonPackage, fetchPypi, mupdf, swig }:
 buildPythonPackage rec {
   pname = "PyMuPDF";
-  version = "1.16.1";
+  version = "1.16.2";
 
   src = fetchPypi {
     inherit pname version;
     # rev = "${version}";
 
-    sha256 = "094pk6lbycywwk23z39vljvpjq9g012b5ccmxijfxn47mff8qq3g";
+    sha256 = "1bidybzkjsc0kdd18xnhz97p70br8xh8whzwydp3a5m411cm00mg";
   };
 
   patchPhase = ''
@@ -15,7 +15,8 @@ buildPythonPackage rec {
         --replace '/usr/include/mupdf' ${mupdf.dev}/include/mupdf
     '';
   # .dev
-  buildInputs = [ mupdf swig ];
+  nativeBuildInputs = [swig];
+  buildInputs = [ mupdf ];
 
   doCheck = false;
 

@@ -61,6 +61,7 @@ let
     strongswanStructured  # to get VPN working
     persoConfig
 
+    paravirtualization_guest
     minimalConfig
     # noChelsio # because of mptcp trunk
 

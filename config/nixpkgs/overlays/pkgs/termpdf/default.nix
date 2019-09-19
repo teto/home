@@ -4,11 +4,12 @@
 , fetchPypi
 , bibtool
 , pymupdf
+, pyperclip
+, roman
 }:
-# stdenv.mkDerivation rec {
 buildPythonApplication {
   pname = "termpdf.py";
-  version = "1.0.2";
+  version = "0.1.1";
 
   src = fetchFromGitHub {
     owner = "dsanson";
@@ -23,15 +24,16 @@ buildPythonApplication {
   #   sha256 = "0iy6r29ncpca7v4ibnig2mh93nkrqvy4nhmzkq6flxmryghfzhwn";
   # };
 
-  buildInputs = [ bibtool pymupdf ];
+  # pyperclip/ fizz ?
+  buildInputs = [ bibtool pymupdf pyperclip roman ];
 
   doCheck = false;
 
   meta = with stdenv.lib; {
     description = "Linux kernel config generator";
-    homepage = https://github.com/nichoski/kergen;
+    homepage = https://github.com/dsanson/termpdf.py;
     maintainers = with maintainers; [ teto ];
-    license =  licenses.asl20;
+    license =  licenses.mit;
   };
 }
 
