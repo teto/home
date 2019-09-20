@@ -83,6 +83,12 @@ set exrc
 
 " vim-plug plugin declarations {{{1
 call plug#begin(s:plugdir)
+"
+" annotations plugins {{{
+Plug 'MattesGroeger/vim-bookmarks' " ruby  / :BookmarkAnnotate
+" 'wdicarlo/vim-notebook' " last update in 2016
+" 'plutonly/vim-annotate" "  last update in 2015
+"}}}
 " branch v2-integration
 " Plug 'andymass/vim-matchup' " to replace matchit
 " Plug 'AGhost-7/critiq.vim' " :h critiq

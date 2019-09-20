@@ -18,6 +18,12 @@ in
 
   networking.firewall.allowedTCPPorts = [ 80 443 ];
 
+  # ${secrets.gitolite_server.hostname}
+  security.acme.certs."${secrets.gitolite_server.hostname}" = {
+    webroot = "/var/www/challenges";
+    email = "foo@example.com";
+  };
+
   # create some errors on deploy
   # services.nginx.virtualHosts = { 
   #   # "cloud.acelpb.com" = {... }

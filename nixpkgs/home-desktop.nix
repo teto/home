@@ -106,9 +106,9 @@ let
     scrot # screenshot app
     # smplayer # GUI around mpv
     sxiv # simple image viewer
-    unstable.system_config_printer
+    # system_config_printer # fails
     # vimiv # image viewer
-    # shared_mime_info # temporary fix for nautilus to find the correct files
+    shared_mime_info # temporary fix for nautilus to find the correct files
     tagainijisho # japanse dict; like zkanji Qt based
     translate-shell
     unstable.transmission_gtk

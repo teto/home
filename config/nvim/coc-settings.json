@@ -4,7 +4,6 @@
 //	"diagnostic.warningSign": "⚠",
 //	"diagnostic.infoSign": ">>",
 //	"diagnostic.hintSign": ">>",
-	// "python.jediEnabled": false,
 	// "git.enableGutters": false,
 	// "git.addGlameToVirtualText": false,
 	//"git.changeRemovedSign.hlGroup": ,
@@ -25,6 +24,13 @@
 	"translator.maxsize": 5000, 
 	"coc.preferences.colorSupport": false,
 	"highlight.disableLanguages": [ "c"],
+	"python.autoComplete.showAdvancedMembers": false,
+	// "python.setInterpreter": 
+	// "python.pythonPath": "python",
+	"python.jediEnabled": false,
+	"python.upgradePythonLanguageServer": true,
+	"python.linting.mypyEnabled": true,
+	"python.linting.pydocstyleEnabled": true,
 	"coc.source.around.enable": true,
 	// use https://github.com/neoclide/coc.nvim/wiki/Completion-with-sources#improve-completion-experience
 	"coc.source.around.shortcut": "around",
@@ -72,7 +78,7 @@
              "command": "python",
 			 "args": [ "-mpyls", "-vv", "--log-file" , "/tmp/lsp_python.log"],
 			 "trace.server": "verbose",
-			 "filetypes": ["python"],
+			 "filetypes": [],
 			 "settings": {
 				"MPLS": {
 					"command": "dotnet",
