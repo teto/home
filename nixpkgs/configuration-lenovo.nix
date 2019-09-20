@@ -266,7 +266,7 @@ in
     };
 
     distributedBuilds = false;
-    # package = pkgs.nixFlakes;
+    package = pkgs.nixFlakes;
   };
 
   # kind of a test

@@ -48,16 +48,17 @@ let
 
 
   # prev.lib.mkForce
+
+  # soundConfig
   defaultConfigStructured = with prev.lib.kernel; with structuredConfigs; (prev.lib.mkMerge [
     # structuredConfigs.kvmConfigStructured
     bpfConfigStructured
     debugConfigStructured
-    soundConfig
     mininetConfigStructured
     kvmConfigStructured
     mptcpConfigStructured
     localConfigStructured
-    net9pConfigStructured
+    net9p
     strongswanStructured  # to get VPN working
     persoConfig
 
@@ -81,9 +82,11 @@ in rec {
     (kernel.override {
 
       # structuredConfigs.debugConfigStructured 
-      # structuredExtraConfig = with structuredConfigs; (prev.lib.mkMerge [
-      #   kernel.passthru.
-      # ]);
+      structuredExtraConfig = with structuredConfigs; (prev.lib.mkMerge [
+        # kernel.passthru.
+        net9p
+        paravirtualization_guest
+      ]);
     });
 
   # TODO maybe I should modify linuxPackagesFor instead ?
@@ -132,6 +135,9 @@ in rec {
   linuxPackages_mptcp_trunk = prev.linuxPackagesFor linux_mptcp_trunk_raw;
 
   linux_mptcp_trunk_dev = addMenuConfig linux_mptcp_trunk_raw ;
+
+  # upstream mptcp but with options to run as a guest
+  linux_mptcp_guest = kernelConfigureAsGuest prev.linux_mptcp;
 
   # see https://nixos.wiki/wiki/Linux_Kernel
   # linux_mptcp_trunk = (prev.linuxManualConfig {

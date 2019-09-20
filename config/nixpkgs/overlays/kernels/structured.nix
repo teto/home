@@ -159,6 +159,7 @@ with lib.modules;
     COMPACTION = yes;  # compact of memory for the allocation of huge pages
   };
 
+  # virtio etc.
   paravirtualization_guest = {
       VIRTIO = yes;
       VIRTIO_PCI = yes;
@@ -171,7 +172,8 @@ with lib.modules;
       VIRTIO_NET        = yes;
       RPMSG_VIRTIO      = option yes;
       VIRTIO_CONSOLE    = yes;
-      #
+
+      # yes when 
       PACKET = yes;
       PACKET_DIAG = yes;
 
@@ -276,7 +278,7 @@ with lib.modules;
       SECCOMP              = yes;
     };
 
-    net9pConfigStructured = {
+    net9p = {
 
       # for qemu/libvirt shared folders
       NET_9P = yes;
