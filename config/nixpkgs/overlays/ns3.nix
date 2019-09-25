@@ -35,10 +35,10 @@ rec {
 
   ns-3-dce-dev = super.ns-3-dce.overrideAttrs(oa: {
       src = (builtins.fetchGit {
-        url  = git://github.com/direct-code-execution/ns-3-dce;
-        rev    = "master";
+        url  = git://github.com/teto/ns-3-dce;
+        rev    = "python3";
         name = "dce";
-      })
+      });
   });
 
   # dce-quagga-dev =  if (super.pkgs ? dce-quagga) then (super.dce-quagga.overrideAttrs( oa: {

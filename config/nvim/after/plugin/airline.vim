@@ -7,15 +7,15 @@
 " 'neomake', 
 " check with :AirlineExtensions
 let g:airline_extensions = [
-	'obsession',
-	'quickfix',
-	'tabline',
-	'wordcount',
-	'grepper',
-	'gutentags',
-	'vimtex',
-	'coc',
-	]
+			\ 'obsession',
+			\ 'quickfix',
+			\ 'tabline',
+			\ 'wordcount',
+			\ 'grepper',
+			\ 'gutentags',
+			\ 'vimtex',
+			\ 'coc',
+			\ ]
 let g:airline#extensions#coc#enabled = 1
 
 " let g:airline#extensions#default#layout = [
@@ -105,10 +105,6 @@ let g:airline#extensions#tagbar#flags = 'f'
 let g:airline#extensions#csv#enabled = 1
 let g:airline_detect_spell=1
 
-" ycm integration
-let g:airline#extensions#ycm#enabled = 0
-let g:airline#extensions#ycm#error_symbol = s:gutter_error_sign
-let g:airline#extensions#ycm#warning_symbol = s:gutter_warn_sign
 
 let g:airline#extensions#whitespace#enabled = 0
 let g:airline#extensions#whitespace#mixed_indent_algo = 2
