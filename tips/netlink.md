@@ -16,3 +16,5 @@ sudo ip link add nlmon0 type nlmon
 sudo ip link set dev nlmon0 up
 
 then start wireshark
+or use
+ip monitor
