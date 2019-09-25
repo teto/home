@@ -50,8 +50,16 @@ final: prev:
 
   dualsub = prev.callPackage ./dualsubtitles { };
 
-  fzf-extras =  # prev.callPackage ./fzf-extras.nix {};
-    builtins.fetchurl https://github.com/atweiden/fzf-extras/blob/master/fzf-extras.zsh;
+  # prev.callPackage ./fzf-extras.nix {};
+  # copy to share/
+  fzf-extras = let src = prev.fetchFromGitHub {
+    owner = "atweiden";
+    repo = "fzf-extras";
+    rev = "2ba6d111eee8db3f7c6614cac9c6931cdc76489d";
+    sha256 = "1r90zpg5m717rnj29lngd6sqdq5214y0v96b7f05xh42ysbdr1gd";
+  };
+  in src;
+  # "${src}/fzf-extras.zsh";
 
   gitbatch = prev.callPackage ./gitbatch { };
 

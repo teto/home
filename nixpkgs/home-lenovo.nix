@@ -72,6 +72,11 @@ let
   xsession.initExtra = ''
   '';
 
+  # fzf-extras found in overlay fzf-extras
+  programs.zsh.initExtra = ''
+    source "${pkgs.fzf-extras}/fzf-extras.zsh";
+  '';
+
   # programs.termite = {
   #   enable = true;
   #   # colorsExtra = builtins.readFile ../config/termite/solarized-dark;

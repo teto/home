@@ -33,10 +33,16 @@ rec {
   #   # withExamples = true;
   };
 
+  # TODO regarder https://github.com/wfxr/forgit aussi
+  ns-3-dce-local = super.ns-3-dce.overrideAttrs(oa: {
+    # cleanfilter
+    src = super.lib.cleanSource "/home/teto/dce";
+  });
+
   ns-3-dce-dev = super.ns-3-dce.overrideAttrs(oa: {
       src = (builtins.fetchGit {
         url  = git://github.com/teto/ns-3-dce;
-        rev    = "python3";
+        ref    = "python3";
         name = "dce";
       });
   });
