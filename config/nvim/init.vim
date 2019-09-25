@@ -94,9 +94,9 @@ Plug 'MattesGroeger/vim-bookmarks' " ruby  / :BookmarkAnnotate
 " Plug 'AGhost-7/critiq.vim' " :h critiq
 Plug 'alok/notational-fzf-vim' " to take notes
 Plug 'iamcco/markdown-preview.nvim' " test , most recent
-Plug 'rhysd/git-messenger.vim' " to show git message 
+" Plug 'rhysd/git-messenger.vim' " to show git message 
 " Plug 'voldikss/vim-translate-me' " floawting windows for neovim
-Plug 'chrisbra/Colorizer'
+" Plug 'chrisbra/Colorizer'
 Plug 'ndmitchell/ghcid', { 'rtp': 'plugins/nvim' }
 Plug 'neovimhaskell/nvim-hs.vim' " to help with nvim-hs
 " Plug 'KabbAmine/vCoolor.vim' " :Vcooler
@@ -152,7 +152,6 @@ Plug 'gianarb/notify.vim' " call notify#emitNotification('Title', 'Body')
 " Plug 'vim-scripts/coq-syntax', {'for': 'coq'}
 " Plug 'the-lambda-church/coquille', {'branch': 'matt', 'for': 'coq'}
 " Plug 'teto/coquille', {'branch': 'matt', 'for': 'coq'}
-" Plug 'let-def/vimbufsync', {'for': 'coq'} " for coq
 " Plug 'inside/vim-search-pulse' " Search related
 
 " vim-search-pulse {{{
@@ -366,7 +365,7 @@ Plug 'vimwiki/vimwiki'   " to write notes
 " Plug 'rhysd/github-complete.vim' " provides github user/repo autocompletion after @ and #
 
 " does not work seems to be better ones
-Plug 'vasconcelloslf/vim-interestingwords' " highlight the words you choose <leader>k (does not work in neovim)
+" Plug 'vasconcelloslf/vim-interestingwords' " highlight the words you choose <leader>k (does not work in neovim)
 " Plug 't9md/vim-quickhl' " hl manually selected words :h QuickhlManualEnable
 
 " colorschemes {{{
@@ -468,6 +467,7 @@ set showmatch
 " Use visual bell instead of beeping when doing something wrong
 set visualbell
 set errorbells " easier to test visualbell with it
+set nostartofline " empeche c_f / c_b de changer de colonne
 
 " if boths are set at the same time, vim uses an hybrid mode
 " Display line numbers on the left
@@ -711,19 +711,6 @@ let g:gutentags_file_list_command = 'rg --files'
 
 let g:gutentags_ctags_exclude = ['.vim-src', 'build', '.mypy_cache']
 " }}}
-" Chromatica (needs libclang > 3.9) {{{
-" can compile_commands.json or a .clang file
-" let g:chomatica#respnsive_mode=1
-" let g:chromatica#libclang_path='/usr/local/opt/llvm/lib'
-let g:chromatica#libclang_path="/usr/lib/llvm-3.8/lib/"
-let g:chromatica#enable_at_startup=0
-let g:chromatica#enable_debug=1
-let g:chromatica#global_args= [] " prepended for each file compile args
-let g:chromatica#responsive_mode = 0
-let g:chromatica#delay_ms = 80
-let g:chromatica#use_pch = 1
-let g:chromatica#highlight_feature_level=0
-" }}}
 " FZF config {{{
 let g:fzf_command_prefix = 'Fzf' " prefix commands :Files become :FzfFiles, etc.
 let g:fzf_nvim_statusline = 0 " disable statusline overwriting
@@ -873,10 +860,6 @@ imap <c-x><c-f> <plug>(fzf-complete-path)
 "
 
 " }}}
-" terminal related {{{
-" automatic close when htting escape
-autocmd! FileType fzf tnoremap <buffer> <Esc> <c-g>
-" }}}
 " Csv config {{{
 " you can use :CsvVertFold to hide commands
 " There is the analyze command as well
@@ -904,144 +887,6 @@ endif
 nnoremap <Leader>/ :set hlsearch! hls?<CR> " toggle search highlighting
 
 " }}}
-" Airline {{{
-" debug with :AirlineExtensions
-" to speed up things
-
-" 'neomake', 
-let g:airline_extensions = ['obsession', 'quickfix', 'tabline', 'wordcount', 'languageclient' ]
-" let g:airline#extensions#default#layout = [
-"     \ [ 'a', 'b', 'c' ],
-"     \ [ 'x', 'y', 'z', 'error', 'warning' ]
-"     \ ]
-" let g:airline#extensions#wordcount#filetypes = ...
-
-let g:airline#extensions#ale#enabled = 0
-let g:airline#extensions#neomake#enabled = 1
-let g:airline#extensions#languageclient#enabled = 1
-
-let g:airline_highlighting_cache = 1
-let g:airline_exclude_preview = 0
-" control which sections get truncated and at what width. >
-let g:airline#extensions#default#section_truncate_width = {
-      \ 'b': 79,
-      \ 'x': 60,
-      \ 'y': 88,
-      \ 'z': 45,
-      \ 'warning': 80,
-      \ 'error': 80,
-      \ }
-
-
-let g:airline#extensions#quickfix#quickfix_text = 'Quickfix'
-let g:airline#extensions#quickfix#location_text = 'Location'
-
-let g:airline_highlighting_cache = 1 " to speed up things
-let g:airline_powerline_fonts = 0
-let g:airline_left_sep = ''
-let g:airline_right_sep = ''
-let g:airline_section = '|'
-" display buffers as tabs if no split
-" see :h airline-tabline
-let g:airline_theme = 'molokai'
-" let g:airline_section_b = '%#TermCursor#' . NeomakeJobs()
-
-" first array is left-side, followed by right side
-let g:airline#extensions#default#layout = [
-      \ [ 'a', 'b', 'c' ],
-      \ [ 'x', 'y', 'z', 'error', 'warning' ]
-      \ ]
-" section y is fileencoding , useless in neovim
-" define_raw
-" call airline#parts#define_function('neomake_custom', 'NeomakeStatusLine')
-" let g:airline_section_y = airline#section#create_right(['neomake_custom','ffenc'])
-
-" let g:airline_section_y = airline#section#create_right(['neomake'])
-" let g:airline_section_y = airline#section#create_right(['neomake','ffenc'])
-call airline#parts#define_function('grepper', 'grepper#statusline')
-" see :h airline-default-sections
-let g:airline_section_x = airline#section#create_right(['grepper'])
-" let g:airline_section_y = airline#section#create_right(['neomake_error_count', 'neomake_warning_count'])
-" let g:airline_section_z = airline#section#create_right(['neomake_error_count', 'neomake_warning_count'])
-" let g:airline_section_error = airline#section#create_right(['neomake_error_count', 'languageclient_error_count'])
-" let g:airline_section_warning (ycm_warning_count, syntastic-warn,
-
-" grepper#statusline()
- " airline#section#create(['windowswap', 'obsession', '%3p%%'.spc, 'linenr', 'maxlinenr', spc.':%3v'])
-" let g:airline_section_z = airline#section#create_right(['linenumber'])
-" airline extensions {{{
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#left_sep = ' '
-let g:airline#extensions#tabline#left_alt_sep = '|'
-let g:airline#extensions#vimtex#enabled=1
-let g:airline#extensions#tabline#buffer_nr_show = 1
-let g:airline#extensions#tabline#show_buffers = 1
-let g:airline#extensions#tabline#buffer_min_count =2
-let g:airline#extensions#tabline#tab_min_count = 0
-let g:airline#extensions#tabline#buffer_idx_mode = 1
-let g:airline#extensions#tabline#buffers_label = 'b'
-let g:airline#extensions#tabline#tabs_label = 't'
-let g:airline#extensions#tabline#show_tabs = 0
-let airline#extensions#tabline#current_first = 0
-" to rely on badd only ?
-" let airline#extensions#tabline#disable_refresh = 0
-
-let g:airline#extensions#tabline#formatter = 'unique_tail'
-" let g:airline_extensions = ['branch', 'tabline', 'obsession']
-
-" rely on tagbar plugin
-let g:airline#extensions#tagbar#enabled = 1
-let g:airline#extensions#tagbar#flags = 'f'
-
-" csv plugin
-let g:airline#extensions#csv#enabled = 1
-let g:airline_detect_spell=1
-
-" ycm integration
-let g:airline#extensions#ycm#enabled = 0
-let g:airline#extensions#ycm#error_symbol = s:gutter_error_sign
-let g:airline#extensions#ycm#warning_symbol = s:gutter_warn_sign
-
-let g:airline#extensions#whitespace#enabled = 0
-let g:airline#extensions#whitespace#mixed_indent_algo = 2
-
-let g:airline#extensions#obsession#enabled = 1
-let g:airline#extensions#obsession#indicator_text = ''
-"}}}
-
-" let g:airline#extensions#whitespace#checks = [ 'indent', 'trailing', 'long' ]
-"|neomake#statusline#LoclistStatus should be shown in warning section
-" let &statusline .= ' %{grepper#statusline()}'
-" let g:airline_section_z = airline#section#create(['%{ObsessionStatus(''$'', '''')}'])
-" airline mappings {{{
-nmap <leader>& <Plug>AirlineSelectTab1
-nmap <leader>é <Plug>AirlineSelectTab2
-nmap <leader>" <Plug>AirlineSelectTab3
-nmap <leader>' <Plug>AirlineSelectTab4
-nmap <leader>( <Plug>AirlineSelectTab5
-nmap <leader>- <Plug>AirlineSelectTab6
-nmap <leader>è <Plug>AirlineSelectTab7
-nmap <leader>è <Plug>AirlineSelectTab7
-nmap <leader>_ <Plug>AirlineSelectTab8
-nmap <leader>ç <Plug>AirlineSelectTab9
-
-" qwerty version
-  nmap <leader>1 <Plug>AirlineSelectTab1
-  nmap <leader>2 <Plug>AirlineSelectTab2
-  nmap <leader>3 <Plug>AirlineSelectTab3
-  nmap <leader>4 <Plug>AirlineSelectTab4
-  nmap <leader>5 <Plug>AirlineSelectTab5
-  nmap <leader>6 <Plug>AirlineSelectTab6
-  nmap <leader>7 <Plug>AirlineSelectTab7
-  nmap <leader>8 <Plug>AirlineSelectTab8
-  nmap <leader>9 <Plug>AirlineSelectTab9
-  nmap <leader>- <Plug>AirlineSelectPrevTab
-  nmap <leader>+ <Plug>AirlineSelectNextTab
-
-"}}}
-" one could change the formatter with
-  " let g:airline#extensions#tabline#formatter = 'default'
-"}}}
 " limelight {{{
 " Color name (:help cterm-colors) or ANSI code
 " let g:limelight_conceal_ctermfg = 'gray'
@@ -1288,10 +1133,7 @@ endif
 nnoremap <leader>rg  :Grepper -tool rg -open -switch
 nnoremap <leader>rgb  :Grepper -tool rg -open -switch -buffer
 
-
-
 " highlight! link QuickFixLine Normal
-
 
 function! OnGrepperCompletion()
   copen
@@ -1404,10 +1246,6 @@ let g:auto_save_write_all_buffers = 0 " Setting this option to 1 will write all
 "   " to solve pb with Airline https://github.com/vim-airline/vim-airline/issues/1030#issuecomment-183958050
 "   exe ":au FocusLost ".expand("%")." :wa | :AirlineRefresh | :echom 'Focus lost'"
 " endfunction
-" }}}
-" Customized commands depending on buffer type {{{
-
-nnoremap <LocalLeader>sv :source $MYVIMRC<CR> " reload vimrc
 " }}}
 " vim-scripts/QuickFixCurrentNumber {{{
 "*:QuickhlManualEnable*		Enable.
@@ -1671,6 +1509,9 @@ let g:iron_repl_open_cmd="vsplit"
 " let g:iron_new_repl_hooks
 " let g:iron_new_lua_repl_hooks
 "let g:iron_map_defaults
+"}}}
+" bookmarks.vim {{{
+  let g:bookmark_no_default_key_mappings = 1
 "}}}
 " mardown-preview.nvim {{{
 " set to 1, nvim will open the preview window after entering the markdown buffer default: 0
@@ -2102,6 +1943,7 @@ nnoremap <Leader>w :w<CR>
 "nnoremap <F8> :vertical wincmd f<CR> " open file under cursor in a split
 nnoremap <leader>gfs :vertical wincmd f<CR> " open file under cursor in a split
 
+nnoremap <LocalLeader>sv :source $MYVIMRC<CR> " reload vimrc
 
 " from justinmk
 func! ReadExCommandOutput(newbuf, cmd) abort

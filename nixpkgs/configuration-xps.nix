@@ -54,7 +54,8 @@ let
   boot.kernelParams = [ " console=ttyS0" "acpi_backlight=vendor" ];
 
   # TODO use the mptcp one ?
-  boot.kernelPackages = pkgs.linuxPackages;
+  # boot.kernelPackages = pkgs.linuxPackages;
+  boot.kernelPackages = pkgs.linuxPackages_mptcp;
   # boot.kernelPackages = pkgs.linuxPackages_latest;
   # boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_4_14;
 
@@ -191,7 +192,9 @@ let
   # environment.enableDebugInfo = true;
 # } ++ lib.optionalAttrs (config.programs ? mininet) {
 
-  # programs.mininet.enable = true;
+
+  # to 
+  programs.mininet.enable = true;
 
   services.xserver = {
     displayManager.slim = {

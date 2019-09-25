@@ -183,9 +183,14 @@ rec {
 
       # see https://discourse.nixos.org/t/announcing-tree-sitter-nix/2483/10
       # https://github.com/neovim/neovim/pull/10124
+      # src = builtins.fetchGit {
+      #   url = https://github.com/teto/neovim.git;
+      #   ref = "treesitter";
+      # };
+
       src = builtins.fetchGit {
-        url = https://github.com/teto/neovim.git;
-        ref = "treesitter";
+        url = https://github.com/bfredl/neovim.git;
+        ref = "tree-sitter-api";
       };
 
   });

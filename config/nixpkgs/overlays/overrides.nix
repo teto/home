@@ -5,7 +5,6 @@ let
   # TODO builtins.filterSource (p: t: lib.cleanSourceFilter p t && baseNameOf p != "build")
   filter-cmake = builtins.filterSource (p: t: super.lib.cleanSourceFilter p t && baseNameOf p != "build");
 
-  fetchgitLocal = super.fetchgitLocal;
 in
 rec {
 
@@ -37,10 +36,6 @@ rec {
         sha256 = "0fbcj3ps83n7v8ybihc6wk8x61l8rkqg6077zh9v58gk4j6wdyhq";
       };
 	});
-
-  # nix-shell -p python.pkgs.my_stuff
-
-  rfc-bibtex = (super.rfx-bibtex  or (super.python3Packages.callPackage ./pkgs/rfc-bibtex {}));
 
   protocol-local = super.protocol.overrideAttrs (oldAttrs: {
     src=/home/teto/protocol;
