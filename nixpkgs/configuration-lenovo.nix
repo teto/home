@@ -248,6 +248,8 @@ in
     videoDrivers = [ "nvidia" ];
   };
 
+  networking.enableIPv6 = false;
+
   # hardware.nvidia.package
 
   # docker pull mattator/dce-dockerfiles

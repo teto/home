@@ -37,6 +37,7 @@
 	"coc.source.buffer.shortcut": "buf",
 	"suggest.snippetIndicator": "►",
 	"suggest.noselect": false,
+	"suggest.trigger": "always",
 	"git.realtimeGutters": false,
 	"git.changedSign.text": " ",
 	"git.changedSign.hlGroup": "SignifySignChange",
@@ -78,26 +79,26 @@
              "command": "python",
 			 "args": [ "-mpyls", "-vv", "--log-file" , "/tmp/lsp_python.log"],
 			 "trace.server": "verbose",
-			 "filetypes": [],
+			 "filetypes": ["python"],
 			 "settings": {
-				"MPLS": {
-					"command": "dotnet",
-					"args": [
-						"exec",
-						"/home/$USER/.local/share/microsoft-python-language-server/Microsoft.Python.LanguageServer.dll"
-					],
-					"filetypes": [
-					],
-					"initializationOptions": {
-						"interpreter": {
-							"properties": {
-//								"InterpreterPath": "/bin/python3",
-								//"UseDefaultDatabase": true,
-								//"Version": "3.7.2"
-							}
-						}
-					}
-				},
+//				"MPLS": {
+//					"command": "dotnet",
+//					"args": [
+//						"exec",
+//						"/home/$USER/.local/share/microsoft-python-language-server/Microsoft.Python.LanguageServer.dll"
+//					],
+//					"filetypes": [
+//					],
+//					"initializationOptions": {
+//						"interpreter": {
+//							"properties": {
+////								"InterpreterPath": "/bin/python3",
+//								//"UseDefaultDatabase": true,
+//								//"Version": "3.7.2"
+//							}
+//						}
+//					}
+//				},
 				"pyls": {
 					"enable": true,
 					"trace": {

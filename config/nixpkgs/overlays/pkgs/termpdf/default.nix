@@ -6,6 +6,8 @@
 , pymupdf
 , pyperclip
 , roman
+, pdfrw
+, pagelabels
 }:
 buildPythonApplication {
   pname = "termpdf.py";
@@ -25,7 +27,7 @@ buildPythonApplication {
   # };
 
   # pyperclip/ fizz ?
-  buildInputs = [ bibtool pymupdf pyperclip roman ];
+  buildInputs = [ bibtool pymupdf pyperclip roman pagelabels pdfrw ];
 
   doCheck = false;
 

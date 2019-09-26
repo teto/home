@@ -52,7 +52,7 @@ let
 
       # reuse once https://github.com/neovim/neovim/issues/9390 is fixed
       # vimtex
-      ultisnips
+      # ultisnips  # disabled because it maps <tab>
       unicode-vim
     ]
     # ++ [

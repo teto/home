@@ -56,7 +56,7 @@ final: prev:
     owner = "atweiden";
     repo = "fzf-extras";
     rev = "2ba6d111eee8db3f7c6614cac9c6931cdc76489d";
-    sha256 = "1r90zpg5m717rnj29lngd6sqdq5214y0v96b7f05xh42ysbdr1gd";
+    sha256 = "0zi4g03986yiqh2ccx666xacabiszjc34ibb372nrnfw9qmd7frz";
   };
   in src;
   # "${src}/fzf-extras.zsh";

@@ -149,6 +149,9 @@ rec {
       tcp_netstat="netstat -ltnp";
       # TODO move to root level ?
       nixpaste="curl -F \"text=<-\" http://nixpaste.lbr.uno";
+
+      # kitty
+      icat="kitty +kitten icat";
     };
 
 
