@@ -62,6 +62,9 @@ in
   # it apparently still is quite an important thing to have
   boot.devSize = "5g";
 
+  # to make it work with 5.3
+  boot.zfs.enableUnstable = true;
+
   # TODO look at
   # boot.specialFileSystems.
 
