@@ -16,8 +16,11 @@ default-library = papers
 default-query-string = '*'
 document-description-format = {doc[ref]} - {doc[title]}
 
+opentool = xdg-open
+
 # Use ranger as a file browser, too a  nice python package
-# file-browser = ranger
+file-browser = ranger
+
 # Ask for confirmation when doing papis add ...
 add-confirm = True
 # Edit the info.yaml file before adding a doc into the library
@@ -26,6 +29,9 @@ add-edit = True
 # Open the files before adding a document into the library
 # papis add --open
 add-open = True
+
+# as a plugin
+picktool = fzf
 
 ref-format = {doc[author_list][0][surname]}{doc[year]}
 # /* papis configuration */
@@ -48,3 +54,10 @@ status_line_style = bg:ansiwhite fg:ansiblack
 message_toolbar_style = bg:ansiyellow fg:ansiblack
 
 error_toolbar_style = bg:ansired fg:ansiblack
+
+
+# [library_example] 
+# header-format = {doc[first_name]} {doc[last_name]}
+# match-format = {doc[org]} {doc[first_name]} {doc[last_name]}
+# browse-query-format = {doc[first_name]} {doc[last_name]}
+# add-open = False

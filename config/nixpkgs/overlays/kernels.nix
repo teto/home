@@ -83,9 +83,11 @@ in rec {
 
       # structuredConfigs.debugConfigStructured 
       structuredExtraConfig = with structuredConfigs; (prev.lib.mkMerge [
-        # kernel.passthru.
+        kernel.configfile.passthru.structuredConfig
         net9p
         paravirtualization_guest
+
+        # mptcpConfigStructured
       ]);
     });
 

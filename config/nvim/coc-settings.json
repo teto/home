@@ -110,20 +110,20 @@
 					],
 					"plugins": {
 						"jedi_completion": {
-							"enabled": true
+							"enabled": false
 						},
 						"jedi_hover": {
-							"enabled": true
+							"enabled": false
 						},
 						"jedi_references": {
-							"enabled": true
+							"enabled": false
 						},
 						"jedi_signature_help": {
-							"enabled": true
+							"enabled": false
 						},
 						"jedi_symbols": {
-							"enabled": true,
-							"all_scopes": true
+							"enabled": false,
+							"all_scopes": false
 						},
 						"mccabe": {
 							"enabled": true,

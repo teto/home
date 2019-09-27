@@ -1,3 +1,9 @@
+        export PYTHONPATH="$tmp_path/@pythonSitePackages@:$PYTHONPATH"
+        mkdir -p "$tmp_path/@pythonSitePackages@"
+        eval "@pythonInterpreter@ -m pip install -e . --prefix $tmp_path >&2"
+
+# Just run this until a fix appears !
+python -m pip install -e . --prefix $tmp_path >&2
 
 mount -o remount,rw /nix/store
 chown -R root:root /nix/store
