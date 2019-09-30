@@ -7,8 +7,9 @@ let
       # - coc-vimtex  coc-snippets 
       # use coc-yank for yank history
 
-      coc-git
+      # coc-git  # doesn't like it when it's user installed
       coc-nvim
+      # coc-python # test
       # coc-translator  # not available yet
       csv-vim
       # replaced by coc

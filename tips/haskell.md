@@ -26,3 +26,6 @@ $ ghc-pkg -v -f /home/teto/netlink-hs  recache
 How to configure cabal ?
 https://www.haskell.org/cabal/users-guide/installing-packages.html
 $ cabal user-config update
+
+
+    see https://wiki.haskell.org/FAQ#How_can_I_get_a_stack_backtrace_when_my_program_throws_an_exception.3F

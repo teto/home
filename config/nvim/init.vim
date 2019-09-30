@@ -92,6 +92,7 @@ Plug 'MattesGroeger/vim-bookmarks' " ruby  / :BookmarkAnnotate
 " branch v2-integration
 " Plug 'andymass/vim-matchup' " to replace matchit
 " Plug 'AGhost-7/critiq.vim' " :h critiq
+Plug 'glacambre/firenvim' " to use nvim in firefox
 Plug 'liuchengxu/vim-clap' " fuzzer
 Plug 'alok/notational-fzf-vim' " to take notes
 Plug 'iamcco/markdown-preview.nvim' " test , most recent
@@ -1122,12 +1123,6 @@ endif
 " let g:grepper = { 'git': { 'grepprg': 'git grep -nI $* -- $.' }}
 " Grepper -grepprg ag --vimgrep $* $. works
 " runtime plugin/grepper.vim  " init grepper with defaults
-" let g:grepper.tools += ["rgall"]
-" let g:grepper.rgall = copy(g:grepper.rg)
-" let g:grepper.rgall.grepprg .= ' --no-ignore'
-" let g:grepper.highlight = 1
-" let g:grepper.open = 0
-" let g:grepper.switch = 1
 
 " nnoremap <leader>git :Grepper -tool git -open -nojump
 " nnoremap <leader>ag  :Grepper -tool ag  -open -switch
@@ -1136,17 +1131,17 @@ nnoremap <leader>rgb  :Grepper -tool rg -open -switch -buffer
 
 " highlight! link QuickFixLine Normal
 
-function! OnGrepperCompletion()
-  copen
-  hi link GrepperNormal   StatusLineNC
-  " guibg=lightblue
-  if exists("winhl")
-    setlocal winhl=Normal:GrepperNormal
-  endif
-" call notify#emitNotification('grepper', 'Search finished') |
-endfunction
+" function! OnGrepperCompletion()
+"   copen
+"   hi link GrepperNormal   StatusLineNC
+"   " guibg=lightblue
+"   if exists("winhl")
+"     setlocal winhl=Normal:GrepperNormal
+"   endif
+" " call notify#emitNotification('grepper', 'Search finished') |
+" endfunction
 
-autocmd User Grepper call OnGrepperCompletion()
+" autocmd User Grepper call OnGrepperCompletion()
 
 " nmap gs <plug>(GrepperOperator)
 " xmap gs <plug>(GrepperOperator)

@@ -121,7 +121,7 @@ final: prev:
     inherit (prev.pkgs.gnome2) libgnome libgnomeui;
   };
 
-  termpdfpy = prev.python3Packages.callPackage ./termpdf {};
+  # termpdfpy = prev.python3Packages.callPackage ./termpdf {};
 
   i3dispatch = prev.python3Packages.callPackage ./i3-dispatch {};
 

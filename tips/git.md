@@ -7,6 +7,11 @@ git repack -a -d --depth=250 --window=250
 
 git gc --aggressive --prune
 
-
 https://help.github.com/en/articles/checking-out-pull-requests-locally
  git fetch origin pull/ID/head:BRANCHNAME
+
+
+# Chercher a travers toutes les branches
+git grep "string/regexp" $(git rev-list --all)
+https://stackoverflow.com/questions/7151311/using-git-how-could-i-search-for-a-string-across-all-branches
+

@@ -341,7 +341,7 @@ in
   # see https://www.mail-archive.com/nix-commits-bounces@lists.science.uu.nl/msg04507.html
 
   # kinda experimental
-  # services.openssh.banner = "SALUT MATT";
+  services.openssh.banner = "Hello world";
   security.rngd.enable = true;
   security.rngd.debug = true;
 

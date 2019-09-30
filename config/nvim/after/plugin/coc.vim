@@ -79,10 +79,10 @@ let g:coc_snippet_prev = '<c-k>'
 imap <C-j> <Plug>(coc-snippets-expand-jump)
 " }}}
 " navigate chunks of current buffer{{{
-nmap [g <Plug>(coc-git-prevchunk)
-nmap ]g <Plug>(coc-git-nextchunk)
-" show chunk diff at current position
-nmap gs <Plug>(coc-git-chunkinfo)
+" nmap [g <Plug>(coc-git-prevchunk)
+" nmap ]g <Plug>(coc-git-nextchunk)
+" " show chunk diff at current position
+" nmap gs <Plug>(coc-git-chunkinfo)
 " show commit contains current position
 " nmap gc <Plug>(coc-git-commit) " nope ! used by commentary
 "}}}

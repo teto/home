@@ -28,9 +28,10 @@
 	// "python.setInterpreter": 
 	// "python.pythonPath": "python",
 	"python.jediEnabled": false,
-	"python.upgradePythonLanguageServer": true,
+	// "python.upgradePythonLanguageServer": true,
 	"python.linting.mypyEnabled": true,
-	"python.linting.pydocstyleEnabled": true,
+	// "python.linting.mypyPath"
+	"python.linting.pydocstyleEnabled": false,
 	"coc.source.around.enable": true,
 	// use https://github.com/neoclide/coc.nvim/wiki/Completion-with-sources#improve-completion-experience
 	"coc.source.around.shortcut": "around",
@@ -79,7 +80,7 @@
              "command": "python",
 			 "args": [ "-mpyls", "-vv", "--log-file" , "/tmp/lsp_python.log"],
 			 "trace.server": "verbose",
-			 "filetypes": ["python"],
+			 "filetypes": [],
 			 "settings": {
 //				"MPLS": {
 //					"command": "dotnet",
