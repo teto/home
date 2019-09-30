@@ -3,11 +3,14 @@
 , fetchFromGitHub
 , fetchPypi
 , bibtool
+, pybtex
 , pymupdf
+, pynvim
 , pyperclip
 , roman
 , pdfrw
 , pagelabels
+, setuptools
 }:
 buildPythonApplication {
   pname = "termpdf.py";
@@ -16,8 +19,8 @@ buildPythonApplication {
   src = fetchFromGitHub {
     owner = "dsanson";
     repo = "termpdf.py";
-    rev = "ef8b3c05d758d139b8b028495718c3123445536c";
-    sha256 = "0smnx61cg8si9paviy6sgzgqkq6idiw324m1ww7sm8f6jyjdfncg";
+    rev = "d47c764f03394fdd8b719b1f877f3496a865e5ff";
+    sha256 = "M5a1gHK7UJZSJeUquQGgoaM1GDVZ+zfQ2NcWHnfIz4o=";
   };
   # src = fetchFromGitHub {
   #   owner = "papis";
@@ -27,7 +30,11 @@ buildPythonApplication {
   # };
 
   # pyperclip/ fizz ?
-  buildInputs = [ bibtool pymupdf pyperclip roman pagelabels pdfrw ];
+  propagatedBuildInputs = [
+    bibtool pybtex pymupdf pyperclip roman pagelabels pdfrw
+    pynvim
+    setuptools
+  ];
 
   doCheck = false;
 

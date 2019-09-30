@@ -109,7 +109,7 @@ final: prev:
 
   rt-tests = prev.callPackage ./rt-test.nix {};
 
-  termite-color-switcher = prev.callPackage ./termite-color-switcher {};
+  # termite-color-switcher = prev.callPackage ./termite-color-switcher {};
 
   # netbee = prev.callPackage ./netbee {};
 
