@@ -71,10 +71,8 @@ final: prev:
 
   mptcpnumerics = prev.python3Packages.callPackage ./mptcpnumerics.nix {};
 
-  mptcpanalyzer = prev.callPackage /home/teto/mptcpanalyzer {}
-    # builtins.fetchUrl 
-    # ./mptcpanalyzer { };
-  ;
+  # install from the repo
+  # mptcpanalyzer = prev.callPackage /home/teto/mptcpanalyzer {};
 
   neovim-gtk = prev.callPackage ./neovim-gtk { };
 

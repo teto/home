@@ -405,6 +405,7 @@ Plug 'lervag/vimtex'
 " let g:far#source='vimgrep'
 " let g:far#source='ag'
 " let g:far#limit
+let g:far#source='rg'
 let g:far#collapse_result=1
 " }}}
 
