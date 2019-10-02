@@ -109,7 +109,8 @@ in
 
   # DOES NOT WORK !
   # boot.kernelPackages = unstable.pkgs.linuxPackages;
-  boot.kernelPackages = pkgs.linuxPackages;
+  # boot.kernelPackages = pkgs.linuxPackages;
+  boot.kernelPackages = pkgs.linuxPackages_mptcp;
 
   # boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_latest_without_ns;
 
@@ -341,7 +342,7 @@ in
   # see https://www.mail-archive.com/nix-commits-bounces@lists.science.uu.nl/msg04507.html
 
   # kinda experimental
-  services.openssh.banner = "Hello world";
+  # services.openssh.banner = "Hello world";
   security.rngd.enable = true;
   security.rngd.debug = true;
 
