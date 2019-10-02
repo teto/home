@@ -63,8 +63,6 @@ final: prev:
 
   gitbatch = prev.callPackage ./gitbatch { };
 
-  gnvim = prev.callPackage ./gnvim { };
-
   hunter = prev.callPackage ./hunter { };
 
   mda-lite = prev.pythonPackages.callPackage ./mda-lite {};
