@@ -1,3 +1,6 @@
+[checkout]
+defaultRemote=upstream
+
 # TODO this should be generated
 [user]
   name = Matthieu Coudron

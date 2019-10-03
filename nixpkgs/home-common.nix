@@ -214,6 +214,10 @@ rec {
   # home.activation.setXDGbrowser = dagEntryBefore [ "linkGeneration" ] ''
   # xdg-settings set default-web-browser firefox.desktop
 
+  programs.starship = {
+    enable = true;
+  };
+
   programs.vim = {
     enable = true;
     settings = {

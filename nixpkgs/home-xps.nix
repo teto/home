@@ -87,6 +87,8 @@ let
     # xrandr --output  eDP1 --mode 1600x900
   # '';
 
-
+  xdg.mimeApps = {
+      enable = true;
+  };
 }
 
