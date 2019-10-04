@@ -39,9 +39,12 @@ let
   addMenuConfig = kernel:
     # kernel;
     (kernel.overrideAttrs (o: {
-    nativeBuildInputs=o.nativeBuildInputs ++ [ prev.pkgconfig prev.qt5.qtbase prev.ncurses ];
-    # we need python to run scripts/gen_compile_commands
-    buildInputs = o.buildInputs ++ [prev.python];
+      nativeBuildInputs=o.nativeBuildInputs ++ [
+        prev.pkgconfig prev.qt5.qtbase prev.ncurses
+        # we need python to run scripts/gen_compile_commands
+        prev.python
+    ];
+    # buildInputs = (o.buildInputs or []) ++ [prev.python];
     shellHook = (o.shellHook or "") + ''
       echo "make menuconfig KCONFIG_CONFIG=$PWD/build/.config"
       echo "make menuconfig KCONFIG_CONFIG=$PWD/build/.config"

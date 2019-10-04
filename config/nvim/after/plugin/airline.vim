@@ -12,11 +12,12 @@ let g:airline_extensions = [
 			\ 'tabline',
 			\ 'wordcount',
 			\ 'grepper',
-			\ 'gutentags',
 			\ 'vimtex',
 			\ 'coc',
 			\ ]
+" \ 'gutentags',
 let g:airline#extensions#coc#enabled = 1
+let g:airline#extensions#gutentags#enabled = 0
 
 " let g:airline#extensions#default#layout = [
 "     \ [ 'a', 'b', 'c' ],

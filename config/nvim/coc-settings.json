@@ -23,6 +23,7 @@
 	"coc.preferences.extensionUpdateCheck": "never",
 	"translator.maxsize": 5000, 
 	"coc.preferences.colorSupport": false,
+	"coc.source.ultisnips.filetypes": ["tex"],
 	"highlight.disableLanguages": [ "c"],
 	"python.autoComplete.showAdvancedMembers": false,
 	// "python.setInterpreter": 
@@ -32,6 +33,7 @@
 	"python.linting.mypyEnabled": true,
 	// "python.linting.mypyPath"
 	"python.linting.pydocstyleEnabled": false,
+	"python.disableInstallationCheck": true,
 	"coc.source.around.enable": true,
 	// use https://github.com/neoclide/coc.nvim/wiki/Completion-with-sources#improve-completion-experience
 	"coc.source.around.shortcut": "around",
@@ -160,12 +162,50 @@
 		"cquery": {
 			"command": "cquery",
 			"args": ["--log-file=/tmp/cq.log"],
-			"filetypes": ["c"],
+			"filetypes": [],
 			"trace.server": "verbose",
-			"rootPatterns": ["compile_flags.txt", "compile_commands.json"],
+			"rootPatterns": [
+				"compile_flags.txt", "compile_commands.json",
+				// "build/compile_commands.json"
+			],
+			// see compilationDatabaseDirectory
 			"initializationOptions": {
-			"cacheDirectory": "/tmp/cquery"
+				"cacheDirectory": "/tmp/cquery",
+				// in the future can be moved 
+				"compilationDatabaseDirectory": "/mnt/ext/mptcp/build/compile_commands.json"
 			}
+		},
+		"ccls": {
+			"command": "ccls",
+			"args": ["--log-file=/tmp/ccls.log", "-v=1"],
+			"filetypes": ["c", "cpp", "objc", "objcpp"],
+			"rootPatterns": [".ccls", "compile_commands.json", ".vim/", ".git/", ".hg/"],
+			"initializationOptions": {
+				"compilationDatabaseDirectory": "/home/teto/mptcp/build",
+				"clang": {
+					"excludeArgs": [
+						"-m*",
+						"-Wa*"
+					]
+				},
+				"cache": {
+					"directory": "/tmp/ccls"
+				}
+			}
+		},
+		"clangd": {
+			"command": "clangd",
+			"args": [
+				"--background-index"
+			],
+			"rootPatterns": [
+				"compile_flags.txt",
+				"compile_commands.json",
+				".vim/",
+				".git/",
+				".hg/"
+			],
+			"filetypes": []
 		}
-  },
+	},
 }

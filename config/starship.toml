@@ -1,20 +1,28 @@
+# https://starship.rs/config/#character
 # Don't print a new line at the start of the prompt
 add_newline = false
+# prompt_order = 
 
 # Replace the "❯" symbol in the prompt with "➜"
 [character]      # The name of the module we are confguring is "character"
 symbol = "➜"     # The "symbol" segment is being set to "➜"
-
+vicmd_symbol = "vicmd"  # "❮"
 # Disable the package module, hiding it from the prompt completely
 [package]
 disabled = true
 
 [nix_shell]
-disabled = true
+disabled = false
 use_name = true
+# style = "bold red"
 impure_msg = "impure shell"
 pure_msg = "pure shell"
 
+[kubernetes]
+disabled = true
+
+[java]
+disabled = true
 
 [jobs]
 symbol = "+ "
@@ -24,9 +32,25 @@ threshold = 4
 [cmd_duration]
 min_time = 4
 
+[golang]
+disabled = true
 
 
 [battery]
 full_symbol = "🔋"
 charging_symbol = "⚡️"
 discharging_symbol = "💀"
+
+[git_status]
+disabled = true
+
+[git_state]
+disabled = true
+
+[python]
+symbol = "👾 "
+pyenv_version_name = false
+
+[ruby]
+disabled = true
+

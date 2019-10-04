@@ -18,7 +18,6 @@ rec {
   programs.man.enable = true;
 
   home.packages = with pkgs; [
-    pkgs.starship
     # TODO pass to vim makeWrapperArgs
     pkgs.nodePackages.bash-language-server
     # just in my branch :'(
@@ -152,6 +151,10 @@ rec {
 
       # kitty
       icat="kitty +kitten icat";
+
+      # modprobe to use 
+      # TODO might need to use -S as well
+      modprobe_exp="modprobe -d /home/teto/mptcp/build";
     };
 
 
@@ -309,8 +312,8 @@ rec {
       source $ZDOTDIR/zshrc
 
 
-      eval "$(${pkgs.starship}/bin/starship init zsh)"
     ''
+    # eval "$(${pkgs.starship}/bin/starship init zsh)"
       # + builtins.readFile dotDir + ./zshrc
       ;
 

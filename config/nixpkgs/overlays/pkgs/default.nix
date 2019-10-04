@@ -67,7 +67,7 @@ final: prev:
 
   mda-lite = prev.pythonPackages.callPackage ./mda-lite {};
 
-  mptcpnumerics = prev.python3Packages.callPackage ./mptcpnumerics.nix {};
+  # mptcpnumerics = prev.python3Packages.callPackage ./mptcpnumerics.nix {};
 
   # install from the repo
   # mptcpanalyzer = prev.callPackage /home/teto/mptcpanalyzer {};
@@ -105,7 +105,6 @@ final: prev:
 
   rt-tests = prev.callPackage ./rt-test.nix {};
 
-  # termite-color-switcher = prev.callPackage ./termite-color-switcher {};
 
   # netbee = prev.callPackage ./netbee {};
 
@@ -123,7 +122,6 @@ final: prev:
 
   rofi-scripts = prev.callPackage ./rofi-scripts {};
 
-  texlab = prev.callPackage ./texlab {};
-
-
+  # see nixpkgs PR instead
+  # texlab = prev.callPackage ./texlab {};
 }

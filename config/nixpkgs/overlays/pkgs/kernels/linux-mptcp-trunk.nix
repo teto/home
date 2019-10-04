@@ -23,8 +23,13 @@ buildLinux (rec {
     # url = https://github.com/teto/mptcp.git;
     #  tilpner: arg the git fetch was working but after 50mn died with "remote: fatal: Out of memory, calloc failed". I will give more memory to the VM 
     # now it seems like the firewall blocks some ports that could be used
-    url = "gitolite@nixos.iijlab.net:mptcp.git";
+
+    # this was too slow on gitolite
+    # url = "gitolite@nixos.iijlab.net:mptcp.git";
+    # on github it should be faster
+    url = "git@github.com:teto/mptcp_private.git";
     ref = "integrated_owd";
+
   };
 
 } // args)
