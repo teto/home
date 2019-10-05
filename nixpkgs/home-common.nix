@@ -10,6 +10,15 @@ let
     xdg_utils
   ];
 
+  # change to a package
+  fzf-extras = let src = pkgs.fetchFromGitHub {
+    owner = "atweiden";
+    repo = "fzf-extras";
+    rev = "2ba6d111eee8db3f7c6614cac9c6931cdc76489d";
+    sha256 = "0zi4g03986yiqh2ccx666xacabiszjc34ibb372nrnfw9qmd7frz";
+  };
+  in src;
+
 in
 rec {
   news.display = "silent";
@@ -309,14 +318,18 @@ rec {
 
       # TODO remove and include it ?
       # source $ZDOTDIR/zshrc.generated
-      source $ZDOTDIR/zshrc
+      # if [ -f "$ZDOTDIR/zshrc" ]; then
+        source $ZDOTDIR/zshrc
+      # fi
 
+      # https://github.com/atweiden/fzf-extras
+      source "${fzf-extras}/fzf-extras.zsh";
+      source "${fzf-extras}/fzf-extras.bash";
 
     ''
     # eval "$(${pkgs.starship}/bin/starship init zsh)"
       # + builtins.readFile dotDir + ./zshrc
       ;
-
   };
 
   programs.tmux = {

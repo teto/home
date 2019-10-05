@@ -74,7 +74,6 @@ let
 
   # fzf-extras found in overlay fzf-extras
   programs.zsh.initExtra = ''
-    source "${pkgs.fzf-extras}/fzf-extras.zsh";
   '';
 
   # programs.termite = {

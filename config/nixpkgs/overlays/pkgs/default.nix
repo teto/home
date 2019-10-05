@@ -52,13 +52,13 @@ final: prev:
 
   # prev.callPackage ./fzf-extras.nix {};
   # copy to share/
-  fzf-extras = let src = prev.fetchFromGitHub {
-    owner = "atweiden";
-    repo = "fzf-extras";
-    rev = "2ba6d111eee8db3f7c6614cac9c6931cdc76489d";
-    sha256 = "0zi4g03986yiqh2ccx666xacabiszjc34ibb372nrnfw9qmd7frz";
-  };
-  in src;
+  # fzf-extras = let src = prev.fetchFromGitHub {
+  #   owner = "atweiden";
+  #   repo = "fzf-extras";
+  #   rev = "2ba6d111eee8db3f7c6614cac9c6931cdc76489d";
+  #   sha256 = "0zi4g03986yiqh2ccx666xacabiszjc34ibb372nrnfw9qmd7frz";
+  # };
+  # in src;
   # "${src}/fzf-extras.zsh";
 
   gitbatch = prev.callPackage ./gitbatch { };
