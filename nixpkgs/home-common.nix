@@ -324,7 +324,7 @@ rec {
 
       # https://github.com/atweiden/fzf-extras
       source "${fzf-extras}/fzf-extras.zsh";
-      source "${fzf-extras}/fzf-extras.bash";
+      source "${fzf-extras}/fzf-extras.sh";
 
     ''
     # eval "$(${pkgs.starship}/bin/starship init zsh)"

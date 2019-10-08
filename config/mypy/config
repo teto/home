@@ -1,0 +1,52 @@
+# see https://mypy.readthedocs.io/en/stable/config_file.html
+[mypy]
+# warns about unneeded # type: ignore comments
+warn_unused_ignores=0
+strict_optional = false
+
+[mypy-.*]
+ignore_missing_imports = False
+
+[mypy-pulp.*]
+ignore_missing_imports = True
+
+[mypy-cmd2.*]
+ignore_missing_imports = True
+
+[mypy-pandas.*]
+ignore_missing_imports = True
+
+[mypy-numpy.*]
+ignore_missing_imports = True
+
+[mypy-matplotlib.*]
+ignore_missing_imports = True
+
+[mypy-scipy.*]
+ignore_missing_imports = True
+
+[mypy-stevedore.*]
+ignore_missing_imports = True
+
+[mypy-setuptools.*]
+ignore_missing_imports = True
+
+[mypy-colorama.*]
+ignore_missing_imports = True
+
+[mypy-bitmath.*]
+ignore_missing_imports = True
+
+[mypy-pixcat.*]
+ignore_missing_imports = True
+
+[pylint]
+ignore = E226,E302,E41,E265,E301,E303,E125,E128
+
+[pycodestyle]
+# E301 expected 1 blank line, found 0
+# e303 too many blank lines
+ignore = E226,E302,E41,E265,E301,E303,E125,E128,E712,W503
+max-line-length = 120
+
+

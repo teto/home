@@ -67,12 +67,12 @@ final: prev:
 
   mda-lite = prev.pythonPackages.callPackage ./mda-lite {};
 
-  # mptcpnumerics = prev.python3Packages.callPackage ./mptcpnumerics.nix {};
+  mptcpnumerics = prev.python3Packages.callPackage ./mptcpnumerics.nix {};
 
   # install from the repo
   # mptcpanalyzer = prev.callPackage /home/teto/mptcpanalyzer {};
 
-  neovim-gtk = prev.callPackage ./neovim-gtk { };
+  # neovim-gtk = prev.callPackage ./neovim-gtk { };
 
   # nushell = prev.callPackage ./nushell { };
 
