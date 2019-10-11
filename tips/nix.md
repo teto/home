@@ -2,6 +2,9 @@
         mkdir -p "$tmp_path/@pythonSitePackages@"
         eval "@pythonInterpreter@ -m pip install -e . --prefix $tmp_path >&2"
 
+
+--no-net
+
 # Just run this until a fix appears !
 python -m pip install -e . --prefix $tmp_path >&2
 

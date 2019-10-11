@@ -8,12 +8,15 @@ buildGoPackage rec {
 
   subPackages = [ "." ];
 
-  src = fetchFromGitHub {
-    owner = "isacikgoz";
-    repo = pname;
-    rev = "v${version}";
-    sha256 = "sha256-vmxaZbwb98gZMm4CVEWC7AUn1Tvdxgqw6416jOAB7eQ=";
+  src = fetchGit {
+    url = https://github.com/isacikgoz/gitbatch.git;
   };
+  # fetchFromGitHub {
+  #   owner = "isacikgoz";
+  #   repo = pname;
+  #   rev = "v${version}";
+  #   sha256 = "sha256-vmxaZbwb98gZMm4CVEWC7AUn1Tvdxgqw6416jOAB7eQ=";
+  # };
 
   meta = with stdenv.lib; {
     description = "Running git UI commands";

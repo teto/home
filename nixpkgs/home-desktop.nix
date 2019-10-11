@@ -106,7 +106,6 @@ let
     scrot # screenshot app
     # smplayer # GUI around mpv
     sxiv # simple image viewer
-    # system_config_printer # fails
     # vimiv # image viewer
     shared_mime_info # temporary fix for nautilus to find the correct files
     tagainijisho # japanse dict; like zkanji Qt based
@@ -138,7 +137,7 @@ let
 
     unstable.qutebrowser  # keyboard driven fantastic browser
     gnome3.nautilus # demande webkit/todo replace by nemo ?
-    shutter # screenshot utility
+    # shutter # screenshot utility
     # mcomix # manga reader
     # mendeley # requiert qtwebengine
     pinta    # photo editing
@@ -199,7 +198,7 @@ in
 
   programs.rofi = {
     enable = true;
-    terminal = "${pkgs.termite}/bin/termite";
+    terminal = "${pkgs.kitty}/bin/kitty";
     borderWidth = 1;
     theme = "solarized_alternate";
     # lines= ;
@@ -329,7 +328,8 @@ in
   # programs.newsboat.urls =
 
   programs.termite = {
-    enable = true;
+    enable = false;
+
     clickableUrl = false;
     cursorBlink = "system";
     cursorShape = "block";

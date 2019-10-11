@@ -72,6 +72,9 @@ rec {
   # https://github.com/commercialhaskell/stack/issues/2358
   home.file.".stack/config.yaml".source = ../home/stack.yaml;
 
+  # 20.03
+  home.stateVersion = "19.09";
+
   # see tips/haskell.md, an incomplete cabal config can be a pain
   # - absence of repostiory will make cabal update fail
   # is needed with new-build ?
@@ -134,12 +137,6 @@ rec {
     historyIgnore=["ls"];
     # historyFile = "${xdg.cacheHome}/bash_history";
     historyFile = "$XDG_CACHE_HOME/bash_history";
-    # initExtra=''
-    #   ${includeFzf}
-    # '';
-      # profileExtra=''
-      #   '';
-      # shellOptions=
     shellAliases = {
       hm="home-manager";
       #mostly for testin
@@ -291,6 +288,12 @@ rec {
     # plugins =
     # loginExtra=
     # profileExtra
+      # # used to compile bpf stuff
+      # __bcc() {
+      #         clang -O2 -emit-llvm -c $1 -o - | \
+      #         llc -march=bpf -filetype=obj -o "`basename $1 .c`.o"
+      # }
+
     initExtra = ''
       alias -s json=nvim
       alias -s Vagrantfile=nvim
@@ -303,18 +306,8 @@ rec {
       alias -s doc=xdg-open
       alias -s docx=xdg-open
 
-
-      # there must be a module for this
-      source ${pkgs.autojump}/share/autojump/autojump.zsh
-
       # VERY IMPORTANT else zsh can eat last line
       setopt prompt_sp
-
-      # used to compile bpf stuff
-      __bcc() {
-              clang -O2 -emit-llvm -c $1 -o - | \
-              llc -march=bpf -filetype=obj -o "`basename $1 .c`.o"
-      }
 
       # TODO remove and include it ?
       # source $ZDOTDIR/zshrc.generated
@@ -323,6 +316,7 @@ rec {
       # fi
 
       # https://github.com/atweiden/fzf-extras
+      # the zsh script does nothing yet
       source "${fzf-extras}/fzf-extras.zsh";
       source "${fzf-extras}/fzf-extras.sh";
 

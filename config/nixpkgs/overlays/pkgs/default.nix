@@ -61,7 +61,7 @@ final: prev:
   # in src;
   # "${src}/fzf-extras.zsh";
 
-  gitbatch = prev.callPackage ./gitbatch { };
+  # gitbatch = prev.callPackage ./gitbatch { };
 
   hunter = prev.callPackage ./hunter { };
 

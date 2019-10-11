@@ -76,9 +76,5 @@ let
   programs.zsh.initExtra = ''
   '';
 
-  # programs.termite = {
-  #   enable = true;
-  #   # colorsExtra = builtins.readFile ../config/termite/solarized-dark;
-  # };
 }
 

@@ -68,8 +68,9 @@ let
 
   services.nextcloud-client.enable = true;
 
+  # waiting for attribute 'vte-ng' missing
   programs.termite = {
-    enable = true;
+    enable = false;
     # TODO the light in fact
     # check if it exists
     # colorsExtra = builtins.readFile ../config/termite/solarized-dark;

@@ -272,6 +272,11 @@ kernel_xconfig=''
 
   environment.etc."inputrc".source = ../config/inputrc;
 
+  # set it to true to help
+  documentation.nixos.includeAllModules = false;
+
+  programs.system-config-printer.enable = true;
+
   # todo set it only if path exists
   # convert set back to list
   security.sudo = {
