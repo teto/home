@@ -15,6 +15,10 @@ autocmd FileType json syntax match Comment +\/\/.\+$+
 " Use `[c` and `]c` to navigate diagnostics
 nmap <silent> [c <Plug>(coc-diagnostic-prev)
 nmap <silent> ]c <Plug>(coc-diagnostic-next)
+
+nmap <silent> [[ <Plug>(coc-diagnostic-prev)
+nmap <silent> ]] <Plug>(coc-diagnostic-next)
+
 " Remap keys for gotos
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
@@ -56,6 +60,14 @@ command! -nargs=0 Format :call CocAction('format')
 
 " Use `:Fold` to fold current buffer
 command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+
+call coc#config('diagnostic', {
+			\ "diagnostic.enable": v:true,
+  			\ "diagnostic.errorSign": ">>",
+			\ })
+" diagnostic.warningSign": "⚠",
+" diagnostic.infoSign": ">>",
+" diagnostic.hintSign": ">>",
 
 
 let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'

@@ -1,7 +1,7 @@
 {
 	"diagnostic.enable": true,
   	"diagnostic.errorSign": ">>",
-//	"diagnostic.warningSign": "⚠",
+	"diagnostic.warningSign": "⚠",
 //	"diagnostic.infoSign": ">>",
 //	"diagnostic.hintSign": ">>",
 	// "git.enableGutters": false,

@@ -299,7 +299,10 @@ rec {
     cmakeBuildType="debug";
       # -DMN_LOG_LEVEL
 
-    nativeBuildInputs = oa.nativeBuildInputs ++ [ self.pkgs.valgrind ];
+      nativeBuildInputs = oa.nativeBuildInputs ++ [
+        self.pkgs.valgrind
+        self.pkgs.ccls
+      ];
     shellHook = ''
       export NVIM_PYTHON_LOG_LEVEL=DEBUG
       export NVIM_LOG_FILE=/tmp/log
