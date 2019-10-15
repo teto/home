@@ -31,6 +31,7 @@ rec {
     pkgs.nodePackages.bash-language-server
     # just in my branch :'(
     pkgs.luaPackages.lua-lsp
+    pkgs.dtrx  # to compress stuff
 
     # to be used in i3
     # pkgs.i3dispatch
@@ -206,11 +207,6 @@ rec {
         diff = "${pkgs.gitAndTools.diff-so-fancy}/bin/diff-so-fancy | less --tabs=1,5 -RFX";
         show = "${pkgs.gitAndTools.diff-so-fancy}/bin/diff-so-fancy | less --tabs=1,5 -RFX";
       };
-
-    # pager = {
-	# diff = diff-so-fancy | less --tabs=1,5 -RFX
-	# show = diff-so-fancy | less --tabs=1,5 -RFX
-  # };
     };
   };
 
@@ -266,6 +262,7 @@ rec {
 
   programs.zsh = rec {
     enable = true;
+    # enableAutojump = true;
     # dotDir = "${config.xdg.configHome}/zsh";
     dotDir = ".config/zsh";
     sessionVariables = {
@@ -305,6 +302,10 @@ rec {
       alias -s pdf=xdg-open
       alias -s doc=xdg-open
       alias -s docx=xdg-open
+
+
+      # there must be a module for this
+      source ${pkgs.autojump}/share/autojump/autojump.zsh
 
       # VERY IMPORTANT else zsh can eat last line
       setopt prompt_sp

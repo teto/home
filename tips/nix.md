@@ -26,3 +26,6 @@ find reverse dependencies
 nix-store --query --referrers $(which xdg-mime)
 
 Mention `--max-jobs 0` to build remotely only
+
+
+CURL_TRACE 

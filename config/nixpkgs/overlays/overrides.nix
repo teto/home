@@ -16,7 +16,7 @@ rec {
     '';
   });
 
-  i3-local = let i3path = ~/i3; in 
+  i3-local = let i3path = ~/i3; in
   if (builtins.pathExists i3path) then
     super.i3.overrideAttrs (oldAttrs: {
 	  name = "i3-dev";

@@ -347,5 +347,28 @@ in
     # colorsExtra = '' '';
   };
 
+# [Added Associations]
+# video/x-matroska=vlc.desktop;mpv.desktop;
+# video/mp4=vlc.desktop;mpv.desktop;userapp-mpv-DXOVBY.desktop;
+# text/csv=sublime_text.desktop;
+# video/x-msvideo=mpv.desktop;
+# application/x-matroska=mpv.desktop;
+# text/x-patch=sublime_text.desktop;
+# text/x-chdr=sublime_text.desktop;
+# text/plain=sublime_text.desktop;
+# application/binary=sublime_text.desktop;
+# application/zip=xarchiver.desktop;
+# image/gif=qiv.desktop;
+# text/x-rockspec=sublime_text.desktop;
+
+# [Removed Associations]
+# application/pdf=Mendeley.desktop
+  xdg.mimeApps = {
+      enable = true;
+      associations = {
+        added = {
+        };
+      };
+  };
 
 }

@@ -6,7 +6,9 @@ buildGoPackage rec {
 
   goPackagePath = "github.com/isacikgoz/gitbatch";
 
-  subPackages = [ "." ];
+  # subPackages = [ "." ];
+
+  # goDeps = 
 
   src = fetchGit {
     url = https://github.com/isacikgoz/gitbatch.git;

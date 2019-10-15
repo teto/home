@@ -19,6 +19,8 @@ let
     # ./modules/mptcp.nix
     ./modules/vpn.nix
 
+    ./modules/tor.nix
+
       <nixos-hardware/dell/xps/13-9360>
   ] ;
 
@@ -54,8 +56,8 @@ let
   boot.kernelParams = [ " console=ttyS0" "acpi_backlight=vendor" ];
 
   # TODO use the mptcp one ?
-  # boot.kernelPackages = pkgs.linuxPackages;
-  boot.kernelPackages = pkgs.linuxPackages_mptcp;
+  boot.kernelPackages = pkgs.linuxPackages;
+  # boot.kernelPackages = pkgs.linuxPackages_mptcp;
   # boot.kernelPackages = pkgs.linuxPackages_latest;
   # boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_4_14;
 

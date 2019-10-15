@@ -40,10 +40,11 @@ self: prev:
       # should not be needed anymore right ?
       tensorflow-core-ops = appendPatch (hprev.tensorflow-core-ops) ./pkgs/tensorflow.patch;
 
-      ihaskell = builtins.trace "overrideCABAL !!" overrideCabal (dontCheck hprev.ihaskell) ( drv: {
-        executableToolDepends = [ prev.pkgs.jupyter ];
-        executableHaskellDepends = [ prev.pkgs.jupyter ];
-      });
+      # ihaskell = builtins.trace "overrideCABAL !!" overrideCabal (dontCheck hprev.ihaskell) ( drv: {
+      #   executableToolDepends = [ prev.pkgs.jupyter ];
+      #   executableHaskellDepends = [ prev.pkgs.jupyter ];
+      # });
+      # ihaskell = hprev.ihaskell_0_10_0_2;
 
       bitset = overrideSrc hprev.bitset { src = prev.fetchFromGitHub {
         owner = "teto";
