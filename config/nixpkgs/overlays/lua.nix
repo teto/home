@@ -16,24 +16,25 @@ rec {
   #       # };
   #     });
 
-    # packageOverrides = luaself: luaprev: {
+    packageOverrides = luaself: luaprev: {
 
-    #   luarocks-nix = luaprev.luarocks-nix.overrideAttrs(oa: {
-    #     pname = "luarocks-local";
-    #     src = /home/teto/luarocks;
-    #     # src = builtins.fetchGit {
-    #     #   url = https://github.com/teto/luarocks/;
-    #     #   ref = "nix";
-    #     # };
-    #   });
+      luarocks-nix = luaprev.luarocks-nix.overrideAttrs(oa: {
+        pname = "luarocks-local";
+        src = /home/teto/luarocks;
+        # src = builtins.fetchGit {
+        #   url = https://github.com/teto/luarocks/;
+        #   ref = "nix";
+        # };
+      });
 
-    #   # prev.lib.traceValSeq 
+    #   # prev.lib.traceValSeq
     #   cqueues = ( luaprev.cqueues.override({
     #     # name = "matt";
     #     # pname = "matt";
     #     disabled = false;
     #   }));
-    # };
+
+    };
 
   };
 

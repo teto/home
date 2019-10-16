@@ -92,6 +92,8 @@ Plug 'MattesGroeger/vim-bookmarks' " ruby  / :BookmarkAnnotate
 " branch v2-integration
 " Plug 'andymass/vim-matchup' " to replace matchit
 " Plug 'AGhost-7/critiq.vim' " :h critiq
+Plug 'bogado/file-line' " to open a file at a specific line
+Plug 'yuki-ycino/fzf-preview.vim' " toto
 Plug 'glacambre/firenvim' " to use nvim in firefox
 Plug 'liuchengxu/vim-clap' " fuzzer
 Plug 'alok/notational-fzf-vim' " to take notes
@@ -849,7 +851,7 @@ endfunction
 "   \ 'header':  ['fg', 'Comment']
 " }
 
-let g:fzf_history_dir = $XDG_CACHE_HOME.'/fzf-history'
+let g:fzf_history_dir = stdpath('cache').'/fzf-history'
 " Advanced customization using autoload functions
 "autocmd VimEnter * command! Colors
   "\ call fzf#vim#colors({'left': '15%', 'options': '--reverse --margin 30%,0'})
@@ -859,10 +861,43 @@ let g:fzf_history_dir = $XDG_CACHE_HOME.'/fzf-history'
 let g:fzf_buffers_jump = 1
 
 imap <c-x><c-f> <plug>(fzf-complete-path)
+" inspired by https://github.com/junegunn/fzf.vim/issues/664#issuecomment-476438294
+let $FZF_DEFAULT_OPTS='--layout=reverse'
+let g:fzf_layout = { 'window': 'call FloatingFZF()' }
 
-"
+" Function to create the custom floating window
+function! FloatingFZF()
+  " creates a scratch, unlisted, new, empty, unnamed buffer
+  " to be used in the floating window
+  let buf = nvim_create_buf(v:false, v:true)
+
+  " 90% of the height
+  let height = float2nr(&lines * 0.6)
+  " 60% of the height
+  let width = float2nr(&columns * 0.6)
+  " horizontal position (centralized)
+  let horizontal = float2nr((&columns - width) / 2)
+  " vertical position (one line down of the top)
+  let vertical = 6
+
+  let opts = {
+        \ 'relative': 'editor',
+        \ 'row': vertical,
+        \ 'col': horizontal,
+        \ 'width': width,
+        \ 'height': height
+        \ }
+
+  call nvim_open_win(buf, v:true, opts)
+endfunction
 
 " }}}
+" fzf-preview{{{
+" let g:fzf_preview_layout = 'top split new'
+let g:fzf_preview_layout = ''
+" Key to toggle fzf window size of normal size and full-screen
+let g:fzf_full_preview_toggle_key = '<C-s>'
+"}}}
 " Csv config {{{
 " you can use :CsvVertFold to hide commands
 " There is the analyze command as well
@@ -938,7 +973,7 @@ let g:haskell_backpack = 1                " to enable highlighting of backpack k
 let g:haskell_indent_disable=1
 "}}}
 " Startify config {{{
-nnoremap <Leader>st :Startify<cr>
+" nnoremap <Leader>st :Startify<cr>
 
 let g:startify_list_order = [
       \ ['   MRU '.getcwd()], 'dir',
@@ -948,7 +983,7 @@ let g:startify_list_order = [
       \ ]
 let g:startify_use_env = 0
 let g:startify_disable_at_vimenter = 0
-let g:startify_session_dir = $XDG_DATA_HOME.'/nvim/sessions'
+let g:startify_session_dir = stdpath('data').'/nvim/sessions'
 let g:startify_bookmarks = [
       \ {'i': $XDG_CONFIG_HOME.'/i3/config.main'},
       \ {'h': $XDG_CONFIG_HOME.'/nixpkgs/home.nix'},
@@ -1967,3 +2002,9 @@ hi CursorLine                    guibg=#293739 guifg=None
 
 au BufWinLeave,BufLeave * if &buftype != 'nofile' | silent! mkview | endif
 au BufWinEnter * if &buftype != 'nofile' | silent! loadview | endif
+
+
+highlight NormalFloat cterm=NONE ctermfg=14 ctermbg=0 gui=NONE guifg=#93a1a1 guibg=#002931
+
+" taken from justinmk's config
+command! Tags !ctags -R --exclude='build*' --exclude='.vim-src/**' --exclude='venv/**' --exclude='**/site-packages/**' --exclude='data/**' --exclude='dist/**' --exclude='notebooks/**' --exclude='Notebooks/**' --exclude='*graphhopper_data/*.json' --exclude='*graphhopper/*.json' --exclude='*.json' --exclude='qgis/**' *

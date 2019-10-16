@@ -62,7 +62,7 @@ let
     # khal # => vdirsyncer !
     khard
     libsecret
-    newsboat
+    newsboat # marked as broken
     slack
     # vdirsyncer
     customWeechat
@@ -74,6 +74,7 @@ let
     # apvlv # broken
     # alsa-utils # for alsamixer
     arandr  # to move screens/monitors around
+    hunspellDicts.fr-any
     # buku
     dynamic-colors # to change the terminal colors ("dynamic-colors switch solarized-dark")
     # gcalc

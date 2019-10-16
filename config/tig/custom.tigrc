@@ -4,5 +4,5 @@
 bind main ! !git revert %(commit)
 
 # -m 1 will always work with newer git for now remove it
-bind main C !git cherry-pick  %(commit)
+bind main C !git cherry-pick -m 1 %(commit)
 
