@@ -27,6 +27,7 @@ let
     git-review # to contribute to wireshark
 
     gitAndTools.diff-so-fancy # todo install it via the git config instead
+    gitAndTools.hub  # lol
     # https://github.com/felipec/git-remote-hg
     # gitAndTools.git-remote-hg
     gitAndTools.git-recent
