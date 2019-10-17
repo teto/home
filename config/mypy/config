@@ -5,7 +5,7 @@ warn_unused_ignores=0
 strict_optional = false
 
 [mypy-.*]
-ignore_missing_imports = False
+ignore_missing_imports = True
 
 [mypy-pulp.*]
 ignore_missing_imports = True

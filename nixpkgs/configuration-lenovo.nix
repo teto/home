@@ -17,6 +17,8 @@ in
     ./modules/vpn.nix
     ./modules/openssh.nix
 
+    ./modules/sway.nix
+
     # not needed ?
     # ./modules/hwrng.nix
 
@@ -291,8 +293,7 @@ in
   #   package = pkgs.linux_mptcp_trunk_raw;
   # };
 
-  # once available
-  # services.greenclip.enable = true;
+  services.greenclip.enable = true;
 
   # services.owamp.enable = true;
 
