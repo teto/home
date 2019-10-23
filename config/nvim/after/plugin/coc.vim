@@ -1,16 +1,15 @@
-" coc.nvim {{{
 " Note: yarn is not required if you want to manage extensions using a vim
 " plugin manager such as vim-plug.
-" set by nix
-" let g:coc_node_path=
 " coc-yank / coc-vimtex / coc-lua
+if ! exists('g:did_coc_loaded')
+  finish
+endif
+
 " Some servers have issues with backup files, see #649
 set nobackup
 set nowritebackup
 " don't give |ins-completion-menu| messages.
 set shortmess+=c
-" coc.nvim uses its custom json that accepts comments like //
-autocmd FileType json syntax match Comment +\/\/.\+$+
 
 " Use `[c` and `]c` to navigate diagnostics
 nmap <silent> [c <Plug>(coc-diagnostic-prev)

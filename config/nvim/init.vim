@@ -676,6 +676,19 @@ let g:dirvish_mode=2
 " let g:echodoc#enable_at_startup=1
 " g:echodoc#type " only for gonvim
 "}}}
+" nvim-colorizer{{{
+lua require 'terminal'.setup()
+"}}}
+" firenvim {{{
+let g:firenvim_config = {
+    \ 'localSettings': {
+        \ '.*': {
+            \ 'selector': 'textarea',
+            \ 'priority': 0,
+        \ }
+    \ }
+\ }
+"}}}
 
 " float-preview {{{
 let g:float_preview#docked = 0
@@ -1154,12 +1167,6 @@ endif
 "set listchars=tab:•·,trail:·,extends:❯,precedes:❮,nbsp:×
 " }}}
 " Grepper {{{
-" add -cword to automatically fill with the underlying word
-" example given by mhinz to search into current buffer
-" https://github.com/mhinz/vim-grepper/issues/27
-" let g:grepper = { 'git': { 'grepprg': 'git grep -nI $* -- $.' }}
-" Grepper -grepprg ag --vimgrep $* $. works
-" runtime plugin/grepper.vim  " init grepper with defaults
 
 " nnoremap <leader>git :Grepper -tool git -open -nojump
 " nnoremap <leader>ag  :Grepper -tool ag  -open -switch
@@ -2010,5 +2017,3 @@ highlight NormalFloat cterm=NONE ctermfg=14 ctermbg=0 gui=NONE guifg=#93a1a1 gui
 " taken from justinmk's config
 command! Tags !ctags -R --exclude='build*' --exclude='.vim-src/**' --exclude='venv/**' --exclude='**/site-packages/**' --exclude='data/**' --exclude='dist/**' --exclude='notebooks/**' --exclude='Notebooks/**' --exclude='*graphhopper_data/*.json' --exclude='*graphhopper/*.json' --exclude='*.json' --exclude='qgis/**' *
 
-
-lua require 'terminal'.setup()

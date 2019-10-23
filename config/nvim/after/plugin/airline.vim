@@ -3,21 +3,22 @@
 " Airline {{{
 " debug with :AirlineExtensions
 " to speed up things
+  let g:airline#extensions#disable_rtp_load = 1
+
+
 
 " 'neomake', 
 " check with :AirlineExtensions
-let g:airline_extensions = [
-			\ 'obsession',
-			\ 'quickfix',
-			\ 'tabline',
-			\ 'wordcount',
-			\ 'grepper',
-			\ 'vimtex',
-			\ 'coc',
-			\ ]
+" let g:airline_extensions = [
+" 			\ 'obsession',
+" 			\ 'quickfix',
+" 			\ 'tabline',
+" 			\ 'wordcount',
+" 			\ 'grepper',
+" 			\ 'vimtex',
+" 			\ 'coc',
+" 			\ ]
 " \ 'gutentags',
-let g:airline#extensions#coc#enabled = 1
-let g:airline#extensions#gutentags#enabled = 0
 
 " let g:airline#extensions#default#layout = [
 "     \ [ 'a', 'b', 'c' ],
@@ -25,6 +26,9 @@ let g:airline#extensions#gutentags#enabled = 0
 "     \ ]
 " let g:airline#extensions#wordcount#filetypes = ...
 
+let g:airline#extensions#coc#enabled = 1
+let g:airline#extensions#gutentags#enabled = 0
+let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#ale#enabled = 0
 let g:airline#extensions#neomake#enabled = 1
 let g:airline#extensions#languageclient#enabled = 1
@@ -67,7 +71,7 @@ let g:airline#extensions#default#layout = [
 
 " let g:airline_section_y = airline#section#create_right(['neomake'])
 " let g:airline_section_y = airline#section#create_right(['neomake','ffenc'])
-call airline#parts#define_function('grepper', 'grepper#statusline')
+" call airline#parts#define_function('grepper', 'grepper#statusline')
 " see :h airline-default-sections
 let g:airline_section_x = airline#section#create_right(['grepper'])
 " let g:airline_section_y = airline#section#create_right(['neomake_error_count', 'neomake_warning_count'])
@@ -79,7 +83,6 @@ let g:airline_section_x = airline#section#create_right(['grepper'])
  " airline#section#create(['windowswap', 'obsession', '%3p%%'.spc, 'linenr', 'maxlinenr', spc.':%3v'])
 " let g:airline_section_z = airline#section#create_right(['linenumber'])
 " airline extensions {{{
-let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline#extensions#vimtex#enabled=1
@@ -114,10 +117,6 @@ let g:airline#extensions#obsession#enabled = 1
 let g:airline#extensions#obsession#indicator_text = ''
 "}}}
 
-" let g:airline#extensions#whitespace#checks = [ 'indent', 'trailing', 'long' ]
-"|neomake#statusline#LoclistStatus should be shown in warning section
-" let &statusline .= ' %{grepper#statusline()}'
-" let g:airline_section_z = airline#section#create(['%{ObsessionStatus(''$'', '''')}'])
 " airline mappings {{{
 nmap <leader>& <Plug>AirlineSelectTab1
 nmap <leader>é <Plug>AirlineSelectTab2
@@ -144,7 +143,5 @@ nmap <leader>ç <Plug>AirlineSelectTab9
   nmap <leader>+ <Plug>AirlineSelectNextTab
 
 "}}}
-" one could change the formatter with
-  " let g:airline#extensions#tabline#formatter = 'default'
 "}}}
 
