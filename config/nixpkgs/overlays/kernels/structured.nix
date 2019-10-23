@@ -185,6 +185,9 @@ with lib.modules;
 
       HW_RANDOM     = yes;  # Means module or yes
       HW_RANDOM_VIRTIO     = yes;  # Means module or yes
+
+      # to fix a build issue :s 
+      INET_TCP_DIAG = mkForce yes;
   };
 
   # TODO cleanup to retain kvm specific config

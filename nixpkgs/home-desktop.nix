@@ -365,12 +365,5 @@ in
 
 # [Removed Associations]
 # application/pdf=Mendeley.desktop
-  xdg.mimeApps = {
-      enable = true;
-      associations = {
-        added = {
-        };
-      };
-  };
 
 }

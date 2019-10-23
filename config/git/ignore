@@ -16,6 +16,7 @@ __pad__
 *.py[cod]
 *.symvers
 *.aux
+*.pyc
 __pycache__/
 *.cpp_parameters
 *.mo

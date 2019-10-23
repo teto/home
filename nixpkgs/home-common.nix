@@ -23,6 +23,10 @@ in
 rec {
   news.display = "silent";
 
+  imports = [
+    ./modules/xdg-mime.nix
+  ];
+
   # home.extraOutputsToInstall = [ "man" "doc" ];
   programs.man.enable = true;
 
@@ -121,9 +125,6 @@ rec {
     #   hello world
     # '';
   };
-
-  # xdg.configFile.".config/mpv/input.conf".source = dotfiles/mpv-input.conf;
-  # xdg.configFile.".config/mpv/mpv.conf".source = dotfiles/mpv-mpv.conf;
 
   programs.bash = {
     enable = true;
