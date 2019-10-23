@@ -328,16 +328,16 @@ compdef _gnu_generic mptcpanalyzer
 # inspired by http://lynnard.me/blog/2014/01/05/change-cursor-shape-for-zsh-vi-mode/
 # zle-line-init 
 # zle-line-finish
+# starship overrides it
+# https://unix.stackexchange.com/questions/547/make-my-zsh-prompt-show-mode-in-vi-mode?noredirect=1&lq=1
 zle-keymap-select () {
-    if [ "$TERM" = "xterm-256color" ]; then
-        if [ $KEYMAP = vicmd ]; then
-            # the command mode for vi
-            echo -ne "\e[2 q"
-        else
-            # the insert mode for vi
-            # echo -ne "\e[4 q"
-	    echo -ne '\e[5 q'
-        fi
+    if [ $KEYMAP = vicmd ]; then
+	# the command mode for vi
+	echo -ne "\e[2 q"
+    else
+	# the insert mode for vi
+	# echo -ne "\e[4 q"
+	echo -ne '\e[5 q'
     fi
 }
 # https://unix.stackexchange.com/questions/547/make-my-zsh-prompt-show-mode-in-vi-mode?noredirect=1&lq=1
@@ -348,7 +348,14 @@ zle-keymap-select () {
 #   esac
 # }
 
+# http://zsh.sourceforge.net/Doc/Release/User-Contributions.html#ZLE-Functions
+# autoload zsh-mime-setup
 zle -N zle-keymap-select
+
+# autoload -U pick-web-browser
+# alias -s html=pick-web-browser
+# zstyle ':mime:*' x-browsers opera konqueror firefox
+# zstyle ':mime:*' tty-browsers opera konqueror firefox
 
 # load terminfo for portable keybindings
 # zmodload zsh/terminfo

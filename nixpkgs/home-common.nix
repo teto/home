@@ -193,6 +193,7 @@ rec {
 
       pull = {
         rebase = true;
+        ff = "only";
       };
 
       stash = {
@@ -219,9 +220,10 @@ rec {
   # home.activation.setXDGbrowser = dagEntryBefore [ "linkGeneration" ] ''
   # xdg-settings set default-web-browser firefox.desktop
 
-  programs.starship = {
-    enable = true;
-  };
+  # don't enable it since it will override my zle-keymap-select binding
+  # programs.starship = {
+  #   enable = true;
+  # };
 
   programs.vim = {
     enable = true;
@@ -310,6 +312,9 @@ rec {
       # VERY IMPORTANT else zsh can eat last line
       setopt prompt_sp
 
+      # eval before sourcing zshrc since that one will override my
+      # zle call
+      eval "$(${pkgs.starship}/bin/starship init zsh)"
       # TODO remove and include it ?
       # source $ZDOTDIR/zshrc.generated
       # if [ -f "$ZDOTDIR/zshrc" ]; then

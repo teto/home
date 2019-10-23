@@ -2,12 +2,6 @@
 # See https://wiki.archlinux.org/index.php/XDG_Base_Directory_support#Partial to get aound
 #  non XDG conformant programs
 
-# check we are on nixos
-#########################################
-# true if file exists, aka if we are on nixos
-# test ! -f /etc/NIXOS
-# ON_NIXOS=$?
-
 # setup fpath {{{
 # fpath is not searched recursively
 # fpath=( $ZDOTDIR/completions $fpath )
