@@ -161,8 +161,11 @@ with lib.modules;
 
   # virtio etc.
   paravirtualization_guest = {
+      VETH = yes;
       VIRTIO = yes;
-      VIRTIO_PCI = yes;
+      SCSI_VIRTIO    = no; # appears first
+
+      VIRTIO_PCI = yes; # should selection VIRTIO
       VIRTIO_PCI_LEGACY = yes;
       VIRTIO_BALLOON    = yes;
       VIRTIO_INPUT      = yes;
@@ -170,7 +173,7 @@ with lib.modules;
       # VIRTIO_MMIO = no;
       VIRTIO_BLK        = yes;
       VIRTIO_NET        = yes;
-      RPMSG_VIRTIO      = option yes;
+      RPMSG_VIRTIO      = yes;
       VIRTIO_CONSOLE    = yes;
 
       # yes when 

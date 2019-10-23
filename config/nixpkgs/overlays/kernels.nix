@@ -1,4 +1,5 @@
 # https://nixos.wiki/wiki/Linux_Kernel
+# configfile.passthru.structuredConfig
 self: prev:
 # with prev.lib.kernel;
 

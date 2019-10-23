@@ -41,7 +41,7 @@ rec {
         #   src=/home/teto/protocol;
         # });
 
-        python-doi = pythonsuper.callPackage ./pkgs/python-doi {};
+        # python-doi = pythonsuper.callPackage ./pkgs/python-doi {};
 
         # pytest-mock = pythonsuper.pytest-mock.overrideAttrs(oa: {
         #   src = super.fetchFromGitHub {
@@ -67,7 +67,7 @@ rec {
           };
         });
 
-        papis = pythonsuper.papis.overridePythonAttrs (oa: {
+        papis-dev = pythonsuper.papis.overridePythonAttrs (oa: {
           version = "0.9-dev";
 
           # datautil
@@ -76,7 +76,7 @@ rec {
             # useful for zotero script
             pyyaml dateutil python-doi
           ]);
-          src = /home/teto/papis;
+          # src = /home/teto/papis;
           doCheck = false;
 
           # src = builtins.fetchGit {

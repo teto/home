@@ -31,7 +31,7 @@ add-edit = True
 add-open = True
 
 # as a plugin
-picktool = fzf
+# picktool = fzf
 
 ref-format = {doc[author_list][0][surname]}{doc[year]}
 # /* papis configuration */
