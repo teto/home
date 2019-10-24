@@ -110,7 +110,7 @@ in
   # DOES NOT WORK !
   # boot.kernelPackages = unstable.pkgs.linuxPackages;
   # boot.kernelPackages = pkgs.linuxPackages;
-  boot.kernelPackages = pkgs.linuxPackages_mptcp;
+  boot.kernelPackages = pkgs.linuxPackages;
 
   # boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_latest_without_ns;
 
@@ -266,13 +266,20 @@ in
 
   nix = {
     sshServe = {
-      enable = false;
+      enable = true;
       protocol = "ssh";
       # keys = [ secrets.gitolitePublicKey ];
     };
 
+
+    # added to nix.conf
+    extraOptions = ''
+      experimental-features = nix-command flakes
+    '';
+
     distributedBuilds = false;
     package = pkgs.nixFlakes;
+    # package = pkgs.nixUnstable;
   };
 
   # kind of a test

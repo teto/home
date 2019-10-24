@@ -160,22 +160,35 @@ with lib.modules;
   };
 
   # virtio etc.
+  # see linux-4.19.80/kernel/configs/kvm_guest.config
+  # override defconfig
+  # make O=../obj/x86_64 kvmconfighttp://www.gorecursion.com/virtualization/2016/12/17/buildkernel.html
+  # http://www.gorecursion.com/virtualization/2016/12/17/buildkernel.html
+  # scripts/kconfig/merge_config.sh we could provide several snippets
+  # TODO find how it works
   paravirtualization_guest = {
+    # FIREWIRE = no;
+    # MACINTOSH_DRIVERS = no;
+    XEN = no;
       VETH = yes;
+      TTY = yes;
       VIRTIO = yes;
       SCSI_VIRTIO    = no; # appears first
-
+      S390_GUEST = yes;
+      VIRTIO_VSOCKETS_COMMON = yes;
       VIRTIO_PCI = yes; # should selection VIRTIO
       VIRTIO_PCI_LEGACY = yes;
       VIRTIO_BALLOON    = yes;
       VIRTIO_INPUT      = yes;
       VIRTIO_MMIO       = yes;
+      # VIRTIO_MMIO_CMDLINE_DEVICES = no;
       # VIRTIO_MMIO = no;
       VIRTIO_BLK        = yes;
       VIRTIO_NET        = yes;
       RPMSG_VIRTIO      = yes;
+      REMOTEPROC = no;
       VIRTIO_CONSOLE    = yes;
-
+      NETWORK_FILESYSTEMS= yes;
       # yes when 
       PACKET = yes;
       PACKET_DIAG = yes;
@@ -187,7 +200,47 @@ with lib.modules;
       HW_RANDOM_VIRTIO     = yes;  # Means module or yes
 
       # to fix a build issue :s 
-      INET_TCP_DIAG = mkForce yes;
+      # depends on INET_DIAG that defaults to yes
+      # INET_TCP_DIAG = yes;
+
+      INET=yes;
+      SERIAL_8250_CONSOLE=yes;
+      DRM_VIRTIO_GPU= no;
+      PARAVIRT=yes;
+# NET=y
+# NET_CORE=y
+# NETDEVICES=y
+# BLOCK=y
+# BLK_DEV=y
+# NETWORK_FILESYSTEMS=y
+# INET=y
+# TTY=y
+# SERIAL_8250=y
+# SERIAL_8250_CONSOLE=y
+# IP_PNP=y
+# IP_PNP_DHCP=y
+# BINFMT_ELF=y
+# PCI=y
+# PCI_MSI=y
+# DEBUG_KERNEL=y
+# VIRTUALIZATION=y
+# HYPERVISOR_GUEST=y
+# PARAVIRT=y
+# KVM_GUEST=y
+# S390_GUEST=y
+# VIRTIO=y
+# VIRTIO_PCI=y
+# VIRTIO_BLK=y
+# VIRTIO_CONSOLE=y
+# VIRTIO_NET=y
+# 9P_FS=y
+# NET_9P=y
+# NET_9P_VIRTIO=y
+# SCSI_LOWLEVEL=y
+# SCSI_VIRTIO=y
+# VIRTIO_INPUT=y
+# DRM_VIRTIO_GPU=y
+
   };
 
   # TODO cleanup to retain kvm specific config
@@ -201,7 +254,8 @@ with lib.modules;
     PCI = yes;
     VOP = option no;
     SCIF_BUS = option no;
-    CAIF = option no; # stands for "Communication CPU to Application CPU Interface"
+    # CAIF = option no; # stands for "Communication CPU to Application CPU Interface"
+    CAIF = no; # stands for "Communication CPU to Application CPU Interface"
     INTEL_MIC_CARD = option  yes;
     REMOTEPROC = option yes;
     # VIRTIO_MENU y

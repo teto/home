@@ -80,20 +80,37 @@ let
 
 in rec {
 
+  kernelForDev = { debugKconfig ? true }: kernel:
+    (kernel.overrideAttrs(oa: {
+
+      # could be or kernelPatches
+      # prePatch = ''
+
+      #   substituteInPlace scripts/kconfig/ \
+      #     --replace 'int cdebug = PRINTD;' 'int cdebug = DEBUG_PARSE;'
+      # '';
+
+
+    }));
+
   /*
     Setups the kernel config to use virtio as a guest
    */
   kernelConfigureAsGuest = kernel:
     (kernel.override {
       # temp because of deadline
+      # preferBuiltin = true; -> should change the structuredConfig
+      # defconfig = "kvmguest"; # doesn't work well
+      # TODO 
+      # it was not answering Console on 8250/16550 and compatible serial port, NAME: SERIAL_8250_CONSOLE, ALTS: Y/n/?, ANSWER:
       ignoreConfigErrors=true;
+      autoModules = false;
 
       # structuredConfigs.debugConfigStructured
       structuredExtraConfig = with structuredConfigs; (prev.lib.mkMerge [
         kernel.configfile.passthru.structuredConfig
         net9p
         paravirtualization_guest
-
         # mptcpConfigStructured
       ]);
     });
@@ -147,6 +164,7 @@ in rec {
 
   # upstream mptcp but with options to run as a guest
   linux_mptcp_guest = kernelConfigureAsGuest prev.linux_mptcp;
+  linux_mptcp_guest-dev = kernelForDev {} linux_mptcp_guest;
 
   # see https://nixos.wiki/wiki/Linux_Kernel
   # linux_mptcp_trunk = (prev.linuxManualConfig {

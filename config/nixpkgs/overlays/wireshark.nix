@@ -30,7 +30,7 @@ in
 # TODO add htis in shell_hook of my wireshakr
 #     export QT_PLUGIN_PATH=${qt5.qtbase.bin}/${qt5.qtbase.qtPluginPrefix}
 
-  wireshark-master = (super.wireshark.override({ })).overrideAttrs (oa: {
+  wireshark-master = (super.wireshark.override({})).overrideAttrs (oa: {
     nativeBuildInputs = oa.nativeBuildInputs ++ [ super.doxygen ];
     shellHook = oa.shellHook + ''
       export QT_PLUGIN_PATH=${super.qt5.qtbase.bin}/${super.qt5.qtbase.qtPluginPrefix}
@@ -59,15 +59,15 @@ in
     # inherit nvimrc;
   });
 
-  # wireshark-local-stable = super.wireshark.overrideAttrs (oldAttrs: {
-  #   # pygobject2
-  #   name = "wireshark-local-stable";
-  #   src = builtins.fetchGit {
-  #     url = wiresharkFolder;
-  #     # rev = "reinject_stable";
-  #     # sha256 = "0pbmdwphmz4c6g9rvi58kmjhkvhy5ys5y8dzl2cfh8w00jc62cn0";
-  #   };
-  # });
+  wireshark-local-stable = super.wireshark.overrideAttrs (oldAttrs: {
+    # pygobject2
+    name = "wireshark-local-stable";
+    src = builtins.fetchGit {
+      url = wiresharkFolder;
+      # rev = "reinject_stable";
+      # sha256 = "0pbmdwphmz4c6g9rvi58kmjhkvhy5ys5y8dzl2cfh8w00jc62cn0";
+    };
+  });
 
 
   # tshark-local = super.tshark.overrideAttrs (oldAttrs: {
