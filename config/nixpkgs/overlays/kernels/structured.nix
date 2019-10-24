@@ -152,7 +152,8 @@ with lib.modules;
     KVM_INTEL = option module;
     KVM_AMD = option module;
 
-    VHOST_NET = module;
+    # VHOST_NET ne se lance pas tout seul
+    VHOST_NET = module; # vhost_net should appear in lsmod
     HPET = yes;  # High Precision Event Timer
     TRANSPARENT_HUGEPAGE = yes;
     CGROUPS = yes;
@@ -162,19 +163,21 @@ with lib.modules;
   # virtio etc.
   # see linux-4.19.80/kernel/configs/kvm_guest.config
   # override defconfig
-  # make O=../obj/x86_64 kvmconfighttp://www.gorecursion.com/virtualization/2016/12/17/buildkernel.html
+  # make O=../obj/x86_64 kvmconfig
   # http://www.gorecursion.com/virtualization/2016/12/17/buildkernel.html
   # scripts/kconfig/merge_config.sh we could provide several snippets
   # TODO find how it works
   paravirtualization_guest = {
     # FIREWIRE = no;
     # MACINTOSH_DRIVERS = no;
-    XEN = no;
       VETH = yes;
       TTY = yes;
-      VIRTIO = yes;
-      SCSI_VIRTIO    = no; # appears first
+      VIRTIO = yes; # should be selected by the rest
+      # no 
+      VSOCKETS = yes;
+      SCSI_VIRTIO    = yes; # appears first
       S390_GUEST = yes;
+      VIRTIO_VSOCKETS = yes;
       VIRTIO_VSOCKETS_COMMON = yes;
       VIRTIO_PCI = yes; # should selection VIRTIO
       VIRTIO_PCI_LEGACY = yes;
@@ -182,7 +185,6 @@ with lib.modules;
       VIRTIO_INPUT      = yes;
       VIRTIO_MMIO       = yes;
       # VIRTIO_MMIO_CMDLINE_DEVICES = no;
-      # VIRTIO_MMIO = no;
       VIRTIO_BLK        = yes;
       VIRTIO_NET        = yes;
       RPMSG_VIRTIO      = yes;
@@ -204,9 +206,16 @@ with lib.modules;
       # INET_TCP_DIAG = yes;
 
       INET=yes;
+      SERIAL_8250= yes;
       SERIAL_8250_CONSOLE=yes;
       DRM_VIRTIO_GPU= no;
       PARAVIRT=yes;
+
+      # This enables automatic configuration of IP addresses of devices and
+      # of the routing table during kernel boo
+      IP_PNP=yes;
+      IP_PNP_DHCP=yes;
+
 # NET=y
 # NET_CORE=y
 # NETDEVICES=y
