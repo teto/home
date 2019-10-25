@@ -137,7 +137,7 @@ with lib.modules;
     # CHELSIO_T4? no
     CHELSIO_LIB  = no;
     # to prevent selection of NET_VENDOR_CHELSIO 
-    SCSI_LOWLEVEL = no;
+    # SCSI_LOWLEVEL = no;
     CHELSIO_TLS  = no;
   };
 
@@ -175,7 +175,11 @@ with lib.modules;
       VIRTIO = yes; # should be selected by the rest
       # no 
       VSOCKETS = yes;
-      SCSI_VIRTIO    = yes; # appears first
+      VHOST_VSOCK = yes;
+      CAIF_VIRTIO = no;
+      PCCARD = no;
+      CRYPTO_DEV_VIRTIO = yes; # by default a module
+      # SCSI_VIRTIO    = yes; # appears first
       S390_GUEST = yes;
       VIRTIO_VSOCKETS = yes;
       VIRTIO_VSOCKETS_COMMON = yes;
@@ -200,6 +204,7 @@ with lib.modules;
 
       HW_RANDOM     = yes;  # Means module or yes
       HW_RANDOM_VIRTIO     = yes;  # Means module or yes
+    DRM_VIRTIO_GPU = mkForce no;
 
       # to fix a build issue :s 
       # depends on INET_DIAG that defaults to yes
@@ -208,7 +213,6 @@ with lib.modules;
       INET=yes;
       SERIAL_8250= yes;
       SERIAL_8250_CONSOLE=yes;
-      DRM_VIRTIO_GPU= no;
       PARAVIRT=yes;
 
       # This enables automatic configuration of IP addresses of devices and
@@ -292,15 +296,14 @@ with lib.modules;
     # MD=> MULTI device
     PCMCIA= yes;
 
-    BLK_DEV_MD = no;
+    # BLK_DEV_MD = no;
     # PARIDE = mkForce yes;
 
     # DM => DEVICE MAPPER (lvm
     BLK_DEV_DM_BUILTIN= no;
 
     SCSI    = yes;
-    SCSI_VIRTIO    = yes;
-    DRM_VIRTIO_GPU = yes;
+    # SCSI_VIRTIO    = yes;
 
       HW_RANDOM     = yes;  # Means module or yes
       HW_RANDOM_VIRTIO     = yes;  # Means module or yes

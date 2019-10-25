@@ -104,13 +104,16 @@ in rec {
       # TODO 
       # it was not answering Console on 8250/16550 and compatible serial port, NAME: SERIAL_8250_CONSOLE, ALTS: Y/n/?, ANSWER:
       ignoreConfigErrors=true;
-      autoModules = false;
+
+      # won't work like this
+      autoModules = true;
 
       # structuredConfigs.debugConfigStructured
       structuredExtraConfig = with structuredConfigs; (prev.lib.mkMerge [
         kernel.configfile.passthru.structuredConfig
         net9p
         paravirtualization_guest
+        kvmConfigStructured
         # mptcpConfigStructured
       ]);
     });
