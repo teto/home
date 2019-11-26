@@ -14,7 +14,7 @@ let
   devPkgs = with pkgs; let
       # float to use coc.nvim
       # TODO pass extraMakeWrapperArgs
-      neovim-xp = pkgs.wrapNeovim pkgs.neovim-unwrapped-treesitter {
+      neovim-xp = pkgs.wrapNeovim pkgs.neovim-unwrapped-master {
         # TODO pass lua-lsp
         # extraMakeWrapperArgs = " --prefix PATH ${pkgs.}"
         structuredConfigure = pkgs.neovimDefaultConfig;

@@ -9,8 +9,13 @@ defaultRemote=upstream
 
 compactionHeuristic
 
+# [sendpack]
+# sideband = false
+
 [push]
   default = simple
+
+# http.postBuffer 52428800
 
 [core]
   # whitespace = space-before-tab

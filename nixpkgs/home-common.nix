@@ -185,8 +185,12 @@ rec {
       signByDefault = false;
       key = "64BB6787";
     };
-
     extraConfig= {
+# git config core.sshCommand "ssh -vvv"
+      core = {
+        sshCommand = "ssh -vvv";
+      };
+
       rebase = {
         autosquash = true;
         autoStash = true;
@@ -324,8 +328,9 @@ rec {
 
       # https://github.com/atweiden/fzf-extras
       # the zsh script does nothing yet
-      source "${fzf-extras}/fzf-extras.zsh";
-      source "${fzf-extras}/fzf-extras.sh";
+      # Bug open fzf always
+      # emulate sh -c 'source "${fzf-extras}/fzf-extras.sh";'
+      # source "${fzf-extras}/fzf-extras.zsh";
 
     ''
     # eval "$(${pkgs.starship}/bin/starship init zsh)"

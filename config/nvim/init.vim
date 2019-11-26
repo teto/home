@@ -92,6 +92,7 @@ Plug 'MattesGroeger/vim-bookmarks' " ruby  / :BookmarkAnnotate
 " branch v2-integration
 " Plug 'andymass/vim-matchup' " to replace matchit
 " Plug 'AGhost-7/critiq.vim' " :h critiq
+Plug 'christoomey/vim-conflicted' " toto
 Plug 'norcalli/nvim-terminal.lua' " to display ANSI colors
 Plug 'bogado/file-line' " to open a file at a specific line
 Plug 'yuki-ycino/fzf-preview.vim' " toto
@@ -106,7 +107,7 @@ Plug 'ndmitchell/ghcid', { 'rtp': 'plugins/nvim' }
 Plug 'neovimhaskell/nvim-hs.vim' " to help with nvim-hs
 " Plug 'KabbAmine/vCoolor.vim' " :Vcooler
 " Plug 'rickhowe/diffchar.vim' " per char diff buggy
-Plug 'prabirshrestha/vim-lsp'
+" Plug 'prabirshrestha/vim-lsp'
 " Plug 'bfredl/nvim-lspmirror'
 " Plug 'bfredl/nvim-lspext' " extension
 Plug 'neomutt/neomutt.vim' " syntax file for neomutt
@@ -2016,4 +2017,33 @@ highlight NormalFloat cterm=NONE ctermfg=14 ctermbg=0 gui=NONE guifg=#93a1a1 gui
 
 " taken from justinmk's config
 command! Tags !ctags -R --exclude='build*' --exclude='.vim-src/**' --exclude='venv/**' --exclude='**/site-packages/**' --exclude='data/**' --exclude='dist/**' --exclude='notebooks/**' --exclude='Notebooks/**' --exclude='*graphhopper_data/*.json' --exclude='*graphhopper/*.json' --exclude='*.json' --exclude='qgis/**' *
+
+" https://github.com/neovim/nvim-lsp
+" nvim_lsp.ccls.setup({config})
+    "call lsp#add_filetype_config({
+    "      \ 'filetype': 'python',
+    "      \ 'name': 'pyls',
+    "      \ 'cmd': 'pyls'
+    "      \ })
+
+  function! LSP_maps()
+    nnoremap <buffer> <silent> <leader>ngd :call lsp#text_document_declaration()<CR>
+    nnoremap <buffer> <silent> ngd :call lsp#text_document_definition()<CR>
+    nnoremap <buffer> <silent> nK  :call lsp#text_document_hover()<CR>
+    " nnoremap <buffer> <silent> <leader>d :lua require("vim.lsp.util").show_line_diagnostics()<CR>
+
+    " nnoremap <silent> <space>dc :call lsp#text_document_declaration()<CR>
+    " nnoremap <silent> <space>df :call lsp#text_document_definition()<CR>
+    " nnoremap <silent> <space>h  :call lsp#text_document_hover()<CR>
+    " nnoremap <silent> <space>i  :call lsp#text_document_implementation()<CR>
+    " nnoremap <silent> <space>s  :call lsp#text_document_signature_help()<CR>
+    " nnoremap <silent> <space>td :call lsp#text_document_type_definition()<CR>
+    " nnoremap <silent> <space>ds :lua vim.lsp.util.show_line_diagnostics()<CR>
+  endfunction
+
+" call LSP_maps()
+" lsp#text_document_hover()
+nnoremap ngd :call lsp#text_document_declaration()<CR>
+nnoremap ngd :call lsp#text_document_definition()<CR>
+nnoremap nK  :call lsp#text_document_hover()<CR>
 

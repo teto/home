@@ -13,9 +13,9 @@ let
     ./common-desktop.nix
     # ./modules/libvirtd.nix
     ./modules/network-manager.nix
-    ./modules/libvirtd.nix
-    ./modules/vpn.nix
-    ./modules/distributedBuilds.nix
+    # ./modules/libvirtd.nix
+    # ./modules/vpn.nix
+    # ./modules/distributedBuilds.nix
 
     # just for testing
     # ./modules/nextcloud.nix
@@ -40,7 +40,7 @@ let
   # boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_mptcp_with_netlink;
   # boot.kernelPackages = pkgs.linuxPackages;
   # boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_mptcp_trunk_raw;
-  boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_mptcp;
+  # boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_mptcp;
   # boot.kernelPackages = pkgs.linuxPackages_4_14;
 # boot.kernelPackages = pkgs.linuxPackagesFor pkgs.my_lenovo_kernel;
 
@@ -67,11 +67,12 @@ let
   # this is for gaming
   hardware.opengl.driSupport32Bit = true;
 
+  # programs.seahorse.enable = true; # UI to manage keyrings
+
   # List services that you want to enable:
   services = {
     gnome3 = {
       gnome-keyring.enable = true;
-      seahorse.enable = true; # UI to manage keyrings
       at-spi2-core.enable = true; # for keyring it seems
     };
 
@@ -93,11 +94,6 @@ let
   hardware.bluetooth.powerOnBoot = true;
 
   programs.ccache.enable = true;
-  services.xserver.displayManager.slim = {
-    # theme =
-    autoLogin = true;
-    defaultUser = "teto";
-  };
 
   nixpkgs = {
     overlays = [

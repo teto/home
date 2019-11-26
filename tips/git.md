@@ -10,6 +10,10 @@ git gc --aggressive --prune
 https://help.github.com/en/articles/checking-out-pull-requests-locally
  git fetch origin pull/ID/head:BRANCHNAME
 
+# debug ssh
+
+GIT_SSH_COMMAND="ssh -v"
+GIT_SSH_COMMAND="ssh -vvv" git clone example
 
 # Chercher a travers toutes les branches
 git grep "string/regexp" $(git rev-list --all)

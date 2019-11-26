@@ -169,12 +169,6 @@ rec {
 	  version = "official-master";
       src = builtins.fetchGit {
         url = https://github.com/neovim/neovim.git;
-        # rev = "3e58e60568c2acc765f3ee72295e2f15baa3cf52";
-        # url = https://github.com/teto/neovim.git;
-        # ref = "master";
-        # rev = "";
-        # rev = "d81b510ecf1890828caa653ebb2fa053131f3265";
-        # checksum = "1prmibvr5v1cri71miy08qd1pvbnxmy04irnrxan2ynv95w0q0qm";
       };
 
   });
@@ -298,6 +292,11 @@ rec {
   }).overrideAttrs(oa:{
     cmakeBuildType="debug";
       # -DMN_LOG_LEVEL
+
+      version = "master";
+      src = builtins.fetchGit {
+        url = https://github.com/neovim/neovim.git;
+      };
 
       nativeBuildInputs = oa.nativeBuildInputs ++ [
         self.pkgs.valgrind

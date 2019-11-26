@@ -49,6 +49,7 @@ in
 
     # prefix with pango if you want to have fancy effects
     config = {
+      workspaceAutoBackAndForth = true;
 
       focus.followMouse = false;
       fonts = [ "pango:FontAwesome 12" "Terminus 10" ];

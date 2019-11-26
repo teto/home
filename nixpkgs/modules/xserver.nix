@@ -47,5 +47,43 @@
     };
 
   };
+  # services.xserver.desktopManager.default = "none";
+  # services.xserver.desktopManager.xterm.enable = true;
+  # # services.xserver.desktopManager.x
+  # # services.xserver.windowManager.default = "none";
+  # services.xserver.windowManager.i3.enable = true;
+  # # xserver.displayManager.auto.enable = "teto";
+  # # boot.extraModulePackages
+  # services.xserver = {
+  #   enable = true;
+  #   autorun = true;
+  #   # exportConfiguration = true;
+  #   desktopManager.default = "none";
+  #   desktopManager.xterm.enable = true;
+  #   enableCtrlAltBackspace = true;
+
+  #   displayManager.lightdm = {
+  #     autoLogin = {
+  #       enable = false;
+  #       user = "teto";
+  #     };
+  #     # background = ;
+  #   };
+  #   # displayManager.slim = {
+  #   #     autoLogin = true;
+  #   #     defaultUser = "teto";
+  #   # };
+  #   # set the correct primary monitor
+  #   # xrandrHeads = [
+  #   #   {
+  #   #     primary = true;
+  #   #     # monitorConfig = ''
+  #   #     #   '';
+  #   #     output = "DP-2";
+  #   #   }
+  #   # ];
+
+  #   videoDrivers = [ "nvidia" ];
+  # };
 
 }

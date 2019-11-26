@@ -24,7 +24,7 @@ in
     '';
 
   # flameshot in standalone won't work
-  services.flameshot.enable = true;
+  # services.flameshot.enable = true;
 
   programs.home-manager = {
     enable = true;
@@ -52,4 +52,5 @@ in
     # options = [ "add Mod1 Alt_R" ];
   };
 
+  services.nextcloud-client.enable = true;
 }
