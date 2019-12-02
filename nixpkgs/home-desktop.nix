@@ -40,6 +40,7 @@ let
     neovim-remote # for latex etc
     nix-prefetch-scripts
     nix-index # to list package contents
+    nix-review
     pcalc  # cool calc
     rpl # to replace strings across files
     universal-ctags  # there are many different ctags, be careful !

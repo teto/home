@@ -7,6 +7,9 @@ defaultRemote=upstream
   email = mattator@gmail.com
   signingkey = E1B768A0
 
+[core]
+sshCommand=ssh -vvv
+
 compactionHeuristic
 
 # [sendpack]

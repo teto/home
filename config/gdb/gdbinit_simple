@@ -34,7 +34,7 @@ handle SIG34 nostop noprint pass
 
 set print vtbl on 
 # move it to $XDG_CACHE_HOME ?
-set history save
+set history save on
 #symbol-file /home/teto/mptcp_src/vmlinux
 #set architecture i386:x86-64
 #target remote :1234

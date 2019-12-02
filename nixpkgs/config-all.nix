@@ -53,8 +53,8 @@ rec {
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Set your time zone.
-  # time.timeZone = "Europe/Amsterdam";
-  time.timeZone = "Asia/Tokyo";
+  time.timeZone = "Europe/Paris";
+  # time.timeZone = "Asia/Tokyo";
   time.hardwareClockInLocalTime = false; # by default false
   # services.tzupdate.enable = true;
 

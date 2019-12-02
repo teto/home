@@ -12,6 +12,7 @@ MPTCPANALYZER_FOLDER = "${HOME}/mptcpanalyzer"
 KERNEL_FOLDER = "${HOME}/mptcp"
 BLOG_FOLDER = "${HOME}/blog"
 NIXPKGS_FOLDER = "${HOME}/nixpkgs"
+DOTFILES_FOLDER = "${HOME}/dotfiles"
 HOME_MANAGER_FOLDER = "${HOME}/hm"
 NEOVIM_FOLDER = "${HOME}/neovim"
 LKL_FOLDER = "${HOME}/lkl"
@@ -41,9 +42,15 @@ pip:
 	wget https://bootstrap.pypa.io/get-pip.py /tmp/
 	python3.5 /tmp/get-pip.py --user
 
+
+dotfiles:
+	git clone -o gh git@github.com:teto/home.git "${DCE_FOLDER}"
+
 home:
 	stow -t ${HOME} home
 
+
+# I now rely on password-store instead
 keyring:
 	echo "Setup keyrings"
 	# echo " nix-shell -p python3Packages.secretstorage -p python36Packages.keyring -p python36Packages.pygobject3"
@@ -116,7 +123,10 @@ $(WIRESHARK_FOLDER):
 	git remote add upstream https://code.wireshark.org/review/p/wireshark.git; \
 	git remote add iij gitolite@iij_vm:wireshark.git
 
+home-manager:
 hm: | $(HOME_MANAGER_FOLDER)
+	git clone -o gh git@github.com:teto/ns-3-dce.git "${DCE_FOLDER}"; \
+	git remote add gh_upstream http://github.com/wireshark/wireshark.git; \
 
 
 nixpkgs: | $(NIXPKGS_FOLDER)

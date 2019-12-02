@@ -7,17 +7,19 @@ in
   imports = [
     # todo renommer en workstation
     # ./hardware-dell.nix
-    ./hardware-lenovo.nix
+#    ./hardware-lenovo.nix
+    /etc/nixos/hardware-configuration.nix
 
     ./modules/distributedBuilds.nix
     ./config-all.nix
     ./common-desktop.nix
     ./modules/network-manager.nix
     ./modules/libvirtd.nix
-    ./modules/vpn.nix
+    # ./modules/vpn.nix
     ./modules/openssh.nix
+    ./modules/tor.nix
 
-    ./modules/sway.nix
+    # ./modules/sway.nix
 
     # not needed ?
     # ./modules/hwrng.nix
@@ -56,10 +58,10 @@ in
 
   # system.requiredKernelConfig 
 
-  fileSystems."/mnt/ext" =
-    { device = "/dev/sda4";
-    options = [ "user" "exec" ];
-    };
+#  fileSystems."/mnt/ext" =
+ #   { device = "/dev/sda4";
+  #  options = [ "user" "exec" ];
+   # };
 
   # it apparently still is quite an important thing to have
   boot.devSize = "5g";
@@ -90,16 +92,34 @@ in
 
   boot.consoleLogLevel=6;
   boot.loader = {
-    systemd-boot.enable = true;
+#    systemd-boot.enable = true;
     efi.canTouchEfiVariables = true; # allows to run $ efi...
     systemd-boot.editor = true; # allow to edit command line
     timeout = 5;
   # just to generate the entry used by ubuntu's grub
-  # boot.loader.grub.enable = true;
-  # boot.loader.grub.version = 2;
+    grub = {
+      enable = true;
+      useOSProber = true;
+      # efiSupport = true;
+# boot.loader.grub.version = 2;
   # install to none, we just need the generated config
   # for ubuntu grub to discover
-    grub.device = "/dev/sda";
+      device = "/dev/sdb";
+
+      # set $FS_UUID to the UUID of the EFI partition
+      # extraEntries = ''
+      #   menuentry "Windows" {
+      #     insmod part_gpt
+      #     insmod fat
+      #     insmod search_fs_uuid
+      #     insmod chain
+      #     search --fs--uid --set=root 9A24EC0A24EBE6EB
+      #     chainloader /EFI/Microsoft/Boot/bootmgfw.efi
+      #   }
+      # '';
+      # extraConfig
+
+    };
   };
 
   # hide messages !
@@ -214,6 +234,7 @@ in
 
   networking.enableIPv6 = false;
 
+  services.xserver.videoDrivers = [ "nvidia" ];
   # hardware.nvidia.package
 
   # docker pull mattator/dce-dockerfiles

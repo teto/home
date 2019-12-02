@@ -219,7 +219,7 @@ in
 
         # TODO use i3
         # test rofi-randr
-        "XF86Display" = "exec " + ../../rofi-scripts/monitor_layout.sh ;
+        # "XF86Display" = "exec " + ../../rofi-scripts/monitor_layout.sh ;
 
 # bindsym $mod+ctrl+h exec $greenclip
 # bindsym $mod+ctrl+v exec ~/.vim-anywhere/bin/run"

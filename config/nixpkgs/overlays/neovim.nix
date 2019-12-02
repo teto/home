@@ -8,7 +8,7 @@ let
       # use coc-yank for yank history
 
       # coc-git  # doesn't like it when it's user installed
-      coc-nvim
+      # coc-nvim
       # coc-python # test
       # coc-translator  # not available yet
       csv-vim
@@ -25,6 +25,7 @@ let
       gruvbox
 
       # neomake
+      nvim-terminal-lua
 
       # LanguageClient-neovim
       tagbar
@@ -152,6 +153,14 @@ rec {
       structuredConfigure = finalConfig;
     };
 
+    # look at the makefile
+    # libtermkey = self.enableDebugging (
+    # # libtermkey =
+    #   super.libtermkey.overrideAttrs( oa: {
+    #   name = "libtermkey-matt-${oa.version}";
+    #   # oa.makeFlags
+    #   makeFlags =  [ "PREFIX=/home/teto/libtermkey/build" "DEBUG=1"];
+    # }));
 
     # libvterm-neovim-master = super.libvterm-neovim.overrideAttrs(oa: {
     #   src = super.fetchFromGitHub {
@@ -292,6 +301,9 @@ rec {
   }).overrideAttrs(oa:{
     cmakeBuildType="debug";
       # -DMN_LOG_LEVEL
+      # preConfigure= ''
+      #   export PKG_CONFIG_PATH="/home/teto/libtermkey/build/lib/pkgconfig:$PKG_CONFIG_PATH"
+      # '';
 
       version = "master";
       src = builtins.fetchGit {
@@ -310,6 +322,7 @@ rec {
 
       echo "To run tests:"
       echo "VALGRIND=1 TEST_FILE=test/functional/core/job_spec.lua TEST_TAG=env make functionaltest"
+
     '';
   });
 

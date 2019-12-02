@@ -319,9 +319,9 @@ compdef _gnu_generic mptcpanalyzer
 # TODO work 
 # need zle to be active
 # https://junegunn.kr/2016/07/fzf-git
-. "$XDG_CONFIG_HOME/fzf-gems/fzf_git_functions.sh"
+# . "$XDG_CONFIG_HOME/fzf-gems/fzf_git_functions.sh"
 # you can list the actually bound keys with bindkey -M viins
-. "$XDG_CONFIG_HOME/fzf-gems/fzf_git_keybindings.zsh"
+# . "$XDG_CONFIG_HOME/fzf-gems/fzf_git_keybindings.zsh"
 # }}}
 
 # set cursor depending in vi mode

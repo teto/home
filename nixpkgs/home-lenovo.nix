@@ -15,10 +15,10 @@ let
     # Not tracked, so doesn't need to go in per-machine subdir
       # ./home-common-headless.nix
       ./home-desktop.nix
-
       # ./modules/vdirsyncer.nix
+      ./modules/sway.nix
 
-      ./home-mail.nix
+      # ./home-mail.nix
       # symlink towards a config
     ]
     ;
@@ -32,6 +32,8 @@ let
     # libinput-gestures
     # rofi
     # netperf # check for man; netserver to start
+    nushell
+    steam-run
   ];
 
   # you can switch from cli with xkb-switch

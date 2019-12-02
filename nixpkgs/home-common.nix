@@ -188,7 +188,8 @@ rec {
     extraConfig= {
 # git config core.sshCommand "ssh -vvv"
       core = {
-        sshCommand = "ssh -vvv";
+        # sshCommand = "ssh -vvv";
+        sshCommand = "ssh";
       };
 
       rebase = {
@@ -341,7 +342,7 @@ rec {
   programs.tmux = {
     enable = true;
     sensibleOnTop = true;
-    secureSocket = false;
+    # secureSocket = false;
     # tmuxinator.enable = false;
     # tmuxp
 
