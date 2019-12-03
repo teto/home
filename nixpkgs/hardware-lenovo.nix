@@ -8,30 +8,38 @@
     [ <nixpkgs/nixos/modules/installer/scan/not-detected.nix>
     ];
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usb_storage" "usbhid" "sd_mod" "sr_mod" ];
+  boot.initrd.availableKernelModules = [ "xhci_pci" "ehci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" "sr_mod" ];
+  boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/01d59d7e-a97f-48ed-8b44-0541a8ec1c3d";
+    { device = "/dev/disk/by-uuid/443ce6b0-e43e-43e6-9d10-c0c6293ccf66";
       fsType = "ext4";
     };
 
-  fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/6325-6468";
-      fsType = "vfat";
-    };
+  swapDevices =
+    [ { device = "/dev/disk/by-uuid/ebbfc6ca-a0f0-4b8b-ac1e-7a2b4390d72c"; }
+    ];
 
-  fileSystems."/mnt/ntfs" =
+  fileSystems."/mnt/ext4" =
     { device = "/dev/sda1";
       fsType = "ntfs";
-
       # see https://nixos.wiki/wiki/NTFS
       options = [ "rw" "uid=teto"];
     # options = [ "user", ];
     };
 
-  swapDevices = [ ];
+  fileSystems."/mnt/ntfs" =
+    {
+      device = "/dev/sda2";
+      fsType = "ntfs";
+      # see https://nixos.wiki/wiki/NTFS
+      options = [ "rw" "uid=teto"];
+    # options = [ "user", ];
+    };
+
+
 
   nix.maxJobs = lib.mkDefault 4;
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";

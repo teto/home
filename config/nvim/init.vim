@@ -2027,7 +2027,7 @@ command! Tags !ctags -R --exclude='build*' --exclude='.vim-src/**' --exclude='ve
     "      \ })
 
   function! LSP_maps()
-    nnoremap <buffer> <silent> <leader>ngd :call lsp#text_document_declaration()<CR>
+    " nnoremap <buffer> <silent> <leader>ngd :call lsp#text_document_declaration()<CR>
     nnoremap <buffer> <silent> ngd :call lsp#text_document_definition()<CR>
     nnoremap <buffer> <silent> nK  :call lsp#text_document_hover()<CR>
     " nnoremap <buffer> <silent> <leader>d :lua require("vim.lsp.util").show_line_diagnostics()<CR>

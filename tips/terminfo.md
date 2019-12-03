@@ -14,6 +14,10 @@ Pour compiler a partir des sources
 Add this
 Se=\E[2 q, Ss=\E[%p1%d q,
 
+tput init
+tput <capname>
+tput cvvis
+tput civis
 
 A priori a program should look first at (according to man tic):
 - TERMINFO

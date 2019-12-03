@@ -1,6 +1,10 @@
 " Moved here since I install it via nix and thus when nvim isn't wrapped it
 " fails pathetically
-" Airline {{{
+
+if !exists("g:loaded_airline")
+	finish
+endif
+
 " debug with :AirlineExtensions
 " to speed up things
   let g:airline#extensions#disable_rtp_load = 1
@@ -142,6 +146,5 @@ nmap <leader>ç <Plug>AirlineSelectTab9
   nmap <leader>- <Plug>AirlineSelectPrevTab
   nmap <leader>+ <Plug>AirlineSelectNextTab
 
-"}}}
 "}}}
 

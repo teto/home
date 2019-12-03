@@ -300,10 +300,6 @@ rec {
     doCheck=true;
   }).overrideAttrs(oa:{
     cmakeBuildType="debug";
-      # -DMN_LOG_LEVEL
-      # preConfigure= ''
-      #   export PKG_CONFIG_PATH="/home/teto/libtermkey/build/lib/pkgconfig:$PKG_CONFIG_PATH"
-      # '';
 
       version = "master";
       src = builtins.fetchGit {
@@ -326,13 +322,6 @@ rec {
     '';
   });
 
-  neovim-dev-clang = (self.neovim-dev.override {
-    stdenv = super.clangStdenv;
-  }).overrideAttrs(oa:{
-    shellHook = oa.shellHook + ''
-      export CLANG_SANITIZER=ASAN_UBSAN
-    '';
-  });
 
   # neovim-unwrapped-local = super.pkgs.neovim-unwrapped.overrideAttrs (oldAttrs: {
 	  # name = "neovim-unwrapped-local";
