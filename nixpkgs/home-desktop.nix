@@ -302,6 +302,11 @@ in
     enableSshSupport = true;
     # grabKeyboardAndMouse= false;
     verbose = true;
+    # see https://github.com/rycee/home-manager/issues/908
+    # could try ncurses as well
+    extraConfig = ''
+      pinentry-program ${pkgs.pinentry-gnome}/bin/pinentry-gnome3
+    '';
   };
 
   # i3 now available !
