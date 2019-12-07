@@ -22,12 +22,10 @@
     [ { device = "/dev/disk/by-uuid/ebbfc6ca-a0f0-4b8b-ac1e-7a2b4390d72c"; }
     ];
 
-  fileSystems."/mnt/ext4" =
+  fileSystems."/mnt/ext" =
     { device = "/dev/sda1";
-      fsType = "ntfs";
-      # see https://nixos.wiki/wiki/NTFS
-      options = [ "rw" "uid=teto"];
-    # options = [ "user", ];
+      fsType = "ext4";
+      options = [ "rw" "uid=teto" "nofail" ];
     };
 
   fileSystems."/mnt/ntfs" =
@@ -35,7 +33,7 @@
       device = "/dev/sda2";
       fsType = "ntfs";
       # see https://nixos.wiki/wiki/NTFS
-      options = [ "rw" "uid=teto"];
+      options = [ "rw" "uid=teto""nofail"  ];
     # options = [ "user", ];
     };
 

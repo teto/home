@@ -92,6 +92,7 @@ Plug 'MattesGroeger/vim-bookmarks' " ruby  / :BookmarkAnnotate
 " branch v2-integration
 " Plug 'andymass/vim-matchup' " to replace matchit
 " Plug 'AGhost-7/critiq.vim' " :h critiq
+Plug 'neovim/nvim-lsp' " while fuzzing details out
 Plug 'christoomey/vim-conflicted' " toto
 Plug 'norcalli/nvim-terminal.lua' " to display ANSI colors
 Plug 'bogado/file-line' " to open a file at a specific line
@@ -2018,18 +2019,15 @@ highlight NormalFloat cterm=NONE ctermfg=14 ctermbg=0 gui=NONE guifg=#93a1a1 gui
 " taken from justinmk's config
 command! Tags !ctags -R --exclude='build*' --exclude='.vim-src/**' --exclude='venv/**' --exclude='**/site-packages/**' --exclude='data/**' --exclude='dist/**' --exclude='notebooks/**' --exclude='Notebooks/**' --exclude='*graphhopper_data/*.json' --exclude='*graphhopper/*.json' --exclude='*.json' --exclude='qgis/**' *
 
-" https://github.com/neovim/nvim-lsp
-" nvim_lsp.ccls.setup({config})
-    "call lsp#add_filetype_config({
-    "      \ 'filetype': 'python',
-    "      \ 'name': 'pyls',
-    "      \ 'cmd': 'pyls'
-    "      \ })
-
   function! LSP_maps()
     " nnoremap <buffer> <silent> <leader>ngd :call lsp#text_document_declaration()<CR>
-    nnoremap <buffer> <silent> ngd :call lsp#text_document_definition()<CR>
-    nnoremap <buffer> <silent> nK  :call lsp#text_document_hover()<CR>
+    nnoremap <buffer> <silent> ngd <cmd>lua vim.lsp.buf.definition()<CR>
+    nnoremap <buffer> <silent> nK  <cmd>lua vim.lsp.buf.hover()<CR>
+    nnoremap <buffer> <silent> ngi  <cmd>lua vim.lsp.buf.implementation()<CR>
+    nnoremap <buffer><cmd>lua vim.lsp.buf.signature_help()<CR>
+
+    nnoremap <silent> ;td <cmd>lua vim.lsp.buf.type_definition()<CR>
+
     " nnoremap <buffer> <silent> <leader>d :lua require("vim.lsp.util").show_line_diagnostics()<CR>
 
     " nnoremap <silent> <space>dc :call lsp#text_document_declaration()<CR>
@@ -2041,9 +2039,14 @@ command! Tags !ctags -R --exclude='build*' --exclude='.vim-src/**' --exclude='ve
     " nnoremap <silent> <space>ds :lua vim.lsp.util.show_line_diagnostics()<CR>
   endfunction
 
-" call LSP_maps()
-" lsp#text_document_hover()
-nnoremap ngd :call lsp#text_document_declaration()<CR>
-nnoremap ngd :call lsp#text_document_definition()<CR>
-nnoremap nK  :call lsp#text_document_hover()<CR>
+" lua require 'init.lua'
+" Doesn't seem to work
+" luafile stdpath('config').'/init.lua'
+" vim.fn.stdpath('config')
+luafile ~/.config/nvim/init.lua
+" logs are written to /home/teto/.local/share/nvim/vim-lsp.log
+lua vim.lsp.set_log_level("debug")
 
+call LSP_maps()
+
+" lua vim.treesitter.add_language("/home/teto/tree-sitter-c/build/Release/tree_sitter_c_binding.node", "c")

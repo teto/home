@@ -7,8 +7,8 @@ in
   imports = [
     # todo renommer en workstation
     # ./hardware-dell.nix
-#    ./hardware-lenovo.nix
-    /etc/nixos/hardware-configuration.nix
+   ./hardware-lenovo.nix
+    # /etc/nixos/hardware-configuration.nix
 
     ./modules/distributedBuilds.nix
     ./config-all.nix

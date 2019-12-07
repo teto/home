@@ -74,7 +74,6 @@ rec {
   # this generates a config appropriate to work with the passed derivations
   # for instance to develop on a software from a nix-shell
   genNeovim = drvs: userConfig:
-    with super;
     let
       # isHaskellPkg
       # lib.debug.traceVal
@@ -97,9 +96,9 @@ rec {
   #   inherit stdenv haskellLib ghc buildHaskellPackages extensible-self all-cabal-hashes;
   # };
 
-        selected = drvs haskellPackages;
+        selected = drvs super.haskellPackages;
 
-        packageInputs = map getBuildInputs selected;
+        packageInputs = map super.getBuildInputs selected;
       in
         # might be possible to further refine
         packageInputs;
@@ -146,7 +145,7 @@ rec {
         ]
       );
     in
-    wrapNeovim neovim-unwrapped-master {
+    super.wrapNeovim neovim-unwrapped-master {
       # extraMakeWrapperArgs
       # rename configure ?
       # TODO should be able to add some packages in PATH like jq
@@ -173,11 +172,18 @@ rec {
 
 
     # libvterm-neovim = libvterm-neovim-master;
-  neovim-unwrapped-master = (super.neovim-unwrapped.override({})).overrideAttrs (oldAttrs: {
+  neovim-unwrapped-master = super.neovim-unwrapped.overrideAttrs (oldAttrs: {
 	  name = "neovim";
 	  version = "official-master";
-      src = builtins.fetchGit {
-        url = https://github.com/neovim/neovim.git;
+      # src = builtins.fetchGit {
+      #   url = https://github.com/teto/neovim.git;
+      #   ref = "master";
+      # };
+      src = super.fetchFromGitHub {
+        owner = "neovim";
+        repo = "neovim";
+        rev = "b1e4ec1c2a08981683b2355715a421c0bfb64644";
+        sha256 = "XeEzsh1qtdd/uthsStkZsmCydDm+kcCplpSB+gNwArI=";
       };
 
   });
@@ -185,13 +191,6 @@ rec {
   neovim-unwrapped-treesitter = (super.neovim-unwrapped).overrideAttrs (oldAttrs: {
 	  name = "neovim";
 	  version = "treesitter";
-
-      # see https://discourse.nixos.org/t/announcing-tree-sitter-nix/2483/10
-      # https://github.com/neovim/neovim/pull/10124
-      # src = builtins.fetchGit {
-      #   url = https://github.com/teto/neovim.git;
-      #   ref = "treesitter";
-      # };
 
       # bfredl:tree-sitter-query
       # 11113
@@ -228,14 +227,14 @@ rec {
         withRuby = false; # for vim-rfc/GhDashboard etc.
         withNodeJs = true; # used by coc.vim
 
-        # TODO use them only if 
+        # TODO use them only if
         customRC = ''
           " always see at least 10 lines
           set scrolloff=10
           set hidden
 
-        autocmd BufReadPost *.pdf silent %!${self.pkgs.xpdf}/bin/pdftotext -nopgbrk -layout -q -eol unix "%" - | fmt -w78
         ''
+        # autocmd BufReadPost *.pdf silent %!${self.pkgs.xpdf}/bin/pdftotext -nopgbrk -layout -q -eol unix "%" - | fmt -w78
         # if we support coc.nvim
         # + ''
         #   let g:coc_node_path = '${self.pkgs.nodejs}/bin/node'
