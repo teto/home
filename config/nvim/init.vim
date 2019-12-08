@@ -1198,16 +1198,11 @@ nnoremap <leader>rgb  :Grepper -tool rg -open -switch -buffer
 " set foldopen+=all " specifies commands for which folds should open
 " set foldclose=all
 "set foldtext=
-set foldcolumn=1
-
-if has("folding_fillchars")
-	" removed to test default values
-	" ,foldend:^
-  set fillchars+=foldopen:▾,foldsep:│,foldclose:▸
+" removed to test default values
+" ,foldend:^
+  " set fillchars+=foldopen:▾,foldsep:│,foldclose:▸
   " echo "doing it"
   " set fdc=-1
-  set fdc=0
-endif
 " }}}
 " vim-sneak {{{
 let g:sneak#s_next = 1 " can press 's' again to go to next result, like ';'
@@ -2050,3 +2045,5 @@ lua vim.lsp.set_log_level("debug")
 call LSP_maps()
 
 " lua vim.treesitter.add_language("/home/teto/tree-sitter-c/build/Release/tree_sitter_c_binding.node", "c")
+" vim.lsp.util.set_qflist
+" location_callback

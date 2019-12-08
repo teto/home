@@ -9,3 +9,6 @@ nix run nixpkgs.tree-sitter nixpkgs.nodePackages.node-gyp nixpkgs.python27 nixpk
     vim.treesitter.add_language("/path/to/c_parser.so", "c")
 vim.treesitter.add_language("/home/teto/tree-sitter-c/build/Release/tree_sitter_c_binding.node", "c")
 undefined symbol: node_module_register
+
+
+gcc -o parser.so -shared src/parser.c -Os -I./src -fPIC

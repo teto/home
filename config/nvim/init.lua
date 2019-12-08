@@ -3,6 +3,7 @@
 local nvim_lsp = require 'nvim_lsp'
 local skeleton = require'nvim_lsp/skeleton'
 
+-- vim.lsp.util.show_current_line_diagnostics()
 -- Check if it's already defined for when I reload this file.
 if not nvim_lsp.lua_lsp then
   skeleton.lua_lsp = {
@@ -83,6 +84,7 @@ nvim_lsp.ccls.setup({
 
 nvim_lsp.pyls.setup({
 	name = "pyls";
+	cmd = {  "python", "-mpyls", "-vv", "--log-file" , "/tmp/lsp_python.log"},
 	init_options = {
 	enable = true;
 	trace = { server = "verbose"; };
@@ -94,23 +96,23 @@ nvim_lsp.pyls.setup({
 		jedi_references = { enabled = true; };
 		jedi_signature_help = { enabled = true; };
 		jedi_symbols = {
-		enabled = true;
-		all_scopes = true;
+			enabled = true;
+			all_scopes = true;
 		};
 		mccabe = {
-		enabled = true;
-		threshold = 15;
+			enabled = false;
+			threshold = 15;
 		};
 		preload = { enabled = true; };
 		pycodestyle = { enabled = true; };
 		pydocstyle = {
-		enabled = false;
-		match = "(?!test_).*\\.py";
-		matchDir = "[^\\.].*";
+			enabled = false;
+			match = "(?!test_).*\\.py";
+			matchDir = "[^\\.].*";
 		};
 		pyflakes = { enabled = true; };
-		rope_completion = { enabled = true; };
-		yapf = { enabled = true; };
+		rope_completion = { enabled = false; };
+		yapf = { enabled = false; };
 	};
 	};
 })

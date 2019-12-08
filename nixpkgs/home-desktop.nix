@@ -35,6 +35,8 @@ let
     gitAndTools.git-extras
     gitAndTools.git-crypt
     # ccache # breaks some builds ? has to be configured via program, use ccacheStdEnv instead ?
+
+    lazygit  # kinda like tig
     ncurses.dev # for infocmp
     neovim-xp   # hum remove ?
     neovim-remote # for latex etc
