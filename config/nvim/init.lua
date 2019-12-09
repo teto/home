@@ -91,30 +91,48 @@ nvim_lsp.pyls.setup({
 	trace = { server = "verbose"; };
 	commandPath = "";
 	configurationSources = { "pycodestyle" };
-	plugins = {
-		pylint = { enabled = false; };
-		jedi_completion = { enabled = true; };
-		jedi_hover = { enabled = true; };
-		jedi_references = { enabled = true; };
-		jedi_signature_help = { enabled = true; };
-		jedi_symbols = {
-			enabled = true;
-			all_scopes = true;
+	settings = {
+		pyls = {
+		plugins = {
+			pylint = { enabled = false; };
+			jedi_completion = { enabled = true; };
+			jedi_hover = { enabled = true; };
+			jedi_references = { enabled = true; };
+			jedi_signature_help = { enabled = true; };
+			jedi_symbols = {
+				enabled = false;
+				all_scopes = false;
+			};
+			mccabe = {
+				enabled = false;
+				threshold = 15;
+			};
+			preload = { enabled = true; };
+			pycodestyle = { enabled = true; };
+			pydocstyle = {
+				enabled = false;
+				match = "(?!test_).*\\.py";
+				matchDir = "[^\\.].*";
+			};
+			pyflakes = { enabled = false; };
+			rope_completion = { enabled = false; };
+			yapf = { enabled = false; };
 		};
-		mccabe = {
-			enabled = false;
-			threshold = 15;
-		};
-		preload = { enabled = true; };
-		pycodestyle = { enabled = true; };
-		pydocstyle = {
-			enabled = false;
-			match = "(?!test_).*\\.py";
-			matchDir = "[^\\.].*";
-		};
-		pyflakes = { enabled = true; };
-		rope_completion = { enabled = false; };
-		yapf = { enabled = false; };
 	};
 	};
+  };
 })
+
+do
+  local method = 'textDocument/publishDiagnostics'
+  local default_callback = vim.lsp.callbacks[method]
+  vim.lsp.callbacks[method] = function(err, method, result, client_id)
+    default_callback(err, method, result, client_id)
+    if result and result.diagnostics then
+      for _, v in ipairs(result.diagnostics) do
+        v.uri = v.uri or result.uri
+      end
+      vim.lsp.util.set_qflist(result.diagnostics)
+    end
+  end
+end

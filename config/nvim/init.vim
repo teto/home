@@ -2042,8 +2042,15 @@ luafile ~/.config/nvim/init.lua
 " logs are written to /home/teto/.local/share/nvim/vim-lsp.log
 lua vim.lsp.set_log_level("debug")
 
+verbose 
+
+" this is set per-buffer so...
 call LSP_maps()
 
+nnoremap ]] :cabove<CR>
+nnoremap ]] :cbelow<CR>
+
+set omnifunc=lsp#omnifunc
 " lua vim.treesitter.add_language("/home/teto/tree-sitter-c/build/Release/tree_sitter_c_binding.node", "c")
 " vim.lsp.util.set_qflist
 " location_callback
