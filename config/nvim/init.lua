@@ -82,6 +82,7 @@ nvim_lsp.ccls.setup({
 	}
 })
 
+-- config at https://raw.githubusercontent.com/palantir/python-language-server/develop/vscode-client/package.json
 nvim_lsp.pyls.setup({
 	name = "pyls";
 	cmd = {  "python", "-mpyls", "-vv", "--log-file" , "/tmp/lsp_python.log"},
@@ -91,6 +92,7 @@ nvim_lsp.pyls.setup({
 	commandPath = "";
 	configurationSources = { "pycodestyle" };
 	plugins = {
+		pylint = { enabled = false; };
 		jedi_completion = { enabled = true; };
 		jedi_hover = { enabled = true; };
 		jedi_references = { enabled = true; };

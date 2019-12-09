@@ -183,7 +183,7 @@ Plug 'junegunn/limelight.vim' " highlights
 Plug 'calvinchengx/vim-aftercolors' " load after/colors
 " Plug 'ntpeters/vim-better-whitespace' " StripWhitespace care it stole my
 " leader
-Plug 'bronson/vim-trailing-whitespace' " :FixTrailingWhitespace
+Plug 'bronson/vim-trailing-whitespace' " :FixWhitespace
 " Plug 'tpope/vim-scriptease' " Adds command such as :Messages
 " Plug 'tpope/vim-eunuch' " {provides SudoEdit, SudoWrite , Unlink, Rename etc...
 

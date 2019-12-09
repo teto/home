@@ -25,7 +25,8 @@
   fileSystems."/mnt/ext" =
     { device = "/dev/sda1";
       fsType = "ext4";
-      options = [ "rw" "uid=teto" "nofail" ];
+      # "uid=teto" 
+      options = [ "rw" "user" "nofail" ];
     };
 
   fileSystems."/mnt/ntfs" =
