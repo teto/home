@@ -86,13 +86,12 @@ nvim_lsp.ccls.setup({
 nvim_lsp.pyls.setup({
 	name = "pyls";
 	cmd = {  "python", "-mpyls", "-vv", "--log-file" , "/tmp/lsp_python.log"},
-	init_options = {
+	-- init_options = {
 	enable = true;
 	trace = { server = "verbose"; };
-	commandPath = "";
 	configurationSources = { "pycodestyle" };
-	-- settings = {
-		-- pyls = {
+	settings = {
+		pyls = {
 		plugins = {
 			pylint = { enabled = false; };
 			jedi_completion = { enabled = true; };
@@ -118,9 +117,9 @@ nvim_lsp.pyls.setup({
 			rope_completion = { enabled = false; };
 			yapf = { enabled = false; };
 		};
-	-- };
-	-- };
-  };
+	};
+	};
+  -- };
 })
 
 do
