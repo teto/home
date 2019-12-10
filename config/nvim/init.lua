@@ -91,8 +91,8 @@ nvim_lsp.pyls.setup({
 	trace = { server = "verbose"; };
 	commandPath = "";
 	configurationSources = { "pycodestyle" };
-	settings = {
-		pyls = {
+	-- settings = {
+		-- pyls = {
 		plugins = {
 			pylint = { enabled = false; };
 			jedi_completion = { enabled = true; };
@@ -107,19 +107,19 @@ nvim_lsp.pyls.setup({
 				enabled = false;
 				threshold = 15;
 			};
-			preload = { enabled = true; };
+			-- preload = { enabled = true; };
 			pycodestyle = { enabled = true; };
-			pydocstyle = {
-				enabled = false;
-				match = "(?!test_).*\\.py";
-				matchDir = "[^\\.].*";
-			};
+			-- pydocstyle = {
+			-- 	enabled = false;
+			-- 	match = "(?!test_).*\\.py";
+			-- 	matchDir = "[^\\.].*";
+			-- };
 			pyflakes = { enabled = false; };
 			rope_completion = { enabled = false; };
 			yapf = { enabled = false; };
 		};
-	};
-	};
+	-- };
+	-- };
   };
 })
 
