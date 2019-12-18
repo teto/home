@@ -1,26 +1,27 @@
 -- How to add a new server
 -- https://github.com/neovim/nvim-lsp/issues/41
 local nvim_lsp = require 'nvim_lsp'
-local skeleton = require'nvim_lsp/skeleton'
+local configs = require'nvim_lsp/skeleton'
 
 -- vim.lsp.util.show_current_line_diagnostics()
 -- Check if it's already defined for when I reload this file.
 if not nvim_lsp.lua_lsp then
-  skeleton.lua_lsp = {
+  configs.lua_lsp = {
     default_config = {
       cmd = {'lua-lsp'};
       filetypes = {'lua'};
-      -- root_dir = function(fname)
-      --   return nvim_lsp.util.find_git_ancestor(fname) or vim.loop.os_homedir()
-      -- end;
+	  root_dir = function(fname)
+        return nvim_lsp.util.find_git_ancestor(fname) or vim.loop.os_homedir()
+      end;
       log_level = vim.lsp.protocol.MessageType.Warning;
       settings = {};
     };
   }
 end
 
+nvim_lsp.lua_lsp.setup{}
 -- sumneko_lua
--- nvim_lsp.lua_lsp.setup({
+-- nvim_lsp.lua_lsp.setup{
 -- 	name = "lua";
 -- 	-- cmd = "lua-lsp",
 -- 	-- filetypes = { "lua" };
@@ -131,7 +132,7 @@ do
       for _, v in ipairs(result.diagnostics) do
         v.uri = v.uri or result.uri
       end
-      vim.lsp.util.set_qflist(result.diagnostics)
+      vim.lsp.util.set_loclist(result.diagnostics)
     end
   end
 end

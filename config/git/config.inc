@@ -8,7 +8,7 @@ defaultRemote=upstream
   signingkey = E1B768A0
 
 [core]
-sshCommand=ssh -vvv
+# sshCommand=ssh -vvv
 
 compactionHeuristic
 

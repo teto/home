@@ -92,6 +92,7 @@ Plug 'MattesGroeger/vim-bookmarks' " ruby  / :BookmarkAnnotate
 " branch v2-integration
 " Plug 'andymass/vim-matchup' " to replace matchit
 " Plug 'AGhost-7/critiq.vim' " :h critiq
+Plug 'liuchengxu/vista.vim'
 Plug 'neovim/nvim-lsp' " while fuzzing details out
 Plug 'christoomey/vim-conflicted' " toto
 Plug 'norcalli/nvim-terminal.lua' " to display ANSI colors
@@ -1391,7 +1392,7 @@ let g:langserver_executables = {
   " call lsp#server#add(['rust'], ['rls'], {})
 " }}}
 " miniyank (from bfredl) {{{
-let g:miniyank_delete_maxlines=1000
+let g:miniyank_delete_maxlines=100
 let g:miniyank_filename = $XDG_CACHE_HOME."/miniyank.mpack"
 map p <Plug>(miniyank-autoput)
 map P <Plug>(miniyank-autoPut)
@@ -2014,12 +2015,12 @@ highlight NormalFloat cterm=NONE ctermfg=14 ctermbg=0 gui=NONE guifg=#93a1a1 gui
 " taken from justinmk's config
 command! Tags !ctags -R --exclude='build*' --exclude='.vim-src/**' --exclude='venv/**' --exclude='**/site-packages/**' --exclude='data/**' --exclude='dist/**' --exclude='notebooks/**' --exclude='Notebooks/**' --exclude='*graphhopper_data/*.json' --exclude='*graphhopper/*.json' --exclude='*.json' --exclude='qgis/**' *
 
-  function! LSP_maps()
+  " function! LSP_maps()
     " nnoremap <buffer> <silent> <leader>ngd :call lsp#text_document_declaration()<CR>
-    nnoremap <buffer> <silent> ngd <cmd>lua vim.lsp.buf.definition()<CR>
-    nnoremap <buffer> <silent> nK  <cmd>lua vim.lsp.buf.hover()<CR>
+    nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
+    nnoremap <silent> K  <cmd>lua vim.lsp.buf.hover()<CR>
     nnoremap <buffer> <silent> ngi  <cmd>lua vim.lsp.buf.implementation()<CR>
-    nnoremap <buffer><cmd>lua vim.lsp.buf.signature_help()<CR>
+    nnoremap <cmd>lua vim.lsp.buf.signature_help()<CR>
 
     nnoremap <silent> ;td <cmd>lua vim.lsp.buf.type_definition()<CR>
 
@@ -2032,7 +2033,7 @@ command! Tags !ctags -R --exclude='build*' --exclude='.vim-src/**' --exclude='ve
     " nnoremap <silent> <space>s  :call lsp#text_document_signature_help()<CR>
     " nnoremap <silent> <space>td :call lsp#text_document_type_definition()<CR>
     " nnoremap <silent> <space>ds :lua vim.lsp.util.show_line_diagnostics()<CR>
-  endfunction
+  " endfunction
 
 " lua require 'init.lua'
 " Doesn't seem to work
@@ -2045,7 +2046,7 @@ lua vim.lsp.set_log_level("debug")
 verbose 
 
 " this is set per-buffer so...
-call LSP_maps()
+" call LSP_maps()
 
 nnoremap ]] :cabove<CR>
 nnoremap ]] :cbelow<CR>
@@ -2054,3 +2055,7 @@ set omnifunc=lsp#omnifunc
 " lua vim.treesitter.add_language("/home/teto/tree-sitter-c/build/Release/tree_sitter_c_binding.node", "c")
 " vim.lsp.util.set_qflist
 " location_callback
+
+" Creates a :Watch <filename> 
+" command ?
+" luafile ~/.config/nvim/watch_fs.lua

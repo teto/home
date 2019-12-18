@@ -8,9 +8,15 @@
     [ <nixpkgs/nixos/modules/installer/scan/not-detected.nix>
     ];
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "ehci_pci" "ahci" "firewire_ohci" "usbhid" "sd_mod" "sr_mod" "sdhci_pci" ];
-  boot.kernelModules = [ "kvm-intel" "b43" ];
-  boot.extraModulePackages = [ config.boot.kernelPackages.broadcom_sta ];
+  boot.initrd.availableKernelModules = [
+    "xhci_pci" "ehci_pci" "ahci" "firewire_ohci" "usbhid" "sd_mod" "sr_mod" "sdhci_pci" 
+  ];
+  boot.kernelModules = [
+    "kvm-intel" "b43"
+  ];
+  boot.extraModulePackages = [
+    config.boot.kernelPackages.broadcom_sta
+  ];
 
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/91ccf165-de06-44f1-9dc8-652a5f7d92cf";

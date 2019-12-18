@@ -122,6 +122,9 @@ final: prev:
 
   rofi-scripts = prev.callPackage ./rofi-scripts {};
 
+
+  tree-sitter-nix-shared = prev.callPackage ./tree-sitter-grammars/nix.nix {};
+
   # see nixpkgs PR instead
   # texlab = prev.callPackage ./texlab {};
 }

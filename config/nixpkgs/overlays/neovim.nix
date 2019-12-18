@@ -297,18 +297,25 @@ rec {
   neovim-dev = (super.pkgs.neovim-unwrapped.override  {
     # name = "neovim-test";
     doCheck=true;
+    devMode=true;
   }).overrideAttrs(oa:{
     cmakeBuildType="debug";
 
-      version = "master";
-      src = builtins.fetchGit {
-        url = https://github.com/neovim/neovim.git;
-      };
+    version = "master";
+    src = builtins.fetchGit {
+      url = https://github.com/neovim/neovim.git;
+    };
 
-      nativeBuildInputs = oa.nativeBuildInputs ++ [
-        self.pkgs.valgrind
-        self.pkgs.ccls
-      ];
+    nativeBuildInputs = oa.nativeBuildInputs ++ [
+      self.pkgs.valgrind
+      self.pkgs.ccls
+    ];
+
+    buildInputs = oa.buildInputs ++ [
+      self.pkgs.icu  # for treesitter unicode/ptypes.h
+    ];
+
+    # export NVIM_PROG
     shellHook = ''
       export NVIM_PYTHON_LOG_LEVEL=DEBUG
       export NVIM_LOG_FILE=/tmp/log

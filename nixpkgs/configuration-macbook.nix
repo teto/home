@@ -20,7 +20,7 @@ let
     # just for testing
     # ./modules/nextcloud.nix
 
-    ./modules/tor.nix
+    # ./modules/tor.nix
   ];
 
   boot.loader ={
@@ -153,8 +153,11 @@ let
   #   pkgs.openvswitch
   # ];
 
-  networking.enableB43Firmware = true;
+  # a contender is https://wireless.wiki.kernel.org/en/users/drivers/b43
+  # networking.enableB43Firmware = true;
+  hardware.firmware = [ pkgs.b43Firmware_6_30_163_46 ];
 
+  # for android development
   programs.adb.enable = true;
 
 }

@@ -55,6 +55,7 @@ rec {
   # Set your time zone.
   time.timeZone = "Europe/Paris";
   # time.timeZone = "Asia/Tokyo";
+  # set to false on windows machines else it messes up
   time.hardwareClockInLocalTime = false; # by default false
   # services.tzupdate.enable = true;
 
