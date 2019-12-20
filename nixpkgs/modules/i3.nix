@@ -175,7 +175,8 @@ in
     # consider using lib.mkOptionDefault according to help
     keybindings =
     let
-      mad="Mod4"; mod="Mod1";
+      mad="Mod4";
+      mod="Mod1";
       notify-send = "${pkgs.libnotify}/bin/notify-send";
 
       move_focused_wnd = dir: fr: us:

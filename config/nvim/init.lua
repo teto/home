@@ -53,23 +53,19 @@ nvim_lsp.hie.setup({
 -- 	filetypes = { "tex" };
 -- })
 
--- vim.lsp.add_filetype_config {
--- 	name = "clangd";
--- 	filetype = {"c", "cpp"};
--- 	cmd = "clangd-7 -background-index";
--- 	capabilities = {
--- 		offsetEncoding = {"utf-8", "utf-16"};
--- 	};
--- 	on_init = vim.schedule_wrap(function(client, result)
--- 		if result.offsetEncoding then
--- 			client.offset_encoding = result.offsetEncoding
--- 		end
--- 	end)
--- }
-
 
 nvim_lsp.texlab.setup({ })
 
+--nvim_lsp.clangd.setup({
+--	--compile-commands-dir=build
+--    cmd = {"clangd", "--background-index", 
+--		, "--log=verbose" -- error/info/verbose
+--		"--pretty" -- pretty print json output
+--	};
+--})
+
+
+-- https://github.com/MaskRay/ccls/wiki/Debugging
 nvim_lsp.ccls.setup({
 	name = "ccls",
 	filetypes = { "c", "cpp", "objc", "objcpp" },

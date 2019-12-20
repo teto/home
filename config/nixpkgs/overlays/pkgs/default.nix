@@ -122,6 +122,7 @@ final: prev:
 
   rofi-scripts = prev.callPackage ./rofi-scripts {};
 
+  sumneko = prev.callPackage ./sumneko.nix {};
 
   tree-sitter-nix-shared = prev.callPackage ./tree-sitter-grammars/nix.nix {};
 

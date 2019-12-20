@@ -175,16 +175,16 @@ rec {
   neovim-unwrapped-master = super.neovim-unwrapped.overrideAttrs (oldAttrs: {
 	  name = "neovim";
 	  version = "official-master";
-      # src = builtins.fetchGit {
-      #   url = https://github.com/teto/neovim.git;
-      #   ref = "master";
-      # };
-      src = super.fetchFromGitHub {
-        owner = "neovim";
-        repo = "neovim";
-        rev = "b1e4ec1c2a08981683b2355715a421c0bfb64644";
-        sha256 = "XeEzsh1qtdd/uthsStkZsmCydDm+kcCplpSB+gNwArI=";
+      src = builtins.fetchGit {
+        url = https://github.com/teto/neovim.git;
+        ref = "master";
       };
+      # src = super.fetchFromGitHub {
+      #   owner = "neovim";
+      #   repo = "neovim";
+      #   rev = "b1e4ec1c2a08981683b2355715a421c0bfb64644";
+      #   sha256 = "XeEzsh1qtdd/uthsStkZsmCydDm+kcCplpSB+gNwArI=";
+      # };
 
   });
 
@@ -308,7 +308,10 @@ rec {
 
     nativeBuildInputs = oa.nativeBuildInputs ++ [
       self.pkgs.valgrind
+
+      # testing between both
       self.pkgs.ccls
+      self.pkgs.clang-tools  # for clangd
     ];
 
     buildInputs = oa.buildInputs ++ [
@@ -316,12 +319,15 @@ rec {
     ];
 
     # export NVIM_PROG
-    shellHook = ''
+    # https://github.com/neovim/neovim/blob/master/test/README.md#configuration
+    shellHook = oa.shellHook + ''
       export NVIM_PYTHON_LOG_LEVEL=DEBUG
       export NVIM_LOG_FILE=/tmp/log
       # export NVIM_PYTHON_LOG_FILE=/tmp/log
       export VALGRIND_LOG="$PWD/valgrind.log"
 
+      export NVIM_TEST_PRINT_I=1
+      export NVIM_TEST_MAIN_CDEFS=1
       echo "To run tests:"
       echo "VALGRIND=1 TEST_FILE=test/functional/core/job_spec.lua TEST_TAG=env make functionaltest"
 

@@ -37,6 +37,9 @@ rec {
     pkgs.luaPackages.lua-lsp
     pkgs.dtrx  # to compress stuff
 
+    # vim-vint  # 
+    # nixpkgs-fmt
+
     # to be used in i3
     # pkgs.i3dispatch
   ];

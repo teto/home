@@ -3,8 +3,8 @@
 }:
 
 buildPythonApplication rec {
-  name = "i3dispatch-${version}";
-  version = "0.1";
+  pname = "i3dispatch";
+  version = "unstable";
 
   postUnpack=''
     HOME=$TMPDIR

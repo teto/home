@@ -92,8 +92,11 @@ Plug 'MattesGroeger/vim-bookmarks' " ruby  / :BookmarkAnnotate
 " branch v2-integration
 " Plug 'andymass/vim-matchup' " to replace matchit
 " Plug 'AGhost-7/critiq.vim' " :h critiq
+" Plug 'wellle/context.vim' " show current function for example
 Plug 'liuchengxu/vista.vim'
-Plug 'neovim/nvim-lsp' " while fuzzing details out
+" Plug 'neovim/nvim-lsp' " while fuzzing details out
+Plug '~/nvim-lsp' " while fuzzing details out
+
 Plug 'christoomey/vim-conflicted' " toto
 Plug 'norcalli/nvim-terminal.lua' " to display ANSI colors
 Plug 'bogado/file-line' " to open a file at a specific line
@@ -105,13 +108,8 @@ Plug 'iamcco/markdown-preview.nvim' " test , most recent
 " Plug 'rhysd/git-messenger.vim' " to show git message
 " Plug 'voldikss/vim-translate-me' " floating windows for neovim
 " Plug 'chrisbra/Colorizer'
-Plug 'ndmitchell/ghcid', { 'rtp': 'plugins/nvim' }
+" Plug 'ndmitchell/ghcid', { 'rtp': 'plugins/nvim' }
 Plug 'neovimhaskell/nvim-hs.vim' " to help with nvim-hs
-" Plug 'KabbAmine/vCoolor.vim' " :Vcooler
-" Plug 'rickhowe/diffchar.vim' " per char diff buggy
-" Plug 'prabirshrestha/vim-lsp'
-" Plug 'bfredl/nvim-lspmirror'
-" Plug 'bfredl/nvim-lspext' " extension
 Plug 'neomutt/neomutt.vim' " syntax file for neomutt
 Plug 'elbeardmorez/vim-loclist-follow' " to have quicklist synced with cursor
 " call :NR on a region than :w . coupled with b:nrrw_aucmd_create,
@@ -121,7 +119,7 @@ Plug 'chrisbra/vim-diff-enhanced' "
 " Plug 'vim-pandoc/vim-pandoc'
 Plug 'vim-pandoc/vim-pandoc-syntax'
 Plug 'idanarye/vim-merginal'
-Plug 'tveskag/nvim-blame-line' " ToggleBlameLine
+" Plug 'tveskag/nvim-blame-line' " ToggleBlameLine
 " Plug 'moznion/github-commit-comment.vim' " last update from 2014
 " Plug 'dhruvasagar/vim-open-url' " gB/gW to open browser
 Plug 'Carpetsmoker/xdg_open.vim' " overrides gx
@@ -130,7 +128,6 @@ Plug 'tweekmonster/startuptime.vim', {'on': 'StartupTime'} " see startup time pe
 Plug 'vim-scripts/vis' " ?
 Plug 'Konfekt/vim-CtrlXA' " use ctrl a/xto cycle between different words
 " Plug 'jamessan/vim-gnupg' " does not support neovim yet ?
-" Plug 'mattn/gist-vim' " to gist requires webapi
 " provider dependant {{{
 " new deoplete relies on yarp :
 Plug 'AndrewRadev/splitjoin.vim' " gS/gJ to
@@ -144,7 +141,7 @@ Plug '~/nvim-palette', { 'do': ':UpdateRemotePlugins' }
 
 " Plug 'romainl/vim-qf' " can create pb with neomake
 Plug 'editorconfig/editorconfig-vim' " not remote but involves python
-Plug 'neomake/neomake' " just for nix
+Plug 'neomake/neomake' " just for nix and neovim dev with nvimdev ?
 " provider
 Plug 'msrose/vim-perpetuloc'
 " Plug 'brooth/far.vim', { 'do': ':UpdateRemotePlugins' } " search and replace across files
@@ -170,12 +167,9 @@ let g:vim_search_pulse_duration = 400
 " Plug 'ehamberg/vim-cute-python' " display unicode characters, kinda looks bad on vim grid
 Plug 'dbakker/vim-projectroot' " projectroot#guess()
 Plug 'sunaku/vim-dasht' " get documentation (zeavim is also a contender KabbAmine/zeavim.vim)
-" Plug 'sk1418/QFGrep' " Filter quickfix
-" (upstreamd already or ?)
 " Plug 'mtth/scratch.vim' " , {'on': 'Scratch'} mapped to ?
 " Plug 'tjdevries/vim-inyoface.git' "InYoFace_toggle to display only comments
 " todo depend de rust
-" Plug 'powerman/vim-plugin-AnsiEsc' " { to hl ESC codes
 Plug 'junegunn/gv.vim' " git commit viewer :Gv
 " Plug 'mhinz/vim-halo' " to hight cursor line
 " Plug 'ludovicchabant/vim-gutentags' " automatic tag generation, very good
@@ -1643,6 +1637,28 @@ let g:mkdp_page_title = '「${name}」'
 " " Stop the preview"
 " :MarkdownPreviewStop
 "}}}
+" context {{{
+let g:context_enabled = 1
+let g:context_max_height = 21
+"}}}
+" vista (tagbar-like software) {{{
+" Vista finder fzf
+" Vista nvim_lsp
+" available options are echo/scroll/floating_win/both
+let g:vista_echo_cursor_strategy='echo'
+let g:vista_close_on_jump=0
+let g:vista_default_executive='nvim_lsp'
+
+let g:vista_executive_for = {
+    \ 'php': 'vim_lsp',
+    \ 'markdown': 'toc',
+    \ }
+let g:vista_highlight_whole_line=1
+" let g:vista_finder_alternative_executives=['tags']
+" let g:vista_fzf_preview
+" let g:vista_blink=[2, 100]
+" let g:vista_icon_indent=[ '+', '+' ]
+"}}}
 " alok/notational-fzf-vim {{{
 " use c-x to create the note
 " let g:nv_search_paths = []
@@ -2019,10 +2035,10 @@ command! Tags !ctags -R --exclude='build*' --exclude='.vim-src/**' --exclude='ve
     " nnoremap <buffer> <silent> <leader>ngd :call lsp#text_document_declaration()<CR>
     nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
     nnoremap <silent> K  <cmd>lua vim.lsp.buf.hover()<CR>
-    nnoremap <buffer> <silent> ngi  <cmd>lua vim.lsp.buf.implementation()<CR>
+    nnoremap <silent> ngi  <cmd>lua vim.lsp.buf.implementation()<CR>
     nnoremap <cmd>lua vim.lsp.buf.signature_help()<CR>
 
-    nnoremap <silent> ;td <cmd>lua vim.lsp.buf.type_definition()<CR>
+    nnoremap <silent> ntd <cmd>lua vim.lsp.buf.type_definition()<CR>
 
     " nnoremap <buffer> <silent> <leader>d :lua require("vim.lsp.util").show_line_diagnostics()<CR>
 
