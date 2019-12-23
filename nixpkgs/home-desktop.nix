@@ -36,6 +36,8 @@ let
     gitAndTools.git-crypt
     # ccache # breaks some builds ? has to be configured via program, use ccacheStdEnv instead ?
 
+    patchutils  # for interdiff
+
     lazygit  # kinda like tig
     ncurses.dev # for infocmp
     neovim-xp   # hum remove ?

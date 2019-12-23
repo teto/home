@@ -112,6 +112,7 @@ rec {
     WWW_HOME="$XDG_CONFIG_HOME/w3m";
     # used by ranger
     TERMCMD="termite";
+    VIM_SOURCE_DIR="$HOME/vim";
     # TERMINAL # used by i3-sensible-terminal
   };
 
