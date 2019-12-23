@@ -26,7 +26,7 @@
     { device = "/dev/sda1";
       fsType = "ext4";
       # "uid=teto" 
-      options = [ "rw" "user" "nofail" ];
+      options = [ "exec" "rw" "user" "nofail" ];
     };
 
   fileSystems."/mnt/ntfs" =
