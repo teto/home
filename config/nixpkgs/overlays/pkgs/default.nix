@@ -124,7 +124,22 @@ final: prev:
 
   sumneko = prev.callPackage ./sumneko.nix {};
 
-  tree-sitter-nix-shared = prev.callPackage ./tree-sitter-grammars/nix.nix {};
+  tree-sitter-nix-shared = prev.callPackage ./tree-sitter-grammars/nix.nix {
+    language = "nix";
+    source = builtins.fetchGit {
+      url = https://github.com/cstrahan/tree-sitter-nix;
+    };
+  };
+
+  tree-sitter-bash-shared = prev.callPackage ./tree-sitter-grammars/nix.nix {
+    language = "bash";
+  };
+
+  tree-sitter-c-shared = prev.callPackage ./tree-sitter-grammars/nix.nix {
+    language = "c";
+  };
+
+
 
   # see nixpkgs PR instead
   # texlab = prev.callPackage ./texlab {};

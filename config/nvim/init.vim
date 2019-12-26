@@ -102,7 +102,7 @@ Plug 'norcalli/nvim-terminal.lua' " to display ANSI colors
 Plug 'bogado/file-line' " to open a file at a specific line
 Plug 'yuki-ycino/fzf-preview.vim' " toto
 Plug 'glacambre/firenvim' " to use nvim in firefox
-Plug 'liuchengxu/vim-clap' " fuzzer
+" Plug 'liuchengxu/vim-clap' " fuzzer
 Plug 'alok/notational-fzf-vim' " to take notes
 Plug 'iamcco/markdown-preview.nvim' " test , most recent
 " Plug 'rhysd/git-messenger.vim' " to show git message
@@ -362,7 +362,7 @@ Plug 'vim-scripts/rfc-syntax', { 'for': 'rfc' } " optional syntax highlighting f
 " careful maps F4 by default
 Plug 'teto/Modeliner' " <leader>ml to setup buffer modeline
 " This one has bindings mapped to <leader>l
-Plug 'vimwiki/vimwiki'   " to write notes
+" Plug 'vimwiki/vimwiki'   " to write notes
 "Plug 'teto/neovim-auto-autoread' " works only in neovim, runs external checker
 " Plug 'rhysd/github-complete.vim' " provides github user/repo autocompletion after @ and #
 
@@ -2036,9 +2036,11 @@ command! Tags !ctags -R --exclude='build*' --exclude='.vim-src/**' --exclude='ve
     nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
     nnoremap <silent> K  <cmd>lua vim.lsp.buf.hover()<CR>
     nnoremap <silent> ngi  <cmd>lua vim.lsp.buf.implementation()<CR>
-    nnoremap <cmd>lua vim.lsp.buf.signature_help()<CR>
+    nnoremap ,sh <cmd>lua vim.lsp.buf.signature_help()<CR>
+  nnoremap <silent> ,td <cmd>lua vim.lsp.buf.type_definition()<CR>
 
-    nnoremap <silent> ntd <cmd>lua vim.lsp.buf.type_definition()<CR>
+    nnoremap <silent> naf <cmd>lua vim.lsp.buf.formatting()<CR>
+    nnoremap <silent> xaf <cmd>lua vim.lsp.buf.range_formatting()<CR>
 
     " nnoremap <buffer> <silent> <leader>d :lua require("vim.lsp.util").show_line_diagnostics()<CR>
 
@@ -2067,7 +2069,10 @@ verbose
 nnoremap ]] :cabove<CR>
 nnoremap ]] :cbelow<CR>
 
-set omnifunc=lsp#omnifunc
+" set omnifunc=lsp#omnifunc
+  " autocmd Filetype rust,python,go,c,cpp setl omnifunc=v:lua.vim.lsp.omnifunc
+
+set omnifunc=v:lua.vim.lsp.omnifunc
 " lua vim.treesitter.add_language("/home/teto/tree-sitter-c/build/Release/tree_sitter_c_binding.node", "c")
 " vim.lsp.util.set_qflist
 " location_callback

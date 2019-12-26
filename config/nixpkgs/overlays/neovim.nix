@@ -298,8 +298,11 @@ rec {
     # name = "neovim-test";
     doCheck=true;
     devMode=true;
+    # stdenv = clangStdenv;
+
   }).overrideAttrs(oa:{
     cmakeBuildType="debug";
+    cmakeFlags = oa.cmakeFlags ++ [ "-DMIN_LOG_LEVEL=0" ];
 
     version = "master";
     src = builtins.fetchGit {
@@ -307,7 +310,7 @@ rec {
     };
 
     nativeBuildInputs = oa.nativeBuildInputs ++ [
-      self.pkgs.valgrind
+      # self.pkgs.valgrind
 
       # testing between both
       self.pkgs.ccls
@@ -316,6 +319,7 @@ rec {
 
     buildInputs = oa.buildInputs ++ [
       self.pkgs.icu  # for treesitter unicode/ptypes.h
+      # utf8proc
     ];
 
     # export NVIM_PROG

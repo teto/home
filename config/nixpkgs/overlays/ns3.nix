@@ -33,19 +33,19 @@ rec {
   #   # withExamples = true;
   };
 
-  # TODO regarder https://github.com/wfxr/forgit aussi
-  ns-3-dce-local = super.ns-3-dce.overrideAttrs(oa: {
-    # cleanfilter
-    src = super.lib.cleanSource "/home/teto/dce";
-  });
+  # # TODO regarder https://github.com/wfxr/forgit aussi
+  # ns-3-dce-local = super.ns-3-dce.overrideAttrs(oa: {
+  #   # cleanfilter
+  #   src = super.lib.cleanSource "/home/teto/dce";
+  # });
 
-  ns-3-dce-dev = super.ns-3-dce.overrideAttrs(oa: {
-      src = (builtins.fetchGit {
-        url  = git://github.com/teto/ns-3-dce;
-        ref    = "python3";
-        name = "dce";
-      });
-  });
+  # ns-3-dce-dev = super.ns-3-dce.overrideAttrs(oa: {
+  #     src = (builtins.fetchGit {
+  #       url  = git://github.com/teto/ns-3-dce;
+  #       ref    = "python3";
+  #       name = "dce";
+  #     });
+  # });
 
   # dce-quagga-dev =  if (super.pkgs ? dce-quagga) then (super.dce-quagga.overrideAttrs( oa: {
   #   srcs = [
