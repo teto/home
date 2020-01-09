@@ -277,7 +277,7 @@ rec {
     };
 
     extraPython3Packages = ps: with ps; [
-      pandas
+      # pandas # broken
       jedi
       urllib3
       # pygments # for pygmentize and minted in latex
@@ -297,7 +297,7 @@ rec {
   neovim-dev = (super.pkgs.neovim-unwrapped.override  {
     # name = "neovim-test";
     doCheck=true;
-    devMode=true;
+    # devMode=true;
     # stdenv = clangStdenv;
 
   }).overrideAttrs(oa:{
@@ -319,7 +319,7 @@ rec {
 
     buildInputs = oa.buildInputs ++ [
       self.pkgs.icu  # for treesitter unicode/ptypes.h
-      # utf8proc
+      self.pkgs.utf8proc
     ];
 
     # export NVIM_PROG

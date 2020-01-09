@@ -18,7 +18,7 @@ let
       # ./modules/vdirsyncer.nix
       ./modules/sway.nix
 
-      # ./home-mail.nix
+      ./home-mail.nix
       # symlink towards a config
     ]
     ;
@@ -70,6 +70,7 @@ let
   };
 
   xsession.initExtra = ''
+    xrandr --output DVI-I-1 --primary
   '';
 
   # fzf-extras found in overlay fzf-extras

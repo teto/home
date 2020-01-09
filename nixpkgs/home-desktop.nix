@@ -305,13 +305,17 @@ in
     defaultCacheTtl = 1800;
     enableSshSupport = true;
     # grabKeyboardAndMouse= false;
+    pinentryFlavor = "curses";
     verbose = true;
     # see https://github.com/rycee/home-manager/issues/908
     # could try ncurses as well
-    extraConfig = ''
-      pinentry-program ${pkgs.pinentry-gnome}/bin/pinentry-gnome3
-    '';
+    # extraConfig = ''
+    #   pinentry-program ${pkgs.pinentry-gnome}/bin/pinentry-gnome3
+    # '';
   };
+
+  # needed for gpg-agent gnome pinentry
+  # services.dbus.packages = [ pkgs.gcr ];
 
   # i3 now available !
   xsession = {
