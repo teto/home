@@ -93,10 +93,10 @@ Plug 'MattesGroeger/vim-bookmarks' " ruby  / :BookmarkAnnotate
 " Plug 'andymass/vim-matchup' " to replace matchit
 " Plug 'AGhost-7/critiq.vim' " :h critiq
 " Plug 'wellle/context.vim' " show current function for example
-Plug 'liuchengxu/vista.vim'
+Plug 'liuchengxu/vista.vim' " replaces tagbar to list workplace symbols
 " Plug 'neovim/nvim-lsp' " while fuzzing details out
 Plug '~/nvim-lsp' " while fuzzing details out
-
+Plug 'puremourning/vimspector' " to debug programs
 Plug 'christoomey/vim-conflicted' " toto
 Plug 'norcalli/nvim-terminal.lua' " to display ANSI colors
 Plug 'bogado/file-line' " to open a file at a specific line
@@ -166,11 +166,11 @@ let g:vim_search_pulse_duration = 400
 
 " Plug 'ehamberg/vim-cute-python' " display unicode characters, kinda looks bad on vim grid
 Plug 'dbakker/vim-projectroot' " projectroot#guess()
-Plug 'sunaku/vim-dasht' " get documentation (zeavim is also a contender KabbAmine/zeavim.vim)
+" Plug 'sunaku/vim-dasht' " get documentation (zeavim is also a contender KabbAmine/zeavim.vim)
 " Plug 'mtth/scratch.vim' " , {'on': 'Scratch'} mapped to ?
 " Plug 'tjdevries/vim-inyoface.git' "InYoFace_toggle to display only comments
 " todo depend de rust
-Plug 'junegunn/gv.vim' " git commit viewer :Gv
+" Plug 'junegunn/gv.vim' " git commit viewer :Gv
 " Plug 'mhinz/vim-halo' " to hight cursor line
 " Plug 'ludovicchabant/vim-gutentags' " automatic tag generation, very good
 Plug 'junegunn/goyo.vim', {'on': 'Goyo'} "distraction free writing focus
@@ -219,7 +219,7 @@ let cmdline_external_term_cmd = "termite -e '%s' &"
 "}}}
 " Plug 'SirVer/ultisnips' " handle snippets
 " " Snippets are separated from the engine. Add this if you want them:
-Plug 'honza/vim-snippets'
+" Plug 'honza/vim-snippets'
 " Plug 'Shougo/neosnippet.vim'
 " Plug 'Shougo/neosnippet-snippets'
 
@@ -227,6 +227,8 @@ Plug 'sjl/gundo.vim' " :GundoShow/Toggle to redo changes
 " Plug 'vim-scripts/DrawIt' " to draw diagrams
 " Plug 'Yggdroot/indentLine',{ 'for': 'python' }  " draw verticals indents but seems greedy
 " Plug 'beloglazov/vim-online-thesaurus' " thesaurus => dico dde synonymes
+
+""" contact autocompletion
 " Plug 'fszymanski/deoplete-abook' " replaced with the khard one
 " Plug 'paretje/deoplete-notmuch', {'for': 'mail', 'do': ':UpdateRemotePlugins'}
 " Plug 'adborden/vim-notmuch-address' " does not work yet
@@ -251,11 +253,9 @@ Plug 'neovimhaskell/haskell-vim', {'for':'haskell'} " haskell install
 "Plug 'mattn/vim-rtags' a l'air léger
 " Plug 'shaneharper/vim-rtags' " <leader>r ou bien :RtagsFind  mais ne marche pas
 Plug 'tpope/vim-unimpaired' " [<space> [e [n ]n pour gerer les conflits etc...
+Plug 'mbbill/undotree' " replaces gundo
 
 " Using a non-master branch
-
-" Plug 'dbgx/lldb.nvim',{ 'for': 'c' } " To debug (use clang to get correct line numbers
-" Plug 'dbgx/gdb.nvim',{ 'for': 'c' } " To debug (use clang to get correct line numbers
 
 " filetypes {{{2
 " Plug 'cespare/vim-toml', { 'for': 'toml'}
@@ -276,7 +276,6 @@ Plug 'PotatoesMaster/i3-vim-syntax'
 " Plug 'Valloric/ListToggle' " toggle location/quickfix list toggling seems to fail
 " Plug 'git@github.com:milkypostman/vim-togglelist' " same
 " still problems with airline when installed via nix
-Plug 'mbbill/undotree' " replaces gundo
 Plug '907th/vim-auto-save' " :h auto-save
 " Plug 'teto/vim-auto-save' " autosave :h auto-save
 Plug 'bfredl/nvim-miniyank' " killring alike plugin, cycling paste careful search for :Yank commands
@@ -316,7 +315,6 @@ Plug 'tpope/vim-rhubarb' " github support in fugitive, use |i_CTRL-X_CTRL-O|
 "Plug 'jaxbot/github-issues.vim' " works only with vim
 "Plug 'tpope/vim-surround' " don't realy know how to use yet
 " Plug 'junegunn/vim-peekaboo' " gives a preview of buffers when pasting, need ruby ?
-Plug 'mhinz/vim-randomtag', { 'on': 'Random' } " Adds a :Random function that launches help at random
 
 
 "  fuzzers {{{2
@@ -332,9 +330,7 @@ Plug 'mhinz/vim-randomtag', { 'on': 'Random' } " Adds a :Random function that la
 
 "}}}
 
-
 Plug 'vhakulinen/gnvim-lsp' " load it only for gnvim
-
 
 " , { 'for': 'markdown', 'do': function('BuildComposer') } " Needs rust, cargo, plenty of things :help markdown-composer
 " move to nix

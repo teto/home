@@ -36,6 +36,9 @@ let
     steam-run
   ];
 
+
+  services.lorri.enable = true;
+
   # you can switch from cli with xkb-switch
   # or xkblayout-state
   home.keyboard = {

@@ -160,6 +160,7 @@ in
 
   imports = [
     ./home-common.nix
+    ./home-dev.nix
     ./modules/home-tor.nix
     ./modules/i3.nix
   ];
@@ -334,7 +335,6 @@ in
 
   # as long as there is no better way to configure i3
   # xsession.windowManager.command = "${pkgs.i3}/bin/i3";
-
   home.file.".pypirc".source = ../home/pypirc;
 
   # readline equivalent but in haskell for ghci
