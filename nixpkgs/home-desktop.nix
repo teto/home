@@ -87,6 +87,7 @@ let
     # unstable.dropbox
     gnome3.networkmanagerapplet # should
     gnome3.defaultIconTheme # else nothing appears
+    i3-layout-manager  # to save/load layouts
     mpv
     kitty
     libnotify
@@ -330,6 +331,7 @@ in
     #   ${pkgs.feh}/bin/feh --bg-fill /home/teto/dotfiles/wallpapers/nebula.jpg
     # '';
   };
+
   # xsession.windowManager.command = "…";
     # ${pkgs.networkmanagerapplet}/bin/nm-applet &
 

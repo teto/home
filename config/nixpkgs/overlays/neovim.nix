@@ -176,8 +176,11 @@ rec {
 	  name = "neovim";
 	  version = "official-master";
       src = builtins.fetchGit {
-        url = https://github.com/teto/neovim.git;
+        url = https://github.com/neovim/neovim.git;
         ref = "master";
+
+        # url = https://github.com/teto/neovim.git;
+        # ref = "libuv_notif";
       };
       # src = super.fetchFromGitHub {
       #   owner = "neovim";
@@ -297,6 +300,7 @@ rec {
   neovim-dev = (super.pkgs.neovim-unwrapped.override  {
     # name = "neovim-test";
     doCheck=true;
+    withDoc=true;
     # devMode=true;
     # stdenv = clangStdenv;
 

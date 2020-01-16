@@ -5,6 +5,9 @@ endif
 let g:grepper.tools += ["gitall"]
 let g:grepper.gitall = copy(g:grepper.git)
 let g:grepper.gitall.grepprg = 'git grep "$*" $(git rev-list --all)'
+let g:grepper.tools += ["rg-fixed"]
+let g:grepper.rgfixed = copy(g:grepper.rg)
+" let g:grepper.gitall.grepprg = 'git grep "$*" $(git rev-list --all)'
 
 
 " let g:grepper.rgall.grepprg .= ' --no-ignore'

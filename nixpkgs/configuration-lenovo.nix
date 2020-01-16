@@ -24,20 +24,17 @@ in
     # not needed ?
     # ./modules/hwrng.nix
 
-    # see clone for that
-    # ./modules/proxy.nix
-
     # ihaskell marked as broken :'(
     # ./modules/jupyter.nix
   #   ./modules/mininet.nix
 
     # extra module not upstreamed yet
     # makes it crash
-    ({ config, lib, ... }:
-    {
-      _file = "matt";
-      # boot.kernel.checkPackageConfig = true;
-    })
+    # ({ config, lib, ... }:
+    # {
+    #   _file = "matt";
+    #   # boot.kernel.checkPackageConfig = true;
+    # })
     # ./modules/mptcp.nix
 
   ]
@@ -318,6 +315,12 @@ in
   #       # ];
   #     }
   # ];
+
+
+  services.xserver.displayManager.gdm.nvidiaWayland = true;
+
+  # this is required as well
+  hardware.nvidia.modesetting.enable = true;
 
   # security.sudo.wheelNeedsPassword = ;
 

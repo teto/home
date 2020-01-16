@@ -17,6 +17,7 @@ let
       ./home-desktop.nix
       # ./modules/vdirsyncer.nix
       ./modules/sway.nix
+      ./neomutt.nix
 
       ./home-mail.nix
       # symlink towards a config
@@ -37,7 +38,8 @@ let
   ];
 
 
-  services.lorri.enable = true;
+  # hum...
+  # services.lorri.enable = true;
 
   # you can switch from cli with xkb-switch
   # or xkblayout-state

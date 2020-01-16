@@ -97,6 +97,7 @@ Plug 'liuchengxu/vista.vim' " replaces tagbar to list workplace symbols
 " Plug 'neovim/nvim-lsp' " while fuzzing details out
 Plug '~/nvim-lsp' " while fuzzing details out
 Plug 'puremourning/vimspector' " to debug programs
+Plug 'hotwatermorning/auto-git-diff' " to help rebasing
 Plug 'christoomey/vim-conflicted' " toto
 Plug 'norcalli/nvim-terminal.lua' " to display ANSI colors
 Plug 'bogado/file-line' " to open a file at a specific line
@@ -122,7 +123,7 @@ Plug 'idanarye/vim-merginal'
 " Plug 'tveskag/nvim-blame-line' " ToggleBlameLine
 " Plug 'moznion/github-commit-comment.vim' " last update from 2014
 " Plug 'dhruvasagar/vim-open-url' " gB/gW to open browser
-Plug 'Carpetsmoker/xdg_open.vim' " overrides gx
+" Plug 'Carpetsmoker/xdg_open.vim' " overrides gx
 Plug 'tweekmonster/nvim-api-viewer', {'on': 'NvimAPI'} " see nvim api
 Plug 'tweekmonster/startuptime.vim', {'on': 'StartupTime'} " see startup time per script
 Plug 'vim-scripts/vis' " ?
@@ -276,7 +277,7 @@ Plug 'PotatoesMaster/i3-vim-syntax'
 " Plug 'Valloric/ListToggle' " toggle location/quickfix list toggling seems to fail
 " Plug 'git@github.com:milkypostman/vim-togglelist' " same
 " still problems with airline when installed via nix
-Plug '907th/vim-auto-save' " :h auto-save
+" Plug '907th/vim-auto-save' " :h auto-save
 " Plug 'teto/vim-auto-save' " autosave :h auto-save
 Plug 'bfredl/nvim-miniyank' " killring alike plugin, cycling paste careful search for :Yank commands
 " hangs with big strings
@@ -407,8 +408,8 @@ let g:far#collapse_result=1
 
 " Plug 'gregsexton/gitv'
 " Plug 'jeffwilliams/basejump' " to alt+click on file:line and go to it
-Plug 'neovim/nvimdev.nvim' " thanks tweekmonster !
-Plug 'jceb/vim-orgmode' " orgmode
+Plug 'teto/nvimdev.nvim' " thanks tweekmonster !
+" Plug 'jceb/vim-orgmode' " orgmode
 call plug#end()
 " }}}
 
@@ -1165,6 +1166,8 @@ endif
 " nnoremap <leader>ag  :Grepper -tool ag  -open -switch
 nnoremap <leader>rg  :Grepper -tool rg -open -switch
 nnoremap <leader>rgb  :Grepper -tool rg -open -switch -buffer
+" TODO add 
+vnoremap <leader>rg  :Grepper -tool rg -open -switch
 
 " highlight! link QuickFixLine Normal
 
@@ -1191,7 +1194,8 @@ nnoremap <leader>rgb  :Grepper -tool rg -open -switch -buffer
 "set foldtext=
 " removed to test default values
 " ,foldend:^
-  " set fillchars+=foldopen:▾,foldsep:│,foldclose:▸
+  set fillchars+=foldopen:▾,foldsep:│
+  " set fillchars+=foldclose:▸
   " echo "doing it"
   " set fdc=-1
 " }}}
@@ -1262,18 +1266,6 @@ nmap <leader>wj <plug>(signify-next-hunk)
 " nnoremap <leader>sj :echomsg 'next-hunk'<CR>
 nmap <leader>sk <plug>(signify-prev-hunk)
 
-" }}}
-" autosave plugin (:h auto-save) {{{
-let g:auto_save_in_insert_mode = 1
-let g:auto_save_events = ['FocusLost']
-"let g:auto_save_events = ['CursorHold', 'FocusLost']
-let g:auto_save_write_all_buffers = 0 " Setting this option to 1 will write all
-" Put this in vimrc, add custom commands in the function.
-"
-" function! AutoSaveOnLostFocus()
-"   " to solve pb with Airline https://github.com/vim-airline/vim-airline/issues/1030#issuecomment-183958050
-"   exe ":au FocusLost ".expand("%")." :wa | :AirlineRefresh | :echom 'Focus lost'"
-" endfunction
 " }}}
 " vim-scripts/QuickFixCurrentNumber {{{
 "*:QuickhlManualEnable*		Enable.
@@ -1641,7 +1633,7 @@ let g:context_max_height = 21
 " Vista finder fzf
 " Vista nvim_lsp
 " available options are echo/scroll/floating_win/both
-let g:vista_echo_cursor_strategy='echo'
+let g:vista_echo_cursor_strategy='both'
 let g:vista_close_on_jump=0
 let g:vista_default_executive='nvim_lsp'
 
@@ -2031,23 +2023,15 @@ command! Tags !ctags -R --exclude='build*' --exclude='.vim-src/**' --exclude='ve
     " nnoremap <buffer> <silent> <leader>ngd :call lsp#text_document_declaration()<CR>
     nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
     nnoremap <silent> K  <cmd>lua vim.lsp.buf.hover()<CR>
-    nnoremap <silent> ngi  <cmd>lua vim.lsp.buf.implementation()<CR>
+    nnoremap <silent> ,gi  <cmd>lua vim.lsp.buf.implementation()<CR>
     nnoremap ,sh <cmd>lua vim.lsp.buf.signature_help()<CR>
   nnoremap <silent> ,td <cmd>lua vim.lsp.buf.type_definition()<CR>
+  nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
 
-    nnoremap <silent> naf <cmd>lua vim.lsp.buf.formatting()<CR>
-    nnoremap <silent> xaf <cmd>lua vim.lsp.buf.range_formatting()<CR>
+    nnoremap <silent> ,af <cmd>lua vim.lsp.buf.formatting()<CR>
+    nnoremap <silent> ,arf <cmd>lua vim.lsp.buf.range_formatting()<CR>
 
     " nnoremap <buffer> <silent> <leader>d :lua require("vim.lsp.util").show_line_diagnostics()<CR>
-
-    " nnoremap <silent> <space>dc :call lsp#text_document_declaration()<CR>
-    " nnoremap <silent> <space>df :call lsp#text_document_definition()<CR>
-    " nnoremap <silent> <space>h  :call lsp#text_document_hover()<CR>
-    " nnoremap <silent> <space>i  :call lsp#text_document_implementation()<CR>
-    " nnoremap <silent> <space>s  :call lsp#text_document_signature_help()<CR>
-    " nnoremap <silent> <space>td :call lsp#text_document_type_definition()<CR>
-    " nnoremap <silent> <space>ds :lua vim.lsp.util.show_line_diagnostics()<CR>
-  " endfunction
 
 " lua require 'init.lua'
 " Doesn't seem to work
@@ -2056,8 +2040,6 @@ command! Tags !ctags -R --exclude='build*' --exclude='.vim-src/**' --exclude='ve
 luafile ~/.config/nvim/init.lua
 " logs are written to /home/teto/.local/share/nvim/vim-lsp.log
 lua vim.lsp.set_log_level("debug")
-
-verbose 
 
 " this is set per-buffer so...
 " call LSP_maps()
@@ -2075,4 +2057,14 @@ set omnifunc=v:lua.vim.lsp.omnifunc
 
 " Creates a :Watch <filename> 
 " command ?
-" luafile ~/.config/nvim/watch_fs.lua
+luafile ~/.config/nvim/watch_fs.lua
+
+" nvim__buf_set_watcher
+let g:watcher = { }
+
+" v:lua.vim.fswatch.watch_file()
+" let g:watcher.watch = v:lua.vim.fswatch.watch_file
+" let g:watcher.stop = v:lua.vim.fswatch.stop
+
+" disable [1/5]
+" set shortmess+=S
