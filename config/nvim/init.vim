@@ -2060,7 +2060,7 @@ set omnifunc=v:lua.vim.lsp.omnifunc
 luafile ~/.config/nvim/watch_fs.lua
 
 " nvim__buf_set_watcher
-let g:watcher = { }
+" let g:watcher = { }
 
 " v:lua.vim.fswatch.watch_file()
 " let g:watcher.watch = v:lua.vim.fswatch.watch_file
