@@ -4,7 +4,7 @@ with libk;
 # with lib.kernel;
 with lib.modules;
 {
-  _file = "toto";
+  _file = "overlay/kernel/structured.nix";
 
   strongswanStructured = {
     XFRM_USER                = yes;

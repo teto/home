@@ -475,7 +475,7 @@ set number
 "Prefer relative line numbering?
 set relativenumber
 " TODO do a macro that cycles throught show/hide absolute/relative line numbers
-map <C-N><C-N> :set invnumber<CR>
+map <C-N><C-N> <Cmd>set invnumber<CR>
 
 " Display unprintable characters with '^' and
 " set nolist to disable or set list!
@@ -490,6 +490,9 @@ map <C-N><C-N> :set invnumber<CR>
 filetype plugin on
 syntax on
 
+" vimspector {{{
+let g:vimspector_enable_mappings = 'HUMAN'
+"}}}
 " backup files etc... {{{
 set noswapfile
 " set undodir=~/.vim/tmp/undo//     " undo files
@@ -646,7 +649,6 @@ let g:diminactive_debug = 0
 let g:diminactive_use_colorcolumn = 1
 let g:diminactive_use_syntax = 0
 let g:diminactive_enable_focus = 0
-
 "}}}
 " ultisnips {{{
 " g:UltiSnipsSnippetsDir
@@ -744,17 +746,17 @@ let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %
 
 " mostly fzf mappings, use TAB to mark several files at the same time
 " https://github.com/neovim/neovim/issues/4487
-nnoremap <Leader>o :FzfFiles<CR>
-nnoremap <Leader>g :FzfGitFiles<CR>
-nnoremap <Leader>F :FzfFiletypes<CR>
-nnoremap <Leader>h :FzfHistory<CR>
-nnoremap <Leader>c :FzfCommits<CR>
-nnoremap <Leader>C :FzfColors<CR>
-nnoremap <leader>b :FzfBuffers<CR>
-nnoremap <leader>m :FzfMarks<CR>
-nnoremap <leader>l :FzfLines<CR>
-nnoremap <leader>t :FzfTags<CR>
-nnoremap <leader>T :FzfBTags<CR>
+nnoremap <Leader>o <Cmd>FzfFiles<CR>
+nnoremap <Leader>g <Cmd>FzfGitFiles<CR>
+nnoremap <Leader>F <Cmd>FzfFiletypes<CR>
+nnoremap <Leader>h <Cmd>FzfHistory<CR>
+nnoremap <Leader>c <Cmd>FzfCommits<CR>
+nnoremap <Leader>C <Cmd>FzfColors<CR>
+nnoremap <leader>b <Cmd>FzfBuffers<CR>
+nnoremap <leader>m <Cmd>FzfMarks<CR>
+nnoremap <leader>l <Cmd>FzfLines<CR>
+nnoremap <leader>t <Cmd>FzfTags<CR>
+nnoremap <leader>T <Cmd>FzfBTags<CR>
 
 
 function! SeeLineHistory()
@@ -926,9 +928,7 @@ set ignorecase " ignore case when searching
 set smartcase " take case into account if search entry has capitals in it
 set wrapscan " prevent from going back to the beginning of the file
 
-if has("nvim-0.2.0")
-  set inccommand=nosplit
-endif
+set inccommand=nosplit
 
 nnoremap <Leader>/ :set hlsearch! hls?<CR> " toggle search highlighting
 
@@ -965,8 +965,8 @@ nnoremap <Leader>/ :set hlsearch! hls?<CR> " toggle search highlighting
 nnoremap <leader>c <Plug>(InYoFace_Toggle)<CR>
 " }}}
 " vim-sayonara {{{
-nnoremap <silent><leader>Q  :Sayonara<cr>
-nnoremap <silent><leader>q  :Sayonara!<cr>
+nnoremap <silent><leader>Q  <Cmd>Sayonara<cr>
+nnoremap <silent><leader>q  <Cmd>Sayonara!<cr>
 
 let g:sayonara_confirm_quit = 0
 " }}}
@@ -1193,7 +1193,7 @@ vnoremap <leader>rg  :Grepper -tool rg -open -switch
 " set foldclose=all
 "set foldtext=
 " removed to test default values
-" ,foldend:^
+" ,foldend:^ ┬ 
   set fillchars+=foldopen:▾,foldsep:│
   " set fillchars+=foldclose:▸
   " echo "doing it"
@@ -1222,9 +1222,9 @@ let g:peekaboo_delay = 0
 let g:peekaboo_compact = 1
 " }}}
 " vimplug bindings {{{
-nnoremap <leader>pi :PlugInstall<CR>
-nnoremap <leader>pU :PlugUpgrade<CR>
-nnoremap <leader>pu :PlugUpdate<CR>
+nnoremap <leader>pi <Cmd>PlugInstall<CR>
+nnoremap <leader>pU <Cmd>PlugUpgrade<CR>
+nnoremap <leader>pu <Cmd>PlugUpdate<CR>
 " }}}
 " signify (display added/removed lines from vcs) {{{
 let g:signify_vcs_list = [ 'git']
@@ -1262,13 +1262,13 @@ let g:signify_update_on_bufenter    = 1
 let g:signify_update_on_focusgained = 1
 " hunk jumping
 " nmap <leader>wj :call sy#jump#next_hunk(v:count1)<CR>
-nmap <leader>wj <plug>(signify-next-hunk)
+" nmap <leader>wj <plug>(signify-next-hunk)
 " nnoremap <leader>sj :echomsg 'next-hunk'<CR>
-nmap <leader>sk <plug>(signify-prev-hunk)
+" nmap <leader>sk <plug>(signify-prev-hunk)
 
 " }}}
 " vim-scripts/QuickFixCurrentNumber {{{
-"*:QuickhlManualEnable*		Enable.
+" *:QuickhlManualEnable*		Enable.
 " }}}
 " Tips from vim-galore {{{
 
@@ -1747,7 +1747,7 @@ noremap Q <NOP>
 map <Leader>n :bnext<CR>
 map <Leader>N :bNext<CR>
 " map <Leader>p :bprevious<CR>
-map <Leader>$ :Obsession<CR>
+map <Leader>$ <Cmd>Obsession<CR>
 " map <Leader>d :bdelete<CR>
 
 "http://stackoverflow.com/questions/28613190/exclude-quickfix-buffer-from-bnext-bprevious
@@ -2044,8 +2044,8 @@ lua vim.lsp.set_log_level("debug")
 " this is set per-buffer so...
 " call LSP_maps()
 
-nnoremap ]] :cabove<CR>
-nnoremap ]] :cbelow<CR>
+nnoremap ]] <Cmd>cabove<CR>
+nnoremap ]] <Cmd>cbelow<CR>
 
 " set omnifunc=lsp#omnifunc
   " autocmd Filetype rust,python,go,c,cpp setl omnifunc=v:lua.vim.lsp.omnifunc
@@ -2057,7 +2057,7 @@ set omnifunc=v:lua.vim.lsp.omnifunc
 
 " Creates a :Watch <filename> 
 " command ?
-luafile ~/.config/nvim/watch_fs.lua
+" luafile ~/.config/nvim/watch_fs.lua
 
 " nvim__buf_set_watcher
 " let g:watcher = { }

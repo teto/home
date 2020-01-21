@@ -1,11 +1,12 @@
 --
 package.path = "/home/teto/neovim/runtime/lua/vim/?.lua;" .. package.path
 -- print(package.path)
-require 'fswatch'
+fswatch = require 'fswatch'
 
 
--- Inspiration taken from https://teukka.tech/luanvim.html
--- and https://github.com/neovim/neovim/pull/1791
+-- Inspiration taken from:
+-- https://teukka.tech/luanvim.html
+-- https://github.com/neovim/neovim/pull/1791
 function nvim_create_augroups(definitions)
   for group_name, definition in pairs(definitions) do
     vim.api.nvim_command('augroup '..group_name)
@@ -19,11 +20,11 @@ function nvim_create_augroups(definitions)
 end
 
 local autocmds = {
-  -- fsnotif = {
+  fsnotif = {
 		-- -- "VimEnter",        "*",      [[lua sourceCScope()]]};
 
 	-- -- TODO use lua
-  --   "BufRead"     ,   "*", call notify_register(expand('<afile>'))
+    "BufRead"     ,   "*", [[lua fswatch.watch_file(vim.fn.expand('<afile>')) ]],
   --   "BufDelete"   ,   "*", call notify_unregister(expand('<afile>'))
   --   "BufWritePre" ,   "*", call notify_set(expand('<afile>'), 0)
   --   "FileWritePre",   "*", call notify_set(expand('<afile>'), 0)
@@ -36,8 +37,13 @@ local autocmds = {
   --   "BufFilePost",    "*", call notify_register(expand('<afile>'))
 
 
-  -- }
+  }
 }
 
-nvim_create_augroups(autocmds)
+local function test_watcher()
+    -- "BufRead"     ,   "*", [[lua fswatch.watch_file(vim.fn.expand('<afile>')) ]],
+	vim.api.nvim_command("autocmd! BufRead * lua fswatch.watch_file(vim.fn.expand('<afile>'))")
+end
+test_watcher()
+-- nvim_create_augroups(autocmds)
 

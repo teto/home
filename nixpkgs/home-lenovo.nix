@@ -16,13 +16,13 @@ let
       # ./home-common-headless.nix
       ./home-desktop.nix
       # ./modules/vdirsyncer.nix
-      ./modules/sway.nix
+      # ./modules/sway.nix
       ./neomutt.nix
 
       ./home-mail.nix
       # symlink towards a config
-    ]
-    ;
+  ]
+  ;
 
   # on home-manager master
   # home.accounts.mail.maildirModule
