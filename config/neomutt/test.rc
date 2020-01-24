@@ -29,6 +29,9 @@ alternative_order text/plain text text/enriched
 bind index <Return> display-message
 bind pager,index R group-reply
 
+# TODO add to vimrc mappings
+bind index zc collapse-thread
+
 # in order to do http://flavioleitner.blogspot.com/2011/03/patch-workflow-with-mutt-and-git.html
 set pipe_split=yes
 

@@ -47,7 +47,10 @@ rec {
   # # for ubuntu grub to discover
   #   grub.device = "/dev/sda";
   # };
-
+  services.journald.extraConfig = ''
+    # alternatively one can run journalctl --vacuum-time=2d
+    SystemMaxUse=2G
+  '';
   # see https://github.com/NixOS/nixpkgs/issues/15293
 
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.

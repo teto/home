@@ -8,12 +8,18 @@ let
 in
 rec {
 
-  termite-unwrapped = super.termite-unwrapped.overrideAttrs(oa: {
-    postBuild = ''
-      substituteInPlace termite.terminfo \
-        --replace "smcup=\E[?1049h," "smcup=\E[?1049h\E[22;0;0t," \
-        --replace "rmcup=\E[?1049l," "rmcup=\E[?1049l\E[23;0;0t"
-    '';
+  # termite-unwrapped = super.termite-unwrapped.overrideAttrs(oa: {
+  #   postBuild = ''
+  #     substituteInPlace termite.terminfo \
+  #       --replace "smcup=\E[?1049h," "smcup=\E[?1049h\E[22;0;0t," \
+  #       --replace "rmcup=\E[?1049l," "rmcup=\E[?1049l\E[23;0;0t"
+  #   '';
+  # });
+
+  direnv = super.direnv.overrideAttrs (oa: {
+    src = builtins.fetchGit {
+      url = https://github.com/direnv/direnv.git;
+    };
   });
 
   i3-local = let i3path = ~/i3; in

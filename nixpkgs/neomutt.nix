@@ -16,9 +16,8 @@
 
     sort = "threads";
 
-    extraStructuredConfig = {
-
-    };
+    # settings = {
+    # };
 
     extraConfig = ''
       source $XDG_CONFIG_HOME/neomutt/test.rc

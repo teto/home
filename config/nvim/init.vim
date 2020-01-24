@@ -96,7 +96,7 @@ Plug 'MattesGroeger/vim-bookmarks' " ruby  / :BookmarkAnnotate
 Plug 'liuchengxu/vista.vim' " replaces tagbar to list workplace symbols
 " Plug 'neovim/nvim-lsp' " while fuzzing details out
 Plug '~/nvim-lsp' " while fuzzing details out
-Plug 'puremourning/vimspector' " to debug programs
+" Plug 'puremourning/vimspector' " to debug programs
 Plug 'hotwatermorning/auto-git-diff' " to help rebasing
 Plug 'christoomey/vim-conflicted' " toto
 Plug 'norcalli/nvim-terminal.lua' " to display ANSI colors
@@ -278,7 +278,7 @@ Plug 'PotatoesMaster/i3-vim-syntax'
 " Plug 'git@github.com:milkypostman/vim-togglelist' " same
 " still problems with airline when installed via nix
 " Plug '907th/vim-auto-save' " :h auto-save
-" Plug 'teto/vim-auto-save' " autosave :h auto-save
+Plug 'teto/vim-auto-save' " autosave :h auto-save
 Plug 'bfredl/nvim-miniyank' " killring alike plugin, cycling paste careful search for :Yank commands
 " hangs with big strings
 
@@ -1887,9 +1887,7 @@ nnoremap gO i<CR>
 " nnoremap <Leader>lg @g
 
 " testing my PR
-if has("nvim-0.4.0")
-  set signcolumn=auto:3
-endif
+set signcolumn=auto:3
 
 function! FzfFlipBool()
   " let l:dict = {}
@@ -1974,9 +1972,9 @@ augroup END
 " augroup END
 
 " open vimrc
-nnoremap <Leader>ev :e $MYVIMRC<CR>
+nnoremap <Leader>ev <Cmd>e $MYVIMRC<CR>
 " reload vimrc
-nnoremap <Leader>sv :source $MYVIMRC<CR>
+nnoremap <Leader>sv <Cmd>source $MYVIMRC<CR>
 
 " open netrw/dirvish split
 " nnoremap <Leader>e :Vex<CR>
@@ -1985,7 +1983,6 @@ nnoremap <Leader>w :w<CR>
 "nnoremap <F8> :vertical wincmd f<CR> " open file under cursor in a split
 nnoremap <leader>gfs :vertical wincmd f<CR> " open file under cursor in a split
 
-nnoremap <LocalLeader>sv :source $MYVIMRC<CR> " reload vimrc
 
 " from justinmk
 func! ReadExCommandOutput(newbuf, cmd) abort
@@ -2019,19 +2016,19 @@ highlight NormalFloat cterm=NONE ctermfg=14 ctermbg=0 gui=NONE guifg=#93a1a1 gui
 " taken from justinmk's config
 command! Tags !ctags -R --exclude='build*' --exclude='.vim-src/**' --exclude='venv/**' --exclude='**/site-packages/**' --exclude='data/**' --exclude='dist/**' --exclude='notebooks/**' --exclude='Notebooks/**' --exclude='*graphhopper_data/*.json' --exclude='*graphhopper/*.json' --exclude='*.json' --exclude='qgis/**' *
 
-  " function! LSP_maps()
-    " nnoremap <buffer> <silent> <leader>ngd :call lsp#text_document_declaration()<CR>
-    nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
-    nnoremap <silent> K  <cmd>lua vim.lsp.buf.hover()<CR>
-    nnoremap <silent> ,gi  <cmd>lua vim.lsp.buf.implementation()<CR>
-    nnoremap ,sh <cmd>lua vim.lsp.buf.signature_help()<CR>
-  nnoremap <silent> ,td <cmd>lua vim.lsp.buf.type_definition()<CR>
-  nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
+" function! LSP_maps()
+" nnoremap <buffer> <silent> <leader>ngd :call lsp#text_document_declaration()<CR>
+nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
+nnoremap <silent> K  <cmd>lua vim.lsp.buf.hover()<CR>
+nnoremap <silent> ,gi  <cmd>lua vim.lsp.buf.implementation()<CR>
+nnoremap ,sh <cmd>lua vim.lsp.buf.signature_help()<CR>
+nnoremap <silent> ,td <cmd>lua vim.lsp.buf.type_definition()<CR>
+nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
 
-    nnoremap <silent> ,af <cmd>lua vim.lsp.buf.formatting()<CR>
-    nnoremap <silent> ,arf <cmd>lua vim.lsp.buf.range_formatting()<CR>
+nnoremap <silent> ,af <cmd>lua vim.lsp.buf.formatting()<CR>
+nnoremap <silent> ,arf <cmd>lua vim.lsp.buf.range_formatting()<CR>
 
-    " nnoremap <buffer> <silent> <leader>d :lua require("vim.lsp.util").show_line_diagnostics()<CR>
+" nnoremap <buffer> <silent> <leader>d :lua require("vim.lsp.util").show_line_diagnostics()<CR>
 
 " lua require 'init.lua'
 " Doesn't seem to work
@@ -2044,7 +2041,7 @@ lua vim.lsp.set_log_level("debug")
 " this is set per-buffer so...
 " call LSP_maps()
 
-nnoremap ]] <Cmd>cabove<CR>
+nnoremap [[ <Cmd>cabove<CR>
 nnoremap ]] <Cmd>cbelow<CR>
 
 " set omnifunc=lsp#omnifunc

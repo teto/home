@@ -300,7 +300,7 @@ rec {
   neovim-dev = (super.pkgs.neovim-unwrapped.override  {
     # name = "neovim-test";
     doCheck=true;
-    withDoc=true;
+    # withDoc=true;
     # devMode=true;
     # stdenv = clangStdenv;
 
