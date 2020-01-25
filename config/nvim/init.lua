@@ -19,6 +19,21 @@ if not nvim_lsp.lua_lsp then
   }
 end
 
+-- if not nvim_lsp.ghcide then
+  -- configs.ghcide = {
+	  -- default_config = {
+		-- name = "ghcide";
+		-- cmd = {"ghcide", "--lsp"};
+		-- filetypes = { "hs", "lhs", "haskell" };
+		-- root_dir = function(fname)
+			-- return nvim_lsp.util.find_git_ancestor(fname) or vim.loop.os_homedir()
+		-- end;
+		-- log_level = vim.lsp.protocol.MessageType.Warning;
+		-- settings = {};
+	-- };
+  -- }
+-- end
+
 nvim_lsp.lua_lsp.setup{}
 -- sumneko_lua
 -- nvim_lsp.lua_lsp.setup{
@@ -36,9 +51,8 @@ nvim_lsp.lua_lsp.setup{}
 
 -- todo create one for ghcide
 nvim_lsp.ghcide.setup({
-	name = "ghcide";
-	cmd = {"ghcide", "--lsp"};
-	filetypes = { "hs", "lhs", "haskell" };
+	log_level = vim.lsp.protocol.MessageType.Log;
+	root_dir = nvim_lsp.util.root_pattern(".git");
 })
 
 -- nvim_lsp.hie.setup({
