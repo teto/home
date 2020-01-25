@@ -172,7 +172,7 @@ in
     # pkgs.up # live preview of pipes
     pkgs.peek # GIF recorder
 
-    # pkgs.cachix  # almot always broken
+    unstable.cachix  # almot always broken
     ]
    ;
 

@@ -16,11 +16,11 @@ rec {
   #   '';
   # });
 
-  direnv = super.direnv.overrideAttrs (oa: {
-    src = builtins.fetchGit {
-      url = https://github.com/direnv/direnv.git;
-    };
-  });
+  # direnv = super.direnv.overrideAttrs (oa: {
+  #   src = builtins.fetchGit {
+  #     url = https://github.com/direnv/direnv.git;
+  #   };
+  # });
 
   i3-local = let i3path = ~/i3; in
   if (builtins.pathExists i3path) then
@@ -47,6 +47,7 @@ rec {
     src=/home/teto/protocol;
   });
 
+  # ghcide-nix = https://github.com/hercules-ci/ghcide-nix
   all-hies = import (fetchTarball "https://github.com/infinisil/all-hies/tarball/master") {};
 
   # nixVeryUnstable = super.nixUnstable.overrideAttrs(o: {
@@ -103,14 +104,14 @@ rec {
     };
   });
 
-  luarocks-nix = super.luarocks-nix.overrideAttrs(oa: {
-    name = "luarocks-local";
-    src = /home/teto/luarocks;
-    # src = builtins.fetchGit {
-    #   url = https://github.com/teto/luarocks/;
-    #   ref = "nix";
-    # };
-  });
+  # luarocks-nix = super.luarocks-nix.overrideAttrs(oa: {
+  #   name = "luarocks-local";
+  #   src = /home/teto/luarocks;
+  #   # src = builtins.fetchGit {
+  #   #   url = https://github.com/teto/luarocks/;
+  #   #   ref = "nix";
+  #   # };
+  # });
 
   # iperf3_lkl = super.iperf3.overrideAttrs(old: {
   # });

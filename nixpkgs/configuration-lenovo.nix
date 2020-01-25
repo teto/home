@@ -79,7 +79,8 @@ in
   swapDevices = [{
     # label = "dartagnan";
     device = "/fucking_swap";
-    size = 8192; # in MB
+    # size = 8192; # in MB
+    size = 4096; # in MB
     # size = 16000; # in MB
   } ];
 

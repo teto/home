@@ -290,7 +290,6 @@ rec {
       python-language-server
       pycodestyle
     ]
-      # ++ lib.optionals ( pkgs ? pyls-mypy) [ pyls-mypy ]
     ;
 
   };

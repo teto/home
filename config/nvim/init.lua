@@ -33,19 +33,27 @@ nvim_lsp.lua_lsp.setup{}
 -- 	filetypes = { "sh" };
 -- })
 
-nvim_lsp.hie.setup({
-	name = "hie";
-	cmd = "hie-wrapper";
+
+-- todo create one for ghcide
+nvim_lsp.ghcide.setup({
+	name = "ghcide";
+	cmd = {"ghcide", "--lsp"};
 	filetypes = { "hs", "lhs", "haskell" };
-	init_options = {};
-	-- languageServerHaskell = {
-	capabilities = {
-		hlintOn = false,
-		maxNumberOfProblems= 10,
-		completionSnippetsOn = true,
-		liquidOn = false
-	};
 })
+
+-- nvim_lsp.hie.setup({
+-- 	name = "hie";
+-- 	cmd = "hie-wrapper";
+-- 	filetypes = { "hs", "lhs", "haskell" };
+-- 	init_options = {};
+-- 	-- languageServerHaskell = {
+-- 	capabilities = {
+-- 		hlintOn = false,
+-- 		maxNumberOfProblems= 10,
+-- 		completionSnippetsOn = true,
+-- 		liquidOn = false
+-- 	};
+-- })
 
 -- vim.lsp.add_filetype_config({
 -- 	name = "latex";
