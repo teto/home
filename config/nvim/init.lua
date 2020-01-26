@@ -50,24 +50,26 @@ nvim_lsp.lua_lsp.setup{}
 
 
 -- todo create one for ghcide
-nvim_lsp.ghcide.setup({
-	log_level = vim.lsp.protocol.MessageType.Log;
-	root_dir = nvim_lsp.util.root_pattern(".git");
-})
-
--- nvim_lsp.hie.setup({
--- 	name = "hie";
--- 	cmd = "hie-wrapper";
--- 	filetypes = { "hs", "lhs", "haskell" };
--- 	init_options = {};
--- 	-- languageServerHaskell = {
--- 	capabilities = {
--- 		hlintOn = false,
--- 		maxNumberOfProblems= 10,
--- 		completionSnippetsOn = true,
--- 		liquidOn = false
--- 	};
+-- nvim_lsp.ghcide.setup({
+-- 	log_level = vim.lsp.protocol.MessageType.Log;
+-- 	root_dir = nvim_lsp.util.root_pattern(".git");
 -- })
+
+nvim_lsp.hie.setup({
+	name = "hie";
+	-- cmd = "hie-wrapper";
+	cmd = { "hie-wrapper", "--lsp", "-d", "--vomit", "--logfile", "/tmp/lsp_haskell.log"},
+	filetypes = { "hs", "lhs", "haskell" };
+	init_options = {};
+	root_dir = nvim_lsp.util.root_pattern(".git");
+	-- languageServerHaskell = {
+	-- capabilities = {
+	-- 	hlintOn = false,
+	-- 	maxNumberOfProblems= 10,
+	-- 	completionSnippetsOn = true,
+	-- 	liquidOn = false
+	-- };
+})
 
 -- vim.lsp.add_filetype_config({
 -- 	name = "latex";
@@ -142,19 +144,19 @@ nvim_lsp.pyls.setup({
 })
 
 -- jsut to check if issues are mine or not
--- do
---   local method = 'textDocument/publishDiagnostics'
---   local default_callback = vim.lsp.callbacks[method]
---   vim.lsp.callbacks[method] = function(err, method, result, client_id)
---     default_callback(err, method, result, client_id)
---     if result and result.diagnostics then
---       for _, v in ipairs(result.diagnostics) do
---         v.uri = v.uri or result.uri
---       end
---       vim.lsp.util.set_loclist(result.diagnostics)
---     end
---   end
--- end
+do
+  local method = 'textDocument/publishDiagnostics'
+  local default_callback = vim.lsp.callbacks[method]
+  vim.lsp.callbacks[method] = function(err, method, result, client_id)
+    default_callback(err, method, result, client_id)
+    if result and result.diagnostics then
+      for _, v in ipairs(result.diagnostics) do
+        v.uri = v.uri or result.uri
+      end
+      vim.lsp.util.set_loclist(result.diagnostics)
+    end
+  end
+end
 
 
 
