@@ -285,7 +285,7 @@ in
 
 
   services.mpd = {
-    enable = true;
+    enable = false;
     # dataDir = xdg.dataDir
     # musicDirectory = 
     # extraConfig = 
@@ -382,5 +382,6 @@ in
 
 # [Removed Associations]
 # application/pdf=Mendeley.desktop
+
 
 }

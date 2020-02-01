@@ -314,6 +314,7 @@ Plug 'teto/vim-listchars' " to cycle between different list/listchars configurat
 "Plug 'justinmk/vim-gtfo' " ?
 Plug 'tpope/vim-rhubarb' " github support in fugitive, use |i_CTRL-X_CTRL-O|
 "Plug 'jaxbot/github-issues.vim' " works only with vim
+" Plug 'machakann/vim-sandwich' " deal with sandwiched objects
 "Plug 'tpope/vim-surround' " don't realy know how to use yet
 " Plug 'junegunn/vim-peekaboo' " gives a preview of buffers when pasting, need ruby ?
 
@@ -2041,8 +2042,8 @@ lua vim.lsp.set_log_level("debug")
 " this is set per-buffer so...
 " call LSP_maps()
 
-nnoremap [[ <Cmd>cabove<CR>
-nnoremap ]] <Cmd>cbelow<CR>
+nnoremap [[ <Cmd>labove<CR>
+nnoremap ]] <Cmd>lbelow<CR>
 
 " set omnifunc=lsp#omnifunc
   " autocmd Filetype rust,python,go,c,cpp setl omnifunc=v:lua.vim.lsp.omnifunc

@@ -50,26 +50,34 @@ nvim_lsp.lua_lsp.setup{}
 
 
 -- todo create one for ghcide
--- nvim_lsp.ghcide.setup({
--- 	log_level = vim.lsp.protocol.MessageType.Log;
--- 	root_dir = nvim_lsp.util.root_pattern(".git");
--- })
-
-nvim_lsp.hie.setup({
-	name = "hie";
-	-- cmd = "hie-wrapper";
-	cmd = { "hie-wrapper", "--lsp", "-d", "--vomit", "--logfile", "/tmp/lsp_haskell.log"},
-	filetypes = { "hs", "lhs", "haskell" };
-	init_options = {};
+nvim_lsp.ghcide.setup({
+	log_level = vim.lsp.protocol.MessageType.Log;
 	root_dir = nvim_lsp.util.root_pattern(".git");
-	-- languageServerHaskell = {
-	-- capabilities = {
-	-- 	hlintOn = false,
-	-- 	maxNumberOfProblems= 10,
-	-- 	completionSnippetsOn = true,
-	-- 	liquidOn = false
-	-- };
 })
+
+--nvim_lsp.hie.setup({
+--	name = "hie";
+--	-- cmd = "hie-wrapper";
+--	cmd = { "hie-wrapper", "--lsp", "-d", "--vomit", "--logfile", "/tmp/lsp_haskell.log"},
+--	filetypes = { "hs", "lhs", "haskell" };
+--	-- init_options = {};
+--	root_dir = nvim_lsp.util.root_pattern(".git");
+--	-- languageServerHaskell = {
+
+--	log_level = vim.lsp.protocol.MessageType.Error;
+--	--careful, without this, we get a warning from hie
+--	init_options = {
+--		languageServerHaskell = {
+--			hlintOn = false;
+--			-- maxNumberOfProblems = number;
+--			-- diagnosticsDebounceDuration = number;
+--			-- liquidOn = bool (default false);
+--			completionSnippetsOn = true;
+--			-- formatOnImportOn = bool (default true);
+--			-- formattingProvider = string (default "brittany", alternate "floskell");
+--		}
+--	};
+--})
 
 -- vim.lsp.add_filetype_config({
 -- 	name = "latex";

@@ -9,7 +9,7 @@ rec {
     enableDoxygen = false;
     build_profile = "optimized";
     # withManual = true;
-    pythonSupport = true;
+    pythonSupport = false;
     python = super.python3;
     wafHook = super.wafHook.override({python = super.python3;});
   }))

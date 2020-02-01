@@ -8,7 +8,6 @@ in
     # todo renommer en workstation
     # ./hardware-dell.nix
    ./hardware-lenovo.nix
-    # /etc/nixos/hardware-configuration.nix
 
     ./modules/distributedBuilds.nix
     ./config-all.nix
@@ -35,8 +34,7 @@ in
     #   _file = "matt";
     #   # boot.kernel.checkPackageConfig = true;
     # })
-    # ./modules/mptcp.nix
-
+    ./modules/mptcp.nix
   ]
   ;
 
@@ -128,7 +126,7 @@ in
   # DOES NOT WORK !
   # boot.kernelPackages = unstable.pkgs.linuxPackages;
   # boot.kernelPackages = pkgs.linuxPackages;
-  boot.kernelPackages = pkgs.linuxPackages;
+  # boot.kernelPackages = pkgs.linuxPackages;
 
   # boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_latest_without_ns;
 
