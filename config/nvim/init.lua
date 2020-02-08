@@ -1,11 +1,11 @@
 -- How to add a new server
 -- https://github.com/neovim/nvim-lsp/issues/41
 local nvim_lsp = require 'nvim_lsp'
-local configs = require'nvim_lsp/skeleton'
+local configs = require'nvim_lsp/configs'
 
 -- vim.lsp.util.show_current_line_diagnostics()
 -- Check if it's already defined for when I reload this file.
-if not nvim_lsp.lua_lsp then
+if not configs.lua_lsp then
   configs.lua_lsp = {
     default_config = {
       cmd = {'lua-lsp'};

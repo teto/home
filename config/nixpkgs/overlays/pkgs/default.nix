@@ -12,6 +12,7 @@ final: prev:
   #   stdenv=prev.clangStdenv;
   #   llvm=prev.llvm_5;
   # };
+
   buku_run = prev.stdenv.mkDerivation rec {
     pname = "buku_run";
     version = "0.1.1";
@@ -122,7 +123,7 @@ final: prev:
 
   rofi-scripts = prev.callPackage ./rofi-scripts {};
 
-  sumneko = prev.callPackage ./sumneko.nix {};
+  # sumneko = prev.callPackage ./sumneko.nix {};
 
   tree-sitter-nix-shared = prev.callPackage ./tree-sitter-grammars/nix.nix {
     language = "nix";

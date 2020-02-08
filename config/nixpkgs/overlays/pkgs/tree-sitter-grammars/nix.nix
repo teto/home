@@ -18,10 +18,10 @@ stdenv.mkDerivation {
   configurePhase= ":";
   buildPhase = ''
     echo $src
-    gcc -I$src/src/ -shared -o shared.so -Os $src/src/parser.c
+    gcc -I$src/src/ -shared -o parser -Os $src/src/parser.c
   '';
   installPhase = ''
     mkdir $out
-    cp shared.so $out/
+    cp parser $out/
   '';
 }

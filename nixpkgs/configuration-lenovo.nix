@@ -341,4 +341,6 @@ in
     ln -s ${config.boot.kernelPackages.kernel.dev}/vmlinux $out/vmlinux
   '';
 
+  # environment.ld-linux = true;
+
 }

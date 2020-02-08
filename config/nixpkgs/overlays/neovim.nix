@@ -178,15 +178,14 @@ rec {
       src = builtins.fetchGit {
         url = https://github.com/neovim/neovim.git;
         ref = "master";
-
         # url = https://github.com/teto/neovim.git;
-        # ref = "libuv_notif";
+        # ref = "treesitter_fix";
       };
       # src = super.fetchFromGitHub {
-      #   owner = "neovim";
+      #   owner = "teto";
       #   repo = "neovim";
-      #   rev = "b1e4ec1c2a08981683b2355715a421c0bfb64644";
-      #   sha256 = "XeEzsh1qtdd/uthsStkZsmCydDm+kcCplpSB+gNwArI=";
+      #   rev = "b81427c114fc36c96bb30655cb572eed6b503832";
+      #   sha256 = "XeEzsh2qtdd/uthsStkZsmCydDm+kcCplpSB+gNwArI=";
       # };
 
   });

@@ -97,6 +97,7 @@ Plug 'liuchengxu/vista.vim' " replaces tagbar to list workplace symbols
 " Plug 'neovim/nvim-lsp' " while fuzzing details out
 Plug '~/nvim-lsp' " while fuzzing details out
 " Plug 'puremourning/vimspector' " to debug programs
+Plug 'bfredl/nvim-luadev'  " lua repl :Luadev
 Plug 'hotwatermorning/auto-git-diff' " to help rebasing
 Plug 'christoomey/vim-conflicted' " toto
 Plug 'norcalli/nvim-terminal.lua' " to display ANSI colors
@@ -106,6 +107,7 @@ Plug 'glacambre/firenvim' " to use nvim in firefox
 " Plug 'liuchengxu/vim-clap' " fuzzer
 Plug 'alok/notational-fzf-vim' " to take notes
 Plug 'iamcco/markdown-preview.nvim' " test , most recent
+Plug 'suy/vim-context-commentstring'
 " Plug 'rhysd/git-messenger.vim' " to show git message
 " Plug 'voldikss/vim-translate-me' " floating windows for neovim
 " Plug 'chrisbra/Colorizer'
@@ -132,7 +134,7 @@ Plug 'Konfekt/vim-CtrlXA' " use ctrl a/xto cycle between different words
 " provider dependant {{{
 " new deoplete relies on yarp :
 Plug 'AndrewRadev/splitjoin.vim' " gS/gJ to
-" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 " Plug 'roxma/nvim-yarp' " required for deoplete
 " Plug 'roxma/vim-hug-neovim-rpc' " what is that ? required for deoplete
 " Plug '~/vim-config'
@@ -187,10 +189,10 @@ Plug 'bronson/vim-trailing-whitespace' " :FixWhitespace
 " Plug 'metakirby5/codi.vim', {'on': 'Codi'} " repl
 " Plug 'hkupty/iron.nvim', {'do': ':UpdateRemotePlugins'}
 " careful it maps cl by default
-" Plug 'vigemus/iron.nvim', { 'branch': 'lua/replace' }
+Plug 'vigemus/iron.nvim'    ", { 'branch': 'lua/replace' }
 " Plug 'jalvesaq/vimcmdline' " no help files, mappings clunky
 " github mirror of Plug 'http://gitlab.com/HiPhish/repl.nvim'
-Plug 'http://gitlab.com/HiPhish/repl.nvim'
+" Plug 'http://gitlab.com/HiPhish/repl.nvim' " no commit for the past 2 years
 " vimcmdline mappings{{{
 let cmdline_map_start          = "<LocalLeader>s"
 let cmdline_map_send           = "<Space>"
@@ -490,6 +492,7 @@ map <C-N><C-N> <Cmd>set invnumber<CR>
 " to load plugins in ftplugin matching ftdetect
 filetype plugin on
 syntax on
+let g:vimsyn_embed = 'lP'  " support embedded lua, python and ruby
 
 " vimspector {{{
 let g:vimspector_enable_mappings = 'HUMAN'
@@ -1196,7 +1199,7 @@ vnoremap <leader>rg  :Grepper -tool rg -open -switch
 " removed to test default values
 " ,foldend:^ ┬ 
   set fillchars+=foldopen:▾,foldsep:│
-  " set fillchars+=foldclose:▸
+  set fillchars+=foldclose:▸
   " echo "doing it"
   " set fdc=-1
 " }}}
@@ -1527,6 +1530,7 @@ nmap <F1>  <Plug>(ListToggleQToggle)
 " ctr send a chunk of text with motion
 " nmap <localleader>t <Plug>(iron-send-motion)
 let g:iron_repl_open_cmd="vsplit"
+luafile $HOME/.config/nvim/iron-config.lua
 " let g:iron_new_repl_hooks
 " let g:iron_new_lua_repl_hooks
 "let g:iron_map_defaults

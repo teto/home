@@ -56,20 +56,20 @@ rec {
         mininet = pythonsuper.alot.overrideAttrs (oldAttrs: {
         });
 
-        alot = pythonsuper.alot.overrideAttrs (oldAttrs: {
-          name = "alot-dev";
-          version = "0.9-dev";
-          src = builtins.fetchGit {
-            url = https://github.com/pazz/alot.git;
-          };
+        # alot = pythonsuper.alot.overrideAttrs (oldAttrs: {
+        #   name = "alot-dev";
+        #   version = "0.9-dev";
+        #   src = builtins.fetchGit {
+        #     url = https://github.com/pazz/alot.git;
+        #   };
 
-          # src = super.fetchFromGitHub {
-          #   owner = "pazz";
-          #   repo = "alot";
-          #   rev = "6bb18fa97c78b3cb1fcb60ce5d850602b55e358f";
-          #   sha256 = "1l8b32ly0fvzwsy3f3ywwi0plckm31y269xxckmgi02sdwisq1ah";
-          # };
-        });
+        #   # src = super.fetchFromGitHub {
+        #   #   owner = "pazz";
+        #   #   repo = "alot";
+        #   #   rev = "6bb18fa97c78b3cb1fcb60ce5d850602b55e358f";
+        #   #   sha256 = "1l8b32ly0fvzwsy3f3ywwi0plckm31y269xxckmgi02sdwisq1ah";
+        #   # };
+        # });
 
         papis-dev = pythonsuper.papis.overridePythonAttrs (oa: {
           version = "1.0-dev";
