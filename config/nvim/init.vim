@@ -187,9 +187,8 @@ Plug 'bronson/vim-trailing-whitespace' " :FixWhitespace
 
 " REPL (Read Execute Present Loop) {{{
 " Plug 'metakirby5/codi.vim', {'on': 'Codi'} " repl
-" Plug 'hkupty/iron.nvim', {'do': ':UpdateRemotePlugins'}
 " careful it maps cl by default
-Plug 'vigemus/iron.nvim'    ", { 'branch': 'lua/replace' }
+" Plug 'vigemus/iron.nvim'    ", { 'branch': 'lua/replace' }
 " Plug 'jalvesaq/vimcmdline' " no help files, mappings clunky
 " github mirror of Plug 'http://gitlab.com/HiPhish/repl.nvim'
 " Plug 'http://gitlab.com/HiPhish/repl.nvim' " no commit for the past 2 years
@@ -248,7 +247,6 @@ Plug 'neovimhaskell/haskell-vim', {'for':'haskell'} " haskell install
 " Plug 'deoplete-plugins/deoplete-make' " empty !
 " Plug 'deoplete-plugins/deoplete-zsh'
 " Plug 'deoplete-plugins/deoplete-jedi'
-" Plug 'deoplete-plugins/deoplete-clang'
 "
 " Plug 'ncm2/float-preview.nvim'
 "}}}
@@ -1415,8 +1413,8 @@ command! YanksBefore call fzf#run(fzf#wrap('YanksBefore', {
 \ 'options': '--no-sort --prompt="Yanks-P> "',
 \ }))
 
-map <A-p> :YanksAfter<CR>
-map <A-P> :YanksBefore<CR>
+map <A-p> <Cmd>YanksAfter<CR>
+map <A-P> <Cmd>YanksBefore<CR>
 
 :
 "}}}
@@ -1530,7 +1528,8 @@ nmap <F1>  <Plug>(ListToggleQToggle)
 " ctr send a chunk of text with motion
 " nmap <localleader>t <Plug>(iron-send-motion)
 let g:iron_repl_open_cmd="vsplit"
-luafile $HOME/.config/nvim/iron-config.lua
+" if TODO only if included
+" luafile $HOME/.config/nvim/iron-config.lua
 " let g:iron_new_repl_hooks
 " let g:iron_new_lua_repl_hooks
 "let g:iron_map_defaults
@@ -2053,6 +2052,27 @@ nnoremap ]] <Cmd>lbelow<CR>
   " autocmd Filetype rust,python,go,c,cpp setl omnifunc=v:lua.vim.lsp.omnifunc
 
 set omnifunc=v:lua.vim.lsp.omnifunc
+" ✘'
+let g:LspDiagnosticsErrorSign = 'T'
+let g:LspDiagnosticsWarningSign = 'W'
+let g:LspDiagnosticsInformationSign = 'I'
+let g:LspDiagnosticsHintSign = 'H'
+
+  function! LspStatus() abort
+      let sl = ''
+      if luaeval('server_ready()')
+	  let sl.='%#MyStatuslineLSP#E:'
+	  let sl.='%#MyStatuslineLSPErrors#%{luaeval("buf_diagnostics_count(\"Error\")")}'
+	  let sl.='%#MyStatuslineLSP# W:'
+	  let sl.='%#MyStatuslineLSPWarnings#%{luaeval("buf_diagnostics_count(\"Warning\")")}'
+      else
+	  let sl.='%#MyStatuslineLSPErrors#off'
+      endif
+      return sl
+  endfunction
+" not upstreamed yet
+" let &l:statusline = '%#MyStatuslineLSP#LSP '.LspStatus() 
+
 " lua vim.treesitter.add_language("/home/teto/tree-sitter-c/build/Release/tree_sitter_c_binding.node", "c")
 " vim.lsp.util.set_qflist
 " location_callback
