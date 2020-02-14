@@ -93,6 +93,7 @@ Plug 'MattesGroeger/vim-bookmarks' " ruby  / :BookmarkAnnotate
 " Plug 'andymass/vim-matchup' " to replace matchit
 " Plug 'AGhost-7/critiq.vim' " :h critiq
 " Plug 'wellle/context.vim' " show current function for example
+Plug 'skywind3000/vim-quickui' " 
 Plug 'liuchengxu/vista.vim' " replaces tagbar to list workplace symbols
 " Plug 'neovim/nvim-lsp' " while fuzzing details out
 Plug '~/nvim-lsp' " while fuzzing details out
@@ -2090,3 +2091,26 @@ let g:LspDiagnosticsHintSign = 'H'
 
 " disable [1/5]
 " set shortmess+=S
+"
+"
+" quickui {{{
+" https://github.com/skywind3000/vim-quickui
+let g:quickui_border_style = 1
+let content = [
+            \ ["&Help Keyword\t\\ch", 'echo 100' ],
+            \ ["&Signature\t\\cs", 'echo 101'],
+            \ ['-'],
+            \ ["Find in &File\t\\cx", 'echo 200' ],
+            \ ["Find in &Project\t\\cp", 'echo 300' ],
+            \ ["Find in &Defintion\t\\cd", 'echo 400' ],
+            \ ["Search &References\t\\cr", 'echo 500'],
+            \ ['-'],
+            \ ["&Documentation\t\\cm", 'echo 600'],
+            \ ]
+" set cursor to the last position
+let opts = {'index':g:quickui#context#cursor}
+
+map <RightMouse>  <Cmd>call quickui#context#open(content, opts)<CR>
+
+" call quickui#context#open(content, opts)
+" }}}
