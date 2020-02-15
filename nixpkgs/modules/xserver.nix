@@ -15,7 +15,7 @@
     enable = true;
     autorun = true;
     displayManager = {
-      auto = {
+      lightdm.autoLogin = {
         enable = false;
         user = "teto";
       };

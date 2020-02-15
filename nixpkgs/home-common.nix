@@ -36,6 +36,9 @@ rec {
     # just in my branch :'(
     pkgs.luaPackages.lua-lsp
     pkgs.dtrx  # to compress stuff
+	pkgs.pdftotext  # should ideally be described only in neovim's rc
+
+	# TODO try i3-snapshot
 
     # vim-vint  # 
     # nixpkgs-fmt

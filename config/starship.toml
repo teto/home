@@ -47,6 +47,12 @@ disabled = true
 [git_state]
 disabled = true
 
+[git_branch]
+disabled = false
+
+[haskell]
+disabled = true
+
 [python]
 symbol = "👾 "
 pyenv_version_name = false

@@ -109,7 +109,7 @@ Plug 'glacambre/firenvim' " to use nvim in firefox
 Plug 'alok/notational-fzf-vim' " to take notes
 Plug 'iamcco/markdown-preview.nvim' " test , most recent
 Plug 'suy/vim-context-commentstring'
-" Plug 'rhysd/git-messenger.vim' " to show git message
+Plug 'rhysd/git-messenger.vim' " to show git message :GitMessenger
 " Plug 'voldikss/vim-translate-me' " floating windows for neovim
 " Plug 'chrisbra/Colorizer'
 " Plug 'ndmitchell/ghcid', { 'rtp': 'plugins/nvim' }
@@ -469,7 +469,6 @@ set showmatch
 " Use visual bell instead of beeping when doing something wrong
 set visualbell
 set errorbells " easier to test visualbell with it
-set nostartofline " empeche c_f / c_b de changer de colonne
 
 " if boths are set at the same time, vim uses an hybrid mode
 " Display line numbers on the left
@@ -535,7 +534,7 @@ set wildoptions+=pum
 " Modeliner shortcuts  {{{
 set modeline
 set modelines=4 "number of lines checked
-nmap <leader>ml :Modeliner<Enter>
+nmap <leader>ml <Cmd>Modeliner<Enter>
 let g:Modeliner_format = 'et ff= fenc= sts= sw= ts= fdm='
 " }}}
 "clipboard {{{
@@ -629,9 +628,6 @@ set wrap
 set linebreak " better display (makes sense only with wrap)
 set breakindent " preserve or add indentation on wrap
 let &showbreak = '↳ '  	" displayed in front of wrapped lines
-if has ("signcolumn")
-  set signcolumn=auto " display signcolumn depending on
-endif
 
 " @:NonText
 " set highlight
@@ -688,7 +684,6 @@ let g:firenvim_config = {
     \ }
 \ }
 "}}}
-
 " float-preview {{{
 let g:float_preview#docked = 0
 " let g:float_preview#win
