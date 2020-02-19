@@ -170,7 +170,7 @@ let g:vim_search_pulse_duration = 400
 
 " Plug 'ehamberg/vim-cute-python' " display unicode characters, kinda looks bad on vim grid
 Plug 'dbakker/vim-projectroot' " projectroot#guess()
-" Plug 'sunaku/vim-dasht' " get documentation (zeavim is also a contender KabbAmine/zeavim.vim)
+Plug 'sunaku/vim-dasht' " get documentation (zeavim is also a contender KabbAmine/zeavim.vim)
 " Plug 'mtth/scratch.vim' " , {'on': 'Scratch'} mapped to ?
 " Plug 'tjdevries/vim-inyoface.git' "InYoFace_toggle to display only comments
 " todo depend de rust
@@ -2016,10 +2016,29 @@ highlight NormalFloat cterm=NONE ctermfg=14 ctermbg=0 gui=NONE guifg=#93a1a1 gui
 " taken from justinmk's config
 command! Tags !ctags -R --exclude='build*' --exclude='.vim-src/**' --exclude='venv/**' --exclude='**/site-packages/**' --exclude='data/**' --exclude='dist/**' --exclude='notebooks/**' --exclude='Notebooks/**' --exclude='*graphhopper_data/*.json' --exclude='*graphhopper/*.json' --exclude='*.json' --exclude='qgis/**' *
 
+
+function! Show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    " 
+    let g:res = luaeval('vim.lsp.buf.hover()')
+    if g:res == v:false && &ft == "haskell"
+	" 	let result=coc#util#echo_line()
+	" 	echom result
+	" 	if result == tpl
+	" 		echom "haskell fallback"
+	" 	endif
+		execute '!hoogle '.expand('<cword>')
+	endif
+  endif
+endfunction
+
 " function! LSP_maps()
 " nnoremap <buffer> <silent> <leader>ngd :call lsp#text_document_declaration()<CR>
 nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
-nnoremap <silent> K  <cmd>lua vim.lsp.buf.hover()<CR>
+" nnoremap <silent> K  <cmd>lua vim.lsp.buf.hover()<CR>
+nnoremap <silent> K  <cmd>Show_documentation()<CR>
 nnoremap <silent> ,gi  <cmd>lua vim.lsp.buf.implementation()<CR>
 nnoremap ,sh <cmd>lua vim.lsp.buf.signature_help()<CR>
 nnoremap <silent> ,td <cmd>lua vim.lsp.buf.type_definition()<CR>
@@ -2098,7 +2117,7 @@ let content = [
             \ ["Find in &File\t\\cx", 'echo 200' ],
             \ ["Find in &Project\t\\cp", 'echo 300' ],
             \ ["Find in &Defintion\t\\cd", 'echo 400' ],
-            \ ["Search &References\t\\cr", 'echo 500'],
+            \ ["Search &References\t\\cr", '<cmd>lua vim.lsp.buf.references()<CR>'],
             \ ['-'],
             \ ["&Documentation\t\\cm", 'echo 600'],
             \ ]
