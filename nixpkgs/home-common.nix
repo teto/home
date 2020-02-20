@@ -36,7 +36,7 @@ rec {
     # just in my branch :'(
     pkgs.luaPackages.lua-lsp
     pkgs.dtrx  # to compress stuff
-	pkgs.pdftotext  # should ideally be described only in neovim's rc
+	# pkgs.pdftotext  # should ideally be described only in neovim's rc
 
 	# TODO try i3-snapshot
 
@@ -81,7 +81,7 @@ rec {
 
   # useful to prevent some problems with nix
   # https://github.com/commercialhaskell/stack/issues/2358
-  home.file.".stack/config.yaml".source = ../home/stack.yaml;
+  # home.file.".stack/config.yaml".source = ../home/stack.yaml;
 
   # 20.03
   home.stateVersion = "19.09";

@@ -38,11 +38,8 @@ let
   # boot.blacklistedKernelModules = [ "wl" ];
 
   # boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_mptcp_with_netlink;
-  # boot.kernelPackages = pkgs.linuxPackages;
   # boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_mptcp_trunk_raw;
   # boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_mptcp;
-  # boot.kernelPackages = pkgs.linuxPackages_4_14;
-# boot.kernelPackages = pkgs.linuxPackagesFor pkgs.my_lenovo_kernel;
 
 
   # programs.mininet.enable = true;

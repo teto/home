@@ -121,6 +121,8 @@ final: prev:
 
   i3dispatch = prev.python3Packages.callPackage ./i3-dispatch {};
 
+  i3-snapshot = prev.callPackage ./i3-snapshot {};
+
   rofi-scripts = prev.callPackage ./rofi-scripts {};
 
   # sumneko = prev.callPackage ./sumneko.nix {};

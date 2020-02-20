@@ -2,7 +2,6 @@
 {
   # defini dans l'overlay = ne marche pas sur les machines lointaines ?
   boot.kernelPackages = pkgs.linuxPackages_mptcp;
-  # boot.kernelPackages = pkgs.linuxPackages_mptcp-local;
 
   boot.kernelModules = [
     # "kvm"  # for virtualisation

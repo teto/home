@@ -126,7 +126,6 @@ in
   # DOES NOT WORK !
   # boot.kernelPackages = unstable.pkgs.linuxPackages;
   # boot.kernelPackages = pkgs.linuxPackages;
-  # boot.kernelPackages = pkgs.linuxPackages;
 
   # boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_latest_without_ns;
 
