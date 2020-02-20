@@ -34,3 +34,29 @@
   vim-markdown-preview = super.vim-markdown-preview.overrideAttrs(oa: {
     propagatedBuildsInputs = (oa.propagatedBuildsInputs or []) ++ [ xdotool grip ];
   });
+
+
+  markdown-preview-nvim = let
+    version = "0.0.9";
+    index_js = fetchzip {
+        # TODO fix linux/macos
+        url = "https://github.com/iamcco/markdown-preview.nvim/releases/download/v${version}/markdown-preview-linux.tar.gz";
+        sha256 = "0cqgrfyaq8nck1y6mb63gmwgdrxqzgdgns5gjshpp1xzfq6asrqj";
+      };
+    nodePackages = import ./nodepkgs.nix {
+      inherit (super) pkgs;
+      inherit (stdenv.hostPlatform) system;
+    };
+      # node2nix ./package.json
+  in super.markdown-preview-nvim.overrideAttrs(old: {
+    # you still need to enable the node js provider in your nvim config
+    # TODO fix folder
+    buildInputs = (old.buildInputs or []) ++ [nodejs] ++ (with nodePackages; [
+
+    ]);
+    postInstall = ''
+      mkdir -p $out/share/vim-plugins/coc-nvim/app
+      cp ${index_js}/index.js $out/share/vim-plugins/coc-nvim/build/
+    '';
+
+  });
