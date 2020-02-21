@@ -2,8 +2,8 @@ home
 ====
 
 This folder contains my customizations for:
-* alot (MUA: Mail User Agent, like mutt is)
-* [astroid](https://github.com/astroidmail/astroid) (like alot, but with a GUI interface)
+* [alot](https://github.com/pazz/alot) (MUA: Mail User Agent, like mutt)
+* [astroid](https://github.com/astroidmail/astroid) (MUA with a GUI)
 * bash
 * [buku](https://github.com/jarun/Buku): a cli bookmark manager
 * clerk (to control mpd via rofi)
@@ -17,7 +17,6 @@ This folder contains my customizations for:
 * [i3pystatus](https://github.com/) (generates a status line for i3bar)
 * [khard](https://github.com/pimutils/khard) (a carddav CLI)
 * [khal](https://github.com/pimutils/khal) (a calendar CLI)
-* liquidprompt (a script to make your prompt adapt to the current context)
 * mpd (configuration files to run this music server as a user)
 * [msmtp](https://marlam.de/msmtp/news) (MSA: Mail Sending Agent)
 * [neomutt](https://neomutt.org) (Mail User Agent)
@@ -28,10 +27,12 @@ This folder contains my customizations for:
 * [notmuch](www.notmuch.org) (to tag mails)
 * offlineimap (MRA: Mail Retriever Agent)
 * powerline (to generate a fancy prompt)
+* [purebred](https://github.com/purebred-mua/purebred) (terminal MUA)
 * procmail
 * [qutebrowser](www.qutebrowser.org) (vim like browser)
 * [ranger](https://github.com/ranger/ranger) (CLI file explorer)
 * [rofi](https://github.com/DaveDavenport/rofi) (a dmenu-like interactive prompt, works with clerk/i3 etc...)
+* starship (prompt manager)
 * sxiv (image viewer)
 * [termite](https://github.com/thestinger/termite) (a modal terminal)
 * [tig](https://github.com/jonas/tig) (a git history reader)
@@ -56,33 +57,17 @@ $ make nixpkgs
 
 $ make config
 # TODO pass my own fork NIX_PATH=home-manager=https://github.com/teto/home-manager/archive/master.tar.gz nix-shell <home-manager> -A install
-$ home-manager switch
+$ home-manager -I nixos-config=~/dotfiles/nixpkgs/configuration-<HOSTNAME>.nix -f ~/dotfiles/nixpkgs/home-<HOSTNAME>.nix switch
 ```
+passing eventually -I home-manager=...
 
 
 
 # How to recover the cyphered files
 
-You will need `nix run nixpkgs.git nixpkgs.gitAndTools.git-crypt` do decypher some
-`$ git-crypt status -e` to find cyphered files.
-Look at .gitattributes, you will need git-encrypt installed
-
-
-To change your shell to zsh:
-====
-chsh -s /bin/zsh <login>
-
-
-then copy files from the "examples" folder and adapt them.
-You can also copy some programs I use to the bin folder:
-	dotfiles$ cp -R bin ~/bin
-
-There might be additional more specific READMEs in subfolders.
-
-
-Neovim
-====
-:PlugUpgrade / :PlugInstall / :UpdateRemotePlugins
+Run `nix run nixpkgs.git nixpkgs.gitAndTools.git-crypt` do decypher the files
+listed by `$ git-crypt status -e` or .gitattributes.
+`$ git-crypt unlock` should unlock the files.
 
 
 To install .desktop entries

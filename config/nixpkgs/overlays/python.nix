@@ -1,18 +1,16 @@
 self: super:
 
 rec {
-  python = super.python.override {
-     # Careful, we're using a different self and super here!
-    packageOverrides = python-self: pythonsuper: {
-
-        # mininet-python = pythonsuper.mininet-python.overrideAttrs ( oa: {
-        #   src = /home/teto/mininet2;
-        # });
-
-      # };
-    };
-  };
-  pythonPackages = python.pkgs;
+  # python = super.python.override {
+  #    # Careful, we're using a different self and super here!
+  #   packageOverrides = python-self: pythonsuper: {
+  #       # mininet-python = pythonsuper.mininet-python.overrideAttrs ( oa: {
+  #       #   src = /home/teto/mininet2;
+  #       # });
+  #     # };
+  #   };
+  # };
+  # pythonPackages = python.pkgs;
 
   python3 = super.python3.override {
      # Careful, we're using a different self and super here!
@@ -98,7 +96,6 @@ rec {
           #   sha256 = "0hw8f62qri62lg1wi37n0nvw1dw6pcmrbs66zbrzwf54rpl33462";
           #   # fetchSubmodules = true;
           # };
-
         });
 
 

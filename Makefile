@@ -74,16 +74,6 @@ cache:
 	# todo should be done
 	mkdir -p ${XDG_CACHE_HOME}/less ${XDG_CACHE_HOME}/mptcpanalyzer ${XDG_CACHE_HOME}/vdirsyncer
 
-mail:
-	mkdir -p ${MAILDIR}/gmail/.notmuch
-	mkdir -p ${MAILDIR}/iij/.notmuch
-	ln -s ${MAILDIR}/pro ${MAILDIR}/iij
-	ln -s ${mkfile_dir}/hooks_pro ${MAILDIR}/pro/.notmuch/hooks
-	ln -s ${mkfile_dir}/hooks_perso ${MAILDIR}/gmail/.notmuch/hooks
-	notmuch --config=${XDG_CONFIG_HOME}/notmuch/notmuchrc new
-	notmuch --config=${XDG_CONFIG_HOME}/notmuch/notmuchrc_pro new
-
-
 fonts:
 	echo "Regenerating cache"
 	echo "list fonts with fc-list"

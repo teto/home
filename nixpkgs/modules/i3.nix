@@ -1,8 +1,10 @@
 { config, pkgs, lib,  ... }:
 let
-  # i3extraConfig = 
 
-  unstable = import <nixos-unstable> {}; # https://nixos.org/channels/nixos-unstable
+  # https://nixos.org/channels/nixos-unstable
+  unstable = import <nixos-unstable> {};
+
+  i3pystatus-custom = pkgs.i3pystatus-perso.override ({ extraLibs = with pkgs.python3Packages; [ pytz notmuch dbus-python ]; });
 
   # or use {pkgs.kitty}/bin/kitty
   term = "kitty";
@@ -57,7 +59,6 @@ in
         # i3pystatus-custom = pkgs.i3pystatus.overrideAttrs (oldAttrs: {
         #   propagatedBuildInputs = with pkgs.python3Packages; oldAttrs.propagatedBuildInputs ++ [ pytz ];
         # });
-        i3pystatus-custom = pkgs.i3pystatus-perso.override ({ extraLibs = with pkgs.python3Packages; [ pytz notmuch dbus-python ]; });
           # propagatedBuildInputs = with pkgs.python3Packages; oldAttrs.propagatedBuildInputs ++ [ pytz ];
         # });
       in [

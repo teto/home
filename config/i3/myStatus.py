@@ -16,7 +16,12 @@ from i3pystatus import Status
 
 # from i3pystatus.core.netrc_backend import NetrcBackend
 
-status = Status(standalone=True, logfile="$HOME/i3pystatus.log", click_events=True,)
+status = Status(
+    standalone=True,
+    logfile="$HOME/i3pystatus.log",
+    click_events=True,
+    check_internet=("github.com", 22)
+)
 
 my_term = "termite"
 
@@ -25,7 +30,9 @@ my_term = "termite"
 
 status.register("spotify")
 
-status.register("nix-channels")
+status.register("nix-channels",
+    channel="nixos-unstable"
+)
 
 # Displays clock like this:
 # Tue 30 Jul 11:59:46 PM KW31

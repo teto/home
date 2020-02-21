@@ -31,16 +31,22 @@ rec {
     else null;
 
     # TODO override extraLibs instead
-   i3pystatus-perso = super.i3pystatus.overrideAttrs (oldAttrs: {
+    i3pystatus-perso = (super.i3pystatus.override({
+      extraLibs = with self.pkgs.python3Packages; [ pytz notmuch dbus-python ];
+    })).overrideAttrs (oldAttrs: {
 	  name = "i3pystatus-dev";
 	  # src = null; # super.lib.cleanSource ~/i3pystatus;
       # propagatedBuildInputs = with self.python3Packages; oldAttrs.propagatedBuildInputs ++ [ pytz ];
-      src = super.fetchFromGitHub {
-        repo = "i3pystatus";
-        owner = "teto";
-        rev="0597577a21761fe5d0ce66082137c65c13354d15";
-        sha256 = "0fbcj3ps83n7v8ybihc6wk8x61l8rkqg6077zh9v58gk4j6wdyhq";
+      src = builtins.fetchGit {
+        url = https://github.com/teto/i3pystatus;
+        ref = "nix_backend";
       };
+      # src = super.fetchFromGitHub {
+      #   repo = "i3pystatus";
+      #   owner = "teto";
+      #   rev="0597577a21761fe5d0ce66082137c65c13354d15";
+      #   sha256 = "0fbcj3ps83n7v8ybihc6wk8x61l8rkqg6077zh9v58gk4j6wdyhq";
+      # };
 	});
 
   protocol-local = super.protocol.overrideAttrs (oldAttrs: {
