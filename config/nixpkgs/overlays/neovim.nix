@@ -46,7 +46,7 @@ let
       # deoplete-khard
       # TODO this one will be ok once we patch it
       # vim-markdown-composer  # WIP
-      vim-markdown-preview  # WIP
+      # vim-markdown-preview  # WIP
       vim-highlightedyank
       vim-commentary
 

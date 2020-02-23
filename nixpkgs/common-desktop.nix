@@ -171,8 +171,8 @@ in
     # now with nix build -f channel:nixos-unstable
     # TODO use options.nix.nixPath.default ++
     nixPath = [
-      # "nixos-unstable=https://github.com/nixos/nixpkgs-channels/archive/nixos-unstable.tar.gz"
-      # "nixos=https://github.com/nixos/nixpkgs-channels/archive/nixos-19.09.tar.gz"
+      "nixos-unstable=https://github.com/nixos/nixpkgs-channels/archive/nixos-unstable.tar.gz"
+      "nixos=https://github.com/nixos/nixpkgs-channels/archive/nixos-19.09.tar.gz"
     ]
     ++ lib.optional (builtins.pathExists userNixpkgs)  "nixpkgs=${builtins.toString userNixpkgs}"
     ++ lib.optional (builtins.pathExists nixosConfig)  "nixos-config=${builtins.toString nixosConfig}"

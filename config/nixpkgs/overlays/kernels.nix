@@ -145,7 +145,7 @@ in rec {
 
     # triggers can't exec "lsmod"
     # defconfig = "localmodconfig";
-    kernelPatches = prev.linux_5_2.kernelPatches;
+    kernelPatches = prev.linux_5_4.kernelPatches;
     # does not seem true anymore
     # preferBuiltin = false;
     ignoreConfigErrors=true;
