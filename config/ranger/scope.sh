@@ -1,4 +1,4 @@
-#!/nix/store/flb9ar1xdd13c606aa4my9miy3iv4vyk-bash-4.4-p12/bin/sh
+#!/bin/sh
 # ranger supports enhanced previews.  If the option "use_preview_script"
 # is set to True and this file exists, this script will be called and its
 # output is displayed in ranger.  ANSI color codes are supported.

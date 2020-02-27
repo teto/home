@@ -49,35 +49,34 @@ nvim_lsp.lua_lsp.setup{}
 -- })
 
 
--- todo create one for ghcide
--- nvim_lsp.ghcide.setup({
--- 	log_level = vim.lsp.protocol.MessageType.Log;
--- 	root_dir = nvim_lsp.util.root_pattern(".git");
--- })
-
-nvim_lsp.hie.setup({
-	name = "hie";
-	-- cmd = "hie-wrapper";
-	cmd = { "hie-wrapper", "--lsp", "-d", "--vomit", "--logfile", "/tmp/lsp_haskell.log"},
-	filetypes = { "hs", "lhs", "haskell" };
-	-- init_options = {};
+nvim_lsp.ghcide.setup({
+	log_level = vim.lsp.protocol.MessageType.Log;
 	root_dir = nvim_lsp.util.root_pattern(".git");
-	-- root_dir = function () return "/home/teto/test-task-2-final/solution" end;
-
-	log_level = vim.lsp.protocol.MessageType.Error;
-	--careful, without this, we get a warning from hie
-	init_options = {
-		languageServerHaskell = {
-			hlintOn = false;
-			-- maxNumberOfProblems = number;
-			-- diagnosticsDebounceDuration = number;
-			-- liquidOn = bool (default false);
-			completionSnippetsOn = true;
-			-- formatOnImportOn = bool (default true);
-			-- formattingProvider = string (default "brittany", alternate "floskell");
-		}
-	};
 })
+
+--nvim_lsp.hie.setup({
+--	name = "hie";
+--	-- cmd = "hie-wrapper";
+--	cmd = { "hie-wrapper", "--lsp", "-d", "--vomit", "--logfile", "/tmp/lsp_haskell.log"},
+--	filetypes = { "hs", "lhs", "haskell" };
+--	-- init_options = {};
+--	root_dir = nvim_lsp.util.root_pattern(".git");
+--	-- root_dir = function () return "/home/teto/test-task-2-final/solution" end;
+
+--	log_level = vim.lsp.protocol.MessageType.Error;
+--	--careful, without this, we get a warning from hie
+--	init_options = {
+--		languageServerHaskell = {
+--			hlintOn = false;
+--			-- maxNumberOfProblems = number;
+--			-- diagnosticsDebounceDuration = number;
+--			-- liquidOn = bool (default false);
+--			completionSnippetsOn = true;
+--			-- formatOnImportOn = bool (default true);
+--			-- formattingProvider = string (default "brittany", alternate "floskell");
+--		}
+--	};
+--})
 
 -- vim.lsp.add_filetype_config({
 -- 	name = "latex";
@@ -166,5 +165,8 @@ do
   end
 end
 
-
+-- to disable virtualtext check 
+-- follow https://www.reddit.com/r/neovim/comments/f8u6fz/lsp_query/fip91ww/?utm_source=share&utm_medium=web2x
+-- vim.nvim_command [[autocmd CursorHold <buffer> lua vim.lsp.util.show_line_diagnostics()]]
+-- vim.nvim_command [[autocmd CursorMoved <buffer> lua vim.lsp.util.show_line_diagnostics()]]
 

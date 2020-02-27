@@ -300,15 +300,20 @@ rec {
     doCheck=true;
     # withDoc=true;
     # devMode=true;
-    # stdenv = clangStdenv;
+    stdenv = super.pkgs.clangStdenv;
 
   }).overrideAttrs(oa:{
     cmakeBuildType="debug";
-    cmakeFlags = oa.cmakeFlags ++ [ "-DMIN_LOG_LEVEL=0" ];
+    cmakeFlags = oa.cmakeFlags ++ [
+      "-DMIN_LOG_LEVEL=0"
+      "-DCLANG_ASAN_UBSAN=ON"
+    ];
 
     version = "master";
     src = builtins.fetchGit {
-      url = https://github.com/neovim/neovim.git;
+      # url = https://github.com/neovim/neovim.git;
+      url = https://github.com/teto/neovim.git;
+      ref = "folds_auto";
     };
 
     nativeBuildInputs = oa.nativeBuildInputs ++ [
@@ -317,6 +322,8 @@ rec {
       # testing between both
       self.pkgs.ccls
       self.pkgs.clang-tools  # for clangd
+
+      self.pkgs.llvm  # for llvm-symbolizer
     ];
 
     buildInputs = oa.buildInputs ++ [

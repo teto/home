@@ -20,7 +20,7 @@ status = Status(
     standalone=True,
     logfile="$HOME/i3pystatus.log",
     click_events=True,
-    check_internet=("github.com", 22)
+    internet_check=("github.com", 22)
 )
 
 my_term = "termite"

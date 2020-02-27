@@ -93,6 +93,7 @@ Plug 'MattesGroeger/vim-bookmarks' " ruby  / :BookmarkAnnotate
 " Plug 'andymass/vim-matchup' " to replace matchit
 " Plug 'AGhost-7/critiq.vim' " :h critiq
 " Plug 'wellle/context.vim' " show current function for example
+Plug 'kyazdani42/highlight.lua' " to test treesitter
 Plug 'skywind3000/vim-quickui' " 
 Plug 'liuchengxu/vista.vim' " replaces tagbar to list workplace symbols
 " Plug 'neovim/nvim-lsp' " while fuzzing details out
@@ -2034,7 +2035,7 @@ function! Show_documentation()
   endif
 endfunction
 
-" function! LSP_maps()
+" lsp config {{{
 " nnoremap <buffer> <silent> <leader>ngd :call lsp#text_document_declaration()<CR>
 nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
 " nnoremap <silent> K  <cmd>lua vim.lsp.buf.hover()<CR>
@@ -2067,30 +2068,45 @@ nnoremap ]] <Cmd>lbelow<CR>
   " autocmd Filetype rust,python,go,c,cpp setl omnifunc=v:lua.vim.lsp.omnifunc
 
 set omnifunc=v:lua.vim.lsp.omnifunc
+
+
+autocmd CursorHold <buffer> lua vim.lsp.util.show_line_diagnostics()
+autocmd CursorMoved <buffer> lua vim.lsp.util.show_line_diagnostics()
+
+" https://github.com/neovim/neovim/pull/11638
+" autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
+" autocmd CursorHoldI <buffer> lua vim.lsp.buf.document_highlight()
+" autocmd CursorMoved <buffer> lua vim.lsp.util.buf_clear_references()
+
 " ✘'
 let g:LspDiagnosticsErrorSign = 'T'
-let g:LspDiagnosticsWarningSign = 'W'
+let g:LspDiagnosticsWarningSign = 'R'
 let g:LspDiagnosticsInformationSign = 'I'
 let g:LspDiagnosticsHintSign = 'H'
 
-  function! LspStatus() abort
-      let sl = ''
-      if luaeval('server_ready()')
-	  let sl.='%#MyStatuslineLSP#E:'
-	  let sl.='%#MyStatuslineLSPErrors#%{luaeval("buf_diagnostics_count(\"Error\")")}'
-	  let sl.='%#MyStatuslineLSP# W:'
-	  let sl.='%#MyStatuslineLSPWarnings#%{luaeval("buf_diagnostics_count(\"Warning\")")}'
-      else
-	  let sl.='%#MyStatuslineLSPErrors#off'
-      endif
-      return sl
-  endfunction
-" not upstreamed yet
+" function! LspStatus() abort
+"     let sl = ''
+"     if luaeval('vim.lsp.buf.server_ready()')
+"         let sl.='%#MyStatuslineLSP#E:'
+"         let sl.='%#MyStatuslineLSPErrors#%{luaeval("vim.lsp.util.buf_diagnostics_count(\"Error\")")}'
+"         let sl.='%#MyStatuslineLSP# W:'
+"         let sl.='%#MyStatuslineLSPWarnings#%{luaeval("vim.lsp.util.buf_diagnostics_count(\"Warning\")")}'
+"     else
+"         let sl.='%#MyStatuslineLSPErrors#off'
+"     endif
+"     return sl
+" endfunction
+
 " let &l:statusline = '%#MyStatuslineLSP#LSP '.LspStatus() 
 
-" lua vim.treesitter.add_language("/home/teto/tree-sitter-c/build/Release/tree_sitter_c_binding.node", "c")
 " vim.lsp.util.set_qflist
 " location_callback
+" }}}
+
+
+" treesitter config {{{
+" lua vim.treesitter.add_language("/home/teto/tree-sitter-c/build/Release/tree_sitter_c_binding.node", "c")
+"}}}
 
 " Creates a :Watch <filename> 
 " command ?
@@ -2105,8 +2121,8 @@ let g:LspDiagnosticsHintSign = 'H'
 
 " disable [1/5]
 " set shortmess+=S
-"
-"
+
+
 " quickui {{{
 " https://github.com/skywind3000/vim-quickui
 let g:quickui_border_style = 1

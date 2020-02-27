@@ -340,6 +340,11 @@ in
     ln -s ${config.boot.kernelPackages.kernel.dev}/vmlinux $out/vmlinux
   '';
 
+  services.xserver.displayManager.lightdm.autoLogin = {
+    enable = true;
+    user = "teto";
+  };
+
   # environment.ld-linux = true;
 
 }
