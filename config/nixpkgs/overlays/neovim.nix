@@ -176,10 +176,10 @@ rec {
 	  name = "neovim";
 	  version = "official-master";
       src = builtins.fetchGit {
-        url = https://github.com/neovim/neovim.git;
-        ref = "master";
-        # url = https://github.com/teto/neovim.git;
-        # ref = "treesitter_fix";
+        # url = https://github.com/neovim/neovim.git;
+        # ref = "master";
+        url = https://github.com/teto/neovim.git;
+        ref = "folds_auto";
       };
       # src = super.fetchFromGitHub {
       #   owner = "teto";
@@ -324,6 +324,7 @@ rec {
       self.pkgs.clang-tools  # for clangd
 
       self.pkgs.llvm  # for llvm-symbolizer
+      self.pkgs.valgrind
     ];
 
     buildInputs = oa.buildInputs ++ [

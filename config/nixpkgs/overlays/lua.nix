@@ -18,14 +18,14 @@ rec {
 
     packageOverrides = luaself: luaprev: {
 
-      luarocks = luaprev.luarocks.overrideAttrs(oa: {
-        pname = "luarocks-local";
-        src = /home/teto/luarocks;
-        # src = builtins.fetchGit {
-        #   url = https://github.com/teto/luarocks/;
-        #   ref = "nix";
-        # };
-      });
+      # luarocks = luaprev.luarocks.overrideAttrs(oa: {
+      #   pname = "luarocks-local";
+      #   src = /home/teto/luarocks;
+      #   # src = builtins.fetchGit {
+      #   #   url = https://github.com/teto/luarocks/;
+      #   #   ref = "nix";
+      #   # };
+      # });
 
       luarocks-nix = luaprev.luarocks-nix.overrideAttrs(oa: {
         pname = "luarocks-local";
@@ -43,12 +43,9 @@ rec {
       #   #   url = https://github.com/teto/luarocks/;
       #   #   ref = "nix";
       #   # };
-
       #   doCheck = true;
-
       #   # self.busted #
       #   # checkInputs = [];
-
       #   # checkPhase = ''
       #     # busted spec/
       #   # '';
