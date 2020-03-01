@@ -365,7 +365,7 @@ Plug 'teto/Modeliner' " <leader>ml to setup buffer modeline
 " Plug 'vimwiki/vimwiki'   " to write notes
 "Plug 'teto/neovim-auto-autoread' " works only in neovim, runs external checker
 " Plug 'rhysd/github-complete.vim' " provides github user/repo autocompletion after @ and #
-
+Plug 'haorenW1025/diagnostic-nvim'  " LSP improvements
 " does not work seems to be better ones
 " Plug 'vasconcelloslf/vim-interestingwords' " highlight the words you choose <leader>k (does not work in neovim)
 " Plug 't9md/vim-quickhl' " hl manually selected words :h QuickhlManualEnable
@@ -1351,27 +1351,6 @@ command! NvimLintToggle :call VarToggle("g:nvimdev_auto_lint")
 au FileType coq call coquille#FNMapping()
 let g:coquille_auto_move=1
 " }}}
-" tjdevries lsp {{{
-let g:langserver_executables = {
-    \ 'go': {
-    \ 'name': 'sourcegraph/langserver-go',
-    \ 'cmd': ['langserver-go', '-trace', '-logfile', expand('~/Desktop/langserver-go.log')],
-    \ },
-    \ 'c': {
-    \ 'name': 'clangd',
-    \ 'cmd': ['clangd', ],
-    \ },
-    \ 'python': {
-    \ 'name': 'pyls',
-    \ 'cmd': ['pyls', '--log-file' , expand('~/lsp_python.log')],
-    \ },
-      \ }
-
-" extracted from
-" https://github.com/bfredl/nvim-lspmirror
-  " call lsp#server#add(['c', 'c++'], ['clangd'], {})
-  " call lsp#server#add(['rust'], ['rls'], {})
-" }}}
 " miniyank (from bfredl) {{{
 let g:miniyank_delete_maxlines=100
 let g:miniyank_filename = $XDG_CACHE_HOME."/miniyank.mpack"
@@ -1658,6 +1637,16 @@ let g:nv_default_extension = '.md'
 "if no directory found and g:nv_main_directory is not specified
 "let g:nv_main_directory = g:nv_main_directory or (first directory in g:nv_search_paths)
 "}}}
+" diagnostic builds on nvim's LSP {{{
+let g:diagnostic_enable_virtual_text = 1
+let g:diagnostic_show_sign = 0
+let g:diagnostic_auto_popup_while_jump = 1
+let g:diagnostic_insert_delay = 0
+"}}}
+
+
+
+
 
 set hidden " you can open a new buffer even if current is unsaved (error E37)
 set completeopt=menu,longest

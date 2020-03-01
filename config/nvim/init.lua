@@ -150,6 +150,10 @@ nvim_lsp.pyls.setup({
   -- };
 })
 
+nvim_lsp.ghcide.setup{on_attach=require'diagnostic'.on_attach}
+
+nvim_lsp.hie.setup{on_attach=require'diagnostic'.on_attach}
+
 -- jsut to check if issues are mine or not
 do
   local method = 'textDocument/publishDiagnostics'
