@@ -16,7 +16,7 @@
     autorun = true;
     displayManager = {
       lightdm.autoLogin = {
-        enable = false;
+        # enable = false;
         user = "teto";
       };
       # job.logXsession = true; # writes into ~/.xsessions-errors

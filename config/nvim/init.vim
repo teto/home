@@ -2012,7 +2012,8 @@ au BufWinLeave,BufLeave * if &buftype != 'nofile' | silent! mkview | endif
 au BufWinEnter * if &buftype != 'nofile' | silent! loadview | endif
 
 
-highlight NormalFloat cterm=NONE ctermfg=14 ctermbg=0 gui=NONE guifg=#93a1a1 guibg=#002931
+
+" highlight NormalFloat cterm=NONE ctermfg=14 ctermbg=0 gui=NONE guifg=#93a1a1 guibg=#002931
 
 " taken from justinmk's config
 command! Tags !ctags -R --exclude='build*' --exclude='.vim-src/**' --exclude='venv/**' --exclude='**/site-packages/**' --exclude='data/**' --exclude='dist/**' --exclude='notebooks/**' --exclude='Notebooks/**' --exclude='*graphhopper_data/*.json' --exclude='*graphhopper/*.json' --exclude='*.json' --exclude='qgis/**' *
@@ -2022,24 +2023,19 @@ function! Show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
     execute 'h '.expand('<cword>')
   else
-    " 
-    let g:res = luaeval('vim.lsp.buf.hover()')
-    if g:res == v:false && &ft == "haskell"
-	" 	let result=coc#util#echo_line()
-	" 	echom result
-	" 	if result == tpl
-	" 		echom "haskell fallback"
-	" 	endif
-		execute '!hoogle '.expand('<cword>')
-	endif
+    lua vim.lsp.buf.hover()
+    " let g:res = luaeval('vim.lsp.buf.hover()')
+    " if g:res == v:false && &ft == "haskell"
+		" execute '!hoogle '.expand('<cword>')
+	" endif
   endif
 endfunction
 
 " lsp config {{{
 " nnoremap <buffer> <silent> <leader>ngd :call lsp#text_document_declaration()<CR>
 nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
-" nnoremap <silent> K  <cmd>lua vim.lsp.buf.hover()<CR>
-nnoremap <silent> K  <cmd>Show_documentation()<CR>
+nnoremap <silent> K  <cmd>lua vim.lsp.buf.hover()<CR>
+" nnoremap <silent> K  <cmd>Show_documentation()<CR>
 nnoremap <silent> ,gi  <cmd>lua vim.lsp.buf.implementation()<CR>
 nnoremap ,sh <cmd>lua vim.lsp.buf.signature_help()<CR>
 nnoremap <silent> ,td <cmd>lua vim.lsp.buf.type_definition()<CR>
@@ -2048,6 +2044,8 @@ nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
 nnoremap <silent> ,af <cmd>lua vim.lsp.buf.formatting()<CR>
 nnoremap <silent> ,arf <cmd>lua vim.lsp.buf.range_formatting()<CR>
 
+" when upstreamed
+nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
 " nnoremap <buffer> <silent> <leader>d :lua require("vim.lsp.util").show_line_diagnostics()<CR>
 
 " lua require 'init.lua'

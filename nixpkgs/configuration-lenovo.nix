@@ -254,20 +254,15 @@ in
     '';
 
     distributedBuilds = false;
-    package = pkgs.nixFlakes;
-    # package = pkgs.nixUnstable;
+    # package = pkgs.nixFlakes;
+    package = pkgs.nixUnstable;
   };
 
   # kind of a test
   # security.pam.services.lightdm.enableGnomeKeyring = true;
 
-  # hardware.bluetooth.enable = true;
-  # hardware.bluetooth.powerOnBoot = true;
-
   # will fial until openflowswitch is fixed
   programs.mininet.enable = false;
-  # test with sudo mn --switch ovsk -v debug
-
 
   # networking.mptcp = {
   #   enable = true;
@@ -278,18 +273,14 @@ in
 
   services.greenclip.enable = true;
 
-  # services.owamp.enable = true;
-
   # ebpf ?
   # broken in https://github.com/NixOS/nixpkgs/issues/56724
   # programs.bcc.enable = true;
 
   environment.systemPackages = with pkgs;
     (import ./basetools.nix { inherit pkgs;})
-    # strongswan # to get ipsec in path
     # cups-pk-helper # to add printer through gnome control center
     ++ [
-    # firefox
       ]
   ;
 
@@ -340,11 +331,11 @@ in
     ln -s ${config.boot.kernelPackages.kernel.dev}/vmlinux $out/vmlinux
   '';
 
+  # TODO this doesn't seem taken into account
   services.xserver.displayManager.lightdm.autoLogin = {
     enable = true;
     user = "teto";
   };
 
   # environment.ld-linux = true;
-
 }

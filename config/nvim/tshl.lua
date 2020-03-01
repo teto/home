@@ -1,6 +1,5 @@
 cquery = [[
 (ERROR) @ErrorMsg
-
 "break" @keyword
 "case" @keyword
 "continue" @keyword
@@ -13,7 +12,6 @@ cquery = [[
 "switch" @keyword
 "while" @keyword
 "goto" @keyword
-
 "const" @StorageClass
 "static" @StorageClass
 "struct" @StorageClass
@@ -22,7 +20,6 @@ cquery = [[
 "extern" @StorageClass
 "typedef" @StorageClass
 "union" @StorageClass
-
 "#define" @PreProc
 "#else" @PreProc
 "#endif" @PreProc
@@ -31,27 +28,18 @@ cquery = [[
 "#ifndef" @PreProc
 "#include" @PreProc
 (preproc_directive) @PreProc
-
 (string_literal) @string
 (system_lib_string) @string
-
 (number_literal) @number
 (char_literal) @string
-
 (field_identifier) @property
-
 ((type_identifier) @Special.ee (eq? @Special.ee "Dictionary"))
 (type_identifier) @UserType
-
 (primitive_type) @type
 (sized_type_specifier) @type
-
 ;((function_definition (storage_class_specifier) @funcclass declarator: (function_declarator (identifier) @StaticFunction))  (eq? @funcclass "static"))
-
 ((binary_expression left: (identifier) @WarningMsg.left right: (identifier) @WarningMsg.right) (eq? @WarningMsg.left @WarningMsg.right))
-
 (comment) @comment
-
 ;(call_expression
 ;  function: (identifier) @function)
 ;(function_declarator
