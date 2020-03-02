@@ -1,5 +1,5 @@
 --
-package.path = "/home/teto/neovim/runtime/lua/vim/?.lua;" .. package.path
+package.path = "/home/teto/neovim3/runtime/lua/vim/?.lua;" .. package.path
 -- print(package.path)
 fswatch = require 'fswatch'
 
@@ -25,16 +25,16 @@ local autocmds = {
 
 	-- -- TODO use lua
     "BufRead"     ,   "*", [[lua fswatch.watch_file(vim.fn.expand('<afile>')) ]],
-  --   "BufDelete"   ,   "*", call notify_unregister(expand('<afile>'))
-  --   "BufWritePre" ,   "*", call notify_set(expand('<afile>'), 0)
-  --   "FileWritePre",   "*", call notify_set(expand('<afile>'), 0)
-  --   "FileAppendPre",  "*", call notify_set(expand('<afile>'), 0)
-  --   "BufWritePost",   "*", call notify_register(expand('<afile>'))
-  --   "FileWritePost",  "*", call notify_register(expand('<afile>'))
-  --   "FileAppendPost", "*", call notify_register(expand('<afile>'))
+    "BufDelete"   ,   "*", [[lua fswatch.stop(vim.fn.expand('<afile>'))]],
+    "BufWritePre" ,   "*", [[lua fswatch.stop(vim.fn.expand('<afile>'), 0)]],
+    "FileWritePre",   "*", [[lua fswatch.stop(vim.fn.expand('<afile>'), 0)]],
+    "FileAppendPre",  "*", [[lua fswatch.stop(vim.fn.expand('<afile>'), 0)]],
+    "BufWritePost",   "*", [[call notify_register(vim.fn.expand('<afile>'))]],
+    "FileWritePost",  "*", [[call notify_register(vim.fn.expand('<afile>'))]],
+    "FileAppendPost", "*", [[call notify_register(vim.fn.expand('<afile>'))]],
  
-  --   "BufFilePre",     "*", call notify_unregister(expand('<afile>'))
-  --   "BufFilePost",    "*", call notify_register(expand('<afile>'))
+    "BufFilePre",     "*", [[lua fswatch.stop(vim.fn.expand('<afile>'))]],
+    "BufFilePost",    "*", [[call notify_register(vim.fn.expand('<afile>'))]]
 
 
   }
@@ -44,6 +44,6 @@ local function test_watcher()
     -- "BufRead"     ,   "*", [[lua fswatch.watch_file(vim.fn.expand('<afile>')) ]],
 	vim.api.nvim_command("autocmd! BufRead * lua fswatch.watch_file(vim.fn.expand('<afile>'))")
 end
-test_watcher()
--- nvim_create_augroups(autocmds)
+-- test_watcher()
+nvim_create_augroups(autocmds)
 
