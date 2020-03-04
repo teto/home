@@ -172,6 +172,7 @@ let
     # cups-pk-helper # to add printer through gnome control center
     ++ [
       pkgs.libinput-gestures
+      pkgs.brightnessctl
       ]
   ;
 
@@ -231,10 +232,8 @@ let
   #   (import ./overlays/haskell.nix)
   # ];
 
-  # need to be root
+  # need to be video
   # hardware.acpilight.enable = true;
-  # -- ?
-  hardware.brightnessctl.enable = true;
 
   networking.iproute2.enable = true;
 

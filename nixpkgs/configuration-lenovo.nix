@@ -281,7 +281,8 @@ in
     (import ./basetools.nix { inherit pkgs;})
     # cups-pk-helper # to add printer through gnome control center
     ++ [
-      ]
+      pkgs.brightnessctl
+    ]
   ;
 
   # services.squid.enable = true;
