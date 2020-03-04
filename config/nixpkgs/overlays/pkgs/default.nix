@@ -100,7 +100,8 @@ final: prev:
   #   inherit rustNightlyPlatform;
   # };
 
-  papis-python-rofi = prev.python3Packages.callPackage ./papis-rofi.nix {};
+  # breaks nix-index evaluation
+  # papis-python-rofi = prev.python3Packages.callPackage ./papis-rofi.nix {};
 
   ping = prev.prettyping;
 

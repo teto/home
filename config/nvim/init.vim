@@ -255,7 +255,7 @@ Plug 'neovimhaskell/haskell-vim', {'for':'haskell'} " haskell install
 
 "Plug 'mattn/vim-rtags' a l'air léger
 " Plug 'shaneharper/vim-rtags' " <leader>r ou bien :RtagsFind  mais ne marche pas
-Plug 'tpope/vim-unimpaired' " [<space> [e [n ]n pour gerer les conflits etc...
+" Plug 'tpope/vim-unimpaired' " [<space> [e [n ]n pour gerer les conflits etc...
 Plug 'mbbill/undotree' " replaces gundo
 
 " Using a non-master branch
@@ -279,9 +279,9 @@ Plug 'PotatoesMaster/i3-vim-syntax'
 " Plug 'Valloric/ListToggle' " toggle location/quickfix list toggling seems to fail
 " Plug 'git@github.com:milkypostman/vim-togglelist' " same
 " still problems with airline when installed via nix
-" Plug '907th/vim-auto-save' " :h auto-save
-Plug 'teto/vim-auto-save' " autosave :h auto-save
-Plug 'bfredl/nvim-miniyank' " killring alike plugin, cycling paste careful search for :Yank commands
+Plug '907th/vim-auto-save' " :h auto-save
+" Plug 'teto/vim-auto-save' " autosave :h auto-save
+" Plug 'bfredl/nvim-miniyank' " killring alike plugin, cycling paste careful search for :Yank commands
 " hangs with big strings
 
 " Text objects {{{
@@ -365,7 +365,7 @@ Plug 'teto/Modeliner' " <leader>ml to setup buffer modeline
 " Plug 'vimwiki/vimwiki'   " to write notes
 "Plug 'teto/neovim-auto-autoread' " works only in neovim, runs external checker
 " Plug 'rhysd/github-complete.vim' " provides github user/repo autocompletion after @ and #
-Plug 'haorenW1025/diagnostic-nvim'  " LSP improvements
+" Plug 'haorenW1025/diagnostic-nvim'  " LSP improvements
 " does not work seems to be better ones
 " Plug 'vasconcelloslf/vim-interestingwords' " highlight the words you choose <leader>k (does not work in neovim)
 " Plug 't9md/vim-quickhl' " hl manually selected words :h QuickhlManualEnable
@@ -961,7 +961,7 @@ nnoremap <Leader>/ :set hlsearch! hls?<CR> " toggle search highlighting
 " autocmd! User GoyoLeave Limelight!
 " }}}
 " inyoface (highlight only comments) {{{
-nnoremap <leader>c <Plug>(InYoFace_Toggle)<CR>
+" nnoremap <leader>c <Plug>(InYoFace_Toggle)<CR>
 " }}}
 " vim-sayonara {{{
 nnoremap <silent><leader>Q  <Cmd>Sayonara<cr>
@@ -1354,8 +1354,8 @@ let g:coquille_auto_move=1
 " miniyank (from bfredl) {{{
 let g:miniyank_delete_maxlines=100
 let g:miniyank_filename = $XDG_CACHE_HOME."/miniyank.mpack"
-map p <Plug>(miniyank-autoput)
-map P <Plug>(miniyank-autoPut)
+" map p <Plug>(miniyank-autoput)
+" map P <Plug>(miniyank-autoPut)
 
 
 function! FZFYankList() abort
@@ -2064,6 +2064,10 @@ autocmd CursorMoved <buffer> lua vim.lsp.util.show_line_diagnostics()
 " autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
 " autocmd CursorHoldI <buffer> lua vim.lsp.buf.document_highlight()
 " autocmd CursorMoved <buffer> lua vim.lsp.util.buf_clear_references()
+
+
+" to test kitty undercurl
+hi LspDiagnosticsUnderline cterm=underline gui=undercurl
 
 " ✘'
 let g:LspDiagnosticsErrorSign = 'T'

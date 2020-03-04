@@ -322,7 +322,7 @@ in
 
   # kinda experimental
   # services.openssh.banner = "Hello world";
-  security.rngd.enable = true;
+  security.rngd.enable = false;
   security.rngd.debug = true;
 
   # marked as internal

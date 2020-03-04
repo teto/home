@@ -150,9 +150,14 @@ nvim_lsp.pyls.setup({
   -- };
 })
 
-nvim_lsp.ghcide.setup{on_attach=require'diagnostic'.on_attach}
 
-nvim_lsp.hie.setup{on_attach=require'diagnostic'.on_attach}
+-- use only if require diagnostic is not null ?
+-- local diag_plugin = require'diagnostic'
+local present, diag_plugin = pcall(require, "diagnostic")
+if present then
+	nvim_lsp.ghcide.setup{on_attach=diag_plugin.on_attach}
+	nvim_lsp.hie.setup{on_attach=diag_plugin.on_attach}
+end
 
 -- jsut to check if issues are mine or not
 do

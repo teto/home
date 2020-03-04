@@ -311,9 +311,9 @@ rec {
 
     version = "master";
     src = builtins.fetchGit {
-      # url = https://github.com/neovim/neovim.git;
-      url = https://github.com/teto/neovim.git;
-      ref = "folds_auto";
+      url = https://github.com/neovim/neovim.git;
+      # url = https://github.com/teto/neovim.git;
+      # ref = "folds_auto";
     };
 
     nativeBuildInputs = oa.nativeBuildInputs ++ [

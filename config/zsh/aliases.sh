@@ -7,9 +7,6 @@
 # make menuconfig KCONFIG_CONFIG=config_off
 # try xconfig
 # see https://nixos.wiki/wiki/Linux_Kernel for xconfig example
-alias kernel_makeconfig="nix-shell -E 'with import <nixpkgs> {}; mptcp-manual.overrideAttrs (o: {nativeBuildInputs=o.nativeBuildInputs ++ [ pkgconfig ncurses ];})' --command 'make menuconfig KCONFIG_CONFIG=build/.config"
-alias kernel_xconfig="nix-shell -E 'with import <nixpkgs> {}; linux.overrideAttrs (o: {nativeBuildInputs=o.nativeBuildInputs ++ [ pkgconfig qt5.qtbase ];})'"
-alias kernel_xconfig="make xconfig KCONFIG_CONFIG=build/.config"
 
 # nix aliases {{{
 
@@ -29,7 +26,7 @@ alias mp="mptcpanalyzer"
 # alias n="ncmpcpp"
 alias n="nix-shell"
 # alias ff="find . -iname" # use fd instead
-alias latest="ls -lt |head"
+alias latest="ls -lt $@ |head"
 
 # alias :q="exit"
 #}}}
@@ -40,7 +37,7 @@ function rfw(){
 
 alias servethis="nix-shell -ppython3 --command \'python -c 'import SimpleHTTPServer; SimpleHTTPServer.test()'\""
 
-alias testneovim=" nix-shell -E 'with import <nixpkgs> {}; neovim-unwrapped.overrideAttrs(oa: { doCheck=true;})'"
+# alias testneovim=" nix-shell -E 'with import <nixpkgs> {}; neovim-unwrapped.overrideAttrs(oa: { doCheck=true;})'"
 
 # todo use exa instead
 

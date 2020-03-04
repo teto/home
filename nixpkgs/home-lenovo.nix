@@ -58,7 +58,7 @@ let
   };
 
   # for blue tooth applet; must be installed systemwide
-  services.blueman-applet.enable = true;
+  services.blueman-applet.enable = false;
 
   # programs.bash = {
   #   # goes to .profile
