@@ -4,9 +4,13 @@
 { config, lib, pkgs, ... }:
 
 {
-  imports =
-    [ <nixpkgs/nixos/modules/installer/scan/not-detected.nix>
-    ];
+  # does not work anymore with flakes
+  # imports =
+  #   [ <nixpkgs/nixos/modules/installer/scan/not-detected.nix>
+  #   ];
+
+  # replace it in the flake with
+  # modules = [ pkgs.nixosModules.notDetected ];
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "ehci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" "sr_mod" ];
   boot.initrd.kernelModules = [ ];
