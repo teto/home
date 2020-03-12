@@ -27,7 +27,7 @@ rec {
       #   # };
       # });
 
-      luarocks-nix = luaprev.luarocks-nix.overrideAttrs(oa: {
+      luarocks-nix-dev = luaprev.luarocks-nix.overrideAttrs(oa: {
         pname = "luarocks-local";
         src = /home/teto/luarocks;
         # src = builtins.fetchGit {

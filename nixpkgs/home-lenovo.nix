@@ -20,6 +20,7 @@ let
       ./neomutt.nix
 
       ./home-mail.nix
+      ./home-extra.nix
       # symlink towards a config
   ]
   ;
@@ -33,7 +34,7 @@ let
     # libinput-gestures
     # rofi
     # netperf # check for man; netserver to start
-    nushell
+    # nushell
     steam-run
   ];
 

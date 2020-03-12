@@ -110,15 +110,6 @@ rec {
     };
   });
 
-  # luarocks-nix = super.luarocks-nix.overrideAttrs(oa: {
-  #   name = "luarocks-local";
-  #   src = /home/teto/luarocks;
-  #   # src = builtins.fetchGit {
-  #   #   url = https://github.com/teto/luarocks/;
-  #   #   ref = "nix";
-  #   # };
-  # });
-
   # iperf3_lkl = super.iperf3.overrideAttrs(old: {
   # });
 }

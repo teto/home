@@ -343,6 +343,7 @@ rec {
       export NVIM_TEST_PRINT_I=1
       export NVIM_TEST_MAIN_CDEFS=1
       echo "To run tests:"
+      echo "test/functional/fswatch/fswatch_spec.lua"
       echo "VALGRIND=1 TEST_FILE=test/functional/core/job_spec.lua TEST_TAG=env make functionaltest"
 
     '';
