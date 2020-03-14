@@ -1,1 +1,0 @@
-/home/teto/dotfiles/shells.nix/neovim.nix

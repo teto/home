@@ -44,7 +44,8 @@ let
     neovim-remote # for latex etc
     nix-prefetch-scripts
     nix-index # to list package contents
-    nix-review
+    nixpkgs-review
+    # nix-review
     pcalc  # cool calc
     rpl # to replace strings across files
     universal-ctags  # there are many different ctags, be careful !
@@ -76,6 +77,11 @@ let
     # mairix mutt msmtp lbdb contacts spamassassin
   ];
 
+  gamingPkgs = with pkgs; [
+
+    steam
+  ];
+
   desktopPkgs = with pkgs; [
     # apvlv # broken
     # alsa-utils # for alsamixer
@@ -87,7 +93,7 @@ let
     # unstable.dropbox
     gnome3.networkmanagerapplet # should
     gnome3.defaultIconTheme # else nothing appears
-    i3-layout-manager  # to save/load layouts
+    # i3-layout-manager  # to save/load layouts
     mpv
     kitty
     libnotify
@@ -98,8 +104,7 @@ let
     ffmpegthumbnailer # to preview videos in ranger
     # todo try sthg else
     # requires xdmcp https://github.com/freedesktop/libXdmcp
-    # haskellPackages.greenclip # todo get from haskell
-    unstable.gnome3.eog # eye of gnome = image viewer / creates a collision
+    gnome3.eog # eye of gnome = image viewer / creates a collision
     moc  # music player
     mupdf.bin # evince does better too
     # mdp # markdown CLI presenter
@@ -107,12 +112,13 @@ let
     ncpamixer # pulseaudio TUI mixer
     noti # send notifications when a command finishes
     # papis # library manager
-    unstable.gnome3.gnome-calculator
+    gnome3.gnome-calculator  # compare with qalqulate-gtk
     pass
     qtpass
     sublime3
     scrot # screenshot app
     # smplayer # GUI around mpv
+
     sxiv # simple image viewer
     # vimiv # image viewer
     shared_mime_info # temporary fix for nautilus to find the correct files

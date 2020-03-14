@@ -12,11 +12,18 @@
     "xhci_pci" "ehci_pci" "ahci" "firewire_ohci" "usbhid" "sd_mod" "sr_mod" "sdhci_pci" 
   ];
   boot.kernelModules = [
-    "kvm-intel" "b43"
+    "kvm-intel"
+    "b43"
   ];
   boot.extraModulePackages = [
     config.boot.kernelPackages.broadcom_sta
   ];
+
+
+  boot.blacklistedKernelModules = [ "wl" ];
+  # a contender is https://wireless.wiki.kernel.org/en/users/drivers/b43
+  # networking.enableB43Firmware = true;
+  # hardware.firmware = [ pkgs.b43Firmware_6_30_163_46 ];
 
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/91ccf165-de06-44f1-9dc8-652a5f7d92cf";

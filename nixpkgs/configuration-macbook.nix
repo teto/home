@@ -35,8 +35,6 @@ let
     grub.device = "/dev/sda";
   };
 
-  # boot.blacklistedKernelModules = [ "wl" ];
-
   # boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_mptcp_with_netlink;
   # boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_mptcp_trunk_raw;
   # boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_mptcp;
@@ -57,10 +55,7 @@ let
   # creates problem with buffalo check if it blocks requests or what
   # it is necessary to use dnssec though :(
   networking.resolvconf.dnsExtensionMechanism = false;
-  # networking.extraHosts = secrets.extraHosts;
-  # networking.extraResolvconfConf=''
-  #   libc=NO
-  #   '';
+
   # this is for gaming
   hardware.opengl.driSupport32Bit = true;
 
@@ -150,11 +145,10 @@ let
   #   pkgs.openvswitch
   # ];
 
-  # a contender is https://wireless.wiki.kernel.org/en/users/drivers/b43
-  # networking.enableB43Firmware = true;
-  hardware.firmware = [ pkgs.b43Firmware_6_30_163_46 ];
+  services.greenclip.enable = true;
+
 
   # for android development
-  programs.adb.enable = true;
+  programs.adb.enable = false;
 
 }

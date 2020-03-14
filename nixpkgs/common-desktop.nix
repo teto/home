@@ -129,13 +129,6 @@ in
     # musicDirectory
   };
 
-  # TODO modify it to pass a function instead ?!
-  services.xserver.windowManager.awesome = {
-    enable = true;
-    luaModules = [ pkgs.luaPackages.lpeg ];
-  };
-
-  # services.xserver.xrandrHeads = ;
 
   # seemingly working for chromium only, check for firefox
   programs.browserpass.enable = true;
@@ -172,7 +165,7 @@ in
     # TODO use options.nix.nixPath.default ++
     nixPath = [
       "nixos-unstable=https://github.com/nixos/nixpkgs-channels/archive/nixos-unstable.tar.gz"
-      "nixos=https://github.com/nixos/nixpkgs-channels/archive/nixos-19.09.tar.gz"
+      "nixos=https://github.com/nixos/nixpkgs-channels/archive/nixos-20.03.tar.gz"
     ]
     ++ lib.optional (builtins.pathExists userNixpkgs)  "nixpkgs=${builtins.toString userNixpkgs}"
     ++ lib.optional (builtins.pathExists nixosConfig)  "nixos-config=${builtins.toString nixosConfig}"
@@ -219,8 +212,6 @@ in
   # then coredumpctl debug will launch gdb !
   # boot.kernel.sysctl."kernel.core_pattern" = "core"; to disable.
   # security.pam.loginLimits
-
-  # networking.extraHosts = secrets.extraHosts;
 
   system.copySystemConfiguration = true;
 

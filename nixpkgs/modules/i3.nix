@@ -79,7 +79,6 @@ in
         { command= "setxkbmap -layout us"; always = true; notification = false; }
         # { command= "xkblayout-state set +1"; always = false; notification = false; }
         # todo convert to a HM stuff
-        # { command= "${pkgs.haskellPackages.greenclip}/bin/greenclip daemon"; always = false; notification = false; }
         ];
 
 # bindsym $mod+m  mode "monitors"

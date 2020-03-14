@@ -3,10 +3,7 @@
 # ##########################################
 ### MAIN
 ##########################################
-#
-#” “
 
-# -modi fb:../Examples/rofi-file-browser.sh
 # https://github.com/DaveDavenport/rofi
 # Combi mode, allow several modes to be merged into one list.
 # ,Layouts:i3-list-layouts,file:/home/teto/rofi/Examples/rofi-file-browser.sh'
@@ -375,7 +372,6 @@ floating_maximum_size -1 x -1
 # xrandr --output LVDS1 --primary --auto --output DP1 --auto --right-of LVDS1
 #exec_always xrandr --output $output1 --auto --output $output2 --right-of $output1
 #exec urxvtc -name irclient -e irssi
-# exec greenclip daemon
 
 # not valid on nixos
 # exec_always xmodmap ~/.Xmodmap
