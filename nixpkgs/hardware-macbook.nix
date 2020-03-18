@@ -22,7 +22,7 @@
 
   boot.blacklistedKernelModules = [ "wl" ];
   # a contender is https://wireless.wiki.kernel.org/en/users/drivers/b43
-  # networking.enableB43Firmware = true;
+  networking.enableB43Firmware = true;
   # hardware.firmware = [ pkgs.b43Firmware_6_30_163_46 ];
 
   fileSystems."/" =

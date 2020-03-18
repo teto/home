@@ -17,6 +17,7 @@ in
   home.packages = with pkgs; [
     dunst
     xdg_utils
+    steam
   ];
 
   home.file.".digrc".text = ''
