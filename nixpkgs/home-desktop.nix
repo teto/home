@@ -11,7 +11,7 @@ let
     csvsimple subfigure  glossaries biblatex logreq xstring biblatex-ieee subfiles mfirstuc;
    };
 
-  devPkgs = with pkgs; let
+  devPkgs = all: with pkgs; let
       # float to use coc.nvim
       # TODO pass extraMakeWrapperArgs
       neovim-xp = pkgs.wrapNeovim pkgs.neovim-unwrapped-master {
@@ -21,6 +21,7 @@ let
       };
     in
     [
+    # ccache # breaks some builds ? has to be configured via program, use ccacheStdEnv instead ?
     editorconfig-core-c
     exa  # to list files
     gdb
@@ -34,7 +35,7 @@ let
     # gitAndTools.git-annex # fails on unstable
     gitAndTools.git-extras
     gitAndTools.git-crypt
-    # ccache # breaks some builds ? has to be configured via program, use ccacheStdEnv instead ?
+
 
     patchutils  # for interdiff
 
@@ -49,9 +50,12 @@ let
     pcalc  # cool calc
     rpl # to replace strings across files
     universal-ctags  # there are many different ctags, be careful !
+  ]
+  ++ lib.optionals all [
+    hexyl  # hex editor
   ];
 
-  imPkgs = with pkgs;
+  imPkgs = all: with pkgs;
     let
       customWeechat = weechat.override {
         configure = { availablePlugins, ... }: {
@@ -68,27 +72,24 @@ let
     # gnome3.california # fails
     # khal # => vdirsyncer !
     khard
-    libsecret
-    newsboat # marked as broken
-    slack
+    libsecret  # to consult
+    newsboat #
     # vdirsyncer
     customWeechat
     # leafnode dovecot22 dovecot_pigeonhole fetchmail procmail w3m
     # mairix mutt msmtp lbdb contacts spamassassin
+  ] ++ lib.optionals all [
+    slack
   ];
 
-  gamingPkgs = with pkgs; [
 
-    steam
-  ];
-
-  desktopPkgs = with pkgs; [
+  desktopPkgs = all: with pkgs; [
     # apvlv # broken
     # alsa-utils # for alsamixer
     arandr  # to move screens/monitors around
     hunspellDicts.fr-any
     # buku
-    dynamic-colors # to change the terminal colors ("dynamic-colors switch solarized-dark")
+    # dynamic-colors # to change the terminal colors ("dynamic-colors switch solarized-dark")
     # gcalc
     # unstable.dropbox
     gnome3.networkmanagerapplet # should
@@ -112,7 +113,6 @@ let
     ncpamixer # pulseaudio TUI mixer
     noti # send notifications when a command finishes
     # papis # library manager
-    gnome3.gnome-calculator  # compare with qalqulate-gtk
     pass
     qtpass
     sublime3
@@ -124,15 +124,20 @@ let
     shared_mime_info # temporary fix for nautilus to find the correct files
     tagainijisho # japanse dict; like zkanji Qt based
     translate-shell
-    unstable.transmission_gtk
+    unstable.transmission_gtk  # bittorrent client
     xdotool # needed for vimtex + zathura
     xarchiver # to unpack/pack files
     xorg.xev
-    xorg.xbacklight
+    xorg.xbacklight  # todo should be set from module
     xclip
     xcwd
     zathura
-  ];
+  ]
+  ++ lib.optionals all [
+    unstable.libreoffice
+    gnome3.gnome-calculator  # compare with qalqulate-gtk
+  ]
+  ;
 
   home.sessionVariables = {
     # JUPYTER_CONFIG_DIR=
@@ -155,12 +160,9 @@ let
     # shutter # screenshot utility
     # mcomix # manga reader
     # mendeley # requiert qtwebengine
-    pinta    # photo editing
-    # unstable.qtcreator  # for wireshark
     zeal       # doc for developers
     vifm
     # zotero     # doc software
-    # wavemon
     # astroid # always compiles webkit so needs 1 full day
   ];
 in
@@ -173,12 +175,15 @@ in
     ./modules/i3.nix
   ];
 
-  home.packages = desktopPkgs ++ devPkgs ++ heavyPackages
-  ++ imPkgs ++ [
-    # pkgs.up # live preview of pipes
-    pkgs.peek # GIF recorder
+  # rename to fn, accept a parameter for optional
+  home.packages =
+    (desktopPkgs true) ++ (devPkgs true) ++ heavyPackages
+    ++ (imPkgs true)
+    ++ [
+      # pkgs.up # live preview of pipes
+      pkgs.peek # GIF recorder
 
-    unstable.cachix  # almot always broken
+      unstable.cachix  # almot always broken
     ]
    ;
 

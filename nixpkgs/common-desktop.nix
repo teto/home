@@ -61,10 +61,11 @@ in
     support32Bit = true;
   };
 
+  console.font = "Lat2-Terminus16";
+  console.keyMap = "fr";
+
   # Select internationalisation properties.
   i18n = {
-     consoleFont = "Lat2-Terminus16";
-     consoleKeyMap = "fr";
      defaultLocale = "fr_FR.UTF-8";
      # can generate problems for wireshark with Qt versions
      inputMethod = {

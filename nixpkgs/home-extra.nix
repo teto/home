@@ -2,7 +2,11 @@
 { config, lib, pkgs,  ... }:
 {
 
-  users.users.teto.packages = with pkgs; [
+  home.packages = with pkgs; [
+  # users.users.teto.packages = with pkgs; [
+    hakuneko
+    hexyl
+    pinta    # photo editing
     pciutils # for lspci
     ncdu  # to see disk usage
     # bridge-utils # pour  brctl
