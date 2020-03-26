@@ -6,12 +6,12 @@ let
       # to install manually with coc.nvim:
       # - coc-vimtex  coc-snippets 
       # use coc-yank for yank history
-
+      editorconfig-vim
       # coc-git  # doesn't like it when it's user installed
       # coc-nvim
       # coc-python # test
       # coc-translator  # not available yet
-      csv-vim
+      # csv-vim
       # replaced by coc
       fugitive
       far-vim
@@ -28,9 +28,10 @@ let
       nvim-terminal-lua
 
       # LanguageClient-neovim
-      tagbar
+      # tagbar
       # targets-vim
       # vCoolor-vim
+      # vim-CtrlXA
       vim-dirvish
       vim-fugitive
       vim-signature
@@ -179,7 +180,7 @@ rec {
         # url = https://github.com/neovim/neovim.git;
         # ref = "master";
         url = https://github.com/teto/neovim.git;
-        ref = "folds_auto";
+        ref = "diagnostic";
       };
       # src = super.fetchFromGitHub {
       #   owner = "teto";
@@ -222,6 +223,8 @@ rec {
   # TODO pass args to the wrapper to get access to :
   # - bash-language-server
   # - digestif ?
+  # TODO add withHaskell + the limited code
+  # add a package to haskell function
   neovimDefaultConfig = {
         withPython3 = true;
         withPython = false;

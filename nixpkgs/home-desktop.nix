@@ -12,7 +12,6 @@ let
    };
 
   devPkgs = all: with pkgs; let
-      # float to use coc.nvim
       # TODO pass extraMakeWrapperArgs
       neovim-xp = pkgs.wrapNeovim pkgs.neovim-unwrapped-master {
         # TODO pass lua-lsp

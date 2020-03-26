@@ -67,6 +67,10 @@ rec {
     #     disabled = false;
     #   }));
 
+    # mpack = ( luaprev.mpack.override({
+    #   CFLAGS = "-ansi -g3 -Wall -Wextra -Werror -Wconversion -Wstrict-prototypes -Wno-unused-parameter -pedantic";
+    # }));
+
     };
 
   };

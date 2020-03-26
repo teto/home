@@ -14,31 +14,24 @@ self: prev:
 # haskellPackages.callCabal2nix to nixpkgs which means anyone can easily pull in GitHub packages and hackage packages that aren't in nixpkgs.
 # pkgs.haskell.lib.dontCheck
 
-  yst = prev.haskellPackages.yst.overrideAttrs (oldAttrs: {
-     jailbreak = true;
-  });
-
-
   haskell = prev.haskell // {
 
     # to work around a stack bug (stack ghc is hardcoded)
     # compiler = prev.haskell.compiler // { ghc802 = prev.haskell.compiler.ghc844; };
 
-    packageOverrides = hself: hprev: with prev.haskell.lib; rec {
+    packageOverrides = hself: hold: with prev.haskell.lib; rec {
       # useful to fetch newer libraries with callHackage
-      # ghc802 = hprev.ghc844;
-      gutenhasktags = dontCheck (hprev.callPackage ./pkgs/gutenhasktags {});
+      # gutenhasktags = dontCheck (hprev.callPackage ./pkgs/gutenhasktags {});
 
-      ip = dontCheck hprev.ip;
-      c2hsc = dontCheck hprev.c2hsc;
+          # for newer nixpkgs (March 2020)
+          # base-compat = doJailbreak (hold.base-compat);
+          # time-compat = doJailbreak (hold.time-compat);
 
-      zeromq4-haskell = prev.haskell.lib.dontCheck hprev.zeromq4-haskell;
-
-      # cabal-helper = prev.haskell.lib.doJailbreak (hprev.cabal-helper);
-      wide-word = prev.haskell.lib.doJailbreak (hprev.wide-word);
+      # ip = dontCheck hprev.ip;
+      # c2hsc = dontCheck hprev.c2hsc;
 
       # should not be needed anymore right ?
-      tensorflow-core-ops = appendPatch (hprev.tensorflow-core-ops) ./pkgs/tensorflow.patch;
+      # tensorflow-core-ops = appendPatch (hprev.tensorflow-core-ops) ./pkgs/tensorflow.patch;
 
       # ihaskell = builtins.trace "overrideCABAL !!" overrideCabal (dontCheck hprev.ihaskell) ( drv: {
       #   executableToolDepends = [ prev.pkgs.jupyter ];
@@ -46,12 +39,12 @@ self: prev:
       # });
       # ihaskell = hprev.ihaskell_0_10_0_2;
 
-      bitset = overrideSrc hprev.bitset { src = prev.fetchFromGitHub {
-        owner = "teto";
-        repo = "bitset";
-        rev = "upgrade";
-        sha256 = "1bbxav9fxpmpjmd1grwz8wx759kxdmp9lw7rrbd11mx8qj7kwpqx";
-      }; };
+      # bitset = overrideSrc hprev.bitset { src = prev.fetchFromGitHub {
+      #   owner = "teto";
+      #   repo = "bitset";
+      #   rev = "upgrade";
+      #   sha256 = "1bbxav9fxpmpjmd1grwz8wx759kxdmp9lw7rrbd11mx8qj7kwpqx";
+      # }; };
 
 
       # "fork" by infinisil

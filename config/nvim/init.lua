@@ -20,18 +20,18 @@ if not configs.lua_lsp then
 end
 
 -- if not nvim_lsp.ghcide then
-  -- configs.ghcide = {
-	  -- default_config = {
-		-- name = "ghcide";
-		-- cmd = {"ghcide", "--lsp"};
-		-- filetypes = { "hs", "lhs", "haskell" };
-		-- root_dir = function(fname)
-			-- return nvim_lsp.util.find_git_ancestor(fname) or vim.loop.os_homedir()
-		-- end;
-		-- log_level = vim.lsp.protocol.MessageType.Warning;
-		-- settings = {};
-	-- };
-  -- }
+--   configs.ghcide = {
+-- 	  default_config = {
+-- 		name = "ghcide";
+-- 		cmd = {"ghcide", "--lsp"};
+-- 		filetypes = { "hs", "lhs", "haskell" };
+-- 		root_dir = function(fname)
+-- 			return nvim_lsp.util.find_git_ancestor(fname) or vim.loop.os_homedir()
+-- 		end;
+-- 		log_level = vim.lsp.protocol.MessageType.Warning;
+-- 		settings = {};
+-- 	};
+--   }
 -- end
 
 nvim_lsp.lua_lsp.setup{}
@@ -48,10 +48,25 @@ nvim_lsp.lua_lsp.setup{}
 -- 	filetypes = { "sh" };
 -- })
 
+-- local present, diag_plugin = pcall(require, "diagnostic")
+-- if present then
+	
+-- end
+
 
 nvim_lsp.ghcide.setup({
 	log_level = vim.lsp.protocol.MessageType.Log;
 	root_dir = nvim_lsp.util.root_pattern(".git");
+
+	cmd = {"ghcide", "--lsp"};
+	filetypes = { "hs", "lhs", "haskell" };
+	root_dir = function(fname)
+		return nvim_lsp.util.find_git_ancestor(fname) or vim.loop.os_homedir()
+	end;
+	log_level = vim.lsp.protocol.MessageType.Warning;
+	settings = {};
+
+	-- on_attach=require'diagnostic'.on_attach
 })
 
 --nvim_lsp.hie.setup({
@@ -62,7 +77,6 @@ nvim_lsp.ghcide.setup({
 --	-- init_options = {};
 --	root_dir = nvim_lsp.util.root_pattern(".git");
 --	-- root_dir = function () return "/home/teto/test-task-2-final/solution" end;
-
 --	log_level = vim.lsp.protocol.MessageType.Error;
 --	--careful, without this, we get a warning from hie
 --	init_options = {
@@ -152,11 +166,25 @@ nvim_lsp.pyls.setup({
 
 
 -- use only if require diagnostic is not null ?
--- local diag_plugin = require'diagnostic'
-local present, diag_plugin = pcall(require, "diagnostic")
-if present then
-	nvim_lsp.ghcide.setup{on_attach=diag_plugin.on_attach}
-	nvim_lsp.hie.setup{on_attach=diag_plugin.on_attach}
+do 
+	-- local present, diag_plugin = pcall(require, "diagnostic")
+	-- if present then
+	-- 	nvim_lsp.ghcide.setup{on_attach=diag_plugin.on_attach}
+	-- 	-- nvim_lsp.hie.setup{on_attach=diag_plugin.on_attach}
+	-- else
+		-- print("could not require diagnostic")
+		-- local method = 'textDocument/publishDiagnostics'
+		-- local default_callback = vim.lsp.callbacks[method]
+		-- vim.lsp.callbacks[method] = function(err, method, result, client_id)
+		-- 	default_callback(err, method, result, client_id)
+		-- 	if result and result.diagnostics then
+		-- 	for _, v in ipairs(result.diagnostics) do
+		-- 		v.uri = v.uri or result.uri
+		-- 	end
+		-- 	vim.lsp.util.set_loclist(result.diagnostics)
+		-- 	end
+		-- end
+	-- end
 end
 
 -- jsut to check if issues are mine or not
@@ -166,9 +194,9 @@ do
   vim.lsp.callbacks[method] = function(err, method, result, client_id)
     default_callback(err, method, result, client_id)
     if result and result.diagnostics then
-      for _, v in ipairs(result.diagnostics) do
-        v.uri = v.uri or result.uri
-      end
+    --   for _, v in ipairs(result.diagnostics) do
+    --     v.uri = v.uri or result.uri
+    --   end
       vim.lsp.util.set_loclist(result.diagnostics)
     end
   end

@@ -50,7 +50,13 @@ function! SynStack()
   endif
   echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 endfunc
+
+nnoremap <C-RightMouse> :call SynStack()<CR>
 " }}}
+"
+set cpoptions="aABceFsn" " vi ComPatibility options
+
+
 " mouse {{{
 set mouse=a
 set mousemodel=popup
@@ -83,7 +89,6 @@ set exrc
 
 " vim-plug plugin declarations {{{1
 call plug#begin(s:plugdir)
-"
 " annotations plugins {{{
 Plug 'MattesGroeger/vim-bookmarks' " ruby  / :BookmarkAnnotate
 " 'wdicarlo/vim-notebook' " last update in 2016
@@ -92,8 +97,7 @@ Plug 'MattesGroeger/vim-bookmarks' " ruby  / :BookmarkAnnotate
 " branch v2-integration
 " Plug 'andymass/vim-matchup' " to replace matchit
 " Plug 'AGhost-7/critiq.vim' " :h critiq
-" Plug 'wellle/context.vim' " show current function for example
-Plug 'kyazdani42/highlight.lua' " to test treesitter
+" Plug 'kyazdani42/highlight.lua' " to test treesitter
 Plug 'skywind3000/vim-quickui' " 
 Plug 'liuchengxu/vista.vim' " replaces tagbar to list workplace symbols
 " Plug 'neovim/nvim-lsp' " while fuzzing details out
@@ -101,30 +105,37 @@ Plug '~/nvim-lsp' " while fuzzing details out
 " Plug 'puremourning/vimspector' " to debug programs
 Plug 'bfredl/nvim-luadev'  " lua repl :Luadev
 Plug 'hotwatermorning/auto-git-diff' " to help rebasing
-Plug 'christoomey/vim-conflicted' " toto
+" Plug 'christoomey/vim-conflicted' " toto
 Plug 'norcalli/nvim-terminal.lua' " to display ANSI colors
 Plug 'bogado/file-line' " to open a file at a specific line
-Plug 'yuki-ycino/fzf-preview.vim' " toto
+" Plug 'yuki-ycino/fzf-preview.vim' " toto
 Plug 'glacambre/firenvim' " to use nvim in firefox
 " Plug 'liuchengxu/vim-clap' " fuzzer
 Plug 'alok/notational-fzf-vim' " to take notes
 Plug 'iamcco/markdown-preview.nvim' " test , most recent
-Plug 'suy/vim-context-commentstring'
-Plug 'rhysd/git-messenger.vim' " to show git message :GitMessenger
+Plug 'suy/vim-context-commentstring' " commen for current programming language
 " Plug 'voldikss/vim-translate-me' " floating windows for neovim
-" Plug 'chrisbra/Colorizer'
-" Plug 'ndmitchell/ghcid', { 'rtp': 'plugins/nvim' }
 Plug 'neovimhaskell/nvim-hs.vim' " to help with nvim-hs
-Plug 'neomutt/neomutt.vim' " syntax file for neomutt
 Plug 'elbeardmorez/vim-loclist-follow' " to have quicklist synced with cursor
 " call :NR on a region than :w . coupled with b:nrrw_aucmd_create,
 Plug 'chrisbra/NrrwRgn' " to help with multi-ft files
 Plug 'chrisbra/vim-diff-enhanced' "
 " Plug 'mhinz/vim-signify' " Indicate changed lines within a file using a VCS.
 " Plug 'vim-pandoc/vim-pandoc'
+
+" around vcs {{{
+Plug 'idanarye/vim-merginal'  " fugitive extension :Merginal
+Plug 'rhysd/git-messenger.vim' " to show git message :GitMessenger
+" Plug 'junegunn/gv.vim' " git commit viewer :Gv
+
+" }}}
+
+" filetype related {{{
+Plug 'neomutt/neomutt.vim' " syntax file for neomutt
 Plug 'vim-pandoc/vim-pandoc-syntax'
-Plug 'idanarye/vim-merginal'
-" Plug 'tveskag/nvim-blame-line' " ToggleBlameLine
+Plug 'vim-scripts/rfc-syntax', { 'for': 'rfc' } " optional syntax highlighting for RFC files
+" Plug 'vim-scripts/coq-syntax', {'for': 'coq'}
+"}}}
 " Plug 'moznion/github-commit-comment.vim' " last update from 2014
 " Plug 'dhruvasagar/vim-open-url' " gB/gW to open browser
 " Plug 'Carpetsmoker/xdg_open.vim' " overrides gx
@@ -137,9 +148,6 @@ Plug 'Konfekt/vim-CtrlXA' " use ctrl a/xto cycle between different words
 " new deoplete relies on yarp :
 Plug 'AndrewRadev/splitjoin.vim' " gS/gJ to
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-" Plug 'roxma/nvim-yarp' " required for deoplete
-" Plug 'roxma/vim-hug-neovim-rpc' " what is that ? required for deoplete
-" Plug '~/vim-config'
 Plug '~/nvim-palette', { 'do': ':UpdateRemotePlugins' }
 
 " Plug 'LnL7/vim-nix', {'for': 'nix'}
@@ -148,7 +156,7 @@ Plug '~/nvim-palette', { 'do': ':UpdateRemotePlugins' }
 Plug 'editorconfig/editorconfig-vim' " not remote but involves python
 Plug 'neomake/neomake' " just for nix and neovim dev with nvimdev ?
 " provider
-Plug 'msrose/vim-perpetuloc'
+" Plug 'msrose/vim-perpetuloc' " Cursor-based location list jumping for vim (Lnext)
 " Plug 'brooth/far.vim', { 'do': ':UpdateRemotePlugins' } " search and replace across files
 " needs ruby support, works in recent neovim
 Plug 'junegunn/vim-github-dashboard', { 'do': ':UpdateRemotePlugins' }
@@ -159,9 +167,7 @@ Plug 'fmoralesc/vim-pad', {'branch': 'devel'} " :Pad new, note taking
 " while waiting for my neovim notification provider...
 Plug 'tjdevries/descriptive_maps.vim', {'do': ':UpdateRemotePlugins' } " :call DescriptiveStart()
 Plug 'gianarb/notify.vim' " call notify#emitNotification('Title', 'Body')
-" Plug 'vim-scripts/coq-syntax', {'for': 'coq'}
 " Plug 'the-lambda-church/coquille', {'branch': 'matt', 'for': 'coq'}
-" Plug 'teto/coquille', {'branch': 'matt', 'for': 'coq'}
 " Plug 'inside/vim-search-pulse' " Search related
 
 " vim-search-pulse {{{
@@ -175,7 +181,6 @@ Plug 'sunaku/vim-dasht' " get documentation (zeavim is also a contender KabbAmin
 " Plug 'mtth/scratch.vim' " , {'on': 'Scratch'} mapped to ?
 " Plug 'tjdevries/vim-inyoface.git' "InYoFace_toggle to display only comments
 " todo depend de rust
-" Plug 'junegunn/gv.vim' " git commit viewer :Gv
 " Plug 'mhinz/vim-halo' " to hight cursor line
 " Plug 'ludovicchabant/vim-gutentags' " automatic tag generation, very good
 Plug 'junegunn/goyo.vim', {'on': 'Goyo'} "distraction free writing focus
@@ -227,7 +232,7 @@ let cmdline_external_term_cmd = "termite -e '%s' &"
 " Plug 'Shougo/neosnippet.vim'
 " Plug 'Shougo/neosnippet-snippets'
 
-Plug 'sjl/gundo.vim' " :GundoShow/Toggle to redo changes
+" Plug 'sjl/gundo.vim' " :GundoShow/Toggle to redo changes
 " Plug 'vim-scripts/DrawIt' " to draw diagrams
 " Plug 'Yggdroot/indentLine',{ 'for': 'python' }  " draw verticals indents but seems greedy
 " Plug 'beloglazov/vim-online-thesaurus' " thesaurus => dico dde synonymes
@@ -301,10 +306,6 @@ Plug 'wellle/targets.vim' " Adds new motion targets ci{
 " }}}
 
 Plug 'dietsche/vim-lastplace' " restore last cursor postion (is it still needed ?)
-" vim-lastplace to restore cursor position {{{
-let g:lastplace_ignore = "gitcommit,gitrebase,svn,hgcommit"
-let g:lastplace_ignore_buftype = "quickfix,nofile,help"
-" }}}
 " Powerline does not work in neovim hence use vim-airline instead
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes' " creates problems if not here
@@ -320,21 +321,7 @@ Plug 'tpope/vim-rhubarb' " github support in fugitive, use |i_CTRL-X_CTRL-O|
 "Plug 'tpope/vim-surround' " don't realy know how to use yet
 " Plug 'junegunn/vim-peekaboo' " gives a preview of buffers when pasting, need ruby ?
 
-
-"  fuzzers {{{2
-" Plug 'junegunn/fzf', { 'dir': $XDG_DATA_HOME . '/fzf', 'do': './install --completion --key-bindings --64' }
-" let distribution (like nixos install fzf
-" this package only ocntains fzf#run,
-" Plug 'junegunn/fzf', " { 'dir': $XDG_DATA_HOME . '/fzf', 'do': ':term ./install --no-update-rc --bin --64'}
-
-" Many options available :
-" https://github.com/junegunn/fzf.vim
-" Most commands support CTRL-T / CTRL-X / CTRL-V key bindings to open in a new tab, a new split, or in a new vertical split
-" Plug 'junegunn/fzf.vim' " defines :Files / :Commits for FZF
-
-"}}}
-
-Plug 'vhakulinen/gnvim-lsp' " load it only for gnvim
+" Plug 'vhakulinen/gnvim-lsp' " load it only for gnvim
 
 " , { 'for': 'markdown', 'do': function('BuildComposer') } " Needs rust, cargo, plenty of things :help markdown-composer
 " move to nix
@@ -343,21 +330,13 @@ Plug '~/vim-markdown-composer'
 " Plug 'JamshedVesuna/vim-markdown-preview'
 Plug 'Rykka/riv.vim', {'for': 'rst'}
 Plug 'Rykka/InstantRst', {'for': 'rst'} " rst live preview with :InstantRst,
-"Plug 'junegunn/vim-easy-align'   " to align '=' on multiple lines for instance
 Plug 'dhruvasagar/vim-table-mode', {'for': 'txt'}
 
 " Plug 'kshenoy/vim-signature' " display marks in gutter, love it
-
-" forked it to solve a bug: git@github.com:teto/QuickFixCurrentNumber.git
-" Plug '~/QuickFixCurrentNumber' " use :Cnr :Cgo instead of :cnext etc...
-" Plug 'Coacher/QuickFixCurrentNumber' " use :Cnr :Cgo instead of :cnext etc...
-Plug 'teto/QuickFixCurrentNumber' " use :Cnr :Cgo instead of :cnext etc...
-Plug 'vim-scripts/ingo-library' " DEPENDANCY of QuickFixCurrentNumber
 "Plug 'tomtom/quickfixsigns_vim'
 Plug 'nacitar/a.vim' " :A
 " Plug 'mhinz/vim-tree' " test
 Plug 'mhinz/vim-rfc', { 'on': 'RFC' } " requires nokigiri gem
-Plug 'vim-scripts/rfc-syntax', { 'for': 'rfc' } " optional syntax highlighting for RFC files
 " can show a list of unicode characeters, with their name  :UnicodeTable etc...
 " careful maps F4 by default
 Plug 'teto/Modeliner' " <leader>ml to setup buffer modeline
@@ -365,8 +344,11 @@ Plug 'teto/Modeliner' " <leader>ml to setup buffer modeline
 " Plug 'vimwiki/vimwiki'   " to write notes
 "Plug 'teto/neovim-auto-autoread' " works only in neovim, runs external checker
 " Plug 'rhysd/github-complete.vim' " provides github user/repo autocompletion after @ and #
-" Plug 'haorenW1025/diagnostic-nvim'  " LSP improvements
+
+Plug 'haorenW1025/diagnostic-nvim'  " LSP improvements OpenDiagnostic/PrevDiagnostic
+
 " does not work seems to be better ones
+"
 " Plug 'vasconcelloslf/vim-interestingwords' " highlight the words you choose <leader>k (does not work in neovim)
 " Plug 't9md/vim-quickhl' " hl manually selected words :h QuickhlManualEnable
 
@@ -382,10 +364,6 @@ Plug 'joshdick/onedark.vim'
 Plug 'NLKNguyen/papercolor-theme'
 " }}}
 
-" Had to disable this one, needs a vim with lua compiled
-" and it's not possible in neovim yet
-" color_coded requires vim to be compiled with -lua
-"Plug 'jeaye/color_coded'
 " do not run it automatically, can be boring
 " Plug 'chrisbra/csv.vim'
 
@@ -399,14 +377,6 @@ let g:EditorConfig_max_line_indicator = "line"
 " lazyload creates problems
 " TODO move to nix once https://github.com/neovim/neovim/issues/9390 is fixed
 Plug 'lervag/vimtex'
-" }}}
-" far config (Find And Replace) {{{
-" let g:far#source='agnvim'
-" let g:far#source='vimgrep'
-" let g:far#source='ag'
-" let g:far#limit
-let g:far#source='rg'
-let g:far#collapse_result=1
 " }}}
 
 " Plug 'gregsexton/gitv'
@@ -605,9 +575,18 @@ let g:markdown_composer_binary = "/nix/store/vham27qv1d8gab5xh4vvpbyal3vgfs8d-vi
 let g:vim_markdown_preview_github=1
 let g:vim_markdown_preview_use_xdg_open=1
 "}}}
-"
-"set winheight=30
-"set winminheight=5
+" vim-lastplace to restore cursor position {{{
+let g:lastplace_ignore = "gitcommit,gitrebase,svn,hgcommit"
+let g:lastplace_ignore_buftype = "quickfix,nofile,help"
+" }}}
+" far config (Find And Replace) {{{
+" let g:far#source='agnvim'
+" let g:far#source='vimgrep'
+" let g:far#source='ag'
+" let g:far#limit
+let g:far#source='rg'
+let g:far#collapse_result=1
+" }}}
 " instant restructured text {{{
 let g:instant_rst_browser = "qutebrowser"
 let g:instant_rst_additional_dirs=[ "/home/teto/mptcpweb" ]
@@ -686,7 +665,7 @@ let g:firenvim_config = {
 \ }
 "}}}
 " float-preview {{{
-let g:float_preview#docked = 0
+" let g:float_preview#docked = 0
 " let g:float_preview#win
 "}}}
 " vim-pad {{{
@@ -868,11 +847,14 @@ let g:fzf_history_dir = stdpath('cache').'/fzf-history'
 
   " [Buffers] Jump to the existing window if possible
 let g:fzf_buffers_jump = 1
+" Empty value to disable preview window altogether
+" let g:fzf_preview_window = ''
+let g:fzf_preview_window = 'right:30%'
 
 imap <c-x><c-f> <plug>(fzf-complete-path)
 " inspired by https://github.com/junegunn/fzf.vim/issues/664#issuecomment-476438294
-let $FZF_DEFAULT_OPTS='--layout=reverse'
-let g:fzf_layout = { 'window': 'call FloatingFZF()' }
+" let $FZF_DEFAULT_OPTS='--layout=reverse'
+let g:fzf_layout.window =  'call FloatingFZF()'
 
 " Function to create the custom floating window
 function! FloatingFZF()
@@ -883,7 +865,7 @@ function! FloatingFZF()
   " 90% of the height
   let height = float2nr(&lines * 0.6)
   " 60% of the height
-  let width = float2nr(&columns * 0.6)
+  let width = float2nr(&columns * 0.8)
   " horizontal position (centralized)
   let horizontal = float2nr((&columns - width) / 2)
   " vertical position (one line down of the top)
@@ -901,7 +883,7 @@ function! FloatingFZF()
 endfunction
 
 " }}}
-" fzf-preview{{{
+" fzf-preview {{{
 " let g:fzf_preview_layout = 'top split new'
 let g:fzf_preview_layout = ''
 " Key to toggle fzf window size of normal size and full-screen
@@ -1605,10 +1587,6 @@ let g:mkdp_page_title = '「${name}」'
 " " Stop the preview"
 " :MarkdownPreviewStop
 "}}}
-" context {{{
-let g:context_enabled = 1
-let g:context_max_height = 21
-"}}}
 " vista (tagbar-like software) {{{
 " Vista finder fzf
 " Vista nvim_lsp
@@ -1637,15 +1615,13 @@ let g:nv_default_extension = '.md'
 "if no directory found and g:nv_main_directory is not specified
 "let g:nv_main_directory = g:nv_main_directory or (first directory in g:nv_search_paths)
 "}}}
-" diagnostic builds on nvim's LSP {{{
+" diagnostic builds on nvim's LSP {{{ 
 let g:diagnostic_enable_virtual_text = 1
-let g:diagnostic_show_sign = 0
+let g:diagnostic_show_sign = 1
+" happens when PrevDiagnostic
 let g:diagnostic_auto_popup_while_jump = 1
 let g:diagnostic_insert_delay = 0
 "}}}
-
-
-
 
 
 set hidden " you can open a new buffer even if current is unsaved (error E37)
@@ -1668,37 +1644,6 @@ nnoremap Y y$
 let &undodir=stdpath('data').'/undo/'
 set undofile
 
-" search items in location list (per window)
-" nnoremap <F1> :lprev<CR>
-" nnoremap <F2> :lnext<CR>
-" search for  item in quickfix list (global/unique)
-" TODO should be able to look for the next one from where I stand !
-" tire du plugin QuickFixCurrentNumber
-" au QuickfixCmdPost nmap <F3> <Plug>(QuickFixCurrentNumberLPrev) | nmap <f4> <Plug>(QuickFixCurrentNumberLNext)
-
-" http://vim.1045645.n5.nabble.com/detect-QuickFix-window-list-or-LocationList-td4952180.html
-function! GoToNextError()
-" qf ? getqflist()
-  let list = getloclist(0)
-  let ret = len(list)
-echomsg ret
-  if ret == 0
-    echomsg 'GoToNextQF'
-    execute "normal \<Plug>(QuickFixCurrentNumberQNext)"
-  else
-
-    echomsg 'GoToNextLL'
-    " call <Plug>(QuickFixCurrentNumberLNext)
-    execute "normal \<Plug>(QuickFixCurrentNumberLNext)"
-  endif
-endfunc
-
-" <Plug>(QuickFixCurrentNumberLPrev)
-nmap <F3> call GoToPrevError()
-nmap <F4> call GoToNextError()
-
-" nmap <S-F3> <Plug>(QuickFixCurrentNumberQPrev)
-" nmap <S-f4> <Plug>(QuickFixCurrentNumberQNext)
 
 nnoremap <F6> :AutoSaveToggle<CR>
 "nnoremap <F6> :AutoSaveOnLostFocus<CR>
@@ -1712,7 +1657,7 @@ nnoremap <F8> :bn<CR>
 map <F11> <Plug>(ToggleListchars)
 
 " Command to toggle line wrapping.
-nnoremap <Leader>wr :set wrap! \| :set wrap?<CR>
+" nnoremap <Leader>wr :set wrap! \| :set wrap?<CR>
 
 " Get off my lawn
 "noremap <Left> :echoe "Use h"<CR>
@@ -1923,22 +1868,17 @@ function! s:RequireHaskellHost(name)
     " your configuration files are.
     " return jobstart(['stack', 'exec', 'nvim-hs', a:name.name], {'rpc': v:true, 'cwd': expand('$HOME') . '/.config/nvim'})
     " we don't want to run stack !
-    return jobstart(['nvim-hs', a:name.name], {'rpc': v:true, 'cwd': expand('$HOME') . '/.config/nvim'})
+    if executable('nvim-hs') 
+      return jobstart(['nvim-hs', a:name.name], {'rpc': v:true, 'cwd': stdpath('config')})
+    endif
 endfunction
-set cpoptions="aABceFsn" " vi ComPatibility options
-
-nnoremap <C-RightMouse> :call SynStack()<CR>
-
-" hi CursorLine guibg=NONE cterm=underline gui=underline guifg=NONE guisp=fg
-"
-" set display+=lastline
 
 " Register a plugin host that is started when a haskell file is opened
-" call remote#host#Register('haskell', "*.l\?hs", function('s:RequireHaskellHost'))
+call remote#host#Register('haskell', "*.l\?hs", function('s:RequireHaskellHost'))
 
 " But if you need it for other files as well, you may just start it
 " forcefully by requiring it
-" let hc=remote#host#Require('haskell')
+let hc=remote#host#Require('haskell')
 
 " printer configuration
 " set printexpr
@@ -2051,6 +1991,9 @@ lua vim.lsp.set_log_level("debug")
 nnoremap [[ <Cmd>labove<CR>
 nnoremap ]] <Cmd>lbelow<CR>
 
+
+nnoremap ]] <Plug>PrevDiagnostic<CR>
+
 " set omnifunc=lsp#omnifunc
   " autocmd Filetype rust,python,go,c,cpp setl omnifunc=v:lua.vim.lsp.omnifunc
 
@@ -2093,7 +2036,6 @@ let g:LspDiagnosticsHintSign = 'H'
 " vim.lsp.util.set_qflist
 " location_callback
 " }}}
-
 
 " treesitter config {{{
 " lua vim.treesitter.add_language("/home/teto/tree-sitter-c/build/Release/tree_sitter_c_binding.node", "c")
