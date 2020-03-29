@@ -3,7 +3,7 @@ let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_ignore_case = 1
 " let g:deoplete#disable_auto_complete = 0
 let g:deoplete#enable_debug = 1
-" let g:deoplete#auto_complete_delay=0
+let g:deoplete#auto_complete_delay=0
 
 " call deoplete#custom#option({
 " \ 'auto_complete': v:true,
@@ -76,6 +76,7 @@ let g:deoplete#sources#jedi#show_docstring=1
 " deoplete notmuch
 " notmuch address command to fetch completions
 " NOTE: --format=sexp is required
-let g:deoplete#sources#notmuch#command = ['notmuch', 'address', '--format=sexp', '--output=recipients', '--deduplicate=address', 'tag:inbox']
+" use dict instead generated 
+" let g:deoplete#sources#notmuch#command = ['notmuch', 'address', '--format=sexp', '--output=recipients', '--deduplicate=address', 'tag:inbox']
 " }}}
 

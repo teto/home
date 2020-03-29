@@ -162,6 +162,10 @@ $(NEOVIM_FOLDER):
 	cd "${NEOVIM_FOLDER}"; \
 		git remote add upstream git@github.com:teto/neovim.git
 
+vim_plugins:
+	# /home/teto/nixpkgs/pkgs/misc/vim-plugins/update.py
+	~/nixpkgs/pkgs/misc/vim-plugins/update.py -i config/nixpkgs/overlays/vim-plugins/vim-plugin-names -o config/nixpkgs/overlays/vim-plugins/generated.nix
+
 cachix:
 	cachix use teto
 	cachix use hie-nix

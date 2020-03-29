@@ -192,7 +192,6 @@ in
     // {
         # todo use i3lock-fancy instead
         # alternative is "light"
-        # set $greenclip "rofi -modi 'clipboard:greenclip print' -show clipboard"
         "${mod}+ctrl+v" = "exec ${pkgs.bash}/bin/bash ~/vim-anywhere/bin/run";
         "${mod}+Tab"="exec \"${pkgs.rofi}/bin/rofi -modi 'run,drun,window,ssh' -show run\"";
         "${mod}+Ctrl+L"="exec ${pkgs.i3lock-fancy}/bin/i3lock-fancy";

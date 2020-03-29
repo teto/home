@@ -28,7 +28,7 @@ let
       nvim-terminal-lua
 
       # LanguageClient-neovim
-      # tagbar
+      tagbar
       # targets-vim
       # vCoolor-vim
       # vim-CtrlXA
@@ -44,7 +44,6 @@ let
       vim-obsession
       vim-rsi
       vim-sayonara
-      # deoplete-khard
       # TODO this one will be ok once we patch it
       # vim-markdown-composer  # WIP
       # vim-markdown-preview  # WIP
@@ -62,6 +61,7 @@ let
     #   deoplete-nvim
     #   deoplete-jedi # keeps crashing
     #   deoplete-zsh # not available just yet
+      # deoplete-khard
     #   echodoc-vim
     # ]
     ;

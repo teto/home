@@ -121,7 +121,10 @@ Plug 'elbeardmorez/vim-loclist-follow' " to have quicklist synced with cursor
 Plug 'chrisbra/NrrwRgn' " to help with multi-ft files
 Plug 'chrisbra/vim-diff-enhanced' "
 " Plug 'mhinz/vim-signify' " Indicate changed lines within a file using a VCS.
-" Plug 'vim-pandoc/vim-pandoc'
+Plug 'vim-pandoc/vim-pandoc'
+Plug 'vim-pandoc/vim-pandoc-syntax'
+Plug 'shime/vim-livedown'  " :LivedownPreview
+Plug 'conornewton/vim-pandoc-markdown-preview' " :StartMdPreview / StopMd
 
 " around vcs {{{
 Plug 'idanarye/vim-merginal'  " fugitive extension :Merginal
@@ -143,15 +146,29 @@ Plug 'tweekmonster/nvim-api-viewer', {'on': 'NvimAPI'} " see nvim api
 Plug 'tweekmonster/startuptime.vim', {'on': 'StartupTime'} " see startup time per script
 Plug 'vim-scripts/vis' " ?
 Plug 'Konfekt/vim-CtrlXA' " use ctrl a/xto cycle between different words
-" Plug 'jamessan/vim-gnupg' " does not support neovim yet ?
-" provider dependant {{{
-" new deoplete relies on yarp :
 Plug 'AndrewRadev/splitjoin.vim' " gS/gJ to
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug '~/nvim-palette', { 'do': ':UpdateRemotePlugins' }
+" Plug 'jamessan/vim-gnupg' " does not support neovim yet ?
+
+" autocompletion 
+" Plug 'ncm2/ncm2'  " completion manager
+
+" deoplete {{{
+" new deoplete relies on yarp :
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'Shougo/deoplete-lsp'
+" crashes without netrc
+" Plug 'deoplete-plugins/deoplete-make' " empty !
+" Plug 'deoplete-plugins/deoplete-zsh'
+" Plug 'deoplete-plugins/deoplete-jedi'
+" Plug 'SevereOverfl0w/deoplete-github' " completion on commit issues (just
+
+" Plug 'fszymanski/deoplete-abook' " replaced with the khard one
+" Plug 'paretje/deoplete-notmuch', {'for': 'mail', 'do': ':UpdateRemotePlugins'}
+" Plug 'nicoe/deoplete-khard', {'for': 'mail'}
+"}}}
 
 " Plug 'LnL7/vim-nix', {'for': 'nix'}
-
 " Plug 'romainl/vim-qf' " can create pb with neomake
 Plug 'editorconfig/editorconfig-vim' " not remote but involves python
 Plug 'neomake/neomake' " just for nix and neovim dev with nvimdev ?
@@ -161,7 +178,6 @@ Plug 'neomake/neomake' " just for nix and neovim dev with nvimdev ?
 " needs ruby support, works in recent neovim
 Plug 'junegunn/vim-github-dashboard', { 'do': ':UpdateRemotePlugins' }
 Plug 'fmoralesc/vim-pad', {'branch': 'devel'} " :Pad new, note taking
-"}}}
 " to test https://github.com/neovim/neovim/issues/3688
 " Plug 'haya14busa/incsearch.vim' " just to test
 " while waiting for my neovim notification provider...
@@ -169,6 +185,7 @@ Plug 'tjdevries/descriptive_maps.vim', {'do': ':UpdateRemotePlugins' } " :call D
 Plug 'gianarb/notify.vim' " call notify#emitNotification('Title', 'Body')
 " Plug 'the-lambda-church/coquille', {'branch': 'matt', 'for': 'coq'}
 " Plug 'inside/vim-search-pulse' " Search related
+" Plug 'adborden/vim-notmuch-address' " does not work yet
 
 " vim-search-pulse {{{
 let g:vim_search_pulse_mode = 'cursor_line'
@@ -237,11 +254,8 @@ let cmdline_external_term_cmd = "termite -e '%s' &"
 " Plug 'Yggdroot/indentLine',{ 'for': 'python' }  " draw verticals indents but seems greedy
 " Plug 'beloglazov/vim-online-thesaurus' " thesaurus => dico dde synonymes
 
+
 """ contact autocompletion
-" Plug 'fszymanski/deoplete-abook' " replaced with the khard one
-" Plug 'paretje/deoplete-notmuch', {'for': 'mail', 'do': ':UpdateRemotePlugins'}
-" Plug 'adborden/vim-notmuch-address' " does not work yet
-" Plug 'nicoe/deoplete-khard', {'for': 'mail'}
 
 " to configure vim for haskell, refer to
 " http://yannesposito.com/Scratch/en/blog/Vim-as-IDE/
@@ -249,11 +263,6 @@ let cmdline_external_term_cmd = "termite -e '%s' &"
 Plug 'neovimhaskell/haskell-vim', {'for':'haskell'} " haskell install
 " Plug 'enomsg/vim-haskellConcealPlus', {'for':'haskell'}     " unicode for haskell operators
 " Plug 'bitc/vim-hdevtools'
-" Plug 'SevereOverfl0w/deoplete-github' " completion on commit issues (just
-" crashes without netrc
-" Plug 'deoplete-plugins/deoplete-make' " empty !
-" Plug 'deoplete-plugins/deoplete-zsh'
-" Plug 'deoplete-plugins/deoplete-jedi'
 "
 " Plug 'ncm2/float-preview.nvim'
 "}}}
@@ -463,6 +472,9 @@ filetype plugin on
 syntax on
 let g:vimsyn_embed = 'lP'  " support embedded lua, python and ruby
 
+"{{{ deoplete
+" configured in after/deoplete.vim
+"}}}
 " vimspector {{{
 let g:vimspector_enable_mappings = 'HUMAN'
 "}}}
@@ -1122,9 +1134,10 @@ let g:vimtex_compiler_latexmk = {
         \}
         " \   '-verbose',
 
-if !exists('g:deoplete#omni#input_patterns')
-    let g:deoplete#omni#input_patterns = {}
-endif
+" if !exists('g:deoplete#omni#input_patterns')
+"     let g:deoplete#omni#input_patterns = {}
+" endif
+
 " let g:deoplete#omni#input_patterns.tex = g:vimtex#re#deoplete
 "<plug>(vimtex-toc-toggle)
 " au BufEnter *.tex exec ":setlocal spell spelllang=en_us"
@@ -1390,6 +1403,12 @@ nnoremap <Leader>k :Dasht<Space>
 
 " search ALL the docsets
 nnoremap <Leader><Leader>k :Dasht!<Space>
+
+" search related docsets
+nnoremap ,k <Cmd>call Dasht([expand('<cword>'), expand('<cWORD>')])<Return>
+
+" search ALL the docsets
+nnoremap <silent> <Leader><Leader>K :call Dasht([expand('<cword>'), expand('<cWORD>')], '!')<Return>
 "}}}}}}
 " neosnippet {{{
 " let g:neosnippet#enable_completed_snippet = 1
@@ -1466,20 +1485,9 @@ let g:open_url_browser_default="qutebrowser"
 " <Leader>r to restore original quickfix entires.
 let g:QFG_hi_error = 'ctermbg=167 ctermfg=16 guibg=#d75f5f guifg=black'
 "}}}
-" QuickFixCurrentNumber {{{
-let g:no_QuickFixCurrentNumber_maps = 1
-" }}}
 " location list / quickfix config {{{
 " location list can be associated with only one window.
 " The location list is independent of the quickfix list.
-" }}}
-" ListToggle config {{{
-let g:lt_location_list_toggle_map = '<F12>' " '<leader>l'
-let g:lt_quickfix_list_toggle_map = '<F2>' " '<leader>qq'
-
-" nmap <leader>l  <Plug>(ListToggleLToggle)
-nmap <F1>  <Plug>(ListToggleQToggle)
-
 " }}}
 " iron.nvim {{{
 " cp = repeat the previous command
@@ -1665,7 +1673,7 @@ map <F11> <Plug>(ToggleListchars)
 "nnoremap <Up> :echoe "Use k"<CR>
 "nnoremap <Down> :echoe "Use j"<CR>
 
-nnoremap <silent> <Leader>B :TagbarToggle<CR>
+nnoremap <silent> <Leader>B <Cmd>TagbarToggle<CR>
 " set vim's cwd to current file's
 nnoremap ,cd :cd %:p:h<CR>:pwd<CR>
 
@@ -1988,11 +1996,11 @@ lua vim.lsp.set_log_level("debug")
 " this is set per-buffer so...
 " call LSP_maps()
 
-nnoremap [[ <Cmd>labove<CR>
-nnoremap ]] <Cmd>lbelow<CR>
+" nnoremap [[ <Cmd>labove<CR>
+" nnoremap ]] <Cmd>lbelow<CR>
 
-
-nnoremap ]] <Plug>PrevDiagnostic<CR>
+nmap [[ <Cmd>PrevDiagnostic<cr>
+nmap ]] <Cmd>NextDiagnostic<cr>
 
 " set omnifunc=lsp#omnifunc
   " autocmd Filetype rust,python,go,c,cpp setl omnifunc=v:lua.vim.lsp.omnifunc
@@ -2000,8 +2008,8 @@ nnoremap ]] <Plug>PrevDiagnostic<CR>
 set omnifunc=v:lua.vim.lsp.omnifunc
 
 
-autocmd CursorHold <buffer> lua vim.lsp.util.show_line_diagnostics()
-autocmd CursorMoved <buffer> lua vim.lsp.util.show_line_diagnostics()
+autocmd CursorHold lua vim.lsp.util.show_line_diagnostics()
+autocmd CursorMoved lua vim.lsp.util.show_line_diagnostics()
 
 " https://github.com/neovim/neovim/pull/11638
 " autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()

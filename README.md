@@ -26,7 +26,6 @@ This folder contains my customizations for:
 * newboat (RSS reader, fork of newsbeuter)
 * [notmuch](www.notmuch.org) (to tag mails)
 * offlineimap (MRA: Mail Retriever Agent)
-* powerline (to generate a fancy prompt)
 * [purebred](https://github.com/purebred-mua/purebred) (terminal MUA)
 * procmail
 * [qutebrowser](www.qutebrowser.org) (vim like browser)

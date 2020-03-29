@@ -48,7 +48,7 @@ self: prev:
 
 
       # "fork" by infinisil
-      all-hies = import (fetchTarball "https://github.com/infinisil/all-hies/tarball/master") {};
+      # all-hies = import (fetchTarball "https://github.com/infinisil/all-hies/tarball/master") {};
     };
   };
 

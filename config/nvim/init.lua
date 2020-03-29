@@ -3,6 +3,16 @@
 local nvim_lsp = require 'nvim_lsp'
 local configs = require'nvim_lsp/configs'
 
+-- external plugins to have some nice features
+local present, diag_plugin = pcall(require, "diagnostic")
+
+-- to override all defaults
+-- nvim_lsp.util.default_config = vim.tbl_extend(
+--   "force",
+--   nvim_lsp.util.default_config,
+--   { log_level = lsp.protocol.MessageType.Warning.Error }
+-- )
+
 -- vim.lsp.util.show_current_line_diagnostics()
 -- Check if it's already defined for when I reload this file.
 if not configs.lua_lsp then
@@ -54,43 +64,45 @@ nvim_lsp.lua_lsp.setup{}
 -- end
 
 
-nvim_lsp.ghcide.setup({
-	log_level = vim.lsp.protocol.MessageType.Log;
-	root_dir = nvim_lsp.util.root_pattern(".git");
+-- nvim_lsp.ghcide.setup({
+-- 	log_level = vim.lsp.protocol.MessageType.Log;
+-- 	root_dir = nvim_lsp.util.root_pattern(".git");
 
-	cmd = {"ghcide", "--lsp"};
+-- 	cmd = {"ghcide", "--lsp"};
+-- 	filetypes = { "hs", "lhs", "haskell" };
+-- 	root_dir = function(fname)
+-- 		return nvim_lsp.util.find_git_ancestor(fname) or vim.loop.os_homedir()
+-- 	end;
+-- 	log_level = vim.lsp.protocol.MessageType.Warning;
+-- 	settings = {};
+-- 	-- on_attach=require'diagnostic'.on_attach
+-- })
+
+nvim_lsp.hie.setup({
+	name = "hie";
+	cmd = "otot";
+	-- "/home/teto/all-hies/result/bin/hie-wrapper"
+	-- cmd = { "toto", "--lsp", "-d", "--vomit", "--logfile", "/tmp/lsp_haskell.log"},
 	filetypes = { "hs", "lhs", "haskell" };
-	root_dir = function(fname)
-		return nvim_lsp.util.find_git_ancestor(fname) or vim.loop.os_homedir()
-	end;
-	log_level = vim.lsp.protocol.MessageType.Warning;
-	settings = {};
+	-- init_options = {};
+	root_dir = nvim_lsp.util.root_pattern(".git");
+	-- root_dir = function () return "/home/teto/test-task-2-final/solution" end;
+	log_level = vim.lsp.protocol.MessageType.Error;
+	--careful, without this, we get a warning from hie
+	init_options = {
+		languageServerHaskell = {
+			hlintOn = false;
+			-- maxNumberOfProblems = number;
+			-- diagnosticsDebounceDuration = number;
+			-- liquidOn = bool (default false);
+			completionSnippetsOn = true;
+			-- formatOnImportOn = bool (default true);
+			-- formattingProvider = string (default "brittany", alternate "floskell");
+		}
+	};
+	on_attach=diag_plugin.on_attach;
 
-	-- on_attach=require'diagnostic'.on_attach
 })
-
---nvim_lsp.hie.setup({
---	name = "hie";
---	-- cmd = "hie-wrapper";
---	cmd = { "hie-wrapper", "--lsp", "-d", "--vomit", "--logfile", "/tmp/lsp_haskell.log"},
---	filetypes = { "hs", "lhs", "haskell" };
---	-- init_options = {};
---	root_dir = nvim_lsp.util.root_pattern(".git");
---	-- root_dir = function () return "/home/teto/test-task-2-final/solution" end;
---	log_level = vim.lsp.protocol.MessageType.Error;
---	--careful, without this, we get a warning from hie
---	init_options = {
---		languageServerHaskell = {
---			hlintOn = false;
---			-- maxNumberOfProblems = number;
---			-- diagnosticsDebounceDuration = number;
---			-- liquidOn = bool (default false);
---			completionSnippetsOn = true;
---			-- formatOnImportOn = bool (default true);
---			-- formattingProvider = string (default "brittany", alternate "floskell");
---		}
---	};
---})
 
 -- vim.lsp.add_filetype_config({
 -- 	name = "latex";
@@ -167,40 +179,39 @@ nvim_lsp.pyls.setup({
 
 -- use only if require diagnostic is not null ?
 do 
-	-- local present, diag_plugin = pcall(require, "diagnostic")
-	-- if present then
+	if present then
 	-- 	nvim_lsp.ghcide.setup{on_attach=diag_plugin.on_attach}
-	-- 	-- nvim_lsp.hie.setup{on_attach=diag_plugin.on_attach}
-	-- else
-		-- print("could not require diagnostic")
-		-- local method = 'textDocument/publishDiagnostics'
-		-- local default_callback = vim.lsp.callbacks[method]
-		-- vim.lsp.callbacks[method] = function(err, method, result, client_id)
-		-- 	default_callback(err, method, result, client_id)
-		-- 	if result and result.diagnostics then
-		-- 	for _, v in ipairs(result.diagnostics) do
-		-- 		v.uri = v.uri or result.uri
-		-- 	end
-		-- 	vim.lsp.util.set_loclist(result.diagnostics)
-		-- 	end
-		-- end
-	-- end
+	-- nvim_lsp.hie.setup{on_attach=diag_plugin.on_attach}
+	else
+		print("could not require diagnostic")
+		local method = 'textDocument/publishDiagnostics'
+		local default_callback = vim.lsp.callbacks[method]
+		vim.lsp.callbacks[method] = function(err, method, result, client_id)
+			default_callback(err, method, result, client_id)
+			if result and result.diagnostics then
+			for _, v in ipairs(result.diagnostics) do
+				v.uri = v.uri or result.uri
+			end
+			vim.lsp.util.set_loclist(result.diagnostics)
+			end
+		end
+	end
 end
 
 -- jsut to check if issues are mine or not
-do
-  local method = 'textDocument/publishDiagnostics'
-  local default_callback = vim.lsp.callbacks[method]
-  vim.lsp.callbacks[method] = function(err, method, result, client_id)
-    default_callback(err, method, result, client_id)
-    if result and result.diagnostics then
-    --   for _, v in ipairs(result.diagnostics) do
-    --     v.uri = v.uri or result.uri
-    --   end
-      vim.lsp.util.set_loclist(result.diagnostics)
-    end
-  end
-end
+-- do
+--   local method = 'textDocument/publishDiagnostics'
+--   local default_callback = vim.lsp.callbacks[method]
+--   vim.lsp.callbacks[method] = function(err, method, result, client_id)
+--     default_callback(err, method, result, client_id)
+--     if result and result.diagnostics then
+--     --   for _, v in ipairs(result.diagnostics) do
+--     --     v.uri = v.uri or result.uri
+--     --   end
+--       vim.lsp.util.set_loclist(result.diagnostics)
+--     end
+--   end
+-- end
 
 -- to disable virtualtext check 
 -- follow https://www.reddit.com/r/neovim/comments/f8u6fz/lsp_query/fip91ww/?utm_source=share&utm_medium=web2x

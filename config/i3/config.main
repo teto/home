@@ -18,10 +18,8 @@ set $GroupFr Group2
 # bindsym $mod+g exec $greenclip
 # bindsym $mod+b exec buku_run
 
-# bindsym $mad+h exec $greenclip
 # bindsym $mad+b exec buku_run
 # bindsym $mad+r exec rofi_pass
-# bindsym $mod+ctrl+h exec $greenclip
 # bindsym $mod+ctrl+b exec buku_run
 # bindsym $mod+ctrl+v exec ~/vim-anywhere/bin/run"
 
