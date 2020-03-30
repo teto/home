@@ -1,6 +1,6 @@
 self: super:
 let
-  startPlugins = with super.pkgs.vimPlugins; [
+  startPlugins = with self.pkgs.vimPlugins; [
       # echodoc-vim
 
       # to install manually with coc.nvim:
@@ -13,7 +13,7 @@ let
       # coc-translator  # not available yet
       # csv-vim
       # replaced by coc
-      fugitive
+      vim-fugitive
       far-vim
 
       # fails with   python module. Run `pip install neovim` to fix. For more info, :he nvim-python"
