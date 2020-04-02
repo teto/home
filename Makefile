@@ -20,7 +20,7 @@ LKL_FOLDER = "${HOME}/lkl"
 mkfile_path := $(abspath $(lastword $(MAKEFILE_LIST)))
 mkfile_dir := $(dir $(mkfile_path))
 
-.PHONY: config etc mail local bin home
+.PHONY: config etc mail local bin home vim_plugins
 
 # http://stackoverflow.com/questions/448910/makefile-variable-assignment
 config:

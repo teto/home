@@ -1,5 +1,6 @@
-norcalli/nvim-terminal.lua
-glacambre/firenvim
+davidgranstrom/nvim-markdown-preview
 euclio/vim-markdown-composer
+glacambre/firenvim
 iamcco/markdown-preview.nvim
 JamshedVesuna/vim-markdown-preview
+norcalli/nvim-terminal.lua

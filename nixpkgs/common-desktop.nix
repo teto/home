@@ -9,8 +9,6 @@ let
 in
 {
 
-
-
   imports = [
     # todo renommer en workstation
     # ./hardware-dell.nix
@@ -215,6 +213,9 @@ in
   # security.pam.loginLimits
 
   system.copySystemConfiguration = true;
+
+  # this is slow
+  documentation.nixos.enable = true;
 
   # in master
   # xdg.autostart.enable

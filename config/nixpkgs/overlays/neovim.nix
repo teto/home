@@ -46,6 +46,9 @@ let
       vim-sayonara
       # TODO this one will be ok once we patch it
       # vim-markdown-composer  # WIP
+
+      markdown-preview-nvim # :MarkdownPreview
+
       # vim-markdown-preview  # WIP
       vim-highlightedyank
       vim-commentary

@@ -112,7 +112,7 @@ Plug 'bogado/file-line' " to open a file at a specific line
 Plug 'glacambre/firenvim' " to use nvim in firefox
 " Plug 'liuchengxu/vim-clap' " fuzzer
 Plug 'alok/notational-fzf-vim' " to take notes
-Plug 'iamcco/markdown-preview.nvim' " test , most recent
+" Plug 'iamcco/markdown-preview.nvim' " :MarkdownPreview
 Plug 'suy/vim-context-commentstring' " commen for current programming language
 " Plug 'voldikss/vim-translate-me' " floating windows for neovim
 Plug 'neovimhaskell/nvim-hs.vim' " to help with nvim-hs
@@ -293,7 +293,7 @@ Plug 'PotatoesMaster/i3-vim-syntax'
 " Plug 'Valloric/ListToggle' " toggle location/quickfix list toggling seems to fail
 " Plug 'git@github.com:milkypostman/vim-togglelist' " same
 " still problems with airline when installed via nix
-Plug '907th/vim-auto-save' " :h auto-save
+" Plug '907th/vim-auto-save' " :h auto-save
 " Plug 'teto/vim-auto-save' " autosave :h auto-save
 " Plug 'bfredl/nvim-miniyank' " killring alike plugin, cycling paste careful search for :Yank commands
 " hangs with big strings
@@ -350,7 +350,7 @@ Plug 'mhinz/vim-rfc', { 'on': 'RFC' } " requires nokigiri gem
 " careful maps F4 by default
 Plug 'teto/Modeliner' " <leader>ml to setup buffer modeline
 " This one has bindings mapped to <leader>l
-" Plug 'vimwiki/vimwiki'   " to write notes
+Plug 'vimwiki/vimwiki'   " to write notes
 "Plug 'teto/neovim-auto-autoread' " works only in neovim, runs external checker
 " Plug 'rhysd/github-complete.vim' " provides github user/repo autocompletion after @ and #
 

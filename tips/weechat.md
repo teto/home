@@ -1,4 +1,7 @@
-https://weechat.org/files/doc/devel/weechat_faq.en.html#terminal_copy_paste
+https://weechat.org/files/doc/devel/weechat_faq.en.html#terminal_copy_paste (alt
++ l )
+
+or `/window bare 5` (for it to last 5sec)
 
 /mouse enable
 

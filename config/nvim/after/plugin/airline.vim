@@ -7,7 +7,7 @@ endif
 
 " debug with :AirlineExtensions
 " to speed up things
-  let g:airline#extensions#disable_rtp_load = 1
+let g:airline#extensions#disable_rtp_load = 1
 
 
 
@@ -32,10 +32,10 @@ endif
 
 let g:airline#extensions#coc#enabled = 1
 let g:airline#extensions#gutentags#enabled = 0
-let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#enabled = 0
 let g:airline#extensions#ale#enabled = 0
 let g:airline#extensions#neomake#enabled = 1
-let g:airline#extensions#languageclient#enabled = 1
+let g:airline#extensions#languageclient#enabled = 0
 
 let g:airline_highlighting_cache = 1
 let g:airline_exclude_preview = 0

@@ -16,6 +16,7 @@ in
 
   home.packages = with pkgs; [
     dunst
+    fortune
     xdg_utils
     steam
   ];
