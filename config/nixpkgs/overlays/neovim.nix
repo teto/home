@@ -27,6 +27,7 @@ let
       # neomake
       nvim-terminal-lua
 
+
       # LanguageClient-neovim
       tagbar
       # targets-vim
@@ -47,7 +48,9 @@ let
       # TODO this one will be ok once we patch it
       # vim-markdown-composer  # WIP
 
-      markdown-preview-nvim # :MarkdownPreview
+      vim-livedown
+      # markdown-preview-nvim # :MarkdownPreview
+      nvim-markdown-preview  # :MarkdownPreview
 
       # vim-markdown-preview  # WIP
       vim-highlightedyank

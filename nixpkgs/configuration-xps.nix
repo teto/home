@@ -167,10 +167,9 @@ let
   };
 
   environment.systemPackages = with pkgs;
-    (import ./basetools.nix { inherit pkgs;})
     # strongswan # to get ipsec in path
     # cups-pk-helper # to add printer through gnome control center
-    ++ [
+    [
       pkgs.libinput-gestures
       pkgs.brightnessctl
       ]

@@ -15,11 +15,11 @@ in
     # /etc/nixos/hardware-configuration.nix
     ./config-all.nix
 
-    ./modules/ntp.nix
-    ./modules/network-manager.nix
-    ./modules/xserver.nix
-    ./modules/wireshark.nix
-    ./modules/wifi.nix
+    ./ntp.nix
+    ./network-manager.nix
+    ./xserver.nix
+    ./wireshark.nix
+    ./wifi.nix
     # ./modules/tor.nix
 
     # only if available
@@ -42,6 +42,9 @@ in
         # "usbhid"
         # "hid_generic"
   # ];
+  environment.systemPackages = with pkgs; [
+     stow
+  ];
 
   networking.firewall.checkReversePath = false; # for nixops
   networking.firewall.allowedUDPPorts = [ 631 ];
@@ -216,6 +219,8 @@ in
 
   # this is slow
   documentation.nixos.enable = true;
+
+  programs.system-config-printer.enable = true;
 
   # in master
   # xdg.autostart.enable

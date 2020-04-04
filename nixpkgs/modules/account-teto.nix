@@ -5,14 +5,13 @@ in
 {
   imports = [
     "${builtins.fetchTarball https://github.com/rycee/home-manager/archive/master.tar.gz}/nixos"
-
   ];
 
   users.users.teto = {
      isNormalUser = true; # creates home/ sets default shell
      uid = 1000;
      extraGroups = [
-       "audio" # for pulseaudio 
+       "audio" # for pulseaudio
        "docker"   # to access docker socket
        "input"    # for libinput-gestures
        "libvirtd" # for nixops
@@ -23,10 +22,10 @@ in
        "jupyter"
        "video" # to control brightness
        "wheel" # for sudo
-       # "kvm" # don't think that's needed 
+       # "kvm" # don't think that's needed
      ];
      # once can set initialHashedPassword too
-     # initialPassword 
+     # initialPassword
      # generated with nix run nixpkgs.mkpasswd mkpasswd -m sha-512
      hashedPassword = "$6$T/5zYuCMI$U45oW0D6cPKsXtETwlNFpsit924HElAYtXPsGTpj0XS/ITUz39xpPxnL.kzUWqeqQmRxvEOAHBeKm5/xHDrvs1";
 

@@ -1,7 +1,8 @@
 { config, lib, pkgs,  ... }:
 let
   secrets = import ./secrets.nix;
-  unstable = import <nixos-unstable> { inherit config; }; # https://nixos.org/channels/nixos-unstable
+  # # https://nixos.org/channels/nixos-unstable
+  unstable = import <nixos-unstable> { inherit config; };
 in
 {
   imports = [
@@ -10,8 +11,8 @@ in
    ./hardware-lenovo.nix
 
     ./modules/distributedBuilds.nix
-    ./config-all.nix
-    ./common-desktop.nix
+    ./modules/config-all.nix
+    ./modules/desktop.nix
     ./modules/network-manager.nix
     ./modules/libvirtd.nix
     # ./modules/vpn.nix
@@ -278,9 +279,8 @@ in
   # programs.bcc.enable = true;
 
   environment.systemPackages = with pkgs;
-    (import ./basetools.nix { inherit pkgs;})
     # cups-pk-helper # to add printer through gnome control center
-    ++ [
+    [
       pkgs.brightnessctl
     ]
   ;

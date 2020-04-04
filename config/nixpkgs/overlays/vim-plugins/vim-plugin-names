@@ -4,3 +4,4 @@ glacambre/firenvim
 iamcco/markdown-preview.nvim
 JamshedVesuna/vim-markdown-preview
 norcalli/nvim-terminal.lua
+shime/vim-livedown

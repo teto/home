@@ -47,6 +47,17 @@ self: super:
     };
   };
 
+  vim-livedown = buildVimPluginFrom2Nix {
+    pname = "vim-livedown";
+    version = "2019-02-28";
+    src = fetchFromGitHub {
+      owner = "shime";
+      repo = "vim-livedown";
+      rev = "24c78c0c1177c0231bb542fa1e3807a3b089248e";
+      sha256 = "0dnhxh4ifhvkp9a2vh7a97kc3dqcnh1jv3g8dlsxwy47zdhb0lnd";
+    };
+  };
+
   vim-markdown-composer = buildVimPluginFrom2Nix {
     pname = "vim-markdown-composer";
     version = "2020-02-07";

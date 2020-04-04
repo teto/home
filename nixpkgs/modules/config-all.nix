@@ -7,10 +7,7 @@
 { config, pkgs, options, lib, ... } @ mainArgs:
 
 let
-  userNixpkgs = /home/teto/nixpkgs;
   fzf = pkgs.fzf;
-  load-packages = file:
-    import file (removeAttrs mainArgs [ "config" ]);
 in
   # Check if custom vars are set
   # assert mySecrets.user            != "";
@@ -24,11 +21,10 @@ in
   # assert mySecrets.ibspass         != "";
   # assert mySecrets.ibsip != "";
 rec {
-  # environment.systemPackages = with pkgs; 
 
   imports = [
       ./account-teto.nix
-      ./modules/ntp.nix
+      ./ntp.nix
       # ./mptcp-kernel.nix
   ];
   # kernelModules are forcibly loaded
@@ -69,9 +65,48 @@ rec {
     termite.terminfo # to be able to edit over ssh
     kitty.terminfo # to be able to edit over ssh
     utillinux # for lsns (namespace listing)
-  ]
-  ++ (load-packages ./basetools.nix)
-  ;
+  ] ++ (with pkgs; [
+     automake
+     # autoconf
+     autojump
+     binutils
+     # cmake
+     curl
+     fd  # replaces 'find'
+     file
+	 fzf
+     # lgogdownloader
+     # libtool
+     lsof
+     # libreoffice # too long to compile
+	 # gawk
+     gitAndTools.gitFull # to get send-email
+	 # git-extras # does not find it (yet)
+     gnum4 # hum
+     gnupg
+     gnumake
+     htop
+
+     # ipsecTools # does it provide ipsec ?
+     # neovim # TODO remake a custom one
+     # pkgconfig
+     # pstree
+
+     # for fuser, useful when can't umount a directory
+     # https://unix.stackexchange.com/questions/107885/busy-device-on-umount
+     psmisc
+     # pv # monitor copy progress
+     ranger
+     rsync
+     ripgrep
+     sudo
+     # tig
+	 unzip
+     # vifm
+     vim
+     wget
+     # zsh
+  ]);
 
    # TODO it appears in /etc/bashrc !
    environment.shellAliases = {
@@ -279,7 +314,6 @@ kernel_xconfig=''
   # set it to true to help
   documentation.nixos.includeAllModules = false;
 
-  programs.system-config-printer.enable = true;
 
   # todo set it only if path exists
   # convert set back to list

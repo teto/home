@@ -24,7 +24,7 @@ rec {
   news.display = "silent";
 
   imports = [
-    ./modules/xdg-mime.nix
+    ./xdg-mime.nix
   ];
 
   # home.extraOutputsToInstall = [ "man" "doc" ];
@@ -376,14 +376,14 @@ rec {
       set-option -g status on                # turn the status bar on
       if-shell -b 'head $XDG_CONFIG_HOME/tmux/config' \
         "source-file $XDG_CONFIG_HOME/tmux/config"
-      '';
+    '';
   };
 
-  xdg.configFile."zsh/zshrc.generated".source = ../config/zsh/zshrc;
+  xdg.configFile."zsh/zshrc.generated".source = ../../config/zsh/zshrc;
   # home.activation.copyZshrc = dagEntryBefore [ "linkGeneration" ] ''
   #   cp $
   #   '';
-  home.file.".digrc".source =  ../home/digrc;
+  # home.file.".digrc".source =  ../../home/digrc;
 
   # order matters
   home.file.".mailcap".text =  ''

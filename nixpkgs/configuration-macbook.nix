@@ -9,9 +9,7 @@ let
 {
   imports = [
     ./hardware-macbook.nix
-
-    ./common-desktop.nix
-    # ./modules/libvirtd.nix
+    ./modules/desktop.nix
     ./modules/network-manager.nix
     # ./modules/libvirtd.nix
     # ./modules/vpn.nix
@@ -19,7 +17,6 @@ let
 
     # just for testing
     # ./modules/nextcloud.nix
-
     # ./modules/tor.nix
   ];
 
@@ -37,7 +34,7 @@ let
 
   # boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_mptcp_with_netlink;
   # boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_mptcp_trunk_raw;
-  # boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_mptcp;
+  # boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_5_6;
 
 
   # programs.mininet.enable = true;
@@ -120,7 +117,6 @@ let
     distributedBuilds = true;
   };
 
-
   hardware.pulseaudio = {
     enable = true;
 
@@ -140,15 +136,8 @@ let
     # });
   };
 
-  # # Just for the sake of testing
-  # environment.systemPackages = [
-  #   pkgs.openvswitch
-  # ];
-
   services.greenclip.enable = true;
-
 
   # for android development
   programs.adb.enable = false;
-
 }

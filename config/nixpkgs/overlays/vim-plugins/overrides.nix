@@ -43,6 +43,16 @@ self: prev:
     propagatedBuildsInputs = (oa.propagatedBuildsInputs or []) ++ [ xdotool grip ];
   });
 
+  nvim-markdown-preview = prev.nvim-markdown-preview.overrideAttrs(old: {
+    buildInputs = [ pkgs.nodePackages.live-server pkgs.pandoc ];
+    preFixup = ''
+      substituteInPlace $out/share/vim-plugins/nvim-markdown-preview/ftplugin/markdown.vim --replace "executable('live-server')" \
+          "executable('${pkgs.nodePackages.live-server}/bin/live-server')"
+
+      substituteInPlace $out/share/vim-plugins/nvim-markdown-preview/autoload/markdown.vim --replace "live-server" \
+          "${pkgs.nodePackages.live-server}/bin/live-server"
+      '';
+  });
 
   markdown-preview-nvim = let
     version = "0.0.9";

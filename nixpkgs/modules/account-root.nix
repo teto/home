@@ -6,7 +6,6 @@
      # once can set initialHashedPassword too
      initialPassword = "test";
 	 # shell = pkgs.zsh;
-     # import basetools
      # openssh.authorizedKeys.keyFiles = [ ./keys/root_gitolite.pub ];
   };
 }

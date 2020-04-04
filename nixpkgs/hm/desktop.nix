@@ -168,10 +168,10 @@ in
 {
 
   imports = [
-    ./home-common.nix
-    ./home-dev.nix
-    ./modules/home-tor.nix
-    ./modules/i3.nix
+    ./common.nix
+    ./dev.nix
+    # ./modules/home-tor.nix
+    ./i3.nix
   ];
 
   # rename to fn, accept a parameter for optional
@@ -226,6 +226,7 @@ in
 
     # rofi.font: SourceCodePro 9
     # font =
+    # ,Layouts:${../../bin/i3-list-layouts}
     extraConfig=''
       !rofi.opacity: 90
       !rofi.width: 50
@@ -233,7 +234,7 @@ in
       rofi.fuzzy: true
       rofi.show-icons: true
       ! cd window
-      rofi.modi:       run,drun,window,ssh,Layouts:${../bin/i3-list-layouts}
+      rofi.modi:       run,drun,window,ssh
       /* see to integrate teiler */
       rofi.sidebar-mode: true
 
@@ -348,7 +349,7 @@ in
 
   # as long as there is no better way to configure i3
   # xsession.windowManager.command = "${pkgs.i3}/bin/i3";
-  home.file.".pypirc".source = ../home/pypirc;
+  home.file.".pypirc".source = ../../home/pypirc;
 
   # readline equivalent but in haskell for ghci
   # home.file.".haskeline".source = ../home/haskeline;

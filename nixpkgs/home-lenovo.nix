@@ -1,6 +1,6 @@
 # home-manager specific config from
 { config, lib, pkgs,  ... }:
-let 
+let
 
   mbsyncConfig = {
     enable = true;
@@ -13,14 +13,13 @@ let
 {
   imports = [
     # Not tracked, so doesn't need to go in per-machine subdir
-      # ./home-common-headless.nix
-      ./home-desktop.nix
+      ./hm/desktop.nix
       # ./modules/vdirsyncer.nix
       # ./modules/sway.nix
-      ./neomutt.nix
+      ./hm/neomutt.nix
 
-      ./home-mail.nix
-      ./home-extra.nix
+      ./hm/mail.nix
+      ./hm/extra.nix
       # symlink towards a config
   ]
   ;
@@ -84,4 +83,3 @@ let
   '';
 
 }
-

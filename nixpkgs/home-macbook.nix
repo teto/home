@@ -4,10 +4,10 @@ let
 in
 {
   imports = [
-    ./home-common.nix
-    ./home-desktop.nix
+    ./hm/common.nix
+    ./hm/desktop.nix
 
-    ./home-mail.nix
+    ./hm/mail.nix
 
     # while waiting for it to land upstream
     # ./neomutt.nix
@@ -22,8 +22,7 @@ in
   ];
 
   home.file.".digrc".text = ''
-
-    '';
+  '';
 
   # flameshot in standalone won't work
   # services.flameshot.enable = true;

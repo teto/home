@@ -13,13 +13,12 @@ let
 {
   imports = [
     # Not tracked, so doesn't need to go in per-machine subdir
-      # ./home-common-headless.nix
-      ./home-desktop.nix
+      ./hm/desktop.nix
 
       ./modules/tablet.nix
       # ./modules/hm-experimental.nix
       # ./modules/vdirsyncer.nix
-      ./home-mail.nix
+      ./hm/mail.nix
       # symlink towards a config
     ]
     ;
