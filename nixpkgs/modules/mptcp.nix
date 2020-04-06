@@ -1,7 +1,4 @@
 { config, lib, pkgs, ... }:
-
-with lib;
-
 {
   networking.mptcp = {
     enable = true;
@@ -12,5 +9,4 @@ with lib;
     # package = pkgs.linux_mptcp;
   };
 
-  # tcp_no_metrics_save
 }

@@ -149,7 +149,6 @@ let
     userName = "matthieucoudron@fastmail.com";
     realName = "Matthieu Coudron";
     address = "matthieucoudron@fastmail.com";
-    # flavor = "gmail.com";
 
     # to work around a git send-email problem
     # smtp.port = 587;
@@ -158,9 +157,7 @@ let
     # maildirModule.path = "gmail";
 
     # keyring get gmail login
-    # loginCommand =
     # passwordCommand = "${pkgs.libsecret}/bin/secret-tool lookup gmail password";
-    # builtins.toString
 
     # fastmail requires an app-specific password
     passwordCommand = getPassword "perso/fastmail_mc";
@@ -169,8 +166,6 @@ let
     imap = { host = "imap.fastmail.com"; tls = my_tls; };
     smtp = { host = "smtp.fastmail.com"; tls = my_tls; };
     # smtp.tls.useStartTls = false;
-
-    # contactCompletion = "notmuch address";
   };
 
   gmail =
@@ -317,6 +312,41 @@ in
      #   };
      # };
    };
+
+   programs.neomutt = {
+      enable = true;
+      # checkStatsInterval  = 60;
+      # editor
+      # theme: seems dangerous
+      # macros = [ ];
+      # binds = [ ];
+      vimKeys = true;
+      sidebar = {
+        enable = false;
+        # shortPath = false;
+        # width = 60;
+      };
+
+      sort = "threads";
+
+      # settings = {
+      # };
+
+      extraConfig = ''
+        source $XDG_CONFIG_HOME/neomutt/test.rc
+      '';
+
+# # only available in neomutt
+# set new_mail_command="notify-send --icon='/home/teto/.config/neomutt/mutt-48x48.png' \
+# 'New Email' '%n new messages, %u unread.' &"
+    #set sidebar_short_path
+    # set sidebar_width = 25
+# # Shorten mailbox names (truncate all subdirs)
+# set sidebar_component_depth=1
+# # Shorten mailbox names (truncate 1 subdirs)
+# set sidebar_delim_chars="/"
+# # Delete everything up to the last or Nth / character
+    };
 
    programs.msmtp = {
      enable = true;

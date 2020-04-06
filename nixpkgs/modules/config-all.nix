@@ -25,31 +25,17 @@ rec {
   imports = [
       ./account-teto.nix
       ./ntp.nix
-      # ./mptcp-kernel.nix
   ];
   # kernelModules are forcibly loaded
   # availableKernelModules are just available, and udev will auto-load them as needed
 
 
   boot.cleanTmpDir = true; # to clean /tmp on reboot
-  # Use the systemd-boot EFI boot loader.
-  # boot.loader ={
-  #   systemd-boot.enable = true;
-  #   efi.canTouchEfiVariables = true; # allows to run $ efi...
-  # # just to generate the entry used by ubuntu's grub
-  # # boot.loader.grub.enable = true;
-  # # boot.loader.grub.version = 2;
-  # # install to none, we just need the generated config
-  # # for ubuntu grub to discover
-  #   grub.device = "/dev/sda";
-  # };
   services.journald.extraConfig = ''
     # alternatively one can run journalctl --vacuum-time=2d
     SystemMaxUse=2G
   '';
   # see https://github.com/NixOS/nixpkgs/issues/15293
-
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Set your time zone.
   time.timeZone = "Europe/Paris";
@@ -175,7 +161,7 @@ kernel_xconfig=''
   };
 
   # stick to sh as it's shell independant
-  environment.extraInit = builtins.readFile ../config/zsh/init.sh;
+  environment.extraInit = builtins.readFile ../../config/zsh/init.sh;
 
   # environment.gnome3.excludePackages = [];
   # security.initialRootPassword = "!";
@@ -309,7 +295,7 @@ kernel_xconfig=''
     # "net.ipv4.tcp_allowed_congestion_control" = "reno cubic";
   };
 
-  environment.etc."inputrc".source = ../config/inputrc;
+  environment.etc."inputrc".source = ../../config/inputrc;
 
   # set it to true to help
   documentation.nixos.includeAllModules = false;

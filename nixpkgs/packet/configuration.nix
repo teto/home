@@ -8,8 +8,8 @@
   imports =
     [ # Include the results of the hardware scan.
       ./packet.nix
-      # TODO
-      ../
+      # TODO base
+      # ../
     ];
 
   # Use the systemd-boot EFI boot loader.

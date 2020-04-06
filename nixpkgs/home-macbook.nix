@@ -10,7 +10,7 @@ in
     ./hm/mail.nix
 
     # while waiting for it to land upstream
-    # ./neomutt.nix
+    # ./hm/neomutt.nix
   ];
   # home.keyboard.layout = "fr,us";
 

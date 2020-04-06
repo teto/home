@@ -575,6 +575,15 @@ set splitbelow	" on horizontal splits
 set splitright   " on vertical split
 
 " }}}
+" vimwiki {{{
+let wiki_1 = {}
+let wiki_1.path = '~/Nextcloud2/perso/notes'
+let wiki_1.index = 'main'
+let wiki_1.ext = '.txt'
+let g:vimwiki_list = [
+  \ wiki_1, {'path': '~/dotfiles/tips'} 
+  \ ]
+"}}}
 " {{{ Markdown composer
 " Run with :ComposerStart
 " let g:markdown_composer_open_browser        = "qutebrowser"

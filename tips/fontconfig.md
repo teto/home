@@ -6,3 +6,11 @@ fc-match -s 'Source Code Pro'
 
 FC_DEBUG=4 pango-view -t '{character}' 2>&1 | \
     grep -o 'family: "[^"]\+' | cut -c 10- | tail -n 1
+
+
+Powerline & Fonts
+====
+
+* list fonts with fc-list
+* regenerate cache with fc-cache -vf : it will look into the directories defined in your $HOME/.fonts.conf
+Make sure (append ~/.fonts for local fonts only)
