@@ -64,45 +64,45 @@ nvim_lsp.lua_lsp.setup{}
 -- end
 
 
--- nvim_lsp.ghcide.setup({
--- 	log_level = vim.lsp.protocol.MessageType.Log;
--- 	root_dir = nvim_lsp.util.root_pattern(".git");
-
--- 	cmd = {"ghcide", "--lsp"};
--- 	filetypes = { "hs", "lhs", "haskell" };
--- 	root_dir = function(fname)
--- 		return nvim_lsp.util.find_git_ancestor(fname) or vim.loop.os_homedir()
--- 	end;
--- 	log_level = vim.lsp.protocol.MessageType.Warning;
--- 	settings = {};
--- 	-- on_attach=require'diagnostic'.on_attach
--- })
-
-nvim_lsp.hie.setup({
-	name = "hie";
-	cmd = "otot";
-	-- "/home/teto/all-hies/result/bin/hie-wrapper"
-	-- cmd = { "toto", "--lsp", "-d", "--vomit", "--logfile", "/tmp/lsp_haskell.log"},
-	filetypes = { "hs", "lhs", "haskell" };
-	-- init_options = {};
+nvim_lsp.ghcide.setup({
+	log_level = vim.lsp.protocol.MessageType.Log;
 	root_dir = nvim_lsp.util.root_pattern(".git");
-	-- root_dir = function () return "/home/teto/test-task-2-final/solution" end;
-	log_level = vim.lsp.protocol.MessageType.Error;
-	--careful, without this, we get a warning from hie
-	init_options = {
-		languageServerHaskell = {
-			hlintOn = false;
-			-- maxNumberOfProblems = number;
-			-- diagnosticsDebounceDuration = number;
-			-- liquidOn = bool (default false);
-			completionSnippetsOn = true;
-			-- formatOnImportOn = bool (default true);
-			-- formattingProvider = string (default "brittany", alternate "floskell");
-		}
-	};
-	on_attach=diag_plugin.on_attach;
 
+	cmd = {"ghcide", "--lsp"};
+	filetypes = { "hs", "lhs", "haskell" };
+	root_dir = function(fname)
+		return nvim_lsp.util.find_git_ancestor(fname) or vim.loop.os_homedir()
+	end;
+	log_level = vim.lsp.protocol.MessageType.Warning;
+	settings = {};
+	-- on_attach=require'diagnostic'.on_attach
 })
+
+--nvim_lsp.hie.setup({
+--	name = "hie";
+--	-- cmd = "otot";
+--	-- "/home/teto/all-hies/result/bin/hie-wrapper"
+--	-- cmd = { "toto", "--lsp", "-d", "--vomit", "--logfile", "/tmp/lsp_haskell.log"},
+--	filetypes = { "hs", "lhs", "haskell" };
+--	-- init_options = {};
+--	root_dir = nvim_lsp.util.root_pattern(".git");
+--	-- root_dir = function () return "/home/teto/test-task-2-final/solution" end;
+--	log_level = vim.lsp.protocol.MessageType.Error;
+--	--careful, without this, we get a warning from hie
+--	init_options = {
+--		languageServerHaskell = {
+--			hlintOn = false;
+--			-- maxNumberOfProblems = number;
+--			-- diagnosticsDebounceDuration = number;
+--			-- liquidOn = bool (default false);
+--			completionSnippetsOn = true;
+--			-- formatOnImportOn = bool (default true);
+--			-- formattingProvider = string (default "brittany", alternate "floskell");
+--		}
+--	};
+--	on_attach=diag_plugin.on_attach;
+
+--})
 
 -- vim.lsp.add_filetype_config({
 -- 	name = "latex";

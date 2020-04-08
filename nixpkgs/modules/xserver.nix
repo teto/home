@@ -2,7 +2,6 @@
 {
 
   environment.systemPackages = with pkgs; [
-    # haskellPackages.greenclip # todo get from haskell
     mupdf.bin # evince does better too
     rofi
     xautolock

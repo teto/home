@@ -198,7 +198,6 @@ in
         "${mod}+Ctrl+h" = ''exec "${pkgs.rofi}/bin/rofi -modi 'clipboard:greenclip print' -show clipboard"'';
         # "${mod}+ctrl+b" = "exec " + ../buku_run/buku_run;
         "${mod}+g" = "exec ${pkgs.i3-easyfocus}/bin/i3-easyfocus";
-        # "${mod}+3" = "exec ${pkgs.buku_run}/bin/buku_run";
         # "${mod}+b" = "exec ${pkgs.buku_run}/bin/buku_run";
         "${mod}+p" = "exec ${pkgs.rofi-pass}/bin/rofi-pass";
 
@@ -220,13 +219,6 @@ in
         # TODO use i3
         # test rofi-randr
         # "XF86Display" = "exec " + ../../rofi-scripts/monitor_layout.sh ;
-
-# bindsym $mod+ctrl+h exec $greenclip
-# bindsym $mod+ctrl+v exec ~/.vim-anywhere/bin/run"
-
-# set $greenclip "rofi -modi 'clipboard:greenclip print' -show clipboard"
-#       bindsym $mad+h exec $greenclip
-        # TODO let i3dispatch
 
   # XF86AudioNext="exec ${mpc} next; exec notify-send 'Audio next'";
   # XF86AudioPrev exec mpc prev; exec notify-send "Audio prev"

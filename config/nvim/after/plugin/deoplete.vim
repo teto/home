@@ -1,9 +1,12 @@
 " Deoplete {{{
+" or call |deoplete#enable()|
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_ignore_case = 1
 " let g:deoplete#disable_auto_complete = 0
 let g:deoplete#enable_debug = 1
 let g:deoplete#auto_complete_delay=0
+
+call deoplete#enable_logging('DEBUG', '/tmp/deoplete.log')
 
 " call deoplete#custom#option({
 " \ 'auto_complete': v:true,
@@ -24,7 +27,6 @@ let g:deoplete#auto_complete_delay=0
 
 " " deoplete#toggle()
 " call deoplete#custom#source('perso', { 'matt' : 'mattator@gmail.com' })
-
 " call deoplete#custom#source('_', 'matchers', ['matcher_cpsm'])
 " call deoplete#custom#source('_', 'sorters', [])
 
@@ -32,7 +34,6 @@ let g:deoplete#auto_complete_delay=0
 " let g:deoplete#keyword_patterns.gitcommit = '.+'
 
 " call deoplete#custom#option('profile', v:true)
-" call deoplete#enable_logging('DEBUG', '/tmp/deoplete.log')
 " call deoplete#custom#source('jedi', 'is_debug_enabled', 1)
 
 " call deoplete#custom#set('jedi', 'debug_enabled', 1)

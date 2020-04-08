@@ -33,6 +33,7 @@ let
       # targets-vim
       # vCoolor-vim
       # vim-CtrlXA
+      vim-dasht
       vim-dirvish
       vim-fugitive
       vim-signature

@@ -310,7 +310,6 @@ in
 
   # services.screen-locker.enable = true;
 
-  # while waiting to fix greenclip related problems
   services.parcellite.enable = false;
 
   # might trigger nm-applet crash ?

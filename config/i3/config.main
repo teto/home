@@ -14,10 +14,6 @@
 set $GroupUs Group1
 set $GroupFr Group2
 
-# todo use other mod
-# bindsym $mod+g exec $greenclip
-# bindsym $mod+b exec buku_run
-
 # bindsym $mad+b exec buku_run
 # bindsym $mad+r exec rofi_pass
 # bindsym $mod+ctrl+b exec buku_run
