@@ -33,7 +33,7 @@ let
   };
 
   # boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_mptcp_with_netlink;
-  # boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_5_6;
+  boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_5_6;
 
   # programs.mininet.enable = true;
 
