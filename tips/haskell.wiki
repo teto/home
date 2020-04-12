@@ -31,4 +31,7 @@ $ cabal user-config update
 
 see https://wiki.haskell.org/FAQ#How_can_I_get_a_stack_backtrace_when_my_program_throws_an_exception.3F
 
+    -- -fno-warn-unused-imports 
+    -- -fforce-recomp  makes it build twice on nixos
+    ghc-options: -Wall -fno-warn-unused-binds -fno-warn-unused-matches -threaded -fprof-auto -rtsopts
 

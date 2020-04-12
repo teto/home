@@ -1,0 +1,6 @@
+Main page of my notes
+
+[[haskell]]
+
+
+[[bluetooth]]

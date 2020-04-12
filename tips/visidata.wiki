@@ -1,0 +1,3 @@
+
+shift O to open spreadsheet options
+ctrl +r  to reload

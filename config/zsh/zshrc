@@ -7,10 +7,8 @@
 # test ! -f /etc/NIXOS
 # ON_NIXOS=$?
 
-
 # for VTE-based terminals. In termite Ctrl + Shift + t opens terminal in cwd
 # source /etc/profile.d/vte.sh
-
 
 # Per folder history {{{
 # https://github.com/jimhester/per-directory-history
@@ -22,6 +20,7 @@
 
 . "$ZDOTDIR/aliases.zsh"
 
+export PATH="${XDG_DATA_HOME}/../bin:$PATH"
 # notifies when long command finishes
 # zbell should recognize aliases
 zbell_ignore=("$EDITOR" "$PAGER" v)
@@ -33,7 +32,7 @@ zbell_ignore=("$EDITOR" "$PAGER" v)
 
 # zsh.enableSuggestions right handside color
 # see https://github.com/zsh-users/zsh-autosuggestions for suggestions
-AUTOSUGGESTION_HIGHLIGHT_COLOR="fg=cyan"
+# AUTOSUGGESTION_HIGHLIGHT_COLOR="fg=cyan"
 
 # TODO move it to HM maybe
 . "/etc/zinputrc"
@@ -162,8 +161,6 @@ bindkey '^Z' fancy-ctrl-z
 # export WORDCHARS=''
 # }}}
 
-
-
 # Look if zsh autosuggestions improve things
 #autoload predict-on
 #predict-on
@@ -190,7 +187,7 @@ add-zsh-hook precmd update_term_title
 # . "$ZDOTDIR/git-extras-completion.zsh"
 
 # zsh searches $fpath for completion files
-fpath=( $ZDOTDIR/completions $fpath )
+# fpath=( $ZDOTDIR/completions $fpath )
 
 # Enable completion caching, use rehash to clear
 zstyle ':completion::complete:*' use-cache on
@@ -294,7 +291,6 @@ SPROMPT="Correct $fg[red]%R$reset_color to $fg[green]%r$reset_color [(y)es (n)o 
 #install it first
 #source zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-
 # _gnu_generic should work if program accepts --help
 compdef _gnu_generic qutebrowser
 compdef _gnu_generic mptcpanalyzer
@@ -313,16 +309,6 @@ compdef _gnu_generic mptcpanalyzer
 #     fi
 # }
 
-# TODO replace with fzf-extras
-# Enable FZF fuzzy matcher {{{
-
-# TODO work 
-# need zle to be active
-# https://junegunn.kr/2016/07/fzf-git
-# . "$XDG_CONFIG_HOME/fzf-gems/fzf_git_functions.sh"
-# you can list the actually bound keys with bindkey -M viins
-# . "$XDG_CONFIG_HOME/fzf-gems/fzf_git_keybindings.zsh"
-# }}}
 
 # set cursor depending in vi mode
 # inspired by http://lynnard.me/blog/2014/01/05/change-cursor-shape-for-zsh-vi-mode/
@@ -351,11 +337,6 @@ zle-keymap-select () {
 # http://zsh.sourceforge.net/Doc/Release/User-Contributions.html#ZLE-Functions
 # autoload zsh-mime-setup
 zle -N zle-keymap-select
-
-# autoload -U pick-web-browser
-# alias -s html=pick-web-browser
-# zstyle ':mime:*' x-browsers opera konqueror firefox
-# zstyle ':mime:*' tty-browsers opera konqueror firefox
 
 # load terminfo for portable keybindings
 # zmodload zsh/terminfo

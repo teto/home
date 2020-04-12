@@ -1,5 +1,5 @@
-#! /usr/bin/env nix-shell 
-#! nix-shell -p 'python.withPackages(ps:with ps;[secretstorage keyring ])' ~/nixpkgs -i sh --show-trace
+#!/usr/bin/env nix-shell
+#!nix-shell -p 'python.withPackages(ps:with ps;[secretstorage keyring ])' ~/nixpkgs -i sh --show-trace
 
 secret-tool store --label gmail gmail password
 secret-tool store --label iij iij password

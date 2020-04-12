@@ -19,6 +19,7 @@ in
     fortune
     xdg_utils
     steam
+    gtk-engine-murrine  # for hyper-light drifter
   ];
 
   home.file.".digrc".text = ''

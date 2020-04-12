@@ -1,2 +1,3 @@
-#! /usr/bin/env nix-shell
+#!/usr/bin/env nix-shell
+#!nix-shell -p curl ~/nixpkgs -i sh
 curl https://ipinfo.io/ip

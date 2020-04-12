@@ -32,16 +32,17 @@ rec {
 
   home.packages = with pkgs; [
     # TODO pass to vim makeWrapperArgs
-    pkgs.nodePackages.bash-language-server
+    nodePackages.bash-language-server
     # just in my branch :'(
-    pkgs.luaPackages.lua-lsp
-    pkgs.dtrx  # to compress stuff
+    luaPackages.lua-lsp
+    dtrx  # to compress stuff
 	# pkgs.pdftotext  # should ideally be described only in neovim's rc
 
 	# TODO try i3-snapshot
 
     # vim-vint  # 
     # nixpkgs-fmt
+    tig
 
     # to be used in i3
     # pkgs.i3dispatch

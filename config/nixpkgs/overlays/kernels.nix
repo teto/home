@@ -80,17 +80,20 @@ let
 
 in rec {
 
+  linux_mptcp_official = prev.linux_5_6.override {
+    structuredExtraConfig = with self.lib.kernel; {
+      MPTCP     =yes;
+      MPTCP_IPV6=yes;
+    };
+  };
+
   kernelForDev = { debugKconfig ? true }: kernel:
     (kernel.overrideAttrs(oa: {
-
       # could be or kernelPatches
       # prePatch = ''
-
       #   substituteInPlace scripts/kconfig/ \
       #     --replace 'int cdebug = PRINTD;' 'int cdebug = DEBUG_PARSE;'
       # '';
-
-
     }));
 
   /*

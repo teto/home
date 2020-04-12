@@ -103,7 +103,6 @@ rec {
   #   package-set = initialPackages;
   #   inherit stdenv haskellLib ghc buildHaskellPackages extensible-self all-cabal-hashes;
   # };
-
         selected = drvs super.haskellPackages;
 
         packageInputs = map super.getBuildInputs selected;
@@ -114,10 +113,10 @@ rec {
 
       extraHaskellPackages = hs: with hs; [
         # hie
-        all-hies.versions.ghc865
-        gutenhasktags
-        haskdogs # seems to build on hasktags/ recursively import things
-        hasktags
+        # all-hies.versions.ghc865
+        # gutenhasktags
+        # haskdogs # seems to build on hasktags/ recursively import things
+        # hasktags
       ]
       # ++ requiredHaskellPackages drvs
       ;

@@ -7,7 +7,7 @@
   # see https://nixos.org/nix-dev/2015-July/017657.html for problems 
   # with /run/user/1000 size
   services.logind.extraConfig = ''
-    RuntimeDirectorySize=5G
+    RuntimeDirectorySize=3G
   '';
 
   virtualisation.libvirtd = {

@@ -123,4 +123,4 @@ EOF
   fi
 }
 
-pnix-shell "$@"
+nix-shellp "$@"
