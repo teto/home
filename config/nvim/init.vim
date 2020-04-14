@@ -15,7 +15,6 @@ map <D-b> :echom "hello papy"
 " to see the difference highlights,
 " runtime syntax/hitest.vim
 
-
 " vim-plug autoinstallation {{{
 " TODO use stdpath now
 let s:nvimdir = stdpath('data')
@@ -53,9 +52,7 @@ endfunc
 
 nnoremap <C-RightMouse> :call SynStack()<CR>
 " }}}
-"
 set cpoptions="aABceFsn" " vi ComPatibility options
-
 
 " mouse {{{
 set mouse=a
@@ -350,11 +347,19 @@ Plug 'mhinz/vim-rfc', { 'on': 'RFC' } " requires nokigiri gem
 " careful maps F4 by default
 Plug 'teto/Modeliner' " <leader>ml to setup buffer modeline
 " This one has bindings mapped to <leader>l
-Plug 'vimwiki/vimwiki'   " to write notes
+" Plug '~/vimwiki'   " to write notes
+" Plug 'vimwiki/vimwiki', { 'branch': 'dev'}   " to write notes
 "Plug 'teto/neovim-auto-autoread' " works only in neovim, runs external checker
 " Plug 'rhysd/github-complete.vim' " provides github user/repo autocompletion after @ and #
 
 Plug 'haorenW1025/diagnostic-nvim'  " LSP improvements OpenDiagnostic/PrevDiagnostic
+" Plug 'haorenW1025/completion-nvim' " lsp based completion framework
+" Plug 'vigoux/completion-treesitter' " extension of completion-nvim
+
+
+" github-comment requires webapi (https://github.com/mattn/webapi-vim)
+" Plug 'mmozuras/vim-github-comment' " :GHComment
+Plug 'kthibodeaux/pull-review'     " :PullReviewList
 
 " does not work seems to be better ones
 "
@@ -767,11 +772,11 @@ function! SeeLineHistory()
 endfunc
 
 let s:opts = {
-	\ 'source': "git branch -a",
-	\ 'options': ' --prompt "Misc>"',
-	\ 'down': '50%',
-	\ }
-	" \ 'sink': function('s:processResult'),
+  \ 'source': "git branch -a",
+  \ 'options': ' --prompt "Misc>"',
+  \ 'down': '50%',
+  \ }
+  " \ 'sink': function('s:processResult'),
 
 
 " FzfBranches
@@ -1151,6 +1156,10 @@ let g:vimtex_compiler_latexmk = {
 "<plug>(vimtex-toc-toggle)
 " au BufEnter *.tex exec ":setlocal spell spelllang=en_us"
 "" }}}
+" github-comment {{{
+" ,precedes:❮,nbsp:×
+let g:github_user = 'teto'
+"}}}
 " vim-listchars config {{{
     "\"trail:·,tab:→\ ,eol:↲,precedes:<,extends:>"
 "let g:listchar_formats=[
@@ -1161,16 +1170,18 @@ let g:vimtex_compiler_latexmk = {
 " while waiting to finish my vim-listchars plugin
 "set listchars=tab:»·,eol:↲,nbsp:␣,extends:…
 "|
-"set listchars=tab:•·,trail:·,extends:❯,precedes:❮,nbsp:×
+set listchars=tab:•·,trail:·,extends:❯,precedes:❮,nbsp:×
+" conceal is used by deefault if cchar does not exit
+set listchars+=conceal:❯
 " }}}
 " Grepper {{{
 
 " nnoremap <leader>git :Grepper -tool git -open -nojump
 " nnoremap <leader>ag  :Grepper -tool ag  -open -switch
-nnoremap <leader>rg  :Grepper -tool rg -open -switch
-nnoremap <leader>rgb  :Grepper -tool rg -open -switch -buffer
+nnoremap <leader>rg  <Cmd>Grepper -tool rg -open -switch
+nnoremap <leader>rgb  <Cmd>Grepper -tool rg -open -switch -buffer
 " TODO add 
-vnoremap <leader>rg  :Grepper -tool rg -open -switch
+vnoremap <leader>rg  <Cmd>Grepper -tool rg -open -switch
 
 " highlight! link QuickFixLine Normal
 
@@ -1639,6 +1650,35 @@ let g:diagnostic_show_sign = 1
 let g:diagnostic_auto_popup_while_jump = 1
 let g:diagnostic_insert_delay = 0
 "}}}
+" completion-nvim {{{
+" Configure the completion chains
+let g:completion_chain_complete_list = {
+			\'default' : {
+			\	'default' : [
+			\		{'complete_items' : ['lsp', 'snippet']},
+			\		{'mode' : 'file'}
+			\	],
+			\	'comment' : [],
+			\	'string' : []
+			\	},
+			\'vim' : [
+			\	{'complete_items': ['snippet']},
+			\	{'mode' : 'cmd'}
+			\	],
+			\'c' : [
+			\	{'complete_items': ['ts']}
+			\	],
+			\'python' : [
+			\	{'complete_items': ['ts']}
+			\	],
+			\'lua' : [
+			\	{'complete_items': ['ts']}
+			\	],
+			\}
+" Use completion-nvim in every buffer
+" autocmd BufEnter * lua require'completion'.on_attach()
+" }}}
+
 
 
 set hidden " you can open a new buffer even if current is unsaved (error E37)
@@ -1703,6 +1743,8 @@ map <Leader>$ <Cmd>Obsession<CR>
 " map <Leader>d :bdelete<CR>
 
 "http://stackoverflow.com/questions/28613190/exclude-quickfix-buffer-from-bnext-bprevious
+
+map <Leader>lr <Plug>(Luadev-RunLine)
 
 " spell config {{{
 " todo better if it could be parsable
@@ -1977,6 +2019,21 @@ function! Show_documentation()
   endif
 endfunction
 
+function! CreateVisualExtmark()
+
+  let opts = {
+    \ 'end_line': line("'>"),
+    \ 'end_col': col("'>")
+    \ }
+  let ns_id = nvim_create_namespace("folds")
+  let curbuf = 0
+  let line = line("'<")
+  let col = col("'<")
+  call nvim_buf_set_extmark(curbuf, ns_id, 0, line, col, opts)
+endfunction
+
+map ,fa <Cmd>call CreateVisualExtmark()<CR>
+
 " lsp config {{{
 " nnoremap <buffer> <silent> <leader>ngd :call lsp#text_document_declaration()<CR>
 nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
@@ -2072,7 +2129,6 @@ let g:LspDiagnosticsHintSign = 'H'
 " disable [1/5]
 " set shortmess+=S
 
-
 " quickui {{{
 " https://github.com/skywind3000/vim-quickui
 let g:quickui_border_style = 1
@@ -2088,9 +2144,9 @@ let content = [
             \ ["&Documentation\t\\cm", 'echo 600'],
             \ ]
 " set cursor to the last position
-let opts = {'index':g:quickui#context#cursor}
+let quick_opts = {'index':g:quickui#context#cursor}
 
-map <RightMouse>  <Cmd>call quickui#context#open(content, opts)<CR>
+map <RightMouse>  <Cmd>call quickui#context#open(content, quick_opts)<CR>
 
 " call quickui#context#open(content, opts)
 " }}}

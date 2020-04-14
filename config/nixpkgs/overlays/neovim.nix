@@ -315,7 +315,9 @@ rec {
     cmakeBuildType="debug";
     cmakeFlags = oa.cmakeFlags ++ [
       "-DMIN_LOG_LEVEL=0"
-      "-DCLANG_ASAN_UBSAN=ON"
+
+      # useful to
+      # "-DCLANG_ASAN_UBSAN=ON"
     ];
 
     version = "master";

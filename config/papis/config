@@ -36,7 +36,7 @@ add-open = True
 ref-format = {doc[author_list][0][surname]}{doc[year]}
 # /* papis configuration */
 # from dois
-# cache-dir 
+# cache-dir
 
 # skip user conflict (year conflict) Replace '2018' by '2018'
 
@@ -48,7 +48,7 @@ options_list.unselected_margin_style =
 # default is {selected_index}/{number_of_documents} F1:help c-l:redraw
 status_line_format = "F1: Help"
 # use rofi/dmenu/fzf
-# papis.pick 
+# papis.pick
 
 status_line_style = bg:ansiwhite fg:ansiblack
 message_toolbar_style = bg:ansiyellow fg:ansiblack

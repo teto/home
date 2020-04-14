@@ -1,8 +1,16 @@
-autocmd WinNew
+" autocmd WinNew
 
+" test with conceal 
 
+" syntax keyword pyNiceOperator sum conceal cchar=∑
 
+" nvim_buf_set_extmark({buffer}, {ns_id}, {id}, {line}, {col}, {opts})
+setlocal conceallevel=2
+" syntax keyword vimCommand all conceal cchar=∀
+syn match HateWord /hate/ conceal cchar=∀
+toto hate adasda
 
+copen
 
 " snd hl group is for language mappings
 " set guicursor=n-v-c:block-blinkon250-Cursor/lCursor
