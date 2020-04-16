@@ -94,7 +94,6 @@ Plug 'MattesGroeger/vim-bookmarks' " ruby  / :BookmarkAnnotate
 " branch v2-integration
 " Plug 'andymass/vim-matchup' " to replace matchit
 " Plug 'AGhost-7/critiq.vim' " :h critiq
-" Plug 'kyazdani42/highlight.lua' " to test treesitter
 Plug 'skywind3000/vim-quickui' " 
 Plug 'liuchengxu/vista.vim' " replaces tagbar to list workplace symbols
 " Plug 'neovim/nvim-lsp' " while fuzzing details out
@@ -353,8 +352,9 @@ Plug 'teto/Modeliner' " <leader>ml to setup buffer modeline
 " Plug 'rhysd/github-complete.vim' " provides github user/repo autocompletion after @ and #
 
 Plug 'haorenW1025/diagnostic-nvim'  " LSP improvements OpenDiagnostic/PrevDiagnostic
-" Plug 'haorenW1025/completion-nvim' " lsp based completion framework
-" Plug 'vigoux/completion-treesitter' " extension of completion-nvim
+Plug 'haorenW1025/completion-nvim' " lsp based completion framework
+Plug 'vigoux/completion-treesitter' " extension of completion-nvim
+" Plug 'kyazdani42/highlight.lua' " to test treesitter
 
 
 " github-comment requires webapi (https://github.com/mattn/webapi-vim)

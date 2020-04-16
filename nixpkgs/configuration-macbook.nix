@@ -66,6 +66,9 @@ let
     gnome3 = {
       gnome-keyring.enable = true;
       at-spi2-core.enable = true; # for keyring it seems
+
+      # to be able to see the trash in nautilus
+      # gvfs.enable = true;
     };
 
     # Enable CUPS to print documents.
@@ -97,24 +100,17 @@ let
 
     config = {
       android_sdk.accept_license = true;
-
       permittedInsecurePackages = [ ];
-
       # allowBroken = true;
       allowUnfree = true;  # for nvidia drivers
     };
   };
 
   nix = {
-    # might be useful to fetch from private repositories even in sandboxed mode ?!
-    # fetchGit is run as user so no
-    # envVars = {
-    # };
     # extraConfig = ''
     # '';
-
     # 0 = default/highest vs 7 lowest
-    # daemonIONiceLevel = 3;
+    daemonIONiceLevel = 3;
     # 0 = max (default) vs 19 lowest
     # daemonNiceLevel = 2;
     distributedBuilds = true;
@@ -122,7 +118,6 @@ let
 
   hardware.pulseaudio = {
     enable = true;
-
     systemWide = false;
     # daemon.config
     support32Bit = true;
@@ -130,15 +125,9 @@ let
     extraModules = [ pkgs.pulseaudio-modules-bt ];
 
     package = pkgs.pulseaudioFull;
-    # Replace built in pulseaudio modules with enhanced bluetooth ones
-    # package = with pkgs; pulseaudioFull.overrideAttrs(oldAttrs: {
-    #   postInstall = oldAttrs.postInstall + ''
-
-    #     cp -a ${pulseaudio-modules-bt}/* $out/
-    #   '';
-    # });
   };
 
+  # started as a user service
   services.greenclip.enable = true;
 
   # for android development
