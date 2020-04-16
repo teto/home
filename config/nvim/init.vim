@@ -3,6 +3,16 @@
 " :scriptnames to list loaded scripts
 " and prefix you command with 'verbose' is a very good way to get info
 " like ':verbose map J' to know where it was loaded last
+
+function! TestFoldTextWithColumns()
+  let line = getline(v:foldstart)
+  " if v:foldstartcol
+  return repeat(">", 4). "toto" . repeat(" ", 4)
+endfunc
+
+" set foldtext=TestFoldTextWithColumns()
+
+
 " map <C-D> <C-]>"{{{"{{{"{{{
 " map <C-D> :tag<CR>"}}}
 map <D-b> :echom "hello papy"
@@ -1636,7 +1646,7 @@ let g:vista_highlight_whole_line=1
 " alok/notational-fzf-vim {{{
 " use c-x to create the note
 " let g:nv_search_paths = []
-let g:nv_search_paths = ['~/wiki', '~/writing', '~/code', 'docs.md' , './notes.md']
+let g:nv_search_paths = ['~/notes', 'docs.md' , './notes.md']
 let g:nv_default_extension = '.md'
 
 " String. Default is first directory found in `g:nv_search_paths`. Error thrown

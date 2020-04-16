@@ -11,6 +11,7 @@ mkShell {
   buildInputs = [ bundler rubyEnv libxml2 ];
 
   shellHook = ''
-    bundle install --path .bundle
+    echo "bundle install --path .bundle"
+    echo "bundle exec jekyll build --verbose"
   '';
 }

@@ -6,7 +6,7 @@ let g:deoplete#enable_ignore_case = 1
 let g:deoplete#enable_debug = 1
 let g:deoplete#auto_complete_delay=0
 
-call deoplete#enable_logging('DEBUG', '/tmp/deoplete.log')
+" call deoplete#enable_logging('DEBUG', '/tmp/deoplete.log')
 
 " call deoplete#custom#option({
 " \ 'auto_complete': v:true,
