@@ -7,5 +7,6 @@
 "let c_gnu=1
 " }}}
 
-
+" otherwise vim defaults to ccomplete#Complete
+setlocal omnifunc=v:lua.vim.lsp.omnifunc
 " LanguageClientStop

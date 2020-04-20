@@ -1,4 +1,5 @@
 # https://starship.rs/config/#character
+# https://starship.rs/config/#line-break
 # Don't print a new line at the start of the prompt
 add_newline = false
 # prompt_order = 
@@ -31,6 +32,7 @@ threshold = 4
 
 [cmd_duration]
 min_time = 4
+# prefix = "underwent "
 
 [golang]
 disabled = true

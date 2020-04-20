@@ -49,7 +49,7 @@ let
       # TODO this one will be ok once we patch it
       # vim-markdown-composer  # WIP
 
-      vim-livedown
+      # vim-livedown
       # markdown-preview-nvim # :MarkdownPreview
       nvim-markdown-preview  # :MarkdownPreview
 
@@ -183,10 +183,10 @@ rec {
 	  name = "neovim";
 	  version = "official-master";
       src = builtins.fetchGit {
+        url = https://github.com/neovim/neovim.git;
+        ref = "master";
         # url = https://github.com/neovim/neovim.git;
-        # ref = "master";
-        url = https://github.com/teto/neovim.git;
-        ref = "diagnostic";
+        # ref = "diagnostic";
       };
       # src = super.fetchFromGitHub {
       #   owner = "teto";
@@ -328,19 +328,17 @@ rec {
     };
 
     nativeBuildInputs = oa.nativeBuildInputs ++ [
-      # self.pkgs.valgrind
-
       # testing between both
       self.pkgs.ccls
       self.pkgs.clang-tools  # for clangd
 
       self.pkgs.llvm  # for llvm-symbolizer
-      self.pkgs.valgrind
+      # self.pkgs.valgrind
     ];
 
     buildInputs = oa.buildInputs ++ [
       self.pkgs.icu  # for treesitter unicode/ptypes.h
-      self.pkgs.utf8proc
+      # self.pkgs.utf8proc
     ];
 
     # export NVIM_PROG

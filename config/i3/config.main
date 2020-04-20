@@ -112,21 +112,13 @@ mode "focused" {
 	bindsym Escape mode "default"
 }
 
-# bindsym $mod+shift+s sticky toggle
-
 # TODO remove since it is used by Dunst ?
 bindsym $mod+n mode "focused"
 #bindsym $mod+c exec "~/.i3/misc_commands.py"
-bindsym $mod+t exec floating toggle
-
-# Go into hibernation
-#bindsym Mod4+Shift+F9 exec sudo hibernate -F /etc/hibernate/tuxonice.conf
 
 # The IPC interface allows programs like an external workspace bar
 # (i3-wsbar) or i3-msg (can be used to "remote-control" i3) to work.
 # ipc-socket $XDG_RUNTIME_DIR/i3/ipc.sock
-
-
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod

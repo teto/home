@@ -20,7 +20,7 @@ LKL_FOLDER = "${HOME}/lkl"
 mkfile_path := $(abspath $(lastword $(MAKEFILE_LIST)))
 mkfile_dir := $(dir $(mkfile_path))
 
-.PHONY: config etc mail local bin home vim_plugins
+.PHONY: config etc mail local bin home vim_plugins treesitter
 
 # http://stackoverflow.com/questions/448910/makefile-variable-assignment
 config:
@@ -33,6 +33,10 @@ bin:
 local:
 	stow -t "$(XDG_DATA_HOME)" local
 	mkdir -p $(XDG_DATA_HOME)/fzf-history $(XDG_DATA_HOME)/newsbeuter
+
+# installe les grammaires treesitter chez neovim
+treesitter:
+	nix-build -A tree-sitter.builtGrammars.c
 
 zsh:
 	# won't work on nix

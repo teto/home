@@ -51,6 +51,7 @@ in
 
     # prefix with pango if you want to have fancy effects
     config = {
+      terminal = term;
       workspaceAutoBackAndForth = true;
 
       focus.followMouse = false;
@@ -230,6 +231,10 @@ in
   # XF86AudioMute exec amixer -q set Master toggle; exec notify-send "Mute toggle"
         "$GroupFr+$mod+apostrophe"="kill";
         "$GroupUs+$mod+4"="kill";
+
+        "$mod+t" = "floating toggle";
+        "$mod+y" = "sticky toggle; exec ${notify-send}";
+
         "XF86AudioRaiseVolume"=
           "exec --no-startup-id pactl set-sink-volume 0 +5%;exec ${notify-send} --icon=speaker_no_sound -u low -t 1000 'Audio Raised volume'";
         "XF86AudioLowerVolume"="exec --no-startup-id pactl set-sink-volume 0 -5%;exec ${notify-send} -u low 'Audio lowered'";

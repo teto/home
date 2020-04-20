@@ -4,7 +4,8 @@ local nvim_lsp = require 'nvim_lsp'
 local configs = require'nvim_lsp/configs'
 
 -- external plugins to have some nice features
-local present, diag_plugin = pcall(require, "diagnostic")
+local plug_diagnostic_enabled, plug_diagnostic = pcall(require, "diagnostic")
+local plug_completion_enabled, plug_completion = pcall(require, "completion")
 
 -- to override all defaults
 -- nvim_lsp.util.default_config = vim.tbl_extend(
@@ -58,10 +59,6 @@ nvim_lsp.lua_lsp.setup{}
 -- 	filetypes = { "sh" };
 -- })
 
--- local present, diag_plugin = pcall(require, "diagnostic")
--- if present then
-	
--- end
 
 
 nvim_lsp.ghcide.setup({
@@ -176,12 +173,16 @@ nvim_lsp.pyls.setup({
   -- };
 })
 
-
+-- require'completion'.on_attach
 -- use only if require diagnostic is not null ?
-do 
-	if present then
-	-- 	nvim_lsp.ghcide.setup{on_attach=diag_plugin.on_attach}
-	-- nvim_lsp.hie.setup{on_attach=diag_plugin.on_attach}
+do
+	if plug_completion_enabled then
+		nvim_lsp.ccls.setup{on_attach= plug_completion.on_attach}
+	-- end
+
+	-- if plug_diagnostic_enabled then
+	-- 	nvim_lsp.ghcide.setup{on_attach=plug_diagnostic.on_attach}
+	-- nvim_lsp.hie.setup{on_attach=plug_diagnostic.on_attach}
 	else
 		print("could not require diagnostic")
 		local method = 'textDocument/publishDiagnostics'

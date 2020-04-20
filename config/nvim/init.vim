@@ -6,22 +6,33 @@
 
 function! TestFoldTextWithColumns()
   let line = getline(v:foldstart)
-  " if v:foldstartcol
-  return repeat(">", 4). "toto" . repeat(" ", 4)
+  let res = ""
+  " v:foldstart / v:foldend
+  if exists("v:foldstartcol")
+    let res = "foldstartcol exists :". v:foldstartcol
+  endif
+  return res . " toto" . repeat(" ", 4)
 endfunc
 
 " set foldtext=TestFoldTextWithColumns()
+"
+"
+
+" dsadasd {{{
 
 
-" map <C-D> <C-]>"{{{"{{{"{{{
-" map <C-D> :tag<CR>"}}}
+"}}}
+
+
+
+" map <C-D> <C-]>
+" map <C-D> :tag<CR>
 map <D-b> :echom "hello papy"
 
 "$NVIM_PYTHON_LOG_FILE
-" to test startup time"}}}
+" to test startup time
 " nvim --startuptime startup.log
 " nvim -u NONE --startuptime startup.log
-"}}}
 " to see the difference highlights,
 " runtime syntax/hitest.vim
 
@@ -93,6 +104,8 @@ set gdefault
 
 " nvim will load any .nvimrc in the cwd; useful for per-project settings
 set exrc
+set completeopt=menu " use pum to show completions
+
 
 " vim-plug plugin declarations {{{1
 call plug#begin(s:plugdir)
@@ -117,7 +130,7 @@ Plug 'bogado/file-line' " to open a file at a specific line
 " Plug 'yuki-ycino/fzf-preview.vim' " toto
 Plug 'glacambre/firenvim' " to use nvim in firefox
 " Plug 'liuchengxu/vim-clap' " fuzzer
-Plug 'alok/notational-fzf-vim' " to take notes
+Plug 'alok/notational-fzf-vim' " to take notes, :NV
 " Plug 'iamcco/markdown-preview.nvim' " :MarkdownPreview
 Plug 'suy/vim-context-commentstring' " commen for current programming language
 " Plug 'voldikss/vim-translate-me' " floating windows for neovim
@@ -161,8 +174,9 @@ Plug '~/nvim-palette', { 'do': ':UpdateRemotePlugins' }
 
 " deoplete {{{
 " new deoplete relies on yarp :
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'Shougo/deoplete-lsp'
+" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" Plug 'Shougo/deoplete-lsp'
+
 " crashes without netrc
 " Plug 'deoplete-plugins/deoplete-make' " empty !
 " Plug 'deoplete-plugins/deoplete-zsh'
@@ -249,7 +263,7 @@ let cmdline_follow_colorscheme = 1
 let cmdline_external_term_cmd = "termite -e '%s' &"
 "}}}
 "}}}
-" Plug 'SirVer/ultisnips' " handle snippets
+Plug 'SirVer/ultisnips' " handle snippets
 " " Snippets are separated from the engine. Add this if you want them:
 " Plug 'honza/vim-snippets'
 " Plug 'Shougo/neosnippet.vim'
@@ -363,8 +377,8 @@ Plug 'teto/Modeliner' " <leader>ml to setup buffer modeline
 
 Plug 'haorenW1025/diagnostic-nvim'  " LSP improvements OpenDiagnostic/PrevDiagnostic
 Plug 'haorenW1025/completion-nvim' " lsp based completion framework
-Plug 'vigoux/completion-treesitter' " extension of completion-nvim
-" Plug 'kyazdani42/highlight.lua' " to test treesitter
+Plug 'nvim-treesitter/completion-treesitter' " extension of completion-nvim
+" Plug 'nvim-treesitter/highlight.lua' " to test treesitter
 
 
 " github-comment requires webapi (https://github.com/mattn/webapi-vim)
@@ -1646,8 +1660,10 @@ let g:vista_highlight_whole_line=1
 " alok/notational-fzf-vim {{{
 " use c-x to create the note
 " let g:nv_search_paths = []
-let g:nv_search_paths = ['~/notes', 'docs.md' , './notes.md']
+let g:nv_search_paths = ['~/Nextcloud2/Notes']
 let g:nv_default_extension = '.md'
+let g:nv_show_preview = 1
+let g:nv_create_note_key = 'ctrl-x'
 
 " String. Default is first directory found in `g:nv_search_paths`. Error thrown
 "if no directory found and g:nv_main_directory is not specified
@@ -1662,38 +1678,51 @@ let g:diagnostic_insert_delay = 0
 "}}}
 " completion-nvim {{{
 " Configure the completion chains
-let g:completion_chain_complete_list = {
-			\'default' : {
-			\	'default' : [
-			\		{'complete_items' : ['lsp', 'snippet']},
-			\		{'mode' : 'file'}
-			\	],
-			\	'comment' : [],
-			\	'string' : []
-			\	},
-			\'vim' : [
-			\	{'complete_items': ['snippet']},
-			\	{'mode' : 'cmd'}
-			\	],
-			\'c' : [
-			\	{'complete_items': ['ts']}
-			\	],
-			\'python' : [
-			\	{'complete_items': ['ts']}
-			\	],
-			\'lua' : [
-			\	{'complete_items': ['ts']}
-			\	],
-			\}
+" let g:completion_chain_complete_list = {
+"     \'default' : {
+"     \	'default' : [
+"     \		{'complete_items' : ['lsp', 'snippet']},
+"     \		{'mode' : 'file'}
+"     \	],
+"     \	'comment' : [],
+"     \	'string' : []
+"     \	},
+"     \'vim' : [
+"     \	{'complete_items': ['snippet']},
+"     \	{'mode' : 'cmd'}
+"     \	],
+"     \'c' : [
+"     \	{'complete_items': ['ts']}
+"     \	],
+"     \'python' : [
+"     \	{'complete_items': ['ts']}
+"     \	],
+"     \'lua' : [
+"     \	{'complete_items': ['ts']}
+"     \	],
+"     \}
+
+" let g:completion_enable_auto_popup = 0
+let g:completion_enable_snippet = 'UltiSnips'
+let g:completion_enable_auto_signature = 1
+" let g:completion_confirm_key = "\<C-y>"
+set completeopt+=menuone  " use pum even for one match
+set completeopt+=noinsert,noselect
+
 " Use completion-nvim in every buffer
 " autocmd BufEnter * lua require'completion'.on_attach()
 " }}}
-
+" treesitter-completion {{{
+" Highlight the node at point, its usages and definition when cursor holds
+" grammaers are searched in `parser/{lang}.*
+" let g:complete_ts_highlight_at_point = 1
+" set foldexpr=completion_treesitter#foldexpr()
+" set foldmethod=expr
+"}}}
 
 
 set hidden " you can open a new buffer even if current is unsaved (error E37)
-set completeopt=menu,longest
-
+" set completeopt+=longest
 " draw a line on 80th column
 set colorcolumn=80,100
 
@@ -2123,6 +2152,7 @@ let g:LspDiagnosticsHintSign = 'H'
 
 " treesitter config {{{
 " lua vim.treesitter.add_language("/home/teto/tree-sitter-c/build/Release/tree_sitter_c_binding.node", "c")
+" nix-build -A tree-sitter.builtGrammars.c
 "}}}
 
 " Creates a :Watch <filename> 
