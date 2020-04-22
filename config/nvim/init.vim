@@ -336,7 +336,8 @@ Plug 'wellle/targets.vim' " Adds new motion targets ci{
 
 Plug 'dietsche/vim-lastplace' " restore last cursor postion (is it still needed ?)
 " Powerline does not work in neovim hence use vim-airline instead
-Plug 'vim-airline/vim-airline'
+" Plug 'vim-airline/vim-airline'
+Plug '~/vim-airline'
 Plug 'vim-airline/vim-airline-themes' " creates problems if not here
 
 Plug 'justinmk/vim-gtfo' " gfo to open filemanager in cwd
@@ -377,9 +378,9 @@ Plug 'teto/Modeliner' " <leader>ml to setup buffer modeline
 
 Plug 'haorenW1025/diagnostic-nvim'  " LSP improvements OpenDiagnostic/PrevDiagnostic
 Plug 'haorenW1025/completion-nvim' " lsp based completion framework
-Plug 'nvim-treesitter/completion-treesitter' " extension of completion-nvim
+" treesitter may slow down nvim
+" Plug 'nvim-treesitter/completion-treesitter' " extension of completion-nvim
 " Plug 'nvim-treesitter/highlight.lua' " to test treesitter
-
 
 " github-comment requires webapi (https://github.com/mattn/webapi-vim)
 " Plug 'mmozuras/vim-github-comment' " :GHComment
@@ -1202,10 +1203,10 @@ set listchars+=conceal:❯
 
 " nnoremap <leader>git :Grepper -tool git -open -nojump
 " nnoremap <leader>ag  :Grepper -tool ag  -open -switch
-nnoremap <leader>rg  <Cmd>Grepper -tool rg -open -switch
-nnoremap <leader>rgb  <Cmd>Grepper -tool rg -open -switch -buffer
+nnoremap <leader>rg  <Cmd>Grepper -tool rg -open -switch<CR>
+nnoremap <leader>rgb  <Cmd>Grepper -tool rg -open -switch -buffer<CR>
 " TODO add 
-vnoremap <leader>rg  <Cmd>Grepper -tool rg -open -switch
+vnoremap <leader>rg  <Cmd>Grepper -tool rg -open -switch<CR>
 
 " highlight! link QuickFixLine Normal
 
@@ -1652,6 +1653,7 @@ let g:vista_executive_for = {
     \ 'markdown': 'toc',
     \ }
 let g:vista_highlight_whole_line=1
+
 " let g:vista_finder_alternative_executives=['tags']
 " let g:vista_fzf_preview
 " let g:vista_blink=[2, 100]

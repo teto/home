@@ -25,6 +25,7 @@ in
     # only if available
     # ./modules/jupyter.nix
   ];
+  environment.homeBinInPath = true;
 
   # boot.kernelModules = [ ];
 
@@ -121,7 +122,7 @@ in
 
   # TODO check
   services.strongswan = {
-    enable = true;
+    enable = false;
       # "/etc/ipsec.d/*.secrets" "/etc/ipsec.d"
     secrets = ["/etc/ipsec.d"];
   };

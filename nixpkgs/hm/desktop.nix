@@ -32,6 +32,7 @@ let
     git-review # to contribute to wireshark
 
     gitAndTools.diff-so-fancy # todo install it via the git config instead
+    gitAndTools.gitbatch
     gitAndTools.hub  # lol
     # https://github.com/felipec/git-remote-hg
     # gitAndTools.git-remote-hg
@@ -349,11 +350,7 @@ in
     # '';
   };
 
-  # xsession.windowManager.command = "…";
-    # ${pkgs.networkmanagerapplet}/bin/nm-applet &
-
   # as long as there is no better way to configure i3
-  # xsession.windowManager.command = "${pkgs.i3}/bin/i3";
   home.file.".pypirc".source = ../../home/pypirc;
 
   # readline equivalent but in haskell for ghci

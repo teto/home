@@ -113,7 +113,6 @@ let
     # SBC / AAC
     extraModules = [ pkgs.pulseaudio-modules-bt ];
 
-    # extraConfig =
     # extraClientConf =
     # only this one has bluetooth
     package = pkgs.pulseaudioFull;

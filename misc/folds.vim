@@ -1,7 +1,7 @@
 function! TestFoldTextWithColumns()
   let l:line = getline(v:foldstart)
-  let l:res = "v:foldstartcol not supported " . count
   let l:foldcount = v:foldend - v:foldstart + 1
+  let l:res = "v:foldstartcol not supported " . l:foldcount
   " use strpart
   " v:foldstart / v:foldend
   if exists("v:foldstartcol")

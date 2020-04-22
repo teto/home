@@ -337,8 +337,7 @@ rec {
     ];
 
     buildInputs = oa.buildInputs ++ [
-      self.pkgs.icu  # for treesitter unicode/ptypes.h
-      # self.pkgs.utf8proc
+      # self.pkgs.icu  # for treesitter unicode/ptypes.h
     ];
 
     # export NVIM_PROG

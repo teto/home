@@ -4,9 +4,6 @@ let
 
   mbsyncConfig = {
     enable = true;
-    # extraConfig = ''
-    #   '';
-
     create = "maildir";
   };
   in
@@ -57,13 +54,6 @@ let
   
   # for blue tooth applet; must be installed systemwide
   services.blueman-applet.enable = true;
-
-  # programs.bash = {
-  #   # goes to .profile
-  #   sessionVariables = {
-  #     # HISTFILE="$XDG_CACHE_HOME/bash_history";
-  #   };
-  # };
 
   services.nextcloud-client.enable = true;
 

@@ -51,19 +51,6 @@ final: prev:
 
   dualsub = prev.callPackage ./dualsubtitles { };
 
-  # prev.callPackage ./fzf-extras.nix {};
-  # copy to share/
-  # fzf-extras = let src = prev.fetchFromGitHub {
-  #   owner = "atweiden";
-  #   repo = "fzf-extras";
-  #   rev = "2ba6d111eee8db3f7c6614cac9c6931cdc76489d";
-  #   sha256 = "0zi4g03986yiqh2ccx666xacabiszjc34ibb372nrnfw9qmd7frz";
-  # };
-  # in src;
-  # "${src}/fzf-extras.zsh";
-
-  # gitbatch = prev.callPackage ./gitbatch { };
-
   hunter = prev.callPackage ./hunter { };
 
   mda-lite = prev.pythonPackages.callPackage ./mda-lite {};
@@ -75,23 +62,16 @@ final: prev:
 
   # neovim-gtk = prev.callPackage ./neovim-gtk { };
 
-  # nushell = prev.callPackage ./nushell { };
-
   # nix-dev = prev.nix.overrideAttrs(oa: {
   #   dontStrip = true;
   #  enableDebugging = true;
   # }
 
-
   subtitles-rs = prev.callPackage ./subtitles-rs { };
-
 
   # http-getter = prev.python3Packages.callPackage ./http-getter { } ;
   packetdrill-mptcp = prev.packetdrill.overrideAttrs ( oa: {
   });
-
-
-  # oni = prev.callPackage ./oni/default.nix {};
 
 
   # rustNightlyPlatform = prev.recurseIntoAttrs (prev.makeRustPlatform rust-nightly);
@@ -103,10 +83,9 @@ final: prev:
   # breaks nix-index evaluation
   # papis-python-rofi = prev.python3Packages.callPackage ./papis-rofi.nix {};
 
-  ping = prev.prettyping;
+  # ping = prev.prettyping;
 
   rt-tests = prev.callPackage ./rt-test.nix {};
-
 
   # netbee = prev.callPackage ./netbee {};
 
@@ -135,16 +114,7 @@ final: prev:
     };
   };
 
-  tree-sitter-bash-shared = prev.callPackage ./tree-sitter-grammars/nix.nix {
-    language = "bash";
-  };
-
-  tree-sitter-c-shared = prev.callPackage ./tree-sitter-grammars/nix.nix {
-    language = "c";
-  };
-
-
-
-  # see nixpkgs PR instead
-  # texlab = prev.callPackage ./texlab {};
+  # tree-sitter-bash-shared = prev.callPackage ./tree-sitter-grammars/nix.nix {
+  #   language = "bash";
+  # };
 }

@@ -1,6 +1,7 @@
 " Moved here since I install it via nix and thus when nvim isn't wrapped it
 " fails pathetically
 
+" airline_active
 if !exists("g:loaded_airline")
 	finish
 endif
@@ -35,19 +36,18 @@ let g:airline#extensions#gutentags#enabled = 0
 let g:airline#extensions#tabline#enabled = 0
 let g:airline#extensions#ale#enabled = 0
 let g:airline#extensions#neomake#enabled = 1
-let g:airline#extensions#languageclient#enabled = 0
 
 let g:airline_highlighting_cache = 1
 let g:airline_exclude_preview = 0
 " control which sections get truncated and at what width. >
-let g:airline#extensions#default#section_truncate_width = {
-      \ 'b': 79,
-      \ 'x': 60,
-      \ 'y': 88,
-      \ 'z': 45,
-      \ 'warning': 80,
-      \ 'error': 80,
-      \ }
+" let g:airline#extensions#default#section_truncate_width = {
+"       \ 'b': 79,
+"       \ 'x': 60,
+"       \ 'y': 88,
+"       \ 'z': 45,
+"       \ 'warning': 80,
+"       \ 'error': 80,
+"       \ }
 
 
 let g:airline#extensions#quickfix#quickfix_text = 'Quickfix'
@@ -68,6 +68,7 @@ let g:airline#extensions#default#layout = [
       \ [ 'a', 'b', 'c' ],
       \ [ 'x', 'y', 'z', 'error', 'warning' ]
       \ ]
+
 " section y is fileencoding , useless in neovim
 " define_raw
 " call airline#parts#define_function('neomake_custom', 'NeomakeStatusLine')
@@ -77,7 +78,7 @@ let g:airline#extensions#default#layout = [
 " let g:airline_section_y = airline#section#create_right(['neomake','ffenc'])
 " call airline#parts#define_function('grepper', 'grepper#statusline')
 " see :h airline-default-sections
-let g:airline_section_x = airline#section#create_right(['grepper'])
+" let g:airline_section_x = airline#section#create_right(['grepper'])
 " let g:airline_section_y = airline#section#create_right(['neomake_error_count', 'neomake_warning_count'])
 " let g:airline_section_z = airline#section#create_right(['neomake_error_count', 'neomake_warning_count'])
 " let g:airline_section_error = airline#section#create_right(['neomake_error_count', 'languageclient_error_count'])
@@ -89,7 +90,7 @@ let g:airline_section_x = airline#section#create_right(['grepper'])
 " airline extensions {{{
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
-let g:airline#extensions#vimtex#enabled=1
+
 let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline#extensions#tabline#show_buffers = 1
 let g:airline#extensions#tabline#buffer_min_count =2
@@ -98,7 +99,14 @@ let g:airline#extensions#tabline#buffer_idx_mode = 1
 let g:airline#extensions#tabline#buffers_label = 'b'
 let g:airline#extensions#tabline#tabs_label = 't'
 let g:airline#extensions#tabline#show_tabs = 0
-let airline#extensions#tabline#current_first = 0
+let g:airline#extensions#tabline#current_first = 0
+
+" vimtex
+let g:airline#extensions#vimtex#enabled=1
+
+" vista
+let g:airline#extensions#vista#enabled = 1
+
 " to rely on badd only ?
 " let airline#extensions#tabline#disable_refresh = 0
 

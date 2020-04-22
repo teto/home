@@ -14,8 +14,8 @@ let
   fzf-extras = let src = pkgs.fetchFromGitHub {
     owner = "atweiden";
     repo = "fzf-extras";
-    rev = "2ba6d111eee8db3f7c6614cac9c6931cdc76489d";
-    sha256 = "0zi4g03986yiqh2ccx666xacabiszjc34ibb372nrnfw9qmd7frz";
+    rev = "fe38c1c1a1512fb0ca5df31de28c909d9cc5847a";
+    sha256 = "1a690maplj3lyvcqi8af2m0fprm4hr2jlkciig1a6s77rzh1npdw";
   };
   in src;
 
@@ -113,10 +113,6 @@ rec {
     VIM_SOURCE_DIR="$HOME/vim";
     # TERMINAL # used by i3-sensible-terminal
   };
-
-  # TODO
-  # (import <nixpkgs/nixos> {}).config
-  # systemd.user.sessionVariables = args.nixos.config.networking.proxy.envVars;
 
   # source file name can't start with .
   # home.file.".wgetrc".source = dotfiles/home/wgetrc;
@@ -329,16 +325,20 @@ rec {
         source $ZDOTDIR/zshrc
       # fi
 
+
+
+    ''
       # https://github.com/atweiden/fzf-extras
       # the zsh script does nothing yet
       # Bug open fzf always
       # emulate sh -c 'source "${fzf-extras}/fzf-extras.sh";'
       # source "${fzf-extras}/fzf-extras.zsh";
 
-    ''
-    # eval "$(${pkgs.starship}/bin/starship init zsh)"
-      # + builtins.readFile dotDir + ./zshrc
-      ;
+      # # going to be run from $XDG_CONFIG_HOME/zsh
+      # source ../fzf-gems/fzf_git_functions.zsh
+      # i3-dmenu-desktop --dmenu=fzf
+
+    ;
   };
 
   programs.tmux = {
