@@ -5,8 +5,10 @@ endif
 let g:grepper.tools += ["gitall"]
 let g:grepper.gitall = copy(g:grepper.git)
 let g:grepper.gitall.grepprg = 'git grep "$*" $(git rev-list --all)'
-let g:grepper.tools += ["rg-fixed"]
+let g:grepper.tools += ["rgfixed"]
 let g:grepper.rgfixed = copy(g:grepper.rg)
+" for a fixed string
+let g:grepper.rgfixed.grepprg .= " -F "
 " let g:grepper.gitall.grepprg = 'git grep "$*" $(git rev-list --all)'
 
 

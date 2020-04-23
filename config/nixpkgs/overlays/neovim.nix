@@ -314,7 +314,7 @@ rec {
   }).overrideAttrs(oa:{
     cmakeBuildType="debug";
     cmakeFlags = oa.cmakeFlags ++ [
-      "-DMIN_LOG_LEVEL=0"
+      # "-DMIN_LOG_LEVEL=1"
 
       # useful to
       # "-DCLANG_ASAN_UBSAN=ON"
@@ -324,7 +324,7 @@ rec {
     src = builtins.fetchGit {
       url = https://github.com/neovim/neovim.git;
       # url = https://github.com/teto/neovim.git;
-      # ref = "folds_auto";
+      # ref = "inlinefolds_matt";
     };
 
     nativeBuildInputs = oa.nativeBuildInputs ++ [
@@ -336,9 +336,7 @@ rec {
       # self.pkgs.valgrind
     ];
 
-    buildInputs = oa.buildInputs ++ [
-      # self.pkgs.icu  # for treesitter unicode/ptypes.h
-    ];
+    # buildInputs = oa.buildInputs ++ [ ];
 
     # export NVIM_PROG
     # https://github.com/neovim/neovim/blob/master/test/README.md#configuration

@@ -377,9 +377,10 @@ Plug 'teto/Modeliner' " <leader>ml to setup buffer modeline
 " Plug 'rhysd/github-complete.vim' " provides github user/repo autocompletion after @ and #
 
 Plug 'haorenW1025/diagnostic-nvim'  " LSP improvements OpenDiagnostic/PrevDiagnostic
+" https://github.com/haorenW1025/completion-nvim/wiki/chain-complete-support
 Plug 'haorenW1025/completion-nvim' " lsp based completion framework
 " treesitter may slow down nvim
-" Plug 'nvim-treesitter/completion-treesitter' " extension of completion-nvim
+Plug 'nvim-treesitter/completion-treesitter' " extension of completion-nvim
 " Plug 'nvim-treesitter/highlight.lua' " to test treesitter
 
 " github-comment requires webapi (https://github.com/mattn/webapi-vim)
@@ -609,7 +610,7 @@ set splitright   " on vertical split
 let wiki_1 = {}
 let wiki_1.path = '~/Nextcloud2/perso/notes'
 let wiki_1.index = 'main'
-let wiki_1.ext = '.txt'
+let wiki_1.ext = '.wiki'
 let g:vimwiki_list = [
   \ wiki_1, {'path': '~/dotfiles/tips'} 
   \ ]
@@ -1680,29 +1681,29 @@ let g:diagnostic_insert_delay = 0
 "}}}
 " completion-nvim {{{
 " Configure the completion chains
-" let g:completion_chain_complete_list = {
-"     \'default' : {
-"     \	'default' : [
-"     \		{'complete_items' : ['lsp', 'snippet']},
-"     \		{'mode' : 'file'}
-"     \	],
-"     \	'comment' : [],
-"     \	'string' : []
-"     \	},
-"     \'vim' : [
-"     \	{'complete_items': ['snippet']},
-"     \	{'mode' : 'cmd'}
-"     \	],
-"     \'c' : [
-"     \	{'complete_items': ['ts']}
-"     \	],
-"     \'python' : [
-"     \	{'complete_items': ['ts']}
-"     \	],
-"     \'lua' : [
-"     \	{'complete_items': ['ts']}
-"     \	],
-"     \}
+let g:completion_chain_complete_list = {
+    \'default' : {
+    \	'default' : [
+    \		{'complete_items' : ['lsp', 'snippet']},
+    \		{'mode' : 'file'}
+    \	],
+    \	'comment' : [],
+    \	'string' : []
+    \	},
+    \'vim' : [
+    \	{'complete_items': ['snippet']},
+    \	{'mode' : 'cmd'}
+    \	],
+    \'c' : [
+    \	{'complete_items': ['ts']}
+    \	],
+    \'python' : [
+    \	{'complete_items': ['ts']}
+    \	],
+    \'lua' : [
+    \	{'complete_items': ['ts']}
+    \	],
+    \}
 
 " let g:completion_enable_auto_popup = 0
 let g:completion_enable_snippet = 'UltiSnips'
