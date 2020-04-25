@@ -16,7 +16,9 @@ let
       MaxSize = "1m";
     };
     # postSyncHookCommand = "notmuch new";
+    # create missing mailboxes
     create = "maildir";
+
   };
 
   accountExtra = {

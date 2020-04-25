@@ -376,11 +376,13 @@ Plug 'teto/Modeliner' " <leader>ml to setup buffer modeline
 "Plug 'teto/neovim-auto-autoread' " works only in neovim, runs external checker
 " Plug 'rhysd/github-complete.vim' " provides github user/repo autocompletion after @ and #
 
+" Plug 'ripxorip/aerojump.nvim'
+
 Plug 'haorenW1025/diagnostic-nvim'  " LSP improvements OpenDiagnostic/PrevDiagnostic
 " https://github.com/haorenW1025/completion-nvim/wiki/chain-complete-support
 Plug 'haorenW1025/completion-nvim' " lsp based completion framework
 " treesitter may slow down nvim
-Plug 'nvim-treesitter/completion-treesitter' " extension of completion-nvim
+" Plug 'nvim-treesitter/completion-treesitter' " extension of completion-nvim
 " Plug 'nvim-treesitter/highlight.lua' " to test treesitter
 
 " github-comment requires webapi (https://github.com/mattn/webapi-vim)
@@ -942,7 +944,6 @@ let g:fzf_preview_layout = ''
 let g:fzf_full_preview_toggle_key = '<C-s>'
 "}}}
 " Csv config {{{
-" you can use :CsvVertFold to hide commands
 " There is the analyze command as well
 let g:csv_autocmd_arrange = 0
 " let g:csv_autocmd_arrange_size = 1024*1024
@@ -1139,11 +1140,11 @@ let g:vimtex_indent_bib_enabled=1
 let g:vimtex_index_split_pos = 'below'
 let g:vimtex_view_method = 'zathura'
 "let g:vimtex_snippets_leader = ','
-let g:vimtex_fold_enabled = 0
 let g:vimtex_format_enabled = 0
 let g:vimtex_complete_recursive_bib = 0
 let g:vimtex_complete_close_braces = 0
 let g:vimtex_fold_comments=0
+let g:vimtex_fold_enabled = 0
 let g:vimtex_view_use_temp_files=1 " to prevent zathura from flickering
 let g:vimtex_syntax_minted = [
       \ {
@@ -1232,12 +1233,8 @@ vnoremap <leader>rg  <Cmd>Grepper -tool rg -open -switch<CR>
 " set foldopen+=all " specifies commands for which folds should open
 " set foldclose=all
 "set foldtext=
-" removed to test default values
-" ,foldend:^ ┬ 
   set fillchars+=foldopen:▾,foldsep:│
   set fillchars+=foldclose:▸
-  " echo "doing it"
-  " set fdc=-1
 " }}}
 " vim-sneak {{{
 let g:sneak#s_next = 1 " can press 's' again to go to next result, like ';'
@@ -1659,6 +1656,7 @@ let g:vista_highlight_whole_line=1
 " let g:vista_fzf_preview
 " let g:vista_blink=[2, 100]
 " let g:vista_icon_indent=[ '+', '+' ]
+nnoremap <Leader>v <Cmd>Vista<CR>
 "}}}
 " alok/notational-fzf-vim {{{
 " use c-x to create the note
@@ -1677,7 +1675,8 @@ let g:diagnostic_enable_virtual_text = 1
 let g:diagnostic_show_sign = 1
 " happens when PrevDiagnostic
 let g:diagnostic_auto_popup_while_jump = 1
-let g:diagnostic_insert_delay = 0
+" to prevent diagnostics from popping up in insert mode
+let g:diagnostic_insert_delay = 1
 "}}}
 " completion-nvim {{{
 " Configure the completion chains
@@ -2171,6 +2170,9 @@ let g:LspDiagnosticsHintSign = 'H'
 
 " disable [1/5]
 " set shortmess+=S
+
+command! LspStopAllClients lua vim.lsp.stop_client(vim.lsp.get_active_clients())
+
 
 " quickui {{{
 " https://github.com/skywind3000/vim-quickui

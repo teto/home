@@ -302,8 +302,6 @@ rec {
 
   };
 
-
-  # TODO do a version with clang
   neovim-dev = (super.pkgs.neovim-unwrapped.override  {
     # name = "neovim-test";
     doCheck=true;
@@ -313,12 +311,6 @@ rec {
 
   }).overrideAttrs(oa:{
     cmakeBuildType="debug";
-    cmakeFlags = oa.cmakeFlags ++ [
-      # "-DMIN_LOG_LEVEL=1"
-
-      # useful to
-      # "-DCLANG_ASAN_UBSAN=ON"
-    ];
 
     version = "master";
     src = builtins.fetchGit {
@@ -327,41 +319,6 @@ rec {
       # ref = "inlinefolds_matt";
     };
 
-    nativeBuildInputs = oa.nativeBuildInputs ++ [
-      # testing between both
-      self.pkgs.ccls
-      self.pkgs.clang-tools  # for clangd
-
-      self.pkgs.llvm  # for llvm-symbolizer
-      # self.pkgs.valgrind
-    ];
-
     # buildInputs = oa.buildInputs ++ [ ];
-
-    # export NVIM_PROG
-    # https://github.com/neovim/neovim/blob/master/test/README.md#configuration
-    shellHook = oa.shellHook + ''
-      export NVIM_PYTHON_LOG_LEVEL=DEBUG
-      export NVIM_LOG_FILE=/tmp/log
-      # export NVIM_PYTHON_LOG_FILE=/tmp/log
-      export VALGRIND_LOG="$PWD/valgrind.log"
-
-      export NVIM_TEST_PRINT_I=1
-      export NVIM_TEST_MAIN_CDEFS=1
-      echo "To run tests:"
-      echo "test/functional/fswatch/fswatch_spec.lua"
-      echo "VALGRIND=1 TEST_FILE=test/functional/core/job_spec.lua TEST_TAG=env make functionaltest"
-
-    '';
   });
-
-
-  # neovim-unwrapped-local = super.pkgs.neovim-unwrapped.overrideAttrs (oldAttrs: {
-	  # name = "neovim-unwrapped-local";
-	  # src = super.lib.cleanSource ~/neovim;
-      # cmakeBuildType="debug";
-      # meta.priority=0;
-  # });
-
-  }
-
+}

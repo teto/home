@@ -15,6 +15,10 @@
     # aircrack-ng
     nodePackages.insect
     nushell  # rust-based semantic shell
+
+    # a terminal slide
+    # haskellPackages.patat
+    # https://github.com/jaspervdj/patat
 ];
 
 }

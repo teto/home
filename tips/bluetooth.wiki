@@ -1,0 +1,3 @@
+
+console pin
+trust 70:26:05:62:DB:B2

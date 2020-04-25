@@ -8,3 +8,7 @@ coredumpctl debug
 journalctl -b0 -u <unit>
 
 systemctl list-jobs
+
+
+To limit memory consumption:
+systemd-run --user -p MemoryLimit=3G google-chrome

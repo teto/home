@@ -53,6 +53,8 @@ final: prev:
 
   hunter = prev.callPackage ./hunter { };
 
+  i3-resurrect = prev.python3Packages.callPackage ./i3-resurrect {};
+
   mda-lite = prev.pythonPackages.callPackage ./mda-lite {};
 
   mptcpnumerics = prev.python3Packages.callPackage ./mptcpnumerics.nix {};
