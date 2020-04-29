@@ -337,6 +337,8 @@ Plug 'dietsche/vim-lastplace' " restore last cursor postion (is it still needed 
 Plug 'vim-airline/vim-airline'
 Plug '~/vim-airline'
 Plug 'vim-airline/vim-airline-themes' " creates problems if not here
+Plug 'hrsh7th/vim-vsnip' " vscode/lsp snippet format
+Plug 'hrsh7th/vim-vsnip-integ'
 
 Plug 'justinmk/vim-gtfo' " gfo to open filemanager in cwd
 Plug 'wannesm/wmgraphviz.vim', {'for': 'dot'} " graphviz syntax highlighting

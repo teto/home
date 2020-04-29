@@ -53,7 +53,7 @@ let
   };
 
 
-  # problem is I don't get the error
+  # problem is I don't get the error/can't interrupt => TODO use another one
   mbsyncWrapper = pkgs.writeShellScriptBin "mbsync-wrapper" ''
       ${pkgs.isync}/bin/mbsync $@
       notmuch new
@@ -125,25 +125,11 @@ let
         #   ];
         # };
     };
+
     offlineimap = {
-      enable = true;
-      extraConfig.local = {
-        # alot per-account extraConfig
-        # The startdate option expects a date in the format yyyy-mm-dd.
-        # can't be used with maxage
-        # startdate = 2018-04-01
-      };
+      enable = false;
+      extraConfig.local = { };
       extraConfig.remote = {};
-      # for now remove since it will generate
-      # postSyncHookCommand = "notmuch new";
-      # extraConfig =
-      # seens to work without it ?
-      # sslcacertfile= /etc/ssl/certs/ca-certificates.crt
-      # newer offlineimap > 6.5.4 needs this
-      # cert_fingerprint = 89091347184d41768bfc0da9fad94bfe882dd358
-      # name translations would need to be done in both repositories, but reverse
-      # prevent sync with All mail folder since it duplicates mail
-      # folderfilter = lambda foldername: foldername not in ['[Gmail]/All Mail','[Gmail]/Spam','[Gmail]/Important']
     };
 
 
@@ -168,6 +154,38 @@ let
     imap = { host = "imap.fastmail.com"; tls = my_tls; };
     smtp = { host = "smtp.fastmail.com"; tls = my_tls; };
     # smtp.tls.useStartTls = false;
+  };
+
+  nova =
+  accountExtra //
+  {
+    # gpg = gpgModule;
+    astroid = { enable = true; };
+
+    mbsync = mbsyncConfig;
+    msmtp.enable = true;
+    notmuch = {
+      enable = true;
+        # hooks = {
+        #   # postInsert =
+        #   preNew = ''
+        #     '';
+        #   postNew = lib.concatStrings [
+        #     (builtins.readFile ../hooks_perso/post-new)
+        #     (builtins.readFile ../hooks_pro/post-new)
+        #   ];
+        # };
+    };
+
+
+    primary = false;
+    userName = "matthieu";
+    realName = "Matthieu coudron";
+    address = "mattator@gmail.com";
+    flavor = "gmail.com";
+    smtp.tls.useStartTls = true;
+
+    passwordCommand = getPassword "nova_mail";
   };
 
   gmail =
@@ -198,26 +216,6 @@ let
         #   ];
         # };
     };
-    offlineimap = {
-      enable = true;
-      extraConfig.local = {
-        # alot per-account extraConfig
-        # The startdate option expects a date in the format yyyy-mm-dd.
-        # can't be used with maxage
-        # startdate = 2018-04-01
-      };
-      extraConfig.remote = {};
-      # for now remove since it will generate
-      # postSyncHookCommand = "notmuch new";
-      # extraConfig =
-      # seens to work without it ?
-      # sslcacertfile= /etc/ssl/certs/ca-certificates.crt
-      # newer offlineimap > 6.5.4 needs this
-      # cert_fingerprint = 89091347184d41768bfc0da9fad94bfe882dd358
-      # name translations would need to be done in both repositories, but reverse
-      # prevent sync with All mail folder since it duplicates mail
-      # folderfilter = lambda foldername: foldername not in ['[Gmail]/All Mail','[Gmail]/Spam','[Gmail]/Important']
-    };
 
 
     primary = true;
@@ -227,19 +225,10 @@ let
     flavor = "gmail.com";
     smtp.tls.useStartTls = true;
 
-    # to work around a git send-email problem
-    # smtp.port = 587;
-
-    # TODO this should be made default
-    # maildirModule.path = "gmail";
-
-    # keyring get gmail login
     # loginCommand =
     # passwordCommand = "${pkgs.libsecret}/bin/secret-tool lookup gmail password";
     # builtins.toString
     passwordCommand = getPassword "gmail";
-
-    # contactCompletion = "notmuch address";
   };
 
 in
@@ -253,6 +242,7 @@ in
   accounts.email.accounts = {
     inherit gmail;
     inherit fastmail;
+    inherit nova;
 
 
     # iij =

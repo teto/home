@@ -31,9 +31,9 @@
     # allow for more layout
     layout = "us,fr";  # you can switch from cli with xkb-switch
     # TODO swap esc/shift
-    xkbOptions = "eurosign:e";
+    # consoleUseXkbConfig
+    xkbOptions = "eurosign:e, swapcaps:ctrl";
     # xkbOptions = "eurosign:e, caps:swapescape";
-    # xbkDir
 
     libinput = {
       enable = true;

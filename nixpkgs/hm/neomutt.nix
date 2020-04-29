@@ -18,8 +18,9 @@
       # settings = {
       # };
 
+      # will search into $XDG_CONFIG_HOME/neomutt/
       extraConfig = ''
-        source $XDG_CONFIG_HOME/neomutt/test.rc
+        source test.rc
       '';
 
 # # only available in neomutt

@@ -1,0 +1,7 @@
+https://discourse.nixos.org/t/problem-with-xkboptions-it-doesnt-seem-to-take-effect/5269/9
+
+Pour reset les options il suffit de faire:
+setxkbmap -option 
+#  -option "shift:both_capslock"
+$ setxkbmap -option "swapcaps:ctrl"
+$  setxkbmap -print -verbose 10

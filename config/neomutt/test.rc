@@ -1,4 +1,4 @@
-# vim: set noet fdm=marker fenc=utf-8 ff=unix sts=0 sw=4 ts=4 ft=neomuttrc :
+# vim: set fdm=marker fenc=utf-8 ff=unix sts=0 ft=neomuttrc :
 #
 # TO DEBUG
 # - set VAR? to see the actual value
@@ -12,6 +12,28 @@
 #
 # double u to uncancel a delete
 # https://stevelosh.com/blog/2012/10/the-homely-mutt/#s22-postponing-drafts
+#
+# Message status flags
+#D	message is deleted (is marked for deletion)
+# d	message has attachments marked for deletion
+# K	contains a PGP public key
+# N	message is new
+# O	message is old
+# P	message is PGP encrypted
+# r	message has been replied to
+# S	message is signed, and the signature is successfully verified
+# s	message is signed
+# !	message is flagged
+# *	message is tagged
+# n	thread contains new messages (only if collapsed)
+# o	thread contains old messages (only if collapsed)
+#
+# Message recipient flags
+# +	message is to you and you only
+# T	message is to you, but also to or CC'ed to others
+# C	message is CC'ed to you
+# F	message is from you
+# L	message is sent to a subscribed mailing list
 #
 set move = no
 
@@ -68,12 +90,30 @@ source solarized-dark-256.neomuttrc
 # set folder_format="%N %3C %d %2l (%5s) %f"
 # set message_format="From: <%a>, Sub: %s"
 
+# controls how date is displayed in index_format
+# set date_format="%A %d %b %Y à %H:%M:%S (%Z)"
+# set date_format="%<[y?%<[d?%[%H:%M]&%[%m/%d]>&%[%y.%m]>"
+
 # set index_format = "%4C %Z %{%b %d} %-15.15L (%?l?%4l&%4c?) %s"
 # %{%d %d}
 # TODO display only if collapsed
 # &%<l?%l Lines&%c Bytes>
 # I want to be able to see where
-set index_format = "%-15.15L %<M?%M Msgs> %s (%?l?%4l&%4c?)"
+# (%?l?%4l&%4c?)
+# %g -> tags
+# %> inbox name ?
+# SCOL / FCOL
+# %<[y?%<[m?%<[d?%[%H:%M ]&%[%a %d]>&%[%b %d]>&%[%m/%y ]>
+# use conditional dates
+# %Z -> tags
+# set index_format="%4C %-6@date@ %-15.15F %Z (%4c) %s"
+
+# index-format-hook  date  "~d<1d"    "%[%H:%M]"
+# index-format-hook  date  "~d<1m"    "%[%a %d]"
+# index-format-hook  date  "~d<1y"    "%[%b %d]"
+# index-format-hook  date  "~A"       "%[%m/%y]"
+
+set index_format = "%-15.15L %<M?%2M Msgs&       > %Z %g %s %*    %<[y?%<[m?%<[d?%[%H:%M ]&%[%a %d]>&%[%b %d]>&%[%m/%y ]>"
 #
 # set index_format="%?M?_%M_ ?%Z %2C %.13d (%-$FCOL.${FCOL}F) %-$SCOL.${SCOL}s %?M?_%M_&(%c/%l?"
 
@@ -87,6 +127,11 @@ set index_format = "%-15.15L %<M?%M Msgs> %s (%?l?%4l&%4c?)"
 # https://unix.stackexchange.com/questions/60838/saving-email-as-file-in-mutt
 alternative_order text/plain text text/enriched 
 
+
+# https://neomutt.org/guide/tuning
+# if too low, can slow down neomutt
+set read_inc=1000
+
 # read-thread
 # work around a bug in vimrc config
 bind index <Return> display-message
@@ -95,6 +140,9 @@ bind pager,index R group-reply
 # TODO add to vimrc mappings
 bind index zc collapse-thread
 bind index zo collapse-thread
+
+bind index [ previous-unread
+bind index ] next-unread
 
 alternative_order text/enriched text/plain text
 
@@ -222,4 +270,21 @@ unignore X-Virus-hagbard:
 
 # Now order the visable header lines
 hdr_order From: Subject: To: CC: BCC: Reply-To: Mail-Followup-To: Date: Organization: User-Agent: X-Mailer:
+# }}}
+
+# set hidden_tags = "inbox,unread,draft,flagged,passed,replied,signed,encrypted,attachment"
+# virtual-mailboxes "neomutt" "notmuch://?query=folder:neomutt and NOT tag:archive"
+# virtual-mailboxes "eudyptula" "notmuch://?query=folder:eudyptula and NOT tag:archive"
+# virtual-mailboxes "vfio" "notmuch://?query=folder:vfio and NOT tag:archive"
+
+# notmuch config {{{
+# This option specifies timeout for Notmuch database. Default is 5 seconds.
+set nm_open_timeout = 5
+# This variable specifies notmuch query type, supported types: 'threads' and
+# 'messages'.
+set nm_query_type = messages
+# This variable specifies notmuch query limit.
+set nm_db_limit = 10000
+
+set virtual_spoolfile = yes
 # }}}
