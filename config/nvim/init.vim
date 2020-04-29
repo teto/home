@@ -18,13 +18,6 @@ endfunc
 "
 "
 
-" dsadasd {{{
-
-
-"}}}
-
-
-
 " map <C-D> <C-]>
 " map <C-D> :tag<CR>
 map <D-b> :echom "hello papy"
@@ -74,6 +67,8 @@ endfunc
 nnoremap <C-RightMouse> :call SynStack()<CR>
 " }}}
 set cpoptions="aABceFsn" " vi ComPatibility options
+" should not be a default ?
+set cpoptions-=_
 
 " mouse {{{
 set mouse=a
@@ -117,11 +112,12 @@ Plug 'MattesGroeger/vim-bookmarks' " ruby  / :BookmarkAnnotate
 " branch v2-integration
 " Plug 'andymass/vim-matchup' " to replace matchit
 " Plug 'AGhost-7/critiq.vim' " :h critiq
+" Plug 'thaerkh/vim-workspace'  " :ToggleWorkspace
 Plug 'skywind3000/vim-quickui' " 
 Plug 'liuchengxu/vista.vim' " replaces tagbar to list workplace symbols
 " Plug 'neovim/nvim-lsp' " while fuzzing details out
 Plug '~/nvim-lsp' " while fuzzing details out
-" Plug 'puremourning/vimspector' " to debug programs
+Plug 'puremourning/vimspector' " to debug programs
 Plug 'bfredl/nvim-luadev'  " lua repl :Luadev
 Plug 'hotwatermorning/auto-git-diff' " to help rebasing
 " Plug 'christoomey/vim-conflicted' " toto
@@ -265,7 +261,7 @@ let cmdline_external_term_cmd = "termite -e '%s' &"
 "}}}
 Plug 'SirVer/ultisnips' " handle snippets
 " " Snippets are separated from the engine. Add this if you want them:
-" Plug 'honza/vim-snippets'
+Plug 'honza/vim-snippets'
 " Plug 'Shougo/neosnippet.vim'
 " Plug 'Shougo/neosnippet-snippets'
 
@@ -297,6 +293,8 @@ Plug 'mbbill/undotree' " replaces gundo
 " filetypes {{{2
 " Plug 'cespare/vim-toml', { 'for': 'toml'}
 Plug 'PotatoesMaster/i3-vim-syntax'
+Plug 'florentc/vim-tla'
+" one competitor is https://github.com/hwayne/tla.vim/
 " Plug 'dzeban/vim-log-syntax' " hl some keywords like ERROR/DEBUG/WARNING
 " }}}
 " Python {{{2
@@ -313,7 +311,7 @@ Plug 'PotatoesMaster/i3-vim-syntax'
 " Plug 'Valloric/ListToggle' " toggle location/quickfix list toggling seems to fail
 " Plug 'git@github.com:milkypostman/vim-togglelist' " same
 " still problems with airline when installed via nix
-" Plug '907th/vim-auto-save' " :h auto-save
+Plug '907th/vim-auto-save' " :h auto-save
 " Plug 'teto/vim-auto-save' " autosave :h auto-save
 " Plug 'bfredl/nvim-miniyank' " killring alike plugin, cycling paste careful search for :Yank commands
 " hangs with big strings
@@ -336,7 +334,7 @@ Plug 'wellle/targets.vim' " Adds new motion targets ci{
 
 Plug 'dietsche/vim-lastplace' " restore last cursor postion (is it still needed ?)
 " Powerline does not work in neovim hence use vim-airline instead
-" Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline'
 Plug '~/vim-airline'
 Plug 'vim-airline/vim-airline-themes' " creates problems if not here
 
@@ -428,6 +426,7 @@ Plug 'teto/nvimdev.nvim' " thanks tweekmonster !
 call plug#end()
 " }}}
 
+let g:did_install_default_menus = 1  " avoid stupid menu.vim (saves ~100ms)
 
 " start scrolling before reaching end of screen in order to keep more context
 " set it to a big value
@@ -467,6 +466,7 @@ set title " vim will change terminal title
 " to count the number of buffer
 " echo len(filter(range(1, bufnr('$')), 'buflisted(v:val)'))
 " let &titlestring=" %t %{len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) } - NVIM"
+set titlestring=%{getpid().':'.getcwd()}
 
 " conceal configuration {{{
 " transforms some characters into their digraphs equivalent
@@ -504,12 +504,16 @@ map <C-N><C-N> <Cmd>set invnumber<CR>
 filetype plugin on
 syntax on
 let g:vimsyn_embed = 'lP'  " support embedded lua, python and ruby
+" don't syntax-highlight long lines
+set synmaxcol=200
 
 "{{{ deoplete
 " configured in after/deoplete.vim
 "}}}
 " vimspector {{{
 let g:vimspector_enable_mappings = 'HUMAN'
+     
+
 "}}}
 " backup files etc... {{{
 set noswapfile
@@ -645,9 +649,17 @@ let g:far#collapse_result=1
 let g:instant_rst_browser = "qutebrowser"
 let g:instant_rst_additional_dirs=[ "/home/teto/mptcpweb" ]
 " }}}
+" vim-workspace {{{
+" used for autosave
+" :CloseHiddenBuffers
+" nnoremap <leader>s :ToggleWorkspace<CR>
+let g:workspace_session_disable_on_args = 1
+let g:workspace_autosave_always = 1
+let g:workspace_autosave_untrailspaces = 0
+let g:workspace_autosave_ignore = ['gitcommit']
+" }}}
 " Appearance {{{
 set background=dark " remember: does not change the background color !
-" set fillchars=vert:│,fold:>,stl:\ ,stlnc:\ ,diff:-
 " one  ▶
 
 set noshowmode " Show the current mode on command line
@@ -684,7 +696,7 @@ let g:diminactive_use_syntax = 0
 let g:diminactive_enable_focus = 0
 "}}}
 " ultisnips {{{
-" g:UltiSnipsSnippetsDir
+let g:UltiSnipsSnippetDirectories=[stdpath('config').'/snippets' ]
 " }}}
 " vim-plug config {{{
 let g:plug_shallow=1
@@ -1197,7 +1209,9 @@ let g:github_user = 'teto'
 " while waiting to finish my vim-listchars plugin
 "set listchars=tab:»·,eol:↲,nbsp:␣,extends:…
 "|
+
 set listchars=tab:•·,trail:·,extends:❯,precedes:❮,nbsp:×
+" set listchars+=conceal:X
 " conceal is used by deefault if cchar does not exit
 set listchars+=conceal:❯
 " }}}
@@ -1235,6 +1249,8 @@ vnoremap <leader>rg  <Cmd>Grepper -tool rg -open -switch<CR>
 "set foldtext=
   set fillchars+=foldopen:▾,foldsep:│
   set fillchars+=foldclose:▸
+  set fillchars+=msgsep:‾
+  hi MsgSeparator ctermbg=black ctermfg=white
 " }}}
 " vim-sneak {{{
 let g:sneak#s_next = 1 " can press 's' again to go to next result, like ';'
@@ -1652,11 +1668,25 @@ let g:vista_executive_for = {
     \ }
 let g:vista_highlight_whole_line=1
 
+" Declare the command including the executable and options used to generate ctags output
+" for some certain filetypes.The file path will be appened to your custom command.
+" For example:
+let g:vista_ctags_cmd = {
+      \ 'haskell': 'hasktags -x -o - -c',
+      \ }
 " let g:vista_finder_alternative_executives=['tags']
 " let g:vista_fzf_preview
 " let g:vista_blink=[2, 100]
 " let g:vista_icon_indent=[ '+', '+' ]
 nnoremap <Leader>v <Cmd>Vista<CR>
+" Ensure you have installed some decent font to show these pretty symbols, then you can enable icon for the kind.
+let g:vista#renderer#enable_icon = 1
+
+" The default icons can't be suitable for all the filetypes, you can extend it as you wish.
+let g:vista#renderer#icons = {
+\   "function": "\uf794",
+\   "variable": "\uf71b",
+\  }
 "}}}
 " alok/notational-fzf-vim {{{
 " use c-x to create the note
@@ -1680,29 +1710,29 @@ let g:diagnostic_insert_delay = 1
 "}}}
 " completion-nvim {{{
 " Configure the completion chains
-let g:completion_chain_complete_list = {
-    \'default' : {
-    \	'default' : [
-    \		{'complete_items' : ['lsp', 'snippet']},
-    \		{'mode' : 'file'}
-    \	],
-    \	'comment' : [],
-    \	'string' : []
-    \	},
-    \'vim' : [
-    \	{'complete_items': ['snippet']},
-    \	{'mode' : 'cmd'}
-    \	],
-    \'c' : [
-    \	{'complete_items': ['ts']}
-    \	],
-    \'python' : [
-    \	{'complete_items': ['ts']}
-    \	],
-    \'lua' : [
-    \	{'complete_items': ['ts']}
-    \	],
-    \}
+" let g:completion_chain_complete_list = {
+"     \'default' : {
+"     \	'default' : [
+"     \		{'complete_items' : ['lsp', 'snippet']},
+"     \		{'mode' : 'file'}
+"     \	],
+"     \	'comment' : [],
+"     \	'string' : []
+"     \	},
+"     \'vim' : [
+"     \	{'complete_items': ['snippet']},
+"     \	{'mode' : 'cmd'}
+"     \	],
+"     \'c' : [
+"     \	{'complete_items': ['ts']}
+"     \	],
+"     \'python' : [
+"     \	{'complete_items': ['ts']}
+"     \	],
+"     \'lua' : [
+"     \	{'complete_items': ['ts']}
+"     \	],
+"     \}
 
 " let g:completion_enable_auto_popup = 0
 let g:completion_enable_snippet = 'UltiSnips'
@@ -1743,7 +1773,7 @@ let &undodir=stdpath('data').'/undo/'
 set undofile
 
 
-nnoremap <F6> :AutoSaveToggle<CR>
+nnoremap <F6> <Cmd>AutoSaveToggle<CR>
 "nnoremap <F6> :AutoSaveOnLostFocus<CR>
 " goto previous buffer
 nnoremap <F7> :bp<CR>
@@ -1764,6 +1794,8 @@ map <F11> <Plug>(ToggleListchars)
 "nnoremap <Down> :echoe "Use j"<CR>
 
 nnoremap <silent> <Leader>B <Cmd>TagbarToggle<CR>
+nnoremap <Leader>V <Cmd>Vista finder<CR>
+
 " set vim's cwd to current file's
 nnoremap ,cd :cd %:p:h<CR>:pwd<CR>
 
@@ -2037,8 +2069,8 @@ nnoremap <S-CR> i<CR><Esc>
 hi CursorLine                    guibg=#293739 guifg=None
 " hi CocErrorFloat
 
-au BufWinLeave,BufLeave * if &buftype != 'nofile' | silent! mkview | endif
-au BufWinEnter * if &buftype != 'nofile' | silent! loadview | endif
+" au BufWinLeave,BufLeave * if &buftype != 'nofile' | silent! mkview | endif
+" au BufWinEnter * if &buftype != 'nofile' | silent! loadview | endif
 
 
 
@@ -2080,13 +2112,16 @@ map ,fa <Cmd>call CreateVisualExtmark()<CR>
 nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
 nnoremap <silent> K  <cmd>lua vim.lsp.buf.hover()<CR>
 " nnoremap <silent> K  <cmd>Show_documentation()<CR>
-nnoremap <silent> ,gi  <cmd>lua vim.lsp.buf.implementation()<CR>
+nnoremap ,gi  <cmd>lua vim.lsp.buf.implementation()<CR>
 nnoremap ,sh <cmd>lua vim.lsp.buf.signature_help()<CR>
 nnoremap <silent> ,td <cmd>lua vim.lsp.buf.type_definition()<CR>
 nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
 
 nnoremap <silent> ,af <cmd>lua vim.lsp.buf.formatting()<CR>
 nnoremap <silent> ,arf <cmd>lua vim.lsp.buf.range_formatting()<CR>
+
+" nnoremap <silent> <leader>do :OpenDiagnostic<CR>
+nnoremap <leader>dl <cmd>lua vim.lsp.util.show_line_diagnostics()<CR>
 
 " when upstreamed
 nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
@@ -2171,8 +2206,26 @@ let g:LspDiagnosticsHintSign = 'H'
 " disable [1/5]
 " set shortmess+=S
 
+
+" nnoremap ' `
+
+" keep selection when shifting
+xnoremap > >gv
+xnoremap < <gv
+
 command! LspStopAllClients lua vim.lsp.stop_client(vim.lsp.get_active_clients())
 
+" set working directory to the current buffer's directory
+nnoremap cd :lcd %:p:h<bar>pwd<cr>
+nnoremap cu :lcd ..<bar>pwd<cr>
+
+"linewise partial staging in visual-mode.
+xnoremap <c-p> :diffput<cr>
+xnoremap <c-o> :diffget<cr>
+" nnoremap <expr> dp &diff ? 'dp' : ':Printf<cr>'
+
+" command! ProfileVim     exe 'Start '.v:progpath.' --startuptime "'.expand("~/vimprofile.txt").'" -c "e ~/vimprofile.txt"'
+" command! NvimTestScreenshot put =\"local Screen = require('test.functional.ui.screen')\nlocal screen = Screen.new()\nscreen:attach()\nscreen:snapshot_util({},true)\"
 
 " quickui {{{
 " https://github.com/skywind3000/vim-quickui

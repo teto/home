@@ -5,6 +5,12 @@ let
 
   terminalCommand = pkgs.termite;
 
+  # TODO copy it
+  unicode-data = pkgs.fetchurl {
+    url = "http://www.unicode.org/Public/UNIDATA/UnicodeData.txt";
+    sha256 = "16b0jzvvzarnlxdvs2izd5ia0ipbd87md143dc6lv6xpdqcs75s9";
+  };
+
   texliveEnv = pkgs.texlive.combine {
     # tabularx is not available
     inherit (pkgs.texlive) scheme-small cleveref latexmk bibtex algorithms cm-super

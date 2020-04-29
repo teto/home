@@ -17,16 +17,18 @@ function! TestFoldTextWithColumns()
   return l:res
 endfunc
 
-set foldtext=TestFoldTextWithColumns()
-
+" set foldtext=TestFoldTextWithColumns()
+set foldtext=
 set fdc=2
-set foldminlines=0
+set number
+
+" to be able to fold
+" set foldminlines=0
+
 " set fdm=marker
 set fdm=manual
 
-" set fillchars+=
-" one  ▶
-" set fillchars+=vert:│,fold:>,stl:\ ,stlnc:\ ,diff:-
-" set fillchars+=foldopen:▾,foldsep:│,foldclose:▸
-" bin/nvim ../toto.txt -c "call feedkeys('zf5jggzf2j')" -u NONE
-" zf2j
+" set listchars+=conceal:X
+" conceal used by default if cchar does not exit
+set listchars+=conceal:X
+

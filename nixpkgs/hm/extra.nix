@@ -13,8 +13,10 @@
     wirelesstools # to get iwconfig
     gitAndTools.diff-so-fancy
     # aircrack-ng
-    nodePackages.insect
+    nodePackages.insect  # fancy calculator
     nushell  # rust-based semantic shell
+    tlaplus  # formal logic
+    tlaplusToolbox  # from leslie lamport
 
     # a terminal slide
     # haskellPackages.patat

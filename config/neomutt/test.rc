@@ -1,14 +1,51 @@
 # vim: set noet fdm=marker fenc=utf-8 ff=unix sts=0 sw=4 ts=4 ft=neomuttrc :
+#
+# TO DEBUG
+# - set VAR? to see the actual value
+# - :exec show-log-messages
+# https://gitlab.com/sarpik/mutt-wizard/-/blob/master/muttrc
 # http://www.davep.org/mutt/muttrc/
 # how to debug explained here https://neomutt.org/dev/debug
 # :exec what-key to find the name of the key
 # run :set ?option to see the value of a command
 # set debug_level = 2
+#
+# double u to uncancel a delete
+# https://stevelosh.com/blog/2012/10/the-homely-mutt/#s22-postponing-drafts
+#
 set move = no
+
+set sleep_time = 0		# Pause 0 seconds for informational messages
+set markers = no		# Disables the `+` displayed at line wraps
+set mark_old = no		# Unread mail stay unread until read
+
+set tilde                # displays "~" to show EOF
+
+set history=100
+
+set save_history=100    # per category size of the history
+
+bind pager [ previous-unread
+bind pager ] next-unread
+
+bind index,pager y modify-labels
+bind index,pager X change-vfolder
+
+tag-transforms "attachment" "@" \
+               "encrypted"  "" \
+               "signed"     "✎" \
+               "neomutt-users" "users" \
+               "neomutt-devel" "devel" \
+               "github-issues" "gh"
+tag-formats "attachment" "GA" \
+            "encrypted"  "GE" \
+            "signed"     "GS"
 
 # exec change-vfolder
 #
 # set debug_file = neolog
+# between 1-5, 2 recommended
+# set debug_level = 2
 
 # TODO fix folder hooks
 # source ~/.config/neomutt/neomuttrc
@@ -18,7 +55,33 @@ set move = no
 set sort_aux = reverse-last-date-received
 
 # source theme
-source $XDG_CONFIG_HOME/neomutt/dracula.muttrc
+# source $XDG_CONFIG_HOME/neomutt/dracula.muttrc
+# source $XDG_CONFIG_HOME/neomutt/zenburn.neomuttrc
+source solarized-dark-256.neomuttrc
+# source $XDG_CONFIG_HOME/neomutt/formats
+
+# formats{{{
+# set alias_format="%2n %t %-20.20a: %r"
+# set attach_format="%2n %D%I%u%t %T%f %d (%s) (%m/%M, %e, %C)"
+# set compose_format="Compose %h [Approx. msg size: %l, Atts: %a] %v %>-"
+# set date_format="!%a %e.%h'%y at %k:%M:%S %Z"
+# set folder_format="%N %3C %d %2l (%5s) %f"
+# set message_format="From: <%a>, Sub: %s"
+
+# set index_format = "%4C %Z %{%b %d} %-15.15L (%?l?%4l&%4c?) %s"
+# %{%d %d}
+# TODO display only if collapsed
+# &%<l?%l Lines&%c Bytes>
+# I want to be able to see where
+set index_format = "%-15.15L %<M?%M Msgs> %s (%?l?%4l&%4c?)"
+#
+# set index_format="%?M?_%M_ ?%Z %2C %.13d (%-$FCOL.${FCOL}F) %-$SCOL.${SCOL}s %?M?_%M_&(%c/%l?"
+
+# set pager_format="%Z %C/%m %d (%F) %s (%c/%l) %|-"
+# set pgp_entry_format="%3n %t%f %4l/0x%k %-4a %2c %u %[%a %e.%h'%y at %k:%M:%S %Z]"
+
+# set status_format="_%r_ %h: %f, %l/%m (%P,%s) [ %?p?PP:%p ?%?t?Tag:%t ?%?d?DEL:%d ?]%?V?, %L/%M only=%V? < %?F?go:%F ?%?n?new:%n ?> %v"
+# }}}
 
 # ultimate trick to
 # https://unix.stackexchange.com/questions/60838/saving-email-as-file-in-mutt
@@ -31,6 +94,11 @@ bind pager,index R group-reply
 
 # TODO add to vimrc mappings
 bind index zc collapse-thread
+bind index zo collapse-thread
+
+alternative_order text/enriched text/plain text
+
+set delete = yes
 
 # in order to do http://flavioleitner.blogspot.com/2011/03/patch-workflow-with-mutt-and-git.html
 set pipe_split=yes
@@ -50,6 +118,11 @@ set new_mail_command="notify-send --icon='/home/teto/.config/neomutt/mutt-48x48.
 # index 	<vfolder-window-forward> 	generate virtual folder by moving the query's time window forward
 # index 	<vfolder-window-backward> 	generate virtual folder by moving the query's time window backward
 
+
+# t to tag messages
+
+set collapse_all
+unset collapse_unread
 
 # locales FR pour les nom des jours et mois
 # set charset
@@ -75,9 +148,54 @@ set new_mail_command="notify-send --icon='/home/teto/.config/neomutt/mutt-48x48.
 # set pager_stop
 # Correcteur d'orthographe
 # set ispell="aspell -e -c"
-# <Enter>             select-entry                   sélectionner l'entrée courante 
-# collapse_unread
+# <Enter>             select-entry                   sélectionner l'entrée courante
 
+bind index D delete-message
+
+# cache caching {{{
+# $header_cache and $message_cachedir
+# set message_cachedir=
+# }}}
+
+
+bind index,pager B sidebar-toggle-visible
+
+
+# does it run notmuch ?
+# macro index o "<shell-escape>mbsync mailbox<enter>" "run mbsync to sync mail for this account"
+# taken from steve losh config
+bind index p recall-message
+bind compose p postpone-message
+
+# sidebar {{{
+unset sidebar_visible
+set sidebar_format = "%B%?F? [%F]?%* %?N?%N/?%S"
+set mail_check_stats
+# Plenty of space
+set sidebar_width = 25
+# Pretty line-drawing character
+set sidebar_divider_char = '│'
+# }}}
+
+# compose View Options{{{
+set envelope_from                    # which from?
+set edit_headers                     # show headers when composing
+set fast_reply                       # skip to compose when replying
+set askcc                            # ask for CC:
+set fcc_attach                       # save attachments with the body
+set forward_format = "Fwd: %s"       # format of subject when forwarding
+set forward_decode                   # decode when forwarding
+set attribution = "On %d, %n wrote:" # format of quoting header
+set reply_to                         # reply to Reply to: field
+set reverse_name                     # reply as whomever it was to
+set include                          # include message in replies
+set forward_quote                    # include message in forwards
+set text_flowed
+unset sig_dashes                     # no dashes before sig
+unset mime_forward                   # forward attachments as part of body
+
+# auto_view text/html		# automatically show html (mailcap uses w3m)
+# }}}
 
 # Configure header displays {{{
 

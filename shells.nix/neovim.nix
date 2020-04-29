@@ -31,9 +31,8 @@ let
     nativeBuildInputs = oa.nativeBuildInputs ++ [
       # testing between both
       pkgs.ccls
-      pkgs.clang-tools  # for clangd
-
-      pkgs.llvm  # for llvm-symbolizer
+      # pkgs.clang-tools  # for clangd
+      # pkgs.llvm  # for llvm-symbolizer
       # pkgs.valgrind
     ];
 
