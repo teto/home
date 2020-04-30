@@ -1,0 +1,24 @@
+Comment ecrire sa requete comme ca ?
+
+flags are listed in : flag_chars
+https://neomutt.org/guide/gettingstarted
+
+lua-source ~/.config/neomutt/utils.lua
+folder-hook neomutt 'lua chgdir("~/.maildirs/NetC/neomutt", true)'
+
+
+15:19 <ryzokuken> that would help me do it faster
+15:22 <jindraj> teto: sure it's possible. look here https://neomutt.org/guide/configuration.html#23-%C2%A0executing-functions
+15:36 <teto> jindraj: sorry if that sounds stupid but I dont get how to exec toggle-unread on just the marked items ? 
+15:46 <jindraj> either use toggle-new (but it switches it, so if you accidentaly tag unread message it will be marked as read).
+15:46 <jindraj> Or use set-flag / clear-flag
+15:48 <jindraj> teto: `macro index z '<tag-prefix-cond><set-flag>N<end-cond>`  - use this to mark tagged messages as unread.
+15:49 <jindraj> analogicaly the similar macro with …<clear-flag>N…  to mark them read.
+
+
+16:13 <jindraj> there are two differences. 1) encapsulating the call in <tag-prefix-cond> <end-cond> makes sure all enclosed functions inside will be applied to tagged messages.16:15 <jindraj> 1a) <tag-prefx> will be used only for direcrtly following function.
+16:15 <jindraj> 2) <set-flag> is really setting new flag so it doesn't matter whether the messages you tagged are read or unread (new/old)16:15 <mingdao> I have an email that did not send (during changing hosting providers) which I have forwarded to a working address. It is in the Inbox. Is there any way to just send that message?16:15 <jindraj> 2b) <toggle-new> changes read messages to unread and unread to read.
+16:16 <jindraj> mingdao: you can bounce the message `b`
+
+
+:push <tag-prefix><toggle-new>
