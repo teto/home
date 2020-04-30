@@ -20,10 +20,10 @@ status = Status(
     standalone=True,
     logfile="$HOME/i3pystatus.log",
     click_events=True,
-    internet_check=("github.com", 22)
+    # internet_check=("github.com", 22)
 )
 
-my_term = "termite"
+my_term = "kitty"
 
 #status.register("text",
 
@@ -49,7 +49,7 @@ clock = status.register(
         (" %a %-d %X (Paris)", 'Europe/Paris'),
         (" %a %-d %X (Tokyo)", 'Asia/Tokyo'),
     ],
-    on_leftclick="termite -e ikhal",
+    on_leftclick="kitty ikhal",
     # on_leftclick="xmessage toto",
     # on_rightclick=["/usr/bin/urxvtc",'-e', 'cal'],
     on_rightclick="gnome-terminal -e sh",
@@ -67,10 +67,12 @@ clock = status.register(
 # clock.on_click(1)
 # print(clock.on_clicks)
 status.register("pulseaudio")
+
 # Shows your CPU temperature, if you have a Intel CPU
 # status.register("temp",   format="{temp:.0f}°C",)
 # might not work with modesetting, nvidia etc...
 status.register("backlight", format="{percentage}%",)
+
 # redshift = status.register("redshift", )
 # redshift.toggle_inhibit()
 #

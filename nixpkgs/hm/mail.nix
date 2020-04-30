@@ -73,29 +73,8 @@ let
     # certificatesFile = "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
     certificatesFile = "/etc/ssl/certs/ca-certificates.crt";
   };
-  # keyringProg = pkgs.python3.withPackages(ps: with ps; [ secretstorage keyring pygobject3]);
 
-
-  # customMbsync = pkgs.writeScript ''
-  #     # start
-  #     ${pkgs.mbsync}/bin/mbsync -c /$@
-  #     notmuch
-  #   '';
-
-  # stdenv.mkDerivation {
-  #     name = "mbsync-with-hooks";
-  #     buildInputs = [ pkgs.makeWrapper ];
-  #     unpackPhase = "true";
-  #     installPhase = ''
-  #       mkdir -p $out/bin
-  #       cp ${./scripts}/* $out/bin
-  #       # for f in $out/bin/*; do
-  #         wrapProgram $f --prefix PATH : ${stdenv.lib.makeBinPath [ coreutils gawk gnused nix diffutils ]}
-  #       done
-  #     '';
-  # };
   gpgModule = {
-
     key = "64BB678705EF85ABF7345F69BD024BD9C261596D";
     signByDefault = false;
   };
@@ -111,7 +90,7 @@ let
       mailboxes = ["INBOX" "Sent" "Work"];
     };
 
-    mbsync = mbsyncConfig;
+    mbsync = mbsyncConfig // { remove = "both"; };
     msmtp.enable = true;
     notmuch = {
       enable = true;
@@ -162,7 +141,7 @@ let
     # gpg = gpgModule;
     astroid = { enable = true; };
 
-    mbsync = mbsyncConfig;
+    mbsync = mbsyncConfig // { remove = "both"; };
     msmtp.enable = true;
     notmuch = {
       enable = true;
@@ -331,9 +310,9 @@ in
 
 
 
-   #   # see https://github.com/pazz/alot/wiki/Tips,-Tricks-and-other-cool-Hacks for more ideas
+   # see https://github.com/pazz/alot/wiki/Tips,-Tricks-and-other-cool-Hacks for more ideas
    bindings = let
-     refreshCommand = account: "shellescape 'mbsync ${account}'; refresh";
+     refreshCommand = account: "shellescape 'check-mail.sh ${account}'; refresh";
    in
      {
         global = {
@@ -354,9 +333,10 @@ in
           # otherwise toggling tags makes UI sluggish
           # https://github.com/pazz/alot/issues/307
           s = "toggletags --no-flush unread";
+          d = "toggletags killed";
           "r g" = refreshCommand "gmail";
           "r f" = refreshCommand "fastmail";
-          "$ g" = refreshCommand "gmail";
+          "r n" = refreshCommand "nova";
           "@" = refreshCommand "gmail";
         };
         thread = {
@@ -365,6 +345,7 @@ in
 
           "s m" = "call hooks.save_mail(ui)";
           R = "reply --all";
+          # TODO add a vimkeys component to alot
           "z C" = "fold *";
           "z c" = "fold";
           "z o" = "unfold";
@@ -509,7 +490,7 @@ in
 
    # disabled for now, use mbsync instead
    programs.offlineimap = {
-      enable = true;
+      enable = false;
       extraConfig.general = {
         # interval between updates (in minutes)
         autorefresh=0;
@@ -553,7 +534,7 @@ in
     # postExec =
     # verbose
     verbose = true;  # to help debug problems in journalctl
-     frequency =  "*:0/5";
+    frequency =  "*:0/5";
   };
 
 

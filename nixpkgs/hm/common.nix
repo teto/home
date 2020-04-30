@@ -134,7 +134,7 @@ rec {
       # HISTFILE="$XDG_CACHE_HOME/bash_history";
     };
     # historyControl=["erasedups", "ignoredups", "ignorespace"]
-    historyIgnore=["ls"];
+    historyIgnore=["ls" "pwd"];
     # historyFile = "${xdg.cacheHome}/bash_history";
     historyFile = "$XDG_CACHE_HOME/bash_history";
     shellAliases = {
@@ -269,13 +269,12 @@ rec {
   programs.zsh = rec {
     enable = true;
     # enableAutojump = true;
-    # dotDir = "${config.xdg.configHome}/zsh";
     dotDir = ".config/zsh";
     sessionVariables = {
       # HISTFILE="$XDG_CACHE_HOME/zsh_history";
     };
     history = {
-        save = 10000000;
+        save = 1000000;
         ignoreDups = true;
         # defined as HISTFILE="$HOME/${cfg.history.path}"
         # https://github.com/nsnam/bake-git
@@ -288,14 +287,6 @@ rec {
     } // config.programs.bash.shellAliases;
 
     autocd = true;
-    # plugins =
-    # loginExtra=
-    # profileExtra
-      # # used to compile bpf stuff
-      # __bcc() {
-      #         clang -O2 -emit-llvm -c $1 -o - | \
-      #         llc -march=bpf -filetype=obj -o "`basename $1 .c`.o"
-      # }
 
     initExtra = ''
       alias -s json=nvim

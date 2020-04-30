@@ -13,6 +13,8 @@
 # double u to uncancel a delete
 # https://stevelosh.com/blog/2012/10/the-homely-mutt/#s22-postponing-drafts
 #
+# http://therandymon.com/woodnotes/mutt/node58.html
+#
 # Message status flags
 #D	message is deleted (is marked for deletion)
 # d	message has attachments marked for deletion
@@ -37,6 +39,10 @@
 #
 set move = no
 
+# TODO set flag_chars
+# TODO set to_chars " +TCFLR"
+
+
 set sleep_time = 0		# Pause 0 seconds for informational messages
 set markers = no		# Disables the `+` displayed at line wraps
 set mark_old = no		# Unread mail stay unread until read
@@ -47,21 +53,13 @@ set history=100
 
 set save_history=100    # per category size of the history
 
+bind index D delete-thread
 bind pager [ previous-unread
 bind pager ] next-unread
 
 bind index,pager y modify-labels
 bind index,pager X change-vfolder
 
-tag-transforms "attachment" "@" \
-               "encrypted"  "" \
-               "signed"     "✎" \
-               "neomutt-users" "users" \
-               "neomutt-devel" "devel" \
-               "github-issues" "gh"
-tag-formats "attachment" "GA" \
-            "encrypted"  "GE" \
-            "signed"     "GS"
 
 # exec change-vfolder
 #
@@ -125,7 +123,7 @@ set index_format = "%-15.15L %<M?%2M Msgs&       > %Z %g %s %*    %<[y?%<[m?%<[d
 
 # ultimate trick to
 # https://unix.stackexchange.com/questions/60838/saving-email-as-file-in-mutt
-alternative_order text/plain text text/enriched 
+alternative_order text/plain text text/enriched
 
 
 # https://neomutt.org/guide/tuning
@@ -148,6 +146,18 @@ alternative_order text/enriched text/plain text
 
 set delete = yes
 
+
+# macro attach s <save-entry><kill-line>/home/YOU/downloads/<enter>y "Save entry"
+
+# hum keep it manual
+# timeout-hook 'exec sync-mailbox'
+# shutdown-hook 'exec sync-mailbox'
+
+macro index @ '<shell-escape>check-mail.sh >/dev/null 2>&1 &<enter>' "Check for new mails"
+
+# nani ?
+# set uncollapse_jump = yes
+
 # in order to do http://flavioleitner.blogspot.com/2011/03/patch-workflow-with-mutt-and-git.html
 set pipe_split=yes
 
@@ -166,6 +176,7 @@ set new_mail_command="notify-send --icon='/home/teto/.config/neomutt/mutt-48x48.
 # index 	<vfolder-window-forward> 	generate virtual folder by moving the query's time window forward
 # index 	<vfolder-window-backward> 	generate virtual folder by moving the query's time window backward
 
+# tag-prefix-cond
 
 # t to tag messages
 
@@ -181,7 +192,6 @@ unset collapse_unread
 # Replace some tags with icons
 # https://neomutt.org/feature/custom-tags#commands
 # tag-transforms
-
 # https://neomutt.org/feature/global-hooks
 
 # phrase d'intro pour réponse quotée
@@ -207,6 +217,7 @@ bind index D delete-message
 
 
 bind index,pager B sidebar-toggle-visible
+
 
 
 # does it run notmuch ?
@@ -272,6 +283,11 @@ unignore X-Virus-hagbard:
 hdr_order From: Subject: To: CC: BCC: Reply-To: Mail-Followup-To: Date: Organization: User-Agent: X-Mailer:
 # }}}
 
+# Terminal config {{{
+set ts_enabled
+# set ts_status_format
+# }}}
+
 # set hidden_tags = "inbox,unread,draft,flagged,passed,replied,signed,encrypted,attachment"
 # virtual-mailboxes "neomutt" "notmuch://?query=folder:neomutt and NOT tag:archive"
 # virtual-mailboxes "eudyptula" "notmuch://?query=folder:eudyptula and NOT tag:archive"
@@ -285,6 +301,45 @@ set nm_open_timeout = 5
 set nm_query_type = messages
 # This variable specifies notmuch query limit.
 set nm_db_limit = 10000
+set nm_unread_tag = unread
+# set nm_exclude_tags = ""
+set hidden_tags = "inbox"
 
+set nm_query_window_duration=2
+set nm_query_window_timebase = "year"
+# set nm_replied_tag = "replied"
+ # nm_sendmail: #!/bin/bash
+ #    tee >(notmuch-deliver -t sent -f Sent) | sendmail $*
+
+# generate virtual folder from query with time window
+bind index < vfolder-window-backward
+bind index > vfolder-window-forward
 set virtual_spoolfile = yes
+
+# macro index A "<modify-labels>+archive -unread -inbox\\n" "Archive message"
+# macro index c "<change-vfolder>?" "Change to vfolder overview"
+# macro index \\\\ "<vfolder-from-query>" "Search mailbox"
+
+virtual-mailboxes "sent" "notmuch://?query=tag:sent"
+virtual-mailboxes "ietf" "notmuch://?query=tag:ietf"
+virtual-mailboxes "unread" "notmuch://?query=tag:unread"
+
+tag-transforms "unread" "" \
+				"attachment" "" \
+				"github" "" \
+				"flagged" "" \
+				"signed" ""
+        # ⚑
+
+# tag-transforms "attachment" "@" \
+#                "encrypted"  "" \
+#                "signed"     "✎" \
+#                "neomutt-users" "users" \
+#                "neomutt-devel" "devel" \
+#                "github-issues" "gh"
+tag-formats "attachment" "GA" \
+            "encrypted"  "GE" \
+            "github"  "MATTATOR" \
+            "signed"     "GS"
+
 # }}}

@@ -335,10 +335,10 @@ Plug 'wellle/targets.vim' " Adds new motion targets ci{
 Plug 'dietsche/vim-lastplace' " restore last cursor postion (is it still needed ?)
 " Powerline does not work in neovim hence use vim-airline instead
 Plug 'vim-airline/vim-airline'
-Plug '~/vim-airline'
+" Plug '~/vim-airline'
 Plug 'vim-airline/vim-airline-themes' " creates problems if not here
-Plug 'hrsh7th/vim-vsnip' " vscode/lsp snippet format
-Plug 'hrsh7th/vim-vsnip-integ'
+" Plug 'hrsh7th/vim-vsnip' " vscode/lsp snippet format
+" Plug 'hrsh7th/vim-vsnip-integ'
 
 Plug 'justinmk/vim-gtfo' " gfo to open filemanager in cwd
 Plug 'wannesm/wmgraphviz.vim', {'for': 'dot'} " graphviz syntax highlighting
@@ -1726,7 +1726,7 @@ let g:diagnostic_insert_delay = 1
 "     \	{'mode' : 'cmd'}
 "     \	],
 "     \'c' : [
-"     \	{'complete_items': ['ts']}
+"     \	{'complete_items': ['ts'], 'triggered_only': [‘.', '::']}
 "     \	],
 "     \'python' : [
 "     \	{'complete_items': ['ts']}

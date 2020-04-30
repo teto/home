@@ -35,6 +35,7 @@ local:
 	mkdir -p $(XDG_DATA_HOME)/fzf-history $(XDG_DATA_HOME)/newsbeuter
 
 # installe les grammaires treesitter chez neovim
+# TODO run the scripts/ instead
 treesitter:
 	nix-build -A tree-sitter.builtGrammars.c
 
@@ -44,7 +45,7 @@ zsh:
 
 pip:
 	wget https://bootstrap.pypa.io/get-pip.py /tmp/
-	python3.5 /tmp/get-pip.py --user
+	python3 /tmp/get-pip.py --user
 
 
 dotfiles:
@@ -86,6 +87,7 @@ fonts:
 # xdg:
 	# Example: xdg-mime default qutebrowser.desktop text/html
 
+# TODO do with nix
 nautilus:
 	gsettings set org.gnome.desktop.background show-desktop-icons false
 

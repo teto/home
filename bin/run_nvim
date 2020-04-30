@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-DEV=$PWD
-cd $HOME/tmp && exec env VIMRUNTIME=$DEV/runtime gdb -ex run --args $DEV/build/bin/nvim "$@"

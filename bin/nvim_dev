@@ -1,6 +1,0 @@
-#!/usr/bin/env bash
-# thanks tweekmonster and mhinz !
-#  you have to run to generate the doc
-# :helptags $VIMRUNTIME/doc
-DEV=${DEV:-${PWD}}
-VIMRUNTIME="$DEV/runtime" "$DEV/bin/nvim" "$@"

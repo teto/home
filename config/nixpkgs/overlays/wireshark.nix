@@ -47,9 +47,16 @@ in
     ];
     cmakeBuildType="debug";
 
-    buildInputs = oa.buildInputs ++ [ super.cquery ];
+    buildInputs = oa.buildInputs ++ [
+      # llvm instead
+      super.cquery
+    ];
 
     # TODO add a neovim with cquery lsp
+    #       "WIRESHARK_ABORT_ON_DISSECTOR_BUG=1"
+    # G_DEBUG=fatal_criticals 
+    # libtool --mode=execute gdb $HOME/wireshark/debug/run/$1
+    # or break on proto_report_dissector_bug
     shellHook = (oa.shellHook or "") + ''
       export QT_PLUGIN_PATH=${super.qt5.qtbase.bin}/${super.qt5.qtbase.qtPluginPrefix}
       echo "rm -rf build && cmakeConfigurePhase"

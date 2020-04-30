@@ -1,4 +1,5 @@
 # vim: filetype=muttrc
+# color235 
 
 # custom body highlights -----------------------------------------------
 # highlight my name and other personally relevant strings
@@ -41,6 +42,7 @@ mono  error         bold
 
 # TODO I would like to have vim colorize these colors
 
+# color FG BG flags
 #color index         color160        color234        "~D(!~p|~p)"               # deleted
 #color index         color235        color234        ~F                         # flagged
 #color index         color166        color234        ~=                         # duplicate messages
@@ -71,12 +73,14 @@ color index         color136        color234        "~v~(~N)"                   
 color index         color64         color234        "~N~v~(~N)"                 # collapsed thread with unread parent
 # statusbg used to indicated flagged when foreground color shows other status
 # for collapsed thread
-color index         color160        color235        "~v~(~F)!~N"                # collapsed thread with flagged, no unread
-color index         color136        color235        "~v~(~F~N)"                 # collapsed thread with some unread & flagged
-color index         color64         color235        "~N~v~(~F~N)"               # collapsed thread with unread parent & flagged
-color index         color64         color235        "~N~v~(~F)"                 # collapsed thread with unread parent, no unread inside, but some flagged
-color index         color37         color235        "~v~(~p)"                   # collapsed thread with unread parent, no unread inside, some to me directly
-color index         color136        color160        "~v~(~D)"                   # thread with deleted (doesn't differentiate between all or partial)
+# collapsed thread with flagged, no unread
+color index         color160        color235        "~v~(~F)!~N"
+# collapsed thread with some unread & flagged
+# color index         color136        color235        "~v~(~F~N)"
+# color index         color64         color235        "~N~v~(~F~N)"               # collapsed thread with unread parent & flagged
+# color index         color64         color235        "~N~v~(~F)"                 # collapsed thread with unread parent, no unread inside, but some flagged
+# color index         color37         color235        "~v~(~p)"                   # collapsed thread with unread parent, no unread inside, some to me directly
+# color index         color136        color160        "~v~(~D)"                   # thread with deleted (doesn't differentiate between all or partial)
 #color index         color136        color234        "~(~N)"                    # messages in threads with some unread
 #color index         color64         color234        "~S"                       # superseded messages
 #color index         color160        color234        "~T"                       # tagged messages
