@@ -3,9 +3,7 @@
 local nvim_lsp = require 'nvim_lsp'
 local configs = require'nvim_lsp/configs'
 
--- external plugins to have some nice features
-local plug_diagnostic_enabled, plug_diagnostic = pcall(require, "diagnostic")
-local plug_completion_enabled, plug_completion = pcall(require, "completion")
+local attach_cb = require 'on_attach'
 
 -- to override all defaults
 -- nvim_lsp.util.default_config = vim.tbl_extend(
@@ -72,7 +70,7 @@ nvim_lsp.ghcide.setup({
 	end;
 	log_level = vim.lsp.protocol.MessageType.Warning;
 	settings = {};
-	-- on_attach=require'diagnostic'.on_attach
+	-- on_attach=attach_cb.on_attach
 })
 
 --nvim_lsp.hie.setup({
@@ -167,7 +165,8 @@ nvim_lsp.ccls.setup({
 		-- "compilationDatabaseDirectory": "/home/teto/mptcp/build",
 		clang = { excludeArgs = { "-m*", "-Wa*" } },
 		cache = { directory = "/tmp/ccls" }
-	}
+	},
+	on_attach = attach_cb.on_attach
 })
 
 -- config at https://raw.githubusercontent.com/palantir/python-language-server/develop/vscode-client/package.json
@@ -207,34 +206,8 @@ nvim_lsp.pyls.setup({
 		};
 	};
 	};
-  -- };
 })
 
--- require'completion'.on_attach
--- use only if require diagnostic is not null ?
-do
-	if plug_completion_enabled then
-		nvim_lsp.ccls.setup{on_attach= plug_completion.on_attach}
-	-- end
-
-	-- if plug_diagnostic_enabled then
-	-- 	nvim_lsp.ghcide.setup{on_attach=plug_diagnostic.on_attach}
-	-- nvim_lsp.hie.setup{on_attach=plug_diagnostic.on_attach}
-	else
-		print("could not require diagnostic")
-		local method = 'textDocument/publishDiagnostics'
-		local default_callback = vim.lsp.callbacks[method]
-		vim.lsp.callbacks[method] = function(err, method, result, client_id)
-			default_callback(err, method, result, client_id)
-			if result and result.diagnostics then
-			for _, v in ipairs(result.diagnostics) do
-				v.uri = v.uri or result.uri
-			end
-			vim.lsp.util.set_loclist(result.diagnostics)
-			end
-		end
-	end
-end
 
 -- jsut to check if issues are mine or not
 -- do

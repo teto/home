@@ -31,11 +31,12 @@ rec {
   programs.man.enable = true;
 
   home.packages = with pkgs; [
-	# pkgs.pdftotext  # should ideally be described only in neovim's rc
+    # should ideally be described only in neovim's rc
+	pythonPackages.pdftotext
 
 	# TODO try i3-snapshot
 
-    # vim-vint  # 
+    # vim-vint  #
     tig
 
     # to be used in i3

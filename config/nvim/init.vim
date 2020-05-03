@@ -1253,6 +1253,8 @@ vnoremap <leader>rg  <Cmd>Grepper -tool rg -open -switch<CR>
   set fillchars+=foldclose:▸
   set fillchars+=msgsep:‾
   hi MsgSeparator ctermbg=black ctermfg=white
+
+  set fdc=auto:2
 " }}}
 " vim-sneak {{{
 let g:sneak#s_next = 1 " can press 's' again to go to next result, like ';'
@@ -1711,34 +1713,37 @@ let g:diagnostic_auto_popup_while_jump = 1
 let g:diagnostic_insert_delay = 1
 "}}}
 " completion-nvim {{{
-" Configure the completion chains
-" let g:completion_chain_complete_list = {
-"     \'default' : {
-"     \	'default' : [
-"     \		{'complete_items' : ['lsp', 'snippet']},
-"     \		{'mode' : 'file'}
-"     \	],
-"     \	'comment' : [],
-"     \	'string' : []
-"     \	},
-"     \'vim' : [
-"     \	{'complete_items': ['snippet']},
-"     \	{'mode' : 'cmd'}
-"     \	],
-"     \'c' : [
-"     \	{'complete_items': ['ts'], 'triggered_only': [‘.', '::']}
-"     \	],
-"     \'python' : [
-"     \	{'complete_items': ['ts']}
-"     \	],
-"     \'lua' : [
-"     \	{'complete_items': ['ts']}
-"     \	],
-"     \}
-
+let g:completion_docked_hover=1
 " let g:completion_enable_auto_popup = 0
 let g:completion_enable_snippet = 'UltiSnips'
 let g:completion_enable_auto_signature = 1
+let g:completion_timer_cycle = 200 "default value is 80
+" Configure the completion chains
+let g:completion_chain_complete_list = {
+    \'default' : {
+    \	'default' : [
+    \		{'complete_items' : ['lsp', 'snippet']},
+    \		{'mode' : 'file'}
+    \	],
+    \	'comment' : [],
+    \	'string' : []
+    \	},
+    \'vim' : [
+    \	{'complete_items': ['snippet']},
+    \	{'mode' : 'cmd'}
+    \	],
+    \'c' : [
+    \	{'complete_items': ['lsp'], 'triggered_only': ['.', '::', '->', '_']}
+    \	],
+    \'python' : [
+    \	{'complete_items': ['ts']}
+    \	],
+    \'lua' : [
+    \	{'complete_items': ['ts']}
+    \	],
+    \}
+
+" hello world"
 " let g:completion_confirm_key = "\<C-y>"
 set completeopt+=menuone  " use pum even for one match
 set completeopt+=noinsert,noselect
@@ -2118,12 +2123,15 @@ nnoremap ,gi  <cmd>lua vim.lsp.buf.implementation()<CR>
 nnoremap ,sh <cmd>lua vim.lsp.buf.signature_help()<CR>
 nnoremap <silent> ,td <cmd>lua vim.lsp.buf.type_definition()<CR>
 nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
-
 nnoremap <silent> ,af <cmd>lua vim.lsp.buf.formatting()<CR>
 nnoremap <silent> ,arf <cmd>lua vim.lsp.buf.range_formatting()<CR>
 
+nnoremap ,ga vim.lsp.buf.code_action()<CR>
+
 " nnoremap <silent> <leader>do :OpenDiagnostic<CR>
 nnoremap <leader>dl <cmd>lua vim.lsp.util.show_line_diagnostics()<CR>
+
+" vim.lsp.buf.rename()
 
 " when upstreamed
 nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
@@ -2212,8 +2220,8 @@ let g:LspDiagnosticsHintSign = 'H'
 " nnoremap ' `
 
 " keep selection when shifting
-xnoremap > >gv
-xnoremap < <gv
+" xnoremap > >gv
+" xnoremap < <gv
 
 command! LspStopAllClients lua vim.lsp.stop_client(vim.lsp.get_active_clients())
 

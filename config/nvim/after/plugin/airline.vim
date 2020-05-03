@@ -33,8 +33,7 @@ let g:airline#extensions#disable_rtp_load = 1
 
 let g:airline#extensions#coc#enabled = 1
 let g:airline#extensions#gutentags#enabled = 0
-let g:airline#extensions#tabline#enabled = 0
-let g:airline#extensions#ale#enabled = 0
+let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#neomake#enabled = 1
 
 let g:airline_highlighting_cache = 1
@@ -50,8 +49,8 @@ let g:airline_exclude_preview = 0
 "       \ }
 
 
-let g:airline#extensions#quickfix#quickfix_text = 'Quickfix'
-let g:airline#extensions#quickfix#location_text = 'Location'
+" let g:airline#extensions#quickfix#quickfix_text = 'Quickfix'
+" let g:airline#extensions#quickfix#location_text = 'Location'
 
 let g:airline_highlighting_cache = 1 " to speed up things
 let g:airline_powerline_fonts = 0

@@ -198,7 +198,7 @@ res = status.register(
     backends=[
         # my notmuch config is in a non standard place => I have to setup db_path
         notmuchmail.Notmuch(account="gmail",
-            query="tag:inbox and tag:unread",
+            query="tag:unread",
             db_path="/home/teto/maildir",
             ),
         # # notmuchmail.Notmuch(account="gmail", query="tag:inbox and tag:unread"),

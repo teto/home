@@ -39,6 +39,9 @@
 #
 set move = no
 
+# disable top menu bar
+set help=no
+
 # TODO set flag_chars
 # TODO set to_chars " +TCFLR"
 
@@ -253,8 +256,10 @@ set text_flowed
 unset sig_dashes                     # no dashes before sig
 unset mime_forward                   # forward attachments as part of body
 
-# auto_view text/html		# automatically show html (mailcap uses w3m)
 # }}}
+
+auto_view text/html		# automatically show html (mailcap uses w3m)
+
 
 # Configure header displays {{{
 

@@ -1,0 +1,5 @@
+
+pour supprimer physiquement les mails
+
+# TODO ajouter 
+notmuch search --format=text0 --output=files tag:trash and not date:2weeks.. | xargs -0 --no-run-if-empty rm

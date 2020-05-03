@@ -1,6 +1,13 @@
 +nvim -- to:neovim@googlegroups.com or subject:[neovim/
-+ns3 -- to:ns-3-reviews@googlegroups.com
++ns3 -- to:ns-3-reviews@googlegroups.com or to:*@nsnam.org
 +github -- from:notifications@github.com
 +nix -- subject:[NixOS/
 +wireshark -- from:wireshark-dev@wireshark.org
 +mininet -- to:mininet-discuss@lists.stanford.edu
+
+# Manage sent, spam, and trash folders
+-unread -new folder:Trash
+-unread -new folder:Spam
+-unread -new folder:Sent
+
+

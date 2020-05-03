@@ -135,11 +135,14 @@ let
     # smtp.tls.useStartTls = false;
   };
 
-  nova =
+
+  nova = # {{{
   accountExtra //
   {
-    # gpg = gpgModule;
     astroid = { enable = true; };
+    neomutt = {
+      enable = false;
+    };
 
     mbsync = mbsyncConfig // { remove = "both"; };
     msmtp.enable = true;
@@ -156,16 +159,17 @@ let
         # };
     };
 
-
     primary = false;
-    userName = "matthieu";
+    userName = "matthieu.coudron@novadiscovery.com";
     realName = "Matthieu coudron";
-    address = "mattator@gmail.com";
+    address = "matthieu.coudron@novadiscovery.com";
     flavor = "gmail.com";
     smtp.tls.useStartTls = true;
 
     passwordCommand = getPassword "nova_mail";
   };
+  # }}}
+
 
   gmail =
   accountExtra //
@@ -176,30 +180,30 @@ let
       # package =
     };
 
-    getmail={
-      enable = true;
-      mailboxes = ["INBOX" "Sent" "Work"];
+    # getmail={
+    #   enable = true;
+    #   mailboxes = ["INBOX" "Sent" "Work"];
+    # };
+
+    mbsync = mbsyncConfig // {
+      remove = "both";
+      # how to destroy on gmail ?
+      # expunge = "both";
+      # Exclude everything under the internal [Gmail] folder, except the interesting folders
+# Patterns * ![Gmail]* "[Gmail]/Sent Mail" "[Gmail]/Starred" "[Gmail]/All Mail"
+      # "[Gmail]/Inbox"
+      patterns = ["* ![Gmail]*" "[Gmail]/Sent Mail" "[Gmail]/Starred" ];
+      # to be able to create drafts ?
+      create = "both";
     };
 
-    mbsync = mbsyncConfig;
     msmtp.enable = true;
-    notmuch = {
-      enable = true;
-        # hooks = {
-        #   # postInsert =
-        #   preNew = ''
-        #     '';
-        #   postNew = lib.concatStrings [
-        #     (builtins.readFile ../hooks_perso/post-new)
-        #     (builtins.readFile ../hooks_pro/post-new)
-        #   ];
-        # };
-    };
 
+    notmuch.enable = true;
 
     primary = true;
     userName = "mattator";
-    realName = "Luke skywalker";
+    realName = "Matt ";
     address = "mattator@gmail.com";
     flavor = "gmail.com";
     smtp.tls.useStartTls = true;
@@ -217,76 +221,35 @@ in
     ./neomutt.nix
   ];
 
+  home.packages = with pkgs; [
+    isync
+  ];
+
   accounts.email.maildirBasePath = "${config.home.homeDirectory}/maildir";
   accounts.email.accounts = {
     inherit gmail;
     inherit fastmail;
     inherit nova;
-
-
-    # iij =
-    #   accountExtra //
-      # {
-      # # juste pour tester, a supprimer
-      # mbsync = mbsyncConfig;
-      # msmtp.enable = true;
-      # notmuch = {
-      #   enable = true;
-      # };
-      # # offlineimap = {
-      # #   enable = true;
-      # #   extraConfig.local = ''
-      # #     # alot per-account extraConfig
-      # #     # The startdate option expects a date in the format yyyy-mm-dd.
-      # #     # can't be used with maxage
-      # #     # startdate = 2018-04-01
-      # #     '';
-      # #   # postSyncHookCommand = ''
-      # #   #   '';
-      # # };
-
-      # userName = "coudron@iij.ad.jp";
-      # realName = "Matthieu Coudron";
-      # address = "coudron@iij.ad.jp";
-      # # passwordCommand = "${pkgs.libsecret}/bin/secret-tool lookup iij password";
-
-      # passwordCommand = getPassword "iij/mail";
-      # imap = { host = "imap-tyo.iiji.jp"; tls = my_tls; };
-      # smtp = { host = "mbox.iiji.jp"; tls = my_tls; };
-    # };
   };
-
 
 
    # TODO conditionnally define these
    programs.notmuch = {
      enable = true;
 
-     # extraConfig = {
-     #   maildir = { synchronize_flags = "false"; };
-     #  };
+     # dont add "inbox" tag
+     new.tags = ["unread"];
+
      # hopefully hooks should be per-account
      hooks = {
-
-        # postInsert =
-
         # this is a trick since mbsync doesn't support
         # https://github.com/rycee/home-manager/issues/365
         # https://github.com/rycee/home-manager/pull/363
-        # mbsync --all
-        # while waiting to fix the real one !
-        # preNew = ''
-        #   mbsync -c /home/teto/dotfiles/config/mbsync/mbsyncrc gmail
-        #   '';
         postNew = lib.concatStrings [
           (builtins.readFile ../../hooks_perso/post-new)
-          (builtins.readFile ../../hooks_pro/post-new)
+          # (builtins.readFile ../../hooks_pro/post-new)
         ];
       };
-     # extraConfig = {
-     #   maildir = {
-     #   };
-     # };
    };
 
 
@@ -308,190 +271,121 @@ in
      # Hooks are python callables that live in a module specified by hooksfile in the config.
      hooks = builtins.readFile ../../config/alot/apply_patch.py;
 
+    # see https://github.com/pazz/alot/wiki/Tips,-Tricks-and-other-cool-Hacks for more ideas
+    bindings = let
+      refreshCommand = account: "shellescape 'check-mail.sh ${account}'; refresh";
+    in
+      {
+          global = {
+            R = "reload";
+            # look for ctrl+l
+            "ctrl l" = "flush; refresh";
+            # "ctrl l" = "flush";
+            "/" = "prompt 'search '";
+            t = "taglist";
+            Q = "exit";
+            q = "bclose";
+            "." = "repeat";
+            # n = "compose";
+            n = "namedqueries";
+            "ctrl f" = "move halfpage down";
+            "ctrl b" = "move halfpage up";
 
+            # otherwise toggling tags makes UI sluggish
+            # https://github.com/pazz/alot/issues/307
+            # call `flush` to refresh
+            s = "toggletags --no-flush unread";
+            d = "toggletags --no-flush killed";
 
-   # see https://github.com/pazz/alot/wiki/Tips,-Tricks-and-other-cool-Hacks for more ideas
-   bindings = let
-     refreshCommand = account: "shellescape 'check-mail.sh ${account}'; refresh";
-   in
-     {
-        global = {
-          R = "reload";
-          # look for ctrl+l
-          "ctrl l" = "refresh";
-          # "ctrl l" = "flush";
-          "/" = "prompt 'search '";
-          t = "taglist";
-          Q = "exit";
-          q = "bclose";
-          "." = "repeat";
-          # n = "compose";
-          n = "namedqueries";
-          "ctrl f" = "move halfpage down";
-          "ctrl b" = "move halfpage up";
+            "r g" = refreshCommand "gmail";
+            "r f" = refreshCommand "fastmail";
+            "r n" = refreshCommand "nova";
 
-          # otherwise toggling tags makes UI sluggish
-          # https://github.com/pazz/alot/issues/307
-          s = "toggletags --no-flush unread";
-          d = "toggletags killed";
-          "r g" = refreshCommand "gmail";
-          "r f" = refreshCommand "fastmail";
-          "r n" = refreshCommand "nova";
-          "@" = refreshCommand "gmail";
-        };
-        thread = {
-          a = "call hooks.apply_patch(ui)";
-          "' '" = "fold; untag unread; move next unfolded";
+            "@" = refreshCommand "gmail";
+          };
+          thread = {
+            a = "call hooks.apply_patch(ui)";
+            "' '" = "fold; untag unread; move next unfolded";
 
-          "s m" = "call hooks.save_mail(ui)";
-          R = "reply --all";
-          # TODO add a vimkeys component to alot
-          "z C" = "fold *";
-          "z c" = "fold";
-          "z o" = "unfold";
-          "z O" = "unfold *";
-        };
-        search = {
-          t = "toggletags todo";
-          # t = "toggletags todo";
-          l = "select";
-          right = "select";
-          # star it
-          # s = "toggletags todo";
-        };
+            "s m" = "call hooks.save_mail(ui)";
+            R = "reply --all";
+            # TODO add a vimkeys component to alot
+            "z C" = "fold *";
+            "z c" = "fold";
+            "z o" = "unfold";
+            "z O" = "unfold *";
+          };
+          search = {
+            t = "toggletags todo";
+            # t = "toggletags todo";
+            l = "select";
+            right = "select";
+            # star it
+            # s = "toggletags todo";
+          };
       };
 
-    # // {
-    #   # experimental
-    #   tags = {
-    #     # replied = {
-    #     #   translated = "⏎";
-    #     # };
-    #     unread = {
-    #       translated = "";
-    #       # normal = "";
-    #     };
-    #   };
-    #   extraConfigStructured = {
-    #     edit_headers_whitelist = "Subject: toto";
-    #   };
-    # }
-    # ;
+      tags = {
+        replied = {
+          translated = "⏎";
+        };
+        unread = {
+          translated = "";
+          # normal = "";
+        };
+        lists = {
+          translated = "📃";
+        };
 
-     settings = {
+        attachment = {
+          translated = "📎";
+          # normal = "", "", "light blue", "", "light blue", ""
+        };
+
+        bug = {
+          translated = "🐜";
+            # normal = "", "", "dark red", "", "light red", ""
+        };
+        encrypted.translated= "🔒";
+    # translated = 
+        github = {
+          translated = "";
+        };
+        spam.translated = "♻";
+        flagged = {
+      #       translated = ⚑
+          translated = "";
+          #  normal = "","","light red","","dark red",""
+        };
+
+        #   [[sent]]
+        #     translated =  ↗#⇗
+        #     normal = "","", "dark blue", "", "dark blue", ""
+      };
+
+    settings = {
       # attachment_prefix = ~/Downloads
-        theme = "matt";
-        mailinglists = "lisp@ietf.org, taps@ietf.org";
-        editor_in_thread = false;
-        auto_remove_unread = true;
-        ask_subject = false;
-        handle_mouse = true;
-        thread_authors_replace_me = true;
+      # edit_headers_whitelist = "Subject: toto";
+      theme = "matt";
+      mailinglists = "lisp@ietf.org, taps@ietf.org";
+      editor_in_thread = false;
+      auto_remove_unread = true;
+      ask_subject = false;
+      handle_mouse = true;
+      thread_authors_replace_me = true;
+        # notify_timeout = 20; # -1 for unlimited
+
+      initial_command = "search tag:unread AND NOT tag:killed";
         # initial_command = "bufferlist; taglist; search foo; search bar; buffer 0";
       };
     };
 
-# # TODO add as a string  extraConfigStr
-# # some are from fontawesome
-# # type i CTRTL-V u then unicode text im vim
-# # signed / nix / neovim
-# [tags]
-  # # [[inbox]]
-  # #   translated = 📥
-  # [[unread]]
-    # translated = 
-  # [[replied]]
-    # translated = ⏎
-  # [[sent]]
-    # translated = ↗
-  # [[attachment]]
-  # # 
-    # translated = 
-  # # [[lists]]
-  # #   translated = 📃
-  # # [[bug]]
-  # #   translated = 🐜
-  # #   normal = "", "", "dark red", "", "light red", ""
-  # # TODO use a lock
-  # [[encrypted]]
-  # # 
-# # 🔒
-    # translated = 
-  # [[github]]
-    # translated = 
-  # [[spam]]
-    # translated = ♻
-  # [[flagged]]
-     #    # ⚑
-     #  translated = 
-     #  normal = "","","light red","","dark red",""
-# '';
-
-# [tags]
-
-#   [[flagged]]
-#       translated = ⚑
-#       normal = "","","light red","","dark red",""
-#   # [[inbox]]
-#   #   translated = ➤#📨●◉↘
-#   #   normal = "", "", "", "", "", ""
-#   [[sent]]
-#     translated =  ↗#⇗
-#     normal = "","", "dark blue", "", "dark blue", ""
-#   [[unread]]
-#     translated = ""
-#   [[replied]]
-#     translated = ⏎
-#     normal = "","", "dark cyan", "default", "dark blue", "default"
-#   # [[encrypted]]
-#   #   translated = 🔒#🔑#⚷
-# #    normal = "", "", "", "", "#0ff", "#006"
-#   # [[signed]]
-#   #   translated = ®
-#   #   normal = "", "", "", "", "", ""
-#   # [[ring]]
-#   #   translated = 💍#◉
-#   # [[killed]]
-#   #   translated = τ  # ☠
-# # #    normal = "", "", "", "", g70, g27
-#   # [[lists]]
-#   #   translated = 📃#⎎
-
-#   # [[attachment]]
-#   #   translated = 📎
-#   #   normal = "", "", "light blue", "", "light blue", ""
-
-#   # [[bug]]
-#   #   translated = 🐜
-#   #   normal = "", "", "dark red", "", "light red", ""
-#   [[todo]]
-#     normal = "", "", white, "dark magenta", white, "dark magenta"
-     # extraConfig =
-     # # ''
-     # #    body_mimetype=text/plain
-     # #  # by default hooks.py but this makes it easier to edit
-     # #  hooksfile = ~/.config/alot/apply_patch.py
-     # #    # search_threads_sort_order = newest_first
-# # # displayed_headers
-     # #   # attachment_prefix = ~/Downloads
-     # #     theme = "matt"
-     # #   #  mailinglists = lisp@ietf.org, taps@ietf.org
-     # #     editor_in_thread = False
-     # #     auto_remove_unread = True
-     # #     ask_subject = False
-     # #     handle_mouse = True
-     # #     thread_authors_replace_me = True
-     # #     notify_timeout = 20 # -1 for unlimited
-     # #     # initial_command = "bufferlist; taglist; search foo; search bar; buffer 0";
-     # #  ''
-     # #  +
-     #  ''
 
 
    # disabled for now, use mbsync instead
    programs.offlineimap = {
-      enable = false;
-      extraConfig.general = {
+     enable = false;
+     extraConfig.general = {
         # interval between updates (in minutes)
         autorefresh=0;
       };
@@ -499,9 +393,9 @@ in
       # TODO get the version for keyring
       # remotepasseval
       pythonFile = ''
-      from subprocess import check_output
+        from subprocess import check_output
 
-      def get_pass(service, cmd):
+        def get_pass(service, cmd):
           return subprocess.check_output(cmd, ).splitlines()[0]
 
       # def get_pass(account):
@@ -519,15 +413,14 @@ in
         # maxage=30
         synclabels= true;
       };
-   };
+    };
 
-  programs.mbsync = {
-    enable = true;
-    package = mbsyncWrapper;
-  };
+    programs.mbsync = {
+      enable = true;
+    };
 
-  services.mbsync = {
-    enable = false;  # disabled because it kept asking for my password
+    services.mbsync = {
+      enable = false;  # disabled because it kept asking for my password
     # configFile = ;
     # package = ;
     # preExec =
@@ -540,31 +433,23 @@ in
 
   # enrich definition given in
   # programs.git = {
-    # sendemail.identity = "gmail";
+  #    sendemail.identity = "gmail";
   # };
 
-  # programs.muchsync = {
-  # };
+  # programs.muchsync = { };
 
   programs.astroid = {
     enable = false;
     # TODO factor with my mbsyncwrapper ?
     pollScript = ''
-      mbsync gmail
+      check-mail.sh gmail
     '';
-
-    # startupQueries = [
-    #     {
-    #       "INBOX"= "tag:unread and not tag:deleted and not tag:muted and not tag:ietf";
-    #       "Flagged"= "tag:flagged";
-    #     }
-    #     { "Drafts"= "tag:draft"; }
-    #   ];
 
     # I don't want it to trigger
     # P => main_window.poll
     extraConfig = {
       poll.interval = 0;
+      # TODO use "killed"
       startup.queries = {
         "Unread iij"= "tag:unread and not tag:deleted and not tag:muted and not tag:ietf and to:coudron@iij.ad.jp";
         "Unread gmail"= "tag:unread and not tag:deleted and not tag:muted and not tag:ietf and to:mattator@gmail.com";
