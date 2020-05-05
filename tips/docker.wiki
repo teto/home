@@ -3,3 +3,5 @@ docker run mattator/dce-dockerfiles:latest
 # start the container + get a prompt 
 
 docker exec -it <container name> /bin/bash
+
+docker-credentials-pass pour eviter d'avoir le mdp en clair dans $HOME/.docker/config.json

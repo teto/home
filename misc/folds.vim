@@ -25,8 +25,17 @@ set number
 " to be able to fold
 " set foldminlines=0
 
+"can test conceal with 
+":syn match Conceal /syn/ conceal cchar=+
+
 " set fdm=marker
 set fdm=manual
+
+" 
+set foldopen=
+
+set conceallevel=2
+set concealcursor+=in
 
 " set listchars+=conceal:X
 " conceal used by default if cchar does not exit

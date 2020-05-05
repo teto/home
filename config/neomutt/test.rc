@@ -64,6 +64,16 @@ bind index,pager y modify-labels
 bind index,pager X change-vfolder
 
 
+# to prevent from jumping to next mail
+set pager_stop = yes
+
+# set mailcap_path = ~/.config/neomutt/mailcap
+# alternative_order multipart/mixed text/plain text/calendar application/ics text/html
+# auto_view text/html
+# auto_view text/calendar
+# auto_view application/ics
+# set show_multipart_alternative = "info"
+
 # exec change-vfolder
 #
 # set debug_file = neolog

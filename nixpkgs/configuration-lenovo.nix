@@ -232,13 +232,6 @@ in
   services.xserver.videoDrivers = [ "nvidia" ];
   # hardware.nvidia.package
 
-  # docker pull mattator/dce-dockerfiles
-  # virtualisation.docker = {
-  #   enable = true;
-  #   enableOnBoot = true;
-  #   # logDriver = 
-  #   # liveRestore
-  # };
 
   nix = {
     sshServe = {

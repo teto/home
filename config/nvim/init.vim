@@ -3,6 +3,7 @@
 " :scriptnames to list loaded scripts
 " and prefix you command with 'verbose' is a very good way to get info
 " like ':verbose map J' to know where it was loaded last
+" ❌
 
 function! TestFoldTextWithColumns()
   let line = getline(v:foldstart)
@@ -157,6 +158,7 @@ Plug 'vim-scripts/rfc-syntax', { 'for': 'rfc' } " optional syntax highlighting f
 " Plug 'moznion/github-commit-comment.vim' " last update from 2014
 " Plug 'dhruvasagar/vim-open-url' " gB/gW to open browser
 " Plug 'Carpetsmoker/xdg_open.vim' " overrides gx
+Plug 'mcchrish/info-window.nvim'  " to display buffer information in a popup
 Plug 'tweekmonster/nvim-api-viewer', {'on': 'NvimAPI'} " see nvim api
 Plug 'tweekmonster/startuptime.vim', {'on': 'StartupTime'} " see startup time per script
 Plug 'vim-scripts/vis' " ?

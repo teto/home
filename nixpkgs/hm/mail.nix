@@ -144,7 +144,12 @@ let
       enable = false;
     };
 
-    mbsync = mbsyncConfig // { remove = "both"; };
+    mbsync = mbsyncConfig // {
+      remove = "both";
+      extraConfig.account = {
+        AuthMechs = "LOGIN";
+      };
+    };
     msmtp.enable = true;
     notmuch = {
       enable = true;
