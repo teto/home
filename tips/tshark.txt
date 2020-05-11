@@ -1,2 +1,7 @@
 
+https://fedoraproject.org/wiki/How_to_edit_iptables_rules
+
+tshark -f "not port 22"
+
+tshark -i <IF> -f "tcp"
 port 22

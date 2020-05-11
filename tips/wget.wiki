@@ -1,0 +1,1 @@
+wget -m https://neovim.io

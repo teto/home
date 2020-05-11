@@ -142,8 +142,42 @@ nvim_lsp.rust_analyzer.setup({
     cmd = { "rust-analyzer" },
     -- root_dir = root_pattern("Cargo.toml", "rust-project.json")
 })
+nvim_lsp.pyls_ms.setup({
+    init_options = {
+      analysisUpdates = true,
+      asyncStartup = true,
+      displayOptions = {},
+      interpreter = {
+        properties = {
+          InterpreterPath = "/usr/bin/python",
+          Version = "2.7"
+        }
+      }
+    },
+    -- on_new_config = <function 1>
+    settings = {
+      python = {
+        analysis = {
+          disabled = {},
+          errors = {},
+          info = {}
+        }
+      }
+	}
+})
 
-nvim_lsp.texlab.setup({ })
+nvim_lsp.texlab.setup({
+  name = 'texlab_fancy';
+  log_level = vim.lsp.protocol.MessageType.Log;
+  message_level = vim.lsp.protocol.MessageType.Log;
+  settings = {
+    latex = {
+      build = {
+        onSave = true;
+      }
+    }
+  }
+})
 
 --nvim_lsp.clangd.setup({
 --	--compile-commands-dir=build

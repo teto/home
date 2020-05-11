@@ -2203,8 +2203,13 @@ let g:LspDiagnosticsHintSign = 'H'
 " lua vim.treesitter.add_language("/home/teto/tree-sitter-c/build/Release/tree_sitter_c_binding.node", "c")
 " nix-build -A tree-sitter.builtGrammars.c
 "}}}
+"{{{sessionoptions
+set sessionoptions-=terminal
+set sessionoptions-=help
+"}}}
 
-" Creates a :Watch <filename> 
+
+" Creates a :Watch <filename>
 " command ?
 " luafile ~/.config/nvim/watch_fs.lua
 
