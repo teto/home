@@ -11,22 +11,17 @@ let
     # ./hardware-dell.nix
     ./hardware-xps.nix
 
-    ./config-all.nix
-    ./common-desktop.nix
-    ./modules/libvirtd.nix
+    ./modules/config-all.nix
+    ./modules/desktop.nix
+    # ./modules/libvirtd.nix
     ./modules/distributedBuilds.nix
 
     # ./modules/mptcp.nix
-    ./modules/vpn.nix
+    # ./modules/vpn.nix
 
-    ./modules/tor.nix
+    # ./modules/tor.nix
 
-      <nixos-hardware/dell/xps/13-9360>
   ] ;
-
-  # kinda unstble configs (e.g., only in my nixpkgs)
-  # boot.structuredConfig = {
-  # };
 
   # TODO conditionnally enable it
   # networking.proxy.default
@@ -34,12 +29,6 @@ let
 
   # it apparently still is quite an important thing to have
   boot.devSize = "5g";
-  # swapDevices = [{
-    # label = "dartagnan";
-    # device = "/fucking_swap";
-    # size = 8192; # in MB
-    # size = 16000; # in MB
-  # } ];
 
   boot.loader ={
     systemd-boot.enable = true;
@@ -132,11 +121,11 @@ let
   # TODO move to laptop
   # see https://github.com/NixOS/nixpkgs/issues/57053
   hardware.firmware = with pkgs; [ wireless-regdb ];
-  boot.extraModprobeConfig = ''
-    options cfg80211 ieee80211_regdom="GB"
-  '';
+#  boot.extraModprobeConfig = ''
+#    options cfg80211 ieee80211_regdom="GB"
+#  '';
 
-  programs.seahorse.enable = true; # UI to manage keyrings
+  # programs.seahorse.enable = true; # UI to manage keyrings
 
   # List services that you want to enable:
   services = {
@@ -195,26 +184,7 @@ let
 
 
   # to 
-  programs.mininet.enable = true;
-
-  services.xserver = {
-    displayManager.slim = {
-      autoLogin = false;
-      defaultUser = "teto";
-    };
-    resolutions = [ { x= 1600; y = 900;} ];
-    libinput.enable = true;
-
-    # to properly run xbacklight 
-    # https://askubuntu.com/questions/715306/xbacklight-no-outputs-have-backlight-property-no-sys-class-backlight-folder
-    config = ''
-    Section "Device"
-        Identifier  "Intel Graphics"
-        Driver      "intel"
-        Option      "Backlight"  "intel_backlight"
-    EndSection
-      '';
-  };
+  # programs.mininet.enable = true;
 
   # virtualisation.virtualbox = {
   #   host.enable = true;
@@ -239,13 +209,12 @@ let
     package = pkgs.nixFlakes;
   };
 
-  services.logind = {
-
-    # see https://bbs.archlinux.org/viewtopic.php?id=225977 for problems with LID
-    # lidSwitch = "ignore";
-    lidSwitch = "suspend";
-    lidSwitchDocked = "suspend";
-    lidSwitchExternalPower = "ignore";
-  };
+  # services.logind = {
+  #   # see https://bbs.archlinux.org/viewtopic.php?id=225977 for problems with LID
+  #   # lidSwitch = "ignore";
+  #   lidSwitch = "suspend";
+  #   lidSwitchDocked = "suspend";
+  #   lidSwitchExternalPower = "ignore";
+  # };
 
 }

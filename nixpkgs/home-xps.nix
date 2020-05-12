@@ -12,10 +12,9 @@ let
     # Not tracked, so doesn't need to go in per-machine subdir
       ./hm/desktop.nix
 
-      ./modules/tablet.nix
       # ./modules/hm-experimental.nix
       # ./modules/vdirsyncer.nix
-      ./hm/mail.nix
+      # ./hm/mail.nix
       # symlink towards a config
     ]
     ;
@@ -65,8 +64,8 @@ let
     # colorsExtra = builtins.readFile ../config/termite/solarized-dark;
   };
 
+  # xrandr --output  eDP1 --mode 1600x900
   xsession.initExtra = ''
-    xrandr --output  eDP1 --mode 1600x900
   '';
 
   # programs.vscode = {

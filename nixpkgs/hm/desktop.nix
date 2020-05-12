@@ -99,7 +99,6 @@ let
     # alsa-utils # for alsamixer
     arandr  # to move screens/monitors around
     hunspellDicts.fr-any
-    dtrx  # to compress stuff
     # buku
     # dynamic-colors # to change the terminal colors ("dynamic-colors switch solarized-dark")
     # gcalc
