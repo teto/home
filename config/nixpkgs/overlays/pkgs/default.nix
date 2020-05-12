@@ -1,12 +1,5 @@
- # If the path is a directory, then we take the content of the directory, order it lexicographically, and attempt to interpret each as an overlay by:
-
- #    Importing the file, if it is a .nix file.
-
- #    Importing a top-level default.nix file, if it is a directory. 
 final: prev:
 {
-  # astroid = prev.astroid;
-  # astroid = prev.enableDebugging prev.astroid;
 
   # ebpfdropper = prev.callPackage ./ebpfdropper.nix {
   #   stdenv=prev.clangStdenv;
@@ -109,14 +102,10 @@ final: prev:
 
   # sumneko = prev.callPackage ./sumneko.nix {};
 
-  tree-sitter-nix-shared = prev.callPackage ./tree-sitter-grammars/nix.nix {
-    language = "nix";
-    source = builtins.fetchGit {
-      url = https://github.com/cstrahan/tree-sitter-nix;
-    };
-  };
-
-  # tree-sitter-bash-shared = prev.callPackage ./tree-sitter-grammars/nix.nix {
-  #   language = "bash";
+  # tree-sitter-nix-shared = prev.callPackage ./tree-sitter-grammars/nix.nix {
+  #   language = "nix";
+  #   source = builtins.fetchGit {
+  #     url = https://github.com/cstrahan/tree-sitter-nix;
+  #   };
   # };
 }

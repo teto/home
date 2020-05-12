@@ -60,6 +60,10 @@ $ home-manager -I nixos-config=~/dotfiles/nixpkgs/configuration-<HOSTNAME>.nix -
 ```
 passing eventually -I home-manager=...
 
+```
+home $ git submodule update --init
+home $ make config
+```
 
 
 # How to recover the cyphered files
@@ -71,8 +75,7 @@ listed by `$ git-crypt status -e` or .gitattributes.
 
 To install .desktop entries
 ====
-Put them in
-~/.local/share/applications
+Put them in `~/.local/share/applications`
 
 
 

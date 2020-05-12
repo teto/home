@@ -9,26 +9,21 @@ let
   in
 {
   imports = [
-    # Not tracked, so doesn't need to go in per-machine subdir
       ./hm/desktop.nix
 
-      # ./modules/hm-experimental.nix
-      # ./modules/vdirsyncer.nix
-      # ./hm/mail.nix
-      # symlink towards a config
+      # ./hm/experimental.nix
+      # ./hm/vdirsyncer.nix
+      ./hm/mail.nix
     ]
     ;
 
-  # on home-manager master
-  # home.accounts.mail.maildirModule
+  # depends from feh ?
   programs.feh.enable = true;
 
-  # add a service for tablet
-  # https://github.com/ssmolkin1/i3touchmenu
   home.packages = with pkgs; [
-    # touchegg # won't work anymore apparently
-    # libinput-gestures
-    # netperf # check for man; netserver to start
+    virt-manager # to run ubuntu, needs libvirtd service
+    # aqemu # 0.9.2 , needs kvm/qemu
+    # kvm
 
   ];
 

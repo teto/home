@@ -1,0 +1,46 @@
+{
+	"home-manager": {
+		"gh": "git@github.com:teto/home-manager.git"
+	},
+	"wireshark": {
+		"gh_upstream": "https://github.com/wireshark/wireshark.git",
+		"upstream": "https://code.wireshark.org/review/p/wireshark.git",
+		"gh": "git@github.com:teto/wireshark.git"
+	},
+	"mptcpanalyzer": {
+		"upstream": "git@github.com:teto/mptcpanalyzer.git"
+	},
+	"dce": {
+		"gh": "git@github.com:teto/ns-3-dce.git",
+		"upstream": "git@github.com:direct-code-execution/ns-3-dce.git"
+	},
+	"nixpkgs": {
+		"upstream": "https://github.com/NixOS/nixpkgs.git",
+		"channels": "git://github.com/NixOS/nixpkgs-channels.git",
+		"gh": "git@github.com:teto/nixpkgs.git"
+	},
+	"nixops": {
+		"gh": "git@github.com:teto/nixops.git",
+		"upstream": "http://github.com/nixos/nixops.git"
+	},
+	"mptcp": {
+		"gh": "git@github.com:teto/mptcp.git",
+		"upstream": "https://github.com/multipath-tcp/mptcp.git",
+		"nuse": "git@github.com:libos-nuse/lkl-linux.git"
+	},
+	"lkl": {
+		"linus": "git@github.com:torvalds/linux.git",
+		"gh": "git@github.com:teto/mptcp.git",
+		"lkl": "git@github.com:libos-nuse/lkl-linux.git"
+	},
+	"neovim": {
+		"gh": "git@github.com:teto/neovim.git",
+		"upstream": "git@github.com:teto/neovim.git"
+	},
+	"mptcpanalyzer": {
+		"upstream": "git@github.com:teto/mptcpanalyzer.git"
+	},
+	"mptcppm": {
+		"upstream": "git@github.com:teto/mptcp-pm.git"
+	}
+}

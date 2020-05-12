@@ -13,7 +13,7 @@ let
 
     ./modules/config-all.nix
     ./modules/desktop.nix
-    # ./modules/libvirtd.nix
+    ./modules/libvirtd.nix
     ./modules/distributedBuilds.nix
 
     # ./modules/mptcp.nix
@@ -42,12 +42,12 @@ let
     # grub.device = "/dev/sda";
   };
 
-  boot.kernelParams = [ " console=ttyS0" "acpi_backlight=vendor" ];
+  boot.kernelParams = [ " console=ttyS0" "acpi_backlight=vendor" "i915.enable_psr=0" ];
 
   # TODO use the mptcp one ?
-  boot.kernelPackages = pkgs.linuxPackages;
+  # boot.kernelPackages = pkgs.linuxPackages;
   # boot.kernelPackages = pkgs.linuxPackages_mptcp;
-  # boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
   # boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_4_14;
 
   # boot.extraModprobeConfig = ''
@@ -67,8 +67,8 @@ let
 
   boot.kernel.sysctl = {
     # to not provoke the kernel into crashing
-    "net.ipv4.tcp_timestamps" = 0;
-    "net.ipv4.tcp_allowed_congestion_control" = 0;
+    # "net.ipv4.tcp_timestamps" = 0;
+    # "net.ipv4.tcp_allowed_congestion_control" = 0;
     # "net.ipv4.ipv4.ip_forward" = 1;
     # "net.ipv4.tcp_keepalive_time" = 60;
     # "net.core.rmem_max" = 4194304;
@@ -112,7 +112,7 @@ let
     powerOnBoot = false;
 
     # as per https://nixos.wiki/wiki/Bluetooth recommendation
-    extraConfig = ''
+    config = ''
       [General]
       Enable=Source,Sink,Media,Socket
     '';
@@ -158,11 +158,12 @@ let
     # strongswan # to get ipsec in path
     # cups-pk-helper # to add printer through gnome control center
     [
-      pkgs.libinput-gestures
-      pkgs.brightnessctl
+      # pkgs.brightnessctl
       ]
   ;
 
+  # need to be video
+  # hardware.acpilight.enable = true;
 
   # service to update bios etc
   # managed to get this problem https://github.com/NixOS/nixpkgs/issues/47640
@@ -182,8 +183,6 @@ let
   # environment.enableDebugInfo = true;
 # } ++ lib.optionalAttrs (config.programs ? mininet) {
 
-
-  # to 
   # programs.mininet.enable = true;
 
   # virtualisation.virtualbox = {
@@ -200,13 +199,23 @@ let
   #   (import ./overlays/haskell.nix)
   # ];
 
-  # need to be video
-  # hardware.acpilight.enable = true;
-
   networking.iproute2.enable = true;
 
   nix = {
     package = pkgs.nixFlakes;
+
+    # sshServe = {
+    #   enable = true;
+    #   protocol = "ssh";
+    #   # keys = [ secrets.gitolitePublicKey ];
+    # };
+
+    # added to nix.conf
+    extraOptions = ''
+      experimental-features = nix-command flakes
+    '';
+
+    distributedBuilds = false;
   };
 
   # services.logind = {

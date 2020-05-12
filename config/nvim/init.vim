@@ -116,8 +116,8 @@ Plug 'MattesGroeger/vim-bookmarks' " ruby  / :BookmarkAnnotate
 " Plug 'thaerkh/vim-workspace'  " :ToggleWorkspace
 Plug 'skywind3000/vim-quickui' " 
 Plug 'liuchengxu/vista.vim' " replaces tagbar to list workplace symbols
-" Plug 'neovim/nvim-lsp' " while fuzzing details out
-Plug '~/nvim-lsp' " while fuzzing details out
+Plug 'neovim/nvim-lsp' " while fuzzing details out
+" Plug '~/nvim-lsp' " while fuzzing details out
 Plug 'puremourning/vimspector' " to debug programs
 Plug 'bfredl/nvim-luadev'  " lua repl :Luadev
 Plug 'hotwatermorning/auto-git-diff' " to help rebasing
@@ -358,7 +358,7 @@ Plug 'tpope/vim-rhubarb' " github support in fugitive, use |i_CTRL-X_CTRL-O|
 " , { 'for': 'markdown', 'do': function('BuildComposer') } " Needs rust, cargo, plenty of things :help markdown-composer
 " move to nix
 " euclio
-Plug '~/vim-markdown-composer'
+" Plug '~/vim-markdown-composer'
 " Plug 'JamshedVesuna/vim-markdown-preview'
 Plug 'Rykka/riv.vim', {'for': 'rst'}
 Plug 'Rykka/InstantRst', {'for': 'rst'} " rst live preview with :InstantRst,

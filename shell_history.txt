@@ -1,0 +1,3 @@
+git fetch --all
+rm ~/.cache/greenclip.history
+git reset --hard gh/nixos-unstable
