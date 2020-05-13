@@ -21,17 +21,23 @@
 
       pkgs = import nixpkgs {
         inherit system;
-        overlays = self.overlays;
+        # overlays = self.overlays;
         config = { allowUnfree = true; };
       };
     in {
       # nixosConfigurations = let configs = import ./hosts args;
       # in configs;
 
-      # overlay = import ./pkgs;
-
-      overlays = [(import ./config/nixpkgs/overlays/pkgs/default.nix )];
-      # overlays = [(self: super: {})];
+      # overlay = import ./config/nixpkgs/overlays/pkgs/default.nix;
+      # overlays = [self.overlay];
+      # overlays = [(import ./config/nixpkgs/overlays/pkgs/default.nix )];
+      overlays = {
+        pkgs = import ./config/nixpkgs/overlays/pkgs/default.nix;
+        haskell = import ./config/nixpkgs/overlays/haskell.nix;
+        neovim = import ./config/nixpkgs/overlays/neovim.nix;
+        wireshark = import ./config/nixpkgs/overlays/wireshark.nix;
+        # toto = (final: prev: {});
+      };
       # overlays = let
       #   overlays = map (name: import (./config/nixpkgs/overlays + "/${name}"))
       #     (attrNames (readDir ./config/nixpkgs/overlays));
@@ -44,24 +50,24 @@
         ;
       };
 
-      # nixosModules = let
-      #   prep = map (path: {
-      #     name = removeSuffix ".nix" (baseNameOf path);
-      #     value = import path;
-      #   });
+      nixosModules = let
+        prep = map (path: {
+          name = removeSuffix ".nix" (baseNameOf path);
+          value = import path;
+        });
 
-      #   # modules
-      #   moduleList = import ./nixpkgs/modules/list.nix;
-      #   # modulesAttrs = listToAttrs (prep moduleList);
-      #   modulesAttrs = {};
+        # modules
+        moduleList = import ./nixpkgs/modules/list.nix;
+        modulesAttrs = listToAttrs (prep moduleList);
+        # modulesAttrs = {};
 
-      #   # profiles
-      #   profilesList = import ./nixpkgs/profiles/list.nix;
-      #   # profilesAttrs = { profiles = listToAttrs (prep profilesList); };
-      #   profilesAttrs = {};
+        # profiles
+        profilesList = import ./nixpkgs/profiles/list.nix;
+        # profilesAttrs = { profiles = listToAttrs (prep profilesList); };
+        profilesAttrs = {};
 
-      # in modulesAttrs
-      #   // profilesAttrs;
+      in modulesAttrs
+        // profilesAttrs;
     };
 }
 

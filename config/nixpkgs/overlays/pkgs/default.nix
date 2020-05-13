@@ -48,7 +48,7 @@ final: prev:
 
   i3-resurrect = prev.python3Packages.callPackage ./i3-resurrect {};
 
-  mda-lite = prev.pythonPackages.callPackage ./mda-lite {};
+  # mda-lite = prev.pythonPackages.callPackage ./mda-lite {};
 
   mptcpnumerics = prev.python3Packages.callPackage ./mptcpnumerics.nix {};
 
@@ -57,17 +57,9 @@ final: prev:
 
   # neovim-gtk = prev.callPackage ./neovim-gtk { };
 
-  # nix-dev = prev.nix.overrideAttrs(oa: {
-  #   dontStrip = true;
-  #  enableDebugging = true;
-  # }
-
   subtitles-rs = prev.callPackage ./subtitles-rs { };
 
-  # http-getter = prev.python3Packages.callPackage ./http-getter { } ;
-  packetdrill-mptcp = prev.packetdrill.overrideAttrs ( oa: {
-  });
-
+  # packetdrill-mptcp = prev.packetdrill.overrideAttrs ( oa: { });
 
   # rustNightlyPlatform = prev.recurseIntoAttrs (prev.makeRustPlatform rust-nightly);
 
@@ -75,28 +67,21 @@ final: prev:
   #   inherit rustNightlyPlatform;
   # };
 
-  # breaks nix-index evaluation
-  # papis-python-rofi = prev.python3Packages.callPackage ./papis-rofi.nix {};
-
   # ping = prev.prettyping;
 
-  rt-tests = prev.callPackage ./rt-test.nix {};
-
-  # netbee = prev.callPackage ./netbee {};
+  # rt-tests = prev.callPackage ./rt-test.nix {};
 
   mptcptrace = prev.callPackage ./mptcptrace {};
 
-  mptcpplot = prev.callPackage ./mptcpplot {};
+  # mptcpplot = prev.callPackage ./mptcpplot {};
 
-  stab = prev.callPackage ./stab.nix {
-    inherit (prev.pkgs.gnome2) libgnome libgnomeui;
-  };
-
-  # termpdfpy = prev.python3Packages.callPackage ./termpdf {};
+  # stab = prev.callPackage ./stab.nix {
+  #   inherit (prev.pkgs.gnome2) libgnome libgnomeui;
+  # };
 
   i3dispatch = prev.python3Packages.callPackage ./i3-dispatch {};
 
-  i3-snapshot = prev.callPackage ./i3-snapshot {};
+  # i3-snapshot = prev.callPackage ./i3-snapshot {};
 
   rofi-scripts = prev.callPackage ./rofi-scripts {};
 

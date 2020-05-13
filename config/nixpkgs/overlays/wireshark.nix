@@ -1,6 +1,6 @@
-self: super:
+final: prev:
 let
-  filter-cmake = builtins.filterSource (p: t: super.lib.cleanSourceFilter p t && baseNameOf p != "build");
+  filter-cmake = builtins.filterSource (p: t: prev.lib.cleanSourceFilter p t && baseNameOf p != "build");
   # won't work on sandboxed
   wiresharkFolder = /home/teto/wireshark;
 
@@ -11,7 +11,7 @@ let
       # sha256 = "1i0gqf8n8fsz3sqzkhcg05pf0krngnm335pnnlp94yzdkzzg3jyr";
   };
 
-  # src = self.fetchFromGitHub {
+  # src = final.fetchFromGitHub {
   #     repo   ="wireshark";
   #     owner  ="teto";
   #     rev    = "45efb048808d794f53cc431864c9ddfa99952b49";
@@ -19,7 +19,7 @@ let
   #   };
 
   # write in .nvimrc
-  nvimrc = super.pkgs.writeText "_nvimrc" ''
+  nvimrc = prev.pkgs.writeText "_nvimrc" ''
       " to deal with cmake build folder
       let &makeprg="make -C build"
     '';
@@ -30,14 +30,14 @@ in
 # TODO add htis in shell_hook of my wireshakr
 #     export QT_PLUGIN_PATH=${qt5.qtbase.bin}/${qt5.qtbase.qtPluginPrefix}
 
-  wireshark-master = (super.wireshark.override({})).overrideAttrs (oa: {
-    nativeBuildInputs = oa.nativeBuildInputs ++ [ super.doxygen ];
+  wireshark-master = (prev.wireshark.override({})).overrideAttrs (oa: {
+    nativeBuildInputs = oa.nativeBuildInputs ++ [ prev.doxygen ];
     shellHook = oa.shellHook + ''
-      export QT_PLUGIN_PATH=${super.qt5.qtbase.bin}/${super.qt5.qtbase.qtPluginPrefix}
+      export QT_PLUGIN_PATH=${prev.qt5.qtbase.bin}/${prev.qt5.qtbase.qtPluginPrefix}
     '';
   });
 
-  wireshark-dev = super.wireshark.overrideAttrs (oa: {
+  wireshark-dev = prev.wireshark.overrideAttrs (oa: {
     name = "wireshark-dev";
     # src = srcSockDiag;
     # hardeningDisable = ["all"];
@@ -49,7 +49,7 @@ in
 
     buildInputs = oa.buildInputs ++ [
       # llvm instead
-      super.cquery
+      prev.cquery
     ];
 
     # TODO add a neovim with cquery lsp
@@ -58,7 +58,7 @@ in
     # libtool --mode=execute gdb $HOME/wireshark/debug/run/$1
     # or break on proto_report_dissector_bug
     shellHook = (oa.shellHook or "") + ''
-      export QT_PLUGIN_PATH=${super.qt5.qtbase.bin}/${super.qt5.qtbase.qtPluginPrefix}
+      export QT_PLUGIN_PATH=${prev.qt5.qtbase.bin}/${prev.qt5.qtbase.qtPluginPrefix}
       echo "rm -rf build && cmakeConfigurePhase"
       echo "ln -s build/compile_commands.json"
     '';
@@ -66,7 +66,7 @@ in
     # inherit nvimrc;
   });
 
-  wireshark-local-stable = super.wireshark.overrideAttrs (oldAttrs: {
+  wireshark-local-stable = prev.wireshark.overrideAttrs (oldAttrs: {
     # pygobject2
     name = "wireshark-local-stable";
     src = builtins.fetchGit {
@@ -77,7 +77,7 @@ in
   });
 
 
-  # tshark-local = super.tshark.overrideAttrs (oldAttrs: {
+  # tshark-local = prev.tshark.overrideAttrs (oldAttrs: {
   #   # pygobject2
   #   name = "tshark-dev";
   #   src = filter-cmake wiresharkFolder;
@@ -88,7 +88,7 @@ in
   #   # };
 
   #   # write in .nvimrc
-  #   nvimrc = super.pkgs.writeText "_nvimrc" ''
+  #   nvimrc = prev.pkgs.writeText "_nvimrc" ''
   #       " to deal with cmake build folder
   #       let &makeprg="make -C build"
   #     '';

@@ -118,7 +118,7 @@ Plug 'skywind3000/vim-quickui' "
 Plug 'liuchengxu/vista.vim' " replaces tagbar to list workplace symbols
 Plug 'neovim/nvim-lsp' " while fuzzing details out
 " Plug '~/nvim-lsp' " while fuzzing details out
-Plug 'puremourning/vimspector' " to debug programs
+" Plug 'puremourning/vimspector' " to debug programs
 Plug 'bfredl/nvim-luadev'  " lua repl :Luadev
 Plug 'hotwatermorning/auto-git-diff' " to help rebasing
 " Plug 'christoomey/vim-conflicted' " toto
@@ -127,7 +127,7 @@ Plug 'bogado/file-line' " to open a file at a specific line
 " Plug 'yuki-ycino/fzf-preview.vim' " toto
 Plug 'glacambre/firenvim' " to use nvim in firefox
 " Plug 'liuchengxu/vim-clap' " fuzzer
-Plug 'alok/notational-fzf-vim' " to take notes, :NV
+" Plug 'alok/notational-fzf-vim' " to take notes, :NV
 " Plug 'iamcco/markdown-preview.nvim' " :MarkdownPreview
 Plug 'suy/vim-context-commentstring' " commen for current programming language
 " Plug 'voldikss/vim-translate-me' " floating windows for neovim

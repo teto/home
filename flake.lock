@@ -1,0 +1,67 @@
+{
+  "nodes": {
+    "home": {
+      "info": {
+        "lastModified": 1581799840,
+        "narHash": "sha256-FLRpqHPswrY6bU9Uzrpqz2ZfKN8cTusu3JjvWgpQIZ8="
+      },
+      "inputs": {
+        "nixpkgs": "nixpkgs"
+      },
+      "locked": {
+        "owner": "nrdxp",
+        "repo": "home-manager",
+        "rev": "dae62d0baf5e918c3657e3973acfca970f826191",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nrdxp",
+        "ref": "flakes",
+        "repo": "home-manager",
+        "type": "github"
+      }
+    },
+    "nixpkgs": {
+      "info": {
+        "lastModified": 1589384121,
+        "narHash": "sha256-JiNH7j4GPNdmkR6A2fqwaSzpOLDTqmXYZVtFbGIc434="
+      },
+      "locked": {
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "233e60ca24f931ef3fcaf629fe2ca4f225fdeaa4",
+        "type": "github"
+      },
+      "original": {
+        "id": "nixpkgs",
+        "type": "indirect"
+      }
+    },
+    "nixpkgs_2": {
+      "info": {
+        "lastModified": 1589289896,
+        "narHash": "sha256-PTaHv1kiz6xvVyPe2MJQyVsKWjAda+K8t5ZrE3YI7nQ="
+      },
+      "locked": {
+        "owner": "teto",
+        "repo": "nixpkgs",
+        "rev": "6b281c1056ac57971472b7f862bc6d285a54b493",
+        "type": "github"
+      },
+      "original": {
+        "owner": "teto",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "root": {
+      "inputs": {
+        "home": "home",
+        "nixpkgs": "nixpkgs_2"
+      }
+    }
+  },
+  "root": "root",
+  "version": 5
+}

@@ -2,7 +2,7 @@
 # we can find an exaple of an overlay in
 # https://github.com/typeable/nixpkgs-stackage/blob/master/default.nix
 # https://github.com/NixOS/nixpkgs/issues/44718
-self: prev:
+final: prev:
 {
   # haskell.lib.dontCheck
   # pkgs.haskell.lib.doJailbreak

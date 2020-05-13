@@ -57,9 +57,9 @@ settings:
   tabs.tabs_are_windows:
     global: false
   url.default_page:
-    global: /home/teto/dotfiles/homepage.html
+    global: /home/teto/home/homepage.html
   url.searchengines:
     global:
       DEFAULT: https://www.google.com/search?source=hp&q={}
   url.start_pages:
-    global: /home/teto/dotfiles/homepage.html
+    global: /home/teto/home/homepage.html

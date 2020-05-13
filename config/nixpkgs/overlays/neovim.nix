@@ -1,6 +1,6 @@
-self: super:
+final: prev:
 let
-  startPlugins = with self.pkgs.vimPlugins; [
+  startPlugins = with prev.pkgs.vimPlugins; [
       # echodoc-vim
 
       # to install manually with coc.nvim:
@@ -85,7 +85,7 @@ rec {
     let
       # isHaskellPkg
       # lib.debug.traceVal
-      requiredPythonModules =  (super.python3Packages.requiredPythonModules drvs );
+      requiredPythonModules =  (final.python3Packages.requiredPythonModules drvs );
 
       # Get list of required Python modules given a list of derivations.
       # TODO look into compiler.shellFor { packages= } to see how to get deps
@@ -103,9 +103,9 @@ rec {
   #   package-set = initialPackages;
   #   inherit stdenv haskellLib ghc buildHaskellPackages extensible-self all-cabal-hashes;
   # };
-        selected = drvs super.haskellPackages;
+        selected = drvs final.haskellPackages;
 
-        packageInputs = map super.getBuildInputs selected;
+        packageInputs = map final.getBuildInputs selected;
       in
         # might be possible to further refine
         packageInputs;
@@ -129,9 +129,8 @@ rec {
         extraPython3Packages = compatFun (requiredPythonModules);
         # haskellPackages
         # TODO do the same for ruby / haskell
-      } 
+      }
       # // lib.optionalAttrs (requiredHaskellPackages != [])  {
-
       #   withHaskell = true;
       #   inherit extraHaskellPackages;
       # }
@@ -139,20 +138,20 @@ rec {
 
       # buildInputs = []
 
-      finalConfig = super.neovimConfig (
-        super.lib.mkMerge [
+      finalConfig = final.neovimConfig (
+        final.lib.mkMerge [
           # project specific user config
           userConfig
           # my miniimal global config, when I am out of a nix-shell
           # the plugins/environments I always want available
-          self.neovimDefaultConfig
+          neovimDefaultConfig
           # a config generated from the input 'drvs' with an appropriate development
           # environment.
           generatedConfig
         ]
       );
     in
-    super.wrapNeovim neovim-unwrapped-master {
+    final.wrapNeovim neovim-unwrapped-master {
       # extraMakeWrapperArgs
       # rename configure ?
       # TODO should be able to add some packages in PATH like jq
@@ -160,16 +159,16 @@ rec {
     };
 
     # look at the makefile
-    # libtermkey = self.enableDebugging (
+    # libtermkey = prev.enableDebugging (
     # # libtermkey =
-    #   super.libtermkey.overrideAttrs( oa: {
+    #   final.libtermkey.overrideAttrs( oa: {
     #   name = "libtermkey-matt-${oa.version}";
     #   # oa.makeFlags
     #   makeFlags =  [ "PREFIX=/home/teto/libtermkey/build" "DEBUG=1"];
     # }));
 
-    # libvterm-neovim-master = super.libvterm-neovim.overrideAttrs(oa: {
-    #   src = super.fetchFromGitHub {
+    # libvterm-neovim-master = final.libvterm-neovim.overrideAttrs(oa: {
+    #   src = final.fetchFromGitHub {
     #     owner = "neovim";
     #     repo = "libvterm";
     #     rev = "4a5fa43e0dbc0db4fe67d40d788d60852864df9e";
@@ -179,7 +178,7 @@ rec {
 
 
     # libvterm-neovim = libvterm-neovim-master;
-  neovim-unwrapped-master = super.neovim-unwrapped.overrideAttrs (oldAttrs: {
+  neovim-unwrapped-master = final.neovim-unwrapped.overrideAttrs (oldAttrs: {
 	  name = "neovim";
 	  version = "official-master";
       src = builtins.fetchGit {
@@ -188,7 +187,7 @@ rec {
         # url = https://github.com/neovim/neovim.git;
         # ref = "diagnostic";
       };
-      # src = super.fetchFromGitHub {
+      # src = final.fetchFromGitHub {
       #   owner = "teto";
       #   repo = "neovim";
       #   rev = "b81427c114fc36c96bb30655cb572eed6b503832";
@@ -197,7 +196,7 @@ rec {
 
   });
 
-  neovim-unwrapped-treesitter = (super.neovim-unwrapped).overrideAttrs (oldAttrs: {
+  neovim-unwrapped-treesitter = (final.neovim-unwrapped).overrideAttrs (oldAttrs: {
 	  name = "neovim";
 	  version = "treesitter";
 
@@ -245,10 +244,10 @@ rec {
           set hidden
 
         ''
-        # autocmd BufReadPost *.pdf silent %!${self.pkgs.xpdf}/bin/pdftotext -nopgbrk -layout -q -eol unix "%" - | fmt -w78
+        # autocmd BufReadPost *.pdf silent %!${prev.pkgs.xpdf}/bin/pdftotext -nopgbrk -layout -q -eol unix "%" - | fmt -w78
         # if we support coc.nvim
         # + ''
-        #   let g:coc_node_path = '${self.pkgs.nodejs}/bin/node'
+        #   let g:coc_node_path = '${prev.pkgs.nodejs}/bin/node'
         # ''
 
         # LanguageClient support
@@ -257,8 +256,8 @@ rec {
         # let g:LanguageClient_serverCommands = {
         #      \ 'python': [ g:python3_host_prog, '-mpyls', '-vv', '--log-file' , '/tmp/lsp_python.log']
         #      \ , 'haskell': ['hie-wrapper', '--lsp', '-d', '--vomit', '--logfile', '/tmp/lsp_haskell.log' ]
-        #      \ , 'cpp': ['${super.pkgs.cquery}/bin/cquery', '--log-file=/tmp/cq.log']
-        #      \ , 'c': ['${super.pkgs.cquery}/bin/cquery', '--log-file=/tmp/cq.log']
+        #      \ , 'cpp': ['${final.pkgs.cquery}/bin/cquery', '--log-file=/tmp/cq.log']
+        #      \ , 'c': ['${final.pkgs.cquery}/bin/cquery', '--log-file=/tmp/cq.log']
         #      \ , 'nix': ['nix-lsp']
         #      \ }
         # ''
@@ -302,12 +301,12 @@ rec {
 
   };
 
-  neovim-dev = (super.pkgs.neovim-unwrapped.override  {
+  neovim-dev = (final.pkgs.neovim-unwrapped.override  {
     # name = "neovim-test";
     doCheck=true;
     # withDoc=true;
     # devMode=true;
-    stdenv = super.pkgs.clangStdenv;
+    stdenv = final.pkgs.clangStdenv;
 
   }).overrideAttrs(oa:{
     cmakeBuildType="debug";

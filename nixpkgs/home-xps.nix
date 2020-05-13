@@ -1,6 +1,6 @@
 # home-manager specific config from
 { config, lib, pkgs,  ... }:
-let 
+let
 
   mbsyncConfig = {
     enable = true;
@@ -14,6 +14,8 @@ let
       # ./hm/experimental.nix
       # ./hm/vdirsyncer.nix
       ./hm/mail.nix
+
+      ./profiles/nova-user.nix
     ]
     ;
 

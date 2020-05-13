@@ -1,3 +1,5 @@
 git fetch --all
 rm ~/.cache/greenclip.history
 git reset --hard gh/nixos-unstable
+home-manager -I nixpkgs=/home/teto/nixpkgs -I nixos-config=/home/teto/home/nixpkgs/configuration-xps.nix switch
+git rebase channels/nixos-unstable

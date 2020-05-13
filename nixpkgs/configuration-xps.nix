@@ -2,7 +2,6 @@
 let
   #secrets = import ./secrets.nix;
   # hopefully it can be generated as dirname <nixos-config>
-  # configDir = /home/teto/dotfiles/nixpkgs;
 
   in
 {
@@ -13,6 +12,10 @@ let
 
     ./modules/config-all.nix
     ./modules/desktop.nix
+    ./modules/docker-daemon.nix
+    ./profiles/nova-dev.nix
+
+
     ./modules/libvirtd.nix
     ./modules/distributedBuilds.nix
 
@@ -112,10 +115,11 @@ let
     powerOnBoot = false;
 
     # as per https://nixos.wiki/wiki/Bluetooth recommendation
-    config = ''
-      [General]
-      Enable=Source,Sink,Media,Socket
-    '';
+    # config = {
+    #   General = {
+    #     Enable="Source,Sink,Media,Socket";
+    #   };
+    # };
   };
 
   # TODO move to laptop

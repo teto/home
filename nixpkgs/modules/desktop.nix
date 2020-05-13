@@ -148,6 +148,8 @@ in
     ];
   };
 
+  services.greenclip.enable = true;
+
   # services.hoogle = {
   #   enable = true;
   #   packages = (hpkgs: with hpkgs; [netlink]);
