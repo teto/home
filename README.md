@@ -38,6 +38,7 @@ This folder contains my customizations for:
 * tmux (terminal multiplexer)
 * [vifm](https://vifm.info/) (ranger-like, file explorer)
 * [vimus](https://github.com/vimus/vimus) (or vimpc ? mpd player)
+* [visidata](https://www.visidata.org/) (for data analysis, csv/json/pcap/... reader)
 * weechat (Irc client)
 * zsh (powerful alternative to bash)
 
@@ -65,8 +66,20 @@ home $ git submodule update --init
 home $ make config
 ```
 
+WIP: flakifying the install
 
-# How to recover the cyphered files
+# Transfer state
+
+
+Highly confidential secrets can't be shared reliably on the repository so they need to be
+transferred.
+
+## How to transfer secrets from another machine
+
+$ nix shell nixpkgs#magic-wormhole
+$ wormhole send ~/.gnupg ~/.password-store ~/.ssh
+
+## How to recover the repo cyphered files
 
 Run `nix run nixpkgs.git nixpkgs.gitAndTools.git-crypt` do decypher the files
 listed by `$ git-crypt status -e` or .gitattributes.

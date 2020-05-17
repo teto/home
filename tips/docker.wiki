@@ -5,3 +5,9 @@ docker run mattator/dce-dockerfiles:latest
 docker exec -it <container name> /bin/bash
 
 docker-credentials-pass pour eviter d'avoir le mdp en clair dans $HOME/.docker/config.json
+
+docker ps --no-trunc
+
+Quand le service keeps restarting, look at `docker logs`
+
+docker logs --tail 50 --follow --timestamps jinko_result-store-external_1

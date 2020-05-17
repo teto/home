@@ -8,8 +8,11 @@ let
   };
   in
 {
+  nixpkgs.config.allowUnfree = true;
+
   imports = [
       ./hm/desktop.nix
+      ./hm/dev.nix
 
       # ./hm/experimental.nix
       # ./hm/vdirsyncer.nix

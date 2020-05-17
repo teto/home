@@ -15,7 +15,7 @@ let
     # Not tracked, so doesn't need to go in per-machine subdir
       ./hm/desktop.nix
       # ./modules/vdirsyncer.nix
-      # ./modules/sway.nix
+      # ./hm/sway.nix
       ./hm/neomutt.nix
 
       ./hm/mail.nix

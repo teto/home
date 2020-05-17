@@ -4,9 +4,9 @@ let
   unstable = import <nixos-unstable> {};
 
   cliUtils = with pkgs; [
-    netcat-gnu # plain 'netcat' is the bsd one
-    bind # for dig
-    w3m # for preview in ranger w3mimgdisplay
+    netcat-gnu  # plain 'netcat' is the bsd one
+    bind   # for dig
+    w3m   # for preview in ranger w3mimgdisplay
     xdg_utils
   ];
 

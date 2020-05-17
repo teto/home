@@ -38,8 +38,9 @@ let
     git-review # to contribute to wireshark
 
     gitAndTools.diff-so-fancy # todo install it via the git config instead
-    gitAndTools.gitbatch
-    gitAndTools.hub  # lol
+    gitAndTools.gitbatch   # to fetch form several repos at once
+    gitAndTools.gh  # lol
+    # gitAndTools.hub  # lol
     # https://github.com/felipec/git-remote-hg
     # gitAndTools.git-remote-hg
     gitAndTools.git-recent

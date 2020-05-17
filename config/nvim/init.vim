@@ -1697,7 +1697,7 @@ let g:vista#renderer#icons = {
 " alok/notational-fzf-vim {{{
 " use c-x to create the note
 " let g:nv_search_paths = []
-let g:nv_search_paths = ['~/Nextcloud2/Notes']
+let g:nv_search_paths = ['~/Nextcloud/Notes']
 let g:nv_default_extension = '.md'
 let g:nv_show_preview = 1
 let g:nv_create_note_key = 'ctrl-x'
@@ -1738,10 +1738,10 @@ let g:completion_chain_complete_list = {
     \	{'complete_items': ['lsp'], 'triggered_only': ['.', '::', '->', '_']}
     \	],
     \'python' : [
-    \	{'complete_items': ['ts']}
+    \	{'complete_items': ['lsp']}
     \	],
     \'lua' : [
-    \	{'complete_items': ['ts']}
+    \	{'complete_items': ['lsp']}
     \	],
     \}
 
@@ -2137,6 +2137,8 @@ nnoremap <leader>dl <cmd>lua vim.lsp.util.show_line_diagnostics()<CR>
 
 " when upstreamed
 nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
+nnoremap <silent> gA    <cmd>lua vim.lsp.buf.code_action()<CR>
+
 " nnoremap <buffer> <silent> <leader>d :lua require("vim.lsp.util").show_line_diagnostics()<CR>
 
 " lua require 'init.lua'

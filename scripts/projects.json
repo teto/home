@@ -1,6 +1,7 @@
 {
-	"home-manager": {
-		"gh": "git@github.com:teto/home-manager.git"
+	"hm": {
+		"gh": "git@github.com:teto/home-manager.git",
+		"upstream": "git@github.com:rycee/home-manager.git"
 	},
 	"wireshark": {
 		"gh_upstream": "https://github.com/wireshark/wireshark.git",
@@ -33,9 +34,12 @@
 		"gh": "git@github.com:teto/mptcp.git",
 		"lkl": "git@github.com:libos-nuse/lkl-linux.git"
 	},
+	"vim": {
+		"upstream": "https://github.com/vim/vim.git"
+	},
 	"neovim": {
 		"gh": "git@github.com:teto/neovim.git",
-		"upstream": "git@github.com:teto/neovim.git"
+		"upstream": "git@github.com:neovim/neovim.git"
 	},
 	"mptcpanalyzer": {
 		"upstream": "git@github.com:teto/mptcpanalyzer.git"
