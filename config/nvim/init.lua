@@ -70,7 +70,7 @@ nvim_lsp.ghcide.setup({
 	end;
 	log_level = vim.lsp.protocol.MessageType.Warning;
 	settings = {};
-	-- on_attach=attach_cb.on_attach
+	on_attach=attach_cb.on_attach
 })
 
 --nvim_lsp.hie.setup({

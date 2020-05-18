@@ -1707,7 +1707,7 @@ let g:nv_create_note_key = 'ctrl-x'
 "let g:nv_main_directory = g:nv_main_directory or (first directory in g:nv_search_paths)
 "}}}
 " diagnostic builds on nvim's LSP {{{ 
-let g:diagnostic_enable_virtual_text = 1
+let g:diagnostic_enable_virtual_text = 0
 let g:diagnostic_show_sign = 1
 " happens when PrevDiagnostic
 let g:diagnostic_auto_popup_while_jump = 1

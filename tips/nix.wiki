@@ -25,3 +25,10 @@ Mention `--max-jobs 0` to build remotely only
 
 
 CURL_TRACE 
+
+# Nix paths I keep forgetting
+
+- /nix/var/nix/profiles/system
+- /run/current-system/sw/bin/
+- /var/run/booted-system
+

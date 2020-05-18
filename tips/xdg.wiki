@@ -13,3 +13,21 @@ xdg-mime query filetype cwnd_xx.png
 
 # Then you can do
 xdg-mime default qutebrowser.desktop text/html
+
+To install .desktop entries
+====
+Put them in `~/.local/share/applications`
+
+
+
+Set default applications
+====
+Run
+```
+$ xdg-mime query filetype ~/Téléchargements/coflow-scheduling.pdf
+to get the name of the mime/type. You can then ask the default with:
+$ XDG_UTILS_DEBUG_LEVEL=4 xdg-mime query default application/pdf
+and finally update it with
+$ xdg-mime default zathura.desktop application/pdf
+```
+
