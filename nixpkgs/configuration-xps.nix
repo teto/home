@@ -18,6 +18,7 @@ let
 
     ./modules/libvirtd.nix
     ./modules/distributedBuilds.nix
+    ./modules/hoogle.nix
 
     # ./modules/mptcp.nix
     # ./modules/vpn.nix
@@ -203,18 +204,6 @@ let
   #   (import ./overlays/haskell.nix)
   # ];
 
-
-  services.hoogle = {
-    enable = true;
-    # port
-
-    packages = hs: with hs; [
-      http-api-data
-      servant
-      servant-server
-    ];
-
-  };
 
   networking.iproute2.enable = true;
 

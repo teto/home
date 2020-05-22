@@ -65,6 +65,12 @@ nvim_lsp.ghcide.setup({
 
 	cmd = {"ghcide", "--lsp"};
 	filetypes = { "hs", "lhs", "haskell" };
+
+		-- ".stack.yaml",
+        -- ".hie-bios",
+        -- "BUILD.bazel",
+        -- "cabal.config",
+        -- "package.yaml"
 	root_dir = function(fname)
 		return nvim_lsp.util.find_git_ancestor(fname) or vim.loop.os_homedir()
 	end;

@@ -1,4 +1,10 @@
 {
+	"nix": {
+		"upstream":	"git@github.com:nixos/nix"
+	},
+	"hnix": {
+		"upstream":	"git@github.com:haskell-nix/hnix-store"
+	},
 	"hm": {
 		"gh": "git@github.com:teto/home-manager.git",
 		"upstream": "git@github.com:rycee/home-manager.git"

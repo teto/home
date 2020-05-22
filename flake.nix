@@ -10,10 +10,10 @@
   # requires = [ flake:nixpkgs ];
 
   inputs.nixpkgs.url = "github:teto/nixpkgs/nixos-unstable";
-  # todo use teto instead
-  inputs.home.url = "github:nrdxp/home-manager/flakes";
+  # TODO use mine instead
+  inputs.hm.url = "github:nrdxp/home-manager/flakes";
 
-  outputs = args@{ self, home, nixpkgs }:
+  outputs = args@{ self, hm, nixpkgs }:
     let
       inherit (builtins) listToAttrs baseNameOf attrNames readDir;
       inherit (nixpkgs.lib) removeSuffix;
@@ -25,8 +25,8 @@
         config = { allowUnfree = true; };
       };
     in {
-      # nixosConfigurations = let configs = import ./hosts args;
-      # in configs;
+      nixosConfigurations = let configs = import ./hosts args;
+      in configs;
 
       # overlay = import ./config/nixpkgs/overlays/pkgs/default.nix;
       # overlays = [self.overlay];

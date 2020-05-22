@@ -276,4 +276,9 @@ in
     };
 
   };
+
+  wayland.windowManager.sway = {
+    enable = true;
+    config = removeAttrs  config.xsession.windowManager.i3.config ["startup"];
+  };
 }

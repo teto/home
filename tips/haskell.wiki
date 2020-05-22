@@ -35,3 +35,11 @@ see https://wiki.haskell.org/FAQ#How_can_I_get_a_stack_backtrace_when_my_program
     -- -fforce-recomp  makes it build twice on nixos
     ghc-options: -Wall -fno-warn-unused-binds -fno-warn-unused-matches -threaded -fprof-auto -rtsopts
 
+AWSInfo{..} = RecordWildCards
+
+
+How to convert between Text/String/ByteString
+import Data.Text.Encoding
+https://stackoverflow.com/questions/3232074/what-is-the-best-way-to-convert-string-to-bytestring
+
+

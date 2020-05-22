@@ -114,6 +114,7 @@ Plug 'MattesGroeger/vim-bookmarks' " ruby  / :BookmarkAnnotate
 " Plug 'andymass/vim-matchup' " to replace matchit
 " Plug 'AGhost-7/critiq.vim' " :h critiq
 " Plug 'thaerkh/vim-workspace'  " :ToggleWorkspace
+Plug 'wbthomason/lsp-status.nvim'  " display lsp progress
 Plug 'skywind3000/vim-quickui' " 
 Plug 'liuchengxu/vista.vim' " replaces tagbar to list workplace symbols
 Plug 'neovim/nvim-lsp' " while fuzzing details out
@@ -1713,6 +1714,12 @@ let g:diagnostic_show_sign = 1
 let g:diagnostic_auto_popup_while_jump = 1
 " to prevent diagnostics from popping up in insert mode
 let g:diagnostic_insert_delay = 1
+
+
+" call sign_define("LspDiagnosticsErrorSign", {"text" : "E", "texthl" : "LspDiagnosticsError"})
+" call sign_define("LspDiagnosticsWarningSign", {"text" : "W", "texthl" : "LspDiagnosticsWarning"})
+" call sign_define("LspDiagnosticInformationSign", {"text" : "I", "texthl" : "LspDiagnosticsInformation"})
+" call sign_define("LspDiagnosticHintSign", {"text" : "H", "texthl" : "LspDiagnosticsHint"})
 "}}}
 " completion-nvim {{{
 let g:completion_docked_hover=1
@@ -1760,7 +1767,12 @@ set completeopt+=noinsert,noselect
 " set foldexpr=completion_treesitter#foldexpr()
 " set foldmethod=expr
 "}}}
+" lsp status {{{
 
+"}}}
+
+" to prettify json
+" g:python3_host_prog -m json.tool
 
 set hidden " you can open a new buffer even if current is unsaved (error E37)
 " set completeopt+=longest
