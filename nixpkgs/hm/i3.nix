@@ -4,11 +4,76 @@ let
   # https://nixos.org/channels/nixos-unstable
   unstable = import <nixos-unstable> {};
 
-  i3pystatus-custom = pkgs.i3pystatus-perso.override ({ extraLibs = with pkgs.python3Packages; [ pytz notmuch dbus-python ]; });
+  i3pystatus-custom = pkgs.i3pystatus-perso.override ({
+    extraLibs = with pkgs.python3Packages; [ pytz notmuch dbus-python ];
+  });
 
   # or use {pkgs.kitty}/bin/kitty
   term = "kitty";
-  # term = "termite";
+
+
+  sharedExtraConfig = ''
+      set $GroupUs Group1
+      set $GroupFr Group2
+
+      set $mod Mod1
+      set $rmod Mod1
+
+      # to easily swap between i3/vim mode
+      set $kleft h
+      set $kdown j
+      set $kup k
+      set $kright l
+
+      set $term ${term}
+
+      workspace_auto_back_and_forth true
+      show_marks yes
+
+      set $w1 1:
+      set $w2 2:
+      set $w3 3:
+      set $w4 4:qemu
+      set $w5 5:misc
+      set $w6 6:irc
+      set $w7 7
+      set $w8 8
+      set $w9 9
+
+      # experimental part about
+      # Mod4 => window key
+      set $mad Super_L
+      # Mod4
+
+      # https://faq.i3wm.org/question/5942/using-modifer-key-as-a-binding/
+      # https://faq.i3wm.org/question/5429/stay-in-mode-only-while-key-is-pressed/
+      # set $set_mark  /home/teto/.i3/set_marks.py
+      #bindsym $mad exec notify-send "XP mode"; mode "xp"; exec $set_mark
+
+      # The middle button over a titlebar kills the window
+      bindsym --release button2 kill
+
+
+      # bindsym $mod+shift+e exec /home/teto/i3-easyfocus/easyfocus
+
+      # The side buttons move the window around
+      bindsym button9 move left
+      bindsym button8 move right
+
+
+      # Tests for title_format
+      # give the focused window a prefix
+      # bindsym $mod+Shift+g title_format "[test] %title"
+
+      for_window [class="^qutebrowser$"] title_format "<span background='blue'>QB</span> %title"
+      for_window [class="^Firefox$"] title_format "<span background='#F28559'>FF</span> %title"
+      for_window [title="Thunderbird$"] title_format " %title"
+
+    ''
+    + (lib.concatStrings [
+      (builtins.readFile ../../config/i3/config.main)
+      # (builtins.readFile ../../config/i3/config.xp)
+    ]);
 in
 {
   xsession.windowManager.i3 =
@@ -26,27 +91,16 @@ in
     in
   {
     enable = true;
-    extraConfig = (lib.concatStrings [
-      (builtins.readFile ../../config/i3/config.main)
-      (builtins.readFile ../../config/i3/config.xp)
-      (builtins.readFile ../../config/i3/config.colors)
-    ])
-    + ''
-      set $term ${term}
 
-      workspace_auto_back_and_forth true
-      show_marks yes
+    # bindsym $mod+ctrl+v exec ~/vim-anywhere/bin/run"
+    extraConfig = sharedExtraConfig
+      + (lib.concatStrings [
+        (builtins.readFile ../../config/i3/config.colors)
+      ])
+      + ''
+        new_float pixel 2
+      ''
 
-      set $w1 1:
-      set $w2 2:
-      set $w3 3:
-      set $w4 4:qemu
-      set $w5 5:misc
-      set $w6 6:irc
-      set $w7 7
-      set $w8 8
-      set $w9 9
-    ''
     ;
 
     # prefix with pango if you want to have fancy effects
@@ -56,13 +110,7 @@ in
 
       focus.followMouse = false;
       fonts = [ "pango:FontAwesome 12" "Terminus 10" ];
-      bars = let
-        # i3pystatus-custom = pkgs.i3pystatus.overrideAttrs (oldAttrs: {
-        #   propagatedBuildInputs = with pkgs.python3Packages; oldAttrs.propagatedBuildInputs ++ [ pytz ];
-        # });
-          # propagatedBuildInputs = with pkgs.python3Packages; oldAttrs.propagatedBuildInputs ++ [ pytz ];
-        # });
-      in [
+      bars = [
         {
           position="top";
           workspaceButtons=true;
@@ -113,7 +161,7 @@ in
         // move_to_output "left" "Left" "Left"
         // move_to_output "left" "j" "j"
         // move_to_output "right" "Right" "Right"
-        // move_to_output "right" "m" "semicolumn"
+        # // move_to_output "right" "m" "semicolumn"
         // move_to_output "top" "Up" "Up"
         // move_to_output "top" "k" "k"
         // move_to_output "down" "down" "down"
@@ -126,35 +174,24 @@ in
 	# bindsym $mod+Up   exec  $(xdotool mousemove_relative --sync -- 0 -15)
   # }
 
-          # resize ..."
-
         # # Enter papis mode
-        papis = {
-          # open documents
-          "$mod+o" = "exec python3 -m papis.main --pick-lib --set picktool dmenu open";
-          # edit documents
-          "$mod+e" = "exec python3 -m papis.main --pick-lib --set picktool dmenu --set editor gvim edit";
-          # open document's url
-           "$mod+b" = "exec python3 -m papis.main --pick-lib --set picktool dmenu browse";
+        # papis = {
+        #   # open documents
+        #   "$mod+o" = "exec python3 -m papis.main --pick-lib --set picktool dmenu open";
+        #   # edit documents
+        #   "$mod+e" = "exec python3 -m papis.main --pick-lib --set picktool dmenu --set editor gvim edit";
+        #   # open document's url
+        #    "$mod+b" = "exec python3 -m papis.main --pick-lib --set picktool dmenu browse";
+        # #   bindsym Ctrl+c mode "default"
+        #   "Escape" = ''mode "default"'';
+        # };
 
-        #   # return to default mode
-        #   bindsym Ctrl+c mode "default"
-        #   Return mode "default"
-          "Escape" = ''mode "default"'';
-
-        };
-
-        rofi-scripts = {
-          # open documents
-          "$mod+l" = "sh j";
-          # "$mod+e" = "exec python3 -m papis.main --pick-lib --set picktool dmenu --set editor gvim edit";
-
-        #   # return to default mode
-        #   bindsym Ctrl+c mode "default"
-          "Return" = ''mode "default"'';
-          "Escape" = ''mode "default"'';
-
-        };
+        # rofi-scripts = {
+        #   # open documents
+        #   "$mod+l" = "sh j";
+        #   "Return" = ''mode "default"'';
+        #   "Escape" = ''mode "default"'';
+        # };
       };
 
       window = {
@@ -189,6 +226,8 @@ in
     {
       "$mod+f" = "fullscreen";
       "$mod+Shift+f" = "fullscreen global";
+      "$mod+button3" = "floating toggle";
+
     }
     // {
         # todo use i3lock-fancy instead
@@ -202,10 +241,6 @@ in
         # "${mod}+b" = "exec ${pkgs.buku_run}/bin/buku_run";
         "${mod}+p" = "exec ${pkgs.rofi-pass}/bin/rofi-pass";
 
-        "$mod+Ctrl+1" = ''mode "papis"'';
-        "$mod+Ctrl+p" = ''mode "papis"'';
-        # "${mod}+shift+p" = "focus parent";
-
         # "${mod}+shift+n" = "exec ${unstable.gnome3.nautilus}/bin/nautilus";
         "${mod}+Shift+1" =  "exec qutebrowser";
 
@@ -217,18 +252,17 @@ in
         "XF86MonBrightnessUp" = "exec ${pkgs.xorg.xbacklight}/bin/xbacklight -inc 10";
         "XF86MonBrightnessDown" = "exec ${pkgs.xorg.xbacklight}/bin/xbacklight -dec 10";
 
-        # TODO use i3
         # test rofi-randr
         # "XF86Display" = "exec " + ../../rofi-scripts/monitor_layout.sh ;
 
-  # XF86AudioNext="exec ${mpc} next; exec notify-send 'Audio next'";
-  # XF86AudioPrev exec mpc prev; exec notify-send "Audio prev"
-  # XF86AudioPause exec mpc toggle; exec notify-send "Audio Pause"
+        # XF86AudioNext="exec ${mpc} next; exec notify-send 'Audio next'";
+        # XF86AudioPrev exec mpc prev; exec notify-send "Audio prev"
+        # XF86AudioPause exec mpc toggle; exec notify-send "Audio Pause"
       # } // {
         # alsa version
-  # XF86AudioRaiseVolume=if home.packages ?  exec amixer -q set Master 2dB+ unmute; exec notify-send "Audio Raised volume"
-  # XF86AudioLowerVolume exec amixer -q set Master 2dB- unmute; exec notify-send Audio lowered
-  # XF86AudioMute exec amixer -q set Master toggle; exec notify-send "Mute toggle"
+        # XF86AudioRaiseVolume=if home.packages ?  exec amixer -q set Master 2dB+ unmute; exec notify-send "Audio Raised volume"
+        # XF86AudioLowerVolume exec amixer -q set Master 2dB- unmute; exec notify-send Audio lowered
+        # XF86AudioMute exec amixer -q set Master toggle; exec notify-send "Mute toggle"
         "$GroupFr+$mod+apostrophe"="kill";
         "$GroupUs+$mod+4"="kill";
 
@@ -274,11 +308,32 @@ in
       }
     ;
     };
-
   };
 
   wayland.windowManager.sway = {
-    enable = true;
-    config = removeAttrs  config.xsession.windowManager.i3.config ["startup"];
+    # enable = true;
+    config = (removeAttrs  config.xsession.windowManager.i3.config ["startup" "bars"])
+      // {
+          input = {
+            "type:keyboard" = { xkb_layout = "us,fr"; };
+
+          };
+
+      bars = [
+        {
+          position="top";
+          workspaceButtons=true;
+          workspaceNumbers=false;
+          # id="0";
+          # command="";
+          statusCommand="${i3pystatus-custom}/bin/i3pystatus-python-interpreter $XDG_CONFIG_HOME/i3/myStatus.py";
+        }
+      ];
+    };
+      # statusCommand="${i3pystatus-custom}/bin/i3pystatus-python-interpreter $XDG_CONFIG_HOME/i3/myStatus.py";
+
+    extraConfig = sharedExtraConfig + ''
+      default_floating_border pixel 2
+    '';
   };
 }

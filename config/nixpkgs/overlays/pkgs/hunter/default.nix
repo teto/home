@@ -1,26 +1,18 @@
 { stdenv
 , callPackage
 , makeRustPlatform
-, fetchFromGitHub, IOKit ? null
+, fetchFromGitHub
+, IOKit ? null
+, makeWrapper
+, glib
+, gst_all_1
+, libsixel
 }:
 
 assert stdenv.isDarwin -> IOKit != null;
 
-# let
-#   src = fetchFromGitHub {
-#       owner = "mozilla";
-#       repo = "nixpkgs-mozilla";
-#       # commit from: 2019-05-15
-#       rev = "9f35c4b09fd44a77227e79ff0c1b4b6a69dff533";
-#       sha256 = "18h0nvh55b5an4gmlgfbvwbyqj91bklf1zymis6lbdh75571qaz0";
-#    };
-# in
-# with import "${src.out}/rust-overlay.nix" pkgs pkgs;
-# The date of the nighly version to use.
-
 let
-  # date = "2020-3-30";
-  date = "2019-07-30";
+  date = "2020-05-22";
   mozillaOverlay = fetchFromGitHub {
     owner = "mozilla";
     repo = "nixpkgs-mozilla";
@@ -35,7 +27,7 @@ let
   };
 in
 rustPlatform.buildRustPackage rec {
-  pname = "hunter-filemanager";
+  pname = "hunter";
   version = "1.3.5";
 
   src = fetchFromGitHub {
@@ -47,9 +39,22 @@ rustPlatform.buildRustPackage rec {
 
   RUSTC_BOOTSTRAP=1;
 
-  buildInputs = stdenv.lib.optionals stdenv.isDarwin [ IOKit ];
+  nativeBuildInputs = [ makeWrapper ];
+  buildInputs = [
+    glib
+    gst_all_1.gstreamer
+    gst_all_1.gst-plugins-base
+    gst_all_1.gst-plugins-good
+    gst_all_1.gst-plugins-ugly
+    gst_all_1.gst-plugins-bad
+    libsixel
+  ] ++ stdenv.lib.optionals stdenv.isDarwin [ IOKit ];
 
-  cargoSha256 = "0qnvw4n49m9shpql8bh3l19iymkfbbsd548gm1p7k26c2n9iwc7y";
+  postInstall = ''
+    wrapProgram $out/bin/hunter --prefix GST_PLUGIN_SYSTEM_PATH_1_0 : "$GST_PLUGIN_SYSTEM_PATH_1_0"
+  '';
+
+  cargoSha256 = "18ycj1f310s74gkjz2hh4dqzjb3bnxm683968l1cbxs7gq20jzx6";
 
   meta = with stdenv.lib; {
     description = "The fastest file manager in the galaxy!";

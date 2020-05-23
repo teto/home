@@ -17,6 +17,7 @@ let
       # ./hm/experimental.nix
       # ./hm/vdirsyncer.nix
       ./hm/mail.nix
+      ./hm/sway.nix
 
       ./profiles/nova-user.nix
     ]

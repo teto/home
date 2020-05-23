@@ -6,6 +6,11 @@
 # original client.border #d72f6b 
 # client .background 
 
+set_from_resource $foc_border i3bar.foc_border #d72f6b
+set_from_resource $foc_border_bg i3bar.foc_border_bg #d70a53
+set_from_resource $bar_bg i3bar.background #090e1400
+set_from_resource $bar_status i3bar.statusline #d70a53
+
 
 # set_from_resource $<name> <resource_name> <fallback>
 set_from_resource $black i3wm.color0 #000000

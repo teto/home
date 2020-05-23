@@ -6,8 +6,6 @@ let
   in
 {
   imports = [
-    # todo renommer en workstation
-    # ./hardware-dell.nix
     ./hardware-xps.nix
 
     ./modules/config-all.nix
@@ -21,7 +19,8 @@ let
     ./modules/hoogle.nix
 
     # ./modules/mptcp.nix
-    # ./modules/vpn.nix
+
+    ./modules/sway.nix
 
     # ./modules/tor.nix
 
@@ -114,13 +113,6 @@ let
   hardware.bluetooth = {
     enable = true;
     powerOnBoot = false;
-
-    # as per https://nixos.wiki/wiki/Bluetooth recommendation
-    # config = {
-    #   General = {
-    #     Enable="Source,Sink,Media,Socket";
-    #   };
-    # };
   };
 
   # TODO move to laptop
@@ -163,8 +155,8 @@ let
     # strongswan # to get ipsec in path
     # cups-pk-helper # to add printer through gnome control center
     [
-      # pkgs.brightnessctl
-      ]
+      pkgs.brightnessctl
+    ]
   ;
 
   # need to be video
@@ -198,12 +190,6 @@ let
   #    host.enableHardening = true;
   #    host.headless = false;
   # };
-
-  # nixpkgs.overlays = [
-  #   (import ./overlays/kernels.nix)
-  #   (import ./overlays/haskell.nix)
-  # ];
-
 
   networking.iproute2.enable = true;
 

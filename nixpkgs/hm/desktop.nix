@@ -128,7 +128,7 @@ let
     pass
     qtpass
     sublime3
-    scrot # screenshot app
+    scrot  # screenshot app for wayland
     # smplayer # GUI around mpv
 
     sxiv # simple image viewer

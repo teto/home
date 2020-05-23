@@ -305,9 +305,8 @@ rec {
     # name = "neovim-test";
     doCheck=true;
     # withDoc=true;
-    # devMode=true;
+    devMode=true;
     stdenv = final.pkgs.clangStdenv;
-
   }).overrideAttrs(oa:{
     cmakeBuildType="debug";
 
@@ -318,6 +317,6 @@ rec {
       # ref = "inlinefolds_matt";
     };
 
-    # buildInputs = oa.buildInputs ++ [ ];
+    buildInputs = oa.buildInputs ++ ([ final.pkgs.tree-sitter ]);
   });
 }

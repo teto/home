@@ -226,9 +226,11 @@ rec {
   # xdg-settings set default-web-browser firefox.desktop
 
   # don't enable it since it will override my zle-keymap-select binding
-  # programs.starship = {
-  #   enable = true;
-  # };
+  programs.starship = {
+    enable = true;
+    enableZshIntegration = true;
+     # settings = {};
+  };
 
   programs.vim = {
     enable = true;
@@ -310,7 +312,7 @@ rec {
 
       # eval before sourcing zshrc since that one will override my
       # zle call
-      eval "$(${pkgs.starship}/bin/starship init zsh)"
+      # eval "$(${pkgs.starship}/bin/starship init zsh)"
       # TODO remove and include it ?
       # source $ZDOTDIR/zshrc.generated
       # if [ -f "$ZDOTDIR/zshrc" ]; then
@@ -374,7 +376,7 @@ rec {
 
   # order matters
   home.file.".mailcap".text =  ''
-applmcation/pdf; evince '%s';
+application/pdf; evince '%s';
 # pdftotext
 # wordtotext
 # ppt2text
@@ -395,5 +397,4 @@ image/*; eog '%s';
   programs.lesspipe.enable = true;
 
   manual.json.enable = true;
-
 }

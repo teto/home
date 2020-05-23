@@ -273,7 +273,6 @@ in
   environment.systemPackages = with pkgs;
     # cups-pk-helper # to add printer through gnome control center
     [
-      pkgs.brightnessctl
     ]
   ;
 

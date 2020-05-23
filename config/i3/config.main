@@ -4,81 +4,17 @@
 ### MAIN
 ##########################################
 
-# https://github.com/DaveDavenport/rofi
-# Combi mode, allow several modes to be merged into one list.
-# ,Layouts:i3-list-layouts,file:/home/teto/rofi/Examples/rofi-file-browser.sh'
-# set $launcher "rofi -modi 'run,drun,window,ssh' -show run"
-# Randr:rofi-randr,Monitor:monitor_layout.sh'
-# set $greenclip "rofi -modi 'clipboard:greenclip print' -show clipboard"
-
-set $GroupUs Group1
-set $GroupFr Group2
-
-# bindsym $mad+b exec buku_run
-# bindsym $mad+r exec rofi_pass
-# bindsym $mod+ctrl+b exec buku_run
-# bindsym $mod+ctrl+v exec ~/vim-anywhere/bin/run"
-
-# xmodmap to see the mappings for ModX etc...
-set $mod Mod1
-set $rmod Mod1
-set $BROWSER qutebrowser
-#set $term rxvt-unicode
-# tODO move to nix generator ?
-
-# to easily swap between i3/vim mode
-set $kleft h
-set $kdown j
-set $kup k
-set $kright l
-
-# 
-# 
-# set $w1 1:
-# set $w2 2:
-# set $w3 3:
-# set $w4 4:qemu
-# set $w5 5:misc
-# set $w6 6:irc
-# set $w7 7
-# set $w8 8
-# set $w9 9
-
 
 # default border size
 #new_window  pixel 2
-new_float pixel 2
 
 #for_window [instance="audioplayer"] move to scratchpad
 for_window [instance="pad_*"] move scratchpad
 #for_window [instance="pad_flyingterminal"] move scratchpad
 #for_window [instance="pad_ircclient"] move scratchpad
 # this concerns too many boxes, thus creating bugs
-for_window [class="Codeblocks" title="Global Variable Editor"] resize grow right 500;
-for_window [class="Codeblocks" title="codeblocks"] resize grow left 300;
-for_window [class="Codeblocks" title="Multiple matches"] resize grow right 300;
 
-# Manage monitors, enable or disable, it's in rofi-scripts
 bindsym $mod+Shift+V exec "manage_monitors.sh"
-
-# TODO should detect the number of monitors !
-# bindsym $mod+m  mode "monitors"
-# mode "monitors" {
-
-# 	# todo should work with hjkl too
-# 	bindsym $mod+Left move workspace to output left
-# 	bindsym $mod+Right move workspace to output right
-# 	bindsym $mod+Up move workspace to output top
-# 	bindsym $mod+Down move workspace to output down
-
-# 	bindsym $mod+Shift+Left workspace prev_on_output
-# 	bindsym $mod+Shift+Right workspace next_on_output
-
-# 	bindsym Return mode "default"
-# 	bindsym Escape mode "default"
-# }
-
-
 
 mode "focused" {
 
@@ -114,11 +50,7 @@ mode "focused" {
 
 # TODO remove since it is used by Dunst ?
 bindsym $mod+n mode "focused"
-#bindsym $mod+c exec "~/.i3/misc_commands.py"
 
-# The IPC interface allows programs like an external workspace bar
-# (i3-wsbar) or i3-msg (can be used to "remote-control" i3) to work.
-# ipc-socket $XDG_RUNTIME_DIR/i3/ipc.sock
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -243,17 +175,6 @@ mode --pango_markup "$rofi_mode" {
 	bindsym Escape mode "default"
 }
 
-mode "command" {
-
-	bindsym f exec "$HOME/.i3/script.sh fn_keys"; mode default
-	bindsym t exec "$HOME/.i3/script.sh touchpad"; mode default
-
-# set monitors, wap them ? etc..
-
-	bindsym Return mode "default"
-	bindsym Escape mode "default"
-}
-
 # resize window (you can also use the mouse for that) {{{
 bindsym $mod+r mode "resize"
 mode "resize" {
@@ -273,8 +194,9 @@ mode "resize" {
         bindsym $GroupFr+m resize grow right 10 px or 10 ppt
         bindsym $GroupFr+Shift+m resize shrink right 10 px or 10 ppt
 
-        bindsym $GroupUs+semicolumn resize grow right 10 px or 10 ppt
-        bindsym $GroupUs+Shift+semicolumn resize shrink right 10 px or 10 ppt
+		# semicolumn is not recognized by sway
+        # bindsym $GroupUs+semicolumn resize grow right 10 px or 10 ppt
+        # bindsym $GroupUs+Shift+semicolumn resize shrink right 10 px or 10 ppt
 
         # same bindings, but for the arrow keys
         #bindsym Right resize shrink width 10 px or 10 ppt
@@ -305,33 +227,20 @@ mode "resize" {
 
 bindsym $mod+shift+b border toggle
 bindsym $mod+ctrl+minus move scratchpad
-#
-#
-
-set_from_resource $foc_border i3bar.foc_border #d72f6b
-set_from_resource $foc_border_bg i3bar.foc_border_bg #d70a53
-set_from_resource $bar_bg i3bar.background #090e1400
-set_from_resource $bar_status i3bar.statusline #d70a53
-
-
 
 # bindsym $mod+shift+n exec nemo
 bindsym $mod+shift+p mode mouse
 
 bindsym  $mod+shift+o exec xkill
 
-
 mode mouse {
 
 #xdotool mousemove --sync 1000 10
 #xdotool click 3
-#sleep 1
-#
 	bindsym $mod+Left exec	$(xdotool mousemove_relative --sync -- -15 0)
 	bindsym $mod+Right exec $(xdotool mousemove_relative --sync -- 15 0)
 	bindsym $mod+Down exec  $(xdotool mousemove_relative --sync -- 0 15)
 	bindsym $mod+Up   exec  $(xdotool mousemove_relative --sync -- 0 -15)
-#xdotool click 1
 	bindsym Escape mode "default"
 }
 
@@ -350,16 +259,5 @@ floating_maximum_size -1 x -1
 #exec_always urxvtc -name pad_term4
 #exec_always urxvtc -name pad_term5
 
-# DP3 & LVDS1
-# to move
-# TODO ca ca plante si j'en ai
-# bindsym XF86Display exec ~/.config/i3/monitors.sh
-
 # xrandr --output LVDS1 --primary --auto --output DP1 --auto --right-of LVDS1
 #exec_always xrandr --output $output1 --auto --output $output2 --right-of $output1
-#exec urxvtc -name irclient -e irssi
-
-# not valid on nixos
-# exec_always xmodmap ~/.Xmodmap
-#https://faq.i3wm.org/question/2155/how-can-i-use-autostart-desktop-files-in-i3/
-# exec dex -ae i3
