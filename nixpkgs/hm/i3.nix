@@ -69,6 +69,16 @@ let
       for_window [class="^Firefox$"] title_format "<span background='#F28559'>FF</span> %title"
       for_window [title="Thunderbird$"] title_format " %title"
 
+      # class                 border,  backgrd,  text,    indicator,  child border
+      # client.focused          $focused_border $client_bg #FFFF50
+      # client.focused_inactive $focused_border_inactive  $focinac_bg $focinac_txt  #090e14
+      # client.unfocused        $unfocused_border $unfocused_border_bg $unfocused_txt #090e14
+      # client.urgent           #870000 #870000 #ffffff #090e14
+      # client.background       $client_bg
+      # # client.background       #66ff33
+
+      # client.placeholder  #000000 #0c0c0c #ffffff #000000   #0c0c0c
+
     ''
     + (lib.concatStrings [
       (builtins.readFile ../../config/i3/config.main)
@@ -76,6 +86,10 @@ let
     ]);
 in
 {
+  imports = [
+    ../lib/colors.nix
+  ];
+
   xsession.windowManager.i3 =
   let
     bind_ws = workspace_id: fr: us:
@@ -107,6 +121,54 @@ in
     config = {
       terminal = term;
       workspaceAutoBackAndForth = true;
+
+      colors = {
+      # class                 border,  backgrd,  text,    indicator,  child border
+      # client.focused          $focused_border $client_bg #FFFF50
+      # client.urgent           #870000 #870000 #ffffff #090e14
+      # client.background       $client_bg
+      # # client.background       #66ff33
+
+      # client.placeholder  #000000 #0c0c0c #ffffff #000000   #0c0c0c
+
+        background = "#d70a53";
+        # focused_inactive = 
+
+      # client.focused          $focused_border $client_bg #FFFF50
+        focused = {
+          border = "#C043C6";
+          background = "#d70a53";
+          text = "#FFFF50";
+          indicator = "#FFFF50";
+          childBorder = "white";
+        };
+      # client.focused_inactive $focused_border_inactive  $focinac_bg $focinac_txt  #090e14
+        focusedInactive = {
+          border = "#06090d";
+          background = "#06090d";
+          text = "#696f89";
+          indicator = "#090e14";
+          childBorder = "red";
+        };
+
+      # client.unfocused        $unfocused_border $unfocused_border_bg $unfocused_txt #090e14
+        unfocused = {
+          border = "#605C57"; # "#C043C6";
+          background = "#605C57";
+          text = "#ffffff";
+          indicator  = "#090e14";
+          childBorder = "red";
+        };
+
+        urgent = {
+          border = "#870000";
+          background = "#870000";
+          text = "#ffffff";
+          indicator = "#090e14";
+          childBorder = "red";
+        };
+
+      };
 
       focus.followMouse = false;
       fonts = [ "pango:FontAwesome 12" "Terminus 10" ];
@@ -230,15 +292,18 @@ in
 
     }
     // {
+        # change container layout (stacked, tabbed, default)
+        "$GroupFr+$mod+ampersand" = "layout toggle";
+        "$GroupUs+$mod+1"  = "layout toggle";
         # todo use i3lock-fancy instead
         # alternative is "light"
         "${mod}+ctrl+v" = "exec ${pkgs.bash}/bin/bash ~/vim-anywhere/bin/run";
         "${mod}+Tab"="exec \"${pkgs.rofi}/bin/rofi -modi 'run,drun,window,ssh' -show run\"";
         "${mod}+Ctrl+L"="exec ${pkgs.i3lock-fancy}/bin/i3lock-fancy";
         "${mod}+Ctrl+h" = ''exec "${pkgs.rofi}/bin/rofi -modi 'clipboard:greenclip print' -show clipboard"'';
-        # "${mod}+ctrl+b" = "exec " + ../buku_run/buku_run;
         "${mod}+g" = "exec ${pkgs.i3-easyfocus}/bin/i3-easyfocus";
-        # "${mod}+b" = "exec ${pkgs.buku_run}/bin/buku_run";
+        # "${mod}+ctrl+b" = "exec " + ../buku_run/buku_run;
+        "${mod}+b" = "exec ${pkgs.buku_run}/bin/buku_run";
         "${mod}+p" = "exec ${pkgs.rofi-pass}/bin/rofi-pass";
 
         # "${mod}+shift+n" = "exec ${unstable.gnome3.nautilus}/bin/nautilus";
@@ -318,6 +383,12 @@ in
             "type:keyboard" = { xkb_layout = "us,fr"; };
 
           };
+
+      keybindings = lib.recursiveUpdate config.xsession.windowManager.i3.config.keybindings {
+        "$GroupFr+$mod+ampersand" = "layout toggle all";
+        "$GroupUs+$mod+1"  = "layout toggle all";
+
+      };
 
       bars = [
         {

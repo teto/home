@@ -2131,6 +2131,7 @@ map ,fa <Cmd>call CreateVisualExtmark()<CR>
 " lsp config {{{
 " nnoremap <buffer> <silent> <leader>ngd :call lsp#text_document_declaration()<CR>
 nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
+" todo add fallback on keyword/haskell use hoogle
 nnoremap <silent> K  <cmd>lua vim.lsp.buf.hover()<CR>
 " nnoremap <silent> K  <cmd>Show_documentation()<CR>
 nnoremap ,gi  <cmd>lua vim.lsp.buf.implementation()<CR>
@@ -2176,6 +2177,11 @@ nmap ]] <Cmd>NextDiagnostic<cr>
 set omnifunc=v:lua.vim.lsp.omnifunc
 
 
+augroup highlight_yank
+    autocmd!
+    autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank("IncSearch", 1000)
+augroup END
+
 autocmd CursorHold lua vim.lsp.util.show_line_diagnostics()
 autocmd CursorMoved lua vim.lsp.util.show_line_diagnostics()
 
@@ -2207,7 +2213,7 @@ function! LspStatus() abort
     return sl
 endfunction
 
-let &l:statusline = '%#MyStatuslineLSP#LSP '.LspStatus() 
+" let &l:statusline = '%#MyStatuslineLSP#LSP '.LspStatus() 
 
 " vim.lsp.util.set_qflist
 " location_callback

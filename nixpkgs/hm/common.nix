@@ -89,9 +89,6 @@ rec {
   # home.file.".cabal/config".text = ../home/cabal;
 
 
-  # TODO doesn't find ZDOTDIR (yet)
-  # TODO maybe we can add to PATH
-  # TODO use xdg.configFile ?
   # - https://github.com/carnager/rofi-scripts.git
   # https://github.com/carnager/buku_run
   home.sessionVariables = {
@@ -106,7 +103,6 @@ rec {
     # MUTT="$XDG_CONFIG_HOME/mutt";
 
     # TODO package these instead now these are submoudles of dotfiles To remove
-    PATH="$HOME/rofi-scripts:$HOME/buku_run:$PATH";
     VIFM="$XDG_CONFIG_HOME/vifm";
     WWW_HOME="$XDG_CONFIG_HOME/w3m";
     # used by ranger

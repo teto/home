@@ -54,7 +54,7 @@ let
       nvim-markdown-preview  # :MarkdownPreview
 
       # vim-markdown-preview  # WIP
-      vim-highlightedyank
+      # vim-highlightedyank
       vim-commentary
 
       # vimwiki

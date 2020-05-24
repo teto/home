@@ -98,16 +98,7 @@ bindsym $mod+v split toggle
 # bindsym $mod+f fullscreen
 # bindsym $mod+Shift+f fullscreen global
 
-# change container layout (stacked, tabbed, default)
-bindsym $GroupFr+$mod+ampersand layout toggle
-bindsym $GroupUs+$mod+1 layout toggle
 
-#bindsym $mod+s layout stacking
-#bindsym $mod+z layout tabbed
-#bindsym $mod+e layout default
-
-# to lock screen (relied on a fork)
-# bindsym $mod+Ctrl+L exec "i3lock -i ~/Images/route66.png"
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle

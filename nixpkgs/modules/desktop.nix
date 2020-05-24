@@ -150,17 +150,8 @@ in
 
   services.greenclip.enable = true;
 
-  # services.hoogle = {
-  #   enable = true;
-  #   packages = (hpkgs: with hpkgs; [netlink]);
-  #   port = 8090; # let 8080 for nix-serve
-  #   # haskellPackages = pkgs.haskellPackages;
-  # };
-
   nix = {
     # allowedUsers = [];
-
-    buildCores=4;
 
     # This priority propagates to build processes. 0 is the default Unix process I/O priority, 7 is the lowest
     # daemonIONiceLevel = 3;

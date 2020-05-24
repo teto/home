@@ -11,6 +11,3 @@ setlocal expandtab                   " expand tabs to spaces
 let g:gutentags_ctags_executable_haskell = 'hasktags'
 
 " map gh :!hoogle <cword><CR>
-
-" Equivalent to the above.
-let b:ale_linters = {'haskell': ['hie']}

@@ -100,7 +100,7 @@ let
     # alsa-utils # for alsamixer
     arandr  # to move screens/monitors around
     hunspellDicts.fr-any
-    # buku
+    buku
     # dynamic-colors # to change the terminal colors ("dynamic-colors switch solarized-dark")
     # gcalc
     # unstable.dropbox
@@ -216,6 +216,31 @@ in
     # Not accepted. we should find another way to enable it
     # pass package for instance
     # enableBukubrow = true;
+    extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+    ];
+
+    profiles = {
+      default =  {
+        isDefault = true;
+        settings = {
+          "browser.startup.homepage" = "https://nixos.org";
+          "browser.search.region" = "FR";
+          "browser.search.isUS" = false;
+          # "distribution.searchplugins.defaultLocale" = "en-GB";
+          # "general.useragent.locale" = "en-GB";
+          # "browser.bookmarks.showMobileBookmarks" = true;
+        };
+        path = "q1pprbmm.default";
+        # extraConfig = 
+        id = 0;
+      };
+
+      nova = {
+        id = 1;
+        path = "6bt2uwrj.nova";
+        settings = {};
+      };
+    };
   };
 
   programs.browserpass = {

@@ -33,6 +33,7 @@ This folder contains my customizations for:
 * [rofi](https://github.com/DaveDavenport/rofi) (a dmenu-like interactive prompt, works with clerk/i3 etc...)
 * [starship](https://starship.rs/) (prompt manager)
 * sxiv (image viewer)
+* [sway](www.swaywm.com) (wayland window manager)
 * [termite](https://github.com/thestinger/termite) (a modal terminal)
 * [tig](https://github.com/jonas/tig) (a git history reader)
 * tmux (terminal multiplexer)

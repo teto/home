@@ -28,6 +28,7 @@ let
 
   home.packages = with pkgs; [
     virt-manager # to run ubuntu, needs libvirtd service
+    brightnessctl
     # aqemu # 0.9.2 , needs kvm/qemu
     # kvm
 
