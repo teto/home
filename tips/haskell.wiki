@@ -38,8 +38,11 @@ see https://wiki.haskell.org/FAQ#How_can_I_get_a_stack_backtrace_when_my_program
 AWSInfo{..} = RecordWildCards
 
 
-How to convert between Text/String/ByteString
+# How to convert between Text/String/ByteString
 import Data.Text.Encoding
 https://stackoverflow.com/questions/3232074/what-is-the-best-way-to-convert-string-to-bytestring
 
+# to select only some fields in a record: RecordWildCards
+record{..} will bring everything intoScope
+A better alternative is (tcpInfo@DiagTcpInfo {} ) 
 

@@ -19,12 +19,13 @@ let
       ./hm/mail.nix
       ./hm/sway.nix
 
-      ./profiles/nova-user.nix
+      ./hm/profiles/nova-user.nix
+      ./hm/profiles/nova-dev.nix
     ]
     ;
 
-  # depends from feh ?
-  programs.feh.enable = true;
+  # depends from feh ? huh not if we use sway
+  # programs.feh.enable = true;
 
   home.packages = with pkgs; [
     virt-manager # to run ubuntu, needs libvirtd service
@@ -38,6 +39,7 @@ let
   # or xkblayout-state
   home.keyboard = {
     # layout = "fr,us";
+    # ctrl:swapcaps
     # options = [ "grp:caps_toggle" "grp_led:scroll" ];
     # TODO can add Mod4 
     # grp:alt_shift_toggle,ctrl:nocaps,grp_led:scroll

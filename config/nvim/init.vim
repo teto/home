@@ -105,6 +105,7 @@ set completeopt=menu " use pum to show completions
 
 " vim-plug plugin declarations {{{1
 call plug#begin(s:plugdir)
+Plug '~/pdf-scribe.nvim'  " to annotate pdf files from nvim :PdfScribeInit
 " annotations plugins {{{
 Plug 'MattesGroeger/vim-bookmarks' " ruby  / :BookmarkAnnotate
 " 'wdicarlo/vim-notebook' " last update in 2016
@@ -1769,6 +1770,11 @@ set completeopt+=noinsert,noselect
 "}}}
 " lsp status {{{
 
+"}}}
+" pdf-scribe {{{
+" PdfScribeInit
+let g:pdfscribe_pdf_dir  = expand('$HOME').'/Nextcloud/papis_db'
+let g:pdfscribe_notes_dir = expand('$HOME').'/Nextcloud/papis_db'
 "}}}
 
 " to prettify json

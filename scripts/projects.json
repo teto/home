@@ -23,7 +23,6 @@
 	},
 	"nixpkgs": {
 		"upstream": "https://github.com/NixOS/nixpkgs.git",
-		"channels": "git://github.com/NixOS/nixpkgs-channels.git",
 		"gh": "git@github.com:teto/nixpkgs.git"
 	},
 	"nixops": {

@@ -306,7 +306,6 @@ in
     # Redisplay last message(s).
     # On the US keyboard layout "grave" is normally above TAB and left
     # of "1". Make sure this key actually exists on your keyboard layout,
-    # e.g. check output of 'xmodmap -pke'
     history = "ctrl+grave";
       };
 
@@ -327,7 +326,6 @@ in
 #     # Redisplay last message(s).
 #     # On the US keyboard layout "grave" is normally above TAB and left
 #     # of "1". Make sure this key actually exists on your keyboard layout,
-#     # e.g. check output of 'xmodmap -pke'
 #     history = ctrl+grave
     };
   };

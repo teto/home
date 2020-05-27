@@ -2,8 +2,17 @@
 -- https://github.com/neovim/nvim-lsp/issues/41
 local nvim_lsp = require 'nvim_lsp'
 local configs = require'nvim_lsp/configs'
+local lsp_status = require'lsp-status'
+
+-- completion_customize_lsp_label as used in completion-nvim
+lsp_status.config { kind_labels = vim.g.completion_customize_lsp_label }
+
+-- Register the progress callback
+lsp_status.register_progress()
 
 local attach_cb = require 'on_attach'
+
+-- configs.capabilities = vim.tbl_extend('keep', configs.capabilities or {}, lsp_status.capabilities)
 
 -- to override all defaults
 -- nvim_lsp.util.default_config = vim.tbl_extend(
@@ -155,6 +164,8 @@ nvim_lsp.pyls_ms.setup({
       asyncStartup = true,
       displayOptions = {},
     },
+	-- as per lsp_status doc
+	callbacks = lsp_status.extensions.pyls_ms.setup(),
     settings = {
       python = {
         analysis = {
@@ -185,6 +196,8 @@ nvim_lsp.texlab.setup({
 --		, "--log=verbose" -- error/info/verbose
 --		"--pretty" -- pretty print json output
 --	};
+--	-- mandated by lsp-status
+--	init_options = { clangdFileStatus = true }
 --})
 
 

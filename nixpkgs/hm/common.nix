@@ -27,6 +27,9 @@ rec {
     ./xdg-mime.nix
   ];
 
+  home.username = "teto";
+  home.homeDirectory = "/home/teto";
+
   # home.extraOutputsToInstall = [ "man" "doc" ];
   programs.man.enable = true;
 
@@ -79,8 +82,7 @@ rec {
   # https://github.com/commercialhaskell/stack/issues/2358
   # home.file.".stack/config.yaml".source = ../home/stack.yaml;
 
-  # 20.03
-  home.stateVersion = "19.09";
+  home.stateVersion = "20.09";
 
   # see tips/haskell.md, an incomplete cabal config can be a pain
   # - absence of repostiory will make cabal update fail

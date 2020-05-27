@@ -193,6 +193,15 @@ let
 
   networking.iproute2.enable = true;
 
+  # to fix tearing with optimus
+  #hardware.nvidia.modesetting.enable = true;
+  ##experimental 
+  #hardware.nvidia.powerManagement.enable = false;
+  #services.xserver.videoDrivers = 
+  # hardware.nvidiaOptimus.disable = false;
+
+  # services.xserver.videoDrivers = [ "nvidia" ];
+
   nix = {
     package = pkgs.nixFlakes;
 

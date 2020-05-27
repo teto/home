@@ -1,0 +1,8 @@
+
+exec_always --no-startup-id "setxkbmap -layout us,no -option grp:win_space_toggle"
+
+# To reset options, there is no other choice but to reset all of them apparently with an empty `-option`
+setxkbmap -option
+
+see `man xkeyboard-config`
+https://unix.stackexchange.com/questions/45447/other-than-alt-shift-to-switch-keyboard-layout-any-other-xorg-key-combination

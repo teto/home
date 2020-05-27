@@ -9,10 +9,12 @@ let
   });
 
   # or use {pkgs.kitty}/bin/kitty
-  term = "kitty";
+  term = "${pkgs.kitty}/bin/kitty";
 
 
   sharedExtraConfig = ''
+      exec_always --no-startup-id setxkbmap -layout us
+
       set $GroupUs Group1
       set $GroupFr Group2
 
@@ -140,7 +142,7 @@ in
           background = "#d70a53";
           text = "#FFFF50";
           indicator = "#FFFF50";
-          childBorder = "white";
+          childBorder = "#ffffff";
         };
       # client.focused_inactive $focused_border_inactive  $focinac_bg $focinac_txt  #090e14
         focusedInactive = {
@@ -148,7 +150,7 @@ in
           background = "#06090d";
           text = "#696f89";
           indicator = "#090e14";
-          childBorder = "red";
+          childBorder = "#ff0000";
         };
 
       # client.unfocused        $unfocused_border $unfocused_border_bg $unfocused_txt #090e14
@@ -157,7 +159,7 @@ in
           background = "#605C57";
           text = "#ffffff";
           indicator  = "#090e14";
-          childBorder = "red";
+          childBorder = "#ff0000";
         };
 
         urgent = {
@@ -165,13 +167,14 @@ in
           background = "#870000";
           text = "#ffffff";
           indicator = "#090e14";
-          childBorder = "red";
+          childBorder = "#ff0000";
         };
 
       };
 
       focus.followMouse = false;
-      fonts = [ "pango:FontAwesome 12" "Terminus 10" ];
+      # pango:
+      fonts = [ "FontAwesome 12" "Terminus 10" ];
       bars = [
         {
           position="top";
@@ -187,7 +190,7 @@ in
       # todo use assigns instead
       startup=[
         # TODO improve config/config specific
-        { command= "setxkbmap -layout us"; always = true; notification = false; }
+        # { command= "setxkbmap -layout us"; always = true; notification = false; }
         # { command= "xkblayout-state set +1"; always = false; notification = false; }
         # todo convert to a HM stuff
         ];

@@ -16,8 +16,8 @@ alias -s gif=xdg-open
 alias -s avi=mpv
 alias -s mp3=mocp
 alias -s pdf=xdg-open
-alias -s doc=xdg-open
-alias -s docx=xdg-open
+alias -s {doc,docx}=xdg-open
+alias -s git="git clone"
 
 
 alias dfh="df --human-readable"

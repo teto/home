@@ -42,7 +42,6 @@ in
   # you can switch from cli with xkb-switch
   # or xkblayout-state
   # xev -event keyboard to retreive key symbols
-  # xmodmap will show the modifiers list
   home.keyboard = {
     layout = "us,fr";
     # options = [ "grp:caps_toggle" "grp_led:scroll" ];
