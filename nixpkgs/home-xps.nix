@@ -39,11 +39,12 @@ let
   # or xkblayout-state
   home.keyboard = {
     # layout = "fr,us";
-    # ctrl:swapcaps
+    # 
     # options = [ "grp:caps_toggle" "grp_led:scroll" ];
     # TODO can add Mod4 
     # grp:alt_shift_toggle,ctrl:nocaps,grp_led:scroll
-    options = [ "add Mod1 Alt_R" "ctrl:nocaps"];
+    # "ctrl:nocaps"
+    options = [ "add Mod1 Alt_R"  "ctrl:swapcaps" ];
     # options = [ "add Mod1 Alt_R" ];
   };
 

@@ -8,18 +8,22 @@ local lsp_status = require'lsp-status'
 lsp_status.config { kind_labels = vim.g.completion_customize_lsp_label }
 
 -- Register the progress callback
-lsp_status.register_progress()
+-- lsp_status.register_progress()
 
+
+-- custom attach callback
 local attach_cb = require 'on_attach'
 
--- configs.capabilities = vim.tbl_extend('keep', configs.capabilities or {}, lsp_status.capabilities)
 
+-- this generates an error
 -- to override all defaults
--- nvim_lsp.util.default_config = vim.tbl_extend(
---   "force",
---   nvim_lsp.util.default_config,
 --   { log_level = lsp.protocol.MessageType.Warning.Error }
--- )
+nvim_lsp.util.default_config.capabilities = vim.tbl_extend(
+  "force",
+  nvim_lsp.util.default_config.capabilities or {},
+  -- enable 'progress' support in lsp servers
+  lsp_status.capabilities
+)
 
 -- vim.lsp.util.show_current_line_diagnostics()
 -- Check if it's already defined for when I reload this file.
@@ -190,31 +194,34 @@ nvim_lsp.texlab.setup({
   }
 })
 
---nvim_lsp.clangd.setup({
---	--compile-commands-dir=build
---    cmd = {"clangd", "--background-index", 
---		, "--log=verbose" -- error/info/verbose
---		"--pretty" -- pretty print json output
---	};
---	-- mandated by lsp-status
---	init_options = { clangdFileStatus = true }
---})
+nvim_lsp.clangd.setup({
+	--compile-commands-dir=build
+    cmd = {"clangd", "--background-index", 
+		"--log=info", -- error/info/verbose
+		"--pretty" -- pretty print json output
+	};
+	-- 'build/compile_commands.json',
+	root_dir = nvim_lsp.util.root_pattern( '.git'),
+	-- mandated by lsp-status
+	init_options = { clangdFileStatus = true },
+	callbacks = lsp_status.extensions.clangd.setup()
+})
 
 
 -- https://github.com/MaskRay/ccls/wiki/Debugging
-nvim_lsp.ccls.setup({
-	name = "ccls",
-	filetypes = { "c", "cpp", "objc", "objcpp" },
-	cmd = { "ccls", "--log-file=/tmp/ccls.log", "-v=1" },
-	log_level = vim.lsp.protocol.MessageType.Log;
-	root_dir = nvim_lsp.util.root_pattern(".git");
-	init_options = {
-		-- "compilationDatabaseDirectory": "/home/teto/mptcp/build",
-		clang = { excludeArgs = { "-m*", "-Wa*" } },
-		cache = { directory = "/tmp/ccls" }
-	},
-	on_attach = attach_cb.on_attach
-})
+-- nvim_lsp.ccls.setup({
+-- 	name = "ccls",
+-- 	filetypes = { "c", "cpp", "objc", "objcpp" },
+-- 	cmd = { "ccls", "--log-file=/tmp/ccls.log", "-v=1" },
+-- 	log_level = vim.lsp.protocol.MessageType.Log;
+-- 	root_dir = nvim_lsp.util.root_pattern(".git");
+-- 	init_options = {
+-- 		-- "compilationDatabaseDirectory": "/home/teto/mptcp/build",
+-- 		clang = { excludeArgs = { "-m*", "-Wa*" } },
+-- 		cache = { directory = "/tmp/ccls" }
+-- 	},
+-- 	on_attach = attach_cb.on_attach
+-- })
 
 -- config at https://raw.githubusercontent.com/palantir/python-language-server/develop/vscode-client/package.json
 nvim_lsp.pyls.setup({
@@ -255,20 +262,111 @@ nvim_lsp.pyls.setup({
 	};
 })
 
+local function preview_location_callback(_, method, result)
+  if result == nil or vim.tbl_isempty(result) then
+    vim.lsp.log.info(method, 'No location found')
+    return nil
+  end
+  if vim.tbl_islist(result) then
+    vim.lsp.util.preview_location(result[1])
+  else
+    vim.lsp.util.preview_location(result)
+  end
+end
 
--- jsut to check if issues are mine or not
--- do
---   local method = 'textDocument/publishDiagnostics'
---   local default_callback = vim.lsp.callbacks[method]
---   vim.lsp.callbacks[method] = function(err, method, result, client_id)
---     default_callback(err, method, result, client_id)
---     if result and result.diagnostics then
---     --   for _, v in ipairs(result.diagnostics) do
---     --     v.uri = v.uri or result.uri
---     --   end
---       vim.lsp.util.set_loclist(result.diagnostics)
---     end
---   end
+-- taken from https://github.com/neovim/neovim/pull/12368
+function peek_definition()
+  local params = vim.lsp.util.make_position_params()
+  return vim.lsp.buf_request(0, 'textDocument/definition', params, preview_location_callback)
+end
+
+
+vim.g.indicator_errors = ''
+vim.g.indicator_warnings = ''
+vim.g.indicator_info = '🛈'
+vim.g.indicator_hint = '❗'
+vim.g.indicator_ok = ''
+vim.g.spinner_frames = {'⣾', '⣽', '⣻', '⢿', '⡿', '⣟', '⣯', '⣷'}
+
+vim.g.should_show_diagnostics_in_statusline = true
+
+function StatusLineLSP()
+	return lsp_status.status()
+end
+  -- if #vim.lsp.buf_get_clients() == 0 then
+  --   return ''
+  -- end
+
+  -- local status_parts = {}
+  -- local base_status = ''
+
+  -- local some_diagnostics = false
+  -- local only_hint = true
+
+  -- if vim.g.should_show_diagnostics_in_statusline then
+  --   local diagnostics = lsp_status.diagnostics()
+  --   local buf_messages = lsp_status.messages()
+  --   if diagnostics.errors and diagnostics.errors > 0 then
+  --     table.insert(status_parts, vim.g.indicator_errors .. ' ' .. diagnostics.errors)
+  --     only_hint = false
+  --     some_diagnostics = true
+  --   end
+
+  --   if diagnostics.warnings and diagnostics.warnings > 0 then
+  --     table.insert(status_parts, vim.g.indicator_warnings .. ' ' .. diagnostics.warnings)
+  --     only_hint = false
+  --     some_diagnostics = true
+  --   end
+
+  --   if diagnostics.info and diagnostics.info > 0 then
+  --     table.insert(status_parts, vim.g.indicator_info .. ' ' .. diagnostics.info)
+  --     only_hint = false
+  --     some_diagnostics = true
+  --   end
+
+  --   if diagnostics.hints and diagnostics.hints > 0 then
+  --     table.insert(status_parts, vim.g.indicator_hint .. ' ' .. diagnostics.hints)
+  --     some_diagnostics = true
+  --   end
+
+  --   local msgs = {}
+  --   for _, msg in ipairs(buf_messages) do
+  --     local name = aliases[msg.name] or msg.name
+  --     local client_name = '[' .. name .. ']'
+  --     if msg.progress then
+  --       local contents = msg.title
+  --       if msg.message then
+  --         contents = contents .. ' ' .. msg.message
+  --       end
+
+  --       if msg.percentage then
+  --         contents = contents .. ' (' .. msg.percentage .. ')'
+  --       end
+
+  --       if msg.spinner then
+  --         contents = vim.g.spinner_frames[(msg.spinner % #vim.g.spinner_frames) + 1] .. ' ' .. contents
+  --       end
+
+  --       table.insert(msgs, client_name .. ' ' .. contents)
+  --     else
+  --       table.insert(msgs, client_name .. ' ' .. msg.content)
+  --     end
+  --   end
+
+  --   base_status = vim.trim(table.concat(status_parts, ' ') .. ' ' .. table.concat(msgs, ' '))
+  -- end
+
+  -- local symbol = ' 🇻' .. ((some_diagnostics and only_hint) and '' or ' ')
+  -- local current_function = vim.b.lsp_current_function
+  -- if current_function and current_function ~= '' then
+  --   symbol = symbol .. '(' .. current_function .. ') '
+  -- end
+
+  -- if base_status ~= '' then
+  --   return symbol .. base_status .. ' '
+  -- end
+
+  -- return symbol .. vim.g.indicator_ok .. ' '
 -- end
 
 -- to disable virtualtext check 

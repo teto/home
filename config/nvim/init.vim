@@ -314,7 +314,6 @@ Plug 'florentc/vim-tla'
 
 " Plug 'Valloric/ListToggle' " toggle location/quickfix list toggling seems to fail
 " Plug 'git@github.com:milkypostman/vim-togglelist' " same
-" still problems with airline when installed via nix
 Plug '907th/vim-auto-save' " :h auto-save
 " Plug 'teto/vim-auto-save' " autosave :h auto-save
 " Plug 'bfredl/nvim-miniyank' " killring alike plugin, cycling paste careful search for :Yank commands
@@ -337,8 +336,7 @@ Plug 'wellle/targets.vim' " Adds new motion targets ci{
 " }}}
 
 Plug 'dietsche/vim-lastplace' " restore last cursor postion (is it still needed ?)
-" Powerline does not work in neovim hence use vim-airline instead
-Plug 'vim-airline/vim-airline'
+" Plug 'vim-airline/vim-airline'
 " Plug '~/vim-airline'
 Plug 'vim-airline/vim-airline-themes' " creates problems if not here
 " Plug 'hrsh7th/vim-vsnip' " vscode/lsp snippet format
@@ -2263,10 +2261,37 @@ nnoremap cd :lcd %:p:h<bar>pwd<cr>
 nnoremap cu :lcd ..<bar>pwd<cr>
 
 "linewise partial staging in visual-mode.
-xnoremap <c-p> :diffput<cr>
-xnoremap <c-o> :diffget<cr>
+xnoremap <c-p> <Cmd>diffput<cr>
+xnoremap <c-o> <Cmd>diffget<cr>
 " nnoremap <expr> dp &diff ? 'dp' : ':Printf<cr>'
 
+
+function! SetStatusline() abort
+    " Setup for variables
+    let g:_active_buffer = bufnr('%')
+
+    " Left section
+    let stl = ''
+    " let stl .= my_stl#get_mode()
+    " let stl .= '%*'
+    " let stl .= my_stl#add_left_separator()
+
+  " let stl .= '%#NvimOperator#'
+  let stl = '%{v:lua.StatusLineLSP()}'
+  " let stl .= '%* '
+  " set statusline=stl
+  " let &l:statusline = '%#MyStatuslineLSP#LSP '.LspStatus() 
+  return stl
+
+endfunction
+
+" lsp_status.status()
+" Set the statusline for non airline times
+"   let stl = '%{v:lua.StatusLineLSP()}'
+
+" set statusline=%{v:lua.StatusLineLSP()}
+" set statusline=%!SetStatusline()
+" lsp_status.status()
 " command! ProfileVim     exe 'Start '.v:progpath.' --startuptime "'.expand("~/vimprofile.txt").'" -c "e ~/vimprofile.txt"'
 " command! NvimTestScreenshot put =\"local Screen = require('test.functional.ui.screen')\nlocal screen = Screen.new()\nscreen:attach()\nscreen:snapshot_util({},true)\"
 

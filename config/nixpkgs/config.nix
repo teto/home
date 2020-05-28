@@ -1,8 +1,7 @@
 { pkgs }:
 {
 	permittedInsecurePackages = [
-		# "webkitgtk-2.4.11" # for astroid
-         # "linux-4.13.16"
+         "xpdf-4.02"  # for pdftotext
 	];
 	allowBroken = true;
 	allowUnfree = true;

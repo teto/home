@@ -237,14 +237,17 @@ rec {
         withRuby = false; # for vim-rfc/GhDashboard etc.
         withNodeJs = true; # used by coc.vim
 
+        # for pdf2text
+        # addToPath = [ poppler_utils ];
+
         # TODO use them only if
         customRC = ''
           " always see at least 10 lines
           set scrolloff=10
           set hidden
-
+        autocmd BufReadPost *.pdf silent %!${prev.pkgs.xpdf}/bin/pdftotext -nopgbrk -layout -q -eol unix "%" - | fmt -w78
         ''
-        # autocmd BufReadPost *.pdf silent %!${prev.pkgs.xpdf}/bin/pdftotext -nopgbrk -layout -q -eol unix "%" - | fmt -w78
+        # autocmd BufReadPost *.pdf silent %!${prev.pkgs.poppler_utils}/bin/pdftotext -nopgbrk -layout -q -eol unix "%" - | fmt -w78
         # if we support coc.nvim
         # + ''
         #   let g:coc_node_path = '${prev.pkgs.nodejs}/bin/node'
@@ -306,7 +309,7 @@ rec {
     doCheck=true;
     # withDoc=true;
     devMode=true;
-    stdenv = final.pkgs.clangStdenv;
+    stdenv = final.pkgs.llvmPackages_latest.stdenv;
   }).overrideAttrs(oa:{
     cmakeBuildType="debug";
 
