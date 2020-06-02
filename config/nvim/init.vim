@@ -2199,10 +2199,12 @@ autocmd CursorMoved lua vim.lsp.util.show_line_diagnostics()
 hi LspDiagnosticsUnderline cterm=underline gui=undercurl
 
 " ✘'
-let g:LspDiagnosticsErrorSign = 'T'
-let g:LspDiagnosticsWarningSign = 'R'
-let g:LspDiagnosticsInformationSign = 'I'
-let g:LspDiagnosticsHintSign = 'H'
+" 
+" TODO update
+sign define LspDiagnosticsErrorSign text=E
+sign define LspDiagnosticsWarningSign text=W
+sign define LspDiagnosticsInformationSign text=I
+sign define LspDiagnosticsHintSign text=H
 
 function! LspStatus() abort
     let sl = ''
@@ -2219,8 +2221,6 @@ endfunction
 
 " let &l:statusline = '%#MyStatuslineLSP#LSP '.LspStatus() 
 
-" vim.lsp.util.set_qflist
-" location_callback
 " }}}
 
 " treesitter config {{{
@@ -2270,17 +2270,7 @@ function! SetStatusline() abort
     " Setup for variables
     let g:_active_buffer = bufnr('%')
 
-    " Left section
-    let stl = ''
-    " let stl .= my_stl#get_mode()
-    " let stl .= '%*'
-    " let stl .= my_stl#add_left_separator()
-
-  " let stl .= '%#NvimOperator#'
   let stl = '%{v:lua.StatusLineLSP()}'
-  " let stl .= '%* '
-  " set statusline=stl
-  " let &l:statusline = '%#MyStatuslineLSP#LSP '.LspStatus() 
   return stl
 
 endfunction
@@ -2289,9 +2279,8 @@ endfunction
 " Set the statusline for non airline times
 "   let stl = '%{v:lua.StatusLineLSP()}'
 
-" set statusline=%{v:lua.StatusLineLSP()}
+set statusline=%{v:lua.StatusLineLSP()}
 " set statusline=%!SetStatusline()
-" lsp_status.status()
 " command! ProfileVim     exe 'Start '.v:progpath.' --startuptime "'.expand("~/vimprofile.txt").'" -c "e ~/vimprofile.txt"'
 " command! NvimTestScreenshot put =\"local Screen = require('test.functional.ui.screen')\nlocal screen = Screen.new()\nscreen:attach()\nscreen:snapshot_util({},true)\"
 

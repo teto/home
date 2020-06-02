@@ -70,16 +70,15 @@ let
   };
 
   # xrandr --output  eDP1 --mode 1600x900
-  xsession.initExtra = ''
-  '';
+  # xsession.initExtra = ''
+  # '';
 
+  # TODO try plugins
   # programs.vscode = {
   #   enable = true;
   #   haskell.enable = true;
   #   haskell.hie.enable = true;
   # };
-    # xrandr --output  eDP1 --mode 1600x900
-  # '';
 
 }
 

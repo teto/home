@@ -44,7 +44,7 @@ M.on_attach = function(client)
 	-- Not sure if this is right
 	-- vim.cmd("setlocal omnifunc=lsp#omnifunc")
 
-	-- setup_progress(client)
+	setup_progress(client)
 	-- Register client for messages and set up buffer autocommands to update 
 -- the statusline and the current function
 end

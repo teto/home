@@ -1,6 +1,6 @@
 # https://nixos.wiki/wiki/Linux_Kernel
 # configfile.passthru.structuredConfig
-self: prev:
+final: prev:
 # with prev.lib.kernel;
 
 
@@ -81,7 +81,7 @@ let
 in rec {
 
   linux_mptcp_official = prev.linux_5_6.override {
-    structuredExtraConfig = with self.lib.kernel; {
+    structuredExtraConfig = with final.lib.kernel; {
       MPTCP     =yes;
       MPTCP_IPV6=yes;
     };
@@ -191,7 +191,7 @@ in rec {
   #   '';
   # });
 
-  # linux_mptcp_trunk_test = self.linux_mptcp_trunk.overrideAttrs(oa: {
+  # linux_mptcp_trunk_test = final.linux_mptcp_trunk.overrideAttrs(oa: {
   #   src = prev.fetchFromGitHub {
   #     owner = "teto";
   #     repo = "mptcp";

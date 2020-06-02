@@ -7,8 +7,6 @@ local lsp_status = require'lsp-status'
 -- completion_customize_lsp_label as used in completion-nvim
 lsp_status.config { kind_labels = vim.g.completion_customize_lsp_label }
 
--- Register the progress callback
--- lsp_status.register_progress()
 
 
 -- custom attach callback
@@ -41,20 +39,6 @@ if not configs.lua_lsp then
   }
 end
 
--- if not nvim_lsp.ghcide then
---   configs.ghcide = {
--- 	  default_config = {
--- 		name = "ghcide";
--- 		cmd = {"ghcide", "--lsp"};
--- 		filetypes = { "hs", "lhs", "haskell" };
--- 		root_dir = function(fname)
--- 			return nvim_lsp.util.find_git_ancestor(fname) or vim.loop.os_homedir()
--- 		end;
--- 		log_level = vim.lsp.protocol.MessageType.Warning;
--- 		settings = {};
--- 	};
---   }
--- end
 
 nvim_lsp.lua_lsp.setup{}
 -- sumneko_lua
@@ -79,11 +63,11 @@ nvim_lsp.ghcide.setup({
 	cmd = {"ghcide", "--lsp"};
 	filetypes = { "hs", "lhs", "haskell" };
 
-		-- ".stack.yaml",
-        -- ".hie-bios",
-        -- "BUILD.bazel",
-        -- "cabal.config",
-        -- "package.yaml"
+	-- ".stack.yaml",
+	-- ".hie-bios",
+	-- "BUILD.bazel",
+	-- "cabal.config",
+	-- "package.yaml"
 	root_dir = function(fname)
 		return nvim_lsp.util.find_git_ancestor(fname) or vim.loop.os_homedir()
 	end;
@@ -207,6 +191,7 @@ nvim_lsp.clangd.setup({
 	callbacks = lsp_status.extensions.clangd.setup()
 })
 
+-- lua vim.lsp.buf.hover()
 
 -- https://github.com/MaskRay/ccls/wiki/Debugging
 -- nvim_lsp.ccls.setup({
