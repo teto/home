@@ -30,7 +30,7 @@ in
      hashedPassword = "$6$T/5zYuCMI$U45oW0D6cPKsXtETwlNFpsit924HElAYtXPsGTpj0XS/ITUz39xpPxnL.kzUWqeqQmRxvEOAHBeKm5/xHDrvs1";
 
 
-     openssh.authorizedKeys.keyFiles = [ ./keys/iij_rsa.pub ];
+     openssh.authorizedKeys.keyFiles = [ ../keys/iij_rsa.pub ];
 
      packages = with pkgs; [
        pciutils # for lspci

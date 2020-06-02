@@ -5,9 +5,7 @@ XDG_CACHE_HOME ?= $(HOME)/.cache
 XDG_DATA_HOME ?= $(HOME)/.local/share
 MAILDIR ?= $(HOME)/maildir
 
-MPTCPANALYZER_FOLDER = "${HOME}/mptcpanalyzer"
 BLOG_FOLDER = "${HOME}/blog"
-NEOVIM_FOLDER = "${HOME}/neovim"
 
 mkfile_path := $(abspath $(lastword $(MAKEFILE_LIST)))
 mkfile_dir := $(dir $(mkfile_path))
@@ -65,7 +63,7 @@ keyring:
 cache:
 	#mkdir -p $(shell echo "${XDG_CACHE_HOME:-$HOME/.cache}/less")
 	# todo should be done
-	mkdir -p ${XDG_CACHE_HOME}/less ${XDG_CACHE_HOME}/mptcpanalyzer ${XDG_CACHE_HOME}/vdirsyncer
+	mkdir -p ${XDG_CACHE_HOME}/less ${XDG_CACHE_HOME}/vdirsyncer
 
 fonts:
 	echo "Regenerating cache"
@@ -82,12 +80,6 @@ nautilus:
 blog: | $(BLOG_FOLDER)
 $(BLOG_FOLDER):
 	git clone gitolite@iij_vm:blog.git "${BLOG_FOLDER}"
-
-neovim: | $(NEOVIM_FOLDER)
-$(NEOVIM_FOLDER):
-	git clone git@github.com:teto/neovim.git "${NEOVIM_FOLDER}"
-	cd "${NEOVIM_FOLDER}"; \
-		git remote add upstream git@github.com:teto/neovim.git
 
 vim_plugins:
 	# /home/teto/nixpkgs/pkgs/misc/vim-plugins/update.py

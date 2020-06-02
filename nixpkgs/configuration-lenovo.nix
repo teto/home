@@ -35,7 +35,9 @@ in
     #   _file = "matt";
     #   # boot.kernel.checkPackageConfig = true;
     # })
-    ./modules/mptcp.nix
+
+    # TODO use from flake or from unstable
+    # ./modules/mptcp.nix
   ]
   ;
 
