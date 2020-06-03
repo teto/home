@@ -10,6 +10,10 @@ in
     # ./hardware-dell.nix
    ./hardware-lenovo.nix
 
+    # for nova dev
+    ./modules/docker-daemon.nix
+    ./profiles/nova-dev.nix
+
     ./modules/distributedBuilds.nix
     ./modules/config-all.nix
     ./modules/desktop.nix
@@ -249,8 +253,8 @@ in
     '';
 
     distributedBuilds = false;
-    # package = pkgs.nixFlakes;
-    package = pkgs.nixUnstable;
+    package = pkgs.nixFlakes;
+    # package = pkgs.nixUnstable;
   };
 
   # kind of a test

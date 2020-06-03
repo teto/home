@@ -1,0 +1,6 @@
+wrong content-type can trigger a 415 error
+application/octet-stream
+curl -v -X PUT -d @request.json -H 'Content-Type: application/json' 127.0.0.1:5001/result/task_id/42.csv
+
+
+curl -i -X POST -H "Content-Type: application/json;=" -d '{"user":"bar","pass":"foooo"}' http://localhost:8000

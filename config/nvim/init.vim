@@ -336,7 +336,7 @@ Plug 'wellle/targets.vim' " Adds new motion targets ci{
 " }}}
 
 Plug 'dietsche/vim-lastplace' " restore last cursor postion (is it still needed ?)
-" Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline'
 " Plug '~/vim-airline'
 Plug 'vim-airline/vim-airline-themes' " creates problems if not here
 " Plug 'hrsh7th/vim-vsnip' " vscode/lsp snippet format

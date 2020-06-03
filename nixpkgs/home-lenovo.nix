@@ -17,6 +17,7 @@ let
       # ./modules/vdirsyncer.nix
       # ./hm/sway.nix
       ./hm/neomutt.nix
+      ./hm/profiles/nova-dev.nix
 
       ./hm/mail.nix
       ./hm/extra.nix
