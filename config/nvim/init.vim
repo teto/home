@@ -2265,21 +2265,6 @@ xnoremap <c-p> <Cmd>diffput<cr>
 xnoremap <c-o> <Cmd>diffget<cr>
 " nnoremap <expr> dp &diff ? 'dp' : ':Printf<cr>'
 
-
-function! SetStatusline() abort
-    " Setup for variables
-    let g:_active_buffer = bufnr('%')
-
-  let stl = '%{v:lua.StatusLineLSP()}'
-  return stl
-
-endfunction
-
-" lsp_status.status()
-" Set the statusline for non airline times
-"   let stl = '%{v:lua.StatusLineLSP()}'
-
-set statusline=%{v:lua.StatusLineLSP()}
 " set statusline=%!SetStatusline()
 " command! ProfileVim     exe 'Start '.v:progpath.' --startuptime "'.expand("~/vimprofile.txt").'" -c "e ~/vimprofile.txt"'
 " command! NvimTestScreenshot put =\"local Screen = require('test.functional.ui.screen')\nlocal screen = Screen.new()\nscreen:attach()\nscreen:snapshot_util({},true)\"

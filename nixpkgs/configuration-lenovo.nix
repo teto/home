@@ -21,6 +21,7 @@ in
     ./modules/libvirtd.nix
     # ./modules/vpn.nix
     ./modules/openssh.nix
+    ./modules/hoogle.nix
     ./modules/tor.nix
 
     # ./modules/sway.nix
@@ -131,7 +132,7 @@ in
 
   # DOES NOT WORK !
   # boot.kernelPackages = unstable.pkgs.linuxPackages;
-  # boot.kernelPackages = pkgs.linuxPackages;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   # boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_latest_without_ns;
 

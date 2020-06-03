@@ -1,7 +1,7 @@
 " Moved here since I install it via nix and thus when nvim isn't wrapped it
 " fails pathetically
+" check :h airline-advanced-customization
 
-" airline_active
 if !exists("g:loaded_airline")
 	finish
 endif
@@ -11,8 +11,26 @@ endif
 let g:airline#extensions#disable_rtp_load = 1
 
 let g:airline#extensions#tabline#enabled = 1
-let g:airline_disable_statusline = 1
+let g:airline_disable_statusline = 0
 
+" LSP
+call airline#parts#define_function('lsp_status', 'StatusLSP')
+" call airline#parts#define_minwidth('lsp_status', 5) 
+" call airline#parts#define_condition('foo', 'getcwd() =~ "work_dir"')
+
+function! StatusLSP() abort
+    " Setup for variables
+	" let g:_active_buffer = bufnr('%')
+	let stl = '%{v:lua.StatusLineLSP()}'
+	return stl
+endfunction
+
+let g:airline_section_y = airline#section#create_right(['lsp_status'])
+
+" lsp_status.status()
+" Set the statusline for non airline times
+"   let stl = '%{v:lua.StatusLineLSP()}'
+" set statusline=%{v:lua.StatusLineLSP()}
 
 
 " 'neomake', 

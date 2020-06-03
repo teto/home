@@ -27,7 +27,7 @@
     ];
 
   fileSystems."/mnt/ext" =
-    { device = "/dev/sda1";
+    { device = "/dev/sdc1";
       fsType = "ext4";
       # "uid=teto" 
       options = [ "exec" "rw" "user" "nofail" ];
@@ -35,7 +35,7 @@
 
   fileSystems."/mnt/ntfs" =
     {
-      device = "/dev/sda2";
+      device = "/dev/sdc2";
       fsType = "ntfs";
       # see https://nixos.wiki/wiki/NTFS
       options = [ "rw" "uid=teto""nofail"  ];

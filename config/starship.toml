@@ -4,10 +4,17 @@
 add_newline = false
 # prompt_order = 
 
+[aws]
+disabled = true
+# displayed_items
+symbol = "🅰 "
+displayed_items = "region"
+
 # Replace the "❯" symbol in the prompt with "➜"
 [character]      # The name of the module we are confguring is "character"
 symbol = "➜"     # The "symbol" segment is being set to "➜"
-vicmd_symbol = "vicmd"  # "❮"
+vicmd_symbol = "v"  # "❮"
+
 # Disable the package module, hiding it from the prompt completely
 [package]
 disabled = true
@@ -16,7 +23,7 @@ disabled = true
 disabled = false
 use_name = true
 # style = "bold red"
-impure_msg = "impure shell"
+impure_msg = "IMPURE"
 pure_msg = "pure shell"
 
 [kubernetes]
@@ -53,7 +60,7 @@ disabled = true
 disabled = false
 
 [haskell]
-disabled = true
+disabled = false
 
 [python]
 symbol = "👾 "

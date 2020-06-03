@@ -8,7 +8,7 @@ in
 {
 
   home.packages = [
-    pkgs.aws
+    pkgs.awscli # be careful the aws 
     # pkgs.mongodb-compass  # either crashes or fail to build
     pkgs.robo3t  # another mongoDB gui
     pkgs.minio-client  # mc

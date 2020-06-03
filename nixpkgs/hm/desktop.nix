@@ -146,7 +146,6 @@ let
     zathura
   ]
   ++ lib.optionals all [
-    unstable.libreoffice
     gnome3.gnome-calculator  # compare with qalqulate-gtk
   ]
   ;
@@ -164,7 +163,7 @@ let
     # anki          # spaced repetition system
     # hopefully we can remove this from the environment
     # it's just that I can't setup latex correctly
-    unstable.libreoffice
+    # unstable.libreoffice
     unstable.wireshark
 
     unstable.qutebrowser  # keyboard driven fantastic browser

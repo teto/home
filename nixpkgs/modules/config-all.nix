@@ -64,7 +64,6 @@ rec {
      # lgogdownloader
      # libtool
      lsof
-     # libreoffice # too long to compile
 	 # gawk
      gitAndTools.gitFull # to get send-email
 	 # git-extras # does not find it (yet)
