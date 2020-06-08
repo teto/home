@@ -171,7 +171,7 @@ let
     flavor = "gmail.com";
     smtp.tls.useStartTls = true;
 
-    passwordCommand = getPassword "nova_mail";
+    passwordCommand = getPassword "nova/mail";
   };
   # }}}
 
@@ -213,10 +213,7 @@ let
     flavor = "gmail.com";
     smtp.tls.useStartTls = true;
 
-    # loginCommand =
-    # passwordCommand = "${pkgs.libsecret}/bin/secret-tool lookup gmail password";
-    # builtins.toString
-    passwordCommand = getPassword "gmail";
+    passwordCommand = getPassword "perso/gmail";
   };
 
 in

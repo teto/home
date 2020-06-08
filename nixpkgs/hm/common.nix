@@ -223,6 +223,17 @@ rec {
   # home.activation.setXDGbrowser = dagEntryBefore [ "linkGeneration" ] ''
   # xdg-settings set default-web-browser firefox.desktop
 
+  home.keyboard = {
+    # layout = "fr,us";
+    # options = [ "grp:caps_toggle" "grp_led:scroll" ];
+    # TODO can add Mod4 
+    # grp:alt_shift_toggle,ctrl:nocaps,grp_led:scroll
+    # "ctrl:nocaps"
+    options = [
+      "ctrl:nocaps"  # makes caps lock an additionnal ctrl
+    ];
+  };
+
   # don't enable it since it will override my zle-keymap-select binding
   programs.starship = {
     enable = true;

@@ -9,6 +9,10 @@
 		"gh": "git@github.com:teto/home-manager.git",
 		"upstream": "git@github.com:rycee/home-manager.git"
 	},
+	"luarocks": {
+		"upstream": "https://github.com/luarocks/luarocks.git",
+		"gh": "git@github.com:nix-community/luarocks-nix.git"
+	},
 	"wireshark": {
 		"gh_upstream": "https://github.com/wireshark/wireshark.git",
 		"upstream": "https://code.wireshark.org/review/p/wireshark.git",

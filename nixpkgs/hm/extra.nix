@@ -1,5 +1,8 @@
 # could be called home-huge.nix
 { config, lib, pkgs,  ... }:
+let
+    stable = import <nixos> {};
+in
 {
 
   home.packages = with pkgs; [
@@ -13,7 +16,7 @@
     wirelesstools # to get iwconfig
     gitAndTools.diff-so-fancy
     # aircrack-ng
-    # nodePackages.insect  # fancy calculator
+    nodePackages.insect  # fancy calculator
     nushell  # rust-based semantic shell
     tlaplus  # formal logic
     tlaplusToolbox  # from leslie lamport

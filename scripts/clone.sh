@@ -1,4 +1,5 @@
-#!/bin/sh
+#!/usr/bin/env nix-shell
+#!nix-shell -p jq -i sh
 # clone repositories
 # jq
 set -eu -o pipefail

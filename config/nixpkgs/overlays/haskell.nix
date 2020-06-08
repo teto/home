@@ -28,7 +28,6 @@ final: prev:
           # time-compat = doJailbreak (hold.time-compat);
 
       # ip = dontCheck hprev.ip;
-      # c2hsc = dontCheck hprev.c2hsc;
 
       # should not be needed anymore right ?
       # tensorflow-core-ops = appendPatch (hprev.tensorflow-core-ops) ./pkgs/tensorflow.patch;

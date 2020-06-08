@@ -1287,6 +1287,7 @@ nnoremap <leader>pu <Cmd>PlugUpdate<CR>
 " }}}
 " signify (display added/removed lines from vcs) {{{
 let g:signify_vcs_list = [ 'git']
+let g:signify_priority = 2
 " let g:signify_mapping_next_hunk = '<leader>hn' " hunk next
 " let g:signify_mapping_prev_hunk = '<leader>gk'
 " let g:signify_mapping_toggle_highlight = '<leader>gh'
@@ -2265,7 +2266,16 @@ xnoremap <c-p> <Cmd>diffput<cr>
 xnoremap <c-o> <Cmd>diffget<cr>
 " nnoremap <expr> dp &diff ? 'dp' : ':Printf<cr>'
 
+function! StatusLSP() abort
+    " Setup for variables
+	" let g:_active_buffer = bufnr('%')
+	let stl = '%{v:lua.StatusLineLSP()}'
+	return stl
+endfunction
+
+
 " set statusline=%!SetStatusline()
+
 " command! ProfileVim     exe 'Start '.v:progpath.' --startuptime "'.expand("~/vimprofile.txt").'" -c "e ~/vimprofile.txt"'
 " command! NvimTestScreenshot put =\"local Screen = require('test.functional.ui.screen')\nlocal screen = Screen.new()\nscreen:attach()\nscreen:snapshot_util({},true)\"
 

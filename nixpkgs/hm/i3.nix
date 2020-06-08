@@ -190,9 +190,6 @@ in
       # todo use assigns instead
       startup=[
         # TODO improve config/config specific
-        # { command= "setxkbmap -layout us"; always = true; notification = false; }
-        # { command= "xkblayout-state set +1"; always = false; notification = false; }
-        # todo convert to a HM stuff
         ];
 
 # bindsym $mod+m  mode "monitors"
@@ -305,18 +302,14 @@ in
         "${mod}+Ctrl+L"="exec ${pkgs.i3lock-fancy}/bin/i3lock-fancy";
         "${mod}+Ctrl+h" = ''exec "${pkgs.rofi}/bin/rofi -modi 'clipboard:greenclip print' -show clipboard"'';
         "${mod}+g" = "exec ${pkgs.i3-easyfocus}/bin/i3-easyfocus";
-        # "${mod}+ctrl+b" = "exec " + ../buku_run/buku_run;
-        "${mod}+b" = "exec ${pkgs.buku_run}/bin/buku_run";
+        # broken
+        # "${mod}+b" = "exec ${pkgs.buku_run}/bin/buku_run";
         "${mod}+p" = "exec ${pkgs.rofi-pass}/bin/rofi-pass";
 
-        # "${mod}+shift+n" = "exec ${unstable.gnome3.nautilus}/bin/nautilus";
         "${mod}+Shift+1" =  "exec qutebrowser";
 
-      # "${mod}+Shift+Return" = "exec --no-startup-id ${pkgs.termite -d "$(xcwd)"
-# bindsym $GroupFr+$mod+eacute i3-list-windows
-# bindsym $GroupUs+$mod+2 i3-list-windows
+        # "${mod}+Shift+Return" = "exec --no-startup-id ${pkgs.termite -d "$(xcwd)"
 
-        # "${mod}+shift+q"="exec ${pkgs.gnome3.nautilus}/bin/nautilus";
         "XF86MonBrightnessUp" = "exec ${pkgs.xorg.xbacklight}/bin/xbacklight -inc 10";
         "XF86MonBrightnessDown" = "exec ${pkgs.xorg.xbacklight}/bin/xbacklight -dec 10";
 
@@ -327,10 +320,6 @@ in
         # XF86AudioPrev exec mpc prev; exec notify-send "Audio prev"
         # XF86AudioPause exec mpc toggle; exec notify-send "Audio Pause"
       # } // {
-        # alsa version
-        # XF86AudioRaiseVolume=if home.packages ?  exec amixer -q set Master 2dB+ unmute; exec notify-send "Audio Raised volume"
-        # XF86AudioLowerVolume exec amixer -q set Master 2dB- unmute; exec notify-send Audio lowered
-        # XF86AudioMute exec amixer -q set Master toggle; exec notify-send "Mute toggle"
         "$GroupFr+$mod+apostrophe"="kill";
         "$GroupUs+$mod+4"="kill";
 
@@ -347,11 +336,6 @@ in
         # bindsym --release Shift+Print exec "scrot -s '/home/user/Pictures/screenshots/%s_%H%M_%d%m%Y_$wx$h.png'"
         # bindsym --release $mod+Shift+Print exec "scrot -u -d 4 '/home/user/Pictures/screenshots/%s_%H%M_%d%m%Y_$wx$h.png'"
 
-# Media player controls
-# bindsym XF86AudioPlay exec playerctl play
-# bindsym XF86AudioPause exec playerctl pause
-# bindsym XF86AudioNext exec playerctl next
-# bindsym XF86AudioPrev exec playerctl previous
       }
       // bind_ws 1 "a" "q"
       // bind_ws 2 "z" "w"

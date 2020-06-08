@@ -18,13 +18,6 @@ call airline#parts#define_function('lsp_status', 'StatusLSP')
 " call airline#parts#define_minwidth('lsp_status', 5) 
 " call airline#parts#define_condition('foo', 'getcwd() =~ "work_dir"')
 
-function! StatusLSP() abort
-    " Setup for variables
-	" let g:_active_buffer = bufnr('%')
-	let stl = '%{v:lua.StatusLineLSP()}'
-	return stl
-endfunction
-
 let g:airline_section_y = airline#section#create_right(['lsp_status'])
 
 " lsp_status.status()
