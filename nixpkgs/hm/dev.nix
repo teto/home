@@ -10,6 +10,7 @@
   programs.direnv.enable = true;
 
   programs.direnv.enableZshIntegration = true;
+  programs.direnv.enableNixDirenvIntegration = true;
 
   # programs.direnv.config
   # programs.direnv.stdlib

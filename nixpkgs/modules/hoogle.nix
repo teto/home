@@ -3,12 +3,13 @@
   services.hoogle = {
     enable = true;
     port = 9999;
-
     packages = hs: with hs; [
       http-api-data
       aeson
       amazonka
       amazonka-s3
+      # bson  # broken too
+      http-media   # Network.HTTP.Media 
       katip
       servant
       servant-cli
@@ -19,6 +20,7 @@
       servant-docs
       servant-server
       split
+      streaming-commons
     ];
   };
 }

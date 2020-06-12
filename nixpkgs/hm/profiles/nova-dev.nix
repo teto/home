@@ -13,7 +13,9 @@ in
     pkgs.robo3t  # another mongoDB gui
     pkgs.minio-client  # mc
     gitAndTools.lab  # git lab etc
-
+    mongodb-tools  # for bsondump
   ];
 
+
+   # complete -C '{pkgs.awscli}/bin/aws_completer' aws
 }

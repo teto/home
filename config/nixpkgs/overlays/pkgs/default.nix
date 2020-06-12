@@ -44,7 +44,8 @@ final: prev:
 
   dualsub = prev.callPackage ./dualsubtitles { };
 
-  hunter = prev.callPackage ./hunter { };
+  # casse nix-index
+  # hunter = prev.callPackage ./hunter { };
 
   i3-resurrect = prev.python3Packages.callPackage ./i3-resurrect {};
 

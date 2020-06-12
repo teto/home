@@ -46,3 +46,6 @@ https://stackoverflow.com/questions/3232074/what-is-the-best-way-to-convert-stri
 record{..} will bring everything intoScope
 A better alternative is (tcpInfo@DiagTcpInfo {} ) 
 
+
+# acronyms
+NT = natural transformation

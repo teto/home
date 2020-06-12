@@ -795,7 +795,7 @@ let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %
 " mostly fzf mappings, use TAB to mark several files at the same time
 " https://github.com/neovim/neovim/issues/4487
 nnoremap <Leader>o <Cmd>FzfFiles<CR>
-nnoremap <Leader>g <Cmd>FzfGitFiles<CR>
+" nnoremap <Leader>g <Cmd>FzfGitFiles<CR>
 nnoremap <Leader>F <Cmd>FzfFiletypes<CR>
 nnoremap <Leader>h <Cmd>FzfHistory<CR>
 nnoremap <Leader>c <Cmd>FzfCommits<CR>
@@ -805,6 +805,7 @@ nnoremap <leader>m <Cmd>FzfMarks<CR>
 nnoremap <leader>l <Cmd>FzfLines<CR>
 nnoremap <leader>t <Cmd>FzfTags<CR>
 nnoremap <leader>T <Cmd>FzfBTags<CR>
+nnoremap <leader>g <Cmd>FzfRg<CR>
 
 
 function! SeeLineHistory()
@@ -1794,9 +1795,16 @@ set diffopt+=internal,algorithm:patience
 nnoremap Y y$
 
 
+
 " let undos persist across open/close
 let &undodir=stdpath('data').'/undo/'
 set undofile
+
+" deal with vscode
+if exists('g:vscode')
+    " VSCode extension
+endif
+
 
 
 nnoremap <F6> <Cmd>AutoSaveToggle<CR>
@@ -1873,6 +1881,8 @@ set showfulltag "test
 "nmap <Tab> >>
 "vmap <S-Tab> <gv
 "vmap <Tab> >gv
+
+
 
 " azerty customizations : utilise <C-V> pour entrer le caractère utilisé {{{
 "https://www.reddit.com/r/vim/comments/2tvupe/azerty_keymapping/

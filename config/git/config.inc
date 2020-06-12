@@ -91,6 +91,7 @@ renamelimit = 14000
 
 [diff]
   tool = nvim -d
+  word-diff=color
 
 # git diff --no-prefix
 

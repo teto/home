@@ -11,3 +11,10 @@ docker ps --no-trunc
 Quand le service keeps restarting, look at `docker logs`
 
 docker logs --tail 50 --follow --timestamps jinko_result-store-external_1
+
+docker network ls
+
+
+docker attach jinko_frontend_1
+
+--sig-proxy

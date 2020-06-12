@@ -46,7 +46,7 @@ in
   ]
   ;
 
-  users.extraUsers.teto.packages = with pkgs; [
+  users.users.teto.packages = with pkgs; [
     pciutils # for lspci
     ncdu  # to see disk usage
     # bridge-utils # pour  brctl
@@ -158,7 +158,11 @@ in
 
   # TODO add the chromecast
   networking.firewall.allowedUDPPorts = [ ];
-  networking.firewall.allowedTCPPorts = [ 8080 ];
+  # networking.firewall.allowedTCPPorts = [ 8080 ];
+
+  # temporary while working on result-store
+  networking.firewall.allowedTCPPorts = [ 5000 52002 ];
+
   # creates problem with buffalo check if it blocks requests or what
   # it is necessary to use dnssec though :(
   networking.resolvconf.dnsExtensionMechanism = false;

@@ -10,7 +10,8 @@ let
 
   # level of indirection while waiting for a better solution
   # callPackage ?
-  libk = import <nixpkgs/lib/kernel.nix> { inherit (prev.stdenv) lib; version = 4; };
+  libk = prev.lib.kernel;
+    # import <nixpkgs/lib/kernel.nix> { inherit (prev.stdenv) lib; version = 4; };
 
 
   # TODO I could use this to discrimanate between branches ?
