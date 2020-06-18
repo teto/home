@@ -19,6 +19,8 @@
       # servant-db-postgresql
       servant-docs
       servant-server
+      servant-swagger
+      swagger2
       split
       streaming-commons
     ];

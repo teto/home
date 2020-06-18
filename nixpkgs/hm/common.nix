@@ -291,7 +291,7 @@ rec {
         # defined as HISTFILE="$HOME/${cfg.history.path}"
         # https://github.com/nsnam/bake-git
         # TODO fix
-        path = ".cache/zsh_history";
+        path = "${config.xdg.cacheHome}/zsh_history";
         share = true;
         extended = true; # save timestamp
     };

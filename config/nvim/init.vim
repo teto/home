@@ -115,8 +115,12 @@ Plug 'MattesGroeger/vim-bookmarks' " ruby  / :BookmarkAnnotate
 " Plug 'andymass/vim-matchup' " to replace matchit
 " Plug 'AGhost-7/critiq.vim' " :h critiq
 " Plug 'thaerkh/vim-workspace'  " :ToggleWorkspace
+
+Plug 'diepm/vim-rest-console' " test
+" Plug 'BK1603/nvim-autoread' " nvim-autoread
+" Plug '~/nvim-autoread' " nvim-autoread
 Plug 'wbthomason/lsp-status.nvim'  " display lsp progress
-Plug 'skywind3000/vim-quickui' " 
+Plug 'skywind3000/vim-quickui'
 Plug 'liuchengxu/vista.vim' " replaces tagbar to list workplace symbols
 Plug 'neovim/nvim-lsp' " while fuzzing details out
 " Plug '~/nvim-lsp' " while fuzzing details out
@@ -2310,3 +2314,10 @@ map <RightMouse>  <Cmd>call quickui#context#open(content, quick_opts)<CR>
 
 " call quickui#context#open(content, opts)
 " }}}
+"
+"
+function! LuaComplete (ArgLeaf, CmdLine, CursorPos) abort
+        return map(luaeval("vim.tbl_keys(" . a:CmdLine[4:] . ")"), {k,v -> a:CmdLine[4:] . "." . v})
+endfunction
+
+command! -complete=customlist,LuaComplete -nargs=1 LuaFile lua <args>

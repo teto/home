@@ -139,7 +139,6 @@ in
   nixpkgs = {
     config = {
       allowUnfree = true;
-      firefox.enableBukubrow = true;
     };
 
     overlays = [

@@ -14,6 +14,7 @@ in
     pkgs.minio-client  # mc
     gitAndTools.lab  # git lab etc
     mongodb-tools  # for bsondump
+    nodePackages.dockerfile-language-server-nodejs # docker
   ];
 
 

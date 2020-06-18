@@ -10,7 +10,8 @@
     # Not accepted. we should find another way to enable it
     # pass package for instance
     # enableBukubrow = true;
-    extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+    # with pkgs.nur.repos.rycee.firefox-addons;
+    extensions =  with pkgs;[
         nur.repos.rycee.firefox-addons.bitwarden
         nur.repos.rycee.firefox-addons.browserpass
         nur.repos.rycee.firefox-addons.browserpass-otp

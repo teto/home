@@ -205,7 +205,11 @@ in
     printing = {
       enable = true;
       browsing = false;
-      drivers = [ pkgs.gutenprint pkgs.gutenprintBin ];
+      drivers = [
+        pkgs.gutenprint pkgs.gutenprintBin
+        # See https://discourse.nixos.org/t/install-cups-driver-for-brother-printer/7169
+        pkgs.brlaser
+      ];
     };
 
     # just locate

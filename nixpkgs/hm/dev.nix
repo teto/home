@@ -4,7 +4,8 @@
 
   home.packages = with pkgs; [
     visidata
-
+    yaml-language-server
+    # dockerfile-language-server-nodejs
   ];
 
   programs.direnv.enable = true;

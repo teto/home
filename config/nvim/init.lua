@@ -55,6 +55,8 @@ nvim_lsp.lua_lsp.setup{}
 -- })
 
 
+nvim_lsp.dockerls.setup{}
+nvim_lsp.yamlls.setup{}
 
 nvim_lsp.ghcide.setup({
 	log_level = vim.lsp.protocol.MessageType.Log;

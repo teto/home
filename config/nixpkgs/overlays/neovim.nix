@@ -304,14 +304,17 @@ rec {
 
   };
 
-  neovim-dev = (final.pkgs.neovim-unwrapped.override  {
-    # name = "neovim-test";
+  neovim-dev = let
+        devMode = true;
+    in (final.pkgs.neovim-unwrapped.override  {
     doCheck=true;
-    # withDoc=true;
-    devMode=true;
+    # devMode=true;
     stdenv = final.pkgs.llvmPackages_latest.stdenv;
   }).overrideAttrs(oa:{
     cmakeBuildType="debug";
+
+    # TODO add luaCheck
+    # cmakeFlags = oa.cmakeFlags ++ optional devMode "-DLUACHECK_PRG=${neovimLuaEnv}/bin/luacheck";
 
     version = "master";
     src = builtins.fetchGit {
@@ -319,6 +322,12 @@ rec {
       # url = https://github.com/teto/neovim.git;
       # ref = "inlinefolds_matt";
     };
+    nativeBuildInputs = oa.nativeBuildInputs 
+      ++ final.pkgs.lib.optionals devMode (with final.pkgs; [
+        include-what-you-use  # for scripts/check-includes.py
+        jq                    # jq for scripts/vim-patch.sh -r
+        doxygen
+      ]);
 
     buildInputs = oa.buildInputs ++ ([ final.pkgs.tree-sitter ]);
   });

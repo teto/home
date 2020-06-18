@@ -49,3 +49,7 @@ A better alternative is (tcpInfo@DiagTcpInfo {} )
 
 # acronyms
 NT = natural transformation
+
+
+# Lenses
+~. -> view

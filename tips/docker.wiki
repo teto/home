@@ -18,3 +18,71 @@ docker network ls
 docker attach jinko_frontend_1
 
 --sig-proxy
+
+docker inspect jinko_result-store_1
+
+https://docs.docker.com/compose/compose-file/#ports
+
+
+
+To use the bridge network use network_mode: https://docs.docker.com/compose/compose-file/#network-mode
+
+Compose relies on network scoped aliases, so if you try to use bridge as an external network it will set those aliases. If you use network_mode, it will disable the built-in aliases, and rely on the aliases made available by the bridge network.
+
+
+`docker network connect bridge [container]`
+to join the default network that way.
+
+$ docker network rm host / bridge / none
+Error response from daemon: host is a pre-defined network and cannot be removed
+
+# How to rebuild and restart a single container ?
+`docker-compose up -d --build worker`
+
+# How to stop a single container ?
+$ docker-compose rm -f -s -v result-store
+
+# use a preexisting network
+https://docs.docker.com/compose/networking/#use-a-pre-existing-network
+
+docker network create
+
+https://www.reddit.com/r/docker/comments/8wlggo/dockercompose_not_picking_up_the_existing_network/
+networks:
+  external: true
+  name: dtaone_net
+
+# to show ocnf
+docker-compose config
+
+Well you could use network_mode property in the service. This is mutually exclusive with the networks property though. If you use the network_mode: "host" your service has access to the test network, without explicitly joining.
+
+https://docs.docker.com/compose/environment-variables/#the-env-file
+compose > shell environment > .env file > dockerfile > undefined
+
+
+# Networking
+In host mode the container does not get its own IP-address allocated. 
+Similarly port mapping is disabled.
+
+
+
+23:42 <Church-> Well I'm doing something stupid then.
+23:57 <@ada> teto: no; not if that container is only attached to the host network
+23:57 <@ada> teto: a container could only resolve the names of other containers who are also on a common user-defined network
+23:58 <@ada> teto: so container-networks only
+23:59 <teto> ada but can I attach it to host and the rest ? do port mappings disappear as well ?
+00:00 <@ada> teto: you can't publis hports and also use the host network
+00:00 <@ada> teto: if your container is on the host network, it can just obtain whatever ports it wants
+00:00 <@ada> teto: the container networks are isolated, hence the port publishing
+00:01 <@ada> teto: I don't know if you can be attached to the host network namespace and also a container network
+00:01 <@ada> teto: but you can be attached to multiple container networks
+00:20 <teto> ada: thanks
+00:24 <teto> other question, I would like to override a value via my docker-compose.test.yml: I set `checkhealth: ""` to cancel out a checkhealth defined in docker-compose.yml but can't seem to find a way to cancel it out
+00:39 <Church-> [twisti]: Odd, not sure what I screwed up the first time but deleting the volumes and re-running my docker-compose generated everything successfully this time.
+00:39 <Church-> How odd
+00:41 <teto> nevermind I found in the doc I could override with NONE
+00:50 <teto> when I try to set the default network to "host" in docker-compose, I get "network-scoped alias is supported only for containers in user defined networks", I guess I can use "network_mode: host" on every service but that seems redundant. Is there a simpler way ?
+02:07 <@ada> teto: no, each service that should be on the host network requires the network_mode: host setting
+02:07 <@ada> generally it's a good idea to use container networks when possible; if there is a large number of service that you're putting together on the host network thats usually a red flag
+02:08 <@ada> nothing is stopping you, but you're just removing some of the isolation benefits of using containers in the first place
