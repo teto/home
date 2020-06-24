@@ -100,7 +100,6 @@ set gdefault
 
 " nvim will load any .nvimrc in the cwd; useful for per-project settings
 set exrc
-set completeopt=menu " use pum to show completions
 
 
 " vim-plug plugin declarations {{{1
@@ -1759,8 +1758,10 @@ let g:completion_chain_complete_list = {
 
 " hello world"
 " let g:completion_confirm_key = "\<C-y>"
+set completeopt=menu " use pum to show completions
 set completeopt+=menuone  " use pum even for one match
 set completeopt+=noinsert,noselect
+" set completeopt+=longest
 
 " Use completion-nvim in every buffer
 " autocmd BufEnter * lua require'completion'.on_attach()
@@ -1785,7 +1786,6 @@ let g:pdfscribe_notes_dir = expand('$HOME').'/Nextcloud/papis_db'
 " g:python3_host_prog -m json.tool
 
 set hidden " you can open a new buffer even if current is unsaved (error E37)
-" set completeopt+=longest
 " draw a line on 80th column
 set colorcolumn=80,100
 

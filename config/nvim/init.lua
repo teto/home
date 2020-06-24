@@ -180,35 +180,35 @@ nvim_lsp.texlab.setup({
   }
 })
 
-nvim_lsp.clangd.setup({
-	--compile-commands-dir=build
-    cmd = {"clangd", "--background-index", 
-		"--log=info", -- error/info/verbose
-		"--pretty" -- pretty print json output
-	};
-	-- 'build/compile_commands.json',
-	root_dir = nvim_lsp.util.root_pattern( '.git'),
-	-- mandated by lsp-status
-	init_options = { clangdFileStatus = true },
-	callbacks = lsp_status.extensions.clangd.setup()
-})
+--nvim_lsp.clangd.setup({
+--	--compile-commands-dir=build
+--    cmd = {"clangd", "--background-index", 
+--		"--log=info", -- error/info/verbose
+--		"--pretty" -- pretty print json output
+--	};
+--	-- 'build/compile_commands.json',
+--	root_dir = nvim_lsp.util.root_pattern( '.git'),
+--	-- mandated by lsp-status
+--	init_options = { clangdFileStatus = true },
+--	callbacks = lsp_status.extensions.clangd.setup()
+--})
 
 -- lua vim.lsp.buf.hover()
 
 -- https://github.com/MaskRay/ccls/wiki/Debugging
--- nvim_lsp.ccls.setup({
--- 	name = "ccls",
--- 	filetypes = { "c", "cpp", "objc", "objcpp" },
--- 	cmd = { "ccls", "--log-file=/tmp/ccls.log", "-v=1" },
--- 	log_level = vim.lsp.protocol.MessageType.Log;
--- 	root_dir = nvim_lsp.util.root_pattern(".git");
--- 	init_options = {
--- 		-- "compilationDatabaseDirectory": "/home/teto/mptcp/build",
--- 		clang = { excludeArgs = { "-m*", "-Wa*" } },
--- 		cache = { directory = "/tmp/ccls" }
--- 	},
--- 	on_attach = attach_cb.on_attach
--- })
+nvim_lsp.ccls.setup({
+	name = "ccls",
+	filetypes = { "c", "cpp", "objc", "objcpp" },
+	cmd = { "ccls", "--log-file=/tmp/ccls.log", "-v=1" },
+	log_level = vim.lsp.protocol.MessageType.Log;
+	root_dir = nvim_lsp.util.root_pattern(".git");
+	init_options = {
+		-- "compilationDatabaseDirectory": "/home/teto/mptcp/build",
+		clang = { excludeArgs = { "-m*", "-Wa*" } },
+		cache = { directory = "/tmp/ccls" }
+	},
+	on_attach = attach_cb.on_attach
+})
 
 -- config at https://raw.githubusercontent.com/palantir/python-language-server/develop/vscode-client/package.json
 nvim_lsp.pyls.setup({

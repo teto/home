@@ -3,12 +3,6 @@ let
   stable = import <nixos> {};
   unstable = import <nixos-unstable> {};
 
-  cliUtils = with pkgs; [
-    netcat-gnu  # plain 'netcat' is the bsd one
-    bind   # for dig
-    w3m   # for preview in ranger w3mimgdisplay
-    xdg_utils
-  ];
 
   # change to a package
   fzf-extras = let src = pkgs.fetchFromGitHub {
@@ -41,6 +35,11 @@ rec {
 
     # vim-vint  #
     tig
+    netcat-gnu  # plain 'netcat' is the bsd one
+    # bind   # for dig
+    dig.dnsutils  # for dig
+    w3m   # for preview in ranger w3mimgdisplay
+    xdg_utils
 
     # to be used in i3
     # pkgs.i3dispatch
@@ -108,7 +107,7 @@ rec {
     VIFM="$XDG_CONFIG_HOME/vifm";
     WWW_HOME="$XDG_CONFIG_HOME/w3m";
     # used by ranger
-    TERMCMD="termite";
+    TERMCMD="kitty";
     VIM_SOURCE_DIR="$HOME/vim";
     # TERMINAL # used by i3-sensible-terminal
   };

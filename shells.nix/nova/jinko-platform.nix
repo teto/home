@@ -2,7 +2,7 @@ with import <nixpkgs> {};
 
 let
   # black
-  myPythonEnv = python3.withPackages(ps: with ps; [
+  myPythonEnv = python37.withPackages(ps: with ps; [
     chardet  # encoding detector
     certifi
     locustio  # disable checks for now
@@ -28,6 +28,10 @@ mkShell {
     pipenv
 
     python-language-server
+
+    # for testing
+    httperf
+    apacheHttpd  # ab binary
   ];
 
   #     export DOCKER_HOST=

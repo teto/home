@@ -25,7 +25,9 @@ let
     cmakeFlags = oa.cmakeFlags ++ [
       "-DMIN_LOG_LEVEL=0"
       # useful to
-      # "-DCLANG_ASAN_UBSAN=ON"
+      # https://github.com/google/sanitizers/wiki/AddressSanitizerFlags
+      # https://clang.llvm.org/docs/AddressSanitizer.html#symbolizing-the-reports
+      "-DCLANG_ASAN_UBSAN=ON"
 	];
 
     nativeBuildInputs = oa.nativeBuildInputs ++ [
@@ -33,7 +35,7 @@ let
       # pkgs.ccls
       pkgs.python-language-server
       pkgs.clang-tools  # for clangd
-      # pkgs.llvm  # for llvm-symbolizer
+      pkgs.llvm_10  # for llvm-symbolizer
       # pkgs.valgrind
     ];
 
@@ -51,6 +53,8 @@ let
       echo "To run tests:"
       echo "test/functional/fswatch/fswatch_spec.lua"
       echo "VALGRIND=1 TEST_FILE=test/functional/core/job_spec.lua TEST_TAG=env make functionaltest"
+      # ASAN_OPTIONS=halt_on_error=0
+      export ASAN_OPTIONS="log_path=./stderr:halt_on_error=0"
     '';
 
   });

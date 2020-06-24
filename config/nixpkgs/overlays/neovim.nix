@@ -305,11 +305,11 @@ rec {
   };
 
   neovim-dev = let
-        devMode = true;
+      devMode = true;
     in (final.pkgs.neovim-unwrapped.override  {
-    doCheck=true;
-    # devMode=true;
-    stdenv = final.pkgs.llvmPackages_latest.stdenv;
+      doCheck=true;
+      # devMode=true;
+      stdenv = final.pkgs.llvmPackages_latest.stdenv;
   }).overrideAttrs(oa:{
     cmakeBuildType="debug";
 
@@ -318,9 +318,9 @@ rec {
 
     version = "master";
     src = builtins.fetchGit {
-      url = https://github.com/neovim/neovim.git;
-      # url = https://github.com/teto/neovim.git;
-      # ref = "inlinefolds_matt";
+      # url = https://github.com/neovim/neovim.git;
+      url = https://github.com/teto/neovim.git;
+      ref = "remove-foldline-final";
     };
     nativeBuildInputs = oa.nativeBuildInputs 
       ++ final.pkgs.lib.optionals devMode (with final.pkgs; [

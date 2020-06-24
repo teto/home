@@ -17,7 +17,7 @@ in
     gitAndTools.diff-so-fancy
     # aircrack-ng
     nodePackages.insect  # fancy calculator
-    nushell  # rust-based semantic shell
+    # nushell  # rust-based semantic shell
     tlaplus  # formal logic
     tlaplusToolbox  # from leslie lamport
 
