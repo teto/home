@@ -201,6 +201,7 @@ let
   # hardware.nvidiaOptimus.disable = false;
 
   # services.xserver.videoDrivers = [ "nvidia" ];
+  hardware.sane.enable = true;
 
   nix = {
     package = pkgs.nixFlakes;

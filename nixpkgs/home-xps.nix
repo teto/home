@@ -30,6 +30,7 @@ let
   home.packages = with pkgs; [
     virt-manager # to run ubuntu, needs libvirtd service
     brightnessctl
+    simple-scan
     # aqemu # 0.9.2 , needs kvm/qemu
     # kvm
 
@@ -56,7 +57,7 @@ let
     # must be a string
     path =  "/home/teto/home-manager";
   };
-  
+
   # for blue tooth applet; must be installed systemwide
   services.blueman-applet.enable = true;
 

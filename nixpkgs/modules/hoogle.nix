@@ -9,8 +9,10 @@
       amazonka
       amazonka-s3
       # bson  # broken too
+      haskeline
       http-media   # Network.HTTP.Media 
       katip
+      repline
       servant
       servant-cli
       servant-client

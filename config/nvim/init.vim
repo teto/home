@@ -378,6 +378,7 @@ Plug 'teto/Modeliner' " <leader>ml to setup buffer modeline
 " This one has bindings mapped to <leader>l
 " Plug '~/vimwiki'   " to write notes
 " Plug 'vimwiki/vimwiki', { 'branch': 'dev'}   " to write notes
+Plug 'vimwiki/vimwiki'
 "Plug 'teto/neovim-auto-autoread' " works only in neovim, runs external checker
 " Plug 'rhysd/github-complete.vim' " provides github user/repo autocompletion after @ and #
 
@@ -621,7 +622,7 @@ set splitright   " on vertical split
 " }}}
 " vimwiki {{{
 let wiki_1 = {}
-let wiki_1.path = '~/Nextcloud2/perso/notes'
+let wiki_1.path = '~/Nextcloud/perso/notes'
 let wiki_1.index = 'main'
 let wiki_1.ext = '.wiki'
 let g:vimwiki_list = [

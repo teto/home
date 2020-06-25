@@ -280,6 +280,24 @@ vim.g.should_show_diagnostics_in_statusline = true
 function StatusLineLSP()
 	return lsp_status.status()
 end
+
+
+-- utility functions: override/extend builtin 
+local util = require'vim.lsp.util'
+local api = vim.api
+
+local function preview_location_callback(_, method, result)
+    if result == nil or vim.tbl_isempty(result) then
+        return nil
+    end
+    util.preview_location(result[1])
+end
+
+function peek_definition()
+    local params = util.make_position_params()
+    return vim.lsp.buf_request(0, 'textDocument/definition', params, preview_location_callback)
+end
+
   -- if #vim.lsp.buf_get_clients() == 0 then
   --   return ''
   -- end
