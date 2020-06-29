@@ -18,6 +18,7 @@ rec {
   news.display = "silent";
 
   imports = [
+    ./git.nix
     ./xdg-mime.nix
   ];
 

@@ -132,7 +132,9 @@ in
 
   # DOES NOT WORK !
   # boot.kernelPackages = unstable.pkgs.linuxPackages;
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  # boot.kernelPackages = pkgs.linuxPackages_latest;
+  # boot.kernelPackages = pkgs.linuxPackages_testing;
+  boot.kernelPackages = pkgs.linuxPackages_5_6;
 
   # boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_latest_without_ns;
 

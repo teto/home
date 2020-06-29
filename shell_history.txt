@@ -5,3 +5,4 @@ home-manager -I nixpkgs=/home/teto/nixpkgs -I nixos-config=/home/teto/home/nixpk
 git rebase channels/nixos-unstable
 nix repl . ./nixos
 gch upstream/nixos-unstable -- pkgs/misc/vim-plugins/generated.nix
+sudo nixos-rebuild -I nixos-config=/home/teto/dotfiles/nixpkgs/configuration-lenovo.nix switch

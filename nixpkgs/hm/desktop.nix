@@ -319,6 +319,7 @@ in
     enableSshSupport = true;
     # grabKeyboardAndMouse= false;
     pinentryFlavor = "curses";
+    grabKeyboardAndMouse = true;  # should be set to false instead
     verbose = true;
     # see https://github.com/rycee/home-manager/issues/908
     # could try ncurses as well
