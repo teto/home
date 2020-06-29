@@ -39,10 +39,9 @@ let
 
   ];
 
-  # you can switch from cli with xkb-switch
-  # or xkblayout-state
+  # you can switch from cli with xkb-switch or xkblayout-state
   home.keyboard = {
-    # layout = "fr,us";
+    layout = "fr,us";
     # options = [ "grp:caps_toggle" "grp_led:scroll" ];
     # TODO can add Mod4 
     # grp:alt_shift_toggle,ctrl:nocaps,grp_led:scroll

@@ -367,7 +367,11 @@ in
     config = (removeAttrs  config.xsession.windowManager.i3.config ["startup" "bars"])
       // {
           input = {
-            "type:keyboard" = { xkb_layout = "us,fr"; };
+            "type:keyboard" = {
+              xkb_layout = "us,fr";
+              xkb_options = "ctrl:nocaps";
+              # to swap altwin:swap_lalt_lwin
+            };
 
           };
 

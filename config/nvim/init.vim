@@ -1345,7 +1345,6 @@ let g:signify_update_on_focusgained = 1
 "xnoremap <  <gv
 "xnoremap >  >gv
 " todo do the same for .Xresources ?
-autocmd BufWritePost ~/.Xdefaults call system('xrdb ~/.Xdefaults')
 
 " }}}
 " vim-signature {{{
