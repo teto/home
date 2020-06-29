@@ -19,6 +19,9 @@ let
       ./hm/mail.nix
       ./hm/sway.nix
 
+      # not merged yet
+      ./hm/autoUpgrade.nix
+
       ./hm/profiles/nova-user.nix
       ./hm/profiles/nova-dev.nix
     ]
