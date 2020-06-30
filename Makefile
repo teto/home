@@ -27,7 +27,8 @@ local:
 # installe les grammaires treesitter chez neovim
 # TODO run the scripts/ instead
 treesitter:
-	nix-build -A tree-sitter.builtGrammars.c
+	# nix-build -A tree-sitter.builtGrammars
+	scripts/tsgrammars.sh
 
 zsh:
 	# won't work on nix

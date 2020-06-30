@@ -1,0 +1,3 @@
+`help set` will show you options:
+
+shopt -sp

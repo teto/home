@@ -70,9 +70,10 @@ nvim_lsp.ghcide.setup({
 	-- "BUILD.bazel",
 	-- "cabal.config",
 	-- "package.yaml"
-	root_dir = function(fname)
-		return nvim_lsp.util.find_git_ancestor(fname) or vim.loop.os_homedir()
-	end;
+	-- root_dir = function(fname)
+	-- 	return nvim_lsp.util.find_git_ancestor(fname) or vim.loop.os_homedir()
+	-- end;
+	-- root_dir = nvim_lsp.util.root_pattern("stack.yaml", "hie-bios", "BUILD.bazel", "cabal.config", "package.yaml");
 	log_level = vim.lsp.protocol.MessageType.Warning;
 	settings = {};
 	on_attach=attach_cb.on_attach

@@ -388,8 +388,10 @@ Plug 'haorenW1025/diagnostic-nvim'  " LSP improvements OpenDiagnostic/PrevDiagno
 " https://github.com/haorenW1025/completion-nvim/wiki/chain-complete-support
 Plug 'haorenW1025/completion-nvim' " lsp based completion framework
 " treesitter may slow down nvim
-" Plug 'nvim-treesitter/completion-treesitter' " extension of completion-nvim
-" Plug 'nvim-treesitter/highlight.lua' " to test treesitter
+Plug 'nvim-treesitter/completion-treesitter' " extension of completion-nvim,
+" depends on nvim-treesitter/nvim-treesitter
+Plug 'nvim-treesitter/highlight.lua' " to test treesitter
+Plug 'nvim-treesitter/nvim-treesitter' " to test treesitter
 
 " github-comment requires webapi (https://github.com/mattn/webapi-vim)
 " Plug 'mmozuras/vim-github-comment' " :GHComment
@@ -2180,6 +2182,11 @@ nnoremap <silent> gA    <cmd>lua vim.lsp.buf.code_action()<CR>
 luafile ~/.config/nvim/init.lua
 " logs are written to /home/teto/.local/share/nvim/vim-lsp.log
 lua vim.lsp.set_log_level("debug")
+
+
+" treesitter config
+luafile ~/.config/nvim/treesitter.lua
+
 
 " this is set per-buffer so...
 " call LSP_maps()

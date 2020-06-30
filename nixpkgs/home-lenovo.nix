@@ -19,6 +19,9 @@ let
       ./hm/neomutt.nix
       ./hm/profiles/nova-dev.nix
 
+      # just for testing
+      ./hm/autoUpgrade.nix
+
       ./hm/mail.nix
       ./hm/extra.nix
       # symlink towards a config

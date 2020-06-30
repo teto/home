@@ -133,8 +133,9 @@ rec {
       HISTTIMEFORMAT="%d.%m.%y %T ";
       # HISTFILE="$XDG_CACHE_HOME/bash_history";
     };
-    # historyControl=["erasedups", "ignoredups", "ignorespace"]
+    historyControl=["ignorespace"];
     historyIgnore=["ls" "pwd"];
+    # shellOptions = [ "histappend" "checkwinsize" "extglob" "globstar" "checkjobs" ];
     # historyFile = "${xdg.cacheHome}/bash_history";
     historyFile = "$XDG_CACHE_HOME/bash_history";
     shellAliases = {
