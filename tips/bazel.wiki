@@ -1,5 +1,5 @@
 
-
+bazel help query
 
 [query](https://docs.bazel.build/versions/master/query-how-to.html)
 
