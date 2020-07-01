@@ -7,11 +7,11 @@ in
 
   home.packages = [
     unstable.chromium
-    unstable.google-chrome
+    # unstable.google-chrome
 
     # TODO use vscode instead since it can install extensions ?
     # install atom with pretty-json and markdown-preview-plus
-    unstable.atom
+    # unstable.atom
   ];
 }
 

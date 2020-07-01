@@ -630,6 +630,7 @@ let wiki_1.ext = '.wiki'
 let g:vimwiki_list = [
   \ wiki_1, {'path': '~/dotfiles/tips'} 
   \ ]
+let g:vimwiki_url_maxsave=0
 "}}}
 " {{{ Markdown composer
 " Run with :ComposerStart

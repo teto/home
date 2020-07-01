@@ -171,7 +171,7 @@ let
     # shutter # screenshot utility
     # mcomix # manga reader
     # mendeley # requiert qtwebengine
-    zeal       # doc for developers
+    # unstable.zeal       # doc for developers
     vifm
     # zotero     # doc software
     # astroid # always compiles webkit so needs 1 full day
