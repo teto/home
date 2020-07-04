@@ -241,11 +241,19 @@ rec {
         # addToPath = [ poppler_utils ];
 
         # TODO use them only if
+        # todo override
+            # let g:Unicode_data_directory = /home/user/data/
+    # let g:Unicode_cache_directory = /tmp/
+
         customRC = ''
           " always see at least 10 lines
           set scrolloff=10
           set hidden
         autocmd BufReadPost *.pdf silent %!${prev.pkgs.xpdf}/bin/pdftotext -nopgbrk -layout -q -eol unix "%" - | fmt -w78
+
+        let g:Unicode_data_directory='${final.vimPlugins.unicode-vim}/share/vim-plugins/unicode-vim/autoload/unicode'
+        " let g:Unicode_cache_directory='${final.vimPlugins.unicode-vim}/share/vim-plugins/unicode-vim/autoload/unicode'
+
         ''
         # autocmd BufReadPost *.pdf silent %!${prev.pkgs.poppler_utils}/bin/pdftotext -nopgbrk -layout -q -eol unix "%" - | fmt -w78
         # if we support coc.nvim

@@ -58,4 +58,8 @@ NT = natural transformation
 traceShow / traceId
 
 
+# Frames
+
+inCoreSoA
+AoS = Array of Structures
 

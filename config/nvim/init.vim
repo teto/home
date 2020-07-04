@@ -372,7 +372,6 @@ Plug 'dhruvasagar/vim-table-mode', {'for': 'txt'}
 Plug 'nacitar/a.vim' " :A
 " Plug 'mhinz/vim-tree' " test
 Plug 'mhinz/vim-rfc', { 'on': 'RFC' } " requires nokigiri gem
-" can show a list of unicode characeters, with their name  :UnicodeTable etc...
 " careful maps F4 by default
 Plug 'teto/Modeliner' " <leader>ml to setup buffer modeline
 " This one has bindings mapped to <leader>l
@@ -1734,7 +1733,7 @@ let g:completion_docked_hover=1
 " let g:completion_enable_auto_popup = 0
 let g:completion_enable_snippet = 'UltiSnips'
 let g:completion_enable_auto_signature = 1
-let g:completion_timer_cycle = 200 "default value is 80
+let g:completion_timer_cycle = 80 "default value is 80
 " Configure the completion chains
 let g:completion_chain_complete_list = {
     \'default' : {
