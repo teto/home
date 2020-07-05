@@ -9,6 +9,7 @@
       amazonka
       amazonka-s3
       # bson  # broken too
+      directory
       Frames
       haskeline
       http-media   # Network.HTTP.Media 

@@ -118,7 +118,7 @@ Plug 'MattesGroeger/vim-bookmarks' " ruby  / :BookmarkAnnotate
 Plug 'diepm/vim-rest-console' " test
 " Plug 'BK1603/nvim-autoread' " nvim-autoread
 " Plug '~/nvim-autoread' " nvim-autoread
-Plug 'wbthomason/lsp-status.nvim'  " display lsp progress
+Plug 'nvim-lua/lsp-status.nvim'  " display lsp progress
 Plug 'skywind3000/vim-quickui'
 Plug 'liuchengxu/vista.vim' " replaces tagbar to list workplace symbols
 Plug 'neovim/nvim-lsp' " while fuzzing details out
@@ -383,9 +383,9 @@ Plug 'vimwiki/vimwiki'
 
 " Plug 'ripxorip/aerojump.nvim'
 
-Plug 'haorenW1025/diagnostic-nvim'  " LSP improvements OpenDiagnostic/PrevDiagnostic
+Plug 'nvim-lua/diagnostic-nvim'  " LSP improvements OpenDiagnostic/PrevDiagnostic
 " https://github.com/haorenW1025/completion-nvim/wiki/chain-complete-support
-Plug 'haorenW1025/completion-nvim' " lsp based completion framework
+Plug 'nvim-lua/completion-nvim' " lsp based completion framework
 " treesitter may slow down nvim
 Plug 'nvim-treesitter/completion-treesitter' " extension of completion-nvim,
 " depends on nvim-treesitter/nvim-treesitter
