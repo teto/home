@@ -169,8 +169,6 @@ in
     ;
 
     # sshServe.enable = false;
-
-    # careful will prevent from fetching local git !
     useSandbox = true;
 
     #  to keep build-time dependencies around => rebuild while being offline

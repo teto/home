@@ -23,6 +23,7 @@ in
     ./modules/openssh.nix
     ./modules/hoogle.nix
     ./modules/tor.nix
+    ./modules/nova.nix
 
     # ./modules/sway.nix
 

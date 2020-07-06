@@ -1,7 +1,7 @@
 { config, pkgs, lib,  ... }:
 let
-  stable = import <nixos> {}; # https://nixos.org/channels/nixos
-  unstable = import <nixos-unstable> {}; # https://nixos.org/channels/nixos-unstable
+  stable = import <nixos> {};
+  unstable = import <nixos-unstable> {};
 
   terminalCommand = pkgs.termite;
 
