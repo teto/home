@@ -21,6 +21,7 @@ let
 
       # just for testing
       ./hm/autoUpgrade.nix
+      ./hm/vscode.nix
 
       ./hm/mail.nix
       ./hm/extra.nix
