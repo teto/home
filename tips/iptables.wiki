@@ -1,2 +1,10 @@
 
 iptables -A INPUT -p tcp -i eth0 --dport 5000 -j ACCEPT
+
+
+# flush all chains
+iptables -F
+iptables -t nat -F
+iptables -t mangle -F
+# delete all chains
+iptables -X

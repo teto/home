@@ -55,6 +55,7 @@ NT = natural transformation
 ~. -> view
 
 # Debug
+import Debug.Trace
 traceShow / traceId
 
 

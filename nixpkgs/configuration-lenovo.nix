@@ -7,22 +7,21 @@ in
 {
   imports = [
     # todo renommer en workstation
-    # ./hardware-dell.nix
    ./hardware-lenovo.nix
 
     # for nova dev
     ./modules/docker-daemon.nix
     ./profiles/nova-dev.nix
 
-    ./modules/distributedBuilds.nix
+    # ./modules/distributedBuilds.nix
     ./modules/config-all.nix
-    ./modules/desktop.nix
+    # ./modules/desktop.nix
     ./modules/network-manager.nix
-    ./modules/libvirtd.nix
+    # ./modules/libvirtd.nix
     # ./modules/vpn.nix
-    ./modules/openssh.nix
+    # ./modules/openssh.nix
     ./modules/hoogle.nix
-    ./modules/tor.nix
+    # ./modules/tor.nix
     ./modules/nova.nix
 
     # ./modules/sway.nix
@@ -101,40 +100,24 @@ in
     efi.canTouchEfiVariables = true; # allows to run $ efi...
     systemd-boot.editor = true; # allow to edit command line
     timeout = 5;
-  # just to generate the entry used by ubuntu's grub
+    # just to generate the entry used by ubuntu's grub
     grub = {
       enable = true;
       useOSProber = true;
-      # efiSupport = true;
-# boot.loader.grub.version = 2;
-  # install to none, we just need the generated config
-  # for ubuntu grub to discover
+  # boot.loader.grub.version = 2;
+    # install to none, we just need the generated config
+    # for ubuntu grub to discover
       device = "/dev/sdb";
 
-      # set $FS_UUID to the UUID of the EFI partition
-      # extraEntries = ''
-      #   menuentry "Windows" {
-      #     insmod part_gpt
-      #     insmod fat
-      #     insmod search_fs_uuid
-      #     insmod chain
-      #     search --fs--uid --set=root 9A24EC0A24EBE6EB
-      #     chainloader /EFI/Microsoft/Boot/bootmgfw.efi
-      #   }
-      # '';
 
     };
   };
 
   # hide messages !
   # boot.kernelParams = [ "earlycon=ttyS0" "console=ttyS0" ];
-  # boot.kernelPackages = pkgs.linuxPackagesFor pkgs.my_lenovo_kernel;
-  # boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_latest_debug;
 
   # DOES NOT WORK !
-  # boot.kernelPackages = unstable.pkgs.linuxPackages;
   # boot.kernelPackages = pkgs.linuxPackages_latest;
-  # boot.kernelPackages = pkgs.linuxPackages_testing;
   boot.kernelPackages = pkgs.linuxPackages_5_6;
 
   # boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_latest_without_ns;

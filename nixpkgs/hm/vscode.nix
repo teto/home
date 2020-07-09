@@ -7,8 +7,10 @@
       bbenoist.Nix
       ms-python.python
       ms-kubernetes-tools.vscode-kubernetes-tools
+      # ext install DigitalAssetHoldingsLLC.ghcide
+      # ext install BazelBuild.vscode-bazel
     ];
-    haskell.enable = true;
-    haskell.hie.enable = true;
+    # haskell.enable = true;
+    # haskell.hie.enable = true;
   };
 }

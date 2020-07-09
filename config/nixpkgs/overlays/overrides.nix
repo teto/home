@@ -63,17 +63,19 @@ rec {
   #     ./patches/xdg_utils_symlink.diff
   #   ];
   # });
-  linuxPackages_latest = prev.linuxPackages_latest.extend (selfLinux: superLinux: {
-    nvidia_x11 = superLinux.nvidia_x11.overrideAttrs (attrs: {
-      patches = [
-        (prev.fetchurl {
-          url = https://gitlab.com/snippets/1965550/raw; 
-          sha256 = "0fc0ix468n2s97p9nfdl3bxi3i9hwf60j4k2mabrnxfhladsygzm";
-        })
-        # ./nvidia/conftest.patch
-      ];
-    });
-  });
+
+  # linuxPackages_latest = prev.linuxPackages_latest.extend (selfLinux: superLinux: {
+  #   nvidia_x11 = superLinux.nvidia_x11.overrideAttrs (attrs: {
+  #     patches = [
+  #       (prev.fetchurl {
+  #         url = https://gitlab.com/snippets/1965550/raw; 
+  #         sha256 = "0fc0ix468n2s97p9nfdl3bxi3i9hwf60j4k2mabrnxfhladsygzm";
+  #       })
+  #       # ./nvidia/conftest.patch
+  #     ];
+  #   });
+  # });
+
   nixops-dev = prev.nixops.overrideAttrs ( oa: {
     # src = prev.fetchFromGitHub {
     #   owner = "teto";
