@@ -2206,7 +2206,8 @@ set omnifunc=v:lua.vim.lsp.omnifunc
 
 augroup highlight_yank
     autocmd!
-    autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank("IncSearch", 1000)
+    " silent
+    autocmd TextYankPost * lua require'vim.highlight'.on_yank{higroup="IncSearch", timeout=1000}
 augroup END
 
 autocmd CursorHold lua vim.lsp.util.show_line_diagnostics()
