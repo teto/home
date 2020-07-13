@@ -171,7 +171,7 @@ let
     # shutter # screenshot utility
     # mcomix # manga reader
     # mendeley # requiert qtwebengine
-    # unstable.zeal       # doc for developers
+    zeal       # doc for developers
     vifm
     # zotero     # doc software
     # astroid # always compiles webkit so needs 1 full day
@@ -270,7 +270,8 @@ in
     defaultCacheTtl = 1800;
     enableSshSupport = true;
     # grabKeyboardAndMouse= false;
-    pinentryFlavor = "curses";
+    # pinentryFlavor = "curses";
+    pinentryFlavor = "qt";
     grabKeyboardAndMouse = true;  # should be set to false instead
     verbose = true;
     # see https://github.com/rycee/home-manager/issues/908

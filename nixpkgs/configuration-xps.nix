@@ -21,6 +21,7 @@ let
     # ./modules/mptcp.nix
 
     ./modules/sway.nix
+    ./modules/nova.nix
 
     # ./modules/tor.nix
 

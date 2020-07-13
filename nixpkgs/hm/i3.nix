@@ -192,21 +192,6 @@ in
         # TODO improve config/config specific
         ];
 
-# bindsym $mod+m  mode "monitors"
-# mode "monitors" {
-
-# 	# todo should work with hjkl too
-# 	bindsym $mod+Left move workspace to output left
-# 	bindsym $mod+Right move workspace to output right
-# 	bindsym $mod+Up move workspace to output top
-# 	bindsym $mod+Down move workspace to output down
-
-# 	bindsym $mod+Shift+Left workspace prev_on_output
-# 	bindsym $mod+Shift+Right workspace next_on_output
-
-# 	bindsym Return mode "default"
-# 	bindsym Escape mode "default"
-# }
 
       modes = {
         monitors =
@@ -218,6 +203,7 @@ in
           };
         in
         {
+          "Escape"= "mode default";
           "Return"= "mode default";
         }
         // move_to_output "left" "Left" "Left"
@@ -289,7 +275,7 @@ in
       "$mod+f" = "fullscreen";
       "$mod+Shift+f" = "fullscreen global";
       "$mod+button3" = "floating toggle";
-
+      "$mod+m"= ''mode "monitors'';
     }
     // {
         # change container layout (stacked, tabbed, default)
