@@ -3,3 +3,7 @@ bazel help query
 
 [query](https://docs.bazel.build/versions/master/query-how-to.html)
 
+nixpkgs_package vient de haskell_rules
+nix_package est un wrapper autour de nixpkgs_package (met les options qui vont bien)
+
+nix_c_library

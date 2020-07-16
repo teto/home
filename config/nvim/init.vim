@@ -148,6 +148,7 @@ Plug 'shime/vim-livedown'  " :LivedownPreview
 Plug 'conornewton/vim-pandoc-markdown-preview' " :StartMdPreview / StopMd
 
 " around vcs {{{
+Plug 'sodapopcan/vim-twiggy' " run with :Twiggy
 Plug 'idanarye/vim-merginal'  " fugitive extension :Merginal
 Plug 'rhysd/git-messenger.vim' " to show git message :GitMessenger
 " Plug 'junegunn/gv.vim' " git commit viewer :Gv

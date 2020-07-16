@@ -182,8 +182,10 @@ rec {
 	  name = "neovim";
 	  version = "official-master";
       src = builtins.fetchGit {
-        url = https://github.com/neovim/neovim.git;
-        ref = "master";
+        url = https://github.com/BK1603/neovim.git;
+        ref = "fswatch-autoread";
+        # url = https://github.com/neovim/neovim.git;
+        # ref = "master";
         # url = https://github.com/neovim/neovim.git;
         # ref = "diagnostic";
       };
