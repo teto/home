@@ -11,7 +11,7 @@ let
   ]);
 
   old = import (builtins.fetchTarball {
-      name = "before-libc-update";
+      name = "for-a-good-docker-version";
       url = "https://github.com/nixos/nixpkgs/archive/a9f721892850913699af0d65883f3b16f18d74bb.tar.gz";
       sha256 = "1bk38vvximyi2li1va8s5sc6akvc3vn0ilcnlbbrxay3chrs1pvp";
   }) {};
@@ -23,7 +23,8 @@ mkShell {
   buildInputs = [
     black  # python linter
     jq
-    old.docker-compose
+    docker-compose
+    # old.docker-compose
     myPythonEnv
     pipenv
 

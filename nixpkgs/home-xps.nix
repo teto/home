@@ -16,6 +16,7 @@ let
 
       # ./hm/experimental.nix
       # ./hm/vdirsyncer.nix
+      ./hm/nushell.nix
       ./hm/mail.nix
       ./hm/sway.nix
 

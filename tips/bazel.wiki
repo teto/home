@@ -3,7 +3,13 @@ bazel help query
 
 [query](https://docs.bazel.build/versions/master/query-how-to.html)
 
+`bazel --explain ./explain.txt` ... to see the issue
+
 nixpkgs_package vient de haskell_rules
 nix_package est un wrapper autour de nixpkgs_package (met les options qui vont bien)
 
 nix_c_library
+
+
+To construct :
+bazel-bin/simwork/result-store/result-store-service@image-notimestamp-layer.tar

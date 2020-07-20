@@ -182,10 +182,10 @@ rec {
 	  name = "neovim";
 	  version = "official-master";
       src = builtins.fetchGit {
-        url = https://github.com/BK1603/neovim.git;
-        ref = "fswatch-autoread";
-        # url = https://github.com/neovim/neovim.git;
-        # ref = "master";
+        # url = https://github.com/BK1603/neovim.git;
+        # ref = "fswatch-autoread";
+        url = https://github.com/neovim/neovim.git;
+        ref = "master";
         # url = https://github.com/neovim/neovim.git;
         # ref = "diagnostic";
       };
@@ -198,18 +198,17 @@ rec {
 
   });
 
-  neovim-unwrapped-treesitter = (final.neovim-unwrapped).overrideAttrs (oldAttrs: {
-	  name = "neovim";
-	  version = "treesitter";
+  # neovim-unwrapped-treesitter = (final.neovim-unwrapped).overrideAttrs (oldAttrs: {
+	  # name = "neovim";
+	  # version = "treesitter";
+  #     # bfredl:tree-sitter-query
+  #     # 11113
+  #     src = builtins.fetchGit {
+  #       url = https://github.com/bfredl/neovim.git;
+  #       ref = "tree-sitter-api";
+  #     };
 
-      # bfredl:tree-sitter-query
-      # 11113
-      src = builtins.fetchGit {
-        url = https://github.com/bfredl/neovim.git;
-        ref = "tree-sitter-api";
-      };
-
-  });
+  # });
 
 
   # neovimHaskellConfig = {
@@ -315,6 +314,7 @@ rec {
   };
 
   neovim-dev = let
+      pythonEnv = final.pkgs.python3;
       devMode = true;
     in (final.pkgs.neovim-unwrapped.override  {
       doCheck=true;
@@ -332,13 +332,16 @@ rec {
       url = https://github.com/teto/neovim.git;
       ref = "remove-foldline-final";
     };
-    nativeBuildInputs = oa.nativeBuildInputs 
+    nativeBuildInputs = oa.nativeBuildInputs
       ++ final.pkgs.lib.optionals devMode (with final.pkgs; [
+        pythonEnv
         include-what-you-use  # for scripts/check-includes.py
         jq                    # jq for scripts/vim-patch.sh -r
         doxygen
       ]);
 
-    buildInputs = oa.buildInputs ++ ([ final.pkgs.tree-sitter ]);
+      buildInputs = oa.buildInputs ++ ([
+        # final.pkgs.tree-sitter 
+      ]);
   });
 }

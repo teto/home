@@ -29,6 +29,11 @@ To use the bridge network use network_mode: https://docs.docker.com/compose/comp
 
 Compose relies on network scoped aliases, so if you try to use bridge as an external network it will set those aliases. If you use network_mode, it will disable the built-in aliases, and rely on the aliases made available by the bridge network.
 
+# lister les images locales
+docker images -a
+
+pour ensuite les regarder:
+`docker image inspect hash`
 
 `docker network connect bridge [container]`
 to join the default network that way.

@@ -34,6 +34,7 @@ rec {
 
 	# TODO try i3-snapshot
     # hstr # to deal with shell history
+    # bandwhich  # to monitor per app bandwidth
 
     # vim-vint  #
     tig
@@ -211,6 +212,12 @@ rec {
   programs.fzf = {
     enable = true;
     enableZshIntegration=true;
+    # so that fzf takes into account .gitignore
+    defaultCommand = "fd --type f";
+
+    # add support for ctrl+o to open selected file in VS Code
+    defaultOptions = ["--bind='ctrl-o:execute(code {})+abort'" ];
+    # Setting fd as the default source for fzf
     # defaultOptions
     # changeDirWidgetOptions
     # programs.fzf.fileWidgetOptions
