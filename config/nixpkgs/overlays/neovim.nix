@@ -182,10 +182,10 @@ rec {
 	  name = "neovim";
 	  version = "official-master";
       src = builtins.fetchGit {
-        # url = https://github.com/BK1603/neovim.git;
-        # ref = "fswatch-autoread";
-        url = https://github.com/neovim/neovim.git;
-        ref = "master";
+        url = https://github.com/BK1603/neovim.git;
+        ref = "fswatch-autoread";
+        # url = https://github.com/neovim/neovim.git;
+        # ref = "master";
         # url = https://github.com/neovim/neovim.git;
         # ref = "diagnostic";
       };
@@ -327,11 +327,11 @@ rec {
     # cmakeFlags = oa.cmakeFlags ++ optional devMode "-DLUACHECK_PRG=${neovimLuaEnv}/bin/luacheck";
 
     version = "master";
-    src = builtins.fetchGit {
-      # url = https://github.com/neovim/neovim.git;
-      url = https://github.com/teto/neovim.git;
-      ref = "remove-foldline-final";
-    };
+    # src = builtins.fetchGit {
+    #   # url = https://github.com/neovim/neovim.git;
+    #   url = https://github.com/teto/neovim.git;
+    #   ref = "remove-foldline-final";
+    # };
     nativeBuildInputs = oa.nativeBuildInputs
       ++ final.pkgs.lib.optionals devMode (with final.pkgs; [
         pythonEnv

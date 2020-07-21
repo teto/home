@@ -13,17 +13,14 @@
   services.xserver = {
     enable = true;
     autorun = false;
+
     displayManager = {
-      # defaultSession = null;
-      lightdm.autoLogin = {
+      autoLogin = {
         # enable = false;
         user = "teto";
       };
+      # defaultSession = null;
       gdm = {
-        autoLogin = {
-          # enable = false;
-          user = "teto";
-        };
         wayland = true;
       };
 
