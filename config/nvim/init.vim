@@ -1997,7 +1997,6 @@ nnoremap gO i<CR>
 " let @g="dawi\\gls{p}"
 " nnoremap <Leader>lg @g
 
-" testing my PR
 set signcolumn=auto:3
 
 function! FzfFlipBool()
@@ -2050,11 +2049,11 @@ function! s:RequireHaskellHost(name)
 endfunction
 
 " Register a plugin host that is started when a haskell file is opened
-call remote#host#Register('haskell', "*.l\?hs", function('s:RequireHaskellHost'))
+" call remote#host#Register('haskell', "*.l\?hs", function('s:RequireHaskellHost'))
 
 " But if you need it for other files as well, you may just start it
 " forcefully by requiring it
-let hc=remote#host#Require('haskell')
+" let hc=remote#host#Require('haskell')
 
 " printer configuration
 " set printexpr

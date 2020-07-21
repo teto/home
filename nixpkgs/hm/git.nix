@@ -20,8 +20,11 @@ in
       signByDefault = false;
       key = "64BB6787";
     };
-    extraConfig= {
+    extraConfig = {
 # git config core.sshCommand "ssh -vvv"
+
+      # show the full diff under the commit message
+      commit.verbose = true;
       core = {
         # sshCommand = "ssh -vvv";
         sshCommand = "ssh";
