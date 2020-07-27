@@ -1,3 +1,4 @@
+`load` statements must be at the top
 
 bazel help query
 

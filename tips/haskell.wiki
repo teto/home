@@ -64,3 +64,9 @@ traceShow / traceId
 inCoreSoA
 AoS = Array of Structures
 
+# Multiline strings
+        colNames = "age, workclass, fnlwgt, education, education-num, \
+                   \marital-status, occupation, relationship, race, sex, \
+                   \capital-gain, capital-loss, hours-per-week, \
+                   \native-country\n"
+

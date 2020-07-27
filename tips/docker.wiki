@@ -71,6 +71,9 @@ In host mode the container does not get its own IP-address allocated.
 Similarly port mapping is disabled.
 
 
+# To debug
+docker inspect --format "{{json .State.Health }}" f6c181a5692e | jq
+
 
 23:42 <Church-> Well I'm doing something stupid then.
 23:57 <@ada> teto: no; not if that container is only attached to the host network

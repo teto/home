@@ -392,6 +392,7 @@ Plug 'nvim-treesitter/completion-treesitter' " extension of completion-nvim,
 " depends on nvim-treesitter/nvim-treesitter
 Plug 'nvim-treesitter/highlight.lua' " to test treesitter
 Plug 'nvim-treesitter/nvim-treesitter' " to test treesitter
+Plug 'nvim-treesitter/playground'
 
 " github-comment requires webapi (https://github.com/mattn/webapi-vim)
 " Plug 'mmozuras/vim-github-comment' " :GHComment

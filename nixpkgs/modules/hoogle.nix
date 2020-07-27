@@ -10,10 +10,14 @@
       amazonka-s3
       # bson  # broken too
       directory
+      ip
+      foldl
       Frames
       haskeline
       http-media   # Network.HTTP.Media 
       katip
+      lens
+      # lens-tutorial  # broken
       repline
       servant
       servant-cli
@@ -27,6 +31,8 @@
       swagger2
       split
       streaming-commons
+      vinyl
+      vector
     ];
   };
 }

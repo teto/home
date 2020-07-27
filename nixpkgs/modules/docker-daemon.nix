@@ -11,15 +11,15 @@
     # liveRestore
   };
 
-  # services.dockerRegistry = {
+  services.dockerRegistry = {
 
-  #   enable = false;
-  #   enableGarbageCollect = true;
-  #   # garbageCollectDates
-  #   port = 5000;  # 5000 is the default
-  #   listen = "localhost";
-  #   # storagePath
-  # };
+    enable = true;
+    # enableGarbageCollect = true;
+    # garbageCollectDates
+    port = 6000;  # 5000 is the default but already used by docker
+    # listen = "localhost";
+    # storagePath
+  };
 
   environment.systemPackages = with pkgs; [
     docker-credential-helpers

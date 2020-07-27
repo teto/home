@@ -3,6 +3,7 @@
 
   imports = [
     ../modules/docker-daemon.nix
+    ../modules/minio.nix
   ];
 
   environment.systemPackages = with pkgs; [

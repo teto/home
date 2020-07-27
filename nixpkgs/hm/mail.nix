@@ -11,7 +11,7 @@ let
     extraConfig.channel = {
       # unlimited
       # when setting MaxMessages, set ExpireUnread
-      MaxMessages = 0;
+      MaxMessages = 20000;
       # size[k|m][b]
       MaxSize = "1m";
     };
@@ -197,7 +197,7 @@ let
       # Exclude everything under the internal [Gmail] folder, except the interesting folders
 # Patterns * ![Gmail]* "[Gmail]/Sent Mail" "[Gmail]/Starred" "[Gmail]/All Mail"
       # "[Gmail]/Inbox"
-      patterns = ["* ![Gmail]*" "[Gmail]/Sent Mail" "[Gmail]/Starred" ];
+      # patterns = ["* ![Gmail]*" "[Gmail]/Sent Mail" "[Gmail]/Starred" ];
       # to be able to create drafts ?
       create = "both";
     };
@@ -409,7 +409,7 @@ in
         # in bytes
         # The startdate option expects a date in the format yyyy-mm-dd.
         # can't be used with maxage
-        startdate = "2018-04-01";
+        startdate = "2020-04-01";
         maxsize=20000;
         # works only with local folders of type maildir in daysA
         # maxage=30

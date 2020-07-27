@@ -23,13 +23,17 @@ settings:
     global: []
   content.proxy:
     global: system
+  content.register_protocol_handler:
+    https://mail.google.com?extsrc=mailto&url=%25s: false
   editor.command:
     global:
     - termite
     - -e
     - nvim
     - '{}'
-  fonts.tabs:
+  fonts.tabs.selected:
+    global: 14pt default_family
+  fonts.tabs.unselected:
     global: 14pt default_family
   input.insert_mode.auto_load:
     global: true

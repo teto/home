@@ -1,15 +1,5 @@
 [
   {
-    "slug": "1password-x-password-manager",
-    "license": {
-      "tag": "custom",
-      "shortName": "1pwd",
-      "fullName": "Service Agreement for 1Password users and customers",
-      "url": "https://1password.com/legal/terms-of-service/",
-      "free": false
-    }
-  },
-  {
     "slug": "adsum-notabs"
   },
   {
@@ -30,32 +20,13 @@
     "slug": "browserpass-otp"
   },
   {
-    "slug": "buster-captcha-solver"
-  },
-  {
-    "slug": "close-other-windows"
-  },
-  {
-    "slug": "cookie-autodelete"
-  },
-  {
-    "slug": "dark-night-mode"
-  },
-  {
-    "slug": "dark-scroll-for-tweetdeck"
+    "slug": "yomichan"
   },
   {
     "slug": "darkreader"
   },
   {
     "slug": "decentraleyes"
-  },
-  {
-    "slug": "disconnect"
-  },
-  {
-    "slug": "ecosia-the-green-search",
-    "pname": "ecosia"
   },
   {
     "slug": "facebook-container"
@@ -78,25 +49,9 @@
   {
     "slug": "gopass-bridge"
   },
-  {
-    "slug": "greasemonkey"
-  },
-  {
-    "slug": "görans-hemmasnickrade-ordli",
-    "pname": "swedish-dictionary"
-  },
+  ,
   {
     "slug": "header-editor"
-  },
-  {
-    "slug": "honey",
-    "license": {
-      "tag": "custom",
-      "shortName": "honeyl",
-      "fullName": "Custom License for Honey",
-      "url": "https://addons.mozilla.org/en-US/firefox/addon/honey/license/",
-      "free": false
-    }
   },
   {
     "slug": "https-everywhere"
@@ -105,51 +60,7 @@
     "slug": "i-dont-care-about-cookies"
   },
   {
-    "slug": "ipfs-companion"
-  },
-  {
-    "slug": "keepass-helper-url-in-title",
-    "pname": "keepass-helper"
-  },
-  {
-    "slug": "keepassxc-browser"
-  },
-  {
-    "slug": "leechblock-ng"
-  },
-  {
-    "slug": "link-cleaner"
-  },
-  {
     "slug": "multi-account-containers"
-  },
-  {
-    "slug": "octotree"
-  },
-  {
-    "slug": "old-reddit-redirect"
-  },
-  {
-    "slug": "peertubeify"
-  },
-  {
-    "slug": "plasma-integration"
-  },
-  {
-    "slug": "privacy-badger17",
-    "pname": "privacy-badger"
-  },
-  {
-    "slug": "privacy-possum"
-  },
-  {
-    "slug": "react-devtools"
-  },
-  {
-    "slug": "reddit-enhancement-suite"
-  },
-  {
-    "slug": "reddit-moderator-toolbox"
   },
   {
     "slug": "refined-github-",
@@ -157,16 +68,6 @@
   },
   {
     "slug": "save-page-we"
-  },
-  {
-    "slug": "sidebery"
-  },
-  {
-    "slug": "styl-us",
-    "pname": "stylus"
-  },
-  {
-    "slug": "tab-center-redux"
   },
   {
     "slug": "temporary-containers"
@@ -184,14 +85,6 @@
     "slug": "transparent-standalone-image"
   },
   {
-    "slug": "tridactyl-vim",
-    "pname": "tridactyl",
-    "license": {
-      "tag": "predefined",
-      "shortName": "asl20"
-    }
-  },
-  {
     "slug": "ublock-origin"
   },
   {
@@ -200,14 +93,4 @@
   {
     "slug": "vim-vixen"
   },
-  {
-    "slug": "vimium-ff",
-    "pname": "vimium"
-  },
-  {
-    "slug": "violentmonkey"
-  },
-  {
-    "slug": "zoom-page-we"
-  }
 ]
