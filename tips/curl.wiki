@@ -5,14 +5,22 @@ application/octet-stream
 
 curl -i -X POST -H "Content-Type: application/json;=" -d '{"user":"bar","pass":"foooo"}' http://localhost:8000
 
-curl -v -X PUT -T /home/teto/nova/test.bson -H 'Content-Type: application/bson' 127.0.0.1:52002/result/task_id/42.csv
+curl -v -X PUT -T /home/teto/nova/test.bson -H 'Expect:' -H 'Content-Type: application/bson' 127.0.0.1:52002/result/task_id/42.csv
 
 
 To get the file
-curl -v -H "Accept: application/bson" 127.0.0.1:42000/result/task_id/5f180304c352698b6ba9ade4.csv 
+curl -v -H 'Expect:' -H "Accept: application/bson" 127.0.0.1:52002/result/task_id/5f180304c352698b6ba9ade4.csv 
 
 
 # -H "Accept: application/bson"
 [[curl]] -v  -X DELETE 127.0.0.1:52090/result/task_id/5f180304c352698b6ba9ade3.csv
 
 [[curl]] -v  -X GET 127.0.0.1:52002/healthcheck
+
+
+# to remove specific headers
+add -H '<name>:' and it won't send anything (it's not sending an empty value)
+https://stackoverflow.com/questions/31293181/how-can-i-remove-default-headers-that-curl-sends
+
+
+curl --trace dump will dump the packet

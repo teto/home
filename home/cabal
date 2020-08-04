@@ -24,7 +24,8 @@ repository hackage.haskell.org
 -- ignore-sandbox: False
 -- ignore-expiry: False
 -- http-transport:
--- nix: False
+nix: True
+
 remote-repo-cache: /home/teto/.cabal/packages
 -- local-repo:
 -- logs-dir: /home/teto/.cabal/logs

@@ -42,6 +42,9 @@ let
 in
 {
   nix = {
+    # set it on a per-machine basis
+    # distributedBuilds = true;
+
     # might be useful to fetch from private repositories even in sandboxed mode ?!
     # fetchGit is run as user so no
     # envVars = {
@@ -53,11 +56,9 @@ in
     daemonIONiceLevel = 3;
     # 0 = max (default) vs 19 lowest
     daemonNiceLevel = 2;
-    buildMachines = [
-      localMachine
-    ];
+    # buildMachines = [
+    #   localMachine
+    # ];
 
-    # set it on a per-machine basis
-    # distributedBuilds = true;
   };
 }

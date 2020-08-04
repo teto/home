@@ -12,6 +12,12 @@ mkfile_dir := $(dir $(mkfile_path))
 
 .PHONY: config etc mail local bin home vim_plugins treesitter
 
+
+# regenerate my email contacts
+# (to speed up alot autocompletion)
+contacts:
+	sh ~/bin-nix/generate-addressbook
+
 # http://stackoverflow.com/questions/448910/makefile-variable-assignment
 config:
 	stow -t "$(XDG_CONFIG_HOME)" config

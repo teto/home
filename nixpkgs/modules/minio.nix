@@ -3,6 +3,10 @@ let
   secrets = import ../secrets.nix;
 in
 {
+
+  # dont forget to create the buckets.
+  # with minio client:
+  # mc mb local/jinko-test
   services.minio = {
 
     enable = true;
@@ -12,7 +16,7 @@ in
 
     # enableGarbageCollect = true;
     # garbageCollectDates
-    listenAddress = ":10000";  # 9000 is the default but already used by the platform
+    listenAddress = "0.0.0.0:10000";  # 9000 is the default but already used by the platform
 
     # region = 
     secretKey = "testtesttest";

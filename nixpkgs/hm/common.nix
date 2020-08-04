@@ -137,8 +137,8 @@ rec {
     historyControl=["ignorespace"];
     historyIgnore=["ls" "pwd"];
     # shellOptions = [ "histappend" "checkwinsize" "extglob" "globstar" "checkjobs" ];
-    # historyFile = "${xdg.cacheHome}/bash_history";
-    historyFile = "$XDG_CACHE_HOME/bash_history";
+    historyFile = "${config.xdg.cacheHome}/bash_history";
+    # historyFile = "$XDG_CACHE_HOME/bash_history";
     shellAliases = {
       hm="home-manager";
       #mostly for testin
@@ -153,19 +153,24 @@ rec {
       enjp="trans -from en -to ja ";
       dmesg="dmesg --color=always|less";
 
-      tcp_netstat="netstat -ltnp";
+      netstat_tcp="netstat -ltnp";
       # TODO move to root level ?
       nixpaste="curl -F \"text=<-\" http://nixpaste.lbr.uno";
 
       # kitty
-      icat="kitty +kitten icat";
+      kcat="kitty +kitten icat";
 
-      # modprobe to use 
+      # modprobe to use
       # TODO might need to use -S as well
       modprobe_exp="modprobe -d /home/teto/mptcp/build";
     };
 
 
+    # see https://github.com/minio/mc/issues/3238
+    # generates an error
+    # initExtra = ''
+    #   complete -C ${pkgs.mc}/bin/mc mc
+    # '';
   };
 
   # you can switch from cli with xkb-switch or xkblayout-state

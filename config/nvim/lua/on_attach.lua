@@ -25,11 +25,11 @@ local setup_progress = function(client)
   vim.api.nvim_command('augroup END')
 
   -- If the client is a documentSymbolProvider, set up an autocommand to update the containing function
-  if client.resolved_capabilities.document_symbol then
-    vim.api.nvim_command('augroup lsp_aucmds')
-    vim.api.nvim_command('  au CursorHold,BufEnter <buffer> lua require("lsp-status").update_current_function()')
-    vim.api.nvim_command('augroup END')
-  end
+  -- if client.resolved_capabilities.document_symbol then
+  --   vim.api.nvim_command('augroup lsp_aucmds')
+  --   vim.api.nvim_command('  au CursorHold,BufEnter <buffer> lua require("lsp-status").update_current_function()')
+  --   vim.api.nvim_command('augroup END')
+  -- end
 end
 
 M.on_attach = function(client)

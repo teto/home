@@ -1677,6 +1677,7 @@ let g:mkdp_page_title = '「${name}」'
 let g:vista_echo_cursor_strategy='both'
 let g:vista_close_on_jump=0
 let g:vista_default_executive='nvim_lsp'
+let g:vista_log_file = stdpath('cache').'/vista.log'
 
 let g:vista_executive_for = {
     \ 'php': 'vim_lsp',
@@ -1733,15 +1734,25 @@ let g:diagnostic_insert_delay = 1
 " completion-nvim {{{
 let g:completion_docked_hover=1
 " let g:completion_enable_auto_popup = 0
-let g:completion_enable_snippet = 'UltiSnips'
+" can be v:null
+" 'UltiSnips'
+let g:completion_enable_auto_hover = 1
+let g:completion_enable_auto_signature = 1
+let g:completion_enable_snippet = v:null
 let g:completion_enable_auto_signature = 1
 let g:completion_timer_cycle = 80 "default value is 80
+
+let g:completion_matching_strategy_list = [ 'exact' ]
 " Configure the completion chains
+" path
+" \ {'complete_items' : ['lsp', 'snippet']},
+" here we can choose to separate complete_items
 let g:completion_chain_complete_list = {
     \'default' : {
     \	'default' : [
-    \		{'complete_items' : ['lsp', 'snippet']},
-    \		{'mode' : 'file'}
+    \		{'complete_items' : ['lsp', 'path']},
+    \		{'mode' : '<c-p>'},
+    \		{'mode' : '<c-n>'}
     \	],
     \	'comment' : [],
     \	'string' : []
@@ -1760,6 +1771,9 @@ let g:completion_chain_complete_list = {
     \	{'complete_items': ['lsp']}
     \	],
     \}
+
+imap  <c-j> <Plug>(completion_next_source)
+imap  <c-k> <Plug>(completion_prev_source)
 
 " hello world"
 " let g:completion_confirm_key = "\<C-y>"
