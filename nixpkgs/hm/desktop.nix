@@ -163,7 +163,7 @@ let
     # anki          # spaced repetition system
     # hopefully we can remove this from the environment
     # it's just that I can't setup latex correctly
-    unstable.libreoffice
+    # unstable.libreoffice
     unstable.wireshark
 
     unstable.qutebrowser  # keyboard driven fantastic browser

@@ -11,6 +11,45 @@ nix_package est un wrapper autour de nixpkgs_package (met les options qui vont b
 
 nix_c_library
 
+# to debug
+bazel -c dbg
+bazel --client_debug ...
+https://docs.bazel.build/versions/master/command-line-reference.html#flag--client_debug
+
+bazel -s ...
+will have bazel print the run [[commands]]
+bazel build --explain=file.txt --verbose_explanations
+
+bazel info shows the server log location.
+Our bazel remote is in /tmp/bazel-remote.log
+
+# force a rebuild
+Change the environment 
+bazel build --action_env="avariable=1" :mytarget
+https://stackoverflow.com/questions/59095711/how-to-force-rebuild-a-package-in-bazel-to-measuring-build-time
 
 To construct :
 bazel-bin/simwork/result-store/result-store-service@image-notimestamp-layer.tar
+
+# to override a repository
+bazel build/test/run/sync \
+  --override_repository rules_haskell=/path/to/checkout
+  
+  
+The WORKSPACE file allows users to depend on targets from other parts of the filesystem or downloaded from the internet. It uses the same syntax as BUILD files, but allows a different set of rules called repository rules (sometimes also known as workspace rules).
+
+
+# To force a re-download:
+$ bazel sync
+
+
+# 
+Note that running bazel clean will not actually delete the external directory. To remove all external artifacts, use bazel clean --expunge
+
+bazel shutdown
+
+# for offline builds
+run `bazel fetch` beforehand.
+
+
+%% Targets with tags = ["manual"] will not be included in wildcard target patterns (..., :*, :all, etc.)

@@ -14,7 +14,6 @@ docker logs --tail 50 --follow --timestamps jinko_result-store-external_1
 
 docker network ls
 
-
 docker attach jinko_frontend_1
 
 --sig-proxy
@@ -74,23 +73,3 @@ Similarly port mapping is disabled.
 # To debug
 docker inspect --format "{{json .State.Health }}" f6c181a5692e | jq
 
-
-23:42 <Church-> Well I'm doing something stupid then.
-23:57 <@ada> teto: no; not if that container is only attached to the host network
-23:57 <@ada> teto: a container could only resolve the names of other containers who are also on a common user-defined network
-23:58 <@ada> teto: so container-networks only
-23:59 <teto> ada but can I attach it to host and the rest ? do port mappings disappear as well ?
-00:00 <@ada> teto: you can't publis hports and also use the host network
-00:00 <@ada> teto: if your container is on the host network, it can just obtain whatever ports it wants
-00:00 <@ada> teto: the container networks are isolated, hence the port publishing
-00:01 <@ada> teto: I don't know if you can be attached to the host network namespace and also a container network
-00:01 <@ada> teto: but you can be attached to multiple container networks
-00:20 <teto> ada: thanks
-00:24 <teto> other question, I would like to override a value via my docker-compose.test.yml: I set `checkhealth: ""` to cancel out a checkhealth defined in docker-compose.yml but can't seem to find a way to cancel it out
-00:39 <Church-> [twisti]: Odd, not sure what I screwed up the first time but deleting the volumes and re-running my docker-compose generated everything successfully this time.
-00:39 <Church-> How odd
-00:41 <teto> nevermind I found in the doc I could override with NONE
-00:50 <teto> when I try to set the default network to "host" in docker-compose, I get "network-scoped alias is supported only for containers in user defined networks", I guess I can use "network_mode: host" on every service but that seems redundant. Is there a simpler way ?
-02:07 <@ada> teto: no, each service that should be on the host network requires the network_mode: host setting
-02:07 <@ada> generally it's a good idea to use container networks when possible; if there is a large number of service that you're putting together on the host network thats usually a red flag
-02:08 <@ada> nothing is stopping you, but you're just removing some of the isolation benefits of using containers in the first place

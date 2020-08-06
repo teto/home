@@ -1,0 +1,4 @@
+
+# CI
+
+https://docs.gitlab.com/ce/ci/yaml/README.html
