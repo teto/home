@@ -16,6 +16,7 @@ bazel -c dbg
 bazel --client_debug ...
 https://docs.bazel.build/versions/master/command-line-reference.html#flag--client_debug
 
+# '-s' stands for subcommands
 bazel -s ...
 will have bazel print the run [[commands]]
 bazel build --explain=file.txt --verbose_explanations

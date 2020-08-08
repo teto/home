@@ -73,7 +73,7 @@ in
      inputMethod = {
        enabled = "fcitx";
        fcitx.engines = with pkgs.fcitx-engines; [
-         mozc
+         # mozc  # broken
          table-other # for arabic
          table-extra # for arabic
          # hangul

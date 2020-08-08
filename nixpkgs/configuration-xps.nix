@@ -156,6 +156,7 @@ let
     # strongswan # to get ipsec in path
     # cups-pk-helper # to add printer through gnome control center
     [
+      pkgs.lm_sensors # to see CPU temperature (command 'sensors')
       pkgs.brightnessctl
     ]
   ;

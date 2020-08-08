@@ -13,9 +13,9 @@ curl -v -H 'Expect:' -H "Accept: application/bson" 127.0.0.1:52002/result/task_i
 
 
 # -H "Accept: application/bson"
-[[curl]] -v  -X DELETE 127.0.0.1:52090/result/task_id/5f180304c352698b6ba9ade3.csv
+curl -v  -X DELETE 127.0.0.1:52090/result/task_id/5f180304c352698b6ba9ade3.csv
 
-[[curl]] -v  -X GET 127.0.0.1:52002/healthcheck
+curl -v  -X GET 127.0.0.1:52002/healthcheck
 
 
 # to remove specific headers
@@ -24,3 +24,11 @@ https://stackoverflow.com/questions/31293181/how-can-i-remove-default-headers-th
 
 
 curl --trace dump will dump the packet
+
+# To authenticate 
+
+One can pass 
+-u [[user]]:thepasswordgoeshere
+or curl https://myusername:mypassword@www.example.com/Push_Order.php?orderId=1562
+or use
+CURLOPT_USERPWD
