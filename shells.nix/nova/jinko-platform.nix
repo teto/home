@@ -28,5 +28,10 @@ mkShell {
 
   shellHook = ''
     export PYTHONPATH=${myPythonEnv}/${myPythonEnv.sitePackages}
+    # Use Docker Buildkit
+    export COMPOSE_DOCKER_CLI_BUILD=1
+    export DOCKER_BUILDKIT=1
+
+
   '';
 }

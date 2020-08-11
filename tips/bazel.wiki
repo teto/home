@@ -52,5 +52,6 @@ bazel shutdown
 # for offline builds
 run `bazel fetch` beforehand.
 
+--record_rule_instantiation_callstack
 
 %% Targets with tags = ["manual"] will not be included in wildcard target patterns (..., :*, :all, etc.)

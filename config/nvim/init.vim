@@ -343,8 +343,8 @@ Plug 'dietsche/vim-lastplace' " restore last cursor postion (is it still needed 
 Plug 'vim-airline/vim-airline'
 " Plug '~/vim-airline'
 Plug 'vim-airline/vim-airline-themes' " creates problems if not here
-" Plug 'hrsh7th/vim-vsnip' " vscode/lsp snippet format
-" Plug 'hrsh7th/vim-vsnip-integ'
+Plug 'hrsh7th/vim-vsnip' " vscode/lsp snippet format
+Plug 'hrsh7th/vim-vsnip-integ'
 
 Plug 'justinmk/vim-gtfo' " gfo to open filemanager in cwd
 Plug 'wannesm/wmgraphviz.vim', {'for': 'dot'} " graphviz syntax highlighting
@@ -1800,7 +1800,9 @@ set completeopt+=noinsert,noselect
 let g:pdfscribe_pdf_dir  = expand('$HOME').'/Nextcloud/papis_db'
 let g:pdfscribe_notes_dir = expand('$HOME').'/Nextcloud/papis_db'
 "}}}
-
+" vsnip {{{
+let g:vsnip_snippet_dir = stdpath('config').'/vsnip'
+"}}}
 " to prettify json
 " g:python3_host_prog -m json.tool
 
@@ -1975,9 +1977,12 @@ endif
 " MatchParen(theses)
 " echo -e "\e[9mstrikethrough\e[0m" works in termite (libvte)
 " regarder dans 'guifont' y a s=strikeout
+
+
+" undercurl
 autocmd ColorScheme *
       \ highlight Comment gui=italic
-      \ | highlight Search gui=undercurl
+      \ | highlight Search gui=underline
       \ | highlight MatchParen guibg=NONE guifg=NONE gui=underline
       \ | highlight NeomakePerso cterm=underline ctermbg=Red  ctermfg=227  gui=underline
 " guibg=Red

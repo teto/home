@@ -1,8 +1,20 @@
-docker run mattator/dce-dockerfiles:latest
+# to start a docker
+docker run mattator/dce-dockerfiles:latest 
+add --name NAME to give it a memorable name:
+docker run --name NAME mattator/dce-dockerfiles:latest 
+
+
+One can use `-e "foo=bar"` to pass additionnal variables.
+
+Pour lister les images et leur nom
+docker ps
+%% docker container ls
+
 
 # start the container + get a prompt 
 
 docker exec -it <container name> /bin/bash
+(the image must be running)
 
 docker-credentials-pass pour eviter d'avoir le mdp en clair dans $HOME/.docker/config.json
 
