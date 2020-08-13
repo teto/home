@@ -3,6 +3,7 @@ docker run mattator/dce-dockerfiles:latest
 add --name NAME to give it a memorable name:
 docker run --name NAME mattator/dce-dockerfiles:latest 
 
+docker image prune -a
 
 One can use `-e "foo=bar"` to pass additionnal variables.
 

@@ -1,6 +1,8 @@
 { config, lib, pkgs,  ... }:
 {
 
+  # for sharedssh access
+  services.gvfs.enable = true;
 
   nix = {
     binaryCaches = [

@@ -22,7 +22,7 @@ mkShell {
   buildInputs = [
     black  # python linter
     jq
-    docker-compose
+    old.docker-compose
     myPythonEnv
     pipenv
 

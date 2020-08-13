@@ -298,7 +298,8 @@ rec {
       # fi
 
 
-
+      # not sure how it's inherited
+      unset AWS_DEFAULT_PROFILE
     ''
       # https://github.com/atweiden/fzf-extras
       # the zsh script does nothing yet

@@ -22,6 +22,7 @@ let
 
     ./modules/sway.nix
     ./modules/nova.nix
+    ./modules/kubernetes.nix
 
     # ./modules/tor.nix
 
@@ -167,6 +168,7 @@ let
   # service to update bios etc
   # managed to get this problem https://github.com/NixOS/nixpkgs/issues/47640
   services.fwupd.enable = true;
+  services.gvfs.enable = true;
 
   programs.ccache.enable = true;
 
