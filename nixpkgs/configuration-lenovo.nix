@@ -15,7 +15,7 @@ in
 
     # ./modules/distributedBuilds.nix
     ./modules/config-all.nix
-    # ./modules/desktop.nix
+    ./modules/desktop.nix
     ./modules/network-manager.nix
     # ./modules/libvirtd.nix
     # ./modules/vpn.nix
@@ -118,7 +118,7 @@ in
 
   # DOES NOT WORK !
   # boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.kernelPackages = pkgs.linuxPackages_5_6;
+  boot.kernelPackages = pkgs.linuxPackages_5_7;
 
   # boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_latest_without_ns;
 
@@ -299,7 +299,7 @@ in
   # ];
 
 
-  services.xserver.displayManager.gdm.nvidiaWayland = true;
+  # services.xserver.displayManager.gdm.nvidiaWayland = true;
 
   # this is required as well
   hardware.nvidia.modesetting.enable = true;
@@ -315,8 +315,8 @@ in
 
   # kinda experimental
   # services.openssh.banner = "Hello world";
-  security.rngd.enable = false;
-  security.rngd.debug = true;
+  security.rngd.enable = true;
+  # security.rngd.debug = true;
 
   # marked as internal
   # $out here is the profile generation
@@ -324,11 +324,11 @@ in
     ln -s ${config.boot.kernelPackages.kernel.dev}/vmlinux $out/vmlinux
   '';
 
-  # TODO this doesn't seem taken into account
-  services.xserver.displayManager.lightdm.autoLogin = {
-    enable = true;
-    user = "teto";
-  };
+  # # TODO this doesn't seem taken into account
+  # services.xserver.displayManager.lightdm.autoLogin = {
+  #   enable = true;
+  #   user = "teto";
+  # };
 
   # environment.ld-linux = true;
 }

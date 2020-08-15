@@ -27,5 +27,12 @@ require'nvim-treesitter.configs'.setup {
         list_definitions = "gnD"          -- mapping to list all definitions in current file
       }
     },
-    ensure_installed = {"c"} -- one of 'all', 'language', or a list of languages
+    ensure_installed = {"c"}, -- one of 'all', 'language', or a list of languages
+
+	playground = {
+		enable = true,
+		disable = {},
+		updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
+		persist_queries = false -- Whether the query persists across vim sessions
+	}
 }
