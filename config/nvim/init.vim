@@ -386,7 +386,7 @@ Plug 'vimwiki/vimwiki'
 
 Plug 'nvim-lua/diagnostic-nvim'  " LSP improvements OpenDiagnostic/PrevDiagnostic
 " https://github.com/haorenW1025/completion-nvim/wiki/chain-complete-support
-Plug 'nvim-lua/completion-nvim' " lsp based completion framework
+" Plug 'nvim-lua/completion-nvim' " lsp based completion framework
 " treesitter may slow down nvim
 Plug 'nvim-treesitter/completion-treesitter' " extension of completion-nvim,
 " depends on nvim-treesitter/nvim-treesitter
@@ -1740,7 +1740,7 @@ let g:completion_enable_auto_hover = 1
 let g:completion_enable_auto_signature = 1
 let g:completion_enable_snippet = v:null
 let g:completion_enable_auto_signature = 1
-let g:completion_timer_cycle = 80 "default value is 80
+" let g:completion_timer_cycle = 80 "default value is 80
 
 let g:completion_matching_strategy_list = [ 'exact' ]
 " Configure the completion chains
@@ -1762,7 +1762,8 @@ let g:completion_chain_complete_list = {
     \	{'mode' : 'cmd'}
     \	],
     \'c' : [
-    \	{'complete_items': ['lsp'], 'triggered_only': ['.', '::', '->', '_']}
+    \	{'complete_items': ['lsp'],
+    \     'triggered_only': ['.', '::', '->', '_']}
     \	],
     \'python' : [
     \	{'complete_items': ['lsp']}
@@ -1782,8 +1783,6 @@ set completeopt+=menuone  " use pum even for one match
 set completeopt+=noinsert,noselect
 " set completeopt+=longest
 
-" Use completion-nvim in every buffer
-" autocmd BufEnter * lua require'completion'.on_attach()
 " }}}
 " treesitter-completion {{{
 " Highlight the node at point, its usages and definition when cursor holds
@@ -2245,8 +2244,8 @@ hi LspDiagnosticsUnderline cterm=underline gui=undercurl
 " ✘'
 " 
 " TODO update
-sign define LspDiagnosticsErrorSign text=E
-sign define LspDiagnosticsWarningSign text=W
+sign define LspDiagnosticsErrorSign text=✘
+sign define LspDiagnosticsWarningSign text=！
 sign define LspDiagnosticsInformationSign text=I
 sign define LspDiagnosticsHintSign text=H
 

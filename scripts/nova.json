@@ -1,0 +1,5 @@
+{
+	"gitops": {
+		"upstream": "ssh://git@git.novadiscovery.net:4224/jinko/jinko-gitops-infra.git"
+	}
+}

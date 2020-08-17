@@ -3,5 +3,6 @@ nixpkgs/home-mail.nix filter=git-crypt diff=git-crypt
 nixpkgs/modules/binary-caches.json filter=git-crypt diff=git-crypt
 nixpkgs/modules/cluster-join-token.key filter=git-crypt diff=git-crypt
 nixpkgs/hm/ssh-config.nix filter=git-crypt diff=git-crypt
+scripts/nova.json filter=git-crypt diff=git-crypt
 cfp_wns32019.txt filter=git-crypt diff=git-crypt
 *.key filter=git-crypt diff=git-crypt
