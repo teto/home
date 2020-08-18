@@ -38,6 +38,9 @@ compression = 0
 [credential "https://github.com"]
 	username = teto
 
+[credential "https://git.novadiscovery.net/jinko/scenario"]
+	username = platform
+
 # [sendemail.iij]
 # envelopeSender
 # from = coudn@iij.ad.jp
