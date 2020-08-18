@@ -1,12 +1,19 @@
+# TODO pin
 with import <nixpkgs> {};
 
 let
-  myPythonEnv = python37.withPackages(ps: with ps; [
-    chardet  # encoding detector
-    certifi
-    locustio  # disable checks for now
-    pandas
-  ]);
+
+  myPythonEnv = poetry2nix.mkPoetryEnv {
+    projectDir = ./.;
+  };
+
+  # myPythonEnv = python37.withPackages(ps: with ps; [
+  #   chardet  # encoding detector
+  #   certifi
+  #   locustio  # disable checks for now / locustio not supported for 3.8
+  #   pandas
+  #   poetry  # temp to test
+  # ]);
 
 in
 mkShell {

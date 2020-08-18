@@ -100,7 +100,7 @@ let
     # alsa-utils # for alsamixer
     arandr  # to move screens/monitors around
     hunspellDicts.fr-any
-    buku  # broken on unstable and stable
+    # buku  # broken on unstable and stable
     # dynamic-colors # to change the terminal colors ("dynamic-colors switch solarized-dark")
     # gcalc
     # unstable.dropbox

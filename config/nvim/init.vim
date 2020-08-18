@@ -105,6 +105,7 @@ set exrc
 " vim-plug plugin declarations {{{1
 call plug#begin(s:plugdir)
 Plug '~/pdf-scribe.nvim'  " to annotate pdf files from nvim :PdfScribeInit
+Plug 'cespare/vim-toml'
 " annotations plugins {{{
 Plug 'MattesGroeger/vim-bookmarks' " ruby  / :BookmarkAnnotate
 " 'wdicarlo/vim-notebook' " last update in 2016
