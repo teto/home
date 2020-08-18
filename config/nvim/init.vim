@@ -1164,13 +1164,11 @@ let g:vimtex_quickfix_method="latexlog"
 let g:vimtex_quickfix_mode = 2 " 1=> opened automatically and becomes active (2=> inactive)
 let g:vimtex_indent_enabled=0
 let g:vimtex_indent_bib_enabled=1
-let g:vimtex_index_split_pos = 'below'
 let g:vimtex_view_method = 'zathura'
 "let g:vimtex_snippets_leader = ','
 let g:vimtex_format_enabled = 0
 let g:vimtex_complete_recursive_bib = 0
 let g:vimtex_complete_close_braces = 0
-let g:vimtex_fold_comments=0
 let g:vimtex_fold_enabled = 0
 let g:vimtex_view_use_temp_files=1 " to prevent zathura from flickering
 let g:vimtex_syntax_minted = [
