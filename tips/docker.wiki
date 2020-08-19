@@ -11,6 +11,10 @@ Pour lister les images et leur nom
 docker ps
 %% docker container ls
 
+# kill all containers
+
+docker kill $(docker ps -q)
+
 
 # start the container + get a prompt 
 

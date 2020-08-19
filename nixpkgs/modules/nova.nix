@@ -6,8 +6,8 @@
 
   nix = {
     binaryCaches = [
-      "s3://devops-ci-infra-prod-caching-nix?region=eu-central-1"
-      "https://jinkoone.cachix.org"
+      "s3://devops-ci-infra-prod-caching-nix?region=eu-central-1&profile=nix-daemon"
+      # "https://jinkoone.cachix.org"
       "https://cache.nixos.org/"
     ];
 
@@ -17,9 +17,9 @@
       "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
     ];
 
-    envVars = {
-      AWS_DEFAULT_PROFILE="nix-daemon";
-    };
+    # envVars = {
+    #   AWS_PROFILE="nix-daemon";
+    # };
   };
 
 

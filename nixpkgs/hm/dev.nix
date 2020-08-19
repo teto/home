@@ -6,7 +6,7 @@
     visidata
     yaml-language-server
     # dockerfile-language-server-nodejs
-    pass-git-helper
+    gitAndTools.pass-git-helper
   ];
 
   programs.direnv.enable = true;

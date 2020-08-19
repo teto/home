@@ -1,6 +1,7 @@
 { config, pkgs, ... }:
+# see https://nixos.org/nixos/manual/index.html#sec-kubernetes
 let
-  kubeMasterIP = "127.0.0.1";
+  kubeMasterIP = "10.0.0.1";
   kubeMasterHostname = "api.kube";
   kubeMasterAPIServerPort = 443;
 in
@@ -23,7 +24,12 @@ in
       securePort = kubeMasterAPIServerPort;
       advertiseAddress = kubeMasterIP;
     };
-    addons.dashboard.enable = true;
+    addons.dashboard = {
+      enable = true;
+      rbac.enable = true;
+    };
+
+    # apiserver.enable = true;
 
     # use coredns
     # addons.dns.enable = true;
