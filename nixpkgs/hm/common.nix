@@ -41,8 +41,10 @@ rec {
     netcat-gnu  # plain 'netcat' is the bsd one
     # bind   # for dig
     dig.dnsutils  # for dig
+    strace
     w3m   # for preview in ranger w3mimgdisplay
     xdg_utils
+    whois
 
     # to be used in i3
     # pkgs.i3dispatch

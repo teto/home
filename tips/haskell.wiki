@@ -70,3 +70,5 @@ AoS = Array of Structures
                    \capital-gain, capital-loss, hours-per-week, \
                    \native-country\n"
 
+# Template Haskell
+(the double tick indicates we want the name of the type, not the type itself).

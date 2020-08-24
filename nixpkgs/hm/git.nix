@@ -22,6 +22,8 @@ in
     };
     extraConfig = {
 # git config core.sshCommand "ssh -vvv"
+      # useful when merging from kernel
+      checkout = { defaultRemote="upstream"; };
 
       # show the full diff under the commit message
       commit.verbose = true;
@@ -46,12 +48,35 @@ in
       color = {
         ui = true;
       };
+# vimdiff as merge and diff tool
+      merge = {
+        tool = "fugitive";
+        conflictstyle = "diff3";
+# [mergetool "vimdiff"]
+#   prompt = true
+#   cmd = nvim -d $BASE $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
 
-      pager = {
-        # diff-so-fancy | less --tabs=1,5 -RFX
-        diff = "${pkgs.gitAndTools.diff-so-fancy}/bin/diff-so-fancy | less --tabs=1,5 -RFX";
-        show = "${pkgs.gitAndTools.diff-so-fancy}/bin/diff-so-fancy | less --tabs=1,5 -RFX";
+# [mergetool "fugitive"]
+# ; Use :Gdiffsplit! for 3 way diff
+# 	cmd = nvim -f -c \"Gdiffsplit!\" \"$MERGED\"
+
+# [mergetool]
+# 	keepBackup = false
+
       };
+      # TODO use a fully qualified nvim ?
+      diff = {
+        tool = "nvim -d";
+        word-diff="color";
+        renamelimit = 14000; # useful for kernel
+
+      };
+
+      # pager = {
+      #   # diff-so-fancy | less --tabs=1,5 -RFX
+      #   diff = "${pkgs.gitAndTools.diff-so-fancy}/bin/diff-so-fancy | less --tabs=1,5 -RFX";
+      #   show = "${pkgs.gitAndTools.diff-so-fancy}/bin/diff-so-fancy | less --tabs=1,5 -RFX";
+      # };
     };
   };
 }

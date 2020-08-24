@@ -22,7 +22,9 @@ let
 
     ./modules/sway.nix
     ./modules/nova.nix
-    ./modules/kubernetes.nix
+
+    # may provoke some issues like switch hanging
+    # ./modules/kubernetes.nix
 
     # ./modules/tor.nix
 

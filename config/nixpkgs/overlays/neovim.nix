@@ -7,13 +7,7 @@ let
       # - coc-vimtex  coc-snippets 
       # use coc-yank for yank history
       editorconfig-vim
-      # coc-git  # doesn't like it when it's user installed
-      # coc-nvim
-      # coc-python # test
-      # coc-translator  # not available yet
-      # csv-vim
       # replaced by coc
-      vim-fugitive
       far-vim
 
       # fails with   python module. Run `pip install neovim` to fix. For more info, :he nvim-python"
@@ -35,7 +29,7 @@ let
       # vim-CtrlXA
       vim-dasht
       vim-dirvish
-      vim-fugitive
+      # vim-fugitive
       vim-signature
       vim-signify
       vim-startify

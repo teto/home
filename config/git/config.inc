@@ -1,19 +1,14 @@
-[checkout]
-defaultRemote=upstream
 
 # TODO this should be generated
-[user]
-  name = Matthieu Coudron
-  email = mattator@gmail.com
-  signingkey = E1B768A0
+# [user]
+#   name = Matthieu Coudron
+#   email = mattator@gmail.com
+#   signingkey = E1B768A0
 
 [core]
 # sshCommand=ssh -vvv
 
-compactionHeuristic
-
-# [sendpack]
-# sideband = false
+# compactionHeuristic
 
 [push]
   default = simple
@@ -26,34 +21,12 @@ compression = 0
 # gitproxy  = git-proxy
 
 
-[color]
-  ui = true
-
-
-[pager]
-	diff = diff-so-fancy | less --tabs=1,5 -RFX
-	show = diff-so-fancy | less --tabs=1,5 -RFX
-
-
 [credential "https://github.com"]
 	username = teto
 
 [credential "https://git.novadiscovery.net/jinko/scenario"]
 	username = platform
 
-# [sendemail.iij]
-# envelopeSender
-# from = coudn@iij.ad.jp
-# 	smtpEncryption = tls
-# 	smtpServer = smtp.gmail.com
-# 	smtpUser = coudn@iij.ad.jp
-# 	smtpServerPort = 587
-# 
-# [sendemail.gmail]
-# smtpEncryption = tls
-# smtpServer = smtp.gmail.com
-# smtpUser = mattat@gmail.com
-# smtpServerPort = 587
 
 # diff-highlight.oldNormal    "red bold"
 # diff-highlight.oldHighlight "red bold 52"
@@ -84,22 +57,9 @@ compression = 0
   # With write access
   insteadOf = wgh:
 
-# vimdiff as merge and diff tool
-[merge]
-	tool = fugitive
-	conflictstyle = diff3
-
-# useful when merging from kernel
-renamelimit = 14000
-
-[diff]
-  tool = nvim -d
-  word-diff=color
-
-# git diff --no-prefix
-
 [difftool]
   prompt = false
+
 [alias]
   cdiff = diff --word-diff=color
   ia = !git add $(git ls-files --modified --others --exclude-standard | fzf -m)
@@ -146,13 +106,13 @@ renamelimit = 14000
   # for fzf+git aliases
   pamfix= !HASH=`git log --pretty=oneline | head -50 | fzf` && git fixit `echo ${HASH} | awk '{ print $1 }'`
 
-[mergetool "vimdiff"]
-  prompt = true
-  cmd = nvim -d $BASE $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
-
-[mergetool "fugitive"]
-; Use :Gdiffsplit! for 3 way diff
-	cmd = nvim -f -c \"Gdiffsplit!\" \"$MERGED\"
-
-[mergetool]
-	keepBackup = false
+# [mergetool "vimdiff"]
+#   prompt = true
+#   cmd = nvim -d $BASE $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+# 
+# [mergetool "fugitive"]
+# ; Use :Gdiffsplit! for 3 way diff
+# 	cmd = nvim -f -c \"Gdiffsplit!\" \"$MERGED\"
+# 
+# [mergetool]
+# 	keepBackup = false

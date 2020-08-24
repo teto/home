@@ -116,7 +116,7 @@ Plug 'MattesGroeger/vim-bookmarks' " ruby  / :BookmarkAnnotate
 " Plug 'AGhost-7/critiq.vim' " :h critiq
 " Plug 'thaerkh/vim-workspace'  " :ToggleWorkspace
 
-Plug 'diepm/vim-rest-console' " test
+Plug 'diepm/vim-rest-console' " test rest APIs
 " Plug 'BK1603/nvim-autoread' " nvim-autoread
 " Plug '~/nvim-autoread' " nvim-autoread
 Plug 'nvim-lua/lsp-status.nvim'  " display lsp progress
@@ -149,6 +149,8 @@ Plug 'shime/vim-livedown'  " :LivedownPreview
 Plug 'conornewton/vim-pandoc-markdown-preview' " :StartMdPreview / StopMd
 
 " around vcs {{{
+" Plug 'tpope/vim-fugitive' 
+Plug '~/vim-fugitive' 
 Plug 'sodapopcan/vim-twiggy' " run with :Twiggy
 Plug 'idanarye/vim-merginal'  " fugitive extension :Merginal
 Plug 'rhysd/git-messenger.vim' " to show git message :GitMessenger
