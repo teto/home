@@ -8,7 +8,7 @@ in
     # use accounts.email ?
     # load it from secrets ?
     package = pkgs.gitAndTools.gitFull;    # to get send-email
-    delta.enable = true;
+    delta.enable = false;
     userName = "Matthieu Coudron";
     userEmail = "mcoudron@hotmail.com";
 	includes = [

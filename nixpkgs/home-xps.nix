@@ -19,6 +19,7 @@ let
       # ./hm/nushell.nix
       ./hm/mail.nix
       ./hm/sway.nix
+      # ./hm/mcfly.nix
 
       # not merged yet
       # ./hm/autoUpgrade.nix

@@ -150,7 +150,7 @@ Plug 'conornewton/vim-pandoc-markdown-preview' " :StartMdPreview / StopMd
 
 " around vcs {{{
 " Plug 'tpope/vim-fugitive' 
-Plug '~/vim-fugitive' 
+Plug '~/fugitive' 
 Plug 'sodapopcan/vim-twiggy' " run with :Twiggy
 Plug 'idanarye/vim-merginal'  " fugitive extension :Merginal
 Plug 'rhysd/git-messenger.vim' " to show git message :GitMessenger
