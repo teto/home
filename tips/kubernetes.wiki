@@ -1,0 +1,20 @@
+
+kubectl get -n [[XXXX]] ingress
+
+kubectl cluster-info
+
+1/ make gitops
+check the
+
+kubectl logs
+
+kubectl -n jinko-dev-teto logs jinko-dev-teto-unuou-integration-test        
+
+
+aws eks update-kubeconfig --name jinko-dev --profile default
+
+https://github.com/astefanutti/kubebox is pretty cool
+
+kube on nixos
+to use the local cluster:
+export KUBECONFIG=/etc/kubernetes/cluster-admin.kubeconfig

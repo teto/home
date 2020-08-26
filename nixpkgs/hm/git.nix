@@ -42,16 +42,29 @@ in
         ff = "only";
       };
 
+
+
       stash = {
           showPatch = 1;
       };
       color = {
         ui = true;
       };
-# vimdiff as merge and diff tool
+      # vimdiff as merge and diff tool
       merge = {
         tool = "fugitive";
         conflictstyle = "diff3";
+      };
+
+      mergetool = {
+        vimdiff = {
+          prompt = true;
+          cmd = "nvim -d $BASE $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'";
+        };
+        fugitive = {
+          cmd = "cmd = nvim -f -c \"Gdiffsplit!\" \"$MERGED\"";
+        };
+      };
 # [mergetool "vimdiff"]
 #   prompt = true
 #   cmd = nvim -d $BASE $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
@@ -60,10 +73,6 @@ in
 # ; Use :Gdiffsplit! for 3 way diff
 # 	cmd = nvim -f -c \"Gdiffsplit!\" \"$MERGED\"
 
-# [mergetool]
-# 	keepBackup = false
-
-      };
       # TODO use a fully qualified nvim ?
       diff = {
         tool = "nvim -d";

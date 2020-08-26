@@ -1,0 +1,13 @@
+`When you use an endpoint with no Region, AWS routes the Amazon EC2 request to US East (N. Virginia) (us-east-1), which is the default Region for API calls. `
+
+aws --debug
+--endpoint-url
+
+# Bazel cache
+
+s3.eu-central-1.amazonaws.com
+
+`aws --profile=nix-daemon s3 ls`
+
+
+aws sts get-caller-identity

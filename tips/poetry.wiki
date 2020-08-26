@@ -1,0 +1,6 @@
+replace .venv with your project's env path
+
+
+poetry env info -p
+
+.venv/src/marshmallow_pymodm
