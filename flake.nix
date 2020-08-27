@@ -1,5 +1,5 @@
 {
-  description = "A highly structured configuration database.";
+  description = "My personal configuration";
 
   # epoch = 201909;
 
@@ -9,21 +9,37 @@
   # ADD mine and home manager
   # requires = [ flake:nixpkgs ];
 
-  inputs.nixpkgs.url = "github:teto/nixpkgs/nixos-unstable";
+  inputs = {
+    nixpkgs.url = "github:teto/nixpkgs/nixos-unstable";
   # TODO use mine instead
-  inputs.hm.url = "github:nrdxp/home-manager/flakes";
+    hm.url = "github:nrdxp/home-manager/flakes";
+  };
 
   outputs = args@{ self, hm, nixpkgs }:
     let
       inherit (builtins) listToAttrs baseNameOf attrNames readDir;
       inherit (nixpkgs.lib) removeSuffix;
+
       system = "x86_64-linux";
 
-      pkgs = import nixpkgs {
-        inherit system;
-        # overlays = self.overlays;
-        config = { allowUnfree = true; };
-      };
+      utils = import ./nixpkgs/lib/colors.nix { inherit (nixpkgs) lib;};
+
+      # pkgs = import nixpkgs {
+      #   inherit system;
+      #   # overlays = self.overlays;
+      #   config = { allowUnfree = true; };
+      # };
+      pkgImport = pkgs:
+        import pkgs {
+          inherit system;
+          overlays = nixpkgs.lib.attrValues self.overlays;
+          config = { allowUnfree = true; };
+        };
+
+      # pkgset = {
+      unstablePkgs = pkgImport nixpkgs;
+        # pkgs = pkgImport master;
+      # };
     in {
       nixosConfigurations = let configs = import ./hosts args;
       in configs;
@@ -43,8 +59,8 @@
       #     (attrNames (readDir ./config/nixpkgs/overlays));
       # in overlays;
 
-      packages.x86_64-linux = {
-        inherit (pkgs)
+      packages."${system}" = {
+        inherit (unstablePkgs)
           # i3dispatch
           mptcptrace
         ;
