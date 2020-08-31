@@ -1,0 +1,10 @@
+
+--set tracing.enabled=true
+
+
+Plugins found at
+/home/teto/.local/share/helm/plugins
+
+
+helm env
+

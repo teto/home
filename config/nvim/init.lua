@@ -381,3 +381,16 @@ end
 -- vim.nvim_command [[autocmd CursorHold <buffer> lua vim.lsp.util.show_line_diagnostics()]]
 -- vim.nvim_command [[autocmd CursorMoved <buffer> lua vim.lsp.util.show_line_diagnostics()]]
 
+-- TELESCOPE
+--
+-- Fuzzy find over git files in your directory
+-- require('telescope.builtin').git_files()
+
+-- -- Grep as you type (requires rg currently)
+-- require('telescope.builtin').live_grep()
+
+-- -- Use builtin LSP to request references under cursor. Fuzzy find over results.
+-- require('telescope.builtin').lsp_references()
+
+-- -- Convert currently quickfixlist to telescope
+-- require('telescope.builtin').quickfix()

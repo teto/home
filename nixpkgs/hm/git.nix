@@ -62,7 +62,7 @@ in
           cmd = "nvim -d $BASE $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'";
         };
         fugitive = {
-          cmd = "cmd = nvim -f -c \"Gdiffsplit!\" \"$MERGED\"";
+          cmd = "nvim -f -c \"Gdiffsplit!\" \"$MERGED\"";
         };
       };
 # [mergetool "vimdiff"]

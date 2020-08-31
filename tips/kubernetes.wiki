@@ -8,8 +8,9 @@ check the
 
 kubectl logs
 
-kubectl -n jinko-dev-teto logs jinko-dev-teto-unuou-integration-test        
-
+kubectl -n jinko-dev-teto logs jinko-dev-teto-unuou-integration-test
+kubectl -n jinko-dev-teto get po
+kubectl -n jinko-dev-teto get po -o yaml  jinko-dev-teto-hiicp-integration-test
 
 aws eks update-kubeconfig --name jinko-dev --profile default
 

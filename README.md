@@ -66,7 +66,12 @@ home $ git submodule update --init
 home $ make config
 ```
 
-WIP: flakifying the install
+# Install on nixos via flakes (WIP)
+
+nix registry add mine ~/nixpkgs
+nix registry add nixpkgs github:teto/nixpkgs
+nix registry add poetry github:nix-community/poetry2nix
+sudo nixos-rebuild switch --flake '.#'
 
 # Transfer state
 
