@@ -16,6 +16,27 @@ aws eks update-kubeconfig --name jinko-dev --profile default
 
 https://github.com/astefanutti/kubebox is pretty cool
 
+kubectl exec -it [pod] sh 
+
+
+kubectl edit deployment result-store-deployment
+
+# To edit a live deployment
+
+kubectl -n [ton namespace] get deployments
+kubectl -n jinko-dev-teto edit deployment jinko-dev-teto-result-store
+
+er Command (équivalent de Dodkcer entrypoint ou Arg (equivalent de Docker CMD
+
+Yaml spec is at https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.19/#deploymentspec-v1-apps
+
+containers:
+- envFrom:
+- configMapRef:
+	name: jinko-dev-teto-shared-env
+command: --port 5000 --region Frankfurt
+
+
 kube on nixos
 to use the local cluster:
 export KUBECONFIG=/etc/kubernetes/cluster-admin.kubeconfig

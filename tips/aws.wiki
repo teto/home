@@ -11,3 +11,5 @@ s3.eu-central-1.amazonaws.com
 
 
 aws sts get-caller-identity
+
+aws s3api get-bucket-location --profile jinko-dev --bucket jinko-dev-shared

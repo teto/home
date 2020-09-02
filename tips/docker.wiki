@@ -9,6 +9,11 @@ One can use `-e "foo=bar"` to pass additionnal variables.
 
 Pour lister les images et leur nom
 docker ps
+
+# keep docker running
+
+tail -f /dev/null
+
 %% docker container ls
 
 # kill all containers
