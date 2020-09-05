@@ -37,7 +37,6 @@ final: prev:
 
   };
 
-
   colr = prev.callPackage ./colr {};
 
   dig = final.bind.dnsutils;
@@ -48,14 +47,11 @@ final: prev:
   # hunter = prev.callPackage ./hunter { };
 
   i3-resurrect = prev.python3Packages.callPackage ./i3-resurrect {};
-
   # mda-lite = prev.pythonPackages.callPackage ./mda-lite {};
 
   mptcpnumerics = prev.python3Packages.callPackage ./mptcpnumerics.nix {};
 
   # install from the repo
-  # mptcpanalyzer = prev.callPackage /home/teto/mptcpanalyzer {};
-
   # neovim-gtk = prev.callPackage ./neovim-gtk { };
 
   subtitles-rs = prev.callPackage ./subtitles-rs { };

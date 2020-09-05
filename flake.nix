@@ -46,18 +46,31 @@
     in {
       nixosConfigurations = let
         # configs = import ./nixpkgs/configuration-xps.nix args;
+
+        # TODO import an HM config and use it
+        # hmConfig = 
       in
         {
           # dell
+          # xps
           jedha = nixpkgs.lib.nixosSystem {
             inherit system;
             modules = [
               (import ./nixpkgs/configuration-xps.nix)
+              # TODO see if we can pass it as part of an overlay of the nixpkgs input ?
               hm.nixosModules.home-manager
               (builtins.trace nova nova.nixosModules.profiles.main)
             ];
           };
 
+          lenovo = nixpkgs.lib.nixosSystem {
+            inherit system;
+            modules = [
+              (import ./nixpkgs/configuration-lenovo.nix)
+              hm.nixosModules.home-manager
+              nova.nixosModules.profiles.main
+            ];
+          };
         };
 
       # overlay = import ./config/nixpkgs/overlays/pkgs/default.nix;
@@ -80,6 +93,9 @@
           # i3dispatch
           mptcptrace
         ;
+
+        # python3Packages
+        i3-dispatch = nixpkgs.python3Packages.callPackage ./nipkgs.xpkgs/pkgs/i3-dispatch {};
       };
 
       nixosModules = let
