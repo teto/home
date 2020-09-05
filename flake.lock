@@ -1,0 +1,86 @@
+{
+  "nodes": {
+    "hm": {
+      "inputs": {
+        "nixpkgs": "nixpkgs"
+      },
+      "locked": {
+        "lastModified": 1599242479,
+        "narHash": "sha256-hqI+F1S8gW5OJ+DitXl6F/5f/A7RvnmZJAcR7BDndtQ=",
+        "owner": "rycee",
+        "repo": "home-manager",
+        "rev": "41b1af808f1de69c31f3fd164d5274154ee782e4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "rycee",
+        "repo": "home-manager",
+        "type": "github"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1591712628,
+        "narHash": "sha256-Tj4RhSq0MBD41mE/XzR1BexxDDYQ1yFCb72yEJ0ujpo=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "511f062729e7f214cbc29b5bf88e7b199ffd0cda",
+        "type": "github"
+      },
+      "original": {
+        "id": "nixpkgs",
+        "type": "indirect"
+      }
+    },
+    "nixpkgs_2": {
+      "locked": {
+        "lastModified": 1598277795,
+        "narHash": "sha256-n2/49fQ1FZ9DnKLLcnRUD9jTbQHAAPD2E9silwczPM0=",
+        "owner": "teto",
+        "repo": "nixpkgs",
+        "rev": "47eab3948974a433c02aea6d4193819d829aa8a1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "teto",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_3": {
+      "locked": {
+        "narHash": "sha256-ZxLsgX3OwsPsxehQBt+AHBNOZqyQq0KK+I/ZyMP6NJs=",
+        "path": "/home/teto/nixpkgs",
+        "type": "path"
+      },
+      "original": {
+        "id": "nixpkgs",
+        "type": "indirect"
+      }
+    },
+    "nova": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_3"
+      },
+      "locked": {
+        "narHash": "sha256-ySTLJzzbGMGxPvsPHyJaCQgExJjjV/D+bAuXYLISq+I=",
+        "path": "/home/teto/nova/nova-nix",
+        "type": "path"
+      },
+      "original": {
+        "id": "nova",
+        "type": "indirect"
+      }
+    },
+    "root": {
+      "inputs": {
+        "hm": "hm",
+        "nixpkgs": "nixpkgs_2",
+        "nova": "nova"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}

@@ -11,9 +11,9 @@
   inputs = {
     nixpkgs.url = "github:teto/nixpkgs/nixos-unstable";
   # TODO use mine instead
-    hm.url = "github:nrdxp/home-manager/flakes";
+    hm.url = "github:rycee/home-manager";
     # nova.url = "ssh://git@git.novadiscovery.net:4224/world/nova-nix.git";
-    nova.url = "/home/teto/nova/nova-nix";
+    # nova.url = "/home/teto/nova/nova-nix";
     # TODO one can point at a subfolder ou bien c la branche ? /flakes
     # mptcpanalyzer.url = "github:teto/mptcpanalyzer";
   };
@@ -53,8 +53,8 @@
             inherit system;
             modules = [
               (import ./nixpkgs/configuration-xps.nix)
+              hm.nixosModules.home-manager
               (builtins.trace nova nova.nixosModules.profiles.main)
-              nova.nixosModules.profiles.toto
             ];
           };
 
