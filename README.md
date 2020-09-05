@@ -73,6 +73,8 @@ nix registry add nixpkgs github:teto/nixpkgs
 nix registry add poetry github:nix-community/poetry2nix
 sudo nixos-rebuild switch --flake '.#'
 
+nixos-rebuild switch --flake /path/to/my-flake#my-machine
+
 # Transfer state
 
 Some secrets can't be shared reliably on the repository so they need to be

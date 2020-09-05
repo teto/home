@@ -5,7 +5,7 @@ let
 in
 {
   imports = [
-    "${fetchTarball "https://github.com/msteen/nixos-vsliveshare/tarball/master"}/modules/vsliveshare/home.nix"
+    # "${fetchTarball "https://github.com/msteen/nixos-vsliveshare/tarball/master"}/modules/vsliveshare/home.nix"
   ];
 
   services.vsliveshare = {

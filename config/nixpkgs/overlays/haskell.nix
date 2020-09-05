@@ -27,27 +27,41 @@ final: prev:
           # base-compat = doJailbreak (hold.base-compat);
           # time-compat = doJailbreak (hold.time-compat);
 
-      # ip = dontCheck hprev.ip;
-
-      # should not be needed anymore right ?
-      # tensorflow-core-ops = appendPatch (hprev.tensorflow-core-ops) ./pkgs/tensorflow.patch;
-
       # ihaskell = builtins.trace "overrideCABAL !!" overrideCabal (dontCheck hprev.ihaskell) ( drv: {
       #   executableToolDepends = [ prev.pkgs.jupyter ];
       #   executableHaskellDepends = [ prev.pkgs.jupyter ];
       # });
       # ihaskell = hprev.ihaskell_0_10_0_2;
 
-      # bitset = overrideSrc hprev.bitset { src = prev.fetchFromGitHub {
-      #   owner = "teto";
-      #   repo = "bitset";
-      #   rev = "upgrade";
-      #   sha256 = "1bbxav9fxpmpjmd1grwz8wx759kxdmp9lw7rrbd11mx8qj7kwpqx";
-      # }; };
+      ip = dontCheck hold.ip;
+          bytebuild = dontCheck hold.bytebuild;
 
+          # can be released on more recent nixplks
+          # wide-word = doJailbreak (hold.wide-word);
 
-      # "fork" by infinisil
-      # all-hies = import (fetchTarball "https://github.com/infinisil/all-hies/tarball/master") {};
+          # for newer nixpkgs (March 2020)
+          # base-compat = doJailbreak (hold.base-compat);
+          # time-compat = doJailbreak (hold.time-compat);
+          mptcp-pm = (overrideSrc hold.mptcp-pm {
+            src = prev.fetchFromGitHub {
+              owner = "teto";
+              repo = "mptcp-pm";
+              rev = "4087bd580dcb08919e8e3bc78ec3b25d42ee020d";
+              sha256 = "sha256-MiXbj2G7XSRCcM0rnLrbO9L5ZFyh6Z3sPtnH+ddInI8=";
+            };
+          });
+          netlink = (overrideSrc hold.netlink {
+            # src = builtins.fetchGit {
+            #   # url = https://github.com/ongy/netlink-hs;
+            #   url = https://github.com/teto/netlink-hs;
+            # };
+            src = prev.fetchFromGitHub {
+              owner = "teto";
+              repo = "netlink-hs";
+              rev = "090a48ebdbc35171529c7db1bd420d227c19b76d";
+              sha256 = "sha256-qopa1ED4Bqk185b1AXZ32BG2s80SHDSkCODyoZfnft0=";
+            };
+          });
     };
   };
 

@@ -206,15 +206,10 @@ in
   # boot.kernel.sysctl."kernel.core_pattern" = "core"; to disable.
   # security.pam.loginLimits
 
-  system.copySystemConfiguration = true;
-
   # this is slow
   documentation.nixos.enable = true;
 
   programs.system-config-printer.enable = true;
-
-  # in master
-  # xdg.autostart.enable
 
   users.users.teto = {
     shell = pkgs.zsh;

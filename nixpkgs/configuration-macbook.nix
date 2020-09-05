@@ -2,7 +2,7 @@
 let
   secrets = import ./secrets.nix;
   # hopefully it can be generated as dirname <nixos-config>
-  configDir = /home/teto/dotfiles/nixpkgs;
+  configDir = /home/teto/dotfiles/nigpkgs;
   userNixpkgs = /home/teto/nixpkgs;
 
   in
@@ -33,7 +33,6 @@ let
     grub.device = "/dev/sda";
   };
 
-  # boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_mptcp_with_netlink;
   boot.kernelPackages = pkgs.linuxPackagesFor ( pkgs.linux_5_6.override {
     structuredExtraConfig = with lib.kernel; {
       MPTCP     =yes;

@@ -10,7 +10,7 @@
       amazonka-s3
       # bson  # broken too
       directory
-      ip
+      # ip  # broken
       foldl
       Frames
       haskeline

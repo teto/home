@@ -11,7 +11,7 @@ in
     pkgs.awscli # be careful the aws 
     # pkgs.mongodb-compass  # either crashes or fail to build
     pkgs.robo3t  # another mongoDB gui
-    pkgs.minio-client  # mc
+    pkgs.minio-client  # `mc` binary conflicts with midnight commander `mc`
     gitAndTools.lab  # git lab etc
     mongodb-tools  # for bsondump
     nodePackages.dockerfile-language-server-nodejs # docker

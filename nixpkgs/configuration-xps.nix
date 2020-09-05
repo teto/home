@@ -1,9 +1,7 @@
 { config, lib, pkgs,  ... }:
 let
   #secrets = import ./secrets.nix;
-  # hopefully it can be generated as dirname <nixos-config>
-
-  in
+in
 {
   imports = [
     ./hardware-xps.nix
@@ -11,7 +9,10 @@ let
     ./modules/config-all.nix
     ./modules/desktop.nix
     ./modules/docker-daemon.nix
-    ./profiles/nova-dev.nix
+
+    # TODO moved to their own flake
+    # ./profiles/nova-dev.nix
+    # ./modules/nova.nix
 
 
     ./modules/libvirtd.nix
@@ -21,7 +22,6 @@ let
     # ./modules/mptcp.nix
 
     ./modules/sway.nix
-    ./modules/nova.nix
 
     # may provoke some issues like switch hanging
     # ./modules/kubernetes.nix
@@ -53,9 +53,7 @@ let
 
   # TODO use the mptcp one ?
   # boot.kernelPackages = pkgs.linuxPackages;
-  # boot.kernelPackages = pkgs.linuxPackages_mptcp;
   boot.kernelPackages = pkgs.linuxPackages_latest;
-  # boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_4_14;
 
   # boot.extraModprobeConfig = ''
     # options iwlwifi bt_coex_active=0

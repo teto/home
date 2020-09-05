@@ -18,9 +18,6 @@ in
 
   ];
 
-  # boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_latest;
-
-
   # TODO
   # services.automysqlbackup.config
 

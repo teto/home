@@ -15,10 +15,10 @@
     autorun = false;
 
     displayManager = {
-      autoLogin = {
-        # enable = false;
-        user = "teto";
-      };
+      # autoLogin = {
+      #   # enable = false;
+      #   user = "teto";
+      # };
       # defaultSession = null;
       gdm = {
         wayland = true;

@@ -309,7 +309,8 @@ kernel_xconfig=''
 
   system = {
     stateVersion = "19.03"; # why would I want to keep that ?
-    copySystemConfiguration = true;
+    # breaks with flakes
+    # copySystemConfiguration = true;
     # autoUpgrade = {
     #   channel= "https://nixos.org/channels/nixpkgs-unstable";
     #   enable = true;

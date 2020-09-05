@@ -3,6 +3,12 @@ docker run mattator/dce-dockerfiles:latest
 add --name NAME to give it a memorable name:
 docker run --name NAME mattator/dce-dockerfiles:latest 
 
+To override the entrypoint !
+docker run --entrypoint bash -it 885c3cd03b4d643999dca2db0e4e2fefe533f4689864c5d022bc077c75e22aa0
+
+docker run -it registry.novadiscovery.net/jinko/jinko-platform/jinko-base:local bash 
+
+
 docker image prune -a
 
 One can use `-e "foo=bar"` to pass additionnal variables.
@@ -91,7 +97,17 @@ compose > shell environment > .env file > dockerfile > undefined
 In host mode the container does not get its own IP-address allocated. 
 Similarly port mapping is disabled.
 
+# building
+docker build --progress=plain -t abc:1 . --no-cache
 
 # To debug
 docker inspect --format "{{json .State.Health }}" f6c181a5692e | jq
 
+# to restart deployement
+
+kubectl rollout restart deployments
+kubectl delete ns [NAMESPACE]
+
+docker build --progress auto .
+
+docker build --progress auto --no-cache - < Dockerfile

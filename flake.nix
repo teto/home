@@ -7,15 +7,18 @@
   # in the flake registry, or in `flake.lock` inside this flake, if it
   # exists.
   # ADD mine and home manager
-  # requires = [ flake:nixpkgs ];
 
   inputs = {
     nixpkgs.url = "github:teto/nixpkgs/nixos-unstable";
   # TODO use mine instead
     hm.url = "github:nrdxp/home-manager/flakes";
+    # nova.url = "ssh://git@git.novadiscovery.net:4224/world/nova-nix.git";
+    nova.url = "/home/teto/nova/nova-nix";
+    # TODO one can point at a subfolder ou bien c la branche ? /flakes
+    # mptcpanalyzer.url = "github:teto/mptcpanalyzer";
   };
 
-  outputs = args@{ self, hm, nixpkgs }:
+  outputs = args@{ self, hm, nixpkgs, nova }:
     let
       inherit (builtins) listToAttrs baseNameOf attrNames readDir;
       inherit (nixpkgs.lib) removeSuffix;
@@ -41,8 +44,21 @@
         # pkgs = pkgImport master;
       # };
     in {
-      nixosConfigurations = let configs = import ./hosts args;
-      in configs;
+      nixosConfigurations = let
+        # configs = import ./nixpkgs/configuration-xps.nix args;
+      in
+        {
+          # dell
+          jedha = nixpkgs.lib.nixosSystem {
+            inherit system;
+            modules = [
+              (import ./nixpkgs/configuration-xps.nix)
+              (builtins.trace nova nova.nixosModules.profiles.main)
+              nova.nixosModules.profiles.toto
+            ];
+          };
+
+        };
 
       # overlay = import ./config/nixpkgs/overlays/pkgs/default.nix;
       # overlays = [self.overlay];

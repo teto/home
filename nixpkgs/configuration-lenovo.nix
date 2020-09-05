@@ -120,10 +120,6 @@ in
   # boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.kernelPackages = pkgs.linuxPackages_testing;
 
-  # boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_latest_without_ns;
-
-
-  # lib.mkMerge
   boot.kernelModules =  [
     "af_key" # for ipsec/vpn support
     "kvm"
