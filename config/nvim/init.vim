@@ -413,6 +413,7 @@ Plug 'kthibodeaux/pull-review'     " :PullReviewList
 " Plug 't9md/vim-quickhl' " hl manually selected words :h QuickhlManualEnable
 
 " colorschemes {{{
+Plug 'adlawson/vim-sorcerer'
 Plug 'whatyouhide/vim-gotham'
 Plug 'sickill/vim-monokai'
 Plug 'justinmk/molokai'
@@ -2230,11 +2231,11 @@ nmap ]] <Cmd>NextDiagnostic<cr>
 set omnifunc=v:lua.vim.lsp.omnifunc
 
 
-augroup highlight_yank
-    autocmd!
-    " silent
-    autocmd TextYankPost * lua require'vim.highlight'.on_yank{higroup="IncSearch", timeout=1000}
-augroup END
+" augroup highlight_yank
+"     autocmd!
+"     " silent
+"     autocmd TextYankPost * lua require'vim.highlight'.on_yank{higroup="IncSearch", timeout=1000}
+" augroup END
 
 autocmd CursorHold lua vim.lsp.util.show_line_diagnostics()
 autocmd CursorMoved lua vim.lsp.util.show_line_diagnostics()

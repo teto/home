@@ -3,7 +3,7 @@
 
 
   home.packages = with pkgs; [
-    visidata
+    # visidata
     yaml-language-server
     # dockerfile-language-server-nodejs
     gitAndTools.pass-git-helper

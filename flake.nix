@@ -12,13 +12,14 @@
     nixpkgs.url = "github:teto/nixpkgs/nixos-unstable";
   # TODO use mine instead
     hm.url = "github:rycee/home-manager";
+    nur.url = "github:nix-community/NUR";
     # nova.url = "ssh://git@git.novadiscovery.net:4224/world/nova-nix.git";
     # nova.url = "/home/teto/nova/nova-nix";
     # TODO one can point at a subfolder ou bien c la branche ? /flakes
     # mptcpanalyzer.url = "github:teto/mptcpanalyzer";
   };
 
-  outputs = args@{ self, hm, nixpkgs, nova }:
+  outputs = args@{ self, hm, nixpkgs, nova, nur }:
     let
       inherit (builtins) listToAttrs baseNameOf attrNames readDir;
       inherit (nixpkgs.lib) removeSuffix;
@@ -59,13 +60,24 @@
               (import ./nixpkgs/configuration-xps.nix)
               # TODO see if we can pass it as part of an overlay of the nixpkgs input ?
               hm.nixosModules.home-manager
-              (builtins.trace nova nova.nixosModules.profiles.main)
+              # TODO fix that one
+              # (builtins.trace nova nova.nixosModules.profiles.main)
               # (builtins.trace nova nova.nixosModules.profiles.dev)
                 # home-manager.users.teto = { ... }:
               ({ config, lib, pkgs,  ... }:
                 {
-                  # fails for now
-                  imports = [ ./nixpkgs/hm/common.nix ];
+                  # use the system's pkgs rather than hm nixpkgs.
+                  home-manager.useGlobalPkgs = true;
+                  # installation of users.users.‹name?›.packages
+                  home-manager.useUserPackages = true;
+
+
+                  nixpkgs.overlays = nixpkgs.lib.attrValues self.overlays;
+
+                  home-manager.users."teto" = {
+                    # fails for now
+                    imports = [ ./nixpkgs/home-xps.nix ];
+                  };
                 }
               )
 
@@ -82,12 +94,16 @@
           };
         };
 
+        # overlay = import ./nixpkgs/overlays/default.nix;
+          # (self: prev: { });
+
       overlays = {
         # pkgs = import ./nixpkgs/overlays/pkgs/default.nix;
         haskell = import ./nixpkgs/overlays/haskell.nix;
         neovim = import ./nixpkgs/overlays/neovim.nix;
         wireshark = import ./nixpkgs/overlays/wireshark.nix;
         # toto = (final: prev: {});
+
       };
       # overlays = let
       #   overlays = map (name: import (./config/nixpkgs/overlays + "/${name}"))
@@ -95,11 +111,12 @@
       # in overlays;
 
       packages."${system}" = {
-        inherit (unstablePkgs)
-          # i3dispatch
-          mptcptrace
-        ;
+        inherit (unstablePkgs) mptcptrace neovim-unwrapped-master;
         # mptcptrace = nixpkgs.callPackage ./nipkgs.xpkgs/pkgs/i3-dispatch {};
+
+        dig = nixpkgs.bind.dnsutils;
+
+        # neovim-unwrapped-master = nixpkgs.callPackages ./nixpkgs/pkgs/
 
         # python3Packages
         # i3-dispatch = nixpkgs.python3Packages.callPackage ./nipkgs/pkgs/pkgs/i3-dispatch {};

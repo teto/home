@@ -2,13 +2,9 @@
 { config, lib, pkgs,  ... }:
 let
 
-  mbsyncConfig = {
-    enable = true;
-    create = "maildir";
-  };
-  in
+in
 {
-  nixpkgs.config.allowUnfree = true;
+	# invalid with flakes  nixpkgs.config.allowUnfree = true;
 
   imports = [
       ./hm/desktop.nix
@@ -24,8 +20,9 @@ let
       # not merged yet
       # ./hm/autoUpgrade.nix
 
-      ./hm/profiles/nova-user.nix
-      ./hm/profiles/nova-dev.nix
+	  # TODO reference from nova-nix
+      # ./hm/profiles/nova-user.nix
+      # ./hm/profiles/nova-dev.nix
     ]
     ;
 
@@ -36,8 +33,6 @@ let
     virt-manager # to run ubuntu, needs libvirtd service
     brightnessctl
     simple-scan
-    # aqemu # 0.9.2 , needs kvm/qemu
-    # kvm
 
   ];
 
@@ -62,17 +57,6 @@ let
     # check if it exists
     # colorsExtra = builtins.readFile ../config/termite/solarized-dark;
   };
-
-  # xrandr --output  eDP1 --mode 1600x900
-  # xsession.initExtra = ''
-  # '';
-
-  # TODO try plugins
-  # programs.vscode = {
-  #   enable = true;
-  #   haskell.enable = true;
-  #   haskell.hie.enable = true;
-  # };
 
 }
 

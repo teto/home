@@ -1,7 +1,7 @@
 { config, pkgs, lib,  ... }:
 let
-  stable = import <nixos> {};
-  unstable = import <nixos-unstable> {};
+  # stable = import <nixos> {};
+  # unstable = import <nixos-unstable> {};
 
   terminalCommand = pkgs.termite;
 
@@ -103,15 +103,14 @@ let
     # buku  # broken on unstable and stable
     # dynamic-colors # to change the terminal colors ("dynamic-colors switch solarized-dark")
     # gcalc
-    # unstable.dropbox
     gnome3.networkmanagerapplet # should
     gnome3.defaultIconTheme # else nothing appears
     # i3-layout-manager  # to save/load layouts
     mpv
     kitty
     libnotify
-    # feh
-    unstable.evince # succeed where zathura/mupdf fail
+    # unstable.evince # succeed where zathura/mupdf fail
+
     # conflicts with nautilus
     # unstable.gnome3.file-roller # for GUI archive handling
     ffmpegthumbnailer # to preview videos in ranger
@@ -136,7 +135,7 @@ let
     shared_mime_info # temporary fix for nautilus to find the correct files
     tagainijisho # japanse dict; like zkanji Qt based
     translate-shell
-    unstable.transmission_gtk  # bittorrent client
+    # unstable.transmission_gtk  # bittorrent client
     xdotool # needed for vimtex + zathura
     xarchiver # to unpack/pack files
     xorg.xev
@@ -164,9 +163,9 @@ let
     # hopefully we can remove this from the environment
     # it's just that I can't setup latex correctly
     # unstable.libreoffice
-    unstable.wireshark
+    # unstable.wireshark
 
-    unstable.qutebrowser  # keyboard driven fantastic browser
+    # unstable.qutebrowser  # keyboard driven fantastic browser
     gnome3.nautilus # demande webkit/todo replace by nemo ?
     # shutter # screenshot utility
     # mcomix # manga reader
@@ -195,7 +194,7 @@ in
       # pkgs.up # live preview of pipes
       pkgs.peek # GIF recorder
 
-      unstable.cachix  # almot always broken
+      # unstable.cachix  # almot always broken
     ]
    ;
 

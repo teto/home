@@ -176,17 +176,10 @@ rec {
 	  name = "neovim";
 	  version = "official-master";
       src = builtins.fetchGit {
-        # Shougo/neovim/tree/vim-8.1.1564
-        # url = https://github.com/Shougo/neovim.git;
-        # ref = "vim-8.1.1564";
-
-        url = https://github.com/BK1603/neovim.git;
-        ref = "fswatch-autoread";
-        # ref = "checktime-test";
-        # url = https://github.com/neovim/neovim.git;
-        # ref = "master";
-        # url = https://github.com/neovim/neovim.git;
-        # ref = "diagnostic";
+        # url = https://github.com/BK1603/neovim.git;
+        # ref = "fswatch-autoread";
+        url = https://github.com/neovim/neovim.git;
+        rev = "c1d395a6d664933ec7a644362721db115efef664";
       };
       # src = final.fetchFromGitHub {
       #   owner = "teto";

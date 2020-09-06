@@ -39,7 +39,6 @@ final: prev:
 
   colr = prev.callPackage ./colr {};
 
-  dig = final.bind.dnsutils;
 
   dualsub = prev.callPackage ./dualsubtitles { };
 

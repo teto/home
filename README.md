@@ -84,6 +84,9 @@ nix build .#whateverOutput.activationPackage
 ```
 And then use the activation script in result/.
 
+TODO:
+- reestablish the alias `dig = final.bind.dnsutils;`
+
 
 # Transfer state
 

@@ -1,7 +1,7 @@
 { config, pkgs, lib,  ... } @ args:
 let
-  stable = import <nixos> {};
-  unstable = import <nixos-unstable> {};
+  # stable = import <nixos> {};
+  # unstable = import <nixos-unstable> {};
 
 
   # change to a package
@@ -18,6 +18,7 @@ rec {
   news.display = "silent";
 
   imports = [
+
     ./git.nix
     ./xdg-mime.nix
   ];
@@ -35,12 +36,9 @@ rec {
 	# TODO try i3-snapshot
     # hstr # to deal with shell history
     # bandwhich  # to monitor per app bandwidth
-
-    # vim-vint  #
     tig
     netcat-gnu  # plain 'netcat' is the bsd one
-    # bind   # for dig
-    dig.dnsutils  # for dig
+    # dig.dnsutils  # for dig
     strace
     w3m   # for preview in ranger w3mimgdisplay
     xdg_utils

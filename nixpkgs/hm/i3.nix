@@ -1,10 +1,26 @@
 { config, pkgs, lib,  ... }:
 let
 
-  # https://nixos.org/channels/nixos-unstable
-  unstable = import <nixos-unstable> {};
+  # TODO override extraLibs instead
+  i3pystatus-perso = (pkgs.i3pystatus.override({
+    extraLibs = with pkgs.python3Packages; [ pytz notmuch dbus-python ];
+  })).overrideAttrs (oldAttrs: {
+    name = "i3pystatus-dev";
+    # src = builtins.fetchGit {
+    #   url = https://github.com/teto/i3pystatus;
+    #   ref = "nix_backend";
+    # };
 
-  i3pystatus-custom = pkgs.i3pystatus-perso.override ({
+     src = pkgs.fetchFromGitHub {
+       repo = "i3pystatus";
+       owner = "teto";
+       rev="2a3285aa827a9cbf5cd53eb12619e529576997e3";
+       sha256 = "sha256-QSxfdsK9OkMEvpRsXn/3xncv3w/ePCGrC9S7wzg99mk=";
+     };
+  });
+
+
+  i3pystatus-custom = i3pystatus-perso.override ({
     extraLibs = with pkgs.python3Packages; [ pytz notmuch dbus-python ];
   });
 
