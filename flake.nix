@@ -60,6 +60,15 @@
               # TODO see if we can pass it as part of an overlay of the nixpkgs input ?
               hm.nixosModules.home-manager
               (builtins.trace nova nova.nixosModules.profiles.main)
+              # (builtins.trace nova nova.nixosModules.profiles.dev)
+                # home-manager.users.teto = { ... }:
+              ({ config, lib, pkgs,  ... }:
+                {
+                  # fails for now
+                  imports = [ ./nixpkgs/hm/common.nix ];
+                }
+              )
+
             ];
           };
 
@@ -73,14 +82,11 @@
           };
         };
 
-      # overlay = import ./config/nixpkgs/overlays/pkgs/default.nix;
-      # overlays = [self.overlay];
-      # overlays = [(import ./config/nixpkgs/overlays/pkgs/default.nix )];
       overlays = {
-        pkgs = import ./config/nixpkgs/overlays/pkgs/default.nix;
-        haskell = import ./config/nixpkgs/overlays/haskell.nix;
-        neovim = import ./config/nixpkgs/overlays/neovim.nix;
-        wireshark = import ./config/nixpkgs/overlays/wireshark.nix;
+        # pkgs = import ./nixpkgs/overlays/pkgs/default.nix;
+        haskell = import ./nixpkgs/overlays/haskell.nix;
+        neovim = import ./nixpkgs/overlays/neovim.nix;
+        wireshark = import ./nixpkgs/overlays/wireshark.nix;
         # toto = (final: prev: {});
       };
       # overlays = let
@@ -93,9 +99,10 @@
           # i3dispatch
           mptcptrace
         ;
+        # mptcptrace = nixpkgs.callPackage ./nipkgs.xpkgs/pkgs/i3-dispatch {};
 
         # python3Packages
-        i3-dispatch = nixpkgs.python3Packages.callPackage ./nipkgs.xpkgs/pkgs/i3-dispatch {};
+        # i3-dispatch = nixpkgs.python3Packages.callPackage ./nipkgs/pkgs/pkgs/i3-dispatch {};
       };
 
       nixosModules = let
