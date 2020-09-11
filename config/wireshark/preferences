@@ -295,7 +295,7 @@ gui.layout_type: 2
 
 # Interface link-layer header types (Ex: en0(1),en1(143),...)
 # A string
-capture.devices_linktypes: veth1f1fdaf(1),wlo1(1),vetha0f2b1d(1),veth3d016c1(1),vetha14a1e5(1),veth5ef80b8(1),br-00fc46aafa10(1),vethef0e83c(1),veth6774d91(1),vethbfdb494(1),vethfaab811(1),vethdd4879a(1),veth802956b(1),lo(1),any(113),virbr0(1),docker0(1),eno2(1),bluetooth-monitor(254),bluetooth0(201),ciscodump(147),dpauxmon(275),randpkt(147),sdjournal(147),sshdump(147),udpdump(252)
+capture.devices_linktypes: virbr0(1),vnet0(1),docker0(1),wlo1(1),eno2(1),vethcc33b84(1),lo(1),any(113),br-8cb00c1f1c7f(1),bluetooth-monitor(254),bluetooth0(201),ciscodump(147),dpauxmon(275),randpkt(147),sdjournal(147),sshdump(147),udpdump(252)
 
 # Interface descriptions (Ex: eth0(eth0 descr),eth1(eth1 descr),...)
 # A string
@@ -311,15 +311,15 @@ capture.devices_linktypes: veth1f1fdaf(1),wlo1(1),vetha0f2b1d(1),veth3d016c1(1),
 
 # Interface buffer size (Ex: en0(1),en1(143),...)
 # A string
-capture.devices_buffersize: veth1f1fdaf(2),wlo1(2),vetha0f2b1d(2),veth3d016c1(2),vetha14a1e5(2),veth5ef80b8(2),br-00fc46aafa10(2),vethef0e83c(2),veth6774d91(2),vethbfdb494(2),vethfaab811(2),vethdd4879a(2),veth802956b(2),lo(2),any(2),virbr0(2),docker0(2),eno2(2),bluetooth-monitor(2),nflog(2),nfqueue(2),bluetooth0(2),virbr0-nic(2),ciscodump(2),dpauxmon(2),randpkt(2),sdjournal(2),sshdump(2),udpdump(2)
+capture.devices_buffersize: virbr0(2),vnet0(2),docker0(2),wlo1(2),eno2(2),vethcc33b84(2),lo(2),any(2),br-8cb00c1f1c7f(2),bluetooth-monitor(2),nflog(2),nfqueue(2),bluetooth0(2),virbr0-nic(2),ciscodump(2),dpauxmon(2),randpkt(2),sdjournal(2),sshdump(2),udpdump(2)
 
 # Interface snap length (Ex: en0(65535),en1(1430),...)
 # A string
-capture.devices_snaplen: veth1f1fdaf:0(262144),wlo1:0(262144),vetha0f2b1d:0(262144),veth3d016c1:0(262144),vetha14a1e5:0(262144),veth5ef80b8:0(262144),br-00fc46aafa10:0(262144),vethef0e83c:0(262144),veth6774d91:0(262144),vethbfdb494:0(262144),vethfaab811:0(262144),vethdd4879a:0(262144),veth802956b:0(262144),lo:0(262144),any:0(262144),virbr0:0(262144),docker0:0(262144),eno2:0(262144),bluetooth-monitor:0(262144),nflog:0(262144),nfqueue:0(262144),bluetooth0:0(262144),virbr0-nic:0(262144),ciscodump:0(262144),dpauxmon:0(262144),randpkt:0(262144),sdjournal:0(262144),sshdump:0(262144),udpdump:0(262144)
+capture.devices_snaplen: virbr0:0(262144),vnet0:0(262144),docker0:0(262144),wlo1:0(262144),eno2:0(262144),vethcc33b84:0(262144),lo:0(262144),any:0(262144),br-8cb00c1f1c7f:0(262144),bluetooth-monitor:0(262144),nflog:0(262144),nfqueue:0(262144),bluetooth0:0(262144),virbr0-nic:0(262144),ciscodump:0(262144),dpauxmon:0(262144),randpkt:0(262144),sdjournal:0(262144),sshdump:0(262144),udpdump:0(262144)
 
 # Interface promiscuous mode (Ex: en0(0),en1(1),...)
 # A string
-capture.devices_pmode: veth1f1fdaf(1),wlo1(1),vetha0f2b1d(1),veth3d016c1(1),vetha14a1e5(1),veth5ef80b8(1),br-00fc46aafa10(1),vethef0e83c(1),veth6774d91(1),vethbfdb494(1),vethfaab811(1),vethdd4879a(1),veth802956b(1),lo(1),any(1),virbr0(1),docker0(1),eno2(1),bluetooth-monitor(1),nflog(1),nfqueue(1),bluetooth0(1),virbr0-nic(1),ciscodump(1),dpauxmon(1),randpkt(1),sdjournal(1),sshdump(1),udpdump(1)
+capture.devices_pmode: virbr0(1),vnet0(1),docker0(1),wlo1(1),eno2(1),vethcc33b84(1),lo(1),any(1),br-8cb00c1f1c7f(1),bluetooth-monitor(1),nflog(1),nfqueue(1),bluetooth0(1),virbr0-nic(1),ciscodump(1),dpauxmon(1),randpkt(1),sdjournal(1),sshdump(1),udpdump(1)
 
 # Capture in promiscuous mode?
 # TRUE or FALSE (case-insensitive)
@@ -496,7 +496,7 @@ console.log.level: 64
 
 # Remote capture filter
 # A string
-#extcap.sshdump.remotefilter: not ((host fe80::9cfd:8eff:fe27:398d or host fe80::9482:59ff:feb3:ba8d or host fe80::308c:e6ff:fe55:8ebb or host fe80::3c5a:84ff:fee6:71a7 or host fe80::94d5:f7ff:fe34:1281 or host fe80::74ce:43ff:fef8:230a or host fe80::1010:feff:fef3:9a3d or host fe80::e8f3:efff:feb9:f1fb or host fe80::f413:2fff:fead:8642 or host fe80::4b0:e9ff:fee8:4a06 or host fe80::185b:e4ff:fe32:cd7f or host fe80::42:a7ff:fe10:9582 or host fe80::2864:bd88:4e9a:c9 or host 172.28.0.1 or host 172.17.0.1 or host 192.168.122.1 or host 192.168.1.245) and port 22)
+#extcap.sshdump.remotefilter: not ((host fe80::307a:20ff:fe78:230b or host fe80::42:25ff:fe88:fe4b or host fe80::fc54:ff:fe78:a1e3 or host fe80::2864:bd88:4e9a:c9 or host fe80::a15c:a76f:bf18:2ad9 or host 172.24.0.1 or host 172.20.0.1 or host 192.168.122.1 or host 192.168.1.245 or host 192.168.1.243) and port 22)
 
 # Packets to capture
 # A string
@@ -536,7 +536,7 @@ console.log.level: 64
 
 # Remote capture filter
 # A string
-#extcap.ciscodump.remotefilter: deny tcp host fe80::9cfd:8eff:fe27:398d any eq 0, deny tcp any eq 0 host fe80::9cfd:8eff:fe27:398d, deny tcp host fe80::9482:59ff:feb3:ba8d any eq 0, deny tcp any eq 0 host fe80::9482:59ff:feb3:ba8d, deny tcp host fe80::308c:e6ff:fe55:8ebb any eq 0, deny tcp any eq 0 host fe80::308c:e6ff:fe55:8ebb, deny tcp host fe80::3c5a:84ff:fee6:71a7 any eq 0, deny tcp any eq 0 host fe80::3c5a:84ff:fee6:71a7, deny tcp host fe80::94d5:f7ff:fe34:1281 any eq 0, deny tcp any eq 0 host fe80::94d5:f7ff:fe34:1281, deny tcp host fe80::74ce:43ff:fef8:230a any eq 0, deny tcp any eq 0 host fe80::74ce:43ff:fef8:230a, deny tcp host fe80::1010:feff:fef3:9a3d any eq 0, deny tcp any eq 0 host fe80::1010:feff:fef3:9a3d, deny tcp host fe80::e8f3:efff:feb9:f1fb any eq 0, deny tcp any eq 0 host fe80::e8f3:efff:feb9:f1fb, deny tcp host fe80::f413:2fff:fead:8642 any eq 0, deny tcp any eq 0 host fe80::f413:2fff:fead:8642, deny tcp host fe80::4b0:e9ff:fee8:4a06 any eq 0, deny tcp any eq 0 host fe80::4b0:e9ff:fee8:4a06, deny tcp host fe80::185b:e4ff:fe32:cd7f any eq 0, deny tcp any eq 0 host fe80::185b:e4ff:fe32:cd7f, deny tcp host fe80::42:a7ff:fe10:9582 any eq 0, deny tcp any eq 0 host fe80::42:a7ff:fe10:9582, deny tcp host fe80::2864:bd88:4e9a:c9 any eq 0, deny tcp any eq 0 host fe80::2864:bd88:4e9a:c9, deny tcp host 172.28.0.1 any eq 0, deny tcp any eq 0 host 172.28.0.1, deny tcp host 172.17.0.1 any eq 0, deny tcp any eq 0 host 172.17.0.1, deny tcp host 192.168.122.1 any eq 0, deny tcp any eq 0 host 192.168.122.1, deny tcp host 192.168.1.245 any eq 0, deny tcp any eq 0 host 192.168.1.245, permit ip any any
+#extcap.ciscodump.remotefilter: deny tcp host fe80::307a:20ff:fe78:230b any eq 0, deny tcp any eq 0 host fe80::307a:20ff:fe78:230b, deny tcp host fe80::42:25ff:fe88:fe4b any eq 0, deny tcp any eq 0 host fe80::42:25ff:fe88:fe4b, deny tcp host fe80::fc54:ff:fe78:a1e3 any eq 0, deny tcp any eq 0 host fe80::fc54:ff:fe78:a1e3, deny tcp host fe80::2864:bd88:4e9a:c9 any eq 0, deny tcp any eq 0 host fe80::2864:bd88:4e9a:c9, deny tcp host fe80::a15c:a76f:bf18:2ad9 any eq 0, deny tcp any eq 0 host fe80::a15c:a76f:bf18:2ad9, deny tcp host 172.24.0.1 any eq 0, deny tcp any eq 0 host 172.24.0.1, deny tcp host 172.20.0.1 any eq 0, deny tcp any eq 0 host 172.20.0.1, deny tcp host 192.168.122.1 any eq 0, deny tcp any eq 0 host 192.168.122.1, deny tcp host 192.168.1.245 any eq 0, deny tcp any eq 0 host 192.168.1.245, deny tcp host 192.168.1.243 any eq 0, deny tcp any eq 0 host 192.168.1.243, permit ip any any
 
 # Packets to capture
 # A string

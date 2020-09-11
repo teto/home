@@ -60,13 +60,22 @@ rec {
         #   src = builtins.fetchGit {
         #     url = https://github.com/pazz/alot.git;
         #   };
-
         #   # src = super.fetchFromGitHub {
         #   #   owner = "pazz";
         #   #   repo = "alot";
         #   #   rev = "6bb18fa97c78b3cb1fcb60ce5d850602b55e358f";
         #   #   sha256 = "1l8b32ly0fvzwsy3f3ywwi0plckm31y269xxckmgi02sdwisq1ah";
         #   # };
+        # });
+
+        # this doesn't work, need to use the proper nixpkgs revision
+        # poetry = pythonsuper.poetry.overridePythonAttrs(oa: {
+        #   src = self.fetchFromGitHub {
+        #     owner = "python-poetry";
+        #     repo = "poetry";
+        #     rev = "1.0.2";
+        #     sha256 = "sha256-pqDCCWyoGhkiayy+RMfXlYOD8mbAikBGDvRJnsAUpjw=";
+        #   };
         # });
 
         papis-dev = pythonsuper.papis.overridePythonAttrs (oa: {

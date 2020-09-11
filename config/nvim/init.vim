@@ -106,7 +106,7 @@ set exrc
 call plug#begin(s:plugdir)
 Plug '~/pdf-scribe.nvim'  " to annotate pdf files from nvim :PdfScribeInit
 Plug 'cespare/vim-toml'
-
+Plug 'TaDaa/vimade' " to dim the background on lost focus
 
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
@@ -528,6 +528,8 @@ let g:vimsyn_embed = 'lP'  " support embedded lua, python and ruby
 " don't syntax-highlight long lines
 set synmaxcol=200
 
+
+
 "{{{ deoplete
 " configured in after/deoplete.vim
 "}}}
@@ -792,186 +794,6 @@ let g:gutentags_file_list_command = 'rg --files'
 " gutenhasktags/ haskdogs/ hasktags/hothasktags
 
 let g:gutentags_ctags_exclude = ['.vim-src', 'build', '.mypy_cache']
-" }}}
-" FZF config {{{
-let g:fzf_command_prefix = 'Fzf' " prefix commands :Files become :FzfFiles, etc.
-let g:fzf_nvim_statusline = 0 " disable statusline overwriting
-
-" This is the default extra key bindings
-let g:fzf_action = {
-  \ 'ctrl-t': 'tab split',
-  \ 'ctrl-x': 'split',
-  \ 'ctrl-v': 'vsplit' }
-
-" Default fzf layout
-" - down / up / left / right
-" - window (nvim only)
-let g:fzf_layout = { 'down': '~40%' }
-
-" For Commits and BCommits to customize the options used by 'git log':
-let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
-
-" mostly fzf mappings, use TAB to mark several files at the same time
-" https://github.com/neovim/neovim/issues/4487
-nnoremap <Leader>o <Cmd>FzfFiles<CR>
-" nnoremap <Leader>g <Cmd>FzfGitFiles<CR>
-nnoremap <Leader>F <Cmd>FzfFiletypes<CR>
-nnoremap <Leader>h <Cmd>FzfHistory<CR>
-nnoremap <Leader>c <Cmd>FzfCommits<CR>
-nnoremap <Leader>C <Cmd>FzfColors<CR>
-nnoremap <leader>b <Cmd>FzfBuffers<CR>
-nnoremap <leader>m <Cmd>FzfMarks<CR>
-nnoremap <leader>l <Cmd>FzfLines<CR>
-nnoremap <leader>t <Cmd>FzfTags<CR>
-nnoremap <leader>T <Cmd>FzfBTags<CR>
-nnoremap <leader>g <Cmd>FzfRg<CR>
-
-
-function! SeeLineHistory()
-
-  let file=expand('%')
-  let line=line('.')
-  let cmd= 'git log --format=format:%H '.file.' | xargs -L 1 git blame '.file.' -L '.line.','.line
-  call termopen(cmd)
-endfunc
-
-let s:opts = {
-  \ 'source': "git branch -a",
-  \ 'options': ' --prompt "Misc>"',
-  \ 'down': '50%',
-  \ }
-  " \ 'sink': function('s:processResult'),
-
-
-" FzfBranches
-function! SignifyUpdateBranch(branch)
-  " echom 'chosen branch='.a:branch
-  let g:signify_vcs_cmds = {
-	\'git': 'git diff --no-color --no-ext-diff -U0 '.a:branch.' -- %f'
-    \}
-endfunc
-
-function! ChooseSignifyGitCommit()
-
-  let dict = copy(s:opts)
-  let dict.sink = funcref('SignifyUpdateBranch')
-  call fzf#run(dict)
-  SignifyRefresh
-endfunction
-command! FzfSignifyChooseBranch call ChooseSignifyGitCommit()
-
-" function! GetQfHistory()
-
-"   " let s:res =
-"   redir => cout
-"   silent chistory
-"   redir END
-"   let qfs = split(cout, "\n")
-"   " TODO set jump to do
-"   let current_qf = -1
-"   let i = 0
-"   for item in qfs
-"     if item[0] == ">"
-"       current_qf = i
-"     endif
-"     i = i + 1
-"   endfor
-"   " map(list[1:], 's:format_mark(v:val)')),
-"   return qfs
-"   " return extend(list[0:0], map(list[1:], 's:format_mark(v:val)')),
-" endfunction
-
-" function! UpdateQfList(res)
-"   " TODO compute newer/older count for going to
-"   " TODO if
-"   echo a:res
-"   " get jump id
-"   " if ljump < 0
-"   "   colder -ljump
-"   " else
-"   "   cnewer ljump
-" endfunction
-
-" TODO be able to fzf lhistory/chistory
-" function! FzfChooseQfList()
-
-"   let d = copy(s:opts)
-"   let d.source = GetQfHistory()
-"   " let d.source = ["test 1", "test 2"]
-"   let d.sink = function('UpdateQfList')
-"   call fzf#run(d)
-" endfunction
-
-function! FzfNeomake()
-
-  let d = copy(s:opts)
-
-  let d.source = get(g:, 'neomake_'.&ft.'_enabled_makers', [])
-  " let d.prompt = &ft." makers"
-  let d.options = '--prompt "'.&ft.' Makers>"'
-  " let d.source = ["test 1", "test 2"]
-  let d.sink = function('UpdateQfList')
-  call fzf#run(d)
-endfunction
-
-" Customize fzf colors to match your color scheme
-" let g:fzf_colors = \ { 'fg':      ['fg', 'Normal'],
-"   \ 'bg':      ['bg', 'Normal'],
-"   \ 'hl':      ['fg', 'Comment'],
-"   \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-"   \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-"   \ 'hl+':     ['fg', 'Statement'],
-"   \ 'info':    ['fg', 'PreProc'],
-"   \ 'prompt':  ['fg', 'Conditional'],
-"   \ 'pointer': ['fg', 'Exception'],
-"   \ 'marker':  ['fg', 'Keyword'],
-"   \ 'spinner': ['fg', 'Label'],
-"   \ 'header':  ['fg', 'Comment']
-" }
-
-let g:fzf_history_dir = stdpath('cache').'/fzf-history'
-" Advanced customization using autoload functions
-"autocmd VimEnter * command! Colors
-  "\ call fzf#vim#colors({'left': '15%', 'options': '--reverse --margin 30%,0'})
-" Advanced customization using autoload functions
-
-  " [Buffers] Jump to the existing window if possible
-let g:fzf_buffers_jump = 1
-" Empty value to disable preview window altogether
-" let g:fzf_preview_window = ''
-let g:fzf_preview_window = 'right:30%'
-
-imap <c-x><c-f> <plug>(fzf-complete-path)
-" inspired by https://github.com/junegunn/fzf.vim/issues/664#issuecomment-476438294
-" let $FZF_DEFAULT_OPTS='--layout=reverse'
-let g:fzf_layout.window =  'call FloatingFZF()'
-
-" Function to create the custom floating window
-function! FloatingFZF()
-  " creates a scratch, unlisted, new, empty, unnamed buffer
-  " to be used in the floating window
-  let buf = nvim_create_buf(v:false, v:true)
-
-  " 90% of the height
-  let height = float2nr(&lines * 0.6)
-  " 60% of the height
-  let width = float2nr(&columns * 0.8)
-  " horizontal position (centralized)
-  let horizontal = float2nr((&columns - width) / 2)
-  " vertical position (one line down of the top)
-  let vertical = 6
-
-  let opts = {
-        \ 'relative': 'editor',
-        \ 'row': vertical,
-        \ 'col': horizontal,
-        \ 'width': width,
-        \ 'height': height
-        \ }
-
-  call nvim_open_win(buf, v:true, opts)
-endfunction
-
 " }}}
 " fzf-preview {{{
 " let g:fzf_preview_layout = 'top split new'
@@ -1813,6 +1635,198 @@ let g:vsnip_snippet_dir = stdpath('config').'/vsnip'
 " to prettify json
 " g:python3_host_prog -m json.tool
 
+" FZF config {{{
+let g:fzf_command_prefix = 'Fzf' " prefix commands :Files become :FzfFiles, etc.
+let g:fzf_nvim_statusline = 0 " disable statusline overwriting
+
+" This is the default extra key bindings
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-v': 'vsplit' }
+
+" Default fzf layout
+" - down / up / left / right
+" - window (nvim only)
+let g:fzf_layout = { 'down': '~40%' }
+
+" For Commits and BCommits to customize the options used by 'git log':
+let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
+
+" mostly fzf mappings, use TAB to mark several files at the same time
+" https://github.com/neovim/neovim/issues/4487
+nnoremap <Leader>o <Cmd>FzfFiles<CR>
+" nnoremap <Leader>g <Cmd>FzfGitFiles<CR>
+nnoremap <Leader>F <Cmd>FzfFiletypes<CR>
+nnoremap <Leader>h <Cmd>FzfHistory<CR>
+nnoremap <Leader>c <Cmd>FzfCommits<CR>
+nnoremap <Leader>C <Cmd>FzfColors<CR>
+nnoremap <leader>b <Cmd>FzfBuffers<CR>
+nnoremap <leader>m <Cmd>FzfMarks<CR>
+nnoremap <leader>l <Cmd>FzfLines<CR>
+nnoremap <leader>t <Cmd>FzfTags<CR>
+nnoremap <leader>T <Cmd>FzfBTags<CR>
+nnoremap <leader>g <Cmd>FzfRg<CR>
+
+
+function! SeeLineHistory()
+
+  let file=expand('%')
+  let line=line('.')
+  let cmd= 'git log --format=format:%H '.file.' | xargs -L 1 git blame '.file.' -L '.line.','.line
+  call termopen(cmd)
+endfunc
+
+let s:opts = {
+  \ 'source': "git branch -a",
+  \ 'options': ' --prompt "Misc>"',
+  \ 'down': '50%',
+  \ }
+  " \ 'sink': function('s:processResult'),
+
+
+" FzfBranches
+function! SignifyUpdateBranch(branch)
+  " echom 'chosen branch='.a:branch
+  let g:signify_vcs_cmds = {
+	\'git': 'git diff --no-color --no-ext-diff -U0 '.a:branch.' -- %f'
+    \}
+endfunc
+
+function! ChooseSignifyGitCommit()
+
+  let dict = copy(s:opts)
+  let dict.sink = funcref('SignifyUpdateBranch')
+  call fzf#run(dict)
+  SignifyRefresh
+endfunction
+command! FzfSignifyChooseBranch call ChooseSignifyGitCommit()
+
+" function! GetQfHistory()
+
+"   " let s:res =
+"   redir => cout
+"   silent chistory
+"   redir END
+"   let qfs = split(cout, "\n")
+"   " TODO set jump to do
+"   let current_qf = -1
+"   let i = 0
+"   for item in qfs
+"     if item[0] == ">"
+"       current_qf = i
+"     endif
+"     i = i + 1
+"   endfor
+"   " map(list[1:], 's:format_mark(v:val)')),
+"   return qfs
+"   " return extend(list[0:0], map(list[1:], 's:format_mark(v:val)')),
+" endfunction
+
+" function! UpdateQfList(res)
+"   " TODO compute newer/older count for going to
+"   " TODO if
+"   echo a:res
+"   " get jump id
+"   " if ljump < 0
+"   "   colder -ljump
+"   " else
+"   "   cnewer ljump
+" endfunction
+
+" TODO be able to fzf lhistory/chistory
+" function! FzfChooseQfList()
+
+"   let d = copy(s:opts)
+"   let d.source = GetQfHistory()
+"   " let d.source = ["test 1", "test 2"]
+"   let d.sink = function('UpdateQfList')
+"   call fzf#run(d)
+" endfunction
+
+function! FzfNeomake()
+
+  let d = copy(s:opts)
+
+  let d.source = get(g:, 'neomake_'.&ft.'_enabled_makers', [])
+  " let d.prompt = &ft." makers"
+  let d.options = '--prompt "'.&ft.' Makers>"'
+  " let d.source = ["test 1", "test 2"]
+  let d.sink = function('UpdateQfList')
+  call fzf#run(d)
+endfunction
+
+" Customize fzf colors to match your color scheme
+" let g:fzf_colors = \ { 'fg':      ['fg', 'Normal'],
+"   \ 'bg':      ['bg', 'Normal'],
+"   \ 'hl':      ['fg', 'Comment'],
+"   \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+"   \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+"   \ 'hl+':     ['fg', 'Statement'],
+"   \ 'info':    ['fg', 'PreProc'],
+"   \ 'prompt':  ['fg', 'Conditional'],
+"   \ 'pointer': ['fg', 'Exception'],
+"   \ 'marker':  ['fg', 'Keyword'],
+"   \ 'spinner': ['fg', 'Label'],
+"   \ 'header':  ['fg', 'Comment']
+" }
+
+let g:fzf_history_dir = stdpath('cache').'/fzf-history'
+" Advanced customization using autoload functions
+"autocmd VimEnter * command! Colors
+  "\ call fzf#vim#colors({'left': '15%', 'options': '--reverse --margin 30%,0'})
+" Advanced customization using autoload functions
+
+  " [Buffers] Jump to the existing window if possible
+let g:fzf_buffers_jump = 1
+" Empty value to disable preview window altogether
+" let g:fzf_preview_window = ''
+let g:fzf_preview_window = 'right:30%'
+
+imap <c-x><c-f> <plug>(fzf-complete-path)
+" inspired by https://github.com/junegunn/fzf.vim/issues/664#issuecomment-476438294
+" let $FZF_DEFAULT_OPTS='--layout=reverse'
+let g:fzf_layout.window =  'call FloatingFZF()'
+
+" Function to create the custom floating window
+function! FloatingFZF()
+  " creates a scratch, unlisted, new, empty, unnamed buffer
+  " to be used in the floating window
+  let buf = nvim_create_buf(v:false, v:true)
+
+  " 90% of the height
+  let height = float2nr(&lines * 0.6)
+  " 60% of the height
+  let width = float2nr(&columns * 0.8)
+  " horizontal position (centralized)
+  let horizontal = float2nr((&columns - width) / 2)
+  " vertical position (one line down of the top)
+  let vertical = 6
+
+  let opts = {
+        \ 'relative': 'editor',
+        \ 'row': vertical,
+        \ 'col': horizontal,
+        \ 'width': width,
+        \ 'height': height
+        \ }
+
+  call nvim_open_win(buf, v:true, opts)
+endfunction
+
+" }}}
+
+" telescope.nvim{{{
+" nnoremap <Leader>g :lua require'telescope.builtin'.git_files{}<CR>
+
+" Convert currently quickfixlist to telescope
+" nnoremap <Leader>q :lua require('telescope.builtin').quickfix()<CR>
+
+" Grep as you type (requires rg currently)
+" nnoremap <Leader>rg :lua require('telescope.builtin').live_grep()<CR>
+"}}}
+
+
 set hidden " you can open a new buffer even if current is unsaved (error E37)
 " draw a line on 80th column
 set colorcolumn=80,100
@@ -2231,11 +2245,11 @@ nmap ]] <Cmd>NextDiagnostic<cr>
 set omnifunc=v:lua.vim.lsp.omnifunc
 
 
-" augroup highlight_yank
-"     autocmd!
-"     " silent
-"     autocmd TextYankPost * lua require'vim.highlight'.on_yank{higroup="IncSearch", timeout=1000}
-" augroup END
+augroup highlight_yank
+    autocmd!
+    " silent
+    autocmd TextYankPost * lua require'vim.highlight'.on_yank{higroup="IncSearch", timeout=1000}
+augroup END
 
 autocmd CursorHold lua vim.lsp.util.show_line_diagnostics()
 autocmd CursorMoved lua vim.lsp.util.show_line_diagnostics()

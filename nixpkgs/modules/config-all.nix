@@ -184,6 +184,7 @@ kernel_xconfig=''
 
   programs.less = {
     enable = true;
+    # configFile = ;
     envVariables = {
       LESS = "-R --quit-if-one-screen";
       LESSHISTFILE = "$XDG_CACHE_HOME/less.hst";

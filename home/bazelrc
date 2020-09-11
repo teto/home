@@ -1,2 +1,4 @@
 build --record_rule_instantiation_callstack
 build --verbose_failures
+build --sandbox_debug
+build --override_repository="rules_haskell=/home/teto/nova/rules_haskell"

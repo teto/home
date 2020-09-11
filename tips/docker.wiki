@@ -110,4 +110,12 @@ kubectl delete ns [NAMESPACE]
 
 docker build --progress auto .
 
+--build-arg  arg=value https://docs.docker.com/engine/reference/builder/#arg
 docker build --progress auto --no-cache - < Dockerfile
+
+docker [[build]] --progress auto --no-cache --build-arg JINKO_VERSION=local  -f Dockerfile
+
+
+The docker build command builds Docker images from a Dockerfile and a “context”. A build’s context is the set of files located in the specified PATH or URL. The build process can refer to any of the files in the context. For example, your build can use a COPY instruction to reference a file in the context.
+
+download the full bucket aws s3 sync s3://jinko-dev-shared .

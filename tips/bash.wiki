@@ -1,3 +1,6 @@
 `help set` will show you options:
 
 shopt -sp
+
+# 'here'-strings (for programs that expect a file)
+awk '{print $1}' <<< "$VAR1"

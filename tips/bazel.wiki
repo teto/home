@@ -24,6 +24,13 @@ bazel build --explain=file.txt --verbose_explanations
 bazel info shows the server log location.
 Our bazel remote is in /tmp/bazel-remote.log
 
+
+# update a stack_snpashot
+bazel run @ghcide-unpinned//:pin
+bazel run @stackage-unpinned//:pin
+https://api.haskell.build/haskell/cabal.html#stack_snapshot
+
+
 # force a rebuild
 Change the environment 
 bazel build --action_env="avariable=1" :mytarget
@@ -33,17 +40,16 @@ To construct :
 bazel-bin/simwork/result-store/result-store-service@image-notimestamp-layer.tar
 
 # to override a repository
-bazel build/test/run/sync \
-  --override_repository rules_haskell=/path/to/checkout
-  
-  
+bazel build/test/run/sync --override_repository rules_haskell=/path/to/checkout
+
+
 The WORKSPACE file allows users to depend on targets from other parts of the filesystem or downloaded from the internet. It uses the same syntax as BUILD files, but allows a different set of rules called repository rules (sometimes also known as workspace rules).
 
 
 # To force a re-download:
 $ bazel sync
 
-
+--nofetch
 # 
 Note that running bazel clean will not actually delete the external directory. To remove all external artifacts, use bazel clean --expunge
 
@@ -55,3 +61,9 @@ run `bazel fetch` beforehand.
 --record_rule_instantiation_callstack
 
 %% Targets with tags = ["manual"] will not be included in wildcard target patterns (..., :*, :all, etc.)
+
+
+# understand the cache
+https://docs.bazel.build/versions/master/command-line-reference.html#flag--disk_cache fait reference au ~/.cache/bazel_disk_cache
+https://docs.bazel.build/versions/3.5.0/output_directories.html
+bazel --output_user_root=./user_cache 

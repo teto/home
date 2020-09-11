@@ -1,6 +1,8 @@
 # home-manager specific config from
 { config, lib, pkgs,  ... }:
 let
+  # 
+  # nova-nix = builtins.getFlake "/home/teto/nova/nova-nix"
 
 in
 {

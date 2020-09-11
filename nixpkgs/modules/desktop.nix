@@ -3,9 +3,6 @@ let
   secrets = import ./secrets.nix;
   userNixpkgs = /home/teto/nixpkgs;
   nixosConfig = ./configuration.nix;
-  # nixosOverlay = /home/teto/dotfiles/nixpkgs/overlays;
-  # with builtims.fetchGit , no need for that anymore ?
-  sshFolder = /home/teto/.ssh/config;
 in
 {
 
@@ -149,6 +146,10 @@ in
 
   services.greenclip.enable = true;
 
+  nix.registry = {
+    # nixpkgs.flake = ;
+  };
+
   nix = {
     # allowedUsers = [];
 
@@ -161,11 +162,10 @@ in
     nixPath = [
       "nixos-unstable=https://github.com/nixos/nixpkgs-channels/archive/nixos-unstable.tar.gz"
       "nixos=https://github.com/nixos/nixpkgs-channels/archive/nixos-20.03.tar.gz"
+      "nixpkgs=${builtins.toString userNixpkgs}"
     ]
-    ++ lib.optional (builtins.pathExists userNixpkgs)  "nixpkgs=${builtins.toString userNixpkgs}"
-    ++ lib.optional (builtins.pathExists nixosConfig)  "nixos-config=${builtins.toString nixosConfig}"
-    # ++ lib.optional (builtins.pathExists nixosOverlay) "nixpkgs-overlays=${builtins.toString nixosOverlay}"
-    # ++ lib.optional (builtins.pathExists nixosOverlay) "ssh-config-file=${builtins.toString sshFolder}"
+    # ++ lib.optional (builtins.pathExists userNixpkgs)  "nixpkgs=${builtins.toString userNixpkgs}"
+    # ++ lib.optional (builtins.pathExists nixosConfig)  "nixos-config=${builtins.toString nixosConfig}"
     ;
 
     # sshServe.enable = false;
