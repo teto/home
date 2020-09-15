@@ -1,14 +1,15 @@
 { config, pkgs, lib,  ... }:
 let
 
-#  nur = import (builtins.fetchTarball {
-#    # TODO pass rev
-#    url = "https://github.com/nix-community/NUR/archive/358dfac85d647bd3e0b30aa76c2b63d203233419.tar.gz";
-#    # url = "https://github.com/nix-community/NUR/archive/cb0033ca5ef1e2db7952919f0f983ce57d8526b0.tar.gz";
-#    sha256 = "1xm2z8f7zhwdzwasy348ilk4850i71s98jrhqhjrmaanhc0p67nl";
-#  }) {
-#    inherit pkgs;
-#  };
+ # nur = import (builtins.fetchTarball {
+ #   # TODO pass rev
+ #   url = "https://github.com/nix-community/NUR/archive/358dfac85d647bd3e0b30aa76c2b63d203233419.tar.gz";
+ #   # url = "https://github.com/nix-community/NUR/archive/cb0033ca5ef1e2db7952919f0f983ce57d8526b0.tar.gz";
+ #   sha256 = "1xm2z8f7zhwdzwasy348ilk4850i71s98jrhqhjrmaanhc0p67nl";
+ # }) {
+ #   inherit pkgs;
+ # };
+
 in
 {
 
@@ -23,7 +24,7 @@ in
     # enableBukubrow = true;
     # with pkgs.nur.repos.rycee.firefox-addons;
     extensions =  with pkgs;[
-#        nur.repos.rycee.firefox-addons.bitwarden
+       nur.repos.rycee.firefox-addons.bitwarden
 #        nur.repos.rycee.firefox-addons.browserpass
 #        nur.repos.rycee.firefox-addons.browserpass-otp
 #        nur.repos.rycee.firefox-addons.dark-night-mode

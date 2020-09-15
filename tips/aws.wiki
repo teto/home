@@ -12,4 +12,14 @@ aws sts get-caller-identity
 
 aws s3api get-bucket-location --profile jinko-dev --bucket jinko-dev-shared
 
+# dada
 
+Minimum password length is 32 characters
+Require at least one uppercase letter from Latin alphabet (A-Z)
+Require at least one lowercase letter from Latin alphabet (a-z)
+Require at least one number
+Require at least one non-alphanumeric character ()
+Password expires in 120 day(s)
+Password expiration requires administrator reset
+Allow users to change their own password
+Remember last 5 password(s) and prevent reuse

@@ -1,0 +1,9 @@
+keyboard firmware
+
+make git-submodule
+make ergodox_ez:default:flash
+
+ERGODOX_LED_30
+
+[[ORYX_CONFIGURATOR]]
+

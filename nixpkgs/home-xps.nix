@@ -23,6 +23,7 @@ in
       # ./hm/autoUpgrade.nix
 
 	  # TODO reference from nova-nix
+      nova.nixosConfigurations.hmProfiles.dev
       # ./hm/profiles/nova-user.nix
       # ./hm/profiles/nova-dev.nix
     ]

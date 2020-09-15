@@ -208,7 +208,7 @@ in
   hardware.sane.enable = true;
 
   nix = {
-    package = pkgs.nixFlakes;
+    package = pkgs.nixUnstable;
 
     # sshServe = {
     #   enable = true;

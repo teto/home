@@ -1,5 +1,8 @@
 `load` statements must be at the top
 
+
+bazel build @ghcide-exe//hie-bios
+
 bazel help query
 
 [query](https://docs.bazel.build/versions/master/query-how-to.html)
@@ -25,7 +28,7 @@ bazel info shows the server log location.
 Our bazel remote is in /tmp/bazel-remote.log
 
 
-# update a stack_snpashot
+# update a stack_snapshot
 bazel run @ghcide-unpinned//:pin
 bazel run @stackage-unpinned//:pin
 https://api.haskell.build/haskell/cabal.html#stack_snapshot

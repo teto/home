@@ -3,7 +3,6 @@ let
   # stable = import <nixos> {};
   # unstable = import <nixos-unstable> {};
 
-
   # change to a package
   fzf-extras = let src = pkgs.fetchFromGitHub {
     owner = "atweiden";
@@ -35,13 +34,14 @@ rec {
 
 	# TODO try i3-snapshot
     # hstr # to deal with shell history
-    # bandwhich  # to monitor per app bandwidth
+    bandwhich  # to monitor per app bandwidth
     tig
     netcat-gnu  # plain 'netcat' is the bsd one
-    # dig.dnsutils  # for dig
+    # dig.dnsutils  # for dig disabled because of flakes
     strace
     w3m   # for preview in ranger w3mimgdisplay
     xdg_utils
+    wally-cli  # to flash ergodox keyboards
     whois
 
     # to be used in i3
@@ -85,13 +85,6 @@ rec {
   # home.file.".stack/config.yaml".source = ../home/stack.yaml;
 
   home.stateVersion = "20.09";
-
-  # see tips/haskell.md, an incomplete cabal config can be a pain
-  # - absence of repostiory will make cabal update fail
-  # is needed with new-build ?
-  # "nix: True";
-  # home.file.".cabal/config".text = ../home/cabal;
-
 
   # - https://github.com/carnager/rofi-scripts.git
   # https://github.com/carnager/buku_run

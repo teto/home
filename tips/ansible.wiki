@@ -1,0 +1,24 @@
+
+ANSIBLE_LIBRARY
+
+# to list plugins
+# 
+ansible-doc -t inventory -l
+
+
+ANSIBLE_CONFIG
+
+# to inspect config
+
+ansible-config
+
+# deal with vault 
+
+ansible-vault i
+
+
+ansible-playbook jinko-app.yml --start-at-task='run tests for Helm release'
+
+# reference
+https://docs.ansible.com/ansible/latest/reference_appendices/config.html#the-configuration-file
+ansible.cfg

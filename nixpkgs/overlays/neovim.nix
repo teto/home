@@ -179,7 +179,8 @@ rec {
         # url = https://github.com/BK1603/neovim.git;
         # ref = "fswatch-autoread";
         url = https://github.com/neovim/neovim.git;
-        rev = "c1d395a6d664933ec7a644362721db115efef664";
+        # rev = "20f7b94284a1b7d903bfa81cb2120b55058fbe7f";
+        ref = "master";
       };
       # src = final.fetchFromGitHub {
       #   owner = "teto";
@@ -291,14 +292,13 @@ rec {
     };
 
     extraPython3Packages = ps: with ps; [
-      # pandas # broken
       jedi
-      urllib3
+      # urllib3
       # pygments # for pygmentize and minted in latex
       mypy
       # generates https://github.com/tomv564/pyls-mypy/issues/22
-      pyls-mypy # can't find imports :s
-      python-language-server
+      # pyls-mypy # can't find imports :s
+      # python-language-server
       pycodestyle
     ]
     ;

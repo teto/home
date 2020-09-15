@@ -54,7 +54,7 @@
               hm.nixosModules.home-manager
               # TODO fix that one
               (builtins.trace nova nova.nixosModules.profiles.main)
-              # (builtins.trace nova nova.nixosModules.profiles.dev)
+              (builtins.trace nova nova.nixosModules.profiles.dev)
                 # home-manager.users.teto = { ... }:
               ({ config, lib, pkgs,  ... }:
                 {

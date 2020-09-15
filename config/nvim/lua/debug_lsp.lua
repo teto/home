@@ -27,6 +27,7 @@ local report_info = vim.fn['health#report_info']
 
 function M.check_health()
 
+	print("active clients")
 	for key, client in pairs(vim.lsp.get_active_clients()) do
 		-- print("loading key "..key)
 		M.lsp_dump_active_client(client)

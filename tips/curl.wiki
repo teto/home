@@ -28,7 +28,5 @@ curl --trace dump will dump the packet
 # To authenticate 
 
 One can pass 
--u [[user]]:thepasswordgoeshere
+-u user:thepasswordgoeshere
 or curl https://myusername:mypassword@www.example.com/Push_Order.php?orderId=1562
-or use
-CURLOPT_USERPWD

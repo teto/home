@@ -128,8 +128,8 @@ Plug 'diepm/vim-rest-console' " test rest APIs
 Plug 'nvim-lua/lsp-status.nvim'  " display lsp progress
 Plug 'skywind3000/vim-quickui'
 Plug 'liuchengxu/vista.vim' " replaces tagbar to list workplace symbols
-Plug 'neovim/nvim-lsp' " while fuzzing details out
-" Plug '~/nvim-lsp' " while fuzzing details out
+Plug 'neovim/nvim-lspconfig' " while fuzzing details out
+" Plug '~/nvim-lspconfig' " while fuzzing details out
 " Plug 'puremourning/vimspector' " to debug programs
 Plug 'bfredl/nvim-luadev'  " lua repl :Luadev
 Plug 'hotwatermorning/auto-git-diff' " to help rebasing

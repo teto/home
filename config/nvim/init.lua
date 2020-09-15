@@ -5,7 +5,14 @@ local configs = require'nvim_lsp/configs'
 local lsp_status = require'lsp-status'
 
 -- completion_customize_lsp_label as used in completion-nvim
-lsp_status.config { kind_labels = vim.g.completion_customize_lsp_label }
+lsp_status.config {
+	-- kind_labels = vim.g.completion_customize_lsp_label
+	indicator_errors = "×",
+	indicator_warnings = "!",
+	indicator_info = "i",
+	indicator_hint = "›",
+	status_symbol = "",
+}
 
 
 
@@ -16,31 +23,33 @@ local attach_cb = require 'on_attach'
 -- this generates an error
 -- to override all defaults
 --   { log_level = lsp.protocol.MessageType.Warning.Error }
-nvim_lsp.util.default_config.capabilities = vim.tbl_extend(
-  "force",
-  nvim_lsp.util.default_config.capabilities or {},
-  -- enable 'progress' support in lsp servers
-  lsp_status.capabilities
-)
+
+-- nvim_lsp.util.default_config.capabilities = vim.tbl_extend(
+--   "force",
+--   nvim_lsp.util.default_config.capabilities or {},
+--   -- enable 'progress' support in lsp servers
+--   lsp_status.capabilities
+-- )
 
 -- vim.lsp.util.show_current_line_diagnostics()
 -- Check if it's already defined for when I reload this file.
-if not configs.lua_lsp then
-  configs.lua_lsp = {
-    default_config = {
-      cmd = {'lua-lsp'};
-      filetypes = {'lua'};
-	  root_dir = function(fname)
-        return nvim_lsp.util.find_git_ancestor(fname) or vim.loop.os_homedir()
-      end;
-      log_level = vim.lsp.protocol.MessageType.Warning;
-      settings = {};
-    };
-  }
-end
+-- if not configs.lua_lsp then
+--   configs.lua_lsp = {
+--     default_config = {
+--       cmd = {'lua-lsp'};
+--       filetypes = {'lua'};
+-- 	  root_dir = function(fname)
+--         return nvim_lsp.util.find_git_ancestor(fname) or vim.loop.os_homedir()
+--       end;
+--       log_level = vim.lsp.protocol.MessageType.Warning;
+--       settings = {};
+--     };
+--   }
+-- end
 
 
-nvim_lsp.lua_lsp.setup{}
+-- nvim_lsp.lua_lsp.setup{}
+
 -- sumneko_lua
 -- nvim_lsp.lua_lsp.setup{
 -- 	name = "lua";
@@ -65,17 +74,14 @@ nvim_lsp.ghcide.setup({
 	cmd = {"ghcide", "--lsp"};
 	filetypes = { "hs", "lhs", "haskell" };
 
-	-- ".stack.yaml",
-	-- ".hie-bios",
-	-- "BUILD.bazel",
-	-- "cabal.config",
-	-- "package.yaml"
+	-- ".stack.yaml", ".hie-bios", "BUILD.bazel", "cabal.config", "package.yaml"
 	-- root_dir = function(fname)
 	-- 	return nvim_lsp.util.find_git_ancestor(fname) or vim.loop.os_homedir()
 	-- end;
 	-- root_dir = nvim_lsp.util.root_pattern("stack.yaml", "hie-bios", "BUILD.bazel", "cabal.config", "package.yaml");
 	log_level = vim.lsp.protocol.MessageType.Warning;
 	settings = {};
+	-- on_new_config
 	on_attach=attach_cb.on_attach
 })
 
@@ -169,18 +175,19 @@ nvim_lsp.rust_analyzer.setup({
 -- 	}
 -- })
 
-nvim_lsp.texlab.setup({
-  name = 'texlab_fancy';
-  log_level = vim.lsp.protocol.MessageType.Log;
-  message_level = vim.lsp.protocol.MessageType.Log;
-  settings = {
-    latex = {
-      build = {
-        onSave = true;
-      }
-    }
-  }
-})
+-- | Texlab
+-- nvim_lsp.texlab.setup({
+--   name = 'texlab_fancy';
+--   log_level = vim.lsp.protocol.MessageType.Log;
+--   message_level = vim.lsp.protocol.MessageType.Log;
+--   settings = {
+--     latex = {
+--       build = {
+--         onSave = true;
+--       }
+--     }
+--   }
+-- })
 
 --nvim_lsp.clangd.setup({
 --	--compile-commands-dir=build
