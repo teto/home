@@ -178,15 +178,13 @@ in
       http2 = true
       keep-derivations = true
       keep-failed = true
-      show-trace = true
+      show-trace = false
       builders-use-substitutes = true
     '';
 
-    # generated via cachix use hie-nix
+    #       "https://teto.cachix.org"
     binaryCaches = [
       "https://cache.nixos.org/"
-      "https://teto.cachix.org"
-      "https://all-hies.cachix.org"
       "https://jupyterwith.cachix.org"
     ];
     binaryCachePublicKeys = [

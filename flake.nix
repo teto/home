@@ -7,8 +7,12 @@
     # TODO use mine instead
     hm.url = "github:rycee/home-manager";
     nur.url = "github:nix-community/NUR";
+
+    # nova needs ssh keys, so make it possible to install without nova to boostrap
     # nova.url = "ssh://git@git.novadiscovery.net:4224/world/nova-nix.git";
-    nova.url = "/home/teto/nova/nova-nix";
+    # nova.url = "/home/teto/nova/nova-nix";
+    nova.url = "git+https://flake:xxx1U1DQ4PhC_37AAb4y@git.novadiscovery.net/world/nova-nix";
+
     # TODO one can point at a subfolder ou bien c la branche ? /flakes
     # mptcpanalyzer.url = "github:teto/mptcpanalyzer";
 
@@ -18,7 +22,10 @@
     # };
   };
 
-  outputs = inputs@{ self, hm, nixpkgs, nova, nur, unstable }:
+  outputs = inputs@{
+    self, hm, nixpkgs, nur, unstable
+    , nova 
+    }:
     let
       inherit (builtins) listToAttrs baseNameOf attrNames readDir;
       inherit (nixpkgs.lib) removeSuffix;
@@ -51,8 +58,6 @@
               # TODO see if we can pass it as part of an overlay of the nixpkgs input ?
               hm.nixosModules.home-manager
               # TODO fix that one
-              (builtins.trace nova nova.nixosModules.profiles.main)
-              (builtins.trace nova nova.nixosModules.profiles.dev)
                 # home-manager.users.teto = { ... }:
               ({ config, lib, pkgs,  ... }:
                 {
@@ -69,14 +74,22 @@
                     # fails for now
                     imports = [
                       ./nixpkgs/home-xps.nix
+                    ]
+                    # ++ nixpkgs.lib.optional inputs.nova != null [
+                    ++ [
                       nova.nixosModules.hmProfiles.hm-user
                       nova.nixosModules.hmProfiles.dev
                     ];
                   };
                 }
               )
-
-            ];
+            ]
+            # nixpkgs.lib.optional nova != null
+            ++ [
+              (builtins.trace nova nova.nixosModules.profiles.main)
+              (builtins.trace nova nova.nixosModules.profiles.dev)
+            ]
+            ;
           };
 
           lenovo = nixpkgs.lib.nixosSystem {
@@ -84,6 +97,8 @@
             modules = [
               (import ./nixpkgs/configuration-lenovo.nix)
               hm.nixosModules.home-manager
+            ]
+            ++ [
               nova.nixosModules.profiles.main
             ];
           };
