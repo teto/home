@@ -179,8 +179,7 @@ rec {
         # url = https://github.com/BK1603/neovim.git;
         # ref = "fswatch-autoread";
         url = https://github.com/neovim/neovim.git;
-        # rev = "20f7b94284a1b7d903bfa81cb2120b55058fbe7f";
-        ref = "master";
+        rev = "c3f4610922b3f26c952281481f65d255ad352ac5";
       };
       # src = final.fetchFromGitHub {
       #   owner = "teto";

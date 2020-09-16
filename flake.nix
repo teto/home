@@ -42,8 +42,6 @@
         # hmConfig = 
       in
         {
-          # dell
-          # xps
           jedha = nixpkgs.lib.nixosSystem {
             inherit system;
             # specialArgs = { inherit inputs; };
@@ -67,10 +65,12 @@
                   nixpkgs.overlays = nixpkgs.lib.attrValues self.overlays;
 
                   home-manager.users."teto" = {
+                    # TODO find a way to call nova.nixosModules from home-xps instead
                     # fails for now
                     imports = [
                       ./nixpkgs/home-xps.nix
-                      nova.nixosModules.profiles.hm-user
+                      nova.nixosModules.hmProfiles.hm-user
+                      nova.nixosModules.hmProfiles.dev
                     ];
                   };
                 }

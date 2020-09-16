@@ -18,6 +18,7 @@ in
     ./modules/libvirtd.nix
     ./modules/distributedBuilds.nix
     ./modules/hoogle.nix
+    ./profiles/pixiecore.nix
 
     # ./modules/mptcp.nix
 
@@ -25,14 +26,11 @@ in
 
     # may provoke some issues like switch hanging
     # ./modules/kubernetes.nix
-
     # ./modules/tor.nix
-
   ] ;
 
   # TODO conditionnally enable it
-  # networking.proxy.default
-  # networking.wireless.iwd.enable = true;
+  networking.wireless.iwd.enable = true;
 
   # it apparently still is quite an important thing to have
   boot.devSize = "5g";
@@ -170,12 +168,7 @@ in
   services.fwupd.enable = true;
   services.gvfs.enable = true;
 
-  programs.ccache.enable = true;
-
-
-  # use with nix-locate to find a file across packages
-  # DOES NOT EXIST YET :'(
-  # programs.nix-index.enable = true;
+  programs.ccache.enable = false;
 
   # when set to false, /etc/passwd and /etc/group will be congruent to your NixOS configuration
   # users.mutableUsers = false;
@@ -183,17 +176,6 @@ in
   # let's be fucking crazy
   # environment.enableDebugInfo = true;
 # } ++ lib.optionalAttrs (config.programs ? mininet) {
-
-  # programs.mininet.enable = true;
-
-  # virtualisation.virtualbox = {
-  #   host.enable = true;
-  #   host.enableExtensionPack = true;
-  #   host.addNetworkInterface = true; # adds vboxnet0
-  #   # Enable hardened VirtualBox, which ensures that only the binaries in the system path get access to the devices exposed by the kernel modules instead of all users in the vboxusers group.
-  #    host.enableHardening = true;
-  #    host.headless = false;
-  # };
 
   networking.iproute2.enable = true;
 
@@ -231,5 +213,4 @@ in
   #   lidSwitchDocked = "suspend";
   #   lidSwitchExternalPower = "ignore";
   # };
-
 }
