@@ -53,8 +53,8 @@
     };
 
   };
-  # # services.xserver.windowManager.default = "none";
-  # services.xserver.windowManager.i3.enable = true;
+  # services.xserver.windowManager.default = "none";
+  services.xserver.windowManager.i3.enable = true;
   # # xserver.displayManager.auto.enable = "teto";
   # # boot.extraModulePackages
   #   enableCtrlAltBackspace = true;

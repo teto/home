@@ -282,10 +282,9 @@ in
   # needed for gpg-agent gnome pinentry
   # services.dbus.packages = [ pkgs.gcr ];
 
-  # i3 now available !
   xsession = {
     enable = true;
-    # export ZDOTDIR
+
     profileExtra = ''
       # export ZDOTDIR=
     '';

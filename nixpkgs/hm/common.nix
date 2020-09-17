@@ -300,10 +300,6 @@ rec {
       # emulate sh -c 'source "${fzf-extras}/fzf-extras.sh";'
       # source "${fzf-extras}/fzf-extras.zsh";
 
-      # # going to be run from $XDG_CONFIG_HOME/zsh
-      # source ../fzf-gems/fzf_git_functions.zsh
-      # i3-dmenu-desktop --dmenu=fzf
-
     ;
   };
 
