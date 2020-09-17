@@ -4,7 +4,7 @@ let
 in
 {
   imports = [
-    ./nixpkgs/hardware-dell-nocamera.nix
+    ./hardware-dell-camera.nix
 
     ./modules/config-all.nix
     ./modules/desktop.nix
@@ -46,6 +46,14 @@ in
   # for ubuntu grub to discover
     # grub.device = "/dev/sda";
   };
+
+  boot.initrd.luks.devices = {
+    luksRoot = {
+      device = "/dev/sda2";
+	preLVM = true;
+	allowDiscards = true;
+	};
+ };
 
   boot.kernelParams = [ " console=ttyS0" "acpi_backlight=vendor" "i915.enable_psr=0" ];
 
