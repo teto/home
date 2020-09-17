@@ -30,7 +30,7 @@ in
   ] ;
 
   # TODO conditionnally enable it
-  networking.wireless.iwd.enable = true;
+  # networking.wireless.iwd.enable = true;
 
   # it apparently still is quite an important thing to have
   boot.devSize = "5g";

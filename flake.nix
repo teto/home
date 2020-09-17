@@ -43,10 +43,6 @@
 
     in {
       nixosConfigurations = let
-        # configs = import ./nixpkgs/configuration-xps.nix args;
-
-        # TODO import an HM config and use it
-        # hmConfig = 
       in
         {
           jedha = nixpkgs.lib.nixosSystem {
