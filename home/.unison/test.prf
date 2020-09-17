@@ -1,0 +1,9 @@
+# Unison preferences
+# https://itp.tugraz.at/Comp/Tutorial/soft.ext.access/unison/unison-manual.htm#ignore
+ignore = BelowPath home
+ignore = BelowPath .cache
+ignore = BelowPath .config
+ignore = BelowPath .local
+ignore = Name .*
+root = socket://192.168.1.12:4242
+root = /home/teto
