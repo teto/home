@@ -4,7 +4,7 @@ let
 in
 {
   imports = [
-    ./hardware-xps.nix
+    ./nixpkgs/hardware-dell-nocamera.nix
 
     ./modules/config-all.nix
     ./modules/desktop.nix
