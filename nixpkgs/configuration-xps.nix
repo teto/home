@@ -4,19 +4,11 @@ let
 in
 {
   imports = [
-    ./hardware-dell-camera.nix
-
     ./modules/config-all.nix
     ./modules/desktop.nix
     ./modules/docker-daemon.nix
 
-    # TODO moved to their own flake
-    # ./profiles/nova-dev.nix
-    # ./modules/nova.nix
-
-
     ./modules/libvirtd.nix
-    ./modules/distributedBuilds.nix
     ./modules/hoogle.nix
     ./profiles/pixiecore.nix
 
@@ -33,45 +25,27 @@ in
   # networking.wireless.iwd.enable = true;
 
   # it apparently still is quite an important thing to have
-  boot.devSize = "5g";
+  # boot.devSize = "5g";
 
-  boot.loader ={
-    systemd-boot.enable = true;
-    efi.canTouchEfiVariables = true; # allows to run $ efi...
 
-  # just to generate the entry used by ubuntu's grub
-  # boot.loader.grub.enable = true;
-  # boot.loader.grub.version = 2;
-  # install to none, we just need the generated config
-  # for ubuntu grub to discover
-    # grub.device = "/dev/sda";
-  };
-
-  boot.initrd.luks.devices = {
-    luksRoot = {
-      device = "/dev/sda2";
-	preLVM = true;
-	allowDiscards = true;
-	};
- };
-
-  boot.kernelParams = [ " console=ttyS0" "acpi_backlight=vendor" "i915.enable_psr=0" ];
+  boot.kernelParams = [ 
+  	# "console=ttyS0"
+	# "acpi_backlight=vendor"
+	# "i915.enable_psr=0" 
+	];
 
   # TODO use the mptcp one ?
   # boot.kernelPackages = pkgs.linuxPackages;
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  # boot.kernelPackages = pkgs.linuxPackages_latest;
 
-  # boot.extraModprobeConfig = ''
-    # options iwlwifi bt_coex_active=0
-    # options iwlwifi 11n_disable=1
-    # options iwlwifi swcrypto=1
-  # '';
 
   # TODO we need nouveau
   boot.kernelModules = [
-    "af_key" # for ipsec/vpn support
-    "kvm" "kvm-intel" # for virtualisation
+    # "af_key" # for ipsec/vpn support
+    "kvm"
+    "kvm-intel" # for virtualisation
   ];
+
   # boot.extraModulePackages = [];
   # boot.blacklistedKernelModules = [];
   # boot.hardwareScan = true;
@@ -86,18 +60,10 @@ in
     # "net.core.wmem_max" = 1048576;
   };
 
-  networking.hostName = "jedha"; # Define your hostname.
 
-  # TODO add the chromecast
-  networking.firewall.allowedUDPPorts = [ ];
-  # creates problem with buffalo check if it blocks requests or what
   # it is necessary to use dnssec though :(
   networking.resolvconf.dnsExtensionMechanism = false;
   networking.resolvconf.dnsSingleRequest = true; # juste pour test
-  # not merged yet
-  # networking.wireless.iwd.enable = true;
-
-  # networking.networkmanager.wifi.backend = "iwd";
 
   # this is for gaming
   hardware.opengl.driSupport32Bit = true;
@@ -125,7 +91,7 @@ in
 
   # TODO move to laptop
   # see https://github.com/NixOS/nixpkgs/issues/57053
-  hardware.firmware = with pkgs; [ wireless-regdb ];
+  # hardware.firmware = with pkgs; [ wireless-regdb ];
 #  boot.extraModprobeConfig = ''
 #    options cfg80211 ieee80211_regdom="GB"
 #  '';
@@ -155,21 +121,16 @@ in
 
     # just locate
     locate.enable = true;
-
     # dbus.packages = [ ];
   };
 
   environment.systemPackages = with pkgs;
-    # strongswan # to get ipsec in path
     # cups-pk-helper # to add printer through gnome control center
     [
       pkgs.lm_sensors # to see CPU temperature (command 'sensors')
       pkgs.brightnessctl
     ]
   ;
-
-  # need to be video
-  # hardware.acpilight.enable = true;
 
   # service to update bios etc
   # managed to get this problem https://github.com/NixOS/nixpkgs/issues/47640
@@ -198,8 +159,6 @@ in
   hardware.sane.enable = true;
 
   nix = {
-    package = pkgs.nixUnstable;
-
     # sshServe = {
     #   enable = true;
     #   protocol = "ssh";

@@ -40,28 +40,12 @@
           overlays = nixpkgs.lib.attrValues self.overlays;
           config = { allowUnfree = true; };
         };
-
-    in {
-      nixosConfigurations = let
-      in
-        {
-          jedha = nixpkgs.lib.nixosSystem {
-            inherit system;
-            # specialArgs = { inherit inputs; };
-            specialArgs = { flakes = inputs; };
-            modules = [
-              (import ./nixpkgs/configuration-xps.nix)
-              # TODO see if we can pass it as part of an overlay of the nixpkgs input ?
-              hm.nixosModules.home-manager
-              # TODO fix that one
-                # home-manager.users.teto = { ... }:
-              ({ config, lib, pkgs,  ... }:
+      hm-custom = ({ config, lib, pkgs,  ... }:
                 {
                   # use the system's pkgs rather than hm nixpkgs.
                   home-manager.useGlobalPkgs = true;
                   # installation of users.users.‹name?›.packages
                   home-manager.useUserPackages = true;
-
 
                   nixpkgs.overlays = nixpkgs.lib.attrValues self.overlays;
 
@@ -79,14 +63,70 @@
                   };
                 }
               )
+		;
+    in {
+      nixosConfigurations = let
+      in
+        {
+          mcoudron = nixpkgs.lib.nixosSystem {
+            inherit system;
+            # specialArgs = { inherit inputs; };
+            specialArgs = { flakes = inputs; };
+            modules = [
+              (import ./nixpkgs/hardware-dell-camera.nix)
+              (import ./nixpkgs/configuration-xps.nix)
+              (import ./nixpkgs/profiles/nixUnstable.nix)
+              ({ config, lib, pkgs,  ... }:
+  		{
+		  boot.loader.systemd-boot.enable = true;
+		  boot.loader.efi.canTouchEfiVariables = true;
+		  boot.loader.grub.enableCryptodisk = true;
+		  boot.loader.grub.enable = true;
+		  boot.loader.grub.version = 2;
+		  boot.loader.grub.device = "nodev";
+		  boot.loader.grub.efiSupport = true;
+
+		  boot.initrd.luks.devices.luksRoot = {
+		      # device = "/dev/disk/by-uuid/6bd496bf-55ac-4e56-abf0-ad1f0db735b2";
+		      device = "/dev/sda2";
+			preLVM = true; # luksOpen will be attempted before LVM scan or after it
+			# fallbackToPassword = true;
+			allowDiscards = true; # allow TRIM requests (?!)
+		  };
+		  # boot.kernelParams = [
+			 # CPU performance scaling driver
+		 	 #"intel_pstate=no_hwp" 
+		  # ];
+
+		  networking.hostName = "mcoudron"; # Define your hostname.
+  		})
+              hm.nixosModules.home-manager
+	      hm-custom
             ]
             # nixpkgs.lib.optional nova != null
             ++ [
-              (builtins.trace nova nova.nixosModules.profiles.main)
-              (builtins.trace nova nova.nixosModules.profiles.dev)
+              nova.nixosModules.profiles.main
+              nova.nixosModules.profiles.dev
             ]
             ;
           };
+
+	  # jedha = self.mcoudron // {
+		  # networking.hostName = "jedha"; # Define your hostname.
+		# 		  # TODO set old grub config
+  # boot.loader ={
+  #   systemd-boot.enable = true;
+  #   efi.canTouchEfiVariables = true; # allows to run $ efi...
+
+  # just to generate the entry used by ubuntu's grub
+  # boot.loader.grub.enable = true;
+  # boot.loader.grub.version = 2;
+  # install to none, we just need the generated config
+  # for ubuntu grub to discover
+    # grub.device = "/dev/sda";
+  # };
+
+	  # };
 
           lenovo = nixpkgs.lib.nixosSystem {
             inherit system;

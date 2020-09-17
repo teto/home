@@ -16,29 +16,6 @@ let
     supportedFeatures = [ "big-parallel" "kvm" ];
     # mandatoryFeatures = [ "perf" ];
     };
-  nixosMachine = {
-    hostName = "nixos.iijlab.net";
-    # todo move it to secrets
-    sshUser = "teto";
-    sshKey = "/home/teto/.ssh/iij_rsa";
-    system = "x86_64-linux";
-    maxJobs = 2;
-    speedFactor = 2;
-    supportedFeatures = [ "big-parallel" "kvm" ];
-    # mandatoryFeatures = [ "perf" ];
-    };
-  mptcpMachine = {
-    hostName = "mptcp.iijlab.net";
-    # todo move it to secrets
-    sshUser = "teto";
-    sshKey = "/home/teto/.ssh/iij_rsa";
-    system = "x86_64-linux";
-    maxJobs = 2;
-    speedFactor = 2;
-    supportedFeatures = [ "big-parallel" "kvm" ];
-    # mandatoryFeatures = [ "perf" ];
-    }
-  ;
 in
 {
   nix = {

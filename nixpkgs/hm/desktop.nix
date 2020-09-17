@@ -26,7 +26,6 @@ let
       };
     in
     [
-    # ccache # breaks some builds ? has to be configured via program, use ccacheStdEnv instead ?
     # TODO pass to vim makeWrapperArgs
     nodePackages.bash-language-server
     # just in my branch :'(

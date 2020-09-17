@@ -2227,7 +2227,7 @@ lua vim.lsp.set_log_level("debug")
 
 
 " treesitter config
-luafile ~/.config/nvim/treesitter.lua
+" luafile ~/.config/nvim/treesitter.lua
 
 
 " this is set per-buffer so...

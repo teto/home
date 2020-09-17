@@ -7,9 +7,6 @@ in
 {
 
   imports = [
-    # todo renommer en workstation
-    # ./hardware-dell.nix
-    # /etc/nixos/hardware-configuration.nix
     ./config-all.nix
 
     ./ntp.nix
@@ -17,29 +14,12 @@ in
     ./xserver.nix
     ./wireshark.nix
     ./wifi.nix
-    # ./modules/tor.nix
 
     # only if available
     # ./modules/jupyter.nix
   ];
   environment.homeBinInPath = true;
 
-  # boot.kernelModules = [ ];
-
-  # kernelModules
-  # lib.mkMerge
-  # boot.initrd.availableKernelModules =  [
-    # TODO make them default
-        # Support USB keyboards, in case the boot fails and we only have
-        # a USB keyboard.
-        # "uhci_hcd"
-        # "ehci_hcd"
-        # "ehci_pci"
-        # "ohci_hcd"
-        # "xhci_hcd"
-        # "usbhid"
-        # "hid_generic"
-  # ];
   environment.systemPackages = with pkgs; [
      stow
   ];
@@ -117,13 +97,6 @@ in
   # udisks2 GUI
   # services.udisks2.enable = true;
 
-  # TODO check
-  services.strongswan = {
-    enable = false;
-      # "/etc/ipsec.d/*.secrets" "/etc/ipsec.d"
-    secrets = ["/etc/ipsec.d"];
-  };
-
   services.mpd = {
     enable = false; # TODO move to userspace
     # musicDirectory
@@ -137,11 +110,6 @@ in
     config = {
       allowUnfree = true;
     };
-
-    overlays = [
-      # (import <nixpkgs-overlays/kernels.nix>)
-      # (import <nixpkgs-overlays/haskell.nix>)
-    ];
   };
 
   services.greenclip.enable = true;
@@ -151,7 +119,6 @@ in
   };
 
   nix = {
-    # allowedUsers = [];
 
     # This priority propagates to build processes. 0 is the default Unix process I/O priority, 7 is the lowest
     # daemonIONiceLevel = 3;
@@ -160,12 +127,8 @@ in
     # now with nix build -f channel:nixos-unstable
     # TODO use options.nix.nixPath.default ++
     nixPath = [
-      "nixos-unstable=https://github.com/nixos/nixpkgs-channels/archive/nixos-unstable.tar.gz"
-      "nixos=https://github.com/nixos/nixpkgs-channels/archive/nixos-20.03.tar.gz"
       "nixpkgs=${builtins.toString userNixpkgs}"
     ]
-    # ++ lib.optional (builtins.pathExists userNixpkgs)  "nixpkgs=${builtins.toString userNixpkgs}"
-    # ++ lib.optional (builtins.pathExists nixosConfig)  "nixos-config=${builtins.toString nixosConfig}"
     ;
 
     # sshServe.enable = false;

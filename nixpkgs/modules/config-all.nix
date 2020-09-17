@@ -9,25 +9,12 @@
 let
   fzf = pkgs.fzf;
 in
-  # Check if custom vars are set
-  # assert mySecrets.user            != "";
-  # assert mySecrets.passwd          != "";
-  # assert mySecrets.hashedpasswd    != "";
-  # assert mySecrets.cifs            != "";
-  # assert mySecrets.hostname        != "";
-  # assert mySecrets.smbhome         != "";
-  # assert mySecrets.smboffice       != "";
-  # assert mySecrets.ibsuser         != "";
-  # assert mySecrets.ibspass         != "";
-  # assert mySecrets.ibsip != "";
 rec {
 
   imports = [
       ./account-teto.nix
       ./ntp.nix
   ];
-  # kernelModules are forcibly loaded
-  # availableKernelModules are just available, and udev will auto-load them as needed
 
 
   boot.cleanTmpDir = true; # to clean /tmp on reboot
@@ -162,22 +149,7 @@ kernel_xconfig=''
   # stick to sh as it's shell independant
   environment.extraInit = builtins.readFile ../../config/zsh/init.sh;
 
-  # environment.gnome3.excludePackages = [];
-  # security.initialRootPassword = "!";
-
-  # Enable automatic discovery of the printer (from other linux systems with avahi running)
-  # services.avahi = {
-  #   enable = true;
-  #   publish.enable = true;
-  #   publish.userServices = true;
-  # };
-
-  # option to explore ?
-  # services.opensmtpd = {
-  #   enable= false;
-  # };
-
-  # on master it is
+  # on master it is disabled
   documentation.man.enable = true;
 
   # programs.light.enable = true;
@@ -273,6 +245,8 @@ kernel_xconfig=''
 
   # to get manpages
   documentation.enable = true;
+  # set it to true to help
+  documentation.nixos.includeAllModules = false;
 
   users.defaultUserShell = pkgs.zsh;
 
@@ -284,32 +258,17 @@ kernel_xconfig=''
               ];
 
     };
-
-    # stdenv.userHook = ''
-    #   '';
-  };
-
-  boot.kernel.sysctl = {
-    # to not provoke the kernel into crashing
-    # "net.ipv4.tcp_timestamps" = 0;
-    # "net.ipv4.tcp_allowed_congestion_control" = "reno cubic";
   };
 
   environment.etc."inputrc".source = ../../config/inputrc;
 
-  # set it to true to help
-  documentation.nixos.includeAllModules = false;
-
-
-  # todo set it only if path exists
-  # convert set back to list
   security.sudo = {
     enable = true;
     # wheelNeedsPassword = true;
   };
 
   system = {
-    stateVersion = "19.03";
+    stateVersion = "21.03";
   };
 
 }
