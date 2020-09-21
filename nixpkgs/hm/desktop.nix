@@ -38,28 +38,26 @@ let
 
     gitAndTools.diff-so-fancy # todo install it via the git config instead
     gitAndTools.gitbatch   # to fetch form several repos at once
-    gitAndTools.gh  # lol
-    # gitAndTools.hub  # lol
+    gitAndTools.gh  # github client
+    # gitAndTools.hub  # gh client previous version
     # https://github.com/felipec/git-remote-hg
     # gitAndTools.git-remote-hg
     gitAndTools.git-recent
     # gitAndTools.git-annex # fails on unstable
     gitAndTools.git-extras
     gitAndTools.git-crypt
-
-
     patchutils  # for interdiff
-
     lazygit  # kinda like tig
     ncurses.dev # for infocmp
-    neovim-xp   # hum remove ?
+
+    # neovim-xp   # hum remove ?
+
     neovim-remote # for latex etc
     nix-prefetch-scripts
     nix-index # to list package contents
     nixpkgs-review
-    # nix-review
     pcalc  # cool calc
-    rpl # to replace strings across files
+    rpl    # to replace strings across files
     universal-ctags  # there are many different ctags, be careful !
   ]
   ++ lib.optionals all [

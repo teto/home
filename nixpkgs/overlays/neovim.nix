@@ -13,7 +13,7 @@ let
       # fails with   python module. Run `pip install neovim` to fix. For more info, :he nvim-python"
       # floobits-neovim
 
-      fzf-vim
+      fgf-vim
       # defined in overrides: TODO this should be easier: like fzf-vim should be enough
       fzfWrapper
       gruvbox
@@ -48,23 +48,14 @@ let
       nvim-markdown-preview  # :MarkdownPreview
 
       # vim-markdown-preview  # WIP
-      # vim-highlightedyank
       vim-commentary
 
       # vimwiki
 
       # reuse once https://github.com/neovim/neovim/issues/9390 is fixed
       # vimtex
-      # ultisnips  # disabled because it maps <tab>
       unicode-vim
     ]
-    # ++ [
-    #   deoplete-nvim
-    #   deoplete-jedi # keeps crashing
-    #   deoplete-zsh # not available just yet
-      # deoplete-khard
-    #   echodoc-vim
-    # ]
     ;
 
 
@@ -106,8 +97,6 @@ rec {
 
 
       extraHaskellPackages = hs: with hs; [
-        # hie
-        # all-hies.versions.ghc865
         # gutenhasktags
         # haskdogs # seems to build on hasktags/ recursively import things
         # hasktags
@@ -121,13 +110,7 @@ rec {
       # or haskell ones if it's a haskell project etc.
       generatedConfig = {
         extraPython3Packages = compatFun (requiredPythonModules);
-        # haskellPackages
-        # TODO do the same for ruby / haskell
       }
-      # // lib.optionalAttrs (requiredHaskellPackages != [])  {
-      #   withHaskell = true;
-      #   inherit extraHaskellPackages;
-      # }
       ;
 
       # buildInputs = []
@@ -146,62 +129,28 @@ rec {
       );
     in
     final.wrapNeovim neovim-unwrapped-master {
-      # extraMakeWrapperArgs
-      # rename configure ?
       # TODO should be able to add some packages in PATH like jq
       structuredConfigure = finalConfig;
     };
 
-    # look at the makefile
-    # libtermkey = prev.enableDebugging (
-    # # libtermkey =
-    #   final.libtermkey.overrideAttrs( oa: {
-    #   name = "libtermkey-matt-${oa.version}";
-    #   # oa.makeFlags
-    #   makeFlags =  [ "PREFIX=/home/teto/libtermkey/build" "DEBUG=1"];
-    # }));
-
-    # libvterm-neovim-master = final.libvterm-neovim.overrideAttrs(oa: {
-    #   src = final.fetchFromGitHub {
-    #     owner = "neovim";
-    #     repo = "libvterm";
-    #     rev = "4a5fa43e0dbc0db4fe67d40d788d60852864df9e";
-    #     sha256 = "0hkzqng3zs8hz327wdlhzshcg0qr31fhsbi9mvifkyly6c3y78cx";
-    #   };
-    # });
-
-
-    # libvterm-neovim = libvterm-neovim-master;
-  neovim-unwrapped-master = final.neovim-unwrapped.overrideAttrs (oldAttrs: {
-	  name = "neovim";
-	  version = "official-master";
-      src = builtins.fetchGit {
-        # url = https://github.com/BK1603/neovim.git;
-        # ref = "fswatch-autoread";
-        url = https://github.com/neovim/neovim.git;
-        rev = "c3f4610922b3f26c952281481f65d255ad352ac5";
-      };
-      # src = final.fetchFromGitHub {
-      #   owner = "teto";
-      #   repo = "neovim";
-      #   rev = "b81427c114fc36c96bb30655cb572eed6b503832";
-      #   sha256 = "XeEzsh2qtdd/uthsStkZsmCydDm+kcCplpSB+gNwArI=";
+  neovim-unwrapped-master = prev.neovim-unwrapped.overrideAttrs (oldAttrs: {
+        name = "neovim-master";
+        version = "official-master";
+      # src = builtins.fetchGit {
+      #   # url = https://github.com/BK1603/neovim.git;
+      #   # ref = "fswatch-autoread";
+      #   url = https://github.com/neovim/neovim.git;
+      #   rev = "9f704c88a57cfb797c21c19672ea6617e9673360";
+      #   # sha256 = "XeEzsh3qtdd/uthsStkZsmCydDm+kcCplpSB+gNwArI=";
       # };
+      src = final.fetchFromGitHub {
+        owner = "neovim";
+        repo = "neovim";
+        rev = "9f704c88a57cfb797c21c19672ea6617e9673360";
+        sha256 = "sha256-NNUyWczL6dEPrLVsJILnzrSGKmK1/E5TURSJDjhwSVE=";
+      };
 
   });
-
-  # neovim-unwrapped-treesitter = (final.neovim-unwrapped).overrideAttrs (oldAttrs: {
-	  # name = "neovim";
-	  # version = "treesitter";
-  #     # bfredl:tree-sitter-query
-  #     # 11113
-  #     src = builtins.fetchGit {
-  #       url = https://github.com/bfredl/neovim.git;
-  #       ref = "tree-sitter-api";
-  #     };
-
-  # });
-
 
   # neovimHaskellConfig = {
   #   withHaskell = true;

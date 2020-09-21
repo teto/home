@@ -4,6 +4,6 @@ ignore = BelowPath home
 ignore = BelowPath .cache
 ignore = BelowPath .config
 ignore = BelowPath .local
-ignore = Name .*
+# ignore = Name .*
 root = socket://192.168.1.12:4242
 root = /home/teto

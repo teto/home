@@ -6,3 +6,5 @@ git rebase channels/nixos-unstable
 nix repl . ./nixos
 gch upstream/nixos-unstable -- pkgs/misc/vim-plugins/generated.nix
 sudo nixos-rebuild -I nixos-config=/home/teto/dotfiles/nixpkgs/configuration-lenovo.nix switch
+sudo nixos-rebuild --flake ~/home#mcoudron --no-write-lock-file switch
+pkgs/misc/vim-plugins/update.py --proc 1

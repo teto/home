@@ -30,7 +30,7 @@ local:
 	stow -t "$(XDG_DATA_HOME)" local
 	mkdir -p $(XDG_DATA_HOME)/fzf-history $(XDG_DATA_HOME)/newsbeuter
 
-# installe les grammaires treesitter chez neovim
+# installe les grammaires treesitter
 # TODO run the scripts/ instead
 treesitter:
 	# nix-build -A tree-sitter.builtGrammars

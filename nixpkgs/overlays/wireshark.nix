@@ -11,12 +11,6 @@ let
       # sha256 = "1i0gqf8n8fsz3sqzkhcg05pf0krngnm335pnnlp94yzdkzzg3jyr";
   };
 
-  # src = final.fetchFromGitHub {
-  #     repo   ="wireshark";
-  #     owner  ="teto";
-  #     rev    = "45efb048808d794f53cc431864c9ddfa99952b49";
-  #     sha256 = "1i0gqf8n8fsz3sqzkhcg05pf0krngnm335pnnlp94yzdkzzg3jyr";
-  #   };
 
   # write in .nvimrc
   nvimrc = prev.pkgs.writeText "_nvimrc" ''
@@ -52,7 +46,6 @@ in
       prev.cquery
     ];
 
-    # TODO add a neovim with cquery lsp
     #       "WIRESHARK_ABORT_ON_DISSECTOR_BUG=1"
     # G_DEBUG=fatal_criticals 
     # libtool --mode=execute gdb $HOME/wireshark/debug/run/$1

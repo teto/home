@@ -12,7 +12,6 @@ in
       ./hm/desktop.nix
       ./hm/dev.nix
 
-      # ./hm/experimental.nix
       # ./hm/vdirsyncer.nix
       # ./hm/nushell.nix
       ./hm/mail.nix

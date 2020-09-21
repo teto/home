@@ -30,9 +30,9 @@ rec {
 
   home.packages = with pkgs; [
     # should ideally be described only in neovim's rc
-	pythonPackages.pdftotext
+    pythonPackages.pdftotext
 
-	# TODO try i3-snapshot
+    # TODO try i3-snapshot
     # hstr # to deal with shell history
     bandwhich  # to monitor per app bandwidth
     tig
@@ -147,14 +147,13 @@ rec {
       dmesg="dmesg --color=always|less";
 
       netstat_tcp="netstat -ltnp";
-      # TODO move to root level ?
       nixpaste="curl -F \"text=<-\" http://nixpaste.lbr.uno";
 
       # kitty
       kcat="kitty +kitten icat";
 
       # modprobe to use
-      # TODO might need to use -S as well
+      # might need to use -S as well
       modprobe_exp="modprobe -d /home/teto/mptcp/build";
     };
 
@@ -170,10 +169,7 @@ rec {
   # set to null to disable
   home.keyboard = {
     layout = "fr,us";
-    # options = [ "grp:caps_toggle" "grp_led:scroll" ];
-    # TODO can add Mod4 
     # grp:alt_shift_toggle,ctrl:nocaps,grp_led:scroll
-    # "ctrl:nocaps"
     options = [
       "add Mod1 Alt_R"
       "ctrl:nocaps"  # makes caps lock an additionnal ctrl
@@ -181,13 +177,6 @@ rec {
   };
 
 
-  # programs.neovim = {
-  #   enable = true;
-  #   withPython3 = true;
-  #   withPython = false;
-  # };
-
-  # home.activation.setXDGbrowser = dagEntryBefore [ "linkGeneration" ] ''
   # xdg-settings set default-web-browser firefox.desktop
 
   # don't enable it since it will override my zle-keymap-select binding

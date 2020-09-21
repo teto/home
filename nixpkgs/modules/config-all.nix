@@ -60,7 +60,6 @@ rec {
      htop
 
      # ipsecTools # does it provide ipsec ?
-     # neovim # TODO remake a custom one
      # pkgconfig
      # pstree
 

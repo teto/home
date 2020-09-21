@@ -56,22 +56,6 @@ in
   };
 
 
-
-  # nixpkgs.overlays = [
-  #   import ../../config/nixpkgs/overlays/neovim.nix
-  # ];
-
-  # home-manager.users.teto = { ... }:
-  # {
-  #   # fails for now
-  #   imports = [ ../home-common.nix ];
-  #   xdg.configFile."weechat/irc.conf".source = ../../config/weechat/irc.conf;
-
-  #   programs.zsh.shellInit = ''
-  #     ZSH_DISABLE_COMPFIX=true
-  #   '';
-  # };
-
   # Fix problem with sudo
   # https://github.com/NixOS/nixops/issues/931
   system.activationScripts.nixops-vm-fix-931 = {
@@ -83,10 +67,4 @@ in
     '';
     deps = [];
   };
-
-  # nix.  = ''
-  #   require-sigs = false
-  #   trusted-substituters = s3://<bucket>?region=us-west-1
-  #   extra-substituters = s3://<bucket>?region=us-west-1
-  # '';
 }

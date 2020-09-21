@@ -10,10 +10,11 @@ in
 
     ./modules/libvirtd.nix
     ./modules/hoogle.nix
-    ./profiles/pixiecore.nix
+    # ./profiles/pixiecore.nix
 
     # ./modules/mptcp.nix
 
+    # ./profiles/neovim.nix
     ./modules/sway.nix
 
     # may provoke some issues like switch hanging
@@ -29,14 +30,13 @@ in
 
 
   boot.kernelParams = [ 
-  	# "console=ttyS0"
-	# "acpi_backlight=vendor"
+	"acpi_backlight=vendor"
 	# "i915.enable_psr=0" 
 	];
 
   # TODO use the mptcp one ?
   # boot.kernelPackages = pkgs.linuxPackages;
-  # boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
 
   # TODO we need nouveau

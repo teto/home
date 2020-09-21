@@ -77,7 +77,7 @@ in
         dejavu_fonts
         # Adobe Source Han Sans
         sourceHanSansPackages.japanese
-        fira-code-symbols # for ligatures in neovim-gtk
+        fira-code-symbols # for ligatures
         # noto-fonts
       ];
 
