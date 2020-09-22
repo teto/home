@@ -106,7 +106,7 @@ set exrc
 call plug#begin(s:plugdir)
 Plug '~/pdf-scribe.nvim'  " to annotate pdf files from nvim :PdfScribeInit
 Plug 'cespare/vim-toml'
-Plug 'TaDaa/vimade' " to dim the background on lost focus
+"Plug 'TaDaa/vimade' " to dim the background on lost focus
 
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
@@ -2227,7 +2227,7 @@ lua vim.lsp.set_log_level("debug")
 
 
 " treesitter config
-" luafile ~/.config/nvim/treesitter.lua
+luafile ~/.config/nvim/treesitter.lua
 
 
 " this is set per-buffer so...

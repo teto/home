@@ -39,8 +39,6 @@ let
     gitAndTools.diff-so-fancy # todo install it via the git config instead
     gitAndTools.gitbatch   # to fetch form several repos at once
     gitAndTools.gh  # github client
-    # gitAndTools.hub  # gh client previous version
-    # https://github.com/felipec/git-remote-hg
     # gitAndTools.git-remote-hg
     gitAndTools.git-recent
     # gitAndTools.git-annex # fails on unstable

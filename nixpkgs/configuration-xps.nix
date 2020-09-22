@@ -14,7 +14,7 @@ in
 
     # ./modules/mptcp.nix
 
-    # ./profiles/neovim.nix
+    ./profiles/neovim.nix
     ./modules/sway.nix
 
     # may provoke some issues like switch hanging

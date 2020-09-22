@@ -13,7 +13,7 @@ let
       # fails with   python module. Run `pip install neovim` to fix. For more info, :he nvim-python"
       # floobits-neovim
 
-      fgf-vim
+      fzf-vim
       # defined in overrides: TODO this should be easier: like fzf-vim should be enough
       fzfWrapper
       gruvbox
@@ -45,7 +45,7 @@ let
 
       # vim-livedown
       # markdown-preview-nvim # :MarkdownPreview
-      nvim-markdown-preview  # :MarkdownPreview
+      # nvim-markdown-preview  # :MarkdownPreview
 
       # vim-markdown-preview  # WIP
       vim-commentary
@@ -252,6 +252,17 @@ rec {
     ;
 
   };
+
+  # TODO provide an upper level
+  neovimConfigure = {
+      packages.myVimPackage = {
+        # see examples below how to use custom packages
+        # loaded on launch
+        start = startPlugins;
+        # manually loadable by calling `:packadd $plugin-name`
+        opt = [ ];
+      };
+    };
 
   neovim-dev = let
       pythonEnv = final.pkgs.python3;

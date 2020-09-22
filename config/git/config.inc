@@ -1,10 +1,4 @@
 
-# TODO this should be generated
-# [user]
-#   name = Matthieu Coudron
-#   email = mattator@gmail.com
-#   signingkey = E1B768A0
-
 [core]
 # sshCommand=ssh -vvv
 
@@ -106,13 +100,3 @@ compression = 0
   # for fzf+git aliases
   pamfix= !HASH=`git log --pretty=oneline | head -50 | fzf` && git fixit `echo ${HASH} | awk '{ print $1 }'`
 
-# [mergetool "vimdiff"]
-#   prompt = true
-#   cmd = nvim -d $BASE $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
-# 
-# [mergetool "fugitive"]
-# ; Use :Gdiffsplit! for 3 way diff
-# 	cmd = nvim -f -c \"Gdiffsplit!\" \"$MERGED\"
-# 
-# [mergetool]
-# 	keepBackup = false

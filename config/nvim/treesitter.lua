@@ -1,7 +1,8 @@
-require'nvim-treesitter.configs'.setup {
+local config = require 'nvim-treesitter.configs'
+config.config = config.setup {
     highlight = {
         enable = true,                    -- false will disable the whole extension
-        disable = { 'c', 'rust' },        -- list of language that will be disabled
+        disable = { 'rust' },        -- list of language that will be disabled
     },
     incremental_selection = {
         enable = true,
@@ -36,3 +37,4 @@ require'nvim-treesitter.configs'.setup {
 		persist_queries = false -- Whether the query persists across vim sessions
 	}
 }
+-- return config.config
