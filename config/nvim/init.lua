@@ -24,12 +24,12 @@ local attach_cb = require 'on_attach'
 -- to override all defaults
 --   { log_level = lsp.protocol.MessageType.Warning.Error }
 
--- nvim_lsp.util.default_config.capabilities = vim.tbl_extend(
---   "force",
---   nvim_lsp.util.default_config.capabilities or {},
---   -- enable 'progress' support in lsp servers
---   lsp_status.capabilities
--- )
+nvim_lsp.util.default_config.capabilities = vim.tbl_extend(
+  "keep",
+  nvim_lsp.util.default_config.capabilities or {},
+  -- enable 'progress' support in lsp servers
+  lsp_status.capabilities
+)
 
 -- vim.lsp.util.show_current_line_diagnostics()
 -- Check if it's already defined for when I reload this file.
@@ -85,31 +85,12 @@ nvim_lsp.ghcide.setup({
 	on_attach=attach_cb.on_attach
 })
 
---nvim_lsp.hie.setup({
---	name = "hie";
---	-- cmd = "otot";
---	-- "/home/teto/all-hies/result/bin/hie-wrapper"
---	-- cmd = { "toto", "--lsp", "-d", "--vomit", "--logfile", "/tmp/lsp_haskell.log"},
---	filetypes = { "hs", "lhs", "haskell" };
---	-- init_options = {};
---	root_dir = nvim_lsp.util.root_pattern(".git");
---	-- root_dir = function () return "/home/teto/test-task-2-final/solution" end;
---	log_level = vim.lsp.protocol.MessageType.Error;
---	--careful, without this, we get a warning from hie
---	init_options = {
---		languageServerHaskell = {
---			hlintOn = false;
---			-- maxNumberOfProblems = number;
---			-- diagnosticsDebounceDuration = number;
---			-- liquidOn = bool (default false);
---			completionSnippetsOn = true;
---			-- formatOnImportOn = bool (default true);
---			-- formattingProvider = string (default "brittany", alternate "floskell");
---		}
---	};
---	on_attach=diag_plugin.on_attach;
+nvim_lsp.hls.setup({
+    cmd = { "haskell-language-server-wrapper", "--lsp" },
+    filetypes = { "haskell", "lhaskell" },
+    root_dir = nvim_lsp.util.root_pattern("*.cabal", "stack.yaml", "cabal.project", "package.yaml", "hie.yaml")
+})
 
---})
 
 -- vim.lsp.add_filetype_config({
 -- 	name = "latex";

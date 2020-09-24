@@ -413,6 +413,7 @@ Plug 'kthibodeaux/pull-review'     " :PullReviewList
 " Plug 't9md/vim-quickhl' " hl manually selected words :h QuickhlManualEnable
 
 " colorschemes {{{
+Plug 'flrnd/candid.vim'
 Plug 'adlawson/vim-sorcerer'
 Plug 'whatyouhide/vim-gotham'
 Plug 'sickill/vim-monokai'

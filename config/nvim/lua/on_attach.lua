@@ -6,23 +6,24 @@ local plug_completion_enabled, plug_completion = pcall(require, "completion")
 local plug_lsp_status_enabled, lsp_status = pcall(require, "lsp-status")
 
 local do_progress = true
+lsp_status.register_progress()
+
 local setup_progress = function(client)
   if do_progress then
-    lsp_status.register_progress()
 
     -- Register the client for messages
     lsp_status.register_client(client.name)
   end
 
   -- Set up autocommands for refreshing the statusline when LSP information changes
-  vim.api.nvim_command('augroup lsp_aucmds')
-  vim.api.nvim_command('  au! * <buffer>')
-  if do_progress then
-    vim.api.nvim_command('  au User LspDiagnosticsChanged redrawstatus!')
-    vim.api.nvim_command('  au User LspMessageUpdate      redrawstatus!')
-    vim.api.nvim_command('  au User LspStatusUpdate       redrawstatus!')
-  end
-  vim.api.nvim_command('augroup END')
+  -- vim.api.nvim_command('augroup lsp_aucmds')
+  -- vim.api.nvim_command('  au! * <buffer>')
+  -- if do_progress then
+  --   vim.api.nvim_command('  au User LspDiagnosticsChanged redrawstatus!')
+  --   vim.api.nvim_command('  au User LspMessageUpdate      redrawstatus!')
+  --   vim.api.nvim_command('  au User LspStatusUpdate       redrawstatus!')
+  -- end
+  -- vim.api.nvim_command('augroup END')
 
   -- If the client is a documentSymbolProvider, set up an autocommand to update the containing function
   -- if client.resolved_capabilities.document_symbol then
@@ -41,7 +42,6 @@ M.on_attach = function(client)
 		plug_completion.on_attach(client)
 	end
 
-	-- Not sure if this is right
 	-- vim.cmd("setlocal omnifunc=lsp#omnifunc")
 
 	setup_progress(client)
