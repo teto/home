@@ -136,19 +136,22 @@ rec {
   neovim-unwrapped-master = prev.neovim-unwrapped.overrideAttrs (oldAttrs: {
         name = "neovim-master";
         version = "official-master";
-      # src = builtins.fetchGit {
-      #   # url = https://github.com/BK1603/neovim.git;
-      #   # ref = "fswatch-autoread";
-      #   url = https://github.com/neovim/neovim.git;
-      #   rev = "9f704c88a57cfb797c21c19672ea6617e9673360";
-      #   # sha256 = "XeEzsh3qtdd/uthsStkZsmCydDm+kcCplpSB+gNwArI=";
-      # };
-      src = final.fetchFromGitHub {
-        owner = "neovim";
-        repo = "neovim";
-        rev = "9f704c88a57cfb797c21c19672ea6617e9673360";
-        sha256 = "sha256-NNUyWczL6dEPrLVsJILnzrSGKmK1/E5TURSJDjhwSVE=";
+      src = builtins.fetchGit {
+        # url = https://github.com/BK1603/neovim.git;
+        # ref = "fswatch-autoread";
+        url = https://github.com/teto/neovim.git;
+        # rev = "9f704c88a57cfb797c21c19672ea6617e9673360";
+        rev = "a958039f0ad7cd4f6a139fde18795c88c623a30e";
+        ref = "remove-foldline-final";
+        # sha256 = "XeEzsh4qtdd/uthsStkZsmCydDm+kcCplpSB+gNwArI=";
       };
+
+      # src = final.fetchFromGitHub {
+      #   owner = "neovim";
+      #   repo = "neovim";
+      #   rev = "9f704c88a57cfb797c21c19672ea6617e9673360";
+      #   sha256 = "sha256-NNUyWczL6dEPrLVsJILnzrSGKmK1/E5TURSJDjhwSVE=";
+      # };
 
   });
 

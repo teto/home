@@ -7,7 +7,6 @@ in
 {
   imports = [
     # todo renommer en workstation
-   ./hardware-lenovo.nix
 
     # for nova dev
     ./modules/docker-daemon.nix

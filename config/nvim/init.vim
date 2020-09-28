@@ -108,9 +108,12 @@ Plug '~/pdf-scribe.nvim'  " to annotate pdf files from nvim :PdfScribeInit
 Plug 'cespare/vim-toml'
 "Plug 'TaDaa/vimade' " to dim the background on lost focus
 
+Plug 'RishabhRD/nvim-lsputils' " for lsp codeactions
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-lua/telescope.nvim'
+" Plug 'nvim-lua/telescope.nvim'
+Plug '~/telescope.nvim'
+Plug 'Xuyuanp/scrollbar.nvim'  " for the test
 
 " annotations plugins {{{
 Plug 'MattesGroeger/vim-bookmarks' " ruby  / :BookmarkAnnotate
@@ -2205,6 +2208,7 @@ nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
 nnoremap <silent> ,af <cmd>lua vim.lsp.buf.formatting()<CR>
 nnoremap <silent> ,arf <cmd>lua vim.lsp.buf.range_formatting()<CR>
 
+" TODO let visual map work on range
 nnoremap ,ga vim.lsp.buf.code_action()<CR>
 
 " nnoremap <silent> <leader>do :OpenDiagnostic<CR>
@@ -2365,8 +2369,7 @@ map <RightMouse>  <Cmd>call quickui#context#open(content, quick_opts)<CR>
 
 " call quickui#context#open(content, opts)
 " }}}
-"
-"
+
 function! LuaComplete (ArgLeaf, CmdLine, CursorPos) abort
         return map(luaeval("vim.tbl_keys(" . a:CmdLine[4:] . ")"), {k,v -> a:CmdLine[4:] . "." . v})
 endfunction

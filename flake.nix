@@ -75,6 +75,8 @@
             modules = [
               (import ./nixpkgs/hardware-dell-camera.nix)
               (import ./nixpkgs/configuration-xps.nix)
+              (import ./nixpkgs/profiles/neovim.nix)
+              (import ./nixpkgs/profiles/vscode.nix)
               (import ./nixpkgs/profiles/nixUnstable.nix)
               ({ config, lib, pkgs,  ... }:
   		{
@@ -132,6 +134,7 @@
             inherit system;
             modules = [
               (import ./nixpkgs/configuration-lenovo.nix)
+              (import ./hardware-lenovo.nix)
               hm.nixosModules.home-manager
             ]
             ++ [
