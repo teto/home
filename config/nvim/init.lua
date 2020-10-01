@@ -14,7 +14,19 @@ lsp_status.config {
 	status_symbol = "",
 }
 
+local plug_lsputil_enabled, lsputil = pcall(require, "lsputil")
 
+if plug_lsputil_enabled then
+	vim.lsp.callbacks['textDocument/codeAction'] = lsputil.codeActioncode_action_handler
+	vim.lsp.callbacks['textDocument/codeAction'] = lsputil.codeActioncode_action_handler
+	vim.lsp.callbacks['textDocument/references'] = lsputil.locationsreferences_handler
+	vim.lsp.callbacks['textDocument/definition'] = lsputil.locationsdefinition_handler
+	vim.lsp.callbacks['textDocument/declaration'] = lsputil.locationsdeclaration_handler
+	vim.lsp.callbacks['textDocument/typeDefinition'] = lsputil.locationstypeDefinition_handler
+	vim.lsp.callbacks['textDocument/implementation'] = lsputil.locationsimplementation_handler
+	vim.lsp.callbacks['textDocument/documentSymbol'] = lsputil.symbolsdocument_handler
+	vim.lsp.callbacks['workspace/symbol'] = lsputil.symbolsworkspace_handler
+end
 
 -- custom attach callback
 local attach_cb = require 'on_attach'
@@ -86,7 +98,7 @@ nvim_lsp.ghcide.setup({
 })
 
 nvim_lsp.hls.setup({
-    cmd = { "haskell-language-server-wrapper", "--lsp" },
+    cmd = { "haskell-language-server", "--lsp" },
     filetypes = { "haskell", "lhaskell" },
     root_dir = nvim_lsp.util.root_pattern("*.cabal", "stack.yaml", "cabal.project", "package.yaml", "hie.yaml")
 })

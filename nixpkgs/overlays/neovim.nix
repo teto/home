@@ -139,10 +139,12 @@ rec {
       src = builtins.fetchGit {
         # url = https://github.com/BK1603/neovim.git;
         # ref = "fswatch-autoread";
-        url = https://github.com/teto/neovim.git;
+        url = https://github.com/neovim/neovim.git;
         # rev = "9f704c88a57cfb797c21c19672ea6617e9673360";
-        rev = "a958039f0ad7cd4f6a139fde18795c88c623a30e";
-        ref = "remove-foldline-final";
+        # rev = "a958039f0ad7cd4f6a139fde18795c88c623a30e";
+        rev = "e5d98d85693245fec811307e5a2ccfdea3a350cd"; # 30 septembre
+        ref = "master";
+        # ref = "remove-foldline-final";
         # sha256 = "XeEzsh4qtdd/uthsStkZsmCydDm+kcCplpSB+gNwArI=";
       };
 

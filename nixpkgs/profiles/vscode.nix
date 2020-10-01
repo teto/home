@@ -9,7 +9,7 @@ let
       haskell.haskell
       vscodevim.vim
       # ms-kubernetes-tools.vscode-kubernetes-tools
-    ])
+    ]);
     # ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [{
     #   name = "remote-ssh-edit";
     #   publisher = "ms-vscode-remote";
@@ -18,13 +18,10 @@ let
   # }];
   vscode-with-extensions = pkgs.vscode-with-extensions.override {
       vscodeExtensions = extensions;
-    };
+  };
 in
-
 {
   environment.systemPackages = [
     vscode-with-extensions
   ];
-  ;
 }
-

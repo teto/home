@@ -18,12 +18,6 @@ let
    };
 
   devPkgs = all: with pkgs; let
-      # TODO pass extraMakeWrapperArgs
-      neovim-xp = pkgs.wrapNeovim pkgs.neovim-unwrapped-master {
-        # TODO pass lua-lsp
-        # extraMakeWrapperArgs = " --prefix PATH ${pkgs.}"
-        structuredConfigure = pkgs.neovimDefaultConfig;
-      };
     in
     [
     # TODO pass to vim makeWrapperArgs
@@ -47,9 +41,6 @@ let
     patchutils  # for interdiff
     lazygit  # kinda like tig
     ncurses.dev # for infocmp
-
-    # neovim-xp   # hum remove ?
-
     neovim-remote # for latex etc
     nix-prefetch-scripts
     nix-index # to list package contents

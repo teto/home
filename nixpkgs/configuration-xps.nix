@@ -11,7 +11,6 @@ in
     ./modules/libvirtd.nix
     ./modules/hoogle.nix
     # ./profiles/pixiecore.nix
-
     # ./modules/mptcp.nix
 
     # ./profiles/neovim.nix
@@ -30,8 +29,8 @@ in
 
 
   boot.kernelParams = [ 
-	"acpi_backlight=vendor"
-	# "i915.enable_psr=0" 
+	# "acpi_backlight=vendor"
+	# "i915.enable_psr=0"  # disables a power saving feature that can cause flickering
 	];
 
   # TODO use the mptcp one ?
@@ -123,6 +122,8 @@ in
     locate.enable = true;
     # dbus.packages = [ ];
   };
+
+  hardware.enableAllFirmware =true;
 
   environment.systemPackages = with pkgs;
     # cups-pk-helper # to add printer through gnome control center

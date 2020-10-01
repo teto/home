@@ -108,7 +108,8 @@ Plug '~/pdf-scribe.nvim'  " to annotate pdf files from nvim :PdfScribeInit
 Plug 'cespare/vim-toml'
 "Plug 'TaDaa/vimade' " to dim the background on lost focus
 
-Plug 'RishabhRD/nvim-lsputils' " for lsp codeactions
+" Plug 'RishabhRD/popfix' " to manage underlying popup and previews
+" Plug 'RishabhRD/nvim-lsputils' " for lsp codeactions
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 " Plug 'nvim-lua/telescope.nvim'
@@ -2111,10 +2112,10 @@ set winhl=NormalNC:CursorColumn
 
 " auto reload vim config on save
 " Watch for changes to vimrc
-augroup myvimrc
-  au!
-  au BufWritePost $MYVIMRC,.vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc,init.vim so $MYVIMRC | if has('gui_running') | so $MYGVIMRC | endif
-augroup END
+" augroup myvimrc
+"   au!
+"   au BufWritePost $MYVIMRC,.vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc,init.vim so $MYVIMRC | if has('gui_running') | so $MYGVIMRC | endif
+" augroup END
 
 " augroup onnewsocket
 "   au!
@@ -2353,15 +2354,23 @@ endfunction
 let g:quickui_border_style = 1
 let content = [
             \ ["&Help Keyword\t\\ch", 'echo 100' ],
-            \ ["&Signature\t\\cs", 'echo 101'],
             \ ['-'],
             \ ["Find in &File\t\\cx", 'echo 200' ],
-            \ ["Find in &Project\t\\cp", 'echo 300' ],
-            \ ["Find in &Defintion\t\\cd", 'echo 400' ],
+            \ ["Goto &Definition\t\\cd", '<cmd>lua vim.lsp.buf.type_definition()<CR>'],
+            \ ["Goto I&mplementation\t\\cd", '<cmd>lua vim.lsp.buf.implementation()<CR>'],
+            \ ["Hover\t\\ch", '<cmd>lua vim.lsp.buf.references()<CR>'],
             \ ["Search &References\t\\cr", '<cmd>lua vim.lsp.buf.references()<CR>'],
-            \ ['-'],
+            \ ["Document  &Symbols\t\\cr", '<cmd>lua vim.lsp.buf.document_symbol()<CR>'],
+            \ ["Format  &Symbols\t\\cf", '<cmd>lua vim.lsp.buf.formatting()<CR>'],
+            \ ["&Execute  Command\\ce", '<cmd>lua vim.lsp.buf.execute_command()<CR>'],
+            \ ["&Incoming calls\\ci", '<cmd>lua vim.lsp.buf.incoming_calls()<CR>'],
+            \ ["&Outgoing calls\\ci", '<cmd>lua vim.lsp.buf.outgoing_calls()<CR>'],
+            \ ["&Signature help\\ci", '<cmd>lua vim.lsp.buf.signature_help()<CR>'],
+            \ ["&Workspace symbol\\cw", '<cmd>lua vim.lsp.buf.workspace_symbol()<CR>'],
+            \ ['- LSP '],
             \ ["&Documentation\t\\cm", 'echo 600'],
             \ ]
+" formatting_sync
 " set cursor to the last position
 let quick_opts = {'index':g:quickui#context#cursor}
 

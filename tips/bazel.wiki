@@ -1,5 +1,7 @@
 `load` statements must be at the top
 
+One can't access things from external WORKSPACE(s).
+
 
 bazel build @ghcide-exe//hie-bios
 
@@ -29,6 +31,7 @@ Our bazel remote is in /tmp/bazel-remote.log
 
 
 # update a stack_snapshot
+It can't [[pin]]
 bazel run @ghcide-unpinned//:pin
 bazel run @stackage-unpinned//:pin
 https://api.haskell.build/haskell/cabal.html#stack_snapshot
