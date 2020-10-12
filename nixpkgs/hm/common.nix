@@ -19,7 +19,9 @@ rec {
   imports = [
 
     ./git.nix
-    ./xdg-mime.nix
+
+    # the module is a pain
+    # ./xdg-mime.nix
   ];
 
   home.username = "teto";
@@ -115,9 +117,10 @@ rec {
     enable = true;
   };
 
+  programs.autojump.enable = true;
+
   programs.bash = {
     enable = true;
-    enableAutojump = true;
 
     # goes to .profile
     sessionVariables = {

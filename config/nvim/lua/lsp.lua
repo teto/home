@@ -67,18 +67,13 @@ nvim_lsp.util.default_config.capabilities = vim.tbl_extend(
 -- 	name = "lua";
 -- 	-- cmd = "lua-lsp",
 -- 	-- filetypes = { "lua" };
--- })
-
--- vim.lsp.add_filetype_config({
--- 	name = "bash";
--- 	cmd = "bash-language-server start",
--- 	filetypes = { "sh" };
--- })
+-- }
 
 
 nvim_lsp.dockerls.setup{}
 nvim_lsp.yamlls.setup{}
 
+-- ghcide
 -- nvim_lsp.ghcide.setup({
 -- 	log_level = vim.lsp.protocol.MessageType.Log;
 -- 	root_dir = nvim_lsp.util.root_pattern(".git");
@@ -95,13 +90,21 @@ nvim_lsp.yamlls.setup{}
 -- 	on_attach=attach_cb.on_attach
 -- })
 
+-- haskell-language-server
 nvim_lsp.hls.setup({
     cmd = { "haskell-language-server", "--lsp" },
     filetypes = { "haskell", "lhaskell" },
     root_dir = nvim_lsp.util.root_pattern("*.cabal", "stack.yaml", "cabal.project", "package.yaml", "hie.yaml"),
 	init_options = {
-		formatting_provider = "stylish-haskell",
+		-- languageServerHaskell = {
+		haskell = {
+			formattingProvider = "stylish-haskell",
+		-- "haskell.trace.server": "messages",
+			logFile = "/tmp/nvim-hls.log",
+		-- "codeLens.enable": true,
+		}
 	}
+	
 })
 
 
@@ -149,25 +152,26 @@ nvim_lsp.rust_analyzer.setup({
     -- root_dir = root_pattern("Cargo.toml", "rust-project.json")
 })
 
--- nvim_lsp.pyls_ms.setup({
--- 	cmd = { "python-language-server" };
---     init_options = {
---       analysisUpdates = true,
---       asyncStartup = true,
---       displayOptions = {},
---     },
--- 	-- as per lsp_status doc
--- 	callbacks = lsp_status.extensions.pyls_ms.setup(),
---     settings = {
---       python = {
---         analysis = {
---           disabled = {},
---           errors = {},
---           info = {}
---         }
---       }
--- 	}
--- })
+-- Available on nix via python-language-server (microsoft)
+nvim_lsp.pyls_ms.setup({
+	cmd = { "python-language-server" };
+    init_options = {
+      analysisUpdates = true,
+      asyncStartup = true,
+      displayOptions = {},
+    },
+	-- as per lsp_status doc
+	callbacks = lsp_status.extensions.pyls_ms.setup(),
+    settings = {
+      python = {
+        analysis = {
+          disabled = {},
+          errors = {},
+          info = {}
+        }
+      }
+	}
+})
 
 -- | Texlab
 -- nvim_lsp.texlab.setup({
@@ -214,43 +218,43 @@ nvim_lsp.ccls.setup({
 })
 
 -- -- config at https://raw.githubusercontent.com/palantir/python-language-server/develop/vscode-client/package.json
--- nvim_lsp.pyls.setup({
--- 	name = "pyls";
--- 	cmd = {  "python", "-mpyls", "-vv", "--log-file" , "/tmp/lsp_python.log"},
--- 	-- init_options = {
--- 	enable = true;
--- 	trace = { server = "verbose"; };
--- 	configurationSources = { "pycodestyle" };
--- 	settings = {
--- 		pyls = {
--- 		plugins = {
--- 			pylint = { enabled = false; };
--- 			jedi_completion = { enabled = true; };
--- 			jedi_hover = { enabled = true; };
--- 			jedi_references = { enabled = true; };
--- 			jedi_signature_help = { enabled = true; };
--- 			jedi_symbols = {
--- 				enabled = false;
--- 				all_scopes = false;
--- 			};
--- 			mccabe = {
--- 				enabled = false;
--- 				threshold = 15;
--- 			};
--- 			-- preload = { enabled = true; };
--- 			pycodestyle = { enabled = true; };
--- 			-- pydocstyle = {
--- 			-- 	enabled = false;
--- 			-- 	match = "(?!test_).*\\.py";
--- 			-- 	matchDir = "[^\\.].*";
--- 			-- };
--- 			pyflakes = { enabled = false; };
--- 			rope_completion = { enabled = false; };
--- 			yapf = { enabled = false; };
--- 		};
--- 	};
--- 	};
--- })
+nvim_lsp.pyls.setup({
+	name = "pyls";
+	cmd = {  "python", "-mpyls", "-vv", "--log-file" , "/tmp/lsp_python.log"},
+	-- init_options = {
+	enable = true;
+	trace = { server = "verbose"; };
+	configurationSources = { "pycodestyle" };
+	settings = {
+		pyls = {
+		plugins = {
+			pylint = { enabled = false; };
+			jedi_completion = { enabled = true; };
+			jedi_hover = { enabled = true; };
+			jedi_references = { enabled = true; };
+			jedi_signature_help = { enabled = true; };
+			jedi_symbols = {
+				enabled = false;
+				all_scopes = false;
+			};
+			mccabe = {
+				enabled = false;
+				threshold = 15;
+			};
+			-- preload = { enabled = true; };
+			pycodestyle = { enabled = true; };
+			-- pydocstyle = {
+			-- 	enabled = false;
+			-- 	match = "(?!test_).*\\.py";
+			-- 	matchDir = "[^\\.].*";
+			-- };
+			pyflakes = { enabled = false; };
+			rope_completion = { enabled = false; };
+			yapf = { enabled = false; };
+		};
+	};
+	};
+})
 
 local function preview_location_callback(_, method, result)
   if result == nil or vim.tbl_isempty(result) then

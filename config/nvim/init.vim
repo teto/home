@@ -107,6 +107,8 @@ call plug#begin(s:plugdir)
 Plug '~/pdf-scribe.nvim'  " to annotate pdf files from nvim :PdfScribeInit
 Plug 'cespare/vim-toml'
 "Plug 'TaDaa/vimade' " to dim the background on lost focus
+Plug 'tjdevries/nlua.nvim'
+" Plug 'tjdevries/cyclist.vim' " to cycle between listchars
 
 " Plug 'RishabhRD/popfix' " to manage underlying popup and previews
 " Plug 'RishabhRD/nvim-lsputils' " for lsp codeactions
@@ -391,7 +393,7 @@ Plug 'teto/Modeliner' " <leader>ml to setup buffer modeline
 " This one has bindings mapped to <leader>l
 " Plug '~/vimwiki'   " to write notes
 " Plug 'vimwiki/vimwiki', { 'branch': 'dev'}   " to write notes
-Plug 'vimwiki/vimwiki'
+" Plug 'vimwiki/vimwiki'
 "Plug 'teto/neovim-auto-autoread' " works only in neovim, runs external checker
 " Plug 'rhysd/github-complete.vim' " provides github user/repo autocompletion after @ and #
 
@@ -534,14 +536,8 @@ let g:vimsyn_embed = 'lP'  " support embedded lua, python and ruby
 set synmaxcol=200
 
 
-
-"{{{ deoplete
-" configured in after/deoplete.vim
-"}}}
 " vimspector {{{
 let g:vimspector_enable_mappings = 'HUMAN'
-     
-
 "}}}
 " backup files etc... {{{
 set noswapfile
@@ -679,15 +675,6 @@ let g:far#collapse_result=1
 let g:instant_rst_browser = "qutebrowser"
 let g:instant_rst_additional_dirs=[ "/home/teto/mptcpweb" ]
 " }}}
-" vim-workspace {{{
-" used for autosave
-" :CloseHiddenBuffers
-" nnoremap <leader>s :ToggleWorkspace<CR>
-let g:workspace_session_disable_on_args = 1
-let g:workspace_autosave_always = 1
-let g:workspace_autosave_untrailspaces = 0
-let g:workspace_autosave_ignore = ['gitcommit']
-" }}}
 " Appearance {{{
 set background=dark " remember: does not change the background color !
 " one  ▶
@@ -697,7 +684,6 @@ set cursorline " highlight cursor line
 
 " set diffopt=filler
 
-set autoread " automatically reload file when it has been changed (hope they fix this damn feature one day)
 " set noautoread " to prevent from interfering with our plugin
 set wrap
 " set breakat=80 " characters at which wrap can break line
@@ -861,7 +847,7 @@ nnoremap <Leader>/ :set hlsearch! hls?<CR> " toggle search highlighting
 " inyoface (highlight only comments) {{{
 " nnoremap <leader>c <Plug>(InYoFace_Toggle)<CR>
 " }}}
-" vim-sayonara {{{
+" vim-sayonara * {{{
 nnoremap <silent><leader>Q  <Cmd>Sayonara<cr>
 nnoremap <silent><leader>q  <Cmd>Sayonara!<cr>
 
@@ -2228,7 +2214,7 @@ nnoremap <silent> gA    <cmd>lua vim.lsp.buf.code_action()<CR>
 " luafile stdpath('config').'/init.lua'
 " vim.fn.stdpath('config')
 luafile ~/.config/nvim/init.lua
-" luafile ~/.config/nvim/lsp.lua
+luafile ~/.config/nvim/lua/lsp.lua
 " logs are written to /home/teto/.local/share/nvim/vim-lsp.log
 lua vim.lsp.set_log_level("debug")
 

@@ -35,7 +35,7 @@ vim.g.spinner_frames = {'⣾', '⣽', '⣻', '⢿', '⡿', '⣟', '⣯', '⣷'}
 vim.g.should_show_diagnostics_in_statusline = true
 
 
-local lsp = require 'lsp'
+-- local lsp = require 'lsp'
 
 
 -- to disable virtualtext check 

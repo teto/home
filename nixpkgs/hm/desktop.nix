@@ -170,6 +170,7 @@ in
     # ./modules/home-tor.nix
     ./i3.nix
     ./firefox.nix
+    ./neovim.nix
   ];
 
   # rename to fn, accept a parameter for optional

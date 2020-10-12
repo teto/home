@@ -92,10 +92,6 @@ let
 
   nixpkgs = {
     overlays = [
-      # (import ./overlays/kernels.nix)
-      # (import ./overlays/haskell.nix)
-      # to get xdg_utils
-      # (import ./overlays/i3.nix)
     ];
 
     config = {

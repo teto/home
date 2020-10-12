@@ -1,7 +1,6 @@
 # https://nixos.wiki/wiki/Linux_Kernel
 # configfile.passthru.structuredConfig
 final: prev:
-# with prev.lib.kernel;
 
 
 # DYNAMIC_DEBUG n is important !!
@@ -25,19 +24,15 @@ let
   # in if res.success then res.value else []
 
   # TODO tester ce qui fait flipper/ peut foirer
-# EXT4_ENCRYPTION
-# /home/teto/nixpkgs3/lib/kernel.nix
+  # EXT4_ENCRYPTION
 
 
-#  strongswan required configuration
-# https://wiki.strongswan.org/projects/strongswan/wiki/KernelModules
+  #  strongswan required configuration
+  # https://wiki.strongswan.org/projects/strongswan/wiki/KernelModules
   structuredConfigs = import ./kernels/structured.nix { inherit (prev) lib; inherit libk;};
 
 
-
   # TODO for dev shellHook
-  # silent! call remove(g:LanguageClient_serverCommands, 'c')
-  # see wiki
   addMenuConfig = kernel:
     # kernel;
     (kernel.overrideAttrs (o: {

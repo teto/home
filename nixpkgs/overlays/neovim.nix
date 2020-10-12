@@ -128,7 +128,7 @@ rec {
         ]
       );
     in
-    final.wrapNeovim neovim-unwrapped-master {
+    final.wrapNeovimStructured neovim-unwrapped-master {
       # TODO should be able to add some packages in PATH like jq
       structuredConfigure = finalConfig;
     };
@@ -260,14 +260,14 @@ rec {
 
   # TODO provide an upper level
   neovimConfigure = {
-      packages.myVimPackage = {
-        # see examples below how to use custom packages
-        # loaded on launch
-        start = startPlugins;
-        # manually loadable by calling `:packadd $plugin-name`
-        opt = [ ];
-      };
-    };
+	packages.myVimPackage = {
+	# see examples below how to use custom packages
+	# loaded on launch
+	start = startPlugins;
+	# manually loadable by calling `:packadd $plugin-name`
+	opt = [ ];
+	};
+  };
 
   neovim-dev = let
       pythonEnv = final.pkgs.python3;

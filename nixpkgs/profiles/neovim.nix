@@ -3,15 +3,15 @@
 
   programs.neovim = {
 
-    enable = true;
+    enable = false;
     # builtins.trace pkgs.neovim-unwrapped-master.name
     package = pkgs.neovim-unwrapped-master;
 
+	#  source /home/teto/.config/nvim/init.vim
     configure = pkgs.neovimConfigure // {
       customRC = (pkgs.neovimConfigure.customRC  or "") + ''
         let g:fzf_command_prefix = 'Fzf' " prefix commands :Files become :FzfFiles, etc.
         let g:fzf_nvim_statusline = 0 " disable statusline overwriting
-        source ~/.config/nvim/init.vim
       '';
 
     };

@@ -35,8 +35,13 @@ in
 
   # TODO use the mptcp one ?
   # boot.kernelPackages = pkgs.linuxPackages;
-  boot.kernelPackages = pkgs.linuxPackages_latest;
-
+  # boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackagesFor ( pkgs.linux_5_8.override {
+    structuredExtraConfig = with lib.kernel; {
+      # MPTCP     =yes;
+      # MPTCP_IPV6=yes;
+    };
+  });
 
   # TODO we need nouveau
   boot.kernelModules = [
@@ -66,6 +71,9 @@ in
 
   # this is for gaming
   hardware.opengl.driSupport32Bit = true;
+  # just trying to make some steam warnings go away
+  services.upower.enable = true;
+
   hardware.pulseaudio = {
     enable = true;
     systemWide = false;
