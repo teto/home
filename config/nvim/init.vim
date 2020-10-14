@@ -2229,8 +2229,9 @@ luafile ~/.config/nvim/treesitter.lua
 " nnoremap [[ <Cmd>labove<CR>
 " nnoremap ]] <Cmd>lbelow<CR>
 
-nmap [[ <Cmd>PrevDiagnostic<cr>
-nmap ]] <Cmd>NextDiagnostic<cr>
+" moved to local 
+" nmap [[ <Cmd>PrevDiagnostic<cr>
+" nmap ]] <Cmd>NextDiagnostic<cr>
 
 " set omnifunc=lsp#omnifunc
   " autocmd Filetype rust,python,go,c,cpp setl omnifunc=v:lua.vim.lsp.omnifunc

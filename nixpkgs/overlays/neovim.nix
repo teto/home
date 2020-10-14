@@ -134,18 +134,16 @@ rec {
     };
 
   neovim-unwrapped-master = prev.neovim-unwrapped.overrideAttrs (oldAttrs: {
-        name = "neovim-master";
-        version = "official-master";
+      name = "neovim-master";
+      version = "official-master";
+      cmakeBuildType="debug";
       src = builtins.fetchGit {
         # url = https://github.com/BK1603/neovim.git;
         # ref = "fswatch-autoread";
         url = https://github.com/neovim/neovim.git;
-        # rev = "9f704c88a57cfb797c21c19672ea6617e9673360";
-        # rev = "a958039f0ad7cd4f6a139fde18795c88c623a30e";
-        rev = "e5d98d85693245fec811307e5a2ccfdea3a350cd"; # 30 septembre
+        # rev = "e5d98d85693245fec811307e5a2ccfdea3a350cd"; # 30 septembre
+        rev = "759a05407f3e75cc002c0950563388735e969a94"; # 13 octobre
         ref = "master";
-        # ref = "remove-foldline-final";
-        # sha256 = "XeEzsh4qtdd/uthsStkZsmCydDm+kcCplpSB+gNwArI=";
       };
 
       # src = final.fetchFromGitHub {
@@ -208,21 +206,6 @@ rec {
         #   let g:coc_node_path = '${prev.pkgs.nodejs}/bin/node'
         # ''
 
-        # LanguageClient support
-        # + ''
-        # " fnamemodify( g:python3_host_prog, ':p:h')
-        # let g:LanguageClient_serverCommands = {
-        #      \ 'python': [ g:python3_host_prog, '-mpyls', '-vv', '--log-file' , '/tmp/lsp_python.log']
-        #      \ , 'haskell': ['hie-wrapper', '--lsp', '-d', '--vomit', '--logfile', '/tmp/lsp_haskell.log' ]
-        #      \ , 'cpp': ['${final.pkgs.cquery}/bin/cquery', '--log-file=/tmp/cq.log']
-        #      \ , 'c': ['${final.pkgs.cquery}/bin/cquery', '--log-file=/tmp/cq.log']
-        #      \ , 'nix': ['nix-lsp']
-        #      \ }
-        # ''
-        # # neomake support
-        # + ''
-        #   let g:neomake_python_mypy_exe = fnamemodify( g:python3_host_prog, ':p:h').'/mypy'
-        # ''
         ;
 
     # TODO provide an upper level

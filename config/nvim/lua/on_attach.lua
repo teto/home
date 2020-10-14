@@ -34,8 +34,15 @@ local setup_progress = function(client)
 end
 
 M.on_attach = function(client)
+	-- print("Attaching client")
+	-- print(vim.inspect(client))
 	if plug_diagnostic_enabled then
 		plug_diagnostic.on_attach(client)
+		-- vim.api.nvim_buf_set_keymap(res.bufnr, "n", "q", ":q<CR>", {})
+
+		-- TODO bind conditionnally
+		-- nmap [[ <Cmd>PrevDiagnostic<cr>
+		-- nmap ]] <Cmd>NextDiagnostic<cr>
 	end
 
 	if plug_completion_enabled then

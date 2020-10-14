@@ -38,7 +38,6 @@ let
     steam-run
   ];
 
-
   # hum...
   # services.lorri.enable = true;
 

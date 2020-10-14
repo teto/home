@@ -27,14 +27,21 @@ let
       set sessionoptions-=terminal
       set sessionoptions-=help
     '';
-  };
 
+    highlight_yank = ''
+      augroup highlight_yank
+          autocmd!
+          autocmd TextYankPost * lua require'vim.highlight'.on_yank{higroup="IncSearch", timeout=1000}
+      augroup END
+    '';
+  };
 
 in
 {
 
   home.file."${config.xdg.configHome}/nvim/parser/c.so".source = "${pkgs.tree-sitter.builtGrammars.c}/parser";
   home.file."${config.xdg.configHome}/nvim/parser/bash.so".source = "${pkgs.tree-sitter.builtGrammars.bash}/parser";
+  home.file."${config.xdg.configHome}/nvim/parser/lua.so".source = "${pkgs.tree-sitter.builtGrammars.lua}/parser";
 
   programs.neovim = {
      enable = true;
@@ -44,7 +51,13 @@ in
      extraConfig = ''
         set noshowmode " Show the current mode on command line
         set cursorline " highlight cursor line
-    '';
+    ''
+      # concatStrings = builtins.concatStringsSep "";
+
+    + (lib.strings.concatStrings (
+        lib.mapAttrsToList genBlock rcBlocks
+      ))
+    ;
 
     # TODO add lsp stuff
     extraPackages = with pkgs; [
@@ -163,7 +176,10 @@ in
       # vimtex
       {
         plugin = unicode-vim;
+        # " let g:Unicode_cache_directory='${pkgs.vimPlugins.unicode-vim}/share/vim-plugins/unicode-vim/autoload/unicode'
         config = ''
+          let g:Unicode_data_directory='${pkgs.vimPlugins.unicode-vim}/share/vim-plugins/unicode-vim/autoload/unicode'
+
           " overrides ga
           nmap ga <Plug>(UnicodeGA)
         '';

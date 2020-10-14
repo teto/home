@@ -45,22 +45,22 @@ nvim_lsp.util.default_config.capabilities = vim.tbl_extend(
 
 -- vim.lsp.util.show_current_line_diagnostics()
 -- Check if it's already defined for when I reload this file.
--- if not configs.lua_lsp then
---   configs.lua_lsp = {
---     default_config = {
---       cmd = {'lua-lsp'};
---       filetypes = {'lua'};
--- 	  root_dir = function(fname)
---         return nvim_lsp.util.find_git_ancestor(fname) or vim.loop.os_homedir()
---       end;
---       log_level = vim.lsp.protocol.MessageType.Warning;
---       settings = {};
---     };
---   }
--- end
+if not configs.lua_lsp then
+  configs.lua_lsp = {
+    default_config = {
+      cmd = {'lua-lsp'};
+      filetypes = {'lua'};
+	  root_dir = function(fname)
+        return nvim_lsp.util.find_git_ancestor(fname) or vim.loop.os_homedir()
+      end;
+      log_level = vim.lsp.protocol.MessageType.Warning;
+      settings = {};
+    };
+  }
+end
 
 
--- nvim_lsp.lua_lsp.setup{}
+nvim_lsp.lua_lsp.setup{}
 
 -- sumneko_lua
 -- nvim_lsp.lua_lsp.setup{
@@ -95,6 +95,9 @@ nvim_lsp.hls.setup({
     cmd = { "haskell-language-server", "--lsp" },
     filetypes = { "haskell", "lhaskell" },
     root_dir = nvim_lsp.util.root_pattern("*.cabal", "stack.yaml", "cabal.project", "package.yaml", "hie.yaml"),
+
+	on_attach=attach_cb.on_attach,
+
 	init_options = {
 		-- languageServerHaskell = {
 		haskell = {
