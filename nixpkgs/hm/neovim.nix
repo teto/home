@@ -2,8 +2,10 @@
 
 let
 
-  genBlock = title: content:
-      '' " 
+  genBlock = title: content: ''
+    " ${title} {{{
+    ${content}
+    " }}}
     '';
 
 
@@ -20,6 +22,11 @@ let
 
       set fdc=auto:2
     '';
+
+    sessionoptions = ''
+      set sessionoptions-=terminal
+      set sessionoptions-=help
+    '';
   };
 
 
@@ -33,14 +40,20 @@ in
      enable = true;
      package = pkgs.neovim-unwrapped-master;
 
+     # concatMap
      extraConfig = ''
         set noshowmode " Show the current mode on command line
         set cursorline " highlight cursor line
     '';
 
     # TODO add lsp stuff
-    # extraPackages =  [
-    # ];
+    extraPackages = with pkgs; [
+      pkgs.jq
+      nodePackages.bash-language-server
+      luaPackages.lua-lsp
+      yaml-language-server
+      # dockerfile-language-server-nodejs
+    ];
 
     plugins = with pkgs.vimPlugins; [
       # echodoc-vim
@@ -48,12 +61,12 @@ in
       # to install manually with coc.nvim:
       # - coc-vimtex  coc-snippets 
       # use coc-yank for yank history
-      editorconfig-vim
-      # replaced by coc
+      {
+        plugin = editorconfig-vim;
+        config = ''
+        '';
+      }
       far-vim
-
-      # fails with   python module. Run `pip install neovim` to fix. For more info, :he nvim-python"
-      # floobits-neovim
 
       {
         plugin = fzf-vim;
@@ -80,15 +93,35 @@ in
       # vim-fugitive
       vim-signature
       vim-signify
-      vim-startify
+      {
+        plugin = vim-startify;
+        config = ''
+          let g:startify_use_env = 0
+          let g:startify_disable_at_vimenter = 0
+          let g:startify_session_dir = stdpath('data').'/nvim/sessions'
+        '';
+      }
+
       vim-scriptease
-      vim-sneak
+      {
+        plugin = vim-sneak;
+        config = ''
+          let g:sneak#s_next = 1 " can press 's' again to go to next result, like ';'
+          let g:sneak#prompt = 'Sneak>'
+
+          let g:sneak#streak = 0
+
+          map f <Plug>Sneak_f
+          map F <Plug>Sneak_F
+          map t <Plug>Sneak_t
+          map T <Plug>Sneak_T
+        '';
+      }
       {
         plugin = vim-grepper;
         config = ''
           nnoremap <leader>rg  <Cmd>Grepper -tool rg -open -switch<CR>
           nnoremap <leader>rgb  <Cmd>Grepper -tool rg -open -switch -buffer<CR>
-          " TODO add 
           vnoremap <leader>rg  <Cmd>Grepper -tool rg -open -switch<CR>
         '';
       }
@@ -128,7 +161,14 @@ in
 
       # reuse once https://github.com/neovim/neovim/issues/9390 is fixed
       # vimtex
-      unicode-vim
+      {
+        plugin = unicode-vim;
+        config = ''
+          " overrides ga
+          nmap ga <Plug>(UnicodeGA)
+        '';
+      }
+
     ];
 
   };

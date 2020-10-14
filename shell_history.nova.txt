@@ -1,2 +1,4 @@
 brun //simwork/jinko-tools:all-simwork-images
 set-ghcide-target //simwork/result-store
+aws eks update-kubeconfig
+aws eks update-kubeconfig --name jinko-prod

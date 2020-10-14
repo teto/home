@@ -79,31 +79,31 @@
               (import ./nixpkgs/profiles/vscode.nix)
               (import ./nixpkgs/profiles/nixUnstable.nix)
               ({ config, lib, pkgs,  ... }:
-  		{
-		  boot.loader.systemd-boot.enable = true;
-		  boot.loader.efi.canTouchEfiVariables = true;
-		  boot.loader.grub.enableCryptodisk = true;
-		  boot.loader.grub.enable = true;
-		  boot.loader.grub.version = 2;
-		  boot.loader.grub.device = "nodev";
-		  boot.loader.grub.efiSupport = true;
+                {
+                  boot.loader.systemd-boot.enable = true;
+                  boot.loader.efi.canTouchEfiVariables = true;
+                  boot.loader.grub.enableCryptodisk = true;
+                  boot.loader.grub.enable = true;
+                  boot.loader.grub.version = 2;
+                  boot.loader.grub.device = "nodev";
+                  boot.loader.grub.efiSupport = true;
 
-		  boot.initrd.luks.devices.luksRoot = {
-		      # device = "/dev/disk/by-uuid/6bd496bf-55ac-4e56-abf0-ad1f0db735b2";
-		      device = "/dev/sda2";
-			preLVM = true; # luksOpen will be attempted before LVM scan or after it
-			# fallbackToPassword = true;
-			allowDiscards = true; # allow TRIM requests (?!)
-		  };
-		  # boot.kernelParams = [
-			 # CPU performance scaling driver
-		 	 #"intel_pstate=no_hwp" 
-		  # ];
+                  boot.initrd.luks.devices.luksRoot = {
+                      # device = "/dev/disk/by-uuid/6bd496bf-55ac-4e56-abf0-ad1f0db735b2";
+                      device = "/dev/sda2";
+                    preLVM = true; # luksOpen will be attempted before LVM scan or after it
+                    # fallbackToPassword = true;
+                    allowDiscards = true; # allow TRIM requests (?!)
+                  };
+                  # boot.kernelParams = [
+                    # CPU performance scaling driver
+                    #"intel_pstate=no_hwp" 
+                  # ];
 
-		  networking.hostName = "mcoudron"; # Define your hostname.
-  		})
+                  networking.hostName = "mcoudron"; # Define your hostname.
+                })
               hm.nixosModules.home-manager
-	      hm-custom
+              hm-custom
             ]
             # nixpkgs.lib.optional nova != null
             ++ [

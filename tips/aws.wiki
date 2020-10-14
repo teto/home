@@ -12,6 +12,9 @@ aws sts get-caller-identity
 
 aws s3api get-bucket-location --profile jinko-dev --bucket jinko-dev-shared
 
+# https://docs.aws.amazon.com/eks/latest/userguide/create-kubeconfig.html
+aws eks update-kubeconfig --name jinko-prod
+
 # dada
 
 Minimum password length is 32 characters

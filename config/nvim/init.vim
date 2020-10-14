@@ -113,7 +113,7 @@ Plug 'tjdevries/nlua.nvim'
 " Plug 'RishabhRD/popfix' " to manage underlying popup and previews
 " Plug 'RishabhRD/nvim-lsputils' " for lsp codeactions
 Plug 'nvim-lua/popup.nvim'
-Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-lua/plenary.nvim'  " lua utilities for neovim
 " Plug 'nvim-lua/telescope.nvim'
 Plug '~/telescope.nvim'
 Plug 'Xuyuanp/scrollbar.nvim'  " for the test
@@ -185,7 +185,7 @@ Plug 'tweekmonster/startuptime.vim', {'on': 'StartupTime'} " see startup time pe
 Plug 'vim-scripts/vis' " ?
 Plug 'Konfekt/vim-CtrlXA' " use ctrl a/xto cycle between different words
 Plug 'AndrewRadev/splitjoin.vim' " gS/gJ to
-Plug '~/nvim-palette', { 'do': ':UpdateRemotePlugins' }
+" Plug '~/nvim-palette', { 'do': ':UpdateRemotePlugins' }
 " Plug 'jamessan/vim-gnupg' " does not support neovim yet ?
 
 " autocompletion 
@@ -282,7 +282,7 @@ let cmdline_follow_colorscheme = 1
 let cmdline_external_term_cmd = "termite -e '%s' &"
 "}}}
 "}}}
-Plug 'SirVer/ultisnips' " handle snippets
+" Plug 'SirVer/ultisnips' " handle snippets
 " " Snippets are separated from the engine. Add this if you want them:
 Plug 'honza/vim-snippets'
 " Plug 'Shougo/neosnippet.vim'
@@ -1871,7 +1871,7 @@ nnoremap <Leader>V <Cmd>Vista finder<CR>
 nnoremap ,cd :cd %:p:h<CR>:pwd<CR>
 
 if has('nvim')
-	"runtime! python_setup.vim
+    " runtime! python_setup.vim
  " when launching term
 	tnoremap <Esc> <C-\><C-n>
 endif
@@ -2281,10 +2281,6 @@ endfunction
 
 " }}}
 
-" treesitter config {{{
-" lua vim.treesitter.add_language("/home/teto/tree-sitter-c/build/Release/tree_sitter_c_binding.node", "c")
-" nix-build -A tree-sitter.builtGrammars.c
-"}}}
 "{{{sessionoptions
 set sessionoptions-=terminal
 set sessionoptions-=help

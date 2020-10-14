@@ -1,11 +1,9 @@
 wrong content-type can trigger a 415 error
 application/octet-stream
-[[curl]] -v -X PUT -d @request.json -H 'Content-Type: application/json' 127.0.0.1:5001/result/task_id/42.csv
 
 
 curl -i -X POST -H "Content-Type: application/json;=" -d '{"user":"bar","pass":"foooo"}' http://localhost:8000
 
-curl -v -X PUT -T /home/teto/nova/test.bson -H 'Expect:' -H 'Content-Type: application/bson' 127.0.0.1:52002/result/task_id/42.csv
 
 
 # To get the file
@@ -30,3 +28,19 @@ curl --trace dump will dump the packet
 One can pass 
 -u user:thepasswordgoeshere
 or curl https://myusername:mypassword@www.example.com/Push_Order.php?orderId=1562
+
+
+# with curl password looks messed up
+curl -v -L --http1.1 -u LOGIN:'PASSWORD' -H 'Expect:' -H "Accept: application/json" "http://result-store-janssen-prod.prod.k8s.jinko.ai/result/task_id/5f33a3fb729532e0a8827191.json"
+wget -v --user=LOGIN --password='PASSWORD' -H 'Expect:' -H "Accept: application/json" "http://result-store-janssen-prod.prod.k8s.jinko.ai/result/task_id/5f33a3fb729532e0a8827191.json"
+
+# to put 
+
+curl -v -L --http1.1 -u "jinko:PASSWORD" -H 'Expect:' -H "Accept: application/json" "http://result-store-janssen-prod.prod.k8s.jinko.ai/result/task_id/5f33a3fb729532e0a8827191.json"
+
+curl -v -X PUT -T /home/teto/nova/test.bson -H 'Expect:' -H 'Content-Type: application/bson' 127.0.0.1:52002/result/task_id/42.csv
+curl -v -X PUT -d @request.json -H 'Content-Type: application/json' 127.0.0.1:5001/result/task_id/42.csv
+
+curl --http1.1 -L -u f{login}:{password} -X PUT -T mdl_path '-H' 'Expect:' '-H' 'Content-Type: application/json' http://result-store-janssen-prod.prod.k8s.jinko.ai/result/task_id/toto.json
+
+wget --method=PUT --

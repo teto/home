@@ -21,9 +21,9 @@ let
     in
     [
     # TODO pass to vim makeWrapperArgs
-    nodePackages.bash-language-server
+    # nodePackages.bash-language-server
     # just in my branch :'(
-    luaPackages.lua-lsp
+    # luaPackages.lua-lsp
     nixpkgs-fmt
     editorconfig-core-c
     exa  # to list files
