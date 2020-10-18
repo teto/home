@@ -383,7 +383,7 @@ Plug 'Rykka/riv.vim', {'for': 'rst'}
 Plug 'Rykka/InstantRst', {'for': 'rst'} " rst live preview with :InstantRst,
 Plug 'dhruvasagar/vim-table-mode', {'for': 'txt'}
 
-" Plug 'kshenoy/vim-signature' " display marks in gutter, love it
+Plug 'kshenoy/vim-signature' " display marks in gutter, love it
 "Plug 'tomtom/quickfixsigns_vim'
 Plug 'nacitar/a.vim' " :A
 " Plug 'mhinz/vim-tree' " test
@@ -1925,8 +1925,8 @@ set showfulltag "test
 "https://www.reddit.com/r/vim/comments/2tvupe/azerty_keymapping/
 " parce que # est l'opposé de * et ù est a coté de *
 " map ù %
-noremap             <C-j>           }
-noremap             <C-k>           {
+" noremap             <C-j>           }
+" noremap             <C-k>           {
 
 " }}}
 "'.'
@@ -2226,10 +2226,12 @@ luafile ~/.config/nvim/treesitter.lua
 " this is set per-buffer so...
 " call LSP_maps()
 
-" nnoremap [[ <Cmd>labove<CR>
-" nnoremap ]] <Cmd>lbelow<CR>
-
 " moved to local 
+" nmap [[ <Cmd>PrevDiagnostic<cr>
+" nmap ]] <Cmd>NextDiagnostic<cr>
+
+nmap             <C-k>           <Cmd>PrevDiagnostic<cr>
+nmap             <C-j>           <Cmd>NextDiagnostic<cr>
 " nmap [[ <Cmd>PrevDiagnostic<cr>
 " nmap ]] <Cmd>NextDiagnostic<cr>
 

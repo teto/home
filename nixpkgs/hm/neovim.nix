@@ -104,7 +104,8 @@ in
       vim-dasht
       vim-dirvish
       # vim-fugitive
-      vim-signature
+      # vim-signature
+
       vim-signify
       {
         plugin = vim-startify;

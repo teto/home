@@ -8,6 +8,7 @@
       bbenoist.Nix
       ms-python.python
       ms-kubernetes-tools.vscode-kubernetes-tools
+      ms-vsliveshare.vsliveshare
       # ext install DigitalAssetHoldingsLLC.ghcide
       # ext install BazelBuild.vscode-bazel
     ];

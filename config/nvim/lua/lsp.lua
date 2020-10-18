@@ -26,6 +26,8 @@ if plug_lsputil_enabled then
 	vim.lsp.callbacks['textDocument/implementation'] = lsputil.locationsimplementation_handler
 	vim.lsp.callbacks['textDocument/documentSymbol'] = lsputil.symbolsdocument_handler
 	vim.lsp.callbacks['workspace/symbol'] = lsputil.symbolsworkspace_handler
+	vim.lsp.callbacks['window/showMessage'] = require 'notifications'.notify
+	
 end
 
 -- custom attach callback

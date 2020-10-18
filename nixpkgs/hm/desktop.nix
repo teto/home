@@ -85,6 +85,7 @@ let
     # apvlv # broken
     # alsa-utils # for alsamixer
     arandr  # to move screens/monitors around
+    du-dust  # dust binary: rust replacement of du
     hunspellDicts.fr-any
     # buku  # broken on unstable and stable
     # dynamic-colors # to change the terminal colors ("dynamic-colors switch solarized-dark")
@@ -111,11 +112,13 @@ let
     noti # send notifications when a command finishes
     # papis # library manager
     pass
+    procs  # Rust replacement for 'ps'
     qtpass
     sublime3
     scrot  # screenshot app for wayland
     # smplayer # GUI around mpv
 
+    sd  # rust cli for search & replace
     sxiv # simple image viewer
     # vimiv # image viewer
     shared_mime_info # temporary fix for nautilus to find the correct files

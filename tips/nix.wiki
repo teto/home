@@ -32,3 +32,5 @@ CURL_TRACE
 - /run/current-system/sw/bin/
 - /var/run/booted-system
 
+# install haskell packages from certian version
+nix-shell -p haskell.packages.ghc865.stack
