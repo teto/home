@@ -2,7 +2,12 @@ local config = require 'nvim-treesitter.configs'
 config.config = config.setup {
     highlight = {
         enable = true,                    -- false will disable the whole extension
-        disable = { 'rust', 'bash', 'c' },        -- list of language that will be disabled
+        disable = {
+			'rust',
+			'bash',
+			'c',
+			'lua' -- cos breaks
+		},        -- list of language that will be disabled
     },
     incremental_selection = {
         enable = true,

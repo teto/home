@@ -6,6 +6,5 @@
     # plugins = 
     init = ''
     '';
-    # homeDirectory = 
   };
 }

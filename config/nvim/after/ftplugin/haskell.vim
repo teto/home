@@ -11,8 +11,8 @@ setlocal expandtab                   " expand tabs to spaces
 let g:gutentags_ctags_executable_haskell = 'hasktags'
 
 " disable per-buffer
-let b:airline_disable_statusline = 1
+" let b:airline_disable_statusline = 1
 
-set statusline=%!StatusLSP()
+" set statusline=%!StatusLSP()
 
 " map gh :!hoogle <cword><CR>

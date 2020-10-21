@@ -133,12 +133,12 @@ Plug 'diepm/vim-rest-console' " test rest APIs
 " Plug '~/nvim-autoread' " nvim-autoread
 Plug 'nvim-lua/lsp-status.nvim'  " display lsp progress
 Plug 'skywind3000/vim-quickui'
-Plug 'liuchengxu/vista.vim' " replaces tagbar to list workplace symbols
+" Plug 'liuchengxu/vista.vim' " replaces tagbar to list workplace symbols
 Plug 'neovim/nvim-lspconfig' " while fuzzing details out
 " Plug '~/nvim-lspconfig' " while fuzzing details out
 " Plug 'puremourning/vimspector' " to debug programs
 Plug 'bfredl/nvim-luadev'  " lua repl :Luadev
-Plug 'hotwatermorning/auto-git-diff' " to help rebasing
+Plug 'hotwatermorning/auto-git-diff' " to help rebasing, damn cool
 " Plug 'christoomey/vim-conflicted' " toto
 Plug 'norcalli/nvim-terminal.lua' " to display ANSI colors
 Plug 'bogado/file-line' " to open a file at a specific line
@@ -408,6 +408,7 @@ Plug 'nvim-treesitter/completion-treesitter' " extension of completion-nvim,
 Plug 'nvim-treesitter/highlight.lua' " to test treesitter
 Plug 'nvim-treesitter/nvim-treesitter' " to test treesitter
 Plug 'nvim-treesitter/playground'
+" Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 
 " github-comment requires webapi (https://github.com/mattn/webapi-vim)
 " Plug 'mmozuras/vim-github-comment' " :GHComment
@@ -1132,11 +1133,16 @@ let g:signify_sign_show_text = 1
 "\u00a0  " unbreakable space
 
 " let g:signify_sign_add =  "▎"
+let g:signify_sign_add          = '▎'
+let g:signify_sign_delete       = '▎'
+let g:signify_sign_change       = '▎'
+let g:signify_sign_changedelete = '▎'
+
 let g:signify_sign_add =  "▊"
-let g:signify_sign_delete            = g:signify_sign_add
-" " let g:signify_sign_delete_first_line = '‾'
-let g:signify_sign_change            = g:signify_sign_add
-let g:signify_sign_changedelete      = g:signify_sign_change
+" let g:signify_sign_delete            = g:signify_sign_add
+" " " let g:signify_sign_delete_first_line = '‾'
+" let g:signify_sign_change            = g:signify_sign_add
+" let g:signify_sign_changedelete      = g:signify_sign_change
 let g:signify_sign_show_count= 0
 " master
 
@@ -2014,6 +2020,7 @@ set guicursor=n-v-c:block-blinkon250-Cursor/lCursor,ve:ver35-Cursor,o:hor50-Curs
 " try reverse ?
 highl Cursor ctermfg=16 ctermbg=253 guifg=#000000 guibg=#00FF00
 " highl lCursor ctermfg=16 ctermbg=253 guifg=#000000 guibg=#00FF00
+" #232526
 highlight SignifySignChange cterm=bold ctermbg=237  ctermfg=227 guibg=NONE guifg=#F08A1F
 highlight SignifySignAdd cterm=bold ctermbg=237  ctermfg=227 guibg=NONE guifg=green
 highlight SignifySignDelete cterm=bold ctermbg=237  ctermfg=227 guibg=NONE guifg=red
@@ -2214,7 +2221,7 @@ nnoremap <silent> gA    <cmd>lua vim.lsp.buf.code_action()<CR>
 " luafile stdpath('config').'/init.lua'
 " vim.fn.stdpath('config')
 luafile ~/.config/nvim/init.lua
-luafile ~/.config/nvim/lua/lsp.lua
+luafile ~/.config/nvim/lua/lsp_init.lua
 " logs are written to /home/teto/.local/share/nvim/vim-lsp.log
 lua vim.lsp.set_log_level("debug")
 
@@ -2267,18 +2274,18 @@ sign define LspDiagnosticsWarningSign text=！
 sign define LspDiagnosticsInformationSign text=I
 sign define LspDiagnosticsHintSign text=H
 
-function! LspStatus() abort
-    let sl = ''
-    if luaeval('vim.lsp.buf.server_ready()')
-        let sl.='%#MyStatuslineLSP#E:'
-        let sl.='%#MyStatuslineLSPErrors#%{luaeval("vim.lsp.util.buf_diagnostics_count(\"Error\")")}'
-        let sl.='%#MyStatuslineLSP# W:'
-        let sl.='%#MyStatuslineLSPWarnings#%{luaeval("vim.lsp.util.buf_diagnostics_count(\"Warning\")")}'
-    else
-        let sl.='%#MyStatuslineLSPErrors#off'
-    endif
-    return sl
-endfunction
+" function! LspStatus() abort
+"     let sl = ''
+"     if luaeval('vim.lsp.buf.server_ready()')
+"         let sl.='%#MyStatuslineLSP#E:'
+"         let sl.='%#MyStatuslineLSPErrors#%{luaeval("vim.lsp.util.buf_diagnostics_count(\"Error\")")}'
+"         let sl.='%#MyStatuslineLSP# W:'
+"         let sl.='%#MyStatuslineLSPWarnings#%{luaeval("vim.lsp.util.buf_diagnostics_count(\"Warning\")")}'
+"     else
+"         let sl.='%#MyStatuslineLSPErrors#off'
+"     endif
+"     return sl
+" endfunction
 
 " let &l:statusline = '%#MyStatuslineLSP#LSP '.LspStatus() 
 
@@ -2322,13 +2329,31 @@ xnoremap <c-p> <Cmd>diffput<cr>
 xnoremap <c-o> <Cmd>diffget<cr>
 " nnoremap <expr> dp &diff ? 'dp' : ':Printf<cr>'
 
+" todo do it conditionnally
 function! StatusLSP() abort
-    " Setup for variables
-	" let g:_active_buffer = bufnr('%')
-	let stl = '%{v:lua.StatusLineLSP()}'
-	return stl
 endfunction
 
+
+" function! StatusLSP() abort
+" let status = luaeval('require("lsp-status").status()')
+" let status = luaeval('require("statusline").status()')
+" return trim(status)
+"     " Setup for variables
+"
+" 	" let g:_active_buffer = bufnr('%')
+" 	let stl = '%{v:lua.StatusLineLSP()}'
+" 	return stl
+" endfunction
+
+" from lsp-status
+au User LspMessageUpdate redrawstatus!
+" fromn neovim master
+au User LspProgressUpdate redrawstatus!
+" vim.api.nvim_command('au User LspMessageUpdate redrawstatus!')
+
+
+" generated by HM
+source ~/.config/nvim/init.generated.vim
 
 " set statusline=%!SetStatusline()
 

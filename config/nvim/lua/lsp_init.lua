@@ -1,18 +1,11 @@
 -- How to add a new server
 -- https://github.com/neovim/nvim-lsp/issues/41
 local nvim_lsp = require 'nvim_lsp'
-local configs = require'nvim_lsp/configs'
-local lsp_status = require'lsp-status'
-
--- completion_customize_lsp_label as used in completion-nvim
-lsp_status.config {
-	-- kind_labels = vim.g.completion_customize_lsp_label
-	indicator_errors = "×",
-	indicator_warnings = "!",
-	indicator_info = "i",
-	indicator_hint = "›",
-	status_symbol = "",
-}
+local configs = require 'nvim_lsp/configs'
+local lsp_status_enabled, lsp_status = pcall(require, 'lsp-status')
+local notifs = require 'notifications'
+local util = require'vim.lsp.util'
+local api = vim.api
 
 local plug_lsputil_enabled, lsputil = pcall(require, "lsputil")
 
@@ -26,41 +19,71 @@ if plug_lsputil_enabled then
 	vim.lsp.callbacks['textDocument/implementation'] = lsputil.locationsimplementation_handler
 	vim.lsp.callbacks['textDocument/documentSymbol'] = lsputil.symbolsdocument_handler
 	vim.lsp.callbacks['workspace/symbol'] = lsputil.symbolsworkspace_handler
-	vim.lsp.callbacks['window/showMessage'] = require 'notifications'.notify
-	
+
+	--@see https://microsoft.github.io/language-server-protocol/specifications/specification-current/#window/showMessage
+	-- copy/pasted
+	vim.lsp.callbacks['window/showMessage'] = function(_, _, result, client_id)
+		local message_type = result.type
+		local message = result.message
+		local client = vim.lsp.get_client_by_id(client_id)
+		local client_name = client and client.name or string.format("id=%d", client_id)
+		if not client then
+			notif.notify("LSP[", client_name, "] client has shut down after sending the message")
+		end
+		if message_type == protocol.MessageType.Error then
+			notif.notify("LSP[", client_name, "] ", message)
+		else
+			local message_type_name = protocol.MessageType[message_type]
+			api.nvim_out_write(string.format("LSP[%s][%s] %s\n", client_name, message_type_name, message))
+		end
+		return result
+	end
+
 end
 
 -- custom attach callback
 local attach_cb = require 'on_attach'
 
+if lsp_status_enabled then
+	-- completion_customize_lsp_label as used in completion-nvim
+	lsp_status.config {
+		-- kind_labels = vim.g.completion_customize_lsp_label
+		indicator_errors = "×",
+		indicator_warnings = "!",
+		indicator_info = "i",
+		indicator_hint = "›",
+		status_symbol = "",
+	}
 
--- this generates an error
--- to override all defaults
---   { log_level = lsp.protocol.MessageType.Warning.Error }
 
-nvim_lsp.util.default_config.capabilities = vim.tbl_extend(
-  "keep",
-  nvim_lsp.util.default_config.capabilities or {},
-  -- enable 'progress' support in lsp servers
-  lsp_status.capabilities
-)
+	-- this generates an error
+	-- to override all defaults
+	--   { log_level = lsp.protocol.MessageType.Warning.Error }
+
+	nvim_lsp.util.default_config.capabilities = vim.tbl_extend(
+	"keep",
+	nvim_lsp.util.default_config.capabilities or {},
+	-- enable 'progress' support in lsp servers
+	lsp_status.capabilities
+	)
+
+end
 
 -- vim.lsp.util.show_current_line_diagnostics()
 -- Check if it's already defined for when I reload this file.
 if not configs.lua_lsp then
-  configs.lua_lsp = {
-    default_config = {
-      cmd = {'lua-lsp'};
-      filetypes = {'lua'};
-	  root_dir = function(fname)
-        return nvim_lsp.util.find_git_ancestor(fname) or vim.loop.os_homedir()
-      end;
-      log_level = vim.lsp.protocol.MessageType.Warning;
-      settings = {};
-    };
-  }
+configs.lua_lsp = {
+	default_config = {
+	cmd = {'lua-lsp'};
+	filetypes = {'lua'};
+	root_dir = function(fname)
+		return nvim_lsp.util.find_git_ancestor(fname) or vim.loop.os_homedir()
+	end;
+	log_level = vim.lsp.protocol.MessageType.Warning;
+	settings = {};
+	};
+}
 end
-
 
 nvim_lsp.lua_lsp.setup{}
 
@@ -288,14 +311,14 @@ vim.g.spinner_frames = {'⣾', '⣽', '⣻', '⢿', '⡿', '⣟', '⣯', '⣷'}
 
 vim.g.should_show_diagnostics_in_statusline = true
 
-function StatusLineLSP()
-	return lsp_status.status()
+if plug_lsputil_enabled then
+
+	function StatusLineLSP()
+		return lsp_status.status()
+	end
 end
 
-
 -- utility functions: override/extend builtin 
-local util = require'vim.lsp.util'
-local api = vim.api
 
 local function preview_location_callback(_, method, result)
     if result == nil or vim.tbl_isempty(result) then

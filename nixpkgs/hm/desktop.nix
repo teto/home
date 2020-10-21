@@ -68,11 +68,9 @@ let
       };
   in [
     # gnome3.california # fails
-    # khal # => vdirsyncer !
     khard
     libsecret  # to consult
     newsboat #
-    # vdirsyncer
     customWeechat
     # leafnode dovecot22 dovecot_pigeonhole fetchmail procmail w3m
     # mairix mutt msmtp lbdb contacts spamassassin
@@ -93,7 +91,7 @@ let
     gnome3.networkmanagerapplet # should
     gnome3.defaultIconTheme # else nothing appears
     # i3-layout-manager  # to save/load layouts
-    mpv
+    # mpv # broken on unstable
     kitty
     libnotify
     # unstable.evince # succeed where zathura/mupdf fail

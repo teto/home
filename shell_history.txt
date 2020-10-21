@@ -9,3 +9,4 @@ sudo nixos-rebuild -I nixos-config=/home/teto/dotfiles/nixpkgs/configuration-len
 sudo nixos-rebuild --flake ~/home#mcoudron --no-write-lock-file switch
 pkgs/misc/vim-plugins/update.py --proc 1
 sudo nixos-rebuild --flake ~/home#mcoudron --no-write-lock-file --override-input nova /home/teto/nova/nova-nix --override-input nixpkgs /home/teto/nixpkgs switch  --show-trace
+nixos-rebuild --flake ~/home#mcoudron --no-write-lock-file --override-input nova /home/teto/nova/nova-nix --override-input nixpkgs /home/teto/nixpkgs --override-input hm /home/teto/hm build

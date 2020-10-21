@@ -42,6 +42,8 @@ in
   home.file."${config.xdg.configHome}/nvim/parser/c.so".source = "${pkgs.tree-sitter.builtGrammars.c}/parser";
   home.file."${config.xdg.configHome}/nvim/parser/bash.so".source = "${pkgs.tree-sitter.builtGrammars.bash}/parser";
   home.file."${config.xdg.configHome}/nvim/parser/lua.so".source = "${pkgs.tree-sitter.builtGrammars.lua}/parser";
+  home.file."${config.xdg.configHome}/nvim/parser/nix.so".source = "${pkgs.tree-sitter.builtGrammars.nix}/parser";
+
 
   programs.neovim = {
      enable = true;
@@ -86,6 +88,35 @@ in
         config = ''
           let g:fzf_command_prefix = 'Fzf' " prefix commands :Files become :FzfFiles, etc.
           let g:fzf_nvim_statusline = 0 " disable statusline overwriting
+
+          " This is the default extra key bindings
+          let g:fzf_action = {
+            \ 'ctrl-t': 'tab split',
+            \ 'ctrl-x': 'split',
+            \ 'ctrl-v': 'vsplit' }
+
+          " Default fzf layout
+          " - down / up / left / right
+          " - window (nvim only)
+          let g:fzf_layout = { 'down': '~40%' }
+
+          " For Commits and BCommits to customize the options used by 'git log':
+          let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
+
+          " mostly fzf mappings, use TAB to mark several files at the same time
+          " https://github.com/neovim/neovim/issues/4487
+          nnoremap <Leader>o <Cmd>FzfFiles<CR>
+          " nnoremap <Leader>g <Cmd>FzfGitFiles<CR>
+          nnoremap <Leader>F <Cmd>FzfFiletypes<CR>
+          nnoremap <Leader>h <Cmd>FzfHistory<CR>
+          nnoremap <Leader>c <Cmd>FzfCommits<CR>
+          nnoremap <Leader>C <Cmd>FzfColors<CR>
+          nnoremap <leader>b <Cmd>FzfBuffers<CR>
+          nnoremap <leader>m <Cmd>FzfMarks<CR>
+          nnoremap <leader>l <Cmd>FzfLines<CR>
+          nnoremap <leader>t <Cmd>FzfTags<CR>
+          nnoremap <leader>T <Cmd>FzfBTags<CR>
+          nnoremap <leader>g <Cmd>FzfRg<CR>
         '';
       }
       # defined in overrides: TODO this should be easier: like fzf-vim should be enough
@@ -94,16 +125,40 @@ in
 
       # neomake
       nvim-terminal-lua
+      auto-git-diff   # display git diff while rebasing, pretty dope
 
+      {
+        plugin =  nvimdev-nvim;
+        optional = true;
+      }
 
       # LanguageClient-neovim
-      tagbar
+      {
+        plugin =  tagbar;
+        optional = true;
+      }
+      # {
+      #   plugin = fzf-preview;
+      #   config = ''
+      #     let g:fzf_preview_layout = $'''
+      #     " Key to toggle fzf window size of normal size and full-screen
+      #     let g:fzf_full_preview_toggle_key = '<C-s>'
+      #   '';
+      # }
+
       # targets-vim
       # vCoolor-vim
       # vim-CtrlXA
-      vim-dasht
+      {
+        plugin = vim-dasht;
+        optional = true;
+      }
       vim-dirvish
-      # vim-fugitive
+      {
+        plugin = vim-fugitive;
+        config = ''
+          '';
+      }
       # vim-signature
 
       vim-signify
@@ -169,6 +224,19 @@ in
         plugin = vim-commentary;
         config = ''
           '';
+      }
+      {
+        plugin = nvim-lspconfig;
+        # config = ''
+        # '';
+      }
+
+      {
+        plugin = vista-vim;
+        optional = false;
+        config = ''
+
+        '';
       }
 
       # vimwiki

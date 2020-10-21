@@ -76,7 +76,7 @@ let
 
 in rec {
 
-  linux_mptcp_official = prev.linux_5_7.override {
+  linux_mptcp_official = prev.linux_5_8.override {
     structuredExtraConfig = with final.lib.kernel; {
       MPTCP     =yes;
       MPTCP_IPV6=yes;

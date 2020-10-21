@@ -6,11 +6,13 @@ local plug_completion_enabled, plug_completion = pcall(require, "completion")
 local plug_lsp_status_enabled, lsp_status = pcall(require, "lsp-status")
 
 local do_progress = true
-lsp_status.register_progress()
+
+if plug_lsp_status_enabled then
+	lsp_status.register_progress()
+end
 
 local setup_progress = function(client)
-  if do_progress then
-
+  if do_progress and plug_lsp_status_enabled then
     -- Register the client for messages
     lsp_status.register_client(client.name)
   end

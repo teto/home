@@ -27,7 +27,8 @@ local popup_opts = {
 -- 	-- popup_opts.prompt.minheight = popup_opts.prompt.height
 }
 
-function M.notify()
+-- kinda replace lsp's err_message that is private
+function M.notify(msg)
   -- https://vimhelp.org/popup.txt.html#popup_create-arguments
   local prompt_win, prompt_opts = popup.create("content", popup_opts)
   local prompt_bufnr = a.nvim_win_get_buf(prompt_win)
