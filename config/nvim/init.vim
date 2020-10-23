@@ -2330,20 +2330,20 @@ xnoremap <c-o> <Cmd>diffget<cr>
 " nnoremap <expr> dp &diff ? 'dp' : ':Printf<cr>'
 
 " todo do it conditionnally
-function! StatusLSP() abort
-endfunction
-
-
 " function! StatusLSP() abort
-" let status = luaeval('require("lsp-status").status()')
+" endfunction
+
+
+function! StatusLSP() abort
+  let status = luaeval('require("lsp-status").status()')
 " let status = luaeval('require("statusline").status()')
-" return trim(status)
+  return trim(status)
 "     " Setup for variables
 "
 " 	" let g:_active_buffer = bufnr('%')
 " 	let stl = '%{v:lua.StatusLineLSP()}'
 " 	return stl
-" endfunction
+endfunction
 
 " from lsp-status
 au User LspMessageUpdate redrawstatus!

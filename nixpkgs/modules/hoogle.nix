@@ -28,6 +28,7 @@
       servant-docs
       servant-server
       servant-swagger
+      servant-swagger-ui
       swagger2
       split
       streaming-commons

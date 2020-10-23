@@ -26,3 +26,11 @@ Password expires in 120 day(s)
 Password expiration requires administrator reset
 Allow users to change their own password
 Remember last 5 password(s) and prevent reuse
+
+
+# URL lists
+
+
+Region -> Url
+Paris => https://s3.eu-west-3.amazonaws.com
+Frankfurt => s3-eu-central-1.amazonaws.com

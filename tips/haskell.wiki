@@ -4,6 +4,7 @@ CABAL_HELPER_DEBUG=1
 # How to convert between Text/String/ByteString
 import Data.Text.Encoding
 https://stackoverflow.com/questions/3232074/what-is-the-best-way-to-convert-string-to-bytestring
+https://gist.github.com/dino-/28b09c465c756c44b2c91d777408e166
 
 ## string <-> Bytestring
 BLU.toString   :: BL.ByteString -> String

@@ -74,7 +74,15 @@ pod = set of containers
 
 
 kubectl get pods --all-namespaces
+kubectl get hpa --all-namespaces   
+horizontal ... autoscaler
+
+kubectl -n jinko-janssen-prod get hpa -o yaml > test.yaml 
+then i edited it then I applied the patch
 
 Cool cheatsheet !!
 https://kubernetes.io/fr/docs/reference/kubectl/cheatsheet/
 
+Nice utilities
+- kubebox
+- k9s
