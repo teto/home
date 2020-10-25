@@ -1,7 +1,11 @@
-local config = require 'nvim-treesitter.configs'
+local available, config = pcall(require, 'nvim-treesitter.configs')
+if not available then
+	return
+end
+
 config.config = config.setup {
     highlight = {
-        enable = true,                    -- false will disable the whole extension
+        enable = false,                    -- false will disable the whole extension
         disable = {
 			'rust',
 			'bash',

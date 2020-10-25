@@ -133,10 +133,11 @@ rec {
     historyFile = "${config.xdg.cacheHome}/bash_history";
     # historyFile = "$XDG_CACHE_HOME/bash_history";
     shellAliases = {
+      lg="lazygit";
       hm="home-manager";
       #mostly for testin
-      dfh="df --human-readable";
-      duh="du --human-readable";
+      # dfh="df --human-readable";
+      # duh="du --human-readable";
       latest="ls -lt |head";
       fren="trans -from fr -to en ";
       enfr="trans -from en -to fr ";

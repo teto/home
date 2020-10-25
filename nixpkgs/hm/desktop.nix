@@ -110,6 +110,7 @@ let
     noti # send notifications when a command finishes
     # papis # library manager
     pass
+    pavucontrol
     procs  # Rust replacement for 'ps'
     qtpass
     sublime3
@@ -129,6 +130,7 @@ let
     xorg.xbacklight  # todo should be set from module
     xclip
     xcwd
+    wireshark
     zathura
   ]
   ++ lib.optionals all [

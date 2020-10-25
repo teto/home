@@ -79,6 +79,9 @@ configs.lua_lsp = {
 	root_dir = function(fname)
 		return nvim_lsp.util.find_git_ancestor(fname) or vim.loop.os_homedir()
 	end;
+	-- todo wrap it with nlua: require('nlua.lsp.nvim').
+	on_attach=attach_cb.on_attach,
+
 	log_level = vim.lsp.protocol.MessageType.Warning;
 	settings = {};
 	};

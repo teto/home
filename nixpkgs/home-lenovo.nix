@@ -41,8 +41,7 @@ let
   # hum...
   # services.lorri.enable = true;
 
-  # you can switch from cli with xkb-switch
-  # or xkblayout-state
+  # you can switch from cli with xkb-switch or xkblayout-state
   home.keyboard = {
     # layout = "fr,us";
     # options = [ "grp:caps_toggle" "grp_led:scroll" ];

@@ -40,7 +40,6 @@
     # TODO swap esc/shift
     # consoleUseXkbConfig
     xkbOptions = "eurosign:e, swapcaps:ctrl";
-    # xkbOptions = "eurosign:e, caps:swapescape";
 
     libinput = {
       enable = true;

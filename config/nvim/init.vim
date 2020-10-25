@@ -104,10 +104,12 @@ set exrc
 
 " vim-plug plugin declarations {{{1
 call plug#begin(s:plugdir)
+" Plug 'nvim-lua/lsp-status.nvim'  " display lsp progress
+Plug 'diepm/vim-rest-console' " test rest APIs
 Plug '~/pdf-scribe.nvim'  " to annotate pdf files from nvim :PdfScribeInit
 Plug 'cespare/vim-toml'
 "Plug 'TaDaa/vimade' " to dim the background on lost focus
-Plug 'tjdevries/nlua.nvim'
+Plug 'tjdevries/nlua.nvim' " to add vim.api autocompletion
 " Plug 'tjdevries/cyclist.vim' " to cycle between listchars
 
 " Plug 'RishabhRD/popfix' " to manage underlying popup and previews
@@ -128,10 +130,8 @@ Plug 'MattesGroeger/vim-bookmarks' " ruby  / :BookmarkAnnotate
 " Plug 'AGhost-7/critiq.vim' " :h critiq
 " Plug 'thaerkh/vim-workspace'  " :ToggleWorkspace
 
-Plug 'diepm/vim-rest-console' " test rest APIs
 " Plug 'BK1603/nvim-autoread' " nvim-autoread
 " Plug '~/nvim-autoread' " nvim-autoread
-Plug 'nvim-lua/lsp-status.nvim'  " display lsp progress
 Plug 'skywind3000/vim-quickui'
 " Plug 'liuchengxu/vista.vim' " replaces tagbar to list workplace symbols
 Plug 'neovim/nvim-lspconfig' " while fuzzing details out
@@ -179,12 +179,12 @@ Plug 'vim-scripts/rfc-syntax', { 'for': 'rfc' } " optional syntax highlighting f
 " Plug 'moznion/github-commit-comment.vim' " last update from 2014
 " Plug 'dhruvasagar/vim-open-url' " gB/gW to open browser
 " Plug 'Carpetsmoker/xdg_open.vim' " overrides gx
-Plug 'mcchrish/info-window.nvim'  " to display buffer information in a popup
+Plug 'mcchrish/info-window.nvim'  " :InfoWindowToggle to display buffer information in a popup
 Plug 'tweekmonster/nvim-api-viewer', {'on': 'NvimAPI'} " see nvim api
 Plug 'tweekmonster/startuptime.vim', {'on': 'StartupTime'} " see startup time per script
-Plug 'vim-scripts/vis' " ?
+" Plug 'vim-scripts/vis' " ?
 Plug 'Konfekt/vim-CtrlXA' " use ctrl a/xto cycle between different words
-Plug 'AndrewRadev/splitjoin.vim' " gS/gJ to
+" Plug 'AndrewRadev/splitjoin.vim' " gS/gJ to
 " Plug '~/nvim-palette', { 'do': ':UpdateRemotePlugins' }
 " Plug 'jamessan/vim-gnupg' " does not support neovim yet ?
 
@@ -212,7 +212,6 @@ Plug 'AndrewRadev/splitjoin.vim' " gS/gJ to
 Plug 'editorconfig/editorconfig-vim' " not remote but involves python
 Plug 'neomake/neomake' " just for nix and neovim dev with nvimdev ?
 " provider
-" Plug 'msrose/vim-perpetuloc' " Cursor-based location list jumping for vim (Lnext)
 " Plug 'brooth/far.vim', { 'do': ':UpdateRemotePlugins' } " search and replace across files
 " needs ruby support, works in recent neovim
 Plug 'junegunn/vim-github-dashboard', { 'do': ':UpdateRemotePlugins' }
@@ -405,9 +404,10 @@ Plug 'nvim-lua/diagnostic-nvim'  " LSP improvements OpenDiagnostic/PrevDiagnosti
 " treesitter may slow down nvim
 Plug 'nvim-treesitter/completion-treesitter' " extension of completion-nvim,
 " depends on nvim-treesitter/nvim-treesitter
-Plug 'nvim-treesitter/highlight.lua' " to test treesitter
-Plug 'nvim-treesitter/nvim-treesitter' " to test treesitter
-Plug 'nvim-treesitter/playground'
+" Plug 'nvim-treesitter/highlight.lua' " to test treesitter
+" Plug 'nvim-treesitter/nvim-treesitter' " to test treesitter
+" Plug '~/nvim-treesitter' " to test treesitter
+" Plug 'nvim-treesitter/playground'
 " Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 
 " github-comment requires webapi (https://github.com/mattn/webapi-vim)
@@ -648,7 +648,7 @@ let g:vimwiki_list = [
 let g:vimwiki_url_maxsave=0
 let g:vimwiki_conceallevel = 0
 "}}}
-" {{{ Markdown composer
+" Markdown composer {{{ 
 " Run with :ComposerStart
 " let g:markdown_composer_open_browser        = "qutebrowser"
 " if set to false then run ComposerStart
@@ -2335,8 +2335,8 @@ xnoremap <c-o> <Cmd>diffget<cr>
 
 
 function! StatusLSP() abort
-  let status = luaeval('require("lsp-status").status()')
-" let status = luaeval('require("statusline").status()')
+  " let status = luaeval('require("lsp-status").status()')
+  let status = luaeval('require("statusline").status()')
   return trim(status)
 "     " Setup for variables
 "

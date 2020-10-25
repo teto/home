@@ -39,8 +39,7 @@ in
   # for blue tooth applet; must be installed systemwide
   services.blueman-applet.enable = true;
 
-  # you can switch from cli with xkb-switch
-  # or xkblayout-state
+  # you can switch from cli with xkb-switch or xkblayout-state
   # xev -event keyboard to retreive key symbols
   home.keyboard = {
     layout = "us,fr";
