@@ -24,7 +24,7 @@ in
     # enableBukubrow = true;
     # with pkgs.nur.repos.rycee.firefox-addons;
     extensions =  with pkgs;[
-       nur.repos.rycee.firefox-addons.bitwarden
+      pkgs.nur.repos.rycee.firefox-addons.bitwarden
 #        nur.repos.rycee.firefox-addons.browserpass
 #        nur.repos.rycee.firefox-addons.browserpass-otp
 #        nur.repos.rycee.firefox-addons.dark-night-mode
@@ -35,6 +35,7 @@ in
       default =  {
         isDefault = true;
         settings = {
+          # TODO use my own startpage
           "browser.startup.homepage" = "https://nixos.org";
           "browser.search.region" = "FR";
           "browser.search.isUS" = false;

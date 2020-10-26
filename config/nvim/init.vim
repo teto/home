@@ -109,16 +109,16 @@ Plug 'diepm/vim-rest-console' " test rest APIs
 Plug '~/pdf-scribe.nvim'  " to annotate pdf files from nvim :PdfScribeInit
 Plug 'cespare/vim-toml'
 "Plug 'TaDaa/vimade' " to dim the background on lost focus
-Plug 'tjdevries/nlua.nvim' " to add vim.api autocompletion
+" Plug 'tjdevries/nlua.nvim' " to add vim.api autocompletion
 " Plug 'tjdevries/cyclist.vim' " to cycle between listchars
 
 " Plug 'RishabhRD/popfix' " to manage underlying popup and previews
 " Plug 'RishabhRD/nvim-lsputils' " for lsp codeactions
-Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/popup.nvim'  " mimic vim's popupapi for neovim
 Plug 'nvim-lua/plenary.nvim'  " lua utilities for neovim
 " Plug 'nvim-lua/telescope.nvim'
-Plug '~/telescope.nvim'
-Plug 'Xuyuanp/scrollbar.nvim'  " for the test
+Plug '~/telescope.nvim'    " fzf-like in lua
+" Plug 'Xuyuanp/scrollbar.nvim'  " for the test :h Scrollbar.nvim
 
 " annotations plugins {{{
 Plug 'MattesGroeger/vim-bookmarks' " ruby  / :BookmarkAnnotate
@@ -235,11 +235,10 @@ Plug 'dbakker/vim-projectroot' " projectroot#guess()
 Plug 'sunaku/vim-dasht' " get documentation (zeavim is also a contender KabbAmine/zeavim.vim)
 " Plug 'mtth/scratch.vim' " , {'on': 'Scratch'} mapped to ?
 " Plug 'tjdevries/vim-inyoface.git' "InYoFace_toggle to display only comments
-" todo depend de rust
 " Plug 'mhinz/vim-halo' " to hight cursor line
 " Plug 'ludovicchabant/vim-gutentags' " automatic tag generation, very good
 Plug 'junegunn/goyo.vim', {'on': 'Goyo'} "distraction free writing focus
-Plug 'junegunn/limelight.vim' " highlights
+Plug 'junegunn/limelight.vim' " focus writing :Limelight, works with goyo
 Plug 'calvinchengx/vim-aftercolors' " load after/colors
 " Plug 'ntpeters/vim-better-whitespace' " StripWhitespace care it stole my
 " leader
@@ -845,9 +844,6 @@ nnoremap <Leader>/ :set hlsearch! hls?<CR> " toggle search highlighting
 " autocmd! User GoyoEnter Limelight
 " autocmd! User GoyoLeave Limelight!
 " }}}
-" inyoface (highlight only comments) {{{
-" nnoremap <leader>c <Plug>(InYoFace_Toggle)<CR>
-" }}}
 " vim-sayonara * {{{
 nnoremap <silent><leader>Q  <Cmd>Sayonara<cr>
 nnoremap <silent><leader>q  <Cmd>Sayonara!<cr>
@@ -1138,7 +1134,7 @@ let g:signify_sign_delete       = '▎'
 let g:signify_sign_change       = '▎'
 let g:signify_sign_changedelete = '▎'
 
-let g:signify_sign_add =  "▊"
+" let g:signify_sign_add =  "▊"
 " let g:signify_sign_delete            = g:signify_sign_add
 " " " let g:signify_sign_delete_first_line = '‾'
 " let g:signify_sign_change            = g:signify_sign_add
@@ -1164,9 +1160,6 @@ let g:signify_update_on_focusgained = 1
 " nmap <leader>sk <plug>(signify-prev-hunk)
 
 " }}}
-" vim-scripts/QuickFixCurrentNumber {{{
-" *:QuickhlManualEnable*		Enable.
-" }}}
 " Tips from vim-galore {{{
 
 " to alternate between header and source file
@@ -1190,23 +1183,6 @@ let g:SignaturePeriodicRefresh=1
 " riv restdown config {{{
 let g:riv_disable_folding=1
 let g:riv_disable_indent=0
-" }}}
-" easymotion {{{
-" let g:EasyMotion_do_shade = 1
-" let g:EasyMotion_do_mapping = 1
-" let g:EasyMotion_use_upper = 1 " display upper case letters but let u type lower case
-" let g:EasyMotion_inc_highlight = 0
-" let g:EasyMotion_disable_two_key_combo = 0
-
-" map , <Plug>(easymotion-prefix)
-" Easymotion settings {{{
-" nmap s <Plug>(easymotion-s2)
-let g:EasyMotion_do_mapping = 0
-let g:EasyMotion_smartcase = 1
-let g:EasyMotion_verbose = 0
-" }}}
-
-
 " }}}
 " quickhl (similar to interesting words) {{{
 " nmap <Space>m <Plug>(quickhl-manual-this)
@@ -1312,20 +1288,6 @@ nnoremap ,k <Cmd>call Dasht([expand('<cword>'), expand('<cWORD>')])<Return>
 " search ALL the docsets
 nnoremap <silent> <Leader><Leader>K :call Dasht([expand('<cword>'), expand('<cWORD>')], '!')<Return>
 "}}}}}}
-" neosnippet {{{
-" let g:neosnippet#enable_completed_snippet = 1
-" let g:neosnippet#enable_snipmate_compatibility = 1
-" let g:neosnippet#enable_complete_done = 1
-" imap <C-k>     <expr><Plug>(neosnippet_expand_or_jump)
-" smap <C-k>     <expr><Plug>(neosnippet_expand_or_jump)
-" xmap <C-k>     <Plug>(neosnippet_expand_target)
-
-" inoremap <expr><C-q> pumvisible() ? deoplete#mappings#close_popup() : "\<CR>"
-" inoremap <expr><C-j> pumvisible() ? "\<C-n>" : "\<Tab>"
-" inoremap <expr><C-k> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-" inoremap <expr><C-o> deoplete#mappings#manual_complete()
-" autocmd CompleteDone * call neosnippet#complete_done()
-"}}}
 " vim-translate-me / vtm {{{
 " Which language that the text will be translated
 let g:vtm_default_to_lang='en'
@@ -1369,10 +1331,6 @@ let g:palette_histadd=1
 " nmap <Leader>p :Palette<CR>
 nmap <Leader>x <Plug>(PaletteRun)
 "}}}
-" highlightedyank {{{
-let g:highlightedyank_highlight_duration = 1000
-" let g:highlightedyank_max_linesr=
-" }}}
 " tagbar {{{
 let g:tagbar_left = 0
 let g:tagbar_indent = 1
@@ -1631,7 +1589,14 @@ let g:vsnip_snippet_dir = stdpath('config').'/vsnip'
 "}}}
 " to prettify json
 " g:python3_host_prog -m json.tool
-
+" scrollbar.nvim {{{
+augroup ScrollbarInit
+  autocmd!
+  autocmd CursorMoved,VimResized,QuitPre * silent! lua require('scrollbar').show()
+  autocmd WinEnter,FocusGained           * silent! lua require('scrollbar').show()
+  autocmd WinLeave,FocusLost             * silent! lua require('scrollbar').clear()
+augroup end
+"}}}
 " FZF config {{{
 let g:fzf_command_prefix = 'Fzf' " prefix commands :Files become :FzfFiles, etc.
 let g:fzf_nvim_statusline = 0 " disable statusline overwriting

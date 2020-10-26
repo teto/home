@@ -14,6 +14,7 @@ in
     ./xserver.nix
     ./wireshark.nix
     ./wifi.nix
+    ../profiles/neovim.nix
 
     # only if available
     # ./modules/jupyter.nix
@@ -114,46 +115,17 @@ in
 
   services.greenclip.enable = true;
 
-  nix.registry = {
-    # nixpkgs.flake = ;
-  };
+# nix registry add poetry github:nix-community/poetry2nix
+# nix registry add hm github:rycee/home-manager
 
   nix = {
 
     # This priority propagates to build processes. 0 is the default Unix process I/O priority, 7 is the lowest
     # daemonIONiceLevel = 3;
-    # distributedBuilds = true;
-    # TODO let it be set via channels ?
-    # now with nix build -f channel:nixos-unstable
-    # TODO use options.nix.nixPath.default ++
     nixPath = [
       "nixpkgs=${builtins.toString userNixpkgs}"
     ]
     ;
-
-    # sshServe.enable = false;
-    useSandbox = true;
-
-    #  to keep build-time dependencies around => rebuild while being offline
-    extraOptions = ''
-      gc-keep-outputs = true
-      # http-connections = 25 is the default
-      http2 = true
-      keep-derivations = true
-      keep-failed = true
-      show-trace = false
-      builders-use-substitutes = true
-    '';
-
-    #       "https://teto.cachix.org"
-    binaryCaches = [
-      "https://cache.nixos.org/"
-      "https://jupyterwith.cachix.org"
-    ];
-    binaryCachePublicKeys = [
-    ];
-
-    trustedUsers = [ "root" "teto" ];
 
     # either use --option extra-binary-caches http://hydra.nixos.org/
     # handy to hack/fix around

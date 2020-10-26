@@ -17,7 +17,7 @@ let
       # ./modules/vdirsyncer.nix
       # ./hm/sway.nix
       ./hm/neomutt.nix
-      ./hm/profiles/nova-dev.nix
+      # ./hm/profiles/nova-dev.nix
 
       # just for testing
       ./hm/autoUpgrade.nix

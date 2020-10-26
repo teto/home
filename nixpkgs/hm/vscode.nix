@@ -4,11 +4,14 @@
   programs.vscode.enable = true;
   programs.vscode = {
     extensions = with pkgs.vscode-extensions;[
-      arrterian.nix-env-selector
+      # arrterian.nix-env-selector # not packaged ?
+      # https://marketplace.visualstudio.com/items?itemName=asvetliakov.vscode-neovim
+      asvetliakov.vscode-neovim
       bbenoist.Nix
       ms-python.python
       ms-kubernetes-tools.vscode-kubernetes-tools
       ms-vsliveshare.vsliveshare
+      # vscode-neovim.vsliveshare
       # ext install DigitalAssetHoldingsLLC.ghcide
       # ext install BazelBuild.vscode-bazel
     ];
@@ -20,6 +23,6 @@
       "update.mode" =  "none";
       "update.channel" = "none";
       "[nix]"."editor.tabSize" = 2;
-    }
+    };
   };
 }

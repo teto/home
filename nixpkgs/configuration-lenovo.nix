@@ -1,8 +1,6 @@
 { config, lib, pkgs,  ... }:
 let
   secrets = import ./secrets.nix;
-  # # https://nixos.org/channels/nixos-unstable
-  unstable = import <nixos-unstable> { inherit config; };
 in
 {
   imports = [
@@ -10,7 +8,7 @@ in
 
     # for nova dev
     ./modules/docker-daemon.nix
-    ./profiles/nova-dev.nix
+    # ./profiles/nova-dev.nix
 
     # ./modules/distributedBuilds.nix
     ./modules/config-all.nix
@@ -21,7 +19,8 @@ in
     # ./modules/openssh.nix
     ./modules/hoogle.nix
     # ./modules/tor.nix
-    ./modules/nova.nix
+    # ./modules/nova.nix
+    ./profiles/nixUnstable.nix
 
     # ./modules/sway.nix
 
@@ -50,42 +49,27 @@ in
     ncdu  # to see disk usage
     # bridge-utils # pour  brctl
     wirelesstools # to get iwconfig
-    gitAndTools.diff-so-fancy
     # aircrack-ng
   ];
 
   # nesting clones can be useful to prevent GC of some packages
   # https://nixos.org/nix-dev/2017-June/023967.html
 
-
   # system.requiredKernelConfig 
 
-#  fileSystems."/mnt/ext" =
- #   { device = "/dev/sda4";
-  #  options = [ "user" "exec" ];
-   # };
 
   # it apparently still is quite an important thing to have
   boot.devSize = "5g";
 
-  # to make it work with 5.3
-  boot.zfs.enableUnstable = true;
-
-  # TODO look at
-  # boot.specialFileSystems.
-
-
   # necessary for qemu  to prevent
-# client> qemu-img: Error while writing to COW image: No space left on device
-#   * client: command ‘['qemu-img', 'rebase', '-f', 'qcow2', '-b', '', '/run/user/1000/nixops-tmpV3FOyf/disk-client.qcow2']’ failed on machine ‘client’ (exit code 1)
   # NOTE: this doesn't change the size of /run/user see https://nixos.org/nix-dev/2015-July/017657.html
   boot.runSize = "10g";
 
   swapDevices = [{
     # label = "dartagnan";
     device = "/fucking_swap";
-    # size = 8192; # in MB
-    size = 4096; # in MB
+    size = 8192; # in MB
+    # size = 4096; # in MB
     # size = 16000; # in MB
   } ];
 
@@ -117,7 +101,8 @@ in
 
   # DOES NOT WORK !
   # boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.kernelPackages = pkgs.linuxPackages_testing;
+  boot.kernelPackages = pkgs.linuxPackages;
+  # boot.kernelPackages = pkgs.linuxPackages_testing;
 
   boot.kernelModules =  [
     "af_key" # for ipsec/vpn support
@@ -198,67 +183,31 @@ in
     # dbus.packages = [ ];
   };
 
-      # overlays =
-      # let path = ../overlays; in with builtins;
-      # map (n: import (path + ("/" + n)))
-      #     (filter (n: match ".*\\.nix" n != null ||
-      #                 pathExists (path + ("/" + n + "/default.nix")))
-      #             (attrNames (readDir path)))
-      # ++ [ (import ./envs.nix) ];
-
-  # nixpkgs.overlays = [
-  #   # (import <nixpkgs-overlays/kernels.nix>)
-  #   # (import ./overlays/haskell.nix) 
-  # ];
-
-  # for sublime text
-  # nixpkgs.config.allowUnfree = true;
-
-  # <nixos-overlay>
-  # just for testing
-  # services.qemuGuest.enable = true;
-
   security.sudo.extraConfig = ''
-    Defaults        timestamp_timeout=30
+    Defaults        timestamp_timeout=60
   '';
 
-
-  networking.enableIPv6 = false;
+  # networking.enableIPv6 = false;
 
   services.xserver.videoDrivers = [ "nvidia" ];
   # hardware.nvidia.package
 
 
-  nix = {
-    sshServe = {
-      enable = true;
-      protocol = "ssh";
-      # keys = [ secrets.gitolitePublicKey ];
-    };
-
-
-    # added to nix.conf
-    extraOptions = ''
-      experimental-features = nix-command flakes
-    '';
-
-    distributedBuilds = false;
-    package = pkgs.nixFlakes;
-    # package = pkgs.nixUnstable;
-  };
+  # nix = {
+  #   sshServe = {
+  #     enable = true;
+  #     protocol = "ssh";
+  #     # keys = [ secrets.gitolitePublicKey ];
+  #   };
+  #   distributedBuilds = false;
+  #   package = pkgs.nixFlakes;
+  # };
 
   # kind of a test
   # security.pam.services.lightdm.enableGnomeKeyring = true;
 
   # will fial until openflowswitch is fixed
   programs.mininet.enable = false;
-
-  # networking.mptcp = {
-  #   enable = true;
-  #   debug = true;
-  #   pathManager = "netlink";
-  #   package = pkgs.linux_mptcp_trunk_raw;
-  # };
 
   services.greenclip.enable = true;
 
@@ -267,32 +216,9 @@ in
   # programs.bcc.enable = true;
 
   environment.systemPackages = with pkgs;
-    # cups-pk-helper # to add printer through gnome control center
     [
     ]
   ;
-
-  # services.squid.enable = true;
-  # proxyPort
-
-  # see https://github.com/NixOS/nixpkgs/pull/45345
-  # switch to it via
-  # sudo /run/current-system/fine-tune/child-1/bin/switch-to-configuration test
-  # nesting.clone = [
-  #     {
-  #       imports = [
-  #         ./modules/proxy.nix
-  #       ];
-  #       boot.loader.grub.configurationName = "with proxy";
-  #       # networking.proxy.default = "http://proxy.work.com:80";
-  #       # networking.proxy.noProxy = "127.0.0.1,localhost,work.com";
-  #       # nix.binaryCaches = [
-  #       #         "http://nixcache.work.com"
-  #       #         "https://cache.nixos.org"
-  #       # ];
-  #     }
-  # ];
-
 
   # services.xserver.displayManager.gdm.nvidiaWayland = true;
 
@@ -313,7 +239,6 @@ in
   security.rngd.enable = true;
   # security.rngd.debug = true;
 
-  # marked as internal
   # $out here is the profile generation
   system.extraSystemBuilderCmds = ''
     ln -s ${config.boot.kernelPackages.kernel.dev}/vmlinux $out/vmlinux
@@ -324,6 +249,4 @@ in
   #   enable = true;
   #   user = "teto";
   # };
-
-  # environment.ld-linux = true;
 }

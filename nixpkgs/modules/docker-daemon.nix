@@ -13,7 +13,7 @@
 
   services.dockerRegistry = {
 
-    enable = true;
+    enable = false;
     # enableGarbageCollect = true;
     # garbageCollectDates
     port = 6000;  # 5000 is the default but already used by docker

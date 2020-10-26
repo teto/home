@@ -71,8 +71,6 @@ home $ make config
 ```
 nix registry add mine ~/nixpkgs
 nix registry add nixpkgs github:teto/nixpkgs
-nix registry add poetry github:nix-community/poetry2nix
-nix registry add hm github:rycee/home-manager
 sudo nixos-rebuild switch --flake '.#'
 # when not setting #my-machine, defaults to hostname
 sudo nixos-rebuild switch --flake /path/to/my-flake#my-machine

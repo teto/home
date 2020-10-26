@@ -17,6 +17,9 @@
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
+  # to remove "TSC_DEADLINE disabled due to Errata;
+  # please update microcode to version: 0x22"
+  hardware.cpu.intel.updateMicrocode = true;
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/443ce6b0-e43e-43e6-9d10-c0c6293ccf66";
       fsType = "ext4";
