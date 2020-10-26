@@ -3,15 +3,13 @@
   nix = {
     package = pkgs.nixUnstable;
 
-# nix.sandboxPaths
+    # nix.sandboxPaths
     registry = {
-      # nixpkgs.flake = ;
-      nur = {
-        # from = "nur";
-        to = { type = "github"; owner = "nix-community"; repo="NUR"; };
-        # flake = "nix-community/NUR";
-      };
-# "github:nixos/nixpkgs/nixos-unstable";
+      nur.to = { type = "github"; owner = "nix-community"; repo="NUR"; };
+      hm.to = { type = "github"; owner = "nix-community"; repo="home-manager"; };
+      poetry.to = { type = "github"; owner = "nix-community"; repo="poetry2nix"; };
+
+      # "github:nixos/nixpkgs/nixos-unstable";
       # home-manager
       # hm = {
       #   flake = "github:rycee/home-manager";

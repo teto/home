@@ -13,6 +13,8 @@
     # nova.url = "/home/teto/nova/nova-nix";
     nova.url = "git+https://flake:xxx1U1DQ4PhC_37AAb4y@git.novadiscovery.net/world/nova-nix";
 
+    poetry.url = "nix-community/poetry2nix";
+
     # TODO one can point at a subfolder ou bien c la branche ? /flakes
     # mptcpanalyzer.url = "github:teto/mptcpanalyzer";
 
@@ -70,7 +72,7 @@
             modules = [
               (import ./nixpkgs/hardware-dell-camera.nix)
               (import ./nixpkgs/configuration-xps.nix)
-              (import ./nixpkgs/profiles/nixUnstable.nix)
+              (import ./nixpkgs/profiles/nix-daemon.nix)
               ({ config, lib, pkgs,  ... }:
                 {
                   boot.loader.systemd-boot.enable = true;

@@ -29,9 +29,13 @@ pure_msg = "pure shell"
 [kubernetes]
 disabled = true
 
+[nodejs]
+disabled = true
+
 [java]
 disabled = true
 
+# TODO adjust
 [jobs]
 symbol = "+ "
 threshold = 4
@@ -63,7 +67,8 @@ disabled = false
 disabled = false
 
 [python]
-symbol = "👾 "
+disabled = false
+# symbol = "👾 "
 pyenv_version_name = false
 
 [ruby]

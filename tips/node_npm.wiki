@@ -2,6 +2,10 @@
 https://nixos.wiki/wiki/Node.js
 npm set prefix ~/.npm-global
 
+checkPermissions Missing write access to /home/teto/nova/jinko-shiny/node_modules/npm/node_modules/abbrev
+
+https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally
+ npm config set prefix '~/.npm-global'
 
 https://github.com/purescript/npm-installer/issues/16
 npm install --global --ignore-scripts purescript 

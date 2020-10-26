@@ -20,7 +20,7 @@ in
     ./modules/hoogle.nix
     # ./modules/tor.nix
     # ./modules/nova.nix
-    ./profiles/nixUnstable.nix
+    ./profiles/nix-daemon.nix
 
     # ./modules/sway.nix
 
