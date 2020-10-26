@@ -71,7 +71,7 @@ in
       nodePackages.bash-language-server
       luaPackages.lua-lsp
       yaml-language-server
-      dockerfile-language-server-nodejs
+      nodePackages.dockerfile-language-server-nodejs
     ];
 
     plugins = with pkgs.vimPlugins; [

@@ -11,9 +11,8 @@
 
       # "github:nixos/nixpkgs/nixos-unstable";
       # home-manager
-      # hm = {
-      #   flake = "github:rycee/home-manager";
-      # };
+
+      # todo reference this repo to avoid downloading everything twice
     };
 
       # sshServe = {

@@ -13,7 +13,7 @@
     # nova.url = "/home/teto/nova/nova-nix";
     nova.url = "git+https://flake:xxx1U1DQ4PhC_37AAb4y@git.novadiscovery.net/world/nova-nix";
 
-    poetry.url = "nix-community/poetry2nix";
+    poetry.url = "github:nix-community/poetry2nix";
 
     # TODO one can point at a subfolder ou bien c la branche ? /flakes
     # mptcpanalyzer.url = "github:teto/mptcpanalyzer";
@@ -26,7 +26,7 @@
 
   outputs = inputs@{
     self, hm, nixpkgs, nur, unstable
-    , nova
+    , nova , poetry
     }:
     let
       inherit (builtins) listToAttrs baseNameOf attrNames readDir;
