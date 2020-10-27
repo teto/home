@@ -9,10 +9,6 @@ let
       editorconfig-vim
       # replaced by coc
       far-vim
-
-      # fails with   python module. Run `pip install neovim` to fix. For more info, :he nvim-python"
-      # floobits-neovim
-
       fzf-vim
       # defined in overrides: TODO this should be easier: like fzf-vim should be enough
       fzfWrapper
@@ -20,7 +16,6 @@ let
 
       # neomake
       nvim-terminal-lua
-
 
       # LanguageClient-neovim
       tagbar
@@ -97,8 +92,6 @@ rec {
 
 
       extraHaskellPackages = hs: with hs; [
-        # gutenhasktags
-        # haskdogs # seems to build on hasktags/ recursively import things
         # hasktags
       ]
       # ++ requiredHaskellPackages drvs
@@ -112,8 +105,6 @@ rec {
         extraPython3Packages = compatFun (requiredPythonModules);
       }
       ;
-
-      # buildInputs = []
 
       finalConfig = final.neovimConfig (
         final.lib.mkMerge [
@@ -134,7 +125,7 @@ rec {
     };
 
   neovim-unwrapped-master = prev.neovim-unwrapped.overrideAttrs (oldAttrs: {
-      name = "neovim-master";
+      name = "unwrapped-neovim-master";
       version = "official-master";
       cmakeBuildType="debug";
       src = builtins.fetchGit {

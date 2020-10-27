@@ -9,7 +9,19 @@ let
     '';
 
 
+
   rcBlocks = {
+    wildBlock = ''
+    set wildignore+=.hg,.git,.svn                    " Version control
+    " set wildignore+=*.aux,*.out,*.toc                " LaTeX intermediate files
+    set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg   " binary images
+    set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest " compiled object files
+    set wildignore+=*.sw?                            " Vim swap files
+    set wildignore+=*.luac                           " Lua byte code
+    set wildignore+=*.pyc                            " Python byte code
+    set wildignore+=*.orig                           " Merge resolution files
+    '';
+
     foldBlock = ''
       " block,hor,mark,percent,quickfix,search,tag,undo
       " set foldopen+=all " specifies commands for which folds should open
@@ -43,9 +55,8 @@ in
   home.file."${config.xdg.configHome}/nvim/parser/bash.so".source = "${pkgs.tree-sitter.builtGrammars.bash}/parser";
   home.file."${config.xdg.configHome}/nvim/parser/lua.so".source = "${pkgs.tree-sitter.builtGrammars.lua}/parser";
 
-  # 
-  home.file."${config.xdg.configHome}/nvim/parser/haskell.so".source = "${pkgs.tree-sitter.builtGrammars.haskell}/parser";
   # only on my fork
+  # home.file."${config.xdg.configHome}/nvim/parser/haskell.so".source = "${pkgs.tree-sitter.builtGrammars.haskell}/parser";
   # home.file."${config.xdg.configHome}/nvim/parser/nix.so".source = "${pkgs.tree-sitter.builtGrammars.nix}/parser";
 
 
@@ -84,6 +95,12 @@ in
         plugin = editorconfig-vim;
         config = ''
         '';
+      }
+
+      {
+        plugin = editorconfig-vim;
+        # config = ''
+        # '';
       }
       far-vim
 

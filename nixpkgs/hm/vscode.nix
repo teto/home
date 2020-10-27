@@ -6,7 +6,7 @@
     extensions = with pkgs.vscode-extensions;[
       # arrterian.nix-env-selector # not packaged ?
       # https://marketplace.visualstudio.com/items?itemName=asvetliakov.vscode-neovim
-      asvetliakov.vscode-neovim
+      # asvetliakov.vscode-neovim # only in my fork
       bbenoist.Nix
       ms-python.python
       ms-kubernetes-tools.vscode-kubernetes-tools

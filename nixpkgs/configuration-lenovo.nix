@@ -97,11 +97,16 @@ in
   };
 
   # hide messages !
-  # boot.kernelParams = [ "earlycon=ttyS0" "console=ttyS0" ];
+  boot.kernelParams = [
+    # "earlycon=ttyS0"
+    # "console=ttyS0" 
+    # NECESSARY !! https://discourse.nixos.org/t/browsers-unbearably-slow-after-update/9414/30
+     "intel_pstate=active"
+  ];
 
   # DOES NOT WORK !
-  # boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.kernelPackages = pkgs.linuxPackages;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+  # boot.kernelPackages = pkgs.linuxPackages;
   # boot.kernelPackages = pkgs.linuxPackages_testing;
 
   boot.kernelModules =  [
@@ -114,7 +119,7 @@ in
   boot.kernel.sysctl = {
     # to not provoke the kernel into crashing
     # "net.ipv4.tcp_timestamps" = 0;
-    "net.ipv4.ipv4.ip_forward" = 1;
+    # "net.ipv4.ipv4.ip_forward" = 1;
     # "net.ipv4.tcp_keepalive_time" = 60;
     # "net.core.rmem_max" = 4194304;
     # "net.core.wmem_max" = 1048576;

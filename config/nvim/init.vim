@@ -188,24 +188,6 @@ Plug 'Konfekt/vim-CtrlXA' " use ctrl a/xto cycle between different words
 " Plug '~/nvim-palette', { 'do': ':UpdateRemotePlugins' }
 " Plug 'jamessan/vim-gnupg' " does not support neovim yet ?
 
-" autocompletion 
-" Plug 'ncm2/ncm2'  " completion manager
-
-" deoplete {{{
-" new deoplete relies on yarp :
-" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-" Plug 'Shougo/deoplete-lsp'
-
-" crashes without netrc
-" Plug 'deoplete-plugins/deoplete-make' " empty !
-" Plug 'deoplete-plugins/deoplete-zsh'
-" Plug 'deoplete-plugins/deoplete-jedi'
-" Plug 'SevereOverfl0w/deoplete-github' " completion on commit issues (just
-
-" Plug 'fszymanski/deoplete-abook' " replaced with the khard one
-" Plug 'paretje/deoplete-notmuch', {'for': 'mail', 'do': ':UpdateRemotePlugins'}
-" Plug 'nicoe/deoplete-khard', {'for': 'mail'}
-"}}}
 
 " Plug 'LnL7/vim-nix', {'for': 'nix'}
 " Plug 'romainl/vim-qf' " can create pb with neomake
@@ -399,9 +381,9 @@ Plug 'teto/Modeliner' " <leader>ml to setup buffer modeline
 
 Plug 'nvim-lua/diagnostic-nvim'  " LSP improvements OpenDiagnostic/PrevDiagnostic
 " https://github.com/haorenW1025/completion-nvim/wiki/chain-complete-support
-" Plug 'nvim-lua/completion-nvim' " lsp based completion framework
+Plug 'nvim-lua/completion-nvim' " lsp based completion framework
 " treesitter may slow down nvim
-Plug 'nvim-treesitter/completion-treesitter' " extension of completion-nvim,
+" Plug 'nvim-treesitter/completion-treesitter' " extension of completion-nvim,
 " depends on nvim-treesitter/nvim-treesitter
 " Plug 'nvim-treesitter/highlight.lua' " to test treesitter
 " Plug 'nvim-treesitter/nvim-treesitter' " to test treesitter
@@ -533,7 +515,7 @@ filetype plugin on
 syntax on
 let g:vimsyn_embed = 'lP'  " support embedded lua, python and ruby
 " don't syntax-highlight long lines
-set synmaxcol=200
+set synmaxcol=300
 
 
 " vimspector {{{
@@ -554,16 +536,13 @@ set wildchar=<Tab>
 set wildmode=full " zsh way ?!
 
 set wildignore+=.hg,.git,.svn                    " Version control
-set wildignore+=*.aux,*.out,*.toc                " LaTeX intermediate files
+" set wildignore+=*.aux,*.out,*.toc                " LaTeX intermediate files
 set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg   " binary images
 set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest " compiled object files
-set wildignore+=*.spl                            " compiled spelling word lists
 set wildignore+=*.sw?                            " Vim swap files
-set wildignore+=*.DS_Store                       " OSX bullshit
 
 set wildignore+=*.luac                           " Lua byte code
 
-set wildignore+=migrations                       " Django migrations
 set wildignore+=*.pyc                            " Python byte code
 
 set wildignore+=*.orig                           " Merge resolution files
