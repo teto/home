@@ -1,4 +1,8 @@
-with import <nixpkgs> {};
+with import <nixpkgs> {
+  # overlays = [ 
+  #   import 
+  # ];
+};
 
 let
     # neovim-dev-clang = (self.neovim-dev.override {

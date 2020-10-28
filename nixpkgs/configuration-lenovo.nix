@@ -21,6 +21,7 @@ in
     # ./modules/tor.nix
     # ./modules/nova.nix
     ./profiles/nix-daemon.nix
+    ./profiles/steam.nix
 
     # ./modules/sway.nix
 

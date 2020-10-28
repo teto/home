@@ -276,20 +276,16 @@ Plug 'honza/vim-snippets'
 
 """ contact autocompletion
 
-" to configure vim for haskell, refer to
-" http://yannesposito.com/Scratch/en/blog/Vim-as-IDE/
-"{{{
-Plug 'neovimhaskell/haskell-vim', {'for':'haskell'} " haskell install
+" haskell plugins{{{
+" Plug 'neovimhaskell/haskell-vim', {'for': 'haskell'} " haskell install
 " Plug 'enomsg/vim-haskellConcealPlus', {'for':'haskell'}     " unicode for haskell operators
 " Plug 'bitc/vim-hdevtools'
 "
 " Plug 'ncm2/float-preview.nvim'
 "}}}
 
-"Plug 'mattn/vim-rtags' a l'air léger
-" Plug 'shaneharper/vim-rtags' " <leader>r ou bien :RtagsFind  mais ne marche pas
 " Plug 'tpope/vim-unimpaired' " [<space> [e [n ]n pour gerer les conflits etc...
-Plug 'mbbill/undotree' " replaces gundo
+" Plug 'mbbill/undotree' " replaces gundo
 
 " Using a non-master branch
 
@@ -359,9 +355,9 @@ Plug 'tpope/vim-rhubarb' " github support in fugitive, use |i_CTRL-X_CTRL-O|
 " euclio
 " Plug '~/vim-markdown-composer'
 " Plug 'JamshedVesuna/vim-markdown-preview'
-Plug 'Rykka/riv.vim', {'for': 'rst'}
+" Plug 'Rykka/riv.vim', {'for': 'rst'}
 Plug 'Rykka/InstantRst', {'for': 'rst'} " rst live preview with :InstantRst,
-Plug 'dhruvasagar/vim-table-mode', {'for': 'txt'}
+" Plug 'dhruvasagar/vim-table-mode', {'for': 'txt'}
 
 Plug 'kshenoy/vim-signature' " display marks in gutter, love it
 "Plug 'tomtom/quickfixsigns_vim'
@@ -1555,9 +1551,6 @@ set completeopt+=noinsert,noselect
 " set foldexpr=completion_treesitter#foldexpr()
 " set foldmethod=expr
 "}}}
-" lsp status {{{
-
-"}}}
 " pdf-scribe {{{
 " PdfScribeInit
 let g:pdfscribe_pdf_dir  = expand('$HOME').'/Nextcloud/papis_db'
@@ -1791,7 +1784,6 @@ set undofile
 if exists('g:vscode')
     " VSCode extension
 endif
-
 
 
 nnoremap <F6> <Cmd>AutoSaveToggle<CR>
@@ -2277,6 +2269,7 @@ xnoremap <c-o> <Cmd>diffget<cr>
 " function! StatusLSP() abort
 " endfunction
 
+command! JsonPretty %!jq '.'
 
 function! StatusLSP() abort
   " let status = luaeval('require("lsp-status").status()')
