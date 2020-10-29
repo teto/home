@@ -38,6 +38,7 @@ let
     # gitAndTools.git-annex # fails on unstable
     gitAndTools.git-extras
     gitAndTools.git-crypt
+    gitAndTools.lab
     patchutils  # for interdiff
     lazygit  # kinda like tig
     ncurses.dev # for infocmp

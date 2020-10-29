@@ -102,8 +102,13 @@ in
         # config = ''
         # '';
       }
-      far-vim
-
+      {
+        plugin = far-vim;
+        config = ''
+          let g:far#source='rg'
+          let g:far#collapse_result=1
+        '';
+      }
       {
         plugin = fzf-vim;
         config = ''

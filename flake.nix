@@ -136,6 +136,8 @@
             ]
             ++ [
               nova.nixosModules.profiles.main
+              nova.nixosModules.profiles.main
+              nova.nixosModules.profiles.dev
             ];
           };
         };
@@ -150,7 +152,6 @@
         wireshark = import ./nixpkgs/overlays/wireshark.nix;
         nur = nur.overlay;
         # toto = (final: prev: {});
-
       };
       # overlays = let
       #   overlays = map (name: import (./config/nixpkgs/overlays + "/${name}"))

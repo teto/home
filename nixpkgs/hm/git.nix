@@ -75,6 +75,7 @@ in
 
       # TODO use a fully qualified nvim ?
       diff = {
+        # there is now a specific nvim entry ?
         tool = "nvim -d";
         word-diff="color";
         renamelimit = 14000; # useful for kernel

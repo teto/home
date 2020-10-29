@@ -26,6 +26,7 @@ kubectl edit deployment result-store-deployment
 
 kubectl -n [ton namespace] get deployments
 kubectl -n jinko-dev-teto edit deployment jinko-dev-teto-result-store
+kubectl -n jinko-dev-teto edit pods jinko-dev-teto-result-store
 
 er Command (équivalent de Dodkcer entrypoint ou Arg (equivalent de Docker CMD
 
@@ -74,8 +75,10 @@ pod = set of containers
 
 
 kubectl get pods --all-namespaces
-kubectl get hpa --all-namespaces   
+kubectl -n jinko-janssen-prod get hpa
 horizontal ... autoscaler
+
+kubectl -n jinko-janssen-prod get pod jinko-janssen-prod-result-store-749f78579d-qmgzw -o json 
 
 kubectl -n jinko-janssen-prod get hpa -o yaml > test.yaml 
 then i edited it then I applied the patch

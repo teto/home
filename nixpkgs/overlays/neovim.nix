@@ -56,16 +56,10 @@ let
 
 in
 rec {
-  /* for compatibility with passing extraPythonPackages as a list; added 2018-07-11 */
-  compatFun = funOrList: (if builtins.isList funOrList then (_: funOrList) else funOrList);
-
   # this generates a config appropriate to work with the passed derivations
   # for instance to develop on a software from a nix-shell
   genNeovim = drvs: userConfig:
     let
-      # isHaskellPkg
-      # lib.debug.traceVal
-      requiredPythonModules =  (final.python3Packages.requiredPythonModules drvs );
 
       # Get list of required Python modules given a list of derivations.
       # TODO look into compiler.shellFor { packages= } to see how to get deps
@@ -97,15 +91,6 @@ rec {
       # ++ requiredHaskellPackages drvs
       ;
 
-
-      # Here we generate a neovim config that allows to work with the passed 'drvs'
-      # for instance adding the python propagatedBuildInputs if needed
-      # or haskell ones if it's a haskell project etc.
-      generatedConfig = {
-        extraPython3Packages = compatFun (requiredPythonModules);
-      }
-      ;
-
       finalConfig = final.neovimConfig (
         final.lib.mkMerge [
           # project specific user config
@@ -113,9 +98,6 @@ rec {
           # my miniimal global config, when I am out of a nix-shell
           # the plugins/environments I always want available
           neovimDefaultConfig
-          # a config generated from the input 'drvs' with an appropriate development
-          # environment.
-          generatedConfig
         ]
       );
     in
@@ -145,6 +127,8 @@ rec {
       # };
 
   });
+
+  # makeNeovimConfig = {}:
 
   # neovimHaskellConfig = {
   #   withHaskell = true;
@@ -227,9 +211,7 @@ rec {
       # pyls-mypy # can't find imports :s
       # python-language-server
       pycodestyle
-    ]
-    ;
-
+    ];
   };
 
   # TODO provide an upper level

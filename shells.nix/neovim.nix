@@ -5,20 +5,13 @@ with import <nixpkgs> {
 };
 
 let
-    # neovim-dev-clang = (self.neovim-dev.override {
-    # stdenv = super.clangStdenv;
-  # }).overrideAttrs(oa:{
-    # shellHook = oa.shellHook + ''
-    #   export CLANG_SANITIZER=ASAN_UBSAN
-    # '';
-  # });
 
   postConfigure = ''
     ln -s compile_commands.json ..
   '';
 
   nvim-shell-dev = neovim-dev.overrideAttrs(oa: {
-	cmakeBuildType="debug";
+    cmakeBuildType="debug";
 
     # //Flags used by the C compiler during DEBUG builds.
     # CMAKE_C_FLAGS_DEBUG:STRING=-g

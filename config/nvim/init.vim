@@ -149,7 +149,6 @@ Plug 'glacambre/firenvim' " to use nvim in firefox
 " Plug 'iamcco/markdown-preview.nvim' " :MarkdownPreview
 Plug 'suy/vim-context-commentstring' " commen for current programming language
 " Plug 'voldikss/vim-translate-me' " floating windows for neovim
-Plug 'neovimhaskell/nvim-hs.vim' " to help with nvim-hs
 Plug 'elbeardmorez/vim-loclist-follow' " to have quicklist synced with cursor
 " call :NR on a region than :w . coupled with b:nrrw_aucmd_create,
 Plug 'chrisbra/NrrwRgn' " to help with multi-ft files
@@ -277,7 +276,8 @@ Plug 'honza/vim-snippets'
 """ contact autocompletion
 
 " haskell plugins{{{
-" Plug 'neovimhaskell/haskell-vim', {'for': 'haskell'} " haskell install
+Plug 'neovimhaskell/nvim-hs.vim' " to help with nvim-hs
+Plug 'neovimhaskell/haskell-vim', {'for': 'haskell'} " really helps with syntax highlighting
 " Plug 'enomsg/vim-haskellConcealPlus', {'for':'haskell'}     " unicode for haskell operators
 " Plug 'bitc/vim-hdevtools'
 "
