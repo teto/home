@@ -107,16 +107,7 @@ in
   # seemingly working for chromium only, check for firefox
   programs.browserpass.enable = true;
 
-  nixpkgs = {
-    config = {
-      allowUnfree = true;
-    };
-  };
-
   services.greenclip.enable = true;
-
-# nix registry add poetry github:nix-community/poetry2nix
-# nix registry add hm github:rycee/home-manager
 
   nix = {
 

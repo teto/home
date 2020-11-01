@@ -227,6 +227,7 @@ kernel_xconfig=''
     bindkey '^N' down-history
 
     # TODO doesn't work because it s overriden afterwards apparently
+    # home-manager should have this ?
     . "${fzf}/share/fzf/completion.zsh"
     . "${fzf}/share/fzf/key-bindings.zsh"
 
@@ -253,9 +254,8 @@ kernel_xconfig=''
     config = {
       allowUnfree = true;
       permittedInsecurePackages = [
-            # "webkitgtk-2.4.11"
-              ];
-
+          # "webkitgtk-2.4.11"
+      ];
     };
   };
 

@@ -24,7 +24,7 @@ endfunc
 map <D-b> :echom "hello papy"
 
 "$NVIM_PYTHON_LOG_FILE
-" to test startup time
+" profile startup time
 " nvim --startuptime startup.log
 " nvim -u NONE --startuptime startup.log
 " to see the difference highlights,
@@ -118,7 +118,7 @@ Plug 'nvim-lua/popup.nvim'  " mimic vim's popupapi for neovim
 Plug 'nvim-lua/plenary.nvim'  " lua utilities for neovim
 " Plug 'nvim-lua/telescope.nvim'
 Plug '~/telescope.nvim'    " fzf-like in lua
-" Plug 'Xuyuanp/scrollbar.nvim'  " for the test :h Scrollbar.nvim
+" Plug 'Xuyuanp/scrollbar.nvim'  " :h Scrollbar.nvim
 
 " annotations plugins {{{
 Plug 'MattesGroeger/vim-bookmarks' " ruby  / :BookmarkAnnotate
@@ -130,8 +130,6 @@ Plug 'MattesGroeger/vim-bookmarks' " ruby  / :BookmarkAnnotate
 " Plug 'AGhost-7/critiq.vim' " :h critiq
 " Plug 'thaerkh/vim-workspace'  " :ToggleWorkspace
 
-" Plug 'BK1603/nvim-autoread' " nvim-autoread
-" Plug '~/nvim-autoread' " nvim-autoread
 Plug 'skywind3000/vim-quickui'
 " Plug 'liuchengxu/vista.vim' " replaces tagbar to list workplace symbols
 Plug 'neovim/nvim-lspconfig' " while fuzzing details out
@@ -161,11 +159,10 @@ Plug 'conornewton/vim-pandoc-markdown-preview' " :StartMdPreview / StopMd
 
 " around vcs {{{
 " Plug 'tpope/vim-fugitive' 
-Plug '~/fugitive' 
+Plug '~/fugitive'
 Plug 'sodapopcan/vim-twiggy' " run with :Twiggy
-Plug 'idanarye/vim-merginal'  " fugitive extension :Merginal
+" Plug 'idanarye/vim-merginal'  " fugitive extension :Merginal
 Plug 'rhysd/git-messenger.vim' " to show git message :GitMessenger
-" Plug 'junegunn/gv.vim' " git commit viewer :Gv
 
 " }}}
 
@@ -175,7 +172,6 @@ Plug 'vim-pandoc/vim-pandoc-syntax'
 Plug 'vim-scripts/rfc-syntax', { 'for': 'rfc' } " optional syntax highlighting for RFC files
 " Plug 'vim-scripts/coq-syntax', {'for': 'coq'}
 "}}}
-" Plug 'moznion/github-commit-comment.vim' " last update from 2014
 " Plug 'dhruvasagar/vim-open-url' " gB/gW to open browser
 " Plug 'Carpetsmoker/xdg_open.vim' " overrides gx
 Plug 'mcchrish/info-window.nvim'  " :InfoWindowToggle to display buffer information in a popup
@@ -197,8 +193,6 @@ Plug 'neomake/neomake' " just for nix and neovim dev with nvimdev ?
 " needs ruby support, works in recent neovim
 Plug 'junegunn/vim-github-dashboard', { 'do': ':UpdateRemotePlugins' }
 Plug 'fmoralesc/vim-pad', {'branch': 'devel'} " :Pad new, note taking
-" to test https://github.com/neovim/neovim/issues/3688
-" Plug 'haya14busa/incsearch.vim' " just to test
 " while waiting for my neovim notification provider...
 Plug 'tjdevries/descriptive_maps.vim', {'do': ':UpdateRemotePlugins' } " :call DescriptiveStart()
 Plug 'gianarb/notify.vim' " call notify#emitNotification('Title', 'Body')
@@ -287,8 +281,6 @@ Plug 'neovimhaskell/haskell-vim', {'for': 'haskell'} " really helps with syntax 
 " Plug 'tpope/vim-unimpaired' " [<space> [e [n ]n pour gerer les conflits etc...
 " Plug 'mbbill/undotree' " replaces gundo
 
-" Using a non-master branch
-
 " filetypes {{{2
 " Plug 'cespare/vim-toml', { 'for': 'toml'}
 Plug 'PotatoesMaster/i3-vim-syntax'
@@ -343,11 +335,8 @@ Plug 'teto/vim-listchars' " to cycle between different list/listchars configurat
 "Plug 'tpope/vim-sleuth' " Dunno what it is
 "Plug 'justinmk/vim-gtfo' " ?
 Plug 'tpope/vim-rhubarb' " github support in fugitive, use |i_CTRL-X_CTRL-O|
-"Plug 'jaxbot/github-issues.vim' " works only with vim
-" Plug 'machakann/vim-sandwich' " deal with sandwiched objects
 "Plug 'tpope/vim-surround' " don't realy know how to use yet
 " Plug 'junegunn/vim-peekaboo' " gives a preview of buffers when pasting, need ruby ?
-
 " Plug 'vhakulinen/gnvim-lsp' " load it only for gnvim
 
 " , { 'for': 'markdown', 'do': function('BuildComposer') } " Needs rust, cargo, plenty of things :help markdown-composer
@@ -360,20 +349,14 @@ Plug 'Rykka/InstantRst', {'for': 'rst'} " rst live preview with :InstantRst,
 " Plug 'dhruvasagar/vim-table-mode', {'for': 'txt'}
 
 Plug 'kshenoy/vim-signature' " display marks in gutter, love it
-"Plug 'tomtom/quickfixsigns_vim'
 Plug 'nacitar/a.vim' " :A
-" Plug 'mhinz/vim-tree' " test
 Plug 'mhinz/vim-rfc', { 'on': 'RFC' } " requires nokigiri gem
 " careful maps F4 by default
 Plug 'teto/Modeliner' " <leader>ml to setup buffer modeline
 " This one has bindings mapped to <leader>l
 " Plug '~/vimwiki'   " to write notes
 " Plug 'vimwiki/vimwiki', { 'branch': 'dev'}   " to write notes
-" Plug 'vimwiki/vimwiki'
-"Plug 'teto/neovim-auto-autoread' " works only in neovim, runs external checker
 " Plug 'rhysd/github-complete.vim' " provides github user/repo autocompletion after @ and #
-
-" Plug 'ripxorip/aerojump.nvim'
 
 Plug 'nvim-lua/diagnostic-nvim'  " LSP improvements OpenDiagnostic/PrevDiagnostic
 " https://github.com/haorenW1025/completion-nvim/wiki/chain-complete-support
@@ -1636,59 +1619,6 @@ function! ChooseSignifyGitCommit()
 endfunction
 command! FzfSignifyChooseBranch call ChooseSignifyGitCommit()
 
-" function! GetQfHistory()
-
-"   " let s:res =
-"   redir => cout
-"   silent chistory
-"   redir END
-"   let qfs = split(cout, "\n")
-"   " TODO set jump to do
-"   let current_qf = -1
-"   let i = 0
-"   for item in qfs
-"     if item[0] == ">"
-"       current_qf = i
-"     endif
-"     i = i + 1
-"   endfor
-"   " map(list[1:], 's:format_mark(v:val)')),
-"   return qfs
-"   " return extend(list[0:0], map(list[1:], 's:format_mark(v:val)')),
-" endfunction
-
-" function! UpdateQfList(res)
-"   " TODO compute newer/older count for going to
-"   " TODO if
-"   echo a:res
-"   " get jump id
-"   " if ljump < 0
-"   "   colder -ljump
-"   " else
-"   "   cnewer ljump
-" endfunction
-
-" TODO be able to fzf lhistory/chistory
-" function! FzfChooseQfList()
-
-"   let d = copy(s:opts)
-"   let d.source = GetQfHistory()
-"   " let d.source = ["test 1", "test 2"]
-"   let d.sink = function('UpdateQfList')
-"   call fzf#run(d)
-" endfunction
-
-function! FzfNeomake()
-
-  let d = copy(s:opts)
-
-  let d.source = get(g:, 'neomake_'.&ft.'_enabled_makers', [])
-  " let d.prompt = &ft." makers"
-  let d.options = '--prompt "'.&ft.' Makers>"'
-  " let d.source = ["test 1", "test 2"]
-  let d.sink = function('UpdateQfList')
-  call fzf#run(d)
-endfunction
 
 " Customize fzf colors to match your color scheme
 " let g:fzf_colors = \ { 'fg':      ['fg', 'Normal'],
@@ -1853,7 +1783,7 @@ map <Leader><space> :b#<CR>
 " }}}
 
 set showcmd " show pending command bottom right
-set showfulltag "test
+set showfulltag
 
 " indents
 "nmap <S-Tab> <<
@@ -1961,7 +1891,6 @@ highlight SignifySignChange cterm=bold ctermbg=237  ctermfg=227 guibg=NONE guifg
 highlight SignifySignAdd cterm=bold ctermbg=237  ctermfg=227 guibg=NONE guifg=green
 highlight SignifySignDelete cterm=bold ctermbg=237  ctermfg=227 guibg=NONE guifg=red
 
-" TESTING only
 nnoremap <kPageUp> :lprev
 nnoremap <kPageDown> :lnext
 nnoremap <kPageRight> :lnext
@@ -1990,7 +1919,6 @@ command! FlipBool call FzfFlipBool()
 map <A-]> :vsp<CR>:exec("tag ".expand("<cword>"))<CR>
 
 
-" MATT to test
 let g:python_host_tcp=1
 
 function! ExportMenus(path, modes)
@@ -2199,7 +2127,6 @@ autocmd CursorMoved lua vim.lsp.util.show_line_diagnostics()
 " autocmd CursorMoved <buffer> lua vim.lsp.util.buf_clear_references()
 
 
-" to test kitty undercurl
 hi LspDiagnosticsUnderline cterm=underline gui=undercurl
 
 " ✘'
@@ -2264,10 +2191,6 @@ nnoremap cu :lcd ..<bar>pwd<cr>
 xnoremap <c-p> <Cmd>diffput<cr>
 xnoremap <c-o> <Cmd>diffget<cr>
 " nnoremap <expr> dp &diff ? 'dp' : ':Printf<cr>'
-
-" todo do it conditionnally
-" function! StatusLSP() abort
-" endfunction
 
 command! JsonPretty %!jq '.'
 

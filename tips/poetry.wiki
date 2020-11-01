@@ -1,6 +1,19 @@
 replace .venv with your project's env path
 
+Le nom du package dans l'overlay c'est celui visible dans le fichier lock.
 
+marshmallow-pymodm
 poetry env info -p
 
+pyProject = readTOML pyproject;
+poetryLock = readTOML poetrylock;
+
 .venv/src/marshmallow_pymodm
+
+
+to debug
+poetry env list --full-path
+> /home/teto/.cache/pypoetry/virtualenvs/jinko-platform-x7nkyLjP-py3.7
+
+to compare with `pipenv where`
+/root/.local/share/virtualenvs/-x-v5uFv0

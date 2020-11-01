@@ -2,10 +2,14 @@
   description = "My personal configuration";
 
   inputs = {
-    nixpkgs.url = "github:teto/nixpkgs/nixos-unstable";
+    nixpkgs-teto = {
+      url = "github:teto/nixpkgs/nixos-unstable";
+      # flake = false;
+    };
+    # nixpkgs-teto.url = "https://nixos.org/channels/nixos-20.09/nixexprs.tar.xz";
     unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     # TODO use mine instead
-    hm.url = "github:rycee/home-manager";
+    hm.url = "github:nix-community/home-manager";
     nur.url = "github:nix-community/NUR";
 
     # nova needs ssh keys, so make it possible to install without nova to boostrap
@@ -25,7 +29,7 @@
   };
 
   outputs = inputs@{
-    self, hm, nixpkgs, nur, unstable
+    self, hm, nixpkgs-teto, nur, unstable
     , nova , poetry
     }:
     let
@@ -36,12 +40,16 @@
 
       utils = import ./nixpkgs/lib/colors.nix { inherit (nixpkgs) lib;};
 
-      # pkgImport = pkgs:
-      #   import pkgs {
-      #     inherit system;
-      #     overlays = nixpkgs.lib.attrValues self.overlays;
-      #     config = { allowUnfree = true; };
-      #   };
+      # trick to be able to set allowUnfree
+      pkgImport = pkgs:
+        import pkgs {
+          inherit system;
+          overlays = pkgs.lib.attrValues self.overlays;
+          config = { allowUnfree = true; };
+        };
+
+      nixpkgs = pkgImport inputs.nixpkgs-teto;
+
       hm-custom = ({ config, lib, pkgs,  ... }:
           {
             # nixpkgs.overlays = nixpkgs.lib.attrValues self.overlays;
@@ -62,11 +70,15 @@
         )
 		;
     in {
+
+      defaultPackage."${system}" = nixpkgs;
+
       nixosConfigurations = let
       in
         {
-          mcoudron = nixpkgs.lib.nixosSystem {
+          mcoudron = nixpkgs-teto.lib.nixosSystem {
             inherit system;
+            # extraModules = 
             # specialArgs = { inherit inputs; };
             specialArgs = { flakes = inputs; };
             modules = [
@@ -108,8 +120,10 @@
             ;
           };
 
-          jedha = nixpkgs.lib.nixosSystem {
+          jedha = nixpkgs-teto.lib.nixosSystem {
             inherit system;
+            pkgs = nixpkgs.pkgs;
+            # extraArgs = { pkgs = pkgsImport }
             modules = [
               (import ./nixpkgs/configuration-lenovo.nix)
               (import ./nixpkgs/profiles/neovim.nix)
@@ -119,11 +133,18 @@
                 {
                   nixpkgs.overlays = nixpkgs.lib.attrValues self.overlays;
 
+                  # useless apparently
+                  nixpkgs.config.allowUnfree = true;
+
                   home-manager.users."teto" = {
                     # TODO find a way to call nova.nixosModules from home-xps instead
                     # fails for now
                     imports = [
                       ./nixpkgs/home-lenovo.nix
+                      # just for testing
+                      # ./hm/autoUpgrade.nix
+
+                      ./nixpkgs/hm/vscode.nix
                     ]
                     # ++ nixpkgs.lib.optional inputs.nova != null [
                     ++ [
@@ -151,6 +172,12 @@
         neovim = import ./nixpkgs/overlays/neovim.nix;
         wireshark = import ./nixpkgs/overlays/wireshark.nix;
         nur = nur.overlay;
+        # unfree = final: prev: {
+        #   unstable = import nixpkgs-unstable {
+        #     system = "x86_64-linux";
+        #     config.allowUnfree = true;
+        #   };
+        # };
         # toto = (final: prev: {});
       };
       # overlays = let

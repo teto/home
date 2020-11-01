@@ -96,7 +96,18 @@ in
         config = ''
         '';
       }
-
+      {
+        plugin = nvim-lspconfig;
+        config = ''
+        '';
+        runtime = {
+          "init.vim".text = ''
+            '';
+          "init.lua".text = ''
+            -- TODO write config.lua; genere par home-manager
+            '';
+        };
+      }
       {
         plugin = editorconfig-vim;
         # config = ''
@@ -155,13 +166,13 @@ in
 
       {
         plugin =  nvimdev-nvim;
-        optional = true;
+        # optional = true;
       }
 
       # LanguageClient-neovim
       {
         plugin =  tagbar;
-        optional = true;
+        # optional = true;
       }
       # {
       #   plugin = fzf-preview;
@@ -177,7 +188,7 @@ in
       # vim-CtrlXA
       {
         plugin = vim-dasht;
-        optional = true;
+        # optional = true;
       }
       vim-dirvish
       {
@@ -259,7 +270,7 @@ in
 
       {
         plugin = vista-vim;
-        optional = false;
+        # optional = false;
         config = ''
 
         '';

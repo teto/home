@@ -129,21 +129,52 @@ rec {
   });
 
   # makeNeovimConfig = {}:
+  neovimTreesitterConfig = prev.neovimUtils.makeNeovimConfig {
+    withPython3 = false;
+    plugins = with prev.vimPlugins; [
+      {
+        plugin = nvim-treesitter;
+        # luaConfig = ''
+        # local nvim_lsp = require 'nvim_lsp'
+        # '';
+      }
+# " Plug 'nvim-treesitter/completion-treesitter' " extension of completion-nvim,
+# " depends on nvim-treesitter/nvim-treesitter
+# " Plug 'nvim-treesitter/highlight.lua' " to test treesitter
+# " Plug 'nvim-treesitter/nvim-treesitter' " to test treesitter
+# " Plug '~/nvim-treesitter' " to test treesitter
+# " Plug 'nvim-treesitter/playground'
+# " Plug 'nvim-treesitter/nvim-treesitter-textobjects'
+    ];
 
-  # neovimHaskellConfig = {
-  #   withHaskell = true;
+  };
+
+  neovimHaskellConfig = prev.neovimUtils.makeNeovimConfig {
+    withPython3 = false;
+    plugins = with prev.vimPlugins; [
+      {
+        plugin = nvim-lspconfig;
+        # luaConfig = ''
+        # local nvim_lsp = require 'nvim_lsp'
+        # '';
+      }
+    ];
   #   haskellPackages = [
   #     haskellPackages.haskdogs # seems to build on hasktags/ recursively import things
   #     haskellPackages.hasktags
   #     haskellPackages.nvim-hs
   #     haskellPackages.nvim-hs-ghcid
   #   ];
-  #   customRC = ''
-  #       let g:LanguageClient_serverCommands = {
-  #         'haskell': ['hie', '--lsp', '-d', '--logfile', '/tmp/lsp_haskell.log' ]
-  #       }
-  #     '';
-  # };
+    customRC = ''
+        let g:LanguageClient_serverCommands = {
+          'haskell': ['hie', '--lsp', '-d', '--logfile', '/tmp/lsp_haskell.log' ]
+        }
+    '';
+
+    # ajouter une config lua
+    luaRC = ''
+      '';
+  };
 
   # TODO pass args to the wrapper to get access to :
   # - bash-language-server

@@ -2,14 +2,7 @@
 { config, lib, pkgs,  ... }:
 let
 
-  mbsyncConfig = {
-    enable = true;
-    # extraConfig = ''
-    #   '';
-
-    create = "maildir";
-  };
-  in
+in
 {
   imports = [
     # Not tracked, so doesn't need to go in per-machine subdir
@@ -18,16 +11,9 @@ let
       # ./hm/sway.nix
       ./hm/neomutt.nix
       # ./hm/profiles/nova-dev.nix
-
-      # just for testing
-      ./hm/autoUpgrade.nix
-      ./hm/vscode.nix
-
       ./hm/mail.nix
       ./hm/extra.nix
-      # symlink towards a config
-  ]
-  ;
+  ];
 
   programs.feh.enable = true;
 
@@ -43,11 +29,8 @@ let
 
   # you can switch from cli with xkb-switch or xkblayout-state
   home.keyboard = {
-    # layout = "fr,us";
     # options = [ "grp:caps_toggle" "grp_led:scroll" ];
-    # TODO can add Mod4 
     options = [ "add Mod1 Alt_R" ];
-    # options = [ "add Mod1 Alt_R" ];
   };
 
   programs.home-manager = {
@@ -78,7 +61,7 @@ let
   '';
 
   # fzf-extras found in overlay fzf-extras
-  programs.zsh.initExtra = ''
-  '';
+  # programs.zsh.initExtra = ''
+  # '';
 
 }

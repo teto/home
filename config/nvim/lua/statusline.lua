@@ -5,6 +5,7 @@ local function statusline_lsp()
   end
 
   local msgs = {}
+  local buf_messages = {}
   -- for _, msg in ipairs(buf_messages) do
   --   local name = aliases[msg.name] or msg.name
   --   local client_name = '[' .. name .. ']'
@@ -19,9 +20,6 @@ local function statusline_lsp()
   --       contents = contents .. ' (' .. msg.percentage .. ')'
   --     end
 
-  --     if msg.spinner then
-  --       contents = config.spinner_frames[(msg.spinner % #config.spinner_frames) + 1] .. ' ' .. contents
-  --     end
   --   elseif msg.status then
   --     contents = msg.content
   --     if msg.uri then
