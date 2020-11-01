@@ -16,19 +16,11 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline_disable_statusline = 0
 
 
-" call airline#parts#define_condition('lsp_status', 'luaeval("#vim.lsp.buf_get_clients() > 0")')
 " LSP
 " let g:airline_section_warning = airline#section#create_right(['lsp_status'])
 call airline#parts#define_function('lsp_status', 'StatusLSP')
 call airline#parts#define_minwidth('lsp_status', 5) 
-" call airline#parts#define_condition('foo', 'getcwd() =~ "work_dir"')
-
 let g:airline_section_y = airline#section#create_right(['lsp_status'])
-
-" lsp_status.status()
-" Set the statusline for non airline times
-"   let stl = '%{v:lua.StatusLineLSP()}'
-" set statusline=%{v:lua.StatusLineLSP()}
 
 
 " 'neomake', 

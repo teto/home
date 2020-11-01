@@ -115,7 +115,7 @@ rec {
         # ref = "fswatch-autoread";
         url = https://github.com/neovim/neovim.git;
         # rev = "e5d98d85693245fec811307e5a2ccfdea3a350cd"; # 30 septembre
-        rev = "759a05407f3e75cc002c0950563388735e969a94"; # 13 octobre
+        rev = "8821587748058ee1ad8523865b30a03582f8d7be"; # 1er novembre
         ref = "master";
       };
 

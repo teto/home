@@ -263,18 +263,20 @@ in
           '';
       }
       {
+        # TODO generate its runtime/init
         plugin = nvim-lspconfig;
         # config = ''
         # '';
       }
 
-      {
-        plugin = vista-vim;
-        # optional = false;
-        config = ''
+      # triggers errors when working on neovim
+      # {
+      #   plugin = vista-vim;
+      #   # optional = false;
+      #   config = ''
 
-        '';
-      }
+      #   '';
+      # }
 
       # vimwiki
 

@@ -158,8 +158,9 @@ Plug 'shime/vim-livedown'  " :LivedownPreview
 Plug 'conornewton/vim-pandoc-markdown-preview' " :StartMdPreview / StopMd
 
 " around vcs {{{
-" Plug 'tpope/vim-fugitive' 
-Plug '~/fugitive'
+Plug 'tpope/vim-fugitive' 
+" Plug '~/fugitive'
+Plug 'shumphrey/fugitive-gitlab.vim'
 Plug 'sodapopcan/vim-twiggy' " run with :Twiggy
 " Plug 'idanarye/vim-merginal'  " fugitive extension :Merginal
 Plug 'rhysd/git-messenger.vim' " to show git message :GitMessenger
@@ -360,7 +361,7 @@ Plug 'teto/Modeliner' " <leader>ml to setup buffer modeline
 
 Plug 'nvim-lua/diagnostic-nvim'  " LSP improvements OpenDiagnostic/PrevDiagnostic
 " https://github.com/haorenW1025/completion-nvim/wiki/chain-complete-support
-Plug 'nvim-lua/completion-nvim' " lsp based completion framework
+" Plug 'nvim-lua/completion-nvim' " lsp based completion framework
 " treesitter may slow down nvim
 " Plug 'nvim-treesitter/completion-treesitter' " extension of completion-nvim,
 " depends on nvim-treesitter/nvim-treesitter
@@ -495,8 +496,10 @@ syntax on
 let g:vimsyn_embed = 'lP'  " support embedded lua, python and ruby
 " don't syntax-highlight long lines
 set synmaxcol=300
-
-
+" fugitive-gitlab {{{
+" also add our token for private repos
+let g:fugitive_gitlab_domains = ['https://git.novadiscovery.net']
+"}}}
 " vimspector {{{
 let g:vimspector_enable_mappings = 'HUMAN'
 "}}}
