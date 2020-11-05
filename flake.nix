@@ -50,16 +50,12 @@
 
       nixpkgs = pkgImport inputs.nixpkgs-teto;
 
-      hm-custom = ({ config, lib, pkgs,  ... }:
+      hm-custom = my_imports: ({ config, lib, pkgs,  ... }:
           {
             # nixpkgs.overlays = nixpkgs.lib.attrValues self.overlays;
 
             home-manager.users."teto" = {
-              # TODO find a way to call nova.nixosModules from home-xps instead
-              # fails for now
-              imports = [
-                ./nixpkgs/home-xps.nix
-              ]
+              imports = my_imports
               # ++ nixpkgs.lib.optional inputs.nova != null [
               ++ [
                 nova.nixosModules.hmProfiles.hm-user
@@ -110,9 +106,8 @@
                   networking.hostName = "mcoudron"; # Define your hostname.
                 })
               hm.nixosModules.home-manager
-              hm-custom
+              (hm-custom [ ./nixpkgs/home-xps.nix ] )
             ]
-            # nixpkgs.lib.optional nova != null
             ++ [
               nova.nixosModules.profiles.main
               nova.nixosModules.profiles.dev
@@ -129,31 +124,30 @@
               (import ./nixpkgs/profiles/neovim.nix)
               (import ./nixpkgs/hardware-lenovo.nix)
               hm.nixosModules.home-manager
-              ({ config, lib, pkgs,  ... }:
-                {
-                  nixpkgs.overlays = nixpkgs.lib.attrValues self.overlays;
-
-                  # useless apparently
-                  nixpkgs.config.allowUnfree = true;
-
-                  home-manager.users."teto" = {
-                    # TODO find a way to call nova.nixosModules from home-xps instead
-                    # fails for now
-                    imports = [
-                      ./nixpkgs/home-lenovo.nix
-                      # just for testing
-                      # ./hm/autoUpgrade.nix
-
-                      ./nixpkgs/hm/vscode.nix
-                    ]
-                    # ++ nixpkgs.lib.optional inputs.nova != null [
-                    ++ [
-                      nova.nixosModules.hmProfiles.hm-user
-                      nova.nixosModules.hmProfiles.dev
-                    ];
-                  };
-                }
-              )
+              (hm-custom [ 
+                ./nixpkgs/home-lenovo.nix 
+                ./nixpkgs/hm/vscode.nix
+              ] )
+              # ({ config, lib, pkgs,  ... }:
+              #   {
+              #     nixpkgs.overlays = nixpkgs.lib.attrValues self.overlays;
+              #     # useless apparently
+              #     nixpkgs.config.allowUnfree = true;
+              #     home-manager.users."teto" = {
+              #       imports = [
+              #         ./nixpkgs/home-lenovo.nix
+              #         # just for testing
+              #         # ./hm/autoUpgrade.nix
+              #         ./nixpkgs/hm/vscode.nix
+              #       ]
+              #       # ++ nixpkgs.lib.optional inputs.nova != null [
+              #       ++ [
+              #         nova.nixosModules.hmProfiles.hm-user
+              #         nova.nixosModules.hmProfiles.dev
+              #       ];
+              #     };
+              #   }
+              # )
             ]
             ++ [
               nova.nixosModules.profiles.main

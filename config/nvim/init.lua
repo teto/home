@@ -29,7 +29,8 @@ vim.g.indicator_errors = ''
 vim.g.indicator_warnings = ''
 vim.g.indicator_info = '🛈'
 vim.g.indicator_hint = '❗'
-vim.g.indicator_ok = ''
+vim.g.indicator_ok = '✅'
+-- ✓
 vim.g.spinner_frames = {'⣾', '⣽', '⣻', '⢿', '⡿', '⣟', '⣯', '⣷'}
 
 vim.g.should_show_diagnostics_in_statusline = true

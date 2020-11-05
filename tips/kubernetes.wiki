@@ -4,6 +4,11 @@ kubectl get -n [[XXXX]] ingress
 
 kubectl cluster-info
 
+# on peut avoir plusieurs contextes
+KUBECONFIG=~/.kube/config:~/.kube/kubconfig2
+kubectl config view
+kubectl config get-contexts
+
 1/ make gitops
 check the
 

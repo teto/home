@@ -3,6 +3,21 @@
 local function statusline_lsp()
 
   -- return 'test'
+-- vim.g.indicator_errors = ''
+-- vim.g.indicator_warnings = ''
+-- vim.g.indicator_info = '🛈'
+-- vim.g.indicator_hint = '❗'
+-- vim.g.indicator_ok = ''
+-- vim.g.spinner_frames = {'⣾', '⣽', '⣻', '⢿', '⡿', '⣟', '⣯', '⣷'}
+
+  local base_status = "S"
+  local status_symbol = '🇻'
+  local indicator_ok = '✅'
+	-- vim.g.indicator_errors = ''
+	-- vim.g.indicator_warnings = ''
+	-- vim.g.indicator_info = '🛈'
+	-- vim.g.indicator_hint = '❗'
+	-- vim.g.indicator_ok = '✅'
 
   -- can we ?
   if #vim.lsp.buf_get_clients() == 0 then
@@ -44,9 +59,9 @@ local function statusline_lsp()
 
     table.insert(msgs, client_name .. ' ' .. contents)
   end
-
-  local base_status = vim.trim(table.concat(status_parts, ' ') .. ' ' .. table.concat(msgs, ' '))
-  local symbol = config.status_symbol .. ((some_diagnostics and only_hint) and '' or ' ')
+-- vim.trim(table.concat(status_parts, ' ') ..
+  local base_status =  ' ' .. table.concat(msgs, ' ')
+  local symbol = status_symbol .. ((some_diagnostics and only_hint) and '' or ' ')
   local current_function = vim.b.lsp_current_function
   if current_function and current_function ~= '' then
     symbol = symbol .. '(' .. current_function .. ') '
@@ -56,9 +71,8 @@ local function statusline_lsp()
     return symbol .. base_status .. ' '
   end
 
-  return symbol .. config.indicator_ok .. ' '
-
-  return 'test'
+  return symbol .. indicator_ok .. ' '
+  -- return 'test'
 end
 
 local M = {

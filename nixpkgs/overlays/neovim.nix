@@ -259,6 +259,13 @@ rec {
   neovim-dev = let
       pythonEnv = final.pkgs.python3;
       devMode = true;
+      tree-sitter = prev.tree-sitter.overrideAttrs (oldAttrs: {
+        version = "0.17.3";
+        sha256 = "sha256-uQs80r9cPX8Q46irJYv2FfvuppwonSS5HVClFujaP+U=";
+        cargoSha256 = "sha256-fonlxLNh9KyEwCj7G5vxa7cM/DlcHNFbQpp0SwVQ3j4=";
+
+        postInstall = "PREFIX=$out make install";
+      });
     in (final.pkgs.neovim-unwrapped.override  {
       doCheck=true;
       # devMode=true;
@@ -285,6 +292,7 @@ rec {
 
       buildInputs = oa.buildInputs ++ ([
         # final.pkgs.tree-sitter 
+        tree-sitter
       ]);
   });
 }

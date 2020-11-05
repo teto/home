@@ -18,8 +18,6 @@ in
   programs.feh.enable = true;
 
   home.packages = with pkgs; [
-    # touchegg # won't work anymore apparently
-    # libinput-gestures
     # rofi
     steam-run
   ];

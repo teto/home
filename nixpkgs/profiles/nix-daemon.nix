@@ -3,7 +3,6 @@
   nix = {
     package = pkgs.nixUnstable;
 
-    # nix.sandboxPaths
     registry = {
       nur.to = { type = "github"; owner = "nix-community"; repo="NUR"; };
       hm.to = { type = "github"; owner = "nix-community"; repo="home-manager"; };

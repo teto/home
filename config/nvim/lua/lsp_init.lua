@@ -118,7 +118,6 @@ nvim_lsp.yamlls.setup{}
 -- 	on_attach=attach_cb.on_attach
 -- })
 
--- haskell-language-server
 nvim_lsp.hls.setup({
     cmd = { "haskell-language-server", "--lsp" },
     filetypes = { "haskell", "lhaskell" },
@@ -183,25 +182,25 @@ nvim_lsp.rust_analyzer.setup({
 })
 
 -- Available on nix via python-language-server (microsoft)
--- nvim_lsp.pyls_ms.setup({
--- 	cmd = { "python-language-server" };
---     init_options = {
---       analysisUpdates = true,
---       asyncStartup = true,
---       displayOptions = {},
---     },
--- 	-- as per lsp_status doc
--- 	callbacks = lsp_status.extensions.pyls_ms.setup(),
---     settings = {
---       python = {
---         analysis = {
---           disabled = {},
---           errors = {},
---           info = {}
---         }
---       }
--- 	}
--- })
+nvim_lsp.pyls_ms.setup({
+	cmd = { "python-language-server" };
+    init_options = {
+      analysisUpdates = true,
+      asyncStartup = true,
+      displayOptions = {},
+    },
+	-- as per lsp_status doc
+	-- callbacks = lsp_status.extensions.pyls_ms.setup(),
+    settings = {
+      python = {
+        analysis = {
+          disabled = {},
+          errors = {},
+          info = {}
+        }
+      }
+	}
+})
 
 -- | Texlab
 -- nvim_lsp.texlab.setup({

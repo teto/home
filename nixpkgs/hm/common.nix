@@ -31,23 +31,17 @@ rec {
   programs.man.enable = true;
 
   home.packages = with pkgs; [
-    # should ideally be described only in neovim's rc
-    pythonPackages.pdftotext
 
     # TODO try i3-snapshot
     # hstr # to deal with shell history
-    bandwhich  # to monitor per app bandwidth
     tig
+    # or lazygit
     netcat-gnu  # plain 'netcat' is the bsd one
     # dig.dnsutils  # for dig disabled because of flakes
     strace
     w3m   # for preview in ranger w3mimgdisplay
     xdg_utils
-    wally-cli  # to flash ergodox keyboards
     whois
-
-    # to be used in i3
-    # pkgs.i3dispatch
   ];
 
   # works only because TIGRC_USER is set
@@ -76,11 +70,6 @@ rec {
     source ${config.xdg.configHome}/gdb/gdbinit_simple
     set history filename ${config.xdg.cacheHome}/gdb_history
   '';
-
-  # home.file."${config.xdg.configHome}/rg.conf".text = ''
-  # '';
-
-  # home.file.".ghc/ghci.conf".source = ../home/ghci.conf;
 
   # useful to prevent some problems with nix
   # https://github.com/commercialhaskell/stack/issues/2358
@@ -194,7 +183,7 @@ rec {
     };
     extraConfig = ''
       " TODO set different paths accordingly, to language server especially
-      '';
+    '';
   };
 
   programs.fzf = {

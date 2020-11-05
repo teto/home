@@ -1,12 +1,10 @@
 # home-manager specific config from
 { config, lib, pkgs,  ... }:
 let
-  # 
   # nova-nix = builtins.getFlake "/home/teto/nova/nova-nix"
-
 in
 {
-	# invalid with flakes  nixpkgs.config.allowUnfree = true;
+  # invalid with flakes  nixpkgs.config.allowUnfree = true;
 
   imports = [
       ./hm/desktop.nix
@@ -34,7 +32,6 @@ in
     virt-manager # to run ubuntu, needs libvirtd service
     brightnessctl
     simple-scan
-
   ];
 
 

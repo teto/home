@@ -78,6 +78,8 @@ in
 
     # TODO add lsp stuff
     extraPackages = with pkgs; [
+      # should ideally be described only in neovim's rc
+      pythonPackages.pdftotext
       pkgs.jq
       nodePackages.bash-language-server
       luaPackages.lua-lsp

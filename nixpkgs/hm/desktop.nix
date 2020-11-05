@@ -84,6 +84,7 @@ let
     # apvlv # broken
     # alsa-utils # for alsamixer
     arandr  # to move screens/monitors around
+    bandwhich  # to monitor per app bandwidth
     du-dust  # dust binary: rust replacement of du
     hunspellDicts.fr-any
     # buku  # broken on unstable and stable
@@ -131,6 +132,7 @@ let
     xorg.xbacklight  # todo should be set from module
     xclip
     xcwd
+    wally-cli  # to flash ergodox keyboards
     wireshark
     zathura
   ]
