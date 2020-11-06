@@ -181,6 +181,9 @@ nvim_lsp.rust_analyzer.setup({
     -- root_dir = root_pattern("Cargo.toml", "rust-project.json")
 })
 
+
+require'nvim_lsp'.rnix.setup{}
+
 -- Available on nix via python-language-server (microsoft)
 nvim_lsp.pyls_ms.setup({
 	cmd = { "python-language-server" };

@@ -290,6 +290,7 @@ SPROMPT="Correct $fg[red]%R$reset_color to $fg[green]%r$reset_color [(y)es (n)o 
 # _gnu_generic should work if program accepts --help
 compdef _gnu_generic qutebrowser
 compdef _gnu_generic mptcpanalyzer
+compdef _gnu_generic jcli
 
 
 # todo only when on $NIXOS

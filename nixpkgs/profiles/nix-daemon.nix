@@ -42,6 +42,8 @@
       binaryCaches = [
         "https://cache.nixos.org/"
         "https://jupyterwith.cachix.org"
+        # TODO move it to nova's ?
+        "https://static-haskell-nix.cachix.org"
       ];
 
       trustedUsers = [ "root" "teto" ];
