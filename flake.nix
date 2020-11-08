@@ -167,6 +167,7 @@
         haskell = import ./nixpkgs/overlays/haskell.nix;
         neovim = import ./nixpkgs/overlays/neovim.nix;
         wireshark = import ./nixpkgs/overlays/wireshark.nix;
+        python = import ./nixpkgs/overlays/python.nix;
         nur = nur.overlay;
         # unfree = final: prev: {
         #   unstable = import nixpkgs-unstable {

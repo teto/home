@@ -5,8 +5,6 @@ in
 {
   programs.git = {
     enable = true;
-    # use accounts.email ?
-    # load it from secrets ?
     package = pkgs.gitAndTools.gitFull;    # to get send-email
     delta.enable = false;
     userName = "Matthieu Coudron";
@@ -57,6 +55,7 @@ in
       };
 
       mergetool = {
+        keepBackup = false;
         vimdiff = {
           prompt = true;
           cmd = "nvim -d $BASE $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'";

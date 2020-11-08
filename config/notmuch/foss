@@ -1,13 +1,14 @@
+# vim: set noet fdm=manual fenc=utf-8 ff=unix sts=0 sw=4 ts=4 :
 +nvim -- to:neovim@googlegroups.com or subject:[neovim/
 +ns3 -- to:ns-3-reviews@googlegroups.com or to:*@nsnam.org
 +github -- from:notifications@github.com
 +nix -- subject:[NixOS/
 +wireshark -- from:wireshark-dev@wireshark.org
 +mininet -- to:mininet-discuss@lists.stanford.edu
++ngi -- from:mirko.presser@btech.au.dk
 
 # Manage sent, spam, and trash folders
--unread -new folder:Trash
--unread -new folder:Spam
++inbox folder:'/.*\/Inbox/'
+-unread -new folder:'/.*\/Trash/'
+-new +spam folder:'/.*\/Spam/'
 -unread -new folder:Sent
-
-

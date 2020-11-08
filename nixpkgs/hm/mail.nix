@@ -6,8 +6,6 @@ let
 
   mbsyncConfig = {
     enable = true;
-    # extraConfig = ''
-    #   '';
     extraConfig.channel = {
       # unlimited
       # when setting MaxMessages, set ExpireUnread
@@ -15,10 +13,8 @@ let
       # size[k|m][b]
       MaxSize = "1m";
     };
-    # postSyncHookCommand = "notmuch new";
-    # create missing mailboxes
-    create = "maildir";
-
+    create = "maildir";   # create missing mailboxes
+    expunge = "both";
   };
 
   accountExtra = {
@@ -85,46 +81,19 @@ let
     gpg = gpgModule;
     astroid = { enable = true; };
 
-    getmail={
-      enable = true;
-      mailboxes = ["INBOX" "Sent" "Work"];
+    mbsync = mbsyncConfig // {
+      remove = "both";
     };
 
-    mbsync = mbsyncConfig // { remove = "both"; };
+    # folders.sent = "[Gmail]/Sent Mail";
+
     msmtp.enable = true;
-    notmuch = {
-      enable = true;
-        # hooks = {
-        #   # postInsert =
-        #   preNew = ''
-        #     '';
-        #   postNew = lib.concatStrings [
-        #     (builtins.readFile ../hooks_perso/post-new)
-        #     (builtins.readFile ../hooks_pro/post-new)
-        #   ];
-        # };
-    };
-
-    offlineimap = {
-      enable = false;
-      extraConfig.local = { };
-      extraConfig.remote = {};
-    };
-
+    notmuch.enable = true;
 
     primary = false;
     userName = "matthieucoudron@fastmail.com";
     realName = "Matthieu Coudron";
     address = "matthieucoudron@fastmail.com";
-
-    # to work around a git send-email problem
-    # smtp.port = 587;
-
-    # TODO this should be made default
-    # maildirModule.path = "gmail";
-
-    # keyring get gmail login
-    # passwordCommand = "${pkgs.libsecret}/bin/secret-tool lookup gmail password";
 
     # fastmail requires an app-specific password
     passwordCommand = getPassword "perso/fastmail_mc";
@@ -153,15 +122,6 @@ let
     msmtp.enable = true;
     notmuch = {
       enable = true;
-        # hooks = {
-        #   # postInsert =
-        #   preNew = ''
-        #     '';
-        #   postNew = lib.concatStrings [
-        #     (builtins.readFile ../hooks_perso/post-new)
-        #     (builtins.readFile ../hooks_pro/post-new)
-        #   ];
-        # };
     };
 
     primary = false;
@@ -176,19 +136,14 @@ let
   # }}}
 
 
-  gmail =
-  accountExtra //
-  {
+  gmail = accountExtra // {
     gpg = gpgModule;
-    astroid = {
-      enable = true;
-      # package =
-    };
+    astroid.enable = true;
 
-    # getmail={
-    #   enable = true;
-    #   mailboxes = ["INBOX" "Sent" "Work"];
-    # };
+    folders.drafts = "[Gmail]/Drafts";
+    folders.inbox = "Inbox";
+    folders.sent = "[Gmail]/Sent Mail";
+    folders.trash = "[Gmail]/Trash";
 
     mbsync = mbsyncConfig // {
       remove = "both";
@@ -200,7 +155,47 @@ let
       # patterns = ["* ![Gmail]*" "[Gmail]/Sent Mail" "[Gmail]/Starred" ];
       # to be able to create drafts ?
       create = "both";
+      groups.personal = {
+        channels = {
+          inbox = {
+            masterPattern = "";
+            slavePattern = "";
+          };
+          sent = {
+            masterPattern = config.accounts.email.accounts.gmail.folders.sent;
+            slavePattern = "Sent";
+          };
+          trash = {
+            masterPattern = config.accounts.email.accounts.gmail.folders.trash;
+            slavePattern = "Trash";
+          };
+          starred = {
+            masterPattern = "[Gmail]/Starred";
+            slavePattern = "Starred";
+          };
+          drafts = {
+            masterPattern = config.accounts.email.accounts.gmail.folders.drafts;
+            slavePattern = "Drafts";
+          };
+          # spam = {
+          #   masterPattern = config.accounts.email.accounts.gmail.folders.drafts;
+          #   slavePattern = "Spam";
+          # };
+        };
     };
+        extraConfig.account = {
+          # PipelineDepth = 50;
+          # AuthMechs = "LOGIN";
+          # SSLType = "IMAPS";
+          # SSLVersions = "TLSv1.2";
+        };
+        extraConfig.remote = {
+          Account = "gmail";
+        };
+        extraConfig.local = {
+          SubFolders = "Verbatim";
+        };
+  };
 
     msmtp.enable = true;
 
@@ -221,6 +216,7 @@ in
 
   imports = [
     ./neomutt.nix
+    ./alot.nix
   ];
 
   home.packages = with pkgs; [
@@ -241,16 +237,14 @@ in
 
      # dont add "inbox" tag
      new.tags = ["unread"];
+     # new.ignore = 
+     search.excludeTags = ["spam"];
 
-     # hopefully hooks should be per-account
      hooks = {
-        # this is a trick since mbsync doesn't support
-        # https://github.com/rycee/home-manager/issues/365
-        # https://github.com/rycee/home-manager/pull/363
         postNew = lib.concatStrings [
           (builtins.readFile ../../hooks_perso/post-new)
-          # (builtins.readFile ../../hooks_pro/post-new)
         ];
+        # postInsert = 
       };
    };
 
@@ -264,123 +258,6 @@ in
      '';
    };
 
-  # TODO test http://alot.readthedocs.io/en/latest/configuration/key_bindings.html
-  # w = pipeto urlscan 2> /dev/null
-
-   programs.alot = {
-     enable = true;
-
-     # Hooks are python callables that live in a module specified by hooksfile in the config.
-     hooks = builtins.readFile ../../config/alot/apply_patch.py;
-
-    # see https://github.com/pazz/alot/wiki/Tips,-Tricks-and-other-cool-Hacks for more ideas
-    bindings = let
-      refreshCommand = account: "shellescape 'check-mail.sh ${account}'; refresh";
-    in
-      {
-          global = {
-            R = "reload";
-            # look for ctrl+l
-            "ctrl l" = "flush; refresh";
-            # "ctrl l" = "flush";
-            "/" = "prompt 'search '";
-            t = "taglist";
-            Q = "exit";
-            q = "bclose";
-            "." = "repeat";
-            # n = "compose";
-            n = "namedqueries";
-            "ctrl f" = "move halfpage down";
-            "ctrl b" = "move halfpage up";
-
-            # otherwise toggling tags makes UI sluggish
-            # https://github.com/pazz/alot/issues/307
-            # call `flush` to refresh
-            s = "toggletags --no-flush unread";
-            d = "toggletags --no-flush killed";
-
-            "r g" = refreshCommand "gmail";
-            "r f" = refreshCommand "fastmail";
-            "r n" = refreshCommand "nova";
-
-            "@" = refreshCommand "gmail";
-          };
-          thread = {
-            a = "call hooks.apply_patch(ui)";
-            "' '" = "fold; untag unread; move next unfolded";
-
-            "s m" = "call hooks.save_mail(ui)";
-            R = "reply --all";
-            # TODO add a vimkeys component to alot
-            "z C" = "fold *";
-            "z c" = "fold";
-            "z o" = "unfold";
-            "z O" = "unfold *";
-          };
-          search = {
-            t = "toggletags todo";
-            # t = "toggletags todo";
-            l = "select";
-            right = "select";
-            # star it
-            # s = "toggletags todo";
-          };
-      };
-
-      tags = {
-        replied = {
-          translated = "⏎";
-        };
-        unread = {
-          translated = "";
-          # normal = "";
-        };
-        lists = {
-          translated = "📃";
-        };
-
-        attachment = {
-          translated = "📎";
-          # normal = "", "", "light blue", "", "light blue", ""
-        };
-
-        bug = {
-          translated = "🐜";
-            # normal = "", "", "dark red", "", "light red", ""
-        };
-        encrypted.translated= "🔒";
-    # translated = 
-        github = {
-          translated = "";
-        };
-        spam.translated = "♻";
-        flagged = {
-      #       translated = ⚑
-          translated = "";
-          #  normal = "","","light red","","dark red",""
-        };
-
-        #   [[sent]]
-        #     translated =  ↗#⇗
-        #     normal = "","", "dark blue", "", "dark blue", ""
-      };
-
-    settings = {
-      # attachment_prefix = ~/Downloads
-      # edit_headers_whitelist = "Subject: toto";
-      theme = "matt";
-      mailinglists = "lisp@ietf.org, taps@ietf.org";
-      editor_in_thread = false;
-      auto_remove_unread = true;
-      ask_subject = false;
-      handle_mouse = true;
-      thread_authors_replace_me = true;
-        # notify_timeout = 20; # -1 for unlimited
-
-      initial_command = "search tag:unread AND NOT tag:killed";
-        # initial_command = "bufferlist; taglist; search foo; search bar; buffer 0";
-      };
-    };
 
 
 
@@ -400,12 +277,9 @@ in
         def get_pass(service, cmd):
           return subprocess.check_output(cmd, ).splitlines()[0]
 
-      # def get_pass(account):
-      #     return check_output("pass Mail/" + account, shell=True).splitlines()[0]
       '';
 
       extraConfig.default = {
-
         # in bytes
         # The startdate option expects a date in the format yyyy-mm-dd.
         # can't be used with maxage
@@ -423,20 +297,9 @@ in
 
     services.mbsync = {
       enable = false;  # disabled because it kept asking for my password
-    # configFile = ;
-    # package = ;
-    # preExec =
-    # postExec =
-    # verbose
     verbose = true;  # to help debug problems in journalctl
     frequency =  "*:0/5";
   };
-
-
-  # enrich definition given in
-  # programs.git = {
-  #    sendemail.identity = "gmail";
-  # };
 
   # programs.muchsync = { };
 
@@ -472,7 +335,4 @@ in
     #!/bin/sh
     ${pkgs.notmuch}/bin/notmuch address --format=json --output=recipients  date:3Y.. > ${addressBookFilename}
   '';
-
-
-  # NOTMUCH_CONFIG = "${config.xdg.configHome}/notmuch/notmuchrc";
 }

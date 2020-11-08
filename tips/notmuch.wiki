@@ -1,4 +1,7 @@
+NOTMUCH_DEBUG_QUERY=1 
 
+# to debug a query https://notmuchmail.org/bugs/
+NOTMUCH_DEBUG_QUERY=1 notmuch search big brown fox
 pour supprimer physiquement les mails
 
 # TODO ajouter 

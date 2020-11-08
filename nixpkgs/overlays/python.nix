@@ -1,43 +1,12 @@
 self: super:
 
 rec {
-  # python = super.python.override {
-  #    # Careful, we're using a different self and super here!
-  #   packageOverrides = python-self: pythonsuper: {
-  #       # mininet-python = pythonsuper.mininet-python.overrideAttrs ( oa: {
-  #       #   src = /home/teto/mininet2;
-  #       # });
-  #     # };
-  #   };
-  # };
-  # pythonPackages = python.pkgs;
-
   python3 = super.python3.override {
      # Careful, we're using a different self and super here!
     packageOverrides = pythonself: pythonsuper: {
 
         kergen = pythonsuper.callPackage ./pkgs/kergen.nix { };
-
-
         # Kconfiglib =  pythonsuper.callPackage ./pkgs/kconfiglib.nix { };
-
-      # if (super.pkgs ? pygccxml) then null else
-        # now that s wird
-        # pygccxml =  super.callPackage ../pygccxml.nix {
-        # pkgs = super.pkgs;
-        # pythonPackages = self.pkgs.python3Packages;
-        # pygccxml = pythonsuper.pygccxml.overrideAttrs (oldAttrs: {
-        #   # src=fetchGitHashless {
-        #   #   url=file:///home/teto/pygccxml;
-        #   # };
-
-        #   src=/home/teto/pygccxml;
-        # });
-
-        # TODO write a nix-shell instead
-        # protocol = pythonsuper.protocol.overrideAttrs (oldAttrs: {
-        #   src=/home/teto/protocol;
-        # });
 
         # python-doi = pythonsuper.callPackage ./pkgs/python-doi {};
 
@@ -51,22 +20,26 @@ rec {
         #   SETUPTOOLS_SCM_PRETEND_VERSION="1.10.5";
         # });
 
-        mininet = pythonsuper.alot.overrideAttrs (oldAttrs: {
+        mininet = pythonsuper.alot.override ({
+          withManpage = true;
         });
 
-        # alot = pythonsuper.alot.overrideAttrs (oldAttrs: {
-        #   name = "alot-dev";
-        #   version = "0.9-dev";
-        #   src = builtins.fetchGit {
-        #     url = https://github.com/pazz/alot.git;
-        #   };
-        #   # src = super.fetchFromGitHub {
-        #   #   owner = "pazz";
-        #   #   repo = "alot";
-        #   #   rev = "6bb18fa97c78b3cb1fcb60ce5d850602b55e358f";
-        #   #   sha256 = "1l8b32ly0fvzwsy3f3ywwi0plckm31y269xxckmgi02sdwisq1ah";
-        #   # };
-        # });
+        # because of https://github.com/pazz/alot/issues/1512
+        # tuple('='.join(p) for p in part.get_params())
+        alot = pythonsuper.alot.overrideAttrs (oa: {
+          name = "alot-dev";
+          version = "0.9-dev";
+          src = builtins.fetchGit {
+            url = https://github.com/pazz/alot.git;
+          };
+          buildInputs = oa.buildInputs ++ [ pythonself.notmuch2 ];
+          # src = super.fetchFromGitHub {
+          #   owner = "pazz";
+          #   repo = "alot";
+          #   rev = "6bb18fa97c78b3cb1fcb60ce5d850602b55e358f";
+          #   sha256 = "1l8b32ly0fvzwsy3f3ywwi0plckm31y269xxckmgi02sdwisq1ah";
+          # };
+        });
 
         # this doesn't work, need to use the proper nixpkgs revision
         # poetry = pythonsuper.poetry.overridePythonAttrs(oa: {
@@ -80,9 +53,6 @@ rec {
 
         papis-dev = pythonsuper.papis.overridePythonAttrs (oa: {
           version = "1.0-dev";
-
-          # datautil
-          # super.python3Packages.sqlite
           propagatedBuildInputs = with super.python3Packages; oa.propagatedBuildInputs ++  ([
             # useful for zotero script
             pyyaml dateutil python-doi
@@ -107,41 +77,16 @@ rec {
           # };
         });
 
-
-        pycurl = pythonsuper.pycurl.overrideAttrs (oa: {
-          doCheck = false;
-          installCheckPhase = false;
-        });
-
-        # pymupdf = pythonsuper.callPackage ./pkgs/pymupdf { };
-
-        # look for matching wcwidth
-        # cmd2 = pythonsuper.cmd2.overrideAttrs (oa: {
-        #   # installFlags = [ "--ignore-installed" ];
-        #   version = "1.0";
-        #   nativeBuildInputs = oa.nativeBuildInputs ++ [ super.git ];
-        #   # src = /home/teto/cmd2;
-        #   src = super.fetchgit {
-        #     url=https://github.com/python-cmd2/cmd2.git;
-        #     rev = "f5c904cda48c03a30b3476f3a40224226391deea";
-        #     sha256 = "1226izysk99r2q8gdvi53rclfckcd5gh0qmrnvm5ycgc6qwk0li3";
-        #     leaveDotGit = true;
-        #     deepClone = true;
-        #   };
-        #   doCheck = false;
-        # });
-
         # praw = pythonsuper.praw.overrideAttrs (oldAttrs: {
         #   doCheck = false;
         # });
 
-
-        pelican = pythonsuper.pelican.overrideAttrs (oldAttrs: {
-          # src=fetchGitHashless {
-          #   url=file:///home/teto/pygccxml;
-          # };
-          propagatedBuildInputs = oldAttrs.propagatedBuildInputs ++ [ pythonself.markdown];
-        });
+        # pelican = pythonsuper.pelican.overrideAttrs (oldAttrs: {
+        #   # src=fetchGitHashless {
+        #   #   url=file:///home/teto/pygccxml;
+        #   # };
+        #   propagatedBuildInputs = oldAttrs.propagatedBuildInputs ++ [ pythonself.markdown];
+        # });
 
     };
   };

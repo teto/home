@@ -12,6 +12,7 @@ in
       ./hm/neomutt.nix
       # ./hm/profiles/nova-dev.nix
       ./hm/mail.nix
+      ./hm/alot.nix
       ./hm/extra.nix
   ];
 

@@ -20,7 +20,7 @@ import tempfile
 
 from alot.settings.utils import read_config
 # .completion
-from alot.completion import PathCompleter
+from alot.completion.path import PathCompleter
 
 
 
@@ -30,7 +30,7 @@ def _get_config():
         'alot', 'patch.config')
     return read_config(configpath=config_path)
 
-async def save_mail(ui): 
+async def save_mail(ui):
     # inspired by https://github.com/pazz/alot/issues/1310
     # get msg content 
     msg = ui.current_buffer.get_selected_message()

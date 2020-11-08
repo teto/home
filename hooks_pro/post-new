@@ -1,5 +1,4 @@
-#!/bin/bash
-#echo $(dirname ${BASH_SOURCE:-$0})
+#!/bin/sh
 echo "Starting my post-new hook"
 echo "$NOTMUCH_CONFIG"
 notmuch tag --batch --input="$XDG_CONFIG_HOME/notmuch/ietf"
