@@ -70,10 +70,7 @@ Session.vim
 *.zip
 
 # Logs and databases {{{
-*.csv
 *.log
-*.sql
-*.sqlite
 *.db
 *.out
 *.drift

@@ -5,10 +5,7 @@ in
 {
   imports = [
     # todo renommer en workstation
-
-    # for nova dev
     ./modules/docker-daemon.nix
-    # ./profiles/nova-dev.nix
 
     # ./modules/distributedBuilds.nix
     ./modules/config-all.nix
@@ -25,9 +22,6 @@ in
 
     # ./modules/sway.nix
 
-    # not needed ?
-    # ./modules/hwrng.nix
-
     # ihaskell marked as broken :'(
     # ./modules/jupyter.nix
   #   ./modules/mininet.nix
@@ -40,8 +34,6 @@ in
     #   # boot.kernel.checkPackageConfig = true;
     # })
 
-    # TODO use from flake or from unstable
-    # ./modules/mptcp.nix
   ]
   ;
 

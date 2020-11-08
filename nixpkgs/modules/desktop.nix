@@ -2,7 +2,6 @@
 let
   secrets = import ./secrets.nix;
   userNixpkgs = /home/teto/nixpkgs;
-  nixosConfig = ./configuration.nix;
 in
 {
 
@@ -41,8 +40,8 @@ in
     support32Bit = true;
   };
 
-  console.font = "Lat2-Terminus16";
-  console.keyMap = "fr";
+  # console.font = "Lat2-Terminus16";
+  # console.keyMap = "fr";
 
   # Select internationalisation properties.
   i18n = {
@@ -102,7 +101,6 @@ in
     enable = false; # TODO move to userspace
     # musicDirectory
   };
-
 
   # seemingly working for chromium only, check for firefox
   programs.browserpass.enable = true;

@@ -123,6 +123,8 @@
               (import ./nixpkgs/configuration-lenovo.nix)
               (import ./nixpkgs/profiles/neovim.nix)
               (import ./nixpkgs/hardware-lenovo.nix)
+            # TODO use from flake or from unstable
+              # (import ./nixpkgs/modules/mptcp.nix)
               hm.nixosModules.home-manager
               (hm-custom [ 
                 ./nixpkgs/home-lenovo.nix 

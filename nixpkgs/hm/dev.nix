@@ -3,7 +3,7 @@
 
 
   home.packages = with pkgs; [
-    # visidata
+    visidata
     gitAndTools.pass-git-helper
   ];
 

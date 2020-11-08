@@ -1,3 +1,5 @@
 
 shift O to open spreadsheet options
 ctrl +r  to reload
+
+C pour entrer dans le mode colonne
