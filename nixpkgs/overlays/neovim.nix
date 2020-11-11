@@ -106,18 +106,37 @@ rec {
       structuredConfigure = finalConfig;
     };
 
-  neovim-unwrapped-master = prev.neovim-unwrapped.overrideAttrs (oldAttrs: {
+  neovim-unwrapped-master = let
+    tree-sitter = prev.tree-sitter.overrideAttrs (oa: {
+      version = "0.17.3";
+      sha256 = "sha256-uQs80r9cPX8Q46irJYv2FfvuppwonSS5HVClFujaP+U=";
+      cargoSha256 = "sha256-fonlxLNh9KyEwCj7G5vxa7cM/DlcHNFbQpp0SwVQ3j4=";
+
+      postInstall = "PREFIX=$out make install";
+    });
+    in
+      prev.neovim-unwrapped.overrideAttrs (oa: {
       name = "unwrapped-neovim-master";
       version = "official-master";
       cmakeBuildType="debug";
-      src = builtins.fetchGit {
-        # url = https://github.com/BK1603/neovim.git;
-        # ref = "fswatch-autoread";
-        url = https://github.com/neovim/neovim.git;
-        # rev = "e5d98d85693245fec811307e5a2ccfdea3a350cd"; # 30 septembre
-        rev = "8821587748058ee1ad8523865b30a03582f8d7be"; # 1er novembre
-        ref = "master";
-      };
+      # src = builtins.fetchGit {
+      #   # url = https://github.com/BK1603/neovim.git;
+      #   # ref = "fswatch-autoread";
+      #   url = https://github.com/neovim/neovim.git;
+      #   # rev = "e5d98d85693245fec811307e5a2ccfdea3a350cd"; # 30 septembre
+      #   rev = "8821587748058ee1ad8523865b30a03582f8d7be"; # 1er novembre
+      #   ref = "master";
+      # };
+      buildInputs = oa.buildInputs ++ ([
+        # final.pkgs.tree-sitter 
+        tree-sitter
+      ]);
+
+    src = builtins.fetchGit {
+      # url = https://github.com/neovim/neovim.git;
+      url = https://github.com/teto/neovim.git;
+      ref = "defaults_Y";
+    };
 
       # src = final.fetchFromGitHub {
       #   owner = "neovim";
@@ -259,13 +278,6 @@ rec {
   neovim-dev = let
       pythonEnv = final.pkgs.python3;
       devMode = true;
-      tree-sitter = prev.tree-sitter.overrideAttrs (oldAttrs: {
-        version = "0.17.3";
-        sha256 = "sha256-uQs80r9cPX8Q46irJYv2FfvuppwonSS5HVClFujaP+U=";
-        cargoSha256 = "sha256-fonlxLNh9KyEwCj7G5vxa7cM/DlcHNFbQpp0SwVQ3j4=";
-
-        postInstall = "PREFIX=$out make install";
-      });
     in (final.pkgs.neovim-unwrapped.override  {
       doCheck=true;
       # devMode=true;
@@ -277,11 +289,6 @@ rec {
     # cmakeFlags = oa.cmakeFlags ++ optional devMode "-DLUACHECK_PRG=${neovimLuaEnv}/bin/luacheck";
 
     version = "master";
-    # src = builtins.fetchGit {
-    #   # url = https://github.com/neovim/neovim.git;
-    #   url = https://github.com/teto/neovim.git;
-    #   ref = "remove-foldline-final";
-    # };
     nativeBuildInputs = oa.nativeBuildInputs
       ++ final.pkgs.lib.optionals devMode (with final.pkgs; [
         pythonEnv
@@ -290,9 +297,5 @@ rec {
         doxygen
       ]);
 
-      buildInputs = oa.buildInputs ++ ([
-        # final.pkgs.tree-sitter 
-        tree-sitter
-      ]);
   });
 }

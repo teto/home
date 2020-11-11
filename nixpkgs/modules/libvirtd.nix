@@ -1,7 +1,7 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 {
-  # see https://nixos.org/nixops/manual/#idm140737318329504
-  # for nixops
+  # dont filter DHCP packets
+  # https://github.com/nix-community/nixops-libvirtd#prepare-libvirtd
   networking.firewall.checkReversePath = false;
 
   # see https://nixos.org/nix-dev/2015-July/017657.html for problems 
@@ -9,6 +9,10 @@
   services.logind.extraConfig = ''
     RuntimeDirectorySize=3G
   '';
+
+  environment.systemPackages = [
+    pkgs.virt-manager # to run ubuntu, needs libvirtd service
+  ];
 
   virtualisation.libvirtd = {
     enable = true;
@@ -39,12 +43,12 @@
     qemuVerbatimConfig = ''
       # https://github.com/libvirt/libvirt/blob/master/src/qemu/qemu.conf
       namespaces = []
-      # # Whether libvirt should dynamically change file ownership
-      # # dynamic_ownership = 1
-      # # be careful for network teto might make if fail
-      # # same when creating the pool
+      # Whether libvirt should dynamically change file ownership
+      # dynamic_ownership = 1
+      # be careful for network teto might make if fail
+      # same when creating the pool
       user="teto"
-      group="users"
+      group="libvirtd"
 
       # Whether libvirt should dynamically change file ownership
       # to match the configured user/group above. Defaults to 1.
@@ -53,9 +57,29 @@
     '';
 
     extraOptions= [
+      # very verbose but in a non-interesting way
       # "--verbose"
     ];
 
+
+    # TODO write my own to change permissions
+    # systemd.services.libvirtd-teto = {
+    #   description = "Libvirt Virtual Machine Management Daemon - configuration";
+    #   script = ''
+    #     images=/var/lib/libvirt/images
+    #     sudo mkdir $images
+    #     sudo chgrp libvirtd $images
+    #     sudo chmod g+w $images
+    #   '';
+
+    #   serviceConfig = {
+    #     Type = "oneshot";
+    #     RuntimeDirectoryPreserve = "yes";
+    #     LogsDirectory = subDirs [ "qemu" ];
+    #     RuntimeDirectory = subDirs [ "nix-emulators" "nix-helpers" "nix-ovmf" ];
+    #     StateDirectory = subDirs [ "dnsmasq" ];
+    #   };
+    # };
 
 
     # TODO automate creation of networks

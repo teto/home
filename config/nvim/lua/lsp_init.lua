@@ -11,7 +11,6 @@ local plug_lsputil_enabled, lsputil = pcall(require, "lsputil")
 
 if plug_lsputil_enabled then
 	vim.lsp.callbacks['textDocument/codeAction'] = lsputil.codeActioncode_action_handler
-	vim.lsp.callbacks['textDocument/codeAction'] = lsputil.codeActioncode_action_handler
 	vim.lsp.callbacks['textDocument/references'] = lsputil.locationsreferences_handler
 	vim.lsp.callbacks['textDocument/definition'] = lsputil.locationsdefinition_handler
 	vim.lsp.callbacks['textDocument/declaration'] = lsputil.locationsdeclaration_handler

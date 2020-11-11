@@ -17,13 +17,7 @@ in
 
       # not merged yet
       # ./hm/autoUpgrade.nix
-
-	  # TODO reference from nova-nix
-      # nova.nixosModules.hmProfiles.dev
-      # ./hm/profiles/nova-user.nix
-      # ./hm/profiles/nova-dev.nix
-    ]
-    ;
+  ];
 
   # depends from feh ? huh not if we use sway
   # programs.feh.enable = true;
@@ -37,9 +31,6 @@ in
 
   programs.home-manager = {
     enable = true;
-    # path = https://github.com/rycee/home-manager/archive/master.tar.gz;
-    # failshome.folder +
-    # must be a string
     path =  "/home/teto/home-manager";
   };
 

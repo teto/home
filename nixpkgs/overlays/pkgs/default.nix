@@ -1,16 +1,10 @@
 final: prev:
 {
 
-  # ebpfdropper = prev.callPackage ./ebpfdropper.nix {
-  #   stdenv=prev.clangStdenv;
-  #   llvm=prev.llvm_5;
-  # };
 
   buku_run = prev.stdenv.mkDerivation rec {
     pname = "buku_run";
     version = "0.1.1";
-
-    # src = /home/teto/buku_run;
 
     src = prev.fetchFromGitHub {
       owner = "teto";
@@ -39,7 +33,6 @@ final: prev:
 
   colr = prev.callPackage ./colr {};
 
-
   dualsub = prev.callPackage ./dualsubtitles { };
 
   # casse nix-index
@@ -55,21 +48,11 @@ final: prev:
 
   subtitles-rs = prev.callPackage ./subtitles-rs { };
 
-  # packetdrill-mptcp = prev.packetdrill.overrideAttrs ( oa: { });
-
   # rustNightlyPlatform = prev.recurseIntoAttrs (prev.makeRustPlatform rust-nightly);
-
-  # nix-lsp = prev.callPackage ./nix-lsp {
-  #   inherit rustNightlyPlatform;
-  # };
 
   # ping = prev.prettyping;
 
   # rt-tests = prev.callPackage ./rt-test.nix {};
-
-  mptcptrace = prev.callPackage ./mptcptrace {};
-
-  # mptcpplot = prev.callPackage ./mptcpplot {};
 
   # stab = prev.callPackage ./stab.nix {
   #   inherit (prev.pkgs.gnome2) libgnome libgnomeui;
@@ -82,11 +65,4 @@ final: prev:
   rofi-scripts = prev.callPackage ./rofi-scripts {};
 
   # sumneko = prev.callPackage ./sumneko.nix {};
-
-  # tree-sitter-nix-shared = prev.callPackage ./tree-sitter-grammars/nix.nix {
-  #   language = "nix";
-  #   source = builtins.fetchGit {
-  #     url = https://github.com/cstrahan/tree-sitter-nix;
-  #   };
-  # };
 }

@@ -123,7 +123,10 @@
               (import ./nixpkgs/configuration-lenovo.nix)
               (import ./nixpkgs/profiles/neovim.nix)
               (import ./nixpkgs/hardware-lenovo.nix)
-            # TODO use from flake or from unstable
+              # often breaks
+              # (import ./modules/hoogle.nix)
+
+              # TODO use from flake or from unstable
               # (import ./nixpkgs/modules/mptcp.nix)
               hm.nixosModules.home-manager
               (hm-custom [ 
@@ -183,13 +186,11 @@
       # in overlays;
 
       packages."${system}" = {
-        # inherit (unstablePkgs) mptcptrace neovim-unwrapped-master;
+        # inherit (unstablePkgs) neovim-unwrapped-master;
         # inherit (self.overlays.neovim) neovim-unwrapped-master;
-        mptcptrace = nixpkgs.lib.callPackage ./nixpkgs/pkgs/pkgs/i3-dispatch {};
+        dce = nixpkgs.lib.callPackage ./nixpkgs/pkgs/dce {};
 
         dig = nixpkgs.bind.dnsutils;
-
-        # neovim-unwrapped-master = nixpkgs.callPackages ./nixpkgs/pkgs/
 
         # python3Packages
         # i3-dispatch = nixpkgs.python3Packages.callPackage ./nipkgs/pkgs/pkgs/i3-dispatch {};

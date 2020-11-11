@@ -85,8 +85,6 @@ Mbps
 LTE
 reinjecting
 reinject
-mptcptrace
-mptcpplot
 plugin
 syntonized
 mininet

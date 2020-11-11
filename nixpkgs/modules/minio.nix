@@ -17,10 +17,7 @@ in
     # enableGarbageCollect = true;
     # garbageCollectDates
     listenAddress = "0.0.0.0:10000";  # 9000 is the default but already used by the platform
-
     # region = 
     secretKey = "testtesttest";
-
   };
 }
-

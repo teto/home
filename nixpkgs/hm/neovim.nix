@@ -78,6 +78,9 @@ in
 
     # TODO add lsp stuff
     extraPackages = with pkgs; [
+      # should only appear in python-based installs
+      black
+
       # should ideally be described only in neovim's rc
       pythonPackages.pdftotext
       pkgs.jq

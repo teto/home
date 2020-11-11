@@ -99,6 +99,7 @@ let g:airline#extensions#default#layout = [
 " grepper#statusline()
  " airline#section#create(['windowswap', 'obsession', '%3p%%'.spc, 'linenr', 'maxlinenr', spc.':%3v'])
 " let g:airline_section_z = airline#section#create_right(['linenumber'])
+
 " airline extensions {{{
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
@@ -167,4 +168,3 @@ nmap <leader>ç <Plug>AirlineSelectTab9
   nmap <leader>+ <Plug>AirlineSelectNextTab
 
 "}}}
-

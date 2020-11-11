@@ -1705,7 +1705,7 @@ set diffopt+=iwhiteall
 set diffopt+=internal,algorithm:patience
 
 " Y behave like D or C
-nnoremap Y y$
+" nnoremap Y y$
 
 
 
@@ -2258,3 +2258,5 @@ function! LuaComplete (ArgLeaf, CmdLine, CursorPos) abort
 endfunction
 
 command! -complete=customlist,LuaComplete -nargs=1 LuaFile lua <args>
+
+" unmap Y

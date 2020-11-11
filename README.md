@@ -66,7 +66,7 @@ home $ git submodule update --init
 home $ make config
 ```
 
-# Install on nixos via flakes (WIP)
+# Install on nixos via flakes
 
 ```
 nix registry add mine ~/nixpkgs
@@ -81,9 +81,6 @@ To build home-manager imperatively:
 nix build .#whateverOutput.activationPackage
 ```
 And then use the activation script in result/.
-
-TODO:
-- reestablish the alias `dig = final.bind.dnsutils;`
 
 
 # Transfer state

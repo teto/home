@@ -21,7 +21,7 @@ let
       "-DMIN_LOG_LEVEL=0"
       "-DENABLE_LTO=OFF"
       "-DUSE_BUNDLED=OFF"
-      ''-DCMAKE_C_FLAGS=-gdwarf-2'' #  -g3
+      # ''-DCMAKE_C_FLAGS=-gdwarf-2'' #  -g3
       # useful to
       # https://github.com/google/sanitizers/wiki/AddressSanitizerFlags
       # https://clang.llvm.org/docs/AddressSanitizer.html#symbolizing-the-reports
@@ -55,7 +55,8 @@ let
       echo "VALGRIND=1 TEST_FILE=test/functional/core/job_spec.lua TEST_TAG=env make functionaltest"
       # ASAN_OPTIONS=halt_on_error=0
       #  ./stderr
-      export ASAN_OPTIONS="log_path=./test.log:halt_on_error=0"
+      # halt_on_error=1
+      export ASAN_OPTIONS="log_path=./test.log:abort_on_error=1"
       export UBSAN_OPTIONS=print_stacktrace=1
 
     '';

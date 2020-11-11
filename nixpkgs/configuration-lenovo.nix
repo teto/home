@@ -11,12 +11,11 @@ in
     ./modules/config-all.nix
     ./modules/desktop.nix
     ./modules/network-manager.nix
-    # ./modules/libvirtd.nix
+    ./modules/libvirtd.nix
+    ./modules/minio.nix
     # ./modules/vpn.nix
     # ./modules/openssh.nix
-    ./modules/hoogle.nix
     # ./modules/tor.nix
-    # ./modules/nova.nix
     ./profiles/nix-daemon.nix
     ./profiles/steam.nix
 
