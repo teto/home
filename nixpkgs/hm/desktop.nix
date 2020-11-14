@@ -1,8 +1,5 @@
 { config, pkgs, lib,  ... }:
 let
-  # stable = import <nixos> {};
-  # unstable = import <nixos-unstable> {};
-
   terminalCommand = pkgs.termite;
 
   # TODO copy it

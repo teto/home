@@ -52,7 +52,8 @@
 
       hm-custom = my_imports: ({ config, lib, pkgs,  ... }:
           {
-            # nixpkgs.overlays = nixpkgs.lib.attrValues self.overlays;
+            # necessary for plugins to see nur etc
+            nixpkgs.overlays = nixpkgs.lib.attrValues self.overlays;
 
             home-manager.users."teto" = {
               imports = my_imports
@@ -74,8 +75,6 @@
         {
           mcoudron = nixpkgs-teto.lib.nixosSystem {
             inherit system;
-            # extraModules = 
-            # specialArgs = { inherit inputs; };
             specialArgs = { flakes = inputs; };
             modules = [
               (import ./nixpkgs/hardware-dell-camera.nix)
@@ -129,33 +128,12 @@
               # TODO use from flake or from unstable
               # (import ./nixpkgs/modules/mptcp.nix)
               hm.nixosModules.home-manager
-              (hm-custom [ 
-                ./nixpkgs/home-lenovo.nix 
+              (hm-custom [
+                ./nixpkgs/home-lenovo.nix
                 ./nixpkgs/hm/vscode.nix
               ] )
-              # ({ config, lib, pkgs,  ... }:
-              #   {
-              #     nixpkgs.overlays = nixpkgs.lib.attrValues self.overlays;
-              #     # useless apparently
-              #     nixpkgs.config.allowUnfree = true;
-              #     home-manager.users."teto" = {
-              #       imports = [
-              #         ./nixpkgs/home-lenovo.nix
-              #         # just for testing
-              #         # ./hm/autoUpgrade.nix
-              #         ./nixpkgs/hm/vscode.nix
-              #       ]
-              #       # ++ nixpkgs.lib.optional inputs.nova != null [
-              #       ++ [
-              #         nova.nixosModules.hmProfiles.hm-user
-              #         nova.nixosModules.hmProfiles.dev
-              #       ];
-              #     };
-              #   }
-              # )
             ]
             ++ [
-              nova.nixosModules.profiles.main
               nova.nixosModules.profiles.main
               nova.nixosModules.profiles.dev
             ];

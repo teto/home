@@ -1,3 +1,7 @@
+/MSG NickServ identify 
+
+
+
 si le curseur reste coince, ca s'appelle le "cursor mode":
 https://blog.weechat.org/post/2011/07/26/Mouse-support-and-free-movement-of-cursor
 https://github.com/weechat/weechat/wiki/Cursor-mode

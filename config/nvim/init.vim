@@ -388,7 +388,7 @@ Plug 'sickill/vim-monokai'
 Plug 'justinmk/molokai'
 Plug 'mhinz/vim-janah'
 Plug 'vim-scripts/Solarized'
-Plug 'gruvbox-community/gruvbox'
+" Plug 'gruvbox-community/gruvbox' *
 Plug 'romainl/flattened'
 Plug 'joshdick/onedark.vim'
 Plug 'NLKNguyen/papercolor-theme'
@@ -2104,8 +2104,8 @@ lua vim.lsp.set_log_level("debug")
 " nmap [[ <Cmd>PrevDiagnostic<cr>
 " nmap ]] <Cmd>NextDiagnostic<cr>
 
-nmap             <C-k>           <Cmd>PrevDiagnostic<cr>
-nmap             <C-j>           <Cmd>NextDiagnostic<cr>
+nmap             <C-k>           <Cmd>lua vim.lsp.diagnostic.goto_prev()<cr>
+nmap             <C-j>           <Cmd>lua vim.lsp.diagnostic.goto_next()<cr>
 " nmap [[ <Cmd>PrevDiagnostic<cr>
 " nmap ]] <Cmd>NextDiagnostic<cr>
 

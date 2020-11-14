@@ -8,7 +8,7 @@ docker run --entrypoint bash -it 885c3cd03b4d643999dca2db0e4e2fefe533f4689864c5d
 
 docker run -it registry.novadiscovery.net/jinko/jinko-platform/jinko-base:local bash 
 
-
+docker system prune -af --volumes
 docker image prune -a
 
 One can use `-e "foo=bar"` to pass additionnal variables.

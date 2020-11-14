@@ -1,55 +1,55 @@
 final: prev:
 let
   startPlugins = with prev.pkgs.vimPlugins; [
-      # echodoc-vim
+      # # echodoc-vim
 
-      # to install manually with coc.nvim:
-      # - coc-vimtex  coc-snippets 
-      # use coc-yank for yank history
-      editorconfig-vim
-      # replaced by coc
-      far-vim
-      fzf-vim
-      # defined in overrides: TODO this should be easier: like fzf-vim should be enough
-      fzfWrapper
-      gruvbox
+      # # to install manually with coc.nvim:
+      # # - coc-vimtex  coc-snippets 
+      # # use coc-yank for yank history
+      # editorconfig-vim
+      # # replaced by coc
+      # far-vim
+      # fzf-vim
+      # # defined in overrides: TODO this should be easier: like fzf-vim should be enough
+      # fzfWrapper
+      # gruvbox
 
-      # neomake
-      nvim-terminal-lua
+      # # neomake
+      # nvim-terminal-lua
 
-      # LanguageClient-neovim
-      tagbar
-      # targets-vim
-      # vCoolor-vim
-      # vim-CtrlXA
-      vim-dasht
-      vim-dirvish
-      # vim-fugitive
-      vim-signature
-      vim-signify
-      vim-startify
-      vim-scriptease
-      vim-sneak
-      vim-grepper
-      vim-nix
-      vim-obsession
-      vim-rsi
-      vim-sayonara
-      # TODO this one will be ok once we patch it
-      # vim-markdown-composer  # WIP
+      # # LanguageClient-neovim
+      # tagbar
+      # # targets-vim
+      # # vCoolor-vim
+      # # vim-CtrlXA
+      # vim-dasht
+      # vim-dirvish
+      # # vim-fugitive
+      # vim-signature
+      # vim-signify
+      # vim-startify
+      # vim-scriptease
+      # vim-sneak
+      # vim-grepper
+      # vim-nix
+      # vim-obsession
+      # vim-rsi
+      # vim-sayonara
+      # # TODO this one will be ok once we patch it
+      # # vim-markdown-composer  # WIP
 
-      # vim-livedown
-      # markdown-preview-nvim # :MarkdownPreview
-      # nvim-markdown-preview  # :MarkdownPreview
+      # # vim-livedown
+      # # markdown-preview-nvim # :MarkdownPreview
+      # # nvim-markdown-preview  # :MarkdownPreview
 
-      # vim-markdown-preview  # WIP
-      vim-commentary
+      # # vim-markdown-preview  # WIP
+      # vim-commentary
 
-      # vimwiki
+      # # vimwiki
 
-      # reuse once https://github.com/neovim/neovim/issues/9390 is fixed
-      # vimtex
-      unicode-vim
+      # # reuse once https://github.com/neovim/neovim/issues/9390 is fixed
+      # # vimtex
+      # unicode-vim
     ]
     ;
 
@@ -234,17 +234,17 @@ rec {
         ;
 
     # TODO provide an upper level
-    configure = {
-        packages.myVimPackage = {
-          # see examples below how to use custom packages
-          # loaded on launch
-          start = startPlugins;
-          # manually loadable by calling `:packadd $plugin-name`
-          opt = [ ];
-        };
-      };
+    # configure = {
+    #     packages.myVimPackage = {
+    #       # see examples below how to use custom packages
+    #       # loaded on launch
+    #       start = startPlugins;
+    #       # manually loadable by calling `:packadd $plugin-name`
+    #       opt = [ ];
+    #     };
+    #   };
 
-    plugins = startPlugins;
+    # plugins = startPlugins;
 
     pluginsExperimental = {
       vim-obsession = {

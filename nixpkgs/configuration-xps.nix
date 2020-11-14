@@ -9,14 +9,14 @@ in
     # ./modules/docker-daemon.nix
 
     # ./modules/libvirtd.nix
-    ./modules/hoogle.nix
+    # ./modules/hoogle.nix
     # ./profiles/pixiecore.nix
     # ./modules/mptcp.nix
 
     # ./profiles/neovim.nix
     ./modules/sway.nix
 
-    ./nixpkgs/profiles/vscode.nix
+    ./profiles/vscode.nix
 
     # may provoke some issues like switch hanging
     # ./modules/kubernetes.nix
