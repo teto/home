@@ -1,59 +1,13 @@
 final: prev:
 let
   startPlugins = with prev.pkgs.vimPlugins; [
-      # # echodoc-vim
-
-      # # to install manually with coc.nvim:
-      # # - coc-vimtex  coc-snippets 
-      # # use coc-yank for yank history
-      # editorconfig-vim
-      # # replaced by coc
-      # far-vim
-      # fzf-vim
-      # # defined in overrides: TODO this should be easier: like fzf-vim should be enough
-      # fzfWrapper
-      # gruvbox
-
-      # # neomake
-      # nvim-terminal-lua
-
-      # # LanguageClient-neovim
-      # tagbar
-      # # targets-vim
-      # # vCoolor-vim
-      # # vim-CtrlXA
-      # vim-dasht
-      # vim-dirvish
-      # # vim-fugitive
-      # vim-signature
-      # vim-signify
-      # vim-startify
-      # vim-scriptease
-      # vim-sneak
-      # vim-grepper
-      # vim-nix
-      # vim-obsession
-      # vim-rsi
-      # vim-sayonara
-      # # TODO this one will be ok once we patch it
-      # # vim-markdown-composer  # WIP
-
       # # vim-livedown
       # # markdown-preview-nvim # :MarkdownPreview
       # # nvim-markdown-preview  # :MarkdownPreview
-
-      # # vim-markdown-preview  # WIP
-      # vim-commentary
-
-      # # vimwiki
-
       # # reuse once https://github.com/neovim/neovim/issues/9390 is fixed
       # # vimtex
       # unicode-vim
-    ]
-    ;
-
-
+    ];
 in
 rec {
   # this generates a config appropriate to work with the passed derivations
@@ -107,13 +61,6 @@ rec {
     };
 
   neovim-unwrapped-master = let
-    tree-sitter = prev.tree-sitter.overrideAttrs (oa: {
-      version = "0.17.3";
-      sha256 = "sha256-uQs80r9cPX8Q46irJYv2FfvuppwonSS5HVClFujaP+U=";
-      cargoSha256 = "sha256-fonlxLNh9KyEwCj7G5vxa7cM/DlcHNFbQpp0SwVQ3j4=";
-
-      postInstall = "PREFIX=$out make install";
-    });
     in
       prev.neovim-unwrapped.overrideAttrs (oa: {
       name = "unwrapped-neovim-master";
@@ -128,14 +75,13 @@ rec {
       #   ref = "master";
       # };
       buildInputs = oa.buildInputs ++ ([
-        # final.pkgs.tree-sitter 
-        tree-sitter
+        final.tree-sitter
       ]);
 
     src = builtins.fetchGit {
-      # url = https://github.com/neovim/neovim.git;
-      url = https://github.com/teto/neovim.git;
-      ref = "defaults_Y";
+      url = https://github.com/neovim/neovim.git;
+      # url = https://github.com/teto/neovim.git;
+      # ref = "defaults_Y";
     };
 
       # src = final.fetchFromGitHub {
@@ -185,9 +131,6 @@ rec {
   #     haskellPackages.nvim-hs-ghcid
   #   ];
     customRC = ''
-        let g:LanguageClient_serverCommands = {
-          'haskell': ['hie', '--lsp', '-d', '--logfile', '/tmp/lsp_haskell.log' ]
-        }
     '';
 
     # ajouter une config lua
@@ -283,7 +226,7 @@ rec {
       # devMode=true;
       stdenv = final.pkgs.llvmPackages_latest.stdenv;
   }).overrideAttrs(oa:{
-    cmakeBuildType="debug";
+    cmakeBuildType="Debug";
 
     # TODO add luaCheck
     # cmakeFlags = oa.cmakeFlags ++ optional devMode "-DLUACHECK_PRG=${neovimLuaEnv}/bin/luacheck";

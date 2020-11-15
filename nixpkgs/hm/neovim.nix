@@ -48,6 +48,10 @@ let
     '';
   };
 
+
+  neovim-unwrapped-custom = pkgs.neovim-unwrapped-master.overrideAttrs(oa: {
+    cmakeBuildType="Debug";
+  });
 in
 {
 
@@ -59,10 +63,12 @@ in
   # home.file."${config.xdg.configHome}/nvim/parser/haskell.so".source = "${pkgs.tree-sitter.builtGrammars.haskell}/parser";
   # home.file."${config.xdg.configHome}/nvim/parser/nix.so".source = "${pkgs.tree-sitter.builtGrammars.nix}/parser";
 
+# nvim-lua/lsp_extensions.nvim
+
 
   programs.neovim = {
      enable = true;
-     package = pkgs.neovim-unwrapped-master;
+     package = neovim-unwrapped-custom;
 
      # concatMap
      extraConfig = ''
@@ -84,6 +90,7 @@ in
       # should ideally be described only in neovim's rc
       pythonPackages.pdftotext
       pkgs.jq
+      nodePackages.pyright
       nodePackages.bash-language-server
       luaPackages.lua-lsp
       yaml-language-server
@@ -124,6 +131,10 @@ in
           let g:far#source='rg'
           let g:far#collapse_result=1
         '';
+      }
+      {
+        plugin = telescope-nvim;
+
       }
       {
         plugin = fzf-vim;

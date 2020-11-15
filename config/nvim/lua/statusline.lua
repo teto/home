@@ -28,8 +28,8 @@ local function statusline_lsp()
   local buf_messages = vim.lsp.util.get_progress_messages()
 
   for _, msg in ipairs(buf_messages) do
-    local name = aliases[msg.name] or msg.name
-    local client_name = '[' .. name .. ']'
+	  print("statusline ", vim.inspect(msg))
+    local client_name = '[' .. msg.name .. ']'
     local contents = ''
     if msg.progress then
       contents = msg.title

@@ -1,6 +1,6 @@
 { config, pkgs, lib,  ... }:
 let
-  terminalCommand = pkgs.termite;
+  terminalCommand = pkgs.kitty;
 
   # TODO copy it
   unicode-data = pkgs.fetchurl {

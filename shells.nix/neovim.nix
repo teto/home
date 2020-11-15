@@ -1,8 +1,4 @@
-with import <nixpkgs> {
-  # overlays = [ 
-  #   import 
-  # ];
-};
+with import <nixpkgs> {};
 
 let
 
@@ -11,12 +7,9 @@ let
   '';
 
   nvim-shell-dev = neovim-dev.overrideAttrs(oa: {
-    cmakeBuildType="debug";
 
-    # //Flags used by the C compiler during DEBUG builds.
-    # CMAKE_C_FLAGS_DEBUG:STRING=-g
+    cmakeBuildType="Debug";
 
-    # CMAKE_EXTRA_FLAGS
     cmakeFlags = oa.cmakeFlags ++ [
       "-DMIN_LOG_LEVEL=0"
       "-DENABLE_LTO=OFF"
@@ -30,17 +23,16 @@ let
 
     nativeBuildInputs = oa.nativeBuildInputs ++ [
       # testing between both
-      # pkgs.ccls
-      pkgs.python-language-server
+      pkgs.ccls
       pkgs.clang-tools  # for clangd
       pkgs.llvm_11  # for llvm-symbolizer
       # pkgs.valgrind
     ];
 
-    # export NVIM_PROG
-    # https://github.com/neovim/neovim/blob/master/test/README.md#configuration
-    # b __asan::ReportGenericError
-    # TODO export as a neovim debug hook
+    buildInputs = oa.buildInputs ++ ([
+      tree-sitter
+    ]);
+
     shellHook = oa.shellHook + ''
       export NVIM_PYTHON_LOG_LEVEL=DEBUG
       export NVIM_LOG_FILE=/tmp/log
@@ -56,9 +48,8 @@ let
       # ASAN_OPTIONS=halt_on_error=0
       #  ./stderr
       # halt_on_error=1
-      export ASAN_OPTIONS="log_path=./test.log:abort_on_error=1"
+      export ASAN_OPTIONS="log_path=./test.log:abort_on_error=0"
       export UBSAN_OPTIONS=print_stacktrace=1
-
     '';
   });
 in

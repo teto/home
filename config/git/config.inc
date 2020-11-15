@@ -1,7 +1,5 @@
-
 [core]
 # sshCommand=ssh -vvv
-
 # compactionHeuristic
 
 [push]
@@ -21,7 +19,6 @@ compression = 0
 [credential "https://git.novadiscovery.net/jinko/scenario"]
 	username = platform
 
-
 # diff-highlight.oldNormal    "red bold"
 # diff-highlight.oldHighlight "red bold 52"
 # diff-highlight.newNormal    "green bold"
@@ -34,10 +31,6 @@ compression = 0
 # diff.new        "green bold"
 # diff.whitespace "red reverse"
 
-
-# url.https://github.com/.insteadOf git://github.com/
-# [url "https://github"]
-# insteadOf = git://github
 
 [sendemail]
   chainreplyto = false

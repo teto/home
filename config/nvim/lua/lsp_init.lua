@@ -9,7 +9,8 @@ local api = vim.api
 
 local plug_lsputil_enabled, lsputil = pcall(require, "lsputil")
 
-if plug_lsputil_enabled then
+-- if plug_lsputil_enabled then
+if false then
 	vim.lsp.callbacks['textDocument/codeAction'] = lsputil.codeActioncode_action_handler
 	vim.lsp.callbacks['textDocument/references'] = lsputil.locationsreferences_handler
 	vim.lsp.callbacks['textDocument/definition'] = lsputil.locationsdefinition_handler
@@ -43,30 +44,42 @@ end
 -- custom attach callback
 local attach_cb = require 'on_attach'
 
-if lsp_status_enabled then
-	-- completion_customize_lsp_label as used in completion-nvim
-	lsp_status.config {
-		-- kind_labels = vim.g.completion_customize_lsp_label
-		indicator_errors = "×",
-		indicator_warnings = "!",
-		indicator_info = "i",
-		indicator_hint = "›",
-		status_symbol = "",
-	}
+-- if lsp_status_enabled then
+-- 	-- completion_customize_lsp_label as used in completion-nvim
+-- 	lsp_status.config {
+-- 		-- kind_labels = vim.g.completion_customize_lsp_label
+-- 		indicator_errors = "×",
+-- 		indicator_warnings = "!",
+-- 		indicator_info = "i",
+-- 		indicator_hint = "›",
+-- 		status_symbol = "",
+-- 	}
 
 
-	-- this generates an error
-	-- to override all defaults
-	--   { log_level = lsp.protocol.MessageType.Warning.Error }
+-- 	-- this generates an error
+-- 	-- to override all defaults
+-- 	--   { log_level = lsp.protocol.MessageType.Warning.Error }
 
-	nvim_lsp.util.default_config.capabilities = vim.tbl_extend(
-	"keep",
-	nvim_lsp.util.default_config.capabilities or {},
-	-- enable 'progress' support in lsp servers
-	lsp_status.capabilities
-	)
+-- 	nvim_lsp.util.default_config.capabilities = vim.tbl_extend(
+-- 	"keep",
+-- 	nvim_lsp.util.default_config.capabilities or {},
+-- 	-- enable 'progress' support in lsp servers
+-- 	lsp_status.capabilities
+-- 	)
 
-end
+-- end
+
+
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+  vim.lsp.diagnostic.on_publish_diagnostics, {
+    underline = true,
+    virtual_text = true,
+    signs = {
+      priority = 20
+    },
+    update_in_insert = false,
+  }
+)
 
 -- vim.lsp.util.show_current_line_diagnostics()
 -- Check if it's already defined for when I reload this file.
@@ -99,6 +112,25 @@ nvim_lsp.lua_lsp.setup{}
 
 nvim_lsp.dockerls.setup{}
 nvim_lsp.yamlls.setup{}
+
+configs.pyright = {
+default_config = {
+	cmd = {"pyright-langserver", "--stdio"};
+	filetypes = {"python"};
+	root_dir = nvim_lsp.util.root_pattern(".git", "setup.py",  "setup.cfg", "pyproject.toml", "requirements.txt");
+	settings = {
+	analysis = { autoSearchPaths= true; };
+	pyright = { useLibraryCodeForTypes = true; };
+	};
+	-- The following before_init function can be removed once https://github.com/neovim/neovim/pull/12638 is merged
+	before_init = function(initialize_params)
+	initialize_params['workspaceFolders'] = {{
+		name = 'workspace',
+		uri = initialize_params['rootUri']
+	}}
+	end
+	};
+}
 
 -- ghcide
 -- nvim_lsp.ghcide.setup({
@@ -218,35 +250,40 @@ nvim_lsp.pyls_ms.setup({
 --   }
 -- })
 
---nvim_lsp.clangd.setup({
---	--compile-commands-dir=build
---    cmd = {"clangd", "--background-index", 
---		"--log=info", -- error/info/verbose
---		"--pretty" -- pretty print json output
---	};
+nvim_lsp.clangd.setup({
+	--compile-commands-dir=build
+    cmd = {"clangd", "--background-index",
+		-- "--log=info", -- error/info/verbose
+		-- "--pretty" -- pretty print json output
+	};
+	-- filetypes = { "c", "cpp", "objc", "objcpp" },
+log_level = vim.lsp.protocol.MessageType.Debug;
+--	on_attach=attach_cb.on_attach,
 --	-- 'build/compile_commands.json',
 --	root_dir = nvim_lsp.util.root_pattern( '.git'),
 --	-- mandated by lsp-status
---	init_options = { clangdFileStatus = true },
---	callbacks = lsp_status.extensions.clangd.setup()
---})
+--	init_options = {
+--		-- clangdFileStatus = true 
+--	},
+--	-- callbacks = lsp_status.extensions.clangd.setup()
+})
 
 -- lua vim.lsp.buf.hover()
 
 -- https://github.com/MaskRay/ccls/wiki/Debugging
-nvim_lsp.ccls.setup({
-	name = "ccls",
-	filetypes = { "c", "cpp", "objc", "objcpp" },
-	cmd = { "ccls", "--log-file=/tmp/ccls.log", "-v=1" },
-	log_level = vim.lsp.protocol.MessageType.Log;
-	root_dir = nvim_lsp.util.root_pattern(".git");
-	init_options = {
-		-- "compilationDatabaseDirectory": "/home/teto/mptcp/build",
-		clang = { excludeArgs = { "-m*", "-Wa*" } },
-		cache = { directory = "/tmp/ccls" }
-	},
-	on_attach = attach_cb.on_attach
-})
+-- nvim_lsp.ccls.setup({
+-- 	name = "ccls",
+-- 	filetypes = { "c", "cpp", "objc", "objcpp" },
+-- 	cmd = { "ccls", "--log-file=/tmp/ccls.log", "-v=1" },
+-- 	log_level = vim.lsp.protocol.MessageType.Log;
+-- 	root_dir = nvim_lsp.util.root_pattern(".git");
+-- 	init_options = {
+-- 		-- "compilationDatabaseDirectory": "/home/teto/mptcp/build",
+-- 		clang = { excludeArgs = { "-m*", "-Wa*" } },
+-- 		cache = { directory = "/tmp/ccls" }
+-- 	},
+-- 	on_attach = attach_cb.on_attach
+-- })
 
 -- -- config at https://raw.githubusercontent.com/palantir/python-language-server/develop/vscode-client/package.json
 -- nvim_lsp.pyls.setup({

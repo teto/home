@@ -12,11 +12,6 @@
     hm.url = "github:nix-community/home-manager";
     nur.url = "github:nix-community/NUR";
 
-    # nova needs ssh keys, so make it possible to install without nova to boostrap
-    # nova.url = "ssh://git@git.novadiscovery.net:4224/world/nova-nix.git";
-    # nova.url = "/home/teto/nova/nova-nix";
-    nova.url = "git+https://flake:xxx1U1DQ4PhC_37AAb4y@git.novadiscovery.net/world/nova-nix";
-
     poetry.url = "github:nix-community/poetry2nix";
 
     # TODO one can point at a subfolder ou bien c la branche ? /flakes

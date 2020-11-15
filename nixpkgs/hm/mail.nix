@@ -12,6 +12,7 @@ let
       MaxMessages = 20000;
       # size[k|m][b]
       MaxSize = "1m";
+      CopyArrivalDate =  "yes"; # Keeps the time stamp based message sorting intact.
     };
     create = "maildir";   # create missing mailboxes
     expunge = "both";
@@ -145,7 +146,8 @@ let
     folders.sent = "[Gmail]/Sent Mail";
     folders.trash = "[Gmail]/Trash";
 
-    mbsync = mbsyncConfig // {
+  # CopyArrivalDate
+  mbsync = mbsyncConfig // {
       remove = "both";
       # how to destroy on gmail ?
       # expunge = "both";

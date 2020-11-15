@@ -35,7 +35,7 @@ rec {
     manpages  # because man tcp should always be available
     moreutils # contains errno binary that can translate errnos
     ncurses.dev # for infocmp
-    termite.terminfo # to be able to edit over ssh
+    # termite.terminfo # broken on unstable to be able to edit over ssh
     kitty.terminfo # to be able to edit over ssh
     utillinux # for lsns (namespace listing)
   ] ++ (with pkgs; [
