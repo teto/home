@@ -216,25 +216,25 @@ nvim_lsp.rust_analyzer.setup({
 require'nvim_lsp'.rnix.setup{}
 
 -- Available on nix via python-language-server (microsoft)
-nvim_lsp.pyls_ms.setup({
-	cmd = { "python-language-server" };
-    init_options = {
-      analysisUpdates = true,
-      asyncStartup = true,
-      displayOptions = {},
-    },
-	-- as per lsp_status doc
-	-- callbacks = lsp_status.extensions.pyls_ms.setup(),
-    settings = {
-      python = {
-        analysis = {
-          disabled = {},
-          errors = {},
-          info = {}
-        }
-      }
-	}
-})
+-- nvim_lsp.pyls_ms.setup({
+-- 	cmd = { "python-language-server" };
+--     init_options = {
+--       analysisUpdates = true,
+--       asyncStartup = true,
+--       displayOptions = {},
+--     },
+-- 	-- as per lsp_status doc
+-- 	-- callbacks = lsp_status.extensions.pyls_ms.setup(),
+--     settings = {
+--       python = {
+--         analysis = {
+--           disabled = {},
+--           errors = {},
+--           info = {}
+--         }
+--       }
+-- 	}
+-- })
 
 -- | Texlab
 -- nvim_lsp.texlab.setup({

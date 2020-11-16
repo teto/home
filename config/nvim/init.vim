@@ -2164,6 +2164,8 @@ set sessionoptions-=help
 " xnoremap > >gv
 " xnoremap < <gv
 
+command! OpenDiagnostics lua vim.lsp.diagnostic.set_loclist()
+
 command! LspStopAllClients lua vim.lsp.stop_client(vim.lsp.get_active_clients())
 
 " set working directory to the current buffer's directory
