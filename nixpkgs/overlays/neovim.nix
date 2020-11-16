@@ -79,9 +79,9 @@ rec {
       ]);
 
     src = builtins.fetchGit {
-      url = https://github.com/neovim/neovim.git;
-      # url = https://github.com/teto/neovim.git;
-      # ref = "defaults_Y";
+        # url = https://github.com/neovim/neovim.git;
+      url = https://github.com/teto/neovim.git;
+      ref = "lsp_progress";
     };
 
       # src = final.fetchFromGitHub {

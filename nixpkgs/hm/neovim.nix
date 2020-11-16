@@ -94,6 +94,7 @@ in
       nodePackages.bash-language-server
       luaPackages.lua-lsp
       yaml-language-server
+      rnix-lsp
       nodePackages.dockerfile-language-server-nodejs
     ];
 

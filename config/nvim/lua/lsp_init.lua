@@ -1,7 +1,7 @@
 -- How to add a new server
 -- https://github.com/neovim/nvim-lsp/issues/41
-local nvim_lsp = require 'nvim_lsp'
-local configs = require 'nvim_lsp/configs'
+local nvim_lsp = require 'lspconfig'
+local configs = require 'lspconfig/configs'
 local lsp_status_enabled, lsp_status = pcall(require, 'lsp-status')
 local notifs = require 'notifications'
 local util = require'vim.lsp.util'
@@ -213,7 +213,7 @@ nvim_lsp.rust_analyzer.setup({
 })
 
 
-require'nvim_lsp'.rnix.setup{}
+require'lspconfig'.rnix.setup{}
 
 -- Available on nix via python-language-server (microsoft)
 -- nvim_lsp.pyls_ms.setup({
