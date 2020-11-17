@@ -131,7 +131,7 @@ Plug 'MattesGroeger/vim-bookmarks' " ruby  / :BookmarkAnnotate
 " Plug 'thaerkh/vim-workspace'  " :ToggleWorkspace
 
 Plug 'skywind3000/vim-quickui'
-" Plug 'liuchengxu/vista.vim' " replaces tagbar to list workplace symbols
+Plug 'liuchengxu/vista.vim' " replaces tagbar to list workplace symbols
 Plug 'neovim/nvim-lspconfig' " while fuzzing details out
 " Plug '~/nvim-lspconfig' " while fuzzing details out
 " Plug 'puremourning/vimspector' " to debug programs
@@ -207,6 +207,8 @@ let g:vim_search_pulse_duration = 400
 "}}}
 
 " Plug 'ehamberg/vim-cute-python' " display unicode characters, kinda looks bad on vim grid
+" oberblastmeister/rooter.nvim inspired by vim-rooter
+Plug 'glacambre/shelley'
 Plug 'dbakker/vim-projectroot' " projectroot#guess()
 Plug 'sunaku/vim-dasht' " get documentation (zeavim is also a contender KabbAmine/zeavim.vim)
 " Plug 'mtth/scratch.vim' " , {'on': 'Scratch'} mapped to ?
