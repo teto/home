@@ -127,9 +127,35 @@ in
   # then coredumpctl debug will launch gdb !
   # boot.kernel.sysctl."kernel.core_pattern" = "core"; to disable.
   # security.pam.loginLimits
+  systemd.coredump.enable = true;
+  systemd.coredump.extraConfig = ''
+    '';
 
+    # users.motd = 
+  security.pam.loginLimits = [ 
+    {
+      domain = "teto";
+      type = "soft";
+      item = "core";
+      value = "unlimited";
+    }
+  ];
+
+# nixpkgs/modules/config-all.nix|262 col 15| environment.etc."inputrc".source = ../../config/inputrc;
+  environment.etc."security/limits.conf".text = ''
+    #[domain]        [type]  [item]  [value]
+    teto  soft  core  unlimited
+    teto  hard  core  unlimited
+  '';
+
+  systemd.services."systemd-coredump".serviceConfig.ProtectHome = false;
+  systemd.environment."systemd/system/systemd-coredump@.service.d/override.conf".text = ''
+    ProtectHome=no
+  '';
   # this is slow
   documentation.nixos.enable = true;
+
+  programs.file-roller.enable = true;
 
   programs.system-config-printer.enable = true;
 

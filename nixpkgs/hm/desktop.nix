@@ -40,7 +40,7 @@ let
     lazygit  # kinda like tig
     ncurses.dev # for infocmp
     neovim-remote # for latex etc
-    nix-prefetch-scripts
+    # nix-prefetch-scripts # broken
     nix-index # to list package contents
     nixpkgs-review
     pcalc  # cool calc

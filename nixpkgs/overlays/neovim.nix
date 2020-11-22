@@ -82,6 +82,7 @@ rec {
         # url = https://github.com/neovim/neovim.git;
       url = https://github.com/teto/neovim.git;
       ref = "lsp_progress";
+      rev = "025bbcff376425b32b211edb173713a94e7b0e56";
     };
 
       # src = final.fetchFromGitHub {

@@ -23,6 +23,8 @@ endfunc
 " map <C-D> :tag<CR>
 map <D-b> :echom "hello papy"
 
+" let g:vrc_trigger = '<C-]>'
+
 "$NVIM_PYTHON_LOG_FILE
 " profile startup time
 " nvim --startuptime startup.log
@@ -105,6 +107,7 @@ set exrc
 " vim-plug plugin declarations {{{1
 call plug#begin(s:plugdir)
 " Plug 'nvim-lua/lsp-status.nvim'  " display lsp progress
+Plug 'strboul/urlview.vim' " :Urlview
 Plug 'diepm/vim-rest-console' " test rest APIs
 Plug '~/pdf-scribe.nvim'  " to annotate pdf files from nvim :PdfScribeInit
 Plug 'cespare/vim-toml'
@@ -382,6 +385,7 @@ Plug 'kthibodeaux/pull-review'     " :PullReviewList
 " Plug 't9md/vim-quickhl' " hl manually selected words :h QuickhlManualEnable
 
 " colorschemes {{{
+Plug 'glepnir/zephyr-nvim'
 Plug 'flrnd/candid.vim'
 Plug 'adlawson/vim-sorcerer'
 Plug 'whatyouhide/vim-gotham'

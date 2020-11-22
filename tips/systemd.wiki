@@ -2,6 +2,12 @@ systemd-analyze blame
 
 systemctl --failed --user
 
+# coredump
+to generate a coredump, from gdb you can type `generate-core-file`
+
+https://linux-audit.com/understand-and-configure-core-dumps-work-on-linux/#using-systemdcoredump
+
+See coredump.conf(5) for config
 coredumpctl ...
 coredumpctl debug
 

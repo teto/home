@@ -54,8 +54,8 @@
               imports = my_imports
               # ++ nixpkgs.lib.optional inputs.nova != null [
               ++ [
-                nova.nixosModules.hmProfiles.hm-user
-                nova.nixosModules.hmProfiles.dev
+                nova.hmProfiles.hm-user
+                nova.hmProfiles.dev
               ];
             };
           }

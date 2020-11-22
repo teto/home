@@ -130,20 +130,25 @@ kernel_xconfig=''
 
 
   # variables set by PAM
-  environment.sessionVariables = {};
-  environment.extraOutputsToInstall = [ "man" ];
-  environment.variables = {
+  # https://wiki.archlinux.org/index.php/Environment_variables#Using_pam_env
+  environment.sessionVariables = {
+    XDG_CONFIG_HOME="@{HOME}/.config";
+    # XDG_CACHE_HOME="$HOME/.cache";
+    # XDG_DATA_HOME="$HOME/.local/share";
     EDITOR="nvim";
     BROWSER="qutebrowser";
 
     # todo 
-    XDG_CONFIG_HOME="$HOME/.config";
+    # XDG_CONFIG_HOME="$HOME/.config";
     XDG_CACHE_HOME="$HOME/.cache";
     XDG_DATA_HOME="$HOME/.local/share";
     # TODO Move to user config aka homemanager
     HISTFILE="$XDG_CACHE_HOME/bash_history";
     LESS=""; # options to pass to less automatically
   };
+  environment.extraOutputsToInstall = [ "man" ];
+  # environment.variables = {
+  # };
 
   # stick to sh as it's shell independant
   environment.extraInit = builtins.readFile ../../config/zsh/init.sh;
