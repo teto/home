@@ -132,7 +132,7 @@ in
     '';
 
     # users.motd = 
-  security.pam.loginLimits = [ 
+  security.pam.loginLimits = [
     {
       domain = "teto";
       type = "soft";
@@ -148,10 +148,11 @@ in
     teto  hard  core  unlimited
   '';
 
-  systemd.services."systemd-coredump".serviceConfig.ProtectHome = false;
-  systemd.environment."systemd/system/systemd-coredump@.service.d/override.conf".text = ''
-    ProtectHome=no
-  '';
+  # systemd.services."systemd-coredump".serviceConfig.ProtectHome = false;
+  # systemd.services."systemd-coredump@".serviceConfig.ProtectHome = false;
+  # environment.etc."systemd/system/systemd-coredump@.service.d/override.conf".text = ''
+  #   ProtectHome=no
+  # '';
   # this is slow
   documentation.nixos.enable = true;
 

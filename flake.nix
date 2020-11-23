@@ -51,12 +51,12 @@
             nixpkgs.overlays = nixpkgs.lib.attrValues self.overlays;
 
             home-manager.users."teto" = {
-              imports = my_imports
+              imports = my_imports;
               # ++ nixpkgs.lib.optional inputs.nova != null [
-              ++ [
-                nova.hmProfiles.hm-user
-                nova.hmProfiles.dev
-              ];
+              # ++ [
+              #   nova.hmProfiles.hm-user
+              #   nova.hmProfiles.dev
+              # ];
             };
           }
         )
@@ -100,6 +100,8 @@
                   networking.hostName = "mcoudron"; # Define your hostname.
                 })
               hm.nixosModules.home-manager
+              (nova.homeManagerConfigurations.standard "teto" "/home/teto")
+
               (hm-custom [ ./nixpkgs/home-xps.nix ] )
             ]
             ++ [

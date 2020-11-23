@@ -18,7 +18,7 @@ let
       # useful to
       # https://github.com/google/sanitizers/wiki/AddressSanitizerFlags
       # https://clang.llvm.org/docs/AddressSanitizer.html#symbolizing-the-reports
-      "-DCLANG_ASAN_UBSAN=ON"
+      # "-DCLANG_ASAN_UBSAN=ON"
 	];
 
     nativeBuildInputs = oa.nativeBuildInputs ++ [

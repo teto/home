@@ -7,6 +7,24 @@ x86_64_defconfig kvmconfig
 pr_debug 
 https://lwn.net/Articles/434833/
 cat /sys/kernel/debug/dynamic_debug/control 
+The four values in printk denote: console_loglevel, default_message_loglevel, minimum_console_loglevel and default_console_loglevel respectively.
+
+# https://www.kernel.org/doc/html/latest/admin-guide/sysctl/kernel.html?highlight=printk#printk
+      # https://unix.stackexchange.com/questions/13019/description-of-kernel-printk-values
+      # echo 8 > /proc/sys/kernel/printk
+      # https://elinux.org/Debugging_by_printing
+      # or you can use dmesg -n 8
+      # "kernel.printk" = "7	7	7	7";
+      "kernel.printk" = "8";
+       Kernel constant   Level value   Meaning
+       KERN_EMERG             0        System is unusable
+       KERN_ALERT             1        Action must be taken immediately
+       KERN_CRIT              2        Critical conditions
+       KERN_ERR               3        Error conditions
+       KERN_WARNING           4        Warning conditions
+       KERN_NOTICE            5        Normal but significant condition
+       KERN_INFO              6        Informational
+       KERN_DEBUG             7        Debug-level messages
 
 # to build compile_commands.json
 Run scripts/gen_compile_commands.py
