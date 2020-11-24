@@ -106,7 +106,10 @@ in
   # seemingly working for chromium only, check for firefox
   programs.browserpass.enable = true;
 
-  services.greenclip.enable = true;
+  services.greenclip = {
+    enable = true;
+    package = pkgs.haskell.packages.ghc884.greenclip;
+  };
 
   nix = {
 

@@ -12,8 +12,8 @@
     ];
 
     binaryCachePublicKeys = [
-      "jinkotwo:04t6bF1/peQlZWVpYPN0BraxIV2pdlN2005Vi0hUvso="
-      "jinkoone.cachix.org-1:s17+hDoQ4hVbQkw/Kt0DpoozX2wB7f+smXZ6LcEzmw0="
+      # "jinkotwo:04t6bF1/peQlZWVpYPN0BraxIV2pdlN2005Vi0hUvso="
+      # "jinkoone.cachix.org-1:s17+hDoQ4hVbQkw/Kt0DpoozX2wB7f+smXZ6LcEzmw0="
       "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
     ];
 

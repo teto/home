@@ -100,7 +100,7 @@
                   networking.hostName = "mcoudron"; # Define your hostname.
                 })
               hm.nixosModules.home-manager
-              (nova.homeManagerConfigurations.standard "teto" "/home/teto")
+              (nova.homeManagerConfigurations.standard { username = "teto"; homeDirectory = "/home/teto";})
 
               (hm-custom [ ./nixpkgs/home-xps.nix ] )
             ]

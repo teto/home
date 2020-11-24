@@ -206,8 +206,6 @@ in
   # will fial until openflowswitch is fixed
   programs.mininet.enable = false;
 
-  services.greenclip.enable = true;
-
   # ebpf ?
   # broken in https://github.com/NixOS/nixpkgs/issues/56724
   # programs.bcc.enable = true;

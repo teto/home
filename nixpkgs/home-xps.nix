@@ -9,6 +9,7 @@ in
   imports = [
       ./hm/desktop.nix
       ./hm/dev.nix
+      ./hm/nova.nix
 
       # ./hm/vdirsyncer.nix
       # ./hm/nushell.nix
