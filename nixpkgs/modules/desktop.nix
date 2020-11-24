@@ -49,6 +49,7 @@ in
      # can generate problems for wireshark with Qt versions
      inputMethod = {
        enabled = "fcitx";
+       # i18n.inputMethod.package
        fcitx.engines = with pkgs.fcitx-engines; [
          # mozc  # broken
          table-other # for arabic

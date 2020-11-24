@@ -62,7 +62,9 @@ rec {
 
   neovim-unwrapped-master = let
     in
-      prev.neovim-unwrapped.overrideAttrs (oa: {
+    (prev.neovim-unwrapped.override({
+      luajit = final.lib.enableDebugging;
+    })).overrideAttrs (oa: {
       name = "unwrapped-neovim-master";
       version = "official-master";
       cmakeBuildType="debug";
@@ -75,6 +77,7 @@ rec {
       #   ref = "master";
       # };
       buildInputs = oa.buildInputs ++ ([
+
         final.tree-sitter
       ]);
 
