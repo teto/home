@@ -52,9 +52,7 @@
 
             home-manager.users."teto" = {
               imports = my_imports;
-              # ++ nixpkgs.lib.optional inputs.nova != null [
               # ++ [
-              #   nova.hmProfiles.hm-user
               #   nova.hmProfiles.dev
               # ];
             };
@@ -63,9 +61,20 @@
 		;
     in {
 
-      defaultPackage."${system}" = nixpkgs;
+      # defaultPackage."${system}" = nixpkgs;
 
       nixosConfigurations = let
+        novaHmConfig = [
+              nova.nixosProfiles.main
+              nova.nixosProfiles.dev
+            ]
+            ++ [
+              ({ config, lib, pkgs, ... }: {
+                home-manager.users."teto" = nova.hmProfiles.user;
+                # nova.homeManagerConfigurations.standard { username = "teto"; homeDirectory = "/home/teto";};
+              })
+          ]
+          ;
       in
         {
           mcoudron = nixpkgs-teto.lib.nixosSystem {
@@ -75,6 +84,7 @@
               (import ./nixpkgs/hardware-dell-camera.nix)
               (import ./nixpkgs/configuration-xps.nix)
               (import ./nixpkgs/profiles/nix-daemon.nix)
+              hm.nixosModules.home-manager
               ({ config, lib, pkgs,  ... }:
                 {
                   boot.loader.systemd-boot.enable = true;
@@ -99,13 +109,10 @@
 
                   networking.hostName = "mcoudron"; # Define your hostname.
                 })
-              (nova.homeManagerConfigurations.standard { username = "teto"; homeDirectory = "/home/teto";})
-
-              # (hm-custom [ ./nixpkgs/home-xps.nix ] )
-            ]
-            ++ [
-              nova.nixosModules.profiles.main
-              nova.nixosModules.profiles.dev
+                (hm-custom [
+                  ./nixpkgs/home-xps.nix
+                  # (nova.homeManagerConfigurations.standard { username = "teto"; homeDirectory = "/home/teto";})
+              ])
             ]
             ;
           };
@@ -123,17 +130,13 @@
 
               # TODO use from flake or from unstable
               # (import ./nixpkgs/modules/mptcp.nix)
-              # hm.nixosModules.home-manager
-              # (hm-custom [
-              #   ./nixpkgs/home-lenovo.nix
-              #   ./nixpkgs/hm/vscode.nix
-              # ] )
-              # (nova.homeManagerConfigurations.standard { username = "teto"; homeDirectory = "/home/teto";})
-            ]
-            ++ [
-              nova.nixosModules.profiles.main
-              nova.nixosModules.profiles.dev
-            ];
+              hm.nixosModules.home-manager
+              (hm-custom [
+                ./nixpkgs/home-lenovo.nix
+                # ./nixpkgs/hm/vscode.nix
+                # (nova.homeManagerConfigurations.standard { username = "teto"; homeDirectory = "/home/teto";})
+              ] )
+            ] ++               novaHmConfig;
           };
         };
 
@@ -147,6 +150,8 @@
         wireshark = import ./nixpkgs/overlays/wireshark.nix;
         python = import ./nixpkgs/overlays/python.nix;
         nur = nur.overlay;
+        # nova = nova.overlays;
+
         # unfree = final: prev: {
         #   unstable = import nixpkgs-unstable {
         #     system = "x86_64-linux";
@@ -163,7 +168,7 @@
       packages."${system}" = {
         # inherit (unstablePkgs) neovim-unwrapped-master;
         # inherit (self.overlays.neovim) neovim-unwrapped-master;
-        dce = nixpkgs.lib.callPackage ./nixpkgs/pkgs/dce {};
+        dce = nixpkgs.callPackage ./nixpkgs/pkgs/dce {};
 
         dig = nixpkgs.bind.dnsutils;
 
@@ -191,4 +196,3 @@
         // profilesAttrs;
     };
 }
-

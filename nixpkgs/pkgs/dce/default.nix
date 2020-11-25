@@ -30,7 +30,6 @@ let
   );
 
   dce = stdenv.mkDerivation rec {
-    name    = "${pname}-${version}";
     pname   = "direct-code-execution";
     version = dce-version;
 
@@ -38,14 +37,13 @@ let
 
     # with other modules
     srcs = [
-      /home/teto/dce
-      # (fetchFromGitHub {
-      #   owner  = "direct-code-execution";
-      #   repo   = "ns-3-dce";
-      #   rev    = "dce-${version}";
-      #   sha256 = "0f2g47mql8jjzn2q6lm0cbb5fv62sdqafdvx5g8s3lqri1sca14n";
-      #   name   = "dce";
-      # })
+      (fetchFromGitHub {
+        owner  = "direct-code-execution";
+        repo   = "ns-3-dce";
+        rev    = "dce-${version}";
+        sha256 = "0f2g47mql8jjzn2q6lm0cbb5fv62sdqafdvx5g8s3lqri1sca14n";
+        name   = "dce";
+      })
     ]
     ++ lib.optional withQuagga (fetchFromGitHub {
       owner  = "direct-code-execution";

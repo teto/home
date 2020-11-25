@@ -32,11 +32,11 @@ in
     options = [ "add Mod1 Alt_R" ];
   };
 
-  programs.home-manager = {
-    enable = true;
-    # must be a string
-    path =  "/home/teto/home-manager";
-  };
+  # programs.home-manager = {
+  #   enable = true;
+  #   # must be a string
+  #   path =  "/home/teto/home-manager";
+  # };
 
   # for blue tooth applet; must be installed systemwide
   services.blueman-applet.enable = false;

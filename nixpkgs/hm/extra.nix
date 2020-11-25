@@ -6,7 +6,6 @@ in
 {
 
   home.packages = with pkgs; [
-  # users.users.teto.packages = with pkgs; [
     hakuneko
     hexyl
     pinta    # photo editing

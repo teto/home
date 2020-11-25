@@ -1,14 +1,11 @@
-self: super:
+final: prev:
 
 rec {
-  python3 = super.python3.override {
+  python3 = prev.python3.override {
      # Careful, we're using a different self and super here!
     packageOverrides = pythonself: pythonsuper: {
 
         kergen = pythonsuper.callPackage ./pkgs/kergen.nix { };
-        # Kconfiglib =  pythonsuper.callPackage ./pkgs/kconfiglib.nix { };
-
-        # python-doi = pythonsuper.callPackage ./pkgs/python-doi {};
 
         # pytest-mock = pythonsuper.pytest-mock.overrideAttrs(oa: {
         #   src = super.fetchFromGitHub {
@@ -31,6 +28,7 @@ rec {
           version = "0.9-dev";
           src = builtins.fetchGit {
             url = https://github.com/pazz/alot.git;
+            rev = "7915ea60ba866010abc728851626df96d8b80816";
           };
           buildInputs = oa.buildInputs ++ [ pythonself.notmuch2 ];
           # src = super.fetchFromGitHub {
@@ -53,20 +51,11 @@ rec {
 
         papis-dev = pythonsuper.papis.overridePythonAttrs (oa: {
           version = "1.0-dev";
-          propagatedBuildInputs = with super.python3Packages; oa.propagatedBuildInputs ++  ([
+          propagatedBuildInputs = with prev.python3Packages; oa.propagatedBuildInputs ++  ([
             # useful for zotero script
             pyyaml dateutil python-doi
           ]);
-          # src = /home/teto/papis;
           doCheck = false;
-
-          # src = builtins.fetchGit {
-          #   url = https://github.com/teto/papis;
-          #   ref = "zsh_completion";
-          #   # rev = "101e83a7014e2ed7d17ceb009a433881354fa0fc";
-          #   # sha256 = "0hw8f62qri62lg1wi37n0nvw1dw6pcmrbs66zbrzwf54rpl33462";
-          #   # fetchSubmodules = true;
-          # };
 
           # src = super.fetchFromGitHub {
           #   owner = "papis";
@@ -76,21 +65,8 @@ rec {
           #   # fetchSubmodules = true;
           # };
         });
-
-        # praw = pythonsuper.praw.overrideAttrs (oldAttrs: {
-        #   doCheck = false;
-        # });
-
-        # pelican = pythonsuper.pelican.overrideAttrs (oldAttrs: {
-        #   # src=fetchGitHashless {
-        #   #   url=file:///home/teto/pygccxml;
-        #   # };
-        #   propagatedBuildInputs = oldAttrs.propagatedBuildInputs ++ [ pythonself.markdown];
-        # });
-
     };
   };
 
   python3Packages = python3.pkgs;
 }
-

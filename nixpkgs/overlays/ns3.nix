@@ -1,21 +1,18 @@
-self: super:
-let
-  # fetchgitLocal = super.fetchgitLocal;
-in
+final: prev:
 rec {
 
   # TODO will loop indefinitely
-  ns-3-dev = (super.ns-3.override({
+  ns-3-dev = (prev.ns-3.override({
     enableDoxygen = false;
     build_profile = "optimized";
     # withManual = true;
     pythonSupport = false;
-    python = super.python3;
-    wafHook = super.wafHook.override({python = super.python3;});
+    python = prev.python3;
+    wafHook = prev.wafHook.override({python = prev.python3;});
   }))
   # .overrideAttrs(old: {
   #   name = "ns3-dev";
-  #   src = super.fetchFromGitLab {
+  #   src = prev.fetchFromGitLab {
   #     owner = "tomhenderson";
   #     repo   = "ns-3-dev";
   #     rev    = "6670ff8d48f69c605d33185febd37d13175599a8";
@@ -24,8 +21,8 @@ rec {
   # })
   ;
 
-  ns-3-local = super.ns-3.override {
-    python = self.python3;
+  ns-3-local = prev.ns-3.override {
+    python = final.python3;
     enableDoxygen = false;
     build_profile = "optimized";
     # withManual = true;
@@ -33,13 +30,7 @@ rec {
   #   # withExamples = true;
   };
 
-  # # TODO regarder https://github.com/wfxr/forgit aussi
-  # ns-3-dce-local = super.ns-3-dce.overrideAttrs(oa: {
-  #   # cleanfilter
-  #   src = super.lib.cleanSource "/home/teto/dce";
-  # });
-
-  # ns-3-dce-dev = super.ns-3-dce.overrideAttrs(oa: {
+  # ns-3-dce-dev = prev.ns-3-dce.overrideAttrs(oa: {
   #     src = (builtins.fetchGit {
   #       url  = git://github.com/teto/ns-3-dce;
   #       ref    = "python3";
@@ -47,7 +38,7 @@ rec {
   #     });
   # });
 
-  # dce-quagga-dev =  if (super.pkgs ? dce-quagga) then (super.dce-quagga.overrideAttrs( oa: {
+  # dce-quagga-dev =  if (prev.pkgs ? dce-quagga) then (prev.dce-quagga.overrideAttrs( oa: {
   #   srcs = [
   #     (builtins.fetchGit {
   #       url  = git://github.com/direct-code-execution/ns-3-dce;
@@ -61,5 +52,4 @@ rec {
   #     })
   #   ];
   # })) else null;
-
 }
