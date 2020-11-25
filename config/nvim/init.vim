@@ -211,7 +211,7 @@ let g:vim_search_pulse_duration = 400
 
 " Plug 'ehamberg/vim-cute-python' " display unicode characters, kinda looks bad on vim grid
 " oberblastmeister/rooter.nvim inspired by vim-rooter
-Plug 'pwntester/octo.nvim'
+" Plug 'pwntester/octo.nvim'
 Plug 'glacambre/shelley'
 Plug 'dbakker/vim-projectroot' " projectroot#guess()
 Plug 'sunaku/vim-dasht' " get documentation (zeavim is also a contender KabbAmine/zeavim.vim)

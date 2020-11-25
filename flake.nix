@@ -6,13 +6,13 @@
       url = "github:teto/nixpkgs/nixos-unstable";
       # flake = false;
     };
-    # nixpkgs-teto.url = "https://nixos.org/channels/nixos-20.09/nixexprs.tar.xz";
     unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     # TODO use mine instead
     hm.url = "github:nix-community/home-manager";
     nur.url = "github:nix-community/NUR";
 
-    poetry.url = "github:nix-community/poetry2nix";
+    # temporary until this gets fixed upstream
+    poetry.url = "github:teto/poetry2nix/fix_tag";
 
     # TODO one can point at a subfolder ou bien c la branche ? /flakes
     # mptcpanalyzer.url = "github:teto/mptcpanalyzer";
@@ -70,7 +70,9 @@
             ]
             ++ [
               ({ config, lib, pkgs, ... }: {
-                home-manager.users."teto" = nova.hmProfiles.user;
+                home-manager.users.teto = nova.hmProfiles.user;
+                # home-manager.useUserPackages = true;
+                home-manager.useGlobalPkgs = true;
                 # nova.homeManagerConfigurations.standard { username = "teto"; homeDirectory = "/home/teto";};
               })
           ]
@@ -150,7 +152,7 @@
         wireshark = import ./nixpkgs/overlays/wireshark.nix;
         python = import ./nixpkgs/overlays/python.nix;
         nur = nur.overlay;
-        # nova = nova.overlays;
+        nova = nova.overlays;
 
         # unfree = final: prev: {
         #   unstable = import nixpkgs-unstable {
