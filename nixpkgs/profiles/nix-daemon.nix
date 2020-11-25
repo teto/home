@@ -8,6 +8,9 @@
       hm.to = { type = "github"; owner = "nix-community"; repo="home-manager"; };
       poetry.to = { type = "github"; owner = "nix-community"; repo="poetry2nix"; };
 
+      # sinon user   flake:neovim github:teto/neovim/flake a l'air ok
+      neovim.to = { type = "github"; owner = "teto"; repo="neovim?ref=flake"; };
+
       # "github:nixos/nixpkgs/nixos-unstable";
       # home-manager
 

@@ -121,9 +121,6 @@ let
     package = pkgs.pulseaudioFull;
   };
 
-  # started as a user service
-  services.greenclip.enable = true;
-
   # for android development
   programs.adb.enable = false;
 }

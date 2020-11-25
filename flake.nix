@@ -99,10 +99,9 @@
 
                   networking.hostName = "mcoudron"; # Define your hostname.
                 })
-              hm.nixosModules.home-manager
               (nova.homeManagerConfigurations.standard { username = "teto"; homeDirectory = "/home/teto";})
 
-              (hm-custom [ ./nixpkgs/home-xps.nix ] )
+              # (hm-custom [ ./nixpkgs/home-xps.nix ] )
             ]
             ++ [
               nova.nixosModules.profiles.main
@@ -124,11 +123,12 @@
 
               # TODO use from flake or from unstable
               # (import ./nixpkgs/modules/mptcp.nix)
-              hm.nixosModules.home-manager
-              (hm-custom [
-                ./nixpkgs/home-lenovo.nix
-                ./nixpkgs/hm/vscode.nix
-              ] )
+              # hm.nixosModules.home-manager
+              # (hm-custom [
+              #   ./nixpkgs/home-lenovo.nix
+              #   ./nixpkgs/hm/vscode.nix
+              # ] )
+              # (nova.homeManagerConfigurations.standard { username = "teto"; homeDirectory = "/home/teto";})
             ]
             ++ [
               nova.nixosModules.profiles.main

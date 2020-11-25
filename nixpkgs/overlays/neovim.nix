@@ -63,7 +63,7 @@ rec {
   neovim-unwrapped-master = let
     in
     (prev.neovim-unwrapped.override({
-      luajit = final.lib.enableDebugging;
+      lua = final.enableDebugging final.luajit;
     })).overrideAttrs (oa: {
       name = "unwrapped-neovim-master";
       version = "official-master";
@@ -233,8 +233,7 @@ rec {
     cmakeBuildType="Debug";
 
     # TODO add luaCheck
-    # cmakeFlags = oa.cmakeFlags ++ optional devMode "-DLUACHECK_PRG=${neovimLuaEnv}/bin/luacheck";
-
+    # cmakeFlags = oa.cmakeFlags ++ "-DLUACHECK_PRG=${final.}/bin/luacheck";
     version = "master";
     nativeBuildInputs = oa.nativeBuildInputs
       ++ final.pkgs.lib.optionals devMode (with final.pkgs; [

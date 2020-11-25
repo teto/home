@@ -1,6 +1,6 @@
 -- How to add a new server
 -- https://github.com/neovim/nvim-lsp/issues/41
-local nvim_lsp = require 'lspconfig'
+local lspconfig = require 'lspconfig'
 local configs = require 'lspconfig/configs'
 local lsp_status_enabled, lsp_status = pcall(require, 'lsp-status')
 local notifs = require 'notifications'
@@ -60,9 +60,9 @@ local attach_cb = require 'on_attach'
 -- 	-- to override all defaults
 -- 	--   { log_level = lsp.protocol.MessageType.Warning.Error }
 
--- 	nvim_lsp.util.default_config.capabilities = vim.tbl_extend(
+-- 	lspconfig.util.default_config.capabilities = vim.tbl_extend(
 -- 	"keep",
--- 	nvim_lsp.util.default_config.capabilities or {},
+-- 	lspconfig.util.default_config.capabilities or {},
 -- 	-- enable 'progress' support in lsp servers
 -- 	lsp_status.capabilities
 -- 	)
@@ -89,7 +89,7 @@ configs.lua_lsp = {
 	cmd = {'lua-lsp'};
 	filetypes = {'lua'};
 	root_dir = function(fname)
-		return nvim_lsp.util.find_git_ancestor(fname) or vim.loop.os_homedir()
+		return lspconfig.util.find_git_ancestor(fname) or vim.loop.os_homedir()
 	end;
 	-- todo wrap it with nlua: require('nlua.lsp.nvim').
 	on_attach=attach_cb.on_attach,
@@ -100,59 +100,76 @@ configs.lua_lsp = {
 }
 end
 
-nvim_lsp.lua_lsp.setup{}
+lspconfig.lua_lsp.setup{}
 
 -- sumneko_lua
--- nvim_lsp.lua_lsp.setup{
+-- lspconfig.lua_lsp.setup{
 -- 	name = "lua";
 -- 	-- cmd = "lua-lsp",
 -- 	-- filetypes = { "lua" };
 -- }
 
 
-nvim_lsp.dockerls.setup{}
-nvim_lsp.yamlls.setup{}
+lspconfig.dockerls.setup{}
+lspconfig.yamlls.setup{}
 
-configs.pyright = {
-default_config = {
+-- configs.pyright = {
+-- default_config = {
+-- 	cmd = {"pyright-langserver", "--stdio"};
+-- 	filetypes = {"python"};
+-- 	root_dir = lspconfig.util.root_pattern(".git", "setup.py",  "setup.cfg", "pyproject.toml", "requirements.txt");
+-- 	settings = {
+-- 	analysis = { autoSearchPaths= true; };
+-- 	pyright = { useLibraryCodeForTypes = true; };
+-- 	};
+-- 	-- The following before_init function can be removed once https://github.com/neovim/neovim/pull/12638 is merged
+-- 	before_init = function(initialize_params)
+-- 	initialize_params['workspaceFolders'] = {{
+-- 		name = 'workspace',
+-- 		uri = initialize_params['rootUri']
+-- 	}}
+-- 	end
+-- 	};
+-- }
+
+lspconfig.pyright.setup{
 	cmd = {"pyright-langserver", "--stdio"};
 	filetypes = {"python"};
-	root_dir = nvim_lsp.util.root_pattern(".git", "setup.py",  "setup.cfg", "pyproject.toml", "requirements.txt");
+	root_dir = lspconfig.util.root_pattern(".git", "setup.py",  "setup.cfg", "pyproject.toml", "requirements.txt");
 	settings = {
 	analysis = { autoSearchPaths= true; };
 	pyright = { useLibraryCodeForTypes = true; };
 	};
 	-- The following before_init function can be removed once https://github.com/neovim/neovim/pull/12638 is merged
 	before_init = function(initialize_params)
-	initialize_params['workspaceFolders'] = {{
-		name = 'workspace',
-		uri = initialize_params['rootUri']
-	}}
+		initialize_params['workspaceFolders'] = {{
+			name = 'workspace',
+			uri = initialize_params['rootUri']
+		}}
 	end
-	};
 }
 
 -- ghcide
--- nvim_lsp.ghcide.setup({
+-- lspconfig.ghcide.setup({
 -- 	log_level = vim.lsp.protocol.MessageType.Log;
--- 	root_dir = nvim_lsp.util.root_pattern(".git");
+-- 	root_dir = lspconfig.util.root_pattern(".git");
 -- 	cmd = {"ghcide", "--lsp"};
 -- 	filetypes = { "hs", "lhs", "haskell" };
 -- 	-- ".stack.yaml", ".hie-bios", "BUILD.bazel", "cabal.config", "package.yaml"
 -- 	-- root_dir = function(fname)
--- 	-- 	return nvim_lsp.util.find_git_ancestor(fname) or vim.loop.os_homedir()
+-- 	-- 	return lspconfig.util.find_git_ancestor(fname) or vim.loop.os_homedir()
 -- 	-- end;
--- 	-- root_dir = nvim_lsp.util.root_pattern("stack.yaml", "hie-bios", "BUILD.bazel", "cabal.config", "package.yaml");
+-- 	-- root_dir = lspconfig.util.root_pattern("stack.yaml", "hie-bios", "BUILD.bazel", "cabal.config", "package.yaml");
 -- 	log_level = vim.lsp.protocol.MessageType.Warning;
 -- 	settings = {};
 -- 	-- on_new_config
 -- 	on_attach=attach_cb.on_attach
 -- })
 
-nvim_lsp.hls.setup({
+lspconfig.hls.setup({
     cmd = { "haskell-language-server", "--lsp" },
     filetypes = { "haskell", "lhaskell" },
-    root_dir = nvim_lsp.util.root_pattern("*.cabal", "stack.yaml", "cabal.project", "package.yaml", "hie.yaml"),
+    root_dir = lspconfig.util.root_pattern("*.cabal", "stack.yaml", "cabal.project", "package.yaml", "hie.yaml"),
 
 	on_attach=attach_cb.on_attach,
 
@@ -175,7 +192,7 @@ nvim_lsp.hls.setup({
 -- })
 
 
-nvim_lsp.rust_analyzer.setup({
+lspconfig.rust_analyzer.setup({
     capabilities = {
       textDocument = {
         completion = {
@@ -216,7 +233,7 @@ nvim_lsp.rust_analyzer.setup({
 require'lspconfig'.rnix.setup{}
 
 -- Available on nix via python-language-server (microsoft)
--- nvim_lsp.pyls_ms.setup({
+-- lspconfig.pyls_ms.setup({
 -- 	cmd = { "python-language-server" };
 --     init_options = {
 --       analysisUpdates = true,
@@ -237,7 +254,7 @@ require'lspconfig'.rnix.setup{}
 -- })
 
 -- | Texlab
--- nvim_lsp.texlab.setup({
+-- lspconfig.texlab.setup({
 --   name = 'texlab_fancy';
 --   log_level = vim.lsp.protocol.MessageType.Log;
 --   message_level = vim.lsp.protocol.MessageType.Log;
@@ -250,7 +267,7 @@ require'lspconfig'.rnix.setup{}
 --   }
 -- })
 
-nvim_lsp.clangd.setup({
+lspconfig.clangd.setup({
 	--compile-commands-dir=build
     cmd = {"clangd", "--background-index",
 		-- "--log=info", -- error/info/verbose
@@ -260,7 +277,7 @@ nvim_lsp.clangd.setup({
 log_level = vim.lsp.protocol.MessageType.Debug;
 --	on_attach=attach_cb.on_attach,
 --	-- 'build/compile_commands.json',
---	root_dir = nvim_lsp.util.root_pattern( '.git'),
+--	root_dir = lspconfig.util.root_pattern( '.git'),
 --	-- mandated by lsp-status
 --	init_options = {
 --		-- clangdFileStatus = true 
@@ -271,12 +288,12 @@ log_level = vim.lsp.protocol.MessageType.Debug;
 -- lua vim.lsp.buf.hover()
 
 -- https://github.com/MaskRay/ccls/wiki/Debugging
--- nvim_lsp.ccls.setup({
+-- lspconfig.ccls.setup({
 -- 	name = "ccls",
 -- 	filetypes = { "c", "cpp", "objc", "objcpp" },
 -- 	cmd = { "ccls", "--log-file=/tmp/ccls.log", "-v=1" },
 -- 	log_level = vim.lsp.protocol.MessageType.Log;
--- 	root_dir = nvim_lsp.util.root_pattern(".git");
+-- 	root_dir = lspconfig.util.root_pattern(".git");
 -- 	init_options = {
 -- 		-- "compilationDatabaseDirectory": "/home/teto/mptcp/build",
 -- 		clang = { excludeArgs = { "-m*", "-Wa*" } },
@@ -286,7 +303,7 @@ log_level = vim.lsp.protocol.MessageType.Debug;
 -- })
 
 -- -- config at https://raw.githubusercontent.com/palantir/python-language-server/develop/vscode-client/package.json
--- nvim_lsp.pyls.setup({
+-- lspconfig.pyls.setup({
 -- 	name = "pyls";
 -- 	cmd = {  "python", "-mpyls", "-vv", "--log-file" , "/tmp/lsp_python.log"},
 -- 	-- init_options = {
