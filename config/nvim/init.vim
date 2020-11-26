@@ -366,7 +366,7 @@ Plug 'teto/Modeliner' " <leader>ml to setup buffer modeline
 " Plug 'rhysd/github-complete.vim' " provides github user/repo autocompletion after @ and #
 
 " https://github.com/haorenW1025/completion-nvim/wiki/chain-complete-support
-" Plug 'nvim-lua/completion-nvim' " lsp based completion framework
+Plug 'nvim-lua/completion-nvim' " lsp based completion framework
 " treesitter may slow down nvim
 " Plug 'nvim-treesitter/completion-treesitter' " extension of completion-nvim,
 " depends on nvim-treesitter/nvim-treesitter

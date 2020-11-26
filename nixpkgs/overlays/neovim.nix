@@ -4,12 +4,69 @@ let
       # # vim-livedown
       # # markdown-preview-nvim # :MarkdownPreview
       # # nvim-markdown-preview  # :MarkdownPreview
-      # # reuse once https://github.com/neovim/neovim/issues/9390 is fixed
-      # # vimtex
-      # unicode-vim
+      # # reuse vimtex once https://github.com/neovim/neovim/issues/9390 is fixed
     ];
 in
 rec {
+  neovim-unwrapped-master = let
+    in
+    (prev.neovim-unwrapped.override({
+      lua = final.enableDebugging final.luajit;
+    })).overrideAttrs (oa: {
+      name = "unwrapped-neovim-master";
+      version = "official-master";
+      cmakeBuildType="Debug";
+      src = builtins.fetchGit {
+          # url = https://github.com/neovim/neovim.git;
+        url = https://github.com/teto/neovim.git;
+        ref = "lsp_progress";
+        rev = "b739486ea691066a1dc41e323d7b2f25577ee3e4";
+      };
+      # src = builtins.fetchGit {
+      #   # url = https://github.com/BK1603/neovim.git;
+      #   # ref = "fswatch-autoread";
+      #   url = https://github.com/neovim/neovim.git;
+      #   # rev = "e5d98d85693245fec811307e5a2ccfdea3a350cd"; # 30 septembre
+      #   rev = "8821587748058ee1ad8523865b30a03582f8d7be"; # 1er novembre
+      #   ref = "master";
+      # };
+      buildInputs = oa.buildInputs ++ ([
+        final.tree-sitter
+      ]);
+
+
+      # src = final.fetchFromGitHub {
+      #   owner = "neovim";
+      #   repo = "neovim";
+      #   rev = "9f704c88a57cfb797c21c19672ea6617e9673360";
+      #   sha256 = "sha256-NNUyWczL6dEPrLVsJILnzrSGKmK1/E5TURSJDjhwSVE=";
+      # };
+
+  });
+
+  neovim-dev = let
+      pythonEnv = final.pkgs.python3;
+      devMode = true;
+    in (final.pkgs.neovim-unwrapped.override  {
+      doCheck=true;
+      # devMode=true;
+      stdenv = final.pkgs.llvmPackages_latest.stdenv;
+  }).overrideAttrs(oa:{
+    cmakeBuildType="Debug";
+
+    # TODO add luaCheck
+    # cmakeFlags = oa.cmakeFlags ++ "-DLUACHECK_PRG=${final.}/bin/luacheck";
+    version = "master";
+    nativeBuildInputs = oa.nativeBuildInputs
+      ++ final.pkgs.lib.optionals devMode (with final.pkgs; [
+        pythonEnv
+        include-what-you-use  # for scripts/check-includes.py
+        jq                    # jq for scripts/vim-patch.sh -r
+        doxygen
+      ]);
+
+  });
+
   # this generates a config appropriate to work with the passed derivations
   # for instance to develop on a software from a nix-shell
   genNeovim = drvs: userConfig:
@@ -60,42 +117,6 @@ rec {
       structuredConfigure = finalConfig;
     };
 
-  neovim-unwrapped-master = let
-    in
-    (prev.neovim-unwrapped.override({
-      lua = final.enableDebugging final.luajit;
-    })).overrideAttrs (oa: {
-      name = "unwrapped-neovim-master";
-      version = "official-master";
-      cmakeBuildType="debug";
-      # src = builtins.fetchGit {
-      #   # url = https://github.com/BK1603/neovim.git;
-      #   # ref = "fswatch-autoread";
-      #   url = https://github.com/neovim/neovim.git;
-      #   # rev = "e5d98d85693245fec811307e5a2ccfdea3a350cd"; # 30 septembre
-      #   rev = "8821587748058ee1ad8523865b30a03582f8d7be"; # 1er novembre
-      #   ref = "master";
-      # };
-      buildInputs = oa.buildInputs ++ ([
-
-        final.tree-sitter
-      ]);
-
-    src = builtins.fetchGit {
-        # url = https://github.com/neovim/neovim.git;
-      url = https://github.com/teto/neovim.git;
-      ref = "lsp_progress";
-      rev = "025bbcff376425b32b211edb173713a94e7b0e56";
-    };
-
-      # src = final.fetchFromGitHub {
-      #   owner = "neovim";
-      #   repo = "neovim";
-      #   rev = "9f704c88a57cfb797c21c19672ea6617e9673360";
-      #   sha256 = "sha256-NNUyWczL6dEPrLVsJILnzrSGKmK1/E5TURSJDjhwSVE=";
-      # };
-
-  });
 
   # makeNeovimConfig = {}:
   neovimTreesitterConfig = prev.neovimUtils.makeNeovimConfig {
@@ -221,27 +242,4 @@ rec {
 	opt = [ ];
 	};
   };
-
-  neovim-dev = let
-      pythonEnv = final.pkgs.python3;
-      devMode = true;
-    in (final.pkgs.neovim-unwrapped.override  {
-      doCheck=true;
-      # devMode=true;
-      stdenv = final.pkgs.llvmPackages_latest.stdenv;
-  }).overrideAttrs(oa:{
-    cmakeBuildType="Debug";
-
-    # TODO add luaCheck
-    # cmakeFlags = oa.cmakeFlags ++ "-DLUACHECK_PRG=${final.}/bin/luacheck";
-    version = "master";
-    nativeBuildInputs = oa.nativeBuildInputs
-      ++ final.pkgs.lib.optionals devMode (with final.pkgs; [
-        pythonEnv
-        include-what-you-use  # for scripts/check-includes.py
-        jq                    # jq for scripts/vim-patch.sh -r
-        doxygen
-      ]);
-
-  });
 }

@@ -17,8 +17,8 @@ function! TestFoldTextWithColumns()
   return l:res
 endfunc
 
-" set foldtext=TestFoldTextWithColumns()
-set foldtext=
+set foldtext=TestFoldTextWithColumns()
+" set foldtext=
 set fdc=2
 set number
 
@@ -31,7 +31,7 @@ set number
 " set fdm=marker
 set fdm=manual
 
-" 
+" 'Open folds in {range}'
 set foldopen=
 
 set conceallevel=2

@@ -52,16 +52,11 @@
 
             home-manager.users."teto" = {
               imports = my_imports;
-              # ++ [
-              #   nova.hmProfiles.dev
-              # ];
             };
           }
         )
 		;
     in {
-
-      # defaultPackage."${system}" = nixpkgs;
 
       nixosConfigurations = let
         novaHmConfig = [
@@ -70,9 +65,10 @@
             ]
             ++ [
               ({ config, lib, pkgs, ... }: {
-                home-manager.users.teto = nova.hmProfiles.user;
+                # home-manager.users.teto = nova.hmProfiles.user;
+
                 # home-manager.useUserPackages = true;
-                home-manager.useGlobalPkgs = true;
+                # home-manager.useGlobalPkgs = true;
                 # nova.homeManagerConfigurations.standard { username = "teto"; homeDirectory = "/home/teto";};
               })
           ]
@@ -113,7 +109,6 @@
                 })
                 (hm-custom [
                   ./nixpkgs/home-xps.nix
-                  # (nova.homeManagerConfigurations.standard { username = "teto"; homeDirectory = "/home/teto";})
               ])
             ]
             ;
@@ -136,9 +131,8 @@
               (hm-custom [
                 ./nixpkgs/home-lenovo.nix
                 # ./nixpkgs/hm/vscode.nix
-                # (nova.homeManagerConfigurations.standard { username = "teto"; homeDirectory = "/home/teto";})
               ] )
-            ] ++               novaHmConfig;
+            ] ++ novaHmConfig;
           };
         };
 
@@ -152,7 +146,6 @@
         wireshark = import ./nixpkgs/overlays/wireshark.nix;
         python = import ./nixpkgs/overlays/python.nix;
         nur = nur.overlay;
-        nova = nova.overlays;
 
         # unfree = final: prev: {
         #   unstable = import nixpkgs-unstable {
@@ -161,7 +154,7 @@
         #   };
         # };
         # toto = (final: prev: {});
-      };
+      } // nova.overlays;
       # overlays = let
       #   overlays = map (name: import (./config/nixpkgs/overlays + "/${name}"))
       #     (attrNames (readDir ./config/nixpkgs/overlays));

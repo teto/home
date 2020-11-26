@@ -190,7 +190,7 @@ rec {
     enable = true;
     enableZshIntegration=true;
     # so that fzf takes into account .gitignore
-    defaultCommand = "fd --type f";
+    defaultCommand = "${pkgs.fd}/bin/fd --type f";
 
     # add support for ctrl+o to open selected file in VS Code
     defaultOptions = ["--bind='ctrl-o:execute(code {})+abort'" ];
