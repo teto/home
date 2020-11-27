@@ -6,12 +6,13 @@ function! TestFoldTextWithColumns()
   if exists("v:foldstartcol")
 	let l:inlinefold = v:foldstart == v:foldend
 	"foldstartcol exists :". v:foldstartcol . "/". v:foldendcol
-    let l:res = strpart(line, 0, v:foldstartcol)
+    " let l:res = strpart(line, 0, v:foldstartcol)
+    let l:res = ""
 	" if inline fold
 	if l:inlinefold
 		let l:res .= "{...}".strpart(line, v:foldendcol)
 	else
-		let l:res .= " +- ".l:foldcount." lines startcol=".v:foldstartcol." end=".v:foldendcol
+		let l:res .= "+- ".l:foldcount." lines startcol=".v:foldstartcol." end=".v:foldendcol
 	endif
   endif
   return l:res
