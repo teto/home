@@ -42,6 +42,9 @@ see https://wiki.haskell.org/FAQ#How_can_I_get_a_stack_backtrace_when_my_program
 
 AWSInfo{..} = RecordWildCards
 
+# to disable errors
+{-# OPTIONS_GHC -fno-warn-orphans #-}
+
 
 # to select only some fields in a record: RecordWildCards
 record{..} will bring everything intoScope

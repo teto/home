@@ -1184,7 +1184,7 @@ function! VarToggle(key)
 endfunc
 
 " does not work as neomake won"'t take into account
-command! NvimLintToggle :call VarToggle("g:nvimdev_auto_lint")
+" command! NvimLintToggle :call VarToggle("g:nvimdev_auto_lint")
         " \ 'remove_invalid_entries': get(g:, 'neomake_remove_invalid_entries', 0),
 "}}}
 "coquille{{{
@@ -1510,7 +1510,7 @@ imap  <c-j> <Plug>(completion_next_source)
 imap  <c-k> <Plug>(completion_prev_source)
 
 " hello world"
-" let g:completion_confirm_key = "\<C-y>"
+let g:completion_confirm_key = "\<C-y>"
 set completeopt=menu " use pum to show completions
 set completeopt+=menuone  " use pum even for one match
 set completeopt+=noinsert,noselect
@@ -2231,6 +2231,7 @@ let content = [
             \ ["&Outgoing calls\\ci", 'lua vim.lsp.buf.outgoing_calls()'],
             \ ["&Signature help\\ci", 'lua vim.lsp.buf.signature_help()'],
             \ ["&Workspace symbol\\cw", 'lua vim.lsp.buf.workspace_symbol()'],
+            \ ["&Code action\\cw", 'lua vim.lsp.buf.code_action()'],
             \ ['- LSP '],
             \ ["&Documentation\t\\cm", 'echo 600'],
             \ ]
