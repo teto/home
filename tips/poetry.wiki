@@ -17,3 +17,6 @@ poetry env list --full-path
 
 to compare with `pipenv where`
 /root/.local/share/virtualenvs/-x-v5uFv0
+
+# poetry and nix
+mkPoetryEnv returns a withPackages()
