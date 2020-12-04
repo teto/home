@@ -71,6 +71,14 @@ https://kubernetes.io/docs/reference/kubectl/cheatsheet/#kubectl-output-verbosit
 
 $ minikube start
 
+
+
+# will show cronjobs 
+kubectl -n $YOUR_NS get cronjob 
+
+kubectl -n $YOUR_NS create job --from cronjob/[cronjob name for garbage collect] [arbitrary name that will be used to create a job]
+
+
 # how to restart a container ?
 
 kubectl exec -it [POD_NAME] -c [CONTAINER_NAME] -- /bin/sh -c "kill 1"

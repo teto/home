@@ -14,6 +14,8 @@
     # temporary until this gets fixed upstream
     poetry.url = "github:teto/poetry2nix/fix_tag";
 
+    nova.url = "git+ssh://git@git.novadiscovery.net:4224/world/nova-nix.git?ref=master";
+
     # TODO one can point at a subfolder ou bien c la branche ? /flakes
     # mptcpanalyzer.url = "github:teto/mptcpanalyzer";
 
