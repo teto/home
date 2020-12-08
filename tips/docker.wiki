@@ -8,8 +8,10 @@ docker run --entrypoint bash -it 885c3cd03b4d643999dca2db0e4e2fefe533f4689864c5d
 
 docker run -it registry.novadiscovery.net/jinko/jinko-platform/jinko-base:local bash 
 
+# how to free space / remove images
 docker system prune -af --volumes
 docker image prune -a
+docker rmi -f $(docker images -q)
 
 One can use `-e "foo=bar"` to pass additionnal variables.
 
@@ -92,7 +94,6 @@ Well you could use network_mode property in the service. This is mutually exclus
 
 https://docs.docker.com/compose/environment-variables/#the-env-file
 compose > shell environment > .env file > dockerfile > undefined
-
 
 # Networking
 In host mode the container does not get its own IP-address allocated. 

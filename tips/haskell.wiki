@@ -76,3 +76,8 @@ AoS = Array of Structures
 
 # Template Haskell
 (the double tick indicates we want the name of the type, not the type itself).
+
+
+data ElField (field :: (Symbol, Type)) where
+with constructor 'Field'
+https://hackage.haskell.org/package/vinyl-0.13.0/docs/Data-Vinyl-Functor.html#t:ElField

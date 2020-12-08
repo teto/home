@@ -1,14 +1,11 @@
 { config, pkgs, lib,  ... }:
 
 let
-
   genBlock = title: content: ''
     " ${title} {{{
     ${content}
     " }}}
     '';
-
-
 
   rcBlocks = {
     wildBlock = ''
@@ -49,9 +46,9 @@ let
   };
 
 
-  neovim-unwrapped-custom = pkgs.neovim-unwrapped-master.overrideAttrs(oa: {
-    cmakeBuildType="Debug";
-  });
+  # neovim-unwrapped-custom = pkgs.neovim-unwrapped-master.overrideAttrs(oa: {
+  #   cmakeBuildType="Debug";
+  # });
 in
 {
 
@@ -68,7 +65,9 @@ in
 
   programs.neovim = {
      enable = true;
-     package = neovim-unwrapped-custom;
+
+     # take the one from the flake
+     package = pkgs.neovim-unwrapped-debug;
 
      # concatMap
      extraConfig = ''

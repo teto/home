@@ -15,6 +15,8 @@
     poetry.url = "github:teto/poetry2nix/fix_tag";
 
     nova.url = "git+ssh://git@git.novadiscovery.net:4224/world/nova-nix.git?ref=master";
+    neovim.url = "github:teto/neovim/flake";
+    # neovim.url = "github:neovim/neovim/flake";
 
     # TODO one can point at a subfolder ou bien c la branche ? /flakes
     # mptcpanalyzer.url = "github:teto/mptcpanalyzer";
@@ -27,7 +29,7 @@
 
   outputs = inputs@{
     self, hm, nixpkgs-teto, nur, unstable
-    , nova , poetry
+    , nova , poetry, ...
     }:
     let
       inherit (builtins) listToAttrs baseNameOf attrNames readDir;
@@ -145,6 +147,7 @@
         # pkgs = import ./nixpkgs/overlays/pkgs/default.nix;
         haskell = import ./nixpkgs/overlays/haskell.nix;
         neovim = import ./nixpkgs/overlays/neovim.nix;
+        neovimOfficial = inputs.neovim.overlay;
         wireshark = import ./nixpkgs/overlays/wireshark.nix;
         python = import ./nixpkgs/overlays/python.nix;
         nur = nur.overlay;
