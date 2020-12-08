@@ -15,7 +15,7 @@
     poetry.url = "github:teto/poetry2nix/fix_tag";
 
     nova.url = "git+ssh://git@git.novadiscovery.net:4224/world/nova-nix.git?ref=master";
-    neovim.url = "github:teto/neovim/flake";
+    neovim.url = "github:teto/neovim/flake?dir=contrib";
     # neovim.url = "github:neovim/neovim/flake";
 
     # TODO one can point at a subfolder ou bien c la branche ? /flakes

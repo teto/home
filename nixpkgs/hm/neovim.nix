@@ -67,7 +67,7 @@ in
      enable = true;
 
      # take the one from the flake
-     package = pkgs.neovim-unwrapped-debug;
+     package = pkgs.neovim-debug;
 
      # concatMap
      extraConfig = ''
@@ -188,7 +188,7 @@ in
       # LanguageClient-neovim
       {
         plugin =  tagbar;
-        # optional = true;
+        optional = true;
       }
       # {
       #   plugin = fzf-preview;
