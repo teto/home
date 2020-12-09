@@ -100,8 +100,22 @@ in
     plugins = with pkgs.vimPlugins; [
       # echodoc-vim
 
+      {
+        # davidgranstrom/nvim-markdown-preview
+        plugin = nvim-markdown-preview;
+        config = ''
+        '';
+      }
+      # y a aussi vim-markdown
+      {
+        # euclio/vim-markdown-composer
+        plugin = vim-markdown-composer;
+        config = ''
+        '';
+      }
+
       # to install manually with coc.nvim:
-      # - coc-vimtex  coc-snippets 
+      # - coc-vimtex  coc-snippets
       # use coc-yank for yank history
       {
         plugin = editorconfig-vim;

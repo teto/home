@@ -177,8 +177,8 @@ in
     # };
 
     # added to nix.conf
+    # experimental-features = nix-command flakes
     extraOptions = ''
-      experimental-features = nix-command flakes
     '';
 
     distributedBuilds = false;

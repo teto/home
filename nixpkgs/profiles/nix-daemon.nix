@@ -9,7 +9,7 @@
       poetry.to = { type = "github"; owner = "nix-community"; repo="poetry2nix"; };
 
       # sinon user   flake:neovim github:teto/neovim/flake a l'air ok
-      neovim.to = { type = "github"; owner = "teto"; repo="neovim?ref=flake"; };
+      neovim.to = { type = "github"; owner = "neovim"; repo="neovim?dir=contrib"; };
 
       # "github:nixos/nixpkgs/nixos-unstable";
       # home-manager
@@ -24,8 +24,8 @@
       # };
 
       # added to nix.conf
+      #         experimental-features = nix-command flakes
       extraOptions = ''
-        experimental-features = nix-command flakes
         keep-outputs = true       # Nice for developers
         keep-derivations = true   # Idem
         keep-failed = true

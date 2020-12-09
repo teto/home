@@ -8,11 +8,14 @@
     };
     unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     # TODO use mine instead
-    hm.url = "github:nix-community/home-manager";
+    hm = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs-teto";
+    };
     nur.url = "github:nix-community/NUR";
 
     # temporary until this gets fixed upstream
-    poetry.url = "github:teto/poetry2nix/fix_tag";
+    poetry-unstable.url = "github:teto/poetry2nix/fix_tag";
 
     nova.url = "git+ssh://git@git.novadiscovery.net:4224/world/nova-nix.git?ref=master";
     neovim.url = "github:teto/neovim/flake?dir=contrib";
@@ -29,7 +32,7 @@
 
   outputs = inputs@{
     self, hm, nixpkgs-teto, nur, unstable
-    , nova , poetry, ...
+    , nova , ...
     }:
     let
       inherit (builtins) listToAttrs baseNameOf attrNames readDir;
@@ -64,8 +67,10 @@
 
       nixosConfigurations = let
         novaHmConfig = [
-              nova.nixosProfiles.main
-              nova.nixosProfiles.dev
+              # nova.nixosProfiles.main
+              # nova.nixosProfiles.dev
+              # nova.hmProfiles.standard
+              # nova.hmProfiles.dev
             ]
             ++ [
               ({ config, lib, pkgs, ... }: {
