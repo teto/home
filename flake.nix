@@ -18,7 +18,7 @@
     poetry-unstable.url = "github:teto/poetry2nix/fix_tag";
 
     nova.url = "git+ssh://git@git.novadiscovery.net:4224/world/nova-nix.git?ref=master";
-    neovim.url = "github:teto/neovim/flake?dir=contrib";
+    neovim.url = "github:neovim/neovim?dir=contrib";
     # neovim.url = "github:neovim/neovim/flake";
 
     # TODO one can point at a subfolder ou bien c la branche ? /flakes
@@ -57,6 +57,11 @@
             # necessary for plugins to see nur etc
             nixpkgs.overlays = nixpkgs.lib.attrValues self.overlays;
 
+            home-manager.verbose = true;
+            home-manager.useUserPackages = true;
+            # disables the Home Manager option nixpkgs.*
+            # home-manager.useGlobalPkgs = true;
+
             home-manager.users."teto" = {
               imports = my_imports;
             };
@@ -66,27 +71,21 @@
     in {
 
       nixosConfigurations = let
-        novaHmConfig = [
-              # nova.nixosProfiles.main
-              # nova.nixosProfiles.dev
-              # nova.hmProfiles.standard
-              # nova.hmProfiles.dev
-            ]
-            ++ [
-              ({ config, lib, pkgs, ... }: {
-                # home-manager.users.teto = nova.hmProfiles.user;
-
-                # home-manager.useUserPackages = true;
-                # home-manager.useGlobalPkgs = true;
-                # nova.homeManagerConfigurations.standard { username = "teto"; homeDirectory = "/home/teto";};
-              })
-          ]
-          ;
+        # novaHmConfig = [
+        #       nova.hmProfiles.standard
+        #       nova.hmProfiles.dev
+        #     ]
+        #     ++ [
+        #       ({ config, lib, pkgs, ... }: {
+        #         # home-manager.users.teto = nova.hmProfiles.user;
+        #       })
+        #   ]
+        #   ;
       in
         {
           mcoudron = nixpkgs-teto.lib.nixosSystem {
             inherit system;
-            specialArgs = { flakes = inputs; };
+            # specialArgs = { flakes = inputs; };
             modules = [
               (import ./nixpkgs/hardware-dell-camera.nix)
               (import ./nixpkgs/configuration-xps.nix)
@@ -125,7 +124,7 @@
 
           jedha = nixpkgs-teto.lib.nixosSystem {
             inherit system;
-            pkgs = nixpkgs.pkgs;
+            # pkgs = nixpkgs;
             # extraArgs = { pkgs = pkgsImport }
             modules = [
               (import ./nixpkgs/configuration-lenovo.nix)
@@ -133,15 +132,19 @@
               (import ./nixpkgs/hardware-lenovo.nix)
               # often breaks
               # (import ./modules/hoogle.nix)
+              hm.nixosModules.home-manager
 
               # TODO use from flake or from unstable
               # (import ./nixpkgs/modules/mptcp.nix)
-              hm.nixosModules.home-manager
               (hm-custom [
                 ./nixpkgs/home-lenovo.nix
+                nova.hmProfiles.standard
+                nova.hmProfiles.dev
                 # ./nixpkgs/hm/vscode.nix
               ] )
-            ] ++ novaHmConfig;
+            ]
+            # ++ novaHmConfig
+            ;
           };
         };
 
@@ -164,11 +167,9 @@
         #   };
         # };
         # toto = (final: prev: {});
-      } // nova.overlays;
-      # overlays = let
-      #   overlays = map (name: import (./config/nixpkgs/overlays + "/${name}"))
-      #     (attrNames (readDir ./config/nixpkgs/overlays));
-      # in overlays;
+      }
+      # // nova.overlays
+      ;
 
       packages."${system}" = {
         # inherit (unstablePkgs) neovim-unwrapped-master;

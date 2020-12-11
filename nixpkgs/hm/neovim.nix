@@ -126,13 +126,14 @@ in
         plugin = nvim-lspconfig;
         config = ''
         '';
-        runtime = {
-          "init.vim".text = ''
-            '';
-          "init.lua".text = ''
-            -- TODO write config.lua; genere par home-manager
-            '';
-        };
+        # not upstreamed yet
+        # runtime = {
+        #   "init.vim".text = ''
+        #     '';
+        #   "init.lua".text = ''
+        #     -- TODO write config.lua; genere par home-manager
+        #     '';
+        # };
       }
       {
         plugin = editorconfig-vim;

@@ -2074,7 +2074,7 @@ nnoremap <silent> gA    <cmd>lua vim.lsp.buf.code_action()<CR>
 " Doesn't seem to work
 " luafile stdpath('config').'/init.lua'
 " vim.fn.stdpath('config')
-luafile ~/.config/nvim/init.lua
+" luafile ~/.config/nvim/init.lua
 luafile ~/.config/nvim/lua/lsp_init.lua
 " logs are written to /home/teto/.local/share/nvim/vim-lsp.log
 lua vim.lsp.set_log_level("debug")

@@ -16,6 +16,7 @@ in
   # TODO prefix with stable
   programs.firefox = {
     enable = true;
+    # import the one in pkgs/
     # package = myFirefox;
     # enableAdobeFlash = false;
 
@@ -24,6 +25,7 @@ in
     # enableBukubrow = true;
     # with pkgs.nur.repos.rycee.firefox-addons;
     extensions =  with pkgs;[
+      # TODO no need for bitwarden anymore
       pkgs.nur.repos.rycee.firefox-addons.bitwarden
 #        nur.repos.rycee.firefox-addons.browserpass
 #        nur.repos.rycee.firefox-addons.browserpass-otp
@@ -32,11 +34,10 @@ in
     ];
 
     profiles = {
-      default =  {
-        isDefault = true;
+      perso =  {
         settings = {
           # TODO use my own startpage
-          "browser.startup.homepage" = "https://nixos.org";
+          "browser.startup.homepage" = "https://github.com";
           "browser.search.region" = "FR";
           "browser.search.isUS" = false;
           # "distribution.searchplugins.defaultLocale" = "en-GB";
@@ -45,14 +46,14 @@ in
         };
         path = "q1pprbmm.default";
         # extraConfig = 
-        id = 0;
+        id = 666;
       };
 
-      nova = {
-        id = 1;
-        path = "6bt2uwrj.nova";
-        settings = {};
-      };
+      # nova = {
+      #   id = 1;
+      #   path = "6bt2uwrj.nova";
+      #   settings = {};
+      # };
     };
   };
 }
