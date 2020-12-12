@@ -49,11 +49,11 @@ in
         id = 666;
       };
 
-      # nova = {
+      nova = {
       #   id = 1;
-      #   path = "6bt2uwrj.nova";
+        path = "6bt2uwrj.nova";
       #   settings = {};
-      # };
+      };
     };
   };
 }
