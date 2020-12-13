@@ -27,6 +27,12 @@ in
     extensions =  with pkgs;[
       # TODO no need for bitwarden anymore
       pkgs.nur.repos.rycee.firefox-addons.bitwarden
+
+      (pkgs.fetchFirefoxAddon {
+        name = "ublock";
+        url = "https://addons.mozilla.org/firefox/downloads/file/3679754/ublock_origin-1.31.0-an+fx.xpi";
+        sha256 = "1h768ljlh3pi23l27qp961v1hd0nbj2vasgy11bmcrlqp40zgvnr";
+      })
 #        nur.repos.rycee.firefox-addons.browserpass
 #        nur.repos.rycee.firefox-addons.browserpass-otp
 #        nur.repos.rycee.firefox-addons.dark-night-mode
@@ -46,11 +52,11 @@ in
         };
         path = "q1pprbmm.default";
         # extraConfig = 
-        id = 666;
+        id = 0;
       };
 
       nova = {
-      #   id = 1;
+        id = lib.mkForce 100;
         path = "6bt2uwrj.nova";
       #   settings = {};
       };

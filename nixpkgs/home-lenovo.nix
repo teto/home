@@ -14,6 +14,7 @@ in
       ./hm/mail.nix
       ./hm/alot.nix
       ./hm/extra.nix
+      ./hm/experimental.nix
   ];
 
   programs.feh.enable = true;
@@ -21,6 +22,7 @@ in
   home.packages = with pkgs; [
     # rofi
     steam-run
+    # deadd-notification-center
   ];
 
   # hum...

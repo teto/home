@@ -108,6 +108,9 @@ in
     ../lib/colors.nix
   ];
 
+  # see https://discourse.nixos.org/t/opening-i3-from-home-manager-automatically/4849/7
+  xsession.scriptPath = ".hm-xsession";
+
   xsession.windowManager.i3 =
   let
     bind_ws = workspace_id: fr: us:

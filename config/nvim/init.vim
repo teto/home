@@ -2061,6 +2061,7 @@ nnoremap ,ga <cmd>lua vim.lsp.buf.code_action()<CR>
 
 " nnoremap <silent> <leader>do :OpenDiagnostic<CR>
 nnoremap <leader>dl <cmd>lua vim.lsp.diagnostic.set_loclist()<CR>
+au User LspMessageUpdate lua vim.lsp.diagnostic.set_loclist()<CR>
 
 " vim.lsp.buf.rename()
 

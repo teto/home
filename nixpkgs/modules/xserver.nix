@@ -51,10 +51,24 @@
       # accelSpeed = "1.55";
     };
 
+    displayManager = {
+      lightdm = {
+        enable = true;
+        greeter.enable = false;
+      };
+    };
+    windowManager.i3.enable = true;
+    desktopManager.session = [
+      {
+        name = "home-manager";
+        start = ''
+          ${pkgs.runtimeShell} $HOME/.hm-xsession &
+          waitPID=$!
+        '';
+      }
+    ];
   };
-  # services.xserver.windowManager.default = "none";
-  services.xserver.windowManager.i3.enable = true;
-  # # xserver.displayManager.auto.enable = "teto";
+  # home-manager one
   # # boot.extraModulePackages
   #   enableCtrlAltBackspace = true;
   #   videoDrivers = [ "nvidia" ];
