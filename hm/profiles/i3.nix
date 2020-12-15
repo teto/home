@@ -105,7 +105,7 @@ let
 in
 {
   imports = [
-    ../lib/colors.nix
+    ../../nixpkgs/lib/colors.nix
   ];
 
   # see https://discourse.nixos.org/t/opening-i3-from-home-manager-automatically/4849/7

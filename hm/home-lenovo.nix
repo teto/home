@@ -6,23 +6,20 @@ in
 {
   imports = [
     # Not tracked, so doesn't need to go in per-machine subdir
-      ./hm/desktop.nix
+      ./profiles/desktop.nix
       # ./modules/vdirsyncer.nix
       # ./hm/sway.nix
-      ./hm/neomutt.nix
+      ./profiles/neomutt.nix
       # ./hm/profiles/nova-dev.nix
-      ./hm/mail.nix
-      ./hm/alot.nix
-      ./hm/extra.nix
-      ./hm/experimental.nix
+      ./profiles/mail.nix
+      ./profiles/alot.nix
+      ./profiles/extra.nix
   ];
 
   programs.feh.enable = true;
 
   home.packages = with pkgs; [
-    # rofi
     steam-run
-    # deadd-notification-center
   ];
 
   # hum...
@@ -34,21 +31,8 @@ in
     options = [ "add Mod1 Alt_R" ];
   };
 
-  # programs.home-manager = {
-  #   enable = true;
-  #   # must be a string
-  #   path =  "/home/teto/home-manager";
-  # };
-
   # for blue tooth applet; must be installed systemwide
   services.blueman-applet.enable = false;
-
-  # programs.bash = {
-  #   # goes to .profile
-  #   sessionVariables = {
-  #     # HISTFILE="$XDG_CACHE_HOME/bash_history";
-  #   };
-  # };
 
   services.nextcloud-client.enable = true;
 

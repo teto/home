@@ -87,9 +87,9 @@
             inherit system;
             # specialArgs = { flakes = inputs; };
             modules = [
-              (import ./nixpkgs/hardware-dell-camera.nix)
-              (import ./nixpkgs/configuration-xps.nix)
-              (import ./nixpkgs/profiles/nix-daemon.nix)
+              (import ./nixos/hardware-dell-camera.nix)
+              (import ./nixos/configuration-xps.nix)
+              (import ./nixos/profiles/nix-daemon.nix)
               hm.nixosModules.home-manager
               ({ config, lib, pkgs,  ... }:
                 {
@@ -116,7 +116,7 @@
                   networking.hostName = "mcoudron"; # Define your hostname.
                 })
                 (hm-custom [
-                  ./nixpkgs/home-xps.nix
+                  ./hm/home-xps.nix
               ])
             ]
             ;
@@ -127,23 +127,24 @@
             # pkgs = nixpkgs;
             # extraArgs = { pkgs = pkgsImport }
             modules = [
-              (import ./nixpkgs/configuration-lenovo.nix)
-              (import ./nixpkgs/profiles/neovim.nix)
-              (import ./nixpkgs/hardware-lenovo.nix)
+              (import ./nixos/configuration-lenovo.nix)
+              (import ./nixos/profiles/neovim.nix)
+              (import ./nixos/hardware-lenovo.nix)
               # often breaks
-              # (import ./modules/hoogle.nix)
+              # (import ./nixos/modules/hoogle.nix)
               hm.nixosModules.home-manager
 
               # TODO use from flake or from unstable
-              # (import ./nixpkgs/modules/mptcp.nix)
+              # (import ./nixos/modules/mptcp.nix)
               (hm-custom [
-                ./nixpkgs/home-lenovo.nix
+                ./hm/home-lenovo.nix
                 nova.hmProfiles.standard
-                nova.hmProfiles.dev
-                # ./nixpkgs/hm/vscode.nix
+                # nova.hmProfiles.dev
+                ./hm/profiles/experimental.nix
+
+                # ./hm/vscode.nix #  provided by nova-nix config
               ] )
             ]
-            # ++ novaHmConfig
             ;
           };
         };
@@ -174,7 +175,7 @@
       packages."${system}" = {
         # inherit (unstablePkgs) neovim-unwrapped-master;
         # inherit (self.overlays.neovim) neovim-unwrapped-master;
-        dce = nixpkgs.callPackage ./nixpkgs/pkgs/dce {};
+        dce = nixpkgs.callPackage ./pkgs/dce {};
 
         dig = nixpkgs.bind.dnsutils;
 
@@ -194,11 +195,12 @@
         # modulesAttrs = {};
 
         # profiles
-        profilesList = import ./nixpkgs/profiles/list.nix;
+        # profilesList = import ./nixos/profiles/list.nix;
         # profilesAttrs = { profiles = listToAttrs (prep profilesList); };
-        profilesAttrs = {};
+        # profilesAttrs = {};
 
       in modulesAttrs
-        // profilesAttrs;
+      # // profilesAttrs
+      ;
     };
 }

@@ -55,10 +55,11 @@ in
         id = 0;
       };
 
-      nova = {
-        id = lib.mkForce 100;
+      nova = lib.mkForce {
+        # isDefault = false;
+        id = 1;
         path = "6bt2uwrj.nova";
-      #   settings = {};
+        settings = {};
       };
     };
   };

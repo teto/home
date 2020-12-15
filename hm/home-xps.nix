@@ -40,7 +40,7 @@ in
 
   services.nextcloud-client.enable = true;
 
-  # waiting for attribute 'vte-ng' missing
+# waiting for attribute 'vte-ng' missing
   programs.termite = {
     enable = false;
     # TODO the light in fact
