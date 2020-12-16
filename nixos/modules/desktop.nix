@@ -45,7 +45,9 @@ in
 
   # Select internationalisation properties.
   i18n = {
-     defaultLocale = "fr_FR.UTF-8";
+     # defaultLocale = "fr_FR.UTF-8";
+     # until we can configure it in fcitx
+     defaultLocale = "en_US.UTF-8";
      # can generate problems for wireshark with Qt versions
      inputMethod = {
        # enabled = "fcitx5";
@@ -163,7 +165,7 @@ in
   # this is slow
   documentation.nixos.enable = true;
 
-  programs.file-roller.enable = true;
+  # programs.file-roller.enable = true;
 
   programs.system-config-printer.enable = true;
 

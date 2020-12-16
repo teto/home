@@ -24,6 +24,8 @@ rec {
     # ./xdg-mime.nix
   ];
 
+  xdg.mime.enable = true;
+
   home.username = "teto";
   home.homeDirectory = "/home/teto";
 

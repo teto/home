@@ -3,7 +3,7 @@
   # as long as xdg doesn't accept symlinks (for which I proposed a patch)
   # and overrides my mimeapps.list
   xdg.mimeApps = {
-      enable = true;
+      enable = false;
       associations = {
         added = {
           "video/x-matroska"= [ "mpv.desktop" ];

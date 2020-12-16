@@ -96,7 +96,7 @@ let
     # unstable.evince # succeed where zathura/mupdf fail
 
     # conflicts with nautilus
-    # unstable.gnome3.file-roller # for GUI archive handling
+    gnome3.file-roller # for GUI archive handling
     ffmpegthumbnailer # to preview videos in ranger
     # todo try sthg else
     # requires xdmcp https://github.com/freedesktop/libXdmcp

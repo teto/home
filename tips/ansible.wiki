@@ -4,6 +4,8 @@ ANSIBLE_LIBRARY
 become => sudo
 Roles let you automatically load related vars_files, tasks, handlers, and other Ansible artifacts based on a known file structure. Once you group your content in roles, you can easily reuse them and share them with other users.
 
+# pass own interpreter
+ansible-playbook sample-playbook.yml -e 'ansible_python_interpreter=/usr/bin/python3'
 
 # to list plugins
 # 

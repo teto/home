@@ -42,6 +42,13 @@ Change the environment
 bazel build --action_env="avariable=1" :mytarget
 https://stackoverflow.com/questions/59095711/how-to-force-rebuild-a-package-in-bazel-to-measuring-build-time
 
+to force uploading to cache
+ --no_remote_accept_cached
+--attempt_to_print_relative_paths
+--logging entre 0 et 6
+
+bazel dump is cool
+
 To construct :
 bazel-bin/simwork/result-store/result-store-service@image-notimestamp-layer.tar
 

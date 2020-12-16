@@ -139,7 +139,7 @@
               (hm-custom [
                 ./hm/home-lenovo.nix
                 nova.hmProfiles.standard
-                # nova.hmProfiles.dev
+                nova.hmProfiles.dev
                 ./hm/profiles/experimental.nix
 
                 # ./hm/vscode.nix #  provided by nova-nix config
