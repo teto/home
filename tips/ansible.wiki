@@ -11,6 +11,8 @@ ansible-playbook sample-playbook.yml -e 'ansible_python_interpreter=/usr/bin/pyt
 # 
 ansible-doc -t inventory -l
 
+- to copy a file: the `copy` module copies a file from the local or remote machine to a location on the remote machine.
+- to run a script => `script` module
 
 ANSIBLE_CONFIG
 

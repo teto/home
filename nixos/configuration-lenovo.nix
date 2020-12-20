@@ -97,8 +97,8 @@ in
   ];
 
   # DOES NOT WORK !
-  # boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.kernelPackages = pkgs.linuxPackages;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+  # boot.kernelPackages = pkgs.linuxPackages;
   # boot.kernelPackages = pkgs.linuxPackages;
   # boot.kernelPackages = pkgs.linuxPackages_testing;
 
@@ -211,11 +211,6 @@ in
   # broken in https://github.com/NixOS/nixpkgs/issues/56724
   # programs.bcc.enable = true;
 
-  environment.systemPackages = with pkgs;
-    [
-    ]
-  ;
-
   # services.xserver.displayManager.gdm.nvidiaWayland = true;
 
   # this is required as well
@@ -223,12 +218,10 @@ in
 
   # security.sudo.wheelNeedsPassword = ;
 
-       # system.replaceRuntimeDependencies
-       #     List of packages to override without doing a full rebuild. The original derivation and replacement derivation must have the same name length, and ideally should have close-to-identical directory layout.
+  # system.replaceRuntimeDependencies
+  #     List of packages to override without doing a full rebuild. The original derivation and replacement derivation must have the same name length, and ideally should have close-to-identical directory layout.
 
-# system.userActivationScripts
-  # system.copySystemConfiguration = true;
-  # see https://www.mail-archive.com/nix-commits-bounces@lists.science.uu.nl/msg04507.html
+  # system.userActivationScripts
 
   # kinda experimental
   # services.openssh.banner = "Hello world";
@@ -239,10 +232,4 @@ in
   system.extraSystemBuilderCmds = ''
     ln -s ${config.boot.kernelPackages.kernel.dev}/vmlinux $out/vmlinux
   '';
-
-  # # TODO this doesn't seem taken into account
-  # services.xserver.displayManager.lightdm.autoLogin = {
-  #   enable = true;
-  #   user = "teto";
-  # };
 }

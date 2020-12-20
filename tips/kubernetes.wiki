@@ -74,6 +74,7 @@ $ minikube start
 
 
 # will show cronjobs 
+kubectl -n $YOUR_NS get jobs
 kubectl -n $YOUR_NS get cronjob 
 
 kubectl -n $YOUR_NS create job --from cronjob/[cronjob name for garbage collect] [arbitrary name that will be used to create a job]
@@ -92,6 +93,7 @@ pod = set of containers
 
 kubectl get pods --all-namespaces
 kubectl -n jinko-janssen-prod get hpa
+kubectl -n jinko-janssen-prod delete hpa --all
 horizontal ... autoscaler
 
 kubectl -n jinko-janssen-prod get pod jinko-janssen-prod-result-store-749f78579d-qmgzw -o json 

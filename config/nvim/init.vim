@@ -2192,12 +2192,12 @@ function! StatusLSP() abort
   " let status = luaeval('require("lsp-status").status()')
   let status = luaeval('require("statusline").status()')
   return trim(status)
+endfunction
 "     " Setup for variables
 "
 " 	" let g:_active_buffer = bufnr('%')
 " 	let stl = '%{v:lua.StatusLineLSP()}'
 " 	return stl
-endfunction
 
 " from lsp-status
 au User LspMessageUpdate redrawstatus!
