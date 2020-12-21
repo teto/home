@@ -14,7 +14,9 @@ in
     ./modules/libvirtd.nix
     ./modules/minio.nix
     # ./modules/vpn.nix
-    # ./modules/openssh.nix
+
+    ./modules/openssh.nix
+
     # ./modules/tor.nix
     ./profiles/nix-daemon.nix
     ./profiles/steam.nix
