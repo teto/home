@@ -28,8 +28,8 @@ in
 
 
      openssh.authorizedKeys.keyFiles = [
-       ../perso/keys/iij_rsa.pub
-       ../perso/keys/id_rsa.pub
+       ../../perso/keys/iij_rsa.pub
+       ../../perso/keys/id_rsa.pub
      ];
 
      packages = with pkgs; [
