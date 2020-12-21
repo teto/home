@@ -11,7 +11,10 @@
     forwardX11 = true;
     challengeResponseAuthentication = false;
     logLevel = "VERBOSE";
-
+    # listenAddresses = [
+    #   { addr = "0.0.0.0"; port = 64022; }
+    # ];
+    ports = [ 12666 ];
     startWhenNeeded = true;
     # authorizedKeysFiles = [
     #   "~/.ssh/id_rsa.pub"
@@ -19,5 +22,7 @@
     # authorizedKeys = { }
 
     # hostKeys to generate keys
+    # hostKeys
+
   };
 }

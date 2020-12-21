@@ -2123,10 +2123,6 @@ hi LspDiagnosticsUnderline cterm=underline gui=undercurl
 " ✘'
 " 
 " TODO update
-sign define LspDiagnosticsErrorSign text=✘
-sign define LspDiagnosticsWarningSign text=！
-sign define LspDiagnosticsInformationSign text=I
-sign define LspDiagnosticsHintSign text=H
 
 " function! LspStatus() abort
 "     let sl = ''
@@ -2251,5 +2247,14 @@ function! LuaComplete (ArgLeaf, CmdLine, CursorPos) abort
 endfunction
 
 command! -complete=customlist,LuaComplete -nargs=1 LuaFile lua <args>
+" sign define LspDiagnosticsErrorSign text=✘
+" sign define LspDiagnosticsWarningSign text=！
+" sign define LspDiagnosticsInformationSign text=I
+" sign define LspDiagnosticsHintSign text=H
+
+    sign define LspDiagnosticsSignError text=✘ texthl=LspDiagnosticsSignError linehl= numhl=
+    sign define LspDiagnosticsSignWarning text=！ texthl=LspDiagnosticsSignWarning linehl= numhl=
+    sign define LspDiagnosticsSignInformation text=I texthl=LspDiagnosticsSignInformation linehl= numhl=
+    sign define LspDiagnosticsSignHint text=H texthl=LspDiagnosticsSignHint linehl= numhl=
 
 " unmap Y

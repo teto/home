@@ -171,6 +171,7 @@ in
     ./common.nix
     ./dev.nix
     # ./modules/home-tor.nix
+    ./ssh-config.nix
     ./i3.nix
     ./firefox.nix
     ./neovim.nix
@@ -313,6 +314,7 @@ in
     # read a different file depending on computer
     # colorsExtra = '' '';
   };
+
 
 # [Added Associations]
 # video/x-matroska=vlc.desktop;mpv.desktop;
