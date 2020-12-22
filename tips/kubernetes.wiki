@@ -72,6 +72,8 @@ https://kubernetes.io/docs/reference/kubectl/cheatsheet/#kubectl-output-verbosit
 $ minikube start
 
 
+# todo port forwarding
+kubectl -n XXX port-forward svc/XXX-mongodb 7000:27017
 
 # will show cronjobs 
 kubectl -n $YOUR_NS get jobs

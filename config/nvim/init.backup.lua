@@ -35,6 +35,7 @@ vim.g.spinner_frames = {'⣾', '⣽', '⣻', '⢿', '⡿', '⣟', '⣯', '⣷'}
 
 vim.g.should_show_diagnostics_in_statusline = true
 
+require('lspfuzzy').setup {}
 
 -- local lsp = require 'lsp'
 

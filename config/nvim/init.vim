@@ -107,7 +107,8 @@ set exrc
 " vim-plug plugin declarations {{{1
 call plug#begin(s:plugdir)
 " Plug 'nvim-lua/lsp-status.nvim'  " display lsp progress
-Plug 'strboul/urlview.vim' " :Urlview
+Plug 'ojroques/nvim-lspfuzzy' " to complement lsp
+Plug 'strboul/urlview.vim' " :Urlview to list urls and open them
 Plug 'diepm/vim-rest-console' " test rest APIs
 Plug '~/pdf-scribe.nvim'  " to annotate pdf files from nvim :PdfScribeInit
 Plug 'cespare/vim-toml'
@@ -2076,6 +2077,7 @@ nnoremap <silent> gA    <cmd>lua vim.lsp.buf.code_action()<CR>
 " luafile stdpath('config').'/init.lua'
 " vim.fn.stdpath('config')
 " luafile ~/.config/nvim/init.lua
+luafile ~/.config/nvim/init.backup.lua
 luafile ~/.config/nvim/lua/lsp_init.lua
 " logs are written to /home/teto/.local/share/nvim/vim-lsp.log
 lua vim.lsp.set_log_level("debug")

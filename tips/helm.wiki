@@ -1,6 +1,7 @@
 
 --set tracing.enabled=true
 
+helm repo update
 
 Plugins found at
 /home/teto/.local/share/helm/plugins
