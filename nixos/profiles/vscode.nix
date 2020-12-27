@@ -3,7 +3,7 @@
 let
   extensions = (with pkgs.vscode-extensions; [
       bbenoist.Nix
-      ms-python.python
+      # ms-python.python
       ms-azuretools.vscode-docker
       ms-vscode-remote.remote-ssh
       haskell.haskell

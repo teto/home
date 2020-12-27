@@ -10,7 +10,6 @@ in
 
     ./ntp.nix
     ./network-manager.nix
-    ./xserver.nix
     ./wireshark.nix
     ./wifi.nix
     ../profiles/neovim.nix
@@ -50,8 +49,8 @@ in
      defaultLocale = "en_US.UTF-8";
      # can generate problems for wireshark with Qt versions
      inputMethod = {
-       # enabled = "fcitx5";
-       enabled = "fcitx";
+       enabled = "fcitx5";
+       # enabled = "fcitx";
        # i18n.inputMethod.package
        fcitx.engines = with pkgs.fcitx-engines; [
          # mozc  # broken

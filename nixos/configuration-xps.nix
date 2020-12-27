@@ -12,11 +12,7 @@ in
     # ./modules/hoogle.nix
     # ./profiles/pixiecore.nix
     # ./modules/mptcp.nix
-
     # ./profiles/neovim.nix
-    ./modules/sway.nix
-
-    ./profiles/vscode.nix
 
     # may provoke some issues like switch hanging
     # ./modules/kubernetes.nix
@@ -38,7 +34,7 @@ in
   # TODO use the mptcp one ?
   # boot.kernelPackages = pkgs.linuxPackages;
   # boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.kernelPackages = pkgs.linuxPackagesFor ( pkgs.linux_5_8.override {
+  boot.kernelPackages = pkgs.linuxPackagesFor ( pkgs.linux_5_10.override {
     structuredExtraConfig = with lib.kernel; {
       # MPTCP     =yes;
       # MPTCP_IPV6=yes;

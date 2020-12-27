@@ -37,4 +37,14 @@ function M.notify(msg)
   -- a.nvim_win_set_option(prompt_win, 'winblend', 100)
 end
 
+function M.notify(msg)
+  -- https://vimhelp.org/popup.txt.html#popup_create-arguments
+  local prompt_win, prompt_opts = popup.create("content", popup_opts)
+  local prompt_bufnr = a.nvim_win_get_buf(prompt_win)
+  os.popen()
+  -- a.nvim_win_set_option(prompt_win, 'winhl', 'Normal:TelescopeNormal')
+  -- self.window.winblend)
+  -- a.nvim_win_set_option(prompt_win, 'winblend', 100)
+end
+
 return M

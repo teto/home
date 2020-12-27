@@ -107,7 +107,7 @@ set exrc
 " vim-plug plugin declarations {{{1
 call plug#begin(s:plugdir)
 " Plug 'nvim-lua/lsp-status.nvim'  " display lsp progress
-Plug 'ojroques/nvim-lspfuzzy' " to complement lsp
+" Plug 'ojroques/nvim-lspfuzzy' " to complement lsp
 Plug 'strboul/urlview.vim' " :Urlview to list urls and open them
 Plug 'diepm/vim-rest-console' " test rest APIs
 Plug '~/pdf-scribe.nvim'  " to annotate pdf files from nvim :PdfScribeInit
@@ -419,7 +419,7 @@ Plug 'lervag/vimtex'
 
 " Plug 'gregsexton/gitv'
 " Plug 'jeffwilliams/basejump' " to alt+click on file:line and go to it
-Plug 'teto/nvimdev.nvim' " thanks tweekmonster !
+Plug 'neovim/nvimdev.nvim' " thanks tweekmonster !
 " Plug 'jceb/vim-orgmode' " orgmode
 call plug#end()
 " }}}
@@ -1051,7 +1051,9 @@ vnoremap <leader>rg  <Cmd>Grepper -tool rg -open -switch<CR>
   set fillchars+=foldopen:▾,foldsep:│
   set fillchars+=foldclose:▸
   set fillchars+=msgsep:‾
+  set fillchars+=diff:\ 
   hi MsgSeparator ctermbg=black ctermfg=white
+  hi DiffDelete guibg=red
 
   set fdc=auto:2
 " }}}
@@ -1476,7 +1478,7 @@ let g:completion_enable_snippet = v:null
 let g:completion_enable_auto_signature = 1
 " let g:completion_timer_cycle = 80 "default value is 80
 
-let g:completion_matching_strategy_list = [ 'exact' ]
+" let g:completion_matching_strategy_list = [ 'exact' ]
 " Configure the completion chains
 " path
 " \ {'complete_items' : ['lsp', 'snippet']},
@@ -1496,8 +1498,7 @@ let g:completion_chain_complete_list = {
     \	{'mode' : 'cmd'}
     \	],
     \'c' : [
-    \	{'complete_items': ['lsp'],
-    \     'triggered_only': ['.', '::', '->', '_']}
+    \	{'complete_items': ['lsp']}
     \	],
     \'python' : [
     \	{'complete_items': ['lsp']}
@@ -1506,6 +1507,8 @@ let g:completion_chain_complete_list = {
     \	{'complete_items': ['lsp']}
     \	],
     \}
+
+"   'triggered_only': ['.', '::', '->', '_']
 
 imap  <c-j> <Plug>(completion_next_source)
 imap  <c-k> <Plug>(completion_prev_source)
@@ -1536,12 +1539,12 @@ let g:vsnip_snippet_dir = stdpath('config').'/vsnip'
 " to prettify json
 " g:python3_host_prog -m json.tool
 " scrollbar.nvim {{{
-augroup ScrollbarInit
-  autocmd!
-  autocmd CursorMoved,VimResized,QuitPre * silent! lua require('scrollbar').show()
-  autocmd WinEnter,FocusGained           * silent! lua require('scrollbar').show()
-  autocmd WinLeave,FocusLost             * silent! lua require('scrollbar').clear()
-augroup end
+" augroup ScrollbarInit
+"   autocmd!
+"   autocmd CursorMoved,VimResized,QuitPre * silent! lua require('scrollbar').show()
+"   autocmd WinEnter,FocusGained           * silent! lua require('scrollbar').show()
+"   autocmd WinLeave,FocusLost             * silent! lua require('scrollbar').clear()
+" augroup end
 "}}}
 " FZF config {{{
 let g:fzf_command_prefix = 'Fzf' " prefix commands :Files become :FzfFiles, etc.
@@ -2048,7 +2051,7 @@ map ,fa <Cmd>call CreateVisualExtmark()<CR>
 " nnoremap <buffer> <silent> <leader>ngd :call lsp#text_document_declaration()<CR>
 nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
 " todo add fallback on keyword/haskell use hoogle
-nnoremap <silent> K  <cmd>lua vim.lsp.buf.hover()<CR>
+" nnoremap <silent> K  <cmd>lua vim.lsp.buf.hover()<CR>
 " nnoremap <silent> K  <cmd>Show_documentation()<CR>
 nnoremap ,gi  <cmd>lua vim.lsp.buf.implementation()<CR>
 nnoremap ,sh <cmd>lua vim.lsp.buf.signature_help()<CR>
@@ -2254,9 +2257,10 @@ command! -complete=customlist,LuaComplete -nargs=1 LuaFile lua <args>
 " sign define LspDiagnosticsInformationSign text=I
 " sign define LspDiagnosticsHintSign text=H
 
-    sign define LspDiagnosticsSignError text=✘ texthl=LspDiagnosticsSignError linehl= numhl=
-    sign define LspDiagnosticsSignWarning text=！ texthl=LspDiagnosticsSignWarning linehl= numhl=
-    sign define LspDiagnosticsSignInformation text=I texthl=LspDiagnosticsSignInformation linehl= numhl=
-    sign define LspDiagnosticsSignHint text=H texthl=LspDiagnosticsSignHint linehl= numhl=
+sign define LspDiagnosticsSignError text=✘ texthl=LspDiagnosticsSignError linehl= numhl=
+" sign define LspDiagnosticsSignWarning text=！ texthl=LspDiagnosticsSignWarning linehl= numhl=
+sign define LspDiagnosticsSignWarning text= texthl=LspDiagnosticsSignWarning linehl=red numhl=
+sign define LspDiagnosticsSignInformation text=I texthl=LspDiagnosticsSignInformation linehl= numhl=
+sign define LspDiagnosticsSignHint text=H texthl=LspDiagnosticsSignHint linehl= numhl=
 
 " unmap Y

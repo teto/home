@@ -7,19 +7,23 @@ in
   # invalid with flakes  nixpkgs.config.allowUnfree = true;
 
   imports = [
-      ./hm/desktop.nix
-      ./hm/dev.nix
-      ./hm/nova.nix
+      ./profiles/desktop.nix
+      ./profiles/dev.nix
+      ./profiles/nova.nix
 
       # ./hm/vdirsyncer.nix
       # ./hm/nushell.nix
-      ./hm/mail.nix
-      ./hm/sway.nix
+      ./profiles/mail.nix
+      ./profiles/sway.nix
 
       # not merged yet
       # ./hm/autoUpgrade.nix
   ];
 
+  # xsession.windowManager.i3 = {
+  #   enable = true;
+  # };
+  wayland.windowManager.sway.enable = true;
   # depends from feh ? huh not if we use sway
   # programs.feh.enable = true;
 
@@ -28,12 +32,6 @@ in
     brightnessctl
     simple-scan
   ];
-
-
-  programs.home-manager = {
-    enable = true;
-    path =  "/home/teto/home-manager";
-  };
 
   # for blue tooth applet; must be installed systemwide
   services.blueman-applet.enable = true;
@@ -49,4 +47,3 @@ in
   };
 
 }
-

@@ -53,23 +53,12 @@ let
 
   imPkgs = all: with pkgs;
     let
-      customWeechat = weechat.override {
-        configure = { availablePlugins, ... }: {
-          scripts = with pkgs.weechatScripts; [
-            # weechat-xmpp weechat-matrix-bridge
-            wee-slack
-          ];
-          init = ''
-            /set plugins.var.python.jabber.key "val"
-          '';
-        };
-      };
   in [
     # gnome3.california # fails
     khard
     libsecret  # to consult
     newsboat #
-    customWeechat
+    # customWeechat
     # leafnode dovecot22 dovecot_pigeonhole fetchmail procmail w3m
     # mairix mutt msmtp lbdb contacts spamassassin
   ] ++ lib.optionals all [

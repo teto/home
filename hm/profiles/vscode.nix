@@ -8,7 +8,8 @@
       # https://marketplace.visualstudio.com/items?itemName=asvetliakov.vscode-neovim
       # asvetliakov.vscode-neovim # only in my fork
       bbenoist.Nix
-      ms-python.python
+      # todo replace with pylance/pyright
+      # ms-python.python 
       ms-kubernetes-tools.vscode-kubernetes-tools
       ms-vsliveshare.vsliveshare
       # vscode-neovim.vsliveshare

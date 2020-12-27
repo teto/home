@@ -285,9 +285,9 @@ lspconfig.clangd.setup({
 		-- "--log=info", -- error/info/verbose
 		-- "--pretty" -- pretty print json output
 	};
-	-- filetypes = { "c", "cpp", "objc", "objcpp" },
-log_level = vim.lsp.protocol.MessageType.Debug;
---	on_attach=attach_cb.on_attach,
+	filetypes = { "c", "cpp", "objc", "objcpp" },
+	log_level = vim.lsp.protocol.MessageType.Debug;
+	on_attach=attach_cb.on_attach,
 --	-- 'build/compile_commands.json',
 --	root_dir = lspconfig.util.root_pattern( '.git'),
 --	-- mandated by lsp-status

@@ -15,7 +15,12 @@ in
       ./profiles/alot.nix
       ./profiles/extra.nix
   ];
-
+  xsession.windowManager.i3 = {
+    enable = true;
+  };
+  wayland.windowManager.sway.extraOptions = [
+    "--verbose" "--debug" "--unsupported-gpu" "--my-next-gpu-wont-be-nvidia"
+  ];
   programs.feh.enable = true;
 
   home.packages = with pkgs; [

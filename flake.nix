@@ -18,7 +18,10 @@
     poetry-unstable.url = "github:teto/poetry2nix/fix_tag";
 
     nova.url = "git+ssh://git@git.novadiscovery.net:4224/world/nova-nix.git?ref=master";
-    neovim.url = "github:neovim/neovim?dir=contrib";
+    neovim = {
+      url = "github:neovim/neovim?dir=contrib";
+      inputs.nixpkgs.follows = "nixpkgs-teto";
+    };
     # neovim.url = "github:neovim/neovim/flake";
 
     # TODO one can point at a subfolder ou bien c la branche ? /flakes
@@ -91,6 +94,7 @@
               (import ./nixos/configuration-xps.nix)
               (import ./nixos/profiles/nix-daemon.nix)
               hm.nixosModules.home-manager
+              (import ./nixos/modules/sway.nix)
               ({ config, lib, pkgs,  ... }:
                 {
                   boot.loader.systemd-boot.enable = true;
@@ -117,6 +121,10 @@
                 })
                 (hm-custom [
                   ./hm/home-xps.nix
+                  nova.hmProfiles.standard
+                  nova.hmProfiles.dev
+                  ./hm/profiles/experimental.nix
+
               ])
             ]
             ;
@@ -129,6 +137,7 @@
             modules = [
               (import ./nixos/configuration-lenovo.nix)
               (import ./nixos/profiles/neovim.nix)
+              (import ./nixos/modules/xserver.nix)
               (import ./nixos/hardware-lenovo.nix)
               # often breaks
               # (import ./nixos/modules/hoogle.nix)

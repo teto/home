@@ -26,6 +26,7 @@ hi EndOfBuffer         guibg=#465457
 hi CursorLine                    guibg=#293739 guifg=None
 " hi CursorLineNr    guibg=#E5943D               gui=none
 hi CursorColumn                  guibg=#293739
+hi DiffDelete guibg=red
 
 
 " for coq.vim
