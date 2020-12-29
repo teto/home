@@ -54,7 +54,8 @@ in
 
   programs.mako = {
     enable = true;
-    defaultTimeout = 5000;
+    defaultTimeout = 4000;
+    ignoreTimeout = false;
   };
 
   services.kanshi = {

@@ -155,6 +155,8 @@ in
 
   networking.iproute2.enable = true;
 
+  services.xserver.videoDrivers = [ "nvidia" ];
+
   # to fix tearing with optimus
   #hardware.nvidia.modesetting.enable = true;
   ##experimental 

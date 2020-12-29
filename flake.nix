@@ -93,6 +93,7 @@
               (import ./nixos/hardware-dell-camera.nix)
               (import ./nixos/configuration-xps.nix)
               (import ./nixos/profiles/nix-daemon.nix)
+              (import ./nixos/modules/xserver.nix)
               hm.nixosModules.home-manager
               (import ./nixos/modules/sway.nix)
               ({ config, lib, pkgs,  ... }:

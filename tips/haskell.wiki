@@ -81,3 +81,6 @@ AoS = Array of Structures
 data ElField (field :: (Symbol, Type)) where
 with constructor 'Field'
 https://hackage.haskell.org/package/vinyl-0.13.0/docs/Data-Vinyl-Functor.html#t:ElField
+
+# polysemy
+Effects which don't make use of the m parameter are known as "first-order effects."

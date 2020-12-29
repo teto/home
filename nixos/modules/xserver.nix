@@ -68,10 +68,5 @@
       }
     ];
   };
-  # home-manager one
-  # # boot.extraModulePackages
-  #   enableCtrlAltBackspace = true;
-  #   videoDrivers = [ "nvidia" ];
-  # };
 
 }

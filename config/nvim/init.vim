@@ -108,6 +108,9 @@ set exrc
 call plug#begin(s:plugdir)
 " Plug 'nvim-lua/lsp-status.nvim'  " display lsp progress
 " Plug 'ojroques/nvim-lspfuzzy' " to complement lsp
+Plug 'Olical/aniseed', { 'tag': 'v3.12.0' }
+Plug 'nvim-telescope/telescope-github.nvim'
+Plug 'bakpakin/fennel.vim'
 Plug 'strboul/urlview.vim' " :Urlview to list urls and open them
 Plug 'diepm/vim-rest-console' " test rest APIs
 Plug '~/pdf-scribe.nvim'  " to annotate pdf files from nvim :PdfScribeInit
