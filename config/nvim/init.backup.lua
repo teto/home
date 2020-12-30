@@ -53,8 +53,8 @@ if bufferline_available then
 			-- max_name_length = 18,
 			-- max_prefix_length = 15, -- prefix used when a buffer is deduplicated
 			-- tab_size = 18,
-			-- show_buffer_close_icons = true | false,
-			-- persist_buffer_sort = true, -- whether or not custom sorted buffers should persist
+			show_buffer_close_icons = false,
+			persist_buffer_sort = true, -- whether or not custom sorted buffers should persist
 			-- -- can also be a table containing 2 custom separators
 			-- -- [focused and unfocused]. eg: { '|', '|' }
 			-- separator_style = "slant" | "thick" | "thin" | { 'any', 'any' },

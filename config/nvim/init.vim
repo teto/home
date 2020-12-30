@@ -112,6 +112,7 @@ call plug#begin(s:plugdir)
 Plug 'kyazdani42/nvim-web-devicons' " Recommended (for coloured icons)
 Plug 'ryanoasis/vim-devicons'  " Icons without colours
 Plug 'akinsho/nvim-bufferline.lua'
+
 Plug 'Olical/aniseed', { 'tag': 'v3.12.0' }
 Plug 'nvim-telescope/telescope-github.nvim'
 Plug 'bakpakin/fennel.vim'
@@ -273,7 +274,7 @@ let cmdline_external_term_cmd = "termite -e '%s' &"
 " Plug 'SirVer/ultisnips' " handle snippets
 " " Snippets are separated from the engine. Add this if you want them:
 Plug 'honza/vim-snippets'
-Plug 'itchyny/vim-cursorword'
+" Plug 'itchyny/vim-cursorword'
 " Plug 'Shougo/neosnippet.vim'
 " Plug 'Shougo/neosnippet-snippets'
 
