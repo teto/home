@@ -108,12 +108,12 @@ in
   # seemingly working for chromium only, check for firefox
   programs.browserpass.enable = true;
 
-  # services.greenclip = let
-  #   myGreenclip = with pkgs; haskell.lib.unmarkBroken haskell.packages.ghc884.greenclip;
-  # in {
-  #   enable = true;
-  #   package = myGreenclip;
-  # };
+  services.greenclip = let
+    # myGreenclip = with pkgs; haskell.lib.unmarkBroken haskell.packages.ghc884.greenclip;
+  in {
+    enable = true;
+    # package = myGreenclip;
+  };
 
   nix = {
 

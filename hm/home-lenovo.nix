@@ -14,6 +14,7 @@ in
       ./profiles/mail.nix
       ./profiles/alot.nix
       ./profiles/extra.nix
+      ./profiles/weechat.nix
   ];
   xsession.windowManager.i3 = {
     enable = true;

@@ -1,6 +1,6 @@
 { config, pkgs, lib,  ... }:
-{
-  customWeechat = weechat.override {
+let
+  myWeechat = pkgs.weechat.override {
     configure = { availablePlugins, ... }: {
       scripts = with pkgs.weechatScripts; [
         # weechat-xmpp weechat-matrix-bridge
@@ -10,6 +10,16 @@
         /set plugins.var.python.jabber.key "val"
       '';
     };
+  };
+in
+{
+
+  home.packages = [
+    myWeechat
+  ];
+
+  home.sessionVariables = {
+    WEECHAT_HOME="$XDG_CONFIG_HOME/weechat";
   };
 
   # there is no such module

@@ -15,17 +15,23 @@ in
       # ./hm/nushell.nix
       ./profiles/mail.nix
       ./profiles/sway.nix
+      ./profiles/weechat.nix
+      ./profiles/extra.nix
 
       # not merged yet
       # ./hm/autoUpgrade.nix
   ];
 
-  # xsession.windowManager.i3 = {
-  #   enable = true;
-  # };
+  xsession.windowManager.i3 = {
+    enable = true;
+  };
   wayland.windowManager.sway.enable = true;
   # depends from feh ? huh not if we use sway
   # programs.feh.enable = true;
+
+  wayland.windowManager.sway.extraOptions = [
+    "--verbose" "--debug" "--unsupported-gpu" "--my-next-gpu-wont-be-nvidia"
+  ];
 
   home.packages = with pkgs; [
     virt-manager # to run ubuntu, needs libvirtd service

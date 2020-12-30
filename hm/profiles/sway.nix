@@ -25,6 +25,14 @@ in
     #   menu =
       terminal = term;
 
+      keybindings = let
+        mod="Mod1";
+      in {
+        # clipman can be used too
+        # clipman pick -t wofi
+        "${mod}+Ctrl+h" = lib.mkForce ''exec "${pkgs.clipman}/bin/clipman pick -t wofi'';
+      };
+
       focus.forceWrapping = lib.mkForce true;
       startup = [
         { command =  "wl-paste -t text --watch clipman store"; }
@@ -50,6 +58,7 @@ in
     # wf-recorder # for screencasts
     # bemenu as a dmenu replacement
     wl-clipboard # wl-copy / wl-paste
+    wdisplays # to show 
   ];
 
   programs.mako = {

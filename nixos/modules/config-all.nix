@@ -132,7 +132,8 @@ kernel_xconfig=''
   # variables set by PAM
   # https://wiki.archlinux.org/index.php/Environment_variables#Using_pam_env
   environment.sessionVariables = {
-    XDG_CONFIG_HOME="@{HOME}/.config";
+    # XDG_CONFIG_HOME="@{HOME}/.config";
+    XDG_CONFIG_HOME="$HOME/.config";
     # XDG_CACHE_HOME="$HOME/.cache";
     # XDG_DATA_HOME="$HOME/.local/share";
     EDITOR="nvim";

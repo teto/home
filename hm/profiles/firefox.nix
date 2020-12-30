@@ -94,9 +94,9 @@ in
           "privacy.donottrackheader.enabled" = true;
           "privacy.donottrackheader.value" = 1;
           "privacy.firstparty.isolate" = true;
-          "signon.rememberSignons" = false;
+          # "signon.rememberSignons" = false;
           # "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
-          "widget.content.gtk-theme-override" = "Adwaita:light";
+          # "widget.content.gtk-theme-override" = "Adwaita:light";
         };
         path = "q1pprbmm.default";
         # extraConfig = 
