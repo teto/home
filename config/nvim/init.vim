@@ -110,7 +110,7 @@ call plug#begin(s:plugdir)
 " Plug 'ojroques/nvim-lspfuzzy' " to complement lsp
 " Plug 'Yggdroot/indentLine'
 Plug 'kyazdani42/nvim-web-devicons' " Recommended (for coloured icons)
-Plug 'ryanoasis/vim-devicons' Icons without colours
+Plug 'ryanoasis/vim-devicons'  " Icons without colours
 Plug 'akinsho/nvim-bufferline.lua'
 Plug 'Olical/aniseed', { 'tag': 'v3.12.0' }
 Plug 'nvim-telescope/telescope-github.nvim'
@@ -2258,8 +2258,6 @@ map <RightMouse>  <Cmd>call quickui#context#open(content, quick_opts)<CR>
 function! LuaComplete (ArgLeaf, CmdLine, CursorPos) abort
         return map(luaeval("vim.tbl_keys(" . a:CmdLine[4:] . ")"), {k,v -> a:CmdLine[4:] . "." . v})
 endfunction
-
-lua require'bufferline'.setup()
 
 command! -complete=customlist,LuaComplete -nargs=1 LuaFile lua <args>
 " sign define LspDiagnosticsErrorSign text=✘

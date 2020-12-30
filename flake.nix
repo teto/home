@@ -63,7 +63,7 @@
             home-manager.verbose = true;
             home-manager.useUserPackages = true;
             # disables the Home Manager option nixpkgs.*
-            # home-manager.useGlobalPkgs = true;
+            home-manager.useGlobalPkgs = true;
 
             home-manager.users."teto" = {
               imports = my_imports;

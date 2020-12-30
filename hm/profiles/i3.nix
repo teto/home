@@ -311,6 +311,7 @@ in
 
         # broken
         # "${mod}+b" = "exec ${pkgs.buku_run}/bin/buku_run";
+        "${mad}+c" = "exec ${pkgs.rofi-calc}/bin/rofi-calc";
         "${mod}+p" = "exec ${pkgs.rofi-pass}/bin/rofi-pass";
 
         "${mod}+Shift+1" =  "exec qutebrowser";

@@ -35,6 +35,39 @@ vim.g.spinner_frames = {'⣾', '⣽', '⣻', '⢿', '⡿', '⣟', '⣯', '⣷'}
 
 vim.g.should_show_diagnostics_in_statusline = true
 
+local bufferline_available, bufferline = pcall(require, "bufferline")
+
+if bufferline_available then
+	bufferline.setup{
+		options = {
+			view =  "default",
+			-- "ordinal" 
+			numbers = "buffer_id",
+			-- number_style = "superscript" | "",
+			mappings = true,
+			-- buffer_close_icon= '',
+			modified_icon = '●',
+			close_icon = '',
+			left_trunc_marker = '',
+			right_trunc_marker = '',
+			-- max_name_length = 18,
+			-- max_prefix_length = 15, -- prefix used when a buffer is deduplicated
+			-- tab_size = 18,
+			-- show_buffer_close_icons = true | false,
+			-- persist_buffer_sort = true, -- whether or not custom sorted buffers should persist
+			-- -- can also be a table containing 2 custom separators
+			-- -- [focused and unfocused]. eg: { '|', '|' }
+			-- separator_style = "slant" | "thick" | "thin" | { 'any', 'any' },
+			separator_style = "slant",
+			-- enforce_regular_tabs = false | true,
+			always_show_bufferline = false,
+			-- sort_by = 'extension' | 'relative_directory' | 'directory' | function(buffer_a, buffer_b)
+			-- -- add custom logic
+			-- return buffer_a.modified > buffer_b.modified
+			-- end
+		}
+	}
+end
 -- require('lspfuzzy').setup {}
 
 -- local lsp = require 'lsp'
