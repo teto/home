@@ -6,6 +6,7 @@ in
   imports = [
     ./modules/config-all.nix
     ./modules/desktop.nix
+    ./modules/sway.nix
     # ./modules/docker-daemon.nix
 
     # ./modules/libvirtd.nix

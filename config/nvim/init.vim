@@ -116,6 +116,7 @@ Plug 'akinsho/nvim-bufferline.lua'
 
 Plug 'Olical/aniseed', { 'tag': 'v3.12.0' }
 Plug 'nvim-telescope/telescope-github.nvim'
+Plug 'nvim-telescope/telescope-symbols.nvim'
 Plug 'bakpakin/fennel.vim'
 Plug 'strboul/urlview.vim' " :Urlview to list urls and open them
 Plug 'diepm/vim-rest-console' " test rest APIs

@@ -397,8 +397,11 @@ in
           workspaceButtons=true;
           workspaceNumbers=false;
           # id="0";
-          # command="";
+          command="${pkgs.waybar}/bin/waybar";
           statusCommand="${i3pystatus-custom}/bin/i3pystatus-python-interpreter $XDG_CONFIG_HOME/i3/myStatus.py";
+          extraConfig = ''
+            icon_theme Adwaita
+          '';
         }
       ];
     };
