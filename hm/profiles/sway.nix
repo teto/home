@@ -63,6 +63,7 @@ in
     slurp  # capture tool
     # wf-recorder # for screencasts
     # bemenu as a dmenu replacement
+    waybar  # just for testing
     wl-clipboard # wl-copy / wl-paste
     wdisplays # to show 
     wob # to display a progressbar
