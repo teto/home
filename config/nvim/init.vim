@@ -107,7 +107,7 @@ set exrc
 " vim-plug plugin declarations {{{1
 call plug#begin(s:plugdir)
 " Plug 'nvim-lua/lsp-status.nvim'  " display lsp progress
-" Plug 'ojroques/nvim-lspfuzzy' " to complement lsp
+Plug 'ojroques/nvim-lspfuzzy' " to complement lsp
 " Plug 'Yggdroot/indentLine'
 " Plug 'RRethy/vim-illuminate' " to highlight similar words
 Plug 'kyazdani42/nvim-web-devicons' " Recommended (for coloured icons)

@@ -68,7 +68,11 @@ if bufferline_available then
 		}
 	}
 end
--- require('lspfuzzy').setup {}
+
+local lspfuzzy_available, lspfuzzy = pcall(require, "lspfuzzy")
+if lspfuzzy_available then
+	lspfuzzy.setup {}
+end
 
 -- local lsp = require 'lsp'
 
