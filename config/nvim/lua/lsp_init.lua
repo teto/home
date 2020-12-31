@@ -70,6 +70,7 @@ local attach_cb = require 'on_attach'
 -- end
 
 
+-- explained at https://github.com/nvim-lua/diagnostic-nvim/issues/73
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
     underline = true,

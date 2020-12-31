@@ -109,6 +109,7 @@ call plug#begin(s:plugdir)
 " Plug 'nvim-lua/lsp-status.nvim'  " display lsp progress
 " Plug 'ojroques/nvim-lspfuzzy' " to complement lsp
 " Plug 'Yggdroot/indentLine'
+" Plug 'RRethy/vim-illuminate' " to highlight similar words
 Plug 'kyazdani42/nvim-web-devicons' " Recommended (for coloured icons)
 Plug 'ryanoasis/vim-devicons'  " Icons without colours
 Plug 'akinsho/nvim-bufferline.lua'
@@ -152,9 +153,7 @@ Plug 'hotwatermorning/auto-git-diff' " to help rebasing, damn cool
 " Plug 'christoomey/vim-conflicted' " toto
 Plug 'norcalli/nvim-terminal.lua' " to display ANSI colors
 Plug 'bogado/file-line' " to open a file at a specific line
-" Plug 'yuki-ycino/fzf-preview.vim' " toto
 Plug 'glacambre/firenvim' " to use nvim in firefox
-" Plug 'liuchengxu/vim-clap' " fuzzer
 " Plug 'alok/notational-fzf-vim' " to take notes, :NV
 " Plug 'iamcco/markdown-preview.nvim' " :MarkdownPreview
 Plug 'suy/vim-context-commentstring' " commen for current programming language
@@ -221,7 +220,7 @@ let g:vim_search_pulse_duration = 400
 " Plug 'ehamberg/vim-cute-python' " display unicode characters, kinda looks bad on vim grid
 " oberblastmeister/rooter.nvim inspired by vim-rooter
 " Plug 'pwntester/octo.nvim'
-Plug 'glacambre/shelley'
+" Plug 'glacambre/shelley'
 Plug 'dbakker/vim-projectroot' " projectroot#guess()
 Plug 'sunaku/vim-dasht' " get documentation (zeavim is also a contender KabbAmine/zeavim.vim)
 " Plug 'mtth/scratch.vim' " , {'on': 'Scratch'} mapped to ?
@@ -343,8 +342,8 @@ Plug 'dietsche/vim-lastplace' " restore last cursor postion (is it still needed 
 Plug 'vim-airline/vim-airline'
 " Plug '~/vim-airline'
 Plug 'vim-airline/vim-airline-themes' " creates problems if not here
-Plug 'hrsh7th/vim-vsnip' " vscode/lsp snippet format
-Plug 'hrsh7th/vim-vsnip-integ'
+" Plug 'hrsh7th/vim-vsnip' " vscode/lsp snippet format
+" Plug 'hrsh7th/vim-vsnip-integ'
 
 Plug 'justinmk/vim-gtfo' " gfo to open filemanager in cwd
 Plug 'wannesm/wmgraphviz.vim', {'for': 'dot'} " graphviz syntax highlighting
@@ -362,12 +361,12 @@ Plug 'tpope/vim-rhubarb' " github support in fugitive, use |i_CTRL-X_CTRL-O|
 " Plug '~/vim-markdown-composer'
 " Plug 'JamshedVesuna/vim-markdown-preview'
 " Plug 'Rykka/riv.vim', {'for': 'rst'}
-Plug 'Rykka/InstantRst', {'for': 'rst'} " rst live preview with :InstantRst,
+" Plug 'Rykka/InstantRst', {'for': 'rst'} " rst live preview with :InstantRst,
 " Plug 'dhruvasagar/vim-table-mode', {'for': 'txt'}
 
 Plug 'kshenoy/vim-signature' " display marks in gutter, love it
 Plug 'nacitar/a.vim' " :A
-Plug 'mhinz/vim-rfc', { 'on': 'RFC' } " requires nokigiri gem
+" Plug 'mhinz/vim-rfc', { 'on': 'RFC' } " requires nokigiri gem
 " careful maps F4 by default
 Plug 'teto/Modeliner' " <leader>ml to setup buffer modeline
 " This one has bindings mapped to <leader>l
@@ -388,7 +387,8 @@ Plug 'nvim-lua/completion-nvim' " lsp based completion framework
 
 " github-comment requires webapi (https://github.com/mattn/webapi-vim)
 " Plug 'mmozuras/vim-github-comment' " :GHComment
-Plug 'kthibodeaux/pull-review'     " :PullReviewList
+" use octo instead
+" Plug 'kthibodeaux/pull-review'     " :PullReviewList
 
 " does not work seems to be better ones
 "
@@ -1468,14 +1468,8 @@ let g:nv_create_note_key = 'ctrl-x'
 "if no directory found and g:nv_main_directory is not specified
 "let g:nv_main_directory = g:nv_main_directory or (first directory in g:nv_search_paths)
 "}}}
-" diagnostic builds on nvim's LSP {{{ 
 
-hi   LspDiagnosticsVirtualTextError guifg=red
-    " LspDiagnosticsVirtualTextWarning
-" hi LspDiagnosticsVirtualTextInformation guifg=orange
-    " LspDiagnosticsVirtualTextHint
 
-"}}}
 " completion-nvim {{{
 let g:completion_docked_hover=1
 " let g:completion_enable_auto_popup = 0
@@ -2106,8 +2100,8 @@ lua vim.lsp.set_log_level("debug")
 " nmap [[ <Cmd>PrevDiagnostic<cr>
 " nmap ]] <Cmd>NextDiagnostic<cr>
 
-nmap             <C-k>           <Cmd>lua vim.lsp.diagnostic.goto_prev()<cr>
-nmap             <C-j>           <Cmd>lua vim.lsp.diagnostic.goto_next()<cr>
+nmap             <C-k>           <Cmd>lua vim.lsp.diagnostic.goto_prev {wrap = true }<cr>
+nmap             <C-j>           <Cmd>lua vim.lsp.diagnostic.goto_next {wrap = true }<cr>
 " nmap [[ <Cmd>PrevDiagnostic<cr>
 " nmap ]] <Cmd>NextDiagnostic<cr>
 
@@ -2123,8 +2117,8 @@ augroup highlight_yank
     autocmd TextYankPost * lua require'vim.highlight'.on_yank{higroup="IncSearch", timeout=1000}
 augroup END
 
-autocmd CursorHold lua vim.lsp.util.show_line_diagnostics()
-autocmd CursorMoved lua vim.lsp.util.show_line_diagnostics()
+autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics()
+autocmd CursorMoved * lua vim.lsp.diagnostic.show_line_diagnostics()
 
 " https://github.com/neovim/neovim/pull/11638
 " autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
@@ -2182,8 +2176,9 @@ set sessionoptions-=help
 " xnoremap > >gv
 " xnoremap < <gv
 
-" react to *LspDiagnosticsChanged*
 command! OpenDiagnostics lua vim.lsp.diagnostic.set_loclist()
+" pb c'est qu'il l'autofocus
+autocmd User LspDiagnosticsChanged lua vim.lsp.diagnostic.set_loclist( { open_loclist = false})
 
 command! LspStopAllClients lua vim.lsp.stop_client(vim.lsp.get_active_clients())
 
@@ -2271,5 +2266,18 @@ sign define LspDiagnosticsSignError text=✘ texthl=LspDiagnosticsSignError line
 sign define LspDiagnosticsSignWarning text= texthl=LspDiagnosticsSignWarning linehl=red numhl=
 sign define LspDiagnosticsSignInformation text=I texthl=LspDiagnosticsSignInformation linehl= numhl=
 sign define LspDiagnosticsSignHint text=H texthl=LspDiagnosticsSignHint linehl= numhl=
+
+hi   LspDiagnosticsVirtualTextError guifg=red
+
+" only concerns the text of the message, not the floatwindow
+hi LspDiagnosticsFloatingError guifg=red
+hi LspDiagnosticsFloatingWarning guifg=orange
+  " LspDiagnosticsFloatingInformation
+  " LspDiagnosticsFloatingHint
+
+  " LspDiagnosticsUnderlineError
+  " LspDiagnosticsUnderlineWarning
+  " LspDiagnosticsUnderlineInformation
+  " LspDiagnosticsUnderlineHint
 
 " unmap Y

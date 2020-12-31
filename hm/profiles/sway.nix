@@ -31,12 +31,18 @@ in
         # clipman can be used too
         # clipman pick -t wofi
         "${mod}+Ctrl+h" = lib.mkForce ''exec "${pkgs.clipman}/bin/clipman pick -t wofi'';
+        # "XF86AudioRaiseVolume" = "exec ${pkgs.pamixer}/bin/pamixer -ui 2 && pamixer --get-volume > $SWAYSOCK.wob";
+        # # "exec --no-startup-id pactl set-sink-volume 0 +5%;exec ${notify-send} --icon=speaker_no_sound -u low -t 1000 'Audio Raised volume'";
+        # "XF86AudioLowerVolume" = "exec ${pkgs.pamixer}/bin/pamixer -ud 2 && pamixer --get-volume > $SWAYSOCK.wob";
+        "XF86AudioMute"="exec --no-startup-id pactl set-sink-mute 0 toggle;exec ${notify-send} --icon=speaker_no_sound -u low 'test'";
       };
+
 
       focus.forceWrapping = lib.mkForce true;
       startup = [
         { command =  "wl-paste -t text --watch clipman store"; }
         { command = ''exec wl-paste -p -t text --watch clipman store -P --histpath="~/.local/share/clipman-primary.json"''; }
+        { command = "mkfifo $SWAYSOCK.wob && tail -f $SWAYSOCK.wob | wob"; }
       ];
     };
 
@@ -59,6 +65,7 @@ in
     # bemenu as a dmenu replacement
     wl-clipboard # wl-copy / wl-paste
     wdisplays # to show 
+    wob # to display a progressbar
   ];
 
   programs.mako = {

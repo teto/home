@@ -68,7 +68,6 @@ in
   networking.resolvconf.dnsSingleRequest = true; # juste pour test
 
   # this is for gaming
-  hardware.opengl.driSupport32Bit = true;
   # just trying to make some steam warnings go away
   services.upower.enable = true;
 
@@ -88,7 +87,11 @@ in
     # only this one has bluetooth
     package = pkgs.pulseaudioFull;
   };
-
+  hardware.opengl = {
+    enable = true;
+    driSupport = true;
+    driSupport32Bit = true;
+  };
   hardware.bluetooth = {
     enable = true;
     powerOnBoot = false;
