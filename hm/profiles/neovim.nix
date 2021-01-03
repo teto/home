@@ -52,10 +52,12 @@ let
 in
 {
 
-  home.file."${config.xdg.configHome}/nvim/parser/c.so".source = "${pkgs.tree-sitter.builtGrammars.c}/parser";
-  home.file."${config.xdg.configHome}/nvim/parser/bash.so".source = "${pkgs.tree-sitter.builtGrammars.bash}/parser";
-  home.file."${config.xdg.configHome}/nvim/parser/lua.so".source = "${pkgs.tree-sitter.builtGrammars.lua}/parser";
-
+  home.file."${config.xdg.configHome}/nvim/parser/c.so".source = "${pkgs.tree-sitter.builtGrammars.tree-sitter-c}/parser";
+  home.file."${config.xdg.configHome}/nvim/parser/bash.so".source = "${pkgs.tree-sitter.builtGrammars.tree-sitter-bash}/parser";
+  home.file."${config.xdg.configHome}/nvim/parser/lua.so".source = "${pkgs.tree-sitter.builtGrammars.tree-sitter-lua}/parser";
+  # haskell treesitter is broken
+  # home.file."${config.xdg.configHome}/nvim/parser/haskell.so".source = "${pkgs.tree-sitter.builtGrammars.tree-sitter-haskell}/parser";
+  home.file."${config.xdg.configHome}/nvim/parser/nix.so".source = "${pkgs.tree-sitter.builtGrammars.tree-sitter-nix}/parser";
   # only on my fork
   # home.file."${config.xdg.configHome}/nvim/parser/haskell.so".source = "${pkgs.tree-sitter.builtGrammars.haskell}/parser";
   # home.file."${config.xdg.configHome}/nvim/parser/nix.so".source = "${pkgs.tree-sitter.builtGrammars.nix}/parser";
@@ -83,18 +85,17 @@ in
 
     # TODO add lsp stuff
     extraPackages = with pkgs; [
-      # should only appear in python-based installs
-      black
-
-      # should ideally be described only in neovim's rc
-      pythonPackages.pdftotext
-      pkgs.jq
-      nodePackages.pyright
-      nodePackages.bash-language-server
+      black         # should only appear in python-based installs
       luaPackages.lua-lsp
-      yaml-language-server
-      rnix-lsp
+      nodePackages.bash-language-server
       nodePackages.dockerfile-language-server-nodejs
+      nodePackages.pyright
+      pandoc  # for markdown preview, should be in the package closure instead
+      jq
+      pythonPackages.pdftotext
+      rnix-lsp
+      sumneko-lua-language-server  # not merged yet
+      yaml-language-server
     ];
 
     plugins = with pkgs.vimPlugins; [

@@ -2,7 +2,7 @@
 -- https://github.com/neovim/nvim-lsp/issues/41
 local lspconfig = require 'lspconfig'
 local configs = require 'lspconfig/configs'
-local lsp_status_enabled, lsp_status = pcall(require, 'lsp-status')
+-- local lsp_status_enabled, lsp_status = pcall(require, 'lsp-status')
 local notifs = require 'notifications'
 local util = require'vim.lsp.util'
 local api = vim.api
@@ -28,12 +28,12 @@ if false then
 		local client = vim.lsp.get_client_by_id(client_id)
 		local client_name = client and client.name or string.format("id=%d", client_id)
 		if not client then
-			notif.notify("LSP[", client_name, "] client has shut down after sending the message")
+			notifs.notify("LSP[", client_name, "] client has shut down after sending the message")
 		end
-		if message_type == protocol.MessageType.Error then
-			notif.notify("LSP[", client_name, "] ", message)
+		if message_type == vim.lsp.protocol.MessageType.Error then
+			notifs.notify("LSP[", client_name, "] ", message)
 		else
-			local message_type_name = protocol.MessageType[message_type]
+			local message_type_name = vim.lsp.protocol.MessageType[message_type]
 			api.nvim_out_write(string.format("LSP[%s][%s] %s\n", client_name, message_type_name, message))
 		end
 		return result
@@ -103,13 +103,24 @@ end
 
 lspconfig.lua_lsp.setup{}
 
--- sumneko_lua
--- lspconfig.lua_lsp.setup{
--- 	name = "lua";
--- 	-- cmd = "lua-lsp",
--- 	-- filetypes = { "lua" };
--- }
-
+lspconfig.sumneko_lua.setup{
+  cmd = {"lua-language-server"};
+  settings = {
+	Lua = {
+		runtime = { version = "LuaJIT", path = vim.split(package.path, ';'), },
+		completion = { keywordSnippet = "Disable", },
+		diagnostics = { enable = true, globals = {
+			"vim", "describe", "it", "before_each", "after_each" },
+		},
+		workspace = {
+			library = {
+				[vim.fn.expand("$VIMRUNTIME/lua")] = true,
+				[vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
+			}
+		}
+	}
+  }
+}
 
 lspconfig.dockerls.setup{}
 lspconfig.yamlls.setup{}
@@ -293,7 +304,7 @@ lspconfig.clangd.setup({
 --	root_dir = lspconfig.util.root_pattern( '.git'),
 --	-- mandated by lsp-status
 --	init_options = {
---		-- clangdFileStatus = true 
+--		-- clangdFileStatus = true
 --	},
 --	-- callbacks = lsp_status.extensions.clangd.setup()
 })
@@ -366,8 +377,8 @@ local function preview_location_callback(_, method, result)
   end
 end
 
--- taken from https://github.com/neovim/neovim/pull/12368
-function peek_definition()
+-- -- taken from https://github.com/neovim/neovim/pull/12368
+local function peek_definition()
   local params = vim.lsp.util.make_position_params()
   return vim.lsp.buf_request(0, 'textDocument/definition', params, preview_location_callback)
 end
@@ -382,26 +393,6 @@ vim.g.spinner_frames = {'⣾', '⣽', '⣻', '⢿', '⡿', '⣟', '⣯', '⣷'}
 
 vim.g.should_show_diagnostics_in_statusline = true
 
-if plug_lsputil_enabled then
-
-	function StatusLineLSP()
-		return lsp_status.status()
-	end
-end
-
--- utility functions: override/extend builtin 
-
-local function preview_location_callback(_, method, result)
-    if result == nil or vim.tbl_isempty(result) then
-        return nil
-    end
-    util.preview_location(result[1])
-end
-
-function peek_definition()
-    local params = util.make_position_params()
-    return vim.lsp.buf_request(0, 'textDocument/definition', params, preview_location_callback)
-end
 
   -- if #vim.lsp.buf_get_clients() == 0 then
   --   return ''

@@ -112,7 +112,7 @@ Plug 'ojroques/nvim-lspfuzzy' " to complement lsp
 " Plug 'RRethy/vim-illuminate' " to highlight similar words
 Plug 'kyazdani42/nvim-web-devicons' " Recommended (for coloured icons)
 Plug 'ryanoasis/vim-devicons'  " Icons without colours
-Plug 'akinsho/nvim-bufferline.lua'
+" Plug 'akinsho/nvim-bufferline.lua'
 
 Plug 'Olical/aniseed', { 'tag': 'v3.12.0' }
 Plug 'nvim-telescope/telescope-github.nvim'
@@ -181,7 +181,6 @@ Plug 'rhysd/git-messenger.vim' " to show git message :GitMessenger
 
 " filetype related {{{
 Plug 'neomutt/neomutt.vim' " syntax file for neomutt
-Plug 'vim-pandoc/vim-pandoc-syntax'
 Plug 'vim-scripts/rfc-syntax', { 'for': 'rfc' } " optional syntax highlighting for RFC files
 " Plug 'vim-scripts/coq-syntax', {'for': 'coq'}
 "}}}
@@ -287,7 +286,7 @@ Plug 'honza/vim-snippets'
 """ contact autocompletion
 
 " haskell plugins{{{
-Plug 'neovimhaskell/nvim-hs.vim' " to help with nvim-hs
+" Plug 'neovimhaskell/nvim-hs.vim' " to help with nvim-hs
 Plug 'neovimhaskell/haskell-vim', {'for': 'haskell'} " really helps with syntax highlighting
 " Plug 'enomsg/vim-haskellConcealPlus', {'for':'haskell'}     " unicode for haskell operators
 " Plug 'bitc/vim-hdevtools'
@@ -378,10 +377,10 @@ Plug 'teto/Modeliner' " <leader>ml to setup buffer modeline
 " https://github.com/haorenW1025/completion-nvim/wiki/chain-complete-support
 Plug 'nvim-lua/completion-nvim' " lsp based completion framework
 " treesitter may slow down nvim
-" Plug 'nvim-treesitter/completion-treesitter' " extension of completion-nvim,
+Plug 'nvim-treesitter/completion-treesitter' " extension of completion-nvim,
 " depends on nvim-treesitter/nvim-treesitter
 " Plug 'nvim-treesitter/highlight.lua' " to test treesitter
-" Plug 'nvim-treesitter/nvim-treesitter' " to test treesitter
+Plug 'nvim-treesitter/nvim-treesitter' " to test treesitter
 " Plug '~/nvim-treesitter' " to test treesitter
 " Plug 'nvim-treesitter/playground'
 " Plug 'nvim-treesitter/nvim-treesitter-textobjects'
@@ -2263,13 +2262,17 @@ command! -complete=customlist,LuaComplete -nargs=1 LuaFile lua <args>
 " sign define LspDiagnosticsHintSign text=H
 
 sign define LspDiagnosticsSignError text=✘ texthl=LspDiagnosticsSignError linehl= numhl=
-" sign define LspDiagnosticsSignWarning text=！ texthl=LspDiagnosticsSignWarning linehl= numhl=
-sign define LspDiagnosticsSignWarning text= texthl=LspDiagnosticsSignWarning linehl=red numhl=
-sign define LspDiagnosticsSignInformation text=I texthl=LspDiagnosticsSignInformation linehl= numhl=
+" ！
+sign define LspDiagnosticsSignWarning text=！ texthl=LspDiagnosticsSignWarning linehl= numhl=CustomLineWarn
+" sign define LspDiagnosticsSignWarning text= texthl=LspDiagnosticsSignWarning linehl=red numhl=
+sign define LspDiagnosticsSignInformation text=I texthl=LspDiagnosticsSignInformation linehl= numhl=CustomLineWarn
 sign define LspDiagnosticsSignHint text=H texthl=LspDiagnosticsSignHint linehl= numhl=
 
 hi   LspDiagnosticsVirtualTextError guifg=red
+hi   LspDiagnosticsVirtualTextDebug guifg=green
 
+" guifg=#232526 
+hi CustomLineWarn guifg=#FD971F
 " only concerns the text of the message, not the floatwindow
 hi LspDiagnosticsFloatingError guifg=red
 hi LspDiagnosticsFloatingWarning guifg=orange

@@ -5,12 +5,12 @@ end
 
 config.config = config.setup {
     highlight = {
-        enable = false,                    -- false will disable the whole extension
+        enable = true,                    -- false will disable the whole extension
         disable = {
 			'rust',
 			'bash',
-			'c',
-			'lua' -- cos breaks
+			-- 'c',
+			-- 'lua' -- cos breaks
 		},        -- list of language that will be disabled
     },
     incremental_selection = {
