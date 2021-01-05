@@ -94,14 +94,13 @@ configs.lua_lsp = {
 	end;
 	-- todo wrap it with nlua: require('nlua.lsp.nvim').
 	on_attach=attach_cb.on_attach,
-
 	log_level = vim.lsp.protocol.MessageType.Warning;
 	settings = {};
 	};
 }
 end
 
-lspconfig.lua_lsp.setup{}
+-- lspconfig.lua_lsp.setup{}
 
 lspconfig.sumneko_lua.setup{
   cmd = {"lua-language-server"};
@@ -109,8 +108,10 @@ lspconfig.sumneko_lua.setup{
 	Lua = {
 		runtime = { version = "LuaJIT", path = vim.split(package.path, ';'), },
 		completion = { keywordSnippet = "Disable", },
-		diagnostics = { enable = true, globals = {
-			"vim", "describe", "it", "before_each", "after_each" },
+		diagnostics = { 
+			enable = true,
+			globals = { "vim", "describe", "it", "before_each", "after_each" },
+			disable = { "lowercase-global", "unused-function"}
 		},
 		workspace = {
 			library = {
@@ -196,7 +197,7 @@ lspconfig.hls.setup({
     root_dir = lspconfig.util.root_pattern("*.cabal", "stack.yaml", "cabal.project", "package.yaml", "hie.yaml"),
 
 	on_attach=attach_cb.on_attach,
-
+	message_level = vim.lsp.protocol.MessageType.Warning,
 	init_options = {
 		-- languageServerHaskell = {
 		haskell = {
@@ -254,7 +255,7 @@ lspconfig.rust_analyzer.setup({
 })
 
 
-require'lspconfig'.rnix.setup{}
+lspconfig.rnix.setup{}
 
 -- Available on nix via python-language-server (microsoft)
 -- lspconfig.pyls_ms.setup({

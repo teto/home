@@ -41,7 +41,7 @@ in
       focus.forceWrapping = lib.mkForce true;
       startup = [
         { command =  "wl-paste -t text --watch clipman store"; }
-        { command = ''exec wl-paste -p -t text --watch clipman store -P --histpath="~/.local/share/clipman-primary.json"''; }
+        { command = ''wl-paste -p -t text --watch clipman store -P --histpath="~/.local/share/clipman-primary.json"''; }
         { command = "mkfifo $SWAYSOCK.wob && tail -f $SWAYSOCK.wob | wob"; }
       ];
     };

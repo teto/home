@@ -55,6 +55,7 @@ in
   home.file."${config.xdg.configHome}/nvim/parser/c.so".source = "${pkgs.tree-sitter.builtGrammars.tree-sitter-c}/parser";
   home.file."${config.xdg.configHome}/nvim/parser/bash.so".source = "${pkgs.tree-sitter.builtGrammars.tree-sitter-bash}/parser";
   home.file."${config.xdg.configHome}/nvim/parser/lua.so".source = "${pkgs.tree-sitter.builtGrammars.tree-sitter-lua}/parser";
+  home.file."${config.xdg.configHome}/nvim/parser/python.so".source = "${pkgs.tree-sitter.builtGrammars.tree-sitter-python}/parser";
   # haskell treesitter is broken
   # home.file."${config.xdg.configHome}/nvim/parser/haskell.so".source = "${pkgs.tree-sitter.builtGrammars.tree-sitter-haskell}/parser";
   home.file."${config.xdg.configHome}/nvim/parser/nix.so".source = "${pkgs.tree-sitter.builtGrammars.tree-sitter-nix}/parser";
@@ -86,9 +87,9 @@ in
     # TODO add lsp stuff
     extraPackages = with pkgs; [
       black         # should only appear in python-based installs
-      luaPackages.lua-lsp
+      # luaPackages.lua-lsp
       nodePackages.bash-language-server
-      nodePackages.dockerfile-language-server-nodejs
+      # nodePackages.dockerfile-language-server-nodejs # broken
       nodePackages.pyright
       pandoc  # for markdown preview, should be in the package closure instead
       jq

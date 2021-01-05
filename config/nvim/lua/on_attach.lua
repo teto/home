@@ -14,13 +14,6 @@ local plug_completion_enabled, plug_completion = pcall(require, "completion")
   -- end
   -- vim.api.nvim_command('augroup END')
 
-  -- If the client is a documentSymbolProvider, set up an autocommand to update the containing function
-  -- if client.resolved_capabilities.document_symbol then
-  --   vim.api.nvim_command('augroup lsp_aucmds')
-  --   vim.api.nvim_command('  au CursorHold,BufEnter <buffer> lua require("lsp-status").update_current_function()')
-  --   vim.api.nvim_command('augroup END')
-  -- end
-
 M.on_attach = function(client)
 	-- print("Attaching client")
 	-- print(vim.inspect(client))

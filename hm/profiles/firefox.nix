@@ -14,6 +14,8 @@ in
 {
 
   # TODO prefix with stable
+  # look at firefox/wrapper to add policies 
+  # https://github.com/mozilla/policy-templates#enterprisepoliciesenabled
   programs.firefox = {
     enable = true;
     # import the one in pkgs/

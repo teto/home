@@ -77,7 +77,16 @@ end
 -- local lsp = require 'lsp'
 
 
--- to disable virtualtext check 
+function contextMenu()
+	local choices = {"choice 1", "choice 2"}
+	require"contextmenu".open(choices, {
+		callback = function(chosen)
+			print("Final choice " .. choices[chosen])
+		end
+	})
+end
+
+-- to disable virtualtext check
 -- follow https://www.reddit.com/r/neovim/comments/f8u6fz/lsp_query/fip91ww/?utm_source=share&utm_medium=web2x
 -- vim.nvim_command [[autocmd CursorHold <buffer> lua vim.lsp.util.show_line_diagnostics()]]
 -- vim.nvim_command [[autocmd CursorMoved <buffer> lua vim.lsp.util.show_line_diagnostics()]]

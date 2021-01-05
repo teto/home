@@ -107,7 +107,10 @@ set exrc
 " vim-plug plugin declarations {{{1
 call plug#begin(s:plugdir)
 " Plug 'nvim-lua/lsp-status.nvim'  " display lsp progress
+Plug 'tjdevries/colorbuddy.nvim' " required by some colorscheme
 Plug 'ojroques/nvim-lspfuzzy' " to complement lsp
+Plug 'jbyuki/contextmenu.nvim' " 
+Plug 'kyazdani42/nvim-tree.lua' " to solve crash
 " Plug 'Yggdroot/indentLine'
 " Plug 'RRethy/vim-illuminate' " to highlight similar words
 Plug 'kyazdani42/nvim-web-devicons' " Recommended (for coloured icons)
@@ -146,8 +149,8 @@ Plug 'MattesGroeger/vim-bookmarks' " ruby  / :BookmarkAnnotate
 
 Plug 'skywind3000/vim-quickui'
 Plug 'liuchengxu/vista.vim' " replaces tagbar to list workplace symbols
-Plug 'neovim/nvim-lspconfig' " while fuzzing details out
-" Plug '~/nvim-lspconfig' " while fuzzing details out
+" Plug 'neovim/nvim-lspconfig' " while fuzzing details out
+Plug '~/nvim-lspconfig' " while fuzzing details out
 " Plug 'puremourning/vimspector' " to debug programs
 Plug 'bfredl/nvim-luadev'  " lua repl :Luadev
 Plug 'hotwatermorning/auto-git-diff' " to help rebasing, damn cool
@@ -378,11 +381,9 @@ Plug 'teto/Modeliner' " <leader>ml to setup buffer modeline
 Plug 'nvim-lua/completion-nvim' " lsp based completion framework
 " treesitter may slow down nvim
 Plug 'nvim-treesitter/completion-treesitter' " extension of completion-nvim,
-" depends on nvim-treesitter/nvim-treesitter
-" Plug 'nvim-treesitter/highlight.lua' " to test treesitter
 Plug 'nvim-treesitter/nvim-treesitter' " to test treesitter
 " Plug '~/nvim-treesitter' " to test treesitter
-" Plug 'nvim-treesitter/playground'
+Plug 'nvim-treesitter/playground'
 " Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 
 " github-comment requires webapi (https://github.com/mattn/webapi-vim)
@@ -405,6 +406,7 @@ Plug 'justinmk/molokai'
 Plug 'mhinz/vim-janah'
 Plug 'vim-scripts/Solarized'
 " Plug 'gruvbox-community/gruvbox' *
+Plug 'npxbr/gruvbox.nvim'
 Plug 'romainl/flattened'
 Plug 'joshdick/onedark.vim'
 Plug 'NLKNguyen/papercolor-theme'
@@ -429,6 +431,7 @@ Plug 'lervag/vimtex'
 " Plug 'gregsexton/gitv'
 " Plug 'jeffwilliams/basejump' " to alt+click on file:line and go to it
 Plug 'neovim/nvimdev.nvim' " thanks tweekmonster !
+" Plug 'antoinemadec/openrgb.nvim'
 " Plug 'jceb/vim-orgmode' " orgmode
 call plug#end()
 " }}}
@@ -738,6 +741,12 @@ nmap <leader>ps <Plug>(pad-search)
 nmap <leader>pn <Plug>(pad-new)
 
 " let g:pad#rename_files = 0
+"}}}
+" lua tree {{{
+let g:lua_tree_auto_open = 1
+let g:lua_tree_quit_on_open = 1
+let g:lua_tree_auto_close = 1
+let g:lua_tree_tab_open = 1
 "}}}
 " gutentags + gutenhasktags {{{
 " to keep logs GutentagsToggleTrace
@@ -1064,7 +1073,9 @@ vnoremap <leader>rg  <Cmd>Grepper -tool rg -open -switch<CR>
   hi MsgSeparator ctermbg=black ctermfg=white
   hi DiffDelete guibg=red
 
-  set fdc=auto:2
+  " set fdc=auto:2
+  " set to 2 to check if that's why with nvim-treesitter, syntax gets disabled
+  set fdc=2
 " }}}
 " vim-sneak {{{
 let g:sneak#s_next = 1 " can press 's' again to go to next result, like ';'
@@ -1871,9 +1882,13 @@ autocmd ColorScheme *
 " highlight Comment gui=italic
 
 " put it after teh auguibg=redtocms ColorScheme
-colorscheme molokai
-" colorscheme gruvbox
-" set bg=light
+" colorscheme molokai
+" -- for light mode
+" set bg=dark
+" lua require("colorbuddy").colorscheme("gruvbox", 'dark')
+" colorscheme zephyr
+
+colorscheme gruvbox
 
 " }}}
 
@@ -1898,7 +1913,8 @@ nnoremap gO i<CR>
 " let @g="dawi\\gls{p}"
 " nnoremap <Leader>lg @g
 
-set signcolumn=auto:3
+" set signcolumn=auto:3
+set signcolumn=2
 
 function! FzfFlipBool()
   " let l:dict = {}
@@ -2088,9 +2104,11 @@ luafile ~/.config/nvim/lua/lsp_init.lua
 " logs are written to /home/teto/.local/share/nvim/vim-lsp.log
 lua vim.lsp.set_log_level("debug")
 
+command! LspAction lua vim.lsp.buf.code_action()
+
 
 " treesitter config
-" luafile ~/.config/nvim/treesitter.lua
+luafile ~/.config/nvim/treesitter.lua
 
 
 " this is set per-buffer so...
@@ -2117,7 +2135,7 @@ augroup highlight_yank
     autocmd TextYankPost * lua require'vim.highlight'.on_yank{higroup="IncSearch", timeout=1000}
 augroup END
 
-autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics()
+" autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics()
 autocmd CursorMoved * lua vim.lsp.diagnostic.show_line_diagnostics()
 
 " https://github.com/neovim/neovim/pull/11638
