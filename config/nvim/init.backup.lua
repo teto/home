@@ -3,8 +3,7 @@
 -- local nvim_lsp = require 'nvim_lsp'
 -- local configs = require'nvim_lsp/configs'
 -- local lsp_status = require'lsp-status'
-local plug_telescope_enabled, telescope = pcall(require, "telescope.builtin")
-
+local plug_telescope_enabled, telescope = pcall(require, "telescope")
 
 local function preview_location_callback(_, method, result)
   if result == nil or vim.tbl_isempty(result) then
@@ -41,7 +40,7 @@ if bufferline_available then
 	bufferline.setup{
 		options = {
 			view =  "default",
-			-- "ordinal" 
+			-- "ordinal"
 			numbers = "buffer_id",
 			-- number_style = "superscript" | "",
 			mappings = true,
@@ -74,7 +73,10 @@ if lspfuzzy_available then
 	lspfuzzy.setup {}
 end
 
--- local lsp = require 'lsp'
+-- TODO check for telescope github extension too
+if plug_telescope_enabled then
+	telescope.load_extension('ghcli')
+end
 
 
 function contextMenu()

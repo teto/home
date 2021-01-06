@@ -7,14 +7,12 @@
       nur.to = { type = "github"; owner = "nix-community"; repo="NUR"; };
       hm.to = { type = "github"; owner = "nix-community"; repo="home-manager"; };
       poetry.to = { type = "github"; owner = "nix-community"; repo="poetry2nix"; };
-
-      # sinon user   flake:neovim github:teto/neovim/flake a l'air ok
       neovim.to = { type = "github"; owner = "neovim"; repo="neovim?dir=contrib"; };
+
+      iohk.to = { type = "github"; owner = "input-output-hk"; repo="haskell.nix"; };
 
       # "github:nixos/nixpkgs/nixos-unstable";
       # home-manager
-
-      # todo reference this repo to avoid downloading everything twice
     };
 
       # sshServe = {

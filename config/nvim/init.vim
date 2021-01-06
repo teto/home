@@ -1073,9 +1073,9 @@ vnoremap <leader>rg  <Cmd>Grepper -tool rg -open -switch<CR>
   hi MsgSeparator ctermbg=black ctermfg=white
   hi DiffDelete guibg=red
 
-  " set fdc=auto:2
+  set fdc=auto:2
   " set to 2 to check if that's why with nvim-treesitter, syntax gets disabled
-  set fdc=2
+  " set fdc=2
 " }}}
 " vim-sneak {{{
 let g:sneak#s_next = 1 " can press 's' again to go to next result, like ';'
@@ -1913,8 +1913,8 @@ nnoremap gO i<CR>
 " let @g="dawi\\gls{p}"
 " nnoremap <Leader>lg @g
 
-" set signcolumn=auto:3
-set signcolumn=2
+set signcolumn=auto:3
+" set signcolumn=yes:2
 
 function! FzfFlipBool()
   " let l:dict = {}
