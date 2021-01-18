@@ -10,7 +10,7 @@ local function statusline_lsp()
 -- vim.g.indicator_ok = ''
 -- vim.g.spinner_frames = {'⣾', '⣽', '⣻', '⢿', '⡿', '⣟', '⣯', '⣷'}
 
-  local base_status = "S"
+  -- local base_status = "S"
   local status_symbol = '🇻'
   local indicator_ok = '✅'
 	-- vim.g.indicator_errors = ''
@@ -28,7 +28,7 @@ local function statusline_lsp()
   local buf_messages = vim.lsp.util.get_progress_messages()
 
   for _, msg in ipairs(buf_messages) do
-	  print("statusline ", vim.inspect(msg))
+	  -- print("statusline ", vim.inspect(msg))
     local client_name = '[' .. msg.name .. ']'
     local contents = ''
     if msg.progress then
@@ -61,7 +61,8 @@ local function statusline_lsp()
   end
 -- vim.trim(table.concat(status_parts, ' ') ..
   local base_status =  ' ' .. table.concat(msgs, ' ')
-  local symbol = status_symbol .. ((some_diagnostics and only_hint) and '' or ' ')
+  local symbol = status_symbol
+  -- .. ((some_diagnostics and only_hint) and '' or ' ')
   local current_function = vim.b.lsp_current_function
   if current_function and current_function ~= '' then
     symbol = symbol .. '(' .. current_function .. ') '

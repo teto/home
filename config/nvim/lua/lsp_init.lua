@@ -4,7 +4,7 @@ local lspconfig = require 'lspconfig'
 local configs = require 'lspconfig/configs'
 -- local lsp_status_enabled, lsp_status = pcall(require, 'lsp-status')
 local notifs = require 'notifications'
-local util = require'vim.lsp.util'
+-- local util = require'vim.lsp.util'
 local api = vim.api
 
 local plug_lsputil_enabled, lsputil = pcall(require, "lsputil")
@@ -108,7 +108,7 @@ lspconfig.sumneko_lua.setup{
 	Lua = {
 		runtime = { version = "LuaJIT", path = vim.split(package.path, ';'), },
 		completion = { keywordSnippet = "Disable", },
-		diagnostics = { 
+		diagnostics = {
 			enable = true,
 			globals = { "vim", "describe", "it", "before_each", "after_each" },
 			disable = { "lowercase-global", "unused-function"}
@@ -198,13 +198,15 @@ lspconfig.hls.setup({
 
 	on_attach=attach_cb.on_attach,
 	message_level = vim.lsp.protocol.MessageType.Warning,
-	init_options = {
+	-- init_options = {
+	settings = {
 		-- languageServerHaskell = {
 		haskell = {
 			formattingProvider = "stylish-haskell",
 		-- "haskell.trace.server": "messages",
 			logFile = "/tmp/nvim-hls.log",
 		-- "codeLens.enable": true,
+			hlintOn = "false"
 		}
 	}
 })

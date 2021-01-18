@@ -30,7 +30,8 @@ in
   # programs.feh.enable = true;
 
   wayland.windowManager.sway.extraOptions = [
-    "--verbose" "--debug" "--unsupported-gpu" "--my-next-gpu-wont-be-nvidia"
+    "--verbose"
+    "--debug"
   ];
 
   home.packages = with pkgs; [

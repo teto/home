@@ -107,6 +107,10 @@ set exrc
 " vim-plug plugin declarations {{{1
 call plug#begin(s:plugdir)
 " Plug 'nvim-lua/lsp-status.nvim'  " display lsp progress
+" Plug 'lewis6991/gitsigns.nvim'  " same as vim-signify but lua
+Plug 'kshenoy/vim-signature' " display marks in gutter, love it
+Plug 'mhinz/vim-signify'
+
 Plug 'tjdevries/colorbuddy.nvim' " required by some colorscheme
 Plug 'ojroques/nvim-lspfuzzy' " to complement lsp
 Plug 'jbyuki/contextmenu.nvim' " 
@@ -166,9 +170,8 @@ Plug 'elbeardmorez/vim-loclist-follow' " to have quicklist synced with cursor
 " call :NR on a region than :w . coupled with b:nrrw_aucmd_create,
 Plug 'chrisbra/NrrwRgn' " to help with multi-ft files
 Plug 'chrisbra/vim-diff-enhanced' "
-" Plug 'mhinz/vim-signify' " Indicate changed lines within a file using a VCS.
-Plug 'vim-pandoc/vim-pandoc'
-Plug 'vim-pandoc/vim-pandoc-syntax'
+" Plug 'vim-pandoc/vim-pandoc'
+" Plug 'vim-pandoc/vim-pandoc-syntax'
 Plug 'shime/vim-livedown'  " :LivedownPreview
 Plug 'conornewton/vim-pandoc-markdown-preview' " :StartMdPreview / StopMd
 
@@ -222,13 +225,11 @@ let g:vim_search_pulse_duration = 400
 
 " Plug 'ehamberg/vim-cute-python' " display unicode characters, kinda looks bad on vim grid
 " oberblastmeister/rooter.nvim inspired by vim-rooter
-" Plug 'pwntester/octo.nvim'
+Plug 'pwntester/octo.nvim'
 " Plug 'glacambre/shelley'
 Plug 'dbakker/vim-projectroot' " projectroot#guess()
-Plug 'sunaku/vim-dasht' " get documentation (zeavim is also a contender KabbAmine/zeavim.vim)
+" Plug 'sunaku/vim-dasht' " get documentation (zeavim is also a contender KabbAmine/zeavim.vim)
 " Plug 'mtth/scratch.vim' " , {'on': 'Scratch'} mapped to ?
-" Plug 'tjdevries/vim-inyoface.git' "InYoFace_toggle to display only comments
-" Plug 'mhinz/vim-halo' " to hight cursor line
 " Plug 'ludovicchabant/vim-gutentags' " automatic tag generation, very good
 Plug 'junegunn/goyo.vim', {'on': 'Goyo'} "distraction free writing focus
 Plug 'junegunn/limelight.vim' " focus writing :Limelight, works with goyo
@@ -277,12 +278,9 @@ let cmdline_external_term_cmd = "termite -e '%s' &"
 " " Snippets are separated from the engine. Add this if you want them:
 Plug 'honza/vim-snippets'
 " Plug 'itchyny/vim-cursorword'
-" Plug 'Shougo/neosnippet.vim'
-" Plug 'Shougo/neosnippet-snippets'
 
 " Plug 'sjl/gundo.vim' " :GundoShow/Toggle to redo changes
 " Plug 'vim-scripts/DrawIt' " to draw diagrams
-" Plug 'Yggdroot/indentLine',{ 'for': 'python' }  " draw verticals indents but seems greedy
 " Plug 'beloglazov/vim-online-thesaurus' " thesaurus => dico dde synonymes
 
 
@@ -290,7 +288,7 @@ Plug 'honza/vim-snippets'
 
 " haskell plugins{{{
 " Plug 'neovimhaskell/nvim-hs.vim' " to help with nvim-hs
-Plug 'neovimhaskell/haskell-vim', {'for': 'haskell'} " really helps with syntax highlighting
+" Plug 'neovimhaskell/haskell-vim', {'for': 'haskell'} " really helps with syntax highlighting
 " Plug 'enomsg/vim-haskellConcealPlus', {'for':'haskell'}     " unicode for haskell operators
 " Plug 'bitc/vim-hdevtools'
 "
@@ -318,8 +316,6 @@ Plug 'florentc/vim-tla'
 " Plug 'danielroseman/pygd-vim', {'for': 'python'} " provokes an error
 " }}}
 
-" Plug 'Valloric/ListToggle' " toggle location/quickfix list toggling seems to fail
-" Plug 'git@github.com:milkypostman/vim-togglelist' " same
 Plug '907th/vim-auto-save' " :h auto-save
 " Plug 'teto/vim-auto-save' " autosave :h auto-save
 " Plug 'bfredl/nvim-miniyank' " killring alike plugin, cycling paste careful search for :Yank commands
@@ -367,7 +363,6 @@ Plug 'tpope/vim-rhubarb' " github support in fugitive, use |i_CTRL-X_CTRL-O|
 " Plug 'Rykka/InstantRst', {'for': 'rst'} " rst live preview with :InstantRst,
 " Plug 'dhruvasagar/vim-table-mode', {'for': 'txt'}
 
-Plug 'kshenoy/vim-signature' " display marks in gutter, love it
 Plug 'nacitar/a.vim' " :A
 " Plug 'mhinz/vim-rfc', { 'on': 'RFC' } " requires nokigiri gem
 " careful maps F4 by default
@@ -380,10 +375,11 @@ Plug 'teto/Modeliner' " <leader>ml to setup buffer modeline
 " https://github.com/haorenW1025/completion-nvim/wiki/chain-complete-support
 Plug 'nvim-lua/completion-nvim' " lsp based completion framework
 " treesitter may slow down nvim
-Plug 'nvim-treesitter/completion-treesitter' " extension of completion-nvim,
-Plug 'nvim-treesitter/nvim-treesitter' " to test treesitter
-" Plug '~/nvim-treesitter' " to test treesitter
+" Plug 'nvim-treesitter/completion-treesitter' " extension of completion-nvim,
+" Plug 'nvim-treesitter/nvim-treesitter' " to test treesitter
+Plug '~/nvim-treesitter' " to test treesitter
 Plug 'nvim-treesitter/playground'
+Plug 'p00f/nvim-ts-rainbow'
 " Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 
 " github-comment requires webapi (https://github.com/mattn/webapi-vim)
@@ -394,7 +390,7 @@ Plug 'nvim-treesitter/playground'
 " does not work seems to be better ones
 "
 " Plug 'vasconcelloslf/vim-interestingwords' " highlight the words you choose <leader>k (does not work in neovim)
-" Plug 't9md/vim-quickhl' " hl manually selected words :h QuickhlManualEnable
+Plug 't9md/vim-quickhl' " hl manually selected words :h QuickhlManualEnable
 
 " colorschemes {{{
 Plug 'glepnir/zephyr-nvim'
@@ -907,20 +903,6 @@ let g:bold_parentheses = 1      " Default on
 "au Syntax * RainbowParenthesesLoadRound
 "au Syntax * RainbowParenthesesLoadSquare
 "au Syntax * RainbowParenthesesLoadBraces
-" }}}
-" Gitgutter config {{{
-
-let g:gitgutter_enabled = 0
-let g:gitgutter_map_keys = 0
-let g:gitgutter_max_signs = 200
-let g:gitgutter_realtime = 0
-let g:gitgutter_eager = 0
-"let g:gitgutter_diff_args = '--ignore-space-at-eol'
-nmap <silent> ]h :GitGutterNextHunk<CR>
-nmap <silent> [h :GitGutterPrevHunk<CR>
-nnoremap <silent> <Leader>gu :GitGutterRevertHunk<CR>
-nnoremap <silent> <Leader>gp :GitGutterPreviewHunk<CR><c-w>j
-nnoremap cog :GitGutterToggle<CR>
 " }}}
 " goyo {{{
 let g:goyo_linenr=1
@@ -1479,8 +1461,13 @@ let g:nv_create_note_key = 'ctrl-x'
 "if no directory found and g:nv_main_directory is not specified
 "let g:nv_main_directory = g:nv_main_directory or (first directory in g:nv_search_paths)
 "}}}
+" quickhl (highlight certains words {{{
+nmap <Space>w <Plug>(quickhl-manual-this)
+xmap <Space>w <Plug>(quickhl-manual-this)
+nmap <Space>W <Plug>(quickhl-manual-reset)
+xmap <Space>W <Plug>(quickhl-manual-reset)
 
-
+"}}}
 " completion-nvim {{{
 let g:completion_docked_hover=1
 " let g:completion_enable_auto_popup = 0
@@ -1999,7 +1986,7 @@ nnoremap <Leader>sv <Cmd>source $MYVIMRC<CR>
 
 " open netrw/dirvish split
 " nnoremap <Leader>e :Vex<CR>
-nnoremap <Leader>w :w<CR>
+" nnoremap <Leader>w :w<CR>
 
 "nnoremap <F8> :vertical wincmd f<CR> " open file under cursor in a split
 nnoremap <leader>gfs :vertical wincmd f<CR> " open file under cursor in a split
@@ -2030,7 +2017,6 @@ hi CursorLine                    guibg=#293739 guifg=None
 
 " au BufWinLeave,BufLeave * if &buftype != 'nofile' | silent! mkview | endif
 " au BufWinEnter * if &buftype != 'nofile' | silent! loadview | endif
-
 
 
 " highlight NormalFloat cterm=NONE ctermfg=14 ctermbg=0 gui=NONE guifg=#93a1a1 guibg=#002931
@@ -2109,6 +2095,8 @@ command! LspAction lua vim.lsp.buf.code_action()
 
 " treesitter config
 luafile ~/.config/nvim/treesitter.lua
+" set foldmethod=
+set foldexpr=nvim_treesitter#foldexpr()
 
 
 " this is set per-buffer so...

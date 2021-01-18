@@ -14,14 +14,16 @@ let g:airline#extensions#disable_rtp_load = 1
 
 " replaced by bufferline
 let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#fugitive#enabled = 0
 let g:airline_disable_statusline = 0
+let g:airline#extensions#nvimlsp#enabled = 1
 
 
 " LSP
 " let g:airline_section_warning = airline#section#create_right(['lsp_status'])
 call airline#parts#define_function('lsp_status', 'StatusLSP')
 call airline#parts#define_minwidth('lsp_status', 5) 
-" let g:airline_section_y = airline#section#create_right(['lsp_status'])
+let g:airline_section_y = airline#section#create_right(['lsp_status'])
 
 
 " 'neomake', 

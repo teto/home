@@ -86,6 +86,7 @@ in
 
     # TODO add lsp stuff
     extraPackages = with pkgs; [
+      haskellPackages.hasktags
       black         # should only appear in python-based installs
       # luaPackages.lua-lsp
       nodePackages.bash-language-server
@@ -124,21 +125,21 @@ in
         config = ''
         '';
       }
+      # {
+      #   plugin = nvim-lspconfig;
+      #   config = ''
+      #   '';
+      #   # not upstreamed yet
+      #   # runtime = {
+      #   #   "init.vim".text = ''
+      #   #     '';
+      #   #   "init.lua".text = ''
+      #   #     -- TODO write config.lua; genere par home-manager
+      #   #     '';
+      #   # };
+      # }
       {
-        plugin = nvim-lspconfig;
-        config = ''
-        '';
-        # not upstreamed yet
-        # runtime = {
-        #   "init.vim".text = ''
-        #     '';
-        #   "init.lua".text = ''
-        #     -- TODO write config.lua; genere par home-manager
-        #     '';
-        # };
-      }
-      {
-        plugin = editorconfig-vim;
+        plugin = editorconfig-vim;                                     
         # config = ''
         # '';
       }
@@ -224,14 +225,14 @@ in
         # optional = true;
       }
       vim-dirvish
-      {
-        plugin = vim-fugitive;
-        config = ''
-          '';
-      }
+      # {
+      #   plugin = vim-fugitive;
+      #   config = ''
+      #     '';
+      # }
       # vim-signature
 
-      vim-signify
+      # vim-signify
       {
         plugin = vim-startify;
         config = ''

@@ -75,7 +75,9 @@ in
           "browser.urlbar.speculativeConnect.enabled" = false;
           # "devtools.theme" = "${config.theme.base16.kind}";
           "dom.battery.enabled" = false;
-          "dom.event.clipboardevents.enabled" = false;
+
+          # breaks facebook messenger when set to false
+          "dom.event.clipboardevents.enabled" = true;
           "experiments.activeExperiment" = false;
           "experiments.enabled" = false;
           "experiments.supported" = false;

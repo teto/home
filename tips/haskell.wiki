@@ -59,6 +59,8 @@ NT = natural transformation
 ~. -> view
 
 # Debug
+https://wiki.haskell.org/Debugging
+Recent versions of GHC allow a dump of a stack trace (of all cost centres) when an exception is raised. In order to enable this, compile with -prof, and run with +RTS -xc
 import Debug.Trace
 traceShow / traceId
 
