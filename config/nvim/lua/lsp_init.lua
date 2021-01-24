@@ -152,49 +152,29 @@ lspconfig.pyright.setup{
 	cmd = {"pyright-langserver", "--stdio"};
 	filetypes = {"python"};
 	root_dir = lspconfig.util.root_pattern(".git", "setup.py",  "setup.cfg", "pyproject.toml", "requirements.txt");
-	settings = {
-		python = {
-			analysis = {
-				autoSearchPaths= true;
-				diagnosticMode = 'workspace';
-				typeCheckingMode = 'strict';
-			};
-		};
-		pyright = {
-			useLibraryCodeForTypes = true;
-			disableOrganizeImports = true;
-		};
-	};
-	-- The following before_init function can be removed once https://github.com/neovim/neovim/pull/12638 is merged
-	before_init = function(initialize_params)
-		initialize_params['workspaceFolders'] = {{
-			name = 'workspace',
-			uri = initialize_params['rootUri']
-		}}
-	end
+	-- settings = {
+	-- 	python = {
+	-- 		analysis = {
+	-- 			autoSearchPaths= true;
+	-- 			diagnosticMode = 'workspace';
+	-- 			typeCheckingMode = 'strict';
+	-- 		};
+	-- 	};
+	-- 	pyright = {
+	-- 		useLibraryCodeForTypes = true;
+	-- 		disableOrganizeImports = true;
+	-- 	};
+	-- };
 }
-
--- ghcide
--- lspconfig.ghcide.setup({
--- 	log_level = vim.lsp.protocol.MessageType.Log;
--- 	root_dir = lspconfig.util.root_pattern(".git");
--- 	cmd = {"ghcide", "--lsp"};
--- 	filetypes = { "hs", "lhs", "haskell" };
--- 	-- ".stack.yaml", ".hie-bios", "BUILD.bazel", "cabal.config", "package.yaml"
--- 	-- root_dir = function(fname)
--- 	-- 	return lspconfig.util.find_git_ancestor(fname) or vim.loop.os_homedir()
--- 	-- end;
--- 	-- root_dir = lspconfig.util.root_pattern("stack.yaml", "hie-bios", "BUILD.bazel", "cabal.config", "package.yaml");
--- 	log_level = vim.lsp.protocol.MessageType.Warning;
--- 	settings = {};
--- 	-- on_new_config
--- 	on_attach=attach_cb.on_attach
--- })
 
 lspconfig.hls.setup({
     cmd = { "haskell-language-server", "--lsp" },
     filetypes = { "haskell", "lhaskell" },
-    root_dir = lspconfig.util.root_pattern("*.cabal", "stack.yaml", "cabal.project", "package.yaml", "hie.yaml"),
+    root_dir = lspconfig.util.root_pattern(
+		"*.cabal", "stack.yaml", "cabal.project"
+		-- , "package.yaml"
+		, "hie.yaml"
+	),
 
 	on_attach=attach_cb.on_attach,
 	message_level = vim.lsp.protocol.MessageType.Warning,
@@ -202,11 +182,12 @@ lspconfig.hls.setup({
 	settings = {
 		-- languageServerHaskell = {
 		haskell = {
+			completionSnippetsOn = false,
 			formattingProvider = "stylish-haskell",
 		-- "haskell.trace.server": "messages",
 			logFile = "/tmp/nvim-hls.log",
 		-- "codeLens.enable": true,
-			hlintOn = "false"
+			hlintOn = false
 		}
 	}
 })

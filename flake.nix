@@ -95,6 +95,7 @@
               (import ./nixos/profiles/nix-daemon.nix)
               (import ./nixos/modules/xserver.nix)
               hm.nixosModules.home-manager
+              nova.nixosProfiles.dev
               (import ./nixos/modules/sway.nix)
               ({ config, lib, pkgs,  ... }:
                 {

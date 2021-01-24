@@ -1,0 +1,2 @@
+# disp_column_sep
+bindkey('0', 'go-leftmost')   # alias '0' to go to first column, like vim

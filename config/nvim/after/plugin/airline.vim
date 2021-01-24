@@ -24,7 +24,13 @@ let g:airline#extensions#nvimlsp#enabled = 1
 call airline#parts#define_function('lsp_status', 'StatusLSP')
 call airline#parts#define_minwidth('lsp_status', 5) 
 let g:airline_section_y = airline#section#create_right(['lsp_status'])
+" echo nvim_treesitter#statusline(90) 
+" call airline#parts#define_function('treesitter', 'StatusLSP')
+" call airline#parts#define_minwidth('treesitter', 5) 
 
+" ⓘ / 🛑
+let airline#extensions#nvimlsp#error_symbol = '✘'
+let airline#extensions#nvimlsp#warning_symbol = '！'
 
 " 'neomake', 
 " check with :AirlineExtensions

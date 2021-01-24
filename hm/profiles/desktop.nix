@@ -79,7 +79,6 @@ let
     gnome3.networkmanagerapplet # should
     gnome3.defaultIconTheme # else nothing appears
     # i3-layout-manager  # to save/load layouts
-    # mpv # broken on unstable
     kitty
     libnotify
     # unstable.evince # succeed where zathura/mupdf fail
@@ -158,12 +157,15 @@ in
 
   imports = [
     ./common.nix
+    ./rofi.nix
+    ./mpv.nix
     ./dev.nix
     # ./modules/home-tor.nix
     ./ssh-config.nix
     ./i3.nix
     ./firefox.nix
     ./neovim.nix
+    # ./neovim-minimal.nix
   ];
 
   # rename to fn, accept a parameter for optional
@@ -196,35 +198,6 @@ in
   };
 
   services.network-manager-applet.enable = true;
-
-  programs.rofi = {
-    enable = true;
-    terminal = "${pkgs.kitty}/bin/kitty";
-    borderWidth = 1;
-    theme = "solarized_alternate";
-    # lines= ;
-    location = "center";
-
-    # rofi.font: SourceCodePro 9
-    # font =
-    # ,Layouts:${../../bin/i3-list-layouts}
-    extraConfig=''
-      !rofi.opacity: 90
-      !rofi.width: 50
-      rofi.columns: 1
-      rofi.fuzzy: true
-      rofi.show-icons: true
-      ! cd window
-      rofi.modi:       run,drun,window,ssh
-      /* see to integrate teiler */
-      rofi.sidebar-mode: true
-
-      rofi.kb-mode-previous: Alt+Left
-      rofi.kb-mode-next:	Alt+Right,Alt+Tab
-
-    '';
-  };
-
 
   services.mpd = {
     enable = false;

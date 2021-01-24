@@ -1,3 +1,4 @@
+
 -- How to add a new server
 -- https://github.com/neovim/nvim-lsp/issues/41
 -- local nvim_lsp = require 'nvim_lsp'
@@ -5,6 +6,9 @@
 -- local lsp_status = require'lsp-status'
 local plug_telescope_enabled, telescope = pcall(require, "telescope")
 local plug_gitsigns_enabled, gitsigns = pcall(require, "gitsigns")
+
+-- Only required if you have packer in your `opt` pack
+-- vim.cmd [[packadd packer.nvim]]
 
 local function preview_location_callback(_, method, result)
   if result == nil or vim.tbl_isempty(result) then

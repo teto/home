@@ -1,6 +1,9 @@
 
 ANSIBLE_LIBRARY
 
+--ssh-common-args
+--ssh-extra-args
+
 become => sudo
 Roles let you automatically load related vars_files, tasks, handlers, and other Ansible artifacts based on a known file structure. Once you group your content in roles, you can easily reuse them and share them with other users.
 
@@ -15,6 +18,9 @@ ansible-doc -t inventory -l
 - to run a script => `script` module
 
 ANSIBLE_CONFIG
+ANSIBLE_PRIVATE_KEY_FILE
+
+ANSIBLE_GATHERING=explicit
 
 # to inspect config
 

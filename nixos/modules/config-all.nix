@@ -137,7 +137,8 @@ kernel_xconfig=''
     # XDG_CACHE_HOME="$HOME/.cache";
     # XDG_DATA_HOME="$HOME/.local/share";
     EDITOR="nvim";
-    BROWSER="qutebrowser";
+    # xdg-settings set default-web-browser firefox.desktop
+    # BROWSER="qutebrowser";
 
     # todo 
     # XDG_CONFIG_HOME="$HOME/.config";

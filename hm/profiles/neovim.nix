@@ -225,6 +225,8 @@ in
         # optional = true;
       }
       vim-dirvish
+      packer-nvim
+      sql-nvim
       # {
       #   plugin = vim-fugitive;
       #   config = ''

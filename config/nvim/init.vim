@@ -107,27 +107,30 @@ set exrc
 " vim-plug plugin declarations {{{1
 call plug#begin(s:plugdir)
 " Plug 'nvim-lua/lsp-status.nvim'  " display lsp progress
-" Plug 'lewis6991/gitsigns.nvim'  " same as vim-signify but lua
+Plug 'lewis6991/gitsigns.nvim'  " same as vim-signify but lua
 Plug 'kshenoy/vim-signature' " display marks in gutter, love it
 Plug 'mhinz/vim-signify'
 
+" Plug 'ms-jpq/chadtree' " :CHADhelp
+
 Plug 'tjdevries/colorbuddy.nvim' " required by some colorscheme
 Plug 'ojroques/nvim-lspfuzzy' " to complement lsp
-Plug 'jbyuki/contextmenu.nvim' " 
-Plug 'kyazdani42/nvim-tree.lua' " to solve crash
+Plug 'jbyuki/contextmenu.nvim' "
+" Plug 'kyazdani42/nvim-tree.lua' " to solve crash
 " Plug 'Yggdroot/indentLine'
 " Plug 'RRethy/vim-illuminate' " to highlight similar words
-Plug 'kyazdani42/nvim-web-devicons' " Recommended (for coloured icons)
-Plug 'ryanoasis/vim-devicons'  " Icons without colours
+" Plug 'kyazdani42/nvim-web-devicons' " Recommended (for coloured icons)
+" Plug 'ryanoasis/vim-devicons'  " Icons without colours
 " Plug 'akinsho/nvim-bufferline.lua'
 
-Plug 'Olical/aniseed', { 'tag': 'v3.12.0' }
+" , { 'tag': 'v3.12.0' }
+Plug 'Olical/aniseed'
+Plug 'bakpakin/fennel.vim'
 Plug 'nvim-telescope/telescope-github.nvim'
 Plug 'nvim-telescope/telescope-symbols.nvim'
-Plug 'bakpakin/fennel.vim'
 Plug 'strboul/urlview.vim' " :Urlview to list urls and open them
 Plug 'diepm/vim-rest-console' " test rest APIs
-Plug '~/pdf-scribe.nvim'  " to annotate pdf files from nvim :PdfScribeInit
+" Plug '~/pdf-scribe.nvim'  " to annotate pdf files from nvim :PdfScribeInit
 Plug 'cespare/vim-toml'
 "Plug 'TaDaa/vimade' " to dim the background on lost focus
 " Plug 'tjdevries/nlua.nvim' " to add vim.api autocompletion
@@ -159,7 +162,8 @@ Plug '~/nvim-lspconfig' " while fuzzing details out
 Plug 'bfredl/nvim-luadev'  " lua repl :Luadev
 Plug 'hotwatermorning/auto-git-diff' " to help rebasing, damn cool
 " Plug 'christoomey/vim-conflicted' " toto
-Plug 'norcalli/nvim-terminal.lua' " to display ANSI colors
+" Plug 'norcalli/nvim-terminal.lua' " to display ANSI colors
+Plug '~/nvim-terminal.lua' " to display ANSI colors
 Plug 'bogado/file-line' " to open a file at a specific line
 Plug 'glacambre/firenvim' " to use nvim in firefox
 " Plug 'alok/notational-fzf-vim' " to take notes, :NV
@@ -209,10 +213,10 @@ Plug 'neomake/neomake' " just for nix and neovim dev with nvimdev ?
 " provider
 " Plug 'brooth/far.vim', { 'do': ':UpdateRemotePlugins' } " search and replace across files
 " needs ruby support, works in recent neovim
-Plug 'junegunn/vim-github-dashboard', { 'do': ':UpdateRemotePlugins' }
+" Plug 'junegunn/vim-github-dashboard', { 'do': ':UpdateRemotePlugins' }
 Plug 'fmoralesc/vim-pad', {'branch': 'devel'} " :Pad new, note taking
 " while waiting for my neovim notification provider...
-Plug 'tjdevries/descriptive_maps.vim', {'do': ':UpdateRemotePlugins' } " :call DescriptiveStart()
+" Plug 'tjdevries/descriptive_maps.vim', {'do': ':UpdateRemotePlugins' } " :call DescriptiveStart()
 Plug 'gianarb/notify.vim' " call notify#emitNotification('Title', 'Body')
 " Plug 'the-lambda-church/coquille', {'branch': 'matt', 'for': 'coq'}
 " Plug 'inside/vim-search-pulse' " Search related
@@ -225,7 +229,7 @@ let g:vim_search_pulse_duration = 400
 
 " Plug 'ehamberg/vim-cute-python' " display unicode characters, kinda looks bad on vim grid
 " oberblastmeister/rooter.nvim inspired by vim-rooter
-Plug 'pwntester/octo.nvim'
+Plug 'pwntester/octo.nvim'  " to work with github
 " Plug 'glacambre/shelley'
 Plug 'dbakker/vim-projectroot' " projectroot#guess()
 " Plug 'sunaku/vim-dasht' " get documentation (zeavim is also a contender KabbAmine/zeavim.vim)
@@ -287,8 +291,8 @@ Plug 'honza/vim-snippets'
 """ contact autocompletion
 
 " haskell plugins{{{
-" Plug 'neovimhaskell/nvim-hs.vim' " to help with nvim-hs
-" Plug 'neovimhaskell/haskell-vim', {'for': 'haskell'} " really helps with syntax highlighting
+Plug 'neovimhaskell/nvim-hs.vim' " to help with nvim-hs
+Plug 'neovimhaskell/haskell-vim', {'for': 'haskell'} " really helps with syntax highlighting
 " Plug 'enomsg/vim-haskellConcealPlus', {'for':'haskell'}     " unicode for haskell operators
 " Plug 'bitc/vim-hdevtools'
 "
