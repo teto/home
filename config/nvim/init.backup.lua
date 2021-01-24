@@ -10,6 +10,20 @@ local plug_gitsigns_enabled, gitsigns = pcall(require, "gitsigns")
 -- Only required if you have packer in your `opt` pack
 -- vim.cmd [[packadd packer.nvim]]
 
+-- local packerCfg =
+local packer = require "packer"
+local use = packer.use
+packer.init()
+use { 'haorenW1025/completion-nvim', opt = true,
+requires = {{'hrsh7th/vim-vsnip', opt = true}, {'hrsh7th/vim-vsnip-integ', opt = true}}
+}
+use {
+"nvim-telescope/telescope-frecency.nvim",
+config = function()
+	require"telescope".load_extension("frecency")
+end
+}
+
 local function preview_location_callback(_, method, result)
   if result == nil or vim.tbl_isempty(result) then
     vim.lsp.log.info(method, 'No location found')

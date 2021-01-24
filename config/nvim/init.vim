@@ -2084,23 +2084,9 @@ nnoremap <silent> gA    <cmd>lua vim.lsp.buf.code_action()<CR>
 
 " nnoremap <buffer> <silent> <leader>d :lua require("vim.lsp.util").show_line_diagnostics()<CR>
 
-" lua require 'init.lua'
-" Doesn't seem to work
-" luafile stdpath('config').'/init.lua'
-" vim.fn.stdpath('config')
-" luafile ~/.config/nvim/init.lua
-luafile ~/.config/nvim/init.backup.lua
-luafile ~/.config/nvim/lua/lsp_init.lua
-" logs are written to /home/teto/.local/share/nvim/vim-lsp.log
-lua vim.lsp.set_log_level("debug")
 
 command! LspAction lua vim.lsp.buf.code_action()
 
-
-" treesitter config
-luafile ~/.config/nvim/treesitter.lua
-" set foldmethod=
-set foldexpr=nvim_treesitter#foldexpr()
 
 
 " this is set per-buffer so...
@@ -2295,3 +2281,17 @@ hi LspDiagnosticsFloatingWarning guifg=orange
   " LspDiagnosticsUnderlineHint
 
 " unmap Y
+"
+" Doesn't seem to work
+" luafile stdpath('config').'/init.lua'
+" vim.fn.stdpath('config')
+" luafile ~/.config/nvim/init.lua
+luafile ~/.config/nvim/init.backup.lua
+luafile ~/.config/nvim/lua/lsp_init.lua
+" logs are written to /home/teto/.cache/vim-lsp.log
+lua vim.lsp.set_log_level("debug")
+
+" treesitter config
+luafile ~/.config/nvim/treesitter.lua
+" set foldmethod=
+set foldexpr=nvim_treesitter#foldexpr()
