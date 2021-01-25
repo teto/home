@@ -74,7 +74,10 @@ local attach_cb = require 'on_attach'
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
     underline = true,
-    virtual_text = true,
+    virtual_text = {
+		true,
+		severity_limit = "Warning",
+	},
     signs = {
       priority = 20
     },
@@ -171,7 +174,9 @@ lspconfig.hls.setup({
     cmd = { "haskell-language-server", "--lsp" },
     filetypes = { "haskell", "lhaskell" },
     root_dir = lspconfig.util.root_pattern(
-		"*.cabal", "stack.yaml", "cabal.project"
+		"*.cabal"
+		-- , "stack.yaml"
+		, "cabal.project"
 		-- , "package.yaml"
 		, "hie.yaml"
 	),

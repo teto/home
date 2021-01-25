@@ -198,6 +198,26 @@ if plug_gitsigns_enabled then
 }
 end
 
+
+
+-- vim.fn.stdpath('config')
+
+require 'lsp_init'
+
+-- treesitter config
+require 'myTreesitter'
+
+-- logs are written to /home/teto/.cache/vim-lsp.log
+vim.lsp.set_log_level("debug")
+
+
+local saga = require 'lspsaga'
+local opts = {
+  error_sign = 'xxx'
+}
+
+saga.init_lsp_saga(opts)
+
 -- to disable virtualtext check
 -- follow https://www.reddit.com/r/neovim/comments/f8u6fz/lsp_query/fip91ww/?utm_source=share&utm_medium=web2x
 -- vim.nvim_command [[autocmd CursorHold <buffer> lua vim.lsp.util.show_line_diagnostics()]]

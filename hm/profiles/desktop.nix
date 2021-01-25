@@ -94,6 +94,9 @@ let
     # mdp # markdown CLI presenter
     # gnome3.gnome_control_center
     ncpamixer # pulseaudio TUI mixer
+    # TODO
+    nyxt      # lisp brwoser : not packaged yet ?
+
     noti # send notifications when a command finishes
     # papis # library manager
     pass

@@ -34,13 +34,13 @@ in
 
   # TODO use the mptcp one ?
   # boot.kernelPackages = pkgs.linuxPackages;
-  # boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.kernelPackages = pkgs.linuxPackagesFor ( pkgs.linux_5_10.override {
-    structuredExtraConfig = with lib.kernel; {
-      # MPTCP     =yes;
-      # MPTCP_IPV6=yes;
-    };
-  });
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+  # boot.kernelPackages = pkgs.linuxPackagesFor ( pkgs.linux_5_10.override {
+  #   structuredExtraConfig = with lib.kernel; {
+  #     # MPTCP     =yes;
+  #     # MPTCP_IPV6=yes;
+  #   };
+  # });
 
   # TODO we need nouveau
   boot.kernelModules = [
