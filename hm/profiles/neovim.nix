@@ -87,6 +87,7 @@ in
     # TODO add lsp stuff
     extraPackages = with pkgs; [
       haskellPackages.hasktags
+      code-minimap  # for minimap.vim
       black         # should only appear in python-based installs
       # luaPackages.lua-lsp
       nodePackages.bash-language-server
@@ -224,6 +225,8 @@ in
         plugin = vim-dasht;
         # optional = true;
       }
+      # displays a minimap on the right
+      minimap-vim
       vim-dirvish
       packer-nvim
       sql-nvim

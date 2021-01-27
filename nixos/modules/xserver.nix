@@ -44,10 +44,10 @@
     libinput = {
       enable = true;
       # twoFingerScroll = true;
-      disableWhileTyping = true;
+      touchpad.disableWhileTyping = true;
       # Natural scrolling is about moving in the same direction as the page
       # I hate that so set to no
-      naturalScrolling = false;
+      touchpad.naturalScrolling = false;
       # accelSpeed = "1.55";
     };
 

@@ -167,6 +167,7 @@ in
     ./ssh-config.nix
     ./i3.nix
     ./firefox.nix
+    ./notifications.nix
     ./neovim.nix
     # ./neovim-minimal.nix
   ];

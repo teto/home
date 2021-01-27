@@ -17,11 +17,16 @@ packer.init()
 use { 'haorenW1025/completion-nvim', opt = true,
 requires = {{'hrsh7th/vim-vsnip', opt = true}, {'hrsh7th/vim-vsnip-integ', opt = true}}
 }
+-- use {
+-- 	"nvim-telescope/telescope-frecency.nvim",
+-- 	requires = {{'hrsh7th/vim-vsnip', opt = true}, 'tami5/sql.nvim', opt = false },
+-- 	config = function()
+-- 		telescope.load_extension("frecency")
+-- 	end
+-- }
 use {
-"nvim-telescope/telescope-frecency.nvim",
-config = function()
-	require"telescope".load_extension("frecency")
-end
+	-- requires code-minimap (packaged in nix)
+	'wfxr/minimap.vim'
 }
 
 local function preview_location_callback(_, method, result)
@@ -154,6 +159,8 @@ if plug_telescope_enabled then
 		buffer_previewer_maker = require'telescope.previewers'.buffer_previewer_maker
 	}
 	}
+	-- telescope.load_extension("frecency")
+
 end
 
 
@@ -213,7 +220,17 @@ vim.lsp.set_log_level("debug")
 
 local saga = require 'lspsaga'
 local opts = {
-  error_sign = 'xxx'
+  -- 1: thin border | 2: rounded border | 3: thick border
+  border_style = 2,
+  -- max_hover_width = 2,
+   error_sign = '✘',
+	warn_sign = '！',
+	hint_sign = 'H',
+	infor_sign = '',
+	code_action_icon = ' ',
+-- finder_definition_icon = '  ',
+-- finder_reference_icon = '  ',
+-- definition_preview_icon = '  '
 }
 
 saga.init_lsp_saga(opts)

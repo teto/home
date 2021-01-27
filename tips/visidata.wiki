@@ -5,3 +5,14 @@ ctrl +r  to reload
 
 
 C pour entrer dans le mode colonne
+
+# from irc:
+ "gs gzy to copy the values, the go to the other sheet, za to create a column, gs gzp to paste"
+
+gzY to copy column
+
+# copy/paste from different sheets
+Press Shift+S to open the Sheets sheet.
+
+kubectl get pods | vd -f fixed -
+https://jsvine.github.io/visidata-cheat-sheet/en/

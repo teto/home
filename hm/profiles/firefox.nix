@@ -43,9 +43,8 @@ in
        nur.repos.rycee.firefox-addons.browserpass
 #        nur.repos.rycee.firefox-addons.browserpass-otp
        nur.repos.rycee.firefox-addons.dark-night-mode
-       # nur.repos.rycee.firefox-addons.tree-style-tabs
+       # nur.repos.rycee.firefox-addons.tree-style-tabs  # not in his nur repo
 #        nur.repos.rycee.firefox-addons.gesturefy
-# tree-style-tab
     ];
 
     profiles = {
@@ -85,19 +84,19 @@ in
           "general.smoothScroll" = false;
           "geo.enabled" = false;
           "layout.css.devPixelsPerPx" = "1";
-          "media.navigator.enabled" = false;
-          "media.video_stats.enabled" = false;
+          # "media.navigator.enabled" = false;
+          # "media.video_stats.enabled" = false;
           "network.IDN_show_punycode" = true;
           "network.allow-experiments" = false;
           "network.dns.disablePrefetch" = true;
-          "network.http.referer.XOriginPolicy" = 2;
-          "network.http.referer.XOriginTrimmingPolicy" = 2;
-          "network.http.referer.trimmingPolicy" = 1;
-          "network.prefetch-next" = false;
+          # "network.http.referer.XOriginPolicy" = 2;
+          # "network.http.referer.XOriginTrimmingPolicy" = 2;
+          # "network.http.referer.trimmingPolicy" = 1;
+          # "network.prefetch-next" = false;
           "permissions.default.shortcuts" = 2; # Don't steal my shortcuts!
           "privacy.donottrackheader.enabled" = true;
           "privacy.donottrackheader.value" = 1;
-          "privacy.firstparty.isolate" = true;
+          # "privacy.firstparty.isolate" = true;
           # "signon.rememberSignons" = false;
           # "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
           # "widget.content.gtk-theme-override" = "Adwaita:light";

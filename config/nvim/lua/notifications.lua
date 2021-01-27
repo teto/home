@@ -1,5 +1,6 @@
 local a = vim.api
 local popup = require('popup')
+local uv = require('luv')
 
 -- lua require('plenary.reload').reload_module('notifications')
 local M = { }
@@ -41,10 +42,21 @@ function M.notify(msg)
   -- https://vimhelp.org/popup.txt.html#popup_create-arguments
   local prompt_win, prompt_opts = popup.create("content", popup_opts)
   local prompt_bufnr = a.nvim_win_get_buf(prompt_win)
-  os.popen()
+  -- os.popen()
   -- a.nvim_win_set_option(prompt_win, 'winhl', 'Normal:TelescopeNormal')
   -- self.window.winblend)
   -- a.nvim_win_set_option(prompt_win, 'winblend', 100)
 end
+
+
+function M.notify_external(msg)
+	local handle, pid = uv.spawn("cat", {
+	stdio = {stdin, stdout, stderr}
+	}, function(code, signal) -- on exit
+	print("exit code", code)
+	print("exit signal", signal)
+	end)
+end
+
 
 return M

@@ -25,7 +25,7 @@ alias duh="du --human-readable"
 
 
 alias preview="fzf --preview 'bat --color \"always\" {}'"
-
+alias notif-center="kill -s USR1 $(pidof deadd-notification-center)"
 
 # Gestion du 'ls' : couleur & ne touche pas aux accents
 # alias ls='ls --classify --tabsize=0 --literal --color=auto --show-control-chars --human-readable'

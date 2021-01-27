@@ -1,25 +1,3 @@
 #!/bin/bash
 
-# OSD
 Rofication/rofication-daemon &
-# dunst&
-#owncloud&
-# volumeicon& 
-
-
-# for now generates pb with i3 next
-# loads in $XDG_CON/compton.conf
-# compton&
-
-## Set startup volume
-# set volume
-# pactl set-sink-volume 0 '30%' &
-
-#nm-applet
-
-## Working shells on workspace 1
-#i3-msg workspace 1
-
-#i3-msg layout tabbed
-#urxvt256c -name mail -e bash -c "mutt" &
-#dunst-checkmail&
