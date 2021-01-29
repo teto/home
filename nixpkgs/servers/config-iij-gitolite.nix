@@ -18,10 +18,6 @@ in
 
   ];
 
-  # TODO
-  # services.automysqlbackup.config
-
-
   services.nextcloud.hostName = secrets.gitolite_server.hostname;
 
   environment.systemPackages = with pkgs; [

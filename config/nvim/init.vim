@@ -110,8 +110,6 @@ Plug 'glepnir/lspsaga.nvim'
 Plug 'kshenoy/vim-signature' " display marks in gutter, love it
 Plug 'mhinz/vim-signify'
 
-" Plug 'ms-jpq/chadtree' " :CHADhelp
-
 Plug 'tjdevries/colorbuddy.nvim' " required by some colorscheme
 Plug 'ojroques/nvim-lspfuzzy' " to complement lsp
 Plug 'jbyuki/contextmenu.nvim' "
@@ -155,8 +153,8 @@ Plug 'MattesGroeger/vim-bookmarks' " ruby  / :BookmarkAnnotate
 
 Plug 'skywind3000/vim-quickui'
 Plug 'liuchengxu/vista.vim' " replaces tagbar to list workplace symbols
-" Plug 'neovim/nvim-lspconfig' " while fuzzing details out
-Plug '~/nvim-lspconfig' " while fuzzing details out
+Plug 'neovim/nvim-lspconfig' " while fuzzing details out
+" Plug '~/nvim-lspconfig' " while fuzzing details out
 " Plug 'puremourning/vimspector' " to debug programs
 Plug 'bfredl/nvim-luadev'  " lua repl :Luadev
 Plug 'hotwatermorning/auto-git-diff' " to help rebasing, damn cool
@@ -375,8 +373,10 @@ Plug 'teto/Modeliner' " <leader>ml to setup buffer modeline
 " Plug 'vimwiki/vimwiki', { 'branch': 'dev'}   " to write notes
 " Plug 'rhysd/github-complete.vim' " provides github user/repo autocompletion after @ and #
 
+Plug 'hrsh7th/nvim-compe' 
+
 " https://github.com/haorenW1025/completion-nvim/wiki/chain-complete-support
-Plug 'nvim-lua/completion-nvim' " lsp based completion framework
+" Plug 'nvim-lua/completion-nvim' " lsp based completion framework
 " treesitter may slow down nvim
 " Plug 'nvim-treesitter/completion-treesitter' " extension of completion-nvim,
 " Plug 'nvim-treesitter/nvim-treesitter' " to test treesitter
@@ -534,7 +534,8 @@ set noswapfile
 set wildmenu
 set wildchar=<Tab>
 " list:longest, " list breaks the pum
-set wildmode=full " zsh way ?!
+set wildmode=longest " zsh way ?!
+" set wildmode=list:longest " zsh way ?!
 
 set wildignore+=.hg,.git,.svn                    " Version control
 " set wildignore+=*.aux,*.out,*.toc                " LaTeX intermediate files
@@ -1687,6 +1688,15 @@ endfunction
 " Grep as you type (requires rg currently)
 " nnoremap <Leader>rg :lua require('telescope.builtin').live_grep()<CR>
 "}}}
+" lspsaga {{{
+" nnoremap <silent><leader>ca <cmd>lua require('lspsaga.codeaction').code_action()<CR>
+command! LspSagaAction lua vim.lsp.buf.code_action()
+
+" vnoremap <silent><leader>ca <cmd>'<,'>lua require('lspsaga.codeaction').range_code_action()<CR>
+" nnoremap <silent><leader>ca :LspSagaCodeAction<CR>
+" vnoremap <silent><leader>ca :'<,'>LspSagaRangeCodeAction<CR>
+
+" }}}
 
 
 set hidden " you can open a new buffer even if current is unsaved (error E37)
@@ -1861,7 +1871,6 @@ endif
 " regarder dans 'guifont' y a s=strikeout
 
 
-" undercurl
 autocmd ColorScheme *
       \ highlight Comment gui=italic
       \ | highlight Search gui=underline
@@ -2022,6 +2031,7 @@ hi CursorLine                    guibg=#293739 guifg=None
 " au BufWinEnter * if &buftype != 'nofile' | silent! loadview | endif
 
 
+highlight NormalFloat guibg=#7c6f64
 " highlight NormalFloat cterm=NONE ctermfg=14 ctermbg=0 gui=NONE guifg=#93a1a1 guibg=#002931
 
 " taken from justinmk's config
@@ -2040,6 +2050,7 @@ function! Show_documentation()
   endif
 endfunction
 
+" extmark helper {{{
 function! CreateVisualExtmark()
 
   let opts = {
@@ -2054,49 +2065,15 @@ function! CreateVisualExtmark()
 endfunction
 
 map ,fa <Cmd>call CreateVisualExtmark()<CR>
+" }}}
 
 " lsp config {{{
-" nnoremap <buffer> <silent> <leader>ngd :call lsp#text_document_declaration()<CR>
-nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
-" todo add fallback on keyword/haskell use hoogle
-" nnoremap <silent> K  <cmd>lua vim.lsp.buf.hover()<CR>
-" nnoremap <silent> K  <cmd>Show_documentation()<CR>
-nnoremap ,gi  <cmd>lua vim.lsp.buf.implementation()<CR>
-nnoremap ,sh <cmd>lua vim.lsp.buf.signature_help()<CR>
-nnoremap <silent> ,td <cmd>lua vim.lsp.buf.type_definition()<CR>
-nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
-nnoremap <silent> ,af <cmd>lua vim.lsp.buf.formatting()<CR>
-nnoremap <silent> ,arf <cmd>lua vim.lsp.buf.range_formatting()<CR>
-
-" TODO let visual map work on range
-nnoremap ,ga <cmd>lua vim.lsp.buf.code_action()<CR>
-
-" nnoremap <silent> <leader>do :OpenDiagnostic<CR>
-nnoremap <leader>dl <cmd>lua vim.lsp.diagnostic.set_loclist()<CR>
-au User LspMessageUpdate lua vim.lsp.diagnostic.set_loclist()<CR>
-
-" vim.lsp.buf.rename()
-
-" when upstreamed
-nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
-nnoremap <silent> gA    <cmd>lua vim.lsp.buf.code_action()<CR>
-
-" nnoremap <buffer> <silent> <leader>d :lua require("vim.lsp.util").show_line_diagnostics()<CR>
-
-
 command! LspAction lua vim.lsp.buf.code_action()
 
-
-
-" this is set per-buffer so...
-" call LSP_maps()
-
-" moved to local 
-" nmap [[ <Cmd>PrevDiagnostic<cr>
-" nmap ]] <Cmd>NextDiagnostic<cr>
-
-nmap             <C-k>           <Cmd>lua vim.lsp.diagnostic.goto_prev {wrap = true }<cr>
-nmap             <C-j>           <Cmd>lua vim.lsp.diagnostic.goto_next {wrap = true }<cr>
+" nmap             <C-k>           <Cmd>lua vim.lsp.diagnostic.goto_prev {wrap = true }<cr>
+" nmap             <C-j>           <Cmd>lua vim.lsp.diagnostic.goto_next {wrap = true }<cr>
+" autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics()
+autocmd CursorMoved * lua vim.lsp.diagnostic.show_line_diagnostics()
 " nmap [[ <Cmd>PrevDiagnostic<cr>
 " nmap ]] <Cmd>NextDiagnostic<cr>
 
@@ -2105,42 +2082,30 @@ nmap             <C-j>           <Cmd>lua vim.lsp.diagnostic.goto_next {wrap = t
 
 set omnifunc=v:lua.vim.lsp.omnifunc
 
+sign define LspDiagnosticsSignError text=✘ texthl=LspDiagnosticsSignError linehl= numhl=
+sign define LspDiagnosticsSignWarning text=！ texthl=LspDiagnosticsSignWarning linehl= numhl=CustomLineWarn
+sign define LspDiagnosticsSignInformation text=I texthl=LspDiagnosticsSignInformation linehl= numhl=CustomLineWarn
+sign define LspDiagnosticsSignHint text=H texthl=LspDiagnosticsSignHint linehl= numhl=
 
-augroup highlight_yank
-    autocmd!
-    " silent
-    autocmd TextYankPost * lua require'vim.highlight'.on_yank{higroup="IncSearch", timeout=1000}
-augroup END
+hi   LspDiagnosticsVirtualTextError guifg=red
+hi   LspDiagnosticsVirtualTextDebug guifg=green
 
-" autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics()
-autocmd CursorMoved * lua vim.lsp.diagnostic.show_line_diagnostics()
+" guifg=#232526 
+hi CustomLineWarn guifg=#FD971F
+" only concerns the text of the message, not the floatwindow
+hi LspDiagnosticsFloatingError guifg=red
+hi LspDiagnosticsFloatingWarning guifg=orange
+  " LspDiagnosticsFloatingInformation
+  " LspDiagnosticsFloatingHint
 
 " https://github.com/neovim/neovim/pull/11638
 " autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
 " autocmd CursorHoldI <buffer> lua vim.lsp.buf.document_highlight()
 " autocmd CursorMoved <buffer> lua vim.lsp.util.buf_clear_references()
 
-
-hi LspDiagnosticsUnderline cterm=underline gui=undercurl
-
 " ✘'
 " 
 " TODO update
-
-" function! LspStatus() abort
-"     let sl = ''
-"     if luaeval('vim.lsp.buf.server_ready()')
-"         let sl.='%#MyStatuslineLSP#E:'
-"         let sl.='%#MyStatuslineLSPErrors#%{luaeval("vim.lsp.util.buf_diagnostics_count(\"Error\")")}'
-"         let sl.='%#MyStatuslineLSP# W:'
-"         let sl.='%#MyStatuslineLSPWarnings#%{luaeval("vim.lsp.util.buf_diagnostics_count(\"Warning\")")}'
-"     else
-"         let sl.='%#MyStatuslineLSPErrors#off'
-"     endif
-"     return sl
-" endfunction
-
-" let &l:statusline = '%#MyStatuslineLSP#LSP '.LspStatus() 
 
 " }}}
 
@@ -2158,6 +2123,13 @@ set sessionoptions-=help
 " xnoremap > >gv
 " xnoremap < <gv
 
+augroup highlight_yank
+    autocmd!
+    " silent
+    autocmd TextYankPost * lua require'vim.highlight'.on_yank{higroup="IncSearch", timeout=1000}
+augroup END
+
+
 command! OpenDiagnostics lua vim.lsp.diagnostic.set_loclist()
 " pb c'est qu'il l'autofocus
 autocmd User LspDiagnosticsChanged lua vim.lsp.diagnostic.set_loclist( { open_loclist = false})
@@ -2165,8 +2137,8 @@ autocmd User LspDiagnosticsChanged lua vim.lsp.diagnostic.set_loclist( { open_lo
 command! LspStopAllClients lua vim.lsp.stop_client(vim.lsp.get_active_clients())
 
 " set working directory to the current buffer's directory
-nnoremap cd :lcd %:p:h<bar>pwd<cr>
-nnoremap cu :lcd ..<bar>pwd<cr>
+" nnoremap cd :lcd %:p:h<bar>pwd<cr>
+" nnoremap cu :lcd ..<bar>pwd<cr>
 
 "linewise partial staging in visual-mode.
 xnoremap <c-p> <Cmd>diffput<cr>
@@ -2180,11 +2152,6 @@ function! StatusLSP() abort
   let status = luaeval('require("statusline").status()')
   return trim(status)
 endfunction
-"     " Setup for variables
-"
-" 	" let g:_active_buffer = bufnr('%')
-" 	let stl = '%{v:lua.StatusLineLSP()}'
-" 	return stl
 
 " fromn neovim master
 au User LspProgressUpdate redrawstatus!
@@ -2229,38 +2196,11 @@ map <RightMouse>  <Cmd>call quickui#context#open(content, quick_opts)<CR>
 " call quickui#context#open(content, opts)
 " }}}
 
-function! LuaComplete (ArgLeaf, CmdLine, CursorPos) abort
-        return map(luaeval("vim.tbl_keys(" . a:CmdLine[4:] . ")"), {k,v -> a:CmdLine[4:] . "." . v})
-endfunction
+" function! LuaComplete (ArgLeaf, CmdLine, CursorPos) abort
+"         return map(luaeval("vim.tbl_keys(" . a:CmdLine[4:] . ")"), {k,v -> a:CmdLine[4:] . "." . v})
+" endfunction
+" command! -complete=customlist,LuaComplete -nargs=1 LuaFile lua <args>
 
-command! -complete=customlist,LuaComplete -nargs=1 LuaFile lua <args>
-" sign define LspDiagnosticsErrorSign text=✘
-" sign define LspDiagnosticsWarningSign text=！
-" sign define LspDiagnosticsInformationSign text=I
-" sign define LspDiagnosticsHintSign text=H
-
-sign define LspDiagnosticsSignError text=✘ texthl=LspDiagnosticsSignError linehl= numhl=
-" ！
-sign define LspDiagnosticsSignWarning text=！ texthl=LspDiagnosticsSignWarning linehl= numhl=CustomLineWarn
-" sign define LspDiagnosticsSignWarning text= texthl=LspDiagnosticsSignWarning linehl=red numhl=
-sign define LspDiagnosticsSignInformation text=I texthl=LspDiagnosticsSignInformation linehl= numhl=CustomLineWarn
-sign define LspDiagnosticsSignHint text=H texthl=LspDiagnosticsSignHint linehl= numhl=
-
-hi   LspDiagnosticsVirtualTextError guifg=red
-hi   LspDiagnosticsVirtualTextDebug guifg=green
-
-" guifg=#232526 
-hi CustomLineWarn guifg=#FD971F
-" only concerns the text of the message, not the floatwindow
-hi LspDiagnosticsFloatingError guifg=red
-hi LspDiagnosticsFloatingWarning guifg=orange
-  " LspDiagnosticsFloatingInformation
-  " LspDiagnosticsFloatingHint
-
-  " LspDiagnosticsUnderlineError
-  " LspDiagnosticsUnderlineWarning
-  " LspDiagnosticsUnderlineInformation
-  " LspDiagnosticsUnderlineHint
 
 " unmap Y
 "
@@ -2268,5 +2208,8 @@ hi LspDiagnosticsFloatingWarning guifg=orange
 " luafile stdpath('config').'/init.lua'
 " luafile ~/.config/nvim/init.lua
 luafile ~/.config/nvim/init.backup.lua
+
+hi lspdiagnosticsunderlinewarning gui=NONE
+hi lspdiagnosticsunderlinehint gui=NONE
 " set foldmethod=
-set foldexpr=nvim_treesitter#foldexpr()
+

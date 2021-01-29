@@ -45,8 +45,8 @@ let
     '';
   };
 
-
-  # neovim-unwrapped-custom = pkgs.neovim-unwrapped-master.overrideAttrs(oa: {
+  myPackage = pkgs.neovim-debug;
+  # .overrideAttrs(oa: {
   #   cmakeBuildType="Debug";
   # });
 in
@@ -70,7 +70,7 @@ in
      enable = true;
 
      # take the one from the flake
-     package = pkgs.neovim-debug;
+     package = myPackage;
 
      # concatMap
      extraConfig = ''
@@ -87,7 +87,7 @@ in
     # TODO add lsp stuff
     extraPackages = with pkgs; [
       haskellPackages.hasktags
-      code-minimap  # for minimap.vim
+      # code-minimap  # for minimap.vim
       black         # should only appear in python-based installs
       # luaPackages.lua-lsp
       nodePackages.bash-language-server
@@ -229,7 +229,10 @@ in
       minimap-vim
       vim-dirvish
       packer-nvim
-      sql-nvim
+      {
+        plugin = sql-nvim;
+        config = "let g:sql_clib_path = '${pkgs.sqlite.out}/lib/libsqlite3.so'";
+      }
       # {
       #   plugin = vim-fugitive;
       #   config = ''
@@ -323,6 +326,9 @@ in
       # vimtex
       {
         plugin = unicode-vim;
+        # let g:Unicode_data_directory = /home/user/data/
+        # let g:Unicode_cache_directory = /tmp/
+
         # " let g:Unicode_cache_directory='${pkgs.vimPlugins.unicode-vim}/share/vim-plugins/unicode-vim/autoload/unicode'
         config = ''
           let g:Unicode_data_directory='${pkgs.vimPlugins.unicode-vim}/share/vim-plugins/unicode-vim/autoload/unicode'

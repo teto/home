@@ -4,8 +4,10 @@
 -- local nvim_lsp = require 'nvim_lsp'
 -- local configs = require'nvim_lsp/configs'
 -- local lsp_status = require'lsp-status'
-local plug_telescope_enabled, telescope = pcall(require, "telescope")
-local plug_gitsigns_enabled, gitsigns = pcall(require, "gitsigns")
+local has_telescope, telescope = pcall(require, "telescope")
+local has_gitsigns, gitsigns = pcall(require, "gitsigns")
+local has_compe, compe = pcall(require, "compe")
+local notifs = require "notifications"
 
 -- Only required if you have packer in your `opt` pack
 -- vim.cmd [[packadd packer.nvim]]
@@ -14,39 +16,20 @@ local plug_gitsigns_enabled, gitsigns = pcall(require, "gitsigns")
 local packer = require "packer"
 local use = packer.use
 packer.init()
-use { 'haorenW1025/completion-nvim', opt = true,
-requires = {{'hrsh7th/vim-vsnip', opt = true}, {'hrsh7th/vim-vsnip-integ', opt = true}}
-}
--- use {
--- 	"nvim-telescope/telescope-frecency.nvim",
--- 	requires = {{'hrsh7th/vim-vsnip', opt = true}, 'tami5/sql.nvim', opt = false },
--- 	config = function()
--- 		telescope.load_extension("frecency")
--- 	end
+
+-- use { 'haorenW1025/completion-nvim', opt = true,
+-- requires = {{'hrsh7th/vim-vsnip', opt = true}, {'hrsh7th/vim-vsnip-integ', opt = true}}
 -- }
 use {
-	-- requires code-minimap (packaged in nix)
+	"nvim-telescope/telescope-frecency.nvim",
+	requires = {{'hrsh7th/vim-vsnip', opt = true}, 'tami5/sql.nvim', opt = false },
+	config = function()
+		telescope.load_extension("frecency")
+	end
+}
+use {
 	'wfxr/minimap.vim'
 }
-
-local function preview_location_callback(_, method, result)
-  if result == nil or vim.tbl_isempty(result) then
-    vim.lsp.log.info(method, 'No location found')
-    return nil
-  end
-  if vim.tbl_islist(result) then
-    vim.lsp.util.preview_location(result[1])
-  else
-    vim.lsp.util.preview_location(result)
-  end
-end
-
--- taken from https://github.com/neovim/neovim/pull/12368
-function peek_definition()
-  local params = vim.lsp.util.make_position_params()
-  return vim.lsp.buf_request(0, 'textDocument/definition', params, preview_location_callback)
-end
-
 
 vim.g.indicator_errors = ''
 vim.g.indicator_warnings = ''
@@ -58,9 +41,9 @@ vim.g.spinner_frames = {'⣾', '⣽', '⣻', '⢿', '⡿', '⣟', '⣯', '⣷'}
 
 vim.g.should_show_diagnostics_in_statusline = true
 
-local bufferline_available, bufferline = pcall(require, "bufferline")
+local has_bufferline, bufferline = pcall(require, "bufferline")
 
-if bufferline_available then
+if has_bufferline then
 	bufferline.setup{
 		options = {
 			view =  "default",
@@ -98,7 +81,7 @@ if lspfuzzy_available then
 end
 
 -- TODO check for telescope github extension too
-if plug_telescope_enabled then
+if has_telescope then
 	-- telescope.load_extension('ghcli')
 	local actions = require('telescope.actions')
 	telescope.setup{
@@ -159,7 +142,7 @@ if plug_telescope_enabled then
 		buffer_previewer_maker = require'telescope.previewers'.buffer_previewer_maker
 	}
 	}
-	-- telescope.load_extension("frecency")
+	telescope.load_extension("frecency")
 
 end
 
@@ -173,7 +156,7 @@ function contextMenu()
 	})
 end
 
-if plug_gitsigns_enabled then
+if has_gitsigns then
  gitsigns.setup {
   signs = {
     add          = {hl = 'DiffAdd'   , text = '│', numhl='GitSignsAddNr'},
@@ -205,51 +188,91 @@ if plug_gitsigns_enabled then
 }
 end
 
-
-
 -- vim.fn.stdpath('config')
-
 require 'lsp_init'
 
--- treesitter config
+-- my treesitter config
 require 'myTreesitter'
 
 -- logs are written to /home/teto/.cache/vim-lsp.log
-vim.lsp.set_log_level("debug")
+vim.lsp.set_log_level("info")
 
+if has_compe then
+
+  compe.setup {
+	enabled = true;
+	debug = false;
+	min_length = 1;
+	preselect = 'disable'; -- 'enable' || 'disable' || 'always';
+	-- throttle_time = ... number ...;
+	-- source_timeout = ... number ...;
+	-- incomplete_delay = ... number ...;
+	allow_prefix_unmatch = false;
+
+	source = {
+		path = true;
+		buffer = true;
+		vsnip = true;
+		nvim_lsp = true;
+		-- nvim_lua = { ... overwrite source configuration ... };
+		};
+	};
+end
+
+-- hack
+vim.lsp.notifier = notifs
+
+-- if we are running my fork that has vim.notify
+if vim.notify then
+
+	vim.notify = notifs.notify_external
+end
 
 local saga = require 'lspsaga'
-local opts = {
+local saga_opts = {
   -- 1: thin border | 2: rounded border | 3: thick border
   border_style = 2,
   -- max_hover_width = 2,
    error_sign = '✘',
 	warn_sign = '！',
 	hint_sign = 'H',
-	infor_sign = '',
+	infor_sign = 'I',
 	code_action_icon = ' ',
 -- finder_definition_icon = '  ',
 -- finder_reference_icon = '  ',
 -- definition_preview_icon = '  '
 }
 
-saga.init_lsp_saga(opts)
+saga.init_lsp_saga(saga_opts)
+
+-- showLineDiagnostic is a wrapper around show_line_diagnostics
+-- show_line_diagnostics calls open_floating_preview
+-- local popup_bufnr, winnr = util.open_floating_preview(lines, 'plaintext')
+-- seems like there is no way to pass options from show_line_diagnostics to open_floating_preview
+-- the floating popup has "ownsyntax markdown"
+function showLineDiagnostic ()
+	local opts = {
+		enable_popup = true;
+		-- options of
+		popup_opts = {
+
+		};
+	}
+	return vim.lsp.diagnostic.show_line_diagnostics()
+	-- vim.lsp.diagnostic.goto_prev {wrap = true }
+end
+
+-- options to pass to goto_next/goto_prev
+local goto_opts = {
+	severity_limit = "Warning"
+}
+-- nmap             <C-k>           <Cmd>lua vim.lsp.diagnostic.goto_prev {wrap = true }<cr>
+-- nmap             <C-j>           <Cmd>lua vim.lsp.diagnostic.goto_next {wrap = true }<cr>
+vim.api.nvim_set_keymap('n', '<C-k>', [[<cmd>lua vim.lsp.diagnostic.goto_prev {wrap = true }<CR>]], {noremap = true})
+vim.api.nvim_set_keymap('n', '<C-j>', [[<cmd>lua vim.lsp.diagnostic.goto_next()<cr>]], {noremap = true})
 
 -- to disable virtualtext check
 -- follow https://www.reddit.com/r/neovim/comments/f8u6fz/lsp_query/fip91ww/?utm_source=share&utm_medium=web2x
 -- vim.nvim_command [[autocmd CursorHold <buffer> lua vim.lsp.util.show_line_diagnostics()]]
--- vim.nvim_command [[autocmd CursorMoved <buffer> lua vim.lsp.util.show_line_diagnostics()]]
+vim.cmd [[autocmd CursorMoved <buffer> lua showLineDiagnostic()]]
 
--- TELESCOPE
---
--- Fuzzy find over git files in your directory
--- telescope.git_files()
-
--- -- Grep as you type (requires rg currently)
--- telescope.live_grep()
-
--- -- Use builtin LSP to request references under cursor. Fuzzy find over results.
--- require('telescope.builtin').lsp_references()
-
--- -- Convert currently quickfixlist to telescope
--- require('telescope.builtin').quickfix()

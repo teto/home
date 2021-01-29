@@ -19,10 +19,10 @@
 
     nova.url = "git+ssh://git@git.novadiscovery.net:4224/world/nova-nix.git?ref=master";
     neovim = {
-      url = "github:neovim/neovim?dir=contrib";
+      # url = "github:neovim/neovim?dir=contrib";
+      url = "github:teto/neovim/notif_provider?dir=contrib";
       inputs.nixpkgs.follows = "nixpkgs-teto";
     };
-    # neovim.url = "github:neovim/neovim/flake";
 
     # TODO one can point at a subfolder ou bien c la branche ? /flakes
     # mptcpanalyzer.url = "github:teto/mptcpanalyzer";
@@ -184,8 +184,6 @@
       ;
 
       packages."${system}" = {
-        # inherit (unstablePkgs) neovim-unwrapped-master;
-        # inherit (self.overlays.neovim) neovim-unwrapped-master;
         dce = nixpkgs.callPackage ./pkgs/dce {};
 
         dig = nixpkgs.bind.dnsutils;

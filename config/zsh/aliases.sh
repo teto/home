@@ -37,10 +37,6 @@ function rfw(){
 
 alias servethis="nix-shell -ppython3 --command \'python -c 'import SimpleHTTPServer; SimpleHTTPServer.test()'\""
 
-# alias testneovim=" nix-shell -E 'with import <nixpkgs> {}; neovim-unwrapped.overrideAttrs(oa: { doCheck=true;})'"
-
-# todo use exa instead
-
 # ls related updates {{{
 # I also export TIME_STYLE to change the output of this
 alias ls="ls --color=auto --time-style=iso"

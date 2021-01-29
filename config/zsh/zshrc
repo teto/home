@@ -352,6 +352,12 @@ emulate sh -c "source ${current_folder}/../fzf-gems/fzf_git_functions.sh"
 source "${current_folder}/../fzf-gems/fzf_git_keybindings.zsh"
 # echo $PWD
 
+teatimer() {
+         sleep $1;
+         # mplayer "$HOME/music/<sound-to-play.mp3>"  & notify-send '!! Coffee Time - wake up !!';
+	 mpv $HOME/music/10.0.0.111:8000/Stromae\ -\ House\'llelujah.mp3 & notify-send '!! Coffee Time - wake up !!';
+         exit
+}
 
 # fzf config{{{
 # Use fd (https://github.com/sharkdp/fd) instead of the default find
