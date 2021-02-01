@@ -20,7 +20,8 @@
     nova.url = "git+ssh://git@git.novadiscovery.net:4224/world/nova-nix.git?ref=master";
     neovim = {
       # url = "github:neovim/neovim?dir=contrib";
-      url = "github:teto/neovim/notif_provider?dir=contrib";
+      # url = "github:teto/neovim/notif_provider?dir=contrib";
+      url = "github:teto/neovim/floatpreviewopts?dir=contrib";
       inputs.nixpkgs.follows = "nixpkgs-teto";
     };
 
@@ -125,8 +126,8 @@
                   ./hm/home-xps.nix
                   nova.hmProfiles.standard
                   nova.hmProfiles.dev
+                  # ./hm/profiles/vscode.nix #  provided by nova-nix config
                   ./hm/profiles/experimental.nix
-
               ])
             ]
             ;
@@ -165,6 +166,7 @@
 
       overlays = {
         # pkgs = import ./nixpkgs/overlays/pkgs/default.nix;
+        overrides = import ./nixpkgs/overlays/overrides.nix;
         haskell = import ./nixpkgs/overlays/haskell.nix;
         neovim = import ./nixpkgs/overlays/neovim.nix;
         neovimOfficial = inputs.neovim.overlay;

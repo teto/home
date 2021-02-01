@@ -12,11 +12,17 @@ rec {
     src = builtins.fetchGit {
       url = https://github.com/teto/protocol;
     };
-    # src = /home/teto/protocol;
   });
 
+  visidata = prev.visidata.overrideAttrs(oa: {
+    name = "visidata-matt";
 
-
+    src = builtins.fetchGit {
+      ref = "develop";
+      url = "https://github.com/saulpw/visidata.git";
+      rev = "e65c076c644a9577022c985dee5b447650cddd72";
+    };
+  });
 
   # xdg_utils = prev.xdg_utils.overrideAttrs(oa: {
   #   pname = "xdg-utils-custom";
@@ -27,18 +33,4 @@ rec {
   #   ];
   # });
 
-  # nixops-dev = prev.nixops.overrideAttrs ( oa: {
-  #   # src = prev.fetchFromGitHub {
-  #   #   owner = "teto";
-  #   #   repo = "nixops";
-  #   #   rev = "7c71333a3ff6dc636d0b2547f07b105571a3027b";
-  #   #   sha256 = "0fc0ix468n2s97p9nfdl3bxi3i9hwf60j4k2mabrnxfhladsygzm";
-  #   # };
-  #   # version = "1.7";
-  #   name = "nixops-dev";
-  #   src = builtins.fetchGit {
-  #     url = /home/teto/nixops;
-  #     # rev = "7c71333a3ff6dc636d0b2547f07b105571a3027b";
-  #   };
-  # });
 }

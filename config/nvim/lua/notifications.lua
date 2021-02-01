@@ -49,7 +49,7 @@ end
 
 -- https://github.com/phuhl/linux_notification_center
 -- https://github.com/luvit/luv/blob/master/docs.md
-function M.notify_external(log_level, msg)
+function M.notify_external(msg, log_level, opts)
 	vim.fn.jobstart({"notify-send", msg })
 end
 

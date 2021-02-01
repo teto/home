@@ -95,8 +95,6 @@ vnoremap <LeftRelease> "*ygv
 " inverts the meaning of g in substitution, ie with gdefault, change all
 " occurences
 set gdefault
-" lustyjuggler plugin
-" https://github.com/sjbach/lusty
 
 " nvim will load any .nvimrc in the cwd; useful for per-project settings
 set exrc
@@ -104,14 +102,13 @@ set exrc
 
 " vim-plug plugin declarations {{{1
 call plug#begin(s:plugdir)
-" Plug 'nvim-lua/lsp-status.nvim'  " display lsp progress
 Plug 'glepnir/lspsaga.nvim'
 " Plug 'lewis6991/gitsigns.nvim'  " same as vim-signify but lua
 Plug 'kshenoy/vim-signature' " display marks in gutter, love it
 Plug 'mhinz/vim-signify'
 
 Plug 'tjdevries/colorbuddy.nvim' " required by some colorscheme
-Plug 'ojroques/nvim-lspfuzzy' " to complement lsp
+" Plug 'ojroques/nvim-lspfuzzy' " to complement lsp
 Plug 'jbyuki/contextmenu.nvim' "
 " Plug 'kyazdani42/nvim-tree.lua' " to solve crash
 " Plug 'Yggdroot/indentLine'
@@ -123,22 +120,21 @@ Plug 'jbyuki/contextmenu.nvim' "
 " , { 'tag': 'v3.12.0' }
 Plug 'Olical/aniseed'
 Plug 'bakpakin/fennel.vim'
-Plug 'nvim-telescope/telescope-github.nvim'
-Plug 'nvim-telescope/telescope-symbols.nvim'
 Plug 'strboul/urlview.vim' " :Urlview to list urls and open them
 Plug 'diepm/vim-rest-console' " test rest APIs
 " Plug '~/pdf-scribe.nvim'  " to annotate pdf files from nvim :PdfScribeInit
-Plug 'cespare/vim-toml'
+" Plug 'cespare/vim-toml'
 "Plug 'TaDaa/vimade' " to dim the background on lost focus
-" Plug 'tjdevries/nlua.nvim' " to add vim.api autocompletion
 " Plug 'tjdevries/cyclist.vim' " to cycle between listchars
 
 " Plug 'RishabhRD/popfix' " to manage underlying popup and previews
 " Plug 'RishabhRD/nvim-lsputils' " for lsp codeactions
 Plug 'nvim-lua/popup.nvim'  " mimic vim's popupapi for neovim
 Plug 'nvim-lua/plenary.nvim'  " lua utilities for neovim
-" Plug 'nvim-lua/telescope.nvim'
-Plug '~/telescope.nvim'    " fzf-like in lua
+Plug 'nvim-lua/telescope.nvim'
+" Plug '~/telescope.nvim'    " fzf-like in lua
+Plug 'nvim-telescope/telescope-github.nvim'
+Plug 'nvim-telescope/telescope-symbols.nvim'
 " Plug 'Xuyuanp/scrollbar.nvim'  " :h Scrollbar.nvim
 
 " annotations plugins {{{
@@ -158,7 +154,6 @@ Plug 'neovim/nvim-lspconfig' " while fuzzing details out
 " Plug 'puremourning/vimspector' " to debug programs
 Plug 'bfredl/nvim-luadev'  " lua repl :Luadev
 Plug 'hotwatermorning/auto-git-diff' " to help rebasing, damn cool
-" Plug 'christoomey/vim-conflicted' " toto
 " Plug 'norcalli/nvim-terminal.lua' " to display ANSI colors
 Plug '~/nvim-terminal.lua' " to display ANSI colors
 Plug 'bogado/file-line' " to open a file at a specific line
@@ -167,7 +162,7 @@ Plug 'glacambre/firenvim' " to use nvim in firefox
 " Plug 'iamcco/markdown-preview.nvim' " :MarkdownPreview
 Plug 'suy/vim-context-commentstring' " commen for current programming language
 " Plug 'voldikss/vim-translate-me' " floating windows for neovim
-Plug 'elbeardmorez/vim-loclist-follow' " to have quicklist synced with cursor
+" Plug 'elbeardmorez/vim-loclist-follow' " to have quicklist synced with cursor
 " call :NR on a region than :w . coupled with b:nrrw_aucmd_create,
 Plug 'chrisbra/NrrwRgn' " to help with multi-ft files
 Plug 'chrisbra/vim-diff-enhanced' "
@@ -178,9 +173,8 @@ Plug 'conornewton/vim-pandoc-markdown-preview' " :StartMdPreview / StopMd
 
 " around vcs {{{
 Plug 'tpope/vim-fugitive' 
-" Plug '~/fugitive'
 Plug 'shumphrey/fugitive-gitlab.vim'
-Plug 'sodapopcan/vim-twiggy' " run with :Twiggy
+" Plug 'sodapopcan/vim-twiggy' " run with :Twiggy
 " Plug 'idanarye/vim-merginal'  " fugitive extension :Merginal
 Plug 'rhysd/git-messenger.vim' " to show git message :GitMessenger
 
@@ -194,43 +188,31 @@ Plug 'vim-scripts/rfc-syntax', { 'for': 'rfc' } " optional syntax highlighting f
 " Plug 'dhruvasagar/vim-open-url' " gB/gW to open browser
 " Plug 'Carpetsmoker/xdg_open.vim' " overrides gx
 Plug 'mcchrish/info-window.nvim'  " :InfoWindowToggle to display buffer information in a popup
-Plug 'tweekmonster/nvim-api-viewer', {'on': 'NvimAPI'} " see nvim api
+" Plug 'tweekmonster/nvim-api-viewer', {'on': 'NvimAPI'} " see nvim api
 Plug 'tweekmonster/startuptime.vim', {'on': 'StartupTime'} " see startup time per script
 " Plug 'vim-scripts/vis' " ?
 Plug 'Konfekt/vim-CtrlXA' " use ctrl a/xto cycle between different words
 " Plug 'AndrewRadev/splitjoin.vim' " gS/gJ to
-" Plug '~/nvim-palette', { 'do': ':UpdateRemotePlugins' }
 " Plug 'jamessan/vim-gnupg' " does not support neovim yet ?
-
-
-" Plug 'LnL7/vim-nix', {'for': 'nix'}
-" Plug 'romainl/vim-qf' " can create pb with neomake
 Plug 'editorconfig/editorconfig-vim' " not remote but involves python
 Plug 'neomake/neomake' " just for nix and neovim dev with nvimdev ?
 " provider
-" Plug 'brooth/far.vim', { 'do': ':UpdateRemotePlugins' } " search and replace across files
 " needs ruby support, works in recent neovim
 " Plug 'junegunn/vim-github-dashboard', { 'do': ':UpdateRemotePlugins' }
-Plug 'fmoralesc/vim-pad', {'branch': 'devel'} " :Pad new, note taking
+" Plug 'fmoralesc/vim-pad', {'branch': 'devel'} " :Pad new, note taking
 " while waiting for my neovim notification provider...
 " Plug 'tjdevries/descriptive_maps.vim', {'do': ':UpdateRemotePlugins' } " :call DescriptiveStart()
-Plug 'gianarb/notify.vim' " call notify#emitNotification('Title', 'Body')
 " Plug 'the-lambda-church/coquille', {'branch': 'matt', 'for': 'coq'}
 " Plug 'inside/vim-search-pulse' " Search related
-" Plug 'adborden/vim-notmuch-address' " does not work yet
-
 " vim-search-pulse {{{
 let g:vim_search_pulse_mode = 'cursor_line'
 let g:vim_search_pulse_duration = 400
 "}}}
 
-" Plug 'ehamberg/vim-cute-python' " display unicode characters, kinda looks bad on vim grid
-" oberblastmeister/rooter.nvim inspired by vim-rooter
 Plug 'pwntester/octo.nvim'  " to work with github
 " Plug 'glacambre/shelley'
 Plug 'dbakker/vim-projectroot' " projectroot#guess()
 " Plug 'sunaku/vim-dasht' " get documentation (zeavim is also a contender KabbAmine/zeavim.vim)
-" Plug 'mtth/scratch.vim' " , {'on': 'Scratch'} mapped to ?
 " Plug 'ludovicchabant/vim-gutentags' " automatic tag generation, very good
 Plug 'junegunn/goyo.vim', {'on': 'Goyo'} "distraction free writing focus
 Plug 'junegunn/limelight.vim' " focus writing :Limelight, works with goyo
@@ -349,14 +331,10 @@ Plug 'justinmk/vim-gtfo' " gfo to open filemanager in cwd
 Plug 'wannesm/wmgraphviz.vim', {'for': 'dot'} " graphviz syntax highlighting
 Plug 'teto/vim-listchars' " to cycle between different list/listchars configurations
 "Plug 'tpope/vim-sleuth' " Dunno what it is
-"Plug 'justinmk/vim-gtfo' " ?
 Plug 'tpope/vim-rhubarb' " github support in fugitive, use |i_CTRL-X_CTRL-O|
-"Plug 'tpope/vim-surround' " don't realy know how to use yet
 " Plug 'junegunn/vim-peekaboo' " gives a preview of buffers when pasting, need ruby ?
 " Plug 'vhakulinen/gnvim-lsp' " load it only for gnvim
 
-" , { 'for': 'markdown', 'do': function('BuildComposer') } " Needs rust, cargo, plenty of things :help markdown-composer
-" move to nix
 " euclio
 " Plug '~/vim-markdown-composer'
 " Plug 'JamshedVesuna/vim-markdown-preview'
@@ -373,17 +351,11 @@ Plug 'teto/Modeliner' " <leader>ml to setup buffer modeline
 " Plug 'vimwiki/vimwiki', { 'branch': 'dev'}   " to write notes
 " Plug 'rhysd/github-complete.vim' " provides github user/repo autocompletion after @ and #
 
-Plug 'hrsh7th/nvim-compe' 
+Plug 'hrsh7th/nvim-compe' " autocompletion
 
 " https://github.com/haorenW1025/completion-nvim/wiki/chain-complete-support
 " Plug 'nvim-lua/completion-nvim' " lsp based completion framework
 " treesitter may slow down nvim
-" Plug 'nvim-treesitter/completion-treesitter' " extension of completion-nvim,
-" Plug 'nvim-treesitter/nvim-treesitter' " to test treesitter
-Plug '~/nvim-treesitter' " to test treesitter
-Plug 'nvim-treesitter/playground'
-Plug 'p00f/nvim-ts-rainbow'
-" Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 
 " github-comment requires webapi (https://github.com/mattn/webapi-vim)
 " Plug 'mmozuras/vim-github-comment' " :GHComment
@@ -534,8 +506,8 @@ set noswapfile
 set wildmenu
 set wildchar=<Tab>
 " list:longest, " list breaks the pum
-set wildmode=longest " zsh way ?!
-" set wildmode=list:longest " zsh way ?!
+set wildmode=longest,list " 'longest,list' => fills out longest then show list
+" set wildoptions+=pum
 
 set wildignore+=.hg,.git,.svn                    " Version control
 " set wildignore+=*.aux,*.out,*.toc                " LaTeX intermediate files
@@ -553,7 +525,6 @@ set wildignore+=*.orig                           " Merge resolution files
 set wildignore+=classes
 set wildignore+=lib
 
-set wildoptions+=pum
 
 " }}}
 " Modeliner shortcuts  {{{
@@ -2031,7 +2002,7 @@ hi CursorLine                    guibg=#293739 guifg=None
 " au BufWinEnter * if &buftype != 'nofile' | silent! loadview | endif
 
 
-highlight NormalFloat guibg=#7c6f64
+highlight NormalFloat guibg=#1d2019
 " highlight NormalFloat cterm=NONE ctermfg=14 ctermbg=0 gui=NONE guifg=#93a1a1 guibg=#002931
 
 " taken from justinmk's config
@@ -2070,16 +2041,6 @@ map ,fa <Cmd>call CreateVisualExtmark()<CR>
 " lsp config {{{
 command! LspAction lua vim.lsp.buf.code_action()
 
-" nmap             <C-k>           <Cmd>lua vim.lsp.diagnostic.goto_prev {wrap = true }<cr>
-" nmap             <C-j>           <Cmd>lua vim.lsp.diagnostic.goto_next {wrap = true }<cr>
-" autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics()
-autocmd CursorMoved * lua vim.lsp.diagnostic.show_line_diagnostics()
-" nmap [[ <Cmd>PrevDiagnostic<cr>
-" nmap ]] <Cmd>NextDiagnostic<cr>
-
-" set omnifunc=lsp#omnifunc
-  " autocmd Filetype rust,python,go,c,cpp setl omnifunc=v:lua.vim.lsp.omnifunc
-
 set omnifunc=v:lua.vim.lsp.omnifunc
 
 sign define LspDiagnosticsSignError text=✘ texthl=LspDiagnosticsSignError linehl= numhl=
@@ -2099,14 +2060,7 @@ hi LspDiagnosticsFloatingWarning guifg=orange
   " LspDiagnosticsFloatingHint
 
 " https://github.com/neovim/neovim/pull/11638
-" autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
-" autocmd CursorHoldI <buffer> lua vim.lsp.buf.document_highlight()
 " autocmd CursorMoved <buffer> lua vim.lsp.util.buf_clear_references()
-
-" ✘'
-" 
-" TODO update
-
 " }}}
 
 "{{{sessionoptions
@@ -2207,6 +2161,7 @@ map <RightMouse>  <Cmd>call quickui#context#open(content, quick_opts)<CR>
 " Doesn't seem to work
 " luafile stdpath('config').'/init.lua'
 " luafile ~/.config/nvim/init.lua
+luafile ~/.config/nvim/init.generated.lua
 luafile ~/.config/nvim/init.backup.lua
 
 hi lspdiagnosticsunderlinewarning gui=NONE

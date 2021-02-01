@@ -76,28 +76,31 @@ in
      extraConfig = ''
         set noshowmode " Show the current mode on command line
         set cursorline " highlight cursor line
-    ''
+      ''
       # concatStrings = builtins.concatStringsSep "";
-
-    + (lib.strings.concatStrings (
+      + (lib.strings.concatStrings (
         lib.mapAttrsToList genBlock rcBlocks
       ))
     ;
 
+    extraLuaConfig = ''
+      -- logs are written to /home/teto/.cache/vim-lsp.log
+      vim.lsp.set_log_level("info")
+    '';
+
     # TODO add lsp stuff
     extraPackages = with pkgs; [
       haskellPackages.hasktags
-      # code-minimap  # for minimap.vim
-      black         # should only appear in python-based installs
+      # black         # should only appear in python-based installs
       # luaPackages.lua-lsp
       nodePackages.bash-language-server
       # nodePackages.dockerfile-language-server-nodejs # broken
       nodePackages.pyright
       pandoc  # for markdown preview, should be in the package closure instead
       jq
-      pythonPackages.pdftotext
+      pythonPackages.pdftotext  # should appear only in RC ?
       rnix-lsp
-      sumneko-lua-language-server  # not merged yet
+      sumneko-lua-language-server
       yaml-language-server
     ];
 
@@ -231,7 +234,7 @@ in
       packer-nvim
       {
         plugin = sql-nvim;
-        config = "let g:sql_clib_path = '${pkgs.sqlite.out}/lib/libsqlite3.so'";
+        # config = "let g:sql_clib_path = '${pkgs.sqlite.out}/lib/libsqlite3.so'";
       }
       # {
       #   plugin = vim-fugitive;

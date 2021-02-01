@@ -22,13 +22,33 @@ packer.init()
 -- }
 use {
 	"nvim-telescope/telescope-frecency.nvim",
-	requires = {{'hrsh7th/vim-vsnip', opt = true}, 'tami5/sql.nvim', opt = false },
+	requires = {
+		{'hrsh7th/vim-vsnip', opt = true},
+		-- {'tami5/sql.nvim', opt = false}
+	},
 	config = function()
 		telescope.load_extension("frecency")
 	end
 }
 use {
 	'wfxr/minimap.vim'
+}
+-- 	'nvim-treesitter/completion-treesitter' " extension of completion-nvim,
+use {
+ 'nvim-treesitter/nvim-treesitter'
+ -- '~/nvim-treesitter'
+ }
+use {
+	'nvim-treesitter/playground',
+	requires = { 'nvim-treesitter/nvim-treesitter' }
+}
+use {
+	'p00f/nvim-ts-rainbow',
+	requires = { 'nvim-treesitter/nvim-treesitter' }
+}
+-- 
+use {
+	'nvim-treesitter/nvim-treesitter-textobjects'
 }
 
 vim.g.indicator_errors = ''
@@ -258,8 +278,10 @@ function showLineDiagnostic ()
 
 		};
 	}
-	return vim.lsp.diagnostic.show_line_diagnostics()
+	-- return vim.lsp.diagnostic.show_line_diagnostics()
 	-- vim.lsp.diagnostic.goto_prev {wrap = true }
+	return require'lspsaga.diagnostic'.show_line_diagnostics()
+
 end
 
 -- options to pass to goto_next/goto_prev
@@ -271,8 +293,13 @@ local goto_opts = {
 vim.api.nvim_set_keymap('n', '<C-k>', [[<cmd>lua vim.lsp.diagnostic.goto_prev {wrap = true }<CR>]], {noremap = true})
 vim.api.nvim_set_keymap('n', '<C-j>', [[<cmd>lua vim.lsp.diagnostic.goto_next()<cr>]], {noremap = true})
 
+-- if lspsaga
+-- nnoremap <silent> [e <cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_prev()<CR>
+-- nnoremap <silent> ]e <cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_next()<CR>
+
+
 -- to disable virtualtext check
 -- follow https://www.reddit.com/r/neovim/comments/f8u6fz/lsp_query/fip91ww/?utm_source=share&utm_medium=web2x
--- vim.nvim_command [[autocmd CursorHold <buffer> lua vim.lsp.util.show_line_diagnostics()]]
-vim.cmd [[autocmd CursorMoved <buffer> lua showLineDiagnostic()]]
+vim.cmd [[autocmd CursorHold <buffer> lua showLineDiagnostic()]]
+-- vim.cmd [[autocmd CursorMoved <buffer> lua showLineDiagnostic()]]
 

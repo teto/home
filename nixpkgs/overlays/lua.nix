@@ -3,7 +3,6 @@ rec {
 
   lua = prev.lua.override {
 
-
   #     # TODO use my fork
   #     nvim-client  = luaprev.nvim-client.overrideAttrs (oa: {
   #       src = /home/teto/lua-client;
@@ -12,7 +11,6 @@ rec {
   #       #   owner = "teto";
   #       #   rev = "ffe21016d4ac2de810cc89a4f686fd72065214c0";
   #       #   sha256= "";
-
   #       # };
   #     });
 
@@ -26,15 +24,6 @@ rec {
       #   #   ref = "nix";
       #   # };
       # });
-
-      luarocks-nix-dev = luaprev.luarocks-nix.overrideAttrs(oa: {
-        pname = "luarocks-local";
-        src = /home/teto/luarocks;
-        # src = builtins.fetchGit {
-        #   url = https://github.com/teto/luarocks/;
-        #   ref = "nix";
-        # };
-      });
 
       # argparse = luaprev.argparse.overrideAttrs(oa: {
       #   pname = "argparse-local";

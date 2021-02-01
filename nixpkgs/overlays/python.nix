@@ -39,16 +39,6 @@ rec {
           # };
         });
 
-        # this doesn't work, need to use the proper nixpkgs revision
-        # poetry = pythonsuper.poetry.overridePythonAttrs(oa: {
-        #   src = self.fetchFromGitHub {
-        #     owner = "python-poetry";
-        #     repo = "poetry";
-        #     rev = "1.0.2";
-        #     sha256 = "sha256-pqDCCWyoGhkiayy+RMfXlYOD8mbAikBGDvRJnsAUpjw=";
-        #   };
-        # });
-
         papis-dev = pythonsuper.papis.overridePythonAttrs (oa: {
           version = "1.0-dev";
           propagatedBuildInputs = with prev.python3Packages; oa.propagatedBuildInputs ++  ([

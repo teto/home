@@ -7,6 +7,7 @@ in
     ./modules/config-all.nix
     ./modules/desktop.nix
     ./modules/sway.nix
+    ./profiles/steam.nix
     # ./modules/docker-daemon.nix
 
     # ./modules/libvirtd.nix
