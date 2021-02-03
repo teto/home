@@ -143,7 +143,7 @@ in
       #   # };
       # }
       {
-        plugin = editorconfig-vim;                                     
+        plugin = editorconfig-vim;
         # config = ''
         # '';
       }
@@ -156,7 +156,9 @@ in
       }
       {
         plugin = telescope-nvim;
-
+      }
+      {
+        plugin = telescope-frecency-nvim;
       }
       {
         plugin = fzf-vim;
@@ -232,10 +234,10 @@ in
       minimap-vim
       vim-dirvish
       packer-nvim
-      {
-        plugin = sql-nvim;
-        # config = "let g:sql_clib_path = '${pkgs.sqlite.out}/lib/libsqlite3.so'";
-      }
+      # {
+      #   plugin = sql-nvim;
+      #   # config = "let g:sql_clib_path = '${pkgs.sqlite.out}/lib/libsqlite3.so'";
+      # }
       # {
       #   plugin = vim-fugitive;
       #   config = ''

@@ -5,6 +5,7 @@
   home.packages = with pkgs; [
     visidata
     gitAndTools.pass-git-helper
+     graphviz
   ];
 
   programs.direnv.enable = true;

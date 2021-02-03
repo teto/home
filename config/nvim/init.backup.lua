@@ -20,16 +20,27 @@ packer.init()
 -- use { 'haorenW1025/completion-nvim', opt = true,
 -- requires = {{'hrsh7th/vim-vsnip', opt = true}, {'hrsh7th/vim-vsnip-integ', opt = true}}
 -- }
+-- use {
+-- 	"nvim-telescope/telescope-frecency.nvim",
+-- 	requires = {
+-- 		{'hrsh7th/vim-vsnip', opt = true},
+-- 		-- {'tami5/sql.nvim', opt = false}
+-- 	},
+-- 	config = function()
+-- 		telescope.load_extension("frecency")
+-- 	end
+-- }
+
 use {
-	"nvim-telescope/telescope-frecency.nvim",
-	requires = {
-		{'hrsh7th/vim-vsnip', opt = true},
-		-- {'tami5/sql.nvim', opt = false}
-	},
-	config = function()
-		telescope.load_extension("frecency")
-	end
+	-- shows a lightbulb where a codeAction is available
+	'kosayoda/nvim-lightbulb'
 }
+use {
+	'nvim-telescope/telescope-packer.nvim'
+}
+-- use {
+-- 	'TimUntersberger/neogit'
+-- }
 use {
 	'wfxr/minimap.vim'
 }
@@ -46,7 +57,6 @@ use {
 	'p00f/nvim-ts-rainbow',
 	requires = { 'nvim-treesitter/nvim-treesitter' }
 }
--- 
 use {
 	'nvim-treesitter/nvim-treesitter-textobjects'
 }
@@ -99,6 +109,9 @@ local lspfuzzy_available, lspfuzzy = pcall(require, "lspfuzzy")
 if lspfuzzy_available then
 	lspfuzzy.setup {}
 end
+
+local has_neogit, neogit = pcall(require, 'neogit')
+-- use with neogit.status.create(<kind>)
 
 -- TODO check for telescope github extension too
 if has_telescope then
@@ -296,7 +309,6 @@ vim.api.nvim_set_keymap('n', '<C-j>', [[<cmd>lua vim.lsp.diagnostic.goto_next()<
 -- if lspsaga
 -- nnoremap <silent> [e <cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_prev()<CR>
 -- nnoremap <silent> ]e <cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_next()<CR>
-
 
 -- to disable virtualtext check
 -- follow https://www.reddit.com/r/neovim/comments/f8u6fz/lsp_query/fip91ww/?utm_source=share&utm_medium=web2x
