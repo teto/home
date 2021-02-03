@@ -5,19 +5,9 @@ rec {
      # Careful, we're using a different self and super here!
     packageOverrides = pythonself: pythonsuper: {
 
-        kergen = pythonsuper.callPackage ./pkgs/kergen.nix { };
+        kergen = prev.callPackage ./pkgs/kergen.nix { };
 
-        # pytest-mock = pythonsuper.pytest-mock.overrideAttrs(oa: {
-        #   src = super.fetchFromGitHub {
-        #     rev = "189cc599d3bfbe91a17c93211c04237b6c5849b1";
-        #     owner = "pytest-dev";
-        #     repo = "pytest-mock";
-        #     sha256 = "1p33zz11kk5qfwyaqgzwil5p555n29qrcb770rn3pa7cy8ncnxqk";
-        #   };
-        #   SETUPTOOLS_SCM_PRETEND_VERSION="1.10.5";
-        # });
-
-        mininet = pythonsuper.alot.override ({
+        mininet = pythonsuper.mininet.override ({
           withManpage = true;
         });
 

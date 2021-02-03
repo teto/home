@@ -1,7 +1,7 @@
 { config, pkgs, lib,  ... }:
 
 let
-  genBlock = title: content: ''
+  genBlock = title: content: lib.optionalString (content != null) ''
     " ${title} {{{
     ${content}
     " }}}
@@ -73,9 +73,11 @@ in
      package = myPackage;
 
      # concatMap
+     # source doesn't like `stdpath('config').'`
      extraConfig = ''
         set noshowmode " Show the current mode on command line
         set cursorline " highlight cursor line
+        source $XDG_CONFIG_HOME/nvim/init.manual.vim
       ''
       # concatStrings = builtins.concatStringsSep "";
       + (lib.strings.concatStrings (
@@ -83,10 +85,10 @@ in
       ))
     ;
 
-    extraLuaConfig = ''
-      -- logs are written to /home/teto/.cache/vim-lsp.log
-      vim.lsp.set_log_level("info")
-    '';
+    # extraLuaConfig = ''
+    #   -- logs are written to /home/teto/.cache/vim-lsp.log
+    #   vim.lsp.set_log_level("info")
+    # '';
 
     # TODO add lsp stuff
     extraPackages = with pkgs; [

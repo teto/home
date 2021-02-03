@@ -17,6 +17,20 @@ local packer = require "packer"
 local use = packer.use
 packer.init()
 
+function file_exists(name)
+   local f=io.open(name,"r")
+   if f~=nil then io.close(f) return true else return false end
+end
+
+-- TODOsource if it exists
+local generated_init = "~/.config/nvim/init.generated.lua"
+if file_exists(generated_init) then
+	vim.cmd.luafile( generated_init)
+end
+
+-- luafile 
+
+
 -- use { 'haorenW1025/completion-nvim', opt = true,
 -- requires = {{'hrsh7th/vim-vsnip', opt = true}, {'hrsh7th/vim-vsnip-integ', opt = true}}
 -- }

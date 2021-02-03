@@ -145,7 +145,7 @@ let
     # unstable.libreoffice
     # unstable.wireshark
 
-    # unstable.qutebrowser  # keyboard driven fantastic browser
+    qutebrowser  # keyboard driven fantastic browser
     gnome3.nautilus # demande webkit/todo replace by nemo ?
     # shutter # screenshot utility
     # mcomix # manga reader
