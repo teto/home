@@ -19,6 +19,14 @@
         enable = true;
         user = "teto";
       };
+      displayManager.defaultSession = "none+fake";
+      # https://discourse.nixos.org/t/opening-i3-from-home-manager-automatically/4849/11
+      session =
+        let fakeSession = { manage = "window";
+                            name = "fake";
+                            start = "";
+                          };
+        in [ fakeSession ];
       # defaultSession = null;
       gdm = {
         wayland = true;
