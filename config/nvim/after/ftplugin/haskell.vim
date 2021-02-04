@@ -10,7 +10,6 @@ setlocal expandtab                   " expand tabs to spaces
 
 setlocal nocindent
 setlocal nosmartindent
-setlocal indentexpr
 " > triggers shiftwidth
 
 let g:gutentags_ctags_executable_haskell = 'hasktags'
