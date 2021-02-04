@@ -50,8 +50,6 @@ final: prev:
 
   # rustNightlyPlatform = prev.recurseIntoAttrs (prev.makeRustPlatform rust-nightly);
 
-  # ping = prev.prettyping;
-
   # rt-tests = prev.callPackage ./rt-test.nix {};
 
   # stab = prev.callPackage ./stab.nix {
@@ -64,5 +62,6 @@ final: prev:
 
   rofi-scripts = prev.callPackage ./rofi-scripts {};
 
-  # sumneko = prev.callPackage ./sumneko.nix {};
+  neovide = prev.callPackage ./neovide {};
+
 }
