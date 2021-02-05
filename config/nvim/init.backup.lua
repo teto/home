@@ -127,6 +127,7 @@ end
 local has_neogit, neogit = pcall(require, 'neogit')
 -- use with neogit.status.create(<kind>)
 
+-- telescope {{{
 -- TODO check for telescope github extension too
 if has_telescope then
 	-- telescope.load_extension('ghcli')
@@ -177,11 +178,10 @@ if has_telescope then
 		results_height = 1,
 		results_width = 0.8,
 		border = {},
-		borderchars = { '─', '│', '─', '│', '╭', '╮', '╯', '╰'},
+		-- borderchars = { '─', '│', '─', '│', '╭', '╮', '╯', '╰'},
 		color_devicons = true,
-		use_less = true,
-		set_env = { ['COLORTERM'] = 'truecolor' }, -- default { }, currently unsupported for shells like cmd.exe / powershell.exe
-		file_previewer = require'telescope.previewers'.cat.new, -- For buffer previewer use `require'telescope.previewers'.vim_buffer_cat.new`
+		-- use_less = true,
+		-- file_previewer = require'telescope.previewers'.cat.new, -- For buffer previewer use `require'telescope.previewers'.vim_buffer_cat.new`
 		grep_previewer = require'telescope.previewers'.vimgrep.new, -- For buffer previewer use `require'telescope.previewers'.vim_buffer_vimgrep.new`
 		qflist_previewer = require'telescope.previewers'.qflist.new, -- For buffer previewer use `require'telescope.previewers'.vim_buffer_qflist.new`
 
@@ -190,9 +190,8 @@ if has_telescope then
 	}
 	}
 	telescope.load_extension("frecency")
-
 end
-
+--}}}
 
 function contextMenu()
 	local choices = {"choice 1", "choice 2"}
@@ -202,7 +201,7 @@ function contextMenu()
 		end
 	})
 end
-
+-- gitsigns {{{
 if has_gitsigns then
  gitsigns.setup {
   signs = {
@@ -234,7 +233,7 @@ if has_gitsigns then
   status_formatter = nil, -- Use default
 }
 end
-
+--}}}
 -- vim.fn.stdpath('config')
 require 'lsp_init'
 
@@ -274,7 +273,7 @@ if vim.notify then
 
 	vim.notify = notifs.notify_external
 end
-
+-- lspsaga {{{
 local saga = require 'lspsaga'
 local saga_opts = {
   -- 1: thin border | 2: rounded border | 3: thick border
@@ -291,6 +290,7 @@ local saga_opts = {
 }
 
 saga.init_lsp_saga(saga_opts)
+--}}}
 
 -- showLineDiagnostic is a wrapper around show_line_diagnostics
 -- show_line_diagnostics calls open_floating_preview

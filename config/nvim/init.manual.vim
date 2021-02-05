@@ -1650,15 +1650,6 @@ endfunction
 
 " }}}
 
-" telescope.nvim{{{
-" nnoremap <Leader>g :lua require'telescope.builtin'.git_files{}<CR>
-
-" Convert currently quickfixlist to telescope
-" nnoremap <Leader>q :lua require('telescope.builtin').quickfix()<CR>
-
-" Grep as you type (requires rg currently)
-" nnoremap <Leader>rg :lua require('telescope.builtin').live_grep()<CR>
-"}}}
 " lspsaga {{{
 " nnoremap <silent><leader>ca <cmd>lua require('lspsaga.codeaction').code_action()<CR>
 command! LspSagaAction lua vim.lsp.buf.code_action()
