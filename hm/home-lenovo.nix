@@ -16,6 +16,9 @@ in
       ./profiles/extra.nix
       ./profiles/weechat.nix
   ];
+
+  programs.pywal.enable = true;
+
   xsession.windowManager.i3 = {
     enable = true;
   };

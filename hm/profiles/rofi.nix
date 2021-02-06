@@ -7,15 +7,17 @@
     theme = "solarized_alternate";
     # lines= ;
     location = "center";
+    pass.enable = true;
+
+    # pass.stores = [];
 
     # rofi.font: SourceCodePro 9
     # font =
     # ,Layouts:${../../bin/i3-list-layouts}
     extraConfig={
-      opacity =  90;
       width = 50;
       columns= 1;
-      fuzzy= true;
+      matching = "fuzzy";
       show-icons = true;
       # ! cd window
       modi =       "run,drun,window,ssh";

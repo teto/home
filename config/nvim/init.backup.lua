@@ -71,9 +71,8 @@ use {
 	'p00f/nvim-ts-rainbow',
 	requires = { 'nvim-treesitter/nvim-treesitter' }
 }
-use {
-	'nvim-treesitter/nvim-treesitter-textobjects'
-}
+use { 'nvim-treesitter/nvim-treesitter-textobjects' }
+use { 'notomo/gesture.nvim' }
 
 vim.g.indicator_errors = ''
 vim.g.indicator_warnings = ''

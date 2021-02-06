@@ -221,7 +221,7 @@ rec {
   #   platformTheme = "gnome";
   # };
 
-  programs.zsh = rec {
+programs.zsh = rec {
     enable = true;
     # enableAutojump = true;
     dotDir = ".config/zsh";

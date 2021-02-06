@@ -82,13 +82,14 @@ in
       ))
     ;
 
-    # extraLuaConfig = ''
-    #   -- logs are written to /home/teto/.cache/vim-lsp.log
-    #   vim.lsp.set_log_level("info")
-    # '';
+    extraLuaConfig = ''
+      -- logs are written to /home/teto/.cache/vim-lsp.log
+      vim.lsp.set_log_level("info")
+    '';
 
     # TODO add lsp stuff
     extraPackages = with pkgs; [
+      rust-analyzer
       haskellPackages.hasktags
       # black         # should only appear in python-based installs
       # luaPackages.lua-lsp

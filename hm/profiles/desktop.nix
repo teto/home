@@ -58,7 +58,6 @@ let
     khard
     libsecret  # to consult
     newsboat #
-    # customWeechat
     # leafnode dovecot22 dovecot_pigeonhole fetchmail procmail w3m
     # mairix mutt msmtp lbdb contacts spamassassin
   ] ++ lib.optionals all [
@@ -68,24 +67,15 @@ let
 
   desktopPkgs = let
     # wrap moc to load config from XDG_CONFIG via -C
-    # moc-wrapped = pkgs.wrapProgram --add-flags;
-          # mkdir -p $out
-
-    # moc-wrapped = pkgs.runCommandNoCC "selfSignedCerts" {
-    #   buildInputs = [ pkgs.moc ]; } ''
-    #   makeWrapper
-
-
-    # '';
-    moc-wrapped = symlinkJoin {
+    moc-wrapped = pkgs.symlinkJoin {
       name = "moc-wrapped-${pkgs.moc.version}";
       paths = [ pkgs.moc ];
-      buildInputs = [ makeWrapper ];
+      buildInputs = [ pkgs.makeWrapper ];
       # passthru.unwrapped = mpv;
       postBuild = ''
         # wrapProgram can't operate on symlinks
         rm "$out/bin/mocp"
-        makeWrapper "${pkgs.moc}/bin/moc" "$out/bin/mocp" --add-flags "-C $XDG_CONFIG_HOME/moc/config"
+        makeWrapper "${pkgs.moc}/bin/mocp" "$out/bin/mocp" --add-flags "-C $XDG_CONFIG_HOME/moc/config"
         # rm "$out/bin/mocp"
       '';
     };
@@ -127,6 +117,7 @@ let
     pavucontrol
     procs  # Rust replacement for 'ps'
     qtpass
+    rofi-pass   # rofi-pass
     sublime3
     scrot  # screenshot app for wayland
     # smplayer # GUI around mpv
@@ -184,6 +175,7 @@ in
 
   imports = [
     ./common.nix
+    ./kitty.nix
     ./rofi.nix
     ./mpv.nix
     ./dev.nix
@@ -232,12 +224,6 @@ in
     # dataDir = xdg.dataDir
     # musicDirectory = 
     # extraConfig = 
-  };
-
-  services.random-background = {
-    enable = false;
-    # imageDirectory =
-    # interval =
   };
 
   # services.screen-locker.enable = true;
