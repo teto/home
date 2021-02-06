@@ -89,6 +89,7 @@ in
         antialias=true; # some fonts can be disgusting else
         allowBitmaps = false; # ugly
         includeUserConf = true;
+        cache32Bit = false; # defualt false
         defaultFonts = {
           # monospace = [ "" ];
           # serif = [ "" ];

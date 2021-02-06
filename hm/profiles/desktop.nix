@@ -66,7 +66,31 @@ let
   ];
 
 
-  desktopPkgs = all: with pkgs; [
+  desktopPkgs = let
+    # wrap moc to load config from XDG_CONFIG via -C
+    # moc-wrapped = pkgs.wrapProgram --add-flags;
+          # mkdir -p $out
+
+    # moc-wrapped = pkgs.runCommandNoCC "selfSignedCerts" {
+    #   buildInputs = [ pkgs.moc ]; } ''
+    #   makeWrapper
+
+
+    # '';
+    moc-wrapped = symlinkJoin {
+      name = "moc-wrapped-${pkgs.moc.version}";
+      paths = [ pkgs.moc ];
+      buildInputs = [ makeWrapper ];
+      # passthru.unwrapped = mpv;
+      postBuild = ''
+        # wrapProgram can't operate on symlinks
+        rm "$out/bin/mocp"
+        makeWrapper "${pkgs.moc}/bin/moc" "$out/bin/mocp" --add-flags "-C $XDG_CONFIG_HOME/moc/config"
+        # rm "$out/bin/mocp"
+      '';
+    };
+
+  in all: with pkgs; [
     # apvlv # broken
     # alsa-utils # for alsamixer
     arandr  # to move screens/monitors around
@@ -89,7 +113,7 @@ let
     # todo try sthg else
     # requires xdmcp https://github.com/freedesktop/libXdmcp
     gnome3.eog # eye of gnome = image viewer / creates a collision
-    moc  # music player
+    moc-wrapped  # music player
     mupdf.bin # evince does better too
     # mdp # markdown CLI presenter
     # gnome3.gnome_control_center
@@ -239,6 +263,9 @@ in
 
   # needed for gpg-agent gnome pinentry
   # services.dbus.packages = [ pkgs.gcr ];
+
+
+  programs.pywal.enable = true;
 
   xsession = {
     enable = true;

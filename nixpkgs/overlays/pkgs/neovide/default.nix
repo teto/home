@@ -22,6 +22,7 @@
 , zlib
 , SDL2
 , vulkan-loader
+, cacert
 }:
 let
   skia = callPackage ./skia.nix {};
@@ -51,7 +52,10 @@ in rustPlatform.buildRustPackage rec {
   #   ./.;
   # cargoSha256 = "0qkililxcwjhsvk354ly0bz1gxfqa65ka66f3zri85n3gr9fr397";
   cargoSha256 = "sha256-OEZWPlDYBr/aJe5ssWVMpizLa4IepK/glMBwe0U3Uzk=";
+
+  SSL_CERT_FILE = "${cacert.out}/etc/ssl/certs/ca-bundle.crt";
   nativeBuildInputs = [
+    cacert
     cmake
     pkgconfig
     cargo

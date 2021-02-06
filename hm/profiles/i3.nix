@@ -27,6 +27,7 @@ let
   # or use {pkgs.kitty}/bin/kitty
   term = "${pkgs.kitty}/bin/kitty";
 
+  # TODO make it a pywalflag
 
   sharedExtraConfig = ''
       exec_always --no-startup-id setxkbmap -layout us
@@ -86,17 +87,6 @@ let
       for_window [class="^qutebrowser$"] title_format "<span background='blue'>QB</span> %title"
       for_window [class="^Firefox$"] title_format "<span background='#F28559'>FF</span> %title"
       for_window [title="Thunderbird$"] title_format " %title"
-
-      # class                 border,  backgrd,  text,    indicator,  child border
-      # client.focused          $focused_border $client_bg #FFFF50
-      # client.focused_inactive $focused_border_inactive  $focinac_bg $focinac_txt  #090e14
-      # client.unfocused        $unfocused_border $unfocused_border_bg $unfocused_txt #090e14
-      # client.urgent           #870000 #870000 #ffffff #090e14
-      # client.background       $client_bg
-      # # client.background       #66ff33
-
-      # client.placeholder  #000000 #0c0c0c #ffffff #000000   #0c0c0c
-
     ''
     + (lib.concatStrings [
       (builtins.readFile ../../config/i3/config.main)
@@ -104,12 +94,12 @@ let
     ]);
 in
 {
-  imports = [
-    ../../nixpkgs/lib/colors.nix
-  ];
+  # imports = [
+  #   ../../nixpkgs/lib/colors.nix
+  # ];
 
   # see https://discourse.nixos.org/t/opening-i3-from-home-manager-automatically/4849/7
-  xsession.scriptPath = ".hm-xsession";
+  # xsession.scriptPath = ".hm-xsession";
 
   xsession.windowManager.i3 =
   let
@@ -129,9 +119,10 @@ in
 
     # bindsym $mod+ctrl+v exec ~/vim-anywhere/bin/run"
     extraConfig = sharedExtraConfig
-      + (lib.concatStrings [
-        (builtins.readFile ../../config/i3/config.colors)
-      ])
+    # +
+    # (lib.concatStrings [
+    #     (builtins.readFile ../../config/i3/config.colors)
+    #   ])
       + ''
         new_float pixel 2
       ''
@@ -143,53 +134,53 @@ in
       terminal = term;
       workspaceAutoBackAndForth = true;
 
-      colors = {
-      # class                 border,  backgrd,  text,    indicator,  child border
-      # client.focused          $focused_border $client_bg #FFFF50
-      # client.urgent           #870000 #870000 #ffffff #090e14
-      # client.background       $client_bg
-      # # client.background       #66ff33
+      # colors = {
+      # # class                 border,  backgrd,  text,    indicator,  child border
+      # # client.focused          $focused_border $client_bg #FFFF50
+      # # client.urgent           #870000 #870000 #ffffff #090e14
+      # # client.background       $client_bg
+      # # # client.background       #66ff33
 
-      # client.placeholder  #000000 #0c0c0c #ffffff #000000   #0c0c0c
+      # # client.placeholder  #000000 #0c0c0c #ffffff #000000   #0c0c0c
 
-        background = "#d70a53";
-        # focused_inactive = 
+      #   background = "#d70a53";
+      #   # focused_inactive = 
 
-      # client.focused          $focused_border $client_bg #FFFF50
-        focused = {
-          border = "#C043C6";
-          background = "#d70a53";
-          text = "#FFFF50";
-          indicator = "#FFFF50";
-          childBorder = "#ffffff";
-        };
-      # client.focused_inactive $focused_border_inactive  $focinac_bg $focinac_txt  #090e14
-        focusedInactive = {
-          border = "#06090d";
-          background = "#06090d";
-          text = "#696f89";
-          indicator = "#090e14";
-          childBorder = "#ff0000";
-        };
+      # # client.focused          $focused_border $client_bg #FFFF50
+      #   focused = {
+      #     border = "#C043C6";
+      #     background = "#d70a53";
+      #     text = "#FFFF50";
+      #     indicator = "#FFFF50";
+      #     childBorder = "#ffffff";
+      #   };
+      # # client.focused_inactive $focused_border_inactive  $focinac_bg $focinac_txt  #090e14
+      #   focusedInactive = {
+      #     border = "#06090d";
+      #     background = "#06090d";
+      #     text = "#696f89";
+      #     indicator = "#090e14";
+      #     childBorder = "#ff0000";
+      #   };
 
-      # client.unfocused        $unfocused_border $unfocused_border_bg $unfocused_txt #090e14
-        unfocused = {
-          border = "#605C57"; # "#C043C6";
-          background = "#605C57";
-          text = "#ffffff";
-          indicator  = "#090e14";
-          childBorder = "#ff0000";
-        };
+      # # client.unfocused        $unfocused_border $unfocused_border_bg $unfocused_txt #090e14
+      #   unfocused = {
+      #     border = "#605C57"; # "#C043C6";
+      #     background = "#605C57";
+      #     text = "#ffffff";
+      #     indicator  = "#090e14";
+      #     childBorder = "#ff0000";
+      #   };
 
-        urgent = {
-          border = "#870000";
-          background = "#870000";
-          text = "#ffffff";
-          indicator = "#090e14";
-          childBorder = "#ff0000";
-        };
+      #   urgent = {
+      #     border = "#870000";
+      #     background = "#870000";
+      #     text = "#ffffff";
+      #     indicator = "#090e14";
+      #     childBorder = "#ff0000";
+      #   };
 
-      };
+      # };
 
       focus.followMouse = false;
       # pango:
@@ -264,18 +255,6 @@ in
       window = {
         hideEdgeBorders = "smart";
       };
-      # colors = {
-      #   focused = {
-      #     border = "#03a9f4";
-      #     background = "#03a9f4";
-      #     text = "#eceff1";
-      #     indicator = "#ff9800";
-      #     childBorder = "#03a9f4";
-      #   };
-        # };
-        #
-    # set $mod Mod1
-    # il ne comprend pas Super_L
 
     # consider using lib.mkOptionDefault according to help
     keybindings =
