@@ -16,7 +16,7 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#fugitive#enabled = 0
 let g:airline_disable_statusline = 0
 " generates errors ?
-let g:airline#extensions#nvimlsp#enabled = 0
+let g:airline#extensions#nvimlsp#enabled = 1
 
 
 " LSP

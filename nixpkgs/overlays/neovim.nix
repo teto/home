@@ -1,6 +1,4 @@
 final: prev:
-let
-in
 rec {
 
   # makeNeovimConfig = {}:
@@ -13,15 +11,7 @@ rec {
         # local nvim_lsp = require 'nvim_lsp'
         # '';
       }
-# " Plug 'nvim-treesitter/completion-treesitter' " extension of completion-nvim,
-# " depends on nvim-treesitter/nvim-treesitter
-# " Plug 'nvim-treesitter/highlight.lua' " to test treesitter
-# " Plug 'nvim-treesitter/nvim-treesitter' " to test treesitter
-# " Plug '~/nvim-treesitter' " to test treesitter
-# " Plug 'nvim-treesitter/playground'
-# " Plug 'nvim-treesitter/nvim-treesitter-textobjects'
     ];
-
   };
 
   neovimHaskellConfig = prev.neovimUtils.makeNeovimConfig {
@@ -79,15 +69,4 @@ rec {
       pycodestyle
     ];
   };
-
-  # TODO provide an upper level
-  # neovimConfigure = {
-	# packages.myVimPackage = {
-	# # see examples below how to use custom packages
-	# # loaded on launch
-	# start = startPlugins;
-	# # manually loadable by calling `:packadd $plugin-name`
-	# opt = [ ];
-	# };
-  # };
 }

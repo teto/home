@@ -71,7 +71,9 @@ in
 
      # concatMap
      # source doesn't like `stdpath('config').'`
+     #         ${config.programs.neovim.generatedInitrc}
      extraConfig = ''
+        ${config.programs.neovim.generatedInitrc}
         set noshowmode " Show the current mode on command line
         set cursorline " highlight cursor line
         source $XDG_CONFIG_HOME/nvim/init.manual.vim

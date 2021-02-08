@@ -4,7 +4,7 @@
     enable = true;
     terminal = "${pkgs.kitty}/bin/kitty";
     borderWidth = 1;
-    theme = "solarized_alternate";
+    # theme = "solarized_alternate";
     # lines= ;
     location = "center";
     pass.enable = true;
