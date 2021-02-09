@@ -1,3 +1,4 @@
+-- vim: set noet fdm=marker fenc=utf-8 ff=unix sts=0 sw=4 ts=4 :
 
 -- How to add a new server
 -- https://github.com/neovim/nvim-lsp/issues/41
@@ -45,24 +46,13 @@ end
 -- 	end
 -- }
 
-use {
-	-- shows a lightbulb where a codeAction is available
-	'kosayoda/nvim-lightbulb'
-}
-use {
-	'nvim-telescope/telescope-packer.nvim'
-}
--- use {
--- 	'TimUntersberger/neogit'
--- }
-use {
-	'wfxr/minimap.vim'
-}
+-- shows a lightbulb where a codeAction is available
+use { 'kosayoda/nvim-lightbulb' }
+use { 'nvim-telescope/telescope-packer.nvim' }
+-- use { 'TimUntersberger/neogit' }
+use { 'wfxr/minimap.vim' }
 -- 	'nvim-treesitter/completion-treesitter' " extension of completion-nvim,
-use {
- 'nvim-treesitter/nvim-treesitter'
- -- '~/nvim-treesitter'
- }
+use { 'nvim-treesitter/nvim-treesitter' }
 use {
 	'nvim-treesitter/playground',
 	requires = { 'nvim-treesitter/nvim-treesitter' }
@@ -73,6 +63,8 @@ use {
 }
 use { 'nvim-treesitter/nvim-treesitter-textobjects' }
 use { 'notomo/gesture.nvim' }
+-- use { 'svermeulen/vimpeccable'} -- broken ?
+use { 'tjdevries/astronauta.nvim' }
 
 vim.g.indicator_errors = ''
 vim.g.indicator_warnings = ''
@@ -83,6 +75,16 @@ vim.g.indicator_ok = '✅'
 vim.g.spinner_frames = {'⣾', '⣽', '⣻', '⢿', '⡿', '⣟', '⣯', '⣷'}
 
 vim.g.should_show_diagnostics_in_statusline = true
+
+local k = require"astronauta.keymap"
+local nnoremap = k.nnoremap
+nnoremap { "<Leader>o", function () vim.cmd("FzfFiles") end}
+nnoremap { "<Leader>g", function () vim.cmd("FzfGitFiles") end}
+nnoremap { "<Leader>F", function () vim.cmd("FzfFiletypes") end}
+-- nnoremap <Leader>h <Cmd>FzfHistory<CR>
+-- nnoremap <Leader>c <Cmd>FzfCommits<CR>
+-- nnoremap <Leader>C <Cmd>FzfColors<CR>
+
 
 local has_bufferline, bufferline = pcall(require, "bufferline")
 
@@ -272,43 +274,7 @@ if vim.notify then
 
 	vim.notify = notifs.notify_external
 end
--- lspsaga {{{
-local saga = require 'lspsaga'
-local saga_opts = {
-  -- 1: thin border | 2: rounded border | 3: thick border
-  border_style = 2,
-  -- max_hover_width = 2,
-   error_sign = '✘',
-	warn_sign = '！',
-	hint_sign = 'H',
-	infor_sign = 'I',
-	code_action_icon = ' ',
--- finder_definition_icon = '  ',
--- finder_reference_icon = '  ',
--- definition_preview_icon = '  '
-}
 
-saga.init_lsp_saga(saga_opts)
---}}}
-
--- showLineDiagnostic is a wrapper around show_line_diagnostics
--- show_line_diagnostics calls open_floating_preview
--- local popup_bufnr, winnr = util.open_floating_preview(lines, 'plaintext')
--- seems like there is no way to pass options from show_line_diagnostics to open_floating_preview
--- the floating popup has "ownsyntax markdown"
-function showLineDiagnostic ()
-	local opts = {
-		enable_popup = true;
-		-- options of
-		popup_opts = {
-
-		};
-	}
-	-- return vim.lsp.diagnostic.show_line_diagnostics()
-	-- vim.lsp.diagnostic.goto_prev {wrap = true }
-	return require'lspsaga.diagnostic'.show_line_diagnostics()
-
-end
 
 -- options to pass to goto_next/goto_prev
 local goto_opts = {
@@ -316,12 +282,6 @@ local goto_opts = {
 }
 -- nmap             <C-k>           <Cmd>lua vim.lsp.diagnostic.goto_prev {wrap = true }<cr>
 -- nmap             <C-j>           <Cmd>lua vim.lsp.diagnostic.goto_next {wrap = true }<cr>
-vim.api.nvim_set_keymap('n', '<C-k>', [[<cmd>lua vim.lsp.diagnostic.goto_prev {wrap = true }<CR>]], {noremap = true})
-vim.api.nvim_set_keymap('n', '<C-j>', [[<cmd>lua vim.lsp.diagnostic.goto_next()<cr>]], {noremap = true})
-
--- if lspsaga
--- nnoremap <silent> [e <cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_prev()<CR>
--- nnoremap <silent> ]e <cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_next()<CR>
 
 -- to disable virtualtext check
 -- follow https://www.reddit.com/r/neovim/comments/f8u6fz/lsp_query/fip91ww/?utm_source=share&utm_medium=web2x

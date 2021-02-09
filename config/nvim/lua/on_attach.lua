@@ -2,50 +2,78 @@ local M = {}
 
 -- external plugins to have some nice features
 local has_completion, plug_completion = pcall(require, "completion")
+local lspsaga = require '_lspsaga'
+local has_lspsaga, lspsaga = pcall(require, 'lspsaga')
+local k = require"astronauta.keymap"
+local nnoremap = k.nnoremap
 
+-- showLineDiagnostic is a wrapper around show_line_diagnostics
+-- show_line_diagnostics calls open_floating_preview
+-- local popup_bufnr, winnr = util.open_floating_preview(lines, 'plaintext')
+-- seems like there is no way to pass options from show_line_diagnostics to open_floating_preview
+-- the floating popup has "ownsyntax markdown"
+function showLineDiagnostic ()
+	local opts = {
+		enable_popup = true;
+		-- options of
+		popup_opts = {
 
-  -- Set up autocommands for refreshing the statusline when LSP information changes
-  -- vim.api.nvim_command('augroup lsp_aucmds')
-  -- vim.api.nvim_command('  au! * <buffer>')
-  -- if do_progress then
-  --   vim.api.nvim_command('  au User LspDiagnosticsChanged redrawstatus!')
-  --   vim.api.nvim_command('  au User LspMessageUpdate      redrawstatus!')
-  --   vim.api.nvim_command('  au User LspStatusUpdate       redrawstatus!')
-  -- end
-  -- vim.api.nvim_command('augroup END')
+		};
+	}
+	-- return vim.lsp.diagnostic.show_line_diagnostics()
+	-- vim.lsp.diagnostic.goto_prev {wrap = true }
+	return require'lspsaga.diagnostic'.show_line_diagnostics()
+
+end
+
+-- attach
+local function lspsaga_attach()
+	nnoremap { "gd", function () vim.lsp.buf.definition() end, buffer = true }
+	-- nnoremap { "gd", vim.lsp.buf.references, { buffer=true } }
+	-- nnoremap { "gA", vim.lsp.buf.code_action, { buffer=true } }
+	-- nnoremap { "g0", vim.lsp.buf.document_symbo, { buffer=true } }
+
+	-- vim.api.nvim_buf_set_keymap(0, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', {noremap = true})
+	-- vim.api.nvim_buf_set_keymap(0, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', {noremap = true})
+	-- vim.api.nvim_buf_set_keymap(0, 'n', 'gA', '<cmd>lua vim.lsp.buf.code_action()<CR>', {noremap = true})
+	-- vim.api.nvim_buf_set_keymap(0, 'n', 'g0', '<cmd>lua vim.lsp.buf.document_symbol()<CR>', {noremap = true})
+
+	-- vim.api.nvim_set_keymap('n', '<C-j>', [[<cmd>lua vim.lsp.diagnostic.goto_next()<cr>]], {noremap = true})
+-- code action
+-- nnoremap <silent><leader>ca <cmd>lua require('lspsaga.codeaction').code_action()<CR>
+-- vnoremap <silent><leader>ca <cmd>'<,'>lua require('lspsaga.codeaction').range_code_action()<CR>
+
+-- if lspsaga
+-- nnoremap <silent> [e <cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_prev()<CR>
+-- nnoremap <silent> ]e <cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_next()<CR>
+end
+
+	-- if has_completion then
+	-- 	plug_completion.on_attach(client)
+	-- end
+
+local function default_mappings()
+	-- vim.api.nvim_buf_set_keymap(0, 'n', 'K', [[<cmd>lua vim.lsp.buf.hover()<cr>]], {noremap = true})
+	-- vim.api.nvim_buf_set_keymap(0, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', {noremap = true})
+	-- vim.api.nvim_buf_set_keymap(0, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', {noremap = true})
+	-- vim.api.nvim_buf_set_keymap(0, 'n', 'gA', '<cmd>lua vim.lsp.buf.code_action()<CR>', {noremap = true})
+	-- vim.api.nvim_buf_set_keymap(0, 'n', 'g0', '<cmd>lua vim.lsp.buf.document_symbol()<CR>', {noremap = true})
+
+	nnoremap { "K", vim.lsp.buf.hover, { buffer=true } }
+	nnoremap { "gd", vim.lsp.buf.definition, { buffer=true } }
+	nnoremap { "gd", vim.lsp.buf.references, { buffer=true } }
+	nnoremap { "gA", vim.lsp.buf.code_action, { buffer=true } }
+	nnoremap { "g0", vim.lsp.buf.document_symbo, { buffer=true } }
+end
 
 M.on_attach = function(client)
 	-- print("Attaching client")
 	-- print(vim.inspect(client))
-
-	if has_completion then
-		plug_completion.on_attach(client)
-	end
-
 	-- vim.cmd("setlocal omnifunc=lsp#omnifunc")
-	vim.api.nvim_buf_set_keymap(0, 'n', 'K', [[<cmd>lua vim.lsp.buf.hover()<cr>]], {noremap = true})
-	vim.api.nvim_buf_set_keymap(0, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', {noremap = true})
-	vim.api.nvim_buf_set_keymap(0, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', {noremap = true})
-	vim.api.nvim_buf_set_keymap(0, 'n', 'gA', '<cmd>lua vim.lsp.buf.code_action()<CR>', {noremap = true})
-	vim.api.nvim_buf_set_keymap(0, 'n', 'g0', '<cmd>lua vim.lsp.buf.document_symbol()<CR>', {noremap = true})
 
--- nmap             <C-k>           <Cmd>lua vim.lsp.diagnostic.goto_prev {wrap = true }<cr>
--- nmap             <C-j>           <Cmd>lua vim.lsp.diagnostic.goto_next {wrap = true }<cr>
-
--- " nnoremap <buffer> <silent> <leader>ngd :call lsp#text_document_declaration()<CR>
--- nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
--- " todo add fallback on keyword/haskell use hoogle
--- nnoremap ,gi  <cmd>lua vim.lsp.buf.implementation()<CR>
--- nnoremap ,sh <cmd>lua vim.lsp.buf.signature_help()<CR>
--- nnoremap <silent> ,td <cmd>lua vim.lsp.buf.type_definition()<CR>
--- nnoremap <silent> ,af <cmd>lua vim.lsp.buf.formatting()<CR>
--- nnoremap <silent> ,arf <cmd>lua vim.lsp.buf.range_formatting()<CR>
-
--- " TODO let visual map work on range
--- nnoremap ,ga <cmd>lua vim.lsp.buf.code_action()<CR>
-
--- " nnoremap <silent> <leader>do :OpenDiagnostic<CR>
--- nnoremap <leader>dl <cmd>lua vim.lsp.diagnostic.set_loclist()<CR>
+	if has_lspsaga then
+	   lspsaga_attach()
+	end
 
 -- " vim.lsp.buf.rename()
 end

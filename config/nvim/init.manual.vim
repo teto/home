@@ -987,6 +987,7 @@ let g:github_user = 'teto'
 "set listchars=tab:»·,eol:↲,nbsp:␣,extends:…
 "|
 
+" ⋅
 set listchars=tab:•·,trail:·,extends:❯,precedes:❮,nbsp:×
 " set listchars+=conceal:X
 " conceal is used by deefault if cchar does not exit
@@ -1994,7 +1995,9 @@ hi CursorLine                    guibg=#293739 guifg=None
 " au BufWinEnter * if &buftype != 'nofile' | silent! loadview | endif
 
 
-highlight NormalFloat guibg=#1d2019
+" highlight NormalFloat guibg=#1d2019
+" taken from SignColumn
+highlight NormalFloat guibg=#3c3836
 " highlight NormalFloat cterm=NONE ctermfg=14 ctermbg=0 gui=NONE guifg=#93a1a1 guibg=#002931
 
 " taken from justinmk's config

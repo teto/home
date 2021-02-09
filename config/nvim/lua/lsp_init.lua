@@ -1,7 +1,7 @@
 -- How to add a new server
 -- https://github.com/neovim/nvim-lsp/issues/41
 local lspconfig = require 'lspconfig'
-local configs = require 'lspconfig/configs'
+-- local configs = require 'lspconfig/configs'
 -- local lsp_status_enabled, lsp_status = pcall(require, 'lsp-status')
 local notifs = require 'notifications'
 -- local util = require'vim.lsp.util'
@@ -9,8 +9,8 @@ local api = vim.api
 
 local has_lsputil, lsputil = pcall(require, "lsputil")
 
--- if has_lsputil then
-if false then
+if has_lsputil then
+-- if false then
 	vim.lsp.callbacks['textDocument/codeAction'] = lsputil.codeActioncode_action_handler
 	vim.lsp.callbacks['textDocument/references'] = lsputil.locationsreferences_handler
 	vim.lsp.callbacks['textDocument/definition'] = lsputil.locationsdefinition_handler

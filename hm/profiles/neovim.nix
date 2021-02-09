@@ -71,7 +71,7 @@ in
 
      # concatMap
      # source doesn't like `stdpath('config').'`
-     #         ${config.programs.neovim.generatedInitrc}
+     # todo should use mkBefore
      extraConfig = ''
         ${config.programs.neovim.generatedInitrc}
         set noshowmode " Show the current mode on command line
@@ -184,20 +184,21 @@ in
 
           " mostly fzf mappings, use TAB to mark several files at the same time
           " https://github.com/neovim/neovim/issues/4487
-          nnoremap <Leader>o <Cmd>FzfFiles<CR>
-          " nnoremap <Leader>g <Cmd>FzfGitFiles<CR>
-          nnoremap <Leader>F <Cmd>FzfFiletypes<CR>
-          nnoremap <Leader>h <Cmd>FzfHistory<CR>
-          nnoremap <Leader>c <Cmd>FzfCommits<CR>
-          nnoremap <Leader>C <Cmd>FzfColors<CR>
-          nnoremap <leader>b <Cmd>FzfBuffers<CR>
-          nnoremap <leader>m <Cmd>FzfMarks<CR>
-          nnoremap <leader>l <Cmd>FzfLines<CR>
-          nnoremap <leader>t <Cmd>FzfTags<CR>
-          nnoremap <leader>T <Cmd>FzfBTags<CR>
-          nnoremap <leader>g <Cmd>FzfRg<CR>
         '';
       }
+          # nnoremap <Leader>o <Cmd>FzfFiles<CR>
+          # " nnoremap <Leader>g <Cmd>FzfGitFiles<CR>
+                # nnoremap <Leader>F <Cmd>FzfFiletypes<CR>
+          # nnoremap <Leader>h <Cmd>FzfHistory<CR>
+          # nnoremap <Leader>c <Cmd>FzfCommits<CR>
+          # nnoremap <Leader>C <Cmd>FzfColors<CR>
+          # nnoremap <leader>b <Cmd>FzfBuffers<CR>
+          # nnoremap <leader>m <Cmd>FzfMarks<CR>
+          # nnoremap <leader>l <Cmd>FzfLines<CR>
+          # nnoremap <leader>t <Cmd>FzfTags<CR>
+          # nnoremap <leader>T <Cmd>FzfBTags<CR>
+          # nnoremap <leader>g <Cmd>FzfRg<CR>
+
       # defined in overrides: TODO this should be easier: like fzf-vim should be enough
       fzfWrapper
       gruvbox
