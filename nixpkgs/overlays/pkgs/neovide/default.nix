@@ -7,10 +7,12 @@
 
 , cmake
 , pkgconfig
+, fontconfig
 , cargo
 , rustc
 , python
 , llvmPackages_latest
+, vulkan-tools
 
 , expat
 , openssl
@@ -61,11 +63,13 @@ in rustPlatform.buildRustPackage rec {
     cargo
     rustc
     python
+    vulkan-tools
   ] ++ (with llvmPackages_latest; [
     clang
     llvm
   ]);
   buildInputs = [
+    fontconfig
     skia
     expat
     openssl
@@ -73,5 +77,10 @@ in rustPlatform.buildRustPackage rec {
     SDL2
     vulkan-loader
   ];
+
+
+  shellHook = ''
+    export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:${vulkan-loader}/lib"
+  '';
 }
 
