@@ -28,15 +28,10 @@ end
 
 -- attach
 local function lspsaga_attach()
-	nnoremap { "gd", function () vim.lsp.buf.definition() end, buffer = true }
-	-- nnoremap { "gd", vim.lsp.buf.references, { buffer=true } }
-	-- nnoremap { "gA", vim.lsp.buf.code_action, { buffer=true } }
-	-- nnoremap { "g0", vim.lsp.buf.document_symbo, { buffer=true } }
-
-	-- vim.api.nvim_buf_set_keymap(0, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', {noremap = true})
-	-- vim.api.nvim_buf_set_keymap(0, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', {noremap = true})
-	-- vim.api.nvim_buf_set_keymap(0, 'n', 'gA', '<cmd>lua vim.lsp.buf.code_action()<CR>', {noremap = true})
-	-- vim.api.nvim_buf_set_keymap(0, 'n', 'g0', '<cmd>lua vim.lsp.buf.document_symbol()<CR>', {noremap = true})
+	nnoremap { "gd", vim.lsp.buf.definition, buffer = true }
+	nnoremap { "gr", vim.lsp.buf.references, buffer=true }
+	nnoremap { "gA", vim.lsp.buf.code_action, buffer=true }
+	nnoremap { "g0", vim.lsp.buf.document_symbol, buffer=true }
 
 	-- vim.api.nvim_set_keymap('n', '<C-j>', [[<cmd>lua vim.lsp.diagnostic.goto_next()<cr>]], {noremap = true})
 -- code action
@@ -44,13 +39,11 @@ local function lspsaga_attach()
 -- vnoremap <silent><leader>ca <cmd>'<,'>lua require('lspsaga.codeaction').range_code_action()<CR>
 
 -- if lspsaga
--- nnoremap <silent> [e <cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_prev()<CR>
--- nnoremap <silent> ]e <cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_next()<CR>
+--
+	nnoremap { "[e", require'lspsaga.diagnostic'.lsp_jump_diagnostic_prev, buffer=true }
+	nnoremap { "]e", require'lspsaga.diagnostic'.lsp_jump_diagnostic_next, buffer=true }
 end
 
-	-- if has_completion then
-	-- 	plug_completion.on_attach(client)
-	-- end
 
 local function default_mappings()
 	-- vim.api.nvim_buf_set_keymap(0, 'n', 'K', [[<cmd>lua vim.lsp.buf.hover()<cr>]], {noremap = true})
@@ -59,17 +52,21 @@ local function default_mappings()
 	-- vim.api.nvim_buf_set_keymap(0, 'n', 'gA', '<cmd>lua vim.lsp.buf.code_action()<CR>', {noremap = true})
 	-- vim.api.nvim_buf_set_keymap(0, 'n', 'g0', '<cmd>lua vim.lsp.buf.document_symbol()<CR>', {noremap = true})
 
-	nnoremap { "K", vim.lsp.buf.hover, { buffer=true } }
-	nnoremap { "gd", vim.lsp.buf.definition, { buffer=true } }
-	nnoremap { "gd", vim.lsp.buf.references, { buffer=true } }
-	nnoremap { "gA", vim.lsp.buf.code_action, { buffer=true } }
-	nnoremap { "g0", vim.lsp.buf.document_symbo, { buffer=true } }
+	nnoremap { "K", vim.lsp.buf.hover, buffer=true }
+	nnoremap { "gd", vim.lsp.buf.definition, buffer=true }
+	nnoremap { "gr", vim.lsp.buf.references, buffer=true }
+	nnoremap { "gA", vim.lsp.buf.code_action, buffer=true }
+	nnoremap { "g0", vim.lsp.buf.document_symbo, buffer=true }
 end
 
 M.on_attach = function(client)
 	-- print("Attaching client")
 	-- print(vim.inspect(client))
 	-- vim.cmd("setlocal omnifunc=lsp#omnifunc")
+
+	if has_completion then
+		plug_completion.on_attach(client)
+	end
 
 	if has_lspsaga then
 	   lspsaga_attach()
