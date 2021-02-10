@@ -105,7 +105,7 @@ call plug#begin(s:plugdir)
 Plug 'glepnir/lspsaga.nvim'
 " Plug 'lewis6991/gitsigns.nvim'  " same as vim-signify but lua
 Plug 'kshenoy/vim-signature' " display marks in gutter, love it
-Plug 'mhinz/vim-signify'
+" Plug 'mhinz/vim-signify'  " *
 
 Plug 'tjdevries/colorbuddy.nvim' " required by some colorscheme
 " Plug 'ojroques/nvim-lspfuzzy' " to complement lsp
@@ -1065,7 +1065,7 @@ nnoremap <leader>pu <Cmd>PlugUpdate<CR>
 " }}}
 " signify (display added/removed lines from vcs) {{{
 let g:signify_vcs_list = [ 'git']
-let g:signify_priority = 2
+let g:signify_priority = 1000
 " let g:signify_mapping_next_hunk = '<leader>hn' " hunk next
 " let g:signify_mapping_prev_hunk = '<leader>gk'
 " let g:signify_mapping_toggle_highlight = '<leader>gh'
@@ -2155,7 +2155,8 @@ map <RightMouse>  <Cmd>call quickui#context#open(content, quick_opts)<CR>
 " luafile ~/.config/nvim/init.lua
 luafile ~/.config/nvim/init.backup.lua
 
-hi lspdiagnosticsunderlinewarning gui=NONE
-hi lspdiagnosticsunderlinehint gui=NONE
+" hi lspdiagnosticsunderlinewarning gui=NONE
+" hi lspdiagnosticsunderlinehint gui=NONE
 " set foldmethod=
 
+command Hasktags !hasktags .

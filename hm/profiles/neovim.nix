@@ -248,7 +248,23 @@ in
       # }
       # vim-signature
 
-      # vim-signify
+      {
+        plugin = vim-signify;
+        config = ''
+          let g:signify_vcs_list = [ 'git']
+          let g:signify_priority = 1000
+          let g:signify_sign_add          = '▎'
+          let g:signify_sign_delete       = '▎'
+          let g:signify_sign_change       = '▎'
+          let g:signify_sign_changedelete = '▎'
+
+          let g:signify_cursorhold_insert     = 0
+          let g:signify_cursorhold_normal     = 0
+          let g:signify_update_on_bufenter    = 1
+          let g:signify_update_on_focusgained = 1
+
+        '';
+      }
       {
         plugin = vim-startify;
         config = ''
@@ -307,11 +323,11 @@ in
       # nvim-markdown-preview  # :MarkdownPreview
 
       # vim-markdown-preview  # WIP
-      {
-        plugin = vim-commentary;
-        config = ''
-          '';
-      }
+      # {
+      #   plugin = vim-commentary;
+      #   config = ''
+      #     '';
+      # }
       {
         # TODO generate its runtime/init
         plugin = nvim-lspconfig;

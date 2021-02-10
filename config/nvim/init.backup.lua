@@ -45,7 +45,7 @@ end
 -- 		telescope.load_extension("frecency")
 -- 	end
 -- }
-
+-- use "terrortylor/nvim-comment"
 -- shows a lightbulb where a codeAction is available
 use { 'kosayoda/nvim-lightbulb' }
 use { 'nvim-telescope/telescope-packer.nvim' }
@@ -193,6 +193,10 @@ if has_telescope then
 	telescope.load_extension("frecency")
 end
 --}}}
+-- nvim-comment {{{
+-- replace vim-commentary
+-- require('nvim_comment').setup()
+--}}}
 
 function contextMenu()
 	local choices = {"choice 1", "choice 2"}
@@ -280,11 +284,27 @@ end
 local goto_opts = {
 	severity_limit = "Warning"
 }
--- nmap             <C-k>           <Cmd>lua vim.lsp.diagnostic.goto_prev {wrap = true }<cr>
--- nmap             <C-j>           <Cmd>lua vim.lsp.diagnostic.goto_next {wrap = true }<cr>
+
+-- showLineDiagnostic is a wrapper around show_line_diagnostics
+-- show_line_diagnostics calls open_floating_preview
+-- local popup_bufnr, winnr = util.open_floating_preview(lines, 'plaintext')
+-- seems like there is no way to pass options from show_line_diagnostics to open_floating_preview
+-- the floating popup has "ownsyntax markdown"
+function showLineDiagnostic ()
+	local opts = {
+		enable_popup = true;
+		-- options of
+		popup_opts = {
+
+		};
+	}
+	-- return vim.lsp.diagnostic.show_line_diagnostics()
+	-- vim.lsp.diagnostic.goto_prev {wrap = true }
+	return require'lspsaga.diagnostic'.show_line_diagnostics()
+
+end
 
 -- to disable virtualtext check
 -- follow https://www.reddit.com/r/neovim/comments/f8u6fz/lsp_query/fip91ww/?utm_source=share&utm_medium=web2x
 vim.cmd [[autocmd CursorHold <buffer> lua showLineDiagnostic()]]
 -- vim.cmd [[autocmd CursorMoved <buffer> lua showLineDiagnostic()]]
-

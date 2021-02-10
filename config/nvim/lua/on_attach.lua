@@ -7,31 +7,16 @@ local has_lspsaga, lspsaga = pcall(require, 'lspsaga')
 local k = require"astronauta.keymap"
 local nnoremap = k.nnoremap
 
--- showLineDiagnostic is a wrapper around show_line_diagnostics
--- show_line_diagnostics calls open_floating_preview
--- local popup_bufnr, winnr = util.open_floating_preview(lines, 'plaintext')
--- seems like there is no way to pass options from show_line_diagnostics to open_floating_preview
--- the floating popup has "ownsyntax markdown"
-function showLineDiagnostic ()
-	local opts = {
-		enable_popup = true;
-		-- options of
-		popup_opts = {
-
-		};
-	}
-	-- return vim.lsp.diagnostic.show_line_diagnostics()
-	-- vim.lsp.diagnostic.goto_prev {wrap = true }
-	return require'lspsaga.diagnostic'.show_line_diagnostics()
-
-end
 
 -- attach
 local function lspsaga_attach()
+	-- require'lspsaga.provider'.preview_definition()
 	nnoremap { "gd", vim.lsp.buf.definition, buffer = true }
+	nnoremap { "gD", require'lspsaga.provider'.preview_definition, buffer = true }
 	nnoremap { "gr", vim.lsp.buf.references, buffer=true }
-	nnoremap { "gA", vim.lsp.buf.code_action, buffer=true }
+	nnoremap { "gA", require('lspsaga.codeaction').code_action, buffer=true }
 	nnoremap { "g0", vim.lsp.buf.document_symbol, buffer=true }
+	nnoremap { "gR", require'lspsaga.rename'.rename, buffer=true }
 
 	-- vim.api.nvim_set_keymap('n', '<C-j>', [[<cmd>lua vim.lsp.diagnostic.goto_next()<cr>]], {noremap = true})
 -- code action
@@ -56,7 +41,15 @@ local function default_mappings()
 	nnoremap { "gd", vim.lsp.buf.definition, buffer=true }
 	nnoremap { "gr", vim.lsp.buf.references, buffer=true }
 	nnoremap { "gA", vim.lsp.buf.code_action, buffer=true }
-	nnoremap { "g0", vim.lsp.buf.document_symbo, buffer=true }
+	nnoremap { "g0", vim.lsp.buf.document_symbol, buffer=true }
+
+-- nmap             <C-k>           <Cmd>lua vim.lsp.diagnostic.goto_prev {wrap = true }<cr>
+-- nmap             <C-j>           <Cmd>lua vim.lsp.diagnostic.goto_next {wrap = true }<cr>
+
+	nnoremap { "[e", function () vim.lsp.diagnostic.goto_prev({wrap = true }) end, buffer=true }
+	nnoremap { "]e", function () vim.lsp.diagnostic.goto_next({wrap = true }) end, buffer=true }
+	nnoremap { "<c-k>", function () vim.lsp.diagnostic.goto_prev({wrap = true }) end, buffer=true }
+	nnoremap { "<c-j>", function () vim.lsp.diagnostic.goto_next({wrap = true }) end, buffer=true }
 end
 
 M.on_attach = function(client)
@@ -68,8 +61,11 @@ M.on_attach = function(client)
 		plug_completion.on_attach(client)
 	end
 
-	if has_lspsaga then
+	-- if has_lspsaga then
+	if false then
 	   lspsaga_attach()
+	else
+		default_mappings()
 	end
 
 -- " vim.lsp.buf.rename()
