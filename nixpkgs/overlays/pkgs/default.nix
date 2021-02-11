@@ -2,8 +2,8 @@ final: prev:
 {
 
   # not upstreamed yet
-  myHelm = wrapHelm kubernetes-helm-unwrapped {
-    plugins = with kubernetes-helmPlugins; [ helm-s3 helm-secrets ];
+  myHelm = final.wrapHelm final.kubernetes-helm-unwrapped {
+    plugins = with final.kubernetes-helmPlugins; [ helm-s3 helm-secrets helm-diff ];
   };
 
 
