@@ -1,6 +1,11 @@
 final: prev:
 {
 
+  # not upstreamed yet
+  myHelm = wrapHelm kubernetes-helm-unwrapped {
+    plugins = with kubernetes-helmPlugins; [ helm-s3 helm-secrets ];
+  };
+
 
   buku_run = prev.stdenv.mkDerivation rec {
     pname = "buku_run";
@@ -38,7 +43,6 @@ final: prev:
   # casse nix-index
   # hunter = prev.callPackage ./hunter { };
 
-  i3-resurrect = prev.python3Packages.callPackage ./i3-resurrect {};
   # mda-lite = prev.pythonPackages.callPackage ./mda-lite {};
 
   mptcpnumerics = prev.python3Packages.callPackage ./mptcpnumerics.nix {};
@@ -60,7 +64,7 @@ final: prev:
 
   # i3-snapshot = prev.callPackage ./i3-snapshot {};
 
-  rofi-scripts = prev.callPackage ./rofi-scripts {};
+  # rofi-scripts = prev.callPackage ./rofi-scripts {};
 
   neovide = prev.callPackage ./neovide {};
 

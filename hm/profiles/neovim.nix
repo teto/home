@@ -323,11 +323,11 @@ in
       # nvim-markdown-preview  # :MarkdownPreview
 
       # vim-markdown-preview  # WIP
-      # {
-      #   plugin = vim-commentary;
-      #   config = ''
-      #     '';
-      # }
+      {
+        plugin = vim-commentary;
+        config = ''
+          '';
+      }
       {
         # TODO generate its runtime/init
         plugin = nvim-lspconfig;
