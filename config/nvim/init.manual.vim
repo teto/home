@@ -100,12 +100,15 @@ set gdefault
 set exrc
 
 
-" vim-plug plugin declarations {{{1
+" VIM-PLUG PLUGIN DECLARATIONS {{{1
 call plug#begin(s:plugdir)
 Plug 'glepnir/lspsaga.nvim'
 " Plug 'lewis6991/gitsigns.nvim'  " same as vim-signify but lua
 Plug 'kshenoy/vim-signature' " display marks in gutter, love it
 " Plug 'mhinz/vim-signify'  " *
+
+Plug 'google/vim-maktaba' " required by vim-bazel
+Plug 'bazelbuild/vim-bazel'
 
 Plug 'tjdevries/colorbuddy.nvim' " required by some colorscheme
 " Plug 'ojroques/nvim-lspfuzzy' " to complement lsp

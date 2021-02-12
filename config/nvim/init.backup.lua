@@ -29,9 +29,6 @@ if file_exists(generated_init) then
 	vim.cmd.luafile( generated_init)
 end
 
--- luafile 
-
-
 -- use { 'haorenW1025/completion-nvim', opt = true,
 -- requires = {{'hrsh7th/vim-vsnip', opt = true}, {'hrsh7th/vim-vsnip-integ', opt = true}}
 -- }
@@ -48,6 +45,7 @@ end
 -- use "terrortylor/nvim-comment"
 -- shows a lightbulb where a codeAction is available
 use { 'kosayoda/nvim-lightbulb' }
+use { 'gennaro-tedesco/nvim-peekup' }
 use { 'nvim-telescope/telescope-packer.nvim' }
 -- use { 'TimUntersberger/neogit' }
 use { 'wfxr/minimap.vim' }

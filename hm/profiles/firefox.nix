@@ -20,7 +20,6 @@ in
     enable = true;
     # import the one in pkgs/
     # package = myFirefox;
-    # enableAdobeFlash = false;
 
     # Not accepted. we should find another way to enable it
     # pass package for instance
