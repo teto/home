@@ -180,7 +180,9 @@ in
 
     # just locate
     locate.enable = true;
-    # dbus.packages = [ ];
+    dbus.packages = [
+      pkgs.deadd-notification-center
+    ];
   };
 
   security.sudo.extraConfig = ''

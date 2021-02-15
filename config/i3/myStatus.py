@@ -28,7 +28,7 @@ my_term = "kitty"
 #status.register("text",
 
 
-status.register("spotify")
+# status.register("spotify")
 
 status.register("nix-channels",
     channel="nixos-unstable"

@@ -22,6 +22,7 @@ alias -s git="git clone"
 
 alias dfh="df --human-readable"
 alias duh="du --human-readable"
+alias nd="nix develop"
 
 
 alias preview="fzf --preview 'bat --color \"always\" {}'"

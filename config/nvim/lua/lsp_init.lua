@@ -63,28 +63,11 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   }
 )
 
--- vim.lsp.util.show_current_line_diagnostics()
--- Check if it's already defined for when I reload this file.
--- if not configs.lua_lsp then
--- configs.lua_lsp = {
--- 	default_config = {
--- 	cmd = {'lua-lsp'};
--- 	filetypes = {'lua'};
--- 	root_dir = function(fname)
--- 		return lspconfig.util.find_git_ancestor(fname) or vim.loop.os_homedir()
--- 	end;
--- 	-- todo wrap it with nlua: require('nlua.lsp.nvim').
--- 	on_attach=attach_cb.on_attach,
--- 	log_level = vim.lsp.protocol.MessageType.Warning;
--- 	settings = {};
--- 	};
--- }
--- end
-
 -- lspconfig.lua_lsp.setup{}
 
 lspconfig.sumneko_lua.setup{
   cmd = {"lua-language-server"};
+  on_attach=attach_cb.on_attach,
   settings = {
 	Lua = {
 		runtime = { version = "LuaJIT", path = vim.split(package.path, ';'), },
@@ -107,32 +90,14 @@ lspconfig.sumneko_lua.setup{
 lspconfig.dockerls.setup{}
 lspconfig.yamlls.setup{}
 
--- configs.pyright = {
--- default_config = {
--- 	cmd = {"pyright-langserver", "--stdio"};
--- 	filetypes = {"python"};
--- 	root_dir = lspconfig.util.root_pattern(".git", "setup.py",  "setup.cfg", "pyproject.toml", "requirements.txt");
--- 	settings = {
--- 	analysis = { autoSearchPaths= true; };
--- 	pyright = { useLibraryCodeForTypes = true; };
--- 	};
--- 	-- The following before_init function can be removed once https://github.com/neovim/neovim/pull/12638 is merged
--- 	before_init = function(initialize_params)
--- 	initialize_params['workspaceFolders'] = {{
--- 		name = 'workspace',
--- 		uri = initialize_params['rootUri']
--- 	}}
--- 	end
--- 	};
--- }
-
-
 -- you can configure pyright via a pyrightconfig.json too
 -- https://github.com/microsoft/pyright/blob/cf1a5790d2105ac60dd3378a46725519d14b2844/docs/configuration.md
 lspconfig.pyright.setup{
 	cmd = {"pyright-langserver", "--stdio"};
 	filetypes = {"python"};
+	autostart = false; -- This is the important new option
 	root_dir = lspconfig.util.root_pattern(".git", "setup.py",  "setup.cfg", "pyproject.toml", "requirements.txt");
+	on_attach=attach_cb.on_attach,
 	-- settings = {
 	-- 	python = {
 	-- 		analysis = {

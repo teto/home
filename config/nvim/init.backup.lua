@@ -42,6 +42,12 @@ end
 -- 		telescope.load_extension("frecency")
 -- 	end
 -- }
+
+-- provides TSContextEnable / TSContextDisable
+use { 'romgrk/nvim-treesitter-context',
+	requires = { 'nvim-treesitter/nvim-treesitter' }
+}
+
 -- use "terrortylor/nvim-comment"
 -- shows a lightbulb where a codeAction is available
 use { 'kosayoda/nvim-lightbulb' }

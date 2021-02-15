@@ -13,6 +13,7 @@
 , python
 , llvmPackages_latest
 , vulkan-tools
+, xlibs
 
 , expat
 , openssl
@@ -64,6 +65,7 @@ in rustPlatform.buildRustPackage rec {
     rustc
     python
     vulkan-tools
+    xlibs.libXcursor
   ] ++ (with llvmPackages_latest; [
     clang
     llvm
