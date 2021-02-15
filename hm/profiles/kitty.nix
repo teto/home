@@ -9,7 +9,9 @@
       italic_font = "auto";
       bold_italic_font = "auto";
 
-      font_size = 13;
+      font_size = 12;
+      url_style = "curly";
+
     };
     extraConfig = ''
       include "manual.conf"

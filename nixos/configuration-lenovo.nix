@@ -181,9 +181,14 @@ in
     # just locate
     locate.enable = true;
     dbus.packages = [
-      pkgs.deadd-notification-center
+      pkgs.deadd-notification-center # installed by systemd
     ];
   };
+
+  systemd.packages = [
+    pkgs.deadd-notification-center
+  ];
+
 
   security.sudo.extraConfig = ''
     Defaults        timestamp_timeout=60

@@ -56,7 +56,7 @@ use { 'nvim-telescope/telescope-packer.nvim' }
 -- use { 'TimUntersberger/neogit' }
 use { 'wfxr/minimap.vim' }
 -- 	'nvim-treesitter/completion-treesitter' " extension of completion-nvim,
-use { 'nvim-treesitter/nvim-treesitter' }
+-- use { 'nvim-treesitter/nvim-treesitter' }
 use {
 	'nvim-treesitter/playground',
 	requires = { 'nvim-treesitter/nvim-treesitter' }
