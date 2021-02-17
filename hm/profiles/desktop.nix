@@ -40,6 +40,7 @@ let
     lazygit  # kinda like tig
     ncurses.dev # for infocmp
     neovim-remote # for latex etc
+    nodePackages.bitwarden-cli  # 'bw' binary
     # nix-prefetch-scripts # broken
     nix-index # to list package contents
     nixpkgs-review

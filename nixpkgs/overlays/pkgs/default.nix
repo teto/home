@@ -36,6 +36,10 @@ final: prev:
 
   };
 
+  qtgo = prev.callPackage ./qtgo {};
+
+  menutray = prev.callPackage ./menutray {};
+
   colr = prev.callPackage ./colr {};
 
   dualsub = prev.callPackage ./dualsubtitles { };

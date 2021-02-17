@@ -98,6 +98,10 @@ in
       };
    };
 
+  systemd.packages = [
+    pkgs.deadd-notification-center
+  ];
+
   # udisks2 GUI
   # services.udisks2.enable = true;
 

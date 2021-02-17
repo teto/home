@@ -185,10 +185,6 @@ in
     ];
   };
 
-  systemd.packages = [
-    pkgs.deadd-notification-center
-  ];
-
 
   security.sudo.extraConfig = ''
     Defaults        timestamp_timeout=60
