@@ -15,7 +15,8 @@
     nur.url = "github:nix-community/NUR";
 
     # temporary until this gets fixed upstream
-    poetry-unstable.url = "github:teto/poetry2nix/fix_tag";
+    # poetry-unstable.url = "github:teto/poetry2nix/fix_tag";
+    poetry.url = "github:nix-community/poetry2nix";
 
     nova.url = "git+ssh://git@git.novadiscovery.net:4224/world/nova-nix.git?ref=master";
     neovim = {

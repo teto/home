@@ -44,9 +44,10 @@ end
 -- }
 
 -- provides TSContextEnable / TSContextDisable
-use { 'romgrk/nvim-treesitter-context',
-	requires = { 'nvim-treesitter/nvim-treesitter' }
-}
+-- shows current function on first line
+-- use { 'romgrk/nvim-treesitter-context',
+-- 	requires = { 'nvim-treesitter/nvim-treesitter' }
+-- }
 
 -- use "terrortylor/nvim-comment"
 -- shows a lightbulb where a codeAction is available
