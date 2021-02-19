@@ -48,7 +48,7 @@ AWSInfo{..} = RecordWildCards
 
 # to select only some fields in a record: RecordWildCards
 record{..} will bring everything intoScope
-A better alternative is (tcpInfo@DiagTcpInfo {} ) 
+A better alternative is (tcpInfo@DiagTcpInfo {} )
 
 
 # acronyms

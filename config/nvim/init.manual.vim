@@ -102,6 +102,7 @@ set exrc
 
 " VIM-PLUG PLUGIN DECLARATIONS {{{1
 call plug#begin(s:plugdir)
+Plug 'mjlbach/neovim-ui'
 Plug 'glepnir/lspsaga.nvim'
 " Plug 'lewis6991/gitsigns.nvim'  " same as vim-signify but lua
 Plug 'kshenoy/vim-signature' " display marks in gutter, love it

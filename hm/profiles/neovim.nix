@@ -84,6 +84,11 @@ in
       ))
     ;
 
+    # just for tests
+    # configure = {
+    #   customRC = ''test'';
+    # };
+
     extraLuaConfig = ''
       -- logs are written to /home/teto/.cache/vim-lsp.log
       vim.lsp.set_log_level("info")
