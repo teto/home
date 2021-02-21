@@ -1,4 +1,4 @@
-{ stdenv, buildPackages, fetchFromGitHub, perl, buildLinux, ... } @ args:
+{ stdenv, lib, buildPackages, fetchFromGitHub, perl, buildLinux, ... } @ args:
 
 buildLinux (rec {
   mptcpVersion = "0.96.0";
@@ -8,7 +8,7 @@ buildLinux (rec {
 
   extraMeta = {
     branch = "5.1";
-    maintainers = with stdenv.lib.maintainers; [ teto layus ];
+    maintainers = with lib.maintainers; [ teto layus ];
   };
 
   # src = fetchFromGitHub {

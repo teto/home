@@ -1,4 +1,4 @@
-{ stdenv, fetchFromGitHub, rustPlatform, makeWrapper }:
+{ lib, fetchFromGitHub, rustPlatform, makeWrapper }:
 
 rustPlatform.buildRustPackage rec {
   name = "subtitles-rs";
@@ -17,6 +17,6 @@ rustPlatform.buildRustPackage rec {
   meta = {
     description = "Tools and libraries for manipulating subtitles";
     homepage = https://github.com/emk/subtitles-rs;
-    license = stdenv.lib.licenses.cc0;
+    license = lib.licenses.cc0;
   };
 }

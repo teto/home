@@ -45,7 +45,7 @@ in
 
   buildInputs = [ pythonEnv ];
 
-  meta = with stdenv.lib; {
+  meta = with lib; {
 
     homepage =  https://gitlab.planet-lab.eu/cartography/multilevel-mda-lite;
     description = "Multipath traceroute";

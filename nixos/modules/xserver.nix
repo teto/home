@@ -66,6 +66,9 @@
       };
     };
     windowManager.i3.enable = true;
+
+    # to autostart i3
+    # https://discourse.nixos.org/t/opening-i3-from-home-manager-automatically/4849/7
     desktopManager.session = [
       {
         name = "home-manager";

@@ -1,4 +1,4 @@
-{ stdenv, fetchurl, jre, makeWrapper }:
+{ stdenv, lib, fetchurl, jre, makeWrapper }:
 
 stdenv.mkDerivation rec {
   version = "1.1.0";
@@ -22,6 +22,6 @@ stdenv.mkDerivation rec {
   meta = {
     description = "A tool which allows you to merge two SRT subtitles in a single file";
     homepage = https://github.com/bonigarcia/dualsub;
-    license = stdenv.lib.licenses.gpl3;
+    license = lib.licenses.gpl3;
   };
 }

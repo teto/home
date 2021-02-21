@@ -25,7 +25,7 @@ let
 
   ns3forDce = ns-3.override( { inherit modules python; });
   pythonEnv = python.withPackages(ps:
-    stdenv.lib.optional withManual ps.sphinx
+    lib.optional withManual ps.sphinx
     ++ lib.optionals pythonSupport (with ps;[ pybindgen pygccxml ])
   );
 
@@ -78,7 +78,7 @@ let
 
       ${pythonEnv.interpreter} ./waf configure --prefix=$out \
       --with-ns3=${ns3forDce} --with-python=${pythonEnv.interpreter} \
-        ${stdenv.lib.optionalString (!withExamples) "--disable-examples "} ${stdenv.lib.optionalString (!doCheck) " --disable-tests" };
+        ${lib.optionalString (!withExamples) "--disable-examples "} ${lib.optionalString (!doCheck) " --disable-tests" };
 
       runHook postConfigure
     '';
@@ -89,15 +89,15 @@ let
 
     hardeningDisable = [ "all" ];
 
-    # shellHook= stdenv.lib.optionalString withExamples ''
+    # shellHook= lib.optionalString withExamples ''
     #   export DCE_PATH=${iperf-dce}/bin
     # '';
 
     meta = {
       homepage = https://www.nsnam.org/overview/projects/direct-code-execution;
-      license = stdenv.lib.licenses.gpl3;
+      license = lib.licenses.gpl3;
       description = "Run real applications/network stacks in the simulator ns-3";
-      platforms = with stdenv.lib.platforms; unix;
+      platforms = with lib.platforms; unix;
     };
   };
 in

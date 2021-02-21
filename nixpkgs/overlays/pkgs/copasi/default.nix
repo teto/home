@@ -71,7 +71,7 @@ stdenv.mkDerivation rec {
   '';
 
   # TODO
-  meta = with stdenv.lib; {
+  meta = with lib; {
     homepage = https://openflowswitch.org;
     description = "Advanced library for packet processing. Includes NetVM, NetPDL, and NetPFL.";
     platforms = platforms.unix;

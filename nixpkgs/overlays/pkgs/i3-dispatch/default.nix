@@ -1,4 +1,4 @@
-{ stdenv, buildPythonApplication, fetchFromGitHub, xdotool, psutil
+{ lib, buildPythonApplication, fetchFromGitHub, xdotool, psutil
 , pynvim
 }:
 
@@ -31,7 +31,7 @@ buildPythonApplication rec {
 
   propagatedBuildInputs = [ xdotool psutil pynvim ];
 
-  meta = with stdenv.lib; {
+  meta = with lib; {
     description = "tool to move around in i3";
     homepage = https://github.com/teto/i3-dispatch;
     # homepage = https://github.com/krlanguet/i3-cycle-dispatch;

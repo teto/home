@@ -11,9 +11,14 @@ poetryLock = readTOML poetrylock;
 .venv/src/marshmallow_pymodm
 
 
+https://python-poetry.org/docs/pyproject/#packages
+
+# how to generate a setup.py
+https://github.com/python-poetry/poetry/issues/761#issuecomment-695829120
+
 to debug
 poetry env list --full-path
-> /home/teto/.cache/pypoetry/virtualenvs/jinko-platform-x7nkyLjP-py3.7
+> /home/teto/.cache/pypoetry/virtualenvs/jino-platform-x7nkyLjP-py3.7
 
 to compare with `pipenv where`
 /root/.local/share/virtualenvs/-x-v5uFv0

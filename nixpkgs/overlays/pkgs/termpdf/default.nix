@@ -1,4 +1,4 @@
-{ stdenv
+{ lib
 , buildPythonApplication
 , fetchFromGitHub
 , fetchPypi
@@ -38,7 +38,7 @@ buildPythonApplication {
 
   doCheck = false;
 
-  meta = with stdenv.lib; {
+  meta = with lib; {
     description = "Linux kernel config generator";
     homepage = https://github.com/dsanson/termpdf.py;
     maintainers = with maintainers; [ teto ];

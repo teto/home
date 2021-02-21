@@ -10,7 +10,7 @@ let
   #ihaskellSh = writeScriptBin "ihaskell-notebook" ''
   #  #! ${stdenv.shell}
   #  export GHC_PACKAGE_PATH="$(echo ${ihaskellEnv}/lib/*/package.conf.d| tr ' ' ':'):$GHC_PACKAGE_PATH"
-  #  export PATH="${stdenv.lib.makeBinPath ([ ihaskellEnv jupyter ])}\${PATH:+':'}$PATH"
+  #  export PATH="${lib..makeBinPath ([ ihaskellEnv jupyter ])}\${PATH:+':'}$PATH"
   #  ${ihaskellEnv}/bin/ihaskell install -l $(${ihaskellEnv}/bin/ghc --print-libdir) && ${jupyter}/bin/jupyter notebook
   #'';
   haskellEnv = pkgs.haskellPackages.ghcWithHoogle (self: [
@@ -38,9 +38,9 @@ let
   #   name = "ihaskell-with-packages";
   #   buildInputs = [ makeWrapper ];
   #   paths = [ ihaskellEnv jupyter ];
-  #   # export PATH="${pkgs.stdenv.lib.makeBinPath ([ ihaskellEnv ])}''${PATH:+:}$PATH"
+  #   # export PATH="${lib.makeBinPath ([ ihaskellEnv ])}''${PATH:+:}$PATH"
   #   # export GHC_PACKAGE_PATH="$(echo ${ihaskellEnv}/lib/*/package.conf.d| tr ' ' ':'):$GHC_PACKAGE_PATH"
-  #   # export PATH="${stdenv.lib.makeBinPath ([ ihaskellEnv jupyter ])}''${PATH:+:}$PATH"
+  #   # export PATH="${lib..makeBinPath ([ ihaskellEnv jupyter ])}''${PATH:+:}$PATH"
   #   # to find ghc_pkg/hoogle doc etc
   #   postBuild = ''
   #     for prg in $out/bin"/"*;do
@@ -48,7 +48,7 @@ let
   # ca on en aura plus besoin ?!
   #         wrapProgram $prg --set PYTHONPATH "$(echo ${jupyter}/lib/*/site-packages)" \
   #           --prefix GHC_PACKAGE_PATH ':' "$(echo ${ihaskellEnv}/lib/*/package.conf.d| tr ' ' ':')" \
-  #           --prefix PATH ':'  "${stdenv.lib.makeBinPath ([ ihaskellEnv jupyter ])}"
+  #           --prefix PATH ':'  "${lib..makeBinPath ([ ihaskellEnv jupyter ])}"
   #       fi
   #     done
   #   '';
@@ -110,7 +110,7 @@ in
           #ihaskellSh = pkgs.writeScript "ihaskell-wrapper" ''
           #  #! ${pkgs.stdenv.shell}
           #  export GHC_PACKAGE_PATH="$(echo ${ihaskellEnv}/lib/*/package.conf.d| tr ' ' ':'):$GHC_PACKAGE_PATH"
-          #  export PATH="${pkgs.stdenv.lib.makeBinPath ([ ihaskellEnv ])}''${PATH:+:}$PATH"
+          #  export PATH="${pkgs.lib..makeBinPath ([ ihaskellEnv ])}''${PATH:+:}$PATH"
           #  ${ihaskellEnv}/bin/ihaskell ''$@
           #'';
           # share/jupyter/kernels/haskell/

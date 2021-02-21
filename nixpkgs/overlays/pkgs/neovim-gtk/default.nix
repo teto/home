@@ -1,4 +1,4 @@
-{ stdenv, fetchFromGitHub, rustPlatform
+{ stdenv, lib, fetchFromGitHub, rustPlatform
 , gtk3, pkgconfig, wrapGAppsHook
 }:
 
@@ -21,7 +21,7 @@ buildRustPackage rec {
 
   cargoSha256 = "1xfkx32p07vq3h1klk5rp8cn7fi7d84waqz1djd4mdldzc6hqw28";
 
-  meta = with stdenv.lib; {
+  meta = with lib; {
     description = "GTK ui for neovim written in rust using gtk-rs bindings. With ligatures support.";
     homepage = https://github.com/daa84/neovim-gtk;
     license = with licenses; [ gpl3 ];

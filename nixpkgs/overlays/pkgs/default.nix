@@ -36,7 +36,7 @@ final: prev:
 
   };
 
-  qtgo = prev.callPackage ./qtgo {};
+  # qtgo = prev.callPackage ./qtgo {};
 
   menutray = prev.callPackage ./menutray {};
 
@@ -64,7 +64,7 @@ final: prev:
   #   inherit (prev.pkgs.gnome2) libgnome libgnomeui;
   # };
 
-  i3dispatch = prev.python3Packages.callPackage ./i3-dispatch {};
+  i3dispatch = prev.python3Packages.callPackage ./i3-dispatch { inherit (prev) lib;};
 
   # i3-snapshot = prev.callPackage ./i3-snapshot {};
 

@@ -1,5 +1,5 @@
-with import <nixpkgs> {};
-
+# with import <nixpkgs> {};
+{ stdenv, fetchurl, perl }:
 let
   myPerl = (perl.withPackages (p: []));
 in

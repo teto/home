@@ -1,4 +1,4 @@
-{ stdenv, fetchFromGitHub, jsoncpp, libsigcxx, i3, cmake, pkg-config, zlib }:
+{ stdenv, lib, fetchFromGitHub, jsoncpp, libsigcxx, i3, cmake, pkg-config, zlib }:
 
 stdenv.mkDerivation rec {
   pname = "i3-snapshot";
@@ -16,7 +16,7 @@ stdenv.mkDerivation rec {
   nativeBuildInputs = [ i3 cmake pkg-config ];
   buildInputs = [ jsoncpp libsigcxx zlib];
 
-  meta = with stdenv.lib; {
+  meta = with lib; {
     homepage = https://github.com/regolith-linux/i3-snapshot;
     description = "Record and restore window and workspace containment structure in i3-wm.";
     license = [ licenses.bsd3 ];

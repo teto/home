@@ -1,4 +1,4 @@
-{ stdenv, fetchzip
+{ stdenv, lib, fetchzip
 , pkgconfig
 , libgnome, libgnomeui
 # needs to be python3
@@ -14,7 +14,7 @@ let
   variant = "gtk";
 in
 stdenv.mkDerivation rec {
-  name = "stab${version}";
+  name = "stab-${version}";
   version = "1.3.1";
 
   src = fetchzip {
@@ -32,7 +32,7 @@ stdenv.mkDerivation rec {
     install -D Bin/*/* $out/bin/
   '';
 
-  meta = with stdenv.lib; {
+  meta = with lib; {
     description = "Bandwidth probing tool.";
     homepage = http://www.spin.rice.edu/Software/STAB;
     license = licenses.gpl3;
