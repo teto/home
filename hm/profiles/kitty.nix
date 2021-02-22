@@ -14,7 +14,7 @@
 
     };
     extraConfig = ''
-      include "manual.conf"
+      include ./manual.conf
     '';
   };
 }

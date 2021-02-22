@@ -153,8 +153,8 @@ Plug 'MattesGroeger/vim-bookmarks' " ruby  / :BookmarkAnnotate
 
 Plug 'skywind3000/vim-quickui'
 Plug 'liuchengxu/vista.vim' " replaces tagbar to list workplace symbols
-" Plug 'neovim/nvim-lspconfig' " while fuzzing details out
-Plug '~/nvim-lspconfig' " while fuzzing details out
+Plug 'neovim/nvim-lspconfig' " while fuzzing details out
+" Plug '~/nvim-lspconfig' " while fuzzing details out
 " Plug 'puremourning/vimspector' " to debug programs
 Plug 'bfredl/nvim-luadev'  " lua repl :Luadev
 Plug 'hotwatermorning/auto-git-diff' " to help rebasing, damn cool
