@@ -86,6 +86,9 @@ local nnoremap = k.nnoremap
 nnoremap { "<Leader>o", function () vim.cmd("FzfFiles") end}
 nnoremap { "<Leader>g", function () vim.cmd("FzfGitFiles") end}
 nnoremap { "<Leader>F", function () vim.cmd("FzfFiletypes") end}
+-- replace with telescope
+-- nnoremap { "<Leader>t", function () vim.cmd("FzfTags") end}
+nnoremap { "<Leader>t", function () require'telescope.builtin'.tags{} end }
 -- nnoremap <Leader>h <Cmd>FzfHistory<CR>
 -- nnoremap <Leader>c <Cmd>FzfCommits<CR>
 -- nnoremap <Leader>C <Cmd>FzfColors<CR>
@@ -130,7 +133,7 @@ if lspfuzzy_available then
 	lspfuzzy.setup {}
 end
 
-local has_neogit, neogit = pcall(require, 'neogit')
+-- local has_neogit, neogit = pcall(require, 'neogit')
 -- use with neogit.status.create(<kind>)
 
 -- telescope {{{
@@ -280,7 +283,6 @@ vim.lsp.notifier = notifs
 
 -- if we are running my fork that has vim.notify
 if vim.notify then
-
 	vim.notify = notifs.notify_external
 end
 

@@ -21,7 +21,7 @@
     nova.url = "git+ssh://git@git.novadiscovery.net:4224/world/nova-nix.git?ref=master";
     neovim = {
       url = "github:neovim/neovim?dir=contrib";
-      # url = "github:teto/neovim/notif_provider?dir=contrib";
+      # url = "github:teto/neovim/lsp-notify-errors?dir=contrib";
       # url = "github:teto/neovim/floatpreviewopts?dir=contrib";
       inputs.nixpkgs.follows = "nixpkgs-teto";
     };

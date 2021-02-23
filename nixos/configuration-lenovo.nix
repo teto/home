@@ -230,8 +230,6 @@ in
 
   # kinda experimental
   # services.openssh.banner = "Hello world";
-  security.rngd.enable = true;
-  # security.rngd.debug = true;
 
   # $out here is the profile generation
   system.extraSystemBuilderCmds = ''

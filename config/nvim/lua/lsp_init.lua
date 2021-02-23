@@ -47,11 +47,11 @@ local attach_cb = require 'on_attach'
 -- explained at https://github.com/nvim-lua/diagnostic-nvim/issues/73
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
-	underline = false,
-    -- underline = {
-		-- false,
-		-- severity_limit = "Warning",
-	-- },
+	-- underline = true,
+    underline = {
+		false,
+		severity_limit = "Warning",
+	},
     virtual_text = {
 		true,
 		severity_limit = "Warning",
@@ -74,7 +74,10 @@ lspconfig.sumneko_lua.setup{
 		completion = { keywordSnippet = "Disable", },
 		diagnostics = {
 			enable = true,
-			globals = { "vim", "describe", "it", "before_each", "after_each" },
+			globals = {
+				"vim", "describe", "it", "before_each", "after_each", "pending"
+				, "teardown"
+			},
 			disable = { "lowercase-global", "unused-function"}
 		},
 		workspace = {
