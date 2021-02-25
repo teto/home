@@ -70,6 +70,7 @@ use { 'nvim-treesitter/nvim-treesitter-textobjects' }
 use { 'notomo/gesture.nvim' }
 -- use { 'svermeulen/vimpeccable'} -- broken ?
 use { 'tjdevries/astronauta.nvim' }
+use { 'npxbr/gruvbox.nvim', requires = {"rktjmp/lush.nvim"} }
 
 vim.g.indicator_errors = ''
 vim.g.indicator_warnings = ''
@@ -315,3 +316,7 @@ end
 -- follow https://www.reddit.com/r/neovim/comments/f8u6fz/lsp_query/fip91ww/?utm_source=share&utm_medium=web2x
 vim.cmd [[autocmd CursorHold <buffer> lua showLineDiagnostic()]]
 -- vim.cmd [[autocmd CursorMoved <buffer> lua showLineDiagnostic()]]
+
+
+vim.o.background = "dark" -- or "light" for light mode
+vim.cmd([[colorscheme gruvbox]])

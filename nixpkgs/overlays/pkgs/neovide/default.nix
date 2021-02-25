@@ -14,6 +14,10 @@
 , llvmPackages_latest
 , vulkan-tools
 , xlibs
+, xorg
+, xorg_sys_opengl
+, libglvnd
+, freeglut
 
 , expat
 , openssl
@@ -65,7 +69,7 @@ in rustPlatform.buildRustPackage rec {
     rustc
     python
     vulkan-tools
-    xlibs.libXcursor
+    # xlibs.libXcursor
   ] ++ (with llvmPackages_latest; [
     clang
     llvm
@@ -78,9 +82,17 @@ in rustPlatform.buildRustPackage rec {
     freetype
     SDL2
     vulkan-loader
+    xlibs.libXcursor
+    xlibs.libXrandr
+    xorg.libXi
+    # xorg_sys_opengl
+    libglvnd
+    freeglut
+    freeglut.dev
   ];
 
 
+  # :${xlibs.libXcursor}/lib"
   shellHook = ''
     export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:${vulkan-loader}/lib"
   '';

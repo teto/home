@@ -153,8 +153,8 @@ Plug 'MattesGroeger/vim-bookmarks' " ruby  / :BookmarkAnnotate
 
 Plug 'skywind3000/vim-quickui'
 Plug 'liuchengxu/vista.vim' " replaces tagbar to list workplace symbols
-Plug 'neovim/nvim-lspconfig' " while fuzzing details out
-" Plug '~/nvim-lspconfig' " while fuzzing details out
+" Plug 'neovim/nvim-lspconfig' " while fuzzing details out
+Plug '~/nvim-lspconfig' " while fuzzing details out
 " Plug 'puremourning/vimspector' " to debug programs
 Plug 'bfredl/nvim-luadev'  " lua repl :Luadev
 Plug 'hotwatermorning/auto-git-diff' " to help rebasing, damn cool
@@ -633,7 +633,7 @@ let g:instant_rst_browser = "qutebrowser"
 let g:instant_rst_additional_dirs=[ "/home/teto/mptcpweb" ]
 " }}}
 " Appearance {{{
-set background=dark " remember: does not change the background color !
+" set background=dark " remember: does not change the background color !
 " one  ▶
 
 set noshowmode " Show the current mode on command line
@@ -1850,9 +1850,6 @@ autocmd ColorScheme *
 
 " put it after teh auguibg=redtocms ColorScheme
 " colorscheme molokai
-" -- for light mode
-" set bg=dark
-" lua require("colorbuddy").colorscheme("gruvbox", 'dark')
 " colorscheme zephyr
 
 colorscheme gruvbox
