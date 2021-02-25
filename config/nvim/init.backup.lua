@@ -16,7 +16,9 @@ local notifs = require "notifications"
 -- local packerCfg =
 local packer = require "packer"
 local use = packer.use
-packer.init()
+packer.init({
+-- compile_path
+})
 
 function file_exists(name)
    local f=io.open(name,"r")
@@ -174,13 +176,15 @@ if has_telescope then
 		prompt_prefix = ">",
 		selection_strategy = "reset",
 		sorting_strategy = "descending",
+		-- horizontal, vertical, center, flex
 		layout_strategy = "horizontal",
 		layout_defaults = {
 		-- TODO add builtin options.
 		},
 		file_sorter =  require'telescope.sorters'.get_fuzzy_file,
 		file_ignore_patterns = {},
-		generic_sorter =  require'telescope.sorters'.get_generic_fuzzy_sorter,
+		-- get_generic_fuzzy_sorter not very good, doesn't select an exact match
+		generic_sorter =  require'telescope.sorters'.get_fzy_sorter,
 		shorten_path = true,
 		winblend = 0,
 		width = 0.75,

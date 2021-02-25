@@ -5,10 +5,14 @@ add_newline = false
 # prompt_order = 
 
 [aws]
-disabled = true
+disabled = false
 # displayed_items
+# format = "on [$symbol$profile]($style) "
 symbol = "🅰 "
 displayed_items = "region"
+# [aws.region_aliases]
+# ap-southeast-2 = "au"
+# us-east-1 = "va"
 
 # Replace the "❯" symbol in the prompt with "➜"
 [character]      # The name of the module we are confguring is "character"
@@ -24,7 +28,7 @@ disabled = false
 use_name = true
 # style = "bold red"
 impure_msg = "IMPURE"
-pure_msg = "pure shell"
+pure_msg = "PURE"
 
 [kubernetes]
 disabled = true
@@ -41,8 +45,12 @@ symbol = "+ "
 threshold = 4
 
 
+# https://starship.rs/config/#cmake
 [cmd_duration]
-min_time = 4
+# in milliseconds
+min_time = 2_000
+show_notifications = true
+min_time_to_notify = 10_000
 # prefix = "underwent "
 
 [golang]
