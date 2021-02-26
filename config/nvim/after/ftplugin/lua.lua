@@ -1,2 +1,2 @@
--- 
-print('astronauta works !!')
+-- it works
+-- print('astronauta works !!')

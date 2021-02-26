@@ -98,7 +98,6 @@ in
     extraPackages = with pkgs; [
       rust-analyzer
       haskellPackages.hasktags
-      # black         # should only appear in python-based installs
       # luaPackages.lua-lsp
       nodePackages.bash-language-server
       # nodePackages.dockerfile-language-server-nodejs # broken

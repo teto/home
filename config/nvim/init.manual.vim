@@ -102,12 +102,15 @@ set exrc
 
 " VIM-PLUG PLUGIN DECLARATIONS {{{1
 call plug#begin(s:plugdir)
+" Plug 'wbthomason/packer.nvim'
+Plug '~/packer.nvim'
 Plug 'mjlbach/neovim-ui'
 Plug 'glepnir/lspsaga.nvim'
 " Plug 'lewis6991/gitsigns.nvim'  " same as vim-signify but lua
 Plug 'kshenoy/vim-signature' " display marks in gutter, love it
 " Plug 'mhinz/vim-signify'  " *
 
+" todo move to plug
 Plug 'google/vim-maktaba' " required by vim-bazel
 Plug 'bazelbuild/vim-bazel'
 
@@ -133,12 +136,6 @@ Plug 'diepm/vim-rest-console' " test rest APIs
 
 " Plug 'RishabhRD/popfix' " to manage underlying popup and previews
 " Plug 'RishabhRD/nvim-lsputils' " for lsp codeactions
-Plug 'nvim-lua/popup.nvim'  " mimic vim's popupapi for neovim
-Plug 'nvim-lua/plenary.nvim'  " lua utilities for neovim
-Plug 'nvim-lua/telescope.nvim'
-" Plug '~/telescope.nvim'    " fzf-like in lua
-Plug 'nvim-telescope/telescope-github.nvim'
-Plug 'nvim-telescope/telescope-symbols.nvim'
 " Plug 'Xuyuanp/scrollbar.nvim'  " :h Scrollbar.nvim
 
 " annotations plugins {{{
@@ -213,7 +210,6 @@ let g:vim_search_pulse_mode = 'cursor_line'
 let g:vim_search_pulse_duration = 400
 "}}}
 
-Plug 'pwntester/octo.nvim'  " to work with github
 " Plug 'glacambre/shelley'
 Plug 'dbakker/vim-projectroot' " projectroot#guess()
 " Plug 'sunaku/vim-dasht' " get documentation (zeavim is also a contender KabbAmine/zeavim.vim)
@@ -2154,6 +2150,7 @@ map <RightMouse>  <Cmd>call quickui#context#open(content, quick_opts)<CR>
 " Doesn't seem to work
 " luafile stdpath('config').'/init.lua'
 " luafile ~/.config/nvim/init.lua
+" lua require'packer'.init()
 luafile ~/.config/nvim/init.backup.lua
 
 " hi lspdiagnosticsunderlinewarning gui=NONE

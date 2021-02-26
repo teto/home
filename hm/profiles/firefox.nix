@@ -41,7 +41,6 @@ in
       })
        nur.repos.rycee.firefox-addons.browserpass
 #        nur.repos.rycee.firefox-addons.browserpass-otp
-       nur.repos.rycee.firefox-addons.dark-night-mode
        # nur.repos.rycee.firefox-addons.tree-style-tabs  # not in his nur repo
 #        nur.repos.rycee.firefox-addons.gesturefy
     ];

@@ -8,14 +8,11 @@
 local has_telescope, telescope = pcall(require, "telescope")
 local has_gitsigns, gitsigns = pcall(require, "gitsigns")
 local has_compe, compe = pcall(require, "compe")
-local notifs = require "notifications"
-
--- Only required if you have packer in your `opt` pack
--- vim.cmd [[packadd packer.nvim]]
 
 -- local packerCfg =
 local packer = require "packer"
 local use = packer.use
+
 packer.init({
 -- compile_path
 })
@@ -26,9 +23,12 @@ function file_exists(name)
 end
 
 -- TODOsource if it exists
-local generated_init = "~/.config/nvim/init.generated.lua"
+-- 
+local generated_init = vim.fn.stdpath('config').."/init.generated.lua"
+-- print(generated_init)
 if file_exists(generated_init) then
-	vim.cmd.luafile( generated_init)
+	-- for some reason it doesn't work
+	-- vim.cmd ('luafile '..generated_init..' ')
 end
 
 -- use { 'haorenW1025/completion-nvim', opt = true,
@@ -50,7 +50,15 @@ end
 -- use { 'romgrk/nvim-treesitter-context',
 -- 	requires = { 'nvim-treesitter/nvim-treesitter' }
 -- }
-
+-- Packer can manage itself as an optional plugin
+-- use {'wbthomason/packer.nvim', opt = true}
+use { 'nvim-lua/popup.nvim'  }  -- mimic vim's popupapi for neovim
+use { 'nvim-lua/plenary.nvim' } -- lua utilities for neovim
+use { 'nvim-lua/telescope.nvim' }
+-- Plug '~/telescope.nvim'    -- fzf-like in lua
+use { 'nvim-telescope/telescope-github.nvim' }
+use { 'nvim-telescope/telescope-symbols.nvim' }
+use {'nvim-telescope/telescope-fzy-native.nvim'}
 -- use "terrortylor/nvim-comment"
 -- shows a lightbulb where a codeAction is available
 use { 'kosayoda/nvim-lightbulb' }
@@ -60,6 +68,11 @@ use { 'nvim-telescope/telescope-packer.nvim' }
 use { 'wfxr/minimap.vim' }
 -- 	'nvim-treesitter/completion-treesitter' " extension of completion-nvim,
 -- use { 'nvim-treesitter/nvim-treesitter' }
+use { 'pwntester/octo.nvim',
+	requires = { 'nvim-lua/popup.nvim' }
+
+}  -- to work with github
+
 use {
 	'nvim-treesitter/playground',
 	requires = { 'nvim-treesitter/nvim-treesitter' }
@@ -89,9 +102,9 @@ local nnoremap = k.nnoremap
 nnoremap { "<Leader>o", function () vim.cmd("FzfFiles") end}
 nnoremap { "<Leader>g", function () vim.cmd("FzfGitFiles") end}
 nnoremap { "<Leader>F", function () vim.cmd("FzfFiletypes") end}
+nnoremap { "<Leader>t", function () require'telescope.builtin'.tags{} end }
 -- replace with telescope
 -- nnoremap { "<Leader>t", function () vim.cmd("FzfTags") end}
-nnoremap { "<Leader>t", function () require'telescope.builtin'.tags{} end }
 -- nnoremap <Leader>h <Cmd>FzfHistory<CR>
 -- nnoremap <Leader>c <Cmd>FzfCommits<CR>
 -- nnoremap <Leader>C <Cmd>FzfColors<CR>
@@ -145,65 +158,79 @@ if has_telescope then
 	-- telescope.load_extension('ghcli')
 	local actions = require('telescope.actions')
 	telescope.setup{
-	defaults = {
-		mappings = {
-			i = {
-				-- -- To disable a keymap, put [map] = false
-				-- -- So, to not map "<C-n>", just put
-				-- ["<c-x>"] = false,
-				-- -- Otherwise, just set the mapping to the function that you want it to be.
-				-- ["<C-i>"] = actions.goto_file_selection_split,
-				-- -- Add up multiple actions
-				-- ["<CR>"] = actions.goto_file_selection_edit + actions.center,
-				-- -- You can perform as many actions in a row as you like
-				-- ["<CR>"] = actions.goto_file_selection_edit + actions.center + my_cool_custom_action,
-				["<esc>"] = actions.close
+		defaults = {
+			mappings = {
+				i = {
+					-- -- To disable a keymap, put [map] = false
+					-- -- So, to not map "<C-n>", just put
+					-- ["<c-x>"] = false,
+					-- -- Otherwise, just set the mapping to the function that you want it to be.
+					-- ["<C-i>"] = actions.goto_file_selection_split,
+					-- -- Add up multiple actions
+					-- ["<CR>"] = actions.goto_file_selection_edit + actions.center,
+					-- -- You can perform as many actions in a row as you like
+					-- ["<CR>"] = actions.goto_file_selection_edit + actions.center + my_cool_custom_action,
+					["<esc>"] = actions.close
+				},
+				n = {
+					["<esc>"] = actions.close
+				},
 			},
-			n = {
-				["<esc>"] = actions.close
+			vimgrep_arguments = {
+			'rg',
+			'--color=never',
+			'--no-heading',
+			'--with-filename',
+			'--line-number',
+			'--column',
+			'--smart-case'
 			},
-		},
-		vimgrep_arguments = {
-		'rg',
-		'--color=never',
-		'--no-heading',
-		'--with-filename',
-		'--line-number',
-		'--column',
-		'--smart-case'
-		},
-		prompt_position = "bottom",
-		prompt_prefix = ">",
-		selection_strategy = "reset",
-		sorting_strategy = "descending",
-		-- horizontal, vertical, center, flex
-		layout_strategy = "horizontal",
-		layout_defaults = {
-		-- TODO add builtin options.
-		},
-		file_sorter =  require'telescope.sorters'.get_fuzzy_file,
-		file_ignore_patterns = {},
-		-- get_generic_fuzzy_sorter not very good, doesn't select an exact match
-		generic_sorter =  require'telescope.sorters'.get_fzy_sorter,
-		shorten_path = true,
-		winblend = 0,
-		width = 0.75,
-		preview_cutoff = 120,
-		results_height = 1,
-		results_width = 0.8,
-		border = {},
-		-- borderchars = { '─', '│', '─', '│', '╭', '╮', '╯', '╰'},
-		color_devicons = true,
-		-- use_less = true,
-		-- file_previewer = require'telescope.previewers'.cat.new, -- For buffer previewer use `require'telescope.previewers'.vim_buffer_cat.new`
-		grep_previewer = require'telescope.previewers'.vimgrep.new, -- For buffer previewer use `require'telescope.previewers'.vim_buffer_vimgrep.new`
-		qflist_previewer = require'telescope.previewers'.qflist.new, -- For buffer previewer use `require'telescope.previewers'.vim_buffer_qflist.new`
+			prompt_position = "bottom",
+			prompt_prefix = ">",
+			selection_strategy = "reset",
+			sorting_strategy = "descending",
+			-- horizontal, vertical, center, flex
+			layout_strategy = "horizontal",
+			layout_defaults = {
+			-- TODO add builtin options.
+			},
+			file_ignore_patterns = {},
+			-- get_generic_fuzzy_sorter not very good, doesn't select an exact match
+			-- get_fzy_sorter
+			-- https://github.com/nvim-telescope/telescope.nvim#sorters
+			-- generic_sorter =  require'telescope.sorters'.get_levenshtein_sorter,
+			generic_sorter =  require'telescope.sorters'.get_generic_fuzzy_sorter,
+			file_sorter =  require'telescope.sorters'.get_fuzzy_file,
+			shorten_path = true,
+			winblend = 0,
+			width = 0.75,
+			preview_cutoff = 120,
+			results_height = 1,
+			results_width = 0.8,
+			border = {},
+			-- borderchars = { '─', '│', '─', '│', '╭', '╮', '╯', '╰'},
+			color_devicons = true,
+			-- use_less = true,
+			-- file_previewer = require'telescope.previewers'.cat.new, -- For buffer previewer use `require'telescope.previewers'.vim_buffer_cat.new`
+			grep_previewer = require'telescope.previewers'.vimgrep.new, -- For buffer previewer use `require'telescope.previewers'.vim_buffer_vimgrep.new`
+			qflist_previewer = require'telescope.previewers'.qflist.new, -- For buffer previewer use `require'telescope.previewers'.vim_buffer_qflist.new`
 
-		-- Developer configurations: Not meant for general override
-		buffer_previewer_maker = require'telescope.previewers'.buffer_previewer_maker
+			-- Developer configurations: Not meant for general override
+			buffer_previewer_maker = require'telescope.previewers'.buffer_previewer_maker
+		},
+		extensions = {
+			fzy_native = {
+				override_generic_sorter = false,
+				override_file_sorter = true,
+			}
+		}
 	}
-	}
+	-- This will load fzy_native and have it override the default file sorter
+	require('telescope').load_extension('fzy_native')
 	telescope.load_extension("frecency")
+
+	-- TODO add autocmd
+	-- User TelescopePreviewerLoaded
 end
 --}}}
 -- nvim-comment {{{
@@ -284,9 +311,10 @@ if has_compe then
 end
 
 -- hack
+local has_notifs, notifs = pcall(require, "notifications")
+
 vim.lsp.notifier = notifs
 
--- if we are running my fork that has vim.notify
 if vim.notify then
 	vim.notify = notifs.notify_external
 end
