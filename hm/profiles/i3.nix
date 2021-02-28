@@ -183,7 +183,6 @@ in
       # };
 
       focus.followMouse = false;
-      # pango:
       fonts = [ "FontAwesome 12" "Terminus 10" ];
       bars = [
         {
@@ -191,8 +190,6 @@ in
           workspaceButtons=true;
           workspaceNumbers=false;
           id="0";
-
-          # command="";
           statusCommand="${i3pystatus-custom}/bin/i3pystatus-python-interpreter $XDG_CONFIG_HOME/i3/myStatus.py";
         }
       ];

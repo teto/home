@@ -1994,7 +1994,8 @@ hi CursorLine                    guibg=#293739 guifg=None
 
 " highlight NormalFloat guibg=#1d2019
 " taken from SignColumn
-highlight NormalFloat guibg=#3c3836
+" highlight NormalFloat guibg=#3c3836
+highlight NormalFloat guibg=grey
 " highlight NormalFloat cterm=NONE ctermfg=14 ctermbg=0 gui=NONE guifg=#93a1a1 guibg=#002931
 
 " taken from justinmk's config

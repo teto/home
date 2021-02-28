@@ -4,6 +4,7 @@ let
     stable = import <nixos> {};
 in
 {
+  programs.pywal.enable = true;
 
   home.packages = with pkgs; [
     hakuneko

@@ -17,7 +17,11 @@ in
       ./profiles/weechat.nix
   ];
 
-  programs.pywal.enable = true;
+
+  programs.pazi = {
+    enable = true;
+    enableZshIntegration = true;
+  };
 
   xsession.windowManager.i3 = {
     enable = true;

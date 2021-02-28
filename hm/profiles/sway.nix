@@ -48,8 +48,21 @@ in
 
     #       focus_wrapping force
 
+      # set_from_resource $bg           i3wm.color0 #ff0000
+      # set_from_resource $bg-alt       i3wm.color14 #ff0000
+      # set_from_resource $fg           i3wm.color15 #ff0000
+      # set_from_resource $fg-alt       i3wm.color2 #ff0000
+      # set_from_resource $hl           i3wm.color13 #ff0000
+
+    # https://github.com/dylanaraps/pywal/blob/master/pywal/templates/colors-sway
+    # TODO
     extraConfig = ''
       smart_gaps yes
+      set $bg           {bg}
+      set $bg-alt       {bg-alt}
+      set $fg           i3wm.color15 #ff0000
+      set $fg-alt       i3wm.color2 #ff0000
+      set $hl           i3wm.color13 #ff0000
     '';
   };
 

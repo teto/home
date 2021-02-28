@@ -140,9 +140,6 @@ status.register("battery",
 #  format_up="{essid} {quality:03.0f}%",)
 
 
-# Shows pulseaudio default sink volume
-# Note: requires libpulseaudio from PyPI
-#status.register("pulseaudio",   format="♪{volume}",)
 
 # status.register(
 #     "mpd",
@@ -155,30 +152,8 @@ status.register("battery",
 # on_rightclick=['termite', '-e', 'ncmpcpp']
 # )
 
-#print("mdp on_lclick", mpd);
-
 # alsa = status.register("alsa", mixer="Headphone", format="")
 dpms = status.register("dpms", format="")
-
-# alsa = status.register("alsa",
-#         on_leftclick=[my_term, '-e', 'alsamixer']
-#         )
-
-# status.register("updates",
-#                 format = "Updates: {count}",
-#                 format_working = "In progress",
-#                 format_no_updates = "No updates",
-#                 # on_leftclick=["urxvtc", '-e', 'zsh' , '-c' , 'sudo apt upgrade; zsh'],
-#                 on_rightclick="run",
-#                 backends = [aptget.AptGet()],
-#                 # log_level=logging.DEBUG
-#                 )
-
-
-
-# status.register("rofication", 
-#          log_level=logging.DEBUG,
-#         )
 
 # '~/.config/khal/config'
 # status.register("calendar",  backend=Khal(config_path=None,
@@ -212,16 +187,16 @@ res = status.register(
     log_level=logging.DEBUG
 )
 
-# res = status.register("github",
-#         username="teto",
-#         interval=300,
-#         # #password="placeholder",
-#         # format="Github {unread} {unread_count}",
-#          # keyring_backend="netrc",
-#          # keyring_backend=keyring.backend.netrc,
-#         # keyring_backend=backend.netrcbackend,
-#          log_level=logging.DEBUG,
-        # )
+res = status.register("github",
+        username="teto",
+        interval=300,
+        # #password="placeholder",
+        # format="Github {unread} {unread_count}",
+         # keyring_backend="netrc",
+         # keyring_backend=keyring.backend.netrc,
+        # keyring_backend=backend.netrcbackend,
+         log_level=logging.DEBUG,
+        )
 
 # #print("result:", res)
 # # res.on_leftclick()

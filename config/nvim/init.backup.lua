@@ -54,6 +54,7 @@ end
 use { 'nvim-lua/popup.nvim'  }  -- mimic vim's popupapi for neovim
 use { 'nvim-lua/plenary.nvim' } -- lua utilities for neovim
 use { 'nvim-lua/telescope.nvim' }
+-- use { 'lukas-reineke/indent-blankline.nvim', branch = "lua" }
 -- Plug '~/telescope.nvim'    -- fzf-like in lua
 use { 'nvim-telescope/telescope-github.nvim' }
 use { 'nvim-telescope/telescope-symbols.nvim' }
@@ -151,6 +152,11 @@ end
 -- local has_neogit, neogit = pcall(require, 'neogit')
 -- use with neogit.status.create(<kind>)
 
+
+-- blankline  {{{
+-- let g:indent_blankline_char = '|'
+-- }}}
+
 -- telescope {{{
 -- TODO check for telescope github extension too
 if has_telescope then
@@ -219,13 +225,13 @@ if has_telescope then
 		},
 		extensions = {
 			fzy_native = {
-				override_generic_sorter = false,
+				override_generic_sorter = true,
 				override_file_sorter = true,
 			}
 		}
 	}
 	-- This will load fzy_native and have it override the default file sorter
-	require('telescope').load_extension('fzy_native')
+	telescope.load_extension('fzy_native')
 	telescope.load_extension("frecency")
 
 	-- TODO add autocmd
