@@ -23,7 +23,6 @@ function file_exists(name)
 end
 
 -- TODOsource if it exists
--- 
 local generated_init = vim.fn.stdpath('config').."/init.generated.lua"
 -- print(generated_init)
 if file_exists(generated_init) then
@@ -201,7 +200,7 @@ if has_telescope then
 			-- generic_sorter =  require'telescope.sorters'.get_levenshtein_sorter,
 			generic_sorter =  require'telescope.sorters'.get_generic_fuzzy_sorter,
 			file_sorter =  require'telescope.sorters'.get_fuzzy_file,
-			shorten_path = true,
+			shorten_path = false,
 			winblend = 0,
 			width = 0.75,
 			preview_cutoff = 120,
@@ -321,9 +320,9 @@ end
 
 
 -- options to pass to goto_next/goto_prev
-local goto_opts = {
-	severity_limit = "Warning"
-}
+-- local goto_opts = {
+-- 	severity_limit = "Warning"
+-- }
 
 -- showLineDiagnostic is a wrapper around show_line_diagnostics
 -- show_line_diagnostics calls open_floating_preview

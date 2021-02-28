@@ -7,7 +7,7 @@ in
   # https://github.com/rycee/home-manager/pull/829
 
   wayland.windowManager.sway = {
-    # enable = true;
+    enable = true;
     systemdIntegration = true;
 
     # eventually start foot --server

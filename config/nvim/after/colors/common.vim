@@ -1,2 +1,2 @@
 
-hi CursorLine    guifg=None
+" hi CursorLine    guifg=None

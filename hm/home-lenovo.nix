@@ -50,8 +50,8 @@ in
     # $HOME/.local/share/Zeal/Zeal/docsets
   };
 
+  #     xrandr --output DVI-I-1 --primary
   xsession.initExtra = ''
-    xrandr --output DVI-I-1 --primary
   '';
 
   # fzf-extras found in overlay fzf-extras

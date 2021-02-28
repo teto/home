@@ -18,6 +18,7 @@
 , xorg_sys_opengl
 , libglvnd
 , freeglut
+, patchelf
 
 , expat
 , openssl
@@ -33,6 +34,20 @@
 }:
 let
   skia = callPackage ./skia.nix {};
+  # https://github.com/Kethku/neovide/issues/465
+  rpathLibs = [
+    libglvnd
+    freeglut
+    freeglut.dev
+    freetype
+
+    vulkan-loader
+    xlibs.libXcursor
+    xlibs.libXrandr
+    xorg.libXi
+    fontconfig
+  ];
+  # patchelf --set-rpath "${lib.makeLibraryPath rpathLibs}" $out/bin/alacritty
 in rustPlatform.buildRustPackage rec {
   pname = "neovide";
   version = "0.6.0";
@@ -69,32 +84,35 @@ in rustPlatform.buildRustPackage rec {
     rustc
     python
     vulkan-tools
+    patchelf
     # xlibs.libXcursor
   ] ++ (with llvmPackages_latest; [
     clang
     llvm
   ]);
   buildInputs = [
-    fontconfig
     skia
     expat
     openssl
-    freetype
     SDL2
     vulkan-loader
     xlibs.libXcursor
     xlibs.libXrandr
     xorg.libXi
+    # freetype
+    # fontconfig
     # xorg_sys_opengl
-    libglvnd
-    freeglut
-    freeglut.dev
+    # libglvnd
+    # freeglut
+    # freeglut.dev
   ];
 
 
   # :${xlibs.libXcursor}/lib"
+  #     export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:${vulkan-loader}/lib"
   shellHook = ''
-    export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:${vulkan-loader}/lib"
+
+    echo 'patchelf --set-rpath "${lib.makeLibraryPath rpathLibs}" target/debug/neovide'
   '';
 }
 

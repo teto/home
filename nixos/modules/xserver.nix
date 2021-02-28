@@ -12,21 +12,21 @@
   # Enable the X11 windowing system.
   services.xserver = {
     enable = true;
-    autorun = false;
+    autorun =true;
 
     displayManager = {
       autoLogin = {
         enable = true;
         user = "teto";
       };
-      defaultSession = "none+fake";
+      defaultSession = "none+i3";
       # https://discourse.nixos.org/t/opening-i3-from-home-manager-automatically/4849/11
-      session =
-        let fakeSession = { manage = "window";
-                            name = "fake";
-                            start = "";
-                          };
-        in [ fakeSession ];
+      # session =
+      #   let fakeSession = { manage = "window";
+      #                       name = "fake";
+      #                       start = "";
+      #                     };
+      #   in [ fakeSession ];
       # defaultSession = null;
       gdm = {
         wayland = true;
