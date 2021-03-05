@@ -6,7 +6,7 @@ let
     ln -s compile_commands.json ..
   '';
 
-  nvim-shell-dev = neovim-dev.overrideAttrs(oa: {
+  nvim-shell-dev = neovim-developer.overrideAttrs(oa: {
 
     cmakeBuildType="Debug";
 

@@ -12,7 +12,9 @@ in
     ./modules/desktop.nix
     ./modules/network-manager.nix
     ./modules/libvirtd.nix
-    ./modules/minio.nix
+    # ./modules/minio.nix
+    ./modules/redis.nix # for jinko
+    # ./modules/hoogle.nix
     # ./modules/vpn.nix
 
     ./modules/openssh.nix
@@ -99,8 +101,8 @@ in
   ];
 
   # DOES NOT WORK !
-  boot.kernelPackages = pkgs.linuxPackages_latest;
-  # boot.kernelPackages = pkgs.linuxPackages;
+  # boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_mptcp_95;
   # boot.kernelPackages = pkgs.linuxPackages;
   # boot.kernelPackages = pkgs.linuxPackages_testing;
 

@@ -131,7 +131,6 @@ lspconfig.hls.setup({
 	-- message_level = vim.lsp.protocol.MessageType.Warning,
 	-- init_options = {
 	settings = {
-		-- languageServerHaskell = {
 		haskell = {
 			completionSnippetsOn = false,
 			formattingProvider = "stylish-haskell",

@@ -3,6 +3,7 @@
   services.hoogle = {
     enable = true;
     port = 9999;
+    # haskellPackages = pkgs.haskellPackages;
     packages = hs: with hs; [
       # Package ‘servant-db-postgresql-0.2.2.0’ in /home/teto/nixpkgs/pkgs/development/haskell-modules/hackage-packages.nix:221613 is marked as broken, refusing to evaluate.
       # bson  # broken too
@@ -10,11 +11,11 @@
       # servant-db-postgresql
       Frames
       aeson
-      amazonka # broken
-      amazonka-s3
-      directory
+      # amazonka # broken
+      # amazonka-s3
+      # directory
       foldl
-      haskeline
+      # haskeline
       http-api-data
       http-media   # Network.HTTP.Media 
       ip  # broken

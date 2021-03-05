@@ -54,7 +54,7 @@ end
 use { 'nvim-lua/popup.nvim'  }  -- mimic vim's popupapi for neovim
 use { 'nvim-lua/plenary.nvim' } -- lua utilities for neovim
 use { 'nvim-lua/telescope.nvim' }
--- use { 'lukas-reineke/indent-blankline.nvim', branch = "lua" }
+use { 'lukas-reineke/indent-blankline.nvim', branch = "lua", opt=true}
 -- Plug '~/telescope.nvim'    -- fzf-like in lua
 use { 'nvim-telescope/telescope-github.nvim' }
 use { 'nvim-telescope/telescope-symbols.nvim' }
@@ -227,6 +227,14 @@ if has_telescope then
 			fzy_native = {
 				override_generic_sorter = true,
 				override_file_sorter = true,
+			},
+			frecency = {
+			      workspaces = {
+					["home"]    = "/home/teto/home",
+					["data"]    = "/home/teto/neovim",
+					["jinko"] = "/home/teto/jinko",
+					-- ["wiki"]    = "/home/my_username/wiki"
+				}
 			}
 		}
 	}

@@ -1488,8 +1488,8 @@ let g:completion_chain_complete_list = {
 
 "   'triggered_only': ['.', '::', '->', '_']
 
-imap  <c-j> <Plug>(completion_next_source)
-imap  <c-k> <Plug>(completion_prev_source)
+" imap  <c-j> <Plug>(completion_next_source)
+" imap  <c-k> <Plug>(completion_prev_source)
 
 " hello world"
 let g:completion_confirm_key = "\<C-y>"
@@ -1655,6 +1655,8 @@ endfunction
 " lspsaga {{{
 " nnoremap <silent><leader>ca <cmd>lua require('lspsaga.codeaction').code_action()<CR>
 command! LspSagaAction lua vim.lsp.buf.code_action()
+
+hi LspFloatWinBorder guibg=red
 
 " vnoremap <silent><leader>ca <cmd>'<,'>lua require('lspsaga.codeaction').range_code_action()<CR>
 " nnoremap <silent><leader>ca :LspSagaCodeAction<CR>
