@@ -51,6 +51,8 @@ end
 -- }
 -- Packer can manage itself as an optional plugin
 -- use {'wbthomason/packer.nvim', opt = true}
+
+-- use { 'glepnir/lspsaga.nvim' }  -- builds on top of neovim lsp
 use { 'nvim-lua/popup.nvim'  }  -- mimic vim's popupapi for neovim
 use { 'nvim-lua/plenary.nvim' } -- lua utilities for neovim
 use { 'nvim-lua/telescope.nvim' }
@@ -352,8 +354,8 @@ function showLineDiagnostic ()
 		};
 	}
 	-- return vim.lsp.diagnostic.show_line_diagnostics()
-	-- vim.lsp.diagnostic.goto_prev {wrap = true }
-	return require'lspsaga.diagnostic'.show_line_diagnostics()
+	vim.lsp.diagnostic.goto_prev {wrap = true }
+	-- return require'lspsaga.diagnostic'.show_line_diagnostics()
 
 end
 

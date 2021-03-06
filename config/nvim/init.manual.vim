@@ -105,7 +105,7 @@ call plug#begin(s:plugdir)
 " Plug 'wbthomason/packer.nvim'
 Plug '~/packer.nvim'
 Plug 'mjlbach/neovim-ui'
-Plug 'glepnir/lspsaga.nvim'
+" Plug 'glepnir/lspsaga.nvim'
 " Plug 'lewis6991/gitsigns.nvim'  " same as vim-signify but lua
 Plug 'kshenoy/vim-signature' " display marks in gutter, love it
 " Plug 'mhinz/vim-signify'  " *
@@ -412,7 +412,7 @@ let g:did_install_default_menus = 1  " avoid stupid menu.vim (saves ~100ms)
 
 " start scrolling before reaching end of screen in order to keep more context
 " set it to a big value
-" set scrolloff=3
+set scrolloff=2
 
 " Indentation {{{
 set tabstop=4 " a tab takes 4 characters (local to buffer) abrege en ts
@@ -1084,11 +1084,6 @@ let g:signify_sign_delete       = '▎'
 let g:signify_sign_change       = '▎'
 let g:signify_sign_changedelete = '▎'
 
-" let g:signify_sign_add =  "▊"
-" let g:signify_sign_delete            = g:signify_sign_add
-" " " let g:signify_sign_delete_first_line = '‾'
-" let g:signify_sign_change            = g:signify_sign_add
-" let g:signify_sign_changedelete      = g:signify_sign_change
 let g:signify_sign_show_count= 0
 " master
 
@@ -1110,18 +1105,6 @@ let g:signify_update_on_focusgained = 1
 " nmap <leader>sk <plug>(signify-prev-hunk)
 
 " }}}
-" Tips from vim-galore {{{
-
-" to alternate between header and source file
-" autocmd BufLeave *.{c,cpp} mark C
-" autocmd BufLeave *.h       mark H
-
-" Don't lose selection when shifting sidewards
-"xnoremap <  <gv
-"xnoremap >  >gv
-" todo do the same for .Xresources ?
-
-" }}}
 " vim-signature {{{
 " :SignatureListMarkers         : List all markers
 let g:SignatureMarkTextHLDynamic=0
@@ -1133,17 +1116,6 @@ let g:SignaturePeriodicRefresh=1
 " riv restdown config {{{
 let g:riv_disable_folding=1
 let g:riv_disable_indent=0
-" }}}
-" quickhl (similar to interesting words) {{{
-" nmap <Space>m <Plug>(quickhl-manual-this)
-" xmap <Space>m <Plug>(quickhl-manual-this)
-" nmap <Space>M <Plug>(quickhl-manual-reset)
-" xmap <Space>M <Plug>(quickhl-manual-reset)
-" }}}
-" vim-halo (to show cursor) {{{
-" disabled cause creating pb for now
-" nnoremap <silent> <Esc> :<C-U>call halo#run()<CR>
-" nnoremap <silent> <C-c> :<C-U>call halo#run()<CR><C-c>
 " }}}
 " nvimdev {{{
 " call nvimdev#init("path/to/neovim")
@@ -1275,16 +1247,6 @@ let g:tagbar_show_linenumbers= 1
 " vim-open-url {{{
 let g:open_url_browser_default="qutebrowser"
 "}}}
-" qfgrep {{{
-" <Leader>g to filter entries (user will be asked for pattern) works only in
-" location list/quickfix similar to :QFGrep
-" <Leader>r to restore original quickfix entires.
-let g:QFG_hi_error = 'ctermbg=167 ctermfg=16 guibg=#d75f5f guifg=black'
-"}}}
-" location list / quickfix config {{{
-" location list can be associated with only one window.
-" The location list is independent of the quickfix list.
-" }}}
 " iron.nvim {{{
 " cp = repeat the previous command
 " ctr send a chunk of text with motion
@@ -1663,9 +1625,14 @@ hi LspFloatWinBorder guibg=red
 " vnoremap <silent><leader>ca :'<,'>LspSagaRangeCodeAction<CR>
 
 " }}}
-
+" aniseed {{{
+let g:aniseed#env = v:true
+" lua require('aniseed.env').init()
+" }}}
 
 set hidden " you can open a new buffer even if current is unsaved (error E37)
+
+
 " draw a line on 80th column
 set colorcolumn=80,100
 

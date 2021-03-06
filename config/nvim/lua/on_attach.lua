@@ -2,7 +2,7 @@ local M = {}
 
 -- external plugins to have some nice features
 local has_completion, plug_completion = pcall(require, "completion")
-local lspsaga = require '_lspsaga'
+-- local lspsaga = require '_lspsaga'
 local has_lspsaga, lspsaga = pcall(require, 'lspsaga')
 local k = require"astronauta.keymap"
 local nnoremap = k.nnoremap
