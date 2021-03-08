@@ -1,0 +1,1 @@
+  hi DiffDelete guibg=red

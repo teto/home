@@ -4,6 +4,10 @@
   # for sharedssh access
   services.gvfs.enable = true;
 
+  imports = [
+    ./postgresql.nix
+  ];
+
   nix = {
     binaryCaches = [
       "s3://devops-ci-infra-prod-caching-nix?region=eu-central-1&profile=nix-daemon"

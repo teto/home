@@ -1030,7 +1030,7 @@ vnoremap <leader>rg  <Cmd>Grepper -tool rg -open -switch<CR>
   set fillchars+=msgsep:‾
   set fillchars+=diff:\ 
   hi MsgSeparator ctermbg=black ctermfg=white
-  hi DiffDelete guibg=red
+  " hi DiffDelete guibg=red
 
   set fdc=auto:2
   " set to 2 to check if that's why with nvim-treesitter, syntax gets disabled

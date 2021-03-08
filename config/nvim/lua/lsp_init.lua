@@ -95,25 +95,33 @@ lspconfig.yamlls.setup{}
 
 -- you can configure pyright via a pyrightconfig.json too
 -- https://github.com/microsoft/pyright/blob/cf1a5790d2105ac60dd3378a46725519d14b2844/docs/configuration.md
+-- https://github.com/microsoft/pyright/blob/master/docs/configuration.md
 lspconfig.pyright.setup{
-	cmd = {"pyright-langserver", "--stdio"};
-	filetypes = {"python"};
+	-- cmd = {"pyright-langserver", "--stdio"};
+	-- filetypes = {"python"};
 	autostart = false; -- This is the important new option
 	root_dir = lspconfig.util.root_pattern(".git", "setup.py",  "setup.cfg", "pyproject.toml", "requirements.txt");
 	on_attach=attach_cb.on_attach,
-	-- settings = {
-	-- 	python = {
-	-- 		analysis = {
+	settings = {
+		python = {
+			analysis = {
 	-- 			autoSearchPaths= true;
 	-- 			diagnosticMode = 'workspace';
-	-- 			typeCheckingMode = 'strict';
-	-- 		};
-	-- 	};
-	-- 	pyright = {
-	-- 		useLibraryCodeForTypes = true;
-	-- 		disableOrganizeImports = true;
-	-- 	};
-	-- };
+				useLibraryCodeForTypes = true;
+				typeCheckingMode = 'off'; -- 'off', 'basic', 'strict'
+				reportUnusedVariable = false;
+				disableOrganizeImports = true;
+				reportConstantRedefinition = true;
+				-- diagnosticSeverityOverrides = {
+				-- 	reportUnusedImport = "warning";
+				-- };
+			};
+		};
+		pyright = {
+			disableOrganizeImports = true;
+			reportUnusedVariable = false;
+		};
+	};
 }
 
 lspconfig.hls.setup({

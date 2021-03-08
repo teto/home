@@ -107,6 +107,7 @@ in
       pythonPackages.pdftotext  # should appear only in RC ?
       rnix-lsp
       sumneko-lua-language-server
+      shellcheck
       yaml-language-server
     ];
 
