@@ -110,8 +110,11 @@ lspconfig.pyright.setup{
 				useLibraryCodeForTypes = true;
 				typeCheckingMode = 'off'; -- 'off', 'basic', 'strict'
 				reportUnusedVariable = false;
+				reportUnusedFunction = false;
+				reportUnusedClass = false;
 				disableOrganizeImports = true;
 				reportConstantRedefinition = true;
+				-- reportUnknownParameterType
 				-- diagnosticSeverityOverrides = {
 				-- 	reportUnusedImport = "warning";
 				-- };
