@@ -5,12 +5,13 @@ end
 
 config.config = config.setup {
     highlight = {
-        enable = false,                    -- false will disable the whole extension
+        enable = true,                    -- false will disable the whole extension
         disable = {
 			'rust',
 			'bash',
+			'nix',
 			-- 'c',
-			-- 'lua' -- cos breaks
+			'lua' -- cos breaks
 		},        -- list of language that will be disabled
     },
 --     incremental_selection = {
@@ -39,12 +40,12 @@ config.config = config.setup {
 --     },
 --     ensure_installed = {"c"}, -- one of 'all', 'language', or a list of languages
 
--- 	playground = {
--- 		enable = true,
--- 		disable = {},
--- 		updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
--- 		persist_queries = false -- Whether the query persists across vim sessions
-	-- }
+	playground = {
+		enable = true,
+		disable = {},
+		updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
+		persist_queries = false -- Whether the query persists across vim sessions
+	}
 }
 -- return config.config
 

@@ -1,7 +1,6 @@
 highlight Comment gui=italic
 highlight SignifySignChange cterm=bold ctermbg=237  ctermfg=227 guibg=#F08A1F
-
-
+hi NormalFloat guibg=#3B3735
 " guifg=#465457 guibg=#232526
 " TODO should be less obvious
 " hi LineNr guifg=#FD971F

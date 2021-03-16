@@ -55,12 +55,14 @@ end
 -- use { 'glepnir/lspsaga.nvim' }  -- builds on top of neovim lsp
 use { 'nvim-lua/popup.nvim'  }  -- mimic vim's popupapi for neovim
 use { 'nvim-lua/plenary.nvim' } -- lua utilities for neovim
-use { 'nvim-lua/telescope.nvim' }
+-- use { 'nvim-lua/telescope.nvim' }
+use { '~/telescope.nvim' }
 use { 'lukas-reineke/indent-blankline.nvim', branch = "lua", opt=true}
 -- Plug '~/telescope.nvim'    -- fzf-like in lua
 use { 'nvim-telescope/telescope-github.nvim' }
 use { 'nvim-telescope/telescope-symbols.nvim' }
 use {'nvim-telescope/telescope-fzy-native.nvim'}
+use { 'nvim-telescope/telescope-media-files.nvim'}
 -- use "terrortylor/nvim-comment"
 -- shows a lightbulb where a codeAction is available
 use { 'kosayoda/nvim-lightbulb' }
@@ -70,6 +72,7 @@ use { 'nvim-telescope/telescope-packer.nvim' }
 use { 'wfxr/minimap.vim' }
 -- 	'nvim-treesitter/completion-treesitter' " extension of completion-nvim,
 -- use { 'nvim-treesitter/nvim-treesitter' }
+use { '~/nvim-treesitter' }
 use { 'pwntester/octo.nvim',
 	requires = { 'nvim-lua/popup.nvim' }
 
@@ -88,6 +91,13 @@ use { 'notomo/gesture.nvim' }
 -- use { 'svermeulen/vimpeccable'} -- broken ?
 use { 'tjdevries/astronauta.nvim' }
 use { 'npxbr/gruvbox.nvim', requires = {"rktjmp/lush.nvim"} }
+use { 'onsails/lspkind-nvim' }
+use { 'phaazon/hop.nvim', opt=true }
+
+-- for live editing
+-- use { 'jbyuki/instant.nvim' }
+-- use { 'jbyuki/nabla.nvim' } -- write latex equations in ASCII
+-- use { 'jbyuki/monolithic.nvim' } -- write latex equations in ASCII
 
 vim.g.indicator_errors = ''
 vim.g.indicator_warnings = ''
@@ -105,6 +115,7 @@ nnoremap { "<Leader>o", function () vim.cmd("FzfFiles") end}
 nnoremap { "<Leader>g", function () vim.cmd("FzfGitFiles") end}
 nnoremap { "<Leader>F", function () vim.cmd("FzfFiletypes") end}
 nnoremap { "<Leader>t", function () require'telescope.builtin'.tags{} end }
+nnoremap { "<Leader>C", function () require'telescope.builtin'.colorscheme{} end }
 -- replace with telescope
 -- nnoremap { "<Leader>t", function () vim.cmd("FzfTags") end}
 -- nnoremap <Leader>h <Cmd>FzfHistory<CR>
@@ -211,7 +222,7 @@ if has_telescope then
 			shorten_path = false,
 			winblend = 0,
 			width = 0.75,
-			preview_cutoff = 120,
+			-- preview_cutoff = 120,
 			results_height = 1,
 			results_width = 0.8,
 			border = {},

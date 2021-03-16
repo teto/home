@@ -128,7 +128,11 @@ lspconfig.pyright.setup{
 }
 
 lspconfig.hls.setup({
-    cmd = { "haskell-language-server", "--lsp" },
+    cmd = {
+		-- "haskell-language-server",
+		"/home/teto/nixpkgs2/result/bin/haskell-language-server-wrapper"
+		, "--lsp"
+	},
     filetypes = { "haskell", "lhaskell" },
     root_dir = lspconfig.util.root_pattern(
 		"*.cabal"
@@ -150,6 +154,9 @@ lspconfig.hls.setup({
 		-- "codeLens.enable": true,
 			hlintOn = false
 		}
+	},
+	flags = {
+		allow_incremental_sync = false;
 	}
 })
 

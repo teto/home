@@ -247,6 +247,24 @@ in
         #   "Return" = ''mode "default"'';
         #   "Escape" = ''mode "default"'';
         # };
+
+        # i3resurrect parts
+        saveworkspace = {
+            "1" = "exec $i3_resurrect save -w 1";
+            "2" = "exec $i3_resurrect save -w 2";
+            "3" = "exec $i3_resurrect save -w 3";
+            "4" = "exec $i3_resurrect save -w 4";
+            "5" = "exec $i3_resurrect save -w 5";
+            "6" = "exec $i3_resurrect save -w 6";
+            "7" = "exec $i3_resurrect save -w 7";
+            "8" = "exec $i3_resurrect save -w 8";
+            "9" = "exec $i3_resurrect save -w 9";
+            "0" = "exec $i3_resurrect save -w 0";
+
+            # Back to normal: Enter, Escape, or s
+            "Return" = ''mode "default"'';
+            "Escape" = ''mode "default"'';
+        };
       };
 
       window = {

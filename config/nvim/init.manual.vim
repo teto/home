@@ -73,7 +73,7 @@ set cpoptions-=_
 
 " mouse {{{
 set mouse=a
-set mousemodel=popup
+set mousemodel=popup_setpos
 " }}}
 let mapleader = " "
 let maplocalleader = ","
@@ -1065,7 +1065,7 @@ nnoremap <leader>pu <Cmd>PlugUpdate<CR>
 " }}}
 " signify (display added/removed lines from vcs) {{{
 let g:signify_vcs_list = [ 'git']
-let g:signify_priority = 1000
+let g:signify_priority = 0
 " let g:signify_mapping_next_hunk = '<leader>hn' " hunk next
 " let g:signify_mapping_prev_hunk = '<leader>gk'
 " let g:signify_mapping_toggle_highlight = '<leader>gh'
@@ -1511,7 +1511,7 @@ let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %
 " nnoremap <Leader>F <Cmd>FzfFiletypes<CR>
 " nnoremap <Leader>h <Cmd>FzfHistory<CR>
 nnoremap <Leader>c <Cmd>FzfCommits<CR>
-nnoremap <Leader>C <Cmd>FzfColors<CR>
+" nnoremap <Leader>C <Cmd>FzfColors<CR>
 nnoremap <leader>b <Cmd>FzfBuffers<CR>
 nnoremap <leader>m <Cmd>FzfMarks<CR>
 nnoremap <leader>l <Cmd>FzfLines<CR>
@@ -2079,6 +2079,7 @@ nnoremap <2-LeftMouse> <cmd>lua vim.lsp.buf.definition()<cr>
 
 " quickui {{{
 " https://github.com/skywind3000/vim-quickui
+" TODO should be printed only if available
 let g:quickui_border_style = 1
 let content = [
             \ ["&Help Keyword\t\\ch", 'echo 100' ],
@@ -2096,6 +2097,7 @@ let content = [
             \ ["&Outgoing calls\\ci", 'lua vim.lsp.buf.outgoing_calls()'],
             \ ["&Signature help\\ci", 'lua vim.lsp.buf.signature_help()'],
             \ ["&Workspace symbol\\cw", 'lua vim.lsp.buf.workspace_symbol()'],
+            \ ["&Rename\\cw", 'lua vim.lsp.buf.rename()'],
             \ ["&Code action\\cw", 'lua vim.lsp.buf.code_action()'],
             \ ['- LSP '],
             \ ["&Documentation\t\\cm", 'echo 600'],

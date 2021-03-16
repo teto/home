@@ -8,16 +8,18 @@
 # try xconfig
 # see https://nixos.wiki/wiki/Linux_Kernel for xconfig example
 
+alias nvim-dev="nix develop --override-input nixpkgs /home/teto/nixpkgs --no-write-lock-file ./contrib#neovim-developer  --show-trace"
+
 # nix aliases {{{
 
 # no
 alias nixos-fast="nixos-rebuild  --no-build-nix --fast"
 
 # todo fix completion accordingly
-alias nxi="nix-env -iA"
-alias nxu="nix-env -e"
-alias nxs="nix-shell"
-alias nxp="nixops "
+# alias nxi="nix-env -iA"
+# alias nxu="nix-env -e"
+# alias nxs="nix-shell"
+# alias nxp="nixops "
 
 # rename mptcp ?
 alias mp="mptcpanalyzer"
@@ -28,7 +30,7 @@ alias n="nix-shell"
 # alias ff="find . -iname" # use fd instead
 alias latest="ls -lt $@ |head"
 
-# alias :q="exit"
+alias :q="exit"
 #}}}
 
 function rfw(){
