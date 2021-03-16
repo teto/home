@@ -5,7 +5,7 @@ add_newline = false
 # prompt_order = 
 
 [aws]
-disabled = false
+disabled = true
 # displayed_items
 # format = "on [$symbol$profile]($style) "
 symbol = "🅰 "

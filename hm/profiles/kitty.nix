@@ -11,7 +11,7 @@
 
       font_size = 12;
       url_style = "curly";
-
+enable_audio_bell = false;
     };
     extraConfig = ''
       include ./manual.conf

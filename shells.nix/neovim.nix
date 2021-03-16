@@ -6,14 +6,10 @@ let
     ln -s compile_commands.json ..
   '';
 
-  nvim-shell-dev = neovim-developer.overrideAttrs(oa: {
-
-    cmakeBuildType="Debug";
+  nvim-shell-dev = pkgs.neovim-developer.overrideAttrs(oa: {
 
     cmakeFlags = oa.cmakeFlags ++ [
-      "-DMIN_LOG_LEVEL=0"
       "-DENABLE_LTO=OFF"
-      "-DUSE_BUNDLED=OFF"
       # ''-DCMAKE_C_FLAGS=-gdwarf-2'' #  -g3
       # useful to
       # https://github.com/google/sanitizers/wiki/AddressSanitizerFlags
@@ -28,10 +24,6 @@ let
       pkgs.llvm_11  # for llvm-symbolizer
       # pkgs.valgrind
     ];
-
-    buildInputs = oa.buildInputs ++ ([
-      tree-sitter
-    ]);
 
     shellHook = oa.shellHook + ''
       export NVIM_PYTHON_LOG_LEVEL=DEBUG

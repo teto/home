@@ -127,10 +127,13 @@ lspconfig.pyright.setup{
 	};
 }
 
+-- typescript
+lspconfig.tsserver.setup({ })
+
 lspconfig.hls.setup({
     cmd = {
-		-- "haskell-language-server",
-		"/home/teto/nixpkgs2/result/bin/haskell-language-server-wrapper"
+		"haskell-language-server"
+		-- "/home/teto/nixpkgs2/result/bin/haskell-language-server-wrapper"
 		, "--lsp"
 	},
     filetypes = { "haskell", "lhaskell" },

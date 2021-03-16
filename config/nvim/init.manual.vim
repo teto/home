@@ -1626,7 +1626,7 @@ hi LspFloatWinBorder guibg=red
 
 " }}}
 " aniseed {{{
-let g:aniseed#env = v:true
+" let g:aniseed#env = v:true
 " lua require('aniseed.env').init()
 " }}}
 
@@ -2130,3 +2130,4 @@ luafile ~/.config/nvim/init.backup.lua
 " set foldmethod=
 
 command Hasktags !hasktags .
+set mousemodel=popup_setpos

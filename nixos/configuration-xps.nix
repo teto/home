@@ -7,6 +7,7 @@ in
     ./modules/config-all.nix
     ./modules/desktop.nix
     ./modules/sway.nix
+    ./modules/syncthing.nix
     ./profiles/steam.nix
     # ./modules/docker-daemon.nix
 

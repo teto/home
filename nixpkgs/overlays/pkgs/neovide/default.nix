@@ -6,6 +6,7 @@
 , lib
 
 , cmake
+, cacert
 , pkgconfig
 , fontconfig
 , cargo
@@ -30,7 +31,6 @@
 , zlib
 , SDL2
 , vulkan-loader
-, cacert
 }:
 let
   skia = callPackage ./skia.nix {};

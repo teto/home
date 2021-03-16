@@ -96,18 +96,19 @@ in
 
     # TODO add lsp stuff
     extraPackages = with pkgs; [
-      rust-analyzer
-      haskellPackages.hasktags
       # luaPackages.lua-lsp
-      nodePackages.bash-language-server
       # nodePackages.dockerfile-language-server-nodejs # broken
-      nodePackages.pyright
-      pandoc  # for markdown preview, should be in the package closure instead
+      haskellPackages.hasktags
       jq
+      nodePackages.bash-language-server
+      nodePackages.pyright
+      nodePackages.typescript-language-server
+      pandoc  # for markdown preview, should be in the package closure instead
       pythonPackages.pdftotext  # should appear only in RC ?
       rnix-lsp
-      sumneko-lua-language-server
+      rust-analyzer
       shellcheck
+      sumneko-lua-language-server
       yaml-language-server
     ];
 
