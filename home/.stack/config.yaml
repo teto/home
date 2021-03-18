@@ -13,8 +13,11 @@ templates:
 #    copyright:
 #    github-username:
 
+# https://github.com/commercialhaskell/stack/issues/4864
 nix:
-    enable: true
+    enable: false
+docker:
+    enable: false
 
 allow-newer: true
 

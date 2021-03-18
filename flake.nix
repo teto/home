@@ -76,16 +76,6 @@
     in {
 
       nixosConfigurations = let
-        # novaHmConfig = [
-        #       nova.hmProfiles.standard
-        #       nova.hmProfiles.dev
-        #     ]
-        #     ++ [
-        #       ({ config, lib, pkgs, ... }: {
-        #         # home-manager.users.teto = nova.hmProfiles.user;
-        #       })
-        #   ]
-        #   ;
       in
         {
           mcoudron = nixpkgs-teto.lib.nixosSystem {

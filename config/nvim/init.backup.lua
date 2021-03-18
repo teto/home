@@ -93,6 +93,7 @@ use { 'tjdevries/astronauta.nvim' }
 use { 'npxbr/gruvbox.nvim', requires = {"rktjmp/lush.nvim"} }
 use { 'onsails/lspkind-nvim' }
 use { 'phaazon/hop.nvim', opt=true }
+use { 'alec-gibson/nvim-tetris'}
 
 -- for live editing
 -- use { 'jbyuki/instant.nvim' }
@@ -116,6 +117,7 @@ nnoremap { "<Leader>g", function () vim.cmd("FzfGitFiles") end}
 nnoremap { "<Leader>F", function () vim.cmd("FzfFiletypes") end}
 nnoremap { "<Leader>t", function () require'telescope.builtin'.tags{} end }
 nnoremap { "<Leader>C", function () require'telescope.builtin'.colorscheme{} end }
+nnoremap { "<Leader>f", function () require('telescope').extensions.frecency.frecency() end }
 -- replace with telescope
 -- nnoremap { "<Leader>t", function () vim.cmd("FzfTags") end}
 -- nnoremap <Leader>h <Cmd>FzfHistory<CR>

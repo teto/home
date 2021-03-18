@@ -97,10 +97,11 @@ in
     # TODO add lsp stuff
     extraPackages = with pkgs; [
       # luaPackages.lua-lsp
-      # nodePackages.dockerfile-language-server-nodejs # broken
       haskellPackages.hasktags
       jq
       nodePackages.bash-language-server
+      nodePackages.bash-language-server
+      nodePackages.dockerfile-language-server-nodejs # broken
       nodePackages.pyright
       nodePackages.typescript-language-server
       pandoc  # for markdown preview, should be in the package closure instead
@@ -162,9 +163,9 @@ in
           let g:far#collapse_result=1
         '';
       }
-      {
-        plugin = telescope-nvim;
-      }
+      # {
+      #   plugin = telescope-nvim;
+      # }
       {
         plugin = telescope-frecency-nvim;
       }

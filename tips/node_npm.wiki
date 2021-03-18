@@ -2,6 +2,8 @@
 https://nixos.wiki/wiki/Node.js
 npm set prefix ~/.npm-global
 
+npmjs.org
+
 checkPermissions Missing write access to /home/teto/nova/jinko-shiny/node_modules/npm/node_modules/abbrev
 
 https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally

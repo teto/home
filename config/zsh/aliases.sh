@@ -10,6 +10,8 @@
 
 alias nvim-dev="nix develop --override-input nixpkgs /home/teto/nixpkgs --no-write-lock-file ./contrib#neovim-developer  --show-trace"
 
+alias notif-center="kill -s USR1 $(pidof deadd-notification-center)"
+
 # nix aliases {{{
 
 # no
