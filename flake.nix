@@ -120,8 +120,7 @@
                   # ./hm/profiles/vscode.nix #  provided by nova-nix config
                   ./hm/profiles/experimental.nix
               ])
-            ]
-            ;
+            ];
           };
 
           jedha = nixpkgs-teto.lib.nixosSystem {
@@ -156,7 +155,7 @@
       #   (self: prev: { });
 
       overlays = {
-        # pkgs = import ./nixpkgs/overlays/pkgs/default.nix;
+        local = import ./nixpkgs/overlays/pkgs/default.nix;
         overrides = import ./nixpkgs/overlays/overrides.nix;
         haskell = import ./nixpkgs/overlays/haskell.nix;
         neovim = import ./nixpkgs/overlays/neovim.nix;
@@ -179,7 +178,8 @@
       packages."${system}" = {
         dce = nixpkgs.callPackage ./pkgs/dce {};
 
-        dig = nixpkgs.bind.dnsutils;
+        # aws-lambda-rie = self.overlays.local.aws-lambda-rie ;
+        aws-lambda-rie = nixpkgs.callPackage ./pkgs/aws-lambda-runtime-interface-emulator {};
 
         # python3Packages
         # i3-dispatch = nixpkgs.python3Packages.callPackage ./nipkgs/pkgs/pkgs/i3-dispatch {};

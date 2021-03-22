@@ -1,10 +1,11 @@
 final: prev:
 {
+  aws-lambda-rie = final.callPackage ./aws-lambda-runtime-interface-emulator {};
 
-  # not upstreamed yet
-  myHelm = final.wrapHelm final.kubernetes-helm {
-    plugins = with final.kubernetes-helmPlugins; [ helm-s3 helm-secrets helm-diff ];
-  };
+  # upstreamed already
+  # myHelm = final.wrapHelm final.kubernetes-helm {
+  #   plugins = with final.kubernetes-helmPlugins; [ helm-s3 helm-secrets helm-diff ];
+  # };
 
 
   buku_run = prev.stdenv.mkDerivation rec {
