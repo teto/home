@@ -88,7 +88,7 @@ blog: | $(BLOG_FOLDER)
 $(BLOG_FOLDER):
 	git clone gitolite@iij_vm:blog.git "${BLOG_FOLDER}"
 
-vim_plugins:
+vimPlugins:
 	# /home/teto/nixpkgs/pkgs/misc/vim-plugins/update.py
 	~/nixpkgs/pkgs/misc/vim-plugins/update.py -i config/nixpkgs/overlays/vim-plugins/vim-plugin-names -o config/nixpkgs/overlays/vim-plugins/generated.nix
 

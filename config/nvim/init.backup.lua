@@ -66,10 +66,11 @@ use { 'nvim-telescope/telescope-media-files.nvim'}
 -- use "terrortylor/nvim-comment"
 -- shows a lightbulb where a codeAction is available
 use { 'kosayoda/nvim-lightbulb' }
+-- compete with registers.nvim
 use { 'gennaro-tedesco/nvim-peekup' }
 use { 'nvim-telescope/telescope-packer.nvim' }
 -- use { 'TimUntersberger/neogit' }
-use { 'wfxr/minimap.vim' }
+-- use { 'wfxr/minimap.vim' }
 -- 	'nvim-treesitter/completion-treesitter' " extension of completion-nvim,
 -- use { 'nvim-treesitter/nvim-treesitter' }
 use { '~/nvim-treesitter' }
@@ -94,6 +95,11 @@ use { 'npxbr/gruvbox.nvim', requires = {"rktjmp/lush.nvim"} }
 use { 'onsails/lspkind-nvim' }
 use { 'phaazon/hop.nvim', opt=true }
 use { 'alec-gibson/nvim-tetris'}
+use { 'mfussenegger/nvim-dap'}
+use { 'bazelbuild/vim-bazel' , requires = { 'google/vim-maktaba' } }
+
+-- use fzf to search through diagnostics
+use { 'ojroques/nvim-lspfuzzy'}
 
 -- for live editing
 -- use { 'jbyuki/instant.nvim' }

@@ -19,6 +19,7 @@ buildPythonApplication rec {
 
   src = builtins.fetchGit {
     url = https://github.com/teto/i3-dispatch.git;
+    rev = "8f7213a05a4f6d91424a5ab604e0f97f05f16aa8";
   };
 
 

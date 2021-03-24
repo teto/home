@@ -4,3 +4,6 @@ https://docs.aws.amazon.comserverless-application-model/latest/developerguide/se
 
 sam build -t lambda
 sam deploy --guided
+
+
+docker pull amazon/aws-lambda-provided

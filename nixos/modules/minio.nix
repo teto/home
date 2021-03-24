@@ -4,6 +4,7 @@ let
 in
 {
 
+  # TODO disable autostart
   # dont forget to create the buckets.
   # with minio client:
   # mc mb local/jinko-test
@@ -17,7 +18,7 @@ in
     # enableGarbageCollect = true;
     # garbageCollectDates
     listenAddress = "0.0.0.0:10000";  # 9000 is the default but already used by the platform
-    # region = 
+    # region =
     secretKey = "testtesttest";
   };
 }

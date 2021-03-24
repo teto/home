@@ -102,21 +102,18 @@ set exrc
 
 " VIM-PLUG PLUGIN DECLARATIONS {{{1
 call plug#begin(s:plugdir)
+Plug 'DanilaMihailov/beacon.nvim'
 " Plug 'wbthomason/packer.nvim'
-Plug '~/packer.nvim'
-Plug 'mjlbach/neovim-ui'
+Plug '~/packer.nvim' " because of abug
+" Plug 'mjlbach/neovim-ui'
+Plug '~/neovim-ui'
 " Plug 'glepnir/lspsaga.nvim'
 " Plug 'lewis6991/gitsigns.nvim'  " same as vim-signify but lua
 Plug 'kshenoy/vim-signature' " display marks in gutter, love it
 " Plug 'mhinz/vim-signify'  " *
 
-" todo move to plug
-Plug 'google/vim-maktaba' " required by vim-bazel
-Plug 'bazelbuild/vim-bazel'
-
 Plug 'tjdevries/colorbuddy.nvim' " required by some colorscheme
-" Plug 'ojroques/nvim-lspfuzzy' " to complement lsp
-Plug 'jbyuki/contextmenu.nvim' "
+Plug 'jbyuki/contextmenu.nvim' " deprecated
 " Plug 'kyazdani42/nvim-tree.lua' " to solve crash
 " Plug 'Yggdroot/indentLine'
 " Plug 'RRethy/vim-illuminate' " to highlight similar words
@@ -125,7 +122,7 @@ Plug 'jbyuki/contextmenu.nvim' "
 " Plug 'akinsho/nvim-bufferline.lua'
 
 " , { 'tag': 'v3.12.0' }
-Plug 'Olical/aniseed'
+Plug 'Olical/aniseed' " dependency of ?
 Plug 'bakpakin/fennel.vim'
 Plug 'strboul/urlview.vim' " :Urlview to list urls and open them
 Plug 'diepm/vim-rest-console' " test rest APIs
@@ -148,7 +145,7 @@ Plug 'MattesGroeger/vim-bookmarks' " ruby  / :BookmarkAnnotate
 " Plug 'AGhost-7/critiq.vim' " :h critiq
 " Plug 'thaerkh/vim-workspace'  " :ToggleWorkspace
 
-Plug 'skywind3000/vim-quickui'
+Plug 'skywind3000/vim-quickui' " to design cool uis
 Plug 'liuchengxu/vista.vim' " replaces tagbar to list workplace symbols
 " Plug 'neovim/nvim-lspconfig' " while fuzzing details out
 Plug '~/nvim-lspconfig' " while fuzzing details out
@@ -1617,7 +1614,6 @@ endfunction
 " lspsaga {{{
 " nnoremap <silent><leader>ca <cmd>lua require('lspsaga.codeaction').code_action()<CR>
 command! LspSagaAction lua vim.lsp.buf.code_action()
-
 hi LspFloatWinBorder guibg=red
 
 " vnoremap <silent><leader>ca <cmd>'<,'>lua require('lspsaga.codeaction').range_code_action()<CR>
@@ -1628,6 +1624,18 @@ hi LspFloatWinBorder guibg=red
 " aniseed {{{
 " let g:aniseed#env = v:true
 " lua require('aniseed.env').init()
+" }}}
+" beacon.nvim (to show cursor) {{{
+" let g:beacon_enable = 0
+let g:beacon_size = 80
+let g:beacon_shrink = 0
+" let g:beacon_show_jumps = 0
+"}}}
+" luadev (a repl for nvim) {{{
+" map 5 <Plug>(Luadev-RunLine)
+" vmap 5 <Plug>(Luadev-Run)
+map <Leader>lr <Plug>(Luadev-RunLine)
+map <Leader>ll <Plug>(Luadev-RunLine)
 " }}}
 
 set hidden " you can open a new buffer even if current is unsaved (error E37)
@@ -1701,7 +1709,6 @@ map <Leader>$ <Cmd>Obsession<CR>
 
 "http://stackoverflow.com/questions/28613190/exclude-quickfix-buffer-from-bnext-bprevious
 
-map <Leader>lr <Plug>(Luadev-RunLine)
 
 " spell config {{{
 " todo better if it could be parsable
@@ -1971,18 +1978,6 @@ highlight NormalFloat guibg=grey
 command! Tags !ctags -R --exclude='build*' --exclude='.vim-src/**' --exclude='venv/**' --exclude='**/site-packages/**' --exclude='data/**' --exclude='dist/**' --exclude='notebooks/**' --exclude='Notebooks/**' --exclude='*graphhopper_data/*.json' --exclude='*graphhopper/*.json' --exclude='*.json' --exclude='qgis/**' *
 
 
-function! Show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    lua vim.lsp.buf.hover()
-    " let g:res = luaeval('vim.lsp.buf.hover()')
-    " if g:res == v:false && &ft == "haskell"
-		" execute '!hoogle '.expand('<cword>')
-	" endif
-  endif
-endfunction
-
 " extmark helper {{{
 function! CreateVisualExtmark()
 
@@ -2102,6 +2097,8 @@ let content = [
             \ ['- LSP '],
             \ ["&Documentation\t\\cm", 'echo 600'],
             \ ]
+" map 2 <cmd>lua vim.lsp.buf.code_action()
+
 " formatting_sync
 " set cursor to the last position
 let quick_opts = {'index':g:quickui#context#cursor}
@@ -2119,10 +2116,8 @@ map <RightMouse>  <Cmd>call quickui#context#open(content, quick_opts)<CR>
 
 " unmap Y
 "
-" Doesn't seem to work
 " luafile stdpath('config').'/init.lua'
 " luafile ~/.config/nvim/init.lua
-" lua require'packer'.init()
 luafile ~/.config/nvim/init.backup.lua
 
 " hi lspdiagnosticsunderlinewarning gui=NONE

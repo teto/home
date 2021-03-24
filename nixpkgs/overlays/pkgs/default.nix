@@ -1,6 +1,5 @@
 final: prev:
 {
-  aws-lambda-rie = final.callPackage ./aws-lambda-runtime-interface-emulator {};
 
   # upstreamed already
   # myHelm = final.wrapHelm final.kubernetes-helm {

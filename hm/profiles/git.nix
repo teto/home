@@ -12,13 +12,13 @@ in
 	includes = [
 	  { path = config.xdg.configHome + "/git/config.inc"; }
 	];
-
     # https://git-scm.com/book/en/v2/Git-Tools-Signing-Your-Work
     signing = {
       signByDefault = false;
       key = "64BB6787";
     };
     extraConfig = {
+      init.defaultBranch = "main";
 # git config core.sshCommand "ssh -vvv"
       # useful when merging from kernel
       checkout = { defaultRemote="upstream"; };
