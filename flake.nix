@@ -135,6 +135,7 @@
               # often breaks
               # (import ./nixos/modules/hoogle.nix)
               hm.nixosModules.home-manager
+              nova.nixosProfiles.dev
 
               # TODO use from flake or from unstable
               # (import ./nixos/modules/mptcp.nix)

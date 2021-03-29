@@ -102,7 +102,8 @@ set exrc
 
 " VIM-PLUG PLUGIN DECLARATIONS {{{1
 call plug#begin(s:plugdir)
-Plug 'DanilaMihailov/beacon.nvim'
+Plug 'DanilaMihailov/beacon.nvim'  " blinks line when cursor jumps to a new far location
+Plug 'eugen0329/vim-esearch' " search & replace
 " Plug 'wbthomason/packer.nvim'
 Plug '~/packer.nvim' " because of abug
 " Plug 'mjlbach/neovim-ui'
@@ -114,7 +115,7 @@ Plug 'kshenoy/vim-signature' " display marks in gutter, love it
 
 Plug 'tjdevries/colorbuddy.nvim' " required by some colorscheme
 Plug 'jbyuki/contextmenu.nvim' " deprecated
-" Plug 'kyazdani42/nvim-tree.lua' " to solve crash
+Plug 'kyazdani42/nvim-tree.lua' " to solve crash NvimTreeToggle
 " Plug 'Yggdroot/indentLine'
 " Plug 'RRethy/vim-illuminate' " to highlight similar words
 " Plug 'kyazdani42/nvim-web-devicons' " Recommended (for coloured icons)

@@ -27,4 +27,8 @@
     enable = false;
   };
 
+  services.chrony = {
+    enable = true;
+  };
+
 }
