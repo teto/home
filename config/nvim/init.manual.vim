@@ -103,6 +103,7 @@ set exrc
 " VIM-PLUG PLUGIN DECLARATIONS {{{1
 call plug#begin(s:plugdir)
 Plug 'DanilaMihailov/beacon.nvim'  " blinks line when cursor jumps to a new far location
+Plug 'jubnzv/virtual-types.nvim'
 Plug 'eugen0329/vim-esearch' " search & replace
 " Plug 'wbthomason/packer.nvim'
 Plug '~/packer.nvim' " because of abug

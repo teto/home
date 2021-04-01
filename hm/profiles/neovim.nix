@@ -45,6 +45,14 @@ let
     '';
   };
 
+
+  extraPlugins = [
+    # https://github.com/vmchale/dhall-vim.git
+    dhall-vim
+    # {
+    # }
+  ];
+
   myPackage = pkgs.neovim-debug;
   # .overrideAttrs(oa: {
   #   cmakeBuildType="Debug";
