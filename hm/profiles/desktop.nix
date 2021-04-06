@@ -25,7 +25,6 @@ let
     editorconfig-core-c
     exa  # to list files
     gdb
-    git-review # to contribute to wireshark
 
     gitAndTools.diff-so-fancy # todo install it via the git config instead
     gitAndTools.gitbatch   # to fetch form several repos at once

@@ -32,7 +32,7 @@ in
   programs.feh.enable = true;
 
   home.packages = with pkgs; [
-    steam-run
+    # steam-run
   ];
 
   # hum...
