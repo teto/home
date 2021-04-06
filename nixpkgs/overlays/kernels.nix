@@ -136,6 +136,14 @@ in rec {
 
   linux_mptcp_trunk_dev = addMenuConfig linux_mptcp_trunk_raw ;
 
+  # doesn't work as expected yet
+  # now enabled by default
+  # linux_mptcp_official = pkgs.linux_latest.override {
+  #   structuredExtraConfig = with lib.kernel; {
+  #     MPTCP      = yes;
+  #     MPTCP_IPV6 = yes;
+  #   };
+  # };
 
   # see https://nixos.wiki/wiki/Linux_Kernel
   # linux_mptcp_trunk = (prev.linuxManualConfig {

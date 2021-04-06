@@ -46,7 +46,7 @@ let
   };
 
 
-  extraPlugins = [
+  extraPlugins = with pkgs.vimPlugins;[
     # https://github.com/vmchale/dhall-vim.git
     dhall-vim
     # {

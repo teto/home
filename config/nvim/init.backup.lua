@@ -33,8 +33,7 @@ end
 -- use { 'haorenW1025/completion-nvim', opt = true,
 -- requires = {{'hrsh7th/vim-vsnip', opt = true}, {'hrsh7th/vim-vsnip-integ', opt = true}}
 -- }
--- use {
--- 	"nvim-telescope/telescope-frecency.nvim",
+-- use { "~/telescope-frecency.nvim", }
 -- 	requires = {
 -- 		{'hrsh7th/vim-vsnip', opt = true},
 -- 		-- {'tami5/sql.nvim', opt = false}
@@ -71,23 +70,11 @@ use { 'gennaro-tedesco/nvim-peekup' }
 use { 'nvim-telescope/telescope-packer.nvim' }
 -- use { 'TimUntersberger/neogit' }
 -- use { 'wfxr/minimap.vim' }
--- 	'nvim-treesitter/completion-treesitter' " extension of completion-nvim,
--- use { 'nvim-treesitter/nvim-treesitter' }
-use { '~/nvim-treesitter' }
 use { 'pwntester/octo.nvim',
 	requires = { 'nvim-lua/popup.nvim' }
 
 }  -- to work with github
 
-use {
-	'nvim-treesitter/playground',
-	requires = { 'nvim-treesitter/nvim-treesitter' }
-}
-use {
-	'p00f/nvim-ts-rainbow',
-	requires = { 'nvim-treesitter/nvim-treesitter' }
-}
-use { 'nvim-treesitter/nvim-treesitter-textobjects' }
 use { 'notomo/gesture.nvim' }
 -- use { 'svermeulen/vimpeccable'} -- broken ?
 use { 'tjdevries/astronauta.nvim' }
@@ -123,7 +110,9 @@ nnoremap { "<Leader>g", function () vim.cmd("FzfGitFiles") end}
 nnoremap { "<Leader>F", function () vim.cmd("FzfFiletypes") end}
 nnoremap { "<Leader>t", function () require'telescope.builtin'.tags{} end }
 nnoremap { "<Leader>C", function () require'telescope.builtin'.colorscheme{} end }
-nnoremap { "<Leader>f", function () require('telescope').extensions.frecency.frecency() end }
+nnoremap { "<Leader>f", function () require('telescope').extensions.frecency.frecency({
+	query = "toto"
+}) end }
 -- replace with telescope
 -- nnoremap { "<Leader>t", function () vim.cmd("FzfTags") end}
 -- nnoremap <Leader>h <Cmd>FzfHistory<CR>
@@ -172,7 +161,23 @@ end
 
 -- local has_neogit, neogit = pcall(require, 'neogit')
 -- use with neogit.status.create(<kind>)
-
+-- Treesitter config {{{
+-- 	'nvim-treesitter/completion-treesitter' " extension of completion-nvim,
+-- use { 'nvim-treesitter/nvim-treesitter' }
+local enable_treesitter = false
+if enable_treesitter then
+	use { '~/nvim-treesitter' }
+	use {
+		'nvim-treesitter/playground',
+		requires = { 'nvim-treesitter/nvim-treesitter' }
+	}
+	use {
+		'p00f/nvim-ts-rainbow',
+		requires = { 'nvim-treesitter/nvim-treesitter' }
+	}
+	use { 'nvim-treesitter/nvim-treesitter-textobjects' }
+end
+--}}}
 
 -- blankline  {{{
 -- let g:indent_blankline_char = '|'

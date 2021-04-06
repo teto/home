@@ -51,12 +51,12 @@ let
   # patchelf --set-rpath "${lib.makeLibraryPath rpathLibs}" $out/bin/alacritty
 in rustPlatform.buildRustPackage rec {
   pname = "neovide";
-  version = "0.7.0";
+  version = "0.7.1";
   src = fetchFromGitHub {
     owner = "Kethku";
     repo = "neovide";
     rev = version;
-    sha256 = "sha256-G99rVRcm3ulkt+dlE8VMo0SQmHuuBqPyU7OSycpqrPo=";
+    sha256 = "sha256-tXf0wGYMbjmxbnUnUZZQ/mKaZiAPFNk56m5bQvbeeSM=";
     # lib.fakeSha256;
 
   };
@@ -74,7 +74,7 @@ in rustPlatform.buildRustPackage rec {
   #   )
   #   ./.;
   # cargoSha256 = "0qkililxcwjhsvk354ly0bz1gxfqa65ka66f3zri85n3gr9fr397";
-  cargoSha256 = "sha256-vOBgAlLkLw8VrDngdQJ8/pIDZq9vtgZIX7nFEJYhHL4=";
+  cargoSha256 = "sha256-R8JOwXp74X2tqSTm+/wT/D5gBiIRcLRV2R8+f9o5sOc=";
 
   SSL_CERT_FILE = "${cacert.out}/etc/ssl/certs/ca-bundle.crt";
   CURL_CA_BUNDLE = "${cacert.out}/etc/ssl/certs/ca-bundle.crt";

@@ -9,8 +9,10 @@
 # see https://nixos.wiki/wiki/Linux_Kernel for xconfig example
 
 alias nvim-dev="nix develop --override-input nixpkgs /home/teto/nixpkgs --no-write-lock-file ./contrib#neovim-developer  --show-trace"
-
 alias notif-center="kill -s USR1 $(pidof deadd-notification-center)"
+
+# Gitops quick
+alias mg='if [ -z ${BW_SESSION+x} ]; then export BW_SESSION=$(bw unlock --raw); fi && make gitops'
 
 # nix aliases {{{
 

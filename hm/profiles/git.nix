@@ -11,6 +11,12 @@ in
     userEmail = "mcoudron@hotmail.com";
 	includes = [
 	  { path = config.xdg.configHome + "/git/config.inc"; }
+     # everything under ~/yourworkfolder/ is company code, so use the other user/email/gpg key, etc
+      {
+        # path = ./resources/gitconfigwork;
+        path = config.xdg.configHome + "/git/config.inc";
+        condition = "gitdir:~/nova/";
+      }
 	];
     # https://git-scm.com/book/en/v2/Git-Tools-Signing-Your-Work
     signing = {
