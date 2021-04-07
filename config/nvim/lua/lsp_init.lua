@@ -44,6 +44,15 @@ end
 -- custom attach callback
 local attach_cb = require 'on_attach'
 
+-- override defaults for all servers
+lspconfig.util.default_config = vim.tbl_extend(
+	"force",
+	lspconfig.util.default_config,
+	{
+		on_attach=attach_cb.on_attach,
+
+	})
+
 -- explained at https://github.com/nvim-lua/diagnostic-nvim/issues/73
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
@@ -67,7 +76,6 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 
 lspconfig.sumneko_lua.setup{
   cmd = {"lua-language-server"};
-  on_attach=attach_cb.on_attach,
   settings = {
 	Lua = {
 		runtime = { version = "LuaJIT", path = vim.split(package.path, ';'), },
@@ -101,7 +109,7 @@ lspconfig.pyright.setup{
 	-- filetypes = {"python"};
 	autostart = false; -- This is the important new option
 	root_dir = lspconfig.util.root_pattern(".git", "setup.py",  "setup.cfg", "pyproject.toml", "requirements.txt");
-	on_attach=attach_cb.on_attach,
+	-- on_attach=attach_cb.on_attach,
 	settings = {
 		python = {
 			analysis = {
@@ -145,12 +153,12 @@ lspconfig.hls.setup({
 		, "hie.yaml"
 	),
 
-	on_attach=attach_cb.on_attach,
+	-- on_attach=attach_cb.on_attach,
 	-- message_level = vim.lsp.protocol.MessageType.Warning,
 	-- init_options = {
 	settings = {
 		haskell = {
-			completionSnippetsOn = false,
+			completionSnippetsOn = true,
 			formattingProvider = "stylish-haskell",
 		-- "haskell.trace.server": "messages",
 			logFile = "/tmp/nvim-hls.log",
@@ -227,7 +235,7 @@ lspconfig.clangd.setup({
 	};
 	filetypes = { "c", "cpp", "objc", "objcpp" },
 	-- log_level = vim.lsp.protocol.MessageType.Debug;
-	on_attach=attach_cb.on_attach,
+	-- on_attach=attach_cb.on_attach,
 --	-- 'build/compile_commands.json',
 --	root_dir = lspconfig.util.root_pattern( '.git'),
 --	-- mandated by lsp-status
