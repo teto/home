@@ -55,8 +55,8 @@ in rustPlatform.buildRustPackage rec {
   src = fetchFromGitHub {
     owner = "Kethku";
     repo = "neovide";
-    rev = version;
-    sha256 = "sha256-tXf0wGYMbjmxbnUnUZZQ/mKaZiAPFNk56m5bQvbeeSM=";
+    rev = "e1d8d404167f5c6d5471ce1404493eb1805e94d2";
+    sha256 = "sha256-j0NfzfaqRiFXE47gcPiv9AIBuzICrY/1YWjQ8TUm0RA=";
     # lib.fakeSha256;
 
   };

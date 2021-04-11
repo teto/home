@@ -102,7 +102,7 @@ set exrc
 
 " VIM-PLUG PLUGIN DECLARATIONS {{{1
 call plug#begin(s:plugdir)
-Plug 'DanilaMihailov/beacon.nvim'  " blinks line when cursor jumps to a new far location
+" Plug 'DanilaMihailov/beacon.nvim'  " blinks line when cursor jumps to a new far location
 Plug 'jubnzv/virtual-types.nvim'
 Plug 'andymass/vim-matchup' " to improve %
 Plug 'eugen0329/vim-esearch' " search & replace
@@ -162,7 +162,7 @@ Plug 'hotwatermorning/auto-git-diff' " to help rebasing, damn cool
 Plug '~/nvim-terminal.lua' " to display ANSI colors
 Plug 'bogado/file-line' " to open a file at a specific line
 Plug 'glacambre/firenvim' " to use nvim in firefox
-" Plug 'alok/notational-fzf-vim' " to take notes, :NV
+Plug 'alok/notational-fzf-vim' " to take notes, :NV
 " Plug 'iamcco/markdown-preview.nvim' " :MarkdownPreview
 Plug 'suy/vim-context-commentstring' " commen for current programming language
 " Plug 'voldikss/vim-translate-me' " floating windows for neovim
@@ -2047,6 +2047,9 @@ augroup highlight_yank
     autocmd TextYankPost * lua require'vim.highlight'.on_yank{higroup="IncSearch", timeout=1000}
 augroup END
 
+
+" toto
+command! OpenDiagnostics lua vim.lsp.diagnostic.set_loclist()
 
 command! OpenDiagnostics lua vim.lsp.diagnostic.set_loclist()
 " pb c'est qu'il l'autofocus

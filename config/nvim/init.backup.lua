@@ -52,6 +52,7 @@ end
 -- use {'wbthomason/packer.nvim', opt = true}
 
 -- use { 'glepnir/lspsaga.nvim' }  -- builds on top of neovim lsp
+use { 'edluffy/specs.nvim' }
 use { 'nvim-lua/popup.nvim'  }  -- mimic vim's popupapi for neovim
 use { 'nvim-lua/plenary.nvim' } -- lua utilities for neovim
 -- use { 'nvim-lua/telescope.nvim' }
@@ -355,7 +356,7 @@ if has_compe then
 end
 
 -- hack
-local has_notifs, notifs = pcall(require, "notifications")
+local _, notifs = pcall(require, "notifications")
 
 vim.lsp.notifier = notifs
 
@@ -363,7 +364,26 @@ if vim.notify then
 	vim.notify = notifs.notify_external
 end
 
-
+local has_specs, specs = pcall(require, 'specs')
+if has_specs then
+	specs.setup{
+		show_jumps  = true,
+		min_jump = 30,
+		popup = {
+			delay_ms = 0, -- delay before popup displays
+			inc_ms = 10, -- time increments used for fade/resize effects
+			blend = 10, -- starting blend, between 0-100 (fully transparent), see :h winblend
+			width = 10,
+			winhl = "PMenu",
+			fader = specs.linear_fader,
+			resizer = specs.shrink_resizer
+		},
+		ignore_filetypes = {},
+		ignore_buftypes = {
+			nofile = true,
+		},
+	}
+end
 -- options to pass to goto_next/goto_prev
 -- local goto_opts = {
 -- 	severity_limit = "Warning"
@@ -390,9 +410,11 @@ end
 
 -- to disable virtualtext check
 -- follow https://www.reddit.com/r/neovim/comments/f8u6fz/lsp_query/fip91ww/?utm_source=share&utm_medium=web2x
-vim.cmd [[autocmd CursorHold <buffer> lua showLineDiagnostic()]]
+-- vim.cmd [[autocmd CursorHold <buffer> lua showLineDiagnostic()]]
 -- vim.cmd [[autocmd CursorMoved <buffer> lua showLineDiagnostic()]]
-
-
+function lsp_show_all_diagnostics()
+	local all_diagnostics = vim.lsp.diagnostic.get_all()
+	vim.lsp.util.set_qflist(all_diagnostics)
+end
 vim.o.background = "dark" -- or "light" for light mode
 vim.cmd([[colorscheme gruvbox]])
