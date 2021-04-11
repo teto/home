@@ -53,7 +53,7 @@ in
        # enabled = "fcitx";
        # i18n.inputMethod.package
        fcitx.engines = with pkgs.fcitx-engines; [
-         # mozc  # broken
+         mozc  # broken
          table-other # for arabic
          table-extra # for arabic
          # hangul

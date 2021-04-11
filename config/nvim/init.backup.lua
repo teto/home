@@ -87,7 +87,7 @@ use { 'mfussenegger/nvim-dap'}
 use { 'bazelbuild/vim-bazel' , requires = { 'google/vim-maktaba' } }
 
 -- use fzf to search through diagnostics
-use { 'ojroques/nvim-lspfuzzy'}
+-- use { 'ojroques/nvim-lspfuzzy'}
 
 -- for live editing
 -- use { 'jbyuki/instant.nvim' }

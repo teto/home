@@ -15,6 +15,8 @@ in
       ./profiles/alot.nix
       ./profiles/extra.nix
       ./profiles/weechat.nix
+
+      ./profiles/fcitx.nix
   ];
 
 

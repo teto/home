@@ -30,12 +30,6 @@ local:
 	stow -t "$(XDG_DATA_HOME)" local
 	mkdir -p $(XDG_DATA_HOME)/fzf-history $(XDG_DATA_HOME)/newsbeuter
 
-# installe les grammaires treesitter
-# TODO run the scripts/ instead
-treesitter:
-	# nix-build -A tree-sitter.builtGrammars
-	scripts/tsgrammars.sh
-
 zsh:
 	# won't work on nix
 	chsh -s /bin/zsh ${LOGIN}
@@ -84,14 +78,10 @@ fonts:
 nautilus:
 	gsettings set org.gnome.desktop.background show-desktop-icons false
 
-blog: | $(BLOG_FOLDER)
-$(BLOG_FOLDER):
-	git clone gitolite@iij_vm:blog.git "${BLOG_FOLDER}"
-
 vimPlugins:
 	# /home/teto/nixpkgs/pkgs/misc/vim-plugins/update.py
-	~/nixpkgs/pkgs/misc/vim-plugins/update.py -i config/nixpkgs/overlays/vim-plugins/vim-plugin-names -o config/nixpkgs/overlays/vim-plugins/generated.nix
+	cd ~/nixpkgs3 \
+		&& pkgs/misc/vim-plugins/update.py -i $(CURDIR)/nixpkgs/overlays/vim-plugins/vim-plugin-names -o $(CURDIR)/nixpkgs/overlays/vim-plugins/generated.nix --no-commit
 
 cachix:
 	cachix use teto
-	cachix use hie-nix

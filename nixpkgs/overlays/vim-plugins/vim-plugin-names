@@ -1,10 +1,11 @@
+alec-gibson/nvim-tetris
 davidgranstrom/nvim-markdown-preview
+edluffy/specs.nvim@main
 euclio/vim-markdown-composer
 glacambre/firenvim
 iamcco/markdown-preview.nvim
 JamshedVesuna/vim-markdown-preview
 norcalli/nvim-terminal.lua
+pwntester/octo.nvim
 shime/vim-livedown
 tversteeg/registers.nvim@main
-edluffy/specs.nvim
-pwntester/octo.nvim
