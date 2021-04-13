@@ -53,10 +53,8 @@ let
     # }
   ];
 
+  # taken from the official flake
   myPackage = pkgs.neovim-debug;
-  # .overrideAttrs(oa: {
-  #   cmakeBuildType="Debug";
-  # });
 in
 {
 

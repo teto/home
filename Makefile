@@ -85,3 +85,7 @@ vimPlugins:
 
 cachix:
 	cachix use teto
+
+# just to save the command
+rebuild:
+	sudo nixos-rebuild --flake ~/home --override-input nixpkgs-teto /home/teto/nixpkgs --override-input hm /home/teto/hm --override-input nova /home/teto/nova/nova-nix --no-write-lock-file switch  --show-trace

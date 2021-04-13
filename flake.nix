@@ -41,34 +41,45 @@
     }:
     let
       inherit (builtins) listToAttrs baseNameOf attrNames readDir;
-      inherit (nixpkgs.lib) removeSuffix;
+      # inherit (nixpkgsFinal.lib) removeSuffix;
 
       system = "x86_64-linux";
 
-      utils = import ./nixpkgs/lib/colors.nix { inherit (nixpkgs) lib;};
+      # utils = import ./nixpkgs/lib/colors.nix { inherit (nixpkgsFinals) lib;};
 
       # trick to be able to set allowUnfree
       pkgImport = pkgs:
         import pkgs {
           inherit system;
-          overlays = pkgs.lib.attrValues self.overlays;
+          # nova.overlays //
+          overlays = pkgs.lib.attrValues (self.overlays);
           config = { allowUnfree = true; };
         };
 
-      nixpkgs = pkgImport inputs.nixpkgs-teto;
+      nixpkgs = nixpkgs-teto;
+      nixpkgsFinal = pkgImport inputs.nixpkgs-teto;
 
+      # TODO I should use hm.lib.homeManagerConfiguration
+      # and pass the pkgs to it
       hm-custom = my_imports: ({ config, lib, pkgs,  ... }:
           {
             # necessary for plugins to see nur etc
-            nixpkgs.overlays = nixpkgs.lib.attrValues self.overlays;
+            # ignored by useGlobalPkgs ?
+            # nixpkgs.overlays = nixpkgs.lib.attrValues self.overlays;
 
             home-manager.verbose = true;
+            # install through the use of user.users.USER.packages
             home-manager.useUserPackages = true;
             # disables the Home Manager option nixpkgs.*
             home-manager.useGlobalPkgs = true;
 
             home-manager.users."teto" = {
               imports = my_imports;
+
+              home.packages = [
+                nova.packages."${system}".jcli
+                nova.packages."${system}".jinko-shiny
+              ];
             };
           }
         )
@@ -78,7 +89,7 @@
       nixosConfigurations = let
       in
         {
-          mcoudron = nixpkgs-teto.lib.nixosSystem {
+          mcoudron = nixpkgs.lib.nixosSystem {
             inherit system;
             # specialArgs = { flakes = inputs; };
             modules = [
@@ -113,19 +124,20 @@
 
                   networking.hostName = "mcoudron"; # Define your hostname.
                 })
+                nova.hmConfigurations.dev
                 (hm-custom [
                   ./hm/home-xps.nix
-                  nova.hmProfiles.standard
-                  nova.hmProfiles.dev
-                  # ./hm/profiles/vscode.nix #  provided by nova-nix config
-                  ./hm/profiles/experimental.nix
-              ])
+                #   nova.hmProfiles.standard
+                #   nova.hmProfiles.dev
+                #   # ./hm/profiles/vscode.nix #  provided by nova-nix config
+                #   ./hm/profiles/experimental.nix
+                ])
             ];
           };
 
-          jedha = nixpkgs-teto.lib.nixosSystem {
+          jedha = nixpkgs.lib.nixosSystem {
             inherit system;
-            # pkgs = nixpkgs;
+            pkgs = nixpkgsFinal;
             # extraArgs = { pkgs = pkgsImport }
             modules = [
               (import ./nixos/configuration-lenovo.nix)
@@ -156,10 +168,11 @@
       #   (self: prev: { });
 
       overlays = {
+        # nova = import ./nixpkgs/overlays/pkgs/default.nix;
         local = import ./nixpkgs/overlays/pkgs/default.nix;
         overrides = import ./nixpkgs/overlays/overrides.nix;
         haskell = import ./nixpkgs/overlays/haskell.nix;
-        neovim = import ./nixpkgs/overlays/neovim.nix;
+        # neovim = import ./nixpkgs/overlays/neovim.nix;
         neovimOfficial = inputs.neovim.overlay;
         wireshark = import ./nixpkgs/overlays/wireshark.nix;
         python = import ./nixpkgs/overlays/python.nix;
@@ -177,10 +190,10 @@
       ;
 
       packages."${system}" = {
-        dce = nixpkgs.callPackage ./pkgs/dce {};
+        dce = nixpkgsFinal.callPackage ./pkgs/dce {};
 
         # aws-lambda-rie = self.overlays.local.aws-lambda-rie ;
-        aws-lambda-rie = nixpkgs.callPackage ./pkgs/aws-lambda-runtime-interface-emulator {};
+        aws-lambda-rie = nixpkgsFinal.callPackage ./pkgs/aws-lambda-runtime-interface-emulator {};
 
         # python3Packages
         # i3-dispatch = nixpkgs.python3Packages.callPackage ./nipkgs/pkgs/pkgs/i3-dispatch {};
@@ -188,7 +201,7 @@
 
       nixosModules = let
         prep = map (path: {
-          name = removeSuffix ".nix" (baseNameOf path);
+          name = nixpkgsFinal.lib.removeSuffix ".nix" (baseNameOf path);
           value = import path;
         });
 

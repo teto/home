@@ -3,8 +3,8 @@ let
   secrets = import ./secrets.nix;
 in
 {
-  i18n.inputMethod = "fcitx5";
-  # programs.fcitx = {
-  #   enable = true;
-  # }
+  # i18n.inputMethod = "fcitx5";
+  programs.fcitx5 = {
+    enable = true;
+  };
 }
