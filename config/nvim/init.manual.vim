@@ -103,6 +103,8 @@ set exrc
 " VIM-PLUG PLUGIN DECLARATIONS {{{1
 call plug#begin(s:plugdir)
 " Plug 'DanilaMihailov/beacon.nvim'  " blinks line when cursor jumps to a new far location
+" Plug 'danihodovic/vim-ansible-vault'  " :AnsibleVaultEncrypt
+Plug 'arouene/vim-ansible-vault'
 Plug 'jubnzv/virtual-types.nvim'
 Plug 'andymass/vim-matchup' " to improve %
 Plug 'eugen0329/vim-esearch' " search & replace
