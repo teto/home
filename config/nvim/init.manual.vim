@@ -122,7 +122,7 @@ Plug 'kshenoy/vim-signature' " display marks in gutter, love it
 
 Plug 'tjdevries/colorbuddy.nvim' " required by some colorscheme
 Plug 'jbyuki/contextmenu.nvim' " deprecated
-Plug 'kyazdani42/nvim-tree.lua' " to solve crash NvimTreeToggle
+" Plug 'kyazdani42/nvim-tree.lua' " to solve crash NvimTreeToggle
 " Plug 'Yggdroot/indentLine'
 " Plug 'RRethy/vim-illuminate' " to highlight similar words
 " Plug 'kyazdani42/nvim-web-devicons' " Recommended (for coloured icons)

@@ -100,6 +100,13 @@
               hm.nixosModules.home-manager
               nova.nixosProfiles.dev
               (import ./nixos/modules/sway.nix)
+
+              ({ pkgs, ... }: {
+                # nixpkgs.overlays = [ inputs.neovim.overlay ];
+                nixpkgs.overlays = nixpkgs.lib.attrValues self.overlays;
+
+              })
+
               ({ config, lib, pkgs,  ... }:
                 {
                   boot.loader.systemd-boot.enable = true;
@@ -124,7 +131,9 @@
 
                   networking.hostName = "mcoudron"; # Define your hostname.
                 })
-                nova.hmConfigurations.dev
+
+                # breaks build: doesnt like the "activation-script"
+                # nova.hmConfigurations.dev
                 (hm-custom [
                   ./hm/home-xps.nix
                 #   nova.hmProfiles.standard
@@ -146,8 +155,12 @@
               (import ./nixos/hardware-lenovo.nix)
               # often breaks
               # (import ./nixos/modules/hoogle.nix)
+              ({ pkgs, ... }: {
+                nixpkgs.overlays = nixpkgs.lib.attrValues self.overlays;
+                # [ inputs.neovim.overlay ];
+              })
               hm.nixosModules.home-manager
-              nova.nixosProfiles.dev
+              # nova.nixosProfiles.dev
 
               # TODO use from flake or from unstable
               # (import ./nixos/modules/mptcp.nix)
@@ -198,6 +211,10 @@
         # python3Packages
         # i3-dispatch = nixpkgs.python3Packages.callPackage ./nipkgs/pkgs/pkgs/i3-dispatch {};
       };
+
+      # hmModules = [
+      #   (import ./hm/modules/pywal.nix )
+      # ];
 
       nixosModules = let
         prep = map (path: {
