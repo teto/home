@@ -86,6 +86,8 @@ use { 'alec-gibson/nvim-tetris'}
 use { 'mfussenegger/nvim-dap'}
 use { 'bazelbuild/vim-bazel' , requires = { 'google/vim-maktaba' } }
 
+use 'sunjon/shade.nvim'
+
 -- use fzf to search through diagnostics
 -- use { 'ojroques/nvim-lspfuzzy'}
 
@@ -159,6 +161,18 @@ local lspfuzzy_available, lspfuzzy = pcall(require, "lspfuzzy")
 if lspfuzzy_available then
 	lspfuzzy.setup {}
 end
+
+local has_shade, shade = pcall(require, "shade")
+require'shade'.setup({
+  overlay_opacity = 70,
+  opacity_step = 1,
+  -- keys = {
+  --   brightness_up    = '<C-Up>',
+  --   brightness_down  = '<C-Down>',
+  --   toggle           = '<Leader>s',
+  -- }
+})
+
 
 -- local has_neogit, neogit = pcall(require, 'neogit')
 -- use with neogit.status.create(<kind>)

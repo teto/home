@@ -50,7 +50,6 @@ let
 
   networking.hostName = "jedha"; # Define your hostname.
 
-  # TODO add the chromecast
   # networking.firewall.allowedUDPPorts = [ ];
   # creates problem with buffalo check if it blocks requests or what
   # it is necessary to use dnssec though :(

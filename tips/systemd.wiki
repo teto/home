@@ -15,6 +15,10 @@ journalctl -b0 -u <unit>
 
 systemctl list-jobs
 
+# to remove core files
+systemd-tmpfiles --clean
 
 To limit memory consumption:
 systemd-run --user -p MemoryLimit=3G google-chrome
+
+ō

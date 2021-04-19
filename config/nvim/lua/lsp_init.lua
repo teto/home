@@ -142,6 +142,7 @@ lspconfig.hls.setup({
     cmd = {
 		"haskell-language-server"
 		-- "/home/teto/nixpkgs2/result/bin/haskell-language-server-wrapper"
+		-- "/home/teto/.cabal/bin/haskell-language-server"
 		, "--lsp"
 	},
     filetypes = { "haskell", "lhaskell" },

@@ -141,7 +141,16 @@ in
   # boot.kernel.sysctl."kernel.core_pattern" = "core"; to disable.
   # security.pam.loginLimits
   systemd.coredump.enable = true;
+
+  # see 
   systemd.coredump.extraConfig = ''
+    #Storage=external
+    #Compress=yes
+    ProcessSizeMax=20G
+    ExternalSizeMax=20G
+    #JournalSizeMax=767M
+    #MaxUse=
+    #KeepFree=
     '';
 
     # users.motd = 

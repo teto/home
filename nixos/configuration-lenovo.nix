@@ -124,7 +124,6 @@ in
 
   networking.hostName = "jedha"; # Define your hostname.
 
-  # TODO add the chromecast
   networking.firewall.allowedUDPPorts = [ ];
   # networking.firewall.allowedTCPPorts = [ 8080 ];
 
