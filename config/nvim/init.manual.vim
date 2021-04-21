@@ -2049,6 +2049,19 @@ augroup highlight_yank
     autocmd TextYankPost * lua require'vim.highlight'.on_yank{higroup="IncSearch", timeout=1000}
 augroup END
 
+function! RandNum() abort
+  return str2nr(matchstr(reltimestr(reltime()), '\.\zs\d*'))
+endfunction
+
+function! RandChar() abort
+  return nr2char((RandNum() % 93) + 33)
+endfunction
+
+function! Password() abort
+  return join(map(range(8), 'RandChar()'), '')
+endfunction
+
+" echo Password()
 
 " toto
 command! OpenDiagnostics lua vim.lsp.diagnostic.set_loclist()
