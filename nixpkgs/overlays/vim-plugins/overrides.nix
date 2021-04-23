@@ -43,6 +43,30 @@ self: prev:
     propagatedBuildsInputs = (oa.propagatedBuildsInputs or []) ++ [ xdotool grip ];
   });
 
+  # packer-nvim = super.packer-nvim.overrideAttrs(old: {
+  #   src = builtins.fetchGit {
+  #     url = "https://github.com/teto/packer.nvim.git";
+  #     ref = "fix-displaywin";
+  #     rev = "c81660d2db70eb17b5204d09fd779bfb2c853ad8";
+  #   };
+  # });
+  pdf-scribe-nvim = buildVimPluginFrom2Nix {
+    pname = "pdf-scribe";
+    version = "unstable";
+    src = builtins.fetchGit "https://github.com/wbthomason/pdf-scribe.nvim.git";
+    # src = fetchFromGitHub {
+    #   owner="wbthomason";
+    #   version = "";
+    #   repo = "pdf-scribe.nvim";
+    #   # sha256 = "1ccq6akkm8n612ni5g7w7v5gv73g7p1d9i92k0bnsy33fvi3pmnh";
+    # };
+    # libpoppler-glib.so
+    propagatedBuildInputs = [ poppler ];
+
+    # concat with ;
+    # LUA_CPATH = "${pkgs.poppler}/ rg";
+  };
+
   nvim-markdown-preview = prev.nvim-markdown-preview.overrideAttrs(old: {
     buildInputs = [ pkgs.nodePackages.live-server pkgs.pandoc ];
     preFixup = ''

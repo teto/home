@@ -231,7 +231,7 @@ Plug 'bronson/vim-trailing-whitespace' " :FixWhitespace
 " REPL (Read Execute Present Loop) {{{
 " Plug 'metakirby5/codi.vim', {'on': 'Codi'} " repl
 " careful it maps cl by default
-" Plug 'vigemus/iron.nvim'    ", { 'branch': 'lua/replace' }
+Plug 'vigemus/iron.nvim'    ", { 'branch': 'lua/replace' }
 " Plug 'jalvesaq/vimcmdline' " no help files, mappings clunky
 " github mirror of Plug 'http://gitlab.com/HiPhish/repl.nvim'
 " Plug 'http://gitlab.com/HiPhish/repl.nvim' " no commit for the past 2 years
@@ -1262,7 +1262,8 @@ let g:iron_repl_open_cmd="vsplit"
 " luafile $HOME/.config/nvim/iron-config.lua
 " let g:iron_new_repl_hooks
 " let g:iron_new_lua_repl_hooks
-"let g:iron_map_defaults
+let g:iron_map_defaults=0
+let g:iron_map_extended=0
 "}}}
 " bookmarks.vim {{{
   let g:bookmark_no_default_key_mappings = 1
