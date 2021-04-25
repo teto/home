@@ -9,6 +9,7 @@ in
     ./modules/sway.nix
     ./modules/syncthing.nix
     ./profiles/steam.nix
+    ./profiles/adb.nix
     # ./modules/docker-daemon.nix
 
     # ./modules/libvirtd.nix

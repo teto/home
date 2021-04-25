@@ -74,7 +74,13 @@
             home-manager.useGlobalPkgs = true;
 
             home-manager.users."teto" = {
-              imports = my_imports;
+              imports = my_imports ++ [
+                # custom modules
+                (import ./hm/modules/pywal.nix )
+                (import ./hm/modules/fcitx.nix )
+                # (import ./hm/modules/xdg.nix )
+
+              ];
 
               home.packages = [
                 nova.packages."${system}".jcli
@@ -137,9 +143,9 @@
                 (hm-custom [
                   ./hm/home-xps.nix
                 #   nova.hmProfiles.standard
-                #   nova.hmProfiles.dev
+                  nova.hmProfiles.dev
                 #   # ./hm/profiles/vscode.nix #  provided by nova-nix config
-                #   ./hm/profiles/experimental.nix
+                  ./hm/profiles/experimental.nix
                 ])
             ];
           };

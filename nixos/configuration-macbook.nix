@@ -119,7 +119,4 @@ let
 
     package = pkgs.pulseaudioFull;
   };
-
-  # for android development
-  programs.adb.enable = false;
 }
