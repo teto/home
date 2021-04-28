@@ -1648,6 +1648,10 @@ map <Leader>lr <Plug>(Luadev-RunLine)
 map <Leader>ll <Plug>(Luadev-RunLine)
 " }}}
 
+" nvim-spectre {{{
+nnoremap <leader>S :lua require('spectre').open()<CR>
+"}}}
+
 set hidden " you can open a new buffer even if current is unsaved (error E37)
 
 

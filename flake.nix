@@ -85,6 +85,7 @@
               home.packages = [
                 nova.packages."${system}".jcli
                 nova.packages."${system}".jinko-shiny
+                nova.packages."${system}".nova-deploy
               ];
             };
           }
@@ -174,6 +175,7 @@
                 ./hm/home-lenovo.nix
                 nova.hmProfiles.standard
                 nova.hmProfiles.dev
+                nova.hmProfiles.devops
                 ./hm/profiles/experimental.nix
 
                 # ./hm/vscode.nix #  provided by nova-nix config

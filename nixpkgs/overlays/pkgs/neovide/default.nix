@@ -7,19 +7,20 @@
 
 , cmake
 , cacert
-, pkgconfig
+, pkg-config
 , fontconfig
 , cargo
 , rustc
 , python
 , llvmPackages_latest
 , vulkan-tools
-, xlibs
 , xorg
 , xorg_sys_opengl
 , libglvnd
 , freeglut
 , patchelf
+, makeFontsConf
+, freefont_ttf
 
 , expat
 , openssl
@@ -42,9 +43,9 @@ let
     freetype
 
     vulkan-loader
-    xlibs.libXcursor
-    xlibs.libXext
-    xlibs.libXrandr
+    xorg.libXcursor
+    xorg.libXext
+    xorg.libXrandr
     xorg.libXi
     fontconfig
   ];
@@ -74,34 +75,38 @@ in rustPlatform.buildRustPackage rec {
   #   )
   #   ./.;
   # cargoSha256 = "0qkililxcwjhsvk354ly0bz1gxfqa65ka66f3zri85n3gr9fr397";
-  cargoSha256 = "sha256-R8JOwXp74X2tqSTm+/wT/D5gBiIRcLRV2R8+f9o5sOc=";
+  cargoSha256 = "sha256-u1Qmr8vOQ6+RCy6T9Un011Nl6FBfOmoWRdqyOSPcCG0=";
+
+  FONTCONFIG_FILE = makeFontsConf {
+    fontDirectories = [ freefont_ttf ];
+  };
 
   SSL_CERT_FILE = "${cacert.out}/etc/ssl/certs/ca-bundle.crt";
   CURL_CA_BUNDLE = "${cacert.out}/etc/ssl/certs/ca-bundle.crt";
   nativeBuildInputs = [
     cacert
     cmake
-    pkgconfig
+    pkg-config
     cargo
     rustc
     python
     vulkan-tools
     patchelf
-    xlibs.libXext.dev # for xext.h
-    # xlibs.libXcursor
+    xorg.libXext.dev # for xext.h
+    # xorg.libXcursor
   ] ++ (with llvmPackages_latest; [
     clang
     llvm
   ]);
   buildInputs = [
-    xlibs.libXext.dev # for xext.h
+    xorg.libXext.dev # for xext.h
     skia
     expat
     openssl
     SDL2
     vulkan-loader
-    xlibs.libXcursor
-    xlibs.libXrandr
+    xorg.libXcursor
+    xorg.libXrandr
     xorg.libXi
     freetype
     # fontconfig
@@ -112,7 +117,7 @@ in rustPlatform.buildRustPackage rec {
   ];
 
 
-  # :${xlibs.libXcursor}/lib"
+  # :${xorg.libXcursor}/lib"
   #     export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:${vulkan-loader}/lib"
   shellHook = ''
 

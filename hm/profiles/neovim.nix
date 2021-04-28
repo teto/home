@@ -46,11 +46,18 @@ let
   };
 
 
-  extraPlugins = with pkgs.vimPlugins;[
+  overlayPlugins = with pkgs.vimPlugins;[
     # https://github.com/vmchale/dhall-vim.git
     dhall-vim
     # {
     # }
+      # TODO restore in my overlay
+      # {
+      #   # davidgranstrom/nvim-markdown-preview
+      #   plugin = nvim-markdown-preview;
+      #   config = ''
+      #   '';
+      # }
   ];
 
   # taken from the official flake
@@ -78,8 +85,8 @@ in
      # concatMap
      # source doesn't like `stdpath('config').'`
      # todo should use mkBefore
+     #         ${config.programs.neovim.generatedInitrc}
      extraConfig = ''
-        ${config.programs.neovim.generatedInitrc}
         set noshowmode " Show the current mode on command line
         set cursorline " highlight cursor line
         source $XDG_CONFIG_HOME/nvim/init.manual.vim
@@ -95,10 +102,10 @@ in
     #   customRC = ''test'';
     # };
 
-    extraLuaConfig = ''
-      -- logs are written to /home/teto/.cache/vim-lsp.log
-      vim.lsp.set_log_level("info")
-    '';
+    # extraLuaConfig = ''
+    #   -- logs are written to /home/teto/.cache/vim-lsp.log
+    #   vim.lsp.set_log_level("info")
+    # '';
 
     # TODO add lsp stuff
     extraPackages = with pkgs; [
@@ -122,12 +129,6 @@ in
     plugins = with pkgs.vimPlugins; [
       # echodoc-vim
 
-      {
-        # davidgranstrom/nvim-markdown-preview
-        plugin = nvim-markdown-preview;
-        config = ''
-        '';
-      }
       # y a aussi vim-markdown
       {
         # euclio/vim-markdown-composer

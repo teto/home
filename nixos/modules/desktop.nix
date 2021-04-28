@@ -49,7 +49,8 @@ in
      defaultLocale = "en_US.UTF-8";
      # can generate problems for wireshark with Qt versions
      inputMethod = {
-       enabled = "fcitx5";
+       # enabled = "fcitx5";
+       enabled = null;
        # enabled = "fcitx";
        # i18n.inputMethod.package
        fcitx.engines = with pkgs.fcitx-engines; [

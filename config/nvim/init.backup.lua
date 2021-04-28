@@ -277,7 +277,9 @@ if has_telescope then
 					["data"]    = "/home/teto/neovim",
 					["jinko"] = "/home/teto/jinko",
 					-- ["wiki"]    = "/home/my_username/wiki"
-				}
+				},
+				db_safe_mode = false,
+				auto_validate = false
 			}
 		}
 	}

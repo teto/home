@@ -2,13 +2,28 @@
 # https://starship.rs/config/#line-break
 # Don't print a new line at the start of the prompt
 add_newline = false
-# prompt_order = 
+# format = """\
+#   $username\
+#   $hostname\
+#   $directory\
+#   $git_branch\
+#   $git_commit\
+#   $git_state\
+#   $git_status\
+#   $cmd_duration\
+#   $custom\
+#   $line_break\
+#   $jobs\
+#   $battery\
+#   $time\
+#   $character\
+#   """
 
 [aws]
 disabled = true
 # displayed_items
 # format = "on [$symbol$profile]($style) "
-symbol = "🅰 "
+success_symbol = "🅰 "
 displayed_items = "region"
 # [aws.region_aliases]
 # ap-southeast-2 = "au"
@@ -16,8 +31,9 @@ displayed_items = "region"
 
 # Replace the "❯" symbol in the prompt with "➜"
 [character]      # The name of the module we are confguring is "character"
-symbol = "➜"     # The "symbol" segment is being set to "➜"
+success_symbol = "➜"     # The "symbol" segment is being set to "➜"
 vicmd_symbol = "v"  # "❮"
+# error_symbol
 
 # Disable the package module, hiding it from the prompt completely
 [package]
@@ -25,7 +41,7 @@ disabled = true
 
 [nix_shell]
 disabled = false
-use_name = true
+# use_name = true
 # style = "bold red"
 impure_msg = "IMPURE"
 pure_msg = "PURE"
@@ -50,12 +66,14 @@ threshold = 4
 # in milliseconds
 min_time = 2_000
 show_notifications = true
-min_time_to_notify = 10_000
-# prefix = "underwent "
+# min_time_to_notify = 10_000
+format = "took [$duration]($style) "
 
 [golang]
 disabled = true
 
+[env_var]
+# format = "with [$env_value]($style) "
 
 [battery]
 full_symbol = "🔋"
@@ -71,14 +89,16 @@ disabled = true
 [git_branch]
 disabled = false
 
-[haskell]
-disabled = false
+# [haskell]
+# disabled = false
 
 [python]
 disabled = false
-# symbol = "👾 "
+# success_symbol = "👾 "
 pyenv_version_name = false
 
 [ruby]
 disabled = true
 
+# [custom.example]
+# format = "[$symbol$output]($style) "

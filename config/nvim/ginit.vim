@@ -2,6 +2,14 @@
 
 " see https://github.com/equalsraf/neovim-qt/wiki/GUI#how-to-change-the-font
 " Guifont DejaVu Sans Mono:h13
+GuiTabline 1
+
+GuiPopupmenu 1
+
+" Right Click Context Menu (Copy-Cut-Paste)
+nnoremap <silent><RightMouse> :call GuiShowContextMenu()<CR>
+inoremap <silent><RightMouse> <Esc>:call GuiShowContextMenu()<CR>
+vnoremap <silent><RightMouse> :call GuiShowContextMenu()<CR>gv
 
 " to check if neovim-qt is running, use `exists('g:GuiLoaded')`,
 " see https://github.com/equalsraf/neovim-qt/issues/219

@@ -5,12 +5,12 @@ let
 {
   firenvim = buildVimPluginFrom2Nix {
     pname = "firenvim";
-    version = "2021-04-09";
+    version = "2021-04-25";
     src = fetchFromGitHub {
       owner = "glacambre";
       repo = "firenvim";
-      rev = "0c7e6cf8e0722feca7a0be0ca0627a649a66fdeb";
-      sha256 = "001mv3q7azc5llb6iadiy9s1xpw9a23cipnqcqf0jd94pmy8f6fk";
+      rev = "32087a049f016ee0672aee400249e822c81519f1";
+      sha256 = "061xp8cqmajriv9pn3dli8sx6iz844i3lgpd5v3gc38n6idjfvzv";
     };
     meta.homepage = "https://github.com/glacambre/firenvim/";
   };
@@ -65,24 +65,24 @@ let
 
   octo-nvim = buildVimPluginFrom2Nix {
     pname = "octo-nvim";
-    version = "2021-04-10";
+    version = "2021-04-23";
     src = fetchFromGitHub {
       owner = "pwntester";
       repo = "octo.nvim";
-      rev = "ea8aef7e0c3ae67fa46a46ee58623be3a201c968";
-      sha256 = "1kaw430cik5q6pwl0nf7n4x3p7kbvfszd9qvi1ii5nxxilwc536n";
+      rev = "9aa7d354ff4faee80fc4a766c42d319ca65e6c75";
+      sha256 = "1hrxc3xb90wgnqay8cal8zafn3qbfzql9hyfgm2qy5wys6rp0ng8";
     };
     meta.homepage = "https://github.com/pwntester/octo.nvim/";
   };
 
   registers-nvim = buildVimPluginFrom2Nix {
     pname = "registers-nvim";
-    version = "2021-04-10";
+    version = "2021-04-13";
     src = fetchFromGitHub {
       owner = "tversteeg";
       repo = "registers.nvim";
-      rev = "0a437a3831b4fdaf370c664f54653dcc5aea71fc";
-      sha256 = "00q49377fwgy7f6fqqarqwq5m2aqx1clrq63zla72ghai66kmfhc";
+      rev = "b8ad2cd8a01dc3e4c2530820409d01b1bbd6fb95";
+      sha256 = "1jz41mskrrbb4w2hkxcpmnpgj93nbh2rb30mn566xkjn3zkh1r23";
     };
     meta.homepage = "https://github.com/tversteeg/registers.nvim/";
   };
