@@ -2,5 +2,5 @@
 {
 
   # for android development
-  programs.adb.enable = false;
+  programs.adb.enable = true;
 }

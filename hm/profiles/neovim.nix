@@ -129,6 +129,12 @@ in
     plugins = with pkgs.vimPlugins; [
       # echodoc-vim
 
+      # {
+      #   # davidgranstrom/nvim-markdown-preview
+      #   plugin = nvim-markdown-preview;
+      #   config = ''
+      #   '';
+      # }
       # y a aussi vim-markdown
       {
         # euclio/vim-markdown-composer
