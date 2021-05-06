@@ -10,6 +10,7 @@
       neovim.to = { type = "github"; owner = "neovim"; repo="neovim?dir=contrib"; };
 
       iohk.to = { type = "github"; owner = "input-output-hk"; repo="haskell.nix"; };
+      nixops.to = { type = "github"; owner = "nixos"; repo="nixops"; };
 
       # "github:nixos/nixpkgs/nixos-unstable";
       # home-manager
