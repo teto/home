@@ -21,5 +21,5 @@ in {
       CABAL_DIR="$XDG_CACHE_HOME/cabal";
       WEECHAT_HOME="$XDG_CONFIG_HOME/weechat";
     };
-  }
+  };
 }

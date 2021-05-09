@@ -4,6 +4,6 @@ in
 {
 
   home.packages =  [
-    pkgs.aws-sam-cli  # for sam lambda
+    # pkgs.aws-sam-cli  # BROKEN  for sam lambda
   ];
 }

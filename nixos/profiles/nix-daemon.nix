@@ -11,6 +11,7 @@
 
       iohk.to = { type = "github"; owner = "input-output-hk"; repo="haskell.nix"; };
       nixops.to = { type = "github"; owner = "nixos"; repo="nixops"; };
+      idris.to = { type = "github"; owner = "idris-lang"; repo="Idris2"; };
 
       # "github:nixos/nixpkgs/nixos-unstable";
       # home-manager

@@ -168,8 +168,8 @@ in
   environment.etc."security/limits.conf".text = ''
     #[domain]        [type]  [item]  [value]
     teto  soft  core  unlimited
-    teto  hard  core  unlimited
   '';
+  # teto  hard  core  unlimited
 
   # systemd.services."systemd-coredump".serviceConfig.ProtectHome = false;
   # systemd.services."systemd-coredump@".serviceConfig.ProtectHome = false;

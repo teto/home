@@ -78,7 +78,7 @@
                 # custom modules
                 (import ./hm/modules/pywal.nix )
                 (import ./hm/modules/fcitx.nix )
-                # (import ./hm/modules/xdg.nix )
+                (import ./hm/modules/xdg.nix )
 
               ];
 
@@ -215,6 +215,15 @@
 
         # aws-lambda-rie = self.overlays.local.aws-lambda-rie ;
         aws-lambda-rie = nixpkgsFinal.callPackage ./pkgs/aws-lambda-runtime-interface-emulator {};
+
+        # build-idris-package
+        # idrisPackages / buildIdrisPkg
+        replica = let
+          idrisPackages = nixpkgsFinal.idrisPackages.override {
+            # get idris 2 from the flake
+            idris-no-deps = nixpkgsFinal.idris2;
+          };
+        in idrisPackages.callPackage ./pkgs/REPLica {};
 
         # python3Packages
         # i3-dispatch = nixpkgs.python3Packages.callPackage ./nipkgs/pkgs/pkgs/i3-dispatch {};

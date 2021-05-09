@@ -183,7 +183,10 @@ in
       # };
 
       focus.followMouse = false;
-      fonts = [ "FontAwesome 12" "Terminus 10" ];
+      fonts = {
+        names = [ "FontAwesome" "Terminus" ];
+        size = 10.0;
+      };
       bars = [
         {
           position="top";

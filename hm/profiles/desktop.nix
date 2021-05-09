@@ -103,6 +103,7 @@ let
     # todo try sthg else
     # requires xdmcp https://github.com/freedesktop/libXdmcp
     gnome3.eog # eye of gnome = image viewer / creates a collision
+    magic-wormhole  # super tool to exchange secrets between computers
     moc-wrapped  # music player
     mupdf.bin # evince does better too
     # mdp # markdown CLI presenter

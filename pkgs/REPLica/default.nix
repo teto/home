@@ -21,7 +21,7 @@ build-idris-package  {
     owner = "berewt";
     repo = "REPLica";
     rev = "b8e9295a98e6181c24affd12415b658cb3c384f1";
-    sha256 = "1g3pi0swmg214kndj85hj50ccmckni7piprsxfdzdfhg87s0avw7";
+    sha256 = "sha256-2oTPZedg2pBOJ4T1KP1uoRymkwvSGLrTdDQ6SUcj5zM=";
   };
 
   meta = with lib; {

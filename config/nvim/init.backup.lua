@@ -86,6 +86,9 @@ use { 'alec-gibson/nvim-tetris'}
 use { 'mfussenegger/nvim-dap'}
 use { 'bazelbuild/vim-bazel' , requires = { 'google/vim-maktaba' } }
 
+-- use 'sindrets/diffview.nvim' -- :DiffviewOpen
+use 'folke/which-key.nvim'
+
 -- use 'sunjon/shade.nvim'
 
 -- use fzf to search through diagnostics
