@@ -12,11 +12,9 @@ in
     ./profiles/adb.nix
     # ./modules/docker-daemon.nix
 
-    # ./modules/libvirtd.nix
     # ./modules/hoogle.nix
     # ./profiles/pixiecore.nix
     # ./modules/mptcp.nix
-    # ./profiles/neovim.nix
 
     # may provoke some issues like switch hanging
     # ./modules/kubernetes.nix
@@ -112,7 +110,7 @@ in
 
   # List services that you want to enable:
   services = {
-    gnome3 = {
+    gnome = {
       gnome-keyring.enable = true;
       at-spi2-core.enable = true; # for keyring it seems
     };

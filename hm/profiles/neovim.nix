@@ -48,7 +48,8 @@ let
 
   overlayPlugins = with pkgs.vimPlugins;[
     # https://github.com/vmchale/dhall-vim.git
-    dhall-vim
+    # dhall-vim
+    octo-nvim
     # {
     # }
       # TODO restore in my overlay
@@ -142,6 +143,8 @@ in
         config = ''
         '';
       }
+
+
 
       # to install manually with coc.nvim:
       # - coc-vimtex  coc-snippets
@@ -382,7 +385,7 @@ in
         '';
       }
 
-    ];
+    ] ++ overlayPlugins;
 
   };
 }

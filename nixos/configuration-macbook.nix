@@ -62,7 +62,7 @@ let
 
   # List services that you want to enable:
   services = {
-    gnome3 = {
+    gnome = {
       gnome-keyring.enable = true;
       at-spi2-core.enable = true; # for keyring it seems
 

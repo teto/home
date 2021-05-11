@@ -107,11 +107,11 @@
               hm.nixosModules.home-manager
               nova.nixosProfiles.dev
               (import ./nixos/modules/sway.nix)
+              # (import ./nixos/modules/libvirtd.nix)
 
               ({ pkgs, ... }: {
                 # nixpkgs.overlays = [ inputs.neovim.overlay ];
                 nixpkgs.overlays = nixpkgs.lib.attrValues self.overlays;
-
               })
 
               ({ config, lib, pkgs,  ... }:
@@ -197,6 +197,11 @@
         neovimOfficial = inputs.neovim.overlay;
         wireshark = import ./nixpkgs/overlays/wireshark.nix;
         python = import ./nixpkgs/overlays/python.nix;
+        # vimPlugins = final: prev: {
+        #   vimPlugins = prev.vimPlugins.extend (prev.callPackage ./nixpkgs/overlays/vim-plugins/generated.nix {
+        #     inherit (prev.vimUtils) buildVimPluginFrom2Nix;
+        #   });
+        # };
         nur = nur.overlay;
 
         # unfree = final: prev: {
