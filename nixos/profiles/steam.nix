@@ -1,4 +1,4 @@
 { pkgs, lib,  ... }:
 {
-  programs.steam.enable = false;
+  programs.steam.enable = true;
 }

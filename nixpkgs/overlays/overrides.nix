@@ -14,15 +14,14 @@ rec {
     };
   });
 
-  visidata = prev.visidata.overrideAttrs(oa: {
-    name = "visidata-matt";
-
-    src = builtins.fetchGit {
-      ref = "develop";
-      url = "https://github.com/saulpw/visidata.git";
-      rev = "e65c076c644a9577022c985dee5b447650cddd72";
-    };
-  });
+  # visidata = prev.visidata.overrideAttrs(oa: {
+  #   name = "visidata-matt";
+  #   src = builtins.fetchGit {
+  #     ref = "develop";
+  #     url = "https://github.com/saulpw/visidata.git";
+  #     rev = "e65c076c644a9577022c985dee5b447650cddd72";
+  #   };
+  # });
 
   # xdg_utils = prev.xdg_utils.overrideAttrs(oa: {
   #   pname = "xdg-utils-custom";

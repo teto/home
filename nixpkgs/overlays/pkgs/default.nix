@@ -70,6 +70,6 @@ final: prev:
 
   # rofi-scripts = prev.callPackage ./rofi-scripts {};
 
-  neovide = prev.callPackage ./neovide {};
+  # neovide = prev.callPackage ./neovide {};
 
 }

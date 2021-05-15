@@ -68,6 +68,9 @@ M.on_attach = function(client)
 		default_mappings()
 	end
 
+	-- vim.bo.omnifunc = vim.lsp.omnifunc
+	vim.bo.omnifunc = 'v:lua.vim.lsp.omnifunc'
+
 -- " vim.lsp.buf.rename()
 end
 

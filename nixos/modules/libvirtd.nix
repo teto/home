@@ -62,24 +62,6 @@
     ];
 
 
-    # TODO write my own to change permissions
-    # systemd.services.libvirtd-teto = {
-    #   description = "Libvirt Virtual Machine Management Daemon - configuration";
-    #   script = ''
-    #     images=/var/lib/libvirt/images
-    #     sudo mkdir $images
-    #     sudo chgrp libvirtd $images
-    #     sudo chmod g+w $images
-    #   '';
-
-    #   serviceConfig = {
-    #     Type = "oneshot";
-    #     RuntimeDirectoryPreserve = "yes";
-    #     LogsDirectory = subDirs [ "qemu" ];
-    #     RuntimeDirectory = subDirs [ "nix-emulators" "nix-helpers" "nix-ovmf" ];
-    #     StateDirectory = subDirs [ "dnsmasq" ];
-    #   };
-    # };
 
 
     # TODO automate creation of networks
@@ -102,4 +84,23 @@
 # </network>
   };
   systemd.services.libvirtd.restartIfChanged = lib.mkForce true;
+
+  # TODO write my own to change permissions
+  systemd.services.libvirtd-teto = {
+    description = "Libvirt Virtual Machine Management Daemon - configuration";
+    script = ''
+      images=/home/teto/images
+      sudo mkdir "$images"
+      sudo chgrp libvirtd "$images"
+      sudo chmod g+w "$images"
+    '';
+
+  #   serviceConfig = {
+  #     Type = "oneshot";
+  #     RuntimeDirectoryPreserve = "yes";
+  #     LogsDirectory = subDirs [ "qemu" ];
+  #     RuntimeDirectory = subDirs [ "nix-emulators" "nix-helpers" "nix-ovmf" ];
+  #     StateDirectory = subDirs [ "dnsmasq" ];
+  #   };
+  };
 }

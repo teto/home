@@ -46,12 +46,11 @@ let
   };
 
 
-  overlayPlugins = with pkgs.vimPlugins;[
+  # overlayPlugins = with pkgs.myVimPlugins;[
     # https://github.com/vmchale/dhall-vim.git
     # dhall-vim
-    octo-nvim
-    # {
-    # }
+  overlayPlugins = with pkgs.myVimPlugins; [
+    # octo-nvim
       # TODO restore in my overlay
       # {
       #   # davidgranstrom/nvim-markdown-preview

@@ -100,18 +100,22 @@
             inherit system;
             # specialArgs = { flakes = inputs; };
             modules = [
-              (import ./nixos/hardware-dell-camera.nix)
-              (import ./nixos/configuration-xps.nix)
-              (import ./nixos/profiles/nix-daemon.nix)
-              (import ./nixos/modules/xserver.nix)
               hm.nixosModules.home-manager
               nova.nixosProfiles.dev
-              (import ./nixos/modules/sway.nix)
-              # (import ./nixos/modules/libvirtd.nix)
 
               ({ pkgs, ... }: {
                 # nixpkgs.overlays = [ inputs.neovim.overlay ];
                 nixpkgs.overlays = nixpkgs.lib.attrValues self.overlays;
+                imports = [
+                  ./nixos/hardware-dell-camera.nix
+                  ./nixos/configuration-xps.nix
+                  ./nixos/profiles/nix-daemon.nix
+                  ./nixos/modules/xserver.nix
+                  ./nixos/modules/sway.nix
+                  ./nixos/profiles/steam.nix
+                  ./nixos/profiles/adb.nix
+                  ./nixos/modules/libvirtd.nix
+                ];
               })
 
               ({ config, lib, pkgs,  ... }:
@@ -156,15 +160,19 @@
             pkgs = nixpkgsFinal;
             # extraArgs = { pkgs = pkgsImport }
             modules = [
-              (import ./nixos/configuration-lenovo.nix)
-              (import ./nixos/profiles/neovim.nix)
-              (import ./nixos/modules/xserver.nix)
-              (import ./nixos/hardware-lenovo.nix)
               # often breaks
               # (import ./nixos/modules/hoogle.nix)
               ({ pkgs, ... }: {
                 nixpkgs.overlays = nixpkgs.lib.attrValues self.overlays;
                 # [ inputs.neovim.overlay ];
+
+                imports = [
+                  ./nixos/configuration-lenovo.nix
+                  ./profiles/nix-daemon.nix
+                  ./nixos/profiles/neovim.nix
+                  ./nixos/modules/xserver.nix
+                  ./nixos/hardware-lenovo.nix
+                ];
               })
               hm.nixosModules.home-manager
               # nova.nixosProfiles.dev
@@ -198,10 +206,37 @@
         wireshark = import ./nixpkgs/overlays/wireshark.nix;
         python = import ./nixpkgs/overlays/python.nix;
         # vimPlugins = final: prev: {
-        #   vimPlugins = prev.vimPlugins.extend (prev.callPackage ./nixpkgs/overlays/vim-plugins/generated.nix {
-        #     inherit (prev.vimUtils) buildVimPluginFrom2Nix;
-        #   });
+        #   myVimPlugins = prev.vimPlugins.extend (
+        #     final2: prev2: {
+        #       octo-nvim = prev.buildVimPluginFrom2Nix {
+        #         pname = "octo-nvim";
+        #         version = "2021-05-06";
+        #         src = prev.fetchFromGitHub {
+        #           owner = "pwntester";
+        #           repo = "octo.nvim";
+        #           rev = "d92a7352516f06a457cbf8812b173abc319f7882";
+        #           sha256 = "1xvj3p32nzcn8rv2hscmj8sn8bfm1s2r5j1cwwnkl4zbqdbd4k5f";
+        #         };
+        #         meta.homepage = "https://github.com/pwntester/octo.nvim/";
+        #       };
+        #     }
+
+        #   );
         # };
+            # prev.callPackage ./nixpkgs/overlays/vim-plugins/generated.nix {
+            # # inherit (prev.vimUtils) buildVimPluginFrom2Nix;
+            #     buildVimPluginFrom2Nix = prev.vimUtils.buildVimPluginFrom2Nix;
+            # }
+
+        # doesnt work, no "overrides" in vim-plugins/default.nix
+        # vimPlugins = final: prev: {
+          # vimPlugins = prev.vimPlugins.override {
+            # overrides = (prev.callPackage ./nixpkgs/overlays/vim-plugins/generated.nix {
+                # buildVimPluginFrom2Nix = prev.vimUtils.buildVimPluginFrom2Nix;
+              # });
+          # };
+        # };
+
         nur = nur.overlay;
 
         # unfree = final: prev: {

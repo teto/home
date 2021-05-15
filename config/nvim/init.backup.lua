@@ -87,7 +87,7 @@ use { 'mfussenegger/nvim-dap'}
 use { 'bazelbuild/vim-bazel' , requires = { 'google/vim-maktaba' } }
 
 -- use 'sindrets/diffview.nvim' -- :DiffviewOpen
-use 'folke/which-key.nvim'
+-- use 'folke/which-key.nvim' -- :WhichKey
 
 -- use 'sunjon/shade.nvim'
 
@@ -125,9 +125,9 @@ nnoremap { "<Leader>f", function () require('telescope').extensions.frecency.fre
 -- nnoremap <Leader>c <Cmd>FzfCommits<CR>
 -- nnoremap <Leader>C <Cmd>FzfColors<CR>
 
-local has_whichkey, whichkey = pcall(require, "which-key")
+local has_whichkey, wk = pcall(require, "which-key")
 if has_whichkey then
-  whichkey.setup {
+  wk.setup {
 	-- plugins = {
 	-- 	marks = true, -- shows a list of your marks on ' and `
 	-- 	registers = true, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
@@ -167,6 +167,7 @@ if has_whichkey then
 	-- triggers = "auto", -- automatically setup triggers
 	-- triggers = {"<leader>"} -- or specifiy a list manually
 	}
+
 end
 local has_bufferline, bufferline = pcall(require, "bufferline")
 

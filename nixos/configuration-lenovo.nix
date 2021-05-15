@@ -20,7 +20,6 @@ in
     ./modules/openssh.nix
 
     # ./modules/tor.nix
-    ./profiles/nix-daemon.nix
     ./profiles/steam.nix
 
     # ./modules/sway.nix

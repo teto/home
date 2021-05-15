@@ -389,6 +389,9 @@ Plug 'romainl/flattened'
 Plug 'joshdick/onedark.vim'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'dracula/vim'
+Plug 'sainnhe/sonokai'
+Plug 'folke/tokyonight.nvim'
+Plug 'marko-cerovac/material.nvim'
 " }}}
 
 " do not run it automatically, can be boring
