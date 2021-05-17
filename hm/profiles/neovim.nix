@@ -327,6 +327,7 @@ in
           map <Leader>$ <Cmd>Obsession<CR>
         '';
       }
+      # ctrl-e causes an issue with telescope prompt
       vim-rsi
       {
         plugin = vim-sayonara;

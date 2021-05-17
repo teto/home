@@ -104,9 +104,11 @@ set exrc
 call plug#begin(s:plugdir)
 " Plug 'DanilaMihailov/beacon.nvim'  " blinks line when cursor jumps to a new far location
 " Plug 'danihodovic/vim-ansible-vault'  " :AnsibleVaultEncrypt
+" Plug 'edluffy/hologram.nvim'
+" Plug 'winston0410/range-highlight.nvim'
 Plug 'arouene/vim-ansible-vault'
 Plug 'jubnzv/virtual-types.nvim'
-Plug 'andymass/vim-matchup' " to improve %
+" Plug 'andymass/vim-matchup' " to improve % , buggy ?
 Plug 'eugen0329/vim-esearch' " search & replace
 Plug '~/telescope-frecency.nvim' " just for testing
 Plug 'windwp/nvim-spectre' " nnoremap <leader>S :lua require('spectre').open()<CR>
