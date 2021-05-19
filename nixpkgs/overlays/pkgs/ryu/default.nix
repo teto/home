@@ -12,7 +12,7 @@ buildPythonPackage rec {
 
   doCheck = false;
 
-  meta = with stdenv.lib; {
+  meta = with lib; {
     description = "Component-based software defined networking framework";
     homepage = https://github.com/nichoski/kergen;
     maintainers = with maintainers; [ teto ];

@@ -24,6 +24,7 @@
 { mkDerivation, base, hspec, optparse-applicative, process
 , QuickCheck, stdenv
 , fetchFromGitHub
+, lib
 }:
 mkDerivation {
   pname = "gutenhasktags";
@@ -41,6 +42,6 @@ mkDerivation {
   testHaskellDepends = [ base hspec QuickCheck ];
   homepage = "https://github.com/githubuser/gutenhasktags";
   description = "TODO Initial project template from stack";
-  license = stdenv.lib.licenses.bsd3;
+  license = lib.licenses.bsd3;
 }
 

@@ -6,5 +6,14 @@ in
   # i18n.inputMethod = "fcitx5";
   programs.fcitx5 = {
     enable = true;
+    # fcitx.engines = with pkgs.fcitx-engines; [
+
+    # addons = 
+    # mozc  # broken
+    # table-other # for arabic
+    # table-extra # for arabic
+    # # hangul
+    # m17n
+
   };
 }

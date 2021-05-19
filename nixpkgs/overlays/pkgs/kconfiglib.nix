@@ -1,4 +1,4 @@
-{ stdenv, buildPythonPackage, fetchFromGitHub }:
+{ stdenv, buildPythonPackage, lib, fetchFromGitHub }:
 buildPythonPackage rec {
   pname = "Kconfiglib";
   version = "10.36.0";
@@ -12,7 +12,7 @@ buildPythonPackage rec {
 
   doCheck = false;
 
-  meta = with stdenv.lib; {
+  meta = with lib; {
     description = "A flexible Python 2/3 Kconfig implementation and library";
     homepage = https://github.com/ulfalizer/Kconfiglib;
     maintainers = with maintainers; [ teto ];

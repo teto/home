@@ -25,6 +25,8 @@
       # url = "github:teto/neovim/cursor-update-on-colresize?dir=contrib";
       inputs.nixpkgs.follows = "nixpkgs-teto";
     };
+    # https://github.com/haskell/haskell-language-server/tree/1.1.0
+    # hls.url = "github:haskell/haskell-language-server/nix-flakes";
 
     # TODO one can point at a subfolder ou bien c la branche ? /flakes
     # mptcpanalyzer.url = "github:teto/mptcpanalyzer";
@@ -168,7 +170,7 @@
 
                 imports = [
                   ./nixos/configuration-lenovo.nix
-                  ./profiles/nix-daemon.nix
+                  ./nixos/profiles/nix-daemon.nix
                   ./nixos/profiles/neovim.nix
                   ./nixos/modules/xserver.nix
                   ./nixos/hardware-lenovo.nix
@@ -185,6 +187,7 @@
                 nova.hmProfiles.dev
                 nova.hmProfiles.devops
                 ./hm/profiles/experimental.nix
+                ./hm/profiles/japanese.nix
 
                 # ./hm/vscode.nix #  provided by nova-nix config
               ] )

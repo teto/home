@@ -1,4 +1,4 @@
-{ stdenv, buildGoPackage, fetchFromGitHub }:
+{ stdenv, buildGoPackage, fetchFromGitHub, lib }:
 
 buildGoPackage rec {
   name = "colr-${version}";
@@ -13,7 +13,7 @@ buildGoPackage rec {
     sha256 = "1lxawjsaa2ns5xmy7jx0w1yic742vwq7g3rlg3qmwn5ywh9psi5r";
   };
 
-  meta = with stdenv.lib; {
+  meta = with lib; {
     homepage = https://github.com/k1LoW/colr;
     description = "colr colors strings, colorfully.";
     license = [ licenses.mit ];

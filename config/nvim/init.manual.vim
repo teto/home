@@ -4,31 +4,11 @@
 " and prefix you command with 'verbose' is a very good way to get info
 " like ':verbose map J' to know where it was loaded last
 " ❌
-
-function! TestFoldTextWithColumns()
-  let line = getline(v:foldstart)
-  let res = ""
-  " v:foldstart / v:foldend
-  if exists("v:foldstartcol")
-    let res = "foldstartcol exists :". v:foldstartcol
-  endif
-  return res . " toto" . repeat(" ", 4)
-endfunc
-
-" set foldtext=TestFoldTextWithColumns()
-
-" map <C-D> <C-]>
-" map <C-D> :tag<CR>
-map <D-b> :echom "hello papy"
-
-" let g:vrc_trigger = '<C-]>'
-
-"$NVIM_PYTHON_LOG_FILE
-" profile startup time
-" nvim --startuptime startup.log
-" nvim -u NONE --startuptime startup.log
-" to see the difference highlights,
-" runtime syntax/hitest.vim
+" git diff http://vimcasts.org/episodes/fugitive-vim-resolving-merge-conflicts-with-vimdiff/ {{{
+" the left window contains the version from the target branch
+" the middle window contains the working copy of the file, complete with conflict markers
+" the right window contains the version from the merge branch
+" }}}
 
 " vim-plug autoinstallation {{{
 " TODO use stdpath now
@@ -83,32 +63,22 @@ let s:gutter_error_sign = "✘'"
 let s:gutter_warn_sign = '！'
 " }}}
 
-" GIT DIFF http://vimcasts.org/episodes/fugitive-vim-resolving-merge-conflicts-with-vimdiff/ {{{
-" the left window contains the version from the target branch
-" the middle window contains the working copy of the file, complete with conflict markers
-" the right window contains the version from the merge branch
-" }}}
-
-" from FAQ https://github.com/neovim/neovim/wiki/FAQ
-vnoremap <LeftRelease> "*ygv
 
 " inverts the meaning of g in substitution, ie with gdefault, change all
 " occurences
 set gdefault
 
-" nvim will load any .nvimrc in the cwd; useful for per-project settings
-set exrc
-
-
 " VIM-PLUG PLUGIN DECLARATIONS {{{1
 call plug#begin(s:plugdir)
+Plug 'jubnzv/virtual-types.nvim'
+" Plug 'soywod/himalaya' " mail reader :Himalaya ; needs the rust CLI reader
+" himalaya
 " Plug 'DanilaMihailov/beacon.nvim'  " blinks line when cursor jumps to a new far location
-" Plug 'danihodovic/vim-ansible-vault'  " :AnsibleVaultEncrypt
 " Plug 'edluffy/hologram.nvim'
 " Plug 'winston0410/range-highlight.nvim'
 " Plug 'NTBBloodbath/rest.nvim'
-Plug 'soywod/himalaya', {'rtp': 'vim'}
-Plug 'arouene/vim-ansible-vault'
+" Plug 'soywod/himalaya', {'rtp': 'vim'}
+" Plug 'arouene/vim-ansible-vault'
 Plug 'jubnzv/virtual-types.nvim'
 " Plug 'andymass/vim-matchup' " to improve % , buggy ?
 Plug 'eugen0329/vim-esearch' " search & replace
@@ -1654,7 +1624,10 @@ let g:beacon_shrink = 0
 map <Leader>lr <Plug>(Luadev-RunLine)
 map <Leader>ll <Plug>(Luadev-RunLine)
 " }}}
-
+" himalaya {{{
+let g:himalaya_telescope_preview_enabled = 0
+let g:himalaya_mailbox_picker = 'fzf'
+"}}}
 " nvim-spectre {{{
 nnoremap <leader>S :lua require('spectre').open()<CR>
 "}}}
@@ -2163,3 +2136,33 @@ luafile ~/.config/nvim/init.backup.lua
 
 command Hasktags !hasktags .
 set mousemodel=popup_setpos
+
+function! TestFoldTextWithColumns()
+  let line = getline(v:foldstart)
+  let res = ""
+  " v:foldstart / v:foldend
+  if exists("v:foldstartcol")
+    let res = "foldstartcol exists :". v:foldstartcol
+  endif
+  return res . " toto" . repeat(" ", 4)
+endfunc
+
+" set foldtext=TestFoldTextWithColumns()
+
+" map <C-D> <C-]>
+" map <C-D> :tag<CR>
+map <D-b> :echom "hello papy"
+
+" let g:vrc_trigger = '<C-]>'
+
+"$NVIM_PYTHON_LOG_FILE
+" profile startup time
+" nvim --startuptime startup.log
+" nvim -u NONE --startuptime startup.log
+" to see the difference highlights,
+" runtime syntax/hitest.vim
+
+" nvim will load any .nvimrc in the cwd; useful for per-project settings
+set exrc
+" from FAQ https://github.com/neovim/neovim/wiki/FAQ
+vnoremap <LeftRelease> "*ygv

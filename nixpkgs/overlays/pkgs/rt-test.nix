@@ -1,4 +1,4 @@
-{ stdenv, fetchurl, numactl }:
+{ stdenv, fetchurl, numactl, lib }:
 
 stdenv.mkDerivation {
   name = "re-tests";
@@ -11,7 +11,7 @@ stdenv.mkDerivation {
   nativeBuildInputs = [ numactl ];
     # prefix is not passed when installing apparently
 
-    meta = with stdenv.lib; {
+    meta = with lib; {
       homepage = https://wiki.linuxfoundation.org/realtime/documentation/howto/tools/rt-tests;
       description = "Linux latency analysis";
       license = licenses.gpl2;

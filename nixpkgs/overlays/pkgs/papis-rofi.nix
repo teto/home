@@ -1,4 +1,5 @@
-{ stdenv, buildPythonPackage, fetchFromGitHub, rofi, papis, python-rofi, fetchPypi}:
+{ stdenv, buildPythonPackage, fetchFromGitHub, rofi, papis, python-rofi
+, fetchPypi, lib }:
 buildPythonPackage rec {
   pname = "papis-python-rofi";
   version = "1.0.2";
@@ -18,7 +19,7 @@ buildPythonPackage rec {
 
   doCheck = false;
 
-  meta = with stdenv.lib; {
+  meta = with lib; {
     description = "Linux kernel config generator";
     homepage = https://github.com/nichoski/kergen;
     maintainers = with maintainers; [ teto ];

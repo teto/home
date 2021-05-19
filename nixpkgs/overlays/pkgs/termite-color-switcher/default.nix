@@ -36,7 +36,7 @@ stdenv.mkDerivation  {
     runHook postInstall
   '';
 
-  meta = with stdenv.lib; {
+  meta = with lib; {
 
     license = licenses.bsd3;
     maintainers = [ maintainers.teto ];

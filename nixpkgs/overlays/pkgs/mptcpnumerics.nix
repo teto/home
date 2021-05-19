@@ -1,5 +1,6 @@
 { stdenv, python, fetchFromGitHub, buildPythonApplication
-, stevedore, cmd2, pandas, sortedcontainers, matplotlib, pulp, pyqt5, sympy }:
+, stevedore, cmd2, pandas, sortedcontainers, matplotlib, pulp, pyqt5
+, sympy, lib }:
 buildPythonApplication rec {
 	pname = "mptcpnumerics";
 	version = "0.1";
@@ -32,7 +33,7 @@ buildPythonApplication rec {
     ];
 	/* propagatedBuildInputs =  [ stevedore pandas matplotlib pyqt5 ]; */
 
-    meta = with stdenv.lib; {
+    meta = with lib; {
       description = "tool specialized for multipath TCP";
       maintainers = [ maintainers.teto ];
     };

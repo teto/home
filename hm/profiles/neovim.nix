@@ -138,8 +138,11 @@ in
       # y a aussi vim-markdown
       {
         # euclio/vim-markdown-composer
+        # 
         plugin = vim-markdown-composer;
         config = ''
+          " use with :ComposerStart
+          let g:markdown_composer_autostart = 0
         '';
       }
 

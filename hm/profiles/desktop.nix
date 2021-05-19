@@ -110,7 +110,7 @@ let
     # gnome3.gnome_control_center
     ncpamixer # pulseaudio TUI mixer
     # TODO
-    nyxt      # lisp brwoser : not packaged yet ?
+    # nyxt      # lisp browser
 
     noti # send notifications when a command finishes
     # papis # library manager
@@ -127,7 +127,6 @@ let
     sxiv # simple image viewer
     # vimiv # image viewer
     shared_mime_info # temporary fix for nautilus to find the correct files
-    tagainijisho # japanse dict; like zkanji Qt based
     translate-shell
     # unstable.transmission_gtk  # bittorrent client
     xdotool # needed for vimtex + zathura
