@@ -106,6 +106,7 @@ call plug#begin(s:plugdir)
 " Plug 'danihodovic/vim-ansible-vault'  " :AnsibleVaultEncrypt
 " Plug 'edluffy/hologram.nvim'
 " Plug 'winston0410/range-highlight.nvim'
+" Plug 'NTBBloodbath/rest.nvim'
 Plug 'arouene/vim-ansible-vault'
 Plug 'jubnzv/virtual-types.nvim'
 " Plug 'andymass/vim-matchup' " to improve % , buggy ?
@@ -135,7 +136,7 @@ Plug 'jbyuki/contextmenu.nvim' " deprecated
 Plug 'Olical/aniseed' " dependency of ?
 Plug 'bakpakin/fennel.vim'
 Plug 'strboul/urlview.vim' " :Urlview to list urls and open them
-Plug 'diepm/vim-rest-console' " test rest APIs
+Plug 'diepm/vim-rest-console' " test rest APIs * Hit the trigger key (<C-j> by default).
 " Plug '~/pdf-scribe.nvim'  " to annotate pdf files from nvim :PdfScribeInit
 " Plug 'cespare/vim-toml'
 "Plug 'TaDaa/vimade' " to dim the background on lost focus

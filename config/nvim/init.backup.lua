@@ -56,6 +56,10 @@ use { 'edluffy/specs.nvim' }
 use { 'nvim-lua/popup.nvim'  }  -- mimic vim's popupapi for neovim
 use { 'nvim-lua/plenary.nvim' } -- lua utilities for neovim
 -- use { 'nvim-lua/telescope.nvim' }
+use {
+    'NTBBloodbath/rest.nvim',
+    requires = { 'nvim-lua/plenary.nvim' }
+}
 use { '~/telescope.nvim' }
 use { 'lukas-reineke/indent-blankline.nvim', branch = "lua", opt=true}
 -- Plug '~/telescope.nvim'    -- fzf-like in lua
