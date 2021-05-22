@@ -107,6 +107,7 @@ call plug#begin(s:plugdir)
 " Plug 'edluffy/hologram.nvim'
 " Plug 'winston0410/range-highlight.nvim'
 " Plug 'NTBBloodbath/rest.nvim'
+Plug 'soywod/himalaya', {'rtp': 'vim'}
 Plug 'arouene/vim-ansible-vault'
 Plug 'jubnzv/virtual-types.nvim'
 " Plug 'andymass/vim-matchup' " to improve % , buggy ?

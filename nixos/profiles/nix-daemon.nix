@@ -48,12 +48,11 @@
         "https://jupyterwith.cachix.org"
         # TODO move it to nova's ?
         "https://static-haskell-nix.cachix.org"
+        "https://hydra.iohk.io"
       ];
 
       trustedUsers = [ "root" "teto" ];
 
       distributedBuilds = false;
     };
-
-
 }

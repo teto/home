@@ -17,6 +17,7 @@ in
       ./profiles/sway.nix
       ./profiles/weechat.nix
       ./profiles/extra.nix
+      ./profiles/syncthing.nix
 
       # not merged yet
       # ./hm/autoUpgrade.nix
