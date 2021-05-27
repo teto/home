@@ -1,6 +1,8 @@
 
 ANSIBLE_LIBRARY
 
+export ANSIBLE_KEEP_REMOTE_FILES=1
+
 --ssh-common-args
 --ssh-extra-args
 

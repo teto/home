@@ -1,12 +1,9 @@
 final: prev:
 {
-
   # upstreamed already
   # myHelm = final.wrapHelm final.kubernetes-helm {
   #   plugins = with final.kubernetes-helmPlugins; [ helm-s3 helm-secrets helm-diff ];
   # };
-
-
   buku_run = prev.stdenv.mkDerivation rec {
     pname = "buku_run";
     version = "0.1.1";
@@ -44,9 +41,6 @@ final: prev:
 
   dualsub = prev.callPackage ./dualsubtitles { };
 
-  # casse nix-index
-  # hunter = prev.callPackage ./hunter { };
-
   # mda-lite = prev.pythonPackages.callPackage ./mda-lite {};
 
   mptcpnumerics = prev.python3Packages.callPackage ./mptcpnumerics.nix {};
@@ -57,19 +51,13 @@ final: prev:
   subtitles-rs = prev.callPackage ./subtitles-rs { };
 
   # rustNightlyPlatform = prev.recurseIntoAttrs (prev.makeRustPlatform rust-nightly);
-
   # rt-tests = prev.callPackage ./rt-test.nix {};
-
-  # stab = prev.callPackage ./stab.nix {
-  #   inherit (prev.pkgs.gnome2) libgnome libgnomeui;
-  # };
 
   i3dispatch = prev.python3Packages.callPackage ./i3-dispatch { inherit (prev) lib;};
 
   # i3-snapshot = prev.callPackage ./i3-snapshot {};
-
   # rofi-scripts = prev.callPackage ./rofi-scripts {};
 
-  # neovide = prev.callPackage ./neovide {};
-
+  # neovide = prev.callPackage ./neovide { neovide = prev.neovide; };
+  # neovide = prev.callPackage ./neovide { neovide = prev.neovide; };
 }

@@ -11,26 +11,26 @@
 alias nvim-dev="nix develop --override-input nixpkgs /home/teto/nixpkgs --no-write-lock-file ./contrib#neovim-developer  --show-trace"
 alias notif-center="kill -s USR1 $(pidof deadd-notification-center)"
 
+# TODO
+# export BW_SESSION=$(bw unlock --raw)
+
 # Gitops quick
-alias mg='if [ -z ${BW_SESSION+x} ]; then export BW_SESSION=$(bw unlock --raw); fi && make gitops'
+alias mg='if [ -z ${BW_SESSION} ]; then export BW_SESSION=$(bw unlock --raw); fi && make gitops'
 
 # nix aliases {{{
 
 # no
 alias nixos-fast="nixos-rebuild  --no-build-nix --fast"
 
-# todo fix completion accordingly
-# alias nxi="nix-env -iA"
-# alias nxu="nix-env -e"
-# alias nxs="nix-shell"
-# alias nxp="nixops "
 
 # rename mptcp ?
 alias mp="mptcpanalyzer"
 
 # autres players a tester eventuellement
 # alias n="ncmpcpp"
-alias n="nix-shell"
+alias n="nix develop"
+alias ns="nix-shell"
+# alias lens="sudo rm -rf /home/teto/.config/Lens/extensions && lens"
 # alias ff="find . -iname" # use fd instead
 alias latest="ls -lt $@ |head"
 

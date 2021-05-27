@@ -317,6 +317,13 @@ if has_telescope then
 			buffer_previewer_maker = require'telescope.previewers'.buffer_previewer_maker
 		},
 		extensions = {
+			-- fzf = {
+			-- 	fuzzy = true,                    -- false will only do exact matching
+			-- 	override_generic_sorter = true, -- override the generic sorter
+			-- 	override_file_sorter = true,     -- override the file sorter
+			-- 	case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
+			-- 								-- the default case_mode is "smart_case"
+			-- },
 			fzy_native = {
 				override_generic_sorter = true,
 				override_file_sorter = true,
@@ -334,6 +341,7 @@ if has_telescope then
 		}
 	}
 	-- This will load fzy_native and have it override the default file sorter
+	-- telescope.load_extension('fzf')
 	telescope.load_extension('fzy_native')
 	telescope.load_extension("frecency")
 

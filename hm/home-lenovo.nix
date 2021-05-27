@@ -49,19 +49,18 @@ in
   # for blue tooth applet; must be installed systemwide
   services.blueman-applet.enable = false;
 
-  # services.nextcloud-client.enable = true;
+  services.nextcloud-client.enable = true;
 
   home.sessionVariables = {
     DASHT_DOCSETS_DIR="/mnt/ext/docsets";
     # $HOME/.local/share/Zeal/Zeal/docsets
   };
 
-  #     xrandr --output DVI-I-1 --primary
+  # xrandr --output DVI-I-1 --primary
   xsession.initExtra = ''
   '';
 
   # fzf-extras found in overlay fzf-extras
   # programs.zsh.initExtra = ''
   # '';
-
 }

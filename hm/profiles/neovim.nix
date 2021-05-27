@@ -49,8 +49,37 @@ let
   # overlayPlugins = with pkgs.myVimPlugins;[
     # https://github.com/vmchale/dhall-vim.git
     # dhall-vim
-  overlayPlugins = with pkgs.myVimPlugins; [
+      # vimPlugins = final: prev: {
+  myVimPlugins = pkgs.vimPlugins.extend (
+    final: prev: {
+
+      # doesn't build because plenary requires gh ??!
+      # octo-nvim = pkgs.vimUtils.buildVimPluginFrom2Nix {
+      #   pname = "octo-nvim";
+      #   version = "2021-05-06";
+      #   src = pkgs.fetchFromGitHub {
+      #     owner = "pwntester";
+      #     repo = "octo.nvim";
+      #     rev = "d92a7352516f06a457cbf8812b173abc319f7882";
+      #     sha256 = "1xvj3p32nzcn8rv2hscmj8sn8bfm1s2r5j1cwwnkl4zbqdbd4k5f";
+      #   };
+      #   meta.homepage = "https://github.com/pwntester/octo.nvim/";
+      # };
+    }
+  );
+
+  # Usage:
+  # pkgs.tree-sitter.withPlugins (p: [ p.tree-sitter-c p.tree-sitter-java ... ])
+  #
+  # or for all grammars:
+  # pkgs.tree-sitter.withPlugins (_: allGrammars)
+  # which is equivalent to
+  # pkgs.tree-sitter.withPlugins (p: builtins.attrValues p)
+  overlayPlugins = with myVimPlugins; [
     # octo-nvim
+    pkgs.vimPlugins.telescope-fzf-native-nvim
+
+
       # TODO restore in my overlay
       # {
       #   # davidgranstrom/nvim-markdown-preview
@@ -113,7 +142,6 @@ in
       haskellPackages.hasktags
       jq
       nodePackages.bash-language-server
-      nodePackages.bash-language-server
       nodePackages.dockerfile-language-server-nodejs # broken
       nodePackages.pyright
       nodePackages.typescript-language-server
@@ -127,7 +155,6 @@ in
     ];
 
     plugins = with pkgs.vimPlugins; [
-      # echodoc-vim
 
       # {
       #   # davidgranstrom/nvim-markdown-preview
@@ -138,7 +165,6 @@ in
       # y a aussi vim-markdown
       {
         # euclio/vim-markdown-composer
-        # 
         plugin = vim-markdown-composer;
         config = ''
           " use with :ComposerStart
@@ -146,11 +172,7 @@ in
         '';
       }
 
-
-
       # to install manually with coc.nvim:
-      # - coc-vimtex  coc-snippets
-      # use coc-yank for yank history
       {
         plugin = editorconfig-vim;
         config = ''
@@ -169,18 +191,15 @@ in
       #   #     '';
       #   # };
       # }
-      {
-        plugin = editorconfig-vim;
-        # config = ''
-        # '';
-      }
-      {
-        plugin = far-vim;
-        config = ''
-          let g:far#source='rg'
-          let g:far#collapse_result=1
-        '';
-      }
+
+      # {
+      #   plugin = far-vim;
+      #   config = ''
+      #     let g:far#source='rg'
+      #     let g:far#collapse_result=1
+      #   '';
+      # }
+
       # {
       #   plugin = telescope-nvim;
       # }
@@ -353,12 +372,6 @@ in
         plugin = vim-commentary;
         config = ''
           '';
-      }
-      {
-        # TODO generate its runtime/init
-        plugin = nvim-lspconfig;
-        # config = ''
-        # '';
       }
 
       # triggers errors when working on neovim

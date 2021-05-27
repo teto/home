@@ -18,6 +18,7 @@ in
     # ./modules/vpn.nix
 
     ./modules/openssh.nix
+    # ./modules/syncthing.nix
 
     # ./modules/tor.nix
     ./profiles/steam.nix

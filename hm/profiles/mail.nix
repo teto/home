@@ -160,28 +160,28 @@ let
       groups.personal = {
         channels = {
           inbox = {
-            masterPattern = "";
-            slavePattern = "";
+            farPattern = "";
+            nearPattern = "";
           };
           sent = {
-            masterPattern = config.accounts.email.accounts.gmail.folders.sent;
-            slavePattern = "Sent";
+            farPattern = config.accounts.email.accounts.gmail.folders.sent;
+            nearPattern = "Sent";
           };
           trash = {
-            masterPattern = config.accounts.email.accounts.gmail.folders.trash;
-            slavePattern = "Trash";
+            farPattern = config.accounts.email.accounts.gmail.folders.trash;
+            nearPattern = "Trash";
           };
           starred = {
-            masterPattern = "[Gmail]/Starred";
-            slavePattern = "Starred";
+            farPattern = "[Gmail]/Starred";
+            nearPattern = "Starred";
           };
           drafts = {
-            masterPattern = config.accounts.email.accounts.gmail.folders.drafts;
-            slavePattern = "Drafts";
+            farPattern = config.accounts.email.accounts.gmail.folders.drafts;
+            nearPattern = "Drafts";
           };
           # spam = {
-          #   masterPattern = config.accounts.email.accounts.gmail.folders.drafts;
-          #   slavePattern = "Spam";
+          #   farPattern = config.accounts.email.accounts.gmail.folders.drafts;
+          #   nearPattern = "Spam";
           # };
         };
     };

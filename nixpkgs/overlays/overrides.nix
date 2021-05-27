@@ -14,6 +14,55 @@ rec {
     };
   });
 
+  neovide = prev.neovide.overrideAttrs(oa:
+    let
+      rpathLibs = with final.pkgs; [
+        libglvnd
+        freeglut
+        freeglut.dev
+        freetype
+
+        vulkan-loader
+        xorg.libXcursor
+        xorg.libXext
+        xorg.libXrandr
+        xorg.libXi
+        fontconfig
+      ];
+    in {
+    # shellHook = ''echo "hello world"'';
+      buildInputs = with final.pkgs; oa.buildInputs ++ [
+        libglvnd
+        freeglut
+        freeglut.dev
+        freetype
+
+        vulkan-loader
+        xorg.libXcursor
+        xorg.libXext
+        xorg.libXrandr
+        xorg.libXi
+        fontconfig
+
+
+      ];
+
+      src = final.fetchFromGitHub {
+        owner = "Kethku";
+        repo = "neovide";
+        rev = "580558f39e1494b377385ea109176ebe7ccc357f"; # opengl branch
+        sha256 = "sha256-aElIufOVKKAN8MKxHpzO50DgHyjU49Qwtf5wBGzVDV0=";
+
+      };
+
+      cargoSha256 = "0000000000000000000000000000000000000000000000000000";
+
+      shellHook = ''
+        echo "hello world"
+        echo 'patchelf --set-rpath "${final.lib.makeLibraryPath rpathLibs}" target/debug/neovide'
+      '';
+  });
+
   # visidata = prev.visidata.overrideAttrs(oa: {
   #   name = "visidata-matt";
   #   src = builtins.fetchGit {

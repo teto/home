@@ -12,7 +12,7 @@
     # extraOptionOverrides
     # include path to file
     extraConfig = ''
-      Include ./manual.config
+    Include ./manual.config
     '';
   };
 }

@@ -7,6 +7,8 @@
       # flake = false;
     };
     unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    mptcp-flake.url = "github:teto/mptcp-flake";
+
     # TODO use mine instead
     hm = {
       url = "github:nix-community/home-manager";
@@ -14,8 +16,6 @@
     };
     nur.url = "github:nix-community/NUR";
 
-    # temporary until this gets fixed upstream
-    # poetry-unstable.url = "github:teto/poetry2nix/fix_tag";
     poetry.url = "github:nix-community/poetry2nix";
 
     nova.url = "git+ssh://git@git.novadiscovery.net:4224/world/nova-nix.git?ref=master";
@@ -79,9 +79,9 @@
               imports = my_imports ++ [
                 # custom modules
                 (import ./hm/modules/pywal.nix )
+                (import ./hm/modules/ranger.nix )
                 (import ./hm/modules/fcitx.nix )
                 (import ./hm/modules/xdg.nix )
-
               ];
 
               home.packages = [
@@ -210,7 +210,7 @@
         python = import ./nixpkgs/overlays/python.nix;
         # vimPlugins = final: prev: {
         #   myVimPlugins = prev.vimPlugins.extend (
-        #     final2: prev2: {
+        #     final: prev: {
         #       octo-nvim = prev.buildVimPluginFrom2Nix {
         #         pname = "octo-nvim";
         #         version = "2021-05-06";

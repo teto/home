@@ -56,11 +56,12 @@ let
   in [
     # gnome3.california # fails
     khard
-    libsecret  # to consult
+    # libsecret  # to consult
     newsboat #
     # leafnode dovecot22 dovecot_pigeonhole fetchmail procmail w3m
     # mairix mutt msmtp lbdb contacts spamassassin
   ] ++ lib.optionals all [
+    element-desktop
     slack
   ];
 
@@ -87,19 +88,16 @@ let
     bandwhich  # to monitor per app bandwidth
     du-dust  # dust binary: rust replacement of du
     hunspellDicts.fr-any
-    # buku  # broken on unstable and stable
-    # dynamic-colors # to change the terminal colors ("dynamic-colors switch solarized-dark")
+    buku  # broken on unstable and stable
     # gcalc
     gnome3.networkmanagerapplet # should
     gnome3.defaultIconTheme # else nothing appears
     # i3-layout-manager  # to save/load layouts
-    kitty
     libnotify
     # unstable.evince # succeed where zathura/mupdf fail
 
     # conflicts with nautilus
     gnome3.file-roller # for GUI archive handling
-    ffmpegthumbnailer # to preview videos in ranger
     # todo try sthg else
     # requires xdmcp https://github.com/freedesktop/libXdmcp
     gnome3.eog # eye of gnome = image viewer / creates a collision
@@ -165,7 +163,7 @@ let
     # shutter # screenshot utility
     # mcomix # manga reader
     # mendeley # requiert qtwebengine
-    zeal       # doc for developers
+    # zeal       # doc for developers
     vifm
     # zotero     # doc software
     # astroid # always compiles webkit so needs 1 full day
@@ -226,9 +224,6 @@ in
     # extraConfig = 
   };
 
-  # services.screen-locker.enable = true;
-
-  services.parcellite.enable = false;
 
   # might trigger nm-applet crash ?
   services.gpg-agent = {
@@ -249,7 +244,7 @@ in
 
   # needed for gpg-agent gnome pinentry
   # services.dbus.packages = [ pkgs.gcr ];
-
+  services.parcellite.enable = true;
 
   programs.pywal.enable = true;
 
@@ -273,27 +268,6 @@ in
 
   #  TODO newsboat
   # programs.newsboat.urls =
-
-  programs.termite = {
-    enable = false;
-
-    clickableUrl = false;
-    cursorBlink = "system";
-    cursorShape = "block";
-    font = "Inconsolata 11";
-    scrollOnKeystroke = true;
-    scrollOnOutput = false;
-    scrollbar = "right";
-    searchWrap = false;
-    scrollbackLines = 10000;
-    fullscreen = false;
-    optionsExtra = ''
-    '';
-
-    # read a different file depending on computer
-    # colorsExtra = '' '';
-  };
-
 
 # [Added Associations]
 # video/x-matroska=vlc.desktop;mpv.desktop;

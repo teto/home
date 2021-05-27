@@ -1,7 +1,7 @@
 { config, lib, pkgs,  ... }:
 {
   nix = {
-    package = pkgs.nixExperimental;
+    package = pkgs.nixFlakes;
 
     registry = {
       nur.to = { type = "github"; owner = "nix-community"; repo="NUR"; };
@@ -30,6 +30,8 @@
         keep-outputs = true       # Nice for developers
         keep-derivations = true   # Idem
         keep-failed = true
+
+        experimental-features = nix-command flakes
       '';
       #  to keep build-time dependencies around => rebuild while being offline
       # extraOptions = ''

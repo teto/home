@@ -3,6 +3,7 @@
 {
   home.packages = with pkgs; [
     steam
+    # lgogdownloader
   ];
 
   services.upower.percentageLow = 35;

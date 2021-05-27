@@ -48,7 +48,6 @@ rec {
      fd  # replaces 'find'
      file
 	 fzf
-     # lgogdownloader
      # libtool
      lsof
 	 # gawk

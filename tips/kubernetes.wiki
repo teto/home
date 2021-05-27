@@ -12,6 +12,13 @@ KUBECONFIG=~/.kube/config:~/.kube/kubconfig2
 kubectl config view
 kubectl config get-contexts
 
+
+
+imagePullPolicy: Always
+sha256:f5e2cba84a0de9ed9148fb2ac72cd0af7ff2c351b8f0428d46c2d03417c8f78e
+
+https://github.com/kubernetes-sigs/kustomize/issues/2234
+
 1/ make gitops
 check the
 

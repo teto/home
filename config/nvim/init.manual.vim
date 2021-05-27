@@ -79,6 +79,8 @@ Plug 'jubnzv/virtual-types.nvim'
 " Plug 'NTBBloodbath/rest.nvim'
 " Plug 'soywod/himalaya', {'rtp': 'vim'}
 " Plug 'arouene/vim-ansible-vault'
+
+Plug 'kevinhwang91/rnvimr'
 Plug 'jubnzv/virtual-types.nvim'
 " Plug 'andymass/vim-matchup' " to improve % , buggy ?
 Plug 'eugen0329/vim-esearch' " search & replace
