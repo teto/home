@@ -88,7 +88,7 @@ let
     bandwhich  # to monitor per app bandwidth
     du-dust  # dust binary: rust replacement of du
     hunspellDicts.fr-any
-    buku  # broken on unstable and stable
+    buku
     # gcalc
     gnome3.networkmanagerapplet # should
     gnome3.defaultIconTheme # else nothing appears
@@ -163,7 +163,7 @@ let
     # shutter # screenshot utility
     # mcomix # manga reader
     # mendeley # requiert qtwebengine
-    # zeal       # doc for developers
+    zeal       # doc for developers
     vifm
     # zotero     # doc software
     # astroid # always compiles webkit so needs 1 full day

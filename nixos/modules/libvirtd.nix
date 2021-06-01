@@ -11,7 +11,8 @@
   '';
 
   environment.systemPackages = [
-    # pkgs.virt-manager # broken to run ubuntu, needs libvirtd service
+    # to run ubuntu, needs libvirtd service
+    pkgs.virt-manager  # broken)
   ];
 
   virtualisation.libvirtd = {

@@ -89,7 +89,7 @@ use { 'phaazon/hop.nvim', opt=true }
 use { 'alec-gibson/nvim-tetris'}
 use { 'mfussenegger/nvim-dap'}
 use { 'bazelbuild/vim-bazel' , requires = { 'google/vim-maktaba' } }
-
+use 'matbme/JABS.nvim'
 -- use 'sindrets/diffview.nvim' -- :DiffviewOpen
 -- use 'folke/which-key.nvim' -- :WhichKey
 

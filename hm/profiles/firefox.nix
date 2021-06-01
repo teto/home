@@ -23,7 +23,6 @@ in
 
     # Not accepted. we should find another way to enable it
     # pass package for instance
-    # enableBukubrow = true;
     # with pkgs.nur.repos.rycee.firefox-addons;
     extensions =  with pkgs;[
       # TODO no need for bitwarden anymore
@@ -50,7 +49,7 @@ in
         # https://gitlab.com/rycee/configurations/-/blob/bf46aef74ca53a61fe2d35349fe3dbc6a70b2609/user/firefox.nix#L25-39
         settings = {
           # TODO use my own startpage
-          "browser.startup.homepage" = "https://github.com";
+          "browser.startup.homepage" = "https://github.com/teto";
           "browser.search.region" = "FR";
           "browser.search.isUS" = false;
           # "distribution.searchplugins.defaultLocale" = "en-GB";

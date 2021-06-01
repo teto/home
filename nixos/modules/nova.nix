@@ -8,6 +8,14 @@
     ./postgresql.nix
   ];
 
+
+  xdg.desktopEntries = {
+      min = { # minimal definition
+        exec = "firefox -p nova";
+        name = "Firefox for nova";
+      };
+  };
+
   nix = {
     binaryCaches = [
       "s3://devops-ci-infra-prod-caching-nix?region=eu-central-1&profile=nix-daemon"

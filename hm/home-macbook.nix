@@ -18,7 +18,7 @@ in
     dunst
     fortune
     xdg_utils
-    steam
+    # steam
     gtk-engine-murrine  # for hyper-light drifter
   ];
 

@@ -32,7 +32,9 @@
   fileSystems."/mnt/ext" =
     { device = "/dev/sda1";
       fsType = "ext4";
-      options = [ "defaults" "exec" "user" "nofail" ];
+      # "exec"
+      # user disables exec
+      options = [ "defaults" "user" "exec" "nofail"];
     };
 
   fileSystems."/mnt/ntfs" =
@@ -47,5 +49,6 @@
 
 
   nix.maxJobs = lib.mkDefault 4;
+  # Often used values: "ondemand", "powersave", "performance"
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
 }

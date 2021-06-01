@@ -117,7 +117,7 @@ in
   services.greenclip = let
     # myGreenclip = with pkgs; haskell.lib.unmarkBroken haskell.packages.ghc884.greenclip;
   in {
-    enable = false;
+    enable = true;
     # package = myGreenclip;
   };
 

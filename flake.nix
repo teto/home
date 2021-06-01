@@ -174,6 +174,7 @@
                   ./nixos/profiles/neovim.nix
                   ./nixos/modules/xserver.nix
                   ./nixos/hardware-lenovo.nix
+                  ./nixos/profiles/steam.nix
                 ];
               })
               hm.nixosModules.home-manager
@@ -188,6 +189,7 @@
                 nova.hmProfiles.devops
                 ./hm/profiles/experimental.nix
                 ./hm/profiles/japanese.nix
+                # ./hm/profiles/gaming.nix
 
                 # ./hm/vscode.nix #  provided by nova-nix config
               ] )

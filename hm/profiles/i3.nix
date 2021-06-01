@@ -310,7 +310,7 @@ in
         "Super_L+w" = "exec ${pkgs.i3-easyfocus}/bin/i3-easyfocus";
 
         # broken
-        # "${mod}+b" = "exec ${pkgs.buku_run}/bin/buku_run";
+        "${mod}+b" = "exec ${pkgs.buku_run}/bin/buku_run";
         "${mad}+c" = "exec ${pkgs.rofi-calc}/bin/rofi-calc";
         "${mod}+p" = "exec ${pkgs.rofi-pass}/bin/rofi-pass";
 
