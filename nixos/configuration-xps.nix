@@ -24,7 +24,6 @@ in
 
   # it apparently still is quite an important thing to have
   # boot.devSize = "5g";
-  services.screen-locker.enable = true;
 
   boot.kernelParams = [ 
 	# "acpi_backlight=vendor"

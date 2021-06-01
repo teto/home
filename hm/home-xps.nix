@@ -41,6 +41,11 @@ in
     simple-scan
   ];
 
+  services.screen-locker = {
+    enable = true;
+    lockCmd = "${pkgs.i3lock-fancy}/bin/i3lock-fancy";
+  };
+
   # for blue tooth applet; must be installed systemwide
   services.blueman-applet.enable = true;
 

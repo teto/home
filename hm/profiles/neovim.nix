@@ -77,7 +77,7 @@ let
   # pkgs.tree-sitter.withPlugins (p: builtins.attrValues p)
   overlayPlugins = with myVimPlugins; [
     # octo-nvim
-    pkgs.vimPlugins.telescope-fzf-native-nvim
+    # pkgs.vimPlugins.telescope-fzf-native-nvim
 
 
       # TODO restore in my overlay
