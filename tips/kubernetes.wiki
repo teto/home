@@ -116,3 +116,8 @@ https://kubernetes.io/fr/docs/reference/kubectl/cheatsheet/
 Nice utilities
 - kubebox
 - k9s
+
+kubectl config current-context
+kubectl config set-context
+
+kubectl config use-context arn....
