@@ -2,7 +2,7 @@
 
 One can't access things from external WORKSPACE(s).
 
-
+bazel info --show_make_env
 bazel build @ghcide-exe//hie-bios
 
 bazel help query

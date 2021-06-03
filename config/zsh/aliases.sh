@@ -10,7 +10,8 @@
 
 alias nvim-dev="nix develop --override-input nixpkgs /home/teto/nixpkgs --no-write-lock-file ./contrib#neovim-developer  --show-trace"
 alias notif-center="kill -s USR1 $(pidof deadd-notification-center)"
-
+# --option extra-sandbox-paths "/bin/sh=$(readlink -f $(which bash))"
+alias local-rebuild="sudo nixos-rebuild --flake ~/home --override-input nixpkgs-teto /home/teto/nixpkgs --override-input hm /home/teto/hm --override-input nova /home/teto/nova/nova-nix --override-input mptcp-flake /home/teto/mptcp/mptcp-flake --no-write-lock-file switch --show-trace"
 # TODO
 # export BW_SESSION=$(bw unlock --raw)
 

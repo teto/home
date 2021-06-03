@@ -30,14 +30,6 @@ rec {
   #   # withExamples = true;
   };
 
-  # ns-3-dce-dev = prev.ns-3-dce.overrideAttrs(oa: {
-  #     src = (builtins.fetchGit {
-  #       url  = git://github.com/teto/ns-3-dce;
-  #       ref    = "python3";
-  #       name = "dce";
-  #     });
-  # });
-
   # dce-quagga-dev =  if (prev.pkgs ? dce-quagga) then (prev.dce-quagga.overrideAttrs( oa: {
   #   srcs = [
   #     (builtins.fetchGit {

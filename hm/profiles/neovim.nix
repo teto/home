@@ -68,93 +68,9 @@ let
     }
   );
 
-  # Usage:
-  # pkgs.tree-sitter.withPlugins (p: [ p.tree-sitter-c p.tree-sitter-java ... ])
-  #
-  # or for all grammars:
-  # pkgs.tree-sitter.withPlugins (_: allGrammars)
-  # which is equivalent to
-  # pkgs.tree-sitter.withPlugins (p: builtins.attrValues p)
-  overlayPlugins = with myVimPlugins; [
-    # octo-nvim
-    # pkgs.vimPlugins.telescope-fzf-native-nvim
 
 
-      # TODO restore in my overlay
-      # {
-      #   # davidgranstrom/nvim-markdown-preview
-      #   plugin = nvim-markdown-preview;
-      #   config = ''
-      #   '';
-      # }
-  ];
-
-  # taken from the official flake
-  myPackage = pkgs.neovim-debug;
-in
-{
-
-  home.file."${config.xdg.configHome}/nvim/parser/c.so".source = "${pkgs.tree-sitter.builtGrammars.tree-sitter-c}/parser";
-  home.file."${config.xdg.configHome}/nvim/parser/bash.so".source = "${pkgs.tree-sitter.builtGrammars.tree-sitter-bash}/parser";
-  home.file."${config.xdg.configHome}/nvim/parser/lua.so".source = "${pkgs.tree-sitter.builtGrammars.tree-sitter-lua}/parser";
-  home.file."${config.xdg.configHome}/nvim/parser/python.so".source = "${pkgs.tree-sitter.builtGrammars.tree-sitter-python}/parser";
-  # haskell treesitter is broken
-  home.file."${config.xdg.configHome}/nvim/parser/haskell.so".source = "${pkgs.tree-sitter.builtGrammars.tree-sitter-haskell}/parser";
-  home.file."${config.xdg.configHome}/nvim/parser/nix.so".source = "${pkgs.tree-sitter.builtGrammars.tree-sitter-nix}/parser";
-
-# nvim-lua/lsp_extensions.nvim
-
-
-  programs.neovim = {
-     enable = true;
-
-     # take the one from the flake
-     package = myPackage;
-
-     # concatMap
-     # source doesn't like `stdpath('config').'`
-     # todo should use mkBefore
-     #         ${config.programs.neovim.generatedInitrc}
-     extraConfig = ''
-        set noshowmode " Show the current mode on command line
-        set cursorline " highlight cursor line
-        source $XDG_CONFIG_HOME/nvim/init.manual.vim
-      ''
-      # concatStrings = builtins.concatStringsSep "";
-      + (lib.strings.concatStrings (
-        lib.mapAttrsToList genBlock rcBlocks
-      ))
-    ;
-
-    # just for tests
-    # configure = {
-    #   customRC = ''test'';
-    # };
-
-    # extraLuaConfig = ''
-    #   -- logs are written to /home/teto/.cache/vim-lsp.log
-    #   vim.lsp.set_log_level("info")
-    # '';
-
-    # TODO add lsp stuff
-    extraPackages = with pkgs; [
-      # luaPackages.lua-lsp
-      haskellPackages.hasktags
-      jq
-      nodePackages.bash-language-server
-      nodePackages.dockerfile-language-server-nodejs # broken
-      nodePackages.pyright
-      nodePackages.typescript-language-server
-      pandoc  # for markdown preview, should be in the package closure instead
-      pythonPackages.pdftotext  # should appear only in RC ?
-      rnix-lsp
-      rust-analyzer
-      shellcheck
-      sumneko-lua-language-server
-      yaml-language-server
-    ];
-
-    plugins = with pkgs.vimPlugins; [
+  basePlugins = with pkgs.vimPlugins; [
 
       # {
       #   # davidgranstrom/nvim-markdown-preview
@@ -401,7 +317,88 @@ in
         '';
       }
 
-    ] ++ overlayPlugins;
+  ];
+
+  # Usage:
+  # pkgs.tree-sitter.withPlugins (p: [ p.tree-sitter-c p.tree-sitter-java ... ])
+  #
+  # or for all grammars:
+  # pkgs.tree-sitter.withPlugins (_: allGrammars)
+  # which is equivalent to
+  # pkgs.tree-sitter.withPlugins (p: builtins.attrValues p)
+  overlayPlugins = with myVimPlugins; [
+    # octo-nvim
+    # pkgs.vimPlugins.telescope-fzf-native-nvim
+
+
+      # TODO restore in my overlay
+      # {
+      #   # davidgranstrom/nvim-markdown-preview
+      #   plugin = nvim-markdown-preview;
+      #   config = ''
+      #   '';
+      # }
+  ];
+
+  # taken from the official flake
+  myPackage = pkgs.neovim-debug;
+in
+{
+
+  home.file."${config.xdg.configHome}/nvim/parser/c.so".source = "${pkgs.tree-sitter.builtGrammars.tree-sitter-c}/parser";
+  home.file."${config.xdg.configHome}/nvim/parser/bash.so".source = "${pkgs.tree-sitter.builtGrammars.tree-sitter-bash}/parser";
+  home.file."${config.xdg.configHome}/nvim/parser/lua.so".source = "${pkgs.tree-sitter.builtGrammars.tree-sitter-lua}/parser";
+  home.file."${config.xdg.configHome}/nvim/parser/python.so".source = "${pkgs.tree-sitter.builtGrammars.tree-sitter-python}/parser";
+  # haskell treesitter is broken
+  home.file."${config.xdg.configHome}/nvim/parser/haskell.so".source = "${pkgs.tree-sitter.builtGrammars.tree-sitter-haskell}/parser";
+  home.file."${config.xdg.configHome}/nvim/parser/nix.so".source = "${pkgs.tree-sitter.builtGrammars.tree-sitter-nix}/parser";
+
+# nvim-lua/lsp_extensions.nvim
+
+
+  programs.neovim = {
+     enable = true;
+
+     # take the one from the flake
+     package = myPackage;
+
+     # source doesn't like `stdpath('config').'`
+     # todo should use mkBefore ${config.programs.neovim.generatedInitrc}
+     extraConfig = ''
+        set noshowmode " Show the current mode on command line
+        set cursorline " highlight cursor line
+        source $XDG_CONFIG_HOME/nvim/init.manual.vim
+      ''
+      # concatStrings = builtins.concatStringsSep "";
+      + (lib.strings.concatStrings (
+        lib.mapAttrsToList genBlock rcBlocks
+      ))
+    ;
+
+    # extraLuaConfig = ''
+    #   -- logs are written to /home/teto/.cache/vim-lsp.log
+    #   vim.lsp.set_log_level("info")
+    # '';
+
+    # TODO add lsp stuff
+    extraPackages = with pkgs; [
+      # luaPackages.lua-lsp
+      haskellPackages.hasktags
+      jq
+      nodePackages.bash-language-server
+      nodePackages.dockerfile-language-server-nodejs # broken
+      nodePackages.pyright
+      nodePackages.typescript-language-server
+      pandoc  # for markdown preview, should be in the package closure instead
+      pythonPackages.pdftotext  # should appear only in RC ?
+      rnix-lsp
+      rust-analyzer
+      shellcheck
+      sumneko-lua-language-server
+      yaml-language-server
+    ];
+
+    plugins = basePlugins  ++ overlayPlugins;
 
   };
 }

@@ -13,6 +13,9 @@ set directories path-list
 show directories
 dir dirname  Add directory dirname to the front of the source path.
 
+Dans le cadre de 
+set substitute-path
+
 # history
 
 https://sourceware.org/gdb/current/onlinedocs/gdb/Command-History.html

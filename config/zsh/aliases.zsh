@@ -24,6 +24,7 @@ alias dfh="df --human-readable"
 alias duh="du --human-readable"
 alias nd="nix develop"
 
+alias weather="curl v2.wttr.in"
 
 alias preview="fzf --preview 'bat --color \"always\" {}'"
 alias notif-center="kill -s USR1 $(pidof deadd-notification-center)"

@@ -84,7 +84,6 @@ rec {
   home.sessionVariables = {
     # RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/rg.conf";
     ZDOTDIR="$XDG_CONFIG_HOME/zsh";
-    WEECHAT_HOME="$XDG_CONFIG_HOME/weechat";
     INPUTRC="$XDG_CONFIG_HOME/inputrc";
     IPYTHONDIR="$XDG_CONFIG_HOME/ipython";
     JUPYTER_CONFIG_DIR="$XDG_CONFIG_HOME/jupyter";

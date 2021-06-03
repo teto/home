@@ -175,13 +175,14 @@
                   ./nixos/modules/xserver.nix
                   ./nixos/hardware-lenovo.nix
                   ./nixos/profiles/steam.nix
+                  inputs.mptcp-flake.nixosModules.mptcp
+                  (import ./nixos/profiles/mptcp.nix)
                 ];
               })
               hm.nixosModules.home-manager
               # nova.nixosProfiles.dev
 
               # TODO use from flake or from unstable
-              # (import ./nixos/modules/mptcp.nix)
               (hm-custom [
                 ./hm/home-lenovo.nix
                 nova.hmProfiles.standard

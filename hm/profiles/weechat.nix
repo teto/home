@@ -3,11 +3,13 @@ let
   myWeechat = pkgs.weechat.override {
     configure = { availablePlugins, ... }: {
       scripts = with pkgs.weechatScripts; [
-        # weechat-xmpp weechat-matrix-bridge
-        wee-slack
+        # weechat-xmpp
+        weechat-matrix-bridge
+        # wee-slack
       ];
+      # /set plugins.var.python.jabber.key "val"
       init = ''
-        /set plugins.var.python.jabber.key "val"
+        /mouse enable
       '';
     };
   };
@@ -18,9 +20,6 @@ in
     myWeechat
   ];
 
-  home.sessionVariables = {
-    WEECHAT_HOME="$XDG_CONFIG_HOME/weechat";
-  };
 
   # there is no such module
   # programs.weechat = {

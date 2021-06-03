@@ -116,9 +116,10 @@ in
 
   services.greenclip = let
     # myGreenclip = with pkgs; haskell.lib.unmarkBroken haskell.packages.ghc884.greenclip;
+    myGreenclip = with pkgs; haskellPackages.greenclip;
   in {
-    enable = false;
-    # package = myGreenclip;
+    enable = true;
+    package = myGreenclip;
   };
 
 
@@ -128,8 +129,7 @@ in
     # daemonIONiceLevel = 3;
     nixPath = [
       "nixpkgs=${builtins.toString userNixpkgs}"
-    ]
-    ;
+    ];
 
     # either use --option extra-binary-caches http://hydra.nixos.org/
     # handy to hack/fix around
