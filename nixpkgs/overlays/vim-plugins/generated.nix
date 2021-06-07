@@ -5,12 +5,12 @@ final: prev:
 {
   firenvim = buildVimPluginFrom2Nix {
     pname = "firenvim";
-    version = "2021-05-09";
+    version = "2021-06-06";
     src = fetchFromGitHub {
       owner = "glacambre";
       repo = "firenvim";
-      rev = "6e973151f6e30358f13b80cb68a7b2c4727ff3ef";
-      sha256 = "1vi508b0wy59rsb9nbzfkcw45nrizxgksz1l4p1ggqmzwaj5iw3f";
+      rev = "1f271184aec2620caab4dffbf1955c28e45d1409";
+      sha256 = "07nncmkl5djlzsiskfjipyhwwn3f8sjd24qksgjy56kg5dgy13hy";
     };
     meta.homepage = "https://github.com/glacambre/firenvim/";
   };
@@ -29,12 +29,12 @@ final: prev:
 
   nvim-markdown-preview = buildVimPluginFrom2Nix {
     pname = "nvim-markdown-preview";
-    version = "2019-01-29";
+    version = "2021-05-28";
     src = fetchFromGitHub {
       owner = "davidgranstrom";
       repo = "nvim-markdown-preview";
-      rev = "9914aae9c1736212f88f1893d14bfe69400443f0";
-      sha256 = "1kc74y9wd6ipz82ry7c3vzi4r65b817wiwcgf7q0632qxxczqdxr";
+      rev = "d7cbefc69f93f55e376c4cb9d754390028659ea2";
+      sha256 = "08yk58s2f10130n20i6fgnf8iyy6pwqv6siprbc0jqrn28pllpp9";
     };
     meta.homepage = "https://github.com/davidgranstrom/nvim-markdown-preview/";
   };
@@ -65,24 +65,24 @@ final: prev:
 
   octo-nvim = buildVimPluginFrom2Nix {
     pname = "octo-nvim";
-    version = "2021-05-06";
+    version = "2021-06-03";
     src = fetchFromGitHub {
       owner = "pwntester";
       repo = "octo.nvim";
-      rev = "d92a7352516f06a457cbf8812b173abc319f7882";
-      sha256 = "1xvj3p32nzcn8rv2hscmj8sn8bfm1s2r5j1cwwnkl4zbqdbd4k5f";
+      rev = "70e391d7d4f6eb2dcde7ed2752e64970acbcff49";
+      sha256 = "0sqjjr11115cs0qhdivmxfzs7vhimnzx9rvlq1a775rdmzqwn1b7";
     };
     meta.homepage = "https://github.com/pwntester/octo.nvim/";
   };
 
   registers-nvim = buildVimPluginFrom2Nix {
     pname = "registers-nvim";
-    version = "2021-04-13";
+    version = "2021-05-28";
     src = fetchFromGitHub {
       owner = "tversteeg";
       repo = "registers.nvim";
-      rev = "b8ad2cd8a01dc3e4c2530820409d01b1bbd6fb95";
-      sha256 = "1jz41mskrrbb4w2hkxcpmnpgj93nbh2rb30mn566xkjn3zkh1r23";
+      rev = "34bbf868da6ef0225739e7977a4063872cd2b1e8";
+      sha256 = "0ghy760dc07xwjaf5ci2di8qfq0qip8jyrp7x0rsl820ryy7rggy";
     };
     meta.homepage = "https://github.com/tversteeg/registers.nvim/";
   };

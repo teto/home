@@ -144,6 +144,7 @@ lspconfig.hls.setup({
 		-- "/home/teto/nixpkgs2/result/bin/haskell-language-server-wrapper"
 		-- "/home/teto/.cabal/bin/haskell-language-server"
 		, "--lsp"
+		, "-j2"  -- -j1 doesnt work, and more threads => crash
 	},
     filetypes = { "haskell", "lhaskell" },
     root_dir = lspconfig.util.root_pattern(
@@ -210,7 +211,7 @@ lspconfig.rust_analyzer.setup({
     -- root_dir = root_pattern("Cargo.toml", "rust-project.json")
 })
 
--- lspconfig.rnix.setup{}
+lspconfig.rnix.setup{}
 
 
 -- | Texlab

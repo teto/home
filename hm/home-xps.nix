@@ -34,7 +34,6 @@ in
   ];
 
   home.packages = with pkgs; [
-    virt-manager # to run ubuntu, needs libvirtd service
     brightnessctl
     simple-scan
   ];

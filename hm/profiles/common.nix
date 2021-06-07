@@ -65,7 +65,6 @@ rec {
   # ];
 
 
-  # home.file.".gdbinit".source = ../config/gdbinit_simple;
   home.file.".gdbinit".text = ''
     # ../config/gdbinit_simple;
     # gdb doesn't accept environment variable except via python

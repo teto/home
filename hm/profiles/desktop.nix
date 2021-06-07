@@ -24,7 +24,9 @@ let
     nixpkgs-fmt
     editorconfig-core-c
     exa  # to list files
-    gdb
+      # gdb-debug = prev.enableDebgging prev.gdb ;
+
+    (enableDebugging gdb)
 
     gitAndTools.diff-so-fancy # todo install it via the git config instead
     gitAndTools.gitbatch   # to fetch form several repos at once

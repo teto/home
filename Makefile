@@ -80,7 +80,7 @@ nautilus:
 
 vimPlugins:
 	# /home/teto/nixpkgs/pkgs/misc/vim-plugins/update.py
-	cd ~/nixpkgs3 \
+	cd ~/nixpkgs \
 		&& pkgs/misc/vim-plugins/update.py -i $(CURDIR)/nixpkgs/overlays/vim-plugins/vim-plugin-names -o $(CURDIR)/nixpkgs/overlays/vim-plugins/generated.nix --no-commit
 
 cachix:

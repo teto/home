@@ -48,7 +48,6 @@ let
 
   # overlayPlugins = with pkgs.myVimPlugins;[
     # https://github.com/vmchale/dhall-vim.git
-    # dhall-vim
       # vimPlugins = final: prev: {
   myVimPlugins = pkgs.vimPlugins.extend (
     final: prev: {
@@ -87,11 +86,17 @@ let
           let g:markdown_composer_autostart = 0
         '';
       }
+      {
+        plugin = dhall-vim;
+        config = ''
+          '';
+      }
 
       # to install manually with coc.nvim:
       {
         plugin = editorconfig-vim;
         config = ''
+          " dhall.vim config
         '';
       }
       # {

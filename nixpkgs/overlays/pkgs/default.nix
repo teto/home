@@ -33,6 +33,8 @@ final: prev:
 
   };
 
+  gdb-debug = prev.enableDebgging prev.gdb ;
+
   # qtgo = prev.callPackage ./qtgo {};
 
   menutray = prev.callPackage ./menutray {};
