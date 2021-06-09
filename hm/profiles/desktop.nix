@@ -117,6 +117,7 @@ let
     pass
     pavucontrol
     procs  # Rust replacement for 'ps'
+    qiv  # image viewer
     qtpass
     rofi-pass   # rofi-pass
     sublime3

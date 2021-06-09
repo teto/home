@@ -7,7 +7,6 @@ in
   imports = [
       ./profiles/desktop.nix
       ./profiles/dev.nix
-      ./profiles/nova.nix
 
       # ./hm/vdirsyncer.nix
       # ./hm/nushell.nix

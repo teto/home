@@ -141,10 +141,10 @@ let
     gpg = gpgModule;
     astroid.enable = true;
 
-    folders.drafts = "[Gmail]/Drafts";
-    folders.inbox = "Inbox";
-    folders.sent = "[Gmail]/Sent Mail";
-    folders.trash = "[Gmail]/Trash";
+    # folders.drafts = "[Gmail]/Drafts";
+    # folders.inbox = "Inbox";
+    # folders.sent = "[Gmail]/Sent Mail";
+    # folders.trash = "[Gmail]/Trash";
 
   # CopyArrivalDate
   mbsync = mbsyncConfig // {
@@ -164,21 +164,23 @@ let
             nearPattern = "";
           };
           sent = {
-            farPattern = config.accounts.email.accounts.gmail.folders.sent;
+            # farPattern = config.accounts.email.accounts.gmail.folders.sent;
+            farPattern = "[Gmail]/Sent Mail";
             nearPattern = "Sent";
           };
           trash = {
-            farPattern = config.accounts.email.accounts.gmail.folders.trash;
+            # config.accounts.email.accounts.gmail.folders.trash;
+            farPattern = "[Gmail]/Trash";
             nearPattern = "Trash";
           };
-          starred = {
-            farPattern = "[Gmail]/Starred";
-            nearPattern = "Starred";
-          };
-          drafts = {
-            farPattern = config.accounts.email.accounts.gmail.folders.drafts;
-            nearPattern = "Drafts";
-          };
+          # starred = {
+          #   farPattern = "[Gmail]/Starred";
+          #   nearPattern = "Starred";
+          # };
+          # drafts = {
+          #   farPattern = config.accounts.email.accounts.gmail.folders.drafts;
+          #   nearPattern = "Drafts";
+          # };
           # spam = {
           #   farPattern = config.accounts.email.accounts.gmail.folders.drafts;
           #   nearPattern = "Spam";
@@ -205,7 +207,7 @@ let
 
     primary = true;
     userName = "mattator";
-    realName = "Matt ";
+    realName = "Matt";
     address = "mattator@gmail.com";
     flavor = "gmail.com";
     smtp.tls.useStartTls = true;

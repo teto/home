@@ -36,6 +36,12 @@ in
         fcitx5Package
       ];
 
+      # systemd.user.services.fcitx5-daemon = {
+      #   enable = true;
+      #   script = "${fcitx5Package}/bin/fcitx5";
+      #   wantedBy = [ "graphical-session.target" ];
+      # };
+
     };
   }
 

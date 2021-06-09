@@ -10,6 +10,16 @@
 " the right window contains the version from the merge branch
 " }}}
 
+
+let mapleader = " "
+let maplocalleader = ","
+
+
+
+" inverts the meaning of g in substitution, ie with gdefault, change all
+" occurences
+set gdefault
+
 " vim-plug autoinstallation {{{
 " TODO use stdpath now
 let s:nvimdir = stdpath('data')
@@ -26,47 +36,6 @@ if empty(glob(s:plugscript))
 endif
 
 "}}}
-" Dealing with pdf {{{
-" Read-only pdf through pdftotext / arf kinda fails silently on CJK documents
-autocmd BufReadPost *.pdf silent %!pdftotext -nopgbrk -layout -q -eol unix "%" - | fmt -w78
-
-" convert all kinds of files (but pdf) to plain text
-autocmd BufReadPost *.doc,*.docx,*.rtf,*.odp,*.odt silent %!pandoc "%" -tplain -o /dev/stdout
-" }}}
-" Code to display highlight groups {{{
-" https://jordanelver.co.uk/blog/2015/05/27/working-with-vim-colorschemes/
-" Once you have the name of the highlight group, you can run:
-" verbose high <Name>
-" nmap <leader>sp :call <SID>SynStack()<CR>
-function! SynStack()
-  if !exists("*synstack")
-    return
-  endif
-  echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
-endfunc
-
-nnoremap <C-RightMouse> :call SynStack()<CR>
-" }}}
-set cpoptions="aABceFsn" " vi ComPatibility options
-" should not be a default ?
-set cpoptions-=_
-
-" mouse {{{
-set mouse=a
-set mousemodel=popup_setpos
-" }}}
-let mapleader = " "
-let maplocalleader = ","
-
-" Appearance 1 {{{
-let s:gutter_error_sign = "✘'"
-let s:gutter_warn_sign = '！'
-" }}}
-
-
-" inverts the meaning of g in substitution, ie with gdefault, change all
-" occurences
-set gdefault
 
 " VIM-PLUG PLUGIN DECLARATIONS {{{1
 call plug#begin(s:plugdir)
@@ -111,7 +80,6 @@ Plug 'bakpakin/fennel.vim'
 Plug 'strboul/urlview.vim' " :Urlview to list urls and open them
 Plug 'diepm/vim-rest-console' " test rest APIs * Hit the trigger key (<C-j> by default).
 " Plug '~/pdf-scribe.nvim'  " to annotate pdf files from nvim :PdfScribeInit
-" Plug 'cespare/vim-toml'
 "Plug 'TaDaa/vimade' " to dim the background on lost focus
 " Plug 'tjdevries/cyclist.vim' " to cycle between listchars
 
@@ -263,7 +231,7 @@ Plug 'neovimhaskell/haskell-vim', {'for': 'haskell'} " really helps with syntax 
 " Plug 'mbbill/undotree' " replaces gundo
 
 " filetypes {{{2
-" Plug 'cespare/vim-toml', { 'for': 'toml'}
+Plug 'cespare/vim-toml', { 'for': 'toml'}
 Plug 'PotatoesMaster/i3-vim-syntax'
 Plug 'florentc/vim-tla'
 " one competitor is https://github.com/hwayne/tla.vim/
@@ -457,6 +425,9 @@ set number
 set relativenumber
 " TODO do a macro that cycles throught show/hide absolute/relative line numbers
 map <C-N><C-N> <Cmd>set invnumber<CR>
+set cpoptions="aABceFsn" " vi ComPatibility options
+" should not be a default ?
+set cpoptions-=_
 
 " Display unprintable characters with '^' and
 " set nolist to disable or set list!
@@ -473,6 +444,27 @@ syntax on
 let g:vimsyn_embed = 'lP'  " support embedded lua, python and ruby
 " don't syntax-highlight long lines
 set synmaxcol=300
+" Dealing with pdf {{{
+" Read-only pdf through pdftotext / arf kinda fails silently on CJK documents
+autocmd BufReadPost *.pdf silent %!pdftotext -nopgbrk -layout -q -eol unix "%" - | fmt -w78
+
+" convert all kinds of files (but pdf) to plain text
+autocmd BufReadPost *.doc,*.docx,*.rtf,*.odp,*.odt silent %!pandoc "%" -tplain -o /dev/stdout
+" }}}
+" Code to display highlight groups {{{
+" https://jordanelver.co.uk/blog/2015/05/27/working-with-vim-colorschemes/
+" Once you have the name of the highlight group, you can run:
+" verbose high <Name>
+" nmap <leader>sp :call <SID>SynStack()<CR>
+function! SynStack()
+  if !exists("*synstack")
+    return
+  endif
+  echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+endfunc
+
+nnoremap <C-RightMouse> :call SynStack()<CR>
+" }}}
 " fugitive-gitlab {{{
 " also add our token for private repos
 let g:fugitive_gitlab_domains = ['https://git.novadiscovery.net']
@@ -619,6 +611,7 @@ let g:instant_rst_additional_dirs=[ "/home/teto/mptcpweb" ]
 
 set noshowmode " Show the current mode on command line
 set cursorline " highlight cursor line
+set termguicolors
 
 " set diffopt=filler
 
@@ -1462,8 +1455,6 @@ let g:pdfscribe_notes_dir = expand('$HOME').'/Nextcloud/papis_db'
 " vsnip {{{
 let g:vsnip_snippet_dir = stdpath('config').'/vsnip'
 "}}}
-" to prettify json
-" g:python3_host_prog -m json.tool
 " scrollbar.nvim {{{
 " augroup ScrollbarInit
 "   autocmd!
@@ -1633,6 +1624,14 @@ let g:himalaya_mailbox_picker = 'fzf'
 " nvim-spectre {{{
 nnoremap <leader>S :lua require('spectre').open()<CR>
 "}}}
+" mouse {{{
+set mouse=a
+set mousemodel=popup_setpos
+" }}}
+" Appearance 1 {{{
+let s:gutter_error_sign = "✘'"
+let s:gutter_warn_sign = '！'
+" }}}
 
 set hidden " you can open a new buffer even if current is unsaved (error E37)
 
@@ -1774,7 +1773,7 @@ menu Grepper.Search\ across\ Buffers :Grepper -switch -buffers
 menu Grepper.Search\ across\ directory :Grepper
 menu Grepper.Autoopen\ results :let g:grepper.open=1<CR>
 
-" tabulation-related menu {{{2
+" search-related menu {{{2
 " menu Search.CurrentBuffer :exe Grepper -grepprg rg --vimgrep $* $.
 " menu Search.AllBuffers :exe Grepper -grepprg rg --vimgrep $* $+
 " }}}
@@ -1788,12 +1787,8 @@ menu Tabs.SwitchExpandTabs :set expandtab!
 " }}}
 " nvim specific configuration {{{
 
-if has("nvim")
-  " should work with vim also but need a very new vim
-  set termguicolors
   "set shada=!,'50,<1000,s100,:0,n$XDG_CACHE_HOME/nvim/shada
-  let g:netrw_home=$XDG_DATA_HOME.'/nvim'
-endif
+let g:netrw_home=$XDG_DATA_HOME.'/nvim'
 " }}}
 " colorscheme stuff {{{
 " as we set termguicolors,
@@ -2098,7 +2093,7 @@ let content = [
             \ ["Hover\t\\ch", 'lua vim.lsp.buf.references()'],
             \ ["Search &References\t\\cr", 'lua vim.lsp.buf.references()'],
             \ ["Document  &Symbols\t\\cr", 'lua vim.lsp.buf.document_symbol()'],
-            \ ["Format  &Symbols\t\\cf", 'lua vim.lsp.buf.formatting()'],
+            \ ["Format", 'lua vim.lsp.buf.formatting_sync(nil, 1000)'],
             \ ["&Execute  Command\\ce", 'lua vim.lsp.buf.execute_command()'],
             \ ["&Incoming calls\\ci", 'lua vim.lsp.buf.incoming_calls()'],
             \ ["&Outgoing calls\\ci", 'lua vim.lsp.buf.outgoing_calls()'],

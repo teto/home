@@ -117,6 +117,7 @@
                   ./nixos/profiles/steam.nix
                   ./nixos/profiles/adb.nix
                   ./nixos/modules/libvirtd.nix
+                  ./nixos/profiles/chromecast.nix
                 ];
               })
 
@@ -149,6 +150,8 @@
                 # nova.hmConfigurations.dev
                 (hm-custom [
                   ./hm/home-xps.nix
+                  ./hm/profiles/nova.nix
+
                 #   nova.hmProfiles.standard
                   nova.hmProfiles.dev
                 #   # ./hm/profiles/vscode.nix #  provided by nova-nix config
@@ -190,6 +193,7 @@
                 nova.hmProfiles.devops
                 ./hm/profiles/experimental.nix
                 ./hm/profiles/japanese.nix
+                ./hm/profiles/fcitx.nix
                 # ./hm/profiles/gaming.nix
 
                 # ./hm/vscode.nix #  provided by nova-nix config

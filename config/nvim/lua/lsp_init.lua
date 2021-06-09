@@ -9,41 +9,16 @@ local api = vim.api
 
 local has_lsputil, lsputil = pcall(require, "lsputil")
 
-if has_lsputil then
--- if false then
-	vim.lsp.callbacks['textDocument/codeAction'] = lsputil.codeActioncode_action_handler
-	vim.lsp.callbacks['textDocument/references'] = lsputil.locationsreferences_handler
-	vim.lsp.callbacks['textDocument/definition'] = lsputil.locationsdefinition_handler
-	vim.lsp.callbacks['textDocument/declaration'] = lsputil.locationsdeclaration_handler
-	vim.lsp.callbacks['textDocument/typeDefinition'] = lsputil.locationstypeDefinition_handler
-	vim.lsp.callbacks['textDocument/implementation'] = lsputil.locationsimplementation_handler
-	vim.lsp.callbacks['textDocument/documentSymbol'] = lsputil.symbolsdocument_handler
-	vim.lsp.callbacks['workspace/symbol'] = lsputil.symbolsworkspace_handler
-
-	--@see https://microsoft.github.io/language-server-protocol/specifications/specification-current/#window/showMessage
-	-- copy/pasted
-	vim.lsp.callbacks['window/showMessage'] = function(_, _, result, client_id)
-		local message_type = result.type
-		local message = result.message
-		local client = vim.lsp.get_client_by_id(client_id)
-		local client_name = client and client.name or string.format("id=%d", client_id)
-		if not client then
-			notifs.notify("LSP[", client_name, "] client has shut down after sending the message")
-		end
-		if message_type == vim.lsp.protocol.MessageType.Error then
-			notifs.notify("LSP[", client_name, "] ", message)
-		else
-			local message_type_name = vim.lsp.protocol.MessageType[message_type]
-			api.nvim_out_write(string.format("LSP[%s][%s] %s\n", client_name, message_type_name, message))
-		end
-		return result
-	end
-
-end
 
 -- custom attach callback
 local attach_cb = require 'on_attach'
 
+local temp = vim.lsp.handlers["textDocument/formatting"]
+vim.lsp.handlers["textDocument/formatting"] = function(...)
+
+	vim.notify("Called formatting")
+	temp(...)
+end
 -- override defaults for all servers
 lspconfig.util.default_config = vim.tbl_extend(
 	"force",

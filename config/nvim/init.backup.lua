@@ -94,7 +94,6 @@ use 'matbme/JABS.nvim'
 -- use 'folke/which-key.nvim' -- :WhichKey
 
 -- use 'sunjon/shade.nvim'
-
 -- use fzf to search through diagnostics
 -- use { 'ojroques/nvim-lspfuzzy'}
 

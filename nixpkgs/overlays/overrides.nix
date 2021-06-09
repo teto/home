@@ -7,6 +7,12 @@ let
 
 in
 rec {
+  # steam = prev.steam.override {
+  #   extraLibraries = pkgs: with prev.pkgs; [
+  #     pipewire
+  #   ];
+  # };
+
 
   protocol-local = prev.protocol.overrideAttrs (oldAttrs: {
     src = builtins.fetchGit {

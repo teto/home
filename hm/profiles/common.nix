@@ -38,6 +38,7 @@ rec {
     # hstr # to deal with shell history
     tig
     # or lazygit
+    nix-prefetch-git
     netcat-gnu  # plain 'netcat' is the bsd one
     # dig.dnsutils  # for dig disabled because of flakes
     strace

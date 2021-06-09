@@ -8,8 +8,9 @@ rec {
     # withManual = true;
     pythonSupport = false;
     python = prev.python3;
-    wafHook = prev.wafHook.override({python = prev.python3;});
+    # wafHook = prev.wafHook.override({python = prev.python3;});
   }))
+
   # .overrideAttrs(old: {
   #   name = "ns3-dev";
   #   src = prev.fetchFromGitLab {
@@ -20,15 +21,6 @@ rec {
   #   };
   # })
   ;
-
-  ns-3-local = prev.ns-3.override {
-    python = final.python3;
-    enableDoxygen = false;
-    build_profile = "optimized";
-    # withManual = true;
-    # pythonSupport = true;
-  #   # withExamples = true;
-  };
 
   # dce-quagga-dev =  if (prev.pkgs ? dce-quagga) then (prev.dce-quagga.overrideAttrs( oa: {
   #   srcs = [

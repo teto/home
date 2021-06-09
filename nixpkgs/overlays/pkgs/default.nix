@@ -33,7 +33,7 @@ final: prev:
 
   };
 
-  gdb-debug = prev.enableDebgging prev.gdb ;
+  # gdb-debug = prev.enableDebugging prev.gdb ;
 
   # qtgo = prev.callPackage ./qtgo {};
 

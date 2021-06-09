@@ -49,22 +49,26 @@ let
   # overlayPlugins = with pkgs.myVimPlugins;[
     # https://github.com/vmchale/dhall-vim.git
       # vimPlugins = final: prev: {
-  myVimPlugins = pkgs.vimPlugins.extend (
-    final: prev: {
 
-      # doesn't build because plenary requires gh ??!
-      # octo-nvim = pkgs.vimUtils.buildVimPluginFrom2Nix {
-      #   pname = "octo-nvim";
-      #   version = "2021-05-06";
-      #   src = pkgs.fetchFromGitHub {
-      #     owner = "pwntester";
-      #     repo = "octo.nvim";
-      #     rev = "d92a7352516f06a457cbf8812b173abc319f7882";
-      #     sha256 = "1xvj3p32nzcn8rv2hscmj8sn8bfm1s2r5j1cwwnkl4zbqdbd4k5f";
-      #   };
-      #   meta.homepage = "https://github.com/pwntester/octo.nvim/";
-      # };
-    }
+    # luafile stdpath('config').'/init.lua'
+  myVimPluginsOverlay = pkgs.callPackage ../../nixpkgs/overlays/vim-plugins/generated.nix {};
+
+  myVimPlugins = pkgs.vimPlugins.extend (
+    myVimPluginsOverlay
+  #   final: prev: {
+  #     # doesn't build because plenary requires gh ??!
+  #     octo-nvim = pkgs.vimUtils.buildVimPluginFrom2Nix {
+  #       pname = "octo-nvim";
+  #       version = "2021-05-06";
+  #       src = pkgs.fetchFromGitHub {
+  #         owner = "pwntester";
+  #         repo = "octo.nvim";
+  #         rev = "d92a7352516f06a457cbf8812b173abc319f7882";
+  #         sha256 = "1xvj3p32nzcn8rv2hscmj8sn8bfm1s2r5j1cwwnkl4zbqdbd4k5f";
+  #       };
+  #       meta.homepage = "https://github.com/pwntester/octo.nvim/";
+  #     };
+  #   }
   );
 
 
@@ -89,15 +93,18 @@ let
       {
         plugin = dhall-vim;
         config = ''
-          '';
+          " dhall.vim config
+        '';
       }
-
+      {
+        plugin = vim-toml;
+      }
       # to install manually with coc.nvim:
       {
         plugin = editorconfig-vim;
-        config = ''
-          " dhall.vim config
-        '';
+        # config = ''
+        #   " dhall.vim config
+        # '';
       }
       # {
       #   plugin = nvim-lspconfig;
