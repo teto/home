@@ -38,8 +38,10 @@ in
   ];
 
   services.screen-locker = {
-    enable = true;
+    enable = false;
+    inactiveInterval = 5; # in minutes
     lockCmd = "${pkgs.i3lock-fancy}/bin/i3lock-fancy";
+    # xssLockExtraOptions
   };
 
   # for blue tooth applet; must be installed systemwide
