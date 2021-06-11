@@ -8,12 +8,13 @@ in
     enable = true;
     # fcitx.engines = with pkgs.fcitx-engines; [
 
-    # addons = 
-    # mozc  # broken
-    # table-other # for arabic
-    # table-extra # for arabic
-    # # hangul
-    # m17n
+    addons = with pkgs.fcitx-engines; [
+      mozc  # broken
+      # table-other # for arabic
+      # table-extra # for arabic
+      # # hangul
+      # m17n
+    ];
 
   };
 }

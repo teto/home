@@ -119,6 +119,7 @@ lspconfig.hls.setup({
 		-- "/home/teto/nixpkgs2/result/bin/haskell-language-server-wrapper"
 		-- "/home/teto/.cabal/bin/haskell-language-server"
 		, "--lsp"
+		, "--debug"
 		, "-j2"  -- -j1 doesnt work, and more threads => crash
 	},
     filetypes = { "haskell", "lhaskell" },
