@@ -102,6 +102,12 @@ in
         # extraConfig = 
         id = 0;
       };
+      spam = lib.mkForce {
+        # isDefault = false;
+        id = 4;
+        # path = "6bt2uwrj.nova";
+        settings = {};
+      };
 
       nova = lib.mkForce {
         # isDefault = false;

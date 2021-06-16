@@ -491,5 +491,5 @@ function lsp_show_all_diagnostics()
 	local all_diagnostics = vim.lsp.diagnostic.get_all()
 	vim.lsp.util.set_qflist(all_diagnostics)
 end
-vim.o.background = "dark" -- or "light" for light mode
+vim.opt.background = "dark" -- or "light" for light mode
 vim.cmd([[colorscheme gruvbox]])

@@ -80,7 +80,7 @@
                 # custom modules
                 (import ./hm/modules/pywal.nix )
                 (import ./hm/modules/ranger.nix )
-                (import ./hm/modules/fcitx.nix )
+                # (import ./hm/modules/fcitx.nix )
                 (import ./hm/modules/xdg.nix )
               ];
 
@@ -179,7 +179,8 @@
                   ./nixos/hardware-lenovo.nix
                   ./nixos/profiles/steam.nix
                   inputs.mptcp-flake.nixosModules.mptcp
-                  (import ./nixos/profiles/mptcp.nix)
+                  ./nixos/profiles/mptcp.nix
+                  ./nixos/profiles/nova.nix
                 ];
               })
               hm.nixosModules.home-manager
@@ -194,6 +195,7 @@
                 ./hm/profiles/experimental.nix
                 ./hm/profiles/japanese.nix
                 ./hm/profiles/fcitx.nix
+                ./hm/profiles/nova.nix
                 # ./hm/profiles/gaming.nix
 
                 # ./hm/vscode.nix #  provided by nova-nix config

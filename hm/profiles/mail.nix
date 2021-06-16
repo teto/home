@@ -143,11 +143,13 @@ let
 
     # folders.drafts = "[Gmail]/Drafts";
     # folders.inbox = "Inbox";
-    # folders.sent = "[Gmail]/Sent Mail";
-    # folders.trash = "[Gmail]/Trash";
+
+    # Relative path of the inbox mail.
+    folders.sent = "[Gmail]/Sent Mail";
+    folders.trash = "[Gmail]/Trash";
 
   # CopyArrivalDate
-  mbsync = mbsyncConfig // {
+    mbsync = mbsyncConfig // {
       remove = "both";
       # how to destroy on gmail ?
       # expunge = "both";
@@ -164,13 +166,13 @@ let
             nearPattern = "";
           };
           sent = {
-            # farPattern = config.accounts.email.accounts.gmail.folders.sent;
-            farPattern = "[Gmail]/Sent Mail";
+            farPattern = config.accounts.email.accounts.gmail.folders.sent;
+            # farPattern = "[Gmail]/Sent Mail";
             nearPattern = "Sent";
           };
           trash = {
-            # config.accounts.email.accounts.gmail.folders.trash;
-            farPattern = "[Gmail]/Trash";
+            farPattern = config.accounts.email.accounts.gmail.folders.trash;
+            # farPattern = "[Gmail]/Trash";
             nearPattern = "Trash";
           };
           # starred = {

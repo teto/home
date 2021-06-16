@@ -264,7 +264,7 @@ let
       {
         plugin = vim-grepper;
         config = ''
-          nnoremap <leader>rg  <Cmd>Grepper -tool rg -open -switch<CR>
+          nnoremap <leader>rg  <Cmd>Grepper -tool git -open -switch<CR>
           nnoremap <leader>rgb  <Cmd>Grepper -tool rg -open -switch -buffer<CR>
           vnoremap <leader>rg  <Cmd>Grepper -tool rg -open -switch<CR>
         '';

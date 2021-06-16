@@ -69,7 +69,7 @@ M.on_attach = function(client)
 	end
 
 	-- vim.bo.omnifunc = vim.lsp.omnifunc
-	vim.bo.omnifunc = 'v:lua.vim.lsp.omnifunc'
+	vim.opt.omnifunc = 'v:lua.vim.lsp.omnifunc'
 
 -- " vim.lsp.buf.rename()
 end

@@ -6,4 +6,7 @@ helm repo update
 Plugins found at
 /home/teto/.local/share/helm/plugins
 
+
+helm delete --purge jinko-enyo-dev
+
 helm env

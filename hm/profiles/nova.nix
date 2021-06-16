@@ -3,6 +3,14 @@ let
 in
 {
   xdg.desktopEntries = {
+  # xdg.desktopEntries = {
+  #     min = { # minimal definition
+  #       exec = "firefox -p nova";
+  #       name = "Firefox for nova";
+  #     };
+  # };
+
+
     full = { # full definition
       type = "Application";
       exec = "firefox -p nova";
