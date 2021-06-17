@@ -77,7 +77,7 @@ rec {
   # https://github.com/commercialhaskell/stack/issues/2358
   # home.file.".stack/config.yaml".source = ../home/stack.yaml;
 
-  home.stateVersion = "20.09";
+  home.stateVersion = "21.05";
 
   # - https://github.com/carnager/rofi-scripts.git
   # https://github.com/carnager/buku_run

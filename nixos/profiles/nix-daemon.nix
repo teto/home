@@ -13,8 +13,16 @@
       nixops.to = { type = "github"; owner = "nixos"; repo="nixops"; };
       idris.to = { type = "github"; owner = "idris-lang"; repo="Idris2"; };
       hls.to = { type = "github"; owner = "haskell"; repo="haskell-language-server"; };
+        # from = {
+          # id = "nova-nix";
+          # type = "indirect";
+        # };
 
-      nova.url = "git+ssh://git@git.novadiscovery.net:4224/world/nova-nix.git";
+      nova.to = {
+          type = "git";
+          url = "ssh://git@git.novadiscovery.net:4224/world/nova-nix.git";
+        };
+      # nova.to = { type = "git+ssh://git@git.novadiscovery.net:4224/world/nova-nix.git";
       # "github:nixos/nixpkgs/nixos-unstable";
       # home-manager
     };
