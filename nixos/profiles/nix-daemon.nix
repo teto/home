@@ -14,6 +14,7 @@
       idris.to = { type = "github"; owner = "idris-lang"; repo="Idris2"; };
       hls.to = { type = "github"; owner = "haskell"; repo="haskell-language-server"; };
 
+      nova.url = "git+ssh://git@git.novadiscovery.net:4224/world/nova-nix.git";
       # "github:nixos/nixpkgs/nixos-unstable";
       # home-manager
     };

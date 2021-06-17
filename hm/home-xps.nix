@@ -47,7 +47,7 @@ in
   # for blue tooth applet; must be installed systemwide
   services.blueman-applet.enable = true;
 
-  services.nextcloud-client.enable = true;
+  # services.nextcloud-client.enable = true;
 
 # waiting for attribute 'vte-ng' missing
   programs.termite = {

@@ -1,8 +1,5 @@
 # could be called home-huge.nix
 { config, lib, pkgs,  ... }:
-let
-    stable = import <nixos> {};
-in
 {
   programs.pywal.enable = true;
 
