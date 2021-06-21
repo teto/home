@@ -90,7 +90,7 @@ let
     bandwhich  # to monitor per app bandwidth
     du-dust  # dust binary: rust replacement of du
     hunspellDicts.fr-any
-    buku
+    # buku # broken
     # gcalc
     gnome3.networkmanagerapplet # should
     gnome3.defaultIconTheme # else nothing appears

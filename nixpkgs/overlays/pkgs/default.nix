@@ -59,7 +59,4 @@ final: prev:
 
   # i3-snapshot = prev.callPackage ./i3-snapshot {};
   # rofi-scripts = prev.callPackage ./rofi-scripts {};
-
-  # neovide = prev.callPackage ./neovide { neovide = prev.neovide; };
-  # neovide = prev.callPackage ./neovide { neovide = prev.neovide; };
 }

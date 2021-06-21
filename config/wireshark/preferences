@@ -216,7 +216,7 @@ gui.color_filter_bg.deprecated: ffffaf
 
 # Packet list hidden columns
 # List all columns to hide in the packet list.
-gui.column.hidden: %Cus:ip.src:1:R,%Cus:ip.dst:1:R,%Cus:tcp.options.mptcp.dataack:0:R,%Cus:ip.dst:1:R
+gui.column.hidden: %Cus:ip.src:1:R,%Cus:ip.dst:1:R,%Cus:tcp.options.mptcp.dataack:0:R
 
 # Packet list column format
 # Each pair of strings consists of a column title and its format
@@ -226,6 +226,7 @@ gui.column.format:
 	"ITR", "%Cus:ip.src:1:R",
 	"ETR", "%Cus:ip.dst:1:R",
 	"Source", "%Cus:ip.src:0:R",
+	"Destination", "%Cus:ip.dst:1:R",
 	"tcpseq", "%Cus:tcp.seq:0:R",
 	"dataack", "%Cus:tcp.options.mptcp.dataack:0:R",
 	"tcplen", "%Cus:tcp.len:0:R",
@@ -233,11 +234,12 @@ gui.column.format:
 	"mptcp.stream", "%Cus:mptcp.stream:0:R",
 	"tsecr", "%Cus:tcp.options.timestamp.tsecr:0:R",
 	"mptcpseq", "%Cus:tcp.options.mptcp.subflowseqno:0:R",
-	"Destination", "%Cus:ip.dst:1:R",
 	"Protocol", "%p",
 	"Length", "%L",
 	"Data Sequence Number", "%Cus:mptcp.dsn:0:R",
-	"Info", "%i"
+	"tsecr", "%Cus:tcp.options.timestamp.tsecr:0:R",
+	"Info", "%i",
+	"New Column", "%m"
 
 ####### User Interface: Font ########
 
@@ -415,7 +417,7 @@ console.log.level: 64
 
 # Remote capture filter
 # A string
-#extcap.ciscodump.remotefilter: deny tcp host fe80::6b2a:1c90:471d:9dd3 any eq 0, deny tcp any eq 0 host fe80::6b2a:1c90:471d:9dd3, deny tcp host 2a01:cb14:11ac:8200:9930:218:fb23:d849 any eq 0, deny tcp any eq 0 host 2a01:cb14:11ac:8200:9930:218:fb23:d849, deny tcp host 2a01:cb14:11ac:8200:5dd1:9049:e49e:1507 any eq 0, deny tcp any eq 0 host 2a01:cb14:11ac:8200:5dd1:9049:e49e:1507, deny tcp host 192.168.122.1 any eq 0, deny tcp any eq 0 host 192.168.122.1, deny tcp host 192.168.1.17 any eq 0, deny tcp any eq 0 host 192.168.1.17, permit ip any any
+#extcap.ciscodump.remotefilter: deny tcp host fe80::6b2a:1c90:471d:9dd3 any eq 0, deny tcp any eq 0 host fe80::6b2a:1c90:471d:9dd3, deny tcp host 2a01:cb14:11ac:8200:9930:218:fb23:d849 any eq 0, deny tcp any eq 0 host 2a01:cb14:11ac:8200:9930:218:fb23:d849, deny tcp host 2a01:cb14:11ac:8200:ccb4:2f7a:ee77:b001 any eq 0, deny tcp any eq 0 host 2a01:cb14:11ac:8200:ccb4:2f7a:ee77:b001, deny tcp host 192.168.122.1 any eq 0, deny tcp any eq 0 host 192.168.122.1, deny tcp host 192.168.1.17 any eq 0, deny tcp any eq 0 host 192.168.1.17, permit ip any any
 
 # Packets to capture
 # A string
@@ -539,7 +541,7 @@ console.log.level: 64
 
 # Remote capture filter
 # A string
-#extcap.sshdump.remotefilter: not ((host fe80::6b2a:1c90:471d:9dd3 or host 2a01:cb14:11ac:8200:9930:218:fb23:d849 or host 2a01:cb14:11ac:8200:5dd1:9049:e49e:1507 or host 192.168.122.1 or host 192.168.1.17) and port 22)
+#extcap.sshdump.remotefilter: not ((host fe80::6b2a:1c90:471d:9dd3 or host 2a01:cb14:11ac:8200:9930:218:fb23:d849 or host 2a01:cb14:11ac:8200:ccb4:2f7a:ee77:b001 or host 192.168.122.1 or host 192.168.1.17) and port 22)
 
 # Packets to capture
 # A string

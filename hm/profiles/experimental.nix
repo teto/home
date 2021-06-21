@@ -12,7 +12,7 @@ in
 
   home.packages = with pkgs; [
     deadd-notification-center
-    meli  # jmap mailreader
+    # meli  # broken jmap mailreader
   ];
 
   # programs.htop = {

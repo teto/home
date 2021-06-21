@@ -164,16 +164,25 @@ let
           inbox = {
             farPattern = "";
             nearPattern = "";
+            extraConfig = {
+              Create = "Both";
+            };
           };
           sent = {
             farPattern = config.accounts.email.accounts.gmail.folders.sent;
             # farPattern = "[Gmail]/Sent Mail";
             nearPattern = "Sent";
+            extraConfig = {
+              Create = "Both";
+            };
           };
           trash = {
             farPattern = config.accounts.email.accounts.gmail.folders.trash;
             # farPattern = "[Gmail]/Trash";
             nearPattern = "Trash";
+            extraConfig = {
+              Create = "Both";
+            };
           };
           # starred = {
           #   farPattern = "[Gmail]/Starred";
@@ -188,19 +197,19 @@ let
           #   nearPattern = "Spam";
           # };
         };
-    };
-        extraConfig.account = {
-          # PipelineDepth = 50;
-          # AuthMechs = "LOGIN";
-          # SSLType = "IMAPS";
-          # SSLVersions = "TLSv1.2";
-        };
-        extraConfig.remote = {
-          Account = "gmail";
-        };
-        extraConfig.local = {
-          SubFolders = "Verbatim";
-        };
+      };
+      extraConfig.account = {
+        # PipelineDepth = 50;
+        # AuthMechs = "LOGIN";
+        # SSLType = "IMAPS";
+        # SSLVersions = "TLSv1.2";
+      };
+      extraConfig.remote = {
+        Account = "gmail";
+      };
+      extraConfig.local = {
+        SubFolders = "Verbatim";
+      };
   };
 
     msmtp.enable = true;

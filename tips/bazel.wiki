@@ -1,6 +1,17 @@
 `load` statements must be at the top
 
+--announce_rc prints the flags that are being applied from bazelrc files and the command line
 
+`bazel help info-keys`
+
+
+    BUILD_WORKSPACE_DIRECTORY: the root of the workspace where the build was run.
+    BUILD_WORKING_DIRECTORY: the current working directory where Bazel was run from.
+
+Output directories
+https://docs.bazel.build/versions/main/output_directories.html
+
+https://docs.bazel.build/versions/main/user-manual.html#run
 
 https://docs.bazel.build/versions/main/be/make-variables.html#predefined_label_variables
 bazel info --show_make_env 
