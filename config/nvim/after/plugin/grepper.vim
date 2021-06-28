@@ -10,6 +10,7 @@ let g:grepper.rgfixed = copy(g:grepper.rg)
 " for a fixed string
 let g:grepper.rgfixed.grepprg .= " -F "
 " let g:grepper.gitall.grepprg = 'git grep "$*" $(git rev-list --all)'
+let g:grepper.prompt_quote = 0
 
 
 " let g:grepper.rgall.grepprg .= ' --no-ignore'

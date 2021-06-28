@@ -40,14 +40,19 @@ endif
 " VIM-PLUG PLUGIN DECLARATIONS {{{1
 call plug#begin(s:plugdir)
 Plug 'jubnzv/virtual-types.nvim'
+Plug 'rhysd/vim-gfm-syntax' " markdown syntax compatible with Github's
+Plug 'winston0410/range-highlight.nvim' "highlight ranges like :1,5
 " Plug 'soywod/himalaya' " mail reader :Himalaya ; needs the rust CLI reader
 " himalaya
 " Plug 'DanilaMihailov/beacon.nvim'  " blinks line when cursor jumps to a new far location
 " Plug 'edluffy/hologram.nvim'
-" Plug 'winston0410/range-highlight.nvim'
 " Plug 'NTBBloodbath/rest.nvim'
 " Plug 'soywod/himalaya', {'rtp': 'vim'}
 " Plug 'arouene/vim-ansible-vault'
+
+" recommanded branch faster
+" todo add a meny entry to toggle it
+Plug 'lukas-reineke/indent-blankline.nvim', {'branch': 'lua'}
 
 Plug 'kevinhwang91/rnvimr'
 Plug 'jubnzv/virtual-types.nvim'
@@ -239,7 +244,6 @@ Plug 'florentc/vim-tla'
 " }}}
 " Python {{{2
 " Plug 'klen/python-mode', { 'for': 'python'} "
-" Plug 'hynek/vim-python-pep8-indent', {'for': 'python'} " does not work
 " Plug 'mjbrownie/GetFilePlus', {'for': 'python'} " improves gf on imports
 " fails on relad
 " Plug 'tmhedberg/SimpylFold', { 'for': 'python' } " provides python folding
@@ -254,7 +258,7 @@ Plug '907th/vim-auto-save' " :h auto-save
 " hangs with big strings
 
 " Text objects {{{
-Plug 'michaeljsmith/vim-indent-object'
+" Plug 'michaeljsmith/vim-indent-object'
 Plug 'tommcdo/vim-lion' " Use with gl/L<text object><character to align to>
 " Plug 'tommcdo/vim-exchange' " Use with cx<text object> to cut, cxx to exchange
 " Plug 'tommcdo/vim-kangaroo' "  zp to push/zP to pop the position
@@ -1440,6 +1444,9 @@ set completeopt+=noinsert,noselect
 " set completeopt+=longest
 
 " }}}
+" compe
+
+"
 " treesitter-completion {{{
 " Highlight the node at point, its usages and definition when cursor holds
 " grammaers are searched in `parser/{lang}.*
@@ -2102,6 +2109,7 @@ let content = [
             \ ["&Rename\\cw", 'lua vim.lsp.buf.rename()'],
             \ ["&Code action\\cw", 'lua vim.lsp.buf.code_action()'],
             \ ['- LSP '],
+            \ ['Toggle indentlines', 'IndentBlanklineToggle!'],
             \ ["&Documentation\t\\cm", 'echo 600'],
             \ ]
 " map 2 <cmd>lua vim.lsp.buf.code_action()

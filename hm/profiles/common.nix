@@ -36,6 +36,7 @@ rec {
 
     # TODO try i3-snapshot
     # hstr # to deal with shell history
+    envsubst
     tig
     # or lazygit
     nix-prefetch-git
