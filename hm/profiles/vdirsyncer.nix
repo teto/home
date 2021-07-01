@@ -1,22 +1,104 @@
 { config, pkgs, lib,  ... }:
-
-# TODO vdirsyncer package provides its own unit
 {
-  systemd.user.services.vdirsyncer = {
-    Unit = {
-      After = [ "network.target" ];
-      Description = "Vdirsyncer Daemon";
+
+  # accounts.calendar.accounts = {
+  #   iij = {
+  #     local = {
+  #       type = "filesystem";
+  #       # postHook = '' '';
+  #     };
+  #     remote = {
+  #       url = "http://nixos.iijlab.net/remote.php/dav/calendars/root/personal/";
+  #       type ="caldav";
+  #       userName ="root";
+  #       # password.fetch = ["command", "~/dotfiles/bin/pass-show", "iij/nextcloud"]
+  #       usernameCommand = ["command" "~/dotfiles/bin/pass-show" "iij/nextcloud"];
+
+  #     };
+
+  #   };
+  # };
+
+  accounts.calendar = {
+    basePath = "${config.home.homeDirectory}/calendars";
+    # basePath = "$HOME/calendars";
+    # accounts.iij = {
+    #   khal.enable = true;
+    #   vdirsyncer = {
+    #     enable = true;
+    #     collections = null;
+    #     metadata = ["color" "displayname"];
+    #   };
+    #   local = {
+    #     type = "filesystem";
+    #     fileExt = ".ics";
+    #   };
+    #   remote = {
+    #     type = "caldav";
+    #     # url = "http://nixos.iijlab.net/remote.php/dav/calendars/root/personal/";
+    #     # url = "http://efss.qloud.my/remote.php/dav/calendars/root/personal/";
+    #     url = "https://efss.qloud.my/remote.php/dav/";
+    #       # url = "https://dav.mailbox.org/caldav/<some hash>";
+    #       # userName = "<my email address>";
+    #     # password.fetch = ["command", "~/dotfiles/bin/pass-show", "iij/nextcloud"]
+    #       # usernameCommand = ["command" "~/dotfiles/bin/pass-show" "iij/nextcloud"];
+    #       userName = "root";
+    #       passwordCommand = ["~/dotfiles/bin/pass-show" "iij/nextcloud"];
+    #     };
+    #   };
+
+    accounts.fastmail = {
+      khal.enable = true;
+
+      vdirsyncer = {
+        enable = true;
+        collections = null;
+        metadata = ["color" "displayname"];
+      };
+
+      local = {
+        type = "filesystem";
+        fileExt = ".ics";
+      };
+
+      remote = {
+        type = "caldav";
+        # url = "http://nixos.iijlab.net/remote.php/dav/calendars/root/personal/";
+        # url = "http://efss.qloud.my/remote.php/dav/calendars/root/personal/";
+        url = "https://efss.qloud.my/remote.php/dav/";
+          # url = "https://dav.mailbox.org/caldav/<some hash>";
+          # userName = "<my email address>";
+        # password.fetch = ["command", "~/dotfiles/bin/pass-show", "iij/nextcloud"]
+          # usernameCommand = ["command" "~/dotfiles/bin/pass-show" "iij/nextcloud"];
+          userName = "root";
+          passwordCommand = ["~/dotfiles/bin/pass-show" "iij/nextcloud"];
+        };
+      };
     };
 
-    Install = {
-      WantedBy = [ "default.target" ];
-    };
+  # accounts.contact = {
+  #   basePath = "$HOME/.contacts";
+  #   accounts.main = {
+  #     vdirsyncer.enable = true;
+  #     vdirsyncer.local = {
+  #       type = "filesystem";
+  #       fileExt = ".vcf";
+  #     };
 
-    Service = {
-      Environment = "PATH=${config.home.profileDirectory}/bin";
-      ExecStart = "${pkgs.vdirsyncer}/bin/vdirsyncer sync";
-      Type = "notify";
-      # ExecStartPre = ''${pkgs.bash}/bin/bash -c "${pkgs.coreutils}/bin/mkdir -p '${cfg.dataDir}' '${cfg.playlistDirectory}'"'';
-    };
+  #     vdirsyncer.remote = {
+  #       type = "carddav";
+  #       url = "https://dav.mailbox.org/carddav/<some hash>";
+  #       userName = "<my email address>";
+  #       passwordCommand = ["~/.dotfiles/scripts/password.sh" "eMail/mailbox.org"];
+  #     };
+  #   };
+  # };
+
+  programs.khal.enable = true;
+
+  programs.vdirsyncer = {
+    enable = true;
+    # package = pkgs.vdirsyncerStable;  # can conflict
+
   };
 }

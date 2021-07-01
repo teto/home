@@ -73,6 +73,7 @@ lspconfig.sumneko_lua.setup{
   }
 }
 
+lspconfig.dhall_lsp_server.setup{}
 lspconfig.dockerls.setup{}
 lspconfig.yamlls.setup{}
 

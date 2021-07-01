@@ -7,7 +7,7 @@ in
   imports = [
     # Not tracked, so doesn't need to go in per-machine subdir
       ./profiles/desktop.nix
-      # ./modules/vdirsyncer.nix
+      # ./profiles/vdirsyncer.nix
       ./profiles/sway.nix
       ./profiles/neomutt.nix
       # ./hm/profiles/nova-dev.nix
