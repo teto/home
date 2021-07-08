@@ -236,6 +236,7 @@ in
 
   home.packages = with pkgs; [
     isync
+    mbsyncWrapper
   ];
 
   accounts.email.maildirBasePath = "${config.home.homeDirectory}/maildir";
@@ -251,7 +252,7 @@ in
      enable = true;
 
      # dont add "inbox" tag
-     new.tags = ["unread"];
+     new.tags = ["unread" "inbox"];
      # new.ignore = 
      search.excludeTags = ["spam"];
 
@@ -308,6 +309,7 @@ in
 
     programs.mbsync = {
       enable = true;
+      # package = mbsyncWrapper;
     };
 
     services.mbsync = {
@@ -315,6 +317,7 @@ in
     verbose = true;  # to help debug problems in journalctl
     frequency =  "*:0/5";
   };
+
 
   # programs.muchsync = { };
 

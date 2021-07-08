@@ -12,13 +12,13 @@ in
 
     enable = true;
     # Access key of 5 to 20 characters in length that clients use to access the server
-    accessKey = "pachyderme";
+    # rootCredentialsFile = ;
+    # accessKey = "pachyderme";
+    # secretKey = "testtesttest";
     browser = true; # to enable browser UI
 
     # enableGarbageCollect = true;
     # garbageCollectDates
     listenAddress = "0.0.0.0:10000";  # 9000 is the default but already used by the platform
-    # region =
-    secretKey = "testtesttest";
   };
 }

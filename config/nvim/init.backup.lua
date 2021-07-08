@@ -6,7 +6,6 @@
 -- local configs = require'nvim_lsp/configs'
 -- local lsp_status = require'lsp-status'
 local has_telescope, telescope = pcall(require, "telescope")
-local has_gitsigns, gitsigns = pcall(require, "gitsigns")
 local has_compe, compe = pcall(require, "compe")
 
 -- local packerCfg =
@@ -61,7 +60,6 @@ use {
     requires = { 'nvim-lua/plenary.nvim' }
 }
 use { '~/telescope.nvim' }
-use { 'lukas-reineke/indent-blankline.nvim', branch = "lua", opt=true}
 -- Plug '~/telescope.nvim'    -- fzf-like in lua
 use { 'nvim-telescope/telescope-github.nvim' }
 use { 'nvim-telescope/telescope-symbols.nvim' }
@@ -73,7 +71,7 @@ use { 'kosayoda/nvim-lightbulb' }
 -- compete with registers.nvim
 use { 'gennaro-tedesco/nvim-peekup' }
 use { 'nvim-telescope/telescope-packer.nvim' }
--- use { 'TimUntersberger/neogit' }
+use { 'TimUntersberger/neogit' }
 -- use { 'wfxr/minimap.vim' }
 use { 'pwntester/octo.nvim',
 	requires = { 'nvim-lua/popup.nvim' }
@@ -85,11 +83,15 @@ use { 'notomo/gesture.nvim' }
 use { 'tjdevries/astronauta.nvim' }
 use { 'npxbr/gruvbox.nvim', requires = {"rktjmp/lush.nvim"} }
 use { 'onsails/lspkind-nvim' }
-use { 'phaazon/hop.nvim', opt=true }
-use { 'alec-gibson/nvim-tetris'}
+use { 'phaazon/hop.nvim' }
+use { 'alec-gibson/nvim-tetris', opt = true }
 use { 'mfussenegger/nvim-dap'}
 use { 'bazelbuild/vim-bazel' , requires = { 'google/vim-maktaba' } }
 use 'matbme/JABS.nvim'
+use {
+  "folke/trouble.nvim",
+  requires = "kyazdani42/nvim-web-devicons",
+}
 -- use 'sindrets/diffview.nvim' -- :DiffviewOpen
 -- use 'folke/which-key.nvim' -- :WhichKey
 
@@ -172,8 +174,141 @@ if has_whichkey then
 	}
 
 end
-local has_bufferline, bufferline = pcall(require, "bufferline")
 
+
+-- review locally github PRs
+local has_octo, octo = pcall(require, "octo")
+if has_octo then
+	octo.setup({
+	default_remote = {"upstream", "origin"}; -- order to try remotes
+	reaction_viewer_hint_icon = "";         -- marker for user reactions
+	user_icon = " ";                        -- user icon
+	timeline_marker = "";                   -- timeline marker
+	timeline_indent = "2";                   -- timeline indentation
+	right_bubble_delimiter = "";            -- Bubble delimiter
+	left_bubble_delimiter = "";             -- Bubble delimiter
+	github_hostname = "";                    -- GitHub Enterprise host
+	snippet_context_lines = 4;               -- number or lines around commented lines
+	file_panel = {
+		size = 10,                             -- changed files panel rows
+		use_icons = true                       -- use web-devicons in file panel
+	},
+	mappings = {--{{{
+		issue = {--{{{
+		close_issue = "<space>ic",           -- close issue
+		reopen_issue = "<space>io",          -- reopen issue
+		list_issues = "<space>il",           -- list open issues on same repo
+		reload = "<C-r>",                    -- reload issue
+		open_in_browser = "<C-b>",           -- open issue in browser
+		copy_url = "<C-y>",                  -- copy url to system clipboard
+		add_assignee = "<space>aa",          -- add assignee
+		remove_assignee = "<space>ad",       -- remove assignee
+		create_label = "<space>lc",          -- create label
+		add_label = "<space>la",             -- add label
+		remove_label = "<space>ld",          -- remove label
+		goto_issue = "<space>gi",            -- navigate to a local repo issue
+		add_comment = "<space>ca",           -- add comment
+		delete_comment = "<space>cd",        -- delete comment
+		next_comment = "]c",                 -- go to next comment
+		prev_comment = "[c",                 -- go to previous comment
+		react_hooray = "<space>rp",          -- add/remove 🎉 reaction
+		react_heart = "<space>rh",           -- add/remove ❤️ reaction
+		react_eyes = "<space>re",            -- add/remove 👀 reaction
+		react_thumbs_up = "<space>r+",       -- add/remove 👍 reaction
+		react_thumbs_down = "<space>r-",     -- add/remove 👎 reaction
+		react_rocket = "<space>rr",          -- add/remove 🚀 reaction
+		react_laugh = "<space>rl",           -- add/remove 😄 reaction
+		react_confused = "<space>rc",        -- add/remove 😕 reaction
+		},--}}}
+		pull_request = {--{{{
+		checkout_pr = "<space>po",           -- checkout PR
+		merge_pr = "<space>pm",              -- merge PR
+		list_commits = "<space>pc",          -- list PR commits
+		list_changed_files = "<space>pf",    -- list PR changed files
+		show_pr_diff = "<space>pd",          -- show PR diff
+		add_reviewer = "<space>va",          -- add reviewer
+		remove_reviewer = "<space>vd",       -- remove reviewer request
+		close_issue = "<space>ic",           -- close PR
+		reopen_issue = "<space>io",          -- reopen PR
+		list_issues = "<space>il",           -- list open issues on same repo
+		reload = "<C-r>",                    -- reload PR
+		open_in_browser = "<C-b>",           -- open PR in browser
+		copy_url = "<C-y>",                  -- copy url to system clipboard
+		add_assignee = "<space>aa",          -- add assignee
+		remove_assignee = "<space>ad",       -- remove assignee
+		create_label = "<space>lc",          -- create label
+		add_label = "<space>la",             -- add label
+		remove_label = "<space>ld",          -- remove label
+		goto_issue = "<space>gi",            -- navigate to a local repo issue
+		add_comment = "<space>ca",           -- add comment
+		delete_comment = "<space>cd",        -- delete comment
+		next_comment = "]c",                 -- go to next comment
+		prev_comment = "[c",                 -- go to previous comment
+		react_hooray = "<space>rp",          -- add/remove 🎉 reaction
+		react_heart = "<space>rh",           -- add/remove ❤️ reaction
+		react_eyes = "<space>re",            -- add/remove 👀 reaction
+		react_thumbs_up = "<space>r+",       -- add/remove 👍 reaction
+		react_thumbs_down = "<space>r-",     -- add/remove 👎 reaction
+		react_rocket = "<space>rr",          -- add/remove 🚀 reaction
+		react_laugh = "<space>rl",           -- add/remove 😄 reaction
+		react_confused = "<space>rc",        -- add/remove 😕 reaction
+		},--}}}
+		review_thread = {--{{{
+		goto_issue = "<space>gi",            -- navigate to a local repo issue
+		add_comment = "<space>ca",           -- add comment
+		add_suggestion = "<space>sa",        -- add suggestion
+		delete_comment = "<space>cd",        -- delete comment
+		next_comment = "]c",                 -- go to next comment
+		prev_comment = "[c",                 -- go to previous comment
+		select_next_entry = "]q",            -- move to previous changed file
+		select_prev_entry = "[q",            -- move to next changed file
+		close_review_tab = "<C-c>",          -- close review tab
+		react_hooray = "<space>rp",          -- add/remove 🎉 reaction
+		react_heart = "<space>rh",           -- add/remove ❤️ reaction
+		react_eyes = "<space>re",            -- add/remove 👀 reaction
+		react_thumbs_up = "<space>r+",       -- add/remove 👍 reaction
+		react_thumbs_down = "<space>r-",     -- add/remove 👎 reaction
+		react_rocket = "<space>rr",          -- add/remove 🚀 reaction
+		react_laugh = "<space>rl",           -- add/remove 😄 reaction
+		react_confused = "<space>rc",        -- add/remove 😕 reaction
+		},--}}}
+		submit_win = {--{{{
+		approve_review = "<C-a>",            -- approve review
+		comment_review = "<C-m>",            -- comment review
+		request_changes = "<C-r>",           -- request changes review
+		close_review_tab = "<C-c>",          -- close review tab
+		},--}}}
+		review_diff = {--{{{
+		add_review_comment = "<space>ca",    -- add a new review comment
+		add_review_suggestion = "<space>sa", -- add a new review suggestion
+		focus_files = "<leader>e",           -- move focus to changed file panel
+		toggle_files = "<leader>b",          -- hide/show changed files panel
+		next_thread = "]t",                  -- move to next thread
+		prev_thread = "[t",                  -- move to previous thread
+		select_next_entry = "]q",            -- move to previous changed file
+		select_prev_entry = "[q",            -- move to next changed file
+		close_review_tab = "<C-c>",          -- close review tab
+		toggle_viewed = "<leader><space>",   -- toggle viewer viewed state
+		},--}}}
+		file_panel = {--{{{
+		next_entry = "j",                    -- move to next changed file
+		prev_entry = "k",                    -- move to previous changed file
+		select_entry = "<cr>",               -- show selected changed file diffs
+		refresh_files = "R",                 -- refresh changed files panel
+		focus_files = "<leader>e",           -- move focus to changed file panel
+		toggle_files = "<leader>b",          -- hide/show changed files panel
+		select_next_entry = "]q",            -- move to previous changed file
+		select_prev_entry = "[q",            -- move to next changed file
+		close_review_tab = "<C-c>",          -- close review tab
+		toggle_viewed = "<leader><space>",   -- toggle viewer viewed state
+		}--}}}
+	}--}}}
+	})
+end
+
+
+
+local has_bufferline, bufferline = pcall(require, "bufferline")
 if has_bufferline then
 	bufferline.setup{
 		options = {
@@ -225,7 +360,48 @@ if has_shade then
 end
 
 
--- local has_neogit, neogit = pcall(require, 'neogit')
+local has_neogit, neogit = pcall(require, 'neogit')
+if has_neogit then
+	neogit.setup {
+		disable_signs = false,
+		disable_context_highlighting = false,
+		disable_commit_confirmation = false,
+		-- customize displayed signs
+		signs = {
+			-- { CLOSED, OPENED }
+			section = { ">", "v" },
+			item = { ">", "v" },
+			hunk = { "", "" },
+		},
+		integrations = {
+			-- Neogit only provides inline diffs. If you want a more traditional way to look at diffs you can use `sindrets/diffview.nvim`.
+			-- The diffview integration enables the diff popup, which is a wrapper around `sindrets/diffview.nvim`.
+			--
+			-- Requires you to have `sindrets/diffview.nvim` installed.
+			-- use { 
+			--   'TimUntersberger/neogit', 
+			--   requires = { 
+			--     'nvim-lua/plenary.nvim',
+			--     'sindrets/diffview.nvim' 
+			--   }
+			-- }
+			--
+			diffview = false  
+		},
+		-- override/add mappings
+		mappings = {
+			-- modify status buffer mappings
+			status = {
+			-- Adds a mapping with "B" as key that does the "BranchPopup" command
+			["B"] = "BranchPopup",
+			-- Removes the default mapping of "s"
+			["s"] = "",
+			}
+		}
+
+	}
+end
+
 -- use with neogit.status.create(<kind>)
 -- Treesitter config {{{
 -- 	'nvim-treesitter/completion-treesitter' " extension of completion-nvim,
@@ -282,15 +458,16 @@ if has_telescope then
 			'--column',
 			'--smart-case'
 			},
-			prompt_position = "bottom",
 			prompt_prefix = ">",
 			selection_strategy = "reset",
 			sorting_strategy = "descending",
 			-- horizontal, vertical, center, flex
 			layout_strategy = "horizontal",
-			layout_defaults = {
-			-- TODO add builtin options.
+			layout = {
+				width = 0.75,
+				prompt_position = "bottom",
 			},
+
 			file_ignore_patterns = {},
 			-- get_generic_fuzzy_sorter not very good, doesn't select an exact match
 			-- get_fzy_sorter
@@ -300,10 +477,7 @@ if has_telescope then
 			file_sorter =  require'telescope.sorters'.get_fuzzy_file,
 			shorten_path = false,
 			winblend = 0,
-			width = 0.75,
 			-- preview_cutoff = 120,
-			results_height = 1,
-			results_width = 0.8,
 			border = {},
 			-- borderchars = { '─', '│', '─', '│', '╭', '╮', '╯', '╰'},
 			color_devicons = true,
@@ -362,35 +536,53 @@ function contextMenu()
 	})
 end
 -- gitsigns {{{
+local has_gitsigns, gitsigns = pcall(require, "gitsigns")
 if has_gitsigns then
  gitsigns.setup {
-  signs = {
-    add          = {hl = 'DiffAdd'   , text = '│', numhl='GitSignsAddNr'},
-    change       = {hl = 'DiffChange', text = '│', numhl='GitSignsChangeNr'},
-    delete       = {hl = 'DiffDelete', text = '_', numhl='GitSignsDeleteNr'},
-    topdelete    = {hl = 'DiffDelete', text = '‾', numhl='GitSignsDeleteNr'},
-    changedelete = {hl = 'DiffChange', text = '~', numhl='GitSignsChangeNr'},
+	-- -- '│' passe mais '▎' non :s
+ signs = {
+    add          = {hl = 'GitSignsAdd'   , text ='▎', numhl='GitSignsAddNr'   , linehl='GitSignsAddLn'},
+    change       = {hl = 'GitSignsChange', text ='▎', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
+    delete       = {hl = 'GitSignsDelete', text = '_', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
+    topdelete    = {hl = 'GitSignsDelete', text = '‾', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
+    changedelete = {hl = 'GitSignsChange', text = '~', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
   },
+  -- signs = {
+  --   add          = {hl = 'DiffAdd'   , text = '▎', numhl='GitSignsAddNr'},
+  --   change       = {hl = 'DiffChange', text = '▎', numhl='GitSignsChangeNr'},
+  --   delete       = {hl = 'DiffDelete', text = '_', numhl='GitSignsDeleteNr'},
+  --   topdelete    = {hl = 'DiffDelete', text = '‾', numhl='GitSignsDeleteNr'},
+  --   changedelete = {hl = 'DiffChange', text = '▎', numhl='GitSignsChangeNr'},
+  -- },
   numhl = false,
+  linehl = false,
   keymaps = {
     -- Default keymap options
     noremap = true,
     buffer = true,
 
-    ['n ]c'] = { expr = true, "&diff ? ']c' : '<cmd>lua require\"gitsigns\".next_hunk()<CR>'"},
-    ['n [c'] = { expr = true, "&diff ? '[c' : '<cmd>lua require\"gitsigns\".prev_hunk()<CR>'"},
+    -- ['n ]c'] = { expr = true, "&diff ? ']c' : '<cmd>lua require\"gitsigns\".next_hunk()<CR>'"},
+    -- ['n [c'] = { expr = true, "&diff ? '[c' : '<cmd>lua require\"gitsigns\".prev_hunk()<CR>'"},
 
-    ['n <leader>hs'] = '<cmd>lua require"gitsigns".stage_hunk()<CR>',
-    ['n <leader>hu'] = '<cmd>lua require"gitsigns".undo_stage_hunk()<CR>',
-    ['n <leader>hr'] = '<cmd>lua require"gitsigns".reset_hunk()<CR>',
-    ['n <leader>hp'] = '<cmd>lua require"gitsigns".preview_hunk()<CR>',
-    ['n <leader>hb'] = '<cmd>lua require"gitsigns".blame_line()<CR>',
+    -- ['n <leader>hs'] = '<cmd>lua require"gitsigns".stage_hunk()<CR>',
+    -- ['n <leader>hu'] = '<cmd>lua require"gitsigns".undo_stage_hunk()<CR>',
+    -- ['n <leader>hr'] = '<cmd>lua require"gitsigns".reset_hunk()<CR>',
+    -- ['n <leader>hp'] = '<cmd>lua require"gitsigns".preview_hunk()<CR>',
+    -- ['n <leader>hb'] = '<cmd>lua require"gitsigns".blame_line()<CR>',
   },
   watch_index = {
-    interval = 1000
+    interval = 1000,
+    follow_files = true
   },
+  current_line_blame = false,
+  current_line_blame_delay = 1000,
+  current_line_blame_position = 'eol',
   sign_priority = 6,
+  update_debounce = 100,
   status_formatter = nil, -- Use default
+  word_diff = true,
+  use_decoration_api = true,
+  use_internal_diff = true,  -- If luajit is present
 }
 end
 --}}}
@@ -430,6 +622,56 @@ if has_compe then
   };
 end
 
+
+
+local has_trouble, trouble = pcall(require, 'trouble')
+if has_trouble then
+	trouble.setup {
+    position = "bottom", -- position of the list can be: bottom, top, left, right
+    height = 10, -- height of the trouble list when position is top or bottom
+    width = 50, -- width of the list when position is left or right
+    icons = true, -- use devicons for filenames
+    mode = "lsp_workspace_diagnostics", -- "lsp_workspace_diagnostics", "lsp_document_diagnostics", "quickfix", "lsp_references", "loclist"
+    fold_open = "", -- icon used for open folds
+    fold_closed = "", -- icon used for closed folds
+    action_keys = { -- key mappings for actions in the trouble list
+        -- map to {} to remove a mapping, for example:
+        -- close = {},
+        close = "q", -- close the list
+        cancel = "<esc>", -- cancel the preview and get back to your last window / buffer / cursor
+        refresh = "r", -- manually refresh
+        jump = {"<cr>", "<tab>"}, -- jump to the diagnostic or open / close folds
+        open_split = { "<c-x>" }, -- open buffer in new split
+        open_vsplit = { "<c-v>" }, -- open buffer in new vsplit
+        open_tab = { "<c-t>" }, -- open buffer in new tab
+        jump_close = {"o"}, -- jump to the diagnostic and close the list
+        toggle_mode = "m", -- toggle between "workspace" and "document" diagnostics mode
+        toggle_preview = "P", -- toggle auto_preview
+        hover = "K", -- opens a small poup with the full multiline message
+        preview = "p", -- preview the diagnostic location
+        close_folds = {"zM", "zm"}, -- close all folds
+        open_folds = {"zR", "zr"}, -- open all folds
+        toggle_fold = {"zA", "za"}, -- toggle fold of current file
+        previous = "k", -- preview item
+        next = "j" -- next item
+    },
+    indent_lines = true, -- add an indent guide below the fold icons
+    auto_open = false, -- automatically open the list when you have diagnostics
+    auto_close = false, -- automatically close the list when you have no diagnostics
+    auto_preview = true, -- automatyically preview the location of the diagnostic. <esc> to close preview and go back to last window
+    auto_fold = false, -- automatically fold a file trouble list at creation
+    signs = {
+        -- icons / text used for a diagnostic
+        error = "",
+        warning = "",
+        hint = "",
+        information = "",
+        other = "﫠"
+    },
+    use_lsp_diagnostic_signs = false -- enabling this will use the signs defined in your lsp client
+}
+end
+
 -- hack
 local _, notifs = pcall(require, "notifications")
 
@@ -437,6 +679,11 @@ vim.lsp.notifier = notifs
 
 if vim.notify then
 	vim.notify = notifs.notify_external
+end
+
+local has_hop, hop = pcall(require, 'hop')
+if has_hop then
+	hop.setup {}
 end
 
 local has_specs, specs = pcall(require, 'specs')

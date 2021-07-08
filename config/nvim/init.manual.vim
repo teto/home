@@ -52,7 +52,7 @@ Plug 'winston0410/range-highlight.nvim' "highlight ranges like :1,5
 
 " recommanded branch faster
 " todo add a meny entry to toggle it
-Plug 'lukas-reineke/indent-blankline.nvim', {'branch': 'lua'}
+Plug 'lukas-reineke/indent-blankline.nvim' " already installed in 
 
 Plug 'kevinhwang91/rnvimr'
 Plug 'jubnzv/virtual-types.nvim'
@@ -66,7 +66,7 @@ Plug '~/packer.nvim' " because of abug
 " Plug 'mjlbach/neovim-ui'
 Plug '~/neovim-ui'
 " Plug 'glepnir/lspsaga.nvim'
-" Plug 'lewis6991/gitsigns.nvim'  " same as vim-signify but lua
+Plug 'lewis6991/gitsigns.nvim'  " same as vim-signify but lua
 Plug 'kshenoy/vim-signature' " display marks in gutter, love it
 " Plug 'mhinz/vim-signify'  " *
 
@@ -1045,48 +1045,6 @@ nnoremap <leader>pi <Cmd>PlugInstall<CR>
 nnoremap <leader>pU <Cmd>PlugUpgrade<CR>
 nnoremap <leader>pu <Cmd>PlugUpdate<CR>
 " }}}
-" signify (display added/removed lines from vcs) {{{
-let g:signify_vcs_list = [ 'git']
-let g:signify_priority = 0
-" let g:signify_mapping_next_hunk = '<leader>hn' " hunk next
-" let g:signify_mapping_prev_hunk = '<leader>gk'
-" let g:signify_mapping_toggle_highlight = '<leader>gh'
-let g:signify_line_highlight = 0 " display added/removed lines in different colors
-"let g:signify_line_color_add    = 'DiffAdd'
-"let g:signify_line_color_delete = 'DiffDelete'
-"let g:signify_line_color_change = 'DiffChange'
-" let g:signify_mapping_toggle = '<leader>gt'
-" let g:signify_sign_add =  '+'
-let g:signify_sign_show_text = 1
-"\u00a0  " unbreakable space
-
-" let g:signify_sign_add =  "▎"
-let g:signify_sign_add          = '▎'
-let g:signify_sign_delete       = '▎'
-let g:signify_sign_change       = '▎'
-let g:signify_sign_changedelete = '▎'
-
-let g:signify_sign_show_count= 0
-" master
-
- " foire dans le commit suivant
- " \'git': 'git diff --no-color --no-ext-diff -U0 bfb9cf1 -- %f'
-" let g:signify_vcs_cmds = {
-"       \'git': 'git diff --no-color --no-ext-diff -U0 master -- %f'
-"   \}
-" git log --format=format:%H $FILE | xargs -L 1 git blame $FILE -L $LINE,$LINE
-
-let g:signify_cursorhold_insert     = 0
-let g:signify_cursorhold_normal     = 0
-let g:signify_update_on_bufenter    = 1
-let g:signify_update_on_focusgained = 1
-" hunk jumping
-" nmap <leader>wj :call sy#jump#next_hunk(v:count1)<CR>
-" nmap <leader>wj <plug>(signify-next-hunk)
-" nnoremap <leader>sj :echomsg 'next-hunk'<CR>
-" nmap <leader>sk <plug>(signify-prev-hunk)
-
-" }}}
 " vim-signature {{{
 " :SignatureListMarkers         : List all markers
 let g:SignatureMarkTextHLDynamic=0
@@ -1928,6 +1886,8 @@ set shiftround    " round indent to multiple of 'shiftwidth'
 
 " open vimrc
 nnoremap <Leader>ev <Cmd>e $MYVIMRC<CR>
+nnoremap <Leader>el <Cmd>e ~/.config/nvim/init.backup.lua<CR>
+nnoremap <Leader>em <Cmd>e ~/.config/nvim/init.manual.vim<CR>
 " reload vimrc
 nnoremap <Leader>sv <Cmd>source $MYVIMRC<CR>
 

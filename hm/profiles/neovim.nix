@@ -72,6 +72,18 @@ let
   );
 
 
+  luaPlugins = with pkgs.vimPlugins; [
+      {
+        plugin = telescope-frecency-nvim;
+      }
+    {
+
+      plugin = neogit;
+      config = ''
+        " -- neogit config
+      '';
+    }
+  ];
 
   basePlugins = with pkgs.vimPlugins; [
 
@@ -131,9 +143,6 @@ let
       # {
       #   plugin = telescope-nvim;
       # }
-      {
-        plugin = telescope-frecency-nvim;
-      }
       {
         plugin = fzf-vim;
         config = ''
@@ -220,23 +229,28 @@ let
       # }
       # vim-signature
 
-      {
-        plugin = vim-signify;
-        config = ''
-          let g:signify_vcs_list = [ 'git']
-          let g:signify_priority = 1000
-          let g:signify_sign_add          = '▎'
-          let g:signify_sign_delete       = '▎'
-          let g:signify_sign_change       = '▎'
-          let g:signify_sign_changedelete = '▎'
+      # {
+      #   plugin = vim-signify;
+      #   config = ''
+      #     let g:signify_vcs_list = [ 'git']
+      #     let g:signify_priority = 1000
+      #     "let g:signify_line_color_add    = 'DiffAdd'
+      #     "let g:signify_line_color_delete = 'DiffDelete'
+      #     "let g:signify_line_color_change = 'DiffChange'
+      #     let g:signify_sign_add          = '▎'
+      #     let g:signify_sign_delete       = '▎'
+      #     let g:signify_sign_change       = '▎'
+      #     let g:signify_sign_changedelete = '▎'
+      # let g:signify_line_highlight = 0 " display added/removed lines in different colors
+      # let g:signify_sign_show_text = 1
+      # let g:signify_sign_show_count= 0
+      #     let g:signify_cursorhold_insert     = 0
+      #     let g:signify_cursorhold_normal     = 0
+      #     let g:signify_update_on_bufenter    = 1
+      #     let g:signify_update_on_focusgained = 1
 
-          let g:signify_cursorhold_insert     = 0
-          let g:signify_cursorhold_normal     = 0
-          let g:signify_update_on_bufenter    = 1
-          let g:signify_update_on_focusgained = 1
-
-        '';
-      }
+      #   '';
+      # }
       {
         plugin = vim-startify;
         config = ''
@@ -247,6 +261,7 @@ let
       }
 
       vim-scriptease
+      # test with hop ?
       {
         plugin = vim-sneak;
         config = ''
@@ -261,6 +276,7 @@ let
           map T <Plug>Sneak_T
         '';
       }
+
       {
         plugin = vim-grepper;
         config = ''
@@ -410,7 +426,7 @@ in
       yaml-language-server
     ];
 
-    plugins = basePlugins  ++ overlayPlugins;
+    plugins = basePlugins ++ overlayPlugins ++ luaPlugins;
 
   };
 }

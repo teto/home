@@ -39,6 +39,7 @@ let
     gitAndTools.lab
     patchutils  # for interdiff
     lazygit  # kinda like tig
+    nix-doc # to access nix doc
     ncurses.dev # for infocmp
     neovim-remote # for latex etc
     nodePackages.bitwarden-cli  # 'bw' binary
@@ -183,6 +184,8 @@ in
     # ./modules/home-tor.nix
     ./ssh-config.nix
     ./i3.nix
+
+    ./fcitx.nix
     ./firefox.nix
     ./notifications.nix
     ./neovim.nix

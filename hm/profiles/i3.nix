@@ -2,25 +2,26 @@
 let
 
   # TODO override extraLibs instead
-  i3pystatus-perso = (pkgs.i3pystatus.override({
-    extraLibs = with pkgs.python3Packages; [ pytz notmuch dbus-python ];
-  })).overrideAttrs (oldAttrs: {
-    name = "i3pystatus-dev";
-    # src = builtins.fetchGit {
-    #   url = https://github.com/teto/i3pystatus;
-    #   ref = "nix_backend";
-    # };
+  # i3pystatus-perso = (pkgs.i3pystatus.override({
+  #   extraLibs = with pkgs.python3Packages; [ pytz notmuch dbus-python ];
+  # })).overrideAttrs (oldAttrs: {
+  #   name = "i3pystatus-dev";
+  #   # src = builtins.fetchGit {
+  #   #   url = https://github.com/teto/i3pystatus;
+  #   #   ref = "nix_backend";
+  #   # };
 
-     src = pkgs.fetchFromGitHub {
-       repo = "i3pystatus";
-       owner = "teto";
-       rev="2a3285aa827a9cbf5cd53eb12619e529576997e3";
-       sha256 = "sha256-QSxfdsK9OkMEvpRsXn/3xncv3w/ePCGrC9S7wzg99mk=";
-     };
-  });
+  #    src = pkgs.fetchFromGitHub {
+  #      repo = "i3pystatus";
+  #      owner = "teto";
+  #      rev="2a3285aa827a9cbf5cd53eb12619e529576997e3";
+  #      sha256 = "sha256-QSxfdsK9OkMEvpRsXn/3xncv3w/ePCGrC9S7wzg99mk=";
+  #    };
+  # });
 
 
-  i3pystatus-custom = i3pystatus-perso.override ({
+  i3pystatus-custom = pkgs.i3pystatus.override ({
+  # i3pystatus-custom = i3pystatus-perso.override ({
     extraLibs = with pkgs.python3Packages; [ pytz notmuch dbus-python ];
   });
 
@@ -193,7 +194,7 @@ in
           workspaceButtons=true;
           workspaceNumbers=false;
           id="0";
-          statusCommand="${i3pystatus-custom}/bin/i3pystatus-python-interpreter $XDG_CONFIG_HOME/i3/myStatus.py";
+          # statusCommand="${i3pystatus-custom}/bin/i3pystatus-python-interpreter $XDG_CONFIG_HOME/i3/myStatus.py";
         }
       ];
       keycodebindings= { };
@@ -362,12 +363,12 @@ in
       # semicolumn
       // move_focused_wnd "right" "l" "l"
       # just trying to overwrite previous bindings with i3dispatch
-      // lib.optionalAttrs (pkgs ? i3dispatch ) {
-      "${mod}+Left" = "exec ${pkgs.i3dispatch}/bin/i3dispatch left";
-      "${mod}+Right" = "exec ${pkgs.i3dispatch}/bin/i3dispatch right";
-      "${mod}+Down" = "exec ${pkgs.i3dispatch}/bin/i3dispatch down";
-      "${mod}+Up" = "exec ${pkgs.i3dispatch}/bin/i3dispatch up";
-      }
+      # // lib.optionalAttrs (pkgs ? i3dispatch ) {
+      # "${mod}+Left" = "exec ${pkgs.i3dispatch}/bin/i3dispatch left";
+      # "${mod}+Right" = "exec ${pkgs.i3dispatch}/bin/i3dispatch right";
+      # "${mod}+Down" = "exec ${pkgs.i3dispatch}/bin/i3dispatch down";
+      # "${mod}+Up" = "exec ${pkgs.i3dispatch}/bin/i3dispatch up";
+      # }
     ;
     };
   };
@@ -397,7 +398,7 @@ in
           workspaceNumbers=false;
           # id="0";
           command="${pkgs.waybar}/bin/waybar";
-          statusCommand="${i3pystatus-custom}/bin/i3pystatus-python-interpreter $XDG_CONFIG_HOME/i3/myStatus.py";
+          # statusCommand="${i3pystatus-custom}/bin/i3pystatus-python-interpreter $XDG_CONFIG_HOME/i3/myStatus.py";
           extraConfig = ''
             icon_theme Adwaita
           '';
