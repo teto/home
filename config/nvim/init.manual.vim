@@ -305,7 +305,7 @@ Plug 'teto/Modeliner' " <leader>ml to setup buffer modeline
 " Plug 'vimwiki/vimwiki', { 'branch': 'dev'}   " to write notes
 " Plug 'rhysd/github-complete.vim' " provides github user/repo autocompletion after @ and #
 
-Plug 'hrsh7th/nvim-compe' " autocompletion
+" Plug 'hrsh7th/nvim-compe' " autocompletion
 
 " https://github.com/haorenW1025/completion-nvim/wiki/chain-complete-support
 " Plug 'nvim-lua/completion-nvim' " lsp based completion framework
@@ -1611,7 +1611,7 @@ set diffopt+=iwhiteall
 set diffopt+=internal,algorithm:patience
 
 " Y behave like D or C
-nnoremap Y y$
+" nnoremap Y y$
 
 
 

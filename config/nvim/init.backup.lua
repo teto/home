@@ -6,7 +6,6 @@
 -- local configs = require'nvim_lsp/configs'
 -- local lsp_status = require'lsp-status'
 local has_telescope, telescope = pcall(require, "telescope")
-local has_compe, compe = pcall(require, "compe")
 
 -- local packerCfg =
 local packer = require "packer"
@@ -32,7 +31,7 @@ end
 -- use { 'haorenW1025/completion-nvim', opt = true,
 -- requires = {{'hrsh7th/vim-vsnip', opt = true}, {'hrsh7th/vim-vsnip-integ', opt = true}}
 -- }
--- use { "~/telescope-frecency.nvim", }
+use { "~/telescope-frecency.nvim", }
 -- 	requires = {
 -- 		{'hrsh7th/vim-vsnip', opt = true},
 -- 		-- {'tami5/sql.nvim', opt = false}
@@ -92,6 +91,8 @@ use {
   "folke/trouble.nvim",
   requires = "kyazdani42/nvim-web-devicons",
 }
+use 'hrsh7th/nvim-compe'
+
 -- use 'sindrets/diffview.nvim' -- :DiffviewOpen
 -- use 'folke/which-key.nvim' -- :WhichKey
 
@@ -505,9 +506,12 @@ if has_telescope then
 			      workspaces = {
 					["home"]    = "/home/teto/home",
 					["data"]    = "/home/teto/neovim",
-					["jinko"] = "/home/teto/jinko",
+					["jinko"]   = "/home/teto/jinko",
 					-- ["wiki"]    = "/home/my_username/wiki"
 				},
+				show_scores = true,
+				show_unindexed = true,
+				ignore_patterns = {"*.git/*", "*/tmp/*"},
 				db_safe_mode = false,
 				auto_validate = false
 			}
@@ -595,6 +599,7 @@ require 'myTreesitter'
 -- logs are written to /home/teto/.cache/vim-lsp.log
 vim.lsp.set_log_level("info")
 
+local has_compe, compe = pcall(require, "compe")
 if has_compe then
 
   compe.setup {
@@ -626,11 +631,11 @@ end
 
 local has_trouble, trouble = pcall(require, 'trouble')
 if has_trouble then
-	trouble.setup {
-    position = "bottom", -- position of the list can be: bottom, top, left, right
+	trouble.setup {--{{{
+    position = "bottom", -- position of the list can be: bottom, top, left, right}}}
     height = 10, -- height of the trouble list when position is top or bottom
-    width = 50, -- width of the list when position is left or right
-    icons = true, -- use devicons for filenames
+    width = 50, -- width of the list when position is left or right{{{
+    icons = true, -- use devicons for filenames}}}
     mode = "lsp_workspace_diagnostics", -- "lsp_workspace_diagnostics", "lsp_document_diagnostics", "quickfix", "lsp_references", "loclist"
     fold_open = "", -- icon used for open folds
     fold_closed = "", -- icon used for closed folds

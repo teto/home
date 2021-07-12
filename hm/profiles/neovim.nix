@@ -73,9 +73,9 @@ let
 
 
   luaPlugins = with pkgs.vimPlugins; [
-      {
-        plugin = telescope-frecency-nvim;
-      }
+    {
+      plugin = telescope-frecency-nvim;
+    }
     {
 
       plugin = neogit;

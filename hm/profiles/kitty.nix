@@ -2,7 +2,7 @@
 {
   programs.kitty = {
     enable = true;
-    font.name = "Inconsolata For Powerline";
+    font.name = "Inconsolata";
     settings = {
 
       bold_font  = "auto";

@@ -8,6 +8,10 @@
     ./postgresql.nix
   ];
 
+
+  # to test locally
+  services.gitlab-runner.enable = true;
+
   nix = {
     binaryCaches = [
       "s3://devops-ci-infra-prod-caching-nix?region=eu-central-1&profile=nix-daemon"

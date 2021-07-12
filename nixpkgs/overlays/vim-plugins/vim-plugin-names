@@ -6,7 +6,8 @@ glacambre/firenvim
 iamcco/markdown-preview.nvim
 JamshedVesuna/vim-markdown-preview
 norcalli/nvim-terminal.lua
-nvim-telescope/telescope-fzf-native.nvim
+nvim-telescope/telescope-frecency.nvim@configure_db_user_confirmation
+nvim-telescope/telescope-fzf-native.nvim@main
 pwntester/octo.nvim
 shime/vim-livedown
 tversteeg/registers.nvim@main

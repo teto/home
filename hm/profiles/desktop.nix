@@ -93,6 +93,7 @@ let
     hunspellDicts.fr-any
     # buku # broken
     # gcalc
+    font-manager
     gnome3.networkmanagerapplet # should
     gnome3.defaultIconTheme # else nothing appears
     # i3-layout-manager  # to save/load layouts

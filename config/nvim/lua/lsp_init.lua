@@ -117,11 +117,9 @@ lspconfig.tsserver.setup({ })
 lspconfig.hls.setup({
     cmd = {
 		"haskell-language-server"
-		-- "/home/teto/nixpkgs2/result/bin/haskell-language-server-wrapper"
-		-- "/home/teto/.cabal/bin/haskell-language-server"
 		, "--lsp"
-		, "--debug"
-		, "-j2"  -- -j1 doesnt work, and more threads => crash
+		-- , "--debug"
+		-- , "-j2"  -- -j1 doesnt work, and more threads => crash
 	},
     filetypes = { "haskell", "lhaskell" },
     root_dir = lspconfig.util.root_pattern(
@@ -146,7 +144,7 @@ lspconfig.hls.setup({
 		}
 	},
 	flags = {
-		allow_incremental_sync = false;
+		allow_incremental_sync = true;
 	}
 })
 
