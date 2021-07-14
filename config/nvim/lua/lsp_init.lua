@@ -83,7 +83,7 @@ lspconfig.yamlls.setup{}
 lspconfig.pyright.setup{
 	-- cmd = {"pyright-langserver", "--stdio"};
 	-- filetypes = {"python"};
-	autostart = false; -- This is the important new option
+	-- autostart = false; -- This is the important new option
 	root_dir = lspconfig.util.root_pattern(".git", "setup.py",  "setup.cfg", "pyproject.toml", "requirements.txt");
 	-- on_attach=attach_cb.on_attach,
 	settings = {

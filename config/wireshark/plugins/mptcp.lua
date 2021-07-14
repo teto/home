@@ -130,7 +130,8 @@ end
 -- genl.family ("string" table)
 -- ou bien netlink.protocol
 -- accessible via the GUI: View -> Internals -> Dissector Table
-local mptcp_id = 0x21
+-- run genl ctrl list to get id
+local mptcp_id = 0x1d
 -- netlink_table = DissectorTable.get("genl.family")
 -- local ret = netlink_table:add("mptcp", mptcp_proto)
 -- print(netlink_table)

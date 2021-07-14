@@ -92,7 +92,9 @@ use {
   requires = "kyazdani42/nvim-web-devicons",
 }
 use 'hrsh7th/nvim-compe'
-
+use 'vhyrro/neorg'
+use 'ray-x/lsp_signature.nvim'
+use 'Pocco81/AutoSave.nvim' -- :ASToggle /AsOn / AsOff
 -- use 'sindrets/diffview.nvim' -- :DiffviewOpen
 -- use 'folke/which-key.nvim' -- :WhichKey
 
@@ -176,6 +178,22 @@ if has_whichkey then
 
 end
 
+local autosave = require("autosave")
+
+autosave.setup({
+        enabled = true,
+        execution_message = "AutoSave: saved at " .. vim.fn.strftime("%H:%M:%S"),
+        events = {"InsertLeave"},
+        conditions = {
+            exists = true,
+            filetype_is_not = {},
+            modifiable = true
+        },
+        write_all_buffers = false,
+        on_off_commands = true,
+        clean_command_line_interval = 2500
+    }
+)
 
 -- review locally github PRs
 local has_octo, octo = pcall(require, "octo")

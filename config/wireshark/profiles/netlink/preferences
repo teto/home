@@ -1,4 +1,4 @@
-# Configuration file for Wireshark 3.1.1.
+# Configuration file for Wireshark 3.4.6.
 #
 # This file is regenerated each time preferences are saved within
 # Wireshark. Making manual changes should be safe, however.
@@ -66,11 +66,11 @@
 # (case-insensitive).
 #gui.toolbar_main_style: ICONS
 
-# Check for updates (Windows only)
+# Check for updates (Windows and macOS only)
 # TRUE or FALSE (case-insensitive)
 #gui.update.enabled: TRUE
 
-# The type of update to fetch. You should probably leave this set to UPDATE_CHANNEL_STABLE.
+# The type of update to fetch. You should probably leave this set to STABLE.
 # One of: DEVELOPMENT, STABLE
 # (case-insensitive).
 #gui.update.channel: STABLE
@@ -104,6 +104,10 @@
 # (case-insensitive).
 #gui.version_placement: BOTH
 
+# The maximum number of objects that can be exported
+# A decimal number
+#gui.max_export_objects: 1000
+
 # Enable Packet Editor (Experimental)
 # TRUE or FALSE (case-insensitive)
 #gui.packet_editor.enabled: FALSE
@@ -122,7 +126,7 @@
 #gui.interfaces_remote_display: TRUE
 
 # Hide the given interface types in the startup list.
-# A commma-separated string of interface type values (e.g. 5,9).
+# A comma-separated string of interface type values (e.g. 5,9).
 # 0 = Wired,
 # 1 = AirPCAP,
 # 2 = Pipe,
@@ -138,11 +142,11 @@ gui.interfaces_hidden_types: 7
 
 ####### User Interface: Colors ########
 
-# Foregound color for an active selected item
+# Foreground color for an active selected item
 # A six-digit hexadecimal RGB color triplet (e.g. fce94f)
 #gui.active_frame.fg: 000000
 
-# Backgound color for an active selected item
+# Background color for an active selected item
 # A six-digit hexadecimal RGB color triplet (e.g. fce94f)
 #gui.active_frame.bg: cbe8ff
 
@@ -151,11 +155,11 @@ gui.interfaces_hidden_types: 7
 # (case-insensitive).
 #gui.active_frame.style: DEFAULT
 
-# Foregound color for an inactive selected item
+# Foreground color for an inactive selected item
 # A six-digit hexadecimal RGB color triplet (e.g. fce94f)
 #gui.inactive_frame.fg: 000000
 
-# Backgound color for an inactive selected item
+# Background color for an inactive selected item
 # A six-digit hexadecimal RGB color triplet (e.g. fce94f)
 #gui.inactive_frame.bg: efefef
 
@@ -245,23 +249,27 @@ gui.qt.font_name: Liberation Mono,9,-1,5,50,0,0,0,0,0
 #gui.layout_type: 1
 
 # Layout content of the pane 1
-# One of: NONE, PLIST, PDETAILS, PBYTES
+# One of: NONE, PLIST, PDETAILS, PBYTES, PDIAGRAM
 # (case-insensitive).
 #gui.layout_content_1: PLIST
 
 # Layout content of the pane 2
-# One of: NONE, PLIST, PDETAILS, PBYTES
+# One of: NONE, PLIST, PDETAILS, PBYTES, PDIAGRAM
 # (case-insensitive).
 #gui.layout_content_2: PDETAILS
 
 # Layout content of the pane 3
-# One of: NONE, PLIST, PDETAILS, PBYTES
+# One of: NONE, PLIST, PDETAILS, PBYTES, PDIAGRAM
 # (case-insensitive).
 #gui.layout_content_3: PBYTES
 
 # Enable Packet List Separator
 # TRUE or FALSE (case-insensitive)
 #gui.packet_list_separator.enabled: FALSE
+
+# Show column definition in packet list header
+# TRUE or FALSE (case-insensitive)
+#gui.packet_header_column_definition.enabled: TRUE
 
 # Show selected packet in the Status Bar
 # TRUE or FALSE (case-insensitive)
@@ -287,7 +295,7 @@ gui.qt.font_name: Liberation Mono,9,-1,5,50,0,0,0,0,0
 
 # Interface link-layer header types (Ex: en0(1),en1(143),...)
 # A string
-capture.devices_linktypes: enp3s0(1),enp4s0(1),virbr0(1),vnet0(1),nlmon0(253),lo(1),any(113),virbr1(1)
+capture.devices_linktypes: eno1(1),nlmon0(253),any(113),lo(1),virbr0(1),docker0(1),br-9d473962c8fb(1),br-d36f9ebedf0e(1),br-d687bdbd77b3(1),bluetooth-monitor(254),ciscodump(147),dpauxmon(275),randpkt(147),sdjournal(147),sshdump(147),udpdump(252)
 
 # Interface descriptions (Ex: eth0(eth0 descr),eth1(eth1 descr),...)
 # A string
@@ -303,15 +311,15 @@ capture.devices_linktypes: enp3s0(1),enp4s0(1),virbr0(1),vnet0(1),nlmon0(253),lo
 
 # Interface buffer size (Ex: en0(1),en1(143),...)
 # A string
-capture.devices_buffersize: enp3s0(2),enp4s0(2),virbr0(2),vnet0(2),nlmon0(2),lo(2),any(2),virbr1(2),nflog(2),nfqueue(2),sit0(2),ip6tnl0(2),usbmon0(2),usbmon1(2),usbmon2(2),virbr1-nic(2),virbr0-nic(2),eno1(2)
+capture.devices_buffersize: eno1(2),nlmon0(2),any(2),lo(2),virbr0(2),docker0(2),br-9d473962c8fb(2),br-d36f9ebedf0e(2),br-d687bdbd77b3(2),bluetooth-monitor(2),nflog(2),nfqueue(2),ciscodump(2),dpauxmon(2),randpkt(2),sdjournal(2),sshdump(2),udpdump(2)
 
 # Interface snap length (Ex: en0(65535),en1(1430),...)
 # A string
-capture.devices_snaplen: enp3s0:0(262144),enp4s0:0(262144),virbr0:0(262144),vnet0:0(262144),nlmon0:0(262144),lo:0(262144),any:0(262144),virbr1:0(262144),nflog:0(262144),nfqueue:0(262144),sit0:0(262144),ip6tnl0:0(262144),usbmon0:0(262144),usbmon1:0(262144),usbmon2:0(262144),virbr1-nic:0(262144),virbr0-nic:0(262144),eno1:0(262144)
+capture.devices_snaplen: eno1:0(262144),nlmon0:0(262144),any:0(262144),lo:0(262144),virbr0:0(262144),docker0:0(262144),br-9d473962c8fb:0(262144),br-d36f9ebedf0e:0(262144),br-d687bdbd77b3:0(262144),bluetooth-monitor:0(262144),nflog:0(262144),nfqueue:0(262144),ciscodump:0(262144),dpauxmon:0(262144),randpkt:0(262144),sdjournal:0(262144),sshdump:0(262144),udpdump:0(262144)
 
 # Interface promiscuous mode (Ex: en0(0),en1(1),...)
 # A string
-capture.devices_pmode: enp3s0(1),enp4s0(1),virbr0(1),vnet0(1),nlmon0(1),lo(1),any(1),virbr1(1),nflog(1),nfqueue(1),sit0(1),ip6tnl0(1),usbmon0(1),usbmon1(1),usbmon2(1),virbr1-nic(1),virbr0-nic(1),eno1(1)
+capture.devices_pmode: eno1(1),nlmon0(1),any(1),lo(1),virbr0(1),docker0(1),br-9d473962c8fb(1),br-d36f9ebedf0e(1),br-d687bdbd77b3(1),bluetooth-monitor(1),nflog(1),nfqueue(1),ciscodump(1),dpauxmon(1),randpkt(1),sdjournal(1),sshdump(1),udpdump(1)
 
 # Capture in promiscuous mode?
 # TRUE or FALSE (case-insensitive)
@@ -378,6 +386,62 @@ capture.devices_pmode: enp3s0(1),enp4s0(1),virbr0(1),vnet0(1),nlmon0(1),lo(1),an
 # TRUE or FALSE (case-insensitive)
 #extcap.gui_save_on_start: TRUE
 
+# Remote SSH server address
+# A string
+#extcap.ciscodump.remotehost: 
+
+# Remote SSH server port
+# A string
+#extcap.ciscodump.remoteport: 22
+
+# Remote SSH server username
+# A string
+#extcap.ciscodump.remoteusername: teto
+
+# Path to SSH private key
+# A string
+#extcap.ciscodump.sshkey: 
+
+# ProxyCommand
+# A string
+#extcap.ciscodump.proxycommand: 
+
+# Remote interface
+# A string
+#extcap.ciscodump.remoteinterface: 
+
+# Remote capture filter
+# A string
+#extcap.ciscodump.remotefilter: deny tcp host fe80::6b2a:1c90:471d:9dd3 any eq 0, deny tcp any eq 0 host fe80::6b2a:1c90:471d:9dd3, deny tcp host 2a01:cb14:11ac:8200:9930:218:fb23:d849 any eq 0, deny tcp any eq 0 host 2a01:cb14:11ac:8200:9930:218:fb23:d849, deny tcp host 2a01:cb14:11ac:8200:e576:3268:e61b:f7f1 any eq 0, deny tcp any eq 0 host 2a01:cb14:11ac:8200:e576:3268:e61b:f7f1, deny tcp host 172.18.0.1 any eq 0, deny tcp any eq 0 host 172.18.0.1, deny tcp host 172.19.0.1 any eq 0, deny tcp any eq 0 host 172.19.0.1, deny tcp host 172.20.0.1 any eq 0, deny tcp any eq 0 host 172.20.0.1, deny tcp host 172.17.0.1 any eq 0, deny tcp any eq 0 host 172.17.0.1, deny tcp host 192.168.122.1 any eq 0, deny tcp any eq 0 host 192.168.122.1, deny tcp host 192.168.1.17 any eq 0, deny tcp any eq 0 host 192.168.1.17, permit ip any any
+
+# Packets to capture
+# A string
+#extcap.ciscodump.remotecount: 
+
+# Run in debug mode
+# A string
+#extcap.ciscodump.debug: false
+
+# Use a file for debug
+# A string
+#extcap.ciscodump.debugfile: 
+
+# Listen port
+# A string
+#extcap.udpdump.port: 5555
+
+# Payload type
+# A string
+#extcap.udpdump.payload: data
+
+# Run in debug mode
+# A string
+#extcap.udpdump.debug: false
+
+# Use a file for debug
+# A string
+#extcap.udpdump.debugfile: 
+
 # Starting position
 # A string
 #extcap.sdjournal.startfrom: 
@@ -389,6 +453,50 @@ capture.devices_pmode: enp3s0(1),enp4s0(1),virbr0(1),vnet0(1),nlmon0(1),lo(1),an
 # Use a file for debug
 # A string
 #extcap.sdjournal.debugfile: 
+
+# Max bytes in a packet
+# A string
+#extcap.randpkt.maxbytes: 5000
+
+# Number of packets
+# A string
+#extcap.randpkt.count: 1000
+
+# Packet delay (ms)
+# A string
+#extcap.randpkt.delay: 0
+
+# Random type
+# A string
+#extcap.randpkt.randomtype: false
+
+# All random packets
+# A string
+#extcap.randpkt.allrandom: false
+
+# Type of packet
+# A string
+#extcap.randpkt.type: 
+
+# Run in debug mode
+# A string
+#extcap.randpkt.debug: false
+
+# Use a file for debug
+# A string
+#extcap.randpkt.debugfile: 
+
+# Interface index
+# A string
+#extcap.dpauxmon.interface_id: 0
+
+# Run in debug mode
+# A string
+#extcap.dpauxmon.debug: false
+
+# Use a file for debug
+# A string
+#extcap.dpauxmon.debugfile: 
 
 # Remote SSH server address
 # A string
@@ -428,7 +536,7 @@ capture.devices_pmode: enp3s0(1),enp4s0(1),virbr0(1),vnet0(1),nlmon0(1),lo(1),an
 
 # Remote capture filter
 # A string
-#extcap.sshdump.remotefilter: not ((host fe80::fc54:ff:fe3e:da5f or host fe80::a885:94ff:feb3:e8b2 or host fe80::107d:1309:ef28:ca37 or host fe80::2266:232d:e70a:5970 or host 192.168.122.1 or host 192.168.128.1 or host 192.168.0.128 or host 192.168.0.130) and port 22)
+#extcap.sshdump.remotefilter: not ((host fe80::6b2a:1c90:471d:9dd3 or host 2a01:cb14:11ac:8200:9930:218:fb23:d849 or host 2a01:cb14:11ac:8200:e576:3268:e61b:f7f1 or host 172.18.0.1 or host 172.19.0.1 or host 172.20.0.1 or host 172.17.0.1 or host 192.168.122.1 or host 192.168.1.17) and port 22)
 
 # Packets to capture
 # A string
@@ -441,106 +549,6 @@ capture.devices_pmode: enp3s0(1),enp4s0(1),virbr0(1),vnet0(1),nlmon0(1),lo(1),an
 # Use a file for debug
 # A string
 #extcap.sshdump.debugfile: 
-
-# Listen port
-# A string
-#extcap.udpdump.port: 5555
-
-# Payload type
-# A string
-#extcap.udpdump.payload: data
-
-# Run in debug mode
-# A string
-#extcap.udpdump.debug: false
-
-# Use a file for debug
-# A string
-#extcap.udpdump.debugfile: 
-
-# Interface index
-# A string
-#extcap.dpauxmon.interface_id: 0
-
-# Run in debug mode
-# A string
-#extcap.dpauxmon.debug: false
-
-# Use a file for debug
-# A string
-#extcap.dpauxmon.debugfile: 
-
-# Remote SSH server address
-# A string
-#extcap.ciscodump.remotehost: 
-
-# Remote SSH server port
-# A string
-#extcap.ciscodump.remoteport: 22
-
-# Remote SSH server username
-# A string
-#extcap.ciscodump.remoteusername: teto
-
-# Path to SSH private key
-# A string
-#extcap.ciscodump.sshkey: 
-
-# ProxyCommand
-# A string
-#extcap.ciscodump.proxycommand: 
-
-# Remote interface
-# A string
-#extcap.ciscodump.remoteinterface: 
-
-# Remote capture filter
-# A string
-#extcap.ciscodump.remotefilter: deny tcp host fe80::fc54:ff:fe3e:da5f any eq 0, deny tcp any eq 0 host fe80::fc54:ff:fe3e:da5f, deny tcp host fe80::a885:94ff:feb3:e8b2 any eq 0, deny tcp any eq 0 host fe80::a885:94ff:feb3:e8b2, deny tcp host fe80::107d:1309:ef28:ca37 any eq 0, deny tcp any eq 0 host fe80::107d:1309:ef28:ca37, deny tcp host fe80::2266:232d:e70a:5970 any eq 0, deny tcp any eq 0 host fe80::2266:232d:e70a:5970, deny tcp host 192.168.122.1 any eq 0, deny tcp any eq 0 host 192.168.122.1, deny tcp host 192.168.128.1 any eq 0, deny tcp any eq 0 host 192.168.128.1, deny tcp host 192.168.0.128 any eq 0, deny tcp any eq 0 host 192.168.0.128, deny tcp host 192.168.0.130 any eq 0, deny tcp any eq 0 host 192.168.0.130, permit ip any any
-
-# Packets to capture
-# A string
-#extcap.ciscodump.remotecount: 
-
-# Run in debug mode
-# A string
-#extcap.ciscodump.debug: false
-
-# Use a file for debug
-# A string
-#extcap.ciscodump.debugfile: 
-
-# Max bytes in a packet
-# A string
-#extcap.randpkt.maxbytes: 5000
-
-# Number of packets
-# A string
-#extcap.randpkt.count: 1000
-
-# Packet delay (ms)
-# A string
-#extcap.randpkt.delay: 0
-
-# Random type
-# A string
-#extcap.randpkt.randomtype: false
-
-# All random packets
-# A string
-#extcap.randpkt.allrandom: false
-
-# Type of packet
-# A string
-#extcap.randpkt.type: 
-
-# Run in debug mode
-# A string
-#extcap.randpkt.debug: false
-
-# Use a file for debug
-# A string
-#extcap.randpkt.debugfile: 
 
 ####### Name Resolution ########
 
@@ -563,6 +571,10 @@ capture.devices_pmode: enp3s0(1),enp4s0(1),virbr0(1),vnet0(1),nlmon0(1),lo(1),an
 # Use your system's configured name resolver (usually DNS) to resolve network names. Only applies when network name resolution is enabled.
 # TRUE or FALSE (case-insensitive)
 #nameres.use_external_name_resolver: TRUE
+
+# Uses DNS Servers list to resolve network names if TRUE.  If FALSE, default information is used
+# TRUE or FALSE (case-insensitive)
+#nameres.use_custom_dns_servers: FALSE
 
 # The maximum number of DNS requests that may be active at any time. A large value (many thousands) might overload the network or make your DNS server behave badly.
 # A decimal number
@@ -657,6 +669,18 @@ capture.devices_pmode: enp3s0(1),enp4s0(1),virbr0(1),vnet0(1),nlmon0(1),lo(1),an
 # Use table of LBMR tags to decode the packet instead of above values
 # TRUE or FALSE (case-insensitive)
 #lbmr.use_lbmr_domain: FALSE
+
+# Set the LBMSRS IP Address
+# A string
+#lbmsrs.source_ip_address: 127.0.0.1
+
+# Set the source TCP port
+# A decimal number
+#lbmsrs.source_port: 0
+
+# Use table of LBMSRS tags to decode the packet instead of above values
+# TRUE or FALSE (case-insensitive)
+#lbmsrs.use_lbmsrs_domain: FALSE
 
 # Set the low end of the LBT-RM multicast address range (context transport_lbtrm_multicast_address_low)
 # A string
@@ -934,6 +958,10 @@ capture.devices_pmode: enp3s0(1),enp4s0(1),virbr0(1),vnet0(1),nlmon0(1),lo(1),an
 # TRUE or FALSE (case-insensitive)
 #aeron.use_heuristic_subdissectors: FALSE
 
+# Whether fragmented AFS PDUs should be reassembled
+# TRUE or FALSE (case-insensitive)
+#afs.defragment: FALSE
+
 # Whether the AIM dissector should reassemble messages spanning multiple TCP segments. To use this option, you must also enable "Allow subdissectors to reassemble TCP streams" in the TCP protocol settings.
 # TRUE or FALSE (case-insensitive)
 #aim.desegment: TRUE
@@ -960,11 +988,11 @@ capture.devices_pmode: enp3s0(1),enp4s0(1),virbr0(1),vnet0(1),nlmon0(1),lo(1),an
 # A decimal number
 #amqp.tls.port: 5671
 
-# The dynamic payload types which will be interpreted as AMR(default 0)
+# Dynamic payload types which will be interpreted as AMR; values must be in the range 1 - 127
 # A string denoting an positive integer range (e.g., "1-20,30-40")
 #amr.dynamic.payload.type: 
 
-# The dynamic payload types which will be interpreted as AMR-WB(default 0)
+# Dynamic payload types which will be interpreted as AMR-WB; values must be in the range 1-127
 # A string denoting an positive integer range (e.g., "1-20,30-40")
 #amr.wb.dynamic.payload.type: 
 
@@ -1054,6 +1082,16 @@ capture.devices_pmode: enp3s0(1),enp4s0(1),virbr0(1),vnet0(1),nlmon0(1),lo(1),an
 # (case-insensitive).
 #asterix.i009_version: Version 2.0
 
+# Select the CAT010 version
+# One of: Version 1.10
+# (case-insensitive).
+#asterix.i010_version: Version 1.10
+
+# Select the CAT011 version
+# One of: Version 1.20
+# (case-insensitive).
+#asterix.i011_version: Version 1.20
+
 # Select the CAT019 version
 # One of: Version 1.3
 # (case-insensitive).
@@ -1065,7 +1103,7 @@ capture.devices_pmode: enp3s0(1),enp4s0(1),virbr0(1),vnet0(1),nlmon0(1),lo(1),an
 #asterix.i020_version: Version 1.9
 
 # Select the CAT021 version
-# One of: Version 2.3, Version 2.1
+# One of: Version 2.3, Version 2.1, Version 0.26, Version 0.23
 # (case-insensitive).
 #asterix.i021_version: Version 2.3
 
@@ -1114,7 +1152,7 @@ capture.devices_pmode: enp3s0(1),enp4s0(1),virbr0(1),vnet0(1),nlmon0(1),lo(1),an
 # (case-insensitive).
 #at.role: Off
 
-# Autodection between LANE and SSCOP is hard. As default LANE is preferred
+# Autodetection between LANE and SSCOP is hard. As default LANE is preferred
 # TRUE or FALSE (case-insensitive)
 #atm.dissect_lane_as_sscop: FALSE
 
@@ -1203,6 +1241,10 @@ capture.devices_pmode: enp3s0(1),enp4s0(1),virbr0(1),vnet0(1),nlmon0(1),lo(1),an
 # TRUE or FALSE (case-insensitive)
 #bittorrent.decode_client: FALSE
 
+# The maximum size of the buffer for uncompressed messages. If a message is larger than this, then the packet containing the message, as well as subsequent packets, will fail to decompress
+# A decimal number
+#blip.max_uncompressed_size: 64
+
 # Force decoding stream as A2DP with Content Protection SCMS-T 
 # TRUE or FALSE (case-insensitive)
 #bta2dp.a2dp.content_protection.scms_t: FALSE
@@ -1272,6 +1314,10 @@ capture.devices_pmode: enp3s0(1),enp4s0(1),virbr0(1),vnet0(1),nlmon0(1),lo(1),an
 # Whether the ACL dissector should reassemble fragmented PDUs
 # TRUE or FALSE (case-insensitive)
 #bthci_acl.hci_acl_reassembly: TRUE
+
+# Whether the ISO dissector should reassemble fragmented PDUs
+# TRUE or FALSE (case-insensitive)
+#bthci_iso.hci_iso_reassembly: TRUE
 
 # Whether the BMP dissector should reassemble messages spanning multiple TCP segments. To use this option, you must also enable "Allow subdissectors to reassemble TCP streams" in the TCP protocol settings.
 # TRUE or FALSE (case-insensitive)
@@ -1343,6 +1389,10 @@ capture.devices_pmode: enp3s0(1),enp4s0(1),virbr0(1),vnet0(1),nlmon0(1),lo(1),an
 # Try to decode a packet using an heuristic sub-dissector before using a sub-dissector registered to "decode as"
 # TRUE or FALSE (case-insensitive)
 #can.try_heuristic_first: FALSE
+
+# Try to decode a packet using an heuristic sub-dissector before using a sub-dissector registered to "decode as"
+# TRUE or FALSE (case-insensitive)
+#acf-can.try_heuristic_first: FALSE
 
 # Enable support of Cisco Wireless Controller (based on old 8 draft revision).
 # TRUE or FALSE (case-insensitive)
@@ -1424,6 +1474,10 @@ capture.devices_pmode: enp3s0(1),enp4s0(1),virbr0(1),vnet0(1),nlmon0(1),lo(1),an
 # TRUE or FALSE (case-insensitive)
 #cip.enhanced_info_column: TRUE
 
+# Whether the CIP Motion dissector always display the full raw attribute data bytes
+# TRUE or FALSE (case-insensitive)
+#cipm.display_full_attribute_data: FALSE
+
 # NSAP selector for Transport Protocol (last byte in hex)
 # A hexadecimal number
 #clnp.tp_nsap_selector: 0x21
@@ -1451,6 +1505,14 @@ capture.devices_pmode: enp3s0(1),enp4s0(1),virbr0(1),vnet0(1),nlmon0(1),lo(1),an
 # Decode this TCP port's traffic as TCP-transport-style CMP-over-HTTP. Set to "0" to disable. Use this if the Content-Type is not set correctly.
 # A decimal number
 #cmp.tcp_style_http_alternate_port: 0
+
+# Whether to base64-encode the Community ID hash value
+# TRUE or FALSE (case-insensitive)
+#communityid.do_base64: TRUE
+
+# A 16-bit seed value to add to the hashed data
+# A decimal number
+#communityid.seed: 0
 
 # Whether the COPS dissector should reassemble messages spanning multiple TCP segments. To use this option, you must also enable "Allow subdissectors to reassemble TCP streams" in the TCP protocol settings.
 # TRUE or FALSE (case-insensitive)
@@ -1717,7 +1779,7 @@ capture.devices_pmode: enp3s0(1),enp4s0(1),virbr0(1),vnet0(1),nlmon0(1),lo(1),an
 # A path to a file
 #dtls.debug_file: 
 
-# Pre-Shared-Key as HEX string. Should be 0 to 16 bytes.
+# Pre-Shared Key as HEX string. Should be 0 to 16 bytes.
 # A string
 #dtls.psk: 
 
@@ -1733,9 +1795,18 @@ capture.devices_pmode: enp3s0(1),enp4s0(1),virbr0(1),vnet0(1),nlmon0(1),lo(1),an
 # TRUE or FALSE (case-insensitive)
 #dvb-ci.dissect_lsc_msg: FALSE
 
+# Check this to enable full protocol dissection of data above BBHeader
+# TRUE or FALSE (case-insensitive)
+#dvb-s2_modeadapt.decode_df: FALSE
+
 # Check this to enable full protocol dissection of data above GSE Layer
 # TRUE or FALSE (case-insensitive)
 #dvb-s2_modeadapt.full_decode: FALSE
+
+# defines the RCS protocol version used in table dissection
+# One of: RCS protocol, RCS2 protocol
+# (case-insensitive).
+#dvb-s2_table.rcs_protocol: RCS2 protocol
 
 # Allow only packets with Major=0x03//Minor=0xFF as DVMRP V3 packets
 # TRUE or FALSE (case-insensitive)
@@ -1780,7 +1851,7 @@ capture.devices_pmode: enp3s0(1),enp4s0(1),virbr0(1),vnet0(1),nlmon0(1),lo(1),an
 # TRUE or FALSE (case-insensitive)
 #epl.show_soc_flags: FALSE
 
-# For analysis purposes one might want to show the command layer even if the dissectore assumes a duplicated frame
+# For analysis purposes one might want to show the command layer even if the dissector assumes a duplicated frame
 # TRUE or FALSE (case-insensitive)
 #epl.show_duplicated_command_layer: FALSE
 
@@ -1846,9 +1917,14 @@ capture.devices_pmode: enp3s0(1),enp4s0(1),virbr0(1),vnet0(1),nlmon0(1),lo(1),an
 # A path to a directory
 #etch.file: 
 
-# Some devices add trailing data to frames. When this setting is checked the Ethernet dissector will assume there has been added padding to the frame before the trailer was added. Uncheck if a device added a trailer before the frame was padded.
-# TRUE or FALSE (case-insensitive)
-#eth.assume_padding: TRUE
+# Some devices add trailing data to frames.  Depending on where this device exists in the network, padding could be added to short frames before the additional trailer.  This option determines how that padding will be detected.
+# 
+# Never - Don't detect any padding.  Any bytes after the ethernet payload will be considered trailer.
+# Zeros (default) - Consecutive bytes of zeros up to the minimum ethernet frame size will be treated as padding.  Additional bytes will be considered trailer.
+# Any - Any bytes after the payload up to the minimum ethernet frame size will be treated as padding.  Additional bytes will be considered trailer.
+# One of: Never, Zeros, Any
+# (case-insensitive).
+#eth.padding: Zeros
 
 # Some TAPs add a fixed length ethernet trailer at the end of the frame, but before the (optional) FCS. Make sure it gets interpreted correctly.
 # A decimal number
@@ -1890,9 +1966,9 @@ capture.devices_pmode: enp3s0(1),enp4s0(1),virbr0(1),vnet0(1),nlmon0(1),lo(1),an
 # TRUE or FALSE (case-insensitive)
 #evrc.legacy_pt_60: FALSE
 
-# The dynamic payload type which will be interpreted as EVS; The value must be greater than 95
-# A decimal number
-#evs.dynamic.payload.type: 0
+# Dynamic payload types which will be interpreted as EVS; values must be in the range 1 - 127
+# A string denoting an positive integer range (e.g., "1-20,30-40")
+#evs.dynamic.payload.type: 
 
 # Controls the display of the session's username in the info column.  This is only displayed if the packet containing it was seen during this capture session.
 # TRUE or FALSE (case-insensitive)
@@ -1902,9 +1978,13 @@ capture.devices_pmode: enp3s0(1),enp4s0(1),virbr0(1),vnet0(1),nlmon0(1),lo(1),an
 # TRUE or FALSE (case-insensitive)
 #exec.info_show_command: FALSE
 
+# In a few cases a short ethernet frame will be padded with non-zerobytes.  If this happens, an f5ethtrailer will not be found.Enabling this will step through each byte of the ethernet trailerto try and find the start of an f5ethtrailer
+# TRUE or FALSE (case-insensitive)
+#f5ethtrailer.pref_walk_trailer: FALSE
+
 # Disable this if you do not want this dissector to populate well-known fields in other dissectors (i.e. ip.addr, ipv6.addr, tcp.port and udp.port).  Enabling this will allow filters that reference those fields to also find data in the trailers but will reduce performance.  After disabling, you should restart Wireshark to get performance back.
 # TRUE or FALSE (case-insensitive)
-#f5ethtrailer.pop_other_fields: FALSE
+#f5ethtrailer.pref_pop_other_fields: FALSE
 
 # Enabling this will perform analysis of the trailer data.  It will enable taps on other protocols and slow down Wireshark.
 # TRUE or FALSE (case-insensitive)
@@ -1926,6 +2006,10 @@ capture.devices_pmode: enp3s0(1),enp4s0(1),virbr0(1),vnet0(1),nlmon0(1),lo(1),an
 # If present, include the RST cause text from the trailer in the "info" column of the packet list pane.
 # TRUE or FALSE (case-insensitive)
 #f5ethtrailer.rstcause_in_info: TRUE
+
+# If enabled, KEYLOG entries will be added to the TLS decode in the f5ethtrailer protocol tree.  It will populate the f5ethtrailer.tls.keylog field.
+# TRUE or FALSE (case-insensitive)
+#f5ethtrailer.generate_keylog: TRUE
 
 # If enabled, reassembly of multi-frame sequences is done
 # TRUE or FALSE (case-insensitive)
@@ -2106,7 +2190,15 @@ capture.devices_pmode: enp3s0(1),enp4s0(1),virbr0(1),vnet0(1),nlmon0(1),lo(1),an
 
 # Normally application/grpc message is protobuf, but sometime the true message is json. If this option in on, we always check whether the message is JSON (body starts with '{' and ends with '}') regardless of grpc_message_type_subdissector_table settings (which dissect grpc message according to content-type).
 # TRUE or FALSE (case-insensitive)
-#grpc.detect_json_automaticlly: TRUE
+#grpc.detect_json_automatically: TRUE
+
+# If turned on, http2 will reassemble gRPC message as soon as possible. Or else the gRPC message will be reassembled at the end of each HTTP2 STREAM. If your .proto files contains streaming RPCs (declaring RPC operation input/output message type with 'stream' label), you need to keep this option on.
+# TRUE or FALSE (case-insensitive)
+#grpc.streaming_reassembly_mode: TRUE
+
+# Embed gRPC messages under HTTP2 protocol tree items.
+# TRUE or FALSE (case-insensitive)
+#grpc.embedded_under_http2: FALSE
 
 # Whether the Gryphon dissector should desegment all messages spanning multiple TCP segments
 # TRUE or FALSE (case-insensitive)
@@ -2186,7 +2278,7 @@ capture.devices_pmode: enp3s0(1),enp4s0(1),virbr0(1),vnet0(1),nlmon0(1),lo(1),an
 #gtp.v1u_port: 2152
 
 # Dissect T-PDU as
-# One of: None, TPDU Heuristic, PDCP-LTE, PDCP-NR, SYNC
+# One of: None, TPDU Heuristic, PDCP-LTE, PDCP-NR, SYNC, ETHERNET
 # (case-insensitive).
 #gtp.dissect_tpdu_as: TPDU Heuristic
 
@@ -2244,6 +2336,18 @@ capture.devices_pmode: enp3s0(1),enp4s0(1),virbr0(1),vnet0(1),nlmon0(1),lo(1),an
 # TRUE or FALSE (case-insensitive)
 #h245.prepand: FALSE
 
+# Dynamic payload types which will be interpreted as H.263; values must be in the range 1 - 127
+# A string denoting an positive integer range (e.g., "1-20,30-40")
+#h263p.dynamic.payload.type: 
+
+# Dynamic payload types which will be interpreted as H.264; values must be in the range 1 - 127
+# A string denoting an positive integer range (e.g., "1-20,30-40")
+#h264.dynamic.payload.type: 
+
+# Dynamic payload types which will be interpreted as H.265; values must be in the range 1 - 127
+# A string denoting an positive integer range (e.g., "1-20,30-40")
+#h265.dynamic.payload.type: 
+
 # Desegment H.501 messages that span more TCP segments
 # TRUE or FALSE (case-insensitive)
 #h501.desegment: TRUE
@@ -2255,18 +2359,6 @@ capture.devices_pmode: enp3s0(1),enp4s0(1),virbr0(1),vnet0(1),nlmon0(1),lo(1),an
 # Desegment H.248 messages that span more TCP segments
 # TRUE or FALSE (case-insensitive)
 #h248.desegment: TRUE
-
-# The dynamic payload type which will be interpreted as H264; The value must be greater than 95
-# A decimal number
-#h263p.dynamic.payload.type: 0
-
-# Dynamic payload types which will be interpreted as H264; Values must be in the range 96 - 127
-# A string denoting an positive integer range (e.g., "1-20,30-40")
-#h264.dynamic.payload.type: 
-
-# Dynamic payload types which will be interpreted as H265; Values must be in the range 96 - 127
-# A string denoting an positive integer range (e.g., "1-20,30-40")
-#h265.dynamic.payload.type: 
 
 # Whether the HART-IP dissector should desegment all messages spanning multiple TCP segments
 # TRUE or FALSE (case-insensitive)
@@ -2417,6 +2509,10 @@ capture.devices_pmode: enp3s0(1),enp4s0(1),virbr0(1),vnet0(1),nlmon0(1),lo(1),an
 # TRUE or FALSE (case-insensitive)
 #wpan.802154_ack_tracking: FALSE
 
+# Parse assuming 802.15.4e quirks for compatibility
+# TRUE or FALSE (case-insensitive)
+#wpan.802154e_compatibility: FALSE
+
 # Specifies the security suite to use for 802.15.4-2003 secured frames (only supported suites are listed). Option ignored for 802.15.4-2006 and unsecured frames.
 # One of: AES-128 Encryption, 128-bit Integrity Protection, AES-128 Encryption, 64-bit Integrity Protection, AES-128 Encryption, 32-bit Integrity Protection
 # (case-insensitive).
@@ -2479,6 +2575,10 @@ capture.devices_pmode: enp3s0(1),enp4s0(1),virbr0(1),vnet0(1),nlmon0(1),lo(1),an
 # One of: None, Pigeon Point Systems
 # (case-insensitive).
 #ipmi.selected_oem: None
+
+# No description
+# TRUE or FALSE (case-insensitive)
+#ippusb.attempt_reassembly: TRUE
 
 # Whether the IPv4 type-of-service field should be decoded as a Differentiated Services field (see RFC2474/RFC2475)
 # TRUE or FALSE (case-insensitive)
@@ -2582,9 +2682,9 @@ capture.devices_pmode: enp3s0(1),enp4s0(1),virbr0(1),vnet0(1),nlmon0(1),lo(1),an
 # A string denoting an positive integer range (e.g., "1-20,30-40")
 #iser.target_ports: 3260
 
-# The dynamic payload type which will be interpreted as ISMACryp
-# A decimal number
-#ismacryp.dynamic.payload.type: 0
+# Dynamic payload types which will be interpreted as ISMACryp; values must be in the range 1 - 127
+# A string denoting an positive integer range (e.g., "1-20,30-40")
+#ismacryp.dynamic.payload.type: 
 
 # ISMACryp version
 # One of: ISMACryp v1.1, ISMACryp v2.0
@@ -2729,9 +2829,9 @@ capture.devices_pmode: enp3s0(1),enp4s0(1),virbr0(1),vnet0(1),nlmon0(1),lo(1),an
 # TRUE or FALSE (case-insensitive)
 #iuup.two_byte_pseudoheader: FALSE
 
-# The dynamic payload type which will be interpreted as IuUP
-# A decimal number
-#iuup.dynamic.payload.type: 0
+# Dynamic payload types which will be interpreted as IuUP; values must be in the range 1 - 127
+# A string denoting an positive integer range (e.g., "1-20,30-40")
+#iuup.dynamic.payload.type: 
 
 # Whether the trailer summary line should be shown in the protocol tree
 # TRUE or FALSE (case-insensitive)
@@ -2843,9 +2943,9 @@ capture.devices_pmode: enp3s0(1),enp4s0(1),virbr0(1),vnet0(1),nlmon0(1),lo(1),an
 # TRUE or FALSE (case-insensitive)
 #lapd.use_gsm_sapi_values: FALSE
 
-# RTP payload type for embedded LAPD. It must be one of the dynamic types from 96 to 127. Set it to 0 to disable.
-# A decimal number
-#lapd.rtp_payload_type: 0
+# RTP payload types for embedded LAPD; values must be in the range 1 - 127
+# A string denoting an positive integer range (e.g., "1-20,30-40")
+#lapd.rtp_payload_type: 
 
 # SCTP Payload Protocol Identifier for LAPD. It is a 32 bits value from 0 to 4294967295. Set it to 0 to disable.
 # A decimal number
@@ -2996,6 +3096,10 @@ capture.devices_pmode: enp3s0(1),enp4s0(1),virbr0(1),vnet0(1),nlmon0(1),lo(1),an
 # TRUE or FALSE (case-insensitive)
 #mac-nr.attempt_rrc_decode: TRUE
 
+# Will call NR RLC dissector with standard settings as per RRC spec
+# TRUE or FALSE (case-insensitive)
+#mac-nr.attempt_to_dissect_srb_sdus: TRUE
+
 # Set whether LCID -> drb Table is taken from static table (below) or from info learned from control protocol (i.e. RRC)
 # One of: From static table, From configuration protocol
 # (case-insensitive).
@@ -3013,6 +3117,11 @@ capture.devices_pmode: enp3s0(1),enp4s0(1),virbr0(1),vnet0(1),nlmon0(1),lo(1),an
 # One of: Automatic, 3GPP, 3GPP2
 # (case-insensitive).
 #mbim.sms_pdu_format: Automatic
+
+# No description
+# One of: 1.0, 2.0
+# (case-insensitive).
+#mbim.extended_version: 1.0
 
 # Set the UDP port for the MCPE Server
 # A decimal number
@@ -3099,9 +3208,9 @@ capture.devices_pmode: enp3s0(1),enp4s0(1),virbr0(1),vnet0(1),nlmon0(1),lo(1),an
 # TRUE or FALSE (case-insensitive)
 #mbtcp.desegment: TRUE
 
-# The dynamic payload type which will be interpreted as MP4V-ES
-# A decimal number
-#mp4v-es.dynamic.payload.type: 0
+# Dynamic payload types which will be interpreted as MP4V-ES; values must be in the range 1 - 127
+# A string denoting an positive integer range (e.g., "1-20,30-40")
+#mp4v-es.dynamic.payload.type: 
 
 # Whether the section dissector should verify the CRC or checksum
 # TRUE or FALSE (case-insensitive)
@@ -3171,6 +3280,11 @@ capture.devices_pmode: enp3s0(1),enp4s0(1),virbr0(1),vnet0(1),nlmon0(1),lo(1),an
 # A decimal number
 #mqpcf.maxlst: 20000
 
+# Select the MQTT version to use as protocol version if the CONNECT packet is not captured
+# One of: None, MQTT v3.1, MQTT v3.1.1, MQTT v5.0
+# (case-insensitive).
+#mqtt.default_version: None
+
 # Show Publish Message as text
 # TRUE or FALSE (case-insensitive)
 #mqtt.show_msg_as_text: FALSE
@@ -3203,7 +3317,7 @@ capture.devices_pmode: enp3s0(1),enp4s0(1),virbr0(1),vnet0(1),nlmon0(1),lo(1),an
 # TRUE or FALSE (case-insensitive)
 #mtp2.reverse_bit_order_mtp2: FALSE
 
-# RTP payload types for embedded packets in RTP stream. Must be of the dynamic types from 96 to 127.
+# RTP payload types for embedded packets in RTP stream; values must be in the range 1 - 127
 # A string denoting an positive integer range (e.g., "1-20,30-40")
 #mtp2.rtp_payload_type: 
 
@@ -3251,7 +3365,7 @@ capture.devices_pmode: enp3s0(1),enp4s0(1),virbr0(1),vnet0(1),nlmon0(1),lo(1),an
 # TRUE or FALSE (case-insensitive)
 #mysql.show_sql_query: FALSE
 
-# This should work when the NAS ciphering algorithm is NULL (128-EEA0)
+# This should work when the NAS ciphering algorithm is NULL (5G-EEA0)
 # TRUE or FALSE (case-insensitive)
 #nas-5gs.null_decipher: FALSE
 
@@ -3264,8 +3378,13 @@ capture.devices_pmode: enp3s0(1),enp4s0(1),virbr0(1),vnet0(1),nlmon0(1),lo(1),an
 #nas-eps.null_decipher: TRUE
 
 # No description
-# TRUE or FALSE (case-insensitive)
-#nas-eps.user_data_container_as_ip: TRUE
+# One of: None, IP, Non IP
+# (case-insensitive).
+#nas-eps.decode_user_data_container_as: None
+
+# No description
+# A string
+#nas-eps.non_ip_data_dissector: 
 
 # Whether the Nasdaq ITCH dissector should decode Chi X extensions.
 # TRUE or FALSE (case-insensitive)
@@ -3465,6 +3584,11 @@ capture.devices_pmode: enp3s0(1),enp4s0(1),virbr0(1),vnet0(1),nlmon0(1),lo(1),an
 # One of: automatic, gNB, ng-eNB
 # (case-insensitive).
 #ngap.dissect_target_ng_ran_container_as: automatic
+
+# Select whether LTE container should be dissected as NB-IOT or legacy LTE
+# One of: Automatic, Legacy LTE, NB-IoT
+# (case-insensitive).
+#ngap.dissect_lte_container_as: Automatic
 
 # Whether the Authentication Extension data contains the source address. Some Cisco IOS implementations forgo this part of RFC2332.
 # TRUE or FALSE (case-insensitive)
@@ -3807,7 +3931,7 @@ capture.devices_pmode: enp3s0(1),enp4s0(1),virbr0(1),vnet0(1),nlmon0(1),lo(1),an
 # A decimal number
 #mp.max_fragments: 6
 
-# Age off unreassmbled fragments after this many packets
+# Age off unreassembled fragments after this many packets
 # A decimal number
 #mp.fragment_aging: 4000
 
@@ -3815,17 +3939,25 @@ capture.devices_pmode: enp3s0(1),enp4s0(1),virbr0(1),vnet0(1),nlmon0(1),lo(1),an
 # TRUE or FALSE (case-insensitive)
 #pppoed.show_tags_and_lengths: FALSE
 
-# Try to dissect all length-delimited field as string.
+# If Protobuf messages and fields are defined in loaded .proto files, they will be dissected as wireshark fields if this option is turned on. The names of all these wireshark fields will be prefixed with "pbf." (for fields) or "pbm." (for messages) followed by their full names in the .proto files.
 # TRUE or FALSE (case-insensitive)
-#protobuf.try_dissect_all_length_delimited_field_as_string: FALSE
+#protobuf.pbf_as_hf: FALSE
 
-# Try to dissect length-delimited field as repeated.
+# Show the names of message, field, enum and enum_value. Show the wire type and field number format of field. Show value nodes of field and enum_value.
 # TRUE or FALSE (case-insensitive)
-#protobuf.try_dissect_length_delimited_field_as_repeated: FALSE
+#protobuf.show_details: FALSE
 
-# Try to show all possible field types for each field according to wire type.
+# Show all fields of bytes type as string. For example ETCD string
 # TRUE or FALSE (case-insensitive)
-#protobuf.show_all_possible_field_types: FALSE
+#protobuf.bytes_as_string: FALSE
+
+# Try to dissect all undefined length-delimited fields as string.
+# TRUE or FALSE (case-insensitive)
+#protobuf.try_dissect_as_string: FALSE
+
+# Try to show all possible field types for each undefined field according to wire type.
+# TRUE or FALSE (case-insensitive)
+#protobuf.show_all_types: FALSE
 
 # Properly translates vendor specific opcodes
 # One of: Unknown vendor, Eastman Kodak, Canon, Nikon, Casio EX-F1, Microsoft / MTP, Olympus E series
@@ -3987,7 +4119,7 @@ capture.devices_pmode: enp3s0(1),enp4s0(1),virbr0(1),vnet0(1),nlmon0(1),lo(1),an
 # TRUE or FALSE (case-insensitive)
 #rlc-nr.header_only_mode: FALSE
 
-# N.B. This should be considered experimental/incomplete, in that it doesn't try to discard reassembled state when reestablishmenment happens, or in certain packet-loss cases
+# N.B. This should be considered experimental/incomplete, in that it doesn't try to discard reassembled state when reestablishment happens, or in certain packet-loss cases
 # TRUE or FALSE (case-insensitive)
 #rlc-nr.reassemble_um_frames: FALSE
 
@@ -4101,21 +4233,21 @@ capture.devices_pmode: enp3s0(1),enp4s0(1),virbr0(1),vnet0(1),nlmon0(1),lo(1),an
 # (case-insensitive).
 #rtp.version0_type: Invalid or ZRTP packets
 
-# Payload Type for RFC2198 Redundant Audio Data
-# A decimal number
+# Payload Types for RFC2198 Redundant Audio Data; values must be in the range 1-127
+# A string denoting an positive integer range (e.g., "1-20,30-40")
 #rtp.rfc2198_payload_type: 99
 
-# This is the value of the Payload Type field that specifies RTP Events
-# A decimal number
+# Payload Types for RFC2833 RTP Events; values must be in the range 1 - 127
+# A string denoting an positive integer range (e.g., "1-20,30-40")
 #rtpevent.event_payload_type_value: 101
 
-# This is the value of the Payload Type field that specifies Cisco Named Signaling Events
-# A decimal number
+# Payload Types for Cisco Named Signaling Events; values must be in the range 1 - 127
+# A string denoting an positive integer range (e.g., "1-20,30-40")
 #rtpevent.cisco_nse_payload_type_value: 100
 
-# This is the value of the Payload Type field that specifies RTP-MIDI
-# A decimal number
-#rtpmidi.midi_payload_type_value: 0
+# Dynamic payload types which will be interpreted as RTP-MIDI; values must be in the range 1 - 127
+# A string denoting an positive integer range (e.g., "1-20,30-40")
+#rtpmidi.midi_payload_type_value: 
 
 # Specifies that RTP/RTCP/T.38/MSRP/etc streams are decoded based upon port numbers found in RTPproxy answers
 # TRUE or FALSE (case-insensitive)
@@ -4129,9 +4261,13 @@ capture.devices_pmode: enp3s0(1),enp4s0(1),virbr0(1),vnet0(1),nlmon0(1),lo(1),an
 # A decimal number
 #rtps.max_batch_samples_dissected: 16
 
-# Shows the Topic Name and Type Name of the samples.
+# Shows the Topic Name and Type Name of the samples. Note: this can considerably increase the dissection time
 # TRUE or FALSE (case-insensitive)
-#rtps.enable_topic_info: FALSE
+#rtps.enable_topic_info: TRUE
+
+# Dissects the user data if the Type Object is propagated in Discovery.
+# TRUE or FALSE (case-insensitive)
+#rtps.enable_user_data_dissection: FALSE
 
 # Enables the reassembly of DATA_FRAG submessages.
 # TRUE or FALSE (case-insensitive)
@@ -4240,9 +4376,17 @@ capture.devices_pmode: enp3s0(1),enp4s0(1),virbr0(1),vnet0(1),nlmon0(1),lo(1),an
 # TRUE or FALSE (case-insensitive)
 #sctp.tsn_analysis: TRUE
 
+# Match verification tags(CPU intense)
+# TRUE or FALSE (case-insensitive)
+#sctp.association_index: FALSE
+
 # Dissect upper layer protocols
 # TRUE or FALSE (case-insensitive)
 #sctp.ulp_dissection: TRUE
+
+# Whether Scylla dissector should desegment all messages spanning multiple TCP segments
+# TRUE or FALSE (case-insensitive)
+#scylla.desegment: TRUE
 
 # Data rate
 # One of: Attempt to guess, OC-3, OC-12, OC-24, OC-48
@@ -4342,7 +4486,7 @@ capture.devices_pmode: enp3s0(1),enp4s0(1),virbr0(1),vnet0(1),nlmon0(1),lo(1),an
 # TRUE or FALSE (case-insensitive)
 #sip.delay_sdp_changes: FALSE
 
-# Whether the generated call id should be hiddden(not displayed) in the tree or not.
+# Whether the generated call id should be hidden(not displayed) in the tree or not.
 # TRUE or FALSE (case-insensitive)
 #sip.hide_generatd_call_id: FALSE
 
@@ -4381,6 +4525,10 @@ capture.devices_pmode: enp3s0(1),enp4s0(1),virbr0(1),vnet0(1),nlmon0(1),lo(1),an
 # Whether the dissector should reassemble Named Pipes over SMB2 commands
 # TRUE or FALSE (case-insensitive)
 #smb2.pipe_reassembly: TRUE
+
+# Whether the dissector should try to verify SMB2 signatures
+# TRUE or FALSE (case-insensitive)
+#smb2.verify_signatures: FALSE
 
 # Whether the SMB Direct dissector should reassemble fragmented payloads
 # TRUE or FALSE (case-insensitive)
@@ -4468,6 +4616,30 @@ capture.devices_pmode: enp3s0(1),enp4s0(1),virbr0(1),vnet0(1),nlmon0(1),lo(1),an
 # A string
 #solaredge.system_encryption_key: 
 
+# SOME/IP Port Ranges UDP.
+# A string denoting an positive integer range (e.g., "1-20,30-40")
+#someip.ports.udp: 
+
+# SOME/IP Port Ranges TCP.
+# A string denoting an positive integer range (e.g., "1-20,30-40")
+#someip.ports.tcp: 
+
+# Reassemble SOME/IP-TP segments
+# TRUE or FALSE (case-insensitive)
+#someip.reassemble_tp: TRUE
+
+# Should the SOME/IP Dissector use the payload dissector?
+# TRUE or FALSE (case-insensitive)
+#someip.payload_dissector_activated: FALSE
+
+# SOME/IP Ignore Port Ranges UDP. These ports are not automatically added by the SOME/IP-SD.
+# A string denoting an positive integer range (e.g., "1-20,30-40")
+#someipsd.ports.udp.ignore: 
+
+# SOME/IP Ignore Port Ranges TCP. These ports are not automatically added by the SOME/IP-SD.
+# A string denoting an positive integer range (e.g., "1-20,30-40")
+#someipsd.ports.tcp.ignore: 
+
 # Whether the SoulSeek dissector should reassemble messages spanning multiple TCP segments. To use this option, you must also enable "Allow subdissectors to reassemble TCP streams" in the TCP protocol settings.
 # TRUE or FALSE (case-insensitive)
 #slsk.desegment: TRUE
@@ -4513,6 +4685,12 @@ capture.devices_pmode: enp3s0(1),enp4s0(1),virbr0(1),vnet0(1),nlmon0(1),lo(1),an
 # TRUE or FALSE (case-insensitive)
 #ssh.desegment_buffers: TRUE
 
+# The path to the file which contains a list of key exchange secrets in the following format:
+# "<key-type> <hex-encoded-key>" (without quotes or leading spaces).
+# <key-type> is one of: curve25519. 
+# A path to a file
+#ssh.keylog_file: 
+
 # Whether the STANAG 5066 DTS Layer dissector should reassemble DPDUs spanning multiple TCP segments
 # TRUE or FALSE (case-insensitive)
 #s5066dts.proto_desegment: TRUE
@@ -4544,6 +4722,11 @@ capture.devices_pmode: enp3s0(1),enp4s0(1),virbr0(1),vnet0(1),nlmon0(1),lo(1),an
 # Whether to validate the STT checksum or not.
 # TRUE or FALSE (case-insensitive)
 #stt.check_checksum: FALSE
+
+# Stun Version on the Network
+# One of: Auto, MS-TURN, RFC3489 and earlier, RFC5389 and later
+# (case-insensitive).
+#stun.stunversion: RFC5389 and later
 
 # Version used by Wireshark
 # One of: Internet Draft version 08, RFC 3868
@@ -4710,6 +4893,10 @@ capture.devices_pmode: enp3s0(1),enp4s0(1),virbr0(1),vnet0(1),nlmon0(1),lo(1),an
 # TRUE or FALSE (case-insensitive)
 #tetra.include_carrier_number: TRUE
 
+# Whether fragmented TFTP files should be reassembled
+# TRUE or FALSE (case-insensitive)
+#tftp.defragment: FALSE
+
 # 32-bit sequence counter for hash
 # A string
 #thread.thr_seq_ctr: 
@@ -4792,7 +4979,7 @@ capture.devices_pmode: enp3s0(1),enp4s0(1),virbr0(1),vnet0(1),nlmon0(1),lo(1),an
 # TRUE or FALSE (case-insensitive)
 #tls.ignore_ssl_mac_failed: FALSE
 
-# Pre-Shared-Key as HEX string. Should be 0 to 16 bytes.
+# Pre-Shared Key as HEX string. Should be 0 to 16 bytes.
 # A string
 #tls.psk: 
 
@@ -4834,14 +5021,6 @@ capture.devices_pmode: enp3s0(1),enp4s0(1),virbr0(1),vnet0(1),nlmon0(1),lo(1),an
 # Whether to load the Database or not; not loading the DB disables the protocol; Wireshark has to be restarted for the setting to take effect.
 # TRUE or FALSE (case-insensitive)
 #tpncp.load_db: FALSE
-
-# No description
-# A decimal number
-#tpncp.tcp.trunkpack_port: 2424
-
-# No description
-# A decimal number
-#tpncp.udp.trunkpack_port: 2424
 
 # Position of the capture unit that produced this trace.  This setting affects the way TRANSUM handles TCP Retransmissions.  See the manual for details.
 # One of: Client, Intermediate, Service
@@ -4947,6 +5126,14 @@ capture.devices_pmode: enp3s0(1),enp4s0(1),virbr0(1),vnet0(1),nlmon0(1),lo(1),an
 # TRUE or FALSE (case-insensitive)
 #udplite.calculate_timestamps: TRUE
 
+# No description
+# TRUE or FALSE (case-insensitive)
+#udpcp.attempt_reassembly: TRUE
+
+# No description
+# TRUE or FALSE (case-insensitive)
+#udpcp.attempt_xml_decode: TRUE
+
 # Whether the ULP dissector should reassemble messages spanning multiple TCP segments. To use this option, you must also enable "Allow subdissectors to reassemble TCP streams" in the TCP protocol settings.
 # TRUE or FALSE (case-insensitive)
 #ulp.desegment_ulp_messages: TRUE
@@ -4985,7 +5172,7 @@ capture.devices_pmode: enp3s0(1),enp4s0(1),virbr0(1),vnet0(1),nlmon0(1),lo(1),an
 # TRUE or FALSE (case-insensitive)
 #vnc.desegment: TRUE
 
-# Dynamic payload types which will be interpreted as vp8; Values must be in the range 96 - 127
+# Dynamic payload types which will be interpreted as vp8; Values must be in the range 1 - 127
 # A string denoting an positive integer range (e.g., "1-20,30-40")
 #vp8.dynamic.payload.type: 
 
@@ -5009,6 +5196,10 @@ capture.devices_pmode: enp3s0(1),enp4s0(1),virbr0(1),vnet0(1),nlmon0(1),lo(1),an
 # No description
 # TRUE or FALSE (case-insensitive)
 #websocket.decompress: TRUE
+
+# The TCP port DPP over TCP uses
+# A decimal number
+#dpp.tcp.port: 7871
 
 # Set the maximum Basic CID used in the Wimax decoder (if other than the default of 320).  Note: The maximum Primary CID is double the maximum Basic CID.
 # A decimal number
@@ -5095,6 +5286,11 @@ capture.devices_pmode: enp3s0(1),enp4s0(1),virbr0(1),vnet0(1),nlmon0(1),lo(1),an
 # (case-insensitive).
 #xnap.dissect_target_ng_ran_container_as: automatic
 
+# Select whether LTE RRC Context should be dissected as legacy LTE or NB-IOT
+# One of: LTE, NB-IoT
+# (case-insensitive).
+#xnap.dissect_lte_rrc_context_as: LTE
+
 # Whether the X.25-over-TCP dissector should reassemble messages spanning multiple TCP segments. To use this option, you must also enable "Allow subdissectors to reassemble TCP streams" in the TCP protocol settings
 # TRUE or FALSE (case-insensitive)
 #xot.desegment: TRUE
@@ -5133,7 +5329,7 @@ capture.devices_pmode: enp3s0(1),enp4s0(1),virbr0(1),vnet0(1),nlmon0(1),lo(1),an
 # A decimal number
 #statistics.update_interval: 3000
 
-# If enabled burst rates will be calcuted for statistics that use the stats_tree system. Burst rates are calculated over a much shorter time interval than the rate column.
+# If enabled burst rates will be calculated for statistics that use the stats_tree system. Burst rates are calculated over a much shorter time interval than the rate column.
 # TRUE or FALSE (case-insensitive)
 #statistics.st_enable_burstinfo: TRUE
 

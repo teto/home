@@ -252,7 +252,7 @@ Plug 'florentc/vim-tla'
 " Plug 'danielroseman/pygd-vim', {'for': 'python'} " provokes an error
 " }}}
 
-Plug '907th/vim-auto-save' " :h auto-save
+" Plug '907th/vim-auto-save' " :h auto-save
 " Plug 'teto/vim-auto-save' " autosave :h auto-save
 " Plug 'bfredl/nvim-miniyank' " killring alike plugin, cycling paste careful search for :Yank commands
 " hangs with big strings
@@ -1625,7 +1625,7 @@ if exists('g:vscode')
 endif
 
 
-nnoremap <F6> <Cmd>AutoSaveToggle<CR>
+nnoremap <F6> <Cmd>ASToggle<CR>
 "nnoremap <F6> :AutoSaveOnLostFocus<CR>
 " goto previous buffer
 nnoremap <F7> :bp<CR>

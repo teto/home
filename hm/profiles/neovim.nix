@@ -74,6 +74,9 @@ let
 
   luaPlugins = with pkgs.vimPlugins; [
     {
+      plugin = nvim-compe;
+    }
+    {
       plugin = telescope-frecency-nvim;
     }
     {
