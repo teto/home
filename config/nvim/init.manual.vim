@@ -1889,7 +1889,8 @@ nnoremap <Leader>ev <Cmd>e $MYVIMRC<CR>
 nnoremap <Leader>el <Cmd>e ~/.config/nvim/init.backup.lua<CR>
 nnoremap <Leader>em <Cmd>e ~/.config/nvim/init.manual.vim<CR>
 " reload vimrc
-nnoremap <Leader>sv <Cmd>source $MYVIMRC<CR>
+nnoremap <Leader>sv  <Cmd>source $MYVIMRC<CR>
+nnoremap <Leader>eca <Cmd>Telescope lsp_code_action<CR>
 
 " open netrw/dirvish split
 " nnoremap <Leader>e :Vex<CR>
