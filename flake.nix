@@ -4,7 +4,6 @@
   inputs = {
     nixpkgs-teto = {
       url = "github:teto/nixpkgs/nixos-unstable";
-      # flake = false;
     };
     unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     mptcp-flake.url = "github:teto/mptcp-flake";
@@ -18,7 +17,7 @@
 
     poetry.url = "github:nix-community/poetry2nix";
 
-    nova.url = "git+ssh://git@git.novadiscovery.net:4224/world/nova-nix.git?ref=master";
+    nova.url = "git+ssh://git@git.novadiscovery.net/world/nova-nix.git?ref=master";
     neovim = {
       url = "github:neovim/neovim?dir=contrib";
       # url = "github:teto/neovim/lsp-notify-errors?dir=contrib";

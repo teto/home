@@ -489,18 +489,18 @@
         "shiny": "shiny"
       },
       "locked": {
-        "lastModified": 1622729525,
-        "narHash": "sha256-M2SEcm78lV1X55WkUj3d31lVZ374WJnuU2VUGT8f8IE=",
+        "lastModified": 1624636386,
+        "narHash": "sha256-XaLoqwU7jgOSsCbH3DB6EJaLSsRQhSBAzkZFaaZoHBg=",
         "ref": "master",
-        "rev": "f19beee6fe4efe239b3b27714ce2fd36985e9c67",
-        "revCount": 3,
+        "rev": "27f46f1f9105452bc9df5a8b5eccc338c209f20c",
+        "revCount": 9,
         "type": "git",
-        "url": "ssh://git@git.novadiscovery.net:4224/world/nova-nix.git"
+        "url": "ssh://git@git.novadiscovery.net/world/nova-nix.git"
       },
       "original": {
         "ref": "master",
         "type": "git",
-        "url": "ssh://git@git.novadiscovery.net:4224/world/nova-nix.git"
+        "url": "ssh://git@git.novadiscovery.net/world/nova-nix.git"
       }
     },
     "novops": {

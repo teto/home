@@ -91,6 +91,7 @@ use {
   "folke/trouble.nvim",
   requires = "kyazdani42/nvim-web-devicons",
 }
+use 'MunifTanjim/nui.nvim' -- to create UIs
 use 'hrsh7th/nvim-compe'
 use 'vhyrro/neorg'
 use 'ray-x/lsp_signature.nvim'

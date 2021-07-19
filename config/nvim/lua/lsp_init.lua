@@ -138,7 +138,7 @@ lspconfig.hls.setup({
 			completionSnippetsOn = true,
 			formattingProvider = "stylish-haskell",
 		-- "haskell.trace.server": "messages",
-			logFile = "/tmp/nvim-hls.log",
+			-- logFile = "/tmp/nvim-hls.log",
 		-- "codeLens.enable": true,
 			hlintOn = false
 		}
