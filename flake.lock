@@ -188,15 +188,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1623074835,
-        "narHash": "sha256-hSr3YCBE28MoLwW0zcjdZ5KqH3OPmCtcw72k4n4XD14=",
-        "owner": "nix-community",
+        "lastModified": 1626826788,
+        "narHash": "sha256-aQ3fY7W+Mct1HDSKx67a4xb7qGo8zmWwe/OJ7Pw8UO8=",
+        "owner": "teto",
         "repo": "home-manager",
-        "rev": "9424f31f86e2fee2e64834e1430ecd31c88da923",
+        "rev": "7869174d80b20806c377ec0177a87d5871df45a5",
         "type": "github"
       },
       "original": {
-        "owner": "nix-community",
+        "owner": "teto",
+        "ref": "scratch",
         "repo": "home-manager",
         "type": "github"
       }

@@ -10,7 +10,7 @@
 
     # TODO use mine instead
     hm = {
-      url = "github:nix-community/home-manager";
+      url = "github:teto/home-manager/scratch";
       inputs.nixpkgs.follows = "nixpkgs-teto";
     };
     nur.url = "github:nix-community/NUR";

@@ -86,6 +86,13 @@ let
         ));
     }
     {
+      plugin = tokyonight-nvim;
+    }
+    # broken for now
+    # {
+    #   plugin = telescope-fzf-native-nvim;
+    # }
+    {
       plugin = nvim-compe;
     }
     {
@@ -372,6 +379,9 @@ let
   overlayPlugins = with myVimPlugins; [
     # octo-nvim
     # pkgs.vimPlugins.telescope-fzf-native-nvim
+    {
+      plugin = nvim-spectre;
+    }
 
 
       # TODO restore in my overlay
@@ -441,7 +451,9 @@ in
       yaml-language-server
     ];
 
-    plugins = basePlugins ++ overlayPlugins ++ luaPlugins;
+    plugins = basePlugins
+      # ++ overlayPlugins
+      ++ luaPlugins;
 
   };
 }

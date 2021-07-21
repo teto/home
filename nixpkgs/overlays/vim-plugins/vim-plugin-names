@@ -11,3 +11,4 @@ nvim-telescope/telescope-fzf-native.nvim@main
 pwntester/octo.nvim
 shime/vim-livedown
 tversteeg/registers.nvim@main
+windwp/nvim-spectre
