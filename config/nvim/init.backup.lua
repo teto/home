@@ -99,6 +99,12 @@ use 'Pocco81/AutoSave.nvim' -- :ASToggle /AsOn / AsOff
 -- use 'sindrets/diffview.nvim' -- :DiffviewOpen
 -- use 'folke/which-key.nvim' -- :WhichKey
 
+-- use 'vim-airline/vim-airline'
+-- use 'vim-airline/vim-airline-themes' -- creates problems if not here
+
+use 'hoob3rt/lualine.nvim'
+
+
 -- use 'sunjon/shade.nvim'
 -- use fzf to search through diagnostics
 -- use { 'ojroques/nvim-lspfuzzy'}
@@ -633,8 +639,14 @@ if has_compe then
 	max_abbr_width = 100;
 	max_kind_width = 100;
 	max_menu_width = 100;
-	documentation = true;
-
+	documentation = {
+		border = { '', '' ,'', ' ', '', '', '', ' ' }, -- the border option is the same as `|help nvim_open_win|`
+		winhighlight = "NormalFloat:CompeDocumentation,FloatBorder:CompeDocumentationBorder",
+		max_width = 120,
+		min_width = 60,
+		max_height = math.floor(vim.o.lines * 0.3),
+		min_height = 1,
+	};
 	source = {
 		path = true;
 		buffer = true;
@@ -642,8 +654,24 @@ if has_compe then
 		nvim_lsp = true;
 		nvim_lua = true;
 		vsnip = true;
+		ultisnips = true;
+		luasnip = true;
 	};
   };
+
+  local inoremap = k.inoremap
+  inoremap { "<C-Space>", function () vim.cmd('compe#complete()') end, expr = true }
+  -- inoremap { "<CR>", function () vim.cmd('compe#confirm("<CR>")') end, expr=true }
+  inoremap { "<C-e>", function () vim.cmd('compe#close("<c-e>")') end , expr=true }
+  inoremap { "<C-f>", function () vim.cmd('compe#scroll({ "delta": +4 })') end , expr=true }
+  inoremap { "<C-d>", function () vim.cmd('compe#scroll({ "delta": -4 })') end , expr=true }
+
+-- nnoremap { "<Leader>o", function () vim.cmd("FzfFiles") end}
+-- inoremap <silent><expr> <C-Space> compe#complete()
+-- inoremap <silent><expr> <CR>      compe#confirm('<CR>')
+-- inoremap <silent><expr> <C-e>     compe#close('<C-e>')
+-- inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
+-- inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
 end
 
 
@@ -734,6 +762,40 @@ end
 -- local goto_opts = {
 -- 	severity_limit = "Warning"
 -- }
+
+
+local has_lualine, lualine = pcall(require, 'lualine')
+if has_lualine then
+lualine.setup {
+  options = {
+    icons_enabled = true,
+    theme = 'gruvbox',
+    component_separators = {'', ''},
+    section_separators = {'', ''},
+    disabled_filetypes = {}
+  },
+  sections = {
+    lualine_a = {'mode'},
+    lualine_b = {'branch'},
+    lualine_c = {'filename'},
+    lualine_x = {'encoding', 'fileformat', 'filetype'},
+    lualine_y = {'progress'},
+    lualine_z = {'location'}
+  },
+  inactive_sections = {
+    lualine_a = {},
+    lualine_b = {},
+    lualine_c = {'filename'},
+    lualine_x = {'location'},
+    lualine_y = {},
+    lualine_z = {}
+  },
+  tabline = {},
+  extensions = {}
+}
+end
+
+
 
 -- showLineDiagnostic is a wrapper around show_line_diagnostics
 -- show_line_diagnostics calls open_floating_preview

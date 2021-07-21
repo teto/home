@@ -33,7 +33,7 @@ in
   # this is for gaming
   hardware.opengl.driSupport32Bit = true;
   hardware.pulseaudio = {
-    enable = true;
+    enable = false; # replaced by pipewire
     systemWide = false;
     # daemon.config
     support32Bit = true;
@@ -182,7 +182,7 @@ in
 
   # programs.file-roller.enable = true;
 
-  programs.system-config-printer.enable = true;
+  programs.system-config-printer.enable = false; # broken
 
   users.users.teto = {
     shell = pkgs.zsh;
