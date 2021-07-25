@@ -169,8 +169,8 @@ let
             };
           };
           sent = {
-            farPattern = config.accounts.email.accounts.gmail.folders.sent;
-            # farPattern = "[Gmail]/Sent Mail";
+            # farPattern = config.accounts.email.accounts.gmail.folders.sent;
+            farPattern = "[Gmail]/Sent Mail";
             nearPattern = "Sent";
             extraConfig = {
               Create = "Both";

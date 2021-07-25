@@ -314,6 +314,10 @@ let
         config = ''
           map <Leader>$ <Cmd>Obsession<CR>
         '';
+        # testing luaConfig (experimental)
+        luaConfig = ''
+          -- vim-obsession config
+        '';
       }
       # ctrl-e causes an issue with telescope prompt
       vim-rsi
@@ -428,6 +432,7 @@ in
       ))
     ;
 
+
     # extraLuaConfig = ''
     #   -- logs are written to /home/teto/.cache/vim-lsp.log
     #   vim.lsp.set_log_level("info")
@@ -454,6 +459,11 @@ in
     plugins = basePlugins
       # ++ overlayPlugins
       ++ luaPlugins;
+  };
 
+  xdg.configFile = {
+    # a copy of init.vim in fact
+    "nvim/init.generated.vim".text = config.programs.neovim.generatedConfigViml;
+    "nvim/init.generated.lua".text = config.programs.neovim.generatedConfigLua;
   };
 }

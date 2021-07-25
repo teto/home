@@ -50,7 +50,7 @@ use { "~/telescope-frecency.nvim", }
 -- use {'wbthomason/packer.nvim', opt = true}
 
 -- use { 'glepnir/lspsaga.nvim' }  -- builds on top of neovim lsp
-use { 'edluffy/specs.nvim' }
+use { 'edluffy/specs.nvim' } -- Show where your cursor moves 
 use { 'nvim-lua/popup.nvim'  }  -- mimic vim's popupapi for neovim
 use { 'nvim-lua/plenary.nvim' } -- lua utilities for neovim
 -- use { 'nvim-lua/telescope.nvim' }
@@ -103,6 +103,7 @@ use 'Pocco81/AutoSave.nvim' -- :ASToggle /AsOn / AsOff
 -- use 'vim-airline/vim-airline-themes' -- creates problems if not here
 
 use 'hoob3rt/lualine.nvim'
+use 'arkav/lualine-lsp-progress'
 
 
 -- use 'sunjon/shade.nvim'
@@ -660,7 +661,7 @@ if has_compe then
   };
 
   local inoremap = k.inoremap
-  inoremap { "<C-Space>", function () vim.cmd('compe#complete()') end, expr = true }
+  inoremap { "<C-Space>", function () vim.fn['compe#complete']() end, expr = true }
   -- inoremap { "<CR>", function () vim.cmd('compe#confirm("<CR>")') end, expr=true }
   inoremap { "<C-e>", function () vim.cmd('compe#close("<c-e>")') end , expr=true }
   inoremap { "<C-f>", function () vim.cmd('compe#scroll({ "delta": +4 })') end , expr=true }
@@ -742,12 +743,12 @@ local has_specs, specs = pcall(require, 'specs')
 if has_specs then
 	specs.setup{
 		show_jumps  = true,
-		min_jump = 30,
+		min_jump = 20,
 		popup = {
 			delay_ms = 0, -- delay before popup displays
 			inc_ms = 10, -- time increments used for fade/resize effects
 			blend = 10, -- starting blend, between 0-100 (fully transparent), see :h winblend
-			width = 10,
+			width = 30,
 			winhl = "PMenu",
 			fader = specs.linear_fader,
 			resizer = specs.shrink_resizer
@@ -777,7 +778,7 @@ lualine.setup {
   sections = {
     lualine_a = {'mode'},
     lualine_b = {'branch'},
-    lualine_c = {'filename'},
+    lualine_c = {'filename', 'lsp_progress'},
     lualine_x = {'encoding', 'fileformat', 'filetype'},
     lualine_y = {'progress'},
     lualine_z = {'location'}
