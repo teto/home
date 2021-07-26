@@ -14,7 +14,9 @@ show directories
 dir dirname  Add directory dirname to the front of the source path.
 
 Dans le cadre de 
-set substitute-path
+set substitute-path /foo/bar /mnt/cross
+https://sourceware.org/gdb/current/onlinedocs/gdb/Source-Path.html#set-substitute_002dpath
+show substitute-path
 
 # history
 

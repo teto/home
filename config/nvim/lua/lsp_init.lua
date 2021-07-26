@@ -7,7 +7,7 @@ local notifs = require 'notifications'
 -- local util = require'vim.lsp.util'
 local api = vim.api
 
-local has_lsputil, lsputil = pcall(require, "lsputil")
+-- local has_lsputil, lsputil = pcall(require, "lsputil")
 
 
 -- custom attach callback

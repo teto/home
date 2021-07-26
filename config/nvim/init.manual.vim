@@ -2015,7 +2015,7 @@ command! OpenDiagnostics lua vim.lsp.diagnostic.set_loclist()
 
 command! OpenDiagnostics lua vim.lsp.diagnostic.set_loclist()
 " pb c'est qu'il l'autofocus
-autocmd User LspDiagnosticsChanged lua vim.lsp.diagnostic.set_loclist( { open_loclist = false})
+autocmd User LspDiagnosticsChanged lua vim.lsp.diagnostic.set_loclist( { open = false,  open_loclist = false})
 
 command! LspStopAllClients lua vim.lsp.stop_client(vim.lsp.get_active_clients())
 

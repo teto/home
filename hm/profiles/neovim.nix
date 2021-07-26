@@ -47,10 +47,10 @@ let
 
 
   # overlayPlugins = with pkgs.myVimPlugins;[
-    # https://github.com/vmchale/dhall-vim.git
-      # vimPlugins = final: prev: {
+  # https://github.com/vmchale/dhall-vim.git
+  # vimPlugins = final: prev: {
 
-    # luafile stdpath('config').'/init.lua'
+  # luafile stdpath('config').'/init.lua'
   myVimPluginsOverlay = pkgs.callPackage ../../nixpkgs/overlays/vim-plugins/generated.nix {};
 
   myVimPlugins = pkgs.vimPlugins.extend (

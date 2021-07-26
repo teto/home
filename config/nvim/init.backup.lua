@@ -49,17 +49,15 @@ use { "~/telescope-frecency.nvim", }
 -- Packer can manage itself as an optional plugin
 -- use {'wbthomason/packer.nvim', opt = true}
 
--- use { 'glepnir/lspsaga.nvim' }  -- builds on top of neovim lsp
-use { 'edluffy/specs.nvim' } -- Show where your cursor moves 
+use { 'edluffy/specs.nvim' } -- Show where your cursor moves
 use { 'nvim-lua/popup.nvim'  }  -- mimic vim's popupapi for neovim
 use { 'nvim-lua/plenary.nvim' } -- lua utilities for neovim
--- use { 'nvim-lua/telescope.nvim' }
 use {
     'NTBBloodbath/rest.nvim',
     requires = { 'nvim-lua/plenary.nvim' }
 }
-use { '~/telescope.nvim' }
--- Plug '~/telescope.nvim'    -- fzf-like in lua
+-- use { 'nvim-lua/telescope.nvim' }
+use '~/telescope.nvim'    -- fzf-like in lua
 use { 'nvim-telescope/telescope-github.nvim' }
 use { 'nvim-telescope/telescope-symbols.nvim' }
 use {'nvim-telescope/telescope-fzy-native.nvim'}
@@ -82,15 +80,15 @@ use { 'notomo/gesture.nvim' }
 use { 'tjdevries/astronauta.nvim' }
 use { 'npxbr/gruvbox.nvim', requires = {"rktjmp/lush.nvim"} }
 use { 'onsails/lspkind-nvim' }
-use { 'phaazon/hop.nvim' }
+use { 'phaazon/hop.nvim' }   -- sneak.vim equivalent
 use { 'alec-gibson/nvim-tetris', opt = true }
-use { 'mfussenegger/nvim-dap'}
+-- use { 'mfussenegger/nvim-dap'} -- debug adapter protocol
 use { 'bazelbuild/vim-bazel' , requires = { 'google/vim-maktaba' } }
 use 'matbme/JABS.nvim'
-use {
-  "folke/trouble.nvim",
-  requires = "kyazdani42/nvim-web-devicons",
-}
+-- use {
+--   "folke/trouble.nvim",
+--   requires = "kyazdani42/nvim-web-devicons",
+-- }
 use 'MunifTanjim/nui.nvim' -- to create UIs
 use 'hrsh7th/nvim-compe'
 use 'vhyrro/neorg'
@@ -103,7 +101,7 @@ use 'Pocco81/AutoSave.nvim' -- :ASToggle /AsOn / AsOff
 -- use 'vim-airline/vim-airline-themes' -- creates problems if not here
 
 use 'hoob3rt/lualine.nvim'
-use 'arkav/lualine-lsp-progress'
+-- use 'arkav/lualine-lsp-progress'
 
 
 -- use 'sunjon/shade.nvim'
@@ -186,8 +184,44 @@ if has_whichkey then
 
 end
 
-local autosave = require("autosave")
 
+-- since it was not merge yet
+if vim.ui then
+
+vim.ui.pick = function (entries, opts)
+	acceptable_files = vim.tbl_values(entries)
+
+	local pickers = require "telescope.pickers"
+	local finders = require "telescope.finders"
+	local actions = require "telescope.actions"
+
+	print("use my custom function")
+
+	pickers.new({
+	prompt_title = "Planets",
+	finder = finders.new_table {
+	results = acceptable_files,
+	entry_maker = function(line)
+	  return {
+		value = line,
+
+	    ordinal = line,
+	    display = line,
+	--     filename = base_directory .. "/data/memes/planets/" .. line,
+	  }
+	end,
+
+    attach_mappings = function(_)
+      actions.select_default:replace(actions.run_builtin)
+      return true
+    end,
+	}
+}):find()
+
+end
+end
+
+local autosave = require("autosave")
 autosave.setup({
         enabled = true,
         execution_message = "AutoSave: saved at " .. vim.fn.strftime("%H:%M:%S"),
@@ -333,6 +367,11 @@ if has_octo then
 	})
 end
 
+local orig_ref_handler = vim.lsp.handlers["textDocument/references"]
+vim.lsp.handlers["textDocument/references"] = function(...)
+  orig_ref_handler(...)
+  vim.cmd [[ wincmd p ]]
+end
 
 
 local has_bufferline, bufferline = pcall(require, "bufferline")
@@ -368,10 +407,10 @@ if has_bufferline then
 	}
 end
 
-local lspfuzzy_available, lspfuzzy = pcall(require, "lspfuzzy")
-if lspfuzzy_available then
-	lspfuzzy.setup {}
-end
+-- local lspfuzzy_available, lspfuzzy = pcall(require, "lspfuzzy")
+-- if lspfuzzy_available then
+-- 	lspfuzzy.setup {}
+-- end
 
 local has_shade, shade = pcall(require, "shade")
 if has_shade then
@@ -405,15 +444,15 @@ if has_neogit then
 			-- The diffview integration enables the diff popup, which is a wrapper around `sindrets/diffview.nvim`.
 			--
 			-- Requires you to have `sindrets/diffview.nvim` installed.
-			-- use { 
-			--   'TimUntersberger/neogit', 
-			--   requires = { 
+			-- use {
+			--   'TimUntersberger/neogit',
+			--   requires = {
 			--     'nvim-lua/plenary.nvim',
-			--     'sindrets/diffview.nvim' 
+			--     'sindrets/diffview.nvim'
 			--   }
 			-- }
 			--
-			diffview = false  
+			diffview = false
 		},
 		-- override/add mappings
 		mappings = {
@@ -528,25 +567,25 @@ if has_telescope then
 				override_generic_sorter = true,
 				override_file_sorter = true,
 			},
-			frecency = {
-			      workspaces = {
-					["home"]    = "/home/teto/home",
-					["data"]    = "/home/teto/neovim",
-					["jinko"]   = "/home/teto/jinko",
-					-- ["wiki"]    = "/home/my_username/wiki"
-				},
-				show_scores = true,
-				show_unindexed = true,
-				ignore_patterns = {"*.git/*", "*/tmp/*"},
-				db_safe_mode = false,
-				auto_validate = false
-			}
+			-- frecency = {
+			--       workspaces = {
+			-- 		["home"]    = "/home/teto/home",
+			-- 		["data"]    = "/home/teto/neovim",
+			-- 		["jinko"]   = "/home/teto/jinko",
+			-- 		-- ["wiki"]    = "/home/my_username/wiki"
+			-- 	},
+			-- 	show_scores = true,
+			-- 	show_unindexed = true,
+			-- 	ignore_patterns = {"*.git/*", "*/tmp/*"},
+			-- 	db_safe_mode = false,
+			-- 	auto_validate = false
+			-- }
 		}
 	}
 	-- This will load fzy_native and have it override the default file sorter
 	-- telescope.load_extension('fzf')
 	telescope.load_extension('fzy_native')
-	telescope.load_extension("frecency")
+	-- telescope.load_extension("frecency")
 
 	-- TODO add autocmd
 	-- User TelescopePreviewerLoaded
@@ -678,7 +717,7 @@ end
 
 
 local has_trouble, trouble = pcall(require, 'trouble')
-if has_trouble then
+if false then
 	trouble.setup {--{{{
     position = "bottom", -- position of the list can be: bottom, top, left, right}}}
     height = 10, -- height of the trouble list when position is top or bottom
@@ -821,10 +860,10 @@ end
 -- follow https://www.reddit.com/r/neovim/comments/f8u6fz/lsp_query/fip91ww/?utm_source=share&utm_medium=web2x
 -- vim.cmd [[autocmd CursorHold <buffer> lua showLineDiagnostic()]]
 -- vim.cmd [[autocmd CursorMoved <buffer> lua showLineDiagnostic()]]
-function lsp_show_all_diagnostics()
-	local all_diagnostics = vim.lsp.diagnostic.get_all()
-	vim.lsp.util.set_qflist(all_diagnostics)
-end
+-- function lsp_show_all_diagnostics()
+-- 	local all_diagnostics = vim.lsp.diagnostic.get_all()
+-- 	vim.lsp.util.set_qflist(all_diagnostics)
+-- end
 vim.opt.background = "dark" -- or "light" for light mode
 vim.cmd([[colorscheme gruvbox]])
 
