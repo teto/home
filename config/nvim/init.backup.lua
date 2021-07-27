@@ -48,7 +48,11 @@ use { "~/telescope-frecency.nvim", }
 -- }
 -- Packer can manage itself as an optional plugin
 -- use {'wbthomason/packer.nvim', opt = true}
-
+use {'kristijanhusak/orgmode.nvim', config = function()
+        require('orgmode').setup{}
+end
+}
+use 'windwp/nvim-spectre' -- search & replace 
 use { 'edluffy/specs.nvim' } -- Show where your cursor moves
 use { 'nvim-lua/popup.nvim'  }  -- mimic vim's popupapi for neovim
 use { 'nvim-lua/plenary.nvim' } -- lua utilities for neovim
@@ -133,6 +137,9 @@ nnoremap { "<Leader>C", function () require'telescope.builtin'.colorscheme{ enab
 nnoremap { "<Leader>f", function () require('telescope').extensions.frecency.frecency({
 	query = "toto"
 }) end }
+
+nnoremap { "<leader>S",  function() require('spectre').open() end }
+
 -- replace with telescope
 -- nnoremap { "<Leader>t", function () vim.cmd("FzfTags") end}
 -- nnoremap <Leader>h <Cmd>FzfHistory<CR>
@@ -194,11 +201,14 @@ vim.ui.pick = function (entries, opts)
 	local pickers = require "telescope.pickers"
 	local finders = require "telescope.finders"
 	local actions = require "telescope.actions"
+	local action_state = require "telescope.actions.state"
 
 	print("use my custom function")
+	local prompt = "default prompt"
+	if opts ~= nil then prompt = opts.prompt end
 
-	pickers.new({
-	prompt_title = "Planets",
+	local selection = pickers.new({
+	prompt_title = prompt,
 	finder = finders.new_table {
 	results = acceptable_files,
 	entry_maker = function(line)
@@ -211,13 +221,21 @@ vim.ui.pick = function (entries, opts)
 	  }
 	end,
 
-    attach_mappings = function(_)
-      actions.select_default:replace(actions.run_builtin)
+    attach_mappings = function(prompt_bufnr)
+		actions.select_default:replace(function()
+
+			selection = action_state.get_selected_entry()
+			actions.close(prompt_bufnr)
+			print("Selected", selection)
+			return selection
+		end)
       return true
     end,
 	}
-}):find()
+	}):find()
+	-- print("Selected", selection)
 
+	return selection
 end
 end
 
@@ -870,3 +888,69 @@ vim.cmd([[colorscheme gruvbox]])
 
 -- TODO add a command to select a ref (from telescope ?) and call Gitsigns change_base
 -- afterwards
+
+
+local Menu = require("nui.menu")
+
+function create_menu ()
+
+local menu = Menu({
+  relative = "cursor",
+  border = {
+    style = "rounded",
+    highlight = "Normal",
+    text = {
+      top = "[Sample Menu]",
+      top_align = "left",
+    },
+  },
+  position = {
+    row = 1,
+    col = 0,
+  },
+  highlight = "Normal:Normal",
+}, {
+  lines = {
+	              -- \ ["&Code action\\cw", 'lua vim.lsp.buf.code_action()'],
+            -- \ ['- LSP '],
+            -- \ ['Toggle indentlines', 'IndentBlanklineToggle!'],
+            -- \ ['Start search and replace', 'lua require("spectre").open()'],
+            -- \ ['Toggle obsession', 'Obsession'],
+
+    Menu.separator("Group One"),
+    Menu.item("Toggle obsession", { func = function() vim.cmd("Obsession") end}),
+	Menu.item("Item 2", { func = function() vim.lsp.buf.declaration() end }),
+    Menu.item("Search and replace", { func = function () require("spectre").open() end}),
+    Menu.separator("Group Two"),
+    Menu.item("Very Very Long Item 4"),
+    Menu.item("Item 5"),
+    Menu.item("Item 6"),
+  },
+  max_width = 40,
+  max_height = 20,
+  separator = {
+    char = "-",
+    text_align = "right",
+  },
+  keymap = {
+    focus_next = { "j", "<Down>", "<Tab>" },
+    focus_prev = { "k", "<Up>", "<S-Tab>" },
+    close = { "<Esc>", "<C-c>" },
+    submit = { "<CR>", "<Space>" },
+  },
+  on_close = function()
+    print("CLOSED")
+  end,
+  on_submit = function(item)
+    -- print("SUBMITTED", vim.inspect(item))
+	item.func()
+  end
+})
+
+menu:mount()
+
+menu:map("n", "l", menu.menu_props.on_submit, { noremap = true, nowait = true })
+
+-- menu:on(vim.event.BufLeave, menu.menu_props.on_close, { once = true })
+
+end

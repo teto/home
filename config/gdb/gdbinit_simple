@@ -24,6 +24,10 @@
 # autoload .gdbinit in subfolders of
 add-auto-load-safe-path /home/teto/
 
+set substitute-path /build/0bbaz68smnwny47g4fyj6z98880c58g2-source ~/neovim2
+
+print "toto"
+
 # hide Thread exit with LKL
 set print thread-events off
 # source ~/.gdb/printers.py

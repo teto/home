@@ -59,7 +59,6 @@ Plug 'jubnzv/virtual-types.nvim'
 " Plug 'andymass/vim-matchup' " to improve % , buggy ?
 Plug 'eugen0329/vim-esearch' " search & replace
 Plug '~/telescope-frecency.nvim' " just for testing
-Plug 'windwp/nvim-spectre' " nnoremap <leader>S :lua require('spectre').open()<CR>
 " Plug 'eugen0329/vim-esearch' " search & replace
 " Plug 'wbthomason/packer.nvim'
 Plug '~/packer.nvim' " because of abug
@@ -1583,9 +1582,6 @@ map <Leader>ll <Plug>(Luadev-RunLine)
 let g:himalaya_telescope_preview_enabled = 0
 let g:himalaya_mailbox_picker = 'fzf'
 "}}}
-" nvim-spectre {{{
-nnoremap <leader>S :lua require('spectre').open()<CR>
-"}}}
 " mouse {{{
 set mouse=a
 set mousemodel=popup_setpos
@@ -2011,9 +2007,9 @@ endfunction
 " echo Password()
 
 " toto
-command! OpenDiagnostics lua vim.lsp.diagnostic.set_loclist()
+command! OpenDiagnostics lua vim.lsp.diagnostic.set_loclist({ open = false})
 
-command! OpenDiagnostics lua vim.lsp.diagnostic.set_loclist()
+command! OpenDiagnostics lua vim.lsp.diagnostic.set_loclist({ open = false})
 " pb c'est qu'il l'autofocus
 autocmd User LspDiagnosticsChanged lua vim.lsp.diagnostic.set_loclist( { open = false,  open_loclist = false})
 
@@ -2068,6 +2064,8 @@ let content = [
             \ ["&Code action\\cw", 'lua vim.lsp.buf.code_action()'],
             \ ['- LSP '],
             \ ['Toggle indentlines', 'IndentBlanklineToggle!'],
+            \ ['Start search and replace', 'lua require("spectre").open()'],
+            \ ['Toggle obsession', 'Obsession'],
             \ ["&Documentation\t\\cm", 'echo 600'],
             \ ]
 " map 2 <cmd>lua vim.lsp.buf.code_action()
@@ -2098,6 +2096,8 @@ luafile ~/.config/nvim/init.backup.lua
 " set foldmethod=
 
 command Hasktags !hasktags .
+
+" https://github.com/neovim/neovim/issues/14921
 set mousemodel=popup_setpos
 
 function! TestFoldTextWithColumns()

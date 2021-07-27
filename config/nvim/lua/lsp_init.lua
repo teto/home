@@ -29,23 +29,23 @@ lspconfig.util.default_config = vim.tbl_extend(
 	})
 
 -- explained at https://github.com/nvim-lua/diagnostic-nvim/issues/73
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-  vim.lsp.diagnostic.on_publish_diagnostics, {
-	-- underline = true,
-    underline = {
-		false,
-		severity_limit = "Warning",
-	},
-    virtual_text = {
-		true,
-		severity_limit = "Warning",
-	},
-    signs = {
-      priority = 20
-    },
-    update_in_insert = false,
-  }
-)
+-- vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+--   vim.lsp.diagnostic.on_publish_diagnostics, {
+-- 	-- underline = true,
+--     underline = {
+-- 		false,
+-- 		severity_limit = "Warning",
+-- 	},
+--     virtual_text = {
+-- 		true,
+-- 		severity_limit = "Warning",
+-- 	},
+--     signs = {
+--       priority = 20
+--     },
+--     update_in_insert = false,
+--   }
+-- )
 
 -- lspconfig.lua_lsp.setup{}
 

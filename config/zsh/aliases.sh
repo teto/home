@@ -18,6 +18,19 @@ alias local-rebuild="sudo nixos-rebuild --flake ~/home --override-input nixpkgs-
 # Gitops quick
 alias mg='if [ -z ${BW_SESSION} ]; then export BW_SESSION=$(bw unlock --raw); fi && make gitops'
 
+# to run
+function nvimdev {
+    folder="$1"
+    shift
+    binary="$folder/build/bin/nvim"
+    if [ ! -f "$binary" ]; then
+        echo "No binary $binary"
+        return
+    fi
+    VIMRUNTIME="$folder/runtime" "$binary" "$@"
+
+}
+
 # nix aliases {{{
 
 # no
