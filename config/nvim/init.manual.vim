@@ -62,7 +62,7 @@ Plug '~/telescope-frecency.nvim' " just for testing
 " Plug 'eugen0329/vim-esearch' " search & replace
 " Plug 'wbthomason/packer.nvim'
 Plug '~/packer.nvim' " because of abug
-" Plug 'mjlbach/neovim-ui'
+" Plug 'nvim-lua/neovim-ui'
 Plug '~/neovim-ui'
 " Plug 'glepnir/lspsaga.nvim'
 Plug 'lewis6991/gitsigns.nvim'  " same as vim-signify but lua

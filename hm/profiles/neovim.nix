@@ -133,6 +133,9 @@ let
       {
         plugin = vim-toml;
       }
+      {
+        plugin = onedark-nvim;
+      }
       # to install manually with coc.nvim:
       {
         plugin = editorconfig-vim;
