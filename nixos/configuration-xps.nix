@@ -71,7 +71,7 @@ in
   services.upower.enable = true;
 
   hardware.pulseaudio = {
-    enable = true;
+    enable = false;
     systemWide = false;
   #  support32Bit = true;
   #  # daemon.config = ''
@@ -86,6 +86,7 @@ in
     # only this one has bluetooth
     package = pkgs.pulseaudioFull;
   };
+
   hardware.opengl = {
     enable = true;
     driSupport = true;

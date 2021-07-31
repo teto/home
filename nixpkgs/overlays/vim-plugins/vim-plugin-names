@@ -8,6 +8,7 @@ JamshedVesuna/vim-markdown-preview
 norcalli/nvim-terminal.lua
 nvim-telescope/telescope-frecency.nvim@configure_db_user_confirmation
 nvim-telescope/telescope-fzf-native.nvim@main
+nvim-telescope/telescope.nvim
 pwntester/octo.nvim
 shime/vim-livedown
 tversteeg/registers.nvim@main

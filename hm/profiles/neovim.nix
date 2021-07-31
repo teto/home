@@ -51,7 +51,9 @@ let
   # vimPlugins = final: prev: {
 
   # luafile stdpath('config').'/init.lua'
-  myVimPluginsOverlay = pkgs.callPackage ../../nixpkgs/overlays/vim-plugins/generated.nix {};
+    myVimPluginsOverlay = pkgs.callPackage ../../nixpkgs/overlays/vim-plugins/generated.nix {
+      inherit (pkgs.vimUtils) buildVimPluginFrom2Nix;
+    };
 
   myVimPlugins = pkgs.vimPlugins.extend (
     myVimPluginsOverlay
@@ -84,6 +86,9 @@ let
             tree-sitter-python
           ]
         ));
+    }
+    {
+      plugin = gitsigns-nvim;
     }
     {
       plugin = tokyonight-nvim;
@@ -460,7 +465,7 @@ in
     ];
 
     plugins = basePlugins
-      # ++ overlayPlugins
+      ++ overlayPlugins
       ++ luaPlugins;
   };
 

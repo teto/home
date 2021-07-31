@@ -65,7 +65,7 @@ Plug '~/packer.nvim' " because of abug
 " Plug 'nvim-lua/neovim-ui'
 Plug '~/neovim-ui'
 " Plug 'glepnir/lspsaga.nvim'
-Plug 'lewis6991/gitsigns.nvim'  " same as vim-signify but lua
+" Plug 'lewis6991/gitsigns.nvim'  " same as vim-signify but lua
 Plug 'kshenoy/vim-signature' " display marks in gutter, love it
 " Plug 'mhinz/vim-signify'  " *
 

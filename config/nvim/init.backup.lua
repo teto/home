@@ -543,6 +543,7 @@ if has_telescope then
 			'--smart-case'
 			},
 			prompt_prefix = ">",
+			scroll_strategy = "limit", -- or cycle
 			selection_strategy = "reset",
 			sorting_strategy = "descending",
 			-- horizontal, vertical, center, flex
@@ -562,7 +563,8 @@ if has_telescope then
 			shorten_path = false,
 			winblend = 0,
 			-- preview_cutoff = 120,
-			border = {},
+			border = true,
+			path_display='shorten',
 			-- borderchars = { '─', '│', '─', '│', '╭', '╮', '╯', '╰'},
 			color_devicons = true,
 			-- use_less = true,

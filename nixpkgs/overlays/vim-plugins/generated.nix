@@ -135,6 +135,18 @@ final: prev:
     meta.homepage = "https://github.com/nvim-telescope/telescope-fzf-native.nvim/";
   };
 
+  telescope-nvim = buildVimPluginFrom2Nix {
+    pname = "telescope-nvim";
+    version = "2021-07-20";
+    src = fetchFromGitHub {
+      owner = "nvim-telescope";
+      repo = "telescope.nvim";
+      rev = "664690029fdb302bee8d3f27a458383e8477add7";
+      sha256 = "1aaq9lmfxxxpirkbj3py76qnyfd1qhsq9msfw689zgzjqahk7zhz";
+    };
+    meta.homepage = "https://github.com/nvim-telescope/telescope.nvim/";
+  };
+
   vim-livedown = buildVimPluginFrom2Nix {
     pname = "vim-livedown";
     version = "2019-02-28";
