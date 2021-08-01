@@ -77,6 +77,9 @@ in
   #  # daemon.config = ''
   #  #   load-module module-switch-on-connect
   #  #   '';
+    # High quality BT calls
+    hardware.bluetooth.hsphfpd.enable = true;
+
 
     # adds out-of-tree support for AAC, APTX, APTX-HD and LDAC.
     # SBC / AAC

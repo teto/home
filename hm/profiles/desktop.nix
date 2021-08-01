@@ -86,7 +86,6 @@ let
 
   in all: with pkgs; [
     # apvlv # broken
-    # alsa-utils # for alsamixer
     arandr  # to move screens/monitors around
     bandwhich  # to monitor per app bandwidth
     du-dust  # dust binary: rust replacement of du

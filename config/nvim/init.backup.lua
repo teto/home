@@ -9,7 +9,7 @@ local has_telescope, telescope = pcall(require, "telescope")
 
 -- local packerCfg =
 local packer = require "packer"
-local use = packer.use
+local use, use_rocks = packer.use, packer.use_rocks
 
 packer.init({
 -- compile_path
@@ -55,11 +55,12 @@ end
 use 'windwp/nvim-spectre' -- search & replace 
 use { 'edluffy/specs.nvim' } -- Show where your cursor moves
 use { 'nvim-lua/popup.nvim'  }  -- mimic vim's popupapi for neovim
-use { 'nvim-lua/plenary.nvim' } -- lua utilities for neovim
+-- use { 'nvim-lua/plenary.nvim' } -- lua utilities for neovim
 use {
     'NTBBloodbath/rest.nvim',
-    requires = { 'nvim-lua/plenary.nvim' }
+    -- requires = { 'nvim-lua/plenary.nvim' }
 }
+use_rocks 'plenary.nvim'
 -- use { 'nvim-lua/telescope.nvim' }
 use '~/telescope.nvim'    -- fzf-like in lua
 use { 'nvim-telescope/telescope-github.nvim' }
@@ -921,12 +922,31 @@ local menu = Menu({
 
     Menu.separator("Group One"),
     Menu.item("Toggle obsession", { func = function() vim.cmd("Obsession") end}),
+    Menu.item("Toggle autosave", { func = function() vim.cmd("Obsession") end}),
+    Menu.item("Toggle indentlines", { func = function() vim.cmd('IndentBlanklineToggle!') end}),
 	Menu.item("Item 2", { func = function() vim.lsp.buf.declaration() end }),
     Menu.item("Search and replace", { func = function () require("spectre").open() end}),
-    Menu.separator("Group Two"),
+    Menu.separator("LSP"),
+    Menu.item("Code action", { func = function() vim.lsp.buf.code_action() end}),
+
     Menu.item("Very Very Long Item 4"),
     Menu.item("Item 5"),
     Menu.item("Item 6"),
+            -- \ ["Goto &Definition\t\\cd", 'lua vim.lsp.buf.definition()'],
+            -- \ ["Goto &Declaration\t\\cd", 'lua vim.lsp.buf.declaration()'],
+            -- \ ["Goto I&mplementation\t\\cd", 'lua vim.lsp.buf.implementation()'],
+            -- \ ["Hover\t\\ch", 'lua vim.lsp.buf.references()'],
+            -- \ ["Search &References\t\\cr", 'lua vim.lsp.buf.references()'],
+            -- \ ["Document  &Symbols\t\\cr", 'lua vim.lsp.buf.document_symbol()'],
+            -- \ ["Format", 'lua vim.lsp.buf.formatting_sync(nil, 1000)'],
+            -- \ ["&Execute  Command\\ce", 'lua vim.lsp.buf.execute_command()'],
+            -- \ ["&Incoming calls\\ci", 'lua vim.lsp.buf.incoming_calls()'],
+            -- \ ["&Outgoing calls\\ci", 'lua vim.lsp.buf.outgoing_calls()'],
+            -- \ ["&Signature help\\ci", 'lua vim.lsp.buf.signature_help()'],
+            -- \ ["&Workspace symbol\\cw", 'lua vim.lsp.buf.workspace_symbol()'],
+            -- \ ["&Rename\\cw", 'lua vim.lsp.buf.rename()'],
+            -- \ ["&Code action\\cw", 'lua vim.lsp.buf.code_action()'],
+
   },
   max_width = 40,
   max_height = 20,

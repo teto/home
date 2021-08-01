@@ -2045,9 +2045,7 @@ nnoremap <2-LeftMouse> <cmd>lua vim.lsp.buf.definition()<cr>
 " TODO should be printed only if available
 let g:quickui_border_style = 1
 let content = [
-            \ ["&Help Keyword\t\\ch", 'echo 100' ],
-            \ ['-'],
-            \ ["Find in &File\t\\cx", 'echo 200' ],
+            \ ['LSP -'],
             \ ["Goto &Definition\t\\cd", 'lua vim.lsp.buf.definition()'],
             \ ["Goto &Declaration\t\\cd", 'lua vim.lsp.buf.declaration()'],
             \ ["Goto I&mplementation\t\\cd", 'lua vim.lsp.buf.implementation()'],
@@ -2062,11 +2060,10 @@ let content = [
             \ ["&Workspace symbol\\cw", 'lua vim.lsp.buf.workspace_symbol()'],
             \ ["&Rename\\cw", 'lua vim.lsp.buf.rename()'],
             \ ["&Code action\\cw", 'lua vim.lsp.buf.code_action()'],
-            \ ['- LSP '],
+            \ ['- Misc '],
             \ ['Toggle indentlines', 'IndentBlanklineToggle!'],
             \ ['Start search and replace', 'lua require("spectre").open()'],
             \ ['Toggle obsession', 'Obsession'],
-            \ ["&Documentation\t\\cm", 'echo 600'],
             \ ]
 " map 2 <cmd>lua vim.lsp.buf.code_action()
 
@@ -2074,6 +2071,7 @@ let content = [
 " set cursor to the last position
 let quick_opts = {'index':g:quickui#context#cursor}
 
+" TODO map to lua create_menu()
 map <RightMouse>  <Cmd>call quickui#context#open(content, quick_opts)<CR>
 
 " call quickui#context#open(content, opts)
