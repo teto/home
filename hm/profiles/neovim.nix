@@ -212,7 +212,7 @@ let
 
       # defined in overrides: TODO this should be easier: like fzf-vim should be enough
       fzfWrapper
-      gruvbox
+      # gruvbox
 
       # neomake
       nvim-terminal-lua
@@ -247,7 +247,9 @@ let
       # displays a minimap on the right
       minimap-vim
       vim-dirvish
-      packer-nvim
+      # {
+      #   plugin = packer-nvim;
+      # }
       # {
       #   plugin = sql-nvim;
       #   # config = "let g:sql_clib_path = '${pkgs.sqlite.out}/lib/libsqlite3.so'";

@@ -21,34 +21,35 @@ let
     # nodePackages.bash-language-server
     # just in my branch :'(
     # luaPackages.lua-lsp
-    nixpkgs-fmt
+
+
+      # gdb-debug = prev.enableDebgging prev.gdb ;
+    # gitAndTools.git-annex # fails on unstable
+    # gitAndTools.git-remote-hg
+    # nix-prefetch-scripts # broken
+    (enableDebugging gdb)
     editorconfig-core-c
     exa  # to list files
-      # gdb-debug = prev.enableDebgging prev.gdb ;
-
-    (enableDebugging gdb)
-
     gitAndTools.diff-so-fancy # todo install it via the git config instead
-    gitAndTools.gitbatch   # to fetch form several repos at once
     gitAndTools.gh  # github client
-    # gitAndTools.git-remote-hg
-    gitAndTools.git-recent
-    # gitAndTools.git-annex # fails on unstable
-    gitAndTools.git-extras
     gitAndTools.git-crypt
+    gitAndTools.git-extras
+    gitAndTools.git-recent
+    gitAndTools.gitbatch   # to fetch form several repos at once
     gitAndTools.lab
-    patchutils  # for interdiff
     lazygit  # kinda like tig
-    nix-doc # to access nix doc
     ncurses.dev # for infocmp
     neovim-remote # for latex etc
-    nodePackages.bitwarden-cli  # 'bw' binary
-    # nix-prefetch-scripts # broken
+    nix-doc # to access nix doc
     nix-index # to list package contents
+    nixpkgs-fmt
     nixpkgs-review
+    nodePackages.bitwarden-cli  # 'bw' binary
+    patchutils  # for interdiff
     pcalc  # cool calc
     rpl    # to replace strings across files
     universal-ctags  # there are many different ctags, be careful !
+    virtmanager
   ]
   ++ lib.optionals all [
     hexyl  # hex editor

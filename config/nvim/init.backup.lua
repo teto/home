@@ -49,7 +49,8 @@ use { "~/telescope-frecency.nvim", }
 -- Packer can manage itself as an optional plugin
 -- use {'wbthomason/packer.nvim', opt = true}
 use {'kristijanhusak/orgmode.nvim', config = function()
-        require('orgmode').setup{}
+	-- it maps <leader>oc
+        -- require('orgmode').setup{}
 end
 }
 use 'windwp/nvim-spectre' -- search & replace 
@@ -60,7 +61,7 @@ use {
     'NTBBloodbath/rest.nvim',
     -- requires = { 'nvim-lua/plenary.nvim' }
 }
-use_rocks 'plenary.nvim'
+-- use_rocks 'plenary.nvim'
 -- use { 'nvim-lua/telescope.nvim' }
 use '~/telescope.nvim'    -- fzf-like in lua
 use { 'nvim-telescope/telescope-github.nvim' }
@@ -914,38 +915,27 @@ local menu = Menu({
   highlight = "Normal:Normal",
 }, {
   lines = {
-	              -- \ ["&Code action\\cw", 'lua vim.lsp.buf.code_action()'],
-            -- \ ['- LSP '],
-            -- \ ['Toggle indentlines', 'IndentBlanklineToggle!'],
-            -- \ ['Start search and replace', 'lua require("spectre").open()'],
-            -- \ ['Toggle obsession', 'Obsession'],
-
     Menu.separator("Group One"),
     Menu.item("Toggle obsession", { func = function() vim.cmd("Obsession") end}),
     Menu.item("Toggle autosave", { func = function() vim.cmd("Obsession") end}),
     Menu.item("Toggle indentlines", { func = function() vim.cmd('IndentBlanklineToggle!') end}),
-	Menu.item("Item 2", { func = function() vim.lsp.buf.declaration() end }),
     Menu.item("Search and replace", { func = function () require("spectre").open() end}),
     Menu.separator("LSP"),
     Menu.item("Code action", { func = function() vim.lsp.buf.code_action() end}),
-
-    Menu.item("Very Very Long Item 4"),
-    Menu.item("Item 5"),
-    Menu.item("Item 6"),
+    Menu.item("Search references", { func = function() vim.lsp.buf.references() end}),
+    Menu.item("Definition", { func = function() vim.lsp.buf.definition() end}),
+    Menu.item("Workspace symbols", { func = function() vim.lsp.buf.workspace_symbol() end})
+    Menu.item("Rename", { func = function() vim.lsp.buf.rename() end})
+    Menu.item("Format", { func = function() vim.lsp.buf.formatting_sync(nil, 1000) end})
             -- \ ["Goto &Definition\t\\cd", 'lua vim.lsp.buf.definition()'],
             -- \ ["Goto &Declaration\t\\cd", 'lua vim.lsp.buf.declaration()'],
             -- \ ["Goto I&mplementation\t\\cd", 'lua vim.lsp.buf.implementation()'],
             -- \ ["Hover\t\\ch", 'lua vim.lsp.buf.references()'],
-            -- \ ["Search &References\t\\cr", 'lua vim.lsp.buf.references()'],
             -- \ ["Document  &Symbols\t\\cr", 'lua vim.lsp.buf.document_symbol()'],
-            -- \ ["Format", 'lua vim.lsp.buf.formatting_sync(nil, 1000)'],
             -- \ ["&Execute  Command\\ce", 'lua vim.lsp.buf.execute_command()'],
             -- \ ["&Incoming calls\\ci", 'lua vim.lsp.buf.incoming_calls()'],
             -- \ ["&Outgoing calls\\ci", 'lua vim.lsp.buf.outgoing_calls()'],
             -- \ ["&Signature help\\ci", 'lua vim.lsp.buf.signature_help()'],
-            -- \ ["&Workspace symbol\\cw", 'lua vim.lsp.buf.workspace_symbol()'],
-            -- \ ["&Rename\\cw", 'lua vim.lsp.buf.rename()'],
-            -- \ ["&Code action\\cw", 'lua vim.lsp.buf.code_action()'],
 
   },
   max_width = 40,

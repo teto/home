@@ -7,7 +7,7 @@
       # arrterian.nix-env-selector # not packaged ?
       # https://marketplace.visualstudio.com/items?itemName=asvetliakov.vscode-neovim
       asvetliakov.vscode-neovim # only in my fork
-      bbenoist.Nix
+      # bbenoist.Nix
       # todo replace with pylance/pyright
       # ms-python.python 
       ms-kubernetes-tools.vscode-kubernetes-tools

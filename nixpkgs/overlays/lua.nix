@@ -1,20 +1,9 @@
-self: prev:
+final: prev:
 rec {
 
   lua = prev.lua.override {
 
-  #     # TODO use my fork
-  #     nvim-client  = luaprev.nvim-client.overrideAttrs (oa: {
-  #       src = /home/teto/lua-client;
-  #       # src = prev.fetchFromGitHub {
-  #       #   repo = "lua-client";
-  #       #   owner = "teto";
-  #       #   rev = "ffe21016d4ac2de810cc89a4f686fd72065214c0";
-  #       #   sha256= "";
-  #       # };
-  #     });
-
-    packageOverrides = luaself: luaprev: {
+    packageOverrides = luafinal: luaprev: {
 
       # luarocks = luaprev.luarocks.overrideAttrs(oa: {
       #   pname = "luarocks-local";
@@ -33,7 +22,7 @@ rec {
       #   #   ref = "nix";
       #   # };
       #   doCheck = true;
-      #   # self.busted #
+      #   # final.busted #
       #   # checkInputs = [];
       #   # checkPhase = ''
       #     # busted spec/

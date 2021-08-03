@@ -34,7 +34,6 @@ buildPythonApplication rec {
   meta = with lib; {
     description = "tool to move around in i3";
     homepage = https://github.com/teto/i3-dispatch;
-    # homepage = https://github.com/krlanguet/i3-cycle-dispatch;
     maintainers = [ maintainers.teto ];
 
   };

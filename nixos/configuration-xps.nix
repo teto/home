@@ -70,34 +70,39 @@ in
   # just trying to make some steam warnings go away
   services.upower.enable = true;
 
-  hardware.pulseaudio = {
-    enable = false;
-    systemWide = false;
-  #  support32Bit = true;
-  #  # daemon.config = ''
-  #  #   load-module module-switch-on-connect
-  #  #   '';
+  hardware= {
+    enableAllFirmware =true;
+    sane.enable = true;
     # High quality BT calls
-    hardware.bluetooth.hsphfpd.enable = true;
+    bluetooth = {
+      enable = true;
+      powerOnBoot = false;
+      hsphfpd.enable = true;
+    };
+    opengl = {
+      enable = true;
+      driSupport = true;
+      driSupport32Bit = true;
+    };
+    pulseaudio = {
+      enable = false;
+      systemWide = false;
+    #  support32Bit = true;
+    #  # daemon.config = ''
+    #  #   load-module module-switch-on-connect
+    #  #   '';
+
+      # adds out-of-tree support for AAC, APTX, APTX-HD and LDAC.
+      # SBC / AAC
+      extraModules = [ pkgs.pulseaudio-modules-bt ];
+
+      # extraClientConf =
+      # only this one has bluetooth
+      package = pkgs.pulseaudioFull;
+
+    };
 
 
-    # adds out-of-tree support for AAC, APTX, APTX-HD and LDAC.
-    # SBC / AAC
-    extraModules = [ pkgs.pulseaudio-modules-bt ];
-
-    # extraClientConf =
-    # only this one has bluetooth
-    package = pkgs.pulseaudioFull;
-  };
-
-  hardware.opengl = {
-    enable = true;
-    driSupport = true;
-    driSupport32Bit = true;
-  };
-  hardware.bluetooth = {
-    enable = true;
-    powerOnBoot = false;
   };
 
   # TODO move to laptop
@@ -135,8 +140,6 @@ in
     # dbus.packages = [ ];
   };
 
-  hardware.enableAllFirmware =true;
-
   environment.systemPackages = with pkgs;
     # cups-pk-helper # to add printer through gnome control center
     [
@@ -162,16 +165,6 @@ in
   networking.iproute2.enable = true;
 
   # services.xserver.videoDrivers = [ "nvidia" ];
-
-  # to fix tearing with optimus
-  #hardware.nvidia.modesetting.enable = true;
-  ##experimental 
-  #hardware.nvidia.powerManagement.enable = false;
-  #services.xserver.videoDrivers = 
-  # hardware.nvidiaOptimus.disable = false;
-
-  # services.xserver.videoDrivers = [ "nvidia" ];
-  hardware.sane.enable = true;
 
   nix = {
     # sshServe = {

@@ -7,12 +7,33 @@
     matchBlocks = {
       nova = {
         host = "git.novadiscovery.net";
+        user = "matthieu.coudron";
+
       };
+      ovh1 = {
+        # checkHostIP
+        identityFile = "~/.ssh/ci-infra-ec2-dev";
+        user = "ubuntu";
+        host = "ovh-hybrid-runner-1.devops.novadiscovery.net";
+      };
+      ovh2 = {
+        identityFile = "~/.ssh/ci-infra-ec2-dev";
+        user = "ubuntu";
+        host = "ovh-hybrid-runner-2.devops.novadiscovery.net";
+      };
+      gitlab = {
+        host = "gitlab.devops.novadiscovery.net";
+        user = "ubuntu";
+        identityFile = "~/.ssh/nova_key";
+      };
+
     };
     # extraOptionOverrides
     # include path to file
     extraConfig = ''
-    Include ./manual.config
+      Include ./manual.config
     '';
   };
+
+  # home.file.".ssh/manual.config".source = ;
 }

@@ -328,7 +328,7 @@ Plug 'justinmk/molokai'
 Plug 'mhinz/vim-janah'
 Plug 'vim-scripts/Solarized'
 " Plug 'gruvbox-community/gruvbox' *
-Plug 'npxbr/gruvbox.nvim'
+" Plug 'npxbr/gruvbox.nvim' " requires lush
 Plug 'romainl/flattened'
 Plug 'joshdick/onedark.vim'
 Plug 'NLKNguyen/papercolor-theme'
