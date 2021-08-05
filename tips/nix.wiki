@@ -34,3 +34,9 @@ CURL_TRACE
 
 # install haskell packages from certian version
 nix-shell -p haskell.packages.ghc865.stack
+
+
+# Get information about nix-shell
+
+# nix path-info -Ssh $(nix-build ./shell.nix -A inputDerivation)
+nix path-info -Sshr $(nix-build ./shell.nix -A inputDerivation) | sort -k3 -h | wc -l

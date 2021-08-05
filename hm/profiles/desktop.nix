@@ -49,7 +49,7 @@ let
     pcalc  # cool calc
     rpl    # to replace strings across files
     universal-ctags  # there are many different ctags, be careful !
-    virtmanager
+    # virtmanager  # broken
   ]
   ++ lib.optionals all [
     hexyl  # hex editor
@@ -87,59 +87,56 @@ let
 
   in all: with pkgs; [
     # apvlv # broken
+    # TODO
+    # buku # broken
+    # gcalc
+    # gnome3.gnome_control_center
+    # i3-layout-manager  # to save/load layouts
+    # mdp # markdown CLI presenter
+    # nyxt      # lisp browser
+    # papis # library manager
+    # requires xdmcp https://github.com/freedesktop/libXdmcp
+    # smplayer # GUI around mpv
+    # todo try sthg else
+    # unstable.evince # succeed where zathura/mupdf fail
+    # unstable.transmission_gtk  # bittorrent client
+    # vimiv # image viewer
     arandr  # to move screens/monitors around
     bandwhich  # to monitor per app bandwidth
     du-dust  # dust binary: rust replacement of du
-    hunspellDicts.fr-any
-    # buku # broken
-    # gcalc
     font-manager
-    gnome3.networkmanagerapplet # should
     gnome3.defaultIconTheme # else nothing appears
-    # i3-layout-manager  # to save/load layouts
-    libnotify
-    # unstable.evince # succeed where zathura/mupdf fail
-
-    # conflicts with nautilus
-    gnome3.file-roller # for GUI archive handling
-    # todo try sthg else
-    # requires xdmcp https://github.com/freedesktop/libXdmcp
     gnome3.eog # eye of gnome = image viewer / creates a collision
+    gnome3.file-roller # for GUI archive handling
+    gnome3.networkmanagerapplet # should
+    hunspellDicts.fr-any
+    libnotify
     magic-wormhole  # super tool to exchange secrets between computers
     moc-wrapped  # music player
     mupdf.bin # evince does better too
-    # mdp # markdown CLI presenter
-    # gnome3.gnome_control_center
     ncpamixer # pulseaudio TUI mixer
-    # TODO
-    # nyxt      # lisp browser
-
     noti # send notifications when a command finishes
-    # papis # library manager
     pass
     pavucontrol
     procs  # Rust replacement for 'ps'
     qiv  # image viewer
     qtpass
+    rbw   # Rust bitwarden unofficial client
     rofi-pass   # rofi-pass
-    sublime3
     scrot  # screenshot app for wayland
-    # smplayer # GUI around mpv
-
     sd  # rust cli for search & replace
-    sxiv # simple image viewer
-    # vimiv # image viewer
     shared_mime_info # temporary fix for nautilus to find the correct files
+    sublime3
+    sxiv # simple image viewer
     translate-shell
-    # unstable.transmission_gtk  # bittorrent client
-    xdotool # needed for vimtex + zathura
-    xarchiver # to unpack/pack files
-    xorg.xev
-    xorg.xbacklight  # todo should be set from module
-    xclip
-    xcwd
     wally-cli  # to flash ergodox keyboards
     wireshark
+    xarchiver # to unpack/pack files
+    xclip
+    xcwd
+    xdotool # needed for vimtex + zathura
+    xorg.xbacklight  # todo should be set from module
+    xorg.xev
     zathura
   ]
   ++ lib.optionals all [

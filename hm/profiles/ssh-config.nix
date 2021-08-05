@@ -26,7 +26,12 @@
         user = "ubuntu";
         identityFile = "~/.ssh/nova_key";
       };
-
+      novinfra = {
+        host = "data.novinfra.net";
+        user = "ubuntu";
+        port = 2207;
+        identityFile = "~/.ssh/nova_key";
+      };
     };
     # extraOptionOverrides
     # include path to file

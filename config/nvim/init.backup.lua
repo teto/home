@@ -924,9 +924,9 @@ local menu = Menu({
     Menu.item("Code action", { func = function() vim.lsp.buf.code_action() end}),
     Menu.item("Search references", { func = function() vim.lsp.buf.references() end}),
     Menu.item("Definition", { func = function() vim.lsp.buf.definition() end}),
-    Menu.item("Workspace symbols", { func = function() vim.lsp.buf.workspace_symbol() end})
-    Menu.item("Rename", { func = function() vim.lsp.buf.rename() end})
-    Menu.item("Format", { func = function() vim.lsp.buf.formatting_sync(nil, 1000) end})
+    Menu.item("Workspace symbols", { func = function() vim.lsp.buf.workspace_symbol() end}),
+    Menu.item("Rename", { func = function() vim.lsp.buf.rename() end}),
+    Menu.item("Format", { func = function() vim.lsp.buf.formatting_sync(nil, 1000) end}),
             -- \ ["Goto &Definition\t\\cd", 'lua vim.lsp.buf.definition()'],
             -- \ ["Goto &Declaration\t\\cd", 'lua vim.lsp.buf.declaration()'],
             -- \ ["Goto I&mplementation\t\\cd", 'lua vim.lsp.buf.implementation()'],
@@ -938,8 +938,8 @@ local menu = Menu({
             -- \ ["&Signature help\\ci", 'lua vim.lsp.buf.signature_help()'],
 
   },
-  max_width = 40,
-  max_height = 20,
+  max_width = 200,
+  max_height = 30,
   separator = {
     char = "-",
     text_align = "right",

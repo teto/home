@@ -12,8 +12,8 @@ in
     ./modules/desktop.nix
     ./modules/network-manager.nix
     ./modules/libvirtd.nix
-    ./modules/minio.nix
-    ./modules/redis.nix # for jinko
+    # ./modules/minio.nix
+    # ./modules/redis.nix # for jinko
     # ./modules/hoogle.nix
     # ./modules/vpn.nix
 
