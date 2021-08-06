@@ -264,6 +264,16 @@ in
     # '';
   };
 
+  programs.rbw = {
+    enable = true;
+    settings = {
+        email = "name@example.com";
+        lock_timeout = 300;
+        pinentry = "gnome3";
+    };
+  };
+
+
   # as long as there is no better way to configure i3
   home.file.".pypirc".source = ../../home/pypirc;
 

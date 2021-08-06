@@ -2,11 +2,12 @@
 {
 
   environment.systemPackages = with pkgs; [
+    gksu # to run graphical apps as root
+    i3lock-fancy
     mupdf.bin # evince does better too
     rofi
     xautolock
-    i3lock-fancy
-    gksu # to run graphical apps as root
+    xorg.xkill
   ];
 
   # Enable the X11 windowing system.

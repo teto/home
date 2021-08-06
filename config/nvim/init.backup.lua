@@ -107,7 +107,7 @@ use 'Pocco81/AutoSave.nvim' -- :ASToggle /AsOn / AsOff
 -- use 'vim-airline/vim-airline-themes' -- creates problems if not here
 
 use 'hoob3rt/lualine.nvim'
--- use 'arkav/lualine-lsp-progress'
+use 'arkav/lualine-lsp-progress'
 
 
 -- use 'sunjon/shade.nvim'
