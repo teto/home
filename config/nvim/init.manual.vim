@@ -59,7 +59,6 @@ Plug 'kevinhwang91/rnvimr'
 Plug 'jubnzv/virtual-types.nvim'
 " Plug 'andymass/vim-matchup' " to improve % , buggy ?
 Plug 'eugen0329/vim-esearch' " search & replace
-Plug '~/telescope-frecency.nvim' " just for testing
 " Plug 'eugen0329/vim-esearch' " search & replace
 " Plug 'wbthomason/packer.nvim'
 Plug '~/packer.nvim' " because of abug

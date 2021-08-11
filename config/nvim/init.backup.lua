@@ -31,7 +31,7 @@ end
 -- use { 'haorenW1025/completion-nvim', opt = true,
 -- requires = {{'hrsh7th/vim-vsnip', opt = true}, {'hrsh7th/vim-vsnip-integ', opt = true}}
 -- }
-use { "~/telescope-frecency.nvim", }
+-- use { "~/telescope-frecency.nvim", }
 -- 	requires = {
 -- 		{'hrsh7th/vim-vsnip', opt = true},
 -- 		-- {'tami5/sql.nvim', opt = false}
