@@ -88,6 +88,9 @@ let
         ));
     }
     {
+      plugin = plenary-nvim;
+    }
+    {
       plugin = gitsigns-nvim;
     }
     {
@@ -148,6 +151,9 @@ let
         #   " dhall.vim config
         # '';
       }
+      # {
+      #   plugin = jbyuki/venn.nvim;
+      # }
       # {
       #   plugin = nvim-lspconfig;
       #   config = ''
@@ -325,9 +331,9 @@ let
           map <Leader>$ <Cmd>Obsession<CR>
         '';
         # testing luaConfig (experimental)
-        luaConfig = ''
-          -- vim-obsession config
-        '';
+        # luaConfig = ''
+        #   -- vim-obsession config
+        # '';
       }
       # ctrl-e causes an issue with telescope prompt
       vim-rsi
@@ -474,6 +480,6 @@ in
   xdg.configFile = {
     # a copy of init.vim in fact
     "nvim/init.generated.vim".text = config.programs.neovim.generatedConfigViml;
-    "nvim/init.generated.lua".text = config.programs.neovim.generatedConfigLua;
+    # "nvim/init.generated.lua".text = config.programs.neovim.generatedConfigLua;
   };
 }

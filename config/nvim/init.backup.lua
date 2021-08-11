@@ -95,6 +95,20 @@ use 'matbme/JABS.nvim'
 --   "folke/trouble.nvim",
 --   requires = "kyazdani42/nvim-web-devicons",
 -- }
+use {
+  'kdheepak/tabline.nvim',
+  config = function()
+    require'tabline'.setup {
+      -- Defaults configuration options
+      enable = true
+    }
+    vim.cmd[[
+      set guioptions-=e " Use showtabline in gui vim
+      set sessionoptions+=tabpages,globals " store tabpages and globals in session
+    ]]
+  end,
+  requires = { { 'hoob3rt/lualine.nvim', opt=true }, 'kyazdani42/nvim-web-devicons' }
+}
 use 'MunifTanjim/nui.nvim' -- to create UIs
 use 'hrsh7th/nvim-compe'
 use 'vhyrro/neorg'
@@ -887,7 +901,6 @@ end
 -- 	vim.lsp.util.set_qflist(all_diagnostics)
 -- end
 vim.opt.background = "dark" -- or "light" for light mode
-vim.cmd([[colorscheme gruvbox]])
 
 
 -- TODO add a command to select a ref (from telescope ?) and call Gitsigns change_base
@@ -916,8 +929,9 @@ local menu = Menu({
 }, {
   lines = {
     Menu.separator("Group One"),
+	-- TODO print status when possible
     Menu.item("Toggle obsession", { func = function() vim.cmd("Obsession") end}),
-    Menu.item("Toggle autosave", { func = function() vim.cmd("Obsession") end}),
+    Menu.item("Toggle autosave", { func = function() vim.cmd("ASToggle") end}),
     Menu.item("Toggle indentlines", { func = function() vim.cmd('IndentBlanklineToggle!') end}),
     Menu.item("Search and replace", { func = function () require("spectre").open() end}),
     Menu.separator("LSP"),
@@ -966,3 +980,5 @@ menu:map("n", "l", menu.menu_props.on_submit, { noremap = true, nowait = true })
 -- menu:on(vim.event.BufLeave, menu.menu_props.on_close, { once = true })
 
 end
+
+vim.cmd([[colorscheme gruvbox]])

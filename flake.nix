@@ -114,6 +114,7 @@
                   ./nixos/modules/xserver.nix
                   ./nixos/modules/sway.nix
                   ./nixos/profiles/steam.nix
+                  ./nixos/profiles/qemu.nix
                   ./nixos/profiles/adb.nix
                   ./nixos/modules/libvirtd.nix
                   ./nixos/profiles/chromecast.nix

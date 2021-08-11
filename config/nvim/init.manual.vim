@@ -39,6 +39,7 @@ endif
 
 " VIM-PLUG PLUGIN DECLARATIONS {{{1
 call plug#begin(s:plugdir)
+" Plug 'nvim-lua/plenary.nvim'
 Plug 'jubnzv/virtual-types.nvim'
 Plug 'rhysd/vim-gfm-syntax' " markdown syntax compatible with Github's
 Plug 'winston0410/range-highlight.nvim' "highlight ranges like :1,5
