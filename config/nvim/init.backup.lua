@@ -133,6 +133,8 @@ use 'arkav/lualine-lsp-progress'
 -- use { 'jbyuki/nabla.nvim' } -- write latex equations in ASCII
 -- use { 'jbyuki/monolithic.nvim' } -- write latex equations in ASCII
 
+vim.cmd([[colorscheme sonokai]])
+
 vim.g.indicator_errors = ''
 vim.g.indicator_warnings = ''
 vim.g.indicator_info = '🛈'
@@ -686,7 +688,6 @@ if has_gitsigns then
   update_debounce = 100,
   status_formatter = nil, -- Use default
   word_diff = true,
-  use_decoration_api = true,
   use_internal_diff = true,  -- If luajit is present
 }
 end
@@ -981,4 +982,3 @@ menu:map("n", "l", menu.menu_props.on_submit, { noremap = true, nowait = true })
 
 end
 
-vim.cmd([[colorscheme gruvbox]])
