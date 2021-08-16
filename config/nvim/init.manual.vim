@@ -61,7 +61,7 @@ Plug 'jubnzv/virtual-types.nvim'
 Plug 'eugen0329/vim-esearch' " search & replace
 " Plug 'eugen0329/vim-esearch' " search & replace
 " Plug 'wbthomason/packer.nvim'
-Plug '~/packer.nvim' " because of abug
+" Plug '~/packer.nvim' " because of abug
 " Plug 'nvim-lua/neovim-ui'
 Plug '~/neovim-ui'
 " Plug 'glepnir/lspsaga.nvim'

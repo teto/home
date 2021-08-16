@@ -251,11 +251,11 @@ let
         # optional = true;
       }
       # displays a minimap on the right
-      minimap-vim
+      # minimap-vim # broken
       vim-dirvish
-      # {
-      #   plugin = packer-nvim;
-      # }
+      {
+        plugin = packer-nvim;
+      }
       # {
       #   plugin = sql-nvim;
       #   # config = "let g:sql_clib_path = '${pkgs.sqlite.out}/lib/libsqlite3.so'";

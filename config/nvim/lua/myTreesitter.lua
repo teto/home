@@ -5,7 +5,7 @@ end
 
 config.config = config.setup {
     highlight = {
-        enable = false,                    -- false will disable the whole extension
+        enable = true,                    -- false will disable the whole extension
         disable = {
 			'rust',
 			'bash',

@@ -13,6 +13,7 @@ local use, use_rocks = packer.use, packer.use_rocks
 
 packer.init({
 -- compile_path
+	log = { level = 'trace' },
 })
 
 function file_exists(name)
@@ -95,20 +96,20 @@ use 'matbme/JABS.nvim'
 --   "folke/trouble.nvim",
 --   requires = "kyazdani42/nvim-web-devicons",
 -- }
-use {
-  'kdheepak/tabline.nvim',
-  config = function()
-    require'tabline'.setup {
-      -- Defaults configuration options
-      enable = true
-    }
-    vim.cmd[[
-      set guioptions-=e " Use showtabline in gui vim
-      set sessionoptions+=tabpages,globals " store tabpages and globals in session
-    ]]
-  end,
-  requires = { { 'hoob3rt/lualine.nvim', opt=true }, 'kyazdani42/nvim-web-devicons' }
-}
+-- use {
+--   'kdheepak/tabline.nvim',
+--   config = function()
+--     require'tabline'.setup {
+--       -- Defaults configuration options
+--       enable = true
+--     }
+--     vim.cmd[[
+--       set guioptions-=e " Use showtabline in gui vim
+--       set sessionoptions+=tabpages,globals " store tabpages and globals in session
+--     ]]
+--   end,
+--   requires = { { 'hoob3rt/lualine.nvim', opt=true }, 'kyazdani42/nvim-web-devicons' }
+-- }
 use 'MunifTanjim/nui.nvim' -- to create UIs
 use 'hrsh7th/nvim-compe'
 use 'vhyrro/neorg'
@@ -123,6 +124,7 @@ use 'Pocco81/AutoSave.nvim' -- :ASToggle /AsOn / AsOff
 use 'hoob3rt/lualine.nvim'
 use 'arkav/lualine-lsp-progress'
 
+vim.cmd([[colorscheme sonokai]])
 
 -- use 'sunjon/shade.nvim'
 -- use fzf to search through diagnostics
