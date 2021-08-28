@@ -27,7 +27,7 @@ let
     # gitAndTools.git-annex # fails on unstable
     # gitAndTools.git-remote-hg
     # nix-prefetch-scripts # broken
-    (enableDebugging gdb)
+    gdb
     editorconfig-core-c
     exa  # to list files
     gitAndTools.diff-so-fancy # todo install it via the git config instead

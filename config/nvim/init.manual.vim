@@ -148,7 +148,7 @@ Plug 'tweekmonster/startuptime.vim', {'on': 'StartupTime'} " see startup time pe
 Plug 'Konfekt/vim-CtrlXA' " use ctrl a/xto cycle between different words
 " Plug 'AndrewRadev/splitjoin.vim' " gS/gJ to
 " Plug 'jamessan/vim-gnupg' " does not support neovim yet ?
-Plug 'editorconfig/editorconfig-vim' " not remote but involves python
+" Plug 'editorconfig/editorconfig-vim' " not remote but involves python
 Plug 'neomake/neomake' " just for nix and neovim dev with nvimdev ?
 " provider
 " needs ruby support, works in recent neovim
