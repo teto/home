@@ -20,12 +20,9 @@
     nova.url = "git+ssh://git@git.novadiscovery.net/world/nova-nix.git?ref=master";
     neovim = {
       url = "github:neovim/neovim?dir=contrib";
-      # url = "github:teto/neovim/lsp-notify-errors?dir=contrib";
       # url = "github:teto/neovim/cursor-update-on-colresize?dir=contrib";
       inputs.nixpkgs.follows = "nixpkgs-teto";
     };
-    # https://github.com/haskell/haskell-language-server/tree/1.1.0
-    # hls.url = "github:haskell/haskell-language-server/nix-flakes";
 
     # TODO one can point at a subfolder ou bien c la branche ? /flakes
     # mptcpanalyzer.url = "github:teto/mptcpanalyzer";

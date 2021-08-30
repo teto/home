@@ -141,9 +141,9 @@ let
       {
         plugin = vim-toml;
       }
-      {
-        plugin = onedark-nvim;
-      }
+      # {
+      #   plugin = onedark-nvim;
+      # }
       # to install manually with coc.nvim:
       {
         plugin = editorconfig-vim;
@@ -218,7 +218,6 @@ let
 
       # defined in overrides: TODO this should be easier: like fzf-vim should be enough
       fzfWrapper
-      # gruvbox
 
       # neomake
       nvim-terminal-lua
@@ -255,6 +254,13 @@ let
       vim-dirvish
       {
         plugin = packer-nvim;
+        luaConfig = ''
+          require('packer').init({
+            luarocks = {
+              python_cmd = 'python' -- Set the python command to use for running hererocks
+            },
+          })
+        '';
       }
       # {
       #   plugin = sql-nvim;

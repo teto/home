@@ -77,15 +77,18 @@ use { 'gennaro-tedesco/nvim-peekup' }
 use { 'nvim-telescope/telescope-packer.nvim' }
 use { 'TimUntersberger/neogit' }
 -- use { 'wfxr/minimap.vim' }
-use { 'pwntester/octo.nvim',
-	requires = { 'nvim-lua/popup.nvim' }
-
+use { 'pwntester/octo.nvim'
+-- , requires = { 'nvim-lua/popup.nvim' }
 }  -- to work with github
 
 use { 'notomo/gesture.nvim' }
 -- use { 'svermeulen/vimpeccable'} -- broken ?
 use { 'tjdevries/astronauta.nvim' }
-use { 'npxbr/gruvbox.nvim', requires = {"rktjmp/lush.nvim"} }
+-- use { 'npxbr/gruvbox.nvim'
+-- using teto instead to test packer luarocks support
+use { 'teto/gruvbox.nvim'
+	-- , requires = {"rktjmp/lush.nvim"} 
+	}
 use { 'onsails/lspkind-nvim' }
 use { 'phaazon/hop.nvim' }   -- sneak.vim equivalent
 use { 'alec-gibson/nvim-tetris', opt = true }
@@ -123,8 +126,6 @@ use 'Pocco81/AutoSave.nvim' -- :ASToggle /AsOn / AsOff
 
 use 'hoob3rt/lualine.nvim'
 use 'arkav/lualine-lsp-progress'
-
-vim.cmd([[colorscheme sonokai]])
 
 -- use 'sunjon/shade.nvim'
 -- use fzf to search through diagnostics
