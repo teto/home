@@ -16,7 +16,7 @@
     nur.url = "github:nix-community/NUR";
 
     poetry.url = "github:nix-community/poetry2nix";
-
+    nix-update.url = "github:Mic92/nix-update";
     nova.url = "git+ssh://git@git.novadiscovery.net/world/nova-nix.git?ref=master";
     neovim = {
       url = "github:neovim/neovim?dir=contrib";

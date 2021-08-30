@@ -92,10 +92,10 @@ use { 'alec-gibson/nvim-tetris', opt = true }
 -- use { 'mfussenegger/nvim-dap'} -- debug adapter protocol
 use { 'bazelbuild/vim-bazel' , requires = { 'google/vim-maktaba' } }
 use 'matbme/JABS.nvim'
--- use {
---   "folke/trouble.nvim",
+use {
+  "folke/trouble.nvim",
 --   requires = "kyazdani42/nvim-web-devicons",
--- }
+}
 -- use {
 --   'kdheepak/tabline.nvim',
 --   config = function()
@@ -763,7 +763,7 @@ if false then
     position = "bottom", -- position of the list can be: bottom, top, left, right}}}
     height = 10, -- height of the trouble list when position is top or bottom
     width = 50, -- width of the list when position is left or right{{{
-    icons = true, -- use devicons for filenames}}}
+    icons = false, -- use devicons for filenames}}}
     mode = "lsp_workspace_diagnostics", -- "lsp_workspace_diagnostics", "lsp_document_diagnostics", "quickfix", "lsp_references", "loclist"
     fold_open = "", -- icon used for open folds
     fold_closed = "", -- icon used for closed folds
