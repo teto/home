@@ -100,9 +100,11 @@ let
     # {
     #   plugin = telescope-fzf-native-nvim;
     # }
-    {
-      plugin = nvim-compe;
-    }
+
+    # broken
+    # {
+    #   plugin = nvim-compe;
+    # }
     {
       plugin = telescope-frecency-nvim;
     }

@@ -24,8 +24,6 @@ in
   home.file.".digrc".text = ''
   '';
 
-  # flameshot in standalone won't work
-  # services.flameshot.enable = true;
 
   programs.home-manager = {
     enable = true;

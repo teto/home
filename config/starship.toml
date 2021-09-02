@@ -58,7 +58,8 @@ disabled = true
 # TODO adjust
 [jobs]
 symbol = "+ "
-threshold = 4
+# symbol_threshold = 4
+number_threshold = 4
 
 
 # https://starship.rs/config/#cmake

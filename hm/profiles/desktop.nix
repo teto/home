@@ -111,6 +111,7 @@ let
     gnome3.networkmanagerapplet # should
     hunspellDicts.fr-any
     libnotify
+    # luarocks
     magic-wormhole  # super tool to exchange secrets between computers
     moc-wrapped  # music player
     mupdf.bin # evince does better too
@@ -228,6 +229,7 @@ in
     # extraConfig = 
   };
 
+  services.flameshot.enable = true;
 
   # might trigger nm-applet crash ?
   services.gpg-agent = {

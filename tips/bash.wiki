@@ -4,3 +4,8 @@ shopt -sp
 
 # 'here'-strings (for programs that expect a file)
 awk '{print $1}' <<< "$VAR1"
+
+# How to compare strings
+https://linuxize.com/post/how-to-compare-strings-in-bash/
+
+`if [ "$VAR1" = "$VAR2" ]; then`

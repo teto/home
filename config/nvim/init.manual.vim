@@ -40,6 +40,7 @@ endif
 " VIM-PLUG PLUGIN DECLARATIONS {{{1
 call plug#begin(s:plugdir)
 " Plug 'nvim-lua/plenary.nvim'
+Plug 'idris-hackers/idris-vim'
 Plug 'jubnzv/virtual-types.nvim'
 Plug 'rhysd/vim-gfm-syntax' " markdown syntax compatible with Github's
 Plug 'winston0410/range-highlight.nvim' "highlight ranges like :1,5
@@ -298,7 +299,7 @@ Plug 'nacitar/a.vim' " :A
 Plug 'teto/Modeliner' " <leader>ml to setup buffer modeline
 " This one has bindings mapped to <leader>l
 " Plug '~/vimwiki'   " to write notes
-" Plug 'vimwiki/vimwiki', { 'branch': 'dev'}   " to write notes
+Plug 'vimwiki/vimwiki', { 'branch': 'dev'}   " to write notes
 " Plug 'rhysd/github-complete.vim' " provides github user/repo autocompletion after @ and #
 
 " Plug 'hrsh7th/nvim-compe' " autocompletion
@@ -1452,7 +1453,8 @@ nnoremap <Leader>c <Cmd>FzfCommits<CR>
 " nnoremap <Leader>C <Cmd>FzfColors<CR>
 nnoremap <leader>b <Cmd>FzfBuffers<CR>
 nnoremap <leader>m <Cmd>FzfMarks<CR>
-nnoremap <leader>l <Cmd>FzfLines<CR>
+" nnoremap <leader>l <Cmd>FzfLines<CR>
+nnoremap <leader>l <Cmd>Telescope live_grep<CR>
 " nnoremap <leader>t <Cmd>FzfTags<CR>
 " nnoremap <leader>T <Cmd>FzfBTags<CR>
 nnoremap <leader>g <Cmd>FzfRg<CR>
@@ -2073,6 +2075,8 @@ let quick_opts = {'index':g:quickui#context#cursor}
 
 " TODO map to lua create_menu()
 map <RightMouse>  <Cmd>call quickui#context#open(content, quick_opts)<CR>
+" can't click on it plus it disappears
+" map <RightMouse>  <Cmd>lua create_menu()<CR>
 
 " call quickui#context#open(content, opts)
 " }}}

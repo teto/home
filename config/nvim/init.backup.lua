@@ -55,6 +55,7 @@ use {'kristijanhusak/orgmode.nvim', config = function()
 end
 }
 use 'windwp/nvim-spectre' -- search & replace 
+use 'ellisonleao/glow.nvim' -- markdown preview, run :Glow
 use { 'edluffy/specs.nvim' } -- Show where your cursor moves
 use { 'nvim-lua/popup.nvim'  }  -- mimic vim's popupapi for neovim
 -- use { 'nvim-lua/plenary.nvim' } -- lua utilities for neovim
@@ -86,7 +87,7 @@ use { 'notomo/gesture.nvim' }
 use { 'tjdevries/astronauta.nvim' }
 -- use { 'npxbr/gruvbox.nvim'
 -- using teto instead to test packer luarocks support
-use { 'teto/gruvbox.nvim'
+use_rocks { 'teto/gruvbox.nvim'
 	-- , requires = {"rktjmp/lush.nvim"} 
 	}
 use { 'onsails/lspkind-nvim' }

@@ -1,0 +1,13 @@
+
+# use an alternate config file ?
+export LUAROCKS_CONFIG="$PWD/config.lua";
+
+.luarocks/config-5.x.lua
+
+# do a flat installation ?
+
+```
+-- to create a flat hierarchy
+lua_modules_path = ""
+```
+
