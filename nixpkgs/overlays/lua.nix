@@ -4,6 +4,13 @@ rec {
   lua = prev.lua.override {
 
     packageOverrides = luafinal: luaprev: {
+      testEnv = (prev.lua.withPackages(p: [
+        p.lgi
+        p.ldoc
+        p.lpeg
+      ])).overrideAttrs(oa: {
+        NIX_DEBUG= 9;
+      });
 
       # luarocks = luaprev.luarocks.overrideAttrs(oa: {
       #   pname = "luarocks-local";

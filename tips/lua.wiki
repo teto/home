@@ -1,0 +1,3 @@
+
+Lua Path
+At start-up, Lua initializes this variable with the value of the environment variable LUA_PATH_5_2 or the environment variable LUA_PATH or with a default path defined in luaconf.h, if those environment variables are not defined. Any ";;" in the value of the environment variable is replaced by the default path.
