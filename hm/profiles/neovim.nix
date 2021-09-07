@@ -437,23 +437,24 @@ in
 # nvim-lua/lsp_extensions.nvim
 
 
+  #     extraLuaPackages = ps: [ps.mpack];
   programs.neovim = {
-     enable = true;
+    enable = true;
 
-     # take the one from the flake
-     package = myPackage;
+    # take the one from the flake
+    package = myPackage;
 
-     # source doesn't like `stdpath('config').'`
-     # todo should use mkBefore ${config.programs.neovim.generatedInitrc}
-     extraConfig = ''
-        set noshowmode " Show the current mode on command line
-        set cursorline " highlight cursor line
-        source $XDG_CONFIG_HOME/nvim/init.manual.vim
-      ''
-      # concatStrings = builtins.concatStringsSep "";
-      + (lib.strings.concatStrings (
-        lib.mapAttrsToList genBlock rcBlocks
-      ))
+    # source doesn't like `stdpath('config').'`
+    # todo should use mkBefore ${config.programs.neovim.generatedInitrc}
+    extraConfig = ''
+      set noshowmode " Show the current mode on command line
+      set cursorline " highlight cursor line
+      source $XDG_CONFIG_HOME/nvim/init.manual.vim
+    ''
+    # concatStrings = builtins.concatStringsSep "";
+    + (lib.strings.concatStrings (
+      lib.mapAttrsToList genBlock rcBlocks
+    ))
     ;
 
 

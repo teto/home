@@ -1,4 +1,12 @@
 final: prev:
+let
+  wrapNeovim2 = suffix: config:
+    final.wrapNeovimUnstable final.neovim-unwrapped (config // {
+      extraName = "-${suffix}";
+    });
+
+
+in
 rec {
 
   # makeNeovimConfig = {}:
@@ -37,6 +45,15 @@ rec {
     luaRC = ''
       '';
   };
+
+
+  # these are different config to test
+  nvimWithLuaPackages = wrapNeovim2 "with-lua-packages" (final.neovimUtils.makeNeovimConfig {
+    extraLuaPackages = ps: [ps.mpack];
+    customRC = ''
+      lua require("mpack")
+    '';
+  });
 
   # TODO add withHaskell + the limited code
   # add a package to haskell function
