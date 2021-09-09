@@ -54,6 +54,11 @@ use {'kristijanhusak/orgmode.nvim', config = function()
         -- require('orgmode').setup{}
 end
 }
+-- Lua
+use {
+	"SmiteshP/nvim-gps",
+	requires = "nvim-treesitter/nvim-treesitter"
+}
 use 'windwp/nvim-spectre' -- search & replace 
 use 'ellisonleao/glow.nvim' -- markdown preview, run :Glow
 use { 'edluffy/specs.nvim' } -- Show where your cursor moves
@@ -508,6 +513,25 @@ if has_neogit then
 	}
 end
 
+
+-- Example config
+local has_gps, gps = pcall(require, 'nvim-gps')
+
+gps.setup({
+	icons = {
+		["class-name"] = ' ',      -- Classes and class-like objects
+		["function-name"] = ' ',   -- Functions
+		["method-name"] = ' '      -- Methods (functions inside class-like objects)
+	},
+	-- Disable any languages individually over here
+	-- Any language not disabled here is enabled by default
+	languages = {
+		-- ["bash"] = false,
+		-- ["go"] = false,
+	},
+	separator = ' > ',
+})
+
 -- use with neogit.status.create(<kind>)
 -- Treesitter config {{{
 -- 	'nvim-treesitter/completion-treesitter' " extension of completion-nvim,
@@ -694,7 +718,7 @@ if has_gitsigns then
   update_debounce = 100,
   status_formatter = nil, -- Use default
   word_diff = true,
-  use_internal_diff = true,  -- If luajit is present
+  use_internal_diff = false,  -- If luajit is present
 }
 end
 --}}}
@@ -860,7 +884,8 @@ lualine.setup {
   sections = {
     lualine_a = {'mode'},
     lualine_b = {'branch'},
-    lualine_c = {'filename', 'lsp_progress'},
+
+    lualine_c = {'filename', 'lsp_progress',  gps.get_location, condition = gps.is_available },
     lualine_x = {'encoding', 'fileformat', 'filetype'},
     lualine_y = {'progress'},
     lualine_z = {'location'}
