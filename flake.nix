@@ -19,7 +19,7 @@
     nix-update.url = "github:Mic92/nix-update";
     nova.url = "git+ssh://git@git.novadiscovery.net/world/nova-nix.git?ref=master";
     neovim = {
-      url = "github:neovim/neovim?dir=contrib";
+      url = "github:teto/neovim?dir=contrib&ref=bump-libuv";
       # url = "github:teto/neovim/cursor-update-on-colresize?dir=contrib";
       inputs.nixpkgs.follows = "nixpkgs-teto";
     };

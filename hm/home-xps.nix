@@ -20,6 +20,10 @@ in
       # ./hm/autoUpgrade.nix
   ];
 
+  # use a release version
+  programs.neovim.package = lib.mkForce pkgs.neovim-master;
+
+
   xsession.windowManager.i3 = {
     enable = true;
   };

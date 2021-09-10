@@ -307,16 +307,17 @@
       },
       "locked": {
         "dir": "contrib",
-        "lastModified": 1631113215,
-        "narHash": "sha256-OpVLbtk5gna0g1H8VjACtsFWV/Tk1pM1+4B6uBX91k0=",
-        "owner": "neovim",
+        "lastModified": 1631186354,
+        "narHash": "sha256-WfEBNtenxJqZuH9hix0TchLDVWFYMLuf6xlewuR38+s=",
+        "owner": "teto",
         "repo": "neovim",
-        "rev": "c1f573fbc94aecd0f5841f7eb671be1a0a29758c",
+        "rev": "fd868d7287e3af66b1db647fe216c08635650e2f",
         "type": "github"
       },
       "original": {
         "dir": "contrib",
-        "owner": "neovim",
+        "owner": "teto",
+        "ref": "bump-libuv",
         "repo": "neovim",
         "type": "github"
       }
