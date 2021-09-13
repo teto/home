@@ -81,7 +81,51 @@ use { 'kosayoda/nvim-lightbulb' }
 -- compete with registers.nvim
 use { 'gennaro-tedesco/nvim-peekup' }
 use { 'nvim-telescope/telescope-packer.nvim' }
-use { 'TimUntersberger/neogit' }
+use { 'TimUntersberger/neogit',
+	config = function ()
+		vim.defer_fn (
+		function ()
+		require 'neogit'.setup {
+		disable_signs = false,
+		disable_context_highlighting = false,
+		disable_commit_confirmation = false,
+		-- customize displayed signs
+		signs = {
+			-- { CLOSED, OPENED }
+			section = { ">", "v" },
+			item = { ">", "v" },
+			hunk = { "", "" },
+		},
+		integrations = {
+			-- Neogit only provides inline diffs. If you want a more traditional way to look at diffs you can use `sindrets/diffview.nvim`.
+			-- The diffview integration enables the diff popup, which is a wrapper around `sindrets/diffview.nvim`.
+			--
+			-- Requires you to have `sindrets/diffview.nvim` installed.
+			-- use {
+			--   'TimUntersberger/neogit',
+			--   requires = {
+			--     'nvim-lua/plenary.nvim',
+			--     'sindrets/diffview.nvim'
+			--   }
+			-- }
+			--
+			diffview = false
+		},
+		-- override/add mappings
+		mappings = {
+			-- modify status buffer mappings
+			status = {
+			-- Adds a mapping with "B" as key that does the "BranchPopup" command
+			["B"] = "BranchPopup",
+			-- Removes the default mapping of "s"
+			["s"] = "",
+			}
+		}
+
+	}
+end)
+end
+}
 -- use { 'wfxr/minimap.vim' }
 use { 'pwntester/octo.nvim'
 -- , requires = { 'nvim-lua/popup.nvim' }
@@ -471,47 +515,9 @@ if has_shade then
 end
 
 
-local has_neogit, neogit = pcall(require, 'neogit')
-if has_neogit then
-	neogit.setup {
-		disable_signs = false,
-		disable_context_highlighting = false,
-		disable_commit_confirmation = false,
-		-- customize displayed signs
-		signs = {
-			-- { CLOSED, OPENED }
-			section = { ">", "v" },
-			item = { ">", "v" },
-			hunk = { "", "" },
-		},
-		integrations = {
-			-- Neogit only provides inline diffs. If you want a more traditional way to look at diffs you can use `sindrets/diffview.nvim`.
-			-- The diffview integration enables the diff popup, which is a wrapper around `sindrets/diffview.nvim`.
-			--
-			-- Requires you to have `sindrets/diffview.nvim` installed.
-			-- use {
-			--   'TimUntersberger/neogit',
-			--   requires = {
-			--     'nvim-lua/plenary.nvim',
-			--     'sindrets/diffview.nvim'
-			--   }
-			-- }
-			--
-			diffview = false
-		},
-		-- override/add mappings
-		mappings = {
-			-- modify status buffer mappings
-			status = {
-			-- Adds a mapping with "B" as key that does the "BranchPopup" command
-			["B"] = "BranchPopup",
-			-- Removes the default mapping of "s"
-			["s"] = "",
-			}
-		}
-
-	}
-end
+-- local has_neogit, neogit = pcall(require, 'neogit')
+-- if has_neogit then
+-- end
 
 
 -- Example config
@@ -718,7 +724,9 @@ if has_gitsigns then
   update_debounce = 100,
   status_formatter = nil, -- Use default
   word_diff = true,
-  use_internal_diff = false,  -- If luajit is present
+  diff_opts = {
+	  internal = false
+  }  -- If luajit is present
 }
 end
 --}}}
@@ -885,7 +893,10 @@ lualine.setup {
     lualine_a = {'mode'},
     lualine_b = {'branch'},
 
-    lualine_c = {'filename', 'lsp_progress',  gps.get_location, condition = gps.is_available },
+    lualine_c = {
+		'filename', 'lsp_progress'
+		-- ,  gps.get_location, condition = gps.is_available
+	},
     lualine_x = {'encoding', 'fileformat', 'filetype'},
     lualine_y = {'progress'},
     lualine_z = {'location'}

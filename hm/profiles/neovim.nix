@@ -81,6 +81,8 @@ let
           plugins: with plugins; [
             tree-sitter-bash
             tree-sitter-c
+            tree-sitter-lua
+            tree-sitter-json
             tree-sitter-nix
             tree-sitter-haskell
             tree-sitter-python
@@ -97,9 +99,9 @@ let
       plugin = tokyonight-nvim;
     }
     # broken for now
-    # {
-    #   plugin = telescope-fzf-native-nvim;
-    # }
+    {
+      plugin = telescope-fzf-native-nvim;
+    }
 
     # broken
     # {
@@ -108,13 +110,12 @@ let
     {
       plugin = telescope-frecency-nvim;
     }
-    {
-
-      plugin = neogit;
-      config = ''
-        " -- neogit config
-      '';
-    }
+    # {
+    #   plugin = neogit;
+    #   config = ''
+    #     " -- neogit config
+    #   '';
+    # }
   ];
 
   basePlugins = with pkgs.vimPlugins; [

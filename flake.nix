@@ -6,7 +6,7 @@
       url = "github:teto/nixpkgs/nixos-unstable";
     };
     unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-    mptcp-flake.url = "github:teto/mptcp-flake";
+    # mptcp-flake.url = "github:teto/mptcp-flake";
 
     # TODO use mine instead
     hm = {
@@ -19,7 +19,8 @@
     nix-update.url = "github:Mic92/nix-update";
     nova.url = "git+ssh://git@git.novadiscovery.net/world/nova-nix.git?ref=master";
     neovim = {
-      url = "github:teto/neovim?dir=contrib&ref=bump-libuv";
+      url = "github:neovim/neovim?dir=contrib";
+      # url = "github:teto/neovim?dir=contrib&ref=bump-libuv";
       # url = "github:teto/neovim/cursor-update-on-colresize?dir=contrib";
       inputs.nixpkgs.follows = "nixpkgs-teto";
     };
@@ -176,8 +177,8 @@
                   ./nixos/modules/xserver.nix
                   ./nixos/hardware-lenovo.nix
                   ./nixos/profiles/steam.nix
-                  inputs.mptcp-flake.nixosModules.mptcp
-                  ./nixos/profiles/mptcp.nix
+                  # inputs.mptcp-flake.nixosModules.mptcp
+                  # ./nixos/profiles/mptcp.nix
                   ./nixos/profiles/nova.nix
                 ];
               })
