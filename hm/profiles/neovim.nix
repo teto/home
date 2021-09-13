@@ -136,6 +136,13 @@ let
         '';
       }
       {
+        plugin = gruvbox-nvim;
+        config = ''
+          " test if gruvbox is installed
+
+        '';
+      }
+      {
         plugin = dhall-vim;
         config = ''
           " dhall.vim config

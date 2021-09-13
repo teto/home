@@ -136,9 +136,9 @@ use { 'notomo/gesture.nvim' }
 use { 'tjdevries/astronauta.nvim' }
 -- use { 'npxbr/gruvbox.nvim'
 -- using teto instead to test packer luarocks support
-use_rocks { 'teto/gruvbox.nvim'
+-- use_rocks { 'teto/gruvbox.nvim'
 	-- , requires = {"rktjmp/lush.nvim"} 
-	}
+	-- }
 use { 'onsails/lspkind-nvim' }
 use { 'phaazon/hop.nvim' }   -- sneak.vim equivalent
 use { 'alec-gibson/nvim-tetris', opt = true }
