@@ -18,6 +18,11 @@ alias local-rebuild="sudo nixos-rebuild --flake ~/home --override-input nixpkgs-
 # Gitops quick
 alias mg='if [ -z ${BW_SESSION} ]; then export BW_SESSION=$(bw unlock --raw); fi && make gitops'
 
+# fzf-diff (https://medium.com/@GroundControl/better-git-diffs-with-fzf-89083739a9cb)
+function fzd {
+  preview="git diff $@ --color=always -- {-1}"
+  git diff --name-only $@ | fzf -m --ansi --preview "$preview"
+}
 # to run
 function nvimdev {
     folder="$1"
