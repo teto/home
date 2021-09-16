@@ -203,8 +203,11 @@ local nnoremap = k.nnoremap
 nnoremap { "<Leader>o", function () vim.cmd("FzfFiles") end}
 nnoremap { "<Leader>g", function () vim.cmd("FzfGitFiles") end}
 nnoremap { "<Leader>F", function () vim.cmd("FzfFiletypes") end}
+nnoremap { "<Leader>h", function () vim.cmd("FzfHistory") end}
 nnoremap { "<Leader>t", function () require'telescope.builtin'.tags{} end }
 nnoremap { "<Leader>C", function () require'telescope.builtin'.colorscheme{ enable_preview = true; } end }
+
+nnoremap { "<Leader>ca", function () require'telescope.builtin'.lsp_code_actions{} end }
 nnoremap { "<Leader>f", function () require('telescope').extensions.frecency.frecency({
 	query = "toto"
 }) end }

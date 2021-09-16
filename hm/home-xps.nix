@@ -21,7 +21,7 @@ in
   ];
 
   # use a release version
-  programs.neovim.package = lib.mkForce pkgs.neovim-master;
+  programs.neovim.package = lib.mkForce pkgs.neovim;
 
 
   xsession.windowManager.i3 = {

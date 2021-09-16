@@ -2066,6 +2066,7 @@ let content = [
             \ ['Toggle indentlines', 'IndentBlanklineToggle!'],
             \ ['Start search and replace', 'lua require("spectre").open()'],
             \ ['Toggle obsession', 'Obsession'],
+            \ ['Toggle minimap', 'MinimapToggle'],
             \ ]
 " map 2 <cmd>lua vim.lsp.buf.code_action()
 

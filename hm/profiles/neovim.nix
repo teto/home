@@ -260,7 +260,7 @@ let
         # optional = true;
       }
       # displays a minimap on the right
-      # minimap-vim # broken
+      minimap-vim # broken
       vim-dirvish
       {
         plugin = packer-nvim;
