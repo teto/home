@@ -40,3 +40,7 @@ nix-shell -p haskell.packages.ghc865.stack
 
 # nix path-info -Ssh $(nix-build ./shell.nix -A inputDerivation)
 nix path-info -Sshr $(nix-build ./shell.nix -A inputDerivation) | sort -k3 -h | wc -l
+
+
+# maintainers scripts
+./maintainers/scripts/rebuild-amount.sh --print HEAD

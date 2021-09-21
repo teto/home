@@ -265,6 +265,18 @@ if has_whichkey then
 
 end
 
+require 'jabs'.setup {
+	position = 'center', -- center, corner
+	width = 50,
+	height = 10,
+	border = 'shadow', -- none, single, double, rounded, solid, shadow, (or an array or chars)
+
+	-- the options below are ignored when position = 'center'
+	col = 0,
+	row = 0,
+	anchor = 'NW', -- NW, NE, SW, SE
+	relative = 'win', -- editor, win, cursor
+}
 
 -- since it was not merge yet
 if vim.ui then
@@ -886,8 +898,8 @@ local has_lualine, lualine = pcall(require, 'lualine')
 if has_lualine then
 lualine.setup {
   options = {
-    icons_enabled = true,
-    theme = 'gruvbox',
+    icons_enabled = false,
+    -- theme = 'gruvbox',
     component_separators = {'', ''},
     section_separators = {'', ''},
     disabled_filetypes = {}
@@ -897,7 +909,8 @@ lualine.setup {
     lualine_b = {'branch'},
 
     lualine_c = {
-		'filename', 'lsp_progress'
+		'filename',
+		'lsp_progress'
 		-- ,  gps.get_location, condition = gps.is_available
 	},
     lualine_x = {'encoding', 'fileformat', 'filetype'},
@@ -907,13 +920,13 @@ lualine.setup {
   inactive_sections = {
     lualine_a = {},
     lualine_b = {},
-    lualine_c = {'filename'},
+    lualine_c = {'filename', 'lsp_progress'},
     lualine_x = {'location'},
     lualine_y = {},
     lualine_z = {}
   },
   tabline = {},
-  extensions = {}
+  extensions = { 'fzf', 'fugitive'}
 }
 end
 

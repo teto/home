@@ -430,7 +430,7 @@ let
   ];
 
   # taken from the official flake
-  myPackage = pkgs.neovim-debug;
+  myPackage = pkgs.neovim;
 in
 {
 

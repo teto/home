@@ -145,7 +145,7 @@ let
     # folders.inbox = "Inbox";
 
     # Relative path of the inbox mail.
-    folders.sent = "[Gmail]/Sent Mail";
+    folders.sent = "Sent";
     folders.trash = "[Gmail]/Trash";
 
   # CopyArrivalDate

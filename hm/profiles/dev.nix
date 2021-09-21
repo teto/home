@@ -5,14 +5,15 @@
   home.packages = with pkgs; [
     visidata
     gitAndTools.pass-git-helper
-     graphviz
+    graphviz
   ];
 
-  programs.direnv.enable = true;
+  programs.direnv = {
+    enable = true;
 
-  programs.direnv.enableZshIntegration = true;
-  programs.direnv.nix-direnv.enable = true;
-
-  # programs.direnv.config
-  # programs.direnv.stdlib
+    enableZshIntegration = true;
+    nix-direnv.enable = true;
+    nix-direnv.enableFlakes = true;
+  # stdlib
+  };
 }

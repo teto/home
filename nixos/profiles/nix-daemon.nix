@@ -1,7 +1,7 @@
 { config, lib, pkgs,  ... }:
 {
   nix = {
-    package = pkgs.nixFlakes;
+    package = pkgs.nixUnstable;
 
     registry = {
       nur.to = { type = "github"; owner = "nix-community"; repo="NUR"; };
