@@ -1,6 +1,6 @@
 { config, lib, pkgs,  ... }:
 let
-  secrets = import ../secrets.nix;
+  secrets = import ../../nixpkgs/secrets.nix;
 
   # using this will deadlock
   # https://github.com/NixOS/nix/issues/2029
@@ -33,9 +33,8 @@ in
     daemonIONiceLevel = 3;
     # 0 = max (default) vs 19 lowest
     daemonNiceLevel = 2;
-    # buildMachines = [
-    #   localMachine
-    # ];
-
+    buildMachines = [
+      localMachine
+    ];
   };
 }

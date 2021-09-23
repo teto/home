@@ -180,6 +180,9 @@
                   # inputs.mptcp-flake.nixosModules.mptcp
                   # ./nixos/profiles/mptcp.nix
                   ./nixos/profiles/nova.nix
+
+                  # just to check how /etc/nix/machines looks like
+                  ./nixos/modules/distributedBuilds.nix
                 ];
               })
               hm.nixosModules.home-manager

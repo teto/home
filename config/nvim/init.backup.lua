@@ -312,9 +312,9 @@ use {
 --   requires = { { 'hoob3rt/lualine.nvim', opt=true }, 'kyazdani42/nvim-web-devicons' }
 -- }
 use 'MunifTanjim/nui.nvim' -- to create UIs
--- use 'hrsh7th/nvim-compe'
-use 'vhyrro/neorg'
-use 'ray-x/lsp_signature.nvim'
+use 'hrsh7th/nvim-compe' -- for autocompletion
+use 'vhyrro/neorg'    -- testing
+use 'ray-x/lsp_signature.nvim' -- display function signature in insert mode
 use 'Pocco81/AutoSave.nvim' -- :ASToggle /AsOn / AsOff
 -- use 'sindrets/diffview.nvim' -- :DiffviewOpen
 -- use 'folke/which-key.nvim' -- :WhichKey

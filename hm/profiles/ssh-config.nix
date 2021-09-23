@@ -12,7 +12,7 @@
       };
       ovh1 = {
         # checkHostIP
-        identityFile = "~/.ssh/ci-infra-ec2-dev";
+        identityFile = "~/.ssh/nova-infra-prod";
         user = "ubuntu";
         host = "ovh-hybrid-runner-1.devops.novadiscovery.net";
       };

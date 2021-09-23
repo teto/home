@@ -39,8 +39,8 @@ M.on_attach = function(client)
 	-- vim.bo.omnifunc = vim.lsp.omnifunc
 	vim.opt.omnifunc = 'v:lua.vim.lsp.omnifunc'
 
-	-- require "lsp_signature".on_attach()  -- Note: add in lsp client on-attach
-	require'virtualtypes'.on_attach()
+	require "lsp_signature".on_attach()  -- Note: add in lsp client on-attach
+	-- require'virtualtypes'.on_attach()
 -- " vim.lsp.buf.rename()
 end
 

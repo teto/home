@@ -70,7 +70,7 @@ let
             tree-sitter-lua
             tree-sitter-json
             tree-sitter-nix
-            tree-sitter-haskell
+            # tree-sitter-haskell # crashes with a loop
             tree-sitter-python
           ]
         ));

@@ -21,7 +21,7 @@
 
       nova.to = {
           type = "git";
-          url = "ssh://git@git.novadiscovery.net:4224/world/nova-nix.git";
+          url = "ssh://git@git.novadiscovery.net/world/nova-nix.git";
         };
       # nova.to = { type = "git+ssh://git@git.novadiscovery.net:4224/world/nova-nix.git";
       # "github:nixos/nixpkgs/nixos-unstable";

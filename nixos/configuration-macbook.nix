@@ -13,8 +13,6 @@ let
     ./modules/network-manager.nix
     ./modules/docker-daemon.nix
     # ./modules/libvirtd.nix
-    # ./modules/vpn.nix
-    # ./modules/distributedBuilds.nix
 
     # just for testing
     # ./modules/nextcloud.nix

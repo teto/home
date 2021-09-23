@@ -1,13 +1,15 @@
 final: prev:
 rec {
 
-  lua = prev.lua.override {
+  lua5_1 = prev.lua5_1.override {
 
     packageOverrides = luafinal: luaprev: {
-      testEnv = (prev.lua.withPackages(p: [
-        p.lgi
-        p.ldoc
-        p.lpeg
+      testEnv = (luaprev.lua.withPackages(p: [
+        # p.lgi
+        # p.ldoc
+        # p.lpeg
+        p.plenary-nvim
+        p.gitsigns-nvim
       ])).overrideAttrs(oa: {
         NIX_DEBUG= 9;
       });
@@ -60,6 +62,6 @@ rec {
 
   };
 
-  # lua51Packages = lua5_1.pkgs;
-  luaPackages = lua.pkgs;
+  lua51Packages = lua5_1.pkgs;
+  # luaPackages = lua.pkgs;
 }
