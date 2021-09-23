@@ -1,1 +1,2 @@
 setl expandtab
+setl iskeyword-=.
