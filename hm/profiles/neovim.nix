@@ -8,6 +8,12 @@ let
     '';
 
   rcBlocks = {
+
+    appearance = ''
+      " draw a line on 80th column
+      set colorcolumn=80,100
+    '';
+
     wildBlock = ''
     set wildignore+=.hg,.git,.svn                    " Version control
     " set wildignore+=*.aux,*.out,*.toc                " LaTeX intermediate files
@@ -46,33 +52,13 @@ let
   };
 
 
-  # overlayPlugins = with pkgs.myVimPlugins;[
-  # https://github.com/vmchale/dhall-vim.git
-  # vimPlugins = final: prev: {
-
-  # luafile stdpath('config').'/init.lua'
-    myVimPluginsOverlay = pkgs.callPackage ../../nixpkgs/overlays/vim-plugins/generated.nix {
-      inherit (pkgs.vimUtils) buildVimPluginFrom2Nix;
-    };
+  myVimPluginsOverlay = pkgs.callPackage ../../nixpkgs/overlays/vim-plugins/generated.nix {
+    inherit (pkgs.vimUtils) buildVimPluginFrom2Nix;
+  };
 
   myVimPlugins = pkgs.vimPlugins.extend (
     myVimPluginsOverlay
-  #   final: prev: {
-  #     # doesn't build because plenary requires gh ??!
-  #     octo-nvim = pkgs.vimUtils.buildVimPluginFrom2Nix {
-  #       pname = "octo-nvim";
-  #       version = "2021-05-06";
-  #       src = pkgs.fetchFromGitHub {
-  #         owner = "pwntester";
-  #         repo = "octo.nvim";
-  #         rev = "d92a7352516f06a457cbf8812b173abc319f7882";
-  #         sha256 = "1xvj3p32nzcn8rv2hscmj8sn8bfm1s2r5j1cwwnkl4zbqdbd4k5f";
-  #       };
-  #       meta.homepage = "https://github.com/pwntester/octo.nvim/";
-  #     };
-  #   }
   );
-
 
   luaPlugins = with pkgs.vimPlugins; [
     {
@@ -102,6 +88,11 @@ let
     {
       plugin = telescope-fzf-native-nvim;
     }
+    {
+      plugin = registers-nvim;
+      # use :Registers
+    }
+
 
     # broken
     # {
@@ -127,6 +118,7 @@ let
       #   '';
       # }
       # y a aussi vim-markdown
+      idris-vim
       {
         # euclio/vim-markdown-composer
         plugin = vim-markdown-composer;
@@ -260,7 +252,7 @@ let
         # optional = true;
       }
       # displays a minimap on the right
-      minimap-vim # broken
+      minimap-vim
       vim-dirvish
       {
         plugin = packer-nvim;
@@ -364,10 +356,12 @@ let
       }
       # TODO this one will be ok once we patch it
       # vim-markdown-composer  # WIP
-
       # vim-livedown
       # markdown-preview-nvim # :MarkdownPreview
       # nvim-markdown-preview  # :MarkdownPreview
+      {
+        plugin = nvim-spectre;
+      }
 
       # vim-markdown-preview  # WIP
       {
@@ -381,7 +375,6 @@ let
       #   plugin = vista-vim;
       #   # optional = false;
       #   config = ''
-
       #   '';
       # }
 
@@ -415,10 +408,9 @@ let
   overlayPlugins = with myVimPlugins; [
     # octo-nvim
     # pkgs.vimPlugins.telescope-fzf-native-nvim
-    {
-      plugin = nvim-spectre;
-    }
-
+  # {
+  #     plugin = virtual-types-nvim;
+  #   }
 
       # TODO restore in my overlay
       # {
@@ -434,18 +426,7 @@ let
 in
 {
 
-  # xdg.configFile."nvim/parser/c.so".source = "${pkgs.tree-sitter.builtGrammars.tree-sitter-c}/parser";
-  # home.file."${config.xdg.configHome}/nvim/parser/bash.so".source = "${pkgs.tree-sitter.builtGrammars.tree-sitter-bash}/parser";
-  # home.file."${config.xdg.configHome}/nvim/parser/lua.so".source = "${pkgs.tree-sitter.builtGrammars.tree-sitter-lua}/parser";
-  # home.file."${config.xdg.configHome}/nvim/parser/python.so".source = "${pkgs.tree-sitter.builtGrammars.tree-sitter-python}/parser";
-  # # haskell treesitter is broken
-  # home.file."${config.xdg.configHome}/nvim/parser/haskell.so".source = "${pkgs.tree-sitter.builtGrammars.tree-sitter-haskell}/parser";
-  # home.file."${config.xdg.configHome}/nvim/parser/nix.so".source = "${pkgs.tree-sitter.builtGrammars.tree-sitter-nix}/parser";
-
-# nvim-lua/lsp_extensions.nvim
-
-
-  #     extraLuaPackages = ps: [ps.mpack];
+  #  extraLuaPackages = ps: [ps.mpack];
   programs.neovim = {
     enable = true;
 

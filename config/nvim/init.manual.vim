@@ -40,40 +40,27 @@ endif
 " VIM-PLUG PLUGIN DECLARATIONS {{{1
 call plug#begin(s:plugdir)
 " Plug 'nvim-lua/plenary.nvim'
-Plug 'idris-hackers/idris-vim'
-Plug 'jubnzv/virtual-types.nvim'
 Plug 'rhysd/vim-gfm-syntax' " markdown syntax compatible with Github's
 Plug 'winston0410/range-highlight.nvim' "highlight ranges like :1,5
 " Plug 'soywod/himalaya' " mail reader :Himalaya ; needs the rust CLI reader
 " himalaya
-" Plug 'DanilaMihailov/beacon.nvim'  " blinks line when cursor jumps to a new far location
-" Plug 'edluffy/hologram.nvim'
 " Plug 'NTBBloodbath/rest.nvim'
 " Plug 'soywod/himalaya', {'rtp': 'vim'}
-" Plug 'arouene/vim-ansible-vault'
 
 " recommanded branch faster
-" todo add a meny entry to toggle it
-Plug 'lukas-reineke/indent-blankline.nvim' " already installed in 
 
 Plug 'kevinhwang91/rnvimr'
 Plug 'jubnzv/virtual-types.nvim'
 " Plug 'andymass/vim-matchup' " to improve % , buggy ?
 Plug 'eugen0329/vim-esearch' " search & replace
 " Plug 'eugen0329/vim-esearch' " search & replace
-" Plug 'wbthomason/packer.nvim'
-" Plug '~/packer.nvim' " because of abug
-" Plug 'nvim-lua/neovim-ui'
 Plug '~/neovim-ui'
-" Plug 'glepnir/lspsaga.nvim'
-" Plug 'lewis6991/gitsigns.nvim'  " same as vim-signify but lua
 Plug 'kshenoy/vim-signature' " display marks in gutter, love it
 " Plug 'mhinz/vim-signify'  " *
 
 Plug 'tjdevries/colorbuddy.nvim' " required by some colorscheme
 Plug 'jbyuki/contextmenu.nvim' " deprecated
 " Plug 'kyazdani42/nvim-tree.lua' " to solve crash NvimTreeToggle
-" Plug 'Yggdroot/indentLine'
 " Plug 'RRethy/vim-illuminate' " to highlight similar words
 " Plug 'kyazdani42/nvim-web-devicons' " Recommended (for coloured icons)
 " Plug 'ryanoasis/vim-devicons'  " Icons without colours
@@ -103,7 +90,7 @@ Plug 'MattesGroeger/vim-bookmarks' " ruby  / :BookmarkAnnotate
 " Plug 'thaerkh/vim-workspace'  " :ToggleWorkspace
 
 Plug 'skywind3000/vim-quickui' " to design cool uis
-Plug 'liuchengxu/vista.vim' " replaces tagbar to list workplace symbols
+Plug 'liuchengxu/vista.vim' " to list workplace symbols
 " Plug 'neovim/nvim-lspconfig' " while fuzzing details out
 Plug '~/nvim-lspconfig' " while fuzzing details out
 " Plug 'puremourning/vimspector' " to debug programs
@@ -123,7 +110,7 @@ Plug 'chrisbra/NrrwRgn' " to help with multi-ft files
 Plug 'chrisbra/vim-diff-enhanced' "
 " Plug 'vim-pandoc/vim-pandoc'
 " Plug 'vim-pandoc/vim-pandoc-syntax'
-Plug 'shime/vim-livedown'  " :LivedownPreview
+" Plug 'shime/vim-livedown'  " :LivedownPreview
 Plug 'conornewton/vim-pandoc-markdown-preview' " :StartMdPreview / StopMd
 
 " around vcs {{{
@@ -217,9 +204,6 @@ Plug 'honza/vim-snippets'
 " Plug 'itchyny/vim-cursorword'
 
 " Plug 'sjl/gundo.vim' " :GundoShow/Toggle to redo changes
-" Plug 'vim-scripts/DrawIt' " to draw diagrams
-" Plug 'beloglazov/vim-online-thesaurus' " thesaurus => dico dde synonymes
-
 
 """ contact autocompletion
 
@@ -252,17 +236,11 @@ Plug 'florentc/vim-tla'
 " Plug 'danielroseman/pygd-vim', {'for': 'python'} " provokes an error
 " }}}
 
-" Plug '907th/vim-auto-save' " :h auto-save
-" Plug 'teto/vim-auto-save' " autosave :h auto-save
 " Plug 'bfredl/nvim-miniyank' " killring alike plugin, cycling paste careful search for :Yank commands
 " hangs with big strings
 
 " Text objects {{{
-" Plug 'michaeljsmith/vim-indent-object'
 Plug 'tommcdo/vim-lion' " Use with gl/L<text object><character to align to>
-" Plug 'tommcdo/vim-exchange' " Use with cx<text object> to cut, cxx to exchange
-" Plug 'tommcdo/vim-kangaroo' "  zp to push/zP to pop the position
-" Plug 'tommcdo/vim-ninja-feet' " care overwrites z]
 " }}}
 " {{{ To ease movements
 " Plug 'rhysd/clever-f.vim'
@@ -273,7 +251,7 @@ Plug 'wellle/targets.vim' " Adds new motion targets ci{
 " Plug 'justinmk/vim-ipmotion' " ?
 " }}}
 
-Plug 'dylanaraps/wal.vim'
+Plug 'dylanaraps/wal.vim' " to update colors
 Plug 'dietsche/vim-lastplace' " restore last cursor postion (is it still needed ?)
 " Plug 'hrsh7th/vim-vsnip' " vscode/lsp snippet format
 " Plug 'hrsh7th/vim-vsnip-integ'
@@ -300,8 +278,6 @@ Plug 'teto/Modeliner' " <leader>ml to setup buffer modeline
 " This one has bindings mapped to <leader>l
 " Plug '~/vimwiki'   " to write notes
 Plug 'vimwiki/vimwiki', { 'branch': 'dev'}   " to write notes
-" Plug 'rhysd/github-complete.vim' " provides github user/repo autocompletion after @ and #
-
 " Plug 'hrsh7th/nvim-compe' " autocompletion
 
 " https://github.com/haorenW1025/completion-nvim/wiki/chain-complete-support
@@ -309,12 +285,10 @@ Plug 'vimwiki/vimwiki', { 'branch': 'dev'}   " to write notes
 " treesitter may slow down nvim
 
 " github-comment requires webapi (https://github.com/mattn/webapi-vim)
-" Plug 'mmozuras/vim-github-comment' " :GHComment
 " use octo instead
 " Plug 'kthibodeaux/pull-review'     " :PullReviewList
 
 " does not work seems to be better ones
-"
 " Plug 'vasconcelloslf/vim-interestingwords' " highlight the words you choose <leader>k (does not work in neovim)
 Plug 't9md/vim-quickhl' " hl manually selected words :h QuickhlManualEnable
 
@@ -332,6 +306,7 @@ Plug 'vim-scripts/Solarized'
 " Plug 'npxbr/gruvbox.nvim' " requires lush
 Plug 'romainl/flattened'
 Plug 'joshdick/onedark.vim'
+Plug 'rose-pine/neovim'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'dracula/vim'
 Plug 'sainnhe/sonokai'
@@ -357,7 +332,7 @@ Plug 'lervag/vimtex'
 " Plug 'gregsexton/gitv'
 " Plug 'jeffwilliams/basejump' " to alt+click on file:line and go to it
 Plug 'neovim/nvimdev.nvim' " thanks tweekmonster !
-" Plug 'antoinemadec/openrgb.nvim'
+" Plug 'antoinemadec/openrgb.nvim'  " to take into account RGB stuff
 " Plug 'jceb/vim-orgmode' " orgmode
 call plug#end()
 " }}}
@@ -1176,11 +1151,6 @@ nmap <leader>rs_ <Plug>(ReplSendLine)
 " Send the selected text to the REPL
 vmap <leader>rs  <Plug>(ReplSend)
 " }}}
-" tagbar {{{
-let g:tagbar_left = 0
-let g:tagbar_indent = 1
-let g:tagbar_show_linenumbers= 1
-" }}}
 " vim-open-url {{{
 let g:open_url_browser_default="qutebrowser"
 "}}}
@@ -1291,7 +1261,7 @@ let g:mkdp_page_title = '「${name}」'
 " " Stop the preview"
 " :MarkdownPreviewStop
 "}}}
-" vista (tagbar-like software) {{{
+" vista (visualize LSP symbols) {{{
 " Vista finder fzf
 " Vista nvim_lsp
 " available options are echo/scroll/floating_win/both
@@ -1400,7 +1370,6 @@ set completeopt+=noinsert,noselect
 
 " }}}
 " compe
-
 "
 " treesitter-completion {{{
 " Highlight the node at point, its usages and definition when cursor holds
@@ -1568,12 +1537,6 @@ hi LspFloatWinBorder guibg=red
 " let g:aniseed#env = v:true
 " lua require('aniseed.env').init()
 " }}}
-" beacon.nvim (to show cursor) {{{
-" let g:beacon_enable = 0
-let g:beacon_size = 80
-let g:beacon_shrink = 0
-" let g:beacon_show_jumps = 0
-"}}}
 " luadev (a repl for nvim) {{{
 " map 5 <Plug>(Luadev-RunLine)
 " vmap 5 <Plug>(Luadev-Run)
@@ -1592,12 +1555,25 @@ set mousemodel=popup_setpos
 let s:gutter_error_sign = "✘'"
 let s:gutter_warn_sign = '！'
 " }}}
+" registers.nvim {{{
+let g:registers_return_symbol = "\n" "'⏎' by default
+let g:registers_tab_symbol = "\t" "'·' by default
+let g:registers_space_symbol = "." "' ' by default
+let g:registers_delay = 500 "0 by default, milliseconds to wait before opening the popup window
+let g:registers_register_key_sleep = 1 "0 by default, seconds to wait before closing the window when a register key is pressed
+let g:registers_show_empty_registers = 0 "1 by default, an additional line with the registers without content
+let g:registers_trim_whitespace = 0 "1 by default, don't show whitespace at the begin and end of the registers
+let g:registers_hide_only_whitespace = 1 "0 by default, don't show registers filled exclusively with whitespace
+let g:registers_window_border = "single" "'none' by default, can be 'none', 'single','double', 'rounded', 'solid', or 'shadow' (requires Neovim 0.5.0+)
+let g:registers_window_min_height = 10 "3 by default, minimum height of the window when there is the cursor at the bottom
+let g:registers_window_max_width = 20 "100 by default, maximum width of the window
+" }}}
 
 set hidden " you can open a new buffer even if current is unsaved (error E37)
 
 
 " draw a line on 80th column
-set colorcolumn=80,100
+" set colorcolumn=80,100
 
 " default behavior for diff=filler,vertical
 set diffopt=filler,vertical
@@ -1640,7 +1616,6 @@ map <F11> <Plug>(ToggleListchars)
 "nnoremap <Up> :echoe "Use k"<CR>
 "nnoremap <Down> :echoe "Use j"<CR>
 
-nnoremap <silent> <Leader>B <Cmd>TagbarToggle<CR>
 nnoremap <Leader>V <Cmd>Vista finder<CR>
 
 " set vim's cwd to current file's
@@ -2131,4 +2106,4 @@ map <D-b> :echom "hello papy"
 " nvim will load any .nvimrc in the cwd; useful for per-project settings
 set exrc
 " from FAQ https://github.com/neovim/neovim/wiki/FAQ
-vnoremap <LeftRelease> "*ygv
+" vnoremap <LeftRelease> "*ygv

@@ -1,15 +1,10 @@
 alec-gibson/nvim-tetris
 davidgranstrom/nvim-markdown-preview
-edluffy/specs.nvim@main
 euclio/vim-markdown-composer
 glacambre/firenvim
-iamcco/markdown-preview.nvim
 JamshedVesuna/vim-markdown-preview
-norcalli/nvim-terminal.lua
-nvim-telescope/telescope-frecency.nvim@configure_db_user_confirmation
-nvim-telescope/telescope-fzf-native.nvim@main
+jubnzv/virtual-types.nvim
 nvim-telescope/telescope.nvim
 pwntester/octo.nvim
 shime/vim-livedown
 tversteeg/registers.nvim@main
-windwp/nvim-spectre

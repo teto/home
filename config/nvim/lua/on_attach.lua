@@ -2,32 +2,8 @@ local M = {}
 
 -- external plugins to have some nice features
 local has_completion, plug_completion = pcall(require, "completion")
--- local lspsaga = require '_lspsaga'
-local has_lspsaga, lspsaga = pcall(require, 'lspsaga')
 local k = require"astronauta.keymap"
 local nnoremap = k.nnoremap
-
-
--- attach
-local function lspsaga_attach()
-	-- require'lspsaga.provider'.preview_definition()
-	nnoremap { "gd", vim.lsp.buf.definition, buffer = true }
-	nnoremap { "gD", require'lspsaga.provider'.preview_definition, buffer = true }
-	nnoremap { "gr", vim.lsp.buf.references, buffer=true }
-	nnoremap { "gA", require('lspsaga.codeaction').code_action, buffer=true }
-	nnoremap { "g0", vim.lsp.buf.document_symbol, buffer=true }
-	nnoremap { "gR", require'lspsaga.rename'.rename, buffer=true }
-
-	-- vim.api.nvim_set_keymap('n', '<C-j>', [[<cmd>lua vim.lsp.diagnostic.goto_next()<cr>]], {noremap = true})
--- code action
--- nnoremap <silent><leader>ca <cmd>lua require('lspsaga.codeaction').code_action()<CR>
--- vnoremap <silent><leader>ca <cmd>'<,'>lua require('lspsaga.codeaction').range_code_action()<CR>
-
--- if lspsaga
---
-	nnoremap { "[e", require'lspsaga.diagnostic'.lsp_jump_diagnostic_prev, buffer=true }
-	nnoremap { "]e", require'lspsaga.diagnostic'.lsp_jump_diagnostic_next, buffer=true }
-end
 
 
 local function default_mappings()
@@ -53,25 +29,18 @@ local function default_mappings()
 end
 
 M.on_attach = function(client)
-	-- print("Attaching client")
-	-- print(vim.inspect(client))
-	-- vim.cmd("setlocal omnifunc=lsp#omnifunc")
 
 	if has_completion then
 		plug_completion.on_attach(client)
 	end
 
-	-- if has_lspsaga then
-	if false then
-	   lspsaga_attach()
-	else
-		default_mappings()
-	end
+	default_mappings()
 
 	-- vim.bo.omnifunc = vim.lsp.omnifunc
 	vim.opt.omnifunc = 'v:lua.vim.lsp.omnifunc'
 
 	require "lsp_signature".on_attach()  -- Note: add in lsp client on-attach
+	require'virtualtypes'.on_attach()
 -- " vim.lsp.buf.rename()
 end
 

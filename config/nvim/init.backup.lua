@@ -29,6 +29,15 @@ if file_exists(generated_init) then
 	-- vim.cmd ('luafile '..generated_init..' ')
 end
 
+-- local my_image = require('hologram.image'):new({
+--     source = '/home/teto/doctor.png',
+--     row = 11,
+--     col = 0,
+-- })
+
+-- my_image:transmit() -- send image data to terminal
+
+
 -- use { 'haorenW1025/completion-nvim', opt = true,
 -- requires = {{'hrsh7th/vim-vsnip', opt = true}, {'hrsh7th/vim-vsnip-integ', opt = true}}
 -- }
@@ -59,15 +68,60 @@ use {
 	"SmiteshP/nvim-gps",
 	requires = "nvim-treesitter/nvim-treesitter"
 }
+use 'edluffy/hologram.nvim' -- see https://github.com/edluffy/hologram.nvim#usage for usage
 use 'windwp/nvim-spectre' -- search & replace 
 use 'ellisonleao/glow.nvim' -- markdown preview, run :Glow
-use { 'edluffy/specs.nvim' } -- Show where your cursor moves
+use {
+	-- Show where your cursor moves
+	'edluffy/specs.nvim',
+	config = function ()
+		local specs = require 'specs'
+		specs.setup{
+			show_jumps  = true,
+			min_jump = 20,
+			popup = {
+				delay_ms = 0, -- delay before popup displays
+				inc_ms = 10, -- time increments used for fade/resize effects
+				blend = 10, -- starting blend, between 0-100 (fully transparent), see :h winblend
+				width = 30,
+				winhl = "PMenu",
+				fader = specs.linear_fader,
+				resizer = specs.shrink_resizer
+			},
+			ignore_filetypes = {},
+			ignore_buftypes = {
+				nofile = true,
+			},
+		}
+	end
+
+} 
 use { 'nvim-lua/popup.nvim'  }  -- mimic vim's popupapi for neovim
 -- use { 'nvim-lua/plenary.nvim' } -- lua utilities for neovim
 use {
     'NTBBloodbath/rest.nvim',
     -- requires = { 'nvim-lua/plenary.nvim' }
 }
+use {
+	'lukas-reineke/indent-blankline.nvim',
+	config = function ()
+		require("indent_blankline").setup {
+			char = "|",
+			buftype_exclude = {"terminal"}
+		}
+		vim.cmd [[highlight IndentBlanklineIndent1 guifg=#E06C75 gui=nocombine]]
+		vim.cmd [[highlight IndentBlanklineIndent2 guifg=#E5C07B gui=nocombine]]
+		vim.cmd [[highlight IndentBlanklineIndent3 guifg=#98C379 gui=nocombine]]
+		vim.cmd [[highlight IndentBlanklineIndent4 guifg=#56B6C2 gui=nocombine]]
+		vim.cmd [[highlight IndentBlanklineIndent5 guifg=#61AFEF gui=nocombine]]
+		vim.cmd [[highlight IndentBlanklineIndent6 guifg=#C678DD gui=nocombine]]
+	end
+}
+use {
+	-- shows type annotations for functions in virtual text using built-in LSP client
+	'jubnzv/virtual-types.nvim'
+}
+
 -- use_rocks 'plenary.nvim'
 -- use { 'nvim-lua/telescope.nvim' }
 use '~/telescope.nvim'    -- fzf-like in lua
@@ -572,10 +626,6 @@ if enable_treesitter then
 end
 --}}}
 
--- blankline  {{{
--- let g:indent_blankline_char = '|'
--- }}}
-
 -- telescope {{{
 -- TODO check for telescope github extension too
 if has_telescope then
@@ -808,11 +858,12 @@ end
 
 local has_trouble, trouble = pcall(require, 'trouble')
 if false then
-	trouble.setup {--{{{
+	-- Trouble {{{
+	trouble.setup {
     position = "bottom", -- position of the list can be: bottom, top, left, right}}}
     height = 10, -- height of the trouble list when position is top or bottom
-    width = 50, -- width of the list when position is left or right{{{
-    icons = false, -- use devicons for filenames}}}
+    width = 50, -- width of the list when position is left or right
+    icons = false, -- use devicons for filenames
     mode = "lsp_workspace_diagnostics", -- "lsp_workspace_diagnostics", "lsp_document_diagnostics", "quickfix", "lsp_references", "loclist"
     fold_open = "", -- icon used for open folds
     fold_closed = "", -- icon used for closed folds
@@ -868,26 +919,6 @@ if has_hop then
 	hop.setup {}
 end
 
-local has_specs, specs = pcall(require, 'specs')
-if has_specs then
-	specs.setup{
-		show_jumps  = true,
-		min_jump = 20,
-		popup = {
-			delay_ms = 0, -- delay before popup displays
-			inc_ms = 10, -- time increments used for fade/resize effects
-			blend = 10, -- starting blend, between 0-100 (fully transparent), see :h winblend
-			width = 30,
-			winhl = "PMenu",
-			fader = specs.linear_fader,
-			resizer = specs.shrink_resizer
-		},
-		ignore_filetypes = {},
-		ignore_buftypes = {
-			nofile = true,
-		},
-	}
-end
 -- options to pass to goto_next/goto_prev
 -- local goto_opts = {
 -- 	severity_limit = "Warning"

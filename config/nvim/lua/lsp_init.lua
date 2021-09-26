@@ -125,7 +125,7 @@ lspconfig.hls.setup({
     root_dir = lspconfig.util.root_pattern(
 		"*.cabal"
 		-- , "stack.yaml"
-		, "cabal.project"
+		-- , "cabal.project"
 		-- , "package.yaml"
 		, "hie.yaml"
 	),
