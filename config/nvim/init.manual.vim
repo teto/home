@@ -50,7 +50,7 @@ Plug 'winston0410/range-highlight.nvim' "highlight ranges like :1,5
 " recommanded branch faster
 
 Plug 'kevinhwang91/rnvimr'
-Plug 'jubnzv/virtual-types.nvim'
+" Plug 'jubnzv/virtual-types.nvim' " moved to nix
 " Plug 'andymass/vim-matchup' " to improve % , buggy ?
 Plug 'eugen0329/vim-esearch' " search & replace
 " Plug 'eugen0329/vim-esearch' " search & replace
@@ -95,11 +95,11 @@ Plug 'liuchengxu/vista.vim' " to list workplace symbols
 Plug '~/nvim-lspconfig' " while fuzzing details out
 " Plug 'puremourning/vimspector' " to debug programs
 Plug 'bfredl/nvim-luadev'  " lua repl :Luadev
-Plug 'hotwatermorning/auto-git-diff' " to help rebasing, damn cool
+" Plug 'hotwatermorning/auto-git-diff' " to help rebasing, damn cool
 " Plug 'norcalli/nvim-terminal.lua' " to display ANSI colors
 Plug '~/nvim-terminal.lua' " to display ANSI colors
 Plug 'bogado/file-line' " to open a file at a specific line
-Plug 'glacambre/firenvim' " to use nvim in firefox
+" Plug 'glacambre/firenvim' " to use nvim in firefox
 Plug 'alok/notational-fzf-vim' " to take notes, :NV
 " Plug 'iamcco/markdown-preview.nvim' " :MarkdownPreview
 Plug 'suy/vim-context-commentstring' " commen for current programming language
@@ -158,7 +158,6 @@ Plug 'dbakker/vim-projectroot' " projectroot#guess()
 Plug 'junegunn/goyo.vim', {'on': 'Goyo'} "distraction free writing focus
 Plug 'junegunn/limelight.vim' " focus writing :Limelight, works with goyo
 Plug 'calvinchengx/vim-aftercolors' " load after/colors
-" Plug 'ntpeters/vim-better-whitespace' " StripWhitespace care it stole my
 " leader
 Plug 'bronson/vim-trailing-whitespace' " :FixWhitespace
 " Plug 'tpope/vim-scriptease' " Adds command such as :Messages
@@ -222,18 +221,8 @@ Plug 'neovimhaskell/haskell-vim', {'for': 'haskell'} " really helps with syntax 
 " filetypes {{{2
 Plug 'cespare/vim-toml', { 'for': 'toml'}
 Plug 'PotatoesMaster/i3-vim-syntax'
-Plug 'florentc/vim-tla'
+" Plug 'florentc/vim-tla'
 " one competitor is https://github.com/hwayne/tla.vim/
-" Plug 'dzeban/vim-log-syntax' " hl some keywords like ERROR/DEBUG/WARNING
-" }}}
-" Python {{{2
-" Plug 'klen/python-mode', { 'for': 'python'} "
-" Plug 'mjbrownie/GetFilePlus', {'for': 'python'} " improves gf on imports
-" fails on relad
-" Plug 'tmhedberg/SimpylFold', { 'for': 'python' } " provides python folding
-"Plug 'vim-flake8' " for python syntax
-" Plug 'bfredl/nvim-ipy'  " adds the :IPython command
-" Plug 'danielroseman/pygd-vim', {'for': 'python'} " provokes an error
 " }}}
 
 " Plug 'bfredl/nvim-miniyank' " killring alike plugin, cycling paste careful search for :Yank commands
@@ -243,15 +232,12 @@ Plug 'florentc/vim-tla'
 Plug 'tommcdo/vim-lion' " Use with gl/L<text object><character to align to>
 " }}}
 " {{{ To ease movements
-" Plug 'rhysd/clever-f.vim'
-"Plug 'unblevable/quick-scope'  " highlight characeters to help in f/F moves
-" Plug 'Lokaltog/vim-easymotion' " careful overrides <leader><leader> mappings
 "Plug 'wellle/visual-split.vim'
 Plug 'wellle/targets.vim' " Adds new motion targets ci{
 " Plug 'justinmk/vim-ipmotion' " ?
 " }}}
 
-Plug 'dylanaraps/wal.vim' " to update colors
+Plug 'dylanaraps/wal.vim' " to update colors (available in nix via wal-vim)
 Plug 'dietsche/vim-lastplace' " restore last cursor postion (is it still needed ?)
 " Plug 'hrsh7th/vim-vsnip' " vscode/lsp snippet format
 " Plug 'hrsh7th/vim-vsnip-integ'
@@ -261,7 +247,6 @@ Plug 'wannesm/wmgraphviz.vim', {'for': 'dot'} " graphviz syntax highlighting
 Plug 'teto/vim-listchars' " to cycle between different list/listchars configurations
 "Plug 'tpope/vim-sleuth' " Dunno what it is
 Plug 'tpope/vim-rhubarb' " github support in fugitive, use |i_CTRL-X_CTRL-O|
-" Plug 'junegunn/vim-peekaboo' " gives a preview of buffers when pasting, need ruby ?
 " Plug 'vhakulinen/gnvim-lsp' " load it only for gnvim
 
 " euclio
@@ -277,7 +262,7 @@ Plug 'nacitar/a.vim' " :A
 Plug 'teto/Modeliner' " <leader>ml to setup buffer modeline
 " This one has bindings mapped to <leader>l
 " Plug '~/vimwiki'   " to write notes
-Plug 'vimwiki/vimwiki', { 'branch': 'dev'}   " to write notes
+" Plug 'vimwiki/vimwiki', { 'branch': 'dev'}   " to write notes
 " Plug 'hrsh7th/nvim-compe' " autocompletion
 
 " https://github.com/haorenW1025/completion-nvim/wiki/chain-complete-support

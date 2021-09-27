@@ -154,51 +154,51 @@ use { 'kosayoda/nvim-lightbulb' }
 -- compete with registers.nvim
 use { 'gennaro-tedesco/nvim-peekup' }
 use { 'nvim-telescope/telescope-packer.nvim' }
-use { 'TimUntersberger/neogit',
-	config = function ()
-		vim.defer_fn (
-		function ()
-		require 'neogit'.setup {
-		disable_signs = false,
-		disable_context_highlighting = false,
-		disable_commit_confirmation = false,
-		-- customize displayed signs
-		signs = {
-			-- { CLOSED, OPENED }
-			section = { ">", "v" },
-			item = { ">", "v" },
-			hunk = { "", "" },
-		},
-		integrations = {
-			-- Neogit only provides inline diffs. If you want a more traditional way to look at diffs you can use `sindrets/diffview.nvim`.
-			-- The diffview integration enables the diff popup, which is a wrapper around `sindrets/diffview.nvim`.
-			--
-			-- Requires you to have `sindrets/diffview.nvim` installed.
-			-- use {
-			--   'TimUntersberger/neogit',
-			--   requires = {
-			--     'nvim-lua/plenary.nvim',
-			--     'sindrets/diffview.nvim'
-			--   }
-			-- }
-			--
-			diffview = false
-		},
-		-- override/add mappings
-		mappings = {
-			-- modify status buffer mappings
-			status = {
-			-- Adds a mapping with "B" as key that does the "BranchPopup" command
-			["B"] = "BranchPopup",
-			-- Removes the default mapping of "s"
-			["s"] = "",
-			}
-		}
+--use { 'TimUntersberger/neogit',
+--	config = function ()
+--		vim.defer_fn (
+--		function ()
+--		require 'neogit'.setup {
+--		disable_signs = false,
+--		disable_context_highlighting = false,
+--		disable_commit_confirmation = false,
+--		-- customize displayed signs
+--		signs = {
+--			-- { CLOSED, OPENED }
+--			section = { ">", "v" },
+--			item = { ">", "v" },
+--			hunk = { "", "" },
+--		},
+--		integrations = {
+--			-- Neogit only provides inline diffs. If you want a more traditional way to look at diffs you can use `sindrets/diffview.nvim`.
+--			-- The diffview integration enables the diff popup, which is a wrapper around `sindrets/diffview.nvim`.
+--			--
+--			-- Requires you to have `sindrets/diffview.nvim` installed.
+--			-- use {
+--			--   'TimUntersberger/neogit',
+--			--   requires = {
+--			--     'nvim-lua/plenary.nvim',
+--			--     'sindrets/diffview.nvim'
+--			--   }
+--			-- }
+--			--
+--			diffview = false
+--		},
+--		-- override/add mappings
+--		mappings = {
+--			-- modify status buffer mappings
+--			status = {
+--			-- Adds a mapping with "B" as key that does the "BranchPopup" command
+--			["B"] = "BranchPopup",
+--			-- Removes the default mapping of "s"
+--			["s"] = "",
+--			}
+--		}
 
-	}
-end)
-end
-}
+--	}
+--end)
+--end
+--}
 -- use { 'wfxr/minimap.vim' }
 -- use {
 -- 	-- to work with github
@@ -248,6 +248,54 @@ use {
 use {
   "folke/trouble.nvim",
 --   requires = "kyazdani42/nvim-web-devicons",
+	-- Trouble {{{
+	config = function () 	
+	trouble.setup {
+    position = "bottom", -- position of the list can be: bottom, top, left, right}}}
+    height = 10, -- height of the trouble list when position is top or bottom
+    width = 50, -- width of the list when position is left or right
+    icons = false, -- use devicons for filenames
+    mode = "lsp_workspace_diagnostics", -- "lsp_workspace_diagnostics", "lsp_document_diagnostics", "quickfix", "lsp_references", "loclist"
+    fold_open = "", -- icon used for open folds
+    fold_closed = "", -- icon used for closed folds
+    action_keys = { -- key mappings for actions in the trouble list
+        -- map to {} to remove a mapping, for example:
+        -- close = {},
+        close = "q", -- close the list
+        cancel = "<esc>", -- cancel the preview and get back to your last window / buffer / cursor
+        refresh = "r", -- manually refresh
+        jump = {"<cr>", "<tab>"}, -- jump to the diagnostic or open / close folds
+        open_split = { "<c-x>" }, -- open buffer in new split
+        open_vsplit = { "<c-v>" }, -- open buffer in new vsplit
+        open_tab = { "<c-t>" }, -- open buffer in new tab
+        jump_close = {"o"}, -- jump to the diagnostic and close the list
+        toggle_mode = "m", -- toggle between "workspace" and "document" diagnostics mode
+        toggle_preview = "P", -- toggle auto_preview
+        hover = "K", -- opens a small poup with the full multiline message
+        preview = "p", -- preview the diagnostic location
+        close_folds = {"zM", "zm"}, -- close all folds
+        open_folds = {"zR", "zr"}, -- open all folds
+        toggle_fold = {"zA", "za"}, -- toggle fold of current file
+        previous = "k", -- preview item
+        next = "j" -- next item
+    },
+    indent_lines = true, -- add an indent guide below the fold icons
+    auto_open = false, -- automatically open the list when you have diagnostics
+    auto_close = false, -- automatically close the list when you have no diagnostics
+    auto_preview = true, -- automatyically preview the location of the diagnostic. <esc> to close preview and go back to last window
+    auto_fold = false, -- automatically fold a file trouble list at creation
+    signs = {
+        -- icons / text used for a diagnostic
+        error = "",
+        warning = "",
+        hint = "",
+        information = "",
+        other = "﫠"
+    },
+    use_lsp_diagnostic_signs = false -- enabling this will use the signs defined in your lsp client
+	}
+	end
+
 }
 -- use {
 --   'kdheepak/tabline.nvim',
@@ -264,7 +312,7 @@ use {
 --   requires = { { 'hoob3rt/lualine.nvim', opt=true }, 'kyazdani42/nvim-web-devicons' }
 -- }
 use 'MunifTanjim/nui.nvim' -- to create UIs
-use 'hrsh7th/nvim-compe'
+-- use 'hrsh7th/nvim-compe'
 use 'vhyrro/neorg'
 use 'ray-x/lsp_signature.nvim'
 use 'Pocco81/AutoSave.nvim' -- :ASToggle /AsOn / AsOff
@@ -614,7 +662,6 @@ if has_bufferline then
 end
 
 
--- use with neogit.status.create(<kind>)
 -- Treesitter config {{{
 -- 	'nvim-treesitter/completion-treesitter' " extension of completion-nvim,
 -- use { 'nvim-treesitter/nvim-treesitter' }
@@ -749,61 +796,7 @@ function contextMenu()
 		end
 	})
 end
--- gitsigns {{{
-local has_gitsigns, gitsigns = pcall(require, "gitsigns")
-if has_gitsigns then
- gitsigns.setup {
-	-- -- '│' passe mais '▎' non :s
- signs = {
-    add          = {hl = 'GitSignsAdd'   , text ='▎', numhl='GitSignsAddNr'   , linehl='GitSignsAddLn'},
-    change       = {hl = 'GitSignsChange', text ='▎', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
-    delete       = {hl = 'GitSignsDelete', text = '_', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
-    topdelete    = {hl = 'GitSignsDelete', text = '‾', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
-    changedelete = {hl = 'GitSignsChange', text = '~', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
-  },
-  -- signs = {
-  --   add          = {hl = 'DiffAdd'   , text = '▎', numhl='GitSignsAddNr'},
-  --   change       = {hl = 'DiffChange', text = '▎', numhl='GitSignsChangeNr'},
-  --   delete       = {hl = 'DiffDelete', text = '_', numhl='GitSignsDeleteNr'},
-  --   topdelete    = {hl = 'DiffDelete', text = '‾', numhl='GitSignsDeleteNr'},
-  --   changedelete = {hl = 'DiffChange', text = '▎', numhl='GitSignsChangeNr'},
-  -- },
-  numhl = false,
-  linehl = false,
-  keymaps = {
-    -- Default keymap options
-    noremap = true,
-    buffer = true,
 
-    -- ['n ]c'] = { expr = true, "&diff ? ']c' : '<cmd>lua require\"gitsigns\".next_hunk()<CR>'"},
-    -- ['n [c'] = { expr = true, "&diff ? '[c' : '<cmd>lua require\"gitsigns\".prev_hunk()<CR>'"},
-
-    -- ['n <leader>hs'] = '<cmd>lua require"gitsigns".stage_hunk()<CR>',
-    -- ['n <leader>hu'] = '<cmd>lua require"gitsigns".undo_stage_hunk()<CR>',
-    -- ['n <leader>hr'] = '<cmd>lua require"gitsigns".reset_hunk()<CR>',
-    -- ['n <leader>hp'] = '<cmd>lua require"gitsigns".preview_hunk()<CR>',
-    -- ['n <leader>hb'] = '<cmd>lua require"gitsigns".blame_line()<CR>',
-  },
-  watch_index = {
-    interval = 1000,
-    follow_files = true
-  },
-  current_line_blame = false,
-  current_line_blame_opts = {
-		delay = 1000,
-		virt_text_pos = 'eol'
-	},
-  sign_priority = 6,
-  update_debounce = 100,
-  status_formatter = nil, -- Use default
-  word_diff = true,
-  diff_opts = {
-	  internal = false
-  }  -- If luajit is present
-}
-end
---}}}
--- vim.fn.stdpath('config')
 require 'lsp_init'
 
 -- my treesitter config
@@ -816,7 +809,7 @@ local has_compe, compe = pcall(require, "compe")
 if has_compe then
 
   compe.setup {
-	enabled = true;
+	enabled = false;
 	autocomplete = true;
 	debug = false;
 	min_length = 1;
@@ -864,54 +857,9 @@ end
 
 
 
-local has_trouble, trouble = pcall(require, 'trouble')
-if false then
-	-- Trouble {{{
-	trouble.setup {
-    position = "bottom", -- position of the list can be: bottom, top, left, right}}}
-    height = 10, -- height of the trouble list when position is top or bottom
-    width = 50, -- width of the list when position is left or right
-    icons = false, -- use devicons for filenames
-    mode = "lsp_workspace_diagnostics", -- "lsp_workspace_diagnostics", "lsp_document_diagnostics", "quickfix", "lsp_references", "loclist"
-    fold_open = "", -- icon used for open folds
-    fold_closed = "", -- icon used for closed folds
-    action_keys = { -- key mappings for actions in the trouble list
-        -- map to {} to remove a mapping, for example:
-        -- close = {},
-        close = "q", -- close the list
-        cancel = "<esc>", -- cancel the preview and get back to your last window / buffer / cursor
-        refresh = "r", -- manually refresh
-        jump = {"<cr>", "<tab>"}, -- jump to the diagnostic or open / close folds
-        open_split = { "<c-x>" }, -- open buffer in new split
-        open_vsplit = { "<c-v>" }, -- open buffer in new vsplit
-        open_tab = { "<c-t>" }, -- open buffer in new tab
-        jump_close = {"o"}, -- jump to the diagnostic and close the list
-        toggle_mode = "m", -- toggle between "workspace" and "document" diagnostics mode
-        toggle_preview = "P", -- toggle auto_preview
-        hover = "K", -- opens a small poup with the full multiline message
-        preview = "p", -- preview the diagnostic location
-        close_folds = {"zM", "zm"}, -- close all folds
-        open_folds = {"zR", "zr"}, -- open all folds
-        toggle_fold = {"zA", "za"}, -- toggle fold of current file
-        previous = "k", -- preview item
-        next = "j" -- next item
-    },
-    indent_lines = true, -- add an indent guide below the fold icons
-    auto_open = false, -- automatically open the list when you have diagnostics
-    auto_close = false, -- automatically close the list when you have no diagnostics
-    auto_preview = true, -- automatyically preview the location of the diagnostic. <esc> to close preview and go back to last window
-    auto_fold = false, -- automatically fold a file trouble list at creation
-    signs = {
-        -- icons / text used for a diagnostic
-        error = "",
-        warning = "",
-        hint = "",
-        information = "",
-        other = "﫠"
-    },
-    use_lsp_diagnostic_signs = false -- enabling this will use the signs defined in your lsp client
-}
-end
+-- local has_trouble, trouble = pcall(require, 'trouble')
+-- if false then
+-- end
 
 -- hack
 local _, notifs = pcall(require, "notifications")

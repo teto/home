@@ -6,7 +6,7 @@ in
   programs.git = {
     enable = true;
     package = pkgs.gitAndTools.gitFull;    # to get send-email
-    delta.enable = false;
+    delta.enable = true;
     userName = "Matthieu Coudron";
     userEmail = "mcoudron@hotmail.com";
 	includes = [
