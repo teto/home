@@ -284,10 +284,6 @@ Plug 'vimwiki/vimwiki', { 'branch': 'dev'}   " to write notes
 " Plug 'nvim-lua/completion-nvim' " lsp based completion framework
 " treesitter may slow down nvim
 
-" github-comment requires webapi (https://github.com/mattn/webapi-vim)
-" use octo instead
-" Plug 'kthibodeaux/pull-review'     " :PullReviewList
-
 " does not work seems to be better ones
 " Plug 'vasconcelloslf/vim-interestingwords' " highlight the words you choose <leader>k (does not work in neovim)
 Plug 't9md/vim-quickhl' " hl manually selected words :h QuickhlManualEnable

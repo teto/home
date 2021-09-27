@@ -30,7 +30,7 @@ in
     # path = https://github.com/rycee/home-manager/archive/master.tar.gz;
     # failshome.folder +
     # must be a string
-    path =  "/home/teto/home-manager";
+    # path =  "/home/teto/home-manager";
   };
 
   # for blue tooth applet; must be installed systemwide

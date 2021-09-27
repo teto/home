@@ -43,5 +43,4 @@ in
   };
 
   nix.trustedUsers = ["teto"];
-
 }

@@ -2,12 +2,6 @@
 let
   terminalCommand = pkgs.kitty;
 
-  # TODO copy it
-  unicode-data = pkgs.fetchurl {
-    url = "http://www.unicode.org/Public/UNIDATA/UnicodeData.txt";
-    sha256 = "16b0jzvvzarnlxdvs2izd5ia0ipbd87md143dc6lv6xpdqcs75s9";
-  };
-
   texliveEnv = pkgs.texlive.combine {
     # tabularx is not available
     inherit (pkgs.texlive) scheme-small cleveref latexmk bibtex algorithms cm-super
@@ -266,15 +260,6 @@ in
     # '';
   };
 
-  programs.rbw = {
-    enable = true;
-    settings = {
-        email = "name@example.com";
-        lock_timeout = 300;
-        pinentry = "gnome3";
-    };
-  };
-
 
   # as long as there is no better way to configure i3
   home.file.".pypirc".source = ../../home/pypirc;
@@ -301,6 +286,14 @@ in
 
 # [Removed Associations]
 # application/pdf=Mendeley.desktop
+  programs.rbw = {
+    enable = true;
+    settings = {
+        email = config.accounts.email.accounts.fastmail.address;
+        lock_timeout = 300;
+        pinentry = "gnome3";
+    };
+  };
 
 
 }

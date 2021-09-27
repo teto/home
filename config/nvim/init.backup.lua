@@ -58,15 +58,34 @@ end
 -- }
 -- Packer can manage itself as an optional plugin
 -- use {'wbthomason/packer.nvim', opt = true}
-use {'kristijanhusak/orgmode.nvim', config = function()
+use {'kristijanhusak/orgmode.nvim',
+	config = function()
 	-- it maps <leader>oc
         -- require('orgmode').setup{}
-end
+	end
 }
--- Lua
 use {
 	"SmiteshP/nvim-gps",
-	requires = "nvim-treesitter/nvim-treesitter"
+	requires = "nvim-treesitter/nvim-treesitter",
+	config = function ()
+		-- Example config
+		local has_gps, gps = pcall(require, 'nvim-gps')
+		gps.setup({
+			icons = {
+				["class-name"] = ' ',      -- Classes and class-like objects
+				["function-name"] = ' ',   -- Functions
+				["method-name"] = ' '      -- Methods (functions inside class-like objects)
+			},
+			-- Disable any languages individually over here
+			-- Any language not disabled here is enabled by default
+			languages = {
+				-- ["bash"] = false,
+				-- ["go"] = false,
+			},
+			separator = ' > ',
+		})
+	end
+
 }
 use 'edluffy/hologram.nvim' -- see https://github.com/edluffy/hologram.nvim#usage for usage
 use 'windwp/nvim-spectre' -- search & replace 
@@ -95,7 +114,7 @@ use {
 		}
 	end
 
-} 
+}
 use { 'nvim-lua/popup.nvim'  }  -- mimic vim's popupapi for neovim
 -- use { 'nvim-lua/plenary.nvim' } -- lua utilities for neovim
 use {
@@ -181,9 +200,11 @@ end)
 end
 }
 -- use { 'wfxr/minimap.vim' }
-use { 'pwntester/octo.nvim'
--- , requires = { 'nvim-lua/popup.nvim' }
-}  -- to work with github
+-- use {
+-- 	-- to work with github
+-- 	'pwntester/octo.nvim'
+-- -- , requires = { 'nvim-lua/popup.nvim' }
+-- }
 
 use { 'notomo/gesture.nvim' }
 -- use { 'svermeulen/vimpeccable'} -- broken ?
@@ -194,11 +215,36 @@ use { 'tjdevries/astronauta.nvim' }
 	-- , requires = {"rktjmp/lush.nvim"} 
 	-- }
 use { 'onsails/lspkind-nvim' }
-use { 'phaazon/hop.nvim' }   -- sneak.vim equivalent
+use {
+	'phaazon/hop.nvim',
+	config = function ()
+		require 'hop'.setup {}
+	end
+}   -- sneak.vim equivalent
+
 use { 'alec-gibson/nvim-tetris', opt = true }
+
 -- use { 'mfussenegger/nvim-dap'} -- debug adapter protocol
 use { 'bazelbuild/vim-bazel' , requires = { 'google/vim-maktaba' } }
-use 'matbme/JABS.nvim'
+
+use {
+	'matbme/JABS.nvim',
+	config = function ()
+		require 'jabs'.setup {
+			position = 'center', -- center, corner
+			width = 50,
+			height = 10,
+			border = 'shadow', -- none, single, double, rounded, solid, shadow, (or an array or chars)
+
+			-- the options below are ignored when position = 'center'
+			col = 0,
+			row = 0,
+			anchor = 'NW', -- NW, NE, SW, SE
+			relative = 'win', -- editor, win, cursor
+		}
+	end
+}
+
 use {
   "folke/trouble.nvim",
 --   requires = "kyazdani42/nvim-web-devicons",
@@ -231,7 +277,21 @@ use 'Pocco81/AutoSave.nvim' -- :ASToggle /AsOn / AsOff
 use 'hoob3rt/lualine.nvim'
 use 'arkav/lualine-lsp-progress'
 
--- use 'sunjon/shade.nvim'
+-- use {
+-- 	'sunjon/shade.nvim'
+-- 	config = function ()
+-- 		shade.setup({
+-- 			overlay_opacity = 70,
+-- 			opacity_step = 1,
+-- 			-- keys = {
+-- 			--   brightness_up    = '<C-Up>',
+-- 			--   brightness_down  = '<C-Down>',
+-- 			--   toggle           = '<Leader>s',
+-- 			-- }
+-- 		})
+-- 	end
+-- }
+
 -- use fzf to search through diagnostics
 -- use { 'ojroques/nvim-lspfuzzy'}
 
@@ -319,18 +379,6 @@ if has_whichkey then
 
 end
 
-require 'jabs'.setup {
-	position = 'center', -- center, corner
-	width = 50,
-	height = 10,
-	border = 'shadow', -- none, single, double, rounded, solid, shadow, (or an array or chars)
-
-	-- the options below are ignored when position = 'center'
-	col = 0,
-	row = 0,
-	anchor = 'NW', -- NW, NE, SW, SE
-	relative = 'win', -- editor, win, cursor
-}
 
 -- since it was not merge yet
 if vim.ui then
@@ -565,47 +613,6 @@ if has_bufferline then
 	}
 end
 
--- local lspfuzzy_available, lspfuzzy = pcall(require, "lspfuzzy")
--- if lspfuzzy_available then
--- 	lspfuzzy.setup {}
--- end
-
-local has_shade, shade = pcall(require, "shade")
-if has_shade then
-	shade.setup({
-		overlay_opacity = 70,
-		opacity_step = 1,
-		-- keys = {
-		--   brightness_up    = '<C-Up>',
-		--   brightness_down  = '<C-Down>',
-		--   toggle           = '<Leader>s',
-		-- }
-	})
-end
-
-
--- local has_neogit, neogit = pcall(require, 'neogit')
--- if has_neogit then
--- end
-
-
--- Example config
-local has_gps, gps = pcall(require, 'nvim-gps')
-
-gps.setup({
-	icons = {
-		["class-name"] = ' ',      -- Classes and class-like objects
-		["function-name"] = ' ',   -- Functions
-		["method-name"] = ' '      -- Methods (functions inside class-like objects)
-	},
-	-- Disable any languages individually over here
-	-- Any language not disabled here is enabled by default
-	languages = {
-		-- ["bash"] = false,
-		-- ["go"] = false,
-	},
-	separator = ' > ',
-})
 
 -- use with neogit.status.create(<kind>)
 -- Treesitter config {{{
@@ -728,6 +735,7 @@ if has_telescope then
 	-- User TelescopePreviewerLoaded
 end
 --}}}
+
 -- nvim-comment {{{
 -- replace vim-commentary
 -- require('nvim_comment').setup()
@@ -912,11 +920,6 @@ vim.lsp.notifier = notifs
 
 if vim.notify then
 	vim.notify = notifs.notify_external
-end
-
-local has_hop, hop = pcall(require, 'hop')
-if has_hop then
-	hop.setup {}
 end
 
 -- options to pass to goto_next/goto_prev
