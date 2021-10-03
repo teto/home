@@ -217,7 +217,7 @@ let
     notmuch.enable = true;
 
     primary = true;
-    userName = "mattator";
+    userName = "mattator@gmail.com";
     realName = "Matt";
     address = "mattator@gmail.com";
     flavor = "gmail.com";

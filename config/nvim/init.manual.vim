@@ -54,7 +54,7 @@ Plug 'kevinhwang91/rnvimr'
 " Plug 'andymass/vim-matchup' " to improve % , buggy ?
 Plug 'eugen0329/vim-esearch' " search & replace
 " Plug 'eugen0329/vim-esearch' " search & replace
-Plug '~/neovim-ui'
+Plug '~/neovim/neovim-ui'
 Plug 'kshenoy/vim-signature' " display marks in gutter, love it
 " Plug 'mhinz/vim-signify'  " *
 
@@ -92,12 +92,12 @@ Plug 'MattesGroeger/vim-bookmarks' " ruby  / :BookmarkAnnotate
 Plug 'skywind3000/vim-quickui' " to design cool uis
 Plug 'liuchengxu/vista.vim' " to list workplace symbols
 " Plug 'neovim/nvim-lspconfig' " while fuzzing details out
-Plug '~/nvim-lspconfig' " while fuzzing details out
+Plug '~/neovim/nvim-lspconfig' " while fuzzing details out
 " Plug 'puremourning/vimspector' " to debug programs
 Plug 'bfredl/nvim-luadev'  " lua repl :Luadev
 " Plug 'hotwatermorning/auto-git-diff' " to help rebasing, damn cool
 " Plug 'norcalli/nvim-terminal.lua' " to display ANSI colors
-Plug '~/nvim-terminal.lua' " to display ANSI colors
+Plug '~/neovim/nvim-terminal.lua' " to display ANSI colors
 Plug 'bogado/file-line' " to open a file at a specific line
 " Plug 'glacambre/firenvim' " to use nvim in firefox
 Plug 'alok/notational-fzf-vim' " to take notes, :NV
@@ -2023,6 +2023,9 @@ let content = [
             \ ['Start search and replace', 'lua require("spectre").open()'],
             \ ['Toggle obsession', 'Obsession'],
             \ ['Toggle minimap', 'MinimapToggle'],
+            \ ['REPL - '],
+            \ ['Send line ', 'lua require''luadev''.exec(vim.api.nvim_get_current_line())'],
+            \ ['Send selection ', 'call <SID>luadev_run_operator(v:true)']
             \ ]
 " map 2 <cmd>lua vim.lsp.buf.code_action()
 

@@ -20,13 +20,11 @@
     nova.url = "git+ssh://git@git.novadiscovery.net/world/nova-nix.git?ref=master";
     neovim = {
       url = "github:neovim/neovim?dir=contrib";
-      # url = "github:teto/neovim?dir=contrib&ref=bump-libuv";
-      # url = "github:teto/neovim/cursor-update-on-colresize?dir=contrib";
       inputs.nixpkgs.follows = "nixpkgs-teto";
     };
 
-    # TODO one can point at a subfolder ou bien c la branche ? /flakes
-    # mptcpanalyzer.url = "github:teto/mptcpanalyzer";
+    # TODO extend vim plugins from this overlay
+    neovim-overlay.url = "github:teto/neovim-nightly-overlay/vimPlugins-overlay";
 
     # nix-direnv = {
     #   url = "github:nix-community/nix-direnv";

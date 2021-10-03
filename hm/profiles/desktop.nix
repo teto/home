@@ -122,7 +122,7 @@ let
     sd  # rust cli for search & replace
     shared_mime_info # temporary fix for nautilus to find the correct files
     sublime3
-    sxiv # simple image viewer
+    # sxiv # simple image viewer
     translate-shell
     wally-cli  # to flash ergodox keyboards
     wireshark

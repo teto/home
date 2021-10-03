@@ -1,48 +1,8 @@
-with import <nixpkgs> {};
+(import (
+  fetchTarball {
+    url = "https://github.com/edolstra/flake-compat/archive/12c64ca55c1014cdc1b16ed5a804aa8576601ff2.tar.gz";
+    sha256 = "0jm6nzb83wa6ai17ly9fzpqc40wg1viib8klq8lby54agpl213w5"; }
+) {
+  src =  ./contrib;
+}).shellNix
 
-let
-
-  postConfigure = ''
-    ln -s compile_commands.json ..
-  '';
-
-  nvim-shell-dev = pkgs.neovim-developer.overrideAttrs(oa: {
-
-    cmakeFlags = oa.cmakeFlags ++ [
-      "-DENABLE_LTO=OFF"
-      # ''-DCMAKE_C_FLAGS=-gdwarf-2'' #  -g3
-      # useful to
-      # https://github.com/google/sanitizers/wiki/AddressSanitizerFlags
-      # https://clang.llvm.org/docs/AddressSanitizer.html#symbolizing-the-reports
-      # "-DCLANG_ASAN_UBSAN=ON"
-	];
-
-    nativeBuildInputs = oa.nativeBuildInputs ++ [
-      # testing between both
-      pkgs.ccls
-      pkgs.clang-tools  # for clangd
-      pkgs.llvm_11  # for llvm-symbolizer
-      # pkgs.valgrind
-    ];
-
-    shellHook = oa.shellHook + ''
-      export NVIM_PYTHON_LOG_LEVEL=DEBUG
-      export NVIM_LOG_FILE=/tmp/log
-      # export NVIM_PYTHON_LOG_FILE=/tmp/log
-      export VALGRIND_LOG="$PWD/valgrind.log"
-
-      export NVIM_TEST_PRINT_I=1
-      export NVIM_TEST_MAIN_CDEFS=1
-      echo "echo getpid()"
-      echo "To run tests:"
-      echo "test/functional/fswatch/fswatch_spec.lua"
-      echo "VALGRIND=1 TEST_FILE=test/functional/core/job_spec.lua TEST_TAG=env make functionaltest"
-      # ASAN_OPTIONS=halt_on_error=0
-      #  ./stderr
-      # halt_on_error=1
-      export ASAN_OPTIONS="log_path=./test.log:abort_on_error=0"
-      export UBSAN_OPTIONS=print_stacktrace=1
-    '';
-  });
-in
-  nvim-shell-dev
