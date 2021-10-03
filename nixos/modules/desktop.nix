@@ -49,15 +49,12 @@ in
     # use the example session manager (no others are packaged yet so this is enabled by default,
     # no need to redefine it in your config for now)
     #media-session.enable = true;
-  };
-
-  services.pipewire = {
     config.pipewire = {
       "properties" = {
         #"link.max-buffers" = 64;
-	"link.max-buffers" = 16; # version < 3 clients can't handle more than this
+	# "link.max-buffers" = 16; # version < 3 clients can't handle more than this
 	"log.level" = 2;
-        #"default.clock.rate" = 48000;
+        # "default.clock.rate" = 48000; # 44100
         #"default.clock.quantum" = 1024;
         #"default.clock.min-quantum" = 32;
         #"default.clock.max-quantum" = 8192;
@@ -189,12 +186,19 @@ in
       item = "core";
       value = "unlimited";
     }
+    {
+      domain = "*";
+      type = "hard";
+      item = "memlock";
+      value = "256";
+    }
   ];
 
 # nixpkgs/modules/config-all.nix|262 col 15| environment.etc."inputrc".source = ../../config/inputrc;
   environment.etc."security/limits.conf".text = ''
     #[domain]        [type]  [item]  [value]
     teto  soft  core  unlimited
+    *  hard  memlock  256
   '';
   # teto  hard  core  unlimited
 

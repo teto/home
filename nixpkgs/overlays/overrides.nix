@@ -7,27 +7,12 @@ let
 
 in
 rec {
-  # steam = prev.steam.override {
-  #   extraLibraries = pkgs: with prev.pkgs; [
-  #     pipewire
-  #   ];
-  # };
-
 
   protocol-local = prev.protocol.overrideAttrs (oldAttrs: {
     src = builtins.fetchGit {
       url = https://github.com/teto/protocol;
     };
   });
-
-
-  # neovide
-  #     shellHook = ''
-  #       echo "hello world"
-  #       echo 'patchelf --set-rpath "${final.lib.makeLibraryPath rpathLibs}" target/debug/neovide'
-  #     '';
-  # });
-
 
   # xdg_utils = prev.xdg_utils.overrideAttrs(oa: {
   #   pname = "xdg-utils-custom";

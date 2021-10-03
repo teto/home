@@ -150,7 +150,12 @@ use {'nvim-telescope/telescope-fzy-native.nvim'}
 use { 'nvim-telescope/telescope-media-files.nvim'}
 -- use "terrortylor/nvim-comment"
 -- shows a lightbulb where a codeAction is available
-use { 'kosayoda/nvim-lightbulb' }
+use { 'kosayoda/nvim-lightbulb',
+	config = function ()
+		vim.cmd [[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]]
+	end
+}
+
 -- compete with registers.nvim
 use { 'gennaro-tedesco/nvim-peekup' }
 use { 'nvim-telescope/telescope-packer.nvim' }

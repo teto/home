@@ -1,12 +1,14 @@
-alec-gibson/nvim-tetris
-davidgranstrom/nvim-markdown-preview
-euclio/vim-markdown-composer
-glacambre/firenvim
-JamshedVesuna/vim-markdown-preview
-jubnzv/virtual-types.nvim
-nvim-telescope/telescope.nvim
-pwntester/octo.nvim
-shime/vim-livedown
-tversteeg/registers.nvim@main
-nvim-treesitter/nvim-treesitter-textobjects@0.5-compat
-nvim-treesitter/nvim-treesitter@0.5-compat
+# alec-gibson/nvim-tetris
+# davidgranstrom/nvim-markdown-preview
+# euclio/vim-markdown-composer
+# glacambre/firenvim
+# JamshedVesuna/vim-markdown-preview
+# jubnzv/virtual-types.nvim
+# nvim-telescope/telescope.nvim
+# nvim-treesitter/nvim-treesitter-textobjects@0.5-compat
+# nvim-treesitter/nvim-treesitter@0.5-compat
+# pwntester/octo.nvim
+# shime/vim-livedown
+# TimUntersberger/neogit
+# tversteeg/registers.nvim@main
+lewis6991/gitsigns.nvim@main
