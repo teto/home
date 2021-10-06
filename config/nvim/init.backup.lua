@@ -327,7 +327,8 @@ use 'Pocco81/AutoSave.nvim' -- :ASToggle /AsOn / AsOff
 -- use 'vim-airline/vim-airline'
 -- use 'vim-airline/vim-airline-themes' -- creates problems if not here
 
-use 'hoob3rt/lualine.nvim'
+-- use 'hoob3rt/lualine.nvim'
+use 'shadmansaleh/lualine.nvim' -- fork of hoob3rt/lualine
 use 'arkav/lualine-lsp-progress'
 
 -- use {
@@ -904,14 +905,14 @@ lualine.setup {
     lualine_y = {'progress'},
     lualine_z = {'location'}
   },
-  inactive_sections = {
-    lualine_a = {},
-    lualine_b = {},
-    lualine_c = {'filename', 'lsp_progress'},
-    lualine_x = {'location'},
-    lualine_y = {},
-    lualine_z = {}
-  },
+  -- inactive_sections = {
+  --   lualine_a = {},
+  --   lualine_b = {},
+  --   lualine_c = {'filename', 'lsp_progress'},
+  --   lualine_x = {'location'},
+  --   lualine_y = {},
+  --   lualine_z = {}
+  -- },
   tabline = {},
   extensions = { 'fzf', 'fugitive'}
 }

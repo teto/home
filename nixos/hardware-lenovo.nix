@@ -30,7 +30,7 @@
     ];
 
   fileSystems."/mnt/ext" =
-    { device = "/dev/sda1";
+    { device = "/dev/disk/by-uuid/d118729e-bc3d-4e02-bf6b-f0cb54fef2a1";
       fsType = "ext4";
       # "exec"
       # user disables exec

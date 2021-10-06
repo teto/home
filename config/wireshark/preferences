@@ -10,7 +10,7 @@
 # Open a console window (Windows only)
 # One of: NEVER, AUTOMATIC, ALWAYS
 # (case-insensitive).
-gui.console_open: ALWAYS
+gui.console_open: NEVER
 
 # Restore current display filter after following a stream?
 # TRUE or FALSE (case-insensitive)
@@ -379,7 +379,7 @@ capture.devices_pmode: virbr0(1),vnet0(1),docker0(1),wlo1(1),eno2(1),vethcc33b84
 # MESSAGE  = 32
 # INFO     = 64
 # DEBUG    = 128
-console.log.level: 64
+console.log.level: 4
 
 # Look for dissectors that left some bytes undecoded (debug)
 # TRUE or FALSE (case-insensitive)

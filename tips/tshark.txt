@@ -5,3 +5,5 @@ tshark -f "not port 22"
 
 tshark -i <IF> -f "tcp"
 port 22
+
+in the wireshark config
