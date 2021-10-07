@@ -173,6 +173,7 @@
                   ./nixos/profiles/nix-daemon.nix
                   ./nixos/profiles/neovim.nix
                   ./nixos/modules/xserver.nix
+                  ./nixos/modules/redis.nix
                   ./nixos/hardware-lenovo.nix
                   ./nixos/profiles/steam.nix
                   # inputs.mptcp-flake.nixosModules.mptcp

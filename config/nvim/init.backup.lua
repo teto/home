@@ -157,6 +157,8 @@ use { 'kosayoda/nvim-lightbulb',
 }
 
 -- compete with registers.nvim
+-- https://github.com/gelguy/wilder.nvim
+-- use { 'gelguy/wilder.nvim' }
 use { 'gennaro-tedesco/nvim-peekup' }
 use { 'nvim-telescope/telescope-packer.nvim' }
 --use { 'TimUntersberger/neogit',
