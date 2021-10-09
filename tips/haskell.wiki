@@ -1,5 +1,6 @@
-CABAL_HELPER_DEBUG=1
+﻿CABAL_HELPER_DEBUG=1
 
+cabal haddock --haddock-executables
 
 # How to convert between Text/String/ByteString
 import Data.Text.Encoding
@@ -58,6 +59,9 @@ NT = natural transformation
 
 -ddump-timings
 
+
+# 
+cabal haddock --executables
 
 # Lenses
 ~. -> view

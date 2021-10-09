@@ -146,7 +146,7 @@ let
 
     # Relative path of the inbox mail.
     folders.sent = "Sent";
-    folders.trash = "[Gmail]/Trash";
+    folders.trash = "Trash";
 
   # CopyArrivalDate
     mbsync = mbsyncConfig // {
@@ -322,7 +322,7 @@ in
   # programs.muchsync = { };
 
   programs.astroid = {
-    enable = false;
+    enable = true;
     # TODO factor with my mbsyncwrapper ?
     pollScript = ''
       check-mail.sh gmail
@@ -334,12 +334,14 @@ in
       poll.interval = 0;
       # TODO use "killed"
       startup.queries = {
-        "Unread iij"= "tag:unread and not tag:deleted and not tag:muted and not tag:ietf and to:coudron@iij.ad.jp";
+        # "Unread iij"= "tag:unread and not tag:deleted and not tag:muted and not tag:ietf and to:coudron@iij.ad.jp";
         "Unread gmail"= "tag:unread and not tag:deleted and not tag:muted and not tag:ietf and to:mattator@gmail.com";
         "Flagged"= "tag:flagged";
         # "Drafts"= "tag:draft";
+        "fastmail"= "tag:unread and not tag:deleted and not tag:muted and not tag:ietf and to:matthieucoudron@fastmail.com";
+        # "nova"= "tag:unread and not tag:deleted and not tag:muted and not tag:ietf and to:mattator@gmail.com";
         "ietf"= "tag:ietf";
-        # "gh"= "tag:gh";
+        "gh"= "tag:gh";
       };
     };
 

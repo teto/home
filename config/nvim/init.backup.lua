@@ -38,26 +38,13 @@ end
 -- my_image:transmit() -- send image data to terminal
 
 
--- use { 'haorenW1025/completion-nvim', opt = true,
--- requires = {{'hrsh7th/vim-vsnip', opt = true}, {'hrsh7th/vim-vsnip-integ', opt = true}}
--- }
 -- use { "~/telescope-frecency.nvim", }
--- 	requires = {
--- 		{'hrsh7th/vim-vsnip', opt = true},
--- 		-- {'tami5/sql.nvim', opt = false}
--- 	},
--- 	config = function()
--- 		telescope.load_extension("frecency")
--- 	end
--- }
 
 -- provides TSContextEnable / TSContextDisable
 -- shows current function on first line
 -- use { 'romgrk/nvim-treesitter-context',
 -- 	requires = { 'nvim-treesitter/nvim-treesitter' }
 -- }
--- Packer can manage itself as an optional plugin
--- use {'wbthomason/packer.nvim', opt = true}
 use {'kristijanhusak/orgmode.nvim',
 	config = function()
 	-- it maps <leader>oc
@@ -155,10 +142,13 @@ use { 'kosayoda/nvim-lightbulb',
 		vim.cmd [[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]]
 	end
 }
+-- using packer.nvim
+use {'akinsho/bufferline.nvim', requires = 'kyazdani42/nvim-web-devicons'}
 
 -- compete with registers.nvim
 -- https://github.com/gelguy/wilder.nvim
 -- use { 'gelguy/wilder.nvim' }
+use { 'nathom/filetype.nvim' }
 use { 'gennaro-tedesco/nvim-peekup' }
 use { 'nvim-telescope/telescope-packer.nvim' }
 --use { 'TimUntersberger/neogit',
@@ -319,19 +309,132 @@ use {
 --   requires = { { 'hoob3rt/lualine.nvim', opt=true }, 'kyazdani42/nvim-web-devicons' }
 -- }
 use 'MunifTanjim/nui.nvim' -- to create UIs
-use 'hrsh7th/nvim-compe' -- for autocompletion
+-- use 'hrsh7th/nvim-compe' -- for autocompletion
+-- use 'rafamadriz/friendly-snippets'
+
+use {
+	'hrsh7th/nvim-cmp',
+-- use 'hrsh7th/cmp-nvim-lsp' -- LSP source for nvim-cmp
+-- use 'saadparwaiz1/cmp_luasnip' -- Snippets source for nvim-cmp
+
+	requires = {
+		-- "quangnguyen30192/cmp-nvim-ultisnips",
+		'hrsh7th/cmp-vsnip',
+		'hrsh7th/cmp-nvim-lsp',
+		'hrsh7th/cmp-buffer',
+		'hrsh7th/vim-vsnip',
+		'hrsh7th/vim-vsnip-integ',
+		'rafamadriz/friendly-snippets'
+	},
+	config = function ()
+
+  -- require('lspconfig')[%YOUR_LSP_SERVER%].setup {
+  --   capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+  -- }
+  	local cmp = require 'cmp'
+  	cmp.setup({
+    snippet = {
+	  expand = function(args)
+        -- For `vsnip` user.
+        vim.fn["vsnip#anonymous"](args.body)
+
+        -- For `luasnip` user.
+        -- require('luasnip').lsp_expand(args.body)
+
+        -- For `ultisnips` user.
+        -- vim.fn["UltiSnips#Anon"](args.body)
+      end,
+    },
+    mapping = {
+      ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+      ['<C-f>'] = cmp.mapping.scroll_docs(4),
+      ['<C-Space>'] = cmp.mapping.complete(),
+      ['<C-e>'] = cmp.mapping.close(),
+      ['<CR>'] = cmp.mapping.confirm({ select = true }),
+    },
+    sources = {
+      -- { name = 'nvim_lsp' },
+
+      -- For vsnip user.
+      { name = 'vsnip' },
+
+      -- For luasnip user.
+      -- { name = 'luasnip' },
+
+      -- For ultisnips user.
+      -- { name = 'ultisnips' },
+
+      { name = 'buffer' },
+    }
+  })
+
+  end
+}
+
 use 'vhyrro/neorg'    -- testing
 use 'ray-x/lsp_signature.nvim' -- display function signature in insert mode
-use 'Pocco81/AutoSave.nvim' -- :ASToggle /AsOn / AsOff
+use { 'Pocco81/AutoSave.nvim' -- :ASToggle /AsOn / AsOff
+	, config = function ()
+		local autosave = require("autosave")
+		autosave.setup({
+				enabled = true,
+				execution_message = "AutoSave: saved at " .. vim.fn.strftime("%H:%M:%S"),
+				events = {"InsertLeave"},
+				conditions = {
+					exists = true,
+					filetype_is_not = {},
+					modifiable = true
+				},
+				write_all_buffers = false,
+				on_off_commands = true,
+				clean_command_line_interval = 2500
+			}
+		)
+end
+}
 -- use 'sindrets/diffview.nvim' -- :DiffviewOpen
 -- use 'folke/which-key.nvim' -- :WhichKey
 
--- use 'vim-airline/vim-airline'
--- use 'vim-airline/vim-airline-themes' -- creates problems if not here
 
 -- use 'hoob3rt/lualine.nvim'
-use 'shadmansaleh/lualine.nvim' -- fork of hoob3rt/lualine
-use 'arkav/lualine-lsp-progress'
+use { 'shadmansaleh/lualine.nvim' -- fork of hoob3rt/lualine
+	, requires = { 'arkav/lualine-lsp-progress' }
+	, config = function ()
+		require'lualine'.setup {
+		options = {
+			icons_enabled = false,
+			-- theme = 'gruvbox',
+			component_separators = {'', ''},
+			section_separators = {'', ''},
+			disabled_filetypes = {}
+		},
+		sections = {
+			lualine_a = {'mode'},
+			lualine_b = {'branch'},
+
+			lualine_c = {
+				'filename',
+				'lsp_progress'
+				-- ,  gps.get_location, condition = gps.is_available
+			},
+			lualine_x = {'encoding', 'fileformat', 'filetype'},
+			lualine_y = {'progress'},
+			lualine_z = {'location'}
+		},
+		-- inactive_sections = {
+		--   lualine_a = {},
+		--   lualine_b = {},
+		--   lualine_c = {'filename', 'lsp_progress'},
+		--   lualine_x = {'location'},
+		--   lualine_y = {},
+		--   lualine_z = {}
+		-- },
+		tabline = {},
+		extensions = { 'fzf', 'fugitive'}
+		}
+	end
+}
+
 
 -- use {
 -- 	'sunjon/shade.nvim'
@@ -483,21 +586,6 @@ vim.ui.pick = function (entries, opts)
 end
 end
 
-local autosave = require("autosave")
-autosave.setup({
-        enabled = true,
-        execution_message = "AutoSave: saved at " .. vim.fn.strftime("%H:%M:%S"),
-        events = {"InsertLeave"},
-        conditions = {
-            exists = true,
-            filetype_is_not = {},
-            modifiable = true
-        },
-        write_all_buffers = false,
-        on_off_commands = true,
-        clean_command_line_interval = 2500
-    }
-)
 
 -- review locally github PRs
 local has_octo, octo = pcall(require, "octo")
@@ -813,58 +901,6 @@ require 'myTreesitter'
 -- logs are written to /home/teto/.cache/vim-lsp.log
 vim.lsp.set_log_level("info")
 
-local has_compe, compe = pcall(require, "compe")
-if has_compe then
-
-  compe.setup {
-	enabled = false;
-	autocomplete = true;
-	debug = false;
-	min_length = 1;
-	preselect = 'enable';
-	throttle_time = 80;
-	source_timeout = 200;
-	incomplete_delay = 400;
-	max_abbr_width = 100;
-	max_kind_width = 100;
-	max_menu_width = 100;
-	documentation = {
-		border = { '', '' ,'', ' ', '', '', '', ' ' }, -- the border option is the same as `|help nvim_open_win|`
-		winhighlight = "NormalFloat:CompeDocumentation,FloatBorder:CompeDocumentationBorder",
-		max_width = 120,
-		min_width = 60,
-		max_height = math.floor(vim.o.lines * 0.3),
-		min_height = 1,
-	};
-	source = {
-		path = true;
-		buffer = true;
-		calc = true;
-		nvim_lsp = true;
-		nvim_lua = true;
-		vsnip = true;
-		ultisnips = true;
-		luasnip = true;
-	};
-  };
-
-  local inoremap = k.inoremap
-  inoremap { "<C-Space>", function () vim.fn['compe#complete']() end, expr = true }
-  -- inoremap { "<CR>", function () vim.cmd('compe#confirm("<CR>")') end, expr=true }
-  inoremap { "<C-e>", function () vim.cmd('compe#close("<c-e>")') end , expr=true }
-  inoremap { "<C-f>", function () vim.cmd('compe#scroll({ "delta": +4 })') end , expr=true }
-  inoremap { "<C-d>", function () vim.cmd('compe#scroll({ "delta": -4 })') end , expr=true }
-
--- nnoremap { "<Leader>o", function () vim.cmd("FzfFiles") end}
--- inoremap <silent><expr> <C-Space> compe#complete()
--- inoremap <silent><expr> <CR>      compe#confirm('<CR>')
--- inoremap <silent><expr> <C-e>     compe#close('<C-e>')
--- inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
--- inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
-end
-
-
-
 -- local has_trouble, trouble = pcall(require, 'trouble')
 -- if false then
 -- end
@@ -883,42 +919,6 @@ end
 -- 	severity_limit = "Warning"
 -- }
 
-
-local has_lualine, lualine = pcall(require, 'lualine')
-if has_lualine then
-lualine.setup {
-  options = {
-    icons_enabled = false,
-    -- theme = 'gruvbox',
-    component_separators = {'', ''},
-    section_separators = {'', ''},
-    disabled_filetypes = {}
-  },
-  sections = {
-    lualine_a = {'mode'},
-    lualine_b = {'branch'},
-
-    lualine_c = {
-		'filename',
-		'lsp_progress'
-		-- ,  gps.get_location, condition = gps.is_available
-	},
-    lualine_x = {'encoding', 'fileformat', 'filetype'},
-    lualine_y = {'progress'},
-    lualine_z = {'location'}
-  },
-  -- inactive_sections = {
-  --   lualine_a = {},
-  --   lualine_b = {},
-  --   lualine_c = {'filename', 'lsp_progress'},
-  --   lualine_x = {'location'},
-  --   lualine_y = {},
-  --   lualine_z = {}
-  -- },
-  tabline = {},
-  extensions = { 'fzf', 'fugitive'}
-}
-end
 
 
 
