@@ -404,8 +404,8 @@ use { 'shadmansaleh/lualine.nvim' -- fork of hoob3rt/lualine
 		options = {
 			icons_enabled = false,
 			-- theme = 'gruvbox',
-			component_separators = {'', ''},
-			section_separators = {'', ''},
+			component_separators = {left='', riht=''},
+			section_separators = {left='', right=''},
 			disabled_filetypes = {}
 		},
 		sections = {

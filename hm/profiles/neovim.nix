@@ -76,7 +76,6 @@ let
         ));
     }
     {
-      # 
       plugin = auto-git-diff;
     }
     {

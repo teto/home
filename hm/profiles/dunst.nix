@@ -16,7 +16,6 @@
         # dmenu = /usr/local/bin/rofi -dmenu -p dunst:
         alignment = "right";
         geometry = "500x30-30+20";
-
       };
 
       shortcuts = {
