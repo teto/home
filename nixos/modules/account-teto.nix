@@ -18,6 +18,7 @@ in
        "plugdev" # for udiskie
        "jupyter"
        "video" # to control brightness
+       "realtime"  # for pipewire
        "wheel" # for sudo
        # "kvm" # don't think that's needed
      ];

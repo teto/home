@@ -198,6 +198,7 @@ in
   environment.etc."security/limits.conf".text = ''
     #[domain]        [type]  [item]  [value]
     teto  soft  core  unlimited
+    teto  soft  memlock 128
     *  hard  memlock  256
   '';
   # teto  hard  core  unlimited

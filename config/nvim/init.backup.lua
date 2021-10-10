@@ -319,9 +319,9 @@ use {
 
 	requires = {
 		-- "quangnguyen30192/cmp-nvim-ultisnips",
+		'hrsh7th/cmp-buffer',
 		'hrsh7th/cmp-vsnip',
 		'hrsh7th/cmp-nvim-lsp',
-		'hrsh7th/cmp-buffer',
 		'hrsh7th/vim-vsnip',
 		'hrsh7th/vim-vsnip-integ',
 		'rafamadriz/friendly-snippets'
