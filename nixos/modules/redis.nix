@@ -32,6 +32,26 @@
       # tls-ca-cert-dir = "/etc/ssl/certs";
       tls-ca-cert-file = "${../../data/ca.crt}";
       # syslog-enabled = "yes";
+
+
+# Configure allowed ciphers.  See the ciphers(1ssl) manpage for more information
+# about the syntax of this string.
+#
+# Note: this configuration applies only to <= TLSv1.2.
+#
+      tls-ciphers = "DEFAULT:!MEDIUM";
+
+# Configure allowed TLSv1.3 ciphersuites.  See the ciphers(1ssl) manpage for more
+# information about the syntax of this string, and specifically for TLSv1.3
+# ciphersuites.
+#
+# tls-ciphersuites TLS_CHACHA20_POLY1305_SHA256
+
+# When choosing a cipher, use the server's preference instead of the client
+# preference. By default, the server follows the client's preference.
+#
+      tls-prefer-server-ciphers = "yes";
+
     };
   };
 }

@@ -35,6 +35,20 @@ final: prev:
 
   # qtgo = prev.callPackage ./qtgo {};
 
+  # prev.haskellPackages.callHackage "hmatrix" "0.20.1" {};
+  haskell-docs-cli = prev.haskellPackages.callCabal2nix "haskell-docs-cli" ("${prev.fetchzip {
+        url = "https://github.com/lazamar/haskell-docs-cli/archive/e7f1a60db8696fc96987a3447d402c4d0d54b5e0.tar.gz";
+        sha256 = "sha256-/9VjXFgbBz/OXjxu8/N7enNdVs1sQZmUiKhjSTIl6Fg=";
+      }}") {};
+
+  # https://github.com/phuhl/linux_notification_center
+  # already packaged, just need the systemctl bus
+  # linux_notification_center = prev.haskellPackages.callCabal2nix "linux_notification_center" ("${prev.fetchzip {
+  #       url = "https://github.com/phuhl/linux_notification_center/archive/640ce0fc05a68f2c28be3d9f27fe73516d4332f9.tar.gz";
+  #       sha256 = "sha256-/9VjXFgbBz/OXjxu8/N7enNdVs1sQZmUiKhjSTIl5Fg=";
+  #     }}") {};
+
+
   menutray = prev.callPackage ./menutray {};
 
   colr = prev.callPackage ./colr {};
@@ -42,8 +56,6 @@ final: prev:
   dualsub = prev.callPackage ./dualsubtitles { };
 
   # mda-lite = prev.pythonPackages.callPackage ./mda-lite {};
-
-  mptcpnumerics = prev.python3Packages.callPackage ./mptcpnumerics.nix {};
 
   # install from the repo
   # neovim-gtk = prev.callPackage ./neovim-gtk { };

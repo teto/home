@@ -241,7 +241,7 @@ use {
 		}
 	end
 }
-
+-- use 'mrjones2014/dash.nvim' -- only for dash it seems
 use {
   "folke/trouble.nvim",
 --   requires = "kyazdani42/nvim-web-devicons",
