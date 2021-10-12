@@ -175,6 +175,7 @@
                   ./nixos/profiles/neovim.nix
                   ./nixos/modules/xserver.nix
                   ./nixos/modules/redis.nix
+                  ./nixos/modules/ntp.nix
                   ./nixos/hardware-lenovo.nix
                   ./nixos/profiles/steam.nix
                   # inputs.mptcp-flake.nixosModules.mptcp

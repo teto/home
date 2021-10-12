@@ -295,5 +295,31 @@ in
     };
   };
 
+  # systemd.user.services.xplugd = {
+  #   Unit = {
+  #     Description = "xplugd";
+  #     PartOf = [ "graphical-session.target" ];
+  #   };
+  #   Install.WantedBy = [ "graphical-session.target" ];
+  #   Service.ExecStart = "${pkgs.xplugd}/bin/xplugd -n";
+  # };
+
+
+  # Works only on x11
+  systemd.user.services.deadd = {
+    Unit = {
+      Description = "Linux notification manager";
+      After = [ "graphical-session-pre.target" ];
+      PartOf = [ "graphical-session.target" ];
+    };
+
+    Service = {
+      Type = "dbus";
+      BusName = "org.freedesktop.Notifications";
+      ExecStart = "${pkgs.deadd-notification-center}/bin/linux_notification_server";
+      # Environment = optionalString (cfg.waylandDisplay != "")
+      #   "WAYLAND_DISPLAY=${cfg.waylandDisplay}";
+    };
+  };
 
 }

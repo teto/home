@@ -60,23 +60,25 @@ in
     # check if it exists
     # colorsExtra = builtins.readFile ../config/termite/solarized-dark;
   };
-  systemd.user.services.xplugd = {
-    Unit = {
-      Description = "xplugd";
-      PartOf = [ "graphical-session.target" ];
-    };
-    Install.WantedBy = [ "graphical-session.target" ];
-    Service.ExecStart = "${pkgs.xplugd}/bin/xplugd -n";
-  };
-  xdg.configFile."xplugrc" = {
-    executable = true;
-    text = ''#!/bin/sh
-      case "$1,$3" in
-          keyboard,connected)
-              systemctl --user restart setxkbmap.service
-              ;;
-      esac
-    '';
-  };
+
+  # 
+  # systemd.user.services.xplugd = {
+  #   Unit = {
+  #     Description = "xplugd";
+  #     PartOf = [ "graphical-session.target" ];
+  #   };
+  #   Install.WantedBy = [ "graphical-session.target" ];
+  #   Service.ExecStart = "${pkgs.xplugd}/bin/xplugd -n";
+  # };
+  # xdg.configFile."xplugrc" = {
+  #   executable = true;
+  #   text = ''#!/bin/sh
+  #     case "$1,$3" in
+  #         keyboard,connected)
+  #             systemctl --user restart setxkbmap.service
+  #             ;;
+  #     esac
+  #   '';
+  # };
 
 }
