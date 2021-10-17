@@ -54,7 +54,6 @@ Plug 'hrsh7th/vim-vsnip-integ'
 Plug 'kevinhwang91/rnvimr'
 " Plug 'jubnzv/virtual-types.nvim' " moved to nix
 " Plug 'andymass/vim-matchup' " to improve % , buggy ?
-Plug 'eugen0329/vim-esearch' " search & replace
 " Plug 'eugen0329/vim-esearch' " search & replace
 Plug '~/neovim/neovim-ui'
 Plug 'kshenoy/vim-signature' " display marks in gutter, love it

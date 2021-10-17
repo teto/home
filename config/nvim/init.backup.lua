@@ -74,6 +74,41 @@ use {
 	end
 
 }
+use { 'chentau/marks.nvim',
+config = function ()
+
+	require'marks'.setup {
+		-- whether to map keybinds or not. default true
+		default_mappings = true,
+		-- which builtin marks to show. default {}
+		builtin_marks = { ".", "<", ">", "^" },
+		-- whether movements cycle back to the beginning/end of buffer. default true
+		cyclic = true,
+		-- whether the shada file is updated after modifying uppercase marks. default false
+		force_write_shada = false,
+		-- how often (in ms) to redraw signs/recompute mark positions. 
+		-- higher values will have better performance but may cause visual lag, 
+		-- while lower values may cause performance penalties. default 150.
+		refresh_interval = 250,
+		-- sign priorities for each type of mark - builtin marks, uppercase marks, lowercase
+		-- marks, and bookmarks.
+		-- can be either a table with all/none of the keys, or a single number, in which case
+		-- the priority applies to all marks.
+		-- default 10.
+		sign_priority = { lower=10, upper=15, builtin=8, bookmark=20 },
+		-- marks.nvim allows you to configure up to 10 bookmark groups, each with its own
+		-- sign/virttext. Bookmarks can be used to group together positions and quickly move
+		-- across multiple buffers. default sign is '!@#$%^&*()' (from 0 to 9), and
+		-- default virt_text is "".
+		bookmark_0 = {
+			sign = "⚑",
+			virt_text = "hello world"
+		},
+		mappings = {}
+	}
+end
+
+}
 use 'edluffy/hologram.nvim' -- see https://github.com/edluffy/hologram.nvim#usage for usage
 use 'windwp/nvim-spectre' -- search & replace 
 use 'ellisonleao/glow.nvim' -- markdown preview, run :Glow
@@ -271,7 +306,7 @@ use {
 --   requires = "kyazdani42/nvim-web-devicons",
 	-- Trouble {{{
 	config = function () 	
-	trouble.setup {
+	require'trouble'.setup {
     position = "bottom", -- position of the list can be: bottom, top, left, right}}}
     height = 10, -- height of the trouble list when position is top or bottom
     width = 50, -- width of the list when position is left or right
@@ -428,9 +463,10 @@ use { 'shadmansaleh/lualine.nvim' -- fork of hoob3rt/lualine
 		options = {
 			icons_enabled = false,
 			-- theme = 'gruvbox',
-			component_separators = {left='', riht=''},
+			component_separators = {left='', right=''},
 			section_separators = {left='', right=''},
-			disabled_filetypes = {}
+			separators = {left='', right=''},
+			-- disabled_filetypes = {}
 		},
 		sections = {
 			lualine_a = {'mode'},
@@ -756,7 +792,7 @@ if has_bufferline then
 			-- "ordinal"
 			numbers = "buffer_id",
 			-- number_style = "superscript" | "",
-			mappings = true,
+			-- mappings = true,
 			-- buffer_close_icon= '',
 			modified_icon = '●',
 			close_icon = '',
@@ -925,18 +961,14 @@ require 'myTreesitter'
 -- logs are written to /home/teto/.cache/vim-lsp.log
 vim.lsp.set_log_level("info")
 
--- local has_trouble, trouble = pcall(require, 'trouble')
--- if false then
--- end
-
 -- hack
 local _, notifs = pcall(require, "notifications")
 
 vim.lsp.notifier = notifs
 
-if vim.notify then
-	vim.notify = notifs.notify_external
-end
+-- if vim.notify then
+-- 	vim.notify = notifs.notify_external
+-- end
 
 -- options to pass to goto_next/goto_prev
 -- local goto_opts = {
