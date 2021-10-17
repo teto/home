@@ -76,6 +76,9 @@ let
         ));
     }
     {
+      plugin = lightspeed-nvim;
+    }
+    {
       plugin = auto-git-diff;
     }
     {
@@ -344,14 +347,15 @@ let
 
       #   '';
       # }
-      {
-        plugin = vim-startify;
-        config = ''
-          let g:startify_use_env = 0
-          let g:startify_disable_at_vimenter = 0
-          let g:startify_session_dir = stdpath('data').'/nvim/sessions'
-        '';
-      }
+
+      # {
+      #   plugin = vim-startify;
+      #   config = ''
+      #     let g:startify_use_env = 0
+      #     let g:startify_disable_at_vimenter = 0
+      #     let g:startify_session_dir = stdpath('data').'/nvim/sessions'
+      #   '';
+      # }
 
       vim-scriptease
       # test with hop ?

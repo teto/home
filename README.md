@@ -25,7 +25,6 @@ This folder contains my customizations for:
 * netrc (template only, password database)
 * [newboat](https://newsboat.org/) (RSS reader, fork of newsbeuter)
 * [notmuch](www.notmuch.org) (to tag mails)
-* offlineimap (MRA: Mail Retriever Agent)
 * [purebred](https://github.com/purebred-mua/purebred) (terminal MUA)
 * procmail
 * [qutebrowser](www.qutebrowser.org) (vim like browser)

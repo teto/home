@@ -195,6 +195,7 @@
                 nova.hmProfiles.standard
                 nova.hmProfiles.dev
                 nova.hmProfiles.devops
+                ./hm/profiles/dunst.nix
                 ./hm/profiles/experimental.nix
                 ./hm/profiles/japanese.nix
                 ./hm/profiles/fcitx.nix

@@ -3,7 +3,7 @@
   programs.rofi = {
     enable = true;
     terminal = "${pkgs.kitty}/bin/kitty";
-    borderWidth = 1;
+    # borderWidth = 1;
     # theme = "solarized_alternate";
     # lines= ;
     location = "center";
