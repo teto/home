@@ -53,31 +53,35 @@
     [[threadline]]
         normal = 'default','','default','default','#6d6','default'
         focus = 'default','','light gray','light gray','default, underline','default'
-        parts = date,mailcount,tags,authors,subject
+        parts = date,subject,tags,mailcount
         [[[date]]]
             normal = 'default','','light gray','default','g74','default'
             focus = 'standout','','yellow','light gray','yellow','g58'
             width = 'fit',10,10
             alignment = right
-        [[[mailcount]]]
-            normal = 'default','','light gray','default','g66','default'
-            focus = 'standout','','yellow','light gray','yellow','default'
-            width = 'fit', 5,5
         [[[tags]]]
             normal = 'bold','','dark cyan','','dark cyan',''
             focus = 'standout','','yellow','light gray','yellow','default'
+            alignment = left
+            width = 'fit',1,10
+
         [[[authors]]]
             normal = 'default,underline','','light blue','default','#068','default'
             focus = 'standout','','yellow','light gray','yellow','default'
-            width = 'fit',0,30
+            width = 'fit',30,30
+
         [[[subject]]]
             normal = 'default','','light gray','default','g66','default'
             focus = 'standout','','yellow','light gray','yellow','default'
             width = 'weight', 1
+        [[[mailcount]]]
+            normal = 'default','','light gray','default','g66','default'
+            focus = 'standout','','yellow','light gray','yellow','default'
+            width = 'fit', 5,5
         [[[content]]]
             normal = 'default','','light gray','default','dark gray','default'
             focus = 'standout','','yellow','light gray','yellow','default'
-            width = 'weight', 1
+            width = 'weight', 10,10
 
     # highlight threads containing unread messages
     [[threadline-unread]]
