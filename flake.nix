@@ -80,9 +80,9 @@
               ];
 
               home.packages = [
-                nova.packages."${system}".jcli
-                nova.packages."${system}".jinko-shiny
-                nova.packages."${system}".nova-deploy
+                # nova.packages."${system}".jcli
+                # nova.packages."${system}".jinko-shiny
+                # nova.packages."${system}".nova-deploy
               ];
             };
           }
@@ -264,7 +264,7 @@
         # };
         # toto = (final: prev: {});
       }
-      # // nova.overlays
+      // nova.overlays
       ;
 
       packages."${system}" = {
@@ -307,7 +307,6 @@
         # profilesAttrs = {};
 
       in modulesAttrs
-      # // profilesAttrs
       ;
     };
 }
