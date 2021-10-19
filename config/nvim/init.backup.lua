@@ -21,13 +21,13 @@ function file_exists(name)
    if f~=nil then io.close(f) return true else return false end
 end
 
--- TODOsource if it exists
-local generated_init = vim.fn.stdpath('config').."/init.generated.lua"
+-- TODO source if it exists
+-- local generated_init = vim.fn.stdpath('config').."/init.generated.lua"
 -- print(generated_init)
-if file_exists(generated_init) then
+-- if file_exists(generated_init) then
 	-- for some reason it doesn't work
 	-- vim.cmd ('luafile '..generated_init..' ')
-end
+-- end
 
 -- local my_image = require('hologram.image'):new({
 --     source = '/home/teto/doctor.png',
@@ -80,14 +80,14 @@ config = function ()
 	require'marks'.setup {
 		-- whether to map keybinds or not. default true
 		default_mappings = true,
-		-- which builtin marks to show. default {}
-		builtin_marks = { ".", "<", ">", "^" },
+		-- which builtin marks to show. default {} but available:  ".", "<", ">", "^"
+		builtin_marks = {},
 		-- whether movements cycle back to the beginning/end of buffer. default true
 		cyclic = true,
 		-- whether the shada file is updated after modifying uppercase marks. default false
 		force_write_shada = false,
-		-- how often (in ms) to redraw signs/recompute mark positions. 
-		-- higher values will have better performance but may cause visual lag, 
+		-- how often (in ms) to redraw signs/recompute mark positions.
+		-- higher values will have better performance but may cause visual lag,
 		-- while lower values may cause performance penalties. default 150.
 		refresh_interval = 250,
 		-- sign priorities for each type of mark - builtin marks, uppercase marks, lowercase
@@ -110,7 +110,7 @@ end
 
 }
 use 'edluffy/hologram.nvim' -- see https://github.com/edluffy/hologram.nvim#usage for usage
-use 'windwp/nvim-spectre' -- search & replace 
+use 'windwp/nvim-spectre' -- search & replace
 use 'ellisonleao/glow.nvim' -- markdown preview, run :Glow
 use {
 	-- Show where your cursor moves
@@ -244,7 +244,7 @@ use { 'tjdevries/astronauta.nvim' }
 -- use { 'npxbr/gruvbox.nvim'
 -- using teto instead to test packer luarocks support
 -- use_rocks { 'teto/gruvbox.nvim'
-	-- , requires = {"rktjmp/lush.nvim"} 
+	-- , requires = {"rktjmp/lush.nvim"}
 	-- }
 use { 'onsails/lspkind-nvim' }
 use {
@@ -278,7 +278,7 @@ use {
 }
 use {
 	'ggandor/lightspeed.nvim',
-	config = function () 
+	config = function ()
 		require'lightspeed'.setup {
 			jump_to_first_match = true,
 		jump_on_partial_input_safety_timeout = 400,
@@ -305,7 +305,7 @@ use {
   "folke/trouble.nvim",
 --   requires = "kyazdani42/nvim-web-devicons",
 	-- Trouble {{{
-	config = function () 	
+	config = function ()
 	require'trouble'.setup {
     position = "bottom", -- position of the list can be: bottom, top, left, right}}}
     height = 10, -- height of the trouble list when position is top or bottom
@@ -474,10 +474,11 @@ use { 'shadmansaleh/lualine.nvim' -- fork of hoob3rt/lualine
 
 			lualine_c = {
 				'filename',
-				'lsp_progress'
+				-- 'lsp_progress'
 				-- ,  gps.get_location, condition = gps.is_available
 			},
-			lualine_x = {'encoding', 'fileformat', 'filetype'},
+			lualine_x = {
+				'encoding', 'fileformat', 'filetype'},
 			lualine_y = {'progress'},
 			lualine_z = {'location'}
 		},
@@ -823,7 +824,7 @@ end
 -- use { 'nvim-treesitter/nvim-treesitter' }
 local enable_treesitter = false
 if enable_treesitter then
-	use { '~/nvim-treesitter' }
+	use { 'nvim-treesitter/nvim-treesitter' }
 	use {
 		'nvim-treesitter/playground',
 		requires = { 'nvim-treesitter/nvim-treesitter' }
@@ -911,8 +912,8 @@ if has_telescope then
 											-- the default case_mode is "smart_case"
 			},
 			fzy_native = {
-				override_generic_sorter = true,
-				override_file_sorter = true,
+				override_generic_sorter = false,
+				override_file_sorter = false,
 			},
 			-- frecency = {
 			--       workspaces = {
@@ -930,8 +931,8 @@ if has_telescope then
 		}
 	}
 	-- This will load fzy_native and have it override the default file sorter
-	-- telescope.load_extension('fzf')
-	telescope.load_extension('fzy_native')
+	telescope.load_extension('fzf')
+	-- telescope.load_extension('fzy_native')
 	-- telescope.load_extension("frecency")
 
 	-- TODO add autocmd

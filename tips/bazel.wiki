@@ -1,4 +1,4 @@
-`load` statements must be at the top
+﻿`load` statements must be at the top
 
 --announce_rc prints the flags that are being applied from bazelrc files and the command line
 
@@ -64,6 +64,9 @@ to force uploading to cache
  --no_remote_accept_cached
 --attempt_to_print_relative_paths
 --logging entre 0 et 6
+ --sandbox_debug
+
+ --execution_log_json_file
 
 bazel dump is cool
 
@@ -93,6 +96,7 @@ run `bazel fetch` beforehand.
 
 %% Targets with tags = ["manual"] will not be included in wildcard target patterns (..., :*, :all, etc.)
 
+bazel query 'kind("source file", deps(//simwork/examples:data_Simple))'
 
 # understand the cache
 https://docs.bazel.build/versions/master/command-line-reference.html#flag--disk_cache fait reference au ~/.cache/bazel_disk_cache.
