@@ -56,10 +56,6 @@ alias latest="ls -lt $@ |head"
 alias :q="exit"
 #}}}
 
-function rfw(){
-    readlink -f $(which "$1")
-}
-
 alias servethis="nix-shell -ppython3 --command \'python -c 'import SimpleHTTPServer; SimpleHTTPServer.test()'\""
 
 # ls related updates {{{

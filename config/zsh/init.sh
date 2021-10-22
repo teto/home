@@ -1,7 +1,4 @@
 # common to sh/zsh
-function rfw(){
-    readlink -f $(which "$1")
-}
 
 mpsched() {
     asysctl "net/mptcp/mptcp_scheduler" $@

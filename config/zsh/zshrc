@@ -15,7 +15,11 @@
 # source "$ZDOTDIR/plugins/per-directory-history.zsh"
 # }}}
 
-. "$ZDOTDIR/init.sh"
+function rfw(){
+    readlink -f $(which "$1")
+}
+
+# . "$ZDOTDIR/init.sh"
 
 . "$ZDOTDIR/aliases.zsh"
 
@@ -50,9 +54,9 @@ export HISTIGNORE="ls:ll:cd -:pwd:exit:date"
 setopt hist_expire_dups_first # purge duplicates first
 
 
-setopt hist_ignore_dups # Do not write events to history that are duplicates of previous events
+# setopt hist_ignore_dups # Do not write events to history that are duplicates of previous events
 # setopt hist_ignore_space # remove command line from history list when first character on the line is a space
-setopt hist_find_no_dups # When searching history don't display results already cycled through twice
+# setopt hist_find_no_dups # When searching history don't display results already cycled through twice
 # setopt hist_reduce_blanks # Remove extra blanks from each command line being added to history
 setopt hist_verify # don't execute, just expand history
 setopt share_history # imports new commands and appends typed commands to history
@@ -64,7 +68,7 @@ setopt interactive_comments # Allow comments even in interactive shells (especia
 # ===== Changing Directories
 setopt auto_cd
 setopt cdablevarS # if argument to cd is the name of a parameter whose value is a valid directory, it will become the current directory
-setopt pushd_ignore_dups # don't push multiple copies of the same directory onto the directory stack
+# setopt pushd_ignore_dups # don't push multiple copies of the same directory onto the directory stack
 
 # ===== Expansion and Globbing
 #setopt noextended_glob # treat #, ~, and ^ as part of patterns for filename generation
@@ -291,20 +295,6 @@ SPROMPT="Correct $fg[red]%R$reset_color to $fg[green]%r$reset_color [(y)es (n)o 
 compdef _gnu_generic qutebrowser
 compdef _gnu_generic mptcpanalyzer
 compdef _gnu_generic jcli
-
-
-# todo only when on $NIXOS
-# nix-env() {
-#     local hasF=""
-#     for arg in "$@"
-#     do
-#         [[ arg = "-f" ]] && hasF=1
-#     done
-#     if [[ -n "$hasF" ]]
-#     then command nix-env "$@"
-#     else command nix-env -f '<nixpkgs>' "$@"
-#     fi
-# }
 
 
 # set cursor depending in vi mode

@@ -6,6 +6,7 @@
     visidata
     gitAndTools.pass-git-helper
     graphviz
+    gitlab-runner
   ];
 
   programs.direnv = {

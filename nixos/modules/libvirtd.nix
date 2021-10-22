@@ -41,7 +41,7 @@
 
     # qemuRunAsRoot=false;
 
-    qemuVerbatimConfig = ''
+    qemu.verbatimConfig = ''
       # https://github.com/libvirt/libvirt/blob/master/src/qemu/qemu.conf
       namespaces = []
       # Whether libvirt should dynamically change file ownership

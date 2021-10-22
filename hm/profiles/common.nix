@@ -108,7 +108,14 @@ rec {
     enable = true;
   };
 
-  programs.autojump.enable = true;
+  programs.autojump = {
+    enable = true;
+    enableZshIntegration = true;
+  };
+  programs.z-lua = {
+    enable = true;
+    enableZshIntegration = true;
+  };
 
   programs.bash = {
     enable = true;
@@ -244,32 +251,16 @@ programs.zsh = rec {
 
     autocd = true;
 
+      # # there must be a module for this
+      # source ${pkgs.autojump}/share/autojump/autojump.zsh
     initExtra = ''
-      alias -s json=nvim
-      alias -s Vagrantfile=nvim
-      alias -s png=sxiv
-      alias -s jpg=xdg-open
-      alias -s gif=xdg-open
-      alias -s avi=mpv
-      alias -s mp3=mocp
-      alias -s pdf=xdg-open
-      alias -s doc=xdg-open
-      alias -s docx=xdg-open
-
-
-      # there must be a module for this
-      source ${pkgs.autojump}/share/autojump/autojump.zsh
 
       # VERY IMPORTANT else zsh can eat last line
       setopt prompt_sp
 
-      # eval before sourcing zshrc since that one will override my
-      # zle call
-      # eval "$(${pkgs.starship}/bin/starship init zsh)"
-      # TODO remove and include it ?
       # source $ZDOTDIR/zshrc.generated
       # if [ -f "$ZDOTDIR/zshrc" ]; then
-        source $ZDOTDIR/zshrc
+      source $ZDOTDIR/zshrc
       # fi
 
 

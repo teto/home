@@ -456,7 +456,7 @@ end
 
 
 -- use 'hoob3rt/lualine.nvim'
-use { 'shadmansaleh/lualine.nvim' -- fork of hoob3rt/lualine
+use { 'nvim-lualine/lualine.nvim' -- fork of hoob3rt/lualine
 	, requires = { 'arkav/lualine-lsp-progress' }
 	, config = function ()
 		require'lualine'.setup {
