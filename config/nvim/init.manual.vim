@@ -2038,7 +2038,11 @@ let content = [
             \ ['Toggle minimap', 'MinimapToggle'],
             \ ['REPL - '],
             \ ['Send line ', 'lua require''luadev''.exec(vim.api.nvim_get_current_line())'],
-            \ ['Send selection ', 'call <SID>luadev_run_operator(v:true)']
+            \ ['Send selection ', 'call <SID>luadev_run_operator(v:true)'],
+	    \ ['DAP -'],
+	    \ ['Add breakpoint', 'lua require"dap".toggle_breakpoint()'],
+	    \ ["Continue", 'lua require"dap".continue()'],
+	    \ ['Open REPL', 'lua require"dap".repl.open()']
             \ ]
 " map 2 <cmd>lua vim.lsp.buf.code_action()
 

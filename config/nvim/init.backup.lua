@@ -109,6 +109,9 @@ config = function ()
 end
 
 }
+use 'mfussenegger/nvim-dap'
+use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
+use 'nvim-telescope/telescope-dap.nvim'
 use 'edluffy/hologram.nvim' -- see https://github.com/edluffy/hologram.nvim#usage for usage
 use 'windwp/nvim-spectre' -- search & replace
 use 'ellisonleao/glow.nvim' -- markdown preview, run :Glow

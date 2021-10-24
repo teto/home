@@ -75,6 +75,9 @@ let
           ]
         ));
     }
+    # {
+    #   plugin = nvim-dap;
+    # }
     {
       plugin = lightspeed-nvim;
     }
