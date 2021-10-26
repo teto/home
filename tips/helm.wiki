@@ -1,4 +1,4 @@
-
+﻿
 --set tracing.enabled=true
 
 helm repo update
@@ -9,4 +9,6 @@ Plugins found at
 
 helm delete --purge jinko-enyo-dev
 
+helm history --kubeconfig ./workdir/kubeconfig namespace --max 10
+helm rollback --kubeconfig ./workdir/kubeconfig namespace 128
 helm env

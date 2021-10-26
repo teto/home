@@ -29,7 +29,7 @@
 
   services.chrony = {
     # if time is wrong:
-    # 1/ stop chrony service
+    # 1/ systemctl stop chrony service
     # 2/ "chronyd -q 'pool pool.ntp.org iburst'"
     enable = true;
   };
