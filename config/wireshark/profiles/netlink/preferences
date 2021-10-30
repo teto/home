@@ -1,4 +1,4 @@
-# Configuration file for Wireshark 3.4.6.
+# Configuration file for Wireshark 3.4.9.
 #
 # This file is regenerated each time preferences are saved within
 # Wireshark. Making manual changes should be safe, however.
@@ -216,7 +216,7 @@ gui.interfaces_hidden_types: 7
 
 # Packet list hidden columns
 # List all columns to hide in the packet list.
-gui.column.hidden: %Cus:netlink.hatype:0:R
+gui.column.hidden: %s,%d,%Cus:netlink.hatype:0:R
 
 # Packet list column format
 # Each pair of strings consists of a column title and its format
@@ -388,6 +388,86 @@ capture.devices_pmode: eno1(1),nlmon0(1),any(1),lo(1),virbr0(1),docker0(1),br-9d
 
 # Remote SSH server address
 # A string
+#extcap.sshdump.remotehost: 
+
+# Remote SSH server port
+# A string
+#extcap.sshdump.remoteport: 
+
+# Remote SSH server username
+# A string
+#extcap.sshdump.remoteusername: 
+
+# Path to SSH private key
+# A string
+#extcap.sshdump.sshkey: 
+
+# ProxyCommand
+# A string
+#extcap.sshdump.proxycommand: 
+
+# Remote interface
+# A string
+#extcap.sshdump.remoteinterface: 
+
+# Remote capture command
+# A string
+#extcap.sshdump.remotecapturecommand: 
+
+# Use sudo on the remote machine
+# A string
+#extcap.sshdump.remotesudo: 
+
+# No promiscuous mode
+# A string
+#extcap.sshdump.remotenoprom: 
+
+# Remote capture filter
+# A string
+#extcap.sshdump.remotefilter: not ((host fe80::42:24ff:fe76:638c or host 172.17.0.1 or host 192.168.122.1) and port 22)
+
+# Packets to capture
+# A string
+#extcap.sshdump.remotecount: 0
+
+# Run in debug mode
+# A string
+#extcap.sshdump.debug: false
+
+# Use a file for debug
+# A string
+#extcap.sshdump.debugfile: 
+
+# Starting position
+# A string
+#extcap.sdjournal.startfrom: 
+
+# Run in debug mode
+# A string
+#extcap.sdjournal.debug: false
+
+# Use a file for debug
+# A string
+#extcap.sdjournal.debugfile: 
+
+# Listen port
+# A string
+#extcap.udpdump.port: 5555
+
+# Payload type
+# A string
+#extcap.udpdump.payload: data
+
+# Run in debug mode
+# A string
+#extcap.udpdump.debug: false
+
+# Use a file for debug
+# A string
+#extcap.udpdump.debugfile: 
+
+# Remote SSH server address
+# A string
 #extcap.ciscodump.remotehost: 
 
 # Remote SSH server port
@@ -412,7 +492,7 @@ capture.devices_pmode: eno1(1),nlmon0(1),any(1),lo(1),virbr0(1),docker0(1),br-9d
 
 # Remote capture filter
 # A string
-#extcap.ciscodump.remotefilter: deny tcp host fe80::6b2a:1c90:471d:9dd3 any eq 0, deny tcp any eq 0 host fe80::6b2a:1c90:471d:9dd3, deny tcp host 2a01:cb14:11ac:8200:9930:218:fb23:d849 any eq 0, deny tcp any eq 0 host 2a01:cb14:11ac:8200:9930:218:fb23:d849, deny tcp host 2a01:cb14:11ac:8200:e576:3268:e61b:f7f1 any eq 0, deny tcp any eq 0 host 2a01:cb14:11ac:8200:e576:3268:e61b:f7f1, deny tcp host 172.18.0.1 any eq 0, deny tcp any eq 0 host 172.18.0.1, deny tcp host 172.19.0.1 any eq 0, deny tcp any eq 0 host 172.19.0.1, deny tcp host 172.20.0.1 any eq 0, deny tcp any eq 0 host 172.20.0.1, deny tcp host 172.17.0.1 any eq 0, deny tcp any eq 0 host 172.17.0.1, deny tcp host 192.168.122.1 any eq 0, deny tcp any eq 0 host 192.168.122.1, deny tcp host 192.168.1.17 any eq 0, deny tcp any eq 0 host 192.168.1.17, permit ip any any
+#extcap.ciscodump.remotefilter: deny tcp host fe80::42:24ff:fe76:638c any eq 0, deny tcp any eq 0 host fe80::42:24ff:fe76:638c, deny tcp host 172.17.0.1 any eq 0, deny tcp any eq 0 host 172.17.0.1, deny tcp host 192.168.122.1 any eq 0, deny tcp any eq 0 host 192.168.122.1, permit ip any any
 
 # Packets to capture
 # A string
@@ -425,34 +505,6 @@ capture.devices_pmode: eno1(1),nlmon0(1),any(1),lo(1),virbr0(1),docker0(1),br-9d
 # Use a file for debug
 # A string
 #extcap.ciscodump.debugfile: 
-
-# Listen port
-# A string
-#extcap.udpdump.port: 5555
-
-# Payload type
-# A string
-#extcap.udpdump.payload: data
-
-# Run in debug mode
-# A string
-#extcap.udpdump.debug: false
-
-# Use a file for debug
-# A string
-#extcap.udpdump.debugfile: 
-
-# Starting position
-# A string
-#extcap.sdjournal.startfrom: 
-
-# Run in debug mode
-# A string
-#extcap.sdjournal.debug: false
-
-# Use a file for debug
-# A string
-#extcap.sdjournal.debugfile: 
 
 # Max bytes in a packet
 # A string
@@ -497,58 +549,6 @@ capture.devices_pmode: eno1(1),nlmon0(1),any(1),lo(1),virbr0(1),docker0(1),br-9d
 # Use a file for debug
 # A string
 #extcap.dpauxmon.debugfile: 
-
-# Remote SSH server address
-# A string
-#extcap.sshdump.remotehost: 
-
-# Remote SSH server port
-# A string
-#extcap.sshdump.remoteport: 
-
-# Remote SSH server username
-# A string
-#extcap.sshdump.remoteusername: 
-
-# Path to SSH private key
-# A string
-#extcap.sshdump.sshkey: 
-
-# ProxyCommand
-# A string
-#extcap.sshdump.proxycommand: 
-
-# Remote interface
-# A string
-#extcap.sshdump.remoteinterface: 
-
-# Remote capture command
-# A string
-#extcap.sshdump.remotecapturecommand: 
-
-# Use sudo on the remote machine
-# A string
-#extcap.sshdump.remotesudo: 
-
-# No promiscuous mode
-# A string
-#extcap.sshdump.remotenoprom: 
-
-# Remote capture filter
-# A string
-#extcap.sshdump.remotefilter: not ((host fe80::6b2a:1c90:471d:9dd3 or host 2a01:cb14:11ac:8200:9930:218:fb23:d849 or host 2a01:cb14:11ac:8200:e576:3268:e61b:f7f1 or host 172.18.0.1 or host 172.19.0.1 or host 172.20.0.1 or host 172.17.0.1 or host 192.168.122.1 or host 192.168.1.17) and port 22)
-
-# Packets to capture
-# A string
-#extcap.sshdump.remotecount: 0
-
-# Run in debug mode
-# A string
-#extcap.sshdump.debug: false
-
-# Use a file for debug
-# A string
-#extcap.sshdump.debugfile: 
 
 ####### Name Resolution ########
 
@@ -5179,6 +5179,14 @@ capture.devices_pmode: eno1(1),nlmon0(1),any(1),lo(1),virbr0(1),docker0(1),br-9d
 # There is some ambiguity on how to calculate V3 checksumsAs in V3 will use a pseudo header(which may only be implemented for IPv6 by some manufacturers)
 # TRUE or FALSE (case-insensitive)
 #vrrp.v3_checksum_as_in_v2: FALSE
+
+# Whether the VSS Monitoring dissector should attempt to dissect trailers with no timestamp, only port stamping.  Note that this can result in a large number of false positives.
+# TRUE or FALSE (case-insensitive)
+#vssmonitoring.dissect_portstamping_only: FALSE
+
+# Whether the VSS Monitoring dissector should assume that the port stamp is two bytes, instead of the standard one byte.
+# TRUE or FALSE (case-insensitive)
+#vssmonitoring.two_byte_portstamps: FALSE
 
 # Enable this preference if you want to view the WBXML tokens without the representation in a media type (e.g., WML). Tokens will show up as Tag_0x12, attrStart_0x08 or attrValue_0x0B for example.
 # TRUE or FALSE (case-insensitive)

@@ -1,6 +1,5 @@
 # experimental part about
 # Mod4 => window key
-set $mad Super_L
 
 # https://faq.i3wm.org/question/5942/using-modifer-key-as-a-binding/
 # https://faq.i3wm.org/question/5429/stay-in-mode-only-while-key-is-pressed/
@@ -8,8 +7,8 @@ set $mad Super_L
 #bindsym $mad exec notify-send "XP mode"; mode "xp"; exec $set_mark
 
 # The side buttons move the window around
-bindsym button9 move left
-bindsym button8 move right
+# bindsym button9 move left
+# bindsym button8 move right
 
 # Tests for title_format
 # give the focused window a prefix

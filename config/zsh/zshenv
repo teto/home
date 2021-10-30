@@ -2,10 +2,3 @@
 # See https://wiki.archlinux.org/index.php/XDG_Base_Directory_support#Partial to get aound
 #  non XDG conformant programs
 
-# setup fpath {{{
-# fpath is not searched recursively
-# fpath=( $ZDOTDIR/completions $fpath )
-# fpath=( $HOME/zsh-async $fpath )
-# }}}
-
-# TODO let HM handle this

@@ -85,14 +85,16 @@ let
       # give the focused window a prefix
       # bindsym $mod+Shift+g title_format "[test] %title"
 
-      for_window [class="^qutebrowser$"] title_format "<span background='blue'>QB</span> %title"
-      for_window [class="^Firefox$"] title_format "<span background='#F28559'>FF</span> %title"
       for_window [title="Thunderbird$"] title_format " %title"
+
+
+      include ~/.config/i3/config.main
+      include ~/.config/i3/config.xp
     ''
-    + (lib.concatStrings [
-      (builtins.readFile ../../config/i3/config.main)
-      # (builtins.readFile ../../config/i3/config.xp)
-    ]);
+    # for_window [class="^qutebrowser$"] title_format "<span background='blue'>QB</span> %title"
+    # for_window  title_format "<span background='#F28559'>FF</span> %title"
+
+    ;
 in
 {
   # imports = [
@@ -120,10 +122,6 @@ in
 
     # bindsym $mod+ctrl+v exec ~/vim-anywhere/bin/run"
     extraConfig = sharedExtraConfig
-    # +
-    # (lib.concatStrings [
-    #     (builtins.readFile ../../config/i3/config.colors)
-    #   ])
       + ''
         new_float pixel 2
       ''
@@ -323,8 +321,8 @@ in
         # "XF86MonBrightnessUp" = "exec ${pkgs.xorg.xbacklight}/bin/xbacklight -inc 10";
         # "XF86MonBrightnessDown" = "exec ${pkgs.xorg.xbacklight}/bin/xbacklight -dec 10";
         # brightnessctl
-        "XF86MonBrightnessUp" = "exec ${pkgs.brightnessctl}/bin/brightnessctl set +10";
-        "XF86MonBrightnessDown" = "exec ${pkgs.brightnessctl}/bin/brightnessctl set -10";
+        # "XF86MonBrightnessUp" = "exec ${pkgs.brightnessctl}/bin/brightnessctl set +10";
+        # "XF86MonBrightnessDown" = "exec ${pkgs.brightnessctl}/bin/brightnessctl set -10";
 
         # test rofi-randr
         # "XF86Display" = "exec " + ../../rofi-scripts/monitor_layout.sh ;

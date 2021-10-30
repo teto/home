@@ -147,6 +147,7 @@
                 # nova.hmConfigurations.dev
                 (hm-custom [
                   ./hm/home-xps.nix
+                  ./hm/modules/zsh.nix
                   ./hm/profiles/nova.nix
 
                 #   nova.hmProfiles.standard

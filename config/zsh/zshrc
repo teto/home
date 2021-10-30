@@ -9,36 +9,27 @@
 # for VTE-based terminals. In termite Ctrl + Shift + t opens terminal in cwd
 # source /etc/profile.d/vte.sh
 
-# Per folder history {{{
-# https://github.com/jimhester/per-directory-history
-# you can switch between global/local with ^G
-# source "$ZDOTDIR/plugins/per-directory-history.zsh"
-# }}}
-
 function rfw(){
     readlink -f $(which "$1")
 }
 
 # . "$ZDOTDIR/init.sh"
-
 . "$ZDOTDIR/aliases.zsh"
 
-export PATH="${XDG_DATA_HOME}/../bin:$PATH"
+# export PATH="${XDG_DATA_HOME}/../bin:$PATH"
 # notifies when long command finishes
 # zbell should recognize aliases
 zbell_ignore=("$EDITOR" "$PAGER" v)
-# TODO
 # . "$ZDOTDIR/zbell.zsh"
-#source $ZDOTDIR/hooks.zsh
 # adds a transfer function to upload a file & display its url
-. "$ZDOTDIR/transfer.zsh"
+# . "$ZDOTDIR/transfer.zsh"
 
 # zsh.enableSuggestions right handside color
 # see https://github.com/zsh-users/zsh-autosuggestions for suggestions
 # AUTOSUGGESTION_HIGHLIGHT_COLOR="fg=cyan"
 
 # TODO move it to HM maybe
-. "/etc/zinputrc"
+# . "/etc/zinputrc"
 
 
 # TODO make it a function cat some.json | python -m json.tool
@@ -101,7 +92,6 @@ autoload -U url-quote-magic
 zle -N self-insert url-quote-magic
 
 #}}}
-
 # Bindings ZLE commands {{{1
 # To see the key combo you want to use just do:
 # Don't try to bind CTRL Q / CTRL S !!
@@ -141,7 +131,6 @@ bindkey -r "^G" # was bound to list-expand I don't know where/why
 bindkey '^P' up-history
 bindkey '^N' down-history
 # }}}
-
 # Fancy CTRL Z {{{
 fancy-ctrl-z () {
   if [[ $#BUFFER -eq 0 ]]; then
@@ -155,7 +144,6 @@ fancy-ctrl-z () {
 zle -N fancy-ctrl-z
 bindkey '^Z' fancy-ctrl-z
 # }}}
-
 # to get more focused Ctrl W {{{
 # http://zshwiki.org/home/zle/bindkeys
 # export WORDCHARS=''
@@ -165,8 +153,6 @@ bindkey '^Z' fancy-ctrl-z
 #autoload predict-on
 #predict-on
 autoload -Uz add-zsh-hook
-# autoload -Uz vcs_info
-autoload -U compinit && compinit
 autoload -z edit-command-line
 
 zmodload -i zsh/complist
@@ -177,17 +163,10 @@ zmodload -i zsh/complist
 # zstyle ':vcs_info:*' formats '%F{5}(%f%s%F{5})%F{3}-%F{5}[%F{2}%b%F{5}]%f '
 # zstyle ':vcs_info:*' enable git #svn cvs
 
-add-zsh-hook preexec set_term_title
-#add-zsh-hook zsh_directory_name
-add-zsh-hook precmd update_term_title
 
 # completion config {{{1
 
-# manual completions
-# . "$ZDOTDIR/git-extras-completion.zsh"
-
-# zsh searches $fpath for completion files
-# fpath=( $ZDOTDIR/completions $fpath )
+# autoload -U compinit && compinit
 
 # Enable completion caching, use rehash to clear
 zstyle ':completion::complete:*' use-cache on
@@ -245,21 +224,6 @@ zstyle ':completion:*:kill:*' force-list always
 # }}}
 
 
-# works in termite
-function set_term_title (){
-# -n Do not add a newline to the output.
-
-    # print -Pn "\e]0;$(echo "$1")\a"
-    print -n '\e]0;'
-    print -n "$1"
-    print -nrD "@$PWD"
-    print -n '\a'
-}
-
-update_term_title () {
-    set_term_title $(pwd)
-}
-
 # Pour afficher la commande dans le titre du terminal
 # https://github.com/robbyrussell/oh-my-zsh/blob/master/lib/termsupport.zsh
 # source "$ZDOTDIR/prompt.zsh"
@@ -297,22 +261,6 @@ compdef _gnu_generic mptcpanalyzer
 compdef _gnu_generic jcli
 
 
-# set cursor depending in vi mode
-# inspired by http://lynnard.me/blog/2014/01/05/change-cursor-shape-for-zsh-vi-mode/
-# zle-line-init 
-# zle-line-finish
-# starship overrides it
-# https://unix.stackexchange.com/questions/547/make-my-zsh-prompt-show-mode-in-vi-mode?noredirect=1&lq=1
-zle-keymap-select () {
-    if [ $KEYMAP = vicmd ]; then
-	# the command mode for vi
-	echo -ne "\e[2 q"
-    else
-	# the insert mode for vi
-	# echo -ne "\e[4 q"
-	echo -ne '\e[5 q'
-    fi
-}
 # https://unix.stackexchange.com/questions/547/make-my-zsh-prompt-show-mode-in-vi-mode?noredirect=1&lq=1
 # zle-keymap-select () {
 #   case $KEYMAP in
@@ -321,9 +269,6 @@ zle-keymap-select () {
 #   esac
 # }
 
-# http://zsh.sourceforge.net/Doc/Release/User-Contributions.html#ZLE-Functions
-# autoload zsh-mime-setup
-zle -N zle-keymap-select
 
 # load terminfo for portable keybindings
 # zmodload zsh/terminfo
@@ -363,10 +308,7 @@ _fzf_compgen_dir() {
   fd --type d --hidden --follow --exclude ".git" . "$1"
 }
 # }}}
-#
-#
-#
-#
+
 # Import colorscheme from 'wal' asynchronously
 # &   # Run the process in the background.
 # ( ) # Hide shell job control messages.

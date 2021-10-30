@@ -111,10 +111,16 @@ rec {
   programs.autojump = {
     enable = true;
     enableZshIntegration = true;
+    enableBashIntegration = true;
   };
   programs.z-lua = {
+    enable = false;
+    enableZshIntegration = true;
+  };
+  programs.zoxide = {
     enable = true;
     enableZshIntegration = true;
+    enableBashIntegration = true;
   };
 
   programs.bash = {
@@ -133,7 +139,6 @@ rec {
     # historyFile = "$XDG_CACHE_HOME/bash_history";
     shellAliases = {
       lg="lazygit";
-      hm="home-manager";
       #mostly for testin
       # dfh="df --human-readable";
       # duh="du --human-readable";
@@ -154,15 +159,8 @@ rec {
 
       # modprobe to use
       # might need to use -S as well
-      modprobe_exp="modprobe -d /home/teto/mptcp/build";
+      # modprobe_exp="modprobe -d /home/teto/mptcp/build";
     };
-
-
-    # see https://github.com/minio/mc/issues/3238
-    # generates an error
-    # initExtra = ''
-    #   complete -C ${pkgs.mc}/bin/mc mc
-    # '';
   };
 
   # you can switch from cli with xkb-switch or xkblayout-state
@@ -183,6 +181,7 @@ rec {
   programs.starship = {
     enable = true;
     enableZshIntegration = true;
+    enableBashIntegration = true;
      # settings = {};
   };
 
@@ -229,9 +228,8 @@ rec {
   #   platformTheme = "gnome";
   # };
 
-programs.zsh = rec {
+programs.zsh = {
     enable = true;
-    # enableAutojump = true;
     dotDir = ".config/zsh";
     sessionVariables = {
       # HISTFILE="$XDG_CACHE_HOME/zsh_history";
@@ -251,8 +249,6 @@ programs.zsh = rec {
 
     autocd = true;
 
-      # # there must be a module for this
-      # source ${pkgs.autojump}/share/autojump/autojump.zsh
     initExtra = ''
 
       # VERY IMPORTANT else zsh can eat last line
@@ -263,9 +259,12 @@ programs.zsh = rec {
       source $ZDOTDIR/zshrc
       # fi
 
+      # used in some git aliases
+      export REVIEW_BASE=master
+
 
       # not sure how it's inherited
-      unset AWS_DEFAULT_PROFILE
+      # unset AWS_DEFAULT_PROFILE
     ''
       # https://github.com/atweiden/fzf-extras
       # the zsh script does nothing yet
@@ -274,6 +273,14 @@ programs.zsh = rec {
       # source "${fzf-extras}/fzf-extras.zsh";
 
     ;
+
+    initExtraBeforeCompInit = ''
+      # zsh searches $fpath for completion files
+      fpath+=( $ZDOTDIR/completions )
+    '';
+
+    # custom module
+    enableSetTermTitle = true;
   };
 
   programs.tmux = {

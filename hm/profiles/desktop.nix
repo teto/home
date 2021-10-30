@@ -182,7 +182,6 @@ in
     ./firefox.nix
     ./notifications.nix
     ./neovim.nix
-    # ./neovim-minimal.nix
   ];
 
   # rename to fn, accept a parameter for optional
@@ -197,6 +196,10 @@ in
     ]
    ;
 
+  home.sessionPath = [
+    "$XDG_DATA_HOME/../bin"
+    "/home/teto/.cache/cabal/bin"
+  ];
 
   # tray is enabled by default
   services.udiskie = {

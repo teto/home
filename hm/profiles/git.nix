@@ -23,6 +23,15 @@ in
       signByDefault = false;
       key = "64BB6787";
     };
+
+    aliases = {
+      s="status";
+      st="status";
+      br="branch";
+      d="diff";
+      mg="mergetool";
+
+    };
     extraConfig = {
       init.defaultBranch = "main";
 # git config core.sshCommand "ssh -vvv"

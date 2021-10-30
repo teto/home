@@ -54,11 +54,6 @@ compression = 0
   ci=commit
   cp=cherry-pick
   co=checkout
-  st=status
-  br=branch
-  di=diff
-  mg=mergetool
-  mt=mergetool
 
   # inspired by https://blog.jez.io/cli-code-review/
   # list files which have changed since REVIEW_BASE

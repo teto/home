@@ -7,6 +7,10 @@
 
 # default border size
 #new_window  pixel 2
+# title_window_icon yes
+# enable window icons for all windows
+# for_window [all] title_window_icon on
+for_window [class="^Firefox$"] title_window_icon on
 
 #for_window [instance="audioplayer"] move to scratchpad
 for_window [instance="pad_*"] move scratchpad

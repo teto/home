@@ -41,14 +41,11 @@ rec {
   ] ++ (with pkgs; [
      automake
      # autoconf
-     autojump
      binutils
-     # cmake
      curl
      fd  # replaces 'find'
      file
 	 fzf
-     # libtool
      lsof
 	 # gawk
      gitAndTools.gitFull # to get send-email
@@ -70,12 +67,10 @@ rec {
      rsync
      ripgrep
      sudo
-     # tig
 	 unzip
      # vifm
      vim
      wget
-     # zsh
   ]);
 
    # TODO it appears in /etc/bashrc !
@@ -156,8 +151,6 @@ kernel_xconfig=''
 
   # on master it is disabled
   documentation.man.enable = true;
-
-  # programs.light.enable = true;
 
   programs.less = {
     enable = true;
