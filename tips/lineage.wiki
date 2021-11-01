@@ -1,0 +1,3 @@
+https://github.com/NixOS/mobile-nixos/pull/79
+
+https://download.lineageos.org/dumpling

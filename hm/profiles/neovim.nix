@@ -90,7 +90,7 @@ let
     {
       plugin = gitsigns-nvim;
       luaConfig = ''
-        gitsigns.setup {
+        require 'gitsigns'.setup {
             -- -- '│' passe mais '▎' non :s
         signs = {
             add          = {hl = 'GitSignsAdd'   , text ='▎', numhl='GitSignsAddNr'   , linehl='GitSignsAddLn'},

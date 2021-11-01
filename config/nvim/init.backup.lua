@@ -22,7 +22,7 @@ function file_exists(name)
 end
 
 -- TODO source if it exists
--- local generated_init = vim.fn.stdpath('config').."/init.generated.lua"
+dofile(vim.fn.stdpath('config').."/init.generated.lua")
 -- print(generated_init)
 -- if file_exists(generated_init) then
 	-- for some reason it doesn't work

@@ -1,0 +1,8 @@
+
+
+l'ip + login/mdp est visible a la fin de About -> Licenses
+
+koreader
+rmapi
+
+
