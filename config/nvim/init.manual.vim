@@ -2036,6 +2036,7 @@ let content = [
             \ ['Start search and replace', 'lua require("spectre").open()'],
             \ ['Toggle obsession', 'Obsession'],
             \ ['Toggle minimap', 'MinimapToggle'],
+            \ ['Toggle biscuits', 'lua require("nvim-biscuits").toggle_biscuits()'],
             \ ['REPL - '],
             \ ['Send line ', 'lua require''luadev''.exec(vim.api.nvim_get_current_line())'],
             \ ['Send selection ', 'call <SID>luadev_run_operator(v:true)'],
@@ -2108,3 +2109,9 @@ map <D-b> :echom "hello papy"
 set exrc
 " from FAQ https://github.com/neovim/neovim/wiki/FAQ
 " vnoremap <LeftRelease> "*ygv
+
+" global color
+highlight BiscuitColor ctermfg=cyan
+
+" language specific color
+highlight BiscuitColorRust ctermfg=red

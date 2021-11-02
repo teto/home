@@ -15,6 +15,7 @@
     };
     nur.url = "github:nix-community/NUR";
 
+    purebred.url = "github:purebred-mua/purebred";
     poetry.url = "github:nix-community/poetry2nix";
     nix-update.url = "github:Mic92/nix-update";
     nova.url = "git+ssh://git@git.novadiscovery.net/world/nova-nix.git?ref=master";
@@ -73,6 +74,7 @@
             home-manager.users."teto" = {
               imports = my_imports ++ [
                 # custom modules
+                (import ./hm/modules/zsh.nix)
                 (import ./hm/modules/pywal.nix )
                 (import ./hm/modules/ranger.nix )
                 # (import ./hm/modules/fcitx.nix )
@@ -147,7 +149,6 @@
                 # nova.hmConfigurations.dev
                 (hm-custom [
                   ./hm/home-xps.nix
-                  ./hm/modules/zsh.nix
                   ./hm/profiles/nova.nix
 
                 #   nova.hmProfiles.standard
@@ -206,6 +207,14 @@
                 # ./hm/profiles/gaming.nix
 
                 # ./hm/vscode.nix #  provided by nova-nix config
+                ({ config, lib, pkgs,  ... }:
+                {
+                  home.packages = [
+                    self.inputs.purebred.packages.${system}.purebred
+
+                  ];
+
+                })
               ] )
             ]
             ;

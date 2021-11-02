@@ -1,4 +1,5 @@
-Les cluster names sont accessible
+﻿Les cluster names sont accessible
+
 aws eks update-kubeconfig --name jinko-prod
 kubectl get -n [[XXXX]] ingress
 

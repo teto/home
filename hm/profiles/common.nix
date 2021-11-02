@@ -121,6 +121,7 @@ rec {
     enable = true;
     enableZshIntegration = true;
     enableBashIntegration = true;
+    options = [ "--cmd j"];
   };
 
   programs.bash = {

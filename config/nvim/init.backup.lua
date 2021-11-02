@@ -140,6 +140,29 @@ use {
 	end
 
 }
+use { 'code-biscuits/nvim-biscuits', config = function ()
+	require('nvim-biscuits').setup({
+	default_config = {
+		max_length = 12,
+		min_distance = 5,
+		prefix_string = " 📎 "
+	},
+	language_config = {
+		html = {
+		prefix_string = " 🌐 "
+		},
+		javascript = {
+		prefix_string = " ✨ ",
+		max_length = 80
+		},
+		python = {
+		disabled = true
+		}
+	}
+	})
+end
+}
+
 use { 'nvim-lua/popup.nvim'  }  -- mimic vim's popupapi for neovim
 -- use { 'nvim-lua/plenary.nvim' } -- lua utilities for neovim
 use {
