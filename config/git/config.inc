@@ -1,3 +1,4 @@
+# vim: set noet fdm=manual fenc=utf-8 ff=unix sts=0 sw=4 ts=4 ft=conf :
 [core]
 # sshCommand=ssh -vvv
 # compactionHeuristic
