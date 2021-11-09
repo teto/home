@@ -3,6 +3,7 @@
 
 
   home.packages = with pkgs; [
+    dasht
     visidata
     gitAndTools.pass-git-helper
     graphviz

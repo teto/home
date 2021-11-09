@@ -10,7 +10,6 @@ in
     # ./modules/distributedBuilds.nix
     ./modules/config-all.nix
     ./modules/desktop.nix
-    ./modules/network-manager.nix
     ./modules/libvirtd.nix
     # ./modules/minio.nix
     # ./modules/redis.nix # for jinko
@@ -195,18 +194,6 @@ in
 
   services.xserver.videoDrivers = [ "nvidia" ];
   # hardware.nvidia.package
-
-  # still needed
-  # hardware.pulseaudio.package = pkgs.pulseaudio.override {
-  #   alsa-lib = pkgs.alsa-lib.overrideAttrs (drv: rec {
-  #     version = assert pkgs.alsa-lib.version == "1.2.5"; "1.2.5.1";
-  #     src = pkgs.fetchurl {
-  #       url = "mirror://alsa/lib/${drv.pname}-${version}.tar.bz2";
-  #       hash = "sha256-YoQh2VDOyvI03j+JnVIMCmkjMTyWStdR/6wIHfMxQ44=";
-  #     };
-  #   });
-  # };
-
 
   # rtkit is optional but recommended {{{
   security.rtkit.enable = true;

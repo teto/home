@@ -10,7 +10,6 @@ let
   imports = [
     ./hardware-macbook.nix
     ./modules/desktop.nix
-    ./modules/network-manager.nix
     ./modules/docker-daemon.nix
     # ./modules/libvirtd.nix
 
