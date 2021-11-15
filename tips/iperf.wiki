@@ -1,3 +1,6 @@
+Recall  that by default the client is the sender and the server is the receiver,
+
+-R to reverse those roles
 
 nix run nixpkgs.iperf -c iperf -s
 

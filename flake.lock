@@ -380,6 +380,22 @@
         "type": "github"
       }
     },
+    "nixpkgs_10": {
+      "locked": {
+        "lastModified": 1634782485,
+        "narHash": "sha256-psfh4OQSokGXG0lpq3zKFbhOo3QfoeudRcaUnwMRkQo=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "34ad3ffe08adfca17fcb4e4a47bb5f3b113687be",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nixpkgs_2": {
       "locked": {
         "lastModified": 1617519343,
@@ -637,6 +653,25 @@
         "type": "github"
       }
     },
+    "purebred": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_10",
+        "utils": "utils"
+      },
+      "locked": {
+        "lastModified": 1636605668,
+        "narHash": "sha256-W3lPpdddLfv87lztanSSGf9YohonlpPgBZ3HzFmzRuY=",
+        "owner": "purebred-mua",
+        "repo": "purebred",
+        "rev": "5b418f61e0b4fa55ab9482b08b37c2f4b7887616",
+        "type": "github"
+      },
+      "original": {
+        "owner": "purebred-mua",
+        "repo": "purebred",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "hm": "hm",
@@ -647,6 +682,7 @@
         "nova": "nova",
         "nur": "nur_2",
         "poetry": "poetry_3",
+        "purebred": "purebred",
         "unstable": "unstable"
       }
     },
@@ -684,6 +720,21 @@
         "owner": "nixos",
         "ref": "nixos-unstable",
         "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "utils": {
+      "locked": {
+        "lastModified": 1631561581,
+        "narHash": "sha256-3VQMV5zvxaVLvqqUrNz3iJelLw30mIVSfZmAaauM3dA=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "7e5bf3925f6fbdfaf50a2a7ca0be2879c4261d19",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
         "type": "github"
       }
     }

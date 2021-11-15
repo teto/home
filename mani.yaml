@@ -1,0 +1,12 @@
+projects:
+  neovim:
+    url: git@github.com:neovim/neovim.git
+    path: .
+  mptcpanalyzer:
+    url: git@github.com:teto/quantum2.git
+    path: .
+
+tasks:
+  hello:
+    desc: Print Hello World
+    cmd: echo "Hello World"
