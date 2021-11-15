@@ -10,6 +10,7 @@ config.config = config.setup {
 			'rust',
 			'bash',
 			'nix',
+			'python',
 			-- 'c',
 			'lua' -- cos breaks
 		},        -- list of language that will be disabled

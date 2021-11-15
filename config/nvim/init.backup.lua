@@ -142,22 +142,21 @@ use {
 }
 use { 'code-biscuits/nvim-biscuits', config = function ()
 	require('nvim-biscuits').setup({
+	on_events = { 'InsertLeave', 'CursorHoldI' },
+	cursor_line_only = true,
 	default_config = {
 		max_length = 12,
-		min_distance = 5,
+		min_distance = 50,
 		prefix_string = " 📎 "
 	},
 	language_config = {
-		html = {
-		prefix_string = " 🌐 "
-		},
+		html = { prefix_string = " 🌐 " },
 		javascript = {
-		prefix_string = " ✨ ",
-		max_length = 80
+			prefix_string = " ✨ ",
+			max_length = 80
 		},
-		python = {
-		disabled = true
-		}
+		python = { disabled = true },
+		-- nix = { disabled = true }
 	}
 	})
 end
@@ -166,8 +165,37 @@ end
 use { 'nvim-lua/popup.nvim'  }  -- mimic vim's popupapi for neovim
 -- use { 'nvim-lua/plenary.nvim' } -- lua utilities for neovim
 use {
-    'NTBBloodbath/rest.nvim',
-    -- requires = { 'nvim-lua/plenary.nvim' }
+	-- :h rest-nvim
+	-- <Plug>RestNvim
+	-- nnoremap <Plug>RestNvim :lua require('rest-nvim').run()<CR>
+    'NTBBloodbath/rest.nvim'
+    , requires = { 'nvim-lua/plenary.nvim' }
+  	, config = function()
+    require("rest-nvim").setup({
+      -- Open request results in a horizontal split
+      result_split_horizontal = false,
+      -- Skip SSL verification, useful for unknown certificates
+      skip_ssl_verification = false,
+      -- Highlight request on run
+      highlight = {
+        enabled = true,
+        timeout = 150,
+      },
+      result = {
+        -- toggle showing URL, HTTP info, headers at top the of result window
+        show_url = true,
+        show_http_info = true,
+        show_headers = true,
+      },
+      -- Jump to request line on run
+      jump_to_request = false,
+    })
+	local k = require"astronauta.keymap"
+	local nmap = k.nmap
+	nmap { "<leader>rr", "<Plug>RestNvim", expr = true,}
+	nmap { "<leader>rp", "<Plug>RestNvimPreview", expr = true,}
+
+	end
 }
 use {
 	'lukas-reineke/indent-blankline.nvim',
