@@ -298,6 +298,12 @@ in
     };
   };
 
+
+  programs.broot = {
+    enable = true;
+    enableZshIntegration = true;
+  };
+
   # systemd.user.services.xplugd = {
   #   Unit = {
   #     Description = "xplugd";
