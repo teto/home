@@ -299,7 +299,7 @@ in
       "button9" = "move left";
       "button8" = "move right";
       # start a terminal
-      "$mod+Return" = "exec --no-startup-id $term";
+      "${mod}+Return" = "exec --no-startup-id ${term}";
       # bindsym $mod+Shift+Return exec --no-startup-id ~/.i3/fork_term.sh
       "$mod+Shift+Return" = ''exec --no-startup-id $term -d "$(xcwd)"'';
 

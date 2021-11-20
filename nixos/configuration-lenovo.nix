@@ -1,6 +1,7 @@
 { config, lib, pkgs,  ... }:
 let
   secrets = import ./secrets.nix;
+  nvidiaPackage = config.boot.kernelPackages.nvidiaPackages.stable;
 in
 {
   imports = [
@@ -204,10 +205,26 @@ in
   # services.xserver.displayManager.gdm.nvidiaWayland = true;
 
   # this is required as well
-  hardware.nvidia.modesetting.enable = true;
+  hardware.nvidia= {
+    modesetting.enable = true;
+  # hardware.nvidia.package
+  };
 
+
+  # config from https://discourse.nixos.org/t/nvidia-users-testers-requested-sway-on-nvidia-steam-on-wayland/15264/32
+  environment.etc."gbm/nvidia-drm_gbm.so".source = "${nvidiaPackage}/lib/libnvidia-allocator.so";
+  environment.etc."egl/egl_external_platform.d".source = "/run/opengl-driver/share/egl/egl_external_platform.d/";
+  hardware.opengl.extraPackages = with pkgs; [
+    vaapiVdpau
+    libvdpau-va-gl
+    libva
+  ];
   # security.sudo.wheelNeedsPassword = ;
-
+  services.xserver = {
+    videoDrivers = [ "nvidia" ];
+    displayManager.gdm.wayland = true;
+    displayManager.gdm.nvidiaWayland = true;
+  };
   # system.replaceRuntimeDependencies
   #     List of packages to override without doing a full rebuild. The original derivation and replacement derivation must have the same name length, and ideally should have close-to-identical directory layout.
 
