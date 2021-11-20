@@ -166,30 +166,9 @@ kernel_xconfig=''
     enable= true;
     zsh-autoenv.enable = false;
     enableCompletion = true;
-    autosuggestions.enable = true;
+    autosuggestions.enable = false;
     syntaxHighlighting.enable = false;
-	ohMyZsh = {
-		enable = false;
-	  # theme
-	};
     shellAliases= environment.shellAliases // {
-      se="sudoedit";
-      # to delete files
-      # todo escape it else it fails
-      # clean_orig="find . -name '*.orig' -delete";
-    # ++ [
-  # alias -s json=nvim
-  # alias -s Vagrantfile=nvim
-  # alias -s py=python3
-  # alias -s rb=ruby
-  # alias -s png=sxiv
-  # alias -s jpg=xdg-open
-  # alias -s gif=xdg-open
-  # alias -s avi=mpv
-  # alias -s mp3=mocp
-  # alias -s pdf=xdg-open
-  # alias -s doc=xdg-open
-  # alias -s docx=xdg-open
     };
     # goes to /etc/zshenv
   shellInit = ''
@@ -197,40 +176,40 @@ kernel_xconfig=''
 
   # todo make available for zsh too
   # use FZF_PATH="$(fzf-share)" to do it dynamically
-  interactiveShellInit = ''
-    # To see the key combo you want to use just do:
-    # Don't try to bind CTRL Q / CTRL S !!
-    # cat > /dev/null
-    # And press it
+  # interactiveShellInit = ''
+  #   # To see the key combo you want to use just do:
+  #   # Don't try to bind CTRL Q / CTRL S !!
+  #   # cat > /dev/null
+  #   # And press it
 
-    bindkey "^K"      kill-whole-line                      # ctrl-k
-    bindkey "^A"      beginning-of-line                    # ctrl-a
-    bindkey "^E"      end-of-line                          # ctrl-e
-    bindkey "[B"      history-search-forward               # down arrow
-    bindkey "[A"      history-search-backward              # up arrow
-    bindkey "^D"      delete-char                          # ctrl-d
-    bindkey "^F"      forward-char                         # ctrl-f
-    bindkey "^B"      backward-char                        # ctrl-b
+  #   bindkey "^K"      kill-whole-line                      # ctrl-k
+  #   bindkey "^A"      beginning-of-line                    # ctrl-a
+  #   bindkey "^E"      end-of-line                          # ctrl-e
+  #   bindkey "[B"      history-search-forward               # down arrow
+  #   bindkey "[A"      history-search-backward              # up arrow
+  #   bindkey "^D"      delete-char                          # ctrl-d
+  #   bindkey "^F"      forward-char                         # ctrl-f
+  #   bindkey "^B"      backward-char                        # ctrl-b
 
-    bindkey -v   # Default to standard vi bindings, regardless of editor string
+  #   bindkey -v   # Default to standard vi bindings, regardless of editor string
 
-    zle -N edit-command-line
+  #   zle -N edit-command-line
 
-    # Press ESC-v to edit current line in your favorite $editor
-    bindkey -M vicmd v edit-command-line
-    # bindkey '^V' edit-command-line
-    bindkey -r "^G" # was bound to list-expand I don't know where/why
-    # bindkey '^G' push-line-or-edit
+  #   # Press ESC-v to edit current line in your favorite $editor
+  #   bindkey -M vicmd v edit-command-line
+  #   # bindkey '^V' edit-command-line
+  #   bindkey -r "^G" # was bound to list-expand I don't know where/why
+  #   # bindkey '^G' push-line-or-edit
 
-    bindkey '^P' up-history
-    bindkey '^N' down-history
+  #   bindkey '^P' up-history
+  #   bindkey '^N' down-history
 
-    # TODO doesn't work because it s overriden afterwards apparently
-    # home-manager should have this ?
-    . "${fzf}/share/fzf/completion.zsh"
-    . "${fzf}/share/fzf/key-bindings.zsh"
+  #   # TODO doesn't work because it s overriden afterwards apparently
+  #   # home-manager should have this ?
+  #   # . "${fzf}/share/fzf/completion.zsh"
+  #   # . "${fzf}/share/fzf/key-bindings.zsh"
 
-  '';
+  # '';
 
 };
 
@@ -249,14 +228,14 @@ kernel_xconfig=''
 
   users.defaultUserShell = pkgs.zsh;
 
-  nixpkgs = {
-    config = {
-      allowUnfree = true;
-      permittedInsecurePackages = [
-          # "webkitgtk-2.4.11"
-      ];
-    };
-  };
+  # nixpkgs = {
+  #   config = {
+  #     allowUnfree = true;
+  #     permittedInsecurePackages = [
+  #         # "webkitgtk-2.4.11"
+  #     ];
+  #   };
+  # };
 
   environment.etc."inputrc".source = ../../config/inputrc;
 

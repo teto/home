@@ -25,6 +25,13 @@ in {
         '';
       };
 
+      enableFancyCtrlZ = mkOption {
+        default = true;
+        type = types.bool;
+        description = ''
+          Whether to enable Fish integration.
+        '';
+      };
     };
   };
 
@@ -33,6 +40,22 @@ in {
 
       programs.zsh.initExtraFirst = lib.mkBefore "zmodload zsh/zprof";
       programs.zsh.initExtra = lib.mkAfter "zprof";
+    })
+
+    (mkIf cfg.enableFancyCtrlZ {
+    programs.zsh.initExtra = ''
+      fancy-ctrl-z () {
+        if [[ $#BUFFER -eq 0 ]]; then
+          BUFFER="fg"
+          zle accept-line
+        else
+          zle push-input
+          zle clear-screen
+        fi
+      }
+      zle -N fancy-ctrl-z
+      bindkey '^Z' fancy-ctrl-z
+    '';
     })
 
     (mkIf cfg.enableSetTermTitle {

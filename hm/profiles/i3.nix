@@ -60,6 +60,11 @@ let
       set $w8 8
       set $w9 9
 
+      floating_minimum_size 75 x 50
+      floating_maximum_size -1 x -1
+
+
+
       # experimental part about
       # Mod4 => window key
       set $mad Super_L
@@ -75,10 +80,6 @@ let
 
 
       # bindsym $mod+shift+e exec /home/teto/i3-easyfocus/easyfocus
-
-      # The side buttons move the window around
-      bindsym button9 move left
-      bindsym button8 move right
 
 
       # Tests for title_format
@@ -294,6 +295,14 @@ in
       "$mod+m"= ''mode "monitors'';
     }
     // {
+      # The side buttons move the window around
+      "button9" = "move left";
+      "button8" = "move right";
+      # start a terminal
+      "$mod+Return" = "exec --no-startup-id $term";
+      # bindsym $mod+Shift+Return exec --no-startup-id ~/.i3/fork_term.sh
+      "$mod+Shift+Return" = ''exec --no-startup-id $term -d "$(xcwd)"'';
+
         # change container layout (stacked, tabbed, default)
         "$GroupFr+$mod+ampersand" = "layout toggle";
         "$GroupUs+$mod+1"  = "layout toggle";
@@ -347,6 +356,8 @@ in
         # bindsym --release Print exec "scrot -m '/home/user/Pictures/screenshots/%s_%H%M_%d.%m.%Y_$wx$h.png'"
         # bindsym --release Shift+Print exec "scrot -s '/home/user/Pictures/screenshots/%s_%H%M_%d%m%Y_$wx$h.png'"
         # bindsym --release $mod+Shift+Print exec "scrot -u -d 4 '/home/user/Pictures/screenshots/%s_%H%M_%d%m%Y_$wx$h.png'"
+        "$mod+shift+o" = "exec xkill";
+
 
       }
       // bind_ws 1 "a" "q"

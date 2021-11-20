@@ -21,28 +21,20 @@ function rfw(){
 # notifies when long command finishes
 # zbell should recognize aliases
 zbell_ignore=("$EDITOR" "$PAGER" v)
-# . "$ZDOTDIR/zbell.zsh"
-# adds a transfer function to upload a file & display its url
-# . "$ZDOTDIR/transfer.zsh"
 
 # zsh.enableSuggestions right handside color
 # see https://github.com/zsh-users/zsh-autosuggestions for suggestions
 # AUTOSUGGESTION_HIGHLIGHT_COLOR="fg=cyan"
-
-# TODO move it to HM maybe
-# . "/etc/zinputrc"
-
 
 # TODO make it a function cat some.json | python -m json.tool
 
 # History parameters {{{
 
 # make some commands not show up in history
-export HISTIGNORE="ls:ll:cd -:pwd:exit:date"
+# export HISTIGNORE="ls:ll:cd -:pwd:exit:date"
 
 # multiple zsh sessions will append to the same history file (incrementally, after each command is executed)
 # setopt inc_append_history
-
 setopt hist_expire_dups_first # purge duplicates first
 
 
@@ -145,10 +137,6 @@ fancy-ctrl-z () {
 zle -N fancy-ctrl-z
 bindkey '^Z' fancy-ctrl-z
 # }}}
-# to get more focused Ctrl W {{{
-# http://zshwiki.org/home/zle/bindkeys
-# export WORDCHARS=''
-# }}}
 
 # Look if zsh autosuggestions improve things
 #autoload predict-on
@@ -156,13 +144,7 @@ bindkey '^Z' fancy-ctrl-z
 autoload -Uz add-zsh-hook
 autoload -z edit-command-line
 
-zmodload -i zsh/complist
-
-
-# man zshcontrib
-# zstyle ':vcs_info:*' actionformats '%F{5}(%f%s%F{5})%F{3}-%F{5}[%F{2}%b%F{3}|%F{1}%a%F{5}]%f '
-# zstyle ':vcs_info:*' formats '%F{5}(%f%s%F{5})%F{3}-%F{5}[%F{2}%b%F{5}]%f '
-# zstyle ':vcs_info:*' enable git #svn cvs
+# zmodload -i zsh/complist
 
 
 # completion config {{{1
@@ -227,7 +209,6 @@ zstyle ':completion:*:kill:*' force-list always
 
 # Pour afficher la commande dans le titre du terminal
 # https://github.com/robbyrussell/oh-my-zsh/blob/master/lib/termsupport.zsh
-# source "$ZDOTDIR/prompt.zsh"
 # Prompt {{{
 # if a process takeslonger than this, display its processing time
 REPORTTIME=10
@@ -253,8 +234,6 @@ SPROMPT="Correct $fg[red]%R$reset_color to $fg[green]%r$reset_color [(y)es (n)o 
 ## use ctrl+t to toggle autosuggestions(hopefully this wont be needed as
 ## zsh-autosuggestions is designed to be unobtrusive)
 #bindkey '^T' autosuggest-toggle
-#install it first
-#source zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # _gnu_generic should work if program accepts --help
 # this is superslow

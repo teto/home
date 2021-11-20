@@ -59,10 +59,6 @@ bindsym $mod+n mode "focused"
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
-# start a terminal
-bindsym $mod+Return exec --no-startup-id $term
-# bindsym $mod+Shift+Return exec --no-startup-id ~/.i3/fork_term.sh
-bindsym $mod+Shift+Return exec --no-startup-id $term -d "$(xcwd)"
 
 
 # Use mod-Control-Up and Down to rotate through the workspace list.
@@ -224,7 +220,6 @@ bindsym $mod+ctrl+minus move scratchpad
 # bindsym $mod+shift+n exec nemo
 bindsym $mod+shift+p mode mouse
 
-bindsym  $mod+shift+o exec xkill
 
 mode mouse {
 
@@ -238,9 +233,6 @@ mode mouse {
 }
 
 no_focus [window_role="pop-up"]
-
-floating_minimum_size 75 x 50
-floating_maximum_size -1 x -1
 
 ### TODO need to run urxvtd beforehand
 ### display error in case it does not launch

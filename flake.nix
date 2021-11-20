@@ -33,7 +33,7 @@
     # };
   };
 
-  outputs = inputs@{
+  outputs = {
     self, hm, nixpkgs-teto, nur, unstable
     , nova , ...
     }:
@@ -55,7 +55,7 @@
         };
 
       nixpkgs = nixpkgs-teto;
-      nixpkgsFinal = pkgImport inputs.nixpkgs-teto;
+      nixpkgsFinal = pkgImport self.inputs.nixpkgs-teto;
 
       # TODO I should use hm.lib.homeManagerConfiguration
       # and pass the pkgs to it
@@ -97,13 +97,11 @@
         {
           mcoudron = nixpkgs.lib.nixosSystem {
             inherit system;
-            # specialArgs = { flakes = inputs; };
             modules = [
               hm.nixosModules.home-manager
               nova.nixosProfiles.dev
 
               ({ pkgs, ... }: {
-                # nixpkgs.overlays = [ inputs.neovim.overlay ];
                 nixpkgs.overlays = nixpkgs.lib.attrValues self.overlays;
                 imports = [
                   ./nixos/hardware-dell-camera.nix
@@ -163,13 +161,11 @@
           jedha = nixpkgs.lib.nixosSystem {
             inherit system;
             pkgs = nixpkgsFinal;
-            # extraArgs = { pkgs = pkgsImport }
             modules = [
               # often breaks
               # (import ./nixos/modules/hoogle.nix)
               ({ pkgs, ... }: {
                 nixpkgs.overlays = nixpkgs.lib.attrValues self.overlays;
-                # [ inputs.neovim.overlay ];
 
                 imports = [
                   ./nixos/configuration-lenovo.nix
@@ -180,7 +176,7 @@
                   ./nixos/modules/ntp.nix
                   ./nixos/hardware-lenovo.nix
                   ./nixos/profiles/steam.nix
-                  # inputs.mptcp-flake.nixosModules.mptcp
+                  # self.inputs.mptcp-flake.nixosModules.mptcp
                   # ./nixos/profiles/mptcp.nix
                   ./nixos/profiles/nova.nix
 
@@ -230,7 +226,7 @@
         overrides = import ./nixpkgs/overlays/overrides.nix;
         haskell = import ./nixpkgs/overlays/haskell.nix;
         # neovim = import ./nixpkgs/overlays/neovim.nix;
-        neovimOfficial = inputs.neovim.overlay;
+        neovimOfficial = self.inputs.neovim.overlay;
         wireshark = import ./nixpkgs/overlays/wireshark.nix;
         python = import ./nixpkgs/overlays/python.nix;
         # vimPlugins = final: prev: {
@@ -278,7 +274,7 @@
       // nova.overlays
       ;
 
-      packages."${system}" = {
+      packages.${system} = {
         dce = nixpkgsFinal.callPackage ./pkgs/dce {};
 
         # aws-lambda-rie = self.overlays.local.aws-lambda-rie ;

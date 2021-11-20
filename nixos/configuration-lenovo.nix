@@ -11,10 +11,6 @@ in
     ./modules/config-all.nix
     ./modules/desktop.nix
     ./modules/libvirtd.nix
-    # ./modules/minio.nix
-    # ./modules/redis.nix # for jinko
-    # ./modules/hoogle.nix
-    # ./modules/vpn.nix
 
     ./modules/openssh.nix
     # ./modules/syncthing.nix
@@ -23,9 +19,6 @@ in
     ./profiles/steam.nix
 
     # ./modules/sway.nix
-
-    # ihaskell marked as broken :'(
-    # ./modules/jupyter.nix
   #   ./modules/mininet.nix
 
     # extra module not upstreamed yet
@@ -192,8 +185,6 @@ in
 
   # networking.enableIPv6 = false;
 
-  services.xserver.videoDrivers = [ "nvidia" ];
-  # hardware.nvidia.package
 
   # rtkit is optional but recommended {{{
   security.rtkit.enable = true;

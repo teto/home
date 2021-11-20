@@ -232,6 +232,7 @@ rec {
 programs.zsh = {
     enable = true;
     dotDir = ".config/zsh";
+    autosuggestion.enable = true;
     sessionVariables = {
       # HISTFILE="$XDG_CACHE_HOME/zsh_history";
     };

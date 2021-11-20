@@ -45,7 +45,7 @@ in
   };
 
   # for blue tooth applet; must be installed systemwide
-  services.blueman-applet.enable = false;
+  # services.blueman-applet.enable = false;
 
   services.nextcloud-client.enable = true;
 
