@@ -311,8 +311,12 @@ use {
 use { 'alec-gibson/nvim-tetris', opt = true }
 
 -- use { 'mfussenegger/nvim-dap'} -- debug adapter protocol
-use { 'bazelbuild/vim-bazel' , requires = { 'google/vim-maktaba' } }
-
+use {
+	-- a plugin for interacting with bazel :Bazel build //some/package:sometarget
+	-- supports autocompletion
+	'bazelbuild/vim-bazel' , requires = { 'google/vim-maktaba' } 
+}
+use 'bazelbuild/vim-ft-bzl'
 use {
 	'matbme/JABS.nvim',
 	config = function ()

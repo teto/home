@@ -30,9 +30,8 @@ in
     # '';
 
     # 0 = default/highest vs 7 lowest
-    daemonIONiceLevel = 3;
     # 0 = max (default) vs 19 lowest
-    daemonNiceLevel = 2;
+    # daemonNiceLevel = 2;
     buildMachines = [
       localMachine
     ];

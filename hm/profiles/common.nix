@@ -180,7 +180,7 @@ rec {
 
   # don't enable it since it will override my zle-keymap-select binding
   programs.starship = {
-    enable = true;
+    enable = lib.mkForce true;
     enableZshIntegration = true;
     enableBashIntegration = true;
      # settings = {};
@@ -250,6 +250,11 @@ programs.zsh = {
 
     autocd = true;
 
+    initExtraFirst = "
+      zmodload zsh/zprof
+    ";
+
+    enableCompletion = false;
     initExtra = ''
 
       # VERY IMPORTANT else zsh can eat last line
@@ -263,9 +268,7 @@ programs.zsh = {
       # used in some git aliases
       export REVIEW_BASE=master
 
-
-      # not sure how it's inherited
-      # unset AWS_DEFAULT_PROFILE
+      zprof
     ''
       # https://github.com/atweiden/fzf-extras
       # the zsh script does nothing yet
@@ -281,7 +284,8 @@ programs.zsh = {
     '';
 
     # custom module
-    enableSetTermTitle = true;
+    enableSetTermTitle = false;
+    enableProfiling = true;
   };
 
   programs.tmux = {

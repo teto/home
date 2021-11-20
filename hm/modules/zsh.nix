@@ -10,6 +10,13 @@ in {
   options = {
     programs.zsh = {
       # enable = mkEnableOption "Some custom zsh functions";
+      enableProfiling = mkOption {
+        default = true;
+        type = types.bool;
+        description = ''
+          Whether to enable Fish integration.
+        '';
+      };
       enableSetTermTitle = mkOption {
         default = true;
         type = types.bool;
@@ -22,6 +29,11 @@ in {
   };
 
   config = mkIf cfg.enable (mkMerge [
+    (mkIf cfg.enableProfiling {
+
+      programs.zsh.initExtraFirst = lib.mkBefore "zmodload zsh/zprof";
+      programs.zsh.initExtra = lib.mkAfter "zprof";
+    })
 
     (mkIf cfg.enableSetTermTitle {
     programs.zsh.initExtra = ''

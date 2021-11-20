@@ -13,6 +13,7 @@ function rfw(){
     readlink -f $(which "$1")
 }
 
+
 # . "$ZDOTDIR/init.sh"
 . "$ZDOTDIR/aliases.zsh"
 
@@ -256,9 +257,10 @@ SPROMPT="Correct $fg[red]%R$reset_color to $fg[green]%r$reset_color [(y)es (n)o 
 #source zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # _gnu_generic should work if program accepts --help
-compdef _gnu_generic qutebrowser
-compdef _gnu_generic mptcpanalyzer
-compdef _gnu_generic jcli
+# this is superslow
+# compdef _gnu_generic qutebrowser
+# compdef _gnu_generic mptcpanalyzer
+# compdef _gnu_generic jcli
 
 
 # https://unix.stackexchange.com/questions/547/make-my-zsh-prompt-show-mode-in-vi-mode?noredirect=1&lq=1
