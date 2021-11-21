@@ -51,40 +51,40 @@ in {
         set_from_resource $hl           i3wm.color13 #ff0000
       '';
 
-      config.colors = {
-          focused = {
-            border = "$fg-alt";
-            background = "$bg";
-            text = "$hl";
-            indicator = "$fg-alt";
-            childBorder = "$hl";
-          };
-          focusedInactive = {
-            border = "$fg-alt";
-            background = "$bg";
-            text = "$fg";
-            indicator = "$fg-alt";
-            childBorder = "$fg-alt";
-          };
+      # config.colors = {
+      #     focused = {
+      #       border = "$fg-alt";
+      #       background = "$bg";
+      #       text = "$hl";
+      #       indicator = "$fg-alt";
+      #       childBorder = "$hl";
+      #     };
+      #     focusedInactive = {
+      #       border = "$fg-alt";
+      #       background = "$bg";
+      #       text = "$fg";
+      #       indicator = "$fg-alt";
+      #       childBorder = "$fg-alt";
+      #     };
 
-          unfocused = {
-            border = "$fg-alt";
-            background = "$bg";
-            text = "$fg";
-            indicator = "$fg-alt";
-            childBorder = "$fg-alt";
-          };
+      #     unfocused = {
+      #       border = "$fg-alt";
+      #       background = "$bg";
+      #       text = "$fg";
+      #       indicator = "$fg-alt";
+      #       childBorder = "$fg-alt";
+      #     };
 
-          urgent = {
-            border = "$fg-alt";
-            background = "$bg";
-            text = "$fg";
-            indicator = "$fg-alt";
-            childBorder = "$fg-alt";
-          };
+      #     urgent = {
+      #       border = "$fg-alt";
+      #       background = "$bg";
+      #       text = "$fg";
+      #       indicator = "$fg-alt";
+      #       childBorder = "$fg-alt";
+      #     };
 
-          background = "$bg";
-        };
+      #     background = "$bg";
+      #   };
     };
   };
 }

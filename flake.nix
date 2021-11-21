@@ -43,13 +43,10 @@
 
       system = "x86_64-linux";
 
-      # utils = import ./nixpkgs/lib/colors.nix { inherit (nixpkgsFinals) lib;};
-
       # trick to be able to set allowUnfree
       pkgImport = pkgs:
         import pkgs {
           inherit system;
-          # nova.overlays //
           overlays = pkgs.lib.attrValues (self.overlays);
           config = { allowUnfree = true; };
         };
@@ -262,6 +259,7 @@
         # };
 
         nur = nur.overlay;
+
         nvidia-acceleration-overlay = (prev: super: {
           linuxPackages = super.linuxPackages.extend (final: prev: {
             nvidia_x11.args = [ "-e" ./nvidia_x11_builder.sh ];
@@ -287,13 +285,6 @@
             };
           });  
         }); 
-        # unfree = final: prev: {
-        #   unstable = import nixpkgs-unstable {
-        #     system = "x86_64-linux";
-        #     config.allowUnfree = true;
-        #   };
-        # };
-        # toto = (final: prev: {});
       }
       // nova.overlays
       ;
@@ -304,17 +295,12 @@
         # aws-lambda-rie = self.overlays.local.aws-lambda-rie ;
         aws-lambda-rie = nixpkgsFinal.callPackage ./pkgs/aws-lambda-runtime-interface-emulator {};
 
-        # build-idris-package
-        # idrisPackages / buildIdrisPkg
         replica = let
           idrisPackages = nixpkgsFinal.idrisPackages.override {
             # get idris 2 from the flake
             idris-no-deps = nixpkgsFinal.idris2;
           };
         in idrisPackages.callPackage ./pkgs/REPLica {};
-
-        # python3Packages
-        # i3-dispatch = nixpkgs.python3Packages.callPackage ./nipkgs/pkgs/pkgs/i3-dispatch {};
       };
 
       # hmModules = [

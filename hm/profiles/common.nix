@@ -139,6 +139,8 @@ rec {
     historyFile = "${config.xdg.cacheHome}/bash_history";
     # historyFile = "$XDG_CACHE_HOME/bash_history";
     shellAliases = {
+      n="nix develop";
+      ns="nix-shell";
       lg="lazygit";
       #mostly for testin
       # dfh="df --human-readable";
@@ -154,6 +156,23 @@ rec {
 
       netstat_tcp="netstat -ltnp";
       nixpaste="curl -F \"text=<-\" http://nixpaste.lbr.uno";
+
+      # git variables {{{
+      gl="git log";
+      gs="git status";
+      gd="git diff";
+      ga="git add";
+      gc="git commit";
+      gcm="git commit -m";
+      gca="git commit -a";
+      gb="git branch";
+      gch="git checkout";
+      grv="git remote -v";
+      gpu="git pull";
+      gcl="git clone";
+      # gta="git tag -a -m";
+      gbr="git branch";
+      # }}}
 
       # kitty
       kcat="kitty +kitten icat";
@@ -252,12 +271,20 @@ programs.zsh = {
     autocd = true;
 
     initExtraFirst = "
-      zmodload zsh/zprof
     ";
 
     enableCompletion = false;
     initExtra = ''
 
+    ''
+    ;
+
+      # https://github.com/atweiden/fzf-extras
+      # the zsh script does nothing yet
+      # Bug open fzf always
+      # emulate sh -c 'source "${fzf-extras}/fzf-extras.sh";'
+      # source "${fzf-extras}/fzf-extras.zsh";
+    loginExtra = ''
       # VERY IMPORTANT else zsh can eat last line
       setopt prompt_sp
 
@@ -268,16 +295,7 @@ programs.zsh = {
 
       # used in some git aliases
       export REVIEW_BASE=master
-
-      zprof
-    ''
-      # https://github.com/atweiden/fzf-extras
-      # the zsh script does nothing yet
-      # Bug open fzf always
-      # emulate sh -c 'source "${fzf-extras}/fzf-extras.sh";'
-      # source "${fzf-extras}/fzf-extras.zsh";
-
-    ;
+    '';
 
     initExtraBeforeCompInit = ''
       # zsh searches $fpath for completion files
@@ -285,8 +303,8 @@ programs.zsh = {
     '';
 
     # custom module
-    enableSetTermTitle = false;
-    enableProfiling = true;
+    enableSetTermTitle = true;
+    enableProfiling = false;
   };
 
   programs.tmux = {

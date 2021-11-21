@@ -73,53 +73,28 @@ rec {
      wget
   ]);
 
+      # kernel aliases {{{
+        # nix messes up the escaping I think
+        # kernel_makeconfig=''
+        #   nix-shell -E 'with import <nixpkgs> {}; mptcp-manual.overrideAttrs (o: {nativeBuildInputs=o.nativeBuildInputs ++ [ pkgconfig ncurses ];})' --command "make menuconfig KCONFIG_CONFIG=$PWD/build/.config"
+        #   '';
+  # kernel_xconfig=''
+    # nix-shell -E 'with import <nixpkgs> {}; linux.overrideAttrs (o: {nativeBuildInputs=o.nativeBuildInputs ++ [ pkgconfig qt5.qtbase ];})' --command 'make menuconfig KCONFIG_CONFIG=$PWD/build/.config'
+  # '';
+  # kernel_xconfig="make xconfig KCONFIG_CONFIG=build/.config"
+  # }}}
    # TODO it appears in /etc/bashrc !
    environment.shellAliases = {
-      # git variables {{{
-      gl="git log";
-      gs="git status";
-      gd="git diff";
-      ga="git add";
-      gc="git commit";
-      gcm="git commit -m";
-      gca="git commit -a";
-      gb="git branch";
-      gch="git checkout";
-      grv="git remote -v";
-      gpu="git pull";
-      gcl="git clone";
-      gta="git tag -a -m";
-      gbr="git branch";
-      # }}}
-      # nix aliases {{{
-      nxi="nix-env -iA";
-      nxu="nix-env -e";
-      nxs="nix-shell -A";
-      nxp="nixops ";
-      # }}}
       nix-stray-roots=''nix-store --gc --print-roots | egrep -v "^(/nix/var|/run/\w+-system|\{memory)"'';
-# lib.escapeShellArg fails
       nixpaste="curl -F \"text=<-\" http://nixpaste.lbr.uno";
-    ".."="cd ..";
-    "..."="cd ../..";
+      ".."="cd ..";
+      "..."="cd ../..";
 
-
-    # kernel aliases {{{
-      # nix messes up the escaping I think
-      kernel_makeconfig=''
-        nix-shell -E 'with import <nixpkgs> {}; mptcp-manual.overrideAttrs (o: {nativeBuildInputs=o.nativeBuildInputs ++ [ pkgconfig ncurses ];})' --command "make menuconfig KCONFIG_CONFIG=$PWD/build/.config"
-        '';
-kernel_xconfig=''
-  nix-shell -E 'with import <nixpkgs> {}; linux.overrideAttrs (o: {nativeBuildInputs=o.nativeBuildInputs ++ [ pkgconfig qt5.qtbase ];})' --command 'make menuconfig KCONFIG_CONFIG=$PWD/build/.config'
-'';
-# kernel_xconfig="make xconfig KCONFIG_CONFIG=build/.config"
-# }}}
-
-# oftenly used programs {{{
-      v="nvim";
-      c="cat";
-      r="ranger";
-# }}}
+  # oftenly used programs {{{
+        v="nvim";
+        c="cat";
+        r="ranger";
+  # }}}
    };
 
 
@@ -128,26 +103,20 @@ kernel_xconfig=''
   environment.sessionVariables = {
     # XDG_CONFIG_HOME="@{HOME}/.config";
     XDG_CONFIG_HOME="$HOME/.config";
-    # XDG_CACHE_HOME="$HOME/.cache";
-    # XDG_DATA_HOME="$HOME/.local/share";
     EDITOR="nvim";
     # xdg-settings set default-web-browser firefox.desktop
-    # BROWSER="qutebrowser";
-
-    # todo 
-    # XDG_CONFIG_HOME="$HOME/.config";
     XDG_CACHE_HOME="$HOME/.cache";
     XDG_DATA_HOME="$HOME/.local/share";
     # TODO Move to user config aka homemanager
     # HISTFILE="'${XDG_CACHE_HOME}/bash_history";
-    LESS=""; # options to pass to less automatically
+    # LESS=""; # options to pass to less automatically
   };
   environment.extraOutputsToInstall = [ "man" ];
   # environment.variables = {
   # };
 
   # stick to sh as it's shell independant
-  environment.extraInit = builtins.readFile ../../config/zsh/init.sh;
+  # environment.extraInit = builtins.readFile ../../config/zsh/init.sh;
 
   # on master it is disabled
   documentation.man.enable = true;
@@ -176,12 +145,6 @@ kernel_xconfig=''
 
   # todo make available for zsh too
   # use FZF_PATH="$(fzf-share)" to do it dynamically
-  # interactiveShellInit = ''
-  #   # To see the key combo you want to use just do:
-  #   # Don't try to bind CTRL Q / CTRL S !!
-  #   # cat > /dev/null
-  #   # And press it
-
   #   bindkey "^K"      kill-whole-line                      # ctrl-k
   #   bindkey "^A"      beginning-of-line                    # ctrl-a
   #   bindkey "^E"      end-of-line                          # ctrl-e
@@ -190,8 +153,16 @@ kernel_xconfig=''
   #   bindkey "^D"      delete-char                          # ctrl-d
   #   bindkey "^F"      forward-char                         # ctrl-f
   #   bindkey "^B"      backward-char                        # ctrl-b
+  interactiveShellInit = ''
+  #   # To see the key combo you want to use just do:
+  #   # Don't try to bind CTRL Q / CTRL S !!
+  #   # cat > /dev/null
+  #   # And press it
 
-  #   bindkey -v   # Default to standard vi bindings, regardless of editor string
+
+    bindkey -e
+    bindkey -v   # Default to standard vi bindings, regardless of editor string
+  '';
 
   #   zle -N edit-command-line
 
@@ -200,16 +171,11 @@ kernel_xconfig=''
   #   # bindkey '^V' edit-command-line
   #   bindkey -r "^G" # was bound to list-expand I don't know where/why
   #   # bindkey '^G' push-line-or-edit
-
-  #   bindkey '^P' up-history
-  #   bindkey '^N' down-history
-
   #   # TODO doesn't work because it s overriden afterwards apparently
   #   # home-manager should have this ?
   #   # . "${fzf}/share/fzf/completion.zsh"
   #   # . "${fzf}/share/fzf/key-bindings.zsh"
 
-  # '';
 
 };
 
@@ -228,15 +194,23 @@ kernel_xconfig=''
 
   users.defaultUserShell = pkgs.zsh;
 
-  # nixpkgs = {
-  #   config = {
+  nixpkgs = {
+    config = {
   #     allowUnfree = true;
+      allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+        "vscode-extension-ms-vsliveshare-vsliveshare"
+        "sublimetext3"
+        "slack"
+        "vscode"
+        "steam"
+        "steam-original"
+        "steam-runtime"
+      ];
   #     permittedInsecurePackages = [
   #         # "webkitgtk-2.4.11"
   #     ];
-  #   };
-  # };
-
+    };
+  };
   environment.etc."inputrc".source = ../../config/inputrc;
 
   security.sudo = {

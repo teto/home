@@ -60,12 +60,12 @@ in
     # TODO
     extraConfig = ''
       smart_gaps yes
-      set $bg           {bg}
-      set $bg-alt       {bg-alt}
-      set $fg           i3wm.color15 #ff0000
-      set $fg-alt       i3wm.color2 #ff0000
-      set $hl           i3wm.color13 #ff0000
     '';
+      # set $bg           {bg}
+      # set $bg-alt       {bg-alt}
+      # set $fg           i3wm.color15 #ff0000
+      # set $fg-alt       i3wm.color2 #ff0000
+      # set $hl           i3wm.color13 #ff0000
   };
 
   home.packages = with pkgs; [

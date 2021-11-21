@@ -2,12 +2,6 @@
 let
   terminalCommand = pkgs.kitty;
 
-  texliveEnv = pkgs.texlive.combine {
-    # tabularx is not available
-    inherit (pkgs.texlive) scheme-small cleveref latexmk bibtex algorithms cm-super
-    csvsimple subfigure  glossaries biblatex logreq xstring biblatex-ieee subfiles mfirstuc;
-   };
-
   devPkgs = all: with pkgs; let
     in
     [
@@ -252,20 +246,16 @@ in
   programs.pywal.enable = true;
 
   xsession = {
-    enable = true;
+    enable = false;
+    scriptPath = ".hm-xsession";
 
     profileExtra = ''
-      # export ZDOTDIR=
     '';
-
-    # initExtra = ''
-    #   ${pkgs.feh}/bin/feh --bg-fill /home/teto/dotfiles/wallpapers/nebula.jpg
-    # '';
   };
 
 
   # as long as there is no better way to configure i3
-  home.file.".pypirc".source = ../../home/pypirc;
+  # home.file.".pypirc".source = ../../home/pypirc;
 
   # readline equivalent but in haskell for ghci
   # home.file.".haskeline".source = ../home/haskeline;
@@ -304,31 +294,20 @@ in
     enableZshIntegration = true;
   };
 
-  # systemd.user.services.xplugd = {
+  # Works only on x11
+  # systemd.user.services.deadd = {
   #   Unit = {
-  #     Description = "xplugd";
+  #     Description = "Linux notification manager";
+  #     After = [ "graphical-session-pre.target" ];
   #     PartOf = [ "graphical-session.target" ];
   #   };
-  #   Install.WantedBy = [ "graphical-session.target" ];
-  #   Service.ExecStart = "${pkgs.xplugd}/bin/xplugd -n";
+  #   Service = {
+  #     Type = "dbus";
+  #     BusName = "org.freedesktop.Notifications";
+  #     ExecStart = "${pkgs.deadd-notification-center}/bin/linux_notification_server";
+  #     # Environment = optionalString (cfg.waylandDisplay != "")
+  #     #   "WAYLAND_DISPLAY=${cfg.waylandDisplay}";
+  #   };
   # };
-
-
-  # Works only on x11
-  systemd.user.services.deadd = {
-    Unit = {
-      Description = "Linux notification manager";
-      After = [ "graphical-session-pre.target" ];
-      PartOf = [ "graphical-session.target" ];
-    };
-
-    Service = {
-      Type = "dbus";
-      BusName = "org.freedesktop.Notifications";
-      ExecStart = "${pkgs.deadd-notification-center}/bin/linux_notification_server";
-      # Environment = optionalString (cfg.waylandDisplay != "")
-      #   "WAYLAND_DISPLAY=${cfg.waylandDisplay}";
-    };
-  };
 
 }

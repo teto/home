@@ -63,28 +63,13 @@ let
       floating_minimum_size 75 x 50
       floating_maximum_size -1 x -1
 
-
-
       # experimental part about
       # Mod4 => window key
       set $mad Super_L
       # Mod4
 
-      # https://faq.i3wm.org/question/5942/using-modifer-key-as-a-binding/
-      # https://faq.i3wm.org/question/5429/stay-in-mode-only-while-key-is-pressed/
-      # set $set_mark  /home/teto/.i3/set_marks.py
-      #bindsym $mad exec notify-send "XP mode"; mode "xp"; exec $set_mark
-
       # The middle button over a titlebar kills the window
       bindsym --release button2 kill
-
-
-      # bindsym $mod+shift+e exec /home/teto/i3-easyfocus/easyfocus
-
-
-      # Tests for title_format
-      # give the focused window a prefix
-      # bindsym $mod+Shift+g title_format "[test] %title"
 
       for_window [title="Thunderbird$"] title_format " %title"
 
@@ -92,18 +77,23 @@ let
       include ~/.config/i3/config.main
       include ~/.config/i3/config.xp
     ''
+      # https://faq.i3wm.org/question/5942/using-modifer-key-as-a-binding/
+      # https://faq.i3wm.org/question/5429/stay-in-mode-only-while-key-is-pressed/
+      # set $set_mark  /home/teto/.i3/set_marks.py
+      #bindsym $mad exec notify-send "XP mode"; mode "xp"; exec $set_mark
+
+
+      # bindsym $mod+shift+e exec /home/teto/i3-easyfocus/easyfocus
+      # Tests for title_format
+      # give the focused window a prefix
+      # bindsym $mod+Shift+g title_format "[test] %title"
     # for_window [class="^qutebrowser$"] title_format "<span background='blue'>QB</span> %title"
     # for_window  title_format "<span background='#F28559'>FF</span> %title"
 
     ;
 in
 {
-  # imports = [
-  #   ../../nixpkgs/lib/colors.nix
-  # ];
-
   # see https://discourse.nixos.org/t/opening-i3-from-home-manager-automatically/4849/7
-  xsession.scriptPath = ".hm-xsession";
 
   xsession.windowManager.i3 =
   let
@@ -119,6 +109,7 @@ in
       };
     in
   {
+    # keep it enabled to generate the config
     enable = true;
 
     # bindsym $mod+ctrl+v exec ~/vim-anywhere/bin/run"
@@ -133,54 +124,6 @@ in
     config = {
       terminal = term;
       workspaceAutoBackAndForth = true;
-
-      # colors = {
-      # # class                 border,  backgrd,  text,    indicator,  child border
-      # # client.focused          $focused_border $client_bg #FFFF50
-      # # client.urgent           #870000 #870000 #ffffff #090e14
-      # # client.background       $client_bg
-      # # # client.background       #66ff33
-
-      # # client.placeholder  #000000 #0c0c0c #ffffff #000000   #0c0c0c
-
-      #   background = "#d70a53";
-      #   # focused_inactive = 
-
-      # # client.focused          $focused_border $client_bg #FFFF50
-      #   focused = {
-      #     border = "#C043C6";
-      #     background = "#d70a53";
-      #     text = "#FFFF50";
-      #     indicator = "#FFFF50";
-      #     childBorder = "#ffffff";
-      #   };
-      # # client.focused_inactive $focused_border_inactive  $focinac_bg $focinac_txt  #090e14
-      #   focusedInactive = {
-      #     border = "#06090d";
-      #     background = "#06090d";
-      #     text = "#696f89";
-      #     indicator = "#090e14";
-      #     childBorder = "#ff0000";
-      #   };
-
-      # # client.unfocused        $unfocused_border $unfocused_border_bg $unfocused_txt #090e14
-      #   unfocused = {
-      #     border = "#605C57"; # "#C043C6";
-      #     background = "#605C57";
-      #     text = "#ffffff";
-      #     indicator  = "#090e14";
-      #     childBorder = "#ff0000";
-      #   };
-
-      #   urgent = {
-      #     border = "#870000";
-      #     background = "#870000";
-      #     text = "#ffffff";
-      #     indicator = "#090e14";
-      #     childBorder = "#ff0000";
-      #   };
-
-      # };
 
       focus.followMouse = false;
       fonts = {

@@ -11,7 +11,7 @@ in {
     programs.zsh = {
       # enable = mkEnableOption "Some custom zsh functions";
       enableProfiling = mkOption {
-        default = true;
+        default = false;
         type = types.bool;
         description = ''
           Whether to enable Fish integration.

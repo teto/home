@@ -33,12 +33,6 @@ in
   # TODO use the mptcp one ?
   # boot.kernelPackages = pkgs.linuxPackages;
   boot.kernelPackages = pkgs.linuxPackages_latest;
-  # boot.kernelPackages = pkgs.linuxPackagesFor ( pkgs.linux_5_10.override {
-  #   structuredExtraConfig = with lib.kernel; {
-  #     # MPTCP     =yes;
-  #     # MPTCP_IPV6=yes;
-  #   };
-  # });
 
   # TODO we need nouveau
   boot.kernelModules = [
@@ -49,7 +43,6 @@ in
 
   # boot.extraModulePackages = [];
   # boot.blacklistedKernelModules = [];
-  # boot.hardwareScan = true;
 
   boot.kernel.sysctl = {
     # to not provoke the kernel into crashing
@@ -71,7 +64,8 @@ in
   services.upower.enable = true;
 
   hardware= {
-    enableAllFirmware =true;
+    # enableAllFirmware =true;
+    enableRedistributableFirmware =true;
     sane.enable = true;
     # High quality BT calls
     bluetooth = {
@@ -87,14 +81,12 @@ in
     pulseaudio = {
       enable = false;
       systemWide = false;
-    #  support32Bit = true;
-    #  # daemon.config = ''
-    #  #   load-module module-switch-on-connect
-    #  #   '';
 
       # adds out-of-tree support for AAC, APTX, APTX-HD and LDAC.
       # SBC / AAC
-      extraModules = [ pkgs.pulseaudio-modules-bt ];
+      extraModules = [
+        pkgs.pulseaudio-modules-bt
+      ];
 
       # extraClientConf =
       # only this one has bluetooth
@@ -107,10 +99,13 @@ in
 
   # TODO move to laptop
   # see https://github.com/NixOS/nixpkgs/issues/57053
-  # hardware.firmware = with pkgs; [ wireless-regdb ];
 #  boot.extraModprobeConfig = ''
 #    options cfg80211 ieee80211_regdom="GB"
 #  '';
+
+  security.sudo.extraConfig = ''
+    Defaults        timestamp_timeout=60
+  '';
 
   # programs.seahorse.enable = true; # UI to manage keyrings
 

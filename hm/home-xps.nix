@@ -23,10 +23,10 @@ in
   # use a release version
   programs.neovim.package = lib.mkForce pkgs.neovim;
 
-
   xsession.windowManager.i3 = {
-    enable = true;
+    enable = false;
   };
+
   wayland.windowManager.sway.enable = true;
   # depends from feh ? huh not if we use sway
   # programs.feh.enable = true;
@@ -51,34 +51,5 @@ in
   # for blue tooth applet; must be installed systemwide
   services.blueman-applet.enable = true;
 
-  # services.nextcloud-client.enable = true;
-
-# waiting for attribute 'vte-ng' missing
-  programs.termite = {
-    enable = false;
-    # TODO the light in fact
-    # check if it exists
-    # colorsExtra = builtins.readFile ../config/termite/solarized-dark;
-  };
-
-  # 
-  # systemd.user.services.xplugd = {
-  #   Unit = {
-  #     Description = "xplugd";
-  #     PartOf = [ "graphical-session.target" ];
-  #   };
-  #   Install.WantedBy = [ "graphical-session.target" ];
-  #   Service.ExecStart = "${pkgs.xplugd}/bin/xplugd -n";
-  # };
-  # xdg.configFile."xplugrc" = {
-  #   executable = true;
-  #   text = ''#!/bin/sh
-  #     case "$1,$3" in
-  #         keyboard,connected)
-  #             systemctl --user restart setxkbmap.service
-  #             ;;
-  #     esac
-  #   '';
-  # };
-
+  services.nextcloud-client.enable = true;
 }

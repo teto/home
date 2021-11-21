@@ -18,8 +18,6 @@ for_window [instance="pad_*"] move scratchpad
 #for_window [instance="pad_ircclient"] move scratchpad
 # this concerns too many boxes, thus creating bugs
 
-bindsym $mod+Shift+V exec "manage_monitors.sh"
-
 mode "focused" {
 
 	# hardcoded focus keybindings
@@ -123,8 +121,6 @@ mode "programs" {
     bindsym Escape mode "default"
 }
 
-
-
 # bindsym $mod+quotedbl  focus child
 #bindsym $mod+quotedbl workspace "$w3"
 bindsym $mod+apostrophe mode "programs"
@@ -141,12 +137,6 @@ bindsym $mod+Shift+F3 move container to workspace "$w3"
 bindsym $mod+Shift+F4 move container to workspace "$w4"
 
 
-# reload the configuration file
-bindsym $mod+Shift+C  reload
-# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-# bindsym $mod+Shift+R exec "$HOME/.i3/build_config.sh"; restart
-# exit i3 (logs you out of your X session)
-# command is 'exit'
 # bindsym $mod+Shift+E exec "$HOME/.i3/logout.py"
 
 
