@@ -19,6 +19,10 @@ let
      };
   });
 
+  # key modifier
+  mad="Mod4";
+  mod="Mod1";
+
 
   # i3pystatus-custom = pkgs.i3pystatus.override ({
   i3pystatus-custom = i3pystatus-perso.override ({
@@ -221,8 +225,6 @@ in
     # consider using lib.mkOptionDefault according to help
     keybindings =
     let
-      mad="Mod4";
-      mod="Mod1";
       notify-send = "${pkgs.libnotify}/bin/notify-send";
 
       move_focused_wnd = dir: fr: us:
@@ -346,7 +348,7 @@ in
       keybindings = lib.recursiveUpdate config.xsession.windowManager.i3.config.keybindings {
         "$GroupFr+$mod+ampersand" = "layout toggle all";
         "$GroupUs+$mod+1"  = "layout toggle all";
-
+        "${mod}+Ctrl+L"="exec ${pkgs.swaylock}/bin/swaylock";
       };
 
       bars = [

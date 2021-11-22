@@ -24,7 +24,7 @@ in
   programs.neovim.package = lib.mkForce pkgs.neovim;
 
   xsession.windowManager.i3 = {
-    enable = false;
+    # enable = false;
   };
 
   wayland.windowManager.sway.enable = true;
