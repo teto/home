@@ -239,7 +239,7 @@
         neovimOfficial = self.inputs.neovim.overlay;
         wireshark = import ./nixpkgs/overlays/wireshark.nix;
         python = import ./nixpkgs/overlays/python.nix;
-        wayland = inputs.nixpkgs-wayland.overlay;
+        wayland = self.inputs.nixpkgs-wayland.overlay;
         # vimPlugins = final: prev: {
         #   myVimPlugins = prev.vimPlugins.extend (
         #     final: prev: {
@@ -274,31 +274,6 @@
 
         nur = nur.overlay;
 
-        # nvidia-acceleration-overlay = (prev: super: {
-        #   linuxPackages = super.linuxPackages.extend (final: prev: {
-        #     nvidia_x11.args = [ "-e" ./nvidia_x11_builder.sh ];
-        #     nvidia_x11.libPath = super.pkgs.lib.makeLibraryPath [ super.pkgs.libdrm super.pkgs.xorg.libXext super.pkgs.xorg.libX11 super.pkgs.xorg.libXv super.pkgs.xorg.libXrandr super.pkgs.xorg.libxcb super.pkgs.zlib super.pkgs.stdenv.cc.cc super.pkgs.wayland super.pkgs.libglvnd ];
-        #     nvidia_x11.libPath32 = super.pkgsi686Linux.lib.makeLibraryPath [ super.pkgsi686Linux.libdrm super.pkgsi686Linux.xorg.libXext super.pkgsi686Linux.xorg.libX11 super.pkgsi686Linux.xorg.libXv super.pkgsi686Linux.xorg.libXrandr super.pkgsi686Linux.xorg.libxcb super.pkgsi686Linux.zlib super.pkgsi686Linux.stdenv.cc.cc super.pkgsi686Linux.wayland super.pkgsi686Linux.libglvnd ];
-        #   });
-        #   mesa = super.mesa.overrideAttrs ( old: rec {
-        #     mesonFlags = super.mesa.mesonFlags ++ [ "-Dgbm-backends-path=/run/opengl-driver/lib/gbm:${placeholder "out"}/lib/gbm:${placeholder "out"}/lib" ];
-        #   });
-        #   wlroots = super.wlroots.overrideAttrs(old: {
-        #     postPatch = ''
-        #       sed -i 's/assert(argb8888 &&/assert(true || argb8888 ||/g' 'render/wlr_renderer.c'
-        #     '';  
-        #   });
-        #   xwayland = super.xwayland.overrideAttrs (old: rec {
-        #     version = "21.1.3";
-        #     src = super.fetchFromGitLab {
-        #       domain = "gitlab.freedesktop.org";
-        #       owner = "xorg";
-        #       repo = "xserver";
-        #       rev = "21e3dc3b5a576d38b549716bda0a6b34612e1f1f";
-        #       sha256 = "sha256-i2jQY1I9JupbzqSn1VA5JDPi01nVA6m8FwVQ3ezIbnQ=";
-        #     };
-        #   });  
-        # }); 
       }
       // nova.overlays
       ;
@@ -308,13 +283,6 @@
 
         # aws-lambda-rie = self.overlays.local.aws-lambda-rie ;
         aws-lambda-rie = nixpkgsFinal.callPackage ./pkgs/aws-lambda-runtime-interface-emulator {};
-
-        replica = let
-          idrisPackages = nixpkgsFinal.idrisPackages.override {
-            # get idris 2 from the flake
-            idris-no-deps = nixpkgsFinal.idris2;
-          };
-        in idrisPackages.callPackage ./pkgs/REPLica {};
       };
 
       # hmModules = [
@@ -330,12 +298,6 @@
         # modules
         moduleList = import ./nixpkgs/modules/list.nix;
         modulesAttrs = listToAttrs (prep moduleList);
-        # modulesAttrs = {};
-
-        # profiles
-        # profilesList = import ./nixos/profiles/list.nix;
-        # profilesAttrs = { profiles = listToAttrs (prep profilesList); };
-        # profilesAttrs = {};
 
       in modulesAttrs
       ;

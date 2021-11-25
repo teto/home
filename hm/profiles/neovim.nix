@@ -30,7 +30,7 @@ let
       " set foldopen+=all " specifies commands for which folds should open
       " set foldclose=all
       "set foldtext=
-      set fillchars+=foldopen:▾,foldsep:│
+      set fillchars+=foldopen:▾
       set fillchars+=foldclose:▸
       set fillchars+=msgsep:‾
       hi MsgSeparator ctermbg=black ctermfg=white
