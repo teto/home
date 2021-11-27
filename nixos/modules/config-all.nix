@@ -219,7 +219,7 @@ rec {
   };
 
   system = {
-    stateVersion = "21.03";
+    stateVersion = "21.11";
   };
 
 }

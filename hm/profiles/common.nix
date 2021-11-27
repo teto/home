@@ -78,7 +78,7 @@ rec {
   # https://github.com/commercialhaskell/stack/issues/2358
   # home.file.".stack/config.yaml".source = ../home/stack.yaml;
 
-  home.stateVersion = "21.05";
+  home.stateVersion = "21.11";
 
   # - https://github.com/carnager/rofi-scripts.git
   # https://github.com/carnager/buku_run
@@ -275,7 +275,17 @@ programs.zsh = {
 
     enableCompletion = false;
     initExtra = ''
-
+      # Default to standard vi bindings, regardless of editor string
+      bindkey -v
+      # we can't bind emacs and vi at the same time so this adds emacs'
+      bindkey "^A" beginning-of-line
+      bindkey "^E" end-of-line
+      bindkey "^K" kill-line
+      bindkey "^L" clear-screen
+      bindkey "^R" history-incremental-search-backward
+      bindkey "^U" kill-whole-line
+      bindkey "^W" backward-kill-word
+      bindkey "^Y" yank
     ''
     ;
 
@@ -295,6 +305,7 @@ programs.zsh = {
 
       # used in some git aliases
       export REVIEW_BASE=master
+
     '';
 
     initExtraBeforeCompInit = ''

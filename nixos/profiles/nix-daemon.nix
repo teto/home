@@ -14,6 +14,11 @@
       idris.to = { type = "github"; owner = "idris-lang"; repo="Idris2"; };
       hls.to = { type = "github"; owner = "haskell"; repo="haskell-language-server"; };
       cachix.to = { type = "github"; owner = "cachix"; repo="cachix"; };
+      jupyter.to = { type = "github"; owner = "teto";
+        repo="jupyterWith";
+      };
+        # /fix-jupyter-wip";
+
         # from = {
           # id = "nova-nix";
           # type = "indirect";
