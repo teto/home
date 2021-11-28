@@ -107,7 +107,7 @@ Plug 'suy/vim-context-commentstring' " commen for current programming language
 " Plug 'voldikss/vim-translate-me' " floating windows for neovim
 " Plug 'elbeardmorez/vim-loclist-follow' " to have quicklist synced with cursor
 " call :NR on a region than :w . coupled with b:nrrw_aucmd_create,
-Plug 'chrisbra/NrrwRgn' " to help with multi-ft files
+" Plug 'chrisbra/NrrwRgn' " to help with multi-ft files
 Plug 'chrisbra/vim-diff-enhanced' "
 " Plug 'vim-pandoc/vim-pandoc'
 " Plug 'vim-pandoc/vim-pandoc-syntax'
@@ -1613,8 +1613,8 @@ endif
 noremap Q <NOP>
 
 " buffers
-map <Leader>n :bnext<CR>
-map <Leader>N :bNext<CR>
+" map <Leader>n :bnext<CR>
+" map <Leader>N :bNext<CR>
 " map <Leader>p :bprevious<CR>
 map <Leader>$ <Cmd>Obsession<CR>
 " map <Leader>d :bdelete<CR>

@@ -73,6 +73,7 @@ let
             # tree-sitter-haskell # crashes with a loop
             tree-sitter-python
             tree-sitter-html  # for rest.nvim
+            tree-sitter-norg
           ]
         ));
     }

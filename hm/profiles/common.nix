@@ -274,6 +274,15 @@ programs.zsh = {
     ";
 
     enableCompletion = false;
+    #   bindkey "^R" history-incremental-search-backward
+  #   bindkey "^K"      kill-whole-line                      # ctrl-k
+  #   bindkey "^A"      beginning-of-line                    # ctrl-a
+  #   bindkey "^E"      end-of-line                          # ctrl-e
+  #   bindkey "[B"      history-search-forward               # down arrow
+  #   bindkey "[A"      history-search-backward              # up arrow
+  #   bindkey "^D"      delete-char                          # ctrl-d
+  #   bindkey "^F"      forward-char                         # ctrl-f
+  #   bindkey "^B"      backward-char                        # ctrl-b
     initExtra = ''
       # Default to standard vi bindings, regardless of editor string
       bindkey -v
@@ -282,9 +291,9 @@ programs.zsh = {
       bindkey "^E" end-of-line
       bindkey "^K" kill-line
       bindkey "^L" clear-screen
-      bindkey "^R" history-incremental-search-backward
       bindkey "^U" kill-whole-line
       bindkey "^W" backward-kill-word
+      bindkey "^Y" yank
       bindkey "^Y" yank
     ''
     ;
