@@ -234,7 +234,7 @@ Plug 'tommcdo/vim-lion' " Use with gl/L<text object><character to align to>
 " }}}
 " {{{ To ease movements
 "Plug 'wellle/visual-split.vim'
-Plug 'wellle/targets.vim' " Adds new motion targets ci{
+" Plug 'wellle/targets.vim' " Adds new motion targets ci{
 " Plug 'justinmk/vim-ipmotion' " ?
 " }}}
 

@@ -174,6 +174,7 @@ let
       # }
       # y a aussi vim-markdown
       idris-vim
+      astronauta
       {
         # euclio/vim-markdown-composer
         plugin = vim-markdown-composer;

@@ -10,6 +10,9 @@ local has_telescope, telescope = pcall(require, "telescope")
 -- local packerCfg =
 local packer = require "packer"
 local use, use_rocks = packer.use, packer.use_rocks
+local astronauta = require"astronauta.keymap"
+local nmap = astronauta.nmap
+local nnoremap = astronauta.nnoremap
 
 packer.init({
 -- compile_path
@@ -169,31 +172,31 @@ use {
 	-- <Plug>RestNvim
 	-- nnoremap <Plug>RestNvim :lua require('rest-nvim').run()<CR>
     'NTBBloodbath/rest.nvim'
-    , requires = { 'nvim-lua/plenary.nvim' }
-  	, config = function()
-    require("rest-nvim").setup({
-      -- Open request results in a horizontal split
-      result_split_horizontal = false,
-      -- Skip SSL verification, useful for unknown certificates
-      skip_ssl_verification = false,
-      -- Highlight request on run
-      highlight = {
-        enabled = true,
-        timeout = 150,
-      },
-      result = {
-        -- toggle showing URL, HTTP info, headers at top the of result window
-        show_url = true,
-        show_http_info = true,
-        show_headers = true,
-      },
-      -- Jump to request line on run
-      jump_to_request = false,
-    })
-	local k = require"astronauta.keymap"
-	local nmap = k.nmap
-	nmap { "<leader>rr", "<Plug>RestNvim", expr = true,}
-	nmap { "<leader>rp", "<Plug>RestNvimPreview", expr = true,}
+	, requires = { 'nvim-lua/plenary.nvim' }
+	, config = function()
+		require("rest-nvim").setup({
+		-- Open request results in a horizontal split
+		result_split_horizontal = false,
+		-- Skip SSL verification, useful for unknown certificates
+		skip_ssl_verification = false,
+		-- Highlight request on run
+		highlight = {
+			enabled = true,
+			timeout = 150,
+		},
+		result = {
+			-- toggle showing URL, HTTP info, headers at top the of result window
+			show_url = true,
+			show_http_info = true,
+			show_headers = true,
+		},
+		-- Jump to request line on run
+		jump_to_request = false,
+		})
+		local k = require"astronauta.keymap"
+		local nmap = k.nmap
+		nmap { "<leader>rr", "<Plug>RestNvim", expr = true,}
+		nmap { "<leader>rp", "<Plug>RestNvimPreview", expr = true,}
 
 	end
 }
@@ -252,7 +255,7 @@ use {'akinsho/bufferline.nvim', requires = 'kyazdani42/nvim-web-devicons'}
 -- compete with registers.nvim
 -- https://github.com/gelguy/wilder.nvim
 -- use { 'gelguy/wilder.nvim' }
-use { 'nathom/filetype.nvim' }
+-- use { 'nathom/filetype.nvim' }
 use { 'gennaro-tedesco/nvim-peekup' }
 use { 'nvim-telescope/telescope-packer.nvim' }
 --use { 'TimUntersberger/neogit',
@@ -648,8 +651,6 @@ vim.g.spinner_frames = {'⣾', '⣽', '⣻', '⢿', '⡿', '⣟', '⣯', '⣷'}
 
 vim.g.should_show_diagnostics_in_statusline = true
 
-local k = require"astronauta.keymap"
-local nnoremap = k.nnoremap
 nnoremap { "<Leader>o", function () vim.cmd("FzfFiles") end}
 nnoremap { "<Leader>g", function () vim.cmd("FzfGitFiles") end}
 nnoremap { "<Leader>F", function () vim.cmd("FzfFiletypes") end}
@@ -715,7 +716,7 @@ if has_whichkey then
 
 end
 
-
+nnoremap({"<f12>", function () vim.cmd('IndentBlanklineToggle!') end, expr=true})
 -- since it was not merge yet
 if vim.ui then
 

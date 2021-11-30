@@ -4,6 +4,7 @@ XDG_CONFIG_HOME ?= $(HOME)/.config
 XDG_CACHE_HOME ?= $(HOME)/.cache
 XDG_DATA_HOME ?= $(HOME)/.local/share
 MAILDIR ?= $(HOME)/maildir
+NIXPKGS_REPO ?= ~/nixpkgs
 
 BLOG_FOLDER = "${HOME}/blog"
 
@@ -80,7 +81,7 @@ nautilus:
 
 vimPlugins:
 	# /home/teto/nixpkgs/pkgs/misc/vim-plugins/update.py
-	cd ~/nixpkgs2 \
+	cd $(NIXPKGS_REPO) \
 		&& pkgs/misc/vim-plugins/update.py -i $(CURDIR)/nixpkgs/overlays/vim-plugins/vim-plugin-names -o $(CURDIR)/nixpkgs/overlays/vim-plugins/generated.nix --no-commit
 
 cachix:

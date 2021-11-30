@@ -153,6 +153,8 @@ rec {
   #   bindkey "^D"      delete-char                          # ctrl-d
   #   bindkey "^F"      forward-char                         # ctrl-f
   #   bindkey "^B"      backward-char                        # ctrl-b
+  # bindkey -e
+  # bindkey -v   # Default to standard vi bindings, regardless of editor string
   interactiveShellInit = ''
   #   # To see the key combo you want to use just do:
   #   # Don't try to bind CTRL Q / CTRL S !!
@@ -160,8 +162,6 @@ rec {
   #   # And press it
 
 
-    bindkey -e
-    bindkey -v   # Default to standard vi bindings, regardless of editor string
   '';
 
   #   zle -N edit-command-line

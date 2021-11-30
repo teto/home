@@ -11,5 +11,6 @@
 # shime/vim-livedown
 # TimUntersberger/neogit
 # tversteeg/registers.nvim@main
+tjdevries/astronauta.nvim
 lewis6991/gitsigns.nvim@main
 ggandor/lightspeed.nvim@main
