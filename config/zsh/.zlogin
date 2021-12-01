@@ -1,1 +1,1 @@
-/nix/store/45pm6qbsspxn419f771ixq5kdxgk6qzp-home-manager-files/.config/zsh/.zlogin
+/nix/store/5pqp6c7jy07rd8wriai94rwpgvgqicqj-home-manager-files/.config/zsh/.zlogin

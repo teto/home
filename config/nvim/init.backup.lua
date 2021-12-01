@@ -48,11 +48,10 @@ dofile(vim.fn.stdpath('config').."/init.generated.lua")
 -- use { 'romgrk/nvim-treesitter-context',
 -- 	requires = { 'nvim-treesitter/nvim-treesitter' }
 -- }
-use {'kristijanhusak/orgmode.nvim',
-	config = function()
-	-- it maps <leader>oc
-        -- require('orgmode').setup{}
-	end
+use {
+	'nvim-orgmode/orgmode', config = function()
+        require('orgmode').setup{}
+end
 }
 use {
 	"SmiteshP/nvim-gps",
@@ -205,7 +204,6 @@ use {
 	'lukas-reineke/indent-blankline.nvim',
 	config = function ()
 		require("indent_blankline").setup {
-			enabled = false,
 			char = "│",
 			buftype_exclude = {"terminal"},
 			filetype_exclude = {'help'},
@@ -227,6 +225,7 @@ use {
 			show_trailing_blankline_indent = false,
 			show_current_context = false,
 			show_current_context_start = true,
+			enabled = false,
 		}
 	end
 }
@@ -519,37 +518,37 @@ use {
   end
 }
 
-use {
-    "nvim-neorg/neorg",
-    config = function()
-        require('neorg').setup {
-            -- Tell Neorg what modules to load
-            load = {
-                ["core.defaults"] = {}, -- Load all the default modules
-                ["core.keybinds"] = { -- Configure core.keybinds
-                    config = {
-                        default_keybinds = true, -- Generate the default keybinds
-                        neorg_leader = "<Leader>n" -- This is the default if unspecified
-                    }
-                },
-                ["core.norg.concealer"] = {}, -- Allows for use of icons
-                ["core.norg.completion"] = {
-					config = {
-						engine =  "nvim-cmp"
-					}
-				}, -- Allows for use of icons
-                ["core.norg.dirman"] = { -- Manage your directories with Neorg
-                    config = {
-                        workspaces = {
-                            my_workspace = "~/neorg"
-                        }
-                    }
-                }
-            },
-        }
-    end,
-    requires = "nvim-lua/plenary.nvim"
-}
+-- use {
+--     "nvim-neorg/neorg",
+--     config = function()
+--         require('neorg').setup {
+--             -- Tell Neorg what modules to load
+--             load = {
+--                 ["core.defaults"] = {}, -- Load all the default modules
+--                 ["core.keybinds"] = { -- Configure core.keybinds
+--                     config = {
+--                         default_keybinds = true, -- Generate the default keybinds
+--                         neorg_leader = "<Leader>n" -- This is the default if unspecified
+--                     }
+--                 },
+--                 ["core.norg.concealer"] = {}, -- Allows for use of icons
+--                 ["core.norg.completion"] = {
+-- 					config = {
+-- 						engine =  "nvim-cmp"
+-- 					}
+-- 				}, -- Allows for use of icons
+--                 ["core.norg.dirman"] = { -- Manage your directories with Neorg
+--                     config = {
+--                         workspaces = {
+--                             my_workspace = "~/neorg"
+--                         }
+--                     }
+--                 }
+--             },
+--         }
+--     end,
+--     requires = "nvim-lua/plenary.nvim"
+-- }
 use 'ray-x/lsp_signature.nvim' -- display function signature in insert mode
 use { 'Pocco81/AutoSave.nvim' -- :ASToggle /AsOn / AsOff
 	, config = function ()
