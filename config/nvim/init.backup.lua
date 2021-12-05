@@ -193,7 +193,17 @@ end
 
 }
 use 'mfussenegger/nvim-dap'
-use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
+use {
+	"rcarriga/nvim-dap-ui"
+	, requires = {"mfussenegger/nvim-dap"} 
+}
+use {
+	"rcarriga/nvim-notify"
+	, config = function ()
+		vim.notify = require("notify")
+	end
+}
+
 use 'nvim-telescope/telescope-dap.nvim'
 use 'edluffy/hologram.nvim' -- see https://github.com/edluffy/hologram.nvim#usage for usage
 use 'windwp/nvim-spectre' -- search & replace
