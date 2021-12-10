@@ -1,4 +1,6 @@
 -- vim: set noet fdm=marker fenc=utf-8 ff=unix sts=0 sw=4 ts=4 :
+-- TODO source if it exists
+dofile(vim.fn.stdpath('config').."/init.generated.lua")
 
 -- How to add a new server
 -- https://github.com/neovim/nvim-lsp/issues/41
@@ -24,8 +26,6 @@ function file_exists(name)
    if f~=nil then io.close(f) return true else return false end
 end
 
--- TODO source if it exists
-dofile(vim.fn.stdpath('config').."/init.generated.lua")
 -- print(generated_init)
 -- if file_exists(generated_init) then
 	-- for some reason it doesn't work
