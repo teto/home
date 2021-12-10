@@ -300,7 +300,7 @@ gui.layout_type: 2
 
 # Interface link-layer header types (Ex: en0(1),en1(143),...)
 # A string
-capture.devices_linktypes: eno1(1),any(113),lo(1),virbr0(1),br-9d473962c8fb(1),br-d36f9ebedf0e(1),br-d687bdbd77b3(1),docker0(1),bluetooth-monitor(254),ciscodump(147),dpauxmon(275),randpkt(147),sdjournal(147),sshdump(147),udpdump(252)
+capture.devices_linktypes: eno1(1),any(113),lo(1),virbr0(1),br-9d473962c8fb(1),docker0(1),br-d36f9ebedf0e(1),br-d687bdbd77b3(1),bluetooth-monitor(254),ciscodump(147),dpauxmon(275),randpkt(147),sdjournal(147),sshdump(147),udpdump(252)
 
 # Interface descriptions (Ex: eth0(eth0 descr),eth1(eth1 descr),...)
 # A string
@@ -316,15 +316,15 @@ capture.devices_linktypes: eno1(1),any(113),lo(1),virbr0(1),br-9d473962c8fb(1),b
 
 # Interface buffer size (Ex: en0(1),en1(143),...)
 # A string
-capture.devices_buffersize: eno1(2),any(2),lo(2),virbr0(2),br-9d473962c8fb(2),br-d36f9ebedf0e(2),br-d687bdbd77b3(2),docker0(2),bluetooth-monitor(2),nflog(2),nfqueue(2),ciscodump(2),dpauxmon(2),randpkt(2),sdjournal(2),sshdump(2),udpdump(2)
+capture.devices_buffersize: eno1(2),any(2),lo(2),virbr0(2),br-9d473962c8fb(2),docker0(2),br-d36f9ebedf0e(2),br-d687bdbd77b3(2),bluetooth-monitor(2),nflog(2),nfqueue(2),ciscodump(2),dpauxmon(2),randpkt(2),sdjournal(2),sshdump(2),udpdump(2)
 
 # Interface snap length (Ex: en0(65535),en1(1430),...)
 # A string
-capture.devices_snaplen: eno1:0(262144),any:0(262144),lo:0(262144),virbr0:0(262144),br-9d473962c8fb:0(262144),br-d36f9ebedf0e:0(262144),br-d687bdbd77b3:0(262144),docker0:0(262144),bluetooth-monitor:0(262144),nflog:0(262144),nfqueue:0(262144),ciscodump:0(262144),dpauxmon:0(262144),randpkt:0(262144),sdjournal:0(262144),sshdump:0(262144),udpdump:0(262144)
+capture.devices_snaplen: eno1:0(262144),any:0(262144),lo:0(262144),virbr0:0(262144),br-9d473962c8fb:0(262144),docker0:0(262144),br-d36f9ebedf0e:0(262144),br-d687bdbd77b3:0(262144),bluetooth-monitor:0(262144),nflog:0(262144),nfqueue:0(262144),ciscodump:0(262144),dpauxmon:0(262144),randpkt:0(262144),sdjournal:0(262144),sshdump:0(262144),udpdump:0(262144)
 
 # Interface promiscuous mode (Ex: en0(0),en1(1),...)
 # A string
-capture.devices_pmode: eno1(1),any(1),lo(1),virbr0(1),br-9d473962c8fb(1),br-d36f9ebedf0e(1),br-d687bdbd77b3(1),docker0(1),bluetooth-monitor(1),nflog(1),nfqueue(1),ciscodump(1),dpauxmon(1),randpkt(1),sdjournal(1),sshdump(1),udpdump(1)
+capture.devices_pmode: eno1(1),any(1),lo(1),virbr0(1),br-9d473962c8fb(1),docker0(1),br-d36f9ebedf0e(1),br-d687bdbd77b3(1),bluetooth-monitor(1),nflog(1),nfqueue(1),ciscodump(1),dpauxmon(1),randpkt(1),sdjournal(1),sshdump(1),udpdump(1)
 
 # Capture in promiscuous mode?
 # TRUE or FALSE (case-insensitive)
@@ -417,7 +417,7 @@ console.log.level: 4
 
 # Remote capture filter
 # A string
-#extcap.ciscodump.remotefilter: deny tcp host fe80::6b2a:1c90:471d:9dd3 any eq 0, deny tcp any eq 0 host fe80::6b2a:1c90:471d:9dd3, deny tcp host 2a01:cb14:11ac:8200:9930:218:fb23:d849 any eq 0, deny tcp any eq 0 host 2a01:cb14:11ac:8200:9930:218:fb23:d849, deny tcp host 2a01:cb14:11ac:8200:d1db:766f:9c08:310d any eq 0, deny tcp any eq 0 host 2a01:cb14:11ac:8200:d1db:766f:9c08:310d, deny tcp host 172.17.0.1 any eq 0, deny tcp any eq 0 host 172.17.0.1, deny tcp host 172.18.0.1 any eq 0, deny tcp any eq 0 host 172.18.0.1, deny tcp host 172.19.0.1 any eq 0, deny tcp any eq 0 host 172.19.0.1, deny tcp host 172.20.0.1 any eq 0, deny tcp any eq 0 host 172.20.0.1, deny tcp host 192.168.122.1 any eq 0, deny tcp any eq 0 host 192.168.122.1, deny tcp host 192.168.1.17 any eq 0, deny tcp any eq 0 host 192.168.1.17, permit ip any any
+#extcap.ciscodump.remotefilter: deny tcp host fe80::6b2a:1c90:471d:9dd3 any eq 0, deny tcp any eq 0 host fe80::6b2a:1c90:471d:9dd3, deny tcp host 2a01:cb14:11ac:8200:9930:218:fb23:d849 any eq 0, deny tcp any eq 0 host 2a01:cb14:11ac:8200:9930:218:fb23:d849, deny tcp host 2a01:cb14:11ac:8200:f10a:ae01:7ca6:1788 any eq 0, deny tcp any eq 0 host 2a01:cb14:11ac:8200:f10a:ae01:7ca6:1788, deny tcp host 172.18.0.1 any eq 0, deny tcp any eq 0 host 172.18.0.1, deny tcp host 172.19.0.1 any eq 0, deny tcp any eq 0 host 172.19.0.1, deny tcp host 172.17.0.1 any eq 0, deny tcp any eq 0 host 172.17.0.1, deny tcp host 172.20.0.1 any eq 0, deny tcp any eq 0 host 172.20.0.1, deny tcp host 192.168.122.1 any eq 0, deny tcp any eq 0 host 192.168.122.1, deny tcp host 192.168.1.17 any eq 0, deny tcp any eq 0 host 192.168.1.17, permit ip any any
 
 # Packets to capture
 # A string
@@ -541,7 +541,7 @@ console.log.level: 4
 
 # Remote capture filter
 # A string
-#extcap.sshdump.remotefilter: not ((host fe80::6b2a:1c90:471d:9dd3 or host 2a01:cb14:11ac:8200:9930:218:fb23:d849 or host 2a01:cb14:11ac:8200:d1db:766f:9c08:310d or host 172.17.0.1 or host 172.18.0.1 or host 172.19.0.1 or host 172.20.0.1 or host 192.168.122.1 or host 192.168.1.17) and port 22)
+#extcap.sshdump.remotefilter: not ((host fe80::6b2a:1c90:471d:9dd3 or host 2a01:cb14:11ac:8200:9930:218:fb23:d849 or host 2a01:cb14:11ac:8200:f10a:ae01:7ca6:1788 or host 172.18.0.1 or host 172.19.0.1 or host 172.17.0.1 or host 172.20.0.1 or host 192.168.122.1 or host 192.168.1.17) and port 22)
 
 # Packets to capture
 # A string

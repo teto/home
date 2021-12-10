@@ -294,9 +294,8 @@ programs.zsh = {
       bindkey "^U" kill-whole-line
       bindkey "^W" backward-kill-word
       bindkey "^Y" yank
-      bindkey "^Y" yank
-      bindkey '^P' history-beginning-search-backward
-      bindkey '^N' history-beginning-search-forward
+      bindkey '^P' history-beginning-search-backward-end
+      bindkey '^N' history-beginning-search-forward-end
     ''
     ;
 
