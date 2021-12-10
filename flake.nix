@@ -19,7 +19,7 @@
       url = "github:teto/nixpkgs/nixos-unstable";
     };
     unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-    # mptcp-flake.url = "github:teto/mptcp-flake";
+    mptcp-flake.url = "github:teto/mptcp-flake";
 
     # TODO use mine instead
     hm = {
@@ -241,6 +241,7 @@
         wireshark = import ./nixpkgs/overlays/wireshark.nix;
         python = import ./nixpkgs/overlays/python.nix;
         wayland = self.inputs.nixpkgs-wayland.overlay;
+        mptcp = self.inputs.mptcp-flake.overlay;
         # vimPlugins = final: prev: {
         #   myVimPlugins = prev.vimPlugins.extend (
         #     final: prev: {
