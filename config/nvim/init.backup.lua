@@ -49,9 +49,13 @@ end
 -- 	requires = { 'nvim-treesitter/nvim-treesitter' }
 -- }
 use {
-	'nvim-orgmode/orgmode', config = function()
-        require('orgmode').setup{}
-end
+	'nvim-orgmode/orgmode',
+	config = function()
+		require('orgmode').setup{
+			org_agenda_files = {'~/nextcloud/org/*', '~/orgmode/**/*'},
+			org_default_notes_file = '~/nextcloud/org/refile.org',
+		}
+	end
 }
 use {
 	"SmiteshP/nvim-gps",
