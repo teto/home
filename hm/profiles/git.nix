@@ -52,7 +52,7 @@ in
 
       pull = {
         rebase = true;
-        ff = "only";
+        # ff = "only";
       };
 
 

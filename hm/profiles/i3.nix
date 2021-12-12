@@ -35,7 +35,6 @@ let
   # TODO make it a pywalflag
 
   sharedExtraConfig = ''
-      exec_always --no-startup-id setxkbmap -layout us
 
       set $GroupUs Group1
       set $GroupFr Group2
@@ -119,9 +118,9 @@ in
     # bindsym $mod+ctrl+v exec ~/vim-anywhere/bin/run"
     extraConfig = sharedExtraConfig
       + ''
+        exec_always --no-startup-id setxkbmap -layout us
         new_float pixel 2
       ''
-
     ;
 
     # prefix with pango if you want to have fancy effects

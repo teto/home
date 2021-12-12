@@ -24,7 +24,6 @@ in
   # programs.mosh.enable = true;
 
   # environment.systemPackages = with pkgs; [
-  #   iperf
   # ];
 
 

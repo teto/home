@@ -283,6 +283,9 @@ programs.zsh = {
   #   bindkey "^D"      delete-char                          # ctrl-d
   #   bindkey "^F"      forward-char                         # ctrl-f
   #   bindkey "^B"      backward-char                        # ctrl-b
+      # bindkey ‘^P’ up-line-or-beginning-search
+      # bindkey ‘^N’ down-line-or-beginning-search
+
     initExtra = ''
       # Default to standard vi bindings, regardless of editor string
       bindkey -v
@@ -294,6 +297,9 @@ programs.zsh = {
       bindkey "^U" kill-whole-line
       bindkey "^W" backward-kill-word
       bindkey "^Y" yank
+      autoload -U history-search-end
+      zle -N history-beginning-search-backward-end history-search-end
+      zle -N history-beginning-search-forward-end history-search-end
       bindkey '^P' history-beginning-search-backward-end
       bindkey '^N' history-beginning-search-forward-end
     ''

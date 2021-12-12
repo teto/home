@@ -13,6 +13,7 @@ in
       # ./hm/profiles/nova-dev.nix
       ./profiles/mail.nix
       ./profiles/alot.nix
+      ./profiles/emacs.nix
       ./profiles/extra.nix
       ./profiles/weechat.nix
   ];

@@ -288,7 +288,12 @@ in
     };
   };
 
+  # cheatsheets from terminal
+  programs.navi = {
+    enable = true;
+  };
 
+  # broot is a terminal file navigator
   programs.broot = {
     enable = true;
     enableZshIntegration = true;

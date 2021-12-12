@@ -22,10 +22,10 @@ local function default_mappings()
 -- nmap             <C-k>           <Cmd>lua vim.lsp.diagnostic.goto_prev {wrap = true }<cr>
 -- nmap             <C-j>           <Cmd>lua vim.lsp.diagnostic.goto_next {wrap = true }<cr>
 
-	nnoremap { "[e", function () vim.lsp.diagnostic.goto_prev({wrap = true }) end, buffer=true }
-	nnoremap { "]e", function () vim.lsp.diagnostic.goto_next({wrap = true }) end, buffer=true }
-	nnoremap { "<c-k>", function () vim.lsp.diagnostic.goto_prev({wrap = true }) end, buffer=true }
-	nnoremap { "<c-j>", function () vim.lsp.diagnostic.goto_next({wrap = true }) end, buffer=true }
+	nnoremap { "[e", function () vim.diagnostic.goto_prev({wrap = true }) end, buffer=true }
+	nnoremap { "]e", function () vim.diagnostic.goto_next({wrap = true }) end, buffer=true }
+	nnoremap { "<c-k>", function () vim.diagnostic.goto_prev({wrap = true }) end, buffer=true }
+	nnoremap { "<c-j>", function () vim.diagnostic.goto_next({wrap = true }) end, buffer=true }
 end
 
 M.on_attach = function(client)
