@@ -1,7 +1,11 @@
-{ config, lib, pkgs,  ... }:
+{ config, lib, pkgs,  ... }@args:
 let
   secrets = import ./secrets.nix;
   nvidiaPackage = config.boot.kernelPackages.nvidiaPackages.stable;
+  # mptcp-flake = builtins.getFlake "github:teto/mptcp-flake/bf99516a50dcf3fcbe0a0c924bb56ff57fdd05e1";
+    # type = "git";
+    # ref = "cargoNix";
+    # flake = false;
 in
 {
   imports = [
@@ -94,8 +98,10 @@ in
   ];
 
   # DOES NOT WORK !
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  # boot.kernelPackages = pkgs.linuxPackages_latest;
   # boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_mptcp_95-matt;
+  boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_mptcp_95-patched;
+  # boot.kernelPackages = pkgs.linuxPackagesFor mptcp-flake.packages.${pkgs.stdenv.system}.linux_mptcp_95-matt;
   # boot.kernelPackages = pkgs.linuxPackages;
   # boot.kernelPackages = pkgs.linuxPackages_testing;
 

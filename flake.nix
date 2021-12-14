@@ -46,10 +46,7 @@
     # };
   };
 
-  outputs = {
-    self, hm, nixpkgs-teto, nur, unstable
-    , nova , ...
-    }:
+  outputs = { self, hm, nixpkgs-teto, nur, unstable , nova , ... }:
     let
       inherit (builtins) listToAttrs baseNameOf attrNames readDir;
       # inherit (nixpkgsFinal.lib) removeSuffix;
@@ -101,6 +98,14 @@
         )
 		;
     in {
+      templates = {
+        haskell = {
+          path = ./nixpkgs/templates/haskell;
+          description = "A flake to help develop haskell libraries.";
+        };
+      };
+
+      # defaultTemplate = templates.app;
 
       nixosConfigurations = let
       in
@@ -298,7 +303,7 @@
         });
 
         # modules
-        moduleList = import ./nixpkgs/modules/list.nix;
+        moduleList = import ./nixos/modules/list.nix;
         modulesAttrs = listToAttrs (prep moduleList);
 
       in modulesAttrs
