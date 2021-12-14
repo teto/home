@@ -95,7 +95,7 @@ in
 
   # DOES NOT WORK !
   boot.kernelPackages = pkgs.linuxPackages_latest;
-  # boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_mptcp_95;
+  # boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_mptcp_95-matt;
   # boot.kernelPackages = pkgs.linuxPackages;
   # boot.kernelPackages = pkgs.linuxPackages_testing;
 
@@ -176,6 +176,7 @@ in
     locate.enable = true;
     dbus.packages = [
       pkgs.deadd-notification-center # installed by systemd
+      pkgs.gcr # for pinentry
     ];
   };
 

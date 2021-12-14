@@ -14,6 +14,7 @@
       idris.to = { type = "github"; owner = "idris-lang"; repo="Idris2"; };
       hls.to = { type = "github"; owner = "haskell"; repo="haskell-language-server"; };
       cachix.to = { type = "github"; owner = "cachix"; repo="cachix"; };
+      ihaskell.to = { type = "github"; owner = "gibiansky"; repo="IHaskell"; };
       jupyter.to = { type = "github"; owner = "teto";
         repo="jupyterWith";
       };

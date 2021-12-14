@@ -17,6 +17,7 @@ let
     # nix-prefetch-scripts # broken
     gdb
     editorconfig-core-c
+    rbw
     exa  # to list files
     gitAndTools.diff-so-fancy # todo install it via the git config instead
     gitAndTools.gh  # github client
@@ -280,11 +281,13 @@ in
 # [Removed Associations]
 # application/pdf=Mendeley.desktop
   programs.rbw = {
-    enable = true;
+    enable = false;
     settings = {
         email = config.accounts.email.accounts.fastmail.address;
         lock_timeout = 300;
         pinentry = "gnome3";
+        # see https://github.com/nix-community/home-manager/issues/2476
+        device_id= "111252f7-88b7-47f2-abb9-03dc4b2469ed";
     };
   };
 
@@ -298,6 +301,8 @@ in
     enable = true;
     enableZshIntegration = true;
   };
+
+  # for pinentry-gnome3 to work longer
 
   # Works only on x11
   # systemd.user.services.deadd = {
