@@ -98,9 +98,9 @@ in
   ];
 
   # DOES NOT WORK !
-  # boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
   # boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_mptcp_95-matt;
-  boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_mptcp_95-patched;
+  # boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_mptcp_95-patched;
   # boot.kernelPackages = pkgs.linuxPackagesFor mptcp-flake.packages.${pkgs.stdenv.system}.linux_mptcp_95-matt;
   # boot.kernelPackages = pkgs.linuxPackages;
   # boot.kernelPackages = pkgs.linuxPackages_testing;

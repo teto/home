@@ -751,7 +751,8 @@ nnoremap { "<Leader>h", function () vim.cmd("FzfHistory") end}
 nnoremap { "<Leader>t", function () require'telescope.builtin'.tags{} end }
 nnoremap { "<Leader>C", function () require'telescope.builtin'.colorscheme{ enable_preview = true; } end }
 
-nnoremap { "<Leader>ca", function () require'telescope.builtin'.lsp_code_actions{} end }
+-- 
+nnoremap { "<Leader>ca", function () vim.lsp.buf.code_action{} end }
 nnoremap { "<Leader>f", function () require('telescope').extensions.frecency.frecency({
 	query = "toto"
 }) end }
@@ -808,6 +809,8 @@ if has_whichkey then
 	}
 
 end
+
+-- set tagfunc=v:lua.vim.lsp.tagfunc
 
 nnoremap({"<f12>", function () vim.cmd('IndentBlanklineToggle!') end, expr=true})
 -- since it was not merge yet
