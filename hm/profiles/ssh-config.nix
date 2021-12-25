@@ -29,7 +29,8 @@
       novinfra = {
         host = "data.novinfra.net";
         user = "ubuntu";
-        port = 2207;
+        # le port depend du service
+        # port = 2207;
         identityFile = "~/.ssh/nova_key";
       };
     };

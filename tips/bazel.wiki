@@ -1,4 +1,4 @@
-﻿`load` statements must be at the top
+`load` statements must be at the top
 
 --announce_rc prints the flags that are being applied from bazelrc files and the command line
 
@@ -46,13 +46,6 @@ bazel build --explain=file.txt --verbose_explanations
 
 bazel info shows the server log location.
 Our bazel remote is in /tmp/bazel-remote.log
-
-
-# update a stack_snapshot
-It can't [[pin]]
-bazel run @ghcide-unpinned//:pin
-bazel run @stackage-unpinned//:pin
-https://api.haskell.build/haskell/cabal.html#stack_snapshot
 
 
 # force a rebuild

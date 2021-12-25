@@ -302,15 +302,7 @@ programs.zsh = {
       zle -N history-beginning-search-forward-end history-search-end
       bindkey '^P' history-beginning-search-backward-end
       bindkey '^N' history-beginning-search-forward-end
-    ''
-    ;
 
-      # https://github.com/atweiden/fzf-extras
-      # the zsh script does nothing yet
-      # Bug open fzf always
-      # emulate sh -c 'source "${fzf-extras}/fzf-extras.sh";'
-      # source "${fzf-extras}/fzf-extras.zsh";
-    loginExtra = ''
       # VERY IMPORTANT else zsh can eat last line
       setopt prompt_sp
 
@@ -321,8 +313,17 @@ programs.zsh = {
 
       # used in some git aliases
       export REVIEW_BASE=master
+    ''
+    ;
 
-    '';
+      # https://github.com/atweiden/fzf-extras
+      # the zsh script does nothing yet
+      # Bug open fzf always
+      # emulate sh -c 'source "${fzf-extras}/fzf-extras.sh";'
+      # source "${fzf-extras}/fzf-extras.zsh";
+    # loginExtra = ''
+
+    # '';
 
     initExtraBeforeCompInit = ''
       # zsh searches $fpath for completion files
