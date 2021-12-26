@@ -160,6 +160,10 @@ in
 
   # services.xserver.videoDrivers = [ "nvidia" ];
 
+  programs.gnome-disks = {
+    enable = true;
+  };
+
   nix = {
     # sshServe = {
     #   enable = true;

@@ -159,7 +159,7 @@ in
     # readOnlyStore = false;
   };
 
-  programs.gnome-disks.enable = false;
+  # programs.gnome-disks.enable = false;
 
   # don't forget to run ulimit -c unlimited to get the actual coredump
   # then coredumpctl debug will launch gdb !
@@ -213,7 +213,7 @@ in
 
   # programs.file-roller.enable = true;
 
-  programs.system-config-printer.enable = false; # broken
+  programs.system-config-printer.enable = true; # broken
 
   users.users.teto = {
     shell = pkgs.zsh;
