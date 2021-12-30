@@ -7,3 +7,10 @@ tshark -i <IF> -f "tcp"
 port 22
 
 in the wireshark config
+
+
+## sharkd
+
+One can start daemon
+sharkd unix:/tmp/sharkd
+

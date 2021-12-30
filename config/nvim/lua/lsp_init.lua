@@ -121,6 +121,7 @@ lspconfig.hls.setup({
 		-- , "--debug"
 		-- , "-j2"  -- -j1 doesnt work, and more threads => crash
 	},
+    single_file_support = true,
     filetypes = { "haskell", "lhaskell" },
     capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
     root_dir = lspconfig.util.root_pattern(

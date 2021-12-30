@@ -1,7 +1,6 @@
 #The mailcap file has a "test=" field. If the part after the "=" evaluates to false, then the line is skipped and the program reading .mailcap searches for a subsequent line with a matching MIME type.
 #test=[ -n "$DISPLAY" ]
 application/pdf; evince '%s';
-# pdftotext
 # wordtotext
 # ppt2text 
 # downlaod script mutt_bgrun

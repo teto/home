@@ -44,6 +44,9 @@ Plug 'rhysd/vim-gfm-syntax' " markdown syntax compatible with Github's
 Plug 'winston0410/range-highlight.nvim' "highlight ranges like :1,5
 Plug 'hrsh7th/vim-vsnip'
 Plug 'hrsh7th/vim-vsnip-integ'
+
+Plug 'seandewar/nvimesweeper'
+
 " Plug 'soywod/himalaya' " mail reader :Himalaya ; needs the rust CLI reader
 " himalaya
 " Plug 'NTBBloodbath/rest.nvim'
