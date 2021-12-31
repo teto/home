@@ -1,5 +1,7 @@
 final: prev:
 {
+
+  # gufw = prev.callPackage ./gufw {};
   # upstreamed already
   # myHelm = final.wrapHelm final.kubernetes-helm {
   #   plugins = with final.kubernetes-helmPlugins; [ helm-s3 helm-secrets helm-diff ];

@@ -19,6 +19,8 @@ alias local-rebuild="sudo nixos-rebuild --flake ~/home --override-input nixpkgs-
 alias mg='if [ -z ${BW_SESSION} ]; then export BW_SESSION=$(bw unlock --raw); fi && make gitops'
 alias bn='if [ -z ${BW_SESSION} ]; then export BW_SESSION=$(bw unlock --raw); fi && nix develop'
 
+alias hsenv='nix-shell -p ghc -p haskell.packages.ghc8107.cabal-install pkg-config pcre haskell-language-server'
+
 # fzf-diff (https://medium.com/@GroundControl/better-git-diffs-with-fzf-89083739a9cb)
 function fzd {
   preview="git diff $@ --color=always -- {-1}"

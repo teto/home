@@ -1,0 +1,5 @@
+
+# send/receive a file
+nc -l 4567 -q 1> generic.hs
+
+cat generic.hs | nc jedha.home 4567
