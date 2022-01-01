@@ -1,3 +1,7 @@
+
+to debug 
+WIRESHARK_LOG_LEVEL=noisy 
+)
 To run from build directory:
 WIRESHARK_RUN_FROM_BUILD_DIRECTORY=1 ./run/wireshark
 

@@ -1,0 +1,4 @@
+msf
+
+show exploits
+set RHOSTS 51.77.129.53

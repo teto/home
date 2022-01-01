@@ -1,0 +1,2 @@
+cat /proc/mdstat
+sudo mdadm --detail /dev/md127

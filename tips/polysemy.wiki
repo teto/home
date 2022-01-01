@@ -1,0 +1,1 @@
+Bundle can be a newtype to several effects.

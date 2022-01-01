@@ -1,0 +1,4 @@
+
+
+$ sudo hwclock --show --verbose
+$ sudo hwclock -r 

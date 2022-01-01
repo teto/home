@@ -1,0 +1,4 @@
+with self.idrisPackages; with-packages [ contrib pruviloj ];
+idris --listlibs
+
+https://nixos.org/manual/nixpkgs/stable/#building-an-idris-project-with-nix

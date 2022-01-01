@@ -1,0 +1,4 @@
+
+# treesitter
+dump ast with
+:lua print(vim.treesitter.get_parser(0):parse():root():sexpr())
