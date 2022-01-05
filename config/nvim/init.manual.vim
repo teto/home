@@ -1876,7 +1876,6 @@ command! -nargs=+ -bang -complete=command R call ReadExCommandOutput(<bang>0, <q
 nnoremap <S-CR> i<CR><Esc>
 
 hi CursorLine                    guibg=#293739 guifg=None
-" hi CocErrorFloat
 
 " au BufWinLeave,BufLeave * if &buftype != 'nofile' | silent! mkview | endif
 " au BufWinEnter * if &buftype != 'nofile' | silent! loadview | endif
@@ -1914,24 +1913,19 @@ command! LspAction lua vim.lsp.buf.code_action()
 
 set omnifunc=v:lua.vim.lsp.omnifunc
 
-sign define LspDiagnosticsSignError text=✘ texthl=LspDiagnosticsSignError linehl= numhl=
-sign define LspDiagnosticsSignWarning text=！ texthl=LspDiagnosticsSignWarning linehl= numhl=CustomLineWarn
-sign define LspDiagnosticsSignInformation text=I texthl=LspDiagnosticsSignInformation linehl= numhl=CustomLineWarn
-sign define LspDiagnosticsSignHint text=H texthl=LspDiagnosticsSignHint linehl= numhl=
+sign define DiagnosticSignError text=✘ texthl=LspDiagnosticsSignError linehl= numhl=
+sign define DiagnosticSignWarning text=！ texthl=LspDiagnosticsSignWarning linehl= numhl=CustomLineWarn
+sign define DiagnosticSignInformation text=I texthl=LspDiagnosticsSignInformation linehl= numhl=CustomLineWarn
+sign define DiagnosticSignHint text=H texthl=LspDiagnosticsSignHint linehl= numhl=
 
-hi   LspDiagnosticsVirtualTextError guifg=red
-hi   LspDiagnosticsVirtualTextDebug guifg=green
+hi   DiagnosticVirtualTextError guifg=red
+hi   DiagnosticVirtualTextDebug guifg=green
 
 " guifg=#232526 
 hi CustomLineWarn guifg=#FD971F
 " only concerns the text of the message, not the floatwindow
-hi LspDiagnosticsFloatingError guifg=red
-hi LspDiagnosticsFloatingWarning guifg=orange
-  " LspDiagnosticsFloatingInformation
-  " LspDiagnosticsFloatingHint
-
-" https://github.com/neovim/neovim/pull/11638
-" autocmd CursorMoved <buffer> lua vim.lsp.util.buf_clear_references()
+" hi LspDiagnosticsFloatingError guifg=red
+" hi LspDiagnosticsFloatingWarning guifg=orange
 " }}}
 
 "{{{sessionoptions
@@ -1982,8 +1976,6 @@ endfunction
 
 " toto
 command! OpenDiagnostics lua vim.lsp.diagnostic.set_loclist({ open = false})
-
-command! OpenDiagnostics lua vim.lsp.diagnostic.set_loclist({ open = false})
 " pb c'est qu'il l'autofocus
 autocmd User LspDiagnosticsChanged lua vim.lsp.diagnostic.set_loclist( { open = false,  open_loclist = false})
 
@@ -2006,8 +1998,8 @@ function! StatusLSP() abort
   return trim(status)
 endfunction
 
-" fromn neovim master
 au User LspProgressUpdate redrawstatus!
+
 " vim.api.nvim_command('au User LspMessageUpdate redrawstatus!')
 nnoremap <2-LeftMouse> <cmd>lua vim.lsp.buf.definition()<cr>
 
