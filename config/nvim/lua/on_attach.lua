@@ -2,8 +2,6 @@ local M = {}
 
 -- external plugins to have some nice features
 local has_completion, plug_completion = pcall(require, "completion")
-local k = require"astronauta.keymap"
-local nnoremap = k.nnoremap
 
 
 local function default_mappings()
@@ -13,19 +11,19 @@ local function default_mappings()
 	-- vim.api.nvim_buf_set_keymap(0, 'n', 'gA', '<cmd>lua vim.lsp.buf.code_action()<CR>', {noremap = true})
 	-- vim.api.nvim_buf_set_keymap(0, 'n', 'g0', '<cmd>lua vim.lsp.buf.document_symbol()<CR>', {noremap = true})
 
-	nnoremap { "K", vim.lsp.buf.hover, buffer=true }
-	nnoremap { "gd", vim.lsp.buf.definition, buffer=true }
-	nnoremap { "gr", vim.lsp.buf.references, buffer=true }
-	nnoremap { "gA", vim.lsp.buf.code_action, buffer=true }
-	nnoremap { "g0", vim.lsp.buf.document_symbol, buffer=true }
+	vim.keymap.set ('n', "K", vim.lsp.buf.hover, { buffer=true })
+	vim.keymap.set ('n', "gd", vim.lsp.buf.definition,{ buffer=true })
+	vim.keymap.set ('n', "gr", vim.lsp.buf.references,{ buffer=true })
+	vim.keymap.set ('n', "gA", vim.lsp.buf.code_action, { buffer=true })
+	vim.keymap.set ('n', "g0", vim.lsp.buf.document_symbol, { buffer=true })
 
 -- nmap             <C-k>           <Cmd>lua vim.lsp.diagnostic.goto_prev {wrap = true }<cr>
 -- nmap             <C-j>           <Cmd>lua vim.lsp.diagnostic.goto_next {wrap = true }<cr>
 
-	nnoremap { "[e", function () vim.diagnostic.goto_prev({wrap = true }) end, buffer=true }
-	nnoremap { "]e", function () vim.diagnostic.goto_next({wrap = true }) end, buffer=true }
-	nnoremap { "<c-k>", function () vim.diagnostic.goto_prev({wrap = true }) end, buffer=true }
-	nnoremap { "<c-j>", function () vim.diagnostic.goto_next({wrap = true }) end, buffer=true }
+	vim.keymap.set('n', "[e", function () vim.diagnostic.goto_prev({wrap = true }) end, { buffer=true })
+	vim.keymap.set('n', "]e", function () vim.diagnostic.goto_next({wrap = true }) end, { buffer=true })
+	vim.keymap.set('n', "<c-k>", function () vim.diagnostic.goto_prev({wrap = true }) end, { buffer=true })
+	vim.keymap.set('n', "<c-j>", function () vim.diagnostic.goto_next({wrap = true }) end, { buffer=true })
 end
 
 M.on_attach = function(client)

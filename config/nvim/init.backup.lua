@@ -2,19 +2,14 @@
 -- TODO source if it exists
 dofile(vim.fn.stdpath('config').."/init.generated.lua")
 
--- How to add a new server
--- https://github.com/neovim/nvim-lsp/issues/41
 -- local nvim_lsp = require 'nvim_lsp'
 -- local configs = require'nvim_lsp/configs'
--- local lsp_status = require'lsp-status'
 local has_telescope, telescope = pcall(require, "telescope")
 
 -- local packerCfg =
 local packer = require "packer"
 local use, use_rocks = packer.use, packer.use_rocks
-local astronauta = require"astronauta.keymap"
-local nmap = astronauta.nmap
-local nnoremap = astronauta.nnoremap
+local nnoremap = vim.keymap.set
 
 packer.init({
 -- compile_path
@@ -161,6 +156,17 @@ require('dressing').setup({
   },
 })	end
 }
+
+
+-- use 'https://git.sr.ht/~whynothugo/lsp_lines.nvim'
+use({
+  "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+  as = "lsp_lines",
+  config = function()
+
+    require("lsp_lines").register_lsp_virtual_lines()
+  end,
+})
 use { 'chentau/marks.nvim',
 config = function ()
 
@@ -287,10 +293,8 @@ use {
 		-- Jump to request line on run
 		jump_to_request = false,
 		})
-		local k = require"astronauta.keymap"
-		local nmap = k.nmap
-		nmap { "<leader>rr", "<Plug>RestNvim", expr = true,}
-		nmap { "<leader>rp", "<Plug>RestNvimPreview", expr = true,}
+		vim.keymap.set('n',  "<leader>rr" , "<Plug>RestNvim", { expr = true} )
+		vim.keymap.set('n',  "<leader>rp" , "<Plug>RestNvimPreview", { expr = true} )
 
 	end
 }
@@ -349,7 +353,6 @@ use {'akinsho/bufferline.nvim', requires = 'kyazdani42/nvim-web-devicons'}
 -- compete with registers.nvim
 -- https://github.com/gelguy/wilder.nvim
 -- use { 'gelguy/wilder.nvim' }
--- use { 'nathom/filetype.nvim' }
 use { 'gennaro-tedesco/nvim-peekup' }
 use { 'nvim-telescope/telescope-packer.nvim' }
 --use { 'TimUntersberger/neogit',
@@ -406,7 +409,6 @@ use { 'nvim-telescope/telescope-packer.nvim' }
 
 use { 'notomo/gesture.nvim' }
 -- use { 'svermeulen/vimpeccable'} -- broken ?
-use { 'tjdevries/astronauta.nvim' }
 -- use { 'npxbr/gruvbox.nvim'
 -- using teto instead to test packer luarocks support
 -- use_rocks { 'teto/gruvbox.nvim'
@@ -744,20 +746,20 @@ vim.g.spinner_frames = {'⣾', '⣽', '⣻', '⢿', '⡿', '⣟', '⣯', '⣷'}
 
 vim.g.should_show_diagnostics_in_statusline = true
 
-nnoremap { "<Leader>o", function () vim.cmd("FzfFiles") end}
-nnoremap { "<Leader>g", function () vim.cmd("FzfGitFiles") end}
-nnoremap { "<Leader>F", function () vim.cmd("FzfFiletypes") end}
-nnoremap { "<Leader>h", function () vim.cmd("FzfHistory") end}
-nnoremap { "<Leader>t", function () require'telescope.builtin'.tags{} end }
-nnoremap { "<Leader>C", function () require'telescope.builtin'.colorscheme{ enable_preview = true; } end }
+vim.keymap.set ('n', "<Leader>o", function () vim.cmd("FzfFiles") end)
+vim.keymap.set ('n', "<Leader>g", function () vim.cmd("FzfGitFiles") end)
+vim.keymap.set ('n', "<Leader>F", function () vim.cmd("FzfFiletypes") end)
+vim.keymap.set ('n', "<Leader>h", function () vim.cmd("FzfHistory") end)
+vim.keymap.set ('n', "<Leader>t", function () require'telescope.builtin'.tags{} end )
+vim.keymap.set ('n', "<Leader>C", function () require'telescope.builtin'.colorscheme{ enable_preview = true; } end )
 
 -- 
-nnoremap { "<Leader>ca", function () vim.lsp.buf.code_action{} end }
-nnoremap { "<Leader>f", function () require('telescope').extensions.frecency.frecency({
+nnoremap ( "n", "<Leader>ca", function () vim.lsp.buf.code_action{} end )
+nnoremap ( "n", "<Leader>f", function () require('telescope').extensions.frecency.frecency({
 	query = "toto"
-}) end }
+}) end )
 
-nnoremap { "<leader>S",  function() require('spectre').open() end }
+nnoremap ( "n", "<leader>S",  function() require('spectre').open() end )
 
 -- replace with telescope
 -- nnoremap { "<Leader>t", function () vim.cmd("FzfTags") end}
@@ -812,7 +814,7 @@ end
 
 -- set tagfunc=v:lua.vim.lsp.tagfunc
 
-nnoremap({"<f12>", function () vim.cmd('IndentBlanklineToggle!') end, expr=true})
+nnoremap("n", "<f12>", function () vim.cmd('IndentBlanklineToggle!') end, {expr=true})
 -- since it was not merge yet
 if vim.ui then
 
