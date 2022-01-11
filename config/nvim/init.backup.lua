@@ -753,7 +753,6 @@ vim.keymap.set ('n', "<Leader>h", function () vim.cmd("FzfHistory") end)
 vim.keymap.set ('n', "<Leader>t", function () require'telescope.builtin'.tags{} end )
 vim.keymap.set ('n', "<Leader>C", function () require'telescope.builtin'.colorscheme{ enable_preview = true; } end )
 
--- 
 nnoremap ( "n", "<Leader>ca", function () vim.lsp.buf.code_action{} end )
 nnoremap ( "n", "<Leader>f", function () require('telescope').extensions.frecency.frecency({
 	query = "toto"
@@ -1168,6 +1167,15 @@ function contextMenu()
 		end
 	})
 end
+-- Disable virtual_text since it's redundant due to lsp_lines.
+vim.diagnostic.config({
+  virtual_lines = false,
+  virtual_text = {
+	  severity = { min = vim.diagnostic.severity.WARN }
+  },
+  signs = true,
+  severity_sort = true
+})
 
 require 'lsp_init'
 
@@ -1200,17 +1208,15 @@ vim.lsp.notifier = notifs
 -- seems like there is no way to pass options from show_line_diagnostics to open_floating_preview
 -- the floating popup has "ownsyntax markdown"
 function showLineDiagnostic ()
-	local opts = {
-		enable_popup = true;
-		-- options of
-		popup_opts = {
-
-		};
-	}
+	-- local opts = {
+	-- 	enable_popup = true;
+	-- 	-- options of
+	-- 	popup_opts = {
+	-- 	};
+	-- }
 	-- return vim.lsp.diagnostic.show_line_diagnostics()
-	vim.lsp.diagnostic.goto_prev {wrap = true }
+	vim.diagnostic.goto_prev {wrap = true }
 	-- return require'lspsaga.diagnostic'.show_line_diagnostics()
-
 end
 
 -- to disable virtualtext check
@@ -1331,8 +1337,11 @@ dap.configurations.haskell = {
     logLevel = 'WARNING',
     ghciEnv = vim.empty_dict(),
     ghciPrompt = "λ: ",
-    -- Adjust the prompt to the prompt you see when you invoke the stack ghci command below 
+    -- Adjust the prompt to the prompt you see when you invoke the stack ghci command below
     ghciInitialPrompt = "λ: ",
     ghciCmd= "ghci --test --no-load --no-build --main-is TARGET --ghci-options -fprint-evld-with-show",
   },
 }
+
+
+-- lua vim.diagnostic.setqflist({open = tru, severity = { min = vim.diagnostic.severity.WARN } })

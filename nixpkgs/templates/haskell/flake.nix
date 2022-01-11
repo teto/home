@@ -23,26 +23,12 @@
     };
   };
 
-  outputs = { self, nixpkgs, flake-utils, poetry, replica, hls, ... }:
+  outputs = { self, nixpkgs, flake-utils, hls, ... }:
     flake-utils.lib.eachSystem ["x86_64-linux"] (system: let
 
       compilerVersion = "8107";
-      # compilerVersion = "901";
 
       haskellOverlay = hnew: hold: with pkgs.haskell.lib; {
-
-        # ip = unmarkBroken (dontCheck hold.ip);
-        # relude = hold.relude_1_0_0_1;
-        # co-log-polysemy = doJailbreak (hold.co-log-polysemy);
-        # netlink = (overrideSrc hold.netlink {
-        #   version = "1.1.2.0";
-        #   src = pkgs.fetchFromGitHub {
-        #     owner = "teto";
-        #     repo = "netlink-hs";
-        #     rev = "090a48ebdbc35171529c7db1bd420d227c19b76d";
-        #     sha256 = "sha256-qopa1ED4Bqk185b1AXZ32BG2s80SHDSkCODyoZfnft0=";
-        #   };
-        # });
       };
 
       pkgs = import nixpkgs {
@@ -56,10 +42,10 @@
       myModifier = drv:
         pkgs.haskell.lib.addBuildTools drv (with hsPkgs; [
           cabal-install
-          replica.packages.${system}.build
           hls.packages.${system}."haskell-language-server-${compilerVersion}"
         ]);
 
+      # mkDevShell
       mkPackage = name:
           hsPkgs.developPackage {
             root =  pkgs.lib.cleanSource (builtins.toPath ./. + "/${name}");
@@ -75,16 +61,6 @@
 
         mptcp-pm = mkPackage "mptcp-pm";
 
-        # mptcpanalyzer = hsPkgs.developPackage {
-        #   root = pkgs.lib.cleanSource ./mptcpanalyzer;
-        #   name = "mptcpanalyzer";
-        #   returnShellEnv = true;
-        #   withHoogle = true;
-        #   overrides = hold: hnew: (haskellOverlay hold hnew) // {
-        #     mptcp-pm = self.packages."${system}".mptcp-pm;
-        #   };
-        #   modifier = myModifier;
-        # };
       };
 
       defaultPackage = self.packages.${system}.mptcpanalyzer;

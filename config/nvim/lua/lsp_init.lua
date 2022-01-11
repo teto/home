@@ -81,34 +81,38 @@ lspconfig.yamlls.setup{}
 -- https://github.com/microsoft/pyright/blob/cf1a5790d2105ac60dd3378a46725519d14b2844/docs/configuration.md
 -- https://github.com/microsoft/pyright/blob/master/docs/configuration.md
 lspconfig.pyright.setup{
-        -- cmd = {"pyright-langserver", "--stdio"};
-        -- filetypes = {"python"};
-        -- autostart = false; -- This is the important new option
-        root_dir = lspconfig.util.root_pattern(".git", "setup.py",  "setup.cfg", "pyproject.toml", "requirements.txt");
-        -- on_attach=attach_cb.on_attach,
-        settings = {
-                python = {
-                        analysis = {
-        --                      autoSearchPaths= true;
-        --                      diagnosticMode = 'workspace';
-                                useLibraryCodeForTypes = true;
-                                typeCheckingMode = 'off'; -- 'off', 'basic', 'strict'
-                                reportUnusedVariable = false;
-                                reportUnusedFunction = false;
-                                reportUnusedClass = false;
-                                disableOrganizeImports = true;
-                                reportConstantRedefinition = true;
-                                -- reportUnknownParameterType
-                                -- diagnosticSeverityOverrides = {
-                                --      reportUnusedImport = "warning";
-                                -- };
-                        };
-                };
-                pyright = {
-                        disableOrganizeImports = true;
-                        reportUnusedVariable = false;
-                };
-        };
+	-- cmd = {"pyright-langserver", "--stdio"};
+	-- filetypes = {"python"};
+	-- autostart = false; -- This is the important new option
+	root_dir = lspconfig.util.root_pattern(".git", "setup.py",  "setup.cfg", "pyproject.toml", "requirements.txt");
+	-- on_attach=attach_cb.on_attach,
+	settings = {
+		-- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#pyright
+			python = {
+				analysis = {
+					-- enum { "Error", "Warning", "Information", "Trace" }
+					logLevel = "Warning";
+--                      autoSearchPaths= true;
+				-- diagnosticMode = 'workspace';
+--
+				useLibraryCodeForTypes = true;
+				typeCheckingMode = 'basic'; -- 'off', 'basic', 'strict'
+				reportUnusedVariable = false;
+				reportUnusedFunction = false;
+				reportUnusedClass = false;
+				disableOrganizeImports = true;
+				reportConstantRedefinition = true;
+				-- reportUnknownParameterType
+				-- diagnosticSeverityOverrides = {
+				--      reportUnusedImport = "warning";
+				-- };
+				};
+			};
+			pyright = {
+				disableOrganizeImports = true;
+				reportUnusedVariable = false;
+			};
+	};
 }
 
 -- typescript
@@ -120,7 +124,7 @@ lspconfig.hls.setup({
                 , "--lsp"
                 -- , "--debug"
                 -- , "-j2"  -- -j1 doesnt work, and more threads => crash
-        },
+	},
     single_file_support = true,
     filetypes = { "haskell", "lhaskell" },
     capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
@@ -155,7 +159,7 @@ lspconfig.hls.setup({
           },
         },
         flags = {
-                allow_incremental_sync = true;
+                -- allow_incremental_sync = false;
         }
 })
 
