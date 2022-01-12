@@ -2,12 +2,17 @@
   description = "My personal configuration";
 
   nixConfig = {
-    binaryCachePublicKeys = [
-    # substituters = [
-      "nixpkgs-wayland.cachix.org-1:3lwxaILxMRkVhehr5StQprHdEo4IrE8sRho9R9HOLYA="
+    # extra-binaryCachePublicKeys = [
+    # # substituters = [
+    #   "nixpkgs-wayland.cachix.org-1:3lwxaILxMRkVhehr5StQprHdEo4IrE8sRho9R9HOLYA="
+    # ];
+
+    extra-substituters = [
+      "https://nixpkgs-wayland.cachix.org"
     ];
+
     # "https://nixpkgs-wayland.cachix.org"
-    trusted-public-keys = [
+    extra-trusted-public-keys = [
       "haskell-language-server.cachix.org-1:juFfHrwkOxqIOZShtC4YC1uT1bBcq2RSvC7OMKx0Nz8="
       "nixpkgs-wayland.cachix.org-1:3lwxaILxMRkVhehr5StQprHdEo4IrE8sRho9R9HOLYA="
       "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
@@ -245,7 +250,7 @@
         neovimOfficial = self.inputs.neovim.overlay;
         wireshark = import ./nixpkgs/overlays/wireshark.nix;
         python = import ./nixpkgs/overlays/python.nix;
-        wayland = self.inputs.nixpkgs-wayland.overlay;
+        # wayland = self.inputs.nixpkgs-wayland.overlay;
         mptcp = self.inputs.mptcp-flake.overlay;
         # vimPlugins = final: prev: {
         #   myVimPlugins = prev.vimPlugins.extend (
@@ -262,7 +267,6 @@
         #         meta.homepage = "https://github.com/pwntester/octo.nvim/";
         #       };
         #     }
-
         #   );
         # };
             # prev.callPackage ./nixpkgs/overlays/vim-plugins/generated.nix {
