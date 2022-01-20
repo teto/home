@@ -1,8 +1,7 @@
 { config, pkgs, lib,  ... } @ args:
 let
-  # stable = import <nixos> {};
-  # unstable = import <nixos-unstable> {};
 
+  secrets = import ../../nixpkgs/secrets.nix;
   # change to a package
   fzf-extras = let src = pkgs.fetchFromGitHub {
     owner = "atweiden";
@@ -251,9 +250,10 @@ rec {
 programs.zsh = {
     enable = true;
     dotDir = ".config/zsh";
-    autosuggestion.enable = true;
+    # autosuggestion.enable = true;
     sessionVariables = {
       # HISTFILE="$XDG_CACHE_HOME/zsh_history";
+      GITHUB_TOKEN = secrets.githubToken;
     };
     history = {
         save = 1000000;

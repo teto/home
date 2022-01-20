@@ -231,7 +231,7 @@ in
 
   imports = [
     ./neomutt.nix
-    ./alot.nix
+    # ./alot.nix
   ];
 
   home.packages = with pkgs; [

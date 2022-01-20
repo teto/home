@@ -25,8 +25,8 @@
 
 
     # cp $(nix-build -A tree-sitter.builtGrammars."$lang" ~/nixpkgs)/parser config/nvim/parser/${lang}.so
-    runtime."parser/c.so".source = "${pkgs.tree-sitter.builtGrammars.c}/parser";
-    runtime."parser/bash.so".source = "${pkgs.tree-sitter.builtGrammars.bash}/parser";
+    # runtime."parser/c.so".source = "${pkgs.tree-sitter.builtGrammars.c}/parser";
+    # runtime."parser/bash.so".source = "${pkgs.tree-sitter.builtGrammars.bash}/parser";
   };
 
 # programs = {

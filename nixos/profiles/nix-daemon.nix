@@ -62,14 +62,16 @@
 
       #       "https://teto.cachix.org"
       binaryCaches = [
-        "https://cache.nixos.org/"
+        # "https://cache.nixos.org/" # part of the default
         "https://jupyterwith.cachix.org"
         # TODO move it to nova's ?
         "https://static-haskell-nix.cachix.org"
         "https://hydra.iohk.io"
+        "https://haskell-language-server.cachix.org"
       ];
       binaryCachePublicKeys = [
         "hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ="
+        "haskell-language-server.cachix.org-1:juFfHrwkOxqIOZShtC4YC1uT1bBcq2RSvC7OMKx0Nz8="
       ];
       trustedUsers = [ "root" "teto" ];
 

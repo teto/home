@@ -92,7 +92,7 @@ let
     }
     {
       plugin = gitsigns-nvim;
-      configType = "lua";
+      type = "lua";
       config = ''
         require 'gitsigns'.setup {
             -- -- '│' passe mais '▎' non :s
@@ -315,7 +315,7 @@ let
       vim-dirvish
       {
         plugin = packer-nvim;
-        configType = "lua";
+        type = "lua";
 		config = ''
           require('packer').init({
             luarocks = {
@@ -539,6 +539,6 @@ in
   xdg.configFile = {
     # a copy of init.vim in fact
     "nvim/init.generated.vim".text = config.programs.neovim.generatedConfigViml;
-    # "nvim/init.generated.lua".text = config.programs.neovim.generatedConfigLua;
+    "nvim/init.generated.lua".text = config.programs.neovim.generatedConfigs.lua;
   };
 }

@@ -1,6 +1,9 @@
 # about flakes
 nix profile diff-closures --profile /nix/var/nix/profiles/system
 nix flake add mine /home/teto/nixpkgs
+nix print-dev-env --profile /path/to/profile/to/creat
+
+--profile works with nix develop too
 
 https://gist.github.com/edolstra/40da6e3a4d4ee8fd019395365e0772e7
 

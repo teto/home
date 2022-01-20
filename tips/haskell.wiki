@@ -1,4 +1,27 @@
 ﻿CABAL_HELPER_DEBUG=1
+{-# OPTIONS_GHC -fdefer-type-errors #-}
+{-# OPTIONS_GHC -Wno-missing-signatures #-}
+-- -fdefer-type-errors
+-dppr-cols2000 to control the width of error messages in ghci
+
+
+# working with ghc-pkg
+ghc-pkg init ./test.db
+
+https://downloads.haskell.org/~ghc/latest/docs/html/users_guide/packages.html#package-environments
+
+-package-env
+
+Or GHC_ENVIRONMENT
+GHC_PACKAGE_PATH
+/home/teto/.ghc/x86_64-linux-8.10.7/environments/default
+
+:xa
+cabal install --lib ./servant-openapi3.cabal --package-env ./foo
+cabal install --lib
+ghc-pkg register --user --force /home/teto/nova/servant-openapi3/dist-newstyle/build/x86_64-linux/ghc-8.10.7/servant-openapi3-2.0.1.3/package.conf.inplace/servant-openapi3-2.0.1.3-inplace.conf 
+
+https://stackoverflow.com/questions/55379400/how-to-generate-a-ghc-database-for-one-package
 
 cabal haddock --haddock-executables
 

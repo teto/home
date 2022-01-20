@@ -135,7 +135,8 @@ rec {
     enable= true;
     zsh-autoenv.enable = false;
     enableCompletion = true;
-    autosuggestions.enable = false;
+    # enableAutosuggestions = true;
+    # autosuggestions.enable = false;
     syntaxHighlighting.enable = false;
     shellAliases= environment.shellAliases // {
     };

@@ -165,17 +165,6 @@ in
   };
 
   nix = {
-    # sshServe = {
-    #   enable = true;
-    #   protocol = "ssh";
-    #   # keys = [ secrets.gitolitePublicKey ];
-    # };
-
-    # added to nix.conf
-    # experimental-features = nix-command flakes
-    extraOptions = ''
-    '';
-
     distributedBuilds = false;
   };
 

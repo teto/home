@@ -94,10 +94,10 @@ let
     bandwhich  # to monitor per app bandwidth
     du-dust  # dust binary: rust replacement of du
     font-manager
-    gnome3.defaultIconTheme # else nothing appears
+    gnome.adwaita-icon-theme # else nothing appears
     gnome3.eog # eye of gnome = image viewer / creates a collision
     gnome3.file-roller # for GUI archive handling
-    gnome3.networkmanagerapplet # should
+    pkgs.networkmanagerapplet # should
     hunspellDicts.fr-any
     libnotify
     # luarocks

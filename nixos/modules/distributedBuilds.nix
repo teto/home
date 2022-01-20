@@ -15,7 +15,19 @@ let
     speedFactor = 2;
     supportedFeatures = [ "big-parallel" "kvm" ];
     # mandatoryFeatures = [ "perf" ];
+  };
+  nova-runner-1 = {
+    hostName = secrets.nova-gitlab-runner-1.hostname;
+    # todo move it to secrets
+    sshUser = secrets.nova-gitlab-runner-1.userName;
+    sshKey = "/home/teto/.ssh/nova_infra_prod";
+    system = "x86_64-linux";
+    maxJobs = 2;
+    speedFactor = 2;
+    supportedFeatures = [ "big-parallel" "kvm" ];
+    # mandatoryFeatures = [ "perf" ];
     };
+
 in
 {
   nix = {
@@ -34,6 +46,7 @@ in
     # daemonNiceLevel = 2;
     buildMachines = [
       localMachine
+      nova-runner-1
     ];
   };
 }

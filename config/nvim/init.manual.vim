@@ -202,7 +202,7 @@ let cmdline_external_term_cmd = "termite -e '%s' &"
 "}}}
 "}}}
 " " Snippets are separated from the engine. Add this if you want them:
-Plug 'SirVer/ultisnips' " handle snippets
+" Plug 'SirVer/ultisnips' " handle snippets
 Plug 'honza/vim-snippets'
 " Plug 'itchyny/vim-cursorword'
 

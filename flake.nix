@@ -125,6 +125,7 @@
                 nixpkgs.overlays = nixpkgs.lib.attrValues self.overlays;
                 imports = [
                   ./nixos/hardware-dell-camera.nix
+                  ./nixos/modules/distributedBuilds.nix
                   ./nixos/configuration-xps.nix
                   ./nixos/profiles/nix-daemon.nix
                   ./nixos/modules/xserver.nix

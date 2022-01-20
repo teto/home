@@ -814,6 +814,7 @@ end
 -- set tagfunc=v:lua.vim.lsp.tagfunc
 
 nnoremap("n", "<f12>", function () vim.cmd('IndentBlanklineToggle!') end, {expr=true})
+
 -- since it was not merge yet
 if vim.ui then
 

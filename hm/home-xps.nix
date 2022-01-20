@@ -37,6 +37,7 @@ in
   ];
 
   home.packages = with pkgs; [
+    hlint # (for test with manpage)
     brightnessctl
     simple-scan
   ];
