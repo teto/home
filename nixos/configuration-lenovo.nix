@@ -12,7 +12,6 @@ in
     # todo renommer en workstation
     ./modules/docker-daemon.nix
 
-    # ./modules/distributedBuilds.nix
     ./modules/config-all.nix
     ./modules/desktop.nix
     ./modules/libvirtd.nix
@@ -134,20 +133,6 @@ in
   # it is necessary to use dnssec though :(
   networking.resolvconf.dnsExtensionMechanism = false;
   networking.resolvconf.dnsSingleRequest = false;
-
-  # networking.interfaces = {
-  #     # macAddress = "3B-0B-B5-6A-ED-91";
-  #     eno1 = {
-  #       name = "proxy"; useDHCP=true;  mtu=1500;
-  #       # I just want to use 
-  #       ipv4.routes = [
-  #         { address = "10.0.0.0"; prefixLength = 16; }
-  #         # { address = "192.168.2.0"; prefixLength = 24; via = "192.168.1.1"; }
-  #       ];
-  #     };
-  #     # eth1 = { name = "eth1"; useDHCP=true; };
-  # };
-
 
   # to allow wireshark to capture from netlink
   # networking.localCommands = ''

@@ -188,6 +188,7 @@
               # (import ./nixos/modules/hoogle.nix)
               ({ pkgs, ... }: {
                 nixpkgs.overlays = nixpkgs.lib.attrValues self.overlays;
+                nix.distributedBuilds = true;
 
                 imports = [
                   ./nixos/configuration-lenovo.nix

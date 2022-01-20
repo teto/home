@@ -73,8 +73,8 @@
         "hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ="
         "haskell-language-server.cachix.org-1:juFfHrwkOxqIOZShtC4YC1uT1bBcq2RSvC7OMKx0Nz8="
       ];
-      trustedUsers = [ "root" "teto" ];
-
-      distributedBuilds = false;
+      trustedUsers = [
+        "teto"
+      ];
     };
 }
