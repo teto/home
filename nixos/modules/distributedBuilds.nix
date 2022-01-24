@@ -45,7 +45,7 @@ in
     # 0 = max (default) vs 19 lowest
     # daemonNiceLevel = 2;
     buildMachines = [
-      localMachine
+      # localMachine
       nova-runner-1
     ];
   };

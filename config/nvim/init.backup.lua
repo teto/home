@@ -52,29 +52,29 @@ use {
 		}
 	end
 }
-use {
-	"SmiteshP/nvim-gps",
-	requires = "nvim-treesitter/nvim-treesitter",
-	config = function ()
-		-- Example config
-		local has_gps, gps = pcall(require, 'nvim-gps')
-		gps.setup({
-			icons = {
-				["class-name"] = ' ',      -- Classes and class-like objects
-				["function-name"] = ' ',   -- Functions
-				["method-name"] = ' '      -- Methods (functions inside class-like objects)
-			},
-			-- Disable any languages individually over here
-			-- Any language not disabled here is enabled by default
-			languages = {
-				-- ["bash"] = false,
-				-- ["go"] = false,
-			},
-			separator = ' > ',
-		})
-	end
+-- use {
+-- 	"SmiteshP/nvim-gps",
+-- 	requires = "nvim-treesitter/nvim-treesitter",
+-- 	config = function ()
+-- 		-- Example config
+-- 		local has_gps, gps = pcall(require, 'nvim-gps')
+-- 		gps.setup({
+-- 			icons = {
+-- 				["class-name"] = ' ',      -- Classes and class-like objects
+-- 				["function-name"] = ' ',   -- Functions
+-- 				["method-name"] = ' '      -- Methods (functions inside class-like objects)
+-- 			},
+-- 			-- Disable any languages individually over here
+-- 			-- Any language not disabled here is enabled by default
+-- 			languages = {
+-- 				-- ["bash"] = false,
+-- 				-- ["go"] = false,
+-- 			},
+-- 			separator = ' > ',
+-- 		})
+-- 	end
 
-}
+-- }
 
 -- overrides vim.ui / vim.select with the backend of my choice
 use {
@@ -465,11 +465,9 @@ use {
 	'ggandor/lightspeed.nvim',
 	config = function ()
 		require'lightspeed'.setup {
-		jump_on_partial_input_safety_timeout = 400,
 		-- This can get _really_ slow if the window has a lot of content,
 		-- turn it on only if your machine can always cope with it.
-		highlight_unique_chars = false,
-		grey_out_search_area = true,
+		jump_to_unique_chars = false,
 		match_only_the_start_of_same_char_seqs = true,
 		limit_ft_matches = 5,
 		-- x_mode_prefix_key = '<c-x>',

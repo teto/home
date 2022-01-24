@@ -19,8 +19,11 @@ alias local-rebuild="sudo nixos-rebuild --flake ~/home --override-input nixpkgs-
 alias mg='if [ -z ${BW_SESSION} ]; then export BW_SESSION=$(bw unlock --raw); fi && make gitops'
 alias bn='if [ -z ${BW_SESSION} ]; then export BW_SESSION=$(bw unlock --raw); fi && nix develop'
 
-alias hsenv='nix-shell -p ghc -p haskell.packages.ghc8107.cabal-install pkg-config pcre haskell-language-server'
+# https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz
+# -f channel:nixos-unstable'
+alias hsenv='nix shell nixpkgs#ghc nixpkgs#haskell.packages.ghc8107.cabal-install nixpkgs#pkg-config nixpkgs#haskell-language-server'
 alias nhs=hsenv
+alias nhs9='nix shell nixpkgs#haskell.compiler.ghc921 nixpkgs#haskell.packages.ghc921.cabal-install nixpkgs#pkg-config hls#haskell-language-server-921'
 
 # fzf-diff (https://medium.com/@GroundControl/better-git-diffs-with-fzf-89083739a9cb)
 function fzd {

@@ -9,7 +9,7 @@
     # needed since default is true !
     passwordAuthentication = false;
     forwardX11 = true;
-    challengeResponseAuthentication = false;
+    kbdInteractiveAuthentication = false;
     logLevel = "VERBOSE";
     # listenAddresses = [
     #   { addr = "0.0.0.0"; port = 64022; }

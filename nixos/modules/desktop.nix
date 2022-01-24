@@ -1,7 +1,7 @@
 { config, lib, pkgs,  ... }:
 let
   secrets = import ./secrets.nix;
-  userNixpkgs = /home/teto/nixpkgs;
+  # userNixpkgs = /home/teto/nixpkgs;
 in
 {
 
@@ -13,6 +13,7 @@ in
     ./wireshark.nix
     ./wifi.nix
     ../profiles/neovim.nix
+    ../profiles/pipewire.nix
 
     # only if available
     # ./modules/jupyter.nix
@@ -39,28 +40,6 @@ in
     support32Bit = true;
   };
 
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
-    # use the example session manager (no others are packaged yet so this is enabled by default,
-    # no need to redefine it in your config for now)
-    #media-session.enable = true;
-    config.pipewire = {
-      "properties" = {
-        #"link.max-buffers" = 64;
-	# "link.max-buffers" = 16; # version < 3 clients can't handle more than this
-	"log.level" = 2;
-        # "default.clock.rate" = 48000; # 44100
-        #"default.clock.quantum" = 1024;
-        #"default.clock.min-quantum" = 32;
-        #"default.clock.max-quantum" = 8192;
-      };
-    };
-  };
 
   # console.font = "Lat2-Terminus16";
   # console.keyMap = "fr";
@@ -150,9 +129,9 @@ in
 
     # This priority propagates to build processes. 0 is the default Unix process I/O priority, 7 is the lowest
     # daemonIONiceLevel = 3;
-    nixPath = [
-      "nixpkgs=${builtins.toString userNixpkgs}"
-    ];
+    # nixPath = [
+    #   "nixpkgs=${builtins.toString userNixpkgs}"
+    # ];
 
     # either use --option extra-binary-caches http://hydra.nixos.org/
     # handy to hack/fix around
