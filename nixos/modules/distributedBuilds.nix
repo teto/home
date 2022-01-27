@@ -46,7 +46,7 @@ in
     # daemonNiceLevel = 2;
     buildMachines = [
       # localMachine
-      nova-runner-1
+      # nova-runner-1
     ];
   };
 }

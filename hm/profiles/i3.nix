@@ -66,7 +66,6 @@ let
       floating_minimum_size 75 x 50
       floating_maximum_size -1 x -1
 
-      # experimental part about
       # Mod4 => window key
       set $mad Super_L
       # Mod4

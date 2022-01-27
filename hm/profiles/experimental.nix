@@ -8,6 +8,15 @@ in
   #   enable = true;
   # };
 
+  # nix = {
+  #   registry = {
+  #     nur.to = { type = "github"; owner = "nix-community"; repo="NUR"; };
+  #     hm.to = { type = "github"; owner = "nix-community"; repo="home-manager"; };
+  #     poetry.to = { type = "github"; owner = "nix-community"; repo="poetry2nix"; };
+  #     neovim.to = { type = "github"; owner = "neovim"; repo="neovim?dir=contrib"; };
+  #   };
+  # };
+
   programs.xdg.enable = true;
 
   home.packages = with pkgs; [
