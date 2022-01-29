@@ -88,6 +88,11 @@ use {
 
 -- }
 
+use{"petertriho/nvim-scrollbar",
+	config = function ()
+		require"scrollbar".setup({show=true})
+	end
+}
 -- overrides vim.ui / vim.select with the backend of my choice
 use {
 	'stevearc/dressing.nvim'
