@@ -206,6 +206,7 @@ rec {
         "steam"
         "steam-original"
         "steam-runtime"
+        "Oracle_VM_VirtualBox_Extension_Pack"
       ];
   #     permittedInsecurePackages = [
   #         # "webkitgtk-2.4.11"

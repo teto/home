@@ -136,12 +136,13 @@
                   ./nixos/profiles/adb.nix
                   ./nixos/modules/libvirtd.nix
                   ./nixos/profiles/chromecast.nix
+                  ./nixos/profiles/virtualbox.nix
                 ];
               })
 
               ({ config, lib, pkgs,  ... }:
                 {
-                  boot.loader.systemd-boot.enable = true;
+                  # boot.loader.systemd-boot.enable = true;
                   boot.loader.efi.canTouchEfiVariables = true;
                   boot.loader.grub.enableCryptodisk = true;
                   boot.loader.grub.enable = true;

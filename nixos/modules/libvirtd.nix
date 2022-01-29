@@ -40,7 +40,7 @@
       # group="libvirtd"
 
     # qemuRunAsRoot=false;
-
+# virtualisation.libvirtd.qemu.runAsRoot
     qemu.verbatimConfig = ''
       # https://github.com/libvirt/libvirt/blob/master/src/qemu/qemu.conf
       namespaces = []

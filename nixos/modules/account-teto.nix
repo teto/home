@@ -20,6 +20,7 @@ in
        "video" # to control brightness
        "realtime"  # for pipewire
        "wheel" # for sudo
+       "vboxusers" # to avoid Kernel driver not accessible
        # "kvm" # don't think that's needed
      ];
      # once can set initialHashedPassword too
