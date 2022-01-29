@@ -37,11 +37,10 @@ final: prev:
 
   # qtgo = prev.callPackage ./qtgo {};
 
-  # prev.haskellPackages.callHackage "hmatrix" "0.20.1" {};
-  haskell-docs-cli = prev.haskellPackages.callCabal2nix "haskell-docs-cli" ("${prev.fetchzip {
-        url = "https://github.com/lazamar/haskell-docs-cli/archive/e7f1a60db8696fc96987a3447d402c4d0d54b5e0.tar.gz";
-        sha256 = "sha256-/9VjXFgbBz/OXjxu8/N7enNdVs1sQZmUiKhjSTIl6Fg=";
-      }}") {};
+  # haskell-docs-cli = prev.haskellPackages.callCabal2nix "haskell-docs-cli" (prev.fetchzip {
+  #       url = "https://github.com/lazamar/haskell-docs-cli/archive/e7f1a60db8696fc96987a3447d402c4d0d54b5e0.tar.gz";
+  #       sha256 = "sha256-/9VjXFgbBz/OXjxu8/N7enNdVs1sQZmUiKhjSTIl6Fg=";
+  #     }) {};
 
   # https://github.com/phuhl/linux_notification_center
   # already packaged, just need the systemctl bus
