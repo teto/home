@@ -102,7 +102,7 @@
                     efi.canTouchEfiVariables = true;
                   };
                 };
-                nix.maxJobs = lib.mkDefault 48;
+                nix.settings.max-jobs = lib.mkDefault 48;
               }
           )
         ];

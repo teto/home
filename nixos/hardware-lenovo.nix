@@ -48,7 +48,7 @@
 
 
 
-  nix.maxJobs = lib.mkDefault 4;
+  nix.settings.max-jobs = lib.mkDefault 4;
   # Often used values: "ondemand", "powersave", "performance"
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
 }

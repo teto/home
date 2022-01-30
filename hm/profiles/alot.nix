@@ -3,7 +3,7 @@
   # TODO test http://alot.readthedocs.io/en/latest/configuration/key_bindings.html
   # w = pipeto urlscan 2> /dev/null
    programs.alot = {
-     enable = false;
+     enable = true;
 
      # Hooks are python callables that live in a module specified by hooksfile in the config.
      hooks = builtins.readFile ../../config/alot/apply_patch.py;
