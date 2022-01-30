@@ -61,7 +61,8 @@
       # '';
 
       #       "https://teto.cachix.org"
-      binaryCaches = [
+      settings = {
+        substituters = [
         # "https://cache.nixos.org/" # part of the default
         "https://jupyterwith.cachix.org"
         # TODO move it to nova's ?
@@ -69,12 +70,13 @@
         "https://hydra.iohk.io"
         "https://haskell-language-server.cachix.org"
       ];
-      binaryCachePublicKeys = [
+      trusted-public-keys = [
         "hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ="
         "haskell-language-server.cachix.org-1:juFfHrwkOxqIOZShtC4YC1uT1bBcq2RSvC7OMKx0Nz8="
       ];
-      trustedUsers = [
+      trusted-users = [
         "teto"
       ];
+    };
     };
 }

@@ -52,7 +52,7 @@ clock = status.register(
     on_leftclick="kitty ikhal",
     # on_leftclick="xmessage toto",
     # on_rightclick=["/usr/bin/urxvtc",'-e', 'cal'],
-    on_rightclick="gnome-terminal -e sh",
+    on_rightclick="kitty sh",
     # interval=10,
     # on_clicks={
     #     'left': ["urxvtc"],
@@ -66,7 +66,8 @@ clock = status.register(
 
 # clock.on_click(1)
 # print(clock.on_clicks)
-status.register("pulseaudio")
+# generate errors because of missing pacmd ?
+# status.register("pulseaudio")
 
 # Shows your CPU temperature, if you have a Intel CPU
 # status.register("temp",   format="{temp:.0f}°C",)
