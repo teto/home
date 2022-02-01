@@ -1,6 +1,20 @@
 final: prev:
 {
 
+  # see https://github.com/NixOS/nixpkgs/pull/156974
+  i3lock = let
+    patchedPkgs = import (builtins.fetchTarball {
+      url = "https://github.com/nixos/nixpkgs/archive/ffdadd3ef9167657657d60daf3fe0f1b3176402d.tar.gz";
+      sha256 = "1nrz4vzjsf3n8wlnxskgcgcvpwaymrlff690f5njm4nl0rv22hkh";
+    }) {
+      inherit (prev) system config;
+      # inherit (prev) overlays;  # not sure
+    };
+    patchedPam = patchedPkgs.pam;
+  in 
+    prev.i3lock.override { pam = patchedPam; };
+  # apply the same patch to other packages
+
   # gufw = prev.callPackage ./gufw {};
   # upstreamed already
   # myHelm = final.wrapHelm final.kubernetes-helm {

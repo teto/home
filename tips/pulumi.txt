@@ -1,0 +1,2 @@
+
+pulumi up --verbose 9 --logtostderr

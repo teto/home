@@ -23,7 +23,7 @@ let
   mad="Mod4";
   mod="Mod1";
 
-
+# some-overlay.nix
   # i3pystatus-custom = pkgs.i3pystatus.override ({
   i3pystatus-custom = i3pystatus-perso.override ({
     extraLibs = with pkgs.python3Packages; [ pytz notmuch dbus-python ];
@@ -256,7 +256,11 @@ in
         "${mod}+Ctrl+Tab"="exec \"${pkgs.rofi}/bin/rofi -modi 'window' -show run\"";
         # TODO dwindow exclusively with WIN
         "Super_L+Tab"="exec \"${pkgs.rofi}/bin/rofi -modi 'run,drun,window,ssh' -show run\"";
-        "${mod}+Ctrl+L"="exec ${pkgs.i3lock-fancy}/bin/i3lock-fancy";
+
+        # locker
+        # "${mod}+Ctrl+L"="exec ${pkgs.i3lock-fancy}/bin/i3lock-fancy";
+        "${mod}+Ctrl+L"="exec ${pkgs.i3lock}/bin/i3lock";
+
         "${mod}+Ctrl+h" = ''exec "${pkgs.rofi}/bin/rofi -modi 'clipboard:greenclip print' -show clipboard"'';
         "${mod}+g" = "exec ${pkgs.i3-easyfocus}/bin/i3-easyfocus";
         "Super_L+w" = "exec ${pkgs.i3-easyfocus}/bin/i3-easyfocus";

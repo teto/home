@@ -41,6 +41,8 @@
 
     # qemuRunAsRoot=false;
 # virtualisation.libvirtd.qemu.runAsRoot
+    qemu.user = "teto";
+
     qemu.verbatimConfig = ''
       # https://github.com/libvirt/libvirt/blob/master/src/qemu/qemu.conf
       namespaces = []

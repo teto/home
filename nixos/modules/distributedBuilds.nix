@@ -28,6 +28,18 @@ let
     # mandatoryFeatures = [ "perf" ];
     };
 
+  jedha = {
+    hostName = "jedha.home";
+    # todo move it to secrets
+    sshUser = secrets.jedha.userName;
+    sshKey = "/home/teto/.ssh/nova_infra_prod";
+    system = "x86_64-linux";
+    maxJobs = 2;
+    speedFactor = 2;
+    supportedFeatures = [ "big-parallel" "kvm" ];
+    # mandatoryFeatures = [ "perf" ];
+    };
+
 in
 {
   nix = {
@@ -45,6 +57,7 @@ in
     # 0 = max (default) vs 19 lowest
     # daemonNiceLevel = 2;
     buildMachines = [
+      jedha
       # localMachine
       # nova-runner-1
     ];
