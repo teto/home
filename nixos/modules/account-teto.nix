@@ -44,5 +44,5 @@ in
 
   };
 
-  nix.trustedUsers = ["teto"];
+  nix.settings.trusted-users = ["teto"];
 }

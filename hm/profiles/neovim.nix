@@ -119,7 +119,7 @@ let
             -- ['n <leader>hp'] = '<cmd>lua require"gitsigns".preview_hunk()<CR>',
             -- ['n <leader>hb'] = '<cmd>lua require"gitsigns".blame_line()<CR>',
           },
-          watch_index = {
+          watch_gitdir = {
             interval = 1000,
             follow_files = true
           },
@@ -137,6 +137,113 @@ let
           }  -- If luajit is present
         }'';
 
+    }
+    # {
+    #   plugin = fidget-nvim;
+    #   type = "lua";
+    #   config = ''
+    #     require"fidget".setup{}
+    #   '';
+    # }
+
+    {
+      plugin = lsp_lines-nvim;
+      type = "lua";
+      config = ''
+        require("lsp_lines").register_lsp_virtual_lines()
+        '';
+    }
+    {
+      plugin = marks-nvim;
+      type = "lua";
+      config = ''
+	require'marks'.setup {
+		-- whether to map keybinds or not. default true
+		default_mappings = true,
+		-- which builtin marks to show. default {} but available:  ".", "<", ">", "^"
+		builtin_marks = {},
+		-- whether movements cycle back to the beginning/end of buffer. default true
+		cyclic = true,
+		-- whether the shada file is updated after modifying uppercase marks. default false
+		force_write_shada = false,
+		-- how often (in ms) to redraw signs/recompute mark positions.
+		-- higher values will have better performance but may cause visual lag,
+		-- while lower values may cause performance penalties. default 150.
+		refresh_interval = 250,
+		-- sign priorities for each type of mark - builtin marks, uppercase marks, lowercase
+		-- marks, and bookmarks.
+		-- can be either a table with all/none of the keys, or a single number, in which case
+		-- the priority applies to all marks.
+		-- default 10.
+		sign_priority = { lower=10, upper=15, builtin=8, bookmark=20 },
+		-- marks.nvim allows you to configure up to 10 bookmark groups, each with its own
+		-- sign/virttext. Bookmarks can be used to group together positions and quickly move
+		-- across multiple buffers. default sign is '!@#$%^&*()' (from 0 to 9), and
+		-- default virt_text is "".
+		bookmark_0 = {
+			sign = "⚑",
+			virt_text = "hello world"
+		},
+		mappings = {}
+	}
+      '';
+
+    }
+    # {
+      # not packaged yet
+  # Plug 'bfredl/nvim-miniyank' " killring alike plugin, cycling paste careful search for :Yank commands
+  # hangs with big strings
+    #   plugin = nvim-miniyank;
+    #   config = 
+    #   ''
+# let g:miniyank_delete_maxlines=100
+
+# let g:miniyank_filename = $XDG_CACHE_HOME."/miniyank.mpack"
+# " map p <Plug>(miniyank-autoput)
+# " map P <Plug>(miniyank-autoPut)
+
+
+# function! FZFYankList() abort
+  # function! KeyValue(key, val)
+    # let line = join(a:val[0], '\n')
+    # if (a:val[1] ==# 'V')
+    #   let line = '\n'.line
+    # endif
+    # return a:key.' '.line
+  # endfunction
+  # return map(miniyank#read(), function('KeyValue'))
+# endfunction
+
+# function! FZFYankHandler(opt, line) abort
+  # let key = substitute(a:line, ' .*', '', '')
+  # if !empty(a:line)
+    # let yanks = miniyank#read()[key]
+    # call miniyank#drop(yanks, a:opt)
+  # endif
+# endfunction
+
+# command! YanksAfter call fzf#run(fzf#wrap('YanksAfter', {
+# \ 'source':  FZFYankList(),
+# \ 'sink':    function('FZFYankHandler', ['p']),
+# \ 'options': '--no-sort --prompt="Yanks-p> "',
+# \ }))
+
+# command! YanksBefore call fzf#run(fzf#wrap('YanksBefore', {
+# \ 'source':  FZFYankList(),
+# \ 'sink':    function('FZFYankHandler', ['P']),
+# \ 'options': '--no-sort --prompt="Yanks-P> "',
+# \ }))
+
+# map <A-p> <Cmd>YanksAfter<CR>
+# map <A-P> <Cmd>YanksBefore<CR>
+# '';
+
+    # }
+    vim-lion # Use with gl/L<text object><character to align to 
+    vim-vsnip
+    vim-vsnip-integ
+      {
+      plugin = nvim-spectre;
     }
     {
       plugin = tokyonight-nvim;
@@ -198,6 +305,10 @@ let
         config = ''
           " dhall.vim config
         '';
+      }
+      {
+        plugin = nvim-orgmode;
+        type = "lua";
       }
       {
         plugin = vim-toml;

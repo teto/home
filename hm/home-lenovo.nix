@@ -54,7 +54,9 @@ in
 
   home.packages = with pkgs; [
     # steam-run
+    signal-desktop
     lutris
+    xlibs.xwininfo # for stylish
   ];
 
   # hum...

@@ -16,7 +16,6 @@ in
     ./modules/desktop.nix
     ./modules/libvirtd.nix
 
-    ./modules/openssh.nix
     # ./modules/syncthing.nix
 
     # ./modules/tor.nix
@@ -222,9 +221,6 @@ in
   #     List of packages to override without doing a full rebuild. The original derivation and replacement derivation must have the same name length, and ideally should have close-to-identical directory layout.
 
   # system.userActivationScripts
-
-  # kinda experimental
-  # services.openssh.banner = "Hello world";
 
   # $out here is the profile generation
   system.extraSystemBuilderCmds = ''

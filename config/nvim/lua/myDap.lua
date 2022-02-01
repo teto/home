@@ -21,3 +21,4 @@ dap.configurations.haskell = {
     ghciCmd= "stack ghci --test --no-load --no-build --main-is TARGET --ghci-options -fprint-evld-with-show",
   },
 }
+

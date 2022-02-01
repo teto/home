@@ -3,6 +3,9 @@
 
   services.openssh = {
     enable = true;
+    # kinda experimental
+    # services.openssh.banner = "Hello world";
+
     allowSFTP = true; # for sshfs edit
     # type = types.enum ["yes" "without-password" "prohibit-password" "forced-commands-only" "no"];
     permitRootLogin = "prohibit-password";

@@ -43,7 +43,7 @@ end
 -- use { 'romgrk/nvim-treesitter-context',
 -- 	requires = { 'nvim-treesitter/nvim-treesitter' }
 -- }
-use { 'sunjon/stylish.nvim' }
+use { '~/neovim/stylish.nvim' }
 vim.cmd [[
 amenu Plugin.Fugitive.GFetch :GFetch | amenu Plugin.Fugitive.GPull :GPull | amenu Plugin.Fugitive.GPush :GPush
 amenu File.Filetype.One :echo 1 | amenu File.Filetype.Two :echo 2 | amenu File.Filetype.Three :echo 3
@@ -88,6 +88,7 @@ use {
 
 -- }
 
+-- not packaged
 use{"petertriho/nvim-scrollbar",
 	config = function ()
 		require"scrollbar".setup({show=true})
@@ -176,54 +177,21 @@ require('dressing').setup({
 
 
 -- use 'https://git.sr.ht/~whynothugo/lsp_lines.nvim'
-use({
-  "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
-  as = "lsp_lines",
-  config = function()
+-- use({
+--   "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+--   as = "lsp_lines",
+--   config = function()
 
-    require("lsp_lines").register_lsp_virtual_lines()
-  end,
-})
-use { 'chentau/marks.nvim',
-config = function ()
+--     require("lsp_lines").register_lsp_virtual_lines()
+--   end,
+-- })
 
-	require'marks'.setup {
-		-- whether to map keybinds or not. default true
-		default_mappings = true,
-		-- which builtin marks to show. default {} but available:  ".", "<", ">", "^"
-		builtin_marks = {},
-		-- whether movements cycle back to the beginning/end of buffer. default true
-		cyclic = true,
-		-- whether the shada file is updated after modifying uppercase marks. default false
-		force_write_shada = false,
-		-- how often (in ms) to redraw signs/recompute mark positions.
-		-- higher values will have better performance but may cause visual lag,
-		-- while lower values may cause performance penalties. default 150.
-		refresh_interval = 250,
-		-- sign priorities for each type of mark - builtin marks, uppercase marks, lowercase
-		-- marks, and bookmarks.
-		-- can be either a table with all/none of the keys, or a single number, in which case
-		-- the priority applies to all marks.
-		-- default 10.
-		sign_priority = { lower=10, upper=15, builtin=8, bookmark=20 },
-		-- marks.nvim allows you to configure up to 10 bookmark groups, each with its own
-		-- sign/virttext. Bookmarks can be used to group together positions and quickly move
-		-- across multiple buffers. default sign is '!@#$%^&*()' (from 0 to 9), and
-		-- default virt_text is "".
-		bookmark_0 = {
-			sign = "⚑",
-			virt_text = "hello world"
-		},
-		mappings = {}
-	}
-end
-
-}
-use 'mfussenegger/nvim-dap'
-use {
-	"rcarriga/nvim-dap-ui"
-	, requires = {"mfussenegger/nvim-dap"} 
-}
+-- use 'mfussenegger/nvim-dap'
+-- use {
+-- 	"rcarriga/nvim-dap-ui"
+-- 	, requires = {"mfussenegger/nvim-dap"} 
+-- }
+-- use 'nvim-telescope/telescope-dap.nvim'
 use {
 	"rcarriga/nvim-notify"
 	, config = function ()
@@ -231,9 +199,8 @@ use {
 	end
 }
 
-use 'nvim-telescope/telescope-dap.nvim'
-use 'edluffy/hologram.nvim' -- see https://github.com/edluffy/hologram.nvim#usage for usage
-use 'windwp/nvim-spectre' -- search & replace
+-- terminal image viewer in neovim see https://github.com/edluffy/hologram.nvim#usage for usage
+use 'edluffy/hologram.nvim' 
 use 'ellisonleao/glow.nvim' -- markdown preview, run :Glow
 use {
 	-- Show where your cursor moves
@@ -359,11 +326,11 @@ use {'nvim-telescope/telescope-fzy-native.nvim'}
 use { 'nvim-telescope/telescope-media-files.nvim'}
 -- use "terrortylor/nvim-comment"
 -- shows a lightbulb where a codeAction is available
-use { 'kosayoda/nvim-lightbulb',
-	config = function ()
-		vim.cmd [[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]]
-	end
-}
+-- use { 'kosayoda/nvim-lightbulb',
+-- 	config = function ()
+-- 		vim.cmd [[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]]
+-- 	end
+-- }
 -- using packer.nvim
 use {'akinsho/bufferline.nvim', requires = 'kyazdani42/nvim-web-devicons'}
 
@@ -371,7 +338,7 @@ use {'akinsho/bufferline.nvim', requires = 'kyazdani42/nvim-web-devicons'}
 -- https://github.com/gelguy/wilder.nvim
 -- use { 'gelguy/wilder.nvim' }
 use { 'gennaro-tedesco/nvim-peekup' }
-use { 'nvim-telescope/telescope-packer.nvim' }
+-- use { 'nvim-telescope/telescope-packer.nvim' }
 --use { 'TimUntersberger/neogit',
 --	config = function ()
 --		vim.defer_fn (
@@ -432,12 +399,12 @@ use { 'notomo/gesture.nvim' }
 	-- , requires = {"rktjmp/lush.nvim"}
 	-- }
 use { 'onsails/lspkind-nvim' }
-use {
-	'phaazon/hop.nvim',
-	config = function ()
-		require 'hop'.setup {}
-	end
-}   -- sneak.vim equivalent
+-- use {
+-- 	'phaazon/hop.nvim',
+-- 	config = function ()
+-- 		require 'hop'.setup {}
+-- 	end
+-- }   -- sneak.vim equivalent
 
 use { 'alec-gibson/nvim-tetris', opt = true }
 
@@ -681,7 +648,6 @@ use { 'Pocco81/AutoSave.nvim' -- :ASToggle /AsOn / AsOff
 end
 }
 -- use 'sindrets/diffview.nvim' -- :DiffviewOpen
--- use 'folke/which-key.nvim' -- :WhichKey
 
 
 -- use 'hoob3rt/lualine.nvim'
@@ -780,6 +746,8 @@ nnoremap ( "n", "<leader>S",  function() require('spectre').open() end )
 -- nnoremap <Leader>h <Cmd>FzfHistory<CR>
 -- nnoremap <Leader>c <Cmd>FzfCommits<CR>
 -- nnoremap <Leader>C <Cmd>FzfColors<CR>
+
+-- use 'folke/which-key.nvim' -- :WhichKey
 
 local has_whichkey, wk = pcall(require, "which-key")
 if has_whichkey then
@@ -1331,33 +1299,34 @@ vim.cmd [[highlight IndentBlanklineIndent4 guifg=#56B6C2 gui=nocombine]]
 vim.cmd [[highlight IndentBlanklineIndent5 guifg=#61AFEF gui=nocombine]]
 vim.cmd [[highlight IndentBlanklineIndent6 guifg=#C678DD gui=nocombine]]
 
-
-local dap = require 'dap'
-
-dap.adapters.haskell = {
-  type = 'executable';
-  command = 'haskell-debug-adapter';
-  args = {
-	  -- '--hackage-version=0.0.33.0'
-  };
+menu_opts = {
+  kind = 'menu',
+  prompt = 'Main menu',
+  experimental_mouse = true
 }
-dap.configurations.haskell = {
-  {
-    type = 'haskell',
-    request = 'launch',
-    name = 'Debug',
-    workspace = '${workspaceFolder}',
-    startup = "${file}",
-    stopOnEntry = true,
-    logFile = vim.fn.stdpath('data') .. '/haskell-dap.log',
-    logLevel = 'WARNING',
-    ghciEnv = vim.empty_dict(),
-    ghciPrompt = "λ: ",
-    -- Adjust the prompt to the prompt you see when you invoke the stack ghci command below
-    ghciInitialPrompt = "λ: ",
-    ghciCmd= "ghci --test --no-load --no-build --main-is TARGET --ghci-options -fprint-evld-with-show",
-  },
-}
+
+menu_add = function(name, command)
+
+   res = vim.cmd ([[menu ]]..name..[[ ]]..command)
+   print(res)
+end
+
+menu_add("LSP.Declaration", 'lua vim.lsp.buf.declaration()')
+menu_add("LSP.Hover", 'lua vim.lsp.buf.references()')
+
+vim.api.nvim_set_keymap(
+  'n',
+  '<F1>',
+  "<Cmd>lua require'stylish'.ui_menu(vim.fn.menu_get(''), menu_opts, function(res) print('### ' ..res) end)<CR>",
+  { noremap = true, silent = true }
+)
+-- vim.api.nvim_set_keymap(
+--   'n',
+--   '<F1>',
+--   "<Cmd>lua require'stylish'.ui_menu(vim.fn.menu_get(''), {kind=menu, prompt = 'Main Menu', experimental_mouse = true}, function(res) print('### ' ..res) end)<CR>",
+--   { noremap = true, silent = true }
+-- )
+
 
 
 -- lua vim.diagnostic.setqflist({open = tru, severity = { min = vim.diagnostic.severity.WARN } })

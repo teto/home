@@ -42,10 +42,8 @@ call plug#begin(s:plugdir)
 " Plug 'nvim-lua/plenary.nvim'
 Plug 'rhysd/vim-gfm-syntax' " markdown syntax compatible with Github's
 Plug 'winston0410/range-highlight.nvim' "highlight ranges like :1,5
-Plug 'hrsh7th/vim-vsnip'
-Plug 'hrsh7th/vim-vsnip-integ'
 
-Plug 'seandewar/nvimesweeper'
+Plug 'seandewar/nvimesweeper' " not packaged
 
 " Plug 'soywod/himalaya' " mail reader :Himalaya ; needs the rust CLI reader
 " himalaya
@@ -60,28 +58,15 @@ Plug 'kevinhwang91/rnvimr'
 " Plug 'eugen0329/vim-esearch' " search & replace
 Plug '~/neovim/neovim-ui'
 Plug 'kshenoy/vim-signature' " display marks in gutter, love it
-" Plug 'mhinz/vim-signify'  " *
 
 Plug 'tjdevries/colorbuddy.nvim' " required by some colorscheme
-Plug 'jbyuki/contextmenu.nvim' " deprecated
-" Plug 'kyazdani42/nvim-tree.lua' " to solve crash NvimTreeToggle
-" Plug 'RRethy/vim-illuminate' " to highlight similar words
-" Plug 'kyazdani42/nvim-web-devicons' " Recommended (for coloured icons)
-" Plug 'ryanoasis/vim-devicons'  " Icons without colours
-" Plug 'akinsho/nvim-bufferline.lua'
 
 " , { 'tag': 'v3.12.0' }
 Plug 'Olical/aniseed' " dependency of ?
 Plug 'bakpakin/fennel.vim'
 Plug 'strboul/urlview.vim' " :Urlview to list urls and open them
-Plug 'diepm/vim-rest-console' " test rest APIs * Hit the trigger key (<C-j> by default).
+" Plug 'diepm/vim-rest-console' " test rest APIs * Hit the trigger key (<C-j> by default).
 " Plug '~/pdf-scribe.nvim'  " to annotate pdf files from nvim :PdfScribeInit
-"Plug 'TaDaa/vimade' " to dim the background on lost focus
-" Plug 'tjdevries/cyclist.vim' " to cycle between listchars
-
-" Plug 'RishabhRD/popfix' " to manage underlying popup and previews
-" Plug 'RishabhRD/nvim-lsputils' " for lsp codeactions
-" Plug 'Xuyuanp/scrollbar.nvim'  " :h Scrollbar.nvim
 
 " annotations plugins {{{
 Plug 'MattesGroeger/vim-bookmarks' " ruby  / :BookmarkAnnotate
@@ -89,9 +74,6 @@ Plug 'MattesGroeger/vim-bookmarks' " ruby  / :BookmarkAnnotate
 " 'plutonly/vim-annotate" "  last update in 2015
 "}}}
 " branch v2-integration
-" Plug 'andymass/vim-matchup' " to replace matchit
-" Plug 'AGhost-7/critiq.vim' " :h critiq
-" Plug 'thaerkh/vim-workspace'  " :ToggleWorkspace
 
 Plug 'skywind3000/vim-quickui' " to design cool uis
 Plug 'liuchengxu/vista.vim' " to list workplace symbols
@@ -108,7 +90,6 @@ Plug 'alok/notational-fzf-vim' " to take notes, :NV
 " Plug 'iamcco/markdown-preview.nvim' " :MarkdownPreview
 Plug 'suy/vim-context-commentstring' " commen for current programming language
 " Plug 'voldikss/vim-translate-me' " floating windows for neovim
-" Plug 'elbeardmorez/vim-loclist-follow' " to have quicklist synced with cursor
 " call :NR on a region than :w . coupled with b:nrrw_aucmd_create,
 " Plug 'chrisbra/NrrwRgn' " to help with multi-ft files
 Plug 'chrisbra/vim-diff-enhanced' "
@@ -131,15 +112,10 @@ Plug 'neomutt/neomutt.vim' " syntax file for neomutt
 Plug 'vim-scripts/rfc-syntax', { 'for': 'rfc' } " optional syntax highlighting for RFC files
 " Plug 'vim-scripts/coq-syntax', {'for': 'coq'}
 "}}}
-" Plug 'dhruvasagar/vim-open-url' " gB/gW to open browser
-" Plug 'Carpetsmoker/xdg_open.vim' " overrides gx
 Plug 'mcchrish/info-window.nvim'  " :InfoWindowToggle to display buffer information in a popup
 " Plug 'tweekmonster/nvim-api-viewer', {'on': 'NvimAPI'} " see nvim api
 Plug 'tweekmonster/startuptime.vim', {'on': 'StartupTime'} " see startup time per script
-" Plug 'vim-scripts/vis' " ?
 Plug 'Konfekt/vim-CtrlXA' " use ctrl a/xto cycle between different words
-" Plug 'AndrewRadev/splitjoin.vim' " gS/gJ to
-" Plug 'jamessan/vim-gnupg' " does not support neovim yet ?
 " Plug 'editorconfig/editorconfig-vim' " not remote but involves python
 Plug 'neomake/neomake' " just for nix and neovim dev with nvimdev ?
 " provider
@@ -149,11 +125,6 @@ Plug 'neomake/neomake' " just for nix and neovim dev with nvimdev ?
 " while waiting for my neovim notification provider...
 " Plug 'tjdevries/descriptive_maps.vim', {'do': ':UpdateRemotePlugins' } " :call DescriptiveStart()
 " Plug 'the-lambda-church/coquille', {'branch': 'matt', 'for': 'coq'}
-" Plug 'inside/vim-search-pulse' " Search related
-" vim-search-pulse {{{
-let g:vim_search_pulse_mode = 'cursor_line'
-let g:vim_search_pulse_duration = 400
-"}}}
 
 " Plug 'glacambre/shelley'
 Plug 'dbakker/vim-projectroot' " projectroot#guess()
@@ -220,7 +191,6 @@ Plug 'neovimhaskell/haskell-vim', {'for': 'haskell'} " really helps with syntax 
 "}}}
 
 " Plug 'tpope/vim-unimpaired' " [<space> [e [n ]n pour gerer les conflits etc...
-" Plug 'mbbill/undotree' " replaces gundo
 
 " filetypes {{{2
 Plug 'cespare/vim-toml', { 'for': 'toml'}
@@ -229,12 +199,7 @@ Plug 'PotatoesMaster/i3-vim-syntax'
 " one competitor is https://github.com/hwayne/tla.vim/
 " }}}
 
-" Plug 'bfredl/nvim-miniyank' " killring alike plugin, cycling paste careful search for :Yank commands
-" hangs with big strings
 
-" Text objects {{{
-Plug 'tommcdo/vim-lion' " Use with gl/L<text object><character to align to>
-" }}}
 " {{{ To ease movements
 "Plug 'wellle/visual-split.vim'
 " Plug 'wellle/targets.vim' " Adds new motion targets ci{
@@ -249,12 +214,10 @@ Plug 'dietsche/vim-lastplace' " restore last cursor postion (is it still needed 
 Plug 'justinmk/vim-gtfo' " gfo to open filemanager in cwd
 Plug 'wannesm/wmgraphviz.vim', {'for': 'dot'} " graphviz syntax highlighting
 Plug 'teto/vim-listchars' " to cycle between different list/listchars configurations
-"Plug 'tpope/vim-sleuth' " Dunno what it is
 Plug 'tpope/vim-rhubarb' " github support in fugitive, use |i_CTRL-X_CTRL-O|
 " Plug 'vhakulinen/gnvim-lsp' " load it only for gnvim
 
 " euclio
-" Plug '~/vim-markdown-composer'
 " Plug 'JamshedVesuna/vim-markdown-preview'
 " Plug 'Rykka/riv.vim', {'for': 'rst'}
 " Plug 'Rykka/InstantRst', {'for': 'rst'} " rst live preview with :InstantRst,
@@ -318,7 +281,6 @@ Plug 'lervag/vimtex'
 " Plug 'jeffwilliams/basejump' " to alt+click on file:line and go to it
 Plug 'neovim/nvimdev.nvim' " thanks tweekmonster !
 " Plug 'antoinemadec/openrgb.nvim'  " to take into account RGB stuff
-" Plug 'jceb/vim-orgmode' " orgmode
 call plug#end()
 " }}}
 
@@ -1043,49 +1005,6 @@ endfunc
 au FileType coq call coquille#FNMapping()
 let g:coquille_auto_move=1
 " }}}
-" miniyank (from bfredl) {{{
-let g:miniyank_delete_maxlines=100
-let g:miniyank_filename = $XDG_CACHE_HOME."/miniyank.mpack"
-" map p <Plug>(miniyank-autoput)
-" map P <Plug>(miniyank-autoPut)
-
-
-function! FZFYankList() abort
-  function! KeyValue(key, val)
-    let line = join(a:val[0], '\n')
-    if (a:val[1] ==# 'V')
-      let line = '\n'.line
-    endif
-    return a:key.' '.line
-  endfunction
-  return map(miniyank#read(), function('KeyValue'))
-endfunction
-
-function! FZFYankHandler(opt, line) abort
-  let key = substitute(a:line, ' .*', '', '')
-  if !empty(a:line)
-    let yanks = miniyank#read()[key]
-    call miniyank#drop(yanks, a:opt)
-  endif
-endfunction
-
-command! YanksAfter call fzf#run(fzf#wrap('YanksAfter', {
-\ 'source':  FZFYankList(),
-\ 'sink':    function('FZFYankHandler', ['p']),
-\ 'options': '--no-sort --prompt="Yanks-p> "',
-\ }))
-
-command! YanksBefore call fzf#run(fzf#wrap('YanksBefore', {
-\ 'source':  FZFYankList(),
-\ 'sink':    function('FZFYankHandler', ['P']),
-\ 'options': '--no-sort --prompt="Yanks-P> "',
-\ }))
-
-map <A-p> <Cmd>YanksAfter<CR>
-map <A-P> <Cmd>YanksBefore<CR>
-
-:
-"}}}
 " nvim-hs haskell stuff {{{
 " let g:nvimhsPluginStarter=nvimhs#stack#pluginstarter()
 "}}}
@@ -1136,9 +1055,6 @@ nmap <leader>rs_ <Plug>(ReplSendLine)
 " Send the selected text to the REPL
 vmap <leader>rs  <Plug>(ReplSend)
 " }}}
-" vim-open-url {{{
-let g:open_url_browser_default="qutebrowser"
-"}}}
 " iron.nvim {{{
 " cp = repeat the previous command
 " ctr send a chunk of text with motion
@@ -1300,60 +1216,6 @@ nmap <Space>W <Plug>(quickhl-manual-reset)
 xmap <Space>W <Plug>(quickhl-manual-reset)
 
 "}}}
-" completion-nvim {{{
-let g:completion_docked_hover=1
-" let g:completion_enable_auto_popup = 0
-" can be v:null
-" 'UltiSnips'
-let g:completion_enable_auto_hover = 1
-let g:completion_enable_auto_signature = 1
-let g:completion_enable_snippet = v:null
-let g:completion_enable_auto_signature = 1
-" let g:completion_timer_cycle = 80 "default value is 80
-
-" let g:completion_matching_strategy_list = [ 'exact' ]
-" Configure the completion chains
-" path
-" \ {'complete_items' : ['lsp', 'snippet']},
-" here we can choose to separate complete_items
-let g:completion_chain_complete_list = {
-    \'default' : {
-    \	'default' : [
-    \		{'complete_items' : ['lsp', 'path']},
-    \		{'mode' : '<c-p>'},
-    \		{'mode' : '<c-n>'}
-    \	],
-    \	'comment' : [],
-    \	'string' : []
-    \	},
-    \'vim' : [
-    \	{'complete_items': ['snippet']},
-    \	{'mode' : 'cmd'}
-    \	],
-    \'c' : [
-    \	{'complete_items': ['lsp']}
-    \	],
-    \'python' : [
-    \	{'complete_items': ['lsp']}
-    \	],
-    \'lua' : [
-    \	{'complete_items': ['lsp']}
-    \	],
-    \}
-
-"   'triggered_only': ['.', '::', '->', '_']
-
-" imap  <c-j> <Plug>(completion_next_source)
-" imap  <c-k> <Plug>(completion_prev_source)
-
-" hello world"
-let g:completion_confirm_key = "\<C-y>"
-set completeopt=menu " use pum to show completions
-set completeopt+=menuone  " use pum even for one match
-set completeopt+=noinsert,noselect
-" set completeopt+=longest
-
-" }}}
 " compe
 "
 " treesitter-completion {{{
@@ -1693,6 +1555,30 @@ menu Grepper.Search\ across\ Buffers :Grepper -switch -buffers
 menu Grepper.Search\ across\ directory :Grepper
 menu Grepper.Autoopen\ results :let g:grepper.open=1<CR>
 
+menu LSP.Stop\ All\ Clients :lua vim.lsp.stop_client(vim.lsp.get_active_clients())<CR>
+
+command! OpenDiagnostics lua vim.lsp.diagnostic.set_loclist({ open = false})
+" pb c'est qu'il l'autofocus
+autocmd User LspDiagnosticsChanged lua vim.lsp.diagnostic.set_loclist( { open = false,  open_loclist = false})
+
+command! LspStopAllClients lua vim.lsp.stop_client(vim.lsp.get_active_clients())
+
+menu LSP.Goto\ Definition  lua vim.lsp.buf.definition()<CR>
+            " \ ["Goto &Declaration\t\\cd", 'lua vim.lsp.buf.declaration()'],
+            " \ ["Goto I&mplementation\t\\cd", 'lua vim.lsp.buf.implementation()'],
+            " \ ["Hover\t\\ch", 'lua vim.lsp.buf.references()'],
+            " \ ["Search &References\t\\cr", 'lua vim.lsp.buf.references()'],
+            " \ ["Document  &Symbols\t\\cr", 'lua vim.lsp.buf.document_symbol()'],
+            " \ ["Format", 'lua vim.lsp.buf.formatting_sync(nil, 1000)'],
+            " \ ["&Execute  Command\\ce", 'lua vim.lsp.buf.execute_command()'],
+            " \ ["&Incoming calls\\ci", 'lua vim.lsp.buf.incoming_calls()'],
+            " \ ["&Outgoing calls\\ci", 'lua vim.lsp.buf.outgoing_calls()'],
+            " \ ["&Signature help\\ci", 'lua vim.lsp.buf.signature_help()'],
+            " \ ["&Workspace symbol\\cw", 'lua vim.lsp.buf.workspace_symbol()'],
+            " \ ["&Rename\\cw", 'lua vim.lsp.buf.rename()'],
+            " \ ["&Code action\\cw", 'lua vim.lsp.buf.code_action()'],
+
+
 " search-related menu {{{2
 " menu Search.CurrentBuffer :exe Grepper -grepprg rg --vimgrep $* $.
 " menu Search.AllBuffers :exe Grepper -grepprg rg --vimgrep $* $+
@@ -1975,11 +1861,6 @@ endfunction
 " echo Password()
 
 " toto
-command! OpenDiagnostics lua vim.lsp.diagnostic.set_loclist({ open = false})
-" pb c'est qu'il l'autofocus
-autocmd User LspDiagnosticsChanged lua vim.lsp.diagnostic.set_loclist( { open = false,  open_loclist = false})
-
-command! LspStopAllClients lua vim.lsp.stop_client(vim.lsp.get_active_clients())
 
 " set working directory to the current buffer's directory
 " nnoremap cd :lcd %:p:h<bar>pwd<cr>
@@ -1992,13 +1873,7 @@ xnoremap <c-o> <Cmd>diffget<cr>
 
 command! JsonPretty %!jq '.'
 
-function! StatusLSP() abort
-  " let status = luaeval('require("lsp-status").status()')
-  let status = luaeval('require("statusline").status()')
-  return trim(status)
-endfunction
-
-au User LspProgressUpdate redrawstatus!
+" au User LspProgressUpdate redrawstatus!
 
 " vim.api.nvim_command('au User LspMessageUpdate redrawstatus!')
 nnoremap <2-LeftMouse> <cmd>lua vim.lsp.buf.definition()<cr>

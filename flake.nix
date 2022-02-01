@@ -200,6 +200,7 @@
                   ./nixos/modules/ntp.nix
                   ./nixos/hardware-lenovo.nix
                   ./nixos/profiles/steam.nix
+                  ./nixos/profiles/openssh.nix
                   # self.inputs.mptcp-flake.nixosModules.mptcp
                   # ./nixos/profiles/mptcp.nix
                   ./nixos/profiles/nova.nix
