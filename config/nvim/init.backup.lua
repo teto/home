@@ -12,19 +12,19 @@ local use, use_rocks = packer.use, packer.use_rocks
 local nnoremap = vim.keymap.set
 
 packer.init({
--- compile_path
+	-- compile_path
 	log = { level = 'trace' },
 })
 
 function file_exists(name)
-   local f=io.open(name,"r")
-   if f~=nil then io.close(f) return true else return false end
+	local f=io.open(name,"r")
+	if f~=nil then io.close(f) return true else return false end
 end
 
 -- print(generated_init)
 -- if file_exists(generated_init) then
-	-- for some reason it doesn't work
-	-- vim.cmd ('luafile '..generated_init..' ')
+-- for some reason it doesn't work
+-- vim.cmd ('luafile '..generated_init..' ')
 -- end
 
 -- local my_image = require('hologram.image'):new({
@@ -40,29 +40,14 @@ end
 
 -- provides TSContextEnable / TSContextDisable
 -- shows current function on first line
--- use { 'romgrk/nvim-treesitter-context',
--- 	requires = { 'nvim-treesitter/nvim-treesitter' }
--- }
 use { '~/neovim/stylish.nvim' }
-vim.cmd [[
-amenu Plugin.Fugitive.GFetch :GFetch | amenu Plugin.Fugitive.GPull :GPull | amenu Plugin.Fugitive.GPush :GPush
-amenu File.Filetype.One :echo 1 | amenu File.Filetype.Two :echo 2 | amenu File.Filetype.Three :echo 3
-amenu Edit.Recent.Foo :echo 'foo' | amenu Edit.Recent.Bar :echo 'bar' | amenu Edit.Recent.Baz :echo 'baz'
-amenu Edit.Diff.Revision_1 :echo 'rev_1' | amenu Edit.Diff.Revision_2 :echo 'rev_2' | amenu Edit.Diff.Revision_3 :echo 'rev_3'
-]]
+-- vim.cmd [[
+-- amenu Plugin.Fugitive.GFetch :GFetch | amenu Plugin.Fugitive.GPull :GPull | amenu Plugin.Fugitive.GPush :GPush
+-- amenu File.Filetype.One :echo 1 | amenu File.Filetype.Two :echo 2 | amenu File.Filetype.Three :echo 3
+-- amenu Edit.Recent.Foo :echo 'foo' | amenu Edit.Recent.Bar :echo 'bar' | amenu Edit.Recent.Baz :echo 'baz'
+-- amenu Edit.Diff.Revision_1 :echo 'rev_1' | amenu Edit.Diff.Revision_2 :echo 'rev_2' | amenu Edit.Diff.Revision_3 :echo 'rev_3'
+-- ]]
 
-for i = 1, 16 do
-  vim.cmd('amenu OverflowList.Test_Thing_' .. i .. ' :echo ' .. i)
-end
-use {
-	'nvim-orgmode/orgmode',
-	config = function()
-		require('orgmode').setup{
-			org_agenda_files = {'~/nextcloud/org/*', '~/orgmode/**/*'},
-			org_default_notes_file = '~/orgmode/refile.org',
-		}
-	end
-}
 
 -- use {
 -- 	"SmiteshP/nvim-gps",
@@ -200,7 +185,7 @@ use {
 }
 
 -- terminal image viewer in neovim see https://github.com/edluffy/hologram.nvim#usage for usage
-use 'edluffy/hologram.nvim' 
+use 'edluffy/hologram.nvim'
 use 'ellisonleao/glow.nvim' -- markdown preview, run :Glow
 use {
 	-- Show where your cursor moves
@@ -227,7 +212,8 @@ use {
 	end
 
 }
-use { 'code-biscuits/nvim-biscuits', config = function ()
+use {
+	'code-biscuits/nvim-biscuits', config = function ()
 	require('nvim-biscuits').setup({
 	on_events = { 'InsertLeave', 'CursorHoldI' },
 	cursor_line_only = true,
@@ -1308,11 +1294,27 @@ menu_opts = {
 menu_add = function(name, command)
 
    res = vim.cmd ([[menu ]]..name..[[ ]]..command)
-   print(res)
+   -- print(res)
 end
 
 menu_add("LSP.Declaration", 'lua vim.lsp.buf.declaration()')
 menu_add("LSP.Hover", 'lua vim.lsp.buf.references()')
+menu_add("LSP.Hover", 'lua vim.lsp.buf.references()')
+
+menu_add("Toggle.Minimap", 'MinimapToggle')
+menu_add("Toggle.Obsession", 'Obsession')
+menu_add("Toggle.Biscuits", 'lua require("nvim-biscuits").toggle_biscuits()')
+
+menu_add("REPL.Send line", [[lua require'luadev'.exec(vim.api.nvim_get_current_line())]])
+-- menu_add('REPL.Send selection ', 'call <SID>luadev_run_operator(v:true)')
+
+menu_add('Diagnostic.Display_in_QF', 'lua vim.diagnostic.setqflist({open = true, severity = { min = vim.diagnostic.severity.WARN } })')
+menu_add('Diagnostic.Set_severity_to_warning', 'lua vim.diagnostic.config({virtual_text = { severity = { min = vim.diagnostic.severity.WARN } }})')
+menu_add('Diagnostic.Set_severity_to_all', 'lua vim.diagnostic.config({virtual_text = { severity = nil }})')
+
+-- menu_add("DAP.Add breakpoint", 'lua require"dap".toggle_breakpoint()')
+-- menu_add("DAP.Continue", 'lua require"dap".continue()')
+-- menu_add("DAP.Open repl", 'lua require"dap".repl.open()')
 
 vim.api.nvim_set_keymap(
   'n',

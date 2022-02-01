@@ -1930,24 +1930,8 @@ map <RightMouse>  <Cmd>call quickui#context#open(content, quick_opts)<CR>
 " can't click on it plus it disappears
 " map <RightMouse>  <Cmd>lua create_menu()<CR>
 
-" call quickui#context#open(content, opts)
-" }}}
-
-" function! LuaComplete (ArgLeaf, CmdLine, CursorPos) abort
-"         return map(luaeval("vim.tbl_keys(" . a:CmdLine[4:] . ")"), {k,v -> a:CmdLine[4:] . "." . v})
-" endfunction
-" command! -complete=customlist,LuaComplete -nargs=1 LuaFile lua <args>
-
-
-" unmap Y
-"
-" luafile stdpath('config').'/init.lua'
 " luafile ~/.config/nvim/init.lua
 luafile ~/.config/nvim/init.backup.lua
-
-" hi lspdiagnosticsunderlinewarning gui=NONE
-" hi lspdiagnosticsunderlinehint gui=NONE
-" set foldmethod=
 
 command Hasktags !hasktags .
 
