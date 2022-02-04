@@ -29,7 +29,7 @@ let
     lazygit  # kinda like tig
     ncurses.dev # for infocmp
     neovim-remote # for latex etc
-    nix-doc # to access nix doc
+    # nix-doc # to access nix doc (broken)
     nix-index # to list package contents
     nixpkgs-fmt
     nixpkgs-review
@@ -93,6 +93,8 @@ let
     arandr  # to move screens/monitors around
     bandwhich  # to monitor per app bandwidth
     du-dust  # dust binary: rust replacement of du
+    ncdu  # to see disk usage
+    desktop_file_utils  # to get desktop
     font-manager
     gnome.adwaita-icon-theme # else nothing appears
     gnome3.eog # eye of gnome = image viewer / creates a collision

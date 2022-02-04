@@ -4,6 +4,7 @@
 -- -fdefer-type-errors
 -dppr-cols2000 to control the width of error messages in ghci
 
+time brun --config debug //luad-s2ands5-simulation:MultipleClonesTumors@run -- +RTS -p -s -hy -l-au
 
 # working with ghc-pkg
 ghc-pkg init ./test.db

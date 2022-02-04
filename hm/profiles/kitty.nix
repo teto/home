@@ -3,6 +3,7 @@
   programs.kitty = {
     enable = true;
     font.name = "Inconsolata";
+    shellIntegration.enable = true;
     settings = {
 
       bold_font  = "auto";

@@ -31,6 +31,8 @@
       url = "github:teto/home-manager/scratch";
       inputs.nixpkgs.follows = "nixpkgs-teto";
     };
+
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nur.url = "github:nix-community/NUR";
     nixpkgs-wayland.url = "github:nix-community/nixpkgs-wayland";
     purebred.url = "github:purebred-mua/purebred";
@@ -94,9 +96,7 @@
               ];
 
               home.packages = [
-                # nova.packages."${system}".jcli
                 # nova.packages."${system}".jinko-shiny
-                # nova.packages."${system}".nova-deploy
               ];
             };
           }
@@ -115,6 +115,18 @@
       nixosConfigurations = let
       in
         {
+          router = nixpkgs.lib.nixosSystem {
+            inherit system;
+            modules = [
+              ({ pkgs, ... }: {
+                nixpkgs.overlays = nixpkgs.lib.attrValues self.overlays;
+                imports = [
+                  # ./nixos/hardware-dell-camera.nix
+                  ./nixos/config-router.nix
+                ];
+              })
+            ];
+          };
           mcoudron = nixpkgs.lib.nixosSystem {
             inherit system;
             modules = [

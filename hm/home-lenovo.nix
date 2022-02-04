@@ -32,7 +32,6 @@ in
       "--verbose"
       "--debug"
       "--unsupported-gpu"
-      "--my-next-gpu-wont-be-nvidia"
     ];
     extraSessionCommands = ''
         export MOZ_ENABLE_WAYLAND=1

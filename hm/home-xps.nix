@@ -10,6 +10,7 @@ in
 
       # ./hm/vdirsyncer.nix
       # ./hm/nushell.nix
+      ./profiles/alot.nix
       ./profiles/mail.nix
       ./profiles/sway.nix
       ./profiles/weechat.nix

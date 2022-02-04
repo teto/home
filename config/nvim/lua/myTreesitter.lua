@@ -3,6 +3,11 @@ if not available then
 	return
 end
 
+local ft_to_parser = require"nvim-treesitter.parsers".filetype_to_parsername
+ft_to_parser.http = "http" -- the someft filetype will use the python parser and queries.
+ft_to_parser.json = "json" -- the someft filetype will use the python parser and queries.
+ft_to_parser.httpResult = "http"
+
 config.config = config.setup {
     highlight = {
         enable = true,                    -- false will disable the whole extension

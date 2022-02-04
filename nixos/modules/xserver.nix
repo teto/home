@@ -2,7 +2,6 @@
 {
 
   environment.systemPackages = with pkgs; [
-    gksu # to run graphical apps as root
     i3lock-fancy
     mupdf.bin # evince does better too
     rofi

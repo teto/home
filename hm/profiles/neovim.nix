@@ -68,6 +68,7 @@ let
             tree-sitter-bash
             tree-sitter-c
             tree-sitter-lua
+            tree-sitter-http
             tree-sitter-json
             tree-sitter-nix
             # tree-sitter-haskell # crashes with a loop
@@ -307,7 +308,42 @@ let
         '';
       }
       {
-        plugin = nvim-orgmode;
+        plugin = stylish-nvim;
+        type = "lua";
+        config = ''
+        '';
+      }
+      {
+        plugin = rest-nvim;
+        type = "lua";
+        config = ''
+
+		require("rest-nvim").setup({
+		-- Open request results in a horizontal split
+		result_split_horizontal = false,
+		-- Skip SSL verification, useful for unknown certificates
+		skip_ssl_verification = false,
+		-- Highlight request on run
+		highlight = {
+			enabled = true,
+			timeout = 150,
+		},
+		result = {
+			-- toggle showing URL, HTTP info, headers at top the of result window
+			show_url = true,
+			show_http_info = true,
+			show_headers = true,
+		},
+		-- Jump to request line on run
+		jump_to_request = false,
+		})
+		vim.keymap.set('n',  "<leader>rr" , "<Plug>RestNvim", { expr = true} )
+		vim.keymap.set('n',  "<leader>rp" , "<Plug>RestNvimPreview", { expr = true} )
+        '';
+      }
+      {
+        # matches nvim-orgmode
+        plugin = orgmode;
         type = "lua";
         config = ''
 		require('orgmode').setup{

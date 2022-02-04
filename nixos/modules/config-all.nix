@@ -207,10 +207,8 @@ rec {
         "steam-original"
         "steam-runtime"
         "Oracle_VM_VirtualBox_Extension_Pack"
+        "ec2-api-tools"
       ];
-  #     permittedInsecurePackages = [
-  #         # "webkitgtk-2.4.11"
-  #     ];
     };
   };
   environment.etc."inputrc".source = ../../config/inputrc;

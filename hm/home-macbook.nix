@@ -8,6 +8,7 @@ in
     ./hm/desktop.nix
 
     ./hm/mail.nix
+    ./hm/profiles/alot.nix
 
     # while waiting for it to land upstream
     # ./hm/neomutt.nix

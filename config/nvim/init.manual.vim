@@ -43,6 +43,8 @@ call plug#begin(s:plugdir)
 Plug 'rhysd/vim-gfm-syntax' " markdown syntax compatible with Github's
 Plug 'winston0410/range-highlight.nvim' "highlight ranges like :1,5
 
+Plug 'symphorien/vim-nixhash' " use :NixHash
+
 Plug 'seandewar/nvimesweeper' " not packaged
 
 " Plug 'soywod/himalaya' " mail reader :Himalaya ; needs the rust CLI reader
@@ -242,7 +244,6 @@ Plug 't9md/vim-quickhl' " hl manually selected words :h QuickhlManualEnable
 
 " colorschemes {{{
 Plug 'Matsuuu/pinkmare'
-Plug 'glepnir/zephyr-nvim'
 Plug 'flrnd/candid.vim'
 Plug 'adlawson/vim-sorcerer'
 Plug 'whatyouhide/vim-gotham'
@@ -1443,6 +1444,7 @@ if exists('g:vscode')
 endif
 
 
+" Autosave toggle
 nnoremap <F6> <Cmd>ASToggle<CR>
 "nnoremap <F6> :AutoSaveOnLostFocus<CR>
 " goto previous buffer
@@ -1486,6 +1488,7 @@ map <Leader>$ <Cmd>Obsession<CR>
 
 "http://stackoverflow.com/questions/28613190/exclude-quickfix-buffer-from-bnext-bprevious
 
+map <Leader><space> :b#<CR>
 
 " spell config {{{
 " todo better if it could be parsable
@@ -1494,7 +1497,6 @@ map <Leader>te :te trans :en <cword><CR>
 map <Leader>tf :te trans :fr <cword><CR>
 " for thesaurus vim-thesaurus only works with English :/
 map <Leader>ttf :te trans :fr <cword><CR>
-map <Leader><space> :b#<CR>
 "}}}
 " Unimpaired {{{
 " advised by tpope for these remote countries that don't use qwerty
@@ -1547,6 +1549,7 @@ menu <script> Spell.&EN_US :setlocal spell spelllang=en_us<CR>
 menu ]Spell.hidden should be hidden
 
 menu Trans.FR :te trans :fr <cword><CR>
+" defines a tip
 tmenu Trans.FR Traduire vers le francais
 
 " upstream those to grepper
@@ -1554,6 +1557,8 @@ menu Grepper.Search\ in\ current\ Buffer :Grepper -switch -buffer
 menu Grepper.Search\ across\ Buffers :Grepper -switch -buffers
 menu Grepper.Search\ across\ directory :Grepper
 menu Grepper.Autoopen\ results :let g:grepper.open=1<CR>
+" menu Search.CurrentBuffer :exe Grepper -grepprg rg --vimgrep $* $.
+" menu Search.AllBuffers :exe Grepper -grepprg rg --vimgrep $* $+
 
 menu LSP.Stop\ All\ Clients :lua vim.lsp.stop_client(vim.lsp.get_active_clients())<CR>
 
@@ -1579,10 +1584,6 @@ menu LSP.Goto\ Definition  lua vim.lsp.buf.definition()<CR>
             " \ ["&Code action\\cw", 'lua vim.lsp.buf.code_action()'],
 
 
-" search-related menu {{{2
-" menu Search.CurrentBuffer :exe Grepper -grepprg rg --vimgrep $* $.
-" menu Search.AllBuffers :exe Grepper -grepprg rg --vimgrep $* $+
-" }}}
 " tabulation-related menu {{{2
 menu Tabs.S2 :set  tabstop=2 softtabstop=2 sw=2<CR>
 menu Tabs.S4 :set ts=4 sts=4 sw=4<CR>

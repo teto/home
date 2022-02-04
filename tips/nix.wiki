@@ -29,6 +29,10 @@ Mention `--max-jobs 0` to build remotely only
 
 CURL_TRACE 
 
+# human readable output of closure size
+nix path-info -Sh $(nix-build ./shell.nix -A inputDerivation)
+
+
 # Nix paths I keep forgetting
 
 - /nix/var/nix/profiles/system

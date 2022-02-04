@@ -215,7 +215,6 @@ in
   services.xserver = {
     videoDrivers = [ "nvidia" ];
     displayManager.gdm.wayland = true;
-    displayManager.gdm.nvidiaWayland = true;
   };
   # system.replaceRuntimeDependencies
   #     List of packages to override without doing a full rebuild. The original derivation and replacement derivation must have the same name length, and ideally should have close-to-identical directory layout.

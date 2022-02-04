@@ -40,7 +40,7 @@ end
 
 -- provides TSContextEnable / TSContextDisable
 -- shows current function on first line
-use { '~/neovim/stylish.nvim' }
+-- use { '~/neovim/stylish.nvim' }
 -- vim.cmd [[
 -- amenu Plugin.Fugitive.GFetch :GFetch | amenu Plugin.Fugitive.GPull :GPull | amenu Plugin.Fugitive.GPush :GPush
 -- amenu File.Filetype.One :echo 1 | amenu File.Filetype.Two :echo 2 | amenu File.Filetype.Three :echo 3
@@ -213,7 +213,8 @@ use {
 
 }
 use {
-	'code-biscuits/nvim-biscuits', config = function ()
+	'code-biscuits/nvim-biscuits',
+	config = function ()
 	require('nvim-biscuits').setup({
 	on_events = { 'InsertLeave', 'CursorHoldI' },
 	cursor_line_only = true,
@@ -237,37 +238,37 @@ end
 
 use { 'nvim-lua/popup.nvim'  }  -- mimic vim's popupapi for neovim
 -- use { 'nvim-lua/plenary.nvim' } -- lua utilities for neovim
-use {
-	-- :h rest-nvim
-	-- <Plug>RestNvim
-	-- nnoremap <Plug>RestNvim :lua require('rest-nvim').run()<CR>
-    'NTBBloodbath/rest.nvim'
-	, requires = { 'nvim-lua/plenary.nvim' }
-	, config = function()
-		require("rest-nvim").setup({
-		-- Open request results in a horizontal split
-		result_split_horizontal = false,
-		-- Skip SSL verification, useful for unknown certificates
-		skip_ssl_verification = false,
-		-- Highlight request on run
-		highlight = {
-			enabled = true,
-			timeout = 150,
-		},
-		result = {
-			-- toggle showing URL, HTTP info, headers at top the of result window
-			show_url = true,
-			show_http_info = true,
-			show_headers = true,
-		},
-		-- Jump to request line on run
-		jump_to_request = false,
-		})
-		vim.keymap.set('n',  "<leader>rr" , "<Plug>RestNvim", { expr = true} )
-		vim.keymap.set('n',  "<leader>rp" , "<Plug>RestNvimPreview", { expr = true} )
+-- use {
+-- 	-- :h rest-nvim
+-- 	-- <Plug>RestNvim
+-- 	-- nnoremap <Plug>RestNvim :lua require('rest-nvim').run()<CR>
+--     'NTBBloodbath/rest.nvim'
+-- 	, requires = { 'nvim-lua/plenary.nvim' }
+-- 	, config = function()
+-- 		require("rest-nvim").setup({
+-- 		-- Open request results in a horizontal split
+-- 		result_split_horizontal = false,
+-- 		-- Skip SSL verification, useful for unknown certificates
+-- 		skip_ssl_verification = false,
+-- 		-- Highlight request on run
+-- 		highlight = {
+-- 			enabled = true,
+-- 			timeout = 150,
+-- 		},
+-- 		result = {
+-- 			-- toggle showing URL, HTTP info, headers at top the of result window
+-- 			show_url = true,
+-- 			show_http_info = true,
+-- 			show_headers = true,
+-- 		},
+-- 		-- Jump to request line on run
+-- 		jump_to_request = false,
+-- 		})
+-- 		vim.keymap.set('n',  "<leader>rr" , "<Plug>RestNvim", { expr = true} )
+-- 		vim.keymap.set('n',  "<leader>rp" , "<Plug>RestNvimPreview", { expr = true} )
 
-	end
-}
+-- 	end
+-- }
 
 use {
 	'lukas-reineke/indent-blankline.nvim',
@@ -636,8 +637,37 @@ end
 -- use 'sindrets/diffview.nvim' -- :DiffviewOpen
 
 
--- use 'hoob3rt/lualine.nvim'
-use { 'nvim-lualine/lualine.nvim' -- fork of hoob3rt/lualine
+
+-- local component = {
+-- 	'lsp_progress',
+-- 	display_components = { 'lsp_client_name', { 'title', 'percentage', 'message' }},
+-- 	-- With spinner
+-- 	-- display_components = { 'lsp_client_name', 'spinner', { 'title', 'percentage', 'message' }},
+-- 	colors = {
+-- 	  percentage  = colors.cyan,
+-- 	  title  = colors.cyan,
+-- 	  message  = colors.cyan,
+-- 	  spinner = colors.cyan,
+-- 	  lsp_client_name = colors.magenta,
+-- 	  use = true,
+-- 	},
+-- 	separators = {
+-- 		component = ' ',
+-- 		progress = ' | ',
+-- 		message = { pre = '(', post = ')'},
+-- 		percentage = { pre = '', post = '%% ' },
+-- 		title = { pre = '', post = ': ' },
+-- 		lsp_client_name = { pre = '[', post = ']' },
+-- 		spinner = { pre = '', post = '' },
+-- 		message = { commenced = 'In Progress', completed = 'Completed' },
+-- 	},
+-- 	display_components = { 'lsp_client_name', 'spinner', { 'title', 'percentage', 'message' } },
+-- 	timer = { progress_enddelay = 500, spinner = 1000, lsp_client_name_enddelay = 1000 },
+-- 	spinner_symbols = { '🌑 ', '🌒 ', '🌓 ', '🌔 ', '🌕 ', '🌖 ', '🌗 ', '🌘 ' },
+-- }
+use 'rlch/github-notifications.nvim'
+use {
+	'nvim-lualine/lualine.nvim' -- fork of hoob3rt/lualine
 	, requires = { 'arkav/lualine-lsp-progress' }
 	, config = function ()
 		require'lualine'.setup {
@@ -654,8 +684,9 @@ use { 'nvim-lualine/lualine.nvim' -- fork of hoob3rt/lualine
 			lualine_b = {'branch'},
 
 			lualine_c = {
-				'filename',
-				-- 'lsp_progress'
+				'lsp_progress'
+				-- component
+				-- {'lsp_progress', display_components = { 'lsp_client_name', { 'title', 'percentage', 'message' }}}
 				-- ,  gps.get_location, condition = gps.is_available
 			},
 			lualine_x = {
@@ -678,6 +709,15 @@ use { 'nvim-lualine/lualine.nvim' -- fork of hoob3rt/lualine
 }
 
 
+-- Inserts a component in lualine_c at left section
+-- local function ins_left(component)
+--   table.insert(config.sections.lualine_c, component)
+-- end
+
+-- -- Inserts a component in lualine_x ot right section
+-- local function ins_right(component)
+--   table.insert(config.sections.lualine_x, component)
+-- end
 -- use {
 -- 	'sunjon/shade.nvim'
 -- 	config = function ()
@@ -1139,7 +1179,7 @@ function contextMenu()
 end
 -- Disable virtual_text since it's redundant due to lsp_lines.
 vim.diagnostic.config({
-  virtual_lines = false,
+  virtual_lines = true,
   virtual_text = {
 	  severity = { min = vim.diagnostic.severity.WARN }
   },
@@ -1285,12 +1325,6 @@ vim.cmd [[highlight IndentBlanklineIndent4 guifg=#56B6C2 gui=nocombine]]
 vim.cmd [[highlight IndentBlanklineIndent5 guifg=#61AFEF gui=nocombine]]
 vim.cmd [[highlight IndentBlanklineIndent6 guifg=#C678DD gui=nocombine]]
 
-menu_opts = {
-  kind = 'menu',
-  prompt = 'Main menu',
-  experimental_mouse = true
-}
-
 menu_add = function(name, command)
 
    res = vim.cmd ([[menu ]]..name..[[ ]]..command)
@@ -1303,7 +1337,7 @@ menu_add("LSP.Hover", 'lua vim.lsp.buf.references()')
 
 menu_add("Toggle.Minimap", 'MinimapToggle')
 menu_add("Toggle.Obsession", 'Obsession')
-menu_add("Toggle.Biscuits", 'lua require("nvim-biscuits").toggle_biscuits()')
+-- menu_add("Toggle.Biscuits", 'lua require("nvim-biscuits").toggle_biscuits()')
 
 menu_add("REPL.Send line", [[lua require'luadev'.exec(vim.api.nvim_get_current_line())]])
 -- menu_add('REPL.Send selection ', 'call <SID>luadev_run_operator(v:true)')
@@ -1312,15 +1346,47 @@ menu_add('Diagnostic.Display_in_QF', 'lua vim.diagnostic.setqflist({open = true,
 menu_add('Diagnostic.Set_severity_to_warning', 'lua vim.diagnostic.config({virtual_text = { severity = { min = vim.diagnostic.severity.WARN } }})')
 menu_add('Diagnostic.Set_severity_to_all', 'lua vim.diagnostic.config({virtual_text = { severity = nil }})')
 
+menu_add("Search.Search_and_replace", 'lua require("spectre").open()')
+
+-- nnoremap <Plug>RestNvim :lua require('rest-nvim').run()<CR>
+-- nnoremap <Plug>RestNvimPreview :lua require('rest-nvim').run(true)<CR>
+-- nnoremap <Plug>RestNvimLast :lua require('rest-nvim').last()<CR>
+menu_add("Rest.RunRequest", "RestNvim")
+
 -- menu_add("DAP.Add breakpoint", 'lua require"dap".toggle_breakpoint()')
 -- menu_add("DAP.Continue", 'lua require"dap".continue()')
 -- menu_add("DAP.Open repl", 'lua require"dap".repl.open()')
 
+function open_contextual_menu()
+-- getcurpos()	Get the position of the cursor.  This is like getpos('.'), but
+-- 		includes an extra "curswant" in the list:
+-- 		    [0, lnum, col, off, curswant] ~
+-- 		The "curswant" number is the preferred column when moving the
+-- 		cursor vertically.  Also see |getpos()|.
+-- 		The first "bufnum" item is always zero.
+
+	local curpos = vim.fn.getcurpos()
+
+	menu_opts = {
+		kind = 'menu',
+		prompt = 'Main menu',
+		experimental_mouse = true,
+		position = {
+		  screenrow = curpos[2] ,
+		  screencol = curpos[3]
+		},
+		width = 300,
+		height = 300,
+	}
+
+	require'stylish'.ui_menu(vim.fn.menu_get(''), menu_opts, function(res) print('### ' ..res) end)
+end
+
 vim.api.nvim_set_keymap(
   'n',
   '<F1>',
-  "<Cmd>lua require'stylish'.ui_menu(vim.fn.menu_get(''), menu_opts, function(res) print('### ' ..res) end)<CR>",
-  { noremap = true, silent = true }
+  "<Cmd>lua open_contextual_menu()<CR>",
+  { noremap = true, silent = false }
 )
 -- vim.api.nvim_set_keymap(
 --   'n',
