@@ -25,6 +25,14 @@ in {
         '';
       };
 
+      enableFancyCursor = mkOption {
+        default = true;
+        type = types.bool;
+        description = ''
+          Enable fancy cursor.
+        '';
+      };
+
       enableFancyCtrlZ = mkOption {
         default = true;
         type = types.bool;
@@ -59,21 +67,32 @@ in {
     })
 
     (mkIf cfg.enableSetTermTitle {
-    programs.zsh.initExtra = ''
-      # works in termite
-      function set_term_title (){
-      # -n Do not add a newline to the output.
+      programs.zsh.initExtra = ''
+        # works in termite
+        function set_term_title (){
+        # -n Do not add a newline to the output.
 
-          # print -Pn "\e]0;$(echo "$1")\a"
-          print -n '\e]0;'
-          print -n "$1"
-          print -nrD "@$PWD"
-          print -n '\a'
-      }
+            # print -Pn "\e]0;$(echo "$1")\a"
+            print -n "\e]0;$PWD"
+            print -n "$1"
+            print -nrD "@$PWD"
+            print -n '\a'
+        }
 
-      update_term_title () {
-          set_term_title $(pwd)
-      }
+        update_term_title () {
+            set_term_title $(pwd)
+        }
+        # http://zsh.sourceforge.net/Doc/Release/User-Contributions.html#ZLE-Functions
+        # autoload zsh-mime-setup
+        zle -N zle-keymap-select
+        add-zsh-hook preexec set_term_title
+        #add-zsh-hook zsh_directory_name
+        add-zsh-hook precmd update_term_title
+      '';
+    })
+
+    (mkIf cfg.enableFancyCursor {
+      programs.zsh.initExtra = ''
       # set cursor depending in vi mode
       # inspired by http://lynnard.me/blog/2014/01/05/change-cursor-shape-for-zsh-vi-mode/
       # zle-line-init 
@@ -89,16 +108,8 @@ in {
           # echo -ne "\e[4 q"
           echo -ne '\e[5 q'
           fi
-      }
-      # http://zsh.sourceforge.net/Doc/Release/User-Contributions.html#ZLE-Functions
-      # autoload zsh-mime-setup
-      zle -N zle-keymap-select
-      add-zsh-hook preexec set_term_title
-      #add-zsh-hook zsh_directory_name
-      add-zsh-hook precmd update_term_title
-    '';
-  })
-
+        }'';
+      })
 
     # home.packages = [ pkgs.pywal ];
     # home.sessionVariables = {
