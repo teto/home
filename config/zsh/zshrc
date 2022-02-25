@@ -275,6 +275,12 @@ teatimer() {
          exit
 }
 
+preexec_update_title () {
+    echo "$@"
+    set_term_title "$(pwd): $1"
+}
+
+
 # fzf config{{{
 # Use fd (https://github.com/sharkdp/fd) instead of the default find
 # command for listing path candidates.
@@ -300,10 +306,10 @@ _fzf_compgen_dir() {
 
 # # To add support for TTYs this line can be optionally added.
 # source ~/.cache/wal/colors-tty.sh
-if [[ -n $KITTY_INSTALLATION_DIR ]]; then
-  export KITTY_SHELL_INTEGRATION="enabled"
-  autoload -Uz -- "$KITTY_INSTALLATION_DIR"/shell-integration/zsh/kitty-integration
-  kitty-integration
-  unfunction kitty-integration
-fi
+# if [[ -n $KITTY_INSTALLATION_DIR ]]; then
+#   export KITTY_SHELL_INTEGRATION="enabled"
+#   autoload -Uz -- "$KITTY_INSTALLATION_DIR"/shell-integration/zsh/kitty-integration
+#   kitty-integration
+#   unfunction kitty-integration
+# fi
 

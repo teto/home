@@ -67,26 +67,36 @@ in {
     })
 
     (mkIf cfg.enableSetTermTitle {
+
+      # https://zsh.sourceforge.io/Doc/Release/Functions.html
+      # precmd: Executed before each prompt.
+      # preexec: Executed just after a command has been read and is about to be executed.
+      # add-zsh-hook zsh_directory_name
+      # autoload zsh-mime-setup
       programs.zsh.initExtra = ''
         # works in termite
         function set_term_title (){
-        # -n Do not add a newline to the output.
-
-            # print -Pn "\e]0;$(echo "$1")\a"
-            print -n "\e]0;$PWD"
-            print -n "$1"
-            print -nrD "@$PWD"
-            print -n '\a'
+          # -n Do not add a newline to the output.
+          # print -Pn "\e]0;$(echo "$1")\a"
+          print -n "\e]0;$PWD"
+          print -n "$1"
+          print -nrD "@$PWD"
+          print -n '\a'
         }
 
         update_term_title () {
             set_term_title $(pwd)
         }
+        preexec_update_title () {
+            echo "$@"
+            set_term_title "$(pwd): $1"
+        }
+
         # http://zsh.sourceforge.net/Doc/Release/User-Contributions.html#ZLE-Functions
-        # autoload zsh-mime-setup
         zle -N zle-keymap-select
+
+        # pass 3 arguments: non-expandend, expanded, fully-expanded
         add-zsh-hook preexec set_term_title
-        #add-zsh-hook zsh_directory_name
         add-zsh-hook precmd update_term_title
       '';
     })
