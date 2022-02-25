@@ -1,5 +1,6 @@
 local M = {}
 
+local has_signature, signature = pcall(require, "lsp_signature")
 
 local function default_mappings()
 
@@ -22,8 +23,9 @@ M.on_attach = function(client)
 	-- vim.bo.omnifunc = vim.lsp.omnifunc
 	vim.opt.omnifunc = 'v:lua.vim.lsp.omnifunc'
 
-	-- if has lsp_signature
-	require "lsp_signature".on_attach()  -- Note: add in lsp client on-attach
+	if has_signature then
+	  signature.on_attach()  -- Note: add in lsp client on-attach
+        end
 	-- require'virtualtypes'.on_attach()
 end
 

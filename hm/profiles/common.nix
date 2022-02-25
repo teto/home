@@ -331,6 +331,7 @@ programs.zsh = {
     '';
 
     # custom module
+    enableFancyCursor = true;
     enableSetTermTitle = true;
     enableProfiling = false;
   };

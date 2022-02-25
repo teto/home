@@ -4,8 +4,8 @@ let
   genBlock = title: content: lib.optionalString (content != null) ''
     " ${title} {{{
     ${content}
-    " }}}
-    '';
+	" }}}
+	'';
 
   rcBlocks = {
 
@@ -60,6 +60,23 @@ let
     myVimPluginsOverlay
   );
 
+
+# " , { 'tag': 'v3.12.0' }
+# Plug 'Olical/aniseed' " dependency of ?
+# Plug 'bakpakin/fennel.vim'
+  fennelPlugins = with pkgs.vimPlugins; [
+    # {
+	  # # currently broken
+	  # # > E154: Duplicate tag "module" in file /nix/store/j5vacr79vpxn874361wf25qjqxxj162h-vimplugin-aniseed-2022-02-15/./doc/aniseed.txt
+    #    # > E154: Duplicate tag "module" in file /nix/store/j5vacr79vpxn874361wf25qjqxxj162h-vimplugin-aniseed-2022-02-15/./doc/aniseed.txt
+    #    # > E154: Duplicate tag "module" in file /nix/store/j5vacr79vpxn874361wf25qjqxxj162h-vimplugin-aniseed-2022-02-15/./doc/aniseed.txtFailed to build help tags!
+    #   plugin = aniseed;
+# # " let g:aniseed#env = v:true
+# # " lua require('aniseed.env').init()
+
+    # }
+
+  ];
   luaPlugins = with pkgs.vimPlugins; [
     {
 
@@ -82,9 +99,16 @@ let
     # {
     #   plugin = nvim-dap;
     # }
+    # {
+    #   plugin = lightspeed-nvim;
+    # }
     {
-      plugin = lightspeed-nvim;
+      plugin = trouble-nvim;
+      type = "lua";
     }
+
+
+
     {
       plugin = auto-git-diff;
     }
@@ -151,43 +175,43 @@ let
       plugin = lsp_lines-nvim;
       type = "lua";
       config = ''
-        require("lsp_lines").register_lsp_virtual_lines()
-        '';
+      require("lsp_lines").register_lsp_virtual_lines()
+      '';
     }
     {
       plugin = marks-nvim;
       type = "lua";
       config = ''
-	require'marks'.setup {
-		-- whether to map keybinds or not. default true
-		default_mappings = true,
-		-- which builtin marks to show. default {} but available:  ".", "<", ">", "^"
-		builtin_marks = {},
-		-- whether movements cycle back to the beginning/end of buffer. default true
-		cyclic = true,
-		-- whether the shada file is updated after modifying uppercase marks. default false
-		force_write_shada = false,
-		-- how often (in ms) to redraw signs/recompute mark positions.
-		-- higher values will have better performance but may cause visual lag,
-		-- while lower values may cause performance penalties. default 150.
-		refresh_interval = 250,
-		-- sign priorities for each type of mark - builtin marks, uppercase marks, lowercase
-		-- marks, and bookmarks.
-		-- can be either a table with all/none of the keys, or a single number, in which case
-		-- the priority applies to all marks.
-		-- default 10.
-		sign_priority = { lower=10, upper=15, builtin=8, bookmark=20 },
-		-- marks.nvim allows you to configure up to 10 bookmark groups, each with its own
-		-- sign/virttext. Bookmarks can be used to group together positions and quickly move
-		-- across multiple buffers. default sign is '!@#$%^&*()' (from 0 to 9), and
-		-- default virt_text is "".
-		bookmark_0 = {
-			sign = "⚑",
-			virt_text = "hello world"
-		},
-		mappings = {}
-	}
-      '';
+      require'marks'.setup {
+        -- whether to map keybinds or not. default true
+        default_mappings = true,
+        -- which builtin marks to show. default {} but available:  ".", "<", ">", "^"
+        builtin_marks = {},
+        -- whether movements cycle back to the beginning/end of buffer. default true
+        cyclic = true,
+        -- whether the shada file is updated after modifying uppercase marks. default false
+        force_write_shada = false,
+        -- how often (in ms) to redraw signs/recompute mark positions.
+        -- higher values will have better performance but may cause visual lag,
+        -- while lower values may cause performance penalties. default 150.
+        refresh_interval = 250,
+        -- sign priorities for each type of mark - builtin marks, uppercase marks, lowercase
+        -- marks, and bookmarks.
+        -- can be either a table with all/none of the keys, or a single number, in which case
+        -- the priority applies to all marks.
+        -- default 10.
+        sign_priority = { lower=10, upper=15, builtin=8, bookmark=20 },
+        -- marks.nvim allows you to configure up to 10 bookmark groups, each with its own
+        -- sign/virttext. Bookmarks can be used to group together positions and quickly move
+        -- across multiple buffers. default sign is '!@#$%^&*()' (from 0 to 9), and
+        -- default virt_text is "".
+        bookmark_0 = {
+          sign = "⚑",
+          virt_text = "hello world"
+        },
+        mappings = {}
+    }
+    '';
 
     }
     # {
@@ -255,6 +279,19 @@ let
     }
     {
       plugin = registers-nvim;
+      config = ''
+        let g:registers_return_symbol = "\n" "'⏎' by default
+        let g:registers_tab_symbol = "\t" "'·' by default
+        let g:registers_space_symbol = "." "' ' by default
+        let g:registers_delay = 500 "0 by default, milliseconds to wait before opening the popup window
+        let g:registers_register_key_sleep = 1 "0 by default, seconds to wait before closing the window when a register key is pressed
+        let g:registers_show_empty_registers = 0 "1 by default, an additional line with the registers without content
+        let g:registers_trim_whitespace = 0 "1 by default, don't show whitespace at the begin and end of the registers
+        let g:registers_hide_only_whitespace = 1 "0 by default, don't show registers filled exclusively with whitespace
+        let g:registers_window_border = "single" "'none' by default, can be 'none', 'single','double', 'rounded', 'solid', or 'shadow' (requires Neovim 0.5.0+)
+        let g:registers_window_min_height = 10 "3 by default, minimum height of the window when there is the cursor at the bottom
+        let g:registers_window_max_width = 20 "100 by default, maximum width of the window
+        '';
       # use :Registers
     }
 
@@ -275,6 +312,19 @@ let
   ];
 
   basePlugins = with pkgs.vimPlugins; [
+    # Packer should remain first
+    {
+      plugin = packer-nvim;
+      type = "lua";
+      config = ''
+      require('packer').init({
+        luarocks = {
+          python_cmd = 'python' -- Set the python command to use for running hererocks
+        },
+      })
+      require('init-manual')
+      '';
+    }
 
       # {
       #   # davidgranstrom/nvim-markdown-preview
@@ -317,28 +367,27 @@ let
         plugin = rest-nvim;
         type = "lua";
         config = ''
-
-		require("rest-nvim").setup({
-		-- Open request results in a horizontal split
-		result_split_horizontal = false,
-		-- Skip SSL verification, useful for unknown certificates
-		skip_ssl_verification = false,
-		-- Highlight request on run
-		highlight = {
-			enabled = true,
-			timeout = 150,
-		},
-		result = {
-			-- toggle showing URL, HTTP info, headers at top the of result window
-			show_url = true,
-			show_http_info = true,
-			show_headers = true,
-		},
-		-- Jump to request line on run
-		jump_to_request = false,
-		})
-		vim.keymap.set('n',  "<leader>rr" , "<Plug>RestNvim", { expr = true} )
-		vim.keymap.set('n',  "<leader>rp" , "<Plug>RestNvimPreview", { expr = true} )
+          require("rest-nvim").setup({
+            -- Open request results in a horizontal split
+            result_split_horizontal = false,
+            -- Skip SSL verification, useful for unknown certificates
+            skip_ssl_verification = false,
+            -- Highlight request on run
+            highlight = {
+                    enabled = true,
+                    timeout = 150,
+            },
+            result = {
+                    -- toggle showing URL, HTTP info, headers at top the of result window
+                    show_url = true,
+                    show_http_info = true,
+                    show_headers = true,
+            },
+            -- Jump to request line on run
+            jump_to_request = false,
+          })
+          vim.keymap.set('n',  "<leader>rr" , "<Plug>RestNvim", { expr = true} )
+          vim.keymap.set('n',  "<leader>rp" , "<Plug>RestNvimPreview", { expr = true} )
         '';
       }
       {
@@ -346,10 +395,10 @@ let
         plugin = orgmode;
         type = "lua";
         config = ''
-		require('orgmode').setup{
-			org_agenda_files = {'~/nextcloud/org/*', '~/orgmode/**/*'},
-			org_default_notes_file = '~/orgmode/refile.org',
-		}
+        require('orgmode').setup{
+            org_agenda_files = {'~/nextcloud/org/*', '~/orgmode/**/*'},
+            org_default_notes_file = '~/orgmode/refile.org',
+        }
         '';
       }
       {
@@ -368,28 +417,6 @@ let
       # {
       #   plugin = jbyuki/venn.nvim;
       # }
-      # {
-      #   plugin = nvim-lspconfig;
-      #   config = ''
-      #   '';
-      #   # not upstreamed yet
-      #   # runtime = {
-      #   #   "init.vim".text = ''
-      #   #     '';
-      #   #   "init.lua".text = ''
-      #   #     -- TODO write config.lua; genere par home-manager
-      #   #     '';
-      #   # };
-      # }
-
-      # {
-      #   plugin = far-vim;
-      #   config = ''
-      #     let g:far#source='rg'
-      #     let g:far#collapse_result=1
-      #   '';
-      # }
-
       # {
       #   plugin = telescope-nvim;
       # }
@@ -434,8 +461,13 @@ let
       fzfWrapper
 
       # neomake
-      nvim-terminal-lua
-      auto-git-diff   # display git diff while rebasing, pretty dope
+      {
+        plugin = nvim-terminal-lua;
+        # optional = true;
+      }
+      {
+        plugin = auto-git-diff;   # display git diff while rebasing, pretty dope
+      }
 
       {
         plugin =  nvimdev-nvim;
@@ -443,10 +475,10 @@ let
       }
 
       # LanguageClient-neovim
-      {
-        plugin =  tagbar;
-        optional = true;
-      }
+      # {
+      #   plugin =  tagbar;
+      #   optional = true;
+      # }
       # {
       #   plugin = fzf-preview;
       #   config = ''
@@ -455,10 +487,6 @@ let
       #     let g:fzf_full_preview_toggle_key = '<C-s>'
       #   '';
       # }
-
-      # targets-vim
-      # vCoolor-vim
-      # vim-CtrlXA
       {
         plugin = vim-dasht;
         # optional = true;
@@ -466,17 +494,6 @@ let
       # displays a minimap on the right
       minimap-vim
       vim-dirvish
-      {
-        plugin = packer-nvim;
-        type = "lua";
-		config = ''
-          require('packer').init({
-            luarocks = {
-              python_cmd = 'python' -- Set the python command to use for running hererocks
-            },
-          })
-        '';
-      }
       # {
       #   plugin = sql-nvim;
       #   # config = "let g:sql_clib_path = '${pkgs.sqlite.out}/lib/libsqlite3.so'";
@@ -575,6 +592,7 @@ let
       # nvim-markdown-preview  # :MarkdownPreview
       {
         plugin = nvim-spectre;
+        type = "lua";
       }
 
       # vim-markdown-preview  # WIP
@@ -612,20 +630,9 @@ let
 
   ];
 
-  # Usage:
-  # pkgs.tree-sitter.withPlugins (p: [ p.tree-sitter-c p.tree-sitter-java ... ])
-  #
-  # or for all grammars:
-  # pkgs.tree-sitter.withPlugins (_: allGrammars)
-  # which is equivalent to
-  # pkgs.tree-sitter.withPlugins (p: builtins.attrValues p)
   overlayPlugins = with myVimPlugins; [
     # octo-nvim
     # pkgs.vimPlugins.telescope-fzf-native-nvim
-  # {
-  #     plugin = virtual-types-nvim;
-  #   }
-
       # TODO restore in my overlay
       # {
       #   # davidgranstrom/nvim-markdown-preview
@@ -686,12 +693,14 @@ in
 
     plugins = basePlugins
       ++ overlayPlugins
-      ++ luaPlugins;
+      ++ luaPlugins
+      ++ fennelPlugins
+      ;
   };
 
   xdg.configFile = {
     # a copy of init.vim in fact
-    "nvim/init.generated.vim".text = config.programs.neovim.generatedConfigViml;
-    "nvim/init.generated.lua".text = config.programs.neovim.generatedConfigs.lua;
+    # "nvim/init.generated.vim".text = config.programs.neovim.generatedConfigViml;
+    # "nvim/init.generated.lua".text = config.programs.neovim.generatedConfigs.lua;
   };
 }

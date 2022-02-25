@@ -43,6 +43,10 @@ function nvimdev {
 
 }
 
+# git aliases
+alias gap="git add -p";
+
+
 # nix aliases {{{
 
 # no
@@ -63,7 +67,7 @@ alias latest="ls -lt $@ |head"
 alias :q="exit"
 #}}}
 
-alias servethis="nix-shell -ppython3 --command \'python -c 'import SimpleHTTPServer; SimpleHTTPServer.test()'\""
+alias servethis="nix run nixpkgs#python3 --command \'python -c 'import SimpleHTTPServer; SimpleHTTPServer.test()'\""
 
 # ls related updates {{{
 # I also export TIME_STYLE to change the output of this

@@ -10,3 +10,8 @@ you can run zsh -f. If you want to skip system configuration files but run the p
 
 zsh/zleparameter
 
+https://zsh.sourceforge.io/Doc/Release/User-Contributions.html#Manipulating-Hook-Functions
+
+
+To remove registered preexec function
+add-zsh-hook -D preexec set_term_title

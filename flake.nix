@@ -216,6 +216,7 @@
                   # self.inputs.mptcp-flake.nixosModules.mptcp
                   # ./nixos/profiles/mptcp.nix
                   ./nixos/profiles/nova.nix
+                  ./nixos/profiles/opensnitch.nix
 
                   # just to check how /etc/nix/machines looks like
                   ./nixos/modules/distributedBuilds.nix
@@ -237,6 +238,8 @@
                 ./hm/profiles/nova.nix
                 ./hm/profiles/syncthing.nix
                 ./hm/profiles/vscode.nix
+                ./hm/profiles/extra.nix
+                # services.opensnitch-ui.enable
                 # ./hm/profiles/gaming.nix
 
                 # ./hm/vscode.nix #  provided by nova-nix config

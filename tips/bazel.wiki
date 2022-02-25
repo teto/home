@@ -1,3 +1,4 @@
+bazel run //sanofi-influenza-simulation:tasty-test -- -p '/whatever bazel test tells me to do/' --size-cutoff 1000000000 > log.txt
 
 BAZEL_COMPLETION_USE_QUERY
 
@@ -82,7 +83,7 @@ The WORKSPACE file allows users to depend on targets from other parts of the fil
 $ bazel sync
 
 --nofetch
-# 
+
 Note that running bazel clean will not actually delete the external directory. To remove all external artifacts, use bazel clean --expunge
 
 bazel shutdown

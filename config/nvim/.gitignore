@@ -1,2 +1,5 @@
 plugged/*
+plugin/packer
 *generated*
+lua/init-home-manager.lua
+init.vim

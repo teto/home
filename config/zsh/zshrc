@@ -13,8 +13,6 @@ function rfw(){
     readlink -f $(which "$1")
 }
 
-
-# . "$ZDOTDIR/init.sh"
 . "$ZDOTDIR/aliases.zsh"
 
 # export PATH="${XDG_DATA_HOME}/../bin:$PATH"
@@ -268,18 +266,13 @@ emulate sh -c "source ${current_folder}/../fzf-gems/fzf_git_functions.sh"
 source "${current_folder}/../fzf-gems/fzf_git_keybindings.zsh"
 # echo $PWD
 
+# TODO pass a path that is versioned in home
 teatimer() {
          sleep $1;
-         # mplayer "$HOME/music/<sound-to-play.mp3>"  & notify-send '!! Coffee Time - wake up !!';
-	 mpv $HOME/music/10.0.0.111:8000/Stromae\ -\ House\'llelujah.mp3 & notify-send '!! Coffee Time - wake up !!';
+	 mpv $HOME/home/data/audio/notif1.wav
+	 notify-send '!! Coffee Time - wake up !!';
          exit
 }
-
-preexec_update_title () {
-    echo "$@"
-    set_term_title "$(pwd): $1"
-}
-
 
 # fzf config{{{
 # Use fd (https://github.com/sharkdp/fd) instead of the default find
@@ -312,4 +305,10 @@ _fzf_compgen_dir() {
 #   kitty-integration
 #   unfunction kitty-integration
 # fi
+
+function set_term_title (){
+  # -n Do not add a newline to the output.
+  # print -Pn "\e]0;$(echo "$1")\a"
+  print -n "\e]0;$1\a"
+}
 

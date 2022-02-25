@@ -1,1 +1,16 @@
+config/clerk
+config/sway/config
+config/zsh/.*
+config/systemd/*
+config/nvim/lua/init.lua
+config/git/config
+config/jesseduffield/*
+config/astroid/config
+config/ipython/*
+config/vlc/*
+config/tmux/tmux.conf
+config/supertuxkart/*
+config/mpv/mpv.conf
+config/kitty/kitty.conf
+config/astroid/poll.sh
 **

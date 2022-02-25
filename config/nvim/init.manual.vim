@@ -39,22 +39,17 @@ endif
 
 " VIM-PLUG PLUGIN DECLARATIONS {{{1
 call plug#begin(s:plugdir)
-" Plug 'nvim-lua/plenary.nvim'
 Plug 'rhysd/vim-gfm-syntax' " markdown syntax compatible with Github's
 Plug 'winston0410/range-highlight.nvim' "highlight ranges like :1,5
-
 Plug 'symphorien/vim-nixhash' " use :NixHash
-
 Plug 'seandewar/nvimesweeper' " not packaged
 
 " Plug 'soywod/himalaya' " mail reader :Himalaya ; needs the rust CLI reader
 " himalaya
-" Plug 'NTBBloodbath/rest.nvim'
 " Plug 'soywod/himalaya', {'rtp': 'vim'}
 
 " recommanded branch faster
 
-Plug 'kevinhwang91/rnvimr'
 " Plug 'jubnzv/virtual-types.nvim' " moved to nix
 " Plug 'andymass/vim-matchup' " to improve % , buggy ?
 " Plug 'eugen0329/vim-esearch' " search & replace
@@ -63,9 +58,6 @@ Plug 'kshenoy/vim-signature' " display marks in gutter, love it
 
 Plug 'tjdevries/colorbuddy.nvim' " required by some colorscheme
 
-" , { 'tag': 'v3.12.0' }
-Plug 'Olical/aniseed' " dependency of ?
-Plug 'bakpakin/fennel.vim'
 Plug 'strboul/urlview.vim' " :Urlview to list urls and open them
 " Plug 'diepm/vim-rest-console' " test rest APIs * Hit the trigger key (<C-j> by default).
 " Plug '~/pdf-scribe.nvim'  " to annotate pdf files from nvim :PdfScribeInit
@@ -78,7 +70,6 @@ Plug 'MattesGroeger/vim-bookmarks' " ruby  / :BookmarkAnnotate
 " branch v2-integration
 
 Plug 'skywind3000/vim-quickui' " to design cool uis
-Plug 'liuchengxu/vista.vim' " to list workplace symbols
 " Plug 'neovim/nvim-lspconfig' " while fuzzing details out
 Plug '~/neovim/nvim-lspconfig' " while fuzzing details out
 " Plug 'puremourning/vimspector' " to debug programs
@@ -90,7 +81,7 @@ Plug 'bogado/file-line' " to open a file at a specific line
 " Plug 'glacambre/firenvim' " to use nvim in firefox
 Plug 'alok/notational-fzf-vim' " to take notes, :NV
 " Plug 'iamcco/markdown-preview.nvim' " :MarkdownPreview
-Plug 'suy/vim-context-commentstring' " commen for current programming language
+" Plug 'suy/vim-context-commentstring' " commen for current programming language
 " Plug 'voldikss/vim-translate-me' " floating windows for neovim
 " call :NR on a region than :w . coupled with b:nrrw_aucmd_create,
 " Plug 'chrisbra/NrrwRgn' " to help with multi-ft files
@@ -114,7 +105,7 @@ Plug 'neomutt/neomutt.vim' " syntax file for neomutt
 Plug 'vim-scripts/rfc-syntax', { 'for': 'rfc' } " optional syntax highlighting for RFC files
 " Plug 'vim-scripts/coq-syntax', {'for': 'coq'}
 "}}}
-Plug 'mcchrish/info-window.nvim'  " :InfoWindowToggle to display buffer information in a popup
+" Plug 'mcchrish/info-window.nvim'  " :InfoWindowToggle to display buffer information in a popup
 " Plug 'tweekmonster/nvim-api-viewer', {'on': 'NvimAPI'} " see nvim api
 Plug 'tweekmonster/startuptime.vim', {'on': 'StartupTime'} " see startup time per script
 Plug 'Konfekt/vim-CtrlXA' " use ctrl a/xto cycle between different words
@@ -266,17 +257,8 @@ Plug 'marko-cerovac/material.nvim'
 " do not run it automatically, can be boring
 Plug 'chrisbra/csv.vim'
 
-" editorconfig {{{
-let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
-let g:EditorConfig_max_line_indicator = "line"
-" let g:EditorConfig_verbose = 1
-" }}}
 " Plug 'junegunn/rainbow_parentheses.vim' " the recommanded one
-" {{{ Latex attempts
-" lazyload creates problems
-" TODO move to nix once https://github.com/neovim/neovim/issues/9390 is fixed
 Plug 'lervag/vimtex'
-" }}}
 
 " Plug 'gregsexton/gitv'
 " Plug 'jeffwilliams/basejump' " to alt+click on file:line and go to it
@@ -397,7 +379,7 @@ let g:fugitive_gitlab_domains = ['https://git.novadiscovery.net']
 let g:vimspector_enable_mappings = 'HUMAN'
 "}}}
 " backup files etc... {{{
-set noswapfile
+" set noswapfile
 " set undodir=~/.vim/tmp/undo//     " undo files
 " set backupdir=~/.vim/tmp/backup// " backups
 " set directory=~/.vim/tmp/swap//   " swap files
@@ -1061,10 +1043,6 @@ vmap <leader>rs  <Plug>(ReplSend)
 " ctr send a chunk of text with motion
 " nmap <localleader>t <Plug>(iron-send-motion)
 let g:iron_repl_open_cmd="vsplit"
-" if TODO only if included
-" luafile $HOME/.config/nvim/iron-config.lua
-" let g:iron_new_repl_hooks
-" let g:iron_new_lua_repl_hooks
 let g:iron_map_defaults=0
 let g:iron_map_extended=0
 "}}}
@@ -1381,10 +1359,6 @@ hi LspFloatWinBorder guibg=red
 " vnoremap <silent><leader>ca :'<,'>LspSagaRangeCodeAction<CR>
 
 " }}}
-" aniseed {{{
-" let g:aniseed#env = v:true
-" lua require('aniseed.env').init()
-" }}}
 " luadev (a repl for nvim) {{{
 " map 5 <Plug>(Luadev-RunLine)
 " vmap 5 <Plug>(Luadev-Run)
@@ -1400,21 +1374,8 @@ set mouse=a
 set mousemodel=popup_setpos
 " }}}
 " Appearance 1 {{{
-let s:gutter_error_sign = "✘'"
-let s:gutter_warn_sign = '！'
-" }}}
-" registers.nvim {{{
-let g:registers_return_symbol = "\n" "'⏎' by default
-let g:registers_tab_symbol = "\t" "'·' by default
-let g:registers_space_symbol = "." "' ' by default
-let g:registers_delay = 500 "0 by default, milliseconds to wait before opening the popup window
-let g:registers_register_key_sleep = 1 "0 by default, seconds to wait before closing the window when a register key is pressed
-let g:registers_show_empty_registers = 0 "1 by default, an additional line with the registers without content
-let g:registers_trim_whitespace = 0 "1 by default, don't show whitespace at the begin and end of the registers
-let g:registers_hide_only_whitespace = 1 "0 by default, don't show registers filled exclusively with whitespace
-let g:registers_window_border = "single" "'none' by default, can be 'none', 'single','double', 'rounded', 'solid', or 'shadow' (requires Neovim 0.5.0+)
-let g:registers_window_min_height = 10 "3 by default, minimum height of the window when there is the cursor at the bottom
-let g:registers_window_max_width = 20 "100 by default, maximum width of the window
+" let s:gutter_error_sign = "✘'"
+" let s:gutter_warn_sign = '！'
 " }}}
 
 set hidden " you can open a new buffer even if current is unsaved (error E37)
@@ -1428,11 +1389,6 @@ set diffopt=filler,vertical
 set diffopt+=hiddenoff " neovim > change to default ?
 set diffopt+=iwhiteall
 set diffopt+=internal,algorithm:patience
-
-" Y behave like D or C
-" nnoremap Y y$
-
-
 
 " let undos persist across open/close
 let &undodir=stdpath('data').'/undo/'
@@ -1459,21 +1415,13 @@ map <F11> <Plug>(ToggleListchars)
 " Command to toggle line wrapping.
 " nnoremap <Leader>wr :set wrap! \| :set wrap?<CR>
 
-" Get off my lawn
-"noremap <Left> :echoe "Use h"<CR>
-"nnoremap <Right> :echoe "Use l"<CR>
-"nnoremap <Up> :echoe "Use k"<CR>
-"nnoremap <Down> :echoe "Use j"<CR>
-
-nnoremap <Leader>V <Cmd>Vista finder<CR>
-
 " set vim's cwd to current file's
 nnoremap ,cd :cd %:p:h<CR>:pwd<CR>
 
 if has('nvim')
     " runtime! python_setup.vim
  " when launching term
-	tnoremap <Esc> <C-\><C-n>
+  tnoremap <Esc> <C-\><C-n>
 endif
 
 " Bye bye ex mode
@@ -1553,10 +1501,6 @@ menu Trans.FR :te trans :fr <cword><CR>
 tmenu Trans.FR Traduire vers le francais
 
 " upstream those to grepper
-menu Grepper.Search\ in\ current\ Buffer :Grepper -switch -buffer
-menu Grepper.Search\ across\ Buffers :Grepper -switch -buffers
-menu Grepper.Search\ across\ directory :Grepper
-menu Grepper.Autoopen\ results :let g:grepper.open=1<CR>
 " menu Search.CurrentBuffer :exe Grepper -grepprg rg --vimgrep $* $.
 " menu Search.AllBuffers :exe Grepper -grepprg rg --vimgrep $* $+
 
@@ -1568,21 +1512,6 @@ autocmd User LspDiagnosticsChanged lua vim.lsp.diagnostic.set_loclist( { open = 
 
 command! LspStopAllClients lua vim.lsp.stop_client(vim.lsp.get_active_clients())
 
-menu LSP.Goto\ Definition  lua vim.lsp.buf.definition()<CR>
-            " \ ["Goto &Declaration\t\\cd", 'lua vim.lsp.buf.declaration()'],
-            " \ ["Goto I&mplementation\t\\cd", 'lua vim.lsp.buf.implementation()'],
-            " \ ["Hover\t\\ch", 'lua vim.lsp.buf.references()'],
-            " \ ["Search &References\t\\cr", 'lua vim.lsp.buf.references()'],
-            " \ ["Document  &Symbols\t\\cr", 'lua vim.lsp.buf.document_symbol()'],
-            " \ ["Format", 'lua vim.lsp.buf.formatting_sync(nil, 1000)'],
-            " \ ["&Execute  Command\\ce", 'lua vim.lsp.buf.execute_command()'],
-            " \ ["&Incoming calls\\ci", 'lua vim.lsp.buf.incoming_calls()'],
-            " \ ["&Outgoing calls\\ci", 'lua vim.lsp.buf.outgoing_calls()'],
-            " \ ["&Signature help\\ci", 'lua vim.lsp.buf.signature_help()'],
-            " \ ["&Workspace symbol\\cw", 'lua vim.lsp.buf.workspace_symbol()'],
-            " \ ["&Rename\\cw", 'lua vim.lsp.buf.rename()'],
-            " \ ["&Code action\\cw", 'lua vim.lsp.buf.code_action()'],
-
 
 " tabulation-related menu {{{2
 menu Tabs.S2 :set  tabstop=2 softtabstop=2 sw=2<CR>
@@ -1593,8 +1522,7 @@ menu Tabs.SwitchExpandTabs :set expandtab!
 "}}}
 " }}}
 " nvim specific configuration {{{
-
-  "set shada=!,'50,<1000,s100,:0,n$XDG_CACHE_HOME/nvim/shada
+"set shada=!,'50,<1000,s100,:0,n$XDG_CACHE_HOME/nvim/shada
 let g:netrw_home=$XDG_DATA_HOME.'/nvim'
 " }}}
 " colorscheme stuff {{{
@@ -1607,23 +1535,13 @@ let g:netrw_home=$XDG_DATA_HOME.'/nvim'
 " MatchParen(theses)
 " echo -e "\e[9mstrikethrough\e[0m" works in termite (libvte)
 " regarder dans 'guifont' y a s=strikeout
-
-
 autocmd ColorScheme *
       \ highlight Comment gui=italic
       \ | highlight Search gui=underline
       \ | highlight MatchParen guibg=NONE guifg=NONE gui=underline
       \ | highlight NeomakePerso cterm=underline ctermbg=Red  ctermfg=227  gui=underline
-" guibg=Red
-      " \ | highlight IncSearch guibg=NONE guifg=NONE gui=underline
-" highlight Comment gui=italic
 
-" put it after teh auguibg=redtocms ColorScheme
-" colorscheme molokai
-" colorscheme zephyr
-
-colorscheme gruvbox
-
+" colorscheme gruvbox
 " }}}
 
 " set guicursor="n-v-c:block-Cursor/lCursor,ve:ver35-Cursor,o:hor50-Cursor,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor,sm:block-Cursor"
@@ -1668,22 +1586,12 @@ map <A-]> :vsp<CR>:exec("tag ".expand("<cword>"))<CR>
 
 let g:python_host_tcp=1
 
-function! ExportMenus(path, modes)
-	" export all for now
-	let m = menu_get(a:path, a:modes)
-	let r =  json_encode(m)
-	" put =r " to display in current buffer
-	call writefile([r], "menus.txt")
-endfunc
-
-
 function! Genmpack(file)
-	let t = readfile(a:file)
-	let j = json_decode(t)
-	" echo 'Decoded json'.string(j)
-	let m = msgpackdump(j)
-
-	call writefile(m, 'fname.mpack', 'b')
+    let t = readfile(a:file)
+    let j = json_decode(t)
+    " echo 'Decoded json'.string(j)
+    let m = msgpackdump(j)
+    call writefile(m, 'fname.mpack', 'b')
 endfunc
 
 
@@ -1700,11 +1608,9 @@ endfunction
 
 " Register a plugin host that is started when a haskell file is opened
 " call remote#host#Register('haskell', "*.l\?hs", function('s:RequireHaskellHost'))
-
 " But if you need it for other files as well, you may just start it
 " forcefully by requiring it
 " let hc=remote#host#Require('haskell')
-
 " printer configuration
 " set printexpr
 
@@ -1728,7 +1634,7 @@ set shiftround    " round indent to multiple of 'shiftwidth'
 
 " open vimrc
 nnoremap <Leader>ev <Cmd>e $MYVIMRC<CR>
-nnoremap <Leader>el <Cmd>e ~/.config/nvim/init.backup.lua<CR>
+nnoremap <Leader>el <Cmd>e ~/.config/nvim/lua/init-manual.lua<CR>
 nnoremap <Leader>em <Cmd>e ~/.config/nvim/init.manual.vim<CR>
 " reload vimrc
 nnoremap <Leader>sv  <Cmd>source $MYVIMRC<CR>
@@ -1920,7 +1826,6 @@ let content = [
 	    \ ["Continue", 'lua require"dap".continue()'],
 	    \ ['Open REPL', 'lua require"dap".repl.open()']
             \ ]
-" map 2 <cmd>lua vim.lsp.buf.code_action()
 
 " formatting_sync
 " set cursor to the last position
@@ -1930,11 +1835,10 @@ let quick_opts = {'index':g:quickui#context#cursor}
 map <RightMouse>  <Cmd>call quickui#context#open(content, quick_opts)<CR>
 " can't click on it plus it disappears
 " map <RightMouse>  <Cmd>lua create_menu()<CR>
-
-" luafile ~/.config/nvim/init.lua
-luafile ~/.config/nvim/init.backup.lua
+" }}}
 
 command Hasktags !hasktags .
+command Htags !hasktags .
 
 " https://github.com/neovim/neovim/issues/14921
 set mousemodel=popup_setpos

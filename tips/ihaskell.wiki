@@ -1,0 +1,15 @@
+export GHC_ENVIRONMENT=bazel-bin/simwork/core/compile-package_env-core
+
+(ins)❯ cabal run ihaskell -- kernel --env-file=$HOME/nova/jinko-dev/bazel-bin/simwork/core/compile-package_env-core
+Up to date
+No kernel profile JSON specified.
+This may be a bug!
+Args (Kernel Nothing) [KernelspecEnvFile "/home/teto/nova/jinko-dev/bazel-bin/simwork/core/compile-package_env-core"]
+IHaskell on  ghc8-env via 🐍 via ❄️  IMPURE (ghc-shell-for-ihaskell-0.10.2.2) 
+(ins)➜ cabal run ihaskell -- install 
+Up to date
+No Jupyter / IPython detected -- install Jupyter 3.0+ before using IHaskell.
+ihaskell: 
+Ran commands: 
+which jupyter
+which ipython

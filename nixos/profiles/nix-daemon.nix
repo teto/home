@@ -25,6 +25,8 @@
           # type = "indirect";
         # };
 
+      mptcp.to = { type = "github"; owner="teto"; repo = "mptcp-flake";};
+
       nova.to = {
           type = "git";
           url = "ssh://git@git.novadiscovery.net/world/nova-nix.git";

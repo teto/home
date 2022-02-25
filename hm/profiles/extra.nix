@@ -3,6 +3,8 @@
 {
   programs.pywal.enable = true;
 
+  services.opensnitch-ui.enable = true;
+
   home.packages = with pkgs; [
     hakuneko
     hexyl
