@@ -1,3 +1,14 @@
+
+# poetry2nix
+
+```
+nix shell github:nix-community/poetry2nix#poetry2nix
+# to generate the nix overlay:
+poetry2nix lock --lock=/home/teto/nova/jinko-platform/poetry.lock
+```
+
+
+
 replace .venv with your project's env path
 
 Le nom du package dans l'overlay c'est celui visible dans le fichier lock.

@@ -55,7 +55,7 @@ in
     # steam-run
     signal-desktop
     lutris
-    xlibs.xwininfo # for stylish
+    xorg.xwininfo # for stylish
   ];
 
   # hum...

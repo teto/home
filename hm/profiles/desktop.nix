@@ -94,7 +94,7 @@ let
     bandwhich  # to monitor per app bandwidth
     du-dust  # dust binary: rust replacement of du
     ncdu  # to see disk usage
-    desktop_file_utils  # to get desktop
+    desktop-file-utils  # to get desktop
     font-manager
     gnome.adwaita-icon-theme # else nothing appears
     gnome3.eog # eye of gnome = image viewer / creates a collision
@@ -117,7 +117,7 @@ let
     rofi-pass   # rofi-pass
     scrot  # screenshot app for wayland
     sd  # rust cli for search & replace
-    shared_mime_info # temporary fix for nautilus to find the correct files
+    shared-mime-info # temporary fix for nautilus to find the correct files
     sublime3
     # sxiv # simple image viewer
     translate-shell

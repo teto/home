@@ -24,14 +24,14 @@ end
 -- })
 -- my_image:transmit() -- send image data to terminal
 
-use {
-	"~/telescope-frecency.nvim",
-	config = function ()
-		nnoremap ( "n", "<Leader>f", function () require('telescope').extensions.frecency.frecency({
-			query = "toto"
-		}) end )
-	end
-	}
+-- use {
+-- 	"~/telescope-frecency.nvim",
+-- 	config = function ()
+-- 		nnoremap ( "n", "<Leader>f", function () require('telescope').extensions.frecency.frecency({
+-- 			query = "toto"
+-- 		}) end )
+-- 	end
+-- 	}
 
 -- use {
 --	"SmiteshP/nvim-gps",
@@ -1101,8 +1101,9 @@ function contextMenu()
 end
 -- Disable virtual_text since it's redundant due to lsp_lines.
 vim.diagnostic.config({
-  virtual_lines = true,
-  virtual_text = false;
+	-- disabled because too big in haskell
+  virtual_lines = false,
+  virtual_text = true;
   -- {
 	  -- severity = { min = vim.diagnostic.severity.WARN }
   -- },

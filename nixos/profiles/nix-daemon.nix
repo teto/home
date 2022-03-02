@@ -1,7 +1,8 @@
 { config, lib, pkgs,  ... }:
 {
   nix = {
-    package = pkgs.nixUnstable;
+    # package = pkgs.nixUnstable;
+    # package = pkgs.nix;
 
     registry = {
       nur.to = { type = "github"; owner = "nix-community"; repo="NUR"; };
@@ -69,7 +70,7 @@
         "https://jupyterwith.cachix.org"
         # TODO move it to nova's ?
         "https://static-haskell-nix.cachix.org"
-        "https://hydra.iohk.io"
+        # "https://hydra.iohk.io"  # was blocking
         "https://haskell-language-server.cachix.org"
       ];
       trusted-public-keys = [

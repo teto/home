@@ -32,7 +32,7 @@ rec {
   # services.tzupdate.enable = true;
 
   environment.systemPackages = with pkgs; [
-    manpages  # because man tcp should always be available
+    man-pages  # because man tcp should always be available
     moreutils # contains errno binary that can translate errnos
     ncurses.dev # for infocmp
     # termite.terminfo # broken on unstable to be able to edit over ssh

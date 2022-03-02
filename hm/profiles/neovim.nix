@@ -300,9 +300,9 @@ let
     # {
     #   plugin = nvim-compe;
     # }
-    {
-      plugin = telescope-frecency-nvim;
-    }
+    # {
+    #   plugin = telescope-frecency-nvim;
+    # }
     # {
     #   plugin = neogit;
     #   config = ''
