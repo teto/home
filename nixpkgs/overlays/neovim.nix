@@ -9,42 +9,30 @@ let
 in
 rec {
 
-  # makeNeovimConfig = {}:
-  neovimTreesitterConfig = prev.neovimUtils.makeNeovimConfig {
-    withPython3 = false;
-    plugins = with prev.vimPlugins; [
-      {
-        plugin = nvim-treesitter;
-        # luaConfig = ''
-        # local nvim_lsp = require 'nvim_lsp'
-        # '';
-      }
-    ];
-  };
 
-  neovimHaskellConfig = prev.neovimUtils.makeNeovimConfig {
-    withPython3 = false;
-    plugins = with prev.vimPlugins; [
-      {
-        plugin = nvim-lspconfig;
-        # luaConfig = ''
-        # local nvim_lsp = require 'nvim_lsp'
-        # '';
-      }
-    ];
-  #   haskellPackages = [
-  #     haskellPackages.haskdogs # seems to build on hasktags/ recursively import things
-  #     haskellPackages.hasktags
-  #     haskellPackages.nvim-hs
-  #     haskellPackages.nvim-hs-ghcid
+  # neovimHaskellConfig = prev.neovimUtils.makeNeovimConfig {
+  #   withPython3 = false;
+  #   plugins = with prev.vimPlugins; [
+  #     {
+  #       plugin = nvim-lspconfig;
+  #       # luaConfig = ''
+  #       # local nvim_lsp = require 'nvim_lsp'
+  #       # '';
+  #     }
   #   ];
-    customRC = ''
-    '';
+  # #   haskellPackages = [
+  # #     haskellPackages.haskdogs # seems to build on hasktags/ recursively import things
+  # #     haskellPackages.hasktags
+  # #     haskellPackages.nvim-hs
+  # #     haskellPackages.nvim-hs-ghcid
+  # #   ];
+  #   customRC = ''
+  #   '';
 
-    # ajouter une config lua
-    luaRC = ''
-      '';
-  };
+  #   # ajouter une config lua
+  #   luaRC = ''
+  #     '';
+  # };
 
 
   # these are different config to test

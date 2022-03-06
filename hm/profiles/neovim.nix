@@ -607,6 +607,41 @@ let
       #   plugin = vista-vim;
       #   # optional = false;
       #   config = ''
+# " vista (visualize LSP symbols) {{{
+# " Vista finder fzf
+# " Vista nvim_lsp
+# " available options are echo/scroll/floating_win/both
+# let g:vista_echo_cursor_strategy='both'
+# let g:vista_close_on_jump=0
+# let g:vista_default_executive='nvim_lsp'
+# let g:vista_log_file = stdpath('cache').'/vista.log'
+
+# let g:vista_executive_for = {
+#     \ 'php': 'vim_lsp',
+#     \ 'markdown': 'toc',
+#     \ }
+# let g:vista_highlight_whole_line=1
+
+# " Declare the command including the executable and options used to generate ctags output
+# " for some certain filetypes.The file path will be appened to your custom command.
+# " For example:
+# let g:vista_ctags_cmd = {
+#       \ 'haskell': 'hasktags -x -o - -c',
+#       \ }
+# " let g:vista_finder_alternative_executives=['tags']
+# " let g:vista_fzf_preview
+# " let g:vista_blink=[2, 100]
+# " let g:vista_icon_indent=[ '+', '+' ]
+# nnoremap <Leader>v <Cmd>Vista<CR>
+# " Ensure you have installed some decent font to show these pretty symbols, then you can enable icon for the kind.
+# let g:vista#renderer#enable_icon = 1
+
+# " The default icons can't be suitable for all the filetypes, you can extend it as you wish.
+# let g:vista#renderer#icons = {
+# \   "function": "\uf794",
+# \   "variable": "\uf71b",
+# \  }
+# "}}}
       #   '';
       # }
 
