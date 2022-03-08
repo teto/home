@@ -1,4 +1,4 @@
-﻿CABAL_HELPER_DEBUG=1
+CABAL_HELPER_DEBUG=1
 {-# OPTIONS_GHC -fdefer-type-errors #-}
 {-# OPTIONS_GHC -Wno-missing-signatures #-}
 -- -fdefer-type-errors
@@ -36,17 +36,8 @@ BLU.toString   :: BL.ByteString -> String
 BLU.fromString :: String -> BL.ByteString
 lazyByteString = BLU.fromString "lazyByteString ä ß"
 
->>= vs >>
->> will discard the returned value
-    removeSubflow socket token >>= inspectAnswers >> putStrLn "Finished announcing"
-
-ghc-pkg -f /home/teto/netlink-hs find-module System.Linux.Netlink
-
 pour savoir d'ou le pkg est importe:
 	ghc-pkg find-module System.Linux.Netlink
-
-Fun website
-https://haskell-code-explorer.mfix.io/package/optparse-applicative-0.14.2.0/show/Options/Applicative/BashCompletion.hs
 
 in ghci :
 :show paths

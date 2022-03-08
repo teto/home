@@ -7,11 +7,6 @@ local packer = require "packer"
 local use, _ = packer.use, packer.use_rocks
 local nnoremap = vim.keymap.set
 
--- packer.init({
---	-- compile_path
---	log = { level = 'trace' },
--- })
-
 function file_exists(name)
 	local f=io.open(name,"r")
 	if f~=nil then io.close(f) return true else return false end
@@ -161,6 +156,17 @@ use{"petertriho/nvim-scrollbar",
 --	, requires = {"mfussenegger/nvim-dap"}
 -- }
 -- use 'nvim-telescope/telescope-dap.nvim'
+--
+
+use {
+	-- set virtualedit=all, select an area then call :VBox
+	'jbyuki/venn.nvim'
+	}
+
+
+use {
+	'protex/better-digraphs.nvim'
+}
 use {
 	"rcarriga/nvim-notify"
 	, config = function ()
@@ -172,7 +178,7 @@ use {
 }
 
 -- terminal image viewer in neovim see https://github.com/edluffy/hologram.nvim#usage for usage
-use 'edluffy/hologram.nvim'
+use 'edluffy/hologram.nvim' -- hologram-nvim
 use 'ellisonleao/glow.nvim' -- markdown preview, run :Glow
 use {
 	-- Show where your cursor moves
@@ -606,8 +612,11 @@ use {
 			-- disabled_filetypes = {}
 		},
 		sections = {
-			lualine_a = {'mode'},
-			lualine_b = {'branch'},
+			lualine_a = {'branch'},
+			lualine_b = {
+				-- path=2 => absolute path
+				{'filename', path = 1 }
+			},
 
 			lualine_c = {
 				'lsp_progress'
@@ -615,8 +624,10 @@ use {
 				-- {'lsp_progress', display_components = { 'lsp_client_name', { 'title', 'percentage', 'message' }}}
 				-- ,  gps.get_location, condition = gps.is_available
 			},
-			lualine_x = { 'encoding', 'fileformat', 'filetype'},
-			lualine_y = {'progress'},
+			lualine_x = {
+				-- 'encoding', 'fileformat', 'filetype'
+			},
+			lualine_y = {'diagnostics', 'progress'}, -- progress = %progress in file
 			lualine_z = {'location'}
 		},
 		-- inactive_sections = {
@@ -1124,15 +1135,6 @@ local _, notifs = pcall(require, "notifications")
 
 vim.lsp.notifier = notifs
 
--- if vim.notify then
---	vim.notify = notifs.notify_external
--- end
-
--- options to pass to goto_next/goto_prev
--- local goto_opts = {
---	severity_limit = "Warning"
--- }
-
 -- showLineDiagnostic is a wrapper around show_line_diagnostics
 -- show_line_diagnostics calls open_floating_preview
 -- local popup_bufnr, winnr = util.open_floating_preview(lines, 'plaintext')
@@ -1291,11 +1293,17 @@ function open_contextual_menu()
 		  screenrow = curpos[2] ,
 		  screencol = curpos[3]
 		},
-		width = 300,
-		height = 300,
+		-- ignored
+		-- width = 200,
+		-- height = 300,
 	}
 
-	require'stylish'.ui_menu(vim.fn.menu_get(''), menu_opts, function(res) print('### ' ..res) end)
+	-- print('### ' ..res)
+	require'stylish'.ui_menu(
+		vim.fn.menu_get(''),
+		menu_opts,
+		function(res) vim.cmd(res) end
+	)
 end
 
 vim.api.nvim_set_keymap(

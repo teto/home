@@ -39,6 +39,7 @@ let
     rpl    # to replace strings across files
     universal-ctags  # there are many different ctags, be careful !
     # virtmanager  # broken
+	tio # serial console reader
   ]
   ++ lib.optionals all [
     hexyl  # hex editor
@@ -304,6 +305,9 @@ in
   programs.broot = {
     enable = true;
     enableZshIntegration = true;
+
+	# alt+enter is taken by i3 see https://github.com/Canop/broot/issues/86
+	verbs = [ { invocation = "p"; key = "ctrl-o"; execution = ":open_leave"; } ];
   };
 
   # for pinentry-gnome3 to work longer

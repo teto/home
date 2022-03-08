@@ -1162,13 +1162,6 @@ xmap <Space>W <Plug>(quickhl-manual-reset)
 "}}}
 " compe
 "
-" treesitter-completion {{{
-" Highlight the node at point, its usages and definition when cursor holds
-" grammaers are searched in `parser/{lang}.*
-" let g:complete_ts_highlight_at_point = 1
-" set foldexpr=completion_treesitter#foldexpr()
-" set foldmethod=expr
-"}}}
 " pdf-scribe {{{
 " PdfScribeInit
 let g:pdfscribe_pdf_dir  = expand('$HOME').'/Nextcloud/papis_db'
@@ -1735,8 +1728,6 @@ xnoremap <c-o> <Cmd>diffget<cr>
 
 command! JsonPretty %!jq '.'
 
-" au User LspProgressUpdate redrawstatus!
-
 " vim.api.nvim_command('au User LspMessageUpdate redrawstatus!')
 nnoremap <2-LeftMouse> <cmd>lua vim.lsp.buf.definition()<cr>
 
@@ -1813,6 +1804,10 @@ endfunc
 " map <C-D> <C-]>
 " map <C-D> :tag<CR>
 map <D-b> :echom "hello papy"
+
+inoremap <C-k><C-k> <Cmd>lua require'betterdigraphs'.digraphs("i")<CR>
+nnoremap r<C-k><C-k> <Cmd>lua require'betterdigraphs'.digraphs("r")<CR>
+vnoremap r<C-k><C-k> <ESC><Cmd>lua require'betterdigraphs'.digraphs("gvr")<CR>
 
 " let g:vrc_trigger = '<C-]>'
 

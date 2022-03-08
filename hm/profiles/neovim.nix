@@ -346,10 +346,10 @@ let
       }
       {
         plugin = gruvbox-nvim;
-        config = ''
-          " test if gruvbox is installed
-
-        '';
+        type = "lua";
+        # config = ''
+        #   -- test if gruvbox is installed
+        # '';
       }
       {
         plugin = dhall-vim;
@@ -386,8 +386,8 @@ let
             -- Jump to request line on run
             jump_to_request = false,
           })
-          vim.keymap.set('n',  "<leader>rr" , "<Plug>RestNvim", { expr = true} )
-          vim.keymap.set('n',  "<leader>rp" , "<Plug>RestNvimPreview", { expr = true} )
+          vim.keymap.set('n',  '<leader>rr' , "<Plug>RestNvim")
+          vim.keymap.set('n',  '<leader>rp' , "<Plug>RestNvimPreview")
         '';
       }
       {
