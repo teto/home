@@ -82,7 +82,7 @@ Plug 'bogado/file-line' " to open a file at a specific line
 Plug 'alok/notational-fzf-vim' " to take notes, :NV
 " Plug 'iamcco/markdown-preview.nvim' " :MarkdownPreview
 " Plug 'suy/vim-context-commentstring' " commen for current programming language
-" Plug 'voldikss/vim-translate-me' " floating windows for neovim
+Plug 'voldikss/vim-translator'
 " call :NR on a region than :w . coupled with b:nrrw_aucmd_create,
 " Plug 'chrisbra/NrrwRgn' " to help with multi-ft files
 Plug 'chrisbra/vim-diff-enhanced' "
@@ -1009,7 +1009,7 @@ nnoremap ,k <Cmd>call Dasht([expand('<cword>'), expand('<cWORD>')])<Return>
 " search ALL the docsets
 nnoremap <silent> <Leader><Leader>K :call Dasht([expand('<cword>'), expand('<cWORD>')], '!')<Return>
 "}}}}}}
-" vim-translate-me / vtm {{{
+" vim-translate-me / vim-translator / vtm {{{
 " Which language that the text will be translated
 let g:vtm_default_to_lang='en'
 let g:vtm_default_api='bing'
@@ -1017,11 +1017,11 @@ let g:vtm_default_api='bing'
 " nmap <silent> <Leader>t <Plug>Translate
 " vmap <silent> <Leader>t <Plug>TranslateV
 " Type <Leader>w to translate the text under the cursor, display in the popup window
-nmap <silent> ,te <Plug>TranslateW
-vmap <silent> ,te <Plug>TranslateWV
+" nmap <silent> ,te <Plug>TranslateW
+" vmap <silent> ,te <Plug>TranslateWV
 " Type <Leader>r to translate the text under the cursor and replace the text with the translation
-nmap <silent> <Leader>r <Plug>TranslateR
-vmap <silent> <Leader>r <Plug>TranslateRV
+" nmap <silent> <Leader>r <Plug>TranslateR
+" vmap <silent> <Leader>r <Plug>TranslateRV
 "}}}
 " repl.nvim (from hiphish) {{{
 " let g:repl['lua'] = {

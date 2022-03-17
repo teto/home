@@ -170,7 +170,33 @@ use {
 use {
 	"rcarriga/nvim-notify"
 	, config = function ()
+		require("notify").setup({
+			-- Animation style (see below for details)
+			stages = "fade_in_slide_out",
+
+			-- Function called when a new window is opened, use for changing win settings/config
+			-- on_open = nil,
+			-- Function called when a window is closed
+			-- on_close = nil,
+			-- Render function for notifications. See notify-render()
+			-- render = "default",
+			-- Default timeout for notifications
+			timeout = 5000,
+			-- Max number of columns for messages
+			max_width = 300,
+			-- Max number of lines for a message
+			-- max_height = 50,
+
+			-- For stages that change opacity this is treated as the highlight behind the window
+			-- Set this to either a highlight group, an RGB hex value e.g. "#000000" or a function returning an RGB code for dynamic values
+			background_colour = "Normal",
+
+			-- Minimum width for notification windows
+			minimum_width = 50,
+		})
+
 		vim.notify = require("notify")
+
 	end
 }
 use {
@@ -1072,25 +1098,27 @@ if has_telescope then
 				override_generic_sorter = false,
 				override_file_sorter = false,
 			},
-			-- frecency = {
-			--		 workspaces = {
-			--		["home"]	= "/home/teto/home",
-			--		["data"]	= "/home/teto/neovim",
-			--		["jinko"]	= "/home/teto/jinko",
-			--		-- ["wiki"]    = "/home/my_username/wiki"
-			--	},
-			--	show_scores = true,
-			--	show_unindexed = true,
-			--	ignore_patterns = {"*.git/*", "*/tmp/*"},
-			--	db_safe_mode = false,
-			--	auto_validate = false
-			-- }
+			 frecency = {
+				workspaces = {
+					["home"]	= "/home/teto/home",
+					["data"]	= "/home/teto/neovim",
+					["jinko"]	= "/home/teto/jinko",
+					-- ["wiki"]    = "/home/my_username/wiki"
+				},
+				show_scores = true,
+				show_unindexed = true,
+				ignore_patterns = {"*.git/*", "*/tmp/*"},
+				db_safe_mode = true,
+				auto_validate = false,
+				devicons_disabled = true
+			 }
 		}
 	}
 	-- This will load fzy_native and have it override the default file sorter
 	telescope.load_extension('fzf')
 	-- telescope.load_extension('fzy_native')
-	-- telescope.load_extension("frecency")
+	telescope.load_extension("notify")
+	telescope.load_extension("frecency")
 
 	-- TODO add autocmd
 	-- User TelescopePreviewerLoaded

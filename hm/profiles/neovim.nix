@@ -1,7 +1,7 @@
 { config, pkgs, lib,  ... }:
 
 let
-  genBlock = title: content: lib.optionalString (content != null) ''
+  genBlockViml = title: content: lib.optionalString (content != null) ''
     " ${title} {{{
     ${content}
 	" }}}
@@ -300,9 +300,9 @@ let
     # {
     #   plugin = nvim-compe;
     # }
-    # {
-    #   plugin = telescope-frecency-nvim;
-    # }
+    {
+      plugin = telescope-frecency-nvim;
+    }
     # {
     #   plugin = neogit;
     #   config = ''
@@ -698,7 +698,7 @@ in
     ''
     # concatStrings = builtins.concatStringsSep "";
     + (lib.strings.concatStrings (
-      lib.mapAttrsToList genBlock rcBlocks
+      lib.mapAttrsToList genBlockViml rcBlocks
     ))
     ;
 

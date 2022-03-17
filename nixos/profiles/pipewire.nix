@@ -18,10 +18,10 @@
     #media-session.enable = true;
     config.pipewire = {
       "properties" = {
+		default.clock.allowed-rates = [ 44100 48000 ];
         #"link.max-buffers" = 64;
 	# "link.max-buffers" = 16; # version < 3 clients can't handle more than this
 	"log.level" = 2;
-        # "default.clock.rate" = 48000; # 44100
         #"default.clock.quantum" = 1024;
         #"default.clock.min-quantum" = 32;
         #"default.clock.max-quantum" = 8192;

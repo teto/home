@@ -40,3 +40,5 @@ Remember last 5 password(s) and prevent reuse
 Region -> Url
 Paris => https://s3.eu-west-3.amazonaws.com
 Frankfurt => s3-eu-central-1.amazonaws.com
+
+aws s3api list-objects-v2 --bucket "XXX" --query "Contents[?LastModified>='2021-10-01'].{Key: Key}" --output text --profile nova-devops| xargs -n1 -P10 -t -I 'KEY' aws s3 rm s3://devops-xxx/'KEY' --profile nova-devops

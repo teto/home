@@ -12,7 +12,7 @@
 
   environment.systemPackages = [
     # to run ubuntu, needs libvirtd service
-    pkgs.virt-manager  # broken)
+    # pkgs.virt-manager  # broken)
   ];
 
   virtualisation.libvirtd = {

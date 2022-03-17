@@ -4,5 +4,4 @@
     nyx
     # firefoxPackages.tor-browser
   ];
-
 }

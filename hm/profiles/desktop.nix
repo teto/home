@@ -38,7 +38,6 @@ let
     pcalc  # cool calc
     rpl    # to replace strings across files
     universal-ctags  # there are many different ctags, be careful !
-    # virtmanager  # broken
 	tio # serial console reader
   ]
   ++ lib.optionals all [

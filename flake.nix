@@ -74,7 +74,8 @@
       # TODO I should use hm.lib.homeManagerConfiguration
       # and pass the pkgs to it
       hm-custom = my_imports: ({ config, lib, pkgs,  ... }:
-          {
+
+
             # necessary for plugins to see nur etc
             # ignored by useGlobalPkgs ?
             # nixpkgs.overlays = nixpkgs.lib.attrValues self.overlays;
@@ -127,6 +128,7 @@
               })
             ];
           };
+
           mcoudron = nixpkgs.lib.nixosSystem {
             inherit system;
             modules = [

@@ -36,12 +36,13 @@ rec {
     # TODO try i3-snapshot
     # hstr # to deal with shell history
     envsubst
-    tig
     # or lazygit
     nix-prefetch-git
     netcat-gnu  # plain 'netcat' is the bsd one
     # dig.dnsutils  # for dig disabled because of flakes
+	perf-tools
     strace
+    tig
     w3m   # for preview in ranger w3mimgdisplay
     xdg_utils
     whois
