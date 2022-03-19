@@ -1,6 +1,6 @@
 bazel run //sanofi-influenza-simulation:tasty-test -- -p '/whatever bazel test tells me to do/' --size-cutoff 1000000000 > log.txt
 
-BAZEL_COMPLETION_USE_QUERY
+export BAZEL_COMPLETION_USE_QUERY=1
 
 ghc-pkg register --force --user /home/teto/nova/servant-openapi3/dist-newstyle/build/x86_64-linux/ghc-8.10.7/servant-openapi3-2.0.1.3/package.conf.inplace/servant-openapi3-2.0.1.3-inplace.conf
 
