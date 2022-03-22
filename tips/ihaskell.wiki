@@ -1,5 +1,7 @@
 export GHC_ENVIRONMENT=bazel-bin/simwork/core/compile-package_env-core
 
+echo "test with $ ihaskell install --env-file=bazel-bin/simwork/core/compile-package_env-core'"
+
 (ins)❯ cabal run ihaskell -- kernel --env-file=$HOME/nova/jinko-dev/bazel-bin/simwork/core/compile-package_env-core
 Up to date
 No kernel profile JSON specified.

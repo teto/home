@@ -9,3 +9,6 @@ config at /etc/gitlab-runner/config.toml
 tags are at the coordinator url (website)
 
 journalctl -u gitlab-runner
+
+
+sleep infinity

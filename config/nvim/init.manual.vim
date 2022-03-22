@@ -127,7 +127,7 @@ Plug 'junegunn/goyo.vim', {'on': 'Goyo'} "distraction free writing focus
 Plug 'junegunn/limelight.vim' " focus writing :Limelight, works with goyo
 Plug 'calvinchengx/vim-aftercolors' " load after/colors
 " leader
-Plug 'bronson/vim-trailing-whitespace' " :FixWhitespace
+" Plug 'bronson/vim-trailing-whitespace' " :FixWhitespace
 " Plug 'tpope/vim-scriptease' " Adds command such as :Messages
 " Plug 'tpope/vim-eunuch' " {provides SudoEdit, SudoWrite , Unlink, Rename etc...
 
