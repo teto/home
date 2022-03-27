@@ -15,11 +15,6 @@ let mapleader = " "
 let maplocalleader = ","
 
 
-
-" inverts the meaning of g in substitution, ie with gdefault, change all
-" occurences
-set gdefault
-
 " vim-plug autoinstallation {{{
 " TODO use stdpath now
 let s:nvimdir = stdpath('data')
@@ -38,6 +33,10 @@ endif
 "}}}
 
 " VIM-PLUG PLUGIN DECLARATIONS {{{1
+" vim-plug config {{{
+let g:plug_shallow=1
+" let g:plug_threads
+"}}}
 call plug#begin(s:plugdir)
 Plug 'rhysd/vim-gfm-syntax' " markdown syntax compatible with Github's
 Plug 'winston0410/range-highlight.nvim' "highlight ranges like :1,5
@@ -269,9 +268,6 @@ call plug#end()
 
 let g:did_install_default_menus = 1  " avoid stupid menu.vim (saves ~100ms)
 
-" start scrolling before reaching end of screen in order to keep more context
-" set it to a big value
-set scrolloff=2
 
 " Indentation {{{
 set tabstop=4 " a tab takes 4 characters (local to buffer) abrege en ts
@@ -309,40 +305,14 @@ set title " vim will change terminal title
 " let &titlestring=" %t %{len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) } - NVIM"
 set titlestring=%{getpid().':'.getcwd()}
 
-" conceal configuration {{{
-" transforms some characters into their digraphs equivalent
-" if your font supports it
-" concealcursor " show current line unconcealed
-"let g:tex_conceal="agdms"
-"set conceallevel=2
-" }}}
-
-set showmatch
-
-" set autochdir
-" Use visual bell instead of beeping when doing something wrong
-set visualbell
-set errorbells " easier to test visualbell with it
 
 " if boths are set at the same time, vim uses an hybrid mode
-" Display line numbers on the left
-set number
 "Prefer relative line numbering?
-set relativenumber
+" set relativenumber
 " TODO do a macro that cycles throught show/hide absolute/relative line numbers
 map <C-N><C-N> <Cmd>set invnumber<CR>
-set cpoptions="aABceFsn" " vi ComPatibility options
 " should not be a default ?
 set cpoptions-=_
-
-" Display unprintable characters with '^' and
-" set nolist to disable or set list!
-
-" set timeoutlen=400 " Quick timeouts on key combinations.
-
-" in order to scroll faster
-" nnoremap <C-e> 3<C-e>
-" nnoremap <C-y> 3<C-y>
 
 " to load plugins in ftplugin matching ftdetect
 filetype plugin on
@@ -515,17 +485,6 @@ let g:instant_rst_additional_dirs=[ "/home/teto/mptcpweb" ]
 " set background=dark " remember: does not change the background color !
 " one  ▶
 
-set noshowmode " Show the current mode on command line
-set cursorline " highlight cursor line
-set termguicolors
-
-" set diffopt=filler
-
-" set noautoread " to prevent from interfering with our plugin
-set wrap
-" set breakat=80 " characters at which wrap can break line
-set linebreak " better display (makes sense only with wrap)
-set breakindent " preserve or add indentation on wrap
 let &showbreak = '↳ '  	" displayed in front of wrapped lines
 
 " @:NonText
@@ -551,10 +510,6 @@ let g:diminactive_enable_focus = 0
 " ultisnips {{{
 let g:UltiSnipsSnippetDirectories=[stdpath('config').'/snippets' ]
 " }}}
-" vim-plug config {{{
-let g:plug_shallow=1
-" let g:plug_threads
-"}}}
 " interesting words {{{
 "nnoremap <silent> <leader>k :call InterestingWords('n')<cr>
 "nnoremap <silent> <leader>K :call UncolorAllWords()<cr>
@@ -565,13 +520,6 @@ let g:plug_shallow=1
 " }}}
 " dirvish {{{
 let g:dirvish_mode=2
-"}}}
-" echodoc {{{
-" let g:echodoc#enable_at_startup=1
-" g:echodoc#type " only for gonvim
-"}}}
-" nvim-colorizer{{{
-lua require 'terminal'.setup()
 "}}}
 " firenvim {{{
 let g:firenvim_config = {
@@ -1326,9 +1274,6 @@ set mousemodel=popup_setpos
 " let s:gutter_warn_sign = '！'
 " }}}
 
-set hidden " you can open a new buffer even if current is unsaved (error E37)
-
-
 " draw a line on 80th column
 " set colorcolumn=80,100
 
@@ -1389,10 +1334,10 @@ map <Leader><space> :b#<CR>
 " spell config {{{
 " todo better if it could be parsable
 " map <Leader>t :!trans :fr -no-ansi <cword><CR>
-map <Leader>te :te trans :en <cword><CR>
-map <Leader>tf :te trans :fr <cword><CR>
-" for thesaurus vim-thesaurus only works with English :/
-map <Leader>ttf :te trans :fr <cword><CR>
+" map <Leader>te :te trans :en <cword><CR>
+" map <Leader>tf :te trans :fr <cword><CR>
+" " for thesaurus vim-thesaurus only works with English :/
+" map <Leader>ttf :te trans :fr <cword><CR>
 "}}}
 " Unimpaired {{{
 " advised by tpope for these remote countries that don't use qwerty
@@ -1404,16 +1349,6 @@ map <Leader>ttf :te trans :fr <cword><CR>
 " xmap < [
 " xmap > ]
 " }}}
-
-set showcmd " show pending command bottom right
-set showfulltag
-
-" indents
-"nmap <S-Tab> <<
-"nmap <Tab> >>
-"vmap <S-Tab> <gv
-"vmap <Tab> >gv
-
 
 
 " azerty customizations : utilise <C-V> pour entrer le caractère utilisé {{{
@@ -1562,11 +1497,6 @@ endfunction
 " printer configuration
 " set printexpr
 
-
-set shiftround    " round indent to multiple of 'shiftwidth'
-
-" window-local
-" set winhl=NormalNC:CursorColumn
 
 " auto reload vim config on save
 " Watch for changes to vimrc

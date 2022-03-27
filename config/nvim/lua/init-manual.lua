@@ -11,6 +11,43 @@ function file_exists(name)
 	local f=io.open(name,"r")
 	if f~=nil then io.close(f) return true else return false end
 end
+-- main config {{{
+vim.opt.showmatch = true
+vim.opt.showcmd = true
+vim.opt.showfulltag = true
+vim.opt.hidden = true -- you can open a new buffer even if current is unsaved (error E37) =
+vim.opt.shiftround = true -- round indent to multiple of 'shiftwidth'
+
+-- Use visual bell instead of beeping when doing something wrong
+vim.opt.visualbell = true
+-- easier to test visualbell with it
+vim.opt.errorbells  = true
+
+ -- start scrolling before reaching end of screen in order to keep more context
+ -- set it to a big value
+vim.opt.scrolloff=2
+-- inverts the meaning of g in substitution, ie with gdefault, change all occurences
+vim.opt.gdefault = true
+vim.opt.cpoptions="aABceFsn"  -- vi ComPatibility options
+
+vim.o.swapfile = false
+vim.opt.number = true
+vim.opt.relativenumber = true
+vim.opt.laststatus = 3
+vim.opt.conceallevel = 2
+vim.opt.concealcursor = 'nc'
+vim.opt.showmode = false -- Show the current mode on command line
+vim.opt.cursorline = true -- highlight cursor line
+vim.opt.termguicolors = true
+
+-- set noautoread " to prevent from interfering with our plugin
+-- set breakat=80 " characters at which wrap can break line
+vim.opt.wrap = true
+vim.opt.linebreak = true -- better display (makes sense only with wrap)
+vim.opt.breakindent = true -- preserve or add indentation on wrap
+--}}}
+
+-- lua vim.diagnostic.setqflist({open = tru, severity = { min = vim.diagnostic.severity.WARN } })
 
 -- local my_image = require('hologram.image'):new({
 --	   source = '/home/teto/doctor.png',
@@ -19,14 +56,14 @@ end
 -- })
 -- my_image:transmit() -- send image data to terminal
 
--- use {
--- 	"~/telescope-frecency.nvim",
--- 	config = function ()
--- 		nnoremap ( "n", "<Leader>f", function () require('telescope').extensions.frecency.frecency({
--- 			query = "toto"
--- 		}) end )
--- 	end
--- 	}
+use {
+	"~/telescope-frecency.nvim",
+	config = function ()
+		nnoremap ( "n", "<Leader>f", function () require('telescope').extensions.frecency.frecency({
+			query = "toto"
+		}) end )
+	end
+	}
 
 -- use {
 --	"SmiteshP/nvim-gps",
@@ -50,6 +87,16 @@ end
 --		})
 --	end
 
+-- }
+
+-- use {
+-- 	'VonHeikemen/fine-cmdline.nvim',
+-- 	config = function ()
+-- 	require('fine-cmdline').setup()
+-- 	end
+-- 	  -- requires = {
+--     -- {'MunifTanjim/nui.nvim'}
+--   -- }
 -- }
 
 -- not packaged
@@ -968,6 +1015,7 @@ vim.lsp.handlers["textDocument/references"] = function(...)
 end
 
 
+
 local has_bufferline, bufferline = pcall(require, "bufferline")
 if has_bufferline then
 	bufferline.setup{
@@ -1000,6 +1048,9 @@ if has_bufferline then
 		}
 	}
 end
+-- nvim-colorizer {{{
+require 'terminal'.setup()
+-- }}}
 
 
 -- Treesitter config {{{
@@ -1347,7 +1398,3 @@ vim.api.nvim_set_keymap(
 --	 { noremap = true, silent = true }
 -- )
 
-vim.o.swapfile = false
-
-
--- lua vim.diagnostic.setqflist({open = tru, severity = { min = vim.diagnostic.severity.WARN } })

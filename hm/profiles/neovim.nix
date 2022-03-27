@@ -267,13 +267,18 @@ let
     vim-lion # Use with gl/L<text object><character to align to 
     vim-vsnip
     vim-vsnip-integ
-      {
+	{
       plugin = nvim-spectre;
     }
     {
       plugin = tokyonight-nvim;
     }
     # broken for now
+    {
+	  # prettier quickfix
+      # plugin = nvim-bqf;
+      plugin = nvim-pqf-git;
+    }
     {
       plugin = telescope-fzf-native-nvim;
     }

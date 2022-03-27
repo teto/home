@@ -2,7 +2,7 @@
 {
 
   services.opensnitch = {
-    enable = true;
+    enable = false;
   };
 }
 
