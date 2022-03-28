@@ -33,40 +33,9 @@ in
 
   # this is for gaming
   hardware.opengl.driSupport32Bit = true;
-  hardware.pulseaudio = {
-    enable = false; # replaced by pipewire
-    systemWide = false;
-    # daemon.config
-    support32Bit = true;
-  };
-
 
   # console.font = "Lat2-Terminus16";
   # console.keyMap = "fr";
-
-  # Select internationalisation properties.
-  # i18n = {
-  #    # defaultLocale = "fr_FR.UTF-8";
-  #    # until we can configure it in fcitx
-  #    defaultLocale = "en_US.UTF-8";
-  #    # can generate problems for wireshark with Qt versions
-  #    inputMethod = {
-  #      enabled = "fcitx5";
-  #      # enabled = null;
-  #      # enabled = "fcitx";
-  #      # i18n.inputMethod.package
-  #      fcitx.engines = with pkgs.fcitx-engines; [
-  #        mozc  # broken
-  #        table-other # for arabic
-  #        table-extra # for arabic
-  #        # hangul
-  #        m17n
-  #    ];
-  #    };
-
-  #    # see https://github.com/NixOS/nixpkgs/issues/22895
-  #    # consoleUseXkbConfig = "fr";
-  #};
 
    # inspired by https://gist.github.com/539h/8144b5cabf97b5b206da
    # todo find a good japanese font

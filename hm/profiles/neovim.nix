@@ -92,6 +92,7 @@ let
             tree-sitter-python
             tree-sitter-html  # for rest.nvim
             tree-sitter-norg
+            tree-sitter-org-nvim
             # tree-sitter-org
           ]
         ));

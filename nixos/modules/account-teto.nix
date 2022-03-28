@@ -8,7 +8,7 @@ in
      isNormalUser = true; # creates home/ sets default shell
      uid = 1000;
      extraGroups = [
-       "audio" # for pulseaudio
+       "audio" # for pulseaudio/pipewire
        "docker"   # to access docker socket
        "input"    # for libinput-gestures
        "libvirtd" # for nixops
@@ -18,7 +18,8 @@ in
        "plugdev" # for udiskie
        "jupyter"
        "video" # to control brightness
-       "realtime"  # for pipewire
+       "rtkit"  # for pipewire
+       "pipewire"  # for pipewire
        "wheel" # for sudo
        "vboxusers" # to avoid Kernel driver not accessible
        # "kvm" # don't think that's needed
@@ -30,7 +31,6 @@ in
 
 
      openssh.authorizedKeys.keyFiles = [
-       ../../perso/keys/iij_rsa.pub
        ../../perso/keys/id_rsa.pub
      ];
 
