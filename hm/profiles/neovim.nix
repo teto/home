@@ -104,12 +104,15 @@ let
     #   plugin = lightspeed-nvim;
     # }
     {
+      plugin = urlview-nvim;
+      type = "lua";
+	  config = ''
+		'';
+    }
+    {
       plugin = trouble-nvim;
       type = "lua";
     }
-
-
-
     {
       plugin = auto-git-diff;
     }

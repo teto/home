@@ -1015,7 +1015,11 @@ vim.lsp.handlers["textDocument/references"] = function(...)
   vim.cmd [[ wincmd p ]]
 end
 
-
+require("urlview").setup({
+  picker = "default", -- "default" (vim.ui.select), "telescope" (telescope.nvim)
+	title = "URLs: ", -- prompt title
+	debug = true, -- logs user errors
+})
 
 local has_bufferline, bufferline = pcall(require, "bufferline")
 if has_bufferline then

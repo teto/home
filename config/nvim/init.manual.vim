@@ -57,7 +57,7 @@ Plug 'kshenoy/vim-signature' " display marks in gutter, love it
 
 Plug 'tjdevries/colorbuddy.nvim' " required by some colorscheme
 
-Plug 'strboul/urlview.vim' " :Urlview to list urls and open them
+" Plug 'strboul/urlview.vim' " :Urlview to list urls and open them
 " Plug 'diepm/vim-rest-console' " test rest APIs * Hit the trigger key (<C-j> by default).
 " Plug '~/pdf-scribe.nvim'  " to annotate pdf files from nvim :PdfScribeInit
 

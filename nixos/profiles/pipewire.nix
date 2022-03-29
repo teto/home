@@ -10,7 +10,7 @@
 
   # Disable everything that causes pipewire to interact with alsa devices
   alsa.enable = false;
-  pulse.enable = false;
+  pulse.enable = true;
   jack.enable = false;
 
     # # one or the other
