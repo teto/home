@@ -275,11 +275,11 @@ let
       plugin = tokyonight-nvim;
     }
     # broken for now
-    {
-	  # prettier quickfix
-      # plugin = nvim-bqf;
-      plugin = nvim-pqf-git;
-    }
+    # {
+	  # # prettier quickfix
+    #   # plugin = nvim-bqf;
+    #   plugin = nvim-pqf-git;
+    # }
     {
       plugin = telescope-fzf-native-nvim;
     }
@@ -404,6 +404,8 @@ let
         require('orgmode').setup{
             org_agenda_files = {'~/nextcloud/org/*', '~/orgmode/**/*'},
             org_default_notes_file = '~/orgmode/refile.org',
+			-- TODO add templates
+			org_agenda_templates = `{ t = { description = 'Task', template = '* TODO %?\n  %u' } }`,
         }
         '';
       }

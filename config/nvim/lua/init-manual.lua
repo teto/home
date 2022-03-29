@@ -56,14 +56,14 @@ vim.opt.breakindent = true -- preserve or add indentation on wrap
 -- })
 -- my_image:transmit() -- send image data to terminal
 
-use {
-	"~/telescope-frecency.nvim",
-	config = function ()
-		nnoremap ( "n", "<Leader>f", function () require('telescope').extensions.frecency.frecency({
-			query = "toto"
-		}) end )
-	end
-	}
+-- use {
+-- 	"~/telescope-frecency.nvim",
+-- 	config = function ()
+-- 		nnoremap ( "n", "<Leader>f", function () require('telescope').extensions.frecency.frecency({
+-- 			query = "toto"
+-- 		}) end )
+-- 	end
+-- 	}
 
 -- use {
 --	"SmiteshP/nvim-gps",
@@ -596,7 +596,7 @@ use {
 	  ['<C-f>'] = cmp.mapping.scroll_docs(4),
 	  ['<C-Space>'] = cmp.mapping.complete(),
 	  ['<C-e>'] = cmp.mapping.close(),
-	  ['<CR>'] = cmp.mapping.confirm({ select = true }),
+	  -- ['<CR>'] = cmp.mapping.confirm({ select = true }),
 	},
 	sources = {
 	  -- { name = 'nvim_lsp' },
@@ -611,7 +611,8 @@ use {
 	  -- { name = 'ultisnips' },
 
 	  { name = 'buffer' },
-	  { name = 'neorg' },
+	  -- { name = 'neorg' },
+	  { name = 'orgmode' },
 	}
   })
 

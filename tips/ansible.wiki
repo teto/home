@@ -32,6 +32,7 @@ ansible-config
 
 ansible-vault i
 
+ansible-galaxy collection install -r requirements.yml
 
 ansible-playbook jinko-app.yml --start-at-task='run tests for Helm release'
 
