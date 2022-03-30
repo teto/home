@@ -104,6 +104,12 @@ let
     #   plugin = lightspeed-nvim;
     # }
     {
+      plugin = sniprun;
+      type = "lua";
+	  # config = ''
+		# '';
+    }
+    {
       plugin = urlview-nvim;
       type = "lua";
 	  config = ''
@@ -408,7 +414,7 @@ let
             org_agenda_files = {'~/nextcloud/org/*', '~/orgmode/**/*'},
             org_default_notes_file = '~/orgmode/refile.org',
 			-- TODO add templates
-			org_agenda_templates = `{ t = { description = 'Task', template = '* TODO %?\n  %u' } }`,
+			org_agenda_templates = { t = { description = 'Task', template = '* TODO %?\n  %u' } },
         }
         '';
       }

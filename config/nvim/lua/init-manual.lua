@@ -1402,4 +1402,3 @@ vim.api.nvim_set_keymap(
 --	 "<Cmd>lua require'stylish'.ui_menu(vim.fn.menu_get(''), {kind=menu, prompt = 'Main Menu', experimental_mouse = true}, function(res) print('### ' ..res) end)<CR>",
 --	 { noremap = true, silent = true }
 -- )
-
