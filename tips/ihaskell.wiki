@@ -1,5 +1,8 @@
 export GHC_ENVIRONMENT=bazel-bin/simwork/core/compile-package_env-core
 
+One can use several package databases in ihaskell
+https://github.com/IHaskell/IHaskell/pull/1280
+
 echo "test with $ ihaskell install --env-file=bazel-bin/simwork/core/compile-package_env-core'"
 
 (ins)❯ cabal run ihaskell -- kernel --env-file=$HOME/nova/jinko-dev/bazel-bin/simwork/core/compile-package_env-core
