@@ -326,6 +326,14 @@ let
     # }
   ];
 
+
+  colorschemePlugins = with pkgs.vimPlugins; [
+	{
+	  plugin = sonokai;
+	}
+	{ plugin = tokyonight-nvim; }
+  ];
+
   basePlugins = with pkgs.vimPlugins; [
     # Packer should remain first
     {
@@ -665,7 +673,11 @@ let
       # vimwiki
 
       # reuse once https://github.com/neovim/neovim/issues/9390 is fixed
-      # vimtex
+      vimtex
+      {
+        plugin = vimtex;
+		optional = true;
+	  }
       {
         plugin = unicode-vim;
         # let g:Unicode_data_directory = /home/user/data/
@@ -743,10 +755,12 @@ in
       yaml-language-server
     ];
 
-    plugins = basePlugins
+	plugins = 
+		 basePlugins
       ++ overlayPlugins
       ++ luaPlugins
-      ++ fennelPlugins
+      # ++ fennelPlugins
+      ++ colorschemePlugins
       ;
   };
 

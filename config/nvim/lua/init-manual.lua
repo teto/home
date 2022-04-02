@@ -210,7 +210,18 @@ use {
 	'jbyuki/venn.nvim'
 	}
 
+-- use {
 
+-- 	'rose-pine/neovim'
+-- }
+use({
+    'rose-pine/neovim',
+    as = 'rose-pine',
+    tag = 'v1.*',
+    config = function()
+        vim.cmd('colorscheme rose-pine')
+    end
+})
 use {
 	'protex/better-digraphs.nvim'
 }
@@ -753,7 +764,7 @@ use {
 -- use { 'jbyuki/nabla.nvim' } -- write latex equations in ASCII
 -- use { 'jbyuki/monolithic.nvim' } -- write latex equations in ASCII
 
-vim.cmd([[colorscheme sonokai]])
+-- vim.cmd([[colorscheme sonokai]])
 
 vim.g.indicator_errors = ''
 vim.g.indicator_warnings = ''

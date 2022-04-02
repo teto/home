@@ -245,11 +245,8 @@ Plug 'vim-scripts/Solarized'
 " Plug 'npxbr/gruvbox.nvim' " requires lush
 Plug 'romainl/flattened'
 Plug 'joshdick/onedark.vim'
-Plug 'rose-pine/neovim'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'dracula/vim'
-Plug 'sainnhe/sonokai'
-Plug 'folke/tokyonight.nvim'
 Plug 'marko-cerovac/material.nvim'
 " }}}
 
@@ -257,8 +254,6 @@ Plug 'marko-cerovac/material.nvim'
 Plug 'chrisbra/csv.vim'
 
 " Plug 'junegunn/rainbow_parentheses.vim' " the recommanded one
-Plug 'lervag/vimtex'
-
 " Plug 'gregsexton/gitv'
 " Plug 'jeffwilliams/basejump' " to alt+click on file:line and go to it
 Plug 'neovim/nvimdev.nvim' " thanks tweekmonster !
