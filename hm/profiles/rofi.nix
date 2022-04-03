@@ -1,16 +1,16 @@
 { config, pkgs, lib,  ... }:
-let
-  rofi-hoogle-src = pkgs.fetchFromGitHub {
-    owner = "rebeccaskinner";
-    repo = "rofi-hoogle";
-    rev = "27c273ff67add68578052a13f560a08c12fa5767";
-    sha256 = "09vx9bc8s53c575haalcqkdwy44ys1j8v9k2aaly7lndr19spp8f";
-  };
-  # TODO need hs-hoogle-overlay
-  rofi-hoogle = import "${rofi-hoogle-src}/rofi-hoogle-plugin/package.nix" { inherit pkgs; };
-  hs-hoogle-query = pkgs.haskellPackages.callPackage "${rofi-hoogle-src}/haskell" {};
+# let
+#   rofi-hoogle-src = pkgs.fetchFromGitHub {
+#     owner = "teto";
+#     repo = "rofi-hoogle";
+#     rev = "27c273ff67add68578052a13f560a08c12fa5767";
+#     sha256 = "09vx9bc8s53c575haalcqkdwy44ys1j8v9k2aaly7lndr19spp8f";
+#   };
+#   # TODO need hs-hoogle-overlay
+#   rofi-hoogle = import "${rofi-hoogle-src}/rofi-hoogle-plugin/package.nix" { inherit pkgs; };
+#   hs-hoogle-query = pkgs.haskellPackages.callPackage "${rofi-hoogle-src}/haskell" {};
 
-in
+# in
 {
   programs.rofi = {
     enable = true;
@@ -24,7 +24,7 @@ in
     plugins = with pkgs; [
       rofi-emoji
       rofi-calc
-      # rofi-hoogle # TODO see https://github.com/rebeccaskinner/rofi-hoogle/issues/3
+      rofi-hoogle # TODO see https://github.com/rebeccaskinner/rofi-hoogle/issues/3
     ];
     # pass.stores = [];
 

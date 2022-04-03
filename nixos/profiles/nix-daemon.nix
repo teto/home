@@ -16,15 +16,12 @@
       hls.to = { type = "github"; owner = "haskell"; repo="haskell-language-server"; };
       cachix.to = { type = "github"; owner = "cachix"; repo="cachix"; };
       ihaskell.to = { type = "github"; owner = "gibiansky"; repo="IHaskell"; };
-      jupyter.to = { type = "github"; owner = "teto";
-        repo="jupyterWith";
-      };
-        # /fix-jupyter-wip";
+      jupyter.to = { type = "github"; owner = "teto"; repo="jupyterWith"; };
 
-        # from = {
-          # id = "nova-nix";
-          # type = "indirect";
-        # };
+	  # from = {
+		# id = "nova-nix";
+		# type = "indirect";
+	  # };
 
       mptcp.to = { type = "github"; owner="teto"; repo = "mptcp-flake";};
 
@@ -44,7 +41,7 @@
       # };
 
       # added to nix.conf
-      #         experimental-features = nix-command flakes
+      # experimental-features = nix-command flakes
       extraOptions = ''
         keep-outputs = true       # Nice for developers
         keep-derivations = true   # Idem

@@ -8,6 +8,7 @@ in
     # Not tracked, so doesn't need to go in per-machine subdir
       ./profiles/desktop.nix
       # ./profiles/vdirsyncer.nix
+      ./profiles/polybar.nix
       ./profiles/sway.nix
       ./profiles/neomutt.nix
       # ./hm/profiles/nova-dev.nix

@@ -25,6 +25,7 @@
     };
     unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     mptcp-flake.url = "github:teto/mptcp-flake";
+    rofi-hoogle.url = "github:teto/rofi-hoogle/fixup";
 
     # TODO use mine instead
     hm = {
@@ -64,7 +65,7 @@
       pkgImport = pkgs:
         import pkgs {
           inherit system;
-          overlays = pkgs.lib.attrValues (self.overlays);
+          overlays = (pkgs.lib.attrValues self.overlays) ++ [ self.inputs.rofi-hoogle.overlay ];
           config = { allowUnfree = true; };
         };
 
