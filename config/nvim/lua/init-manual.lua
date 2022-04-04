@@ -219,7 +219,7 @@ use({
     as = 'rose-pine',
     tag = 'v1.*',
     config = function()
-        vim.cmd('colorscheme rose-pine')
+        -- vim.cmd('colorscheme rose-pine')
     end
 })
 use {

@@ -39,6 +39,7 @@
     purebred.url = "github:purebred-mua/purebred";
     poetry.url = "github:nix-community/poetry2nix";
     nix-update.url = "github:Mic92/nix-update";
+    i3pystatus = { url = "github:teto/i3pystatus/nix_backend"; flake = false; };
     nova.url = "git+ssh://git@git.novadiscovery.net/world/nova-nix.git?ref=master";
     neovim = {
       url = "github:neovim/neovim?dir=contrib";
@@ -263,6 +264,35 @@
       #   (self: prev: { });
 
       overlays = {
+
+		autoupdating = final: prev: {
+
+				  # TODO override extraLibs instead 
+		  i3pystatus-perso = (prev.i3pystatus.override({
+			extraLibs = with final.python3Packages; [ pytz notmuch dbus-python ];
+		  })).overrideAttrs (oldAttrs: {
+			name = "i3pystatus-dev";
+			# src = builtins.fetchGit {
+			#   url = https://github.com/teto/i3pystatus;
+			#   ref = "nix_backend";
+			# };
+
+			src = final.fetchFromGitHub {
+			  repo = "i3pystatus";
+			  owner = "teto";
+			  rev="2a3285aa827a9cbf5cd53eb12619e529576997e3";
+			  sha256 = "sha256-QSxfdsK9OkMEvpRsXn/3xncv3w/ePCGrC9S7wzg99mk=";
+			};
+		  });
+
+		# some-overlay.nix
+		  # i3pystatus-custom = pkgs.i3pystatus.override ({
+		  i3pystatus-custom = final.i3pystatus-perso.override ({
+			extraLibs = with final.python3Packages; [ pytz notmuch dbus-python ];
+		  });
+		};
+
+
         # nova = import ./nixpkgs/overlays/pkgs/default.nix;
         local = import ./nixpkgs/overlays/pkgs/default.nix;
         overrides = import ./nixpkgs/overlays/overrides.nix;
@@ -315,6 +345,8 @@
 
         # aws-lambda-rie = self.overlays.local.aws-lambda-rie ;
         aws-lambda-rie = nixpkgsFinal.callPackage ./pkgs/aws-lambda-runtime-interface-emulator {};
+
+		inherit (nixpkgsFinal) i3pystatus-custom;
       };
 
       # hmModules = [

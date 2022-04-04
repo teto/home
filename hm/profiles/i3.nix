@@ -1,33 +1,10 @@
 { config, pkgs, lib,  ... }:
 let
 
-  # TODO override extraLibs instead
-  i3pystatus-perso = (pkgs.i3pystatus.override({
-    extraLibs = with pkgs.python3Packages; [ pytz notmuch dbus-python ];
-  })).overrideAttrs (oldAttrs: {
-    name = "i3pystatus-dev";
-    # src = builtins.fetchGit {
-    #   url = https://github.com/teto/i3pystatus;
-    #   ref = "nix_backend";
-    # };
-
-     src = pkgs.fetchFromGitHub {
-       repo = "i3pystatus";
-       owner = "teto";
-       rev="2a3285aa827a9cbf5cd53eb12619e529576997e3";
-       sha256 = "sha256-QSxfdsK9OkMEvpRsXn/3xncv3w/ePCGrC9S7wzg99mk=";
-     };
-  });
 
   # key modifier
   mad="Mod4";
   mod="Mod1";
-
-# some-overlay.nix
-  # i3pystatus-custom = pkgs.i3pystatus.override ({
-  i3pystatus-custom = i3pystatus-perso.override ({
-    extraLibs = with pkgs.python3Packages; [ pytz notmuch dbus-python ];
-  });
 
   # or use {pkgs.kitty}/bin/kitty
   term = "${pkgs.kitty}/bin/kitty";
@@ -139,7 +116,7 @@ in
           workspaceButtons=true;
           workspaceNumbers=false;
           id="0";
-          statusCommand="${i3pystatus-custom}/bin/i3pystatus-python-interpreter $XDG_CONFIG_HOME/i3/myStatus.py";
+          statusCommand="${pkgs.i3pystatus-custom}/bin/i3pystatus-python-interpreter $XDG_CONFIG_HOME/i3/myStatus.py";
         }
       ];
       keycodebindings= { };
@@ -360,7 +337,7 @@ in
           workspaceNumbers=false;
           # id="0";
           command="${pkgs.waybar}/bin/waybar";
-          statusCommand="${i3pystatus-custom}/bin/i3pystatus-python-interpreter $XDG_CONFIG_HOME/i3/myStatus.py";
+          statusCommand="${pkgs.i3pystatus-custom}/bin/i3pystatus-python-interpreter $XDG_CONFIG_HOME/i3/myStatus.py";
           extraConfig = ''
             icon_theme Adwaita
           '';

@@ -632,6 +632,23 @@
         "type": "github"
       }
     },
+    "i3pystatus": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1649063751,
+        "narHash": "sha256-c6rt2Pq4LLYV1rSb4Rz/Vg510izx5sG/Zqv1sWM673A=",
+        "owner": "teto",
+        "repo": "i3pystatus",
+        "rev": "be7455c7eac15547118ec3149d8c49bed2ab0c68",
+        "type": "github"
+      },
+      "original": {
+        "owner": "teto",
+        "ref": "nix_backend",
+        "repo": "i3pystatus",
+        "type": "github"
+      }
+    },
     "idris": {
       "inputs": {
         "flake-utils": "flake-utils_10",
@@ -1650,6 +1667,7 @@
     "root": {
       "inputs": {
         "hm": "hm",
+        "i3pystatus": "i3pystatus",
         "mptcp-flake": "mptcp-flake",
         "neovim": "neovim",
         "neovim-overlay": "neovim-overlay",

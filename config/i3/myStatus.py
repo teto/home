@@ -8,6 +8,7 @@ from i3pystatus.mail import notmuchmail
 # from i3pystatus.mail import maildir
 #import keyring.backends.netrc as backend
 from i3pystatus import Status
+import os
 # from i3pystatus.updates import aptget
 
 # TODO conditionnal import
@@ -18,7 +19,7 @@ from i3pystatus import Status
 
 status = Status(
     standalone=True,
-    logfile="$HOME/i3pystatus.log",
+    logfile=os.getenv("XDG_CACHE_HOME", "$HOME/.cache") + "$HOME/i3pystatus.log",
     click_events=True,
     # internet_check=("github.com", 22)
 )
@@ -26,7 +27,6 @@ status = Status(
 my_term = "kitty"
 
 #status.register("text",
-
 
 # status.register("spotify")
 
@@ -184,7 +184,9 @@ res = status.register(
     hide_if_null=False,
     interval=3600,
     # on_clicks={'left', "urxvtc -e mutt"},
-    on_leftclick='urxvtc -e mutt',
+	# TODO run an update
+    on_leftclick='',
+    on_rightclick='kitty alot',
     log_level=logging.DEBUG
 )
 
@@ -201,6 +203,14 @@ res = status.register("github",
 
 # #print("result:", res)
 # # res.on_leftclick()
+def popup(msg):
+	DesktopNotification(
+		title="toto",
+		body=msg,
+		# icon=self.notification_icon,
+		urgency=1,
+		timeout=0,
+	).display()
 
 
 status.run()
