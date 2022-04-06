@@ -12,3 +12,4 @@ journalctl -u gitlab-runner
 
 
 sleep infinity
+CI_DEBUG_TRACE

@@ -45,6 +45,7 @@
       url = "github:neovim/neovim?dir=contrib";
       inputs.nixpkgs.follows = "nixpkgs-teto";
     };
+	sops-nix.url = "github:Mic92/sops-nix";
 
     # TODO extend vim plugins from this overlay
     neovim-overlay.url = "github:teto/neovim-nightly-overlay/vimPlugins-overlay";
@@ -66,7 +67,9 @@
       pkgImport = pkgs:
         import pkgs {
           inherit system;
-          overlays = (pkgs.lib.attrValues self.overlays) ++ [ self.inputs.rofi-hoogle.overlay ];
+		  overlays = (pkgs.lib.attrValues self.overlays) ++ [ 
+			self.inputs.rofi-hoogle.overlay
+		  ];
           config = { allowUnfree = true; };
         };
 
@@ -135,6 +138,7 @@
             modules = [
               hm.nixosModules.home-manager
               nova.nixosProfiles.dev
+			  self.inputs.sops-nix.nixosModules.sops
 
               ({ pkgs, ... }: {
                 nixpkgs.overlays = nixpkgs.lib.attrValues self.overlays;
@@ -200,6 +204,7 @@
             inherit system;
             pkgs = nixpkgsFinal;
             modules = [
+			  self.inputs.sops-nix.nixosModules.sops
               # often breaks
               # (import ./nixos/modules/hoogle.nix)
               ({ pkgs, ... }: {

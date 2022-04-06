@@ -87,6 +87,8 @@ Recent versions of GHC allow a dump of a stack trace (of all cost centres) when 
 import Debug.Trace
 traceShow / traceId
 
+# ghci 
+use `:script` to load redundant commands
 
 # Frames
 

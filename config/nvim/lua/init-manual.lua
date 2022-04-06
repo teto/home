@@ -764,7 +764,7 @@ use {
 -- use { 'jbyuki/nabla.nvim' } -- write latex equations in ASCII
 -- use { 'jbyuki/monolithic.nvim' } -- write latex equations in ASCII
 
--- vim.cmd([[colorscheme sonokai]])
+vim.cmd([[colorscheme sonokai]])
 
 vim.g.indicator_errors = ''
 vim.g.indicator_warnings = ''
@@ -1026,11 +1026,11 @@ vim.lsp.handlers["textDocument/references"] = function(...)
   vim.cmd [[ wincmd p ]]
 end
 
-require("urlview").setup({
-  picker = "default", -- "default" (vim.ui.select), "telescope" (telescope.nvim)
-	title = "URLs: ", -- prompt title
-	debug = true, -- logs user errors
-})
+-- require("urlview").setup({
+--   picker = "default", -- "default" (vim.ui.select), "telescope" (telescope.nvim)
+-- 	title = "URLs: ", -- prompt title
+-- 	debug = true, -- logs user errors
+-- })
 
 local has_bufferline, bufferline = pcall(require, "bufferline")
 if has_bufferline then

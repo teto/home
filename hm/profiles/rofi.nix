@@ -24,7 +24,7 @@
     plugins = with pkgs; [
       rofi-emoji
       rofi-calc
-      rofi-hoogle # TODO see https://github.com/rebeccaskinner/rofi-hoogle/issues/3
+      # rofi-hoogle # TODO see https://github.com/rebeccaskinner/rofi-hoogle/issues/3
     ];
     # pass.stores = [];
 
