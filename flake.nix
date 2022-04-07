@@ -345,6 +345,19 @@
       // nova.overlays
       ;
 
+	  devShells.${system} = {
+		# default devShell when working on this repo:
+		# - I need sops to edit my secrets
+		# - git-crypt 
+		default = nixpkgs.legacyPackages.${system}.mkShell {
+		  name = "dotfiles-shell";
+		  buildInputs = with nixpkgsFinal; [
+			sops
+			age
+		  ];
+		};
+	  };
+
       packages.${system} = {
         dce = nixpkgsFinal.callPackage ./pkgs/dce {};
 
