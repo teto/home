@@ -1,4 +1,4 @@
-﻿Les cluster names sont accessible
+Les cluster names sont accessible
 
 aws eks update-kubeconfig --name jinko-prod
 kubectl get -n [[XXXX]] ingress
@@ -13,7 +13,9 @@ KUBECONFIG=~/.kube/config:~/.kube/kubconfig2
 kubectl config view
 kubectl config get-contexts
 
-
+kubectl get secrets
+kubectl -n jinko-preprod describe secrets/jinko-core-env 
+kubectl get secret <SECRET_NAME> -o jsonpath="{.data.<DATA>}" | base64 --decode
 
 imagePullPolicy: Always
 sha256:f5e2cba84a0de9ed9148fb2ac72cd0af7ff2c351b8f0428d46c2d03417c8f78e

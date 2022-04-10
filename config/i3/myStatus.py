@@ -19,7 +19,7 @@ import os
 
 status = Status(
     standalone=True,
-    logfile=os.getenv("XDG_CACHE_HOME", "$HOME/.cache") + "$HOME/i3pystatus.log",
+    logfile=os.getenv("XDG_CACHE_HOME", "$HOME/.cache") + "/i3pystatus.log",
     click_events=True,
     # internet_check=("github.com", 22)
 )
