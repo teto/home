@@ -143,6 +143,7 @@
               ({ pkgs, ... }: {
                 nixpkgs.overlays = nixpkgs.lib.attrValues self.overlays;
                 imports = [
+			      ./nixos/profiles/sops.nix
                   ./nixos/hardware-dell-camera.nix
                   ./nixos/modules/distributedBuilds.nix
                   ./nixos/configuration-xps.nix
