@@ -140,10 +140,11 @@
               nova.nixosProfiles.dev
 			  self.inputs.sops-nix.nixosModules.sops
 
+  # imports = [ <sops-nix/modules/sops> ];
+
               ({ pkgs, ... }: {
                 nixpkgs.overlays = nixpkgs.lib.attrValues self.overlays;
                 imports = [
-			      ./nixos/profiles/sops.nix
                   ./nixos/hardware-dell-camera.nix
                   ./nixos/modules/distributedBuilds.nix
                   ./nixos/configuration-xps.nix
@@ -283,16 +284,15 @@
 			#   ref = "nix_backend";
 			# };
 
-			src = final.fetchFromGitHub {
-			  repo = "i3pystatus";
-			  owner = "teto";
-			  rev="2a3285aa827a9cbf5cd53eb12619e529576997e3";
-			  sha256 = "sha256-QSxfdsK9OkMEvpRsXn/3xncv3w/ePCGrC9S7wzg99mk=";
-			};
+			src = self.inputs.i3pystatus;
+			# src = final.fetchFromGitHub {
+			#   repo = "i3pystatus";
+			#   owner = "teto";
+			#   rev="2a3285aa827a9cbf5cd53eb12619e529576997e3";
+			#   sha256 = "sha256-QSxfdsK9OkMEvpRsXn/3xncv3w/ePCGrC9S7wzg99mk=";
+			# };
 		  });
 
-		# some-overlay.nix
-		  # i3pystatus-custom = pkgs.i3pystatus.override ({
 		  i3pystatus-custom = final.i3pystatus-perso.override ({
 			extraLibs = with final.python3Packages; [ pytz notmuch dbus-python ];
 		  });

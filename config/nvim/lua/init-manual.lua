@@ -776,8 +776,8 @@ vim.g.spinner_frames = {'⣾', '⣽', '⣻', '⢿', '⡿', '⣟', '⣯', '⣷'}
 
 vim.g.should_show_diagnostics_in_statusline = true
 
-vim.keymap.set ('n', "<Leader>o", function () vim.cmd("FzfFiles") end)
-vim.keymap.set ('n', "<Leader>g", function () vim.cmd("FzfGitFiles") end)
+vim.keymap.set ('n', "<Leader>g", function () vim.cmd("FzfFiles") end)
+vim.keymap.set ('n', "<Leader>o", function () vim.cmd("FzfGitFiles") end)
 vim.keymap.set ('n', "<Leader>F", function () vim.cmd("FzfFiletypes") end)
 vim.keymap.set ('n', "<Leader>h", function () vim.cmd("FzfHistory") end)
 vim.keymap.set ('n', "<Leader>t", function () require'telescope.builtin'.tags{} end )

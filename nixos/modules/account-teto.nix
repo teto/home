@@ -23,6 +23,8 @@ in
        "wheel" # for sudo
        "vboxusers" # to avoid Kernel driver not accessible
        # "kvm" # don't think that's needed
+	   # config.users.groups.keys.name
+	   "keys"
      ];
      # once can set initialHashedPassword too
      # initialPassword

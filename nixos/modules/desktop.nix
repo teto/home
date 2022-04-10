@@ -8,6 +8,7 @@ in
   imports = [
     ./config-all.nix
 
+	../profiles/sops.nix
     ./ntp.nix
     ./network-manager.nix
     ./wireshark.nix
@@ -161,7 +162,7 @@ in
 
   # programs.file-roller.enable = true;
 
-  programs.system-config-printer.enable = true; # broken
+  programs.system-config-printer.enable = false; # broken
 
   users.users.teto = {
     shell = pkgs.zsh;

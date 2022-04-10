@@ -125,6 +125,7 @@ let
     wally-cli  # to flash ergodox keyboards
     wireshark
     xarchiver # to unpack/pack files
+    # xbacklight # for usage with i3pystatus backight module
     xclip
     xcwd
     xdotool # needed for vimtex + zathura

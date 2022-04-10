@@ -4,8 +4,8 @@
 # $ cat /run/secrets/myservice/my_subdir/my_secret
 # password1
 # https://github.com/Mic92/sops-nix
+{ config, lib, pkgs,  ... }:
 {
-  imports = [ <sops-nix/modules/sops> ];
 
   # This will add secrets.yml to the nix store
   # You can avoid this by adding a string to the full path instead, i.e.
@@ -20,8 +20,20 @@
   # This will generate a new key if the key specified above does not exist
   sops.age.generateKey = false;
 
+  # By default secrets are owned by root:root. Furthermore the parent directory /run/secrets.d is only owned by root and the keys group has read access to it:
   # This is the actual specification of the secrets.
-  # sops.secrets.example-key = {};
+  sops.secrets."github_token" = {
+	mode = "400";
+	owner = config.users.users.teto.name;
+	group = config.users.users.teto.group;
+
+  };
+
+  # sops.secrets."nextcloud" = {
+	# mode = "400";
+	# owner = config.users.users.teto.name;
+	# group = config.users.users.teto.group;
+  # };
   # sops.secrets."myservice/my_subdir/my_secret" = {};
 
   # sops.secrets.example-secret.mode = "0440";

@@ -1,7 +1,7 @@
 { config, pkgs, lib,  ... }:
 {
   services.dunst = {
-    enable=true;
+    enable = true; # failed to produce output path for output 'out' at 
     settings = {
       global={
         markup="full";

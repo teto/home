@@ -254,7 +254,8 @@ programs.zsh = {
     # autosuggestion.enable = true;
     sessionVariables = {
       # HISTFILE="$XDG_CACHE_HOME/zsh_history";
-      GITHUB_TOKEN = secrets.githubToken;
+	  # TODO load this from sops instead
+      # GITHUB_TOKEN = secrets.githubToken;
     };
     history = {
         save = 1000000;

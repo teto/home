@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-# to refresh the bar
-#
+# to refresh the bar https://i3pystatus.readthedocs.io/en/latest/configuration.html#refreshing-the-bar
+# 
 # pkill -SIGUSR1 -f "python /home/user/.config/i3/pystatus.py"
 
 import logging
@@ -17,9 +17,11 @@ import os
 
 # from i3pystatus.core.netrc_backend import NetrcBackend
 
+cacheFolder = os.getenv("XDG_CACHE_HOME", "$HOME/.cache")
+
 status = Status(
     standalone=True,
-    logfile=os.getenv("XDG_CACHE_HOME", "$HOME/.cache") + "/i3pystatus.log",
+    logfile=cacheFolder + "/i3pystatus.log",
     click_events=True,
     # internet_check=("github.com", 22)
 )
@@ -27,8 +29,6 @@ status = Status(
 my_term = "kitty"
 
 #status.register("text",
-
-# status.register("spotify")
 
 status.register("nix-channels",
     channel="nixos-unstable"
@@ -173,11 +173,13 @@ res = status.register(
     "mail",
     backends=[
         # my notmuch config is in a non standard place => I have to setup db_path
-        notmuchmail.Notmuch(account="gmail",
-            # and in inbox/not spam
-            query="tag:unread",
-            db_path="/home/teto/maildir",
-            ),
+        notmuchmail.Notmuch(
+		  account="gmail",
+		  # and in inbox/not spam
+		  query="tag:unread",
+		  # TODO this should be read from mail.nix
+		  db_path="/home/teto/maildir",
+		),
         # # notmuchmail.Notmuch(account="gmail", query="tag:inbox and tag:unread"),
     # maildir.MaildirMail(directory="/home/teto/Maildir/gmail/INBOX"),
     ],
@@ -186,7 +188,7 @@ res = status.register(
     # on_clicks={'left', "urxvtc -e mutt"},
 	# TODO run an update
     on_leftclick='',
-    on_rightclick='kitty alot',
+    on_rightclick=f"kitty alot -l{cacheFolder}/alot-from-bar.log",
     log_level=logging.DEBUG
 )
 
