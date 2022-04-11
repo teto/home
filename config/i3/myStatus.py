@@ -187,10 +187,16 @@ res = status.register(
     interval=3600,
     # on_clicks={'left', "urxvtc -e mutt"},
 	# TODO run an update
-    on_leftclick='',
-    on_rightclick=f"kitty alot -l{cacheFolder}/alot-from-bar.log",
+    on_leftclick="kitty echo $PATH",
+    # on_rightclick=f"kitty 'alot -l/tmp/alot-from-bar.log'",
+    # sh -c 'alot; sleep 20'
+    on_rightclick=["kitty", "alot -l/tmp/alot-from-bar.log --config /home/teto/home/alot-config"],
+    # ; sleep 10",
     log_level=logging.DEBUG
 )
+
+def launch_alot():
+    subprocess.Popen(["kitty"])
 
 res = status.register("github",
         username="teto",
