@@ -131,7 +131,7 @@ let
     xdotool # needed for vimtex + zathura
     xorg.xbacklight  # todo should be set from module
     xorg.xev
-    zathura
+    # zathura # broken
   ]
   ++ lib.optionals all [
     gnome3.gnome-calculator  # compare with qalqulate-gtk

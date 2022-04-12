@@ -12,6 +12,8 @@ https://gist.github.com/edolstra/40da6e3a4d4ee8fd019395365e0772e7
 mount -o remount,rw /nix/store
 chown -R root:root /nix/store
 
+NIX_SSHOPTS to pass additional ssh flags to nix
+
 
 Limit bandwidth
  CURLOPT_MAX_RECV_SPEED_LARGE

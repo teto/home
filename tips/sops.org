@@ -1,0 +1,5 @@
+
+https://github.com/mozilla/sops#encrypting-using-age
+
+To use an alternate key:
+- SOPS_AGE_KEY_FILE=runner3
