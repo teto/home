@@ -7,7 +7,7 @@ import logging
 from i3pystatus.mail import notmuchmail
 # from i3pystatus.mail import maildir
 #import keyring.backends.netrc as backend
-from i3pystatus import Status
+from i3pystatus import Status, get_module
 import os
 # from i3pystatus.updates import aptget
 
@@ -195,8 +195,10 @@ res = status.register(
     log_level=logging.DEBUG
 )
 
+
+@get_module
 def launch_alot():
-    subprocess.Popen(["kitty"])
+    subprocess.Popen(["kitty", alot])
 
 res = status.register("github",
         username="teto",

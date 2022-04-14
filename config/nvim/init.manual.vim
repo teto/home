@@ -50,12 +50,10 @@ Plug 'seandewar/nvimesweeper' " not packaged
 " recommanded branch faster
 
 " Plug 'jubnzv/virtual-types.nvim' " moved to nix
-" Plug 'andymass/vim-matchup' " to improve % , buggy ?
 " Plug 'eugen0329/vim-esearch' " search & replace
 Plug '~/neovim/neovim-ui'
 Plug 'kshenoy/vim-signature' " display marks in gutter, love it
 
-Plug 'tjdevries/colorbuddy.nvim' " required by some colorscheme
 
 " Plug 'strboul/urlview.vim' " :Urlview to list urls and open them
 " Plug 'diepm/vim-rest-console' " test rest APIs * Hit the trigger key (<C-j> by default).
@@ -88,7 +86,7 @@ Plug 'chrisbra/vim-diff-enhanced' "
 " Plug 'vim-pandoc/vim-pandoc'
 " Plug 'vim-pandoc/vim-pandoc-syntax'
 " Plug 'shime/vim-livedown'  " :LivedownPreview
-Plug 'conornewton/vim-pandoc-markdown-preview' " :StartMdPreview / StopMd
+" Plug 'conornewton/vim-pandoc-markdown-preview' " :StartMdPreview / StopMd
 
 " around vcs {{{
 Plug 'tpope/vim-fugitive' 
@@ -100,16 +98,15 @@ Plug 'rhysd/git-messenger.vim' " to show git message :GitMessenger
 " }}}
 
 " filetype related {{{
-Plug 'neomutt/neomutt.vim' " syntax file for neomutt
-Plug 'vim-scripts/rfc-syntax', { 'for': 'rfc' } " optional syntax highlighting for RFC files
+" Plug 'vim-scripts/rfc-syntax', { 'for': 'rfc' } " optional syntax highlighting for RFC files
 " Plug 'vim-scripts/coq-syntax', {'for': 'coq'}
 "}}}
 " Plug 'mcchrish/info-window.nvim'  " :InfoWindowToggle to display buffer information in a popup
 " Plug 'tweekmonster/nvim-api-viewer', {'on': 'NvimAPI'} " see nvim api
 Plug 'tweekmonster/startuptime.vim', {'on': 'StartupTime'} " see startup time per script
-Plug 'Konfekt/vim-CtrlXA' " use ctrl a/xto cycle between different words
+" Plug 'Konfekt/vim-CtrlXA' " use ctrl a/xto cycle between different words
 " Plug 'editorconfig/editorconfig-vim' " not remote but involves python
-Plug 'neomake/neomake' " just for nix and neovim dev with nvimdev ?
+" Plug 'neomake/neomake' " just for nix and neovim dev with nvimdev ?
 " provider
 " needs ruby support, works in recent neovim
 " Plug 'junegunn/vim-github-dashboard', { 'do': ':UpdateRemotePlugins' }
@@ -122,7 +119,6 @@ Plug 'neomake/neomake' " just for nix and neovim dev with nvimdev ?
 Plug 'dbakker/vim-projectroot' " projectroot#guess()
 " Plug 'sunaku/vim-dasht' " get documentation (zeavim is also a contender KabbAmine/zeavim.vim)
 " Plug 'ludovicchabant/vim-gutentags' " automatic tag generation, very good
-Plug 'junegunn/goyo.vim', {'on': 'Goyo'} "distraction free writing focus
 Plug 'junegunn/limelight.vim' " focus writing :Limelight, works with goyo
 Plug 'calvinchengx/vim-aftercolors' " load after/colors
 " leader
@@ -198,13 +194,14 @@ Plug 'PotatoesMaster/i3-vim-syntax'
 " Plug 'justinmk/vim-ipmotion' " ?
 " }}}
 
-Plug 'dylanaraps/wal.vim' " to update colors (available in nix via wal-vim)
-Plug 'dietsche/vim-lastplace' " restore last cursor postion (is it still needed ?)
+" TODO replace with pywals-nvim
+" Plug 'dylanaraps/wal.vim' " to update colors (available in nix via wal-vim)
+" Plug 'dietsche/vim-lastplace' " restore last cursor postion (is it still needed ?)
 " Plug 'hrsh7th/vim-vsnip' " vscode/lsp snippet format
 " Plug 'hrsh7th/vim-vsnip-integ'
 
 Plug 'justinmk/vim-gtfo' " gfo to open filemanager in cwd
-Plug 'wannesm/wmgraphviz.vim', {'for': 'dot'} " graphviz syntax highlighting
+" Plug 'wannesm/wmgraphviz.vim', {'for': 'dot'} " graphviz syntax highlighting
 Plug 'teto/vim-listchars' " to cycle between different list/listchars configurations
 Plug 'tpope/vim-rhubarb' " github support in fugitive, use |i_CTRL-X_CTRL-O|
 " Plug 'vhakulinen/gnvim-lsp' " load it only for gnvim
@@ -215,7 +212,7 @@ Plug 'tpope/vim-rhubarb' " github support in fugitive, use |i_CTRL-X_CTRL-O|
 " Plug 'Rykka/InstantRst', {'for': 'rst'} " rst live preview with :InstantRst,
 " Plug 'dhruvasagar/vim-table-mode', {'for': 'txt'}
 
-Plug 'nacitar/a.vim' " :A
+" Plug 'nacitar/a.vim' " :A
 " Plug 'mhinz/vim-rfc', { 'on': 'RFC' } " requires nokigiri gem
 " careful maps F4 by default
 Plug 'teto/Modeliner' " <leader>ml to setup buffer modeline
@@ -230,23 +227,18 @@ Plug 'teto/Modeliner' " <leader>ml to setup buffer modeline
 
 " does not work seems to be better ones
 " Plug 'vasconcelloslf/vim-interestingwords' " highlight the words you choose <leader>k (does not work in neovim)
-Plug 't9md/vim-quickhl' " hl manually selected words :h QuickhlManualEnable
+" Plug 't9md/vim-quickhl' " hl manually selected words :h QuickhlManualEnable
 
 " colorschemes {{{
 Plug 'Matsuuu/pinkmare'
 Plug 'flrnd/candid.vim'
 Plug 'adlawson/vim-sorcerer'
 Plug 'whatyouhide/vim-gotham'
-Plug 'sickill/vim-monokai'
-Plug 'justinmk/molokai'
-Plug 'mhinz/vim-janah'
 Plug 'vim-scripts/Solarized'
 " Plug 'gruvbox-community/gruvbox' *
 " Plug 'npxbr/gruvbox.nvim' " requires lush
 Plug 'romainl/flattened'
-Plug 'joshdick/onedark.vim'
 Plug 'NLKNguyen/papercolor-theme'
-Plug 'dracula/vim'
 Plug 'marko-cerovac/material.nvim'
 " }}}
 

@@ -104,6 +104,13 @@ let
     #   plugin = lightspeed-nvim;
     # }
     {
+      # required by some colorscheme
+      plugin = colorbuddy-nvim;
+      type = "lua";
+	  # config = ''
+		# '';
+    }
+    {
       plugin = sniprun;
       type = "lua";
 	  # config = ''
@@ -319,6 +326,8 @@ let
     {
       plugin = telescope-frecency-nvim;
     }
+	{ plugin = nvimdev-nvim; }
+	{ plugin = neomake; }
     # {
     #   plugin = neogit;
     #   config = ''
@@ -333,10 +342,18 @@ let
 	  plugin = sonokai;
 	}
 	{ plugin = tokyonight-nvim; }
+	{ plugin = molokai; }
+	{ plugin = onedark-nvim; }
+	{ plugin = dracula-vim; }
+    # monkai-pro
+	{ plugin = vim-monokai; }
+	{ plugin = vim-janah; }
   ];
 
   basePlugins = with pkgs.vimPlugins; [
     # Packer should remain first
+	{ plugin = vim-lastplace; }
+	{ plugin = wmgraphviz-vim; }
     {
       plugin = packer-nvim;
       type = "lua";
@@ -602,6 +619,8 @@ let
       }
       # ctrl-e causes an issue with telescope prompt
       vim-rsi
+      # ' " syntax file for neomutt
+      neomutt-vim
       {
         plugin = vim-sayonara;
         config = ''
