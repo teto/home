@@ -620,7 +620,7 @@ let
       # ctrl-e causes an issue with telescope prompt
       vim-rsi
       # ' " syntax file for neomutt
-      neomutt-vim
+      # neomutt-vim
       {
         plugin = vim-sayonara;
         config = ''
