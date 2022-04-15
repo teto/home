@@ -309,6 +309,8 @@
         python = import ./nixpkgs/overlays/python.nix;
         # wayland = self.inputs.nixpkgs-wayland.overlay;
         mptcp = self.inputs.mptcp-flake.overlay;
+				# haskell environment for ghc9
+
         # vimPlugins = final: prev: {
         #   myVimPlugins = prev.vimPlugins.extend (
         #     final: prev: {
@@ -357,6 +359,8 @@
 			age
 		  ];
 		};
+		
+		inherit (nixpkgs) nhs9;
 	  };
 
       packages.${system} = {

@@ -3,11 +3,12 @@
 
 
   home.packages = with pkgs; [
-    dasht
-    visidata
-    gitAndTools.pass-git-helper
+    eva # calculette in a REPL
+    dasht  # ~ zeal but in terminal
+    visidata # "vd", spreadsheet in terminal
+    gitAndTools.pass-git-helper # to register docker password in terminal
     graphviz
-    gitlab-runner
+    # gitlab-runner
   ];
 
   programs.direnv = {

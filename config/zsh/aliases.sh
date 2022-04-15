@@ -24,7 +24,7 @@ alias bn='if [ -z ${BW_SESSION} ]; then export BW_SESSION=$(bw unlock --raw); fi
 # github:nixos/nixpkgs/ff9efb0724de5ae0f9db9df2debefced7eb1571d
 alias hsenv='nix shell nixpkgs#ghc nixpkgs#haskell.packages.ghc8107.cabal-install nixpkgs#pkg-config nixpkgs#haskell-language-server'
 alias nhs=hsenv
-alias nhs9='nix shell nixpkgs#haskell.compiler.ghc922 nixpkgs#haskell.packages.ghc922.cabal-install nixpkgs#pkg-config hls#haskell-language-server-921 --no-write-lock-file'
+alias nhs9='nix shell nixpkgs#haskell.compiler.ghc922 nixpkgs#haskell.packages.ghc922.cabal-install nixpkgs#pkg-config hls#haskell-language-server-922 --no-write-lock-file'
 
 # fzf-diff (https://medium.com/@GroundControl/better-git-diffs-with-fzf-89083739a9cb)
 function fzd {

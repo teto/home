@@ -1,5 +1,17 @@
 final: prev:
 {
+  nhs9 = final.mkShell { 
+    buildInputs = let 
+      pkgs = final.pks;
+      ghcEnv = pkgs.haskell.packages.ghc922.withPackages(hs: [ 
+        hs.haskell-language-server 
+        hs.cabal-install
+      ]);
+    in [
+      pkgs.pkg-config
+    ];
+  };
+
   # haskell = prev.haskell // {
 
   #   # to work around a stack bug (stack ghc is hardcoded)
