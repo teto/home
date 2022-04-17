@@ -9,7 +9,7 @@
 # see https://nixos.wiki/wiki/Linux_Kernel for xconfig example
 
 alias nvim-dev="nix develop --override-input nixpkgs /home/teto/nixpkgs --no-write-lock-file ./contrib#neovim-developer  --show-trace"
-alias notif-center="kill -s USR1 $(pidof deadd-notification-center)"
+# alias notif-center='kill -s USR1 $(pidof deadd-notification-center)'
 # --option extra-sandbox-paths "/bin/sh=$(readlink -f $(which bash))"
 alias local-rebuild="sudo nixos-rebuild --flake ~/home --override-input nixpkgs-teto /home/teto/nixpkgs --override-input hm /home/teto/hm --override-input nova /home/teto/nova/nova-nix --override-input mptcp-flake /home/teto/mptcp/mptcp-flake --no-write-lock-file switch --show-trace"
 # TODO
@@ -23,8 +23,8 @@ alias bn='if [ -z ${BW_SESSION} ]; then export BW_SESSION=$(bw unlock --raw); fi
 # -f channel:nixos-unstable'
 # github:nixos/nixpkgs/ff9efb0724de5ae0f9db9df2debefced7eb1571d
 alias hsenv='nix shell nixpkgs#ghc nixpkgs#haskell.packages.ghc8107.cabal-install nixpkgs#pkg-config nixpkgs#haskell-language-server'
-alias nhs=hsenv
-alias nhs9='nix shell nixpkgs#haskell.compiler.ghc922 nixpkgs#haskell.packages.ghc922.cabal-install nixpkgs#pkg-config hls#haskell-language-server-922 --no-write-lock-file'
+# alias nhs=hsenv
+# alias nhs9='nix shell nixpkgs#haskell.compiler.ghc922 nixpkgs#haskell.packages.ghc922.cabal-install nixpkgs#pkg-config hls#haskell-language-server-922 --no-write-lock-file'
 
 # fzf-diff (https://medium.com/@GroundControl/better-git-diffs-with-fzf-89083739a9cb)
 function fzd {
@@ -47,6 +47,8 @@ function nvimdev {
 # git aliases
 alias gap="git add -p";
 
+# rename mptcp ?
+alias mp="mptcpanalyzer"
 
 # nix aliases {{{
 
@@ -54,8 +56,6 @@ alias gap="git add -p";
 alias nixos-fast="nixos-rebuild  --no-build-nix --fast"
 
 
-# rename mptcp ?
-alias mp="mptcpanalyzer"
 
 # autres players a tester eventuellement
 # alias n="ncmpcpp"
@@ -65,7 +65,6 @@ alias ns="nix-shell"
 # alias ff="find . -iname" # use fd instead
 alias latest="ls -lt $@ |head"
 
-alias :q="exit"
 #}}}
 
 alias servethis="nix run nixpkgs#python3 --command \'python -c 'import SimpleHTTPServer; SimpleHTTPServer.test()'\""
@@ -84,7 +83,7 @@ alias llt="ls -ltr"
 # alias c="cat"
 # alias v="nvim"
 #alias n="nvim"
-alias m="mutt -F \"\$XDG_CONFIG_HOME/mutt/muttrc\""
+alias m="neomutt -F \"\$XDG_CONFIG_HOME/mutt/muttrc\""
 # view uses vim as a pager
 alias l="nvim +view"
 alias s="sxiv"

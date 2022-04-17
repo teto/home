@@ -2,6 +2,7 @@
 {
   programs.zsh = {
       enable = true;
+	  # $HOME is prepend hence the issues
       dotDir = ".config/zsh";
       # autosuggestion.enable = true;
       sessionVariables = {
@@ -10,15 +11,19 @@
         # GITHUB_TOKEN = secrets.githubToken;
       };
       history = {
-          save = 1000000;
-          ignoreDups = true;
-          # defined as HISTFILE="$HOME/${cfg.history.path}"
-          # https://github.com/nsnam/bake-git
-          # TODO fix
-          path = "${config.xdg.cacheHome}/zsh_history";
-          share = true;
-          extended = true; # save timestamp
+		# HISTSIZE
+		# loaded in memory, careful since it slows down zsh
+		size = 1000;
+		save = 1000000;
+		ignoreDups = true;
+		# defined as HISTFILE="$HOME/${cfg.history.path}"
+		# https://github.com/nsnam/bake-git
+		# TODO fix
+		path = "${config.xdg.cacheHome}/zsh_history";
+		share = true;
+		extended = true; # save timestamp
       };
+
       shellAliases = {
       } // config.programs.bash.shellAliases;
 
@@ -84,6 +89,21 @@
         fpath+=( $ZDOTDIR/completions )
       '';
 
+	  # to disable loading of /etc/z* files
+	  # envExtra = '' 
+		# setopt no_global_rcs
+	  # '';
+      # kernel aliases {{{
+        # nix messes up the escaping I think
+        # kernel_makeconfig=''
+        #   nix-shell -E 'with import <nixpkgs> {}; mptcp-manual.overrideAttrs (o: {nativeBuildInputs=o.nativeBuildInputs ++ [ pkgconfig ncurses ];})' --command "make menuconfig KCONFIG_CONFIG=$PWD/build/.config"
+        #   '';
+  # kernel_xconfig=''
+    # nix-shell -E 'with import <nixpkgs> {}; linux.overrideAttrs (o: {nativeBuildInputs=o.nativeBuildInputs ++ [ pkgconfig qt5.qtbase ];})' --command 'make menuconfig KCONFIG_CONFIG=$PWD/build/.config'
+  # '';
+  # kernel_xconfig="make xconfig KCONFIG_CONFIG=build/.config"
+  # }}}
+
       # custom module
       enableFancyCursor = true;
       enableSetTermTitle = true;
@@ -105,8 +125,15 @@
     historyFile = "${config.xdg.cacheHome}/bash_history";
     # historyFile = "$XDG_CACHE_HOME/bash_history";
     shellAliases = {
+      # ".."="cd ..";
+      # "..."="cd ../..";
+
+        v="nvim";
+        c="cat";
+        r="ranger";
+
       n="nix develop";
-      nhs="nix shell ${toString ../../..}#nhs";
+      nhs="nix shell /home/teto/home#nhs9";
       ns="nix-shell";
       lg="lazygit";
       #mostly for testin

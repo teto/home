@@ -22,3 +22,11 @@ To limit memory consumption:
 systemd-run --user -p MemoryLimit=3G google-chrome
 
 ō
+
+systemctl list-timers
+
+
+One can use systemd-run to create transient .timer units. That is, one can set a command to run at a specified time without having a service file. For example the following command touches a file after 30 seconds:
+
+# systemd-run --on-active=30 /bin/touch /tmp/foo
+

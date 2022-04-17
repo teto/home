@@ -84,6 +84,7 @@ let
 
     mbsync = mbsyncConfig // {
       remove = "both";
+	  sync = true;
     };
 
     # folders.sent = "[Gmail]/Sent Mail";
@@ -119,6 +120,7 @@ let
       extraConfig.account = {
         AuthMechs = "LOGIN";
       };
+	  sync = false;
     };
     msmtp.enable = true;
     notmuch = {
@@ -312,10 +314,13 @@ in
     };
 
     services.mbsync = {
-      enable = false;  # disabled because it kept asking for my password
-    verbose = true;  # to help debug problems in journalctl
-    frequency =  "*:0/5";
-  };
+	  enable = true;  # disabled because it kept asking for my password
+	  verbose = true;  # to help debug problems in journalctl
+	  frequency =  "*:0/5";
+	  postExec = ''
+		notmuch new
+	  '';
+	};
 
 
   # programs.muchsync = { };

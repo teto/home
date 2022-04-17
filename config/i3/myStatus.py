@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+#  vim: set noet fdm=manual fenc=utf-8 ff=unix sts=2 sw=2 ts=4 : 
 # to refresh the bar https://i3pystatus.readthedocs.io/en/latest/configuration.html#refreshing-the-bar
 # 
 # pkill -SIGUSR1 -f "python /home/user/.config/i3/pystatus.py"
@@ -9,6 +9,7 @@ from i3pystatus.mail import notmuchmail
 #import keyring.backends.netrc as backend
 from i3pystatus import Status, get_module
 import os
+import subprocess
 # from i3pystatus.updates import aptget
 
 # TODO conditionnal import
@@ -169,6 +170,12 @@ dpms = status.register("dpms", format="")
 
 # status.register("scratchpad",)
 
+@get_module
+def launch_alot(mod):
+    cmd = ["kitty", "alot", "-l/tmp/alot-from-bar.log",  "--config",  "/home/teto/home/alot-config"]
+    res = subprocess.Popen(cmd)
+
+
 res = status.register(
     "mail",
     backends=[
@@ -190,15 +197,11 @@ res = status.register(
     on_leftclick="kitty echo $PATH",
     # on_rightclick=f"kitty 'alot -l/tmp/alot-from-bar.log'",
     # sh -c 'alot; sleep 20'
-    on_rightclick=["kitty", "alot -l/tmp/alot-from-bar.log --config /home/teto/home/alot-config"],
+    on_rightclick=launch_alot,
     # ; sleep 10",
     log_level=logging.DEBUG
 )
 
-
-@get_module
-def launch_alot():
-    subprocess.Popen(["kitty", alot])
 
 res = status.register("github",
         username="teto",

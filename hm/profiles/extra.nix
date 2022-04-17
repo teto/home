@@ -1,8 +1,6 @@
 # could be called home-huge.nix
 { config, lib, pkgs,  ... }:
 {
-  programs.pywal.enable = true;
-
   services.opensnitch-ui.enable = true;
 
   home.packages = with pkgs; [

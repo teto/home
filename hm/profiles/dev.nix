@@ -8,11 +8,13 @@
     visidata # "vd", spreadsheet in terminal
     gitAndTools.pass-git-helper # to register docker password in terminal
     graphviz
+	flamegraph
+	linuxPackages.perf
     # gitlab-runner
   ];
 
   programs.direnv = {
-    enable = true;
+    enable = false;
 
     enableZshIntegration = true;
     nix-direnv.enable = true;

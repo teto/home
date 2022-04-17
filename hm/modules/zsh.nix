@@ -46,8 +46,14 @@ in {
   config = mkIf cfg.enable (mkMerge [
     (mkIf cfg.enableProfiling {
 
-      programs.zsh.initExtraFirst = lib.mkBefore "zmodload zsh/zprof";
-      programs.zsh.initExtra = lib.mkAfter "zprof";
+      # programs.zsh.initExtraFirst = lib.mkBefore "zmodload zsh/zprof";
+      # programs.zsh.initExtra = lib.mkAfter "zprof";
+
+	  home.file.".config/zsh/.zshrc".text = mkMerge [
+		(lib.mkBefore "zmodload zsh/zprof")
+		(lib.mkAfter "zprof")
+	  ];
+	  # home.file.".config/zsh/.zshrc".text = 
     })
 
     (mkIf cfg.enableFancyCtrlZ {

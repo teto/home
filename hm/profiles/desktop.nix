@@ -229,7 +229,7 @@ in
 
   # might trigger nm-applet crash ?
   services.gpg-agent = {
-    enable = true;
+    enable = false; # to check if that's what slows down zsh startup
     defaultCacheTtl = 1800;
     enableSshSupport = true;
     # grabKeyboardAndMouse= false;

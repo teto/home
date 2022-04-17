@@ -110,7 +110,7 @@ rec {
   };
 
   programs.autojump = {
-    enable = true;
+    enable = false;
     enableZshIntegration = true;
     enableBashIntegration = true;
   };

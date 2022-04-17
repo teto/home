@@ -5,9 +5,7 @@
 # true if file exists, aka if we are on nixos
 # test ! -f /etc/NIXOS
 # ON_NIXOS=$?
-
-# for VTE-based terminals. In termite Ctrl + Shift + t opens terminal in cwd
-# source /etc/profile.d/vte.sh
+prompt off
 
 function rfw(){
     readlink -f $(which "$1")
@@ -79,8 +77,8 @@ unsetopt menu_complete # do not autoselect the first completion entry
 # Scripts and Functions
 #setopt multios # perform implicit tees or cats when multiple redirections are attempted
 # SMART URLS
-autoload -U url-quote-magic
-zle -N self-insert url-quote-magic
+# autoload -U url-quote-magic
+# zle -N self-insert url-quote-magic
 
 #}}}
 # Bindings ZLE commands {{{1
@@ -263,16 +261,16 @@ SPROMPT="Correct $fg[red]%R$reset_color to $fg[green]%r$reset_color [(y)es (n)o 
 # mydir=${0:a:h}
 current_folder="${0:a:h}"
 echo "current-folder: $current_folder"
-source "${current_folder}/../fzf-gems/fzf_git_functions.sh"
-source "${current_folder}/../fzf-gems/fzf_git_keybindings.zsh"
+# source "${current_folder}/../fzf-gems/fzf_git_functions.sh"
+# source "${current_folder}/../fzf-gems/fzf_git_keybindings.zsh"
 # echo $PWD
 
 # TODO pass a path that is versioned in home
 teatimer() {
-         sleep $1;
-	 mpv $HOME/home/data/audio/notif1.wav
-	 notify-send '!! Coffee Time - wake up !!';
-         exit
+    sleep $1;
+    mpv $HOME/home/data/audio/notif1.wav
+    notify-send '!! Coffee Time - wake up !!';
+    exit
 }
 
 # fzf config{{{
@@ -307,9 +305,9 @@ _fzf_compgen_dir() {
 #   unfunction kitty-integration
 # fi
 
-function set_term_title (){
-  # -n Do not add a newline to the output.
-  # print -Pn "\e]0;$(echo "$1")\a"
-  print -n "\e]0;$1\a"
-}
+# function set_term_title (){
+#   # -n Do not add a newline to the output.
+#   # print -Pn "\e]0;$(echo "$1")\a"
+#   print -n "\e]0;$1\a"
+# }
 

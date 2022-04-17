@@ -56,8 +56,6 @@ rec {
      htop
 
      # ipsecTools # does it provide ipsec ?
-     # pkgconfig
-     # pstree
 
      # for fuser, useful when can't umount a directory
      # https://unix.stackexchange.com/questions/107885/busy-device-on-umount
@@ -73,16 +71,6 @@ rec {
      wget
   ]);
 
-      # kernel aliases {{{
-        # nix messes up the escaping I think
-        # kernel_makeconfig=''
-        #   nix-shell -E 'with import <nixpkgs> {}; mptcp-manual.overrideAttrs (o: {nativeBuildInputs=o.nativeBuildInputs ++ [ pkgconfig ncurses ];})' --command "make menuconfig KCONFIG_CONFIG=$PWD/build/.config"
-        #   '';
-  # kernel_xconfig=''
-    # nix-shell -E 'with import <nixpkgs> {}; linux.overrideAttrs (o: {nativeBuildInputs=o.nativeBuildInputs ++ [ pkgconfig qt5.qtbase ];})' --command 'make menuconfig KCONFIG_CONFIG=$PWD/build/.config'
-  # '';
-  # kernel_xconfig="make xconfig KCONFIG_CONFIG=build/.config"
-  # }}}
    # TODO it appears in /etc/bashrc !
    environment.shellAliases = {
       nix-stray-roots=''nix-store --gc --print-roots | egrep -v "^(/nix/var|/run/\w+-system|\{memory)"'';
@@ -135,14 +123,20 @@ rec {
     enable= true;
     zsh-autoenv.enable = false;
     enableCompletion = true;
+    enableGlobalCompInit = false;
     # enableAutosuggestions = true;
-    # autosuggestions.enable = false;
+    autosuggestions = {
+      enable = false;
+      # highlightStyle = ""
+    };
+    # promptInit
+    # vteIntegration = false;
     syntaxHighlighting.enable = false;
     shellAliases= environment.shellAliases // {
     };
     # goes to /etc/zshenv
-  shellInit = ''
-    '';
+    # shellInit = ''
+    # '';
 
   # todo make available for zsh too
   # use FZF_PATH="$(fzf-share)" to do it dynamically
@@ -156,29 +150,21 @@ rec {
   #   bindkey "^B"      backward-char                        # ctrl-b
   # bindkey -e
   # bindkey -v   # Default to standard vi bindings, regardless of editor string
-  interactiveShellInit = ''
-  #   # To see the key combo you want to use just do:
-  #   # Don't try to bind CTRL Q / CTRL S !!
-  #   # cat > /dev/null
-  #   # And press it
-
-
-  '';
-
-  #   zle -N edit-command-line
-
-  #   # Press ESC-v to edit current line in your favorite $editor
-  #   bindkey -M vicmd v edit-command-line
-  #   # bindkey '^V' edit-command-line
-  #   bindkey -r "^G" # was bound to list-expand I don't know where/why
-  #   # bindkey '^G' push-line-or-edit
-  #   # TODO doesn't work because it s overriden afterwards apparently
-  #   # home-manager should have this ?
-  #   # . "${fzf}/share/fzf/completion.zsh"
-  #   # . "${fzf}/share/fzf/key-bindings.zsh"
+  # interactiveShellInit = ''
+  # #   # To see the key combo you want to use just do:
+  # #   # Don't try to bind CTRL Q / CTRL S !!
+  # #   # cat > /dev/null
+  # #   # And press it
 
 
 };
+
+
+  # environment.etc.zshrc.text = lib.mkMerge [
+		# (lib.mkBefore "zmodload zsh/zprof")
+		# (lib.mkAfter "zprof")
+  #   ];
+
 
   # for nix-shell
   programs.bash = {
