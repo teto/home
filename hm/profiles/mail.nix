@@ -60,7 +60,7 @@ let
   getPassword = accountName:
     let
       script = pkgs.writeShellScriptBin "pass-show" ''
-      ${pkgs.pass}/bin/pass show "$@" | head -n 1
+      ${pkgs.pass}/bin/pass show "$@" | ${pkgs.coreutils}/bin/head -n 1
     '';
     in
       "${script}/bin/pass-show ${accountName}";
@@ -317,11 +317,16 @@ in
 	  enable = true;  # disabled because it kept asking for my password
 	  verbose = true;  # to help debug problems in journalctl
 	  frequency =  "*:0/5";
-	  postExec = ''
-		notmuch new
-	  '';
+	  # TODO add a echo for the log
+	  postExec = "${pkgs.notmuch}/bin/notmuch new";
 	};
+	  systemd.user.services.mbsync = {
+		Service = {
+		  # TODO need DBUS_SESSION_BUS_ADDRESS 
+		  FailureAction=''${pkgs.libnotify}/bin/notify-send --app-name="%N" "Failure"'';
+		};
 
+	  };
 
   # programs.muchsync = { };
 

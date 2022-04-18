@@ -1,0 +1,12 @@
+https://linuxembedded.fr/2015/07/comprendre-dbus
+busctl
+d-feet
+
+dbus-monitor
+
+to list available services
+dbus-send --print-reply --dest=org.freedesktop.DBus  /org/freedesktop/DBus org.freedesktop.DBus.ListNames
+https://www.freedesktop.org/wiki/Software/systemd/dbus/
+
+https://ggargblogs.wordpress.com/2020/09/06/using-dbus-api-in-python-for-managing-services-in-linux/
+https://wyssmann.com/blog/2021/07/notifications-for-failing-systemd-services/

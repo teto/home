@@ -53,8 +53,7 @@ let
       for_window [title="Thunderbird$"] title_format " %title"
 
 
-      include ~/.config/i3/config.main
-      include ~/.config/i3/config.xp
+      include ~/.config/i3/manual.i3
     ''
       # https://faq.i3wm.org/question/5942/using-modifer-key-as-a-binding/
       # https://faq.i3wm.org/question/5429/stay-in-mode-only-while-key-is-pressed/

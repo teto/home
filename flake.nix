@@ -151,7 +151,7 @@
                   ./nixos/profiles/nix-daemon.nix
                   ./nixos/modules/xserver.nix
                   ./nixos/modules/sway.nix
-                  ./nixos/modules/redis.nix
+                  # ./nixos/modules/redis.nix
                   ./nixos/profiles/steam.nix
                   ./nixos/profiles/qemu.nix
                   ./nixos/profiles/adb.nix
@@ -275,8 +275,13 @@
 		autoupdating = final: prev: {
 
 				  # TODO override extraLibs instead 
-		  i3pystatus-perso = (prev.i3pystatus.override({
-			extraLibs = with final.python3Packages; [ pytz notmuch dbus-python ];
+		  i3pystatus-custom = (prev.i3pystatus.override({
+			extraLibs = with final.python3Packages; [ 
+			  pytz notmuch dbus-python
+
+			  # humanize for a better display of text
+			  humanize 
+			];
 		  })).overrideAttrs (oldAttrs: {
 			name = "i3pystatus-dev";
 			# src = builtins.fetchGit {
@@ -293,9 +298,6 @@
 			# };
 		  });
 
-		  i3pystatus-custom = final.i3pystatus-perso.override ({
-			extraLibs = with final.python3Packages; [ pytz notmuch dbus-python ];
-		  });
 		};
 
 

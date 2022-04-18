@@ -7,8 +7,7 @@ rec {
 
         kergen = prev.callPackage ./pkgs/kergen.nix { };
 
-        mininet-matt = pythonsuper.mininet.override ({
-
+        mininet-with-man = pythonsuper.mininet.override ({
           withManpage = true;
         });
 

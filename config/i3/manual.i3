@@ -236,3 +236,5 @@ no_focus [window_role="pop-up"]
 
 # xrandr --output LVDS1 --primary --auto --output DP1 --auto --right-of LVDS1
 #exec_always xrandr --output $output1 --auto --output $output2 --right-of $output1
+include ~/.config/i3/config.xp
+
