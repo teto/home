@@ -43,7 +43,7 @@
     nova.url = "git+ssh://git@git.novadiscovery.net/world/nova-nix.git?ref=master";
     neovim = {
       url = "github:neovim/neovim?dir=contrib";
-      inputs.nixpkgs.follows = "nixpkgs-teto";
+      # inputs.nixpkgs.follows = "nixpkgs-teto";
     };
 	sops-nix.url = "github:Mic92/sops-nix";
 

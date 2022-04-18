@@ -1,7 +1,10 @@
 CABAL_HELPER_DEBUG=1
 {-# OPTIONS_GHC -fdefer-type-errors #-}
 {-# OPTIONS_GHC -Wno-missing-signatures #-}
--- -fdefer-type-errors
+
+ `:reload!` ajoute automatiquement -fdefer-type-errors
+
+:load impore tous les symboles (!= `import`)
 -dppr-cols2000 to control the width of error messages in ghci
 
 time brun --config debug //luad-s2ands5-simulation:MultipleClonesTumors@run -- +RTS -p -s -hy -l-au
