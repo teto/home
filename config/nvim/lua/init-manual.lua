@@ -1165,27 +1165,27 @@ if has_telescope then
 				override_generic_sorter = false,
 				override_file_sorter = false,
 			},
-			 frecency = {
-				workspaces = {
-					["home"]	= "/home/teto/home",
-					["data"]	= "/home/teto/neovim",
-					["jinko"]	= "/home/teto/jinko",
-					-- ["wiki"]    = "/home/my_username/wiki"
-				},
-				show_scores = true,
-				show_unindexed = true,
-				ignore_patterns = {"*.git/*", "*/tmp/*"},
-				db_safe_mode = true,
-				auto_validate = false,
-				devicons_disabled = true
-			 }
+			 -- frecency = {
+				-- workspaces = {
+					-- ["home"]	= "/home/teto/home",
+					-- ["data"]	= "/home/teto/neovim",
+					-- ["jinko"]	= "/home/teto/jinko",
+					-- -- ["wiki"]    = "/home/my_username/wiki"
+				-- },
+				-- show_scores = true,
+				-- show_unindexed = true,
+				-- ignore_patterns = {"*.git/*", "*/tmp/*"},
+				-- db_safe_mode = true,
+				-- auto_validate = false,
+				-- devicons_disabled = true
+			 -- }
 		}
 	}
 	-- This will load fzy_native and have it override the default file sorter
 	telescope.load_extension('fzf')
 	-- telescope.load_extension('fzy_native')
 	telescope.load_extension("notify")
-	telescope.load_extension("frecency")
+	-- telescope.load_extension("frecency")
 
 	-- TODO add autocmd
 	-- User TelescopePreviewerLoaded

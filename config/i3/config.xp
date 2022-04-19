@@ -18,15 +18,16 @@ for_window [class="^qutebrowser$"] title_format "<span background='blue'>QB</spa
 for_window [class="^Firefox$"] title_format "<span background='#F28559'>FF</span> %title"
 for_window [title="Thunderbird$"] title_format " %title"
 
-bar {
-  id 0
-  font pango:monospace 8.000000
-  position top
-  status_command /nix/store/r0v0snfmygs2wh8ljvl50v01sl05srhz-i3pystatus-dev/bin/i3pystatus-python-interpreter $XDG_CONFIG_HOME/i3/myStatus.py
-  i3bar_command /nix/store/d98qgv2nq66hyyz80bmwks36v7vj090m-i3-4.20.1/bin/i3bar
-  workspace_buttons yes
-strip_workspace_numbers yes
-}
+# TODO use a local i3pystatus
+# bar {
+#   id 0
+#   font pango:monospace 8.000000
+#   position top
+#   status_command /nix/store/r0v0snfmygs2wh8ljvl50v01sl05srhz-i3pystatus-dev/bin/i3pystatus-python-interpreter $XDG_CONFIG_HOME/i3/myStatus.py
+#   i3bar_command /nix/store/d98qgv2nq66hyyz80bmwks36v7vj090m-i3-4.20.1/bin/i3bar
+#   workspace_buttons yes
+# strip_workspace_numbers yes
+# }
 
 
 

@@ -323,9 +323,11 @@ let
     # {
     #   plugin = nvim-compe;
     # }
-    {
-      plugin = telescope-frecency-nvim;
-    }
+
+	# FIX https://github.com/NixOS/nixpkgs/issues/169293 first
+    # {
+    #   plugin = telescope-frecency-nvim;
+    # }
 	{ plugin = nvimdev-nvim; }
 	{ plugin = neomake; }
     # {
