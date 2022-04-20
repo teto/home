@@ -53,3 +53,10 @@ nix path-info -Sshr $(nix-build ./shell.nix -A inputDerivation) | sort -k3 -h | 
 
 # maintainers scripts
 ./maintainers/scripts/rebuild-amount.sh --print HEAD
+
+
+# remote builds 
+
+You need to be a trusted user:
+To select a builder you can run something akin to:
+`nix-build local-integration.nix -A osx.lb_database.build  -I nixpkgs=channel:nixos-18.03 --builders "root@spud x86_64-darwin /home/amine/.ssh/id_rsa 1 1 darwin-playground,LB,any,perf " --option cores 4`

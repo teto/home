@@ -329,4 +329,8 @@ in
   #   };
   # };
 
+  # TODO fix that
+  # systemd.user.sessionVariables = {
+	# NOTMUCH_CONFIG=home.sessionVariables.NOTMUCH_CONFIG;
+  # };
 }

@@ -5,7 +5,7 @@
 # true if file exists, aka if we are on nixos
 # test ! -f /etc/NIXOS
 # ON_NIXOS=$?
-prompt off
+# prompt off
 
 function rfw(){
     readlink -f $(which "$1")
@@ -261,8 +261,8 @@ SPROMPT="Correct $fg[red]%R$reset_color to $fg[green]%r$reset_color [(y)es (n)o 
 # mydir=${0:a:h}
 current_folder="${0:a:h}"
 echo "current-folder: $current_folder"
-# source "${current_folder}/../fzf-gems/fzf_git_functions.sh"
-# source "${current_folder}/../fzf-gems/fzf_git_keybindings.zsh"
+source "${current_folder}/../fzf-gems/fzf_git_functions.sh"
+source "${current_folder}/../fzf-gems/fzf_git_keybindings.zsh"
 # echo $PWD
 
 # TODO pass a path that is versioned in home
@@ -298,12 +298,12 @@ _fzf_compgen_dir() {
 
 # # To add support for TTYs this line can be optionally added.
 # source ~/.cache/wal/colors-tty.sh
-# if [[ -n $KITTY_INSTALLATION_DIR ]]; then
-#   export KITTY_SHELL_INTEGRATION="enabled"
-#   autoload -Uz -- "$KITTY_INSTALLATION_DIR"/shell-integration/zsh/kitty-integration
-#   kitty-integration
-#   unfunction kitty-integration
-# fi
+if [[ -n $KITTY_INSTALLATION_DIR ]]; then
+  export KITTY_SHELL_INTEGRATION="enabled"
+  autoload -Uz -- "$KITTY_INSTALLATION_DIR"/shell-integration/zsh/kitty-integration
+  kitty-integration
+  unfunction kitty-integration
+fi
 
 # function set_term_title (){
 #   # -n Do not add a newline to the output.

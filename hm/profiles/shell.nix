@@ -1,4 +1,7 @@
 { config, pkgs, lib,  ... } @ args:
+let 
+    secrets = import ../../nixpkgs/secrets.nix;
+in
 {
   programs.zsh = {
       enable = true;
@@ -8,7 +11,7 @@
       sessionVariables = {
         # HISTFILE="$XDG_CACHE_HOME/zsh_history";
         # TODO load this from sops instead
-        # GITHUB_TOKEN = secrets.githubToken;
+        GITHUB_TOKEN = secrets.githubToken;
       };
       history = {
 		# HISTSIZE
@@ -32,7 +35,7 @@
       initExtraFirst = "
       ";
 
-      enableCompletion = false;
+      enableCompletion = true;
       #   bindkey "^R" history-incremental-search-backward
     #   bindkey "^K"      kill-whole-line                      # ctrl-k
     #   bindkey "^A"      beginning-of-line                    # ctrl-a
