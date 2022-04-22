@@ -1,7 +1,13 @@
+# push image to registry 
+docker load -i tarball / docker import
+docker tag old new
+docker push (make sure to be logged in, else docker login)
+
 # to start a docker
 docker run mattator/dce-dockerfiles:latest 
 add --name NAME to give it a memorable name:
 docker run --name NAME mattator/dce-dockerfiles:latest 
+
 
 To override the entrypoint !
 docker run --entrypoint bash -it 885c3cd03b4d643999dca2db0e4e2fefe533f4689864c5d022bc077c75e22aa0

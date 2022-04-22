@@ -21,8 +21,8 @@
       };
       ovh2 = {
         # identityFile = "~/.ssh/ci-infra-ec2-dev";
-        identityFile = "~/.ssh/ci-infra-ec2-dev";
-        user = "ubuntu";
+        identityFile = "~/.ssh/nova_key";
+        user = "teto";
         host = "ovh-hybrid-runner-2.devops.novadiscovery.net";
 		identitiesOnly = true;
       };

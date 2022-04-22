@@ -16,7 +16,7 @@ in
       exec = "firefox -p nova";
       icon = "test";
       comment = "Firefox for nova";
-      terminal = true;
+      terminal = false;
       name = "Firefox for nova";
       genericName = "Web Browser";
       mimeType = [ "text/html" "text/xml" ];
@@ -30,7 +30,6 @@ in
       #   Keywords = "calc;math";
       #   DBusActivatable = "false";
       # };
-      fileValidation = true;
     };
     # min = { # minimal definition
     #   exec = "test --option";

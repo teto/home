@@ -33,7 +33,7 @@ vim.opt.cpoptions="aABceFsn"  -- vi ComPatibility options
 vim.o.swapfile = false
 vim.opt.number = true
 vim.opt.relativenumber = true
-vim.opt.laststatus = 3
+vim.o.laststatus = 3
 vim.opt.conceallevel = 2
 vim.opt.concealcursor = 'nc'
 vim.opt.showmode = false -- Show the current mode on command line
@@ -106,85 +106,75 @@ use{"petertriho/nvim-scrollbar",
 	end
 }
 -- overrides vim.ui / vim.select with the backend of my choice
--- use {
---	'stevearc/dressing.nvim'
---	, config = function ()
--- require('dressing').setup({
---	 input = {
---	   -- Default prompt string
---	   default_prompt = "➤ ",
+ use {
+	'stevearc/dressing.nvim'
+	, config = function ()
+	require('dressing').setup({
+	 input = {
+	   -- Default prompt string
+	   default_prompt = "➤ ",
 
---	   -- These are passed to nvim_open_win
---	   anchor = "SW",
---	   relative = "cursor",
---	   row = 0,
---	   col = 0,
---	   border = "rounded",
+	   -- These are passed to nvim_open_win
+	   anchor = "SW",
+	   relative = "cursor",
+	   border = "rounded",
 
---	   -- These can be integers or a float between 0 and 1 (e.g. 0.4 for 40%)
---	   prefer_width = 40,
---	   max_width = nil,
---	   min_width = 20,
+	   -- These can be integers or a float between 0 and 1 (e.g. 0.4 for 40%)
+	   prefer_width = 40,
+	   max_width = nil,
+	   min_width = 20,
 
---	   -- see :help dressing_get_config
---	   get_config = nil,
---	 },
---	 select = {
---	   -- Priority list of preferred vim.select implementations
---	   backend = { "telescope", "fzf", "builtin", "nui" },
+	   -- see :help dressing_get_config
+	   get_config = nil,
+	 },
+	 select = {
+	   -- Priority list of preferred vim.select implementations
+	   backend = { "telescope", "fzf", "builtin", "nui" },
 
---	   -- Options for telescope selector
---	   telescope = {
---		 -- can be 'dropdown', 'cursor', or 'ivy'
---		 theme = "dropdown",
---	   },
+	   -- Options for fzf selector
+	   fzf = {
+		 window = {
+		   width = 0.5,
+		   height = 0.4,
+		 },
+	   },
 
---	   -- Options for fzf selector
---	   fzf = {
---		 window = {
---		   width = 0.5,
---		   height = 0.4,
---		 },
---	   },
+	   -- Options for nui Menu
+	   nui = {
+		 position = "50%",
+		 size = nil,
+		 relative = "editor",
+		 border = {
+		   style = "rounded",
+		 },
+		 max_width = 80,
+		 max_height = 40,
+	   },
 
---	   -- Options for nui Menu
---	   nui = {
---		 position = "50%",
---		 size = nil,
---		 relative = "editor",
---		 border = {
---		   style = "rounded",
---		 },
---		 max_width = 80,
---		 max_height = 40,
---	   },
+	   -- Options for built-in selector
+	   builtin = {
+		 -- These are passed to nvim_open_win
+		 anchor = "NW",
+		 relative = "cursor",
+		 border = "rounded",
 
---	   -- Options for built-in selector
---	   builtin = {
---		 -- These are passed to nvim_open_win
---		 anchor = "NW",
---		 relative = "cursor",
---		 row = 0,
---		 col = 0,
---		 border = "rounded",
+		 -- Window options
+		 winblend = 10,
 
---		 -- Window options
---		 winblend = 10,
+		 -- These can be integers or a float between 0 and 1 (e.g. 0.4 for 40%)
+		 width = nil,
+		 max_width = 0.8,
+		 min_width = 40,
+		 height = nil,
+		 max_height = 0.9,
+		 min_height = 10,
+	   },
 
---		 -- These can be integers or a float between 0 and 1 (e.g. 0.4 for 40%)
---		 width = nil,
---		 max_width = 0.8,
---		 min_width = 40,
---		 height = nil,
---		 max_height = 0.9,
---		 min_height = 10,
---	   },
-
---	   -- see :help dressing_get_config
---	   get_config = nil,
---	 },
--- })	end
--- }
+	   -- see :help dressing_get_config
+	   get_config = nil,
+	 },
+ })	end
+ }
 
 
 -- use 'https://git.sr.ht/~whynothugo/lsp_lines.nvim'
@@ -589,6 +579,14 @@ use {
   --   capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
   -- }
 	local cmp = require 'cmp'
+-- cmp.setup {
+--   ...
+--   mapping = cmp.mapping.preset.insert({
+--     -- Your configuration here.
+--   })
+--   ...
+-- }
+
 	cmp.setup({
 	snippet = {
 	  expand = function(args)
@@ -602,13 +600,16 @@ use {
 		-- vim.fn["UltiSnips#Anon"](args.body)
 	  end,
 	},
-	mapping = {
-	  ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-	  ['<C-f>'] = cmp.mapping.scroll_docs(4),
-	  ['<C-Space>'] = cmp.mapping.complete(),
-	  ['<C-e>'] = cmp.mapping.close(),
-	  -- ['<CR>'] = cmp.mapping.confirm({ select = true }),
-	},
+	mapping = cmp.mapping.preset.insert({
+
+	-- {
+	--   ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+	--   ['<C-f>'] = cmp.mapping.scroll_docs(4),
+	--   ['<C-Space>'] = cmp.mapping.complete(),
+	--   ['<C-e>'] = cmp.mapping.close(),
+	--   -- ['<CR>'] = cmp.mapping.confirm({ select = true }),
+	-- },
+	}),
 	sources = {
 	  -- { name = 'nvim_lsp' },
 
@@ -626,6 +627,13 @@ use {
 	  { name = 'orgmode' },
 	}
   })
+	cmp.setup.cmdline {
+	mapping = cmp.mapping.preset.cmdline({
+		-- Your configuration here.
+	})
+
+	}
+
 
   end
 }
@@ -694,6 +702,7 @@ use {
 			component_separators = {left='', right=''},
 			section_separators = {left='', right=''},
 			separators = {left='', right=''},
+			globalstatus = true,
 			-- disabled_filetypes = {}
 		},
 		sections = {
@@ -1413,3 +1422,4 @@ vim.api.nvim_set_keymap(
 --	 "<Cmd>lua require'stylish'.ui_menu(vim.fn.menu_get(''), {kind=menu, prompt = 'Main Menu', experimental_mouse = true}, function(res) print('### ' ..res) end)<CR>",
 --	 { noremap = true, silent = true }
 -- )
+--

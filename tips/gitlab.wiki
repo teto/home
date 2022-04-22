@@ -1,6 +1,7 @@
 
 # CI
-
+::
+shells/bash.go
 https://docs.gitlab.com/ce/ci/yaml/README.html
 
 

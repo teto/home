@@ -1,6 +1,14 @@
 { config, pkgs, lib,  ... }:
 
 let
+  luaPlugin = attrs: attrs // {
+	config = lib.optionalString (attrs ? config) ''
+      -- ${attrs.plugin.pname} {{{
+      ${attrs.config}
+      -- }}}
+	  '';
+	};
+
   genBlockViml = title: content: lib.optionalString (content != null) ''
     " ${title} {{{
     ${content}
@@ -110,12 +118,12 @@ let
 	  # config = ''
 		# '';
     }
-    {
+    (luaPlugin {
       plugin = sniprun;
       type = "lua";
 	  # config = ''
 		# '';
-    }
+    })
     {
       plugin = urlview-nvim;
       type = "lua";
@@ -325,9 +333,9 @@ let
     # }
 
 	# FIX https://github.com/NixOS/nixpkgs/issues/169293 first
-    # {
-    #   plugin = telescope-frecency-nvim;
-    # }
+    {
+      plugin = telescope-frecency-nvim;
+    }
 	{ plugin = nvimdev-nvim; }
 	{ plugin = neomake; }
     # {

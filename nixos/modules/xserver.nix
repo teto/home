@@ -12,7 +12,7 @@
   # Enable the X11 windowing system.
   services.xserver = {
     enable = true;
-    autorun =true;
+    autorun = false;
 
     displayManager = {
       autoLogin = {
@@ -66,6 +66,15 @@
       };
     };
     windowManager.i3.enable = true;
+
+	# au moins pour le laptop
+	config = ''
+	  Section "Device"
+		  Identifier  "Intel Graphics" 
+		  Driver      "intel"
+		  Option      "Backlight"  "intel_backlight"
+	  EndSection
+	'';
 
     # to autostart i3
     # https://discourse.nixos.org/t/opening-i3-from-home-manager-automatically/4849/7

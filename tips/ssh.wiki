@@ -4,7 +4,9 @@ ssh -i key ec2-user@ec2-X-X-X-X.eu-central-1.compute.amazonaws.com -f -N -L 6379
 # To remove a trusted server
 ssh-keygen -R 192.168.1.100
 
+# how d I exit an ssh connection ?
 https://superuser.com/questions/467398/how-do-i-exit-an-ssh-connection
+hit the Enter key, then type ~. and ssh should immediately close and return you to your command prompt
 
 IdentitiesOnly=yes
 IdentitiesOnly yes
