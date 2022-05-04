@@ -1,3 +1,4 @@
+# https://starship.rs/config/#status
 # https://starship.rs/config/#character
 # https://starship.rs/config/#line-break
 # Don't print a new line at the start of the prompt
@@ -92,6 +93,9 @@ disabled = false
 
 # [haskell]
 # disabled = false
+
+[status]
+disabled = false
 
 [python]
 disabled = false

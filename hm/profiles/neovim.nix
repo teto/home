@@ -389,6 +389,7 @@ let
       # astronauta
       {
         # euclio/vim-markdown-composer
+		# see https://github.com/euclio/vim-markdown-composer/commit/910fd4321b7f25fbab5fdf84e68222cbc226d8b1
         plugin = vim-markdown-composer;
         config = ''
           " use with :ComposerStart
