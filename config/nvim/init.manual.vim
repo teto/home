@@ -42,6 +42,8 @@ Plug 'rhysd/vim-gfm-syntax' " markdown syntax compatible with Github's
 Plug 'winston0410/range-highlight.nvim' "highlight ranges like :1,5
 Plug 'symphorien/vim-nixhash' " use :NixHash
 Plug 'seandewar/nvimesweeper' " not packaged
+Plug 'vim-denops/denops.vim'
+Plug 'ryoppippi/bad-apple.vim'
 
 " Plug 'soywod/himalaya' " mail reader :Himalaya ; needs the rust CLI reader
 " himalaya

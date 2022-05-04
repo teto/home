@@ -71,7 +71,7 @@ in
     buildMachines = [
       # jedha
       # localMachine
-      nova-runner-2
+      # nova-runner-2
     ];
   };
 }
