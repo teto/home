@@ -9,7 +9,7 @@ config.load_autoconfig()
   #   global: /home/teto/home/homepage.html
 
 # TODO to set homepage.html
-c.url.default_page = str(config.configdir / 'homepage.html')
+c.url.default_page = str(config.configdir / 'data' / 'homepage.html')
 # config.set('content.javascript.enabled', False)
 
 # per domain settings
@@ -20,5 +20,5 @@ c.url.default_page = str(config.configdir / 'homepage.html')
 # content.host_blocking.enabled
 # content.host_blocking.lists (Current: ["https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts"])
 # whitelist
-c.content.host_blocking.lists.append( str(config.configdir) + "/blockedHosts")
-c.content.host_blocking.whitelist.append( 'collector.githubapp.com')
+# c.content.host_blocking.lists.append( str(config.configdir) + "/blockedHosts")
+# c.content.host_blocking.whitelist.append( 'collector.githubapp.com')

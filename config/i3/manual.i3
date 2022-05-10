@@ -238,3 +238,5 @@ no_focus [window_role="pop-up"]
 #exec_always xrandr --output $output1 --auto --output $output2 --right-of $output1
 include ~/.config/i3/config.xp
 
+exec_always --no-startup-id setxkbmap -layout us
+

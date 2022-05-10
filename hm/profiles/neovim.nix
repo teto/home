@@ -2,6 +2,7 @@
 
 let
   luaPlugin = attrs: attrs // {
+    type = "lua";
 	config = lib.optionalString (attrs ? config) ''
       -- ${attrs.plugin.pname} {{{
       ${attrs.config}
@@ -120,29 +121,24 @@ let
     }
     (luaPlugin {
       plugin = sniprun;
-      type = "lua";
+      # type = "lua";
 	  # config = ''
 		# '';
     })
-    {
+    (luaPlugin {
       plugin = urlview-nvim;
-      type = "lua";
-	  config = ''
-		'';
-    }
-    {
+    })
+    (luaPlugin {
       plugin = trouble-nvim;
-      type = "lua";
-    }
+    })
     {
       plugin = auto-git-diff;
     }
     {
       plugin = plenary-nvim;
     }
-    {
+    (luaPlugin {
       plugin = gitsigns-nvim;
-      type = "lua";
       config = ''
         require 'gitsigns'.setup {
             -- -- '│' passe mais '▎' non :s
@@ -187,7 +183,7 @@ let
           }  -- If luajit is present
         }'';
 
-    }
+    })
     # {
     #   plugin = fidget-nvim;
     #   type = "lua";
@@ -196,16 +192,14 @@ let
     #   '';
     # }
 
-    {
+    (luaPlugin {
       plugin = lsp_lines-nvim;
-      type = "lua";
       config = ''
       require("lsp_lines").register_lsp_virtual_lines()
       '';
-    }
-    {
+    })
+    (luaPlugin {
       plugin = marks-nvim;
-      type = "lua";
       config = ''
       require'marks'.setup {
         -- whether to map keybinds or not. default true
@@ -237,8 +231,7 @@ let
         mappings = {}
     }
     '';
-
-    }
+    })
     # {
       # not packaged yet
   # Plug 'bfredl/nvim-miniyank' " killring alike plugin, cycling paste careful search for :Yank commands
@@ -292,9 +285,9 @@ let
     vim-lion # Use with gl/L<text object><character to align to 
     vim-vsnip
     vim-vsnip-integ
-	{
+	(luaPlugin {
       plugin = nvim-spectre;
-    }
+    })
     {
       plugin = tokyonight-nvim;
     }
@@ -407,6 +400,30 @@ let
         plugin = dhall-vim;
         config = ''
           " dhall.vim config
+        '';
+      }
+      {
+        plugin = Shade-nvim;
+        type = "lua";
+        config = ''
+        '';
+      }
+      {
+        plugin = pywal-nvim;
+        type = "lua";
+        config = ''
+        '';
+      }
+      {
+        plugin = glow-nvim;
+        type = "lua";
+        # config = ''
+        # '';
+      }
+      {
+        plugin = fzf-lua;
+        type = "lua";
+        config = ''
         '';
       }
       {

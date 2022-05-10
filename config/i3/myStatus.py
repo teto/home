@@ -172,7 +172,11 @@ dpms = status.register("dpms", format="")
 
 @get_module
 def launch_alot(mod):
-    cmd = ["kitty", "alot", "-l/tmp/alot-from-bar.log",  "--config",  "/home/teto/home/alot-config"]
+    cmd = [
+		# run sh first so that terminal survives kitty error
+		"kitty", "sh" "-c", "alot", "-l/tmp/alot-from-bar.log",
+		# "--config",  "/home/teto/home/alot-config"
+		]
     res = subprocess.Popen(cmd)
 
 

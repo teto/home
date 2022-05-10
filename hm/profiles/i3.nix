@@ -12,7 +12,6 @@ let
   # TODO make it a pywalflag
 
   sharedExtraConfig = ''
-
       set $GroupUs Group1
       set $GroupFr Group2
 
@@ -228,10 +227,10 @@ in
         # todo use i3lock-fancy instead
         # alternative is "light"
         # "${mod}+ctrl+v" = "exec ${pkgs.bash}/bin/bash ~/vim-anywhere/bin/run";
-        "${mod}+Tab"="exec \"${pkgs.rofi}/bin/rofi -modi 'window,drun,run,ssh' -show run\"";
+        "${mod}+Tab"="exec \"${pkgs.rofi}/bin/rofi -modi 'window,run,drun,ssh' -show run\"";
         "${mod}+Ctrl+Tab"="exec \"${pkgs.rofi}/bin/rofi -modi 'window' -show run\"";
         # TODO dwindow exclusively with WIN
-        "Super_L+Tab"="exec \"${pkgs.rofi}/bin/rofi -modi 'run,drun,window,ssh' -show run\"";
+        "Super_L+Tab"="exec \"${pkgs.rofi}/bin/rofi -modi 'run,drun,window,ssh' -show window\"";
 
         # locker
         # "${mod}+Ctrl+L"="exec ${pkgs.i3lock-fancy}/bin/i3lock-fancy";

@@ -305,9 +305,9 @@ if [[ -n $KITTY_INSTALLATION_DIR ]]; then
   unfunction kitty-integration
 fi
 
-function set_term_title (){
-  # -n Do not add a newline to the output.
-  # print -Pn "\e]0;$(echo "$1")\a"
-  print -n "\e]0;$1\a"
-}
+# function set_term_title (){
+#   # -n Do not add a newline to the output.
+#   # print -Pn "\e]0;$(echo "$1")\a"
+#   print -n "\e]0;$1\a"
+# }
 

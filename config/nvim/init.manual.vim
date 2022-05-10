@@ -42,8 +42,8 @@ Plug 'rhysd/vim-gfm-syntax' " markdown syntax compatible with Github's
 Plug 'winston0410/range-highlight.nvim' "highlight ranges like :1,5
 Plug 'symphorien/vim-nixhash' " use :NixHash
 Plug 'seandewar/nvimesweeper' " not packaged
-Plug 'vim-denops/denops.vim'
-Plug 'ryoppippi/bad-apple.vim'
+" Plug 'vim-denops/denops.vim'
+" Plug 'ryoppippi/bad-apple.vim' " needs denops
 
 " Plug 'soywod/himalaya' " mail reader :Himalaya ; needs the rust CLI reader
 " himalaya
@@ -1505,7 +1505,6 @@ nnoremap <Leader>el <Cmd>e ~/.config/nvim/lua/init-manual.lua<CR>
 nnoremap <Leader>em <Cmd>e ~/.config/nvim/init.manual.vim<CR>
 " reload vimrc
 nnoremap <Leader>sv  <Cmd>source $MYVIMRC<CR>
-nnoremap <Leader>eca <Cmd>Telescope lsp_code_action<CR>
 
 " open netrw/dirvish split
 " nnoremap <Leader>e :Vex<CR>
@@ -1533,7 +1532,7 @@ command! -nargs=+ -bang -complete=command R call ReadExCommandOutput(<bang>0, <q
 "   let g:neomake_python_mypy_exe = fnamemodify( g:python3_host_prog, ':p:h').'/mypy'
 " endfunc
 
-nnoremap <S-CR> i<CR><Esc>
+" nnoremap <S-CR> i<CR><Esc>
 
 hi CursorLine                    guibg=#293739 guifg=None
 
@@ -1724,18 +1723,6 @@ endfunc
 " map <C-D> :tag<CR>
 map <D-b> :echom "hello papy"
 
-inoremap <C-k><C-k> <Cmd>lua require'betterdigraphs'.digraphs("i")<CR>
-nnoremap r<C-k><C-k> <Cmd>lua require'betterdigraphs'.digraphs("r")<CR>
-vnoremap r<C-k><C-k> <ESC><Cmd>lua require'betterdigraphs'.digraphs("gvr")<CR>
-
-" let g:vrc_trigger = '<C-]>'
-
-"$NVIM_PYTHON_LOG_FILE
-" profile startup time
-" nvim --startuptime startup.log
-" nvim -u NONE --startuptime startup.log
-" to see the difference highlights,
-" runtime syntax/hitest.vim
 
 " nvim will load any .nvimrc in the cwd; useful for per-project settings
 set exrc
