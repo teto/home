@@ -18,7 +18,6 @@ in {
       ffmpegthumbnailer # to preview videos in ranger
     ];
 
-    # home.packages = [ pkgs.pywal ];
     home.sessionVariables = {
     };
   };

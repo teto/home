@@ -94,7 +94,6 @@
               imports = my_imports ++ [
                 # custom modules
                 (import ./hm/modules/zsh.nix)
-                (import ./hm/modules/pywal.nix )
                 (import ./hm/modules/ranger.nix )
                 # (import ./hm/modules/fcitx.nix )
                 (import ./hm/modules/xdg.nix )
@@ -375,10 +374,6 @@
 		inherit (nixpkgsFinal) nhs9;
 
       };
-
-      # hmModules = [
-      #   (import ./hm/modules/pywal.nix )
-      # ];
 
       nixosModules = let
         prep = map (path: {

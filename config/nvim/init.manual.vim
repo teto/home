@@ -189,15 +189,6 @@ Plug 'PotatoesMaster/i3-vim-syntax'
 " one competitor is https://github.com/hwayne/tla.vim/
 " }}}
 
-
-" {{{ To ease movements
-"Plug 'wellle/visual-split.vim'
-" Plug 'wellle/targets.vim' " Adds new motion targets ci{
-" Plug 'justinmk/vim-ipmotion' " ?
-" }}}
-
-" TODO replace with pywals-nvim
-" Plug 'dylanaraps/wal.vim' " to update colors (available in nix via wal-vim)
 " Plug 'dietsche/vim-lastplace' " restore last cursor postion (is it still needed ?)
 " Plug 'hrsh7th/vim-vsnip' " vscode/lsp snippet format
 " Plug 'hrsh7th/vim-vsnip-integ'
@@ -208,24 +199,15 @@ Plug 'teto/vim-listchars' " to cycle between different list/listchars configurat
 Plug 'tpope/vim-rhubarb' " github support in fugitive, use |i_CTRL-X_CTRL-O|
 " Plug 'vhakulinen/gnvim-lsp' " load it only for gnvim
 
-" euclio
-" Plug 'JamshedVesuna/vim-markdown-preview'
 " Plug 'Rykka/riv.vim', {'for': 'rst'}
 " Plug 'Rykka/InstantRst', {'for': 'rst'} " rst live preview with :InstantRst,
 " Plug 'dhruvasagar/vim-table-mode', {'for': 'txt'}
 
-" Plug 'nacitar/a.vim' " :A
 " Plug 'mhinz/vim-rfc', { 'on': 'RFC' } " requires nokigiri gem
 " careful maps F4 by default
 Plug 'teto/Modeliner' " <leader>ml to setup buffer modeline
 " This one has bindings mapped to <leader>l
-" Plug '~/vimwiki'   " to write notes
 " Plug 'vimwiki/vimwiki', { 'branch': 'dev'}   " to write notes
-" Plug 'hrsh7th/nvim-compe' " autocompletion
-
-" https://github.com/haorenW1025/completion-nvim/wiki/chain-complete-support
-" Plug 'nvim-lua/completion-nvim' " lsp based completion framework
-" treesitter may slow down nvim
 
 " does not work seems to be better ones
 " Plug 'vasconcelloslf/vim-interestingwords' " highlight the words you choose <leader>k (does not work in neovim)

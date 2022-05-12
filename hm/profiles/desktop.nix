@@ -250,6 +250,12 @@ in
 
   programs.pywal.enable = true;
 
+  programs.rofi.theme = {
+    "@import" = "${config.xdg.cacheHome}/wal/colors-rofi-dark.rasi";
+    "@theme" = "purple";
+  };
+  # home.packages = [ pkgs.pywal ];
+
   xsession = {
     enable = false;
     scriptPath = ".hm-xsession";

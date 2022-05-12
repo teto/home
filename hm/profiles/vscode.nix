@@ -9,9 +9,8 @@
       asvetliakov.vscode-neovim # only in my fork
       # bbenoist.Nix
       # todo replace with pylance/pyright
-      # ms-python.python 
       ms-kubernetes-tools.vscode-kubernetes-tools
-      ms-vsliveshare.vsliveshare
+      # ms-vsliveshare.vsliveshare
     ];
     # haskell.enable = true;
     # haskell.hie.enable = true;

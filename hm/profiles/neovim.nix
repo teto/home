@@ -3,12 +3,14 @@
 let
   luaPlugin = attrs: attrs // {
     type = "lua";
-	config = lib.optionalString (attrs ? config) ''
-      -- ${attrs.plugin.pname} {{{
-      ${attrs.config}
+	config = lib.optionalString (attrs ? config)  (genBlockLua attrs.plugin.pname attrs.config);
+  };
+
+  genBlockLua = title: content: ''
+      -- ${title} {{{
+      ${content}
       -- }}}
 	  '';
-	};
 
   genBlockViml = title: content: lib.optionalString (content != null) ''
     " ${title} {{{
@@ -16,12 +18,27 @@ let
 	" }}}
 	'';
 
-  rcBlocks = {
 
-    appearance = ''
-      " draw a line on 80th column
-      set colorcolumn=80,100
-    '';
+  luaRcBlocks = {
+	appearance = ''
+      -- draw a line on 80th column
+      vim.o.colorcolumn='80,100'
+	'';
+
+	# hi MsgSeparator ctermbg=black ctermfg=white
+	# TODO equivalent of       set fillchars+=
+	foldBlock = ''
+      vim.o.fillchars='foldopen:▾,foldclose:▸,msgsep:‾'
+	  vim.o.foldcolumn='auto:2'
+	'';
+  };
+
+  vimlRcBlocks = {
+
+    # appearance = ''
+    #   " draw a line on 80th column
+    #   set colorcolumn=80,100
+    # '';
 
     wildBlock = ''
     set wildignore+=.hg,.git,.svn                    " Version control
@@ -36,9 +53,6 @@ let
 
     foldBlock = ''
       " block,hor,mark,percent,quickfix,search,tag,undo
-      " set foldopen+=all " specifies commands for which folds should open
-      " set foldclose=all
-      "set foldtext=
       set fillchars+=foldopen:▾
       set fillchars+=foldclose:▸
       set fillchars+=msgsep:‾
@@ -288,15 +302,21 @@ let
 	(luaPlugin {
       plugin = nvim-spectre;
     })
+	(luaPlugin {
+      plugin = nvim-treesitter-context;
+    })
+	(luaPlugin {
+      plugin = diffview-nvim;
+    })
     {
       plugin = tokyonight-nvim;
     }
     # broken for now
-    # {
+    (luaPlugin {
 	  # # prettier quickfix
-    #   # plugin = nvim-bqf;
-    #   plugin = nvim-pqf-git;
-    # }
+      plugin = nvim-bqf;
+	  #   plugin = nvim-pqf-git;
+    })
     {
       plugin = telescope-fzf-native-nvim;
     }
@@ -326,9 +346,9 @@ let
     # }
 
 	# FIX https://github.com/NixOS/nixpkgs/issues/169293 first
-    {
+    (luaPlugin {
       plugin = telescope-frecency-nvim;
-    }
+    })
 	{ plugin = nvimdev-nvim; }
 	{ plugin = neomake; }
     # {
@@ -357,18 +377,18 @@ let
     # Packer should remain first
 	{ plugin = vim-lastplace; }
 	{ plugin = wmgraphviz-vim; }
-    {
+    (luaPlugin {
       plugin = packer-nvim;
-      type = "lua";
       config = ''
       require('packer').init({
         luarocks = {
           python_cmd = 'python' -- Set the python command to use for running hererocks
         },
       })
+      -- require my own manual config
       require('init-manual')
       '';
-    }
+    })
 
       # {
       #   # davidgranstrom/nvim-markdown-preview
@@ -382,7 +402,9 @@ let
       # astronauta
       {
         # euclio/vim-markdown-composer
-		# see https://github.com/euclio/vim-markdown-composer/commit/910fd4321b7f25fbab5fdf84e68222cbc226d8b1
+        # https://github.com/euclio/vim-markdown-composer/issues/69#issuecomment-1103440076
+        # see https://github.com/euclio/vim-markdown-composer/commit/910fd4321b7f25fbab5fdf84e68222cbc226d8b1
+        # we can now set g:markdown_composer_binary
         plugin = vim-markdown-composer;
         config = ''
           " use with :ComposerStart
@@ -408,31 +430,28 @@ let
         config = ''
         '';
       }
-      {
-        plugin = pywal-nvim;
-        type = "lua";
-        config = ''
-        '';
-      }
-      {
+      # {
+      #   plugin = pywal-nvim;
+      #   type = "lua";
+      #   config = ''
+      #   '';
+      # }
+      (luaPlugin {
         plugin = glow-nvim;
-        type = "lua";
+        # type = "lua";
         # config = ''
         # '';
-      }
-      {
+      })
+      (luaPlugin {
         plugin = fzf-lua;
-        type = "lua";
-        config = ''
-        '';
-      }
+      })
       {
         plugin = stylish-nvim;
         type = "lua";
         config = ''
         '';
       }
-      {
+      (luaPlugin {
         plugin = rest-nvim;
         type = "lua";
         config = ''
@@ -456,22 +475,20 @@ let
             jump_to_request = false,
           })
           vim.keymap.set('n',  '<leader>rr' , "<Plug>RestNvim")
-          vim.keymap.set('n',  '<leader>rp' , "<Plug>RestNvimPreview")
-        '';
-      }
-      {
+          vim.keymap.set('n',  '<leader>rp' , "<Plug>RestNvimPreview")'';
+      })
+      (luaPlugin {
         # matches nvim-orgmode
         plugin = orgmode;
-        type = "lua";
         config = ''
         require('orgmode').setup{
             org_capture_templates = {'~/nextcloud/org/*', '~/orgmode/**/*'},
             org_default_notes_file = '~/orgmode/refile.org',
-			-- TODO add templates
-			org_agenda_templates = { t = { description = 'Task', template = '* TODO %?\n  %u' } },
+            -- TODO add templates
+            org_agenda_templates = { t = { description = 'Task', template = '* TODO %?\n  %u' } },
         }
         '';
-      }
+      })
       {
         plugin = vim-toml;
       }
@@ -663,10 +680,9 @@ let
       # vim-livedown
       # markdown-preview-nvim # :MarkdownPreview
       # nvim-markdown-preview  # :MarkdownPreview
-      {
+      (luaPlugin {
         plugin = nvim-spectre;
-        type = "lua";
-      }
+      })
 
       # vim-markdown-preview  # WIP
       {
@@ -775,7 +791,7 @@ in
     ''
     # concatStrings = builtins.concatStringsSep "";
     + (lib.strings.concatStrings (
-      lib.mapAttrsToList genBlockViml rcBlocks
+      lib.mapAttrsToList genBlockViml vimlRcBlocks
     ))
     ;
 
@@ -812,8 +828,14 @@ in
       ;
   };
 
-  xdg.configFile = {
+  xdg.configFile = let 
+    extraLuaConfig = (lib.strings.concatStrings (
+      lib.mapAttrsToList genBlockLua luaRcBlocks
+    ));
+
+  in {
     # a copy of init.vim in fact
+	 "nvim/lua/init-home-manager.lua".text =  extraLuaConfig;
     # "nvim/init.generated.vim".text = config.programs.neovim.generatedConfigViml;
     # "nvim/init.generated.lua".text = config.programs.neovim.generatedConfigs.lua;
   };

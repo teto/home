@@ -1,4 +1,10 @@
-
+pulumi -C buildlib/infra-python up -s dev -y -v9 -d --logtostderr
 pulumi up --verbose 9 --logtostderr
 
 pulumi plugin ls
+
+
+https://www.pulumi.com/docs/troubleshooting/#diagnosing-issues
+https://www.pulumi.com/docs/troubleshooting/#register-the-provider-first
+
+pulumi plugin install --reinstall -v9 --logtostderr -C buildlib/infra-python/

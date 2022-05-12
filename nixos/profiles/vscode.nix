@@ -22,6 +22,6 @@ let
 in
 {
   environment.systemPackages = [
-    vscode-with-extensions
+    # vscode-with-extensions
   ];
 }

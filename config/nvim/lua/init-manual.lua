@@ -56,13 +56,6 @@ vim.opt.breakindent = true -- preserve or add indentation on wrap
 -- })
 -- my_image:transmit() -- send image data to terminal
 
--- use { 'AlphaTechnolog/pywal.nvim', as = 'pywal',
--- 	config = function ()
--- 		local pywal = require('pywal')
--- 		pywal.setup()
--- 	end
--- }
-
 -- use {
 -- 	"~/telescope-frecency.nvim",
 -- 	config = function ()
@@ -215,9 +208,8 @@ use({
     'rose-pine/neovim',
     as = 'rose-pine',
     tag = 'v1.*',
-    config = function()
-        -- vim.cmd('colorscheme rose-pine')
-    end
+    -- config = function()
+    -- end
 })
 use {
 	'protex/better-digraphs.nvim'
@@ -260,7 +252,7 @@ use {
 
 -- terminal image viewer in neovim see https://github.com/edluffy/hologram.nvim#usage for usage
 use 'edluffy/hologram.nvim' -- hologram-nvim
-use 'ellisonleao/glow.nvim' -- markdown preview, run :Glow
+-- use 'ellisonleao/glow.nvim' -- markdown preview, run :Glow
 use {
 	-- Show where your cursor moves
 	'edluffy/specs.nvim',
@@ -796,6 +788,27 @@ use {
 
 vim.g.sonokai_style = 'atlantis'
 vim.cmd([[colorscheme sonokai]])
+-- vim.cmd([[colorscheme pywal]])
+require'sniprun'.setup({
+  -- selected_interpreters = {'Python3_fifo'},        --" use those instead of the default for the current filetype
+  -- repl_enable = {'Python3_fifo', 'R_original'},    --" enable REPL-like behavior for the given interpreters
+  -- repl_disable = {},                               --" disable REPL-like behavior for the given interpreters
+  -- possible values are 'none', 'single', 'double', or 'shadow'
+  borders = 'single',
+  --" you can combo different display modes as desired
+  display = {
+    "Classic",                    -- "display results in the command-line  area
+    "VirtualTextOk",              -- "display ok results as virtual text (multiline is shortened)
+    -- "VirtualTextErr",          -- "display error results as virtual text
+    -- "TempFloatingWindow",      -- "display results in a floating window
+    -- "LongTempFloatingWindow",  -- "same as above, but only long results. To use with VirtualText__
+    -- "Terminal"                 -- "display results in a vertical split
+    -- "TerminalWithCode",        --# display results and code history in a vertical split
+    -- "NvimNotify",              --# display with the nvim-notify plugin
+    -- "Api"                      --# return output to a programming interface
+  },
+})
+
 
 vim.g.indicator_errors = ''
 vim.g.indicator_warnings = ''
