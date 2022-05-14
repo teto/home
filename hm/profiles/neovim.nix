@@ -749,7 +749,7 @@ let
 
         # " let g:Unicode_cache_directory='${pkgs.vimPlugins.unicode-vim}/share/vim-plugins/unicode-vim/autoload/unicode'
         config = ''
-          let g:Unicode_data_directory='${pkgs.vimPlugins.unicode-vim}/share/vim-plugins/unicode-vim/autoload/unicode'
+          let g:Unicode_data_directory='${pkgs.vimPlugins.unicode-vim}/autoload/unicode'
 
           " overrides ga
           nmap ga <Plug>(UnicodeGA)

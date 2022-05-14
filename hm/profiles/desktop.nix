@@ -52,6 +52,7 @@ let
     khard
     # libsecret  # to consult
     newsboat #
+    mujmap # to sync notmuch tags across jmap 
     # leafnode dovecot22 dovecot_pigeonhole fetchmail procmail w3m
     # mairix mutt msmtp lbdb contacts spamassassin
   ] ++ lib.optionals all [
@@ -109,6 +110,7 @@ let
     mupdf.bin # evince does better too
     ncpamixer # pulseaudio TUI mixer
     noti # send notifications when a command finishes
+    pulseaudioFull # for pactl
     pass
     pavucontrol
     procs  # Rust replacement for 'ps'
