@@ -676,9 +676,21 @@ let
         '';
       }
       # TODO this one will be ok once we patch it
-      # vim-markdown-composer  # WIP
+	  {
+		# https://github.com/euclio/vim-markdown-composer/issues/69#event-6528328732
+		# rust based
+		# ComposerUpdate / ComposerStart
+		plugin = vim-markdown-composer;  # WIP
+		config = ''
+		  let g:markdown_composer_binary = '${vim-markdown-composer.vimMarkdownComposerBin}/bin/markdown-composer'
+		'';
+	  }
       # vim-livedown
-      # markdown-preview-nvim # :MarkdownPreview
+	  { 
+		# node-based
+		# :MarkdownPreview
+		plugin = markdown-preview-nvim;
+	  }
       # nvim-markdown-preview  # :MarkdownPreview
       (luaPlugin {
         plugin = nvim-spectre;

@@ -1,6 +1,7 @@
 -- vim: set noet fdm=marker fenc=utf-8 ff=unix sts=0 sw=4 ts=4 :
 -- local configs = require'nvim_lsp/configs'
 local has_telescope, telescope = pcall(require, "telescope")
+local has_fzf_lua, fzf_lua = pcall(require, "fzf-lua")
 
 -- local packerCfg =
 local packer = require "packer"
@@ -278,6 +279,7 @@ use {
 	end
 
 }
+-- TODO 
 use {
 	'code-biscuits/nvim-biscuits',
 	config = function ()
@@ -341,11 +343,15 @@ use {
 
 -- use_rocks 'plenary.nvim'
 -- use { 'nvim-lua/telescope.nvim' }
+-- telescope plugins {{{
 use '~/telescope.nvim'	  -- fzf-like in lua
 use { 'nvim-telescope/telescope-github.nvim' }
 use { 'nvim-telescope/telescope-symbols.nvim' }
 use {'nvim-telescope/telescope-fzy-native.nvim'}
 use { 'nvim-telescope/telescope-media-files.nvim'}
+use { 'nvim-telescope/telescope-packer.nvim' }
+--}}}
+
 -- use "terrortylor/nvim-comment"
 -- shows a lightbulb where a codeAction is available
 -- use { 'kosayoda/nvim-lightbulb',
@@ -360,7 +366,6 @@ use {'akinsho/bufferline.nvim', requires = 'kyazdani42/nvim-web-devicons'}
 -- https://github.com/gelguy/wilder.nvim
 -- use { 'gelguy/wilder.nvim' }
 use { 'gennaro-tedesco/nvim-peekup' }
-use { 'nvim-telescope/telescope-packer.nvim' }
 --use { 'TimUntersberger/neogit',
 --	config = function ()
 --		vim.defer_fn (
@@ -820,13 +825,33 @@ vim.g.spinner_frames = {'⣾', '⣽', '⣻', '⢿', '⡿', '⣟', '⣯', '⣷'}
 
 vim.g.should_show_diagnostics_in_statusline = true
 
+-- code to toggle diagnostic display
+local diagnostics_active = true
+vim.keymap.set('n', '<leader>d', function()
+  diagnostics_active = not diagnostics_active
+  if diagnostics_active then
+    vim.diagnostic.show()
+  else
+    vim.diagnostic.hide()
+  end
+end)
+
+if has_fzf_lua then
+vim.keymap.set ('n', "<Leader>g", function () fzf_lua.files() end)
+vim.keymap.set ('n', "<Leader>o", function () fzf_lua.git_files() end)
+vim.keymap.set ('n', "<Leader>F", function () vim.cmd("FzfFiletypes") end)
+vim.keymap.set ('n', "<Leader>h", function () vim.cmd("FzfHistory") end)
+vim.keymap.set ('n', "<Leader>t", function () fzf_lua.tags() end )
+vim.keymap.set ('n', "<Leader>b", function () fzf_lua.buffers() end )
+vim.keymap.set ('n', "<Leader>C", function () fzf_lua.colorschemes() end )
+elseif has_telescope then
 vim.keymap.set ('n', "<Leader>g", function () vim.cmd("FzfFiles") end)
 vim.keymap.set ('n', "<Leader>o", function () vim.cmd("FzfGitFiles") end)
 vim.keymap.set ('n', "<Leader>F", function () vim.cmd("FzfFiletypes") end)
 vim.keymap.set ('n', "<Leader>h", function () vim.cmd("FzfHistory") end)
 vim.keymap.set ('n', "<Leader>t", function () require'telescope.builtin'.tags{} end )
 vim.keymap.set ('n', "<Leader>C", function () require'telescope.builtin'.colorscheme{ enable_preview = true; } end )
-
+end
 nnoremap ( "n", "<Leader>ca", function () vim.lsp.buf.code_action{} end )
 
 nnoremap ( "n", "<leader>S",  function() require('spectre').open() end )

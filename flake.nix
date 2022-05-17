@@ -193,7 +193,7 @@
 
                 #   nova.hmProfiles.standard
                   nova.hmProfiles.dev
-                #   # ./hm/profiles/vscode.nix #  provided by nova-nix config
+                  ./hm/profiles/vscode.nix #  provided by nova-nix config
                   ./hm/profiles/experimental.nix
                   ./hm/profiles/emacs.nix
                   ./hm/profiles/wayland.nix

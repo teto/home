@@ -429,8 +429,6 @@ let g:vimwiki_conceallevel = 0
 " let g:markdown_composer_open_browser        = "qutebrowser"
 " if set to false then run ComposerStart
 let g:markdown_composer_autostart           = 0
-" from my fork
-let g:markdown_composer_binary = "/nix/store/vham27qv1d8gab5xh4vvpbyal3vgfs8d-vim-markdown-composer-vim/bin/markdown-composer"
 " }}}
 " markdown preview {{{
 let g:vim_markdown_preview_github=1
@@ -1716,3 +1714,6 @@ highlight BiscuitColor ctermfg=cyan
 
 " language specific color
 highlight BiscuitColorRust ctermfg=red
+let $NVIM_MKDP_LOG_LEVEL = 'debug'
+let $VIM_MKDP_RPC_LOG_FILE = expand('~/mkdp-rpc-log.log')
+let g:mkdp_browser = 'firefox'
