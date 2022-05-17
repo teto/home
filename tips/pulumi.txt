@@ -23,3 +23,7 @@ https://www.pulumi.com/docs/intro/concepts/inputs-outputs/#outputs-and-strings
       key="Name",
       value="Redis relay")
 
+
+
+Pulumi async:
+https://www.leebriggs.co.uk/blog/2021/05/09/pulumi-apply
