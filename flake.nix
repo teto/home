@@ -20,9 +20,10 @@
   };
 
   inputs = {
-    nixpkgs-teto = {
+    nixpkgs = {
       url = "github:teto/nixpkgs/nixos-unstable";
     };
+	peerix.url = "github.con:cid-chan/peerix";
     unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     mptcp-flake.url = "github:teto/mptcp-flake";
     rofi-hoogle.url = "github:teto/rofi-hoogle/fixup";
@@ -30,7 +31,7 @@
     # TODO use mine instead
     hm = {
       url = "github:teto/home-manager/scratch";
-      inputs.nixpkgs.follows = "nixpkgs-teto";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
@@ -43,7 +44,7 @@
     nova.url = "git+ssh://git@git.novadiscovery.net/world/nova-nix.git?ref=master";
     neovim = {
       url = "github:neovim/neovim?dir=contrib";
-      # inputs.nixpkgs.follows = "nixpkgs-teto";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 	sops-nix.url = "github:Mic92/sops-nix";
 
@@ -56,7 +57,7 @@
     # };
   };
 
-  outputs = { self, hm, nixpkgs-teto, nur, unstable , nova , ... }:
+  outputs = { self, hm, nixpkgs, nur, unstable , nova , ... }:
     let
       inherit (builtins) listToAttrs baseNameOf attrNames readDir;
       # inherit (nixpkgsFinal.lib) removeSuffix;
@@ -73,8 +74,8 @@
           config = { allowUnfree = true; };
         };
 
-      nixpkgs = nixpkgs-teto;
-      nixpkgsFinal = pkgImport self.inputs.nixpkgs-teto;
+      nixpkgs = nixpkgs;
+      nixpkgsFinal = pkgImport self.inputs.nixpkgs;
 
       # TODO I should use hm.lib.homeManagerConfiguration
       # and pass the pkgs to it
