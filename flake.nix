@@ -23,7 +23,7 @@
     nixpkgs = {
       url = "github:teto/nixpkgs/nixos-unstable";
     };
-	peerix.url = "github.con:cid-chan/peerix";
+	peerix.url = "github:cid-chan/peerix";
     unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     mptcp-flake.url = "github:teto/mptcp-flake";
     rofi-hoogle.url = "github:teto/rofi-hoogle/fixup";
@@ -74,7 +74,6 @@
           config = { allowUnfree = true; };
         };
 
-      nixpkgs = nixpkgs;
       nixpkgsFinal = pkgImport self.inputs.nixpkgs;
 
       # TODO I should use hm.lib.homeManagerConfiguration
@@ -217,6 +216,7 @@
                   ./nixos/configuration-lenovo.nix
                   ./nixos/profiles/nix-daemon.nix
                   ./nixos/profiles/neovim.nix
+                  # ./nixos/profiles/peerix.nix
                   ./nixos/modules/xserver.nix
                   ./nixos/modules/redis.nix
                   ./nixos/modules/ntp.nix
