@@ -206,6 +206,7 @@
             pkgs = nixpkgsFinal;
             modules = [
 			  self.inputs.sops-nix.nixosModules.sops
+			  self.inputs.peerix.nixosModules.peerix
               # often breaks
               # (import ./nixos/modules/hoogle.nix)
               ({ pkgs, ... }: {
