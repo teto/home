@@ -1,4 +1,17 @@
+" to debug vimscript, use :mess to display error messages
+" :scriptnames to list loaded scripts
+" and prefix you command with 'verbose' is a very good way to get info
+" like ':verbose map J' to know where it was loaded last
 
 # treesitter
 dump ast with
 :lua print(vim.treesitter.get_parser(0):parse():root():sexpr())
+
+package.loaded
+
+
+require'plenary.reload'..reload_module
+lua require('telescope.builtin').vim_options{}
+
+
+

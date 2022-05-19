@@ -1,4 +1,5 @@
 -- vim: set noet fdm=marker fenc=utf-8 ff=unix sts=0 sw=4 ts=4 :
+-- https://www.reddit.com/r/neovim/comments/o8dlwg/how_to_append_to_an_option_in_lua/
 -- local configs = require'nvim_lsp/configs'
 local has_telescope, telescope = pcall(require, "telescope")
 local has_fzf_lua, fzf_lua = pcall(require, "fzf-lua")
@@ -13,6 +14,27 @@ function file_exists(name)
 	if f~=nil then io.close(f) return true else return false end
 end
 -- main config {{{
+vim.opt.title  = true; -- vim will change terminal title
+-- look at :h statusline to see the available 'items'
+-- to count the number of buffer
+-- echo len(filter(range(1, bufnr('$')), 'buflisted(v:val)'))
+-- let &titlestring=" %t %{len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) } - NVIM"
+vim.opt.titlestring="%{getpid().':'.getcwd()}"
+
+-- Indentation {{{
+vim.opt.tabstop=4  -- a tab takes 4 characters (local to buffer) abrege en ts
+vim.opt.shiftwidth=4 -- Number of spaces to use per step of (auto)indent.
+-- set smarttab -- when inserting tab in front a line, use shiftwidth
+-- vim.opt.smartindent = false -- might need to disable ?
+
+-- vim.opt.cindent = true
+-- set cinkeys-=0# " list of keys that cause reindenting in insert mode
+-- set indentkeys-=0#
+
+vim.opt.softtabstop=0 -- inserts a mix of <Tab> and spaces, 0 disablres it
+-- "set expandtab " replace <Tab with spaces
+-- }}}
+
 vim.opt.showmatch = true
 vim.opt.showcmd = true
 vim.opt.showfulltag = true
@@ -30,6 +52,15 @@ vim.opt.scrolloff=2
 -- inverts the meaning of g in substitution, ie with gdefault, change all occurences
 vim.opt.gdefault = true
 vim.opt.cpoptions="aABceFsn"  -- vi ComPatibility options
+-- " should not be a default ?
+-- set cpoptions-=_
+
+vim.g.vimsyn_embed = 'lP'  -- support embedded lua, python and ruby
+-- don't syntax-highlight long lines
+vim.opt.synmaxcol=300
+vim.g.did_install_default_menus = 1  -- avoid stupid menu.vim (saves ~100ms)
+
+
 
 vim.o.swapfile = false
 vim.opt.number = true
@@ -46,9 +77,89 @@ vim.opt.termguicolors = true
 vim.opt.wrap = true
 vim.opt.linebreak = true -- better display (makes sense only with wrap)
 vim.opt.breakindent = true -- preserve or add indentation on wrap
+--
+vim.opt.modeline = true
+vim.opt.modelines=4  -- number of lines checked
+
+vim.opt.backspace='indent,eol,start'
+-- Search parameters {{{
+vim.opt.hlsearch = true -- highlight search terms
+vim.opt.incsearch = true -- show search matches as you type
+vim.opt.ignorecase = true -- ignore case when searching
+vim.opt.smartcase = true -- take case into account if search entry has capitals in it
+vim.opt.wrapscan = true -- prevent from going back to the beginning of the file
+
+vim.opt.inccommand='nosplit'
+
+vim.opt.mouse='a'
+-- https://github.com/neovim/neovim/issues/14921
+vim.opt.mousemodel='popup_setpos'
+
+vim.opt.signcolumn='auto:3'
+
+--set shada=!,'50,<1000,s100,:0,n/home/teto/.cache/nvim/shada
+
+-- added 'n' to defaults to allow wrapping lines to overlap with numbers
+-- n => ? used for wrapped lines as well
+-- vim.opt.matchpairs+=<:>  -- Characters for which % should work
+
+-- TODO to use j/k over
+vim.opt.whichwrap= vim.opt.whichwrap + '<,>,h,l'
+
+-- nnoremap <Leader>/ :set hlsearch! hls?<CR> " toggle search highlighting
+-- }}}
+-- folding config {{{
+-- " block,hor,mark,percent,quickfix,search,tag,undo
+-- " set foldopen+=all " specifies commands for which folds should open
+-- " set foldclose=all
+-- "set foldtext=
+  vim.opt.fillchars= vim.opt.fillchars + 'foldopen:▾,foldsep:│,foldclose:▸'
+  vim.opt.fillchars= vim.opt.fillchars +  'msgsep:‾'
+  vim.opt.fillchars= vim.opt.fillchars +  'diff: ' -- \
+  -- hi MsgSeparator ctermbg=black ctermfg=white
+  -- " hi DiffDelete guibg=red
+-- }}}
+-- default behavior for diff=filler,vertical
+vim.opt.diffopt='filler,vertical'
+-- neovim > change to default ?
+vim.opt.diffopt= vim.opt.diffopt + 'hiddenoff'
+vim.opt.diffopt= vim.opt.diffopt + 'iwhiteall'
+vim.opt.diffopt= vim.opt.diffopt + "internal,algorithm:patience"
+
+vim.opt.undofile = true
+-- let undos persist across open/close
+vim.opt.undodir=vim.fn.stdpath('data')..'/undo/'
 --}}}
 
+-- nnoremap{ "n", "<C-N><C-N>", function () vim.opt.invnumber end }
+
+-- clipboard {{{
+-- X clipboard gets aliased to +
+vim.opt.clipboard='unnamedplus'
+-- copy to external clipboard
+-- nnoremap({'n', 'gp', '"+p' })
+-- nnoremap({'n', 'gy', '"+y' })
+-- }}}
+-- highlight SignifySignChange cterm=bold ctermbg=237  ctermfg=227 guibg=NONE guifg=#F08A1F
+-- highlight SignifySignAdd cterm=bold ctermbg=237  ctermfg=227 guibg=NONE guifg=green
+-- highlight SignifySignDelete cterm=bold ctermbg=237  ctermfg=227 guibg=NONE guifg=red
+
+-- wildmenu completion
+vim.opt.wildmenu = true
+vim.opt.omnifunc='v:lua.vim.lsp.omnifunc'
+
+
 -- lua vim.diagnostic.setqflist({open = tru, severity = { min = vim.diagnostic.severity.WARN } })
+-- fugitive-gitlab {{{
+-- also add our token for private repos
+vim.g.fugitive_gitlab_domains = {'https://git.novadiscovery.net'}
+-- }}}
+-- set guicursor="n-v-c:block-Cursor/lCursor,ve:ver35-Cursor,o:hor50-Cursor,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor,sm:block-Cursor"
+vim.opt.guicursor='n-v-c:block-blinkon250-Cursor/lCursor,ve:ver35-Cursor,o:hor50-Cursor,i-ci:ver25-blinkon250-Cursor/lCursor,r-cr:hor20-Cursor/lCursor'
+
+-- highl Cursor ctermfg=16 ctermbg=253 guifg=#000000 guibg=#00FF00
+vim.api.nvim_set_hl(0, 'Cursor', { ctermfg=16, ctermbg=253, fg='#000000', bg='#00FF00' })
+vim.api.nvim_set_hl(0, 'CursorLine', { fg='None', bg='#293739' })
 
 -- local my_image = require('hologram.image'):new({
 --	   source = '/home/teto/doctor.png',
@@ -56,6 +167,74 @@ vim.opt.breakindent = true -- preserve or add indentation on wrap
 --	   col = 0,
 -- })
 -- my_image:transmit() -- send image data to terminal
+
+-- diagnostic
+
+
+vim.api.nvim_set_hl(0, 'DiagnosticVirtualTextError', { fg='red'})
+vim.api.nvim_set_hl(0, 'DiagnosticVirtualTextDebug', { fg='green'})
+
+
+vim.api.nvim_set_hl(0, "SignifySignChange", {
+	cterm={bold= true},
+	ctermbg=237,
+	ctermfg=227,
+	bg="NONE",
+	fg='#F08A1F'
+})
+vim.api.nvim_set_hl(0,'SignifySignAdd', { cterm={ bold=true}, ctermbg=237,  ctermfg=227, bg='NONE', fg='green' })
+vim.api.nvim_set_hl(0, 'SignifySignDelete', { cterm= {bold=true}, ctermbg=237,  ctermfg=227, bg='NONE', fg='red' })
+
+
+vim.api.nvim_create_autocmd("TextYankPost", {
+  callback =  function()
+    vim.highlight.on_yank({higroup="IncSearch", timeout=1000})
+  end,
+})
+
+
+-- autocmd ColorScheme *
+--       \ highlight Comment gui=italic
+--       \ | highlight Search gui=underline
+--       \ | highlight MatchParen guibg=NONE guifg=NONE gui=underline
+--       \ | highlight NeomakePerso cterm=underline ctermbg=Red  ctermfg=227  gui=underline
+
+
+-- netrw config {{{
+vim.g.netrw_browsex_viewer="xdg-open"
+vim.g.netrw_home=vim.env.XDG_CACHE_HOME..'/nvim'
+vim.g.netrw_liststyle=1 -- long listing with timestamp
+--}}}
+vim.keymap.set("n", "<leader>rg", "<Cmd>Grepper -tool rg -open -switch<CR>")
+-- rgb
+-- vim.keymap.set("n", "<leader>rgb", "<Cmd>Grepper -tool rgb -open -switch -buffer<CR>")
+
+
+-- vim.api.nvim_create_augroup('bufcheck', {clear = true})
+
+-- autocmd BufReadPost *.pdf silent %!pdftotext -nopgbrk -layout -q -eol unix "%" - | fmt -w78
+-- " convert all kinds of files (but pdf) to plain text
+-- autocmd BufReadPost *.doc,*.docx,*.rtf,*.odp,*.odt silent %!pandoc "%" -tplain -o /dev/stdout
+vim.api.nvim_create_autocmd("BufReadPost", {
+	pattern = "*.pdf",
+  callback =  function()
+	  vim.cmd [[%!pdftotext -nopgbrk -layout -q -eol unix "%" - | fmt -w78]]
+    vim.highlight.on_yank({higroup="IncSearch", timeout=1000})
+  end,
+})
+
+
+
+-- display buffer name top-right
+use {
+	"b0o/incline.nvim",
+	config = function ()
+		require('incline').setup()
+	end
+}
+use {
+	"/home/teto/rest.nvim"
+}
 
 -- use {
 -- 	"~/telescope-frecency.nvim",
@@ -411,16 +590,8 @@ use { 'gennaro-tedesco/nvim-peekup' }
 --end)
 --end
 --}
--- use { 'wfxr/minimap.vim' }
--- use {
---	-- to work with github
---	'pwntester/octo.nvim'
--- -- , requires = { 'nvim-lua/popup.nvim' }
--- }
 
 use { 'notomo/gesture.nvim' }
--- use { 'svermeulen/vimpeccable'} -- broken ?
--- use { 'npxbr/gruvbox.nvim'
 -- using teto instead to test packer luarocks support
 -- use_rocks { 'teto/gruvbox.nvim'
 	-- , requires = {"rktjmp/lush.nvim"}
@@ -442,6 +613,8 @@ use {
 	'bazelbuild/vim-bazel' , requires = { 'google/vim-maktaba' }
 }
 use 'bazelbuild/vim-ft-bzl'
+
+-- TODO upstream
 use {
 	'chipsenkbeil/distant.nvim'
 	, config = function()
@@ -696,7 +869,9 @@ use { 'Pocco81/AutoSave.nvim' -- :ASToggle /AsOn / AsOff
 end
 }
 -- use 'sindrets/diffview.nvim' -- :DiffviewOpen
-use 'rlch/github-notifications.nvim'
+
+-- lua require('github-notifications.menu').notifications()
+use 'rlch/github-notifications.nvim' 
 use {
 	'nvim-lualine/lualine.nvim' -- fork of hoob3rt/lualine
 	, requires = { 'arkav/lualine-lsp-progress' }
@@ -837,20 +1012,11 @@ vim.keymap.set('n', '<leader>d', function()
 end)
 
 if has_fzf_lua then
-vim.keymap.set ('n', "<Leader>g", function () fzf_lua.files() end)
-vim.keymap.set ('n', "<Leader>o", function () fzf_lua.git_files() end)
-vim.keymap.set ('n', "<Leader>F", function () vim.cmd("FzfFiletypes") end)
-vim.keymap.set ('n', "<Leader>h", function () vim.cmd("FzfHistory") end)
-vim.keymap.set ('n', "<Leader>t", function () fzf_lua.tags() end )
-vim.keymap.set ('n', "<Leader>b", function () fzf_lua.buffers() end )
-vim.keymap.set ('n', "<Leader>C", function () fzf_lua.colorschemes() end )
+	require 'teto.fzf-lua'.register_keymaps()
+
 elseif has_telescope then
-vim.keymap.set ('n', "<Leader>g", function () vim.cmd("FzfFiles") end)
-vim.keymap.set ('n', "<Leader>o", function () vim.cmd("FzfGitFiles") end)
-vim.keymap.set ('n', "<Leader>F", function () vim.cmd("FzfFiletypes") end)
-vim.keymap.set ('n', "<Leader>h", function () vim.cmd("FzfHistory") end)
-vim.keymap.set ('n', "<Leader>t", function () require'telescope.builtin'.tags{} end )
-vim.keymap.set ('n', "<Leader>C", function () require'telescope.builtin'.colorscheme{ enable_preview = true; } end )
+	require 'teto.telescope'.telescope_create_keymaps()
+
 end
 nnoremap ( "n", "<Leader>ca", function () vim.lsp.buf.code_action{} end )
 
@@ -912,7 +1078,6 @@ end
 
 
 -- since it was not merge yet
-if vim.ui then
 
 vim.ui.pick = function (entries, opts)
 	acceptable_files = vim.tbl_values(entries)
@@ -955,7 +1120,6 @@ vim.ui.pick = function (entries, opts)
 	-- print("Selected", selection)
 
 	return selection
-end
 end
 
 
@@ -1256,7 +1420,7 @@ if has_telescope then
 	-- 	}
 	}
 	-- This will load fzy_native and have it override the default file sorter
-	telescope.load_extension('fzf')
+	-- telescope.load_extension('fzf')
 	-- telescope.load_extension('fzy_native')
 	telescope.load_extension("notify")
 	-- telescope.load_extension("frecency")
@@ -1330,6 +1494,8 @@ end
 --	vim.lsp.util.set_qflist(all_diagnostics)
 -- end
 vim.opt.background = "dark" -- or "light" for light mode
+
+vim.opt.showbreak = '↳ '  	-- displayed in front of wrapped lines
 
 
 -- TODO add a command to select a ref (from telescope ?) and call Gitsigns change_base
@@ -1429,7 +1595,8 @@ menu_add('Diagnostic.Set_severity_to_all', 'lua vim.diagnostic.config({virtual_t
 
 menu_add("Search.Search_and_replace", 'lua require("spectre").open()')
 
-menu_add("Rest.RunRequest", "RestNvim")
+menu_add("Rest.RunRequest", "lua require('rest-nvim').run(true)")
+
 -- menu_add("Search.Search\ in\ current\ Buffer", :Grepper -switch -buffer")
 -- menu_add("Search.Search\ across\ Buffers :Grepper -switch -buffers")
 -- menu_add("Search.Search\ across\ directory :Grepper")
@@ -1474,6 +1641,17 @@ function open_contextual_menu()
 		function(res) vim.cmd(res) end
 	)
 end
+
+
+vim.keymap.set("n", "<leader>q", "<Cmd>Sayonara!<cr>", { silent = true})
+vim.keymap.set("n", "<leader>Q", "<Cmd>Sayonara<cr>", { silent = true})
+
+vim.keymap.set('n',  '<leader>rr' , "<Plug>RestNvim")
+vim.keymap.set('n',  '<leader>rp' , "<Plug>RestNvimPreview")
+vim.keymap.set('n',  '<C-J>' , "<Plug>RestNvimPreview")
+vim.keymap.set('n',  '<C-j>' , "<Plug>RestNvimPreview")
+-- nnoremap <Plug>RestNvimPreview :lua require('rest-nvim').run(true)<CR>
+-- nnoremap <Plug>RestNvimLast :lua require('rest-nvim').last()<CR>
 
 vim.api.nvim_set_keymap(
   'n',

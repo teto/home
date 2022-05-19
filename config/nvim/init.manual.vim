@@ -1,8 +1,4 @@
 " vim: set noet fenc=utf-8 ff=unix sts=0 sw=2 ts=8 fdm=marker :
-" to debug vimscript, use :mess to display error messages
-" :scriptnames to list loaded scripts
-" and prefix you command with 'verbose' is a very good way to get info
-" like ':verbose map J' to know where it was loaded last
 " ❌
 " git diff http://vimcasts.org/episodes/fugitive-vim-resolving-merge-conflicts-with-vimdiff/ {{{
 " the left window contains the version from the target branch
@@ -45,20 +41,12 @@ Plug 'seandewar/nvimesweeper' " not packaged
 " Plug 'vim-denops/denops.vim'
 " Plug 'ryoppippi/bad-apple.vim' " needs denops
 
-" Plug 'soywod/himalaya' " mail reader :Himalaya ; needs the rust CLI reader
-" himalaya
-" Plug 'soywod/himalaya', {'rtp': 'vim'}
-
 " recommanded branch faster
 
-" Plug 'jubnzv/virtual-types.nvim' " moved to nix
 " Plug 'eugen0329/vim-esearch' " search & replace
 Plug '~/neovim/neovim-ui'
 Plug 'kshenoy/vim-signature' " display marks in gutter, love it
 
-
-" Plug 'strboul/urlview.vim' " :Urlview to list urls and open them
-" Plug 'diepm/vim-rest-console' " test rest APIs * Hit the trigger key (<C-j> by default).
 " Plug '~/pdf-scribe.nvim'  " to annotate pdf files from nvim :PdfScribeInit
 
 " annotations plugins {{{
@@ -73,22 +61,17 @@ Plug 'skywind3000/vim-quickui' " to design cool uis
 Plug '~/neovim/nvim-lspconfig' " while fuzzing details out
 " Plug 'puremourning/vimspector' " to debug programs
 Plug 'bfredl/nvim-luadev'  " lua repl :Luadev
-" Plug 'hotwatermorning/auto-git-diff' " to help rebasing, damn cool
 " Plug 'norcalli/nvim-terminal.lua' " to display ANSI colors
 Plug '~/neovim/nvim-terminal.lua' " to display ANSI colors
 Plug 'bogado/file-line' " to open a file at a specific line
 " Plug 'glacambre/firenvim' " to use nvim in firefox
 Plug 'alok/notational-fzf-vim' " to take notes, :NV
-" Plug 'iamcco/markdown-preview.nvim' " :MarkdownPreview
-" Plug 'suy/vim-context-commentstring' " commen for current programming language
 Plug 'voldikss/vim-translator'
 " call :NR on a region than :w . coupled with b:nrrw_aucmd_create,
 " Plug 'chrisbra/NrrwRgn' " to help with multi-ft files
 Plug 'chrisbra/vim-diff-enhanced' "
 " Plug 'vim-pandoc/vim-pandoc'
 " Plug 'vim-pandoc/vim-pandoc-syntax'
-" Plug 'shime/vim-livedown'  " :LivedownPreview
-" Plug 'conornewton/vim-pandoc-markdown-preview' " :StartMdPreview / StopMd
 
 " around vcs {{{
 Plug 'tpope/vim-fugitive' 
@@ -106,13 +89,9 @@ Plug 'rhysd/git-messenger.vim' " to show git message :GitMessenger
 " Plug 'mcchrish/info-window.nvim'  " :InfoWindowToggle to display buffer information in a popup
 " Plug 'tweekmonster/nvim-api-viewer', {'on': 'NvimAPI'} " see nvim api
 Plug 'tweekmonster/startuptime.vim', {'on': 'StartupTime'} " see startup time per script
-" Plug 'Konfekt/vim-CtrlXA' " use ctrl a/xto cycle between different words
-" Plug 'editorconfig/editorconfig-vim' " not remote but involves python
-" Plug 'neomake/neomake' " just for nix and neovim dev with nvimdev ?
 " provider
 " needs ruby support, works in recent neovim
 " Plug 'junegunn/vim-github-dashboard', { 'do': ':UpdateRemotePlugins' }
-" Plug 'fmoralesc/vim-pad', {'branch': 'devel'} " :Pad new, note taking
 " while waiting for my neovim notification provider...
 " Plug 'tjdevries/descriptive_maps.vim', {'do': ':UpdateRemotePlugins' } " :call DescriptiveStart()
 " Plug 'the-lambda-church/coquille', {'branch': 'matt', 'for': 'coq'}
@@ -169,15 +148,8 @@ Plug 'honza/vim-snippets'
 
 " Plug 'sjl/gundo.vim' " :GundoShow/Toggle to redo changes
 
-""" contact autocompletion
-
 " haskell plugins{{{
 Plug 'neovimhaskell/nvim-hs.vim' " to help with nvim-hs
-Plug 'neovimhaskell/haskell-vim', {'for': 'haskell'} " really helps with syntax highlighting
-" Plug 'enomsg/vim-haskellConcealPlus', {'for':'haskell'}     " unicode for haskell operators
-" Plug 'bitc/vim-hdevtools'
-"
-" Plug 'ncm2/float-preview.nvim'
 "}}}
 
 " Plug 'tpope/vim-unimpaired' " [<space> [e [n ]n pour gerer les conflits etc...
@@ -206,8 +178,6 @@ Plug 'tpope/vim-rhubarb' " github support in fugitive, use |i_CTRL-X_CTRL-O|
 " Plug 'mhinz/vim-rfc', { 'on': 'RFC' } " requires nokigiri gem
 " careful maps F4 by default
 Plug 'teto/Modeliner' " <leader>ml to setup buffer modeline
-" This one has bindings mapped to <leader>l
-" Plug 'vimwiki/vimwiki', { 'branch': 'dev'}   " to write notes
 
 " does not work seems to be better ones
 " Plug 'vasconcelloslf/vim-interestingwords' " highlight the words you choose <leader>k (does not work in neovim)
@@ -230,70 +200,24 @@ Plug 'marko-cerovac/material.nvim'
 Plug 'chrisbra/csv.vim'
 
 " Plug 'junegunn/rainbow_parentheses.vim' " the recommanded one
-" Plug 'gregsexton/gitv'
 " Plug 'jeffwilliams/basejump' " to alt+click on file:line and go to it
 Plug 'neovim/nvimdev.nvim' " thanks tweekmonster !
 " Plug 'antoinemadec/openrgb.nvim'  " to take into account RGB stuff
 call plug#end()
 " }}}
 
-let g:did_install_default_menus = 1  " avoid stupid menu.vim (saves ~100ms)
 
-
-" Indentation {{{
-set tabstop=4 " a tab takes 4 characters (local to buffer) abrege en ts
-set shiftwidth=4 " Number of spaces to use per step of (auto)indent.
-" set smarttab " when inserting tab in front a line, use shiftwidth
-set smartindent " might need to disable ?
-
-set cindent
-set cinkeys-=0# " list of keys that cause reindenting in insert mode
-set indentkeys-=0#
-
-set shiftround " round indent to multiple of 'shiftwidth' (for << and >>)
-set softtabstop=0 " inserts a mix of <Tab> and spaces, 0 disablres it
-"set expandtab " replace <Tab with spaces
-" }}}
-" Netrw configuration {{{
-" decide with which program to open files when typing 'gx'
-" let g:netrw_gx
-let g:netrw_browsex_viewer="xdg-open"
-let g:netrw_home=$XDG_CACHE_HOME.'/nvim'
-let g:netrw_liststyle=1 " long listing with timestamp
-" nnoremap gx :call netrw#BrowseX(expand((exists("g:netrw_gx")? g:netrw_gx : '<cfile>')),netrw#CheckIfRemote())<cr>
-" nnoremap gx :call netrw#BrowseX(expand((exists("g:netrw_gx")? g:netrw_gx : '<cfile>')),netrw#CheckIfRemote())<cr>
-" }}}
+" to load plugins in ftplugin matching ftdetect
+filetype plugin on
+syntax on
 " Dirvish {{{
 let g:loaded_netrwPlugin = 1 " ???
 command! -nargs=? -complete=dir Vexplore leftabove vsplit | silent Dirvish <args>
 command! -nargs=? -complete=dir Sexplore belowright split | silent Dirvish <args>
 " }}}
-
-set title " vim will change terminal title
-" look at :h statusline to see the available 'items'
-" to count the number of buffer
-" echo len(filter(range(1, bufnr('$')), 'buflisted(v:val)'))
-" let &titlestring=" %t %{len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) } - NVIM"
-set titlestring=%{getpid().':'.getcwd()}
-
-
-" if boths are set at the same time, vim uses an hybrid mode
-"Prefer relative line numbering?
-" set relativenumber
-" TODO do a macro that cycles throught show/hide absolute/relative line numbers
-map <C-N><C-N> <Cmd>set invnumber<CR>
-" should not be a default ?
-set cpoptions-=_
-
-" to load plugins in ftplugin matching ftdetect
-filetype plugin on
-syntax on
-let g:vimsyn_embed = 'lP'  " support embedded lua, python and ruby
-" don't syntax-highlight long lines
-set synmaxcol=300
 " Dealing with pdf {{{
 " Read-only pdf through pdftotext / arf kinda fails silently on CJK documents
-autocmd BufReadPost *.pdf silent %!pdftotext -nopgbrk -layout -q -eol unix "%" - | fmt -w78
+" autocmd BufReadPost *.pdf silent %!pdftotext -nopgbrk -layout -q -eol unix "%" - | fmt -w78
 
 " convert all kinds of files (but pdf) to plain text
 autocmd BufReadPost *.doc,*.docx,*.rtf,*.odp,*.odt silent %!pandoc "%" -tplain -o /dev/stdout
@@ -312,66 +236,26 @@ endfunc
 
 nnoremap <C-RightMouse> :call SynStack()<CR>
 " }}}
-" fugitive-gitlab {{{
-" also add our token for private repos
-let g:fugitive_gitlab_domains = ['https://git.novadiscovery.net']
-"}}}
-" vimspector {{{
-let g:vimspector_enable_mappings = 'HUMAN'
-"}}}
-" backup files etc... {{{
-" set noswapfile
-" set undodir=~/.vim/tmp/undo//     " undo files
-" set backupdir=~/.vim/tmp/backup// " backups
-" set directory=~/.vim/tmp/swap//   " swap files
-" }}}
 " Wildmenu completion {{{
 
 " display a menu when need to complete a command
-set wildmenu
 set wildchar=<Tab>
 " list:longest, " list breaks the pum
 set wildmode=longest,list " 'longest,list' => fills out longest then show list
 " set wildoptions+=pum
 
-set wildignore+=.hg,.git,.svn                    " Version control
-" set wildignore+=*.aux,*.out,*.toc                " LaTeX intermediate files
-set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg   " binary images
-set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest " compiled object files
-set wildignore+=*.sw?                            " Vim swap files
-
-set wildignore+=*.luac                           " Lua byte code
-
-set wildignore+=*.pyc                            " Python byte code
-
-set wildignore+=*.orig                           " Merge resolution files
-
-" Clojure/Leiningen
-set wildignore+=classes
-set wildignore+=lib
-
-
 " }}}
 " Modeliner shortcuts  {{{
-set modeline
-set modelines=4 "number of lines checked
 nmap <leader>ml <Cmd>Modeliner<Enter>
 let g:Modeliner_format = 'et ff= fenc= sts= sw= ts= fdm='
 " }}}
-"clipboard {{{
-" X clipboard gets aliased to +
-set clipboard=unnamedplus
-" copy to external clipboard
-noremap gp "+p
-noremap gy "+y
-"}}}
 " Window / splits {{{
 "cmap w!! w !sudo tee % >/dev/null
 " vim: set noet fenc=utf-8 ff=unix sts=0 sw=4 ts=4 :
-nmap <silent> <C-Up> :wincmd k<CR>
-nmap <silent> <C-Down> :wincmd j<CR>
-nmap <silent> <C-Left> :wincmd h<CR>
-nmap <silent> <C-Right> :wincmd l<CR>
+nmap <silent> <C-Up> <cmd>wincmd k<CR>
+nmap <silent> <C-Down> <cmd>wincmd j<CR>
+nmap <silent> <C-Left> <cmd>wincmd h<CR>
+nmap <silent> <C-Right> <cmd>wincmd l<CR>
 
 nmap  <D-Up> :wincmd k<CR>
 nmap <silent> <D-Down> :wincmd j<CR>
@@ -413,79 +297,18 @@ set splitbelow	" on horizontal splits
 set splitright   " on vertical split
 
 " }}}
-" vimwiki {{{
-let wiki_1 = {}
-let wiki_1.path = '~/Nextcloud/perso/notes'
-let wiki_1.index = 'main'
-let wiki_1.ext = '.wiki'
-let g:vimwiki_list = [
-  \ wiki_1, {'path': '~/dotfiles/tips'} 
-  \ ]
-let g:vimwiki_url_maxsave=0
-let g:vimwiki_conceallevel = 0
-"}}}
-" Markdown composer {{{ 
-" Run with :ComposerStart
-" let g:markdown_composer_open_browser        = "qutebrowser"
-" if set to false then run ComposerStart
-let g:markdown_composer_autostart           = 0
-" }}}
-" markdown preview {{{
-let g:vim_markdown_preview_github=1
-let g:vim_markdown_preview_use_xdg_open=1
-"}}}
 " vim-lastplace to restore cursor position {{{
 let g:lastplace_ignore = "gitcommit,gitrebase,svn,hgcommit"
 let g:lastplace_ignore_buftype = "quickfix,nofile,help"
 " }}}
-" far config (Find And Replace) {{{
-" let g:far#source='agnvim'
-" let g:far#source='vimgrep'
-" let g:far#source='ag'
-" let g:far#limit
-let g:far#source='rg'
-let g:far#collapse_result=1
-" }}}
-" instant restructured text {{{
-let g:instant_rst_browser = "qutebrowser"
-let g:instant_rst_additional_dirs=[ "/home/teto/mptcpweb" ]
-" }}}
-" Appearance {{{
-" set background=dark " remember: does not change the background color !
-" one  ▶
-
-let &showbreak = '↳ '  	" displayed in front of wrapped lines
-
-" @:NonText
-" set highlight
-" ~:EndOfBuffer,z:TermCursor,
-
-filetype on                   " required! (still required in vim ?)
-set backspace=indent,eol,start
-"}}}
 " Gruvbox config {{{
 " contrast can be soft/medium/hard
 " there are other many options
 let g:gruvbox_contrast_dark="hard"
 let g:gruvbox_contrast_light="hard"
 " }}}
-" Diminactive config {{{
-let g:diminactive_buftype_blacklist = []
-let g:diminactive_debug = 0
-let g:diminactive_use_colorcolumn = 1
-let g:diminactive_use_syntax = 0
-let g:diminactive_enable_focus = 0
-"}}}
 " ultisnips {{{
 let g:UltiSnipsSnippetDirectories=[stdpath('config').'/snippets' ]
-" }}}
-" interesting words {{{
-"nnoremap <silent> <leader>k :call InterestingWords('n')<cr>
-"nnoremap <silent> <leader>K :call UncolorAllWords()<cr>
-" let g:terminal_color_0 = "#202020"
-" let g:interestingWordsTermColors = ['#202020', '121', '211', '137', '214', '222']
-" let g:interestingWordsTermColors = ['#aeee00', '#ff0000', '#0000ff', '#b88823', '#ffa724', '#ff2c4b']
-
 " }}}
 " dirvish {{{
 let g:dirvish_mode=2
@@ -500,10 +323,6 @@ let g:firenvim_config = {
     \ }
 \ }
 "}}}
-" float-preview {{{
-" let g:float_preview#docked = 0
-" let g:float_preview#win
-"}}}
 " vim-pad {{{
 let g:pad#dir=$XDG_DATA_HOME"/notes"
 let g:pad#set_mappings=0
@@ -514,12 +333,6 @@ nmap <leader>ps <Plug>(pad-search)
 nmap <leader>pn <Plug>(pad-new)
 
 " let g:pad#rename_files = 0
-"}}}
-" lua tree {{{
-let g:lua_tree_auto_open = 1
-let g:lua_tree_quit_on_open = 1
-let g:lua_tree_auto_close = 1
-let g:lua_tree_tab_open = 1
 "}}}
 " gutentags + gutenhasktags {{{
 " to keep logs GutentagsToggleTrace
@@ -546,12 +359,6 @@ let g:gutentags_file_list_command = 'rg --files'
 
 let g:gutentags_ctags_exclude = ['.vim-src', 'build', '.mypy_cache']
 " }}}
-" fzf-preview {{{
-" let g:fzf_preview_layout = 'top split new'
-let g:fzf_preview_layout = ''
-" Key to toggle fzf window size of normal size and full-screen
-let g:fzf_full_preview_toggle_key = '<C-s>'
-"}}}
 " Csv config {{{
 " There is the analyze command as well
 let g:csv_autocmd_arrange = 0
@@ -559,56 +366,6 @@ let g:csv_autocmd_arrange = 0
 
 " call InitCSV after changing this value
 " :let g:csv_delim=','
-" }}}
-" unicode.vim {{{
-" overrides ga
-nmap ga <Plug>(UnicodeGA)
-" }}}
-" Search parameters {{{
-set hlsearch " highlight search terms
-set incsearch " show search matches as you type
-set ignorecase " ignore case when searching
-set smartcase " take case into account if search entry has capitals in it
-set wrapscan " prevent from going back to the beginning of the file
-
-set inccommand=nosplit
-
-nnoremap <Leader>/ :set hlsearch! hls?<CR> " toggle search highlighting
-
-" }}}
-" limelight {{{
-" Color name (:help cterm-colors) or ANSI code
-" let g:limelight_conceal_ctermfg = 'gray'
-" let g:limelight_conceal_ctermfg = 240
-
-" " Color name (:help gui-colors) or RGB color
-" let g:limelight_conceal_guifg = 'DarkGray'
-" let g:limelight_conceal_guifg = '#777777'
-
-" " Default: 0.5
-" let g:limelight_default_coefficient = 0.7
-
-" " Number of preceding/following paragraphs to include (default: 0)
-" let g:limelight_paragraph_span = 1
-
-" " Beginning/end of paragraph
-" "   When there's no empty line between the paragraphs
-" "   and each paragraph starts with indentation
-" let g:limelight_bop = '^\s'
-" let g:limelight_eop = '\ze\n^\s'
-
-" " Highlighting priority (default: 10)
-" "   Set it to -1 not to overrule hlsearch
-" let g:limelight_priority = -1
-" goyo.vim integration
-" autocmd! User GoyoEnter Limelight
-" autocmd! User GoyoLeave Limelight!
-" }}}
-" vim-sayonara * {{{
-nnoremap <silent><leader>Q  <Cmd>Sayonara<cr>
-nnoremap <silent><leader>q  <Cmd>Sayonara!<cr>
-
-let g:sayonara_confirm_quit = 0
 " }}}
 " haskell-vim config {{{
 let g:haskell_enable_quantification = 1   " to enable highlighting of `forall`
@@ -773,10 +530,6 @@ let g:vimtex_compiler_latexmk = {
 "<plug>(vimtex-toc-toggle)
 " au BufEnter *.tex exec ":setlocal spell spelllang=en_us"
 "" }}}
-" github-comment {{{
-" ,precedes:❮,nbsp:×
-let g:github_user = 'teto'
-"}}}
 " vim-listchars config {{{
     "\"trail:·,tab:→\ ,eol:↲,precedes:<,extends:>"
 "let g:listchar_formats=[
@@ -793,61 +546,6 @@ set listchars=tab:•·,trail:·,extends:❯,precedes:❮,nbsp:×
 " set listchars+=conceal:X
 " conceal is used by deefault if cchar does not exit
 set listchars+=conceal:❯
-" }}}
-" Grepper {{{
-
-" nnoremap <leader>git :Grepper -tool git -open -nojump
-" nnoremap <leader>ag  :Grepper -tool ag  -open -switch
-nnoremap <leader>rg  <Cmd>Grepper -tool rg -open -switch<CR>
-nnoremap <leader>rgb  <Cmd>Grepper -tool rg -open -switch -buffer<CR>
-" TODO add 
-vnoremap <leader>rg  <Cmd>Grepper -tool rg -open -switch<CR>
-
-" highlight! link QuickFixLine Normal
-
-" function! OnGrepperCompletion()
-"   copen
-"   hi link GrepperNormal   StatusLineNC
-"   " guibg=lightblue
-"   if exists("winhl")
-"     setlocal winhl=Normal:GrepperNormal
-"   endif
-" " call notify#emitNotification('grepper', 'Search finished') |
-" endfunction
-
-" autocmd User Grepper call OnGrepperCompletion()
-
-" nmap gs <plug>(GrepperOperator)
-" xmap gs <plug>(GrepperOperator)
-
-" }}}
-" folding config {{{
-" block,hor,mark,percent,quickfix,search,tag,undo
-" set foldopen+=all " specifies commands for which folds should open
-" set foldclose=all
-"set foldtext=
-  set fillchars+=foldopen:▾,foldsep:│
-  set fillchars+=foldclose:▸
-  set fillchars+=msgsep:‾
-  set fillchars+=diff:\ 
-  hi MsgSeparator ctermbg=black ctermfg=white
-  " hi DiffDelete guibg=red
-
-  set fdc=auto:2
-  " set to 2 to check if that's why with nvim-treesitter, syntax gets disabled
-  " set fdc=2
-" }}}
-" vim-sneak {{{
-let g:sneak#s_next = 1 " can press 's' again to go to next result, like ';'
-let g:sneak#prompt = 'Sneak>'
-
-let g:sneak#streak = 0
-
-map f <Plug>Sneak_f
-map F <Plug>Sneak_F
-map t <Plug>Sneak_t
-map T <Plug>Sneak_T
-
 " }}}
 " Peekaboo config {{{
 " Default peekaboo window
@@ -966,98 +664,6 @@ let g:iron_map_extended=0
 " bookmarks.vim {{{
   let g:bookmark_no_default_key_mappings = 1
 "}}}
-" mardown-preview.nvim {{{
-" set to 1, nvim will open the preview window after entering the markdown buffer default: 0
-let g:mkdp_auto_start = 0
-" set to 1, the nvim will auto close current preview window when change
-" from markdown buffer to another buffer
-" default: 1
-let g:mkdp_auto_close = 1
-
-" set to 1, the vim will refresh markdown when save the buffer or
-" leave from insert mode, default 0 is auto refresh markdown as you edit or
-" move the cursor
-" default: 0
-let g:mkdp_refresh_slow = 0
-
-" set to 1, the MarkdownPreview command can be use for all files,
-" by default it can be use in markdown file
-" default: 0
-let g:mkdp_command_for_global = 0
-
-" set to 1, preview server available to others in your network
-" by default, the server listens on localhost (127.0.0.1)
-" default: 0
-let g:mkdp_open_to_the_world = 0
-
-" use custom IP to open preview page
-" useful when you work in remote vim and preview on local browser
-" more detail see: https://github.com/iamcco/markdown-preview.nvim/pull/9
-" default empty
-let g:mkdp_open_ip = ''
-
-" specify browser to open preview page
-" default: ''
-let g:mkdp_browser = ''
-
-" set to 1, echo preview page url in command line when open preview page
-" default is 0
-let g:mkdp_echo_preview_url = 0
-
-" a custom vim function name to open preview page
-" this function will receive url as param
-" default is empty
-let g:mkdp_browserfunc = ''
-
-" options for markdown render
-" mkit: markdown-it options for render
-" katex: katex options for math
-" uml: markdown-it-plantuml options
-" maid: mermaid options
-" disable_sync_scroll: if disable sync scroll, default 0
-" sync_scroll_type: 'middle', 'top' or 'relative', default value is 'middle'
-"   middle: mean the cursor position alway show at the middle of the preview page
-"   top: mean the vim top viewport alway show at the top of the preview page
-"   relative: mean the cursor position alway show at the relative positon of the preview page
-" hide_yaml_meta: if hide yaml metadata, default is 1
-let g:mkdp_preview_options = {
-    \ 'mkit': {},
-    \ 'katex': {},
-    \ 'uml': {},
-    \ 'maid': {},
-    \ 'disable_sync_scroll': 0,
-    \ 'sync_scroll_type': 'middle',
-    \ 'hide_yaml_meta': 1
-    \ }
-
-" use a custom markdown style must be absolute path
-let g:mkdp_markdown_css = ''
-
-" use a custom highlight style must absolute path
-let g:mkdp_highlight_css = ''
-
-" use a custom port to start server or random for empty
-let g:mkdp_port = ''
-
-" preview page title
-" ${name} will be replace with the file name
-let g:mkdp_page_title = '「${name}」'
-
-" normal/insert
-" <Plug>MarkdownPreview
-" <Plug>MarkdownPreviewStop
-" <Plug>MarkdownPreviewToggle
-
-" " example
-" nmap <C-s> <Plug>MarkdownPreview
-" nmap <M-s> <Plug>MarkdownPreviewStop
-" nmap <C-p> <Plug>MarkdownPreviewToggle
-" Start the preview
-" :MarkdownPreview
-
-" " Stop the preview"
-" :MarkdownPreviewStop
-"}}}
 " alok/notational-fzf-vim {{{
 " use c-x to create the note
 " let g:nv_search_paths = []
@@ -1077,8 +683,6 @@ nmap <Space>W <Plug>(quickhl-manual-reset)
 xmap <Space>W <Plug>(quickhl-manual-reset)
 
 "}}}
-" compe
-"
 " pdf-scribe {{{
 " PdfScribeInit
 let g:pdfscribe_pdf_dir  = expand('$HOME').'/Nextcloud/papis_db'
@@ -1086,14 +690,6 @@ let g:pdfscribe_notes_dir = expand('$HOME').'/Nextcloud/papis_db'
 "}}}
 " vsnip {{{
 let g:vsnip_snippet_dir = stdpath('config').'/vsnip'
-"}}}
-" scrollbar.nvim {{{
-" augroup ScrollbarInit
-"   autocmd!
-"   autocmd CursorMoved,VimResized,QuitPre * silent! lua require('scrollbar').show()
-"   autocmd WinEnter,FocusGained           * silent! lua require('scrollbar').show()
-"   autocmd WinLeave,FocusLost             * silent! lua require('scrollbar').clear()
-" augroup end
 "}}}
 " FZF config {{{
 let g:fzf_command_prefix = 'Fzf' " prefix commands :Files become :FzfFiles, etc.
@@ -1223,7 +819,6 @@ function! FloatingFZF()
 endfunction
 
 " }}}
-
 " luadev (a repl for nvim) {{{
 " map 5 <Plug>(Luadev-RunLine)
 " vmap 5 <Plug>(Luadev-Run)
@@ -1234,27 +829,7 @@ map <Leader>ll <Plug>(Luadev-RunLine)
 let g:himalaya_telescope_preview_enabled = 0
 let g:himalaya_mailbox_picker = 'fzf'
 "}}}
-" mouse {{{
-set mouse=a
-set mousemodel=popup_setpos
-" }}}
-" Appearance 1 {{{
-" let s:gutter_error_sign = "✘'"
-" let s:gutter_warn_sign = '！'
-" }}}
 
-" draw a line on 80th column
-" set colorcolumn=80,100
-
-" default behavior for diff=filler,vertical
-set diffopt=filler,vertical
-set diffopt+=hiddenoff " neovim > change to default ?
-set diffopt+=iwhiteall
-set diffopt+=internal,algorithm:patience
-
-" let undos persist across open/close
-let &undodir=stdpath('data').'/undo/'
-set undofile
 
 " deal with vscode
 if exists('g:vscode')
@@ -1293,50 +868,11 @@ noremap Q <NOP>
 " map <Leader>n :bnext<CR>
 " map <Leader>N :bNext<CR>
 " map <Leader>p :bprevious<CR>
-map <Leader>$ <Cmd>Obsession<CR>
 " map <Leader>d :bdelete<CR>
 
 "http://stackoverflow.com/questions/28613190/exclude-quickfix-buffer-from-bnext-bprevious
 
 map <Leader><space> :b#<CR>
-
-" spell config {{{
-" todo better if it could be parsable
-" map <Leader>t :!trans :fr -no-ansi <cword><CR>
-" map <Leader>te :te trans :en <cword><CR>
-" map <Leader>tf :te trans :fr <cword><CR>
-" " for thesaurus vim-thesaurus only works with English :/
-" map <Leader>ttf :te trans :fr <cword><CR>
-"}}}
-" Unimpaired {{{
-" advised by tpope for these remote countries that don't use qwerty
-" https://github.com/tpope/vim-unimpaired
-" nmap < [
-" nmap > ]
-" omap < [
-" omap > ]
-" xmap < [
-" xmap > ]
-" }}}
-
-
-" azerty customizations : utilise <C-V> pour entrer le caractère utilisé {{{
-"https://www.reddit.com/r/vim/comments/2tvupe/azerty_keymapping/
-" parce que # est l'opposé de * et ù est a coté de *
-" map ù %
-" noremap             <C-j>           }
-" noremap             <C-k>           {
-
-" }}}
-"'.'
-"set shada=!,'50,<1000,s100,:0,n/home/teto/.cache/nvim/shada
-
-" added 'n' to defaults to allow wrapping lines to overlap with numbers
-" n => ? used for wrapped lines as well
-set matchpairs+=<:>  " Characters for which % should work
-
-" TODO to use j/k over
-" set whichwrap+=<,>,h,l
 
 " Interactive menus {{{1
 " use emenu ("execute menu") to launch the command
@@ -1377,35 +913,11 @@ menu Tabs.SwitchExpandTabs :set expandtab!
 "set shada=!,'50,<1000,s100,:0,n$XDG_CACHE_HOME/nvim/shada
 let g:netrw_home=$XDG_DATA_HOME.'/nvim'
 " }}}
-" colorscheme stuff {{{
-" as we set termguicolors,
-" highlight Comment gui="NONE,italic"; e
-" echom "colorscheme changed" |
-" to underline search results instead of highlighting them
-" set to NONE not to change them
-" :help hl-IncSearch
-" MatchParen(theses)
-" echo -e "\e[9mstrikethrough\e[0m" works in termite (libvte)
-" regarder dans 'guifont' y a s=strikeout
-autocmd ColorScheme *
-      \ highlight Comment gui=italic
-      \ | highlight Search gui=underline
-      \ | highlight MatchParen guibg=NONE guifg=NONE gui=underline
-      \ | highlight NeomakePerso cterm=underline ctermbg=Red  ctermfg=227  gui=underline
 
-" colorscheme gruvbox
-" }}}
-
-" set guicursor="n-v-c:block-Cursor/lCursor,ve:ver35-Cursor,o:hor50-Cursor,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor,sm:block-Cursor"
-set guicursor=n-v-c:block-blinkon250-Cursor/lCursor,ve:ver35-Cursor,o:hor50-Cursor,i-ci:ver25-blinkon250-Cursor/lCursor,r-cr:hor20-Cursor/lCursor
 " set guicursor=i:ver3,n:block-blinkon10-Cursor,r:hor50
 " try reverse ?
-highl Cursor ctermfg=16 ctermbg=253 guifg=#000000 guibg=#00FF00
 " highl lCursor ctermfg=16 ctermbg=253 guifg=#000000 guibg=#00FF00
 " #232526
-highlight SignifySignChange cterm=bold ctermbg=237  ctermfg=227 guibg=NONE guifg=#F08A1F
-highlight SignifySignAdd cterm=bold ctermbg=237  ctermfg=227 guibg=NONE guifg=green
-highlight SignifySignDelete cterm=bold ctermbg=237  ctermfg=227 guibg=NONE guifg=red
 
 nnoremap <kPageUp> :lprev
 nnoremap <kPageDown> :lnext
@@ -1417,12 +929,9 @@ nnoremap gO i<CR>
 " let @g="dawi\\gls{p}"
 " nnoremap <Leader>lg @g
 
-set signcolumn=auto:3
-" set signcolumn=yes:2
 
 function! FzfFlipBool()
   " let l:dict = {}
-
   " 'source':
   let l:dict = {
     \ 'sink': 'echo'
@@ -1431,7 +940,6 @@ function! FzfFlipBool()
 endfunc
 command! FlipBool call FzfFlipBool()
 
-"
 " to open tag in a split
 map <A-]> :vsp<CR>:exec("tag ".expand("<cword>"))<CR>
 
@@ -1514,11 +1022,6 @@ command! -nargs=+ -bang -complete=command R call ReadExCommandOutput(<bang>0, <q
 
 " nnoremap <S-CR> i<CR><Esc>
 
-hi CursorLine                    guibg=#293739 guifg=None
-
-" au BufWinLeave,BufLeave * if &buftype != 'nofile' | silent! mkview | endif
-" au BufWinEnter * if &buftype != 'nofile' | silent! loadview | endif
-
 
 " highlight NormalFloat guibg=#1d2019
 " taken from SignColumn
@@ -1548,17 +1051,12 @@ map ,fa <Cmd>call CreateVisualExtmark()<CR>
 " }}}
 
 " lsp config {{{
-command! LspAction lua vim.lsp.buf.code_action()
-
-set omnifunc=v:lua.vim.lsp.omnifunc
+" command! LspAction lua vim.lsp.buf.code_action()
 
 sign define DiagnosticSignError text=✘ texthl=LspDiagnosticsSignError linehl= numhl=
 sign define DiagnosticSignWarning text=！ texthl=LspDiagnosticsSignWarning linehl= numhl=CustomLineWarn
 sign define DiagnosticSignInformation text=I texthl=LspDiagnosticsSignInformation linehl= numhl=CustomLineWarn
 sign define DiagnosticSignHint text=H texthl=LspDiagnosticsSignHint linehl= numhl=
-
-hi   DiagnosticVirtualTextError guifg=red
-hi   DiagnosticVirtualTextDebug guifg=green
 
 " guifg=#232526 
 hi CustomLineWarn guifg=#FD971F
@@ -1566,21 +1064,6 @@ hi CustomLineWarn guifg=#FD971F
 " hi LspDiagnosticsFloatingError guifg=red
 " hi LspDiagnosticsFloatingWarning guifg=orange
 " }}}
-
-"{{{sessionoptions
-set sessionoptions-=terminal
-set sessionoptions-=help
-"}}}
-
-" disable [1/5]
-" set shortmess+=S
-
-" nnoremap ' `
-
-" keep selection when shifting
-" xnoremap > >gv
-" xnoremap < <gv
-
 " bufferline mappings {{{
   nnoremap <silent><leader>1 <Cmd>BufferLineGoToBuffer 1<CR>
   nnoremap <silent><leader>2 <Cmd>BufferLineGoToBuffer 2<CR>
@@ -1592,12 +1075,6 @@ set sessionoptions-=help
   nnoremap <silent><leader>8 <Cmd>BufferLineGoToBuffer 8<CR>
   nnoremap <silent><leader>9 <Cmd>BufferLineGoToBuffer 9<CR>
 "}}}
-
-augroup highlight_yank
-    autocmd!
-    " silent
-    autocmd TextYankPost * lua require'vim.highlight'.on_yank{higroup="IncSearch", timeout=1000}
-augroup END
 
 function! RandNum() abort
   return str2nr(matchstr(reltimestr(reltime()), '\.\zs\d*'))
@@ -1684,8 +1161,6 @@ map <RightMouse>  <Cmd>call quickui#context#open(content, quick_opts)<CR>
 command Hasktags !hasktags .
 command Htags !hasktags .
 
-" https://github.com/neovim/neovim/issues/14921
-set mousemodel=popup_setpos
 
 function! TestFoldTextWithColumns()
   let line = getline(v:foldstart)

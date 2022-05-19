@@ -17,8 +17,7 @@ lspconfig.util.default_config = vim.tbl_extend(
 	"force",
 	lspconfig.util.default_config,
 	{
-			on_attach=attach_cb.on_attach,
-
+		on_attach=attach_cb.on_attach,
 	}
 )
 

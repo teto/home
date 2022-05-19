@@ -35,11 +35,6 @@ let
 
   vimlRcBlocks = {
 
-    # appearance = ''
-    #   " draw a line on 80th column
-    #   set colorcolumn=80,100
-    # '';
-
     wildBlock = ''
     set wildignore+=.hg,.git,.svn                    " Version control
     " set wildignore+=*.aux,*.out,*.toc                " LaTeX intermediate files
@@ -51,26 +46,9 @@ let
     set wildignore+=*.orig                           " Merge resolution files
     '';
 
-    foldBlock = ''
-      " block,hor,mark,percent,quickfix,search,tag,undo
-      set fillchars+=foldopen:▾
-      set fillchars+=foldclose:▸
-      set fillchars+=msgsep:‾
-      hi MsgSeparator ctermbg=black ctermfg=white
-
-      set fdc=auto:2
-    '';
-
     sessionoptions = ''
       set sessionoptions-=terminal
       set sessionoptions-=help
-    '';
-
-    highlight_yank = ''
-      augroup highlight_yank
-          autocmd!
-          autocmd TextYankPost * lua require'vim.highlight'.on_yank{higroup="IncSearch", timeout=1000}
-      augroup END
     '';
   };
 
@@ -88,11 +66,6 @@ let
 # Plug 'Olical/aniseed' " dependency of ?
 # Plug 'bakpakin/fennel.vim'
   fennelPlugins = with pkgs.vimPlugins; [
-    # {
-	  # # currently broken
-	  # # > E154: Duplicate tag "module" in file /nix/store/j5vacr79vpxn874361wf25qjqxxj162h-vimplugin-aniseed-2022-02-15/./doc/aniseed.txt
-    #    # > E154: Duplicate tag "module" in file /nix/store/j5vacr79vpxn874361wf25qjqxxj162h-vimplugin-aniseed-2022-02-15/./doc/aniseed.txt
-    #    # > E154: Duplicate tag "module" in file /nix/store/j5vacr79vpxn874361wf25qjqxxj162h-vimplugin-aniseed-2022-02-15/./doc/aniseed.txtFailed to build help tags!
     #   plugin = aniseed;
 # # " let g:aniseed#env = v:true
 # # " lua require('aniseed.env').init()
@@ -133,6 +106,12 @@ let
 	  # config = ''
 		# '';
     }
+	(luaPlugin { 
+	  plugin = octo-nvim;
+# 	  -- -- , requires = { 'nvim-lua/popup.nvim' }
+	  optional = true;
+	})
+
     (luaPlugin {
       plugin = sniprun;
       # type = "lua";
@@ -149,6 +128,7 @@ let
       plugin = auto-git-diff;
     }
     {
+	  # should be autoinstalled via deps really
       plugin = plenary-nvim;
     }
     (luaPlugin {
@@ -306,20 +286,18 @@ let
       plugin = nvim-treesitter-context;
     })
 	(luaPlugin {
+	  # run with :Diffview
       plugin = diffview-nvim;
     })
     {
       plugin = tokyonight-nvim;
     }
-    # broken for now
     (luaPlugin {
-	  # # prettier quickfix
+	  # prettier quickfix
       plugin = nvim-bqf;
-	  #   plugin = nvim-pqf-git;
+	  # plugin = nvim-pqf-git;
     })
-    {
-      plugin = telescope-fzf-native-nvim;
-    }
+    # { plugin = telescope-fzf-native-nvim; }
     {
       plugin = registers-nvim;
 
@@ -361,9 +339,7 @@ let
 
 
   colorschemePlugins = with pkgs.vimPlugins; [
-	{
-	  plugin = sonokai;
-	}
+	{ plugin = sonokai; }
 	{ plugin = tokyonight-nvim; }
 	{ plugin = molokai; }
 	{ plugin = onedark-nvim; }
@@ -445,38 +421,40 @@ let
       (luaPlugin {
         plugin = fzf-lua;
       })
-      {
-        plugin = stylish-nvim;
-        type = "lua";
-        config = ''
-        '';
-      }
+	  { 
+
+		# really helps with syntax highlighting
+		plugin = haskell-vim; 
+	  }  
+
       (luaPlugin {
-        plugin = rest-nvim;
-        type = "lua";
-        config = ''
-          require("rest-nvim").setup({
-            -- Open request results in a horizontal split
-            result_split_horizontal = false,
-            -- Skip SSL verification, useful for unknown certificates
-            skip_ssl_verification = false,
-            -- Highlight request on run
-            highlight = {
-                    enabled = true,
-                    timeout = 150,
-            },
-            result = {
-                    -- toggle showing URL, HTTP info, headers at top the of result window
-                    show_url = true,
-                    show_http_info = true,
-                    show_headers = true,
-            },
-            -- Jump to request line on run
-            jump_to_request = false,
-          })
-          vim.keymap.set('n',  '<leader>rr' , "<Plug>RestNvim")
-          vim.keymap.set('n',  '<leader>rp' , "<Plug>RestNvimPreview")'';
+        plugin = stylish-nvim;
+        # config = '' '';
       })
+	  # 'diepm/vim-rest-console' " test rest APIs * Hit the trigger key (<C-j> by default).
+      # (luaPlugin {
+      #   plugin = rest-nvim;
+      #   config = ''
+      #     require("rest-nvim").setup({
+      #       -- Open request results in a horizontal split
+      #       result_split_horizontal = false,
+      #       -- Skip SSL verification, useful for unknown certificates
+      #       skip_ssl_verification = false,
+      #       -- Highlight request on run
+      #       highlight = {
+			  # enabled = true,
+			  # timeout = 150,
+      #       },
+      #       result = {
+			  # -- toggle showing URL, HTTP info, headers at top the of result window
+			  # show_url = true,
+			  # show_http_info = true,
+			  # show_headers = true,
+      #       },
+      #       -- Jump to request line on run
+      #       jump_to_request = false,
+      #     })'';
+      # })
       (luaPlugin {
         # matches nvim-orgmode
         plugin = orgmode;
@@ -496,12 +474,20 @@ let
       #   plugin = onedark-nvim;
       # }
       # to install manually with coc.nvim:
+	  # " Plug 'iamcco/markdown-preview.nvim' " :MarkdownPreview
+	  # " Plug 'shime/vim-livedown'  " :LivedownPreview
+	  # " Plug 'suy/vim-context-commentstring' " commen for current programming language
+
       {
         plugin = editorconfig-vim;
         # config = ''
         #   " dhall.vim config
         # '';
       }
+	  {
+		# use ctrl a/xto cycle between different words
+		plugin = vim-CtrlXA;
+	  }
       # {
       #   plugin = jbyuki/venn.nvim;
       # }
@@ -548,7 +534,6 @@ let
       # defined in overrides: TODO this should be easier: like fzf-vim should be enough
       fzfWrapper
 
-      # neomake
       {
         plugin = nvim-terminal-lua;
         # optional = true;
@@ -580,7 +565,7 @@ let
         # optional = true;
       }
       # displays a minimap on the right
-      minimap-vim
+      (luaPlugin { plugin =  minimap-vim; })
       vim-dirvish
       # {
       #   plugin = sql-nvim;
@@ -644,6 +629,7 @@ let
 
       {
         plugin = vim-grepper;
+		# careful these mappings are not applied as they arrive before the plug declaration
         config = ''
           nnoremap <leader>rg  <Cmd>Grepper -tool git -open -switch<CR>
           nnoremap <leader>rgb  <Cmd>Grepper -tool rg -open -switch -buffer<CR>
@@ -669,9 +655,6 @@ let
       {
         plugin = vim-sayonara;
         config = ''
-          nnoremap <silent><leader>Q  <Cmd>Sayonara<cr>
-          nnoremap <silent><leader>q  <Cmd>Sayonara!<cr>
-
           let g:sayonara_confirm_quit = 0
         '';
       }
@@ -682,6 +665,7 @@ let
 		# ComposerUpdate / ComposerStart
 		plugin = vim-markdown-composer;  # WIP
 		config = ''
+		  let g:markdown_composer_autostart           = 0
 		  let g:markdown_composer_binary = '${vim-markdown-composer.vimMarkdownComposerBin}/bin/markdown-composer'
 		'';
 	  }
@@ -690,7 +674,16 @@ let
 		# node-based
 		# :MarkdownPreview
 		plugin = markdown-preview-nvim;
+		# let g:vim_markdown_preview_github=1
+		# let g:vim_markdown_preview_use_xdg_open=1
+
 	  }
+	  # {
+# " far config (Find And Replace) {{{
+# let g:far#source='rg'
+# let g:far#collapse_result=1
+# " }}}
+	  # }
       # nvim-markdown-preview  # :MarkdownPreview
       (luaPlugin {
         plugin = nvim-spectre;
@@ -761,6 +754,9 @@ let
 
         # " let g:Unicode_cache_directory='${pkgs.vimPlugins.unicode-vim}/share/vim-plugins/unicode-vim/autoload/unicode'
 		# let g:Unicode_data_directory='${pkgs.vimPlugins.unicode-vim}/share/vim-plugins/unicode-vim/autoload/unicode'
+		# " overrides ga
+# nmap ga <Plug>(UnicodeGA)
+
         config = ''
           let g:Unicode_data_directory='${pkgs.vimPlugins.unicode-vim}/autoload/unicode'
 
@@ -772,7 +768,6 @@ let
   ];
 
   overlayPlugins = with myVimPlugins; [
-    # octo-nvim
     # pkgs.vimPlugins.telescope-fzf-native-nvim
       # TODO restore in my overlay
       # {
@@ -798,8 +793,6 @@ in
     # source doesn't like `stdpath('config').'`
     # todo should use mkBefore ${config.programs.neovim.generatedInitrc}
     extraConfig = ''
-      set noshowmode " Show the current mode on command line
-      set cursorline " highlight cursor line
       source $XDG_CONFIG_HOME/nvim/init.manual.vim
     ''
     # concatStrings = builtins.concatStringsSep "";

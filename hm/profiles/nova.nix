@@ -2,6 +2,7 @@
 let
 in
 {
+
   xdg.desktopEntries = {
   # xdg.desktopEntries = {
   #     min = { # minimal definition
@@ -14,7 +15,7 @@ in
     full = { # full definition
       type = "Application";
       exec = "firefox -p nova";
-      icon = "test";
+      icon = "firefox";
       comment = "Firefox for nova";
       terminal = false;
       name = "Firefox for nova";
@@ -39,5 +40,6 @@ in
 
   home.packages =  [
     # pkgs.aws-sam-cli  # BROKEN  for sam lambda
+	pkgs.sqlitebrowser
   ];
 }

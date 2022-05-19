@@ -80,6 +80,7 @@ let
   accountExtra //
   {
     gpg = gpgModule;
+	flavor = "fastmail.com";
     astroid = { enable = true; };
 
     mbsync = mbsyncConfig // {
@@ -90,7 +91,15 @@ let
     # folders.sent = "[Gmail]/Sent Mail";
 
     msmtp.enable = true;
-    notmuch.enable = true;
+	notmuch = {
+	  enable = true;
+	  # fqdn = "fastmail.com";
+	};
+	mujmap = {
+	  enable = false;
+	  # settings.fqdn = "fastmail.com";
+	};
+
 
     primary = false;
     userName = "matthieucoudron@fastmail.com";
@@ -101,8 +110,8 @@ let
     passwordCommand = getPassword "perso/fastmail_mc";
 
     # described here https://www.fastmail.com/help/technical/servernamesandports.html
-    imap = { host = "imap.fastmail.com"; tls = my_tls; };
-    smtp = { host = "smtp.fastmail.com"; tls = my_tls; };
+    # imap = { host = "imap.fastmail.com"; tls = my_tls; };
+    # smtp = { host = "smtp.fastmail.com"; tls = my_tls; };
     # smtp.tls.useStartTls = false;
   };
 
@@ -329,6 +338,9 @@ in
 	  };
 
   # programs.muchsync = { };
+  programs.mujmap = {
+    enable = true;
+  };
 
   programs.astroid = {
     enable = true;
