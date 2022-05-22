@@ -29,7 +29,8 @@ status = Status(
 
 my_term = "kitty"
 
-#status.register("text",
+status.register("text",
+	"toto")
 
 status.register("nix-channels",
     channel="nixos-unstable"

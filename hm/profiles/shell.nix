@@ -131,9 +131,9 @@ in
       # ".."="cd ..";
       # "..."="cd ../..";
 
-        v="nvim";
-        c="cat";
-        r="ranger";
+	  v="nvim";
+	  c="cat";
+	  r="ranger";
 
       n="nix develop";
       nhs="nix shell /home/teto/home#nhs9";
