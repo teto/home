@@ -147,6 +147,7 @@ vim.opt.clipboard='unnamedplus'
 -- wildmenu completion
 vim.opt.wildmenu = true
 vim.opt.omnifunc='v:lua.vim.lsp.omnifunc'
+vim.opt.winbar='%f'
 
 
 -- lua vim.diagnostic.setqflist({open = tru, severity = { min = vim.diagnostic.severity.WARN } })
@@ -224,14 +225,13 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 })
 
 
-
 -- display buffer name top-right
-use {
-	"b0o/incline.nvim",
-	config = function ()
-		require('incline').setup()
-	end
-}
+-- use {
+-- 	"b0o/incline.nvim",
+-- 	config = function ()
+-- 		require('incline').setup()
+-- 	end
+-- }
 use {
 	"/home/teto/rest.nvim"
 }
