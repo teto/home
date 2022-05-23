@@ -29,8 +29,17 @@ status = Status(
 
 my_term = "kitty"
 
+
+def change_theme(light=False):
+  # echo 
+  print("Changing theme to ", light)
+
+# TODO retreive theme from pywal
 status.register("text",
-	"toto")
+	text="theme",
+	on_upscroll=change_theme(True),
+	on_downscroll=change_theme(False),
+	)
 
 status.register("nix-channels",
     channel="nixos-unstable"

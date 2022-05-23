@@ -20,6 +20,7 @@ in
        "video" # to control brightness
        "rtkit"  # for pipewire
        "pipewire"  # for pipewire
+       "postgres"  # for pipewire
        "wheel" # for sudo
        "vboxusers" # to avoid Kernel driver not accessible
        # "kvm" # don't think that's needed

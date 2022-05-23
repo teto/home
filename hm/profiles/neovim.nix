@@ -351,6 +351,8 @@ let
 
   basePlugins = with pkgs.vimPlugins; [
     # Packer should remain first
+	
+	{ plugin = vCoolor-vim; }
 	{ plugin = vim-lastplace; }
 	{ plugin = wmgraphviz-vim; }
     (luaPlugin {

@@ -119,6 +119,8 @@ in
     # goes to .profile
     sessionVariables = {
       HISTTIMEFORMAT="%d.%m.%y %T ";
+	  # CAREFUL 
+	  # RUNNER2=lib.mkRemoteBuilderDesc secrets.nova-runner2;
       # HISTFILE="$XDG_CACHE_HOME/bash_history";
     };
     # "ignorespace"

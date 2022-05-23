@@ -9,9 +9,8 @@
     kanshi  # autorandr-like
     wofi  # rofi-like
     slurp  # capture tool
-    # wf-recorder # for screencasts
+    wf-recorder # for screencasts
     # bemenu as a dmenu replacement
-    waybar  # just for testing
     wdisplays
     #  wallutils  # to set wallpaper
     wl-clipboard # wl-copy / wl-paste

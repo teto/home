@@ -5,6 +5,16 @@ let
 in
 {
   # https://github.com/rycee/home-manager/pull/829
+  services.swayidle = {
+	enable = true;
+    events = [
+	  { event = "before-sleep"; command = "swaylock"; }
+	  { event = "lock"; command = "lock"; }
+	];
+  };
+
+  # todo prepend sharedExtraConfig
+  # xdg.configFile."sway/config" = 
 
   wayland.windowManager.sway = {
     enable = true;
@@ -61,6 +71,9 @@ in
     extraConfig = ''
       smart_gaps yes
     '';
+	# fails too
+	  # xkb_numlock enabled
+	  # xkb_capslock disabled
       # set $bg           {bg}
       # set $bg-alt       {bg-alt}
       # set $fg           i3wm.color15 #ff0000

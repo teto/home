@@ -148,9 +148,10 @@
                   ./nixos/modules/distributedBuilds.nix
                   ./nixos/configuration-xps.nix
                   ./nixos/profiles/nix-daemon.nix
+                  ./nixos/profiles/postgresql.nix
                   ./nixos/modules/xserver.nix
                   ./nixos/modules/sway.nix
-                  # ./nixos/modules/redis.nix
+                  ./nixos/modules/redis.nix
                   ./nixos/profiles/steam.nix
                   ./nixos/profiles/qemu.nix
                   ./nixos/profiles/adb.nix

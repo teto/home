@@ -17,9 +17,10 @@
 
       settings = {
         # port = 0; # conflicts with module one
-        tls-port = 4242;
-        tls-cert-file = "${../../data/server.crt}";
-        tls-key-file = "${../../data/server.key}";
+
+        # tls-port = 4242;
+        # tls-cert-file = "${../../data/server.crt}";
+        # tls-key-file = "${../../data/server.key}";
 
         # disable client authentification
         tls-auth-clients = "no";
@@ -29,9 +30,8 @@
         # clients and peers.  Redis requires an explicit configuration of at least one
         # of these, and will not implicitly use the system wide configuration.
         #
-        # tls-ca-cert-file ca.crt
-        # tls-ca-cert-dir = "/etc/ssl/certs";
-        tls-ca-cert-file = "${../../data/ca.crt}";
+        # tls-ca-cert-file = "${../../data/ca.crt}";
+
         # syslog-enabled = "yes";
 
 

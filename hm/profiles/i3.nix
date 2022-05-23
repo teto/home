@@ -334,11 +334,12 @@ in
           workspaceButtons=true;
           workspaceNumbers=false;
           # id="0";
-          command="${pkgs.waybar}/bin/waybar";
+          # command="${pkgs.waybar}/bin/waybar";
+          command="${pkgs.sway}/bin/swaybar";
           statusCommand="${pkgs.i3pystatus-custom}/bin/i3pystatus-python-interpreter $XDG_CONFIG_HOME/i3/myStatus.py";
-          extraConfig = ''
-            icon_theme Adwaita
-          '';
+          # extraConfig = ''
+          #   icon_theme Adwaita
+          # '';
         }
       ];
     };

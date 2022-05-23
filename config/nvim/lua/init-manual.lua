@@ -147,7 +147,7 @@ vim.opt.clipboard='unnamedplus'
 -- wildmenu completion
 vim.opt.wildmenu = true
 vim.opt.omnifunc='v:lua.vim.lsp.omnifunc'
-vim.opt.winbar='%f'
+vim.opt.winbar='%=%m %f'
 
 
 -- lua vim.diagnostic.setqflist({open = tru, severity = { min = vim.diagnostic.severity.WARN } })
@@ -232,6 +232,20 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 -- 		require('incline').setup()
 -- 	end
 -- }
+
+use {
+	'norcalli/nvim-colorizer.lua',
+	config = function ()
+		require('colorizer').setup()
+	end
+
+}
+
+use {
+	-- zenity
+	'DougBeney/pickachu'
+}
+
 use {
 	"/home/teto/rest.nvim"
 }
