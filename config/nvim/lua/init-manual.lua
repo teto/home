@@ -242,6 +242,10 @@ use {
 }
 
 use {
+	'monkoose/fzf-hoogle.vim'
+}
+
+use {
 	-- zenity
 	'DougBeney/pickachu'
 }

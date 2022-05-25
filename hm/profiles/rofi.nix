@@ -1,19 +1,34 @@
 { config, pkgs, lib,  ... }:
-# let
-#   rofi-hoogle-src = pkgs.fetchFromGitHub {
-#     owner = "teto";
-#     repo = "rofi-hoogle";
-#     rev = "27c273ff67add68578052a13f560a08c12fa5767";
-#     sha256 = "09vx9bc8s53c575haalcqkdwy44ys1j8v9k2aaly7lndr19spp8f";
-#   };
-#   # TODO need hs-hoogle-overlay
-#   rofi-hoogle = import "${rofi-hoogle-src}/rofi-hoogle-plugin/package.nix" { inherit pkgs; };
+let
+  rofi-hoogle-src = pkgs.fetchFromGitHub {
+    owner = "teto";
+    repo = "rofi-hoogle";
+    rev = "27c273ff67add68578052a13f560a08c12fa5767";
+    sha256 = "09vx9bc8s53c575haalcqkdwy44ys1j8v9k2aaly7lndr19spp8f";
+  };
+  # TODO need hs-hoogle-overlay
+  # rofi-hoogle = import "${rofi-hoogle-src}/rofi-hoogle-plugin/package.nix" { inherit pkgs; };
 #   hs-hoogle-query = pkgs.haskellPackages.callPackage "${rofi-hoogle-src}/haskell" {};
 
-# in
+  #
+  rofi-wayland = pkgs.rofi.overrideAttrs(oa: {
+
+	src = pkgs.fetchFromGitHub {
+	  owner = "lbonn";
+	  repo = "rofi";
+	  rev = "1e8c22b4a05c7602aa9e51509274ce5ac36a5099";
+	  sha256 = "sha256-FvDzJL5VM4UeDCwDeElZhE/eRUefGrt4GmntaIeuQBQ=";
+
+	};
+
+  });
+in
 {
   programs.rofi = {
     enable = true;
+
+	package = rofi-wayland ;
+
     terminal = "${pkgs.kitty}/bin/kitty";
     # borderWidth = 1;
     # theme = "solarized_alternate";
@@ -26,6 +41,7 @@
     plugins = with pkgs; [
       rofi-emoji
       rofi-calc
+	  # passed as a flake now
       # rofi-hoogle # TODO see https://github.com/rebeccaskinner/rofi-hoogle/issues/3
     ];
     # pass.stores = [];
