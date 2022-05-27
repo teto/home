@@ -17,6 +17,7 @@ in
   # xdg.configFile."sway/config" = 
 
   wayland.windowManager.sway = {
+	# contrary to i3, use `sway reload` on sway
     enable = true;
     systemdIntegration = true;
 
@@ -95,6 +96,7 @@ in
     wl-clipboard # wl-copy / wl-paste
     wdisplays # to show 
     wob # to display a progressbar
+	swaynotificationcenter # top cool
   ];
 
   programs.mako = {

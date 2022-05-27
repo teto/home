@@ -1,0 +1,4 @@
+
+To transfer the wifi password
+nix shell qrencode
+

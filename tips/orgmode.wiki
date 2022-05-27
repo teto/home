@@ -1,0 +1,3 @@
+https://github.com/nvim-orgmode/orgmode
+Open agenda prompt: <Leader>oa
+Open capture prompt: <Leader>oc

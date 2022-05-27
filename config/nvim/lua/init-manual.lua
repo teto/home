@@ -161,6 +161,7 @@ vim.opt.guicursor='n-v-c:block-blinkon250-Cursor/lCursor,ve:ver35-Cursor,o:hor50
 -- highl Cursor ctermfg=16 ctermbg=253 guifg=#000000 guibg=#00FF00
 vim.api.nvim_set_hl(0, 'Cursor', { ctermfg=16, ctermbg=253, fg='#000000', bg='#00FF00' })
 vim.api.nvim_set_hl(0, 'CursorLine', { fg='None', bg='#293739' })
+vim.api.nvim_set_hl(0, 'NormalFloat', { bg='grey' })
 
 -- local my_image = require('hologram.image'):new({
 --	   source = '/home/teto/doctor.png',
@@ -170,7 +171,35 @@ vim.api.nvim_set_hl(0, 'CursorLine', { fg='None', bg='#293739' })
 -- my_image:transmit() -- send image data to terminal
 
 -- diagnostic
+use { 'neovim/nvimdev.nvim' }
+use { 'seandewar/nvimesweeper', opt = true }
+use { 'voldikss/vim-translator', opt = true }
+use 'calvinchengx/vim-aftercolors' -- load after/colors
+use 'bfredl/nvim-luadev'  -- lua repl :Luadev
+use 'alok/notational-fzf-vim' -- to take notes, :NV
+use 'vigemus/iron.nvim'
+use 'neovimhaskell/nvim-hs.vim' -- to help with nvim-hs
+use 'teto/vim-listchars' -- to cycle between different list/listchars configurations
+use 'chrisbra/csv.vim'
+use 'teto/Modeliner' -- <leader>ml to setup buffer modeline
+-- " use 'antoinemadec/openrgb.nvim'  " to take into account RGB stuff
 
+
+-- " use 'vhakulinen/gnvim-lsp' " load it only for gnvim
+
+-- " use 'Rykka/riv.vim', {'for': 'rst'}
+-- " use 'Rykka/InstantRst', {'for': 'rst'} " rst live preview with :InstantRst,
+-- " use 'dhruvasagar/vim-table-mode', {'for': 'txt'}
+
+-- " use 'mhinz/vim-rfc', { 'on': 'RFC' } " requires nokigiri gem
+-- " careful maps F4 by default
+-- use 'tpope/vim-unimpaired' " [<space> [e [n ]n pour gerer les conflits etc...
+-- use 'tpope/vim-scriptease' " Adds command such as :Messages
+-- use 'tpope/vim-eunuch' " {provides SudoEdit, SudoWrite , Unlink, Rename etc...
+-- " use 'ludovicchabant/vim-gutentags' " automatic tag generation, very good
+-- " use 'junegunn/limelight.vim' " focus writing :Limelight, works with goyo
+-- " leader
+-- " use 'bronson/vim-trailing-whitespace' " :FixWhitespace
 
 vim.api.nvim_set_hl(0, 'DiagnosticVirtualTextError', { fg='red'})
 vim.api.nvim_set_hl(0, 'DiagnosticVirtualTextDebug', { fg='green'})
@@ -239,10 +268,6 @@ use {
 		require('colorizer').setup()
 	end
 
-}
-
-use {
-	'monkoose/fzf-hoogle.vim'
 }
 
 use {
@@ -444,9 +469,6 @@ use {
 
 	end
 }
-use {
-	"~/neovim/nvim-lspconfig"
-}
 
 -- terminal image viewer in neovim see https://github.com/edluffy/hologram.nvim#usage for usage
 use 'edluffy/hologram.nvim' -- hologram-nvim
@@ -474,35 +496,33 @@ use {
 			},
 		}
 	end
+}
 
-}
--- TODO 
-use {
-	'code-biscuits/nvim-biscuits',
-	config = function ()
-	require('nvim-biscuits').setup({
-	on_events = { 'InsertLeave', 'CursorHoldI' },
-	cursor_line_only = true,
-	default_config = {
-		max_length = 12,
-		min_distance = 50,
-		prefix_string = " 📎 "
-	},
-	language_config = {
-		html = { prefix_string = " 🌐 " },
-		javascript = {
-			prefix_string = " ✨ ",
-			max_length = 80
-		},
-		python = { disabled = true },
-		-- nix = { disabled = true }
-	}
-	})
-end
-}
+-- use {
+-- 	'code-biscuits/nvim-biscuits',
+-- 	config = function ()
+-- 	require('nvim-biscuits').setup({
+-- 	on_events = { 'InsertLeave', 'CursorHoldI' },
+-- 	cursor_line_only = true,
+-- 	default_config = {
+-- 		max_length = 12,
+-- 		min_distance = 50,
+-- 		prefix_string = " 📎 "
+-- 	},
+-- 	language_config = {
+-- 		html = { prefix_string = " 🌐 " },
+-- 		javascript = {
+-- 			prefix_string = " ✨ ",
+-- 			max_length = 80
+-- 		},
+-- 		python = { disabled = true },
+-- 		-- nix = { disabled = true }
+-- 	}
+-- 	})
+-- end
+-- }
 
 -- use { 'nvim-lua/popup.nvim'	}  -- mimic vim's popupapi for neovim
--- use { 'nvim-lua/plenary.nvim' } -- lua utilities for neovim
 
 use {
 	'lukas-reineke/indent-blankline.nvim',
@@ -546,7 +566,7 @@ use { 'nvim-telescope/telescope-github.nvim' }
 use { 'nvim-telescope/telescope-symbols.nvim' }
 use {'nvim-telescope/telescope-fzy-native.nvim'}
 use { 'nvim-telescope/telescope-media-files.nvim'}
-use { 'nvim-telescope/telescope-packer.nvim' }
+use { 'nvim-telescope/telescope-packer.nvim' } -- :Telescope packer
 --}}}
 
 -- use "terrortylor/nvim-comment"
@@ -557,12 +577,12 @@ use { 'nvim-telescope/telescope-packer.nvim' }
 --	end
 -- }
 -- using packer.nvim
-use {'akinsho/bufferline.nvim', requires = 'kyazdani42/nvim-web-devicons'}
+-- use {'akinsho/bufferline.nvim', requires = 'kyazdani42/nvim-web-devicons'}
 
 -- compete with registers.nvim
 -- https://github.com/gelguy/wilder.nvim
 -- use { 'gelguy/wilder.nvim' }
-use { 'gennaro-tedesco/nvim-peekup' }
+-- use { 'gennaro-tedesco/nvim-peekup' }
 --use { 'TimUntersberger/neogit',
 --	config = function ()
 --		vim.defer_fn (
@@ -609,7 +629,7 @@ use { 'gennaro-tedesco/nvim-peekup' }
 --end
 --}
 
-use { 'notomo/gesture.nvim' }
+use { 'notomo/gesture.nvim' , opt = true; }
 -- using teto instead to test packer luarocks support
 -- use_rocks { 'teto/gruvbox.nvim'
 	-- , requires = {"rktjmp/lush.nvim"}
@@ -631,10 +651,32 @@ use {
 	'bazelbuild/vim-bazel' , requires = { 'google/vim-maktaba' }
 }
 use 'bazelbuild/vim-ft-bzl'
+use 'PotatoesMaster/i3-vim-syntax'
+
+-- colorschemes {{{
+use 'Matsuuu/pinkmare'
+use 'flrnd/candid.vim'
+use 'adlawson/vim-sorcerer'
+use 'whatyouhide/vim-gotham'
+use 'vim-scripts/Solarized'
+-- use 'npxbr/gruvbox.nvim' " requires lush
+use 'romainl/flattened'
+use 'NLKNguyen/papercolor-theme'
+use 'marko-cerovac/material.nvim'
+-- }}}
+
+use 'skywind3000/vim-quickui' -- to design cool uis
+-- use 'neovim/nvim-lspconfig' -- while fuzzing details out
+use '~/neovim/nvim-lspconfig' -- while fuzzing details out
+
+-- use 'vim-scripts/rfc-syntax' -- optional syntax highlighting for RFC files
+-- use 'vim-scripts/coq-syntax'
+use {'tweekmonster/startuptime.vim' , opt = true } -- {'on': 'StartupTime'} " see startup time per script
 
 -- TODO upstream
 use {
 	'chipsenkbeil/distant.nvim'
+	, opt = true
 	, config = function()
 		require('distant').setup {
 		-- Applies Chip's personal settings to every machine you connect to
@@ -646,23 +688,24 @@ use {
 		}
 	end
 }
-use {
-	'matbme/JABS.nvim',
-	config = function ()
-		require 'jabs'.setup {
-			position = 'center', -- center, corner
-			width = 50,
-			height = 10,
-			border = 'shadow', -- none, single, double, rounded, solid, shadow, (or an array or chars)
+-- use {
+-- 	'matbme/JABS.nvim',
+-- 	config = function ()
+-- 		require 'jabs'.setup {
+-- 			position = 'center', -- center, corner
+-- 			width = 50,
+-- 			height = 10,
+-- 			border = 'shadow', -- none, single, double, rounded, solid, shadow, (or an array or chars)
 
-			-- the options below are ignored when position = 'center'
-			col = 0,
-			row = 0,
-			anchor = 'NW', -- NW, NE, SW, SE
-			relative = 'win', -- editor, win, cursor
-		}
-	end
-}
+-- 			-- the options below are ignored when position = 'center'
+-- 			col = 0,
+-- 			row = 0,
+-- 			anchor = 'NW', -- NW, NE, SW, SE
+-- 			relative = 'win', -- editor, win, cursor
+-- 		}
+-- 	end
+-- }
+
 -- use {
 --	'ggandor/lightspeed.nvim',
 --	config = function ()
@@ -753,6 +796,11 @@ use {
 -- }
 use 'MunifTanjim/nui.nvim' -- to create UIs
 -- use 'rafamadriz/friendly-snippets'
+-- " use 'hrsh7th/vim-vsnip' " vscode/lsp snippet format
+-- " use 'hrsh7th/vim-vsnip-integ'
+-- use 'SirVer/ultisnips' " handle snippets
+use 'honza/vim-snippets'
+-- use 'sjl/gundo.vim' " :GundoShow/Toggle to redo changes
 
 use {
 	'hrsh7th/nvim-cmp',
@@ -889,7 +937,7 @@ end
 -- use 'sindrets/diffview.nvim' -- :DiffviewOpen
 
 -- lua require('github-notifications.menu').notifications()
-use 'rlch/github-notifications.nvim' 
+use 'rlch/github-notifications.nvim'
 use {
 	'nvim-lualine/lualine.nvim' -- fork of hoob3rt/lualine
 	, requires = { 'arkav/lualine-lsp-progress' }
@@ -1318,26 +1366,39 @@ if has_bufferline then
 			-- end
 		}
 	}
+
+	for i=1,9 do
+		vim.keymap.set('n',  '<silent><leader>1' , "BufferLineGoToBuffer "..tostring(i))
+	end
 end
 -- nvim-colorizer {{{
 require 'terminal'.setup()
 -- }}}
-
-
+use { 'ethanholz/nvim-lastplace',
+	config = function ()
+		require'nvim-lastplace'.setup {
+			lastplace_ignore_buftype = {"quickfix", "nofile", "help"},
+			lastplace_ignore_filetype = {"gitcommit", "gitrebase", "svn", "hgcommit"},
+			lastplace_open_folds = true
+		}
+	end
+	}
+vim.g.UltiSnipsSnippetDirectories= {vim.fn.stdpath('config')..'/snippets' }
+vim.g.tex_flavor = "latex"
 -- Treesitter config {{{
 --	'nvim-treesitter/completion-treesitter' " extension of completion-nvim,
 -- use { 'nvim-treesitter/nvim-treesitter' }
 local enable_treesitter = false
 if enable_treesitter then
-	use { 'nvim-treesitter/nvim-treesitter' }
+	-- use { 'nvim-treesitter/nvim-treesitter' }
 	use {
 		'nvim-treesitter/playground',
 		requires = { 'nvim-treesitter/nvim-treesitter' }
 	}
-	use {
-		'p00f/nvim-ts-rainbow',
-		requires = { 'nvim-treesitter/nvim-treesitter' }
-	}
+	-- use {
+	-- 	'p00f/nvim-ts-rainbow',
+	-- 	requires = { 'nvim-treesitter/nvim-treesitter' }
+	-- }
 	use { 'nvim-treesitter/nvim-treesitter-textobjects' }
 end
 --}}}
@@ -1448,10 +1509,6 @@ if has_telescope then
 end
 --}}}
 
--- nvim-comment {{{
--- replace vim-commentary
--- require('nvim_comment').setup()
---}}}
 
 function contextMenu()
 	local choices = {"choice 1", "choice 2"}
@@ -1660,16 +1717,64 @@ function open_contextual_menu()
 	)
 end
 
+-- quickui {{{
+-- https://github.com/skywind3000/vim-quickui
+-- TODO should be printed only if available
+vim.g.quickui_border_style = 1
+-- content = {
+--             \ ['LSP -'],
+--             \ ["Goto &Definition\t\\cd", 'lua vim.lsp.buf.definition()'],
+--             \ ["Goto &Declaration\t\\cd", 'lua vim.lsp.buf.declaration()'],
+--             \ ["Goto I&mplementation\t\\cd", 'lua vim.lsp.buf.implementation()'],
+--             \ ["Hover\t\\ch", 'lua vim.lsp.buf.references()'],
+--             \ ["Search &References\t\\cr", 'lua vim.lsp.buf.references()'],
+--             \ ["Document  &Symbols\t\\cr", 'lua vim.lsp.buf.document_symbol()'],
+--             \ ["Format", 'lua vim.lsp.buf.formatting_sync(nil, 1000)'],
+--             \ ["&Execute  Command\\ce", 'lua vim.lsp.buf.execute_command()'],
+--             \ ["&Incoming calls\\ci", 'lua vim.lsp.buf.incoming_calls()'],
+--             \ ["&Outgoing calls\\ci", 'lua vim.lsp.buf.outgoing_calls()'],
+--             \ ["&Signature help\\ci", 'lua vim.lsp.buf.signature_help()'],
+--             \ ["&Workspace symbol\\cw", 'lua vim.lsp.buf.workspace_symbol()'],
+--             \ ["&Rename\\cw", 'lua vim.lsp.buf.rename()'],
+--             \ ["&Code action\\cw", 'lua vim.lsp.buf.code_action()'],
+--             \ ['- Diagnostic '],
+--             \ ['Display in QF', 'lua vim.diagnostic.setqflist({open = true, severity = { min = vim.diagnostic.severity.WARN } })'],
+-- 	    \ ['Set severity to warning', 'lua vim.diagnostic.config({virtual_text = { severity = { min = vim.diagnostic.severity.WARN } }})'],
+-- 	    \ ['Set severity to all', 'lua vim.diagnostic.config({virtual_text = { severity = nil }})'],
+--             \ ['- Misc '],
+--             \ ['Toggle indentlines', 'IndentBlanklineToggle!'],
+--             \ ['Start search and replace', 'lua require("spectre").open()'],
+--             \ ['Toggle obsession', 'Obsession'],
+--             \ ['Toggle minimap', 'MinimapToggle'],
+--             \ ['Toggle biscuits', 'lua require("nvim-biscuits").toggle_biscuits()'],
+--             \ ['REPL - '],
+--             \ ['Send line ', 'lua require''luadev''.exec(vim.api.nvim_get_current_line())'],
+--             \ ['Send selection ', 'call <SID>luadev_run_operator(v:true)'],
+-- 	    \ ['DAP -'],
+-- 	    \ ['Add breakpoint', 'lua require"dap".toggle_breakpoint()'],
+-- 	    \ ["Continue", 'lua require"dap".continue()'],
+-- 	    \ ['Open REPL', 'lua require"dap".repl.open()']
+--             \ }
+
+-- " formatting_sync
+-- " set cursor to the last position
+-- let quick_opts = {'index':g:quickui#context#cursor}
+
+-- " TODO map to lua create_menu()
+-- map <RightMouse>  <Cmd>call quickui#context#open(content, quick_opts)<CR>
+-- " can't click on it plus it disappears
+-- " map <RightMouse>  <Cmd>lua create_menu()<CR>
+-- }}}
 
 vim.keymap.set("n", "<leader>q", "<Cmd>Sayonara!<cr>", { silent = true})
 vim.keymap.set("n", "<leader>Q", "<Cmd>Sayonara<cr>", { silent = true})
 
-vim.keymap.set('n',  '<leader>rr' , "<Plug>RestNvim")
-vim.keymap.set('n',  '<leader>rp' , "<Plug>RestNvimPreview")
-vim.keymap.set('n',  '<C-J>' , "<Plug>RestNvimPreview")
-vim.keymap.set('n',  '<C-j>' , "<Plug>RestNvimPreview")
--- nnoremap <Plug>RestNvimPreview :lua require('rest-nvim').run(true)<CR>
--- nnoremap <Plug>RestNvimLast :lua require('rest-nvim').last()<CR>
+vim.keymap.set('n',  '<leader>rr' , "<use>RestNvim")
+vim.keymap.set('n',  '<leader>rp' , "<use>RestNvimPreview")
+vim.keymap.set('n',  '<C-J>' , "<use>RestNvimPreview")
+vim.keymap.set('n',  '<C-j>' , "<use>RestNvimPreview")
+-- nnoremap <use>RestNvimPreview :lua require('rest-nvim').run(true)<CR>
+-- nnoremap <use>RestNvimLast :lua require('rest-nvim').last()<CR>
 
 vim.api.nvim_set_keymap(
   'n',
@@ -1684,3 +1789,8 @@ vim.api.nvim_set_keymap(
 --	 { noremap = true, silent = true }
 -- )
 --
+--
+-- deal with vscode
+-- if vim.cmd.exists('g:vscode')
+--     -- VSCode extension
+-- end

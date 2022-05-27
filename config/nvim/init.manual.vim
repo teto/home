@@ -35,9 +35,7 @@ let g:plug_shallow=1
 "}}}
 call plug#begin(s:plugdir)
 Plug 'rhysd/vim-gfm-syntax' " markdown syntax compatible with Github's
-Plug 'winston0410/range-highlight.nvim' "highlight ranges like :1,5
-Plug 'symphorien/vim-nixhash' " use :NixHash
-Plug 'seandewar/nvimesweeper' " not packaged
+" Plug 'symphorien/vim-nixhash' " use :NixHash
 " Plug 'vim-denops/denops.vim'
 " Plug 'ryoppippi/bad-apple.vim' " needs denops
 
@@ -45,7 +43,7 @@ Plug 'seandewar/nvimesweeper' " not packaged
 
 " Plug 'eugen0329/vim-esearch' " search & replace
 Plug '~/neovim/neovim-ui'
-Plug 'kshenoy/vim-signature' " display marks in gutter, love it
+" Plug 'kshenoy/vim-signature' " display marks in gutter, love it
 
 " Plug '~/pdf-scribe.nvim'  " to annotate pdf files from nvim :PdfScribeInit
 
@@ -54,63 +52,28 @@ Plug 'MattesGroeger/vim-bookmarks' " ruby  / :BookmarkAnnotate
 " 'wdicarlo/vim-notebook' " last update in 2016
 " 'plutonly/vim-annotate" "  last update in 2015
 "}}}
-" branch v2-integration
 
-Plug 'skywind3000/vim-quickui' " to design cool uis
-" Plug 'neovim/nvim-lspconfig' " while fuzzing details out
-Plug '~/neovim/nvim-lspconfig' " while fuzzing details out
-" Plug 'puremourning/vimspector' " to debug programs
-Plug 'bfredl/nvim-luadev'  " lua repl :Luadev
 " Plug 'norcalli/nvim-terminal.lua' " to display ANSI colors
 Plug '~/neovim/nvim-terminal.lua' " to display ANSI colors
 Plug 'bogado/file-line' " to open a file at a specific line
 " Plug 'glacambre/firenvim' " to use nvim in firefox
-Plug 'alok/notational-fzf-vim' " to take notes, :NV
-Plug 'voldikss/vim-translator'
 " call :NR on a region than :w . coupled with b:nrrw_aucmd_create,
 " Plug 'chrisbra/NrrwRgn' " to help with multi-ft files
 Plug 'chrisbra/vim-diff-enhanced' "
-" Plug 'vim-pandoc/vim-pandoc'
-" Plug 'vim-pandoc/vim-pandoc-syntax'
 
-" around vcs {{{
-Plug 'tpope/vim-fugitive' 
-Plug 'shumphrey/fugitive-gitlab.vim'
-" Plug 'sodapopcan/vim-twiggy' " run with :Twiggy
-" Plug 'idanarye/vim-merginal'  " fugitive extension :Merginal
 Plug 'rhysd/git-messenger.vim' " to show git message :GitMessenger
 
-" }}}
-
-" filetype related {{{
-" Plug 'vim-scripts/rfc-syntax', { 'for': 'rfc' } " optional syntax highlighting for RFC files
-" Plug 'vim-scripts/coq-syntax', {'for': 'coq'}
-"}}}
-" Plug 'mcchrish/info-window.nvim'  " :InfoWindowToggle to display buffer information in a popup
 " Plug 'tweekmonster/nvim-api-viewer', {'on': 'NvimAPI'} " see nvim api
-Plug 'tweekmonster/startuptime.vim', {'on': 'StartupTime'} " see startup time per script
 " provider
 " needs ruby support, works in recent neovim
 " Plug 'junegunn/vim-github-dashboard', { 'do': ':UpdateRemotePlugins' }
 " while waiting for my neovim notification provider...
-" Plug 'tjdevries/descriptive_maps.vim', {'do': ':UpdateRemotePlugins' } " :call DescriptiveStart()
-" Plug 'the-lambda-church/coquille', {'branch': 'matt', 'for': 'coq'}
 
-" Plug 'glacambre/shelley'
-Plug 'dbakker/vim-projectroot' " projectroot#guess()
-" Plug 'sunaku/vim-dasht' " get documentation (zeavim is also a contender KabbAmine/zeavim.vim)
-" Plug 'ludovicchabant/vim-gutentags' " automatic tag generation, very good
-Plug 'junegunn/limelight.vim' " focus writing :Limelight, works with goyo
-Plug 'calvinchengx/vim-aftercolors' " load after/colors
-" leader
-" Plug 'bronson/vim-trailing-whitespace' " :FixWhitespace
-" Plug 'tpope/vim-scriptease' " Adds command such as :Messages
-" Plug 'tpope/vim-eunuch' " {provides SudoEdit, SudoWrite , Unlink, Rename etc...
+" Plug 'dbakker/vim-projectroot' " projectroot#guess()
 
 " REPL (Read Execute Present Loop) {{{
 " Plug 'metakirby5/codi.vim', {'on': 'Codi'} " repl
 " careful it maps cl by default
-Plug 'vigemus/iron.nvim'    ", { 'branch': 'lua/replace' }
 " Plug 'jalvesaq/vimcmdline' " no help files, mappings clunky
 " github mirror of Plug 'http://gitlab.com/HiPhish/repl.nvim'
 " Plug 'http://gitlab.com/HiPhish/repl.nvim' " no commit for the past 2 years
@@ -142,74 +105,19 @@ let cmdline_external_term_cmd = "termite -e '%s' &"
 "}}}
 "}}}
 " " Snippets are separated from the engine. Add this if you want them:
-" Plug 'SirVer/ultisnips' " handle snippets
-Plug 'honza/vim-snippets'
-" Plug 'itchyny/vim-cursorword'
 
-" Plug 'sjl/gundo.vim' " :GundoShow/Toggle to redo changes
-
-" haskell plugins{{{
-Plug 'neovimhaskell/nvim-hs.vim' " to help with nvim-hs
-"}}}
-
-" Plug 'tpope/vim-unimpaired' " [<space> [e [n ]n pour gerer les conflits etc...
-
-" filetypes {{{2
-Plug 'cespare/vim-toml', { 'for': 'toml'}
-Plug 'PotatoesMaster/i3-vim-syntax'
-" Plug 'florentc/vim-tla'
-" one competitor is https://github.com/hwayne/tla.vim/
-" }}}
-
-" Plug 'dietsche/vim-lastplace' " restore last cursor postion (is it still needed ?)
-" Plug 'hrsh7th/vim-vsnip' " vscode/lsp snippet format
-" Plug 'hrsh7th/vim-vsnip-integ'
-
-Plug 'justinmk/vim-gtfo' " gfo to open filemanager in cwd
+" Plug 'justinmk/vim-gtfo' " gfo to open filemanager in cwd
 " Plug 'wannesm/wmgraphviz.vim', {'for': 'dot'} " graphviz syntax highlighting
-Plug 'teto/vim-listchars' " to cycle between different list/listchars configurations
 Plug 'tpope/vim-rhubarb' " github support in fugitive, use |i_CTRL-X_CTRL-O|
-" Plug 'vhakulinen/gnvim-lsp' " load it only for gnvim
 
-" Plug 'Rykka/riv.vim', {'for': 'rst'}
-" Plug 'Rykka/InstantRst', {'for': 'rst'} " rst live preview with :InstantRst,
-" Plug 'dhruvasagar/vim-table-mode', {'for': 'txt'}
 
-" Plug 'mhinz/vim-rfc', { 'on': 'RFC' } " requires nokigiri gem
-" careful maps F4 by default
-Plug 'teto/Modeliner' " <leader>ml to setup buffer modeline
-
-" does not work seems to be better ones
-" Plug 'vasconcelloslf/vim-interestingwords' " highlight the words you choose <leader>k (does not work in neovim)
-" Plug 't9md/vim-quickhl' " hl manually selected words :h QuickhlManualEnable
-
-" colorschemes {{{
-Plug 'Matsuuu/pinkmare'
-Plug 'flrnd/candid.vim'
-Plug 'adlawson/vim-sorcerer'
-Plug 'whatyouhide/vim-gotham'
-Plug 'vim-scripts/Solarized'
-" Plug 'gruvbox-community/gruvbox' *
-" Plug 'npxbr/gruvbox.nvim' " requires lush
-Plug 'romainl/flattened'
-Plug 'NLKNguyen/papercolor-theme'
-Plug 'marko-cerovac/material.nvim'
-" }}}
-
-" do not run it automatically, can be boring
-Plug 'chrisbra/csv.vim'
-
-" Plug 'junegunn/rainbow_parentheses.vim' " the recommanded one
-" Plug 'jeffwilliams/basejump' " to alt+click on file:line and go to it
-Plug 'neovim/nvimdev.nvim' " thanks tweekmonster !
-" Plug 'antoinemadec/openrgb.nvim'  " to take into account RGB stuff
 call plug#end()
 " }}}
 
 
 " to load plugins in ftplugin matching ftdetect
 filetype plugin on
-syntax on
+" syntax on
 " Dirvish {{{
 let g:loaded_netrwPlugin = 1 " ???
 command! -nargs=? -complete=dir Vexplore leftabove vsplit | silent Dirvish <args>
@@ -233,8 +141,6 @@ function! SynStack()
   endif
   echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 endfunc
-
-nnoremap <C-RightMouse> :call SynStack()<CR>
 " }}}
 " Wildmenu completion {{{
 
@@ -307,9 +213,6 @@ let g:lastplace_ignore_buftype = "quickfix,nofile,help"
 let g:gruvbox_contrast_dark="hard"
 let g:gruvbox_contrast_light="hard"
 " }}}
-" ultisnips {{{
-let g:UltiSnipsSnippetDirectories=[stdpath('config').'/snippets' ]
-" }}}
 " dirvish {{{
 let g:dirvish_mode=2
 "}}}
@@ -359,14 +262,6 @@ let g:gutentags_file_list_command = 'rg --files'
 
 let g:gutentags_ctags_exclude = ['.vim-src', 'build', '.mypy_cache']
 " }}}
-" Csv config {{{
-" There is the analyze command as well
-let g:csv_autocmd_arrange = 0
-" let g:csv_autocmd_arrange_size = 1024*1024
-
-" call InitCSV after changing this value
-" :let g:csv_delim=','
-" }}}
 " haskell-vim config {{{
 let g:haskell_enable_quantification = 1   " to enable highlighting of `forall`
 let g:haskell_enable_recursivedo = 1      " to enable highlighting of `mdo` and `rec`
@@ -410,43 +305,11 @@ let g:startify_change_to_dir = 0
 let g:startify_relative_path = 0
 " let g:startify_skiplist=[]
 " }}}
-" Rainbow parentheses {{{
-let g:rbpt_colorpairs = [
-    \ ['red',         'RoyalBlue3'],
-    \ ['brown',       'SeaGreen3'],
-    \ ['blue',        'DarkOrchid3'],
-    \ ['gray',        'firebrick3'],
-    \ ['green',       'RoyalBlue3'],
-    \ ['magenta',     'SeaGreen3'],
-    \ ['cyan',        'DarkOrchid3'],
-    \ ['darkred',     'firebrick3'],
-    \ ['brown',       'RoyalBlue3'],
-    \ ['darkblue',    'DarkOrchid3'],
-    \ ['gray',        'firebrick3'],
-    \ ['darkgreen',   'RoyalBlue3'],
-    \ ['darkmagenta', 'SeaGreen3'],
-    \ ['darkcyan',    'DarkOrchid3'],
-    \ ['red',         'firebrick3'],
-    \ ]
-
-let g:rbpt_max = 4
-let g:rbpt_loadcmd_toggle = 0
-let g:bold_parentheses = 1      " Default on
-
-"au VimEnter * RainbowParenthesesToggle
-"au Syntax * RainbowParenthesesLoadRound
-"au Syntax * RainbowParenthesesLoadSquare
-"au Syntax * RainbowParenthesesLoadBraces
-" }}}
 " goyo {{{
 let g:goyo_linenr=1
 let g:goyo_height= '90%'
 let g:goyo_width = 120
 " }}}
-" Generic Tex configuration {{{
-" See :help ft-tex-plugin
-let g:tex_flavor = "latex"
-"}}}
 " Vimtex configuration {{{
 " Pour le rappel
 " <localleader>ll pour la compilation continue du pdf
@@ -547,21 +410,6 @@ set listchars=tab:•·,trail:·,extends:❯,precedes:❮,nbsp:×
 " conceal is used by deefault if cchar does not exit
 set listchars+=conceal:❯
 " }}}
-" Peekaboo config {{{
-" Default peekaboo window
-let g:peekaboo_window = 'vertical botright 30new'
-
-" Delay opening of peekaboo window (in ms. default: 0)
-let g:peekaboo_delay = 0
-
-" Compact display; do not display the names of the register groups
-let g:peekaboo_compact = 1
-" }}}
-" vimplug bindings {{{
-nnoremap <leader>pi <Cmd>PlugInstall<CR>
-nnoremap <leader>pU <Cmd>PlugUpgrade<CR>
-nnoremap <leader>pu <Cmd>PlugUpdate<CR>
-" }}}
 " vim-signature {{{
 " :SignatureListMarkers         : List all markers
 let g:SignatureMarkTextHLDynamic=0
@@ -597,14 +445,6 @@ endfunc
 " does not work as neomake won"'t take into account
 " command! NvimLintToggle :call VarToggle("g:nvimdev_auto_lint")
         " \ 'remove_invalid_entries': get(g:, 'neomake_remove_invalid_entries', 0),
-"}}}
-"coquille{{{
-" Maps Coquille commands to <F2> (Undo), <F3> (Next), <F4> (ToCursor)
-au FileType coq call coquille#FNMapping()
-let g:coquille_auto_move=1
-" }}}
-" nvim-hs haskell stuff {{{
-" let g:nvimhsPluginStarter=nvimhs#stack#pluginstarter()
 "}}}
 " dasht{{{
 
@@ -660,9 +500,6 @@ vmap <leader>rs  <Plug>(ReplSend)
 let g:iron_repl_open_cmd="vsplit"
 let g:iron_map_defaults=0
 let g:iron_map_extended=0
-"}}}
-" bookmarks.vim {{{
-  let g:bookmark_no_default_key_mappings = 1
 "}}}
 " alok/notational-fzf-vim {{{
 " use c-x to create the note
@@ -831,10 +668,11 @@ let g:himalaya_mailbox_picker = 'fzf'
 "}}}
 
 
-" deal with vscode
-if exists('g:vscode')
-    " VSCode extension
-endif
+" vimplug bindings {{{
+nnoremap <leader>pi <Cmd>PlugInstall<CR>
+nnoremap <leader>pU <Cmd>PlugUpgrade<CR>
+nnoremap <leader>pu <Cmd>PlugUpdate<CR>
+" }}}
 
 
 " Autosave toggle
@@ -863,12 +701,6 @@ endif
 
 " Bye bye ex mode
 noremap Q <NOP>
-
-" buffers
-" map <Leader>n :bnext<CR>
-" map <Leader>N :bNext<CR>
-" map <Leader>p :bprevious<CR>
-" map <Leader>d :bdelete<CR>
 
 "http://stackoverflow.com/questions/28613190/exclude-quickfix-buffer-from-bnext-bprevious
 
@@ -1023,12 +855,6 @@ command! -nargs=+ -bang -complete=command R call ReadExCommandOutput(<bang>0, <q
 " nnoremap <S-CR> i<CR><Esc>
 
 
-" highlight NormalFloat guibg=#1d2019
-" taken from SignColumn
-" highlight NormalFloat guibg=#3c3836
-highlight NormalFloat guibg=grey
-" highlight NormalFloat cterm=NONE ctermfg=14 ctermbg=0 gui=NONE guifg=#93a1a1 guibg=#002931
-
 " taken from justinmk's config
 command! Tags !ctags -R --exclude='build*' --exclude='.vim-src/**' --exclude='venv/**' --exclude='**/site-packages/**' --exclude='data/**' --exclude='dist/**' --exclude='notebooks/**' --exclude='Notebooks/**' --exclude='*graphhopper_data/*.json' --exclude='*graphhopper/*.json' --exclude='*.json' --exclude='qgis/**' *
 
@@ -1064,17 +890,6 @@ hi CustomLineWarn guifg=#FD971F
 " hi LspDiagnosticsFloatingError guifg=red
 " hi LspDiagnosticsFloatingWarning guifg=orange
 " }}}
-" bufferline mappings {{{
-  nnoremap <silent><leader>1 <Cmd>BufferLineGoToBuffer 1<CR>
-  nnoremap <silent><leader>2 <Cmd>BufferLineGoToBuffer 2<CR>
-  nnoremap <silent><leader>3 <Cmd>BufferLineGoToBuffer 3<CR>
-  nnoremap <silent><leader>4 <Cmd>BufferLineGoToBuffer 4<CR>
-  nnoremap <silent><leader>5 <Cmd>BufferLineGoToBuffer 5<CR>
-  nnoremap <silent><leader>6 <Cmd>BufferLineGoToBuffer 6<CR>
-  nnoremap <silent><leader>7 <Cmd>BufferLineGoToBuffer 7<CR>
-  nnoremap <silent><leader>8 <Cmd>BufferLineGoToBuffer 8<CR>
-  nnoremap <silent><leader>9 <Cmd>BufferLineGoToBuffer 9<CR>
-"}}}
 
 function! RandNum() abort
   return str2nr(matchstr(reltimestr(reltime()), '\.\zs\d*'))
@@ -1087,10 +902,6 @@ endfunction
 function! Password() abort
   return join(map(range(8), 'RandChar()'), '')
 endfunction
-
-" echo Password()
-
-" toto
 
 " set working directory to the current buffer's directory
 " nnoremap cd :lcd %:p:h<bar>pwd<cr>
@@ -1109,54 +920,6 @@ nnoremap <2-LeftMouse> <cmd>lua vim.lsp.buf.definition()<cr>
 " command! ProfileVim     exe 'Start '.v:progpath.' --startuptime "'.expand("~/vimprofile.txt").'" -c "e ~/vimprofile.txt"'
 " command! NvimTestScreenshot put =\"local Screen = require('test.functional.ui.screen')\nlocal screen = Screen.new()\nscreen:attach()\nscreen:snapshot_util({},true)\"
 
-" quickui {{{
-" https://github.com/skywind3000/vim-quickui
-" TODO should be printed only if available
-let g:quickui_border_style = 1
-let content = [
-            \ ['LSP -'],
-            \ ["Goto &Definition\t\\cd", 'lua vim.lsp.buf.definition()'],
-            \ ["Goto &Declaration\t\\cd", 'lua vim.lsp.buf.declaration()'],
-            \ ["Goto I&mplementation\t\\cd", 'lua vim.lsp.buf.implementation()'],
-            \ ["Hover\t\\ch", 'lua vim.lsp.buf.references()'],
-            \ ["Search &References\t\\cr", 'lua vim.lsp.buf.references()'],
-            \ ["Document  &Symbols\t\\cr", 'lua vim.lsp.buf.document_symbol()'],
-            \ ["Format", 'lua vim.lsp.buf.formatting_sync(nil, 1000)'],
-            \ ["&Execute  Command\\ce", 'lua vim.lsp.buf.execute_command()'],
-            \ ["&Incoming calls\\ci", 'lua vim.lsp.buf.incoming_calls()'],
-            \ ["&Outgoing calls\\ci", 'lua vim.lsp.buf.outgoing_calls()'],
-            \ ["&Signature help\\ci", 'lua vim.lsp.buf.signature_help()'],
-            \ ["&Workspace symbol\\cw", 'lua vim.lsp.buf.workspace_symbol()'],
-            \ ["&Rename\\cw", 'lua vim.lsp.buf.rename()'],
-            \ ["&Code action\\cw", 'lua vim.lsp.buf.code_action()'],
-            \ ['- Diagnostic '],
-            \ ['Display in QF', 'lua vim.diagnostic.setqflist({open = true, severity = { min = vim.diagnostic.severity.WARN } })'],
-	    \ ['Set severity to warning', 'lua vim.diagnostic.config({virtual_text = { severity = { min = vim.diagnostic.severity.WARN } }})'],
-	    \ ['Set severity to all', 'lua vim.diagnostic.config({virtual_text = { severity = nil }})'],
-            \ ['- Misc '],
-            \ ['Toggle indentlines', 'IndentBlanklineToggle!'],
-            \ ['Start search and replace', 'lua require("spectre").open()'],
-            \ ['Toggle obsession', 'Obsession'],
-            \ ['Toggle minimap', 'MinimapToggle'],
-            \ ['Toggle biscuits', 'lua require("nvim-biscuits").toggle_biscuits()'],
-            \ ['REPL - '],
-            \ ['Send line ', 'lua require''luadev''.exec(vim.api.nvim_get_current_line())'],
-            \ ['Send selection ', 'call <SID>luadev_run_operator(v:true)'],
-	    \ ['DAP -'],
-	    \ ['Add breakpoint', 'lua require"dap".toggle_breakpoint()'],
-	    \ ["Continue", 'lua require"dap".continue()'],
-	    \ ['Open REPL', 'lua require"dap".repl.open()']
-            \ ]
-
-" formatting_sync
-" set cursor to the last position
-let quick_opts = {'index':g:quickui#context#cursor}
-
-" TODO map to lua create_menu()
-map <RightMouse>  <Cmd>call quickui#context#open(content, quick_opts)<CR>
-" can't click on it plus it disappears
-" map <RightMouse>  <Cmd>lua create_menu()<CR>
-" }}}
 
 command Hasktags !hasktags .
 command Htags !hasktags .
@@ -1186,9 +949,9 @@ set exrc
 
 " global color
 highlight BiscuitColor ctermfg=cyan
+" highlight BiscuitColorRust ctermfg=red
 
 " language specific color
-highlight BiscuitColorRust ctermfg=red
 let $NVIM_MKDP_LOG_LEVEL = 'debug'
 let $VIM_MKDP_RPC_LOG_FILE = expand('~/mkdp-rpc-log.log')
 let g:mkdp_browser = 'firefox'

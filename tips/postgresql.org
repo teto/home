@@ -1,0 +1,23 @@
+initdb
+pg_ctl start
+
+
+
+As my own user:
+```
+psql
+psql: error: FATAL:  role "teto" does not exist
+```
+
+psql -U postgres -c 'SHOW config_file'
+
+
++template1=> \conninfo
+You are connected to database "template1" as user "teto" via socket in "/run/postgresql" at port "5432".
+
+```
+$ pg_tmp 
+postgresql:///test?host=%2Ftmp%2Fephemeralpg.qG7Ya5
+```
+
+export POSTGRESQL_CONNECTION=postgres:///run/postgresql

@@ -93,6 +93,7 @@ in
     extraConfig = sharedExtraConfig
       + ''
         exec_always --no-startup-id setxkbmap -layout us
+        exec_always --no-startup-id setxkbmap -option ctrl:nocaps
         new_float pixel 2
       ''
     ;

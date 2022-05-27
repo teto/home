@@ -35,17 +35,18 @@ let
 
   vimlRcBlocks = {
 
-    wildBlock = ''
-    set wildignore+=.hg,.git,.svn                    " Version control
-    " set wildignore+=*.aux,*.out,*.toc                " LaTeX intermediate files
-    set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg   " binary images
-    set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest " compiled object files
-    set wildignore+=*.sw?                            " Vim swap files
-    set wildignore+=*.luac                           " Lua byte code
-    set wildignore+=*.pyc                            " Python byte code
-    set wildignore+=*.orig                           " Merge resolution files
-    '';
+    # wildBlock = ''
+    # set wildignore+=.hg,.git,.svn                    " Version control
+    # " set wildignore+=*.aux,*.out,*.toc                " LaTeX intermediate files
+    # set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg   " binary images
+    # set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest " compiled object files
+    # set wildignore+=*.sw?                            " Vim swap files
+    # set wildignore+=*.luac                           " Lua byte code
+    # set wildignore+=*.pyc                            " Python byte code
+    # set wildignore+=*.orig                           " Merge resolution files
+    # '';
 
+	# TODO move
     sessionoptions = ''
       set sessionoptions-=terminal
       set sessionoptions-=help
@@ -73,6 +74,11 @@ let
     # }
 
   ];
+
+  filetypePlugins = [
+  ];
+  cmpPlugins = [
+  ];
   luaPlugins = with pkgs.vimPlugins; [
     {
 
@@ -93,18 +99,12 @@ let
           ]
         ));
     }
-    # {
-    #   plugin = nvim-dap;
-    # }
-    # {
-    #   plugin = lightspeed-nvim;
-    # }
+    # { plugin = nvim-dap; }
+    # { plugin = lightspeed-nvim; }
     {
       # required by some colorscheme
       plugin = colorbuddy-nvim;
       type = "lua";
-	  # config = ''
-		# '';
     }
 	(luaPlugin { 
 	  plugin = octo-nvim;
@@ -127,10 +127,10 @@ let
     {
       plugin = auto-git-diff;
     }
-    {
-	  # should be autoinstalled via deps really
-      plugin = plenary-nvim;
-    }
+    # {
+	  # # should be autoinstalled via deps really
+    #   plugin = plenary-nvim;
+    # }
     (luaPlugin {
       plugin = gitsigns-nvim;
       config = ''
@@ -283,20 +283,31 @@ let
       plugin = nvim-spectre;
     })
 	(luaPlugin {
-      plugin = nvim-treesitter-context;
+      plugin = nvim-gps;
+	  #local gps = require("nvim-gps")
+	  config = ''
+		require("nvim-gps").setup()
+	  '';
     })
+	# (luaPlugin {
+      # plugin = nvim-treesitter-context;
+    # })
+	# (luaPlugin {
+	#   # run with :Diffview
+      # plugin = diffview-nvim;
+    # })
 	(luaPlugin {
 	  # run with :Diffview
       plugin = diffview-nvim;
+	  optional = true;
     })
-    {
-      plugin = tokyonight-nvim;
-    }
     (luaPlugin {
 	  # prettier quickfix
       plugin = nvim-bqf;
 	  # plugin = nvim-pqf-git;
     })
+    (luaPlugin { plugin = fugitive-gitlab-vim; })
+
     # { plugin = telescope-fzf-native-nvim; }
     {
       plugin = registers-nvim;
@@ -347,6 +358,7 @@ let
     # monkai-pro
 	{ plugin = vim-monokai; }
 	{ plugin = vim-janah; }
+    { plugin = tokyonight-nvim; }
   ];
 
   basePlugins = with pkgs.vimPlugins; [
@@ -389,11 +401,13 @@ let
           let g:markdown_composer_autostart = 0
         '';
       }
+	  # disabled because of https://github.com/rktjmp/lush.nvim/issues/89
+      # (luaPlugin { plugin = gruvbox-nvim; }) 
       {
-        plugin = gruvbox-nvim;
-        type = "lua";
+		# out of tree
+        plugin = fzf-hoogle-vim;
         # config = ''
-        #   -- test if gruvbox is installed
+        #   " dhall.vim config
         # '';
       }
       {
@@ -402,29 +416,54 @@ let
           " dhall.vim config
         '';
       }
-      {
+      (luaPlugin {
         plugin = Shade-nvim;
-        type = "lua";
         config = ''
         '';
-      }
-      # {
+      })
+      (luaPlugin {
+        plugin = bufferline-nvim;
+        # config = ''
+        # '';
+      })
+      (luaPlugin {
+        plugin = nvim-peekup;
+        config = ''
+        '';
+      })
+
+      (luaPlugin {
+        plugin = nvim-biscuits;
+        config = ''
+	require('nvim-biscuits').setup({
+	on_events = { 'InsertLeave', 'CursorHoldI' },
+	cursor_line_only = true,
+	default_config = {
+		max_length = 12,
+		min_distance = 50,
+		prefix_string = " 📎 "
+	},
+	language_config = {
+		html = { prefix_string = " 🌐 " },
+		javascript = {
+			prefix_string = " ✨ ",
+			max_length = 80
+		},
+		python = { disabled = true },
+		-- nix = { disabled = true }
+	}
+	})
+
+        '';
+      })# {
       #   plugin = pywal-nvim;
       #   type = "lua";
       #   config = ''
       #   '';
       # }
-      (luaPlugin {
-        plugin = glow-nvim;
-        # type = "lua";
-        # config = ''
-        # '';
-      })
-      (luaPlugin {
-        plugin = fzf-lua;
-      })
+      (luaPlugin { plugin = glow-nvim; })
+      (luaPlugin { plugin = fzf-lua; })
 	  { 
-
 		# really helps with syntax highlighting
 		plugin = haskell-vim; 
 	  }  
@@ -469,23 +508,12 @@ let
         }
         '';
       })
-      {
-        plugin = vim-toml;
-      }
-      # {
-      #   plugin = onedark-nvim;
-      # }
+      { plugin = vim-toml; }
+      # { plugin = onedark-nvim; }
       # to install manually with coc.nvim:
-	  # " Plug 'iamcco/markdown-preview.nvim' " :MarkdownPreview
-	  # " Plug 'shime/vim-livedown'  " :LivedownPreview
 	  # " Plug 'suy/vim-context-commentstring' " commen for current programming language
 
-      {
-        plugin = editorconfig-vim;
-        # config = ''
-        #   " dhall.vim config
-        # '';
-      }
+      { plugin = editorconfig-vim; }
 	  {
 		# use ctrl a/xto cycle between different words
 		plugin = vim-CtrlXA;
@@ -641,7 +669,6 @@ let
       vim-nix
       {
         plugin = vim-obsession;
-
         config = ''
           map <Leader>$ <Cmd>Obsession<CR>
         '';
@@ -660,10 +687,10 @@ let
           let g:sayonara_confirm_quit = 0
         '';
       }
+
       # TODO this one will be ok once we patch it
 	  {
 		# https://github.com/euclio/vim-markdown-composer/issues/69#event-6528328732
-		# rust based
 		# ComposerUpdate / ComposerStart
 		plugin = vim-markdown-composer;  # WIP
 		config = ''
@@ -671,81 +698,29 @@ let
 		  let g:markdown_composer_binary = '${vim-markdown-composer.vimMarkdownComposerBin}/bin/markdown-composer'
 		'';
 	  }
-      # vim-livedown
-	  { 
-		# node-based
-		# :MarkdownPreview
-		plugin = markdown-preview-nvim;
-		# let g:vim_markdown_preview_github=1
-		# let g:vim_markdown_preview_use_xdg_open=1
 
-	  }
-	  # {
-# " far config (Find And Replace) {{{
-# let g:far#source='rg'
-# let g:far#collapse_result=1
-# " }}}
+      # vim-livedown
+
+	  # { 
+		# # node-based :MarkdownPreview
+		# plugin = markdown-preview-nvim;
+		# # let g:vim_markdown_preview_github=1
+		# # let g:vim_markdown_preview_use_xdg_open=1
 	  # }
+
       # nvim-markdown-preview  # :MarkdownPreview
       (luaPlugin {
         plugin = nvim-spectre;
       })
 
-      # vim-markdown-preview  # WIP
       {
         plugin = vim-commentary;
-        config = ''
-          '';
+        # config = ''
+        #   '';
       }
 
-      # triggers errors when working on neovim
-      # {
-      #   plugin = vista-vim;
-      #   # optional = false;
-      #   config = ''
-# " vista (visualize LSP symbols) {{{
-# " Vista finder fzf
-# " Vista nvim_lsp
-# " available options are echo/scroll/floating_win/both
-# let g:vista_echo_cursor_strategy='both'
-# let g:vista_close_on_jump=0
-# let g:vista_default_executive='nvim_lsp'
-# let g:vista_log_file = stdpath('cache').'/vista.log'
-
-# let g:vista_executive_for = {
-#     \ 'php': 'vim_lsp',
-#     \ 'markdown': 'toc',
-#     \ }
-# let g:vista_highlight_whole_line=1
-
-# " Declare the command including the executable and options used to generate ctags output
-# " for some certain filetypes.The file path will be appened to your custom command.
-# " For example:
-# let g:vista_ctags_cmd = {
-#       \ 'haskell': 'hasktags -x -o - -c',
-#       \ }
-# " let g:vista_finder_alternative_executives=['tags']
-# " let g:vista_fzf_preview
-# " let g:vista_blink=[2, 100]
-# " let g:vista_icon_indent=[ '+', '+' ]
-# nnoremap <Leader>v <Cmd>Vista<CR>
-# " Ensure you have installed some decent font to show these pretty symbols, then you can enable icon for the kind.
-# let g:vista#renderer#enable_icon = 1
-
-# " The default icons can't be suitable for all the filetypes, you can extend it as you wish.
-# let g:vista#renderer#icons = {
-# \   "function": "\uf794",
-# \   "variable": "\uf71b",
-# \  }
-# "}}}
-      #   '';
-      # }
-
-      # vimwiki
-
-      # reuse once https://github.com/neovim/neovim/issues/9390 is fixed
-      vimtex
       {
+		# reuse once https://github.com/neovim/neovim/issues/9390 is fixed
         plugin = vimtex;
 		optional = true;
 	  }
@@ -760,10 +735,10 @@ let
 # nmap ga <Plug>(UnicodeGA)
 
         config = ''
-          let g:Unicode_data_directory='${pkgs.vimPlugins.unicode-vim}/autoload/unicode'
+        let g:Unicode_data_directory='${pkgs.vimPlugins.unicode-vim}/autoload/unicode'
 
-          " overrides ga
-          nmap ga <Plug>(UnicodeGA)
+        " overrides ga
+        nmap ga <Plug>(UnicodeGA)
         '';
       }
 
@@ -833,6 +808,8 @@ in
       ++ luaPlugins
       # ++ fennelPlugins
       ++ colorschemePlugins
+      ++ filetypePlugins
+      ++ cmpPlugins
       ;
   };
 

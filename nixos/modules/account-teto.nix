@@ -20,7 +20,8 @@ in
        "video" # to control brightness
        "rtkit"  # for pipewire
        "pipewire"  # for pipewire
-       "postgres"  # for pipewire
+       "postgres"
+       "pgadmin" # pgadmin is such a mess
        "wheel" # for sudo
        "vboxusers" # to avoid Kernel driver not accessible
        # "kvm" # don't think that's needed

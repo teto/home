@@ -37,8 +37,8 @@ def change_theme(light=False):
 # TODO retreive theme from pywal
 status.register("text",
 	text="theme",
-	# on_upscroll=change_theme(True),
-	# on_downscroll=change_theme(False),
+	on_upscroll=change_theme,
+	on_downscroll=change_theme,
 	)
 
 status.register("nix-channels",

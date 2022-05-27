@@ -219,6 +219,7 @@
                   ./nixos/profiles/nix-daemon.nix
                   ./nixos/profiles/neovim.nix
                   # ./nixos/profiles/peerix.nix
+                  ./nixos/profiles/postgresql.nix
                   ./nixos/modules/xserver.nix
                   ./nixos/modules/redis.nix
                   ./nixos/modules/ntp.nix

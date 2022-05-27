@@ -1,0 +1,11 @@
+
+
+Pour generer la modeline correspondante
+$ gtf 2560 1440 60
+Modeline "2560x1440_60.00"  311.83  2560 2744 3024 3488  1440 1441 1444 1490  -HSync +Vsync
+
+enlevez le "Modeline" quand on met dans newmode
+
+https://wiki.archlinux.org/title/xrandr#Manage_2-monitors
+xrandr --newmode "2560x1440"  311.83  2560 2744 3024 3488  1440 1441 1444 1490  -HSync +Vsync
+xrandr --addmode DP-3 --mode '2560x1440_60.00'
