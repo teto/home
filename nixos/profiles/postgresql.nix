@@ -27,7 +27,7 @@
 	# and give pgadmin:users ownership of both folders
 	# run the pgadmin pre-start systemd script is easier
 
-	enable = true;
+	enable = false;
 	initialEmail = "toto@doesnotexist.com";
 	# "/home/teto/pgadmin.password";
 	initialPasswordFile = pkgs.writeText "test" "toto";

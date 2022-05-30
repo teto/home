@@ -31,26 +31,29 @@ let
       vim.o.fillchars='foldopen:▾,foldclose:▸,msgsep:‾'
 	  vim.o.foldcolumn='auto:2'
 	'';
+
+    # sessionoptions = ''
+    #   set sessionoptions-=terminal
+    #   set sessionoptions-=help
+    # '';
   };
 
   vimlRcBlocks = {
 
-    # wildBlock = ''
-    # set wildignore+=.hg,.git,.svn                    " Version control
-    # " set wildignore+=*.aux,*.out,*.toc                " LaTeX intermediate files
-    # set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg   " binary images
-    # set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest " compiled object files
-    # set wildignore+=*.sw?                            " Vim swap files
-    # set wildignore+=*.luac                           " Lua byte code
-    # set wildignore+=*.pyc                            " Python byte code
-    # set wildignore+=*.orig                           " Merge resolution files
-    # '';
 
 	# TODO move
-    sessionoptions = ''
-      set sessionoptions-=terminal
-      set sessionoptions-=help
-    '';
+    # sessionoptions = ''
+    #   set sessionoptions-=terminal
+    #   set sessionoptions-=help
+    # '';
+	dealingwithpdf= ''
+	  " Read-only pdf through pdftotext / arf kinda fails silently on CJK documents
+	  " autocmd BufReadPost *.pdf silent %!pdftotext -nopgbrk -layout -q -eol unix "%" - | fmt -w78
+
+	  " convert all kinds of files (but pdf) to plain text
+	  autocmd BufReadPost *.doc,*.docx,*.rtf,*.odp,*.odt silent %!pandoc "%" -tplain -o /dev/stdout
+	'';
+
   };
 
 
@@ -405,6 +408,7 @@ let
       # (luaPlugin { plugin = gruvbox-nvim; }) 
       {
 		# out of tree
+		# call with :Hoogle
         plugin = fzf-hoogle-vim;
         # config = ''
         #   " dhall.vim config
@@ -576,37 +580,59 @@ let
         plugin =  nvimdev-nvim;
         # optional = true;
       }
-
-      # LanguageClient-neovim
-      # {
-      #   plugin =  tagbar;
-      #   optional = true;
-      # }
-      # {
-      #   plugin = fzf-preview;
-      #   config = ''
-      #     let g:fzf_preview_layout = $'''
-      #     " Key to toggle fzf window size of normal size and full-screen
-      #     let g:fzf_full_preview_toggle_key = '<C-s>'
-      #   '';
-      # }
       {
         plugin = vim-dasht;
+		config = ''
+		" When in Python, also search NumPy, SciPy, and Pandas:
+		let g:dasht_filetype_docsets = {} " filetype => list of docset name regexp
+		let g:dasht_filetype_docsets['python'] = ['(num|sci)py', 'pandas']
+
+		" search related docsets
+		nnoremap <Leader>k :Dasht<Space>
+
+		" search ALL the docsets
+		nnoremap <Leader><Leader>k :Dasht!<Space>
+
+		" search related docsets
+		nnoremap ,k <Cmd>call Dasht([expand('<cword>'), expand('<cWORD>')])<Return>
+
+		" search ALL the docsets
+		nnoremap <silent> <Leader><Leader>K :call Dasht([expand('<cword>'), expand('<cWORD>')], '!')<Return>
+		  '';
+
         # optional = true;
       }
       # displays a minimap on the right
       (luaPlugin { plugin =  minimap-vim; })
-      vim-dirvish
+      {
+        plugin = vim-dirvish;
+		config = ''
+		  let g:dirvish_mode=2
+		  let g:loaded_netrwPlugin = 1
+		  command! -nargs=? -complete=dir Vexplore leftabove vsplit | silent Dirvish <args>
+		  command! -nargs=? -complete=dir Sexplore belowright split | silent Dirvish <args>
+		'';
+      }
+
       # {
       #   plugin = sql-nvim;
       #   # config = "let g:sql_clib_path = '${pkgs.sqlite.out}/lib/libsqlite3.so'";
       # }
-      # {
-      #   plugin = vim-fugitive;
-      #   config = ''
-      #     '';
-      # }
-      # vim-signature
+      {
+        plugin = vim-fugitive;
+      }
+	  # {
+		# plugin = vim-signature;
+		# config = ''
+		  # let g:SignatureMarkTextHLDynamic=0
+		  # let g:SignatureEnabledAtStartup=1
+		  # let g:SignatureWrapJumps=1
+		  # let g:SignatureDeleteConfirmation=1
+		  # let g:SignaturePeriodicRefresh=1
+		# '';
+	  # }
+
+
 
       # {
       #   plugin = vim-signify;
@@ -633,10 +659,41 @@ let
 
       {
         plugin = vim-startify;
+		# cool stuff is that it autostarts sessions
         config = ''
           let g:startify_use_env = 0
           let g:startify_disable_at_vimenter = 0
           let g:startify_session_dir = stdpath('data').'/nvim/sessions'
+		  let g:startify_list_order = [
+				\ ['   MRU '.getcwd()], 'dir',
+				\ ['   MRU'],           'files' ,
+				\ ['   Bookmarks'],     'bookmarks',
+				\ ['   Sessions'],      'sessions',
+				\ ]
+		  let g:startify_use_env = 0
+		  let g:startify_disable_at_vimenter = 0
+		  let g:startify_session_dir = stdpath('data').'/nvim/sessions'
+		  let g:startify_bookmarks = [
+				\ {'i': $XDG_CONFIG_HOME.'/i3/config.main'},
+				\ {'h': $XDG_CONFIG_HOME.'/nixpkgs/home.nix'},
+				\ {'c': 'dotfiles/nixpkgs/configuration.nix'},
+				\ {'z': $XDG_CONFIG_HOME.'/zsh/'},
+				\ {'m': $XDG_CONFIG_HOME.'/mptcpanalyzer/config'},
+				\ {'n': $XDG_CONFIG_HOME.'/nvim/config'},
+				\ {'N': $XDG_CONFIG_HOME.'/ncmpcpp/config'},
+				\ ]
+				" \ {'q': $XDG_CONFIG_HOME.'/qutebrowser/qutebrowser.conf'},
+		  let g:startify_files_number = 10
+		  let g:startify_session_autoload = 1
+		  let g:startify_session_persistence = 0
+		  let g:startify_change_to_vcs_root = 0
+		  let g:startify_session_savevars = []
+		  let g:startify_session_delete_buffers = 1
+		  let g:startify_change_to_dir = 0
+
+		  let g:startify_relative_path = 0
+		  " let g:startify_skiplist=[]
+
         '';
       }
 
@@ -723,11 +780,83 @@ let
 		# reuse once https://github.com/neovim/neovim/issues/9390 is fixed
         plugin = vimtex;
 		optional = true;
+		config = ''
+" Pour le rappel
+" <localleader>ll pour la compilation continue du pdf
+" <localleader>lv pour la preview du pdf
+" see https://github.com/lervag/vimtex/issues/1058
+" let g:vimtex_log_ignore 
+" taken from https://castel.dev/post/lecture-notes-1/
+let g:tex_conceal='abdmg'
+let g:vimtex_log_verbose=1
+let g:vimtex_quickfix_open_on_warning = 1
+let g:vimtex_view_automatic=1
+let g:vimtex_view_enabled=1
+" was only necessary with vimtex lazy loaded
+" let g:vimtex_toc_config={}
+" let g:vimtex_complete_img_use_tail=1
+" autoindent can slow down vim quite a bit
+" to check indent parameters, run :verbose set ai? cin? cink? cino? si? inde? indk?
+let g:vimtex_indent_enabled=0
+let g:vimtex_indent_bib_enabled=1
+let g:vimtex_compiler_enabled=1 " enable new style vimtex
+let g:vimtex_compiler_progname='nvr'
+" let g:vimtex_compiler_method=
+" possibility between pplatex/pulp/latexlog
+" Note: `pplatex` and `pulp` require that `-file-line-error` is NOT passed to the LaTeX
+  " compiler. |g:vimtex_compiler_latexmk| will be updated automatically if one
+" let g:vimtex_quickfix_method="latexlog"
+let g:vimtex_quickfix_method="latexlog"
+" todo update default instead with extend ?
+" let g:vimtex_quickfix_latexlog = {
+"       \ 'underfull': 0,
+"       \ 'overfull': 0,
+"       \ 'specifier changed to': 0,
+"       \ }
+" let g:vimtex_quickfix_blgparser=
+" g:vimtex_quickfix_autojump
+
+let g:vimtex_quickfix_mode = 2 " 1=> opened automatically and becomes active (2=> inactive)
+let g:vimtex_indent_enabled=0
+let g:vimtex_indent_bib_enabled=1
+let g:vimtex_view_method = 'zathura'
+"let g:vimtex_snippets_leader = ','
+let g:vimtex_format_enabled = 0
+let g:vimtex_complete_recursive_bib = 0
+let g:vimtex_complete_close_braces = 0
+let g:vimtex_fold_enabled = 0
+let g:vimtex_view_use_temp_files=1 " to prevent zathura from flickering
+let g:vimtex_syntax_minted = [
+      \ {
+      \   'lang' : 'json',
+      \ }]
+" with being on anotherline
+      " \ 'Biber reported the following issues',
+      " \ "Invalid format of field 'month'"
+
+" shell-escape is mandatory for minted
+" check that '-file-line-error' is properly removed with pplatex
+" executable The name/path to the latexmk executable. 
+let g:vimtex_compiler_latexmk = {
+        \ 'backend' : 'nvim',
+        \ 'background' : 1,
+        \ 'build_dir' : ''',
+        \ 'callback' : 1,
+        \ 'continuous' : 1,
+        \ 'executable' : 'latexmk',
+        \ 'options' : [
+        \   '-pdf',
+        \   '-file-line-error',
+        \   '-bibtex',
+        \   '-synctex=1',
+        \   '-interaction=nonstopmode',
+        \   '-shell-escape',
+        \ ],
+        \}
+		'';
 	  }
       {
         plugin = unicode-vim;
-        # let g:Unicode_data_directory = /home/user/data/
-        # let g:Unicode_cache_directory = /tmp/
 
         # " let g:Unicode_cache_directory='${pkgs.vimPlugins.unicode-vim}/share/vim-plugins/unicode-vim/autoload/unicode'
 		# let g:Unicode_data_directory='${pkgs.vimPlugins.unicode-vim}/share/vim-plugins/unicode-vim/autoload/unicode'
@@ -770,6 +899,9 @@ in
     # source doesn't like `stdpath('config').'`
     # todo should use mkBefore ${config.programs.neovim.generatedInitrc}
     extraConfig = ''
+	  let mapleader = " "
+	  let maplocalleader = ","
+
       source $XDG_CONFIG_HOME/nvim/init.manual.vim
     ''
     # concatStrings = builtins.concatStringsSep "";

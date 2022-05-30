@@ -1,3 +1,11 @@
+Note to my future self: to override my nix-installed telescope and use the checkout one, I had to:
+
+set rtp^=~/telescope.nvim
+lua require'plenary.reload'.reload_module('telescope')
+lua require('telescope.builtin').vim_options{}
+
+
+otherwise I ended up with a code that uses 2 different telescope apparently because of package.loaded
 " to debug vimscript, use :mess to display error messages
 " :scriptnames to list loaded scripts
 " and prefix you command with 'verbose' is a very good way to get info
@@ -7,11 +15,12 @@
 dump ast with
 :lua print(vim.treesitter.get_parser(0):parse():root():sexpr())
 
-package.loaded
 
+# How to deal with diffs
 
-require'plenary.reload'..reload_module
-lua require('telescope.builtin').vim_options{}
-
-
+" git diff http://vimcasts.org/episodes/fugitive-vim-resolving-merge-conflicts-with-vimdiff/ {{{
+" the left window contains the version from the target branch
+" the middle window contains the working copy of the file, complete with conflict markers
+" the right window contains the version from the merge branch
+" }}}
 

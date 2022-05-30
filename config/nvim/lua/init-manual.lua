@@ -1,4 +1,5 @@
 -- vim: set noet fdm=marker fenc=utf-8 ff=unix sts=0 sw=4 ts=4 :
+-- https://github.com/nanotee/nvim-lua-guide#using-meta-accessors
 -- https://www.reddit.com/r/neovim/comments/o8dlwg/how_to_append_to_an_option_in_lua/
 -- local configs = require'nvim_lsp/configs'
 local has_telescope, telescope = pcall(require, "telescope")
@@ -81,7 +82,7 @@ vim.opt.breakindent = true -- preserve or add indentation on wrap
 vim.opt.modeline = true
 vim.opt.modelines=4  -- number of lines checked
 
-vim.opt.backspace='indent,eol,start'
+vim.opt.backspace= {'indent','eol','start'}
 -- Search parameters {{{
 vim.opt.hlsearch = true -- highlight search terms
 vim.opt.incsearch = true -- show search matches as you type
@@ -122,13 +123,15 @@ vim.opt.whichwrap= vim.opt.whichwrap + '<,>,h,l'
 -- default behavior for diff=filler,vertical
 vim.opt.diffopt='filler,vertical'
 -- neovim > change to default ?
-vim.opt.diffopt= vim.opt.diffopt + 'hiddenoff'
-vim.opt.diffopt= vim.opt.diffopt + 'iwhiteall'
-vim.opt.diffopt= vim.opt.diffopt + "internal,algorithm:patience"
+vim.opt.diffopt:append('hiddenoff')
+vim.opt.diffopt:append('iwhiteall')
+vim.opt.diffopt:append("internal,algorithm:patience")
 
 vim.opt.undofile = true
 -- let undos persist across open/close
 vim.opt.undodir=vim.fn.stdpath('data')..'/undo/'
+vim.opt.sessionoptions:remove('terminal')
+vim.opt.sessionoptions:remove('help')
 --}}}
 
 -- nnoremap{ "n", "<C-N><C-N>", function () vim.opt.invnumber end }
@@ -145,6 +148,16 @@ vim.opt.clipboard='unnamedplus'
 -- highlight SignifySignDelete cterm=bold ctermbg=237  ctermfg=227 guibg=NONE guifg=red
 
 -- wildmenu completion
+-- TODO must be number
+-- vim.opt.wildchar="<Tab>"
+-- display a menu when need to complete a command
+-- list:longest, " list breaks the pum
+vim.opt.wildmode={'longest','list' } -- longest,list' => fills out longest then show list
+-- set wildoptions+=pum
+
+-- TODO ajouter sur le ticket nix
+vim.g.hoogle_fzf_cache_file = vim.fn.stdpath('cache')..'/hoogle_cache.json'
+
 vim.opt.wildmenu = true
 vim.opt.omnifunc='v:lua.vim.lsp.omnifunc'
 vim.opt.winbar='%=%m %f'
@@ -170,6 +183,54 @@ vim.api.nvim_set_hl(0, 'NormalFloat', { bg='grey' })
 -- })
 -- my_image:transmit() -- send image data to terminal
 
+use 'rhysd/vim-gfm-syntax' -- markdown syntax compatible with Github's
+-- use 'symphorien/vim-nixhash' -- use :NixHash
+-- use 'vim-denops/denops.vim'
+-- use 'ryoppippi/bad-apple.vim' -- needs denops
+-- use 'eugen0329/vim-esearch' -- search & replace
+use '~/neovim/neovim-ui'
+-- use 'kshenoy/vim-signature' -- display marks in gutter, love it
+
+-- use '~/pdf-scribe.nvim'  -- to annotate pdf files from nvim :PdfScribeInit
+
+-- annotations plugins {{{
+-- use 'MattesGroeger/vim-bookmarks' -- ruby  / :BookmarkAnnotate
+-- 'wdicarlo/vim-notebook' -- last update in 2016
+-- 'plutonly/vim-annotate-- --  last update in 2015
+--}}}
+
+-- use 'norcalli/nvim-terminal.lua' -- to display ANSI colors
+use '~/neovim/nvim-terminal.lua' -- to display ANSI colors
+use 'bogado/file-line' -- to open a file at a specific line
+-- use 'glacambre/firenvim' -- to use nvim in firefox
+-- call :NR on a region than :w . coupled with b:nrrw_aucmd_create,
+-- use 'chrisbra/NrrwRgn' -- to help with multi-ft files
+use 'chrisbra/vim-diff-enhanced' --
+
+use 'rhysd/git-messenger.vim' -- to show git message :GitMessenger
+
+-- use 'tweekmonster/nvim-api-viewer', {'on': 'NvimAPI'} -- see nvim api
+-- provider
+
+-- REPL (Read Execute Present Loop) {{{
+-- use 'metakirby5/codi.vim', {'on': 'Codi'} -- repl
+-- careful it maps cl by default
+-- use 'jalvesaq/vimcmdline' -- no help files, mappings clunky
+-- github mirror of use 'http://gitlab.com/HiPhish/repl.nvim'
+-- use 'http://gitlab.com/HiPhish/repl.nvim' -- no commit for the past 2 years
+--}}}
+-- Snippets are separated from the engine. Add this if you want them:
+
+-- " use 'justinmk/vim-gtfo' " gfo to open filemanager in cwd
+-- " use 'wannesm/wmgraphviz.vim', {'for': 'dot'} " graphviz syntax highlighting
+use 'tpope/vim-rhubarb' -- github support in fugitive, use |i_CTRL-X_CTRL-O|
+use {
+    'goolord/alpha-nvim',
+    requires = { 'kyazdani42/nvim-web-devicons' },
+    config = function ()
+        require'alpha'.setup(require'alpha.themes.startify'.config)
+    end
+}
 -- diagnostic
 use { 'neovim/nvimdev.nvim' }
 use { 'seandewar/nvimesweeper', opt = true }
@@ -204,6 +265,13 @@ use 'teto/Modeliner' -- <leader>ml to setup buffer modeline
 vim.api.nvim_set_hl(0, 'DiagnosticVirtualTextError', { fg='red'})
 vim.api.nvim_set_hl(0, 'DiagnosticVirtualTextDebug', { fg='green'})
 
+-- http://stackoverflow.com/questions/28613190/exclude-quickfix-buffer-from-bnext-bprevious
+vim.keymap.set("n", "<Leader><Leader>", "<Cmd>b#<CR>")
+
+vim.keymap.set("n", "<Leader>ev", "<Cmd>e $MYVIMRC<CR>")
+vim.keymap.set("n", "<Leader>sv", "<Cmd>source $MYVIMRC<CR>")
+-- nnoremap <Leader>el <Cmd>e ~/.config/nvim/lua/init-manual.lua<CR>
+-- nnoremap <Leader>em <Cmd>e ~/.config/nvim/init.manual.vim<CR>
 
 vim.api.nvim_set_hl(0, "SignifySignChange", {
 	cterm={bold= true},
@@ -221,7 +289,20 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     vim.highlight.on_yank({higroup="IncSearch", timeout=1000})
   end,
 })
+nnoremap('n', '<leader>ml', '<Cmd>Modeliner<Enter>')
+vim.g.Modeliner_format = 'et ff= fenc= sts= sw= ts= fdm='
 
+-- " auto reload vim config on save
+-- " Watch for changes to vimrc
+-- " augroup myvimrc
+-- "   au!
+-- "   au BufWritePost $MYVIMRC,.vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc,init.vim so $MYVIMRC | if has('gui_running') | so $MYGVIMRC | endif
+-- " augroup END
+
+vim.cmd([[sign define DiagnosticSignError text=✘ texthl=LspDiagnosticsSignError linehl= numhl=]])
+vim.cmd([[sign define DiagnosticSignWarning text=！ texthl=LspDiagnosticsSignWarning linehl= numhl=CustomLineWarn]])
+vim.cmd([[sign define DiagnosticSignInformation text=I texthl=LspDiagnosticsSignInformation linehl= numhl=CustomLineWarn]])
+vim.cmd([[sign define DiagnosticSignHint text=H texthl=LspDiagnosticsSignHint linehl= numhl=]])
 
 -- autocmd ColorScheme *
 --       \ highlight Comment gui=italic
@@ -1371,6 +1452,7 @@ if has_bufferline then
 		vim.keymap.set('n',  '<silent><leader>1' , "BufferLineGoToBuffer "..tostring(i))
 	end
 end
+
 -- nvim-colorizer {{{
 require 'terminal'.setup()
 -- }}}
@@ -1717,6 +1799,16 @@ function open_contextual_menu()
 	)
 end
 
+
+vim.opt.listchars='tab:•·,trail:·,extends:❯,precedes:❮,nbsp:×'
+-- set listchars+=conceal:X
+-- conceal is used by deefault if cchar does not exit
+vim.opt.listchars:append('conceal:❯')
+
+-- "set shada=!,'50,<1000,s100,:0,n$XDG_CACHE_HOME/nvim/shada
+vim.g.netrw_home=vim.fn.stdpath('data').'/nvim'
+
+
 -- quickui {{{
 -- https://github.com/skywind3000/vim-quickui
 -- TODO should be printed only if available
@@ -1765,6 +1857,10 @@ vim.g.quickui_border_style = 1
 -- " can't click on it plus it disappears
 -- " map <RightMouse>  <Cmd>lua create_menu()<CR>
 -- }}}
+vim.keymap.set('n',  '<F11>' , "<Plug>(ToggleListchars)")
+
+vim.keymap.set('n',  '<leader>pi' , "<cmd>PackerInstall<CR>")
+vim.keymap.set('n',  '<leader>pu' , "<cmd>PackerSync<CR>")
 
 vim.keymap.set("n", "<leader>q", "<Cmd>Sayonara!<cr>", { silent = true})
 vim.keymap.set("n", "<leader>Q", "<Cmd>Sayonara<cr>", { silent = true})
@@ -1775,6 +1871,63 @@ vim.keymap.set('n',  '<C-J>' , "<use>RestNvimPreview")
 vim.keymap.set('n',  '<C-j>' , "<use>RestNvimPreview")
 -- nnoremap <use>RestNvimPreview :lua require('rest-nvim').run(true)<CR>
 -- nnoremap <use>RestNvimLast :lua require('rest-nvim').last()<CR>
+
+-- goyo {{{
+vim.g.goyo_linenr=1
+vim.g.goyo_height= '90%'
+vim.g.goyo_width = 120
+-- }}}
+-- repl.nvim (from hiphish) {{{
+-- vim.g.repl['lua'] = {
+--     \ 'bin': 'lua',
+--     \ 'args': [],
+--     \ 'syntax': '',
+--     \ 'title': 'Lua REPL'
+-- \ }
+-- Send the text of a motion to the REPL
+-- nmap <leader>rs  <Plug>(ReplSend)
+-- -- Send the current line to the REPL
+-- nmap <leader>rss <Plug>(ReplSendLine)
+-- nmap <leader>rs_ <Plug>(ReplSendLine)
+-- -- Send the selected text to the REPL
+-- vmap <leader>rs  <Plug>(ReplSend)
+-- }}}
+-- iron.nvim {{{
+-- cp = repeat the previous command
+-- ctr send a chunk of text with motion
+-- nmap <localleader>t <Plug>(iron-send-motion)
+-- vim.g.iron_repl_open_cmd=--vsplit--
+vim.g.iron_map_defaults=0
+vim.g.iron_map_extended=0
+--}}}
+-- alok/notational-fzf-vim {{{
+-- use c-x to create the note
+-- vim.g.nv_search_paths = []
+vim.g.nv_search_paths = {'~/Nextcloud/Notes'}
+vim.g.nv_default_extension = '.md'
+vim.g.nv_show_preview = 1
+vim.g.nv_create_note_key = 'ctrl-x'
+
+-- String. Default is first directory found in `g:nv_search_paths`. Error thrown
+--if no directory found and g:nv_main_directory is not specified
+--vim.g.nv_main_directory = g:nv_main_directory or (first directory in g:nv_search_paths)
+--}}}
+
+
+vim.g.vsnip_snippet_dir = vim.fn.stdpath('config')..'/vsnip'
+
+
+-- nvimdev {{{
+-- call nvimdev#init(--path/to/neovim--)
+vim.g.nvimdev_auto_init=1
+vim.g.nvimdev_auto_cd=1
+-- vim.g.nvimdev_auto_ctags=1
+vim.g.nvimdev_auto_lint=1
+vim.g.nvimdev_build_readonly=1
+--}}}
+
+-- " Bye bye ex mode
+-- noremap Q <NOP>
 
 vim.api.nvim_set_keymap(
   'n',
