@@ -114,22 +114,6 @@ let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %
 " nnoremap <leader>g <Cmd>FzfRg<CR>
 
 
-function! SeeLineHistory()
-
-  let file=expand('%')
-  let line=line('.')
-  let cmd= 'git log --format=format:%H '.file.' | xargs -L 1 git blame '.file.' -L '.line.','.line
-  call termopen(cmd)
-endfunc
-
-let s:opts = {
-  \ 'source': "git branch -a",
-  \ 'options': ' --prompt "Misc>"',
-  \ 'down': '50%',
-  \ }
-  " \ 'sink': function('s:processResult'),
-
-
 " FzfBranches
 function! SignifyUpdateBranch(branch)
   " echom 'chosen branch='.a:branch
@@ -148,21 +132,6 @@ endfunction
 command! FzfSignifyChooseBranch call ChooseSignifyGitCommit()
 
 
-" Customize fzf colors to match your color scheme
-" let g:fzf_colors = \ { 'fg':      ['fg', 'Normal'],
-"   \ 'bg':      ['bg', 'Normal'],
-"   \ 'hl':      ['fg', 'Comment'],
-"   \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-"   \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-"   \ 'hl+':     ['fg', 'Statement'],
-"   \ 'info':    ['fg', 'PreProc'],
-"   \ 'prompt':  ['fg', 'Conditional'],
-"   \ 'pointer': ['fg', 'Exception'],
-"   \ 'marker':  ['fg', 'Keyword'],
-"   \ 'spinner': ['fg', 'Label'],
-"   \ 'header':  ['fg', 'Comment']
-" }
-
 let g:fzf_history_dir = stdpath('cache').'/fzf-history'
 " Advanced customization using autoload functions
 "autocmd VimEnter * command! Colors
@@ -175,36 +144,35 @@ let g:fzf_buffers_jump = 1
 " let g:fzf_preview_window = ''
 let g:fzf_preview_window = 'right:30%'
 
-imap <c-x><c-f> <plug>(fzf-complete-path)
 " inspired by https://github.com/junegunn/fzf.vim/issues/664#issuecomment-476438294
 " let $FZF_DEFAULT_OPTS='--layout=reverse'
-let g:fzf_layout.window =  'call FloatingFZF()'
+" let g:fzf_layout.window =  'call FloatingFZF()'
 
-" Function to create the custom floating window
-function! FloatingFZF()
-  " creates a scratch, unlisted, new, empty, unnamed buffer
-  " to be used in the floating window
-  let buf = nvim_create_buf(v:false, v:true)
+" " Function to create the custom floating window
+" function! FloatingFZF()
+"   " creates a scratch, unlisted, new, empty, unnamed buffer
+"   " to be used in the floating window
+"   let buf = nvim_create_buf(v:false, v:true)
 
-  " 90% of the height
-  let height = float2nr(&lines * 0.6)
-  " 60% of the height
-  let width = float2nr(&columns * 0.8)
-  " horizontal position (centralized)
-  let horizontal = float2nr((&columns - width) / 2)
-  " vertical position (one line down of the top)
-  let vertical = 6
+"   " 90% of the height
+"   let height = float2nr(&lines * 0.6)
+"   " 60% of the height
+"   let width = float2nr(&columns * 0.8)
+"   " horizontal position (centralized)
+"   let horizontal = float2nr((&columns - width) / 2)
+"   " vertical position (one line down of the top)
+"   let vertical = 6
 
-  let opts = {
-        \ 'relative': 'editor',
-        \ 'row': vertical,
-        \ 'col': horizontal,
-        \ 'width': width,
-        \ 'height': height
-        \ }
+"   let opts = {
+"         \ 'relative': 'editor',
+"         \ 'row': vertical,
+"         \ 'col': horizontal,
+"         \ 'width': width,
+"         \ 'height': height
+"         \ }
 
-  call nvim_open_win(buf, v:true, opts)
-endfunction
+"   call nvim_open_win(buf, v:true, opts)
+" endfunction
 
 " }}}
 " luadev (a repl for nvim) {{{
@@ -227,75 +195,14 @@ function! SynStack()
 endfunc
 " }}}
 
-" Autosave toggle
-nnoremap <F6> <Cmd>ASToggle<CR>
-
-" set vim's cwd to current file's
-nnoremap ,cd :cd %:p:h<CR>:pwd<CR>
-
-if has('nvim')
-    " runtime! python_setup.vim
- " when launching term
-  tnoremap <Esc> <C-\><C-n>
-endif
-
-
-" Interactive menus {{{1
-" use emenu ("execute menu") to launch the command
-" disable all menus
-unmenu *
-" menu Spell.EN_US :setlocal spell spelllang=en_us \| call histadd('cmd', 'setlocal spell spelllang=en_us')<CR>
-menu Spell.&FR :setlocal spell spelllang=fr_fr<CR>
-" menu Spell.EN_US :setlocal spell spelllang=en_us<CR>
-menu <script> Spell.&EN_US :setlocal spell spelllang=en_us<CR>
-menu ]Spell.hidden should be hidden
-
-menu Trans.FR :te trans :fr <cword><CR>
-" defines a tip
-tmenu Trans.FR Traduire vers le francais
-
-" upstream those to grepper
-" menu Search.CurrentBuffer :exe Grepper -grepprg rg --vimgrep $* $.
-" menu Search.AllBuffers :exe Grepper -grepprg rg --vimgrep $* $+
-
-menu LSP.Stop\ All\ Clients :lua vim.lsp.stop_client(vim.lsp.get_active_clients())<CR>
-
-command! OpenDiagnostics lua vim.lsp.diagnostic.set_loclist({ open = false})
-" pb c'est qu'il l'autofocus
-autocmd User LspDiagnosticsChanged lua vim.lsp.diagnostic.set_loclist( { open = false,  open_loclist = false})
-
-command! LspStopAllClients lua vim.lsp.stop_client(vim.lsp.get_active_clients())
-
-
-" tabulation-related menu {{{2
-menu Tabs.S2 :set  tabstop=2 softtabstop=2 sw=2<CR>
-menu Tabs.S4 :set ts=4 sts=4 sw=4<CR>
-menu Tabs.S6 :set ts=6 sts=6 sw=6<CR>
-menu Tabs.S8 :set ts=8 sts=8 sw=8<CR>
-menu Tabs.SwitchExpandTabs :set expandtab!
-"}}}
-" }}}
-" nvim specific configuration {{{
-" }}}
-
-" set guicursor=i:ver3,n:block-blinkon10-Cursor,r:hor50
-" try reverse ?
-" highl lCursor ctermfg=16 ctermbg=253 guifg=#000000 guibg=#00FF00
-
 nnoremap <kPageUp> :lprev
 nnoremap <kPageDown> :lnext
 nnoremap <kPageRight> :lnext
 nnoremap <kPageRight> :lnext
 nnoremap <k2> :echom "hello world"
-nnoremap gO i<CR>
 " overwrite vimtex status mapping
 " let @g="dawi\\gls{p}"
 " nnoremap <Leader>lg @g
-
-
-" to open tag in a split
-map <A-]> :vsp<CR>:exec("tag ".expand("<cword>"))<CR>
-
 
 function! Genmpack(file)
     let t = readfile(a:file)
@@ -304,33 +211,6 @@ function! Genmpack(file)
     let m = msgpackdump(j)
     call writefile(m, 'fname.mpack', 'b')
 endfunc
-
-
-" function which starts a nvim-hs instance with the supplied name
-function! s:RequireHaskellHost(name)
-    " It is important that the current working directory (cwd) is where
-    " your configuration files are.
-    " return jobstart(['stack', 'exec', 'nvim-hs', a:name.name], {'rpc': v:true, 'cwd': expand('$HOME') . '/.config/nvim'})
-    " we don't want to run stack !
-    if executable('nvim-hs') 
-      return jobstart(['nvim-hs', a:name.name], {'rpc': v:true, 'cwd': stdpath('config')})
-    endif
-endfunction
-
-" Register a plugin host that is started when a haskell file is opened
-" call remote#host#Register('haskell', "*.l\?hs", function('s:RequireHaskellHost'))
-" But if you need it for other files as well, you may just start it
-" forcefully by requiring it
-" let hc=remote#host#Require('haskell')
-" printer configuration
-" set printexpr
-
-
-
-" open vimrc
-" nnoremap <Leader>ev <Cmd>e $MYVIMRC<CR>
-nnoremap <Leader>el <Cmd>e ~/.config/nvim/lua/init-manual.lua<CR>
-nnoremap <Leader>em <Cmd>e ~/.config/nvim/init.manual.vim<CR>
 
 " from justinmk
 func! ReadExCommandOutput(newbuf, cmd) abort
@@ -343,73 +223,12 @@ endf
 command! -nargs=+ -bang -complete=command R call ReadExCommandOutput(<bang>0, <q-args>)
 
 
-" was supposed to be called from
-" function! UpdatePythonHost(prog)
-"   let g:python3_host_prog = a:prog
-"   " Update mypy as well
-"   let g:neomake_python_mypy_exe = fnamemodify( g:python3_host_prog, ':p:h').'/mypy'
-" endfunc
-
-" nnoremap <S-CR> i<CR><Esc>
-
-
-" taken from justinmk's config
-command! Tags !ctags -R --exclude='build*' --exclude='.vim-src/**' --exclude='venv/**' --exclude='**/site-packages/**' --exclude='data/**' --exclude='dist/**' --exclude='notebooks/**' --exclude='Notebooks/**' --exclude='*graphhopper_data/*.json' --exclude='*graphhopper/*.json' --exclude='*.json' --exclude='qgis/**' *
-
-
-" extmark helper {{{
-function! CreateVisualExtmark()
-
-  let opts = {
-    \ 'end_line': line("'>"),
-    \ 'end_col': col("'>")
-    \ }
-  let ns_id = nvim_create_namespace("folds")
-  let curbuf = 0
-  let line = line("'<")
-  let col = col("'<")
-  call nvim_buf_set_extmark(curbuf, ns_id, 0, line, col, opts)
-endfunction
-
-map ,fa <Cmd>call CreateVisualExtmark()<CR>
-" }}}
-
-hi CustomLineWarn guifg=#FD971F
-
-function! RandNum() abort
-  return str2nr(matchstr(reltimestr(reltime()), '\.\zs\d*'))
-endfunction
-
-function! RandChar() abort
-  return nr2char((RandNum() % 93) + 33)
-endfunction
-
-function! Password() abort
-  return join(map(range(8), 'RandChar()'), '')
-endfunction
-
-" set working directory to the current buffer's directory
-" nnoremap cd :lcd %:p:h<bar>pwd<cr>
-" nnoremap cu :lcd ..<bar>pwd<cr>
-
 "linewise partial staging in visual-mode.
 xnoremap <c-p> <Cmd>diffput<cr>
 xnoremap <c-o> <Cmd>diffget<cr>
-" nnoremap <expr> dp &diff ? 'dp' : ':Printf<cr>'
-
-command! JsonPretty %!jq '.'
-
-" vim.api.nvim_command('au User LspMessageUpdate redrawstatus!')
-nnoremap <2-LeftMouse> <cmd>lua vim.lsp.buf.definition()<cr>
-
-" command! ProfileVim     exe 'Start '.v:progpath.' --startuptime "'.expand("~/vimprofile.txt").'" -c "e ~/vimprofile.txt"'
-" command! NvimTestScreenshot put =\"local Screen = require('test.functional.ui.screen')\nlocal screen = Screen.new()\nscreen:attach()\nscreen:snapshot_util({},true)\"
 
 
-command Hasktags !hasktags .
-command Htags !hasktags .
-
-
+" set foldtext=TestFoldTextWithColumns()
 function! TestFoldTextWithColumns()
   let line = getline(v:foldstart)
   let res = ""
@@ -420,18 +239,3 @@ function! TestFoldTextWithColumns()
   return res . " toto" . repeat(" ", 4)
 endfunc
 
-" set foldtext=TestFoldTextWithColumns()
-
-" nvim will load any .nvimrc in the cwd; useful for per-project settings
-set exrc
-" from FAQ https://github.com/neovim/neovim/wiki/FAQ
-" vnoremap <LeftRelease> "*ygv
-
-" global color
-highlight BiscuitColor ctermfg=cyan
-" highlight BiscuitColorRust ctermfg=red
-
-" language specific color
-let $NVIM_MKDP_LOG_LEVEL = 'debug'
-let $VIM_MKDP_RPC_LOG_FILE = expand('~/mkdp-rpc-log.log')
-let g:mkdp_browser = 'firefox'

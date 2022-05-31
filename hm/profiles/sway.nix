@@ -38,9 +38,16 @@ in
     #   menu =
       terminal = term;
 
+	  # Notification Daemon
+
+
+# Toggle control center
+
+
       keybindings = let
         mod="Mod1";
       in {
+		"$mod+Shift+n" = " exec ${pkgs.swaynotificationcenter}/bin/swaync-client -t -sw";
         # clipman can be used too
         # clipman pick -t wofi
         # "${mod}+Ctrl+h" = lib.mkForce ''exec "${pkgs.clipman}/bin/clipman pick -t wofi'';
@@ -56,30 +63,28 @@ in
         { command =  "wl-paste -t text --watch clipman store"; }
         { command = ''wl-paste -p -t text --watch clipman store -P --histpath="~/.local/share/clipman-primary.json"''; }
         { command = "mkfifo $SWAYSOCK.wob && tail -f $SWAYSOCK.wob | wob"; }
+        { command = "swaync"; }
+
       ];
     };
 
-    #       focus_wrapping force
-
-      # set_from_resource $bg           i3wm.color0 #ff0000
-      # set_from_resource $bg-alt       i3wm.color14 #ff0000
-      # set_from_resource $fg           i3wm.color15 #ff0000
-      # set_from_resource $fg-alt       i3wm.color2 #ff0000
-      # set_from_resource $hl           i3wm.color13 #ff0000
-
     # https://github.com/dylanaraps/pywal/blob/master/pywal/templates/colors-sway
     # TODO
+	# from https://www.reddit.com/r/swaywm/comments/uwdboi/how_to_make_chrome_popup_windows_floating/
     extraConfig = ''
-      smart_gaps yes
+	  bindsym button2 kill
+	  smart_gaps yes
+
+	  # Generated windows.
+for_window [title="(?:Open|Save) (?:File|Folder|As)"] floating enable;
+for_window [title="(?:Open|Save) (?:File|Folder|As)"] resize set 800 600
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="bubble"] floating enable
+for_window [window_role="task_dialog"] floating enable
+for_window [window_role="Preferences"] floating enable
+for_window [window_type="dialog"] floating enable
+for_window [window_type="menu"] floating enable
     '';
-	# fails too
-	  # xkb_numlock enabled
-	  # xkb_capslock disabled
-      # set $bg           {bg}
-      # set $bg-alt       {bg-alt}
-      # set $fg           i3wm.color15 #ff0000
-      # set $fg-alt       i3wm.color2 #ff0000
-      # set $hl           i3wm.color13 #ff0000
   };
 
   home.packages = with pkgs; [
@@ -107,7 +112,5 @@ in
 
   services.kanshi = {
     enable = true;
-    # profiles = 
-    # extraConfig = 
   };
 }

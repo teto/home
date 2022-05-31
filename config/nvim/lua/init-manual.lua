@@ -9,6 +9,7 @@ local has_fzf_lua, fzf_lua = pcall(require, "fzf-lua")
 local packer = require "packer"
 local use, _ = packer.use, packer.use_rocks
 local nnoremap = vim.keymap.set
+local map = vim.keymap.set
 
 function file_exists(name)
 	local f=io.open(name,"r")
@@ -149,7 +150,7 @@ vim.opt.clipboard='unnamedplus'
 
 -- wildmenu completion
 -- TODO must be number
--- vim.opt.wildchar="<Tab>"
+-- vim.opt.wildchar=("<Tab>"):byte()
 -- display a menu when need to complete a command
 -- list:longest, " list breaks the pum
 vim.opt.wildmode={'longest','list' } -- longest,list' => fills out longest then show list
@@ -188,7 +189,7 @@ use 'rhysd/vim-gfm-syntax' -- markdown syntax compatible with Github's
 -- use 'vim-denops/denops.vim'
 -- use 'ryoppippi/bad-apple.vim' -- needs denops
 -- use 'eugen0329/vim-esearch' -- search & replace
-use '~/neovim/neovim-ui'
+-- use '~/neovim/neovim-ui'
 -- use 'kshenoy/vim-signature' -- display marks in gutter, love it
 
 -- use '~/pdf-scribe.nvim'  -- to annotate pdf files from nvim :PdfScribeInit
@@ -224,13 +225,13 @@ use 'rhysd/git-messenger.vim' -- to show git message :GitMessenger
 -- " use 'justinmk/vim-gtfo' " gfo to open filemanager in cwd
 -- " use 'wannesm/wmgraphviz.vim', {'for': 'dot'} " graphviz syntax highlighting
 use 'tpope/vim-rhubarb' -- github support in fugitive, use |i_CTRL-X_CTRL-O|
-use {
-    'goolord/alpha-nvim',
-    requires = { 'kyazdani42/nvim-web-devicons' },
-    config = function ()
-        require'alpha'.setup(require'alpha.themes.startify'.config)
-    end
-}
+-- use {
+--     'goolord/alpha-nvim',
+--     requires = { 'kyazdani42/nvim-web-devicons' },
+--     config = function ()
+--         require'alpha'.setup(require'alpha.themes.startify'.config)
+--     end
+-- }
 -- diagnostic
 use { 'neovim/nvimdev.nvim' }
 use { 'seandewar/nvimesweeper', opt = true }
@@ -270,8 +271,22 @@ vim.keymap.set("n", "<Leader><Leader>", "<Cmd>b#<CR>")
 
 vim.keymap.set("n", "<Leader>ev", "<Cmd>e $MYVIMRC<CR>")
 vim.keymap.set("n", "<Leader>sv", "<Cmd>source $MYVIMRC<CR>")
+vim.keymap.set("n", "<Leader>el", "<Cmd>e ~/.config/nvim/lua/init-manual.lua<CR>")
+vim.keymap.set("n", "<Leader>em", "<Cmd>e ~/.config/nvim/lua/init-manual.vim<CR>")
+vim.keymap.set("n", "<F6>", "<Cmd>ASToggle<CR>")
+
+-- " set vim's cwd to current file's
+-- nnoremap ,cd :cd %:p:h<CR>:pwd<CR>
+
+--  " when launching term
+--   tnoremap <Esc> <C-\><C-n>
+
 -- nnoremap <Leader>el <Cmd>e ~/.config/nvim/lua/init-manual.lua<CR>
 -- nnoremap <Leader>em <Cmd>e ~/.config/nvim/init.manual.vim<CR>
+-- -- pb c'est qu'il l'autofocus
+-- autocmd User LspDiagnosticsChanged lua vim.lsp.diagnostic.set_loclist( { open = false,  open_loclist = false})
+
+-- command! LspStopAllClients lua vim.lsp.stop_client(vim.lsp.get_active_clients())
 
 vim.api.nvim_set_hl(0, "SignifySignChange", {
 	cterm={bold= true},
@@ -1449,7 +1464,7 @@ if has_bufferline then
 	}
 
 	for i=1,9 do
-		vim.keymap.set('n',  '<silent><leader>1' , "BufferLineGoToBuffer "..tostring(i))
+		vim.keymap.set('n',  '<leader>'..tostring(i) , "<cmd>BufferLineGoToBuffer "..tostring(i).."<CR>", { silent = true})
 	end
 end
 
@@ -1806,7 +1821,7 @@ vim.opt.listchars='tab:•·,trail:·,extends:❯,precedes:❮,nbsp:×'
 vim.opt.listchars:append('conceal:❯')
 
 -- "set shada=!,'50,<1000,s100,:0,n$XDG_CACHE_HOME/nvim/shada
-vim.g.netrw_home=vim.fn.stdpath('data').'/nvim'
+vim.g.netrw_home=vim.fn.stdpath('data')..'/nvim'
 
 
 -- quickui {{{
@@ -1867,8 +1882,8 @@ vim.keymap.set("n", "<leader>Q", "<Cmd>Sayonara<cr>", { silent = true})
 
 vim.keymap.set('n',  '<leader>rr' , "<use>RestNvim")
 vim.keymap.set('n',  '<leader>rp' , "<use>RestNvimPreview")
-vim.keymap.set('n',  '<C-J>' , "<use>RestNvimPreview")
-vim.keymap.set('n',  '<C-j>' , "<use>RestNvimPreview")
+vim.keymap.set('n',  '<C-J>' , "<use>RestNvim")
+-- vim.keymap.set('n',  '<C-j>' , "<use>RestNvimPreview")
 -- nnoremap <use>RestNvimPreview :lua require('rest-nvim').run(true)<CR>
 -- nnoremap <use>RestNvimLast :lua require('rest-nvim').last()<CR>
 
@@ -1916,6 +1931,8 @@ vim.g.nv_create_note_key = 'ctrl-x'
 
 vim.g.vsnip_snippet_dir = vim.fn.stdpath('config')..'/vsnip'
 
+map('n', '<Leader>$', '<Cmd>Obsession<CR>')
+
 
 -- nvimdev {{{
 -- call nvimdev#init(--path/to/neovim--)
@@ -1925,6 +1942,18 @@ vim.g.nvimdev_auto_cd=1
 vim.g.nvimdev_auto_lint=1
 vim.g.nvimdev_build_readonly=1
 --}}}
+
+-- nvim will load any .nvimrc in the cwd; useful for per-project settings
+vim.opt.exrc = true
+
+-- hi CustomLineWarn guifg=#FD971F
+-- command! JsonPretty %!jq '.'
+vim.api.nvim_create_user_command("Htags", "!hasktags .", {})
+vim.api.nvim_create_user_command("JsonPretty", "%!jq '.'", {})
+
+-- taken from justinmk's config
+vim.api.nvim_create_user_command("Tags", [[!ctags -R --exclude='build*' --exclude='.vim-src/**' --exclude='venv/**' --exclude='**/site-packages/**' --exclude='data/**' --exclude='dist/**' --exclude='notebooks/**' --exclude='Notebooks/**' --exclude='*graphhopper_data/*.json' --exclude='*graphhopper/*.json' --exclude='*.json' --exclude='qgis/**' *]], {})
+
 
 -- " Bye bye ex mode
 -- noremap Q <NOP>

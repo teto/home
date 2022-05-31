@@ -20,7 +20,7 @@ in
   programs.xdg.enable = true;
 
   home.packages = with pkgs; [
-    deadd-notification-center
+    # deadd-notification-center
     # meli  # broken jmap mailreader
   ];
 

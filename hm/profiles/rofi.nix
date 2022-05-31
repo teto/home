@@ -11,23 +11,12 @@ let
 #   hs-hoogle-query = pkgs.haskellPackages.callPackage "${rofi-hoogle-src}/haskell" {};
 
   #
-  rofi-wayland = pkgs.rofi.overrideAttrs(oa: {
-
-	src = pkgs.fetchFromGitHub {
-	  owner = "lbonn";
-	  repo = "rofi";
-	  rev = "1e8c22b4a05c7602aa9e51509274ce5ac36a5099";
-	  sha256 = "sha256-FvDzJL5VM4UeDCwDeElZhE/eRUefGrt4GmntaIeuQBQ=";
-
-	};
-
-  });
 in
 {
   programs.rofi = {
     enable = true;
 
-	package = rofi-wayland ;
+	package = pkgs.rofi-wayland ;
 
     terminal = "${pkgs.kitty}/bin/kitty";
     # borderWidth = 1;

@@ -398,6 +398,10 @@ let
         # https://github.com/euclio/vim-markdown-composer/issues/69#issuecomment-1103440076
         # see https://github.com/euclio/vim-markdown-composer/commit/910fd4321b7f25fbab5fdf84e68222cbc226d8b1
         # we can now set g:markdown_composer_binary
+		# " is that the correct plugin ?
+		# " let $NVIM_MKDP_LOG_LEVEL = 'debug'
+		# " let $VIM_MKDP_RPC_LOG_FILE = expand('~/mkdp-rpc-log.log')
+		# " let g:mkdp_browser = 'firefox'
         plugin = vim-markdown-composer;
         config = ''
           " use with :ComposerStart
@@ -406,14 +410,14 @@ let
       }
 	  # disabled because of https://github.com/rktjmp/lush.nvim/issues/89
       # (luaPlugin { plugin = gruvbox-nvim; }) 
-      {
+      (luaPlugin {
 		# out of tree
 		# call with :Hoogle
         plugin = fzf-hoogle-vim;
-        # config = ''
-        #   " dhall.vim config
-        # '';
-      }
+        config = ''
+		  vim.g.hoogle_fzf_cache_file = vim.fn.stdpath('cache')..'/hoogle_cache.json'
+        '';
+      })
       {
         plugin = dhall-vim;
         config = ''
@@ -426,9 +430,8 @@ let
         '';
       })
       (luaPlugin {
+		# TODO move config hee
         plugin = bufferline-nvim;
-        # config = ''
-        # '';
       })
       (luaPlugin {
         plugin = nvim-peekup;
@@ -661,18 +664,14 @@ let
         plugin = vim-startify;
 		# cool stuff is that it autostarts sessions
         config = ''
-          let g:startify_use_env = 0
-          let g:startify_disable_at_vimenter = 0
-          let g:startify_session_dir = stdpath('data').'/nvim/sessions'
-		  let g:startify_list_order = [
-				\ ['   MRU '.getcwd()], 'dir',
-				\ ['   MRU'],           'files' ,
-				\ ['   Bookmarks'],     'bookmarks',
-				\ ['   Sessions'],      'sessions',
-				\ ]
 		  let g:startify_use_env = 0
 		  let g:startify_disable_at_vimenter = 0
-		  let g:startify_session_dir = stdpath('data').'/nvim/sessions'
+		  let g:startify_lists = [
+				\ { 'header': '   MRU '.getcwd(), 'type': 'dir'},
+				\ { 'header': '   MRU',           'type': 'files'} ,
+				\ { 'header': '   Bookmarks',     'type': 'bookmarks' },
+				\ { 'header': '   Sessions',      'type': 'sessions' }
+				\ ]
 		  let g:startify_bookmarks = [
 				\ {'i': $XDG_CONFIG_HOME.'/i3/config.main'},
 				\ {'h': $XDG_CONFIG_HOME.'/nixpkgs/home.nix'},
@@ -690,10 +689,7 @@ let
 		  let g:startify_session_savevars = []
 		  let g:startify_session_delete_buffers = 1
 		  let g:startify_change_to_dir = 0
-
 		  let g:startify_relative_path = 0
-		  " let g:startify_skiplist=[]
-
         '';
       }
 
@@ -898,11 +894,11 @@ in
 
     # source doesn't like `stdpath('config').'`
     # todo should use mkBefore ${config.programs.neovim.generatedInitrc}
+	# source $XDG_CONFIG_HOME/nvim/init.manual.vim
     extraConfig = ''
 	  let mapleader = " "
 	  let maplocalleader = ","
 
-      source $XDG_CONFIG_HOME/nvim/init.manual.vim
     ''
     # concatStrings = builtins.concatStringsSep "";
     + (lib.strings.concatStrings (

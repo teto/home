@@ -1,3 +1,10 @@
 
 restart 
 swaymsg reload
+
+# add to sway config
+xwayland disable
+
+# to list xwayland clients
+xlsclients
+

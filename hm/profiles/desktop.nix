@@ -250,16 +250,16 @@ in
   # services.dbus.packages = [ pkgs.gcr ];
   services.parcellite.enable = true;
 
-  programs.pywal.enable = true;
 
   programs.rofi.theme = {
     "@import" = "${config.xdg.cacheHome}/wal/colors-rofi-dark.rasi";
     "@theme" = "purple";
   };
-  # home.packages = [ pkgs.pywal ];
 
   xsession = {
     enable = false;
+	# will enable SNI for nm-applet => icon will popup on wayland systray
+	preferStatusNotifierItems = true;
     scriptPath = ".hm-xsession";
 
     profileExtra = ''
