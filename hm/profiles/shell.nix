@@ -1,6 +1,22 @@
 { config, pkgs, lib,  ... } @ args:
 let 
-    secrets = import ../../nixpkgs/secrets.nix;
+  secrets = import ../../nixpkgs/secrets.nix;
+
+  mkRemoteBuilderDesc = machine:
+	with lib;
+      concatStringsSep " " ([
+        "${optionalString (machine.sshUser != null) "${machine.sshUser}@"}${machine.hostName}"
+        (if machine.system != null then machine.system else if machine.systems != [ ] then concatStringsSep "," machine.systems else "-")
+        (if machine.sshKey != null then machine.sshKey else "-")
+        (toString machine.maxJobs)
+        (toString machine.speedFactor)
+        (concatStringsSep "," (machine.supportedFeatures ++ machine.mandatoryFeatures))
+        (concatStringsSep "," machine.mandatoryFeatures)
+      ]
+	  # assume we r always > 2.4
+      # ++ optional (isNixAtLeast "2.4pre") (if machine.publicHostKey != null then machine.publicHostKey else "-"));
+	  # ++ (if machine.publicHostKey != null then machine.publicHostKey else "-")
+	  );
 in
 {
 
@@ -15,8 +31,10 @@ in
     sessionVariables = {
       HISTTIMEFORMAT="%d.%m.%y %T ";
 	  # CAREFUL 
-	  # RUNNER2=lib.mkRemoteBuilderDesc secrets.nova-runner2;
+	  # RUNNER1=lib.mkRemoteBuilderDesc secrets.nova-runner-1;
+	  # RUNNER2=mkRemoteBuilderDesc secrets.nova-runner-2;
       # HISTFILE="$XDG_CACHE_HOME/bash_history";
+	  RUNNER2=mkRemoteBuilderDesc secrets.nova-runner-2;
     };
     # "ignorespace"
     historyControl = [];

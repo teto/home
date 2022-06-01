@@ -5,6 +5,9 @@
 local has_telescope, telescope = pcall(require, "telescope")
 local has_fzf_lua, fzf_lua = pcall(require, "fzf-lua")
 
+-- my treesitter config
+local myMenu = require 'teto.menu'
+
 -- local packerCfg =
 local packer = require "packer"
 local use, _ = packer.use, packer.use_rocks
@@ -358,18 +361,17 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 -- 	end
 -- }
 
-use {
-	'norcalli/nvim-colorizer.lua',
-	config = function ()
-		require('colorizer').setup()
-	end
+-- use {
+-- 	'norcalli/nvim-colorizer.lua',
+-- 	config = function ()
+-- 		require('colorizer').setup()
+-- 	end
+-- }
 
-}
-
-use {
-	-- zenity
-	'DougBeney/pickachu'
-}
+-- use {
+-- 	-- a zenity picker for several stuff (colors etc)
+-- 	'DougBeney/pickachu'
+-- }
 
 use {
 	"/home/teto/rest.nvim"
@@ -419,11 +421,12 @@ use {
 -- }
 
 -- not packaged
-use{"petertriho/nvim-scrollbar",
-	config = function ()
-		require"scrollbar".setup({show=true})
-	end
-}
+-- use{"petertriho/nvim-scrollbar",
+-- 	config = function ()
+-- 		require"scrollbar".setup({show=true})
+-- 	end
+-- }
+
 -- overrides vim.ui / vim.select with the backend of my choice
  use {
 	'stevearc/dressing.nvim'
@@ -514,10 +517,10 @@ use{"petertriho/nvim-scrollbar",
 -- use 'nvim-telescope/telescope-dap.nvim'
 --
 
-use {
-	-- set virtualedit=all, select an area then call :VBox
-	'jbyuki/venn.nvim'
-	}
+-- use {
+-- 	-- set virtualedit=all, select an area then call :VBox
+-- 	'jbyuki/venn.nvim'
+-- 	}
 
 -- use {
 
@@ -530,9 +533,8 @@ use({
     -- config = function()
     -- end
 })
-use {
-	'protex/better-digraphs.nvim'
-}
+use { 'protex/better-digraphs.nvim' }
+
 use {
 	"rcarriga/nvim-notify"
 	, config = function ()
@@ -770,20 +772,20 @@ use '~/neovim/nvim-lspconfig' -- while fuzzing details out
 use {'tweekmonster/startuptime.vim' , opt = true } -- {'on': 'StartupTime'} " see startup time per script
 
 -- TODO upstream
-use {
-	'chipsenkbeil/distant.nvim'
-	, opt = true
-	, config = function()
-		require('distant').setup {
-		-- Applies Chip's personal settings to every machine you connect to
-		--
-		-- 1. Ensures that distant servers terminate with no connections
-		-- 2. Provides navigation bindings for remote directories
-		-- 3. Provides keybinding to jump into a remote file's parent directory
-		['*'] = require('distant.settings').chip_default()
-		}
-	end
-}
+--use {
+--	'chipsenkbeil/distant.nvim'
+--	, opt = true
+--	, config = function()
+--		require('distant').setup {
+--		-- Applies Chip's personal settings to every machine you connect to
+--		--
+--		-- 1. Ensures that distant servers terminate with no connections
+--		-- 2. Provides navigation bindings for remote directories
+--		-- 3. Provides keybinding to jump into a remote file's parent directory
+--		['*'] = require('distant.settings').chip_default()
+--		}
+--	end
+--}
 -- use {
 -- 	'matbme/JABS.nvim',
 -- 	config = function ()
@@ -1742,12 +1744,8 @@ vim.cmd [[highlight IndentBlanklineIndent4 guifg=#56B6C2 gui=nocombine]]
 vim.cmd [[highlight IndentBlanklineIndent5 guifg=#61AFEF gui=nocombine]]
 vim.cmd [[highlight IndentBlanklineIndent6 guifg=#C678DD gui=nocombine]]
 
-menu_add = function(name, command)
 
-   res = vim.cmd ([[menu ]]..name..[[ ]]..command)
-   -- print(res)
-end
-
+menu_add = myMenu.menu_add
 menu_add("LSP.Declaration", 'lua vim.lsp.buf.declaration()')
 menu_add("LSP.Definition", 'lua vim.lsp.buf.definition()')
 menu_add("LSP.Hover", 'lua vim.lsp.buf.references()')

@@ -342,7 +342,7 @@ let
       plugin = telescope-frecency-nvim;
     })
 	{ plugin = nvimdev-nvim; }
-	{ plugin = neomake; }
+	# { plugin = neomake; }
     # {
     #   plugin = neogit;
     #   config = ''
@@ -410,9 +410,9 @@ let
       }
 	  # disabled because of https://github.com/rktjmp/lush.nvim/issues/89
       # (luaPlugin { plugin = gruvbox-nvim; }) 
-      (luaPlugin {
 		# out of tree
 		# call with :Hoogle
+      (luaPlugin {
         plugin = fzf-hoogle-vim;
         config = ''
 		  vim.g.hoogle_fzf_cache_file = vim.fn.stdpath('cache')..'/hoogle_cache.json'
@@ -439,30 +439,32 @@ let
         '';
       })
 
-      (luaPlugin {
-        plugin = nvim-biscuits;
-        config = ''
-	require('nvim-biscuits').setup({
-	on_events = { 'InsertLeave', 'CursorHoldI' },
-	cursor_line_only = true,
-	default_config = {
-		max_length = 12,
-		min_distance = 50,
-		prefix_string = " 📎 "
-	},
-	language_config = {
-		html = { prefix_string = " 🌐 " },
-		javascript = {
-			prefix_string = " ✨ ",
-			max_length = 80
-		},
-		python = { disabled = true },
-		-- nix = { disabled = true }
-	}
-	})
+      # (luaPlugin {
+      #   plugin = nvim-biscuits;
+      #   config = ''
+	# require('nvim-biscuits').setup({
+	# on_events = { 'InsertLeave', 'CursorHoldI' },
+	# cursor_line_only = true,
+	# default_config = {
+		# max_length = 12,
+		# min_distance = 50,
+		# prefix_string = " 📎 "
+	# },
+	# language_config = {
+		# html = { prefix_string = " 🌐 " },
+		# javascript = {
+			# prefix_string = " ✨ ",
+			# max_length = 80
+		# },
+		# python = { disabled = true },
+		# -- nix = { disabled = true }
+	# }
+	# })
 
-        '';
-      })# {
+      #   '';
+	  # })
+
+	  # {
       #   plugin = pywal-nvim;
       #   type = "lua";
       #   config = ''

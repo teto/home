@@ -1,3 +1,4 @@
+local M = {}
 -- " use emenu ("execute menu") to launch the command
 -- " disable all menus
 -- unmenu *
@@ -10,9 +11,20 @@
 -- menu Trans.FR :te trans :fr <cword><CR>
 -- " defines a tip
 -- tmenu Trans.FR Traduire vers le francais
--- menu Tabs.S2 :set  tabstop=2 softtabstop=2 sw=2<CR>
--- menu Tabs.S4 :set ts=4 sts=4 sw=4<CR>
--- menu Tabs.S6 :set ts=6 sts=6 sw=6<CR>
--- menu Tabs.S8 :set ts=8 sts=8 sw=8<CR>
--- menu Tabs.SwitchExpandTabs :set expandtab!
+tabMenu = {
+["Tabs.S2"]= ":set  tabstop=2 softtabstop=2 sw=2<CR>",
+["Tabs.S4"]= ":set ts=4 sts=4 sw=4<CR>",
+["Tabs.S6"]= ":set ts=6 sts=6 sw=6<CR>",
+["Tabs.S8"]= ":set ts=8 sts=8 sw=8<CR>",
+["Tabs.SwitchExpandTabs"] = ":set expandtab!"
+}
 
+M.menu_add = function(name, command)
+
+   res = vim.cmd ([[menu ]]..name..[[ ]]..command)
+   -- print(res)
+end
+
+
+
+return M
