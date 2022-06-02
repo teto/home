@@ -669,10 +669,10 @@ let
 		  let g:startify_use_env = 0
 		  let g:startify_disable_at_vimenter = 0
 		  let g:startify_lists = [
-				\ { 'header': '   MRU '.getcwd(), 'type': 'dir'},
-				\ { 'header': '   MRU',           'type': 'files'} ,
-				\ { 'header': '   Bookmarks',     'type': 'bookmarks' },
-				\ { 'header': '   Sessions',      'type': 'sessions' }
+				\ { 'header': ['   MRU '.getcwd() ], 'type': 'dir'},
+				\ { 'header': ['   MRU' ],           'type': 'files'} ,
+				\ { 'header': ['   Bookmarks' ],     'type': 'bookmarks' },
+				\ { 'header': ['   Sessions'  ],      'type': 'sessions' }
 				\ ]
 		  let g:startify_bookmarks = [
 				\ {'i': $XDG_CONFIG_HOME.'/i3/config.main'},

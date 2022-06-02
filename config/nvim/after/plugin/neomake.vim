@@ -82,46 +82,7 @@ let g:neomake_remove_invalid_entries=1
 " call neomake#configure#automake('w')
 " silent NeomakeDisable
 
-autocmd FileType nix call neomake#configure#automake_for_buffer('w')
-
-" func update_mypy_maker
-  " Hook into NeomakeJobInit.
-" function! s:NeomakeTestJobInit(context) abort
-"   AssertEqual keys(a:context), ['jobinfo']
-
-"   let jobinfo = a:context.jobinfo
-"   AssertEqual jobinfo.maker.name, 'mypy-matt'
-
-"   " argv can be a list or string.
-"   if type(jobinfo.argv) == type([])
-"     let jobinfo.argv = ['nice', '-n18'] + jobinfo.argv
-"   else
-"     let jobinfo.argv = 'nice -n 18 '.jobinfo.argv
-"   endif
-" endfunction
-" augroup neomake_tests
-"     au User NeomakeJobInit call s:NeomakeTestJobInit(g:neomake_hook_context)
-"     " autocmd User NeomakeJobFinished call OnNeomakeFinished()
-" augroup END
-
-" command! BuildPhase Neomake! buildPhase
-" command! BuildPhaseTest Neomake! nix
-
-" todo pass a flag to call configure ?
-" nnoremap <F4> :BuildPhase<CR>
-" nnoremap <F5> :Neomake! make<CR>
-"
-
-" TODO replace with getroot of directory ?
-" let g:neomake_build_folder_maker = {
-"     \ 'exe': 'make',
-"     \ 'args': [],
-"     \ 'cwd': getcwd().'/build',
-"     \ 'errorformat': '%f:%l:%c: %m',
-"     \ 'remove_invalid_entries': 0,
-"     \ 'buffer_output': 0
-"     \ }
-
+" autocmd FileType nix call neomake#configure#automake_for_buffer('w')
 
 " called like this let returned_maker = call(maker.fn, [options], maker)
 function! Check_build_folder(opts, ) abort dict

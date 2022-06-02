@@ -3,6 +3,9 @@ docker load -i tarball / docker import
 docker tag old new
 docker push (make sure to be logged in, else docker login)
 
+# -v host-dir:container-dir
+docker run -v "/nix:/nix" -v "/nix/var/nix/daemon-socket/socket:/nix/var/nix/daemon-socket/socket" -it tetho/nix:test2 sh
+
 # to start a docker
 docker run mattator/dce-dockerfiles:latest 
 add --name NAME to give it a memorable name:

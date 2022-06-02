@@ -571,30 +571,31 @@ use {
 -- terminal image viewer in neovim see https://github.com/edluffy/hologram.nvim#usage for usage
 use 'edluffy/hologram.nvim' -- hologram-nvim
 -- use 'ellisonleao/glow.nvim' -- markdown preview, run :Glow
-use {
-	-- Show where your cursor moves
-	'edluffy/specs.nvim',
-	config = function ()
-		local specs = require 'specs'
-		specs.setup{
-			show_jumps	= true,
-			min_jump = 20,
-			popup = {
-				delay_ms = 0, -- delay before popup displays
-				inc_ms = 10, -- time increments used for fade/resize effects
-				blend = 10, -- starting blend, between 0-100 (fully transparent), see :h winblend
-				width = 30,
-				winhl = "PMenu",
-				fader = specs.linear_fader,
-				resizer = specs.shrink_resizer
-			},
-			ignore_filetypes = {},
-			ignore_buftypes = {
-				nofile = true,
-			},
-		}
-	end
-}
+
+-- use {
+-- 	-- Show where your cursor moves
+-- 	'edluffy/specs.nvim',
+-- 	config = function ()
+-- 		local specs = require 'specs'
+-- 		specs.setup{
+-- 			show_jumps	= true,
+-- 			min_jump = 20,
+-- 			popup = {
+-- 				delay_ms = 0, -- delay before popup displays
+-- 				inc_ms = 10, -- time increments used for fade/resize effects
+-- 				blend = 10, -- starting blend, between 0-100 (fully transparent), see :h winblend
+-- 				width = 30,
+-- 				winhl = "PMenu",
+-- 				fader = specs.linear_fader,
+-- 				resizer = specs.shrink_resizer
+-- 			},
+-- 			ignore_filetypes = {},
+-- 			ignore_buftypes = {
+-- 				nofile = true,
+-- 			},
+-- 		}
+-- 	end
+-- }
 
 -- use {
 -- 	'code-biscuits/nvim-biscuits',
