@@ -196,6 +196,12 @@ use 'rhysd/vim-gfm-syntax' -- markdown syntax compatible with Github's
 -- use 'kshenoy/vim-signature' -- display marks in gutter, love it
 
 -- use '~/pdf-scribe.nvim'  -- to annotate pdf files from nvim :PdfScribeInit
+-- pdf-scribe {{{
+-- PdfScribeInit
+-- let g:pdfscribe_pdf_dir  = expand('$HOME').'/Nextcloud/papis_db'
+-- let g:pdfscribe_notes_dir = expand('$HOME').'/Nextcloud/papis_db'
+-- }}}
+
 
 -- annotations plugins {{{
 -- use 'MattesGroeger/vim-bookmarks' -- ruby  / :BookmarkAnnotate
@@ -248,6 +254,24 @@ use 'teto/vim-listchars' -- to cycle between different list/listchars configurat
 use 'chrisbra/csv.vim'
 use 'teto/Modeliner' -- <leader>ml to setup buffer modeline
 -- " use 'antoinemadec/openrgb.nvim'  " to take into account RGB stuff
+
+-- prefix commands :Files become :FzfFiles, etc.
+vim.g.fzf_command_prefix ='Fzf'
+-- disable statusline overwriting
+vim.g.fzf_nvim_statusline=0
+
+-- This is the default extra key bindings
+vim.g.fzf_action = { ['ctrl-t']= 'tab split', ['ctrl-x']= 'split', ['ctrl-v']= 'vsplit' }
+vim.g.fzf_history_dir = vim.fn.stdpath('cache')..'/fzf-history'
+vim.g.fzf_buffers_jump = 1
+-- Empty value to disable preview window altogether
+vim.g.fzf_preview_window = 'right:30%'
+
+-- Default fzf layout - down / up / left / right - window (nvim only)
+-- vim.g.fzf_layout = { 'down': '~40%' }
+
+-- For Commits and BCommits to customize the options used by 'git log':
+vim.g.fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
 
 
 -- " use 'vhakulinen/gnvim-lsp' " load it only for gnvim
@@ -1095,21 +1119,7 @@ use {
 --	 table.insert(config.sections.lualine_x, component)
 -- end
 
--- broken
---use {
---	'sunjon/shade.nvim',
---	config = function ()
---		require'shade'.setup({
---			overlay_opacity = 70,
---			opacity_step = 1,
---			-- keys = {
---			--	 brightness_up	  = '<C-Up>',
---			--	 brightness_down  = '<C-Down>',
---			--	 toggle			  = '<Leader>s',
---			-- }
---		})
---	end
---}
+-- shade currently broken
 --local has_shade, shade = pcall(require, "shade")
 --if has_shade then
 --	shade.setup({

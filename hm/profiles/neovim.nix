@@ -79,7 +79,9 @@ let
   ];
 
   filetypePlugins = [
+	{ plugin = vim-toml; }
   ];
+
   cmpPlugins = [
   ];
   luaPlugins = with pkgs.vimPlugins; [
@@ -104,11 +106,11 @@ let
     }
     # { plugin = nvim-dap; }
     # { plugin = lightspeed-nvim; }
-    {
+    (luaPlugin {
       # required by some colorscheme
       plugin = colorbuddy-nvim;
-      type = "lua";
-    }
+      # type = "lua";
+    })
 	(luaPlugin { 
 	  plugin = octo-nvim;
 # 	  -- -- , requires = { 'nvim-lua/popup.nvim' }
@@ -426,18 +428,12 @@ let
       }
       (luaPlugin {
         plugin = Shade-nvim;
-        config = ''
-        '';
       })
       (luaPlugin {
 		# TODO move config hee
         plugin = bufferline-nvim;
       })
-      (luaPlugin {
-        plugin = nvim-peekup;
-        config = ''
-        '';
-      })
+      (luaPlugin { plugin = nvim-peekup; })
 
       # (luaPlugin {
       #   plugin = nvim-biscuits;
@@ -475,7 +471,43 @@ let
 	  { 
 		# really helps with syntax highlighting
 		plugin = haskell-vim; 
+		config = ''
+		  let g:haskell_enable_quantification = 1   " to enable highlighting of `forall`
+		  let g:haskell_enable_recursivedo = 1      " to enable highlighting of `mdo` and `rec`
+		  let g:haskell_enable_arrowsyntax = 1      " to enable highlighting of `proc`
+		  let g:haskell_enable_pattern_synonyms = 1 " to enable highlighting of `pattern`
+		  let g:haskell_enable_typeroles = 1        " to enable highlighting of type roles
+		  let g:haskell_enable_static_pointers = 1  " to enable highlighting of `static`
+		  let g:haskell_backpack = 1                " to enable highlighting of backpack keywords
+		  let g:haskell_indent_disable=1
+		'';
+
 	  }  
+# " gutentags + gutenhasktags {{{
+# " to keep logs GutentagsToggleTrace
+# " some commands/functions are not available by default !!
+# " https://github.com/ludovicchabant/vim-gutentags/issues/152
+# let g:gutentags_define_advanced_commands=1
+# " let g:gutentags_project_root
+# " to ease with debug
+# let g:gutentags_trace=0
+# let g:gutentags_enabled = 1 " dynamic loading
+# let g:gutentags_dont_load=0 " kill once and for all
+# let g:gutentags_project_info = [ {'type': 'python', 'file': 'setup.py'},
+#                                \ {'type': 'ruby', 'file': 'Gemfile'},
+#                                \ {'type': 'haskell', 'glob': '*.cabal'} ]
+# " produce tags for haskell http://hackage.haskell.org/package/hasktags
+# " it will fail without a wrapper https://github.com/rob-b/gutenhasktags
+# " looks brittle, hie might be better
+# " or haskdogs
+# " let g:gutentags_ctags_executable_haskell = 'gutenhasktags'
+# let g:gutentags_ctags_executable_haskell = 'hasktags'
+# " let g:gutentags_ctags_extra_args
+# let g:gutentags_file_list_command = 'rg --files'
+# " gutenhasktags/ haskdogs/ hasktags/hothasktags
+
+# let g:gutentags_ctags_exclude = ['.vim-src', 'build', '.mypy_cache']
+# " }}}
 
       (luaPlugin {
         plugin = stylish-nvim;
@@ -517,7 +549,6 @@ let
         }
         '';
       })
-      { plugin = vim-toml; }
       # { plugin = onedark-nvim; }
       # to install manually with coc.nvim:
 	  # " Plug 'suy/vim-context-commentstring' " commen for current programming language

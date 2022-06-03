@@ -1,4 +1,7 @@
 # about flakes
+# nixos/modules/programs/environment.nix
+environment.profileRelativeSessionVariables =
+
 nix profile diff-closures --profile /nix/var/nix/profiles/system
 nix flake add mine /home/teto/nixpkgs
 nix print-dev-env --profile /path/to/profile/to/creat
@@ -36,8 +39,10 @@ nix path-info -Sh $(nix-build ./shell.nix -A inputDerivation)
 
 
 # Nix paths I keep forgetting
+- /nix/var/nix/profiles/default (nix-env root profile)
 
-- /nix/var/nix/profiles/system
+# NixOS paths I keep forgetting
+- /nix/var/nix/profiles/system 
 - /run/current-system/sw/bin/
 - /var/run/booted-system
 
