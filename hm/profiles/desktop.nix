@@ -232,7 +232,8 @@ in
   # might trigger nm-applet crash ?
   services.gpg-agent = {
     enable = true;
-    defaultCacheTtl = 1800;
+    defaultCacheTtl = 7200;
+	# maxCacheTtl
     enableSshSupport = true;
     # grabKeyboardAndMouse= false;
     # pinentryFlavor = "curses";
