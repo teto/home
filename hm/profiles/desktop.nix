@@ -96,6 +96,7 @@ let
     bandwhich  # to monitor per app bandwidth
     du-dust  # dust binary: rust replacement of du
     ncdu  # to see disk usage
+    nomacs  # image viewer
     desktop-file-utils  # to get desktop
     font-manager
     gnome.adwaita-icon-theme # else nothing appears

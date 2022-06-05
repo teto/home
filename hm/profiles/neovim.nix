@@ -78,7 +78,7 @@ let
 
   ];
 
-  filetypePlugins = [
+  filetypePlugins = with pkgs.vimPlugins; [
 	{ plugin = vim-toml; }
   ];
 
