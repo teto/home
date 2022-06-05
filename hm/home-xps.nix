@@ -28,19 +28,19 @@ in
     # enable = false;
   };
 
-  wayland.windowManager.sway.enable = true;
-  # depends from feh ? huh not if we use sway
-  # programs.feh.enable = true;
+  wayland.windowManager.sway= {
+	enable = true;
 
-  wayland.windowManager.sway.extraOptions = [
-    "--verbose"
-    "--debug"
-  ];
+	extraOptions = [
+	  "--verbose"
+	  "--debug"
+	];
+  };
 
   home.packages = with pkgs; [
     hlint # (for test with manpage)
     brightnessctl
-    simple-scan
+    # simple-scan
   ];
 
   services.screen-locker = {

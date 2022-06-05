@@ -21,6 +21,11 @@ in
     enable = true;
     systemdIntegration = true;
 
+	extraOptions = [
+	  "--verbose"
+	  "--debug"
+	];
+
     # eventually start foot --server
     extraSessionCommands = ''
       export SDL_VIDEODRIVER=wayland
