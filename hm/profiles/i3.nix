@@ -9,7 +9,111 @@ let
   # or use {pkgs.kitty}/bin/kitty
   term = "${pkgs.kitty}/bin/kitty";
 
+  notify-send = "${pkgs.libnotify}/bin/notify-send";
+  bind_ws = workspace_id: fr: us:
+	let ws = builtins.toString workspace_id;
+	in
+	{
+	  "$GroupFr+$mod+${fr}"="workspace \"$w${ws}\"";
+	  "$GroupUs+$mod+${us}"="workspace \"$w${ws}\"";
+	  "$GroupFr+Shift+$mod+${fr}"=''move container to workspace "$w${ws}"'';
+	  "$GroupUs+Shift+$mod+${us}"=''move container to workspace "$w${ws}"'';
+	};
+  move_focused_wnd = dir: fr: us:
+  {
+	"$GroupFr+$mod+Shift+${fr}"="move ${dir}";
+	"$GroupUs+$mod+Shift+${us}"="move ${dir}";
+  };
+
   # TODO make it a pywalflag
+  sharedKeybindings = {
+      # The side buttons move the window around
+      "button9" = "move left";
+      "button8" = "move right";
+      # start a terminal
+      "${mod}+Return" = "exec --no-startup-id ${term}";
+      # bindsym $mod+Shift+Return exec --no-startup-id ~/.i3/fork_term.sh
+      "$mod+Shift+Return" = ''exec --no-startup-id $term -d "$(xcwd)"'';
+
+        # change container layout (stacked, tabbed, default)
+        "$GroupFr+$mod+ampersand" = "layout toggle";
+        "$GroupUs+$mod+1"  = "layout toggle";
+        # todo use i3lock-fancy instead
+        # alternative is "light"
+        # "${mod}+ctrl+v" = "exec ${pkgs.bash}/bin/bash ~/vim-anywhere/bin/run";
+        "${mod}+Tab"="exec \"${pkgs.rofi}/bin/rofi -modi 'window,run,drun,ssh' -show run\"";
+        "${mod}+Ctrl+Tab"="exec \"${pkgs.rofi}/bin/rofi -modi 'window' -show run\"";
+        # TODO dwindow exclusively with WIN
+        "Super_L+Tab"="exec \"${pkgs.rofi}/bin/rofi -modi 'run,drun,window,ssh' -show window\"";
+
+        # locker
+        # "${mod}+Ctrl+L"="exec ${pkgs.i3lock-fancy}/bin/i3lock-fancy";
+        "${mod}+Ctrl+L"="exec ${pkgs.i3lock}/bin/i3lock";
+
+        "${mod}+Ctrl+h" = ''exec "${pkgs.rofi}/bin/rofi -modi 'clipboard:greenclip print' -show clipboard"'';
+        "${mod}+g" = "exec ${pkgs.i3-easyfocus}/bin/i3-easyfocus";
+        "Super_L+w" = "exec ${pkgs.i3-easyfocus}/bin/i3-easyfocus";
+
+        # broken
+        # "${mod}+b" = "exec ${pkgs.buku_run}/bin/buku_run";
+        "${mad}+c" = "exec ${pkgs.rofi-calc}/bin/rofi-calc";
+        "${mod}+p" = "exec ${pkgs.rofi-pass}/bin/rofi-pass";
+
+        "${mod}+Shift+1" =  "exec qutebrowser";
+
+        # "${mod}+Shift+Return" = "exec --no-startup-id ${pkgs.termite -d "$(xcwd)"
+
+
+        # test rofi-randr
+        # "XF86Display" = "exec " + ../../rofi-scripts/monitor_layout.sh ;
+
+        # XF86AudioNext="exec ${mpc} next; exec notify-send 'Audio next'";
+        # XF86AudioPrev exec mpc prev; exec notify-send "Audio prev"
+        # XF86AudioPause exec mpc toggle; exec notify-send "Audio Pause"
+      # } // {
+        "$GroupFr+$mod+apostrophe"="kill";
+        "$GroupUs+$mod+4"="kill";
+
+        "$mod+t" = "floating toggle";
+        "$mod+y" = "sticky toggle; exec ${notify-send}";
+
+        # TODO use id of default sinc
+		# icons are set for papirus for now
+        "XF86AudioRaiseVolume"= "exec --no-startup-id ${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@  +5%;exec ${notify-send} --icon=audio-volume-high -u low -t 1000 'Audio Raised volume'";
+        "XF86AudioLowerVolume"="exec --no-startup-id ${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ -5%;exec ${notify-send} --icon=audio-volume-low-symbolic -u low 'Audio lowered'";
+        "XF86AudioMute"="exec --no-startup-id ${pkgs.pulseaudio}/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle;exec ${notify-send} --icon=speaker_no_sound -u low 'test'";
+        # TODO use mpv instead
+        "XF86AudioPlay" = "exec ${pkgs.vlc}/bin/vlc; exec ${notify-send} --icon=media-playback-stop-symbolic -u low 'test'";
+        "--release Print" = "exec ${pkgs.scrot}/bin/scrot -s '/tmp/%s_%H%M_%d.%m.%Y_$wx$h.png'";
+        # bindsym --release Print exec "scrot -m '/home/user/Pictures/screenshots/%s_%H%M_%d.%m.%Y_$wx$h.png'"
+        # bindsym --release Shift+Print exec "scrot -s '/home/user/Pictures/screenshots/%s_%H%M_%d%m%Y_$wx$h.png'"
+        # bindsym --release $mod+Shift+Print exec "scrot -u -d 4 '/home/user/Pictures/screenshots/%s_%H%M_%d%m%Y_$wx$h.png'"
+        "$mod+shift+o" = "exec xkill";
+
+
+      }
+      // bind_ws 1 "a" "q"
+      // bind_ws 2 "z" "w"
+      // bind_ws 3 "e" "e"
+      // bind_ws 4 "q" "a"
+      // bind_ws 5 "s" "s"
+      // bind_ws 6 "d" "d"
+      // bind_ws 7 "w" "z"
+      // bind_ws 8 "x" "x"
+      // bind_ws 9 "c" "c"
+      // move_focused_wnd "left" "h" "h"
+      // move_focused_wnd "down" "j" "j"
+      // move_focused_wnd "up" "k" "k"
+      # semicolumn
+      // move_focused_wnd "right" "l" "l"
+      # just trying to overwrite previous bindings with i3dispatch
+      # // lib.optionalAttrs (pkgs ? i3dispatch ) {
+      # "${mod}+Left" = "exec ${pkgs.i3dispatch}/bin/i3dispatch left";
+      # "${mod}+Right" = "exec ${pkgs.i3dispatch}/bin/i3dispatch right";
+      # "${mod}+Down" = "exec ${pkgs.i3dispatch}/bin/i3dispatch down";
+      # "${mod}+Up" = "exec ${pkgs.i3dispatch}/bin/i3dispatch up";
+      # }
+    ;
 
   sharedExtraConfig = ''
       set $GroupUs Group1
@@ -74,16 +178,6 @@ in
 
   xsession.windowManager.i3 =
   let
-    bind_ws = workspace_id: fr: us:
-
-    let ws = builtins.toString workspace_id;
-    in
-      {
-        "$GroupFr+$mod+${fr}"="workspace \"$w${ws}\"";
-        "$GroupUs+$mod+${us}"="workspace \"$w${ws}\"";
-        "$GroupFr+Shift+$mod+${fr}"=''move container to workspace "$w${ws}"'';
-        "$GroupUs+Shift+$mod+${us}"=''move container to workspace "$w${ws}"'';
-      };
     in
   {
     # keep it enabled to generate the config
@@ -196,116 +290,25 @@ in
         hideEdgeBorders = "smart";
       };
 
-    # consider using lib.mkOptionDefault according to help
-    keybindings =
-    let
-      notify-send = "${pkgs.libnotify}/bin/notify-send";
+	  # consider using lib.mkOptionDefault according to help
+	  keybindings =
+	  let
 
-      move_focused_wnd = dir: fr: us:
-      {
-        "$GroupFr+$mod+Shift+${fr}"="move ${dir}";
-        "$GroupUs+$mod+Shift+${us}"="move ${dir}";
-      };
-    in
-    {
-      "$mod+f" = "fullscreen";
-      "$mod+Shift+f" = "fullscreen global";
-      "$mod+button3" = "floating toggle";
-      "$mod+m"= ''mode "monitors'';
-    }
-    // {
-      # The side buttons move the window around
-      "button9" = "move left";
-      "button8" = "move right";
-      # start a terminal
-      "${mod}+Return" = "exec --no-startup-id ${term}";
-      # bindsym $mod+Shift+Return exec --no-startup-id ~/.i3/fork_term.sh
-      "$mod+Shift+Return" = ''exec --no-startup-id $term -d "$(xcwd)"'';
+	  in
+	  {
+		"$mod+f" = "fullscreen";
+		"$mod+Shift+f" = "fullscreen global";
+		"$mod+button3" = "floating toggle";
+		"$mod+m"= ''mode "monitors'';
+		# "XF86MonBrightnessUp" = "exec ${pkgs.xorg.xbacklight}/bin/xbacklight -inc 10";
+		# "XF86MonBrightnessDown" = "exec ${pkgs.xorg.xbacklight}/bin/xbacklight -dec 10";
+		# brightnessctl
+		"XF86MonBrightnessUp" = "exec ${pkgs.brightnessctl}/bin/brightnessctl set +10";
+		"XF86MonBrightnessDown" = "exec ${pkgs.brightnessctl}/bin/brightnessctl set -10";
 
-        # change container layout (stacked, tabbed, default)
-        "$GroupFr+$mod+ampersand" = "layout toggle";
-        "$GroupUs+$mod+1"  = "layout toggle";
-        # todo use i3lock-fancy instead
-        # alternative is "light"
-        # "${mod}+ctrl+v" = "exec ${pkgs.bash}/bin/bash ~/vim-anywhere/bin/run";
-        "${mod}+Tab"="exec \"${pkgs.rofi}/bin/rofi -modi 'window,run,drun,ssh' -show run\"";
-        "${mod}+Ctrl+Tab"="exec \"${pkgs.rofi}/bin/rofi -modi 'window' -show run\"";
-        # TODO dwindow exclusively with WIN
-        "Super_L+Tab"="exec \"${pkgs.rofi}/bin/rofi -modi 'run,drun,window,ssh' -show window\"";
-
-        # locker
-        # "${mod}+Ctrl+L"="exec ${pkgs.i3lock-fancy}/bin/i3lock-fancy";
-        "${mod}+Ctrl+L"="exec ${pkgs.i3lock}/bin/i3lock";
-
-        "${mod}+Ctrl+h" = ''exec "${pkgs.rofi}/bin/rofi -modi 'clipboard:greenclip print' -show clipboard"'';
-        "${mod}+g" = "exec ${pkgs.i3-easyfocus}/bin/i3-easyfocus";
-        "Super_L+w" = "exec ${pkgs.i3-easyfocus}/bin/i3-easyfocus";
-
-        # broken
-        # "${mod}+b" = "exec ${pkgs.buku_run}/bin/buku_run";
-        "${mad}+c" = "exec ${pkgs.rofi-calc}/bin/rofi-calc";
-        "${mod}+p" = "exec ${pkgs.rofi-pass}/bin/rofi-pass";
-
-        "${mod}+Shift+1" =  "exec qutebrowser";
-
-        # "${mod}+Shift+Return" = "exec --no-startup-id ${pkgs.termite -d "$(xcwd)"
-
-        # "XF86MonBrightnessUp" = "exec ${pkgs.xorg.xbacklight}/bin/xbacklight -inc 10";
-        # "XF86MonBrightnessDown" = "exec ${pkgs.xorg.xbacklight}/bin/xbacklight -dec 10";
-        # brightnessctl
-        # "XF86MonBrightnessUp" = "exec ${pkgs.brightnessctl}/bin/brightnessctl set +10";
-        # "XF86MonBrightnessDown" = "exec ${pkgs.brightnessctl}/bin/brightnessctl set -10";
-
-        # test rofi-randr
-        # "XF86Display" = "exec " + ../../rofi-scripts/monitor_layout.sh ;
-
-        # XF86AudioNext="exec ${mpc} next; exec notify-send 'Audio next'";
-        # XF86AudioPrev exec mpc prev; exec notify-send "Audio prev"
-        # XF86AudioPause exec mpc toggle; exec notify-send "Audio Pause"
-      # } // {
-        "$GroupFr+$mod+apostrophe"="kill";
-        "$GroupUs+$mod+4"="kill";
-
-        "$mod+t" = "floating toggle";
-        "$mod+y" = "sticky toggle; exec ${notify-send}";
-
-        # TODO use id of default sinc
-        "XF86AudioRaiseVolume"= "exec --no-startup-id ${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@  +5%;exec ${notify-send} --icon=speaker_no_sound -u low -t 1000 'Audio Raised volume'";
-        "XF86AudioLowerVolume"="exec --no-startup-id ${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ -5%;exec ${notify-send} -u low 'Audio lowered'";
-        "XF86AudioMute"="exec --no-startup-id ${pkgs.pulseaudio}/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle;exec ${notify-send} --icon=speaker_no_sound -u low 'test'";
-        # TODO use mpv instead
-        "XF86AudioPlay" = "exec ${pkgs.vlc}/bin/vlc; exec ${notify-send} --icon=speaker_no_sound -u low 'test'";
-        "--release Print" = "exec ${pkgs.scrot}/bin/scrot -s '/tmp/%s_%H%M_%d.%m.%Y_$wx$h.png'";
-        # bindsym --release Print exec "scrot -m '/home/user/Pictures/screenshots/%s_%H%M_%d.%m.%Y_$wx$h.png'"
-        # bindsym --release Shift+Print exec "scrot -s '/home/user/Pictures/screenshots/%s_%H%M_%d%m%Y_$wx$h.png'"
-        # bindsym --release $mod+Shift+Print exec "scrot -u -d 4 '/home/user/Pictures/screenshots/%s_%H%M_%d%m%Y_$wx$h.png'"
-        "$mod+shift+o" = "exec xkill";
-
-
-      }
-      // bind_ws 1 "a" "q"
-      // bind_ws 2 "z" "w"
-      // bind_ws 3 "e" "e"
-      // bind_ws 4 "q" "a"
-      // bind_ws 5 "s" "s"
-      // bind_ws 6 "d" "d"
-      // bind_ws 7 "w" "z"
-      // bind_ws 8 "x" "x"
-      // bind_ws 9 "c" "c"
-      // move_focused_wnd "left" "h" "h"
-      // move_focused_wnd "down" "j" "j"
-      // move_focused_wnd "up" "k" "k"
-      # semicolumn
-      // move_focused_wnd "right" "l" "l"
-      # just trying to overwrite previous bindings with i3dispatch
-      # // lib.optionalAttrs (pkgs ? i3dispatch ) {
-      # "${mod}+Left" = "exec ${pkgs.i3dispatch}/bin/i3dispatch left";
-      # "${mod}+Right" = "exec ${pkgs.i3dispatch}/bin/i3dispatch right";
-      # "${mod}+Down" = "exec ${pkgs.i3dispatch}/bin/i3dispatch down";
-      # "${mod}+Up" = "exec ${pkgs.i3dispatch}/bin/i3dispatch up";
-      # }
-    ;
-    };
+	  }
+	  // sharedKeybindings;
+	};
   };
 
   # since we have trouble running i3pystatus
