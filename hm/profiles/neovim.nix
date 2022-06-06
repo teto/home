@@ -297,14 +297,10 @@ let
 	# (luaPlugin {
       # plugin = nvim-treesitter-context;
     # })
-	# (luaPlugin {
-	#   # run with :Diffview
-      # plugin = diffview-nvim;
-    # })
 	(luaPlugin {
 	  # run with :Diffview
       plugin = diffview-nvim;
-	  optional = true;
+	  # optional = true;
     })
     (luaPlugin {
 	  # prettier quickfix

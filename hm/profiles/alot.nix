@@ -103,6 +103,7 @@
     settings = {
       # attachment_prefix = ~/Downloads
       # edit_headers_whitelist = "Subject: toto";
+	  # themes_dir = "$XDG_CONFIG_HOME/alot/themes";
       theme = "matt"; # available in my ~/.config
       mailinglists = "lisp@ietf.org, taps@ietf.org";
       editor_in_thread = false;
@@ -110,7 +111,7 @@
       ask_subject = false;
       handle_mouse = true;
       thread_authors_replace_me = true;
-        # notify_timeout = 20; # -1 for unlimited
+	  notify_timeout = 20; # -1 for unlimited
 
       initial_command = "search tag:inbox AND NOT tag:killed";
         # initial_command = "bufferlist; taglist; search foo; search bar; buffer 0";

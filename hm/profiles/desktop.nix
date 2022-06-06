@@ -179,6 +179,7 @@ in
     # ./modules/home-tor.nix
     ./ssh-config.nix
     ./i3.nix
+    ./wal.nix
 
     ./fcitx.nix
     ./firefox.nix
@@ -193,6 +194,7 @@ in
     ++ [
       # pkgs.up # live preview of pipes
       pkgs.peek # GIF recorder
+	  pkgs.pass-import
 
       # unstable.cachix  # almot always broken
     ]

@@ -25,6 +25,10 @@
     line_even = '','','light gray','black','light gray','g0'
     line_odd = '','','light gray','black','light gray','g0'
     line_focus = 'standout','','black','dark cyan','black','dark cyan'
+[namedqueries]
+    line_focus = 'standout','','yellow','light gray','#ff8','g58'
+    line_even = 'default','','light gray','black','default','g3'
+    line_odd = 'default','','light gray','black','default','default'
 [thread]
     arrow_heads = '','','black','black','g0','g0'
     arrow_bars = '','','black','black','g0','g0'
