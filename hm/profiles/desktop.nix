@@ -2,6 +2,8 @@
 let
   terminalCommand = pkgs.kitty;
 
+  pass-custom = (pkgs.pass.override {     waylandSupport = true; }).withExtensions(ext: with ext; [pass-import]);
+
   devPkgs = all: with pkgs; let
     in
     [
@@ -111,14 +113,14 @@ let
     mupdf.bin # evince does better too
     ncpamixer # pulseaudio TUI mixer
     noti # send notifications when a command finishes
+    pass-custom # pass with extensions
     pulseaudioFull # for pactl
-    pass
     pavucontrol
     procs  # Rust replacement for 'ps'
     qiv  # image viewer
     qtpass
     rbw   # Rust bitwarden unofficial client
-    rofi-pass   # rofi-pass
+    rofi-pass   # rofi-pass it's enabled in the HM module ?
     scrot  # screenshot app for wayland
     sd  # rust cli for search & replace
     shared-mime-info # temporary fix for nautilus to find the correct files
@@ -194,7 +196,6 @@ in
     ++ [
       # pkgs.up # live preview of pipes
       pkgs.peek # GIF recorder
-	  pkgs.pass-import
 
       # unstable.cachix  # almot always broken
     ]

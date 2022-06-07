@@ -17,6 +17,7 @@ in {
           Whether to enable Fish integration.
         '';
       };
+
       enableSetTermTitle = mkOption {
         default = false;
         type = types.bool;
@@ -86,14 +87,15 @@ in {
         }
 
         set_term_title_for_new_prompt () {
-            set_term_title "$(pwd)"
+            set_term_title "$(pwd):$2"
         }
 		# zsh passes
         set_term_title_for_program () {
-            set_term_title "$(pwd):$2"
+            set_term_title "toto: $(pwd):$2"
         }
 
-        # pass 3 arguments: non-expandend, expanded, fully-expanded
+		# https://zsh.sourceforge.io/Doc/Release/Functions.html#index-preexec_005ffunctions
+        # pass 3 arguments: non-expanded, expanded, fully-expanded
         add-zsh-hook preexec set_term_title_for_program
         # precmd: Executed before each prompt.
         add-zsh-hook precmd set_term_title_for_new_prompt

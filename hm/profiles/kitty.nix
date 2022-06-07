@@ -3,7 +3,8 @@
   programs.kitty = {
     enable = true;
     font.name = "Inconsolata";
-    shellIntegration.enable = true;
+	# _ksi_preexec breaks my own preexec !
+    shellIntegration.enable = false;
     settings = {
 
       bold_font  = "auto";
