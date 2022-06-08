@@ -463,7 +463,7 @@ let
       #   '';
       # }
       (luaPlugin { plugin = glow-nvim; })
-      (luaPlugin { plugin = fzf-lua; })
+      # (luaPlugin { plugin = fzf-lua; })
 	  { 
 		# really helps with syntax highlighting
 		plugin = haskell-vim; 

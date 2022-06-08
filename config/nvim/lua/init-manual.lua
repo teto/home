@@ -187,6 +187,7 @@ vim.api.nvim_set_hl(0, 'NormalFloat', { bg='grey' })
 -- })
 -- my_image:transmit() -- send image data to terminal
 
+use '~/neovim/fzf-lua' -- markdown syntax compatible with Github's
 use 'rhysd/vim-gfm-syntax' -- markdown syntax compatible with Github's
 -- use 'symphorien/vim-nixhash' -- use :NixHash
 -- use 'vim-denops/denops.vim'
