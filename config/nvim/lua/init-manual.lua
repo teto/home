@@ -19,6 +19,10 @@ function file_exists(name)
 	if f~=nil then io.close(f) return true else return false end
 end
 -- main config {{{
+-- vim.opt.splitbelow = true	-- on horizontal splits
+vim.opt.splitright = true   -- on vertical split
+
+
 vim.opt.title  = true; -- vim will change terminal title
 -- look at :h statusline to see the available 'items'
 -- to count the number of buffer
@@ -1758,26 +1762,27 @@ vim.cmd [[highlight IndentBlanklineIndent6 guifg=#C678DD gui=nocombine]]
 
 
 menu_add = myMenu.menu_add
-menu_add("LSP.Declaration", 'lua vim.lsp.buf.declaration()')
-menu_add("LSP.Definition", 'lua vim.lsp.buf.definition()')
-menu_add("LSP.Hover", 'lua vim.lsp.buf.references()')
-menu_add("LSP.Hover", 'lua vim.lsp.buf.references()')
+menu_add("LSP.Declaration", '<cmd>lua vim.lsp.buf.declaration()<cr>')
+menu_add("LSP.Definition", '<cmd>lua vim.lsp.buf.definition()<cr>')
+menu_add("LSP.Hover", '<cmd>lua vim.lsp.buf.references()<cr>')
+menu_add("LSP.Hover", '<cmd>lua vim.lsp.buf.references()<cr>')
 
-menu_add("Toggle.Minimap", 'MinimapToggle')
-menu_add("Toggle.Obsession", 'Obsession')
-menu_add("Toggle.Blanklines", 'IndentBlanklineToggle')
+menu_add("Toggle.Minimap", '<cmd>MinimapToggle<cr>')
+menu_add("Toggle.Obsession", '<cmd>Obsession<cr>')
+menu_add("Toggle.Blanklines", '<cmd>IndentBlanklineToggle<cr>')
 -- menu_add("Toggle.Biscuits", 'lua require("nvim-biscuits").toggle_biscuits()')
 
-menu_add("REPL.Send line", [[lua require'luadev'.exec(vim.api.nvim_get_current_line())]])
+menu_add("REPL.Send line", [[<cmd>lua require'luadev'.exec(vim.api.nvim_get_current_line())<cr>]])
 -- menu_add('REPL.Send selection ', 'call <SID>luadev_run_operator(v:true)')
 
-menu_add('Diagnostic.Display_in_QF', 'lua vim.diagnostic.setqflist({open = true, severity = { min = vim.diagnostic.severity.WARN } })')
-menu_add('Diagnostic.Set_severity_to_warning', 'lua vim.diagnostic.config({virtual_text = { severity = { min = vim.diagnostic.severity.WARN } }})')
-menu_add('Diagnostic.Set_severity_to_all', 'lua vim.diagnostic.config({virtual_text = { severity = nil }})')
+menu_add('Diagnostic.Display_in_QF', '<cmd>lua vim.diagnostic.setqflist({open = true, severity = { min = vim.diagnostic.severity.WARN } })<cr>')
+menu_add('Diagnostic.Set_severity_to_warning', '<cmd>lua vim.diagnostic.config({virtual_text = { severity = { min = vim.diagnostic.severity.WARN } }})<cr>')
+menu_add('Diagnostic.Set_severity_to_all', '<cmd>lua vim.diagnostic.config({virtual_text = { severity = nil }})<cr>')
 
-menu_add("Search.Search_and_replace", 'lua require("spectre").open()')
+menu_add("Search.Search_and_replace", '<cmd>lua require("spectre").open()<cr>')
+menu_add("Search.Test", 'let a=3')
 
-menu_add("Rest.RunRequest", "lua require('rest-nvim').run(true)")
+menu_add("Rest.RunRequest", "<cmd>lua require('rest-nvim').run(true)<cr>")
 
 -- menu_add("Search.Search\ in\ current\ Buffer", :Grepper -switch -buffer")
 -- menu_add("Search.Search\ across\ Buffers :Grepper -switch -buffers")
@@ -1974,6 +1979,18 @@ vim.api.nvim_set_keymap(
   "<Cmd>lua open_contextual_menu()<CR>",
   { noremap = true, silent = false }
 )
+
+-- luadev mappings
+-- https://github.com/bfredl/nvim-luadev
+-- for i=1,2 do
+-- 	print("hello: "..tostring(i))
+-- end
+
+vim.api.nvim_set_keymap('n', ',a', '<Plug>(Luadev-Run)', { noremap=false, silent=false })
+vim.api.nvim_set_keymap('v', ',,', '<Plug>(Luadev-Run)', { noremap=false, silent=false })
+vim.api.nvim_set_keymap('n', ',,', '<Plug>(Luadev-RunLine)', { noremap=false, silent=false })
+  -- '<Plug>(Luadev-RunLine)',
+
 -- vim.api.nvim_set_keymap(
 --	 'n',
 --	 '<F1>',

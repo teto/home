@@ -38,20 +38,6 @@ nmap <silent> <D-Down> :wincmd j<CR>
 nmap <silent> <D-Left> :wincmd h<CR>
 nmap <silent> <D-Right> :wincmd l<CR>
 
-set splitbelow	" on horizontal splits
-set splitright   " on vertical split
-
-" }}}
-
-
-
-
-
-" luadev (a repl for nvim) {{{
-" map 5 <Plug>(Luadev-RunLine)
-" vmap 5 <Plug>(Luadev-Run)
-map <Leader>lr <Plug>(Luadev-RunLine)
-map <Leader>ll <Plug>(Luadev-RunLine)
 " }}}
 
 " Code to display highlight groups {{{

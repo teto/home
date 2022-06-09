@@ -21,9 +21,16 @@ tabMenu = {
 
 M.menu_add = function(name, command)
 
-   res = vim.cmd ([[menu ]]..name..[[ ]]..command)
+  -- is there a moment we 
+  res = vim.cmd ([[menu ]]..name..[[ ]]..command)
+end
+
+M.menu_add_cmd = function(name, command)
+
+  res = vim.cmd ([[menu ]]..name..[[ <cmd>]]..command.."<cr>")
    -- print(res)
 end
+
 
 
 
