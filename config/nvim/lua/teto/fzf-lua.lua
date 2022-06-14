@@ -13,7 +13,7 @@ vim.keymap.set ('n', "<Leader>t", function () fzf_lua.tags() end )
 vim.keymap.set ('n', "<Leader>b", function () fzf_lua.buffers() end )
 vim.keymap.set ('n', "<Leader>C", function () fzf_lua.colorschemes() end )
 vim.keymap.set ('n', "<Leader>l", function () fzf_lua.live_grep() end )
-vim.keymap.set ('n', "<Leader>m", function () fzf_lua.menu() end )
+vim.keymap.set ('n', "<Leader>m", function () fzf_lua.menus() end )
 
 end
 return M

@@ -253,7 +253,51 @@ use { 'voldikss/vim-translator', opt = true }
 use 'calvinchengx/vim-aftercolors' -- load after/colors
 use 'bfredl/nvim-luadev'  -- lua repl :Luadev
 use 'alok/notational-fzf-vim' -- to take notes, :NV
-use 'vigemus/iron.nvim'
+use { 'hkupty/iron.nvim',
+	config = function () 
+		local iron = require("iron.core")
+
+		iron.setup {
+		config = {
+			-- If iron should expose `<plug>(...)` mappings for the plugins
+			should_map_plug = false,
+			-- Whether a repl should be discarded or not
+			scratch_repl = true,
+			-- Your repl definitions come here
+			repl_definition = {
+			sh = {
+				command = {"zsh"}
+			}
+			},
+			repl_open_cmd = require('iron.view').curry.bottom(40),
+			-- how the REPL window will be opened, the default is opening
+			-- a float window of height 40 at the bottom.
+		},
+		-- Iron doesn't set keymaps by default anymore. Set them here
+		-- or use `should_map_plug = true` and map from you vim files
+		keymaps = {
+			send_motion = "<space>sc",
+			visual_send = "<space>sc",
+			send_file = "<space>sf",
+			send_line = "<space>sl",
+			send_mark = "<space>sm",
+			mark_motion = "<space>mc",
+			mark_visual = "<space>mc",
+			remove_mark = "<space>md",
+			cr = "<space>s<cr>",
+			interrupt = "<space>s<space>",
+			exit = "<space>sq",
+			clear = "<space>cl",
+		},
+		-- If the highlight is on, you can change how it looks
+		-- For the available options, check nvim_set_hl
+		highlight = {
+			italic = true
+		}
+		}
+
+	end
+}
 use 'neovimhaskell/nvim-hs.vim' -- to help with nvim-hs
 use 'teto/vim-listchars' -- to cycle between different list/listchars configurations
 use 'chrisbra/csv.vim'
@@ -865,7 +909,7 @@ use {
 	position = "bottom", -- position of the list can be: bottom, top, left, right}}}
 	height = 10, -- height of the trouble list when position is top or bottom
 	width = 50, -- width of the list when position is left or right
-	-- icons = false, -- use devicons for filenames
+	icons = false, -- use devicons for filenames
 	-- mode = "workspace_diagnostics", -- "lsp_workspace_diagnostics", "lsp_document_diagnostics", "quickfix", "lsp_references", "loclist"
 	-- fold_open = "", -- icon used for open folds
 	-- fold_closed = "", -- icon used for closed folds
@@ -930,86 +974,78 @@ use 'MunifTanjim/nui.nvim' -- to create UIs
 use 'honza/vim-snippets'
 -- use 'sjl/gundo.vim' " :GundoShow/Toggle to redo changes
 
-use {
-	'hrsh7th/nvim-cmp',
--- use 'hrsh7th/cmp-nvim-lsp' -- LSP source for nvim-cmp
--- use 'saadparwaiz1/cmp_luasnip' -- Snippets source for nvim-cmp
+-- use {
+-- 	'hrsh7th/nvim-cmp',
+-- -- use 'hrsh7th/cmp-nvim-lsp' -- LSP source for nvim-cmp
+-- -- use 'saadparwaiz1/cmp_luasnip' -- Snippets source for nvim-cmp
 
-	requires = {
-		-- "quangnguyen30192/cmp-nvim-ultisnips",
-		'hrsh7th/cmp-buffer',
-		'hrsh7th/cmp-vsnip',
-		'hrsh7th/cmp-nvim-lsp',
-		'hrsh7th/vim-vsnip',
-		'hrsh7th/vim-vsnip-integ',
-		'rafamadriz/friendly-snippets'
-	},
-	config = function ()
+-- 	requires = {
+-- 		-- "quangnguyen30192/cmp-nvim-ultisnips",
+-- 		'hrsh7th/cmp-buffer',
+-- 		'hrsh7th/cmp-vsnip',
+-- 		'hrsh7th/cmp-nvim-lsp',
+-- 		'hrsh7th/vim-vsnip',
+-- 		'hrsh7th/vim-vsnip-integ',
+-- 		'rafamadriz/friendly-snippets'
+-- 	},
+-- 	config = function ()
+-- 	local cmp = require 'cmp'
 
-  -- require('lspconfig')[%YOUR_LSP_SERVER%].setup {
-  --   capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
-  -- }
-	local cmp = require 'cmp'
--- cmp.setup {
---   ...
---   mapping = cmp.mapping.preset.insert({
---     -- Your configuration here.
+-- 	cmp.setup({
+-- 	snippet = {
+-- 	  expand = function(args)
+-- 		-- For `vsnip` user.
+-- 		vim.fn["vsnip#anonymous"](args.body)
+
+-- 		-- For `luasnip` user.
+-- 		-- require('luasnip').lsp_expand(args.body)
+
+-- 		-- For `ultisnips` user.
+-- 		-- vim.fn["UltiSnips#Anon"](args.body)
+-- 	  end,
+-- 	},
+-- 	mapping = cmp.mapping.preset.insert({
+
+-- 	-- {
+-- 	--   ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+-- 	--   ['<C-f>'] = cmp.mapping.scroll_docs(4),
+-- 	--   ['<C-Space>'] = cmp.mapping.complete(),
+-- 	--   ['<C-e>'] = cmp.mapping.close(),
+-- 	--   -- ['<CR>'] = cmp.mapping.confirm({ select = true }),
+-- 	-- },
+-- 	}),
+-- 	sources = {
+-- 	  -- { name = 'nvim_lsp' },
+
+-- 	  -- For vsnip user.
+-- 	  { name = 'vsnip' },
+
+-- 	  -- For luasnip user.
+-- 	  -- { name = 'luasnip' },
+
+-- 	  -- For ultisnips user.
+-- 	  -- { name = 'ultisnips' },
+
+-- 	  { name = 'buffer' },
+-- 	  -- { name = 'neorg' },
+-- 	  { name = 'orgmode' },
+-- 	}
 --   })
---   ...
+-- 	cmp.setup.cmdline {
+-- 	mapping = cmp.mapping.preset.cmdline({
+-- 		-- Your configuration here.
+-- 	})
+
+-- 	}
+
+
+--   end
 -- }
-
-	cmp.setup({
-	snippet = {
-	  expand = function(args)
-		-- For `vsnip` user.
-		vim.fn["vsnip#anonymous"](args.body)
-
-		-- For `luasnip` user.
-		-- require('luasnip').lsp_expand(args.body)
-
-		-- For `ultisnips` user.
-		-- vim.fn["UltiSnips#Anon"](args.body)
-	  end,
-	},
-	mapping = cmp.mapping.preset.insert({
-
-	-- {
-	--   ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-	--   ['<C-f>'] = cmp.mapping.scroll_docs(4),
-	--   ['<C-Space>'] = cmp.mapping.complete(),
-	--   ['<C-e>'] = cmp.mapping.close(),
-	--   -- ['<CR>'] = cmp.mapping.confirm({ select = true }),
-	-- },
-	}),
-	sources = {
-	  -- { name = 'nvim_lsp' },
-
-	  -- For vsnip user.
-	  { name = 'vsnip' },
-
-	  -- For luasnip user.
-	  -- { name = 'luasnip' },
-
-	  -- For ultisnips user.
-	  -- { name = 'ultisnips' },
-
-	  { name = 'buffer' },
-	  -- { name = 'neorg' },
-	  { name = 'orgmode' },
-	}
-  })
-	cmp.setup.cmdline {
-	mapping = cmp.mapping.preset.cmdline({
-		-- Your configuration here.
-	})
-
-	}
-
-
-  end
-}
 -- Load custom tree-sitter grammar for org filetype
-require('orgmode').setup_ts_grammar()
+local has_orgmode, orgmode = pcall(require, "orgmode")
+if has_orgmode then
+	require('orgmode').setup_ts_grammar()
+end
 
 -- use {
 --	   "nvim-neorg/neorg",
@@ -1042,30 +1078,31 @@ require('orgmode').setup_ts_grammar()
 --	   end,
 --	   requires = "nvim-lua/plenary.nvim"
 -- }
-use 'ray-x/lsp_signature.nvim' -- display function signature in insert mode
-use { 'Pocco81/AutoSave.nvim' -- :ASToggle /AsOn / AsOff
-	, config = function ()
-		local autosave = require("autosave")
-		autosave.setup({
-				enabled = true,
-				execution_message = "AutoSave: saved at " .. vim.fn.strftime("%H:%M:%S"),
-				events = {"InsertLeave"},
-				conditions = {
-					exists = true,
-					filetype_is_not = {},
-					modifiable = true
-				},
-				write_all_buffers = false,
-				on_off_commands = true,
-				clean_command_line_interval = 2500
-			}
-		)
-end
-}
+-- use 'ray-x/lsp_signature.nvim' -- display function signature in insert mode
+-- use { 'Pocco81/AutoSave.nvim' -- :ASToggle /AsOn / AsOff
+-- 	, config = function ()
+-- 		local autosave = require("autosave")
+-- 		autosave.setup({
+-- 				enabled = true,
+-- 				execution_message = "AutoSave: saved at " .. vim.fn.strftime("%H:%M:%S"),
+-- 				events = {"InsertLeave"},
+-- 				conditions = {
+-- 					exists = true,
+-- 					filetype_is_not = {},
+-- 					modifiable = true
+-- 				},
+-- 				write_all_buffers = false,
+-- 				on_off_commands = true,
+-- 				clean_command_line_interval = 2500
+-- 			}
+-- 		)
+-- end
+-- }
+
 -- use 'sindrets/diffview.nvim' -- :DiffviewOpen
 
 -- lua require('github-notifications.menu').notifications()
-use 'rlch/github-notifications.nvim'
+-- use 'rlch/github-notifications.nvim'
 use {
 	'nvim-lualine/lualine.nvim' -- fork of hoob3rt/lualine
 	, requires = { 'arkav/lualine-lsp-progress' }
@@ -1159,13 +1196,6 @@ require'sniprun'.setup({
   display = {
     "Classic",                    -- "display results in the command-line  area
     "VirtualTextOk",              -- "display ok results as virtual text (multiline is shortened)
-    -- "VirtualTextErr",          -- "display error results as virtual text
-    -- "TempFloatingWindow",      -- "display results in a floating window
-    -- "LongTempFloatingWindow",  -- "same as above, but only long results. To use with VirtualText__
-    -- "Terminal"                 -- "display results in a vertical split
-    -- "TerminalWithCode",        --# display results and code history in a vertical split
-    -- "NvimNotify",              --# display with the nvim-notify plugin
-    -- "Api"                      --# return output to a programming interface
   },
 })
 
@@ -1929,6 +1959,7 @@ vim.g.goyo_width = 120
 -- vim.g.iron_repl_open_cmd=--vsplit--
 vim.g.iron_map_defaults=0
 vim.g.iron_map_extended=0
+
 --}}}
 -- alok/notational-fzf-vim {{{
 -- use c-x to create the note

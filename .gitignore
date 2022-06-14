@@ -13,4 +13,4 @@ config/supertuxkart/*
 config/mpv/mpv.conf
 config/kitty/kitty.conf
 config/astroid/poll.sh
-**
+# **

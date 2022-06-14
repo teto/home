@@ -80,6 +80,12 @@ let
 
   filetypePlugins = with pkgs.vimPlugins; [
 	{ plugin = vim-toml; }
+      {
+        plugin = dhall-vim;
+        config = ''
+          " dhall.vim config
+        '';
+      }
   ];
 
   cmpPlugins = [
@@ -105,17 +111,11 @@ let
         ));
     }
     # { plugin = nvim-dap; }
-    # { plugin = lightspeed-nvim; }
-    (luaPlugin {
-      # required by some colorscheme
-      plugin = colorbuddy-nvim;
-      # type = "lua";
-    })
-	(luaPlugin { 
-	  plugin = octo-nvim;
-# 	  -- -- , requires = { 'nvim-lua/popup.nvim' }
-	  optional = true;
-	})
+	# (luaPlugin { 
+	#   plugin = octo-nvim;
+# # 	  -- -- , requires = { 'nvim-lua/popup.nvim' }
+	#   optional = true;
+	# })
 
     (luaPlugin {
       plugin = sniprun;
@@ -191,12 +191,12 @@ let
     #   '';
     # }
 
-    (luaPlugin {
-      plugin = lsp_lines-nvim;
-      config = ''
-      require("lsp_lines").register_lsp_virtual_lines()
-      '';
-    })
+    # (luaPlugin {
+    #   plugin = lsp_lines-nvim;
+    #   config = ''
+    #   require("lsp_lines").register_lsp_virtual_lines()
+    #   '';
+    # })
     (luaPlugin {
       plugin = marks-nvim;
       config = ''
@@ -284,19 +284,30 @@ let
     vim-lion # Use with gl/L<text object><character to align to 
     vim-vsnip
     vim-vsnip-integ
-	(luaPlugin {
-      plugin = nvim-spectre;
-    })
-	(luaPlugin {
-      plugin = nvim-gps;
-	  #local gps = require("nvim-gps")
-	  config = ''
-		require("nvim-gps").setup()
-	  '';
-    })
+	# (luaPlugin { plugin = cmp-nvim; })
+	(luaPlugin { plugin = cmp-cmdline-history; })
+	(luaPlugin { plugin = cmp-conventionalcommits; })
+	(luaPlugin { plugin = cmp-digraphs; })
+	# (luaPlugin { plugin = cmp-rg; })
+	# (luaPlugin { plugin = cmp-zsh; })
+
+
+	(luaPlugin { plugin = nvim-spectre; })
+	# (luaPlugin {
+      # plugin = nvim-gps;
+	#   config = ''
+	# 	require("nvim-gps").setup()
+	#   '';
+    # })
 	# (luaPlugin {
       # plugin = nvim-treesitter-context;
     # })
+
+
+	{ plugin = vim-dadbod; }
+	{ plugin = vim-dadbod-completion; }
+	{ plugin = vim-dadbod-ui; }
+
 	(luaPlugin {
 	  # run with :Diffview
       plugin = diffview-nvim;
@@ -339,7 +350,7 @@ let
     (luaPlugin {
       plugin = telescope-frecency-nvim;
     })
-	{ plugin = nvimdev-nvim; }
+	{ plugin = nvimdev-nvim; optional= true;}
 	# { plugin = neomake; }
     # {
     #   plugin = neogit;
@@ -360,6 +371,10 @@ let
 	{ plugin = vim-monokai; }
 	{ plugin = vim-janah; }
     { plugin = tokyonight-nvim; }
+    (luaPlugin {
+      # required by some colorscheme
+      plugin = colorbuddy-nvim;
+    })
   ];
 
   basePlugins = with pkgs.vimPlugins; [
@@ -413,23 +428,21 @@ let
       (luaPlugin {
         plugin = fzf-hoogle-vim;
         config = ''
+		  vim.g.hoogle_path = "hoogle"
 		  vim.g.hoogle_fzf_cache_file = vim.fn.stdpath('cache')..'/hoogle_cache.json'
         '';
       })
-      {
-        plugin = dhall-vim;
-        config = ''
-          " dhall.vim config
-        '';
-      }
-      (luaPlugin {
-        plugin = Shade-nvim;
-      })
+
+      # (luaPlugin {
+      #   plugin = Shade-nvim;
+      # })
+
       (luaPlugin {
 		# TODO move config hee
         plugin = bufferline-nvim;
       })
-      (luaPlugin { plugin = nvim-peekup; })
+
+      # (luaPlugin { plugin = nvim-peekup; })
 
       # (luaPlugin {
       #   plugin = nvim-biscuits;
@@ -456,14 +469,15 @@ let
       #   '';
 	  # })
 
-	  # {
+	  # (luaPlugin {
       #   plugin = pywal-nvim;
-      #   type = "lua";
       #   config = ''
       #   '';
-      # }
+      # })
       (luaPlugin { plugin = glow-nvim; })
+
       # (luaPlugin { plugin = fzf-lua; })
+
 	  { 
 		# really helps with syntax highlighting
 		plugin = haskell-vim; 
@@ -477,7 +491,6 @@ let
 		  let g:haskell_backpack = 1                " to enable highlighting of backpack keywords
 		  let g:haskell_indent_disable=1
 		'';
-
 	  }  
 # " gutentags + gutenhasktags {{{
 # " to keep logs GutentagsToggleTrace
@@ -533,23 +546,22 @@ let
       #       jump_to_request = false,
       #     })'';
       # })
-      (luaPlugin {
-        # matches nvim-orgmode
-        plugin = orgmode;
-        config = ''
-        require('orgmode').setup{
-            org_capture_templates = {'~/nextcloud/org/*', '~/orgmode/**/*'},
-            org_default_notes_file = '~/orgmode/refile.org',
-            -- TODO add templates
-            org_agenda_templates = { t = { description = 'Task', template = '* TODO %?\n  %u' } },
-        }
-        '';
-      })
-      # { plugin = onedark-nvim; }
-      # to install manually with coc.nvim:
-	  # " Plug 'suy/vim-context-commentstring' " commen for current programming language
+
+      # (luaPlugin {
+      #   # matches nvim-orgmode
+      #   plugin = orgmode;
+      #   config = ''
+      #   require('orgmode').setup{
+      #       org_capture_templates = {'~/nextcloud/org/*', '~/orgmode/**/*'},
+      #       org_default_notes_file = '~/orgmode/refile.org',
+      #       -- TODO add templates
+      #       org_agenda_templates = { t = { description = 'Task', template = '* TODO %?\n  %u' } },
+      #   }
+      #   '';
+      # })
 
       { plugin = editorconfig-vim; }
+
 	  {
 		# use ctrl a/xto cycle between different words
 		plugin = vim-CtrlXA;
@@ -606,11 +618,6 @@ let
       }
       {
         plugin = auto-git-diff;   # display git diff while rebasing, pretty dope
-      }
-
-      {
-        plugin =  nvimdev-nvim;
-        # optional = true;
       }
       {
         plugin = vim-dasht;
