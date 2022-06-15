@@ -96,7 +96,7 @@ let
 	  # fqdn = "fastmail.com";
 	};
 	mujmap = {
-	  enable = false;
+	  enable = true;
 	  # settings.fqdn = "fastmail.com";
 	};
 

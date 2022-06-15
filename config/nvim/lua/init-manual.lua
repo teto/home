@@ -14,7 +14,15 @@ local use, _ = packer.use, packer.use_rocks
 local nnoremap = vim.keymap.set
 local map = vim.keymap.set
 
-function file_exists(name)
+packer.init({
+	autoremove = false,
+})
+vim.cmd([[
+  augroup packer_user_config
+    autocmd!
+    autocmd BufWritePost /home/teto/config/nvim/init-manual.lua source <afile> | PackerCompile
+  augroup end
+]])function file_exists(name)
 	local f=io.open(name,"r")
 	if f~=nil then io.close(f) return true else return false end
 end
@@ -142,6 +150,8 @@ vim.opt.sessionoptions:remove('terminal')
 vim.opt.sessionoptions:remove('help')
 --}}}
 
+-- :tnoremap <Esc> <C-\><C-n>
+map('t', '<Esc>', '<C-\\><C-n>')
 -- nnoremap{ "n", "<C-N><C-N>", function () vim.opt.invnumber end }
 
 -- clipboard {{{
@@ -265,9 +275,8 @@ use { 'hkupty/iron.nvim',
 			scratch_repl = true,
 			-- Your repl definitions come here
 			repl_definition = {
-			sh = {
-				command = {"zsh"}
-			}
+				sh = { command = {"zsh"} },
+				nix = { command = {"nix",  "repl", "/home/teto/nixpkgs"} }
 			},
 			repl_open_cmd = require('iron.view').curry.bottom(40),
 			-- how the REPL window will be opened, the default is opening
