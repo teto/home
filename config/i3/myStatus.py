@@ -1,4 +1,4 @@
-#  vim: set noet fdm=manual fenc=utf-8 ff=unix sts=2 sw=2 ts=4 : 
+#  vim: set et fdm=manual fenc=utf-8 ff=unix sts=2 sw=2 ts=4 : 
 # to refresh the bar https://i3pystatus.readthedocs.io/en/latest/configuration.html#refreshing-the-bar
 # 
 # pkill -SIGUSR1 -f "python /home/user/.config/i3/pystatus.py"
@@ -8,6 +8,7 @@ from i3pystatus.mail import notmuchmail
 # from i3pystatus.mail import maildir
 #import keyring.backends.netrc as backend
 from i3pystatus import Status, get_module
+from copy import copy
 import os
 import subprocess
 # from i3pystatus.updates import aptget
@@ -181,13 +182,16 @@ dpms = status.register("dpms", format="")
 # status.register("scratchpad",)
 
 @get_module
-def launch_alot(mod):
+def launch_alot(_mod):
     cmd = [
-		# run sh first so that terminal survives kitty error
-		"kitty", "sh" "-c", "alot", "-l/tmp/alot-from-bar.log",
-		# "--config",  "/home/teto/home/alot-config"
-		]
-    res = subprocess.Popen(cmd)
+        # run sh first so that terminal survives kitty error
+        "kitty", "sh", "-c", 'alot -l/tmp/alot.log -ddebug',
+        # "--config",  "/home/teto/home/alot-config"
+        ]
+    custom_env= copy(os.environ)
+    custom_env["NOTMUCH_CONFIG"] = "/home/teto/.config/notmuch/default/config"
+    res = subprocess.Popen(cmd, env=custom_env)
+    print(res)
 
 
 res = status.register(
