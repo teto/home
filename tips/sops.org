@@ -3,6 +3,5 @@ https://github.com/mozilla/sops#encrypting-using-age
 
 To use an alternate key:
 - SOPS_AGE_KEY_FILE=runner3
-
-  SOPS_AGE_RECIPIENTS
+- or SOPS_AGE_RECIPIENTS=KEY_CONTENT
 sops -s secrets.yaml to see metadata/master keys

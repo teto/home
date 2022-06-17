@@ -1,0 +1,13 @@
+Changing results on the fly
+
+By default, when you type search terms in the address bar, the list under it shows search suggestions from the default search engine, and pages (bookmarks, history, open tabs) where every search term is part of the title, part of a tag or part of the web address (URL).
+
+If you are looking for a specific type of result, like a bookmark or open tab, you can speed up the process of finding it by typing in special characters in the address bar separated by spaces:
+
+    Add ^ to show only matches in your browsing history.
+    Add * to show only matches in your bookmarks.
+    Add + to show only matches in bookmarks you've tagged.
+    Add % to show only matches in your currently open tabs.
+    Add # to show only matches where every search term is part of the title or part of a tag.
+    Add $ to show only matches where every search term is part of the web address (URL). The text "https://" or "http://" in the URL is ignored, but not "file:///".
+    Add ? to show only search suggestions. 

@@ -816,6 +816,8 @@ use { 'notomo/gesture.nvim' , opt = true; }
 	-- , requires = {"rktjmp/lush.nvim"}
 	-- }
 use { 'onsails/lspkind-nvim' }
+use { "rktjmp/lush.nvim" }
+
 -- use {
 --	'phaazon/hop.nvim',
 --	config = function ()
@@ -1726,71 +1728,8 @@ vim.opt.background = "dark" -- or "light" for light mode
 
 vim.opt.showbreak = '↳ '  	-- displayed in front of wrapped lines
 
-
 -- TODO add a command to select a ref (from telescope ?) and call Gitsigns change_base
 -- afterwards
-
-
--- local Menu = require("nui.menu")
-
--- function create_menu ()
-
--- local menu = Menu({
---	 relative = "cursor",
---	 border = {
---	   style = "rounded",
---	   highlight = "Normal",
---	   text = {
---		 top = "[Sample Menu]",
---		 top_align = "left",
---	   },
---	 },
---	 position = {
---	   row = 1,
---	   col = 0,
---	 },
---	 highlight = "Normal:Normal",
--- }, {
---	 lines = {
---	   Menu.separator("Group One"),
---	-- TODO print status when possible
---	   Menu.item("Toggle obsession", { func = function() vim.cmd("Obsession") end}),
---	   Menu.item("Toggle autosave", { func = function() vim.cmd("ASToggle") end}),
---	   Menu.item("Toggle indentlines", { func = function() vim.cmd('IndentBlanklineToggle!') end}),
---	   Menu.item("Search and replace", { func = function () require("spectre").open() end}),
---	   Menu.separator("LSP"),
---	   Menu.item("Code action", { func = function() vim.lsp.buf.code_action() end}),
---	   Menu.item("Search references", { func = function() vim.lsp.buf.references() end}),
---	   Menu.item("Definition", { func = function() vim.lsp.buf.definition() end}),
---	   Menu.item("Workspace symbols", { func = function() vim.lsp.buf.workspace_symbol() end}),
---	   Menu.item("Rename", { func = function() vim.lsp.buf.rename() end}),
---	   Menu.item("Format", { func = function() vim.lsp.buf.formatting_sync(nil, 1000) end}),
-
---	 },
---	 max_width = 200,
---	 max_height = 30,
---	 separator = {
---	   char = "-",
---	   text_align = "right",
---	 },
---	 keymap = {
---	   focus_next = { "j", "<Down>", "<Tab>" },
---	   focus_prev = { "k", "<Up>", "<S-Tab>" },
---	   close = { "<Esc>", "<C-c>" },
---	   submit = { "<CR>", "<Space>" },
---	 },
---	 on_close = function()
---	   print("CLOSED")
---	 end,
---	 on_submit = function(item)
---	   -- print("SUBMITTED", vim.inspect(item))
---	item.func()
---	 end
--- })
--- menu:mount()
--- menu:map("n", "l", menu.menu_props.on_submit, { noremap = true, nowait = true })
--- menu:on(vim.event.BufLeave, menu.menu_props.on_close, { once = true })
--- end
 
 vim.cmd [[highlight IndentBlanklineIndent1 guifg=#E06C75 gui=nocombine]]
 vim.cmd [[highlight IndentBlanklineIndent2 guifg=#E5C07B gui=nocombine]]
@@ -1818,7 +1757,7 @@ menu_add('Diagnostic.Display_in_QF', '<cmd>lua vim.diagnostic.setqflist({open = 
 menu_add('Diagnostic.Set_severity_to_warning', '<cmd>lua vim.diagnostic.config({virtual_text = { severity = { min = vim.diagnostic.severity.WARN } }})<cr>')
 menu_add('Diagnostic.Set_severity_to_all', '<cmd>lua vim.diagnostic.config({virtual_text = { severity = nil }})<cr>')
 
-menu_add("Search.Search_and_replace", '<cmd>lua require("spectre").open()<cr>')
+menu_add("Search.Search_and_replace", "<cmd>lua require('spectre').open()<cr>")
 menu_add("Search.Test", 'let a=3')
 
 menu_add("Rest.RunRequest", "<cmd>lua require('rest-nvim').run(true)<cr>")
@@ -1923,6 +1862,8 @@ vim.g.quickui_border_style = 1
 
 -- " TODO map to lua create_menu()
 -- map <RightMouse>  <Cmd>call quickui#context#open(content, quick_opts)<CR>
+vim.keymap.set('n',  '<RightMouse>', '<Cmd>lua open_contextual_menu()<CR>' )
+
 -- " can't click on it plus it disappears
 -- " map <RightMouse>  <Cmd>lua create_menu()<CR>
 -- }}}

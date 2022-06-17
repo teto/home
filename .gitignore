@@ -1,3 +1,4 @@
+config/autostart
 config/clerk
 config/sway/config
 config/zsh/.*
@@ -7,6 +8,7 @@ config/git/config
 config/jesseduffield/*
 config/astroid/config
 config/ipython/*
+config/jupyter/migrated
 config/vlc/*
 config/tmux/tmux.conf
 config/supertuxkart/*

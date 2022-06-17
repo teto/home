@@ -1,4 +1,4 @@
 { config, lib, pkgs,  ... }:
 {
-  programs.pywal.enable = true;
+  programs.pywal.enable = false;
 }

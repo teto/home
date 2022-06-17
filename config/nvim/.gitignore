@@ -1,5 +1,7 @@
 plugged/*
+.netrwhist
 plugin/packer
+plugin/packer_compiled.lua
 *generated*
 lua/init-home-manager.lua
 init.vim
