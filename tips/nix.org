@@ -18,6 +18,9 @@ chown -R root:root /nix/store
 NIX_SSHOPTS to pass additional ssh flags to nix
 
 
+# builders
+nixpkgs-review pr 176375 --build-args="--substituters '' --option builders \"$RUNNER3\" "
+
 Limit bandwidth
  CURLOPT_MAX_RECV_SPEED_LARGE
 

@@ -92,6 +92,7 @@ in
         # used in some git aliases
         export REVIEW_BASE=master
 		export RUNNER2="${mkRemoteBuilderDesc secrets.nova-runner-2}"
+		export RUNNER3="${mkRemoteBuilderDesc secrets.nova-runner-3}"
 
       ''
       ;

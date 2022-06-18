@@ -231,7 +231,22 @@ use 'bogado/file-line' -- to open a file at a specific line
 -- call :NR on a region than :w . coupled with b:nrrw_aucmd_create,
 -- use 'chrisbra/NrrwRgn' -- to help with multi-ft files
 use 'chrisbra/vim-diff-enhanced' --
+use { 'ldelossa/gh.nvim',
+    requires = { { 'ldelossa/litee.nvim' } },
+	config = function ()
+		require('litee.lib').setup({
+			-- this is where you configure details about your panel, such as
+			-- whether it toggles on the left, right, top, or bottom.
+			-- leaving this blank will use the defaults.
+			-- reminder: gh.nvim uses litee.lib to implement core portions of its UI.
+		})
+		require('litee.gh').setup({
+			-- this is where you configure details about gh.nvim directly relating
+			-- to GitHub integration.
+		})
 
+	end
+  }
 use 'rhysd/git-messenger.vim' -- to show git message :GitMessenger
 
 -- use 'tweekmonster/nvim-api-viewer', {'on': 'NvimAPI'} -- see nvim api
@@ -264,7 +279,7 @@ use 'calvinchengx/vim-aftercolors' -- load after/colors
 use 'bfredl/nvim-luadev'  -- lua repl :Luadev
 use 'alok/notational-fzf-vim' -- to take notes, :NV
 use { 'hkupty/iron.nvim',
-	config = function () 
+	config = function ()
 		local iron = require("iron.core")
 
 		iron.setup {
@@ -509,6 +524,8 @@ use {
 -- 	end
 -- }
 
+use {'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async'}
+
 -- overrides vim.ui / vim.select with the backend of my choice
  use {
 	'stevearc/dressing.nvim'
@@ -524,9 +541,9 @@ use {
 	   border = "rounded",
 
 	   -- These can be integers or a float between 0 and 1 (e.g. 0.4 for 40%)
-	   prefer_width = 40,
-	   max_width = nil,
-	   min_width = 20,
+	   -- prefer_width = 40,
+	   -- max_width = nil,
+	   -- min_width = 20,
 
 	   -- see :help dressing_get_config
 	   get_config = nil,
@@ -542,18 +559,24 @@ use {
 		   height = 0.4,
 		 },
 	   },
+	   telescope = {
+		 window = {
+		   width = 0.5,
+		   height = 0.4,
+		 },
+	   },
 
 	   -- Options for nui Menu
-	   nui = {
-		 position = "50%",
-		 size = nil,
-		 relative = "editor",
-		 border = {
-		   style = "rounded",
-		 },
-		 max_width = 80,
-		 max_height = 40,
-	   },
+	   -- nui = {
+		 -- position = "50%",
+		 -- size = nil,
+		 -- relative = "editor",
+		 -- border = {
+		   -- style = "rounded",
+		 -- },
+		 -- max_width = 80,
+		 -- max_height = 40,
+	   -- },
 
 	   -- Options for built-in selector
 	   builtin = {
