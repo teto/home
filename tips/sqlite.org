@@ -1,0 +1,1 @@
+nix profile install /home/teto/nixpkgs#sqlite.bin

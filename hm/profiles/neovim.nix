@@ -284,12 +284,6 @@ let
     vim-lion # Use with gl/L<text object><character to align to 
     vim-vsnip
     vim-vsnip-integ
-	# (luaPlugin { plugin = cmp-nvim; })
-	(luaPlugin { plugin = cmp-cmdline-history; })
-	(luaPlugin { plugin = cmp-conventionalcommits; })
-	(luaPlugin { plugin = cmp-digraphs; })
-	# (luaPlugin { plugin = cmp-rg; })
-	# (luaPlugin { plugin = cmp-zsh; })
 
 
 	(luaPlugin { plugin = nvim-spectre; })
@@ -342,14 +336,10 @@ let
 
 
     # broken
-    # {
-    #   plugin = nvim-compe;
-    # }
+    { plugin = nvim-compe; }
 
 	# FIX https://github.com/NixOS/nixpkgs/issues/169293 first
-    (luaPlugin {
-      plugin = telescope-frecency-nvim;
-    })
+    (luaPlugin { plugin = telescope-frecency-nvim; })
 	{ plugin = nvimdev-nvim; optional= true;}
 	# { plugin = neomake; }
     # {
@@ -358,6 +348,16 @@ let
     #     " -- neogit config
     #   '';
     # }
+  ];
+
+  completionPlugins = with pkgs.vimPlugins; [
+	(luaPlugin { plugin = nvim-cmp; })
+	(luaPlugin { plugin = cmp-nvim-lsp; })
+	(luaPlugin { plugin = cmp-cmdline-history; })
+	(luaPlugin { plugin = cmp-conventionalcommits; })
+	(luaPlugin { plugin = cmp-digraphs; })
+	# (luaPlugin { plugin = cmp-rg; })
+	# (luaPlugin { plugin = cmp-zsh; })
   ];
 
 
@@ -972,6 +972,7 @@ in
       ++ luaPlugins
       # ++ fennelPlugins
       ++ colorschemePlugins
+      ++ completionPlugins
       ++ filetypePlugins
       ++ cmpPlugins
       ;

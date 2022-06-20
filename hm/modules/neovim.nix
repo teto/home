@@ -13,7 +13,10 @@ in
     options = {
       enableNeorg = mkEnableOption "Neorg" // {
           description = "Don't load by default (load with :packadd)";
-        };
+	  };
+      enableAutocompletion = mkEnableOption "nvim-cmp" // {
+          description = "Don't load by default (load with :packadd)";
+	  };
     };
 
 
@@ -23,7 +26,7 @@ in
         cfg.plugins = [];
       })
 
-      (mkIf cfg.enableNeorg {
+      (mkIf cfg.enableAutocompletion {
         cfg.plugins = [];
       })
 

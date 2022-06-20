@@ -471,7 +471,7 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 -- }
 
 use {
-	"/home/teto/rest.nvim"
+	"/home/teto/neovim/rest.nvim"
 }
 
 -- use {
@@ -934,13 +934,13 @@ use {'tweekmonster/startuptime.vim' , opt = true } -- {'on': 'StartupTime'} " se
 --	end
 -- }
 -- use 'mrjones2014/dash.nvim' -- only for dash it seems
+-- Trouble {{{
 use {
   "folke/trouble.nvim",
 --	 requires = "kyazdani42/nvim-web-devicons",
-	-- Trouble {{{
 	config = function ()
 	require'trouble'.setup {
-	position = "bottom", -- position of the list can be: bottom, top, left, right}}}
+	position = "bottom", -- position of the list can be: bottom, top, left, right
 	height = 10, -- height of the trouble list when position is top or bottom
 	width = 50, -- width of the list when position is left or right
 	icons = false, -- use devicons for filenames
@@ -984,8 +984,9 @@ use {
 	use_diagnostic_signs = true -- enabling this will use the signs defined in your lsp client
 	}
 	end
-
 }
+-- }}}
+
 -- use {
 --	 'kdheepak/tabline.nvim',
 --	 config = function()
@@ -1023,48 +1024,50 @@ use 'honza/vim-snippets'
 -- 		'rafamadriz/friendly-snippets'
 -- 	},
 -- 	config = function ()
--- 	local cmp = require 'cmp'
+local cmp = require 'cmp'
 
--- 	cmp.setup({
--- 	snippet = {
--- 	  expand = function(args)
--- 		-- For `vsnip` user.
--- 		vim.fn["vsnip#anonymous"](args.body)
+-- nvim-cmp autocompletion plugin{{{
+	cmp.setup({
+	snippet = {
+	  expand = function(args)
+		-- For `vsnip` user.
+		vim.fn["vsnip#anonymous"](args.body)
 
--- 		-- For `luasnip` user.
--- 		-- require('luasnip').lsp_expand(args.body)
+		-- For `luasnip` user.
+		-- require('luasnip').lsp_expand(args.body)
 
--- 		-- For `ultisnips` user.
--- 		-- vim.fn["UltiSnips#Anon"](args.body)
--- 	  end,
--- 	},
--- 	mapping = cmp.mapping.preset.insert({
+		-- For `ultisnips` user.
+		-- vim.fn["UltiSnips#Anon"](args.body)
+	  end,
+	},
+	mapping = cmp.mapping.preset.insert({
 
--- 	-- {
--- 	--   ['<C-d>'] = cmp.mapping.scroll_docs(-4),
--- 	--   ['<C-f>'] = cmp.mapping.scroll_docs(4),
--- 	--   ['<C-Space>'] = cmp.mapping.complete(),
--- 	--   ['<C-e>'] = cmp.mapping.close(),
--- 	--   -- ['<CR>'] = cmp.mapping.confirm({ select = true }),
--- 	-- },
--- 	}),
--- 	sources = {
--- 	  -- { name = 'nvim_lsp' },
+	-- {
+	--   ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+	--   ['<C-f>'] = cmp.mapping.scroll_docs(4),
+	--   ['<C-Space>'] = cmp.mapping.complete(),
+	--   ['<C-e>'] = cmp.mapping.close(),
+	--   -- ['<CR>'] = cmp.mapping.confirm({ select = true }),
+	-- },
+	}),
+	sources = {
+	  { name = 'nvim_lsp' },
 
--- 	  -- For vsnip user.
--- 	  { name = 'vsnip' },
+	  -- For vsnip user.
+	  { name = 'vsnip' },
 
--- 	  -- For luasnip user.
--- 	  -- { name = 'luasnip' },
+	  -- For luasnip user.
+	  -- { name = 'luasnip' },
 
--- 	  -- For ultisnips user.
--- 	  -- { name = 'ultisnips' },
+	  -- For ultisnips user.
+	  -- { name = 'ultisnips' },
 
--- 	  { name = 'buffer' },
--- 	  -- { name = 'neorg' },
--- 	  { name = 'orgmode' },
--- 	}
---   })
+	  { name = 'buffer' },
+	  -- { name = 'neorg' },
+	  { name = 'orgmode' },
+	}
+  })
+--  }}}
 -- 	cmp.setup.cmdline {
 -- 	mapping = cmp.mapping.preset.cmdline({
 -- 		-- Your configuration here.
@@ -1072,9 +1075,9 @@ use 'honza/vim-snippets'
 
 -- 	}
 
-
 --   end
 -- }
+
 -- Load custom tree-sitter grammar for org filetype
 local has_orgmode, orgmode = pcall(require, "orgmode")
 if has_orgmode then
@@ -1587,11 +1590,14 @@ end
 if has_telescope then
 	-- telescope.load_extension('ghcli')
 	local actions = require('telescope.actions')
+	local trouble = require('trouble')
 	-- telescope.setup{}
 	telescope.setup{
 		defaults = {
 			mappings = {
 				i = {
+					["<c-t>"] = trouble.open_with_trouble,
+
 	-- 				-- -- To disable a keymap, put [map] = false
 	-- 				-- -- So, to not map "<C-n>", just put
 	-- 				-- ["<c-x>"] = false,
@@ -1604,6 +1610,10 @@ if has_telescope then
 					["<esc>"] = actions.close
 				},
 				n = {
+					["<C-t>"] = function(prompt_bufnr, _mode)
+						require("trouble.providers.telescope").open_with_trouble(prompt_bufnr, _mode)
+					end,
+					-- ["<c-t>"] = trouble.open_with_trouble,
 					["<esc>"] = actions.close
 				},
 			},
@@ -1681,7 +1691,7 @@ if has_telescope then
 	-- telescope.load_extension('fzf')
 	-- telescope.load_extension('fzy_native')
 	telescope.load_extension("notify")
-	-- telescope.load_extension("frecency")
+	telescope.load_extension("frecency")
 
 	-- TODO add autocmd
 	-- User TelescopePreviewerLoaded
@@ -1898,9 +1908,9 @@ vim.keymap.set('n',  '<leader>pu' , "<cmd>PackerSync<CR>")
 vim.keymap.set("n", "<leader>q", "<Cmd>Sayonara!<cr>", { silent = true})
 vim.keymap.set("n", "<leader>Q", "<Cmd>Sayonara<cr>", { silent = true})
 
-vim.keymap.set('n',  '<leader>rr' , "<use>RestNvim")
-vim.keymap.set('n',  '<leader>rp' , "<use>RestNvimPreview")
-vim.keymap.set('n',  '<C-J>' , "<use>RestNvim")
+vim.keymap.set('n',  '<leader>rr' , "<Plug>RestNvim<cr>", { noremap=false,  desc= "Run an http request"})
+vim.keymap.set('n',  '<leader>rp' , "<Plug>RestNvimPreview", { noremap=false,  desc= "Run an http request"})
+vim.keymap.set('n',  '<C-J>' , "<Plug>RestNvim<cr>")
 -- vim.keymap.set('n',  '<C-j>' , "<use>RestNvimPreview")
 -- nnoremap <use>RestNvimPreview :lua require('rest-nvim').run(true)<CR>
 -- nnoremap <use>RestNvimLast :lua require('rest-nvim').last()<CR>
@@ -1984,6 +1994,13 @@ vim.api.nvim_set_keymap(
   { noremap = true, silent = false }
 )
 
+
+-- dadbod UI sql connections
+-- let g:db_ui_winwidth = 30
+vim.g.dbs = {
+  dev = 'sqlite:///home/teto/nova/jinko3/core-platform-db/db.sqlite'
+ }
+
 -- luadev mappings
 -- https://github.com/bfredl/nvim-luadev
 -- for i=1,2 do
@@ -2007,3 +2024,5 @@ vim.api.nvim_set_keymap('n', ',,', '<Plug>(Luadev-RunLine)', { noremap=false, si
 -- if vim.cmd.exists('g:vscode')
 --     -- VSCode extension
 -- end
+local lush = require('lush')
+-- lush.
