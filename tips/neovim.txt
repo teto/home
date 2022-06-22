@@ -24,3 +24,12 @@ dump ast with
 " the right window contains the version from the merge branch
 " }}}
 
+
+plenary.log works as:
+  local outfile = string.format("%s/%s.log", vim.api.nvim_call_function("stdpath", { "cache" }), config.plugin)
+in ~/.cache/rest.nvim.log for instance
+DEBUG_PLENARY="debug"
+
+log only if local p_debug = vim.fn.getenv "DEBUG_PLENARY"
+
+

@@ -470,9 +470,7 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 -- 	'DougBeney/pickachu'
 -- }
 
-use {
-	"/home/teto/neovim/rest.nvim"
-}
+use "/home/teto/neovim/rest.nvim"
 
 -- use {
 -- 	"~/telescope-frecency.nvim",
@@ -1120,18 +1118,18 @@ use { 'Pocco81/AutoSave.nvim' -- :ASToggle /AsOn / AsOff
 	, config = function ()
 		local autosave = require("autosave")
 		autosave.setup({
-				enabled = true,
-				execution_message = "AutoSave: saved at " .. vim.fn.strftime("%H:%M:%S"),
-				events = {"InsertLeave"},
-				conditions = {
-					exists = true,
-					filetype_is_not = {},
-					modifiable = true
-				},
-				write_all_buffers = false,
-				on_off_commands = true,
-				clean_command_line_interval = 2500
-			}
+			enabled = true,
+			execution_message = "AutoSave: saved at " .. vim.fn.strftime("%H:%M:%S"),
+			events = {"InsertLeave", "FocusLost"},
+			conditions = {
+				exists = true,
+				filetype_is_not = {},
+				modifiable = true
+			},
+			write_all_buffers = false,
+			on_off_commands = true,
+			clean_command_line_interval = 2500
+		}
 		)
 end
 }
@@ -1659,7 +1657,7 @@ if has_telescope then
 	-- 		-- Developer configurations: Not meant for general override
 	-- 		-- buffer_previewer_maker = require'telescope.previewers'.buffer_previewer_maker
 		},
-	-- 	extensions = {
+		extensions = {
 	-- 		fzf = {
 	-- 			fuzzy = true,					 -- false will only do exact matching
 	-- 			override_generic_sorter = true, -- override the generic sorter
@@ -1671,21 +1669,21 @@ if has_telescope then
 	-- 			override_generic_sorter = false,
 	-- 			override_file_sorter = false,
 	-- 		},
-	-- 		 -- frecency = {
+			 frecency = {
 	-- 			-- workspaces = {
 	-- 				-- ["home"]	= "/home/teto/home",
 	-- 				-- ["data"]	= "/home/teto/neovim",
 	-- 				-- ["jinko"]	= "/home/teto/jinko",
 	-- 				-- -- ["wiki"]    = "/home/my_username/wiki"
-	-- 			-- },
-	-- 			-- show_scores = true,
-	-- 			-- show_unindexed = true,
-	-- 			-- ignore_patterns = {"*.git/*", "*/tmp/*"},
-	-- 			-- db_safe_mode = true,
-	-- 			-- auto_validate = false,
-	-- 			-- devicons_disabled = true
-	-- 		 -- }
-	-- 	}
+				-- },
+				-- show_scores = true,
+				-- show_unindexed = true,
+				-- ignore_patterns = {"*.git/*", "*/tmp/*"},
+				db_safe_mode = true,
+				auto_validate = false,
+				-- devicons_disabled = true
+			 }
+		}
 	}
 	-- This will load fzy_native and have it override the default file sorter
 	-- telescope.load_extension('fzf')

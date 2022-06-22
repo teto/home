@@ -1,7 +1,8 @@
 # could be called home-huge.nix
 { config, lib, pkgs,  ... }:
 {
-  services.opensnitch-ui.enable = true;
+  # broken on unstable because python2
+  services.opensnitch-ui.enable = false;
 
   home.packages = with pkgs; [
     hakuneko
