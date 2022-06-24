@@ -112,6 +112,14 @@
           path = ./nixpkgs/templates/haskell;
           description = "A flake to help develop haskell libraries.";
         };
+        lua = {
+          path = ./nixpkgs/templates/lua;
+          description = "A flake to help develop haskell libraries.";
+        };
+        python = {
+          path = ./nixpkgs/poetry/haskell;
+          description = "A flake to help develop poetry-based python packages";
+        };
       };
 
       # defaultTemplate = templates.app;

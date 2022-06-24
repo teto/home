@@ -10,4 +10,5 @@ export LUAROCKS_CONFIG="$PWD/config.lua";
 -- to create a flat hierarchy
 lua_modules_path = ""
 ```
-
+luarocks nix lush.nvim scm-1 --dev
+nix-prefetch-git --fetch-submodules --quiet https://github.com/teto/lush.nvim --branch-name rockspec

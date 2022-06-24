@@ -14,6 +14,12 @@ local use, _ = packer.use, packer.use_rocks
 local nnoremap = vim.keymap.set
 local map = vim.keymap.set
 
+vim.opt.rtp:prepend(os.getenv("HOME").."/neovim/plenary.nvim")
+local reload = require'plenary.reload'
+reload.reload_module('plenary')
+require'plenary'
+
+
 packer.init({
 	autoremove = false,
 })
@@ -22,7 +28,8 @@ vim.cmd([[
     autocmd!
     autocmd BufWritePost /home/teto/config/nvim/init-manual.lua source <afile> | PackerCompile
   augroup end
-]])function file_exists(name)
+]])
+function file_exists(name)
 	local f=io.open(name,"r")
 	if f~=nil then io.close(f) return true else return false end
 end
@@ -837,7 +844,7 @@ use { 'notomo/gesture.nvim' , opt = true; }
 	-- , requires = {"rktjmp/lush.nvim"}
 	-- }
 use { 'onsails/lspkind-nvim' }
-use { "rktjmp/lush.nvim" }
+-- use { "rktjmp/lush.nvim" }
 
 -- use {
 --	'phaazon/hop.nvim',

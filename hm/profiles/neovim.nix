@@ -422,6 +422,7 @@ let
         '';
       }
 	  # disabled because of https://github.com/rktjmp/lush.nvim/issues/89
+      (luaPlugin { plugin = lush-nvim; }) 
       # (luaPlugin { plugin = gruvbox-nvim; }) 
 		# out of tree
 		# call with :Hoogle
