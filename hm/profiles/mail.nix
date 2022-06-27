@@ -97,6 +97,8 @@ let
 	};
 	mujmap = {
 	  enable = true;
+	  # TODO replace with pass
+	  settings.password_command = "cat /home/teto/mujmap_password";
 	  # settings.fqdn = "fastmail.com";
 	};
 
