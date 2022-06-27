@@ -98,8 +98,9 @@ let
 	mujmap = {
 	  enable = true;
 	  # TODO replace with pass
-	  settings.password_command = "cat /home/teto/mujmap_password";
-	  # settings.fqdn = "fastmail.com";
+	  # settings.password_command = "cat /home/teto/mujmap_password";
+	  settings.password_command = getPassword "perso/fastmail_mc_jmap";
+	  settings.config_dir = config.accounts.email.maildirBasePath;
 	};
 
 

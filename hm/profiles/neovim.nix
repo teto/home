@@ -110,6 +110,7 @@ let
           ]
         ));
     }
+    { plugin = satellite-nvim; }
     # { plugin = nvim-dap; }
 	# (luaPlugin { 
 	#   plugin = octo-nvim;

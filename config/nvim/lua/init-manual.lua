@@ -208,6 +208,22 @@ vim.api.nvim_set_hl(0, 'NormalFloat', { bg='grey' })
 -- })
 -- my_image:transmit() -- send image data to terminal
 
+-- use {
+--   -- Display marks for different kinds of decorations across the buffer. Builtin handlers include:
+--   -- 'lewis6991/satellite.nvim',
+--   config = function()
+--     require('satellite').setup()
+--   end
+-- }
+use {
+  "max397574/colortils.nvim",
+  -- cmd = "Colortils",
+  config = function()
+    require("colortils").setup()
+  end,
+}
+-- installed via nix
+require('satellite').setup()
 use '~/neovim/fzf-lua' -- markdown syntax compatible with Github's
 use 'rhysd/vim-gfm-syntax' -- markdown syntax compatible with Github's
 -- use 'symphorien/vim-nixhash' -- use :NixHash
