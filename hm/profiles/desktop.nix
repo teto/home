@@ -31,7 +31,7 @@ let
     jq    # to run json queries
     lazygit  # kinda like tig
     ncurses.dev # for infocmp
-    neovim-remote # for latex etc
+    # neovim-remote # broken for latex etc
     # nix-doc # to access nix doc (broken)
     nix-index # to list package contents
     nixpkgs-fmt

@@ -1288,7 +1288,7 @@ elseif has_telescope then
 end
 nnoremap ( "n", "<Leader>ca", function () vim.lsp.buf.code_action{} end )
 
-nnoremap ( "n", "<leader>S",  function() require('spectre').open() end )
+-- nnoremap ( "n", "<leader>S",  function() require('spectre').open() end )
 
 -- replace with telescope
 -- nnoremap { "<Leader>t", function () vim.cmd("FzfTags") end}

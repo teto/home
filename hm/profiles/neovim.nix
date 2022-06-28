@@ -39,13 +39,6 @@ let
   };
 
   vimlRcBlocks = {
-
-
-	# TODO move
-    # sessionoptions = ''
-    #   set sessionoptions-=terminal
-    #   set sessionoptions-=help
-    # '';
 	dealingwithpdf= ''
 	  " Read-only pdf through pdftotext / arf kinda fails silently on CJK documents
 	  " autocmd BufReadPost *.pdf silent %!pdftotext -nopgbrk -layout -q -eol unix "%" - | fmt -w78
@@ -53,7 +46,6 @@ let
 	  " convert all kinds of files (but pdf) to plain text
 	  autocmd BufReadPost *.doc,*.docx,*.rtf,*.odp,*.odt silent %!pandoc "%" -tplain -o /dev/stdout
 	'';
-
   };
 
 
@@ -79,6 +71,7 @@ let
   ];
 
   filetypePlugins = with pkgs.vimPlugins; [
+   	{ plugin = wmgraphviz-vim; }
 	{ plugin = vim-toml; }
       {
         plugin = dhall-vim;
@@ -86,6 +79,7 @@ let
           " dhall.vim config
         '';
       }
+      idris-vim
   ];
 
   cmpPlugins = [
@@ -232,62 +226,17 @@ let
     }
     '';
     })
-    # {
-      # not packaged yet
-  # Plug 'bfredl/nvim-miniyank' " killring alike plugin, cycling paste careful search for :Yank commands
-  # hangs with big strings
-    #   plugin = nvim-miniyank;
-    #   config = 
-    #   ''
-# let g:miniyank_delete_maxlines=100
-
-# let g:miniyank_filename = $XDG_CACHE_HOME."/miniyank.mpack"
-# " map p <Plug>(miniyank-autoput)
-# " map P <Plug>(miniyank-autoPut)
-
-
-# function! FZFYankList() abort
-  # function! KeyValue(key, val)
-    # let line = join(a:val[0], '\n')
-    # if (a:val[1] ==# 'V')
-    #   let line = '\n'.line
-    # endif
-    # return a:key.' '.line
-  # endfunction
-  # return map(miniyank#read(), function('KeyValue'))
-# endfunction
-
-# function! FZFYankHandler(opt, line) abort
-  # let key = substitute(a:line, ' .*', '', '')
-  # if !empty(a:line)
-    # let yanks = miniyank#read()[key]
-    # call miniyank#drop(yanks, a:opt)
-  # endif
-# endfunction
-
-# command! YanksAfter call fzf#run(fzf#wrap('YanksAfter', {
-# \ 'source':  FZFYankList(),
-# \ 'sink':    function('FZFYankHandler', ['p']),
-# \ 'options': '--no-sort --prompt="Yanks-p> "',
-# \ }))
-
-# command! YanksBefore call fzf#run(fzf#wrap('YanksBefore', {
-# \ 'source':  FZFYankList(),
-# \ 'sink':    function('FZFYankHandler', ['P']),
-# \ 'options': '--no-sort --prompt="Yanks-P> "',
-# \ }))
-
-# map <A-p> <Cmd>YanksAfter<CR>
-# map <A-P> <Cmd>YanksBefore<CR>
-# '';
 
     # }
     vim-lion # Use with gl/L<text object><character to align to 
-    vim-vsnip
-    vim-vsnip-integ
+	(luaPlugin {
+	 plugin = nvim-spectre;
+	 after = ''
+	 nnoremap ( "n", "<leader>S",  function() require('spectre').open() end )
+	 '';
 
 
-	(luaPlugin { plugin = nvim-spectre; })
+   })
 	# (luaPlugin {
       # plugin = nvim-gps;
 	#   config = ''
@@ -311,7 +260,6 @@ let
     (luaPlugin {
 	  # prettier quickfix
       plugin = nvim-bqf;
-	  # plugin = nvim-pqf-git;
     })
     (luaPlugin { plugin = fugitive-gitlab-vim; })
 
@@ -335,10 +283,6 @@ let
       # use :Registers
     }
 
-
-    # broken
-    { plugin = nvim-compe; }
-
 	# FIX https://github.com/NixOS/nixpkgs/issues/169293 first
     (luaPlugin { plugin = telescope-frecency-nvim; })
 	{ plugin = nvimdev-nvim; optional= true;}
@@ -359,6 +303,9 @@ let
 	(luaPlugin { plugin = cmp-digraphs; })
 	# (luaPlugin { plugin = cmp-rg; })
 	# (luaPlugin { plugin = cmp-zsh; })
+    vim-vsnip
+    vim-vsnip-integ
+
   ];
 
 
@@ -383,7 +330,6 @@ let
 	
 	{ plugin = vCoolor-vim; }
 	{ plugin = vim-lastplace; }
-	{ plugin = wmgraphviz-vim; }
     (luaPlugin {
       plugin = packer-nvim;
       config = ''
@@ -404,13 +350,14 @@ let
       #   '';
       # }
       # y a aussi vim-markdown
-      idris-vim
       # TODO package
       # astronauta
-      {
+      (luaPlugin {
         # euclio/vim-markdown-composer
         # https://github.com/euclio/vim-markdown-composer/issues/69#issuecomment-1103440076
         # see https://github.com/euclio/vim-markdown-composer/commit/910fd4321b7f25fbab5fdf84e68222cbc226d8b1
+		# https://github.com/euclio/vim-markdown-composer/issues/69#event-6528328732
+		# ComposerUpdate / ComposerStart
         # we can now set g:markdown_composer_binary
 		# " is that the correct plugin ?
 		# " let $NVIM_MKDP_LOG_LEVEL = 'debug'
@@ -418,10 +365,11 @@ let
 		# " let g:mkdp_browser = 'firefox'
         plugin = vim-markdown-composer;
         config = ''
-          " use with :ComposerStart
-          let g:markdown_composer_autostart = 0
-        '';
-      }
+          -- use with :ComposerStart
+          vim.g.markdown_composer_autostart = 0
+		  vim.g.markdown_composer_binary = '${vim-markdown-composer.vimMarkdownComposerBin}/bin/markdown-composer'
+		'';
+      })
 	  # disabled because of https://github.com/rktjmp/lush.nvim/issues/89
       (luaPlugin { plugin = lush-nvim; }) 
       # (luaPlugin { plugin = gruvbox-nvim; }) 
@@ -549,18 +497,20 @@ let
       #     })'';
       # })
 
-      # (luaPlugin {
-      #   # matches nvim-orgmode
-      #   plugin = orgmode;
-      #   config = ''
-      #   require('orgmode').setup{
-      #       org_capture_templates = {'~/nextcloud/org/*', '~/orgmode/**/*'},
-      #       org_default_notes_file = '~/orgmode/refile.org',
-      #       -- TODO add templates
-      #       org_agenda_templates = { t = { description = 'Task', template = '* TODO %?\n  %u' } },
-      #   }
-      #   '';
-      # })
+      (luaPlugin {
+        # matches nvim-orgmode
+        plugin = orgmode;
+        config = ''
+		 require('orgmode').setup_ts_grammar()
+        require('orgmode').setup{
+            org_capture_templates = {'~/nextcloud/org/*', '~/orgmode/**/*'},
+            org_default_notes_file = '~/orgmode/refile.org',
+            -- TODO add templates
+            org_agenda_templates = { t = { description = 'Task', template = '* TODO %?\n  %u' } },
+        }
+
+        '';
+      })
 
       { plugin = editorconfig-vim; }
 
@@ -568,12 +518,8 @@ let
 		# use ctrl a/xto cycle between different words
 		plugin = vim-CtrlXA;
 	  }
-      # {
-      #   plugin = jbyuki/venn.nvim;
-      # }
-      # {
-      #   plugin = telescope-nvim;
-      # }
+      # { plugin = jbyuki/venn.nvim; }
+      # { plugin = telescope-nvim; }
       {
         plugin = fzf-vim;
         config = ''
@@ -598,62 +544,42 @@ let
           " https://github.com/neovim/neovim/issues/4487
         '';
       }
-          # nnoremap <Leader>o <Cmd>FzfFiles<CR>
-          # " nnoremap <Leader>g <Cmd>FzfGitFiles<CR>
-                # nnoremap <Leader>F <Cmd>FzfFiletypes<CR>
-          # nnoremap <Leader>h <Cmd>FzfHistory<CR>
-          # nnoremap <Leader>c <Cmd>FzfCommits<CR>
-          # nnoremap <Leader>C <Cmd>FzfColors<CR>
-          # nnoremap <leader>b <Cmd>FzfBuffers<CR>
-          # nnoremap <leader>m <Cmd>FzfMarks<CR>
-          # nnoremap <leader>l <Cmd>FzfLines<CR>
-          # nnoremap <leader>t <Cmd>FzfTags<CR>
-          # nnoremap <leader>T <Cmd>FzfBTags<CR>
-          # nnoremap <leader>g <Cmd>FzfRg<CR>
 
       # defined in overrides: TODO this should be easier: like fzf-vim should be enough
       fzfWrapper
 
+      { plugin = nvim-terminal-lua; }
       {
-        plugin = nvim-terminal-lua;
-        # optional = true;
+		# display git diff while rebasing, pretty dope
+        plugin = auto-git-diff;   
       }
-      {
-        plugin = auto-git-diff;   # display git diff while rebasing, pretty dope
-      }
-      {
-        plugin = vim-dasht;
-		config = ''
-		" When in Python, also search NumPy, SciPy, and Pandas:
-		let g:dasht_filetype_docsets = {} " filetype => list of docset name regexp
-		let g:dasht_filetype_docsets['python'] = ['(num|sci)py', 'pandas']
+      # {
+      #   plugin = vim-dasht;
+		# config = ''
+		# " When in Python, also search NumPy, SciPy, and Pandas:
+		# let g:dasht_filetype_docsets = {} " filetype => list of docset name regexp
+		# let g:dasht_filetype_docsets['python'] = ['(num|sci)py', 'pandas']
+		# " search related docsets
+		# nnoremap <Leader>k :Dasht<Space>
+		# " search ALL the docsets
+		# nnoremap <Leader><Leader>k :Dasht!<Space>
+		# " search related docsets
+		# nnoremap ,k <Cmd>call Dasht([expand('<cword>'), expand('<cWORD>')])<Return>
+		# " search ALL the docsets
+		# nnoremap <silent> <Leader><Leader>K :call Dasht([expand('<cword>'), expand('<cWORD>')], '!')<Return>
+		  # '';
 
-		" search related docsets
-		nnoremap <Leader>k :Dasht<Space>
-
-		" search ALL the docsets
-		nnoremap <Leader><Leader>k :Dasht!<Space>
-
-		" search related docsets
-		nnoremap ,k <Cmd>call Dasht([expand('<cword>'), expand('<cWORD>')])<Return>
-
-		" search ALL the docsets
-		nnoremap <silent> <Leader><Leader>K :call Dasht([expand('<cword>'), expand('<cWORD>')], '!')<Return>
-		  '';
-
-        # optional = true;
-      }
+      #   # optional = true;
+      # }
       # displays a minimap on the right
       (luaPlugin { plugin =  minimap-vim; })
-      {
+      (luaPlugin {
         plugin = vim-dirvish;
 		config = ''
-		  let g:dirvish_mode=2
-		  let g:loaded_netrwPlugin = 1
-		  command! -nargs=? -complete=dir Vexplore leftabove vsplit | silent Dirvish <args>
-		  command! -nargs=? -complete=dir Sexplore belowright split | silent Dirvish <args>
+		  vim.g.dirvish_mode=2
+		  vim.g.loaded_netrwPlugin = 1
 		'';
-      }
+      })
 
       # {
       #   plugin = sql-nvim;
@@ -672,31 +598,6 @@ let
 		  # let g:SignaturePeriodicRefresh=1
 		# '';
 	  # }
-
-
-
-      # {
-      #   plugin = vim-signify;
-      #   config = ''
-      #     let g:signify_vcs_list = [ 'git']
-      #     let g:signify_priority = 1000
-      #     "let g:signify_line_color_add    = 'DiffAdd'
-      #     "let g:signify_line_color_delete = 'DiffDelete'
-      #     "let g:signify_line_color_change = 'DiffChange'
-      #     let g:signify_sign_add          = '▎'
-      #     let g:signify_sign_delete       = '▎'
-      #     let g:signify_sign_change       = '▎'
-      #     let g:signify_sign_changedelete = '▎'
-      # let g:signify_line_highlight = 0 " display added/removed lines in different colors
-      # let g:signify_sign_show_text = 1
-      # let g:signify_sign_show_count= 0
-      #     let g:signify_cursorhold_insert     = 0
-      #     let g:signify_cursorhold_normal     = 0
-      #     let g:signify_update_on_bufenter    = 1
-      #     let g:signify_update_on_focusgained = 1
-
-      #   '';
-      # }
 
       {
         plugin = vim-startify;
@@ -740,18 +641,26 @@ let
           let g:sneak#prompt = 'Sneak>'
 
           let g:sneak#streak = 0
-
-          map f <Plug>Sneak_f
+		  map f <Plug>Sneak_f
           map F <Plug>Sneak_F
           map t <Plug>Sneak_t
           map T <Plug>Sneak_T
+
         '';
+		# after = ''
+		#   map f <Plug>Sneak_f
+          # map F <Plug>Sneak_F
+          # map t <Plug>Sneak_t
+          # map T <Plug>Sneak_T
+		#  '';
+
       }
 
       {
         plugin = vim-grepper;
 		# careful these mappings are not applied as they arrive before the plug declaration
-        config = ''
+		# config="";
+        after = ''
           nnoremap <leader>rg  <Cmd>Grepper -tool git -open -switch<CR>
           nnoremap <leader>rgb  <Cmd>Grepper -tool rg -open -switch -buffer<CR>
           vnoremap <leader>rg  <Cmd>Grepper -tool rg -open -switch<CR>
@@ -760,7 +669,7 @@ let
       vim-nix
       {
         plugin = vim-obsession;
-        config = ''
+        after = ''
           map <Leader>$ <Cmd>Obsession<CR>
         '';
         # testing luaConfig (experimental)
@@ -772,23 +681,12 @@ let
       vim-rsi
       # ' " syntax file for neomutt
       # neomutt-vim
-      {
+      (luaPlugin {
         plugin = vim-sayonara;
         config = ''
-          let g:sayonara_confirm_quit = 0
+          vim.g.sayonara_confirm_quit = 0
         '';
-      }
-
-      # TODO this one will be ok once we patch it
-	  {
-		# https://github.com/euclio/vim-markdown-composer/issues/69#event-6528328732
-		# ComposerUpdate / ComposerStart
-		plugin = vim-markdown-composer;  # WIP
-		config = ''
-		  let g:markdown_composer_autostart           = 0
-		  let g:markdown_composer_binary = '${vim-markdown-composer.vimMarkdownComposerBin}/bin/markdown-composer'
-		'';
-	  }
+      })
 
       # vim-livedown
 
@@ -800,14 +698,8 @@ let
 	  # }
 
       # nvim-markdown-preview  # :MarkdownPreview
-      (luaPlugin {
-        plugin = nvim-spectre;
-      })
-
       {
         plugin = vim-commentary;
-        # config = ''
-        #   '';
       }
 
       {
@@ -835,20 +727,7 @@ let g:vimtex_indent_enabled=0
 let g:vimtex_indent_bib_enabled=1
 let g:vimtex_compiler_enabled=1 " enable new style vimtex
 let g:vimtex_compiler_progname='nvr'
-" let g:vimtex_compiler_method=
-" possibility between pplatex/pulp/latexlog
-" Note: `pplatex` and `pulp` require that `-file-line-error` is NOT passed to the LaTeX
-  " compiler. |g:vimtex_compiler_latexmk| will be updated automatically if one
-" let g:vimtex_quickfix_method="latexlog"
 let g:vimtex_quickfix_method="latexlog"
-" todo update default instead with extend ?
-" let g:vimtex_quickfix_latexlog = {
-"       \ 'underfull': 0,
-"       \ 'overfull': 0,
-"       \ 'specifier changed to': 0,
-"       \ }
-" let g:vimtex_quickfix_blgparser=
-" g:vimtex_quickfix_autojump
 
 let g:vimtex_quickfix_mode = 2 " 1=> opened automatically and becomes active (2=> inactive)
 let g:vimtex_indent_enabled=0
@@ -889,7 +768,7 @@ let g:vimtex_compiler_latexmk = {
         \}
 		'';
 	  }
-      {
+      (luaPlugin {
         plugin = unicode-vim;
 
         # " let g:Unicode_cache_directory='${pkgs.vimPlugins.unicode-vim}/share/vim-plugins/unicode-vim/autoload/unicode'
@@ -898,12 +777,13 @@ let g:vimtex_compiler_latexmk = {
 # nmap ga <Plug>(UnicodeGA)
 
         config = ''
-        let g:Unicode_data_directory='${pkgs.vimPlugins.unicode-vim}/autoload/unicode'
+        vim.g.Unicode_data_directory='${pkgs.vimPlugins.unicode-vim}/autoload/unicode'
 
-        " overrides ga
-        nmap ga <Plug>(UnicodeGA)
+        -- overrides ga
+		nnoremap ( "n", "ga",  "<Plug>(UnicodeGA)" )
+
         '';
-      }
+      })
 
   ];
 
@@ -917,6 +797,17 @@ let g:vimtex_compiler_latexmk = {
       #   '';
       # }
   ];
+
+  rawPlugins = 
+		 basePlugins
+      ++ overlayPlugins
+      ++ luaPlugins
+      # ++ fennelPlugins
+      ++ colorschemePlugins
+      ++ completionPlugins
+      ++ filetypePlugins
+      ++ cmpPlugins
+	 ;
 
   # taken from the official flake
   myPackage = pkgs.neovim;
@@ -936,9 +827,12 @@ in
     extraConfig = ''
 	  let mapleader = " "
 	  let maplocalleader = ","
-
     ''
     # concatStrings = builtins.concatStringsSep "";
+    + (lib.strings.concatStrings (
+      lib.mapAttrsToList genBlockViml vimlRcBlocks
+    ))
+	# aggregate the "after" attribute
     + (lib.strings.concatStrings (
       lib.mapAttrsToList genBlockViml vimlRcBlocks
     ))
@@ -968,19 +862,11 @@ in
       yaml-language-server
     ];
 
-	plugins = 
-		 basePlugins
-      ++ overlayPlugins
-      ++ luaPlugins
-      # ++ fennelPlugins
-      ++ colorschemePlugins
-      ++ completionPlugins
-      ++ filetypePlugins
-      ++ cmpPlugins
-      ;
+	plugins = map (x: builtins.removeAttrs x ["after"] ) rawPlugins;
   };
 
   xdg.configFile = let 
+   # TODO add the after bits
     extraLuaConfig = (lib.strings.concatStrings (
       lib.mapAttrsToList genBlockLua luaRcBlocks
     ));
