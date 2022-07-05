@@ -329,7 +329,7 @@ let
     # Packer should remain first
 	
 	{ plugin = vCoolor-vim; }
-	{ plugin = vim-lastplace; }
+	# { plugin = vim-lastplace; } # triggers a neovim bug for now
     (luaPlugin {
       plugin = packer-nvim;
       config = ''
@@ -780,7 +780,7 @@ let g:vimtex_compiler_latexmk = {
         vim.g.Unicode_data_directory='${pkgs.vimPlugins.unicode-vim}/autoload/unicode'
 
         -- overrides ga
-		nnoremap ( "n", "ga",  "<Plug>(UnicodeGA)" )
+		vim.keymap.set ( "n", "ga",  "<Plug>(UnicodeGA)" )
 
         '';
       })
@@ -824,7 +824,13 @@ in
     # source doesn't like `stdpath('config').'`
     # todo should use mkBefore ${config.programs.neovim.generatedInitrc}
 	# source $XDG_CONFIG_HOME/nvim/init.manual.vim
-    extraConfig = ''
+	extraConfig = let 
+	 genAfterBlock = x: x.after or "";
+	 # aggregate the "after" attribute
+	 afterRc = lib.strings.concatStrings (
+	   map genAfterBlock  rawPlugins
+	 );
+	in ''
 	  let mapleader = " "
 	  let maplocalleader = ","
     ''
@@ -832,10 +838,7 @@ in
     + (lib.strings.concatStrings (
       lib.mapAttrsToList genBlockViml vimlRcBlocks
     ))
-	# aggregate the "after" attribute
-    + (lib.strings.concatStrings (
-      lib.mapAttrsToList genBlockViml vimlRcBlocks
-    ))
+	+ afterRc
     ;
 
 

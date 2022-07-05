@@ -14,10 +14,11 @@ local use, _ = packer.use, packer.use_rocks
 local nnoremap = vim.keymap.set
 local map = vim.keymap.set
 
-vim.opt.rtp:prepend(os.getenv("HOME").."/neovim/plenary.nvim")
-local reload = require'plenary.reload'
-reload.reload_module('plenary')
-require'plenary'
+-- HOW TO TEST our fork of plenary
+-- vim.opt.rtp:prepend(os.getenv("HOME").."/neovim/plenary.nvim")
+-- local reload = require'plenary.reload'
+-- reload.reload_module('plenary')
+-- require'plenary'
 
 
 packer.init({
@@ -1577,15 +1578,15 @@ end
 -- nvim-colorizer {{{
 require 'terminal'.setup()
 -- }}}
-use { 'ethanholz/nvim-lastplace',
-	config = function ()
-		require'nvim-lastplace'.setup {
-			lastplace_ignore_buftype = {"quickfix", "nofile", "help"},
-			lastplace_ignore_filetype = {"gitcommit", "gitrebase", "svn", "hgcommit"},
-			lastplace_open_folds = true
-		}
-	end
-	}
+-- use { 'ethanholz/nvim-lastplace',
+-- 	config = function ()
+-- 		require'nvim-lastplace'.setup {
+-- 			lastplace_ignore_buftype = {"quickfix", "nofile", "help"},
+-- 			lastplace_ignore_filetype = {"gitcommit", "gitrebase", "svn", "hgcommit"},
+-- 			lastplace_open_folds = true
+-- 		}
+-- 	end
+-- 	}
 vim.g.UltiSnipsSnippetDirectories= {vim.fn.stdpath('config')..'/snippets' }
 vim.g.tex_flavor = "latex"
 -- Treesitter config {{{

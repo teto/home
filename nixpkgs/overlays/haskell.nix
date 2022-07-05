@@ -4,7 +4,7 @@ final: prev:
 	name = "ghc9-haskell-env";
     buildInputs = let 
       pkgs = final.pkgs;
-      ghcEnv = pkgs.haskell.packages.ghc922.ghcWithPackages(hs: [ 
+      ghcEnv = pkgs.haskell.packages.ghc923.ghcWithPackages(hs: [ 
         hs.haskell-language-server 
         hs.cabal-install
       ]);

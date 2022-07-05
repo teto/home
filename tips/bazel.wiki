@@ -63,8 +63,10 @@ to force uploading to cache
  --no_remote_accept_cached
 --attempt_to_print_relative_paths
 --logging entre 0 et 6
- --sandbox_debug
 
+use --sandbox_debug to keep the files around
+To get the location of the sandbox folder for current project, navigate to project and then run:
+$ bazel info output_base
  --execution_log_json_file
 
 bazel dump is cool
@@ -102,3 +104,10 @@ https://docs.bazel.build/versions/master/command-line-reference.html#flag--disk_
 https://docs.bazel.build/versions/3.5.0/output_directories.html
 bazel --output_user_root=./user_cache 
 
+
+version_macros
+
+
+Pour lister les providers d'une target:
+`bazel cquery //simwork/version --output starlark --starlark:expr='providers(target)'`
+https://github.com/bazelbuild/bazel/issues/9422 to show the keys

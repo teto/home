@@ -11,6 +11,7 @@ in
       ./profiles/polybar.nix
       ./profiles/sway.nix
       ./profiles/neomutt.nix
+      ./profiles/nushell.nix
       # ./hm/profiles/nova-dev.nix
       ./profiles/mail.nix
       ./profiles/alot.nix

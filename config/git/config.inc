@@ -89,3 +89,5 @@ compression = 0
   # for fzf+git aliases
   pamfix= !HASH=`git log --pretty=oneline | head -50 | fzf` && git fixit `echo ${HASH} | awk '{ print $1 }'`
 
+[core]
+	fsmonitor = true

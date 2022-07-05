@@ -13,6 +13,7 @@ time brun --config debug //luad-s2ands5-simulation:MultipleClonesTumors@run -- +
 
 # working with ghc-pkg
 ghc-pkg init ./test.db
+ghc-pkg list --global  (vs user)
 
 https://downloads.haskell.org/~ghc/latest/docs/html/users_guide/packages.html#package-environments
 
@@ -21,6 +22,8 @@ https://downloads.haskell.org/~ghc/latest/docs/html/users_guide/packages.html#pa
 Or GHC_ENVIRONMENT
 GHC_PACKAGE_PATH
 /home/teto/.ghc/x86_64-linux-8.10.7/environments/default
+
+https://downloads.haskell.org/~ghc/latest/docs/html/users_guide/packages.html#package-databases
 
 :xa
 cabal install --lib ./servant-openapi3.cabal --package-env ./foo

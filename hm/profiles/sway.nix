@@ -107,6 +107,7 @@ for_window [window_type="menu"] floating enable
     wdisplays # to show 
     wob # to display a progressbar
 	swaynotificationcenter # top cool
+	swaynag-battery # https://github.com/NixOS/nixpkgs/pull/175905
   ];
 
   programs.mako = {

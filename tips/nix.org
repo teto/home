@@ -68,3 +68,8 @@ nix path-info -Sshr $(nix-build ./shell.nix -A inputDerivation) | sort -k3 -h | 
 You need to be a trusted user:
 To select a builder you can run something akin to:
 `nix-build local-integration.nix -A osx.lb_database.build  -I nixpkgs=channel:nixos-18.03 --builders "root@spud x86_64-darwin /home/amine/.ssh/id_rsa 1 1 darwin-playground,LB,any,perf " --option cores 4`
+
+
+# how to reinstall the bootloader
+See https://www.reddit.com/r/NixOS/comments/ouxjzh/how_to_reinstall_bootloader/
+sudo NIXOS_INSTALL_BOOTLOADER=1 /nix/var/nix/profiles/system/bin/switch-to-configuration boot

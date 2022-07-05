@@ -96,7 +96,8 @@ $ wormhole send ~/.gnupg ~/.password-store ~/.ssh
 
 ## How to recover the repo cyphered files
 
-Run `nix run nixpkgs.git nixpkgs.gitAndTools.git-crypt` do decypher the files
-listed by `$ git-crypt status -e` or .gitattributes.
-`$ git-crypt unlock` should unlock the files.
+Install git-crypt do decypher the files
+Retreive the key (possibly from an existing deployement via `gpg-crypt export-key`) and use
+it on the new deployement via:
+`$ git-crypt unlock <key>` should unlock the files.
 
