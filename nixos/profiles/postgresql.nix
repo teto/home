@@ -21,6 +21,13 @@
 	  pkgs.dbeaver # java, crashes often
   ];
 
+  services.pgmanage = {
+   enable  = true;
+   connections = {
+	mini-server = "hostaddr=127.0.0.1 port=5432 dbname=postgres sslmode=require"; nuc-server = "hostaddr=192.168.0.100 port=5432 dbname=postgres"; 
+   };
+  };
+
   services.pgadmin = {
 	# this one is painful
 	# you have to create /var/lib/pgadmin and /var/log/pgadmin

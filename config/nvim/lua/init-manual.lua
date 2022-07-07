@@ -1046,6 +1046,10 @@ use 'honza/vim-snippets'
 -- 		'rafamadriz/friendly-snippets'
 -- 	},
 -- 	config = function ()
+
+
+use 'michaeladler/cmp-notmuch'
+
 local cmp = require 'cmp'
 
 -- nvim-cmp autocompletion plugin{{{

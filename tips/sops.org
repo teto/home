@@ -5,3 +5,5 @@ To use an alternate key:
 - SOPS_AGE_KEY_FILE=runner3
 - or SOPS_AGE_RECIPIENTS=KEY_CONTENT
 sops -s secrets.yaml to see metadata/master keys
+
+sops updatekeys

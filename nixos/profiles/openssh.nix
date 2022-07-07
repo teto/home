@@ -19,6 +19,11 @@
     # ];
     ports = [ 12666 ];
     startWhenNeeded = true;
+
+	extraConfig = ''
+	 HostKey /home/teto/.ssh/server_id_rsa
+	'';
+
     # authorizedKeysFiles = [
     #   "~/.ssh/id_rsa.pub"
     # ];
