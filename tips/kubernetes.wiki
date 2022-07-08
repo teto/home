@@ -120,6 +120,7 @@ Nice utilities
 - kubebox
 - k9s
 
+# to see the 
 kubectl config current-context
 kubectl config set-context
 

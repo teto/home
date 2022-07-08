@@ -1249,18 +1249,18 @@ use {
 vim.g.sonokai_style = 'atlantis'
 vim.cmd([[colorscheme sonokai]])
 -- vim.cmd([[colorscheme pywal]])
-require'sniprun'.setup({
-  -- selected_interpreters = {'Python3_fifo'},        --" use those instead of the default for the current filetype
-  -- repl_enable = {'Python3_fifo', 'R_original'},    --" enable REPL-like behavior for the given interpreters
-  -- repl_disable = {},                               --" disable REPL-like behavior for the given interpreters
-  -- possible values are 'none', 'single', 'double', or 'shadow'
-  borders = 'single',
-  --" you can combo different display modes as desired
-  display = {
-    "Classic",                    -- "display results in the command-line  area
-    "VirtualTextOk",              -- "display ok results as virtual text (multiline is shortened)
-  },
-})
+--require'sniprun'.setup({
+--  -- selected_interpreters = {'Python3_fifo'},        --" use those instead of the default for the current filetype
+--  -- repl_enable = {'Python3_fifo', 'R_original'},    --" enable REPL-like behavior for the given interpreters
+--  -- repl_disable = {},                               --" disable REPL-like behavior for the given interpreters
+--  -- possible values are 'none', 'single', 'double', or 'shadow'
+--  borders = 'single',
+--  --" you can combo different display modes as desired
+--  display = {
+--    "Classic",                    -- "display results in the command-line  area
+--    "VirtualTextOk",              -- "display ok results as virtual text (multiline is shortened)
+--  },
+--})
 
 
 vim.g.indicator_errors = ''
