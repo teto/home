@@ -11,7 +11,7 @@
 
 	  # enableTCPIP = true; # if false, use TCP via localhost only or via socket
 
-	 ensureUsers = 
+	 # ensureUsers = 
   };
 
   # see https://www.pgadmin.org/docs/pgadmin4/6.8/config_py.html

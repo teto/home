@@ -495,7 +495,8 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 -- }
 
 use "/home/teto/neovim/rest.nvim"
-
+-- provides 'NvimTree'
+use 'kyazdani42/nvim-tree.lua' 
 -- use {
 -- 	"~/telescope-frecency.nvim",
 -- 	config = function ()
