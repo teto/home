@@ -51,7 +51,7 @@
     header_value = 'default','','light gray','dark gray','light gray','dark gray'
 [search]
     [[threadline]]
-        normal = 'default','','default','default','#6d6','default'
+        normal = 'default','','default','default','#ff0000','#fff'
         focus = 'default','','light gray','light gray','default, underline','default'
         parts = date,subject,tags,mailcount
         [[[date]]]
@@ -71,7 +71,7 @@
             width = 'fit',30,30
 
         [[[subject]]]
-            normal = 'default','','light gray','default','g66','default'
+            normal = 'default','','light gray','default','g66','#ff0000'
             focus = 'standout','','yellow','light gray','yellow','default'
             width = 'weight', 1
         [[[mailcount]]]

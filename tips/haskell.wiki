@@ -119,3 +119,6 @@ https://hackage.haskell.org/package/vinyl-0.13.0/docs/Data-Vinyl-Functor.html#t:
 
 # polysemy
 Effects which don't make use of the m parameter are known as "first-order effects."
+
+
+https://ghc.gitlab.haskell.org/ghc/doc/users_guide/packages.html#envvar-GHC_PACKAGE_PATH

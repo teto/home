@@ -1,6 +1,8 @@
 initdb
 pg_ctl start
 
+createuser owning_user
+
 
 
 As my own user:
