@@ -27,7 +27,8 @@
   services.pgmanage = {
    enable  = true;
    connections = {
-	mini-server = "hostaddr=127.0.0.1 port=5432 dbname=postgres sslmode=require"; nuc-server = "hostaddr=192.168.0.100 port=5432 dbname=postgres"; 
+	# mini-server = "hostaddr=127.0.0.1 port=5432 dbname=postgres sslmode=require";
+	nuc-server = "hostaddr=127.0.0.1 port=5432 dbname=postgres"; 
    };
   };
 

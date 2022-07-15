@@ -23,3 +23,23 @@ postgresql:///test?host=%2Ftmp%2Fephemeralpg.qG7Ya5
 ```
 
 export POSTGRESQL_CONNECTION=postgres:///run/postgresql
+
+https://cloudblue.freshdesk.com/support/solutions/articles/44001888168-how-to-increase-postgresql-log-level-
+
+# Peer authentication failed for user "postgres"
+https://gist.github.com/AtulKsol/4470d377b448e56468baef85af7fd614
+Bottomline is `sudo -u postgres psql `
+ALTER USER postgres with password ‘new-password’;
+SHOW hba_file;
+
+`sudo -u postgres createuser teto` worked
+
+# How to list the tables ?
+`\l`
+
+# how to switch databases ?
+postgres=# \c sales
+
+CREATE ROLE username superuser;
+
+# \dt

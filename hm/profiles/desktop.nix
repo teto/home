@@ -233,6 +233,10 @@ in
 
   services.flameshot.enable = true;
 
+  # programs.gpg-agent = {
+	# # --max-cache-ttl
+  # };
+
   # might trigger nm-applet crash ?
   services.gpg-agent = {
     enable = true;
@@ -243,7 +247,10 @@ in
     # pinentryFlavor = "curses";
     pinentryFlavor = "qt";
     grabKeyboardAndMouse = true;  # should be set to false instead
+	# default-cache-ttl 60
     verbose = true;
+	# --max-cache-ttl
+	maxCacheTtl = 86400; # in seconds (86400 = 1 day)
     # see https://github.com/rycee/home-manager/issues/908
     # could try ncurses as well
     # extraConfig = ''

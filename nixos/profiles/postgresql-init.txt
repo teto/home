@@ -1,2 +1,2 @@
-CREATE ROLE username superuser;
+createuser teto
 
