@@ -25,7 +25,6 @@ let
 	"$GroupUs+$mod+Shift+${us}"="move ${dir}";
   };
 
-  # TODO make it a pywalflag
   sharedKeybindings = {
       # The side buttons move the window around
       "button9" = "move left";

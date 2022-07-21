@@ -1,4 +1,6 @@
 { config, lib, pkgs,  ... }:
 {
-  programs.pywal.enable = false;
+  # To select a light theme:
+  # wal --theme random_light
+  programs.pywal.enable = true;
 }

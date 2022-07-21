@@ -1,3 +1,12 @@
-# -- THEME AUTO-WRITTEN BY gtk-theme-switch2 DO NOT EDIT
-
-# -- THEME AUTO-WRITTEN BY gtk-theme-switch2 DO NOT EDIT
+gtk-theme-name="HighContrast"
+gtk-icon-theme-name="Adwaita"
+gtk-cursor-theme-name="Adwaita"
+gtk-font-name="Sans 10"
+gtk-menu-images=0
+gtk-cursor-theme-size=0
+gtk-button-images=0
+gtk-xft-antialias=1
+gtk-xft-hinting=1
+gtk-xft-hintstyle="hintslight"
+gtk-xft-rgba="rgb"
+gtk-xft-dpi=98563

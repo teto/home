@@ -1248,7 +1248,8 @@ use {
 -- use { 'jbyuki/monolithic.nvim' } -- write latex equations in ASCII
 
 vim.g.sonokai_style = 'atlantis'
-vim.cmd([[colorscheme sonokai]])
+-- vim.cmd([[colorscheme sonokai]])
+vim.cmd([[colorscheme peachpuff]])
 -- vim.cmd([[colorscheme pywal]])
 --require'sniprun'.setup({
 --  -- selected_interpreters = {'Python3_fifo'},        --" use those instead of the default for the current filetype
@@ -1583,15 +1584,15 @@ end
 -- nvim-colorizer {{{
 require 'terminal'.setup()
 -- }}}
--- use { 'ethanholz/nvim-lastplace',
--- 	config = function ()
--- 		require'nvim-lastplace'.setup {
--- 			lastplace_ignore_buftype = {"quickfix", "nofile", "help"},
--- 			lastplace_ignore_filetype = {"gitcommit", "gitrebase", "svn", "hgcommit"},
--- 			lastplace_open_folds = true
--- 		}
--- 	end
--- 	}
+use { 'ethanholz/nvim-lastplace',
+	config = function ()
+		require'nvim-lastplace'.setup {
+			lastplace_ignore_buftype = {"quickfix", "nofile", "help"},
+			lastplace_ignore_filetype = {"gitcommit", "gitrebase", "svn", "hgcommit"},
+			lastplace_open_folds = true
+		}
+	end
+	}
 vim.g.UltiSnipsSnippetDirectories= {vim.fn.stdpath('config')..'/snippets' }
 vim.g.tex_flavor = "latex"
 -- Treesitter config {{{
@@ -1799,7 +1800,7 @@ vim.cmd [[highlight IndentBlanklineIndent5 guifg=#61AFEF gui=nocombine]]
 vim.cmd [[highlight IndentBlanklineIndent6 guifg=#C678DD gui=nocombine]]
 
 
-menu_add = myMenu.menu_add
+menu_add, menu_add_cmd = myMenu.menu_add, myMenu.menu_add_cmd
 menu_add("LSP.Declaration", '<cmd>lua vim.lsp.buf.declaration()<cr>')
 menu_add("LSP.Definition", '<cmd>lua vim.lsp.buf.definition()<cr>')
 menu_add("LSP.Hover", '<cmd>lua vim.lsp.buf.references()<cr>')
@@ -1817,7 +1818,7 @@ menu_add('Diagnostic.Display_in_QF', '<cmd>lua vim.diagnostic.setqflist({open = 
 menu_add('Diagnostic.Set_severity_to_warning', '<cmd>lua vim.diagnostic.config({virtual_text = { severity = { min = vim.diagnostic.severity.WARN } }})<cr>')
 menu_add('Diagnostic.Set_severity_to_all', '<cmd>lua vim.diagnostic.config({virtual_text = { severity = nil }})<cr>')
 
-menu_add("Search.Search_and_replace", "<cmd>lua require('spectre').open()<cr>")
+menu_add_cmd("Search.Search_and_replace", "lua require('spectre').open()")
 menu_add("Search.Test", 'let a=3')
 
 menu_add("Rest.RunRequest", "<cmd>lua require('rest-nvim').run(true)<cr>")
