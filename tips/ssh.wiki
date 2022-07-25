@@ -23,3 +23,16 @@ ssh-keygen -p [-P old_passphrase] [-N new_passphrase] [-f keyfile]
 ssh-keygen -y -f ~/.ssh/id_rsa > ~/.ssh/id_rsa.pub
 
 cat ~/.ssh/id_rsa.pub | ssh username@server.address.com 'cat &gt;&gt; ~/.ssh/authorized_keys'
+
+# 
+mkdir -p $HOME/.ssh && ssh-keyscan git.novadiscovery.net >> $HOME/.ssh/known_hosts &&  chmod 600 $HOME/.ssh/known_hosts
+
+# to get a list of finger prints
+ssh-keygen -lv -f ~/.ssh/known_hosts
+
+# How to check an host is the correct one
+https://unix.stackexchange.com/questions/126908/get-ssh-server-key-fingerprint
+-l     Show fingerprint of specified public key file.
+
+
+# fingerprint of private key is the same as the public key

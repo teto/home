@@ -311,3 +311,4 @@ _fzf_compgen_dir() {
 #   print -n "\e]0;$1\a"
 # }
 
+source ~/.zshrc-nova

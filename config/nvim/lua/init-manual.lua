@@ -613,7 +613,7 @@ use {'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async'}
 
 		 -- These can be integers or a float between 0 and 1 (e.g. 0.4 for 40%)
 		 width = nil,
-		 max_width = 0.8,
+		 max_width = 0.4,
 		 min_width = 40,
 		 height = nil,
 		 max_height = 0.9,
@@ -1185,7 +1185,14 @@ use {
 			lualine_a = {'branch'},
 			lualine_b = {
 				-- path=2 => absolute path
-				{'filename', path = 1 }
+				{'filename', path = 1,
+					-- takes a function that is called when component is clicked with mouse.
+					on_click = function (nb_of_clicks, button, modifiers) print("CLICK") end,
+                   -- the function receives several arguments
+                   -- - number of clicks incase of multiple clicks
+                   -- - mouse button used (l(left)/r(right)/m(middle)/...)
+                   -- - modifiers pressed (s(shift)/c(ctrl)/a(alt)/m(meta)...)
+			   }
 			},
 
 			lualine_c = {
@@ -2025,6 +2032,7 @@ vim.api.nvim_set_keymap(
 
 -- dadbod UI sql connections
 -- let g:db_ui_winwidth = 30
+-- dadbod is controllable via DBUI
 vim.g.dbs = {
   dev = 'sqlite:///home/teto/nova/jinko3/core-platform-db/db.sqlite'
  }
