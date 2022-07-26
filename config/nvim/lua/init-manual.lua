@@ -557,16 +557,19 @@ use {'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async'}
 	 input = {
 	   -- Default prompt string
 	   default_prompt = "➤ ",
-
+		-- When true, <Esc> will close the modal
+		insert_only = true,
 	   -- These are passed to nvim_open_win
 	   anchor = "SW",
 	   relative = "cursor",
 	   border = "rounded",
-
-	   -- These can be integers or a float between 0 and 1 (e.g. 0.4 for 40%)
-	   -- prefer_width = 40,
-	   -- max_width = nil,
-	   -- min_width = 20,
+		-- These can be integers or a float between 0 and 1 (e.g. 0.4 for 40%)
+		prefer_width = 40,
+		width = nil,
+		-- min_width and max_width can be a list of mixed types.
+		-- min_width = {20, 0.2} means "the greater of 20 columns or 20% of total"
+		max_width = { 140, 0.9 },
+		min_width = { 20, 0.2 },
 
 	   -- see :help dressing_get_config
 	   get_config = nil,
@@ -612,12 +615,15 @@ use {'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async'}
 		 winblend = 10,
 
 		 -- These can be integers or a float between 0 and 1 (e.g. 0.4 for 40%)
+		 -- the min_ and max_ options can be a list of mixed types.
+		 -- max_width = {140, 0.8} means "the lesser of 140 columns or 80% of total"
 		 width = nil,
-		 max_width = 0.4,
-		 min_width = 40,
+		 max_width = { 140, 0.8 },
+		 min_width = { 40, 0.2 },
 		 height = nil,
 		 max_height = 0.9,
-		 min_height = 10,
+		 min_height = { 10, 0.2 },
+
 	   },
 
 	   -- see :help dressing_get_config

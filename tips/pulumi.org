@@ -1,0 +1,2 @@
+- name: debug events
+  debug: msg="My stack events are {{ cloud_formation_output.events | to_nice_json }}"
