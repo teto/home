@@ -216,15 +216,16 @@ vim.api.nvim_set_hl(0, 'NormalFloat', { bg='grey' })
 --     require('satellite').setup()
 --   end
 -- }
-use {
-  "max397574/colortils.nvim",
-  -- cmd = "Colortils",
-  config = function()
-    require("colortils").setup()
-  end,
-}
 -- installed via nix
-require('satellite').setup()
+-- require('satellite').setup()
+-- use {
+--   "max397574/colortils.nvim",
+--   -- cmd = "Colortils",
+--   config = function()
+--     require("colortils").setup()
+--   end,
+-- }
+
 use '~/neovim/fzf-lua' -- markdown syntax compatible with Github's
 use 'rhysd/vim-gfm-syntax' -- markdown syntax compatible with Github's
 -- use 'symphorien/vim-nixhash' -- use :NixHash
@@ -547,7 +548,7 @@ use 'kyazdani42/nvim-tree.lua'
 -- 	end
 -- }
 
-use {'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async'}
+-- use {'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async'}
 
 -- overrides vim.ui / vim.select with the backend of my choice
  use {
@@ -698,7 +699,6 @@ use {
 		})
 
 		vim.notify = require("notify")
-
 	end
 }
 
@@ -901,8 +901,8 @@ use 'marko-cerovac/material.nvim'
 -- }}}
 
 use 'skywind3000/vim-quickui' -- to design cool uis
--- use 'neovim/nvim-lspconfig' -- while fuzzing details out
-use '~/neovim/nvim-lspconfig' -- while fuzzing details out
+use 'neovim/nvim-lspconfig' -- while fuzzing details out
+-- use '~/neovim/nvim-lspconfig' -- while fuzzing details out
 
 -- use 'vim-scripts/rfc-syntax' -- optional syntax highlighting for RFC files
 -- use 'vim-scripts/coq-syntax'
@@ -1304,7 +1304,6 @@ if has_fzf_lua then
 
 elseif has_telescope then
 	require 'teto.telescope'.telescope_create_keymaps()
-
 end
 nnoremap ( "n", "<Leader>ca", function () vim.lsp.buf.code_action{} end )
 
@@ -1731,7 +1730,7 @@ if has_telescope then
 	-- This will load fzy_native and have it override the default file sorter
 	-- telescope.load_extension('fzf')
 	-- telescope.load_extension('fzy_native')
-	telescope.load_extension("notify")
+	-- telescope.load_extension("notify")
 	telescope.load_extension("frecency")
 
 	-- TODO add autocmd

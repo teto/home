@@ -21,18 +21,6 @@ aws lambda list-functions --query '[Functions[].[FunctionName,FunctionArn]]'
 
 Unable to decode Context from event response.
 
-# dada
-
-Minimum password length is 32 characters
-Require at least one uppercase letter from Latin alphabet (A-Z)
-Require at least one lowercase letter from Latin alphabet (a-z)
-Require at least one number
-Require at least one non-alphanumeric character ()
-Password expires in 120 day(s)
-Password expiration requires administrator reset
-Allow users to change their own password
-Remember last 5 password(s) and prevent reuse
-
 
 # URL lists
 
@@ -42,3 +30,8 @@ Paris => https://s3.eu-west-3.amazonaws.com
 Frankfurt => s3-eu-central-1.amazonaws.com
 
 aws s3api list-objects-v2 --bucket "XXX" --query "Contents[?LastModified>='2021-10-01'].{Key: Key}" --output text --profile nova-devops| xargs -n1 -P10 -t -I 'KEY' aws s3 rm s3://devops-xxx/'KEY' --profile nova-devops
+
+
+# openvpn configuration
+https://docs.aws.amazon.com/fr_fr/AmazonElastiCache/latest/mem-ug/accessing-elasticache.html
+https://superuser.com/questions/457020/openvpn-only-route-a-specific-ip-addresses-through-vpn
