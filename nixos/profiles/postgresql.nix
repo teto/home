@@ -19,13 +19,11 @@
   # see https://www.pgadmin.org/docs/pgadmin4/6.8/config_py.html
 
   environment.systemPackages = [
-
-	  pkgs.pgadmin # freaking hell to install
 	  pkgs.dbeaver # java, crashes often
   ];
 
   services.pgmanage = {
-   enable  = true;
+   enable  = false;
    connections = {
 	# sslmode=require
 	core-ws = "hostaddr=127.0.0.1 port=5432 dbname=postgres ";

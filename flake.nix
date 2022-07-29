@@ -163,6 +163,9 @@
                   ./nixos/profiles/steam.nix
                   ./nixos/profiles/qemu.nix
                   ./nixos/profiles/adb.nix
+				  # usually inactive, just to test some stuff
+                  # ./nixos/profiles/gitlab-runner.nix
+
                   ./nixos/modules/libvirtd.nix
                   ./nixos/profiles/chromecast.nix
                   ./nixos/profiles/virtualbox.nix
