@@ -1,4 +1,6 @@
 # How to create a tunnel
+# https://linuxize.com/post/how-to-setup-ssh-tunneling/
+ssh -L [LOCAL_IP:]LOCAL_PORT:DESTINATION:DESTINATION_PORT [USER@]SSH_SERVER
 ssh -i key ec2-user@ec2-X-X-X-X.eu-central-1.compute.amazonaws.com -f -N -L 6379:DOMAIN.roevuh.euc1.cache.amazonaws.com:6379
 
 # To remove a trusted server
