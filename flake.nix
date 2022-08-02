@@ -270,8 +270,8 @@
                 ({ config, lib, pkgs,  ... }:
                 {
                   home.packages = [
-                    self.inputs.purebred.packages.${system}.purebred
-
+					# purebred takes too much space
+                    # self.inputs.purebred.packages.${system}.purebred
                   ];
 
                 })
