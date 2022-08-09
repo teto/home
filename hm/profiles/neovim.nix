@@ -65,9 +65,7 @@ let
     #   plugin = aniseed;
 # # " let g:aniseed#env = v:true
 # # " lua require('aniseed.env').init()
-
     # }
-
   ];
 
   filetypePlugins = with pkgs.vimPlugins; [
@@ -799,7 +797,17 @@ let g:vimtex_compiler_latexmk = {
   ];
 
   rawPlugins = 
-		 basePlugins
+		 
+	 # [
+	  # this one must be first
+	  # (luaPlugin {
+	  #  plugin = myVimPlugins.import-nvim;
+	   
+	  #  config = "local import = require'import'";
+	  # }) 
+	 # ] 
+	 # ++
+	     basePlugins
       ++ overlayPlugins
       ++ luaPlugins
       # ++ fennelPlugins
@@ -876,7 +884,7 @@ in
 
   in {
     # a copy of init.vim in fact
-	 "nvim/lua/init-home-manager.lua".text =  extraLuaConfig;
+	 "nvim/lua/init-home-manager.lua".text = extraLuaConfig;
     # "nvim/init.generated.vim".text = config.programs.neovim.generatedConfigViml;
     # "nvim/init.generated.lua".text = config.programs.neovim.generatedConfigs.lua;
   };

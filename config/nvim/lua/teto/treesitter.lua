@@ -55,3 +55,5 @@ config.config = config.setup {
 }
 -- return config.config
 
+-- mentioned here https://www.reddit.com/r/neovim/comments/wj8txv/very_slow_input_latency_for_haskell_when/
+-- require('vim.treesitter.query').set_query('haskell', 'injections', '')

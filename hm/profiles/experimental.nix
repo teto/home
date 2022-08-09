@@ -17,6 +17,12 @@ in
   #   };
   # };
 
+  programs.aerc = {
+	enable = true;
+	# .enable = true;
+	extraConfig.general.unsafe-accounts-conf = true;
+  };
+
   programs.xdg.enable = true;
 
   home.packages = with pkgs; [

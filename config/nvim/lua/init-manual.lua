@@ -256,22 +256,22 @@ use 'bogado/file-line' -- to open a file at a specific line
 -- call :NR on a region than :w . coupled with b:nrrw_aucmd_create,
 -- use 'chrisbra/NrrwRgn' -- to help with multi-ft files
 use 'chrisbra/vim-diff-enhanced' --
-use { 'ldelossa/gh.nvim',
-    requires = { { 'ldelossa/litee.nvim' } },
-	config = function ()
-		require('litee.lib').setup({
-			-- this is where you configure details about your panel, such as
-			-- whether it toggles on the left, right, top, or bottom.
-			-- leaving this blank will use the defaults.
-			-- reminder: gh.nvim uses litee.lib to implement core portions of its UI.
-		})
-		require('litee.gh').setup({
-			-- this is where you configure details about gh.nvim directly relating
-			-- to GitHub integration.
-		})
+-- use { 'ldelossa/gh.nvim',
+--     requires = { { 'ldelossa/litee.nvim' } },
+-- 	config = function ()
+-- 		require('litee.lib').setup({
+-- 			-- this is where you configure details about your panel, such as
+-- 			-- whether it toggles on the left, right, top, or bottom.
+-- 			-- leaving this blank will use the defaults.
+-- 			-- reminder: gh.nvim uses litee.lib to implement core portions of its UI.
+-- 		})
+-- 		require('litee.gh').setup({
+-- 			-- this is where you configure details about gh.nvim directly relating
+-- 			-- to GitHub integration.
+-- 		})
 
-	end
-  }
+-- 	end
+--   }
 use 'rhysd/git-messenger.vim' -- to show git message :GitMessenger
 
 -- use 'tweekmonster/nvim-api-viewer', {'on': 'NvimAPI'} -- see nvim api
@@ -1261,8 +1261,8 @@ use {
 -- use { 'jbyuki/monolithic.nvim' } -- write latex equations in ASCII
 
 vim.g.sonokai_style = 'atlantis'
--- vim.cmd([[colorscheme sonokai]])
-vim.cmd([[colorscheme peachpuff]])
+vim.cmd([[colorscheme sonokai]])
+-- vim.cmd([[colorscheme peachpuff]])
 -- vim.cmd([[colorscheme pywal]])
 --require'sniprun'.setup({
 --  -- selected_interpreters = {'Python3_fifo'},        --" use those instead of the default for the current filetype
@@ -1731,7 +1731,7 @@ if has_telescope then
 	-- telescope.load_extension('fzf')
 	-- telescope.load_extension('fzy_native')
 	-- telescope.load_extension("notify")
-	telescope.load_extension("frecency")
+	-- telescope.load_extension("frecency")
 
 	-- TODO add autocmd
 	-- User TelescopePreviewerLoaded
