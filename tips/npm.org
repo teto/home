@@ -1,0 +1,1 @@
+npm list -g allows to list installed programs

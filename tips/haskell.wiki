@@ -79,7 +79,7 @@ NT = natural transformation
 
 
 # how to debug timing
-
+https://downloads.haskell.org/~ghc/9.0.1/docs/html/users_guide/debugging.html
 -ddump-timings
 
 

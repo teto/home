@@ -1,5 +1,12 @@
 `When you use an endpoint with no Region, AWS routes the Amazon EC2 request to US East (N. Virginia) (us-east-1), which is the default Region for API calls. `
 
+# s3 
+
+How to download files with a pattern
+https://stackoverflow.com/questions/38834708/how-can-i-use-wildcards-to-cp-a-group-of-files-with-the-aws-cli
+e.g. `aws s3 cp s3://data/ . --recursive --exclude "*" --include "2016-08*"`
+
+
 aws --debug
 --endpoint-url
 

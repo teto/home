@@ -2,6 +2,10 @@
 # nixos/modules/programs/environment.nix
 environment.profileRelativeSessionVariables =
 
+https://github.com/NixOS/nixpkgs/pull/185719
+
+maintainers/scripts/update.nix --argstr luarocks-nix
+
 nix profile diff-closures --profile /nix/var/nix/profiles/system
 nix flake add mine /home/teto/nixpkgs
 nix print-dev-env --profile /path/to/profile/to/creat

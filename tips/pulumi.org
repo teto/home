@@ -1,2 +1,32 @@
-- name: debug events
-  debug: msg="My stack events are {{ cloud_formation_output.events | to_nice_json }}"
+pulumi -C buildlib/infra-python up -s dev -y -v9 -d --logtostderr
+pulumi up --verbose 9 --logtostderr
+
+pulumi plugin ls
+
+pulumi config get redisPassword
+
+# reference 
+Two values are passed to the get function - the logical name Pulumi will use to refer to the resource, and the physical ID that the resource has in the target cloud.
+https://www.pulumi.com/docs/guides/adopting/import/
+
+https://www.pulumi.com/docs/troubleshooting/#diagnosing-issues
+https://www.pulumi.com/docs/troubleshooting/#register-the-provider-first
+
+pulumi plugin install --reinstall -v9 --logtostderr -C buildlib/infra-python/
+
+
+https://stackoverflow.com/questions/64628965/how-do-i-retrieve-property-a-of-pulumi-resource-using-python
+https://www.pulumi.com/docs/intro/concepts/inputs-outputs/#outputs-and-strings
+
+
+  example_tag = aws.ec2.Tag("exampleTag",
+      resource_id=server.id,
+      key="Name",
+      value="Redis relay")
+
+
+
+Pulumi async:
+https://www.leebriggs.co.uk/blog/2021/05/09/pulumi-apply
+ 
+  pulumi config get redisPassword

@@ -1,5 +1,8 @@
+To list keys: "KEYS *"
+To flush all: "flushall "
+
 get "borrow.xxx"
 
+create a key: SET title "The Hobbit"
 zcard
-
 zrange

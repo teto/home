@@ -900,6 +900,7 @@ use 'NLKNguyen/papercolor-theme'
 use 'marko-cerovac/material.nvim'
 -- }}}
 
+use 'anuvyklack/hydra.nvim' -- to create submodes
 use 'skywind3000/vim-quickui' -- to design cool uis
 use 'neovim/nvim-lspconfig' -- while fuzzing details out
 -- use '~/neovim/nvim-lspconfig' -- while fuzzing details out
