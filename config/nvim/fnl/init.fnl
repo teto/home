@@ -1,5 +1,3 @@
-;; The name is up to you.
-(module nvim-config
-  {require {a aniseed.core}})
-
-(a.println "Hello, World!")
+;; ~/.config/nvim/fnl/is_neat.fnl
+;; put your fennel code in fnl/
+(fn [what] (print what "is neat!"))

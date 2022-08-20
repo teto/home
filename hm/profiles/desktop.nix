@@ -2,7 +2,8 @@
 let
   terminalCommand = pkgs.kitty;
 
-  pass-custom = (pkgs.pass.override {     waylandSupport = true; }).withExtensions(ext: with ext; [pass-import]);
+  pass-custom = (pkgs.pass.override { waylandSupport = true; }).withExtensions(ext:
+   with ext; [pass-import]);
 
   devPkgs = all: with pkgs; let
     in
@@ -11,9 +12,7 @@ let
     # nodePackages.bash-language-server
     # just in my branch :'(
     # luaPackages.lua-lsp
-
-
-      # gdb-debug = prev.enableDebgging prev.gdb ;
+	# gdb-debug = prev.enableDebgging prev.gdb ;
     # gitAndTools.git-annex # fails on unstable
     # gitAndTools.git-remote-hg
     # nix-prefetch-scripts # broken
@@ -42,6 +41,7 @@ let
     rpl    # to replace strings across files
     universal-ctags  # there are many different ctags, be careful !
 	tio # serial console reader
+	wine 
   ]
   ++ lib.optionals all [
     hexyl  # hex editor
@@ -108,7 +108,7 @@ let
     hunspellDicts.fr-any
     libnotify
     # luarocks
-    magic-wormhole  # super tool to exchange secrets between computers
+    # magic-wormhole  # super tool to exchange secrets between computers
     moc-wrapped  # music player
     mupdf.bin # evince does better too
     ncpamixer # pulseaudio TUI mixer

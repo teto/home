@@ -18,7 +18,6 @@ let
 	" }}}
 	'';
 
-
   luaRcBlocks = {
 	appearance = ''
       -- draw a line on 80th column
@@ -62,14 +61,50 @@ let
 # Plug 'Olical/aniseed' " dependency of ?
 # Plug 'bakpakin/fennel.vim'
   fennelPlugins = with pkgs.vimPlugins; [
-    #   plugin = aniseed;
-# # " let g:aniseed#env = v:true
-# # " lua require('aniseed.env').init()
-    # }
+   # {  plugin = aniseed;
+	 # runtime = {
+   #      "ftplugin/c.vim".text = "setlocal omnifunc=v:lua.vim.lsp.omnifunc";
+	  # # "toto".text = ''
+		# # -- test fennel
+	  # #  '';
+	 # };
+	# # " let g:aniseed#env = v:true
+	# # " lua require('aniseed.env').init()
+   #  # }
+   # }
+   {
+	 plugin = hotpot-nvim;
+	 type = "lua";
+	 config = ''
+	require("hotpot").setup({
+	  -- allows you to call `(require :fennel)`.
+	  -- recommended you enable this unless you have another fennel in your path.
+	  -- you can always call `(require :hotpot.fennel)`.
+	  provide_require_fennel = false,
+	  -- show fennel compiler results in when editing fennel files
+	  enable_hotpot_diagnostics = true,
+	  -- compiler options are passed directly to the fennel compiler, see
+	  -- fennels own documentation for details.
+	  compiler = {
+		-- options passed to fennel.compile for modules, defaults to {}
+		modules = {
+		  -- not default but recommended, align lua lines with fnl source
+		  -- for more debuggable errors, but less readable lua.
+		  -- correlate = true
+		},
+		-- options passed to fennel.compile for macros, defaults as shown
+		macros = {
+		  env = "_COMPILER" -- MUST be set along with any other options
+		}
+	  }
+	})
+	 '';
+	}
   ];
 
   filetypePlugins = with pkgs.vimPlugins; [
    	{ plugin = wmgraphviz-vim; }
+   	{ plugin = fennel-vim; }
 	{ plugin = vim-toml; }
       {
         plugin = dhall-vim;
@@ -121,6 +156,13 @@ let
     })
     (luaPlugin {
       plugin = trouble-nvim;
+	 runtime = {
+        "ftplugin/c.vim".text = "setlocal omnifunc=v:lua.vim.lsp.omnifunc";
+
+	  # "toto".text = ''
+		# -- test fennel
+	  #  '';
+	 };
     })
     {
       plugin = auto-git-diff;
@@ -810,7 +852,7 @@ let g:vimtex_compiler_latexmk = {
 	     basePlugins
       ++ overlayPlugins
       ++ luaPlugins
-      # ++ fennelPlugins
+      ++ fennelPlugins
       ++ colorschemePlugins
       ++ completionPlugins
       ++ filetypePlugins
@@ -887,5 +929,12 @@ in
 	 "nvim/lua/init-home-manager.lua".text = extraLuaConfig;
     # "nvim/init.generated.vim".text = config.programs.neovim.generatedConfigViml;
     # "nvim/init.generated.lua".text = config.programs.neovim.generatedConfigs.lua;
-  };
+   # }
+   # // {
+
+
+	# # TODO should be aggregated from
+	 # "ftplugin/c.vim".text = "setlocal omnifunc=v:lua.vim.lsp.omnifunc";
+
+	};
 }

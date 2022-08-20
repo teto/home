@@ -3,7 +3,7 @@
 
   programs.nushell = {
     enable = true;
-		   configFile.text = ''
+	  configFile.text = ''
       let $config = {
         filesize_metric: false
         table_mode: rounded

@@ -306,7 +306,6 @@ use 'alok/notational-fzf-vim' -- to take notes, :NV
 use { 'hkupty/iron.nvim',
 	config = function ()
 		local iron = require("iron.core")
-
 		iron.setup {
 		config = {
 			-- If iron should expose `<plug>(...)` mappings for the plugins
@@ -316,7 +315,9 @@ use { 'hkupty/iron.nvim',
 			-- Your repl definitions come here
 			repl_definition = {
 				sh = { command = {"zsh"} },
-				nix = { command = {"nix",  "repl", "/home/teto/nixpkgs"} }
+				nix = { command = {"nix",  "repl", "/home/teto/nixpkgs"} },
+				-- copied from the nix wrapper :/
+				lua = { command = "/nix/store/snzm30m56ps3wkn24van553336a4yylh-luajit-2.1.0-2022-04-05-env/bin/lua"}
 			},
 			repl_open_cmd = require('iron.view').curry.bottom(40),
 			-- how the REPL window will be opened, the default is opening
@@ -869,22 +870,42 @@ use { 'notomo/gesture.nvim' , opt = true; }
 	-- }
 use { 'onsails/lspkind-nvim' }
 -- use { "rktjmp/lush.nvim" }
-
--- use {
---	'phaazon/hop.nvim',
---	config = function ()
---		require 'hop'.setup {}
---	end
--- }   -- sneak.vim equivalent
+use {
+	'rktjmp/hotpot.nvim',
+	config = function ()
+		require("hotpot").setup({
+		-- allows you to call `(require :fennel)`.
+		-- recommended you enable this unless you have another fennel in your path.
+		-- you can always call `(require :hotpot.fennel)`.
+		provide_require_fennel = false,
+		-- show fennel compiler results in when editing fennel files
+		enable_hotpot_diagnostics = true,
+		-- compiler options are passed directly to the fennel compiler, see
+		-- fennels own documentation for details.
+		compiler = {
+			-- options passed to fennel.compile for modules, defaults to {}
+			modules = {
+			-- not default but recommended, align lua lines with fnl source
+			-- for more debuggable errors, but less readable lua.
+			-- correlate = true
+			},
+			-- options passed to fennel.compile for macros, defaults as shown
+			macros = {
+			env = "_COMPILER" -- MUST be set along with any other options
+			}
+		}
+		})
+	end
+}
 
 use { 'alec-gibson/nvim-tetris', opt = true }
 
 -- use { 'mfussenegger/nvim-dap'} -- debug adapter protocol
-use {
-	-- a plugin for interacting with bazel :Bazel build //some/package:sometarget
-	-- supports autocompletion
-	'bazelbuild/vim-bazel' , requires = { 'google/vim-maktaba' }
-}
+-- use {
+-- 	-- a plugin for interacting with bazel :Bazel build //some/package:sometarget
+-- 	-- supports autocompletion
+-- 	'bazelbuild/vim-bazel' , requires = { 'google/vim-maktaba' }
+-- }
 use 'bazelbuild/vim-ft-bzl'
 use 'PotatoesMaster/i3-vim-syntax'
 
@@ -1936,7 +1957,7 @@ vim.g.quickui_border_style = 1
 
 -- " TODO map to lua create_menu()
 -- map <RightMouse>  <Cmd>call quickui#context#open(content, quick_opts)<CR>
-vim.keymap.set('n',  '<RightMouse>', '<Cmd>lua open_contextual_menu()<CR>' )
+-- vim.keymap.set('n',  '<RightMouse>', '<Cmd>lua open_contextual_menu()<CR>' )
 
 -- " can't click on it plus it disappears
 -- " map <RightMouse>  <Cmd>lua create_menu()<CR>
@@ -1976,15 +1997,6 @@ vim.g.goyo_width = 120
 -- -- Send the selected text to the REPL
 -- vmap <leader>rs  <Plug>(ReplSend)
 -- }}}
--- iron.nvim {{{
--- cp = repeat the previous command
--- ctr send a chunk of text with motion
--- nmap <localleader>t <Plug>(iron-send-motion)
--- vim.g.iron_repl_open_cmd=--vsplit--
-vim.g.iron_map_defaults=0
-vim.g.iron_map_extended=0
-
---}}}
 -- alok/notational-fzf-vim {{{
 -- use c-x to create the note
 -- vim.g.nv_search_paths = []
