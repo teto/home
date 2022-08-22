@@ -12,6 +12,14 @@ let
       -- }}}
 	  '';
 
+  # pluginConfigLua = p:
+  #   if p ? plugin && (p.config or "") != "" then ''
+  #     -- ${p.plugin.pname} {{{
+  #     ${p.config}
+  #     -- }}}
+  #   '' else
+  #     "";
+
   genBlockViml = title: content: lib.optionalString (content != null) ''
     " ${title} {{{
     ${content}
@@ -30,6 +38,13 @@ let
       vim.o.fillchars='foldopen:▾,foldclose:▸,msgsep:‾'
 	  vim.o.foldcolumn='auto:2'
 	'';
+	# dealingwithpdf= ''
+	#   " Read-only pdf through pdftotext / arf kinda fails silently on CJK documents
+	#   " autocmd BufReadPost *.pdf silent %!pdftotext -nopgbrk -layout -q -eol unix "%" - | fmt -w78
+
+	#   " convert all kinds of files (but pdf) to plain text
+	#   autocmd BufReadPost *.doc,*.docx,*.rtf,*.odp,*.odt silent %!pandoc "%" -tplain -o /dev/stdout
+	# '';
 
     # sessionoptions = ''
     #   set sessionoptions-=terminal
@@ -37,15 +52,7 @@ let
     # '';
   };
 
-  vimlRcBlocks = {
-	dealingwithpdf= ''
-	  " Read-only pdf through pdftotext / arf kinda fails silently on CJK documents
-	  " autocmd BufReadPost *.pdf silent %!pdftotext -nopgbrk -layout -q -eol unix "%" - | fmt -w78
-
-	  " convert all kinds of files (but pdf) to plain text
-	  autocmd BufReadPost *.doc,*.docx,*.rtf,*.odp,*.odt silent %!pandoc "%" -tplain -o /dev/stdout
-	'';
-  };
+  vimlRcBlocks = { };
 
 
   myVimPluginsOverlay = pkgs.callPackage ../../nixpkgs/overlays/vim-plugins/generated.nix {
@@ -72,9 +79,9 @@ let
 	# # " lua require('aniseed.env').init()
    #  # }
    # }
-   {
+   (luaPlugin {
 	 plugin = hotpot-nvim;
-	 type = "lua";
+	 # type = "lua";
 	 config = ''
 	require("hotpot").setup({
 	  -- allows you to call `(require :fennel)`.
@@ -99,27 +106,19 @@ let
 	  }
 	})
 	 '';
-	}
+	})
   ];
 
   filetypePlugins = with pkgs.vimPlugins; [
    	{ plugin = wmgraphviz-vim; }
    	{ plugin = fennel-vim; }
 	{ plugin = vim-toml; }
-      {
-        plugin = dhall-vim;
-        config = ''
-          " dhall.vim config
-        '';
-      }
-      idris-vim
+	{ plugin = dhall-vim; }
+	idris-vim
   ];
 
-  cmpPlugins = [
-  ];
   luaPlugins = with pkgs.vimPlugins; [
     {
-
       plugin = (nvim-treesitter.withPlugins (
           plugins: with plugins; [
             tree-sitter-bash
@@ -133,7 +132,6 @@ let
             tree-sitter-html  # for rest.nvim
             tree-sitter-norg
             tree-sitter-org-nvim
-            # tree-sitter-org
           ]
         ));
     }
@@ -145,23 +143,63 @@ let
 	#   optional = true;
 	# })
 
-    (luaPlugin {
-      plugin = sniprun;
-      # type = "lua";
-	  # config = ''
-		# '';
-    })
+    # (luaPlugin {
+    #   plugin = sniprun;
+    # })
     (luaPlugin {
       plugin = urlview-nvim;
     })
     (luaPlugin {
       plugin = trouble-nvim;
+	  config = ''
+	require'trouble'.setup {
+	position = "bottom", -- position of the list can be: bottom, top, left, right
+	height = 10, -- height of the trouble list when position is top or bottom
+	width = 50, -- width of the list when position is left or right
+	icons = false, -- use devicons for filenames
+	-- mode = "workspace_diagnostics", -- "lsp_workspace_diagnostics", "lsp_document_diagnostics", "quickfix", "lsp_references", "loclist"
+	-- fold_open = "", -- icon used for open folds
+	-- fold_closed = "", -- icon used for closed folds
+	action_keys = { -- key mappings for actions in the trouble list
+		-- map to {} to remove a mapping, for example:
+		-- close = {},
+		close = "q", -- close the list
+		cancel = "<esc>", -- cancel the preview and get back to your last window / buffer / cursor
+		refresh = "r", -- manually refresh
+		jump = {"<cr>", "<tab>"}, -- jump to the diagnostic or open / close folds
+		open_split = { "<c-x>" }, -- open buffer in new split
+		open_vsplit = { "<c-v>" }, -- open buffer in new vsplit
+		open_tab = { "<c-t>" }, -- open buffer in new tab
+		jump_close = {"o"}, -- jump to the diagnostic and close the list
+		toggle_mode = "m", -- toggle between "workspace" and "document" diagnostics mode
+		toggle_preview = "P", -- toggle auto_preview
+		hover = "K", -- opens a small poup with the full multiline message
+		preview = "p", -- preview the diagnostic location
+		close_folds = {"zM", "zm"}, -- close all folds
+		open_folds = {"zR", "zr"}, -- open all folds
+		toggle_fold = {"zA", "za"}, -- toggle fold of current file
+		previous = "k", -- preview item
+		next = "j" -- next item
+	},
+	-- indent_lines = true, -- add an indent guide below the fold icons
+	-- auto_open = false, -- automatically open the list when you have diagnostics
+	-- auto_close = false, -- automatically close the list when you have no diagnostics
+	-- auto_preview = true, -- automatyically preview the location of the diagnostic. <esc> to close preview and go back to last window
+	-- auto_fold = false, -- automatically fold a file trouble list at creation
+	signs = {
+		-- icons / text used for a diagnostic
+		error = "",
+		warning = "",
+		hint = "",
+		information = "",
+		other = "﫠"
+	},
+	use_diagnostic_signs = true -- enabling this will use the signs defined in your lsp client
+	}
+	'';
+
 	 runtime = {
         "ftplugin/c.vim".text = "setlocal omnifunc=v:lua.vim.lsp.omnifunc";
-
-	  # "toto".text = ''
-		# -- test fennel
-	  #  '';
 	 };
     })
     {
@@ -171,53 +209,54 @@ let
 	  # # should be autoinstalled via deps really
     #   plugin = plenary-nvim;
     # }
-    (luaPlugin {
-      plugin = gitsigns-nvim;
-      config = ''
-        require 'gitsigns'.setup {
-            -- -- '│' passe mais '▎' non :s
-        signs = {
-            add          = {hl = 'GitSignsAdd'   , text ='▎', numhl='GitSignsAddNr'   , linehl='GitSignsAddLn'},
-            change       = {hl = 'GitSignsChange', text ='▎', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
-            delete       = {hl = 'GitSignsDelete', text ='▎', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
-            topdelete    = {hl = 'GitSignsDelete', text ='▎', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
-            changedelete = {hl = 'GitSignsChange', text ='▎', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
-          },
-          numhl = false,
-          linehl = false,
-          keymaps = {
-            -- Default keymap options
-            noremap = true,
-            buffer = true,
 
-            -- ['n ]c'] = { expr = true, "&diff ? ']c' : '<cmd>lua require\"gitsigns\".next_hunk()<CR>'"},
-            -- ['n [c'] = { expr = true, "&diff ? '[c' : '<cmd>lua require\"gitsigns\".prev_hunk()<CR>'"},
+    # (luaPlugin {
+    #   plugin = gitsigns-nvim;
+    #   config = ''
+    #     require 'gitsigns'.setup {
+    #     -- '│' passe mais '▎' non :s
+    #     signs = {
+    #         add          = {hl = 'GitSignsAdd'   , text ='▎', numhl='GitSignsAddNr'   , linehl='GitSignsAddLn'},
+    #         change       = {hl = 'GitSignsChange', text ='▎', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
+    #         delete       = {hl = 'GitSignsDelete', text ='▎', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
+    #         topdelete    = {hl = 'GitSignsDelete', text ='▎', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
+    #         changedelete = {hl = 'GitSignsChange', text ='▎', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
+    #       },
+    #       numhl = false,
+    #       linehl = false,
+    #       keymaps = {
+    #         -- Default keymap options
+    #         noremap = true,
+    #         buffer = true,
 
-            -- ['n <leader>hs'] = '<cmd>lua require"gitsigns".stage_hunk()<CR>',
-            -- ['n <leader>hu'] = '<cmd>lua require"gitsigns".undo_stage_hunk()<CR>',
-            -- ['n <leader>hr'] = '<cmd>lua require"gitsigns".reset_hunk()<CR>',
-            -- ['n <leader>hp'] = '<cmd>lua require"gitsigns".preview_hunk()<CR>',
-            -- ['n <leader>hb'] = '<cmd>lua require"gitsigns".blame_line()<CR>',
-          },
-          watch_gitdir = {
-            interval = 1000,
-            follow_files = true
-          },
-          current_line_blame = false,
-          current_line_blame_opts = {
-                delay = 1000,
-                virt_text_pos = 'eol'
-            },
-          sign_priority = 6,
-          update_debounce = 100,
-          status_formatter = nil, -- Use default
-          word_diff = true,
-          diff_opts = {
-              internal = false
-          }  -- If luajit is present
-        }'';
+    #         -- ['n ]c'] = { expr = true, "&diff ? ']c' : '<cmd>lua require\"gitsigns\".next_hunk()<CR>'"},
+    #         -- ['n [c'] = { expr = true, "&diff ? '[c' : '<cmd>lua require\"gitsigns\".prev_hunk()<CR>'"},
 
-    })
+    #         -- ['n <leader>hs'] = '<cmd>lua require"gitsigns".stage_hunk()<CR>',
+    #         -- ['n <leader>hu'] = '<cmd>lua require"gitsigns".undo_stage_hunk()<CR>',
+    #         -- ['n <leader>hr'] = '<cmd>lua require"gitsigns".reset_hunk()<CR>',
+    #         -- ['n <leader>hp'] = '<cmd>lua require"gitsigns".preview_hunk()<CR>',
+    #         -- ['n <leader>hb'] = '<cmd>lua require"gitsigns".blame_line()<CR>',
+    #       },
+    #       watch_gitdir = {
+    #         interval = 1000,
+    #         follow_files = true
+    #       },
+    #       current_line_blame = false,
+    #       current_line_blame_opts = {
+    #             delay = 1000,
+    #             virt_text_pos = 'eol'
+    #         },
+    #       sign_priority = 6,
+    #       update_debounce = 300,
+    #       status_formatter = nil, -- Use default
+    #       word_diff = true,
+    #       diff_opts = {
+    #           internal = false
+    #       }  -- If luajit is present
+    #     }'';
+
+    # })
     # {
     #   plugin = fidget-nvim;
     #   type = "lua";
@@ -271,8 +310,8 @@ let
     vim-lion # Use with gl/L<text object><character to align to 
 	(luaPlugin {
 	 plugin = nvim-spectre;
-	 after = ''
-	 nnoremap ( "n", "<leader>S",  function() require('spectre').open() end )
+	 config = ''
+	 -- nnoremap ( "n", "<leader>S",  function() require('spectre').open() end )
 	 '';
 
 
@@ -337,14 +376,14 @@ let
 
   completionPlugins = with pkgs.vimPlugins; [
 	(luaPlugin { plugin = nvim-cmp; })
-	(luaPlugin { plugin = cmp-nvim-lsp; })
-	(luaPlugin { plugin = cmp-cmdline-history; })
-	(luaPlugin { plugin = cmp-conventionalcommits; })
-	(luaPlugin { plugin = cmp-digraphs; })
+	# (luaPlugin { plugin = cmp-nvim-lsp; })
+	# (luaPlugin { plugin = cmp-cmdline-history; })
+	# (luaPlugin { plugin = cmp-conventionalcommits; })
+	# (luaPlugin { plugin = cmp-digraphs; })
 	# (luaPlugin { plugin = cmp-rg; })
 	# (luaPlugin { plugin = cmp-zsh; })
-    vim-vsnip
-    vim-vsnip-integ
+    # vim-vsnip
+    # vim-vsnip-integ
 
   ];
 
@@ -368,7 +407,7 @@ let
   basePlugins = with pkgs.vimPlugins; [
     # Packer should remain first
 	
-	{ plugin = vCoolor-vim; }
+	# { plugin = vCoolor-vim; }
 	# { plugin = vim-lastplace; } # triggers a neovim bug for now
     (luaPlugin {
       plugin = packer-nvim;
@@ -466,22 +505,22 @@ let
       # })
       (luaPlugin { plugin = glow-nvim; })
 
-      # (luaPlugin { plugin = fzf-lua; })
+      (luaPlugin { plugin = fzf-lua; })
 
-	  { 
+	  (luaPlugin { 
 		# really helps with syntax highlighting
 		plugin = haskell-vim; 
 		config = ''
-		  let g:haskell_enable_quantification = 1   " to enable highlighting of `forall`
-		  let g:haskell_enable_recursivedo = 1      " to enable highlighting of `mdo` and `rec`
-		  let g:haskell_enable_arrowsyntax = 1      " to enable highlighting of `proc`
-		  let g:haskell_enable_pattern_synonyms = 1 " to enable highlighting of `pattern`
-		  let g:haskell_enable_typeroles = 1        " to enable highlighting of type roles
-		  let g:haskell_enable_static_pointers = 1  " to enable highlighting of `static`
-		  let g:haskell_backpack = 1                " to enable highlighting of backpack keywords
-		  let g:haskell_indent_disable=1
+		  vim.g.haskell_enable_quantification = 1   -- to enable highlighting of `forall`
+		  vim.g.haskell_enable_recursivedo = 1      -- to enable highlighting of `mdo` and `rec`
+		  vim.g.haskell_enable_arrowsyntax = 1      -- to enable highlighting of `proc`
+		  vim.g.haskell_enable_pattern_synonyms = 1 -- to enable highlighting of `pattern`
+		  vim.g.haskell_enable_typeroles = 1        -- to enable highlighting of type roles
+		  vim.g.haskell_enable_static_pointers = 1  -- to enable highlighting of `static`
+		  vim.g.haskell_backpack = 1                -- to enable highlighting of backpack keywords
+		  vim.g.haskell_indent_disable=1
 		'';
-	  }  
+	  })  
 # " gutentags + gutenhasktags {{{
 # " to keep logs GutentagsToggleTrace
 # " some commands/functions are not available by default !!
@@ -537,20 +576,21 @@ let
       #     })'';
       # })
 
-      (luaPlugin {
-        # matches nvim-orgmode
-        plugin = orgmode;
-        config = ''
-		 require('orgmode').setup_ts_grammar()
-        require('orgmode').setup{
-            org_capture_templates = {'~/nextcloud/org/*', '~/orgmode/**/*'},
-            org_default_notes_file = '~/orgmode/refile.org',
-            -- TODO add templates
-            org_agenda_templates = { t = { description = 'Task', template = '* TODO %?\n  %u' } },
-        }
+	  # it depends on nvim-treesitter
+      # (luaPlugin {
+      #   # matches nvim-orgmode
+      #   plugin = orgmode;
+		# 		 require('orgmode').setup_ts_grammar()
+      #   config = ''
+      #   require('orgmode').setup{
+      #       org_capture_templates = {'~/nextcloud/org/*', '~/orgmode/**/*'},
+      #       org_default_notes_file = '~/orgmode/refile.org',
+      #       -- TODO add templates
+      #       org_agenda_templates = { t = { description = 'Task', template = '* TODO %?\n  %u' } },
+      #   }
 
-        '';
-      })
+      #   '';
+      # })
 
       { plugin = editorconfig-vim; }
 
@@ -560,30 +600,15 @@ let
 	  }
       # { plugin = jbyuki/venn.nvim; }
       # { plugin = telescope-nvim; }
-      {
+      (luaPlugin {
         plugin = fzf-vim;
+		 # " mostly fzf mappings, use TAB to mark several files at the same time
+		 # " https://github.com/neovim/neovim/issues/4487
         config = ''
-          let g:fzf_command_prefix = 'Fzf' " prefix commands :Files become :FzfFiles, etc.
-          let g:fzf_nvim_statusline = 0 " disable statusline overwriting
-
-          " This is the default extra key bindings
-          let g:fzf_action = {
-            \ 'ctrl-t': 'tab split',
-            \ 'ctrl-x': 'split',
-            \ 'ctrl-v': 'vsplit' }
-
-          " Default fzf layout
-          " - down / up / left / right
-          " - window (nvim only)
-          let g:fzf_layout = { 'down': '~40%' }
-
-          " For Commits and BCommits to customize the options used by 'git log':
-          let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
-
-          " mostly fzf mappings, use TAB to mark several files at the same time
-          " https://github.com/neovim/neovim/issues/4487
+          vim.g.fzf_command_prefix = 'Fzf' -- prefix commands :Files become :FzfFiles, etc.
+          vim.g.fzf_nvim_statusline = 0 -- disable statusline overwriting
         '';
-      }
+      })
 
       # defined in overrides: TODO this should be easier: like fzf-vim should be enough
       fzfWrapper
@@ -639,10 +664,12 @@ let
 		# '';
 	  # }
 
-      {
+      (luaPlugin{
         plugin = vim-startify;
 		# cool stuff is that it autostarts sessions
+		# TODO
         config = ''
+		  vim.cmd [[
 		  let g:startify_use_env = 0
 		  let g:startify_disable_at_vimenter = 0
 		  let g:startify_lists = [
@@ -669,54 +696,48 @@ let
 		  let g:startify_session_delete_buffers = 1
 		  let g:startify_change_to_dir = 0
 		  let g:startify_relative_path = 0
+		  ]]
         '';
-      }
+      })
 
       vim-scriptease
       # test with hop ?
-      {
+      (luaPlugin {
         plugin = vim-sneak;
         config = ''
-          let g:sneak#s_next = 1 " can press 's' again to go to next result, like ';'
-          let g:sneak#prompt = 'Sneak>'
+ -- can press 's' again to go to next result, like ';'
+		  vim.cmd [[
+		   let g:sneak#s_next = 1 
+		   let g:sneak#prompt = 'Sneak>'
 
           let g:sneak#streak = 0
-		  map f <Plug>Sneak_f
-          map F <Plug>Sneak_F
-          map t <Plug>Sneak_t
-          map T <Plug>Sneak_T
-
+		  ]]
         '';
-		# after = ''
-		#   map f <Plug>Sneak_f
+		  # map f <Plug>Sneak_f
           # map F <Plug>Sneak_F
           # map t <Plug>Sneak_t
           # map T <Plug>Sneak_T
-		#  '';
 
-      }
+      })
 
       {
         plugin = vim-grepper;
 		# careful these mappings are not applied as they arrive before the plug declaration
 		# config="";
-        after = ''
-          nnoremap <leader>rg  <Cmd>Grepper -tool git -open -switch<CR>
-          nnoremap <leader>rgb  <Cmd>Grepper -tool rg -open -switch -buffer<CR>
-          vnoremap <leader>rg  <Cmd>Grepper -tool rg -open -switch<CR>
-        '';
+        # after = ''
+        # '';
       }
       vim-nix
-      {
+      (luaPlugin {
         plugin = vim-obsession;
         after = ''
-          map <Leader>$ <Cmd>Obsession<CR>
+          vim.keymap.set("n", "<Leader>$", "<Cmd>Obsession<CR>", { remap = true })
         '';
         # testing luaConfig (experimental)
         # luaConfig = ''
         #   -- vim-obsession config
         # '';
-      }
+      })
       # ctrl-e causes an issue with telescope prompt
       vim-rsi
       # ' " syntax file for neomutt
@@ -742,72 +763,65 @@ let
         plugin = vim-commentary;
       }
 
-      {
+      (luaPlugin {
 		# reuse once https://github.com/neovim/neovim/issues/9390 is fixed
         plugin = vimtex;
 		optional = true;
 		config = ''
-" Pour le rappel
-" <localleader>ll pour la compilation continue du pdf
-" <localleader>lv pour la preview du pdf
-" see https://github.com/lervag/vimtex/issues/1058
-" let g:vimtex_log_ignore 
-" taken from https://castel.dev/post/lecture-notes-1/
-let g:tex_conceal='abdmg'
-let g:vimtex_log_verbose=1
-let g:vimtex_quickfix_open_on_warning = 1
-let g:vimtex_view_automatic=1
-let g:vimtex_view_enabled=1
-" was only necessary with vimtex lazy loaded
-" let g:vimtex_toc_config={}
-" let g:vimtex_complete_img_use_tail=1
-" autoindent can slow down vim quite a bit
-" to check indent parameters, run :verbose set ai? cin? cink? cino? si? inde? indk?
-let g:vimtex_indent_enabled=0
-let g:vimtex_indent_bib_enabled=1
-let g:vimtex_compiler_enabled=1 " enable new style vimtex
-let g:vimtex_compiler_progname='nvr'
-let g:vimtex_quickfix_method="latexlog"
+-- Pour le rappel
+-- <localleader>ll pour la compilation continue du pdf
+-- <localleader>lv pour la preview du pdf
+-- see https://github.com/lervag/vimtex/issues/1058
+-- let g:vimtex_log_ignore 
+-- taken from https://castel.dev/post/lecture-notes-1/
+vim.g.tex_conceal='abdmg'
+vim.g.vimtex_log_verbose=1
+vim.g.vimtex_quickfix_open_on_warning = 1
+vim.g.vimtex_view_automatic=1
+vim.g.vimtex_view_enabled=1
+-- was only necessary with vimtex lazy loaded
+-- let g:vimtex_toc_config={}
+-- let g:vimtex_complete_img_use_tail=1
+-- autoindent can slow down vim quite a bit
+-- to check indent parameters, run :verbose set ai? cin? cink? cino? si? inde? indk?
+vim.g.vimtex_indent_enabled=0
+vim.g.vimtex_indent_bib_enabled=1
+vim.g.vimtex_compiler_enabled=1
+vim.g.vimtex_compiler_progname='nvr'
+vim.g.vimtex_quickfix_method="latexlog"
+-- 1=> opened automatically and becomes active (2=> inactive)
+vim.g.vimtex_quickfix_mode = 2
+vim.g.vimtex_indent_enabled=0
+vim.g.vimtex_indent_bib_enabled=1
+vim.g.vimtex_view_method = 'zathura'
+vim.g.vimtex_format_enabled = 0
+vim.g.vimtex_complete_recursive_bib = 0
+vim.g.vimtex_complete_close_braces = 0
+vim.g.vimtex_fold_enabled = 0
+vim.g.vimtex_view_use_temp_files=1 -- to prevent zathura from flickering
+-- let g:vimtex_syntax_minted = [ { 'lang' : 'json', \ }]
 
-let g:vimtex_quickfix_mode = 2 " 1=> opened automatically and becomes active (2=> inactive)
-let g:vimtex_indent_enabled=0
-let g:vimtex_indent_bib_enabled=1
-let g:vimtex_view_method = 'zathura'
-"let g:vimtex_snippets_leader = ','
-let g:vimtex_format_enabled = 0
-let g:vimtex_complete_recursive_bib = 0
-let g:vimtex_complete_close_braces = 0
-let g:vimtex_fold_enabled = 0
-let g:vimtex_view_use_temp_files=1 " to prevent zathura from flickering
-let g:vimtex_syntax_minted = [
-      \ {
-      \   'lang' : 'json',
-      \ }]
-" with being on anotherline
-      " \ 'Biber reported the following issues',
-      " \ "Invalid format of field 'month'"
-
-" shell-escape is mandatory for minted
-" check that '-file-line-error' is properly removed with pplatex
-" executable The name/path to the latexmk executable. 
-let g:vimtex_compiler_latexmk = {
-        \ 'backend' : 'nvim',
-        \ 'background' : 1,
-        \ 'build_dir' : ''',
-        \ 'callback' : 1,
-        \ 'continuous' : 1,
-        \ 'executable' : 'latexmk',
-        \ 'options' : [
-        \   '-pdf',
-        \   '-file-line-error',
-        \   '-bibtex',
-        \   '-synctex=1',
-        \   '-interaction=nonstopmode',
-        \   '-shell-escape',
-        \ ],
-        \}
+-- shell-escape is mandatory for minted
+-- check that '-file-line-error' is properly removed with pplatex
+-- executable The name/path to the latexmk executable. 
 		'';
-	  }
+# vim.gvimtex_compiler_latexmk = {
+#          'backend' : 'nvim',
+#          'background' : 1,
+#          'build_dir' : ''',
+#          'callback' : 1,
+#          'continuous' : 1,
+#          'executable' : 'latexmk',
+#          'options' : {
+#            '-pdf',
+#            '-file-line-error',
+#            '-bibtex',
+#            '-synctex=1',
+#            '-interaction=nonstopmode',
+#            '-shell-escape',
+#          },
+#         }
+	  })
       (luaPlugin {
         plugin = unicode-vim;
 
@@ -820,7 +834,7 @@ let g:vimtex_compiler_latexmk = {
         vim.g.Unicode_data_directory='${pkgs.vimPlugins.unicode-vim}/autoload/unicode'
 
         -- overrides ga
-		vim.keymap.set ( "n", "ga",  "<Plug>(UnicodeGA)" )
+		vim.keymap.set ( "n", "ga",  "<Plug>(UnicodeGA)", { remap = true, } )
 
         '';
       })
@@ -852,11 +866,10 @@ let g:vimtex_compiler_latexmk = {
 	     basePlugins
       ++ overlayPlugins
       ++ luaPlugins
-      ++ fennelPlugins
+      # ++ fennelPlugins
       ++ colorschemePlugins
       ++ completionPlugins
       ++ filetypePlugins
-      ++ cmpPlugins
 	 ;
 
   # taken from the official flake
@@ -874,22 +887,16 @@ in
     # source doesn't like `stdpath('config').'`
     # todo should use mkBefore ${config.programs.neovim.generatedInitrc}
 	# source $XDG_CONFIG_HOME/nvim/init.manual.vim
-	extraConfig = let 
-	 genAfterBlock = x: x.after or "";
-	 # aggregate the "after" attribute
-	 afterRc = lib.strings.concatStrings (
-	   map genAfterBlock  rawPlugins
-	 );
-	in ''
-	  let mapleader = " "
-	  let maplocalleader = ","
-    ''
-    # concatStrings = builtins.concatStringsSep "";
-    + (lib.strings.concatStrings (
-      lib.mapAttrsToList genBlockViml vimlRcBlocks
-    ))
-	+ afterRc
-    ;
+	# extraConfig = let 
+	# in ''
+	#   let mapleader = " "
+	#   let maplocalleader = ","
+    # ''
+    # # concatStrings = builtins.concatStringsSep "";
+    # + (lib.strings.concatStrings (
+      # lib.mapAttrsToList genBlockViml vimlRcBlocks
+    # ))
+    # ;
 
 
     # extraLuaConfig = ''
@@ -927,14 +934,5 @@ in
   in {
     # a copy of init.vim in fact
 	 "nvim/lua/init-home-manager.lua".text = extraLuaConfig;
-    # "nvim/init.generated.vim".text = config.programs.neovim.generatedConfigViml;
-    # "nvim/init.generated.lua".text = config.programs.neovim.generatedConfigs.lua;
-   # }
-   # // {
-
-
-	# # TODO should be aggregated from
-	 # "ftplugin/c.vim".text = "setlocal omnifunc=v:lua.vim.lsp.omnifunc";
-
 	};
 }

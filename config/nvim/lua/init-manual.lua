@@ -3,7 +3,7 @@
 -- https://www.reddit.com/r/neovim/comments/o8dlwg/how_to_append_to_an_option_in_lua/
 -- local configs = require'nvim_lsp/configs'
 local has_telescope, telescope = pcall(require, "telescope")
-local has_fzf_lua, fzf_lua = pcall(require, "fzf-lua")
+local has_fzf_lua, _ = pcall(require, "fzf-lua")
 
 -- my treesitter config
 local myMenu = require 'teto.menu'
@@ -19,7 +19,8 @@ local map = vim.keymap.set
 -- local reload = require'plenary.reload'
 -- reload.reload_module('plenary')
 -- require'plenary'
-
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 
 packer.init({
 	autoremove = false,
@@ -80,7 +81,7 @@ vim.opt.cpoptions="aABceFsn"  -- vi ComPatibility options
 -- " should not be a default ?
 -- set cpoptions-=_
 
-vim.g.vimsyn_embed = 'lP'  -- support embedded lua, python and ruby
+-- vim.g.vimsyn_embed = 'lP'  -- support embedded lua, python and ruby
 -- don't syntax-highlight long lines
 vim.opt.synmaxcol=300
 vim.g.did_install_default_menus = 1  -- avoid stupid menu.vim (saves ~100ms)
@@ -169,9 +170,6 @@ vim.opt.clipboard='unnamedplus'
 -- nnoremap({'n', 'gp', '"+p' })
 -- nnoremap({'n', 'gy', '"+y' })
 -- }}}
--- highlight SignifySignChange cterm=bold ctermbg=237  ctermfg=227 guibg=NONE guifg=#F08A1F
--- highlight SignifySignAdd cterm=bold ctermbg=237  ctermfg=227 guibg=NONE guifg=green
--- highlight SignifySignDelete cterm=bold ctermbg=237  ctermfg=227 guibg=NONE guifg=red
 
 -- wildmenu completion
 -- TODO must be number
@@ -226,20 +224,18 @@ vim.api.nvim_set_hl(0, 'NormalFloat', { bg='grey' })
 --   end,
 -- }
 
-use '~/neovim/fzf-lua' -- markdown syntax compatible with Github's
+-- use '~/neovim/fzf-lua' -- markdown syntax compatible with Github's
 use 'rhysd/vim-gfm-syntax' -- markdown syntax compatible with Github's
 -- use 'symphorien/vim-nixhash' -- use :NixHash
 -- use 'vim-denops/denops.vim'
 -- use 'ryoppippi/bad-apple.vim' -- needs denops
 -- use 'eugen0329/vim-esearch' -- search & replace
--- use '~/neovim/neovim-ui'
 -- use 'kshenoy/vim-signature' -- display marks in gutter, love it
 
 -- use '~/pdf-scribe.nvim'  -- to annotate pdf files from nvim :PdfScribeInit
--- pdf-scribe {{{
 -- PdfScribeInit
--- let g:pdfscribe_pdf_dir  = expand('$HOME').'/Nextcloud/papis_db'
--- let g:pdfscribe_notes_dir = expand('$HOME').'/Nextcloud/papis_db'
+-- vim.g.pdfscribe_pdf_dir  = expand('$HOME').'/Nextcloud/papis_db'
+-- vim.g.pdfscribe_notes_dir = expand('$HOME').'/Nextcloud/papis_db'
 -- }}}
 
 
@@ -250,7 +246,7 @@ use 'rhysd/vim-gfm-syntax' -- markdown syntax compatible with Github's
 --}}}
 
 -- use 'norcalli/nvim-terminal.lua' -- to display ANSI colors
-use '~/neovim/nvim-terminal.lua' -- to display ANSI colors
+-- use '~/neovim/nvim-terminal.lua' -- to display ANSI colors
 use 'bogado/file-line' -- to open a file at a specific line
 -- use 'glacambre/firenvim' -- to use nvim in firefox
 -- call :NR on a region than :w . coupled with b:nrrw_aucmd_create,
@@ -272,7 +268,7 @@ use 'chrisbra/vim-diff-enhanced' --
 
 -- 	end
 --   }
-use 'rhysd/git-messenger.vim' -- to show git message :GitMessenger
+-- use 'rhysd/git-messenger.vim' -- to show git message :GitMessenger
 
 -- use 'tweekmonster/nvim-api-viewer', {'on': 'NvimAPI'} -- see nvim api
 -- provider
@@ -297,58 +293,77 @@ use 'tpope/vim-rhubarb' -- github support in fugitive, use |i_CTRL-X_CTRL-O|
 --     end
 -- }
 -- diagnostic
-use { 'neovim/nvimdev.nvim' }
+-- use { 'neovim/nvimdev.nvim', opt = true }
+use {
+	'jose-elias-alvarez/null-ls.nvim',
+	config = function ()
+		require("null-ls").setup({
+		sources = {
+			-- needs a luacheck in PATH
+			require("null-ls").builtins.diagnostics.luacheck,
+			-- require("null-ls").builtins.formatting.stylua,
+			-- require("null-ls").builtins.diagnostics.eslint,
+			-- require("null-ls").builtins.completion.spell,
+		},
+	})
+	end
+}
+use {
+  'AckslD/nvim-FeMaco.lua',
+  config = 'require("femaco").setup()',
+}
 use { 'seandewar/nvimesweeper', opt = true }
 use { 'voldikss/vim-translator', opt = true }
 use 'calvinchengx/vim-aftercolors' -- load after/colors
 use 'bfredl/nvim-luadev'  -- lua repl :Luadev
 use 'alok/notational-fzf-vim' -- to take notes, :NV
-use { 'hkupty/iron.nvim',
-	config = function ()
-		local iron = require("iron.core")
-		iron.setup {
-		config = {
-			-- If iron should expose `<plug>(...)` mappings for the plugins
-			should_map_plug = false,
-			-- Whether a repl should be discarded or not
-			scratch_repl = true,
-			-- Your repl definitions come here
-			repl_definition = {
-				sh = { command = {"zsh"} },
-				nix = { command = {"nix",  "repl", "/home/teto/nixpkgs"} },
-				-- copied from the nix wrapper :/
-				lua = { command = "/nix/store/snzm30m56ps3wkn24van553336a4yylh-luajit-2.1.0-2022-04-05-env/bin/lua"}
-			},
-			repl_open_cmd = require('iron.view').curry.bottom(40),
-			-- how the REPL window will be opened, the default is opening
-			-- a float window of height 40 at the bottom.
-		},
-		-- Iron doesn't set keymaps by default anymore. Set them here
-		-- or use `should_map_plug = true` and map from you vim files
-		keymaps = {
-			send_motion = "<space>sc",
-			visual_send = "<space>sc",
-			send_file = "<space>sf",
-			send_line = "<space>sl",
-			send_mark = "<space>sm",
-			mark_motion = "<space>mc",
-			mark_visual = "<space>mc",
-			remove_mark = "<space>md",
-			cr = "<space>s<cr>",
-			interrupt = "<space>s<space>",
-			exit = "<space>sq",
-			clear = "<space>cl",
-		},
-		-- If the highlight is on, you can change how it looks
-		-- For the available options, check nvim_set_hl
-		highlight = {
-			italic = true
-		}
-		}
+-- use { 
+-- 	'hkupty/iron.nvim',
+-- 	config = function ()
+-- 		local iron = require("iron.core")
+-- 		iron.setup {
+-- 		config = {
+-- 			-- If iron should expose `<plug>(...)` mappings for the plugins
+-- 			should_map_plug = false,
+-- 			-- Whether a repl should be discarded or not
+-- 			scratch_repl = true,
+-- 			-- Your repl definitions come here
+-- 			repl_definition = {
+-- 				sh = { command = {"zsh"} },
+-- 				nix = { command = {"nix",  "repl", "/home/teto/nixpkgs"} },
+-- 				-- copied from the nix wrapper :/
+-- 				lua = { command = "/nix/store/snzm30m56ps3wkn24van553336a4yylh-luajit-2.1.0-2022-04-05-env/bin/lua"}
+-- 			},
+-- 			repl_open_cmd = require('iron.view').curry.bottom(40),
+-- 			-- how the REPL window will be opened, the default is opening
+-- 			-- a float window of height 40 at the bottom.
+-- 		},
+-- 		-- Iron doesn't set keymaps by default anymore. Set them here
+-- 		-- or use `should_map_plug = true` and map from you vim files
+-- 		keymaps = {
+-- 			send_motion = "<space>sc",
+-- 			visual_send = "<space>sc",
+-- 			send_file = "<space>sf",
+-- 			send_line = "<space>sl",
+-- 			send_mark = "<space>sm",
+-- 			mark_motion = "<space>mc",
+-- 			mark_visual = "<space>mc",
+-- 			remove_mark = "<space>md",
+-- 			cr = "<space>s<cr>",
+-- 			interrupt = "<space>s<space>",
+-- 			exit = "<space>sq",
+-- 			clear = "<space>cl",
+-- 		},
+-- 		-- If the highlight is on, you can change how it looks
+-- 		-- For the available options, check nvim_set_hl
+-- 		highlight = {
+-- 			italic = true
+-- 		}
+-- 		}
 
-	end
-}
-use 'neovimhaskell/nvim-hs.vim' -- to help with nvim-hs
+-- 	end
+-- }
+-- use 'neovimhaskell/nvim-hs.vim' -- to help with nvim-hs
 use 'teto/vim-listchars' -- to cycle between different list/listchars configurations
 use 'chrisbra/csv.vim'
 use 'teto/Modeliner' -- <leader>ml to setup buffer modeline
@@ -424,6 +439,15 @@ vim.api.nvim_set_hl(0, "SignifySignChange", {
 vim.api.nvim_set_hl(0,'SignifySignAdd', { cterm={ bold=true}, ctermbg=237,  ctermfg=227, bg='NONE', fg='green' })
 vim.api.nvim_set_hl(0, 'SignifySignDelete', { cterm= {bold=true}, ctermbg=237,  ctermfg=227, bg='NONE', fg='red' })
 
+-- This is the default extra key bindings
+-- vim.g.fzf_action = { ['ctrl-t']: 'tab split', 'ctrl-x': 'split', 'ctrl-v': 'vsplit' }
+
+-- Default fzf layout - down / up / left / right - window (nvim only)
+vim.g.fzf_layout = { ['down'] = '~40%' }
+
+-- For Commits and BCommits to customize the options used by 'git log':
+vim.g.fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
+
 
 vim.api.nvim_create_autocmd("TextYankPost", {
   callback =  function()
@@ -498,7 +522,7 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 
 use "/home/teto/neovim/rest.nvim"
 -- provides 'NvimTree'
-use 'kyazdani42/nvim-tree.lua' 
+use 'kyazdani42/nvim-tree.lua'
 -- use {
 -- 	"~/telescope-frecency.nvim",
 -- 	config = function ()
@@ -509,30 +533,6 @@ use 'kyazdani42/nvim-tree.lua'
 -- 	}
 
 -- use {
---	"SmiteshP/nvim-gps",
---	requires = "nvim-treesitter/nvim-treesitter",
---	config = function ()
---		-- Example config
---		local has_gps, gps = pcall(require, 'nvim-gps')
---		gps.setup({
---			icons = {
---				["class-name"] = ' ',		-- Classes and class-like objects
---				["function-name"] = ' ',	-- Functions
---				["method-name"] = ' '		-- Methods (functions inside class-like objects)
---			},
---			-- Disable any languages individually over here
---			-- Any language not disabled here is enabled by default
---			languages = {
---				-- ["bash"] = false,
---				-- ["go"] = false,
---			},
---			separator = ' > ',
---		})
---	end
-
--- }
-
--- use {
 -- 	'VonHeikemen/fine-cmdline.nvim',
 -- 	config = function ()
 -- 	require('fine-cmdline').setup()
@@ -540,13 +540,6 @@ use 'kyazdani42/nvim-tree.lua'
 -- 	  -- requires = {
 --     -- {'MunifTanjim/nui.nvim'}
 --   -- }
--- }
-
--- not packaged
--- use{"petertriho/nvim-scrollbar",
--- 	config = function ()
--- 		require"scrollbar".setup({show=true})
--- 	end
 -- }
 
 -- use {'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async'}
@@ -669,7 +662,7 @@ use({
     -- config = function()
     -- end
 })
-use { 'protex/better-digraphs.nvim' }
+-- use { 'protex/better-digraphs.nvim' }
 
 use {
 	"rcarriga/nvim-notify"
@@ -704,7 +697,7 @@ use {
 }
 
 -- terminal image viewer in neovim see https://github.com/edluffy/hologram.nvim#usage for usage
-use 'edluffy/hologram.nvim' -- hologram-nvim
+-- use 'edluffy/hologram.nvim' -- hologram-nvim
 -- use 'ellisonleao/glow.nvim' -- markdown preview, run :Glow
 
 -- use {
@@ -787,13 +780,11 @@ use {
 		}
 	end
 }
-use {
-	-- shows type annotations for functions in virtual text using built-in LSP client
-	'jubnzv/virtual-types.nvim'
-}
+-- use {
+-- 	-- shows type annotations for functions in virtual text using built-in LSP client
+-- 	'jubnzv/virtual-types.nvim'
+-- }
 
--- use_rocks 'plenary.nvim'
--- use { 'nvim-lua/telescope.nvim' }
 -- telescope plugins {{{
 use '~/telescope.nvim'	  -- fzf-like in lua
 use { 'nvim-telescope/telescope-github.nvim' }
@@ -863,12 +854,8 @@ use { 'nvim-telescope/telescope-packer.nvim' } -- :Telescope packer
 --end
 --}
 
-use { 'notomo/gesture.nvim' , opt = true; }
+-- use { 'notomo/gesture.nvim' , opt = true; }
 -- using teto instead to test packer luarocks support
--- use_rocks { 'teto/gruvbox.nvim'
-	-- , requires = {"rktjmp/lush.nvim"}
-	-- }
-use { 'onsails/lspkind-nvim' }
 -- use { "rktjmp/lush.nvim" }
 use {
 	'rktjmp/hotpot.nvim',
@@ -921,7 +908,7 @@ use 'NLKNguyen/papercolor-theme'
 use 'marko-cerovac/material.nvim'
 -- }}}
 
-use 'anuvyklack/hydra.nvim' -- to create submodes
+-- use 'anuvyklack/hydra.nvim' -- to create submodes
 use 'skywind3000/vim-quickui' -- to design cool uis
 use 'neovim/nvim-lspconfig' -- while fuzzing details out
 -- use '~/neovim/nvim-lspconfig' -- while fuzzing details out
@@ -986,56 +973,13 @@ use {'tweekmonster/startuptime.vim' , opt = true } -- {'on': 'StartupTime'} " se
 -- }
 -- use 'mrjones2014/dash.nvim' -- only for dash it seems
 -- Trouble {{{
-use {
-  "folke/trouble.nvim",
---	 requires = "kyazdani42/nvim-web-devicons",
-	config = function ()
-	require'trouble'.setup {
-	position = "bottom", -- position of the list can be: bottom, top, left, right
-	height = 10, -- height of the trouble list when position is top or bottom
-	width = 50, -- width of the list when position is left or right
-	icons = false, -- use devicons for filenames
-	-- mode = "workspace_diagnostics", -- "lsp_workspace_diagnostics", "lsp_document_diagnostics", "quickfix", "lsp_references", "loclist"
-	-- fold_open = "", -- icon used for open folds
-	-- fold_closed = "", -- icon used for closed folds
-	action_keys = { -- key mappings for actions in the trouble list
-		-- map to {} to remove a mapping, for example:
-		-- close = {},
-		close = "q", -- close the list
-		cancel = "<esc>", -- cancel the preview and get back to your last window / buffer / cursor
-		refresh = "r", -- manually refresh
-		jump = {"<cr>", "<tab>"}, -- jump to the diagnostic or open / close folds
-		open_split = { "<c-x>" }, -- open buffer in new split
-		open_vsplit = { "<c-v>" }, -- open buffer in new vsplit
-		open_tab = { "<c-t>" }, -- open buffer in new tab
-		jump_close = {"o"}, -- jump to the diagnostic and close the list
-		toggle_mode = "m", -- toggle between "workspace" and "document" diagnostics mode
-		toggle_preview = "P", -- toggle auto_preview
-		hover = "K", -- opens a small poup with the full multiline message
-		preview = "p", -- preview the diagnostic location
-		close_folds = {"zM", "zm"}, -- close all folds
-		open_folds = {"zR", "zr"}, -- open all folds
-		toggle_fold = {"zA", "za"}, -- toggle fold of current file
-		previous = "k", -- preview item
-		next = "j" -- next item
-	},
-	-- indent_lines = true, -- add an indent guide below the fold icons
-	-- auto_open = false, -- automatically open the list when you have diagnostics
-	-- auto_close = false, -- automatically close the list when you have no diagnostics
-	-- auto_preview = true, -- automatyically preview the location of the diagnostic. <esc> to close preview and go back to last window
-	-- auto_fold = false, -- automatically fold a file trouble list at creation
-	signs = {
-		-- icons / text used for a diagnostic
-		error = "",
-		warning = "",
-		hint = "",
-		information = "",
-		other = "﫠"
-	},
-	use_diagnostic_signs = true -- enabling this will use the signs defined in your lsp client
-	}
-	end
-}
+--use {
+--  "folke/trouble.nvim",
+----	 requires = "kyazdani42/nvim-web-devicons",
+--	config = function ()
+
+--	end
+--}
 -- }}}
 
 -- use {
@@ -1053,10 +997,6 @@ use {
 --	 requires = { { 'hoob3rt/lualine.nvim', opt=true }, 'kyazdani42/nvim-web-devicons' }
 -- }
 use 'MunifTanjim/nui.nvim' -- to create UIs
--- use 'rafamadriz/friendly-snippets'
--- " use 'hrsh7th/vim-vsnip' " vscode/lsp snippet format
--- " use 'hrsh7th/vim-vsnip-integ'
--- use 'SirVer/ultisnips' " handle snippets
 use 'honza/vim-snippets'
 -- use 'sjl/gundo.vim' " :GundoShow/Toggle to redo changes
 
@@ -1119,7 +1059,7 @@ local cmp = require 'cmp'
 
 	  { name = 'buffer' },
 	  -- { name = 'neorg' },
-	  { name = 'orgmode' },
+	  -- { name = 'orgmode' },
 	}
   })
 --  }}}
@@ -1134,10 +1074,11 @@ local cmp = require 'cmp'
 -- }
 
 -- Load custom tree-sitter grammar for org filetype
-local has_orgmode, orgmode = pcall(require, "orgmode")
-if has_orgmode then
-	require('orgmode').setup_ts_grammar()
-end
+-- orgmode depends on treesitter
+-- local has_orgmode, orgmode = pcall(require, "orgmode")
+-- if has_orgmode then
+-- 	orgmode.setup_ts_grammar()
+-- end
 
 -- use {
 --	   "nvim-neorg/neorg",
@@ -1171,25 +1112,25 @@ end
 --	   requires = "nvim-lua/plenary.nvim"
 -- }
 use 'ray-x/lsp_signature.nvim' -- display function signature in insert mode
-use { 'Pocco81/AutoSave.nvim' -- :ASToggle /AsOn / AsOff
-	, config = function ()
-		local autosave = require("autosave")
-		autosave.setup({
-			enabled = true,
-			execution_message = "AutoSave: saved at " .. vim.fn.strftime("%H:%M:%S"),
-			events = {"InsertLeave", "FocusLost"},
-			conditions = {
-				exists = true,
-				filetype_is_not = {},
-				modifiable = true
-			},
-			write_all_buffers = false,
-			on_off_commands = true,
-			clean_command_line_interval = 2500
-		}
-		)
-end
-}
+-- use { 'Pocco81/AutoSave.nvim' -- :ASToggle /AsOn / AsOff
+-- 	, config = function ()
+-- 		local autosave = require("autosave")
+-- 		autosave.setup({
+-- 			enabled = true,
+-- 			execution_message = "AutoSave: saved at " .. vim.fn.strftime("%H:%M:%S"),
+-- 			events = {"InsertLeave", "FocusLost"},
+-- 			conditions = {
+-- 				exists = true,
+-- 				filetype_is_not = {},
+-- 				modifiable = true
+-- 			},
+-- 			write_all_buffers = false,
+-- 			on_off_commands = true,
+-- 			clean_command_line_interval = 2500
+-- 		}
+-- 		)
+-- end
+-- }
 
 -- use 'sindrets/diffview.nvim' -- :DiffviewOpen
 
@@ -1215,7 +1156,7 @@ use {
 				-- path=2 => absolute path
 				{'filename', path = 1,
 					-- takes a function that is called when component is clicked with mouse.
-					on_click = function (nb_of_clicks, button, modifiers) print("CLICK") end,
+					on_click = function (nb_of_clicks, button, _modifiers) print("CLICK") end,
                    -- the function receives several arguments
                    -- - number of clicks incase of multiple clicks
                    -- - mouse button used (l(left)/r(right)/m(middle)/...)
@@ -1644,8 +1585,11 @@ if enable_treesitter then
 	-- 	requires = { 'nvim-treesitter/nvim-treesitter' }
 	-- }
 	use { 'nvim-treesitter/nvim-treesitter-textobjects' }
+
 end
 --}}}
+-- my treesitter config
+require 'teto.treesitter'
 
 -- telescope {{{
 -- TODO check for telescope github extension too
@@ -1782,9 +1726,6 @@ vim.diagnostic.config({
 })
 
 require 'teto.lsp'
-
--- my treesitter config
-require 'teto.treesitter'
 
 -- logs are written to /home/teto/.cache/vim-lsp.log
 vim.lsp.set_log_level("info")
@@ -1970,18 +1911,13 @@ vim.keymap.set('n',  '<leader>pu' , "<cmd>PackerSync<CR>")
 vim.keymap.set("n", "<leader>q", "<Cmd>Sayonara!<cr>", { silent = true})
 vim.keymap.set("n", "<leader>Q", "<Cmd>Sayonara<cr>", { silent = true})
 
-vim.keymap.set('n',  '<leader>rr' , "<Plug>RestNvim<cr>", { noremap=false,  desc= "Run an http request"})
-vim.keymap.set('n',  '<leader>rp' , "<Plug>RestNvimPreview", { noremap=false,  desc= "Run an http request"})
+vim.keymap.set('n',  '<leader>rr' , "<Plug>RestNvim<cr>", { remap=true,  desc= "Run an http request"})
+vim.keymap.set('n',  '<leader>rp' , "<Plug>RestNvimPreview", { remap=true,  desc= "Preview an http request"})
 vim.keymap.set('n',  '<C-J>' , "<Plug>RestNvim<cr>")
 -- vim.keymap.set('n',  '<C-j>' , "<use>RestNvimPreview")
 -- nnoremap <use>RestNvimPreview :lua require('rest-nvim').run(true)<CR>
 -- nnoremap <use>RestNvimLast :lua require('rest-nvim').last()<CR>
 
--- goyo {{{
-vim.g.goyo_linenr=1
-vim.g.goyo_height= '90%'
-vim.g.goyo_width = 120
--- }}}
 -- repl.nvim (from hiphish) {{{
 -- vim.g.repl['lua'] = {
 --     \ 'bin': 'lua',
@@ -2047,6 +1983,12 @@ vim.api.nvim_set_keymap(
   { noremap = true, silent = false }
 )
 
+vim.cmd([[
+map f <Plug>Sneak_f
+map F <Plug>Sneak_F
+map t <Plug>Sneak_t
+map T <Plug>Sneak_T
+]])
 
 -- dadbod UI sql connections
 -- let g:db_ui_winwidth = 30
@@ -2064,7 +2006,10 @@ vim.g.dbs = {
 vim.api.nvim_set_keymap('n', ',a', '<Plug>(Luadev-Run)', { noremap=false, silent=false })
 vim.api.nvim_set_keymap('v', ',,', '<Plug>(Luadev-Run)', { noremap=false, silent=false })
 vim.api.nvim_set_keymap('n', ',,', '<Plug>(Luadev-RunLine)', { noremap=false, silent=false })
-  -- '<Plug>(Luadev-RunLine)',
+
+map("n", "<leader>rg", "<Cmd>Grepper -tool git -open -switch<CR>", { remap = true })
+map("n", "<leader>rgb", "<Cmd>Grepper -tool rg -open -switch -buffer<CR>", { remap = true })
+map("n", "<leader>rg", "<Cmd>Grepper -tool rg -open -switch<CR>", { remap = true })
 
 -- vim.api.nvim_set_keymap(
 --	 'n',
@@ -2072,11 +2017,5 @@ vim.api.nvim_set_keymap('n', ',,', '<Plug>(Luadev-RunLine)', { noremap=false, si
 --	 "<Cmd>lua require'stylish'.ui_menu(vim.fn.menu_get(''), {kind=menu, prompt = 'Main Menu', experimental_mouse = true}, function(res) print('### ' ..res) end)<CR>",
 --	 { noremap = true, silent = true }
 -- )
---
---
--- deal with vscode
--- if vim.cmd.exists('g:vscode')
---     -- VSCode extension
--- end
-local lush = require('lush')
--- lush.
+vim.o.grepprg='rg --vimgrep --no-heading --smart-case'
+

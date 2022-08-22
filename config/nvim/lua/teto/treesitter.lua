@@ -14,14 +14,14 @@ config.config = config.setup {
         disable = {
 			'rust',
 			'bash',
-			'nix',
+			-- 'nix',
 			'python',
 			-- 'c',
 			'lua' -- cos breaks
 		},        -- list of language that will be disabled
     },
---     incremental_selection = {
---         enable = true,
+    incremental_selection = {
+        enable = false,
 --         disable = { 'cpp', 'lua' },
 --         keymaps = {                       -- mappings for incremental selection (visual mappings)
 --           init_selection = 'gnn',         -- maps in normal mode to init the node/scope selection
@@ -29,21 +29,21 @@ config.config = config.setup {
 --           scope_incremental = "grc",      -- increment to the upper scope (as defined in locals.scm)
 --           node_decremental = "grm",       -- decrement to the previous node
 --         }
---     },
+    },
 --     refactor = {
 --       highlight_definitions = {
 --         enable = true
 --       },
---       smart_rename = {
---         enable = true,
+      smart_rename = {
+        enable = false,
 --         smart_rename = "grr"              -- mapping to rename reference under cursor
---       },
---       navigation = {
---         enable = true,
+      },
+      navigation = {
+        enable = false,
 --         goto_definition = "gnd",          -- mapping to go to definition of symbol under cursor
 --         list_definitions = "gnD"          -- mapping to list all definitions in current file
 --       }
---     },
+    },
 --     ensure_installed = {"c"}, -- one of 'all', 'language', or a list of languages
 
 	playground = {
