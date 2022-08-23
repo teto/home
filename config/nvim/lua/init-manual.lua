@@ -1262,12 +1262,12 @@ vim.keymap.set('n', '<leader>d', function()
   end
 end)
 
-if has_fzf_lua then
-	require 'teto.fzf-lua'.register_keymaps()
+-- if has_fzf_lua then
+-- 	require 'teto.fzf-lua'.register_keymaps()
 
-elseif has_telescope then
+-- elseif has_telescope then
 	require 'teto.telescope'.telescope_create_keymaps()
-end
+-- end
 nnoremap ( "n", "<Leader>ca", function () vim.lsp.buf.code_action{} end )
 
 -- nnoremap ( "n", "<leader>S",  function() require('spectre').open() end )
@@ -1779,7 +1779,7 @@ menu_add, menu_add_cmd = myMenu.menu_add, myMenu.menu_add_cmd
 menu_add("LSP.Declaration", '<cmd>lua vim.lsp.buf.declaration()<cr>')
 menu_add("LSP.Definition", '<cmd>lua vim.lsp.buf.definition()<cr>')
 menu_add("LSP.Hover", '<cmd>lua vim.lsp.buf.references()<cr>')
-menu_add("LSP.Hover", '<cmd>lua vim.lsp.buf.references()<cr>')
+menu_add("LSP.Rename", '<cmd>lua vim.lsp.buf.rename()<cr>')
 
 menu_add("Toggle.Minimap", '<cmd>MinimapToggle<cr>')
 menu_add("Toggle.Obsession", '<cmd>Obsession<cr>')
@@ -1933,6 +1933,7 @@ vim.keymap.set('n',  '<C-J>' , "<Plug>RestNvim<cr>")
 -- -- Send the selected text to the REPL
 -- vmap <leader>rs  <Plug>(ReplSend)
 -- }}}
+
 -- alok/notational-fzf-vim {{{
 -- use c-x to create the note
 -- vim.g.nv_search_paths = []

@@ -39,3 +39,4 @@ log only if local p_debug = vim.fn.getenv "DEBUG_PLENARY"
 Then run `:gr TEXT` to grep, it fills the quickfix
 then `cfdo s/X/Y` works !
 See https://www.reddit.com/r/neovim/comments/i5iptq/comment/g0vpn8j/?utm_source=reddit&utm_medium=web2x&context=3 for details
+http://vimcasts.org/episodes/project-wide-find-and-replace/

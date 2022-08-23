@@ -120,11 +120,11 @@ local function make_cmp_capabilities()
 end
 
 lspconfig.hls.setup({
-	cmd = {
-		  "haskell-language-server", "--lsp"
+	-- cmd = {
+	-- 	  "haskell-language-server", "--lsp"
 		  -- , "--debug"
 		  -- , "-j2"	-- -j1 doesnt work, and more threads => crash
-	},
+	-- },
 	single_file_support = true,
 	filetypes = { "haskell", "lhaskell" },
 	capabilities = make_cmp_capabilities(),
@@ -156,7 +156,7 @@ lspconfig.hls.setup({
 		},
 	  },
 	  flags = {
-			  -- allow_incremental_sync = false;
+			 -- allow_incremental_sync = false;
 	  }
 })
 
