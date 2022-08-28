@@ -366,8 +366,6 @@ let
 	  # let g:registers_window_border = "single" "'none' by default, can be 'none', 'single','double', 'rounded', 'solid', or 'shadow' (requires Neovim 0.5.0+)
 	  # let g:registers_window_min_height = 10 "3 by default, minimum height of the window when there is the cursor at the bottom
 	  # let g:registers_window_max_width = 20 "100 by default, maximum width of the window
-      config = ''
-        '';
       # use :Registers
     }
 
@@ -558,7 +556,6 @@ let
 
       (luaPlugin {
         plugin = stylish-nvim;
-        # config = '' '';
       })
 	  # 'diepm/vim-rest-console' " test rest APIs * Hit the trigger key (<C-j> by default).
       # (luaPlugin {
