@@ -1262,12 +1262,11 @@ vim.keymap.set('n', '<leader>d', function()
   end
 end)
 
--- if has_fzf_lua then
--- 	require 'teto.fzf-lua'.register_keymaps()
-
--- elseif has_telescope then
+if has_fzf_lua then
+	require 'teto.fzf-lua'.register_keymaps()
+elseif has_telescope then
 	require 'teto.telescope'.telescope_create_keymaps()
--- end
+end
 nnoremap ( "n", "<Leader>ca", function () vim.lsp.buf.code_action{} end )
 
 -- nnoremap ( "n", "<leader>S",  function() require('spectre').open() end )

@@ -1,1 +1,2 @@
-npm list -g allows to list installed programs
+npm list -g allows to list installed programs and their install folders, for instance:
+~/.npm-global/lib
