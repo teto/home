@@ -1273,7 +1273,8 @@ if has_fzf_lua then
 elseif has_telescope then
 	require 'teto.telescope'.telescope_create_keymaps()
 end
-nnoremap ( "n", "<Leader>ca", function () vim.lsp.buf.code_action{} end )
+-- nnoremap ( "n", "<Leader>ca", function () vim.lsp.buf.code_action{} end )
+nnoremap ( "n", "<Leader>ca", function () vim.cmd [[ FzfLua lsp_code_actions]] end )
 
 -- nnoremap ( "n", "<leader>S",  function() require('spectre').open() end )
 

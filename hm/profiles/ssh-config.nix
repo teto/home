@@ -10,7 +10,7 @@
       nova = {
         host = "git.novadiscovery.net";
         user = "matthieu.coudron";
-
+        identityFile = "~/.ssh/nova_key";
       };
       ovh1 = {
         # checkHostIP
