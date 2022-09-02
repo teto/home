@@ -76,7 +76,7 @@ lspconfig.yamlls.setup{}
 lspconfig.pyright.setup{
 	-- cmd = {"pyright-langserver", "--stdio"};
 	-- filetypes = {"python"};
-	-- autostart = false; -- This is the important new option
+	autostart = false; -- This is the important new option
 	root_dir = lspconfig.util.root_pattern(".git", "setup.py",	"setup.cfg", "pyproject.toml", "requirements.txt");
 	-- on_attach=attach_cb.on_attach,
 	settings = {
@@ -109,7 +109,10 @@ lspconfig.pyright.setup{
 }
 
 -- typescript
-lspconfig.tsserver.setup({ })
+lspconfig.tsserver.setup({
+ autostart = false
+
+})
 
 local function make_cmp_capabilities()
   local has_cmp_lsp, cmp_lsp = pcall(require, 'cmp_nvim_lsp')

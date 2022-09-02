@@ -77,3 +77,6 @@ To select a builder you can run something akin to:
 # how to reinstall the bootloader
 See https://www.reddit.com/r/NixOS/comments/ouxjzh/how_to_reinstall_bootloader/
 sudo NIXOS_INSTALL_BOOTLOADER=1 /nix/var/nix/profiles/system/bin/switch-to-configuration boot
+
+# how to regen the nixos doc:
+$  ./nixos/doc/manual/md-to-db.sh
