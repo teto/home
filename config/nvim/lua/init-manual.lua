@@ -1017,10 +1017,11 @@ use 'honza/vim-snippets'
 -- 	config = function ()
 
 
-use 'michaeladler/cmp-notmuch'
 
-local cmp = require 'cmp'
+local has_cmp, cmp = pcall(require, "cmp")
 
+if has_cmp then
+	use 'michaeladler/cmp-notmuch'
 -- nvim-cmp autocompletion plugin{{{
 	cmp.setup({
 	snippet = {
@@ -1072,6 +1073,7 @@ local cmp = require 'cmp'
 
 --   end
 -- }
+end
 
 -- Load custom tree-sitter grammar for org filetype
 -- orgmode depends on treesitter

@@ -14,15 +14,15 @@
       };
       ovh1 = {
         # checkHostIP
-        identityFile = "~/.ssh/nova-infra-prod";
-        user = "ubuntu";
+        identityFile = "~/.ssh/nova_key";
+        # user = "nova";
         host = "ovh-hybrid-runner-1.devops.novadiscovery.net";
 		identitiesOnly = true;
       };
       ovh2 = {
         # identityFile = "~/.ssh/ci-infra-ec2-dev";
         identityFile = "~/.ssh/nova_key";
-        user = "teto";
+        # user = "teto";
         host = "ovh-hybrid-runner-2.devops.novadiscovery.net";
 		identitiesOnly = true;
       };
@@ -52,8 +52,10 @@
     };
     # extraOptionOverrides
     # include path to file
+		  # { path = config.xdg.configHome + "/git/config.inc"; }
+
     extraConfig = ''
-      Include ./manual.config
+      Include "${config.xdg.configHome}/ssh/config"
     '';
   };
 

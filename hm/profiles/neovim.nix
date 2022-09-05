@@ -303,7 +303,7 @@ let
     #     -- the priority applies to all marks.
     #     -- default 10.
     #     sign_priority = { lower=10, upper=15, builtin=8, bookmark=20 },
-    #     -- marks.nvim allows you to configure up to 10 bookmark groups, each with its own
+    #     -- marks.nvim allows you to up to 10 bookmark groups, each with its own
     #     -- sign/virttext. Bookmarks can be used to group together positions and quickly move
     #     -- across multiple buffers. default sign is '!@#$%^&*()' (from 0 to 9), and
     #     -- default virt_text is "".
@@ -317,6 +317,7 @@ let
     # })
 
     vim-lion # Use with gl/L<text object><character to align to 
+	moonscript-vim
 
 	(luaPlugin {
 	 plugin = nvim-spectre;
@@ -348,6 +349,11 @@ let
     (luaPlugin {
 	  # prettier quickfix
       plugin = nvim-bqf;
+	  config = ''require'bqf'.setup({
+		preview = {
+		 delay_syntax = 0
+		}
+	  })'';
     })
     (luaPlugin { plugin = fugitive-gitlab-vim; })
 
@@ -458,7 +464,7 @@ let
 		'';
       })
 	  # disabled because of https://github.com/rktjmp/lush.nvim/issues/89
-      (luaPlugin { plugin = lush-nvim; }) 
+      # (luaPlugin { plugin = lush-nvim; }) 
       # (luaPlugin { plugin = gruvbox-nvim; }) 
 		# out of tree
 		# call with :Hoogle

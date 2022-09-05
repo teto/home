@@ -1,0 +1,2 @@
+Il y a plusieurs types de cron: https://wiki.gentoo.org/wiki/Cron#Which_cron_is_right_for_the_job.3F
+cron vs crontab

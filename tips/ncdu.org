@@ -1,0 +1,2 @@
+to check disk usage, ncdu peut exporter les resultats et les recharger plus tard via ncdu -F
+ncdu -1xo- / | gzip >export.gz

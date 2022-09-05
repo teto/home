@@ -31,10 +31,6 @@ local:
 	stow -t "$(XDG_DATA_HOME)" local
 	mkdir -p $(XDG_DATA_HOME)/fzf-history $(XDG_DATA_HOME)/newsbeuter
 
-zsh:
-	# won't work on nix
-	chsh -s /bin/zsh ${LOGIN}
-
 pip:
 	wget https://bootstrap.pypa.io/get-pip.py /tmp/
 	python3 /tmp/get-pip.py --user
@@ -89,4 +85,4 @@ cachix:
 
 # just to save the command
 rebuild:
-	sudo nixos-rebuild --flake ~/home --override-input nixpkgs-teto /home/teto/nixpkgs --override-input hm /home/teto/hm --override-input nova /home/teto/nova/nova-nix --no-write-lock-file switch  --show-trace
+	nixos-rebuild --flake ~/home --override-input nixpkgs-teto /home/teto/nixpkgs --override-input hm /home/teto/hm --override-input nova /home/teto/nova/nova-nix --no-write-lock-file switch  --show-trace --use-remote-sudo

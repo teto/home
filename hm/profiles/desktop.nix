@@ -157,7 +157,6 @@ let
     # hopefully we can remove this from the environment
     # it's just that I can't setup latex correctly
     # unstable.libreoffice
-    # unstable.wireshark
 
     qutebrowser  # keyboard driven fantastic browser
     gnome3.nautilus # demande webkit/todo replace by nemo ?

@@ -1,3 +1,4 @@
+config/ssh/config filter=git-crypt diff=git-crypt
 nixpkgs/secrets.nix filter=git-crypt diff=git-crypt
 nixpkgs/home-mail.nix filter=git-crypt diff=git-crypt
 nixpkgs/modules/binary-caches.json filter=git-crypt diff=git-crypt

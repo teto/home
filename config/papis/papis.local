@@ -1,0 +1,12 @@
+# my library for papers and stuff
+[papers]
+dir = ~/Nextcloud/papis_db
+# opentool = okular
+#
+## my library for papers and stuff
+# [papers]
+# dir = ~/Documents/papers
+
+# # my library for books and related documents
+# [books]
+# dir = ~/Documents/books
