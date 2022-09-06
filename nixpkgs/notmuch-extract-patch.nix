@@ -1,5 +1,4 @@
-{ 
-stdenv
+{ stdenv
 , notmuch
 , buildPythonApplication
 , fetchFromGitHub
