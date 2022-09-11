@@ -21,16 +21,17 @@ local map = vim.keymap.set
 -- require'plenary'
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
+vim.g.matchparen = 0
 
 packer.init({
 	autoremove = false,
 })
-vim.cmd([[
-  augroup packer_user_config
-    autocmd!
-    autocmd BufWritePost /home/teto/config/nvim/init-manual.lua source <afile> | PackerCompile
-  augroup end
-]])
+-- vim.cmd([[
+--   augroup packer_user_config
+--     autocmd!
+--     autocmd BufWritePost /home/teto/config/nvim/init-manual.lua source <afile> | PackerCompile
+--   augroup end
+-- ]])
 function file_exists(name)
 	local f=io.open(name,"r")
 	if f~=nil then io.close(f) return true else return false end
@@ -183,7 +184,7 @@ vim.opt.wildmode={'longest','list' } -- longest,list' => fills out longest then 
 vim.g.hoogle_fzf_cache_file = vim.fn.stdpath('cache')..'/hoogle_cache.json'
 
 vim.opt.wildmenu = true
-vim.opt.omnifunc='v:lua.vim.lsp.omnifunc'
+-- vim.opt.omnifunc='v:lua.vim.lsp.omnifunc'
 vim.opt.winbar='%=%m %f'
 
 
@@ -569,7 +570,10 @@ use 'kyazdani42/nvim-tree.lua'
 	   -- see :help dressing_get_config
 	   get_config = nil,
 	 },
-	 select = {
+	 mappings = {
+		 ["<C-c>"] = "Close"
+	},
+	select = {
 	   -- Priority list of preferred vim.select implementations
 	   backend = { "telescope", "fzf", "builtin", "nui" },
 
@@ -1601,6 +1605,10 @@ if has_telescope then
 	-- telescope.setup{}
 	telescope.setup{
 		defaults = {
+			layout_config = {
+				vertical = { width = 0.7 }
+				-- other layout configuration here
+			},
 			mappings = {
 				i = {
 					["<c-t>"] = trouble.open_with_trouble,

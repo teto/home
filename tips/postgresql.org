@@ -23,6 +23,7 @@ postgresql:///test?host=%2Ftmp%2Fephemeralpg.qG7Ya5
 ```
 
 export POSTGRESQL_CONNECTION=postgres:///run/postgresql
+<<<<<<< Updated upstream
 
 https://cloudblue.freshdesk.com/support/solutions/articles/44001888168-how-to-increase-postgresql-log-level-
 

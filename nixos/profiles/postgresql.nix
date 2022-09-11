@@ -13,7 +13,7 @@
 
 	 # ensureUsers =  [];
 	 # initdbArgs
-	 initialScript = ./postgresql-init.txt;
+	 # initialScript = ./postgresql-init.txt;
   };
 
   # see https://www.pgadmin.org/docs/pgadmin4/6.8/config_py.html

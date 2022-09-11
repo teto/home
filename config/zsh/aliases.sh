@@ -62,6 +62,8 @@ alias nixos-fast="nixos-rebuild  --no-build-nix --fast"
 alias n="nix develop"
 alias n2="nix develop --option builders \"\$RUNNER2\" -j0"
 alias n3='nix develop --option builders "$RUNNER3" -j0'
+# TODO should use all runners
+alias nall='nix develop --option builders "$RUNNER3" -j0'
 alias ns="nix-shell"
 # alias lens="sudo rm -rf /home/teto/.config/Lens/extensions && lens"
 # alias ff="find . -iname" # use fd instead

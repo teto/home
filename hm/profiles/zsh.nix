@@ -44,6 +44,9 @@ in
       };
 
       shellAliases = {
+	   # trying to generate aliases replacing RUNNER2
+	   #  l
+		# BUILDER2 = 
       } // config.programs.bash.shellAliases;
 
       autocd = true;
