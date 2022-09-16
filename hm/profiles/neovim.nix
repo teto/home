@@ -894,6 +894,10 @@ in
     # take the one from the flake
     package = myPackage;
 
+	# https://github.com/iskolbin/lbase64
+	# extraLuaPackages = lp: [ lp.basexx ];
+	extraLuaPackages = [ pkgs.lua51Packages.basexx ];
+
     # source doesn't like `stdpath('config').'`
     # todo should use mkBefore ${config.programs.neovim.generatedInitrc}
 	# source $XDG_CONFIG_HOME/nvim/init.manual.vim
