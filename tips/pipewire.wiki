@@ -1,2 +1,4 @@
 pw-top
 Try WIREPLUMBER_DEBUG=10
+
+systemctl --user restart pipewire{,-pulse}.socket

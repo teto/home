@@ -12,6 +12,23 @@
   alsa.enable = false;
   pulse.enable = true;
   jack.enable = false;
+    config.pipewire = {
+      "properties" = {
+		default.clock.allowed-rates = [ 44100 48000 96000 ];
+		"log.level" = 4;
+		"default.clock.quantum"       = 256;
+		"default.clock.min-quantum"   = 256;
+		"default.clock.max-quantum"   = 256;
+      };
+    };
+  };
+
+}
+        #"link.max-buffers" = 64;
+	# "link.max-buffers" = 16; # version < 3 clients can't handle more than this
+	# https://gitlab.freedesktop.org/pipewire/pipewire/-/wikis/Troubleshooting
+	# 4 or 5 should be verbose enough
+	# PIPEWIRE_DEBUG=5 <app> 2>log
 
     # # one or the other
     # media-session.enable = false;
@@ -25,22 +42,8 @@
     # use the example session manager (no others are packaged yet so this is enabled by default,
     # no need to redefine it in your config for now)
     #media-session.enable = true;
-    config.pipewire = {
-      "properties" = {
-		default.clock.allowed-rates = [ 44100 48000 ];
-        #"link.max-buffers" = 64;
-	# "link.max-buffers" = 16; # version < 3 clients can't handle more than this
-	# https://gitlab.freedesktop.org/pipewire/pipewire/-/wikis/Troubleshooting
-	# 4 or 5 should be verbose enough
-	# PIPEWIRE_DEBUG=5 <app> 2>log
-		"log.level" = 2;
 
         #"default.clock.quantum" = 1024;
         #"default.clock.min-quantum" = 32;
         #"default.clock.max-quantum" = 8192;
-		"pulse.min.req" = 0.021333; 
-      };
-    };
-  };
-
-}
+		# "pulse.min.req" = 0.021333; 

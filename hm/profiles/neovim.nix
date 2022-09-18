@@ -3,7 +3,7 @@
 let
   luaPlugin = attrs: attrs // {
     type = "lua";
-	config = lib.optionalString (attrs ? config)  (genBlockLua attrs.plugin.pname attrs.config);
+	config = lib.optionalString (attrs ? config && attrs.config != null)  (genBlockLua attrs.plugin.pname attrs.config);
   };
 
   # pluginConfigLua = p:

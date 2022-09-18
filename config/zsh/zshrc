@@ -260,10 +260,11 @@ SPROMPT="Correct $fg[red]%R$reset_color to $fg[green]%r$reset_color [(y)es (n)o 
 
 # mydir=${0:a:h}
 current_folder="${0:a:h}"
-echo "current-folder: $current_folder"
-source "${current_folder}/../fzf-gems/fzf_git_functions.sh"
-source "${current_folder}/../fzf-gems/fzf_git_keybindings.zsh"
+# echo "current-folder: $current_folder"
+# source "${current_folder}/../fzf-gems/fzf_git_functions.sh"
+# source "${current_folder}/../fzf-gems/fzf_git_keybindings.zsh"
 # echo $PWD
+source ~/fzf-git.sh/fzf-git.sh
 
 # TODO pass a path that is versioned in home
 teatimer() {
