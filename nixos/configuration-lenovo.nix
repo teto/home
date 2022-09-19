@@ -209,7 +209,9 @@ in
   ];
   # security.sudo.wheelNeedsPassword = ;
   services.xserver = {
-    videoDrivers = [ "nvidia" ];
+   # disabled to run stable-diffusion
+   # "nvidia"
+    videoDrivers = [ "modesetting" "fbdev" ];
     displayManager.gdm.wayland = true;
   };
   # system.replaceRuntimeDependencies

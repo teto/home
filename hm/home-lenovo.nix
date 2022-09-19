@@ -20,6 +20,7 @@ in
       ./profiles/weechat.nix
   ];
 
+  # Mic92/nix-index-database
 
   programs.pazi = {
     enable = false;

@@ -40,6 +40,7 @@
     purebred.url = "github:purebred-mua/purebred";
     poetry.url = "github:nix-community/poetry2nix";
     nix-update.url = "github:Mic92/nix-update";
+	nix-index-cache.url = "github:Mic92/nix-index-database";
     i3pystatus = { url = "github:teto/i3pystatus/nix_backend"; flake = false; };
     nova.url = "git+ssh://git@git.novadiscovery.net/world/nova-nix.git?ref=master";
     neovim = {
@@ -228,6 +229,7 @@
                 imports = [
                   ./nixos/configuration-lenovo.nix
                   ./nixos/profiles/nix-daemon.nix
+                  ./nixos/profiles/experimental.nix
                   ./nixos/profiles/neovim.nix
                   # ./nixos/profiles/peerix.nix
                   ./nixos/profiles/postgresql.nix
