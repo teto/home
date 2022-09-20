@@ -18,6 +18,7 @@ alias local-rebuild="sudo nixos-rebuild --flake ~/home --override-input nixpkgs-
 # Gitops quick
 alias mg='if [ -z ${BW_SESSION} ]; then export BW_SESSION=$(bw unlock --raw); fi && make gitops'
 alias bn='if [ -z ${BW_SESSION} ]; then export BW_SESSION=$(bw unlock --raw); fi && nix develop'
+# --command "novops lod -r "'
 
 # https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz
 # -f channel:nixos-unstable'

@@ -1230,8 +1230,8 @@ use {
 -- use { 'jbyuki/monolithic.nvim' } -- write latex equations in ASCII
 
 vim.g.sonokai_style = 'atlantis'
-vim.cmd([[colorscheme sonokai]])
--- vim.cmd([[colorscheme peachpuff]])
+-- vim.cmd([[colorscheme sonokai]])
+vim.cmd([[colorscheme peachpuff]])
 -- vim.cmd([[colorscheme pywal]])
 --require'sniprun'.setup({
 --  -- selected_interpreters = {'Python3_fifo'},        --" use those instead of the default for the current filetype
@@ -1269,7 +1269,16 @@ vim.keymap.set('n', '<leader>d', function()
 end)
 
 if has_fzf_lua then
+
 	require 'teto.fzf-lua'.register_keymaps()
+	local fzf_history_dir = vim.fn.expand('~/.local/share/fzf-history')
+	require('fzf-lua').setup{
+		-- [...]
+		fzf_opts = {
+			-- [...]
+			['--history']     = fzf_history_dir .. '/' .. 'myhistory'
+		},
+	}
 elseif has_telescope then
 	require 'teto.telescope'.telescope_create_keymaps()
 end

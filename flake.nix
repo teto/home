@@ -156,6 +156,7 @@
                   ./nixos/hardware-dell-camera.nix
                   ./nixos/modules/distributedBuilds.nix
                   ./nixos/configuration-xps.nix
+                  ./nixos/profiles/cron.nix
                   ./nixos/profiles/nix-daemon.nix
                   ./nixos/profiles/postgresql.nix
                   ./nixos/modules/xserver.nix

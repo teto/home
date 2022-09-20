@@ -20,3 +20,8 @@ git grep "string/regexp" $(git rev-list --all)
 https://stackoverflow.com/questions/7151311/using-git-how-could-i-search-for-a-string-across-all-branches
 
 git grep buildLayeredImage `git show-ref --heads`
+
+
+# bisect
+
+git bisect run ../test.sh

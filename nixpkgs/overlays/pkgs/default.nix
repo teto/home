@@ -16,6 +16,8 @@ final: prev:
 
   rofi = final.rofi-wayland;
 
+  Rdebug =  final.lib.enableDebugging (prev.R);
+
   # see https://github.com/NixOS/nixpkgs/pull/156974
   # i3lock = let
   #   patchedPkgs = import (builtins.fetchTarball {
