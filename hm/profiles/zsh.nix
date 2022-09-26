@@ -21,6 +21,9 @@ in
 {
   programs.zsh = {
       enable = true;
+
+	  enableFzfGit = true;
+
 	  # $HOME is prepend hence the issues
       dotDir = ".config/zsh";
       # autosuggestion.enable = true;

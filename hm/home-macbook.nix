@@ -18,7 +18,7 @@ in
   home.packages = with pkgs; [
     dunst
     fortune
-    xdg_utils
+    xdg-utils
     gtk-engine-murrine  # for hyper-light drifter
   ];
 

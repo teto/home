@@ -211,7 +211,11 @@ in
   services.xserver = {
    # disabled to run stable-diffusion
    # "nvidia"
-    videoDrivers = [ "modesetting" "fbdev" ];
+   videoDrivers = [ 
+	# "modesetting"
+	# "fbdev"
+	"nvidia"
+   ];
     displayManager.gdm.wayland = true;
   };
   # system.replaceRuntimeDependencies

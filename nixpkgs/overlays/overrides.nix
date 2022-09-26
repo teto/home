@@ -14,7 +14,7 @@ rec {
     };
   });
 
-  # xdg_utils = prev.xdg_utils.overrideAttrs(oa: {
+  # xdg-utils = prev.xdg-utils.overrideAttrs(oa: {
   #   pname = "xdg-utils-custom";
   #   name = "xdg-utils-custom-matt";
   #   # version = "matt";

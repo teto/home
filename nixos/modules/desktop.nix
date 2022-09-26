@@ -52,7 +52,7 @@ in
         source-code-pro
         dejavu_fonts
         # Adobe Source Han Sans
-        sourceHanSansPackages.japanese
+        source-han-sans #sourceHanSansPackages.japanese
         fira-code-symbols # for ligatures
         # noto-fonts
       ];

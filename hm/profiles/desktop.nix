@@ -50,7 +50,7 @@ let
   imPkgs = all: with pkgs;
     let
   in [
-    # gnome3.california # fails
+    # gnome.california # fails
     khard
     # libsecret  # to consult
     newsboat #
@@ -83,7 +83,7 @@ let
     # TODO
     # buku # broken
     # gcalc
-    # gnome3.gnome_control_center
+    # gnome.gnome_control_center
     # i3-layout-manager  # to save/load layouts
     # mdp # markdown CLI presenter
     # nyxt      # lisp browser
@@ -102,8 +102,8 @@ let
     desktop-file-utils  # to get desktop
     font-manager
     gnome.adwaita-icon-theme # else nothing appears
-    gnome3.eog # eye of gnome = image viewer / creates a collision
-    gnome3.file-roller # for GUI archive handling
+    gnome.eog # eye of gnome = image viewer / creates a collision
+    gnome.file-roller # for GUI archive handling
     pkgs.networkmanagerapplet # should
     hunspellDicts.fr-any
     libnotify
@@ -139,7 +139,7 @@ let
     # zathura # broken
   ]
   ++ lib.optionals all [
-    gnome3.gnome-calculator  # compare with qalqulate-gtk
+    gnome.gnome-calculator  # compare with qalqulate-gtk
   ]
   ;
 
@@ -159,7 +159,7 @@ let
     # unstable.libreoffice
 
     qutebrowser  # keyboard driven fantastic browser
-    gnome3.nautilus # demande webkit/todo replace by nemo ?
+    gnome.nautilus # demande webkit/todo replace by nemo ?
     # shutter # screenshot utility
     # mcomix # manga reader
     # mendeley # requiert qtwebengine
@@ -253,7 +253,7 @@ in
     # see https://github.com/rycee/home-manager/issues/908
     # could try ncurses as well
     # extraConfig = ''
-    #   pinentry-program ${pkgs.pinentry-gnome}/bin/pinentry-gnome3
+    #   pinentry-program ${pkgs.pinentry-gnome}/bin/pinentry-gnome
     # '';
   };
 
@@ -308,7 +308,7 @@ in
     settings = {
         email = config.accounts.email.accounts.fastmail.address;
         lock_timeout = 300;
-        pinentry = "gnome3";
+        pinentry = "gnome";
         # see https://github.com/nix-community/home-manager/issues/2476
         device_id= "111252f7-88b7-47f2-abb9-03dc4b2469ed";
     };
@@ -330,7 +330,7 @@ in
 	verbs = [ { invocation = "p"; key = "ctrl-o"; execution = ":open_leave"; } ];
   };
 
-  # for pinentry-gnome3 to work longer
+  # for pinentry-gnome to work longer
 
   # Works only on x11
   # systemd.user.services.deadd = {

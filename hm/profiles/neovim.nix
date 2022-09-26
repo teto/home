@@ -590,7 +590,7 @@ let
       # (luaPlugin {
       #   # matches nvim-orgmode
       #   plugin = orgmode;
-		# 		 require('orgmode').setup_ts_grammar()
+		# # require('orgmode').setup_ts_grammar()
       #   config = ''
       #   require('orgmode').setup{
       #       org_capture_templates = {'~/nextcloud/org/*', '~/orgmode/**/*'},
@@ -929,7 +929,8 @@ in
       nodePackages.typescript-language-server
       pandoc  # for markdown preview, should be in the package closure instead
       # pythonPackages.pdftotext  # should appear only in RC ? broken
-      rnix-lsp
+	  nil # a nix lsp
+      # rnix-lsp
       rust-analyzer
       shellcheck
       sumneko-lua-language-server

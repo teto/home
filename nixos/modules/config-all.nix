@@ -37,7 +37,7 @@ rec {
     ncurses.dev # for infocmp
     # termite.terminfo # broken on unstable to be able to edit over ssh
     kitty.terminfo # to be able to edit over ssh
-    utillinux # for lsns (namespace listing)
+    util-linux # for lsns (namespace listing)
   ] ++ (with pkgs; [
      automake
      # autoconf

@@ -45,7 +45,7 @@ rec {
     strace
     tig
     w3m   # for preview in ranger w3mimgdisplay
-    xdg_utils
+    xdg-utils
     whois
   ];
 

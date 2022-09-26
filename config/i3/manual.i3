@@ -240,3 +240,5 @@ include ~/.config/i3/config.xp
 
 exec_always --no-startup-id setxkbmap -layout us
 
+# class
+for_window [instance="pad_*"] move scratchpad

@@ -13,8 +13,9 @@ in
 
 
     full = { # full definition
+	# https://superuser.com/questions/1179843/how-to-start-a-firefox-with-a-different-wm-class-or-any-other-altered-property
       type = "Application";
-      exec = "firefox -p nova";
+      exec = "firefox -p nova --class firefox-nova";
       icon = "firefox";
       comment = "Firefox for nova";
       terminal = false;

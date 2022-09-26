@@ -18,6 +18,8 @@ for_window [class="^qutebrowser$"] title_format "<span background='blue'>QB</spa
 for_window [class="^Firefox$"] title_format "<span background='#F28559'>FF</span> %title"
 for_window [title="Thunderbird$"] title_format " %title"
 
+# title_format "<span background='#F28559'>FF</span> %title"
+for_window [class="^firefox-nova$"] move workspace "5:misc"
 # TODO use a local i3pystatus
 # bar {
 #   id 0

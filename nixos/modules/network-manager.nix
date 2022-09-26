@@ -2,7 +2,7 @@
 {
 
   # environment.systemPackages = [
-  #   pkgs.gnome3.networkmanagerapplet
+  #   pkgs.gnome.networkmanagerapplet
   # ];
 
   networking.networkmanager = {

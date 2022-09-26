@@ -10,6 +10,8 @@ let
   term = "${pkgs.kitty}/bin/kitty";
 
   notify-send = "${pkgs.libnotify}/bin/notify-send";
+
+  # note that you can assign a workspace to a specific monitor !
   bind_ws = workspace_id: fr: us:
 	let ws = builtins.toString workspace_id;
 	in
@@ -40,7 +42,7 @@ let
         # todo use i3lock-fancy instead
         # alternative is "light"
         # "${mod}+ctrl+v" = "exec ${pkgs.bash}/bin/bash ~/vim-anywhere/bin/run";
-        "${mod}+Tab"="exec \"${pkgs.rofi}/bin/rofi -modi 'window,run,drun,ssh' -show run\"";
+        "${mod}+Tab"="exec \"${pkgs.rofi}/bin/rofi -modi 'window,drun,ssh' -show window\"";
         "${mod}+Ctrl+Tab"="exec \"${pkgs.rofi}/bin/rofi -modi 'window' -show run\"";
         # TODO dwindow exclusively with WIN
         "Super_L+Tab"="exec \"${pkgs.rofi}/bin/rofi -modi 'run,drun,window,ssh' -show window\"";

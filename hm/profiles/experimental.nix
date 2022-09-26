@@ -16,6 +16,11 @@ in
   #     neovim.to = { type = "github"; owner = "neovim"; repo="neovim?dir=contrib"; };
   #   };
   # };
+  programs.ranger = {
+	enable = true;
+	# plugins = [];
+	# loadDefaultRc
+  };
 
   programs.aerc = {
 	enable = true;

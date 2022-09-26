@@ -95,7 +95,7 @@
               imports = my_imports ++ [
                 # custom modules
                 (import ./hm/modules/zsh.nix)
-                (import ./hm/modules/ranger.nix )
+                # (import ./hm/modules/ranger.nix )
                 # (import ./hm/modules/fcitx.nix )
                 (import ./hm/modules/xdg.nix )
               ];
