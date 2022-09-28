@@ -201,7 +201,8 @@ lspconfig.rust_analyzer.setup({
 	-- root_dir = root_pattern("Cargo.toml", "rust-project.json")
 })
 
-lspconfig.rnix.setup{}
+-- lspconfig.rnix.setup{}
+lspconfig.nil_ls.setup{}
 
 
 -- | Texlab

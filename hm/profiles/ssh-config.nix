@@ -16,25 +16,30 @@
         # checkHostIP
         identityFile = "~/.ssh/nova_key";
         # user = "nova";
-        host = "ovh-hybrid-runner-1.devops.novadiscovery.net";
+		host = "ovh1";
+        hostname = "ovh-hybrid-runner-1.devops.novadiscovery.net";
 		identitiesOnly = true;
       };
       ovh2 = {
         # identityFile = "~/.ssh/ci-infra-ec2-dev";
         identityFile = "~/.ssh/nova_key";
         # user = "teto";
-        host = "ovh-hybrid-runner-2.devops.novadiscovery.net";
+		host = "ovh2";
+        hostname = "ovh-hybrid-runner-2.devops.novadiscovery.net";
 		identitiesOnly = true;
       };
-      # ovh3 = {
-      #   identityFile = "~/.ssh/nova-infra-prod";
-      #   user = "ubuntu";
-      #   host = "ovh-hybrid-runner-3.devops.novadiscovery.net";
+      ovh3 = {
+        # identityFile = "~/.ssh/nova-infra-prod";
+        # user = "teto";
+		identitiesOnly = true;
+        identityFile = "~/.ssh/nova_key";
+		host = "ovh3";
+        hostname = "ovh-hybrid-runner-3.devops.novadiscovery.net ";
 		# extraOptions = {
-		  # # to fix https://dammit.nl/ssh-unix-socket.html
+		  # to fix https://dammit.nl/ssh-unix-socket.html
 		  # controlPath = "~/.ssh/control/%C";
 		# };
-      # };
+      };
       gitlab = {
         host = "gitlab.devops.novadiscovery.net";
         user = "ubuntu";

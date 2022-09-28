@@ -264,7 +264,7 @@ current_folder="${0:a:h}"
 # source "${current_folder}/../fzf-gems/fzf_git_functions.sh"
 # source "${current_folder}/../fzf-gems/fzf_git_keybindings.zsh"
 # echo $PWD
-source ~/fzf-git.sh/fzf-git.sh
+# source ~/fzf-git.sh/fzf-git.sh
 
 # TODO pass a path that is versioned in home
 teatimer() {

@@ -1230,8 +1230,8 @@ use {
 -- use { 'jbyuki/monolithic.nvim' } -- write latex equations in ASCII
 
 vim.g.sonokai_style = 'atlantis'
--- vim.cmd([[colorscheme sonokai]])
-vim.cmd([[colorscheme peachpuff]])
+vim.cmd([[colorscheme sonokai]])
+-- vim.cmd([[colorscheme peachpuff]])
 -- vim.cmd([[colorscheme pywal]])
 --require'sniprun'.setup({
 --  -- selected_interpreters = {'Python3_fifo'},        --" use those instead of the default for the current filetype
@@ -1276,7 +1276,9 @@ if has_fzf_lua then
 		-- [...]
 		fzf_opts = {
 			-- [...]
-			['--history']     = fzf_history_dir .. '/' .. 'myhistory'
+			['--history']     = fzf_history_dir .. '/' .. 'myhistory',
+			-- to get the prompt at the top
+			['--layout'] = 'reverse'
 		},
 	}
 elseif has_telescope then
