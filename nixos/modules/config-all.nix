@@ -183,17 +183,17 @@ rec {
 
   nixpkgs = {
     config = {
-  #     allowUnfree = true;
       allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-        "vscode-extension-ms-vsliveshare-vsliveshare"
-        "sublimetext3"
+        "Oracle_VM_VirtualBox_Extension_Pack"
+        "ec2-api-tools"
+        "google-chrome"
         "slack"
-        "vscode"
         "steam"
         "steam-original"
         "steam-runtime"
-        "Oracle_VM_VirtualBox_Extension_Pack"
-        "ec2-api-tools"
+        "sublimetext3"
+        "vscode"
+        "vscode-extension-ms-vsliveshare-vsliveshare"
       ];
     };
   };

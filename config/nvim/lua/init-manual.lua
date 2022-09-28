@@ -1276,7 +1276,7 @@ if has_fzf_lua then
 		-- [...]
 		fzf_opts = {
 			-- [...]
-			['--history']     = fzf_history_dir .. '/' .. 'myhistory',
+			['--history']     = fzf_history_dir ,
 			-- to get the prompt at the top
 			['--layout'] = 'reverse'
 		},

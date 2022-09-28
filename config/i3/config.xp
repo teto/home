@@ -30,6 +30,3 @@ for_window [class="^firefox-nova$"] move workspace "5:misc"
 #   workspace_buttons yes
 # strip_workspace_numbers yes
 # }
-
-
-
