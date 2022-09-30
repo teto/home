@@ -313,6 +313,12 @@ use {
   'AckslD/nvim-FeMaco.lua',
   config = 'require("femaco").setup()',
 }
+use { 'folke/noice.nvim',
+  event = "VimEnter",
+  config = function()
+    require("noice").setup()
+  end,
+}
 use { 'seandewar/nvimesweeper', opt = true }
 use { 'voldikss/vim-translator', opt = true }
 use 'calvinchengx/vim-aftercolors' -- load after/colors

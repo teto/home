@@ -6,33 +6,11 @@ let
 	config = lib.optionalString (attrs ? config && attrs.config != null)  (genBlockLua attrs.plugin.pname attrs.config);
   };
 
-  # pluginConfigLua = p:
-  #   if p ? plugin && (p.config or "") != "" then ''
-  #     -- ${p.plugin.pname} {{{
-  #     ${p.config}
-  #     -- }}}
-  #   '' else
-  #     "";
-
   genBlockLua = title: content: ''
       -- ${title} {{{
       ${content}
       -- }}}
 	  '';
-
-  # pluginConfigLua = p:
-  #   if p ? plugin && (p.config or "") != "" then ''
-  #     -- ${p.plugin.pname} {{{
-  #     ${p.config}
-  #     -- }}}
-  #   '' else
-  #     "";
-
-  genBlockViml = title: content: lib.optionalString (content != null) ''
-    " ${title} {{{
-    ${content}
-	" }}}
-	'';
 
   luaRcBlocks = {
 	appearance = ''
@@ -59,8 +37,6 @@ let
     #   set sessionoptions-=help
     # '';
   };
-
-  vimlRcBlocks = { };
 
   myVimPluginsOverlay = pkgs.callPackage ../../nixpkgs/overlays/vim-plugins/generated.nix {
     inherit (pkgs.vimUtils) buildVimPluginFrom2Nix;

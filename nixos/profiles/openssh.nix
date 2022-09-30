@@ -8,12 +8,7 @@
 
     allowSFTP = true; # for sshfs edit
     # type = types.enum ["yes" "without-password" "prohibit-password" "forced-commands-only" "no"];
-    permitRootLogin = "prohibit-password";
     # needed since default is true !
-    passwordAuthentication = false;
-    forwardX11 = true;
-    kbdInteractiveAuthentication = false;
-    logLevel = "VERBOSE";
     # listenAddresses = [
     #   { addr = "0.0.0.0"; port = 64022; }
     # ];
@@ -31,6 +26,21 @@
 
     # hostKeys to generate keys
     # hostKeys
+
+
+	# new format
+	settings = {
+	 LogLevel = "VERBOSE";
+	 KbdInteractiveAuthentication = false;
+	 PasswordAuthentication = false;
+	 PermitRootLogin = "prohibit-password";
+	};
+
+    # forwardX11 = true;
+	 # kbdInteractiveAuthentication = false;
+    # logLevel = "VERBOSE";
+    # permitRootLogin = "prohibit-password";
+    # passwordAuthentication = false;
 
   };
 }

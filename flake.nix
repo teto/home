@@ -60,7 +60,7 @@
 
   outputs = { self, hm, nixpkgs, nur, unstable , nova , ... }:
     let
-      inherit (builtins) listToAttrs baseNameOf attrNames readDir;
+      inherit (builtins) listToAttrs baseNameOf;
       # inherit (nixpkgsFinal.lib) removeSuffix;
 
       system = "x86_64-linux";
@@ -125,9 +125,7 @@
 
       # defaultTemplate = templates.app;
 
-      nixosConfigurations = let
-      in
-        {
+      nixosConfigurations = {
           router = nixpkgs.lib.nixosSystem {
             inherit system;
             modules = [

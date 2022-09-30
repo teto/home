@@ -1,3 +1,5 @@
+# to run on a nvidia card
+--unsupported-gpu
 
 restart 
 swaymsg reload
