@@ -12,15 +12,16 @@ local M = {}
 -- " defines a tip
 -- tmenu Trans.FR Traduire vers le francais
 tabMenu = {
-["Tabs.S2"]= ":set  tabstop=2 softtabstop=2 sw=2<CR>",
+["Tabs.S2"]= ":set  tabstop=2 sofllottabstop=2 sw=2<CR>",
 ["Tabs.S4"]= ":set ts=4 sts=4 sw=4<CR>",
 ["Tabs.S6"]= ":set ts=6 sts=6 sw=6<CR>",
 ["Tabs.S8"]= ":set ts=8 sts=8 sw=8<CR>",
 ["Tabs.SwitchExpandTabs"] = ":set expandtab!"
 }
 
-M.menu_add = function(name, command)
+-- "PopUpn"
 
+M.menu_add = function(name, command)
   -- is there a moment we 
   res = vim.cmd ([[menu ]]..name..[[ ]]..command)
 end
@@ -31,7 +32,8 @@ M.menu_add_cmd = function(name, command)
    -- print(res)
 end
 
-
+M.menu_add ("PopUp.Lsp_definition", "<Cmd>lua vim.lsp.buf.definition<CR>")
+M.menu_add ("PopUp.Lsp_definition", "<Cmd>lua vim.lsp.buf.definition<CR>")
 
 
 return M
