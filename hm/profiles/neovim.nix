@@ -361,9 +361,9 @@ let
   ];
 
   completionPlugins = with pkgs.vimPlugins; [
-	(luaPlugin { plugin = coq_nvim; })
-	# (luaPlugin { plugin = nvim-cmp; })
-	# (luaPlugin { plugin = cmp-nvim-lsp; })
+	# (luaPlugin { plugin = coq_nvim; })
+	(luaPlugin { plugin = nvim-cmp; })
+	(luaPlugin { plugin = cmp-nvim-lsp; })
 	# (luaPlugin { plugin = cmp-cmdline-history; })
 	# (luaPlugin { plugin = cmp-conventionalcommits; })
 	# (luaPlugin { plugin = cmp-digraphs; })
