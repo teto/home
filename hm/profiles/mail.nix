@@ -338,7 +338,21 @@ in
 	  systemd.user.services.mbsync = {
 		Service = {
 		  # TODO need DBUS_SESSION_BUS_ADDRESS 
-		  FailureAction=''${pkgs.libnotify}/bin/notify-send --app-name="%N" "Failure"'';
+		  # --app-name="%N" toto
+		  Environment=''DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/1000/bus"'';
+		  FailureAction=''${pkgs.libnotify}/bin/notify-send "Failure"'';
+		    # TODO try to use LoadCredential
+			# serviceConfig = {
+            # DynamicUser = true;
+            # PrivateTmp = true;
+            # WorkingDirectory = "/var/lib/plausible";
+            # StateDirectory = "plausible";
+            # LoadCredential = [
+              # "ADMIN_USER_PWD:${cfg.adminUser.passwordFile}"
+              # "SECRET_KEY_BASE:${cfg.server.secretKeybaseFile}"
+              # "RELEASE_COOKIE:${cfg.releaseCookiePath}"
+            # ] ++ lib.optionals (cfg.mail.smtp.passwordFile != null) [ "SMTP_USER_PWD:${cfg.mail.smtp.passwordFile}"];
+          # };
 		};
 
 	  };

@@ -1,4 +1,5 @@
 systemd-analyze blame
+systemd-analyze verify toto.unit
 
 systemctl --failed --user
 

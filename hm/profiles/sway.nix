@@ -49,9 +49,7 @@ in
 # Toggle control center
 
 
-      keybindings = let
-        mod="Mod1";
-      in {
+      keybindings = {
 		"$mod+Shift+n" = " exec ${pkgs.swaynotificationcenter}/bin/swaync-client -t -sw";
         # clipman can be used too
         # clipman pick -t wofi
@@ -76,7 +74,7 @@ in
     # https://github.com/dylanaraps/pywal/blob/master/pywal/templates/colors-sway
     # TODO
 	# from https://www.reddit.com/r/swaywm/comments/uwdboi/how_to_make_chrome_popup_windows_floating/
-    extraConfig = ''
+    extraConfig = builtins.readFile ../../config/i3/config.shared + ''
 	  bindsym button2 kill
 	  smart_gaps yes
 

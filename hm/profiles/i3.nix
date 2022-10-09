@@ -42,10 +42,12 @@ let
         # todo use i3lock-fancy instead
         # alternative is "light"
         # "${mod}+ctrl+v" = "exec ${pkgs.bash}/bin/bash ~/vim-anywhere/bin/run";
-        "${mod}+Tab"="exec \"${pkgs.rofi}/bin/rofi -modi 'window,drun,ssh' -show window\"";
+        "${mod}+Tab"="exec \"${pkgs.rofi}/bin/rofi -modi 'drun,window,ssh' -show window\"";
         "${mod}+Ctrl+Tab"="exec \"${pkgs.rofi}/bin/rofi -modi 'window' -show run\"";
         # TODO dwindow exclusively with WIN
         "Super_L+Tab"="exec \"${pkgs.rofi}/bin/rofi -modi 'run,drun,window,ssh' -show window\"";
+        "Super_L+a"="exec \"${pkgs.rofi}/bin/rofi -modi 'run,drun,window,ssh' -show window\"";
+        "Mod4+Tab"="exec \"${pkgs.rofi}/bin/rofi -modi 'run,drun,window,ssh' -show window\"";
 
         # locker
         # "${mod}+Ctrl+L"="exec ${pkgs.i3lock-fancy}/bin/i3lock-fancy";
@@ -177,15 +179,12 @@ in
 {
   # see https://discourse.nixos.org/t/opening-i3-from-home-manager-automatically/4849/7
 
-  xsession.windowManager.i3 =
-  let
-    in
-  {
+  xsession.windowManager.i3 = {
     # keep it enabled to generate the config
     enable = true;
 
     # bindsym $mod+ctrl+v exec ~/vim-anywhere/bin/run"
-    extraConfig = sharedExtraConfig
+    extraConfig = builtins.readFile ../../config/i3/config.shared
       + ''
         exec_always --no-startup-id setxkbmap -layout us
         exec_always --no-startup-id setxkbmap -option ctrl:nocaps

@@ -316,6 +316,7 @@ use {
 use { 'folke/noice.nvim',
   event = "VimEnter",
   config = function()
+	-- https://github.com/folke/noice.nvim/wiki/Configuration-Recipes#show-recording-messages
     require("noice").setup({
       cmdline = {
         view = "cmdline_popup", -- view for rendering the cmdline. Change to `cmdline` to get a classic cmdline at the bottom
@@ -333,12 +334,69 @@ use { 'folke/noice.nvim',
         filter = { event = "msg_show", ["not"] = { kind = { "search_count", "echo" } } },
       },
       throttle = 1000 / 30, -- how frequently does Noice need to check for ui updates? This has no effect when in blocking mode.
-      views = {}, -- @see the section on views below
+      views = {
+		-- @see the section on views below
+		cmdline_popup = {
+			border = {
+			style = "none",
+			padding = { 2, 3 },
+			},
+        -- filter_options = {},
+			win_options = {
+				winhighlight = "NormalFloat:NormalFloat,FloatBorder:FloatBorder",
+			},
+			position = {
+			-- row = 5,
+			col = "50%",
+			},
+			size = {
+				width = 110,
+				height = "auto",
+			},
+		},
+		popupmenu = {
+			relative = "editor",
+			position = {
+			row = 8,
+			col = "50%",
+			},
+			size = {
+			width = 60,
+			height = 10,
+			},
+			border = {
+			style = "rounded",
+			padding = { 0, 1 },
+			},
+			win_options = {
+			winhighlight = { Normal = "Normal", FloatBorder = "DiagnosticInfo" },
+			},
+		},
+
+	  },
       routes = {
 		-- skip search_count messages instead of showing them as virtual text
-          filter = { event = "msg_show", kind = "search_count" },
-          opts = { skip = true },
-
+          -- filter = { event = "msg_show", kind = "search_count" },
+          -- opts = { skip = true },
+      { -- shows @Recording message
+        view = "notify",
+        filter = { event = "msg_showmode" },
+      },
+      {
+        filter = {
+          event = "cmdline",
+          find = "^%s*[/?]",
+        },
+        view = "cmdline",
+      },
+	  {
+        filter = {
+          event = "msg_show",
+          kind = "",
+          find = "written",
+        },
+        opts = { skip = true },
+      },
 	  }, -- @see the section on routes below
   })
   end,
@@ -820,12 +878,16 @@ use {
 -- }
 
 -- telescope plugins {{{
-use '~/telescope.nvim'	  -- fzf-like in lua
-use { 'nvim-telescope/telescope-github.nvim' }
-use { 'nvim-telescope/telescope-symbols.nvim' }
-use {'nvim-telescope/telescope-fzy-native.nvim'}
-use { 'nvim-telescope/telescope-media-files.nvim'}
-use { 'nvim-telescope/telescope-packer.nvim' } -- :Telescope packer
+use { '~/telescope.nvim',
+	requires = {
+'nvim-telescope/telescope-github.nvim',
+ 'nvim-telescope/telescope-symbols.nvim',
+'nvim-telescope/telescope-fzy-native.nvim',
+ 'nvim-telescope/telescope-media-files.nvim',
+ 'nvim-telescope/telescope-packer.nvim',  -- :Telescope pack,e
+ 'MrcJkb/telescope-manix'   -- :Telescope manix
+	}
+}
 --}}}
 
 -- use "terrortylor/nvim-comment"
@@ -1746,7 +1808,8 @@ if has_telescope then
 	-- telescope.load_extension('fzf')
 	-- telescope.load_extension('fzy_native')
 	-- telescope.load_extension("notify")
-	-- telescope.load_extension("frecency")
+	telescope.load_extension("frecency")
+	telescope.load_extension("manix")
 
 	-- TODO add autocmd
 	-- User TelescopePreviewerLoaded

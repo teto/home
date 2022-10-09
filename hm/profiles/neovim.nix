@@ -897,8 +897,10 @@ in
     # TODO add lsp stuff
     extraPackages = with pkgs; [
       # luaPackages.lua-lsp
+      lua51Packages.luacheck
       haskellPackages.hasktags
       jq
+	  manix
       nodePackages.bash-language-server
       nodePackages.dockerfile-language-server-nodejs # broken
       nodePackages.pyright

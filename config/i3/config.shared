@@ -1,0 +1,42 @@
+# config shared with sway
+set $GroupUs Group1
+set $GroupFr Group2
+
+set $mod Mod1
+set $rmod Mod1
+
+# to easily swap between i3/vim mode
+set $kleft h
+set $kdown j
+set $kup k
+set $kright l
+
+
+workspace_auto_back_and_forth true
+show_marks yes
+
+set $w1 1:
+set $w2 2:
+set $w3 3:
+set $w4 4:qemu
+set $w5 5:misc
+set $w6 6:irc
+set $w7 7
+set $w8 8
+set $w9 9
+
+floating_minimum_size 75 x 50
+floating_maximum_size -1 x -1
+
+# Mod4 => window key
+set $mad Super_L
+# Mod4
+
+# The middle button over a titlebar kills the window
+bindsym --release button2 kill
+
+for_window [title="Thunderbird$"] title_format " %title"
+
+
+include ~/.config/i3/manual.i3
+

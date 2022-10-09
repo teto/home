@@ -57,6 +57,7 @@ in
       global={
         markup="full";
         sticky_history = true;
+history = "ctrl+grave";
       # icon_path = let
       #   useCustomTheme = cfg.iconTheme.package != hicolorTheme.package
       #     || cfg.iconTheme.name != hicolorTheme.name || cfg.iconTheme.size
@@ -74,13 +75,13 @@ in
         geometry = "500x30-30+20";
       };
 
-      shortcuts = {
+      # shortcuts = {
 
     # Redisplay last message(s).
     # On the US keyboard layout "grave" is normally above TAB and left
     # of "1". Make sure this key actually exists on your keyboard layout,
-    history = "ctrl+grave";
-      };
+    # history = "ctrl+grave";
+    #   };
 
 
 # [shortcuts]
