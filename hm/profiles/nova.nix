@@ -1,6 +1,4 @@
 { config, lib, pkgs,  ... }:
-let
-in
 {
 
   xdg.desktopEntries = {
@@ -17,9 +15,9 @@ in
       type = "Application";
       exec = "firefox -p nova --class firefox-nova";
       icon = "firefox";
-      comment = "Firefox for nova";
+      comment = "Nova (firefox)";
       terminal = false;
-      name = "Firefox for nova";
+      name = "nova (Firefox)";
       genericName = "Web Browser";
       mimeType = [ "text/html" "text/xml" ];
       categories = [ "Network" "WebBrowser" ];

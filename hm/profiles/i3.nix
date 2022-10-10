@@ -42,7 +42,7 @@ let
         # todo use i3lock-fancy instead
         # alternative is "light"
         # "${mod}+ctrl+v" = "exec ${pkgs.bash}/bin/bash ~/vim-anywhere/bin/run";
-        "${mod}+Tab"="exec \"${pkgs.rofi}/bin/rofi -modi 'drun,window,ssh' -show window\"";
+        "${mod}+Tab"="exec \"${pkgs.rofi}/bin/rofi -modi 'drun,window,ssh' -show drun\"";
         "${mod}+Ctrl+Tab"="exec \"${pkgs.rofi}/bin/rofi -modi 'window' -show run\"";
         # TODO dwindow exclusively with WIN
         "Super_L+Tab"="exec \"${pkgs.rofi}/bin/rofi -modi 'run,drun,window,ssh' -show window\"";
