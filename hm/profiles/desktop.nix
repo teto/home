@@ -158,7 +158,7 @@ let
     # it's just that I can't setup latex correctly
     # unstable.libreoffice
 
-    qutebrowser  # keyboard driven fantastic browser
+    # qutebrowser  # broken keyboard driven fantastic browser
     gnome.nautilus # demande webkit/todo replace by nemo ?
     # shutter # screenshot utility
     # mcomix # manga reader
