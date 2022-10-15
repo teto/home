@@ -47,6 +47,23 @@ let
   );
 
 
+  parserDir = pkgs.tree-sitter.withPlugins (tree-sitter-grammars-fn);
+  # TODO this should be done automatically
+  tree-sitter-grammars-fn = p: with p; [
+	tree-sitter-bash
+	tree-sitter-c
+	tree-sitter-lua
+	tree-sitter-http
+	tree-sitter-json
+	tree-sitter-nix
+	# tree-sitter-haskell # crashes with a loop
+	tree-sitter-python
+	tree-sitter-html  # for rest.nvim
+	tree-sitter-norg
+	tree-sitter-org-nvim
+  ];
+
+
 # " , { 'tag': 'v3.12.0' }
 # Plug 'Olical/aniseed' " dependency of ?
 # Plug 'bakpakin/fennel.vim'
@@ -102,21 +119,38 @@ let
 
   luaPlugins = with pkgs.vimPlugins; [
     {
-      plugin = (nvim-treesitter.withPlugins (
-          plugins: with plugins; [
-            tree-sitter-bash
-            tree-sitter-c
-            tree-sitter-lua
-            tree-sitter-http
-            tree-sitter-json
-            tree-sitter-nix
-            # tree-sitter-haskell # crashes with a loop
-            tree-sitter-python
-            tree-sitter-html  # for rest.nvim
-            tree-sitter-norg
-            tree-sitter-org-nvim
-          ]
-        ));
+	 plugin = nvim-treesitter;
+	 runtime = {
+	  "parser" = {
+	   recursive = true;
+	   # target
+	   # target = "parser";
+	   source = parserDir;
+	   };
+	 };
+      # plugin = (nvim-treesitter.withPlugins (
+      #     plugins: with plugins; [
+      #       tree-sitter-bash
+      #       tree-sitter-c
+      #       tree-sitter-lua
+      #       tree-sitter-http
+      #       tree-sitter-json
+      #       tree-sitter-nix
+      #       # tree-sitter-haskell # crashes with a loop
+      #       tree-sitter-python
+      #       tree-sitter-html  # for rest.nvim
+      #       tree-sitter-norg
+      #       tree-sitter-org-nvim
+      #     ]
+      #   ));
+	   # see https://github.com/NixOS/nixpkgs/issues/189838#issuecomment-1250993635 for rationale
+	   # runtime 
+	   # config = ''
+		 # local available, config = pcall(require, 'nvim-treesitter.configs')
+		 # config.setup {
+		  # parser_install_dir = ${pkgs.buildEnv { name = "tree-sitter-grammars"; paths = tree-sitter-grammars; } }
+		 # }
+	   # '';
     }
     { plugin = satellite-nvim; }
     # { plugin = nvim-dap; }
@@ -563,20 +597,20 @@ let
       # })
 
 	  # it depends on nvim-treesitter
-      # (luaPlugin {
-      #   # matches nvim-orgmode
-      #   plugin = orgmode;
-		# # require('orgmode').setup_ts_grammar()
-      #   config = ''
-      #   require('orgmode').setup{
-      #       org_capture_templates = {'~/nextcloud/org/*', '~/orgmode/**/*'},
-      #       org_default_notes_file = '~/orgmode/refile.org',
-      #       -- TODO add templates
-      #       org_agenda_templates = { t = { description = 'Task', template = '* TODO %?\n  %u' } },
-      #   }
-
-      #   '';
-      # })
+      (luaPlugin {
+        # matches nvim-orgmode
+        plugin = orgmode;
+		
+        config = ''
+		require('orgmode').setup_ts_grammar()
+        require('orgmode').setup{
+            org_capture_templates = {'~/nextcloud/org/*', '~/orgmode/**/*'},
+            org_default_notes_file = '~/orgmode/refile.org',
+            -- TODO add templates
+            org_agenda_templates = { t = { description = 'Task', template = '* TODO %?\n  %u' } },
+        }
+	   '';
+      })
 
       { plugin = editorconfig-vim; }
 

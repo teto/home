@@ -32,10 +32,10 @@ packer.init({
 --     autocmd BufWritePost /home/teto/config/nvim/init-manual.lua source <afile> | PackerCompile
 --   augroup end
 -- ]])
-function file_exists(name)
-	local f=io.open(name,"r")
-	if f~=nil then io.close(f) return true else return false end
-end
+-- local function file_exists(name)
+-- 	local f=io.open(name,"r")
+-- 	if f~=nil then io.close(f) return true else return false end
+-- end
 -- main config {{{
 -- vim.opt.splitbelow = true	-- on horizontal splits
 vim.opt.splitright = true   -- on vertical split
@@ -315,11 +315,13 @@ use {
 }
 use { 'folke/noice.nvim',
   event = "VimEnter",
+  requires = { "rcarriga/nvim-notify" },
   config = function()
 	-- https://github.com/folke/noice.nvim/wiki/Configuration-Recipes#show-recording-messages
     require("noice").setup({
       cmdline = {
-        view = "cmdline_popup", -- view for rendering the cmdline. Change to `cmdline` to get a classic cmdline at the bottom
+		-- view for rendering the cmdline. Change to `cmdline` to get a classic cmdline at the bottom
+        view = "cmdline_popup",
         opts = { buf_options = { filetype = "vim" } }, -- enable syntax highlighting in the cmdline
         icons = {
           ["/"] = { icon = " ", hl_group = "Normal" },
@@ -333,7 +335,8 @@ use { 'folke/noice.nvim',
         opts = { enter = true },
         filter = { event = "msg_show", ["not"] = { kind = { "search_count", "echo" } } },
       },
-      throttle = 1000 / 30, -- how frequently does Noice need to check for ui updates? This has no effect when in blocking mode.
+	  -- how frequently does Noice need to check for ui updates? This has no effect when in blocking mode.
+      throttle = 1000 / 30,
       views = {
 		-- @see the section on views below
 		cmdline_popup = {
@@ -406,7 +409,7 @@ use { 'voldikss/vim-translator', opt = true }
 use 'calvinchengx/vim-aftercolors' -- load after/colors
 use 'bfredl/nvim-luadev'  -- lua repl :Luadev
 use 'alok/notational-fzf-vim' -- to take notes, :NV
--- use { 
+-- use {
 -- 	'hkupty/iron.nvim',
 -- 	config = function ()
 -- 		local iron = require("iron.core")
@@ -1142,6 +1145,9 @@ if has_cmp then
 	--   -- ['<CR>'] = cmp.mapping.confirm({ select = true }),
 	-- },
 	}),
+	-- view = {
+	-- 	entries = 'native'
+	-- },
 	sources = {
 	  { name = 'nvim_lsp' },
 
@@ -1173,10 +1179,10 @@ end
 
 -- Load custom tree-sitter grammar for org filetype
 -- orgmode depends on treesitter
--- local has_orgmode, orgmode = pcall(require, "orgmode")
--- if has_orgmode then
--- 	orgmode.setup_ts_grammar()
--- end
+local has_orgmode, orgmode = pcall(require, "orgmode")
+if has_orgmode then
+	orgmode.setup_ts_grammar()
+end
 
 -- use {
 --	   "nvim-neorg/neorg",
@@ -1887,11 +1893,12 @@ vim.cmd [[highlight IndentBlanklineIndent5 guifg=#61AFEF gui=nocombine]]
 vim.cmd [[highlight IndentBlanklineIndent6 guifg=#C678DD gui=nocombine]]
 
 
-menu_add, menu_add_cmd = myMenu.menu_add, myMenu.menu_add_cmd
+local menu_add, menu_add_cmd = myMenu.menu_add, myMenu.menu_add_cmd
 menu_add("LSP.Declaration", '<cmd>lua vim.lsp.buf.declaration()<cr>')
 menu_add("LSP.Definition", '<cmd>lua vim.lsp.buf.definition()<cr>')
 menu_add("LSP.Hover", '<cmd>lua vim.lsp.buf.references()<cr>')
 menu_add("LSP.Rename", '<cmd>lua vim.lsp.buf.rename()<cr>')
+menu_add("LSP.Format", '<cmd>lua vim.lsp.buf.format()<cr>')
 
 menu_add("Toggle.Minimap", '<cmd>MinimapToggle<cr>')
 menu_add("Toggle.Obsession", '<cmd>Obsession<cr>')
@@ -1901,8 +1908,10 @@ menu_add("Toggle.Blanklines", '<cmd>IndentBlanklineToggle<cr>')
 menu_add("REPL.Send line", [[<cmd>lua require'luadev'.exec(vim.api.nvim_get_current_line())<cr>]])
 -- menu_add('REPL.Send selection ', 'call <SID>luadev_run_operator(v:true)')
 
-menu_add('Diagnostic.Display_in_QF', '<cmd>lua vim.diagnostic.setqflist({open = true, severity = { min = vim.diagnostic.severity.WARN } })<cr>')
-menu_add('Diagnostic.Set_severity_to_warning', '<cmd>lua vim.diagnostic.config({virtual_text = { severity = { min = vim.diagnostic.severity.WARN } }})<cr>')
+menu_add('Diagnostic.Display_in_QF',
+	'<cmd>lua vim.diagnostic.setqflist({open = true, severity = { min = vim.diagnostic.severity.WARN } })<cr>')
+menu_add('Diagnostic.Set_severity_to_warning',
+	'<cmd>lua vim.diagnostic.config({virtual_text = { severity = { min = vim.diagnostic.severity.WARN } }})<cr>')
 menu_add('Diagnostic.Set_severity_to_all', '<cmd>lua vim.diagnostic.config({virtual_text = { severity = nil }})<cr>')
 
 menu_add_cmd("Search.Search_and_replace", "lua require('spectre').open()")
@@ -1924,7 +1933,7 @@ menu_add("Rest.RunRequest", "<cmd>lua require('rest-nvim').run(true)<cr>")
 -- menu_add("DAP.Continue", 'lua require"dap".continue()')
 -- menu_add("DAP.Open repl", 'lua require"dap".repl.open()')
 
-function open_contextual_menu()
+local function open_contextual_menu()
 -- getcurpos()	Get the position of the cursor.  This is like getpos('.'), but
 --		includes an extra "curswant" in the list:
 --			[0, lnum, col, off, curswant] ~

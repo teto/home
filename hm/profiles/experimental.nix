@@ -1,8 +1,4 @@
 { pkgs, lib, config, ... }:
-let
-
-in
-
 {
   # programs.meli = {
   #   enable = true;
@@ -30,7 +26,7 @@ in
 
   programs.xdg.enable = true;
 
-  home.packages = with pkgs; [
+  home.packages = [
     # deadd-notification-center
     # meli  # broken jmap mailreader
   ];

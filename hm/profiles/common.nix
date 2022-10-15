@@ -12,7 +12,7 @@ let
   in src;
 
 in
-rec {
+{
   news.display = "silent";
 
   imports = [

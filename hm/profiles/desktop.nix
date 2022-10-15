@@ -1,13 +1,11 @@
 { config, pkgs, lib,  ... }:
 let
-  terminalCommand = pkgs.kitty;
+  # terminalCommand = pkgs.kitty;
 
   pass-custom = (pkgs.pass.override { waylandSupport = true; }).withExtensions(ext:
    with ext; [pass-import]);
 
-  devPkgs = all: with pkgs; let
-    in
-    [
+  devPkgs = all: with pkgs; [
     # TODO pass to vim makeWrapperArgs
     # nodePackages.bash-language-server
     # just in my branch :'(
@@ -32,6 +30,8 @@ let
     ncurses.dev # for infocmp
     # neovim-remote # broken for latex etc
     # nix-doc # to access nix doc (broken)
+	manix 
+	nix-output-monitor
     nix-index # to list package contents
     nixpkgs-fmt
     nixpkgs-review
@@ -47,9 +47,7 @@ let
     hexyl  # hex editor
   ];
 
-  imPkgs = all: with pkgs;
-    let
-  in [
+  imPkgs = all: with pkgs; [
     # gnome.california # fails
     khard
     # libsecret  # to consult

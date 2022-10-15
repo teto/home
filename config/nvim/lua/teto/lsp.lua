@@ -9,8 +9,8 @@ local attach_cb = require 'on_attach'
 local temp = vim.lsp.handlers["textDocument/formatting"]
 vim.lsp.handlers["textDocument/formatting"] = function(...)
 
-		vim.notify("Called formatting")
-		temp(...)
+   vim.notify("Called formatting")
+   temp(...)
 end
 -- override defaults for all servers
 lspconfig.util.default_config = vim.tbl_extend(
@@ -113,11 +113,10 @@ lspconfig.tsserver.setup({
  autostart = false
 
 })
-
 local function make_cmp_capabilities()
   local has_cmp_lsp, cmp_lsp = pcall(require, 'cmp_nvim_lsp')
   if has_cmp_lsp then
-	return cmp_lsp.update_capabilities(vim.lsp.protocol.make_client_capabilities())
+	return cmp_lsp.default_capabilities()
   end
   return vim.lsp.protocol.make_client_capabilities()
 end

@@ -1,8 +1,5 @@
 # home-manager specific config from
 { config, lib, pkgs,  ... }:
-let
-
-in
 {
   imports = [
     # Not tracked, so doesn't need to go in per-machine subdir

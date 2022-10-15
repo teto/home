@@ -1,3 +1,7 @@
+#+TITLE: neovim.org
+
+* test
+
 Note to my future self: to override my nix-installed telescope and use the checkout one, I had to:
 
 set rtp^=~/telescope.nvim
