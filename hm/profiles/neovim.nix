@@ -401,7 +401,7 @@ let
 	# (luaPlugin { plugin = cmp-cmdline-history; })
 	# (luaPlugin { plugin = cmp-conventionalcommits; })
 	# (luaPlugin { plugin = cmp-digraphs; })
-	# (luaPlugin { plugin = cmp-rg; })
+	(luaPlugin { plugin = cmp-rg; })
 	# (luaPlugin { plugin = cmp-zsh; })
     # vim-vsnip
     # vim-vsnip-integ

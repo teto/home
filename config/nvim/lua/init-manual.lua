@@ -253,6 +253,32 @@ use 'bogado/file-line' -- to open a file at a specific line
 -- call :NR on a region than :w . coupled with b:nrrw_aucmd_create,
 -- use 'chrisbra/NrrwRgn' -- to help with multi-ft files
 use 'chrisbra/vim-diff-enhanced' --
+
+use({
+-- 'jghauser/papis.nvim'
+  "jghauser/papis.nvim",
+  after = { "telescope.nvim", "nvim-cmp" },
+  requires = {
+    "kkharji/sqlite.lua",
+    "nvim-lua/plenary.nvim",
+    "MunifTanjim/nui.nvim",
+    "nvim-treesitter/nvim-treesitter",
+  },
+  rocks = {
+    {
+      "lyaml" 
+      -- If using macOS or Linux, you may need to install the `libyaml` package.
+      -- If you install libyaml with homebrew you will need to set the YAML_DIR
+      -- to the location of the homebrew installation of libyaml e.g.
+      -- env = { YAML_DIR = '/opt/homebrew/Cellar/libyaml/0.2.5/' },
+    }
+  },
+  config = function()
+    require("papis").setup(
+    -- Your configuration goes here
+    )
+  end,
+})
 -- use { 'ldelossa/gh.nvim',
 --     requires = { { 'ldelossa/litee.nvim' } },
 -- 	config = function ()
@@ -320,8 +346,7 @@ use { 'folke/noice.nvim',
 	-- https://github.com/folke/noice.nvim/wiki/Configuration-Recipes#show-recording-messages
     require("noice").setup({
       cmdline = {
-		-- view for rendering the cmdline. Change to `cmdline` to get a classic cmdline at the bottom
-        view = "cmdline_popup",
+        view = "cmdline_popup", -- view for rendering the cmdline. Change to `cmdline` to get a classic cmdline at the bottom
         opts = { buf_options = { filetype = "vim" } }, -- enable syntax highlighting in the cmdline
         icons = {
           ["/"] = { icon = " ", hl_group = "Normal" },
@@ -1812,7 +1837,7 @@ if has_telescope then
 	}
 	-- This will load fzy_native and have it override the default file sorter
 	-- telescope.load_extension('fzf')
-	-- telescope.load_extension('fzy_native')
+	--jghauser/papis.nvim telescope.load_extension('fzy_native')
 	-- telescope.load_extension("notify")
 	telescope.load_extension("frecency")
 	telescope.load_extension("manix")

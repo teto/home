@@ -16,6 +16,7 @@ in
       ./profiles/weechat.nix
       ./profiles/extra.nix
       ./profiles/syncthing.nix
+      ./profiles/japanese.nix
 
       # not merged yet
       # ./hm/autoUpgrade.nix
