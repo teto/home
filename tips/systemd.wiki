@@ -31,3 +31,10 @@ One can use systemd-run to create transient .timer units. That is, one can set a
 
 # systemd-run --on-active=30 /bin/touch /tmp/foo
 
+
+# debug systemd issue 
+
+sudo systemctl edit gitlab-runner.service                
+Failed to create directories for "/etc/systemd/system/gitlab-runner.service.d/override.conf": No such file or directory
+
+You can also try `edit --full`

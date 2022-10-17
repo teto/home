@@ -250,5 +250,6 @@ image/*; eog '%s';
   # for colors etc.
   programs.lesspipe.enable = true;
 
-  manual.json.enable = true;
+  # TODO
+  manual.json.enable = false;
 }

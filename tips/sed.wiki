@@ -5,3 +5,6 @@ https://stackoverflow.com/questions/19713011/sed-delete-option-change-of-delimit
 
 sed does not support nongreedy mode
 https://stackoverflow.com/questions/1103149/non-greedy-reluctant-regex-matching-in-sed
+
+
+sed has non-greedy matching

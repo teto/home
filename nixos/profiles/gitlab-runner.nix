@@ -11,12 +11,12 @@ let
   ];
   runnerName = "devs";
   targetEnvironment = "aws";
-  novaLib = pkgs.callPackage ./lib.nix { inherit runnerName targetEnvironment; };
+  # novaLib = pkgs.callPackage ./lib.nix { inherit runnerName targetEnvironment; };
 
   # a function to rename tags depending on the environment
   renameTag = tag: if targetEnvironment == "dev" then "test_${tag}" else tag;
 
-  genDescription = name: "${name} ${targetEnvironment} - ${runnerName}";
+  genDescription = name: "MATT's machine !! ${name} ${targetEnvironment} - ${runnerName}";
 in
 {
   # Gitlab Runner
@@ -25,18 +25,18 @@ in
 
   services.gitlab-runner = {
     enable = true;
-    settings = {
-      checkInterval = 0;
-      concurrent = 100;
-    };
-    gracefulTermination = true;
+    # settings = {
+    #   checkInterval = 0;
+    #   concurrent = 100;
+    # };
+    # gracefulTermination = true;
     # debugTraceDisabled # set to true Runner will disable the possibility of using the CI_DEBUG_TRACE
-    gracefulTimeout = "5min 20s";
+    # gracefulTimeout = "5min 20s";
 
     services = {
 
       nix = {
-        description = genDescription "Nix/Bazel";
+        description = genDescription "Nix/Bazel 2";
         limit = 10;
         executor = "docker";
         # registrationConfigFile is mandatory so forward it to /dev/null
@@ -52,7 +52,6 @@ in
           "/nix/store:/nix/store:ro"
           "/nix/var/nix/db:/nix/var/nix/db"
           "/nix/var/nix/daemon-socket:/nix/var/nix/daemon-socket"
-          "${novaLib.bazelCacheFolder}:/bazel/shared-cache"
           "bazel-runtime:/tmp/.cache/bazel"
           # bind it to help applications in the container find the AWS credentials
           "/run/secrets/aws/credentialsFile:/root/.aws/credentials:ro"
@@ -118,59 +117,6 @@ in
         tagList = [ (renameTag "nix") (renameTag "bazel") "nixos" runnerName ];
       };
 
-      # npm = {
-      #   description = genDescription "Npm runner";
-      #   limit = 10;
-      #   executor = "docker";
-      #   # registrationConfigFile is mandatory so forward it to /dev/null
-      #   registrationConfigFile = "/dev/null";
-      #   registrationFlags = defaultRegistrationFlags ++ [
-      #     "--cache-dir /gitlab-cache"
-      #   ];
-      #   environmentVariables = {
-      #     DOCKER_DRIVER = "overlay2";
-      #     NIX_REMOTE = "daemon";
-      #     NPM_CONFIG_STORE_DIR = "/pnpm";
-      #   };
-      #   dockerImage = "ubuntu";
-      #   dockerPrivileged = true;
-      #   dockerVolumes = [
-      #     "/gitlab-cache:/gitlab-cache"
-      #     "/data/nix:/nix"
-      #     "/data/npm:/npm"
-      #     "/data/pnpm:/pnpm"
-      #     "/data/node:/node"
-      #   ];
-
-      #   tagList = [ (renameTag "npm") "npm2" runnerName ];
-      # };
-
-      # generic = {
-      #   description = genDescription "Generic runner";
-      #   limit = 10;
-      #   executor = "docker";
-      #   runUntagged = true;
-
-      #   # registrationConfigFile is mandatory so forward it to /dev/null
-      #   registrationConfigFile = "/dev/null";
-      #   registrationFlags = defaultRegistrationFlags ++ [
-      #     "--cache-dir /gitlab-cache"
-      #   ];
-      #   environmentVariables = {
-      #     DOCKER_DRIVER = "overlay2";
-      #   };
-      #   dockerImage = "ubuntu";
-      #   dockerPrivileged = true;
-      #   dockerVolumes = [
-      #     "/gitlab-cache:/gitlab-cache"
-      #     "/data/nix:/nix"
-      #     "/data/npm:/npm"
-      #     "/data/pnpm:/pnpm"
-      #     "/data/node:/node"
-      #   ];
-
-      #   tagList = [ (renameTag "generic") ];
-      # };
     };
   };
 

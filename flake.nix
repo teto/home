@@ -242,6 +242,7 @@
                   # ./nixos/profiles/mptcp.nix
                   ./nixos/profiles/nova.nix
                   ./nixos/profiles/opensnitch.nix
+				  ./nixos/profiles/gitlab-runner.nix
 
                   # just to check how /etc/nix/machines looks like
                   ./nixos/modules/distributedBuilds.nix

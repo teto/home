@@ -107,7 +107,10 @@ rec {
   # environment.extraInit = builtins.readFile ../../config/zsh/init.sh;
 
   # on master it is disabled
-  documentation.man.enable = true;
+  documentation.man.enable = true; # temp
+  documentation.doc.enable = false; # builds html doc, slow
+  documentation.info.enable = false;
+  # documentation.nixos.enable = true;
 
   programs.less = {
     enable = true;

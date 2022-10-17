@@ -10,7 +10,7 @@
 
 
   # to test locally
-  services.gitlab-runner.enable = true;
+  # services.gitlab-runner.enable = true;
 
   nix = {
     # binaryCaches = [
