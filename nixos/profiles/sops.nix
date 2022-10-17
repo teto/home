@@ -29,6 +29,13 @@
 
   };
 
+  sops.secrets."gitlab/registrationToken" = {
+    mode = "0440";
+    owner = config.users.users.nobody.name;
+    group = config.users.users.nobody.group;
+  };
+
+
   # sops.secrets."nextcloud" = {
 	# mode = "400";
 	# owner = config.users.users.teto.name;
