@@ -16,7 +16,8 @@ let
   # a function to rename tags depending on the environment
   renameTag = tag: if targetEnvironment == "dev" then "test_${tag}" else tag;
 
-  genDescription = name: "MATT's machine !! ${name} ${targetEnvironment} - ${runnerName}";
+  # for now let's avoid using quotes
+  genDescription = name: "MATTs machine !! ${name} ${targetEnvironment} - ${runnerName}";
 in
 {
   # Gitlab Runner

@@ -194,6 +194,7 @@ rec {
         "steam"
         "steam-original"
         "steam-runtime"
+        "steam-run"
         "sublimetext3"
         "vscode"
         "vscode-extension-ms-vsliveshare-vsliveshare"

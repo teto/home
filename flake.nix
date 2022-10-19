@@ -146,8 +146,6 @@
               nova.nixosProfiles.dev
 			  self.inputs.sops-nix.nixosModules.sops
 
-  # imports = [ <sops-nix/modules/sops> ];
-
               ({ pkgs, ... }: {
                 nixpkgs.overlays = nixpkgs.lib.attrValues self.overlays;
                 imports = [
@@ -164,7 +162,7 @@
                   ./nixos/profiles/qemu.nix
                   ./nixos/profiles/adb.nix
 				  # usually inactive, just to test some stuff
-                  # ./nixos/profiles/gitlab-runner.nix
+                  ./nixos/profiles/gitlab-runner.nix
 
                   ./nixos/modules/libvirtd.nix
                   ./nixos/profiles/chromecast.nix
