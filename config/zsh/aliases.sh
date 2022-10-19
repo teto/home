@@ -51,10 +51,13 @@ alias gap="git add -p";
 # rename mptcp ?
 alias mp="mptcpanalyzer"
 
+# git aliases
+alias grc="git rebase --continue"
+
 # nix aliases {{{
 
 # no
-alias nixos-fast="nixos-rebuild  --no-build-nix --fast"
+alias nixos-fast="nixos-rebuild --no-build-nix --fast"
 
 
 
@@ -66,6 +69,7 @@ alias n3='nix develop --option builders "$RUNNER3" -j0'
 # TODO should use all runners
 alias nall='nix develop --option builders "$RUNNER3" -j0'
 alias ns="nix-shell"
+alias nl="nix log "
 # alias lens="sudo rm -rf /home/teto/.config/Lens/extensions && lens"
 # alias ff="find . -iname" # use fd instead
 alias latest="ls -lt $@ |head"

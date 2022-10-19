@@ -346,6 +346,11 @@ in
   #   };
   # };
 
+
+  # https://github.com/NixOS/nixpkgs/issues/196651
+  manual.manpages.enable = false; 
+
+
   # TODO fix that
   # systemd.user.sessionVariables = {
 	# NOTMUCH_CONFIG=home.sessionVariables.NOTMUCH_CONFIG;

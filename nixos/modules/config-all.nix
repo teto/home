@@ -178,7 +178,7 @@ rec {
   };
 
   # to get manpages
-  documentation.enable = true;
+  documentation.enable = false;
   # set it to true to help
   documentation.nixos.includeAllModules = false;
 

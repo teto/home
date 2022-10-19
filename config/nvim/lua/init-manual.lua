@@ -1403,6 +1403,12 @@ if has_fzf_lua then
 			-- to get the prompt at the top
 			['--layout'] = 'reverse'
 		},
+		winopts = {
+			preview = {
+				-- default = 'builtin'
+				hidden = 'hidden'
+			}
+		}
 	}
 elseif has_telescope then
 	require 'teto.telescope'.telescope_create_keymaps()

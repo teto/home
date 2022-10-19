@@ -36,7 +36,7 @@ pip:
 	python3 /tmp/get-pip.py --user
 
 home:
-	stow -t ${HOME} home
+	stow --dotfiles -t ${HOME} home
 
 
 # I now rely on password-store instead
