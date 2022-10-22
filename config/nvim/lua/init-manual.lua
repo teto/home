@@ -266,7 +266,7 @@ use({
   },
   rocks = {
     {
-      "lyaml" 
+      "lyaml"
       -- If using macOS or Linux, you may need to install the `libyaml` package.
       -- If you install libyaml with homebrew you will need to set the YAML_DIR
       -- to the location of the homebrew installation of libyaml e.g.
@@ -2123,7 +2123,8 @@ vim.api.nvim_create_user_command("Htags", "!hasktags .", {})
 vim.api.nvim_create_user_command("JsonPretty", "%!jq '.'", {})
 
 -- taken from justinmk's config
-vim.api.nvim_create_user_command("Tags", [[!ctags -R --exclude='build*' --exclude='.vim-src/**' --exclude='venv/**' --exclude='**/site-packages/**' --exclude='data/**' --exclude='dist/**' --exclude='notebooks/**' --exclude='Notebooks/**' --exclude='*graphhopper_data/*.json' --exclude='*graphhopper/*.json' --exclude='*.json' --exclude='qgis/**' *]], {})
+vim.api.nvim_create_user_command("Tags", [[
+	!ctags -R --exclude='build*' --exclude='.vim-src/**' --exclude='venv/**' --exclude='**/site-packages/**' --exclude='data/**' --exclude='dist/**' --exclude='notebooks/**' --exclude='Notebooks/**' --exclude='*graphhopper_data/*.json' --exclude='*graphhopper/*.json' --exclude='*.json' --exclude='qgis/**' *]], {})
 
 
 -- " Bye bye ex mode

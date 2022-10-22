@@ -194,7 +194,7 @@ in
 
   # this is required as well
   hardware.nvidia= {
-    modesetting.enable = true;
+    # modesetting.enable = true;
   # hardware.nvidia.package
   };
 
@@ -202,7 +202,7 @@ in
   # config from https://discourse.nixos.org/t/nvidia-users-testers-requested-sway-on-nvidia-steam-on-wayland/15264/32
   environment.etc."gbm/nvidia-drm_gbm.so".source = "${nvidiaPackage}/lib/libnvidia-allocator.so";
   environment.etc."egl/egl_external_platform.d".source = "/run/opengl-driver/share/egl/egl_external_platform.d/";
-  hardware.opengl.extraPackages = with pkgs; [
+  hardware.opengl.extraPackages = [
     # vaapiVdpau
     # libvdpau-va-gl
     # libva

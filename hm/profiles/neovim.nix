@@ -402,6 +402,8 @@ let
 	# (luaPlugin { plugin = cmp-conventionalcommits; })
 	# (luaPlugin { plugin = cmp-digraphs; })
 	(luaPlugin { plugin = cmp-rg; })
+	(luaPlugin { plugin = cmp-vsnip; })
+	({ plugin = vim-vsnip; })
 	# (luaPlugin { plugin = cmp-zsh; })
     # vim-vsnip
     # vim-vsnip-integ
@@ -752,6 +754,7 @@ let
         plugin = vim-obsession;
         after = ''
           vim.keymap.set("n", "<Leader>$", "<Cmd>Obsession<CR>", { remap = true })
+		  vim.g.obsession_no_bufenter = true
         '';
         # testing luaConfig (experimental)
         # luaConfig = ''

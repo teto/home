@@ -1,0 +1,1 @@
+perl -nle 'print "$1" if /.*GET (.*)/' input-file
