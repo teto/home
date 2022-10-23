@@ -108,7 +108,7 @@ rec {
 
   # on master it is disabled
   documentation.man.enable = true; # temp
-  documentation.doc.enable = false; # builds html doc, slow
+  documentation.doc.enable = true; # builds html doc, slow
   documentation.info.enable = false;
   # documentation.nixos.enable = true;
 

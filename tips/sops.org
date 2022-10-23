@@ -1,4 +1,4 @@
-
+#+BEGIN
 https://github.com/mozilla/sops#encrypting-using-age
 
 To use an alternate key:
@@ -7,3 +7,6 @@ To use an alternate key:
 sops -s secrets.yaml to see metadata/master keys
 
 sops updatekeys
+
+# 
+sops -d --extract "['ssh_client_key']" "secrets-${CI_ENVIRONMENT_NAME}.yaml" > "$SSH_CLIENTKEY"

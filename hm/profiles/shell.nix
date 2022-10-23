@@ -52,7 +52,8 @@ in
 	  r="ranger";
 
       n="nix develop";
-      nhs="nix shell /home/teto/home#nhs9";
+      nhs92="nix develop /home/teto/home#nhs92";
+      nhs94="nix develop /home/teto/home#nhs94";
       ns="nix-shell";
       lg="lazygit";
       #mostly for testin

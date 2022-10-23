@@ -23,15 +23,14 @@ alias bn='if [ -z ${BW_SESSION} ]; then export BW_SESSION=$(bw unlock --raw); fi
 # https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz
 # -f channel:nixos-unstable'
 # github:nixos/nixpkgs/ff9efb0724de5ae0f9db9df2debefced7eb1571d
-alias hsenv='nix shell nixpkgs#ghc nixpkgs#haskell.packages.ghc8107.cabal-install nixpkgs#pkg-config nixpkgs#haskell-language-server'
-# alias nhs=hsenv
-# alias nhs9='nix shell nixpkgs#haskell.compiler.ghc922 nixpkgs#haskell.packages.ghc922.cabal-install nixpkgs#pkg-config hls#haskell-language-server-922 --no-write-lock-file'
+# alias hsenv='nix shell nixpkgs#ghc nixpkgs#haskell.packages.ghc8107.cabal-install nixpkgs#pkg-config nixpkgs#haskell-language-server'
 
 # fzf-diff (https://medium.com/@GroundControl/better-git-diffs-with-fzf-89083739a9cb)
 function fzd {
   preview="git diff $@ --color=always -- {-1}"
   git diff --name-only $@ | fzf -m --ansi --preview "$preview"
 }
+
 # to run
 function nvimdev {
     folder="$1"
@@ -47,12 +46,11 @@ function nvimdev {
 
 # git aliases
 alias gap="git add -p";
+alias grc="git rebase --continue";
+alias gra="git rebase --abort";
 
 # rename mptcp ?
 alias mp="mptcpanalyzer"
-
-# git aliases
-alias grc="git rebase --continue"
 
 # nix aliases {{{
 

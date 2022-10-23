@@ -343,6 +343,10 @@ use { 'folke/noice.nvim',
   event = "VimEnter",
   requires = { "rcarriga/nvim-notify" },
   config = function()
+	local fakeColor = { fg='#000000', bg='#00FF00' }
+	vim.api.nvim_set_hl(0, 'NoiceCmdlinePopupBorder', fakeColor)
+	vim.api.nvim_set_hl(0, 'NoiceCmdlinePopupBorderCmdline', fakeColor)
+
 	-- https://github.com/folke/noice.nvim/wiki/Configuration-Recipes#show-recording-messages
     require("noice").setup({
       cmdline = {
@@ -354,6 +358,12 @@ use { 'folke/noice.nvim',
           [":"] = { icon = " ", hl_group = "DiagnosticInfo", firstc = false },
         },
       },
+	  lsp_progress ={
+		  enabled = true
+	  },
+	  popupmenu = {
+		  enabled = false;
+	  },
       history = {
         -- options for the message history that you get with `:Noice`
         view = "split",
@@ -363,23 +373,33 @@ use { 'folke/noice.nvim',
 	  -- how frequently does Noice need to check for ui updates? This has no effect when in blocking mode.
       throttle = 1000 / 30,
       views = {
+        -- cmdline = {
+		-- }
 		-- @see the section on views below
 		cmdline_popup = {
 			border = {
-			style = "none",
-			padding = { 2, 3 },
+				-- style = "none",
+				padding = { 2, 3 },
 			},
         -- filter_options = {},
 			win_options = {
-				winhighlight = "NormalFloat:NormalFloat,FloatBorder:FloatBorder",
+				winhighlight = {
+					-- Normal = "NormalFloat",
+					-- FloatBorder = "NormalFloat",
+					-- Normal = "NoicePopupmenu", -- change to NormalFloat to make it look like other floats
+					-- FloatBorder = "NoicePopupmenuBorder", -- border highlight
+					-- CursorLine = "NoicePopupmenuSelected", -- used for highlighting the selected item
+					-- PmenuMatch = "NoicePopupmenuMatch", -- used to highlight the part of the item that matches the input
+				},
 			},
 			position = {
-			-- row = 5,
-			col = "50%",
+				-- row = 5,
+				col = "50%",
 			},
 			size = {
-				width = 110,
-				height = "auto",
+				width = 210,
+				-- height = "auto",
+				height = 3
 			},
 		},
 		popupmenu = {
@@ -2065,7 +2085,6 @@ vim.keymap.set("n", "<leader>Q", "<Cmd>Sayonara<cr>", { silent = true})
 
 vim.keymap.set('n',  '<leader>rr' , "<Plug>RestNvim<cr>", { remap=true,  desc= "Run an http request"})
 vim.keymap.set('n',  '<leader>rp' , "<Plug>RestNvimPreview", { remap=true,  desc= "Preview an http request"})
-vim.keymap.set('n',  '<C-J>' , "<Plug>RestNvim<cr>")
 -- vim.keymap.set('n',  '<C-j>' , "<use>RestNvimPreview")
 -- nnoremap <use>RestNvimPreview :lua require('rest-nvim').run(true)<CR>
 -- nnoremap <use>RestNvimLast :lua require('rest-nvim').last()<CR>

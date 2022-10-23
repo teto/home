@@ -32,6 +32,11 @@
     # 1/ systemctl stop chronyd.service
     # 2/ "sudo chronyd -q 'pool pool.ntp.org iburst'"
     enable = true;
+
+	# to correct big errors on startup
+	initstepslew = {
+	 enabled = true;
+	};
   };
 
 }

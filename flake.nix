@@ -376,7 +376,7 @@
 		  ];
 		};
 		
-		inherit (nixpkgsFinal) nhs9;
+		inherit (nixpkgsFinal) nhs92 nhs94;
 	  };
 
       packages.${system} = {
@@ -386,7 +386,7 @@
         aws-lambda-rie = nixpkgsFinal.callPackage ./pkgs/aws-lambda-runtime-interface-emulator {};
 
 		inherit (nixpkgsFinal) i3pystatus-custom;
-		inherit (nixpkgsFinal) nhs9;
+		inherit (nixpkgsFinal) nhs92 nhs94;
 
       };
 
