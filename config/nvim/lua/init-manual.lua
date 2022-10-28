@@ -254,7 +254,7 @@ use 'bogado/file-line' -- to open a file at a specific line
 -- use 'chrisbra/NrrwRgn' -- to help with multi-ft files
 use 'chrisbra/vim-diff-enhanced' --
 
--- use({
+-- use ({
 --   "jghauser/papis.nvim",
 --   after = { "telescope.nvim", "nvim-cmp" },
 --   requires = {
@@ -663,6 +663,8 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 use "/home/teto/neovim/rest.nvim"
 -- provides 'NvimTree'
 use 'kyazdani42/nvim-tree.lua'
+-- TODO package in nvim
+use 'MrcJkb/haskell-tools.nvim'
 -- use {
 -- 	"~/telescope-frecency.nvim",
 -- 	config = function ()
@@ -1185,13 +1187,11 @@ if has_cmp then
 	},
 	mapping = cmp.mapping.preset.insert({
 
-	-- {
-	--   ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-	--   ['<C-f>'] = cmp.mapping.scroll_docs(4),
+	  ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+	  ['<C-f>'] = cmp.mapping.scroll_docs(4),
 	--   ['<C-Space>'] = cmp.mapping.complete(),
 	--   ['<C-e>'] = cmp.mapping.close(),
-	--   -- ['<CR>'] = cmp.mapping.confirm({ select = true }),
-	-- },
+	  ['<CR>'] = cmp.mapping.confirm({ select = true }),
 	}),
 	-- view = {
 	-- 	entries = 'native'
