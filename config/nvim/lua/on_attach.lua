@@ -25,7 +25,7 @@ M.on_attach = function(client)
 
 	if has_signature then
 	  signature.on_attach()  -- Note: add in lsp client on-attach
-        end
+	end
 	-- require'virtualtypes'.on_attach()
 end
 

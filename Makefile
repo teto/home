@@ -13,6 +13,8 @@ mkfile_dir := $(dir $(mkfile_path))
 
 .PHONY: config etc mail local bin home vim_plugins treesitter
 
+lint:
+	stylua config/nvim/init.lua
 
 # regenerate my email contacts
 # (to speed up alot autocompletion)
