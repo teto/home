@@ -14,6 +14,8 @@ local function default_mappings()
 	vim.keymap.set('n', "]e", function () vim.diagnostic.goto_next({wrap = true }) end, { buffer=true })
 	vim.keymap.set('n', "<c-k>", function () vim.diagnostic.goto_prev({wrap = true }) end, { buffer=true })
 	vim.keymap.set('n', "<c-j>", function () vim.diagnostic.goto_next({wrap = true }) end, { buffer=true })
+	vim.keymap.set('n', "]l", function () vim.diagnostic.goto_next({wrap = true }) end, { buffer=true })
+	vim.keymap.set('n', "[l", function () vim.diagnostic.goto_prev({wrap = true }) end, { buffer=true })
 end
 
 M.on_attach = function(client)

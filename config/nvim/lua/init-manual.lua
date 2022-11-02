@@ -664,6 +664,7 @@ vim.api.nvim_create_autocmd('BufReadPost', {
 use('/home/teto/neovim/rest.nvim')
 -- provides 'NvimTree'
 use('kyazdani42/nvim-tree.lua')
+use 'rhysd/committia.vim'
 -- TODO package in nvim
 use({
     'MrcJkb/haskell-tools.nvim',
@@ -685,13 +686,14 @@ use({
             },
             hls = { -- LSP client options
                 on_attach = function(client, bufnr)
-                    local attach_cb = require('teto.on_attach')
-                    attach_cb(client, bufnr)
+                    local attach_cb = require('on_attach')
+                    attach_cb.on_attach(client, bufnr)
 
                     -- haskell-language-server relies heavily on codeLenses,
                     -- so auto-refresh (see advanced configuration) is enabled by default
-                    vim.keymap.set('n', '<space>ca', vim.lsp.codelens.run, opts)
-                    vim.keymap.set('n', '<space>hs', ht.hoogle.hoogle_signature, opts)
+                    vim.keymap.set('n', '<leader>ca', vim.lsp.codelens.run, opts)
+                    vim.keymap.set('n', '<leader>cl', vim.lsp.codelens.run, opts)
+                    vim.keymap.set('n', '<leader>hs', ht.hoogle.hoogle_signature, opts)
                     -- default_on_attach(client, bufnr)  -- if defined, see nvim-lspconfig
                 end,
                 -- ...
@@ -699,7 +701,7 @@ use({
                     formattingProvider = 'ormolu',
                     checkProject = true, -- Setting this to true could have a performance impact on large mono repos.
                     -- ...
-                    pluginb = {
+                    plugin = {
                         refineImports = { -- refine imports
                             codeLensOn = false,
                         },
@@ -997,7 +999,7 @@ use({
 --	end
 -- }
 -- using packer.nvim
--- use {'akinsho/bufferline.nvim', requires = 'kyazdani42/nvim-web-devicons'}
+use {'akinsho/bufferline.nvim', requires = 'kyazdani42/nvim-web-devicons'}
 
 -- compete with registers.nvim
 -- https://github.com/gelguy/wilder.nvim
@@ -1177,20 +1179,22 @@ use({ 'tweekmonster/startuptime.vim', opt = true }) -- {'on': 'StartupTime'} " s
 --}
 -- }}}
 
--- use {
---	 'kdheepak/tabline.nvim',
---	 config = function()
---	   require'tabline'.setup {
---		 -- Defaults configuration options
---		 enable = true
---	   }
---	   vim.cmd[[
---		 set guioptions-=e " Use showtabline in gui vim
---		 set sessionoptions+=tabpages,globals " store tabpages and globals in session
---	   ]]
---	 end,
---	 requires = { { 'hoob3rt/lualine.nvim', opt=true }, 'kyazdani42/nvim-web-devicons' }
--- }
+ -- use {
+	 -- 'kdheepak/tabline.nvim',
+	 -- config = function()
+	   -- require'tabline'.setup {
+		 -- -- Defaults configuration options
+		 -- enable = true,
+		 -- show_filename_only = true,
+		 -- show_devicons = false,
+	   -- }
+	   -- vim.cmd[[
+		 -- set guioptions-=e " Use showtabline in gui vim
+		 -- set sessionoptions+=tabpages,globals " store tabpages and globals in session
+	   -- ]]
+	 -- end,
+	 -- requires = { { 'hoob3rt/lualine.nvim', opt=true }, 'kyazdani42/nvim-web-devicons' }
+ -- }
 use('MunifTanjim/nui.nvim') -- to create UIs
 use('honza/vim-snippets')
 -- use 'sjl/gundo.vim' " :GundoShow/Toggle to redo changes
@@ -1385,7 +1389,7 @@ use({
             --	 lualine_y = {},
             --	 lualine_z = {}
             -- },
-            tabline = {},
+            -- tabline = {},
             extensions = { 'fzf', 'fugitive' },
         })
     end,
@@ -1738,34 +1742,35 @@ end
 -- })
 
 local has_bufferline, bufferline = pcall(require, 'bufferline')
--- if has_bufferline then
--- 	bufferline.setup{
--- -- 		options = {
--- -- 			view =	"default",
--- -- 			numbers = "buffer_id",
--- -- 			-- number_style = "superscript" | "",
--- -- 			-- mappings = true,
--- -- 			modified_icon = '●',
--- -- 			close_icon = '',
--- -- 			left_trunc_marker = '',
--- -- 			right_trunc_marker = '',
--- -- 			-- max_name_length = 18,
--- -- 			-- max_prefix_length = 15, -- prefix used when a buffer is deduplicated
--- -- 			-- tab_size = 18,
--- -- 			show_buffer_close_icons = false,
--- -- 			persist_buffer_sort = true, -- whether or not custom sorted buffers should persist
--- -- 			-- -- can also be a table containing 2 custom separators
--- -- 			-- -- [focused and unfocused]. eg: { '|', '|' }
--- -- 			-- separator_style = "slant" | "thick" | "thin" | { 'any', 'any' },
--- -- 			separator_style = "slant",
--- -- 			-- enforce_regular_tabs = false | true,
--- -- 			always_show_bufferline = false,
--- -- 			-- sort_by = 'extension' | 'relative_directory' | 'directory' | function(buffer_a, buffer_b)
--- -- 			-- -- add custom logic
--- -- 			-- return buffer_a.modified > buffer_b.modified
--- -- 			-- end
--- -- 		}
--- 	}
+if has_bufferline then
+	bufferline.setup{
+		options = {
+			view =	"default",
+			numbers = "buffer_id",
+			-- number_style = "superscript" | "",
+			-- mappings = true,
+			modified_icon = '●',
+			close_icon = '',
+			left_trunc_marker = '',
+			right_trunc_marker = '',
+			-- max_name_length = 18,
+			-- max_prefix_length = 15, -- prefix used when a buffer is deduplicated
+			-- tab_size = 18,
+			show_buffer_close_icons = false,
+			persist_buffer_sort = true, -- whether or not custom sorted buffers should persist
+			-- -- can also be a table containing 2 custom separators
+			-- -- [focused and unfocused]. eg: { '|', '|' }
+			-- separator_style = "slant" | "thick" | "thin" | { 'any', 'any' },
+			separator_style = "slant",
+			-- enforce_regular_tabs = false | true,
+			always_show_bufferline = false,
+			-- sort_by = 'extension' | 'relative_directory' | 'directory' | function(buffer_a, buffer_b)
+			-- -- add custom logic
+			-- return buffer_a.modified > buffer_b.modified
+			-- end
+		}
+	}
+end
 
 -- -- 	for i=1,9 do
 -- -- 		vim.keymap.set('n',  '<leader>'..tostring(i) , "<cmd>BufferLineGoToBuffer "..tostring(i).."<CR>", { silent = true})
