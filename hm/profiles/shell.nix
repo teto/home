@@ -24,6 +24,14 @@ in
 	./zsh.nix 
   ];
 
+  # 
+  programs.atuin = {
+
+
+   enable = false;
+   enableZshIntegration = true;
+  };
+
   programs.bash = {
     enable = true;
 
