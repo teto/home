@@ -122,10 +122,10 @@ let
 	 plugin = nvim-treesitter;
 	 runtime = {
 	  "parser" = {
-	   recursive = true;
-	   # target
-	   # target = "parser";
-	   source = parserDir;
+		recursive = true;
+		# target
+		# target = "parser";
+		source = parserDir;
 	   };
 	 };
       # plugin = (nvim-treesitter.withPlugins (

@@ -121,46 +121,47 @@ local function make_cmp_capabilities()
   return vim.lsp.protocol.make_client_capabilities()
 end
 
-lspconfig.hls.setup({
-	-- cmd = {
-	-- 	  "haskell-language-server", "--lsp"
-		  -- , "--debug"
-		  -- , "-j2"	-- -j1 doesnt work, and more threads => crash
-	-- },
-	single_file_support = true,
-	filetypes = { "haskell", "lhaskell" },
-	capabilities = make_cmp_capabilities(),
-	root_dir = lspconfig.util.root_pattern(
-		"*.cabal"
-		-- , "stack.yaml"
-		-- , "cabal.project"
-		-- , "package.yaml"
-		, "hie.yaml"
-	),
-	-- message_level = vim.lsp.protocol.MessageType.Warning,
-	settings = {
-	  haskell = {
-		completionSnippetsOn = true,
-		formattingProvider = "stylish-haskell",
-		-- "haskell.trace.server": "messages",
-		-- logFile = "/tmp/nvim-hls.log",
-		-- "codeLens.enable": true,
-	  -- hlintOn = false
-		plugin= {
-			hlint = {
-		  -- "config": {
-		  --	   "flags": []
-		  -- },
-			  diagnosticsOn= false,
-			  codeActionsOn= false
-			},
-		  }
-		},
-	  },
-	  flags = {
-			 -- allow_incremental_sync = false;
-	  }
-})
+-- commented out because https://github.com/MrcJkb/haskell-tools.nvim recommends to disable it
+--lspconfig.hls.setup({
+--	-- cmd = {
+--	-- 	  "haskell-language-server", "--lsp"
+--		  -- , "--debug"
+--		  -- , "-j2"	-- -j1 doesnt work, and more threads => crash
+--	-- },
+--	single_file_support = true,
+--	filetypes = { "haskell", "lhaskell" },
+--	capabilities = make_cmp_capabilities(),
+--	root_dir = lspconfig.util.root_pattern(
+--		"*.cabal"
+--		-- , "stack.yaml"
+--		-- , "cabal.project"
+--		-- , "package.yaml"
+--		, "hie.yaml"
+--	),
+--	-- message_level = vim.lsp.protocol.MessageType.Warning,
+--	settings = {
+--	  haskell = {
+--		completionSnippetsOn = true,
+--		formattingProvider = "stylish-haskell",
+--		-- "haskell.trace.server": "messages",
+--		-- logFile = "/tmp/nvim-hls.log",
+--		-- "codeLens.enable": true,
+--	  -- hlintOn = false
+--		plugin= {
+--			hlint = {
+--		  -- "config": {
+--		  --	   "flags": []
+--		  -- },
+--			  diagnosticsOn= false,
+--			  codeActionsOn= false
+--			},
+--		  }
+--		},
+--	  },
+--	  flags = {
+--			 -- allow_incremental_sync = false;
+--	  }
+--})
 
 
 lspconfig.rust_analyzer.setup({

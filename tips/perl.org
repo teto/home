@@ -1,1 +1,7 @@
+#+TITLE+
+
+toto ca fait ca
+
+#+SOURCE perl
 perl -nle 'print "$1" if /.*GET (.*)/' input-file
+#-SOURCE

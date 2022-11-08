@@ -32,8 +32,6 @@ M.menu_add_cmd = function(name, command)
    -- print(res)
 end
 
-M.menu_add ("PopUp.Lsp_definition", "<Cmd>lua vim.lsp.buf.definition<CR>")
-M.menu_add ("PopUp.Lsp_definition", "<Cmd>lua vim.lsp.buf.definition<CR>")
 
 
 return M

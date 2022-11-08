@@ -180,6 +180,7 @@ in
     ./i3.nix
     ./wal.nix
 
+    ./nushell.nix
     ./fcitx.nix
     ./firefox.nix
     ./notifications.nix

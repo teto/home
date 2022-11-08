@@ -10,7 +10,6 @@ ssh-keygen -R 192.168.1.100
 https://superuser.com/questions/467398/how-do-i-exit-an-ssh-connection
 hit the Enter key, then type ~. and ssh should immediately close and return you to your command prompt
 
-IdentitiesOnly=yes
 IdentitiesOnly yes
 
 # List keys loaded in ssh-agent

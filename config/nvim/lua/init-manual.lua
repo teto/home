@@ -22,6 +22,7 @@ local map = vim.keymap.set
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 vim.g.matchparen = 0
+vim.g.mousemoveevent = 1
 
 packer.init({
     autoremove = false,
@@ -682,7 +683,18 @@ use({
                     -- 'telescope-web': The online version (depends on curl).
                     -- 'browser': Open hoogle search in the default browser.
                     mode = 'auto',
-                },
+                }, 
+				repl = {
+					-- 'builtin': Use the simple builtin repl
+					-- 'toggleterm': Use akinsho/toggleterm.nvim
+					handler = 'builtin',
+					builtin = {
+						create_repl_window = function(view)
+						-- create_repl_split | create_repl_vsplit | create_repl_tabnew | create_repl_cur_win
+						return view.create_repl_split { size = vim.o.lines / 3 }
+						end
+					},
+				},
             },
             hls = { -- LSP client options
                 on_attach = function(client, bufnr)
@@ -702,9 +714,10 @@ use({
                     checkProject = true, -- Setting this to true could have a performance impact on large mono repos.
                     -- ...
                     plugin = {
-                        refineImports = { -- refine imports
-                            codeLensOn = false,
-                        },
+						refineImports = {
+						codeActionsOn = true,
+						codeLensOn = false,
+						},
                     },
                 },
             },
@@ -987,6 +1000,8 @@ use({
         'nvim-telescope/telescope-media-files.nvim',
         'nvim-telescope/telescope-packer.nvim', -- :Telescope pack,e
         'MrcJkb/telescope-manix',   -- :Telescope manix
+		'luc-tielen/telescope_hoogle'
+		-- psiska/telescope-hoogle.nvim looks less advanced
     },
 })
 --}}}
@@ -1312,26 +1327,26 @@ end
 --	   requires = "nvim-lua/plenary.nvim"
 -- }
 use('ray-x/lsp_signature.nvim') -- display function signature in insert mode
-use({
-    'Pocco81/AutoSave.nvim', -- :ASToggle /AsOn / AsOff
-    -- 	, config = function ()
-    -- 		local autosave = require("autosave")
-    -- 		autosave.setup({
-    -- 			enabled = true,
-    -- 			execution_message = "AutoSave: saved at " .. vim.fn.strftime("%H:%M:%S"),
-    -- 			events = {"InsertLeave", "FocusLost"},
-    -- 			conditions = {
-    -- 				exists = true,
-    -- 				filetype_is_not = {},
-    -- 				modifiable = true
-    -- 			},
-    -- 			write_all_buffers = false,
-    -- 			on_off_commands = true,
-    -- 			clean_command_line_interval = 2500
-    -- 		}
-    -- 		)
-    -- end
-})
+-- use({
+--     'Pocco81/AutoSave.nvim' -- :ASToggle /AsOn / AsOff
+-- 	, config = function ()
+-- 		local autosave = require("autosave")
+-- 		autosave.setup({
+-- 			enabled = true,
+-- 			execution_message = "AutoSave: saved at " .. vim.fn.strftime("%H:%M:%S"),
+-- 			events = { "FocusLost"}, -- "InsertLeave"
+-- 			conditions = {
+-- 				exists = true,
+-- 				filetype_is_not = {},
+-- 				modifiable = true
+-- 			},
+-- 			write_all_buffers = false,
+-- 			on_off_commands = true,
+-- 			clean_command_line_interval = 2500
+-- 		}
+-- 		)
+--     end
+-- })
 
 -- use 'sindrets/diffview.nvim' -- :DiffviewOpen
 
@@ -1341,57 +1356,7 @@ use({
     'nvim-lualine/lualine.nvim', -- fork of hoob3rt/lualine
     requires = { 'arkav/lualine-lsp-progress' },
     config = function()
-        require('lualine').setup({
-            options = {
-                icons_enabled = false,
-                -- theme = 'gruvbox',
-                component_separators = { left = '', right = '' },
-                section_separators = { left = '', right = '' },
-                separators = { left = '', right = '' },
-                globalstatus = true,
-                -- disabled_filetypes = {}
-            },
-            sections = {
-                lualine_a = { 'branch' },
-                lualine_b = {
-                    -- path=2 => absolute path
-                    {
-                        'filename',
-                        path = 1,
-                        -- takes a function that is called when component is clicked with mouse.
-                        on_click = function(nb_of_clicks, button, _modifiers)
-                            print('CLICK')
-                        end,
-                        -- the function receives several arguments
-                        -- - number of clicks incase of multiple clicks
-                        -- - mouse button used (l(left)/r(right)/m(middle)/...)
-                        -- - modifiers pressed (s(shift)/c(ctrl)/a(alt)/m(meta)...)
-                    },
-                },
-
-                lualine_c = {
-                    'lsp_progress',
-                    -- component
-                    -- {'lsp_progress', display_components = { 'lsp_client_name', { 'title', 'percentage', 'message' }}}
-                    -- ,  gps.get_location, condition = gps.is_available
-                },
-                lualine_x = {
-                    -- 'encoding', 'fileformat', 'filetype'
-                },
-                lualine_y = { 'diagnostics', 'progress' }, -- progress = %progress in file
-                lualine_z = { 'location' },
-            },
-            -- inactive_sections = {
-            --	 lualine_a = {},
-            --	 lualine_b = {},
-            --	 lualine_c = {'filename', 'lsp_progress'},
-            --	 lualine_x = {'location'},
-            --	 lualine_y = {},
-            --	 lualine_z = {}
-            -- },
-            -- tabline = {},
-            extensions = { 'fzf', 'fugitive' },
-        })
+		require 'teto.lualine'
     end,
 })
 
@@ -1549,51 +1514,51 @@ end
 
 -- since it was not merge yet
 
-vim.ui.pick = function(entries, opts)
-    acceptable_files = vim.tbl_values(entries)
+--vim.ui.pick = function(entries, opts)
+--    acceptable_files = vim.tbl_values(entries)
 
-    local pickers = require('telescope.pickers')
-    local finders = require('telescope.finders')
-    local actions = require('telescope.actions')
-    local action_state = require('telescope.actions.state')
+--    local pickers = require('telescope.pickers')
+--    local finders = require('telescope.finders')
+--    local actions = require('telescope.actions')
+--    local action_state = require('telescope.actions.state')
 
-    print('use my custom function')
-    local prompt = 'default prompt'
-    if opts ~= nil then
-        prompt = opts.prompt
-    end
+--    print('use my custom function')
+--    local prompt = 'default prompt'
+--    if opts ~= nil then
+--        prompt = opts.prompt
+--    end
 
-    local selection = pickers
-        .new({
-            prompt_title = prompt,
-            finder = finders.new_table({
-                results = acceptable_files,
-                entry_maker = function(line)
-                    return {
-                        value = line,
+--    local selection = pickers
+--        .new({
+--            prompt_title = prompt,
+--            finder = finders.new_table({
+--                results = acceptable_files,
+--                entry_maker = function(line)
+--                    return {
+--                        value = line,
 
-                        ordinal = line,
-                        display = line,
-                        --	   filename = base_directory .. "/data/memes/planets/" .. line,
-                    }
-                end,
+--                        ordinal = line,
+--                        display = line,
+--                        --	   filename = base_directory .. "/data/memes/planets/" .. line,
+--                    }
+--                end,
 
-                attach_mappings = function(prompt_bufnr)
-                    actions.select_default:replace(function()
-                        selection = action_state.get_selected_entry()
-                        actions.close(prompt_bufnr)
-                        print('Selected', selection)
-                        return selection
-                    end)
-                    return true
-                end,
-            }),
-        })
-        :find()
-    -- print("Selected", selection)
+--                attach_mappings = function(prompt_bufnr)
+--                    actions.select_default:replace(function()
+--                        selection = action_state.get_selected_entry()
+--                        actions.close(prompt_bufnr)
+--                        print('Selected', selection)
+--                        return selection
+--                    end)
+--                    return true
+--                end,
+--            }),
+--        })
+--        :find()
+--    -- print("Selected", selection)
 
-    return selection
-end
+--    return selection
+--end
 
 -- review locally github PRs
 local has_octo, octo = pcall(require, 'octo')
@@ -1729,11 +1694,11 @@ end
 -- nnoremap { "n", "r<C-k><C-k>" , function () require'betterdigraphs'.digraphs("r") end}
 -- vnoremap r<C-k><C-k> <ESC><Cmd>lua require'betterdigraphs'.digraphs("gvr")<CR>
 
-local orig_ref_handler = vim.lsp.handlers['textDocument/references']
-vim.lsp.handlers['textDocument/references'] = function(...)
-    orig_ref_handler(...)
-    vim.cmd([[ wincmd p ]])
-end
+-- local orig_ref_handler = vim.lsp.handlers['textDocument/references']
+-- vim.lsp.handlers['textDocument/references'] = function(...)
+--     orig_ref_handler(...)
+--     vim.cmd([[ wincmd p ]])
+-- end
 
 -- require("urlview").setup({
 --   picker = "default", -- "default" (vim.ui.select), "telescope" (telescope.nvim)
@@ -1768,14 +1733,18 @@ if has_bufferline then
 			-- -- add custom logic
 			-- return buffer_a.modified > buffer_b.modified
 			-- end
+			hover = {
+				enabled = true,
+				delay = 200,
+				reveal = {'close'}
+			},
 		}
 	}
 end
 
--- -- 	for i=1,9 do
--- -- 		vim.keymap.set('n',  '<leader>'..tostring(i) , "<cmd>BufferLineGoToBuffer "..tostring(i).."<CR>", { silent = true})
--- -- 	end
--- end
+for i=1,9 do
+	vim.keymap.set('n',  '<leader>'..tostring(i) , "<cmd>BufferLineGoToBuffer "..tostring(i).."<CR>", { silent = true})
+end
 
 -- nvim-colorizer {{{
 require('terminal').setup()
@@ -1922,6 +1891,7 @@ if has_telescope then
     -- telescope.load_extension('fzf')
     --jghauser/papis.nvim telescope.load_extension('fzy_native')
     -- telescope.load_extension("notify")
+	telescope.load_extension('hoogle')
     telescope.load_extension('frecency')
     telescope.load_extension('manix')
 
@@ -1985,7 +1955,7 @@ end
 --	local all_diagnostics = vim.lsp.diagnostic.get_all()
 --	vim.lsp.util.set_qflist(all_diagnostics)
 -- end
-vim.opt.background = 'dark' -- or "light" for light mode
+vim.opt.background = 'light' -- or "light" for light mode
 
 vim.opt.showbreak = '↳ ' -- displayed in front of wrapped lines
 
@@ -2013,6 +1983,11 @@ menu_add('Toggle.Blanklines', '<cmd>IndentBlanklineToggle<cr>')
 
 menu_add('REPL.Send line', [[<cmd>lua require'luadev'.exec(vim.api.nvim_get_current_line())<cr>]])
 -- menu_add('REPL.Send selection ', 'call <SID>luadev_run_operator(v:true)')
+
+menu_add ("PopUp.Lsp_declaration", "<Cmd>lua vim.lsp.buf.declaration()<CR>")
+menu_add ("PopUp.Lsp_definition", "<Cmd>lua vim.lsp.buf.definition()<CR>")
+menu_add('PopUp.LSP_Rename', '<cmd>lua vim.lsp.buf.rename()<cr>')
+menu_add('PopUp.LSP_Format', '<cmd>lua vim.lsp.buf.format()<cr>')
 
 menu_add(
     'Diagnostic.Display_in_QF',

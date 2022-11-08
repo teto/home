@@ -10,7 +10,7 @@ in
   # mc mb local/jinko-test
   services.minio = {
 
-    enable = true;
+    enable = false;
     # Access key of 5 to 20 characters in length that clients use to access the server
     # rootCredentialsFile = ;
     # accessKey = "pachyderme";

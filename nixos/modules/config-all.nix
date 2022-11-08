@@ -110,7 +110,7 @@ rec {
   documentation.man.enable = true; # temp
   documentation.doc.enable = true; # builds html doc, slow
   documentation.info.enable = false;
-  # documentation.nixos.enable = true;
+  documentation.nixos.enable = true;
 
   programs.less = {
     enable = true;
@@ -178,7 +178,7 @@ rec {
   };
 
   # to get manpages
-  documentation.enable = false;
+  documentation.enable = true;
   # set it to true to help
   documentation.nixos.includeAllModules = false;
 

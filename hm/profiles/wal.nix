@@ -2,5 +2,5 @@
 {
   # To select a light theme:
   # wal --theme random_light
-  programs.pywal.enable = false;
+  programs.pywal.enable = true;
 }
