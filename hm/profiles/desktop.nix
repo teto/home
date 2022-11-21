@@ -20,6 +20,7 @@ let
     exa  # to list files
     gitAndTools.diff-so-fancy # todo install it via the git config instead
     gitAndTools.gh  # github client
+    gitAndTools.git-absorb
     gitAndTools.git-crypt
     gitAndTools.git-extras
     gitAndTools.git-recent
@@ -28,6 +29,7 @@ let
     jq    # to run json queries
     lazygit  # kinda like tig
     ncurses.dev # for infocmp
+    neovide
     # neovim-remote # broken for latex etc
     # nix-doc # to access nix doc (broken)
 	manix 

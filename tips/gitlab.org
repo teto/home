@@ -12,8 +12,16 @@ tags are at the coordinator url (website)
 journalctl -u gitlab-runner
 
 
+log_level = 
+
+[[global section][https://docs.gitlab.com/runner/configuration/advanced-configuration.html#the-global-section]]
+
+* To enable debug
+  variables:
+    CI_DEBUG_TRACE: "true"
+
 sleep infinity
-CI_DEBUG_TRACE
+export CI_DEBUG_TRACE
 
 # Deploy keys
 

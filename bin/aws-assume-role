@@ -1,0 +1,11 @@
+#!/bin/sh
+# arn:aws:iam::<YOUR_ACCOUNT>:role/<YOUR_ROLENAME>
+arn="$1"
+# shift
+
+OUT=$(aws sts assume-role --role-session-name aaa --role-arn "$arn" --profile nova-sandbox);\
+
+
+echo "export AWS_ACCESS_KEY_ID=$(echo $OUT | jq -r '.Credentials''.AccessKeyId');"
+echo "export AWS_SECRET_ACCESS_KEY=$(echo $OUT | jq -r '.Credentials''.SecretAccessKey');"
+echo "export AWS_SESSION_TOKEN=$(echo $OUT | jq -r '.Credentials''.SessionToken');"

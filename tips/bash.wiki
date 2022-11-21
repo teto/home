@@ -9,3 +9,9 @@ awk '{print $1}' <<< "$VAR1"
 https://linuxize.com/post/how-to-compare-strings-in-bash/
 
 `if [ "$VAR1" = "$VAR2" ]; then`
+
+
+*
+
+cat <<-'EOF' > ~/.config/nix/nix.conf
+

@@ -223,6 +223,8 @@ vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'grey' })
 --   end,
 -- }
 
+use {'shaunsingh/oxocarbon.nvim', branch = 'fennel'}
+
 -- use '~/neovim/fzf-lua' -- markdown syntax compatible with Github's
 use('rhysd/vim-gfm-syntax') -- markdown syntax compatible with Github's
 -- use 'symphorien/vim-nixhash' -- use :NixHash
@@ -1288,6 +1290,14 @@ if has_cmp then
     -- }
 end
 
+vim.api.nvim_create_autocmd('MenuPopup', {
+    callback = function()
+        -- vim.highlight.on_yank({ higroup = 'IncSearch', timeout = 1000 })
+		print("hello")
+    end,
+})
+
+
 -- Load custom tree-sitter grammar for org filetype
 -- orgmode depends on treesitter
 local has_orgmode, orgmode = pcall(require, 'orgmode')
@@ -1392,9 +1402,9 @@ use({
 -- use { 'jbyuki/nabla.nvim' } -- write latex equations in ASCII
 -- use { 'jbyuki/monolithic.nvim' } -- write latex equations in ASCII
 
-vim.g.sonokai_style = 'atlantis'
-vim.cmd([[colorscheme sonokai]])
--- vim.cmd([[colorscheme peachpuff]])
+-- vim.g.sonokai_style = 'atlantis'
+-- vim.cmd([[colorscheme sonokai]])
+vim.cmd([[colorscheme janah]])
 -- vim.cmd([[colorscheme pywal]])
 --require'sniprun'.setup({
 --  -- selected_interpreters = {'Python3_fifo'},        --" use those instead of the default for the current filetype
