@@ -1,0 +1,17 @@
+* openwrt
+  ** router address is by default 192.168.1.1
+  ** can use tio /dev/ttyUSB0 to connect to it
+  ** restart luci with "service uhttpd reload" ? https://openwrt.org/docs/guide-user/luci/luci.secure
+  ** connect to http://192.168.1.1
+
+* package manager
+  ** opkg update
+
+TODO install
+needs wpa-supplicant
+
+
+brctl show / brctl
+
+cat /etc/config/network to see config
+ip link set br-lan up

@@ -252,6 +252,7 @@ use('bogado/file-line') -- to open a file at a specific line
 -- call :NR on a region than :w . coupled with b:nrrw_aucmd_create,
 -- use 'chrisbra/NrrwRgn' -- to help with multi-ft files
 use('chrisbra/vim-diff-enhanced') --
+use 'uga-rosa/translate.nvim'
 
 -- use ({
 --   "jghauser/papis.nvim",
@@ -711,16 +712,18 @@ use({
                     -- default_on_attach(client, bufnr)  -- if defined, see nvim-lspconfig
                 end,
                 -- ...
-                haskell = { -- haskell-language-server options
-                    formattingProvider = 'ormolu',
-                    checkProject = true, -- Setting this to true could have a performance impact on large mono repos.
-                    -- ...
-                    plugin = {
-						refineImports = {
-						codeActionsOn = true,
-						codeLensOn = false,
+                settings = { -- haskell-language-server options
+					haskell = {
+						formattingProvider = 'ormolu',
+						checkProject = true, -- Setting this to true could have a performance impact on large mono repos.
+						-- ...
+						plugin = {
+							refineImports = {
+							codeActionsOn = true,
+							codeLensOn = false,
+							},
 						},
-                    },
+					},
                 },
             },
         })
@@ -748,6 +751,16 @@ use({
 -- }
 
 -- use {'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async'}
+
+
+-- for quickreading: use :FSToggle to Toggle flow state
+use({'nullchilly/fsread.nvim', config = function ()
+
+	-- vim.g.flow_strength = 0.7 -- low: 0.3, middle: 0.5, high: 0.7 (default)
+	-- vim.g.skip_flow_default_hl = true -- If you want to override default highlights
+	-- vim.api.nvim_set_hl(0, "FSPrefix", { fg = "#cdd6f4" })
+	-- vim.api.nvim_set_hl(0, "FSSuffix", { fg = "#6C7086" })
+end})
 
 -- overrides vim.ui / vim.select with the backend of my choice
 use({
