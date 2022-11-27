@@ -13,8 +13,18 @@ mkfile_dir := $(dir $(mkfile_path))
 
 .PHONY: config etc mail local bin home vim_plugins treesitter
 
-lint:
+lint: lint-nix lint-lua
+
+lint-nix:
+	nixpkgs-fmt -c .
+
+lint-lua:
 	stylua config/nvim/init.lua
+
+deploy-router:
+	# --auto-rollback false --magic-rollback false
+	# we MUST skip checks else it fails
+	deploy .\#router  -s 
 
 # regenerate my email contacts
 # (to speed up alot autocompletion)
@@ -33,13 +43,11 @@ local:
 	stow -t "$(XDG_DATA_HOME)" local
 	mkdir -p $(XDG_DATA_HOME)/fzf-history $(XDG_DATA_HOME)/newsbeuter
 
-pip:
-	wget https://bootstrap.pypa.io/get-pip.py /tmp/
-	python3 /tmp/get-pip.py --user
-
 home:
 	stow --dotfiles -t ${HOME} home
 
+routerIso:
+		nix build .\#nixosConfigurations.routerIso.config.system.build.isoImage
 
 # I now rely on password-store instead
 keyring:
@@ -87,4 +95,4 @@ cachix:
 
 # just to save the command
 rebuild:
-	nixos-rebuild --flake ~/home --override-input nixpkgs-teto /home/teto/nixpkgs --override-input hm /home/teto/hm --override-input nova /home/teto/nova/nova-nix --no-write-lock-file switch  --show-trace --use-remote-sudo
+	nixos-rebuild --flake ~/home --override-input nixpkgs /home/teto/nixpkgs --override-input hm /home/teto/hm --override-input nova /home/teto/nova/nova-nix --no-write-lock-file switch  --show-trace --use-remote-sudo

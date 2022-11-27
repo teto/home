@@ -1,0 +1,10 @@
+https://francis.begyn.be/blog/nixos-home-router
+
+https://github.com/NixOS/nixos-hardware/blob/master/pcengines/apu/default.nix
+
+Starting version 251.7
+kbd_mode: KDSKBMODE: Inappropriate ioctl for device
+starting device mapper and LVM...
+mounting tmpfs on /...
+
+* When booting, hit tab to edit the boot entry. Normally NixOS does not output to serial in the boot process, so we need to enable is by appending console=ttyS0,115200 to the boot entry. All characters appear twice, so just make sure you type it correctyl ;) . ctrl+l can be used to refresh the screen. * After installing, you want to make sure that the PCEngine APU entry from the NixOS hardware repo is present, as it enables the console port.

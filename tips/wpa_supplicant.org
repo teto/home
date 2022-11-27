@@ -1,0 +1,13 @@
+
+#+BEGIN_SRC shell
+wpa_cli
+add_network
+set_network 0 ssid "neotokyo"
+set_network 0 psk "mypassword"
+set_network 0 key_mgmt WPA-PSK
+
+enable_network 0
+
+#+END_SRC
+
+https://nixos.org/manual/nixos/unstable/index.html#sec-installation-manual-networking

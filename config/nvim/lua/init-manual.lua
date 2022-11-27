@@ -245,6 +245,8 @@ use('rhysd/vim-gfm-syntax') -- markdown syntax compatible with Github's
 -- 'plutonly/vim-annotate-- --  last update in 2015
 --}}}
 
+use 'eandrju/cellular-automaton.nvim' -- :CellularAutomaton make_it_rain
+
 -- use 'norcalli/nvim-terminal.lua' -- to display ANSI colors
 -- use '~/neovim/nvim-terminal.lua' -- to display ANSI colors
 use('bogado/file-line') -- to open a file at a specific line
@@ -252,7 +254,31 @@ use('bogado/file-line') -- to open a file at a specific line
 -- call :NR on a region than :w . coupled with b:nrrw_aucmd_create,
 -- use 'chrisbra/NrrwRgn' -- to help with multi-ft files
 use('chrisbra/vim-diff-enhanced') --
-use 'uga-rosa/translate.nvim'
+
+
+-- competition to potamides/pantran.nvim which uses just AI backends it seems
+use({'uga-rosa/translate.nvim',
+	config = function ()
+
+	require("translate").setup({
+		default = {
+			command = "translate-shell",
+		},
+		preset = {
+			output = {
+				split = {
+					append = true,
+				},
+			},
+		},
+	})
+end})
+
+use 'linty-org/readline.nvim'
+
+-- to create anki cards
+use 'rareitems/anki.nvim'
+
 
 -- use ({
 --   "jghauser/papis.nvim",
@@ -2240,3 +2266,5 @@ map('n', '<leader>rg', '<Cmd>Grepper -tool rg -open -switch<CR>', { remap = true
 --	 { noremap = true, silent = true }
 -- )
 vim.o.grepprg = 'rg --vimgrep --no-heading --smart-case'
+
+require 'teto.context_menu'.setup_rclick_menu_autocommands()

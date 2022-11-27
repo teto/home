@@ -2,7 +2,7 @@
 {
   programs.kitty = {
     enable = true;
-    font.name = "Inconsolata";
+    font.name = "Ubuntu";
 	# _ksi_preexec breaks my own preexec !
     shellIntegration.enable = false;
     settings = {

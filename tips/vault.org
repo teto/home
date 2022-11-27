@@ -1,0 +1,2 @@
+* accept env variables
+  VAULT_ADDR and VAULT_TOKEN

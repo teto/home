@@ -1,4 +1,4 @@
-{ config, lib, pkgs,  ... }@args:
+{ config, lib, pkgs,  ... }:
 {
 boot.kernel.sysctl = {
   # if you use ipv4, this is all you need
@@ -14,8 +14,8 @@ boot.kernel.sysctl = {
   "net.ipv6.conf.all.use_tempaddr" = 0;
 
   # On WAN, allow IPv6 autoconfiguration and tempory address use.
-  "net.ipv6.conf.${name}.accept_ra" = 2;
-  "net.ipv6.conf.${name}.autoconf" = 1;
+  # "net.ipv6.conf.${name}.accept_ra" = 2;
+  # "net.ipv6.conf.${name}.autoconf" = 1;
 };
 
 }

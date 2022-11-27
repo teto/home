@@ -8,9 +8,9 @@ sudo iptables -A INPUT -p all --dport 4567 -j ACCEPT
 (dont forget the sudo else you'll get
 iptables v1.8.7 (nf_tables): unknown option "--dport")
 
-# flush all chains
-iptables -F
-iptables -t nat -F
-iptables -t mangle -F
+* flush all chains
+ iptables -F
+ iptables -t nat -F
+ iptables -t mangle -F
 # delete all chains
 iptables -X

@@ -21,6 +21,16 @@ in
   ];
   environment.homeBinInPath = true;
 
+  # to get manpages
+  documentation.enable = true;
+  # set it to true to help
+  documentation.nixos.includeAllModules = false;
+
+  # on master it is disabled
+  documentation.man.enable = true; # temp
+  documentation.doc.enable = true; # builds html doc, slow
+  documentation.info.enable = false;
+
   environment.systemPackages = with pkgs; [
      stow
   ];
@@ -111,6 +121,12 @@ in
   # programs.gnome-disks.enable = false;
 
   # don't forget to run ulimit -c unlimited to get the actual coredump
+  # check thos comment to setup user ulimits https://github.com/NixOS/nixpkgs/issues/159964#issuecomment-1252682060
+   # systemd.services."user@1000".serviceConfig.LimitNOFILE = "32768";
+  # security.pam.loginLimits = [
+   #  { domain = "*"; item = "nofile"; type = "-"; value = "32768"; }
+   #  { domain = "*"; item = "memlock"; type = "-"; value = "32768"; }
+  # ];
   # then coredumpctl debug will launch gdb !
   # boot.kernel.sysctl."kernel.core_pattern" = "core"; to disable.
   # security.pam.loginLimits

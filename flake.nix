@@ -25,6 +25,8 @@
     nixpkgs = {
       url = "github:teto/nixpkgs/nixos-unstable";
     };
+    deploy-rs.url = "github:serokell/deploy-rs";
+
 	peerix.url = "github:cid-chan/peerix";
     unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     mptcp-flake.url = "github:teto/mptcp-flake";
@@ -60,7 +62,7 @@
     # };
   };
 
-  outputs = { self, hm, nixpkgs, nur, unstable , nova , ... }:
+  outputs = { self, hm, nixpkgs, nur, unstable , nova, deploy-rs, ... }:
     let
       inherit (builtins) listToAttrs baseNameOf;
       # inherit (nixpkgsFinal.lib) removeSuffix;
@@ -125,8 +127,38 @@
         };
       };
 
-      # defaultTemplate = templates.app;
+      # the 'deploy' entry is used by 'deploy-rs' to deploy our nixosConfigurations
+      # if it doesn't work you can always fall back to the vanilla nixos-rebuild:
+      # NIX_SSHOPTS="-F ssh_config" nixos-rebuild switch --flake '.#ovh3-prod' --target-host nova@ovh-hybrid-runner-3.devops.novadiscovery.net --use-remote-sudo
+      deploy = {
+        # WARN: when bootstrapping, the "nova" user doesn't exist yet and as such you should run
+        # deploy .#TARGET --ssh-user root
+        user = "root";
+        # for now
+        # sshOpts = [ "-F" "ssh_config" ];
+        nodes =
+          let
+            # system = "x86_64-linux";
+            genNode = attrs: {
+              inherit (attrs) hostname;
+              profiles.system = {
+                # remoteBuild = false;
+                hostname = attrs.hostname;
+                path = deploy-rs.lib.${system}.activate.nixos self.nixosConfigurations.router;
+              };
+            };
+		  in {
+			router = genNode ({ name = "router"; hostname ="192.168.1.12"; });
+		  };
+          # nixpkgs.lib.listToAttrs (
+          #   map
+          #     (attr:
+          #       nixpkgs.lib.nameValuePair "${attr.runnerName}-${attr.targetEnvironment}" (genNode attr)
+          #     )
+          #     configs);
+      };
 
+      # defaultTemplate = templates.app;
       nixosConfigurations = {
           router = nixpkgs.lib.nixosSystem {
             inherit system;
@@ -135,11 +167,33 @@
                 nixpkgs.overlays = nixpkgs.lib.attrValues self.overlays;
                 imports = [
                   # ./nixos/hardware-dell-camera.nix
-                  ./nixos/config-router.nix
+                  ./nixos/hosts/router/configuration.nix
+				  self.inputs.nixos-hardware.nixosModules.pcengines-apu
                 ];
               })
             ];
           };
+
+		  # "${nixos}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
+		  # nix build .#nixosConfigurations.routerIso.config.system.build.isoImage
+		  # or make routerIso
+		  # routerIso = nixpkgs.lib.nixosSystem {
+            # inherit system;
+            # modules = [
+              # ({ pkgs, ... }: {
+                # nixpkgs.overlays = nixpkgs.lib.attrValues self.overlays;
+				# # for the live cd
+				# isoImage.squashfsCompression = "zstd -Xcompression-level 5";
+
+                # imports = [
+                  # # ./nixos/hardware-dell-camera.nix
+				  # "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
+                  # ./nixos/hosts/router/configuration.nix
+				  # self.inputs.nixos-hardware.nixosModules.pcengines-apu
+                # ];
+              # })
+            # ];
+          # };
 
           mcoudron = nixpkgs.lib.nixosSystem {
             inherit system;
@@ -375,6 +429,8 @@
 		  buildInputs = with nixpkgsFinal; [
 			sops
 			age
+			deploy-rs.packages.${system}.deploy-rs
+
 		  ];
 		};
 		

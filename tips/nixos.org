@@ -1,0 +1,2 @@
+* get ip in installer
+dhcpcd

@@ -19,6 +19,9 @@
 		host = "ovh1";
         hostname = "ovh-hybrid-runner-1.devops.novadiscovery.net";
 		identitiesOnly = true;
+		# experimental
+		# https://github.com/nix-community/home-manager/pull/2992
+		# match = "ovh1";
       };
       ovh2 = {
         # identityFile = "~/.ssh/ci-infra-ec2-dev";

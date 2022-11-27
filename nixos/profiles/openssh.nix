@@ -33,7 +33,9 @@
 	 LogLevel = "VERBOSE";
 	 KbdInteractiveAuthentication = false;
 	 PasswordAuthentication = false;
-	 PermitRootLogin = "prohibit-password";
+
+	 # 
+	 # PermitRootLogin = "prohibit-password";
 	};
 
     # forwardX11 = true;

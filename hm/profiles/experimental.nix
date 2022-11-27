@@ -26,6 +26,8 @@
 
   programs.xdg.enable = true;
 
+  programs.gnome-shell.enable = true;
+
   home.packages = [
     # deadd-notification-center
     # meli  # broken jmap mailreader

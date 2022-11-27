@@ -106,12 +106,6 @@ rec {
   # stick to sh as it's shell independant
   # environment.extraInit = builtins.readFile ../../config/zsh/init.sh;
 
-  # on master it is disabled
-  documentation.man.enable = true; # temp
-  documentation.doc.enable = true; # builds html doc, slow
-  documentation.info.enable = false;
-  documentation.nixos.enable = true;
-
   programs.less = {
     enable = true;
     # configFile = ;
@@ -123,7 +117,7 @@ rec {
   };
 
   programs.zsh = {
-    enable= true;
+    enable=true;
     zsh-autoenv.enable = false;
     enableCompletion = true;
     enableGlobalCompInit = false;
@@ -160,7 +154,7 @@ rec {
   # #   # And press it
 
 
-};
+  };
 
 
   # environment.etc.zshrc.text = lib.mkMerge [
@@ -177,12 +171,8 @@ rec {
     '';
   };
 
-  # to get manpages
-  documentation.enable = true;
-  # set it to true to help
-  documentation.nixos.includeAllModules = false;
 
-  users.defaultUserShell = pkgs.zsh;
+  # users.defaultUserShell = pkgs.zsh;
 
   nixpkgs = {
     config = {
