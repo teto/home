@@ -1,3 +1,5 @@
+when updating this, fill the nix store on the runners by running the following:
+  # nix build github:nixos/nix/VERSION --out-link ./dont-remove#
 # push image to registry 
 docker load -i tarball / docker import
 docker tag old new

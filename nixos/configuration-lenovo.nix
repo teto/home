@@ -1,4 +1,4 @@
-{ config, lib, pkgs,  ... }@args:
+{ config, lib, pkgs,  ... }:
 let
   secrets = import ./secrets.nix;
   nvidiaPackage = config.boot.kernelPackages.nvidiaPackages.stable;

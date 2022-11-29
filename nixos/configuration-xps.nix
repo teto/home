@@ -1,4 +1,7 @@
 { config, lib, pkgs,  ... }:
+let
+  secrets = import ../nixpkgs/secrets.nix;
+in
 {
   imports = [
     ./modules/config-all.nix
@@ -132,9 +135,15 @@
     # dbus.packages = [ ];
   };
 
-  environment.systemPackages = with pkgs;
+  # for tests
+  services.vault = {
+	enable = true;
+	dev = true;
+	devRootTokenID = secrets.vault.rootTokenId;
+  };
+
+  environment.systemPackages = [
     # cups-pk-helper # to add printer through gnome control center
-    [
       pkgs.lm_sensors # to see CPU temperature (command 'sensors')
     ]
   ;

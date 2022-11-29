@@ -1,2 +1,26 @@
 * accept env variables
   VAULT_ADDR and VAULT_TOKEN
+
+* to ignore certificate check 
+  export VAULT_SKIP_VERIFY=1
+* to debug token issues
+  vault token lookup
+
+
+When running Vault in dev mode, Key/Value v2 secrets engine is enabled at secret/ path.
+
+vault policy list
+vault secrets list -detailed
+vault secrets enable aws
+vault secrets enable -path=ssh-prod ssh
+
+#+BEGIN_SRC
+vault secrets list -detailed
+#+END_SRC
+
+
+When you access a KV v2 secrets engine using the vault kv CLI commands, we recommend using the -mount flag syntax (e.g. vault kv get -mount=secret foo) to reference the path to the KV v2 secrets engine.
+Without access to sys, commands like vault policy list or vault secrets list will not work.
+
+* to check what is possible
+vault token lookup | grep policies
