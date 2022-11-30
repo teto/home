@@ -18,6 +18,12 @@ let
 
   bridgeNetwork = { address = "10.0.0.0"; prefixLength = 24; };
 
+  # todo rely on a lib to manipulate network
+  show = at: 
+   "${at.address}/${toString at.prefixLength}";
+
+  externalInterface = "wlp5s0";
+
   # bridgeNetwork = "10.0.0.0";
 in
 {
@@ -30,15 +36,15 @@ in
       
     # TODO import from https://github.com/NixOS/nixos-hardware/tree/master/pcengines/apu
     # pcengines/apu
-  #   ./modules/mininet.nix
-
   ];
+
+  environment.systemPackages = with pkgs; [
+	bridge-utils
+   ];
 
   # Use the GRUB 2 boot loader.
   boot.loader.grub.enable = true;
   boot.loader.grub.version = 2;
-  # boot.loader.grub.efiSupport = true;
-  # boot.loader.grub.efiInstallAsRemovable = true;
   # boot.loader.efi.efiSysMountPoint = "/boot/efi";
   # Define on which hard drive you want to install Grub.
   boot.loader.grub.device = "/dev/sda"; # or "nodev" for efi only
@@ -65,57 +71,10 @@ in
   #   # "net.core.wmem_max" = 1048576;
   # };
 
-
   # # creates problem with buffalo check if it blocks requests or what
   # # it is necessary to use dnssec though :(
   # networking.resolvconf.dnsExtensionMechanism = false;
   # networking.resolvconf.dnsSingleRequest = false;
-
-  # to allow wireshark to capture from netlink
-  # networking.localCommands = ''
-  #   ip link show nlmon0
-  #   if [ $? -ne 0 ]; then
-  #     ip link add nlmon0 type nlmon
-  #     ip link set dev nlmon0 up
-  #   fi
-  # '';
-
-# networking = {
-#   useDHCP = false;
-#   # nameserver = [ "<DNS IP>" ];
-#   # Define VLANS
-#   vlans = {
-#     wan = {
-#       id = 10;
-#       interface = "enp1s0";
-#     };
-#     lan = {
-#       id = 20;
-#       interface = "enp2s0";
-#     };
-#     # iot = {
-#     #   id = 90;
-#     #   interface = "enp2s0";
-#     # };
-#   };
-
-#   interfaces = {
-#     # Don't request DHCP on the physical interfaces
-#     enp1s0.useDHCP = false;
-#     enp2s0.useDHCP = false;
-#     enp3s0.useDHCP = false;
-
-#     # Handle the VLANs
-#     wan.useDHCP = true;
-#     # lan = {
-#     #   ipv4.addresses = [{
-#     #     address = "10.1.1.1";
-#     #     prefixLength = 24;
-#     #   }];
-#     # };
-#   };
-# };
-
 
   powerManagement.cpuFreqGovernor = "ondemand";
 
@@ -130,26 +89,40 @@ in
   services.irqbalance.enable = true;
 
   networking.hostName = "coruscante";
-  networking.dhcpcd.enable = false;
+  # networking.dhcpcd.enable = true;
   networking.usePredictableInterfaceNames = true;
-  networking.firewall.interfaces.enp1s0.allowedTCPPorts = [ 4949 ];
+  # networking.firewall.interfaces.enp1s0.allowedTCPPorts = [ 4949 ];
+
   networking.firewall.interfaces.br0.allowedTCPPorts = [ 53 ];
   networking.firewall.interfaces.br0.allowedUDPPorts = [ 53 ];
 
   security.sudo.wheelNeedsPassword = false;
 
   services.acpid.enable = true;
-  services.openssh.enable = true;
+  services.openssh = {
+   enable = true;
+    # kinda experimental
+    # services.openssh.banner = "Hello world";
+    # ports = [ 12666 ];
+	# new format
+	settings = {
+	 LogLevel = "VERBOSE";
+	 KbdInteractiveAuthentication = false;
+	 PasswordAuthentication = false;
+	 # PermitRootLogin = "prohibit-password";
+	};
+
+  };
 
   services.unbound = {
-    enable = true;
+    enable = false;
     settings = {
       server = {
         interface = [ "127.0.0.1" "10.42.42.42" ];
         access-control =  [
           "0.0.0.0/0 refuse"
           "127.0.0.0/8 allow"
-          "10.42.42.0/24 allow"
+          "${show bridgeNetwork} allow"
         ];
       };
     };
@@ -169,26 +142,35 @@ in
   # };
 
   networking = {
+	# address of the livebox
     defaultGateway = { address = "192.168.1.1"; interface = "wlp5s0"; };
+
     interfaces.enp1s0 = {
-        ipv4.addresses = [
-            { address = "192.168.1.127"; prefixLength = 24; }
-        ];
+	  useDHCP = true;
+        # ipv4.addresses = [
+            # { address = "192.168.1.127"; prefixLength = 24; }
+        # ];
+    };
+
+    interfaces.wlp5s0 = {
+	  useDHCP = true;
+        # ipv4.addresses = [
+            # { address = "192.168.1.127"; prefixLength = 24; }
+        # ];
     };
 
     interfaces.br0 = {
         ipv4.addresses = [
 		  bridgeNetwork
-            # { address = "10.42.42.42"; prefixLength = 24; }
         ];
     };
 
     bridges.br0 = {
-        interfaces = [ "eth1" "eth2" ];
+	   interfaces = [ "enp2s0" "enp3s0"  "enp4s0" ];
     };
 
     nat.enable = true;
-    nat.externalInterface = "enp1s0";
+    nat.externalInterface = externalInterface;
     nat.internalInterfaces = [ "br0" ];
 
    wireless = {
@@ -208,10 +190,11 @@ in
 	  # TODO FIX
       extraConfig = ''
       option subnet-mask 255.255.255.0;
+	  # L'option routers spécifie une liste d'adresses IP de routeurs qui sont sur le sous-réseau du client. Les routeurs doivent être mentionnés par ordre de préférence.
       option routers ${bridgeNetwork.address};
-      option domain-name-servers 10.42.42.42, 9.9.9.9;
-      subnet 10.42.42.0 netmask 255.255.255.0 {
-          range 10.42.42.100 10.42.42.199;
+      option domain-name-servers 192.168.1.1;
+      subnet ${bridgeNetwork.address} netmask 255.255.255.0 {
+          range 10.0.0.100 10.0.0.199;
       }
       '';
       interfaces = [ "br0" ];

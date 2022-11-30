@@ -5,14 +5,15 @@
     enable = true;
     # kinda experimental
     # services.openssh.banner = "Hello world";
+    # ports = [ 12666 ];
 
-    allowSFTP = true; # for sshfs edit
+    allowSFTP = false; # for sshfs edit
     # type = types.enum ["yes" "without-password" "prohibit-password" "forced-commands-only" "no"];
     # needed since default is true !
     # listenAddresses = [
     #   { addr = "0.0.0.0"; port = 64022; }
     # ];
-    ports = [ 12666 ];
+
     startWhenNeeded = true;
 
 	extraConfig = ''
@@ -33,8 +34,6 @@
 	 LogLevel = "VERBOSE";
 	 KbdInteractiveAuthentication = false;
 	 PasswordAuthentication = false;
-
-	 # 
 	 # PermitRootLogin = "prohibit-password";
 	};
 
