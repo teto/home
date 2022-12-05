@@ -1,15 +1,15 @@
-with import <nixpkgs> {};
+with import <nixpkgs> { };
 
 luaPackages.argparse.overrideAttrs (oa: {
-    doCheck = true;
+  doCheck = true;
 
-     # self.busted #
-    checkInputs = [];
+  # self.busted #
+  checkInputs = [ ];
 
-    # checkPhase = ''
-      # busted spec/
-    # '';
-    shellHook = ''
-      export PATH="/home/teto/busted/bin:$PATH"
-    '';
+  # checkPhase = ''
+  # busted spec/
+  # '';
+  shellHook = ''
+    export PATH="/home/teto/busted/bin:$PATH"
+  '';
 })

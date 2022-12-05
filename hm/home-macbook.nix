@@ -1,4 +1,4 @@
-{ pkgs, lib,  ... }:
+{ pkgs, lib, ... }:
 let
   secrets = import ./secrets.nix;
 in
@@ -19,7 +19,7 @@ in
     dunst
     fortune
     xdg-utils
-    gtk-engine-murrine  # for hyper-light drifter
+    gtk-engine-murrine # for hyper-light drifter
   ];
 
   home.file.".digrc".text = ''
@@ -46,7 +46,7 @@ in
     options = [
       "add Mod1 Super_L"
       "keysym XF86Eject = Delete"
-  ];
+    ];
     # options = [ "add Mod1 Alt_R" ];
   };
 

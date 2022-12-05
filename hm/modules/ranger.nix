@@ -5,7 +5,8 @@ with lib;
 let
   cfg = config.programs.ranger;
 
-in {
+in
+{
 
   options = {
     programs.ranger = {
@@ -18,8 +19,7 @@ in {
       ffmpegthumbnailer # to preview videos in ranger
     ];
 
-    home.sessionVariables = {
-    };
+    home.sessionVariables = { };
   };
 }
 

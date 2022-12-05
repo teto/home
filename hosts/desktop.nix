@@ -1,7 +1,7 @@
-{ config, lib, pkgs,  ... }:
+{ config, lib, pkgs, ... }:
 # let
-  # secrets = import ./secrets.nix;
-  # userNixpkgs = /home/teto/nixpkgs;
+# secrets = import ./secrets.nix;
+# userNixpkgs = /home/teto/nixpkgs;
 # in
 {
 
@@ -14,7 +14,7 @@
     ../modules/wifi.nix
     ../nixos/profiles/neovim.nix
     ../nixos/profiles/pipewire.nix
-	../nixos/profiles/sops.nix
+    ../nixos/profiles/sops.nix
 
     # only if available
     # ./modules/jupyter.nix
@@ -32,7 +32,7 @@
   documentation.info.enable = false;
 
   environment.systemPackages = with pkgs; [
-     stow
+    stow
   ];
 
   networking.firewall.checkReversePath = false; # for nixops
@@ -48,38 +48,38 @@
   # console.font = "Lat2-Terminus16";
   # console.keyMap = "fr";
 
-   # inspired by https://gist.github.com/539h/8144b5cabf97b5b206da
-   # todo find a good japanese font
-   fonts = {
-      fontDir.enable = true; # ?
-      fonts = with pkgs; [
-        ubuntu_font_family
-        inconsolata # monospace
-        noto-fonts-cjk # asiatic
-        # nerdfonts
-        # corefonts # microsoft fonts  UNFREE
-        font-awesome_5
-        source-code-pro
-        dejavu_fonts
-        # Adobe Source Han Sans
-        source-han-sans #sourceHanSansPackages.japanese
-        fira-code-symbols # for ligatures
-        # noto-fonts
-      ];
+  # inspired by https://gist.github.com/539h/8144b5cabf97b5b206da
+  # todo find a good japanese font
+  fonts = {
+    fontDir.enable = true; # ?
+    fonts = with pkgs; [
+      ubuntu_font_family
+      inconsolata # monospace
+      noto-fonts-cjk # asiatic
+      # nerdfonts
+      # corefonts # microsoft fonts  UNFREE
+      font-awesome_5
+      source-code-pro
+      dejavu_fonts
+      # Adobe Source Han Sans
+      source-han-sans #sourceHanSansPackages.japanese
+      fira-code-symbols # for ligatures
+      # noto-fonts
+    ];
 
-      fontconfig= {
-        enable=true;
-        antialias=true; # some fonts can be disgusting else
-        allowBitmaps = false; # ugly
-        includeUserConf = true;
-        cache32Bit = false; # defualt false
-        defaultFonts = {
-          # monospace = [ "" ];
-          # serif = [ "" ];
-          # sansSerif =
-        };
+    fontconfig = {
+      enable = true;
+      antialias = true; # some fonts can be disgusting else
+      allowBitmaps = false; # ugly
+      includeUserConf = true;
+      cache32Bit = false; # defualt false
+      defaultFonts = {
+        # monospace = [ "" ];
+        # serif = [ "" ];
+        # sansSerif =
       };
-   };
+    };
+  };
 
   systemd.packages = [
     pkgs.deadd-notification-center
@@ -96,13 +96,15 @@
   # seemingly working for chromium only, check for firefox
   programs.browserpass.enable = true;
 
-  services.greenclip = let
-    # myGreenclip = with pkgs; haskell.lib.unmarkBroken haskell.packages.ghc884.greenclip;
-    myGreenclip = with pkgs; haskellPackages.greenclip;
-  in {
-    enable = true;
-    package = myGreenclip;
-  };
+  services.greenclip =
+    let
+      # myGreenclip = with pkgs; haskell.lib.unmarkBroken haskell.packages.ghc884.greenclip;
+      myGreenclip = with pkgs; haskellPackages.greenclip;
+    in
+    {
+      enable = true;
+      package = myGreenclip;
+    };
 
 
   nix = {
@@ -122,10 +124,10 @@
 
   # don't forget to run ulimit -c unlimited to get the actual coredump
   # check thos comment to setup user ulimits https://github.com/NixOS/nixpkgs/issues/159964#issuecomment-1252682060
-   # systemd.services."user@1000".serviceConfig.LimitNOFILE = "32768";
+  # systemd.services."user@1000".serviceConfig.LimitNOFILE = "32768";
   # security.pam.loginLimits = [
-   #  { domain = "*"; item = "nofile"; type = "-"; value = "32768"; }
-   #  { domain = "*"; item = "memlock"; type = "-"; value = "32768"; }
+  #  { domain = "*"; item = "nofile"; type = "-"; value = "32768"; }
+  #  { domain = "*"; item = "memlock"; type = "-"; value = "32768"; }
   # ];
   # then coredumpctl debug will launch gdb !
   # boot.kernel.sysctl."kernel.core_pattern" = "core"; to disable.
@@ -141,9 +143,9 @@
     #JournalSizeMax=767M
     #MaxUse=
     #KeepFree=
-    '';
+  '';
 
-    # users.motd = 
+  # users.motd = 
   security.pam.loginLimits = [
     {
       domain = "teto";
@@ -159,7 +161,7 @@
     }
   ];
 
-# nixpkgs/modules/config-all.nix|262 col 15| environment.etc."inputrc".source = ../../config/inputrc;
+  # nixpkgs/modules/config-all.nix|262 col 15| environment.etc."inputrc".source = ../../config/inputrc;
   environment.etc."security/limits.conf".text = ''
     #[domain]        [type]  [item]  [value]
     teto  soft  core  unlimited

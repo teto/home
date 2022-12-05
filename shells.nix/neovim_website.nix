@@ -1,7 +1,7 @@
-with import <nixpkgs> {};
+with import <nixpkgs> { };
 
 let
-  rubyEnv = ruby.withPackages(p: with p; [ nokogiri ]);
+  rubyEnv = ruby.withPackages (p: with p; [ nokogiri ]);
 in
 mkShell {
 

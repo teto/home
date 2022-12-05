@@ -14,22 +14,24 @@ let
   #  ${ihaskellEnv}/bin/ihaskell install -l $(${ihaskellEnv}/bin/ghc --print-libdir) && ${jupyter}/bin/jupyter notebook
   #'';
   haskellEnv = pkgs.haskellPackages.ghcWithHoogle (self: [
-          self.ihaskell
-          (pkgs.haskell.lib.doJailbreak self.ihaskell-blaze)
-          (pkgs.haskell.lib.doJailbreak self.ihaskell-diagrams)
-          (pkgs.haskell.lib.doJailbreak self.ihaskell-display)
-          # self.netlink
-        ]);
+    self.ihaskell
+    (pkgs.haskell.lib.doJailbreak self.ihaskell-blaze)
+    (pkgs.haskell.lib.doJailbreak self.ihaskell-diagrams)
+    (pkgs.haskell.lib.doJailbreak self.ihaskell-display)
+    # self.netlink
+  ]);
 
   # le tric la c que c pas le ihhaskell de all-packages.nix mais celui du haskell set
   # apparemment le global peut se configurer via nixpkgs.config.ihaskell.packages.
   # faut s'en inspirer
   # by default --use-rtsopts=""
-  ihaskellKernel = pkgs.runCommand "ihaskellKernel" {
-    # haskellEnv is a trick that should not be needed !
-    # https://github.com/NixOS/nixpkgs/issues/47135#issuecomment-431495187
-    # haskellEnv.env ?
-    buildInputs = [ pkgs.jupyter haskellEnv ]; } ''
+  ihaskellKernel = pkgs.runCommand "ihaskellKernel"
+    {
+      # haskellEnv is a trick that should not be needed !
+      # https://github.com/NixOS/nixpkgs/issues/47135#issuecomment-431495187
+      # haskellEnv.env ?
+      buildInputs = [ pkgs.jupyter haskellEnv ];
+    } ''
     export HOME=/tmp
     ${haskellEnv}/bin/ihaskell install --prefix=$out --use-rtsopts=""
   '';
@@ -56,9 +58,9 @@ let
 
 in
 {
-# only if exists !
-# enableDebugging
-# journalctl -b -u jupyter.service
+  # only if exists !
+  # enableDebugging
+  # journalctl -b -u jupyter.service
   services.jupyter = {
     enable = true;
     # port = 8123; # 8888 by default
@@ -66,9 +68,9 @@ in
     # password is 'test'
 
     # raw jupyter config
-      # jupyter notebook --generate-config
-      #
-#c.MappingKernelManager.kernel_info_timeout = 60
+    # jupyter notebook --generate-config
+    #
+    #c.MappingKernelManager.kernel_info_timeout = 60
     notebookConfig = ''
       c.Application.log_level = 'DEBUG'
       c.Session.debug = True
@@ -76,15 +78,17 @@ in
     '';
 
     password = "'sha1:1b961dc713fb:88483270a63e57d18d43cf337e629539de1436ba'";
-    kernels= {
+    kernels = {
       # Python3 kernel
-        python3 = let
+      python3 =
+        let
           env = (pkgs.python3.withPackages (pythonPackages: with pythonPackages; [
-                  ipykernel
-                  pandas
-                  scikitlearn
-                ]));
-        in {
+            ipykernel
+            pandas
+            scikitlearn
+          ]));
+        in
+        {
           displayName = "Python 3 for machine learning";
           argv = [
             "${env.interpreter}"
@@ -98,13 +102,14 @@ in
           # logo64 = builtins.toPath "${env.sitePackages}/ipykernel/resources/logo-64x64.png";
         };
 
-        # just need to run
-        # ihaskell install  --debug --prefix .
-        # then we can read share/jupyter/kernels/haskell/kernel.json
-        # ihaskell-kernel = builtins.toPath
+      # just need to run
+      # ihaskell install  --debug --prefix .
+      # then we can read share/jupyter/kernels/haskell/kernel.json
+      # ihaskell-kernel = builtins.toPath
 
       # haskell kernel
-        haskell = let
+      haskell =
+        let
 
           # ihaskellSh = pkgs.writeScriptBin "ihaskell-wrapper" ''
           #ihaskellSh = pkgs.writeScript "ihaskell-wrapper" ''
@@ -122,29 +127,29 @@ in
         # // {
         #   content.
         # }
-        ;
+      ;
 
-        # {
-          # displayName = "Haskell for machine learning";
-          # # https://github.com/gibiansky/IHaskell/issues/920
-          # argv = [
-            # "${ihaskellSh}"
-            # "kernel"
-            # "{connection_file}"
-            # "--ghclib"
-            # "${ihaskellEnv}/lib/ghc-8.4.3"
-            # "+RTS"
-            # "-M3g"
-            # # "-N2" # requires the program to be compiled with threaded
-            # "-RTS"
-          # ];
-          # language = "haskell";
-        # };
+      # {
+      # displayName = "Haskell for machine learning";
+      # # https://github.com/gibiansky/IHaskell/issues/920
+      # argv = [
+      # "${ihaskellSh}"
+      # "kernel"
+      # "{connection_file}"
+      # "--ghclib"
+      # "${ihaskellEnv}/lib/ghc-8.4.3"
+      # "+RTS"
+      # "-M3g"
+      # # "-N2" # requires the program to be compiled with threaded
+      # "-RTS"
+      # ];
+      # language = "haskell";
+      # };
 
 
       # sage = let
       #   # readFile
-    #   kernel= builtins.fromJSON (builtins.readFile (pkgs.sage + "/share/jupyter/kernels/sagemath/kernel.json")) // {
+      #   kernel= builtins.fromJSON (builtins.readFile (pkgs.sage + "/share/jupyter/kernels/sagemath/kernel.json")) // {
       #     language="python";
       #   };
       #     env = (pkgs.python3.withPackages (pythonPackages: with pythonPackages; [
@@ -155,19 +160,19 @@ in
       #             ]));
       #   in
       #   kernel;
-                # {
-            # displayName = "Python 3 for sage";
-            # argv = [
-              # "$ {env.interpreter}"
-              # "-m"
-              # "ipykernel_launcher"
-              # "-f"
-              # "{connection_file}"
-            # ];
-            # language = "python";
-            # logo32 = "$ {env.sitePackages}/ipykernel/resources/logo-32x32.png";
-            # logo64 = "$ {env.sitePackages}/ipykernel/resources/logo-64x64.png";
-          # };
+      # {
+      # displayName = "Python 3 for sage";
+      # argv = [
+      # "$ {env.interpreter}"
+      # "-m"
+      # "ipykernel_launcher"
+      # "-f"
+      # "{connection_file}"
+      # ];
+      # language = "python";
+      # logo32 = "$ {env.sitePackages}/ipykernel/resources/logo-32x32.png";
+      # logo64 = "$ {env.sitePackages}/ipykernel/resources/logo-64x64.png";
+      # };
 
     };
   };

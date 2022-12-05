@@ -1,11 +1,11 @@
 { stdenv
 , fetchFromGitLab
-, pkgconfig 
+, pkgconfig
 , autoreconfHook
 , check
 , graph-tool
-# , openssl # for libcrypto
-# , libpcap
+  # , openssl # for libcrypto
+  # , libpcap
 , scapy
 , setuptools
 , netifaces
@@ -14,18 +14,21 @@
 }:
 
 let
-  pythonEnv = python.withPackages(ps: with ps; [ 
-    scapy netifaces setuptools graph-tool
+  pythonEnv = python.withPackages (ps: with ps; [
+    scapy
+    netifaces
+    setuptools
+    graph-tool
   ]);
 in
-  # stdenv.mkDerivation rec 
-  buildPythonApplication {
+# stdenv.mkDerivation rec 
+buildPythonApplication {
   name = "mda-lite";
   version = "20180606";
 
   # FATAL we need to keep a git repo
   src = fetchFromGitLab {
-# https://gitlab.planet-lab.eu/cartography/multilevel-mda-lite
+    # https://gitlab.planet-lab.eu/cartography/multilevel-mda-lite
     domain = "gitlab.planet-lab.eu";
     owner = "cartography";
     repo = "multilevel-mda-lite";
@@ -47,7 +50,7 @@ in
 
   meta = with lib; {
 
-    homepage =  https://gitlab.planet-lab.eu/cartography/multilevel-mda-lite;
+    homepage = https://gitlab.planet-lab.eu/cartography/multilevel-mda-lite;
     description = "Multipath traceroute";
     platforms = platforms.unix;
     license = licenses.gpl3;

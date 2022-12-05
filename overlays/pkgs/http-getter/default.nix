@@ -1,5 +1,10 @@
-{ stdenv, fetchFromGitHub, cmake
-, curl, pkgconfig, lib }:
+{ stdenv
+, fetchFromGitHub
+, cmake
+, curl
+, pkgconfig
+, lib
+}:
 
 stdenv.mkDerivation rec {
   name = "http-getter";

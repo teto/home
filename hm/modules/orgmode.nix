@@ -5,11 +5,12 @@ with lib;
 let
   cfg = config.programs.orgmode;
 
-in {
+in
+{
 
   options = {
     programs.zsh = {
-	  enableFzfGit = mkEnableOption "Fzf-git";
+      enableFzfGit = mkEnableOption "Fzf-git";
 
       # # enable = mkEnableOption "Some custom zsh functions";
       # enableProfiling = mkOption {
@@ -26,9 +27,9 @@ in {
   config = mkIf cfg.enable (mkMerge [
     # (mkIf cfg.enableFzfGit {
     #   programs.zsh.initExtra = ''
-	   # source ${fzf-git-sh}/fzf-git.sh
-	   # '';
-	# })
+    # source ${fzf-git-sh}/fzf-git.sh
+    # '';
+    # })
 
     (mkIf cfg.enableFancyCtrlZ {
       programs.zsh.initExtra = ''

@@ -1,4 +1,4 @@
-{ pkgs ? import <nixpkgs> {} }:
+{ pkgs ? import <nixpkgs> { } }:
 
 rec {
   optslist = ./options.json;
@@ -11,8 +11,8 @@ rec {
       --preview-window=wrap
   '';
 
-   gfzfopts = pkgs.writeShellScriptBin "gfzfopts" ''
-     termite -e "zsh -ic ${fzfopts}/bin/fzfopts"
-   '';
+  gfzfopts = pkgs.writeShellScriptBin "gfzfopts" ''
+    termite -e "zsh -ic ${fzfopts}/bin/fzfopts"
+  '';
 
 }

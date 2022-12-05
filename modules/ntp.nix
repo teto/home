@@ -12,7 +12,7 @@
       # "3.nixos.pool.ntp.org"
     ];
 
-	# what are constraints ?
+    # what are constraints ?
     extraConfig = ''
       server 0.nixos.pool.ntp.org trusted
       constraints from "https://www.google.com/"
@@ -34,10 +34,10 @@
     # 2/ "sudo chronyd -q 'pool pool.ntp.org iburst'"
     enable = true;
 
-	# to correct big errors on startup
-	initstepslew = {
-	 enabled = true;
-	};
+    # to correct big errors on startup
+    initstepslew = {
+      enabled = true;
+    };
   };
 
 }

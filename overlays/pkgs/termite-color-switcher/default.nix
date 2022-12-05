@@ -1,6 +1,6 @@
 { pkgs ? import <nixpkgs> }:
 with pkgs;
-stdenv.mkDerivation  {
+stdenv.mkDerivation {
 
   pname = "termite-color-switcher";
   version = "05052019";

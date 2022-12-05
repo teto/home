@@ -25,10 +25,10 @@ let
         Pocket = false;
         Snippets = false;
       };
-       UserMessaging = {
-         ExtensionRecommendations = false;
-         SkipOnboarding = true;
-       };
+      UserMessaging = {
+        ExtensionRecommendations = false;
+        SkipOnboarding = true;
+      };
     };
     extraPrefs = ''
       // Show more ssl cert infos
@@ -36,4 +36,4 @@ let
     '';
   };
 in
-  myFirefox
+myFirefox

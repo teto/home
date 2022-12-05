@@ -24,31 +24,31 @@
   };
 
   outputs = { self, nixpkgs, flake-utils, hls, ... }:
-    flake-utils.lib.eachSystem ["x86_64-linux"] (system: let
+    flake-utils.lib.eachSystem [ "x86_64-linux" ] (system:
+      let
 
-      compilerVersion = "8107";
+        compilerVersion = "8107";
 
-      haskellOverlay = hnew: hold: with pkgs.haskell.lib; {
-      };
+        haskellOverlay = hnew: hold: with pkgs.haskell.lib; { };
 
-      pkgs = import nixpkgs {
+        pkgs = import nixpkgs {
           inherit system;
-          config = { allowUnfree = false; allowBroken = true;};
+          config = { allowUnfree = false; allowBroken = true; };
         };
 
-      hsPkgs = pkgs.haskell.packages."ghc${compilerVersion}";
+        hsPkgs = pkgs.haskell.packages."ghc${compilerVersion}";
 
-      # modifier used in haskellPackages.developPackage
-      myModifier = drv:
-        pkgs.haskell.lib.addBuildTools drv (with hsPkgs; [
-          cabal-install
-          hls.packages.${system}."haskell-language-server-${compilerVersion}"
-        ]);
+        # modifier used in haskellPackages.developPackage
+        myModifier = drv:
+          pkgs.haskell.lib.addBuildTools drv (with hsPkgs; [
+            cabal-install
+            hls.packages.${system}."haskell-language-server-${compilerVersion}"
+          ]);
 
-      # mkDevShell
-      mkPackage = name:
+        # mkDevShell
+        mkPackage = name:
           hsPkgs.developPackage {
-            root =  pkgs.lib.cleanSource (builtins.toPath ./. + "/${name}");
+            root = pkgs.lib.cleanSource (builtins.toPath ./. + "/${name}");
             name = name;
             returnShellEnv = false;
             withHoogle = true;
@@ -56,17 +56,18 @@
             modifier = myModifier;
           };
 
-    in {
-      packages = {
+      in
+      {
+        packages = {
 
-        mptcp-pm = mkPackage "mptcp-pm";
+          mptcp-pm = mkPackage "mptcp-pm";
 
-      };
+        };
 
-      defaultPackage = self.packages.${system}.mptcpanalyzer;
+        defaultPackage = self.packages.${system}.mptcpanalyzer;
 
-      devShells = {
-        mptcp-pm = self.packages.${system}.mptcp-pm.envFunc {};
-      };
-  });
+        devShells = {
+          mptcp-pm = self.packages.${system}.mptcp-pm.envFunc { };
+        };
+      });
 }

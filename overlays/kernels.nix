@@ -13,24 +13,26 @@ let
   # EXT4_ENCRYPTION
 
   # https://wiki.strongswan.org/projects/strongswan/wiki/KernelModules
-  structuredConfigs = import ./kernels/structured.nix { inherit (prev) lib; inherit libk;};
+  structuredConfigs = import ./kernels/structured.nix { inherit (prev) lib; inherit libk; };
 
 
   # TODO for dev shellHook
   addMenuConfig = kernel:
     # kernel;
     (kernel.overrideAttrs (o: {
-      nativeBuildInputs=o.nativeBuildInputs ++ [
-        prev.pkgconfig prev.qt5.qtbase prev.ncurses
+      nativeBuildInputs = o.nativeBuildInputs ++ [
+        prev.pkgconfig
+        prev.qt5.qtbase
+        prev.ncurses
         # we need python to run scripts/gen_compile_commands
         prev.python
-    ];
-    # buildInputs = (o.buildInputs or []) ++ [prev.python];
-    shellHook = (o.shellHook or "") + ''
-      echo "make menuconfig KCONFIG_CONFIG=$PWD/build/.config"
-      echo "make menuconfig KCONFIG_CONFIG=$PWD/build/.config"
-    '';
-  }));
+      ];
+      # buildInputs = (o.buildInputs or []) ++ [prev.python];
+      shellHook = (o.shellHook or "") + ''
+        echo "make menuconfig KCONFIG_CONFIG=$PWD/build/.config"
+        echo "make menuconfig KCONFIG_CONFIG=$PWD/build/.config"
+      '';
+    }));
 
 
 
@@ -55,13 +57,14 @@ let
 
   # todo remove tags
   filter-src = builtins.filterSource (p: t:
-  let baseName = baseNameOf p;
-  in prev.lib.cleanSourceFilter p t && baseName != "build" && baseName != "tags");
+    let baseName = baseNameOf p;
+    in prev.lib.cleanSourceFilter p t && baseName != "build" && baseName != "tags");
 
-in rec {
+in
+rec {
 
   kernelForDev = { debugKconfig ? true }: kernel:
-    (kernel.overrideAttrs(oa: {
+    (kernel.overrideAttrs (oa: {
       # could be or kernelPatches
       # prePatch = ''
       #   substituteInPlace scripts/kconfig/ \
@@ -77,7 +80,7 @@ in rec {
       # defconfig = "kvmguest"; # doesn't work well
       # TODO 
       # it was not answering Console on 8250/16550 and compatible serial port, NAME: SERIAL_8250_CONSOLE, ALTS: Y/n/?, ANSWER:
-      ignoreConfigErrors=true;
+      ignoreConfigErrors = true;
 
       # won't work like this
       autoModules = true;
@@ -94,7 +97,7 @@ in rec {
 
   # TODO maybe I should modify linuxPackagesFor instead ?
   linux_latest_debug = prev.linux_latest.override {
-    structuredExtraConfig = structuredConfigs.debugConfigStructured ;
+    structuredExtraConfig = structuredConfigs.debugConfigStructured;
   };
 
 
@@ -103,7 +106,7 @@ in rec {
     # That works
     # defconfig = "x86_64_defconfig kvmconfig";
     structuredExtraConfig = {
-      NET_NS      = libk.no;
+      NET_NS = libk.no;
     };
   };
 
@@ -119,7 +122,7 @@ in rec {
     kernelPatches = prev.linux_5_4.kernelPatches;
     # does not seem true anymore
     # preferBuiltin = false;
-    ignoreConfigErrors=true;
+    ignoreConfigErrors = true;
     # autoModules = true;
     # boot.debug1device
 
@@ -134,7 +137,7 @@ in rec {
 
   linuxPackages_mptcp_trunk = prev.linuxPackagesFor linux_mptcp_trunk_raw;
 
-  linux_mptcp_trunk_dev = addMenuConfig linux_mptcp_trunk_raw ;
+  linux_mptcp_trunk_dev = addMenuConfig linux_mptcp_trunk_raw;
 
   # doesn't work as expected yet
   # now enabled by default
@@ -163,7 +166,7 @@ in rec {
   # });
 
   /*
-  simple convenience to just test the code faster
+    simple convenience to just test the code faster
   */
   # checkKernelConfigTest = let
   #   # alread flattened

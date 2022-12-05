@@ -16,9 +16,9 @@
 
     startWhenNeeded = true;
 
-	extraConfig = ''
-	 HostKey /home/teto/.ssh/server_id_rsa
-	'';
+    extraConfig = ''
+      	 HostKey /home/teto/.ssh/server_id_rsa
+      	'';
 
     # authorizedKeysFiles = [
     #   "~/.ssh/id_rsa.pub"
@@ -29,16 +29,16 @@
     # hostKeys
 
 
-	# new format
-	settings = {
-	 LogLevel = "VERBOSE";
-	 KbdInteractiveAuthentication = false;
-	 PasswordAuthentication = false;
-	 # PermitRootLogin = "prohibit-password";
-	};
+    # new format
+    settings = {
+      LogLevel = "VERBOSE";
+      KbdInteractiveAuthentication = false;
+      PasswordAuthentication = false;
+      # PermitRootLogin = "prohibit-password";
+    };
 
     # forwardX11 = true;
-	 # kbdInteractiveAuthentication = false;
+    # kbdInteractiveAuthentication = false;
     # logLevel = "VERBOSE";
     # permitRootLogin = "prohibit-password";
     # passwordAuthentication = false;

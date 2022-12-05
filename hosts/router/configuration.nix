@@ -1,26 +1,26 @@
 /*
-the router is an APU4D4, i.e., x86-based system
-https://teklager.se/en/products/routers/apu4d4-open-source-router
+  the router is an APU4D4, i.e., x86-based system
+  https://teklager.se/en/products/routers/apu4d4-open-source-router
 
-Links of interest:
-- https://dataswamp.org/~solene/2022-08-03-nixos-with-live-usb-router.html
-- https://skogsbrus.xyz/blog/2022/06/12/router/
-- https://francis.begyn.be/blog/nixos-home-router
-- https://www.jjpdev.com/posts/home-router-nixos/
+  Links of interest:
+  - https://dataswamp.org/~solene/2022-08-03-nixos-with-live-usb-router.html
+  - https://skogsbrus.xyz/blog/2022/06/12/router/
+  - https://francis.begyn.be/blog/nixos-home-router
+  - https://www.jjpdev.com/posts/home-router-nixos/
 
-When booting, hit tab to edit the boot entry. 
-Normally NixOS does not output to serial in the boot process, so we need to enable is by appending console=ttyS0,115200 to the boot entry. All characters appear twice, so just make sure you type it correctyl ;) . ctrl+l can be used to refresh the screen. 
- After installing, you want to make sure that the PCEngine APU entry from the NixOS hardware repo is present, as it enables the console port.
+  When booting, hit tab to edit the boot entry. 
+  Normally NixOS does not output to serial in the boot process, so we need to enable is by appending console=ttyS0,115200 to the boot entry. All characters appear twice, so just make sure you type it correctyl ;) . ctrl+l can be used to refresh the screen. 
+   After installing, you want to make sure that the PCEngine APU entry from the NixOS hardware repo is present, as it enables the console port.
 */
-{ config, lib, pkgs,  ... }:
+{ config, lib, pkgs, ... }:
 let
   secrets = import ../../nixpkgs/secrets.nix;
 
   bridgeNetwork = { address = "10.0.0.0"; prefixLength = 24; };
 
   # todo rely on a lib to manipulate network
-  show = at: 
-   "${at.address}/${toString at.prefixLength}";
+  show = at:
+    "${at.address}/${toString at.prefixLength}";
 
   externalInterface = "wlp5s0";
 
@@ -29,20 +29,20 @@ in
 {
   # pcengines/apu/
   imports = [
-	./hardware.nix
+    ./hardware.nix
     ../config-all.nix
     ../../nixos/profiles/openssh.nix
     ../../nixos/profiles/router.nix
-	# TODO use ${modulePath} instead
-     # self.inputs.nixos-hardware.nixosModules.pcengines-apu 
+    # TODO use ${modulePath} instead
+    # self.inputs.nixos-hardware.nixosModules.pcengines-apu 
 
     # TODO import from https://github.com/NixOS/nixos-hardware/tree/master/pcengines/apu
     # pcengines/apu
   ];
 
   environment.systemPackages = with pkgs; [
-	bridge-utils
-   ];
+    bridge-utils
+  ];
 
   # Use the GRUB 2 boot loader.
   boot.loader.grub.enable = true;
@@ -54,7 +54,7 @@ in
   # for the live cd
   # isoImage.squashfsCompression = "zstd -Xcompression-level 5";
 
-  users.users.teto.packages =  [
+  users.users.teto.packages = [
     # pciutils # for lspci
     # ncdu  # to see disk usage
     # bridge-utils # pour  brctl
@@ -83,8 +83,8 @@ in
   # TODO why copy solene's blog explanation
   # boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
   boot.kernelParams = [
-   "copytoram"
-   "console=ttyS0,115200"
+    "copytoram"
+    "console=ttyS0,115200"
   ];
   boot.supportedFilesystems = pkgs.lib.mkForce [ "btrfs" "vfat" "xfs" "ntfs" "cifs" ];
 
@@ -102,17 +102,17 @@ in
 
   services.acpid.enable = true;
   services.openssh = {
-   enable = true;
+    enable = true;
     # kinda experimental
     # services.openssh.banner = "Hello world";
     # ports = [ 12666 ];
-	# new format
-	settings = {
-	 LogLevel = "VERBOSE";
-	 KbdInteractiveAuthentication = false;
-	 PasswordAuthentication = false;
-	 # PermitRootLogin = "prohibit-password";
-	};
+    # new format
+    settings = {
+      LogLevel = "VERBOSE";
+      KbdInteractiveAuthentication = false;
+      PasswordAuthentication = false;
+      # PermitRootLogin = "prohibit-password";
+    };
 
   };
 
@@ -121,7 +121,7 @@ in
     settings = {
       server = {
         interface = [ "127.0.0.1" "10.42.42.42" ];
-        access-control =  [
+        access-control = [
           "0.0.0.0/0 refuse"
           "127.0.0.0/8 allow"
           "${show bridgeNetwork} allow"
@@ -144,62 +144,62 @@ in
   # };
 
   networking = {
-	# address of the livebox
+    # address of the livebox
     defaultGateway = { address = "192.168.1.1"; interface = "wlp5s0"; };
 
     interfaces.enp1s0 = {
-	  useDHCP = true;
-        # ipv4.addresses = [
-            # { address = "192.168.1.127"; prefixLength = 24; }
-        # ];
+      useDHCP = true;
+      # ipv4.addresses = [
+      # { address = "192.168.1.127"; prefixLength = 24; }
+      # ];
     };
 
     interfaces.wlp5s0 = {
-	  useDHCP = true;
-        # ipv4.addresses = [
-            # { address = "192.168.1.127"; prefixLength = 24; }
-        # ];
+      useDHCP = true;
+      # ipv4.addresses = [
+      # { address = "192.168.1.127"; prefixLength = 24; }
+      # ];
     };
 
     interfaces.br0 = {
-        ipv4.addresses = [
-		  bridgeNetwork
-        ];
+      ipv4.addresses = [
+        bridgeNetwork
+      ];
     };
 
     bridges.br0 = {
-	   interfaces = [ "enp2s0" "enp3s0"  "enp4s0" ];
+      interfaces = [ "enp2s0" "enp3s0" "enp4s0" ];
     };
 
     nat.enable = true;
     nat.externalInterface = externalInterface;
     nat.internalInterfaces = [ "br0" ];
 
-   wireless = {
-	enable = true;
-	userControlled.enable = true; 
-	networks = { 
-	  neotokyo = { 
-		psk = secrets.router.password;
-	  }; 
-	}; 
-   };
+    wireless = {
+      enable = true;
+      userControlled.enable = true;
+      networks = {
+        neotokyo = {
+          psk = secrets.router.password;
+        };
+      };
+    };
   };
 
   services.dhcpd4 = {
-	 enable = true;
+    enable = true;
 
-	  # TODO FIX
-      extraConfig = ''
-      option subnet-mask 255.255.255.0;
-	  # L'option routers spécifie une liste d'adresses IP de routeurs qui sont sur le sous-réseau du client. Les routeurs doivent être mentionnés par ordre de préférence.
-      option routers ${bridgeNetwork.address};
-      option domain-name-servers 192.168.1.1;
-      subnet ${bridgeNetwork.address} netmask 255.255.255.0 {
-          range 10.0.0.100 10.0.0.199;
-      }
-      '';
-      interfaces = [ "br0" ];
+    # TODO FIX
+    extraConfig = ''
+            option subnet-mask 255.255.255.0;
+      	  # L'option routers spécifie une liste d'adresses IP de routeurs qui sont sur le sous-réseau du client. Les routeurs doivent être mentionnés par ordre de préférence.
+            option routers ${bridgeNetwork.address};
+            option domain-name-servers 192.168.1.1;
+            subnet ${bridgeNetwork.address} netmask 255.255.255.0 {
+                range 10.0.0.100 10.0.0.199;
+            }
+    '';
+    interfaces = [ "br0" ];
   };
 
   time.timeZone = "Europe/Paris";

@@ -1,4 +1,4 @@
-({ config, lib, pkgs,  ... }:
+({ config, lib, pkgs, ... }:
 {
   # use the system's pkgs rather than hm nixpkgs.
   home-manager.useGlobalPkgs = true;

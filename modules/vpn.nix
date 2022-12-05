@@ -1,4 +1,4 @@
-{ config, lib,  pkgs, ... }:
+{ config, lib, pkgs, ... }:
 {
   # services.xl2tpd = {
   #   enable = true;
@@ -7,7 +7,7 @@
 
   services.strongswan = {
     enable = true;
-      # "/etc/ipsec.d/*.secrets" "/etc/ipsec.d"
+    # "/etc/ipsec.d/*.secrets" "/etc/ipsec.d"
     # secrets = ["/etc/ipsec.d"];
     # /etc/
     secrets = [

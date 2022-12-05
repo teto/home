@@ -1,65 +1,65 @@
-{ config, lib, pkgs,  ... }:
+{ config, lib, pkgs, ... }:
 {
   nix = {
     registry = {
-      nur.to = { type = "github"; owner = "nix-community"; repo="NUR"; };
-      hm.to = { type = "github"; owner = "nix-community"; repo="home-manager"; };
-      poetry.to = { type = "github"; owner = "nix-community"; repo="poetry2nix"; };
-      neovim.to = { type = "github"; owner = "neovim"; repo="neovim?dir=contrib"; };
+      nur.to = { type = "github"; owner = "nix-community"; repo = "NUR"; };
+      hm.to = { type = "github"; owner = "nix-community"; repo = "home-manager"; };
+      poetry.to = { type = "github"; owner = "nix-community"; repo = "poetry2nix"; };
+      neovim.to = { type = "github"; owner = "neovim"; repo = "neovim?dir=contrib"; };
 
-      iohk.to = { type = "github"; owner = "input-output-hk"; repo="haskell.nix"; };
-      nixops.to = { type = "github"; owner = "nixos"; repo="nixops"; };
-      idris.to = { type = "github"; owner = "idris-lang"; repo="Idris2"; };
-      hls.to = { type = "github"; owner = "haskell"; repo="haskell-language-server"; };
-      cachix.to = { type = "github"; owner = "cachix"; repo="cachix"; };
-      ihaskell.to = { type = "github"; owner = "gibiansky"; repo="IHaskell"; };
-      jupyter.to = { type = "github"; owner = "teto"; repo="jupyterWith"; };
+      iohk.to = { type = "github"; owner = "input-output-hk"; repo = "haskell.nix"; };
+      nixops.to = { type = "github"; owner = "nixos"; repo = "nixops"; };
+      idris.to = { type = "github"; owner = "idris-lang"; repo = "Idris2"; };
+      hls.to = { type = "github"; owner = "haskell"; repo = "haskell-language-server"; };
+      cachix.to = { type = "github"; owner = "cachix"; repo = "cachix"; };
+      ihaskell.to = { type = "github"; owner = "gibiansky"; repo = "IHaskell"; };
+      jupyter.to = { type = "github"; owner = "teto"; repo = "jupyterWith"; };
 
-	  # from = {
-		# id = "nova-nix";
-		# type = "indirect";
-	  # };
+      # from = {
+      # id = "nova-nix";
+      # type = "indirect";
+      # };
 
-      mptcp.to = { type = "github"; owner="teto"; repo = "mptcp-flake";};
+      mptcp.to = { type = "github"; owner = "teto"; repo = "mptcp-flake"; };
 
       nova.to = {
-          type = "git";
-          url = "ssh://git@git.novadiscovery.net/world/nova-nix.git";
-        };
+        type = "git";
+        url = "ssh://git@git.novadiscovery.net/world/nova-nix.git";
+      };
       # nova.to = { type = "git+ssh://git@git.novadiscovery.net:4224/world/nova-nix.git";
       # "github:nixos/nixpkgs/nixos-unstable";
       # home-manager
     };
 
-      # sshServe = {
-      #   enable = true;
-      #   protocol = "ssh";
-      #   # keys = [ secrets.gitolitePublicKey ];
-      # };
+    # sshServe = {
+    #   enable = true;
+    #   protocol = "ssh";
+    #   # keys = [ secrets.gitolitePublicKey ];
+    # };
 
-      # added to nix.conf
-      # experimental-features = nix-command flakes
-      extraOptions = ''
-        keep-outputs = true       # Nice for developers
-        keep-derivations = true   # Idem
-        keep-failed = true
+    # added to nix.conf
+    # experimental-features = nix-command flakes
+    extraOptions = ''
+      keep-outputs = true       # Nice for developers
+      keep-derivations = true   # Idem
+      keep-failed = true
 
-        experimental-features = nix-command flakes
-      '';
-      #  to keep build-time dependencies around => rebuild while being offline
-      # extraOptions = ''
-      #   gc-keep-outputs = true
-      #   # http-connections = 25 is the default
-      #   http2 = true
-      #   keep-derivations = true
-      #   keep-failed = true
-      #   show-trace = false
-      #   builders-use-substitutes = true
-      # '';
+      experimental-features = nix-command flakes
+    '';
+    #  to keep build-time dependencies around => rebuild while being offline
+    # extraOptions = ''
+    #   gc-keep-outputs = true
+    #   # http-connections = 25 is the default
+    #   http2 = true
+    #   keep-derivations = true
+    #   keep-failed = true
+    #   show-trace = false
+    #   builders-use-substitutes = true
+    # '';
 
-      # "https://teto.cachix.org"
-      settings = {
-        substituters = [
+    # "https://teto.cachix.org"
+    settings = {
+      substituters = [
         # "https://cache.nixos.org/" # part of the default
         "https://jupyterwith.cachix.org"
         # TODO move it to nova's ?
@@ -75,5 +75,5 @@
         "teto"
       ];
     };
-    };
+  };
 }

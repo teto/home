@@ -1,5 +1,5 @@
 # could be called home-huge.nix
-{ config, lib, pkgs,  ... }:
+{ config, lib, pkgs, ... }:
 {
 
   # broken on unstable because python2
@@ -8,13 +8,13 @@
   home.packages = with pkgs; [
     hakuneko
     hexyl
-    pinta    # photo editing
+    pinta # photo editing
     pciutils # for lspci
     bridge-utils # pour  brctl
     wirelesstools # to get iwconfig
     gitAndTools.diff-so-fancy
     # aircrack-ng
-    nodePackages.insect  # fancy calculator
+    nodePackages.insect # fancy calculator
     # nushell  # rust-based semantic shell
     # tlaplus  # formal logic
     # tlaplusToolbox  # from leslie lamport
@@ -22,6 +22,6 @@
     # a terminal slide
     # haskellPackages.patat
     # https://github.com/jaspervdj/patat
-];
+  ];
 
 }

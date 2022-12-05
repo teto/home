@@ -16,6 +16,6 @@ buildPythonPackage rec {
     description = "Component-based software defined networking framework";
     homepage = https://github.com/nichoski/kergen;
     maintainers = with maintainers; [ teto ];
-    license =  licenses.asl20;
+    license = licenses.asl20;
   };
 }

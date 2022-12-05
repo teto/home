@@ -1,7 +1,7 @@
 # checkout nixos/modules/services/continuous-integration/gitlab-runner.nix to
 # check how the config is generated/service run
 # For all options not available, just use "registrationFlags"
-{ modulesPath, pkgs, lib,  ... }@attrs:
+{ modulesPath, pkgs, lib, ... }@attrs:
 let
   gitlabUrl = "https://git.novadiscovery.net/";
 

@@ -1,4 +1,4 @@
-{ config, pkgs, lib,  ... }:
+{ config, pkgs, lib, ... }:
 let
   myWeechat = pkgs.weechat.override {
     configure = { availablePlugins, ... }: {

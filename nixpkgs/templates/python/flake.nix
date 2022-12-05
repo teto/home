@@ -14,32 +14,35 @@
     };
   };
 
-  outputs = { self, nixpkgs, flake-utils, poetry2nix, ... }: let
-    in flake-utils.lib.eachDefaultSystem (system: let
-      pkgs = nixpkgs.legacyPackages.${system};
+  outputs = { self, nixpkgs, flake-utils, poetry2nix, ... }:
+    let
+    in flake-utils.lib.eachDefaultSystem (system:
+      let
+        pkgs = nixpkgs.legacyPackages.${system};
 
-      overrides = pkgs.poetry2nix.overrides.withDefaults (final: prev: {
-        matplotlib = pkgs.python3Packages.matplotlib;
+        overrides = pkgs.poetry2nix.overrides.withDefaults (final: prev: {
+          matplotlib = pkgs.python3Packages.matplotlib;
+        });
+      in
+      rec {
+
+
+        packages.myPackage = pkgs.poetry2nix.mkPoetryApplication {
+          projectDir = ./.;
+          inherit overrides;
+        };
+        defaultPackage = self.packages.${system}.myPackage;
+
+        devShell = defaultPackage.overrideAttrs (oa: {
+
+          propagatedBuildInputs = oa.propagatedBuildInputs ++ [
+            pkgs.nodePackages.pyright
+            # poetry2nix.packages."${system}".poetry
+          ];
+
+          postShellHook = ''
+            export PYTHONPATH="$PWD:$PYTHONPATH"
+          '';
+        });
       });
-    in rec {
-
-
-    packages.myPackage = pkgs.poetry2nix.mkPoetryApplication {
-      projectDir = ./.;
-      inherit overrides;
-    };
-    defaultPackage = self.packages.${system}.myPackage;
-
-    devShell = defaultPackage.overrideAttrs(oa: {
-
-      propagatedBuildInputs = oa.propagatedBuildInputs ++ [
-        pkgs.nodePackages.pyright
-        # poetry2nix.packages."${system}".poetry
-      ];
-
-      postShellHook = ''
-        export PYTHONPATH="$PWD:$PYTHONPATH"
-      '';
-    });
-  });
 }

@@ -1,11 +1,11 @@
-{ config, lib, pkgs,  ... }:
+{ config, lib, pkgs, ... }:
 let
   secrets = import ./secrets.nix;
   # hopefully it can be generated as dirname <nixos-config>
   configDir = /home/teto/dotfiles/nigpkgs;
   userNixpkgs = /home/teto/nixpkgs;
 
-  in
+in
 {
   imports = [
     ./hardware-macbook.nix
@@ -18,22 +18,22 @@ let
     # ./modules/tor.nix
   ];
 
-  boot.loader ={
+  boot.loader = {
     systemd-boot.enable = true;
     efi.canTouchEfiVariables = true; # allows to run $ efi...
 
-  # just to generate the entry used by ubuntu's grub
-  # boot.loader.grub.enable = true;
-  # boot.loader.grub.version = 2;
-  # install to none, we just need the generated config
-  # for ubuntu grub to discover
+    # just to generate the entry used by ubuntu's grub
+    # boot.loader.grub.enable = true;
+    # boot.loader.grub.version = 2;
+    # install to none, we just need the generated config
+    # for ubuntu grub to discover
     grub.device = "/dev/sda";
   };
 
-  boot.kernelPackages = pkgs.linuxPackagesFor ( pkgs.linux_5_6.override {
+  boot.kernelPackages = pkgs.linuxPackagesFor (pkgs.linux_5_6.override {
     structuredExtraConfig = with lib.kernel; {
-      MPTCP     =yes;
-      MPTCP_IPV6=yes;
+      MPTCP = yes;
+      MPTCP_IPV6 = yes;
     };
   });
 
@@ -94,7 +94,7 @@ let
       android_sdk.accept_license = true;
       permittedInsecurePackages = [ ];
       # allowBroken = true;
-      allowUnfree = true;  # for nvidia drivers
+      allowUnfree = true; # for nvidia drivers
     };
   };
 

@@ -1,4 +1,4 @@
-{ config, lib, pkgs,  ... }:
+{ config, lib, pkgs, ... }:
 let
   secrets = import ../../nixpkgs/secrets.nix;
 
@@ -26,7 +26,7 @@ let
     speedFactor = 2;
     supportedFeatures = [ "big-parallel" "kvm" ];
     # mandatoryFeatures = [ "perf" ];
-    };
+  };
 
   nova-runner-2 = {
     hostName = secrets.nova-gitlab-runner-2.hostname;
@@ -38,7 +38,7 @@ let
     speedFactor = 2;
     supportedFeatures = [ "big-parallel" "kvm" ];
     # mandatoryFeatures = [ "perf" ];
-    };
+  };
 
   jedha = {
     hostName = "jedha.home";
@@ -50,7 +50,7 @@ let
     speedFactor = 2;
     supportedFeatures = [ "big-parallel" "kvm" ];
     # mandatoryFeatures = [ "perf" ];
-    };
+  };
 
 in
 {

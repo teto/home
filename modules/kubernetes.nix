@@ -17,7 +17,7 @@ in
   ];
 
   services.kubernetes = {
-    roles = ["master" "node"];
+    roles = [ "master" "node" ];
     masterAddress = kubeMasterHostname;
     easyCerts = true;
     apiserver = {

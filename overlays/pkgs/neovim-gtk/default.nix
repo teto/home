@@ -1,5 +1,10 @@
-{ stdenv, lib, fetchFromGitHub, rustPlatform
-, gtk3, pkgconfig, wrapGAppsHook
+{ stdenv
+, lib
+, fetchFromGitHub
+, rustPlatform
+, gtk3
+, pkgconfig
+, wrapGAppsHook
 }:
 
 with rustPlatform;

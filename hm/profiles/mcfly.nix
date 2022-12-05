@@ -1,4 +1,4 @@
-{ config, pkgs, lib,  ... } @ args:
+{ config, pkgs, lib, ... } @ args:
 {
   programs.mcfly = {
     enable = true;

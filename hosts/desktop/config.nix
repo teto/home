@@ -1,44 +1,44 @@
-{ config, lib, pkgs,  ... }:
+{ config, lib, pkgs, ... }:
 let
   # secrets = import ./secrets.nix;
   nvidiaPackage = config.boot.kernelPackages.nvidiaPackages.stable;
   # mptcp-flake = builtins.getFlake "github:teto/mptcp-flake/bf99516a50dcf3fcbe0a0c924bb56ff57fdd05e1";
-    # type = "git";
-    # ref = "cargoNix";
-    # flake = false;
+  # type = "git";
+  # ref = "cargoNix";
+  # flake = false;
 in
 {
   imports = [
-		   ./hardware.nix
+    ./hardware.nix
 
     # todo renommer en workstation
     ../../modules/docker-daemon.nix
 
     ../config-all.nix
     ../desktop.nix
-	../../nixos/profiles/nix-daemon.nix
-	../../nixos/profiles/experimental.nix
-	../../nixos/profiles/postgresql.nix
-	../../nixos/profiles/steam.nix
-	../../nixos/profiles/openssh.nix
-	../../nixos/profiles/opensnitch.nix
-	../../nixos/profiles/gitlab-runner.nix
+    ../../nixos/profiles/nix-daemon.nix
+    ../../nixos/profiles/experimental.nix
+    ../../nixos/profiles/postgresql.nix
+    ../../nixos/profiles/steam.nix
+    ../../nixos/profiles/openssh.nix
+    ../../nixos/profiles/opensnitch.nix
+    ../../nixos/profiles/gitlab-runner.nix
     ../../nixos/profiles/steam.nix
 
     ../../modules/libvirtd.nix
-	../../modules/xserver.nix
-	../../modules/redis.nix
-	../../modules/ntp.nix
+    ../../modules/xserver.nix
+    ../../modules/redis.nix
+    ../../modules/ntp.nix
 
-		   # just to check how /etc/nix/machines looks like
-		   ../../modules/distributedBuilds.nix
+    # just to check how /etc/nix/machines looks like
+    ../../modules/distributedBuilds.nix
 
     # ./modules/syncthing.nix
 
     # ./modules/tor.nix
 
     # ./modules/sway.nix
-  #   ./modules/mininet.nix
+    #   ./modules/mininet.nix
 
     # extra module not upstreamed yet
     # makes it crash
@@ -48,12 +48,11 @@ in
     #   # boot.kernel.checkPackageConfig = true;
     # })
 
-  ]
-  ;
+  ];
 
   users.users.teto.packages = with pkgs; [
     pciutils # for lspci
-    ncdu  # to see disk usage
+    ncdu # to see disk usage
     # bridge-utils # pour  brctl
     wirelesstools # to get iwconfig
     # aircrack-ng
@@ -78,15 +77,15 @@ in
     size = 8192; # in MB
     # size = 4096; # in MB
     # size = 16000; # in MB
-  } ];
+  }];
 
   boot.blacklistedKernelModules = [
     # "nouveau"
   ];
 
-  boot.consoleLogLevel=6;
+  boot.consoleLogLevel = 6;
   boot.loader = {
-#    systemd-boot.enable = true;
+    #    systemd-boot.enable = true;
     efi.canTouchEfiVariables = true; # allows to run $ efi...
     systemd-boot.editor = true; # allow to edit command line
     timeout = 5;
@@ -94,9 +93,9 @@ in
     grub = {
       enable = true;
       useOSProber = true;
-  # boot.loader.grub.version = 2;
-    # install to none, we just need the generated config
-    # for ubuntu grub to discover
+      # boot.loader.grub.version = 2;
+      # install to none, we just need the generated config
+      # for ubuntu grub to discover
       device = "/dev/sdb";
 
 
@@ -108,7 +107,7 @@ in
     # "earlycon=ttyS0"
     # "console=ttyS0" 
     # NECESSARY !! https://discourse.nixos.org/t/browsers-unbearably-slow-after-update/9414/30
-     "intel_pstate=active"
+    "intel_pstate=active"
   ];
 
   # DOES NOT WORK !
@@ -116,7 +115,7 @@ in
   # boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_mptcp_96;
   # boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_mptcp_95-matt;
 
-  boot.kernelModules =  [
+  boot.kernelModules = [
     "af_key" # for ipsec/vpn support
     "kvm"
     "kvm-intel" # for virtualisation
@@ -169,7 +168,8 @@ in
       enable = true;
       browsing = false;
       drivers = [
-        pkgs.gutenprint pkgs.gutenprintBin
+        pkgs.gutenprint
+        pkgs.gutenprintBin
         # See https://discourse.nixos.org/t/install-cups-driver-for-brother-printer/7169
         pkgs.brlaser
       ];
@@ -209,9 +209,9 @@ in
   # services.xserver.displayManager.gdm.nvidiaWayland = true;
 
   # this is required as well
-  hardware.nvidia= {
+  hardware.nvidia = {
     modesetting.enable = true;
-  # hardware.nvidia.package
+    # hardware.nvidia.package
   };
 
 
@@ -225,20 +225,20 @@ in
   ];
   # security.sudo.wheelNeedsPassword = ;
   services.xserver = {
-   # disabled to run stable-diffusion
-   # "nvidia"
-   videoDrivers = [ 
-	# "modesetting"
-	# "fbdev"
-	"nvidia"
-   ];
+    # disabled to run stable-diffusion
+    # "nvidia"
+    videoDrivers = [
+      # "modesetting"
+      # "fbdev"
+      "nvidia"
+    ];
     displayManager.gdm.wayland = true;
   };
   # system.replaceRuntimeDependencies
   #     List of packages to override without doing a full rebuild. The original derivation and replacement derivation must have the same name length, and ideally should have close-to-identical directory layout.
 
   environment.systemPackages = [
-   pkgs.linuxPackages.nvidia_x11.bin # to get nvidia-smi EVEN when nvidia is not used as a video driver
+    pkgs.linuxPackages.nvidia_x11.bin # to get nvidia-smi EVEN when nvidia is not used as a video driver
   ];
 
   # system.userActivationScripts

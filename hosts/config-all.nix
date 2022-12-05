@@ -12,9 +12,9 @@ in
 rec {
 
   imports = [
-      ./account-teto.nix
-      ../modules/ntp.nix
-      ../nixos/profiles/neovim.nix
+    ./account-teto.nix
+    ../modules/ntp.nix
+    ../nixos/profiles/neovim.nix
 
   ];
 
@@ -34,69 +34,69 @@ rec {
   # services.tzupdate.enable = true;
 
   environment.systemPackages = with pkgs; [
-    man-pages  # because man tcp should always be available
+    man-pages # because man tcp should always be available
     moreutils # contains errno binary that can translate errnos
     ncurses.dev # for infocmp
     # termite.terminfo # broken on unstable to be able to edit over ssh
     kitty.terminfo # to be able to edit over ssh
     util-linux # for lsns (namespace listing)
   ] ++ (with pkgs; [
-     automake
-     # autoconf
-     binutils
-     curl
-     fd  # replaces 'find'
-     file
-	 fzf
-     lsof
-	 # gawk
-     gitAndTools.gitFull # to get send-email
-	 # git-extras # does not find it (yet)
-     gnum4 # hum
-     gnupg
-     gnumake
-     htop
+    automake
+    # autoconf
+    binutils
+    curl
+    fd # replaces 'find'
+    file
+    fzf
+    lsof
+    # gawk
+    gitAndTools.gitFull # to get send-email
+    # git-extras # does not find it (yet)
+    gnum4 # hum
+    gnupg
+    gnumake
+    htop
 
-     # ipsecTools # does it provide ipsec ?
+    # ipsecTools # does it provide ipsec ?
 
-     # for fuser, useful when can't umount a directory
-     # https://unix.stackexchange.com/questions/107885/busy-device-on-umount
-     psmisc
-     # pv # monitor copy progress
-     ranger
-     rsync
-     ripgrep
-     sudo
-	 unzip
-     # vifm
-     vim
-     wget
+    # for fuser, useful when can't umount a directory
+    # https://unix.stackexchange.com/questions/107885/busy-device-on-umount
+    psmisc
+    # pv # monitor copy progress
+    ranger
+    rsync
+    ripgrep
+    sudo
+    unzip
+    # vifm
+    vim
+    wget
   ]);
 
-   # TODO it appears in /etc/bashrc !
-   environment.shellAliases = {
-      nix-stray-roots=''nix-store --gc --print-roots | egrep -v "^(/nix/var|/run/\w+-system|\{memory)"'';
-      nixpaste="curl -F \"text=<-\" http://nixpaste.lbr.uno";
-      ".."="cd ..";
-      "..."="cd ../..";
+  # TODO it appears in /etc/bashrc !
+  environment.shellAliases = {
+    nix-stray-roots = ''nix-store --gc --print-roots | egrep -v "^(/nix/var|/run/\w+-system|\{memory)"'';
+    nixpaste = "curl -F \"text=<-\" http://nixpaste.lbr.uno";
+    ".." = "cd ..";
+    "..." = "cd ../..";
 
-  # oftenly used programs {{{
-        v="nvim";
-        c="cat";
-        r="ranger";
-  # }}}
-   };
+    # oftenly used programs {{{
+    v = "nvim";
+    c = "cat";
+    r = "ranger";
+    # }}}
+  };
 
 
   # variables set by PAM
   # https://wiki.archlinux.org/index.php/Environment_variables#Using_pam_env
   environment.sessionVariables = {
     # XDG_CONFIG_HOME="@{HOME}/.config";
-    XDG_CONFIG_HOME="$HOME/.config";
-    EDITOR="nvim";
+    XDG_CONFIG_HOME = "$HOME/.config";
+    EDITOR = "nvim";
     # xdg-settings set default-web-browser firefox.desktop
-    XDG_CACHE_HOME="$HOME/.cache";
-    XDG_DATA_HOME="$HOME/.local/share";
+    XDG_CACHE_HOME = "$HOME/.cache";
+    XDG_DATA_HOME = "$HOME/.local/share";
     # TODO Move to user config aka homemanager
     # HISTFILE="'${XDG_CACHE_HOME}/bash_history";
     # LESS=""; # options to pass to less automatically
@@ -119,7 +119,7 @@ rec {
   };
 
   programs.zsh = {
-    enable=true;
+    enable = true;
     zsh-autoenv.enable = false;
     enableCompletion = true;
     enableGlobalCompInit = false;
@@ -131,44 +131,43 @@ rec {
     # promptInit
     # vteIntegration = false;
     syntaxHighlighting.enable = false;
-    shellAliases= environment.shellAliases // {
-    };
+    shellAliases = environment.shellAliases // { };
     # goes to /etc/zshenv
     # shellInit = ''
     # '';
 
-  # todo make available for zsh too
-  # use FZF_PATH="$(fzf-share)" to do it dynamically
-  #   bindkey "^K"      kill-whole-line                      # ctrl-k
-  #   bindkey "^A"      beginning-of-line                    # ctrl-a
-  #   bindkey "^E"      end-of-line                          # ctrl-e
-  #   bindkey "[B"      history-search-forward               # down arrow
-  #   bindkey "[A"      history-search-backward              # up arrow
-  #   bindkey "^D"      delete-char                          # ctrl-d
-  #   bindkey "^F"      forward-char                         # ctrl-f
-  #   bindkey "^B"      backward-char                        # ctrl-b
-  # bindkey -e
-  # bindkey -v   # Default to standard vi bindings, regardless of editor string
-  # interactiveShellInit = ''
-  # #   # To see the key combo you want to use just do:
-  # #   # Don't try to bind CTRL Q / CTRL S !!
-  # #   # cat > /dev/null
-  # #   # And press it
+    # todo make available for zsh too
+    # use FZF_PATH="$(fzf-share)" to do it dynamically
+    #   bindkey "^K"      kill-whole-line                      # ctrl-k
+    #   bindkey "^A"      beginning-of-line                    # ctrl-a
+    #   bindkey "^E"      end-of-line                          # ctrl-e
+    #   bindkey "[B"      history-search-forward               # down arrow
+    #   bindkey "[A"      history-search-backward              # up arrow
+    #   bindkey "^D"      delete-char                          # ctrl-d
+    #   bindkey "^F"      forward-char                         # ctrl-f
+    #   bindkey "^B"      backward-char                        # ctrl-b
+    # bindkey -e
+    # bindkey -v   # Default to standard vi bindings, regardless of editor string
+    # interactiveShellInit = ''
+    # #   # To see the key combo you want to use just do:
+    # #   # Don't try to bind CTRL Q / CTRL S !!
+    # #   # cat > /dev/null
+    # #   # And press it
 
 
   };
 
 
   # environment.etc.zshrc.text = lib.mkMerge [
-		# (lib.mkBefore "zmodload zsh/zprof")
-		# (lib.mkAfter "zprof")
+  # (lib.mkBefore "zmodload zsh/zprof")
+  # (lib.mkAfter "zprof")
   #   ];
 
 
   # for nix-shell
   programs.bash = {
     enableCompletion = true;
-    shellInit=''
+    shellInit = ''
       # set -o vi
     '';
   };

@@ -1,17 +1,18 @@
-{ config, lib, pkgs,  ... }:
+{ config, lib, pkgs, ... }:
 {
 
   xdg.desktopEntries = {
-  # xdg.desktopEntries = {
-  #     min = { # minimal definition
-  #       exec = "firefox -p nova";
-  #       name = "Firefox for nova";
-  #     };
-  # };
+    # xdg.desktopEntries = {
+    #     min = { # minimal definition
+    #       exec = "firefox -p nova";
+    #       name = "Firefox for nova";
+    #     };
+    # };
 
 
-    full = { # full definition
-	# https://superuser.com/questions/1179843/how-to-start-a-firefox-with-a-different-wm-class-or-any-other-altered-property
+    full = {
+      # full definition
+      # https://superuser.com/questions/1179843/how-to-start-a-firefox-with-a-different-wm-class-or-any-other-altered-property
       type = "Application";
       exec = "firefox -p nova --class firefox-nova";
       icon = "firefox";
@@ -38,15 +39,15 @@
   };
 
   programs.ssh.matchBlocks.janssen = {
-	user = "janssen";
-	port = 2207;
-	identityFile = "~/.ssh/nova_key";
-	hostname = "data.novinfra.net";
+    user = "janssen";
+    port = 2207;
+    identityFile = "~/.ssh/nova_key";
+    hostname = "data.novinfra.net";
   };
 
-  home.packages =  [
+  home.packages = [
     # pkgs.aws-sam-cli  # BROKEN  for sam lambda
-	pkgs.sqlitebrowser
-	pkgs.redis # for redis-cli
+    pkgs.sqlitebrowser
+    pkgs.redis # for redis-cli
   ];
 }

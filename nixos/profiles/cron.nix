@@ -2,7 +2,7 @@
 let
 
   /*
-   Sync the runner cache with our official cache
+     Sync the runner cache with our official cache
   */
   sync2Cache = pkgs.writeShellScript "sync2Cache" ''
     export AWS_SHARED 
@@ -31,25 +31,25 @@ in
   # Persistent is so that when you schedule the timer for noon but that your laptop is off at this time, it fires as soon as you wake up instead of just skipping
   # https://www.codyhiar.com/blog/repeated-tasks-with-systemd-service-timers-on-nixos/
   systemd.services.cache-update = {
-   serviceConfig.Type = "oneshot";
-   serviceConfig.ExecStart = sync2Cache;
+    serviceConfig.Type = "oneshot";
+    serviceConfig.ExecStart = sync2Cache;
 
     # path = with pkgs; [ systemd system-sendmail ];
   };
 
 
   systemd.timers.cache-update = {
-	wantedBy = [ "timers.target" ];
-	partOf = [ "cache-update.service" ];
-	timerConfig = {
-	 	OnUnitInactiveSec = "10m";
-	};
+    wantedBy = [ "timers.target" ];
+    partOf = [ "cache-update.service" ];
+    timerConfig = {
+      OnUnitInactiveSec = "10m";
+    };
   };
 
   systemd.services.test-timer = {
-   script = ''
-	 echo "hello world"
-	'';
+    script = ''
+      	 echo "hello world"
+      	'';
     serviceConfig = {
       Type = "oneshot";
       # ExecStart = "${pkgs.coreutils}/bin/true";
@@ -57,13 +57,13 @@ in
   };
 
   systemd.timers.test-timer = {
-	partOf = [ "test-timer.service" ];
-	timerConfig = {
-	  OnCalendar = "minutely";
-	 	# OnUnitInactiveSec = "";
+    partOf = [ "test-timer.service" ];
+    timerConfig = {
+      OnCalendar = "minutely";
+      # OnUnitInactiveSec = "";
 
-	#   Unit = "cache-update.service";
-	};
+      #   Unit = "cache-update.service";
+    };
   };
 
 }

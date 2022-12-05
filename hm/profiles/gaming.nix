@@ -1,5 +1,5 @@
 # could be called home-huge.nix
-{ config, lib, pkgs,  ... }:
+{ config, lib, pkgs, ... }:
 {
   # home.packages = with pkgs; [
   #   # lgogdownloader

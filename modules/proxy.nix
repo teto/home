@@ -9,6 +9,6 @@
     # httpProxy = ftpProxy;
     # httpsProxy = "https://proxy.iiji.jp:8080/";
     # rsyncProxy = ftpProxy;
-    noProxy="localhost,127.0.0.1,.iiji.jp,.iijprj.net,iijgio.jp";
+    noProxy = "localhost,127.0.0.1,.iiji.jp,.iijprj.net,iijgio.jp";
   };
 }

@@ -3,26 +3,26 @@ let
   filter-cmake = builtins.filterSource (p: t: prev.lib.cleanSourceFilter p t && baseNameOf p != "build");
 
   srcSockDiag = builtins.fetchGit {
-      url = https://github.com/teto/wireshark;
-      ref = "sock_diag";
-      # rev    = "45efb048808d794f53cc431864c9ddfa99952b49";
-      # sha256 = "1i0gqf8n8fsz3sqzkhcg05pf0krngnm335pnnlp94yzdkzzg3jyr";
+    url = https://github.com/teto/wireshark;
+    ref = "sock_diag";
+    # rev    = "45efb048808d794f53cc431864c9ddfa99952b49";
+    # sha256 = "1i0gqf8n8fsz3sqzkhcg05pf0krngnm335pnnlp94yzdkzzg3jyr";
   };
 
 
   # write in .nvimrc
   nvimrc = prev.pkgs.writeText "_nvimrc" ''
-      " to deal with cmake build folder
-      let &makeprg="make -C build"
-    '';
+    " to deal with cmake build folder
+    let &makeprg="make -C build"
+  '';
   # add a nix with cquery ?
 in
-  {
+{
 
-# TODO add htis in shell_hook of my wireshakr
-#     export QT_PLUGIN_PATH=${qt5.qtbase.bin}/${qt5.qtbase.qtPluginPrefix}
+  # TODO add htis in shell_hook of my wireshakr
+  #     export QT_PLUGIN_PATH=${qt5.qtbase.bin}/${qt5.qtbase.qtPluginPrefix}
 
-  wireshark-master = (prev.wireshark.override({})).overrideAttrs (oa: {
+  wireshark-master = (prev.wireshark.override ({ })).overrideAttrs (oa: {
     nativeBuildInputs = oa.nativeBuildInputs ++ [ prev.doxygen ];
     shellHook = oa.shellHook + ''
       export QT_PLUGIN_PATH=${prev.qt5.qtbase.bin}/${prev.qt5.qtbase.qtPluginPrefix}
@@ -37,7 +37,7 @@ in
       "-DCMAKE_EXPORT_COMPILE_COMMANDS=YES"
       "-DBUILD_androiddump=OFF"
     ];
-    cmakeBuildType="debug";
+    cmakeBuildType = "debug";
 
     buildInputs = oa.buildInputs ++ [
       # llvm instead

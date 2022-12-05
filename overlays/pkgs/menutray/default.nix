@@ -1,7 +1,7 @@
 # with import <nixpkgs> {};
 { stdenv, fetchurl, perl }:
 let
-  myPerl = (perl.withPackages (p: []));
+  myPerl = (perl.withPackages (p: [ ]));
 in
 stdenv.mkDerivation rec {
   pname = "menutray";
@@ -13,7 +13,8 @@ stdenv.mkDerivation rec {
   };
 
   nativeBuildInputs =
-    [ myPerl
+    [
+      myPerl
     ];
 
 }

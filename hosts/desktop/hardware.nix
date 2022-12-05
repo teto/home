@@ -21,20 +21,21 @@
   # please update microcode to version: 0x22"
   hardware.cpu.intel.updateMicrocode = true;
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/443ce6b0-e43e-43e6-9d10-c0c6293ccf66";
+    {
+      device = "/dev/disk/by-uuid/443ce6b0-e43e-43e6-9d10-c0c6293ccf66";
       fsType = "ext4";
     };
 
   swapDevices =
-    [ { device = "/dev/disk/by-uuid/ebbfc6ca-a0f0-4b8b-ac1e-7a2b4390d72c"; }
-    ];
+    [{ device = "/dev/disk/by-uuid/ebbfc6ca-a0f0-4b8b-ac1e-7a2b4390d72c"; }];
 
   fileSystems."/mnt/ext" =
-    { device = "/dev/disk/by-uuid/d118729e-bc3d-4e02-bf6b-f0cb54fef2a1";
+    {
+      device = "/dev/disk/by-uuid/d118729e-bc3d-4e02-bf6b-f0cb54fef2a1";
       fsType = "ext4";
       # "exec"
       # user disables exec
-      options = [ "defaults" "user" "exec" "nofail"];
+      options = [ "defaults" "user" "exec" "nofail" ];
     };
 
   fileSystems."/mnt/ntfs" =
@@ -42,13 +43,13 @@
       device = "/dev/sda2";
       fsType = "ntfs";
       # see https://nixos.wiki/wiki/NTFS
-      options = [ "rw" "uid=teto""nofail"  ];
-    # options = [ "user", ];
+      options = [ "rw" "uid=teto" "nofail" ];
+      # options = [ "user", ];
     };
 
 
 
-  nix.settings.max-jobs = lib.mkDefault 4;
+  # nix.settings.max-jobs = lib.mkDefault 4;
   # Often used values: "ondemand", "powersave", "performance"
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
 }

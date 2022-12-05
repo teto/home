@@ -1,18 +1,18 @@
-{ config, pkgs, lib,  ... }:
+{ config, pkgs, lib, ... }:
 {
 
   programs.nushell = {
     enable = true;
-	# configFile.text = ''
-      # let $config = {
-        # filesize_metric: false
-        # table_mode: rounded
-        # use_ls_colors: true
-        # banner: true
-      # }
+    # configFile.text = ''
+    # let $config = {
+    # filesize_metric: false
+    # table_mode: rounded
+    # use_ls_colors: true
+    # banner: true
+    # }
     # '';
     # envFile.text = ''
-      # let-env FOO = 'BAR'
+    # let-env FOO = 'BAR'
     # '';
 
 

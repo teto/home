@@ -1,7 +1,7 @@
-{ pkgs ? import <nixpkgs> {} }:
+{ pkgs ? import <nixpkgs> { } }:
 
 let
-  fixWrapper = pkgs.runCommand "fix-wrapper" {} ''
+  fixWrapper = pkgs.runCommand "fix-wrapper" { } ''
     mkdir -p $out/bin
     for i in ${pkgs.gcc.cc}/bin/*-gnu-gcc*; do
       ln -s ${pkgs.gcc}/bin/gcc $out/bin/$(basename "$i")
@@ -14,7 +14,8 @@ let
   fhs = pkgs.buildFHSUserEnv {
     name = "openwrt-env";
     targetPkgs = pkgs: with pkgs;
-      [ git
+      [
+        git
         perl
         gnumake
         gcc
@@ -43,4 +44,5 @@ let
       export hardeningDisable=all
     '';
   };
-in fhs.env
+in
+fhs.env

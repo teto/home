@@ -17,8 +17,8 @@
       foldl
       # haskeline
       http-api-data
-      http-media   # Network.HTTP.Media 
-      ip  # broken
+      http-media # Network.HTTP.Media 
+      ip # broken
       katip
       lens
       optparse-applicative

@@ -31,7 +31,13 @@ buildPythonApplication {
 
   # pyperclip/ fizz ?
   propagatedBuildInputs = [
-    bibtool pybtex pymupdf pyperclip roman pagelabels pdfrw
+    bibtool
+    pybtex
+    pymupdf
+    pyperclip
+    roman
+    pagelabels
+    pdfrw
     pynvim
     setuptools
   ];
@@ -42,7 +48,7 @@ buildPythonApplication {
     description = "Linux kernel config generator";
     homepage = https://github.com/dsanson/termpdf.py;
     maintainers = with maintainers; [ teto ];
-    license =  licenses.mit;
+    license = licenses.mit;
   };
 }
 

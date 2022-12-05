@@ -1,4 +1,6 @@
-{ imports = [
-./packet/auth.nix
-./packet/system.nix
-]; }
+{
+  imports = [
+    ./packet/auth.nix
+    ./packet/system.nix
+  ];
+}

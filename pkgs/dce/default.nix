@@ -1,36 +1,55 @@
 # some dependencies need to be patched
 # http://code.nsnam.org/bake/file/c502b48053dc/bakeconf.xml
-{ stdenv, fetchFromGitHub, autoreconfHook, libtool, intltool, pkgconfig
-, ns-3, gcc
+{ stdenv
+, fetchFromGitHub
+, autoreconfHook
+, libtool
+, intltool
+, pkgconfig
+, ns-3
+, gcc
 , castxml ? null
-# hidden dependency of waf
+  # hidden dependency of waf
 , ncurses
 , python
 , lib
 , fetchurl
 , withManual ? false
 , withQuagga ? false
-, withExamples ? false, openssl ? null, ccnd ? null, iperf2 ? null
-# shall we generate bindings
+, withExamples ? false
+, openssl ? null
+, ccnd ? null
+, iperf2 ? null
+  # shall we generate bindings
 , pythonSupport ? false
 , ...
 }:
 
 let
   dce-version = "1.10";
-  modules = [ "core" "network" "internet" "point-to-point" "fd-net-device"
-  "point-to-point-layout" "netanim" "tap-bridge" "mobility" "flow-monitor"]
+  modules = [
+    "core"
+    "network"
+    "internet"
+    "point-to-point"
+    "fd-net-device"
+    "point-to-point-layout"
+    "netanim"
+    "tap-bridge"
+    "mobility"
+    "flow-monitor"
+  ]
   ++ lib.optionals withQuagga [ "internet-apps" ]
   ;
 
-  ns3forDce = ns-3.override( { inherit modules python; });
-  pythonEnv = python.withPackages(ps:
+  ns3forDce = ns-3.override ({ inherit modules python; });
+  pythonEnv = python.withPackages (ps:
     lib.optional withManual ps.sphinx
     ++ lib.optionals pythonSupport (with ps;[ pybindgen pygccxml ])
   );
 
   dce = stdenv.mkDerivation rec {
-    pname   = "direct-code-execution";
+    pname = "direct-code-execution";
     version = dce-version;
 
     outputs = [ "out" ] ++ lib.optional pythonSupport "py";
@@ -38,19 +57,19 @@ let
     # with other modules
     srcs = [
       (fetchFromGitHub {
-        owner  = "direct-code-execution";
-        repo   = "ns-3-dce";
-        rev    = "dce-${version}";
+        owner = "direct-code-execution";
+        repo = "ns-3-dce";
+        rev = "dce-${version}";
         sha256 = "0f2g47mql8jjzn2q6lm0cbb5fv62sdqafdvx5g8s3lqri1sca14n";
-        name   = "dce";
+        name = "dce";
       })
     ]
     ++ lib.optional withQuagga (fetchFromGitHub {
-      owner  = "direct-code-execution";
-      repo   = "ns-3-dce-quagga";
-      rev    = "dce-${dce-version}";
+      owner = "direct-code-execution";
+      repo = "ns-3-dce-quagga";
+      rev = "dce-${dce-version}";
       sha256 = "1bbb1v33mv1p8isiggg9qg3a8hs0yq5s1dqz22lbdx55jrdxm7rb";
-      name   = "dce-quagga";
+      name = "dce-quagga";
     })
     ;
 
@@ -64,7 +83,7 @@ let
     buildInputs = [ ns3forDce gcc pythonEnv ]
       ++ lib.optionals pythonSupport [ castxml ncurses ]
       ++ lib.optionals withExamples [ openssl ]
-      ;
+    ;
 
     nativeBuildInputs = [ pkgconfig ];
 
@@ -83,7 +102,7 @@ let
       runHook postConfigure
     '';
 
-    buildPhase=''
+    buildPhase = ''
       ${pythonEnv.interpreter} ./waf build
     '';
 
@@ -101,4 +120,4 @@ let
     };
   };
 in
-  dce
+dce

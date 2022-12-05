@@ -1,7 +1,7 @@
-{ config, pkgs, lib,  ... } @ args:
+{ config, pkgs, lib, ... } @ args:
 {
   services.peerix = {
-	enable = true;
-	openFirewall = true;
+    enable = true;
+    openFirewall = true;
   };
 }

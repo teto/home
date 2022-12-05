@@ -5,7 +5,7 @@
     enable = true;
     enableOnBoot = false;
     # listenOptions = [
-      # "0.0.0.0:80"
+    # "0.0.0.0:80"
     # ];
     # logDriver = 
     # liveRestore
@@ -16,7 +16,7 @@
     enable = false;
     # enableGarbageCollect = true;
     # garbageCollectDates
-    port = 6000;  # 5000 is the default but already used by docker
+    port = 6000; # 5000 is the default but already used by docker
     # listen = "localhost";
     # storagePath
   };

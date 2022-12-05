@@ -16,7 +16,7 @@ buildPythonPackage rec {
     description = "Linux kernel config generator";
     homepage = https://github.com/nichoski/kergen;
     maintainers = with maintainers; [ teto ];
-    license =  licenses.asl20;
+    license = licenses.asl20;
   };
 }
 

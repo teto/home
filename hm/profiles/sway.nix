@@ -1,4 +1,4 @@
-{ config, lib, pkgs,  ... }:
+{ config, lib, pkgs, ... }:
 let
 
   term = "${pkgs.kitty}/bin/kitty";
@@ -6,25 +6,25 @@ in
 {
   # https://github.com/rycee/home-manager/pull/829
   services.swayidle = {
-	enable = true;
+    enable = true;
     events = [
-	  { event = "before-sleep"; command = "swaylock"; }
-	  { event = "lock"; command = "lock"; }
-	];
+      { event = "before-sleep"; command = "swaylock"; }
+      { event = "lock"; command = "lock"; }
+    ];
   };
 
   # todo prepend sharedExtraConfig
   # xdg.configFile."sway/config" = 
 
   wayland.windowManager.sway = {
-	# contrary to i3, use `sway reload` on sway
+    # contrary to i3, use `sway reload` on sway
     enable = true;
     systemdIntegration = true;
 
-	extraOptions = [
-	  "--verbose"
-	  "--debug"
-	];
+    extraOptions = [
+      "--verbose"
+      "--debug"
+    ];
 
     # eventually start foot --server
     extraSessionCommands = ''
@@ -40,17 +40,17 @@ in
 
     # config = removeAttrs  config.xsession.windowManager.i3.config ["startup"];
     config = {
-    #   menu =
+      #   menu =
       terminal = term;
 
-	  # Notification Daemon
+      # Notification Daemon
 
 
-# Toggle control center
+      # Toggle control center
 
 
       keybindings = {
-		"$mod+Shift+n" = " exec ${pkgs.swaynotificationcenter}/bin/swaync-client -t -sw";
+        "$mod+Shift+n" = " exec ${pkgs.swaynotificationcenter}/bin/swaync-client -t -sw";
         # clipman can be used too
         # clipman pick -t wofi
         # "${mod}+Ctrl+h" = lib.mkForce ''exec "${pkgs.clipman}/bin/clipman pick -t wofi'';
@@ -63,7 +63,7 @@ in
 
       focus.forceWrapping = lib.mkForce true;
       startup = [
-        { command =  "wl-paste -t text --watch clipman store"; }
+        { command = "wl-paste -t text --watch clipman store"; }
         { command = ''wl-paste -p -t text --watch clipman store -P --histpath="~/.local/share/clipman-primary.json"''; }
         { command = "mkfifo $SWAYSOCK.wob && tail -f $SWAYSOCK.wob | wob"; }
         { command = "swaync"; }
@@ -73,39 +73,39 @@ in
 
     # https://github.com/dylanaraps/pywal/blob/master/pywal/templates/colors-sway
     # TODO
-	# from https://www.reddit.com/r/swaywm/comments/uwdboi/how_to_make_chrome_popup_windows_floating/
+    # from https://www.reddit.com/r/swaywm/comments/uwdboi/how_to_make_chrome_popup_windows_floating/
     extraConfig = builtins.readFile ../../config/i3/config.shared + ''
-	  bindsym button2 kill
-	  smart_gaps yes
+      	  bindsym button2 kill
+      	  smart_gaps yes
 
-	  # Generated windows.
-	  for_window [title="(?:Open|Save) (?:File|Folder|As)"] floating enable;
-	  for_window [title="(?:Open|Save) (?:File|Folder|As)"] resize set 800 600
-	  for_window [window_role="pop-up"] floating enable
-	  for_window [window_role="bubble"] floating enable
-	  for_window [window_role="task_dialog"] floating enable
-	  for_window [window_role="Preferences"] floating enable
-	  for_window [window_type="dialog"] floating enable
-	  for_window [window_type="menu"] floating enable
+      	  # Generated windows.
+      	  for_window [title="(?:Open|Save) (?:File|Folder|As)"] floating enable;
+      	  for_window [title="(?:Open|Save) (?:File|Folder|As)"] resize set 800 600
+      	  for_window [window_role="pop-up"] floating enable
+      	  for_window [window_role="bubble"] floating enable
+      	  for_window [window_role="task_dialog"] floating enable
+      	  for_window [window_role="Preferences"] floating enable
+      	  for_window [window_type="dialog"] floating enable
+      	  for_window [window_type="menu"] floating enable
     '';
   };
 
   home.packages = with pkgs; [
     # grimshot # simplifies usage of grim ?
-    clipman  # clipboard manager, works with wofi
-    foot  # terminal
-    grim  # replace scrot
-    kanshi  # autorandr-like
-    wofi  # rofi-like
-    slurp  # capture tool
+    clipman # clipboard manager, works with wofi
+    foot # terminal
+    grim # replace scrot
+    kanshi # autorandr-like
+    wofi # rofi-like
+    slurp # capture tool
     # wf-recorder # for screencasts
     # bemenu as a dmenu replacement
-    waybar  # just for testing
+    waybar # just for testing
     wl-clipboard # wl-copy / wl-paste
     wdisplays # to show 
     wob # to display a progressbar
-	swaynotificationcenter # top cool
-	swaynag-battery # https://github.com/NixOS/nixpkgs/pull/175905
+    swaynotificationcenter # top cool
+    swaynag-battery # https://github.com/NixOS/nixpkgs/pull/175905
   ];
 
   programs.mako = {

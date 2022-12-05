@@ -4,14 +4,14 @@ rec {
   lua5_1 = prev.lua5_1.override {
 
     packageOverrides = luafinal: luaprev: {
-      testEnv = (luaprev.lua.withPackages(p: [
+      testEnv = (luaprev.lua.withPackages (p: [
         # p.lgi
         # p.ldoc
         # p.lpeg
         p.plenary-nvim
         p.gitsigns-nvim
-      ])).overrideAttrs(oa: {
-        NIX_DEBUG= 9;
+      ])).overrideAttrs (oa: {
+        NIX_DEBUG = 9;
       });
 
       # luarocks = luaprev.luarocks.overrideAttrs(oa: {
@@ -47,16 +47,16 @@ rec {
       #   src = /home/teto/busted;
       # });
 
-    #   # prev.lib.traceValSeq
-    #   cqueues = ( luaprev.cqueues.override({
-    #     # name = "matt";
-    #     # pname = "matt";
-    #     disabled = false;
-    #   }));
+      #   # prev.lib.traceValSeq
+      #   cqueues = ( luaprev.cqueues.override({
+      #     # name = "matt";
+      #     # pname = "matt";
+      #     disabled = false;
+      #   }));
 
-    # mpack = ( luaprev.mpack.override({
-    #   CFLAGS = "-ansi -g3 -Wall -Wextra -Werror -Wconversion -Wstrict-prototypes -Wno-unused-parameter -pedantic";
-    # }));
+      # mpack = ( luaprev.mpack.override({
+      #   CFLAGS = "-ansi -g3 -Wall -Wextra -Werror -Wconversion -Wstrict-prototypes -Wno-unused-parameter -pedantic";
+      # }));
 
     };
 

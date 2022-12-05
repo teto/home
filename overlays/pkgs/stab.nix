@@ -1,7 +1,10 @@
-{ stdenv, lib, fetchzip
+{ stdenv
+, lib
+, fetchzip
 , pkgconfig
-, libgnome, libgnomeui
-# needs to be python3
+, libgnome
+, libgnomeui
+  # needs to be python3
 , python
 
 }:
@@ -22,7 +25,8 @@ stdenv.mkDerivation rec {
     sha256 = "1z3gychbm95xmqbr4lhcvw3hhkys77c9h3qrfbv358q1w5pdrj3y";
   };
   buildInputs = [
-    libgnomeui libgnome
+    libgnomeui
+    libgnome
     pkgconfig
   ];
 
@@ -36,7 +40,7 @@ stdenv.mkDerivation rec {
     description = "Bandwidth probing tool.";
     homepage = http://www.spin.rice.edu/Software/STAB;
     license = licenses.gpl3;
-    maintainers = with maintainers; [teto];
+    maintainers = with maintainers; [ teto ];
   };
 }
 

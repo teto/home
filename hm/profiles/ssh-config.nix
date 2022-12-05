@@ -1,11 +1,11 @@
-{ config, pkgs, lib,  ... }:
+{ config, pkgs, lib, ... }:
 {
   programs.ssh = {
 
     enable = true;
 
-	# can I have it per target ?
-	# controlPath = "";
+    # can I have it per target ?
+    # controlPath = "";
     matchBlocks = {
       nova = {
         host = "git.novadiscovery.net";
@@ -16,38 +16,38 @@
         # checkHostIP
         identityFile = "~/.ssh/nova_key";
         # user = "nova";
-		host = "ovh1";
+        host = "ovh1";
         hostname = "ovh-hybrid-runner-1.devops.novadiscovery.net";
-		identitiesOnly = true;
-		# experimental
-		# https://github.com/nix-community/home-manager/pull/2992
-		# match = "ovh1";
+        identitiesOnly = true;
+        # experimental
+        # https://github.com/nix-community/home-manager/pull/2992
+        # match = "ovh1";
       };
       ovh2 = {
         # identityFile = "~/.ssh/ci-infra-ec2-dev";
         identityFile = "~/.ssh/nova_key";
         # user = "teto";
-		host = "ovh2";
+        host = "ovh2";
         hostname = "ovh-hybrid-runner-2.devops.novadiscovery.net";
-		identitiesOnly = true;
+        identitiesOnly = true;
       };
       ovh3 = {
         # identityFile = "~/.ssh/nova-infra-prod";
         # user = "teto";
-		identitiesOnly = true;
+        identitiesOnly = true;
         identityFile = "~/.ssh/nova_key";
-		host = "ovh3";
+        host = "ovh3";
         hostname = "ovh-hybrid-runner-3.devops.novadiscovery.net ";
-		# extraOptions = {
-		  # to fix https://dammit.nl/ssh-unix-socket.html
-		  # controlPath = "~/.ssh/control/%C";
-		# };
+        # extraOptions = {
+        # to fix https://dammit.nl/ssh-unix-socket.html
+        # controlPath = "~/.ssh/control/%C";
+        # };
       };
       gitlab = {
         host = "gitlab.devops.novadiscovery.net";
         user = "ubuntu";
         identityFile = "~/.ssh/nova_key";
-		identitiesOnly = true;
+        identitiesOnly = true;
       };
 
       novinfra = {
@@ -60,7 +60,7 @@
     };
     # extraOptionOverrides
     # include path to file
-		  # { path = config.xdg.configHome + "/git/config.inc"; }
+    # { path = config.xdg.configHome + "/git/config.inc"; }
 
     extraConfig = ''
       Include "${config.xdg.configHome}/ssh/config"

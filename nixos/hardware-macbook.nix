@@ -5,11 +5,19 @@
 
 {
   imports =
-    [ <nixpkgs/nixos/modules/installer/scan/not-detected.nix>
+    [
+      <nixpkgs/nixos/modules/installer/scan/not-detected.nix>
     ];
 
   boot.initrd.availableKernelModules = [
-    "xhci_pci" "ehci_pci" "ahci" "firewire_ohci" "usbhid" "sd_mod" "sr_mod" "sdhci_pci" 
+    "xhci_pci"
+    "ehci_pci"
+    "ahci"
+    "firewire_ohci"
+    "usbhid"
+    "sd_mod"
+    "sr_mod"
+    "sdhci_pci"
   ];
   boot.kernelModules = [
     "kvm-intel"
@@ -25,18 +33,19 @@
   networking.enableB43Firmware = true;
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/91ccf165-de06-44f1-9dc8-652a5f7d92cf";
+    {
+      device = "/dev/disk/by-uuid/91ccf165-de06-44f1-9dc8-652a5f7d92cf";
       fsType = "ext4";
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/745E-30ED";
+    {
+      device = "/dev/disk/by-uuid/745E-30ED";
       fsType = "vfat";
     };
 
   swapDevices =
-    [ { device = "/dev/disk/by-uuid/d02fb2d3-e82f-4940-9a32-85d389bb655b"; }
-    ];
+    [{ device = "/dev/disk/by-uuid/d02fb2d3-e82f-4940-9a32-85d389bb655b"; }];
 
   nix.maxJobs = lib.mkDefault 4;
   powerManagement.cpuFreqGovernor = "powersave";

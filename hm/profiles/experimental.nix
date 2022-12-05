@@ -13,15 +13,15 @@
   #   };
   # };
   programs.ranger = {
-	enable = true;
-	# plugins = [];
-	# loadDefaultRc
+    enable = true;
+    # plugins = [];
+    # loadDefaultRc
   };
 
   programs.aerc = {
-	enable = true;
-	# .enable = true;
-	extraConfig.general.unsafe-accounts-conf = true;
+    enable = true;
+    # .enable = true;
+    extraConfig.general.unsafe-accounts-conf = true;
   };
 
   programs.xdg.enable = true;

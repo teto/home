@@ -2,21 +2,21 @@ final: prev:
 {
 
   # lib = final.callPackage ./lib.nix {};
-  inherit (final.callPackage ./lib.nix {}) mkRemoteBuilderDesc ;
+  inherit (final.callPackage ./lib.nix { }) mkRemoteBuilderDesc;
 
-  rofi-wayland = prev.rofi.overrideAttrs(oa: {
+  rofi-wayland = prev.rofi.overrideAttrs (oa: {
 
-	src = final.fetchFromGitHub {
-	  owner = "lbonn";
-	  repo = "rofi";
-	  rev = "1e8c22b4a05c7602aa9e51509274ce5ac36a5099";
-	  sha256 = "sha256-FvDzJL5VM4UeDCwDeElZhE/eRUefGrt4GmntaIeuQBQ=";
-	};
+    src = final.fetchFromGitHub {
+      owner = "lbonn";
+      repo = "rofi";
+      rev = "1e8c22b4a05c7602aa9e51509274ce5ac36a5099";
+      sha256 = "sha256-FvDzJL5VM4UeDCwDeElZhE/eRUefGrt4GmntaIeuQBQ=";
+    };
   });
 
   rofi = final.rofi-wayland;
 
-  Rdebug =  final.lib.enableDebugging (prev.R);
+  Rdebug = final.lib.enableDebugging (prev.R);
 
   # see https://github.com/NixOS/nixpkgs/pull/156974
   # i3lock = let
@@ -44,7 +44,7 @@ final: prev:
     src = prev.fetchFromGitHub {
       owner = "teto";
       repo = "buku_run";
-      rev =  "50aac85f8e42618cfd636f5040ba690a7e365d6f";
+      rev = "50aac85f8e42618cfd636f5040ba690a7e365d6f";
       sha256 = "1r90zpg5m717rnj29lngd6sqdq5214y0v96b7f05xh42ysbdr2gd";
     };
     # src = prev.fetchFromGitHub {
@@ -81,9 +81,9 @@ final: prev:
   #     }}") {};
 
 
-  menutray = prev.callPackage ./menutray {};
+  menutray = prev.callPackage ./menutray { };
 
-  colr = prev.callPackage ./colr {};
+  colr = prev.callPackage ./colr { };
 
   dualsub = prev.callPackage ./dualsubtitles { };
 
@@ -97,7 +97,7 @@ final: prev:
   # rustNightlyPlatform = prev.recurseIntoAttrs (prev.makeRustPlatform rust-nightly);
   # rt-tests = prev.callPackage ./rt-test.nix {};
 
-  i3dispatch = prev.python3Packages.callPackage ./i3-dispatch { inherit (prev) lib;};
+  i3dispatch = prev.python3Packages.callPackage ./i3-dispatch { inherit (prev) lib; };
 
   # i3-snapshot = prev.callPackage ./i3-snapshot {};
   # rofi-scripts = prev.callPackage ./rofi-scripts {};

@@ -1,6 +1,6 @@
 { config, lib, pkgs, ... }:
 let
-  netboot = pkgs.callPackage ./netboot.nix {};
+  netboot = pkgs.callPackage ./netboot.nix { };
 in
 {
   services.pixiecore = {

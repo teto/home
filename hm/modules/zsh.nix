@@ -5,19 +5,23 @@ with lib;
 let
   cfg = config.programs.zsh;
 
-  fzf-git-sh = let src = pkgs.fetchFromGitHub {
-    owner = "junegunn";
-    repo = "fzf-git.sh";
-    rev = "a48b9414872213430db18582585172d49fa57ac5";
-    sha256 = "sha256-wztFfe57ZNuuWSNfTFLKz8UJ5hJRtHl0QEd/1au6SWk=";
-  };
-  in src;
+  fzf-git-sh =
+    let
+      src = pkgs.fetchFromGitHub {
+        owner = "junegunn";
+        repo = "fzf-git.sh";
+        rev = "a48b9414872213430db18582585172d49fa57ac5";
+        sha256 = "sha256-wztFfe57ZNuuWSNfTFLKz8UJ5hJRtHl0QEd/1au6SWk=";
+      };
+    in
+    src;
 
-in {
+in
+{
 
   options = {
     programs.zsh = {
-	  enableFzfGit = mkEnableOption "Fzf-git";
+      enableFzfGit = mkEnableOption "Fzf-git";
 
       # enable = mkEnableOption "Some custom zsh functions";
       enableProfiling = mkOption {
@@ -60,18 +64,18 @@ in {
       # programs.zsh.initExtraFirst = lib.mkBefore "zmodload zsh/zprof";
       # programs.zsh.initExtra = lib.mkAfter "zprof";
 
-	  home.file.".config/zsh/.zshrc".text = mkMerge [
-		(lib.mkBefore "zmodload zsh/zprof")
-		(lib.mkAfter "zprof")
-	  ];
-	  # home.file.".config/zsh/.zshrc".text = 
+      home.file.".config/zsh/.zshrc".text = mkMerge [
+        (lib.mkBefore "zmodload zsh/zprof")
+        (lib.mkAfter "zprof")
+      ];
+      # home.file.".config/zsh/.zshrc".text = 
     })
 
     (mkIf cfg.enableFzfGit {
       programs.zsh.initExtra = ''
-	   source ${fzf-git-sh}/fzf-git.sh
-	   '';
-	})
+        	   source ${fzf-git-sh}/fzf-git.sh
+        	   '';
+    })
 
     (mkIf cfg.enableFancyCtrlZ {
       programs.zsh.initExtra = ''
@@ -98,23 +102,23 @@ in {
       # -n Do not add a newline to the output.
       # print -Pn "\e]0;$(echo "$1")\a"
       programs.zsh.initExtra = ''
-        function set_term_title (){
-          print -n "\e]0;$1\a"
-        }
+                function set_term_title (){
+                  print -n "\e]0;$1\a"
+                }
 
-        set_term_title_for_new_prompt () {
-            set_term_title "$(pwd):$2"
-        }
-		# zsh passes
-        set_term_title_for_program () {
-            set_term_title "toto: $(pwd):$2"
-        }
+                set_term_title_for_new_prompt () {
+                    set_term_title "$(pwd):$2"
+                }
+        		# zsh passes
+                set_term_title_for_program () {
+                    set_term_title "toto: $(pwd):$2"
+                }
 
-		# https://zsh.sourceforge.io/Doc/Release/Functions.html#index-preexec_005ffunctions
-        # pass 3 arguments: non-expanded, expanded, fully-expanded
-        add-zsh-hook preexec set_term_title_for_program
-        # precmd: Executed before each prompt.
-        add-zsh-hook precmd set_term_title_for_new_prompt
+        		# https://zsh.sourceforge.io/Doc/Release/Functions.html#index-preexec_005ffunctions
+                # pass 3 arguments: non-expanded, expanded, fully-expanded
+                add-zsh-hook preexec set_term_title_for_program
+                # precmd: Executed before each prompt.
+                add-zsh-hook precmd set_term_title_for_new_prompt
       '';
     })
 
@@ -140,7 +144,7 @@ in {
         # http://zsh.sourceforge.net/Doc/Release/User-Contributions.html#ZLE-Functions
         zle -N zle-keymap-select
       '';
-      })
+    })
 
     # home.sessionVariables = {
     #   CABAL_CONFIG="$XDG_CONFIG_HOME/cabal/config";

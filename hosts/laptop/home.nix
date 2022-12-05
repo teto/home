@@ -1,27 +1,27 @@
 # home-manager specific config from
-{ config, lib, pkgs,  ... }:
+{ config, lib, pkgs, ... }:
 {
 
   imports = [
-      # ./hm/vdirsyncer.nix
-      # ./hm/nushell.nix
-      ../../hm/profiles/desktop.nix
-      ../../hm/profiles/mail.nix
-      ../../hm/profiles/sway.nix
-      ../../hm/profiles/weechat.nix
-      ../../hm/profiles/extra.nix
-      ../../hm/profiles/syncthing.nix
-      ../../hm/profiles/japanese.nix
+    # ./hm/vdirsyncer.nix
+    # ./hm/nushell.nix
+    ../../hm/profiles/desktop.nix
+    ../../hm/profiles/mail.nix
+    ../../hm/profiles/sway.nix
+    ../../hm/profiles/weechat.nix
+    ../../hm/profiles/extra.nix
+    ../../hm/profiles/syncthing.nix
+    ../../hm/profiles/japanese.nix
 
-      ../../hm/profiles/alot.nix
-      ../../hm/profiles/dev.nix
-	  ../../hm/profiles/vscode.nix #  provided by nova-nix config
-	  ../../hm/profiles/experimental.nix
-	  ../../hm/profiles/emacs.nix
-	  ../../hm/profiles/wayland.nix
+    ../../hm/profiles/alot.nix
+    ../../hm/profiles/dev.nix
+    ../../hm/profiles/vscode.nix #  provided by nova-nix config
+    ../../hm/profiles/experimental.nix
+    ../../hm/profiles/emacs.nix
+    ../../hm/profiles/wayland.nix
 
-      # not merged yet
-      # ./hm/autoUpgrade.nix
+    # not merged yet
+    # ./hm/autoUpgrade.nix
   ];
 
   # use a release version
@@ -31,13 +31,13 @@
     # enable = false;
   };
 
-  wayland.windowManager.sway= {
-	enable = true;
+  wayland.windowManager.sway = {
+    enable = true;
 
-	extraOptions = [
-	  "--verbose"
-	  "--debug"
-	];
+    extraOptions = [
+      "--verbose"
+      "--debug"
+    ];
   };
 
   home.packages = with pkgs; [

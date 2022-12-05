@@ -1,4 +1,8 @@
-{ lib, buildPythonApplication, fetchFromGitHub, xdotool, psutil
+{ lib
+, buildPythonApplication
+, fetchFromGitHub
+, xdotool
+, psutil
 , pynvim
 }:
 
@@ -6,7 +10,7 @@ buildPythonApplication rec {
   pname = "i3dispatch";
   version = "unstable";
 
-  postUnpack=''
+  postUnpack = ''
     HOME=$TMPDIR
   '';
 

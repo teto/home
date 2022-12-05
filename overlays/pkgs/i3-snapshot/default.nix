@@ -14,7 +14,7 @@ stdenv.mkDerivation rec {
 
   # for ipc.h
   nativeBuildInputs = [ i3 cmake pkg-config ];
-  buildInputs = [ jsoncpp libsigcxx zlib];
+  buildInputs = [ jsoncpp libsigcxx zlib ];
 
   meta = with lib; {
     homepage = https://github.com/regolith-linux/i3-snapshot;

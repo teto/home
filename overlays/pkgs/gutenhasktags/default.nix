@@ -21,8 +21,13 @@
 
 # }
 
-{ mkDerivation, base, hspec, optparse-applicative, process
-, QuickCheck, stdenv
+{ mkDerivation
+, base
+, hspec
+, optparse-applicative
+, process
+, QuickCheck
+, stdenv
 , fetchFromGitHub
 , lib
 }:

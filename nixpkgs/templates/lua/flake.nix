@@ -12,12 +12,13 @@
         pkgs = nixpkgs.legacyPackages.${system};
 
         mkPackage = luaVersion:
-            pkgs."lua${luaVersion}Packages".luarocks;
+          pkgs."lua${luaVersion}Packages".luarocks;
 
-		mkDevShell = luaVersion: let
-		  luaPkgs = pkgs."lua${luaVersion}Packages";
-		in
-          luaPkgs.luarocks.overrideAttrs(oa: {
+        mkDevShell = luaVersion:
+          let
+            luaPkgs = pkgs."lua${luaVersion}Packages";
+          in
+          luaPkgs.luarocks.overrideAttrs (oa: {
             name = "luarocks-dev";
             buildInputs = oa.buildInputs ++ [
 

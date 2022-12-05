@@ -1,12 +1,12 @@
-{ config, lib, pkgs,  ... }:
+{ config, lib, pkgs, ... }:
 {
 
- # TODO add options in fact
+  # TODO add options in fact
   programs.neovim = {
 
     enable = false;
 
-	# source /home/teto/.config/nvim/init.vim
+    # source /home/teto/.config/nvim/init.vim
     configure = pkgs.neovimConfigure // {
       customRC = (pkgs.neovimConfigure.customRC  or "") + ''
         let g:fzf_command_prefix = 'Fzf' " prefix commands :Files become :FzfFiles, etc.

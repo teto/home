@@ -20,7 +20,7 @@ let
     rev = "e912ed483e980dfb4666ae0ed17845c4220e5e7c";
     sha256 = "08fvzb8w80bkkabc1iyhzd15f4sm7ra10jn32kfch5klgl0gj3j3";
   };
-  mozilla = callPackage "${mozillaOverlay.out}/package-set.nix" {};
+  mozilla = callPackage "${mozillaOverlay.out}/package-set.nix" { };
   rustNightly = (mozilla.rustChannelOf { inherit date; channel = "nightly"; }).rust;
   rustPlatform = makeRustPlatform {
     cargo = rustNightly;
@@ -38,7 +38,7 @@ rustPlatform.buildRustPackage rec {
     sha256 = "0z28ymz0kr726zjsrksipy7jz7y1kmqlxigyqkh3pyh154b38cis";
   };
 
-  RUSTC_BOOTSTRAP=1;
+  RUSTC_BOOTSTRAP = 1;
 
   nativeBuildInputs = [ makeWrapper ];
   buildInputs = [
@@ -61,7 +61,7 @@ rustPlatform.buildRustPackage rec {
     description = "The fastest file manager in the galaxy!";
     homepage = https://github.com/rabite0/hunter;
     license = licenses.wtfpl;
-    maintainers = [];
+    maintainers = [ ];
     platforms = platforms.unix;
   };
 }

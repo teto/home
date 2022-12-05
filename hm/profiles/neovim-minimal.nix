@@ -26,9 +26,9 @@
       {
         plugin = vimtex;
         config = ''
-          let g:vimtex_view_method = 'zathura'
-let g:vimtex_quickfix_ignore_filters = ['Package unicode-math Warning']
-          let g:tex_flavor = 'latex'
+                    let g:vimtex_view_method = 'zathura'
+          let g:vimtex_quickfix_ignore_filters = ['Package unicode-math Warning']
+                    let g:tex_flavor = 'latex'
         '';
       }
       vim-nix

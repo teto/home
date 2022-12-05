@@ -1,4 +1,4 @@
-{ config, pkgs, lib,  ... }:
+{ config, pkgs, lib, ... }:
 {
   myFirefox = pkgs.wrapFirefox pkgs.firefox-unwrapped {
     extraExtensions = [
@@ -18,10 +18,10 @@
         Pocket = false;
         Snippets = false;
       };
-       UserMessaging = {
-         ExtensionRecommendations = false;
-         SkipOnboarding = true;
-       };
+      UserMessaging = {
+        ExtensionRecommendations = false;
+        SkipOnboarding = true;
+      };
     };
     extraPrefs = ''
       // Show more ssl cert infos

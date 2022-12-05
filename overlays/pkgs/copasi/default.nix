@@ -1,7 +1,9 @@
-{ stdenv, fetchFromGitHub
-# , git, autoreconfHook,
-# pkgconfig
-, bison, flex
+{ stdenv
+, fetchFromGitHub
+  # , git, autoreconfHook,
+  # pkgconfig
+, bison
+, flex
 , libpcap
 , xercesc
 , pcre
@@ -57,14 +59,14 @@ stdenv.mkDerivation rec {
   # https://github.com/CPqD/ofsoftswitch13/wiki/OpenFlow-1.3-Tutorial
   buildInputs = [ cmake bison flex xercesc libpcap pcre.dev ];
 
-    # for $f in ${subfolders}
-  preConfigure=''
+  # for $f in ${subfolders}
+  preConfigure = ''
     cd src
   '';
 
   # there is no install target, just an install.sh
   # that hardcodes everything and checks for root so we skip it
-  installPhase=''
+  installPhase = ''
     mkdir -p $out/lib
     cp ../bin/* $out/lib/
     cp -r ../include $out

@@ -125,41 +125,6 @@
         # in
         {
 
-          # the 'deploy' entry is used by 'deploy-rs' to deploy our nixosConfigurations
-          # if it doesn't work you can always fall back to the vanilla nixos-rebuild:
-          # NIX_SSHOPTS="-F ssh_config" nixos-rebuild switch --flake '.#ovh3-prod' --target-host nova@ovh-hybrid-runner-3.devops.novadiscovery.net --use-remote-sudo
-          deploy = {
-            # WARN: when bootstrapping, the "nova" user doesn't exist yet and as such you should run
-            # deploy .#TARGET --ssh-user root
-            user = "root";
-            # for now
-            # sshOpts = [ "-F" "ssh_config" ];
-            nodes =
-              let
-                # system = "x86_64-linux";
-                genNode = attrs: {
-                  inherit (attrs) hostname;
-                  profiles.system = {
-                    # remoteBuild = false;
-                    hostname = attrs.hostname;
-                    path = deploy-rs.lib.${system}.activate.nixos self.nixosConfigurations.${attrs.name};
-                  };
-                };
-              in
-              {
-                router = genNode ({ name = "router"; hostname = "192.168.1.12"; });
-
-                jakku = genNode ({ name = "jakku"; hostname = "46.226.104.191"; });
-              };
-            # nixpkgs.lib.listToAttrs (
-            #   map
-            #     (attr:
-            #       nixpkgs.lib.nameValuePair "${attr.runnerName}-${attr.targetEnvironment}" (genNode attr)
-            #     )
-            #     configs);
-          };
-
-          # defaultTemplate = templates.app;
 
 
           devShells = {
@@ -232,7 +197,7 @@
             inherit system;
             modules = [
               hm.nixosModules.home-manager
-              nova.nixosProfiles.dev
+              # nova.nixosProfiles.dev
               self.inputs.sops-nix.nixosModules.sops
 
               ({ pkgs, ... }: {
@@ -253,8 +218,8 @@
                 ./hosts/laptop/home.nix
                 ./hm/profiles/nova.nix
 
-                #   nova.hmProfiles.standard
-                nova.hmProfiles.dev
+                # nova.hmProfiles.standard
+                # nova.hmProfiles.dev
               ])
             ];
           };
@@ -423,6 +388,42 @@
       # just for one specific host
       // nova.overlays
       ;
+
+      # the 'deploy' entry is used by 'deploy-rs' to deploy our nixosConfigurations
+      # if it doesn't work you can always fall back to the vanilla nixos-rebuild:
+      # NIX_SSHOPTS="-F ssh_config" nixos-rebuild switch --flake '.#ovh3-prod' --target-host nova@ovh-hybrid-runner-3.devops.novadiscovery.net --use-remote-sudo
+      deploy = {
+        # WARN: when bootstrapping, the "nova" user doesn't exist yet and as such you should run
+        # deploy .#TARGET --ssh-user root
+        user = "root";
+        # for now
+        # sshOpts = [ "-F" "ssh_config" ];
+        nodes =
+          let
+            # system = "x86_64-linux";
+            genNode = attrs: {
+              inherit (attrs) hostname;
+              profiles.system = {
+                # remoteBuild = false;
+                hostname = attrs.hostname;
+                path = deploy-rs.lib.${system}.activate.nixos self.nixosConfigurations.${attrs.name};
+              };
+            };
+          in
+          {
+            router = genNode ({ name = "router"; hostname = "192.168.1.12"; });
+
+            jakku = genNode ({ name = "jakku"; hostname = secrets.jakku.hostname; });
+          };
+        # nixpkgs.lib.listToAttrs (
+        #   map
+        #     (attr:
+        #       nixpkgs.lib.nameValuePair "${attr.runnerName}-${attr.targetEnvironment}" (genNode attr)
+        #     )
+        #     configs);
+      };
+
+      # defaultTemplate = templates.app;
 
     };
 }

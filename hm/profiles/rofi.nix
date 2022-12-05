@@ -1,4 +1,4 @@
-{ config, pkgs, lib,  ... }:
+{ config, pkgs, lib, ... }:
 let
   rofi-hoogle-src = pkgs.fetchFromGitHub {
     owner = "teto";
@@ -8,7 +8,7 @@ let
   };
   # TODO need hs-hoogle-overlay
   # rofi-hoogle = import "${rofi-hoogle-src}/rofi-hoogle-plugin/package.nix" { inherit pkgs; };
-#   hs-hoogle-query = pkgs.haskellPackages.callPackage "${rofi-hoogle-src}/haskell" {};
+  #   hs-hoogle-query = pkgs.haskellPackages.callPackage "${rofi-hoogle-src}/haskell" {};
 
   #
 in
@@ -16,7 +16,7 @@ in
   programs.rofi = {
     enable = true;
 
-	package = pkgs.rofi-wayland ;
+    package = pkgs.rofi-wayland;
 
     terminal = "${pkgs.kitty}/bin/kitty";
     # borderWidth = 1;
@@ -25,18 +25,18 @@ in
     # lines= ;
     location = "center";
 
-	pass = {
-	 enable = true;
-	 extraConfig = ''
-	   # workaround for https://github.com/carnager/rofi-pass/issues/226
-	   help_color="#FF0000"
-	 '';
-	};
+    pass = {
+      enable = true;
+      extraConfig = ''
+        	   # workaround for https://github.com/carnager/rofi-pass/issues/226
+        	   help_color="#FF0000"
+        	 '';
+    };
 
     plugins = with pkgs; [
       rofi-emoji
       rofi-calc
-	  # passed as a flake now
+      # passed as a flake now
       # rofi-hoogle # TODO see https://github.com/rebeccaskinner/rofi-hoogle/issues/3
     ];
     # pass.stores = [];
@@ -44,17 +44,17 @@ in
     # rofi.font: SourceCodePro 9
     # font =
     # ,Layouts:${../../bin/i3-list-layouts}
-    extraConfig={
+    extraConfig = {
       width = 50;
-      columns= 1;
+      columns = 1;
       matching = "fuzzy";
       show-icons = true;
       # ! cd window
-      modi =       "run,drun,window,ssh";
+      modi = "run,drun,window,ssh";
       /* see to integrate teiler */
-      sidebar-mode= true;
+      sidebar-mode = true;
       kb-mode-previous = "Alt+Left";
-      kb-mode-next =	"Alt+Right,Alt+Tab";
+      kb-mode-next = "Alt+Right,Alt+Tab";
     };
   };
 }

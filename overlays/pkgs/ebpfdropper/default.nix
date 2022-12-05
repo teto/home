@@ -2,19 +2,19 @@
 
 
 # this stdenv belongs to clang
-stdenv.mkDerivation  { 
+stdenv.mkDerivation {
   name = "ebpfdropper";
   version = "0.1";
 
-  buildInputs =  [ 
+  buildInputs = [
     llvm # for llc
-  ]; 
+  ];
 
   src = ./ebpfdropper;
 
   # to prevent
   # error: <unknown>:0:0: in function handle_ingress i32 (%struct.__sk_buff*): A call to built-in function '__stack_chk_fail' is not supported.
-  hardeningDisable=["all"];
+  hardeningDisable = [ "all" ];
 
   unpackPhase = ":";
 

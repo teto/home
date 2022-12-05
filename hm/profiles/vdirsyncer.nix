@@ -1,4 +1,4 @@
-{ config, pkgs, lib,  ... }:
+{ config, pkgs, lib, ... }:
 {
 
   # accounts.calendar.accounts = {
@@ -53,7 +53,7 @@
       vdirsyncer = {
         enable = true;
         collections = null;
-        metadata = ["color" "displayname"];
+        metadata = [ "color" "displayname" ];
       };
 
       local = {
@@ -66,15 +66,15 @@
         # url = "http://nixos.iijlab.net/remote.php/dav/calendars/root/personal/";
         # url = "http://efss.qloud.my/remote.php/dav/calendars/root/personal/";
         url = "https://efss.qloud.my/remote.php/dav/";
-          # url = "https://dav.mailbox.org/caldav/<some hash>";
-          # userName = "<my email address>";
+        # url = "https://dav.mailbox.org/caldav/<some hash>";
+        # userName = "<my email address>";
         # password.fetch = ["command", "~/dotfiles/bin/pass-show", "iij/nextcloud"]
-          # usernameCommand = ["command" "~/dotfiles/bin/pass-show" "iij/nextcloud"];
-          userName = "root";
-          passwordCommand = ["~/dotfiles/bin/pass-show" "iij/nextcloud"];
-        };
+        # usernameCommand = ["command" "~/dotfiles/bin/pass-show" "iij/nextcloud"];
+        userName = "root";
+        passwordCommand = [ "~/dotfiles/bin/pass-show" "iij/nextcloud" ];
       };
     };
+  };
 
   # accounts.contact = {
   #   basePath = "$HOME/.contacts";

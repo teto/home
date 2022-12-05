@@ -1,8 +1,10 @@
 let
-  jupyter = import (builtins.fetchGit {
-    url = https://github.com/tweag/jupyterWith;
-    rev = "";
-  }) {};
+  jupyter = import
+    (builtins.fetchGit {
+      url = https://github.com/tweag/jupyterWith;
+      rev = "";
+    })
+    { };
 
   iPython = jupyter.kernels.iPythonWith {
     name = "python";
@@ -19,5 +21,5 @@ let
       kernels = [ iPython iHaskell ];
     };
 in
-  # TODO use mkShell, run $ jupyter lab
-  jupyterEnvironment.env
+# TODO use mkShell, run $ jupyter lab
+jupyterEnvironment.env

@@ -1,4 +1,4 @@
-{ config, lib,  pkgs, ... }:
+{ config, lib, pkgs, ... }:
 {
 
   environment.systemPackages = with pkgs; [
@@ -36,7 +36,7 @@
       # job.logXsession = true; # writes into ~/.xsessions-errors
       # enableCtrlAltBackspace = false;
       # for the smaller setup setup the favorite mode to 1920 x 1080
-       # screenSection = '' '';
+      # screenSection = '' '';
     };
 
     # required to make localectl work
@@ -44,7 +44,7 @@
     exportConfiguration = true;
 
     # allow for more layout
-    layout = "us,fr";  # you can switch from cli with xkb-switch
+    layout = "us,fr"; # you can switch from cli with xkb-switch
     # TODO swap esc/shift
     # consoleUseXkbConfig
     xkbOptions = "eurosign:e, swapcaps:ctrl";
@@ -67,14 +67,14 @@
     };
     windowManager.i3.enable = true;
 
-	# au moins pour le laptop
-	config = ''
-	  Section "Device"
-		  Identifier  "Intel Graphics" 
-		  Driver      "intel"
-		  Option      "Backlight"  "intel_backlight"
-	  EndSection
-	'';
+    # au moins pour le laptop
+    config = ''
+      	  Section "Device"
+      		  Identifier  "Intel Graphics" 
+      		  Driver      "intel"
+      		  Option      "Backlight"  "intel_backlight"
+      	  EndSection
+      	'';
 
     # to autostart i3
     # https://discourse.nixos.org/t/opening-i3-from-home-manager-automatically/4849/7

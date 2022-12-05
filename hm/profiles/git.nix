@@ -1,23 +1,23 @@
-{ config, pkgs, lib,  ... } @ args:
+{ config, pkgs, lib, ... } @ args:
 let
   secrets = import ./secrets.nix;
 in
 {
   programs.git = {
     enable = true;
-    package = pkgs.gitAndTools.gitFull;    # to get send-email
+    package = pkgs.gitAndTools.gitFull; # to get send-email
     delta.enable = true;
     userName = "Matthieu Coudron";
     userEmail = "mcoudron@hotmail.com";
-	includes = [
-	  { path = config.xdg.configHome + "/git/config.inc"; }
-     # everything under ~/yourworkfolder/ is company code, so use the other user/email/gpg key, etc
+    includes = [
+      { path = config.xdg.configHome + "/git/config.inc"; }
+      # everything under ~/yourworkfolder/ is company code, so use the other user/email/gpg key, etc
       {
         # path = ./resources/gitconfigwork;
         path = config.xdg.configHome + "/git/config.inc";
         condition = "gitdir:~/nova/";
       }
-	];
+    ];
     # https://git-scm.com/book/en/v2/Git-Tools-Signing-Your-Work
     signing = {
       signByDefault = false;
@@ -25,18 +25,18 @@ in
     };
 
     aliases = {
-      s="status";
-      st="status";
-      br="branch";
-      d="diff";
-      mg="mergetool";
+      s = "status";
+      st = "status";
+      br = "branch";
+      d = "diff";
+      mg = "mergetool";
 
     };
     extraConfig = {
       init.defaultBranch = "main";
-# git config core.sshCommand "ssh -vvv"
+      # git config core.sshCommand "ssh -vvv"
       # useful when merging from kernel
-      checkout = { defaultRemote="upstream"; };
+      checkout = { defaultRemote = "upstream"; };
 
       # show the full diff under the commit message
       commit.verbose = true;
@@ -58,7 +58,7 @@ in
 
 
       stash = {
-          showPatch = 1;
+        showPatch = 1;
       };
       color = {
         ui = true;
@@ -79,19 +79,19 @@ in
           cmd = "nvim -f -c \"Gdiffsplit!\" \"$MERGED\"";
         };
       };
-# [mergetool "vimdiff"]
-#   prompt = true
-#   cmd = nvim -d $BASE $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+      # [mergetool "vimdiff"]
+      #   prompt = true
+      #   cmd = nvim -d $BASE $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
 
-# [mergetool "fugitive"]
-# ; Use :Gdiffsplit! for 3 way diff
-# 	cmd = nvim -f -c \"Gdiffsplit!\" \"$MERGED\"
+      # [mergetool "fugitive"]
+      # ; Use :Gdiffsplit! for 3 way diff
+      # 	cmd = nvim -f -c \"Gdiffsplit!\" \"$MERGED\"
 
       # TODO use a fully qualified nvim ?
       diff = {
         # there is now a specific nvim entry ?
         tool = "nvim -d";
-        word-diff="color";
+        word-diff = "color";
         renamelimit = 14000; # useful for kernel
 
       };

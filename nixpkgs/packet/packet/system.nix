@@ -90,27 +90,27 @@
               ];
               boot.kernelModules = [ "kvm-amd" ];
               boot.kernelParams = [ "console=ttyS1,115200n8" ];
-              boot.extraModulePackages = [];
+              boot.extraModulePackages = [ ];
             }
           )
           (
             { lib, ... }:
-              {
-                boot = {
-                  loader = {
-                    systemd-boot.enable = true;
-                    efi.canTouchEfiVariables = true;
-                  };
+            {
+              boot = {
+                loader = {
+                  systemd-boot.enable = true;
+                  efi.canTouchEfiVariables = true;
                 };
-                nix.settings.max-jobs = lib.mkDefault 48;
-              }
+              };
+              # nix.settings.max-jobs = lib.mkDefault 48;
+            }
           )
         ];
       }
     )
     (
       {
-        swapDevices = [];
+        swapDevices = [ ];
 
         fileSystems = {
 

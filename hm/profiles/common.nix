@@ -1,4 +1,4 @@
-{ config, pkgs, lib,  ... }:
+{ config, pkgs, lib, ... }:
 {
   news.display = "silent";
 
@@ -26,12 +26,12 @@
     envsubst
     # or lazygit
     nix-prefetch-git
-    netcat-gnu  # plain 'netcat' is the bsd one
+    netcat-gnu # plain 'netcat' is the bsd one
     # dig.dnsutils  # for dig disabled because of flakes
-	perf-tools
+    perf-tools
     strace
     tig
-    w3m   # for preview in ranger w3mimgdisplay
+    w3m # for preview in ranger w3mimgdisplay
     xdg-utils
     whois
   ];
@@ -39,11 +39,11 @@
   # works only because TIGRC_USER is set
   # if file exists vim.tigrc
   home.file."${config.xdg.configHome}/tig/config".text = ''
-      source ${pkgs.tig}/etc/vim.tigrc
-      # not provided
-      # source ${pkgs.tig}/tig/contrib/large-repo.tigrc
-      source ${config.xdg.configHome}/tig/custom.tigrc
-    '';
+    source ${pkgs.tig}/etc/vim.tigrc
+    # not provided
+    # source ${pkgs.tig}/tig/contrib/large-repo.tigrc
+    source ${config.xdg.configHome}/tig/custom.tigrc
+  '';
   # lib.concatStrings [
   #   (builtins.readFile vimTigrc)
   #   # TODO reestablish when the package gets updated
@@ -70,20 +70,20 @@
   # https://github.com/carnager/buku_run
   home.sessionVariables = {
     # RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/rg.conf";
-    ZDOTDIR="$XDG_CONFIG_HOME/zsh";
-    INPUTRC="$XDG_CONFIG_HOME/inputrc";
-    IPYTHONDIR="$XDG_CONFIG_HOME/ipython";
-    JUPYTER_CONFIG_DIR="$XDG_CONFIG_HOME/jupyter";
+    ZDOTDIR = "$XDG_CONFIG_HOME/zsh";
+    INPUTRC = "$XDG_CONFIG_HOME/inputrc";
+    IPYTHONDIR = "$XDG_CONFIG_HOME/ipython";
+    JUPYTER_CONFIG_DIR = "$XDG_CONFIG_HOME/jupyter";
     # testing if we can avoid having to symlink XDG_CONFIG_HOME
     # should be setup by neomutt module
     # MUTT="$XDG_CONFIG_HOME/mutt";
 
     # TODO package these instead now these are submoudles of dotfiles To remove
-    VIFM="$XDG_CONFIG_HOME/vifm";
-    WWW_HOME="$XDG_CONFIG_HOME/w3m";
+    VIFM = "$XDG_CONFIG_HOME/vifm";
+    WWW_HOME = "$XDG_CONFIG_HOME/w3m";
     # used by ranger
-    TERMCMD="kitty";
-    VIM_SOURCE_DIR="$HOME/vim";
+    TERMCMD = "kitty";
+    VIM_SOURCE_DIR = "$HOME/vim";
     # TERMINAL # used by i3-sensible-terminal
   };
 
@@ -107,7 +107,7 @@
     enable = true;
     enableZshIntegration = true;
     enableBashIntegration = true;
-    options = [ "--cmd j"];
+    options = [ "--cmd j" ];
   };
 
 
@@ -118,7 +118,7 @@
     # grp:alt_shift_toggle,ctrl:nocaps,grp_led:scroll
     options = [
       "add Mod1 Alt_R"
-      "ctrl:nocaps"  # makes caps lock an additionnal ctrl
+      "ctrl:nocaps" # makes caps lock an additionnal ctrl
     ];
   };
 
@@ -130,7 +130,7 @@
     enable = lib.mkForce true;
     enableZshIntegration = true;
     enableBashIntegration = true;
-     # settings = {};
+    # settings = {};
   };
 
   programs.vim = {
@@ -145,12 +145,12 @@
 
   programs.fzf = {
     enable = true;
-    enableZshIntegration=true;
+    enableZshIntegration = true;
     # so that fzf takes into account .gitignore
     defaultCommand = "${pkgs.fd}/bin/fd --type f";
 
     # add support for ctrl+o to open selected file in VS Code
-    defaultOptions = ["--bind='ctrl-o:execute(code {})+abort'" ];
+    defaultOptions = [ "--bind='ctrl-o:execute(code {})+abort'" ];
     # Setting fd as the default source for fzf
     # defaultOptions
     # changeDirWidgetOptions
@@ -217,22 +217,22 @@
   # home.file.".digrc".source =  ../../home/digrc;
 
   # order matters
-  home.file.".mailcap".text =  ''
-application/pdf; evince '%s';
-# pdftotext
-# wordtotext
-# ppt2text
-# download script mutt_bgrun
-#application/pdf; pdftohtml -q -stdout %s | w3m -T text/html; copiousoutput
-#application/msword; wvWare -x /usr/lib/wv/wvHtml.xml %s 2>/dev/null | w3m -T text/html; copiousoutput
-text/calendar; khal import '%s'
-text/*; less '%s';
-# khal import [-a CALENDAR] [--batch] [--random-uid|-r] ICSFILE
-image/*; eog '%s';
+  home.file.".mailcap".text = ''
+    application/pdf; evince '%s';
+    # pdftotext
+    # wordtotext
+    # ppt2text
+    # download script mutt_bgrun
+    #application/pdf; pdftohtml -q -stdout %s | w3m -T text/html; copiousoutput
+    #application/msword; wvWare -x /usr/lib/wv/wvHtml.xml %s 2>/dev/null | w3m -T text/html; copiousoutput
+    text/calendar; khal import '%s'
+    text/*; less '%s';
+    # khal import [-a CALENDAR] [--batch] [--random-uid|-r] ICSFILE
+    image/*; eog '%s';
 
-    text/html;  ${pkgs.w3m}/bin/w3m -dump -o document_charset=%{charset} '%s'; nametemplate=%s.html; copiousoutput
-    application/*; xdg-open "%s"
-    */*; xdg-open "%s"
+        text/html;  ${pkgs.w3m}/bin/w3m -dump -o document_charset=%{charset} '%s'; nametemplate=%s.html; copiousoutput
+        application/*; xdg-open "%s"
+        */*; xdg-open "%s"
   '';
 
   # for colors etc.

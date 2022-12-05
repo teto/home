@@ -12,9 +12,9 @@ let
       MaxMessages = 20000;
       # size[k|m][b]
       MaxSize = "1m";
-      CopyArrivalDate =  "yes"; # Keeps the time stamp based message sorting intact.
+      CopyArrivalDate = "yes"; # Keeps the time stamp based message sorting intact.
     };
-    create = "maildir";   # create missing mailboxes
+    create = "maildir"; # create missing mailboxes
     expunge = "both";
   };
 
@@ -32,18 +32,18 @@ let
     #   '';
     # };
     alot = {
-        # TODO pass mon fichier a moi
-        contactCompletion = {
-          type = "shellcommand";
-          command = "cat ${addressBookFilename}";
-          regexp =
-            "'\\[?{"
-            + ''"name": "(?P<name>.*)", ''
-            + ''"address": "(?P<email>.+)", ''
-            + ''"name-addr": ".*"''
-            + "}[,\\]]?'";
-          shellcommand_external_filtering = "False";
-        };
+      # TODO pass mon fichier a moi
+      contactCompletion = {
+        type = "shellcommand";
+        command = "cat ${addressBookFilename}";
+        regexp =
+          "'\\[?{"
+          + ''"name": "(?P<name>.*)", ''
+          + ''"address": "(?P<email>.+)", ''
+          + ''"name-addr": ".*"''
+          + "}[,\\]]?'";
+        shellcommand_external_filtering = "False";
+      };
     };
 
 
@@ -52,20 +52,20 @@ let
 
   # problem is I don't get the error/can't interrupt => TODO use another one
   mbsyncWrapper = pkgs.writeShellScriptBin "mbsync-wrapper" ''
-      ${pkgs.isync}/bin/mbsync $@
-      notmuch new
-    '';
+    ${pkgs.isync}/bin/mbsync $@
+    notmuch new
+  '';
 
   # temporary solution since it's not portable
   getPassword = accountName:
     let
-	 # https://superuser.com/questions/624343/keep-gnupg-credentials-cached-for-entire-user-session
-	 # 	  export PASSWORD_STORE_GPG_OPTS=" --default-cache-ttl 34560000"
+      # https://superuser.com/questions/624343/keep-gnupg-credentials-cached-for-entire-user-session
+      # 	  export PASSWORD_STORE_GPG_OPTS=" --default-cache-ttl 34560000"
       script = pkgs.writeShellScriptBin "pass-show" ''
-      ${pkgs.pass}/bin/pass show "$@" | ${pkgs.coreutils}/bin/head -n 1
-    '';
+        ${pkgs.pass}/bin/pass show "$@" | ${pkgs.coreutils}/bin/head -n 1
+      '';
     in
-      "${script}/bin/pass-show ${accountName}";
+    "${script}/bin/pass-show ${accountName}";
 
   my_tls = {
     enable = true;
@@ -79,78 +79,78 @@ let
   };
 
   fastmail =
-  accountExtra //
-  {
-    gpg = gpgModule;
-	flavor = "fastmail.com";
-    astroid = { enable = true; };
+    accountExtra //
+    {
+      gpg = gpgModule;
+      flavor = "fastmail.com";
+      astroid = { enable = true; };
 
-    mbsync = mbsyncConfig // {
-      remove = "both";
-	  sync = true;
+      mbsync = mbsyncConfig // {
+        remove = "both";
+        sync = true;
+      };
+
+      # folders.sent = "[Gmail]/Sent Mail";
+
+      msmtp.enable = true;
+      aerc.enable = true;
+      notmuch = {
+        enable = true;
+        # fqdn = "fastmail.com";
+      };
+      mujmap = {
+        enable = true;
+        # TODO replace with pass
+        # settings.password_command = "cat /home/teto/mujmap_password";
+        settings.password_command = getPassword "perso/fastmail_mc_jmap";
+        settings.config_dir = config.accounts.email.maildirBasePath;
+      };
+
+
+      primary = false;
+      userName = "matthieucoudron@fastmail.com";
+      realName = "Matthieu Coudron";
+      address = "matthieucoudron@fastmail.com";
+
+      # fastmail requires an app-specific password
+      passwordCommand = getPassword "perso/fastmail_mc";
+
+      # described here https://www.fastmail.com/help/technical/servernamesandports.html
+      # imap = { host = "imap.fastmail.com"; tls = my_tls; };
+      # smtp = { host = "smtp.fastmail.com"; tls = my_tls; };
+      # smtp.tls.useStartTls = false;
     };
-
-    # folders.sent = "[Gmail]/Sent Mail";
-
-    msmtp.enable = true;
-	aerc.enable = true;
-	notmuch = {
-	  enable = true;
-	  # fqdn = "fastmail.com";
-	};
-	mujmap = {
-	  enable = true;
-	  # TODO replace with pass
-	  # settings.password_command = "cat /home/teto/mujmap_password";
-	  settings.password_command = getPassword "perso/fastmail_mc_jmap";
-	  settings.config_dir = config.accounts.email.maildirBasePath;
-	};
-
-
-    primary = false;
-    userName = "matthieucoudron@fastmail.com";
-    realName = "Matthieu Coudron";
-    address = "matthieucoudron@fastmail.com";
-
-    # fastmail requires an app-specific password
-    passwordCommand = getPassword "perso/fastmail_mc";
-
-    # described here https://www.fastmail.com/help/technical/servernamesandports.html
-    # imap = { host = "imap.fastmail.com"; tls = my_tls; };
-    # smtp = { host = "smtp.fastmail.com"; tls = my_tls; };
-    # smtp.tls.useStartTls = false;
-  };
 
 
   nova = # {{{
-  accountExtra //
-  {
-    astroid = { enable = true; };
-    neomutt = {
-      enable = false;
-    };
-
-    mbsync = mbsyncConfig // {
-      remove = "both";
-      extraConfig.account = {
-        AuthMechs = "LOGIN";
+    accountExtra //
+    {
+      astroid = { enable = true; };
+      neomutt = {
+        enable = false;
       };
-	  sync = false;
-    };
-    msmtp.enable = true;
-    notmuch = {
-      enable = true;
-    };
 
-    primary = false;
-    userName = "matthieu.coudron@novadiscovery.com";
-    realName = "Matthieu coudron";
-    address = "matthieu.coudron@novadiscovery.com";
-    flavor = "gmail.com";
-    smtp.tls.useStartTls = true;
+      mbsync = mbsyncConfig // {
+        remove = "both";
+        extraConfig.account = {
+          AuthMechs = "LOGIN";
+        };
+        sync = false;
+      };
+      msmtp.enable = true;
+      notmuch = {
+        enable = true;
+      };
 
-    passwordCommand = getPassword "nova/mail";
-  };
+      primary = false;
+      userName = "matthieu.coudron@novadiscovery.com";
+      realName = "Matthieu coudron";
+      address = "matthieu.coudron@novadiscovery.com";
+      flavor = "gmail.com";
+      smtp.tls.useStartTls = true;
+
+      passwordCommand = getPassword "nova/mail";
+    };
   # }}}
 
 
@@ -165,13 +165,13 @@ let
     folders.sent = "Sent";
     folders.trash = "Trash";
 
-  # CopyArrivalDate
+    # CopyArrivalDate
     mbsync = mbsyncConfig // {
       remove = "both";
       # how to destroy on gmail ?
       # expunge = "both";
       # Exclude everything under the internal [Gmail] folder, except the interesting folders
-# Patterns * ![Gmail]* "[Gmail]/Sent Mail" "[Gmail]/Starred" "[Gmail]/All Mail"
+      # Patterns * ![Gmail]* "[Gmail]/Sent Mail" "[Gmail]/Starred" "[Gmail]/All Mail"
       # "[Gmail]/Inbox"
       # patterns = ["* ![Gmail]*" "[Gmail]/Sent Mail" "[Gmail]/Starred" ];
       # to be able to create drafts ?
@@ -227,7 +227,7 @@ let
       extraConfig.local = {
         SubFolders = "Verbatim";
       };
-  };
+    };
 
     msmtp.enable = true;
 
@@ -263,100 +263,100 @@ in
   };
 
 
-   # TODO conditionnally define these
-   programs.notmuch = {
-     enable = true;
+  # TODO conditionnally define these
+  programs.notmuch = {
+    enable = true;
 
-     # dont add "inbox" tag
-     new.tags = ["unread" "inbox"];
-     # new.ignore = 
-     search.excludeTags = ["spam"];
+    # dont add "inbox" tag
+    new.tags = [ "unread" "inbox" ];
+    # new.ignore = 
+    search.excludeTags = [ "spam" ];
 
-     hooks = {
-        postNew = lib.concatStrings [
-          (builtins.readFile ../../hooks_perso/post-new)
-        ];
-        # postInsert = 
-      };
-   };
+    hooks = {
+      postNew = lib.concatStrings [
+        (builtins.readFile ../../hooks_perso/post-new)
+      ];
+      # postInsert = 
+    };
+  };
 
 
-   programs.msmtp = {
-     enable = true;
-     extraConfig = ''
+  programs.msmtp = {
+    enable = true;
+    extraConfig = ''
       # this will create a default account which will then break the
       # default added via primary
       # syslog         on
-     '';
-   };
+    '';
+  };
 
 
 
 
-   # disabled for now, use mbsync instead
-   programs.offlineimap = {
-     enable = false;
-     extraConfig.general = {
-        # interval between updates (in minutes)
-        autorefresh=0;
-      };
-
-      # TODO get the version for keyring
-      # remotepasseval
-      pythonFile = ''
-        from subprocess import check_output
-
-        def get_pass(service, cmd):
-          return subprocess.check_output(cmd, ).splitlines()[0]
-
-      '';
-
-      extraConfig.default = {
-        # in bytes
-        # The startdate option expects a date in the format yyyy-mm-dd.
-        # can't be used with maxage
-        startdate = "2020-04-01";
-        maxsize=20000;
-        # works only with local folders of type maildir in daysA
-        # maxage=30
-        synclabels= true;
-      };
+  # disabled for now, use mbsync instead
+  programs.offlineimap = {
+    enable = false;
+    extraConfig.general = {
+      # interval between updates (in minutes)
+      autorefresh = 0;
     };
 
-    programs.mbsync = {
-      enable = true;
-      # package = mbsyncWrapper;
+    # TODO get the version for keyring
+    # remotepasseval
+    pythonFile = ''
+      from subprocess import check_output
+
+      def get_pass(service, cmd):
+        return subprocess.check_output(cmd, ).splitlines()[0]
+
+    '';
+
+    extraConfig.default = {
+      # in bytes
+      # The startdate option expects a date in the format yyyy-mm-dd.
+      # can't be used with maxage
+      startdate = "2020-04-01";
+      maxsize = 20000;
+      # works only with local folders of type maildir in daysA
+      # maxage=30
+      synclabels = true;
+    };
+  };
+
+  programs.mbsync = {
+    enable = true;
+    # package = mbsyncWrapper;
+  };
+
+  services.mbsync = {
+    enable = true; # disabled because it kept asking for my password
+    verbose = true; # to help debug problems in journalctl
+    frequency = "*:0/5";
+    # TODO add a echo for the log
+    postExec = "${pkgs.notmuch}/bin/notmuch new";
+  };
+  systemd.user.services.mbsync = {
+    Service = {
+      # TODO need DBUS_SESSION_BUS_ADDRESS 
+      # --app-name="%N" toto
+      Environment = ''DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/1000/bus"'';
+      # TODO
+      # FailureAction=''${pkgs.libnotify}/bin/notify-send "Failure"'';
+      # TODO try to use LoadCredential
+      # serviceConfig = {
+      # DynamicUser = true;
+      # PrivateTmp = true;
+      # WorkingDirectory = "/var/lib/plausible";
+      # StateDirectory = "plausible";
+      # LoadCredential = [
+      # "ADMIN_USER_PWD:${cfg.adminUser.passwordFile}"
+      # "SECRET_KEY_BASE:${cfg.server.secretKeybaseFile}"
+      # "RELEASE_COOKIE:${cfg.releaseCookiePath}"
+      # ] ++ lib.optionals (cfg.mail.smtp.passwordFile != null) [ "SMTP_USER_PWD:${cfg.mail.smtp.passwordFile}"];
+      # };
     };
 
-    services.mbsync = {
-	  enable = true;  # disabled because it kept asking for my password
-	  verbose = true;  # to help debug problems in journalctl
-	  frequency =  "*:0/5";
-	  # TODO add a echo for the log
-	  postExec = "${pkgs.notmuch}/bin/notmuch new";
-	};
-	  systemd.user.services.mbsync = {
-		Service = {
-		  # TODO need DBUS_SESSION_BUS_ADDRESS 
-		  # --app-name="%N" toto
-		  Environment=''DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/1000/bus"'';
-		  # TODO
-		  # FailureAction=''${pkgs.libnotify}/bin/notify-send "Failure"'';
-		    # TODO try to use LoadCredential
-			# serviceConfig = {
-            # DynamicUser = true;
-            # PrivateTmp = true;
-            # WorkingDirectory = "/var/lib/plausible";
-            # StateDirectory = "plausible";
-            # LoadCredential = [
-              # "ADMIN_USER_PWD:${cfg.adminUser.passwordFile}"
-              # "SECRET_KEY_BASE:${cfg.server.secretKeybaseFile}"
-              # "RELEASE_COOKIE:${cfg.releaseCookiePath}"
-            # ] ++ lib.optionals (cfg.mail.smtp.passwordFile != null) [ "SMTP_USER_PWD:${cfg.mail.smtp.passwordFile}"];
-          # };
-		};
-
-	  };
+  };
 
   # programs.muchsync = { };
   programs.mujmap = {
@@ -377,13 +377,13 @@ in
       # TODO use "killed"
       startup.queries = {
         # "Unread iij"= "tag:unread and not tag:deleted and not tag:muted and not tag:ietf and to:coudron@iij.ad.jp";
-        "Unread gmail"= "tag:unread and not tag:deleted and not tag:muted and not tag:ietf and to:mattator@gmail.com";
-        "Flagged"= "tag:flagged";
+        "Unread gmail" = "tag:unread and not tag:deleted and not tag:muted and not tag:ietf and to:mattator@gmail.com";
+        "Flagged" = "tag:flagged";
         # "Drafts"= "tag:draft";
-        "fastmail"= "tag:unread and not tag:deleted and not tag:muted and not tag:ietf and to:matthieucoudron@fastmail.com";
+        "fastmail" = "tag:unread and not tag:deleted and not tag:muted and not tag:ietf and to:matthieucoudron@fastmail.com";
         # "nova"= "tag:unread and not tag:deleted and not tag:muted and not tag:ietf and to:mattator@gmail.com";
-        "ietf"= "tag:ietf";
-        "gh"= "tag:gh";
+        "ietf" = "tag:ietf";
+        "gh" = "tag:gh";
       };
     };
 
