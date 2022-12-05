@@ -13,7 +13,9 @@ rec {
 
   imports = [
       ./account-teto.nix
-      ./ntp.nix
+      ../modules/ntp.nix
+      ../nixos/profiles/neovim.nix
+
   ];
 
 
@@ -192,7 +194,7 @@ rec {
       ];
     };
   };
-  environment.etc."inputrc".source = ../../config/inputrc;
+  environment.etc."inputrc".source = ../config/inputrc;
 
   security.sudo = {
     enable = true;

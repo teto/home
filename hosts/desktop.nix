@@ -1,20 +1,20 @@
 { config, lib, pkgs,  ... }:
-let
-  secrets = import ./secrets.nix;
+# let
+  # secrets = import ./secrets.nix;
   # userNixpkgs = /home/teto/nixpkgs;
-in
+# in
 {
 
   imports = [
     ./config-all.nix
 
-	../profiles/sops.nix
-    ./ntp.nix
-    ./network-manager.nix
-    ./wireshark.nix
-    ./wifi.nix
-    ../profiles/neovim.nix
-    ../profiles/pipewire.nix
+    ../modules/ntp.nix
+    ../modules/network-manager.nix
+    ../modules/wireshark.nix
+    ../modules/wifi.nix
+    ../nixos/profiles/neovim.nix
+    ../nixos/profiles/pipewire.nix
+	../nixos/profiles/sops.nix
 
     # only if available
     # ./modules/jupyter.nix

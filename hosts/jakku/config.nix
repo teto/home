@@ -1,16 +1,19 @@
-{ config, pkgs, lib, ... }:
+{ config, modulesPath, pkgs, lib, ... }:
 let
   secrets = import ../secrets.nix;
 in
 {
 
   imports = [
-      ./hardware-iij-gitolite.nix
-      ./common-server.nix
-      ../modules/gitolite.nix
-      ../modules/openssh.nix
-      ../modules/hercules-ci-agents.nix
-      ../modules/nextcloud.nix
+	  # for gandi
+	 
+	  "${modulesPath}/virtualisation/openstack-config.nix"
+      ./hardware.nix
+      ../common-server.nix
+      ../../modules/gitolite.nix
+      ../../modules/openssh.nix
+      # ../../modules/hercules-ci-agents.nix
+      ../../modules/nextcloud.nix
       # ../modules/blog.nix
 
       # just to help someone on irc
@@ -32,7 +35,7 @@ in
   boot.loader.grub.version = 2;
   boot.loader.grub.device = "/dev/sda";
 
-  networking.hostName = "gitolite";
+  networking.hostName = "jakku";
 
   networking.defaultGateway = secrets.gateway;
   networking.nameservers = secrets.nameservers;
@@ -51,16 +54,4 @@ in
     useSandbox = true;
   };
 
-
-  # Fix problem with sudo
-  # https://github.com/NixOS/nixops/issues/931
-  system.activationScripts.nixops-vm-fix-931 = {
-    text = ''
-      if ls -l /nix/store | grep sudo | grep -q nogroup; then
-        mount -o remount,rw  /nix/store
-        chown -R root:nixbld /nix/store
-      fi
-    '';
-    deps = [];
-  };
 }

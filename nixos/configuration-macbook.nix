@@ -9,7 +9,7 @@ let
 {
   imports = [
     ./hardware-macbook.nix
-    ./modules/desktop.nix
+    ./desktop.nix
     ./modules/docker-daemon.nix
     # ./modules/libvirtd.nix
 

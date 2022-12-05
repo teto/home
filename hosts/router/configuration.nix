@@ -30,10 +30,12 @@ in
   # pcengines/apu/
   imports = [
 	./hardware.nix
-    ../../modules/config-all.nix
+    ../config-all.nix
     ../../profiles/openssh.nix
     ../../profiles/router.nix
-      
+	# TODO use ${modulePath} instead
+     # self.inputs.nixos-hardware.nixosModules.pcengines-apu 
+
     # TODO import from https://github.com/NixOS/nixos-hardware/tree/master/pcengines/apu
     # pcengines/apu
   ];

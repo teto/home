@@ -1,7 +1,7 @@
 { config, pkgs, options, lib, ... }:
-let
-  secrets = import ./secrets.nix;
-in
+# let
+#   secrets = import ./secrets.nix;
+# in
 {
 
   users.users.teto = {
@@ -35,7 +35,7 @@ in
 
 
      openssh.authorizedKeys.keyFiles = [
-       ../../perso/keys/id_rsa.pub
+       ../perso/keys/id_rsa.pub
      ];
 
      packages = with pkgs; [

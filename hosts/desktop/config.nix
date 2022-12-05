@@ -1,6 +1,6 @@
 { config, lib, pkgs,  ... }:
 let
-  secrets = import ./secrets.nix;
+  # secrets = import ./secrets.nix;
   nvidiaPackage = config.boot.kernelPackages.nvidiaPackages.stable;
   # mptcp-flake = builtins.getFlake "github:teto/mptcp-flake/bf99516a50dcf3fcbe0a0c924bb56ff57fdd05e1";
     # type = "git";
@@ -10,11 +10,13 @@ in
 {
   imports = [
     # todo renommer en workstation
-    ./modules/docker-daemon.nix
+    ../../modules/docker-daemon.nix
 
-    ./modules/config-all.nix
-    ./modules/desktop.nix
-    ./modules/libvirtd.nix
+    ../config-all.nix
+    ../desktop.nix
+    ../../libvirtd.nix
+	../../profiles/nix-daemon.nix
+	../../profiles/experimental.nix
 
     # ./modules/syncthing.nix
 

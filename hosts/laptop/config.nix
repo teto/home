@@ -1,13 +1,13 @@
 { config, lib, pkgs,  ... }:
 let
-  secrets = import ../nixpkgs/secrets.nix;
+  secrets = import ../../nixpkgs/secrets.nix;
 in
 {
   imports = [
-    ./modules/config-all.nix
-    ./modules/desktop.nix
-    ./modules/sway.nix
-    ./modules/syncthing.nix
+    ../config-all.nix
+    ../desktop.nix
+    ../../modules/sway.nix
+    ../../modules/syncthing.nix
     # ./modules/docker-daemon.nix
 
     # ./modules/hoogle.nix

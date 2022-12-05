@@ -101,6 +101,7 @@ let
     nomacs  # image viewer
     desktop-file-utils  # to get desktop
     font-manager
+	gthumb  # image manager, great to tag pictures
     gnome.adwaita-icon-theme # else nothing appears
     gnome.eog # eye of gnome = image viewer / creates a collision
     gnome.file-roller # for GUI archive handling

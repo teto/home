@@ -1,3 +1,8 @@
+#+title: NixOS System Configuration
+#+author: teto
+#+options: toc:nil num:nil
+
+#+BEGIN_SRC nix
 {
   description = "My personal configuration";
 
@@ -78,6 +83,9 @@
           config = { allowUnfree = true; };
         };
 
+	  # deployNodes = {
+	  # };
+
       nixpkgsFinal = pkgImport self.inputs.nixpkgs;
 
       # TODO I should use hm.lib.homeManagerConfiguration
@@ -143,11 +151,13 @@
               profiles.system = {
                 # remoteBuild = false;
                 hostname = attrs.hostname;
-                path = deploy-rs.lib.${system}.activate.nixos self.nixosConfigurations.router;
+                path = deploy-rs.lib.${system}.activate.nixos self.nixosConfigurations.${attrs.name};
               };
             };
 		  in {
 			router = genNode ({ name = "router"; hostname ="192.168.1.12"; });
+
+			jakku = genNode ({ name = "jakku"; hostname = "46.226.104.191"; });
 		  };
           # nixpkgs.lib.listToAttrs (
           #   map
@@ -165,7 +175,6 @@
               ({ pkgs, ... }: {
                 nixpkgs.overlays = nixpkgs.lib.attrValues self.overlays;
                 imports = [
-                  # ./nixos/hardware-dell-camera.nix
                   ./nixos/hosts/router/configuration.nix
 				  self.inputs.nixos-hardware.nixosModules.pcengines-apu
                 ];
@@ -204,24 +213,24 @@
               ({ pkgs, ... }: {
                 nixpkgs.overlays = nixpkgs.lib.attrValues self.overlays;
                 imports = [
-                  ./nixos/hardware-dell-camera.nix
-                  ./nixos/modules/distributedBuilds.nix
-                  ./nixos/configuration-xps.nix
-                  ./nixos/profiles/cron.nix
-                  ./nixos/profiles/nix-daemon.nix
-                  ./nixos/profiles/postgresql.nix
-                  ./nixos/modules/xserver.nix
-                  ./nixos/modules/sway.nix
+                  ./hosts/laptop/hardware.nix
+                  ./modules/distributedBuilds.nix
+                  ./hosts/laptop/config.nix
+                  ./modules/xserver.nix
+                  ./modules/sway.nix
                   # ./nixos/modules/redis.nix
                   ./nixos/profiles/steam.nix
                   ./nixos/profiles/qemu.nix
                   ./nixos/profiles/adb.nix
+                  ./nixos/profiles/cron.nix
+                  ./nixos/profiles/nix-daemon.nix
+                  ./nixos/profiles/postgresql.nix
 				  # usually inactive, just to test some stuff
                   ./nixos/profiles/gitlab-runner.nix
 
-                  ./nixos/modules/libvirtd.nix
-                  ./nixos/profiles/chromecast.nix
-                  ./nixos/profiles/virtualbox.nix
+                  ./modules/libvirtd.nix
+                  # ./nixos/profiles/chromecast.nix
+                  # ./nixos/profiles/virtualbox.nix
                 ];
               })
 
@@ -266,6 +275,41 @@
             ];
           };
 
+		  jakku = nixpkgs.lib.nixosSystem {
+            inherit system;
+            pkgs = nixpkgsFinal;
+            modules = [
+			  self.inputs.sops-nix.nixosModules.sops
+              # often breaks
+              # (import ./nixos/modules/hoogle.nix)
+              ({ pkgs, ... }: {
+                nixpkgs.overlays = nixpkgs.lib.attrValues self.overlays;
+                nix.distributedBuilds = true;
+
+                imports = [
+                  ./nixos/hosts/jakku/config.nix
+                  ./nixos/profiles/nix-daemon.nix
+                  ./nixos/profiles/neovim.nix
+                  # ./nixos/profiles/peerix.nix
+                  ./nixos/modules/ntp.nix
+                  ./nixos/profiles/openssh.nix
+                  # self.inputs.mptcp-flake.nixosModules.mptcp
+                  # ./nixos/profiles/mptcp.nix
+
+                  # just to check how /etc/nix/machines looks like
+                  # ./nixos/modules/distributedBuilds.nix
+                ];
+              })
+              hm.nixosModules.home-manager
+
+              # TODO use from flake or from unstable
+              (hm-custom [
+                ./hm/home-lenovo.nix
+              ])
+            ]
+            ;
+          };
+
           jedha = nixpkgs.lib.nixosSystem {
             inherit system;
             pkgs = nixpkgsFinal;
@@ -279,16 +323,13 @@
                 nix.distributedBuilds = true;
 
                 imports = [
-                  ./nixos/configuration-lenovo.nix
-                  ./nixos/profiles/nix-daemon.nix
-                  ./nixos/profiles/experimental.nix
-                  ./nixos/profiles/neovim.nix
+                  ./nixos/hosts/desktop/config.nix
+                  ./nixos/hosts/desktop/hardware.nix
                   # ./nixos/profiles/peerix.nix
                   ./nixos/profiles/postgresql.nix
                   ./nixos/modules/xserver.nix
                   ./nixos/modules/redis.nix
                   ./nixos/modules/ntp.nix
-                  ./nixos/hardware-lenovo.nix
                   ./nixos/profiles/steam.nix
                   ./nixos/profiles/openssh.nix
                   # self.inputs.mptcp-flake.nixosModules.mptcp
@@ -371,51 +412,18 @@
 
 
         # nova = import ./nixpkgs/overlays/pkgs/default.nix;
-        local = import ./nixpkgs/overlays/pkgs/default.nix;
-        overrides = import ./nixpkgs/overlays/overrides.nix;
-        haskell = import ./nixpkgs/overlays/haskell.nix;
+        local = import ./overlays/pkgs/default.nix;
+        overrides = import ./overlays/overrides.nix;
+        haskell = import ./overlays/haskell.nix;
         # neovim = import ./nixpkgs/overlays/neovim.nix;
         neovimOfficial = self.inputs.neovim.overlay;
-        wireshark = import ./nixpkgs/overlays/wireshark.nix;
-        python = import ./nixpkgs/overlays/python.nix;
+        wireshark = import ./overlays/wireshark.nix;
+        python = import ./overlays/python.nix;
         # wayland = self.inputs.nixpkgs-wayland.overlay;
         mptcp = self.inputs.mptcp-flake.overlay;
-				# haskell environment for ghc9
-
-        # vimPlugins = final: prev: {
-        #   myVimPlugins = prev.vimPlugins.extend (
-        #     final: prev: {
-        #       octo-nvim = prev.buildVimPluginFrom2Nix {
-        #         pname = "octo-nvim";
-        #         version = "2021-05-06";
-        #         src = prev.fetchFromGitHub {
-        #           owner = "pwntester";
-        #           repo = "octo.nvim";
-        #           rev = "d92a7352516f06a457cbf8812b173abc319f7882";
-        #           sha256 = "1xvj3p32nzcn8rv2hscmj8sn8bfm1s2r5j1cwwnkl4zbqdbd4k5f";
-        #         };
-        #         meta.homepage = "https://github.com/pwntester/octo.nvim/";
-        #       };
-        #     }
-        #   );
-        # };
-            # prev.callPackage ./nixpkgs/overlays/vim-plugins/generated.nix {
-            # # inherit (prev.vimUtils) buildVimPluginFrom2Nix;
-            #     buildVimPluginFrom2Nix = prev.vimUtils.buildVimPluginFrom2Nix;
-            # }
-
-        # doesnt work, no "overrides" in vim-plugins/default.nix
-        # vimPlugins = final: prev: {
-          # vimPlugins = prev.vimPlugins.override {
-            # overrides = (prev.callPackage ./nixpkgs/overlays/vim-plugins/generated.nix {
-                # buildVimPluginFrom2Nix = prev.vimUtils.buildVimPluginFrom2Nix;
-              # });
-          # };
-        # };
-
         nur = nur.overlay;
-
       }
+	  # just for one specific host
       // nova.overlays
       ;
 
@@ -429,7 +437,6 @@
 			sops
 			age
 			deploy-rs.packages.${system}.deploy-rs
-
 		  ];
 		};
 		
@@ -454,10 +461,12 @@
         });
 
         # modules
-        moduleList = import ./nixos/modules/list.nix;
+		# TODO use the one from the overlay
+        moduleList = import ./modules/list.nix;
         modulesAttrs = listToAttrs (prep moduleList);
 
       in modulesAttrs
       ;
     };
 }
+#+END_SRC nix

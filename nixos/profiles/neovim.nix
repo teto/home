@@ -1,6 +1,7 @@
 { config, lib, pkgs,  ... }:
 {
 
+ # TODO add options in fact
   programs.neovim = {
 
     enable = false;

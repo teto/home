@@ -11,13 +11,14 @@
       "2.nixos.pool.ntp.org"
       # "3.nixos.pool.ntp.org"
     ];
+
+	# what are constraints ?
     extraConfig = ''
       server 0.nixos.pool.ntp.org trusted
       constraints from "https://www.google.com/"
       constraints from "https://www.nixos.org/"
     '';
   };
-
 
   services.ntp = {
     enable = false;

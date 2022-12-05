@@ -1,7 +1,5 @@
 # home-manager specific config from
 { config, lib, pkgs,  ... }:
-let
-in
 {
 
   imports = [

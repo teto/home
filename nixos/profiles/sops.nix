@@ -17,6 +17,7 @@
 
   # This is using an age key that is expected to already be in the filesystem
   sops.age.keyFile = "/home/teto/.config/sops/age/keys.txt";
+
   # This will generate a new key if the key specified above does not exist
   sops.age.generateKey = false;
 

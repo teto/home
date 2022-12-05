@@ -10,6 +10,7 @@ in
     # hostName = "toto.com";
     nginx.enable = true;
     config = {
+	 # TODO use sops instead !
       adminpass = secrets.nextcloud.password;
     };
     maxUploadSize = "512M";
