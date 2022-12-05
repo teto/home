@@ -3,18 +3,19 @@
 {
   imports = [
     # Not tracked, so doesn't need to go in per-machine subdir
-      ./profiles/desktop.nix
-      # ./profiles/vdirsyncer.nix
-      ./profiles/polybar.nix
-      ./profiles/sway.nix
-      ./profiles/neomutt.nix
-      ./profiles/nushell.nix
+      ../../hm/profiles/desktop.nix
+      ../../hm/profiles/polybar.nix
+      ../../hm/profiles/sway.nix
+      ../../hm/profiles/neomutt.nix
+      ../../hm/profiles/nushell.nix
+      ../../hm/profiles/mail.nix
+      ../../hm/profiles/alot.nix
+      ../../hm/profiles/emacs.nix
+      ../../hm/profiles/extra.nix
+      ../../hm/profiles/weechat.nix
       # ./hm/profiles/nova-dev.nix
-      ./profiles/mail.nix
-      ./profiles/alot.nix
-      ./profiles/emacs.nix
-      ./profiles/extra.nix
-      ./profiles/weechat.nix
+      # ./profiles/vdirsyncer.nix
+
   ];
 
   # Mic92/nix-index-database

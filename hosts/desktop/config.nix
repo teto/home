@@ -9,19 +9,33 @@ let
 in
 {
   imports = [
+		   ./hardware.nix
+
     # todo renommer en workstation
     ../../modules/docker-daemon.nix
 
     ../config-all.nix
     ../desktop.nix
-    ../../libvirtd.nix
-	../../profiles/nix-daemon.nix
-	../../profiles/experimental.nix
+	../../nixos/profiles/nix-daemon.nix
+	../../nixos/profiles/experimental.nix
+	../../nixos/profiles/postgresql.nix
+	../../nixos/profiles/steam.nix
+	../../nixos/profiles/openssh.nix
+	../../nixos/profiles/opensnitch.nix
+	../../nixos/profiles/gitlab-runner.nix
+    ../../nixos/profiles/steam.nix
+
+    ../../modules/libvirtd.nix
+	../../modules/xserver.nix
+	../../modules/redis.nix
+	../../modules/ntp.nix
+
+		   # just to check how /etc/nix/machines looks like
+		   ../../modules/distributedBuilds.nix
 
     # ./modules/syncthing.nix
 
     # ./modules/tor.nix
-    ./profiles/steam.nix
 
     # ./modules/sway.nix
   #   ./modules/mininet.nix

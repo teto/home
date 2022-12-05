@@ -16,6 +16,11 @@
       ./profiles/syncthing.nix
       ./profiles/japanese.nix
 
+	  ./hm/profiles/vscode.nix #  provided by nova-nix config
+	  ./hm/profiles/experimental.nix
+	  ./hm/profiles/emacs.nix
+	  ./hm/profiles/wayland.nix
+
       # not merged yet
       # ./hm/autoUpgrade.nix
   ];

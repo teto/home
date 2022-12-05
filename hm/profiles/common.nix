@@ -1,17 +1,4 @@
-{ config, pkgs, lib,  ... } @ args:
-let
-
-  secrets = import ../../nixpkgs/secrets.nix;
-  # change to a package
-  fzf-extras = let src = pkgs.fetchFromGitHub {
-    owner = "atweiden";
-    repo = "fzf-extras";
-    rev = "fe38c1c1a1512fb0ca5df31de28c909d9cc5847a";
-    sha256 = "1a690maplj3lyvcqi8af2m0fprm4hr2jlkciig1a6s77rzh1npdw";
-  };
-  in src;
-
-in
+{ config, pkgs, lib,  ... }:
 {
   news.display = "silent";
 
@@ -76,6 +63,7 @@ in
   # https://github.com/commercialhaskell/stack/issues/2358
   # home.file.".stack/config.yaml".source = ../home/stack.yaml;
 
+  # TODO use 22.11
   home.stateVersion = "21.11";
 
   # - https://github.com/carnager/rofi-scripts.git

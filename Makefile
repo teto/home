@@ -16,7 +16,7 @@ mkfile_dir := $(dir $(mkfile_path))
 lint: lint-nix lint-lua
 
 lint-nix:
-	nixpkgs-fmt -c .
+	nixpkgs-fmt --check .
 
 lint-lua:
 	stylua config/nvim/init.lua

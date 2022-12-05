@@ -1,14 +1,29 @@
-{ config, lib, pkgs,  ... }:
+{ config, lib, pkgs, ... }:
 let
   secrets = import ../../nixpkgs/secrets.nix;
 in
 {
   imports = [
+    ./hardware.nix
+    ../../modules/distributedBuilds.nix
     ../config-all.nix
     ../desktop.nix
     ../../modules/sway.nix
     ../../modules/syncthing.nix
     # ./modules/docker-daemon.nix
+    ../../modules/xserver.nix
+    ../../modules/sway.nix
+    # ./nixos/modules/redis.nix
+    ../../nixos/profiles/steam.nix
+    ../../nixos/profiles/qemu.nix
+    ../../nixos/profiles/adb.nix
+    ../../nixos/profiles/cron.nix
+    ../../nixos/profiles/nix-daemon.nix
+    ../../nixos/profiles/postgresql.nix
+    # usually inactive, just to test some stuff
+    ./nixos/profiles/gitlab-runner.nix
+
+    ./modules/libvirtd.nix
 
     # ./modules/hoogle.nix
     # ./profiles/pixiecore.nix
@@ -17,18 +32,39 @@ in
     # may provoke some issues like switch hanging
     # ./modules/kubernetes.nix
     # ./modules/tor.nix
-  ] ;
+  ];
 
   # TODO conditionnally enable it
   # networking.wireless.iwd.enable = true;
+  # boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.grub.enableCryptodisk = true;
+  boot.loader.grub.enable = true;
+  boot.loader.grub.version = 2;
+  boot.loader.grub.device = "nodev";
+  boot.loader.grub.efiSupport = true;
+
+  boot.initrd.luks.devices.luksRoot = {
+    # device = "/dev/disk/by-uuid/6bd496bf-55ac-4e56-abf0-ad1f0db735b2";
+    device = "/dev/sda2";
+    preLVM = true; # luksOpen will be attempted before LVM scan or after it
+    # fallbackToPassword = true;
+    allowDiscards = true; # allow TRIM requests (?!)
+  };
+  # boot.kernelParams = [
+  # CPU performance scaling driver
+  #"intel_pstate=no_hwp" 
+  # ];
+
+  networking.hostName = "mcoudron"; # Define your hostname.
 
   # it apparently still is quite an important thing to have
   # boot.devSize = "5g";
 
-  boot.kernelParams = [ 
-	# "acpi_backlight=vendor"
-	# "i915.enable_psr=0"  # disables a power saving feature that can cause flickering
-	];
+  boot.kernelParams = [
+    # "acpi_backlight=vendor"
+    # "i915.enable_psr=0"  # disables a power saving feature that can cause flickering
+  ];
 
   # TODO use the mptcp one ?
   # boot.kernelPackages = pkgs.linuxPackages;
@@ -63,9 +99,9 @@ in
   # just trying to make some steam warnings go away
   services.upower.enable = true;
 
-  hardware= {
+  hardware = {
     # enableAllFirmware =true;
-    enableRedistributableFirmware =true;
+    enableRedistributableFirmware = true;
     sane.enable = true;
     # High quality BT calls
     bluetooth = {
@@ -99,9 +135,9 @@ in
 
   # TODO move to laptop
   # see https://github.com/NixOS/nixpkgs/issues/57053
-#  boot.extraModprobeConfig = ''
-#    options cfg80211 ieee80211_regdom="GB"
-#  '';
+  #  boot.extraModprobeConfig = ''
+  #    options cfg80211 ieee80211_regdom="GB"
+  #  '';
 
   security.sudo.extraConfig = ''
     Defaults        timestamp_timeout=60
@@ -137,16 +173,15 @@ in
 
   # for tests
   services.vault = {
-	enable = true;
-	dev = true;
-	devRootTokenID = secrets.vault.rootTokenId;
+    enable = true;
+    dev = true;
+    devRootTokenID = secrets.vault.rootTokenId;
   };
 
   environment.systemPackages = [
     # cups-pk-helper # to add printer through gnome control center
-      pkgs.lm_sensors # to see CPU temperature (command 'sensors')
-    ]
-  ;
+    pkgs.lm_sensors # to see CPU temperature (command 'sensors')
+  ];
 
   # service to update bios etc
   # managed to get this problem https://github.com/NixOS/nixpkgs/issues/47640
@@ -160,7 +195,7 @@ in
 
   # let's be fucking crazy
   # environment.enableDebugInfo = true;
-# } ++ lib.optionalAttrs (config.programs ? mininet) {
+  # } ++ lib.optionalAttrs (config.programs ? mininet) {
 
   networking.iproute2.enable = true;
 

@@ -1,4 +1,4 @@
-{ config, pkgs, options, lib, ... } @ mainArgs:
+{ config, pkgs, options, lib, ... }:
 let
 
   #ihaskellEnv = ghcWithPackages (self: [
