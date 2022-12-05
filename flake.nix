@@ -104,17 +104,11 @@
           # disables the Home Manager option nixpkgs.*
           home-manager.useGlobalPkgs = true;
 
-          home-manager.users."teto" = {
+          home-manager.users.teto = {
             imports = my_imports ++ [
               # custom modules
               (import ./hm/modules/zsh.nix)
-              # (import ./hm/modules/ranger.nix )
-              # (import ./hm/modules/fcitx.nix )
               (import ./hm/modules/xdg.nix)
-            ];
-
-            home.packages = [
-              # nova.packages."${system}".jinko-shiny
             ];
           };
         }
@@ -256,7 +250,7 @@
               # breaks build: doesnt like the "activation-script"
               # nova.hmConfigurations.dev
               (hm-custom [
-                ./hm/home-xps.nix
+                ./hosts/laptop/home.nix
                 ./hm/profiles/nova.nix
 
                 #   nova.hmProfiles.standard

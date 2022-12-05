@@ -21,9 +21,9 @@ in
     ../../nixos/profiles/nix-daemon.nix
     ../../nixos/profiles/postgresql.nix
     # usually inactive, just to test some stuff
-    ./nixos/profiles/gitlab-runner.nix
+    # ../../nixos/profiles/gitlab-runner.nix
 
-    ./modules/libvirtd.nix
+    ../../modules/libvirtd.nix
 
     # ./modules/hoogle.nix
     # ./profiles/pixiecore.nix

@@ -3,23 +3,22 @@
 {
 
   imports = [
-      ./profiles/desktop.nix
-      ./profiles/dev.nix
-
       # ./hm/vdirsyncer.nix
       # ./hm/nushell.nix
-      ./profiles/alot.nix
-      ./profiles/mail.nix
-      ./profiles/sway.nix
-      ./profiles/weechat.nix
-      ./profiles/extra.nix
-      ./profiles/syncthing.nix
-      ./profiles/japanese.nix
+      ../../hm/profiles/desktop.nix
+      ../../hm/profiles/mail.nix
+      ../../hm/profiles/sway.nix
+      ../../hm/profiles/weechat.nix
+      ../../hm/profiles/extra.nix
+      ../../hm/profiles/syncthing.nix
+      ../../hm/profiles/japanese.nix
 
-	  ./hm/profiles/vscode.nix #  provided by nova-nix config
-	  ./hm/profiles/experimental.nix
-	  ./hm/profiles/emacs.nix
-	  ./hm/profiles/wayland.nix
+      ../../hm/profiles/alot.nix
+      ../../hm/profiles/dev.nix
+	  ../../hm/profiles/vscode.nix #  provided by nova-nix config
+	  ../../hm/profiles/experimental.nix
+	  ../../hm/profiles/emacs.nix
+	  ../../hm/profiles/wayland.nix
 
       # not merged yet
       # ./hm/autoUpgrade.nix
