@@ -25,6 +25,8 @@ in
 
   ];
 
+  sops.defaultSopsFile = ./secrets.yaml;
+
   services.nextcloud.hostName = secrets.gitolite_server.hostname;
 
   environment.systemPackages = with pkgs; [

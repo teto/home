@@ -7,7 +7,8 @@ keys:
   # - &admin_alice 2504791468b153b8a3963cc97ba53d1919c5dfd4
   - &teto age18etpu3xwwsv87ysarwndzaxdv3dw7a7zzytxrhdc2gtls0cr0elsa79uc5
 creation_rules:
-  - path_regex: secrets/[^/]+\.yaml$
+  # - path_regex: secrets/[^/]+\.yaml$
+  - path_regex: hosts/.*/secrets.yaml
     key_groups:
     - age:
       - *teto

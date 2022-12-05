@@ -14,7 +14,7 @@ Normally NixOS does not output to serial in the boot process, so we need to enab
 */
 { config, lib, pkgs,  ... }:
 let
-  secrets = import ../../../nixpkgs/secrets.nix;
+  secrets = import ../../nixpkgs/secrets.nix;
 
   bridgeNetwork = { address = "10.0.0.0"; prefixLength = 24; };
 
@@ -31,8 +31,8 @@ in
   imports = [
 	./hardware.nix
     ../config-all.nix
-    ../../profiles/openssh.nix
-    ../../profiles/router.nix
+    ../../nixos/profiles/openssh.nix
+    ../../nixos/profiles/router.nix
 	# TODO use ${modulePath} instead
      # self.inputs.nixos-hardware.nixosModules.pcengines-apu 
 

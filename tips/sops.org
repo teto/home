@@ -1,6 +1,11 @@
 #+BEGIN_SRC
 #+END_SRC
 
+* variables of interest
+  - SOPS_AGE_KEY
+  - SOPS_AGE_KEY_FILE 
+  - SOPS_AGE_RECIPIENTS
+
 https://github.com/mozilla/sops#encrypting-using-age
 
 To use an alternate key:

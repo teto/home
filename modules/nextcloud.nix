@@ -1,6 +1,6 @@
 { config, lib, pkgs,  ... }:
 let
-  secrets = import ../secrets.nix;
+  secrets = import ../nixpkgs/secrets.nix;
 in
 {
 
@@ -8,10 +8,9 @@ in
     enable = true;
     # machine specific
     # hostName = "toto.com";
-    nginx.enable = true;
     config = {
-	 # TODO use sops instead !
-      adminpass = secrets.nextcloud.password;
+	 # loaded via sops 
+	 adminpassFile = "/run/secrets/gitlab/registrationToken";
     };
     maxUploadSize = "512M";
     logLevel = 0;
@@ -23,6 +22,12 @@ in
   security.acme.certs."${secrets.gitolite_server.hostname}" = {
     webroot = "/var/www/challenges";
     email = "foo@example.com";
+  };
+
+  sops.secrets."nextcloud" = {
+    mode = "0440";
+    owner = config.users.users.nobody.name;
+    group = config.users.users.nobody.group;
   };
 
   # create some errors on deploy
