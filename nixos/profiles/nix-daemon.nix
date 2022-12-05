@@ -1,9 +1,6 @@
 { config, lib, pkgs,  ... }:
 {
   nix = {
-    # package = pkgs.nixUnstable;
-    # package = pkgs.nix;
-
     registry = {
       nur.to = { type = "github"; owner = "nix-community"; repo="NUR"; };
       hm.to = { type = "github"; owner = "nix-community"; repo="home-manager"; };
@@ -60,7 +57,7 @@
       #   builders-use-substitutes = true
       # '';
 
-      #       "https://teto.cachix.org"
+      # "https://teto.cachix.org"
       settings = {
         substituters = [
         # "https://cache.nixos.org/" # part of the default

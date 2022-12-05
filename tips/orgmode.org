@@ -2,3 +2,8 @@ https://github.com/nvim-orgmode/orgmode
 Global mappins
 Open agenda prompt: <Leader>oa
 Open capture prompt: <Leader>oc
+
+
+#+BEGIN_SRC :shell
+echo "hello world"
+#+END_SRC

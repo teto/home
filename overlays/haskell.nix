@@ -22,6 +22,7 @@ final: prev:
 		hs.ghc
         hs.haskell-language-server 
         hs.cabal-install
+		prev.cairo
       ]);
     in [
 		# pkgs.haskell.compiler.ghc94

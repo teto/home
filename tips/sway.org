@@ -1,5 +1,8 @@
 # to run on a nvidia card
---unsupported-gpu
+* Proprietary Nvidia drivers are in use
+  --unsupported-gpu
+
+* Failed to query DRI3 DRM FD
 
 restart 
 swaymsg reload
@@ -9,4 +12,5 @@ xwayland disable
 
 # to list xwayland clients
 xlsclients
+
 

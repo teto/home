@@ -1,6 +1,8 @@
 systemd-analyze blame
 systemd-analyze verify toto.unit
 
+systemctl service-log-level
+
 systemctl --failed --user
 
 # coredump

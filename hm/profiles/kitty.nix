@@ -2,7 +2,12 @@
 {
   programs.kitty = {
     enable = true;
-    font.name = "Ubuntu";
+	# we need a monospace font
+	# check that it supports italic with font-manager or 
+	# printf '\e[3mAB'
+    # font.name = "Source Code Pro";
+	font.name = "Ubuntu";
+
 	# _ksi_preexec breaks my own preexec !
     shellIntegration.enable = false;
     settings = {

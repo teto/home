@@ -1,0 +1,131 @@
+Les cluster names sont accessible
+
+aws eks update-kubeconfig --name jinko-prod
+kubectl get -n [[XXXX]] ingress
+
+kubectl cluster-info
+
+sts = StatefulSets
+pvc = persistentvolumeclaim
+
+** restart a job 
+ 
+  kubectl get job "your-job" -o json > your-job.json
+ 
+ # on peut avoir plusieurs contextes
+ KUBECONFIG=~/.kube/config:~/.kube/kubconfig2
+ kubectl config view
+ kubectl config get-contexts
+ 
+ kubectl get secrets
+ kubectl -n jinko-preprod describe secrets/jinko-core-env 
+ kubectl get secret <SECRET_NAME> -o jsonpath="{.data.<DATA>}" | base64 --decode
+ 
+ imagePullPolicy: Always
+ sha256:f5e2cba84a0de9ed9148fb2ac72cd0af7ff2c351b8f0428d46c2d03417c8f78e
+ 
+ https://github.com/kubernetes-sigs/kustomize/issues/2234
+ 
+ 1/ make gitops
+ check the
+ 
+ kubectl logs
+ 
+ kubectl -n jinko-dev-teto logs jinko-dev-teto-unuou-integration-test
+ kubectl -n jinko-dev-teto get po
+ kubectl -n jinko-dev-teto get po -o yaml  jinko-dev-teto-hiicp-integration-test
+ 
+ aws eks update-kubeconfig --name jinko-dev --profile default
+ 
+ https://github.com/astefanutti/kubebox is pretty cool
+ 
+ kubectl exec -it [pod] sh 
+ 
+ 
+ kubectl edit deployment result-store-deployment
+ 
+ # To edit a live deployment
+ 
+ kubectl -n [ton namespace] get deployments
+ kubectl -n jinko-dev-teto edit deployment jinko-dev-teto-result-store
+ kubectl -n jinko-dev-teto edit pods jinko-dev-teto-result-store
+ 
+ er Command (équivalent de Dodkcer entrypoint ou Arg (equivalent de Docker CMD
+ 
+ Yaml spec is at https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.19/#deploymentspec-v1-apps
+ 
+ containers:
+ - envFrom:
+ - configMapRef:
+ 	name: jinko-dev-teto-shared-env
+ 
+ /!\ command correspond a `entrypoint` dans docker
+ args correspond a `command` dans 
+ args:
+   - --port 5000
+   - --region Frankfurt
+ 
+ 
+ kube on nixos
+ to use the local cluster:
+ export KUBECONFIG=/etc/kubernetes/cluster-admin.kubeconfig
+ 
+ 
+ Pour savoir comment il va choper les images docker:
+ 
+ ImagePullPolicy:
+ IfNotexist
+ Always
+ 
+ # debug a container
+ kubectl describe pod
+ kubectl logs --previous
+ use `-v=9` (between 0 and 9)
+ https://kubernetes.io/docs/reference/kubectl/cheatsheet/#kubectl-output-verbosity-and-debugging
+ 
+ $ minikube start
+ 
+ 
+ # todo port forwarding
+ kubectl -n XXX port-forward svc/XXX-mongodb 7000:27017
+ 
+ # will show cronjobs 
+ kubectl -n $YOUR_NS get jobs
+ kubectl -n $YOUR_NS get cronjob 
+ 
+ kubectl -n $YOUR_NS create job --from cronjob/[cronjob name for garbage collect] [arbitrary name that will be used to create a job]
+ 
+ 
+ # how to restart a container ?
+ 
+ kubectl exec -it [POD_NAME] -c [CONTAINER_NAME] -- /bin/sh -c "kill 1"
+ docker kill
+ https://stackoverflow.com/questions/46123457/restart-container-within-pod
+ 
+ kubectl explain pods
+ 
+ pod = set of containers
+ 
+ 
+ kubectl get pods --all-namespaces
+ kubectl -n jinko-janssen-prod get hpa
+ kubectl -n jinko-janssen-prod delete hpa --all
+ horizontal ... autoscaler
+ 
+ kubectl -n jinko-janssen-prod get pod jinko-janssen-prod-result-store-749f78579d-qmgzw -o json 
+ 
+ kubectl -n jinko-janssen-prod get hpa -o yaml > test.yaml 
+ then i edited it then I applied the patch
+ 
+ Cool cheatsheet !!
+ https://kubernetes.io/fr/docs/reference/kubectl/cheatsheet/
+ 
+ Nice utilities
+ - kubebox
+ - k9s
+ 
+ # to see the 
+ kubectl config current-context
+ kubectl config set-context
+ 
+ kubectl config use-context arn....

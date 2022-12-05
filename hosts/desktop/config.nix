@@ -196,7 +196,7 @@ in
 
   # this is required as well
   hardware.nvidia= {
-    # modesetting.enable = true;
+    modesetting.enable = true;
   # hardware.nvidia.package
   };
 

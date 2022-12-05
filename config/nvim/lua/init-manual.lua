@@ -198,6 +198,7 @@ vim.opt.guicursor =
 vim.api.nvim_set_hl(0, 'Cursor', { ctermfg = 16, ctermbg = 253, fg = '#000000', bg = '#00FF00' })
 vim.api.nvim_set_hl(0, 'CursorLine', { fg = 'None', bg = '#293739' })
 vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'grey' })
+vim.api.nvim_set_hl(0, 'LspCodeLens', { italic=true })
 
 -- local my_image = require('hologram.image'):new({
 --	   source = '/home/teto/doctor.png',
@@ -224,6 +225,7 @@ vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'grey' })
 -- }
 
 use {'shaunsingh/oxocarbon.nvim', branch = 'fennel'}
+use { 'aloussase/scout', rtp = 'vim' }
 
 -- use '~/neovim/fzf-lua' -- markdown syntax compatible with Github's
 use('rhysd/vim-gfm-syntax') -- markdown syntax compatible with Github's
@@ -482,7 +484,7 @@ use({ 'seandewar/nvimesweeper', opt = true })
 use({ 'voldikss/vim-translator', opt = true })
 use('calvinchengx/vim-aftercolors') -- load after/colors
 use('bfredl/nvim-luadev') -- lua repl :Luadev
-use('alok/notational-fzf-vim') -- to take notes, :NV
+-- use('alok/notational-fzf-vim') -- to take notes, :NV
 -- use {
 -- 	'hkupty/iron.nvim',
 -- 	config = function ()
@@ -706,13 +708,14 @@ use({
                     -- Whether to automatically display/refresh codeLenses
                     autoRefresh = true,
                 },
-                hoogle = {
-                    -- 'auto': Choose a mode automatically, based on what is available.
-                    -- 'telescope-local': Force use of a local installation.
-                    -- 'telescope-web': The online version (depends on curl).
-                    -- 'browser': Open hoogle search in the default browser.
-                    mode = 'auto',
-                }, 
+                -- hoogle = {
+                --     -- 'auto': Choose a mode automatically, based on what is available.
+                --     -- 'telescope-local': Force use of a local installation.
+                --     -- 'telescope-web': The online version (depends on curl).
+                --     -- 'browser': Open hoogle search in the default browser.
+                --     mode = 'auto',
+                -- }
+				-- ,
 				repl = {
 					-- 'builtin': Use the simple builtin repl
 					-- 'toggleterm': Use akinsho/toggleterm.nvim
@@ -734,7 +737,7 @@ use({
                     -- so auto-refresh (see advanced configuration) is enabled by default
                     vim.keymap.set('n', '<leader>ca', vim.lsp.codelens.run, opts)
                     vim.keymap.set('n', '<leader>cl', vim.lsp.codelens.run, opts)
-                    vim.keymap.set('n', '<leader>hs', ht.hoogle.hoogle_signature, opts)
+                    -- vim.keymap.set('n', '<leader>hs', ht.hoogle.hoogle_signature, opts)
                     -- default_on_attach(client, bufnr)  -- if defined, see nvim-lspconfig
                 end,
                 -- ...
@@ -1032,19 +1035,19 @@ use({
 -- }
 
 -- telescope plugins {{{
-use({
-    '~/telescope.nvim',
-    requires = {
-        'nvim-telescope/telescope-github.nvim',
-        'nvim-telescope/telescope-symbols.nvim',
-        'nvim-telescope/telescope-fzy-native.nvim',
-        'nvim-telescope/telescope-media-files.nvim',
-        'nvim-telescope/telescope-packer.nvim', -- :Telescope pack,e
-        'MrcJkb/telescope-manix',   -- :Telescope manix
-		'luc-tielen/telescope_hoogle'
-		-- psiska/telescope-hoogle.nvim looks less advanced
-    },
-})
+-- use({
+--     '~/telescope.nvim',
+--     requires = {
+--         'nvim-telescope/telescope-github.nvim',
+--         'nvim-telescope/telescope-symbols.nvim',
+--         'nvim-telescope/telescope-fzy-native.nvim',
+--         'nvim-telescope/telescope-media-files.nvim',
+--         'nvim-telescope/telescope-packer.nvim', -- :Telescope pack,e
+--         'MrcJkb/telescope-manix',   -- :Telescope manix
+-- 		'luc-tielen/telescope_hoogle'
+-- 		-- psiska/telescope-hoogle.nvim looks less advanced
+--     },
+-- })
 --}}}
 
 -- use "terrortylor/nvim-comment"
@@ -1507,12 +1510,6 @@ end)
 
 -- nnoremap ( "n", "<leader>S",  function() require('spectre').open() end )
 
--- replace with telescope
--- nnoremap { "<Leader>t", function () vim.cmd("FzfTags") end}
--- nnoremap <Leader>h <Cmd>FzfHistory<CR>
--- nnoremap <Leader>c <Cmd>FzfCommits<CR>
--- nnoremap <Leader>C <Cmd>FzfColors<CR>
-
 -- use 'folke/which-key.nvim' -- :WhichKey
 
 local has_whichkey, wk = pcall(require, 'which-key')
@@ -1563,51 +1560,6 @@ end
 
 -- since it was not merge yet
 
---vim.ui.pick = function(entries, opts)
---    acceptable_files = vim.tbl_values(entries)
-
---    local pickers = require('telescope.pickers')
---    local finders = require('telescope.finders')
---    local actions = require('telescope.actions')
---    local action_state = require('telescope.actions.state')
-
---    print('use my custom function')
---    local prompt = 'default prompt'
---    if opts ~= nil then
---        prompt = opts.prompt
---    end
-
---    local selection = pickers
---        .new({
---            prompt_title = prompt,
---            finder = finders.new_table({
---                results = acceptable_files,
---                entry_maker = function(line)
---                    return {
---                        value = line,
-
---                        ordinal = line,
---                        display = line,
---                        --	   filename = base_directory .. "/data/memes/planets/" .. line,
---                    }
---                end,
-
---                attach_mappings = function(prompt_bufnr)
---                    actions.select_default:replace(function()
---                        selection = action_state.get_selected_entry()
---                        actions.close(prompt_bufnr)
---                        print('Selected', selection)
---                        return selection
---                    end)
---                    return true
---                end,
---            }),
---        })
---        :find()
---    -- print("Selected", selection)
-
---    return selection
---end
 
 -- review locally github PRs
 local has_octo, octo = pcall(require, 'octo')
@@ -1832,7 +1784,7 @@ require('teto.treesitter')
 
 -- telescope {{{
 -- TODO check for telescope github extension too
-if has_telescope then
+if false then
     -- telescope.load_extension('ghcli')
     local actions = require('telescope.actions')
     local trouble = require('trouble')
@@ -1943,13 +1895,14 @@ if has_telescope then
 	telescope.load_extension('hoogle')
     telescope.load_extension('frecency')
     telescope.load_extension('manix')
+	-- telescope.load_extension('scout')
 
     -- TODO add autocmd
     -- User TelescopePreviewerLoaded
 end
 --}}}
 
-function contextMenu()
+local contextMenu = function ()
     local choices = { 'choice 1', 'choice 2' }
     require('contextmenu').open(choices, {
         callback = function(chosen)

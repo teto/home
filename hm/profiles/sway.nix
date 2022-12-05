@@ -79,14 +79,14 @@ in
 	  smart_gaps yes
 
 	  # Generated windows.
-for_window [title="(?:Open|Save) (?:File|Folder|As)"] floating enable;
-for_window [title="(?:Open|Save) (?:File|Folder|As)"] resize set 800 600
-for_window [window_role="pop-up"] floating enable
-for_window [window_role="bubble"] floating enable
-for_window [window_role="task_dialog"] floating enable
-for_window [window_role="Preferences"] floating enable
-for_window [window_type="dialog"] floating enable
-for_window [window_type="menu"] floating enable
+	  for_window [title="(?:Open|Save) (?:File|Folder|As)"] floating enable;
+	  for_window [title="(?:Open|Save) (?:File|Folder|As)"] resize set 800 600
+	  for_window [window_role="pop-up"] floating enable
+	  for_window [window_role="bubble"] floating enable
+	  for_window [window_role="task_dialog"] floating enable
+	  for_window [window_role="Preferences"] floating enable
+	  for_window [window_type="dialog"] floating enable
+	  for_window [window_type="menu"] floating enable
     '';
   };
 

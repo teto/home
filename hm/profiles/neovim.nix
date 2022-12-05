@@ -160,9 +160,9 @@ let
 	#   optional = true;
 	# })
 
-    # (luaPlugin {
-    #   plugin = sniprun;
-    # })
+    (luaPlugin {
+      plugin = sniprun;
+    })
 
     (luaPlugin {
       plugin = urlview-nvim;
@@ -383,7 +383,7 @@ let
     }
 
 	# FIX https://github.com/NixOS/nixpkgs/issues/169293 first
-    (luaPlugin { plugin = telescope-frecency-nvim; })
+    # (luaPlugin { plugin = telescope-frecency-nvim; })
 	{ plugin = nvimdev-nvim; optional= true;}
 	# { plugin = neomake; }
     # {
