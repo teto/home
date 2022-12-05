@@ -70,6 +70,7 @@
     let
       inherit (builtins) listToAttrs baseNameOf;
       # inherit (nixpkgsFinal.lib) removeSuffix;
+	  secrets = import ./nixpkgs/secrets.nix;
 
       system = "x86_64-linux";
 
@@ -284,30 +285,25 @@
               # (import ./nixos/modules/hoogle.nix)
               ({ pkgs, ... }: {
                 nixpkgs.overlays = nixpkgs.lib.attrValues self.overlays;
-                nix.distributedBuilds = true;
 
                 imports = [
-                  ./nixos/hosts/jakku/config.nix
-                  ./nixos/profiles/nix-daemon.nix
-                  ./nixos/profiles/neovim.nix
-                  # ./nixos/profiles/peerix.nix
-                  ./nixos/modules/ntp.nix
-                  ./nixos/profiles/openssh.nix
-                  # self.inputs.mptcp-flake.nixosModules.mptcp
-                  # ./nixos/profiles/mptcp.nix
-
+                  ./hosts/jakku/config.nix
                   # just to check how /etc/nix/machines looks like
                   # ./nixos/modules/distributedBuilds.nix
                 ];
               })
               hm.nixosModules.home-manager
-
               # TODO use from flake or from unstable
-              (hm-custom [
-                ./hm/home-lenovo.nix
-              ])
+              # (hm-custom [
+                # ./hm/home-lenovo.nix
+              # ])
             ]
             ;
+            specialArgs = {
+			  hostname = "jakku";
+			  inherit secrets;
+			};
+
           };
 
           jedha = nixpkgs.lib.nixosSystem {

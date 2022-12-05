@@ -1,6 +1,6 @@
 { config, modulesPath, pkgs, lib, ... }:
 let
-  secrets = import ../secrets.nix;
+  secrets = import ../../nixpkgs/secrets.nix;
 in
 {
 
@@ -11,9 +11,13 @@ in
       ./hardware.nix
       ../common-server.nix
       ../../modules/gitolite.nix
-      ../../modules/openssh.nix
       # ../../modules/hercules-ci-agents.nix
       ../../modules/nextcloud.nix
+      ../../modules/ntp.nix
+	   ../../nixos/profiles/nix-daemon.nix
+	   ../../nixos/profiles/neovim.nix
+	   ../../nixos/profiles/openssh.nix
+
       # ../modules/blog.nix
 
       # just to help someone on irc
@@ -25,22 +29,17 @@ in
 
   environment.systemPackages = with pkgs; [
     tmux
-    weechat
+    # weechat
   ];
 
- # type = types.enum ["yes" "without-password" "prohibit-password" "forced-commands-only" "no"];
   services.gitolite.adminPubkey = secrets.gitolitePublicKey;
-
-  boot.loader.grub.enable = true;
-  boot.loader.grub.version = 2;
-  boot.loader.grub.device = "/dev/sda";
 
   networking.hostName = "jakku";
 
-  networking.defaultGateway = secrets.gateway;
-  networking.nameservers = secrets.nameservers;
+  # networking.defaultGateway = secrets.gateway;
+  # networking.nameservers = secrets.nameservers;
 
-  networking.interfaces.ens192 = secrets.gitolite_server.interfaces;
+  # networking.interfaces.ens192 = secrets.gitolite_server.interfaces;
 
   # allow to fetch mininet from the host machine
 
