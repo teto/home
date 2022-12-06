@@ -198,7 +198,6 @@ vim.opt.guicursor =
 vim.api.nvim_set_hl(0, 'Cursor', { ctermfg = 16, ctermbg = 253, fg = '#000000', bg = '#00FF00' })
 vim.api.nvim_set_hl(0, 'CursorLine', { fg = 'None', bg = '#293739' })
 vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'grey' })
-vim.api.nvim_set_hl(0, 'LspCodeLens', { italic=true })
 
 -- local my_image = require('hologram.image'):new({
 --	   source = '/home/teto/doctor.png',
@@ -629,6 +628,14 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     end,
 })
 nnoremap('n', '<leader>ml', '<Cmd>Modeliner<Enter>')
+
+vim.api.nvim_create_autocmd('ColorScheme', {
+    callback = function()
+		vim.api.nvim_set_hl(0, 'LspCodeLens', { italic=true })
+    end,
+})
+
+
 vim.g.Modeliner_format = 'et ff= fenc= sts= sw= ts= fdm='
 
 -- " auto reload vim config on save
