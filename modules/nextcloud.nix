@@ -21,15 +21,15 @@ in
   networking.firewall.allowedTCPPorts = [ 80 443 ];
 
   # ${secrets.gitolite_server.hostname}
-  security.acme.certs."${secrets.jakku.hostname}" = {
-    webroot = "/var/www/challenges";
-    email = "foo@example.com";
-  };
+  # security.acme.certs."${secrets.jakku.hostname}" = {
+  #   webroot = "/var/www/challenges";
+  #   email = "foo@example.com";
+  # };
 
-  sops.secrets."nextcloud" = {
+  sops.secrets."nextcloud/adminPassword" = {
     mode = "0440";
-    owner = config.users.users.nobody.name;
-    group = config.users.users.nobody.group;
+    owner = config.users.users.nextcloud.name;
+    group = config.users.users.nextcloud.group;
   };
 
   # create some errors on deploy
