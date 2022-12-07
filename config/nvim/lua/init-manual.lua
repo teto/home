@@ -828,7 +828,7 @@ use({
             },
             select = {
                 -- Priority list of preferred vim.select implementations
-                backend = { 'telescope', 'fzf', 'builtin', 'nui' },
+                backend = { 'fzf_lua', 'telescope', 'builtin', 'nui' },
 
                 -- Options for fzf selector
                 fzf = {
@@ -855,7 +855,7 @@ use({
                 -- max_width = 80,
                 -- max_height = 40,
                 -- },
-
+-- dressing.select.builtin.win_options.winblend 
                 -- Options for built-in selector
                 builtin = {
                     -- These are passed to nvim_open_win
@@ -864,7 +864,9 @@ use({
                     border = 'rounded',
 
                     -- Window options
-                    winblend = 10,
+					win_options = {
+						winblend = 10,
+					},
 
                     -- These can be integers or a float between 0 and 1 (e.g. 0.4 for 40%)
                     -- the min_ and max_ options can be a list of mixed types.

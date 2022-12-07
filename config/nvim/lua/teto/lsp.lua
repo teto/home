@@ -254,9 +254,9 @@ lspconfig.clangd.setup({
 --		on_attach = attach_cb.on_attach
 -- })
 
-function lsp_diagnostic_toggle_virtual_text()
-  local virtual_text = vim.b.lsp_virtual_text_enabled
-  virtual_text = not virtual_text
-  vim.b.lsp_virtual_text_enabled = virtual_text
-  vim.lsp.diagnostic.display(vim.lsp.diagnostic.get(0, 1), 0, 1, {virtual_text = virtual_text})
-end
+-- local function lsp_diagnostic_toggle_virtual_text()
+--   local virtual_text = vim.b.lsp_virtual_text_enabled
+--   virtual_text = not virtual_text
+--   vim.b.lsp_virtual_text_enabled = virtual_text
+--   vim.lsp.diagnostic.display(vim.lsp.diagnostic.get(0, 1), 0, 1, {virtual_text = virtual_text})
+-- end
