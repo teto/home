@@ -210,28 +210,24 @@ in
 
   # this is required as well
   hardware.nvidia = {
-    modesetting.enable = true;
+   # this makes screen go black on boot :/
+    modesetting.enable = false; # needs "modestting" in videoDrivers ?
     # hardware.nvidia.package
   };
 
 
   # config from https://discourse.nixos.org/t/nvidia-users-testers-requested-sway-on-nvidia-steam-on-wayland/15264/32
-  environment.etc."gbm/nvidia-drm_gbm.so".source = "${nvidiaPackage}/lib/libnvidia-allocator.so";
-  environment.etc."egl/egl_external_platform.d".source = "/run/opengl-driver/share/egl/egl_external_platform.d/";
+  # environment.etc."gbm/nvidia-drm_gbm.so".source = "${nvidiaPackage}/lib/libnvidia-allocator.so";
+  # environment.etc."egl/egl_external_platform.d".source = "/run/opengl-driver/share/egl/egl_external_platform.d/";
   hardware.opengl.extraPackages = [
     # vaapiVdpau
     # libvdpau-va-gl
     # libva
   ];
   # security.sudo.wheelNeedsPassword = ;
-  services.xserver = {
     # disabled to run stable-diffusion
-    # "nvidia"
-    videoDrivers = [
-      # "modesetting"
-      # "fbdev"
-      "nvidia"
-    ];
+  services.xserver = {
+    videoDrivers = [ "modesetting" "fbdev" "nvidia" ];
     displayManager.gdm.wayland = true;
   };
   # system.replaceRuntimeDependencies

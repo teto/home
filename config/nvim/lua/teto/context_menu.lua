@@ -9,6 +9,15 @@ M.buf_has_lsp = function()
     )
 end
 
+--- Checks if current buf has LSPs attached
+---@return boolean
+M.buf_has_sniprun = function()
+    -- return not vim.tbl_isempty(
+    --     vim.lsp.buf_get_clients(vim.api.nvim_get_current_buf())
+    -- )
+	return true
+end
+
 -- local nonfile_bufs = require'nvpunk.util.nonfile_buffers'
 
 --- Checks if current buf is a file
@@ -150,14 +159,43 @@ M.set_telescope_rclick_menu = function()
     })
 end
 
+M.set_fzf_lua_rclick_menu = function()
+    M.set_rclick_submenu('MenuFzfLua', 'FzfLua   ', {
+        {'Find File             <space>tf',   '<space>tf'},
+        {'Live Grep             <space>tg',   '<space>tg'},
+        {'Recent Files          <space>th',   '<space>th'},
+    })
+end
+
 M.set_git_rclick_menu = function()
-    M.set_rclick_submenu('TetoGitMenu', 'Git         ', {
+    M.set_rclick_submenu('MenuTetoGit', 'Git         ', {
         {'Preview Changes       <space>g?',   '<space>g?'},
         {'Prev Hunk             <space>g[',   '<space>g['},
         {'Next Hunk             <space>g]',   '<space>g]'},
         {'Blame Line            <space>gb',   '<space>gb'},
     }, M.buf_is_file)
 end
+
+M.set_spectre_rclick_menu = function()
+    -- nnoremap <leader>sw <cmd>lua require('spectre').open_visual({select_word=true})<CR>
+    -- vnoremap <leader>s <cmd>lua require('spectre').open_visual()<CR>
+    -- "  search in current file
+    -- nnoremap <leader>sp viw:lua require('spectre').open_file_search()<cr>
+
+    M.set_rclick_submenu('MenuSpectre', 'Replace         ', {
+        {'Replace',  '<cmd>lua require("spectre").open()<cr>'},
+        {'Replace word',  '<cmd>lua require("spectre").open_visual({select_word=true})<cr>'},
+        {'Search file',  '<cmd>lua require("spectre").open()<cr>'},
+    }, function () return true end)
+end
+
+M.set_sniprun_rclick_menu = function()
+    M.set_rclick_submenu('MenuSnipRun', 'SnipRun', {
+        {'SnipRun',   '<cmd>SnipRun<cr>'},
+        {'SnipTerminate',   '<cmd>SnipTerminate<cr>'},
+    }, function () return true end)
+end
+
 
 M.setup_rclick_menu_autocommands = function()
     vim.api.nvim_create_autocmd(
@@ -168,6 +206,9 @@ M.setup_rclick_menu_autocommands = function()
             -- M.set_java_rclick_menu()
             -- M.set_nvimtree_rclick_menu()
             -- M.set_neotree_rclick_menu()
+            M.set_spectre_rclick_menu()
+            M.set_sniprun_rclick_menu()
+            -- M.set_orgmode_rclick_menu()
             M.set_telescope_rclick_menu()
             M.set_git_rclick_menu()
         end
