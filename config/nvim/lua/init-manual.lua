@@ -223,7 +223,7 @@ vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'grey' })
 --   end,
 -- }
 
-use {'shaunsingh/oxocarbon.nvim', branch = 'fennel'}
+use {'shaunsingh/oxocarbon.nvim'}
 use { 'aloussase/scout', rtp = 'vim' }
 
 -- use '~/neovim/fzf-lua' -- markdown syntax compatible with Github's
@@ -250,7 +250,7 @@ use 'eandrju/cellular-automaton.nvim' -- :CellularAutomaton make_it_rain
 
 -- use 'norcalli/nvim-terminal.lua' -- to display ANSI colors
 -- use '~/neovim/nvim-terminal.lua' -- to display ANSI colors
-use('bogado/file-line') -- to open a file at a specific line
+use({'bogado/file-line', branch="main"}) -- to open a file at a specific line
 -- use 'glacambre/firenvim' -- to use nvim in firefox
 -- call :NR on a region than :w . coupled with b:nrrw_aucmd_create,
 -- use 'chrisbra/NrrwRgn' -- to help with multi-ft files
@@ -1165,7 +1165,7 @@ use('PotatoesMaster/i3-vim-syntax')
 use('Matsuuu/pinkmare')
 use('flrnd/candid.vim')
 use('adlawson/vim-sorcerer')
-use('whatyouhide/vim-gotham')
+-- use('whatyouhide/vim-gotham')
 use('vim-scripts/Solarized')
 -- use 'npxbr/gruvbox.nvim' " requires lush
 use('romainl/flattened')
@@ -1285,8 +1285,9 @@ use('honza/vim-snippets')
 
 local has_cmp, cmp = pcall(require, 'cmp')
 
-if has_cmp then
-    use('michaeladler/cmp-notmuch')
+-- print("has_cmp", has_cmp)
+if false then
+    -- use('michaeladler/cmp-notmuch')
     -- nvim-cmp autocompletion plugin{{{
     cmp.setup({
         snippet = {
@@ -1782,9 +1783,6 @@ for i=1,9 do
 	vim.keymap.set('n',  '<leader>'..tostring(i) , "<cmd>BufferLineGoToBuffer "..tostring(i).."<CR>", { silent = true})
 end
 
--- nvim-colorizer {{{
-require('terminal').setup()
--- }}}
 use({
     'ethanholz/nvim-lastplace',
     config = function()
@@ -2007,34 +2005,34 @@ vim.cmd([[highlight IndentBlanklineIndent5 guifg=#61AFEF gui=nocombine]])
 vim.cmd([[highlight IndentBlanklineIndent6 guifg=#C678DD gui=nocombine]])
 
 local menu_add, menu_add_cmd = myMenu.menu_add, myMenu.menu_add_cmd
-menu_add('LSP.Declaration', '<cmd>lua vim.lsp.buf.declaration()<cr>')
-menu_add('LSP.Definition', '<cmd>lua vim.lsp.buf.definition()<cr>')
-menu_add('LSP.Hover', '<cmd>lua vim.lsp.buf.references()<cr>')
-menu_add('LSP.Rename', '<cmd>lua vim.lsp.buf.rename()<cr>')
-menu_add('LSP.Format', '<cmd>lua vim.lsp.buf.format()<cr>')
+-- menu_add('LSP.Declaration', '<cmd>lua vim.lsp.buf.declaration()<cr>')
+-- menu_add('LSP.Definition', '<cmd>lua vim.lsp.buf.definition()<cr>')
+-- menu_add('LSP.Hover', '<cmd>lua vim.lsp.buf.references()<cr>')
+-- menu_add('LSP.Rename', '<cmd>lua vim.lsp.buf.rename()<cr>')
+-- menu_add('LSP.Format', '<cmd>lua vim.lsp.buf.format()<cr>')
 
-menu_add('Toggle.Minimap', '<cmd>MinimapToggle<cr>')
-menu_add('Toggle.Obsession', '<cmd>Obsession<cr>')
-menu_add('Toggle.Blanklines', '<cmd>IndentBlanklineToggle<cr>')
+-- menu_add('Toggle.Minimap', '<cmd>MinimapToggle<cr>')
+-- menu_add('Toggle.Obsession', '<cmd>Obsession<cr>')
+-- menu_add('Toggle.Blanklines', '<cmd>IndentBlanklineToggle<cr>')
 -- menu_add("Toggle.Biscuits", 'lua require("nvim-biscuits").toggle_biscuits()')
 
-menu_add('REPL.Send line', [[<cmd>lua require'luadev'.exec(vim.api.nvim_get_current_line())<cr>]])
+-- menu_add('REPL.Send line', [[<cmd>lua require'luadev'.exec(vim.api.nvim_get_current_line())<cr>]])
 -- menu_add('REPL.Send selection ', 'call <SID>luadev_run_operator(v:true)')
 
-menu_add ("PopUp.Lsp_declaration", "<Cmd>lua vim.lsp.buf.declaration()<CR>")
-menu_add ("PopUp.Lsp_definition", "<Cmd>lua vim.lsp.buf.definition()<CR>")
-menu_add('PopUp.LSP_Rename', '<cmd>lua vim.lsp.buf.rename()<cr>')
-menu_add('PopUp.LSP_Format', '<cmd>lua vim.lsp.buf.format()<cr>')
+-- menu_add ("PopUp.Lsp_declaration", "<Cmd>lua vim.lsp.buf.declaration()<CR>")
+-- menu_add ("PopUp.Lsp_definition", "<Cmd>lua vim.lsp.buf.definition()<CR>")
+-- menu_add('PopUp.LSP_Rename', '<cmd>lua vim.lsp.buf.rename()<cr>')
+-- menu_add('PopUp.LSP_Format', '<cmd>lua vim.lsp.buf.format()<cr>')
 
-menu_add(
-    'Diagnostic.Display_in_QF',
-    '<cmd>lua vim.diagnostic.setqflist({open = true, severity = { min = vim.diagnostic.severity.WARN } })<cr>'
-)
-menu_add(
-    'Diagnostic.Set_severity_to_warning',
-    '<cmd>lua vim.diagnostic.config({virtual_text = { severity = { min = vim.diagnostic.severity.WARN } }})<cr>'
-)
-menu_add('Diagnostic.Set_severity_to_all', '<cmd>lua vim.diagnostic.config({virtual_text = { severity = nil }})<cr>')
+-- menu_add(
+--     'Diagnostic.Display_in_QF',
+--     '<cmd>lua vim.diagnostic.setqflist({open = true, severity = { min = vim.diagnostic.severity.WARN } })<cr>'
+-- )
+-- menu_add(
+--     'Diagnostic.Set_severity_to_warning',
+--     '<cmd>lua vim.diagnostic.config({virtual_text = { severity = { min = vim.diagnostic.severity.WARN } }})<cr>'
+-- )
+-- menu_add('Diagnostic.Set_severity_to_all', '<cmd>lua vim.diagnostic.config({virtual_text = { severity = nil }})<cr>')
 
 menu_add_cmd('Search.Search_and_replace', "lua require('spectre').open()")
 menu_add('Search.Test', 'let a=3')

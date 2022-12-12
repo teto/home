@@ -30,6 +30,10 @@ M.buf_is_file = function()
     -- )
 end
 
+M.buf_is_rest = function()
+  return vim.bo.filetype == "http"
+end
+
 --- Checks if current buf has DAP support
 ---@return boolean
 M.buf_has_dap = function()
@@ -114,12 +118,21 @@ M.set_lsp_rclick_menu = function()
         {'Go to Definition              gd',        'gd'},
         {'Go to Implementation          gI',        'gI'},
         {'Signature Help             <C-k>',     '<C-k>'},
-        {'Rename                 <space>rn', '<space>rn'},
+        {'Rename',  '<cmd>lua vim.lsp.buf.rename()<cr>'},
         {'References                    gr',        'gr'},
         {'Expand Diagnostics      <space>e',  '<space>e'},
-        {'Auto Format             <space>f',  '<space>f'},
+        {'Auto Format', '<cmd>lua vim.lsp.buf.format()<cr>'},
     }, M.buf_has_lsp)
 end
+-- menu_add(
+--     'Diagnostic.Display_in_QF',
+--     '<cmd>lua vim.diagnostic.setqflist({open = true, severity = { min = vim.diagnostic.severity.WARN } })<cr>'
+-- )
+-- menu_add(
+--     'Diagnostic.Set_severity_to_warning',
+--     '<cmd>lua vim.diagnostic.config({virtual_text = { severity = { min = vim.diagnostic.severity.WARN } }})<cr>'
+-- )
+-- menu_add('Diagnostic.Set_severity_to_all', '<cmd>lua vim.diagnostic.config({virtual_text = { severity = nil }})<cr>')
 
 M.set_dap_rclick_menu = function()
     M.set_rclick_submenu('TetoMenuDap', 'Debug       ', {
@@ -188,6 +201,14 @@ M.set_spectre_rclick_menu = function()
         {'Search file',  '<cmd>lua require("spectre").open()<cr>'},
     }, function () return true end)
 end
+-- menu_add('Rest.RunRequest', "<cmd>lua require('rest-nvim').run(true)<cr>")
+
+M.set_rest_rclick_menu = function()
+    M.set_rclick_submenu('MenuRest', 'Rest', {
+        {'Run request',    "<cmd>lua require('rest-nvim').run(true)<cr>"},
+    }, M.buf_is_rest)
+end
+
 
 M.set_sniprun_rclick_menu = function()
     M.set_rclick_submenu('MenuSnipRun', 'SnipRun', {
@@ -196,21 +217,60 @@ M.set_sniprun_rclick_menu = function()
     }, function () return true end)
 end
 
+M.set_repl_rclick_menu = function()
+    M.set_rclick_submenu('MenuRepl', 'Repl', {
+	 {'Send line', [[<cmd>lua require'luadev'.exec(vim.api.nvim_get_current_line())<cr>]]}
+        -- {'SnipRun',   '<cmd>SnipRun<cr>'},
+        -- {'SnipTerminate',   '<cmd>SnipTerminate<cr>'},
+    }, function () return true end)
+end
+
+M.set_toggle_rclick_menu = function()
+    M.set_rclick_submenu('MenuToggle', 'SnipRun', {
+        {'Minimap',   '<cmd>MinimapToggle<cr>'},
+        {'Obsession',   '<cmd>Obsession<cr>'},
+        {'Obsession',   '<cmd>IndentBlanklineToggle<cr>'},
+    }, function () return true end)
+end
+
+-- menu_add('Toggle.Minimap', '<cmd>MinimapToggle<cr>')
+-- menu_add('Toggle.Obsession', '<cmd>Obsession<cr>')
+-- menu_add('Toggle.Blanklines', '<cmd>IndentBlanklineToggle<cr>')
+-- -- menu_add("Toggle.Biscuits", 'lua require("nvim-biscuits").toggle_biscuits()')
+
+-- menu_add('REPL.Send line', [[<cmd>lua require'luadev'.exec(vim.api.nvim_get_current_line())<cr>]])
+-- -- menu_add('REPL.Send selection ', 'call <SID>luadev_run_operator(v:true)')
+
+-- menu_add ("PopUp.Lsp_declaration", "<Cmd>lua vim.lsp.buf.declaration()<CR>")
+-- menu_add ("PopUp.Lsp_definition", "<Cmd>lua vim.lsp.buf.definition()<CR>")
+-- menu_add('PopUp.LSP_Rename', '<cmd>lua vim.lsp.buf.rename()<cr>')
+-- menu_add('PopUp.LSP_Format', '<cmd>lua vim.lsp.buf.format()<cr>')
+
+-- menu_add(
+--     'Diagnostic.Display_in_QF',
+--     '<cmd>lua vim.diagnostic.setqflist({open = true, severity = { min = vim.diagnostic.severity.WARN } })<cr>'
+-- )
+-- menu_add(
+--     'Diagnostic.Set_severity_to_warning',
+--     '<cmd>lua vim.diagnostic.config({virtual_text = { severity = { min = vim.diagnostic.severity.WARN } }})<cr>'
+-- )
 
 M.setup_rclick_menu_autocommands = function()
     vim.api.nvim_create_autocmd(
         {'BufEnter', 'LspAttach'}, {
         callback = function()
             M.set_lsp_rclick_menu()
+            M.set_repl_rclick_menu()
             -- M.set_dap_rclick_menu()
             -- M.set_java_rclick_menu()
             -- M.set_nvimtree_rclick_menu()
-            -- M.set_neotree_rclick_menu()
+            M.set_rest_rclick_menu()
             M.set_spectre_rclick_menu()
             M.set_sniprun_rclick_menu()
             -- M.set_orgmode_rclick_menu()
             M.set_telescope_rclick_menu()
             M.set_git_rclick_menu()
+            M.set_toggle_rclick_menu()
         end
     })
 end

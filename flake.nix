@@ -224,7 +224,7 @@
             ];
           };
 
-          jakku = nixpkgs.lib.nixosSystem {
+          neotokyo = nixpkgs.lib.nixosSystem {
             inherit system;
             pkgs = nixpkgsFinal;
             modules = [
@@ -247,7 +247,7 @@
               # ])
             ];
             specialArgs = {
-              hostname = "jakku";
+              hostname = "neotokyo";
               inherit secrets;
             };
 
@@ -413,7 +413,7 @@
           {
             router = genNode ({ name = "router"; hostname = "192.168.1.12"; });
 
-            jakku = genNode ({ name = "jakku"; hostname = secrets.jakku.hostname; });
+            neotokyo = genNode ({ name = "neotokyo"; hostname = secrets.jakku.hostname; });
           };
         # nixpkgs.lib.listToAttrs (
         #   map

@@ -4,10 +4,8 @@ let
     final.wrapNeovimUnstable final.neovim-unwrapped (config // {
       extraName = "-${suffix}";
     });
-
-
 in
-rec {
+{
 
 
   # neovimHaskellConfig = prev.neovimUtils.makeNeovimConfig {

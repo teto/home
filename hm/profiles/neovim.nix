@@ -114,6 +114,7 @@ let
     { plugin = fennel-vim; }
     { plugin = vim-toml; }
     { plugin = dhall-vim; }
+    { plugin = vim-teal; }
     idris-vim
   ];
 
@@ -635,7 +636,8 @@ let
     # defined in overrides: TODO this should be easier: like fzf-vim should be enough
     fzfWrapper
 
-    { plugin = nvim-terminal-lua; }
+	#  nvim-colorizer 
+    (luaPlugin { plugin = nvim-terminal-lua; config = "require('terminal').setup()"; })
     {
       # display git diff while rebasing, pretty dope
       plugin = auto-git-diff;
