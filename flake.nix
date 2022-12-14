@@ -43,6 +43,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+	nix.url = "github:NixOS/nix";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nur.url = "github:nix-community/NUR";
     nixpkgs-wayland.url = "github:nix-community/nixpkgs-wayland";
@@ -79,6 +80,7 @@
           inherit system;
           overlays = (pkgs.lib.attrValues self.overlays) ++ [
             self.inputs.rofi-hoogle.overlay
+			# self.inputs.nix.overlays.default
           ];
           config = { allowUnfree = true; };
         };
@@ -195,6 +197,10 @@
 
           mcoudron = nixpkgs.lib.nixosSystem {
             inherit system;
+            specialArgs = {
+              inherit secrets;
+            };
+
             modules = [
               hm.nixosModules.home-manager
               # nova.nixosProfiles.dev
@@ -256,6 +262,10 @@
           jedha = nixpkgs.lib.nixosSystem {
             inherit system;
             pkgs = nixpkgsFinal;
+            specialArgs = {
+              inherit secrets;
+			  inherit (self) inputs;
+            };
             modules = [
               self.inputs.sops-nix.nixosModules.sops
               self.inputs.peerix.nixosModules.peerix

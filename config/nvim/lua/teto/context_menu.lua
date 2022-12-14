@@ -226,10 +226,10 @@ M.set_repl_rclick_menu = function()
 end
 
 M.set_toggle_rclick_menu = function()
-    M.set_rclick_submenu('MenuToggle', 'SnipRun', {
+    M.set_rclick_submenu('MenuToggle', 'Toggle ->', {
         {'Minimap',   '<cmd>MinimapToggle<cr>'},
         {'Obsession',   '<cmd>Obsession<cr>'},
-        {'Obsession',   '<cmd>IndentBlanklineToggle<cr>'},
+        {'Indent guides',   '<cmd>IndentBlanklineToggle<cr>'},
     }, function () return true end)
 end
 
