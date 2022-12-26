@@ -219,6 +219,8 @@ lspconfig.nil_ls.setup{}
 --	 }
 -- })
 
+lspconfig.teal_ls.setup({})
+
 lspconfig.clangd.setup({
 		--compile-commands-dir=build
 	cmd = {

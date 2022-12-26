@@ -1,0 +1,36 @@
+[[https://en.wikipedia.org/wiki/Extended_Display_Identification_Data][EDID Extended Display Identification Data]]
+i2cdetect -l
+
+Try loading the i2c-dev kernel module and trying again. No guarantees
+on parse-edid (it's working with a pretty old version of the
+standard), but get-edid should be able to get you a raw EDID file,
+which is useful in a bunch of different places, and you could also
+pass to a different EDID parsing program, if parse-edid finds modes it
+can't handle.
+
+Usually, i2c devices are controlled by a kernel driver. But it is also
+possible to access all devices on an adapter from userspace, through
+the /dev interface. You need to load module i2c-dev for this.
+
+Each registered i2c adapter gets a number, counting from 0. You can
+examine /sys/class/i2c-dev/ to see what number corresponds to which adapter.
+Alternatively, you can run "i2cdetect -l" to obtain a formatted list of all
+i2c adapters present on your system at a given time. i2cdetect is part of
+the i2c-tools package.
+
+I2C device files are character device files with major device number 89
+and a minor device number corresponding to the number assigned as
+explained above. They should be called "i2c-%d" (i2c-0, i2c-1, ...,
+i2c-10, ...). All 256 minor device numbers are reserved for i2c.
+
+
+ls /sys/class/i2c-adapter
+nix shell nixpkgs#i2c-tools
+nix shell nixpkgs#read-edid
+nix shell nixpkgs#edid-decode
+
+modinfo i2c-dev
+
+https://kodi.wiki/view/Archive:Creating_and_using_edid.bin_via_xorg.conf
+
+cat edid.bin|edid-decode

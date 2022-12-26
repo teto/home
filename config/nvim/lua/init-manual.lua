@@ -798,6 +798,11 @@ use({'nullchilly/fsread.nvim', config = function ()
 	-- vim.api.nvim_set_hl(0, "FSSuffix", { fg = "#6C7086" })
 end})
 
+local verbose_output = false
+require("tealmaker").build_all(verbose_output)
+
+-- use('svermeulen/nvim-teal-maker')
+
 -- overrides vim.ui / vim.select with the backend of my choice
 use({
     'stevearc/dressing.nvim',

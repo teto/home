@@ -34,6 +34,7 @@ let
     # nix-doc # to access nix doc (broken)
     manix
     nix-output-monitor
+    nix-update # nix-update <ATTR> to update a software
     nix-index # to list package contents
     nixpkgs-fmt
     nixpkgs-review

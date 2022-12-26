@@ -6,23 +6,24 @@ let
     config = lib.optionalString (attrs ? config && attrs.config != null) (genBlockLua attrs.plugin.pname attrs.config);
   };
 
-  genBlockLua = title: content: ''
-          -- ${title} {{{
-          ${content}
-          -- }}}
-    	  '';
+  genBlockLua = title: content: 
+   ''
+   -- ${title} {{{
+   ${content}
+   -- }}}
+   '';
 
   luaRcBlocks = {
     appearance = ''
-            -- draw a line on 80th column
-            vim.o.colorcolumn='80,100'
+		-- draw a line on 80th column
+		vim.o.colorcolumn='80,100'
       	'';
 
     # hi MsgSeparator ctermbg=black ctermfg=white
     # TODO equivalent of       set fillchars+=
     foldBlock = ''
-            vim.o.fillchars='foldopen:▾,foldclose:▸,msgsep:‾'
-      	  vim.o.foldcolumn='auto:2'
+		vim.o.fillchars='foldopen:▾,foldclose:▸,msgsep:‾'
+		vim.o.foldcolumn='auto:2'
       	'';
     # dealingwithpdf= ''
     #   " Read-only pdf through pdftotext / arf kinda fails silently on CJK documents
@@ -67,47 +68,6 @@ let
   # " , { 'tag': 'v3.12.0' }
   # Plug 'Olical/aniseed' " dependency of ?
   # Plug 'bakpakin/fennel.vim'
-  fennelPlugins = with pkgs.vimPlugins; [
-    # {  plugin = aniseed;
-    # runtime = {
-    #      "ftplugin/c.vim".text = "setlocal omnifunc=v:lua.vim.lsp.omnifunc";
-    # # "toto".text = ''
-    # # -- test fennel
-    # #  '';
-    # };
-    # # " let g:aniseed#env = v:true
-    # # " lua require('aniseed.env').init()
-    #  # }
-    # }
-    (luaPlugin {
-      plugin = hotpot-nvim;
-      # type = "lua";
-      config = ''
-        	require("hotpot").setup({
-        	  -- allows you to call `(require :fennel)`.
-        	  -- recommended you enable this unless you have another fennel in your path.
-        	  -- you can always call `(require :hotpot.fennel)`.
-        	  provide_require_fennel = false,
-        	  -- show fennel compiler results in when editing fennel files
-        	  enable_hotpot_diagnostics = true,
-        	  -- compiler options are passed directly to the fennel compiler, see
-        	  -- fennels own documentation for details.
-        	  compiler = {
-        		-- options passed to fennel.compile for modules, defaults to {}
-        		modules = {
-        		  -- not default but recommended, align lua lines with fnl source
-        		  -- for more debuggable errors, but less readable lua.
-        		  -- correlate = true
-        		},
-        		-- options passed to fennel.compile for macros, defaults as shown
-        		macros = {
-        		  env = "_COMPILER" -- MUST be set along with any other options
-        		}
-        	  }
-        	})
-        	 '';
-    })
-  ];
 
   filetypePlugins = with pkgs.vimPlugins; [
     { plugin = wmgraphviz-vim; }
@@ -273,7 +233,8 @@ let
           diff_opts = {
               internal = false
           }  -- If luajit is present
-        }'';
+		}
+		'';
     })
 
     # {
@@ -330,8 +291,8 @@ let
     (luaPlugin {
       plugin = nvim-spectre;
       config = ''
-        	  -- nnoremap ( "n", "<leader>S",  function() require('spectre').open() end )
-        	 '';
+		 -- nnoremap ( "n", "<leader>S",  function() require('spectre').open() end )
+		 '';
     })
 
     # (luaPlugin {
@@ -357,11 +318,13 @@ let
     (luaPlugin {
       # prettier quickfix
       plugin = nvim-bqf;
-      config = ''require'bqf'.setup({
+	  config = ''
+	   require'bqf'.setup({
 		preview = {
 		 delay_syntax = 0
 		}
-	  })'';
+	   })
+	   '';
     })
     (luaPlugin { plugin = fugitive-gitlab-vim; })
 
@@ -408,7 +371,6 @@ let
     # (luaPlugin { plugin = cmp-zsh; })
     # vim-vsnip
     # vim-vsnip-integ
-
   ];
 
 
@@ -902,9 +864,18 @@ let
 in
 {
 
+ imports = [
+   ../modules/neovim.nix
+ ];
+
   #  extraLuaPackages = ps: [ps.mpack];
   programs.neovim = {
     enable = true;
+
+	fennel.enable = false;
+	teal.enable = true;
+	orgmode.enable = true;
+	# autocompletion.enable = true;
 
     # take the one from the flake
     package = myPackage;
@@ -933,9 +904,12 @@ in
     #   vim.lsp.set_log_level("info")
     # '';
 
+	# TODO use lua from 
+
     # TODO add lsp stuff
     extraPackages = with pkgs; [
       # luaPackages.lua-lsp
+      lua53Packages.teal-language-server
       lua51Packages.luacheck
       haskellPackages.hasktags
       jq
