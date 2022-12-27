@@ -79,16 +79,17 @@ let
   ];
 
   luaPlugins = with pkgs.vimPlugins; [
-    {
-      plugin = nvim-treesitter;
-      runtime = {
-        "parser" = {
-          recursive = true;
-          # target
-          # target = "parser";
-          source = parserDir;
-        };
-      };
+    # {
+    #   plugin = nvim-treesitter;
+    #   runtime = {
+    #     "parser" = {
+    #       recursive = true;
+    #       # target
+    #       # target = "parser";
+    #       source = parserDir;
+    #     };
+    #   };
+
       # plugin = (nvim-treesitter.withPlugins (
       #     plugins: with plugins; [
       #       tree-sitter-bash
@@ -112,7 +113,7 @@ let
       # parser_install_dir = ${pkgs.buildEnv { name = "tree-sitter-grammars"; paths = tree-sitter-grammars; } }
       # }
       # '';
-    }
+    # }
     { plugin = satellite-nvim; }
     # { plugin = nvim-dap; }
     # (luaPlugin { 
@@ -120,11 +121,9 @@ let
     # # 	  -- -- , requires = { 'nvim-lua/popup.nvim' }
     #   optional = true;
     # })
-
     (luaPlugin {
       plugin = sniprun;
     })
-
     (luaPlugin {
       plugin = urlview-nvim;
     })

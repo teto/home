@@ -36,7 +36,11 @@ DEBUG_PLENARY="debug"
 
 log only if local p_debug = vim.fn.getenv "DEBUG_PLENARY"
 
-# how to search and replace across files
+* how to search and replace across files
+
+#+BEGIN_SRC lua
+print('Test')
+#+END_SRC
 
 `grepprg=rg --vimgrep --no-heading `
 

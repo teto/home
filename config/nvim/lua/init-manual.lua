@@ -788,6 +788,7 @@ use({
 
 -- use {'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async'}
 
+use "folke/neodev.nvim"
 
 -- for quickreading: use :FSToggle to Toggle flow state
 use({'nullchilly/fsread.nvim', config = function ()
@@ -798,10 +799,8 @@ use({'nullchilly/fsread.nvim', config = function ()
 	-- vim.api.nvim_set_hl(0, "FSSuffix", { fg = "#6C7086" })
 end})
 
-local verbose_output = false
-require("tealmaker").build_all(verbose_output)
-
--- use('svermeulen/nvim-teal-maker')
+-- local verbose_output = false
+-- require("tealmaker").build_all(verbose_output)
 
 -- overrides vim.ui / vim.select with the backend of my choice
 use({
@@ -1500,6 +1499,9 @@ if has_sniprun then
 		"VirtualTextOk",              -- "display ok results as virtual text (multiline is shortened)
 	},
 	})
+	vim.api.nvim_set_keymap('v', 'f', '<Plug>SnipRun', {silent = true})
+	vim.api.nvim_set_keymap('n', '<leader>f', '<Plug>SnipRunOperator', {silent = true})
+	vim.api.nvim_set_keymap('n', '<leader>ff', '<Plug>SnipRun', {silent = true})
 end
 
 vim.g.indicator_errors = ''

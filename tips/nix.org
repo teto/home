@@ -87,3 +87,8 @@ sudo NIXOS_INSTALL_BOOTLOADER=1 /nix/var/nix/profiles/system/bin/switch-to-confi
 
 # how to regen the nixos doc:
 $  ./nixos/doc/manual/md-to-db.sh
+
+
+# nix shell 
+
+does not execute hooks !
