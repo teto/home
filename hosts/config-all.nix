@@ -93,7 +93,7 @@ rec {
   environment.sessionVariables = {
     # XDG_CONFIG_HOME="@{HOME}/.config";
     XDG_CONFIG_HOME = "$HOME/.config";
-    EDITOR = "nvim";
+    # EDITOR = "nvim";
     # xdg-settings set default-web-browser firefox.desktop
     XDG_CACHE_HOME = "$HOME/.cache";
     XDG_DATA_HOME = "$HOME/.local/share";

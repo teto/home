@@ -26,16 +26,12 @@
     # ];
     # authorizedKeys = { }
 
-    # hostKeys to generate keys
-    # hostKeys
-
-
     # new format
     settings = {
       LogLevel = "VERBOSE";
       KbdInteractiveAuthentication = false;
       PasswordAuthentication = false;
-      # PermitRootLogin = "prohibit-password";
+      # PermitRootLogin = "no";
     };
 
     # forwardX11 = true;

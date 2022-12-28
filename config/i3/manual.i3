@@ -88,7 +88,7 @@ bindsym $mod+F3 [instance="pad_(?!ncmpcpp)"] move scratchpad; [instance="pad_ncm
 
 # split in vertical orientation
 # needs i3next
-bindsym $mod+v split toggle
+# bindsym $mod+v split toggle
 
 # enter fullscreen mode for the focused container
 # bindsym $mod+f fullscreen

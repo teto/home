@@ -39,6 +39,7 @@ in
 
   # Creating Nextcloud users and configure mail adresses
   # systemd.services.nextcloud-add-user = {
+   # --password-from-env  looks for the password in OC_PASS
   #   script = ''
   #     export OC_PASS="test123"
   #     ${config.services.nextcloud.occ}/bin/nextcloud-occ user:add --password-from-env user1

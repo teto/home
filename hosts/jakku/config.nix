@@ -9,6 +9,7 @@ in
 
     "${modulesPath}/virtualisation/openstack-config.nix"
     # ./hardware.nix
+	./openssh.nix
     ../common-server.nix
     ../../modules/gitolite.nix
     # ../../modules/hercules-ci-agents.nix
@@ -16,7 +17,6 @@ in
     ../../modules/ntp.nix
     ../../nixos/profiles/nix-daemon.nix
     ../../nixos/profiles/neovim.nix
-    ../../nixos/profiles/openssh.nix
 
     # ../modules/blog.nix
 

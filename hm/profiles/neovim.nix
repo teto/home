@@ -537,29 +537,36 @@ let
       plugin = stylish-nvim;
     })
     # 'diepm/vim-rest-console' " test rest APIs * Hit the trigger key (<C-j> by default).
-    # (luaPlugin {
-    #   plugin = rest-nvim;
-    #   config = ''
-    #     require("rest-nvim").setup({
-    #       -- Open request results in a horizontal split
-    #       result_split_horizontal = false,
-    #       -- Skip SSL verification, useful for unknown certificates
-    #       skip_ssl_verification = false,
-    #       -- Highlight request on run
-    #       highlight = {
-    # enabled = true,
-    # timeout = 150,
-    #       },
-    #       result = {
-    # -- toggle showing URL, HTTP info, headers at top the of result window
-    # show_url = true,
-    # show_http_info = true,
-    # show_headers = true,
-    #       },
-    #       -- Jump to request line on run
-    #       jump_to_request = false,
-    #     })'';
-    # })
+    (luaPlugin {
+      plugin = rest-nvim;
+      config = ''
+        require("rest-nvim").setup({
+          -- Open request results in a horizontal split
+          result_split_horizontal = false,
+          -- Skip SSL verification, useful for unknown certificates
+          skip_ssl_verification = false,
+          -- Highlight request on run
+          highlight = {
+		   enabled = true,
+		   timeout = 150,
+          },
+          result = {
+		   -- toggle showing URL, HTTP info, headers at top the of result window
+		   show_url = true,
+		   show_http_info = true,
+		   show_headers = true,
+		   -- disable formatters else they generate errors/add dependencies
+		   -- for instance when it detects html, it tried to run 'tidy'
+		   formatters = {
+			html = false,
+			jq = false
+		   },
+          },
+          -- Jump to request line on run
+          jump_to_request = false,
+		})
+		'';
+    })
 
     # it depends on nvim-treesitter
     (luaPlugin {
@@ -871,6 +878,7 @@ in
   #  extraLuaPackages = ps: [ps.mpack];
   programs.neovim = {
     enable = true;
+	# defaultEditor = false;
 
 	fennel.enable = false;
 	teal.enable = true;

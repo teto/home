@@ -45,9 +45,9 @@ let
     "${mod}+Tab" = "exec \"${pkgs.rofi}/bin/rofi -modi 'drun,window,ssh' -show drun\"";
     "${mod}+Ctrl+Tab" = "exec \"${pkgs.rofi}/bin/rofi -modi 'window' -show run\"";
     # TODO dwindow exclusively with WIN
-    "Super_L+Tab" = "exec \"${pkgs.rofi}/bin/rofi -modi 'run,drun,window,ssh' -show window\"";
-    "Super_L+a" = "exec \"${pkgs.rofi}/bin/rofi -modi 'run,drun,window,ssh' -show window\"";
-    "Mod4+Tab" = "exec \"${pkgs.rofi}/bin/rofi -modi 'run,drun,window,ssh' -show window\"";
+    "${mad}+Tab" = "exec \"${pkgs.rofi}/bin/rofi -modi 'run,drun,window,ssh' -show window\"";
+    "${mad}+a" = "exec \"${pkgs.rofi}/bin/rofi -modi 'run,drun,window,ssh' -show window\"";
+    # "${mad}+Tab" = "exec \"${pkgs.rofi}/bin/rofi -modi 'run,drun,window,ssh' -show window\"";
 
     # locker
     # "${mod}+Ctrl+L"="exec ${pkgs.i3lock-fancy}/bin/i3lock-fancy";
@@ -55,7 +55,7 @@ let
 
     "${mod}+Ctrl+h" = ''exec "${pkgs.rofi}/bin/rofi -modi 'clipboard:greenclip print' -show clipboard"'';
     "${mod}+g" = "exec ${pkgs.i3-easyfocus}/bin/i3-easyfocus";
-    "Super_L+w" = "exec ${pkgs.i3-easyfocus}/bin/i3-easyfocus";
+    "${mad}+w" = "exec ${pkgs.i3-easyfocus}/bin/i3-easyfocus";
 
     # broken
     # "${mod}+b" = "exec ${pkgs.buku_run}/bin/buku_run";
@@ -315,9 +315,6 @@ in
 
       # consider using lib.mkOptionDefault according to help
       keybindings =
-        let
-
-        in
         {
           "$mod+f" = "fullscreen";
           "$mod+Shift+f" = "fullscreen global";

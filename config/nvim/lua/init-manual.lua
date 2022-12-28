@@ -6,13 +6,29 @@ local has_telescope, telescope = pcall(require, 'telescope')
 local has_fzf_lua, _ = pcall(require, 'fzf-lua')
 
 -- my treesitter config
-local myMenu = require('teto.menu')
+-- local myMenu = require('teto.menu')
 
 -- local packerCfg =
 local packer = require('packer')
 local use, _ = packer.use, packer.use_rocks
 local nnoremap = vim.keymap.set
 local map = vim.keymap.set
+
+
+-- local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+-- if not vim.loop.fs_stat(lazypath) then
+--   vim.fn.system({
+--     "git",
+--     "clone",
+--     "--filter=blob:none",
+--     "--single-branch",
+--     "https://github.com/folke/lazy.nvim.git",
+--     lazypath,
+--   })
+-- end
+-- require("lazy").setup(plugins, opts)
+
+-- vim.opt.runtimepath:prepend(lazypath)
 
 -- HOW TO TEST our fork of plenary
 -- vim.opt.rtp:prepend(os.getenv("HOME").."/neovim/plenary.nvim")
@@ -1290,7 +1306,7 @@ use('honza/vim-snippets')
 local has_cmp, cmp = pcall(require, 'cmp')
 
 -- print("has_cmp", has_cmp)
-if false then
+if has_cmp then
     -- use('michaeladler/cmp-notmuch')
     -- nvim-cmp autocompletion plugin{{{
     cmp.setup({
@@ -1942,14 +1958,15 @@ if false then
 end
 --}}}
 
-local contextMenu = function ()
-    local choices = { 'choice 1', 'choice 2' }
-    require('contextmenu').open(choices, {
-        callback = function(chosen)
-            print('Final choice ' .. choices[chosen])
-        end,
-    })
-end
+-- local contextMenu = function ()
+--     local choices = { 'choice 1', 'choice 2' }
+--     require('contextmenu').open(choices, {
+--         callback = function(chosen)
+--             print('Final choice ' .. choices[chosen])
+--         end,
+--     })
+-- end
+
 -- Disable virtual_text since it's redundant due to lsp_lines.
 vim.diagnostic.config({
     -- disabled because too big in haskell
@@ -1971,23 +1988,6 @@ vim.lsp.set_log_level('info')
 local _, notifs = pcall(require, 'notifications')
 
 vim.lsp.notifier = notifs
-
--- showLineDiagnostic is a wrapper around show_line_diagnostics
--- show_line_diagnostics calls open_floating_preview
--- local popup_bufnr, winnr = util.open_floating_preview(lines, 'plaintext')
--- seems like there is no way to pass options from show_line_diagnostics to open_floating_preview
--- the floating popup has "ownsyntax markdown"
-function showLineDiagnostic()
-    -- local opts = {
-    --	enable_popup = true;
-    --	-- options of
-    --	popup_opts = {
-    --	};
-    -- }
-    -- return vim.lsp.diagnostic.show_line_diagnostics()
-    vim.diagnostic.goto_prev({ wrap = true })
-    -- return require'lspsaga.diagnostic'.show_line_diagnostics()
-end
 
 -- to disable virtualtext check
 -- follow https://www.reddit.com/r/neovim/comments/f8u6fz/lsp_query/fip91ww/?utm_source=share&utm_medium=web2x
@@ -2011,7 +2011,7 @@ vim.cmd([[highlight IndentBlanklineIndent4 guifg=#56B6C2 gui=nocombine]])
 vim.cmd([[highlight IndentBlanklineIndent5 guifg=#61AFEF gui=nocombine]])
 vim.cmd([[highlight IndentBlanklineIndent6 guifg=#C678DD gui=nocombine]])
 
-local menu_add, menu_add_cmd = myMenu.menu_add, myMenu.menu_add_cmd
+-- local menu_add, menu_add_cmd = myMenu.menu_add, myMenu.menu_add_cmd
 -- menu_add('LSP.Declaration', '<cmd>lua vim.lsp.buf.declaration()<cr>')
 -- menu_add('LSP.Definition', '<cmd>lua vim.lsp.buf.definition()<cr>')
 -- menu_add('LSP.Hover', '<cmd>lua vim.lsp.buf.references()<cr>')
@@ -2041,10 +2041,10 @@ local menu_add, menu_add_cmd = myMenu.menu_add, myMenu.menu_add_cmd
 -- )
 -- menu_add('Diagnostic.Set_severity_to_all', '<cmd>lua vim.diagnostic.config({virtual_text = { severity = nil }})<cr>')
 
-menu_add_cmd('Search.Search_and_replace', "lua require('spectre').open()")
-menu_add('Search.Test', 'let a=3')
+-- menu_add_cmd('Search.Search_and_replace', "lua require('spectre').open()")
+-- menu_add('Search.Test', 'let a=3')
 
-menu_add('Rest.RunRequest', "<cmd>lua require('rest-nvim').run(true)<cr>")
+-- menu_add('Rest.RunRequest', "<cmd>lua require('rest-nvim').run(true)<cr>")
 
 -- menu_add("Search.Search\ in\ current\ Buffer", :Grepper -switch -buffer")
 -- menu_add("Search.Search\ across\ Buffers :Grepper -switch -buffers")

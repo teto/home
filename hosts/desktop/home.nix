@@ -18,6 +18,13 @@
   ];
 
   # Mic92/nix-index-database
+  # programs.vim = {
+  #  enable = true;
+  #  defaultEditor = true;
+  # };
+
+  programs.neovim.defaultEditor = true;
+
 
   programs.pazi = {
     enable = false;
