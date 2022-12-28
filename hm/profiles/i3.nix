@@ -80,6 +80,10 @@ let
     "$mod+t" = "floating toggle";
     "$mod+y" = "sticky toggle; exec ${notify-send}";
 
+	# split in vertical orientation
+	# needs i3next
+   "$mod+v" = "split toggle";
+
     # TODO use id of default sinc
     # icons are set for papirus for now
     "XF86AudioRaiseVolume" = "exec --no-startup-id ${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@  +5%;exec ${notify-send} --icon=audio-volume-high -u low -t 1000 'Audio Raised volume'";
@@ -93,6 +97,23 @@ let
     # bindsym --release $mod+Shift+Print exec "scrot -u -d 4 '/home/user/Pictures/screenshots/%s_%H%M_%d%m%Y_$wx$h.png'"
     "$mod+shift+o" = "exec xkill";
 
+	# different focus for windows
+	"$mod+$kleft" = "focus left";
+	"$mod+$kdown" = "focus down";
+	"$mod+$kup" = "focus up";
+	"$mod+$kright" = "focus right";
+
+	# toggle tiling / floating
+	"$mod+Shift+space" = "floating toggle";
+	# change focus between tiling / floating windows
+	"$mod+space" = "focus mode_toggle";
+
+
+	# alternatively, you can use the cursor keys:
+	"$mod+Shift+Left" = "move left";
+	"$mod+Shift+Down" = "move down";
+	"$mod+Shift+Up" = "move up";
+	"$mod+Shift+Right" = "move right";
 
   }
   // bind_ws 1 "a" "q"
@@ -158,6 +179,8 @@ let
 
     for_window [title="Thunderbird$"] title_format " %title"
 
+	# for_window [all] title_window_icon on
+	for_window [class="^Firefox$"] title_window_icon on
 
     include ~/.config/i3/manual.i3
   ''

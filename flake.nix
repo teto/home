@@ -105,7 +105,9 @@
           home-manager.useUserPackages = true;
           # disables the Home Manager option nixpkgs.*
           home-manager.useGlobalPkgs = true;
-
+		  home-manager.extraSpecialArgs = {
+		   inherit secrets;
+		  };
           home-manager.users.teto = {
             imports = my_imports ++ [
               # custom modules

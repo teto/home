@@ -3,6 +3,13 @@
 
   programs.nushell = {
     enable = true;
+
+	shellAliases = config.programs.bash.shellAliases;
+	# {
+
+	#  ll = "ls -l";
+	# };
+
     # configFile.text = ''
     # let $config = {
     # filesize_metric: false

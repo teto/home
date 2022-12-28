@@ -700,7 +700,7 @@ vim.api.nvim_create_autocmd('BufReadPost', {
 -- 	'DougBeney/pickachu'
 -- }
 
--- use('/home/teto/neovim/rest.nvim')
+use('/home/teto/neovim/rest.nvim')
 -- provides 'NvimTree'
 use('kyazdani42/nvim-tree.lua')
 use 'rhysd/committia.vim'

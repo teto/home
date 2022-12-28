@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, secrets, ... }:
 {
   programs.ssh = {
 
@@ -7,6 +7,13 @@
     # can I have it per target ?
     # controlPath = "";
     matchBlocks = {
+      jakku = {
+        host = secrets.jakku.hostname;
+        user = "teto";
+        # le port depend du service
+        port = secrets.jakku.sshPort;
+        identityFile = "~/.ssh/id_rsa";
+      };
       nova = {
         host = "git.novadiscovery.net";
         user = "matthieu.coudron";

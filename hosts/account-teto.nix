@@ -33,7 +33,6 @@
     # generated with nix run nixpkgs.mkpasswd mkpasswd -m sha-512
     hashedPassword = "$6$T/5zYuCMI$U45oW0D6cPKsXtETwlNFpsit924HElAYtXPsGTpj0XS/ITUz39xpPxnL.kzUWqeqQmRxvEOAHBeKm5/xHDrvs1";
 
-
     openssh.authorizedKeys.keyFiles = [
       ../perso/keys/id_rsa.pub
     ];

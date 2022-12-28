@@ -7,16 +7,53 @@ in
   services.nextcloud = {
     enable = true;
     # machine specific
-    # hostName = "toto.com";
+    hostName = secrets.jakku.hostname;
     config = {
       # loaded via sops 
       adminpassFile = "/run/secrets/nextcloud/adminPassword";
+	  # TODO change it
+	  # adminUser = "root";
+	  # dbpassFile = 
+
+	  # we can use an s3 account
+	  # objectstore.s3.enable
     };
     maxUploadSize = "512M";
     logLevel = 0;
     enableBrokenCiphersForSSE = false;
+	# increase security
+	enableImagemagick = false;
     package = pkgs.nextcloud25;
+	autoUpdateApps.enable = true;
+
+	extraApps = with pkgs.nextcloud25Packages.apps; {
+	  inherit mail news contacts;
+	 # example of how to get a more recent version
+	 # contacts = pkgs.fetchNextcloudApp rec {
+	 #   url = "https://github.com/nextcloud-releases/contacts/releases/download/v4.2.2/contacts-v4.2.2.tar.gz";
+	 #   sha256 = "sha256-eTc51pkg3OdHJB7X4/hD39Ce+9vKzw1nlJ7BhPOzdy0=";
+	 # };
+	};
+	extraAppsEnable = true;
   };
+
+  # Creating Nextcloud users and configure mail adresses
+  # systemd.services.nextcloud-add-user = {
+  #   script = ''
+  #     export OC_PASS="test123"
+  #     ${config.services.nextcloud.occ}/bin/nextcloud-occ user:add --password-from-env user1
+  #     ${config.services.nextcloud.occ}/bin/nextcloud-occ user:setting user1 settings email "user1@localhost"
+  #     ${config.services.nextcloud.occ}/bin/nextcloud-occ user:add --password-from-env user2
+  #     ${config.services.nextcloud.occ}/bin/nextcloud-occ user:setting user2 settings email "user2@localhost"
+  #     ${config.services.nextcloud.occ}/bin/nextcloud-occ user:setting admin settings email "admin@localhost"
+  #   '';
+  #   serviceConfig = {
+  #     Type = "oneshot";
+  #     User= "nextcloud";
+  #   };
+  #   after = [ "nextcloud-setup.service" ];
+  #   wantedBy = [ "multi-user.target" ];
+  # };
 
   networking.firewall.allowedTCPPorts = [ 80 443 ];
 

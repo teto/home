@@ -1,4 +1,4 @@
-#  vim: set noet fdm=manual fenc=utf-8 ff=unix sts=0 sw=4 ts=4 fdm=marker:
+#vim: set noet fdm=manual fenc=utf-8 ff=unix sts=0 sw=4 ts=4 fdm=marker:
 # vim:filetype=i3
 # ##########################################
 ### MAIN
@@ -10,7 +10,7 @@
 # title_window_icon yes
 # enable window icons for all windows
 # for_window [all] title_window_icon on
-for_window [class="^Firefox$"] title_window_icon on
+# for_window [class="^Firefox$"] title_window_icon on
 
 #for_window [instance="audioplayer"] move to scratchpad
 for_window [instance="pad_*"] move scratchpad
@@ -57,8 +57,6 @@ bindsym $mod+n mode "focused"
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
-
-
 # Use mod-Control-Up and Down to rotate through the workspace list.
 no_focus [class="^qutebrowser"]
 
@@ -74,16 +72,16 @@ bindsym $mod+F3 [instance="pad_(?!ncmpcpp)"] move scratchpad; [instance="pad_ncm
 
 # This may be slow since script involves a few steps
 # change focus
-bindsym $mod+$kleft focus left
-bindsym $mod+$kdown focus down
-bindsym $mod+$kup focus up
-bindsym $mod+$kright focus right
+# bindsym $mod+$kleft focus left
+# bindsym $mod+$kdown focus down
+# bindsym $mod+$kup focus up
+# bindsym $mod+$kright focus right
 
-# alternatively, you can use the cursor keys:
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
+# # alternatively, you can use the cursor keys:
+# bindsym $mod+Shift+Left move left
+# bindsym $mod+Shift+Down move down
+# bindsym $mod+Shift+Up move up
+# bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
 # bindsym $mod+b split h
@@ -97,12 +95,6 @@ bindsym $mod+v split toggle
 # bindsym $mod+Shift+f fullscreen global
 
 
-
-# toggle tiling / floating
-bindsym $mod+Shift+space floating toggle
-
-# change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
 
 
 mode "programs" {
@@ -222,7 +214,7 @@ mode mouse {
 	bindsym Escape mode "default"
 }
 
-no_focus [window_role="pop-up"]
+# no_focus [window_role="pop-up"]
 
 ### TODO need to run urxvtd beforehand
 ### display error in case it does not launch
@@ -236,9 +228,11 @@ no_focus [window_role="pop-up"]
 
 # xrandr --output LVDS1 --primary --auto --output DP1 --auto --right-of LVDS1
 #exec_always xrandr --output $output1 --auto --output $output2 --right-of $output1
-include ~/.config/i3/config.xp
-
-exec_always --no-startup-id setxkbmap -layout us
+for_window [class="^qutebrowser$"] title_format "<span background='blue'>QB</span> %title"
+for_window [class="^Firefox$"] title_format "<span background='#F28559'>FF</span> %title"
+for_window [title="Thunderbird$"] title_format " %title"
 
 # class
 for_window [instance="pad_*"] move scratchpad
+for_window [class="^firefox-nova$"] move workspace "5:misc"
+

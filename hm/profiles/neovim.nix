@@ -49,6 +49,7 @@ let
 
 
   parserDir = pkgs.tree-sitter.withPlugins (tree-sitter-grammars-fn);
+
   # TODO this should be done automatically
   tree-sitter-grammars-fn = p: with p; [
     tree-sitter-bash
@@ -881,7 +882,7 @@ in
 
     # https://github.com/iskolbin/lbase64
     # extraLuaPackages = lp: [ lp.basexx ];
-    extraLuaPackages = [ pkgs.lua51Packages.basexx ];
+    extraLuaPackages = ls: [ ls.basexx ];
 
     # source doesn't like `stdpath('config').'`
     # todo should use mkBefore ${config.programs.neovim.generatedInitrc}
