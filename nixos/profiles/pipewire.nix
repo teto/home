@@ -12,17 +12,19 @@
     alsa.enable = false;
     pulse.enable = true;
     jack.enable = false;
-    config.pipewire = {
-      "properties" = {
-        default.clock.allowed-rates = [ 44100 48000 96000 ];
-        "log.level" = 4;
-        "default.clock.quantum" = 256;
-        "default.clock.min-quantum" = 256;
-        "default.clock.max-quantum" = 256;
-      };
-    };
+    # config.pipewire = {
+    #   "properties" = {
+    #     default.clock.allowed-rates = [ 44100 48000 96000 ];
+    #     "log.level" = 4;
+    #     "default.clock.quantum" = 256;
+    #     "default.clock.min-quantum" = 256;
+    #     "default.clock.max-quantum" = 256;
+    #   };
+    # };
   };
 
+  # to avoid the "can't find pactl" at launch
+  systemd.user.services.pipewire-pulse.path = [ pkgs.pulseaudio ];
 }
 #"link.max-buffers" = 64;
 # "link.max-buffers" = 16; # version < 3 clients can't handle more than this

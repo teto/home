@@ -118,7 +118,7 @@ let
       ncpamixer # pulseaudio TUI mixer
       noti # send notifications when a command finishes
       pass-custom # pass with extensions
-      pulseaudioFull # for pactl
+      # pulseaudioFull # for pactl
       pavucontrol
       procs # Rust replacement for 'ps'
       qiv # image viewer

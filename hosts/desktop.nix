@@ -19,6 +19,9 @@
     # only if available
     # ./modules/jupyter.nix
   ];
+
+  xdg.portal.enable = true;
+
   environment.homeBinInPath = true;
 
   # to get manpages
@@ -146,20 +149,20 @@
   '';
 
   # users.motd = 
-  security.pam.loginLimits = [
-    {
-      domain = "teto";
-      type = "soft";
-      item = "core";
-      value = "unlimited";
-    }
-    {
-      domain = "*";
-      type = "hard";
-      item = "memlock";
-      value = "256";
-    }
-  ];
+  # security.pam.loginLimits = [
+  #   {
+  #     domain = "teto";
+  #     type = "soft";
+  #     item = "core";
+  #     value = "unlimited";
+  #   }
+  #   {
+  #     domain = "*";
+  #     type = "hard";
+  #     item = "memlock";
+  #     value = "256";
+  #   }
+  # ];
 
   # nixpkgs/modules/config-all.nix|262 col 15| environment.etc."inputrc".source = ../../config/inputrc;
   environment.etc."security/limits.conf".text = ''
@@ -167,6 +170,7 @@
     teto  soft  core  unlimited
     teto  soft  memlock 128
     *  hard  memlock  256
+    @audio   -  nice     -20
   '';
   # teto  hard  core  unlimited
 

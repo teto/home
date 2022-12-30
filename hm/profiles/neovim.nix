@@ -15,16 +15,16 @@ let
 
   luaRcBlocks = {
     appearance = ''
-		-- draw a line on 80th column
-		vim.o.colorcolumn='80,100'
-      	'';
+        -- draw a line on 80th column
+        vim.o.colorcolumn='80,100'
+        '';
 
     # hi MsgSeparator ctermbg=black ctermfg=white
     # TODO equivalent of       set fillchars+=
     foldBlock = ''
-		vim.o.fillchars='foldopen:▾,foldclose:▸,msgsep:‾'
-		vim.o.foldcolumn='auto:2'
-      	'';
+        vim.o.fillchars='foldopen:▾,foldclose:▸,msgsep:‾'
+        vim.o.foldcolumn='auto:2'
+        '';
     # dealingwithpdf= ''
     #   " Read-only pdf through pdftotext / arf kinda fails silently on CJK documents
     #   " autocmd BufReadPost *.pdf silent %!pdftotext -nopgbrk -layout -q -eol unix "%" - | fmt -w78
@@ -119,7 +119,7 @@ let
     # { plugin = nvim-dap; }
     # (luaPlugin { 
     #   plugin = octo-nvim;
-    # # 	  -- -- , requires = { 'nvim-lua/popup.nvim' }
+    # #       -- -- , requires = { 'nvim-lua/popup.nvim' }
     #   optional = true;
     # })
     (luaPlugin {
@@ -131,51 +131,51 @@ let
     (luaPlugin {
       plugin = trouble-nvim;
       config = ''
-        	require'trouble'.setup {
-        	position = "bottom", -- position of the list can be: bottom, top, left, right
-        	height = 10, -- height of the trouble list when position is top or bottom
-        	width = 50, -- width of the list when position is left or right
-        	icons = false, -- use devicons for filenames
-        	-- mode = "workspace_diagnostics", -- "lsp_workspace_diagnostics", "lsp_document_diagnostics", "quickfix", "lsp_references", "loclist"
-        	-- fold_open = "", -- icon used for open folds
-        	-- fold_closed = "", -- icon used for closed folds
-        	action_keys = { -- key mappings for actions in the trouble list
-        		-- map to {} to remove a mapping, for example:
-        		-- close = {},
-        		close = "q", -- close the list
-        		cancel = "<esc>", -- cancel the preview and get back to your last window / buffer / cursor
-        		refresh = "r", -- manually refresh
-        		jump = {"<cr>", "<tab>"}, -- jump to the diagnostic or open / close folds
-        		open_split = { "<c-x>" }, -- open buffer in new split
-        		open_vsplit = { "<c-v>" }, -- open buffer in new vsplit
-        		open_tab = { "<c-t>" }, -- open buffer in new tab
-        		jump_close = {"o"}, -- jump to the diagnostic and close the list
-        		toggle_mode = "m", -- toggle between "workspace" and "document" diagnostics mode
-        		toggle_preview = "P", -- toggle auto_preview
-        		hover = "K", -- opens a small poup with the full multiline message
-        		preview = "p", -- preview the diagnostic location
-        		close_folds = {"zM", "zm"}, -- close all folds
-        		open_folds = {"zR", "zr"}, -- open all folds
-        		toggle_fold = {"zA", "za"}, -- toggle fold of current file
-        		previous = "k", -- preview item
-        		next = "j" -- next item
-        	},
-        	-- indent_lines = true, -- add an indent guide below the fold icons
-        	-- auto_open = false, -- automatically open the list when you have diagnostics
-        	-- auto_close = false, -- automatically close the list when you have no diagnostics
-        	-- auto_preview = true, -- automatyically preview the location of the diagnostic. <esc> to close preview and go back to last window
-        	-- auto_fold = false, -- automatically fold a file trouble list at creation
-        	signs = {
-        		-- icons / text used for a diagnostic
-        		error = "",
-        		warning = "",
-        		hint = "",
-        		information = "",
-        		other = "﫠"
-        	},
-        	use_diagnostic_signs = true -- enabling this will use the signs defined in your lsp client
-        	}
-        	'';
+            require'trouble'.setup {
+            position = "bottom", -- position of the list can be: bottom, top, left, right
+            height = 10, -- height of the trouble list when position is top or bottom
+            width = 50, -- width of the list when position is left or right
+            icons = false, -- use devicons for filenames
+            -- mode = "workspace_diagnostics", -- "lsp_workspace_diagnostics", "lsp_document_diagnostics", "quickfix", "lsp_references", "loclist"
+            -- fold_open = "", -- icon used for open folds
+            -- fold_closed = "", -- icon used for closed folds
+            action_keys = { -- key mappings for actions in the trouble list
+                -- map to {} to remove a mapping, for example:
+                -- close = {},
+                close = "q", -- close the list
+                cancel = "<esc>", -- cancel the preview and get back to your last window / buffer / cursor
+                refresh = "r", -- manually refresh
+                jump = {"<cr>", "<tab>"}, -- jump to the diagnostic or open / close folds
+                open_split = { "<c-x>" }, -- open buffer in new split
+                open_vsplit = { "<c-v>" }, -- open buffer in new vsplit
+                open_tab = { "<c-t>" }, -- open buffer in new tab
+                jump_close = {"o"}, -- jump to the diagnostic and close the list
+                toggle_mode = "m", -- toggle between "workspace" and "document" diagnostics mode
+                toggle_preview = "P", -- toggle auto_preview
+                hover = "K", -- opens a small poup with the full multiline message
+                preview = "p", -- preview the diagnostic location
+                close_folds = {"zM", "zm"}, -- close all folds
+                open_folds = {"zR", "zr"}, -- open all folds
+                toggle_fold = {"zA", "za"}, -- toggle fold of current file
+                previous = "k", -- preview item
+                next = "j" -- next item
+            },
+            -- indent_lines = true, -- add an indent guide below the fold icons
+            -- auto_open = false, -- automatically open the list when you have diagnostics
+            -- auto_close = false, -- automatically close the list when you have no diagnostics
+            -- auto_preview = true, -- automatyically preview the location of the diagnostic. <esc> to close preview and go back to last window
+            -- auto_fold = false, -- automatically fold a file trouble list at creation
+            signs = {
+                -- icons / text used for a diagnostic
+                error = "",
+                warning = "",
+                hint = "",
+                information = "",
+                other = "﫠"
+            },
+            use_diagnostic_signs = true -- enabling this will use the signs defined in your lsp client
+            }
+            '';
 
       runtime = {
         "ftplugin/c.vim".text = "setlocal omnifunc=v:lua.vim.lsp.omnifunc";
@@ -233,8 +233,8 @@ let
           diff_opts = {
               internal = false
           }  -- If luajit is present
-		}
-		'';
+        }
+        '';
     })
 
     # {
@@ -291,14 +291,14 @@ let
     (luaPlugin {
       plugin = nvim-spectre;
       config = ''
-		 -- nnoremap ( "n", "<leader>S",  function() require('spectre').open() end )
-		 '';
+         -- nnoremap ( "n", "<leader>S",  function() require('spectre').open() end )
+         '';
     })
 
     # (luaPlugin {
     # plugin = nvim-gps;
     #   config = ''
-    # 	require("nvim-gps").setup()
+    #   require("nvim-gps").setup()
     #   '';
     # })
     # (luaPlugin {
@@ -318,13 +318,13 @@ let
     (luaPlugin {
       # prettier quickfix
       plugin = nvim-bqf;
-	  config = ''
-	   require'bqf'.setup({
-		preview = {
-		 delay_syntax = 0
-		}
-	   })
-	   '';
+      config = ''
+       require'bqf'.setup({
+        preview = {
+         delay_syntax = 0
+        }
+       })
+       '';
     })
     (luaPlugin { plugin = fugitive-gitlab-vim; })
 
@@ -430,21 +430,21 @@ let
       # " let g:mkdp_browser = 'firefox'
       plugin = vim-markdown-composer;
       config = ''
-                  -- use with :ComposerStart
-                  vim.g.markdown_composer_autostart = 0
-        		  vim.g.markdown_composer_binary = '${vim-markdown-composer.vimMarkdownComposerBin}/bin/markdown-composer'
-        		'';
+         -- use with :ComposerStart
+         vim.g.markdown_composer_autostart = 0
+         vim.g.markdown_composer_binary = '${vim-markdown-composer.vimMarkdownComposerBin}/bin/markdown-composer'
+         '';
     })
     # disabled because of https://github.com/rktjmp/lush.nvim/issues/89
-    # (luaPlugin { plugin = lush-nvim; }) 
+    (luaPlugin { plugin = lush-nvim; }) 
     # (luaPlugin { plugin = gruvbox-nvim; }) 
     # out of tree
     # call with :Hoogle
     (luaPlugin {
       plugin = fzf-hoogle-vim;
       config = ''
-        		  vim.g.hoogle_path = "hoogle"
-        		  vim.g.hoogle_fzf_cache_file = vim.fn.stdpath('cache')..'/hoogle_cache.json'
+      vim.g.hoogle_path = "hoogle"
+      vim.g.hoogle_fzf_cache_file = vim.fn.stdpath('cache')..'/hoogle_cache.json'
       '';
     })
 
@@ -497,15 +497,15 @@ let
       # really helps with syntax highlighting
       plugin = haskell-vim;
       config = ''
-        		  vim.g.haskell_enable_quantification = 1   -- to enable highlighting of `forall`
-        		  vim.g.haskell_enable_recursivedo = 1      -- to enable highlighting of `mdo` and `rec`
-        		  vim.g.haskell_enable_arrowsyntax = 1      -- to enable highlighting of `proc`
-        		  vim.g.haskell_enable_pattern_synonyms = 1 -- to enable highlighting of `pattern`
-        		  vim.g.haskell_enable_typeroles = 1        -- to enable highlighting of type roles
-        		  vim.g.haskell_enable_static_pointers = 1  -- to enable highlighting of `static`
-        		  vim.g.haskell_backpack = 1                -- to enable highlighting of backpack keywords
-        		  vim.g.haskell_indent_disable=1
-        		'';
+        vim.g.haskell_enable_quantification = 1   -- to enable highlighting of `forall`
+        vim.g.haskell_enable_recursivedo = 1      -- to enable highlighting of `mdo` and `rec`
+        vim.g.haskell_enable_arrowsyntax = 1      -- to enable highlighting of `proc`
+        vim.g.haskell_enable_pattern_synonyms = 1 -- to enable highlighting of `pattern`
+        vim.g.haskell_enable_typeroles = 1        -- to enable highlighting of type roles
+        vim.g.haskell_enable_static_pointers = 1  -- to enable highlighting of `static`
+        vim.g.haskell_backpack = 1                -- to enable highlighting of backpack keywords
+        vim.g.haskell_indent_disable=1
+        '';
     })
     # " gutentags + gutenhasktags {{{
     # " to keep logs GutentagsToggleTrace
@@ -547,25 +547,25 @@ let
           skip_ssl_verification = false,
           -- Highlight request on run
           highlight = {
-		   enabled = true,
-		   timeout = 150,
+           enabled = true,
+           timeout = 150,
           },
           result = {
-		   -- toggle showing URL, HTTP info, headers at top the of result window
-		   show_url = true,
-		   show_http_info = true,
-		   show_headers = true,
-		   -- disable formatters else they generate errors/add dependencies
-		   -- for instance when it detects html, it tried to run 'tidy'
-		   formatters = {
-			html = false,
-			jq = false
-		   },
+           -- toggle showing URL, HTTP info, headers at top the of result window
+           show_url = true,
+           show_http_info = true,
+           show_headers = true,
+           -- disable formatters else they generate errors/add dependencies
+           -- for instance when it detects html, it tried to run 'tidy'
+           formatters = {
+            html = false,
+            jq = false
+           },
           },
           -- Jump to request line on run
           jump_to_request = false,
-		})
-		'';
+        })
+        '';
     })
 
     # it depends on nvim-treesitter
@@ -574,14 +574,14 @@ let
       plugin = orgmode;
 
       config = ''
-        		require('orgmode').setup_ts_grammar()
+                require('orgmode').setup_ts_grammar()
                 require('orgmode').setup{
                     org_capture_templates = {'~/nextcloud/org/*', '~/orgmode/**/*'},
                     org_default_notes_file = '~/orgmode/refile.org',
                     -- TODO add templates
                     org_agenda_templates = { t = { description = 'Task', template = '* TODO %?\n  %u' } },
                 }
-        	   '';
+               '';
     })
 
     { plugin = editorconfig-vim; }
@@ -605,7 +605,7 @@ let
     # defined in overrides: TODO this should be easier: like fzf-vim should be enough
     fzfWrapper
 
-	#  nvim-colorizer 
+    #  nvim-colorizer 
     (luaPlugin { plugin = nvim-terminal-lua; config = "require('terminal').setup()"; })
     {
       # display git diff while rebasing, pretty dope
@@ -634,9 +634,9 @@ let
     (luaPlugin {
       plugin = vim-dirvish;
       config = ''
-        		  vim.g.dirvish_mode=2
-        		  vim.g.loaded_netrwPlugin = 1
-        		'';
+                  vim.g.dirvish_mode=2
+                  vim.g.loaded_netrwPlugin = 1
+                '';
     })
 
     # {
@@ -662,34 +662,34 @@ let
       # cool stuff is that it autostarts sessions
       # TODO
       config = ''
-        		  vim.cmd [[
-        		  let g:startify_use_env = 0
-        		  let g:startify_disable_at_vimenter = 0
-        		  let g:startify_lists = [
-        				\ { 'header': ['   MRU '.getcwd() ], 'type': 'dir'},
-        				\ { 'header': ['   MRU' ],           'type': 'files'} ,
-        				\ { 'header': ['   Bookmarks' ],     'type': 'bookmarks' },
-        				\ { 'header': ['   Sessions'  ],      'type': 'sessions' }
-        				\ ]
-        		  let g:startify_bookmarks = [
-        				\ {'i': $XDG_CONFIG_HOME.'/i3/config.main'},
-        				\ {'h': $XDG_CONFIG_HOME.'/nixpkgs/home.nix'},
-        				\ {'c': 'dotfiles/nixpkgs/configuration.nix'},
-        				\ {'z': $XDG_CONFIG_HOME.'/zsh/'},
-        				\ {'m': $XDG_CONFIG_HOME.'/mptcpanalyzer/config'},
-        				\ {'n': $XDG_CONFIG_HOME.'/nvim/config'},
-        				\ {'N': $XDG_CONFIG_HOME.'/ncmpcpp/config'},
-        				\ ]
-        				" \ {'q': $XDG_CONFIG_HOME.'/qutebrowser/qutebrowser.conf'},
-        		  let g:startify_files_number = 10
-        		  let g:startify_session_autoload = 1
-        		  let g:startify_session_persistence = 0
-        		  let g:startify_change_to_vcs_root = 0
-        		  let g:startify_session_savevars = []
-        		  let g:startify_session_delete_buffers = 1
-        		  let g:startify_change_to_dir = 0
-        		  let g:startify_relative_path = 0
-        		  ]]
+                  vim.cmd [[
+                  let g:startify_use_env = 0
+                  let g:startify_disable_at_vimenter = 0
+                  let g:startify_lists = [
+                        \ { 'header': ['   MRU '.getcwd() ], 'type': 'dir'},
+                        \ { 'header': ['   MRU' ],           'type': 'files'} ,
+                        \ { 'header': ['   Bookmarks' ],     'type': 'bookmarks' },
+                        \ { 'header': ['   Sessions'  ],      'type': 'sessions' }
+                        \ ]
+                  let g:startify_bookmarks = [
+                        \ {'i': $XDG_CONFIG_HOME.'/i3/config.main'},
+                        \ {'h': $XDG_CONFIG_HOME.'/nixpkgs/home.nix'},
+                        \ {'c': 'dotfiles/nixpkgs/configuration.nix'},
+                        \ {'z': $XDG_CONFIG_HOME.'/zsh/'},
+                        \ {'m': $XDG_CONFIG_HOME.'/mptcpanalyzer/config'},
+                        \ {'n': $XDG_CONFIG_HOME.'/nvim/config'},
+                        \ {'N': $XDG_CONFIG_HOME.'/ncmpcpp/config'},
+                        \ ]
+                        " \ {'q': $XDG_CONFIG_HOME.'/qutebrowser/qutebrowser.conf'},
+                  let g:startify_files_number = 10
+                  let g:startify_session_autoload = 1
+                  let g:startify_session_persistence = 0
+                  let g:startify_change_to_vcs_root = 0
+                  let g:startify_session_savevars = []
+                  let g:startify_session_delete_buffers = 1
+                  let g:startify_change_to_dir = 0
+                  let g:startify_relative_path = 0
+                  ]]
       '';
     })
 
@@ -699,13 +699,13 @@ let
       plugin = vim-sneak;
       config = ''
          -- can press 's' again to go to next result, like ';'
-        		  vim.cmd [[
-        		   let g:sneak#s_next = 1 
-        		   let g:sneak#prompt = 'Sneak>'
+                  vim.cmd [[
+                   let g:sneak#s_next = 1 
+                   let g:sneak#prompt = 'Sneak>'
 
                   let g:sneak#streak = 0
-        		  ]]
-      '';
+                  ]]
+         '';
       # map f <Plug>Sneak_f
       # map F <Plug>Sneak_F
       # map t <Plug>Sneak_t
@@ -724,8 +724,8 @@ let
     (luaPlugin {
       plugin = vim-obsession;
       after = ''
-                  vim.keymap.set("n", "<Leader>$", "<Cmd>Obsession<CR>", { remap = true })
-        		  vim.g.obsession_no_bufenter = true
+      vim.keymap.set("n", "<Leader>$", "<Cmd>Obsession<CR>", { remap = true })
+      vim.g.obsession_no_bufenter = true
       '';
       # testing luaConfig (experimental)
       # luaConfig = ''
@@ -740,7 +740,7 @@ let
       plugin = vim-sayonara;
       config = ''
         vim.g.sayonara_confirm_quit = 0
-      '';
+        '';
     })
 
     # vim-livedown
@@ -798,7 +798,7 @@ let
         -- shell-escape is mandatory for minted
         -- check that '-file-line-error' is properly removed with pplatex
         -- executable The name/path to the latexmk executable. 
-        		'';
+                '';
       # vim.gvimtex_compiler_latexmk = {
       #          'backend' : 'nvim',
       #          'background' : 1,
@@ -825,12 +825,12 @@ let
       # nmap ga <Plug>(UnicodeGA)
 
       config = ''
-                vim.g.Unicode_data_directory='${pkgs.vimPlugins.unicode-vim}/autoload/unicode'
+        vim.g.Unicode_data_directory='${pkgs.vimPlugins.unicode-vim}/autoload/unicode'
 
-                -- overrides ga
-        		vim.keymap.set ( "n", "ga",  "<Plug>(UnicodeGA)", { remap = true, } )
+        -- overrides ga
+        vim.keymap.set ( "n", "ga",  "<Plug>(UnicodeGA)", { remap = true, } )
 
-      '';
+        '';
     })
 
   ];
@@ -860,7 +860,6 @@ let
     basePlugins
     ++ overlayPlugins
     ++ luaPlugins
-    # ++ fennelPlugins
     ++ colorschemePlugins
     ++ completionPlugins
     ++ filetypePlugins
@@ -878,12 +877,13 @@ in
   #  extraLuaPackages = ps: [ps.mpack];
   programs.neovim = {
     enable = true;
-	# defaultEditor = false;
+    # defaultEditor = false;
 
-	fennel.enable = false;
-	teal.enable = true;
-	orgmode.enable = true;
-	# autocompletion.enable = true;
+    # custom options
+    fennel.enable = false;
+    teal.enable = true;
+    orgmode.enable = true;
+    # autocompletion.enable = true;
 
     # take the one from the flake
     package = myPackage;
@@ -912,7 +912,7 @@ in
     #   vim.lsp.set_log_level("info")
     # '';
 
-	# TODO use lua from 
+    # TODO use lua from 
 
     # TODO add lsp stuff
     extraPackages = with pkgs; [

@@ -104,15 +104,4 @@ in
     # daemonNiceLevel = 2;
     distributedBuilds = true;
   };
-
-  hardware.pulseaudio = {
-    enable = true;
-    systemWide = false;
-    # daemon.config
-    support32Bit = true;
-
-    extraModules = [ pkgs.pulseaudio-modules-bt ];
-
-    package = pkgs.pulseaudioFull;
-  };
 }

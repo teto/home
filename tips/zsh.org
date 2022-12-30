@@ -1,10 +1,17 @@
-#
+#+title: zsh tips 
 
 zsh --help shows different commands:
 
-zsh -f <=> --no-rcs => disable local config
--d disables global config
-zsh -lxv to debug
+
+https://unix.stackexchange.com/questions/74184/how-to-save-current-command-on-zsh
+push-line mapping
+
+* bypass local config
+  zsh -f <=> --no-rcs => disable local config
+  -d disables global config
+  zsh -lxv to debug
+
+* test
 
 "zle -N" Create a user-defined widget.  If there is already a widget with the specified name, it is overwritten
 

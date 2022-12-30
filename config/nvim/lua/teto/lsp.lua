@@ -9,15 +9,15 @@ local attach_cb = require 'on_attach'
 local temp = vim.lsp.handlers["textDocument/formatting"]
 vim.lsp.handlers["textDocument/formatting"] = function(...)
 
-   vim.notify("Called formatting")
-   temp(...)
+	vim.notify("Called formatting")
+	temp(...)
 end
 -- override defaults for all servers
 lspconfig.util.default_config = vim.tbl_extend(
 	"force",
 	lspconfig.util.default_config,
 	{
-		on_attach=attach_cb.on_attach,
+		on_attach = attach_cb.on_attach,
 	}
 )
 
@@ -40,44 +40,45 @@ lspconfig.util.default_config = vim.tbl_extend(
 --	 }
 -- )
 
-lspconfig.bashls.setup{ }
+lspconfig.bashls.setup {}
 
-lspconfig.sumneko_lua.setup{
-  cmd = {"lua-language-server"};
-  settings = {
+lspconfig.sumneko_lua.setup {
+	cmd = { "lua-language-server" };
+	settings = {
 		Lua = {
-				runtime = { version = "LuaJIT", path = vim.split(package.path, ';'), },
-				completion = { keywordSnippet = "Disable", },
-				diagnostics = {
-						enable = true,
-						globals = {
-								"vim", "describe", "it", "before_each", "after_each", "pending"
-								, "teardown"
-						},
-						disable = { "lowercase-global", "unused-function"}
+			runtime = { version = "LuaJIT", path = vim.split(package.path, ';'), },
+			completion = { keywordSnippet = "Disable", },
+			diagnostics = {
+				enable = true,
+				globals = {
+					"vim", "describe", "it", "before_each", "after_each", "pending"
+					, "teardown"
 				},
-				workspace = {
-						library = {
-								[vim.fn.expand("$VIMRUNTIME/lua")] = true,
-								[vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
-						}
+				disable = { "lowercase-global", "unused-function" }
+			},
+			workspace = {
+				checkThirdParty = false,
+				library = {
+					[vim.fn.expand("$VIMRUNTIME/lua")] = true,
+					[vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
 				}
+			}
 		}
-  }
+	}
 }
 
-lspconfig.dhall_lsp_server.setup{}
-lspconfig.dockerls.setup{}
-lspconfig.yamlls.setup{}
+lspconfig.dhall_lsp_server.setup {}
+lspconfig.dockerls.setup {}
+lspconfig.yamlls.setup {}
 
 -- you can configure pyright via a pyrightconfig.json too
 -- https://github.com/microsoft/pyright/blob/cf1a5790d2105ac60dd3378a46725519d14b2844/docs/configuration.md
 -- https://github.com/microsoft/pyright/blob/master/docs/configuration.md
-lspconfig.pyright.setup{
+lspconfig.pyright.setup {
 	-- cmd = {"pyright-langserver", "--stdio"};
 	-- filetypes = {"python"};
 	autostart = false; -- This is the important new option
-	root_dir = lspconfig.util.root_pattern(".git", "setup.py",	"setup.cfg", "pyproject.toml", "requirements.txt");
+	root_dir = lspconfig.util.root_pattern(".git", "setup.py", "setup.cfg", "pyproject.toml", "requirements.txt");
 	-- on_attach=attach_cb.on_attach,
 	settings = {
 		-- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#pyright
@@ -85,20 +86,20 @@ lspconfig.pyright.setup{
 			analysis = {
 				-- enum { "Error", "Warning", "Information", "Trace" }
 				logLevel = "Warning";
---						autoSearchPaths= true;
-			-- diagnosticMode = 'workspace';
---
-			useLibraryCodeForTypes = true;
-			typeCheckingMode = 'basic'; -- 'off', 'basic', 'strict'
-			reportUnusedVariable = false;
-			reportUnusedFunction = false;
-			reportUnusedClass = false;
-			disableOrganizeImports = true;
-			reportConstantRedefinition = true;
-			-- reportUnknownParameterType
-			-- diagnosticSeverityOverrides = {
-			--		reportUnusedImport = "warning";
-			-- };
+				--						autoSearchPaths= true;
+				-- diagnosticMode = 'workspace';
+				--
+				useLibraryCodeForTypes = true;
+				typeCheckingMode = 'basic'; -- 'off', 'basic', 'strict'
+				reportUnusedVariable = false;
+				reportUnusedFunction = false;
+				reportUnusedClass = false;
+				disableOrganizeImports = true;
+				reportConstantRedefinition = true;
+				-- reportUnknownParameterType
+				-- diagnosticSeverityOverrides = {
+				--		reportUnusedImport = "warning";
+				-- };
 			};
 		};
 		pyright = {
@@ -110,15 +111,15 @@ lspconfig.pyright.setup{
 
 -- typescript
 lspconfig.tsserver.setup({
- autostart = false
+	autostart = false
 
 })
 local function make_cmp_capabilities()
-  local has_cmp_lsp, cmp_lsp = pcall(require, 'cmp_nvim_lsp')
-  if has_cmp_lsp then
-	return cmp_lsp.default_capabilities()
-  end
-  return vim.lsp.protocol.make_client_capabilities()
+	local has_cmp_lsp, cmp_lsp = pcall(require, 'cmp_nvim_lsp')
+	if has_cmp_lsp then
+		return cmp_lsp.default_capabilities()
+	end
+	return vim.lsp.protocol.make_client_capabilities()
 end
 
 -- commented out because https://github.com/MrcJkb/haskell-tools.nvim recommends to disable it
@@ -166,43 +167,43 @@ end
 
 lspconfig.rust_analyzer.setup({
 	capabilities = {
-	  textDocument = {
-		completion = {
-		  completionItem = {
-			-- commitCharactersSupport = false,
-			-- deprecatedSupport = false,
-			-- documentationFormat = { "markdown", "plaintext" },
-			-- preselectSupport = false,
-			snippetSupport = true
-		  },
-		},
-		-- hover = {
-		--	 contentFormat = { "markdown", "plaintext" },
-		--	 dynamicRegistration = false
-		-- },
-		-- references = {
-		--	 dynamicRegistration = false
-		-- },
-		-- signatureHelp = {
-		--	 dynamicRegistration = false,
-		--	 signatureInformation = {
-		--	   documentationFormat = { "markdown", "plaintext" }
-		--	 }
-		-- },
-		-- synchronization = {
-		--	 didSave = true,
-		--	 dynamicRegistration = false,
-		--	 willSave = false,
-		--	 willSaveWaitUntil = false
-		-- }
-	  }
+		textDocument = {
+			completion = {
+				completionItem = {
+					-- commitCharactersSupport = false,
+					-- deprecatedSupport = false,
+					-- documentationFormat = { "markdown", "plaintext" },
+					-- preselectSupport = false,
+					snippetSupport = true
+				},
+			},
+			-- hover = {
+			--	 contentFormat = { "markdown", "plaintext" },
+			--	 dynamicRegistration = false
+			-- },
+			-- references = {
+			--	 dynamicRegistration = false
+			-- },
+			-- signatureHelp = {
+			--	 dynamicRegistration = false,
+			--	 signatureInformation = {
+			--	   documentationFormat = { "markdown", "plaintext" }
+			--	 }
+			-- },
+			-- synchronization = {
+			--	 didSave = true,
+			--	 dynamicRegistration = false,
+			--	 willSave = false,
+			--	 willSaveWaitUntil = false
+			-- }
+		}
 	},
 	cmd = { "rust-analyzer" },
 	-- root_dir = root_pattern("Cargo.toml", "rust-project.json")
 })
 
 -- lspconfig.rnix.setup{}
-lspconfig.nil_ls.setup{}
+lspconfig.nil_ls.setup {}
 
 
 -- | Texlab
@@ -222,22 +223,22 @@ lspconfig.nil_ls.setup{}
 lspconfig.teal_ls.setup({})
 
 lspconfig.clangd.setup({
-		--compile-commands-dir=build
+	--compile-commands-dir=build
 	cmd = {
-				"clangd", "--background-index",
-				-- "--log=info", -- error/info/verbose
-				-- "--pretty" -- pretty print json output
-		};
-		filetypes = { "c", "cpp", "objc", "objcpp" },
-		-- log_level = vim.lsp.protocol.MessageType.Debug;
-		-- on_attach=attach_cb.on_attach,
---		-- 'build/compile_commands.json',
---		root_dir = lspconfig.util.root_pattern( '.git'),
---		-- mandated by lsp-status
---		init_options = {
---				-- clangdFileStatus = true
---		},
---		-- callbacks = lsp_status.extensions.clangd.setup()
+		"clangd", "--background-index",
+		-- "--log=info", -- error/info/verbose
+		-- "--pretty" -- pretty print json output
+	};
+	filetypes = { "c", "cpp", "objc", "objcpp" },
+	-- log_level = vim.lsp.protocol.MessageType.Debug;
+	-- on_attach=attach_cb.on_attach,
+	--		-- 'build/compile_commands.json',
+	--		root_dir = lspconfig.util.root_pattern( '.git'),
+	--		-- mandated by lsp-status
+	--		init_options = {
+	--				-- clangdFileStatus = true
+	--		},
+	--		-- callbacks = lsp_status.extensions.clangd.setup()
 })
 
 
