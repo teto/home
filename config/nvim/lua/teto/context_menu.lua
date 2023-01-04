@@ -1,5 +1,9 @@
 -- inspired by https://gitlab.com/gabmus/nvpunk/-/blob/master/lua/nvpunk/util/context_menu.lua
-local M = {}
+-- one can run 'popup <name>' to go straight to the correct menu
+local M = {
+ active_menus = {}
+
+}
 
 --- Checks if current buf has LSPs attached
 ---@return boolean
@@ -233,9 +237,27 @@ M.set_toggle_rclick_menu = function()
     }, function () return true end)
 end
 
--- menu_add('Toggle.Minimap', '<cmd>MinimapToggle<cr>')
--- menu_add('Toggle.Obsession', '<cmd>Obsession<cr>')
--- menu_add('Toggle.Blanklines', '<cmd>IndentBlanklineToggle<cr>')
+
+M.add_component = function(component)
+ table.insert(M.active_menus, component)
+end
+
+            -- M.set_lsp_rclick_menu()
+            -- M.set_repl_rclick_menu()
+            -- M.set_rest_rclick_menu()
+            -- M.set_spectre_rclick_menu()
+            -- M.set_sniprun_rclick_menu()
+            -- -- M.set_orgmode_rclick_menu()
+            -- M.set_telescope_rclick_menu()
+            -- M.set_git_rclick_menu()
+            -- M.set_toggle_rclick_menu()
+M.add_component(M.set_lsp_rclick_menu)
+M.add_component(M.set_spectre_rclick_menu)
+M.add_component(M.set_repl_rclick_menu)
+M.add_component(M.set_rest_rclick_menu)
+M.add_component(M.set_sniprun_rclick_menu)
+M.add_component(M.set_toggle_rclick_menu)
+
 -- -- menu_add("Toggle.Biscuits", 'lua require("nvim-biscuits").toggle_biscuits()')
 
 -- menu_add('REPL.Send line', [[<cmd>lua require'luadev'.exec(vim.api.nvim_get_current_line())<cr>]])
@@ -255,22 +277,19 @@ end
 --     '<cmd>lua vim.diagnostic.config({virtual_text = { severity = { min = vim.diagnostic.severity.WARN } }})<cr>'
 -- )
 
+
+-- TODO the run it on filetype change too
 M.setup_rclick_menu_autocommands = function()
+	-- M.set_dap_rclick_menu()
+	-- M.set_java_rclick_menu()
+	-- M.set_nvimtree_rclick_menu()
     vim.api.nvim_create_autocmd(
-        {'BufEnter', 'LspAttach'}, {
+        {'BufEnter', 'LspAttach', 'FileType'}, {
+		 -- TODO regenerate this function everytime ?
         callback = function()
-            M.set_lsp_rclick_menu()
-            M.set_repl_rclick_menu()
-            -- M.set_dap_rclick_menu()
-            -- M.set_java_rclick_menu()
-            -- M.set_nvimtree_rclick_menu()
-            M.set_rest_rclick_menu()
-            M.set_spectre_rclick_menu()
-            M.set_sniprun_rclick_menu()
-            -- M.set_orgmode_rclick_menu()
-            M.set_telescope_rclick_menu()
-            M.set_git_rclick_menu()
-            M.set_toggle_rclick_menu()
+		  for _, component in ipairs(M.active_menus) do
+			component()
+		  end
         end
     })
 end
