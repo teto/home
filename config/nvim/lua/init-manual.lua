@@ -498,54 +498,57 @@ use({
 use({ 'seandewar/nvimesweeper', opt = true })
 use({ 'voldikss/vim-translator', opt = true })
 use('calvinchengx/vim-aftercolors') -- load after/colors
+-- Vim-cool disables search highlighting when you are done searching and re-enables it when you search again.
+use('romainl/vim-cool')
+-- use('lrangell/theme-cycler.nvim') -- doesnt work
 use('bfredl/nvim-luadev') -- lua repl :Luadev
 -- use('alok/notational-fzf-vim') -- to take notes, :NV
--- use {
--- 	'hkupty/iron.nvim',
--- 	config = function ()
--- 		local iron = require("iron.core")
--- 		iron.setup {
--- 		config = {
--- 			-- If iron should expose `<plug>(...)` mappings for the plugins
--- 			should_map_plug = false,
--- 			-- Whether a repl should be discarded or not
--- 			scratch_repl = true,
--- 			-- Your repl definitions come here
--- 			repl_definition = {
--- 				sh = { command = {"zsh"} },
--- 				nix = { command = {"nix",  "repl", "/home/teto/nixpkgs"} },
--- 				-- copied from the nix wrapper :/
--- 				lua = { command = "/nix/store/snzm30m56ps3wkn24van553336a4yylh-luajit-2.1.0-2022-04-05-env/bin/lua"}
--- 			},
--- 			repl_open_cmd = require('iron.view').curry.bottom(40),
--- 			-- how the REPL window will be opened, the default is opening
--- 			-- a float window of height 40 at the bottom.
--- 		},
--- 		-- Iron doesn't set keymaps by default anymore. Set them here
--- 		-- or use `should_map_plug = true` and map from you vim files
--- 		keymaps = {
--- 			send_motion = "<space>sc",
--- 			visual_send = "<space>sc",
--- 			send_file = "<space>sf",
--- 			send_line = "<space>sl",
--- 			send_mark = "<space>sm",
--- 			mark_motion = "<space>mc",
--- 			mark_visual = "<space>mc",
--- 			remove_mark = "<space>md",
--- 			cr = "<space>s<cr>",
--- 			interrupt = "<space>s<space>",
--- 			exit = "<space>sq",
--- 			clear = "<space>cl",
--- 		},
--- 		-- If the highlight is on, you can change how it looks
--- 		-- For the available options, check nvim_set_hl
--- 		highlight = {
--- 			italic = true
--- 		}
--- 		}
+use {
+	'hkupty/iron.nvim',
+	config = function ()
+		local iron = require("iron.core")
+		iron.setup {
+		config = {
+			-- If iron should expose `<plug>(...)` mappings for the plugins
+			should_map_plug = false,
+			-- Whether a repl should be discarded or not
+			scratch_repl = true,
+			-- Your repl definitions come here
+			repl_definition = {
+				sh = { command = {"zsh"} },
+				nix = { command = {"nix",  "repl", "/home/teto/nixpkgs"} },
+				-- copied from the nix wrapper :/
+				lua = { command = "lua"}
+			},
+			repl_open_cmd = require('iron.view').curry.bottom(40),
+			-- how the REPL window will be opened, the default is opening
+			-- a float window of height 40 at the bottom.
+		},
+		-- Iron doesn't set keymaps by default anymore. Set them here
+		-- or use `should_map_plug = true` and map from you vim files
+		keymaps = {
+			send_motion = "<space>sc",
+			visual_send = "<space>sc",
+			send_file = "<space>sf",
+			send_line = "<space>sl",
+			send_mark = "<space>sm",
+			mark_motion = "<space>mc",
+			mark_visual = "<space>mc",
+			remove_mark = "<space>md",
+			cr = "<space>s<cr>",
+			interrupt = "<space>s<space>",
+			exit = "<space>sq",
+			clear = "<space>cl",
+		},
+		-- If the highlight is on, you can change how it looks
+		-- For the available options, check nvim_set_hl
+		highlight = {
+			italic = true
+		}
+		}
 
--- 	end
--- }
+	end
+}
 -- use 'neovimhaskell/nvim-hs.vim' -- to help with nvim-hs
 use('teto/vim-listchars') -- to cycle between different list/listchars configurations
 use('chrisbra/csv.vim')
@@ -1194,7 +1197,7 @@ use('marko-cerovac/material.nvim')
 -- }}}
 
 -- use 'anuvyklack/hydra.nvim' -- to create submodes
-use('skywind3000/vim-quickui') -- to design cool uis
+-- use('skywind3000/vim-quickui') -- to design cool uis
 use('neovim/nvim-lspconfig') -- while fuzzing details out
 -- use '~/neovim/nvim-lspconfig' -- while fuzzing details out
 
@@ -1362,12 +1365,12 @@ if has_cmp then
     -- }
 end
 
-vim.api.nvim_create_autocmd('MenuPopup', {
-    callback = function()
-        -- vim.highlight.on_yank({ higroup = 'IncSearch', timeout = 1000 })
-		print("hello")
-    end,
-})
+-- vim.api.nvim_create_autocmd('MenuPopup', {
+--     callback = function()
+--         -- vim.highlight.on_yank({ higroup = 'IncSearch', timeout = 1000 })
+-- 		print("hello")
+--     end,
+-- })
 
 
 -- Load custom tree-sitter grammar for org filetype
@@ -1475,8 +1478,8 @@ use({
 -- use { 'jbyuki/monolithic.nvim' } -- write latex equations in ASCII
 
 -- vim.g.sonokai_style = 'atlantis'
--- vim.cmd([[colorscheme sonokai]])
-vim.cmd([[colorscheme janah]])
+vim.cmd([[colorscheme sonokai]])
+-- vim.cmd([[colorscheme janah]])
 -- vim.cmd([[colorscheme pywal]])
 local has_sniprun, sniprun = pcall(require, 'sniprun')
 
