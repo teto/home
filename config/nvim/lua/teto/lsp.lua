@@ -54,7 +54,8 @@ lspconfig.sumneko_lua.setup {
 					"vim", "describe", "it", "before_each", "after_each", "pending"
 					, "teardown"
 				},
-				disable = { "lowercase-global", "unused-function" }
+			   unusedLocalExclude = {"_*" },
+			   disable = { "lowercase-global", "unused-function" }
 			},
 			workspace = {
 				checkThirdParty = false,

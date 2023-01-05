@@ -1,4 +1,10 @@
 #+title: test
+#+property: :tangle xmonad.hs
+
+
+* show me the possibilities of orgmode
+  Distrotube shows the tangle option in https://www.youtube.com/watch?v=D3FzMPZm7vY
+  The associated PR is https://github.com/nvim-orgmode/orgmode/pull/435
 
 https://github.com/nvim-orgmode/orgmode
 Global mappins

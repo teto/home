@@ -1,5 +1,6 @@
 -- inspired by https://gitlab.com/gabmus/nvpunk/-/blob/master/lua/nvpunk/util/context_menu.lua
 -- one can run 'popup <name>' to go straight to the correct menu
+-- TODO add the number of entries in the top-level menu
 local M = {
  active_menus = {}
 

@@ -3,7 +3,7 @@
 -- https://www.reddit.com/r/neovim/comments/o8dlwg/how_to_append_to_an_option_in_lua/
 -- local configs = require'nvim_lsp/configs'
 local has_telescope, telescope = pcall(require, 'telescope')
-local has_fzf_lua, _ = pcall(require, 'fzf-lua')
+local has_fzf_lua, fzf_lua = pcall(require, 'fzf-lua')
 
 -- my treesitter config
 -- local myMenu = require('teto.menu')
@@ -500,7 +500,8 @@ use({ 'voldikss/vim-translator', opt = true })
 use('calvinchengx/vim-aftercolors') -- load after/colors
 -- Vim-cool disables search highlighting when you are done searching and re-enables it when you search again.
 use('romainl/vim-cool')
--- use('lrangell/theme-cycler.nvim') -- doesnt work
+-- lua require"themeCycler".open()
+use('lrangell/theme-cycler.nvim') -- doesnt work
 use('bfredl/nvim-luadev') -- lua repl :Luadev
 -- use('alok/notational-fzf-vim') -- to take notes, :NV
 use {
@@ -761,6 +762,7 @@ use({
 
                     -- haskell-language-server relies heavily on codeLenses,
                     -- so auto-refresh (see advanced configuration) is enabled by default
+					local opts = {}
                     vim.keymap.set('n', '<leader>ca', vim.lsp.codelens.run, opts)
                     vim.keymap.set('n', '<leader>cl', vim.lsp.codelens.run, opts)
                     -- vim.keymap.set('n', '<leader>hs', ht.hoogle.hoogle_signature, opts)
@@ -822,92 +824,92 @@ end})
 -- require("tealmaker").build_all(verbose_output)
 
 -- overrides vim.ui / vim.select with the backend of my choice
-use({
-    'stevearc/dressing.nvim',
-    config = function()
-        require('dressing').setup({
-            input = {
-                -- Default prompt string
-                default_prompt = '➤ ',
-                -- When true, <Esc> will close the modal
-                insert_only = true,
-                -- These are passed to nvim_open_win
-                anchor = 'SW',
-                relative = 'cursor',
-                border = 'rounded',
-                -- These can be integers or a float between 0 and 1 (e.g. 0.4 for 40%)
-                prefer_width = 40,
-                width = nil,
-                -- min_width and max_width can be a list of mixed types.
-                -- min_width = {20, 0.2} means "the greater of 20 columns or 20% of total"
-                max_width = { 140, 0.9 },
-                min_width = { 20, 0.2 },
+-- use({
+--     'stevearc/dressing.nvim',
+--     config = function()
+--         require('dressing').setup({
+--             input = {
+--                 -- Default prompt string
+--                 default_prompt = '➤ ',
+--                 -- When true, <Esc> will close the modal
+--                 insert_only = true,
+--                 -- These are passed to nvim_open_win
+--                 anchor = 'SW',
+--                 relative = 'cursor',
+--                 border = 'rounded',
+--                 -- These can be integers or a float between 0 and 1 (e.g. 0.4 for 40%)
+--                 prefer_width = 40,
+--                 width = nil,
+--                 -- min_width and max_width can be a list of mixed types.
+--                 -- min_width = {20, 0.2} means "the greater of 20 columns or 20% of total"
+--                 max_width = { 140, 0.9 },
+--                 min_width = { 20, 0.2 },
 
-                -- see :help dressing_get_config
-                get_config = nil,
-            },
-            mappings = {
-                ['<C-c>'] = 'Close',
-            },
-            select = {
-                -- Priority list of preferred vim.select implementations
-                backend = { 'fzf_lua', 'telescope', 'builtin', 'nui' },
+--                 -- see :help dressing_get_config
+--                 get_config = nil,
+--             },
+--             mappings = {
+--                 ['<C-c>'] = 'Close',
+--             },
+--             select = {
+--                 -- Priority list of preferred vim.select implementations
+--                 backend = { 'fzf_lua', 'telescope', 'builtin', 'nui' },
 
-                -- Options for fzf selector
-                fzf = {
-                    window = {
-                        width = 0.5,
-                        height = 0.4,
-                    },
-                },
-                telescope = {
-                    window = {
-                        width = 0.5,
-                        height = 0.4,
-                    },
-                },
+--                 -- Options for fzf selector
+--                 fzf = {
+--                     window = {
+--                         width = 0.5,
+--                         height = 0.4,
+--                     },
+--                 },
+--                 telescope = {
+--                     window = {
+--                         width = 0.5,
+--                         height = 0.4,
+--                     },
+--                 },
 
-                -- Options for nui Menu
-                -- nui = {
-                -- position = "50%",
-                -- size = nil,
-                -- relative = "editor",
-                -- border = {
-                -- style = "rounded",
-                -- },
-                -- max_width = 80,
-                -- max_height = 40,
-                -- },
--- dressing.select.builtin.win_options.winblend 
-                -- Options for built-in selector
-                builtin = {
-                    -- These are passed to nvim_open_win
-                    anchor = 'NW',
-                    relative = 'cursor',
-                    border = 'rounded',
+--                 -- Options for nui Menu
+--                 -- nui = {
+--                 -- position = "50%",
+--                 -- size = nil,
+--                 -- relative = "editor",
+--                 -- border = {
+--                 -- style = "rounded",
+--                 -- },
+--                 -- max_width = 80,
+--                 -- max_height = 40,
+--                 -- },
+-- -- dressing.select.builtin.win_options.winblend
+--                 -- Options for built-in selector
+--                 builtin = {
+--                     -- These are passed to nvim_open_win
+--                     anchor = 'NW',
+--                     relative = 'cursor',
+--                     border = 'rounded',
 
-                    -- Window options
-					win_options = {
-						winblend = 10,
-					},
+--                     -- Window options
+-- 					win_options = {
+-- 						winblend = 10,
+-- 					},
 
-                    -- These can be integers or a float between 0 and 1 (e.g. 0.4 for 40%)
-                    -- the min_ and max_ options can be a list of mixed types.
-                    -- max_width = {140, 0.8} means "the lesser of 140 columns or 80% of total"
-                    width = nil,
-                    max_width = { 140, 0.8 },
-                    min_width = { 40, 0.2 },
-                    height = nil,
-                    max_height = 0.9,
-                    min_height = { 10, 0.2 },
-                },
+--                     -- These can be integers or a float between 0 and 1 (e.g. 0.4 for 40%)
+--                     -- the min_ and max_ options can be a list of mixed types.
+--                     -- max_width = {140, 0.8} means "the lesser of 140 columns or 80% of total"
+--                     width = nil,
+--                     max_width = { 140, 0.8 },
+--                     min_width = { 40, 0.2 },
+--                     height = nil,
+--                     max_height = 0.9,
+--                     min_height = { 10, 0.2 },
+--                 },
 
-                -- see :help dressing_get_config
-                get_config = nil,
-            },
-        })
-    end,
-})
+--                 -- see :help dressing_get_config
+--                 get_config = nil,
+--             },
+--         })
+--     end,
+-- })
 
 -- use 'https://git.sr.ht/~whynothugo/lsp_lines.nvim'
 -- use({
@@ -1067,19 +1069,19 @@ use({
 -- }
 
 -- telescope plugins {{{
--- use({
---     '~/telescope.nvim',
---     requires = {
---         'nvim-telescope/telescope-github.nvim',
---         'nvim-telescope/telescope-symbols.nvim',
---         'nvim-telescope/telescope-fzy-native.nvim',
---         'nvim-telescope/telescope-media-files.nvim',
---         'nvim-telescope/telescope-packer.nvim', -- :Telescope pack,e
---         'MrcJkb/telescope-manix',   -- :Telescope manix
--- 		'luc-tielen/telescope_hoogle'
--- 		-- psiska/telescope-hoogle.nvim looks less advanced
---     },
--- })
+use({
+    '~/telescope.nvim',
+    requires = {
+        'nvim-telescope/telescope-github.nvim',
+        'nvim-telescope/telescope-symbols.nvim',
+        'nvim-telescope/telescope-fzy-native.nvim',
+        'nvim-telescope/telescope-media-files.nvim',
+        'nvim-telescope/telescope-packer.nvim', -- :Telescope pack,e
+        'MrcJkb/telescope-manix',   -- :Telescope manix
+		'luc-tielen/telescope_hoogle'
+		-- psiska/telescope-hoogle.nvim looks less advanced
+    },
+})
 --}}}
 
 -- use "terrortylor/nvim-comment"
@@ -1545,9 +1547,11 @@ vim.keymap.set('n', '<leader>d', function()
 end)
 
 if has_fzf_lua then
+	require('fzf-lua.providers.ui_select').register({})
+
     require('teto.fzf-lua').register_keymaps()
     local fzf_history_dir = vim.fn.expand('~/.local/share/fzf-history')
-    require('fzf-lua').setup({
+    fzf_lua.setup({
         -- [...]
         fzf_opts = {
             -- [...]
@@ -1870,8 +1874,8 @@ if false then
                     ['<esc>'] = actions.close,
                 },
                 n = {
-                    ['<C-t>'] = function(prompt_bufnr, _mode)
-                        require('trouble.providers.telescope').open_with_trouble(prompt_bufnr, _mode)
+                    ['<C-t>'] = function(prompt_bufnr, mode)
+                        require('trouble.providers.telescope').open_with_trouble(prompt_bufnr, mode)
                     end,
                     -- ["<c-t>"] = trouble.open_with_trouble,
                     ['<esc>'] = actions.close,
@@ -2073,7 +2077,7 @@ local function open_contextual_menu()
 
     local curpos = vim.fn.getcurpos()
 
-    menu_opts = {
+    local menu_opts = {
         kind = 'menu',
         prompt = 'Main menu',
         experimental_mouse = true,

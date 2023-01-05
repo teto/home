@@ -9,10 +9,14 @@ local obsession_component = require('teto.lualine.obsession')
 
 -- print(vim.inspect(obsession_component))
 
--- sections = { lualine_a = { hello } }
 
 -- local component = {function() return "toto" end , color = {fg= "red"}}
 
+-- Trying to display
+local get_workspace_diagnostic_count = function ()
+  local ws_diags = #vim.diagnostic.get()
+  return "count: "..tostring(ws_diags)
+end
 require('lualine').setup({
 	options = {
 		icons_enabled = false,
@@ -26,7 +30,6 @@ require('lualine').setup({
 	sections = {
 		lualine_a = { 'branch' },
 		lualine_b = {
-			-- path=2 => absolute path
 			{
 				'filename',
 				path = 1,
@@ -34,15 +37,9 @@ require('lualine').setup({
 				on_click = function(_nb_of_clicks, _button, _modifiers)
 				 local filename = vim.fn.getreg('%')
 					print('copying filename to clipboard: '..filename)
-					-- copy it into clipboard
-					-- vim.cmd("call provider#clipboard#Call('set', [ ['tata'], 'v','\"']))")
 					clip.copy(filename)
--- lua vim.api.nvim_feedkeys("+y", "n", false)
---     return call(s:clipboard[a:method],a:args,s:clipboard)
---     echo provider#clipboard#Call('get', ['*'])
--- vim.cmd("provider#clipboard#Call('copy', )")
--- reg) abort
 				end,
+			-- path=2 => absolute path
 				-- the function receives several arguments
 				-- - number of clicks incase of multiple clicks
 				-- - mouse button used (l(left)/r(right)/m(middle)/...)
@@ -66,6 +63,7 @@ require('lualine').setup({
 		lualine_y = { 'diagnostics', 'progress' }, -- progress = %progress in file
 		lualine_z = {
 		  obsession_component
+		  , get_workspace_diagnostic_count
 		  , 'location'
 		},
 	},
