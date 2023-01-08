@@ -9,8 +9,10 @@ ft_to_parser.json = "json" -- the someft filetype will use the python parser and
 ft_to_parser.httpResult = "http"
 
 config.config = config.setup {
-    highlight = {
-        enable = false,                    -- false will disable the whole extension
+   -- why is treesitter not using stdpath('data') ?!
+   parser_install_dir = "/home/teto/parsers",
+   highlight = {
+        enable = true,                    -- false will disable the whole extension
         disable = {
 			'rust',
 			'bash',
@@ -21,7 +23,7 @@ config.config = config.setup {
 		},        -- list of language that will be disabled
     },
     incremental_selection = {
-        enable = false,
+        enable = true,
 --         disable = { 'cpp', 'lua' },
 --         keymaps = {                       -- mappings for incremental selection (visual mappings)
 --           init_selection = 'gnn',         -- maps in normal mode to init the node/scope selection
@@ -47,11 +49,16 @@ config.config = config.setup {
 --     ensure_installed = {"c"}, -- one of 'all', 'language', or a list of languages
 
 	playground = {
-		enable = false,
+		enable = true,
 		disable = {},
 		updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
-		persist_queries = false -- Whether the query persists across vim sessions
-	}
+		persist_queries = true -- Whether the query persists across vim sessions
+	},
+  query_linter = {
+    enable = true,
+    use_virtual_text = true,
+    lint_events = { "BufWrite", "CursorHold" },
+  },
 }
 -- return config.config
 

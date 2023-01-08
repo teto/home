@@ -5,7 +5,7 @@
 * show me the possibilities of orgmode
   Distrotube shows the tangle option in https://www.youtube.com/watch?v=D3FzMPZm7vY
   The associated PR is https://github.com/nvim-orgmode/orgmode/pull/435
-
+https://github.com/nvim-orgmode/orgmode/issues/54
 https://github.com/nvim-orgmode/orgmode
 Global mappins
 Open agenda prompt: <Leader>oa
@@ -34,3 +34,4 @@ echo $i
 
 done
 #+END_SRC
+

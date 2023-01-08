@@ -202,6 +202,9 @@ bindsym $mod+ctrl+minus move scratchpad
 # bindsym $mod+shift+n exec nemo
 bindsym $mod+shift+p mode mouse
 
+# TODO use /nix/store/wdpmd24p4bdc8c3y63sjr5x272fxw0mx-i3easyfocus-20190411/bin/i3-easyfocus
+bindsym Menu exec /nix/store/wdpmd24p4bdc8c3y63sjr5x272fxw0mx-i3easyfocus-20190411/bin/i3-easyfocus
+
 
 mode mouse {
 

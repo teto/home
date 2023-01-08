@@ -79,17 +79,14 @@ let
     idris-vim
   ];
 
+  treesitterPlugins = with pkgs.vimPlugins; [
+     {
+	   # for :TSPlaygroundToggle
+       plugin = playground;
+	 }
+  ];
+
   luaPlugins = with pkgs.vimPlugins; [
-    # {
-    #   plugin = nvim-treesitter;
-    #   runtime = {
-    #     "parser" = {
-    #       recursive = true;
-    #       # target
-    #       # target = "parser";
-    #       source = parserDir;
-    #     };
-    #   };
 
       # plugin = (nvim-treesitter.withPlugins (
       #     plugins: with plugins; [
@@ -860,6 +857,7 @@ let
     basePlugins
     ++ overlayPlugins
     ++ luaPlugins
+    ++ treesitterPlugins
     ++ colorschemePlugins
     ++ completionPlugins
     ++ filetypePlugins

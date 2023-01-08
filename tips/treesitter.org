@@ -1,4 +1,9 @@
+#+title: Treesitter tips
 
 local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
 
 Parsers are searched for as `parser/{lang}.*` in any 'runtimepath' directory.
++BEGIN_SRC viml 
+set rtp+=/home/teto/tree-sitter-http
+checkhealth vim.treesitter
++END_SRC

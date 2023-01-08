@@ -41,6 +41,7 @@ let
     # # " lua require('aniseed.env').init()
     #  # }
     # }
+
     (luaPlugin {
       plugin = hotpot-nvim;
       # type = "lua";
@@ -67,7 +68,7 @@ let
 			   }
 			 }
 		   })
-		'';
+		   '';
     })
   ];
 

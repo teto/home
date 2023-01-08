@@ -521,7 +521,7 @@ use {
 				-- copied from the nix wrapper :/
 				lua = { command = "lua"}
 			},
-			repl_open_cmd = require('iron.view').curry.bottom(40),
+			repl_open_cmd = require('iron.view').bottom(40),
 			-- how the REPL window will be opened, the default is opening
 			-- a float window of height 40 at the bottom.
 		},
@@ -1826,24 +1826,22 @@ use({
 vim.g.UltiSnipsSnippetDirectories = { vim.fn.stdpath('config') .. '/snippets' }
 vim.g.tex_flavor = 'latex'
 -- Treesitter config {{{
---	'nvim-treesitter/completion-treesitter' " extension of completion-nvim,
+require('teto.treesitter')
+
 -- use { 'nvim-treesitter/nvim-treesitter' }
-local enable_treesitter = false
-if enable_treesitter then
-    -- use { 'nvim-treesitter/nvim-treesitter' }
-    use({
-        'nvim-treesitter/playground',
-        requires = { 'nvim-treesitter/nvim-treesitter' },
-    })
+
+-- :TSPlaygroundToggle
+-- use({
+-- 	'nvim-treesitter/playground',
+-- 	requires = { 'nvim-treesitter/nvim-treesitter' },
+-- })
     -- use {
     -- 	'p00f/nvim-ts-rainbow',
     -- 	requires = { 'nvim-treesitter/nvim-treesitter' }
     -- }
-    use({ 'nvim-treesitter/nvim-treesitter-textobjects' })
-end
+-- use({ 'nvim-treesitter/nvim-treesitter-textobjects' })
 --}}}
 -- my treesitter config
-require('teto.treesitter')
 
 -- telescope {{{
 -- TODO check for telescope github extension too

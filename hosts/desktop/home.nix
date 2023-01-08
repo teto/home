@@ -23,8 +23,6 @@
   #  defaultEditor = true;
   # };
 
-  programs.neovim.defaultEditor = true;
-
 
   programs.pazi = {
     enable = false;
