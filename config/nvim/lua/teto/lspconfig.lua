@@ -112,16 +112,8 @@ lspconfig.pyright.setup {
 
 -- typescript
 lspconfig.tsserver.setup({
-	autostart = false
-
+	autostart = true
 })
-local function make_cmp_capabilities()
-	local has_cmp_lsp, cmp_lsp = pcall(require, 'cmp_nvim_lsp')
-	if has_cmp_lsp then
-		return cmp_lsp.default_capabilities()
-	end
-	return vim.lsp.protocol.make_client_capabilities()
-end
 
 -- commented out because https://github.com/MrcJkb/haskell-tools.nvim recommends to disable it
 --lspconfig.hls.setup({

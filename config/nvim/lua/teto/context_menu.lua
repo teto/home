@@ -14,6 +14,13 @@ M.buf_has_lsp = function()
     )
 end
 
+M.buf_has_treesitter = function()
+    return vim.treesitter.get_parser()
+    -- return not vim.tbl_isempty(
+    --     vim.lsp.buf_get_clients(vim.api.nvim_get_current_buf())
+    -- )
+end
+
 --- Checks if current buf has LSPs attached
 ---@return boolean
 M.buf_has_sniprun = function()
@@ -116,6 +123,17 @@ M.set_rclick_submenu = function(menu_name, submenu_label, items, bindif)
     )
 end
 
+-- vim.diagnostic.config({
+--     -- disabled because too big in haskell
+--     virtual_lines = false,
+--     virtual_text = true,
+--     -- {
+--     -- severity = { min = vim.diagnostic.severity.WARN }
+--     -- },
+--     signs = true,
+--     severity_sort = true,
+-- })
+
 M.set_lsp_rclick_menu = function()
     M.set_rclick_submenu('TetoMenuLsp', 'LSP         ', {
         {'Code Actions           <space>ca', '<space>ca'},
@@ -127,6 +145,10 @@ M.set_lsp_rclick_menu = function()
         {'References                    gr',        'gr'},
         {'Expand Diagnostics      <space>e',  '<space>e'},
         {'Auto Format', '<cmd>lua vim.lsp.buf.format()<cr>'},
+        -- error only
+        {'Show errors only', '<cmd>echo "TODO"<cr>'},
+        -- vim.diagnostic.config(conf)
+        -- {'Toggle hints only', ''},
     }, M.buf_has_lsp)
 end
 -- menu_add(
@@ -238,6 +260,14 @@ M.set_toggle_rclick_menu = function()
     }, function () return true end)
 end
 
+M.set_treesitter_rclick_menu = function()
+    M.set_rclick_submenu('MenuTreesitter', 'Treesitter ->', {
+        {'Show tree',   '<cmd>lua vim.treesitter.show_tree()<cr>'},
+        -- {'Obsession',   '<cmd>Obsession<cr>'},
+        -- {'Indent guides',   '<cmd>IndentBlanklineToggle<cr>'},
+    }, function () return true end)
+end
+
 
 M.add_component = function(component)
  table.insert(M.active_menus, component)
@@ -258,6 +288,7 @@ M.add_component(M.set_repl_rclick_menu)
 M.add_component(M.set_rest_rclick_menu)
 M.add_component(M.set_sniprun_rclick_menu)
 M.add_component(M.set_toggle_rclick_menu)
+M.add_component(M.set_treesitter_rclick_menu)
 
 -- -- menu_add("Toggle.Biscuits", 'lua require("nvim-biscuits").toggle_biscuits()')
 

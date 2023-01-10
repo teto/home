@@ -222,6 +222,41 @@ vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'grey' })
 -- })
 -- my_image:transmit() -- send image data to terminal
 
+
+-- nvim-treesitter
+-- require("nvim-tree").setup({ update_focused_file = { enable = true, }, })
+
+use('/home/teto/neovim/rest.nvim')
+
+local has_rest, rest = pcall(require, 'rest-nvim')
+if has_rest then
+	rest.setup({
+		-- Open request results in a horizontal split
+		result_split_horizontal = false,
+		-- Skip SSL verification, useful for unknown certificates
+		skip_ssl_verification = false,
+		-- Highlight request on run
+		highlight = {
+			enabled = true,
+			timeout = 150,
+		},
+		result = {
+			-- toggle showing URL, HTTP info, headers at top the of result window
+			show_url = true,
+			show_http_info = true,
+			show_headers = true,
+		-- disable formatters else they generate errors/add dependencies
+		-- for instance when it detects html, it tried to run 'tidy'
+		formatters = {
+			html = false,
+			jq = false
+		},
+		},
+		-- Jump to request line on run
+		jump_to_request = false,
+	})
+end
+
 -- use {
 --   -- Display marks for different kinds of decorations across the buffer. Builtin handlers include:
 --   -- 'lewis6991/satellite.nvim',
@@ -720,7 +755,6 @@ vim.api.nvim_create_autocmd('BufReadPost', {
 -- 	'DougBeney/pickachu'
 -- }
 
-use('/home/teto/neovim/rest.nvim')
 -- provides 'NvimTree'
 use('kyazdani42/nvim-tree.lua')
 use 'rhysd/committia.vim'
@@ -771,17 +805,50 @@ use({
                 -- ...
                 settings = { -- haskell-language-server options
 					haskell = {
-						formattingProvider = 'ormolu',
-						checkProject = true, -- Setting this to true could have a performance impact on large mono repos.
-						-- ...
+						-- Setting this to true could have a performance impact on large mono repos.
+						checkProject = false,
+						checkParents = "NeverCheck",
+--		-- "haskell.trace.server": "messages",
+						logFile = "/tmp/nvim-hls.log",
+--		-- "codeLens.enable": true,
+						completionSnippetsOn = true,
+						-- formattingProvider = 'ormolu',
+						formattingProvider = "stylish-haskell",
 						plugin = {
 							refineImports = {
-							codeActionsOn = true,
-							codeLensOn = false,
+								codeActionsOn = true,
+								codeLensOn = false,
+							},
+							hlint = {
+							-- "config": {
+							--	   "flags": []
+							-- },
+								diagnosticsOn= false,
+								codeActionsOn= false
 							},
 						},
 					},
                 },
+--	settings = {
+--	  haskell = {
+--		completionSnippetsOn = true,
+--		formattingProvider = "stylish-haskell",
+--		-- "haskell.trace.server": "messages",
+--		-- logFile = "/tmp/nvim-hls.log",
+--		-- "codeLens.enable": true,
+--	  -- hlintOn = false
+		--plugin= {
+		--	hlint = {
+		--  -- "config": {
+		--  --	   "flags": []
+		--  -- },
+		--	  diagnosticsOn= false,
+		--	  codeActionsOn= false
+		--	},
+		--  }
+--		},
+--	  },
+
             },
         })
     end,
@@ -1414,26 +1481,26 @@ end
 --	   requires = "nvim-lua/plenary.nvim"
 -- }
 use('ray-x/lsp_signature.nvim') -- display function signature in insert mode
--- use({
---     'Pocco81/AutoSave.nvim' -- :ASToggle /AsOn / AsOff
--- 	, config = function ()
--- 		local autosave = require("autosave")
--- 		autosave.setup({
--- 			enabled = true,
--- 			execution_message = "AutoSave: saved at " .. vim.fn.strftime("%H:%M:%S"),
--- 			events = { "FocusLost"}, -- "InsertLeave"
--- 			conditions = {
--- 				exists = true,
--- 				filetype_is_not = {},
--- 				modifiable = true
--- 			},
--- 			write_all_buffers = false,
--- 			on_off_commands = true,
--- 			clean_command_line_interval = 2500
--- 		}
--- 		)
---     end
--- })
+use({
+    'Pocco81/AutoSave.nvim' -- :ASToggle /AsOn / AsOff
+	, config = function ()
+		local autosave = require("autosave")
+		autosave.setup({
+			enabled = true,
+			execution_message = "AutoSave: saved at " .. vim.fn.strftime("%H:%M:%S"),
+			events = { "FocusLost"}, -- "InsertLeave"
+			conditions = {
+				exists = true,
+				filetype_is_not = {},
+				modifiable = true
+			},
+			write_all_buffers = false,
+			on_off_commands = true,
+			clean_command_line_interval = 2500
+		}
+		)
+    end
+})
 
 -- use 'sindrets/diffview.nvim' -- :DiffviewOpen
 
@@ -1984,7 +2051,7 @@ vim.diagnostic.config({
     severity_sort = true,
 })
 
-require('teto.lsp')
+require('teto.lspconfig')
 
 -- logs are written to /home/teto/.cache/vim-lsp.log
 vim.lsp.set_log_level('info')
@@ -2049,7 +2116,6 @@ vim.cmd([[highlight IndentBlanklineIndent6 guifg=#C678DD gui=nocombine]])
 -- menu_add_cmd('Search.Search_and_replace', "lua require('spectre').open()")
 -- menu_add('Search.Test', 'let a=3')
 
--- menu_add('Rest.RunRequest', "<cmd>lua require('rest-nvim').run(true)<cr>")
 
 -- menu_add("Search.Search\ in\ current\ Buffer", :Grepper -switch -buffer")
 -- menu_add("Search.Search\ across\ Buffers :Grepper -switch -buffers")
