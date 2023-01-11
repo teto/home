@@ -81,14 +81,31 @@ let
 
   treesitterPlugins = with pkgs.vimPlugins; [
      {
-	   # for :TSPlaygroundToggle
+       # for :TSPlaygroundToggle
        plugin = playground;
-	 }
+     }
   ];
 
   luaPlugins = with pkgs.vimPlugins; [
+    (luaPlugin {
+      plugin = nvim-lspconfig;
+      config = let nodePkgs = pkgs.nodePackages; in ''
+        local lspconfig = require 'lspconfig'
+        lspconfig.tsserver.setup({
+            autostart = true,
+            -- TODO should be generated/fixed in nix
+            cmd = {
+              "${lib.getExe nodePkgs.typescript-language-server}",
+                  "--stdio",
+                  "--tsserver-path",
+                  -- found with 'nix build .#nodePackages.typescript'
+                  "${nodePkgs.typescript}/lib/node_modules/typescript/lib"
+            }
+         })
+        '';
+    })
 
-	{
+    {
       plugin = (nvim-treesitter.withPlugins (
           plugins: with plugins; [
             # tree-sitter-bash
@@ -572,14 +589,13 @@ let
       plugin = orgmode;
 
       config = ''
-                require('orgmode').setup_ts_grammar()
-                require('orgmode').setup{
-                    org_capture_templates = {'~/nextcloud/org/*', '~/orgmode/**/*'},
-                    org_default_notes_file = '~/orgmode/refile.org',
-                    -- TODO add templates
-                    org_agenda_templates = { t = { description = 'Task', template = '* TODO %?\n  %u' } },
-                }
-               '';
+          require('orgmode').setup_ts_grammar()
+          require('orgmode').setup{
+              org_capture_templates = {'~/nextcloud/org/*', '~/orgmode/**/*'},
+              org_default_notes_file = '~/orgmode/refile.org',
+              -- TODO add templates
+              org_agenda_templates = { t = { description = 'Task', template = '* TODO %?\n  %u' } },
+          }'';
     })
 
     { plugin = editorconfig-vim; }
@@ -596,8 +612,7 @@ let
       # " https://github.com/neovim/neovim/issues/4487
       config = ''
         vim.g.fzf_command_prefix = 'Fzf' -- prefix commands :Files become :FzfFiles, etc.
-        vim.g.fzf_nvim_statusline = 0 -- disable statusline overwriting
-      '';
+        vim.g.fzf_nvim_statusline = 0 -- disable statusline overwriting'';
     })
 
     # defined in overrides: TODO this should be easier: like fzf-vim should be enough

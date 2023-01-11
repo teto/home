@@ -18,6 +18,7 @@ config.config = config.setup {
 			'bash',
 			-- 'nix',
 			'python',
+			'http', -- while I am working on the parser !
 			-- 'c',
 			'lua' -- cos breaks
 		},        -- list of language that will be disabled

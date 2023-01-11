@@ -1592,6 +1592,8 @@ if has_sniprun then
 	vim.api.nvim_set_keymap('n', '<leader>ff', '<Plug>SnipRun', {silent = true})
 end
 
+vim.api.nvim_set_keymap('n', '<f3>', '<cmd>vim.treesitter.show_tree()<cr>', {})
+
 vim.g.indicator_errors = ''
 vim.g.indicator_warnings = ''
 vim.g.indicator_info = '🛈'
