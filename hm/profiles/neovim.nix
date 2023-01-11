@@ -88,30 +88,31 @@ let
 
   luaPlugins = with pkgs.vimPlugins; [
 
-      # plugin = (nvim-treesitter.withPlugins (
-      #     plugins: with plugins; [
-      #       tree-sitter-bash
-      #       tree-sitter-c
-      #       tree-sitter-lua
-      #       tree-sitter-http
-      #       tree-sitter-json
-      #       tree-sitter-nix
-      #       # tree-sitter-haskell # crashes with a loop
-      #       tree-sitter-python
-      #       tree-sitter-html  # for rest.nvim
-      #       tree-sitter-norg
-      #       tree-sitter-org-nvim
-      #     ]
-      #   ));
+	{
+      plugin = (nvim-treesitter.withPlugins (
+          plugins: with plugins; [
+            # tree-sitter-bash
+            # tree-sitter-c
+            # tree-sitter-lua
+            # tree-sitter-http
+            # tree-sitter-json
+            # tree-sitter-nix
+            # # tree-sitter-haskell # crashes with a loop
+            # tree-sitter-python
+            # tree-sitter-html  # for rest.nvim
+            # tree-sitter-norg
+            # tree-sitter-org-nvim
+            tree-sitter-query
+          ]
+        ));
       # see https://github.com/NixOS/nixpkgs/issues/189838#issuecomment-1250993635 for rationale
-      # runtime 
       # config = ''
       # local available, config = pcall(require, 'nvim-treesitter.configs')
       # config.setup {
       # parser_install_dir = ${pkgs.buildEnv { name = "tree-sitter-grammars"; paths = tree-sitter-grammars; } }
       # }
       # '';
-    # }
+    }
     { plugin = satellite-nvim; }
     # { plugin = nvim-dap; }
     # (luaPlugin { 

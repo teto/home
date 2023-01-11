@@ -1484,19 +1484,19 @@ use('ray-x/lsp_signature.nvim') -- display function signature in insert mode
 use({
     'Pocco81/AutoSave.nvim' -- :ASToggle /AsOn / AsOff
 	, config = function ()
-		local autosave = require("autosave")
+		local autosave = require("auto-save")
 		autosave.setup({
 			enabled = true,
-			execution_message = "AutoSave: saved at " .. vim.fn.strftime("%H:%M:%S"),
+			-- execution_message = "AutoSave: saved at " .. vim.fn.strftime("%H:%M:%S"),
 			events = { "FocusLost"}, -- "InsertLeave"
-			conditions = {
-				exists = true,
-				filetype_is_not = {},
-				modifiable = true
-			},
+			-- conditions = {
+			-- 	exists = true,
+			-- 	filetype_is_not = {},
+			-- 	modifiable = true
+			-- },
 			write_all_buffers = false,
-			on_off_commands = true,
-			clean_command_line_interval = 2500
+			-- on_off_commands = true,
+			-- clean_command_line_interval = 2500
 		}
 		)
     end

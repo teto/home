@@ -112,7 +112,15 @@ lspconfig.pyright.setup {
 
 -- typescript
 lspconfig.tsserver.setup({
-	autostart = true
+	autostart = true,
+    -- TODO should be generated/fixed in nix
+    cmd = {
+      "typescript-language-server",
+          "--stdio",
+          "--tsserver-path",
+          -- found with 'nix build .#nodePackages.typescript'
+          "/nix/store/34pzigggq36pk9sz9a95bz53qlqx1mpx-typescript-4.9.4/lib/node_modules/typescript/lib"
+    }
 })
 
 -- commented out because https://github.com/MrcJkb/haskell-tools.nvim recommends to disable it
