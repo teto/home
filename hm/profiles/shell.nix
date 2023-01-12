@@ -59,9 +59,10 @@ in
       c = "cat";
       r = "ranger";
 
+      sscwl = "nix run .#simwork.core-webservice.local -- --bypass-manifest-check -vv";
       n = "nix develop";
-      nhs92 = "nix develop /home/teto/home#nhs92";
-      nhs94 = "nix develop /home/teto/home#nhs94";
+      nhs92 = "nix develop \$PWD/home#nhs92";
+      nhs94 = "nix develop \$PWD/home#nhs94";
       ns = "nix-shell";
       lg = "lazygit";
       #mostly for testin

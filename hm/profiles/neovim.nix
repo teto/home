@@ -87,23 +87,26 @@ let
   ];
 
   luaPlugins = with pkgs.vimPlugins; [
-    (luaPlugin {
-      plugin = nvim-lspconfig;
-      config = let nodePkgs = pkgs.nodePackages; in ''
-        local lspconfig = require 'lspconfig'
-        lspconfig.tsserver.setup({
-            autostart = true,
-            -- TODO should be generated/fixed in nix
-            cmd = {
-              "${lib.getExe nodePkgs.typescript-language-server}",
-                  "--stdio",
-                  "--tsserver-path",
-                  -- found with 'nix build .#nodePackages.typescript'
-                  "${nodePkgs.typescript}/lib/node_modules/typescript/lib"
-            }
-         })
-        '';
-    })
+	{
+	 plugin = b64-nvim;
+	}
+    # (luaPlugin {
+    #   plugin = nvim-lspconfig;
+    #   config = let nodePkgs = pkgs.nodePackages; in ''
+    #     local lspconfig = require 'lspconfig'
+    #     lspconfig.tsserver.setup({
+    #         autostart = true,
+    #         -- TODO should be generated/fixed in nix
+    #         cmd = {
+    #           "${lib.getExe nodePkgs.typescript-language-server}",
+    #               "--stdio",
+    #               "--tsserver-path",
+    #               -- found with 'nix build .#nodePackages.typescript'
+    #               "${nodePkgs.typescript}/lib/node_modules/typescript/lib"
+    #         }
+    #      })
+    #     '';
+    # })
 
     {
       plugin = (nvim-treesitter.withPlugins (
@@ -597,8 +600,6 @@ let
               org_agenda_templates = { t = { description = 'Task', template = '* TODO %?\n  %u' } },
           }'';
     })
-
-    { plugin = editorconfig-vim; }
 
     {
       # use ctrl a/xto cycle between different words

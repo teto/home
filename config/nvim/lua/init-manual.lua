@@ -215,6 +215,8 @@ vim.api.nvim_set_hl(0, 'Cursor', { ctermfg = 16, ctermbg = 253, fg = '#000000', 
 vim.api.nvim_set_hl(0, 'CursorLine', { fg = 'None', bg = '#293739' })
 vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'grey' })
 
+
+
 -- local my_image = require('hologram.image'):new({
 --	   source = '/home/teto/doctor.png',
 --	   row = 11,
@@ -226,7 +228,12 @@ vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'grey' })
 -- nvim-treesitter
 -- require("nvim-tree").setup({ update_focused_file = { enable = true, }, })
 
-use('/home/teto/neovim/rest.nvim')
+-- use('/home/teto/neovim/rest.nvim')
+-- while testing/developing rest.nvim
+vim.opt.runtimepath:prepend('/home/teto/neovim/rest.nvim')
+vim.opt.runtimepath:prepend('/home/teto/tree-sitter-http')
+-- f3 to show tree
+vim.api.nvim_set_keymap('n', '<f2>', "<cmd>lua require'plenary.reload'.reload_module('rest-nvim.request'); print(require'rest-nvim.request'.ts_get_requests())<cr>", {})
 
 local has_rest, rest = pcall(require, 'rest-nvim')
 if has_rest then
@@ -1592,7 +1599,7 @@ if has_sniprun then
 	vim.api.nvim_set_keymap('n', '<leader>ff', '<Plug>SnipRun', {silent = true})
 end
 
-vim.api.nvim_set_keymap('n', '<f3>', '<cmd>vim.treesitter.show_tree()<cr>', {})
+vim.api.nvim_set_keymap('n', '<f3>', '<cmd>lua vim.treesitter.show_tree()<cr>', {})
 
 vim.g.indicator_errors = ''
 vim.g.indicator_warnings = ''
