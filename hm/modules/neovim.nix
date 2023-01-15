@@ -13,6 +13,15 @@ let
 	#   ;
   };
 
+  defaultCompletionPlugins = with pkgs.vimPlugins; [
+    (luaPlugin { plugin = nvim-cmp; })
+    (luaPlugin { plugin = cmp-nvim-lsp; })
+    (luaPlugin { plugin = cmp-nvim-lua; })
+    # (luaPlugin { plugin = cmp-cmdline-history; })
+    # (luaPlugin { plugin = cmp-conventionalcommits; })
+    # (luaPlugin { plugin = cmp-digraphs; })
+   ];
+
   orgmodePlugins = with pkgs.vimPlugins; [
     (luaPlugin {
       # matches nvim-orgmode
@@ -79,7 +88,7 @@ let
 
         plugins = mkOption {
           # type = types.listOf types.package;
-          default = [];
+          default = defaultCompletionPlugins;
           # descriptcompletionPlugins = with pkgs.vimPlugins; [
     # # (luaPlugin { plugin = coq_nvim; })
     # (luaPlugin { plugin = nvim-cmp; })
@@ -182,9 +191,9 @@ in
       programs.neovim.plugins = cfg.orgmode.plugins;
     })
 
-    # (mkIf cfg.autocompletion.enable {
-    #   programs.neovim.plugins = [ ];
-    # })
+    (mkIf cfg.autocompletion.enable {
+      programs.neovim.plugins = cfg.autocompletion.plugins; # [ ];
+    })
 
     (mkIf cfg.teal.enable {
       programs.neovim.plugins = cfg.teal.plugins;

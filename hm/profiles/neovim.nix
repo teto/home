@@ -141,6 +141,9 @@ let
     #   optional = true;
     # })
     (luaPlugin {
+      plugin = nvim-lua-gf;
+    })
+    (luaPlugin {
       plugin = sniprun;
     })
     (luaPlugin {
@@ -881,7 +884,7 @@ let
     ++ luaPlugins
     ++ treesitterPlugins
     ++ colorschemePlugins
-    ++ completionPlugins
+    # ++ completionPlugins
     ++ filetypePlugins
   ;
 
@@ -903,14 +906,14 @@ in
     fennel.enable = false;
     teal.enable = true;
     orgmode.enable = true;
-    # autocompletion.enable = true;
+    autocompletion.enable = true;
 
     # take the one from the flake
     package = myPackage;
 
     # https://github.com/iskolbin/lbase64
     # extraLuaPackages = lp: [ lp.basexx ];
-    extraLuaPackages = ls: [ ls.basexx ];
+    # extraLuaPackages = ls: [ ls.basexx ];
 
     # source doesn't like `stdpath('config').'`
     # todo should use mkBefore ${config.programs.neovim.generatedInitrc}
