@@ -1,6 +1,6 @@
 return {
 
-'Matsuuu/pinkmare'
+ 'Matsuuu/pinkmare'
 , 'flrnd/candid.vim'
 , 'adlawson/vim-sorcerer'
 -- 'whatyouhide/vim-gotham'
@@ -9,4 +9,12 @@ return {
 , 'romainl/flattened'
 , 'NLKNguyen/papercolor-theme'
 , 'marko-cerovac/material.nvim'
+, 'shaunsingh/oxocarbon.nvim'
+, {
+    'rose-pine/neovim',
+    as = 'rose-pine',
+    -- tag = 'v1.*',
+    -- config = function()
+    -- end
+},
 }

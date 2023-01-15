@@ -9,40 +9,57 @@ local has_fzf_lua, fzf_lua = pcall(require, 'fzf-lua')
 -- local myMenu = require('teto.menu')
 
 -- local packerCfg =
-local packer = require('packer')
-local use, _ = packer.use, packer.use_rocks
+-- local packer = require('packer')
+-- local use, _ = packer.use, packer.use_rocks
 local nnoremap = vim.keymap.set
 local map = vim.keymap.set
 
 
--- local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
--- if not vim.loop.fs_stat(lazypath) then
---   vim.fn.system({
---     "git",
---     "clone",
---     "--filter=blob:none",
---     "--single-branch",
---     "https://github.com/folke/lazy.nvim.git",
---     lazypath,
---   })
--- end
--- require("lazy").setup(plugins, opts)
-
--- vim.opt.runtimepath:prepend(lazypath)
-
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
+end
+vim.opt.rtp:prepend(lazypath)
+vim.opt.packpath:prepend('/nix/store/8znlrk8mz6824718b3gp9n90wg42any7-vim-pack-dir')
+vim.opt.rtp:prepend('/nix/store/8znlrk8mz6824718b3gp9n90wg42any7-vim-pack-dir')
+vim.cmd([[packloadall ]])
 -- HOW TO TEST our fork of plenary
 -- vim.opt.rtp:prepend(os.getenv("HOME").."/neovim/plenary.nvim")
 -- local reload = require'plenary.reload'
 -- reload.reload_module('plenary')
 -- require'plenary'
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
 vim.g.matchparen = 0
 vim.g.mousemoveevent = 1
+-- must be setup before calling lazy
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
+vim.opt.termguicolors = true
 
-packer.init({
-    autoremove = false,
+require("lazy").setup("lazyplugins", {
+	performance = {
+		cache = {
+		enabled = false
+		},
+		reset_packpath = false,
+		rtp = {
+			reset = false;
+			paths = {'/nix/store/8znlrk8mz6824718b3gp9n90wg42any7-vim-pack-dir'},
+
+			}
+	}
+
 })
+-- packer.init({
+--     autoremove = false,
+-- })
+
 -- vim.cmd([[
 --   augroup packer_user_config
 --     autocmd!
@@ -111,7 +128,6 @@ vim.o.laststatus = 3
 vim.opt.concealcursor = 'nc'
 vim.opt.showmode = false -- Show the current mode on command line
 vim.opt.cursorline = true -- highlight cursor line
-vim.opt.termguicolors = true
 
 -- set noautoread " to prevent from interfering with our plugin
 -- set breakat=80 " characters at which wrap can break line
@@ -228,7 +244,6 @@ vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'grey' })
 -- nvim-treesitter
 -- require("nvim-tree").setup({ update_focused_file = { enable = true, }, })
 
--- use('/home/teto/neovim/rest.nvim')
 -- while testing/developing rest.nvim
 vim.opt.runtimepath:prepend('/home/teto/neovim/rest.nvim')
 vim.opt.runtimepath:prepend('/home/teto/tree-sitter-http')
@@ -281,11 +296,10 @@ end
 --   end,
 -- }
 
-use {'shaunsingh/oxocarbon.nvim'}
-use { 'aloussase/scout', rtp = 'vim' }
+-- telescope extension to search hackage require('telescope').load_extension('scout')
+-- use { 'aloussase/scout', rtp = 'vim' }
 
 -- use '~/neovim/fzf-lua' -- markdown syntax compatible with Github's
-use('rhysd/vim-gfm-syntax') -- markdown syntax compatible with Github's
 -- use 'symphorien/vim-nixhash' -- use :NixHash
 -- use 'vim-denops/denops.vim'
 -- use 'ryoppippi/bad-apple.vim' -- needs denops
@@ -298,104 +312,20 @@ use('rhysd/vim-gfm-syntax') -- markdown syntax compatible with Github's
 -- vim.g.pdfscribe_notes_dir = expand('$HOME').'/Nextcloud/papis_db'
 -- }}}
 
--- annotations plugins {{{
--- use 'MattesGroeger/vim-bookmarks' -- ruby  / :BookmarkAnnotate
--- 'wdicarlo/vim-notebook' -- last update in 2016
--- 'plutonly/vim-annotate-- --  last update in 2015
---}}}
-
-use 'eandrju/cellular-automaton.nvim' -- :CellularAutomaton make_it_rain
-
--- use 'norcalli/nvim-terminal.lua' -- to display ANSI colors
--- use '~/neovim/nvim-terminal.lua' -- to display ANSI colors
-use({'bogado/file-line', branch="main"}) -- to open a file at a specific line
 -- use 'glacambre/firenvim' -- to use nvim in firefox
 -- call :NR on a region than :w . coupled with b:nrrw_aucmd_create,
 -- use 'chrisbra/NrrwRgn' -- to help with multi-ft files
-use('chrisbra/vim-diff-enhanced') --
 
 
--- competition to potamides/pantran.nvim which uses just AI backends it seems
-use({'uga-rosa/translate.nvim',
-	config = function ()
 
-	require("translate").setup({
-		default = {
-			command = "translate-shell",
-		},
-		preset = {
-			output = {
-				split = {
-					append = true,
-				},
-			},
-		},
-	})
-end})
-
-use 'linty-org/readline.nvim'
-
--- to create anki cards
-use 'rareitems/anki.nvim'
-
-
--- use ({
---   "jghauser/papis.nvim",
---   after = { "telescope.nvim", "nvim-cmp" },
---   requires = {
---     "kkharji/sqlite.lua",
---     "nvim-lua/plenary.nvim",
---     "MunifTanjim/nui.nvim",
---     "nvim-treesitter/nvim-treesitter",
---   },
---   rocks = {
---     {
---       "lyaml"
---       -- If using macOS or Linux, you may need to install the `libyaml` package.
---       -- If you install libyaml with homebrew you will need to set the YAML_DIR
---       -- to the location of the homebrew installation of libyaml e.g.
---       -- env = { YAML_DIR = '/opt/homebrew/Cellar/libyaml/0.2.5/' },
---     }
---   },
---   config = function()
---     require("papis").setup(
---     -- Your configuration goes here
---     )
---   end,
--- })
--- use { 'ldelossa/gh.nvim',
---     requires = { { 'ldelossa/litee.nvim' } },
--- 	config = function ()
--- 		require('litee.lib').setup({
--- 			-- this is where you configure details about your panel, such as
--- 			-- whether it toggles on the left, right, top, or bottom.
--- 			-- leaving this blank will use the defaults.
--- 			-- reminder: gh.nvim uses litee.lib to implement core portions of its UI.
--- 		})
--- 		require('litee.gh').setup({
--- 			-- this is where you configure details about gh.nvim directly relating
--- 			-- to GitHub integration.
--- 		})
-
--- 	end
---   }
 -- use 'rhysd/git-messenger.vim' -- to show git message :GitMessenger
-
 -- use 'tweekmonster/nvim-api-viewer', {'on': 'NvimAPI'} -- see nvim api
 -- provider
 
--- REPL (Read Execute Present Loop) {{{
--- use 'metakirby5/codi.vim', {'on': 'Codi'} -- repl
--- careful it maps cl by default
--- use 'jalvesaq/vimcmdline' -- no help files, mappings clunky
--- github mirror of use 'http://gitlab.com/HiPhish/repl.nvim'
--- use 'http://gitlab.com/HiPhish/repl.nvim' -- no commit for the past 2 years
---}}}
 -- Snippets are separated from the engine. Add this if you want them:
 
 -- " use 'justinmk/vim-gtfo' " gfo to open filemanager in cwd
 -- " use 'wannesm/wmgraphviz.vim', {'for': 'dot'} " graphviz syntax highlighting
-use('tpope/vim-rhubarb') -- github support in fugitive, use |i_CTRL-X_CTRL-O|
 -- use {
 --     'goolord/alpha-nvim',
 --     requires = { 'kyazdani42/nvim-web-devicons' },
@@ -405,200 +335,10 @@ use('tpope/vim-rhubarb') -- github support in fugitive, use |i_CTRL-X_CTRL-O|
 -- }
 -- diagnostic
 -- use { 'neovim/nvimdev.nvim', opt = true }
-use({
-    'jose-elias-alvarez/null-ls.nvim',
-    config = function()
-        require('null-ls').setup({
-            sources = {
-                -- needs a luacheck in PATH
-                require('null-ls').builtins.diagnostics.luacheck,
-                -- require("null-ls").builtins.formatting.stylua,
-                -- require("null-ls").builtins.diagnostics.eslint,
-                -- require("null-ls").builtins.completion.spell,
-            },
-        })
-    end,
-})
-use({
-    'AckslD/nvim-FeMaco.lua',
-    config = 'require("femaco").setup()',
-})
--- use { 'folke/noice.nvim',
---   event = "VimEnter",
---   requires = { "rcarriga/nvim-notify" },
---   config = function()
--- 	local fakeColor = { fg='#000000', bg='#00FF00' }
--- 	vim.api.nvim_set_hl(0, 'NoiceCmdlinePopupBorder', fakeColor)
--- 	vim.api.nvim_set_hl(0, 'NoiceCmdlinePopupBorderCmdline', fakeColor)
 
--- 	-- https://github.com/folke/noice.nvim/wiki/Configuration-Recipes#show-recording-messages
---     require("noice").setup({
---       cmdline = {
---         view = "cmdline_popup", -- view for rendering the cmdline. Change to `cmdline` to get a classic cmdline at the bottom
---         opts = {
--- 			buf_options = {
--- 				-- filetype = "vim"
--- 			}
--- 		}, -- enable syntax highlighting in the cmdline
---         icons = {
---           ["/"] = { icon = " ", hl_group = "Normal" },
---           ["?"] = { icon = " ", hl_group = "DiagnosticWarn" },
---           [":"] = { icon = " ", hl_group = "DiagnosticInfo", firstc = false },
---         },
---       },
--- 	  lsp_progress ={
--- 		  enabled = true
--- 	  },
--- 	  popupmenu = {
--- 		  enabled = false;
--- 	  },
---       history = {
---         -- options for the message history that you get with `:Noice`
---         view = "split",
---         opts = { enter = true },
---         filter = { event = "msg_show", ["not"] = { kind = { "search_count", "echo" } } },
---       },
--- 	  -- how frequently does Noice need to check for ui updates? This has no effect when in blocking mode.
---       throttle = 1000 / 30,
---       views = {
---         -- cmdline = {
--- 		-- }
--- 		-- @see the section on views below
--- 		cmdline_popup = {
--- 			border = {
--- 				-- style = "none",
--- 				padding = { 2, 3 },
--- 			},
---         -- filter_options = {},
--- 			win_options = {
--- 				winhighlight = {
--- 					-- Normal = "NormalFloat",
--- 					-- FloatBorder = "NormalFloat",
--- 					-- Normal = "NoicePopupmenu", -- change to NormalFloat to make it look like other floats
--- 					-- FloatBorder = "NoicePopupmenuBorder", -- border highlight
--- 					-- CursorLine = "NoicePopupmenuSelected", -- used for highlighting the selected item
--- 					-- PmenuMatch = "NoicePopupmenuMatch", -- used to highlight the part of the item that matches the input
--- 				},
--- 			},
--- 			position = {
--- 				-- row = 5,
--- 				col = "50%",
--- 			},
--- 			size = {
--- 				width = 210,
--- 				-- height = "auto",
--- 				height = 3
--- 			},
--- 		},
--- 		popupmenu = {
--- 			relative = "editor",
--- 			position = {
--- 			row = 8,
--- 			col = "50%",
--- 			},
--- 			size = {
--- 			width = 60,
--- 			height = 10,
--- 			},
--- 			border = {
--- 			style = "rounded",
--- 			padding = { 0, 1 },
--- 			},
--- 			win_options = {
--- 			winhighlight = { Normal = "Normal", FloatBorder = "DiagnosticInfo" },
--- 			},
--- 		},
-
--- 	  },
---       routes = {
--- 		-- skip search_count messages instead of showing them as virtual text
---           -- filter = { event = "msg_show", kind = "search_count" },
---           -- opts = { skip = true },
---       { -- shows @Recording message
---         view = "notify",
---         filter = { event = "msg_showmode" },
---       },
---       {
---         filter = {
---           event = "cmdline",
---           find = "^%s*[/?]",
---         },
---         view = "cmdline",
---       },
--- 	  {
---         filter = {
---           event = "msg_show",
---           kind = "",
---           find = "written",
---         },
---         opts = { skip = true },
---       },
--- 	  }, -- @see the section on routes below
---   })
---   end,
--- }
-
-use({ 'nvim-zh/colorful-winsep.nvim' })
--- :Nvimesweeper / :h nvimesweeper
-use({ 'seandewar/nvimesweeper', opt = true })
-use({ 'voldikss/vim-translator', opt = true })
-use('calvinchengx/vim-aftercolors') -- load after/colors
--- Vim-cool disables search highlighting when you are done searching and re-enables it when you search again.
-use('romainl/vim-cool')
 -- lua require"themeCycler".open()
-use('lrangell/theme-cycler.nvim') -- doesnt work
-use('bfredl/nvim-luadev') -- lua repl :Luadev
 -- use('alok/notational-fzf-vim') -- to take notes, :NV
-use {
-	'hkupty/iron.nvim',
-	config = function ()
-		local iron = require("iron.core")
-		iron.setup {
-		config = {
-			-- If iron should expose `<plug>(...)` mappings for the plugins
-			should_map_plug = false,
-			-- Whether a repl should be discarded or not
-			scratch_repl = true,
-			-- Your repl definitions come here
-			repl_definition = {
-				sh = { command = {"zsh"} },
-				nix = { command = {"nix",  "repl", "/home/teto/nixpkgs"} },
-				-- copied from the nix wrapper :/
-				lua = { command = "lua"}
-			},
-			repl_open_cmd = require('iron.view').bottom(40),
-			-- how the REPL window will be opened, the default is opening
-			-- a float window of height 40 at the bottom.
-		},
-		-- Iron doesn't set keymaps by default anymore. Set them here
-		-- or use `should_map_plug = true` and map from you vim files
-		keymaps = {
-			send_motion = "<space>sc",
-			visual_send = "<space>sc",
-			send_file = "<space>sf",
-			send_line = "<space>sl",
-			send_mark = "<space>sm",
-			mark_motion = "<space>mc",
-			mark_visual = "<space>mc",
-			remove_mark = "<space>md",
-			cr = "<space>s<cr>",
-			interrupt = "<space>s<space>",
-			exit = "<space>sq",
-			clear = "<space>cl",
-		},
-		-- If the highlight is on, you can change how it looks
-		-- For the available options, check nvim_set_hl
-		highlight = {
-			italic = true
-		}
-		}
-
-	end
-}
 -- use 'neovimhaskell/nvim-hs.vim' -- to help with nvim-hs
-use('teto/vim-listchars') -- to cycle between different list/listchars configurations
-use('chrisbra/csv.vim')
-use('teto/Modeliner') -- <leader>ml to setup buffer modeline
 -- " use 'antoinemadec/openrgb.nvim'  " to take into account RGB stuff
 
 -- prefix commands :Files become :FzfFiles, etc.
@@ -765,105 +505,6 @@ vim.api.nvim_create_autocmd('BufReadPost', {
 -- 	'DougBeney/pickachu'
 -- }
 
--- provides 'NvimTree'
-use('kyazdani42/nvim-tree.lua')
-use 'rhysd/committia.vim'
--- TODO package in nvim
-use({
-    'MrcJkb/haskell-tools.nvim',
-    config = function()
-        local ht = require('haskell-tools')
-        ht.setup({
-            tools = { -- haskell-tools options
-                codeLens = {
-                    -- Whether to automatically display/refresh codeLenses
-                    autoRefresh = true,
-                },
-                -- hoogle = {
-                --     -- 'auto': Choose a mode automatically, based on what is available.
-                --     -- 'telescope-local': Force use of a local installation.
-                --     -- 'telescope-web': The online version (depends on curl).
-                --     -- 'browser': Open hoogle search in the default browser.
-                --     mode = 'auto',
-                -- }
-				-- ,
-				repl = {
-					-- 'builtin': Use the simple builtin repl
-					-- 'toggleterm': Use akinsho/toggleterm.nvim
-					handler = 'builtin',
-					builtin = {
-						create_repl_window = function(view)
-						-- create_repl_split | create_repl_vsplit | create_repl_tabnew | create_repl_cur_win
-						return view.create_repl_split { size = vim.o.lines / 3 }
-						end
-					},
-				},
-            },
-            hls = { -- LSP client options
-                on_attach = function(client, bufnr)
-                    local attach_cb = require('on_attach')
-                    attach_cb.on_attach(client, bufnr)
-
-                    -- haskell-language-server relies heavily on codeLenses,
-                    -- so auto-refresh (see advanced configuration) is enabled by default
-					local opts = {}
-                    vim.keymap.set('n', '<leader>ca', vim.lsp.codelens.run, opts)
-                    vim.keymap.set('n', '<leader>cl', vim.lsp.codelens.run, opts)
-                    -- vim.keymap.set('n', '<leader>hs', ht.hoogle.hoogle_signature, opts)
-                    -- default_on_attach(client, bufnr)  -- if defined, see nvim-lspconfig
-                end,
-                -- ...
-                settings = { -- haskell-language-server options
-					haskell = {
-						-- Setting this to true could have a performance impact on large mono repos.
-						checkProject = false,
-						checkParents = "NeverCheck",
---		-- "haskell.trace.server": "messages",
-						logFile = "/tmp/nvim-hls.log",
---		-- "codeLens.enable": true,
-						completionSnippetsOn = true,
-						-- formattingProvider = 'ormolu',
-						formattingProvider = "stylish-haskell",
-						plugin = {
-							refineImports = {
-								codeActionsOn = true,
-								codeLensOn = false,
-							},
-							hlint = {
-							-- "config": {
-							--	   "flags": []
-							-- },
-								diagnosticsOn= false,
-								codeActionsOn= false
-							},
-						},
-					},
-                },
---	settings = {
---	  haskell = {
---		completionSnippetsOn = true,
---		formattingProvider = "stylish-haskell",
---		-- "haskell.trace.server": "messages",
---		-- logFile = "/tmp/nvim-hls.log",
---		-- "codeLens.enable": true,
---	  -- hlintOn = false
-		--plugin= {
-		--	hlint = {
-		--  -- "config": {
-		--  --	   "flags": []
-		--  -- },
-		--	  diagnosticsOn= false,
-		--	  codeActionsOn= false
-		--	},
-		--  }
---		},
---	  },
-
-            },
-        })
-    end,
-})
-
 -- defaults
 -- use {
 -- 	"~/telescope-frecency.nvim",
@@ -886,16 +527,6 @@ use({
 
 -- use {'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async'}
 
-use "folke/neodev.nvim"
-
--- for quickreading: use :FSToggle to Toggle flow state
-use({'nullchilly/fsread.nvim', config = function ()
-
-	-- vim.g.flow_strength = 0.7 -- low: 0.3, middle: 0.5, high: 0.7 (default)
-	-- vim.g.skip_flow_default_hl = true -- If you want to override default highlights
-	-- vim.api.nvim_set_hl(0, "FSPrefix", { fg = "#cdd6f4" })
-	-- vim.api.nvim_set_hl(0, "FSSuffix", { fg = "#6C7086" })
-end})
 
 -- local verbose_output = false
 -- require("tealmaker").build_all(verbose_output)
@@ -1015,46 +646,7 @@ end})
 
 -- 	'rose-pine/neovim'
 -- }
-use({
-    'rose-pine/neovim',
-    as = 'rose-pine',
-    tag = 'v1.*',
-    -- config = function()
-    -- end
-})
 -- use { 'protex/better-digraphs.nvim' }
-
-use({
-    'rcarriga/nvim-notify',
-    config = function()
-        require('notify').setup({
-            -- Animation style (see below for details)
-            stages = 'fade_in_slide_out',
-
-            -- Function called when a new window is opened, use for changing win settings/config
-            -- on_open = nil,
-            -- Function called when a window is closed
-            -- on_close = nil,
-            -- Render function for notifications. See notify-render()
-            -- render = "default",
-            -- Default timeout for notifications
-            timeout = 5000,
-            -- Max number of columns for messages
-            max_width = 300,
-            -- Max number of lines for a message
-            -- max_height = 50,
-
-            -- For stages that change opacity this is treated as the highlight behind the window
-            -- Set this to either a highlight group, an RGB hex value e.g. "#000000" or a function returning an RGB code for dynamic values
-            background_colour = 'Normal',
-
-            -- Minimum width for notification windows
-            minimum_width = 50,
-        })
-
-        vim.notify = require('notify')
-    end,
-})
 
 -- terminal image viewer in neovim see https://github.com/edluffy/hologram.nvim#usage for usage
 -- use 'edluffy/hologram.nvim' -- hologram-nvim
@@ -1111,55 +703,12 @@ use({
 
 -- use { 'nvim-lua/popup.nvim'	}  -- mimic vim's popupapi for neovim
 
-use({
-    'lukas-reineke/indent-blankline.nvim',
-    config = function()
-        require('indent_blankline').setup({
-            char = '│',
-            buftype_exclude = { 'terminal' },
-            filetype_exclude = { 'help' },
-            space_char_blankline = ' ',
-            show_end_of_line = true,
-            char_highlight_list = {
-                'IndentBlanklineIndent1',
-                'IndentBlanklineIndent2',
-                'IndentBlanklineIndent3',
-                'IndentBlanklineIndent4',
-                'IndentBlanklineIndent5',
-                'IndentBlanklineIndent6',
-            },
-            max_indent_increase = 1,
-            indent_level = 2,
-            show_first_indent_level = false,
-            -- blankline_use_treesitter,
-            char_list = { '.', '|', '-' },
-            show_trailing_blankline_indent = false,
-            show_current_context = false,
-            show_current_context_start = true,
-            enabled = false,
-        })
-    end,
-})
 -- use {
 -- 	-- shows type annotations for functions in virtual text using built-in LSP client
 -- 	'jubnzv/virtual-types.nvim'
 -- }
 
--- telescope plugins {{{
-use({
-    '~/telescope.nvim',
-    requires = {
-        'nvim-telescope/telescope-github.nvim',
-        'nvim-telescope/telescope-symbols.nvim',
-        'nvim-telescope/telescope-fzy-native.nvim',
-        'nvim-telescope/telescope-media-files.nvim',
-        'nvim-telescope/telescope-packer.nvim', -- :Telescope pack,e
-        'MrcJkb/telescope-manix',   -- :Telescope manix
-		'luc-tielen/telescope_hoogle'
-		-- psiska/telescope-hoogle.nvim looks less advanced
-    },
-})
---}}}
+-- telescope plugins {{}}
 
 -- use "terrortylor/nvim-comment"
 -- shows a lightbulb where a codeAction is available
@@ -1169,7 +718,6 @@ use({
 --	end
 -- }
 -- using packer.nvim
-use {'akinsho/bufferline.nvim', requires = 'kyazdani42/nvim-web-devicons'}
 
 -- compete with registers.nvim
 -- https://github.com/gelguy/wilder.nvim
@@ -1224,35 +772,6 @@ use {'akinsho/bufferline.nvim', requires = 'kyazdani42/nvim-web-devicons'}
 -- use { 'notomo/gesture.nvim' , opt = true; }
 -- using teto instead to test packer luarocks support
 -- use { "rktjmp/lush.nvim" }
-use({
-    'rktjmp/hotpot.nvim',
-    config = function()
-        require('hotpot').setup({
-            -- allows you to call `(require :fennel)`.
-            -- recommended you enable this unless you have another fennel in your path.
-            -- you can always call `(require :hotpot.fennel)`.
-            provide_require_fennel = false,
-            -- show fennel compiler results in when editing fennel files
-            enable_hotpot_diagnostics = true,
-            -- compiler options are passed directly to the fennel compiler, see
-            -- fennels own documentation for details.
-            compiler = {
-                -- options passed to fennel.compile for modules, defaults to {}
-                modules = {
-                    -- not default but recommended, align lua lines with fnl source
-                    -- for more debuggable errors, but less readable lua.
-                    -- correlate = true
-                },
-                -- options passed to fennel.compile for macros, defaults as shown
-                macros = {
-                    env = '_COMPILER', -- MUST be set along with any other options
-                },
-            },
-        })
-    end,
-})
-
-use({ 'alec-gibson/nvim-tetris', opt = true })
 
 -- use { 'mfussenegger/nvim-dap'} -- debug adapter protocol
 -- use {
@@ -1260,29 +779,13 @@ use({ 'alec-gibson/nvim-tetris', opt = true })
 -- 	-- supports autocompletion
 -- 	'bazelbuild/vim-bazel' , requires = { 'google/vim-maktaba' }
 -- }
-use('bazelbuild/vim-ft-bzl')
-use('PotatoesMaster/i3-vim-syntax')
-
--- colorschemes {{{
-use('Matsuuu/pinkmare')
-use('flrnd/candid.vim')
-use('adlawson/vim-sorcerer')
--- use('whatyouhide/vim-gotham')
-use('vim-scripts/Solarized')
--- use 'npxbr/gruvbox.nvim' " requires lush
-use('romainl/flattened')
-use('NLKNguyen/papercolor-theme')
-use('marko-cerovac/material.nvim')
--- }}}
 
 -- use 'anuvyklack/hydra.nvim' -- to create submodes
--- use('skywind3000/vim-quickui') -- to design cool uis
-use('neovim/nvim-lspconfig') -- while fuzzing details out
+-- 'skywind3000/vim-quickui', -- to design cool uis
+
 -- use '~/neovim/nvim-lspconfig' -- while fuzzing details out
 
--- use 'vim-scripts/rfc-syntax' -- optional syntax highlighting for RFC files
--- use 'vim-scripts/coq-syntax'
-use({ 'tweekmonster/startuptime.vim', opt = true }) -- {'on': 'StartupTime'} " see startup time per script
+
 
 -- TODO upstream
 --use {
@@ -1365,8 +868,6 @@ use({ 'tweekmonster/startuptime.vim', opt = true }) -- {'on': 'StartupTime'} " s
 	 -- end,
 	 -- requires = { { 'hoob3rt/lualine.nvim', opt=true }, 'kyazdani42/nvim-web-devicons' }
  -- }
-use('MunifTanjim/nui.nvim') -- to create UIs
-use('honza/vim-snippets')
 -- use 'sjl/gundo.vim' " :GundoShow/Toggle to redo changes
 
 -- use {
@@ -1490,39 +991,11 @@ end
 --	   end,
 --	   requires = "nvim-lua/plenary.nvim"
 -- }
-use('ray-x/lsp_signature.nvim') -- display function signature in insert mode
-use({
-    'Pocco81/AutoSave.nvim' -- :ASToggle /AsOn / AsOff
-	, config = function ()
-		local autosave = require("auto-save")
-		autosave.setup({
-			enabled = true,
-			-- execution_message = "AutoSave: saved at " .. vim.fn.strftime("%H:%M:%S"),
-			events = { "FocusLost"}, -- "InsertLeave"
-			-- conditions = {
-			-- 	exists = true,
-			-- 	filetype_is_not = {},
-			-- 	modifiable = true
-			-- },
-			write_all_buffers = false,
-			-- on_off_commands = true,
-			-- clean_command_line_interval = 2500
-		}
-		)
-    end
-})
 
 -- use 'sindrets/diffview.nvim' -- :DiffviewOpen
 
 -- lua require('github-notifications.menu').notifications()
 -- use 'rlch/github-notifications.nvim'
-use({
-    'nvim-lualine/lualine.nvim', -- fork of hoob3rt/lualine
-    requires = { 'arkav/lualine-lsp-progress' },
-    config = function()
-		require 'teto.lualine'
-    end,
-})
 
 -- Inserts a component in lualine_c at left section
 -- local function ins_left(component)
@@ -1892,16 +1365,6 @@ for i=1,9 do
 	vim.keymap.set('n',  '<leader>'..tostring(i) , "<cmd>BufferLineGoToBuffer "..tostring(i).."<CR>", { silent = true})
 end
 
-use({
-    'ethanholz/nvim-lastplace',
-    config = function()
-        require('nvim-lastplace').setup({
-            lastplace_ignore_buftype = { 'quickfix', 'nofile', 'help' },
-            lastplace_ignore_filetype = { 'gitcommit', 'gitrebase', 'svn', 'hgcommit' },
-            lastplace_open_folds = true,
-        })
-    end,
-})
 vim.g.UltiSnipsSnippetDirectories = { vim.fn.stdpath('config') .. '/snippets' }
 vim.g.tex_flavor = 'latex'
 -- Treesitter config {{{

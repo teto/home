@@ -1,0 +1,116 @@
+return {
+-- { 'folke/noice.nvim',
+--   event = "VimEnter",
+--   requires = { "rcarriga/nvim-notify" },
+--   config = function()
+-- 	local fakeColor = { fg='#000000', bg='#00FF00' }
+-- 	vim.api.nvim_set_hl(0, 'NoiceCmdlinePopupBorder', fakeColor)
+-- 	vim.api.nvim_set_hl(0, 'NoiceCmdlinePopupBorderCmdline', fakeColor)
+
+-- 	-- https://github.com/folke/noice.nvim/wiki/Configuration-Recipes#show-recording-messages
+--     require("noice").setup({
+--       cmdline = {
+--         view = "cmdline_popup", -- view for rendering the cmdline. Change to `cmdline` to get a classic cmdline at the bottom
+--         opts = {
+-- 			buf_options = {
+-- 				-- filetype = "vim"
+-- 			}
+-- 		}, -- enable syntax highlighting in the cmdline
+--         icons = {
+--           ["/"] = { icon = " ", hl_group = "Normal" },
+--           ["?"] = { icon = " ", hl_group = "DiagnosticWarn" },
+--           [":"] = { icon = " ", hl_group = "DiagnosticInfo", firstc = false },
+--         },
+--       },
+-- 	  lsp_progress ={
+-- 		  enabled = true
+-- 	  },
+-- 	  popupmenu = {
+-- 		  enabled = false;
+-- 	  },
+--       history = {
+--         -- options for the message history that you get with `:Noice`
+--         view = "split",
+--         opts = { enter = true },
+--         filter = { event = "msg_show", ["not"] = { kind = { "search_count", "echo" } } },
+--       },
+-- 	  -- how frequently does Noice need to check for ui updates? This has no effect when in blocking mode.
+--       throttle = 1000 / 30,
+--       views = {
+--         -- cmdline = {
+-- 		-- }
+-- 		-- @see the section on views below
+-- 		cmdline_popup = {
+-- 			border = {
+-- 				-- style = "none",
+-- 				padding = { 2, 3 },
+-- 			},
+--         -- filter_options = {},
+-- 			win_options = {
+-- 				winhighlight = {
+-- 					-- Normal = "NormalFloat",
+-- 					-- FloatBorder = "NormalFloat",
+-- 					-- Normal = "NoicePopupmenu", -- change to NormalFloat to make it look like other floats
+-- 					-- FloatBorder = "NoicePopupmenuBorder", -- border highlight
+-- 					-- CursorLine = "NoicePopupmenuSelected", -- used for highlighting the selected item
+-- 					-- PmenuMatch = "NoicePopupmenuMatch", -- used to highlight the part of the item that matches the input
+-- 				},
+-- 			},
+-- 			position = {
+-- 				-- row = 5,
+-- 				col = "50%",
+-- 			},
+-- 			size = {
+-- 				width = 210,
+-- 				-- height = "auto",
+-- 				height = 3
+-- 			},
+-- 		},
+-- 		popupmenu = {
+-- 			relative = "editor",
+-- 			position = {
+-- 			row = 8,
+-- 			col = "50%",
+-- 			},
+-- 			size = {
+-- 			width = 60,
+-- 			height = 10,
+-- 			},
+-- 			border = {
+-- 			style = "rounded",
+-- 			padding = { 0, 1 },
+-- 			},
+-- 			win_options = {
+-- 			winhighlight = { Normal = "Normal", FloatBorder = "DiagnosticInfo" },
+-- 			},
+-- 		},
+
+-- 	  },
+--       routes = {
+-- 		-- skip search_count messages instead of showing them as virtual text
+--           -- filter = { event = "msg_show", kind = "search_count" },
+--           -- opts = { skip = true },
+--       { -- shows @Recording message
+--         view = "notify",
+--         filter = { event = "msg_showmode" },
+--       },
+--       {
+--         filter = {
+--           event = "cmdline",
+--           find = "^%s*[/?]",
+--         },
+--         view = "cmdline",
+--       },
+-- 	  {
+--         filter = {
+--           event = "msg_show",
+--           kind = "",
+--           find = "written",
+--         },
+--         opts = { skip = true },
+--       },
+-- 	  }, -- @see the section on routes below
+--   })
+--   end,
+-- }
+}
