@@ -600,6 +600,11 @@ let
               org_agenda_templates = { t = { description = 'Task', template = '* TODO %?\n  %u' } },
           }'';
     })
+	(luaPlugin {
+	  plugin = SchemaStore-nvim;
+	  # config = ''
+	  #  '';
+	})
 
     {
       # use ctrl a/xto cycle between different words
@@ -937,6 +942,7 @@ in
       haskellPackages.hasktags
       jq
       manix
+	  nodePackages.vscode-langservers-extracted
       nodePackages.bash-language-server
       nodePackages.dockerfile-language-server-nodejs # broken
       nodePackages.pyright

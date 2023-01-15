@@ -537,6 +537,9 @@ use({
 --   })
 --   end,
 -- }
+
+use({ 'nvim-zh/colorful-winsep.nvim' })
+-- :Nvimesweeper / :h nvimesweeper
 use({ 'seandewar/nvimesweeper', opt = true })
 use({ 'voldikss/vim-translator', opt = true })
 use('calvinchengx/vim-aftercolors') -- load after/colors
