@@ -14,6 +14,9 @@ return {
     end,
 },
 "folke/neodev.nvim",
+-- vim.api.nvim_set_keymap('n', '<f2>',
+-- 	"<cmd>lua require'plenary.reload'.reload_module('rest-nvim.request'); print(require'rest-nvim.request'.ts_get_requests())<cr>"
+-- 	, {})
 
 -- to cycle between different list/listchars configurations
 'teto/vim-listchars',

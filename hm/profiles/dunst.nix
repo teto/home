@@ -1,40 +1,4 @@
 { config, pkgs, lib, ... }:
-let
-
-  # basePaths = [
-  #   "/run/current-system/sw"
-  #   config.home.profileDirectory
-  #   cfg.iconTheme.package
-  # ] ++ optional useCustomTheme hicolorTheme.package;
-
-  # themes = [ cfg.iconTheme ] ++ optional useCustomTheme
-  #   (hicolorTheme // { size = cfg.iconTheme.size; });
-
-  # categories = [
-  #   "actions"
-  #   "animations"
-  #   "apps"
-  #   "categories"
-  #   "devices"
-  #   "emblems"
-  #   "emotes"
-  #   "filesystem"
-  #   "intl"
-  #   "legacy"
-  #   "mimetypes"
-  #   "places"
-  #   "status"
-  #   "stock"
-  # ];
-
-  # mkPath = { basePath, theme, category }:
-  #   "${basePath}/share/icons/${theme.name}/${theme.size}/${category}";
-  # mkIconPath = concatMapStringsSep ":" mkPath (cartesianProductOfSets {
-  # basePath = basePaths;
-  # theme = themes;
-  # category = categories;
-  # });
-in
 {
   # you can use dunstctl to control stuff
   # to debug dunst: -verbosity debug

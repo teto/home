@@ -55,14 +55,15 @@ let
     tree-sitter-bash
     tree-sitter-c
     tree-sitter-lua
-    tree-sitter-http
+    tree-sitter-query
+    # tree-sitter-http
     tree-sitter-json
     tree-sitter-nix
     # tree-sitter-haskell # crashes with a loop
-    tree-sitter-python
-    tree-sitter-html # for rest.nvim
-    tree-sitter-norg
-    tree-sitter-org-nvim
+    # tree-sitter-python
+    # tree-sitter-html # for rest.nvim
+    # tree-sitter-norg
+    # tree-sitter-org-nvim
   ];
 
 
@@ -84,6 +85,10 @@ let
        # for :TSPlaygroundToggle
        plugin = playground;
      }
+	 {
+
+	  plugin = parserDir;
+	 }
   ];
 
   luaPlugins = with pkgs.vimPlugins; [
@@ -349,7 +354,6 @@ let
     })
     (luaPlugin { plugin = fugitive-gitlab-vim; })
 
-    # { plugin = telescope-fzf-native-nvim; }
     {
       plugin = registers-nvim;
 
@@ -369,7 +373,20 @@ let
 
     # FIX https://github.com/NixOS/nixpkgs/issues/169293 first
     # (luaPlugin { plugin = telescope-frecency-nvim; })
-    { plugin = nvimdev-nvim; optional = true; }
+	(luaPlugin {
+	  plugin = nvimdev-nvim; optional = true;
+	  config = ''
+	  -- nvimdev {{{
+-- call nvimdev#init(--path/to/neovim--)
+vim.g.nvimdev_auto_init = 1
+vim.g.nvimdev_auto_cd = 1
+-- vim.g.nvimdev_auto_ctags=1
+vim.g.nvimdev_auto_lint = 1
+vim.g.nvimdev_build_readonly = 1
+--}}}'';
+
+
+   })
     # { plugin = neomake; }
     # {
     #   plugin = neogit;
@@ -473,10 +490,10 @@ let
     #   plugin = Shade-nvim;
     # })
 
-    (luaPlugin {
-      # TODO move config hee
-      plugin = bufferline-nvim;
-    })
+    # (luaPlugin {
+    #   # TODO move config hee
+    #   plugin = bufferline-nvim;
+    # })
 
     # (luaPlugin { plugin = nvim-peekup; })
 
@@ -557,7 +574,6 @@ let
     (luaPlugin {
       plugin = stylish-nvim;
     })
-    # 'diepm/vim-rest-console' " test rest APIs * Hit the trigger key (<C-j> by default).
     # (luaPlugin {
     #   plugin = rest-nvim;
     #   config = ''

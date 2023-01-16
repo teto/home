@@ -2,31 +2,25 @@
 -- https://github.com/nanotee/nvim-lua-guide#using-meta-accessors
 -- https://www.reddit.com/r/neovim/comments/o8dlwg/how_to_append_to_an_option_in_lua/
 -- local configs = require'nvim_lsp/configs'
-local has_telescope, telescope = pcall(require, 'telescope')
 local has_fzf_lua, fzf_lua = pcall(require, 'fzf-lua')
 
--- my treesitter config
--- local myMenu = require('teto.menu')
-
--- local packerCfg =
--- local packer = require('packer')
--- local use, _ = packer.use, packer.use_rocks
 local nnoremap = vim.keymap.set
 local map = vim.keymap.set
 
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable", -- latest stable release
-    lazypath,
-  })
+	vim.fn.system({
+		"git",
+		"clone",
+		"--filter=blob:none",
+		"https://github.com/folke/lazy.nvim.git",
+		"--branch=stable", -- latest stable release
+		lazypath,
+	})
 end
 vim.opt.rtp:prepend(lazypath)
+-- TODO fix ?
 vim.opt.packpath:prepend('/nix/store/8znlrk8mz6824718b3gp9n90wg42any7-vim-pack-dir')
 vim.opt.rtp:prepend('/nix/store/8znlrk8mz6824718b3gp9n90wg42any7-vim-pack-dir')
 vim.cmd([[packloadall ]])
@@ -43,16 +37,23 @@ vim.g.maplocalleader = ' '
 vim.opt.termguicolors = true
 
 require("lazy").setup("lazyplugins", {
+	lockfile = vim.fn.stdpath("cache") .. "/lazy-lock.json",
+	dev = {
+		-- directory where you store your local plugin projects
+		path = "~/neovim",
+		---@type string[] plugins that match these patterns will use your local versions instead of being fetched from GitHub
+		patterns = {}, -- For example {"folke"}
+	},
 	performance = {
 		cache = {
-		enabled = false
+			enabled = false
 		},
 		reset_packpath = false,
 		rtp = {
 			reset = false;
-			paths = {'/nix/store/8znlrk8mz6824718b3gp9n90wg42any7-vim-pack-dir'},
+			paths = { '/nix/store/8znlrk8mz6824718b3gp9n90wg42any7-vim-pack-dir' },
 
-			}
+		}
 	}
 
 })
@@ -224,7 +225,7 @@ vim.g.fugitive_gitlab_domains = { 'https://git.novadiscovery.net' }
 -- }}}
 -- set guicursor="n-v-c:block-Cursor/lCursor,ve:ver35-Cursor,o:hor50-Cursor,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor,sm:block-Cursor"
 vim.opt.guicursor =
-    'n-v-c:block-blinkon250-Cursor/lCursor,ve:ver35-Cursor,o:hor50-Cursor,i-ci:ver25-blinkon250-Cursor/lCursor,r-cr:hor20-Cursor/lCursor'
+'n-v-c:block-blinkon250-Cursor/lCursor,ve:ver35-Cursor,o:hor50-Cursor,i-ci:ver25-blinkon250-Cursor/lCursor,r-cr:hor20-Cursor/lCursor'
 
 -- highl Cursor ctermfg=16 ctermbg=253 guifg=#000000 guibg=#00FF00
 vim.api.nvim_set_hl(0, 'Cursor', { ctermfg = 16, ctermbg = 253, fg = '#000000', bg = '#00FF00' })
@@ -248,7 +249,12 @@ vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'grey' })
 vim.opt.runtimepath:prepend('/home/teto/neovim/rest.nvim')
 vim.opt.runtimepath:prepend('/home/teto/tree-sitter-http')
 -- f3 to show tree
-vim.api.nvim_set_keymap('n', '<f2>', "<cmd>lua require'plenary.reload'.reload_module('rest-nvim.request'); print(require'rest-nvim.request'.ts_get_requests())<cr>", {})
+vim.api.nvim_set_keymap('n', '<f2>',
+	"<cmd>lua require'plenary.reload'.reload_module('rest-nvim.request'); print(require'rest-nvim.request'.ts_get_requests())<cr>"
+	, {})
+-- nnoremap <use>RestNvimPreview :lua require('rest-nvim').run(true)<CR>
+-- nnoremap <use>RestNvimLast :lua require('rest-nvim').last()<CR>
+
 
 local has_rest, rest = pcall(require, 'rest-nvim')
 if has_rest then
@@ -267,44 +273,20 @@ if has_rest then
 			show_url = true,
 			show_http_info = true,
 			show_headers = true,
-		-- disable formatters else they generate errors/add dependencies
-		-- for instance when it detects html, it tried to run 'tidy'
-		formatters = {
-			html = false,
-			jq = false
-		},
+			-- disable formatters else they generate errors/add dependencies
+			-- for instance when it detects html, it tried to run 'tidy'
+			formatters = {
+				html = false,
+				jq = false
+			},
 		},
 		-- Jump to request line on run
 		jump_to_request = false,
 	})
 end
 
--- use {
---   -- Display marks for different kinds of decorations across the buffer. Builtin handlers include:
---   -- 'lewis6991/satellite.nvim',
---   config = function()
---     require('satellite').setup()
---   end
--- }
--- installed via nix
--- require('satellite').setup()
--- use {
---   "max397574/colortils.nvim",
---   -- cmd = "Colortils",
---   config = function()
---     require("colortils").setup()
---   end,
--- }
 
--- telescope extension to search hackage require('telescope').load_extension('scout')
--- use { 'aloussase/scout', rtp = 'vim' }
 
--- use '~/neovim/fzf-lua' -- markdown syntax compatible with Github's
--- use 'symphorien/vim-nixhash' -- use :NixHash
--- use 'vim-denops/denops.vim'
--- use 'ryoppippi/bad-apple.vim' -- needs denops
--- use 'eugen0329/vim-esearch' -- search & replace
--- use 'kshenoy/vim-signature' -- display marks in gutter, love it
 
 -- use '~/pdf-scribe.nvim'  -- to annotate pdf files from nvim :PdfScribeInit
 -- PdfScribeInit
@@ -312,34 +294,11 @@ end
 -- vim.g.pdfscribe_notes_dir = expand('$HOME').'/Nextcloud/papis_db'
 -- }}}
 
--- use 'glacambre/firenvim' -- to use nvim in firefox
--- call :NR on a region than :w . coupled with b:nrrw_aucmd_create,
--- use 'chrisbra/NrrwRgn' -- to help with multi-ft files
-
-
-
--- use 'rhysd/git-messenger.vim' -- to show git message :GitMessenger
--- use 'tweekmonster/nvim-api-viewer', {'on': 'NvimAPI'} -- see nvim api
--- provider
 
 -- Snippets are separated from the engine. Add this if you want them:
 
 -- " use 'justinmk/vim-gtfo' " gfo to open filemanager in cwd
 -- " use 'wannesm/wmgraphviz.vim', {'for': 'dot'} " graphviz syntax highlighting
--- use {
---     'goolord/alpha-nvim',
---     requires = { 'kyazdani42/nvim-web-devicons' },
---     config = function ()
---         require'alpha'.setup(require'alpha.themes.startify'.config)
---     end
--- }
--- diagnostic
--- use { 'neovim/nvimdev.nvim', opt = true }
-
--- lua require"themeCycler".open()
--- use('alok/notational-fzf-vim') -- to take notes, :NV
--- use 'neovimhaskell/nvim-hs.vim' -- to help with nvim-hs
--- " use 'antoinemadec/openrgb.nvim'  " to take into account RGB stuff
 
 -- prefix commands :Files become :FzfFiles, etc.
 vim.g.fzf_command_prefix = 'Fzf'
@@ -401,21 +360,21 @@ vim.keymap.set('n', '<F6>', '<Cmd>ASToggle<CR>')
 -- command! LspStopAllClients lua vim.lsp.stop_client(vim.lsp.get_active_clients())
 
 vim.api.nvim_set_hl(0, 'SignifySignChange', {
-    cterm = { bold = true },
-    ctermbg = 237,
-    ctermfg = 227,
-    bg = 'NONE',
-    fg = '#F08A1F',
+	cterm = { bold = true },
+	ctermbg = 237,
+	ctermfg = 227,
+	bg = 'NONE',
+	fg = '#F08A1F',
 })
 vim.api.nvim_set_hl(
-    0,
-    'SignifySignAdd',
-    { cterm = { bold = true }, ctermbg = 237, ctermfg = 227, bg = 'NONE', fg = 'green' }
+	0,
+	'SignifySignAdd',
+	{ cterm = { bold = true }, ctermbg = 237, ctermfg = 227, bg = 'NONE', fg = 'green' }
 )
 vim.api.nvim_set_hl(
-    0,
-    'SignifySignDelete',
-    { cterm = { bold = true }, ctermbg = 237, ctermfg = 227, bg = 'NONE', fg = 'red' }
+	0,
+	'SignifySignDelete',
+	{ cterm = { bold = true }, ctermbg = 237, ctermfg = 227, bg = 'NONE', fg = 'red' }
 )
 
 -- This is the default extra key bindings
@@ -428,16 +387,16 @@ vim.g.fzf_layout = { ['down'] = '~40%' }
 vim.g.fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
 
 vim.api.nvim_create_autocmd('TextYankPost', {
-    callback = function()
-        vim.highlight.on_yank({ higroup = 'IncSearch', timeout = 1000 })
-    end,
+	callback = function()
+		vim.highlight.on_yank({ higroup = 'IncSearch', timeout = 1000 })
+	end,
 })
 nnoremap('n', '<leader>ml', '<Cmd>Modeliner<Enter>')
 
 vim.api.nvim_create_autocmd('ColorScheme', {
-    callback = function()
-		vim.api.nvim_set_hl(0, 'LspCodeLens', { italic=true })
-    end,
+	callback = function()
+		vim.api.nvim_set_hl(0, 'LspCodeLens', { italic = true })
+	end,
 })
 
 
@@ -453,7 +412,7 @@ vim.g.Modeliner_format = 'et ff= fenc= sts= sw= ts= fdm='
 vim.cmd([[sign define DiagnosticSignError text=✘ texthl=LspDiagnosticsSignError linehl= numhl=]])
 vim.cmd([[sign define DiagnosticSignWarning text=！ texthl=LspDiagnosticsSignWarning linehl= numhl=CustomLineWarn]])
 vim.cmd(
-    [[sign define DiagnosticSignInformation text=I texthl=LspDiagnosticsSignInformation linehl= numhl=CustomLineWarn]]
+	[[sign define DiagnosticSignInformation text=I texthl=LspDiagnosticsSignInformation linehl= numhl=CustomLineWarn]]
 )
 vim.cmd([[sign define DiagnosticSignHint text=H texthl=LspDiagnosticsSignHint linehl= numhl=]])
 
@@ -478,20 +437,12 @@ vim.keymap.set('n', '<leader>rg', '<Cmd>Grepper -tool rg -open -switch<CR>')
 -- " convert all kinds of files (but pdf) to plain text
 -- autocmd BufReadPost *.doc,*.docx,*.rtf,*.odp,*.odt silent %!pandoc "%" -tplain -o /dev/stdout
 vim.api.nvim_create_autocmd('BufReadPost', {
-    pattern = '*.pdf',
-    callback = function()
-        vim.cmd([[%!pdftotext -nopgbrk -layout -q -eol unix "%" - | fmt -w78]])
-        vim.highlight.on_yank({ higroup = 'IncSearch', timeout = 1000 })
-    end,
+	pattern = '*.pdf',
+	callback = function()
+		vim.cmd([[%!pdftotext -nopgbrk -layout -q -eol unix "%" - | fmt -w78]])
+		vim.highlight.on_yank({ higroup = 'IncSearch', timeout = 1000 })
+	end,
 })
-
--- display buffer name top-right
--- use {
--- 	"b0o/incline.nvim",
--- 	config = function ()
--- 		require('incline').setup()
--- 	end
--- }
 
 -- use {
 -- 	'norcalli/nvim-colorizer.lua',
@@ -504,211 +455,19 @@ vim.api.nvim_create_autocmd('BufReadPost', {
 -- 	-- a zenity picker for several stuff (colors etc)
 -- 	'DougBeney/pickachu'
 -- }
-
--- defaults
--- use {
--- 	"~/telescope-frecency.nvim",
--- 	config = function ()
--- 		nnoremap ( "n", "<Leader>f", function () require('telescope').extensions.frecency.frecency({
--- 			query = "toto"
--- 		}) end )
--- 	end
--- 	}
-
--- use {
--- 	'VonHeikemen/fine-cmdline.nvim',
--- 	config = function ()
--- 	require('fine-cmdline').setup()
--- 	end
--- 	  -- requires = {
---     -- {'MunifTanjim/nui.nvim'}
---   -- }
--- }
-
 -- use {'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async'}
-
 
 -- local verbose_output = false
 -- require("tealmaker").build_all(verbose_output)
 
--- overrides vim.ui / vim.select with the backend of my choice
--- use({
---     'stevearc/dressing.nvim',
---     config = function()
---         require('dressing').setup({
---             input = {
---                 -- Default prompt string
---                 default_prompt = '➤ ',
---                 -- When true, <Esc> will close the modal
---                 insert_only = true,
---                 -- These are passed to nvim_open_win
---                 anchor = 'SW',
---                 relative = 'cursor',
---                 border = 'rounded',
---                 -- These can be integers or a float between 0 and 1 (e.g. 0.4 for 40%)
---                 prefer_width = 40,
---                 width = nil,
---                 -- min_width and max_width can be a list of mixed types.
---                 -- min_width = {20, 0.2} means "the greater of 20 columns or 20% of total"
---                 max_width = { 140, 0.9 },
---                 min_width = { 20, 0.2 },
-
---                 -- see :help dressing_get_config
---                 get_config = nil,
---             },
---             mappings = {
---                 ['<C-c>'] = 'Close',
---             },
---             select = {
---                 -- Priority list of preferred vim.select implementations
---                 backend = { 'fzf_lua', 'telescope', 'builtin', 'nui' },
-
---                 -- Options for fzf selector
---                 fzf = {
---                     window = {
---                         width = 0.5,
---                         height = 0.4,
---                     },
---                 },
---                 telescope = {
---                     window = {
---                         width = 0.5,
---                         height = 0.4,
---                     },
---                 },
-
---                 -- Options for nui Menu
---                 -- nui = {
---                 -- position = "50%",
---                 -- size = nil,
---                 -- relative = "editor",
---                 -- border = {
---                 -- style = "rounded",
---                 -- },
---                 -- max_width = 80,
---                 -- max_height = 40,
---                 -- },
--- -- dressing.select.builtin.win_options.winblend
---                 -- Options for built-in selector
---                 builtin = {
---                     -- These are passed to nvim_open_win
---                     anchor = 'NW',
---                     relative = 'cursor',
---                     border = 'rounded',
-
---                     -- Window options
--- 					win_options = {
--- 						winblend = 10,
--- 					},
-
---                     -- These can be integers or a float between 0 and 1 (e.g. 0.4 for 40%)
---                     -- the min_ and max_ options can be a list of mixed types.
---                     -- max_width = {140, 0.8} means "the lesser of 140 columns or 80% of total"
---                     width = nil,
---                     max_width = { 140, 0.8 },
---                     min_width = { 40, 0.2 },
---                     height = nil,
---                     max_height = 0.9,
---                     min_height = { 10, 0.2 },
---                 },
-
---                 -- see :help dressing_get_config
---                 get_config = nil,
---             },
---         })
---     end,
--- })
-
--- use 'https://git.sr.ht/~whynothugo/lsp_lines.nvim'
--- use({
---	 "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
---	 as = "lsp_lines",
---	 config = function()
-
---	   require("lsp_lines").register_lsp_virtual_lines()
---	 end,
--- })
-
--- use 'mfussenegger/nvim-dap'
--- use {
---	"rcarriga/nvim-dap-ui"
---	, requires = {"mfussenegger/nvim-dap"}
--- }
--- use 'nvim-telescope/telescope-dap.nvim'
---
 
 -- use {
 -- 	-- set virtualedit=all, select an area then call :VBox
 -- 	'jbyuki/venn.nvim'
 -- 	}
 
--- use {
-
--- 	'rose-pine/neovim'
--- }
 -- use { 'protex/better-digraphs.nvim' }
 
--- terminal image viewer in neovim see https://github.com/edluffy/hologram.nvim#usage for usage
--- use 'edluffy/hologram.nvim' -- hologram-nvim
--- use 'ellisonleao/glow.nvim' -- markdown preview, run :Glow
-
--- use {
--- 	-- Show where your cursor moves
--- 	'edluffy/specs.nvim',
--- 	config = function ()
--- 		local specs = require 'specs'
--- 		specs.setup{
--- 			show_jumps	= true,
--- 			min_jump = 20,
--- 			popup = {
--- 				delay_ms = 0, -- delay before popup displays
--- 				inc_ms = 10, -- time increments used for fade/resize effects
--- 				blend = 10, -- starting blend, between 0-100 (fully transparent), see :h winblend
--- 				width = 30,
--- 				winhl = "PMenu",
--- 				fader = specs.linear_fader,
--- 				resizer = specs.shrink_resizer
--- 			},
--- 			ignore_filetypes = {},
--- 			ignore_buftypes = {
--- 				nofile = true,
--- 			},
--- 		}
--- 	end
--- }
-
--- use {
--- 	'code-biscuits/nvim-biscuits',
--- 	config = function ()
--- 	require('nvim-biscuits').setup({
--- 	on_events = { 'InsertLeave', 'CursorHoldI' },
--- 	cursor_line_only = true,
--- 	default_config = {
--- 		max_length = 12,
--- 		min_distance = 50,
--- 		prefix_string = " 📎 "
--- 	},
--- 	language_config = {
--- 		html = { prefix_string = " 🌐 " },
--- 		javascript = {
--- 			prefix_string = " ✨ ",
--- 			max_length = 80
--- 		},
--- 		python = { disabled = true },
--- 		-- nix = { disabled = true }
--- 	}
--- 	})
--- end
--- }
-
--- use { 'nvim-lua/popup.nvim'	}  -- mimic vim's popupapi for neovim
-
--- use {
--- 	-- shows type annotations for functions in virtual text using built-in LSP client
--- 	'jubnzv/virtual-types.nvim'
--- }
-
--- telescope plugins {{}}
 
 -- use "terrortylor/nvim-comment"
 -- shows a lightbulb where a codeAction is available
@@ -717,73 +476,12 @@ vim.api.nvim_create_autocmd('BufReadPost', {
 --		vim.cmd [[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]]
 --	end
 -- }
--- using packer.nvim
-
 -- compete with registers.nvim
 -- https://github.com/gelguy/wilder.nvim
 -- use { 'gelguy/wilder.nvim' }
 -- use { 'gennaro-tedesco/nvim-peekup' }
---use { 'TimUntersberger/neogit',
---	config = function ()
---		vim.defer_fn (
---		function ()
---		require 'neogit'.setup {
---		disable_signs = false,
---		disable_context_highlighting = false,
---		disable_commit_confirmation = false,
---		-- customize displayed signs
---		signs = {
---			-- { CLOSED, OPENED }
---			section = { ">", "v" },
---			item = { ">", "v" },
---			hunk = { "", "" },
---		},
---		integrations = {
---			-- Neogit only provides inline diffs. If you want a more traditional way to look at diffs you can use `sindrets/diffview.nvim`.
---			-- The diffview integration enables the diff popup, which is a wrapper around `sindrets/diffview.nvim`.
---			--
---			-- Requires you to have `sindrets/diffview.nvim` installed.
---			-- use {
---			--	 'TimUntersberger/neogit',
---			--	 requires = {
---			--	   'nvim-lua/plenary.nvim',
---			--	   'sindrets/diffview.nvim'
---			--	 }
---			-- }
---			--
---			diffview = false
---		},
---		-- override/add mappings
---		mappings = {
---			-- modify status buffer mappings
---			status = {
---			-- Adds a mapping with "B" as key that does the "BranchPopup" command
---			["B"] = "BranchPopup",
---			-- Removes the default mapping of "s"
---			["s"] = "",
---			}
---		}
-
---	}
---end)
---end
---}
-
 -- use { 'notomo/gesture.nvim' , opt = true; }
--- using teto instead to test packer luarocks support
--- use { "rktjmp/lush.nvim" }
-
--- use { 'mfussenegger/nvim-dap'} -- debug adapter protocol
--- use {
--- 	-- a plugin for interacting with bazel :Bazel build //some/package:sometarget
--- 	-- supports autocompletion
--- 	'bazelbuild/vim-bazel' , requires = { 'google/vim-maktaba' }
--- }
-
 -- use 'anuvyklack/hydra.nvim' -- to create submodes
--- 'skywind3000/vim-quickui', -- to design cool uis
-
--- use '~/neovim/nvim-lspconfig' -- while fuzzing details out
 
 
 
@@ -802,74 +500,8 @@ vim.api.nvim_create_autocmd('BufReadPost', {
 --		}
 --	end
 --}
--- use {
--- 	'matbme/JABS.nvim',
--- 	config = function ()
--- 		require 'jabs'.setup {
--- 			position = 'center', -- center, corner
--- 			width = 50,
--- 			height = 10,
--- 			border = 'shadow', -- none, single, double, rounded, solid, shadow, (or an array or chars)
-
--- 			-- the options below are ignored when position = 'center'
--- 			col = 0,
--- 			row = 0,
--- 			anchor = 'NW', -- NW, NE, SW, SE
--- 			relative = 'win', -- editor, win, cursor
--- 		}
--- 	end
--- }
-
--- use {
---	'ggandor/lightspeed.nvim',
---	config = function ()
---		require'lightspeed'.setup {
---		-- This can get _really_ slow if the window has a lot of content,
---		-- turn it on only if your machine can always cope with it.
---		jump_to_unique_chars = false,
---		match_only_the_start_of_same_char_seqs = true,
---		limit_ft_matches = 5,
---		-- x_mode_prefix_key = '<c-x>',
---		substitute_chars = { ['\r'] = '¬' },
---		instant_repeat_fwd_key = nil,
---		instant_repeat_bwd_key = nil,
---		-- If no values are given, these will be set at runtime,
---		-- based on `jump_to_first_match`.
---		labels = nil,
---		cycle_group_fwd_key = nil,
---		cycle_group_bwd_key = nil,
---		}
---	end
--- }
 -- use 'mrjones2014/dash.nvim' -- only for dash it seems
--- Trouble {{{
---use {
---  "folke/trouble.nvim",
-----	 requires = "kyazdani42/nvim-web-devicons",
---	config = function ()
-
---	end
---}
--- }}}
-
- -- use {
-	 -- 'kdheepak/tabline.nvim',
-	 -- config = function()
-	   -- require'tabline'.setup {
-		 -- -- Defaults configuration options
-		 -- enable = true,
-		 -- show_filename_only = true,
-		 -- show_devicons = false,
-	   -- }
-	   -- vim.cmd[[
-		 -- set guioptions-=e " Use showtabline in gui vim
-		 -- set sessionoptions+=tabpages,globals " store tabpages and globals in session
-	   -- ]]
-	 -- end,
-	 -- requires = { { 'hoob3rt/lualine.nvim', opt=true }, 'kyazdani42/nvim-web-devicons' }
- -- }
 -- use 'sjl/gundo.vim' " :GundoShow/Toggle to redo changes
-
 -- use {
 -- 	'hrsh7th/nvim-cmp',
 -- -- use 'hrsh7th/cmp-nvim-lsp' -- LSP source for nvim-cmp
@@ -890,112 +522,69 @@ local has_cmp, cmp = pcall(require, 'cmp')
 
 -- print("has_cmp", has_cmp)
 if has_cmp then
-    -- use('michaeladler/cmp-notmuch')
-    -- nvim-cmp autocompletion plugin{{{
-    cmp.setup({
-        snippet = {
-            expand = function(args)
-                -- For `vsnip` user.
-                vim.fn['vsnip#anonymous'](args.body)
+	-- use('michaeladler/cmp-notmuch')
+	-- nvim-cmp autocompletion plugin{{{
+	cmp.setup({
+		snippet = {
+			expand = function(args)
+				-- For `vsnip` user.
+				vim.fn['vsnip#anonymous'](args.body)
 
-                -- For `luasnip` user.
-                -- require('luasnip').lsp_expand(args.body)
+				-- For `luasnip` user.
+				-- require('luasnip').lsp_expand(args.body)
 
-                -- For `ultisnips` user.
-                -- vim.fn["UltiSnips#Anon"](args.body)
-            end,
-        },
-        mapping = cmp.mapping.preset.insert({
+				-- For `ultisnips` user.
+				-- vim.fn["UltiSnips#Anon"](args.body)
+			end,
+		},
+		mapping = cmp.mapping.preset.insert({
 
-            ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-            ['<C-f>'] = cmp.mapping.scroll_docs(4),
-            --   ['<C-Space>'] = cmp.mapping.complete(),
-            --   ['<C-e>'] = cmp.mapping.close(),
-            ['<CR>'] = cmp.mapping.confirm({ select = true }),
-        }),
-        -- view = {
-        -- 	entries = 'native'
-        -- },
-        sources = {
-            { name = 'nvim_lsp' },
+			['<C-d>'] = cmp.mapping.scroll_docs(-4),
+			['<C-f>'] = cmp.mapping.scroll_docs(4),
+			--   ['<C-Space>'] = cmp.mapping.complete(),
+			--   ['<C-e>'] = cmp.mapping.close(),
+			['<CR>'] = cmp.mapping.confirm({ select = true }),
+		}),
+		-- view = {
+		-- 	entries = 'native'
+		-- },
+		sources = {
+			{ name = 'nvim_lsp' },
 
-            -- For vsnip user.
-            { name = 'vsnip' },
+			-- For vsnip user.
+			{ name = 'vsnip' },
 
-            -- For luasnip user.
-            -- { name = 'luasnip' },
+			-- For luasnip user.
+			-- { name = 'luasnip' },
 
-            -- For ultisnips user.
-            -- { name = 'ultisnips' },
+			-- For ultisnips user.
+			-- { name = 'ultisnips' },
 
-            { name = 'buffer' },
-            -- { name = 'neorg' },
-            -- { name = 'orgmode' },
-        },
-    })
-    --  }}}
-    -- 	cmp.setup.cmdline {
-    -- 	mapping = cmp.mapping.preset.cmdline({
-    -- 		-- Your configuration here.
-    -- 	})
+			{ name = 'buffer' },
+			-- { name = 'neorg' },
+			-- { name = 'orgmode' },
+		},
+	})
+	--  }}}
+	-- 	cmp.setup.cmdline {
+	-- 	mapping = cmp.mapping.preset.cmdline({
+	-- 		-- Your configuration here.
+	-- 	})
 
-    -- 	}
+	-- 	}
 
-    --   end
-    -- }
+	--   end
+	-- }
 end
-
--- vim.api.nvim_create_autocmd('MenuPopup', {
---     callback = function()
---         -- vim.highlight.on_yank({ higroup = 'IncSearch', timeout = 1000 })
--- 		print("hello")
---     end,
--- })
-
 
 -- Load custom tree-sitter grammar for org filetype
 -- orgmode depends on treesitter
 local has_orgmode, orgmode = pcall(require, 'orgmode')
 if has_orgmode then
-    orgmode.setup_ts_grammar()
+	orgmode.setup_ts_grammar()
 end
 
--- use {
---	   "nvim-neorg/neorg",
---	   config = function()
---		   require('neorg').setup {
---			   -- Tell Neorg what modules to load
---			   load = {
---				   ["core.defaults"] = {}, -- Load all the default modules
---				   ["core.keybinds"] = { -- Configure core.keybinds
---					   config = {
---						   default_keybinds = true, -- Generate the default keybinds
---						   neorg_leader = "<Leader>n" -- This is the default if unspecified
---					   }
---				   },
---				   ["core.norg.concealer"] = {}, -- Allows for use of icons
---				   ["core.norg.completion"] = {
---					config = {
---						engine =  "nvim-cmp"
---					}
---				}, -- Allows for use of icons
---				   ["core.norg.dirman"] = { -- Manage your directories with Neorg
---					   config = {
---						   workspaces = {
---							   my_workspace = "~/neorg"
---						   }
---					   }
---				   }
---			   },
---		   }
---	   end,
---	   requires = "nvim-lua/plenary.nvim"
--- }
 
--- use 'sindrets/diffview.nvim' -- :DiffviewOpen
-
--- lua require('github-notifications.menu').notifications()
--- use 'rlch/github-notifications.nvim'
 
 -- Inserts a component in lualine_c at left section
 -- local function ins_left(component)
@@ -1037,42 +626,42 @@ local has_sniprun, sniprun = pcall(require, 'sniprun')
 
 if has_sniprun then
 	sniprun.setup({
-	-- selected_interpreters = {'Python3_fifo'},        --" use those instead of the default for the current filetype
-	-- repl_enable = {'Python3_fifo', 'R_original'},    --" enable REPL-like behavior for the given interpreters
-	-- repl_disable = {},                               --" disable REPL-like behavior for the given interpreters
-	interpreter_options = {         --# interpreter-specific options, see docs / :SnipInfo <name>
-		Bash_original = {
-			use_on_filetypes = {"nix"}    --# the 'use_on_filetypes' configuration key is
-		}
-		--# use the interpreter name as key
-		--GFM_original = {
-		--use_on_filetypes = {"markdown.pandoc"}    --# the 'use_on_filetypes' configuration key is
-		--											--# available for every interpreter
+		-- selected_interpreters = {'Python3_fifo'},        --" use those instead of the default for the current filetype
+		-- repl_enable = {'Python3_fifo', 'R_original'},    --" enable REPL-like behavior for the given interpreters
+		-- repl_disable = {},                               --" disable REPL-like behavior for the given interpreters
+		interpreter_options = { --# interpreter-specific options, see docs / :SnipInfo <name>
+			Bash_original = {
+				use_on_filetypes = { "nix" } --# the 'use_on_filetypes' configuration key is
+			}
+			--# use the interpreter name as key
+			--GFM_original = {
+			--use_on_filetypes = {"markdown.pandoc"}    --# the 'use_on_filetypes' configuration key is
+			--											--# available for every interpreter
+			--},
+			--Python3_original = {
+			--	error_truncate = "auto"         --# Truncate runtime errors 'long', 'short' or 'auto'
+			--									--# the hint is available for every interpreter
+			--									--# but may not be always respected
+			--}
+		},
+		-- possible values are 'none', 'single', 'double', or 'shadow'
+		borders = 'single',
+		--live_display = { "VirtualTextOk" }, --# display mode used in live_mode
+		----# You can use the same keys to customize whether a sniprun producing
+		----# no output should display nothing or '(no output)'
+		--show_no_output = {
+		--	"Classic",
+		--	"TempFloatingWindow",      --# implies LongTempFloatingWindow, which has no effect on its own
 		--},
-		--Python3_original = {
-		--	error_truncate = "auto"         --# Truncate runtime errors 'long', 'short' or 'auto'
-		--									--# the hint is available for every interpreter
-		--									--# but may not be always respected
-		--}
-	},
-	-- possible values are 'none', 'single', 'double', or 'shadow'
-	borders = 'single',
-	--live_display = { "VirtualTextOk" }, --# display mode used in live_mode
-	----# You can use the same keys to customize whether a sniprun producing
-	----# no output should display nothing or '(no output)'
-	--show_no_output = {
-	--	"Classic",
-	--	"TempFloatingWindow",      --# implies LongTempFloatingWindow, which has no effect on its own
-	--},
-	--" you can combo different display modes as desired
-	display = {
-		"Classic",                    -- "display results in the command-line  area
-		"VirtualTextOk",              -- "display ok results as virtual text (multiline is shortened)
-	},
+		--" you can combo different display modes as desired
+		display = {
+			"Classic", -- "display results in the command-line  area
+			"VirtualTextOk", -- "display ok results as virtual text (multiline is shortened)
+		},
 	})
-	vim.api.nvim_set_keymap('v', 'f', '<Plug>SnipRun', {silent = true})
-	vim.api.nvim_set_keymap('n', '<leader>f', '<Plug>SnipRunOperator', {silent = true})
-	vim.api.nvim_set_keymap('n', '<leader>ff', '<Plug>SnipRun', {silent = true})
+	vim.api.nvim_set_keymap('v', 'f', '<Plug>SnipRun', { silent = true })
+	vim.api.nvim_set_keymap('n', '<leader>f', '<Plug>SnipRunOperator', { silent = true })
+	vim.api.nvim_set_keymap('n', '<leader>ff', '<Plug>SnipRun', { silent = true })
 end
 
 vim.api.nvim_set_keymap('n', '<f3>', '<cmd>lua vim.treesitter.show_tree()<cr>', {})
@@ -1090,40 +679,38 @@ vim.g.should_show_diagnostics_in_statusline = true
 -- code to toggle diagnostic display
 local diagnostics_active = true
 vim.keymap.set('n', '<leader>d', function()
-    diagnostics_active = not diagnostics_active
-    if diagnostics_active then
-        vim.diagnostic.show()
-    else
-        vim.diagnostic.hide()
-    end
+	diagnostics_active = not diagnostics_active
+	if diagnostics_active then
+		vim.diagnostic.show()
+	else
+		vim.diagnostic.hide()
+	end
 end)
 
 if has_fzf_lua then
 	require('fzf-lua.providers.ui_select').register({})
 
-    require('teto.fzf-lua').register_keymaps()
-    local fzf_history_dir = vim.fn.expand('~/.local/share/fzf-history')
-    fzf_lua.setup({
-        -- [...]
-        fzf_opts = {
-            -- [...]
-            ['--history'] = fzf_history_dir,
-            -- to get the prompt at the top
-            ['--layout'] = 'reverse',
-        },
-        winopts = {
-            preview = {
-                -- default = 'builtin'
-                hidden = 'hidden',
-            },
-        },
-    })
-elseif has_telescope then
-    require('teto.telescope').telescope_create_keymaps()
+	require('teto.fzf-lua').register_keymaps()
+	local fzf_history_dir = vim.fn.expand('~/.local/share/fzf-history')
+	fzf_lua.setup({
+		-- [...]
+		fzf_opts = {
+			-- [...]
+			['--history'] = fzf_history_dir,
+			-- to get the prompt at the top
+			['--layout'] = 'reverse',
+		},
+		winopts = {
+			preview = {
+				-- default = 'builtin'
+				hidden = 'hidden',
+			},
+		},
+	})
 end
 -- nnoremap ( "n", "<Leader>ca", function () vim.lsp.buf.code_action{} end )
 nnoremap('n', '<Leader>ca', function()
-    vim.cmd([[ FzfLua lsp_code_actions]])
+	vim.cmd([[ FzfLua lsp_code_actions]])
 end)
 
 -- nnoremap ( "n", "<leader>S",  function() require('spectre').open() end )
@@ -1132,182 +719,51 @@ end)
 
 local has_whichkey, wk = pcall(require, 'which-key')
 if has_whichkey then
-    wk.setup({
-        -- plugins = {
-        --	marks = true, -- shows a list of your marks on ' and `
-        --	registers = true, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
-        --	-- the presets plugin, adds help for a bunch of default keybindings in Neovim
-        --	-- No actual key bindings are created
-        --	presets = {
-        --	operators = true, -- adds help for operators like d, y, ... and registers them for motion / text object completion
-        --	motions = true, -- adds help for motions
-        --	text_objects = true, -- help for text objects triggered after entering an operator
-        --	windows = true, -- default bindings on <c-w>
-        --	nav = true, -- misc bindings to work with windows
-        --	z = true, -- bindings for folds, spelling and others prefixed with z
-        --	g = true, -- bindings for prefixed with g
-        --	},
-        -- },
-        -- add operators that will trigger motion and text object completion
-        -- to enable all native operators, set the preset / operators plugin above
-        -- operators = { gc = "Comments" },
-        -- icons = {
-        --	breadcrumb = "»", -- symbol used in the command line area that shows your active key combo
-        --	separator = "➜", -- symbol used between a key and it's label
-        --	group = "+", -- symbol prepended to a group
-        -- },
-        -- window = {
-        --	border = "none", -- none, single, double, shadow
-        --	position = "bottom", -- bottom, top
-        --	margin = { 1, 0, 1, 0 }, -- extra window margin [top, right, bottom, left]
-        --	padding = { 2, 2, 2, 2 }, -- extra window padding [top, right, bottom, left]
-        -- },
-        -- layout = {
-        --	height = { min = 4, max = 25 }, -- min and max height of the columns
-        --	width = { min = 20, max = 50 }, -- min and max width of the columns
-        --	spacing = 3, -- spacing between columns
-        -- },
-        -- hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ "}, -- hide mapping boilerplate
-        -- show_help = true, -- show help message on the command line when the popup is visible
-        -- triggers = "auto", -- automatically setup triggers
-        -- triggers = {"<leader>"} -- or specifiy a list manually
-    })
+	wk.setup({
+		-- plugins = {
+		--	marks = true, -- shows a list of your marks on ' and `
+		--	registers = true, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
+		--	-- the presets plugin, adds help for a bunch of default keybindings in Neovim
+		--	-- No actual key bindings are created
+		--	presets = {
+		--	operators = true, -- adds help for operators like d, y, ... and registers them for motion / text object completion
+		--	motions = true, -- adds help for motions
+		--	text_objects = true, -- help for text objects triggered after entering an operator
+		--	windows = true, -- default bindings on <c-w>
+		--	nav = true, -- misc bindings to work with windows
+		--	z = true, -- bindings for folds, spelling and others prefixed with z
+		--	g = true, -- bindings for prefixed with g
+		--	},
+		-- },
+		-- add operators that will trigger motion and text object completion
+		-- to enable all native operators, set the preset / operators plugin above
+		-- operators = { gc = "Comments" },
+		-- icons = {
+		--	breadcrumb = "»", -- symbol used in the command line area that shows your active key combo
+		--	separator = "➜", -- symbol used between a key and it's label
+		--	group = "+", -- symbol prepended to a group
+		-- },
+		-- window = {
+		--	border = "none", -- none, single, double, shadow
+		--	position = "bottom", -- bottom, top
+		--	margin = { 1, 0, 1, 0 }, -- extra window margin [top, right, bottom, left]
+		--	padding = { 2, 2, 2, 2 }, -- extra window padding [top, right, bottom, left]
+		-- },
+		-- layout = {
+		--	height = { min = 4, max = 25 }, -- min and max height of the columns
+		--	width = { min = 20, max = 50 }, -- min and max width of the columns
+		--	spacing = 3, -- spacing between columns
+		-- },
+		-- hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ "}, -- hide mapping boilerplate
+		-- show_help = true, -- show help message on the command line when the popup is visible
+		-- triggers = "auto", -- automatically setup triggers
+		-- triggers = {"<leader>"} -- or specifiy a list manually
+	})
 end
 
 -- set tagfunc=v:lua.vim.lsp.tagfunc
 
 -- since it was not merge yet
-
-
--- review locally github PRs
-local has_octo, octo = pcall(require, 'octo')
-if has_octo then
-    octo.setup({
-        default_remote = { 'upstream', 'origin' }, -- order to try remotes
-        reaction_viewer_hint_icon = '', -- marker for user reactions
-        user_icon = ' ', -- user icon
-        timeline_marker = '', -- timeline marker
-        timeline_indent = '2', -- timeline indentation
-        right_bubble_delimiter = '', -- Bubble delimiter
-        left_bubble_delimiter = '', -- Bubble delimiter
-        github_hostname = '', -- GitHub Enterprise host
-        snippet_context_lines = 4, -- number or lines around commented lines
-        file_panel = {
-            size = 10, -- changed files panel rows
-            use_icons = true,					   -- use web-devicons in file panel
-        },
-        mappings = { --{{{
-            issue = { --{{{
-                close_issue = '<space>ic', -- close issue
-                reopen_issue = '<space>io', -- reopen issue
-                list_issues = '<space>il', -- list open issues on same repo
-                reload = '<C-r>', -- reload issue
-                open_in_browser = '<C-b>', -- open issue in browser
-                copy_url = '<C-y>', -- copy url to system clipboard
-                add_assignee = '<space>aa', -- add assignee
-                remove_assignee = '<space>ad', -- remove assignee
-                create_label = '<space>lc', -- create label
-                add_label = '<space>la', -- add label
-                remove_label = '<space>ld', -- remove label
-                goto_issue = '<space>gi', -- navigate to a local repo issue
-                add_comment = '<space>ca', -- add comment
-                delete_comment = '<space>cd', -- delete comment
-                next_comment = ']c', -- go to next comment
-                prev_comment = '[c', -- go to previous comment
-                react_hooray = '<space>rp', -- add/remove 🎉 reaction
-                react_heart = '<space>rh', -- add/remove ❤️ reaction
-                react_eyes = '<space>re', -- add/remove 👀 reaction
-                react_thumbs_up = '<space>r+', -- add/remove 👍 reaction
-                react_thumbs_down = '<space>r-', -- add/remove 👎 reaction
-                react_rocket = '<space>rr', -- add/remove 🚀 reaction
-                react_laugh = '<space>rl', -- add/remove 😄 reaction
-                react_confused = '<space>rc', -- add/remove 😕 reaction
-            }, --}}}
-            pull_request = { --{{{
-                checkout_pr = '<space>po', -- checkout PR
-                merge_pr = '<space>pm', -- merge PR
-                list_commits = '<space>pc', -- list PR commits
-                list_changed_files = '<space>pf', -- list PR changed files
-                show_pr_diff = '<space>pd', -- show PR diff
-                add_reviewer = '<space>va', -- add reviewer
-                remove_reviewer = '<space>vd', -- remove reviewer request
-                close_issue = '<space>ic', -- close PR
-                reopen_issue = '<space>io', -- reopen PR
-                list_issues = '<space>il', -- list open issues on same repo
-                reload = '<C-r>', -- reload PR
-                open_in_browser = '<C-b>', -- open PR in browser
-                copy_url = '<C-y>', -- copy url to system clipboard
-                add_assignee = '<space>aa', -- add assignee
-                remove_assignee = '<space>ad', -- remove assignee
-                create_label = '<space>lc', -- create label
-                add_label = '<space>la', -- add label
-                remove_label = '<space>ld', -- remove label
-                goto_issue = '<space>gi', -- navigate to a local repo issue
-                add_comment = '<space>ca', -- add comment
-                delete_comment = '<space>cd', -- delete comment
-                next_comment = ']c', -- go to next comment
-                prev_comment = '[c', -- go to previous comment
-                react_hooray = '<space>rp', -- add/remove 🎉 reaction
-                react_heart = '<space>rh', -- add/remove ❤️ reaction
-                react_eyes = '<space>re', -- add/remove 👀 reaction
-                react_thumbs_up = '<space>r+', -- add/remove 👍 reaction
-                react_thumbs_down = '<space>r-', -- add/remove 👎 reaction
-                react_rocket = '<space>rr', -- add/remove 🚀 reaction
-                react_laugh = '<space>rl', -- add/remove 😄 reaction
-                react_confused = '<space>rc', -- add/remove 😕 reaction
-            }, --}}}
-            review_thread = { --{{{
-                goto_issue = '<space>gi', -- navigate to a local repo issue
-                add_comment = '<space>ca', -- add comment
-                add_suggestion = '<space>sa', -- add suggestion
-                delete_comment = '<space>cd', -- delete comment
-                next_comment = ']c', -- go to next comment
-                prev_comment = '[c', -- go to previous comment
-                select_next_entry = ']q', -- move to previous changed file
-                select_prev_entry = '[q', -- move to next changed file
-                close_review_tab = '<C-c>', -- close review tab
-                react_hooray = '<space>rp', -- add/remove 🎉 reaction
-                react_heart = '<space>rh', -- add/remove ❤️ reaction
-                react_eyes = '<space>re', -- add/remove 👀 reaction
-                react_thumbs_up = '<space>r+', -- add/remove 👍 reaction
-                react_thumbs_down = '<space>r-', -- add/remove 👎 reaction
-                react_rocket = '<space>rr', -- add/remove 🚀 reaction
-                react_laugh = '<space>rl', -- add/remove 😄 reaction
-                react_confused = '<space>rc', -- add/remove 😕 reaction
-            }, --}}}
-            submit_win = { --{{{
-                approve_review = '<C-a>', -- approve review
-                comment_review = '<C-m>', -- comment review
-                request_changes = '<C-r>', -- request changes review
-                close_review_tab = '<C-c>', -- close review tab
-            }, --}}}
-            review_diff = { --{{{
-                add_review_comment = '<space>ca', -- add a new review comment
-                add_review_suggestion = '<space>sa', -- add a new review suggestion
-                focus_files = '<leader>e', -- move focus to changed file panel
-                toggle_files = '<leader>b', -- hide/show changed files panel
-                next_thread = ']t', -- move to next thread
-                prev_thread = '[t', -- move to previous thread
-                select_next_entry = ']q', -- move to previous changed file
-                select_prev_entry = '[q', -- move to next changed file
-                close_review_tab = '<C-c>', -- close review tab
-                toggle_viewed = '<leader><space>', -- toggle viewer viewed state
-            }, --}}}
-            file_panel = { --{{{
-                next_entry = 'j', -- move to next changed file
-                prev_entry = 'k', -- move to previous changed file
-                select_entry = '<cr>', -- show selected changed file diffs
-                refresh_files = 'R', -- refresh changed files panel
-                focus_files = '<leader>e', -- move focus to changed file panel
-                toggle_files = '<leader>b', -- hide/show changed files panel
-                select_next_entry = ']q', -- move to previous changed file
-                select_prev_entry = '[q', -- move to next changed file
-                close_review_tab = '<C-c>', -- close review tab
-                toggle_viewed = '<leader><space>', -- toggle viewer viewed state
-            },--}}}
-        },--}}}
-    })
-end
 
 -- inoremap <C-k><C-k> <Cmd>lua require'betterdigraphs'.digraphs("i")<CR>
 -- nnoremap { "n", "r<C-k><C-k>" , function () require'betterdigraphs'.digraphs("r") end}
@@ -1319,17 +775,11 @@ end
 --     vim.cmd([[ wincmd p ]])
 -- end
 
--- require("urlview").setup({
---   picker = "default", -- "default" (vim.ui.select), "telescope" (telescope.nvim)
--- 	title = "URLs: ", -- prompt title
--- 	debug = true, -- logs user errors
--- })
-
 local has_bufferline, bufferline = pcall(require, 'bufferline')
 if has_bufferline then
-	bufferline.setup{
+	bufferline.setup {
 		options = {
-			view =	"default",
+			view = "default",
 			numbers = "buffer_id",
 			-- number_style = "superscript" | "",
 			-- mappings = true,
@@ -1355,175 +805,31 @@ if has_bufferline then
 			hover = {
 				enabled = true,
 				delay = 200,
-				reveal = {'close'}
+				reveal = { 'close' }
 			},
 		}
 	}
 end
 
-for i=1,9 do
-	vim.keymap.set('n',  '<leader>'..tostring(i) , "<cmd>BufferLineGoToBuffer "..tostring(i).."<CR>", { silent = true})
+for i = 1, 9 do
+	vim.keymap.set('n', '<leader>' .. tostring(i), "<cmd>BufferLineGoToBuffer " .. tostring(i) .. "<CR>", { silent = true })
 end
 
 vim.g.UltiSnipsSnippetDirectories = { vim.fn.stdpath('config') .. '/snippets' }
 vim.g.tex_flavor = 'latex'
--- Treesitter config {{{
 require('teto.treesitter')
 
--- use { 'nvim-treesitter/nvim-treesitter' }
-
--- :TSPlaygroundToggle
--- use({
--- 	'nvim-treesitter/playground',
--- 	requires = { 'nvim-treesitter/nvim-treesitter' },
--- })
-    -- use {
-    -- 	'p00f/nvim-ts-rainbow',
-    -- 	requires = { 'nvim-treesitter/nvim-treesitter' }
-    -- }
--- use({ 'nvim-treesitter/nvim-treesitter-textobjects' })
---}}}
--- my treesitter config
-
--- telescope {{{
--- TODO check for telescope github extension too
-if false then
-    -- telescope.load_extension('ghcli')
-    local actions = require('telescope.actions')
-    local trouble = require('trouble')
-    -- telescope.setup{}
-    telescope.setup({
-        defaults = {
-            layout_config = {
-                vertical = { width = 0.7 },
-                -- other layout configuration here
-            },
-            mappings = {
-                i = {
-                    ['<c-t>'] = trouble.open_with_trouble,
-
-                    -- 				-- -- To disable a keymap, put [map] = false
-                    -- 				-- -- So, to not map "<C-n>", just put
-                    -- 				-- ["<c-x>"] = false,
-                    -- 				-- -- Otherwise, just set the mapping to the function that you want it to be.
-                    -- 				-- ["<C-i>"] = actions.goto_file_selection_split,
-                    -- 				-- -- Add up multiple actions
-                    -- 				-- ["<CR>"] = actions.goto_file_selection_edit + actions.center,
-                    -- 				-- -- You can perform as many actions in a row as you like
-                    -- 				-- ["<CR>"] = actions.goto_file_selection_edit + actions.center + my_cool_custom_action,
-                    ['<esc>'] = actions.close,
-                },
-                n = {
-                    ['<C-t>'] = function(prompt_bufnr, mode)
-                        require('trouble.providers.telescope').open_with_trouble(prompt_bufnr, mode)
-                    end,
-                    -- ["<c-t>"] = trouble.open_with_trouble,
-                    ['<esc>'] = actions.close,
-                },
-            },
-            -- 		vimgrep_arguments = {
-            -- 		'rg',
-            -- 		'--color=never',
-            -- 		'--no-heading',
-            -- 		'--with-filename',
-            -- 		'--line-number',
-            -- 		'--column',
-            -- 		'--smart-case'
-            -- 		},
-            -- 		prompt_prefix = ">",
-            -- 		scroll_strategy = "limit", -- or cycle
-            -- 		selection_strategy = "reset",
-            -- 		sorting_strategy = "descending",
-            -- 		-- horizontal, vertical, center, flex
-            -- 		layout_strategy = "horizontal",
-            -- 		layout = {
-            -- 			width = 0.75,
-            -- 			prompt_position = "bottom",
-            -- 		},
-
-            -- 		file_ignore_patterns = {},
-            -- 		-- get_generic_fuzzy_sorter not very good, doesn't select an exact match
-            -- 		-- get_fzy_sorter
-            -- 		-- https://github.com/nvim-telescope/telescope.nvim#sorters
-            -- 		-- generic_sorter =  require'telescope.sorters'.get_levenshtein_sorter,
-            -- 		generic_sorter =  require'telescope.sorters'.get_generic_fuzzy_sorter,
-            -- 		file_sorter =  require'telescope.sorters'.get_fuzzy_file,
-            -- 		shorten_path = false,
-            -- 		path_display='smart',
-            -- 		winblend = 0,
-            -- 		-- preview_cutoff = 120,
-            -- 		border = true,
-            -- 		-- borderchars = { '─', '│', '─', '│', '╭', '╮', '╯', '╰'},
-            -- 		color_devicons = true,
-            -- 		-- use_less = true,
-            -- 		-- file_previewer = require'telescope.previewers'.cat.new, -- For buffer previewer use `require'telescope.previewers'.vim_buffer_cat.new`
-            -- 		-- grep_previewer = require'telescope.previewers'.vimgrep.new, -- For buffer previewer use `require'telescope.previewers'.vim_buffer_vimgrep.new`
-            -- 		-- qflist_previewer = require'telescope.previewers'.qflist.new, -- For buffer previewer use `require'telescope.previewers'.vim_buffer_qflist.new`
-
-            -- 		-- Developer configurations: Not meant for general override
-            -- 		-- buffer_previewer_maker = require'telescope.previewers'.buffer_previewer_maker
-        },
-        extensions = {
-            -- 		fzf = {
-            -- 			fuzzy = true,					 -- false will only do exact matching
-            -- 			override_generic_sorter = true, -- override the generic sorter
-            -- 			override_file_sorter = true,	 -- override the file sorter
-            -- 			case_mode = "smart_case",		 -- or "ignore_case" or "respect_case"
-            -- 										-- the default case_mode is "smart_case"
-            -- 		},
-            -- 		fzy_native = {
-            -- 			override_generic_sorter = false,
-            -- 			override_file_sorter = false,
-            -- 		},
-            frecency = {
-                -- 			-- workspaces = {
-                -- 				-- ["home"]	= "/home/teto/home",
-                -- 				-- ["data"]	= "/home/teto/neovim",
-                -- 				-- ["jinko"]	= "/home/teto/jinko",
-                -- 				-- -- ["wiki"]    = "/home/my_username/wiki"
-                -- },
-                -- show_scores = true,
-                -- show_unindexed = true,
-                -- ignore_patterns = {"*.git/*", "*/tmp/*"},
-                db_safe_mode = true,
-                auto_validate = false,
-                -- devicons_disabled = true
-            },
-        },
-    })
-    -- This will load fzy_native and have it override the default file sorter
-    -- telescope.load_extension('fzf')
-    --jghauser/papis.nvim telescope.load_extension('fzy_native')
-    -- telescope.load_extension("notify")
-	telescope.load_extension('hoogle')
-    telescope.load_extension('frecency')
-    telescope.load_extension('manix')
-	-- telescope.load_extension('scout')
-
-    -- TODO add autocmd
-    -- User TelescopePreviewerLoaded
-end
---}}}
-
--- local contextMenu = function ()
---     local choices = { 'choice 1', 'choice 2' }
---     require('contextmenu').open(choices, {
---         callback = function(chosen)
---             print('Final choice ' .. choices[chosen])
---         end,
---     })
--- end
 
 -- Disable virtual_text since it's redundant due to lsp_lines.
 vim.diagnostic.config({
-    -- disabled because too big in haskell
-    virtual_lines = false,
-    virtual_text = true,
-    -- {
-    -- severity = { min = vim.diagnostic.severity.WARN }
-    -- },
-    signs = true,
-    severity_sort = true,
+	-- disabled because too big in haskell
+	virtual_lines = false,
+	virtual_text = true,
+	-- {
+	-- severity = { min = vim.diagnostic.severity.WARN }
+	-- },
+	signs = true,
+	severity_sort = true,
 })
 
 require('teto.lspconfig')
@@ -1548,8 +854,7 @@ vim.opt.background = 'light' -- or "light" for light mode
 
 vim.opt.showbreak = '↳ ' -- displayed in front of wrapped lines
 
--- TODO add a command to select a ref (from telescope ?) and call Gitsigns change_base
--- afterwards
+-- TODO add a command to select a ref  and call Gitsigns change_base afterwards
 
 vim.cmd([[highlight IndentBlanklineIndent1 guifg=#E06C75 gui=nocombine]])
 vim.cmd([[highlight IndentBlanklineIndent2 guifg=#E5C07B gui=nocombine]])
@@ -1607,32 +912,32 @@ vim.cmd([[highlight IndentBlanklineIndent6 guifg=#C678DD gui=nocombine]])
 -- menu_add("DAP.Open repl", 'lua require"dap".repl.open()')
 
 local function open_contextual_menu()
-    -- getcurpos()	Get the position of the cursor.  This is like getpos('.'), but
-    --		includes an extra "curswant" in the list:
-    --			[0, lnum, col, off, curswant] ~
-    --		The "curswant" number is the preferred column when moving the
-    --		cursor vertically.	Also see |getpos()|.
-    --		The first "bufnum" item is always zero.
+	-- getcurpos()	Get the position of the cursor.  This is like getpos('.'), but
+	--		includes an extra "curswant" in the list:
+	--			[0, lnum, col, off, curswant] ~
+	--		The "curswant" number is the preferred column when moving the
+	--		cursor vertically.	Also see |getpos()|.
+	--		The first "bufnum" item is always zero.
 
-    local curpos = vim.fn.getcurpos()
+	local curpos = vim.fn.getcurpos()
 
-    local menu_opts = {
-        kind = 'menu',
-        prompt = 'Main menu',
-        experimental_mouse = true,
-        position = {
-            screenrow = curpos[2],
-            screencol = curpos[3],
-        },
-        -- ignored
-        -- width = 200,
-        -- height = 300,
-    }
+	local menu_opts = {
+		kind = 'menu',
+		prompt = 'Main menu',
+		experimental_mouse = true,
+		position = {
+			screenrow = curpos[2],
+			screencol = curpos[3],
+		},
+		-- ignored
+		-- width = 200,
+		-- height = 300,
+	}
 
-    -- print('### ' ..res)
-    require('stylish').ui_menu(vim.fn.menu_get(''), menu_opts, function(res)
-        vim.cmd(res)
-    end)
+	-- print('### ' ..res)
+	require('stylish').ui_menu(vim.fn.menu_get(''), menu_opts, function(res)
+		vim.cmd(res)
+	end)
 end
 
 vim.opt.listchars = 'tab:•·,trail:·,extends:❯,precedes:❮,nbsp:×'
@@ -1643,56 +948,6 @@ vim.opt.listchars:append('conceal:❯')
 -- "set shada=!,'50,<1000,s100,:0,n$XDG_CACHE_HOME/nvim/shada
 vim.g.netrw_home = vim.fn.stdpath('data') .. '/nvim'
 
--- quickui {{{
--- https://github.com/skywind3000/vim-quickui
--- TODO should be printed only if available
-vim.g.quickui_border_style = 1
--- content = {
---             \ ['LSP -'],
---             \ ["Goto &Definition\t\\cd", 'lua vim.lsp.buf.definition()'],
---             \ ["Goto &Declaration\t\\cd", 'lua vim.lsp.buf.declaration()'],
---             \ ["Goto I&mplementation\t\\cd", 'lua vim.lsp.buf.implementation()'],
---             \ ["Hover\t\\ch", 'lua vim.lsp.buf.references()'],
---             \ ["Search &References\t\\cr", 'lua vim.lsp.buf.references()'],
---             \ ["Document  &Symbols\t\\cr", 'lua vim.lsp.buf.document_symbol()'],
---             \ ["Format", 'lua vim.lsp.buf.formatting_sync(nil, 1000)'],
---             \ ["&Execute  Command\\ce", 'lua vim.lsp.buf.execute_command()'],
---             \ ["&Incoming calls\\ci", 'lua vim.lsp.buf.incoming_calls()'],
---             \ ["&Outgoing calls\\ci", 'lua vim.lsp.buf.outgoing_calls()'],
---             \ ["&Signature help\\ci", 'lua vim.lsp.buf.signature_help()'],
---             \ ["&Workspace symbol\\cw", 'lua vim.lsp.buf.workspace_symbol()'],
---             \ ["&Rename\\cw", 'lua vim.lsp.buf.rename()'],
---             \ ["&Code action\\cw", 'lua vim.lsp.buf.code_action()'],
---             \ ['- Diagnostic '],
---             \ ['Display in QF', 'lua vim.diagnostic.setqflist({open = true, severity = { min = vim.diagnostic.severity.WARN } })'],
--- 	    \ ['Set severity to warning', 'lua vim.diagnostic.config({virtual_text = { severity = { min = vim.diagnostic.severity.WARN } }})'],
--- 	    \ ['Set severity to all', 'lua vim.diagnostic.config({virtual_text = { severity = nil }})'],
---             \ ['- Misc '],
---             \ ['Toggle indentlines', 'IndentBlanklineToggle!'],
---             \ ['Start search and replace', 'lua require("spectre").open()'],
---             \ ['Toggle obsession', 'Obsession'],
---             \ ['Toggle minimap', 'MinimapToggle'],
---             \ ['Toggle biscuits', 'lua require("nvim-biscuits").toggle_biscuits()'],
---             \ ['REPL - '],
---             \ ['Send line ', 'lua require''luadev''.exec(vim.api.nvim_get_current_line())'],
---             \ ['Send selection ', 'call <SID>luadev_run_operator(v:true)'],
--- 	    \ ['DAP -'],
--- 	    \ ['Add breakpoint', 'lua require"dap".toggle_breakpoint()'],
--- 	    \ ["Continue", 'lua require"dap".continue()'],
--- 	    \ ['Open REPL', 'lua require"dap".repl.open()']
---             \ }
-
--- " formatting_sync
--- " set cursor to the last position
--- let quick_opts = {'index':g:quickui#context#cursor}
-
--- " TODO map to lua create_menu()
--- map <RightMouse>  <Cmd>call quickui#context#open(content, quick_opts)<CR>
--- vim.keymap.set('n',  '<RightMouse>', '<Cmd>lua open_contextual_menu()<CR>' )
-
--- " can't click on it plus it disappears
--- " map <RightMouse>  <Cmd>lua create_menu()<CR>
--- }}}
 vim.keymap.set('n', '<F11>', '<Plug>(ToggleListchars)')
 
 vim.keymap.set('n', '<leader>pi', '<cmd>PackerInstall<CR>')
@@ -1700,12 +955,6 @@ vim.keymap.set('n', '<leader>pu', '<cmd>PackerSync<CR>')
 
 vim.keymap.set('n', '<leader>q', '<Cmd>Sayonara!<cr>', { silent = true })
 vim.keymap.set('n', '<leader>Q', '<Cmd>Sayonara<cr>', { silent = true })
-
-vim.keymap.set('n', '<leader>rr', '<Plug>RestNvim<cr>', { remap = true, desc = 'Run an http request' })
-vim.keymap.set('n', '<leader>rp', '<Plug>RestNvimPreview', { remap = true, desc = 'Preview an http request' })
--- vim.keymap.set('n',  '<C-j>' , "<use>RestNvimPreview")
--- nnoremap <use>RestNvimPreview :lua require('rest-nvim').run(true)<CR>
--- nnoremap <use>RestNvimLast :lua require('rest-nvim').last()<CR>
 
 -- repl.nvim (from hiphish) {{{
 -- vim.g.repl['lua'] = {
@@ -1723,31 +972,11 @@ vim.keymap.set('n', '<leader>rp', '<Plug>RestNvimPreview', { remap = true, desc 
 -- vmap <leader>rs  <Plug>(ReplSend)
 -- }}}
 
--- alok/notational-fzf-vim {{{
--- use c-x to create the note
--- vim.g.nv_search_paths = []
-vim.g.nv_search_paths = { '~/Nextcloud/Notes' }
-vim.g.nv_default_extension = '.md'
-vim.g.nv_show_preview = 1
-vim.g.nv_create_note_key = 'ctrl-x'
-
--- String. Default is first directory found in `g:nv_search_paths`. Error thrown
---if no directory found and g:nv_main_directory is not specified
---vim.g.nv_main_directory = g:nv_main_directory or (first directory in g:nv_search_paths)
---}}}
 
 vim.g.vsnip_snippet_dir = vim.fn.stdpath('config') .. '/vsnip'
 
 map('n', '<Leader>$', '<Cmd>Obsession<CR>')
 
--- nvimdev {{{
--- call nvimdev#init(--path/to/neovim--)
-vim.g.nvimdev_auto_init = 1
-vim.g.nvimdev_auto_cd = 1
--- vim.g.nvimdev_auto_ctags=1
-vim.g.nvimdev_auto_lint = 1
-vim.g.nvimdev_build_readonly = 1
---}}}
 
 -- nvim will load any .nvimrc in the cwd; useful for per-project settings
 vim.opt.exrc = true
@@ -1759,10 +988,11 @@ vim.api.nvim_create_user_command('JsonPretty', "%!jq '.'", {})
 
 -- taken from justinmk's config
 vim.api.nvim_create_user_command(
-    'Tags',
-    [[
-	!ctags -R --exclude='build*' --exclude='.vim-src/**' --exclude='venv/**' --exclude='**/site-packages/**' --exclude='data/**' --exclude='dist/**' --exclude='notebooks/**' --exclude='Notebooks/**' --exclude='*graphhopper_data/*.json' --exclude='*graphhopper/*.json' --exclude='*.json' --exclude='qgis/**' *]],
-    {}
+	'Tags',
+	[[
+	!ctags -R --exclude='build*' --exclude='.vim-src/**' --exclude='venv/**' --exclude='**/site-packages/**' --exclude='data/**' --exclude='dist/**' --exclude='notebooks/**' --exclude='Notebooks/**' --exclude='*graphhopper_data/*.json' --exclude='*graphhopper/*.json' --exclude='*.json' --exclude='qgis/**' *]]
+	,
+	{}
 )
 
 -- " Bye bye ex mode
@@ -1781,7 +1011,7 @@ map T <Plug>Sneak_T
 -- let g:db_ui_winwidth = 30
 -- dadbod is controllable via DBUI
 vim.g.dbs = {
-    dev = 'sqlite:///home/teto/nova/jinko3/core-platform-db/db.sqlite',
+	dev = 'sqlite:///home/teto/nova/jinko3/core-platform-db/db.sqlite',
 }
 
 -- luadev mappings

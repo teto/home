@@ -232,7 +232,8 @@ end
 
 M.set_rest_rclick_menu = function()
     M.set_rclick_submenu('MenuRest', 'Rest', {
-        {'Run request',    "<cmd>lua require('rest-nvim').run(true)<cr>"},
+        {'Run request',    "<cmd>lua require('rest-nvim').run(false)<cr>"},
+        {'Run request (verbose)',    "<cmd>lua require('rest-nvim').run({ verbose = true})<cr>"},
     }, M.buf_is_rest)
 end
 

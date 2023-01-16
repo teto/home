@@ -30,7 +30,8 @@ return {
 	-- vim.api.nvim_set_hl(0, "FSPrefix", { fg = "#cdd6f4" })
 	-- vim.api.nvim_set_hl(0, "FSSuffix", { fg = "#6C7086" })
 end},
-{'tweekmonster/startuptime.vim', opt = true }, -- {'on': 'StartupTime'} " see startup time per script
+{ 'alec-gibson/nvim-tetris', lazy = true },
+{'tweekmonster/startuptime.vim', lazy = true }, -- {'on': 'StartupTime'} " see startup time per script
 'MunifTanjim/nui.nvim', -- to create UIs
 'honza/vim-snippets',
 { 'ethanholz/nvim-lastplace',
@@ -41,6 +42,114 @@ end},
             lastplace_open_folds = true,
         })
     end,
-}
+},
+{'rhysd/git-messenger.vim', cmd = "GitMessenger" }, -- to show git message :GitMessenger
+{  'tweekmonster/nvim-api-viewer', cmd = "NvimAPI" },
+-- 'antoinemadec/openrgb.nvim',
+-- 'vim-denops/denops.vim',
+-- to help with nvim-hs
+-- 'neovimhaskell/nvim-hs.vim',
+-- use 'ryoppippi/bad-apple.vim' -- needs denops
+-- use 'eugen0329/vim-esearch' -- search & replace
+-- use 'kshenoy/vim-signature' -- display marks in gutter, love it
+-- use {
+--   -- Display marks for different kinds of decorations across the buffer. Builtin handlers include:
+--   -- 'lewis6991/satellite.nvim',
+--   config = function()
+--     require('satellite').setup()
+--   end
+-- }
+-- installed via nix
+-- require('satellite').setup()
+-- use {
+--   "max397574/colortils.nvim",
+--   -- cmd = "Colortils",
+--   config = function()
+--     require("colortils").setup()
+--   end,
+-- }
+
+--{ -- to take notes, :NV
+--'alok/notational-fzf-vim',
+--config = function ()
+---- alok/notational-fzf-vim {{{
+---- use c-x to create the note
+---- vim.g.nv_search_paths = []
+--vim.g.nv_search_paths = { '~/Nextcloud/Notes' }
+--vim.g.nv_default_extension = '.md'
+--vim.g.nv_show_preview = 1
+--vim.g.nv_create_note_key = 'ctrl-x'
+--end
+
+---- String. Default is first directory found in `g:nv_search_paths`. Error thrown
+----if no directory found and g:nv_main_directory is not specified
+----vim.g.nv_main_directory = g:nv_main_directory or (first directory in g:nv_search_paths)
+----}}}
+--},
+
+-- terminal image viewer in neovim see https://github.com/edluffy/hologram.nvim#usage for usage
+-- use 'edluffy/hologram.nvim' -- hologram-nvim
+-- use 'ellisonleao/glow.nvim' -- markdown preview, run :Glow
+
+-- use {
+-- 	-- Show where your cursor moves
+-- 	'edluffy/specs.nvim',
+-- 	config = function ()
+-- 		local specs = require 'specs'
+-- 		specs.setup{
+-- 			show_jumps	= true,
+-- 			min_jump = 20,
+-- 			popup = {
+-- 				delay_ms = 0, -- delay before popup displays
+-- 				inc_ms = 10, -- time increments used for fade/resize effects
+-- 				blend = 10, -- starting blend, between 0-100 (fully transparent), see :h winblend
+-- 				width = 30,
+-- 				winhl = "PMenu",
+-- 				fader = specs.linear_fader,
+-- 				resizer = specs.shrink_resizer
+-- 			},
+-- 			ignore_filetypes = {},
+-- 			ignore_buftypes = {
+-- 				nofile = true,
+-- 			},
+-- 		}
+-- 	end
+-- }
+
+-- use {
+-- 	'code-biscuits/nvim-biscuits',
+-- 	config = function ()
+-- 	require('nvim-biscuits').setup({
+-- 	on_events = { 'InsertLeave', 'CursorHoldI' },
+-- 	cursor_line_only = true,
+-- 	default_config = {
+-- 		max_length = 12,
+-- 		min_distance = 50,
+-- 		prefix_string = " 📎 "
+-- 	},
+-- 	language_config = {
+-- 		html = { prefix_string = " 🌐 " },
+-- 		javascript = {
+-- 			prefix_string = " ✨ ",
+-- 			max_length = 80
+-- 		},
+-- 		python = { disabled = true },
+-- 		-- nix = { disabled = true }
+-- 	}
+-- 	})
+-- end
+-- }
+
+-- use { 'nvim-lua/popup.nvim'	}  -- mimic vim's popupapi for neovim
+
+-- use {
+-- 	-- shows type annotations for functions in virtual text using built-in LSP client
+-- 	'jubnzv/virtual-types.nvim'
+-- }
+
+
+-- use 'glacambre/firenvim' -- to use nvim in firefox
+-- call :NR on a region than :w . coupled with b:nrrw_aucmd_create,
+-- use 'chrisbra/NrrwRgn' -- to help with multi-ft files
 
 }

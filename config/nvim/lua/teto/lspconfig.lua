@@ -118,9 +118,9 @@ lspconfig.tsserver.setup({
     cmd = {
       "typescript-language-server",
           "--stdio",
-          -- "--tsserver-path",
+          "--tsserver-path",
           -- found with 'nix build .#nodePackages.typescript'
-          -- "/nix/store/34pzigggq36pk9sz9a95bz53qlqx1mpx-typescript-4.9.4/lib/node_modules/typescript/lib"
+          "/nix/store/34pzigggq36pk9sz9a95bz53qlqx1mpx-typescript-4.9.4/lib/node_modules/typescript/lib"
     }
 })
 

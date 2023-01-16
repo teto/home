@@ -2,6 +2,21 @@ return {
  'neovim/nvim-lspconfig', -- while fuzzing details out
  {
     'MrcJkb/haskell-tools.nvim',
+--  'mfussenegger/nvim-dap'
+--  'https://git.sr.ht/~whynothugo/lsp_lines.nvim'
+-- ({
+--	 "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+--	 as = "lsp_lines",
+--	 config = function()
+
+--	   require("lsp_lines").register_lsp_virtual_lines()
+--	 end,
+-- })
+-- {
+--	"rcarriga/nvim-dap-ui"
+--	, requires = {"mfussenegger/nvim-dap"}
+-- }
+-- use 'nvim-telescope/telescope-dap.nvim'
     config = function()
         local ht = require('haskell-tools')
         ht.setup({
