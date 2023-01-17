@@ -610,9 +610,6 @@ end
 --	})
 --end
 
--- use fzf to search through diagnostics
--- use { 'ojroques/nvim-lspfuzzy'}
-
 -- for live editing
 -- use { 'jbyuki/instant.nvim' }
 -- use { 'jbyuki/nabla.nvim' } -- write latex equations in ASCII
@@ -710,7 +707,7 @@ if has_fzf_lua then
 end
 -- nnoremap ( "n", "<Leader>ca", function () vim.lsp.buf.code_action{} end )
 nnoremap('n', '<Leader>ca', function()
-	vim.cmd([[ FzfLua lsp_code_actions]])
+	vim.cmd([[FzfLua lsp_code_actions]])
 end)
 
 -- nnoremap ( "n", "<leader>S",  function() require('spectre').open() end )
@@ -761,19 +758,10 @@ if has_whichkey then
 	})
 end
 
--- set tagfunc=v:lua.vim.lsp.tagfunc
-
 -- since it was not merge yet
-
 -- inoremap <C-k><C-k> <Cmd>lua require'betterdigraphs'.digraphs("i")<CR>
 -- nnoremap { "n", "r<C-k><C-k>" , function () require'betterdigraphs'.digraphs("r") end}
 -- vnoremap r<C-k><C-k> <ESC><Cmd>lua require'betterdigraphs'.digraphs("gvr")<CR>
-
--- local orig_ref_handler = vim.lsp.handlers['textDocument/references']
--- vim.lsp.handlers['textDocument/references'] = function(...)
---     orig_ref_handler(...)
---     vim.cmd([[ wincmd p ]])
--- end
 
 local has_bufferline, bufferline = pcall(require, 'bufferline')
 if has_bufferline then
@@ -785,8 +773,8 @@ if has_bufferline then
 			-- mappings = true,
 			modified_icon = '●',
 			close_icon = '',
-			left_trunc_marker = '',
-			right_trunc_marker = '',
+			-- left_trunc_marker = '',
+			-- right_trunc_marker = '',
 			-- max_name_length = 18,
 			-- max_prefix_length = 15, -- prefix used when a buffer is deduplicated
 			-- tab_size = 18,
@@ -809,11 +797,11 @@ if has_bufferline then
 			},
 		}
 	}
+	for i = 1, 9 do
+		vim.keymap.set('n', '<leader>' .. tostring(i), "<cmd>BufferLineGoToBuffer " .. tostring(i) .. "<CR>", { silent = true })
+	end
 end
 
-for i = 1, 9 do
-	vim.keymap.set('n', '<leader>' .. tostring(i), "<cmd>BufferLineGoToBuffer " .. tostring(i) .. "<CR>", { silent = true })
-end
 
 vim.g.UltiSnipsSnippetDirectories = { vim.fn.stdpath('config') .. '/snippets' }
 vim.g.tex_flavor = 'latex'
@@ -949,9 +937,6 @@ vim.opt.listchars:append('conceal:❯')
 vim.g.netrw_home = vim.fn.stdpath('data') .. '/nvim'
 
 vim.keymap.set('n', '<F11>', '<Plug>(ToggleListchars)')
-
-vim.keymap.set('n', '<leader>pi', '<cmd>PackerInstall<CR>')
-vim.keymap.set('n', '<leader>pu', '<cmd>PackerSync<CR>')
 
 vim.keymap.set('n', '<leader>q', '<Cmd>Sayonara!<cr>', { silent = true })
 vim.keymap.set('n', '<leader>Q', '<Cmd>Sayonara<cr>', { silent = true })
