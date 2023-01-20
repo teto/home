@@ -10,26 +10,31 @@ return {
 'nvim-zh/colorful-winsep.nvim' ,
 -- :Nvimesweeper / :h nvimesweeper
 { 'seandewar/nvimesweeper', lazy = true },
+--  '~/pdf-scribe.nvim'  -- to annotate pdf files from nvim :PdfScribeInit
+-- PdfScribeInit
+-- vim.g.pdfscribe_pdf_dir  = expand('$HOME').'/Nextcloud/papis_db'
+-- vim.g.pdfscribe_notes_dir = expand('$HOME').'/Nextcloud/papis_db'
+-- }}}
+
 { 'voldikss/vim-translator', lazy = true },
 -- load 'after/colors'
 'calvinchengx/vim-aftercolors',
 -- Vim-cool disables search highlighting when you are done searching and re-enables it when you search again.
--- use('romainl/vim-cool')
+-- ('romainl/vim-cool')
 -- 'lrangell/theme-cycler.nvim'
 -- lua repl :Luadev
-'bfredl/nvim-luadev',
+{'bfredl/nvim-luadev', cmd = "Luadev"},
 {
     'AckslD/nvim-FeMaco.lua',
-    config = 'require("femaco").setup()',
+    config = function () require("femaco").setup() end,
 },
 -- for quickreading: use :FSToggle to Toggle flow state
-{'nullchilly/fsread.nvim', config = function ()
-
-	-- vim.g.flow_strength = 0.7 -- low: 0.3, middle: 0.5, high: 0.7 (default)
-	-- vim.g.skip_flow_default_hl = true -- If you want to override default highlights
-	-- vim.api.nvim_set_hl(0, "FSPrefix", { fg = "#cdd6f4" })
-	-- vim.api.nvim_set_hl(0, "FSSuffix", { fg = "#6C7086" })
-end},
+-- {'nullchilly/fsread.nvim', config = function ()
+-- 	-- vim.g.flow_strength = 0.7 -- low: 0.3, middle: 0.5, high: 0.7 (default)
+-- 	-- vim.g.skip_flow_default_hl = true -- If you want to override default highlights
+-- 	-- vim.api.nvim_set_hl(0, "FSPrefix", { fg = "#cdd6f4" })
+-- 	-- vim.api.nvim_set_hl(0, "FSSuffix", { fg = "#6C7086" })
+-- end},
 { 'alec-gibson/nvim-tetris', lazy = true },
 {'tweekmonster/startuptime.vim', lazy = true }, -- {'on': 'StartupTime'} " see startup time per script
 'MunifTanjim/nui.nvim', -- to create UIs
@@ -49,10 +54,10 @@ end},
 -- 'vim-denops/denops.vim',
 -- to help with nvim-hs
 -- 'neovimhaskell/nvim-hs.vim',
--- use 'ryoppippi/bad-apple.vim' -- needs denops
--- use 'eugen0329/vim-esearch' -- search & replace
--- use 'kshenoy/vim-signature' -- display marks in gutter, love it
--- use {
+--  'ryoppippi/bad-apple.vim' -- needs denops
+--  'eugen0329/vim-esearch' -- search & replace
+--  'kshenoy/vim-signature' -- display marks in gutter, love it
+--  {
 --   -- Display marks for different kinds of decorations across the buffer. Builtin handlers include:
 --   -- 'lewis6991/satellite.nvim',
 --   config = function()
@@ -61,7 +66,7 @@ end},
 -- }
 -- installed via nix
 -- require('satellite').setup()
--- use {
+--  {
 --   "max397574/colortils.nvim",
 --   -- cmd = "Colortils",
 --   config = function()
@@ -88,10 +93,10 @@ end},
 --},
 
 -- terminal image viewer in neovim see https://github.com/edluffy/hologram.nvim#usage for usage
--- use 'edluffy/hologram.nvim' -- hologram-nvim
--- use 'ellisonleao/glow.nvim' -- markdown preview, run :Glow
+--  'edluffy/hologram.nvim' -- hologram-nvim
+--  'ellisonleao/glow.nvim' -- markdown preview, run :Glow
 
--- use {
+--  {
 -- 	-- Show where your cursor moves
 -- 	'edluffy/specs.nvim',
 -- 	config = function ()
@@ -116,7 +121,7 @@ end},
 -- 	end
 -- }
 
--- use {
+--  {
 -- 	'code-biscuits/nvim-biscuits',
 -- 	config = function ()
 -- 	require('nvim-biscuits').setup({
@@ -140,16 +145,16 @@ end},
 -- end
 -- }
 
--- use { 'nvim-lua/popup.nvim'	}  -- mimic vim's popupapi for neovim
+--  { 'nvim-lua/popup.nvim'	}  -- mimic vim's popupapi for neovim
 
--- use {
+--  {
 -- 	-- shows type annotations for functions in virtual text using built-in LSP client
 -- 	'jubnzv/virtual-types.nvim'
 -- }
 
 
--- use 'glacambre/firenvim' -- to use nvim in firefox
+--  'glacambre/firenvim' -- to use nvim in firefox
 -- call :NR on a region than :w . coupled with b:nrrw_aucmd_create,
--- use 'chrisbra/NrrwRgn' -- to help with multi-ft files
+--  'chrisbra/NrrwRgn' -- to help with multi-ft files
 
 }

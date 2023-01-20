@@ -20,9 +20,6 @@ if not vim.loop.fs_stat(lazypath) then
 	})
 end
 vim.opt.rtp:prepend(lazypath)
--- TODO fix ?
-vim.opt.packpath:prepend('/nix/store/8znlrk8mz6824718b3gp9n90wg42any7-vim-pack-dir')
-vim.opt.rtp:prepend('/nix/store/8znlrk8mz6824718b3gp9n90wg42any7-vim-pack-dir')
 vim.cmd([[packloadall ]])
 -- HOW TO TEST our fork of plenary
 -- vim.opt.rtp:prepend(os.getenv("HOME").."/neovim/plenary.nvim")
@@ -57,16 +54,6 @@ require("lazy").setup("lazyplugins", {
 	}
 
 })
--- packer.init({
---     autoremove = false,
--- })
-
--- vim.cmd([[
---   augroup packer_user_config
---     autocmd!
---     autocmd BufWritePost /home/teto/config/nvim/init-manual.lua source <afile> | PackerCompile
---   augroup end
--- ]])
 -- local function file_exists(name)
 -- 	local f=io.open(name,"r")
 -- 	if f~=nil then io.close(f) return true else return false end
@@ -191,8 +178,11 @@ vim.opt.sessionoptions:remove('terminal')
 vim.opt.sessionoptions:remove('help')
 --}}}
 
--- :tnoremap <Esc> <C-\><C-n>
+
+
+-- annoying in fzf-lua ?
 map('t', '<Esc>', '<C-\\><C-n>')
+-- :tnoremap <Esc> <C-\><C-n>
 -- nnoremap{ "n", "<C-N><C-N>", function () vim.opt.invnumber end }
 
 -- clipboard {{{
@@ -207,11 +197,10 @@ vim.opt.clipboard = 'unnamedplus'
 -- TODO must be number
 -- vim.opt.wildchar=("<Tab>"):byte()
 -- display a menu when need to complete a command
--- list:longest, " list breaks the pum
+-- list:longest, -- list breaks the pum
 vim.opt.wildmode = { 'longest', 'list' } -- longest,list' => fills out longest then show list
 -- set wildoptions+=pum
 
--- TODO ajouter sur le ticket nix
 vim.g.hoogle_fzf_cache_file = vim.fn.stdpath('cache') .. '/hoogle_cache.json'
 
 vim.opt.wildmenu = true
@@ -241,10 +230,6 @@ vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'grey' })
 -- })
 -- my_image:transmit() -- send image data to terminal
 
-
--- nvim-treesitter
--- require("nvim-tree").setup({ update_focused_file = { enable = true, }, })
-
 -- while testing/developing rest.nvim
 vim.opt.runtimepath:prepend('/home/teto/neovim/rest.nvim')
 vim.opt.runtimepath:prepend('/home/teto/tree-sitter-http')
@@ -252,8 +237,6 @@ vim.opt.runtimepath:prepend('/home/teto/tree-sitter-http')
 vim.api.nvim_set_keymap('n', '<f2>',
 	"<cmd>lua require'plenary.reload'.reload_module('rest-nvim.request'); print(require'rest-nvim.request'.ts_get_requests())<cr>"
 	, {})
--- nnoremap <use>RestNvimPreview :lua require('rest-nvim').run(true)<CR>
--- nnoremap <use>RestNvimLast :lua require('rest-nvim').last()<CR>
 
 
 local has_rest, rest = pcall(require, 'rest-nvim')
@@ -287,12 +270,6 @@ end
 
 
 
-
--- use '~/pdf-scribe.nvim'  -- to annotate pdf files from nvim :PdfScribeInit
--- PdfScribeInit
--- vim.g.pdfscribe_pdf_dir  = expand('$HOME').'/Nextcloud/papis_db'
--- vim.g.pdfscribe_notes_dir = expand('$HOME').'/Nextcloud/papis_db'
--- }}}
 
 
 -- Snippets are separated from the engine. Add this if you want them:
