@@ -107,7 +107,7 @@ in
     bluetooth = {
       enable = true;
       powerOnBoot = false;
-      hsphfpd.enable = true;
+	  # hsphfpd.enable = false; # conflicts with pipewire
     };
     opengl = {
       enable = true;

@@ -335,6 +335,7 @@ in
     # TODO add a echo for the log
     postExec = "${pkgs.notmuch}/bin/notmuch new";
   };
+  # copy load credential implem from https://github.com/NixOS/nixpkgs/pull/211559/files
   systemd.user.services.mbsync = {
     Service = {
       # TODO need DBUS_SESSION_BUS_ADDRESS 
