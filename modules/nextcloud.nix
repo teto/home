@@ -6,9 +6,15 @@ in
 
   services.nextcloud = {
     enable = true;
+
+    # Use HTTPS for links
+    https = true;
+
     # machine specific
     hostName = secrets.jakku.hostname;
     config = {
+      # Further forces Nextcloud to use HTTPS
+      overwriteProtocol = "https";
       # loaded via sops 
       adminpassFile = "/run/secrets/nextcloud/adminPassword";
 	  # TODO change it

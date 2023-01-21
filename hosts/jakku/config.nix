@@ -40,8 +40,22 @@ in
   sops.age.generateKey = false;
 
   services.nextcloud.hostName = secrets.jakku.hostname;
-  security.acme.acceptTerms = true;
+  security.acme = {
+	acceptTerms = true;
+	# defaults.email = "acme@neotokyo.fr";
+  };
 
+  services.nginx = {
+   enable = true;
+   # Setup Nextcloud virtual host to listen on ports
+   virtualHosts = {
+     secrets.jakku.hostname = {
+       ## Force HTTP redirect to HTTPS
+       forceSSL = true;
+       ## LetsEncrypt
+       enableACME = true;
+    };
+  };
   environment.systemPackages = with pkgs; [
     tmux
     # weechat

@@ -26,6 +26,9 @@ deploy-router:
 	# we MUST skip checks else it fails
 	deploy .\#router  -s 
 
+deploy-neotokyo:
+	deploy .\#neotokyo  -s 
+
 # regenerate my email contacts
 # (to speed up alot autocompletion)
 contacts:
