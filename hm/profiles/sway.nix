@@ -27,28 +27,23 @@ in
     ];
 
     # eventually start foot --server
+    # export GBM_BACKEND=nvidia-drm
+    # export GBM_BACKENDS_PATH=/etc/gbm
+    # 
     extraSessionCommands = ''
-      export SDL_VIDEODRIVER=wayland
-      # needs qt5.qtwayland in systemPackages
-      export GBM_BACKEND=nvidia-drm
-      export GBM_BACKENDS_PATH=/etc/gbm
-      export QT_QPA_PLATFORM=wayland
-      export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
+            # needs qt5.qtwayland in systemPackages
+            export QT_QPA_PLATFORM=wayland
+      	  export GBM_BACKEND=nvidia-drm
+      	  export SDL_VIDEODRIVER=wayland
+            export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
     '';
     wrapperFeatures = { gtk = true; };
 
-
-    # config = removeAttrs  config.xsession.windowManager.i3.config ["startup"];
     config = {
-      #   menu =
       terminal = term;
 
       # Notification Daemon
-
-
       # Toggle control center
-
-
       keybindings = {
         "$mod+Shift+n" = " exec ${pkgs.swaynotificationcenter}/bin/swaync-client -t -sw";
         # clipman can be used too
@@ -61,7 +56,7 @@ in
       };
 
 
-      focus.forceWrapping = lib.mkForce true;
+      focus.wrapping = "yes";
       startup = [
         { command = "wl-paste -t text --watch clipman store"; }
         { command = ''wl-paste -p -t text --watch clipman store -P --histpath="~/.local/share/clipman-primary.json"''; }

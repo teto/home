@@ -1,7 +1,6 @@
 { config, lib, pkgs, ... }:
 let
   # secrets = import ./secrets.nix;
-  nvidiaPackage = config.boot.kernelPackages.nvidiaPackages.stable;
   # mptcp-flake = builtins.getFlake "github:teto/mptcp-flake/bf99516a50dcf3fcbe0a0c924bb56ff57fdd05e1";
   # type = "git";
   # ref = "cargoNix";
@@ -111,9 +110,9 @@ in
   ];
 
   # DOES NOT WORK !
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  # boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_6_0;
   # boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_mptcp_96;
-  # boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_mptcp_95-matt;
 
   boot.kernelModules = [
     "af_key" # for ipsec/vpn support
@@ -180,8 +179,8 @@ in
     dbus.packages = [
       pkgs.deadd-notification-center # installed by systemd
       pkgs.gcr # for pinentry
-	  pkgs.gnome.gdm
-	  pkgs.gnome.gnome-control-center
+      # pkgs.gnome.gdm
+      # pkgs.gnome.gnome-control-center
     ];
   };
 
@@ -212,24 +211,36 @@ in
 
   # this is required as well
   hardware.nvidia = {
-   # this makes screen go black on boot :/
-    modesetting.enable = false; # needs "modestting" in videoDrivers ?
-    # hardware.nvidia.package
+    # this makes screen go black on boot :/
+    modesetting.enable = true; # needs "modesetting" in videoDrivers ?
+
+    # hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
+    powerManagement.enable = false;
   };
-
-
-  # config from https://discourse.nixos.org/t/nvidia-users-testers-requested-sway-on-nvidia-steam-on-wayland/15264/32
   # environment.etc."gbm/nvidia-drm_gbm.so".source = "${nvidiaPackage}/lib/libnvidia-allocator.so";
   # environment.etc."egl/egl_external_platform.d".source = "/run/opengl-driver/share/egl/egl_external_platform.d/";
+
+  environment.variables = {
+    WLR_NO_HARDWARE_CURSORS = "1";
+  };
+
+  environment.sessionVariables = {
+    WLR_NO_HARDWARE_CURSORS = "1";
+  };
+
+  # config from https://discourse.nixos.org/t/nvidia-users-testers-requested-sway-on-nvidia-steam-on-wayland/15264/32
   hardware.opengl.extraPackages = [
     # vaapiVdpau
     # libvdpau-va-gl
     # libva
   ];
   # security.sudo.wheelNeedsPassword = ;
-    # disabled to run stable-diffusion
+  # disabled to run stable-diffusion
   services.xserver = {
-    videoDrivers = [ "modesetting" "fbdev" "nvidia" ];
+    videoDrivers = [
+      "nvidia"
+      # "modesetting" "fbdev"
+    ];
     displayManager.gdm.wayland = true;
   };
   # system.replaceRuntimeDependencies

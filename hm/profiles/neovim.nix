@@ -6,25 +6,25 @@ let
     config = lib.optionalString (attrs ? config && attrs.config != null) (genBlockLua attrs.plugin.pname attrs.config);
   };
 
-  genBlockLua = title: content: 
-   ''
-   -- ${title} {{{
-   ${content}
-   -- }}}
-   '';
+  genBlockLua = title: content:
+    ''
+      -- ${title} {{{
+      ${content}
+      -- }}}
+    '';
 
   luaRcBlocks = {
     appearance = ''
-        -- draw a line on 80th column
-        vim.o.colorcolumn='80,100'
-        '';
+      -- draw a line on 80th column
+      vim.o.colorcolumn='80,100'
+    '';
 
     # hi MsgSeparator ctermbg=black ctermfg=white
     # TODO equivalent of       set fillchars+=
     foldBlock = ''
-        vim.o.fillchars='foldopen:▾,foldclose:▸,msgsep:‾'
-        vim.o.foldcolumn='auto:2'
-        '';
+      vim.o.fillchars='foldopen:▾,foldclose:▸,msgsep:‾'
+      vim.o.foldcolumn='auto:2'
+    '';
     # dealingwithpdf= ''
     #   " Read-only pdf through pdftotext / arf kinda fails silently on CJK documents
     #   " autocmd BufReadPost *.pdf silent %!pdftotext -nopgbrk -layout -q -eol unix "%" - | fmt -w78
@@ -81,20 +81,20 @@ let
   ];
 
   treesitterPlugins = with pkgs.vimPlugins; [
-     {
-       # for :TSPlaygroundToggle
-       plugin = playground;
-     }
-	 {
+    {
+      # for :TSPlaygroundToggle
+      plugin = playground;
+    }
+    {
 
-	  plugin = parserDir;
-	 }
+      plugin = parserDir;
+    }
   ];
 
   luaPlugins = with pkgs.vimPlugins; [
-	{
-	 plugin = b64-nvim;
-	}
+    {
+      plugin = b64-nvim;
+    }
     # (luaPlugin {
     #   plugin = nvim-lspconfig;
     #   config = let nodePkgs = pkgs.nodePackages; in ''
@@ -115,21 +115,21 @@ let
 
     {
       plugin = (nvim-treesitter.withPlugins (
-          plugins: with plugins; [
-            # tree-sitter-bash
-            # tree-sitter-c
-            # tree-sitter-lua
-            # tree-sitter-http
-            # tree-sitter-json
-            # tree-sitter-nix
-            # # tree-sitter-haskell # crashes with a loop
-            # tree-sitter-python
-            # tree-sitter-html  # for rest.nvim
-            # tree-sitter-norg
-            # tree-sitter-org-nvim
-            tree-sitter-query
-          ]
-        ));
+        plugins: with plugins; [
+          # tree-sitter-bash
+          # tree-sitter-c
+          # tree-sitter-lua
+          # tree-sitter-http
+          # tree-sitter-json
+          # tree-sitter-nix
+          # # tree-sitter-haskell # crashes with a loop
+          # tree-sitter-python
+          # tree-sitter-html  # for rest.nvim
+          # tree-sitter-norg
+          # tree-sitter-org-nvim
+          tree-sitter-query
+        ]
+      ));
       # see https://github.com/NixOS/nixpkgs/issues/189838#issuecomment-1250993635 for rationale
       # config = ''
       # local available, config = pcall(require, 'nvim-treesitter.configs')
@@ -157,51 +157,51 @@ let
     (luaPlugin {
       plugin = trouble-nvim;
       config = ''
-            require'trouble'.setup {
-            position = "bottom", -- position of the list can be: bottom, top, left, right
-            height = 10, -- height of the trouble list when position is top or bottom
-            width = 50, -- width of the list when position is left or right
-            icons = false, -- use devicons for filenames
-            -- mode = "workspace_diagnostics", -- "lsp_workspace_diagnostics", "lsp_document_diagnostics", "quickfix", "lsp_references", "loclist"
-            -- fold_open = "", -- icon used for open folds
-            -- fold_closed = "", -- icon used for closed folds
-            action_keys = { -- key mappings for actions in the trouble list
-                -- map to {} to remove a mapping, for example:
-                -- close = {},
-                close = "q", -- close the list
-                cancel = "<esc>", -- cancel the preview and get back to your last window / buffer / cursor
-                refresh = "r", -- manually refresh
-                jump = {"<cr>", "<tab>"}, -- jump to the diagnostic or open / close folds
-                open_split = { "<c-x>" }, -- open buffer in new split
-                open_vsplit = { "<c-v>" }, -- open buffer in new vsplit
-                open_tab = { "<c-t>" }, -- open buffer in new tab
-                jump_close = {"o"}, -- jump to the diagnostic and close the list
-                toggle_mode = "m", -- toggle between "workspace" and "document" diagnostics mode
-                toggle_preview = "P", -- toggle auto_preview
-                hover = "K", -- opens a small poup with the full multiline message
-                preview = "p", -- preview the diagnostic location
-                close_folds = {"zM", "zm"}, -- close all folds
-                open_folds = {"zR", "zr"}, -- open all folds
-                toggle_fold = {"zA", "za"}, -- toggle fold of current file
-                previous = "k", -- preview item
-                next = "j" -- next item
-            },
-            -- indent_lines = true, -- add an indent guide below the fold icons
-            -- auto_open = false, -- automatically open the list when you have diagnostics
-            -- auto_close = false, -- automatically close the list when you have no diagnostics
-            -- auto_preview = true, -- automatyically preview the location of the diagnostic. <esc> to close preview and go back to last window
-            -- auto_fold = false, -- automatically fold a file trouble list at creation
-            signs = {
-                -- icons / text used for a diagnostic
-                error = "",
-                warning = "",
-                hint = "",
-                information = "",
-                other = "﫠"
-            },
-            use_diagnostic_signs = true -- enabling this will use the signs defined in your lsp client
-            }
-            '';
+        require'trouble'.setup {
+        position = "bottom", -- position of the list can be: bottom, top, left, right
+        height = 10, -- height of the trouble list when position is top or bottom
+        width = 50, -- width of the list when position is left or right
+        icons = false, -- use devicons for filenames
+        -- mode = "workspace_diagnostics", -- "lsp_workspace_diagnostics", "lsp_document_diagnostics", "quickfix", "lsp_references", "loclist"
+        -- fold_open = "", -- icon used for open folds
+        -- fold_closed = "", -- icon used for closed folds
+        action_keys = { -- key mappings for actions in the trouble list
+            -- map to {} to remove a mapping, for example:
+            -- close = {},
+            close = "q", -- close the list
+            cancel = "<esc>", -- cancel the preview and get back to your last window / buffer / cursor
+            refresh = "r", -- manually refresh
+            jump = {"<cr>", "<tab>"}, -- jump to the diagnostic or open / close folds
+            open_split = { "<c-x>" }, -- open buffer in new split
+            open_vsplit = { "<c-v>" }, -- open buffer in new vsplit
+            open_tab = { "<c-t>" }, -- open buffer in new tab
+            jump_close = {"o"}, -- jump to the diagnostic and close the list
+            toggle_mode = "m", -- toggle between "workspace" and "document" diagnostics mode
+            toggle_preview = "P", -- toggle auto_preview
+            hover = "K", -- opens a small poup with the full multiline message
+            preview = "p", -- preview the diagnostic location
+            close_folds = {"zM", "zm"}, -- close all folds
+            open_folds = {"zR", "zr"}, -- open all folds
+            toggle_fold = {"zA", "za"}, -- toggle fold of current file
+            previous = "k", -- preview item
+            next = "j" -- next item
+        },
+        -- indent_lines = true, -- add an indent guide below the fold icons
+        -- auto_open = false, -- automatically open the list when you have diagnostics
+        -- auto_close = false, -- automatically close the list when you have no diagnostics
+        -- auto_preview = true, -- automatyically preview the location of the diagnostic. <esc> to close preview and go back to last window
+        -- auto_fold = false, -- automatically fold a file trouble list at creation
+        signs = {
+            -- icons / text used for a diagnostic
+            error = "",
+            warning = "",
+            hint = "",
+            information = "",
+            other = "﫠"
+        },
+        use_diagnostic_signs = true -- enabling this will use the signs defined in your lsp client
+        }
+      '';
 
       runtime = {
         "ftplugin/c.vim".text = "setlocal omnifunc=v:lua.vim.lsp.omnifunc";
@@ -260,7 +260,7 @@ let
               internal = false
           }  -- If luajit is present
         }
-        '';
+      '';
     })
 
     # {
@@ -317,8 +317,8 @@ let
     (luaPlugin {
       plugin = nvim-spectre;
       config = ''
-         -- nnoremap ( "n", "<leader>S",  function() require('spectre').open() end )
-         '';
+        -- nnoremap ( "n", "<leader>S",  function() require('spectre').open() end )
+      '';
     })
 
     # (luaPlugin {
@@ -345,12 +345,12 @@ let
       # prettier quickfix
       plugin = nvim-bqf;
       config = ''
-       require'bqf'.setup({
-        preview = {
-         delay_syntax = 0
-        }
-       })
-       '';
+        require'bqf'.setup({
+         preview = {
+          delay_syntax = 0
+         }
+        })
+      '';
     })
     (luaPlugin { plugin = fugitive-gitlab-vim; })
 
@@ -373,20 +373,21 @@ let
 
     # FIX https://github.com/NixOS/nixpkgs/issues/169293 first
     # (luaPlugin { plugin = telescope-frecency-nvim; })
-	(luaPlugin {
-	  plugin = nvimdev-nvim; optional = true;
-	  config = ''
-	  -- nvimdev {{{
--- call nvimdev#init(--path/to/neovim--)
-vim.g.nvimdev_auto_init = 1
-vim.g.nvimdev_auto_cd = 1
--- vim.g.nvimdev_auto_ctags=1
-vim.g.nvimdev_auto_lint = 1
-vim.g.nvimdev_build_readonly = 1
---}}}'';
+    (luaPlugin {
+      plugin = nvimdev-nvim;
+      optional = true;
+      config = ''
+        	  -- nvimdev {{{
+        -- call nvimdev#init(--path/to/neovim--)
+        vim.g.nvimdev_auto_init = 1
+        vim.g.nvimdev_auto_cd = 1
+        -- vim.g.nvimdev_auto_ctags=1
+        vim.g.nvimdev_auto_lint = 1
+        vim.g.nvimdev_build_readonly = 1
+        --}}}'';
 
 
-   })
+    })
     # { plugin = neomake; }
     # {
     #   plugin = neogit;
@@ -433,19 +434,25 @@ vim.g.nvimdev_build_readonly = 1
 
     # { plugin = vCoolor-vim; }
     # { plugin = vim-lastplace; } # triggers a neovim bug for now
+    # (luaPlugin {
+    #   plugin = packer-nvim;
+    #   config = ''
+    #     require('packer').init({
+    #       luarocks = {
+    #         python_cmd = 'python' -- Set the python command to use for running hererocks
+    #       },
+    #     })
+    #     -- require my own manual config
+    #     require('init-manual')
+    #   '';
+    # })
     (luaPlugin {
-      plugin = packer-nvim;
+      plugin = lazy-nvim;
       config = ''
-        require('packer').init({
-          luarocks = {
-            python_cmd = 'python' -- Set the python command to use for running hererocks
-          },
-        })
         -- require my own manual config
         require('init-manual')
       '';
     })
-
     # {
     #   # davidgranstrom/nvim-markdown-preview
     #   plugin = nvim-markdown-preview;
@@ -468,21 +475,21 @@ vim.g.nvimdev_build_readonly = 1
       # " let g:mkdp_browser = 'firefox'
       plugin = vim-markdown-composer;
       config = ''
-         -- use with :ComposerStart
-         vim.g.markdown_composer_autostart = 0
-         vim.g.markdown_composer_binary = '${vim-markdown-composer.vimMarkdownComposerBin}/bin/markdown-composer'
-         '';
+        -- use with :ComposerStart
+        vim.g.markdown_composer_autostart = 0
+        vim.g.markdown_composer_binary = '${vim-markdown-composer.vimMarkdownComposerBin}/bin/markdown-composer'
+      '';
     })
     # disabled because of https://github.com/rktjmp/lush.nvim/issues/89
-    (luaPlugin { plugin = lush-nvim; }) 
+    (luaPlugin { plugin = lush-nvim; })
     # (luaPlugin { plugin = gruvbox-nvim; }) 
     # out of tree
     # call with :Hoogle
     (luaPlugin {
       plugin = fzf-hoogle-vim;
       config = ''
-      vim.g.hoogle_path = "hoogle"
-      vim.g.hoogle_fzf_cache_file = vim.fn.stdpath('cache')..'/hoogle_cache.json'
+        vim.g.hoogle_path = "hoogle"
+        vim.g.hoogle_fzf_cache_file = vim.fn.stdpath('cache')..'/hoogle_cache.json'
       '';
     })
 
@@ -543,7 +550,7 @@ vim.g.nvimdev_build_readonly = 1
         vim.g.haskell_enable_static_pointers = 1  -- to enable highlighting of `static`
         vim.g.haskell_backpack = 1                -- to enable highlighting of backpack keywords
         vim.g.haskell_indent_disable=1
-        '';
+      '';
     })
     # " gutentags + gutenhasktags {{{
     # " to keep logs GutentagsToggleTrace
@@ -611,19 +618,19 @@ vim.g.nvimdev_build_readonly = 1
       plugin = orgmode;
 
       config = ''
-          require('orgmode').setup_ts_grammar()
-          require('orgmode').setup{
-              org_capture_templates = {'~/nextcloud/org/*', '~/orgmode/**/*'},
-              org_default_notes_file = '~/orgmode/refile.org',
-              -- TODO add templates
-              org_agenda_templates = { t = { description = 'Task', template = '* TODO %?\n  %u' } },
-          }'';
+        require('orgmode').setup_ts_grammar()
+        require('orgmode').setup{
+            org_capture_templates = {'~/nextcloud/org/*', '~/orgmode/**/*'},
+            org_default_notes_file = '~/orgmode/refile.org',
+            -- TODO add templates
+            org_agenda_templates = { t = { description = 'Task', template = '* TODO %?\n  %u' } },
+        }'';
     })
-	(luaPlugin {
-	  plugin = SchemaStore-nvim;
-	  # config = ''
-	  #  '';
-	})
+    (luaPlugin {
+      plugin = SchemaStore-nvim;
+      # config = ''
+      #  '';
+    })
 
     {
       # use ctrl a/xto cycle between different words
@@ -672,9 +679,9 @@ vim.g.nvimdev_build_readonly = 1
     (luaPlugin {
       plugin = vim-dirvish;
       config = ''
-                  vim.g.dirvish_mode=2
-                  vim.g.loaded_netrwPlugin = 1
-                '';
+        vim.g.dirvish_mode=2
+        vim.g.loaded_netrwPlugin = 1
+      '';
     })
 
     # {
@@ -700,34 +707,34 @@ vim.g.nvimdev_build_readonly = 1
       # cool stuff is that it autostarts sessions
       # TODO
       config = ''
-                  vim.cmd [[
-                  let g:startify_use_env = 0
-                  let g:startify_disable_at_vimenter = 0
-                  let g:startify_lists = [
-                        \ { 'header': ['   MRU '.getcwd() ], 'type': 'dir'},
-                        \ { 'header': ['   MRU' ],           'type': 'files'} ,
-                        \ { 'header': ['   Bookmarks' ],     'type': 'bookmarks' },
-                        \ { 'header': ['   Sessions'  ],      'type': 'sessions' }
-                        \ ]
-                  let g:startify_bookmarks = [
-                        \ {'i': $XDG_CONFIG_HOME.'/i3/config.main'},
-                        \ {'h': $XDG_CONFIG_HOME.'/nixpkgs/home.nix'},
-                        \ {'c': 'dotfiles/nixpkgs/configuration.nix'},
-                        \ {'z': $XDG_CONFIG_HOME.'/zsh/'},
-                        \ {'m': $XDG_CONFIG_HOME.'/mptcpanalyzer/config'},
-                        \ {'n': $XDG_CONFIG_HOME.'/nvim/config'},
-                        \ {'N': $XDG_CONFIG_HOME.'/ncmpcpp/config'},
-                        \ ]
-                        " \ {'q': $XDG_CONFIG_HOME.'/qutebrowser/qutebrowser.conf'},
-                  let g:startify_files_number = 10
-                  let g:startify_session_autoload = 1
-                  let g:startify_session_persistence = 0
-                  let g:startify_change_to_vcs_root = 0
-                  let g:startify_session_savevars = []
-                  let g:startify_session_delete_buffers = 1
-                  let g:startify_change_to_dir = 0
-                  let g:startify_relative_path = 0
-                  ]]
+        vim.cmd [[
+        let g:startify_use_env = 0
+        let g:startify_disable_at_vimenter = 0
+        let g:startify_lists = [
+              \ { 'header': ['   MRU '.getcwd() ], 'type': 'dir'},
+              \ { 'header': ['   MRU' ],           'type': 'files'} ,
+              \ { 'header': ['   Bookmarks' ],     'type': 'bookmarks' },
+              \ { 'header': ['   Sessions'  ],      'type': 'sessions' }
+              \ ]
+        let g:startify_bookmarks = [
+              \ {'i': $XDG_CONFIG_HOME.'/i3/config.main'},
+              \ {'h': $XDG_CONFIG_HOME.'/nixpkgs/home.nix'},
+              \ {'c': 'dotfiles/nixpkgs/configuration.nix'},
+              \ {'z': $XDG_CONFIG_HOME.'/zsh/'},
+              \ {'m': $XDG_CONFIG_HOME.'/mptcpanalyzer/config'},
+              \ {'n': $XDG_CONFIG_HOME.'/nvim/config'},
+              \ {'N': $XDG_CONFIG_HOME.'/ncmpcpp/config'},
+              \ ]
+              " \ {'q': $XDG_CONFIG_HOME.'/qutebrowser/qutebrowser.conf'},
+        let g:startify_files_number = 10
+        let g:startify_session_autoload = 1
+        let g:startify_session_persistence = 0
+        let g:startify_change_to_vcs_root = 0
+        let g:startify_session_savevars = []
+        let g:startify_session_delete_buffers = 1
+        let g:startify_change_to_dir = 0
+        let g:startify_relative_path = 0
+        ]]
       '';
     })
 
@@ -736,14 +743,14 @@ vim.g.nvimdev_build_readonly = 1
     (luaPlugin {
       plugin = vim-sneak;
       config = ''
-         -- can press 's' again to go to next result, like ';'
-                  vim.cmd [[
-                   let g:sneak#s_next = 1 
-                   let g:sneak#prompt = 'Sneak>'
+        -- can press 's' again to go to next result, like ';'
+                 vim.cmd [[
+                  let g:sneak#s_next = 1 
+                  let g:sneak#prompt = 'Sneak>'
 
-                  let g:sneak#streak = 0
-                  ]]
-         '';
+                 let g:sneak#streak = 0
+                 ]]
+      '';
       # map f <Plug>Sneak_f
       # map F <Plug>Sneak_F
       # map t <Plug>Sneak_t
@@ -762,8 +769,8 @@ vim.g.nvimdev_build_readonly = 1
     (luaPlugin {
       plugin = vim-obsession;
       after = ''
-      vim.keymap.set("n", "<Leader>$", "<Cmd>Obsession<CR>", { remap = true })
-      vim.g.obsession_no_bufenter = true
+        vim.keymap.set("n", "<Leader>$", "<Cmd>Obsession<CR>", { remap = true })
+        vim.g.obsession_no_bufenter = true
       '';
       # testing luaConfig (experimental)
       # luaConfig = ''
@@ -778,7 +785,7 @@ vim.g.nvimdev_build_readonly = 1
       plugin = vim-sayonara;
       config = ''
         vim.g.sayonara_confirm_quit = 0
-        '';
+      '';
     })
 
     # vim-livedown
@@ -836,7 +843,7 @@ vim.g.nvimdev_build_readonly = 1
         -- shell-escape is mandatory for minted
         -- check that '-file-line-error' is properly removed with pplatex
         -- executable The name/path to the latexmk executable. 
-                '';
+      '';
       # vim.gvimtex_compiler_latexmk = {
       #          'backend' : 'nvim',
       #          'background' : 1,
@@ -868,7 +875,7 @@ vim.g.nvimdev_build_readonly = 1
         -- overrides ga
         vim.keymap.set ( "n", "ga",  "<Plug>(UnicodeGA)", { remap = true, } )
 
-        '';
+      '';
     })
 
   ];
@@ -909,9 +916,9 @@ vim.g.nvimdev_build_readonly = 1
 in
 {
 
- imports = [
-   ../modules/neovim.nix
- ];
+  imports = [
+    ../modules/neovim.nix
+  ];
 
   #  extraLuaPackages = ps: [ps.mpack];
   programs.neovim = {
@@ -961,7 +968,7 @@ in
       haskellPackages.hasktags
       jq
       manix
-	  nodePackages.vscode-langservers-extracted
+      nodePackages.vscode-langservers-extracted
       nodePackages.bash-language-server
       nodePackages.dockerfile-language-server-nodejs # broken
       nodePackages.pyright

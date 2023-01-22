@@ -21,16 +21,13 @@ local M = {}
 -- "PopUpn"
 
 M.menu_add = function(name, command)
-  -- is there a moment we
-  vim.cmd ([[menu ]]..name..[[ ]]..command)
+    -- is there a moment we
+    vim.cmd([[menu ]] .. name .. [[ ]] .. command)
 end
 
 M.menu_add_cmd = function(name, command)
-
-  vim.cmd ([[menu ]]..name..[[ <cmd>]]..command.."<cr>")
-   -- print(res)
+    vim.cmd([[menu ]] .. name .. [[ <cmd>]] .. command .. '<cr>')
+    -- print(res)
 end
-
-
 
 return M

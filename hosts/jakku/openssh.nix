@@ -2,13 +2,13 @@
 {
   imports = [
     ../../nixos/profiles/openssh.nix
-   ];
+  ];
 
   services.openssh = {
-   ports = [ secrets.jakku.sshPort ];
+    ports = [ secrets.jakku.sshPort ];
 
-   settings = {
-     PermitRootLogin = lib.mkForce "no";
-	};
+    settings = {
+      PermitRootLogin = lib.mkForce "no";
+    };
   };
 }

@@ -28,13 +28,13 @@
 --  # You can change the two settings below to choose whether the info is shown by default and
 --  # which key combination contains the zones info.
 
-local _show_zones_info_by_default = false;
-local _zones_key = "Ctrl+Alt+Z"
+local _show_zones_info_by_default = false
+local _zones_key = 'Ctrl+Alt+Z'
 
-local ZONE_THRESH_PERCENTAGE = 20;
+local ZONE_THRESH_PERCENTAGE = 20
 -- -- sides get 20% each, mid gets 60%, same vertically
-local VERT = {'top', 'middle', 'bottom'}
-local HORZ = {'left', 'middle', 'right'}
+local VERT = { 'top', 'middle', 'bottom' }
+local HORZ = { 'left', 'middle', 'right' }
 
 local msg = mp.msg
 
@@ -42,7 +42,7 @@ function getMouseZone()
     -- returns the mouse zone as two strings [top/middle/bottom], [left/middle/right], e.g. "middle", "right"
 
     local screenW, screenH = mp.get_osd_size()
-    local mouseX, mouseY   = mp.get_mouse_pos()
+    local mouseX, mouseY = mp.get_mouse_pos()
 
     local threshY = screenH * ZONE_THRESH_PERCENTAGE / 100
     local threshX = screenW * ZONE_THRESH_PERCENTAGE / 100
@@ -54,11 +54,11 @@ function getMouseZone()
 end
 
 function string:split(sep)
-    local sep, key, cmd = sep or ":", nil, nil
+    local sep, key, cmd = sep or ':', nil, nil
     local sep = self:find(sep)
     if sep ~= nil then
-        key = self:sub(0,sep-1):gsub("^%s*(.-)%s*$","%1")
-        cmd = self:sub(sep+1,-1):gsub("^%s*(.-)%s*$","%1")
+        key = self:sub(0, sep - 1):gsub('^%s*(.-)%s*$', '%1')
+        cmd = self:sub(sep + 1, -1):gsub('^%s*(.-)%s*$', '%1')
     else
         key = self
         cmd = nil
@@ -69,39 +69,39 @@ end
 function getZonesData(list)
     local data = {}
     for _, v in ipairs(list) do
-        local sep = v:find(":")
+        local sep = v:find(':')
         if sep < 1 or sep == nil then
-            msg.warn("Invalid zone description: " .. v)
-            msg.warn("Expected: {default|{top|middle|bottom|left|right|*}[-{left|middle|right|*}}]: <command>")
-            msg.warn("E.g. \"default: seek 10\" or \"middle-right: add volume 5\"")
+            msg.warn('Invalid zone description: ' .. v)
+            msg.warn('Expected: {default|{top|middle|bottom|left|right|*}[-{left|middle|right|*}}]: <command>')
+            msg.warn('E.g. "default: seek 10" or "middle-right: add volume 5"')
         else
             local pos, cmd = v:split()
             posY, posX = pos:split('-')
-            if posX == nil and posY ~= "default" and posY ~= "*" and posY ~= "" then
+            if posX == nil and posY ~= 'default' and posY ~= '*' and posY ~= '' then
                 for _, x in pairs(HORZ) do
-                    if posY == x and data['middle-'..x] == nil then
-                        data['middle-'..x] = cmd
+                    if posY == x and data['middle-' .. x] == nil then
+                        data['middle-' .. x] = cmd
                     end
                 end
                 for _, y in pairs(VERT) do
-                    if posY == y and data[y..'-middle'] == nil then
-                        data[y..'-middle'] = cmd
+                    if posY == y and data[y .. '-middle'] == nil then
+                        data[y .. '-middle'] = cmd
                     end
                 end
-            elseif posX == "*" and (posY ~= "*" or posY ~= "") then
+            elseif posX == '*' and (posY ~= '*' or posY ~= '') then
                 for _, x in pairs(HORZ) do
-                    if data[posY..'-'..x] == nil then
-                        data[posY..'-'..x] = cmd
+                    if data[posY .. '-' .. x] == nil then
+                        data[posY .. '-' .. x] = cmd
                     end
                 end
-            elseif posY == "*" and (posX ~= "*" or posX ~= "") then
+            elseif posY == '*' and (posX ~= '*' or posX ~= '') then
                 for _, y in pairs(VERT) do
-                    if data[y..'-'..posX] == nil then
-                        data[y..'-'..posX] = cmd
+                    if data[y .. '-' .. posX] == nil then
+                        data[y .. '-' .. posX] = cmd
                     end
                 end
-            elseif posX == nil and (posY == "default" or posY == "*" or posY == "") then
-                data["default"] = cmd
+            elseif posX == nil and (posY == 'default' or posY == '*' or posY == '') then
+                data['default'] = cmd
             else
                 data[pos] = cmd
             end
@@ -110,36 +110,36 @@ function getZonesData(list)
     return data
 end
 
-mp.register_script_message("commands", function (...)
-    local arg={...}
-    msg.debug('commands: \n\t'..table.concat(arg,'\n\t'))
+mp.register_script_message('commands', function(...)
+    local arg = { ... }
+    msg.debug('commands: \n\t' .. table.concat(arg, '\n\t'))
 
     local keyY, keyX = getMouseZone()
-    msg.debug(string.format("mouse at: %s-%s", keyY, keyX))
+    msg.debug(string.format('mouse at: %s-%s', keyY, keyX))
 
     local cmd = nil
     local commands = getZonesData(arg)
-    local precise = commands[keyY..'-'..keyX]
+    local precise = commands[keyY .. '-' .. keyX]
     local default = commands['default']
-    cmd = ( precise ~= nil ) and precise or default
+    cmd = (precise ~= nil) and precise or default
 
     if cmd ~= nil then
-        msg.verbose("running cmd: "..cmd)
+        msg.verbose('running cmd: ' .. cmd)
         mp.command(cmd)
     else
-        msg.debug("no command assigned for "..keyY .. '-' .. keyX)
+        msg.debug('no command assigned for ' .. keyY .. '-' .. keyX)
     end
 end)
 
 local timeoutId, lastZone = nil, nil
-mp.register_script_message("info", function (...)
-    local arg={...}
+mp.register_script_message('info', function(...)
+    local arg = { ... }
     local info = {}
     local disp = ''
     if timeoutId == nil then
         timeoutId = mp.add_periodic_timer(0.1, function()
             local keyY, keyX = getMouseZone()
-            local zone = keyY..'-'..keyX
+            local zone = keyY .. '-' .. keyX
             disp = info[zone] or info['default'] or ''
             if zone ~= lastZone then
                 mp.osd_message(disp, 3)
@@ -151,10 +151,10 @@ mp.register_script_message("info", function (...)
         timeoutId = nil
     end
     info = getZonesData(arg)
-    local status = (timeoutId ~= nil) and "on" or "off"
-    mp.osd_message("zones info: "..status)
+    local status = (timeoutId ~= nil) and 'on' or 'off'
+    mp.osd_message('zones info: ' .. status)
 end)
 
 if _show_zones_info_by_default then
-    mp.command("keypress ".._zones_key)
+    mp.command('keypress ' .. _zones_key)
 end

@@ -4,11 +4,11 @@
   programs.nushell = {
     enable = true;
 
-	shellAliases = config.programs.bash.shellAliases;
-	# {
+    shellAliases = config.programs.bash.shellAliases;
+    # {
 
-	#  ll = "ls -l";
-	# };
+    #  ll = "ls -l";
+    # };
 
     # configFile.text = ''
     # let $config = {

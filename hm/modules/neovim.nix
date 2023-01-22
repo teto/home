@@ -7,10 +7,10 @@ let
 
   luaPlugin = attrs: attrs // {
     type = "lua";
-	# config = lib.optionalString
-	#   (attrs ? config && attrs.config != null) 
-	#   (genBlockLua attrs.plugin.pname attrs.config)
-	#   ;
+    # config = lib.optionalString
+    #   (attrs ? config && attrs.config != null) 
+    #   (genBlockLua attrs.plugin.pname attrs.config)
+    #   ;
   };
 
   defaultCompletionPlugins = with pkgs.vimPlugins; [
@@ -20,21 +20,21 @@ let
     # (luaPlugin { plugin = cmp-cmdline-history; })
     # (luaPlugin { plugin = cmp-conventionalcommits; })
     # (luaPlugin { plugin = cmp-digraphs; })
-   ];
+  ];
 
   orgmodePlugins = with pkgs.vimPlugins; [
     (luaPlugin {
       # matches nvim-orgmode
       plugin = orgmode;
       config = ''
-		require('orgmode').setup_ts_grammar()
-		require('orgmode').setup{
-			org_capture_templates = {'~/nextcloud/org/*', '~/orgmode/**/*'},
-			org_default_notes_file = '~/orgmode/refile.org',
-			-- TODO add templates
-			org_agenda_templates = { t = { description = 'Task', template = '* TODO %?\n  %u' } },
-		}
-		'';
+        		require('orgmode').setup_ts_grammar()
+        		require('orgmode').setup{
+        			org_capture_templates = {'~/nextcloud/org/*', '~/orgmode/**/*'},
+        			org_default_notes_file = '~/orgmode/refile.org',
+        			-- TODO add templates
+        			org_agenda_templates = { t = { description = 'Task', template = '* TODO %?\n  %u' } },
+        		}
+        		'';
     })
   ];
 
@@ -55,63 +55,63 @@ let
       plugin = hotpot-nvim;
       # type = "lua";
       config = ''
-		   require("hotpot").setup({
-			 -- allows you to call `(require :fennel)`.
-			 -- recommended you enable this unless you have another fennel in your path.
-			 -- you can always call `(require :hotpot.fennel)`.
-			 provide_require_fennel = false,
-			 -- show fennel compiler results in when editing fennel files
-			 enable_hotpot_diagnostics = true,
-			 -- compiler options are passed directly to the fennel compiler, see
-			 -- fennels own documentation for details.
-			 compiler = {
-			   -- options passed to fennel.compile for modules, defaults to {}
-			   modules = {
-				 -- not default but recommended, align lua lines with fnl source
-				 -- for more debuggable errors, but less readable lua.
-				 -- correlate = true
-			   },
-			   -- options passed to fennel.compile for macros, defaults as shown
-			   macros = {
-				 env = "_COMPILER" -- MUST be set along with any other options
-			   }
-			 }
-		   })
-		   '';
+        		   require("hotpot").setup({
+        			 -- allows you to call `(require :fennel)`.
+        			 -- recommended you enable this unless you have another fennel in your path.
+        			 -- you can always call `(require :hotpot.fennel)`.
+        			 provide_require_fennel = false,
+        			 -- show fennel compiler results in when editing fennel files
+        			 enable_hotpot_diagnostics = true,
+        			 -- compiler options are passed directly to the fennel compiler, see
+        			 -- fennels own documentation for details.
+        			 compiler = {
+        			   -- options passed to fennel.compile for modules, defaults to {}
+        			   modules = {
+        				 -- not default but recommended, align lua lines with fnl source
+        				 -- for more debuggable errors, but less readable lua.
+        				 -- correlate = true
+        			   },
+        			   -- options passed to fennel.compile for macros, defaults as shown
+        			   macros = {
+        				 env = "_COMPILER" -- MUST be set along with any other options
+        			   }
+        			 }
+        		   })
+        		   '';
     })
   ];
 
-  autocompletionModule = 
+  autocompletionModule =
     types.submodule {
       options = {
-	   enable = mkEnableOption "autocompletion";
+        enable = mkEnableOption "autocompletion";
 
         plugins = mkOption {
           # type = types.listOf types.package;
           default = defaultCompletionPlugins;
           # descriptcompletionPlugins = with pkgs.vimPlugins; [
-    # # (luaPlugin { plugin = coq_nvim; })
-    # (luaPlugin { plugin = nvim-cmp; })
-    # (luaPlugin { plugin = cmp-nvim-lsp; })
-    # # (luaPlugin { plugin = cmp-cmdline-history; })
-    # # (luaPlugin { plugin = cmp-conventionalcommits; })
-    # # (luaPlugin { plugin = cmp-digraphs; })
-    # (luaPlugin { plugin = cmp-rg; })
-    # (luaPlugin { plugin = cmp-vsnip; })
-    # ({ plugin = vim-vsnip; })
-    # # (luaPlugin { plugin = cmp-zsh; })
-    # # vim-vsnip
-    # # vim-vsnip-integ
-  # ]ion = "The plugins to use.";
+          # # (luaPlugin { plugin = coq_nvim; })
+          # (luaPlugin { plugin = nvim-cmp; })
+          # (luaPlugin { plugin = cmp-nvim-lsp; })
+          # # (luaPlugin { plugin = cmp-cmdline-history; })
+          # # (luaPlugin { plugin = cmp-conventionalcommits; })
+          # # (luaPlugin { plugin = cmp-digraphs; })
+          # (luaPlugin { plugin = cmp-rg; })
+          # (luaPlugin { plugin = cmp-vsnip; })
+          # ({ plugin = vim-vsnip; })
+          # # (luaPlugin { plugin = cmp-zsh; })
+          # # vim-vsnip
+          # # vim-vsnip-integ
+          # ]ion = "The plugins to use.";
         };
       };
     };
 
-  orgmodeModule = 
+  orgmodeModule =
     types.submodule {
       options = {
 
-	   enable = mkEnableOption "Orgmode";
+        enable = mkEnableOption "Orgmode";
 
         plugins = mkOption {
           # type = types.listOf types.package;
@@ -121,10 +121,10 @@ let
       };
     };
 
-  fennelModule = 
+  fennelModule =
     types.submodule {
       options = {
-	   enable = mkEnableOption "Fennel";
+        enable = mkEnableOption "Fennel";
         plugins = mkOption {
           # type = types.listOf types.package;
           default = fennelPlugins;
@@ -133,17 +133,17 @@ let
       };
     };
 
-  tealModule = 
+  tealModule =
     types.submodule {
       options = {
-	   enable = mkEnableOption "Teal";
+        enable = mkEnableOption "Teal";
         plugins = mkOption {
           # type = types.listOf types.package;
-		  default = with pkgs.vimPlugins; [ 
-			(luaPlugin {
-			  plugin = nvim-teal-maker;
-		   })
-		  ];
+          default = with pkgs.vimPlugins; [
+            (luaPlugin {
+              plugin = nvim-teal-maker;
+            })
+          ];
           description = "Teal associated plugins";
         };
       };
@@ -153,35 +153,35 @@ let
 
 in
 {
- options = {
-  programs.neovim = {
-	orgmode = mkOption {
-	  type = orgmodeModule;
-	  # default = {};
-	  description = ''
-		Enable orgmode support.
-	  '';
-	};
+  options = {
+    programs.neovim = {
+      orgmode = mkOption {
+        type = orgmodeModule;
+        # default = {};
+        description = ''
+          		Enable orgmode support.
+          	  '';
+      };
 
-    autocompletion = mkOption {
-	 type = autocompletionModule;
-	 description = "Autocompletion configuration";
+      autocompletion = mkOption {
+        type = autocompletionModule;
+        description = "Autocompletion configuration";
+      };
+
+      teal = mkOption {
+        type = tealModule;
+        description = ''
+          		Enable support for teal language.
+          	  '';
+      };
+
+      fennel = mkOption {
+        type = fennelModule;
+        description = ''
+          		Enable support for fennel language.
+          	  '';
+      };
     };
-
-	teal = mkOption {
-	  type = tealModule;
-	  description = ''
-		Enable support for teal language.
-	  '';
-	};
-
-	fennel = mkOption {
-	  type = fennelModule;
-	  description = ''
-		Enable support for fennel language.
-	  '';
-	};
-   };
   };
 
 

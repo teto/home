@@ -107,7 +107,7 @@ in
     bluetooth = {
       enable = true;
       powerOnBoot = false;
-	  # hsphfpd.enable = false; # conflicts with pipewire
+      # hsphfpd.enable = false; # conflicts with pipewire
     };
     opengl = {
       enable = true;
@@ -127,10 +127,7 @@ in
       # extraClientConf =
       # only this one has bluetooth
       package = pkgs.pulseaudioFull;
-
     };
-
-
   };
 
   # TODO move to laptop

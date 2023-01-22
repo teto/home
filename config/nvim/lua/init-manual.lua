@@ -7,17 +7,16 @@ local has_fzf_lua, fzf_lua = pcall(require, 'fzf-lua')
 local nnoremap = vim.keymap.set
 local map = vim.keymap.set
 
-
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
-	vim.fn.system({
-		"git",
-		"clone",
-		"--filter=blob:none",
-		"https://github.com/folke/lazy.nvim.git",
-		"--branch=stable", -- latest stable release
-		lazypath,
-	})
+    vim.fn.system({
+        'git',
+        'clone',
+        '--filter=blob:none',
+        'https://github.com/folke/lazy.nvim.git',
+        '--branch=stable', -- latest stable release
+        lazypath,
+    })
 end
 vim.opt.rtp:prepend(lazypath)
 vim.cmd([[packloadall ]])
@@ -33,26 +32,24 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 vim.opt.termguicolors = true
 
-require("lazy").setup("lazyplugins", {
-	lockfile = vim.fn.stdpath("cache") .. "/lazy-lock.json",
-	dev = {
-		-- directory where you store your local plugin projects
-		path = "~/neovim",
-		---@type string[] plugins that match these patterns will use your local versions instead of being fetched from GitHub
-		patterns = {}, -- For example {"folke"}
-	},
-	performance = {
-		cache = {
-			enabled = false
-		},
-		reset_packpath = false,
-		rtp = {
-			reset = false;
-			paths = { '/nix/store/8znlrk8mz6824718b3gp9n90wg42any7-vim-pack-dir' },
-
-		}
-	}
-
+require('lazy').setup('lazyplugins', {
+    lockfile = vim.fn.stdpath('cache') .. '/lazy-lock.json',
+    dev = {
+        -- directory where you store your local plugin projects
+        path = '~/neovim',
+        ---@type string[] plugins that match these patterns will use your local versions instead of being fetched from GitHub
+        patterns = {}, -- For example {"folke"}
+    },
+    performance = {
+        cache = {
+            enabled = false,
+        },
+        reset_packpath = false,
+        rtp = {
+            reset = false,
+            -- paths = { '/nix/store/8znlrk8mz6824718b3gp9n90wg42any7-vim-pack-dir' },
+        },
+    },
 })
 -- local function file_exists(name)
 -- 	local f=io.open(name,"r")
@@ -178,8 +175,6 @@ vim.opt.sessionoptions:remove('terminal')
 vim.opt.sessionoptions:remove('help')
 --}}}
 
-
-
 -- annoying in fzf-lua ?
 map('t', '<Esc>', '<C-\\><C-n>')
 -- :tnoremap <Esc> <C-\><C-n>
@@ -214,14 +209,12 @@ vim.g.fugitive_gitlab_domains = { 'https://git.novadiscovery.net' }
 -- }}}
 -- set guicursor="n-v-c:block-Cursor/lCursor,ve:ver35-Cursor,o:hor50-Cursor,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor,sm:block-Cursor"
 vim.opt.guicursor =
-'n-v-c:block-blinkon250-Cursor/lCursor,ve:ver35-Cursor,o:hor50-Cursor,i-ci:ver25-blinkon250-Cursor/lCursor,r-cr:hor20-Cursor/lCursor'
+    'n-v-c:block-blinkon250-Cursor/lCursor,ve:ver35-Cursor,o:hor50-Cursor,i-ci:ver25-blinkon250-Cursor/lCursor,r-cr:hor20-Cursor/lCursor'
 
 -- highl Cursor ctermfg=16 ctermbg=253 guifg=#000000 guibg=#00FF00
 vim.api.nvim_set_hl(0, 'Cursor', { ctermfg = 16, ctermbg = 253, fg = '#000000', bg = '#00FF00' })
 vim.api.nvim_set_hl(0, 'CursorLine', { fg = 'None', bg = '#293739' })
 vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'grey' })
-
-
 
 -- local my_image = require('hologram.image'):new({
 --	   source = '/home/teto/doctor.png',
@@ -234,43 +227,41 @@ vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'grey' })
 vim.opt.runtimepath:prepend('/home/teto/neovim/rest.nvim')
 vim.opt.runtimepath:prepend('/home/teto/tree-sitter-http')
 -- f3 to show tree
-vim.api.nvim_set_keymap('n', '<f2>',
-	"<cmd>lua require'plenary.reload'.reload_module('rest-nvim.request'); print(require'rest-nvim.request'.ts_get_requests())<cr>"
-	, {})
-
+vim.api.nvim_set_keymap(
+    'n',
+    '<f2>',
+    "<cmd>lua require'plenary.reload'.reload_module('rest-nvim.request'); print(require'rest-nvim.request'.ts_get_requests())<cr>",
+    {}
+)
 
 local has_rest, rest = pcall(require, 'rest-nvim')
 if has_rest then
-	rest.setup({
-		-- Open request results in a horizontal split
-		result_split_horizontal = false,
-		-- Skip SSL verification, useful for unknown certificates
-		skip_ssl_verification = false,
-		-- Highlight request on run
-		highlight = {
-			enabled = true,
-			timeout = 150,
-		},
-		result = {
-			-- toggle showing URL, HTTP info, headers at top the of result window
-			show_url = true,
-			show_http_info = true,
-			show_headers = true,
-			-- disable formatters else they generate errors/add dependencies
-			-- for instance when it detects html, it tried to run 'tidy'
-			formatters = {
-				html = false,
-				jq = false
-			},
-		},
-		-- Jump to request line on run
-		jump_to_request = false,
-	})
+    rest.setup({
+        -- Open request results in a horizontal split
+        result_split_horizontal = false,
+        -- Skip SSL verification, useful for unknown certificates
+        skip_ssl_verification = false,
+        -- Highlight request on run
+        highlight = {
+            enabled = true,
+            timeout = 150,
+        },
+        result = {
+            -- toggle showing URL, HTTP info, headers at top the of result window
+            show_url = true,
+            show_http_info = true,
+            show_headers = true,
+            -- disable formatters else they generate errors/add dependencies
+            -- for instance when it detects html, it tried to run 'tidy'
+            formatters = {
+                html = false,
+                jq = false,
+            },
+        },
+        -- Jump to request line on run
+        jump_to_request = false,
+    })
 end
-
-
-
-
 
 -- Snippets are separated from the engine. Add this if you want them:
 
@@ -337,21 +328,21 @@ vim.keymap.set('n', '<F6>', '<Cmd>ASToggle<CR>')
 -- command! LspStopAllClients lua vim.lsp.stop_client(vim.lsp.get_active_clients())
 
 vim.api.nvim_set_hl(0, 'SignifySignChange', {
-	cterm = { bold = true },
-	ctermbg = 237,
-	ctermfg = 227,
-	bg = 'NONE',
-	fg = '#F08A1F',
+    cterm = { bold = true },
+    ctermbg = 237,
+    ctermfg = 227,
+    bg = 'NONE',
+    fg = '#F08A1F',
 })
 vim.api.nvim_set_hl(
-	0,
-	'SignifySignAdd',
-	{ cterm = { bold = true }, ctermbg = 237, ctermfg = 227, bg = 'NONE', fg = 'green' }
+    0,
+    'SignifySignAdd',
+    { cterm = { bold = true }, ctermbg = 237, ctermfg = 227, bg = 'NONE', fg = 'green' }
 )
 vim.api.nvim_set_hl(
-	0,
-	'SignifySignDelete',
-	{ cterm = { bold = true }, ctermbg = 237, ctermfg = 227, bg = 'NONE', fg = 'red' }
+    0,
+    'SignifySignDelete',
+    { cterm = { bold = true }, ctermbg = 237, ctermfg = 227, bg = 'NONE', fg = 'red' }
 )
 
 -- This is the default extra key bindings
@@ -364,18 +355,17 @@ vim.g.fzf_layout = { ['down'] = '~40%' }
 vim.g.fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
 
 vim.api.nvim_create_autocmd('TextYankPost', {
-	callback = function()
-		vim.highlight.on_yank({ higroup = 'IncSearch', timeout = 1000 })
-	end,
+    callback = function()
+        vim.highlight.on_yank({ higroup = 'IncSearch', timeout = 1000 })
+    end,
 })
 nnoremap('n', '<leader>ml', '<Cmd>Modeliner<Enter>')
 
 vim.api.nvim_create_autocmd('ColorScheme', {
-	callback = function()
-		vim.api.nvim_set_hl(0, 'LspCodeLens', { italic = true })
-	end,
+    callback = function()
+        vim.api.nvim_set_hl(0, 'LspCodeLens', { italic = true })
+    end,
 })
-
 
 vim.g.Modeliner_format = 'et ff= fenc= sts= sw= ts= fdm='
 
@@ -389,7 +379,7 @@ vim.g.Modeliner_format = 'et ff= fenc= sts= sw= ts= fdm='
 vim.cmd([[sign define DiagnosticSignError text=✘ texthl=LspDiagnosticsSignError linehl= numhl=]])
 vim.cmd([[sign define DiagnosticSignWarning text=！ texthl=LspDiagnosticsSignWarning linehl= numhl=CustomLineWarn]])
 vim.cmd(
-	[[sign define DiagnosticSignInformation text=I texthl=LspDiagnosticsSignInformation linehl= numhl=CustomLineWarn]]
+    [[sign define DiagnosticSignInformation text=I texthl=LspDiagnosticsSignInformation linehl= numhl=CustomLineWarn]]
 )
 vim.cmd([[sign define DiagnosticSignHint text=H texthl=LspDiagnosticsSignHint linehl= numhl=]])
 
@@ -414,11 +404,11 @@ vim.keymap.set('n', '<leader>rg', '<Cmd>Grepper -tool rg -open -switch<CR>')
 -- " convert all kinds of files (but pdf) to plain text
 -- autocmd BufReadPost *.doc,*.docx,*.rtf,*.odp,*.odt silent %!pandoc "%" -tplain -o /dev/stdout
 vim.api.nvim_create_autocmd('BufReadPost', {
-	pattern = '*.pdf',
-	callback = function()
-		vim.cmd([[%!pdftotext -nopgbrk -layout -q -eol unix "%" - | fmt -w78]])
-		vim.highlight.on_yank({ higroup = 'IncSearch', timeout = 1000 })
-	end,
+    pattern = '*.pdf',
+    callback = function()
+        vim.cmd([[%!pdftotext -nopgbrk -layout -q -eol unix "%" - | fmt -w78]])
+        vim.highlight.on_yank({ higroup = 'IncSearch', timeout = 1000 })
+    end,
 })
 
 -- use {
@@ -437,14 +427,12 @@ vim.api.nvim_create_autocmd('BufReadPost', {
 -- local verbose_output = false
 -- require("tealmaker").build_all(verbose_output)
 
-
 -- use {
 -- 	-- set virtualedit=all, select an area then call :VBox
 -- 	'jbyuki/venn.nvim'
 -- 	}
 
 -- use { 'protex/better-digraphs.nvim' }
-
 
 -- use "terrortylor/nvim-comment"
 -- shows a lightbulb where a codeAction is available
@@ -459,8 +447,6 @@ vim.api.nvim_create_autocmd('BufReadPost', {
 -- use { 'gennaro-tedesco/nvim-peekup' }
 -- use { 'notomo/gesture.nvim' , opt = true; }
 -- use 'anuvyklack/hydra.nvim' -- to create submodes
-
-
 
 -- TODO upstream
 --use {
@@ -499,69 +485,67 @@ local has_cmp, cmp = pcall(require, 'cmp')
 
 -- print("has_cmp", has_cmp)
 if has_cmp then
-	-- use('michaeladler/cmp-notmuch')
-	-- nvim-cmp autocompletion plugin{{{
-	cmp.setup({
-		snippet = {
-			expand = function(args)
-				-- For `vsnip` user.
-				vim.fn['vsnip#anonymous'](args.body)
+    -- use('michaeladler/cmp-notmuch')
+    -- nvim-cmp autocompletion plugin{{{
+    cmp.setup({
+        snippet = {
+            expand = function(args)
+                -- For `vsnip` user.
+                vim.fn['vsnip#anonymous'](args.body)
 
-				-- For `luasnip` user.
-				-- require('luasnip').lsp_expand(args.body)
+                -- For `luasnip` user.
+                -- require('luasnip').lsp_expand(args.body)
 
-				-- For `ultisnips` user.
-				-- vim.fn["UltiSnips#Anon"](args.body)
-			end,
-		},
-		mapping = cmp.mapping.preset.insert({
+                -- For `ultisnips` user.
+                -- vim.fn["UltiSnips#Anon"](args.body)
+            end,
+        },
+        mapping = cmp.mapping.preset.insert({
 
-			['<C-d>'] = cmp.mapping.scroll_docs(-4),
-			['<C-f>'] = cmp.mapping.scroll_docs(4),
-			--   ['<C-Space>'] = cmp.mapping.complete(),
-			--   ['<C-e>'] = cmp.mapping.close(),
-			['<CR>'] = cmp.mapping.confirm({ select = true }),
-		}),
-		-- view = {
-		-- 	entries = 'native'
-		-- },
-		sources = {
-			{ name = 'nvim_lsp' },
+            ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+            ['<C-f>'] = cmp.mapping.scroll_docs(4),
+            --   ['<C-Space>'] = cmp.mapping.complete(),
+            --   ['<C-e>'] = cmp.mapping.close(),
+            ['<CR>'] = cmp.mapping.confirm({ select = true }),
+        }),
+        -- view = {
+        -- 	entries = 'native'
+        -- },
+        sources = {
+            { name = 'nvim_lsp' },
 
-			-- For vsnip user.
-			{ name = 'vsnip' },
+            -- For vsnip user.
+            { name = 'vsnip' },
 
-			-- For luasnip user.
-			-- { name = 'luasnip' },
+            -- For luasnip user.
+            -- { name = 'luasnip' },
 
-			-- For ultisnips user.
-			-- { name = 'ultisnips' },
+            -- For ultisnips user.
+            -- { name = 'ultisnips' },
 
-			{ name = 'buffer' },
-			-- { name = 'neorg' },
-			-- { name = 'orgmode' },
-		},
-	})
-	--  }}}
-	-- 	cmp.setup.cmdline {
-	-- 	mapping = cmp.mapping.preset.cmdline({
-	-- 		-- Your configuration here.
-	-- 	})
+            { name = 'buffer' },
+            -- { name = 'neorg' },
+            -- { name = 'orgmode' },
+        },
+    })
+    --  }}}
+    -- 	cmp.setup.cmdline {
+    -- 	mapping = cmp.mapping.preset.cmdline({
+    -- 		-- Your configuration here.
+    -- 	})
 
-	-- 	}
+    -- 	}
 
-	--   end
-	-- }
+    --   end
+    -- }
 end
 
 -- Load custom tree-sitter grammar for org filetype
 -- orgmode depends on treesitter
 local has_orgmode, orgmode = pcall(require, 'orgmode')
 if has_orgmode then
-	orgmode.setup_ts_grammar()
+    orgmode.setup_ts_grammar()
 end
-
-
 
 -- Inserts a component in lualine_c at left section
 -- local function ins_left(component)
@@ -599,43 +583,43 @@ vim.cmd([[colorscheme sonokai]])
 local has_sniprun, sniprun = pcall(require, 'sniprun')
 
 if has_sniprun then
-	sniprun.setup({
-		-- selected_interpreters = {'Python3_fifo'},        --" use those instead of the default for the current filetype
-		-- repl_enable = {'Python3_fifo', 'R_original'},    --" enable REPL-like behavior for the given interpreters
-		-- repl_disable = {},                               --" disable REPL-like behavior for the given interpreters
-		interpreter_options = { --# interpreter-specific options, see docs / :SnipInfo <name>
-			Bash_original = {
-				use_on_filetypes = { "nix" } --# the 'use_on_filetypes' configuration key is
-			}
-			--# use the interpreter name as key
-			--GFM_original = {
-			--use_on_filetypes = {"markdown.pandoc"}    --# the 'use_on_filetypes' configuration key is
-			--											--# available for every interpreter
-			--},
-			--Python3_original = {
-			--	error_truncate = "auto"         --# Truncate runtime errors 'long', 'short' or 'auto'
-			--									--# the hint is available for every interpreter
-			--									--# but may not be always respected
-			--}
-		},
-		-- possible values are 'none', 'single', 'double', or 'shadow'
-		borders = 'single',
-		--live_display = { "VirtualTextOk" }, --# display mode used in live_mode
-		----# You can use the same keys to customize whether a sniprun producing
-		----# no output should display nothing or '(no output)'
-		--show_no_output = {
-		--	"Classic",
-		--	"TempFloatingWindow",      --# implies LongTempFloatingWindow, which has no effect on its own
-		--},
-		--" you can combo different display modes as desired
-		display = {
-			"Classic", -- "display results in the command-line  area
-			"VirtualTextOk", -- "display ok results as virtual text (multiline is shortened)
-		},
-	})
-	vim.api.nvim_set_keymap('v', 'f', '<Plug>SnipRun', { silent = true })
-	vim.api.nvim_set_keymap('n', '<leader>f', '<Plug>SnipRunOperator', { silent = true })
-	vim.api.nvim_set_keymap('n', '<leader>ff', '<Plug>SnipRun', { silent = true })
+    sniprun.setup({
+        -- selected_interpreters = {'Python3_fifo'},        --" use those instead of the default for the current filetype
+        -- repl_enable = {'Python3_fifo', 'R_original'},    --" enable REPL-like behavior for the given interpreters
+        -- repl_disable = {},                               --" disable REPL-like behavior for the given interpreters
+        interpreter_options = { --# interpreter-specific options, see docs / :SnipInfo <name>
+            Bash_original = {
+                use_on_filetypes = { 'nix' }, --# the 'use_on_filetypes' configuration key is
+            },
+            --# use the interpreter name as key
+            --GFM_original = {
+            --use_on_filetypes = {"markdown.pandoc"}    --# the 'use_on_filetypes' configuration key is
+            --											--# available for every interpreter
+            --},
+            --Python3_original = {
+            --	error_truncate = "auto"         --# Truncate runtime errors 'long', 'short' or 'auto'
+            --									--# the hint is available for every interpreter
+            --									--# but may not be always respected
+            --}
+        },
+        -- possible values are 'none', 'single', 'double', or 'shadow'
+        borders = 'single',
+        --live_display = { "VirtualTextOk" }, --# display mode used in live_mode
+        ----# You can use the same keys to customize whether a sniprun producing
+        ----# no output should display nothing or '(no output)'
+        --show_no_output = {
+        --	"Classic",
+        --	"TempFloatingWindow",      --# implies LongTempFloatingWindow, which has no effect on its own
+        --},
+        --" you can combo different display modes as desired
+        display = {
+            'Classic', -- "display results in the command-line  area
+            'VirtualTextOk', -- "display ok results as virtual text (multiline is shortened)
+        },
+    })
+    vim.api.nvim_set_keymap('v', 'f', '<Plug>SnipRun', { silent = true })
+    vim.api.nvim_set_keymap('n', '<leader>f', '<Plug>SnipRunOperator', { silent = true })
+    vim.api.nvim_set_keymap('n', '<leader>ff', '<Plug>SnipRun', { silent = true })
 end
 
 vim.api.nvim_set_keymap('n', '<f3>', '<cmd>lua vim.treesitter.show_tree()<cr>', {})
@@ -653,38 +637,38 @@ vim.g.should_show_diagnostics_in_statusline = true
 -- code to toggle diagnostic display
 local diagnostics_active = true
 vim.keymap.set('n', '<leader>d', function()
-	diagnostics_active = not diagnostics_active
-	if diagnostics_active then
-		vim.diagnostic.show()
-	else
-		vim.diagnostic.hide()
-	end
+    diagnostics_active = not diagnostics_active
+    if diagnostics_active then
+        vim.diagnostic.show()
+    else
+        vim.diagnostic.hide()
+    end
 end)
 
 if has_fzf_lua then
-	require('fzf-lua.providers.ui_select').register({})
+    require('fzf-lua.providers.ui_select').register({})
 
-	require('teto.fzf-lua').register_keymaps()
-	local fzf_history_dir = vim.fn.expand('~/.local/share/fzf-history')
-	fzf_lua.setup({
-		-- [...]
-		fzf_opts = {
-			-- [...]
-			['--history'] = fzf_history_dir,
-			-- to get the prompt at the top
-			['--layout'] = 'reverse',
-		},
-		winopts = {
-			preview = {
-				-- default = 'builtin'
-				hidden = 'hidden',
-			},
-		},
-	})
+    require('teto.fzf-lua').register_keymaps()
+    local fzf_history_dir = vim.fn.expand('~/.local/share/fzf-history')
+    fzf_lua.setup({
+        -- [...]
+        fzf_opts = {
+            -- [...]
+            ['--history'] = fzf_history_dir,
+            -- to get the prompt at the top
+            ['--layout'] = 'reverse',
+        },
+        winopts = {
+            preview = {
+                -- default = 'builtin'
+                hidden = 'hidden',
+            },
+        },
+    })
 end
 -- nnoremap ( "n", "<Leader>ca", function () vim.lsp.buf.code_action{} end )
 nnoremap('n', '<Leader>ca', function()
-	vim.cmd([[FzfLua lsp_code_actions]])
+    vim.cmd([[FzfLua lsp_code_actions]])
 end)
 
 -- nnoremap ( "n", "<leader>S",  function() require('spectre').open() end )
@@ -693,46 +677,46 @@ end)
 
 local has_whichkey, wk = pcall(require, 'which-key')
 if has_whichkey then
-	wk.setup({
-		-- plugins = {
-		--	marks = true, -- shows a list of your marks on ' and `
-		--	registers = true, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
-		--	-- the presets plugin, adds help for a bunch of default keybindings in Neovim
-		--	-- No actual key bindings are created
-		--	presets = {
-		--	operators = true, -- adds help for operators like d, y, ... and registers them for motion / text object completion
-		--	motions = true, -- adds help for motions
-		--	text_objects = true, -- help for text objects triggered after entering an operator
-		--	windows = true, -- default bindings on <c-w>
-		--	nav = true, -- misc bindings to work with windows
-		--	z = true, -- bindings for folds, spelling and others prefixed with z
-		--	g = true, -- bindings for prefixed with g
-		--	},
-		-- },
-		-- add operators that will trigger motion and text object completion
-		-- to enable all native operators, set the preset / operators plugin above
-		-- operators = { gc = "Comments" },
-		-- icons = {
-		--	breadcrumb = "»", -- symbol used in the command line area that shows your active key combo
-		--	separator = "➜", -- symbol used between a key and it's label
-		--	group = "+", -- symbol prepended to a group
-		-- },
-		-- window = {
-		--	border = "none", -- none, single, double, shadow
-		--	position = "bottom", -- bottom, top
-		--	margin = { 1, 0, 1, 0 }, -- extra window margin [top, right, bottom, left]
-		--	padding = { 2, 2, 2, 2 }, -- extra window padding [top, right, bottom, left]
-		-- },
-		-- layout = {
-		--	height = { min = 4, max = 25 }, -- min and max height of the columns
-		--	width = { min = 20, max = 50 }, -- min and max width of the columns
-		--	spacing = 3, -- spacing between columns
-		-- },
-		-- hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ "}, -- hide mapping boilerplate
-		-- show_help = true, -- show help message on the command line when the popup is visible
-		-- triggers = "auto", -- automatically setup triggers
-		-- triggers = {"<leader>"} -- or specifiy a list manually
-	})
+    wk.setup({
+        -- plugins = {
+        --	marks = true, -- shows a list of your marks on ' and `
+        --	registers = true, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
+        --	-- the presets plugin, adds help for a bunch of default keybindings in Neovim
+        --	-- No actual key bindings are created
+        --	presets = {
+        --	operators = true, -- adds help for operators like d, y, ... and registers them for motion / text object completion
+        --	motions = true, -- adds help for motions
+        --	text_objects = true, -- help for text objects triggered after entering an operator
+        --	windows = true, -- default bindings on <c-w>
+        --	nav = true, -- misc bindings to work with windows
+        --	z = true, -- bindings for folds, spelling and others prefixed with z
+        --	g = true, -- bindings for prefixed with g
+        --	},
+        -- },
+        -- add operators that will trigger motion and text object completion
+        -- to enable all native operators, set the preset / operators plugin above
+        -- operators = { gc = "Comments" },
+        -- icons = {
+        --	breadcrumb = "»", -- symbol used in the command line area that shows your active key combo
+        --	separator = "➜", -- symbol used between a key and it's label
+        --	group = "+", -- symbol prepended to a group
+        -- },
+        -- window = {
+        --	border = "none", -- none, single, double, shadow
+        --	position = "bottom", -- bottom, top
+        --	margin = { 1, 0, 1, 0 }, -- extra window margin [top, right, bottom, left]
+        --	padding = { 2, 2, 2, 2 }, -- extra window padding [top, right, bottom, left]
+        -- },
+        -- layout = {
+        --	height = { min = 4, max = 25 }, -- min and max height of the columns
+        --	width = { min = 20, max = 50 }, -- min and max width of the columns
+        --	spacing = 3, -- spacing between columns
+        -- },
+        -- hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ "}, -- hide mapping boilerplate
+        -- show_help = true, -- show help message on the command line when the popup is visible
+        -- triggers = "auto", -- automatically setup triggers
+        -- triggers = {"<leader>"} -- or specifiy a list manually
+    })
 end
 
 -- since it was not merge yet
@@ -742,59 +726,62 @@ end
 
 local has_bufferline, bufferline = pcall(require, 'bufferline')
 if has_bufferline then
-	bufferline.setup {
-		options = {
-			view = "default",
-			numbers = "buffer_id",
-			-- number_style = "superscript" | "",
-			-- mappings = true,
-			modified_icon = '●',
-			close_icon = '',
-			-- left_trunc_marker = '',
-			-- right_trunc_marker = '',
-			-- max_name_length = 18,
-			-- max_prefix_length = 15, -- prefix used when a buffer is deduplicated
-			-- tab_size = 18,
-			show_buffer_close_icons = false,
-			persist_buffer_sort = true, -- whether or not custom sorted buffers should persist
-			-- -- can also be a table containing 2 custom separators
-			-- -- [focused and unfocused]. eg: { '|', '|' }
-			-- separator_style = "slant" | "thick" | "thin" | { 'any', 'any' },
-			separator_style = "slant",
-			-- enforce_regular_tabs = false | true,
-			always_show_bufferline = false,
-			-- sort_by = 'extension' | 'relative_directory' | 'directory' | function(buffer_a, buffer_b)
-			-- -- add custom logic
-			-- return buffer_a.modified > buffer_b.modified
-			-- end
-			hover = {
-				enabled = true,
-				delay = 200,
-				reveal = { 'close' }
-			},
-		}
-	}
-	for i = 1, 9 do
-		vim.keymap.set('n', '<leader>' .. tostring(i), "<cmd>BufferLineGoToBuffer " .. tostring(i) .. "<CR>", { silent = true })
-	end
+    bufferline.setup({
+        options = {
+            view = 'default',
+            numbers = 'buffer_id',
+            -- number_style = "superscript" | "",
+            -- mappings = true,
+            modified_icon = '●',
+            close_icon = '',
+            -- left_trunc_marker = '',
+            -- right_trunc_marker = '',
+            -- max_name_length = 18,
+            -- max_prefix_length = 15, -- prefix used when a buffer is deduplicated
+            -- tab_size = 18,
+            show_buffer_close_icons = false,
+            persist_buffer_sort = true, -- whether or not custom sorted buffers should persist
+            -- -- can also be a table containing 2 custom separators
+            -- -- [focused and unfocused]. eg: { '|', '|' }
+            -- separator_style = "slant" | "thick" | "thin" | { 'any', 'any' },
+            separator_style = 'slant',
+            -- enforce_regular_tabs = false | true,
+            always_show_bufferline = false,
+            -- sort_by = 'extension' | 'relative_directory' | 'directory' | function(buffer_a, buffer_b)
+            -- -- add custom logic
+            -- return buffer_a.modified > buffer_b.modified
+            -- end
+            hover = {
+                enabled = true,
+                delay = 200,
+                reveal = { 'close' },
+            },
+        },
+    })
+    for i = 1, 9 do
+        vim.keymap.set(
+            'n',
+            '<leader>' .. tostring(i),
+            '<cmd>BufferLineGoToBuffer ' .. tostring(i) .. '<CR>',
+            { silent = true }
+        )
+    end
 end
-
 
 vim.g.UltiSnipsSnippetDirectories = { vim.fn.stdpath('config') .. '/snippets' }
 vim.g.tex_flavor = 'latex'
 require('teto.treesitter')
 
-
 -- Disable virtual_text since it's redundant due to lsp_lines.
 vim.diagnostic.config({
-	-- disabled because too big in haskell
-	virtual_lines = false,
-	virtual_text = true,
-	-- {
-	-- severity = { min = vim.diagnostic.severity.WARN }
-	-- },
-	signs = true,
-	severity_sort = true,
+    -- disabled because too big in haskell
+    virtual_lines = false,
+    virtual_text = true,
+    -- {
+    -- severity = { min = vim.diagnostic.severity.WARN }
+    -- },
+    signs = true,
+    severity_sort = true,
 })
 
 require('teto.lspconfig')
@@ -861,7 +848,6 @@ vim.cmd([[highlight IndentBlanklineIndent6 guifg=#C678DD gui=nocombine]])
 -- menu_add_cmd('Search.Search_and_replace', "lua require('spectre').open()")
 -- menu_add('Search.Test', 'let a=3')
 
-
 -- menu_add("Search.Search\ in\ current\ Buffer", :Grepper -switch -buffer")
 -- menu_add("Search.Search\ across\ Buffers :Grepper -switch -buffers")
 -- menu_add("Search.Search\ across\ directory :Grepper")
@@ -877,32 +863,32 @@ vim.cmd([[highlight IndentBlanklineIndent6 guifg=#C678DD gui=nocombine]])
 -- menu_add("DAP.Open repl", 'lua require"dap".repl.open()')
 
 local function open_contextual_menu()
-	-- getcurpos()	Get the position of the cursor.  This is like getpos('.'), but
-	--		includes an extra "curswant" in the list:
-	--			[0, lnum, col, off, curswant] ~
-	--		The "curswant" number is the preferred column when moving the
-	--		cursor vertically.	Also see |getpos()|.
-	--		The first "bufnum" item is always zero.
+    -- getcurpos()	Get the position of the cursor.  This is like getpos('.'), but
+    --		includes an extra "curswant" in the list:
+    --			[0, lnum, col, off, curswant] ~
+    --		The "curswant" number is the preferred column when moving the
+    --		cursor vertically.	Also see |getpos()|.
+    --		The first "bufnum" item is always zero.
 
-	local curpos = vim.fn.getcurpos()
+    local curpos = vim.fn.getcurpos()
 
-	local menu_opts = {
-		kind = 'menu',
-		prompt = 'Main menu',
-		experimental_mouse = true,
-		position = {
-			screenrow = curpos[2],
-			screencol = curpos[3],
-		},
-		-- ignored
-		-- width = 200,
-		-- height = 300,
-	}
+    local menu_opts = {
+        kind = 'menu',
+        prompt = 'Main menu',
+        experimental_mouse = true,
+        position = {
+            screenrow = curpos[2],
+            screencol = curpos[3],
+        },
+        -- ignored
+        -- width = 200,
+        -- height = 300,
+    }
 
-	-- print('### ' ..res)
-	require('stylish').ui_menu(vim.fn.menu_get(''), menu_opts, function(res)
-		vim.cmd(res)
-	end)
+    -- print('### ' ..res)
+    require('stylish').ui_menu(vim.fn.menu_get(''), menu_opts, function(res)
+        vim.cmd(res)
+    end)
 end
 
 vim.opt.listchars = 'tab:•·,trail:·,extends:❯,precedes:❮,nbsp:×'
@@ -934,11 +920,9 @@ vim.keymap.set('n', '<leader>Q', '<Cmd>Sayonara<cr>', { silent = true })
 -- vmap <leader>rs  <Plug>(ReplSend)
 -- }}}
 
-
 vim.g.vsnip_snippet_dir = vim.fn.stdpath('config') .. '/vsnip'
 
 map('n', '<Leader>$', '<Cmd>Obsession<CR>')
-
 
 -- nvim will load any .nvimrc in the cwd; useful for per-project settings
 vim.opt.exrc = true
@@ -950,11 +934,10 @@ vim.api.nvim_create_user_command('JsonPretty', "%!jq '.'", {})
 
 -- taken from justinmk's config
 vim.api.nvim_create_user_command(
-	'Tags',
-	[[
-	!ctags -R --exclude='build*' --exclude='.vim-src/**' --exclude='venv/**' --exclude='**/site-packages/**' --exclude='data/**' --exclude='dist/**' --exclude='notebooks/**' --exclude='Notebooks/**' --exclude='*graphhopper_data/*.json' --exclude='*graphhopper/*.json' --exclude='*.json' --exclude='qgis/**' *]]
-	,
-	{}
+    'Tags',
+    [[
+	!ctags -R --exclude='build*' --exclude='.vim-src/**' --exclude='venv/**' --exclude='**/site-packages/**' --exclude='data/**' --exclude='dist/**' --exclude='notebooks/**' --exclude='Notebooks/**' --exclude='*graphhopper_data/*.json' --exclude='*graphhopper/*.json' --exclude='*.json' --exclude='qgis/**' *]],
+    {}
 )
 
 -- " Bye bye ex mode
@@ -973,7 +956,7 @@ map T <Plug>Sneak_T
 -- let g:db_ui_winwidth = 30
 -- dadbod is controllable via DBUI
 vim.g.dbs = {
-	dev = 'sqlite:///home/teto/nova/jinko3/core-platform-db/db.sqlite',
+    dev = 'sqlite:///home/teto/nova/jinko3/core-platform-db/db.sqlite',
 }
 
 -- luadev mappings
@@ -998,4 +981,4 @@ map('n', '<leader>rg', '<Cmd>Grepper -tool rg -open -switch<CR>', { remap = true
 -- )
 vim.o.grepprg = 'rg --vimgrep --no-heading --smart-case'
 
-require 'teto.context_menu'.setup_rclick_menu_autocommands()
+require('teto.context_menu').setup_rclick_menu_autocommands()

@@ -9,7 +9,7 @@ in
 
     "${modulesPath}/virtualisation/openstack-config.nix"
     # ./hardware.nix
-	./openssh.nix
+    ./openssh.nix
     ../common-server.nix
     ../../modules/gitolite.nix
     # ../../modules/hercules-ci-agents.nix
@@ -41,40 +41,40 @@ in
 
   services.nextcloud.hostName = secrets.jakku.hostname;
   security.acme = {
-	acceptTerms = true;
-	# defaults.email = "acme@neotokyo.fr";
+    acceptTerms = true;
+    # defaults.email = "acme@neotokyo.fr";
   };
 
   services.nginx = {
-   enable = true;
-   # Setup Nextcloud virtual host to listen on ports
-   virtualHosts = {
-     secrets.jakku.hostname = {
-       ## Force HTTP redirect to HTTPS
-       forceSSL = true;
-       ## LetsEncrypt
-       enableACME = true;
+    enable = true;
+    # Setup Nextcloud virtual host to listen on ports
+    virtualHosts = {
+      secrets.jakku.hostname = {
+        ## Force HTTP redirect to HTTPS
+        forceSSL = true;
+        ## LetsEncrypt
+        enableACME = true;
+      };
     };
-  };
-  environment.systemPackages = with pkgs; [
-    tmux
-    # weechat
-  ];
+    environment.systemPackages = with pkgs; [
+      tmux
+      # weechat
+    ];
 
-  services.gitolite.adminPubkey = secrets.gitolitePublicKey;
+    services.gitolite.adminPubkey = secrets.gitolitePublicKey;
 
-  networking.hostName = "jakku";
+    networking.hostName = "jakku";
 
 
-  # networking.defaultGateway = secrets.gateway;
-  # networking.nameservers = secrets.nameservers;
+    # networking.defaultGateway = secrets.gateway;
+    # networking.nameservers = secrets.nameservers;
 
-  # networking.interfaces.ens192 = secrets.gitolite_server.interfaces;
+    # networking.interfaces.ens192 = secrets.gitolite_server.interfaces;
 
-  # allow to fetch mininet from the host machine
+    # allow to fetch mininet from the host machine
 
-  # nix.settings = {
-  #   trustedUsers = [ "root" "teto" ];
-  # };
+    # nix.settings = {
+    #   trustedUsers = [ "root" "teto" ];
+    # };
 
-}
+  }

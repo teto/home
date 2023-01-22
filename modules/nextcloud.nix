@@ -17,35 +17,35 @@ in
       overwriteProtocol = "https";
       # loaded via sops 
       adminpassFile = "/run/secrets/nextcloud/adminPassword";
-	  # TODO change it
-	  # adminUser = "root";
-	  # dbpassFile = 
+      # TODO change it
+      # adminUser = "root";
+      # dbpassFile = 
 
-	  # we can use an s3 account
-	  # objectstore.s3.enable
+      # we can use an s3 account
+      # objectstore.s3.enable
     };
     maxUploadSize = "512M";
     logLevel = 0;
     enableBrokenCiphersForSSE = false;
-	# increase security
-	enableImagemagick = false;
+    # increase security
+    enableImagemagick = false;
     package = pkgs.nextcloud25;
-	autoUpdateApps.enable = true;
+    autoUpdateApps.enable = true;
 
-	extraApps = with pkgs.nextcloud25Packages.apps; {
-	  inherit mail news contacts;
-	 # example of how to get a more recent version
-	 # contacts = pkgs.fetchNextcloudApp rec {
-	 #   url = "https://github.com/nextcloud-releases/contacts/releases/download/v4.2.2/contacts-v4.2.2.tar.gz";
-	 #   sha256 = "sha256-eTc51pkg3OdHJB7X4/hD39Ce+9vKzw1nlJ7BhPOzdy0=";
-	 # };
-	};
-	extraAppsEnable = true;
+    extraApps = with pkgs.nextcloud25Packages.apps; {
+      inherit mail news contacts;
+      # example of how to get a more recent version
+      # contacts = pkgs.fetchNextcloudApp rec {
+      #   url = "https://github.com/nextcloud-releases/contacts/releases/download/v4.2.2/contacts-v4.2.2.tar.gz";
+      #   sha256 = "sha256-eTc51pkg3OdHJB7X4/hD39Ce+9vKzw1nlJ7BhPOzdy0=";
+      # };
+    };
+    extraAppsEnable = true;
   };
 
   # Creating Nextcloud users and configure mail adresses
   # systemd.services.nextcloud-add-user = {
-   # --password-from-env  looks for the password in OC_PASS
+  # --password-from-env  looks for the password in OC_PASS
   #   script = ''
   #     export OC_PASS="test123"
   #     ${config.services.nextcloud.occ}/bin/nextcloud-occ user:add --password-from-env user1

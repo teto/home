@@ -32,24 +32,26 @@
   xsession.windowManager.i3 = {
     enable = true;
   };
+
+  # TODO generate a wrapper ?
   wayland.windowManager.sway = {
     extraOptions = [
       "--verbose"
       "--debug"
       "--unsupported-gpu"
     ];
-	# export MOZ_ENABLE_WAYLAND=1
-	# export QT_QPA_PLATFORM=wayland
-	# export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
-	# export SDL_VIDEODRIVER=wayland
-	# export XDG_CURRENT_DESKTOP="sway"
-	# export XDG_SESSION_TYPE="wayland"
-	# export _JAVA_AWT_WM_NONREPARENTING=1
+    # export MOZ_ENABLE_WAYLAND=1
+    # export QT_QPA_PLATFORM=wayland
+    # export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
+    # export SDL_VIDEODRIVER=wayland
+    # export XDG_CURRENT_DESKTOP="sway"
+    # export XDG_SESSION_TYPE="wayland"
+    # export _JAVA_AWT_WM_NONREPARENTING=1
     extraSessionCommands = ''
       export WLR_NO_HARDWARE_CURSORS=1
     '';
-      # export GBM_BACKEND=nvidia-drm
-      # export __GLX_VENDOR_LIBRARY_NAME=nvidia
+    # export GBM_BACKEND=nvidia-drm
+    # export __GLX_VENDOR_LIBRARY_NAME=nvidia
   };
 
   # seulemt pour X
@@ -59,6 +61,8 @@
     # steam-run
     signal-desktop
     lutris
+    # gnome.gnome-maps
+
     xorg.xwininfo # for stylish
   ];
 

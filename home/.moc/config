@@ -202,7 +202,7 @@ XTerms += xterm-termite
 
 # Theme file. This can be absolute path or relative to
 # /usr/share/moc/themes/ (depends on installation prefix) or ~/.moc/themes/
-Theme			= nightly_theme
+Theme			= dante
 
 # The theme used when running on an xterm.
 XTermTheme		= transparent-background
@@ -214,7 +214,7 @@ XTermTheme		= transparent-background
 
 # MOC directory - where pid file, socket, and state files are stored.
 # You can use ~ at the beginning.
-MOCDir		= ~/.moc
+MOCDir		= ~/.cache/moc
 
 # Use mmap() to read files. mmap() is much slower on NFS.
 UseMmap			= no

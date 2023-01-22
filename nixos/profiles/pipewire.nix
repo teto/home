@@ -9,9 +9,9 @@
     wireplumber.enable = true;
 
     # Disable everything that causes pipewire to interact with alsa devices
-    alsa.enable = false;
+    alsa.enable = true;
     pulse.enable = true;
-    jack.enable = false;
+    jack.enable = true;
     # config.pipewire = {
     #   "properties" = {
     #     default.clock.allowed-rates = [ 44100 48000 96000 ];

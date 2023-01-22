@@ -7,8 +7,8 @@
     # services.openssh.banner = "Hello world";
     # ports = [ 12666 ];
 
-	# # for sshfs edit or scp
-    allowSFTP = true; 
+    # # for sshfs edit or scp
+    allowSFTP = true;
     # type = types.enum ["yes" "without-password" "prohibit-password" "forced-commands-only" "no"];
     # needed since default is true !
     # listenAddresses = [
@@ -18,8 +18,8 @@
     startWhenNeeded = true;
 
     # extraConfig = ''
-	  # HostKey /home/teto/.ssh/server_id_rsa
-	 # '';
+    # HostKey /home/teto/.ssh/server_id_rsa
+    # '';
 
     # authorizedKeysFiles = [
     #   "~/.ssh/id_rsa.pub"
