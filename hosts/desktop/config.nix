@@ -107,6 +107,9 @@ in
     # "console=ttyS0" 
     # NECESSARY !! https://discourse.nixos.org/t/browsers-unbearably-slow-after-update/9414/30
     "intel_pstate=active"
+
+	# see https://forums.developer.nvidia.com/t/unusable-linux-text-console-with-nvidia-drm-modeset-1-or-if-nvidia-persistenced-is-loaded/184428/14
+	"no-scroll"
   ];
 
   # DOES NOT WORK !
@@ -212,7 +215,7 @@ in
   # this is required as well
   hardware.nvidia = {
     # this makes screen go black on boot :/
-    modesetting.enable = true; # needs "modesetting" in videoDrivers ?
+    modesetting.enable = false; # needs "modesetting" in videoDrivers ?
 
     # hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
     powerManagement.enable = false;

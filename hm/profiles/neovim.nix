@@ -433,7 +433,6 @@ let
     # Packer should remain first
 
     # { plugin = vCoolor-vim; }
-    # { plugin = vim-lastplace; } # triggers a neovim bug for now
     # (luaPlugin {
     #   plugin = packer-nvim;
     #   config = ''

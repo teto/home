@@ -132,7 +132,6 @@ M.set_lsp_rclick_menu = function()
         { 'Auto Format', '<cmd>lua vim.lsp.buf.format()<cr>' },
         -- error only
         { 'Show errors only', '<cmd>echo "TODO"<cr>' },
-        -- vim.diagnostic.config(conf)
         -- {'Toggle hints only', ''},
     }, M.buf_has_lsp)
 end

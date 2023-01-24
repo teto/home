@@ -1,1 +1,3 @@
 nvidia-smi
+    # see https://forums.developer.nvidia.com/t/unusable-linux-text-console-with-nvidia-drm-modeset-1-or-if-nvidia-persistenced-is-loaded/184428/14  no-scroll
+
