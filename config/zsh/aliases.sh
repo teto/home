@@ -61,6 +61,14 @@ alias nixos-fast="nixos-rebuild --no-build-nix --fast"
 
 # autres players a tester eventuellement
 # alias n="ncmpcpp"
+function n {
+    if [ -f "./contrib/flake.nix" ];
+    then 
+        nix develop ./contrib
+    else 
+        nix develop "$@"
+    fi
+}
 alias n="nix develop"
 alias n2="nix develop --option builders \"\$RUNNER2\" -j0"
 alias n3='nix develop --option builders "$RUNNER3" -j0'

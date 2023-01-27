@@ -66,6 +66,11 @@ return {
     -- })
 -- end,
     -- lua repl :Luadev
+
+-- for live editing
+--  { 'jbyuki/instant.nvim' }
+--  { 'jbyuki/nabla.nvim' } -- write latex equations in ASCII
+--  { 'jbyuki/monolithic.nvim' } -- write latex equations in ASCII
     { 'bfredl/nvim-luadev', cmd = 'Luadev' },
     {
         'AckslD/nvim-FeMaco.lua',

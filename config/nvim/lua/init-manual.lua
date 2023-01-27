@@ -487,18 +487,19 @@ if has_cmp then
     -- use('michaeladler/cmp-notmuch')
     -- nvim-cmp autocompletion plugin{{{
     cmp.setup({
-        snippet = {
-            expand = function(args)
-                -- For `vsnip` user.
-                vim.fn['vsnip#anonymous'](args.body)
+		-- commented to prevent 'Unknown function: vsnip#anonymous'
+        -- snippet = {
+        --     expand = function(args)
+        --         -- For `vsnip` user.
+        --         vim.fn['vsnip#anonymous'](args.body)
 
-                -- For `luasnip` user.
-                -- require('luasnip').lsp_expand(args.body)
+        --         -- For `luasnip` user.
+        --         -- require('luasnip').lsp_expand(args.body)
 
-                -- For `ultisnips` user.
-                -- vim.fn["UltiSnips#Anon"](args.body)
-            end,
-        },
+        --         -- For `ultisnips` user.
+        --         -- vim.fn["UltiSnips#Anon"](args.body)
+        --     end,
+        -- },
         mapping = cmp.mapping.preset.insert({
 
             ['<C-d>'] = cmp.mapping.scroll_docs(-4),
@@ -545,35 +546,6 @@ local has_orgmode, orgmode = pcall(require, 'orgmode')
 if has_orgmode then
     orgmode.setup_ts_grammar()
 end
-
--- Inserts a component in lualine_c at left section
--- local function ins_left(component)
---	 table.insert(config.sections.lualine_c, component)
--- end
-
--- -- Inserts a component in lualine_x ot right section
--- local function ins_right(component)
---	 table.insert(config.sections.lualine_x, component)
--- end
-
--- shade currently broken
---local has_shade, shade = pcall(require, "shade")
---if has_shade then
---	shade.setup({
---		overlay_opacity = 70,
---		opacity_step = 1,
---		-- keys = {
---		--	 brightness_up	  = '<C-Up>',
---		--	 brightness_down  = '<C-Down>',
---		--	 toggle			  = '<Leader>s',
---		-- }
---	})
---end
-
--- for live editing
--- use { 'jbyuki/instant.nvim' }
--- use { 'jbyuki/nabla.nvim' } -- write latex equations in ASCII
--- use { 'jbyuki/monolithic.nvim' } -- write latex equations in ASCII
 
 -- vim.g.sonokai_style = 'atlantis'
 vim.cmd([[colorscheme sonokai]])

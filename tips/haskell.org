@@ -123,6 +123,7 @@ Effects which don't make use of the m parameter are known as "first-order effect
 
 https://ghc.gitlab.haskell.org/ghc/doc/users_guide/packages.html#envvar-GHC_PACKAGE_PATH
 
+* working with strings
 
 import Data.ByteString.Lazy as BL
 import Data.ByteString as BS
