@@ -42,24 +42,29 @@ in
   services.nextcloud.hostName = secrets.jakku.hostname;
   security.acme = {
     acceptTerms = true;
-    # defaults.email = "acme@neotokyo.fr";
+    defaults.email = "acme@neotokyo.fr";
   };
 
-  services.nginx = {
-    enable = true;
-    # Setup Nextcloud virtual host to listen on ports
-    virtualHosts = {
-      secrets.jakku.hostname = {
+  services.nginx.virtualHosts.${config.services.nextcloud.hostName} =  {
         ## Force HTTP redirect to HTTPS
         forceSSL = true;
         ## LetsEncrypt
         enableACME = true;
-      };
-    };
-    environment.systemPackages = with pkgs; [
-      tmux
-      # weechat
-    ];
+  };
+
+
+  services.nginx = {
+    enable = true;
+    # Setup Nextcloud virtual host to listen on ports
+    # virtualHosts = {
+    #   secrets.jakku.hostname = {
+    #   };
+    # };
+ };
+  environment.systemPackages = with pkgs; [
+	tmux
+	# weechat
+  ];
 
     services.gitolite.adminPubkey = secrets.gitolitePublicKey;
 

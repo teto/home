@@ -18,6 +18,7 @@ in
     ../../nixos/profiles/qemu.nix
     ../../nixos/profiles/adb.nix
     ../../nixos/profiles/cron.nix
+    ../../nixos/profiles/kanata.nix
     ../../nixos/profiles/nix-daemon.nix
     ../../nixos/profiles/postgresql.nix
     # usually inactive, just to test some stuff

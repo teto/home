@@ -27,6 +27,9 @@ deploy-router:
 	deploy .\#router  -s 
 
 deploy-neotokyo:
+	# - we need interactivty to enter password see 
+	#   https://github.com/serokell/deploy-rs/issues/78#issuecomment-1367467086
+	# -t --magic-rollback false
 	deploy .\#neotokyo  -s 
 
 # regenerate my email contacts

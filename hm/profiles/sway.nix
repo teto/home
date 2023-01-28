@@ -56,7 +56,7 @@ in
       };
 
 
-      focus.wrapping = "yes";
+      # focus.wrapping = "yes";
       startup = [
         { command = "wl-paste -t text --watch clipman store"; }
         { command = ''wl-paste -p -t text --watch clipman store -P --histpath="~/.local/share/clipman-primary.json"''; }
