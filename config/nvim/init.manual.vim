@@ -1,26 +1,6 @@
 " vim: set noet fenc=utf-8 ff=unix sts=0 sw=2 ts=8 fdm=marker :
 " ❌
 
-" vim-plug installation {{{
-" TODO use stdpath now
-" let s:nvimdir = stdpath('data')
-" let s:plugscript = s:nvimdir.'/autoload/plug.vim'
-" let s:plugdir = s:nvimdir.'/site'
-
-" " to allow line-continuation in vim otherwise plug autoinstall fails
-" if empty(glob(s:plugscript))
-"   execute "!mkdir -p " s:nvimdir.'/autoload' s:plugdir
-"   execute "!curl -fLo" s:plugscript '--create-dirs'
-" 		\ 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-" 		  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-" endif
-
-
-" let g:plug_shallow=1
-" " let g:plug_threads
-" call plug#begin(s:plugdir)
-" call plug#end()
-" }}}
 
 
 " to load plugins in ftplugin matching ftdetect

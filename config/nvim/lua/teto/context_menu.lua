@@ -2,29 +2,29 @@
 -- one can run 'popup <name>' to go straight to the correct menu
 -- TODO add the number of entries in the top-level menu
 local M = {
-    active_menus = {},
+ active_menus = {},
 }
 
 --- Checks if current buf has LSPs attached
 ---@return boolean
 M.buf_has_lsp = function()
-    return not vim.tbl_isempty(vim.lsp.buf_get_clients(vim.api.nvim_get_current_buf()))
+ return not vim.tbl_isempty(vim.lsp.buf_get_clients(vim.api.nvim_get_current_buf()))
 end
 
 M.buf_has_treesitter = function()
-    return vim.treesitter.get_parser()
-    -- return not vim.tbl_isempty(
-    --     vim.lsp.buf_get_clients(vim.api.nvim_get_current_buf())
-    -- )
+ return vim.treesitter.get_parser()
+ -- return not vim.tbl_isempty(
+ --     vim.lsp.buf_get_clients(vim.api.nvim_get_current_buf())
+ -- )
 end
 
 --- Checks if current buf has LSPs attached
 ---@return boolean
 M.buf_has_sniprun = function()
-    -- return not vim.tbl_isempty(
-    --     vim.lsp.buf_get_clients(vim.api.nvim_get_current_buf())
-    -- )
-    return true
+ -- return not vim.tbl_isempty(
+ --     vim.lsp.buf_get_clients(vim.api.nvim_get_current_buf())
+ -- )
+ return true
 end
 
 -- local nonfile_bufs = require'nvpunk.util.nonfile_buffers'
@@ -32,21 +32,21 @@ end
 --- Checks if current buf is a file
 ---@return boolean
 M.buf_is_file = function()
-    return true
-    -- return not vim.tbl_contains(
-    --     nonfile_bufs,
-    --     vim.bo.filetype
-    -- )
+ return true
+ -- return not vim.tbl_contains(
+ --     nonfile_bufs,
+ --     vim.bo.filetype
+ -- )
 end
 
 M.buf_is_rest = function()
-    return vim.bo.filetype == 'http'
+ return vim.bo.filetype == 'http'
 end
 
 --- Checks if current buf has DAP support
 ---@return boolean
 M.buf_has_dap = function()
-    return M.buf_is_file()
+ return M.buf_is_file()
 end
 
 --- Create a context menu
@@ -54,9 +54,9 @@ end
 ---@param strings table[string]
 ---@param funcs table[function]
 M.uiselect_context_menu = function(prompt, strings, funcs)
-    vim.ui.select(strings, { prompt = prompt }, function(_, idx)
-        vim.schedule(funcs[idx])
-    end)
+ vim.ui.select(strings, { prompt = prompt }, function(_, idx)
+  vim.schedule(funcs[idx])
+ end)
 end
 
 local MODES = { 'i', 'n' }
@@ -64,19 +64,19 @@ local MODES = { 'i', 'n' }
 --- Clear all entries from the given menu
 ---@param menu string
 M.clear_menu = function(menu)
-    pcall(function()
-        vim.cmd('aunmenu ' .. menu)
-    end)
+ pcall(function()
+  vim.cmd('aunmenu ' .. menu)
+ end)
 end
 
 --- Formats the label of a menu entry to avoid errors
 ---@param label string
 ---@return string
 M.format_menu_label = function(label)
-    local res = string.gsub(label, ' ', [[\ ]])
-    res = string.gsub(res, '<', [[\<]])
-    res = string.gsub(res, '>', [[\>]])
-    return res
+ local res = string.gsub(label, ' ', [[\ ]])
+ res = string.gsub(res, '<', [[\<]])
+ res = string.gsub(res, '>', [[\>]])
+ return res
 end
 
 --- Create an entry for the right click menu
@@ -84,9 +84,9 @@ end
 ---@param label string
 ---@param action string
 M.rclick_context_menu = function(menu, label, action)
-    for _, m in ipairs(MODES) do
-        vim.cmd(m .. 'menu ' .. menu .. '.' .. M.format_menu_label(label) .. ' ' .. action)
-    end
+ for _, m in ipairs(MODES) do
+  vim.cmd(m .. 'menu ' .. menu .. '.' .. M.format_menu_label(label) .. ' ' .. action)
+ end
 end
 
 --- Set up a right click submenu
@@ -95,17 +95,17 @@ end
 ---@param items table[{string, string}]
 ---@param bindif function?
 M.set_rclick_submenu = function(menu_name, submenu_label, items, bindif)
-    M.clear_menu(menu_name)
-    M.clear_menu('PopUp.' .. M.format_menu_label(submenu_label))
-    if bindif ~= nil then
-        if not bindif() then
-            return
-        end
-    end
-    for _, i in ipairs(items) do
-        M.rclick_context_menu(menu_name, i[1], i[2])
-    end
-    M.rclick_context_menu('PopUp', submenu_label, '<cmd>popup ' .. menu_name .. '<cr>')
+ M.clear_menu(menu_name)
+ M.clear_menu('PopUp.' .. M.format_menu_label(submenu_label))
+ if bindif ~= nil then
+  if not bindif() then
+   return
+  end
+ end
+ for _, i in ipairs(items) do
+  M.rclick_context_menu(menu_name, i[1], i[2])
+ end
+ M.rclick_context_menu('PopUp', submenu_label, '<cmd>popup ' .. menu_name .. '<cr>')
 end
 
 -- vim.diagnostic.config({
@@ -120,20 +120,23 @@ end
 -- })
 
 M.set_lsp_rclick_menu = function()
-    M.set_rclick_submenu('TetoMenuLsp', 'LSP         ', {
-        { 'Code Actions           <space>ca', '<space>ca' },
-        { 'Go to Declaration             gD', 'gD' },
-        { 'Go to Definition              gd', 'gd' },
-        { 'Go to Implementation          gI', 'gI' },
-        { 'Signature Help             <C-k>', '<C-k>' },
-        { 'Rename', '<cmd>lua vim.lsp.buf.rename()<cr>' },
-        { 'References                    gr', 'gr' },
-        { 'Expand Diagnostics      <space>e', '<space>e' },
-        { 'Auto Format', '<cmd>lua vim.lsp.buf.format()<cr>' },
-        -- error only
-        { 'Show errors only', '<cmd>echo "TODO"<cr>' },
-        -- {'Toggle hints only', ''},
-    }, M.buf_has_lsp)
+ M.set_rclick_submenu('TetoMenuLsp', 'LSP         ', {
+  { 'Code Actions           <space>ca', '<space>ca' },
+  { 'Go to Declaration             gD', 'gD' },
+  { 'Go to Definition              gd', 'gd' },
+  { 'Go to Implementation          gI', 'gI' },
+  { 'Signature Help             <C-k>', '<C-k>' },
+  { 'Rename', '<cmd>lua vim.lsp.buf.rename()<cr>' },
+  { 'References                    gr', 'gr' },
+  -- { 'Expand Diagnostics      <space>e', '<space>e' },
+  { 'Auto Format', '<cmd>lua vim.lsp.buf.format()<cr>' },
+  -- error only
+  { 'Show diagnostics inline', "<cmd>lua require'teto.lsp'.toggle_diagnostic_display()<cr>" },
+  { 'Show errors only', "<cmd>lua require'teto.lsp'.set_level(vim.diagnostic.severity.ERROR)<cr>" },
+  { 'Toggle lsp lines', "<cmd>lua require('lsp_lines').toggle<cr>" },
+  { 'Show all levels', "<cmd>lua require'teto.lsp'.set_level(vim.diagnostic.severity.HINTS)<cr>" },
+  -- {'Toggle hints only', ''},
+ }, M.buf_has_lsp)
 end
 -- menu_add(
 --     'Diagnostic.Display_in_QF',
@@ -146,12 +149,12 @@ end
 -- menu_add('Diagnostic.Set_severity_to_all', '<cmd>lua vim.diagnostic.config({virtual_text = { severity = nil }})<cr>')
 
 M.set_dap_rclick_menu = function()
-    M.set_rclick_submenu('TetoMenuDap', 'Debug       ', {
-        { 'Show DAP UI           <space>bu', '<space>bu' },
-        { 'Toggle Breakpoint     <space>bb', '<space>bb' },
-        { 'Continue              <space>bc', '<space>bc' },
-        { 'Terminate             <space>bk', '<space>bk' },
-    }, M.buf_has_dap)
+ M.set_rclick_submenu('TetoMenuDap', 'Debug       ', {
+  { 'Show DAP UI           <space>bu', '<space>bu' },
+  { 'Toggle Breakpoint     <space>bb', '<space>bb' },
+  { 'Continue              <space>bc', '<space>bc' },
+  { 'Terminate             <space>bk', '<space>bk' },
+ }, M.buf_has_dap)
 end
 
 -- M.set_nvimtree_rclick_menu = function()
@@ -176,94 +179,94 @@ end
 -- end
 
 M.set_telescope_rclick_menu = function()
-    M.set_rclick_submenu('TetoTelescopeMenu', 'Telescope   ', {
-        { 'Find File             <space>tf', '<space>tf' },
-        { 'Live Grep             <space>tg', '<space>tg' },
-        { 'Recent Files          <space>th', '<space>th' },
-    })
+ M.set_rclick_submenu('TetoTelescopeMenu', 'Telescope   ', {
+  { 'Find File             <space>tf', '<space>tf' },
+  { 'Live Grep             <space>tg', '<space>tg' },
+  { 'Recent Files          <space>th', '<space>th' },
+ })
 end
 
 M.set_fzf_lua_rclick_menu = function()
-    M.set_rclick_submenu('MenuFzfLua', 'FzfLua   ', {
-        { 'Find File             <space>tf', '<space>tf' },
-        { 'Live Grep             <space>tg', '<space>tg' },
-        { 'Recent Files          <space>th', '<space>th' },
-    })
+ M.set_rclick_submenu('MenuFzfLua', 'FzfLua   ', {
+  { 'Find File             <space>tf', '<space>tf' },
+  { 'Live Grep             <space>tg', '<space>tg' },
+  { 'Recent Files          <space>th', '<space>th' },
+ })
 end
 
 M.set_git_rclick_menu = function()
-    M.set_rclick_submenu('MenuTetoGit', 'Git         ', {
-        { 'Preview Changes       <space>g?', '<space>g?' },
-        { 'Prev Hunk             <space>g[', '<space>g[' },
-        { 'Next Hunk             <space>g]', '<space>g]' },
-        { 'Blame Line            <space>gb', '<space>gb' },
-    }, M.buf_is_file)
+ M.set_rclick_submenu('MenuTetoGit', 'Git         ', {
+  { 'Preview Changes       <space>g?', '<space>g?' },
+  { 'Prev Hunk             <space>g[', '<space>g[' },
+  { 'Next Hunk             <space>g]', '<space>g]' },
+  { 'Blame Line            <space>gb', '<space>gb' },
+ }, M.buf_is_file)
 end
 
 M.set_spectre_rclick_menu = function()
-    -- nnoremap <leader>sw <cmd>lua require('spectre').open_visual({select_word=true})<CR>
-    -- vnoremap <leader>s <cmd>lua require('spectre').open_visual()<CR>
-    -- "  search in current file
-    -- nnoremap <leader>sp viw:lua require('spectre').open_file_search()<cr>
+ -- nnoremap <leader>sw <cmd>lua require('spectre').open_visual({select_word=true})<CR>
+ -- vnoremap <leader>s <cmd>lua require('spectre').open_visual()<CR>
+ -- "  search in current file
+ -- nnoremap <leader>sp viw:lua require('spectre').open_file_search()<cr>
 
-    M.set_rclick_submenu('MenuSpectre', 'Replace         ', {
-        { 'Replace', '<cmd>lua require("spectre").open()<cr>' },
-        { 'Replace word', '<cmd>lua require("spectre").open_visual({select_word=true})<cr>' },
-        { 'Search file', '<cmd>lua require("spectre").open()<cr>' },
-    }, function()
-        return true
-    end)
+ M.set_rclick_submenu('MenuSpectre', 'Replace         ', {
+  { 'Replace', '<cmd>lua require("spectre").open()<cr>' },
+  { 'Replace word', '<cmd>lua require("spectre").open_visual({select_word=true})<cr>' },
+  { 'Search file', '<cmd>lua require("spectre").open()<cr>' },
+ }, function()
+  return true
+ end)
 end
 -- menu_add('Rest.RunRequest', "<cmd>lua require('rest-nvim').run(true)<cr>")
 
 M.set_rest_rclick_menu = function()
-    M.set_rclick_submenu('MenuRest', 'Rest', {
-        { 'Run request', "<cmd>lua require('rest-nvim').run(false)<cr>" },
-        { 'Run request (verbose)', "<cmd>lua require('rest-nvim').run({ verbose = true})<cr>" },
-    }, M.buf_is_rest)
+ M.set_rclick_submenu('MenuRest', 'Rest', {
+  { 'Run request', "<cmd>lua require('rest-nvim').run(false)<cr>" },
+  { 'Run request (verbose)', "<cmd>lua require('rest-nvim').run({ verbose = true})<cr>" },
+ }, M.buf_is_rest)
 end
 
 M.set_sniprun_rclick_menu = function()
-    M.set_rclick_submenu('MenuSnipRun', 'SnipRun', {
-        { 'SnipRun', '<cmd>SnipRun<cr>' },
-        { 'SnipTerminate', '<cmd>SnipTerminate<cr>' },
-    }, function()
-        return true
-    end)
+ M.set_rclick_submenu('MenuSnipRun', 'SnipRun', {
+  { 'SnipRun', '<cmd>SnipRun<cr>' },
+  { 'SnipTerminate', '<cmd>SnipTerminate<cr>' },
+ }, function()
+  return true
+ end)
 end
 
 M.set_repl_rclick_menu = function()
-    M.set_rclick_submenu('MenuRepl', 'Repl', {
-        { 'Send line', [[<cmd>lua require'luadev'.exec(vim.api.nvim_get_current_line())<cr>]] },
-        -- {'SnipRun',   '<cmd>SnipRun<cr>'},
-        -- {'SnipTerminate',   '<cmd>SnipTerminate<cr>'},
-    }, function()
-        return true
-    end)
+ M.set_rclick_submenu('MenuRepl', 'Repl', {
+  { 'Send line', [[<cmd>lua require'luadev'.exec(vim.api.nvim_get_current_line())<cr>]] },
+  -- {'SnipRun',   '<cmd>SnipRun<cr>'},
+  -- {'SnipTerminate',   '<cmd>SnipTerminate<cr>'},
+ }, function()
+  return true
+ end)
 end
 
 M.set_toggle_rclick_menu = function()
-    M.set_rclick_submenu('MenuToggle', 'Toggle ->', {
-        { 'Minimap', '<cmd>MinimapToggle<cr>' },
-        { 'Obsession', '<cmd>Obsession<cr>' },
-        { 'Indent guides', '<cmd>IndentBlanklineToggle<cr>' },
-    }, function()
-        return true
-    end)
+ M.set_rclick_submenu('MenuToggle', 'Toggle ->', {
+  { 'Minimap', '<cmd>MinimapToggle<cr>' },
+  { 'Obsession', '<cmd>Obsession<cr>' },
+  { 'Indent guides', '<cmd>IndentBlanklineToggle<cr>' },
+ }, function()
+  return true
+ end)
 end
 
 M.set_treesitter_rclick_menu = function()
-    M.set_rclick_submenu('MenuTreesitter', 'Treesitter ->', {
-        { 'Show tree', '<cmd>lua vim.treesitter.show_tree()<cr>' },
-        -- {'Obsession',   '<cmd>Obsession<cr>'},
-        -- {'Indent guides',   '<cmd>IndentBlanklineToggle<cr>'},
-    }, function()
-        return true
-    end)
+ M.set_rclick_submenu('MenuTreesitter', 'Treesitter ->', {
+  { 'Show tree', '<cmd>lua vim.treesitter.show_tree()<cr>' },
+  -- {'Obsession',   '<cmd>Obsession<cr>'},
+  -- {'Indent guides',   '<cmd>IndentBlanklineToggle<cr>'},
+ }, function()
+  return true
+ end)
 end
 
 M.add_component = function(component)
-    table.insert(M.active_menus, component)
+ table.insert(M.active_menus, component)
 end
 
 -- M.set_lsp_rclick_menu()
@@ -304,17 +307,17 @@ M.add_component(M.set_treesitter_rclick_menu)
 
 -- TODO the run it on filetype change too
 M.setup_rclick_menu_autocommands = function()
-    -- M.set_dap_rclick_menu()
-    -- M.set_java_rclick_menu()
-    -- M.set_nvimtree_rclick_menu()
-    vim.api.nvim_create_autocmd({ 'BufEnter', 'LspAttach', 'FileType' }, {
-        -- TODO regenerate this function everytime ?
-        callback = function()
-            for _, component in ipairs(M.active_menus) do
-                component()
-            end
-        end,
-    })
+ -- M.set_dap_rclick_menu()
+ -- M.set_java_rclick_menu()
+ -- M.set_nvimtree_rclick_menu()
+ vim.api.nvim_create_autocmd({ 'BufEnter', 'LspAttach', 'FileType' }, {
+  -- TODO regenerate this function everytime ?
+  callback = function()
+   for _, component in ipairs(M.active_menus) do
+    component()
+   end
+  end,
+ })
 end
 
 M.clear_menu('PopUp')

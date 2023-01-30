@@ -388,28 +388,6 @@ let
 
 
     })
-    # { plugin = neomake; }
-    # {
-    #   plugin = neogit;
-    #   config = ''
-    #     " -- neogit config
-    #   '';
-    # }
-  ];
-
-  completionPlugins = with pkgs.vimPlugins; [
-    # (luaPlugin { plugin = coq_nvim; })
-    (luaPlugin { plugin = nvim-cmp; })
-    (luaPlugin { plugin = cmp-nvim-lsp; })
-    # (luaPlugin { plugin = cmp-cmdline-history; })
-    # (luaPlugin { plugin = cmp-conventionalcommits; })
-    # (luaPlugin { plugin = cmp-digraphs; })
-    (luaPlugin { plugin = cmp-rg; })
-    (luaPlugin { plugin = cmp-vsnip; })
-    ({ plugin = vim-vsnip; })
-    # (luaPlugin { plugin = cmp-zsh; })
-    # vim-vsnip
-    # vim-vsnip-integ
   ];
 
 
@@ -433,18 +411,6 @@ let
     # Packer should remain first
 
     # { plugin = vCoolor-vim; }
-    # (luaPlugin {
-    #   plugin = packer-nvim;
-    #   config = ''
-    #     require('packer').init({
-    #       luarocks = {
-    #         python_cmd = 'python' -- Set the python command to use for running hererocks
-    #       },
-    #     })
-    #     -- require my own manual config
-    #     require('init-manual')
-    #   '';
-    # })
     (luaPlugin {
       plugin = lazy-nvim;
       config = ''
@@ -491,10 +457,6 @@ let
         vim.g.hoogle_fzf_cache_file = vim.fn.stdpath('cache')..'/hoogle_cache.json'
       '';
     })
-
-    # (luaPlugin {
-    #   plugin = Shade-nvim;
-    # })
 
     # (luaPlugin {
     #   # TODO move config hee
@@ -891,22 +853,11 @@ let
   ];
 
   rawPlugins =
-
-    # [
-    # this one must be first
-    # (luaPlugin {
-    #  plugin = myVimPlugins.import-nvim;
-
-    #  config = "local import = require'import'";
-    # }) 
-    # ] 
-    # ++
-    basePlugins
+	   basePlugins
     ++ overlayPlugins
     ++ luaPlugins
     ++ treesitterPlugins
     ++ colorschemePlugins
-    # ++ completionPlugins
     ++ filetypePlugins
   ;
 

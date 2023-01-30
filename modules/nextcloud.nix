@@ -1,6 +1,7 @@
 { config, lib, pkgs, ... }:
 let
   secrets = import ../nixpkgs/secrets.nix;
+  nextcloudAdminPasswordSopsPath = "nextcloud/adminPassword";
 in
 {
 
@@ -16,7 +17,7 @@ in
       # Further forces Nextcloud to use HTTPS
       overwriteProtocol = "https";
       # loaded via sops 
-      adminpassFile = "/run/secrets/nextcloud/adminPassword";
+      adminpassFile = "/run/secrets/${nextcloudAdminPasswordSopsPath}";
       # TODO change it
       # adminUser = "root";
       # dbpassFile = 
@@ -43,6 +44,12 @@ in
     extraAppsEnable = true;
   };
 
+  # to be able to send mails from the admin panel
+  # Test mails can be send via administration interface in the menu section "Basic settings". 
+  extraOptions = {
+    mail_smtpmode = "sendmail";
+    mail_sendmailmode = "pipe";
+  };
   # Creating Nextcloud users and configure mail adresses
   # systemd.services.nextcloud-add-user = {
   # --password-from-env  looks for the password in OC_PASS
@@ -70,7 +77,7 @@ in
   #   email = "foo@example.com";
   # };
 
-  sops.secrets."nextcloud/adminPassword" = {
+  sops.secrets.${nextcloudAdminPasswordSopsPath} = {
     mode = "0440";
     owner = config.users.users.nextcloud.name;
     group = config.users.users.nextcloud.group;

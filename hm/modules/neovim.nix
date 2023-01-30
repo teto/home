@@ -13,6 +13,13 @@ let
     #   ;
   };
 
+  # completionPlugins = with pkgs.vimPlugins; [
+  #   # (luaPlugin { plugin = coq_nvim; })
+  #   (luaPlugin { plugin = cmp-rg; })
+  #   # (luaPlugin { plugin = cmp-zsh; })
+  #   # vim-vsnip
+  #   # vim-vsnip-integ
+  # ];
   defaultCompletionPlugins = with pkgs.vimPlugins; [
     (luaPlugin { plugin = nvim-cmp; })
     (luaPlugin { plugin = cmp-nvim-lsp; })
@@ -20,6 +27,8 @@ let
     # (luaPlugin { plugin = cmp-cmdline-history; })
     # (luaPlugin { plugin = cmp-conventionalcommits; })
     # (luaPlugin { plugin = cmp-digraphs; })
+  #   (luaPlugin { plugin = cmp-vsnip; })
+    ({ plugin = vim-vsnip; })
   ];
 
   orgmodePlugins = with pkgs.vimPlugins; [

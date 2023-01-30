@@ -97,6 +97,9 @@ let
       # unstable.evince # succeed where zathura/mupdf fail
       # unstable.transmission_gtk  # bittorrent client
       # vimiv # image viewer
+	  usbutils
+	  vifm
+
       arandr # to move screens/monitors around
       bandwhich # to monitor per app bandwidth
       du-dust # dust binary: rust replacement of du
@@ -168,7 +171,6 @@ let
     # mcomix # manga reader
     # mendeley # requiert qtwebengine
     zeal # doc for developers
-    vifm
     # zotero     # doc software
     # astroid # always compiles webkit so needs 1 full day
   ];

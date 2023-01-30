@@ -12,6 +12,25 @@ return {
           })
          end
 }
+-- 'mhinz/vim-signify'
+-- vim.api.nvim_set_hl(0, 'SignifySignChange', {
+-- 	cterm = { bold = true },
+-- 	ctermbg = 237,
+-- 	ctermfg = 227,
+-- 	bg = 'NONE',
+-- 	fg = '#F08A1F',
+-- })
+-- vim.api.nvim_set_hl(
+-- 	0,
+-- 	'SignifySignAdd',
+-- 	{ cterm = { bold = true }, ctermbg = 237, ctermfg = 227, bg = 'NONE', fg = 'green' }
+-- )
+-- vim.api.nvim_set_hl(
+-- 	0,
+-- 	'SignifySignDelete',
+-- 	{ cterm = { bold = true }, ctermbg = 237, ctermfg = 227, bg = 'NONE', fg = 'red' }
+-- )
+
 
 }
 

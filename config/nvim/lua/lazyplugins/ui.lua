@@ -2,11 +2,18 @@ return {
 
     'Matsuuu/pinkmare',
     'flrnd/candid.vim',
-    'adlawson/vim-sorcerer'    -- 'whatyouhide/vim-gotham'
-,
-    'vim-scripts/Solarized'    -- use 'npxbr/gruvbox.nvim' " requires lus
-,
+    { 'norcalli/nvim-colorizer.lua',
+        config = function ()
+            require('colorizer').setup()
+        end
+    },
+    -- 'whatyouhide/vim-gotham'
+    'adlawson/vim-sorcerer',
+    -- use 'npxbr/gruvbox.nvim' " requires lus
+    'vim-scripts/Solarized',
+    {'kevinhwang91/nvim-ufo', dependencies = 'kevinhwang91/promise-async'},
     'romainl/flattened',
+    { 'protex/better-digraphs.nvim', lazy=true },
     'NLKNguyen/papercolor-theme',
     'marko-cerovac/material.nvim',
     'shaunsingh/oxocarbon.nvim',

@@ -24,7 +24,6 @@ syntax enable
 call plug#begin(s:nvimdir.'/plugged')
 
 "Plug 'lervag/vimtex', {'for': 'tex'}
-" Plug 'mhinz/vim-signify'
 let g:nvim_tree_auto_open = 1
 let g:nvim_tree_quit_on_open = 1
 let g:nvim_tree_auto_close = 1

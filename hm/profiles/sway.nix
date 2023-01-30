@@ -37,10 +37,16 @@ in
       	  export SDL_VIDEODRIVER=wayland
             export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
     '';
+
     wrapperFeatures = { gtk = true; };
 
     config = {
       terminal = term;
+
+	  # menu = 
+
+	  # we want to override the (pywal) config from i3
+	  colors = lib.mkForce { };
 
       # Notification Daemon
       # Toggle control center
@@ -62,7 +68,6 @@ in
         { command = ''wl-paste -p -t text --watch clipman store -P --histpath="~/.local/share/clipman-primary.json"''; }
         { command = "mkfifo $SWAYSOCK.wob && tail -f $SWAYSOCK.wob | wob"; }
         { command = "swaync"; }
-
       ];
     };
 

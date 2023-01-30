@@ -1,7 +1,5 @@
 local M = {}
 
-local has_signature, signature = pcall(require, 'lsp_signature')
-
 local function default_mappings()
     vim.keymap.set('n', 'K', vim.lsp.buf.hover, { buffer = true })
     vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { buffer = true })
@@ -29,16 +27,11 @@ local function default_mappings()
     end, { buffer = true })
 end
 
-M.on_attach = function(client)
+M.on_attach = function(client, bufnr)
     default_mappings()
 
     -- vim.bo.omnifunc = vim.lsp.omnifunc
     vim.opt.omnifunc = 'v:lua.vim.lsp.omnifunc'
-
-    if has_signature then
-        signature.on_attach() -- Note: add in lsp client on-attach
-    end
-    -- require'virtualtypes'.on_attach()
 end
 
 return M

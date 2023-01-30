@@ -5,6 +5,21 @@ return {
     -- use 'jalvesaq/vimcmdline' -- no help files, mappings clunky
     -- github mirror of use 'http://gitlab.com/HiPhish/repl.nvim'
     -- use 'http://gitlab.com/HiPhish/repl.nvim' -- no commit for the past 2 years
+-- repl.nvim (from hiphish) {{{
+-- vim.g.repl['lua'] = {
+--     \ 'bin': 'lua',
+--     \ 'args': [],
+--     \ 'syntax': '',
+--     \ 'title': 'Lua REPL'
+-- \ }
+-- Send the text of a motion to the REPL
+-- nmap <leader>rs  <Plug>(ReplSend)
+-- -- Send the current line to the REPL
+-- nmap <leader>rss <Plug>(ReplSendLine)
+-- nmap <leader>rs_ <Plug>(ReplSendLine)
+-- -- Send the selected text to the REPL
+-- vmap <leader>rs  <Plug>(ReplSend)
+-- }}}
     --}}}
     {
         'hkupty/iron.nvim',
