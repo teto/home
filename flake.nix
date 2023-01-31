@@ -55,8 +55,8 @@
     i3pystatus = { url = "github:teto/i3pystatus/nix_backend"; flake = false; };
     nova.url = "git+ssh://git@git.novadiscovery.net/world/nova-nix.git?ref=master";
     neovim = {
-      url = "github:neovim/neovim?dir=contrib";
-      # url = "github:lewis6991/neovim?ref=refactor/options&dir=contrib";
+      url = "github:nojnhuh/neovim?dir=contrib&ref=lsp-watch-files";
+      # url = "github:neovim/neovim?dir=contrib";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     sops-nix.url = "github:Mic92/sops-nix";
