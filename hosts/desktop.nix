@@ -20,8 +20,10 @@
     # ./modules/jupyter.nix
   ];
 
-  xdg.portal.enable = true;
-
+  xdg.portal = {
+   enable = true; 
+   xdgOpenUsePortal = true; 
+  };
   environment.homeBinInPath = true;
 
   # to get manpages

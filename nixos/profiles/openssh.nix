@@ -32,9 +32,9 @@
       KbdInteractiveAuthentication = false;
       PasswordAuthentication = false;
       # PermitRootLogin = "no";
+	  X11Forwarding = true;
     };
 
-    # forwardX11 = true;
     # kbdInteractiveAuthentication = false;
     # logLevel = "VERBOSE";
     # permitRootLogin = "prohibit-password";

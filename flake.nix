@@ -4,7 +4,7 @@
 
 #+BEGIN_SRC nix
 {
-  description = "My personal configuration";
+  description = "Un petit aperçu de l'enfer";
 
   nixConfig = {
 
@@ -27,11 +27,7 @@
     };
     deploy-rs.url = "github:serokell/deploy-rs";
     flake-utils.url = "github:numtide/flake-utils";
-    treefmt-nix = {
-      url = "github:numtide/treefmt-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
+    treefmt-nix.url = "github:numtide/treefmt-nix";
 
     peerix.url = "github:cid-chan/peerix";
     unstable.url = "github:nixos/nixpkgs/nixos-unstable";

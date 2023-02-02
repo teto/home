@@ -37,6 +37,7 @@
     # to correct big errors on startup
     initstepslew = {
       enabled = true;
+	  threshold = 100;
     };
   };
 

@@ -791,3 +791,4 @@ vim.filetype.add({
 vim.o.grepprg = 'rg --vimgrep --no-heading --smart-case'
 
 require('teto.context_menu').setup_rclick_menu_autocommands()
+require('teto.lsp').set_lsp_lines(true)
