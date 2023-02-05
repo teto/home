@@ -90,6 +90,10 @@ in
     '';
   };
 
+  xdg.configFile."sway/config".text = lib.mkBefore "
+	include ${../../config/i3/config.shared}
+   ";
+
   home.packages = with pkgs; [
     # grimshot # simplifies usage of grim ?
     clipman # clipboard manager, works with wofi

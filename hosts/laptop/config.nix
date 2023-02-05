@@ -16,11 +16,12 @@ in
     # ./nixos/modules/redis.nix
     ../../nixos/profiles/steam.nix
     ../../nixos/profiles/qemu.nix
-    ../../nixos/profiles/adb.nix
+    # ../../nixos/profiles/adb.nix
     ../../nixos/profiles/cron.nix
     ../../nixos/profiles/kanata.nix
     ../../nixos/profiles/nix-daemon.nix
-    ../../nixos/profiles/postgresql.nix
+    # ../../nixos/profiles/postgresql.nix
+    ../../nixos/profiles/home-assistant.nix
     # usually inactive, just to test some stuff
     # ../../nixos/profiles/gitlab-runner.nix
 
@@ -170,11 +171,11 @@ in
   };
 
   # for tests
-  services.vault = {
-    enable = true;
-    dev = true;
-    devRootTokenID = secrets.vault.rootTokenId;
-  };
+  # services.vault = {
+  #   enable = true;
+  #   dev = true;
+  #   devRootTokenID = secrets.vault.rootTokenId;
+  # };
 
   environment.systemPackages = [
     # cups-pk-helper # to add printer through gnome control center

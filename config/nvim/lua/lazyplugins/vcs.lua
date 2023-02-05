@@ -1,5 +1,6 @@
 return {
- { 'pwntester/octo.nvim', config = function ()
+ { 'pwntester/octo.nvim'
+ , config = function ()
         require 'octo'.setup({
             default_remote = { 'up', 'upstream', 'origin' }, -- order to try remotes
     --         reaction_viewer_hint_icon = '', -- marker for user reactions
@@ -9,8 +10,9 @@ return {
     --         right_bubble_delimiter = '', -- Bubble delimiter
     --         left_bubble_delimiter = '', -- Bubble delimiter
     --         github_hostname = '', -- GitHub Enterprise host
-          })
-         end
+  })
+ end
+ , lazy = true
 }
 -- 'mhinz/vim-signify'
 -- vim.api.nvim_set_hl(0, 'SignifySignChange', {
