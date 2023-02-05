@@ -619,7 +619,7 @@ require('teto.treesitter')
 require('teto.lspconfig')
 
 -- logs are written to /home/teto/.cache/vim-lsp.log
-vim.lsp.set_log_level('info')
+vim.lsp.set_log_level('DEBUG')
 
 -- hack
 -- local _, notifs = pcall(require, 'notifications')

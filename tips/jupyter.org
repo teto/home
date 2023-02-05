@@ -4,7 +4,7 @@ https://docs.jupyter.org/en/latest/use/jupyter-directories.html
 Typically returns:
 $ jupyter --paths
 
-```
+#+BEGIN_SRC 
 config:
     /home/teto/.config/jupyter
     /nix/store/vzqny68wq33dcg4hkdala51n5vqhpnwc-python3-3.9.12/etc/jupyter
@@ -17,7 +17,8 @@ data:
     /usr/share/jupyter
 runtime:
     /home/teto/.local/share/jupyter/runtime
-```
+#+END_SRC
+
 User folders are favored always so the best is to override the defaults to avoid bad suprises
 
 export JUPYTER_PATH=juptest/share/jupyter

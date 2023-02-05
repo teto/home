@@ -8,6 +8,13 @@ kubectl cluster-info
 sts = StatefulSets
 pvc = persistentvolumeclaim
 
+* Find my cluster
+
+  #+BEGIN_SRC sh
+  export AWS_PROFILE=my-profile
+  eksctl get cluster
+  #+END_SRC
+
 ** restart a job 
  
   kubectl get job "your-job" -o json > your-job.json

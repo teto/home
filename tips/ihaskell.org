@@ -11,10 +11,12 @@ No kernel profile JSON specified.
 This may be a bug!
 Args (Kernel Nothing) [KernelspecEnvFile "/home/teto/nova/jinko-dev/bazel-bin/simwork/core/compile-package_env-core"]
 IHaskell on  ghc8-env via 🐍 via ❄️  IMPURE (ghc-shell-for-ihaskell-0.10.2.2) 
-(ins)➜ cabal run ihaskell -- install 
-Up to date
+#+BEGIN_SRC sh
+cabal run ihaskell -- install 
 No Jupyter / IPython detected -- install Jupyter 3.0+ before using IHaskell.
-ihaskell: 
-Ran commands: 
-which jupyter
-which ipython
+#+END_SRC
+
+
+can be solved with a:
+nix shell ~/nixpkgs#python3Packages.jupyter-client ~/nixpkgs#python3Packages.jupyter-core
+(jupyter-kernelspec is in jupyter-client while "jupyter" is in jupyter-core only)
