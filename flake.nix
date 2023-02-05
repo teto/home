@@ -49,7 +49,8 @@
     nix-update.url = "github:Mic92/nix-update";
     nix-index-cache.url = "github:Mic92/nix-index-database";
     i3pystatus = { url = "github:teto/i3pystatus/nix_backend"; flake = false; };
-    nova.url = "git+ssh://git@git.novadiscovery.net/world/nova-nix.git?ref=master";
+    # nova.url = "git+ssh://git@git.novadiscovery.net/world/nova-nix.git?ref=master";
+    nova.url = "git+ssh://git@git.novadiscovery.net/sys/doctor";
     neovim = {
       url = "github:nojnhuh/neovim?dir=contrib&ref=lsp-watch-files";
       # url = "github:neovim/neovim?dir=contrib";
@@ -217,7 +218,7 @@
 
             modules = [
               hm.nixosModules.home-manager
-              # nova.nixosProfiles.dev
+              nova.nixosProfiles.dev
               self.inputs.sops-nix.nixosModules.sops
 
               ({ pkgs, ... }: {
@@ -238,8 +239,8 @@
                 ./hosts/laptop/home.nix
                 ./hm/profiles/nova.nix
 
-                # nova.hmProfiles.standard
-                # nova.hmProfiles.dev
+                nova.hmProfiles.standard
+                nova.hmProfiles.dev
               ])
             ];
           };
@@ -294,7 +295,7 @@
                 ];
               })
               hm.nixosModules.home-manager
-              # nova.nixosProfiles.dev
+              nova.nixosProfiles.dev
 
               # TODO use from flake or from unstable
               (hm-custom [
