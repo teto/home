@@ -5,7 +5,6 @@
   services.gvfs.enable = true;
 
   imports = [
-    # ./postgresql.nix
   ];
 
 

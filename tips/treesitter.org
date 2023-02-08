@@ -7,3 +7,7 @@ Parsers are searched for as `parser/{lang}.*` in any 'runtimepath' directory.
 set rtp+=/home/teto/tree-sitter-http
 checkhealth vim.treesitter
 +END_SRC
+
+
+To reload a grammar:
+require("nvim-treesitter.parsers").reset_cache()

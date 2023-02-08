@@ -1,3 +1,7 @@
+* see running config
+ https://superuser.com/questions/1173594/get-configuration-of-running-sshd
+ sshd  -T
+
 # How to create a tunnel
 # https://linuxize.com/post/how-to-setup-ssh-tunneling/
 ssh -L [LOCAL_IP:]LOCAL_PORT:DESTINATION:DESTINATION_PORT [USER@]SSH_SERVER

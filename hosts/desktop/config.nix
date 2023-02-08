@@ -1,11 +1,4 @@
 { config, lib, pkgs, ... }:
-let
-  # secrets = import ./secrets.nix;
-  # mptcp-flake = builtins.getFlake "github:teto/mptcp-flake/bf99516a50dcf3fcbe0a0c924bb56ff57fdd05e1";
-  # type = "git";
-  # ref = "cargoNix";
-  # flake = false;
-in
 {
   imports = [
     ./hardware.nix
@@ -33,9 +26,7 @@ in
     ../../modules/distributedBuilds.nix
 
     # ./modules/syncthing.nix
-
     # ./modules/tor.nix
-
     # ./modules/sway.nix
     #   ./modules/mininet.nix
 
@@ -49,10 +40,54 @@ in
 
   ];
 
+  # for testing
+  # 
+  services.openssh = {
+
+   # tu peux en avoir plusieurs sur ce mode
+   # HostKey /etc/ssh/ssh_host_rsa_key
+   # HostKey /etc/ssh/ssh_host_ed25519_key
+   # alors que on a 
+   # AuthorizedKeysFile %h/.ssh/authorized_keys %h/.ssh/authorized_keys2 /etc/ssh/authorized_keys.d/%u
+	hostKeys = [
+	  {
+		bits = 4096;
+		path = "/etc/ssh/ssh_host_rsa_key";
+		type = "rsa";
+	  }
+	  {
+		path = "/etc/ssh/ssh_host_ed25519_key";
+		type = "ed25519";
+	  }
+   ];
+
+   # settings = {
+	 # AuthorizedKeysCommand = "true";
+	 # AuthorizedKeysCommandUser = "nobody";
+   # };
+
+   # > /nix/store/94paffh2ns62jjwfhf419hrcs2lalw8d-sshd.conf-validated line 5: no argument after keyword "ListenAddresses"
+   # > /nix/store/94paffh2ns62jjwfhf419hrcs2lalw8d-sshd.conf-validated line 33: keyword Port extra arguments at end of line
+   # settings.Port = [ 42 ];
+   # 
+   # AuthorizedKeysCommandUser
+   #     Specifies the user under whose account the AuthorizedKeysCommand is run.  It is recommended to  use  a  dedi‐
+   #     cated  user  that has no other role on the host than running authorized keys commands.  If AuthorizedKeysCom‐
+   #     mand is specified but AuthorizedKeysCommandUser is not, then sshd(8) will refuse to start.
+   # 	 Port 320
+	 # Port 42
+   extraConfig = ''
+	AuthorizedKeysFile %h/.ssh/authorized_keys %h/.ssh/authorized_keys2 /etc/ssh/authorized_keys.d/%ujjk
+	 AuthorizedKeysCommand none
+	 # La question est: est-ce que AuthorizedKeysCommandUser est utilise si 
+	 AuthorizedKeysCommandUser toto
+	'';
+  };
+
   users.users.teto.packages = with pkgs; [
     pciutils # for lspci
     ncdu # to see disk usage
-    # bridge-utils # pour  brctl
+    # bridge-utils# pour  brctl
     wirelesstools # to get iwconfig
     # aircrack-ng
   ];
