@@ -2,10 +2,12 @@ return {
     {
         'jose-elias-alvarez/null-ls.nvim',
         config = function()
-            require('null-ls').setup({
+          local null =  require('null-ls')
+            null.setup({
                 sources = {
                     -- needs a luacheck in PATH
-                    require('null-ls').builtins.diagnostics.luacheck,
+                    null.builtins.diagnostics.luacheck,
+                    null.builtins.diagnostics.hlint,
                     -- require("null-ls").builtins.formatting.stylua,
                     -- require("null-ls").builtins.diagnostics.eslint,
                     -- require("null-ls").builtins.completion.spell,
