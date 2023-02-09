@@ -7,7 +7,7 @@ return {
                 sources = {
                     -- needs a luacheck in PATH
                     null.builtins.diagnostics.luacheck,
-                    null.builtins.diagnostics.hlint,
+                    -- null.builtins.diagnostics.hlint,
                     -- require("null-ls").builtins.formatting.stylua,
                     -- require("null-ls").builtins.diagnostics.eslint,
                     -- require("null-ls").builtins.completion.spell,
@@ -22,10 +22,12 @@ return {
 
     -- to cycle between different list/listchars configurations
     'teto/vim-listchars',
-    'chrisbra/csv.vim',
+    { 'chrisbra/csv.vim'
+    , lazy = true
+   },
     -- provides 'NvimTree'
-    'kyazdani42/nvim-tree.lua',
-    'rhysd/committia.vim',
+    { 'kyazdani42/nvim-tree.lua', lazy = true},
+    { 'rhysd/committia.vim', lazy = true},
     -- <leader>ml to setup buffer modeline
     -- 'teto/Modeliner', -- not needed with editorconfig ?
     {
@@ -139,6 +141,7 @@ return {
     -- competition to potamides/pantran.nvim which uses just AI backends it seems
     {
         'uga-rosa/translate.nvim',
+        lazy = true,
         config = function()
             require('translate').setup({
                 default = {

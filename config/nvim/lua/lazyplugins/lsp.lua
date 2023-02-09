@@ -82,6 +82,8 @@ return {
       -- default_on_attach(client, bufnr)  -- if defined, see nvim-lspconfig
      end,
      -- ...
+     -- replaces lspconfig.hls.setup
+     -- README says: Do not call the nvim-lspconfig.hls setup or set up the lsp manually, as doing so may cause conflicts.
      settings = { -- haskell-language-server options
       haskell = {
        -- Setting this to true could have a performance impact on large mono repos.
@@ -102,8 +104,8 @@ return {
          -- "config": {
          --	   "flags": []
          -- },
-         diagnosticsOn = false,
-         codeActionsOn = false,
+         diagnosticsOn = true,
+         codeActionsOn = true,
         },
        },
       },
