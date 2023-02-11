@@ -1,0 +1,6 @@
+jq -r '["Status","Value","Result"], (.result.difs[] | [.type,.entity,.result]) 
+# https://stackoverflow.com/questions/59551206/how-can-i-print-an-arbitrary-string-with-jq
+
+.[] | "Email address for user \(.first_name) \(.last_name) is \"\(.email)\""
+
+:Iron

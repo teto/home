@@ -1,1 +1,5 @@
 https://docs.datadoghq.com/getting_started/agent/
+
+configcheck
+status
+flare <TICKET>

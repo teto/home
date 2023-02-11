@@ -26,6 +26,7 @@ let
     gitAndTools.git-recent
     gitAndTools.gitbatch # to fetch form several repos at once
     gitAndTools.lab
+	inotify-tools # for inotify-wait notably
     jq # to run json queries
     lazygit # kinda like tig
     ncurses.dev # for infocmp
