@@ -51,7 +51,7 @@ in
       # Notification Daemon
       # Toggle control center
       keybindings = {
-        "$mod+Shift+n" = " exec ${pkgs.swaynotificationcenter}/bin/swaync-client -t -sw";
+        # "$mod+Shift+n" = " exec ${pkgs.swaynotificationcenter}/bin/swaync-client -t -sw";
         # clipman can be used too
         # clipman pick -t wofi
         # "${mod}+Ctrl+h" = lib.mkForce ''exec "${pkgs.clipman}/bin/clipman pick -t wofi'';
@@ -104,11 +104,11 @@ in
     slurp # capture tool
     # wf-recorder # for screencasts
     # bemenu as a dmenu replacement
-    waybar # just for testing
+    # waybar # just for testing
     wl-clipboard # wl-copy / wl-paste
     wdisplays # to show 
     wob # to display a progressbar
-    swaynotificationcenter # top cool
+    # swaynotificationcenter # top cool broken
     swaynag-battery # https://github.com/NixOS/nixpkgs/pull/175905
   ];
 

@@ -44,6 +44,8 @@
         identitiesOnly = true;
         identityFile = "~/.ssh/nova_key";
         host = "ovh3";
+		port = 12666;
+
         hostname = "ovh-hybrid-runner-3.devops.novadiscovery.net ";
         # extraOptions = {
         # to fix https://dammit.nl/ssh-unix-socket.html
