@@ -135,6 +135,8 @@ M.set_lsp_rclick_menu = function()
   { 'Show errors only', "<cmd>lua require'teto.lsp'.set_level(vim.diagnostic.severity.ERROR)<cr>" },
   { 'Toggle lsp lines', "<cmd>lua require('lsp_lines').toggle<cr>" },
   { 'Show all levels', "<cmd>lua require'teto.lsp'.set_level(vim.diagnostic.severity.HINTS)<cr>" },
+  -- 
+  { 'Apply all code actions', "<cmd>echo 'TODO'" },
   -- {'Toggle hints only', ''},
  }, M.buf_has_lsp)
 end

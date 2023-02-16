@@ -12,20 +12,45 @@ let
   notify-send = "${pkgs.libnotify}/bin/notify-send";
 
   # note that you can assign a workspace to a specific monitor !
-  bind_ws = workspace_id: fr: us:
+  bind_ws = layout: workspace_id: fr:
     let ws = builtins.toString workspace_id;
     in
     {
-      "$GroupFr+$mod+${fr}" = "workspace \"$w${ws}\"";
-      "$GroupUs+$mod+${us}" = "workspace \"$w${ws}\"";
-      "$GroupFr+Shift+$mod+${fr}" = ''move container to workspace "$w${ws}"'';
-      "$GroupUs+Shift+$mod+${us}" = ''move container to workspace "$w${ws}"'';
+      "$Group${layout}+$mod+${fr}" = ''workspace "''$${ws}"'';
+      # "$GroupUs+$mod+${us}" = "workspace \"$w${ws}\"";
+      "$Group${layout}+Shift+$mod+${fr}" = ''move container to workspace "''$${ws}"'';
+      # "$GroupUs+Shift+$mod+${us}" = ''move container to workspace "$w${ws}"'';
     };
+
   move_focused_wnd = dir: fr: us:
     {
       "$GroupFr+$mod+Shift+${fr}" = "move ${dir}";
       "$GroupUs+$mod+Shift+${us}" = "move ${dir}";
     };
+
+   wsAzertyBindings = {
+	 w1= "a" ;
+	 w2= "z" ;
+	 w3= "e" ;
+	 w4= "q" ;
+	 w5= "s" ;
+	 w6= "d" ;
+	 w7= "w" ;
+	 w8= "x" ;
+	 w9= "c" ;
+   };
+
+   wsQwertyBindings = {
+	 w1= "q" ;
+	 w2= "w" ;
+	 w3= "e" ;
+	 w4= "a" ;
+	 w5= "s" ;
+	 w6= "d" ;
+	 w7= "z" ;
+	 w8= "x" ;
+	 w9= "c" ;
+   };
 
   sharedKeybindings = {
     # The side buttons move the window around
@@ -115,21 +140,14 @@ let
     "$mod+Shift+Up" = "move up";
     "$mod+Shift+Right" = "move right";
 
-  }
-  // bind_ws 1 "a" "q"
-  // bind_ws 2 "z" "w"
-  // bind_ws 3 "e" "e"
-  // bind_ws 4 "q" "a"
-  // bind_ws 5 "s" "s"
-  // bind_ws 6 "d" "d"
-  // bind_ws 7 "w" "z"
-  // bind_ws 8 "x" "x"
-  // bind_ws 9 "c" "c"
-  // move_focused_wnd "left" "h" "h"
-  // move_focused_wnd "down" "j" "j"
-  // move_focused_wnd "up" "k" "k"
-  # semicolumn
-  // move_focused_wnd "right" "l" "l"
+   } 
+   // (lib.concatMapAttrs (bind_ws "Fr") wsAzertyBindings)
+   // (lib.concatMapAttrs (bind_ws "Us") wsQwertyBindings)
+   // move_focused_wnd "left" "h" "h"
+   // move_focused_wnd "down" "j" "j"
+   // move_focused_wnd "up" "k" "k"
+   # semicolumn
+   // move_focused_wnd "right" "l" "l"
     # just trying to overwrite previous bindings with i3dispatch
     # // lib.optionalAttrs (pkgs ? i3dispatch ) {
     # "${mod}+Left" = "exec ${pkgs.i3dispatch}/bin/i3dispatch left";
@@ -371,7 +389,9 @@ in
     };
     # statusCommand="${i3pystatus-custom}/bin/i3pystatus-python-interpreter $XDG_CONFIG_HOME/i3/myStatus.py";
 
-    extraConfig = sharedExtraConfig + ''
+	extraConfigEarly = sharedExtraConfig;
+
+    extraConfig =  ''
       default_floating_border pixel 2
     '';
   };

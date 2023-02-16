@@ -473,6 +473,14 @@ end
 local has_orgmode, orgmode = pcall(require, 'orgmode')
 if has_orgmode then
 	orgmode.setup_ts_grammar()
+	require('orgmode').setup{
+		org_capture_templates = {'~/nextcloud/org/*', '~/orgmode/**/*'},
+		org_default_notes_file = '~/orgmode/refile.org',
+		-- TODO add templates
+		org_agenda_templates = { t = { description = 'Task', template = '* TODO %?\n  %u' }  }
+	}
+
+
 end
 
 -- vim.g.sonokai_style = 'atlantis'
@@ -521,7 +529,8 @@ if has_sniprun then
 	vim.api.nvim_set_keymap('n', '<leader>ff', '<Plug>SnipRun', { silent = true })
 end
 
-vim.api.nvim_set_keymap('n', '<f3>', '<cmd>lua vim.treesitter.show_tree()<cr>', {})
+vim.api.nvim_set_keymap('n', '<f3>', '<cmd>lua require("nvim-treesitter.parsers").reset_cache(); vim.treesitter.show_tree()<cr>', {})
+vim.api.nvim_set_keymap('n', '<f5>', '<cmd>!make build', {})
 
 vim.g.indicator_errors = ''
 vim.g.indicator_warnings = ''

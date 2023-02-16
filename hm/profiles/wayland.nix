@@ -15,7 +15,7 @@
     #  wallutils  # to set wallpaper
     wl-clipboard # wl-copy / wl-paste
     wdisplays # to show 
-    wlogout # a logout menu
+    # wlogout # a logout menu
     # xdg-desktop-portal-wlr
     wob # to display a progressbar
   ];

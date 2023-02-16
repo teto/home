@@ -5,7 +5,7 @@
     enable = true;
     # kinda experimental
     # services.openssh.banner = "Hello world";
-    # ports = [ 12666 ];
+    ports = [ 12666 ];
 
     # # for sshfs edit or scp
     allowSFTP = true;

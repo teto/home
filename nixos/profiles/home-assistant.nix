@@ -15,10 +15,14 @@
 	  extraPackages = python3Packages: with python3Packages; [
 		psycopg2
 	  ];
+	  # look at https://www.home-assistant.io/integrations/
 	  extraComponents = [
-		"default_config"
-		"esphome"
-		"met"
+		# "default_config"
+		# "deconz" # interface for zigbee conbee II
+		# "esphome"
+		# "hue"
+		# "emulated_hue"
+		# "met"
 	  ];
 	};
 
@@ -48,6 +52,7 @@
 		   server_port = 8123;
 		};
 	  feedreader.urls = [
+	   "https://www.home-assistant.io/atom.xml"
 	   # "https://nixos.org/blogs.xml"
 	  ];
     };

@@ -9,6 +9,7 @@
     uid = 1000;
     extraGroups = [
       "audio" # for pulseaudio/pipewire
+      "dialout" # to access serial devices like the conbee II
       "docker" # to access docker socket
       "input" # for libinput-gestures
       "libvirtd" # for nixops

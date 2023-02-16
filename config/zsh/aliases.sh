@@ -11,14 +11,11 @@
 alias nvim-dev="nix develop --override-input nixpkgs /home/teto/nixpkgs --no-write-lock-file ./contrib#neovim-developer  --show-trace"
 # alias notif-center='kill -s USR1 $(pidof deadd-notification-center)'
 # --option extra-sandbox-paths "/bin/sh=$(readlink -f $(which bash))"
-alias local-rebuild="sudo nixos-rebuild --flake ~/home --override-input nixpkgs-teto /home/teto/nixpkgs --override-input hm /home/teto/hm --override-input nova /home/teto/nova/nova-nix --override-input mptcp-flake /home/teto/mptcp/mptcp-flake --no-write-lock-file switch --show-trace"
-# TODO
-# export BW_SESSION=$(bw unlock --raw)
+alias local-rebuild="nixos-rebuild --flake ~/home --override-input nixpkgs-teto /home/teto/nixpkgs --override-input hm /home/teto/hm --override-input nova /home/teto/nova/doctor --override-input mptcp-flake /home/teto/mptcp/mptcp-flake --no-write-lock-file switch --show-trace --use-remote-sudo"
 
 # Gitops quick
 alias mg='if [ -z ${BW_SESSION} ]; then export BW_SESSION=$(bw unlock --raw); fi && make gitops'
 alias bn='if [ -z ${BW_SESSION} ]; then export BW_SESSION=$(bw unlock --raw); fi && nix develop'
-# --command "novops lod -r "'
 
 # https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz
 # -f channel:nixos-unstable'
@@ -58,7 +55,6 @@ alias mp="mptcpanalyzer"
 alias nixos-fast="nixos-rebuild --no-build-nix --fast"
 
 
-
 # autres players a tester eventuellement
 # alias n="ncmpcpp"
 function n {
@@ -75,23 +71,26 @@ alias n3='nix develop --option builders "$RUNNER3" -j0'
 # TODO should use all runners
 alias nall='nix develop --option builders "$RUNNER3" -j0'
 alias ns="nix-shell"
+alias nr="nix run "
 alias nl="nix log "
 # alias lens="sudo rm -rf /home/teto/.config/Lens/extensions && lens"
 # alias ff="find . -iname" # use fd instead
-alias latest="ls -lt $@ |head"
+function latest {
+    # shellcheck disable=SC2012
+    ls -lt "$@" |head
+}
 
 #}}}
 
-alias servethis="nix run nixpkgs#python3 --command \'python -c 'import SimpleHTTPServer; SimpleHTTPServer.test()'\""
+# alias servethis="nix run nixpkgs#python3 --command \'python -c 'import SimpleHTTPServer; SimpleHTTPServer.test()'\""
 
 # ls related updates {{{
 # I also export TIME_STYLE to change the output of this
 alias ls="ls --color=auto --time-style=iso"
 alias ll="ls -l"
-alias la="ls -a"
-alias lla="ls -la"
+alias la="ls -la"
 # -r makes recent changes appear last, more practical
-alias llt="ls -ltr"
+# alias llt="ls -ltr"
 # }}}
 
 # oftenly used programs {{{
@@ -107,7 +106,7 @@ alias z="apvlv"
 alias q="qutebrowser"
 # }}}
 
-### compilation related {{{
+# compilation related {{{
 alias makej="make -j4"
 alias nm="nm -l"
 # }}}
