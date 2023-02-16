@@ -31,7 +31,7 @@ in
   imports = [
     ./hardware.nix
     ../config-all.nix
-    ../../nixos/profiles/openssh.nix
+    ./openssh.nix
     ../../nixos/profiles/router.nix
     # TODO use ${modulePath} instead
     # self.inputs.nixos-hardware.nixosModules.pcengines-apu 

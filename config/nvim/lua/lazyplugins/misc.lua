@@ -134,6 +134,13 @@ return {
  --         })
  --     end,
  -- },
+ {
+  "giusgad/pets.nvim",
+  dependencies = { "MunifTanjim/nui.nvim", "edluffy/hologram.nvim" },
+  config = function ()
+   require("pets").setup({})
+  end
+},
  { 'rhysd/git-messenger.vim', cmd = 'GitMessenger' }, -- to show git message :GitMessenger
  { 'tweekmonster/nvim-api-viewer', cmd = 'NvimAPI' },
  -- 'antoinemadec/openrgb.nvim',

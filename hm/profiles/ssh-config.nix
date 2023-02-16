@@ -1,3 +1,4 @@
+# TODO this should be fetched from the runners themselves !
 { config, pkgs, lib, secrets, ... }:
 {
   programs.ssh = {

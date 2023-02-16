@@ -42,8 +42,10 @@ in
       # RUNNER1=lib.mkRemoteBuilderDesc secrets.nova-runner-1;
       # RUNNER2=mkRemoteBuilderDesc secrets.nova-runner-2;
       # HISTFILE="$XDG_CACHE_HOME/bash_history";
+      RUNNER1 = mkRemoteBuilderDesc secrets.nova-runner-1;
       RUNNER2 = mkRemoteBuilderDesc secrets.nova-runner-2;
       RUNNER3 = mkRemoteBuilderDesc secrets.nova-runner-3;
+	  NOVA_CACHE = secrets.novaNixCache;
     };
     # "ignorespace"
     historyControl = [ ];
