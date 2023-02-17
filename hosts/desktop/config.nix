@@ -8,11 +8,11 @@
 
     ../config-all.nix
     ../desktop.nix
+    ./sshd.nix
     ../../nixos/profiles/nix-daemon.nix
     ../../nixos/profiles/experimental.nix
     ../../nixos/profiles/postgresql.nix
     ../../nixos/profiles/steam.nix
-    ../../nixos/profiles/openssh.nix
     ../../nixos/profiles/opensnitch.nix
     ../../nixos/profiles/gitlab-runner.nix
     ../../nixos/profiles/steam.nix
@@ -41,7 +41,6 @@
   ];
 
   # for testing
-  # 
   services.openssh = {
 
    # tu peux en avoir plusieurs sur ce mode

@@ -1,6 +1,6 @@
-{ config, pkgs, lib, ... } @ args:
+{ config, pkgs, lib, secrets, ... } @ args:
 let
-  secrets = import ../../nixpkgs/secrets.nix;
+  # secrets = import ../../nixpkgs/secrets.nix;
 
   mkRemoteBuilderDesc = machine:
     with lib;
@@ -42,10 +42,11 @@ in
       # RUNNER1=lib.mkRemoteBuilderDesc secrets.nova-runner-1;
       # RUNNER2=mkRemoteBuilderDesc secrets.nova-runner-2;
       # HISTFILE="$XDG_CACHE_HOME/bash_history";
-      RUNNER1 = mkRemoteBuilderDesc secrets.nova-runner-1;
-      RUNNER2 = mkRemoteBuilderDesc secrets.nova-runner-2;
-      RUNNER3 = mkRemoteBuilderDesc secrets.nova-runner-3;
-	  NOVA_CACHE = secrets.novaNixCache;
+      NOVA_RUNNER1 = mkRemoteBuilderDesc secrets.nova-runner-1;
+      NOVA_RUNNER2 = mkRemoteBuilderDesc secrets.nova-runner-2;
+      NOVA_RUNNER3 = mkRemoteBuilderDesc secrets.nova-runner-3;
+	  NOVA_CACHE_DEV  = secrets.novaNixCache.dev;
+	  NOVA_CACHE_PROD = secrets.novaNixCache.prod;
     };
     # "ignorespace"
     historyControl = [ ];

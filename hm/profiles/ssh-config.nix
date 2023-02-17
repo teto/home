@@ -23,25 +23,27 @@
       ovh1 = {
         # checkHostIP
         identityFile = "~/.ssh/nova_key";
-        # user = "nova";
+        user = "matthieu.coudron";
         host = "ovh1";
         hostname = "ovh-hybrid-runner-1.devops.novadiscovery.net";
         identitiesOnly = true;
         # experimental
         # https://github.com/nix-community/home-manager/pull/2992
         # match = "ovh1";
+		port = 12666;
       };
       ovh2 = {
         # identityFile = "~/.ssh/ci-infra-ec2-dev";
         identityFile = "~/.ssh/nova_key";
-        # user = "teto";
+        user = "matthieu.coudron";
         host = "ovh2";
         hostname = "ovh-hybrid-runner-2.devops.novadiscovery.net";
         identitiesOnly = true;
+		port = 12666;
       };
       ovh3 = {
         # identityFile = "~/.ssh/nova-infra-prod";
-        # user = "teto";
+        user = "matthieu.coudron";
         identitiesOnly = true;
         identityFile = "~/.ssh/nova_key";
         host = "ovh3";

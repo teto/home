@@ -1,6 +1,6 @@
-{ config, pkgs, lib, ... } @ args:
+{ config, pkgs, lib, secrets, ... } @ args:
 let
-  secrets = import ../../nixpkgs/secrets.nix;
+  # secrets = import ../../nixpkgs/secrets.nix;
 
   mkRemoteBuilderDesc = machine:
     with lib;
