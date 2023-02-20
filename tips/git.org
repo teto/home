@@ -25,3 +25,7 @@ git grep buildLayeredImage `git show-ref --heads`
 # bisect
 
 git bisect run ../test.sh
+
+
+# to change email
+git config user.email
