@@ -6,10 +6,10 @@ createuser owning_user
 
 
 As my own user:
-```
-psql
-psql: error: FATAL:  role "teto" does not exist
-```
+ #+BEGIN_SRC sh
+ psql
+ psql: error: FATAL:  role "teto" does not exist
+ #+END_SRC
 
 psql -U postgres -c 'SHOW config_file'
 
