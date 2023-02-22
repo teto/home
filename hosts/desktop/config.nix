@@ -276,7 +276,8 @@
   services.xserver = {
     videoDrivers = [
       "nvidia"
-      # "modesetting" "fbdev"
+	  "modesetting"
+	  "fbdev"
     ];
     displayManager.gdm.wayland = true;
   };

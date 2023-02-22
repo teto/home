@@ -28,7 +28,8 @@
 
   programs.gnome-shell.enable = true;
 
-  home.packages = [
+  home.packages = with pkgs; [
+	openlens # not in unstable yet 
     # deadd-notification-center
     # meli  # broken jmap mailreader
   ];

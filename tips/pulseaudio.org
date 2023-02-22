@@ -5,5 +5,7 @@ pw-cli info all
 pactl list sinks
 pw-cli s 41 Props '{ mute: false, channelVolumes: [ 0.8, 0.8 ] }'
 
-# Set default sink for new audio playback
-pactl set-default-sink "$NEW_DEFAULT_SINK"
+* Set default sink for new audio playback
+
+  pactl get-default-sink
+  pactl set-default-sink "$NEW_DEFAULT_SINK"

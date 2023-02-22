@@ -1,5 +1,15 @@
 `When you use an endpoint with no Region, AWS routes the Amazon EC2 request to US East (N. Virginia) (us-east-1), which is the default Region for API calls. `
 
+* Environment variables of interest
+
+  https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html
+  export AWS_PROFILE=
+  export AWS_ACCESS_KEY_ID=RoleAccessKeyID
+  export AWS_SECRET_ACCESS_KEY=RoleSecretKey
+  export AWS_SESSION_TOKEN=RoleSessionToken
+  unset AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY AWS_SESSION_TOKEN
+
+
 # s3 
 
 How to download files with a pattern
@@ -43,7 +53,7 @@ aws s3api list-objects-v2 --bucket "XXX" --query "Contents[?LastModified>='2021-
 https://docs.aws.amazon.com/fr_fr/AmazonElastiCache/latest/mem-ug/accessing-elasticache.html
 https://superuser.com/questions/457020/openvpn-only-route-a-specific-ip-addresses-through-vpn
 
-# roles
+* roles
 aws iam list-roles
 aws sts assume-role --role-arn "arn:aws:iam::419998656076:role/cirunner_dev_deploy" --profile nova-sandbox --role-session-name toto
 
