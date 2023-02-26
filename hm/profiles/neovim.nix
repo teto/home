@@ -145,15 +145,11 @@ let
     # #       -- -- , requires = { 'nvim-lua/popup.nvim' }
     #   optional = true;
     # })
-    (luaPlugin {
-      plugin = nvim-lua-gf;
-    })
-    (luaPlugin {
-      plugin = sniprun;
-    })
-    (luaPlugin {
-      plugin = urlview-nvim;
-    })
+
+	# not upstreamed yet
+    # (luaPlugin { plugin = nvim-lua-gf; })
+    (luaPlugin { plugin = sniprun; })
+    (luaPlugin { plugin = urlview-nvim; })
     (luaPlugin {
       plugin = trouble-nvim;
       config = ''
@@ -427,24 +423,24 @@ let
     # y a aussi vim-markdown
     # TODO package
     # astronauta
-    (luaPlugin {
-      # euclio/vim-markdown-composer
-      # https://github.com/euclio/vim-markdown-composer/issues/69#issuecomment-1103440076
-      # see https://github.com/euclio/vim-markdown-composer/commit/910fd4321b7f25fbab5fdf84e68222cbc226d8b1
-      # https://github.com/euclio/vim-markdown-composer/issues/69#event-6528328732
-      # ComposerUpdate / ComposerStart
-      # we can now set g:markdown_composer_binary
-      # " is that the correct plugin ?
-      # " let $NVIM_MKDP_LOG_LEVEL = 'debug'
-      # " let $VIM_MKDP_RPC_LOG_FILE = expand('~/mkdp-rpc-log.log')
-      # " let g:mkdp_browser = 'firefox'
-      plugin = vim-markdown-composer;
-      config = ''
-        -- use with :ComposerStart
-        vim.g.markdown_composer_autostart = 0
-        vim.g.markdown_composer_binary = '${vim-markdown-composer.vimMarkdownComposerBin}/bin/markdown-composer'
-      '';
-    })
+    # (luaPlugin {
+    #   # euclio/vim-markdown-composer
+    #   # https://github.com/euclio/vim-markdown-composer/issues/69#issuecomment-1103440076
+    #   # see https://github.com/euclio/vim-markdown-composer/commit/910fd4321b7f25fbab5fdf84e68222cbc226d8b1
+    #   # https://github.com/euclio/vim-markdown-composer/issues/69#event-6528328732
+    #   # ComposerUpdate / ComposerStart
+    #   # we can now set g:markdown_composer_binary
+    #   # " is that the correct plugin ?
+    #   # " let $NVIM_MKDP_LOG_LEVEL = 'debug'
+    #   # " let $VIM_MKDP_RPC_LOG_FILE = expand('~/mkdp-rpc-log.log')
+    #   # " let g:mkdp_browser = 'firefox'
+    #   plugin = vim-markdown-composer;
+    #   config = ''
+    #     -- use with :ComposerStart
+    #     vim.g.markdown_composer_autostart = 0
+    #     vim.g.markdown_composer_binary = '${vim-markdown-composer.vimMarkdownComposerBin}/bin/markdown-composer'
+    #   '';
+    # })
     # disabled because of https://github.com/rktjmp/lush.nvim/issues/89
     (luaPlugin { plugin = lush-nvim; })
     # (luaPlugin { plugin = gruvbox-nvim; }) 
@@ -879,7 +875,7 @@ in
     fennel.enable = false;
     teal.enable = true;
     orgmode.enable = true;
-    autocompletion.enable = true;
+    autocompletion.enable = false;
 
     # take the one from the flake
     package = myPackage;

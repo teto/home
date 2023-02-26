@@ -9,91 +9,94 @@ environment.profileRelativeSessionVariables =
 
 https://github.com/NixOS/nixpkgs/pull/185719
 
-maintainers/scripts/update.nix --argstr luarocks-nix
+  ** how to autoupdate one's script
 
-nix profile diff-closures --profile /nix/var/nix/profiles/system
-nix flake add mine /home/teto/nixpkgs
-nix print-dev-env --profile /path/to/profile/to/creat
-
---profile works with nix develop too
-
-https://gist.github.com/edolstra/40da6e3a4d4ee8fd019395365e0772e7
-
---no-net
-
-mount -o remount,rw /nix/store
-chown -R root:root /nix/store
-
-NIX_SSHOPTS to pass additional ssh flags to nix
-
-
-# builders
-nixpkgs-review pr 176375 --build-args="--substituters '' --option builders \"$RUNNER3\" "
-
-set "--post-build-hook true" to skip it.
-
-Limit bandwidth
- CURLOPT_MAX_RECV_SPEED_LARGE
-
-Remote builds: https://nixos.wiki/wiki/Distributed_build
-
-https://discourse.nixos.org/t/remote-builders-operation-addtostore-is-not-supported-by-store/2115/2
-env NIX_REMOTE='ssh-ng://my.machine?compress=true' nix-build
-
-find reverse dependencies
-nix-store --query --referrers $(which xdg-mime)
-
-Mention `--max-jobs 0` to build remotely only
-
-# how to iterate on nix repl ?
-```
-:a (import ./test.nix { inherit lib linkFarm;}) 
-:r 
-```
-
-CURL_TRACE 
-
-# human readable output of closure size
-nix path-info -Sh $(nix-build ./shell.nix -A inputDerivation)
-
-
-# Nix paths I keep forgetting
-- /nix/var/nix/profiles/default (nix-env root profile)
-
-# NixOS paths I keep forgetting
-- /nix/var/nix/profiles/system 
-- /run/current-system/sw/bin/
-- /var/run/booted-system
-
-# install haskell packages from certian version
-nix-shell -p haskell.packages.ghc865.stack
-
-
-# Get information about nix-shell
-
-# nix path-info -Ssh $(nix-build ./shell.nix -A inputDerivation)
-nix path-info -Sshr $(nix-build ./shell.nix -A inputDerivation) | sort -k3 -h | wc -l
-
-
-# maintainers scripts
-./maintainers/scripts/rebuild-amount.sh --print HEAD
-
-
-# remote builds 
-
-You need to be a trusted user:
-To select a builder you can run something akin to:
-`nix-build local-integration.nix -A osx.lb_database.build  -I nixpkgs=channel:nixos-18.03 --builders "root@spud x86_64-darwin /home/amine/.ssh/id_rsa 1 1 darwin-playground,LB,any,perf " --option cores 4`
-
-
-# how to reinstall the bootloader
-See https://www.reddit.com/r/NixOS/comments/ouxjzh/how_to_reinstall_bootloader/
-sudo NIXOS_INSTALL_BOOTLOADER=1 /nix/var/nix/profiles/system/bin/switch-to-configuration boot
-
-# how to regen the nixos doc:
-$  ./nixos/doc/manual/md-to-db.sh
-
-
-# nix shell 
-
-does not execute hooks !
+   nix-shell maintainers/scripts/update.nix --argstr path luarocks-nix
+   nix-shell maintainers/scripts/update.nix --arg maintainer teto
+ 
+ nix profile diff-closures --profile /nix/var/nix/profiles/system
+ nix flake add mine /home/teto/nixpkgs
+ nix print-dev-env --profile /path/to/profile/to/creat
+ 
+ --profile works with nix develop too
+ 
+ https://gist.github.com/edolstra/40da6e3a4d4ee8fd019395365e0772e7
+ 
+ --no-net
+ 
+ mount -o remount,rw /nix/store
+ chown -R root:root /nix/store
+ 
+ NIX_SSHOPTS to pass additional ssh flags to nix
+ 
+ 
+ # builders
+ nixpkgs-review pr 176375 --build-args="--substituters '' --option builders \"$NOVA_RUNNER3\" "
+ 
+ set "--post-build-hook true" to skip it.
+ 
+ Limit bandwidth
+  CURLOPT_MAX_RECV_SPEED_LARGE
+ 
+ Remote builds: https://nixos.wiki/wiki/Distributed_build
+ 
+ https://discourse.nixos.org/t/remote-builders-operation-addtostore-is-not-supported-by-store/2115/2
+ env NIX_REMOTE='ssh-ng://my.machine?compress=true' nix-build
+ 
+ find reverse dependencies
+ nix-store --query --referrers $(which xdg-mime)
+ 
+ Mention `--max-jobs 0` to build remotely only
+ 
+ # how to iterate on nix repl ?
+ ```
+ :a (import ./test.nix { inherit lib linkFarm;}) 
+ :r 
+ ```
+ 
+ CURL_TRACE 
+ 
+ # human readable output of closure size
+ nix path-info -Sh $(nix-build ./shell.nix -A inputDerivation)
+ 
+ 
+ # Nix paths I keep forgetting
+ - /nix/var/nix/profiles/default (nix-env root profile)
+ 
+ # NixOS paths I keep forgetting
+ - /nix/var/nix/profiles/system 
+ - /run/current-system/sw/bin/
+ - /var/run/booted-system
+ 
+ # install haskell packages from certian version
+ nix-shell -p haskell.packages.ghc865.stack
+ 
+ 
+ # Get information about nix-shell
+ 
+ # nix path-info -Ssh $(nix-build ./shell.nix -A inputDerivation)
+ nix path-info -Sshr $(nix-build ./shell.nix -A inputDerivation) | sort -k3 -h | wc -l
+ 
+ 
+ # maintainers scripts
+ ./maintainers/scripts/rebuild-amount.sh --print HEAD
+ 
+ 
+ # remote builds 
+ 
+ You need to be a trusted user:
+ To select a builder you can run something akin to:
+ `nix-build local-integration.nix -A osx.lb_database.build  -I nixpkgs=channel:nixos-18.03 --builders "root@spud x86_64-darwin /home/amine/.ssh/id_rsa 1 1 darwin-playground,LB,any,perf " --option cores 4`
+ 
+ 
+ # how to reinstall the bootloader
+ See https://www.reddit.com/r/NixOS/comments/ouxjzh/how_to_reinstall_bootloader/
+ sudo NIXOS_INSTALL_BOOTLOADER=1 /nix/var/nix/profiles/system/bin/switch-to-configuration boot
+ 
+ # how to regen the nixos doc:
+ $  ./nixos/doc/manual/md-to-db.sh
+ 
+ 
+ # nix shell 
+ 
+ does not execute hooks !

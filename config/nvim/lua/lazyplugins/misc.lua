@@ -34,6 +34,8 @@ return {
  -- { 'notomo/gesture.nvim' , opt = true; },
  -- 'anuvyklack/hydra.nvim', -- to create submodes
  -- "terrortylor/nvim-comment"
+ 'cameron-wags/rainbow_csv.nvim',
+ 'gennaro-tedesco/nvim-peekup',
  'rhysd/vim-gfm-syntax', -- markdown syntax compatible with Github's
  { 'eandrju/cellular-automaton.nvim', lazy = true }, -- :CellularAutomaton make_it_rain
  { 'bogado/file-line', branch = 'main' }, -- to open a file at a specific line

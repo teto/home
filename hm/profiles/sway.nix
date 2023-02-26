@@ -16,6 +16,7 @@ in
   # todo prepend sharedExtraConfig
   # xdg.configFile."sway/config" = 
 
+
   wayland.windowManager.sway = {
     # contrary to i3, use `sway reload` on sway
     enable = true;
@@ -25,17 +26,15 @@ in
       "--verbose"
       "--debug"
     ];
-
     # eventually start foot --server
-    # export GBM_BACKEND=nvidia-drm
-    # export GBM_BACKENDS_PATH=/etc/gbm
-    # 
+    # TODO we should wrap sway with that ?
     extraSessionCommands = ''
-            # needs qt5.qtwayland in systemPackages
-            export QT_QPA_PLATFORM=wayland
-      	  export GBM_BACKEND=nvidia-drm
-      	  export SDL_VIDEODRIVER=wayland
-            export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
+     # needs qt5.qtwayland in systemPackages
+	 export GBM_BACKENDS_PATH=/etc/gbm
+	 export QT_QPA_PLATFORM=wayland
+	 export GBM_BACKEND=nvidia-drm
+	 export SDL_VIDEODRIVER=wayland
+	 export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
     '';
 
     wrapperFeatures = { gtk = true; };

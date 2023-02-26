@@ -1,15 +1,8 @@
 { config, lib, pkgs, ... }:
-let
-  secrets = import ./secrets.nix;
-  # hopefully it can be generated as dirname <nixos-config>
-  configDir = /home/teto/dotfiles/nigpkgs;
-  userNixpkgs = /home/teto/nixpkgs;
-
-in
 {
   imports = [
     ./hardware-macbook.nix
-    ./desktop.nix
+    ../nixos/profiles/desktop.nix
     ./modules/docker-daemon.nix
     # ./modules/libvirtd.nix
 

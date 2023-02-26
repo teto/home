@@ -2,13 +2,13 @@
 {
   imports = [
     ./hardware.nix
+    ./sshd.nix
 
     # todo renommer en workstation
     ../../modules/docker-daemon.nix
 
     ../config-all.nix
-    ../desktop.nix
-    ./sshd.nix
+    ../../nixos/profiles/desktop.nix
     ../../nixos/profiles/nix-daemon.nix
     ../../nixos/profiles/experimental.nix
     ../../nixos/profiles/postgresql.nix
@@ -60,27 +60,6 @@
 	  }
    ];
 
-   # settings = {
-	 # AuthorizedKeysCommand = "true";
-	 # AuthorizedKeysCommandUser = "nobody";
-   # };
-
-   # > /nix/store/94paffh2ns62jjwfhf419hrcs2lalw8d-sshd.conf-validated line 5: no argument after keyword "ListenAddresses"
-   # > /nix/store/94paffh2ns62jjwfhf419hrcs2lalw8d-sshd.conf-validated line 33: keyword Port extra arguments at end of line
-   # settings.Port = [ 42 ];
-   # 
-   # AuthorizedKeysCommandUser
-   #     Specifies the user under whose account the AuthorizedKeysCommand is run.  It is recommended to  use  a  dedi‐
-   #     cated  user  that has no other role on the host than running authorized keys commands.  If AuthorizedKeysCom‐
-   #     mand is specified but AuthorizedKeysCommandUser is not, then sshd(8) will refuse to start.
-   # 	 Port 320
-	 # Port 42
-   extraConfig = ''
-	AuthorizedKeysFile %h/.ssh/authorized_keys %h/.ssh/authorized_keys2 /etc/ssh/authorized_keys.d/%ujjk
-	 AuthorizedKeysCommand none
-	 # La question est: est-ce que AuthorizedKeysCommandUser est utilise si 
-	 AuthorizedKeysCommandUser toto
-	'';
   };
 
   users.users.teto.packages = with pkgs; [
@@ -254,7 +233,10 @@
     # hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
     powerManagement.enable = false;
   };
-  # environment.etc."gbm/nvidia-drm_gbm.so".source = "${nvidiaPackage}/lib/libnvidia-allocator.so";
+    # https://discourse.nixos.org/t/nvidia-users-testers-requested-sway-on-nvidia-steam-on-wayland/15264/21?u=teto
+
+  # pkgs.linuxPackages_latest
+  environment.etc."gbm/nvidia-drm_gbm.so".source = "${pkgs.linuxPackages.nvidiaPackages.stable}/lib/libnvidia-allocator.so";
   # environment.etc."egl/egl_external_platform.d".source = "/run/opengl-driver/share/egl/egl_external_platform.d/";
 
   environment.variables = {
@@ -266,10 +248,10 @@
   };
 
   # config from https://discourse.nixos.org/t/nvidia-users-testers-requested-sway-on-nvidia-steam-on-wayland/15264/32
-  hardware.opengl.extraPackages = [
-    # vaapiVdpau
-    # libvdpau-va-gl
-    # libva
+  hardware.opengl.extraPackages = with pkgs; [
+    vaapiVdpau
+    libvdpau-va-gl
+    libva
   ];
   # security.sudo.wheelNeedsPassword = ;
   # disabled to run stable-diffusion

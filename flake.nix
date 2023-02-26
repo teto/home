@@ -51,6 +51,8 @@
     i3pystatus = { url = "github:teto/i3pystatus/nix_backend"; flake = false; };
     # nova.url = "git+ssh://git@git.novadiscovery.net/world/nova-nix.git?ref=master";
     nova.url = "git+ssh://git@git.novadiscovery.net/sys/doctor";
+	# c8296214151883ce27036be74d22d04953418cf4
+    nova-ci.url = "git+ssh://git@git.novadiscovery.net/infra/ci-runner?ref=fix-exposure";
     neovim = {
       url = "github:nojnhuh/neovim?dir=contrib&ref=lsp-watch-files";
       # url = "github:neovim/neovim?dir=contrib";
@@ -223,6 +225,7 @@
             inherit system;
             specialArgs = {
               inherit secrets;
+			  flakeInputs = self.inputs;
             };
 
             modules = [
@@ -414,6 +417,8 @@
         wayland = self.inputs.nixpkgs-wayland.overlay;
         mptcp = self.inputs.mptcp-flake.overlay;
         nur = nur.overlay;
+		nova-ci = self.inputs.nova-ci.overlays.default;
+
       }
       # just for one specific host
       // nova.overlays

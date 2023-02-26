@@ -61,7 +61,7 @@
 
     # "https://teto.cachix.org"
     settings = {
-      substituters = [
+      extra-substituters = [
         # "https://cache.nixos.org/" # part of the default
         "https://jupyterwith.cachix.org"
         # TODO move it to nova's ?

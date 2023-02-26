@@ -1,5 +1,12 @@
 # TODO this should be fetched from the runners themselves !
-{ config, pkgs, lib, secrets, ... }:
+{ config, pkgs, lib, secrets, 
+# flakeInputs,
+... }:
+
+let
+  # runners = flakeInputs.nova-ci.;
+
+in 
 {
   programs.ssh = {
 
@@ -7,7 +14,7 @@
 
     # can I have it per target ?
     # controlPath = "";
-    matchBlocks = {
+	matchBlocks = {
       jakku = {
         host = secrets.jakku.hostname;
         user = "teto";
@@ -46,10 +53,11 @@
         user = "matthieu.coudron";
         identitiesOnly = true;
         identityFile = "~/.ssh/nova_key";
-        host = "ovh3";
+        # host = "ovh3";
 		port = 12666;
+		match = "Host ovh-hybrid-runner-3.devops.novadiscovery.net";
 
-        hostname = "ovh-hybrid-runner-3.devops.novadiscovery.net ";
+        hostname = "ovh-hybrid-runner-3.devops.novadiscovery.net";
         # extraOptions = {
         # to fix https://dammit.nl/ssh-unix-socket.html
         # controlPath = "~/.ssh/control/%C";

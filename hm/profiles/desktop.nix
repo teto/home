@@ -17,6 +17,7 @@ let
     gdb
     editorconfig-core-c
     rbw
+	haxe
     exa # to list files
     gitAndTools.diff-so-fancy # todo install it via the git config instead
     gitAndTools.gh # github client
@@ -166,7 +167,7 @@ let
     # it's just that I can't setup latex correctly
     # unstable.libreoffice
 
-    qutebrowser # broken keyboard driven fantastic browser
+    # qutebrowser # broken keyboard driven fantastic browser
     gnome.nautilus # demande webkit/todo replace by nemo ?
     # shutter # screenshot utility
     # mcomix # manga reader

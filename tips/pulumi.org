@@ -1,3 +1,7 @@
+* enables logging 
+
+  pulumi uses the glog package for logging, which by default logs to files in /tmp.
+
 pulumi -C buildlib/infra-python up -s dev -y -v9 -d --logtostderr
 pulumi up --verbose 9 --logtostderr
 

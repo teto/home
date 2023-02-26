@@ -12,3 +12,17 @@ lua_modules_path = ""
 ```
 luarocks nix lush.nvim scm-1 --dev
 nix-prefetch-git --fetch-submodules --quiet https://github.com/teto/lush.nvim --branch-name rockspec
+
+
+* tips related to luarocks-tag-release
+
+  d'abord exporter
+  LUAROCKS_API_KEY
+  https://docs.github.com/en/actions/learn-github-actions/variables
+
+  GITHUB_REPOSITORY not set
+  GITHUB_SERVER_URL not set
+  # For example: https://github.com
+  GITHUB_SERVER_URL=https://github.com
+  GITHUB_REF_NAME="toto"
+  GITHUB_SHA

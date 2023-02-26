@@ -6,15 +6,16 @@
 {
 
   imports = [
-    ./config-all.nix
+    ../../hosts/config-all.nix
 
-    ../modules/ntp.nix
-    ../modules/network-manager.nix
-    ../modules/wireshark.nix
-    ../modules/wifi.nix
-    ../nixos/profiles/neovim.nix
-    ../nixos/profiles/pipewire.nix
-    ../nixos/profiles/sops.nix
+    ../../modules/ntp.nix
+    ../../modules/network-manager.nix
+    ../../modules/wireshark.nix
+    ../../modules/wifi.nix
+
+    ./neovim.nix
+    ./pipewire.nix
+    ./sops.nix
 
     # only if available
     # ./modules/jupyter.nix
@@ -47,8 +48,22 @@
   # allow-downgrade falls back when dnssec fails, "true" foces dnssec
   services.resolved.dnssec = "allow-downgrade";
 
-  # this is for gaming
-  hardware.opengl.driSupport32Bit = true;
+  hardware = {
+    # enableAllFirmware =true;
+    enableRedistributableFirmware = true;
+    sane.enable = true;
+    # High quality BT calls
+    bluetooth = {
+      enable = true;
+      powerOnBoot = false;
+      # hsphfpd.enable = false; # conflicts with pipewire
+    };
+    opengl = {
+      enable = true;
+      driSupport = true;
+      driSupport32Bit = true;
+    };
+  };
 
   # console.font = "Lat2-Terminus16";
   # console.keyMap = "fr";
@@ -166,7 +181,6 @@
   #   }
   # ];
 
-  # nixpkgs/modules/config-all.nix|262 col 15| environment.etc."inputrc".source = ../../config/inputrc;
   environment.etc."security/limits.conf".text = ''
     #[domain]        [type]  [item]  [value]
     teto  soft  core  unlimited
@@ -191,5 +205,15 @@
   users.users.teto = {
     shell = pkgs.zsh;
   };
+
+  system.activationScripts.report-nixos-changes = ''
+    PATH=$PATH:${lib.makeBinPath [ pkgs.nvd pkgs.nix ]}
+    nvd diff $(ls -dv /nix/var/nix/profiles/system-*-link | tail -2)
+  '';
+
+  system.activationScripts.report-home-manager-changes = ''
+    PATH=$PATH:${lib.makeBinPath [ pkgs.nvd pkgs.nix ]}
+    nvd diff $(ls -dv /nix/var/nix/profiles/per-user/teto/home-manager-*-link | tail -2)
+  '';
 
 }

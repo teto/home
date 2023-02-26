@@ -38,12 +38,17 @@
     # };
   };
 
-  programs.ssh.matchBlocks.janssen = {
-    user = "janssen";
-    port = 2207;
-    identityFile = "~/.ssh/nova_key";
-    hostname = "data.novinfra.net";
-  };
+  # fetched from the nova ci-runner overlay
+  # remove the runnerName part
+  programs.ssh.matchBlocks = pkgs.novaRunnerSshConfigs;
+  # programs.ssh.matchBlocks = pkgs.sshConfigs ;
+
+  # programs.ssh.matchBlocks.janssen = {
+  #   user = "janssen";
+  #   port = 2207;
+  #   identityFile = "~/.ssh/nova_key";
+  #   hostname = "data.novinfra.net";
+  # };
 
   home.packages = [
     # pkgs.aws-sam-cli  # BROKEN  for sam lambda

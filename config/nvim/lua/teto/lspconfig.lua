@@ -37,7 +37,7 @@ lspconfig.util.default_config = vim.tbl_extend('force', lspconfig.util.default_c
 
 lspconfig.bashls.setup({})
 
-lspconfig.sumneko_lua.setup({
+lspconfig.lua_ls.setup({
     cmd = { 'lua-language-server' },
     settings = {
         Lua = {
