@@ -65,8 +65,8 @@ in
 
       sscwl = "nix run .#simwork.core-webservice.local -- --bypass-manifest-check -vv";
       n = "nix develop";
-      nhs92 = "nix develop \$PWD/home#nhs92";
-      nhs94 = "nix develop \$PWD/home#nhs94";
+      nhs92 = "nix develop $HOME/home#nhs92";
+      nhs94 = "nix develop $HOME/home#nhs94";
       ns = "nix-shell";
       lg = "lazygit";
       #mostly for testin

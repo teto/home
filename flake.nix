@@ -40,6 +40,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+	pulumi-fork = { url = "github:teto/pulumi/nix-node-sdk"; flake = false;};
     nix.url = "github:NixOS/nix";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nur.url = "github:nix-community/NUR";
@@ -85,6 +86,14 @@
           overlays = (pkgs.lib.attrValues self.overlays) ++ [
             self.inputs.rofi-hoogle.overlay
             # self.inputs.nix.overlays.default
+			# temporary overlay to work around pulumi error
+			(final: prev: {
+
+			  pulumi = prev.pulumi.overrideAttrs(oa: {
+				src = self.inputs.pulumi-fork;
+			  });
+
+			})
           ];
           config = { allowUnfree = true; };
         };

@@ -2,11 +2,6 @@
 { config, pkgs, lib, secrets, 
 # flakeInputs,
 ... }:
-
-let
-  # runners = flakeInputs.nova-ci.;
-
-in 
 {
   programs.ssh = {
 
@@ -27,42 +22,46 @@ in
         user = "matthieu.coudron";
         identityFile = "~/.ssh/nova_key";
       };
-      ovh1 = {
-        # checkHostIP
-        identityFile = "~/.ssh/nova_key";
-        user = "matthieu.coudron";
-        host = "ovh1";
-        hostname = "ovh-hybrid-runner-1.devops.novadiscovery.net";
-        identitiesOnly = true;
-        # experimental
-        # https://github.com/nix-community/home-manager/pull/2992
-        # match = "ovh1";
-		port = 12666;
-      };
-      ovh2 = {
-        # identityFile = "~/.ssh/ci-infra-ec2-dev";
-        identityFile = "~/.ssh/nova_key";
-        user = "matthieu.coudron";
-        host = "ovh2";
-        hostname = "ovh-hybrid-runner-2.devops.novadiscovery.net";
-        identitiesOnly = true;
-		port = 12666;
-      };
-      ovh3 = {
-        # identityFile = "~/.ssh/nova-infra-prod";
-        user = "matthieu.coudron";
-        identitiesOnly = true;
-        identityFile = "~/.ssh/nova_key";
-        # host = "ovh3";
-		port = 12666;
-		match = "Host ovh-hybrid-runner-3.devops.novadiscovery.net";
 
-        hostname = "ovh-hybrid-runner-3.devops.novadiscovery.net";
-        # extraOptions = {
-        # to fix https://dammit.nl/ssh-unix-socket.html
-        # controlPath = "~/.ssh/control/%C";
-        # };
-      };
+      # ovh1 = {
+      #   # checkHostIP
+      #   identityFile = "~/.ssh/nova_key";
+      #   user = "matthieu.coudron";
+      #   host = "ovh1";
+      #   hostname = "ovh-hybrid-runner-1.devops.novadiscovery.net";
+      #   identitiesOnly = true;
+      #   # experimental
+      #   # https://github.com/nix-community/home-manager/pull/2992
+      #   # match = "ovh1";
+		# port = 12666;
+      # };
+
+      # ovh2 = {
+      #   # identityFile = "~/.ssh/ci-infra-ec2-dev";
+      #   identityFile = "~/.ssh/nova_key";
+      #   user = "matthieu.coudron";
+      #   host = "ovh2";
+      #   hostname = "ovh-hybrid-runner-2.devops.novadiscovery.net";
+      #   identitiesOnly = true;
+		# port = 12666;
+      # };
+
+      # ovh3 = {
+      #   # identityFile = "~/.ssh/nova-infra-prod";
+      #   user = "matthieu.coudron";
+      #   identitiesOnly = true;
+      #   identityFile = "~/.ssh/nova_key";
+      #   # host = "ovh3";
+		# port = 12666;
+		# match = "Host ovh-hybrid-runner-3.devops.novadiscovery.net";
+
+      #   hostname = "ovh-hybrid-runner-3.devops.novadiscovery.net";
+      #   # extraOptions = {
+      #   # to fix https://dammit.nl/ssh-unix-socket.html
+      #   # controlPath = "~/.ssh/control/%C";
+      #   # };
+      # };
+
       gitlab = {
         host = "gitlab.devops.novadiscovery.net";
         user = "ubuntu";
