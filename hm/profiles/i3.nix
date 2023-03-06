@@ -217,8 +217,15 @@ let
   ;
 in
 {
-  # see https://discourse.nixos.org/t/opening-i3-from-home-manager-automatically/4849/7
+  home.sessionVariables = {
+    # JUPYTER_CONFIG_DIR=
 
+    # this variable is used by i3-sensible-terminal to determine the basic terminal
+	# so define it only in i3 ?
+    TERMINAL = "kitty";
+  };
+
+  # see https://discourse.nixos.org/t/opening-i3-from-home-manager-automatically/4849/7
   xsession.windowManager.i3 = {
     # keep it enabled to generate the config
     enable = true;

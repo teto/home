@@ -3,6 +3,7 @@
 
 
   home.packages = with pkgs; [
+	jq
     eva # calculette in a REPL
     dasht # ~ zeal but in terminal
     visidata # "vd", spreadsheet in terminal

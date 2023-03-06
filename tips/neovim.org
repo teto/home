@@ -1,5 +1,18 @@
 #+TITLE: neovim.org
 
+nvim -V3 to see terminal
+
+# prettyprint json
+%!jq '.'
+
+* debug haskell-tools.nvim
+
+  lua require('haskell-tools').start_or_attach({  tools = { log = { level = vim.log.levels.DEBUG }}})
+
+* dump the full rtp
+
+  i_ctrl-R then `=&rtp` and you are done !
+
 * How to control plenary plugins log level
 
 plenary.log works as:
@@ -41,11 +54,12 @@ dump ast with
 
 
 
+
 * how to search and replace across files
 
-#+BEGIN_SRC lua
-print('Test')
-#+END_SRC
+  #+BEGIN_SRC lua
+  print('Test')
+  #+END_SRC
 
 `grepprg=rg --vimgrep --no-heading `
 

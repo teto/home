@@ -10,8 +10,7 @@ return {
             'nvim-telescope/telescope-symbols.nvim',
             'nvim-telescope/telescope-fzy-native.nvim',
             'nvim-telescope/telescope-media-files.nvim',
-            'nvim-telescope/telescope-packer.nvim', -- :Telescope pack,e
-            'MrcJkb/telescope-manix', -- :Telescope manix
+            -- 'MrcJkb/telescope-manix', -- :Telescope manix
             'luc-tielen/telescope_hoogle',
             -- psiska/telescope-hoogle.nvim looks less advanced
         },

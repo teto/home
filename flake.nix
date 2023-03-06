@@ -40,7 +40,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-	pulumi-fork = { url = "github:teto/pulumi/nix-node-sdk"; flake = false;};
     nix.url = "github:NixOS/nix";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nur.url = "github:nix-community/NUR";
@@ -55,8 +54,8 @@
 	# c8296214151883ce27036be74d22d04953418cf4
     nova-ci.url = "git+ssh://git@git.novadiscovery.net/infra/ci-runner?ref=fix-exposure";
     neovim = {
-      url = "github:nojnhuh/neovim?dir=contrib&ref=lsp-watch-files";
-      # url = "github:neovim/neovim?dir=contrib";
+      # url = "github:nojnhuh/neovim?dir=contrib&ref=lsp-watch-files";
+      url = "github:neovim/neovim?dir=contrib";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     sops-nix.url = "github:Mic92/sops-nix";
@@ -87,13 +86,13 @@
             self.inputs.rofi-hoogle.overlay
             # self.inputs.nix.overlays.default
 			# temporary overlay to work around pulumi error
-			(final: prev: {
+			# (final: prev: {
 
-			  pulumi = prev.pulumi.overrideAttrs(oa: {
-				src = self.inputs.pulumi-fork;
-			  });
+			#   pulumi = prev.pulumi.overrideAttrs(oa: {
+			# 	src = self.inputs.pulumi-fork;
+			#   });
 
-			})
+			# })
           ];
           config = { allowUnfree = true; };
         };

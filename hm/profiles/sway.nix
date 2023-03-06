@@ -111,7 +111,7 @@ in
     swaynag-battery # https://github.com/NixOS/nixpkgs/pull/175905
   ];
 
-  programs.mako = {
+  services.mako = {
     enable = true;
     defaultTimeout = 4000;
     ignoreTimeout = false;

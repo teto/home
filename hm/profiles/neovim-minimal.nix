@@ -2,7 +2,7 @@
 
 {
   programs.neovim = {
-    enable = true;
+    enable = false;
     vimAlias = true;
     plugins = with pkgs.vimPlugins; [
       sensible

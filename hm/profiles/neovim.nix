@@ -48,23 +48,23 @@ let
   );
 
 
-  parserDir = pkgs.tree-sitter.withPlugins (tree-sitter-grammars-fn);
+  # parserDir = pkgs.tree-sitter.withPlugins (tree-sitter-grammars-fn);
 
-  # TODO this should be done automatically
-  tree-sitter-grammars-fn = p: with p; [
-    tree-sitter-bash
-    tree-sitter-c
-    tree-sitter-lua
-    tree-sitter-query
-    # tree-sitter-http
-    tree-sitter-json
-    tree-sitter-nix
-    # tree-sitter-haskell # crashes with a loop
-    # tree-sitter-python
-    # tree-sitter-html # for rest.nvim
-    # tree-sitter-norg
-    # tree-sitter-org-nvim
-  ];
+  # # TODO this should be done automatically
+  # tree-sitter-grammars-fn = p: with p; [
+  #   tree-sitter-bash
+  #   tree-sitter-c
+  #   tree-sitter-lua
+  #   tree-sitter-query
+  #   # tree-sitter-http
+  #   tree-sitter-json
+  #   tree-sitter-nix
+  #   # tree-sitter-haskell # crashes with a loop
+  #   # tree-sitter-python
+  #   # tree-sitter-html # for rest.nvim
+  #   # tree-sitter-norg
+  #   # tree-sitter-org-nvim
+  # ];
 
 
   # " , { 'tag': 'v3.12.0' }
@@ -77,24 +77,26 @@ let
     { plugin = vim-toml; }
     { plugin = dhall-vim; }
     { plugin = vim-teal; }
+    moonscript-vim
     idris-vim
   ];
 
-  treesitterPlugins = with pkgs.vimPlugins; [
-    {
+  treesitterPlugins = # with pkgs.vimPlugins; [
+   [
       # for :TSPlaygroundToggle
-      plugin = playground;
-    }
-    {
-
-      plugin = parserDir;
-    }
+    # { plugin = playground; }
+    # { plugin = parserDir; }
+    # (luaPlugin {
+    # plugin = nvim-gps;
+    #   config = ''
+    #   require("nvim-gps").setup()
+    #   '';
+    # })
+    # (luaPlugin { plugin = nvim-treesitter-context; })
   ];
 
   luaPlugins = with pkgs.vimPlugins; [
-    {
-      plugin = b64-nvim;
-    }
+    { plugin = b64-nvim; }
     # (luaPlugin {
     #   plugin = nvim-lspconfig;
     #   config = let nodePkgs = pkgs.nodePackages; in ''
@@ -203,13 +205,7 @@ let
         "ftplugin/c.vim".text = "setlocal omnifunc=v:lua.vim.lsp.omnifunc";
       };
     })
-    {
-      plugin = auto-git-diff;
-    }
-    # {
-    # # should be autoinstalled via deps really
-    #   plugin = plenary-nvim;
-    # }
+    { plugin = auto-git-diff; }
 
     (luaPlugin {
       plugin = gitsigns-nvim;
@@ -308,7 +304,6 @@ let
     })
 
     vim-lion # Use with gl/L<text object><character to align to 
-    moonscript-vim
 
     (luaPlugin {
       plugin = nvim-spectre;
@@ -317,20 +312,9 @@ let
       '';
     })
 
-    # (luaPlugin {
-    # plugin = nvim-gps;
-    #   config = ''
-    #   require("nvim-gps").setup()
-    #   '';
-    # })
-    # (luaPlugin {
-    # plugin = nvim-treesitter-context;
-    # })
-
-
-    { plugin = vim-dadbod; }
-    { plugin = vim-dadbod-completion; }
-    { plugin = vim-dadbod-ui; }
+    # { plugin = vim-dadbod; }
+    # { plugin = vim-dadbod-completion; }
+    # { plugin = vim-dadbod-ui; }
 
     (luaPlugin {
       # run with :Diffview
@@ -349,6 +333,8 @@ let
       '';
     })
     (luaPlugin { plugin = fugitive-gitlab-vim; })
+    # (luaPlugin { plugin = haskell-tools-nvim; })
+    (luaPlugin { plugin = telescope-manix; })
 
     {
       plugin = registers-nvim;
@@ -381,8 +367,6 @@ let
         vim.g.nvimdev_auto_lint = 1
         vim.g.nvimdev_build_readonly = 1
         --}}}'';
-
-
     })
   ];
 
@@ -574,14 +558,14 @@ let
       # matches nvim-orgmode
       plugin = orgmode;
 
-      config = ''
-        require('orgmode').setup_ts_grammar()
-        require('orgmode').setup{
-            org_capture_templates = {'~/nextcloud/org/*', '~/orgmode/**/*'},
-            org_default_notes_file = '~/orgmode/refile.org',
-            -- TODO add templates
-            org_agenda_templates = { t = { description = 'Task', template = '* TODO %?\n  %u' } },
-        }'';
+      # config = ''
+      #   require('orgmode').setup_ts_grammar()
+      #   require('orgmode').setup{
+      #       org_capture_templates = {'~/nextcloud/org/*', '~/orgmode/**/*'},
+      #       org_default_notes_file = '~/orgmode/refile.org',
+      #       -- TODO add templates
+      #       org_agenda_templates = { t = { description = 'Task', template = '* TODO %?\n  %u' } },
+      #   }'';
     })
     (luaPlugin {
       plugin = SchemaStore-nvim;
@@ -589,8 +573,7 @@ let
       #  '';
     })
 
-    {
-      # use ctrl a/xto cycle between different words
+    { # use ctrl a/xto cycle between different words
       plugin = vim-CtrlXA;
     }
     # { plugin = jbyuki/venn.nvim; }
@@ -648,17 +631,8 @@ let
     {
       plugin = vim-fugitive;
     }
-    # {
-    # plugin = vim-signature;
-    # config = ''
-    # let g:SignatureMarkTextHLDynamic=0
-    # let g:SignatureEnabledAtStartup=1
-    # let g:SignatureWrapJumps=1
-    # let g:SignatureDeleteConfirmation=1
-    # let g:SignaturePeriodicRefresh=1
-    # '';
-    # }
 
+	# TODO to replace
     (luaPlugin {
       plugin = vim-startify;
       # cool stuff is that it autostarts sessions
@@ -912,7 +886,6 @@ in
       lua53Packages.teal-language-server
       lua51Packages.luacheck
       haskellPackages.hasktags
-      jq
       manix
       nodePackages.vscode-langservers-extracted
       nodePackages.bash-language-server

@@ -2,17 +2,18 @@ return {
 
     'Matsuuu/pinkmare',
     'flrnd/candid.vim',
-    {
-      'NvChad/nvim-colorizer.lua',
-        config = function ()
-            require('colorizer').setup()
-        end
-    },
+    'uga-rosa/ccc.nvim',
+    -- {
+    --   'NvChad/nvim-colorizer.lua',
+    --     config = function ()
+    --         require('colorizer').setup()
+    --     end
+    -- },
     -- 'whatyouhide/vim-gotham'
     'adlawson/vim-sorcerer',
     -- use 'npxbr/gruvbox.nvim' " requires lus
     'vim-scripts/Solarized',
-    {'kevinhwang91/nvim-ufo', dependencies = 'kevinhwang91/promise-async'},
+    {'kevinhwang91/nvim-ufo', dependencies = {'kevinhwang91/promise-async'}},
     'romainl/flattened',
     { 'protex/better-digraphs.nvim', lazy=true },
     'NLKNguyen/papercolor-theme',
@@ -20,7 +21,7 @@ return {
     'shaunsingh/oxocarbon.nvim',
     {
         'rose-pine/neovim',
-        as = 'rose-pine',
+        name = 'rose-pine',
         -- tag = 'v1.*',
         -- config = function()
         -- end
@@ -164,54 +165,4 @@ return {
     --     end,
     -- })
 
-    -- quickui {{{
-    -- https://github.com/skywind3000/vim-quickui
-    -- TODO should be printed only if available
-    -- vim.g.quickui_border_style = 1
-    -- content = {
-    --             \ ['LSP -'],
-    --             \ ["Goto &Definition\t\\cd", 'lua vim.lsp.buf.definition()'],
-    --             \ ["Goto &Declaration\t\\cd", 'lua vim.lsp.buf.declaration()'],
-    --             \ ["Goto I&mplementation\t\\cd", 'lua vim.lsp.buf.implementation()'],
-    --             \ ["Hover\t\\ch", 'lua vim.lsp.buf.references()'],
-    --             \ ["Search &References\t\\cr", 'lua vim.lsp.buf.references()'],
-    --             \ ["Document  &Symbols\t\\cr", 'lua vim.lsp.buf.document_symbol()'],
-    --             \ ["Format", 'lua vim.lsp.buf.formatting_sync(nil, 1000)'],
-    --             \ ["&Execute  Command\\ce", 'lua vim.lsp.buf.execute_command()'],
-    --             \ ["&Incoming calls\\ci", 'lua vim.lsp.buf.incoming_calls()'],
-    --             \ ["&Outgoing calls\\ci", 'lua vim.lsp.buf.outgoing_calls()'],
-    --             \ ["&Signature help\\ci", 'lua vim.lsp.buf.signature_help()'],
-    --             \ ["&Workspace symbol\\cw", 'lua vim.lsp.buf.workspace_symbol()'],
-    --             \ ["&Rename\\cw", 'lua vim.lsp.buf.rename()'],
-    --             \ ["&Code action\\cw", 'lua vim.lsp.buf.code_action()'],
-    --             \ ['- Diagnostic '],
-    --             \ ['Display in QF', 'lua vim.diagnostic.setqflist({open = true, severity = { min = vim.diagnostic.severity.WARN } })'],
-    -- 	    \ ['Set severity to warning', 'lua vim.diagnostic.config({virtual_text = { severity = { min = vim.diagnostic.severity.WARN } }})'],
-    -- 	    \ ['Set severity to all', 'lua vim.diagnostic.config({virtual_text = { severity = nil }})'],
-    --             \ ['- Misc '],
-    --             \ ['Toggle indentlines', 'IndentBlanklineToggle!'],
-    --             \ ['Start search and replace', 'lua require("spectre").open()'],
-    --             \ ['Toggle obsession', 'Obsession'],
-    --             \ ['Toggle minimap', 'MinimapToggle'],
-    --             \ ['Toggle biscuits', 'lua require("nvim-biscuits").toggle_biscuits()'],
-    --             \ ['REPL - '],
-    --             \ ['Send line ', 'lua require''luadev''.exec(vim.api.nvim_get_current_line())'],
-    --             \ ['Send selection ', 'call <SID>luadev_run_operator(v:true)'],
-    -- 	    \ ['DAP -'],
-    -- 	    \ ['Add breakpoint', 'lua require"dap".toggle_breakpoint()'],
-    -- 	    \ ["Continue", 'lua require"dap".continue()'],
-    -- 	    \ ['Open REPL', 'lua require"dap".repl.open()']
-    --             \ }
-
-    -- " formatting_sync
-    -- " set cursor to the last position
-    -- let quick_opts = {'index':g:quickui#context#cursor}
-
-    -- " TODO map to lua create_menu()
-    -- map <RightMouse>  <Cmd>call quickui#context#open(content, quick_opts)<CR>
-    -- vim.keymap.set('n',  '<RightMouse>', '<Cmd>lua open_contextual_menu()<CR>' )
-
-    -- " can't click on it plus it disappears
-    -- " map <RightMouse>  <Cmd>lua create_menu()<CR>
-    -- }}}
 }

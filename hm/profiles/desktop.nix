@@ -152,12 +152,9 @@ let
     ]
   ;
 
-  home.sessionVariables = {
-    # JUPYTER_CONFIG_DIR=
-
-    # this variable is used by i3-sensible-terminal to determine the basic terminal
-    TERMINAL = "kitty";
-  };
+  # home.sessionVariables = {
+  #   # JUPYTER_CONFIG_DIR=
+  # };
 
   # the kind of packages u don't want to compile
   # TODO les prendres depuis un channel avec des binaires ?
@@ -204,6 +201,7 @@ in
     ++ [
       # pkgs.up # live preview of pipes
       pkgs.peek # GIF recorder
+	  pkgs.alsa-utils #  for alsamixer
 
       pkgs.cachix  # almot always broken
     ]
@@ -211,7 +209,7 @@ in
 
   home.sessionPath = [
     "$XDG_DATA_HOME/../bin"
-    "/home/teto/.cache/cabal/bin"
+    # "/home/teto/.cache/cabal/bin"
   ];
 
   # tray is enabled by default

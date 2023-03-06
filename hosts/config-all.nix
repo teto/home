@@ -189,6 +189,7 @@ rec {
         "sublimetext3"
         "vscode"
         "vscode-extension-ms-vsliveshare-vsliveshare"
+        "xmind"
         "zoom"
       ];
     };

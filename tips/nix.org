@@ -1,6 +1,7 @@
 #+title: nix tips
 
 * How to interpret the progress bar ?
+
   See https://github.com/nixos/nix/issues/3352
 
 # about flakes

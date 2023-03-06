@@ -36,21 +36,34 @@ require('lazy').setup('lazyplugins', {
 	lockfile = vim.fn.stdpath('cache') .. '/lazy-lock.json',
 	dev = {
 		-- directory where you store your local plugin projects
-		path = '~/neovim',
+		path = '/home/teto/neovim',
 		---@type string[] plugins that match these patterns will use your local versions instead of being fetched from GitHub
 		patterns = {}, -- For example {"folke"}
 	},
 	performance = {
 		cache = {
+			-- try ?
 			enabled = false,
 		},
+		-- we install some packages via nix so we want to load from packpath too
 		reset_packpath = false,
 		rtp = {
 			reset = false,
-			-- paths = { '/nix/store/8znlrk8mz6824718b3gp9n90wg42any7-vim-pack-dir' },
+          paths = {}, -- add any custom paths here that you want to includes in the rtp
+          disabled_plugins = {
+            -- "gzip",
+            -- "matchit",
+            "matchparen",
+            -- "netrwPlugin",
+            "tarPlugin",
+            "tohtml",
+            "tutor",
+            "zipPlugin",
+          },
 		},
 	},
 })
+
 -- main config {{{
 -- vim.opt.splitbelow = true	-- on horizontal splits
 vim.opt.splitright = true -- on vertical split

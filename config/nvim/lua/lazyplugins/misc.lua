@@ -111,9 +111,10 @@ return {
  { 'bfredl/nvim-luadev', cmd = 'Luadev' },
  {
   'AckslD/nvim-FeMaco.lua',
-  config = function()
-   require('femaco').setup()
-  end,
+  name = 'femaco',
+  -- config = function()
+  --  require('femaco').setup()
+  -- end,
  },
  -- for quickreading: use :FSToggle to Toggle flow state
  -- {'nullchilly/fsread.nvim', config = function ()

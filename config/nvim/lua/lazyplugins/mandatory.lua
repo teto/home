@@ -22,9 +22,7 @@ return {
 
     -- to cycle between different list/listchars configurations
     'teto/vim-listchars',
-    { 'chrisbra/csv.vim'
-    , lazy = true
-   },
+    { 'chrisbra/csv.vim' , lazy = true },
     -- provides 'NvimTree'
     { 'kyazdani42/nvim-tree.lua', lazy = true},
     { 'rhysd/committia.vim', lazy = true},
@@ -90,11 +88,11 @@ return {
             })
         end,
     },
-    { 'akinsho/bufferline.nvim', requires = 'kyazdani42/nvim-web-devicons' },
+    { 'akinsho/bufferline.nvim', dependencies = 'kyazdani42/nvim-web-devicons' },
 
     {
         'nvim-lualine/lualine.nvim', -- fork of hoob3rt/lualine
-        requires = { 'arkav/lualine-lsp-progress' },
+        dependencies = { 'arkav/lualine-lsp-progress' },
         config = function()
             require('teto.lualine')
         end,
