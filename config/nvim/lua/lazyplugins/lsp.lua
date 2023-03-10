@@ -140,9 +140,9 @@ return {
    require("lsp_lines").setup()
   end
  },
- -- { 'fidget.nvim',
- --  config = function ()
- --   require"fidget".setup{}
- --  end
- -- }
+ { 'j-hui/fidget.nvim',
+  config = function ()
+   require"fidget".setup{}
+  end
+ }
 }
