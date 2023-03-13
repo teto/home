@@ -1,0 +1,2 @@
+* hack on ghc
+  Use "nix run "
