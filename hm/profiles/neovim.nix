@@ -886,7 +886,7 @@ in
       lua53Packages.teal-language-server
       lua51Packages.luacheck
       haskellPackages.hasktags
-      manix
+      manix # should be no need, telescope-manix should take care of it
       nodePackages.vscode-langservers-extracted
       nodePackages.bash-language-server
       nodePackages.dockerfile-language-server-nodejs # broken

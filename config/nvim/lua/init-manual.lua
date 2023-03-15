@@ -497,7 +497,8 @@ if has_orgmode then
 end
 
 -- vim.g.sonokai_style = 'atlantis'
-vim.cmd([[colorscheme sonokai]])
+-- vim.cmd([[colorscheme sonokai]])
+vim.cmd([[colorscheme rose-pine]])
 -- vim.cmd([[colorscheme janah]])
 -- vim.cmd([[colorscheme pywal]])
 local has_sniprun, sniprun = pcall(require, 'sniprun')

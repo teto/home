@@ -127,7 +127,7 @@ return {
             -- telescope.load_extension("notify")
             telescope.load_extension('hoogle')
             -- telescope.load_extension('frecency')
-            telescope.load_extension('manix')
+            -- telescope.load_extension('manix')
             -- telescope.load_extension('scout')
 
             -- TODO add autocmd

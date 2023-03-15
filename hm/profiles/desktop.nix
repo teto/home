@@ -34,7 +34,7 @@ let
     neovide
     # neovim-remote # broken for latex etc
     # nix-doc # to access nix doc (broken)
-    manix
+    # manix
     nix-output-monitor
     nix-update # nix-update <ATTR> to update a software
     nix-index # to list package contents
