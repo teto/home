@@ -73,7 +73,18 @@ lspconfig.lua_ls.setup({
 
 lspconfig.dhall_lsp_server.setup({})
 lspconfig.dockerls.setup({})
-lspconfig.yamlls.setup({})
+
+lspconfig.yamlls.setup({
+  -- cmd = { 'yaml-language-server', '--stdio' },
+--   on_attach = lsp.on_attach,
+--   capabilities = lsp.capabilities,
+  settings = {
+    yaml = {
+      schemas = require('schemastore').yaml.schemas(),
+    },
+  },
+-- }
+})
 
 -- you can configure pyright via a pyrightconfig.json too
 -- https://github.com/microsoft/pyright/blob/cf1a5790d2105ac60dd3378a46725519d14b2844/docs/configuration.md

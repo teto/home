@@ -12,6 +12,10 @@
   #     neovim.to = { type = "github"; owner = "neovim"; repo="neovim?dir=contrib"; };
   #   };
   # };
+
+
+  services.batsignal.enable = true;
+
   programs.ranger = {
     enable = true;
     # plugins = [];
