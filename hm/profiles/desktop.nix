@@ -46,6 +46,7 @@ let
     rpl # to replace strings across files
     universal-ctags # there are many different ctags, be careful !
     tio # serial console reader
+	viu # a console image viewer
     wine
   ]
   ++ lib.optionals all [

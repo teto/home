@@ -365,7 +365,7 @@ in
   };
 
   programs.astroid = {
-    enable = true;
+    enable = false;
     # TODO factor with my mbsyncwrapper ?
     pollScript = ''
       check-mail.sh gmail

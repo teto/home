@@ -1,0 +1,285 @@
+#!/bin/sh
+#
+# Copyright (C) 2021  Miroslav Lichvar <mlichvar0@gmail.com>
+#
+# SPDX-License-Identifier: GPL-2.0-or-later
+
+export LC_ALL=C
+
+get_channel() {
+	case "$1" in
+		2412) echo "1";;
+		2417) echo "2";;
+		2422) echo "3";;
+		2427) echo "4";;
+		2432) echo "5";;
+		2437) echo "6";;
+		2442) echo "7";;
+		2447) echo "8";;
+		2452) echo "9";;
+		2457) echo "10";;
+		2462) echo "11";;
+		2467) echo "12";;
+		2472) echo "13";;
+		2484) echo "14";;
+
+		5180) echo "36";;
+		5200) echo "40";;
+		5220) echo "44";;
+		5240) echo "48";;
+		5260) echo "52";;
+		5280) echo "56";;
+		5300) echo "60";;
+		5320) echo "64";;
+		5340) echo "68";;
+		5500) echo "100";;
+		5520) echo "104";;
+		5540) echo "108";;
+		5560) echo "112";;
+		5580) echo "116";;
+		5600) echo "120";;
+		5620) echo "124";;
+		5640) echo "128";;
+		5660) echo "132";;
+		5680) echo "136";;
+		5700) echo "140";;
+		5720) echo "144";;
+		5745) echo "149";;
+		5765) echo "153";;
+		5785) echo "157";;
+		5805) echo "161";;
+		5825) echo "165";;
+		5845) echo "169";;
+		5865) echo "173";;
+		5885) echo "177";;
+		
+		*) echo "0";
+	esac
+}
+
+get_channel_set() {
+	s=$1
+	case "$s" in
+		1@NOHT|1@HT20) echo "-1 0 1 2 3";;
+		2@NOHT|2@HT20) echo "0 1 2 3 4";;
+		3@NOHT|3@HT20) echo "1 2 3 4 5";;
+		4@NOHT|4@HT20) echo "2 3 4 5 6";;
+		5@NOHT|5@HT20) echo "3 4 5 6 7";;
+		6@NOHT|6@HT20) echo "4 5 6 7 8";;
+		7@NOHT|7@HT20) echo "5 6 7 8 9";;
+		8@NOHT|8@HT20) echo "6 7 8 9 10";;
+		9@NOHT|9@HT20) echo "7 8 9 10 11";;
+		10@NOHT|10@HT20) echo "8 9 10 11 12";;
+		11@NOHT|11@HT20) echo "9 10 11 12 13";;
+		12@NOHT|12@HT20) echo "10 11 12 13 14";;
+		13@NOHT|13@HT20) echo "11 12 13 14 15";;
+		14@NOHT|14@HT20) echo "12 13 14 15 16";;
+
+		1@HT40+|5@HT40-) echo "-1 0 1 2 3 4 5 6 7";;
+		2@HT40+|6@HT40-) echo "0 1 2 3 4 5 6 7 8";;
+		3@HT40+|7@HT40-) echo "1 2 3 4 5 6 7 8 9";;
+		4@HT40+|8@HT40-) echo "2 3 4 5 6 7 8 9 10";;
+		5@HT40+|9@HT40-) echo "3 4 5 6 7 8 9 10 11";;
+		6@HT40+|10@HT40-) echo "4 5 6 7 8 9 10 11 12";;
+		7@HT40+|11@HT40-) echo "5 6 7 8 9 10 11 12 13";;
+		8@HT40+|12@HT40-) echo "6 7 8 9 10 11 12 13 14";;
+		9@HT40+|13@HT40-) echo "7 8 9 10 11 12 13 14 15 ";;
+		10@HT40+|14@HT40-) echo "8 9 10 11 12 13 14 15 16";;
+
+		36@*HT40|40@*HT40) echo "36 40";;
+		44@*HT40|48@*HT40) echo "44 48";;
+		52@*HT40|56@*HT40) echo "52 56";;
+		60@*HT40|64@*HT40) echo "60 64";;
+		100@*HT40|104@*HT40) echo "100 104";;
+		108@*HT40|112@*HT40) echo "108 112";;
+		116@*HT40|120@*HT40) echo "116 120";;
+		124@*HT40|128@*HT40) echo "124 128";;
+		132@*HT40|136@*HT40) echo "132 136";;
+		140@*HT40|144@*HT40) echo "140 144";;
+		149@*HT40|153@*HT40) echo "149 153";;
+		157@*HT40|161@*HT40) echo "157 161";;
+		165@*HT40|169@*HT40) echo "165 169";;
+		173@*HT40|177@*HT40) echo "173 177";;
+
+		*@NOHT) echo "${s%@NOHT}";;
+		*@*HT20) echo "${s%@*HT20}";;
+
+		36@VHT80|40@VHT80|44@VHT80|48@VHT80) echo "36 40 44 48";;
+		52@VHT80|56@VHT80|60@VHT80|64@VHT80) echo "52 56 60 64";;
+		100@VHT80|104@VHT80|108@VHT80|112@VHT80) echo "100 104 108 112";;
+		116@VHT80|120@VHT80|124@VHT80|128@VHT80) echo "116 120 124 128";;
+		132@VHT80|136@VHT80|140@VHT80|144@VHT80) echo "132 136 140 144";;
+		149@VHT80|153@VHT80|157@VHT80|161@VHT80) echo "149 153 157 161";;
+		165@VHT80|169@VHT80|173@VHT80|177@VHT80) echo "165 169 173 177";;
+
+
+		36@VHT160|40@VHT160|44@VHT160|48@VHT160|52@VHT160|56@VHT160|60@VHT160|64@VHT160)
+			echo "36 40 44 48 52 56 60 64";;
+		100@VHT160|104@VHT160|108@VHT160|112@VHT160|116@VHT160|120@VHT160|124@VHT160|128@VHT160)
+			echo "100 104 108 112 116 120 124 128";;
+		149@VHT160|153@VHT160|157@VHT160|161@VHT160|165@VHT160|169@VHT160|173@VHT160|177@VHT160)
+			echo "149 153 157 161 165 169 173 177";;
+
+	esac
+}
+
+process_entry() {
+	w=20
+	m=NOHT
+	ch=$(get_channel "$freq")
+
+	if [ "$freq" -lt 3000 ]; then
+		if [ "$ht" = "1" ]; then
+			case "$ht_secoff" in
+				no\ secondary) w=20; m=HT20;;
+				above) w=40; m=HT40+;;
+				below) w=40; m=HT40-;;
+			esac
+		fi
+	else
+		if [ "$vht" = "1" ]; then
+			case "$vht_width" in
+				0\ *)
+					if [ "$vht_center1" -eq 0 ]; then
+						w=20; m=VHT20
+					else
+						w=40; m=VHT40
+					fi
+					;;
+				1\ *)
+					if [ "$vht_center2" -eq 0 ]; then
+						w=80; m=VHT80
+					else
+						#TODO
+						ch=0
+					fi
+					;;
+				2\ *)
+					w=160; m=VHT160
+					;;
+			esac
+		elif [ "$ht" = 1 ]; then
+			case "$ht_secoff" in
+				no\ secondary) w=20; m=HT20;;
+				above|below) w=40; m=HT40;;
+			esac
+		fi
+	fi
+
+	chset=$(get_channel_set "$ch@$m")
+
+	printf "%+03.0f,%s,%s,%d,%d,%s,%s\n" \
+		"$signal" "$bss" "$m" "$w" "$ch" "$chset" "$ssid" 
+
+	bss=""; ssid=""; signal=""; freq=""
+	ht=""; ht_secoff=""
+	vht=""; vht_width=""; vht_center1=""; vht_center2=""
+}
+
+parse_scan() {
+	echo "$1" | (
+		while IFS="	:" read -r token1 token2; do
+			case "$token1" in
+				BSS\ ??)
+					[ -n "$bss" ] && process_entry
+					bss=${token1#* }:${token2%(*}
+					;;
+				SSID)
+					ssid=${token2# }
+					;;
+				signal)
+					signal=${token2# }
+					signal=${signal% dBm}
+					;;
+				freq)
+					freq=${token2# }
+					;;
+				HT\ operation)
+					ht=1
+					;;
+				\ \*\ secondary\ channel\ offset)
+					ht_secoff=${token2# }
+					;;
+				VHT\ operation)
+					vht=1
+					;;
+				\ \*\ channel\ width)
+					vht_width=${token2# }
+					;;
+				\ \*\ center\ freq\ segment\ 1)
+					vht_center1=${token2# }
+					;;
+				\ \*\ center\ freq\ segment\ 2)
+					vht_center2=${token2# }
+					;;
+
+			esac
+		done
+		[ -n "$bss" ] && process_entry
+	)
+}
+
+sort_by_dbm() {
+	echo "$1" | sort
+}
+
+get_channel_map() {
+	set=" $1 "
+	map=""
+
+	for ch in $(seq -- -1 16); do
+		[ "${set#* $ch }" != "$set" ] && map="$map*" || map="$map "
+	done
+	map="$map|"
+	for ch in $(seq 36 4 64); do
+		[ "${set#* $ch }" != "$set" ] && map="$map*" || map="$map "
+	done
+	map="$map|"
+	for ch in $(seq 100 4 144); do
+		[ "${set#* $ch }" != "$set" ] && map="$map*" || map="$map "
+	done
+	map="$map|"
+	for ch in $(seq 149 4 177); do
+		[ "${set#* $ch }" != "$set" ] && map="$map*" || map="$map "
+	done
+
+	echo "|$map|"
+}
+
+print_csv() {
+	printf "%15.15s %3s %3s %3s %s\n" "SSID" "Ch" "Bw" "dBm" \
+		"   1    6    11     36  52  100 116 132  149 165"
+	printf "%15.15s %3s %3s %3s %s\n" "" "" "" "" \
+		"   .    .    .      .   .    .   .   .    .   ."  
+
+	echo "$1" | while IFS=, read -r signal bss _ width chan chset ssid; do
+		printf "%15.15s %3s %3d %3d %s\n" \
+			"$ssid" "$chan" "$width" "$signal" \
+			"$(get_channel_map "$chset")"
+	done
+}
+
+if [ $# -lt 1 ]; then
+	echo "Usage: $0 [DEVICE|-]"
+	exit 1
+fi
+
+dev=$1
+
+if [ "$dev" = "-" ]; then
+	scan=$(cat)
+else
+	scan=$(iw dev "$dev" scan)
+fi
+
+csv=$(parse_scan "$scan")
+csv=$(sort_by_dbm "$csv")
+
+#echo "$csv"
+
+if [ -z "$csv" ]; then
+	echo "No data"
+	exit 1
+fi
+
+print_csv "$csv"
