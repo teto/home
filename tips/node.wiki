@@ -2,3 +2,9 @@
 
 npm init
 
+dans le REPL, import ne fonctionne qu'en fonction:
+
+Pour debug un software:
+node --inspect-brk <CMD>
+
+open websocket via for instance in chrome about//inspect (or sthg alike)

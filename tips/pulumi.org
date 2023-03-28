@@ -34,3 +34,6 @@ Pulumi async:
 https://www.leebriggs.co.uk/blog/2021/05/09/pulumi-apply
  
   pulumi config get redisPassword
+
+
+  pulumi expects javascript, not typescript

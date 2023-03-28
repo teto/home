@@ -5,7 +5,6 @@
     enable = true;
 
     # Enable the (deprecated) media-session session manager instead of wireplumber
-    media-session.enable = false;
     wireplumber.enable = true;
 
     # Disable everything that causes pipewire to interact with alsa devices

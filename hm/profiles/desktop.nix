@@ -97,7 +97,7 @@ let
       # requires xdmcp https://github.com/freedesktop/libXdmcp
       # smplayer # GUI around mpv
       # todo try sthg else
-      # unstable.evince # succeed where zathura/mupdf fail
+      evince # succeed where zathura/mupdf fail
       # unstable.transmission_gtk  # bittorrent client
       # vimiv # image viewer
 	  usbutils

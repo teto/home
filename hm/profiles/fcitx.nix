@@ -1,7 +1,4 @@
-{ config, pkgs, lib, ... } @ args:
-let
-  secrets = import ./secrets.nix;
-in
+{ pkgs, ... }:
 {
 
   i18n.inputMethod = {
