@@ -1,0 +1,6 @@
+
+https://playwright.dev/docs/browsers
+DEBUG=* playwright test  init/init.test.ts
+
+PLAYWRIGHT_BROWSERS_PATH must have same version
+

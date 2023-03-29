@@ -67,6 +67,7 @@ in
       n = "nix develop";
       nhs92 = "nix develop $HOME/home#nhs92";
       nhs94 = "nix develop $HOME/home#nhs94";
+      nhs96 = "nix develop $HOME/home#nhs96";
       ns = "nix-shell";
       lg = "lazygit";
       #mostly for testin

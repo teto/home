@@ -878,9 +878,6 @@ in
     #   vim.lsp.set_log_level("info")
     # '';
 
-    # TODO use lua from 
-
-    # TODO add lsp stuff
     extraPackages = with pkgs; [
       # luaPackages.lua-lsp
       lua53Packages.teal-language-server

@@ -1,0 +1,4 @@
+coimpiler is called "tsc"
+
+https://github.com/Microsoft/TypeScript/issues/8760
+can be called with --traceResolution

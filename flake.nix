@@ -72,7 +72,7 @@
     # };
   };
 
-  outputs = { self, hm, nixpkgs, flake-utils, treefmt-nix, nur, unstable, nova, deploy-rs, ... }:
+  outputs = { self, hm, nixpkgs, flake-utils, treefmt-nix, nur, nova, deploy-rs, ... }:
     let
       inherit (builtins) listToAttrs baseNameOf;
       # inherit (nixpkgsFinal.lib) removeSuffix;
@@ -158,7 +158,7 @@
               ];
             };
 
-            inherit (nixpkgsFinal) nhs92 nhs94;
+            inherit (nixpkgsFinal) nhs92 nhs94 nhs96;
           };
 
           packages = {
@@ -180,7 +180,7 @@
             aws-lambda-rie = nixpkgsFinal.callPackage ./pkgs/aws-lambda-runtime-interface-emulator { };
 
             inherit (nixpkgsFinal) i3pystatus-custom;
-            inherit (nixpkgsFinal) nhs92 nhs94;
+            inherit (nixpkgsFinal) nhs92 nhs94 nhs96;
 
           };
         }) // {
