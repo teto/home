@@ -40,7 +40,7 @@
 
   # fetched from the nova ci-runner overlay
   # remove the runnerName part
-  programs.ssh.matchBlocks = pkgs.novaRunnerSshConfigs;
+  # programs.ssh.matchBlocks = pkgs.novaRunnerSshConfigs;
   # programs.ssh.matchBlocks = pkgs.sshConfigs ;
 
   # programs.ssh.matchBlocks.janssen = {

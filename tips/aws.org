@@ -1,58 +1,58 @@
 `When you use an endpoint with no Region, AWS routes the Amazon EC2 request to US East (N. Virginia) (us-east-1), which is the default Region for API calls. `
 
-* Environment variables of interest
+** Environment variables of interest
+ 
+   https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html
+   export AWS_PROFILE=
+   export AWS_ACCESS_KEY_ID=RoleAccessKeyID
+   export AWS_SECRET_ACCESS_KEY=RoleSecretKey
+   export AWS_SESSION_TOKEN=RoleSessionToken
+   unset AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY AWS_SESSION_TOKEN
+   export AWS_SHARED_CREDENTIALS_FILE
+ 
+ # s3 
+ 
+ How to download files with a pattern
+ https://stackoverflow.com/questions/38834708/how-can-i-use-wildcards-to-cp-a-group-of-files-with-the-aws-cli
+ e.g. `aws s3 cp s3://data/ . --recursive --exclude "*" --include "2016-08*"`
+ 
+ 
+ aws --debug
+ --endpoint-url
 
-  https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html
-  export AWS_PROFILE=
-  export AWS_ACCESS_KEY_ID=RoleAccessKeyID
-  export AWS_SECRET_ACCESS_KEY=RoleSecretKey
-  export AWS_SESSION_TOKEN=RoleSessionToken
-  unset AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY AWS_SESSION_TOKEN
-
-
-# s3 
-
-How to download files with a pattern
-https://stackoverflow.com/questions/38834708/how-can-i-use-wildcards-to-cp-a-group-of-files-with-the-aws-cli
-e.g. `aws s3 cp s3://data/ . --recursive --exclude "*" --include "2016-08*"`
-
-
-aws --debug
---endpoint-url
-
-s3.eu-central-1.amazonaws.com
-
-`aws --profile=nix-daemon s3 ls`
-
-
-aws sts get-caller-identity
-
-aws s3api get-bucket-location --profile jinko-dev --bucket jinko-dev-shared
-
-# https://docs.aws.amazon.com/eks/latest/userguide/create-kubeconfig.html
-aws eks update-kubeconfig --name jinko-prod
-
-
-# Lambda
-aws lambda list-functions --query '[Functions[].[FunctionName,FunctionArn]]'
-
-Unable to decode Context from event response.
-
-
-# URL lists
-
-
-Region -> Url
-Paris => https://s3.eu-west-3.amazonaws.com
-Frankfurt => s3-eu-central-1.amazonaws.com
-
-aws s3api list-objects-v2 --bucket "XXX" --query "Contents[?LastModified>='2021-10-01'].{Key: Key}" --output text --profile nova-devops| xargs -n1 -P10 -t -I 'KEY' aws s3 rm s3://devops-xxx/'KEY' --profile nova-devops
-
-
-# openvpn configuration
-https://docs.aws.amazon.com/fr_fr/AmazonElastiCache/latest/mem-ug/accessing-elasticache.html
-https://superuser.com/questions/457020/openvpn-only-route-a-specific-ip-addresses-through-vpn
-
+ s3.eu-central-1.amazonaws.com
+ 
+ `aws --profile=nix-daemon s3 ls`
+ 
+ 
+ aws sts get-caller-identity
+ 
+ aws s3api get-bucket-location --profile jinko-dev --bucket jinko-dev-shared
+ 
+ # https://docs.aws.amazon.com/eks/latest/userguide/create-kubeconfig.html
+ aws eks update-kubeconfig --name jinko-prod
+ 
+ 
+ # Lambda
+ aws lambda list-functions --query '[Functions[].[FunctionName,FunctionArn]]'
+ 
+ Unable to decode Context from event response.
+ 
+ 
+ # URL lists
+ 
+ 
+ Region -> Url
+ Paris => https://s3.eu-west-3.amazonaws.com
+ Frankfurt => s3-eu-central-1.amazonaws.com
+ 
+ aws s3api list-objects-v2 --bucket "XXX" --query "Contents[?LastModified>='2021-10-01'].{Key: Key}" --output text --profile nova-devops| xargs -n1 -P10 -t -I 'KEY' aws s3 rm s3://devops-xxx/'KEY' --profile nova-devops
+ 
+ 
+ # openvpn configuration
+ https://docs.aws.amazon.com/fr_fr/AmazonElastiCache/latest/mem-ug/accessing-elasticache.html
+ https://superuser.com/questions/457020/openvpn-only-route-a-specific-ip-addresses-through-vpn
+ 
 * roles
 aws iam list-roles
 aws sts assume-role --role-arn "arn:aws:iam::419998656076:role/cirunner_dev_deploy" --profile nova-sandbox --role-session-name toto

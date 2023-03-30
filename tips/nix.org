@@ -1,5 +1,17 @@
 #+title: nix tips
 
+* how to package npm packages ?
+
+  https://github.com/nix-community/dream2nix
+  https://github.com/nix-community/npmlock2nix
+  https://github.com/serokell/nix-npm-buildpackage
+
+
+  With nix-npm-build-package, if you hit:
+  "cache mode is 'only-if-cached' but no cached response available"
+  check https://github.com/serokell/nix-npm-buildpackage/issues/58
+
+
 * How to interpret the progress bar ?
 
   See https://github.com/nixos/nix/issues/3352
