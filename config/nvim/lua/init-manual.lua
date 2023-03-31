@@ -221,6 +221,23 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	end
 })
 
+function string:endswith(ending)
+    return ending == "" or self:sub(-#ending) == ending
+end
+
+vim.api.nvim_create_autocmd("BufRead", {
+	desc = "Disable syntax on big files",
+	callback = function(args)
+		-- print("autocmd BufRead cb", args.file)
+		if args.file:endswith("pkgs/development/haskell-modules/hackage-packages.nix") then
+			print("autocmd BufRead cb", args.file)
+			print("DISABLING syntax")
+			vim.cmd([[setlocal syntax=off]])
+		end
+
+	end
+})
+
 -- fugitive-gitlab {{{
 -- also add our token for private repos
 vim.g.fugitive_gitlab_domains = { 'https://git.novadiscovery.net' }

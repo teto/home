@@ -16,6 +16,7 @@ let
       in
       [
         ghcEnv
+		# ghc
         final.pkg-config
       ];
   };

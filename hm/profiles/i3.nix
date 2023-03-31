@@ -155,6 +155,10 @@ let
     # "${mod}+Down" = "exec ${pkgs.i3dispatch}/bin/i3dispatch down";
     # "${mod}+Up" = "exec ${pkgs.i3dispatch}/bin/i3dispatch up";
     # }
+	# # The middle button over a titlebar kills the window
+	# bindsym --release button2 kill
+
+
   ;
 
   # config shared between i3 and sway
@@ -192,9 +196,6 @@ let
         # Mod4 => window key
         set $mad Super_L
         # Mod4
-
-        # The middle button over a titlebar kills the window
-        bindsym --release button2 kill
 
         for_window [title="Thunderbird$"] title_format " %title"
 
