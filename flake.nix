@@ -79,10 +79,10 @@
       secrets = import ./nixpkgs/secrets.nix;
       system = "x86_64-linux";
 
-      pkgImport = pkgs:
-        import pkgs {
+      pkgImport = src:
+        import src {
           inherit system;
-          overlays = (pkgs.lib.attrValues self.overlays) ++ [
+          overlays = (src.lib.attrValues self.overlays) ++ [
             self.inputs.rofi-hoogle.overlay
             # self.inputs.nix.overlays.default
 			# temporary overlay to work around pulumi error

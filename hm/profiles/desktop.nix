@@ -204,7 +204,7 @@ in
       pkgs.peek # GIF recorder
 	  pkgs.alsa-utils #  for alsamixer
 
-      pkgs.cachix  # almot always broken
+      # pkgs.cachix  # almost always broken
     ]
   ;
 
