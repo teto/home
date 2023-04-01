@@ -130,6 +130,7 @@ let
           # tree-sitter-norg
           # tree-sitter-org-nvim
           tree-sitter-query
+          tree-sitter-just
         ]
       ));
       # see https://github.com/NixOS/nixpkgs/issues/189838#issuecomment-1250993635 for rationale

@@ -249,9 +249,9 @@
 
   # config from https://discourse.nixos.org/t/nvidia-users-testers-requested-sway-on-nvidia-steam-on-wayland/15264/32
   hardware.opengl.extraPackages = with pkgs; [
-    vaapiVdpau
+    # vaapiVdpau
     libvdpau-va-gl
-    libva
+    # libva
   ];
   # security.sudo.wheelNeedsPassword = ;
   # disabled to run stable-diffusion
