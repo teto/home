@@ -238,6 +238,12 @@
   # pkgs.linuxPackages_latest
   environment.etc."gbm/nvidia-drm_gbm.so".source = "${pkgs.linuxPackages.nvidiaPackages.stable}/lib/libnvidia-allocator.so";
   # environment.etc."egl/egl_external_platform.d".source = "/run/opengl-driver/share/egl/egl_external_platform.d/";
+  # /alsa-base.conf
+  environment.etc."modprobe.d/alsa.conf".text = ''
+   # we want nvidia to get index 1 see 
+   # https://wiki.archlinux.org/title/Advanced_Linux_Sound_Architecture#Set_the_default_sound_card
+   options snd_hda_intel index=1
+  '';
 
   environment.variables = {
     WLR_NO_HARDWARE_CURSORS = "1";

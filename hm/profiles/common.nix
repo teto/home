@@ -64,7 +64,7 @@
   # home.file.".stack/config.yaml".source = ../home/stack.yaml;
 
   # TODO use 22.11
-  home.stateVersion = "21.11";
+  home.stateVersion = "22.11";
 
   # - https://github.com/carnager/rofi-scripts.git
   # https://github.com/carnager/buku_run

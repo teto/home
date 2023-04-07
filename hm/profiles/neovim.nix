@@ -153,6 +153,7 @@ let
     # (luaPlugin { plugin = nvim-lua-gf; })
     (luaPlugin { plugin = sniprun; })
     (luaPlugin { plugin = urlview-nvim; })
+    (luaPlugin { plugin = nvim-web-devicons; })
     (luaPlugin {
       plugin = trouble-nvim;
       config = ''
@@ -638,42 +639,41 @@ let
       plugin = vim-fugitive;
     }
 
-	# TODO to replace
-    (luaPlugin {
-      plugin = vim-startify;
-      # cool stuff is that it autostarts sessions
-      # TODO
-      config = ''
-        vim.cmd [[
-        let g:startify_use_env = 0
-        let g:startify_disable_at_vimenter = 0
-        let g:startify_lists = [
-              \ { 'header': ['   MRU '.getcwd() ], 'type': 'dir'},
-              \ { 'header': ['   MRU' ],           'type': 'files'} ,
-              \ { 'header': ['   Bookmarks' ],     'type': 'bookmarks' },
-              \ { 'header': ['   Sessions'  ],      'type': 'sessions' }
-              \ ]
-        let g:startify_bookmarks = [
-              \ {'i': $XDG_CONFIG_HOME.'/i3/config.main'},
-              \ {'h': $XDG_CONFIG_HOME.'/nixpkgs/home.nix'},
-              \ {'c': 'dotfiles/nixpkgs/configuration.nix'},
-              \ {'z': $XDG_CONFIG_HOME.'/zsh/'},
-              \ {'m': $XDG_CONFIG_HOME.'/mptcpanalyzer/config'},
-              \ {'n': $XDG_CONFIG_HOME.'/nvim/config'},
-              \ {'N': $XDG_CONFIG_HOME.'/ncmpcpp/config'},
-              \ ]
-              " \ {'q': $XDG_CONFIG_HOME.'/qutebrowser/qutebrowser.conf'},
-        let g:startify_files_number = 10
-        let g:startify_session_autoload = 1
-        let g:startify_session_persistence = 0
-        let g:startify_change_to_vcs_root = 0
-        let g:startify_session_savevars = []
-        let g:startify_session_delete_buffers = 1
-        let g:startify_change_to_dir = 0
-        let g:startify_relative_path = 0
-        ]]
-      '';
-    })
+	# replaced by alpha.nvim ?
+    # (luaPlugin {
+    #   plugin = vim-startify;
+    #   # cool stuff is that it autostarts sessions
+    #   config = ''
+    #     vim.cmd [[
+    #     let g:startify_use_env = 0
+    #     let g:startify_disable_at_vimenter = 0
+    #     let g:startify_lists = [
+    #           \ { 'header': ['   MRU '.getcwd() ], 'type': 'dir'},
+    #           \ { 'header': ['   MRU' ],           'type': 'files'} ,
+    #           \ { 'header': ['   Bookmarks' ],     'type': 'bookmarks' },
+    #           \ { 'header': ['   Sessions'  ],      'type': 'sessions' }
+    #           \ ]
+    #     let g:startify_bookmarks = [
+    #           \ {'i': $XDG_CONFIG_HOME.'/i3/config.main'},
+    #           \ {'h': $XDG_CONFIG_HOME.'/nixpkgs/home.nix'},
+    #           \ {'c': 'dotfiles/nixpkgs/configuration.nix'},
+    #           \ {'z': $XDG_CONFIG_HOME.'/zsh/'},
+    #           \ {'m': $XDG_CONFIG_HOME.'/mptcpanalyzer/config'},
+    #           \ {'n': $XDG_CONFIG_HOME.'/nvim/config'},
+    #           \ {'N': $XDG_CONFIG_HOME.'/ncmpcpp/config'},
+    #           \ ]
+    #           " \ {'q': $XDG_CONFIG_HOME.'/qutebrowser/qutebrowser.conf'},
+    #     let g:startify_files_number = 10
+    #     let g:startify_session_autoload = 1
+    #     let g:startify_session_persistence = 0
+    #     let g:startify_change_to_vcs_root = 0
+    #     let g:startify_session_savevars = []
+    #     let g:startify_session_delete_buffers = 1
+    #     let g:startify_change_to_dir = 0
+    #     let g:startify_relative_path = 0
+    #     ]]
+    #   '';
+    # })
 
     vim-scriptease
     # test with hop ?
@@ -703,17 +703,13 @@ let
       # '';
     }
     vim-nix
-    (luaPlugin {
-      plugin = vim-obsession;
-      after = ''
-        vim.keymap.set("n", "<Leader>$", "<Cmd>Obsession<CR>", { remap = true })
-        vim.g.obsession_no_bufenter = true
-      '';
-      # testing luaConfig (experimental)
-      # luaConfig = ''
-      #   -- vim-obsession config
-      # '';
-    })
+    # (luaPlugin {
+    #   plugin = vim-obsession;
+    #   after = ''
+    #     vim.keymap.set("n", "<Leader>$", "<Cmd>Obsession<CR>", { remap = true })
+    #     vim.g.obsession_no_bufenter = true
+    #   '';
+    # })
     # ctrl-e causes an issue with telescope prompt
     vim-rsi
     # ' " syntax file for neomutt

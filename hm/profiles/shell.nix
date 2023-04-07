@@ -39,8 +39,6 @@ in
     sessionVariables = {
       HISTTIMEFORMAT = "%d.%m.%y %T ";
       # CAREFUL 
-      # RUNNER1=lib.mkRemoteBuilderDesc secrets.nova-runner-1;
-      # RUNNER2=mkRemoteBuilderDesc secrets.nova-runner-2;
       # HISTFILE="$XDG_CACHE_HOME/bash_history";
 	  # TODO pass the correct port, how to do that ? need ssh_config support
       NOVA_RUNNER1 = mkRemoteBuilderDesc secrets.nova-runner-1;

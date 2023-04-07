@@ -251,7 +251,17 @@
               })
 
               ({ config, lib, pkgs, ... }:
-                { })
+			  { 
+				home-manager.users.root = {
+				 imports = [
+				  (import ./hm/profiles/neovim.nix)
+				 ];
+
+				 home.stateVersion = "22.11";
+				};
+
+
+			  })
 
               # breaks build: doesnt like the "activation-script"
               # nova.hmConfigurations.dev

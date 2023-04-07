@@ -182,12 +182,6 @@
   # ];
 
 
-  # /alsa-base.conf
-  environment.etc."modprobe.d/alsa.conf".text = ''
-   # we want nvidia to get index 1 see 
-   # https://wiki.archlinux.org/title/Advanced_Linux_Sound_Architecture#Set_the_default_sound_card
-   options snd_hda_intel index=1
-  '';
   environment.etc."security/limits.conf".text = ''
     #[domain]        [type]  [item]  [value]
     teto  soft  core  unlimited

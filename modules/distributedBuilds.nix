@@ -16,29 +16,18 @@ let
     supportedFeatures = [ "big-parallel" "kvm" ];
     # mandatoryFeatures = [ "perf" ];
   };
-  nova-runner-1 = {
-    hostName = secrets.nova-gitlab-runner-1.hostname;
-    # todo move it to secrets
-    sshUser = secrets.nova-gitlab-runner-1.userName;
-    sshKey = "/home/teto/.ssh/nova_infra_prod";
-    system = "x86_64-linux";
-    maxJobs = 2;
-    speedFactor = 2;
-    supportedFeatures = [ "big-parallel" "kvm" ];
-    # mandatoryFeatures = [ "perf" ];
-  };
 
-  nova-runner-2 = {
-    hostName = secrets.nova-gitlab-runner-2.hostname;
-    # todo move it to secrets
-    sshUser = secrets.nova-gitlab-runner-2.userName;
-    sshKey = "/home/teto/.ssh/nova_key";
-    system = "x86_64-linux";
-    maxJobs = 2;
-    speedFactor = 2;
-    supportedFeatures = [ "big-parallel" "kvm" ];
-    # mandatoryFeatures = [ "perf" ];
-  };
+  # nova-runner-2 = {
+  #   hostName = secrets.nova-gitlab-runner-2.hostname;
+  #   # todo move it to secrets
+  #   sshUser = secrets.nova-gitlab-runner-2.userName;
+  #   sshKey = "/home/teto/.ssh/nova_key";
+  #   system = "x86_64-linux";
+  #   maxJobs = 2;
+  #   speedFactor = 2;
+  #   supportedFeatures = [ "big-parallel" "kvm" ];
+  #   # mandatoryFeatures = [ "perf" ];
+  # };
 
   jedha = {
     hostName = "jedha.home";

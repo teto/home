@@ -1,4 +1,4 @@
-{ config, pkgs, options, lib, ... }:
+{ config, pkgs, secrets, options, lib, ... }:
 # let
 #   secrets = import ./secrets.nix;
 # in
@@ -32,7 +32,7 @@
     # once can set initialHashedPassword too
     # initialPassword
     # generated with nix run nixpkgs.mkpasswd mkpasswd -m sha-512
-    hashedPassword = "$6$T/5zYuCMI$U45oW0D6cPKsXtETwlNFpsit924HElAYtXPsGTpj0XS/ITUz39xpPxnL.kzUWqeqQmRxvEOAHBeKm5/xHDrvs1";
+    hashedPassword = secrets.users.teto.hashedPassword;
 
     openssh.authorizedKeys.keyFiles = [
       ../perso/keys/id_rsa.pub
