@@ -1,3 +1,7 @@
+
+* how to enable debug 
+  systemctl service-log-level systemd-networkd debug
+
 systemd-analyze blame
 systemd-analyze verify toto.unit
 

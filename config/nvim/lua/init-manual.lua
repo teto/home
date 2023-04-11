@@ -2,6 +2,8 @@
 -- https://github.com/nanotee/nvim-lua-guide#using-meta-accessors
 -- https://www.reddit.com/r/neovim/comments/o8dlwg/how_to_append_to_an_option_in_lua/
 -- local configs = require'nvim_lsp/configs'
+-- vim.loader.enable()
+-- showcmdloc
 local has_fzf_lua, fzf_lua = pcall(require, 'fzf-lua')
 
 local nnoremap = vim.keymap.set
@@ -175,6 +177,7 @@ vim.opt.diffopt = 'filler,vertical'
 -- neovim > change to default ?
 vim.opt.diffopt:append('hiddenoff')
 vim.opt.diffopt:append('iwhiteall')
+-- vim.opt.diffopt:append('linematch')
 vim.opt.diffopt:append('internal,algorithm:patience')
 
 vim.opt.undofile = true

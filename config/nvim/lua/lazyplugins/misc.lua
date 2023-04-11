@@ -70,16 +70,16 @@ return {
   }
  end
 },
--- {
---   'glepnir/dashboard-nvim',
---   event = 'VimEnter',
---   config = function()
---     require('dashboard').setup {
---       -- config
---     }
---   end,
---   dependencies = { {'nvim-tree/nvim-web-devicons'}}
--- },
+{
+  'glepnir/dashboard-nvim',
+  event = 'VimEnter',
+  config = function()
+    require('dashboard').setup {
+      -- config
+    }
+  end,
+  dependencies = { {'nvim-tree/nvim-web-devicons'}}
+},
  'cameron-wags/rainbow_csv.nvim',
  'gennaro-tedesco/nvim-peekup',
  'rhysd/vim-gfm-syntax', -- markdown syntax compatible with Github's
