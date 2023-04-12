@@ -30,11 +30,12 @@ in
     enableBrokenCiphersForSSE = false;
     # increase security
     enableImagemagick = false;
-    package = pkgs.nextcloud25;
+    package = pkgs.nextcloud26;
     autoUpdateApps.enable = true;
 
-    extraApps = with pkgs.nextcloud25Packages.apps; {
-      inherit mail news contacts;
+    extraApps = with pkgs.nextcloud26Packages.apps; {
+      inherit news contacts;
+	  # mail extension can't be download :s 
       # example of how to get a more recent version
       # contacts = pkgs.fetchNextcloudApp rec {
       #   url = "https://github.com/nextcloud-releases/contacts/releases/download/v4.2.2/contacts-v4.2.2.tar.gz";
@@ -46,10 +47,10 @@ in
 
   # to be able to send mails from the admin panel
   # Test mails can be send via administration interface in the menu section "Basic settings". 
-  extraOptions = {
-    mail_smtpmode = "sendmail";
-    mail_sendmailmode = "pipe";
-  };
+  # extraOptions = {
+  #   mail_smtpmode = "sendmail";
+  #   mail_sendmailmode = "pipe";
+  # };
   # Creating Nextcloud users and configure mail adresses
   # systemd.services.nextcloud-add-user = {
   # --password-from-env  looks for the password in OC_PASS

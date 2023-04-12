@@ -58,6 +58,7 @@
   programs.feh.enable = true;
 
   home.packages = with pkgs; [
+	android-tools
     # steam-run
     signal-desktop
     lutris
