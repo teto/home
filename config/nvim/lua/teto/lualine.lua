@@ -47,7 +47,7 @@ require('lualine').setup({
         },
 
         lualine_c = {
-            'lsp_progress',
+            -- 'lsp_progress',
             -- obsession_component,
             -- {'lsp_progress', display_components = { 'lsp_client_name', { 'title', 'percentage', 'message' }}}
             -- ,  gps.get_location, condition = gps.is_available

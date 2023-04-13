@@ -107,11 +107,11 @@ in
                 }
 
                 set_term_title_for_new_prompt () {
-                    set_term_title "$(pwd):$2"
+                    set_term_title "$(pwd):$3"
                 }
         		# zsh passes
                 set_term_title_for_program () {
-                    set_term_title "toto: $(pwd):$2"
+                    set_term_title "program: $(pwd):$2"
                 }
 
         		# https://zsh.sourceforge.io/Doc/Release/Functions.html#index-preexec_005ffunctions

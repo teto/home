@@ -37,7 +37,7 @@
     #   # keys = [ secrets.gitolitePublicKey ];
     # };
 
-    package = pkgs.nixStable;
+    package = pkgs.nixVersions.nix_2_14;
 
     # added to nix.conf
     # experimental-features = nix-command flakes

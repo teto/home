@@ -228,7 +228,7 @@
   # this is required as well
   hardware.nvidia = {
     # this makes screen go black on boot :/
-    modesetting.enable = false; # needs "modesetting" in videoDrivers ?
+    modesetting.enable = true; # needs "modesetting" in videoDrivers ?
 
     # hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
     powerManagement.enable = false;
@@ -236,7 +236,7 @@
     # https://discourse.nixos.org/t/nvidia-users-testers-requested-sway-on-nvidia-steam-on-wayland/15264/21?u=teto
 
   # pkgs.linuxPackages_latest
-  environment.etc."gbm/nvidia-drm_gbm.so".source = "${pkgs.linuxPackages.nvidiaPackages.stable}/lib/libnvidia-allocator.so";
+  # environment.etc."gbm/nvidia-drm_gbm.so".source = "${pkgs.linuxPackages.nvidiaPackages.stable}/lib/libnvidia-allocator.so";
   # environment.etc."egl/egl_external_platform.d".source = "/run/opengl-driver/share/egl/egl_external_platform.d/";
   # /alsa-base.conf
   environment.etc."modprobe.d/alsa.conf".text = ''

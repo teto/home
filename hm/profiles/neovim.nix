@@ -141,7 +141,7 @@ let
       # }
       # '';
     }
-    { plugin = satellite-nvim; }
+    # { plugin = satellite-nvim; }
     # { plugin = nvim-dap; }
     # (luaPlugin { 
     #   plugin = octo-nvim;
@@ -483,9 +483,7 @@ let
     #   '';
     # })
     (luaPlugin { plugin = glow-nvim; })
-
     (luaPlugin { plugin = fzf-lua; })
-
     (luaPlugin {
       # really helps with syntax highlighting
       plugin = haskell-vim;
@@ -884,7 +882,8 @@ in
       # luaPackages.lua-lsp
       lua53Packages.teal-language-server
       lua51Packages.luacheck
-      haskellPackages.hasktags
+      # haskellPackages.hasktags
+      haskellPackages.fast-tags
       manix # should be no need, telescope-manix should take care of it
       nodePackages.vscode-langservers-extracted
       nodePackages.bash-language-server

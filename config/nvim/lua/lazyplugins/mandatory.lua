@@ -92,7 +92,7 @@ return {
 
     {
         'nvim-lualine/lualine.nvim', -- fork of hoob3rt/lualine
-        dependencies = { 'arkav/lualine-lsp-progress' },
+        -- dependencies = { 'arkav/lualine-lsp-progress' },
         config = function()
             require('teto.lualine')
         end,
