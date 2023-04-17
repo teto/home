@@ -19,7 +19,7 @@ rec {
   ];
 
 
-  boot.cleanTmpDir = true; # to clean /tmp on reboot
+  boot.tmp.cleanOnBoot = true; # to clean /tmp on reboot
   services.journald.extraConfig = ''
     # alternatively one can run journalctl --vacuum-time=2d
     SystemMaxUse=2G

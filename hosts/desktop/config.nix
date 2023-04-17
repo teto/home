@@ -228,7 +228,7 @@
   # this is required as well
   hardware.nvidia = {
     # this makes screen go black on boot :/
-    modesetting.enable = true; # needs "modesetting" in videoDrivers ?
+    modesetting.enable = false; # needs "modesetting" in videoDrivers ?
 
     # hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
     powerManagement.enable = false;

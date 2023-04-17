@@ -13,6 +13,7 @@ let
       (concatStringsSep "," (machine.supportedFeatures ++ machine.mandatoryFeatures))
       (concatStringsSep "," machine.mandatoryFeatures)
       # assume we r always > 2.4
+	  "-"
 	  (if machine.publicHostKey != null then machine.publicHostKey else "-")
     ]
     );

@@ -432,7 +432,7 @@
         neovimOfficial = self.inputs.neovim.overlay;
         wireshark = import ./overlays/wireshark.nix;
         python = import ./overlays/python.nix;
-        wayland = self.inputs.nixpkgs-wayland.overlay;
+        # wayland = self.inputs.nixpkgs-wayland.overlay;
         mptcp = self.inputs.mptcp-flake.overlay;
         nur = nur.overlay;
 		nova-ci = self.inputs.nova-ci.overlays.default;
