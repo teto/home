@@ -45,6 +45,9 @@ in
       NOVA_RUNNER3 = mkRemoteBuilderDesc secrets.nova-runner-3;
 	  NOVA_CACHE_DEV  = secrets.novaNixCache.dev;
 	  NOVA_CACHE_PROD = secrets.novaNixCache.prod;
+
+	  # wayland variables
+
     };
     # "ignorespace"
     historyControl = [ ];

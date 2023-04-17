@@ -128,7 +128,6 @@
   # DOES NOT WORK !
   boot.kernelPackages = pkgs.linuxPackages_latest;
   # boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_6_0;
-  # boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_mptcp_96;
 
   boot.kernelModules = [
     "af_key" # for ipsec/vpn support
@@ -228,15 +227,22 @@
   # this is required as well
   hardware.nvidia = {
     # this makes screen go black on boot :/
-    modesetting.enable = false; # needs "modesetting" in videoDrivers ?
+    modesetting.enable =true; # needs "modesetting" in videoDrivers ?
 
-    # hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
+	# may need to select appropriate driver
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
+
+	# open is only ready for data center use 
+	# open = true;
     powerManagement.enable = false;
+	# Update for NVIDA GPU headless mode, i.e. nvidia-persistenced. It ensures all GPUs stay awake even during headless mode.
+	 # nvidiaPersistenced = true;
   };
     # https://discourse.nixos.org/t/nvidia-users-testers-requested-sway-on-nvidia-steam-on-wayland/15264/21?u=teto
 
   # pkgs.linuxPackages_latest
   # environment.etc."gbm/nvidia-drm_gbm.so".source = "${pkgs.linuxPackages.nvidiaPackages.stable}/lib/libnvidia-allocator.so";
+  environment.etc."gbm/nvidia-drm_gbm.so".source = "/run/opengl-driver/lib/gbm/nvidia-drm_gbm.so";
   # environment.etc."egl/egl_external_platform.d".source = "/run/opengl-driver/share/egl/egl_external_platform.d/";
   # /alsa-base.conf
   environment.etc."modprobe.d/alsa.conf".text = ''
@@ -251,21 +257,22 @@
 
   environment.sessionVariables = {
     WLR_NO_HARDWARE_CURSORS = "1";
+	GBM_BACKEND="nvidia-drm";
   };
 
   # config from https://discourse.nixos.org/t/nvidia-users-testers-requested-sway-on-nvidia-steam-on-wayland/15264/32
   hardware.opengl.extraPackages = with pkgs; [
-    # vaapiVdpau
+    vaapiVdpau
     libvdpau-va-gl
-    # libva
+    libva
   ];
   # security.sudo.wheelNeedsPassword = ;
   # disabled to run stable-diffusion
   services.xserver = {
     videoDrivers = [
       "nvidia"
-	  "modesetting"
-	  "fbdev"
+	  # "modesetting"
+	  # "fbdev"
     ];
     displayManager.gdm.wayland = true;
   };
