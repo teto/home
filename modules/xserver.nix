@@ -15,11 +15,17 @@
     autorun = true;
 
     displayManager = {
+	 # enable startx if you want to bypass display managers
+	 startx.enable = true;
       autoLogin = {
-        enable = true;
+        enable =false;
         user = "teto";
       };
       # defaultSession = "none+i3";
+      lightdm = {
+        enable = false;
+        greeter.enable = false;
+      };
       # https://discourse.nixos.org/t/opening-i3-from-home-manager-automatically/4849/11
       # session =
       #   let fakeSession = { manage = "window";
@@ -29,6 +35,7 @@
       #   in [ fakeSession ];
       # defaultSession = null;
       gdm = {
+	    # enable = false;
         wayland = true;
       };
 
@@ -59,22 +66,16 @@
       # accelSpeed = "1.55";
     };
 
-    displayManager = {
-      lightdm = {
-        enable = true;
-        greeter.enable = false;
-      };
-    };
     windowManager.i3.enable = true;
 
     # au moins pour le laptop
-    config = ''
-      	  Section "Device"
-      		  Identifier  "Intel Graphics" 
-      		  Driver      "intel"
-      		  Option      "Backlight"  "intel_backlight"
-      	  EndSection
-      	'';
+    # config = ''
+    #   	  Section "Device"
+    #   		  Identifier  "Intel Graphics" 
+    #   		  Driver      "intel"
+    #   		  Option      "Backlight"  "intel_backlight"
+    #   	  EndSection
+    #   	'';
 
     # to autostart i3
     # https://discourse.nixos.org/t/opening-i3-from-home-manager-automatically/4849/7

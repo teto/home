@@ -28,9 +28,9 @@ in
     ];
     # eventually start foot --server
     # TODO we should wrap sway with that ?
+	# export GBM_BACKENDS_PATH=/etc/gbm
     extraSessionCommands = ''
      # needs qt5.qtwayland in systemPackages
-	 export GBM_BACKENDS_PATH=/etc/gbm
 	 export QT_QPA_PLATFORM=wayland
 	 export GBM_BACKEND=nvidia-drm
 	 export SDL_VIDEODRIVER=wayland
@@ -63,10 +63,10 @@ in
 
       # focus.wrapping = "yes";
       startup = [
-        { command = "wl-paste -t text --watch clipman store"; }
-        { command = ''wl-paste -p -t text --watch clipman store -P --histpath="~/.local/share/clipman-primary.json"''; }
-        { command = "mkfifo $SWAYSOCK.wob && tail -f $SWAYSOCK.wob | wob"; }
-        { command = "swaync"; }
+        # { command = "wl-paste -t text --watch clipman store"; }
+        # { command = ''wl-paste -p -t text --watch clipman store -P --histpath="~/.local/share/clipman-primary.json"''; }
+        # { command = "mkfifo $SWAYSOCK.wob && tail -f $SWAYSOCK.wob | wob"; }
+        # { command = "swaync"; }
       ];
     };
 
