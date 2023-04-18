@@ -22,6 +22,21 @@ return {
 
     -- to cycle between different list/listchars configurations
     'teto/vim-listchars',
+  {
+    "chrishrb/gx.nvim",
+    event = { "BufEnter" },
+    dependencies = { "nvim-lua/plenary.nvim" },
+    -- config = true, -- default settings
+    -- you can specify also another config if you want
+    config = function() require("gx").setup {
+      open_browser_app = "os_specific", -- specify your browser app; default for macos is "open" and for linux "xdg-open"
+      handlers = {
+        plugin = true, -- open plugin links in lua (e.g. packer, lazy, ..)
+        github = true, -- open github issues
+        package_json = true, -- open dependencies from package.json
+      },
+    } end,
+  },
     { 'chrisbra/csv.vim' , lazy = true },
     -- provides 'NvimTree'
     { 'kyazdani42/nvim-tree.lua', lazy = true},
