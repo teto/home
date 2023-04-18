@@ -257,7 +257,9 @@
 
   environment.sessionVariables = {
     WLR_NO_HARDWARE_CURSORS = "1";
-	GBM_BACKEND="nvidia-drm";
+	LIBVA_DRIVER_NAME="nvidia";
+	__GLX_VENDOR_LIBRARY_NAME="nvidia";
+	# GBM_BACKEND="nvidia-drm";
   };
 
   # config from https://discourse.nixos.org/t/nvidia-users-testers-requested-sway-on-nvidia-steam-on-wayland/15264/32
