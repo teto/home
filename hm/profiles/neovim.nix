@@ -849,7 +849,7 @@ in
     fennel.enable = false;
     teal.enable = true;
     orgmode.enable = true;
-    autocompletion.enable = false;
+    autocompletion.enable = true;
 
     # take the one from the flake
     package = myPackage;

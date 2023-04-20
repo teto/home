@@ -248,8 +248,10 @@ end
 
 
 M.toggle_lsp_lines = function ()
+ vim.notify("Toggling lsp_lines")
  local cfg = vim.diagnostic.config()
  if cfg.virtual_lines then
+  vim.notify("Setting it to false")
   cfg.virtual_lines = false
  else
   require'teto.lsp'.set_lsp_lines(true)

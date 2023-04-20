@@ -4,7 +4,6 @@
   services.openssh = {
     enable = false;
     # kinda experimental
-    # services.openssh.banner = "Hello world";
     ports = [ 12666 ];
 
     # # for sshfs edit or scp
