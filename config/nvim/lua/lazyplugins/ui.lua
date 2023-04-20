@@ -19,6 +19,8 @@ return {
     'NLKNguyen/papercolor-theme',
     'marko-cerovac/material.nvim',
     'shaunsingh/oxocarbon.nvim',
+    { "catppuccin/nvim", name = "catppuccin" },
+    'raddari/last-color.nvim',
     {
         'rose-pine/neovim',
         name = 'rose-pine',

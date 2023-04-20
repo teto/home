@@ -133,7 +133,6 @@ M.set_lsp_rclick_menu = function()
   -- error only
   { 'Show diagnostics inline', "<cmd>lua require'teto.lsp'.toggle_diagnostic_display()<cr>" },
   { 'Show errors only', "<cmd>lua require'teto.lsp'.set_level(vim.diagnostic.severity.ERROR)<cr>" },
-  { 'Toggle lsp lines', "<cmd>lua require('lsp_lines').toggle<cr>" },
   { 'Show all levels', "<cmd>lua require'teto.lsp'.set_level(vim.diagnostic.severity.HINTS)<cr>" },
   -- 
   { 'Apply all code actions', "<cmd>echo 'TODO'" },
@@ -247,11 +246,24 @@ M.set_repl_rclick_menu = function()
  end)
 end
 
+
+M.toggle_lsp_lines = function ()
+ local cfg = vim.diagnostic.config()
+ if cfg.virtual_lines then
+  cfg.virtual_lines = false
+ else
+  require'teto.lsp'.set_lsp_lines(true)
+   -- only_current_line
+ end
+end
+
 M.set_toggle_rclick_menu = function()
  M.set_rclick_submenu('MenuToggle', 'Toggle ->', {
   { 'Minimap', '<cmd>MinimapToggle<cr>' },
   { 'Obsession', '<cmd>Obsession<cr>' },
   { 'Indent guides', '<cmd>IndentBlanklineToggle<cr>' },
+  { 'Toggle lsp lines', "<cmd>lua require('teto.context_menu').toggle_lsp_lines()<cr>" },
+
  }, function()
   return true
  end)

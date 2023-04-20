@@ -34,27 +34,55 @@ return {
  -- { 'notomo/gesture.nvim' , opt = true; },
  -- 'anuvyklack/hydra.nvim', -- to create submodes
  -- "terrortylor/nvim-comment"
- {'Shatur/neovim-session-manager',
- config = function ()
-  local Path = require('plenary.path')
-  require('session_manager').setup({
-    sessions_dir = Path:new(vim.fn.stdpath('data'), 'sessions'), -- The directory where the session files will be saved.
-    path_replacer = '__', -- The character to which the path separator will be replaced for session files.
-    colon_replacer = '++', -- The character to which the colon symbol will be replaced for session files.
-    -- Define what to do when Neovim is started without arguments. Possible values: Disabled, CurrentDir, LastSession
-    autoload_mode = require('session_manager.config').AutoloadMode.CurrentDir,
-    autosave_last_session = true, -- Automatically save last session on exit and on session switch.
-    autosave_ignore_not_normal = true, -- Plugin will not save a session when no buffers are opened, or all of them aren't writable or listed.
-    autosave_ignore_dirs = {}, -- A list of directories where the session will not be autosaved.
-    autosave_ignore_filetypes = { -- All buffers of these file types will be closed before the session is saved.
-      'gitcommit',
-    },
-    autosave_ignore_buftypes = {}, -- All buffers of these bufer types will be closed before the session is saved.
-    autosave_only_in_session = false, -- Always autosaves session. If true, only autosaves after a session is active.
-    max_path_length = 80,  -- Shorten the display path if length exceeds this threshold. Use 0 if don't want to shorten the path at all.
-  })
- end
-},
+ { 'SmiteshP/nvim-navic'
+ , config = function ()
+
+   local navic = require'nvim-navic'
+    vim.api.nvim_create_autocmd("LspAttach", {
+        desc = "Attach lsp_signature on new client",
+        callback = function(args)
+            if not (args.data and args.data.client_id) then
+                return
+            end
+            local client = vim.lsp.get_client_by_id(args.data.client_id)
+            local bufnr = args.buf
+            navic.attach(client, bufnr)
+            -- local on_attach = require 'on_attach'
+            -- on_attach.on_attach(client, bufnr)
+        end
+    })
+  end
+ },
+ {
+   'rmagatti/auto-session',
+  config = function()
+    require("auto-session").setup {
+      log_level = "error",
+      auto_session_suppress_dirs = { "~/", "~/Projects", "~/Downloads", "/"},
+    }
+  end
+ },
+ -- {'Shatur/neovim-session-manager',
+ -- config = function ()
+ --  local Path = require('plenary.path')
+ --  require('session_manager').setup({
+ --    sessions_dir = Path:new(vim.fn.stdpath('data'), 'sessions'), -- The directory where the session files will be saved.
+ --    path_replacer = '__', -- The character to which the path separator will be replaced for session files.
+ --    colon_replacer = '++', -- The character to which the colon symbol will be replaced for session files.
+ --    -- Define what to do when Neovim is started without arguments. Possible values: Disabled, CurrentDir, LastSession
+ --    autoload_mode = require('session_manager.config').AutoloadMode.CurrentDir,
+ --    autosave_last_session = true, -- Automatically save last session on exit and on session switch.
+ --    autosave_ignore_not_normal = true, -- Plugin will not save a session when no buffers are opened, or all of them aren't writable or listed.
+ --    autosave_ignore_dirs = {}, -- A list of directories where the session will not be autosaved.
+ --    autosave_ignore_filetypes = { -- All buffers of these file types will be closed before the session is saved.
+ --      'gitcommit',
+ --    },
+ --    autosave_ignore_buftypes = {}, -- All buffers of these bufer types will be closed before the session is saved.
+ --    autosave_only_in_session = false, -- Always autosaves session. If true, only autosaves after a session is active.
+ --    max_path_length = 80,  -- Shorten the display path if length exceeds this threshold. Use 0 if don't want to shorten the path at all.
+ --  })
+ -- end
+-- },
 -- default config
  { 'letieu/hacker.nvim',
   config = function ()
@@ -293,6 +321,7 @@ return {
  -- 	-- shows type annotations for functions in virtual text using built-in LSP client
  -- 	'jubnzv/virtual-types.nvim'
  -- }
+
 
  --  'glacambre/firenvim' -- to use nvim in firefox
  -- call :NR on a region than :w . coupled with b:nrrw_aucmd_create,

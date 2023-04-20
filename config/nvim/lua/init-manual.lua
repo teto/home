@@ -207,7 +207,9 @@ vim.g.hoogle_fzf_cache_file = vim.fn.stdpath('cache') .. '/hoogle_cache.json'
 
 vim.opt.wildmenu = true
 -- vim.opt.omnifunc='v:lua.vim.lsp.omnifunc'
-vim.opt.winbar = '%=%m %f'
+-- navic counts on documentSymbols
+-- %=%m %f
+vim.opt.winbar = "%{%v:lua.require'nvim-navic'.get_location()%}"
 
 
 vim.api.nvim_create_autocmd("LspAttach", {
@@ -517,10 +519,13 @@ if has_orgmode then
 end
 
 -- vim.g.sonokai_style = 'atlantis'
-vim.cmd([[colorscheme sonokai]])
+-- vim.cmd([[colorscheme sonokai]])
 -- vim.cmd([[colorscheme rose-pine]])
 -- vim.cmd([[colorscheme janah]])
 -- vim.cmd([[colorscheme pywal]])
+local theme = require('last-color').recall() or 'sonokai'
+vim.cmd(('colorscheme %s'):format(theme))
+
 local has_sniprun, sniprun = pcall(require, 'sniprun')
 
 if has_sniprun then
