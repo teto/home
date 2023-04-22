@@ -136,6 +136,7 @@ let
       shared-mime-info # temporary fix for nautilus to find the correct files
       sublime3
       # sxiv # simple image viewer
+	  simple-scan
       translate-shell
       wally-cli # to flash ergodox keyboards
       wireshark
@@ -222,7 +223,10 @@ in
 
   programs.browserpass = {
     enable = true;
-    browsers = [ "firefox" "chromium" ];
+	browsers = [ 
+	 "firefox"
+	 # "chromium"
+	];
   };
 
   services.gnome-keyring = {

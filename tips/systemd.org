@@ -18,6 +18,9 @@ See coredump.conf(5) for config
 coredumpctl ...
 coredumpctl debug
 
+* journalctl tips
+  `-o json-pretty`
+{
 journalctl -b0 -u <unit>
 
 systemctl list-jobs
