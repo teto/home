@@ -3,12 +3,13 @@
 {
 
   imports = [
-    # ./hm/vdirsyncer.nix
-    # ./hm/nushell.nix
+   # borken
+    # ../../hm/profiles/vdirsyncer.nix
+    # ../../hm/nushell.nix
     ../../hm/profiles/desktop.nix
     ../../hm/profiles/mail.nix
     ../../hm/profiles/sway.nix
-    ../../hm/profiles/weechat.nix
+    # ../../hm/profiles/weechat.nix
     ../../hm/profiles/extra.nix
     ../../hm/profiles/syncthing.nix
     ../../hm/profiles/japanese.nix

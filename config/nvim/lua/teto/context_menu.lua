@@ -249,22 +249,32 @@ end
 
 M.toggle_lsp_lines = function ()
  vim.notify("Toggling lsp_lines")
- local cfg = vim.diagnostic.config()
- if cfg.virtual_lines then
-  vim.notify("Setting it to false")
-  cfg.virtual_lines = false
- else
-  require'teto.lsp'.set_lsp_lines(true)
-   -- only_current_line
- end
+ -- local cfg = vim.diagnostic.config()
+ -- if cfg.virtual_lines then
+ --  vim.notify("Setting it to false "..tostring(cfg.virtual_lines))
+ --  cfg.virtual_lines = false
+ --  require'teto.lsp'.set_lsp_lines(false)
+
+ -- else
+ --  require'teto.lsp'.set_lsp_lines(true)
+ --   -- only_current_line
+ -- end
+ require("lsp_lines").toggle()
+end
+
+local show_toggle = function (current_status)
+  -- assert(type(current_status) == "boolean", "Expecting a boolean value")
+  -- print(type(current_status))
+  return tostring(current_status)
 end
 
 M.set_toggle_rclick_menu = function()
+ local lsp_status = not vim.diagnostic.config().virtual_lines
  M.set_rclick_submenu('MenuToggle', 'Toggle ->', {
   { 'Minimap', '<cmd>MinimapToggle<cr>' },
   { 'Obsession', '<cmd>Obsession<cr>' },
   { 'Indent guides', '<cmd>IndentBlanklineToggle<cr>' },
-  { 'Toggle lsp lines', "<cmd>lua require('teto.context_menu').toggle_lsp_lines()<cr>" },
+  { 'Toggle lsp lines '..show_toggle(lsp_status), "<cmd>lua require('teto.context_menu').toggle_lsp_lines()<cr>" },
 
  }, function()
   return true

@@ -13,9 +13,6 @@
   #   };
   # };
 
-
-  services.batsignal.enable = true;
-
   programs.ranger = {
     enable = true;
     # plugins = [];

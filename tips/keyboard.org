@@ -15,3 +15,4 @@ setxkbmap -option
 $ setxkbmap -option "swapcaps:ctrl"
 $  setxkbmap -print -verbose 10
 
+https://unix.stackexchange.com/questions/224827/how-do-i-enable-shift-lock-sticky-shift-key
