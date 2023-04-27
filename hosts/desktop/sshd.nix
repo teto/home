@@ -31,7 +31,8 @@
 	# testing https://github.com/NixOS/nixpkgs/pull/215397
     settings = {
       LogLevel = "VERBOSE";
-      KbdInteractiveAuthentication = false;
+      kbdInteractiveAuthentication = false;
+      # KbdInteractiveAuthentication = false;
       PasswordAuthentication = false;
       # PermitRootLogin = "no";
 	  X11Forwarding = true;

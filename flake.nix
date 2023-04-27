@@ -75,7 +75,7 @@
   outputs = { self, hm, nixpkgs, flake-utils, treefmt-nix, nur, nova, deploy-rs, ... }:
     let
       inherit (builtins) listToAttrs baseNameOf;
-      # inherit (nixpkgsFinal.lib) removeSuffix;
+      # inherit (myPkgs.lib) removeSuffix;
       secrets = import ./nixpkgs/secrets.nix;
       system = "x86_64-linux";
 
@@ -97,7 +97,8 @@
           config = { allowUnfree = true; };
         };
 
-      nixpkgsFinal = pkgImport self.inputs.nixpkgs;
+      myPkgs = pkgImport self.inputs.nixpkgs;
+      unstablePkgs = pkgImport self.inputs.unstable;
 
 
       # legacyLib = nixpkgs.lib;
@@ -149,7 +150,7 @@
             # - git-crypt 
             default = nixpkgs.legacyPackages.${system}.mkShell {
               name = "dotfiles-shell";
-              buildInputs = with nixpkgsFinal; [
+              buildInputs = with myPkgs; [
                 sops
                 age
                 deploy-rs.packages.${system}.deploy-rs
@@ -158,7 +159,7 @@
               ];
             };
 
-            inherit (nixpkgsFinal) nhs92 nhs94 nhs96;
+            inherit (unstablePkgs) nhs92 nhs94 nhs96;
           };
 
           packages = {
@@ -174,13 +175,13 @@
               programs.nixpkgs-fmt.enable = true;
               programs.stylua.enable = true;
             };
-            dce = nixpkgsFinal.callPackage ./pkgs/dce { };
+            dce = myPkgs.callPackage ./pkgs/dce { };
 
             # aws-lambda-rie = self.overlays.local.aws-lambda-rie ;
-            aws-lambda-rie = nixpkgsFinal.callPackage ./pkgs/aws-lambda-runtime-interface-emulator { };
+            aws-lambda-rie = myPkgs.callPackage ./pkgs/aws-lambda-runtime-interface-emulator { };
 
-            inherit (nixpkgsFinal) i3pystatus-custom;
-            inherit (nixpkgsFinal) nhs92 nhs94 nhs96;
+            inherit (myPkgs) i3pystatus-custom;
+            inherit (unstablePkgs) nhs92 nhs94 nhs96;
 
           };
         }) // {
@@ -277,7 +278,7 @@
 
           neotokyo = nixpkgs.lib.nixosSystem {
             inherit system;
-            pkgs = nixpkgsFinal;
+            pkgs = myPkgs;
             modules = [
               self.inputs.sops-nix.nixosModules.sops
               # often breaks
@@ -302,7 +303,7 @@
 
           jedha = nixpkgs.lib.nixosSystem {
             inherit system;
-            pkgs = nixpkgsFinal;
+            pkgs = myPkgs;
             specialArgs = {
               inherit secrets;
               inherit (self) inputs;
