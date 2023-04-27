@@ -55,6 +55,8 @@ in
       sidebar-mode = true;
       kb-mode-previous = "Alt+Left";
       kb-mode-next = "Alt+Right,Alt+Tab";
+	  kb-entry-history-up = "Control+p";
+	  kb-entry-history-down = "Control+n";
     };
   };
 }

@@ -23,6 +23,8 @@ coredumpctl debug
 {
 journalctl -b0 -u <unit>
 
+journalctl --disk-usage
+
 systemctl list-jobs
 
 # to remove core files

@@ -104,6 +104,11 @@ return {
   config = function()
     require('dashboard').setup {
       -- config
+      -- change_to_vcs_root
+      -- shortcut_type = "letter" or "number"
+      hide = {
+       statusline = false
+      }
     }
   end,
   dependencies = { {'nvim-tree/nvim-web-devicons'}}
