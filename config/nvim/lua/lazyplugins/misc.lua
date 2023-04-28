@@ -1,4 +1,6 @@
 return {
+ { dir = '/home/teto/neovim/jap.nvim' },
+
  -- compete with registers.nvim
  -- https://github.com/gelguy/wilder.nvim
  -- TODO upstream

@@ -81,8 +81,11 @@
     # include path to file
     # { path = config.xdg.configHome + "/git/config.inc"; }
 
-    extraConfig = ''
-      Include "${config.xdg.configHome}/ssh/config"
+    extraConfig = 
+    ''
+    Include "${config.xdg.configHome}/ssh/config"
+    # TODO remove when doctor's home-manager is ok
+    Include ${config.xdg.configHome}/nova/jinkompute/ssh_config
     '';
   };
 
