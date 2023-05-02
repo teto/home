@@ -11,6 +11,7 @@
   "cache mode is 'only-if-cached' but no cached response available"
   check https://github.com/serokell/nix-npm-buildpackage/issues/58
 
+* du --human-readable --total --summarize $(nix-store --query --requisites $(echo $store_paths)) > >(sort --human-numeric-sort)
 
 * How to interpret the progress bar ?
 
