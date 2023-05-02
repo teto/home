@@ -1,9 +1,10 @@
 # could be called home-huge.nix
 { config, lib, pkgs, ... }:
 {
-  # home.packages = with pkgs; [
+  home.packages = with pkgs; [
   #   # lgogdownloader
-  # ];
+    lutris
+  ];
 
   services.upower.percentageLow = 35;
   services.upower.percentageCritical = 30;

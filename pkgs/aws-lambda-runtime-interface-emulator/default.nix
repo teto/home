@@ -15,12 +15,12 @@ buildGoModule rec {
 
   doCheck = false;
 
-  buildFlagsArray = [ "-ldflags=-s -w -X main.version=${version}" ];
+  ldflags = [ "-s" "-w" "-X main.version=${version}" ];
 
   meta = with lib; {
     description = " allows customers to locally test their Lambda function packaged as a container image";
     homepage = "https://github.com/aws/aws-lambda-runtime-interface-emulator";
     license = licenses.mit;
-    maintainers = with maintainers; [ ];
+    maintainers = [ ];
   };
 }

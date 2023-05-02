@@ -17,6 +17,7 @@ lint-nix:
 lint-lua:
 	stylua config/nvim/init.lua
 
+# deploy my router
 deploy-router:
 	# --auto-rollback false --magic-rollback false
 	# we MUST skip checks else it fails

@@ -12,7 +12,7 @@
     ../../hm/profiles/alot.nix
     ../../hm/profiles/emacs.nix
     ../../hm/profiles/extra.nix
-    ../../hm/profiles/weechat.nix
+    # ../../hm/profiles/weechat.nix
     # ./profiles/vdirsyncer.nix
 
   ];
@@ -59,11 +59,8 @@
 
   home.packages = with pkgs; [
 	android-tools
-    # steam-run
     signal-desktop
-    lutris
     # gnome.gnome-maps
-
     xorg.xwininfo # for stylish
   ];
 
@@ -87,8 +84,8 @@
   };
 
   # xrandr --output DVI-I-1 --primary
-  xsession.initExtra = ''
-  '';
+  # xsession.initExtra = ''
+  # '';
 
   # fzf-extras found in overlay fzf-extras
   # programs.zsh.initExtra = ''

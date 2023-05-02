@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, flakeInputs, pkgs, lib, ... }:
 let
   # terminalCommand = pkgs.kitty;
 

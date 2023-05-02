@@ -1,2 +1,6 @@
 Look at 
 .gpg-id
+
+* import from bitwarden
+  with https://github.com/roddhjav/pass-import one can import from bitwarden via:
+  pass import bitwarden

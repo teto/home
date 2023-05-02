@@ -17,11 +17,26 @@
         port = secrets.jakku.sshPort;
         identityFile = "~/.ssh/id_rsa";
       };
+
+      router = {
+        # checkHostIP
+        identityFile = "~/.ssh/id_rsa";
+        user = "teto";
+        host = "router";
+        hostname = secrets.router.hostname;
+        identitiesOnly = true;
+        # experimental
+        # https://github.com/nix-community/home-manager/pull/2992
+        # match = "ovh1";
+		port = 12666;
+      };
+
       nova = {
         host = "git.novadiscovery.net";
         user = "matthieu.coudron";
         identityFile = "~/.ssh/nova_key";
       };
+	  
 
       ovh1 = {
         # checkHostIP

@@ -2,6 +2,12 @@
 * how to enable debug 
   systemctl service-log-level systemd-networkd debug
 
+* setup credentials 
+
+  systemd-ask-password (echoes password to TTY careful)
+
+  sudo systemd-creds setup 
+  https://unix.stackexchange.com/questions/391040/is-there-a-typical-way-to-pass-a-password-to-a-systemd-unit-file
 systemd-analyze blame
 systemd-analyze verify toto.unit
 

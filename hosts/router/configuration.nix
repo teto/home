@@ -136,12 +136,12 @@ in
   #     internalIPs = [ "br0" ];
   # };
 
-  # services.munin-node = {
-  #     enable = true;
+  services.munin-node = {
+      enable = true;
   #     extraConfig = ''
   #     allow ^63\.12\.23\.38$
   #     '';
-  # };
+  };
 
   networking = {
     # address of the livebox

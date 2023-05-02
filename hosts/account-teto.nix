@@ -1,7 +1,7 @@
-{ config, pkgs, secrets, options, lib, ... }:
-# let
-#   secrets = import ./secrets.nix;
-# in
+{ config, pkgs, options, lib, ... }:
+let
+  secrets = import ../nixpkgs/secrets.nix;
+in
 {
 
   users.users.teto = {

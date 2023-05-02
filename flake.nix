@@ -32,6 +32,7 @@
     peerix.url = "github:cid-chan/peerix";
     unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     mptcp-flake.url = "github:teto/mptcp-flake";
+    mujmap.url = "github:teto/mujmap/flake";
     rofi-hoogle.url = "github:teto/rofi-hoogle/fixup";
 
     # TODO use mine instead
@@ -175,7 +176,7 @@
               programs.nixpkgs-fmt.enable = true;
               programs.stylua.enable = true;
             };
-            dce = myPkgs.callPackage ./pkgs/dce { };
+            dce = myPkgs.callPackage ./pkgs/dce { python = myPkgs.python3; };
 
             # aws-lambda-rie = self.overlays.local.aws-lambda-rie ;
             aws-lambda-rie = myPkgs.callPackage ./pkgs/aws-lambda-runtime-interface-emulator { };
@@ -339,7 +340,7 @@
                 ./hm/profiles/japanese.nix
                 ./hm/profiles/fcitx.nix
                 ./hm/profiles/nova.nix
-                ./hm/profiles/syncthing.nix
+                # ./hm/profiles/syncthing.nix
                 ./hm/profiles/vscode.nix
                 ./hm/profiles/extra.nix
                 # services.opensnitch-ui.enable
@@ -372,7 +373,7 @@
           modulesAttrs = listToAttrs (prep moduleList);
 
         in
-        modulesAttrs
+		 modulesAttrs
       ;
 
       templates = {
@@ -395,6 +396,8 @@
       overlays = {
 
         autoupdating = final: prev: {
+
+		  mujmap = self.inputs.mujmap.packages.x86_64-linux.mujmap;
 
           # TODO override extraLibs instead 
           i3pystatus-custom = (prev.i3pystatus.override ({
@@ -434,7 +437,7 @@
         wireshark = import ./overlays/wireshark.nix;
         python = import ./overlays/python.nix;
         # wayland = self.inputs.nixpkgs-wayland.overlay;
-        mptcp = self.inputs.mptcp-flake.overlay;
+        mptcp = self.inputs.mptcp-flake.overlays.default;
         nur = nur.overlay;
 		nova-ci = self.inputs.nova-ci.overlays.default;
 
@@ -472,7 +475,7 @@
             };
           in
           {
-            router = genNode ({ name = "router"; hostname = "192.168.1.12"; });
+            router = genNode ({ name = "router"; hostname = "192.168.1.11"; });
 
             neotokyo = genNode ({ name = "neotokyo"; hostname = secrets.jakku.hostname; });
           };
