@@ -19,7 +19,7 @@
         enable = true;
         user = "teto";
       };
-      defaultSession = "none+i3";
+      # defaultSession = "none+i3";
       # https://discourse.nixos.org/t/opening-i3-from-home-manager-automatically/4849/11
       # session =
       #   let fakeSession = { manage = "window";

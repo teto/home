@@ -3,6 +3,7 @@
 {
   imports = [
     # Not tracked, so doesn't need to go in per-machine subdir
+    ../../hm/profiles/android.nix
     ../../hm/profiles/desktop.nix
     ../../hm/profiles/polybar.nix
     ../../hm/profiles/sway.nix
@@ -10,19 +11,12 @@
     ../../hm/profiles/nushell.nix
     ../../hm/profiles/mail.nix
     ../../hm/profiles/alot.nix
-    ../../hm/profiles/emacs.nix
+    # ../../hm/profiles/emacs.nix
     ../../hm/profiles/extra.nix
     # ../../hm/profiles/weechat.nix
     # ./profiles/vdirsyncer.nix
 
   ];
-
-  # Mic92/nix-index-database
-  # programs.vim = {
-  #  enable = true;
-  #  defaultEditor = true;
-  # };
-
 
   programs.pazi = {
     enable = false;
@@ -58,14 +52,10 @@
   programs.feh.enable = true;
 
   home.packages = with pkgs; [
-	android-tools
     signal-desktop
     # gnome.gnome-maps
     xorg.xwininfo # for stylish
   ];
-
-  # hum...
-  # services.lorri.enable = true;
 
   # you can switch from cli with xkb-switch or xkblayout-state
   home.keyboard = {
@@ -87,7 +77,4 @@
   # xsession.initExtra = ''
   # '';
 
-  # fzf-extras found in overlay fzf-extras
-  # programs.zsh.initExtra = ''
-  # '';
 }

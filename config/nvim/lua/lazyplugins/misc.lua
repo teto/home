@@ -55,7 +55,10 @@ return {
             end
             local client = vim.lsp.get_client_by_id(args.data.client_id)
             local bufnr = args.buf
-            navic.attach(client, bufnr)
+            if client.server_capabilities.documentSymbolProvider then
+                navic.attach(client, bufnr)
+            end
+            -- navic.attach(client, bufnr)
             -- local on_attach = require 'on_attach'
             -- on_attach.on_attach(client, bufnr)
         end

@@ -345,7 +345,6 @@
                 ./hm/profiles/japanese.nix
                 ./hm/profiles/fcitx.nix
                 ./hm/profiles/nova.nix
-                # ./hm/profiles/syncthing.nix
                 ./hm/profiles/vscode.nix
                 ./hm/profiles/extra.nix
                 # services.opensnitch-ui.enable

@@ -7,7 +7,6 @@
     ../config-all.nix
     ../../nixos/profiles/desktop.nix
     ../../modules/sway.nix
-    ../../modules/syncthing.nix
     # ./modules/docker-daemon.nix
     ../../modules/xserver.nix
     ../../modules/sway.nix
@@ -15,7 +14,7 @@
     ../../nixos/profiles/steam.nix
     ../../nixos/profiles/qemu.nix
     # ../../nixos/profiles/adb.nix
-    ../../nixos/profiles/cron.nix
+    # ../../nixos/profiles/cron.nix
     ../../nixos/profiles/kanata.nix
     ../../nixos/profiles/nix-daemon.nix
     # ../../nixos/profiles/postgresql.nix
@@ -23,7 +22,7 @@
     # usually inactive, just to test some stuff
     # ../../nixos/profiles/gitlab-runner.nix
 
-    ../../modules/libvirtd.nix
+    # ../../modules/libvirtd.nix
 
     # ./modules/hoogle.nix
     # ./profiles/pixiecore.nix
@@ -33,6 +32,18 @@
     # ./modules/kubernetes.nix
     # ./modules/tor.nix
   ];
+
+  services.xserver = {
+    enable = true;
+    autorun = false;
+  };
+
+    # displayManager = {
+    #   autoLogin = {
+    #     enable = true;
+    #     user = "teto";
+    #   };
+      # defaultSession = "none+i3";
 
   # TODO conditionnally enable it
   # networking.wireless.iwd.enable = true;
@@ -66,10 +77,8 @@
     # "i915.enable_psr=0"  # disables a power saving feature that can cause flickering
   ];
 
-  # TODO use the mptcp one ?
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  # boot.kernelPackages = pkgs.linuxPackages_latest;
 
-  # TODO we need nouveau
   boot.kernelModules = [
     # "af_key" # for ipsec/vpn support
     "kvm"
@@ -186,23 +195,14 @@
 
   programs.ccache.enable = false;
 
-  # when set to false, /etc/passwd and /etc/group will be congruent to your NixOS configuration
-  # users.mutableUsers = false;
-
   # let's be fucking crazy
   # environment.enableDebugInfo = true;
   # } ++ lib.optionalAttrs (config.programs ? mininet) {
 
   networking.iproute2.enable = true;
 
-  # services.xserver.videoDrivers = [ "nvidia" ];
-
   programs.gnome-disks = {
     enable = true;
-  };
-
-  nix = {
-    distributedBuilds = false;
   };
 
   # services.logind = {

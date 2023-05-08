@@ -681,13 +681,13 @@ let
       plugin = vim-sneak;
       config = ''
         -- can press 's' again to go to next result, like ';'
-                 vim.cmd [[
-                  let g:sneak#s_next = 1 
-                  let g:sneak#prompt = 'Sneak>'
+        vim.cmd [[
+        let g:sneak#s_next = 1 
+        let g:sneak#prompt = 'Sneak>'
 
-                 let g:sneak#streak = 0
-                 ]]
-      '';
+        let g:sneak#streak = 0
+        ]]
+        '';
       # map f <Plug>Sneak_f
       # map F <Plug>Sneak_F
       # map t <Plug>Sneak_t
@@ -807,8 +807,7 @@ let
 
         -- overrides ga
         vim.keymap.set ( "n", "ga",  "<Plug>(UnicodeGA)", { remap = true, } )
-
-      '';
+        '';
     })
 
   ];
@@ -824,8 +823,8 @@ let
     # }
   ];
 
-  rawPlugins =
-	   basePlugins
+  rawPlugins = 
+       basePlugins
     ++ overlayPlugins
     ++ luaPlugins
     ++ treesitterPlugins
@@ -883,7 +882,7 @@ in
     extraPackages = with pkgs; [
       # luaPackages.lua-lsp
       # lua53Packages.teal-language-server
-	  editorconfig-checker # used in null-ls
+      editorconfig-checker # used in null-ls
       lua51Packages.luacheck
       haskellPackages.hasktags
       haskellPackages.fast-tags
