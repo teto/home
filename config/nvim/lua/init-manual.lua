@@ -267,12 +267,10 @@ vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'grey' })
 vim.opt.runtimepath:prepend('/home/teto/neovim/rest.nvim')
 vim.opt.runtimepath:prepend('/home/teto/tree-sitter-http')
 -- f3 to show tree
-vim.api.nvim_set_keymap(
-	'n',
-	'<f2>',
+vim.keymap.set('n', '<Leader><Leader>', '<Cmd>b#<CR>')
+
+vim.keymap.set('n', '<f2>',
 	"<cmd>lua require'plenary.reload'.reload_module('rest-nvim.request'); print(require'rest-nvim.request'.ts_get_requests())<cr>"
-	,
-	{}
 )
 
 local has_rest, rest = pcall(require, 'rest-nvim')
@@ -607,8 +605,6 @@ end
 nnoremap('n', '<Leader>ca', function()
 	vim.cmd([[FzfLua lsp_code_actions]])
 end)
-
--- nnoremap ( "n", "<leader>S",  function() require('spectre').open() end )
 
 -- since it was not merge yet
 -- inoremap <C-k><C-k> <Cmd>lua require'betterdigraphs'.digraphs("i")<CR>

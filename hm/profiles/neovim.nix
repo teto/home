@@ -473,30 +473,6 @@ let
 
     # (luaPlugin { plugin = nvim-peekup; })
 
-    # (luaPlugin {
-    #   plugin = nvim-biscuits;
-    #   config = ''
-    # require('nvim-biscuits').setup({
-    # on_events = { 'InsertLeave', 'CursorHoldI' },
-    # cursor_line_only = true,
-    # default_config = {
-    # max_length = 12,
-    # min_distance = 50,
-    # prefix_string = " 📎 "
-    # },
-    # language_config = {
-    # html = { prefix_string = " 🌐 " },
-    # javascript = {
-    # prefix_string = " ✨ ",
-    # max_length = 80
-    # },
-    # python = { disabled = true },
-    # -- nix = { disabled = true }
-    # }
-    # })
-
-    #   '';
-    # })
 
     # (luaPlugin {
     #   plugin = pywal-nvim;
@@ -618,9 +594,14 @@ let
 
     #  nvim-colorizer 
     (luaPlugin { plugin = nvim-terminal-lua; config = "require('terminal').setup()"; })
+
+	# TODO hacking on this
     {
       # display git diff while rebasing, pretty dope
       plugin = auto-git-diff;
+	  config = ''
+	  let g:auto_git_diff_disable_auto_update=1
+	  '';
     }
     # {
     #   plugin = vim-dasht;
@@ -901,9 +882,10 @@ in
 
     extraPackages = with pkgs; [
       # luaPackages.lua-lsp
-      lua53Packages.teal-language-server
+      # lua53Packages.teal-language-server
+	  editorconfig-checker # used in null-ls
       lua51Packages.luacheck
-      # haskellPackages.hasktags
+      haskellPackages.hasktags
       haskellPackages.fast-tags
       manix # should be no need, telescope-manix should take care of it
       nodePackages.vscode-langservers-extracted
@@ -911,7 +893,7 @@ in
       nodePackages.dockerfile-language-server-nodejs # broken
       nodePackages.pyright
       nodePackages.typescript-language-server
-      pandoc # for markdown preview, should be in the package closure instead
+      # pandoc # for markdown preview, should be in the package closure instead
       # pythonPackages.pdftotext  # should appear only in RC ? broken
       nil # a nix lsp
       # rnix-lsp

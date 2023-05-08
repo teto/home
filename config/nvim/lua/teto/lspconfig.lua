@@ -57,6 +57,7 @@ lspconfig.lua_ls.setup({
 ,
                     'alsa_monitor',
                 },
+                -- Define variable names that will not be reported as an unused local by unused-local.
                 unusedLocalExclude = { '_*' },
                 disable = { 'lowercase-global', 'unused-function' },
             },

@@ -1,20 +1,20 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, flakeInputs, ... }:
 
 with lib;
 
 let
   cfg = config.programs.zsh;
 
-  fzf-git-sh =
-    let
-      src = pkgs.fetchFromGitHub {
-        owner = "junegunn";
-        repo = "fzf-git.sh";
-        rev = "a48b9414872213430db18582585172d49fa57ac5";
-        sha256 = "sha256-wztFfe57ZNuuWSNfTFLKz8UJ5hJRtHl0QEd/1au6SWk=";
-      };
-    in
-    src;
+  fzf-git-sh = flakeInputs.fzf-git-sh;
+    # let
+    #   src = pkgs.fetchFromGitHub {
+    #     owner = "junegunn";
+    #     repo = "fzf-git.sh";
+    #     rev = "a48b9414872213430db18582585172d49fa57ac5";
+    #     sha256 = "sha256-wztFfe57ZNuuWSNfTFLKz8UJ5hJRtHl0QEd/1au6SWk=";
+    #   };
+    # in
+    # src;
 
 in
 {
@@ -72,9 +72,10 @@ in
     })
 
     (mkIf cfg.enableFzfGit {
-      programs.zsh.initExtra = ''
-        	   source ${fzf-git-sh}/fzf-git.sh
-        	   '';
+	 programs.zsh.initExtra =
+		''
+		source ${fzf-git-sh}/fzf-git.sh
+		'';
     })
 
     (mkIf cfg.enableFancyCtrlZ {

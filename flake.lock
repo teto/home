@@ -672,6 +672,22 @@
         "type": "github"
       }
     },
+    "fzf-git-sh": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1680064615,
+        "narHash": "sha256-fHbyZnJv1rGTqvXffBQH+Ndm4QXa3Oiyh/JT22xuJ/A=",
+        "owner": "junegunn",
+        "repo": "fzf-git.sh",
+        "rev": "703f9a2a0ae4b131def667d758649479236ad326",
+        "type": "github"
+      },
+      "original": {
+        "owner": "junegunn",
+        "repo": "fzf-git.sh",
+        "type": "github"
+      }
+    },
     "gitignore": {
       "flake": false,
       "locked": {
@@ -2141,6 +2157,7 @@
       "inputs": {
         "deploy-rs": "deploy-rs",
         "flake-utils": "flake-utils",
+        "fzf-git-sh": "fzf-git-sh",
         "hm": "hm",
         "i3pystatus": "i3pystatus",
         "mptcp-flake": "mptcp-flake",

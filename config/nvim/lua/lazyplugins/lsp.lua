@@ -1,11 +1,11 @@
 return {
  {'neovim/nvim-lspconfig' }, -- while fuzzing details out
  -- shows a lightbulb where a codeAction is available
- 'kosayoda/nvim-lightbulb',
- --	config = function ()
- --		vim.cmd [[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]]
- --	end
- -- }
+ -- { 'kosayoda/nvim-lightbulb',
+ -- 	config = function ()
+ -- 		vim.cmd [[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]]
+ -- 	end
+ --  },
  { 'lukas-reineke/lsp-format.nvim',
   config = function()
    require("lsp-format").setup {}

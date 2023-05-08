@@ -1,5 +1,12 @@
 return {
+   { 'simrat39/desktop-notify.nvim',
+   config = function () 
+     require("desktop-notify").override_vim_notify()
+    end
+    -- dependencies = { 'nvim-lua/plenary.nvim'}
+   },
 
+    -- colorschemes
     'Matsuuu/pinkmare',
     'flrnd/candid.vim',
     'uga-rosa/ccc.nvim',

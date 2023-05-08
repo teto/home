@@ -1,12 +1,45 @@
 return {
     {
+      -- :NullLsLog / NullLsInfo
         'jose-elias-alvarez/null-ls.nvim',
         config = function()
-          local null =  require('null-ls')
-            null.setup({
+          local null_ls =  require('null-ls')
+          -- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md
+          -- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTIN_CONFIG.md
+              -- null_ls.builtins.diagnostics.shellcheck.with({
+              -- For diagnostics sources, you can change the format of diagnostic messages by setting diagnostics_format:
+        -- diagnostic_config = {
+            -- -- see :help vim.diagnostic.config()
+            -- underline = true,
+            -- virtual_text = false,
+            -- signs = true,
+            -- update_in_insert = false,
+            -- severity_sort = true,
+        -- },
+    -- }),
+            null_ls.setup({
                 sources = {
+                    -- method = null_ls.methods.DIAGNOSTICS_ON_SAVE,
                     -- needs a luacheck in PATH
-                    null.builtins.diagnostics.luacheck,
+                    null_ls.builtins.diagnostics.luacheck.with({
+                     extra_args = {'--ignore 21/_.*'}
+                    }),
+                    null_ls.builtins.code_actions.shellcheck,
+                    null_ls.builtins.diagnostics.editorconfig_checker,
+                    -- null_ls.builtins.diagnostics.teal,
+                    -- null_ls.builtins.diagnostics.tsc
+                    null_ls.builtins.diagnostics.yamllint,
+                    null_ls.builtins.diagnostics.zsh,
+                    null_ls.builtins.formatting.black,
+                    null_ls.builtins.formatting.just,
+                    null_ls.builtins.formatting.markdown_toc,
+                    null_ls.builtins.formatting.nixpkgs_fmt,
+                    null_ls.builtins.formatting.treefmt.with({
+                        -- treefmt requires a config file
+                        condition = function(utils)
+                            return utils.root_has_file("treefmt.toml")
+                        end,
+                    }),
                     -- null.builtins.diagnostics.hlint,
                     -- require("null-ls").builtins.formatting.stylua,
                     -- require("null-ls").builtins.diagnostics.eslint,

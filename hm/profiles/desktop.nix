@@ -168,6 +168,7 @@ let
     # it's just that I can't setup latex correctly
     # unstable.libreoffice
 
+	# take the version from stable ?
     # qutebrowser # broken keyboard driven fantastic browser
     gnome.nautilus # demande webkit/todo replace by nemo ?
     # shutter # screenshot utility
@@ -218,7 +219,7 @@ in
 
   # tray is enabled by default
   services.udiskie = {
-    enable = true;
+    enable = false; # broken
     notify = false;
     automount = false;
   };

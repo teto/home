@@ -25,11 +25,6 @@ in
   };
 
   config = mkIf cfg.enable (mkMerge [
-    # (mkIf cfg.enableFzfGit {
-    #   programs.zsh.initExtra = ''
-    # source ${fzf-git-sh}/fzf-git.sh
-    # '';
-    # })
 
     (mkIf cfg.enableFancyCtrlZ {
       programs.zsh.initExtra = ''

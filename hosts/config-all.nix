@@ -180,6 +180,7 @@ rec {
       allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
         "Oracle_VM_VirtualBox_Extension_Pack"
         "ec2-api-tools"
+        "jiten"  # japanese software recognition tool
         "google-chrome"
         "slack"
         "steam"

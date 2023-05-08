@@ -1,5 +1,12 @@
 return {
- { dir = '/home/teto/neovim/jap.nvim' },
+ { dir = '/home/teto/neovim/jap.nvim',
+  config = function ()
+    vim.keymap.set('n', '<Leader>j', [[<Cmd>lua require'jap-nvim'.show_info()<CR>]])
+  end
+
+ },
+ { "shellRaining/hlchunk.nvim", event = { "UIEnter" }, },
+ { dir = '/home/teto/neovim/nvim-telescope-zeal-cli' },
 
  -- compete with registers.nvim
  -- https://github.com/gelguy/wilder.nvim
@@ -101,20 +108,27 @@ return {
  end
 },
 {
-  'glepnir/dashboard-nvim',
-  event = 'VimEnter',
-  config = function()
-    require('dashboard').setup {
-      -- config
-      -- change_to_vcs_root
-      -- shortcut_type = "letter" or "number"
-      hide = {
-       statusline = false
-      }
-    }
-  end,
-  dependencies = { {'nvim-tree/nvim-web-devicons'}}
+    'goolord/alpha-nvim',
+    -- requires = { 'nvim-tree/nvim-web-devicons' },
+    config = function ()
+        require'alpha'.setup(require'alpha.themes.startify'.config)
+    end
 },
+-- {
+--   'glepnir/dashboard-nvim',
+--   event = 'VimEnter',
+--   config = function()
+--     require('dashboard').setup {
+--       -- config
+--       -- change_to_vcs_root
+--       -- shortcut_type = "letter" or "number"
+--       hide = {
+--        statusline = false
+--       }
+--     }
+--   end,
+--   dependencies = { {'nvim-tree/nvim-web-devicons'}}
+-- },
  'cameron-wags/rainbow_csv.nvim',
  'gennaro-tedesco/nvim-peekup',
  'rhysd/vim-gfm-syntax', -- markdown syntax compatible with Github's

@@ -28,6 +28,10 @@
     deploy-rs.url = "github:serokell/deploy-rs";
     flake-utils.url = "github:numtide/flake-utils";
     treefmt-nix.url = "github:numtide/treefmt-nix";
+	fzf-git-sh = {
+	 url = "github:junegunn/fzf-git.sh";
+	 flake = false;
+	};
 
     peerix.url = "github:cid-chan/peerix";
     unstable.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -121,6 +125,7 @@
           home-manager.useGlobalPkgs = true;
           home-manager.extraSpecialArgs = {
             inherit secrets;
+			flakeInputs = self.inputs;
           };
           home-manager.users.teto = {
             imports = my_imports ++ [
