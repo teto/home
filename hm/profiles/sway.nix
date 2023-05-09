@@ -28,13 +28,13 @@ in
     ];
     # eventually start foot --server
     # TODO we should wrap sway with that ?
-	# export GBM_BACKENDS_PATH=/etc/gbm
+    # export GBM_BACKENDS_PATH=/etc/gbm
     extraSessionCommands = ''
-     # needs qt5.qtwayland in systemPackages
-	 export QT_QPA_PLATFORM=wayland
-	 export GBM_BACKEND=nvidia-drm
-	 export SDL_VIDEODRIVER=wayland
-	 export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
+           # needs qt5.qtwayland in systemPackages
+      	 export QT_QPA_PLATFORM=wayland
+      	 # export GBM_BACKEND=nvidia-drm
+      	 export SDL_VIDEODRIVER=wayland
+      	 export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
     '';
 
     wrapperFeatures = { gtk = true; };
@@ -42,10 +42,10 @@ in
     config = {
       terminal = term;
 
-	  # menu = 
+      # menu = 
 
-	  # we want to override the (pywal) config from i3
-	  colors = lib.mkForce { };
+      # we want to override the (pywal) config from i3
+      colors = lib.mkForce { };
 
       # Notification Daemon
       # Toggle control center

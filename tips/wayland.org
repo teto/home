@@ -1,0 +1,3 @@
+WLR_RENDERER=vulkan
+no_direct_scanout=1
+GBM_BACKEND=nvidia
