@@ -341,6 +341,7 @@ vim.g.fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %
 -- " leader
 -- " use 'bronson/vim-trailing-whitespace' " :FixWhitespace
 
+-- TODO this should depend on theme ! computed via lush
 vim.api.nvim_set_hl(0, 'DiagnosticVirtualTextError', { fg = 'red' })
 vim.api.nvim_set_hl(0, 'DiagnosticVirtualTextDebug', { fg = 'green' })
 
@@ -350,7 +351,6 @@ vim.keymap.set('n', '<Leader><Leader>', '<Cmd>b#<CR>')
 vim.keymap.set('n', '<Leader>ev', '<Cmd>e $MYVIMRC<CR>')
 vim.keymap.set('n', '<Leader>sv', '<Cmd>source $MYVIMRC<CR>')
 vim.keymap.set('n', '<Leader>el', '<Cmd>e ~/.config/nvim/lua/init-manual.lua<CR>')
-vim.keymap.set('n', '<Leader>em', '<Cmd>e ~/.config/nvim/lua/init-manual.vim<CR>')
 vim.keymap.set('n', '<F6>', '<Cmd>ASToggle<CR>')
 
 -- " set vim's cwd to current file's
@@ -371,6 +371,8 @@ vim.g.fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %
 
 vim.api.nvim_create_autocmd('TextYankPost', {
 	callback = function()
+		-- TODO higroup should be its own ? a darker version of CursorLine
+		-- if it doesnt exist
 		vim.highlight.on_yank({ higroup = 'IncSearch', timeout = 1000 })
 	end,
 })
@@ -379,6 +381,7 @@ nnoremap('n', '<leader>ml', '<Cmd>Modeliner<Enter>')
 vim.api.nvim_create_autocmd('ColorScheme', {
 	desc = "Set italic codelens on new colorschemes",
 	callback = function()
+		-- TODO create a TextYankPost highlight if it doesn't exist in scheme ?!
 		vim.api.nvim_set_hl(0, 'LspCodeLens', { italic = true })
 	end,
 })
@@ -566,6 +569,7 @@ if has_sniprun then
 	vim.api.nvim_set_keymap('n', '<leader>ff', '<Plug>SnipRun', { silent = true })
 end
 
+-- add description
 vim.api.nvim_set_keymap('n', '<f3>', '<cmd>lua require("nvim-treesitter.parsers").reset_cache(); vim.treesitter.show_tree()<cr>', {})
 vim.api.nvim_set_keymap('n', '<f5>', '<cmd>!make build', {})
 

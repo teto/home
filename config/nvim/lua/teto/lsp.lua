@@ -11,6 +11,13 @@ M.default_config = {
 	-- },
 	signs = true,
 	severity_sort = true,
+
+    -- TODO how to add borders ?
+    float = {
+     source = true;
+     severity_sort = true;
+
+    }
     -- update_in_insert = false,
 }
 

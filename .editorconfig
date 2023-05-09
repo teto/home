@@ -12,6 +12,9 @@ charset = utf-8
 indent_style = tab
 indent_size = 8
 
+[*.nix]
+indent_style = space
+
 [*.lua]
 indent_style = space
 

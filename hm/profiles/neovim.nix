@@ -322,7 +322,7 @@ let
             },
             mappings = {}
         }
-      '';
+        '';
     })
 
     vim-lion # Use with gl/L<text object><character to align to 
@@ -377,17 +377,17 @@ let
     }
 
     # FIX https://github.com/NixOS/nixpkgs/issues/169293 first
-	(luaPlugin {
-	  plugin = telescope-frecency-nvim; 
-	  config = ''
-	   require'telescope'.load_extension('frecency')
-	  '';
-	})
+    (luaPlugin {
+      plugin = telescope-frecency-nvim; 
+      config = ''
+       require'telescope'.load_extension('frecency')
+       '';
+    })
     (luaPlugin {
       plugin = nvimdev-nvim;
       optional = true;
       config = ''
-        	  -- nvimdev {{{
+        -- nvimdev {{{
         -- call nvimdev#init(--path/to/neovim--)
         vim.g.nvimdev_auto_init = 1
         vim.g.nvimdev_auto_cd = 1
@@ -417,9 +417,9 @@ let
 
   basePlugins = with pkgs.vimPlugins; [
     # Packer should remain first
-	(luaPlugin {
-	  plugin = nvim-telescope-zeal-cli;
-	})
+    (luaPlugin {
+      plugin = nvim-telescope-zeal-cli;
+    })
 
     # { plugin = vCoolor-vim; }
     (luaPlugin {
