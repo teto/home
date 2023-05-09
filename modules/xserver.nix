@@ -67,8 +67,6 @@
       # accelSpeed = "1.55";
     };
 
-    windowManager.i3.enable = true;
-
     # au moins pour le laptop
     # config = ''
     #   	  Section "Device"
@@ -80,6 +78,7 @@
 
     # to autostart i3
     # https://discourse.nixos.org/t/opening-i3-from-home-manager-automatically/4849/7
+    # desktopManager.defaultSession = "gnome"
     desktopManager.session = [
       {
         name = "home-manager";

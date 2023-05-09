@@ -283,13 +283,15 @@ in
   };
 
   xsession = {
-    enable = false;
+    enable = true;
+	numlock.enable = true;
     # will enable SNI for nm-applet => icon will popup on wayland systray
     preferStatusNotifierItems = true;
     scriptPath = ".hm-xsession";
+	# initExtra = 
 
-    profileExtra = ''
-    '';
+    # profileExtra = ''
+    # '';
   };
 
 

@@ -90,14 +90,6 @@
           overlays = (src.lib.attrValues self.overlays) ++ [
             self.inputs.rofi-hoogle.overlay
             # self.inputs.nix.overlays.default
-			# temporary overlay to work around pulumi error
-			# (final: prev: {
-
-			#   pulumi = prev.pulumi.overrideAttrs(oa: {
-			# 	src = self.inputs.pulumi-fork;
-			#   });
-
-			# })
           ];
           config = { allowUnfree = true; };
         };
@@ -111,7 +103,11 @@
 
 
       # TODO I should use hm.lib.homeManagerConfiguration
-      # and pass the pkgs to it
+      # and pass the pkgs to it with
+	  #             extraSpecialArgs = {
+              # flakeInputs = self.inputs;
+            # };
+
       hm-custom = my_imports: ({ config, lib, pkgs, ... }:
         {
           # necessary for plugins to see nur etc
@@ -145,13 +141,7 @@
     in
     flake-utils.lib.eachSystem [ "x86_64-linux" ]
       (system:
-        # let 
-        #  # deployNodes = {
-        #  # };
-        # in
         {
-
-
 
           devShells = {
             # default devShell when working on this repo:

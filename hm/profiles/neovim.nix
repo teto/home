@@ -417,6 +417,9 @@ let
 
   basePlugins = with pkgs.vimPlugins; [
     # Packer should remain first
+	(luaPlugin {
+	  plugin = nvim-telescope-zeal-cli;
+	})
 
     # { plugin = vCoolor-vim; }
     (luaPlugin {

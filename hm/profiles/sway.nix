@@ -20,6 +20,8 @@ in
   wayland.windowManager.sway = {
     # contrary to i3, use `sway reload` on sway
     enable = true;
+	# test to see if flickering persists
+	xwayland = false;
     systemdIntegration = true;
 
     extraOptions = [
@@ -30,8 +32,12 @@ in
     # TODO we should wrap sway with that ?
     # export GBM_BACKENDS_PATH=/etc/gbm
     extraSessionCommands = ''
+		 # according to https://www.reddit.com/r/swaywm/comments/11d89w2/some_workarounds_to_use_sway_with_nvidia/
+		 export XWAYLAND_NO_GLAMOR=1
+
            # needs qt5.qtwayland in systemPackages
       	 export QT_QPA_PLATFORM=wayland
+		 # works without GBM_BACKEND
       	 # export GBM_BACKEND=nvidia-drm
       	 export SDL_VIDEODRIVER=wayland
       	 export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
@@ -73,6 +79,7 @@ in
     # https://github.com/dylanaraps/pywal/blob/master/pywal/templates/colors-sway
     # TODO
     # from https://www.reddit.com/r/swaywm/comments/uwdboi/how_to_make_chrome_popup_windows_floating/
+	# mkBefore
     extraConfig = builtins.readFile ../../config/i3/config.shared + ''
       	  bindsym button2 kill
       	  smart_gaps yes

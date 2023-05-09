@@ -13,4 +13,7 @@ xwayland disable
 # to list xwayland clients
 xlsclients
 
+XWAYLAND_NO_GLAMOR=1
 
+# to check output config:
+swaymsg -t get_outputs

@@ -205,9 +205,6 @@
   # kind of a test
   # security.pam.services.lightdm.enableGnomeKeyring = true;
 
-  # will fial until openflowswitch is fixed
-  programs.mininet.enable = false;
-
   # ebpf ?
   # broken in https://github.com/NixOS/nixpkgs/issues/56724
   # programs.bcc.enable = true;
@@ -215,6 +212,8 @@
   services.xserver = {
     enable = true;
     autorun = false;
+
+    windowManager.i3.enable = true;
   };
 
   # this is required as well
