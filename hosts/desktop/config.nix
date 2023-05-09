@@ -14,29 +14,19 @@
     ../../nixos/profiles/postgresql.nix
     ../../nixos/profiles/steam.nix
     ../../nixos/profiles/opensnitch.nix
-    ../../nixos/profiles/gitlab-runner.nix
+    # ../../nixos/profiles/gitlab-runner.nix
     ../../nixos/profiles/steam.nix
 
     ../../modules/libvirtd.nix
     ../../modules/xserver.nix
-    ../../modules/redis.nix
+    # ../../modules/redis.nix
     ../../modules/ntp.nix
 
     # just to check how /etc/nix/machines looks like
     ../../modules/distributedBuilds.nix
 
-    # ./modules/syncthing.nix
     # ./modules/tor.nix
     # ./modules/sway.nix
-    #   ./modules/mininet.nix
-
-    # extra module not upstreamed yet
-    # makes it crash
-    # ({ config, lib, ... }:
-    # {
-    #   _file = "matt";
-    #   # boot.kernel.checkPackageConfig = true;
-    # })
 
   ];
 
@@ -222,7 +212,10 @@
   # broken in https://github.com/NixOS/nixpkgs/issues/56724
   # programs.bcc.enable = true;
 
-  # services.xserver.displayManager.gdm.nvidiaWayland = true;
+  services.xserver = {
+    enable = true;
+    autorun = false;
+  };
 
   # this is required as well
   hardware.nvidia = {
@@ -259,7 +252,6 @@
     WLR_NO_HARDWARE_CURSORS = "1";
 	LIBVA_DRIVER_NAME="nvidia";
 	__GLX_VENDOR_LIBRARY_NAME="nvidia";
-	# GBM_BACKEND="nvidia-drm";
   };
 
   # config from https://discourse.nixos.org/t/nvidia-users-testers-requested-sway-on-nvidia-steam-on-wayland/15264/32

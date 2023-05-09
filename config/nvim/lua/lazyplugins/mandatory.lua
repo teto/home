@@ -25,7 +25,7 @@ return {
       extra_args = { '--ignore 21/_.*' }
      }),
      null_ls.builtins.code_actions.shellcheck,
-     null_ls.builtins.diagnostics.editorconfig_checker,
+     -- null_ls.builtins.diagnostics.editorconfig_checker, -- too noisy
      -- null_ls.builtins.diagnostics.teal,
      -- null_ls.builtins.diagnostics.tsc
      null_ls.builtins.diagnostics.yamllint,

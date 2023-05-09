@@ -12,16 +12,17 @@
   # Enable the X11 windowing system.
   services.xserver = {
     enable = true;
-    autorun = true;
+	# TODO enable in host-specific configuration
+    # autorun = true;
 
     displayManager = {
 	 # enable startx if you want to bypass display managers
 	 startx.enable = true;
       autoLogin = {
-        enable =false;
+        enable = false;
         user = "teto";
       };
-      # defaultSession = "none+i3";
+      defaultSession = "none+i3";
       lightdm = {
         enable = false;
         greeter.enable = false;

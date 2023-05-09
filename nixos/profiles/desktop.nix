@@ -201,7 +201,7 @@
 
   # programs.file-roller.enable = true;
 
-  programs.system-config-printer.enable = true; # broken
+  programs.system-config-printer.enable = true;
 
   users.users.teto = {
     shell = pkgs.zsh;

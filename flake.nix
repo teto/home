@@ -128,8 +128,11 @@
 			flakeInputs = self.inputs;
           };
           home-manager.users.teto = {
+			# TODO it should load the whole folder
             imports = my_imports ++ [
               # custom modules
+              (import ./hm/modules/neovim.nix)
+              (import ./hm/modules/i3.nix)
               (import ./hm/modules/zsh.nix)
               (import ./hm/modules/xdg.nix)
             ];
@@ -329,6 +332,7 @@
                   # self.inputs.mptcp-flake.nixosModules.mptcp
                   # ./nixos/profiles/mptcp.nix
                   ./nixos/profiles/nova.nix
+
                 ];
               })
               hm.nixosModules.home-manager

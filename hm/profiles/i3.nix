@@ -111,9 +111,6 @@ let
 
     # TODO use id of default sinc
     # icons are set for papirus for now
-    "XF86AudioRaiseVolume" = "exec --no-startup-id ${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@  +5%;exec ${notify-send} --icon=audio-volume-high -u low -t 1000 'Audio Raised volume'";
-    "XF86AudioLowerVolume" = "exec --no-startup-id ${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ -5%;exec ${notify-send} --icon=audio-volume-low-symbolic -u low 'Audio lowered'";
-    "XF86AudioMute" = "exec --no-startup-id ${pkgs.pulseaudio}/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle;exec ${notify-send} --icon=speaker_no_sound -u low 'test'";
     # TODO use mpv instead
     "XF86AudioPlay" = "exec ${pkgs.vlc}/bin/vlc; exec ${notify-send} --icon=media-playback-stop-symbolic -u low 'test'";
     "--release Print" = "exec ${pkgs.flameshot}/bin/scrot -s '/tmp/%s_%H%M_%d.%m.%Y_$wx$h.png'";
@@ -230,6 +227,7 @@ in
   xsession.windowManager.i3 = {
     # keep it enabled to generate the config
     enable = true;
+	enableAudioKeys = true;
 
     # bindsym $mod+ctrl+v exec ~/vim-anywhere/bin/run"
 	# defini ans le sharedExtraConfig as well

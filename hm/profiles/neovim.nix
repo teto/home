@@ -837,10 +837,6 @@ let
 in
 {
 
-  imports = [
-    ../modules/neovim.nix
-  ];
-
   #  extraLuaPackages = ps: [ps.mpack];
   programs.neovim = {
     enable = true;

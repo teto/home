@@ -5,3 +5,8 @@ systemctl --user restart pipewire{,-pulse}.socket
 
 `wpctl status` to list the different IDs
 wpctl set-default
+
+❯ wpctl get-volume @DEFAULT_AUDIO_SINK@
+Volume: 0.35
+❯ wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.4
+❯ wpctl get-volume @DEFAULT_AUDIO_SINK@
