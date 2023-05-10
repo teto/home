@@ -207,7 +207,6 @@ let
         "ftplugin/c.vim".text = "setlocal omnifunc=v:lua.vim.lsp.omnifunc";
       };
     })
-    { plugin = auto-git-diff; }
 
     (luaPlugin {
       plugin = gitsigns-nvim;
@@ -425,9 +424,9 @@ let
     (luaPlugin {
       plugin = lazy-nvim;
       config = ''
-        -- require my own manual config
-        require('init-manual')
-      '';
+       -- require my own manual config
+       require('init-manual')
+       '';
     })
     # {
     #   # davidgranstrom/nvim-markdown-preview
@@ -464,9 +463,9 @@ let
     (luaPlugin {
       plugin = fzf-hoogle-vim;
       config = ''
-        vim.g.hoogle_path = "hoogle"
-        vim.g.hoogle_fzf_cache_file = vim.fn.stdpath('cache')..'/hoogle_cache.json'
-      '';
+       vim.g.hoogle_path = "hoogle"
+       vim.g.hoogle_fzf_cache_file = vim.fn.stdpath('cache')..'/hoogle_cache.json'
+       '';
     })
 
     # (luaPlugin {
@@ -496,7 +495,7 @@ let
         vim.g.haskell_enable_static_pointers = 1  -- to enable highlighting of `static`
         vim.g.haskell_backpack = 1                -- to enable highlighting of backpack keywords
         vim.g.haskell_indent_disable=1
-      '';
+        '';
     })
     # " gutentags + gutenhasktags {{{
     # " to keep logs GutentagsToggleTrace
@@ -631,7 +630,7 @@ let
       config = ''
         vim.g.dirvish_mode=2
         vim.g.loaded_netrwPlugin = 1
-      '';
+        '';
     })
 
     # {
@@ -779,7 +778,7 @@ let
         -- shell-escape is mandatory for minted
         -- check that '-file-line-error' is properly removed with pplatex
         -- executable The name/path to the latexmk executable. 
-      '';
+        '';
       # vim.gvimtex_compiler_latexmk = {
       #          'backend' : 'nvim',
       #          'background' : 1,

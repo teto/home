@@ -32,6 +32,7 @@ vim.g.mousemoveevent = 1
 -- must be setup before calling lazy
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
+vim.opt.colorcolumn = { 100 }
 vim.opt.termguicolors = true
 
 require('lazy').setup('lazyplugins', {

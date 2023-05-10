@@ -16,7 +16,7 @@ M.default_config = {
     float = {
      source = true;
      severity_sort = true;
-
+     border = "rounded";
     }
     -- update_in_insert = false,
 }

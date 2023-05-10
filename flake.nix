@@ -254,6 +254,8 @@
 			  { 
 				home-manager.users.root = {
 				 imports = [
+				                (import ./hm/modules/neovim.nix)
+
 				  (import ./hm/profiles/neovim.nix)
 				 ];
 

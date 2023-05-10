@@ -29,6 +29,7 @@
 
   # TODO generate a wrapper ?
   wayland.windowManager.sway = {
+   	xwayland = false;
     extraOptions = [
       "--verbose"
       "--debug"
@@ -44,6 +45,7 @@
     extraSessionCommands = ''
       export WLR_NO_HARDWARE_CURSORS=1
     '';
+
     # export GBM_BACKEND=nvidia-drm
     # export __GLX_VENDOR_LIBRARY_NAME=nvidia
   };
@@ -52,7 +54,7 @@
   programs.feh.enable = true;
 
   home.packages = with pkgs; [
-    signal-desktop
+    signal-desktop # installe a la main
     # gnome.gnome-maps
     xorg.xwininfo # for stylish
   ];
@@ -69,6 +71,7 @@
   services.nextcloud-client.enable = true;
 
   home.sessionVariables = {
+   # TODO create symlink ?
     DASHT_DOCSETS_DIR = "/mnt/ext/docsets";
     # $HOME/.local/share/Zeal/Zeal/docsets
   };

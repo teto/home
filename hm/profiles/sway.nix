@@ -21,7 +21,7 @@ in
     # contrary to i3, use `sway reload` on sway
     enable = true;
 	# test to see if flickering persists
-	xwayland = false;
+	xwayland = true;
     systemdIntegration = true;
 
     extraOptions = [
