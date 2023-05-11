@@ -571,7 +571,7 @@ if has_sniprun then
 end
 
 -- add description
-vim.api.nvim_set_keymap('n', '<f3>', '<cmd>lua require("nvim-treesitter.parsers").reset_cache(); vim.treesitter.show_tree()<cr>', {})
+vim.api.nvim_set_keymap('n', '<f3>', '<cmd>lua require("nvim-treesitter.parsers").reset_cache(); vim.treesitter.inspect_tree()<cr>', {})
 vim.api.nvim_set_keymap('n', '<f5>', '<cmd>!make build', {})
 
 vim.g.indicator_errors = ''

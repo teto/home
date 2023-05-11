@@ -72,6 +72,7 @@ let
   # Plug 'bakpakin/fennel.vim'
 
   filetypePlugins = with pkgs.vimPlugins; [
+    { plugin = pkgs.vimPlugins.hurl; }
     { plugin = wmgraphviz-vim; }
     { plugin = fennel-vim; }
     { plugin = vim-toml; }

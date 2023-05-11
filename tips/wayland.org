@@ -1,3 +1,13 @@
 WLR_RENDERER=vulkan
 no_direct_scanout=1
 GBM_BACKEND=nvidia
+
+* to list xwayland clients 
+
+ https://www.reddit.com/r/Fedora/comments/kx5yq6/how_to_detect_if_an_app_runs_on_wayland_or/
+ nix-locate xlsclients
+ xorg.xlsclients.out                              21,776 x /nix/store/9c1k6zj95fldfp9ibr7fbr0prhpymhy4-xlsclients-1.1.4/bin/xlsclients
+
+* to take a picture
+
+  grim -g "$(slurp)"

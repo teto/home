@@ -283,6 +283,7 @@ in
   };
 
   xsession = {
+   # TODO disable when using sway
     enable = true;
 	numlock.enable = true;
     # will enable SNI for nm-applet => icon will popup on wayland systray

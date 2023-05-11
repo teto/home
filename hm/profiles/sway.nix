@@ -21,7 +21,7 @@ in
     # contrary to i3, use `sway reload` on sway
     enable = true;
 	# test to see if flickering persists
-	xwayland = true;
+	# xwayland = true;
     systemdIntegration = true;
 
     extraOptions = [
@@ -32,23 +32,21 @@ in
     # TODO we should wrap sway with that ?
     # export GBM_BACKENDS_PATH=/etc/gbm
     extraSessionCommands = ''
-		 # according to https://www.reddit.com/r/swaywm/comments/11d89w2/some_workarounds_to_use_sway_with_nvidia/
-		 export XWAYLAND_NO_GLAMOR=1
+    # according to https://www.reddit.com/r/swaywm/comments/11d89w2/some_workarounds_to_use_sway_with_nvidia/
+    export XWAYLAND_NO_GLAMOR=1
 
-           # needs qt5.qtwayland in systemPackages
-      	 export QT_QPA_PLATFORM=wayland
-		 # works without GBM_BACKEND
-      	 # export GBM_BACKEND=nvidia-drm
-      	 export SDL_VIDEODRIVER=wayland
-      	 export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
+      # needs qt5.qtwayland in systemPackages
+    export QT_QPA_PLATFORM=wayland
+    # works without GBM_BACKEND
+    # export GBM_BACKEND=nvidia-drm
+    export SDL_VIDEODRIVER=wayland
+    export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
     '';
 
     wrapperFeatures = { gtk = true; };
 
     config = {
       terminal = term;
-
-      # menu = 
 
       # we want to override the (pywal) config from i3
       colors = lib.mkForce { };
@@ -101,25 +99,26 @@ in
    ";
 
   home.packages = with pkgs; [
-    # grimshot # simplifies usage of grim ?
-    clipman # clipboard manager, works with wofi
+    clipman # clipboard manager, works with wofi, y a ptet un module
     foot # terminal
-    grim # replace scrot
+    # use it with $ grim -g "$(slurp)"
+    grim # replace scrot/flameshot
     kanshi # autorandr-like
     wofi # rofi-like
     slurp # capture tool
-    # wf-recorder # for screencasts
+    wf-recorder # for screencasts
     # bemenu as a dmenu replacement
     # waybar # just for testing
     wl-clipboard # wl-copy / wl-paste
     wdisplays # to show 
     wob # to display a progressbar
-    # swaynotificationcenter # top cool broken
+    swaynotificationcenter # top cool broken
     swaynag-battery # https://github.com/NixOS/nixpkgs/pull/175905
   ];
 
   services.mako = {
-    enable = true;
+    # disabled in favor of swaync
+    enable = false;
     defaultTimeout = 4000;
     ignoreTimeout = false;
   };

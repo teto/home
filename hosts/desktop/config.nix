@@ -222,7 +222,8 @@
     modesetting.enable =true; # needs "modesetting" in videoDrivers ?
 
 	# may need to select appropriate driver
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
+    # choose between latest, beta, vulkan_beta, stable
+    package = config.boot.kernelPackages.nvidiaPackages.latest;
 
 	# open is only ready for data center use 
 	# open = true;
@@ -234,7 +235,8 @@
 
   # pkgs.linuxPackages_latest
   # environment.etc."gbm/nvidia-drm_gbm.so".source = "${pkgs.linuxPackages.nvidiaPackages.stable}/lib/libnvidia-allocator.so";
-  environment.etc."gbm/nvidia-drm_gbm.so".source = "/run/opengl-driver/lib/gbm/nvidia-drm_gbm.so";
+  # this sholdn't be necessary anymore ?
+  # environment.etc."gbm/nvidia-drm_gbm.so".source = "/run/opengl-driver/lib/gbm/nvidia-drm_gbm.so";
   # environment.etc."egl/egl_external_platform.d".source = "/run/opengl-driver/share/egl/egl_external_platform.d/";
   # /alsa-base.conf
   environment.etc."modprobe.d/alsa.conf".text = ''
@@ -254,10 +256,13 @@
   };
 
   # config from https://discourse.nixos.org/t/nvidia-users-testers-requested-sway-on-nvidia-steam-on-wayland/15264/32
+  # this 
   hardware.opengl.extraPackages = with pkgs; [
     vaapiVdpau
     libvdpau-va-gl
     libva
+    # trying to fix `WLR_RENDERER=vulkan sway`
+    vulkan-validation-layers 
   ];
   # security.sudo.wheelNeedsPassword = ;
   # disabled to run stable-diffusion
@@ -275,8 +280,6 @@
   environment.systemPackages = [
     # pkgs.linuxPackages.nvidia_x11.bin # to get nvidia-smi EVEN when nvidia is not used as a video driver
   ];
-
-  # system.userActivationScripts
 
   # $out here is the profile generation
   system.extraSystemBuilderCmds = ''

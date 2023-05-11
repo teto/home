@@ -29,7 +29,7 @@
 
   # TODO generate a wrapper ?
   wayland.windowManager.sway = {
-   	xwayland = false;
+   	xwayland = true;
     extraOptions = [
       "--verbose"
       "--debug"

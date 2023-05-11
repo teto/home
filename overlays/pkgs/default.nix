@@ -5,6 +5,7 @@ final: prev:
   inherit (final.callPackage ./lib.nix { }) mkRemoteBuilderDesc;
 
   rofi-wayland = prev.rofi.overrideAttrs (oa: {
+   pname = "rofi-wayland";
 
     src = final.fetchFromGitHub {
       owner = "lbonn";
@@ -14,7 +15,7 @@ final: prev:
     };
   });
 
-  rofi = final.rofi-wayland;
+  # rofi = final.rofi-wayland;
 
   Rdebug = final.lib.enableDebugging (prev.R);
 
