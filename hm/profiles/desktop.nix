@@ -50,8 +50,6 @@ let
     tio # serial console reader
 	viu # a console image viewer
     wine
-  ]
-  ++ lib.optionals all [
     hexyl # hex editor
   ];
 
@@ -143,17 +141,10 @@ let
       wally-cli # to flash ergodox keyboards
       wireshark
       xarchiver # to unpack/pack files
-      # xbacklight # for usage with i3pystatus backight module
-      xclip
-      xcwd
-      xdotool # needed for vimtex + zathura
-      xorg.xbacklight # todo should be set from module
-      xorg.xev
       # zathura # broken
+      ytfzf # browse youtube
     ]
-    ++ lib.optionals all [
-      gnome.gnome-calculator # compare with qalqulate-gtk
-    ]
+    #   gnome.gnome-calculator # compare with qalqulate-gtk
   ;
 
   # home.sessionVariables = {

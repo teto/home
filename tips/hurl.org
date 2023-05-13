@@ -1,0 +1,13 @@
+hurl --test basic.hurl
+hurl --variables-file vars.env test.hurl
+
+export HURL_host=example.net
+export HURL_id=1234 
+
+hurl test.hurl
+
+https://hurl.dev/docs/templates.html
+
+
+to capture and reuse values: https://hurl.dev/docs/capturing-response.html
+basically add [Capture]
