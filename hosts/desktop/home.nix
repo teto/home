@@ -5,7 +5,6 @@
     # Not tracked, so doesn't need to go in per-machine subdir
     ../../hm/profiles/android.nix
     ../../hm/profiles/desktop.nix
-    ../../hm/profiles/polybar.nix
     ../../hm/profiles/sway.nix
     ../../hm/profiles/neomutt.nix
     ../../hm/profiles/nushell.nix

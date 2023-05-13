@@ -311,17 +311,16 @@
             };
             modules = [
               self.inputs.sops-nix.nixosModules.sops
-              self.inputs.peerix.nixosModules.peerix
+                  # self.inputs.mptcp-flake.nixosModules.mptcp
+              # self.inputs.peerix.nixosModules.peerix
               # often breaks
               # (import ./nixos/modules/hoogle.nix)
               ({ pkgs, ... }: {
                 nixpkgs.overlays = nixpkgs.lib.attrValues self.overlays;
-                nix.distributedBuilds = true;
 
                 imports = [
                   ./hosts/desktop/config.nix
                   # ./nixos/profiles/peerix.nix
-                  # self.inputs.mptcp-flake.nixosModules.mptcp
                   # ./nixos/profiles/mptcp.nix
                   ./nixos/profiles/nova.nix
 
@@ -336,13 +335,13 @@
                 nova.hmProfiles.standard
                 nova.hmProfiles.dev
                 nova.hmProfiles.devops
-                ./hm/profiles/dunst.nix
                 ./hm/profiles/experimental.nix
                 ./hm/profiles/japanese.nix
                 ./hm/profiles/fcitx.nix
                 ./hm/profiles/nova.nix
                 ./hm/profiles/vscode.nix
                 ./hm/profiles/extra.nix
+                ./hm/profiles/sway.nix
                 # services.opensnitch-ui.enable
                 # ./hm/profiles/gaming.nix
 

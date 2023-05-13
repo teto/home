@@ -123,7 +123,7 @@ lspconfig.pyright.setup({
                  reportUnusedFunction = false,
                  reportUnusedClass = false,
                  reportPrivateImportUsage = "none",
-                 -- reportMissingImports = false,
+                 reportMissingImports = false,
                 },
                 disableOrganizeImports = true,
                 reportConstantRedefinition = true,

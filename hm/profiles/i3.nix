@@ -137,6 +137,16 @@ let
     "$mod+Shift+Up" = "move up";
     "$mod+Shift+Right" = "move right";
 
+    "$mod+f" = "fullscreen";
+    "$mod+Shift+f" = "fullscreen global";
+    "$mod+button3" = "floating toggle";
+    "$mod+m" = ''mode "monitors'';
+    # "XF86MonBrightnessUp" = "exec ${pkgs.xorg.xbacklight}/bin/xbacklight -inc 10";
+    # "XF86MonBrightnessDown" = "exec ${pkgs.xorg.xbacklight}/bin/xbacklight -dec 10";
+    # brightnessctl
+    "XF86MonBrightnessUp" = "exec ${pkgs.brightnessctl}/bin/brightnessctl set +10";
+    "XF86MonBrightnessDown" = "exec ${pkgs.brightnessctl}/bin/brightnessctl set -10";
+
    } 
    // (lib.concatMapAttrs (bind_ws "Fr") wsAzertyBindings)
    // (lib.concatMapAttrs (bind_ws "Us") wsQwertyBindings)
@@ -159,6 +169,25 @@ let
   ;
 in
 {
+  xsession = {
+   # TODO disable when using sway
+    enable = true;
+	numlock.enable = true;
+    # will enable SNI for nm-applet => icon will popup on wayland systray
+    preferStatusNotifierItems = true;
+    scriptPath = ".hm-xsession";
+	# initExtra = 
+
+    # profileExtra = ''
+    # '';
+  };
+
+
+  imports = [
+   # todo should be disabled if sway enabled 
+    # ./dunst.nix
+  ];
+
   home.sessionVariables = {
     # JUPYTER_CONFIG_DIR=
 
@@ -174,6 +203,7 @@ in
       xdotool # needed for vimtex + zathura
       xorg.xbacklight # todo should be set from module
       xorg.xev
+      # pkgs.deadd-notification-center
   ];
 
   # see https://discourse.nixos.org/t/opening-i3-from-home-manager-automatically/4849/7
@@ -295,15 +325,15 @@ in
       # consider using lib.mkOptionDefault according to help
       keybindings =
         {
-          "$mod+f" = "fullscreen";
-          "$mod+Shift+f" = "fullscreen global";
-          "$mod+button3" = "floating toggle";
-          "$mod+m" = ''mode "monitors'';
-          # "XF86MonBrightnessUp" = "exec ${pkgs.xorg.xbacklight}/bin/xbacklight -inc 10";
-          # "XF86MonBrightnessDown" = "exec ${pkgs.xorg.xbacklight}/bin/xbacklight -dec 10";
-          # brightnessctl
-          "XF86MonBrightnessUp" = "exec ${pkgs.brightnessctl}/bin/brightnessctl set +10";
-          "XF86MonBrightnessDown" = "exec ${pkgs.brightnessctl}/bin/brightnessctl set -10";
+          # "$mod+f" = "fullscreen";
+          # "$mod+Shift+f" = "fullscreen global";
+          # "$mod+button3" = "floating toggle";
+          # "$mod+m" = ''mode "monitors'';
+          # # "XF86MonBrightnessUp" = "exec ${pkgs.xorg.xbacklight}/bin/xbacklight -inc 10";
+          # # "XF86MonBrightnessDown" = "exec ${pkgs.xorg.xbacklight}/bin/xbacklight -dec 10";
+          # # brightnessctl
+          # "XF86MonBrightnessUp" = "exec ${pkgs.brightnessctl}/bin/brightnessctl set +10";
+          # "XF86MonBrightnessDown" = "exec ${pkgs.brightnessctl}/bin/brightnessctl set -10";
 
         }
         // sharedKeybindings;

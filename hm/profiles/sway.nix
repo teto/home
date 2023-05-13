@@ -10,6 +10,39 @@ let
 
 in
 {
+  home.packages = with pkgs; [
+    clipman # clipboard manager, works with wofi, y a ptet un module
+    foot # terminal
+    # use it with $ grim -g "$(slurp)"
+    grim # replace scrot/flameshot
+    kanshi # autorandr-like
+    kickoff # transparent launcher for wlr-root
+    fnott # notification tool
+    wofi # rofi-like
+    slurp # capture tool
+    wf-recorder # for screencasts
+    # bemenu as a dmenu replacement
+    # waybar # just for testing
+    wl-clipboard # wl-copy / wl-paste
+    wdisplays # to show 
+    wob # to display a progressbar
+    swaybg # to set wallpaper
+    swayimg # imageviewer
+    swaynotificationcenter # top cool broken
+    # could use fnott as well !
+    swaynag-battery # https://github.com/NixOS/nixpkgs/pull/175905
+    sway-launcher-desktop # fzf-based launcher
+    sov  # sway overview https://github.com/milgra/sov
+    wlr-randr # like xrandr
+    nwg-bar  # locks nothing
+    nwg-drawer # launcher
+    nwg-menu
+    wlogout
+    swaylock
+    waybar
+    polybar
+  ];
+
   # https://github.com/rycee/home-manager/pull/829
   services.swayidle = {
     enable = true;
@@ -23,12 +56,22 @@ in
   # xdg.configFile."sway/config" = 
 
   wayland.windowManager.sway = {
+   enable = true;
     config = (builtins.removeAttrs config.xsession.windowManager.i3.config [ "startup" "bars" ])
       // {
+       output = {
+        # todo put a better path
+        # example = { "HDMI-A-2" = { bg = "~/path/to/background.png fill"; }; };
+
+         "*" = {  bg = "/home/teto/home/wallpapers/nebula.jpg fill"; };
+       };
       input = {
         "type:keyboard" = {
           xkb_layout = "us,fr";
           xkb_options = "ctrl:nocaps";
+          xkb_numlock =  "enabled"; # sadly bools wont work
+          # repeat_delay 500
+          # repeat_rate 5
           # to swap altwin:swap_lalt_lwin
         };
       };
@@ -90,6 +133,7 @@ in
 
 	extraConfigEarly = sharedConfig.sharedExtraConfig;
 
+    # output HDMI-A-1 bg ~/wallpaper.png stretch
     extraConfig = builtins.readFile ../../config/i3/config.shared + ''
       bindsym button2 kill
       smart_gaps yes
@@ -137,23 +181,6 @@ in
 	include ${../../config/i3/config.shared}
    ";
 
-  home.packages = with pkgs; [
-    clipman # clipboard manager, works with wofi, y a ptet un module
-    foot # terminal
-    # use it with $ grim -g "$(slurp)"
-    grim # replace scrot/flameshot
-    kanshi # autorandr-like
-    wofi # rofi-like
-    slurp # capture tool
-    wf-recorder # for screencasts
-    # bemenu as a dmenu replacement
-    # waybar # just for testing
-    wl-clipboard # wl-copy / wl-paste
-    wdisplays # to show 
-    wob # to display a progressbar
-    swaynotificationcenter # top cool broken
-    swaynag-battery # https://github.com/NixOS/nixpkgs/pull/175905
-  ];
 
   services.mako = {
     # disabled in favor of swaync
@@ -164,5 +191,8 @@ in
 
   services.kanshi = {
     enable = true;
+  };
+  programs.waybar = {
+   enable = true;
   };
 }

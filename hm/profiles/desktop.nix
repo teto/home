@@ -87,13 +87,13 @@ let
     all: with pkgs; [
       # apvlv # broken
       # TODO
-      # buku # broken
+      buku # broken
       # gcalc
       # gnome.gnome_control_center
       # i3-layout-manager  # to save/load layouts
       # mdp # markdown CLI presenter
       # nyxt      # lisp browser
-      # papis # library manager
+      papis # library manager
       # requires xdmcp https://github.com/freedesktop/libXdmcp
       # smplayer # GUI around mpv
       # todo try sthg else
@@ -101,6 +101,7 @@ let
       # unstable.transmission_gtk  # bittorrent client
       # vimiv # image viewer
 	  usbutils
+      imv
 	  vifm
 
       arandr # to move screens/monitors around
@@ -175,18 +176,17 @@ in
   imports = [
     ./common.nix
     ./kitty.nix
-    ./rofi.nix
     ./mpv.nix
     ./dev.nix
     # ./modules/home-tor.nix
     ./ssh-config.nix
     ./i3.nix
+    ./rofi.nix
     ./wal.nix
 
     ./nushell.nix
     ./fcitx.nix
     ./firefox.nix
-    ./notifications.nix
     ./neovim.nix
   ];
 
@@ -271,19 +271,6 @@ in
   programs.rofi.theme = {
     "@import" = "${config.xdg.cacheHome}/wal/colors-rofi-dark.rasi";
     "@theme" = "purple";
-  };
-
-  xsession = {
-   # TODO disable when using sway
-    enable = true;
-	numlock.enable = true;
-    # will enable SNI for nm-applet => icon will popup on wayland systray
-    preferStatusNotifierItems = true;
-    scriptPath = ".hm-xsession";
-	# initExtra = 
-
-    # profileExtra = ''
-    # '';
   };
 
 
