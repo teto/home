@@ -87,17 +87,28 @@ lspconfig.dockerls.setup({})
 -- -- }
 -- })
 
+
+
+local pyrightCapabilities = vim.lsp.protocol.make_client_capabilities()
+pyrightCapabilities.textDocument.publishDiagnostics.tagSupport.valueSet = { 2 }
+
 -- you can configure pyright via a pyrightconfig.json too
 -- https://github.com/microsoft/pyright/blob/cf1a5790d2105ac60dd3378a46725519d14b2844/docs/configuration.md
--- https://github.com/microsoft/pyright/blob/master/docs/configuration.md
+-- https://microsoft.github.io/pyright/#/configuration?id=diagnostic-rule-defaults
 lspconfig.pyright.setup({
     -- cmd = {"pyright-langserver", "--stdio"};
     -- filetypes = {"python"};
     autostart = false, -- This is the important new option
-    root_dir = lspconfig.util.root_pattern('.git', 'setup.py', 'setup.cfg', 'pyproject.toml', 'requirements.txt'),
+    flags = {
+      debounce_text_changes = 150,
+    },
+    capabilities = pyrightCapabilities,
+    root_dir = lspconfig.util.root_pattern(
+      '.git', 'setup.py', 'setup.cfg', 'pyproject.toml', 'requirements.txt'),
     -- on_attach=attach_cb.on_attach,
     settings = {
         -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#pyright
+        -- https://microsoft.github.io/pyright/#/settings
         python = {
             analysis = {
                 -- enum { "Error", "Warning", "Information", "Trace" }
@@ -107,11 +118,23 @@ lspconfig.pyright.setup({
                 --
                 useLibraryCodeForTypes = true,
                 typeCheckingMode = 'basic', -- 'off', 'basic', 'strict'
-                reportUnusedVariable = false,
-                reportUnusedFunction = false,
-                reportUnusedClass = false,
+                diagnosticSeverityOverrides = {
+                 reportUnusedVariable = false,
+                 reportUnusedFunction = false,
+                 reportUnusedClass = false,
+                 reportPrivateImportUsage = "none",
+                 -- reportMissingImports = false,
+                },
                 disableOrganizeImports = true,
                 reportConstantRedefinition = true,
+                autoSearchPaths = true,
+
+                diagnosticMode = 'openFilesOnly', -- or workspace
+                extraPaths = {
+                 -- "pkgs/applications/editors/vim/plugins"
+                 "/home/teto/nixpkgs3/maintainers/scripts"
+
+                },
                 -- reportUnknownParameterType
                 -- diagnosticSeverityOverrides = {
                 --		reportUnusedImport = "warning";

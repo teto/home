@@ -6,9 +6,9 @@ M.default_config = {
 	-- disabled because too big in haskell
 	virtual_lines = { only_current_line = true },
 	virtual_text = false,
-	-- {
-	-- severity = { min = vim.diagnostic.severity.WARN }
-	-- },
+	{
+       severity = { min = vim.diagnostic.severity.WARN }
+	},
 	signs = true,
 	severity_sort = true,
 
