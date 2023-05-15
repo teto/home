@@ -102,7 +102,7 @@
   };
 
   systemd.packages = [
-    pkgs.deadd-notification-center
+    # pkgs.deadd-notification-center
   ];
 
   # udisks2 GUI

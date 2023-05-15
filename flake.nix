@@ -35,7 +35,7 @@
 
     peerix.url = "github:cid-chan/peerix";
     unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-    mptcp-flake.url = "github:teto/mptcp-flake";
+    # mptcp-flake.url = "github:teto/mptcp-flake/fix-flake";
     mujmap.url = "github:teto/mujmap/flake";
     rofi-hoogle.url = "github:teto/rofi-hoogle/fixup";
 
@@ -50,7 +50,7 @@
     nur.url = "github:nix-community/NUR";
     nixpkgs-wayland.url = "github:nix-community/nixpkgs-wayland";
     purebred.url = "github:purebred-mua/purebred";
-    poetry.url = "github:nix-community/poetry2nix";
+    # poetry.url = "github:nix-community/poetry2nix";
     nix-update.url = "github:Mic92/nix-update";
     nix-index-cache.url = "github:Mic92/nix-index-database";
     i3pystatus = { url = "github:teto/i3pystatus/nix_backend"; flake = false; };
@@ -436,7 +436,7 @@
         wireshark = import ./overlays/wireshark.nix;
         python = import ./overlays/python.nix;
         # wayland = self.inputs.nixpkgs-wayland.overlay;
-        mptcp = self.inputs.mptcp-flake.overlays.default;
+        # mptcp = self.inputs.mptcp-flake.overlays.default;
         nur = nur.overlay;
 		nova-ci = self.inputs.nova-ci.overlays.default;
 

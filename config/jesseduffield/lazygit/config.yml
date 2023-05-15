@@ -160,8 +160,8 @@ keybinding:
     update: u
     bulkMenu: b
 os:
-  openCommand: sh -c "xdg-open {{filename}} >/dev/null"
-  openLinkCommand: sh -c "xdg-open {{link}} >/dev/null"
+  open: sh -c "xdg-open {{filename}} >/dev/null"
+  openLink: sh -c "xdg-open {{link}} >/dev/null"
 disableStartupPopups: false
 customCommands: []
 services: {}

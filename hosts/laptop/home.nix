@@ -40,6 +40,17 @@
       "--debug"
     ];
   };
+  programs.waybar = {
+   settings = {
+     mainBar = {
+       modules-right = [ 
+        "battery"
+        "bluetooth"
+        # "backlight"
+       ];
+    };
+    };
+  };
 
   home.packages = with pkgs; [
     hlint # (for test with manpage)

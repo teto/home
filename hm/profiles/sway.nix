@@ -57,6 +57,7 @@ in
 
   wayland.windowManager.sway = {
    enable = true;
+   systemdIntegration = true;
     config = (builtins.removeAttrs config.xsession.windowManager.i3.config [ "startup" "bars" ])
       // {
        output = {
@@ -77,14 +78,26 @@ in
       };
       terminal = term;
       bars = [
+        # {
+        #   position = "top";
+        #   workspaceButtons = true;
+        #   workspaceNumbers = false;
+        #   # id="0";
+        #   # command="${pkgs.waybar}/bin/waybar";
+        #   command = "${pkgs.sway}/bin/swaybar";
+        #   statusCommand = "${pkgs.i3pystatus-custom}/bin/i3pystatus-python-interpreter $XDG_CONFIG_HOME/i3/myStatus.py";
+        #   # extraConfig = ''
+        #   #   icon_theme Adwaita
+        #   # '';
+        # }
         {
           position = "top";
           workspaceButtons = true;
           workspaceNumbers = false;
           # id="0";
           # command="${pkgs.waybar}/bin/waybar";
-          command = "${pkgs.sway}/bin/swaybar";
-          statusCommand = "${pkgs.i3pystatus-custom}/bin/i3pystatus-python-interpreter $XDG_CONFIG_HOME/i3/myStatus.py";
+          command = "waybar";
+          # statusCommand = "${pkgs.i3pystatus-custom}/bin/i3pystatus-python-interpreter $XDG_CONFIG_HOME/i3/myStatus.py";
           # extraConfig = ''
           #   icon_theme Adwaita
           # '';
@@ -192,7 +205,125 @@ in
   services.kanshi = {
     enable = true;
   };
-  programs.waybar = {
+
+  programs.waybar = let 
+
+   # TODO make sure it has jq in PATH
+   githubUpdater = pkgs.writeShellScript "github" (builtins.readFile ../modules/waybar/github.sh);
+# token=`cat ${HOME}/.config/github/notifications.token`
+# count=`curl -u username:${token} https://api.github.com/notifications | jq '. | length'`
+
+# if [[ "$count" != "0" ]]; then
+#     echo '{"text":'$count',"tooltip":"$tooltip","class":"$class"}'
+# fi
+
+
+
+  in {
    enable = true;
+   systemd.enable = true;
+   settings = {
+     mainBar = {
+       layer = "top";
+       position = "top";
+       height = 30;
+       # output = [
+         # "eDP-1"
+         # "HDMI-A-1"
+       # ];
+       # "wlr/taskbar" 
+       modules-left = [
+        "sway/workspaces"
+        "sway/mode"
+       ];
+       modules-center = [
+        "sway/window" 
+       # "custom/hello-from-waybar"
+      ];
+       modules-right = [ 
+        # "mpd"
+        # "custom/mymodule#with-css-id"
+        # "temperature"
+        "clock"
+         "idle_inhibitor"
+         # "backlight" # enabled only on laptop
+         "wireplumber"
+        "tray"
+        "custom/notification"
+        "custom/github"
+        "custom/notmuch"
+       ];
+    "tray"= {
+        # "icon-size": 21,
+        "spacing"= 10;
+    };
+    wireplumber= {
+     "format"= "{volume}% {icon}";
+     "format-muted"= "";
+     "on-click"= "helvum";
+     "format-icons"= ["" "" ""];
+    };
+    clock = {
+        # "timezone": "America/New_York",
+        # TODO look how to display timezone
+        "timezones" = [  "Europe/Paris"  "Asia/Tokyo" ];
+        "tooltip-format"= "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
+        "format-alt"= "{:%Y-%m-%d}";
+     };
+
+       "sway/workspaces" = {
+        # {name}:
+         format= "{name}";
+         disable-scroll = false;
+         all-outputs = true;
+         # disable-scroll-wraparound = true;
+         # "disable-markup" : false,
+         # format-icons = {
+         #    "1" = "";
+         #    "2" = "";
+         #    "3" = "";
+         # };
+       };
+       "custom/notification" = {
+         "tooltip" = false;
+         "format" = "{icon}";
+         "format-icons" = {
+           "notification" = "<span foreground='red'><sup></sup></span>";
+           "none" = "";
+           "dnd-notification" = "<span foreground='red'><sup></sup></span>";
+           "dnd-none" = "";
+           "inhibited-notification" = "<span foreground='red'><sup></sup></span>";
+           "inhibited-none" = "";
+           "dnd-inhibited-notification" = "<span foreground='red'><sup></sup></span>";
+           "dnd-inhibited-none" = "";
+         };
+         return-type = "json";
+         "exec-if" = "which swaync-client";
+         "exec" = "swaync-client -swb";
+         "on-click" = "swaync-client -t -sw";
+         "on-click-right" = "swaync-client -d -sw";
+         "escape" = true;
+       };
+       "custom/github"= {
+          "format"= "{} ";
+          "return-type"= "json";
+          "interval"= 60;
+          # "exec"= "$HOME/.config/waybar/github.sh";
+          exec = githubUpdater;
+          "on-click"= "xdg-open https://github.com/notifications";
+      };
+       "custom/notmuch" = {
+         format = "Mail: {}";
+         max-length = 40;
+         # TODO run regularly
+         interval = "once";
+         githubUpdater = pkgs.writeShellScript "waybar-notmuch-module" (builtins.readFile ../modules/waybar/notmuch.sh);
+
+         # exec = pkgs.writeShellScript "hello-from-waybar" ''
+         #   echo "from within waybar"
+         # '';
+       };
+     };
+    };
   };
 }

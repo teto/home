@@ -117,7 +117,7 @@
       initial_command = "search tag:inbox AND NOT tag:killed";
       # initial_command = "bufferlist; taglist; search foo; search bar; buffer 0";
       # envelope_txt2html = "pandoc -f markdown -t html -s --self-contained";
-      envelope_html2txt = "${pkgs.pandoc}/bin/pandoc -t markdown -f html";
+      # envelope_html2txt = "${pkgs.pandoc}/bin/pandoc -t markdown -f html";
     };
   };
 }

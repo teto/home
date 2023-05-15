@@ -18,4 +18,5 @@ config/kitty/kitty.conf
 config/astroid/poll.sh
 config/rofi-pass/
 config/terminator
+misc/
 # **

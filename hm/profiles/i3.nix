@@ -141,11 +141,9 @@ let
     "$mod+Shift+f" = "fullscreen global";
     "$mod+button3" = "floating toggle";
     "$mod+m" = ''mode "monitors'';
-    # "XF86MonBrightnessUp" = "exec ${pkgs.xorg.xbacklight}/bin/xbacklight -inc 10";
-    # "XF86MonBrightnessDown" = "exec ${pkgs.xorg.xbacklight}/bin/xbacklight -dec 10";
     # brightnessctl
-    "XF86MonBrightnessUp" = "exec ${pkgs.brightnessctl}/bin/brightnessctl set +10";
-    "XF86MonBrightnessDown" = "exec ${pkgs.brightnessctl}/bin/brightnessctl set -10";
+    "XF86MonBrightnessUp" = "exec ${pkgs.brightnessctl}/bin/brightnessctl set +10%";
+    "XF86MonBrightnessDown" = "exec ${pkgs.brightnessctl}/bin/brightnessctl set 10%-";
 
    } 
    // (lib.concatMapAttrs (bind_ws "Fr") wsAzertyBindings)
@@ -203,7 +201,6 @@ in
       xdotool # needed for vimtex + zathura
       xorg.xbacklight # todo should be set from module
       xorg.xev
-      # pkgs.deadd-notification-center
   ];
 
   # see https://discourse.nixos.org/t/opening-i3-from-home-manager-automatically/4849/7

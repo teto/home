@@ -55,7 +55,7 @@ zbell_end() {
 
 	if (( ! $has_ignored_cmd )) && (( ran_long )); then
 		print -n "\a"
-		notify-send "$zbell_lastcmd"
+		# notify-send "zbell-alert: $zbell_lastcmd"
 	fi
 }
 

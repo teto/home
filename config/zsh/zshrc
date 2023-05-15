@@ -16,7 +16,7 @@ function rfw(){
 # export PATH="${XDG_DATA_HOME}/../bin:$PATH"
 # notifies when long command finishes
 # zbell should recognize aliases
-zbell_ignore=("$EDITOR" "$PAGER" v)
+# zbell_ignore=("$EDITOR" "$PAGER" v)
 
 # zsh.enableSuggestions right handside color
 # see https://github.com/zsh-users/zsh-autosuggestions for suggestions
