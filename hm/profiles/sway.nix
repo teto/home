@@ -305,19 +305,20 @@ in
          "escape" = true;
        };
        "custom/github"= {
-          "format"= "{} ";
+          "format"= "GITHUB {} ";
           "return-type"= "json";
           "interval"= 60;
           # "exec"= "$HOME/.config/waybar/github.sh";
           exec = githubUpdater;
-          "on-click"= "xdg-open https://github.com/notifications";
+          on-click = "xdg-open https://github.com/notifications";
       };
        "custom/notmuch" = {
          format = "Mail: {}";
          max-length = 40;
          # TODO run regularly
-         interval = "once";
-         githubUpdater = pkgs.writeShellScript "waybar-notmuch-module" (builtins.readFile ../modules/waybar/notmuch.sh);
+         interval = 60;
+         on_click = "kitty sh -c alot -l/tmp/alot.log";
+         exec = pkgs.writeShellScript "waybar-notmuch-module" (builtins.readFile ../modules/waybar/notmuch.sh);
 
          # exec = pkgs.writeShellScript "hello-from-waybar" ''
          #   echo "from within waybar"

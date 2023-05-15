@@ -9,8 +9,7 @@
 
   # This will add secrets.yml to the nix store
   # You can avoid this by adding a string to the full path instead, i.e.
-  # sops.defaultSopsFile = "/root/.sops/secrets/example.yaml";
-  sops.defaultSopsFile = ../../secrets/example.yaml;
+  sops.defaultSopsFile = ../../hosts/desktop/secrets.yaml;
 
   # This will automatically import SSH keys as age keys
   # sops.age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
@@ -30,9 +29,17 @@
 
   };
 
+  sops.secrets.nix_extra_config = {
+    mode = "400";
+    owner = config.users.users.teto.name;
+    group = config.users.users.teto.group;
+
+  };
+
   sops.secrets."gitlab/registrationToken" = {
     mode = "0440";
-    owner = config.users.users.nobody.name;
+    # TODO only readable by gitlab
+    owner = config.users.users.teto.name;
     group = config.users.users.nobody.group;
   };
 
