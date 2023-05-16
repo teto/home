@@ -20,3 +20,4 @@ config/rofi-pass/
 config/terminator
 misc/
 # **
+test*

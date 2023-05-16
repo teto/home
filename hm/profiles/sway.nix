@@ -209,7 +209,13 @@ in
   programs.waybar = let 
 
    # TODO make sure it has jq in PATH
-   githubUpdater = pkgs.writeShellScript "github" (builtins.readFile ../modules/waybar/github.sh);
+   githubUpdater = pkgs.writeShellApplication 
+    { name = "github-updater";
+      runtimeInputs = [ pkgs.curl pkgs.jq ];
+      text = (builtins.readFile ../modules/waybar/github.sh);
+      checkPhase = ":";
+    };
+
 # token=`cat ${HOME}/.config/github/notifications.token`
 # count=`curl -u username:${token} https://api.github.com/notifications | jq '. | length'`
 
@@ -285,8 +291,8 @@ in
          # };
        };
        "custom/notification" = {
-         "tooltip" = false;
-         "format" = "{icon}";
+         tooltip = false;
+         format = "{icon}";
          "format-icons" = {
            "notification" = "<span foreground='red'><sup></sup></span>";
            "none" = "";
@@ -298,27 +304,39 @@ in
            "dnd-inhibited-none" = "";
          };
          return-type = "json";
-         "exec-if" = "which swaync-client";
-         "exec" = "swaync-client -swb";
-         "on-click" = "swaync-client -t -sw";
-         "on-click-right" = "swaync-client -d -sw";
-         "escape" = true;
+         exec-if = "which swaync-client";
+         exec = "swaync-client -swb";
+         on-click = "swaync-client -t -sw";
+         on-click-right = "swaync-client -d -sw";
+         escape = true;
        };
        "custom/github"= {
           "format"= "GITHUB {} ";
           "return-type"= "json";
           "interval"= 60;
           # "exec"= "$HOME/.config/waybar/github.sh";
-          exec = githubUpdater;
+          exec = lib.getExe githubUpdater;
           on-click = "xdg-open https://github.com/notifications";
       };
-       "custom/notmuch" = {
+
+      
+      "custom/notmuch" = let 
+         notmuchChecker = pkgs.writeShellApplication 
+         { name = "waybar-notmuch-module";
+           runtimeInputs = [ pkgs.notmuch pkgs.jq ];
+           text = builtins.readFile ../modules/waybar/notmuch.sh;
+           checkPhase = ":";
+         };
+      in {
          format = "Mail: {}";
          max-length = 40;
+         return-type = "json";
          # TODO run regularly
          interval = 60;
          on_click = "kitty sh -c alot -l/tmp/alot.log";
-         exec = pkgs.writeShellScript "waybar-notmuch-module" (builtins.readFile ../modules/waybar/notmuch.sh);
+         # TODO rerun mbsync + notmuch etc
+         on-click-right = "systemctl start mbsync.service";
+         exec = lib.getExe notmuchChecker;
 
          # exec = pkgs.writeShellScript "hello-from-waybar" ''
          #   echo "from within waybar"

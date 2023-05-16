@@ -13,6 +13,7 @@
     ../../modules/wireshark.nix
     ../../modules/wifi.nix
 
+    ./wayland.nix
     ./neovim.nix
     ./pipewire.nix
     ./sops.nix
@@ -41,9 +42,9 @@
     stow
   ];
 
-  networking.firewall.checkReversePath = false; # for nixops
-  networking.firewall.allowedUDPPorts = [ 631 ];
-  networking.firewall.allowedTCPPorts = [ 631 ];
+  # networking.firewall.checkReversePath = false; # for nixops
+  # networking.firewall.allowedUDPPorts = [ 631 ];
+  # networking.firewall.allowedTCPPorts = [ 631 ];
 
   # allow-downgrade falls back when dnssec fails, "true" foces dnssec
   services.resolved.dnssec = "allow-downgrade";
@@ -108,14 +109,10 @@
   # udisks2 GUI
   # services.udisks2.enable = true;
 
-  services.mpd = {
-    enable = false; # TODO move to userspace
-    # musicDirectory
-  };
-
   # seemingly working for chromium only, check for firefox
   programs.browserpass.enable = true;
 
+  # todo check if still ok on wayland
   services.greenclip =
     let
       # myGreenclip = with pkgs; haskell.lib.unmarkBroken haskell.packages.ghc884.greenclip;
