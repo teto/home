@@ -22,6 +22,8 @@
   };
 
   inputs = {
+
+    # waybar.url = "github:Alexays/Waybar";
     nixpkgs = {
       url = "github:teto/nixpkgs/nixos-unstable";
     };

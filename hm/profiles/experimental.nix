@@ -29,6 +29,8 @@
 
   programs.gnome-shell.enable = true;
 
+  programs.joshuto.enable = true;
+
   home.packages = with pkgs; [
 	# openlens # not in unstable yet 
 	# haxe # to test https://neovim.discourse.group/t/presenting-haxe-neovim-a-new-toolchain-to-build-neovim-plugins/3720

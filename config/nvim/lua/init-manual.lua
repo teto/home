@@ -591,6 +591,7 @@ if has_fzf_lua then
 	require('teto.fzf-lua').register_keymaps()
 	local fzf_history_dir = vim.fn.expand('~/.local/share/fzf-history')
 	fzf_lua.setup({
+		commands = { sort_lastused = true },
 		-- [...]
 		fzf_opts = {
 			-- [...]

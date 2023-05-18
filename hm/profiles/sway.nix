@@ -1,8 +1,8 @@
 { config, lib, pkgs, ... }:
 let
   # key modifier
-  # mad = "Mod4";
   mod = "Mod1";
+  mad = "Mod4";
 
   term = "${pkgs.kitty}/bin/kitty";
 
@@ -11,7 +11,7 @@ let
 in
 {
   home.packages = with pkgs; [
-    clipman # clipboard manager, works with wofi, y a ptet un module
+    # clipman # clipboard manager, works with wofi, y a ptet un module
     foot # terminal
     # use it with $ grim -g "$(slurp)"
     grim # replace scrot/flameshot
@@ -39,8 +39,13 @@ in
     nwg-menu
     wlogout
     swaylock
+    sway-contrib.grimshot # contains "grimshot" for instance
+    shotman # -c region 
     waybar
     polybar
+    # swappy # e https://github.com/jtheoof/swappy
+    # https://github.com/artemsen/swaykbdd # per window keyboard layout
+    # wev # event viewer https://git.sr.ht/~sircmpwn/wev/
   ];
 
   # https://github.com/rycee/home-manager/pull/829
@@ -52,6 +57,11 @@ in
     ];
   };
 
+  services.clipman = {
+    enable = true;
+    # see doc for systemdTarget
+    # systemdTarget = 
+  };
   # todo prepend sharedExtraConfig
   # xdg.configFile."sway/config" = 
 
@@ -90,18 +100,18 @@ in
         #   #   icon_theme Adwaita
         #   # '';
         # }
-        {
-          position = "top";
-          workspaceButtons = true;
-          workspaceNumbers = false;
-          # id="0";
-          # command="${pkgs.waybar}/bin/waybar";
-          command = "waybar";
-          # statusCommand = "${pkgs.i3pystatus-custom}/bin/i3pystatus-python-interpreter $XDG_CONFIG_HOME/i3/myStatus.py";
-          # extraConfig = ''
-          #   icon_theme Adwaita
-          # '';
-        }
+        # {
+        #   position = "top";
+        #   workspaceButtons = true;
+        #   workspaceNumbers = false;
+        #   # id="0";
+        #   # command="${pkgs.waybar}/bin/waybar";
+        #   command = "waybar";
+        #   # statusCommand = "${pkgs.i3pystatus-custom}/bin/i3pystatus-python-interpreter $XDG_CONFIG_HOME/i3/myStatus.py";
+        #   # extraConfig = ''
+        #   #   icon_theme Adwaita
+        #   # '';
+        # }
       ];
 
       # we want to override the (pywal) config from i3
@@ -123,10 +133,32 @@ in
     # TODO
     # from https://www.reddit.com/r/swaywm/comments/uwdboi/how_to_make_chrome_popup_windows_floating/
 	# mkBefore
-      keybindings = lib.recursiveUpdate config.xsession.windowManager.i3.config.keybindings {
+      keybindings = config.xsession.windowManager.i3.config.keybindings // {
         "$GroupFr+$mod+ampersand" = "layout toggle all";
         "$GroupUs+$mod+1" = "layout toggle all";
-        "${mod}+Ctrl+L" = "exec ${pkgs.swaylock}/bin/swaylock";
+        # "${mod}+Ctrl+L" = "exec ${pkgs.swaylock}/bin/swaylock";
+    # start a terminal
+    "${mod}+Return" = "exec --no-startup-id ${term}";
+    # bindsym $mod+Shift+Return exec --no-startup-id ~/.i3/fork_term.sh
+    "${mod}+Shift+Return" = ''exec --no-startup-id ${term} -d "$(kitty-get-cwd.sh)"'';
+
+    "${mod}+Tab" = "exec \"${pkgs.rofi}/bin/rofi -modi 'drun,window,ssh' -show drun\"";
+    "${mod}+Ctrl+Tab" = "exec \"${pkgs.rofi}/bin/rofi -modi 'window' -show run\"";
+    # TODO dwindow exclusively with WIN
+    "${mad}+Tab" = "exec \"${pkgs.rofi}/bin/rofi -modi 'run,drun,window,ssh' -show window\"";
+    "${mad}+a" = "exec \"${pkgs.rofi}/bin/rofi -modi 'run,drun,window,ssh' -show window\"";
+    # "${mad}+Tab" = "exec \"${pkgs.rofi}/bin/rofi -modi 'run,drun,window,ssh' -show window\"";
+
+    # locker
+    # "${mod}+Ctrl+L"="exec ${pkgs.i3lock-fancy}/bin/i3lock-fancy";
+    "${mod}+Ctrl+L" = "exec ${pkgs.swaylock}/bin/swaylock";
+
+    # "${mod}+Ctrl+h" = ''exec "${pkgs.rofi}/bin/rofi -modi 'clipboard:greenclip print' -show clipboard"'';
+    "${mod}+Ctrl+h" = ''exec "${pkgs.clipman}/bin/clipman pick -t rofi'';
+    # "${mod}+g" = "exec ${pkgs.i3-easyfocus}/bin/i3-easyfocus";
+    # "${mad}+w" = "exec ${pkgs.i3-easyfocus}/bin/i3-easyfocus";
+    # TODO bind
+     # XF86Copy
       };
 
 
@@ -160,6 +192,9 @@ in
       for_window [window_role="Preferences"] floating enable
       for_window [window_type="dialog"] floating enable
       for_window [window_type="menu"] floating enable
+
+      # timeout in ms
+      seat * hide_cursor 8000
       '';
 
     # extraConfig =  ''
@@ -211,7 +246,7 @@ in
    # TODO make sure it has jq in PATH
    githubUpdater = pkgs.writeShellApplication 
     { name = "github-updater";
-      runtimeInputs = [ pkgs.curl pkgs.jq ];
+      runtimeInputs = [ pkgs.coreutils pkgs.curl pkgs.jq ];
       text = (builtins.readFile ../modules/waybar/github.sh);
       checkPhase = ":";
     };
@@ -251,22 +286,31 @@ in
         # "custom/mymodule#with-css-id"
         # "temperature"
         "clock"
-         "idle_inhibitor"
-         # "backlight" # enabled only on laptop
-         "wireplumber"
-        "tray"
+        "idle_inhibitor"
+        "wireplumber"
         "custom/notification"
         "custom/github"
         "custom/notmuch"
+        "tray"
        ];
     "tray"= {
         # "icon-size": 21,
         "spacing"= 10;
     };
+    idle_inhibitor = {
+
+
+     "format-icons" = {
+       "activated" = "activated";
+       "deactivated"= "inhibit";
+     };
+    };
     wireplumber= {
      "format"= "{volume}% {icon}";
      "format-muted"= "";
-     "on-click"= "helvum";
+     on-click = "helvum";
+     on_click = "kitty sh -c alot -l/tmp/alot.log";
+
      "format-icons"= ["" "" ""];
     };
     clock = {
@@ -294,29 +338,31 @@ in
          tooltip = false;
          format = "{icon}";
          "format-icons" = {
-           "notification" = "<span foreground='red'><sup></sup></span>";
-           "none" = "";
-           "dnd-notification" = "<span foreground='red'><sup></sup></span>";
-           "dnd-none" = "";
-           "inhibited-notification" = "<span foreground='red'><sup></sup></span>";
-           "inhibited-none" = "";
-           "dnd-inhibited-notification" = "<span foreground='red'><sup></sup></span>";
-           "dnd-inhibited-none" = "";
+           notification = "<span foreground='red'><sup>notifs</sup></span>";
+           none = "No notifications";
+           inhibited-notification = "inhibtited<span foreground='red'><sup>toto</sup></span>";
+           inhibited-none = "0";
+           # Do Not Disturb
+           dnd-notification = "dnd <span foreground='red'><sup>dnd</sup></span>";
+           dnd-none = "no dnd";
+           dnd-inhibited-notification = "dnd<span foreground='red'><sup>dnd</sup></span>";
+           dnd-inhibited-none = "none";
          };
          return-type = "json";
-         exec-if = "which swaync-client";
-         exec = "swaync-client -swb";
-         on-click = "swaync-client -t -sw";
+         # exec-if = "which swaync-client";
+         exec = "${pkgs.swaynotificationcenter}/bin/swaync-client -swb";
+         on-click = "${pkgs.swaynotificationcenter}/bin/swaync-client -t -sw";
          on-click-right = "swaync-client -d -sw";
          escape = true;
        };
        "custom/github"= {
-          "format"= "GITHUB {} ";
+          "format"= "{} ";
           "return-type"= "json";
-          "interval"= 60;
+          # The interval (in seconds) in which the information gets polled
+          "restart_interval"= 60;
           # "exec"= "$HOME/.config/waybar/github.sh";
           exec = lib.getExe githubUpdater;
-          on-click = "xdg-open https://github.com/notifications";
+          on-click = "${pkgs.xdg_utils}/bin/xdg-open https://github.com/notifications";
       };
 
       
@@ -328,13 +374,15 @@ in
            checkPhase = ":";
          };
       in {
-         format = "Mail: {}";
+         format = "  : {}";
          max-length = 40;
          return-type = "json";
          # TODO run regularly
          interval = 60;
          on_click = "kitty sh -c alot -l/tmp/alot.log";
          # TODO rerun mbsync + notmuch etc
+         # TODO read
+         # exec-on-event = false;
          on-click-right = "systemctl start mbsync.service";
          exec = lib.getExe notmuchChecker;
 

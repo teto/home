@@ -2,6 +2,10 @@
 * how to enable debug 
   systemctl service-log-level systemd-networkd debug
 
+* import variables ?
+
+  systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
+
 * setup credentials 
 
   systemd-ask-password (echoes password to TTY careful)

@@ -1,11 +1,12 @@
 { config, pkgs, lib, ... }:
 let
-  rofi-hoogle-src = pkgs.fetchFromGitHub {
-    owner = "teto";
-    repo = "rofi-hoogle";
-    rev = "27c273ff67add68578052a13f560a08c12fa5767";
-    sha256 = "09vx9bc8s53c575haalcqkdwy44ys1j8v9k2aaly7lndr19spp8f";
-  };
+  # rofi-hoogle-src = pkgs.fetchFromGitHub {
+  #   owner = "teto";
+  #   repo = "rofi-hoogle";
+  #   rev = "27c273ff67add68578052a13f560a08c12fa5767";
+  #   sha256 = "09vx9bc8s53c575haalcqkdwy44ys1j8v9k2aaly7lndr19spp8f";
+  # };
+
   # TODO need hs-hoogle-overlay
   # rofi-hoogle = import "${rofi-hoogle-src}/rofi-hoogle-plugin/package.nix" { inherit pkgs; };
   #   hs-hoogle-query = pkgs.haskellPackages.callPackage "${rofi-hoogle-src}/haskell" {};
@@ -28,9 +29,8 @@ in
     pass = {
       enable = true;
       extraConfig = ''
-        	   # workaround for https://github.com/carnager/rofi-pass/issues/226
-        	   help_color="#FF0000"
-        	 '';
+              # workaround for https://github.com/carnager/rofi-pass/issues/226
+              help_color="#FF0000'';
     };
 
     plugins = with pkgs; [
