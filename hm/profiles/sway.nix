@@ -88,30 +88,6 @@ in
       };
       terminal = term;
       bars = [
-        # {
-        #   position = "top";
-        #   workspaceButtons = true;
-        #   workspaceNumbers = false;
-        #   # id="0";
-        #   # command="${pkgs.waybar}/bin/waybar";
-        #   command = "${pkgs.sway}/bin/swaybar";
-        #   statusCommand = "${pkgs.i3pystatus-custom}/bin/i3pystatus-python-interpreter $XDG_CONFIG_HOME/i3/myStatus.py";
-        #   # extraConfig = ''
-        #   #   icon_theme Adwaita
-        #   # '';
-        # }
-        # {
-        #   position = "top";
-        #   workspaceButtons = true;
-        #   workspaceNumbers = false;
-        #   # id="0";
-        #   # command="${pkgs.waybar}/bin/waybar";
-        #   command = "waybar";
-        #   # statusCommand = "${pkgs.i3pystatus-custom}/bin/i3pystatus-python-interpreter $XDG_CONFIG_HOME/i3/myStatus.py";
-        #   # extraConfig = ''
-        #   #   icon_theme Adwaita
-        #   # '';
-        # }
       ];
 
       # we want to override the (pywal) config from i3
@@ -174,7 +150,6 @@ in
 
 
 
-    # statusCommand="${i3pystatus-custom}/bin/i3pystatus-python-interpreter $XDG_CONFIG_HOME/i3/myStatus.py";
 
 	extraConfigEarly = sharedConfig.sharedExtraConfig;
 
