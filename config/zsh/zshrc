@@ -7,6 +7,7 @@
 # ON_NIXOS=$?
 # prompt off
 
+current_folder="${0:a:h}"
 function rfw(){
     readlink -f $(which "$1")
 }
@@ -141,7 +142,7 @@ autoload -Uz add-zsh-hook
 autoload -z edit-command-line
 
 # zmodload -i zsh/complist
-
+. "$ZDOTDIR/zbell.zsh"
 
 # completion config {{{1
 
@@ -207,7 +208,8 @@ zstyle ':completion:*:kill:*' force-list always
 # https://github.com/robbyrussell/oh-my-zsh/blob/master/lib/termsupport.zsh
 # Prompt {{{
 # if a process takeslonger than this, display its processing time
-REPORTTIME=10
+# we can't filter apps so it's quite annoying we disable it
+# REPORTTIME=10
 # delay to consider when changing vi mode
 # in hundredths of seconds (0 defaults to 0.4 ?! 1 => 10 ms)
 KEYTIMEOUT=1
@@ -259,7 +261,6 @@ SPROMPT="Correct $fg[red]%R$reset_color to $fg[green]%r$reset_color [(y)es (n)o 
 # fi
 
 # mydir=${0:a:h}
-current_folder="${0:a:h}"
 # echo "current-folder: $current_folder"
 # source "${current_folder}/../fzf-gems/fzf_git_functions.sh"
 # source "${current_folder}/../fzf-gems/fzf_git_keybindings.zsh"

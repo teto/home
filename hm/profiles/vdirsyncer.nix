@@ -1,4 +1,9 @@
 { config, pkgs, lib, ... }:
+
+let 
+  hmUtils = pkgs.callPackage ../lib.nix {};
+
+in
 {
 
   # accounts.calendar.accounts = {
@@ -13,42 +18,16 @@
   #       userName ="root";
   #       # password.fetch = ["command", "~/dotfiles/bin/pass-show", "iij/nextcloud"]
   #       usernameCommand = ["command" "~/dotfiles/bin/pass-show" "iij/nextcloud"];
-
   #     };
-
   #   };
   # };
 
   accounts.calendar = {
     basePath = "${config.home.homeDirectory}/calendars";
-    # basePath = "$HOME/calendars";
-    # accounts.iij = {
-    #   khal.enable = true;
-    #   vdirsyncer = {
-    #     enable = true;
-    #     collections = null;
-    #     metadata = ["color" "displayname"];
-    #   };
-    #   local = {
-    #     type = "filesystem";
-    #     fileExt = ".ics";
-    #   };
-    #   remote = {
-    #     type = "caldav";
-    #     # url = "http://nixos.iijlab.net/remote.php/dav/calendars/root/personal/";
-    #     # url = "http://efss.qloud.my/remote.php/dav/calendars/root/personal/";
-    #     url = "https://efss.qloud.my/remote.php/dav/";
-    #       # url = "https://dav.mailbox.org/caldav/<some hash>";
-    #       # userName = "<my email address>";
-    #     # password.fetch = ["command", "~/dotfiles/bin/pass-show", "iij/nextcloud"]
-    #       # usernameCommand = ["command" "~/dotfiles/bin/pass-show" "iij/nextcloud"];
-    #       userName = "root";
-    #       passwordCommand = ["~/dotfiles/bin/pass-show" "iij/nextcloud"];
-    #     };
-    #   };
 
     accounts.fastmail = {
-      khal.enable = true;
+     # need locale to be set apparently
+      khal.enable = false;
 
       vdirsyncer = {
         enable = true;
@@ -63,15 +42,16 @@
 
       remote = {
         type = "caldav";
-        # url = "http://nixos.iijlab.net/remote.php/dav/calendars/root/personal/";
         # url = "http://efss.qloud.my/remote.php/dav/calendars/root/personal/";
         url = "https://efss.qloud.my/remote.php/dav/";
-        # url = "https://dav.mailbox.org/caldav/<some hash>";
         # userName = "<my email address>";
         # password.fetch = ["command", "~/dotfiles/bin/pass-show", "iij/nextcloud"]
         # usernameCommand = ["command" "~/dotfiles/bin/pass-show" "iij/nextcloud"];
         userName = "root";
-        passwordCommand = [ "~/dotfiles/bin/pass-show" "iij/nextcloud" ];
+        passwordCommand = [ 
+         (hmUtils.getPassword "perso/fastmail_mc")
+         # "~/dotfiles/bin/pass-show" "iij/nextcloud"
+        ];
       };
     };
   };
@@ -94,7 +74,10 @@
   #   };
   # };
 
-  programs.khal.enable = true;
+  programs.khal = {
+   enable = false;
+   # need a locale to be set
+  };
 
   programs.vdirsyncer = {
     enable = true;

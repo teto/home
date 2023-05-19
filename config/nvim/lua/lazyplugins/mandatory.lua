@@ -28,7 +28,7 @@ return {
      -- null_ls.builtins.diagnostics.editorconfig_checker, -- too noisy
      -- null_ls.builtins.diagnostics.teal,
      -- null_ls.builtins.diagnostics.tsc
-     null_ls.builtins.diagnostics.yamllint,
+     -- null_ls.builtins.diagnostics.yamllint,
      null_ls.builtins.diagnostics.zsh,
      null_ls.builtins.formatting.black,
      null_ls.builtins.formatting.just,

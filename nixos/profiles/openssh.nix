@@ -30,7 +30,7 @@
     settings = {
       LogLevel = "VERBOSE";
       KbdInteractiveAuthentication = false;
-      PasswordAuthentication = false;
+      # PasswordAuthentication = false;
       # PermitRootLogin = "no";
 	  X11Forwarding = true;
     };

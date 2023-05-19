@@ -13,7 +13,7 @@
     # ../../hm/profiles/emacs.nix
     ../../hm/profiles/extra.nix
     # ../../hm/profiles/weechat.nix
-    # ./profiles/vdirsyncer.nix
+    ../../hm/profiles/vdirsyncer.nix
 
   ];
 
@@ -44,7 +44,7 @@
       export WLR_NO_HARDWARE_CURSORS=1
       # we need vulkan else we get flickering
       export WLR_RENDERER=vulkan
-     '';
+      '';
 
     # export GBM_BACKEND=nvidia-drm
     # export __GLX_VENDOR_LIBRARY_NAME=nvidia

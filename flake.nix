@@ -152,6 +152,8 @@
             default = nixpkgs.legacyPackages.${system}.mkShell {
               name = "dotfiles-shell";
               buildInputs = with myPkgs; [
+                # to run `git-crypt export-key`
+                git-crypt 
                 sops
                 age
                 deploy-rs.packages.${system}.deploy-rs
