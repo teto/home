@@ -10,6 +10,7 @@
     gitAndTools.pass-git-helper # to register docker password in terminal
     graphviz
     flamegraph
+    nil # nix LSP server, so that vscode can see it
     # linuxPackages.perf # to avoid kernel rebuild ?
     # filesystem watcher developed by facebook. Useful used in conjonction 
     # with core.monitorfs in git ()

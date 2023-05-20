@@ -248,8 +248,6 @@ SPROMPT="Correct $fg[red]%R$reset_color to $fg[green]%r$reset_color [(y)es (n)o 
 #     viins|main) print -rn -- $terminfo[cnorm];; # less visible cursor
 #   esac
 # }
-
-
 # load terminfo for portable keybindings
 # zmodload zsh/terminfo
 

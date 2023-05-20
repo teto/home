@@ -16,6 +16,24 @@ let
     # in
     # src;
 
+
+    # /tree/master/plugins/zbell
+   # zsh-plugins = "${flakeInputs}/plugins/zbell"
+
+  zbellModule = types.submodule {
+      options = {
+
+        enable = mkEnableOption "Z-bell";
+
+        ignore = mkOption {
+          type = types.listOf types.str;
+          # add $EDITOR
+          default = ["man" "$EDITOR"];
+          description = "The list of programs to ignore.";
+        };
+      };
+    };
+
 in
 {
 
@@ -51,6 +69,18 @@ in
       enableFancyCtrlZ = mkOption {
         default = true;
         type = types.bool;
+        description = ''
+          Whether to enable Fish integration.
+        '';
+      };
+
+      zbell = mkOption {
+        # default = true;
+        # plugins/zbell/zbell.plugin.zsh
+        type = zbellModule;
+        default =  {
+          enable =false;
+        };
         description = ''
           Whether to enable Fish integration.
         '';
@@ -146,6 +176,12 @@ in
         zle -N zle-keymap-select
       '';
     })
+
+    (mkIf cfg.zbell.enable {
+     # TODO source zbell
+      programs.zsh.initExtra = ''
+      '';
+     })
 
     # home.sessionVariables = {
     #   CABAL_CONFIG="$XDG_CONFIG_HOME/cabal/config";

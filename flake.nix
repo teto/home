@@ -27,6 +27,11 @@
     nixpkgs = {
       url = "github:teto/nixpkgs/nixos-unstable";
     };
+    zsh-plugins = {
+      url = "github:ohmyzsh/ohmyzsh";
+      flake = false;
+    };
+
     deploy-rs.url = "github:serokell/deploy-rs";
     flake-utils.url = "github:numtide/flake-utils";
     treefmt-nix.url = "github:numtide/treefmt-nix";

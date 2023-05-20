@@ -846,7 +846,7 @@ in
     defaultEditor = true;
 
     # custom options
-    fennel.enable = false;
+    # fennel.enable = false;
     teal.enable = true;
     orgmode.enable = true;
     autocompletion.enable = true;

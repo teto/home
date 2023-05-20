@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, secrets, ... }:
 
 let 
   hmUtils = pkgs.callPackage ../lib.nix {};
@@ -31,7 +31,8 @@ in
 
       vdirsyncer = {
         enable = true;
-        collections = null;
+        # null doesn't look too interesting :s 
+        collections = ["from a"  "from b"];
         metadata = [ "color" "displayname" ];
       };
 
@@ -43,11 +44,11 @@ in
       remote = {
         type = "caldav";
         # url = "http://efss.qloud.my/remote.php/dav/calendars/root/personal/";
-        url = "https://efss.qloud.my/remote.php/dav/";
-        # userName = "<my email address>";
-        # password.fetch = ["command", "~/dotfiles/bin/pass-show", "iij/nextcloud"]
-        # usernameCommand = ["command" "~/dotfiles/bin/pass-show" "iij/nextcloud"];
-        userName = "root";
+        url = "https://caldav.fastmail.com/";
+        # url = "https://efss.qloud.my/remote.php/dav/";
+        # userName = "m";
+        userName = secrets.calendar.fastmail.username;
+        # needs to be an app-specific password/token
         passwordCommand = (hmUtils.getPassword "perso/fastmail_mc");
          # "~/dotfiles/bin/pass-show" "iij/nextcloud"
         # ];

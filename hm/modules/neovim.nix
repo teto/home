@@ -166,7 +166,9 @@ in
     programs.neovim = {
       orgmode = mkOption {
         type = orgmodeModule;
-        # default = {};
+        default = {
+          enable = false;
+        };
         description = ''
           		Enable orgmode support.
           	  '';
@@ -179,16 +181,18 @@ in
 
       teal = mkOption {
         type = tealModule;
-        description = ''
-          		Enable support for teal language.
-          	  '';
+        default = {
+          enable = false;
+        };
+        description = ''Enable support for teal language.'';
       };
 
       fennel = mkOption {
         type = fennelModule;
-        description = ''
-          		Enable support for fennel language.
-          	  '';
+        default = {
+          enable = false;
+        };
+        description = ''Enable support for fennel language.'';
       };
     };
   };
