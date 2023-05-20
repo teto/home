@@ -10,6 +10,6 @@
         ${pkgs.pass}/bin/pass show "$@" | ${pkgs.coreutils}/bin/head -n 1
       '';
     in
-    "${script}/bin/pass-show ${accountName}";
+    ["${script}/bin/pass-show" accountName];
 
 }

@@ -142,6 +142,7 @@ autoload -Uz add-zsh-hook
 autoload -z edit-command-line
 
 # zmodload -i zsh/complist
+zbell_ignore=($EDITOR $PAGER "man")
 . "$ZDOTDIR/zbell.zsh"
 
 # completion config {{{1

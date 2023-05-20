@@ -48,10 +48,9 @@ in
         # password.fetch = ["command", "~/dotfiles/bin/pass-show", "iij/nextcloud"]
         # usernameCommand = ["command" "~/dotfiles/bin/pass-show" "iij/nextcloud"];
         userName = "root";
-        passwordCommand = [ 
-         (hmUtils.getPassword "perso/fastmail_mc")
+        passwordCommand = (hmUtils.getPassword "perso/fastmail_mc");
          # "~/dotfiles/bin/pass-show" "iij/nextcloud"
-        ];
+        # ];
       };
     };
   };

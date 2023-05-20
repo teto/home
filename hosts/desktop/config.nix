@@ -14,6 +14,7 @@
     ../../nixos/profiles/postgresql.nix
     ../../nixos/profiles/steam.nix
     ../../nixos/profiles/opensnitch.nix
+    ../../nixos/profiles/podman.nix
     # ../../nixos/profiles/gitlab-runner.nix
     ../../nixos/profiles/steam.nix
 

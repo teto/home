@@ -828,7 +828,8 @@ map('n', '<leader>rg', '<Cmd>Grepper -tool rg -open -switch<CR>', { remap = true
 --
 vim.filetype.add({
 	filename = {
-		['.env'] = 'env'
+		['.env'] = 'env',
+		-- ['.http'] = 'http'
 	}
 })
 
