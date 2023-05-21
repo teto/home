@@ -45,7 +45,7 @@ in
 {
   nix = {
     # set it on a per-machine basis
-    # distributedBuilds = true;
+    distributedBuilds = true;
 
     # might be useful to fetch from private repositories even in sandboxed mode ?!
     # fetchGit is run as user so no

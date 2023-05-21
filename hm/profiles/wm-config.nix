@@ -145,10 +145,6 @@ in
     "$mod+button3" = "floating toggle";
     "$mod+m" = ''mode "monitors'';
 
-    # brightnessctl
-    XF86MonBrightnessUp = "exec ${pkgs.brightnessctl}/bin/brightnessctl set +10%";
-    XF86MonBrightnessDown = "exec ${pkgs.brightnessctl}/bin/brightnessctl set 10%-";
-
    } 
    // (lib.concatMapAttrs (bind_ws "Fr") wsAzertyBindings)
    // (lib.concatMapAttrs (bind_ws "Us") wsQwertyBindings)

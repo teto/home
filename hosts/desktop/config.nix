@@ -96,7 +96,6 @@
     grub = {
       enable = true;
       useOSProber = true;
-      # boot.loader.grub.version = 2;
       # install to none, we just need the generated config
       # for ubuntu grub to discover
       device = "/dev/sdb";

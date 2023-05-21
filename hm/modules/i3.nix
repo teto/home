@@ -37,6 +37,12 @@ in
        volume=$(${wpctl} get-volume @DEFAULT_AUDIO_SINK@ | cut -f2 -d' ')
        ${pkgs.perl}/bin/perl -e "print 100 * $volume"
        '';
+     getBrightness = pkgs.writeShellScript  "get-volume-as-integer" 
+       ''
+       # -m => machine
+       brightness=$(${pkgs.brightnessctl}/bin/brightnessctl -m info | cut -f4 -d, )
+       echo $brightness
+       '';
 
     # { name = "get-volume-as-integer";
     #   runtimeInputs = [ pkgs.wireplumber ];
@@ -57,6 +63,13 @@ in
     XF86AudioMute = "exec --no-startup-id ${wpctl} set-mute @DEFAULT_AUDIO_SINK@ toggle;exec ${notify-send} --icon=speaker_no_sound -h boolean:audio-toggle:1 -h string:synchronous:audio-volume -u low 'Toggling audio'" ;
     # XF86AudioLowerVolume = "exec --no-startup-id ${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ -5%;exec ${notify-send} --icon=audio-volume-low-symbolic -u low 'Audio lowered'";
     # XF86AudioMute = "exec --no-startup-id ${pkgs.pulseaudio}/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle;exec ${notify-send} --icon=speaker_no_sound -u low 'test'";
+
+    # brightnessctl brightness-low
+    XF86MonBrightnessUp = "exec ${pkgs.brightnessctl}/bin/brightnessctl set +10%; exec ${notify-send} --icon=brightness -u low -t 1000 -h int:value:$(${getBrightness}) -h string:synchronous:brightness-level 'Brightness' 'Raised brightness'";
+    XF86MonBrightnessDown = "exec ${pkgs.brightnessctl}/bin/brightnessctl set 10%-; exec ${notify-send} --icon=brightness-low -u low -t 1000 -h int:value:$(${getBrightness}) -h string:synchronous:brightness-level 'Brightness' 'Lowered brightness'";
+    # XF86MonBrightnessDown = "exec ${pkgs.brightnessctl}/bin/brightnessctl set 10%-";
+
+
    };
   };
 }

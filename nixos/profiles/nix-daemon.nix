@@ -37,6 +37,8 @@
     #   # keys = [ secrets.gitolitePublicKey ];
     # };
 
+    distributedBuilds = true;
+
     package = pkgs.nixVersions.nix_2_14;
 
     # added to nix.conf
