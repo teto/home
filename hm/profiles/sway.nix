@@ -22,7 +22,6 @@ in
     slurp # capture tool
     wf-recorder # for screencasts
     # bemenu as a dmenu replacement
-    # waybar # just for testing
     wl-clipboard # wl-copy / wl-paste
     wdisplays # to show 
     wob # to display a progressbar
@@ -68,8 +67,24 @@ in
   wayland.windowManager.sway = {
    enable = true;
    systemdIntegration = true;
+   package = lib.hiPrio pkgs.swayfx;
+
     config = (builtins.removeAttrs config.xsession.windowManager.i3.config [ "startup" "bars" ])
       // {
+       window.commands = [
+        {
+         criteria = { app_id = "xdg-desktop-portal-gtk"; };
+         command = "floating enable";
+       }
+       # for_window [title="(?:Open|Save) (?:File|Folder|As)"] floating enable;
+# for_window [title="(?:Open|Save) (?:File|Folder|As)"] resize set 800 600
+# for_window [window_role="pop-up"] floating enable
+# for_window [window_role="bubble"] floating enable
+# for_window [window_role="task_dialog"] floating enable
+# for_window [window_role="Preferences"] floating enable
+# for_window [window_type="dialog"] floating enable
+# for_window [window_type="menu"] floating enable
+      ];
        output = {
         # todo put a better path
         # example = { "HDMI-A-2" = { bg = "~/path/to/background.png fill"; }; };
@@ -116,7 +131,7 @@ in
     # start a terminal
     "${mod}+Return" = "exec --no-startup-id ${term}";
     # bindsym $mod+Shift+Return exec --no-startup-id ~/.i3/fork_term.sh
-    "${mod}+Shift+Return" = ''exec --no-startup-id ${term} -d "$(kitty-get-cwd.sh)"'';
+    "${mod}+Shift+Return" = ''exec --no-startup-id ${term} -d "$(${toString ../../bin/kitty-get-cwd.sh})"'';
 
     "${mod}+Tab" = "exec \"${pkgs.rofi}/bin/rofi -modi 'drun,window,ssh' -show drun\"";
     "${mod}+Ctrl+Tab" = "exec \"${pkgs.rofi}/bin/rofi -modi 'window' -show run\"";
@@ -149,8 +164,6 @@ in
     };
 
 
-
-
 	extraConfigEarly = sharedConfig.sharedExtraConfig;
 
     # output HDMI-A-1 bg ~/wallpaper.png stretch
@@ -170,12 +183,9 @@ in
 
       # timeout in ms
       seat * hide_cursor 8000
+      include ~/.config/sway/swayfx.txt
+
       '';
-
-    # extraConfig =  ''
-    #   default_floating_border pixel 2
-    # '';
-
 
 
     extraOptions = [
@@ -226,14 +236,6 @@ in
       checkPhase = ":";
     };
 
-# token=`cat ${HOME}/.config/github/notifications.token`
-# count=`curl -u username:${token} https://api.github.com/notifications | jq '. | length'`
-
-# if [[ "$count" != "0" ]]; then
-#     echo '{"text":'$count',"tooltip":"$tooltip","class":"$class"}'
-# fi
-
-
 
   in {
    enable = true;
@@ -257,7 +259,7 @@ in
        # "custom/hello-from-waybar"
       ];
        modules-right = [ 
-        # "mpd"
+        "mpd"
         # "custom/mymodule#with-css-id"
         # "temperature"
         "clock"

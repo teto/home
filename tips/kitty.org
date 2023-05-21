@@ -1,4 +1,8 @@
 
+
+one can send system notifications via kitty
+vim.api.nvim_chan_send(vim.v.stderr, '\027]99;;Hello world\027\\')
+
 kitty +kitten ssh myserver
 
 open scrollback buffer ctrl + shift + h

@@ -13,6 +13,7 @@
     ../../modules/wireshark.nix
     ../../modules/wifi.nix
 
+    ./gnome.nix
     ./wayland.nix
     ./neovim.nix
     ./pipewire.nix

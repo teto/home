@@ -177,6 +177,7 @@ in
     ./common.nix
     ./kitty.nix
     ./mpv.nix
+    ./mpd.nix
     ./dev.nix
     # ./modules/home-tor.nix
     ./ssh-config.nix
@@ -228,13 +229,6 @@ in
   };
 
   services.network-manager-applet.enable = true;
-
-  services.mpd = {
-    enable = false;
-    # dataDir = xdg.dataDir
-    # musicDirectory = 
-    # extraConfig = 
-  };
 
   services.flameshot.enable = true;
 

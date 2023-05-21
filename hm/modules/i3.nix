@@ -31,6 +31,7 @@ in
 	xsession.windowManager.i3.config.keybindings = let 
 	 notify-send = "${pkgs.libnotify}/bin/notify-send";
      wpctl = "${pkgs.wireplumber}/bin/wpctl";
+     mpc = "${pkgs.mpc_cli}/bin/mpc";
      # pkgs.writeShellApplication
      getIntegerVolume = pkgs.writeShellScript  "get-volume-as-integer" 
        ''
@@ -69,6 +70,18 @@ in
     XF86MonBrightnessDown = "exec ${pkgs.brightnessctl}/bin/brightnessctl set 10%-; exec ${notify-send} --icon=brightness-low -u low -t 1000 -h int:value:$(${getBrightness}) -h string:synchronous:brightness-level 'Brightness' 'Lowered brightness'";
     # XF86MonBrightnessDown = "exec ${pkgs.brightnessctl}/bin/brightnessctl set 10%-";
 
+    # "XF86Display" = "exec " + ../../rofi-scripts/monitor_layout.sh ;
+
+    XF86AudioNext="exec ${mpc} next; exec notify-send --icon=forward -h string:synchronous:mpd 'Audio next'";
+    XF86AudioPrev="exec ${mpc} next; exec notify-send --icon=backward -h string:synchronous:mpd 'Audio previous'";
+    # XF86AudioPrev exec mpc prev; exec notify-send "Audio prev"
+    XF86AudioPlay = "exec ${mpc} toggle; exec notify-send --icon=play-pause -h string:synchronous:mpd 'mpd' 'Audio Pause'";
+    # XF86AudioPause (pas presente sur mon clavier ?
+
+    XF86AudioStop="exec ${mpc} stop; exec notify-send --icon=stop -h string:synchronous:mpd 'Stopped Audio'";
+
+    # XF86AudioPlay = "exec ${pkgs.vlc}/bin/vlc; exec ${notify-send} --icon=media-playback-stop-symbolic -u low 'test'";
+    "--release Print" = "exec ${pkgs.flameshot}/bin/scrot -s '/tmp/%s_%H%M_%d.%m.%Y_$wx$h.png'";
 
    };
   };

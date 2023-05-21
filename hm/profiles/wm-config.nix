@@ -96,11 +96,6 @@ in
 
 
     # test rofi-randr
-    # "XF86Display" = "exec " + ../../rofi-scripts/monitor_layout.sh ;
-
-    # XF86AudioNext="exec ${mpc} next; exec notify-send 'Audio next'";
-    # XF86AudioPrev exec mpc prev; exec notify-send "Audio prev"
-    # XF86AudioPause exec mpc toggle; exec notify-send "Audio Pause"
     # } // {
     "$GroupFr+$mod+apostrophe" = "kill";
     "$GroupUs+$mod+4" = "kill";
@@ -112,14 +107,7 @@ in
     # needs i3next
     "$mod+v" = "split toggle";
 
-    # TODO use id of default sinc
     # icons are set for papirus for now
-    # TODO use mpv instead
-    XF86AudioPlay = "exec ${pkgs.vlc}/bin/vlc; exec ${notify-send} --icon=media-playback-stop-symbolic -u low 'test'";
-    "--release Print" = "exec ${pkgs.flameshot}/bin/scrot -s '/tmp/%s_%H%M_%d.%m.%Y_$wx$h.png'";
-    # "--release Print" = "exec ${pkgs.scrot}/bin/scrot -s '/tmp/%s_%H%M_%d.%m.%Y_$wx$h.png'";
-    # bindsym --release Shift+Print exec "scrot -s '/home/user/Pictures/screenshots/%s_%H%M_%d%m%Y_$wx$h.png'"
-    # bindsym --release $mod+Shift+Print exec "scrot -u -d 4 '/home/user/Pictures/screenshots/%s_%H%M_%d%m%Y_$wx$h.png'"
     "$mod+shift+o" = "exec xkill";
 
     # different focus for windows

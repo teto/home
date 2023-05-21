@@ -255,8 +255,19 @@ lspconfig.rust_analyzer.setup({
     -- root_dir = root_pattern("Cargo.toml", "rust-project.json")
 })
 
--- lspconfig.rnix.setup{}
-lspconfig.nil_ls.setup({})
+-- see https://github.com/oxalica/nil/blob/main/docs/configuration.md for config
+lspconfig.nil_ls.setup({
+ settings = {
+    formatting = {
+      command =  {"nixpkgs-fmt"},
+    },
+    diagnostic = {
+        -- // Example: ["unused_binding", "unused_with"]
+      ignored = {"unused_binding", "unused_with"},
+      excludedFiles = {}
+    },
+   }
+})
 
 -- | Texlab
 -- lspconfig.texlab.setup({

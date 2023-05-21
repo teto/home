@@ -27,7 +27,7 @@ in
 
     accounts.fastmail = {
      # need locale to be set apparently
-      khal.enable = false;
+      khal.enable = true;
 
       vdirsyncer = {
         enable = true;
@@ -47,7 +47,7 @@ in
         url = "https://caldav.fastmail.com/";
         # url = "https://efss.qloud.my/remote.php/dav/";
         # userName = "m";
-        userName = secrets.calendar.fastmail.username;
+        userName = "matthieucoudron@fastmail.com";
         # needs to be an app-specific password/token
         passwordCommand = (hmUtils.getPassword "perso/fastmail_mc");
          # "~/dotfiles/bin/pass-show" "iij/nextcloud"
@@ -75,7 +75,7 @@ in
   # };
 
   programs.khal = {
-   enable = false;
+   enable = true;
    # need a locale to be set
   };
 
