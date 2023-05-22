@@ -55,7 +55,7 @@ in
     extraConfig = builtins.readFile ../../config/i3/config.shared
       + ''
 
-	   include ~/.config/i3/manual.i3
+      include ~/.config/i3/manual.i3
       exec_always --no-startup-id setxkbmap -layout us
       exec_always --no-startup-id setxkbmap -option ctrl:nocaps
       new_float pixel 2
@@ -73,6 +73,7 @@ in
         names = [ "Inconsolata Normal" ];
         size = 12.0;
       };
+      # = rofi ?
       bars = [
         {
           position = "top";
@@ -167,18 +168,10 @@ in
           # "$mod+Shift+f" = "fullscreen global";
           # "$mod+button3" = "floating toggle";
           # "$mod+m" = ''mode "monitors'';
-          # # "XF86MonBrightnessUp" = "exec ${pkgs.xorg.xbacklight}/bin/xbacklight -inc 10";
-          # # "XF86MonBrightnessDown" = "exec ${pkgs.xorg.xbacklight}/bin/xbacklight -dec 10";
-          # # brightnessctl
-          # "XF86MonBrightnessUp" = "exec ${pkgs.brightnessctl}/bin/brightnessctl set +10";
-          # "XF86MonBrightnessDown" = "exec ${pkgs.brightnessctl}/bin/brightnessctl set -10";
 
         }
         // sharedConfig.sharedKeybindings;
     };
   };
-
-  # since we have trouble running i3pystatus
-  # programs.i3status-rust.enable = true;
 
 }

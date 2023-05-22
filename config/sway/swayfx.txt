@@ -2,5 +2,5 @@ blur enable
 corner_radius 5
 smart_corner_radius enable
 layer_effects "waybar" blur enable
-default_dim_inactive 0.80
+default_dim_inactive 0.20
 # dim_inactive_colors.unfocused #000000FF

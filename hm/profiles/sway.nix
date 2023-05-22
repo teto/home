@@ -41,6 +41,7 @@ in
     sway-contrib.grimshot # contains "grimshot" for instance
     shotman # -c region 
     waybar
+    wlprop # like xprop, determines window parameters
     polybar
     # swappy # e https://github.com/jtheoof/swappy
     # https://github.com/artemsen/swaykbdd # per window keyboard layout
@@ -67,6 +68,14 @@ in
   wayland.windowManager.sway = {
    enable = true;
    systemdIntegration = true;
+     # defaultSwayPackage = pkgs.sway.override {
+    # extraSessionCommands = cfg.extraSessionCommands;
+    # extraOptions = cfg.extraOptions;
+    # withBaseWrapper = cfg.wrapperFeatures.base;
+    # withGtkWrapper = cfg.wrapperFeatures.gtk;
+  # };
+
+
    package = lib.hiPrio pkgs.swayfx;
 
     config = (builtins.removeAttrs config.xsession.windowManager.i3.config [ "startup" "bars" ])
@@ -104,6 +113,13 @@ in
       terminal = term;
       bars = [
       ];
+      # menu = 
+      workspaceOutputAssign = [
+       { 
+        workspace="toto";
+        output = "eDP1";
+       }
+      ];
 
       # we want to override the (pywal) config from i3
       colors = lib.mkForce { };
@@ -127,10 +143,11 @@ in
       keybindings = config.xsession.windowManager.i3.config.keybindings // {
         "$GroupFr+$mod+ampersand" = "layout toggle all";
         "$GroupUs+$mod+1" = "layout toggle all";
+        # "$mod+F1" = [instance="pad_(?!ncmpcpp)"] move scratchpad; [instance="pad_ncmpcpp"] scratchpad show
+
         # "${mod}+Ctrl+L" = "exec ${pkgs.swaylock}/bin/swaylock";
     # start a terminal
     "${mod}+Return" = "exec --no-startup-id ${term}";
-    # bindsym $mod+Shift+Return exec --no-startup-id ~/.i3/fork_term.sh
     "${mod}+Shift+Return" = ''exec --no-startup-id ${term} -d "$(${toString ../../bin/kitty-get-cwd.sh})"'';
 
     "${mod}+Tab" = "exec \"${pkgs.rofi}/bin/rofi -modi 'drun,window,ssh' -show drun\"";
@@ -158,8 +175,7 @@ in
       startup = [
         # { command = "wl-paste -t text --watch clipman store"; }
         # { command = ''wl-paste -p -t text --watch clipman store -P --histpath="~/.local/share/clipman-primary.json"''; }
-        # { command = "mkfifo $SWAYSOCK.wob && tail -f $SWAYSOCK.wob | wob"; }
-        # { command = "swaync"; }
+       { command =  "${term} ncmpcpp"; }
       ];
     };
 
@@ -168,8 +184,11 @@ in
 
     # output HDMI-A-1 bg ~/wallpaper.png stretch
     extraConfig = builtins.readFile ../../config/i3/config.shared + ''
+
+      # Use Mouse+$mod to drag floating windows to their wanted position
+      floating_modifier $mod
+
       bindsym button2 kill
-      smart_gaps yes
 
       # Generated windows.
       for_window [title="(?:Open|Save) (?:File|Folder|As)"] floating enable;
@@ -181,10 +200,11 @@ in
       for_window [window_type="dialog"] floating enable
       for_window [window_type="menu"] floating enable
 
+
       # timeout in ms
       seat * hide_cursor 8000
       include ~/.config/sway/swayfx.txt
-
+      include ~/.config/sway/manual.config
       '';
 
 

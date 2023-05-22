@@ -3,19 +3,8 @@
 ### MAIN
 ##########################################
 
-
-# default border size
-#new_window  pixel 2
-# title_window_icon yes
-# enable window icons for all windows
-# for_window [all] title_window_icon on
-# for_window [class="^Firefox$"] title_window_icon on
-
 #for_window [instance="audioplayer"] move to scratchpad
 for_window [instance="pad_*"] move scratchpad
-#for_window [instance="pad_flyingterminal"] move scratchpad
-#for_window [instance="pad_ircclient"] move scratchpad
-# this concerns too many boxes, thus creating bugs
 
 mode "focused" {
 
@@ -53,47 +42,11 @@ mode "focused" {
 bindsym $mod+n mode "focused"
 
 
-# Use Mouse+$mod to drag floating windows to their wanted position
-floating_modifier $mod
-
 # Use mod-Control-Up and Down to rotate through the workspace list.
 no_focus [class="^qutebrowser"]
 
-#for_window [title="MOC"] move scratchpad
-#for_window [Class="^Transmission"] floating enable
-#bindsym $mod+F1 [instance="pad_(?!flyingterminal)"] move scratchpad; [instance="pad_flyingterminal"] scratchpad show
-#bindsym $mod+F2 [instance="pad_(?!audioplayer)"] move scratchpad ; [instance="pad_audioplayer"] scratchpad show
-#bindsym $mod+F3 [instance="pad_(?!ncmpcpp)"] move scratchpad; [instance="pad_ncmpcpp"] scratchpad show
-bindsym $mod+F1 [con_mark="pad_1"] scratchpad show
 bindsym $mod+F2 [instance="pad_(?!audioplayer)"] move scratchpad ; [instance="pad_audioplayer"] scratchpad show
 bindsym $mod+F3 [instance="pad_(?!ncmpcpp)"] move scratchpad; [instance="pad_ncmpcpp"] scratchpad show
-
-
-# This may be slow since script involves a few steps
-# change focus
-# bindsym $mod+$kleft focus left
-# bindsym $mod+$kdown focus down
-# bindsym $mod+$kup focus up
-# bindsym $mod+$kright focus right
-
-# # alternatively, you can use the cursor keys:
-# bindsym $mod+Shift+Left move left
-# bindsym $mod+Shift+Down move down
-# bindsym $mod+Shift+Up move up
-# bindsym $mod+Shift+Right move right
-
-# split in horizontal orientation
-# bindsym $mod+b split h
-
-# split in vertical orientation
-# needs i3next
-# bindsym $mod+v split toggle
-
-# enter fullscreen mode for the focused container
-# bindsym $mod+f fullscreen
-# bindsym $mod+Shift+f fullscreen global
-
-
 
 
 mode "programs" {
@@ -112,12 +65,8 @@ mode "programs" {
     bindsym Escape mode "default"
 }
 
-# bindsym $mod+quotedbl  focus child
-#bindsym $mod+quotedbl workspace "$w3"
 bindsym $mod+apostrophe mode "programs"
 
-#bindsym $mod+q exec nemo
-# focus the child container
 
 for_window [con_mark="^pad_*"] move scratchpad
 
@@ -133,7 +82,7 @@ bindsym $mod+Shift+F4 move container to workspace "$w4"
 
 set $rofi_mode rofi <b>Q</b>qutebrowser <b>b</b>uku
 bindsym $mod+Shift+R mode "$rofi_mode"
-#
+
 mode --pango_markup "$rofi_mode" {
 	# rofi -modi 'run,DRun,window,ssh,Layouts:i3-list-layouts,file:/home/teto/rofi/Examples/rofi-file-browser.sh' -show run
 	bindsym w mode "default", exec rofi -modi 'window' -show
@@ -198,11 +147,9 @@ mode "resize" {
 bindsym $mod+shift+b border toggle
 bindsym $mod+ctrl+minus move scratchpad
 
-# bindsym $mod+shift+n exec nemo
 bindsym $mod+shift+p mode mouse
 
-# TODO use /nix/store/wdpmd24p4bdc8c3y63sjr5x272fxw0mx-i3easyfocus-20190411/bin/i3-easyfocus
-bindsym Menu exec /nix/store/wdpmd24p4bdc8c3y63sjr5x272fxw0mx-i3easyfocus-20190411/bin/i3-easyfocus
+# bindsym Menu exec /nix/store/wdpmd24p4bdc8c3y63sjr5x272fxw0mx-i3easyfocus-20190411/bin/i3-easyfocus
 
 
 mode mouse {
@@ -216,20 +163,6 @@ mode mouse {
 	bindsym Escape mode "default"
 }
 
-# no_focus [window_role="pop-up"]
-
-### TODO need to run urxvtd beforehand
-### display error in case it does not launch
-# Provide command to send to a specific scratchpad (rename title) or use mark ?
-#
-#exec_always urxvtc -name pad_audioplayer -e "mocp; $SHELL";
-#exec_always urxvtc -name pad_flyingterminal
-#exec_always urxvtc -name pad_ncmpcpp -e sh ncmpcpp;$SHELL
-#exec_always urxvtc -name pad_term4
-#exec_always urxvtc -name pad_term5
-
-# xrandr --output LVDS1 --primary --auto --output DP1 --auto --right-of LVDS1
-#exec_always xrandr --output $output1 --auto --output $output2 --right-of $output1
 for_window [class="^qutebrowser$"] title_format "<span background='blue'>QB</span> %title"
 for_window [class="^Firefox$"] title_format "<span background='#F28559'>FF</span> %title"
 for_window [title="Thunderbird$"] title_format " %title"
