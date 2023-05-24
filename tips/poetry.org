@@ -13,13 +13,10 @@ replace .venv with your project's env path
 
 Le nom du package dans l'overlay c'est celui visible dans le fichier lock.
 
-marshmallow-pymodm
 poetry env info -p
 
 pyProject = readTOML pyproject;
 poetryLock = readTOML poetrylock;
-
-.venv/src/marshmallow_pymodm
 
 
 https://python-poetry.org/docs/pyproject/#packages
@@ -36,3 +33,10 @@ to compare with `pipenv where`
 
 # poetry and nix
 mkPoetryEnv returns a withPackages()
+
+** install on ubuntu
+ 
+   in the alot context 
+   apt install python3 curl libnotmuch-dev libgpgme-dev gcc
+   curl -sSL https://install.python-poetry.org | python3 -
+   export PATH="/root/.local/bin:$PATH"

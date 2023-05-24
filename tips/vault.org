@@ -6,6 +6,9 @@
 * to debug token issues
   vault token lookup
 
+vault login -method=oidc -path=google
+vault kv put -mount=secret ci-runner/prod PULUMI_CONFIG_PASSPHRASE=toto
+vault kv get -mount=secret -field=ssh_client_key ci-runner/prod/secrets-prod.yaml
 
 When running Vault in dev mode, Key/Value v2 secrets engine is enabled at secret/ path.
 

@@ -143,6 +143,7 @@ autoload -z edit-command-line
 
 # zmodload -i zsh/complist
 zbell_ignore=($EDITOR $PAGER "man" "v")
+zbell_duration=30
 . "$ZDOTDIR/zbell.zsh"
 
 # completion config {{{1

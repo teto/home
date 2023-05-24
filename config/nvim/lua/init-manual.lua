@@ -267,6 +267,9 @@ vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'grey' })
 -- while testing/developing rest.nvim
 vim.opt.runtimepath:prepend('/home/teto/neovim/rest.nvim')
 vim.opt.runtimepath:prepend('/home/teto/tree-sitter-http')
+-- lua require'plenary.reload'.reload_module('rest-nvim.request')
+vim.opt.runtimepath:prepend('/home/teto/nvim-treesitter')
+
 -- f3 to show tree
 vim.keymap.set('n', '<Leader><Leader>', '<Cmd>b#<CR>')
 
@@ -840,6 +843,12 @@ vim.filetype.add({
 --	 { noremap = true, silent = true }
 -- )
 vim.o.grepprg = 'rg --vimgrep --no-heading --smart-case'
+
+-- disable filewatching
+require('vim.lsp._watchfiles')._watchfunc = function(_, _, _) return true end
+
+
+
 
 require('teto.context_menu').setup_rclick_menu_autocommands()
 require('teto.lsp').set_lsp_lines(true)

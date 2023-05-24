@@ -4,7 +4,7 @@
 
   imports = [
    # borken
-    # ../../hm/profiles/vdirsyncer.nix
+    ../../hm/profiles/vdirsyncer.nix
     # ../../hm/nushell.nix
     ../../hm/profiles/desktop.nix
     ../../hm/profiles/mail.nix
@@ -48,6 +48,10 @@
         "bluetooth"
         # "backlight"
        ];
+       battery = {
+
+        format = "{time} {icon}";
+       };
     };
     };
   };

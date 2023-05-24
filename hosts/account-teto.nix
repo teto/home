@@ -21,6 +21,7 @@ in
       "video" # to control brightness
       "rtkit" # for pipewire
       "pipewire" # for pipewire
+      "podman"
       "postgres"
       "pgadmin" # pgadmin is such a mess
       "wheel" # for sudo

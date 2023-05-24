@@ -1,6 +1,9 @@
 
-* how to enable debug 
+* how to enable debug  ?
+
+  Works only if service declares BusName / d-bus
   systemctl service-log-level systemd-networkd debug
+  systemctl service-log-level
 
 * import variables ?
 
@@ -15,7 +18,6 @@
 systemd-analyze blame
 systemd-analyze verify toto.unit
 
-systemctl service-log-level
 
 systemctl --failed --user
 
