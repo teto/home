@@ -59,7 +59,14 @@ lspconfig.lua_ls.setup({
                 },
                 -- Define variable names that will not be reported as an unused local by unused-local.
                 unusedLocalExclude = { '_*' },
-                disable = { 'lowercase-global', 'unused-function' },
+                disable = {
+                 'lowercase-global',
+                 'unused-function',
+                 -- these are buggy
+                 'duplicate-doc-field',
+                 'duplicate-set-field'
+
+                },
             },
             workspace = {
                 checkThirdParty = false,

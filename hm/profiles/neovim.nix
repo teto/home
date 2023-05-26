@@ -422,13 +422,11 @@ let
     })
 
     # { plugin = vCoolor-vim; }
-    (luaPlugin {
-      plugin = lazy-nvim;
-      config = ''
-       -- require my own manual config
-       require('init-manual')
-       '';
-    })
+    # (luaPlugin {
+    #   plugin = lazy-nvim;
+    #   config = ''
+    #    '';
+    # })
     # {
     #   # davidgranstrom/nvim-markdown-preview
     #   plugin = nvim-markdown-preview;
@@ -638,9 +636,7 @@ let
     #   plugin = sql-nvim;
     #   # config = "let g:sql_clib_path = '${pkgs.sqlite.out}/lib/libsqlite3.so'";
     # }
-    {
-      plugin = vim-fugitive;
-    }
+    { plugin = vim-fugitive; }
 
 	# replaced by alpha.nvim ?
     # (luaPlugin {
@@ -873,10 +869,16 @@ in
     # ;
 
 
-    # extraLuaConfig = ''
-    #   -- logs are written to /home/teto/.cache/vim-lsp.log
-    #   vim.lsp.set_log_level("info")
-    # '';
+     extraLuaConfig = ''
+       -- logs are written to /home/teto/.cache/vim-lsp.log
+       -- vim.lsp.set_log_level("info")
+       -- require my own manual config
+       require('init-manual')
+     ''
+     + (lib.strings.concatStrings (
+        lib.mapAttrsToList genBlockLua luaRcBlocks
+      ))
+     ;
 
     extraPackages = with pkgs; [
       # luaPackages.lua-lsp
@@ -903,17 +905,4 @@ in
 
     plugins = map (x: builtins.removeAttrs x [ "after" ]) rawPlugins;
   };
-
-  xdg.configFile =
-    let
-      # TODO add the after bits
-      extraLuaConfig = (lib.strings.concatStrings (
-        lib.mapAttrsToList genBlockLua luaRcBlocks
-      ));
-
-    in
-    {
-      # a copy of init.vim in fact
-      "nvim/lua/init-home-manager.lua".text = extraLuaConfig;
-    };
 }

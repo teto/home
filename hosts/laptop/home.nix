@@ -26,7 +26,7 @@
   ];
 
   # use a release version
-  programs.neovim.package = lib.mkForce pkgs.neovim;
+  # programs.neovim.package = lib.mkForce pkgs.neovim;
 
   xsession.windowManager.i3 = {
     # enable = false;

@@ -8,7 +8,7 @@
     # shell = pkgs.zsh;
     # openssh.authorizedKeys.keyFiles = [ ./keys/root_gitolite.pub ];
 	programs.neovim = {
-	  enable = true;
+	  enable = false;
 	  defaultEditor = true;
 	};
 

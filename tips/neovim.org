@@ -1,9 +1,9 @@
 #+TITLE: neovim.org
 
-nvim -V3 to see terminal
+nvim -V30log.txt to log information
 
-# prettyprint json
-%!jq '.'
+you can start neovim with --luamod-dev
+also set vim.g.__ts_debug to help debug language-tree
 
 * debug haskell-tools.nvim
 

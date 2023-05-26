@@ -20,8 +20,13 @@ if not vim.loop.fs_stat(lazypath) then
 		lazypath,
 	})
 end
-vim.opt.rtp:prepend(lazypath)
-vim.cmd([[packloadall ]])
+require("vim.lsp._watchfiles")._watchfunc = require("vim._watch").watch
+
+
+-- undocumented like --luamod-dev
+vim.g.__ts_debug = 10
+
+-- vim.cmd([[packloadall ]])
 -- HOW TO TEST our fork of plenary
 -- vim.opt.rtp:prepend(os.getenv("HOME").."/neovim/plenary.nvim")
 -- local reload = require'plenary.reload'
@@ -35,13 +40,20 @@ vim.g.maplocalleader = ' '
 vim.opt.colorcolumn = { 100 }
 vim.opt.termguicolors = true
 
+-- TODO package last-color in nix
+vim.opt.rtp:prepend(lazypath)
 require('lazy').setup('lazyplugins', {
 	lockfile = vim.fn.stdpath('cache') .. '/lazy-lock.json',
 	dev = {
 		-- directory where you store your local plugin projects
-		path = '/home/teto/neovim',
+		-- path = '/home/teto/neovim',
 		---@type string[] plugins that match these patterns will use your local versions instead of being fetched from GitHub
 		patterns = {}, -- For example {"folke"}
+	},
+	change_detection = {
+		-- automatically check for config file changes and reload the ui
+		enabled = false,
+		notify = false, -- get a notification when changes are found
 	},
 	performance = {
 		cache = {
@@ -52,7 +64,12 @@ require('lazy').setup('lazyplugins', {
 		reset_packpath = false,
 		rtp = {
 			reset = false,
-          paths = {}, -- add any custom paths here that you want to includes in the rtp
+-- while testing/developing rest.nvim
+
+          paths = {
+			  -- '/home/teto/neovim/rest.nvim'
+			-- , '/home/teto/tree-sitter-http'
+		  }, -- add any custom paths here that you want to includes in the rtp
           disabled_plugins = {
             -- "gzip",
             -- "matchit",
@@ -65,7 +82,13 @@ require('lazy').setup('lazyplugins', {
           },
 		},
 	},
+	debug = true,
 })
+-- lazy/config.lua sets vim.go.loadplugins = false so I used to run packloadall to restore those plugins
+-- but there seems to be a bug somewhere as overriding VIMRUNTIME would then be dismissed and it would used
+-- whatever VIMRUNTIME, even an old one ? so there is some cache invalidation issue somewhere ?
+-- this is a quickfix that works around lazyplugins issue but I need to find the rootcause
+vim.go.loadplugins = true
 
 -- main config {{{
 -- vim.opt.splitbelow = true	-- on horizontal splits
@@ -574,7 +597,8 @@ if has_sniprun then
 end
 
 -- add description
-vim.api.nvim_set_keymap('n', '<f3>', '<cmd>lua require("nvim-treesitter.parsers").reset_cache(); vim.treesitter.inspect_tree()<cr>', {})
+-- lua require("nvim-treesitter.parsers").reset_cache();
+vim.api.nvim_set_keymap('n', '<f3>', '<cmd>lua vim.treesitter.inspect_tree()<cr>', {})
 vim.api.nvim_set_keymap('n', '<f5>', '<cmd>!make build', {})
 
 vim.g.indicator_errors = ''
@@ -666,13 +690,13 @@ end
 
 vim.g.UltiSnipsSnippetDirectories = { vim.fn.stdpath('config') .. '/snippets' }
 vim.g.tex_flavor = 'latex'
-require('teto.treesitter')
+-- require('teto.treesitter')
 
 
 require('teto.lspconfig')
 
 -- logs are written to /home/teto/.cache/vim-lsp.log
-vim.lsp.set_log_level('DEBUG')
+-- vim.lsp.set_log_level('DEBUG')
 
 -- hack
 -- local _, notifs = pcall(require, 'notifications')
@@ -832,9 +856,11 @@ map('n', '<leader>rg', '<Cmd>Grepper -tool rg -open -switch<CR>', { remap = true
 vim.filetype.add({
 	filename = {
 		['.env'] = 'env',
-		-- ['.http'] = 'http'
+		['.http'] = 'http'
 	}
 })
+vim.opt.runtimepath:prepend('/home/teto/neovim/rest.nvim')
+vim.opt.runtimepath:prepend('/home/teto/tree-sitter-http')
 
 -- vim.api.nvim_set_keymap(
 --	 'n',
@@ -843,12 +869,6 @@ vim.filetype.add({
 --	 { noremap = true, silent = true }
 -- )
 vim.o.grepprg = 'rg --vimgrep --no-heading --smart-case'
-
--- disable filewatching
-require('vim.lsp._watchfiles')._watchfunc = function(_, _, _) return true end
-
-
-
 
 require('teto.context_menu').setup_rclick_menu_autocommands()
 require('teto.lsp').set_lsp_lines(true)
