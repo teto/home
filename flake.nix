@@ -67,6 +67,7 @@
     neovim = {
       # url = "github:nojnhuh/neovim?dir=contrib&ref=lsp-watch-files";
       url = "github:neovim/neovim?dir=contrib";
+      # url = "github:teto/neovim?dir=contrib&ref=treesitter-message-add-lang";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     sops-nix.url = "github:Mic92/sops-nix";
@@ -184,8 +185,7 @@
             };
             dce = myPkgs.callPackage ./pkgs/dce { python = myPkgs.python3; };
 
-            # aws-lambda-rie = self.overlays.local.aws-lambda-rie ;
-            aws-lambda-rie = myPkgs.callPackage ./pkgs/aws-lambda-runtime-interface-emulator { };
+            # aws-lambda-rie = myPkgs.callPackage ./pkgs/aws-lambda-runtime-interface-emulator { };
 
             inherit (myPkgs) i3pystatus-custom;
             inherit (unstablePkgs) nhs92 nhs94 nhs96;
@@ -259,19 +259,18 @@
               })
 
               ({ config, lib, pkgs, ... }:
-			  { 
-				home-manager.users.root = {
-				 imports = [
-				                (import ./hm/modules/neovim.nix)
+              { 
+                home-manager.users.root = {
+                 imports = [
+                  (import ./hm/modules/neovim.nix)
+                  (import ./hm/profiles/neovim.nix)
+                 ];
 
-				  (import ./hm/profiles/neovim.nix)
-				 ];
-
-				 home.stateVersion = "22.11";
-				};
+                 home.stateVersion = "22.11";
+                };
 
 
-			  })
+              })
 
               # breaks build: doesnt like the "activation-script"
               # nova.hmConfigurations.dev
