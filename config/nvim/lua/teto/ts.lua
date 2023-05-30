@@ -1,6 +1,6 @@
 -- treesitter testing playground
 local ts = vim.treesitter
-local ts_utils = require('nvim-treesitter.ts_utils')
+-- local ts_utils = require('nvim-treesitter.ts_utils')
 
 local query = [[
     (request @request_lists)
@@ -16,7 +16,7 @@ end
 local M = {}
 M.test_get_node = function()
     local bufnr = 0
-    local start_node = ts_utils.get_node_at_cursor()
+    local start_node = ts.get_node()
     local parser = ts.get_parser(bufnr, parser_name)
     local root = parser:parse()[1]:root()
     local start_row, _, end_row, _ = root:range()

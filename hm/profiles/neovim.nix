@@ -93,7 +93,6 @@ let
     #   require("nvim-gps").setup()
     #   '';
     # })
-    # (luaPlugin { plugin = nvim-treesitter-context; })
   ];
 
   luaPlugins = with pkgs.vimPlugins; [
@@ -117,8 +116,12 @@ let
     # })
 
     {
-      plugin = (nvim-treesitter.withPlugins (
-        plugins: with plugins; [
+      # we should have a file of the grammars as plugins
+      # symlinkJoin
+  # Usage:
+      plugin = pkgs.symlinkJoin {
+       name = "tree-sitter-grammars";
+       paths = with pkgs.neovimUtils; [
           # tree-sitter-bash
           # tree-sitter-c
           # tree-sitter-lua
@@ -130,10 +133,10 @@ let
           # tree-sitter-html  # for rest.nvim
           # tree-sitter-norg
           # tree-sitter-org-nvim
-          tree-sitter-query
-          tree-sitter-just
-        ]
-      ));
+          (grammarToPlugin pkgs.tree-sitter-grammars.tree-sitter-query)
+          # (grammarToPlugin tree-sitter-just)
+        ];
+      };
       # see https://github.com/NixOS/nixpkgs/issues/189838#issuecomment-1250993635 for rationale
       # config = ''
       # local available, config = pcall(require, 'nvim-treesitter.configs')
@@ -556,20 +559,20 @@ let
     #     '';
     # })
 
-    # it depends on nvim-treesitter
-    (luaPlugin {
-      # matches nvim-orgmode
-      plugin = orgmode;
+    # disabling as long as it depends on nvim-treesitter
+    # (luaPlugin {
+    #   # matches nvim-orgmode
+    #   plugin = orgmode;
+    #   # config = ''
+    #   #   require('orgmode').setup_ts_grammar()
+    #   #   require('orgmode').setup{
+    #   #       org_capture_templates = {'~/nextcloud/org/*', '~/orgmode/**/*'},
+    #   #       org_default_notes_file = '~/orgmode/refile.org',
+    #   #       -- TODO add templates
+    #   #       org_agenda_templates = { t = { description = 'Task', template = '* TODO %?\n  %u' } },
+    #   #   }'';
+    # })
 
-      # config = ''
-      #   require('orgmode').setup_ts_grammar()
-      #   require('orgmode').setup{
-      #       org_capture_templates = {'~/nextcloud/org/*', '~/orgmode/**/*'},
-      #       org_default_notes_file = '~/orgmode/refile.org',
-      #       -- TODO add templates
-      #       org_agenda_templates = { t = { description = 'Task', template = '* TODO %?\n  %u' } },
-      #   }'';
-    })
     (luaPlugin {
       plugin = SchemaStore-nvim;
       # config = ''
@@ -843,9 +846,11 @@ in
 
     # custom options
     # fennel.enable = false;
-    teal.enable = true;
-    orgmode.enable = true;
+    teal.enable = false;
+    orgmode.enable = false;
     autocompletion.enable = true;
+    # TODO ?
+    # snippets.enable = true;
 
     # take the one from the flake
     package = myPackage;

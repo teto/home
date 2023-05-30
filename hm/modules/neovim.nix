@@ -35,15 +35,14 @@ let
     (luaPlugin {
       # matches nvim-orgmode
       plugin = orgmode;
-      config = ''
-        		require('orgmode').setup_ts_grammar()
-        		require('orgmode').setup{
-        			org_capture_templates = {'~/nextcloud/org/*', '~/orgmode/**/*'},
-        			org_default_notes_file = '~/orgmode/refile.org',
-        			-- TODO add templates
-        			org_agenda_templates = { t = { description = 'Task', template = '* TODO %?\n  %u' } },
-        		}
-        		'';
+       config = ''
+        require('orgmode').setup{
+            org_capture_templates = {'~/nextcloud/org/*', '~/orgmode/**/*'},
+            org_default_notes_file = '~/orgmode/refile.org',
+            -- TODO add templates
+            org_agenda_templates = { t = { description = 'Task', template = '* TODO %?\n  %u' } },
+        }
+        '';
     })
   ];
 

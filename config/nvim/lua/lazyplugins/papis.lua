@@ -5,7 +5,6 @@ return {
     --     "kkharji/sqlite.lua",
     --     "nvim-lua/plenary.nvim",
     --     "MunifTanjim/nui.nvim",
-    --     "nvim-treesitter/nvim-treesitter",
     --   },
     --   rocks = {
     --     {

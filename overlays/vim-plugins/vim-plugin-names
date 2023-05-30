@@ -4,14 +4,7 @@
 # glacambre/firenvim
 # JamshedVesuna/vim-markdown-preview
 # jubnzv/virtual-types.nvim
-# nvim-telescope/telescope.nvim
-# nvim-treesitter/nvim-treesitter-textobjects@0.5-compat
-# nvim-treesitter/nvim-treesitter@0.5-compat
 # pwntester/octo.nvim
 # shime/vim-livedown
 # TimUntersberger/neogit
 # tversteeg/registers.nvim@main
-tjdevries/astronauta.nvim
-lewis6991/gitsigns.nvim@main
-ggandor/lightspeed.nvim@main
-https://git.sr.ht/~whynothugo/lsp_lines.nvim

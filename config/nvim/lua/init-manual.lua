@@ -291,7 +291,7 @@ vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'grey' })
 vim.opt.runtimepath:prepend('/home/teto/neovim/rest.nvim')
 vim.opt.runtimepath:prepend('/home/teto/tree-sitter-http')
 -- lua require'plenary.reload'.reload_module('rest-nvim.request')
-vim.opt.runtimepath:prepend('/home/teto/nvim-treesitter')
+-- vim.opt.runtimepath:prepend('/home/teto/nvim-treesitter')
 
 -- f3 to show tree
 vim.keymap.set('n', '<Leader><Leader>', '<Cmd>b#<CR>')
@@ -533,18 +533,16 @@ end
 
 -- Load custom tree-sitter grammar for org filetype
 -- orgmode depends on treesitter
-local has_orgmode, orgmode = pcall(require, 'orgmode')
-if has_orgmode then
-	orgmode.setup_ts_grammar()
-	require('orgmode').setup{
-		org_capture_templates = {'~/nextcloud/org/*', '~/orgmode/**/*'},
-		org_default_notes_file = '~/orgmode/refile.org',
-		-- TODO add templates
-		org_agenda_templates = { t = { description = 'Task', template = '* TODO %?\n  %u' }  }
-	}
-
-
-end
+-- local has_orgmode, orgmode = pcall(require, 'orgmode')
+-- if has_orgmode then
+-- 	it's already done in nix, but maybe let the possibility to :xa
+-- 	require('orgmode').setup{
+-- 		org_capture_templates = {'~/nextcloud/org/*', '~/orgmode/**/*'},
+-- 		org_default_notes_file = '~/orgmode/refile.org',
+-- 		-- TODO add templates
+-- 		org_agenda_templates = { t = { description = 'Task', template = '* TODO %?\n  %u' }  }
+-- 	}
+-- end
 
 -- vim.g.sonokai_style = 'atlantis'
 -- vim.cmd([[colorscheme sonokai]])
