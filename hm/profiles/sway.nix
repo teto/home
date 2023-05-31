@@ -76,7 +76,8 @@ in
   # };
 
 
-   package = lib.hiPrio pkgs.swayfx;
+  # lib.hiPrio 
+   package = pkgs.swayfx;
 
     config = (builtins.removeAttrs config.xsession.windowManager.i3.config [ "startup" "bars" ])
       // {

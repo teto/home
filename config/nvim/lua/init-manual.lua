@@ -20,8 +20,16 @@ if not vim.loop.fs_stat(lazypath) then
 		lazypath,
 	})
 end
-require("vim.lsp._watchfiles")._watchfunc = require("vim._watch").watch
+-- require("vim.lsp._watchfiles")._watchfunc = require("vim._watch").watch
 
+-- workaround slow neovim https://github.com/neovim/neovim/issues/23725
+local ok, wf = pcall(require, "vim.lsp._watchfiles")
+if ok then
+	-- disable lsp watcher. Too slow on linux
+	wf._watchfunc = function()
+	return function() end
+	end
+end
 
 -- undocumented like --luamod-dev
 vim.g.__ts_debug = 10
