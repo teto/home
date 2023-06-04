@@ -15,6 +15,7 @@ alias local-rebuild="nixos-rebuild --flake ~/home --override-input nixpkgs-teto 
 
 # Gitops quick
 alias mg='if [ -z ${BW_SESSION} ]; then export BW_SESSION=$(bw unlock --raw); fi && make gitops'
+# TODO check return type in bw unlock --check 
 alias bn='if [ -z ${BW_SESSION} ]; then export BW_SESSION=$(bw unlock --raw); fi && nix develop'
 alias bnr='if [ -z ${BW_SESSION} ]; then export BW_SESSION=$(bw unlock --raw); fi && nix develop --option builders "$NOVA_RUNNER3"'
 

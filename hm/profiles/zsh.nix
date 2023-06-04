@@ -8,7 +8,7 @@
     # $HOME is prepend hence the issues
     dotDir = ".config/zsh";
     # autosuggestion.enable = true;
-    sessionVariables = {
+    sessionVariables = config.programs.bash.sessionVariables // {
       # HISTFILE="$XDG_CACHE_HOME/zsh_history";
       # TODO load this from sops instead
       GITHUB_TOKEN = secrets.githubToken;

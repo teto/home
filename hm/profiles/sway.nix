@@ -281,6 +281,7 @@ in
       ];
        modules-right = [ 
         "mpd"
+
         # "custom/mymodule#with-css-id"
         # "temperature"
         "clock"
@@ -291,10 +292,37 @@ in
         "custom/notmuch"
         "tray"
        ];
-    "tray"= {
+    tray= {
         # "icon-size": 21,
         "spacing"= 10;
     };
+    mpd = {
+        "format" = "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ⸨{songPosition}|{queueLength}⸩ ";
+        "format-disconnected" = "Disconnected ";
+        "format-stopped" = "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}Stopped ";
+        "unknown-tag" = "N/A";
+        "interval" = 2;
+        "consume-icons" = {
+            "on" = " ";
+        };
+        "random-icons" = {
+            "off" = "<span color=\"#f53c3c\"></span> ";
+            "on" = " ";
+        };
+        "repeat-icons" = {
+            "on" = " ";
+        };
+        "single-icons" = {
+            "on" = "1 ";
+        };
+        "state-icons" = {
+            "paused" = "";
+            "playing" = "";
+        };
+        "tooltip-format" = "MPD (connected)";
+        "tooltip-format-disconnected" = "MPD (disconnected)";
+    };
+
     idle_inhibitor = {
 
 
@@ -318,7 +346,10 @@ in
         "tooltip-format"= "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
         "format-alt"= "{:%Y-%m-%d}";
      };
-
+    cpu= {
+        format= "{usage}% ";
+        tooltip= false;
+    };
        "sway/workspaces" = {
         # {name}:
          format= "{name}";
@@ -332,6 +363,15 @@ in
          #    "3" = "";
          # };
        };
+    temperature= {
+        # "thermal-zone": 2,
+        # "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+        critical-threshold= 80;
+        # // "format-critical": "{temperatureC}°C {icon}",
+        format = "{temperatureC}°C {icon}";
+        format-icons =  [""  ""  ""];
+    };
+
        "custom/notification" = {
          tooltip = false;
          format = "{icon}";
@@ -362,6 +402,15 @@ in
           exec = lib.getExe githubUpdater;
           on-click = "${pkgs.xdg_utils}/bin/xdg-open https://github.com/notifications";
       };
+
+     network = {
+         # // "interface": "wlp2*", // (Optional) To force the use of this interface
+         format-wifi = "{essid} ({signalStrength}%) ";
+         format-ethernet = "{ifname}: {ipaddr}/{cidr} ";
+         format-linked = "{ifname} (No IP) ";
+         format-disconnected = "Disconnected ⚠";
+         format-alt = "{ifname}: {ipaddr}/{cidr}";
+     };
 
       
       "custom/notmuch" = let 
