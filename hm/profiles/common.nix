@@ -27,6 +27,7 @@
     # or lazygit
     nix-prefetch-git
     netcat-gnu # plain 'netcat' is the bsd one
+    nvimpager # 'less' but with neovim
     # dig.dnsutils  # for dig disabled because of flakes
     perf-tools
     strace

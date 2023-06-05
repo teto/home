@@ -70,6 +70,11 @@
       # url = "github:teto/neovim?dir=contrib&ref=treesitter-message-add-lang";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    neovide = {
+      url = "github:neovide/neovide/new-keyboard-v3";
+      flake = false;
+    };
+
     sops-nix.url = "github:Mic92/sops-nix";
 
     # TODO extend vim plugins from this overlay
@@ -404,6 +409,10 @@
         autoupdating = final: prev: {
 
 		  mujmap = self.inputs.mujmap.packages.x86_64-linux.mujmap;
+          neovide = prev.neovide.overrideAttrs(oa: {
+           src = self.inputs.neovide;
+          });
+
 
           # TODO override extraLibs instead 
           i3pystatus-custom = (prev.i3pystatus.override ({

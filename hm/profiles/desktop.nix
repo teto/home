@@ -305,11 +305,11 @@ in
   };
 
   # cheatsheets from terminal
-  programs.navi = {
-    enable = true;
-    # disabled bcecause it interferes with our fzf widgets mappings
-    enableZshIntegration = false;
-  };
+  # programs.navi = {
+  #   enable = true;
+  #   # disabled bcecause it interferes with our fzf widgets mappings
+  #   enableZshIntegration = false;
+  # };
 
   # broot is a terminal file navigator
   programs.broot = {
