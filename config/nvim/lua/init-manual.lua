@@ -322,6 +322,7 @@ if has_rest then
 		},
 		result = {
 			-- toggle showing URL, HTTP info, headers at top the of result window
+			show_curl_command = true,
 			show_url = true,
 			show_http_info = true,
 			show_headers = true,

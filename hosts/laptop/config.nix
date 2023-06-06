@@ -6,6 +6,7 @@
     ../../modules/distributedBuilds.nix
     ../config-all.nix
     ../../nixos/profiles/desktop.nix
+    ../../nixos/profiles/rstudio-server.nix
     ../../nixos/profiles/podman.nix
     ../../modules/sway.nix
     # ./modules/docker-daemon.nix
