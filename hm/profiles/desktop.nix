@@ -197,7 +197,7 @@ in
     ++ (imPkgs true)
     ++ [
       # pkgs.up # live preview of pipes
-      pkgs.peek # GIF recorder
+      # pkgs.peek # GIF recorder  BROKEN
 	  pkgs.alsa-utils #  for alsamixer
 
       # pkgs.cachix  # almost always broken

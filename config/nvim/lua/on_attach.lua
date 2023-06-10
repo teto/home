@@ -27,8 +27,9 @@ local function default_mappings()
     end, { buffer = true })
 end
 
-M.on_attach = function(client, bufnr)
+M.on_attach = function(client, _bufnr)
     default_mappings()
+    client.server_capabilities.semanticTokensProvider = nil
 
     -- vim.bo.omnifunc = vim.lsp.omnifunc
     vim.opt.omnifunc = 'v:lua.vim.lsp.omnifunc'

@@ -133,23 +133,25 @@ in
       # -n Do not add a newline to the output.
       # print -Pn "\e]0;$(echo "$1")\a"
       programs.zsh.initExtra = ''
-                function set_term_title (){
-                  print -n "\e]0;$1\a"
-                }
+      function set_term_title (){
+        print -n "\e]0;$1\a"
+      }
 
-                set_term_title_for_new_prompt () {
-                    set_term_title "$(pwd):$3"
-                }
-        		# zsh passes
-                set_term_title_for_program () {
-                    set_term_title "program: $(pwd):$2"
-                }
+      set_term_title_for_new_prompt () {
+          echo "set_term_title_for_new_prompt"
+          set_term_title "$(pwd):$3"
+      }
+      # zsh passes
+      set_term_title_for_program () {
+          echo "set_term_title_for_program"
+          set_term_title "program: $(pwd):$3"
+      }
 
-        		# https://zsh.sourceforge.io/Doc/Release/Functions.html#index-preexec_005ffunctions
-                # pass 3 arguments: non-expanded, expanded, fully-expanded
-                add-zsh-hook preexec set_term_title_for_program
-                # precmd: Executed before each prompt.
-                add-zsh-hook precmd set_term_title_for_new_prompt
+      # https://zsh.sourceforge.io/Doc/Release/Functions.html#index-preexec_005ffunctions
+      # pass 3 arguments: non-expanded, expanded, fully-expanded
+      add-zsh-hook preexec set_term_title_for_program
+      # precmd: Executed before each prompt.
+      add-zsh-hook precmd set_term_title_for_new_prompt
       '';
     })
 
