@@ -29,7 +29,7 @@
 
   programs.gnome-shell.enable = true;
 
-  programs.joshuto.enable = true;
+  # programs.joshuto.enable = true;
 
   home.packages = with pkgs; [
 	# openlens # not in unstable yet 
