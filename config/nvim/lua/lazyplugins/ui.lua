@@ -1,10 +1,11 @@
 return {
-  -- { 'romgrk/kirby.nvim', dependencies = {
+  { 'romgrk/kirby.nvim',
+  dependencies = {
   --     -- { 'romgrk/fzy-lua-native', build = 'make install' },
-  --     { 'romgrk/kui.nvim' },
+      -- { 'romgrk/kui.nvim' },
   --     { 'nvim-tree/nvim-web-devicons' },
-  --   },
-  -- },
+    },
+  },
     -- provides 'NvimTree'
     { 'kyazdani42/nvim-tree.lua', lazy = true},
  -- {

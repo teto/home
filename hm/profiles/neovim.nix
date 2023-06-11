@@ -97,6 +97,7 @@ let
 
   luaPlugins = with pkgs.vimPlugins; [
     { plugin = b64-nvim; }
+    { plugin = kui-nvim; }
     # (luaPlugin {
     #   plugin = nvim-lspconfig;
     #   config = let nodePkgs = pkgs.nodePackages; in ''
