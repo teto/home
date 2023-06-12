@@ -12,6 +12,7 @@
       # HISTFILE="$XDG_CACHE_HOME/zsh_history";
       # TODO load this from sops instead
       GITHUB_TOKEN = secrets.githubToken;
+      OPENAI_API_KEY = secrets.OPENAI_API_KEY;
     };
     history = {
       # HISTSIZE

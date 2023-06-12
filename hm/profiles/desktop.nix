@@ -322,6 +322,22 @@ in
 
   # for pinentry-gnome to work longer
 
+  programs.joshuto = {
+
+   enable = true;
+   settings = {
+     hooks = {
+       preview_shown_hook_script = "~/.config/joshuto/on_preview_shown";
+       preview_removed_hook_script = "~/.config/joshuto/on_preview_removed";
+     };
+   };
+   # [preview]
+# ...
+# preview_shown_hook_script = "~/.config/joshuto/on_preview_shown"
+# preview_removed_hook_script = "~/.config/joshuto/on_preview_removed"
+  };
+
+
 
   # https://github.com/NixOS/nixpkgs/issues/196651
   manual.manpages.enable = true;

@@ -67,7 +67,7 @@ in
 
   wayland.windowManager.sway = {
    enable = true;
-   systemdIntegration = true;
+   systemd.enable = true;
      # defaultSwayPackage = pkgs.sway.override {
     # extraSessionCommands = cfg.extraSessionCommands;
     # extraOptions = cfg.extraOptions;
@@ -76,8 +76,12 @@ in
   # };
 
 
-  # lib.hiPrio 
-   package = pkgs.swayfx;
+   # disabling swayfx until  those get merged 
+   # https://github.com/nix-community/home-manager/pull/4039
+   # https://github.com/NixOS/nixpkgs/pull/237044
+
+   # package = pkgs.swayfx;
+   package = pkgs.sway-unwrapped;
 
     config = (builtins.removeAttrs config.xsession.windowManager.i3.config [ "startup" "bars" ])
       // {
@@ -204,9 +208,9 @@ in
 
       # timeout in ms
       seat * hide_cursor 8000
-      include ~/.config/sway/swayfx.txt
       include ~/.config/sway/manual.config
       '';
+      # include ~/.config/sway/swayfx.txt
 
 
     extraOptions = [

@@ -143,6 +143,18 @@ in
   #     '';
   };
 
+
+  # following the guide https://nixos.wiki/wiki/Systemd-networkd
+  systemd.network = {
+    enable = true;
+    networks = {
+     "10-lan" = {
+       matchConfig.Name = "lan";
+       networkConfig.DHCP = "ipv4";
+     };
+    };
+  };
+
   networking = {
     # address of the livebox
     defaultGateway = { address = "192.168.1.1"; interface = "wlp5s0"; };

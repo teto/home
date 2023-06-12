@@ -29,7 +29,12 @@
 
   programs.gnome-shell.enable = true;
 
-  # programs.joshuto.enable = true;
+  programs.joshuto.imagePreview = true;
+  # {
+
+  #  enable = true;
+  #  # "kitty";
+  # };
 
   home.packages = with pkgs; [
 	# openlens # not in unstable yet 

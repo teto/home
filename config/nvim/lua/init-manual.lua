@@ -19,8 +19,8 @@ if not vim.loop.fs_stat(lazypath) then
 		'--branch=stable', -- latest stable release
 		lazypath,
 	})
-end
--- require("vim.lsp._watchfiles")._watchfunc = require("vim._watch").watch
+end-- require("vim.lsp._watchfiles")._watchfunc = require("vim._watch").watch
+local ffi = require 'ffi'
 
 -- workaround slow neovim https://github.com/neovim/neovim/issues/23725
 local ok, wf = pcall(require, "vim.lsp._watchfiles")
@@ -41,8 +41,7 @@ vim.g.__ts_debug = 10
 -- reload.reload_module('plenary')
 -- require'plenary'
 vim.g.matchparen = 0
-vim.g.mousemoveevent = 1
--- must be setup before calling lazy
+vim.g.mousemoveevent = 1-- must be setup before calling lazy
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 vim.opt.colorcolumn = { 100 }
@@ -709,6 +708,33 @@ require('teto.lspconfig')
 -- local _, notifs = pcall(require, 'notifications')
 -- vim.lsp.notifier = notifs
 
+local has_iron, iron = pcall(require, 'iron.core')
+if has_iron then
+
+	-- doc at https://github.com/Vigemus/iron.nvim/tree/master
+	local view = require("iron.view")
+	iron.setup({
+		config = {
+			-- If iron should expose `<plug>(...)` mappings for the plugins
+			-- should_map_plug = false,
+			-- -- Whether a repl should be discarded or not
+			-- scratch_repl = true,
+			-- Your repl definitions come here
+			-- repl_definition = {
+			--     sh = { command = { 'zsh' } },
+			--     nix = { command = { 'nix', 'repl', '/home/teto/nixpkgs' } },
+			--     -- copied from the nix wrapper :/
+			--     lua = { command = '${pkgs.luajit}/bin/lua' },
+			-- },
+			-- repl_open_cmd = require('iron.view').left(200),
+			repl_open_cmd = view.split.vertical.botright(0.4)
+			-- how the REPL window will be opened, the default is opening
+			-- a float window of height 40 at the bottom.
+		},
+	})
+
+end
+
 vim.opt.background = 'light' -- or "light" for light mode
 
 vim.opt.showbreak = '↳ ' -- displayed in front of wrapped lines
@@ -868,6 +894,10 @@ vim.filetype.add({
 })
 vim.opt.runtimepath:prepend('/home/teto/neovim/rest.nvim')
 vim.opt.runtimepath:prepend('/home/teto/tree-sitter-http')
+
+vim.api.nvim_set_keymap('n', ',a', '<Plug>(Luadev-Run)', { noremap = false, silent = false })
+vim.api.nvim_set_keymap('v', ',,', '<Plug>(Luadev-Run)', { noremap = false, silent = false })
+vim.api.nvim_set_keymap('n', ',,', '<Plug>(Luadev-RunLine)', { noremap = false, silent = false })
 
 -- vim.api.nvim_set_keymap(
 --	 'n',

@@ -143,7 +143,7 @@ in
       }
       # zsh passes
       set_term_title_for_program () {
-          echo "set_term_title_for_program"
+          echo "set_term_title_for_program \$1: '$1' \$2: '$2' \$3: '$3'"
           set_term_title "program: $(pwd):$3"
       }
 

@@ -1,4 +1,11 @@
 return {
+ { 'jackMort/ChatGPT.nvim',
+    config = function()
+     -- passing OPENAI_API_KEY in environment for this to work
+     -- huge setup at https://github.com/jackMort/ChatGPT.nvim
+      require("chatgpt").setup()
+    end,
+ },
  { dir = '/home/teto/neovim/jap.nvim',
   config = function ()
     vim.keymap.set('n', '<Leader>j', [[<Cmd>lua require'jap-nvim'.show_info()<CR>]])

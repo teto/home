@@ -8,7 +8,7 @@ local M = {
 --- Checks if current buf has LSPs attached
 ---@return boolean
 M.buf_has_lsp = function()
- return not vim.tbl_isempty(vim.lsp.buf_get_clients(vim.api.nvim_get_current_buf()))
+ return not vim.tbl_isempty(vim.lsp.get_active_clients({ bufnr = vim.api.nvim_get_current_buf()}))
 end
 
 M.buf_has_treesitter = function()
@@ -41,6 +41,10 @@ end
 
 M.buf_is_rest = function()
  return vim.bo.filetype == 'http'
+end
+
+M.buf_is_ft_lua = function()
+ return vim.bo.filetype == 'lua'
 end
 
 --- Checks if current buf has DAP support
@@ -203,6 +207,15 @@ M.set_git_rclick_menu = function()
   { 'Blame Line            <space>gb', '<space>gb' },
  }, M.buf_is_file)
 end
+
+M.set_repl_luadev_rclick_menu = function()
+ M.set_rclick_submenu('MenuTetoReplLuadev', 'Luadev         ', {
+  { 'Run       ,a',  '<Plug>(Luadev-Run)'},
+  { 'Run line  ,,', '<space>g[' },
+ }, M.buf_is_file)
+end
+
+
 
 M.set_spectre_rclick_menu = function()
  -- nnoremap <leader>sw <cmd>lua require('spectre').open_visual({select_word=true})<CR>
