@@ -139,12 +139,12 @@ in
 
       set_term_title_for_new_prompt () {
           echo "set_term_title_for_new_prompt"
-          set_term_title "$(pwd):$3"
+          set_term_title "$(pwd):'$3'"
       }
       # zsh passes
       set_term_title_for_program () {
           echo "set_term_title_for_program \$1: '$1' \$2: '$2' \$3: '$3'"
-          set_term_title "program: $(pwd):$3"
+          set_term_title "program: $(pwd):'$3'"
       }
 
       # https://zsh.sourceforge.io/Doc/Release/Functions.html#index-preexec_005ffunctions

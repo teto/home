@@ -16,6 +16,7 @@
     # with core.monitorfs in git ()
     watchman
     # gitlab-runner
+    vault
   ];
 
   programs.direnv = {

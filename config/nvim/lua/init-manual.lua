@@ -720,12 +720,13 @@ if has_iron then
 			-- -- Whether a repl should be discarded or not
 			-- scratch_repl = true,
 			-- Your repl definitions come here
-			-- repl_definition = {
-			--     sh = { command = { 'zsh' } },
-			--     nix = { command = { 'nix', 'repl', '/home/teto/nixpkgs' } },
-			--     -- copied from the nix wrapper :/
-			--     lua = { command = '${pkgs.luajit}/bin/lua' },
-			-- },
+			repl_definition = {
+			    sh = { command = { 'zsh' } },
+			    nix = { command = { 'nix', 'repl', '/home/teto/nixpkgs' } },
+			    -- copied from the nix wrapper :/
+				-- ${pkgs.luajit}/bin
+			    lua = { command = 'lua' },
+			},
 			-- repl_open_cmd = require('iron.view').left(200),
 			repl_open_cmd = view.split.vertical.botright(0.4)
 			-- how the REPL window will be opened, the default is opening

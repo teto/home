@@ -899,7 +899,7 @@ in
     orgmode.enable = false;
     autocompletion.enable = true;
     # TODO ?
-    # snippets.enable = true;
+    snippets.enable = true;
 
     # take the one from the flake
     package = myPackage;

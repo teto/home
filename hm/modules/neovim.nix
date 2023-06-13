@@ -193,6 +193,14 @@ in
         };
         description = ''Enable support for fennel language.'';
       };
+
+      snippet = mkOption {
+        type = fennelModule;
+        default = {
+          enable = false;
+        };
+        description = ''Enable support for fennel language.'';
+      };
     };
   };
 
