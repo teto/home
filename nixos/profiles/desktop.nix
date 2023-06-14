@@ -113,17 +113,6 @@
   # seemingly working for chromium only, check for firefox
   programs.browserpass.enable = true;
 
-  # todo check if still ok on wayland
-  services.greenclip =
-    let
-      # myGreenclip = with pkgs; haskell.lib.unmarkBroken haskell.packages.ghc884.greenclip;
-      myGreenclip = with pkgs; haskellPackages.greenclip;
-    in
-    {
-      enable = true;
-      package = myGreenclip;
-    };
-
 
   nix = {
 

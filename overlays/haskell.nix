@@ -27,41 +27,6 @@ in
  nhs94 = mkGhcShell "94";
  nhs96 = mkGhcShell "96";
 
-  # nhs94 = final.mkShell {
-  #   name = "ghc9-haskell-env";
-  #   packages =
-  #     let
-  #       ghcEnv = final.haskell.packages.ghc94.ghcWithPackages (hs: [
-  #         hs.ghc
-  #         hs.haskell-language-server
-  #         hs.cabal-install
-  #         # prev.cairo
-  #       ]);
-  #     in
-  #     [
-  #       # pkgs.haskell.compiler.ghc94
-  #       ghcEnv
-  #       final.pkg-config
-  #     ];
-  # };
-
-  #   name = "ghc96-haskell-env";
-  #   packages =
-  #     let
-  #       pkgs = final.pkgs;
-  #       ghcEnv = pkgs.haskell.packages.ghc94.ghcWithPackages (hs: [
-  #         hs.ghc
-  #         hs.haskell-language-server
-  #         hs.cabal-install
-  #         prev.cairo
-  #       ]);
-  #     in
-  #     [
-  #       # pkgs.haskell.compiler.ghc94
-  #       ghcEnv
-  #       final.pkg-config
-  #     ];
-  # };
 
   # haskell = prev.haskell // {
 

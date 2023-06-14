@@ -44,6 +44,18 @@ in
       xorg.xev
   ];
 
+  # todo check if still ok on wayland
+  services.greenclip =
+    let
+      # myGreenclip = with pkgs; haskell.lib.unmarkBroken haskell.packages.ghc884.greenclip;
+      myGreenclip = with pkgs; haskellPackages.greenclip;
+    in
+    {
+      enable = true;
+      package = myGreenclip;
+    };
+
+
   # see https://discourse.nixos.org/t/opening-i3-from-home-manager-automatically/4849/7
   xsession.windowManager.i3 = {
     # keep it enabled to generate the config

@@ -80,8 +80,8 @@ in
    # https://github.com/nix-community/home-manager/pull/4039
    # https://github.com/NixOS/nixpkgs/pull/237044
 
-   # package = pkgs.swayfx;
-   package = pkgs.sway-unwrapped;
+   package = pkgs.swayfx;
+   # package = pkgs.sway-unwrapped;
 
     config = (builtins.removeAttrs config.xsession.windowManager.i3.config [ "startup" "bars" ])
       // {
@@ -358,7 +358,7 @@ in
         # {name}:
          format= "{name}";
          disable-scroll = false;
-         all-outputs = true;
+         all-outputs = false;
          # disable-scroll-wraparound = true;
          # "disable-markup" : false,
          # format-icons = {
