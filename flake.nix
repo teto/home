@@ -62,7 +62,7 @@
     i3pystatus = { url = "github:teto/i3pystatus/nix_backend"; flake = false; };
     # nova.url = "git+ssh://git@git.novadiscovery.net/world/nova-nix.git?ref=master";
     nova.url = "git+ssh://git@git.novadiscovery.net/sys/doctor";
-    jinko-stats.url = "git+ssh://git@git.novadiscovery.net/jinko/jinko-stats.git";
+    jinko-stats.url = "git+ssh://git@git.novadiscovery.net/jinko/jinko-stats.git?ref=add-rserver";
 	# c8296214151883ce27036be74d22d04953418cf4
     nova-ci.url = "git+ssh://git@git.novadiscovery.net/infra/ci-runner?ref=fix-exposure";
     neovim = {
