@@ -1,9 +1,21 @@
 return {
+   {
+      'tzachar/highlight-undo.nvim',
+      config = function()
+        require('highlight-undo').setup({
+          hlgroup = 'HighlightUndo',
+          duration = 300,
+          keymaps = {
+            {'n', 'u', 'undo', {}},
+            {'n', '<C-r>', 'redo', {}},
+          }
+          })
+      end
+  },
   { 'romgrk/kirby.nvim',
   dependencies = {
   --     -- { 'romgrk/fzy-lua-native', build = 'make install' },
       -- { 'romgrk/kui.nvim' },
-  --     { 'nvim-tree/nvim-web-devicons' },
     },
   },
     -- provides 'NvimTree'
