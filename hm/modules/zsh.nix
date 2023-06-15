@@ -16,7 +16,19 @@ let
     # in
     # src;
 
+  termTitleSubmodule = types.submodule {
+      options = {
+        enable = mkEnableOption "Title update";
 
+        # enable = mkOption {
+        #   default = false;
+        #   type = types.bool;
+        #   description = ''
+        #     To change title
+        #   '';
+        # };
+     };
+    };
     # /tree/master/plugins/zbell
    # zsh-plugins = "${flakeInputs}/plugins/zbell"
 
@@ -41,6 +53,16 @@ in
     programs.zsh = {
       enableFzfGit = mkEnableOption "Fzf-git";
 
+      termTitle = mkOption {
+        type = termTitleSubmodule;
+        default = {
+          enable = false;
+        };
+        description = ''
+          Update terminal title.
+        '';
+      };
+
       # enable = mkEnableOption "Some custom zsh functions";
       enableProfiling = mkOption {
         default = false;
@@ -50,13 +72,6 @@ in
         '';
       };
 
-      enableSetTermTitle = mkOption {
-        default = false;
-        type = types.bool;
-        description = ''
-          To change title
-        '';
-      };
 
       enableFancyCursor = mkOption {
         default = true;
@@ -124,7 +139,7 @@ in
       '';
     })
 
-    (mkIf cfg.enableSetTermTitle {
+    (mkIf cfg.termTitle.enable {
 
       # https://zsh.sourceforge.io/Doc/Release/Functions.html
       # preexec: Executed just after a command has been read and is about to be executed.
@@ -153,6 +168,8 @@ in
       # precmd: Executed before each prompt.
       add-zsh-hook precmd set_term_title_for_new_prompt
       '';
+
+      programs.bash.initExtra = config.programs.zsh.initExtra;
     })
 
     (mkIf cfg.enableFancyCursor {

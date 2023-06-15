@@ -1,5 +1,10 @@
 { config, secrets, ... }:
 {
+
+ # imports = [
+ #   (import ../modules/zsh.nix)
+ #  ];
+
   programs.zsh = {
     enable = true;
 
@@ -53,35 +58,33 @@
     # bindkey ‘^N’ down-line-or-beginning-search
 
     initExtra = ''
-              # Default to standard vi bindings, regardless of editor string
-              bindkey -v
-              # we can't bind emacs and vi at the same time so this adds emacs'
-              bindkey "^A" beginning-of-line
-              bindkey "^E" end-of-line
-              bindkey "^K" kill-line
-              bindkey "^L" clear-screen
-              bindkey "^U" kill-whole-line
-              bindkey "^W" backward-kill-word
-              bindkey "^Y" yank
-              autoload -U history-search-end
-              zle -N history-beginning-search-backward-end history-search-end
-              zle -N history-beginning-search-forward-end history-search-end
-              bindkey '^P' history-beginning-search-backward-end
-              bindkey '^N' history-beginning-search-forward-end
+      # Default to standard vi bindings, regardless of editor string
+      bindkey -v
+      # we can't bind emacs and vi at the same time so this adds emacs'
+      bindkey "^A" beginning-of-line
+      bindkey "^E" end-of-line
+      bindkey "^K" kill-line
+      bindkey "^L" clear-screen
+      bindkey "^U" kill-whole-line
+      bindkey "^W" backward-kill-word
+      bindkey "^Y" yank
+      autoload -U history-search-end
+      zle -N history-beginning-search-backward-end history-search-end
+      zle -N history-beginning-search-forward-end history-search-end
+      bindkey '^P' history-beginning-search-backward-end
+      bindkey '^N' history-beginning-search-forward-end
 
-              # VERY IMPORTANT else zsh can eat last line
-              setopt prompt_sp
+      # VERY IMPORTANT else zsh can eat last line
+      setopt prompt_sp
 
-              # source $ZDOTDIR/zshrc.generated
-              # if [ -f "$ZDOTDIR/zshrc" ]; then
-              source $ZDOTDIR/zshrc
-              # fi
+      # source $ZDOTDIR/zshrc.generated
+      # if [ -f "$ZDOTDIR/zshrc" ]; then
+      source $ZDOTDIR/zshrc
+      # fi
 
-              # used in some git aliases
-              export REVIEW_BASE=master
-
-    ''
-    ;
+      # used in some git aliases
+      export REVIEW_BASE=master
+      '';
 
     # https://github.com/atweiden/fzf-extras
     # the zsh script does nothing yet
@@ -114,7 +117,7 @@
 
     # custom module
     enableFancyCursor = true;
-    enableSetTermTitle = true;
+    # termTitle.enable = true;
     enableProfiling = false;
   };
 }

@@ -83,9 +83,89 @@ in
    package = pkgs.swayfx;
    # package = pkgs.sway-unwrapped;
 
-    config = (builtins.removeAttrs config.xsession.windowManager.i3.config [ "startup" "bars" ])
-      // {
-       window.commands = [
+   config = 
+   # (builtins.removeAttrs config.xsession.windowManager.i3.config [ "startup" "bars" ])
+      {
+        terminal = term;
+        workspaceAutoBackAndForth = true;
+
+        focus.followMouse = false;
+        fonts = {
+          # Source Code Pro
+          names = [ "Inconsolata Normal" ];
+          size = 12.0;
+        };
+      modes = {
+        monitors =
+          let
+            move_to_output = dir: fr: us:
+              {
+                "$GroupFr+$mod+${fr}" = "move workspace to output ${dir}";
+                "$GroupUs+$mod+${us}" = "move workspace to output ${dir}";
+              };
+          in
+          {
+            "Escape" = "mode default";
+            "Return" = "mode default";
+          }
+          // move_to_output "left" "Left" "Left"
+          // move_to_output "left" "j" "j"
+          // move_to_output "right" "Right" "Right"
+          # // move_to_output "right" "m" "semicolumn"
+          // move_to_output "top" "Up" "Up"
+          // move_to_output "top" "k" "k"
+          // move_to_output "down" "down" "down"
+          // move_to_output "down" "l" "l"
+        ;
+        # mouse= {
+        # bindsym $mod+Left exec	$(xdotool mousemove_relative --sync -- -15 0)
+        # bindsym $mod+Right exec $(xdotool mousemove_relative --sync -- 15 0)
+        # bindsym $mod+Down exec  $(xdotool mousemove_relative --sync -- 0 15)
+        # bindsym $mod+Up   exec  $(xdotool mousemove_relative --sync -- 0 -15)
+        # }
+
+        # # Enter papis mode
+        # papis = {
+        #   # open documents
+        #   "$mod+o" = "exec python3 -m papis.main --pick-lib --set picktool dmenu open";
+        #   # edit documents
+        #   "$mod+e" = "exec python3 -m papis.main --pick-lib --set picktool dmenu --set editor gvim edit";
+        #   # open document's url
+        #    "$mod+b" = "exec python3 -m papis.main --pick-lib --set picktool dmenu browse";
+        # #   bindsym Ctrl+c mode "default"
+        #   "Escape" = ''mode "default"'';
+        # };
+
+        # rofi-scripts = {
+        #   # open documents
+        #   "$mod+l" = "sh j";
+        #   "Return" = ''mode "default"'';
+        #   "Escape" = ''mode "default"'';
+        # };
+
+        # i3resurrect parts
+        saveworkspace = {
+          "1" = "exec $i3_resurrect save -w 1";
+          "2" = "exec $i3_resurrect save -w 2";
+          "3" = "exec $i3_resurrect save -w 3";
+          "4" = "exec $i3_resurrect save -w 4";
+          "5" = "exec $i3_resurrect save -w 5";
+          "6" = "exec $i3_resurrect save -w 6";
+          "7" = "exec $i3_resurrect save -w 7";
+          "8" = "exec $i3_resurrect save -w 8";
+          "9" = "exec $i3_resurrect save -w 9";
+          "0" = "exec $i3_resurrect save -w 0";
+
+          # Back to normal: Enter, Escape, or s
+          Return = ''mode "default"'';
+          Escape = ''mode "default"'';
+        };
+      };
+
+       window = {
+         hideEdgeBorders = "smart";
+
+        commands = [
         {
          criteria = { app_id = "xdg-desktop-portal-gtk"; };
          command = "floating enable";
@@ -99,6 +179,7 @@ in
 # for_window [window_type="dialog"] floating enable
 # for_window [window_type="menu"] floating enable
       ];
+     };
        output = {
         # todo put a better path
         # example = { "HDMI-A-2" = { bg = "~/path/to/background.png fill"; }; };
@@ -115,7 +196,7 @@ in
           # to swap altwin:swap_lalt_lwin
         };
       };
-      terminal = term;
+      # terminal = term;
       bars = [
       ];
       # menu = 
@@ -145,7 +226,8 @@ in
     # TODO
     # from https://www.reddit.com/r/swaywm/comments/uwdboi/how_to_make_chrome_popup_windows_floating/
 	# mkBefore
-      keybindings = config.xsession.windowManager.i3.config.keybindings // {
+    # ;config.xsession.windowManager.i3.config.keybindings
+      keybindings = sharedConfig.sharedKeybindings // {
         "$GroupFr+$mod+ampersand" = "layout toggle all";
         "$GroupUs+$mod+1" = "layout toggle all";
         # "$mod+F1" = [instance="pad_(?!ncmpcpp)"] move scratchpad; [instance="pad_ncmpcpp"] scratchpad show
