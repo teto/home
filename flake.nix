@@ -72,7 +72,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     neovide = {
-      url = "github:neovide/neovide/new-keyboard-v3";
+      url = "github:neovide/neovide";
       flake = false;
     };
 

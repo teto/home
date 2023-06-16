@@ -26,8 +26,11 @@ in
     basePath = "${config.home.homeDirectory}/calendars";
 
     accounts.fastmail = {
-     # need locale to be set apparently
-      khal.enable = true;
+      # need locale to be set apparently
+      khal = {
+       enable = true;
+       type = "discover";
+      };
 
       vdirsyncer = {
         enable = true;

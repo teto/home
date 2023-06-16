@@ -30,7 +30,7 @@ in
       enable = true;
       extraConfig = ''
               # workaround for https://github.com/carnager/rofi-pass/issues/226
-              help_color="#FF0000'';
+              help_color="#FF0000"'';
     };
 
     plugins = with pkgs; [

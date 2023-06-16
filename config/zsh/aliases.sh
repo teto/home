@@ -69,7 +69,8 @@ function n {
 }
 alias n="nix develop"
 # alias nb='nix develop--option builders "$RUNNER3" -j0'
-alias n2="nix develop --option builders \"\$RUNNER2\" -j0"
+alias n1='nix develop --option builders "$NOVA_RUNNER1" -j0'
+alias n2='nix develop --option builders "$NOVA_RUNNER2" -j0'
 alias n3='nix develop --option builders "$NOVA_RUNNER3" -j0'
 # TODO should use all runners
 alias nall='nix develop --option builders "$NOVA_RUNNER3" -j0'
