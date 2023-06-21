@@ -139,15 +139,8 @@ in
       '';
     })
 
-    (mkIf cfg.termTitle.enable {
-
-      # https://zsh.sourceforge.io/Doc/Release/Functions.html
-      # preexec: Executed just after a command has been read and is about to be executed.
-      # add-zsh-hook zsh_directory_name
-      # autoload zsh-mime-setup
-      # -n Do not add a newline to the output.
-      # print -Pn "\e]0;$(echo "$1")\a"
-      programs.zsh.initExtra = ''
+    (let 
+      shellSetTitleFunctions = ''
       function set_term_title (){
         print -n "\e]0;$1\a"
       }
@@ -161,6 +154,19 @@ in
           echo "set_term_title_for_program \$1: '$1' \$2: '$2' \$3: '$3'"
           set_term_title "program: $(pwd):'$3'"
       }
+      '';
+
+     in mkIf cfg.termTitle.enable {
+
+      # https://zsh.sourceforge.io/Doc/Release/Functions.html
+      # preexec: Executed just after a command has been read and is about to be executed.
+      # add-zsh-hook zsh_directory_name
+      # autoload zsh-mime-setup
+      # -n Do not add a newline to the output.
+      # print -Pn "\e]0;$(echo "$1")\a"
+      programs.zsh.initExtra = ''
+      ${shellSetTitleFunctions}
+
 
       # https://zsh.sourceforge.io/Doc/Release/Functions.html#index-preexec_005ffunctions
       # pass 3 arguments: non-expanded, expanded, fully-expanded
@@ -169,7 +175,15 @@ in
       add-zsh-hook precmd set_term_title_for_new_prompt
       '';
 
-      programs.bash.initExtra = config.programs.zsh.initExtra;
+      # depending 
+      # in my case since I am using starship
+      # https://starship.rs/advanced-config/#custom-pre-prompt-and-pre-execution-commands-in-bash
+      programs.bash.initExtra =  ''
+        ${shellSetTitleFunctions}
+        trap set_term_title DEBUG
+        '';
+
+       # config.programs.zsh.initExtra;
     })
 
     (mkIf cfg.enableFancyCursor {

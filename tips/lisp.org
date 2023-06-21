@@ -1,0 +1,9 @@
+
+https://stevelosh.com/blog/2021/03/small-common-lisp-cli-programs/
+
+The programs need to be able to use libraries, so Quicklisp will need to be involved. Common Lisp has a lot of nice things built-in, but there are some libraries that are just too useful to pass up.
+
+
+(defvar x 10)
+(print (type-of x))
+(defconstant PI 3.141592)

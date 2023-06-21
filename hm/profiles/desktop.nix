@@ -30,6 +30,7 @@ let
 	haskellPackages.fast-tags
 
 	inotify-tools # for inotify-wait notably
+    just # to read justfiles, *replace* Makefile
     jq # to run json queries
     lazygit # kinda like tig
     ncurses.dev # for infocmp
@@ -259,7 +260,6 @@ in
 
   # needed for gpg-agent gnome pinentry
   # services.dbus.packages = [ pkgs.gcr ];
-  services.parcellite.enable = true;
 
 
   programs.rofi.theme = {

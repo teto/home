@@ -21,6 +21,7 @@ in
     # '';
   };
 
+  # services.parcellite.enable = true;
 
   imports = [
    # todo should be disabled if sway enabled 

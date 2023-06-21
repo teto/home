@@ -8,6 +8,10 @@
 
 BLOG_FOLDER := "${HOME}/blog"
 
+# regen fortunes (not necessary with some fortunes version ?!)                                                                                                                                 
+fortunes:
+	mkdir -p ~/.local/share/matt
+	strfile -c % fortunes/jap.txt ~/.local/share/matt/jap.txt.dat   
 
 lint: lint-nix lint-lua
 
