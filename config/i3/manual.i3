@@ -77,9 +77,6 @@ bindsym $mod+Shift+F3 move container to workspace "$w3"
 bindsym $mod+Shift+F4 move container to workspace "$w4"
 
 
-# bindsym $mod+Shift+E exec "$HOME/.i3/logout.py"
-
-
 set $rofi_mode rofi <b>Q</b>qutebrowser <b>b</b>uku
 bindsym $mod+Shift+R mode "$rofi_mode"
 

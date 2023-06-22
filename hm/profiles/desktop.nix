@@ -1,7 +1,5 @@
 { config, flakeInputs, pkgs, lib, ... }:
 let
-  # terminalCommand = pkgs.kitty;
-
   pass-custom = (pkgs.pass.override { waylandSupport = true; }).withExtensions (ext:
     with ext; [ pass-import ]);
 

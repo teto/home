@@ -1,0 +1,10 @@
+病気	malade
+注意
+押	pousser
+#METADATA:
+#--decks immediate,daily,weekly,monthly,quarterly,yearly
+#--intervals 0,1440,10080,43200,129600,518400
+#--listdelimiter |
+#--columns japanese,francais,prononciation
+#--showcolumns japanese
+#--showcolumns francais,prononciation

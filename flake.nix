@@ -31,6 +31,8 @@
       flake = false;
     };
 
+    vocage.url = "git+https://git.sr.ht/~teto/vocage?ref=flake";
+
     deploy-rs.url = "github:serokell/deploy-rs";
     flake-utils.url = "github:numtide/flake-utils";
     treefmt-nix.url = "github:numtide/treefmt-nix";

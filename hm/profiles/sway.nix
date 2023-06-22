@@ -89,7 +89,11 @@ in
         terminal = term;
         workspaceAutoBackAndForth = true;
 
-        focus.followMouse = false;
+        focus = {
+          followMouse = false;
+          wrapping = "yes";
+        };
+
         fonts = {
           # Source Code Pro
           names = [ "Inconsolata Normal" ];
@@ -258,7 +262,6 @@ in
 
 
 
-      # focus.wrapping = "yes";
       startup = [
         # { command = "wl-paste -t text --watch clipman store"; }
         # { command = ''wl-paste -p -t text --watch clipman store -P --histpath="~/.local/share/clipman-primary.json"''; }
