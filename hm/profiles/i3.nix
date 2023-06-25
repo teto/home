@@ -103,28 +103,7 @@ in
       ];
 
 
-      modes = {
-        monitors =
-          let
-            move_to_output = dir: fr: us:
-              {
-                "$GroupFr+$mod+${fr}" = "move workspace to output ${dir}";
-                "$GroupUs+$mod+${us}" = "move workspace to output ${dir}";
-              };
-          in
-          {
-            "Escape" = "mode default";
-            "Return" = "mode default";
-          }
-          // move_to_output "left" "Left" "Left"
-          // move_to_output "left" "j" "j"
-          // move_to_output "right" "Right" "Right"
-          # // move_to_output "right" "m" "semicolumn"
-          // move_to_output "top" "Up" "Up"
-          // move_to_output "top" "k" "k"
-          // move_to_output "down" "down" "down"
-          // move_to_output "down" "l" "l"
-        ;
+
         # mouse= {
         # bindsym $mod+Left exec	$(xdotool mousemove_relative --sync -- -15 0)
         # bindsym $mod+Right exec $(xdotool mousemove_relative --sync -- 15 0)

@@ -53,8 +53,6 @@ let
 	 w9= "c" ;
    };
 
-in
-rec {
 	# ❯ wpctl get-volume @DEFAULT_AUDIO_SINK@
 	# Volume: 0.35
 	# ❯ wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.4
@@ -116,6 +114,75 @@ rec {
     "--release Print" = "exec ${pkgs.flameshot}/bin/scrot -s '/tmp/%s_%H%M_%d.%m.%Y_$wx$h.png'";
 
    };
+
+in
+{
+  modes = {
+    monitors =
+      let
+        move_to_output = dir: fr: us:
+          {
+            "$GroupFr+$mod+${fr}" = "move workspace to output ${dir}";
+            "$GroupUs+$mod+${us}" = "move workspace to output ${dir}";
+          };
+      in
+      {
+        Escape = "mode default";
+        Return = "mode default";
+      }
+      // move_to_output "left" "Left" "Left"
+      // move_to_output "left" "j" "j"
+      // move_to_output "right" "Right" "Right"
+      # // move_to_output "right" "m" "semicolumn"
+      // move_to_output "top" "Up" "Up"
+      // move_to_output "top" "k" "k"
+      // move_to_output "down" "down" "down"
+      // move_to_output "down" "l" "l";
+
+# resize window (you can also use the mouse for that) {{{
+    resize =  {
+            Escape = "mode default";
+            Return = "mode default";
+
+       # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+         j = " resize grow left 10 px or 10 ppt";
+        "Shift+j" = "resize shrink left 10 px or 10 ppt";
+
+        k = " resize grow up  10 px or 10 ppt";
+        "Shift+k" = "resize shrink up 10 px or 10 ppt";
+
+        l = "resize grow down 10 px or 10 ppt";
+        "Shift+l" = "resize shrink down 10 px or 10 ppt";
+
+        "$GroupFr+m" = "resize grow right 10 px or 10 ppt";
+        "$GroupFr+Shift+m" = "resize shrink right 10 px or 10 ppt";
+
+		# semicolumn is not recognized by sway
+        # bindsym $GroupUs+semicolumn resize grow right 10 px or 10 ppt
+        # bindsym $GroupUs+Shift+semicolumn resize shrink right 10 px or 10 ppt
+
+        # same bindings, but for the arrow keys
+        #bindsym Right resize shrink width 10 px or 10 ppt
+        #bindsym Up resize grow height 10 px or 10 ppt
+        #bindsym Down resize shrink height 10 px or 10 ppt
+        #bindsym Left resize grow width 10 px or 10 ppt
+        Left = " resize grow left 10 px or 10 ppt";
+        "Shift+Left" = "resize shrink left 10 px or 10 ppt";
+
+        Up = " resize shrink up  10 px or 10 ppts";
+        "Shift+Up" = "resize grow up 10 px or 10 ppt";
+
+        Down = "resize grow down 10 px or 10 ppt";
+        "Shift+Down" = "resize shrink down 10 px or 10 ppt";
+
+        Right = "resize grow right 10 px or 10 ppt";
+        "Shift+Right" = "resize shrink right 10 px or 10 ppt";
+    };
+    };
+    # }}}
+
 
   sharedKeybindings = {
     # The side buttons move the window around
@@ -194,6 +261,8 @@ rec {
     "$mod+Shift+f" = "fullscreen global";
     "$mod+button3" = "floating toggle";
     "$mod+m" = ''mode "monitors'';
+    "$mod+r" =  ''mode "resize"'';
+
 
    } 
    // (lib.concatMapAttrs (bind_ws "Fr") wsAzertyBindings)
