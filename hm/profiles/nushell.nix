@@ -10,7 +10,10 @@
     #  ll = "ls -l";
     # };
 
-    # configFile.text = ''
+    configFile.text = ''
+     let-env config = {
+      show_banner: false
+     }'';
     # let $config = {
     # filesize_metric: false
     # table_mode: rounded

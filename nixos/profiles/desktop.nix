@@ -43,6 +43,8 @@
     stow
   ];
 
+  security.pam.services.swaylock = {};
+
   # networking.firewall.checkReversePath = false; # for nixops
   # networking.firewall.allowedUDPPorts = [ 631 ];
   # networking.firewall.allowedTCPPorts = [ 631 ];

@@ -1,4 +1,4 @@
-{ config, pkgs, lib, secrets, ... } @ args:
+{ config, pkgs, flakeInputs, lib, secrets, ... } @ args:
 let
   # secrets = import ../../nixpkgs/secrets.nix;
 
@@ -35,7 +35,29 @@ in
     enable = true;
 
     # goes to .profile
-    sessionVariables = {
+    sessionVariables = let 
+      defaultMandatoryFeatures = [];
+      remoteBuilders = lib.listToAttrs (
+          map
+            (attr:
+            # attrs should only contain
+            # So seems like there is no way to fix those
+            lib.nameValuePair "${attr.runnerName}_${attr.targetEnvironment}" (mkRemoteBuilderDesc secrets.nova-runner-1.userName (attr // {
+               sshKey = secrets.nova-runner-1.sshKey;
+               system = "x86_64-linux";
+               maxJobs = 2;
+               speedFactor = 2;
+               supportedFeatures = [ ];
+               mandatoryFeatures = defaultMandatoryFeatures;
+               # TODO to fill up
+               publicHostKey = null;
+              })
+              )
+            )
+            # TODO we should expose the resulting nix expressions directly
+            flakeInputs.nova-ci );
+
+     in {
       HISTTIMEFORMAT = "%d.%m.%y %T ";
       # CAREFUL 
       # HISTFILE="$XDG_CACHE_HOME/bash_history";

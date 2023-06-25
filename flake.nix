@@ -66,7 +66,7 @@
     nova.url = "git+ssh://git@git.novadiscovery.net/sys/doctor";
     jinko-stats.url = "git+ssh://git@git.novadiscovery.net/jinko/jinko-stats.git?ref=add-rserver";
 	# c8296214151883ce27036be74d22d04953418cf4
-    nova-ci.url = "git+ssh://git@git.novadiscovery.net/infra/ci-runner?ref=fix-exposure";
+    nova-ci.url = "git+ssh://git@git.novadiscovery.net/infra/ci-runner";
     neovim = {
       # url = "github:nojnhuh/neovim?dir=contrib&ref=lsp-watch-files";
       url = "github:neovim/neovim?dir=contrib";

@@ -28,10 +28,10 @@
   programs.xdg.enable = true;
 
   programs.gnome-shell.enable = true;
+  programs.swappy.enable = true;
 
   programs.joshuto.imagePreview = true;
   # {
-
   #  enable = true;
   #  # "kitty";
   # };

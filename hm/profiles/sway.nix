@@ -80,7 +80,7 @@ in
    # https://github.com/nix-community/home-manager/pull/4039
    # https://github.com/NixOS/nixpkgs/pull/237044
 
-   package = pkgs.swayfx;
+  # package = pkgs.swayfx;
    # package = pkgs.sway-unwrapped;
 
    config = 
@@ -308,6 +308,9 @@ in
     extraSessionCommands = ''
     # according to https://www.reddit.com/r/swaywm/comments/11d89w2/some_workarounds_to_use_sway_with_nvidia/
     export XWAYLAND_NO_GLAMOR=1
+
+     # useful for electron based apps: slack / vscode 
+    export NIXOS_OZONE_WL=1
 
       # needs qt5.qtwayland in systemPackages
     export QT_QPA_PLATFORM=wayland
