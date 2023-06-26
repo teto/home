@@ -4,9 +4,7 @@
     tagainijisho # japanse dict; like zkanji Qt based
     # ${config.system}
     flakeInputs.vocage.packages."x86_64-linux".vocage
-
-
+    # jiten # unfree, helpful for jap.nvim
   ];
-
 
 }

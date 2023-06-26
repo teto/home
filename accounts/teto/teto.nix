@@ -1,6 +1,6 @@
 { config, pkgs, options, lib, ... }:
 let
-  secrets = import ../nixpkgs/secrets.nix;
+  secrets = import ../../nixpkgs/secrets.nix;
 in
 {
 
@@ -36,7 +36,7 @@ in
     hashedPassword = secrets.users.teto.hashedPassword;
 
     openssh.authorizedKeys.keyFiles = [
-      ../perso/keys/id_rsa.pub
+      ../../perso/keys/id_rsa.pub
     ];
 
     packages = with pkgs; [
@@ -47,6 +47,12 @@ in
       # aircrack-ng
     ];
 
+  };
+
+  home-manager.users.teto = {
+   imports = [ 
+     (import ./ssh-config.nix)
+   ];
   };
 
   nix.settings.trusted-users = [ "teto" ];

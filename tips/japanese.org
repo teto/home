@@ -1,0 +1,14 @@
+can download snapshot of db at https://drive.google.com/drive/u/0/folders/1z4zF9ImZlNeTZZplflvvnpZfJp3WVLPk
+https://pypi.org/project/jamdict-data/
+
+jamdict est une bonne api python
+
+result/bin/jiten r2k toto
+jiten permet de convertir kanjis / katakanas
+
+
+docker exec -it ichiran-main-1 ichiran-cli -i "一覧は最高だぞ"
+https://github.com/tshatrov/ichiran
+
+
+https://github.com/ichisadashioko/kanji-recognition

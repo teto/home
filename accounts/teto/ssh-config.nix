@@ -38,7 +38,6 @@
       };
 	  
 
-      # TODO generate from nova-ci
       ovh1 = {
         # checkHostIP
         identityFile = "~/.ssh/nova_key";
@@ -75,5 +74,4 @@
     Include ${config.xdg.configHome}/nova/jinkompute/ssh_config
     '';
   };
-
 }

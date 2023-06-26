@@ -52,6 +52,7 @@ in
   options = {
     programs.zsh = {
       enableFzfGit = mkEnableOption "Fzf-git";
+      enableVocageSensei = mkEnableOption "Vocage sensei";
 
       termTitle = mkOption {
         type = termTitleSubmodule;
@@ -114,6 +115,14 @@ in
         (lib.mkAfter "zprof")
       ];
       # home.file.".config/zsh/.zshrc".text = 
+    })
+
+    (mkIf cfg.enableVocageSensei {
+    
+	 programs.zsh.initExtra =
+		''
+		source ${fzf-git-sh}/fzf-git.sh
+		'';
     })
 
     (mkIf cfg.enableFzfGit {

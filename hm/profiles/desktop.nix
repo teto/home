@@ -179,7 +179,6 @@ in
     ./mpd.nix
     ./dev.nix
     # ./modules/home-tor.nix
-    ./ssh-config.nix
     # ./i3.nix
     ./rofi.nix
     ./wal.nix

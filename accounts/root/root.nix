@@ -7,12 +7,20 @@
     initialPassword = secrets.users.root.defaultPassword;
     # shell = pkgs.zsh;
     # openssh.authorizedKeys.keyFiles = [ ./keys/root_gitolite.pub ];
-	programs.neovim = {
-	  enable = false;
-	  defaultEditor = true;
-	};
 
+  };
 
+  home-manager.users.root = {
+   home.stateVersion = "23.05";
+
+   imports = [ 
+     (import ./ssh-config.nix)
+	# programs.neovim = {
+	#   enable = true;
+	#   defaultEditor = true;
+	# };
+
+   ];
   };
 }
 

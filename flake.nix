@@ -66,7 +66,7 @@
     nova.url = "git+ssh://git@git.novadiscovery.net/sys/doctor";
     jinko-stats.url = "git+ssh://git@git.novadiscovery.net/jinko/jinko-stats.git?ref=add-rserver";
 	# c8296214151883ce27036be74d22d04953418cf4
-    nova-ci.url = "git+ssh://git@git.novadiscovery.net/infra/ci-runner";
+    nova-ci.url = "git+ssh://git@git.novadiscovery.net/infra/ci-runner?ref=expose-runners";
     neovim = {
       # url = "github:nojnhuh/neovim?dir=contrib&ref=lsp-watch-files";
       url = "github:neovim/neovim?dir=contrib";
@@ -120,8 +120,8 @@
       # TODO I should use hm.lib.homeManagerConfiguration
       # and pass the pkgs to it with
 	  #             extraSpecialArgs = {
-              # flakeInputs = self.inputs;
-            # };
+      # flakeInputs = self.inputs;
+      # };
 
       hm-custom = my_imports: ({ config, lib, pkgs, ... }:
         {
@@ -274,7 +274,7 @@
                   (import ./hm/profiles/neovim.nix)
                  ];
 
-                 home.stateVersion = "22.11";
+                 home.stateVersion = "23.05";
                 };
 
 

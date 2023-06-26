@@ -15,8 +15,7 @@ in
 
       # wait until it gets upstreamd o/
       # ../modules/mptcp.nix
-      ../account-root.nix
-      ../account-teto.nix
+      ../../accounts/root/root.nix
     ];
 
   # services.nextcloud.hostName = secrets.mptcp_server.hostname;
