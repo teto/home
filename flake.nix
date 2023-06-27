@@ -104,6 +104,7 @@
           inherit system;
           overlays = (src.lib.attrValues self.overlays) ++ [
             self.inputs.rofi-hoogle.overlay
+            # self.inputs.nixpkgs-wayland.overlay
             # self.inputs.nix.overlays.default
           ];
           config = { allowUnfree = true; };
@@ -450,11 +451,10 @@
         local = import ./overlays/pkgs/default.nix;
         overrides = import ./overlays/overrides.nix;
         haskell = import ./overlays/haskell.nix;
-        # neovim = import ./nixpkgs/overlays/neovim.nix;
         neovimOfficial = self.inputs.neovim.overlay;
         wireshark = import ./overlays/wireshark.nix;
-        python = import ./overlays/python.nix;
-        # wayland = self.inputs.nixpkgs-wayland.overlay;
+        # python = import ./overlays/python.nix;
+        # wayland = 
         # mptcp = self.inputs.mptcp-flake.overlays.default;
         nur = nur.overlay;
 		nova-ci = self.inputs.nova-ci.overlays.default;

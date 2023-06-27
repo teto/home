@@ -323,7 +323,7 @@ in
 
    enable = true;
    settings = {
-     hooks = {
+     preview = {
        preview_shown_hook_script = "~/.config/joshuto/on_preview_shown";
        preview_removed_hook_script = "~/.config/joshuto/on_preview_removed";
      };

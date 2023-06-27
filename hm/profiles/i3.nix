@@ -160,6 +160,7 @@ in
           # "$mod+Shift+f" = "fullscreen global";
           # "$mod+button3" = "floating toggle";
           # "$mod+m" = ''mode "monitors'';
+         "${sharedConfig.mod}+p" = "exec ${pkgs.rofi-pass}/bin/rofi-pass";
 
         }
         // sharedConfig.sharedKeybindings;

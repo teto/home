@@ -10,7 +10,7 @@ rec {
 
   protocol-local = prev.protocol.overrideAttrs (oldAttrs: {
     src = builtins.fetchGit {
-      url = https://github.com/teto/protocol;
+      url = "https://github.com/teto/protocol";
     };
   });
 

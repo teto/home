@@ -40,6 +40,7 @@ in
     swaylock
     sway-contrib.grimshot # contains "grimshot" for instance
     shotman # -c region 
+    tessen # handle passwords
     waybar
     wlprop # like xprop, determines window parameters
     polybar
@@ -231,7 +232,9 @@ in
     # from https://www.reddit.com/r/swaywm/comments/uwdboi/how_to_make_chrome_popup_windows_floating/
 	# mkBefore
     # ;config.xsession.windowManager.i3.config.keybindings
-      keybindings = sharedConfig.sharedKeybindings // {
+    keybindings = sharedConfig.sharedKeybindings // {
+         "${mod}+p" = "exec ${pkgs.tessen}/bin/tessen --dmenu=rofi";
+
         "$GroupFr+$mod+ampersand" = "layout toggle all";
         "$GroupUs+$mod+1" = "layout toggle all";
         # "$mod+F1" = [instance="pad_(?!ncmpcpp)"] move scratchpad; [instance="pad_ncmpcpp"] scratchpad show

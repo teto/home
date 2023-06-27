@@ -50,7 +50,7 @@ in
                sshUser = secrets.nova-gitlab-runner-1.userName;
                sshKey = secrets.nova-runner-1.sshKey;
                system = "x86_64-linux";
-               maxJobs = 2;
+               maxJobs = 10;
                speedFactor = 2;
                supportedFeatures = [ ];
                mandatoryFeatures = defaultMandatoryFeatures;
