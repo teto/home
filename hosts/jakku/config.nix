@@ -91,5 +91,8 @@ in
     # nix.settings = {
     #   trustedUsers = [ "root" "teto" ];
     # };
+  system = {
+    stateVersion = "22.11";
+  };
 
-  }
+}

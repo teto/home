@@ -24,7 +24,7 @@ rec {
   services.journald.extraConfig = ''
     # alternatively one can run journalctl --vacuum-time=2d
     SystemMaxUse=2G
-  '';
+    '';
   # see https://github.com/NixOS/nixpkgs/issues/15293
 
   # Set your time zone.

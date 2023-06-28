@@ -51,7 +51,10 @@ in
 
   home-manager.users.teto = {
    imports = [ 
-     (import ./ssh-config.nix)
+    ({ ... }: {   home.stateVersion = "23.05"; })
+ 
+     # import only for desktop
+     # (import ./ssh-config.nix)
    ];
   };
 

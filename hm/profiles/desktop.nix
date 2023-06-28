@@ -187,6 +187,7 @@ in
     ./fcitx.nix
     ./firefox.nix
     ./neovim.nix
+    ../../accounts/teto/ssh-config.nix
   ];
 
   # rename to fn, accept a parameter for optional

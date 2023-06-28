@@ -1,5 +1,6 @@
 # TODO this should be fetched from the runners themselves !
-{ config, pkgs, lib, secrets, 
+{ config, pkgs, lib
+, secrets, 
 flakeInputs,
 ... }:
 {
