@@ -42,9 +42,10 @@
 	};
 
     peerix.url = "github:cid-chan/peerix";
-    unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixos-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixos-stable.url = "github:nixos/nixpkgs/nixos-23.05";
     # mptcp-flake.url = "github:teto/mptcp-flake/fix-flake";
-    mujmap.url = "github:teto/mujmap/flake";
+    mujmap.url = "github:elizagamedev/mujmap";
     rofi-hoogle.url = "github:teto/rofi-hoogle/fixup";
 
     # TODO use mine instead
@@ -92,7 +93,7 @@
     # };
   };
 
-  outputs = { self, hm, nixpkgs, flake-utils, treefmt-nix, nur, nova, deploy-rs, ... }:
+  outputs = { self, hm, nixpkgs, flake-utils, treefmt-nix, nova, deploy-rs, ... }:
     let
       inherit (builtins) listToAttrs baseNameOf;
       # inherit (myPkgs.lib) removeSuffix;
@@ -111,7 +112,7 @@
         };
 
       myPkgs = pkgImport self.inputs.nixpkgs;
-      unstablePkgs = pkgImport self.inputs.unstable;
+      unstablePkgs = pkgImport self.inputs.nixos-unstable;
 
 
       # legacyLib = nixpkgs.lib;
@@ -197,6 +198,7 @@
             # aws-lambda-rie = myPkgs.callPackage ./pkgs/aws-lambda-runtime-interface-emulator { };
 
             inherit (myPkgs) i3pystatus-custom;
+            jupyter4ihaskell = myPkgs.jupyter-teto;
             inherit (unstablePkgs) nhs92 nhs94 nhs96;
 
           };
@@ -460,10 +462,10 @@
         haskell = import ./overlays/haskell.nix;
         neovimOfficial = self.inputs.neovim.overlay;
         wireshark = import ./overlays/wireshark.nix;
-        # python = import ./overlays/python.nix;
+        python = import ./overlays/python.nix;
         # wayland = 
         # mptcp = self.inputs.mptcp-flake.overlays.default;
-        nur = nur.overlay;
+        # nur = nur.overlay;
 		nova-ci = self.inputs.nova-ci.overlays.default;
 
       }

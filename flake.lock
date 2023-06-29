@@ -1075,16 +1075,15 @@
         ]
       },
       "locked": {
-        "lastModified": 1682974156,
+        "lastModified": 1684113803,
         "narHash": "sha256-mSJ6uyZSaWWdhqiYNcIm7lC6PZZrZ8PSdxfu+s9MZD0=",
-        "owner": "teto",
+        "owner": "elizagamedev",
         "repo": "mujmap",
-        "rev": "798091098b09f0084a9c8f6ff7e06986bd49f0f0",
+        "rev": "5f700af890769185ad99d4aae9f53496bb2aa6f2",
         "type": "github"
       },
       "original": {
-        "owner": "teto",
-        "ref": "flake",
+        "owner": "elizagamedev",
         "repo": "mujmap",
         "type": "github"
       }
@@ -1352,6 +1351,38 @@
         "owner": "NixOS",
         "ref": "master",
         "repo": "nixos-hardware",
+        "type": "github"
+      }
+    },
+    "nixos-stable": {
+      "locked": {
+        "lastModified": 1687829761,
+        "narHash": "sha256-QRe1Y8SS3M4GeC58F/6ajz6V0ZLUVWX3ZAMgov2N3/g=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "9790f3242da2152d5aa1976e3e4b8b414f4dd206",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-23.05",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixos-unstable": {
+      "locked": {
+        "lastModified": 1687898314,
+        "narHash": "sha256-B4BHon3uMXQw8ZdbwxRK1BmxVOGBV4viipKpGaIlGwk=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "e18dc963075ed115afb3e312b64643bf8fd4b474",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
         "type": "github"
       }
     },
@@ -2209,6 +2240,8 @@
         "nix-index-cache": "nix-index-cache",
         "nix-update": "nix-update",
         "nixos-hardware": "nixos-hardware",
+        "nixos-stable": "nixos-stable",
+        "nixos-unstable": "nixos-unstable",
         "nixpkgs": "nixpkgs_9",
         "nixpkgs-wayland": "nixpkgs-wayland",
         "nova": "nova",
@@ -2220,7 +2253,6 @@
         "sops-nix": "sops-nix_2",
         "tree-sitter": "tree-sitter",
         "treefmt-nix": "treefmt-nix_3",
-        "unstable": "unstable",
         "vocage": "vocage",
         "zsh-plugins": "zsh-plugins"
       }
@@ -2466,22 +2498,6 @@
       "original": {
         "owner": "numtide",
         "repo": "treefmt-nix",
-        "type": "github"
-      }
-    },
-    "unstable": {
-      "locked": {
-        "lastModified": 1686592866,
-        "narHash": "sha256-riGg89eWhXJcPNrQGcSwTEEm7CGxWC06oSX44hajeMw=",
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "0eeebd64de89e4163f4d3cf34ffe925a5cf67a05",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nixos",
-        "ref": "nixos-unstable",
-        "repo": "nixpkgs",
         "type": "github"
       }
     },
