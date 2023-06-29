@@ -29,26 +29,13 @@ rec {
       #   # };
       # });
 
-      papis-dev = pythonsuper.papis.overridePythonAttrs (oa: {
-        version = "1.0-dev";
-        propagatedBuildInputs = with prev.python3Packages; oa.propagatedBuildInputs ++ ([
-          # useful for zotero script
-          pyyaml
-          dateutil
-          python-doi
-        ]);
-        doCheck = false;
-
-        # src = super.fetchFromGitHub {
-        #   owner = "papis";
-        #   repo = "papis";
-        #   rev = "101e83a7014e2ed7d17ceb009a433881354fa0fc";
-        #   sha256 = "0hw8f62qri62lg1wi37n0nvw1dw6pcmrbs66zbrzwf54rpl33462";
-        #   # fetchSubmodules = true;
-        # };
-      });
     };
   };
 
   python3Packages = python3.pkgs;
+
+  jupyter-teto = python3.withPackages(ps: [
+   ps.notebook
+   ps.jupyter-client
+  ]);
 }

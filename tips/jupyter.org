@@ -1,5 +1,6 @@
 
 https://docs.jupyter.org/en/latest/use/jupyter-directories.html
+https://jupyter-client.readthedocs.io/en/stable/kernels.html#kernel-specs
 
 Typically returns:
 $ jupyter --paths
@@ -31,3 +32,13 @@ export JUPYTER_DATA_DIR
 jupyter --data-dir
 
 http://localhost:8888/notebooks/Untitled2.ipynb?kernel_name=haskell
+
+nix shell nixpkgs\#python3Packages.jupyter_core
+jupyter --help ne me donne que 2 sous-commandes possibles:
+
+vaut mieux utiliser:
+nix shell nixpkgs\#python3Packages.jupyter-client
+result/bin/ihaskell install   --debug
+
+
+python310Packages.notebook

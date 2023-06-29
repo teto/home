@@ -18,6 +18,7 @@ alias mg='if [ -z ${BW_SESSION} ]; then export BW_SESSION=$(bw unlock --raw); fi
 # TODO check return type in bw unlock --check 
 alias bn='if [ -z ${BW_SESSION} ]; then export BW_SESSION=$(bw unlock --raw); fi && nix develop'
 alias bnr='if [ -z ${BW_SESSION} ]; then export BW_SESSION=$(bw unlock --raw); fi && nix develop --option builders "$NOVA_RUNNER3"'
+alias nfs='nix flake show'
 
 # https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz
 # -f channel:nixos-unstable'
