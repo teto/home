@@ -79,6 +79,9 @@ return {
     'marko-cerovac/material.nvim',
     'shaunsingh/oxocarbon.nvim',
     { "catppuccin/nvim", name = "catppuccin" },
+ -- load 'after/colors'
+ -- 'calvinchengx/vim-aftercolors',
+
     'raddari/last-color.nvim',
     {
         'rose-pine/neovim',

@@ -110,7 +110,9 @@ return {
    })
   end,
  },
- { 'akinsho/bufferline.nvim', dependencies = 'nvim-tree/nvim-web-devicons' },
+ { 'akinsho/bufferline.nvim'
+  -- , dependencies = 'nvim-tree/nvim-web-devicons' 
+ },
 
  {
   'nvim-lualine/lualine.nvim',       -- fork of hoob3rt/lualine

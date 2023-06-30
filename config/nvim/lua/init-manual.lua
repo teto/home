@@ -552,13 +552,6 @@ end
 -- 	}
 -- end
 
--- vim.g.sonokai_style = 'atlantis'
--- vim.cmd([[colorscheme sonokai]])
--- vim.cmd([[colorscheme rose-pine]])
--- vim.cmd([[colorscheme janah]])
--- vim.cmd([[colorscheme pywal]])
-local theme = require('last-color').recall() or 'sonokai'
-vim.cmd(('colorscheme %s'):format(theme))
 
 local has_sniprun, sniprun = pcall(require, 'sniprun')
 
@@ -910,3 +903,12 @@ vim.o.grepprg = 'rg --vimgrep --no-heading --smart-case'
 
 require('teto.context_menu').setup_rclick_menu_autocommands()
 require('teto.lsp').set_lsp_lines(true)
+
+-- vim.g.sonokai_style = 'atlantis'
+-- vim.cmd([[colorscheme sonokai]])
+-- vim.cmd([[colorscheme rose-pine]])
+-- vim.cmd([[colorscheme janah]])
+-- vim.cmd([[colorscheme pywal]])
+local theme = require('last-color').recall() or 'sonokai'
+print("Setting colorscheme ", theme )
+vim.cmd(('colorscheme %s'):format(theme))

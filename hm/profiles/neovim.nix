@@ -206,7 +206,7 @@ let
     # (luaPlugin { plugin = nvim-lua-gf; })
     (luaPlugin { plugin = sniprun; })
     (luaPlugin { plugin = urlview-nvim; })
-    (luaPlugin { plugin = nvim-web-devicons; })
+    # (luaPlugin { plugin = nvim-web-devicons; })
     (luaPlugin {
       plugin = trouble-nvim;
       config = ''
@@ -749,9 +749,6 @@ let
     {
       plugin = vim-grepper;
       # careful these mappings are not applied as they arrive before the plug declaration
-      # config="";
-      # after = ''
-      # '';
     }
     vim-nix
     # (luaPlugin {

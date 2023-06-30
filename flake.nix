@@ -465,7 +465,7 @@
         python = import ./overlays/python.nix;
         # wayland = 
         # mptcp = self.inputs.mptcp-flake.overlays.default;
-        # nur = nur.overlay;
+        nur = self.inputs.nur.overlay;
 		nova-ci = self.inputs.nova-ci.overlays.default;
 
       }

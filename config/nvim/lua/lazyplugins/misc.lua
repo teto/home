@@ -118,6 +118,7 @@ return {
  end
 },
 {
+  -- yeah it depends 
     'goolord/alpha-nvim',
     -- requires = { 'nvim-tree/nvim-web-devicons' },
     config = function ()
@@ -159,8 +160,6 @@ return {
  -- }}}
 
  { 'voldikss/vim-translator', lazy = true },
- -- load 'after/colors'
- 'calvinchengx/vim-aftercolors',
  -- Vim-cool disables search highlighting when you are done searching and re-enables it when you search again.
  -- ('romainl/vim-cool')
  -- 'lrangell/theme-cycler.nvim'
