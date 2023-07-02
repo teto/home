@@ -217,11 +217,12 @@
           router = nixpkgs.lib.nixosSystem {
             inherit system;
             modules = [
+              hm.nixosModules.home-manager
+              self.inputs.nixos-hardware.nixosModules.pcengines-apu
               ({ pkgs, ... }: {
                 nixpkgs.overlays = nixpkgs.lib.attrValues self.overlays;
                 imports = [
                   ./hosts/router/configuration.nix
-                  self.inputs.nixos-hardware.nixosModules.pcengines-apu
                 ];
               })
             ];
@@ -502,7 +503,17 @@
             };
           in
           {
-            router = genNode ({ name = "router"; hostname = "192.168.1.11"; });
+           router = genNode ({ 
+            name = "router";
+            # local-facing address
+            # hostname = "192.168.1.11";
+            hostname = "10.0.0.0";
+           }) // {
+             # sshOpts = [ "-F" "ssh_config" ];
+             sshUser = "teto";
+             sshOpts = [ "-i" "~/.ssh/id_rsa"];
+
+           };
 
             neotokyo = genNode ({ name = "neotokyo"; hostname = secrets.jakku.hostname; });
           };

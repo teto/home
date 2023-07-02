@@ -93,7 +93,7 @@ in
 
   services.irqbalance.enable = true;
 
-  networking.hostName = "coruscante";
+  networking.hostName = "router";
   # networking.dhcpcd.enable = true;
   networking.usePredictableInterfaceNames = true;
   # networking.firewall.interfaces.enp1s0.allowedTCPPorts = [ 4949 ];
@@ -176,8 +176,10 @@ in
      # man systemd.netdev
      "br0" = {
       # match
-       netDev.Name="br0";
-       netDev.Kind="bridge";
+       netdevConfig.Name="br0";
+       netdevConfig.Kind="bridge";
+      # interfaces = [ "enp2s0" "enp3s0" "enp4s0" ];
+      # bridgeConfig
 
      };
 
@@ -191,6 +193,19 @@ in
      "10-lan" = {
        matchConfig.Name = "lan";
        networkConfig.DHCP = "ipv4";
+     };
+     "br0" = {
+       matchConfig.Name = "br0";
+       # address = [ 
+       # ];
+       networkConfig.Address = "${bridgeNetwork.address}/${toString bridgeNetwork.prefixLength}";
+          # routes = [
+          #   { routeConfig = { Destination = "64:ff9b::/96"; Gateway = "2001:db8::1"; }; }
+          # ];
+
+       networkConfig.DHCP = "ipv4";
+
+
      };
     };
   };
