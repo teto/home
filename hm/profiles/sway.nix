@@ -307,7 +307,7 @@ in
     ];
     # eventually start foot --server
     # TODO we should wrap sway with that ?
-    # export GBM_BACKENDS_PATH=/etc/gbm
+    # some of these advised by https://github.com/flameshot-org/flameshot/blob/master/docs/Sway%20and%20wlroots%20support.md
     extraSessionCommands = ''
     # according to https://www.reddit.com/r/swaywm/comments/11d89w2/some_workarounds_to_use_sway_with_nvidia/
     export XWAYLAND_NO_GLAMOR=1
@@ -317,6 +317,10 @@ in
 
       # needs qt5.qtwayland in systemPackages
     export QT_QPA_PLATFORM=wayland
+    export SDL_VIDEODRIVER=wayland
+    export _JAVA_AWT_WM_NONREPARENTING=1
+    export XDG_CURRENT_DESKTOP=sway
+    export XDG_SESSION_DESKTOP=sway
     # works without GBM_BACKEND
     # export GBM_BACKEND=nvidia-drm
     export SDL_VIDEODRIVER=wayland
