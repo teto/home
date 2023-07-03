@@ -17,7 +17,10 @@
 
   See https://github.com/nixos/nix/issues/3352
 
-# about flakes
+* about flakes
+** how to build a nixosConfiguration 
+
+  nix build .#nixosConfigurations.staging.config.system.build.toplevel
 # nixos/modules/programs/environment.nix
 environment.profileRelativeSessionVariables =
 

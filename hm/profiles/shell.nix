@@ -45,7 +45,7 @@ in
             # So seems like there is no way to fix those
             # secrets.nova-runner-1.sshUser 
             lib.nameValuePair 
-             (lib.toUpper "NOVA_RUNNER_${attr.runnerName}")
+             (lib.toUpper "NOVA_${attr.runnerName}")
              (mkRemoteBuilderDesc (attr // {
                sshUser = secrets.nova-gitlab-runner-1.userName;
                sshKey = secrets.nova-runner-1.sshKey;
@@ -69,7 +69,6 @@ in
       # HISTFILE="$XDG_CACHE_HOME/bash_history";
 	  # TODO pass the correct port, how to do that ? need ssh_config support
       # NOVA_RUNNER1 = mkRemoteBuilderDesc secrets.nova-runner-1;
-      # NOVA_RUNNER2 = mkRemoteBuilderDesc secrets.nova-runner-2;
 	  NOVA_CACHE_DEV  = secrets.novaNixCache.dev;
 	  NOVA_CACHE_PROD = secrets.novaNixCache.prod;
 

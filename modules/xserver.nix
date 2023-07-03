@@ -7,6 +7,7 @@
     rofi
     xautolock
     xorg.xkill
+    xorg.xwininfo # for stylish
   ];
 
   # Enable the X11 windowing system.

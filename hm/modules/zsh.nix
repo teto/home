@@ -6,31 +6,10 @@ let
   cfg = config.programs.zsh;
 
   fzf-git-sh = flakeInputs.fzf-git-sh;
-    # let
-    #   src = pkgs.fetchFromGitHub {
-    #     owner = "junegunn";
-    #     repo = "fzf-git.sh";
-    #     rev = "a48b9414872213430db18582585172d49fa57ac5";
-    #     sha256 = "sha256-wztFfe57ZNuuWSNfTFLKz8UJ5hJRtHl0QEd/1au6SWk=";
-    #   };
-    # in
-    # src;
 
-  termTitleSubmodule = types.submodule {
-      options = {
-        enable = mkEnableOption "Title update";
-
-        # enable = mkOption {
-        #   default = false;
-        #   type = types.bool;
-        #   description = ''
-        #     To change title
-        #   '';
-        # };
-     };
-    };
     # /tree/master/plugins/zbell
    # zsh-plugins = "${flakeInputs}/plugins/zbell"
+  termTitleSubmodule = types.submodule (import ./title-submodule.nix);
 
   zbellModule = types.submodule {
       options = {

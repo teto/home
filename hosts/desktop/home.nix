@@ -22,9 +22,9 @@
     enableZshIntegration = true;
   };
 
-  xsession.windowManager.i3 = {
-    enable = true;
-  };
+  # xsession.windowManager.i3 = {
+  #   enable = true;
+  # };
 
   # TODO generate a wrapper ?
   wayland.windowManager.sway = {
@@ -51,12 +51,12 @@
   };
 
   # seulemt pour X
-  programs.feh.enable = true;
+  # programs.feh.enable = true;
 
   home.packages = with pkgs; [
-    signal-desktop # installe a la main
+    # signal-desktop # installe a la main
     # gnome.gnome-maps
-    xorg.xwininfo # for stylish
+    # xorg.xwininfo # for stylish
   ];
 
   # you can switch from cli with xkb-switch or xkblayout-state

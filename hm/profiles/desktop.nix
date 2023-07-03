@@ -198,6 +198,8 @@ in
     ./firefox.nix
     ./neovim.nix
     ../../accounts/teto/ssh-config.nix
+   # (import ./ssh-config.nix { inherit flakeInputs secrets; } )
+
   ];
 
   # rename to fn, accept a parameter for optional
@@ -208,19 +210,16 @@ in
       # pkgs.up # live preview of pipes
       # pkgs.peek # GIF recorder  BROKEN
 	  pkgs.alsa-utils #  for alsamixer
-
-      # pkgs.cachix  # almost always broken
     ]
   ;
 
   home.sessionPath = [
     "$XDG_DATA_HOME/../bin"
-    # "/home/teto/.cache/cabal/bin"
   ];
 
   # tray is enabled by default
   services.udiskie = {
-    enable = false; # broken
+    enable = true; # broken
     notify = false;
     automount = false;
   };
@@ -333,12 +332,12 @@ in
   programs.joshuto = {
 
    enable = true;
-   settings = {
-     preview = {
-       preview_shown_hook_script = "~/.config/joshuto/on_preview_shown";
-       preview_removed_hook_script = "~/.config/joshuto/on_preview_removed";
-     };
-   };
+   # settings = {
+   #   preview = {
+   #     preview_shown_hook_script = "~/.config/joshuto/on_preview_shown";
+   #     preview_removed_hook_script = "~/.config/joshuto/on_preview_removed";
+   #   };
+   # };
    # [preview]
 # ...
 # preview_shown_hook_script = "~/.config/joshuto/on_preview_shown"
