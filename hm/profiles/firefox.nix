@@ -1,14 +1,6 @@
 { config, pkgs, lib, ... }:
 let
 
-  # nur = import (builtins.fetchTarball {
-  #   # TODO pass rev
-  #   url = "https://github.com/nix-community/NUR/archive/358dfac85d647bd3e0b30aa76c2b63d203233419.tar.gz";
-  #   # url = "https://github.com/nix-community/NUR/archive/cb0033ca5ef1e2db7952919f0f983ce57d8526b0.tar.gz";
-  #   sha256 = "1xm2z8f7zhwdzwasy348ilk4850i71s98jrhqhjrmaanhc0p67nl";
-  # }) {
-  #   inherit pkgs;
-  # };
   defaultFirefoxSettings = {
     # TODO use my own startpage
     "browser.startup.homepage" = "https://github.com/teto";
@@ -82,26 +74,26 @@ in
         # Not accepted. we should find another way to enable it
         # pass package for instance
         # with pkgs.nur.repos.rycee.firefox-addons;
-        extensions = with pkgs;[
-          # TODO no need for bitwarden anymore
-          # pkgs.nur.repos.rycee.firefox-addons.bitwarden
-          # pkgs.nur.repos.rycee.firefox-addons.browserpass
+        # extensions = with pkgs;[
+        #   # TODO no need for bitwarden anymore
+        #   # pkgs.nur.repos.rycee.firefox-addons.bitwarden
+        #   # pkgs.nur.repos.rycee.firefox-addons.browserpass
 
-          (pkgs.fetchFirefoxAddon {
-            name = "ublock";
-            url = "https://addons.mozilla.org/firefox/downloads/file/3679754/ublock_origin-1.31.0-an+fx.xpi";
-            sha256 = "1h768ljlh3pi23l27qp961v1hd0nbj2vasgy11bmcrlqp40zgvnr";
-          })
-          (pkgs.fetchFirefoxAddon {
-            name = "rikaichamp";
-            url = "https://addons.mozilla.org/firefox/downloads/file/3691333/rikaichamp-0.3.3-fx.xpi";
-            sha256 = "sha256-wFW5E7Ewux8ZbKCZXshQaOQojyim7zpsDgrLPAAnFL8=";
-          })
+        #   (pkgs.fetchFirefoxAddon {
+        #     name = "ublock";
+        #     url = "https://addons.mozilla.org/firefox/downloads/file/3679754/ublock_origin-1.31.0-an+fx.xpi";
+        #     sha256 = "1h768ljlh3pi23l27qp961v1hd0nbj2vasgy11bmcrlqp40zgvnr";
+        #   })
+        #   (pkgs.fetchFirefoxAddon {
+        #     name = "rikaichamp";
+        #     url = "https://addons.mozilla.org/firefox/downloads/file/3691333/rikaichamp-0.3.3-fx.xpi";
+        #     sha256 = "sha256-wFW5E7Ewux8ZbKCZXshQaOQojyim7zpsDgrLPAAnFL8=";
+        #   })
 
-          #        nur.repos.rycee.firefox-addons.browserpass-otp
-          # nur.repos.rycee.firefox-addons.tree-style-tabs  # not in his nur repo
-          #        nur.repos.rycee.firefox-addons.gesturefy
-        ];
+        #   #        nur.repos.rycee.firefox-addons.browserpass-otp
+        #   # nur.repos.rycee.firefox-addons.tree-style-tabs  # not in his nur repo
+        #   #        nur.repos.rycee.firefox-addons.gesturefy
+        # ];
 
       };
 

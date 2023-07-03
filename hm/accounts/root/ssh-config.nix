@@ -3,6 +3,9 @@
 , secrets, 
 flakeInputs,
 ... }:
+let
+  secrets = import ../../../nixpkgs/secrets.nix;
+in
 {
   programs.ssh = {
 

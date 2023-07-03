@@ -45,14 +45,5 @@ in
 
   };
 
-  # home-manager.users.teto = {
-  #  imports = [ 
-  #   ({ ... }: {   home.stateVersion = "23.05"; })
- 
-  #    # import only for desktop
-  #    # (import ./ssh-config.nix)
-  #  ];
-  # };
-
   nix.settings.trusted-users = [ "teto" ];
 }

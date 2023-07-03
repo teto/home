@@ -1,14 +1,14 @@
 { wrapFirefox, firefox-unwrapped, fetchFirefoxAddon }:
 
 let
-  myFirefox = wrapFirefox pkgs.firefox-unwrapped {
+  myFirefox = wrapFirefox firefox-unwrapped {
     extraExtensions = [
-      (pkgs.fetchFirefoxAddon {
+      (fetchFirefoxAddon {
         name = "ublock";
         url = "https://addons.mozilla.org/firefox/downloads/file/3679754/ublock_origin-1.31.0-an+fx.xpi";
         sha256 = "1h768ljlh3pi23l27qp961v1hd0nbj2vasgy11bmcrlqp40zgvnr";
       })
-      (pkgs.fetchFirefoxAddon {
+      (fetchFirefoxAddon {
         name = "bitwarden";
         url = "https://addons.mozilla.org/firefox/downloads/file/3677817/bitwarden_free_password_manager-1.47.0-an+fx.xpi";
         sha256 = "sha256-hYBXHTQMYNuAjZdHEM4pbEAVXKFeUozK8VgHiO7PmOo=";

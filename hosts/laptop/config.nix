@@ -1,4 +1,4 @@
-{ config, lib, pkgs, secrets, ... }:
+{ config, lib, pkgs, flakeInputs, secrets, ... }:
 {
   imports = [
     ./sshd.nix
@@ -98,6 +98,32 @@
     # "net.core.rmem_max" = 4194304;
     # "net.core.wmem_max" = 1048576;
   };
+
+  home-manager.users.root = {
+   imports = [
+    (import ../../hm/modules/neovim.nix)
+    (import ./../hm/profiles/neovim.nix)
+   ];
+
+   home.stateVersion = "23.05";
+  };
+
+ home-manager.users.teto = {
+   # TODO it should load the whole folder
+   imports = [
+     # custom modules
+     (import ../../hm/modules/neovim.nix)
+     (import ../../hm/modules/i3.nix)
+     (import ../../hm/modules/zsh.nix)
+     (import ../../hm/modules/xdg.nix)
+     ./home.nix
+     ../../hm/profiles/nova.nix
+     flakeInputs.nova.hmProfiles.standard
+     flakeInputs.nova.hmProfiles.dev
+    # breaks build: doesnt like the "activation-script"
+    # nova.hmConfigurations.dev
+   ];
+ };
 
 
   # it is necessary to use dnssec though :(

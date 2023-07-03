@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, flakeInputs, lib, pkgs, ... }:
 {
   imports = [
     ./hardware.nix
@@ -28,6 +28,28 @@
 
     # ./modules/tor.nix
   ];
+
+  home-manager.users.root = {
+   imports = [
+    ../../hm/accounts/root/ssh-config.nix
+    (import ../../hm/modules/neovim.nix)
+    (import ../../hm/profiles/neovim.nix)
+   ];
+
+   home.stateVersion = "23.05";
+  };
+
+   # TODO use from flake or from unstable
+   # services.opensnitch-ui.enable
+   # ./hm/profiles/gaming.nix
+  home-manager.users.teto = {
+    # TODO it should load the whole folder
+    imports = [
+     ./home.nix
+ # breaks build: doesnt like the "activation-script"
+ # nova.hmConfigurations.dev
+    ];
+  };
 
   # for testing
   services.openssh = {

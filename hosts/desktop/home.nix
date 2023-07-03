@@ -1,5 +1,5 @@
 # home-manager specific config from
-{ config, lib, pkgs, ... }:
+{ config, lib, flakeInputs, pkgs, ... }:
 {
   imports = [
     # Not tracked, so doesn't need to go in per-machine subdir
@@ -14,6 +14,20 @@
     ../../hm/profiles/extra.nix
     # ../../hm/profiles/weechat.nix
     ../../hm/profiles/vdirsyncer.nix
+     flakeInputs.nova.hmProfiles.standard
+     flakeInputs.nova.hmProfiles.dev
+     flakeInputs.nova.hmProfiles.devops
+     ../../hm/profiles/experimental.nix
+     ../../hm/profiles/japanese.nix
+     ../../hm/profiles/fcitx.nix
+     ../../hm/profiles/nova.nix
+     ../../hm/profiles/vscode.nix
+     ../../hm/profiles/extra.nix
+      # custom modules
+      (import ../../hm/modules/neovim.nix)
+      (import ../../hm/modules/zsh.nix)
+      (import ../../hm/modules/xdg.nix)
+      ../../hm/profiles/nova.nix
 
   ];
 
