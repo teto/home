@@ -245,11 +245,11 @@ in
 >>>>>>> 8a267fb5 (reduce defddault account)
      };
      "10-enp2s0" = {
-       matchConfig.OriginalName = "enp2s0";
+       matchConfig.Name = "enp2s0";
        networkConfig.Bridge = "br0";
      };
      "10-enp3s0" = {
-       matchConfig.OriginalName = "enp3s0";
+       matchConfig.Name = "enp3s0";
        networkConfig.Bridge = "br0";
      };
 

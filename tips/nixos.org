@@ -9,26 +9,3 @@ dhcpcd
 * remote install
 
  nixos-rebuild --flake .#router --target-host teto@10.0.0.4 switch  --use-remote-sudo
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   
