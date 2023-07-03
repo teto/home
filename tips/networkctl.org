@@ -1,2 +1,4 @@
 just `networkctl` will list 
 o
+
+networkctl up br0

@@ -93,13 +93,6 @@ in
 
   services.irqbalance.enable = true;
 
-  networking.hostName = "router";
-  # networking.dhcpcd.enable = true;
-  networking.usePredictableInterfaceNames = true;
-  # networking.firewall.interfaces.enp1s0.allowedTCPPorts = [ 4949 ];
-
-  networking.firewall.interfaces.br0.allowedTCPPorts = [ 53 ];
-  networking.firewall.interfaces.br0.allowedUDPPorts = [ 53 ];
 
   security.sudo.wheelNeedsPassword = false;
 
@@ -139,17 +132,19 @@ in
   #     internalIPs = [ "br0" ];
   # };
 
-  services.munin-node = {
-      enable = true;
-  #     extraConfig = ''
-  #     allow ^63\.12\.23\.38$
-  #     '';
-  };
+  # services.munin-node = {
+  #     enable = true;
+  # #     extraConfig = ''
+  # #     allow ^63\.12\.23\.38$
+  # #     '';
+  # };
 
 
   # following the guide https://nixos.wiki/wiki/Systemd-networkd
   systemd.network = {
     enable = true;
+    # SYSTEMD_LOG_LEVEL=debug
+    wait-online.timeout = 10;
 
    # example
    # systemd.network.links."10-custom_name" = {
@@ -165,8 +160,7 @@ in
      };
      "10-wlp5s0" = {
        matchConfig.OriginalName = "wlp5s0";
-      # "ether", "loopback", "wlan", "wwan"
-      # matchConfig.Type = "ether";
+       # linkConfig.MTUBytes = "1442";
      };
 
     };
@@ -190,57 +184,115 @@ in
 # Kind=bridge
 
     networks = {
-     "10-lan" = {
-       matchConfig.Name = "lan";
+     "10-enp1s0" = {
+       matchConfig.Name = "enp1s0";
        networkConfig.DHCP = "ipv4";
      };
+     "10-wirelesss-wan" = {
+       matchConfig.Name = "wlp5s0";
+       networkConfig.DHCP = "ipv4";
+       networkConfig.IPv6AcceptRA="no";
+       networkConfig.LinkLocalAddressing="ipv4";
+       networkConfig.IgnoreCarrierLoss="3s";
+       networkConfig.Description = "WAN port";
+       linkConfig.RequiredForOnline = true;
+
+     };
+     # "10-wired-wan" = {
+     #   matchConfig.Name = "lan";
+     #   networkConfig.DHCP = "ipv4";
+     # };
      "br0" = {
        matchConfig.Name = "br0";
        # address = [ 
        # ];
-       networkConfig.Address = "${bridgeNetwork.address}/${toString bridgeNetwork.prefixLength}";
+       networkConfig.Address = "10.0.0.1/${toString bridgeNetwork.prefixLength}";
           # routes = [
           #   { routeConfig = { Destination = "64:ff9b::/96"; Gateway = "2001:db8::1"; }; }
           # ];
 
-       networkConfig.DHCP = "ipv4";
+       # networkConfig.Gateway = "${bridgeNetwork.address}";
+       # networkConfig.DHCP = "ipv4";
+       networkConfig.DHCPServer = true;
+       networkConfig.IPMasquerade="ipv4";
+       dhcpServerConfig = {
+         PoolOffset = 100;
+         PoolSize = 40;
+         EmitDNS=true;
+         # ServerAddress
+         # EmitNTP
+         # EmitTimeZone
+         # SendOption
+
+         # DefaultLeaseTimeSec=, MaxLeaseTimeSec=
+         # DNS=
+       };
 
 
      };
+     "10-enp2s0" = {
+       matchConfig.OriginalName = "enp2s0";
+       networkConfig.Bridge = "br0";
+     };
+     "10-enp3s0" = {
+       matchConfig.OriginalName = "enp3s0";
+       networkConfig.Bridge = "br0";
+     };
+
+     # remove once we make sure everything works
+     # "10-enp4s0" = {
+     #   matchConfig.OriginalName = "enp4s0";
+     #   networkConfig.Bridge = "br0";
+     # };
+
     };
   };
 
+  # systemd.services.systemd-networkd.environment.SYSTEMD_LOG_LEVEL = "debug";
   networking = {
-    # address of the livebox
-    defaultGateway = { address = "192.168.1.1"; interface = "wlp5s0"; };
+     useNetworkd = true;
+     useDHCP = false;
+  hostName = "router";
+  # networking.dhcpcd.enable = true;
+  usePredictableInterfaceNames = true;
+  # networking.firewall.interfaces.enp1s0.allowedTCPPorts = [ 4949 ];
 
-    interfaces.enp1s0 = {
-      useDHCP = true;
-      # ipv4.addresses = [
-      # { address = "192.168.1.127"; prefixLength = 24; }
-      # ];
-    };
+  firewall = {
+     enable = false;
+    interfaces.br0.allowedTCPPorts = [ 53 ];
+    interfaces.br0.allowedUDPPorts = [ 53 ];
+  };
 
-    interfaces.wlp5s0 = {
-      useDHCP = true;
-      # ipv4.addresses = [
-      # { address = "192.168.1.127"; prefixLength = 24; }
-      # ];
-    };
+  #   # address of the livebox
+  #   defaultGateway = { address = "192.168.1.1"; interface = "wlp5s0"; };
 
-    interfaces.br0 = {
-      ipv4.addresses = [
-        bridgeNetwork
-      ];
-    };
+  #   interfaces.enp1s0 = {
+  #     useDHCP = true;
+  #     # ipv4.addresses = [
+  #     # { address = "192.168.1.127"; prefixLength = 24; }
+  #     # ];
+  #   };
 
-    bridges.br0 = {
-      interfaces = [ "enp2s0" "enp3s0" "enp4s0" ];
-    };
+  #   interfaces.wlp5s0 = {
+  #     useDHCP = true;
+  #     # ipv4.addresses = [
+  #     # { address = "192.168.1.127"; prefixLength = 24; }
+  #     # ];
+  #   };
 
-    nat.enable = true;
-    nat.externalInterface = externalInterface;
-    nat.internalInterfaces = [ "br0" ];
+  #   interfaces.br0 = {
+  #     ipv4.addresses = [
+  #       bridgeNetwork
+  #     ];
+  #   };
+
+  #   bridges.br0 = {
+  #     interfaces = [ "enp2s0" "enp3s0" "enp4s0" ];
+  #   };
+
+  #   nat.enable = true;
+  #   nat.externalInterface = externalInterface;
+  #   nat.internalInterfaces = [ "br0" ];
 
     wireless = {
       enable = true;
@@ -253,21 +305,21 @@ in
     };
   };
 
-  services.dhcpd4 = {
-    enable = true;
+  # services.dhcpd4 = {
+  #   enable = true;
 
-    # TODO FIX
-    extraConfig = ''
-    option subnet-mask 255.255.255.0;
-    # L'option routers spécifie une liste d'adresses IP de routeurs qui sont sur le sous-réseau du client. Les routeurs doivent être mentionnés par ordre de préférence.
-    option routers ${bridgeNetwork.address};
-    option domain-name-servers 192.168.1.1;
-    subnet ${bridgeNetwork.address} netmask 255.255.255.0 {
-        range 10.0.0.100 10.0.0.199;
-    }
-    '';
-    interfaces = [ "br0" ];
-  };
+  #   # TODO FIX
+  #   extraConfig = ''
+  #   option subnet-mask 255.255.255.0;
+  #   # L'option routers spécifie une liste d'adresses IP de routeurs qui sont sur le sous-réseau du client. Les routeurs doivent être mentionnés par ordre de préférence.
+  #   option routers ${bridgeNetwork.address};
+  #   option domain-name-servers 192.168.1.1;
+  #   subnet ${bridgeNetwork.address} netmask 255.255.255.0 {
+  #       range 10.0.0.100 10.0.0.199;
+  #   }
+  #   '';
+  #   interfaces = [ "br0" ];
+  # };
 
   time.timeZone = "Europe/Paris";
 

@@ -6,7 +6,9 @@ dhcpcd
   nix-env --list-generations
   nix-env --list-generations --profile /nix/var/nix/profiles/system
 
+* remote install
 
+ nixos-rebuild --flake .#router --target-host teto@10.0.0.4 switch  --use-remote-sudo
 
 
 

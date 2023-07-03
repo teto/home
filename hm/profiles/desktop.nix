@@ -106,6 +106,7 @@ let
       arandr # to move screens/monitors around
       bandwhich # to monitor per app bandwidth
       du-dust # dust binary: rust replacement of du
+      dogdns # dns solver "dog"
       ncdu # to see disk usage
       nomacs # image viewer
       desktop-file-utils # to get desktop
@@ -131,7 +132,7 @@ let
       qtpass
       rbw # Rust bitwarden unofficial client
       rofi-pass # rofi-pass it's enabled in the HM module ?
-      scrot # screenshot app for wayland
+      # scrot # screenshot app for xorg
       sd # rust cli for search & replace
       shared-mime-info # temporary fix for nautilus to find the correct files
       sublime3

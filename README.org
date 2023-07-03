@@ -12,13 +12,11 @@ This folder contains my customizations for:
 - [[https://github.com/jarun/Buku][buku]]: a cli bookmark manager
 - clerk (to control mpd via rofi)
 - font handling font-manager
-- fcitx (input method mechanims)
-- git (Source control)
-- greenclip (clipboard history, works with rofi, contender of roficlip)
+- fcitx5 (input method mechanims)
 - [[https://github.com/rycee/home-manager/][home-manager]]
 - htop
 - [[www.i3wm.org][i3]], a great if not the best tiling window manager)
-- [[https://github.com/][i3pystatus]] (generates a status line for i3bar)
+- [[https://github.com/Alexays/Waybar][waybar]] sway bar
 - [[https://github.com/pimutils/khard][khard]] (a carddav CLI)
 - [[https://github.com/pimutils/khal][khal]] (a calendar CLI)
 - mpd (configuration files to run this music server as a user)
@@ -26,11 +24,9 @@ This folder contains my customizations for:
 - [[https://neomutt.org][neomutt]] (Mail User Agent)
 - ncmpcpp (mpd console player)
 - [[https://github.com/neovim/neovim][neovim]] (fork of vim)
-- netrc (template only, password database)
 - [[https://newsboat.org/][newboat]] (RSS reader, fork of newsbeuter)
 - [[www.notmuch.org][notmuch]] (to tag mails)
 - [[https://github.com/purebred-mua/purebred][purebred]] (terminal MUA)
-- procmail
 - [[qutebrowser][www.qutebrowser.org]] (vim like browser)
 - [[https://github.com/ranger/ranger][ranger]] (CLI file explorer)
 - [[https://github.com/DaveDavenport/rofi][rofi]] (a dmenu-like interactive prompt, works with clerk/i3 etc...)
@@ -40,6 +36,7 @@ This folder contains my customizations for:
 - [[https://sw.kovidgoyal.net/kitty/][kitty]] (a modal terminal)
 - [[https://github.com/jonas/tig][tig]] (a git history reader)
 - tmux (terminal multiplexer)
+- [[https://github.com/tio/tio][tio]] a serial device tool
 - [[https://vifm.info/][vifm]] (ranger-like, file explorer)
 - [[https://github.com/vimus/vimus][vimus]] (or vimpc ? mpd player)
 - [[https://www.visidata.org/][visidata]] (for data analysis, csv/json/pcap/... reader)
