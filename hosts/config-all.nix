@@ -40,9 +40,7 @@ rec {
     ncurses.dev # for infocmp
     # termite.terminfo # broken on unstable to be able to edit over ssh
     kitty.terminfo # to be able to edit over ssh
-    util-linux # for lsns (namespace listing)
   ] ++ (with pkgs; [
-    automake
     # autoconf
     binutils
     curl
@@ -50,28 +48,17 @@ rec {
     file
     fzf
     lsof
-    # gawk
     gitAndTools.gitFull # to get send-email
     # git-extras # does not find it (yet)
-    gnum4 # hum
-    gnupg
-    gnumake
+    # gnupg
+    # gnumake
     htop
-
     # ipsecTools # does it provide ipsec ?
 
-    # for fuser, useful when can't umount a directory
-    # https://unix.stackexchange.com/questions/107885/busy-device-on-umount
-    psmisc
     # pv # monitor copy progress
-    ranger
-    rsync
-    ripgrep
     sudo
     unzip
     # vifm
-    vim
-    wget
   ]);
 
   # TODO it appears in /etc/bashrc !
@@ -84,7 +71,6 @@ rec {
     # oftenly used programs {{{
     v = "nvim";
     c = "cat";
-    r = "ranger";
     # }}}
   };
 
@@ -119,44 +105,6 @@ rec {
     };
   };
 
-  programs.zsh = {
-    enable = true;
-    zsh-autoenv.enable = false;
-    enableCompletion = true;
-    enableGlobalCompInit = false;
-    # enableAutosuggestions = true;
-    autosuggestions = {
-      enable = false;
-      # highlightStyle = ""
-    };
-    # promptInit
-    # vteIntegration = false;
-    syntaxHighlighting.enable = false;
-    shellAliases = environment.shellAliases // { };
-    # goes to /etc/zshenv
-    # shellInit = ''
-    # '';
-
-    # todo make available for zsh too
-    # use FZF_PATH="$(fzf-share)" to do it dynamically
-    #   bindkey "^K"      kill-whole-line                      # ctrl-k
-    #   bindkey "^A"      beginning-of-line                    # ctrl-a
-    #   bindkey "^E"      end-of-line                          # ctrl-e
-    #   bindkey "[B"      history-search-forward               # down arrow
-    #   bindkey "[A"      history-search-backward              # up arrow
-    #   bindkey "^D"      delete-char                          # ctrl-d
-    #   bindkey "^F"      forward-char                         # ctrl-f
-    #   bindkey "^B"      backward-char                        # ctrl-b
-    # bindkey -e
-    # bindkey -v   # Default to standard vi bindings, regardless of editor string
-    # interactiveShellInit = ''
-    # #   # To see the key combo you want to use just do:
-    # #   # Don't try to bind CTRL Q / CTRL S !!
-    # #   # cat > /dev/null
-    # #   # And press it
-
-
-  };
 
 
   # environment.etc.zshrc.text = lib.mkMerge [

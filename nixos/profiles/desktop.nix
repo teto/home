@@ -13,6 +13,7 @@
     ../../modules/wireshark.nix
     ../../modules/wifi.nix
 
+    ./zsh.nix
     ./gnome.nix
     ./wayland.nix
     ./neovim.nix
@@ -107,6 +108,7 @@
 
   systemd.packages = [
     # pkgs.deadd-notification-center
+
   ];
 
   # udisks2 GUI

@@ -40,11 +40,7 @@ in
     ];
 
     packages = with pkgs; [
-      pciutils # for lspci
       ncdu # to see disk usage
-      wirelesstools # to get iwconfig
-      gitAndTools.diff-so-fancy
-      # aircrack-ng
     ];
 
   };

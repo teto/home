@@ -14,6 +14,12 @@ let
     # nix-prefetch-scripts # broken
     gdb
     editorconfig-core-c
+    automake
+    gnum4 # hum
+    # for fuser, useful when can't umount a directory
+    # https://unix.stackexchange.com/questions/107885/busy-device-on-umount
+    psmisc
+    util-linux # for lsns (namespace listing)
     rbw
 	haxe
     exa # to list files
@@ -144,6 +150,9 @@ let
       xarchiver # to unpack/pack files
       # zathura # broken
       ytfzf # browse youtube
+      ranger # or joshuto ?
+      rsync
+      ripgrep
     ]
     #   gnome.gnome-calculator # compare with qalqulate-gtk
   ;

@@ -9,6 +9,7 @@
 BLOG_FOLDER := "${HOME}/blog"
 
 # regen fortunes (not necessary with some fortunes version ?!)                                                                                                                                 
+# strfile not necessarilyu in PATH !
 fortunes:
 	mkdir -p ~/.local/share/matt
 	strfile -c % fortunes/jap.txt ~/.local/share/matt/jap.txt.dat   
@@ -25,6 +26,7 @@ lint-lua:
 deploy-router:
 	# --auto-rollback false --magic-rollback false
 	# we MUST skip checks else it fails
+	# deploy .\#router  -s  --auto-rollback false --magic-rollback false
 	deploy .\#router  -s 
 
 deploy-neotokyo:

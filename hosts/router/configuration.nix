@@ -43,6 +43,11 @@ in
     # pcengines/apu
   ];
 
+  services.journald.extraConfig = ''
+    # alternatively one can run journalctl --vacuum-time=2d
+    SystemMaxUse=200MB
+    '';
+
   environment.systemPackages = with pkgs; [
     bridge-utils
   ];
@@ -93,7 +98,6 @@ in
 
   services.irqbalance.enable = true;
 
-
   security.sudo.wheelNeedsPassword = false;
 
   services.acpid.enable = true;
@@ -132,6 +136,7 @@ in
   #     internalIPs = [ "br0" ];
   # };
 
+  # this takes a lot of space !
   # services.munin-node = {
   #     enable = true;
   # #     extraConfig = ''
@@ -158,6 +163,7 @@ in
       # "ether", "loopback", "wlan", "wwan"
       # matchConfig.Type = "ether";
      };
+     # externalInterface / wanInterface
      "10-wlp5s0" = {
        matchConfig.OriginalName = "wlp5s0";
        # linkConfig.MTUBytes = "1442";
@@ -211,6 +217,7 @@ in
           #   { routeConfig = { Destination = "64:ff9b::/96"; Gateway = "2001:db8::1"; }; }
           # ];
 
+<<<<<<< HEAD
        # networkConfig.Gateway = "${bridgeNetwork.address}";
        # networkConfig.DHCP = "ipv4";
        networkConfig.DHCPServer = true;
@@ -229,6 +236,13 @@ in
        };
 
 
+||||||| parent of 8a267fb5 (reduce defddault account)
+       networkConfig.DHCP = "ipv4";
+
+
+=======
+       networkConfig.DHCP = "ipv4";
+>>>>>>> 8a267fb5 (reduce defddault account)
      };
      "10-enp2s0" = {
        matchConfig.OriginalName = "enp2s0";
@@ -265,13 +279,13 @@ in
 
   #   # address of the livebox
   #   defaultGateway = { address = "192.168.1.1"; interface = "wlp5s0"; };
-
-  #   interfaces.enp1s0 = {
+  #  interfaces.enp1s0 = {
   #     useDHCP = true;
   #     # ipv4.addresses = [
   #     # { address = "192.168.1.127"; prefixLength = 24; }
   #     # ];
   #   };
+
 
   #   interfaces.wlp5s0 = {
   #     useDHCP = true;

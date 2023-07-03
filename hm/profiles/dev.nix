@@ -3,6 +3,10 @@
 
 
   home.packages = with pkgs; [
+    pciutils # for lspci
+    wirelesstools # to get iwconfig
+    gitAndTools.diff-so-fancy
+    # aircrack-ng
 	jq
     eva # calculette in a REPL
     dasht # ~ zeal but in terminal
