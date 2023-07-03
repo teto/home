@@ -16,7 +16,7 @@
 
     ../../hm/profiles/alot.nix
     ../../hm/profiles/dev.nix
-    ../../hm/profiles/vscode.nix #  provided by nova-nix config
+    # ../../hm/profiles/vscode.nix #  provided by nova-nix config
     ../../hm/profiles/experimental.nix
     ../../hm/profiles/emacs.nix
     ../../hm/profiles/wayland.nix
@@ -25,12 +25,6 @@
     # ./hm/autoUpgrade.nix
   ];
 
-  # use a release version
-  # programs.neovim.package = lib.mkForce pkgs.neovim;
-
-  xsession.windowManager.i3 = {
-    # enable = false;
-  };
 
   wayland.windowManager.sway = {
     enable = true;
@@ -40,21 +34,21 @@
       "--debug"
     ];
   };
-  programs.waybar = {
-   settings = {
-     mainBar = {
-       modules-right = [ 
-        "battery"
-        "bluetooth"
-        # "backlight"
-       ];
-       battery = {
+  # programs.waybar = {
+  #  settings = {
+  #    mainBar = {
+  #      modules-right = [ 
+  #       "battery"
+  #       "bluetooth"
+  #       # "backlight"
+  #      ];
+  #      battery = {
 
-        format = "{time} {icon}";
-       };
-    };
-    };
-  };
+  #       format = "{time} {icon}";
+  #      };
+  #   };
+  #   };
+  # };
 
   home.packages = with pkgs; [
     hlint # (for test with manpage)

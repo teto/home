@@ -146,14 +146,14 @@
   systemd.coredump.enable = true;
 
   # see 
-  systemd.coredump.extraConfig = ''
-    #Storage=external
-    #Compress=yes
-    ProcessSizeMax=20G
-    ExternalSizeMax=20G
     #JournalSizeMax=767M
     #MaxUse=
     #KeepFree=
+  systemd.coredump.extraConfig = ''
+    #Storage=external
+    #Compress=yes
+    ProcessSizeMax=5G
+    ExternalSizeMax=10G
   '';
 
   # users.motd = 

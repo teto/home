@@ -12,8 +12,8 @@ in
 rec {
 
   imports = [
-    ../accounts/root/root.nix
-    ../accounts/teto/teto.nix
+    ../nixos/accounts/root/root.nix
+    ../nixos/accounts/teto/teto.nix
     ../modules/ntp.nix
     ../nixos/profiles/neovim.nix
 

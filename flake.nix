@@ -93,7 +93,7 @@
     # };
   };
 
-  outputs = { self, hm, nixpkgs, flake-utils, treefmt-nix, nova, deploy-rs, ... }:
+  outputs = { self, hm, nur, nixpkgs, flake-utils, treefmt-nix, nova, deploy-rs, ... }:
     let
       inherit (builtins) listToAttrs baseNameOf;
       # inherit (myPkgs.lib) removeSuffix;
@@ -125,13 +125,8 @@
       # flakeInputs = self.inputs;
       # };
 
-      hm-custom = my_imports: ({ config, lib, pkgs, ... }:
-        {
-          # necessary for plugins to see nur etc
-          # ignored by useGlobalPkgs ?
-          # nixpkgs.overlays = nixpkgs.lib.attrValues self.overlays;
-
-          home-manager.verbose = true;
+      hm-common = { config, lib, pkgs, ... }: {
+                home-manager.verbose = true;
           # install through the use of user.users.USER.packages
           home-manager.useUserPackages = true;
           # disables the Home Manager option nixpkgs.*
@@ -140,6 +135,11 @@
             inherit secrets;
 			flakeInputs = self.inputs;
           };
+         };
+
+
+      hm-custom = my_imports: ({ config, lib, pkgs, ... }:
+        {
           home-manager.users.teto = {
 			# TODO it should load the whole folder
             imports = my_imports ++ [
@@ -270,6 +270,8 @@
                 ];
               })
 
+              hm-common
+
               ({ config, lib, pkgs, ... }:
               { 
                 home-manager.users.root = {
@@ -281,18 +283,24 @@
                  home.stateVersion = "23.05";
                 };
 
-
-              })
-
+               home-manager.users.teto = {
+                 # TODO it should load the whole folder
+                 imports = [
+                   # custom modules
+                   (import ./hm/modules/neovim.nix)
+                   (import ./hm/modules/i3.nix)
+                   (import ./hm/modules/zsh.nix)
+                   (import ./hm/modules/xdg.nix)
+                   ./hosts/laptop/home.nix
+                   ./hm/profiles/nova.nix
+                   nova.hmProfiles.standard
+                   nova.hmProfiles.dev
               # breaks build: doesnt like the "activation-script"
               # nova.hmConfigurations.dev
-              (hm-custom [
-                ./hosts/laptop/home.nix
-                ./hm/profiles/nova.nix
+                 ];
+               };
 
-                nova.hmProfiles.standard
-                nova.hmProfiles.dev
-              ])
+              })
             ];
           };
 
@@ -354,33 +362,43 @@
               })
               hm.nixosModules.home-manager
               nova.nixosProfiles.dev
+              nur.nixosModules.nur
+              hm-common
 
               # TODO use from flake or from unstable
-              (hm-custom [
-                ./hosts/desktop/home.nix
-                nova.hmProfiles.standard
-                nova.hmProfiles.dev
-                nova.hmProfiles.devops
-                ./hm/profiles/experimental.nix
-                ./hm/profiles/japanese.nix
-                ./hm/profiles/fcitx.nix
-                ./hm/profiles/nova.nix
-                ./hm/profiles/vscode.nix
-                ./hm/profiles/extra.nix
-                ./hm/profiles/sway.nix
                 # services.opensnitch-ui.enable
                 # ./hm/profiles/gaming.nix
-
-                # ./hm/vscode.nix #  provided by nova-nix config
                 ({ config, lib, pkgs, ... }:
                   {
-                    home.packages = [
-                      # purebred takes too much space
-                      # self.inputs.purebred.packages.${system}.purebred
-                    ];
+               home-manager.users.teto = {
+                 # TODO it should load the whole folder
+                 imports = [
+                  ./hosts/desktop/home.nix
+                  nova.hmProfiles.standard
+                  nova.hmProfiles.dev
+                  nova.hmProfiles.devops
+                  ./hm/profiles/experimental.nix
+                  ./hm/profiles/japanese.nix
+                  ./hm/profiles/fcitx.nix
+                  ./hm/profiles/nova.nix
+                  ./hm/profiles/vscode.nix
+                  ./hm/profiles/extra.nix
+                  ./hm/profiles/sway.nix
+                   # custom modules
+                   (import ./hm/modules/neovim.nix)
+                   (import ./hm/modules/i3.nix)
+                   (import ./hm/modules/zsh.nix)
+                   (import ./hm/modules/xdg.nix)
+                   ./hosts/laptop/home.nix
+                   ./hm/profiles/nova.nix
+                   nova.hmProfiles.standard
+                   nova.hmProfiles.dev
+              # breaks build: doesnt like the "activation-script"
+              # nova.hmConfigurations.dev
+                 ];
+               };
 
                   })
-              ])
             ];
           };
         };

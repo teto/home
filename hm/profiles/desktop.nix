@@ -197,7 +197,7 @@ in
     ./fcitx.nix
     ./firefox.nix
     ./neovim.nix
-    ../../accounts/teto/ssh-config.nix
+    ../accounts/teto/ssh-config.nix
    # (import ./ssh-config.nix { inherit flakeInputs secrets; } )
 
   ];

@@ -2,6 +2,9 @@
 { config, pkgs, lib, secrets, 
 # flakeInputs,
 ... }:
+let
+  secrets = import ../../../nixpkgs/secrets.nix;
+in
 {
   programs.ssh = {
 
@@ -38,7 +41,6 @@
       };
 	  
 
-      # TODO generate from nova-ci
       ovh1 = {
         # checkHostIP
         identityFile = "~/.ssh/nova_key";
@@ -75,5 +77,4 @@
     Include ${config.xdg.configHome}/nova/jinkompute/ssh_config
     '';
   };
-
 }

@@ -84,7 +84,8 @@ in
         # with pkgs.nur.repos.rycee.firefox-addons;
         extensions = with pkgs;[
           # TODO no need for bitwarden anymore
-          pkgs.nur.repos.rycee.firefox-addons.bitwarden
+          # pkgs.nur.repos.rycee.firefox-addons.bitwarden
+          # pkgs.nur.repos.rycee.firefox-addons.browserpass
 
           (pkgs.fetchFirefoxAddon {
             name = "ublock";
@@ -96,7 +97,6 @@ in
             url = "https://addons.mozilla.org/firefox/downloads/file/3691333/rikaichamp-0.3.3-fx.xpi";
             sha256 = "sha256-wFW5E7Ewux8ZbKCZXshQaOQojyim7zpsDgrLPAAnFL8=";
           })
-          nur.repos.rycee.firefox-addons.browserpass
 
           #        nur.repos.rycee.firefox-addons.browserpass-otp
           # nur.repos.rycee.firefox-addons.tree-style-tabs  # not in his nur repo

@@ -2,7 +2,7 @@
 {
   myFirefox = pkgs.wrapFirefox pkgs.firefox-unwrapped {
     extraExtensions = [
-      (fetchFirefoxAddon {
+      (pkgs.fetchFirefoxAddon {
         name = "ublock";
         url = "https://addons.mozilla.org/firefox/downloads/file/3679754/ublock_origin-1.31.0-an+fx.xpi";
         sha256 = "1h768ljlh3pi23l27qp961v1hd0nbj2vasgy11bmcrlqp40zgvnr";

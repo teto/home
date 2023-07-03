@@ -27,8 +27,6 @@
     ../../modules/distributedBuilds.nix
 
     # ./modules/tor.nix
-    # ./modules/sway.nix
-
   ];
 
   # for testing
@@ -63,9 +61,6 @@
 
   # nesting clones can be useful to prevent GC of some packages
   # https://nixos.org/nix-dev/2017-June/023967.html
-
-  # system.requiredKernelConfig 
-
 
   # it apparently still is quite an important thing to have
   boot.devSize = "5g";
