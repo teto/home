@@ -217,7 +217,6 @@ in
           #   { routeConfig = { Destination = "64:ff9b::/96"; Gateway = "2001:db8::1"; }; }
           # ];
 
-<<<<<<< HEAD
        # networkConfig.Gateway = "${bridgeNetwork.address}";
        # networkConfig.DHCP = "ipv4";
        networkConfig.DHCPServer = true;
@@ -236,13 +235,9 @@ in
        };
 
 
-||||||| parent of 8a267fb5 (reduce defddault account)
        networkConfig.DHCP = "ipv4";
 
 
-=======
-       networkConfig.DHCP = "ipv4";
->>>>>>> 8a267fb5 (reduce defddault account)
      };
      "10-enp2s0" = {
        matchConfig.Name = "enp2s0";

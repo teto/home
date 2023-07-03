@@ -32,8 +32,7 @@
   home-manager.users.root = {
    imports = [
     ../../hm/accounts/root/ssh-config.nix
-    (import ../../hm/modules/neovim.nix)
-    (import ../../hm/profiles/neovim.nix)
+    ../../hm/profiles/neovim.nix
    ];
 
    home.stateVersion = "23.05";

@@ -24,9 +24,6 @@
      ../../hm/profiles/vscode.nix
      ../../hm/profiles/extra.nix
       # custom modules
-      (import ../../hm/modules/neovim.nix)
-      (import ../../hm/modules/zsh.nix)
-      (import ../../hm/modules/xdg.nix)
       ../../hm/profiles/nova.nix
 
   ];

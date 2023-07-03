@@ -188,8 +188,6 @@ in
     ./mpv.nix
     ./mpd.nix
     ./dev.nix
-    # ./modules/home-tor.nix
-    # ./i3.nix
     ./rofi.nix
     ./wal.nix
 
@@ -198,7 +196,6 @@ in
     ./firefox.nix
     ./neovim.nix
     ../accounts/teto/ssh-config.nix
-   # (import ./ssh-config.nix { inherit flakeInputs secrets; } )
 
   ];
 

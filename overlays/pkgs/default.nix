@@ -74,14 +74,6 @@ final: prev:
   #       sha256 = "sha256-/9VjXFgbBz/OXjxu8/N7enNdVs1sQZmUiKhjSTIl6Fg=";
   #     }) {};
 
-  # https://github.com/phuhl/linux_notification_center
-  # already packaged, just need the systemctl bus
-  # linux_notification_center = prev.haskellPackages.callCabal2nix "linux_notification_center" ("${prev.fetchzip {
-  #       url = "https://github.com/phuhl/linux_notification_center/archive/640ce0fc05a68f2c28be3d9f27fe73516d4332f9.tar.gz";
-  #       sha256 = "sha256-/9VjXFgbBz/OXjxu8/N7enNdVs1sQZmUiKhjSTIl5Fg=";
-  #     }}") {};
-
-
   menutray = prev.callPackage ./menutray { };
 
   colr = prev.callPackage ./colr { };
@@ -89,9 +81,6 @@ final: prev:
   dualsub = prev.callPackage ./dualsubtitles { };
 
   # mda-lite = prev.pythonPackages.callPackage ./mda-lite {};
-
-  # install from the repo
-  # neovim-gtk = prev.callPackage ./neovim-gtk { };
 
   subtitles-rs = prev.callPackage ./subtitles-rs { };
 
@@ -101,5 +90,4 @@ final: prev:
   i3dispatch = prev.python3Packages.callPackage ./i3-dispatch { inherit (prev) lib; };
 
   # i3-snapshot = prev.callPackage ./i3-snapshot {};
-  # rofi-scripts = prev.callPackage ./rofi-scripts {};
 }

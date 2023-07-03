@@ -165,6 +165,12 @@ in
         }
         // sharedConfig.sharedKeybindings;
     };
+
+  services.screen-locker = {
+    enable = false;
+    inactiveInterval = 5; # in minutes
+    lockCmd = "${pkgs.i3lock-fancy}/bin/i3lock-fancy";
+    # xssLockExtraOptions
   };
 
 }

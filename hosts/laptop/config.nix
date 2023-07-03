@@ -10,7 +10,7 @@
     ../../nixos/profiles/podman.nix
     ../../modules/sway.nix
     # ./modules/docker-daemon.nix
-    ../../modules/xserver.nix
+    # ../../modules/xserver.nix
     ../../modules/sway.nix
     # ./nixos/modules/redis.nix
     ../../nixos/profiles/steam.nix
@@ -101,8 +101,7 @@
 
   home-manager.users.root = {
    imports = [
-    (import ../../hm/modules/neovim.nix)
-    (import ./../hm/profiles/neovim.nix)
+    ../../hm/profiles/neovim.nix
    ];
 
    home.stateVersion = "23.05";
@@ -112,10 +111,6 @@
    # TODO it should load the whole folder
    imports = [
      # custom modules
-     (import ../../hm/modules/neovim.nix)
-     (import ../../hm/modules/i3.nix)
-     (import ../../hm/modules/zsh.nix)
-     (import ../../hm/modules/xdg.nix)
      ./home.nix
      ../../hm/profiles/nova.nix
      flakeInputs.nova.hmProfiles.standard

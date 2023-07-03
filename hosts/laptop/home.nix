@@ -5,7 +5,6 @@
   imports = [
    # borken
     ../../hm/profiles/vdirsyncer.nix
-    # ../../hm/nushell.nix
     ../../hm/profiles/desktop.nix
     ../../hm/profiles/mail.nix
     ../../hm/profiles/sway.nix
@@ -21,8 +20,6 @@
     ../../hm/profiles/emacs.nix
     ../../hm/profiles/wayland.nix
 
-    # not merged yet
-    # ./hm/autoUpgrade.nix
   ];
 
 
@@ -34,21 +31,6 @@
       "--debug"
     ];
   };
-  # programs.waybar = {
-  #  settings = {
-  #    mainBar = {
-  #      modules-right = [ 
-  #       "battery"
-  #       "bluetooth"
-  #       # "backlight"
-  #      ];
-  #      battery = {
-
-  #       format = "{time} {icon}";
-  #      };
-  #   };
-  #   };
-  # };
 
   home.packages = with pkgs; [
     hlint # (for test with manpage)
@@ -56,12 +38,6 @@
     # simple-scan
   ];
 
-  services.screen-locker = {
-    enable = false;
-    inactiveInterval = 5; # in minutes
-    lockCmd = "${pkgs.i3lock-fancy}/bin/i3lock-fancy";
-    # xssLockExtraOptions
-  };
 
   # for blue tooth applet; must be installed systemwide
   services.blueman-applet.enable = true;

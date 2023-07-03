@@ -126,34 +126,25 @@
       # };
 
       hm-common = { config, lib, pkgs, ... }: {
-                home-manager.verbose = true;
+          home-manager.verbose = true;
           # install through the use of user.users.USER.packages
           home-manager.useUserPackages = true;
           # disables the Home Manager option nixpkgs.*
           home-manager.useGlobalPkgs = true;
+
+          home-manager.sharedModules = [
+            ./hm/modules/neovim.nix
+            ./hm/modules/i3.nix
+            ./hm/modules/zsh.nix
+            ./hm/modules/xdg.nix
+          ];
           home-manager.extraSpecialArgs = {
             inherit secrets;
 			flakeInputs = self.inputs;
           };
+
+          # TODO imports
          };
-
-
-      hm-custom = my_imports: ({ config, lib, pkgs, ... }:
-        {
-          home-manager.users.teto = {
-			# TODO it should load the whole folder
-            imports = my_imports ++ [
-              # custom modules
-              (import ./hm/modules/neovim.nix)
-              (import ./hm/modules/i3.nix)
-              (import ./hm/modules/zsh.nix)
-              (import ./hm/modules/xdg.nix)
-            ];
-          };
-        }
-      )
-      ;
-      # supportedSystems = [ "x86_64-linux" "aarch64-linux" ];
 
     in
     flake-utils.lib.eachSystem [ "x86_64-linux" ]
