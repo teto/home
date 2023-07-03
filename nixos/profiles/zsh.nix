@@ -13,7 +13,7 @@
     # promptInit
     # vteIntegration = false;
     syntaxHighlighting.enable = false;
-    shellAliases = environment.shellAliases // { };
+    shellAliases = config.environment.shellAliases // { };
     # goes to /etc/zshenv
     # shellInit = ''
     # '';
