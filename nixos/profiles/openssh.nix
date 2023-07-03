@@ -9,7 +9,6 @@
 
     # # for sshfs edit or scp
     allowSFTP = true;
-    # type = types.enum ["yes" "without-password" "prohibit-password" "forced-commands-only" "no"];
     # needed since default is true !
     # listenAddresses = [
     #   { addr = "0.0.0.0"; port = 64022; }
@@ -32,13 +31,7 @@
       KbdInteractiveAuthentication = false;
       # PasswordAuthentication = false;
       # PermitRootLogin = "no";
-	  X11Forwarding = true;
+	  X11Forwarding = false;
     };
-
-    # kbdInteractiveAuthentication = false;
-    # logLevel = "VERBOSE";
-    # permitRootLogin = "prohibit-password";
-    # passwordAuthentication = false;
-
   };
 }
