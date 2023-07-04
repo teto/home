@@ -5,7 +5,7 @@
     enable = true;
     # kinda experimental
     # services.openssh.banner = "Hello world";
-    ports = [ 12666 ];
+    # ports = [ 12666 ];
 
     # # for sshfs edit or scp
     allowSFTP = true;
@@ -16,15 +16,9 @@
 
     startWhenNeeded = true;
 
-    # extraConfig = ''
-    # HostKey /home/teto/.ssh/server_id_rsa
-    # '';
-
     # authorizedKeysFiles = [
     #   "~/.ssh/id_rsa.pub"
     # ];
-    # authorizedKeys = { }
-
     # new format
     settings = {
       LogLevel = "VERBOSE";

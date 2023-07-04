@@ -275,7 +275,7 @@
                 nixpkgs.overlays = nixpkgs.lib.attrValues self.overlays;
 
                 imports = [
-                  ./hosts/jakku/config.nix
+                  ./hosts/neotokyo/config.nix
                   # just to check how /etc/nix/machines looks like
                   # ./nixos/modules/distributedBuilds.nix
                 ];
