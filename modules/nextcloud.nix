@@ -1,6 +1,6 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, secrets, ... }:
 let
-  secrets = import ../nixpkgs/secrets.nix;
+  # secrets = import ../nixpkgs/secrets.nix;
 
   # used to setup sops at the bottom of the file
   nextcloudAdminPasswordSopsPath = "nextcloud/adminPassword";
@@ -13,8 +13,10 @@ in
     # Use HTTPS for links
     https = true;
 
-    # machine specific
-    hostName = secrets.jakku.hostname;
+    # New option since NixOS 23.05
+    configureRedis = true;
+    caching.apcu = false;
+
     config = {
       # Further forces Nextcloud to use HTTPS
       overwriteProtocol = "https";
@@ -32,7 +34,7 @@ in
     enableBrokenCiphersForSSE = false;
     # increase security
     enableImagemagick = false;
-    package = pkgs.nextcloud26;
+    package = pkgs.nextcloud27;
     autoUpdateApps.enable = true;
 
     extraApps = with pkgs.nextcloud26Packages.apps; {
@@ -54,31 +56,26 @@ in
   #   mail_sendmailmode = "pipe";
   # };
   # Creating Nextcloud users and configure mail adresses
-  # systemd.services.nextcloud-add-user = {
+  systemd.services.nextcloud-add-user = {
   # --password-from-env  looks for the password in OC_PASS
-  #   script = ''
-  #     export OC_PASS="test123"
-  #     ${config.services.nextcloud.occ}/bin/nextcloud-occ user:add --password-from-env user1
-  #     ${config.services.nextcloud.occ}/bin/nextcloud-occ user:setting user1 settings email "user1@localhost"
-  #     ${config.services.nextcloud.occ}/bin/nextcloud-occ user:add --password-from-env user2
-  #     ${config.services.nextcloud.occ}/bin/nextcloud-occ user:setting user2 settings email "user2@localhost"
-  #     ${config.services.nextcloud.occ}/bin/nextcloud-occ user:setting admin settings email "admin@localhost"
-  #   '';
-  #   serviceConfig = {
-  #     Type = "oneshot";
-  #     User= "nextcloud";
-  #   };
-  #   after = [ "nextcloud-setup.service" ];
-  #   wantedBy = [ "multi-user.target" ];
-  # };
+    script = ''
+      export OC_PASS="test123"
+      ${config.services.nextcloud.occ}/bin/nextcloud-occ user:add --password-from-env teto
+      ${config.services.nextcloud.occ}/bin/nextcloud-occ user:setting teto settings email "${secrets.users.teto.email}"
+    '';
+      # ${config.services.nextcloud.occ}/bin/nextcloud-occ user:add --password-from-env user2
+      # ${config.services.nextcloud.occ}/bin/nextcloud-occ user:setting user2 settings email "user2@localhost"
+      # ${config.services.nextcloud.occ}/bin/nextcloud-occ user:setting admin settings email "admin@localhost"
+    serviceConfig = {
+      Type = "oneshot";
+      User= "nextcloud";
+    };
+    after = [ "nextcloud-setup.service" ];
+    wantedBy = [ "multi-user.target" ];
+  };
 
   networking.firewall.allowedTCPPorts = [ 80 443 ];
 
-  # ${secrets.gitolite_server.hostname}
-  # security.acme.certs."${secrets.jakku.hostname}" = {
-  #   webroot = "/var/www/challenges";
-  #   email = "foo@example.com";
-  # };
 
   sops.secrets.${nextcloudAdminPasswordSopsPath} = {
     mode = "0440";
