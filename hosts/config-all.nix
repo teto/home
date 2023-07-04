@@ -121,29 +121,6 @@ rec {
     '';
   };
 
-
-  # users.defaultUserShell = pkgs.zsh;
-
-  nixpkgs = {
-    config = {
-      allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-        "Oracle_VM_VirtualBox_Extension_Pack"
-        "ec2-api-tools"
-        "jiten"  # japanese software recognition tool
-        "google-chrome"
-        "slack"
-        "steam"
-        "steam-original"
-        "steam-runtime"
-        "steam-run"
-        "sublimetext3"
-        "vscode"
-        "vscode-extension-ms-vsliveshare-vsliveshare"
-        "xmind"
-        "zoom"
-      ];
-    };
-  };
   environment.etc."inputrc".source = ../config/inputrc;
 
   security.sudo = {
@@ -151,8 +128,5 @@ rec {
     # wheelNeedsPassword = true;
   };
 
-  system = {
-    stateVersion = "22.11";
-  };
 
 }

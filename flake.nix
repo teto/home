@@ -459,7 +459,10 @@
 
            };
 
-            neotokyo = genNode ({ name = "neotokyo"; hostname = secrets.jakku.hostname; });
+           neotokyo = genNode ({ name = "neotokyo"; hostname = secrets.jakku.hostname; }) // {
+
+            # user = "teto";
+           };
           };
         # nixpkgs.lib.listToAttrs (
         #   map

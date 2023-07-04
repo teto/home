@@ -15,9 +15,9 @@
 
     };
 
-    runtime."ftplugin/bzl.vim".text = ''
-      setlocal expandtab
-    '';
+    # runtime."ftplugin/bzl.vim".text = ''
+    #   setlocal expandtab
+    # '';
 
     runtime."ftplugin/c.vim".text = ''
       " otherwise vim defaults to ccomplete#Complete

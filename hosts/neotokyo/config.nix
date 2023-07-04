@@ -22,7 +22,7 @@ in
     ./openssh.nix
     ./sops.nix
     ../common-server.nix
-    ../../modules/gitolite.nix
+    # ../../modules/gitolite.nix
     # ../../modules/hercules-ci-agents.nix
     ../../modules/nextcloud.nix
     ../../modules/ntp.nix
@@ -37,6 +37,7 @@ in
   ];
 
 
+  # security.sudo.wheelNeedsPassword = true;
 
   services.nextcloud.hostName = secrets.jakku.hostname;
   security.acme = {
@@ -67,21 +68,10 @@ in
 
     services.gitolite.adminPubkey = secrets.gitolitePublicKey;
 
-    networking.hostName = "jakku";
+    networking.hostName = "neotokyo";
 
-
-    # networking.defaultGateway = secrets.gateway;
-    # networking.nameservers = secrets.nameservers;
-
-    # networking.interfaces.ens192 = secrets.gitolite_server.interfaces;
-
-    # allow to fetch mininet from the host machine
-
-    # nix.settings = {
-    #   trustedUsers = [ "root" "teto" ];
-    # };
   system = {
-    stateVersion = "22.11";
+    stateVersion = "23.05";
   };
 
 }
