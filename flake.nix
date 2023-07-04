@@ -135,6 +135,7 @@
           home-manager.sharedModules = [
             ./hm/modules/neovim.nix
             ./hm/modules/i3.nix
+            ./hm/modules/bash.nix
             ./hm/modules/zsh.nix
             ./hm/modules/xdg.nix
           ];

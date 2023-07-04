@@ -3,6 +3,11 @@
   imports = [
     ./hardware.nix
     ./sshd.nix
+    ./sops.nix
+
+    # this is only to test the new config
+    ./nextcloud.nix
+    # ./gitlab-runner.nix
 
     # todo renommer en workstation
     ../../modules/docker-daemon.nix
@@ -15,7 +20,6 @@
     ../../nixos/profiles/steam.nix
     ../../nixos/profiles/opensnitch.nix
     ../../nixos/profiles/podman.nix
-    # ../../nixos/profiles/gitlab-runner.nix
     ../../nixos/profiles/steam.nix
 
     ../../modules/libvirtd.nix
@@ -32,7 +36,7 @@
   home-manager.users.root = {
    imports = [
     ../../hm/accounts/root/ssh-config.nix
-    ../../hm/profiles/neovim.nix
+    # ../../hm/profiles/neovim.nix
    ];
 
    home.stateVersion = "23.05";
@@ -48,6 +52,7 @@
  # breaks build: doesnt like the "activation-script"
  # nova.hmConfigurations.dev
     ];
+   home.stateVersion = "23.05";
   };
 
   # for testing
@@ -301,4 +306,6 @@
   system.extraSystemBuilderCmds = ''
     ln -s ${config.boot.kernelPackages.kernel.dev}/vmlinux $out/vmlinux
   '';
+
+  system.stateVersion = "23.05";
 }

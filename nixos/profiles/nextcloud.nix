@@ -9,6 +9,7 @@ in
 
   services.nextcloud = {
     enable = true;
+    package = pkgs.nextcloud27;
 
     # Use HTTPS for links
     https = true;
@@ -34,10 +35,9 @@ in
     enableBrokenCiphersForSSE = false;
     # increase security
     enableImagemagick = false;
-    package = pkgs.nextcloud27;
     autoUpdateApps.enable = true;
 
-    extraApps = with pkgs.nextcloud26Packages.apps; {
+    extraApps = with pkgs.nextcloud27Packages.apps; {
       inherit news contacts;
 	  # mail extension can't be download :s 
       # example of how to get a more recent version

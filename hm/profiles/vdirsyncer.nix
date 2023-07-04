@@ -59,23 +59,6 @@ in
     };
   };
 
-  # accounts.contact = {
-  #   basePath = "$HOME/.contacts";
-  #   accounts.main = {
-  #     vdirsyncer.enable = true;
-  #     vdirsyncer.local = {
-  #       type = "filesystem";
-  #       fileExt = ".vcf";
-  #     };
-
-  #     vdirsyncer.remote = {
-  #       type = "carddav";
-  #       url = "https://dav.mailbox.org/carddav/<some hash>";
-  #       userName = "<my email address>";
-  #       passwordCommand = ["~/.dotfiles/scripts/password.sh" "eMail/mailbox.org"];
-  #     };
-  #   };
-  # };
 
   programs.khal = {
    enable = true;
@@ -99,5 +82,9 @@ in
     enable = true;
     # package = pkgs.vdirsyncerStable;  # can conflict
 
+  };
+
+  services.vdirsyncer = {
+    enable = true;
   };
 }

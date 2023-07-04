@@ -346,9 +346,6 @@ in
   # https://github.com/NixOS/nixpkgs/issues/196651
   manual.manpages.enable = true;
 
-  system = {
-    stateVersion = "23.05";
-  };
 
   # TODO fix that
   # systemd.user.sessionVariables = {
