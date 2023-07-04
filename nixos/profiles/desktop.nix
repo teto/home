@@ -8,7 +8,7 @@
   imports = [
     ../../hosts/config-all.nix
 
-    ../../modules/ntp.nix
+    ../../nixos/profiles/ntp.nix
     ../../modules/network-manager.nix
     ../../modules/wireshark.nix
     ../../modules/wifi.nix

@@ -24,8 +24,8 @@ in
     ../common-server.nix
     # ../../modules/gitolite.nix
     # ../../modules/hercules-ci-agents.nix
-    ../../modules/nextcloud.nix
-    ../../modules/ntp.nix
+    ../../nixos/profiles/nextcloud.nix
+    ../../nixos/profiles/ntp.nix
     ../../nixos/profiles/nix-daemon.nix
     ../../nixos/profiles/neovim.nix
 

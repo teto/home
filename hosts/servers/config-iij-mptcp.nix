@@ -11,7 +11,6 @@ in
       ./common-server.nix
       ../modules/openssh.nix
       ../modules/wireshark.nix
-      # ../modules/nextcloud.nix
 
       # wait until it gets upstreamd o/
       # ../modules/mptcp.nix

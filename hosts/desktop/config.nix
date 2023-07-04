@@ -21,7 +21,7 @@
     ../../modules/libvirtd.nix
     ../../modules/xserver.nix
     # ../../modules/redis.nix
-    ../../modules/ntp.nix
+    ../../nixos/profiles/ntp.nix
 
     # just to check how /etc/nix/machines looks like
     ../../modules/distributedBuilds.nix
