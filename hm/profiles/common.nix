@@ -99,10 +99,10 @@
     enableZshIntegration = true;
     enableBashIntegration = true;
   };
-  programs.z-lua = {
-    enable = false;
-    enableZshIntegration = true;
-  };
+  # programs.z-lua = {
+  #   enable = false;
+  #   enableZshIntegration = true;
+  # };
   programs.zoxide = {
     enable = true;
     enableZshIntegration = true;
@@ -139,8 +139,8 @@
       number = true;
     };
     extraConfig = ''
-      " TODO set different paths accordingly, to language server especially
-    '';
+     " TODO set different paths accordingly, to language server especially
+     '';
   };
 
   programs.fzf = {
@@ -207,10 +207,9 @@
       set-option -g status on                # turn the status bar on
       if-shell -b 'head $XDG_CONFIG_HOME/tmux/config' \
         "source-file $XDG_CONFIG_HOME/tmux/config"
-    '';
+      '';
   };
 
-  xdg.configFile."zsh/zshrc.generated".source = ../../config/zsh/zshrc;
   # home.activation.copyZshrc = dagEntryBefore [ "linkGeneration" ] ''
   #   cp $
   #   '';

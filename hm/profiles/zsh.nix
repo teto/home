@@ -1,5 +1,7 @@
 { config, secrets, ... }:
 {
+  xdg.configFile."zsh/zshrc.generated".source = ../../config/zsh/zshrc;
+
   programs.zsh = {
     enable = true;
 

@@ -20,8 +20,8 @@
 
     # will search into $XDG_CONFIG_HOME/neomutt/
     extraConfig = ''
-      source test.rc
-    '';
+     source test.rc
+     '';
 
     # # only available in neomutt
     # set new_mail_command="notify-send --icon='/home/teto/.config/neomutt/mutt-48x48.png' \

@@ -33,22 +33,18 @@ in
 		# source ${fzf-git-sh}/fzf-git.sh
 		# '';
     # })
+      # # zsh passes
+      # set_term_title_for_program () {
+      #     echo "set_term_title_for_program \$1: '$1' \$2: '$2' \$3: '$3'"
+      #     set_term_title "program: $(pwd):'$3'"
+      # }
 
     (let 
       shellSetTitleFunctions = ''
       function set_term_title (){
-        print -n "\e]0;$1\a"
+       echo -ne "\033]0;''${PWD}: (toto)\007"
       }
 
-      set_term_title_for_new_prompt () {
-          echo "set_term_title_for_new_prompt"
-          set_term_title "$(pwd):'$3'"
-      }
-      # zsh passes
-      set_term_title_for_program () {
-          echo "set_term_title_for_program \$1: '$1' \$2: '$2' \$3: '$3'"
-          set_term_title "program: $(pwd):'$3'"
-      }
       '';
 
      in mkIf cfg.termTitle.enable {
@@ -56,8 +52,11 @@ in
       # depending 
       # in my case since I am using starship
       # https://starship.rs/advanced-config/#custom-pre-prompt-and-pre-execution-commands-in-bash
+      # starship_precmd_user_func="set_win_title"
+
       programs.bash.initExtra =  ''
         ${shellSetTitleFunctions}
+        starship_precmd_user_func="set_term_title"
         trap set_term_title DEBUG
         '';
     })

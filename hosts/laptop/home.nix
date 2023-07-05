@@ -3,10 +3,10 @@
 {
 
   imports = [
-   # borken
+   ../desktop/teto/home.nix
+
     ../../hm/profiles/vdirsyncer.nix
     ../../hm/profiles/desktop.nix
-    ../../hm/profiles/mail.nix
     ../../hm/profiles/sway.nix
     # ../../hm/profiles/weechat.nix
     ../../hm/profiles/extra.nix
@@ -20,7 +20,6 @@
     ../../hm/profiles/emacs.nix
     ../../hm/profiles/wayland.nix
 
-    ../../hm/accounts/teto/ssh-config.nix
   ];
 
 
@@ -32,13 +31,6 @@
       "--debug"
     ];
   };
-
-  home.packages = with pkgs; [
-    hlint # (for test with manpage)
-    brightnessctl
-    # simple-scan
-  ];
-
 
   # for blue tooth applet; must be installed systemwide
   services.blueman-applet.enable = true;

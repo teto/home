@@ -2,16 +2,17 @@
 { config, lib, flakeInputs, pkgs, ... }:
 {
   imports = [
-   ./ssh-config.nix
-   ./zsh.nix
-   ./bash.nix
+    ./ssh-config.nix
+    ./zsh.nix
+    ./bash.nix
+    ./mail.nix
+
     # Not tracked, so doesn't need to go in per-machine subdir
     ../../../hm/profiles/android.nix
     ../../../hm/profiles/desktop.nix
     ../../../hm/profiles/sway.nix
     ../../../hm/profiles/neomutt.nix
     ../../../hm/profiles/nushell.nix
-    ../../../hm/profiles/mail.nix
     ../../../hm/profiles/alot.nix
     ../../../hm/profiles/extra.nix
     ../../../hm/profiles/vdirsyncer.nix

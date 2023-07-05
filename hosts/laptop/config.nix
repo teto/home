@@ -23,8 +23,6 @@
     # ../../nixos/profiles/postgresql.nix
     ../../nixos/profiles/home-assistant.nix
     # usually inactive, just to test some stuff
-    # ../../nixos/profiles/gitlab-runner.nix
-
     # ../../modules/libvirtd.nix
 
     # ./modules/hoogle.nix
@@ -36,10 +34,10 @@
     # ./modules/tor.nix
   ];
 
-  services.xserver = {
-    enable = true;
-    autorun = false;
-  };
+  # services.xserver = {
+  #   enable = true;
+  #   autorun = false;
+  # };
 
     # displayManager = {
     #   autoLogin = {
@@ -227,6 +225,8 @@
   programs.gnome-disks = {
     enable = true;
   };
+
+  system.stateVersion = "23.05";
 
   # services.logind = {
   #   # see https://bbs.archlinux.org/viewtopic.php?id=225977 for problems with LID

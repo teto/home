@@ -1,7 +1,7 @@
 { pkgs, lib, config, secrets, ... }:
 let
 
-  hmUtils = pkgs.callPackage ../lib.nix {};
+  hmUtils = pkgs.callPackage ../../../hm/lib.nix {};
 
   getPasswordCommand = account: lib.strings.escapeShellArgs (hmUtils.getPassword account);
 
@@ -241,12 +241,12 @@ in
 {
 
   imports = [
-    ./neomutt.nix
+    ../../../hm/profiles/neomutt.nix
   ];
 
   home.packages = with pkgs; [
     isync
-    mbsyncWrapper
+    # mbsyncWrapper
   ];
 
   accounts.email.maildirBasePath = "${config.home.homeDirectory}/maildir";
@@ -268,7 +268,7 @@ in
 
     hooks = {
       postNew = lib.concatStrings [
-        (builtins.readFile ../../hooks_perso/post-new)
+        (builtins.readFile ../../../hooks_perso/post-new)
       ];
       # postInsert = 
     };
@@ -288,35 +288,6 @@ in
 
 
   # disabled for now, use mbsync instead
-  programs.offlineimap = {
-    enable = false;
-    extraConfig.general = {
-      # interval between updates (in minutes)
-      autorefresh = 0;
-    };
-
-    # TODO get the version for keyring
-    # remotepasseval
-    pythonFile = ''
-      from subprocess import check_output
-
-      def get_pass(service, cmd):
-        return subprocess.check_output(cmd, ).splitlines()[0]
-
-    '';
-
-    extraConfig.default = {
-      # in bytes
-      # The startdate option expects a date in the format yyyy-mm-dd.
-      # can't be used with maxage
-      startdate = "2020-04-01";
-      maxsize = 20000;
-      # works only with local folders of type maildir in daysA
-      # maxage=30
-      synclabels = true;
-    };
-  };
-
   programs.mbsync = {
     enable = true;
     # package = mbsyncWrapper;
@@ -381,8 +352,8 @@ in
     enable = false;
     # TODO factor with my mbsyncwrapper ?
     pollScript = ''
-      check-mail.sh gmail
-    '';
+     check-mail.sh gmail
+     '';
 
     # I don't want it to trigger
     # P => main_window.poll

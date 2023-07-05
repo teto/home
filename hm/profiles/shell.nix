@@ -1,7 +1,4 @@
 { config, pkgs, flakeInputs, lib, secrets, ... } @ args:
-let
-  # secrets = import ../../nixpkgs/secrets.nix;
-in
 {
 
   # imports = [
@@ -16,6 +13,7 @@ in
 
   programs.bash = {
     enable = true;
+    termTitle.enable = true;
 
     # goes to .profile
     sessionVariables = {
