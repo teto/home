@@ -2,7 +2,7 @@ final: prev:
 {
 
   # lib = final.callPackage ./lib.nix {};
-  inherit (final.callPackage ./lib.nix { }) mkRemoteBuilderDesc;
+  # inherit (final.callPackage ./lib.nix { }) mkRemoteBuilderDesc;
 
   rofi-wayland = prev.rofi.overrideAttrs (oa: {
    pname = "rofi-wayland";

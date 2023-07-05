@@ -195,7 +195,6 @@ in
     ./fcitx.nix
     ./firefox.nix
     ./neovim.nix
-    ../accounts/teto/ssh-config.nix
 
   ];
 
@@ -242,6 +241,7 @@ in
   # };
 
   # might trigger nm-applet crash ?
+  # TODO disable it ?
   services.gpg-agent = {
     enable = true;
     defaultCacheTtl = 7200;

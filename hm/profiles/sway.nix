@@ -73,7 +73,7 @@ in
    # https://github.com/nix-community/home-manager/pull/4039
    # https://github.com/NixOS/nixpkgs/pull/237044
 
-  # package = pkgs.swayfx;
+  package = pkgs.swayfx;
    # package = pkgs.sway-unwrapped;
 
    config = 
@@ -269,6 +269,8 @@ in
 	extraConfigEarly = sharedConfig.sharedExtraConfig;
 
     # output HDMI-A-1 bg ~/wallpaper.png stretch
+    # TODO remove the config.shared stuff
+    # create option for the for_window popups
     extraConfig = builtins.readFile ../../config/i3/config.shared + ''
 
       # Use Mouse+$mod to drag floating windows to their wanted position
@@ -314,8 +316,6 @@ in
     export _JAVA_AWT_WM_NONREPARENTING=1
     export XDG_CURRENT_DESKTOP=sway
     export XDG_SESSION_DESKTOP=sway
-    # works without GBM_BACKEND
-    # export GBM_BACKEND=nvidia-drm
     export SDL_VIDEODRIVER=wayland
     export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
     '';

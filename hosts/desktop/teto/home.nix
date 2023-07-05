@@ -2,29 +2,32 @@
 { config, lib, flakeInputs, pkgs, ... }:
 {
   imports = [
+   ./ssh-config.nix
+   ./zsh.nix
+   ./bash.nix
     # Not tracked, so doesn't need to go in per-machine subdir
-    ../../hm/profiles/android.nix
-    ../../hm/profiles/desktop.nix
-    ../../hm/profiles/sway.nix
-    ../../hm/profiles/neomutt.nix
-    ../../hm/profiles/nushell.nix
-    ../../hm/profiles/mail.nix
-    ../../hm/profiles/alot.nix
+    ../../../hm/profiles/android.nix
+    ../../../hm/profiles/desktop.nix
+    ../../../hm/profiles/sway.nix
+    ../../../hm/profiles/neomutt.nix
+    ../../../hm/profiles/nushell.nix
+    ../../../hm/profiles/mail.nix
+    ../../../hm/profiles/alot.nix
+    ../../../hm/profiles/extra.nix
+    ../../../hm/profiles/vdirsyncer.nix
+    ../../../hm/profiles/experimental.nix
+    ../../../hm/profiles/japanese.nix
+    ../../../hm/profiles/fcitx.nix
+    ../../../hm/profiles/nova.nix
+    ../../../hm/profiles/vscode.nix
+    ../../../hm/profiles/extra.nix
+      # custom modules
+      ../../../hm/profiles/nova.nix
     # ../../hm/profiles/emacs.nix
-    ../../hm/profiles/extra.nix
     # ../../hm/profiles/weechat.nix
-    ../../hm/profiles/vdirsyncer.nix
      flakeInputs.nova.hmProfiles.standard
      flakeInputs.nova.hmProfiles.dev
      flakeInputs.nova.hmProfiles.devops
-     ../../hm/profiles/experimental.nix
-     ../../hm/profiles/japanese.nix
-     ../../hm/profiles/fcitx.nix
-     ../../hm/profiles/nova.nix
-     ../../hm/profiles/vscode.nix
-     ../../hm/profiles/extra.nix
-      # custom modules
-      ../../hm/profiles/nova.nix
 
   ];
 
@@ -68,6 +71,12 @@
     # signal-desktop # installe a la main
     # gnome.gnome-maps
     # xorg.xwininfo # for stylish
+    pciutils # for lspci
+    ncdu # to see disk usage
+    # bridge-utils# pour  brctl
+    wirelesstools # to get iwconfig
+    # aircrack-ng
+
   ];
 
   # you can switch from cli with xkb-switch or xkblayout-state

@@ -46,9 +46,9 @@
   home-manager.users.teto = {
     # TODO it should load the whole folder
     imports = [
-     ./home.nix
- # breaks build: doesnt like the "activation-script"
- # nova.hmConfigurations.dev
+     ./teto/home.nix
+      # breaks build: doesnt like the "activation-script"
+     # nova.hmConfigurations.dev
     ];
    home.stateVersion = "23.05";
   };
@@ -74,14 +74,6 @@
    ];
 
   };
-
-  users.users.teto.packages = with pkgs; [
-    pciutils # for lspci
-    ncdu # to see disk usage
-    # bridge-utils# pour  brctl
-    wirelesstools # to get iwconfig
-    # aircrack-ng
-  ];
 
   # nesting clones can be useful to prevent GC of some packages
   # https://nixos.org/nix-dev/2017-June/023967.html
@@ -228,12 +220,11 @@
   # broken in https://github.com/NixOS/nixpkgs/issues/56724
   # programs.bcc.enable = true;
 
-  services.xserver = {
-    enable = true;
-    autorun = false;
-
-    windowManager.i3.enable = true;
-  };
+  # services.xserver = {
+  #   enable = true;
+  #   autorun = false;
+  #   windowManager.i3.enable = true;
+  # };
 
   # this is required as well
   hardware.nvidia = {
@@ -285,6 +276,7 @@
   ];
   # security.sudo.wheelNeedsPassword = ;
   # disabled to run stable-diffusion
+  # TODO this should go somewhere else
   services.xserver = {
     videoDrivers = [
       "nvidia"

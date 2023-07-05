@@ -8,13 +8,7 @@
     # $HOME is prepend hence the issues
     dotDir = ".config/zsh";
     # autosuggestion.enable = true;
-    sessionVariables = config.programs.bash.sessionVariables // {
-      # HISTFILE="$XDG_CACHE_HOME/zsh_history";
-      # TODO load this from sops instead
-      GITHUB_TOKEN = secrets.githubToken;
-      # TODO add it to sops
-      OPENAI_API_KEY = secrets.OPENAI_API_KEY;
-    };
+    sessionVariables = {};
     history = {
       # HISTSIZE
       # loaded in memory, careful since it slows down zsh
@@ -37,8 +31,8 @@
 
     autocd = true;
 
-    initExtraFirst = "
-      ";
+    # initExtraFirst = "
+    #   ";
 
     enableCompletion = true;
     #   bindkey "^R" history-incremental-search-backward

@@ -12,4 +12,20 @@
     in
     ["${script}/bin/pass-show" accountName];
 
+  # TODO hopefully should get upstreamed
+  mkRemoteBuilderDesc = machine:
+    with lib;
+    concatStringsSep " " ([
+      "${optionalString (machine.sshUser != null) "${machine.sshUser}@"}${machine.hostName}"
+      (if machine.system != null then machine.system else if machine.systems != [ ] then concatStringsSep "," machine.systems else "-")
+      (if machine.sshKey != null then machine.sshKey else "-")
+      (toString machine.maxJobs)
+      (toString machine.speedFactor)
+      (concatStringsSep "," (machine.supportedFeatures ++ machine.mandatoryFeatures))
+      (concatStringsSep "," machine.mandatoryFeatures)
+      # assume we r always > 2.4
+	  (if machine.publicHostKey != null then machine.publicHostKey else "-")
+    ]
+    );
+
 }

@@ -1,21 +1,6 @@
 { config, pkgs, flakeInputs, lib, secrets, ... } @ args:
 let
   # secrets = import ../../nixpkgs/secrets.nix;
-
-  mkRemoteBuilderDesc = machine:
-    with lib;
-    concatStringsSep " " ([
-      "${optionalString (machine.sshUser != null) "${machine.sshUser}@"}${machine.hostName}"
-      (if machine.system != null then machine.system else if machine.systems != [ ] then concatStringsSep "," machine.systems else "-")
-      (if machine.sshKey != null then machine.sshKey else "-")
-      (toString machine.maxJobs)
-      (toString machine.speedFactor)
-      (concatStringsSep "," (machine.supportedFeatures ++ machine.mandatoryFeatures))
-      (concatStringsSep "," machine.mandatoryFeatures)
-      # assume we r always > 2.4
-	  (if machine.publicHostKey != null then machine.publicHostKey else "-")
-    ]
-    );
 in
 {
 
@@ -33,35 +18,7 @@ in
     enable = true;
 
     # goes to .profile
-    sessionVariables = let 
-     prod-runners = builtins.fromJSON (builtins.readFile "${flakeInputs.nova-ci}/configs/prod/runners-generated.json");
-      defaultMandatoryFeatures = [];
-      remoteBuilders = lib.listToAttrs (
-          map
-            (attr:
-            # attrs should only contain
-            # So seems like there is no way to fix those
-            # secrets.nova-runner-1.sshUser 
-            lib.nameValuePair 
-             (lib.toUpper "NOVA_${attr.runnerName}")
-             (mkRemoteBuilderDesc (attr // {
-               sshUser = secrets.nova-gitlab-runner-1.userName;
-               sshKey = secrets.nova-runner-1.sshKey;
-               system = "x86_64-linux";
-               maxJobs = 10;
-               speedFactor = 2;
-               supportedFeatures = [ ];
-               mandatoryFeatures = defaultMandatoryFeatures;
-               # TODO to fill up
-               publicHostKey = null;
-               hostName = attr.hostname;
-              })
-              )
-            )
-            # TODO we should expose the resulting nix expressions directly
-             prod-runners);
-
-     in {
+    sessionVariables = {
       HISTTIMEFORMAT = "%d.%m.%y %T ";
       # CAREFUL 
       # HISTFILE="$XDG_CACHE_HOME/bash_history";
@@ -71,8 +28,7 @@ in
 	  NOVA_CACHE_PROD = secrets.novaNixCache.prod;
 
 	  # wayland variables
-
-    } // remoteBuilders;
+    };
 
     # "ignorespace"
     historyControl = [ ];

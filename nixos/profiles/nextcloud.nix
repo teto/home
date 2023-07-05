@@ -37,8 +37,11 @@ in
     enableImagemagick = false;
     autoUpdateApps.enable = true;
 
-    extraApps = with pkgs.nextcloud27Packages.apps; {
-      inherit news contacts;
+    extraApps = with config.services.nextcloud.package.packages.apps; {
+
+
+     # inherit news; # removed 'cos gives a wrong error
+     inherit contacts;
 	  # mail extension can't be download :s 
       # example of how to get a more recent version
       # contacts = pkgs.fetchNextcloudApp rec {
