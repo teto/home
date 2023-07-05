@@ -20,6 +20,7 @@
     ../../hm/profiles/emacs.nix
     ../../hm/profiles/wayland.nix
 
+    ../../hm/accounts/teto/ssh-config.nix
   ];
 
 

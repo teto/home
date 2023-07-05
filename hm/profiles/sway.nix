@@ -17,21 +17,19 @@ in
     grim # replace scrot/flameshot
     kanshi # autorandr-like
     kickoff # transparent launcher for wlr-root
-    fnott # notification tool
     wofi # rofi-like
     slurp # capture tool
     wf-recorder # for screencasts
     # bemenu as a dmenu replacement
     wl-clipboard # wl-copy / wl-paste
     wdisplays # to show 
-    wob # to display a progressbar
     swaybg # to set wallpaper
     swayimg # imageviewer
-    swaynotificationcenter # top cool broken
-    # could use fnott as well !
+    swaynotificationcenter # top cool
     swaynag-battery # https://github.com/NixOS/nixpkgs/pull/175905
     sway-launcher-desktop # fzf-based launcher
-    sov  # sway overview https://github.com/milgra/sov
+    # sway overview, draws layouts for each workspace: dope https://github.com/milgra/sov
+    sov  
     wlr-randr # like xrandr
     nwg-bar  # locks nothing
     nwg-drawer # launcher
@@ -42,8 +40,8 @@ in
     shotman # -c region 
     tessen # handle passwords
     waybar
+    # eventually ironbar
     wlprop # like xprop, determines window parameters
-    polybar
     # swappy # e https://github.com/jtheoof/swappy
     # https://github.com/artemsen/swaykbdd # per window keyboard layout
     # wev # event viewer https://git.sr.ht/~sircmpwn/wev/
@@ -68,14 +66,8 @@ in
 
   wayland.windowManager.sway = {
    enable = true;
+   # creates a sway-session target that is started on wayland start
    systemd.enable = true;
-     # defaultSwayPackage = pkgs.sway.override {
-    # extraSessionCommands = cfg.extraSessionCommands;
-    # extraOptions = cfg.extraOptions;
-    # withBaseWrapper = cfg.wrapperFeatures.base;
-    # withGtkWrapper = cfg.wrapperFeatures.gtk;
-  # };
-
 
    # disabling swayfx until  those get merged 
    # https://github.com/nix-community/home-manager/pull/4039
@@ -85,7 +77,6 @@ in
    # package = pkgs.sway-unwrapped;
 
    config = 
-   # (builtins.removeAttrs config.xsession.windowManager.i3.config [ "startup" "bars" ])
       {
         terminal = term;
         workspaceAutoBackAndForth = true;
@@ -237,6 +228,8 @@ in
 
         "$GroupFr+$mod+ampersand" = "layout toggle all";
         "$GroupUs+$mod+1" = "layout toggle all";
+        # TODO https://crates.io/crates/sway-scratchpad
+        # "F12" = "exec ~/.cargo/bin/sway";
         # "$mod+F1" = [instance="pad_(?!ncmpcpp)"] move scratchpad; [instance="pad_ncmpcpp"] scratchpad show
 
         # "${mod}+Ctrl+L" = "exec ${pkgs.swaylock}/bin/swaylock";

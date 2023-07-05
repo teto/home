@@ -68,15 +68,6 @@
       # accelSpeed = "1.55";
     };
 
-    # au moins pour le laptop
-    # config = ''
-    #   	  Section "Device"
-    #   		  Identifier  "Intel Graphics" 
-    #   		  Driver      "intel"
-    #   		  Option      "Backlight"  "intel_backlight"
-    #   	  EndSection
-    #   	'';
-
     # to autostart i3
     # https://discourse.nixos.org/t/opening-i3-from-home-manager-automatically/4849/7
     # desktopManager.defaultSession = "gnome"

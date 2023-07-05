@@ -2,6 +2,7 @@
 {
   imports = [
     ./sshd.nix
+    ./sops.nix
     ./hardware.nix
     ../../modules/distributedBuilds.nix
     ../config-all.nix

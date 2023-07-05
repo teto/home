@@ -1,10 +1,5 @@
 { config, secrets, ... }:
 {
-
- # imports = [
- #   (import ../modules/zsh.nix)
- #  ];
-
   programs.zsh = {
     enable = true;
 
@@ -17,6 +12,7 @@
       # HISTFILE="$XDG_CACHE_HOME/zsh_history";
       # TODO load this from sops instead
       GITHUB_TOKEN = secrets.githubToken;
+      # TODO add it to sops
       OPENAI_API_KEY = secrets.OPENAI_API_KEY;
     };
     history = {

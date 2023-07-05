@@ -19,14 +19,12 @@ let
 in
 {
 
-  imports = [
-    ./zsh.nix
-  ];
+  # imports = [
+  #   ./zsh.nix
+  # ];
 
   # 
   programs.atuin = {
-
-
     enable = false;
     enableZshIntegration = true;
   };

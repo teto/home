@@ -1,7 +1,7 @@
-{ config, modulesPath, pkgs, lib, ... }:
-let
-  secrets = import ../../nixpkgs/secrets.nix;
-in
+{ config, secrets, modulesPath, pkgs, lib, ... }:
+# let
+  # secrets = import ../../nixpkgs/secrets.nix;
+# in
 {
     boot.initrd.kernelModules = [
       "xen-blkfront" "xen-tpmfront" "xen-kbdfront" "xen-fbfront"
@@ -16,7 +16,6 @@ in
 
   imports = [
     # for gandi
-
     "${modulesPath}/virtualisation/openstack-config.nix"
     # ./hardware.nix
     ./openssh.nix
@@ -24,7 +23,7 @@ in
     ../common-server.nix
     # ../../modules/gitolite.nix
     # ../../modules/hercules-ci-agents.nix
-    ../../nixos/profiles/nextcloud.nix
+
     ../../nixos/profiles/ntp.nix
     ../../nixos/profiles/nix-daemon.nix
     ../../nixos/profiles/neovim.nix
@@ -39,36 +38,14 @@ in
 
   # security.sudo.wheelNeedsPassword = true;
 
-  services.nextcloud.hostName = secrets.jakku.hostname;
-  security.acme = {
-    acceptTerms = true;
-    defaults.email = "acme@neotokyo.fr";
-  };
-
-  services.nginx.virtualHosts.${config.services.nextcloud.hostName} =  {
-        ## Force HTTP redirect to HTTPS
-        forceSSL = true;
-        ## LetsEncrypt
-        enableACME = true;
-  };
-
-
-  services.nginx = {
-    enable = true;
-    # Setup Nextcloud virtual host to listen on ports
-    # virtualHosts = {
-    #   secrets.jakku.hostname = {
-    #   };
-    # };
- };
   environment.systemPackages = with pkgs; [
 	tmux
 	# weechat
   ];
 
-    services.gitolite.adminPubkey = secrets.gitolitePublicKey;
+  services.gitolite.adminPubkey = secrets.gitolitePublicKey;
 
-    networking.hostName = "neotokyo";
+  networking.hostName = "neotokyo";
 
   system = {
     stateVersion = "23.05";

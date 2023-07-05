@@ -8,6 +8,7 @@
     # this is only to test the new config
     ./nextcloud.nix
     # ./gitlab-runner.nix
+    ../../nixos/profiles/postgresql.nix
 
     # todo renommer en workstation
     ../../modules/docker-daemon.nix
@@ -16,21 +17,18 @@
     ../../nixos/profiles/desktop.nix
     ../../nixos/profiles/nix-daemon.nix
     ../../nixos/profiles/experimental.nix
-    ../../nixos/profiles/postgresql.nix
     ../../nixos/profiles/steam.nix
     ../../nixos/profiles/opensnitch.nix
     ../../nixos/profiles/podman.nix
     ../../nixos/profiles/steam.nix
 
     ../../modules/libvirtd.nix
-    ../../modules/xserver.nix
+    # ../../modules/xserver.nix
     # ../../modules/redis.nix
     ../../nixos/profiles/ntp.nix
 
     # just to check how /etc/nix/machines looks like
     ../../modules/distributedBuilds.nix
-
-    # ./modules/tor.nix
   ];
 
   home-manager.users.root = {

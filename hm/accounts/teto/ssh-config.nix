@@ -40,34 +40,33 @@ in
         identityFile = "~/.ssh/nova_key";
       };
 	  
+      # ovh1 = {
+      #   # checkHostIP
+      #   identityFile = "~/.ssh/nova_key";
+      #   user = "matthieu.coudron";
+      #   host = "ovh1";
+      #   hostname = "ovh-hybrid-runner-1.devops.novadiscovery.net";
+      #   identitiesOnly = true;
+      #   # experimental
+      #   # https://github.com/nix-community/home-manager/pull/2992
+      #   # match = "ovh1";
+		# port = 12666;
+      # };
 
-      ovh1 = {
-        # checkHostIP
-        identityFile = "~/.ssh/nova_key";
-        user = "matthieu.coudron";
-        host = "ovh1";
-        hostname = "ovh-hybrid-runner-1.devops.novadiscovery.net";
-        identitiesOnly = true;
-        # experimental
-        # https://github.com/nix-community/home-manager/pull/2992
-        # match = "ovh1";
-		port = 12666;
-      };
+      # gitlab = {
+      #   host = "gitlab.devops.novadiscovery.net";
+      #   user = "ubuntu";
+      #   identityFile = "~/.ssh/nova_key";
+      #   identitiesOnly = true;
+      # };
 
-      gitlab = {
-        host = "gitlab.devops.novadiscovery.net";
-        user = "ubuntu";
-        identityFile = "~/.ssh/nova_key";
-        identitiesOnly = true;
-      };
-
-      novinfra = {
-        host = "data.novinfra.net";
-        user = "ubuntu";
-        # le port depend du service
-        # port = 2207;
-        identityFile = "~/.ssh/nova_key";
-      };
+      # novinfra = {
+      #   host = "data.novinfra.net";
+      #   user = "ubuntu";
+      #   # le port depend du service
+      #   # port = 2207;
+      #   identityFile = "~/.ssh/nova_key";
+      # };
     };
 
     extraConfig = 
