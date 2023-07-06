@@ -36,6 +36,7 @@
     # you have to create /var/lib/pgadmin and /var/log/pgadmin
     # and give pgadmin:users ownership of both folders
     # run the pgadmin pre-start systemd script is easier
+    # best to use dbeaver instead
 
     enable = false;
     initialEmail = "toto@doesnotexist.com";

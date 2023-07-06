@@ -32,6 +32,22 @@
     ];
   };
 
+  programs.waybar = {
+   settings = {
+     mainBar = {
+       modules-right = [ 
+        "battery"
+        "bluetooth"
+        # "backlight"
+       ];
+       battery = {
+
+        format = "{time} {icon}";
+       };
+    };
+    };
+  };
+
   # for blue tooth applet; must be installed systemwide
   services.blueman-applet.enable = true;
 

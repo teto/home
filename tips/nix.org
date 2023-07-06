@@ -113,7 +113,14 @@ https://github.com/NixOS/nixpkgs/pull/185719
  # how to regen the nixos doc:
  $  ./nixos/doc/manual/md-to-db.sh
  
+ * cross building
+
+ For instance to build for another architecture
  
+ nix-build -A pkgsCross.aarch64-android.neovim
+
+ with flakes, one should use legacyPackages
+
  # nix shell 
  
  does not execute hooks !

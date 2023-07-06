@@ -2,17 +2,15 @@
 [core]
 # sshCommand=ssh -vvv
 # compactionHeuristic
+fsmonitor = true
+  # whitespace = space-before-tab
+compression = 0
+# gitproxy  = git-proxy
 
 [push]
   default = simple
 
 # http.postBuffer 52428800
-
-[core]
-  # whitespace = space-before-tab
-compression = 0
-# gitproxy  = git-proxy
-
 
 [credential "https://github.com"]
 	username = teto
@@ -32,6 +30,9 @@ compression = 0
 # diff.new        "green bold"
 # diff.whitespace "red reverse"
 
+[gpg]
+# format
+# signingkey
 
 [sendemail]
   chainreplyto = false
@@ -88,6 +89,3 @@ compression = 0
   # look at https://github.com/fcsonline/dotfiles/blob/master/git/gitconfig
   # for fzf+git aliases
   pamfix= !HASH=`git log --pretty=oneline | head -50 | fzf` && git fixit `echo ${HASH} | awk '{ print $1 }'`
-
-[core]
-	fsmonitor = true

@@ -21,7 +21,9 @@ in
     # https://git-scm.com/book/en/v2/Git-Tools-Signing-Your-Work
     signing = {
       signByDefault = false;
-      key = "64BB6787";
+
+      # key = "64BB6787"; # old key
+      key = "88A4D2369454E51E"; # new key
     };
 
     aliases = {

@@ -20,7 +20,7 @@
     # ../../nixos/profiles/cron.nix
     ../../nixos/profiles/kanata.nix
     ../../nixos/profiles/nix-daemon.nix
-    # ../../nixos/profiles/postgresql.nix
+    ../../nixos/profiles/postgresql.nix
     ../../nixos/profiles/home-assistant.nix
     # usually inactive, just to test some stuff
     # ../../modules/libvirtd.nix
@@ -33,18 +33,6 @@
     # ./modules/kubernetes.nix
     # ./modules/tor.nix
   ];
-
-  # services.xserver = {
-  #   enable = true;
-  #   autorun = false;
-  # };
-
-    # displayManager = {
-    #   autoLogin = {
-    #     enable = true;
-    #     user = "teto";
-    #   };
-      # defaultSession = "none+i3";
 
   # TODO conditionnally enable it
   # networking.wireless.iwd.enable = true;
@@ -101,6 +89,7 @@
   home-manager.users.root = {
    imports = [
     ../../hm/profiles/neovim.nix
+    ../desktop/root/ssh-config.nix
    ];
 
    home.stateVersion = "23.05";
@@ -227,7 +216,7 @@
   };
 
   system.stateVersion = "23.05";
-
+  
   # services.logind = {
   #   # see https://bbs.archlinux.org/viewtopic.php?id=225977 for problems with LID
   #   # lidSwitch = "ignore";
