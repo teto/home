@@ -1,6 +1,10 @@
 hurl --test basic.hurl
 hurl --variables-file vars.env test.hurl
 
+Add --verbose to see queries and --very-verbose to see
+
+--check-root
+
 export HURL_host=example.net
 export HURL_id=1234 
 

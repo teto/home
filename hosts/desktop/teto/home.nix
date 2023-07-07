@@ -6,6 +6,7 @@
     ./zsh.nix
     ./bash.nix
     ./mail.nix
+    ./git.nix
 
     # Not tracked, so doesn't need to go in per-machine subdir
     ../../../hm/profiles/android.nix

@@ -15,24 +15,9 @@ compression = 0
 [credential "https://github.com"]
 	username = teto
 
-[credential "https://git.novadiscovery.net/jinko/scenario"]
-	username = platform
+# [credential "https://git.novadiscovery.net/jinko/scenario"]
+# 	username = platform
 
-# diff-highlight.oldNormal    "red bold"
-# diff-highlight.oldHighlight "red bold 52"
-# diff-highlight.newNormal    "green bold"
-# diff-highlight.newHighlight "green bold 22"
-# 
-# diff.meta       "yellow"
-# diff.frag       "magenta bold"
-# diff.commit     "yellow bold"
-# diff.old        "red bold"
-# diff.new        "green bold"
-# diff.whitespace "red reverse"
-
-[gpg]
-# format
-# signingkey
 
 [sendemail]
   chainreplyto = false
