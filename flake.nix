@@ -461,6 +461,7 @@
            };
 
            neotokyo = genNode ({ name = "neotokyo"; hostname = secrets.jakku.hostname; }) // {
+             sshOpts = [ "-t" ];
 
             # user = "teto";
            };

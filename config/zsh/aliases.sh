@@ -1,6 +1,10 @@
 # vim: set et fenc=utf-8 ff=unix sts=0 sw=4 ts=4 fdm=marker :
 # TODO move to home-manager ?
 
+function rfw(){
+    readlink -f $(which "$1")
+}
+
 
 # to edit nixos kernel config
 # then type $ make menuconfig
@@ -17,7 +21,7 @@ alias local-rebuild="nixos-rebuild --flake ~/home --override-input nixpkgs-teto 
 alias mg='if [ -z ${BW_SESSION} ]; then export BW_SESSION=$(bw unlock --raw); fi && make gitops'
 # TODO check return type in bw unlock --check 
 alias bn='if [ -z ${BW_SESSION} ]; then export BW_SESSION=$(bw unlock --raw); fi && nix develop'
-alias bnr='if [ -z ${BW_SESSION} ]; then export BW_SESSION=$(bw unlock --raw); fi && nix develop --option builders "$NOVA_RUNNER3"'
+alias bnr='if [ -z ${BW_SESSION} ]; then export BW_SESSION=$(bw unlock --raw); fi && nix develop --option builders "$NOVA_OVH1"'
 alias nfs='nix flake show'
 
 # https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz

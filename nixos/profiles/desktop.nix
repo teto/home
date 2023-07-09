@@ -9,9 +9,9 @@
     ../../hosts/config-all.nix
 
     ../../nixos/profiles/ntp.nix
-    ../../modules/network-manager.nix
-    ../../modules/wireshark.nix
-    ../../modules/wifi.nix
+    ../../nixos/profiles/wireshark.nix
+    ../../nixos/modules/network-manager.nix
+    ../../nixos/modules/wifi.nix
 
     ./zsh.nix
     ./gnome.nix
@@ -110,6 +110,7 @@
       # Adobe Source Han Sans
       source-han-sans #sourceHanSansPackages.japanese
       fira-code-symbols # for ligatures
+      iosevka
       # noto-fonts
     ];
 
@@ -127,17 +128,10 @@
     };
   };
 
-  systemd.packages = [
-    # pkgs.deadd-notification-center
-
-  ];
-
-  # udisks2 GUI
-  # services.udisks2.enable = true;
+  # systemd.packages = [ ];
 
   # seemingly working for chromium only, check for firefox
   programs.browserpass.enable = true;
-
 
   nix = {
 
@@ -214,10 +208,6 @@
   # programs.file-roller.enable = true;
 
   programs.system-config-printer.enable = true;
-
-  users.users.teto = {
-    shell = pkgs.zsh;
-  };
 
   # system.activationScripts.report-nixos-changes = ''
   #   PATH=$PATH:${lib.makeBinPath [ pkgs.nvd pkgs.nix ]}

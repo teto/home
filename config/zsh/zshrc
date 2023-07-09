@@ -8,10 +8,6 @@
 # prompt off
 
 current_folder="${0:a:h}"
-function rfw(){
-    readlink -f $(which "$1")
-}
-
 . "$ZDOTDIR/aliases.zsh"
 
 # export PATH="${XDG_DATA_HOME}/../bin:$PATH"

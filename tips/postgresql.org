@@ -3,7 +3,7 @@ pg_ctl start
 
 createuser owning_user
 
-
+sudo -u postgres psql 
 
 As my own user:
  #+BEGIN_SRC sh
@@ -23,7 +23,10 @@ postgresql:///test?host=%2Ftmp%2Fephemeralpg.qG7Ya5
 ```
 
 export POSTGRESQL_CONNECTION=postgres:///run/postgresql
-<<<<<<< Updated upstream
+
+* How to remove a DB
+
+ dropb DBNAME
 
 https://cloudblue.freshdesk.com/support/solutions/articles/44001888168-how-to-increase-postgresql-log-level-
 

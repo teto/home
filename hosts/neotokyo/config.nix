@@ -21,8 +21,8 @@
     ./openssh.nix
     ./sops.nix
     ../common-server.nix
-    # ../../modules/gitolite.nix
-    # ../../modules/hercules-ci-agents.nix
+    # ../../nixos/modules/gitolite.nix
+    # ../../nixos/modules/hercules-ci-agents.nix
 
     ../../nixos/profiles/ntp.nix
     ../../nixos/profiles/nix-daemon.nix

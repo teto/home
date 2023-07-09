@@ -1,7 +1,5 @@
 { config, pkgs, options, lib, ... }:
-let
-in 
- {
+{
   programs.git = {
     userName = "Matthieu Coudron";
     # userEmail = "tiny.idea7043@fastmail.com";

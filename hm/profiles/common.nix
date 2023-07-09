@@ -13,9 +13,6 @@
 
   xdg.mime.enable = true;
 
-  home.username = "teto";
-  home.homeDirectory = "/home/teto";
-
   # home.extraOutputsToInstall = [ "man" "doc" ];
   programs.man.enable = true;
 

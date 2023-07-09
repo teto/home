@@ -34,6 +34,7 @@ in
     nwg-bar  # locks nothing
     nwg-drawer # launcher
     nwg-menu
+    nwg-dock # a nice dock 
     wlogout
     swaylock
     sway-contrib.grimshot # contains "grimshot" for instance
@@ -73,7 +74,7 @@ in
    # https://github.com/nix-community/home-manager/pull/4039
    # https://github.com/NixOS/nixpkgs/pull/237044
 
-  package = pkgs.swayfx;
+  # package = pkgs.swayfx;
    # package = pkgs.sway-unwrapped;
 
    config = 

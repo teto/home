@@ -4,15 +4,14 @@
     ./sshd.nix
     ./sops.nix
     ./hardware.nix
-    ../../modules/distributedBuilds.nix
     ../config-all.nix
+    ../../nixos/modules/distributedBuilds.nix
     ../../nixos/profiles/desktop.nix
     ../../nixos/profiles/rstudio-server.nix
     ../../nixos/profiles/podman.nix
-    ../../modules/sway.nix
-    # ./modules/docker-daemon.nix
+    ../../nixos/modules/sway.nix
+    # ../../nixos/modules/docker-daemon.nix
     # ../../modules/xserver.nix
-    ../../modules/sway.nix
     # ./nixos/modules/redis.nix
     ../../nixos/profiles/steam.nix
     ../../nixos/profiles/qemu.nix
@@ -23,15 +22,10 @@
     ../../nixos/profiles/postgresql.nix
     ../../nixos/profiles/home-assistant.nix
     # usually inactive, just to test some stuff
-    # ../../modules/libvirtd.nix
+    # ../../nixos/modules/libvirtd.nix
 
-    # ./modules/hoogle.nix
     # ./profiles/pixiecore.nix
-    # ./modules/mptcp.nix
 
-    # may provoke some issues like switch hanging
-    # ./modules/kubernetes.nix
-    # ./modules/tor.nix
   ];
 
   # TODO conditionnally enable it

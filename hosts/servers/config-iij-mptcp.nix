@@ -9,8 +9,8 @@ in
       # Include the results of the hardware scan.
       ./hardware-iij-mptcp.nix
       ./common-server.nix
-      ../modules/openssh.nix
-      ../modules/wireshark.nix
+      ../../nixos/profiles/openssh.nix
+      ../../nixos/profiles/wireshark.nix
 
       # wait until it gets upstreamd o/
       # ../modules/mptcp.nix

@@ -11,7 +11,7 @@
     ../../nixos/profiles/postgresql.nix
 
     # todo renommer en workstation
-    ../../modules/docker-daemon.nix
+    ../../nixos/modules/docker-daemon.nix
 
     ../config-all.nix
     ../../nixos/profiles/desktop.nix
@@ -22,18 +22,18 @@
     ../../nixos/profiles/podman.nix
     ../../nixos/profiles/steam.nix
 
-    ../../modules/libvirtd.nix
+    ../../nixos/modules/libvirtd.nix
     # ../../modules/xserver.nix
     # ../../modules/redis.nix
     ../../nixos/profiles/ntp.nix
 
     # just to check how /etc/nix/machines looks like
-    ../../modules/distributedBuilds.nix
+    ../../nixos/modules/distributedBuilds.nix
   ];
 
   home-manager.users.root = {
    imports = [
-    ../../hm/accounts/root/ssh-config.nix
+    ./root/ssh-config.nix
     # ../../hm/profiles/neovim.nix
    ];
 
@@ -54,26 +54,8 @@
   };
 
   # for testing
-  services.openssh = {
-
-   # tu peux en avoir plusieurs sur ce mode
-   # HostKey /etc/ssh/ssh_host_rsa_key
-   # HostKey /etc/ssh/ssh_host_ed25519_key
-   # alors que on a 
-   # AuthorizedKeysFile %h/.ssh/authorized_keys %h/.ssh/authorized_keys2 /etc/ssh/authorized_keys.d/%u
-	hostKeys = [
-	  {
-		bits = 4096;
-		path = "/etc/ssh/ssh_host_rsa_key";
-		type = "rsa";
-	  }
-	  {
-		path = "/etc/ssh/ssh_host_ed25519_key";
-		type = "ed25519";
-	  }
-   ];
-
-  };
+  # services.openssh = {
+  # };
 
   # nesting clones can be useful to prevent GC of some packages
   # https://nixos.org/nix-dev/2017-June/023967.html

@@ -11,6 +11,9 @@
 
     # enableTCPIP = true; # if false, use TCP via localhost only or via socket
 
+    # pg_hba.conf is generated through authentication bit
+    # authentication = 
+
     # ensureUsers =  [];
     # initdbArgs
     # initialScript = ./postgresql-init.txt;
@@ -49,8 +52,6 @@
   # environment.etc."pgadmin/config_system.py".text = ''
   # SERVER_MODE=None
   # '';
-
-
   # 
 }
 

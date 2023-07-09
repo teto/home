@@ -1,6 +1,6 @@
 { config, pkgs, lib, ... } @ args:
 let
-  secrets = import ./secrets.nix;
+  secrets = import ../../nixpkgs/secrets.nix;
 in
 {
   programs.git = {

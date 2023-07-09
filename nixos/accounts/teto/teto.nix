@@ -5,6 +5,9 @@ in
 {
 
   users.users.teto = {
+
+    shell = pkgs.zsh;
+
     isNormalUser = true; # creates home/ sets default shell
     uid = 1000;
     extraGroups = [
@@ -42,7 +45,6 @@ in
     packages = with pkgs; [
       ncdu # to see disk usage
     ];
-
   };
 
   nix.settings.trusted-users = [ "teto" ];
