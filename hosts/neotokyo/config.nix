@@ -1,8 +1,13 @@
-{ config, secrets, modulesPath, pkgs, lib, ... }:
+{ config, flakeInputs, secrets, modulesPath, pkgs, lib, ... }:
 # let
   # secrets = import ../../nixpkgs/secrets.nix;
 # in
 {
+  networking.hostName = "neotokyo";
+
+  system.stateVersion = "23.05";
+
+  # imported from gandhi ?
     boot.initrd.kernelModules = [
       "xen-blkfront" "xen-tpmfront" "xen-kbdfront" "xen-fbfront"
       "xen-netfront" "xen-pcifront" "xen-scsifront"
@@ -35,20 +40,35 @@
 
   ];
 
+  home-manager.users.root = {
+   imports = [
+    ../../hm/profiles/neovim.nix
+    ../desktop/root/ssh-config.nix
+   ];
+
+   home.stateVersion = "23.05";
+  };
+
+ home-manager.users.teto = {
+   # TODO it should load the whole folder
+   imports = [
+    # ../desktop/teto/
+    ../../hm/profiles/zsh.nix
+
+     # custom modules
+     # ./home.nix
+    # breaks build: doesnt like the "activation-script"
+    # nova.hmConfigurations.dev
+   ];
+   home.stateVersion = "23.05";
+ };
+
 
   # security.sudo.wheelNeedsPassword = true;
 
-  environment.systemPackages = with pkgs; [
-	tmux
-	# weechat
-  ];
+  # environment.systemPackages = with pkgs; [ ];
 
   services.gitolite.adminPubkey = secrets.gitolitePublicKey;
 
-  networking.hostName = "neotokyo";
-
-  system = {
-    stateVersion = "23.05";
-  };
 
 }

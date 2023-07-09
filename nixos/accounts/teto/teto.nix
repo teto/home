@@ -4,6 +4,9 @@ let
 in
 {
 
+ imports = [
+   ../../profiles/zsh.nix
+  ];
   users.users.teto = {
 
     shell = pkgs.zsh;

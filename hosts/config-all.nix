@@ -105,14 +105,6 @@ rec {
     };
   };
 
-
-
-  # environment.etc.zshrc.text = lib.mkMerge [
-  # (lib.mkBefore "zmodload zsh/zprof")
-  # (lib.mkAfter "zprof")
-  #   ];
-
-
   # for nix-shell
   programs.bash = {
     enableCompletion = true;

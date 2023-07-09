@@ -270,8 +270,7 @@
             pkgs = myPkgs;
             modules = [
               self.inputs.sops-nix.nixosModules.sops
-              # often breaks
-              # (import ./nixos/modules/hoogle.nix)
+
               ({ pkgs, ... }: {
                 nixpkgs.overlays = nixpkgs.lib.attrValues self.overlays;
 
@@ -281,12 +280,8 @@
                   # ./nixos/modules/distributedBuilds.nix
                 ];
 
-               home-manager.extraSpecialArgs = {
-                 inherit secrets;
-                 flakeInputs = self.inputs;
-               };
-
               })
+              hm-common
               hm.nixosModules.home-manager
             ];
             specialArgs = {
