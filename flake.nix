@@ -164,6 +164,7 @@
                 git-crypt 
                 sops
                 age
+                ssh-to-age
                 deploy-rs.packages.${system}.deploy-rs
                 just
                 self.packages.${system}.treefmt-with-config

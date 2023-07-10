@@ -1,3 +1,7 @@
+* sops-nix
+
+  https://github.com/Mic92/sops-nix
+
 #+BEGIN_SRC
 #+END_SRC
 
@@ -14,12 +18,20 @@ To use an alternate key:
  - SOPS_AGE_KEY
 sops -s secrets.yaml to see metadata/master keys
 
+
+* how to add newkeys
+
 sops updatekeys
+
+* how to support a newserver
+ssh-keyscan example.com | ssh-to-age
+ssh-to-age --run 'cat /etc/ssh/ssh_host_ed25519_key.pub | ssh-to-age'
 
 # 
 sops -d --extract "['ssh_client_key']" "secrets-${CI_ENVIRONMENT_NAME}.yaml" > "$SSH_CLIENTKEY"
 
 sops --aws-profile
 
-* [[https://github.com/mozilla/sops#publishing-to-vault][publishing to vault]]
+* publishing to vault
+ [[https://github.com/mozilla/sops#publishing-to-vault][publishing to vault]]
   export VAULT_ADDR=

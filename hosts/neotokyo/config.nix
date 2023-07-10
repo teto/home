@@ -25,6 +25,8 @@
     # ./hardware.nix
     ./openssh.nix
     ./sops.nix
+    ./nextcloud.nix
+
     ../common-server.nix
     # ../../nixos/modules/gitolite.nix
     # ../../nixos/modules/hercules-ci-agents.nix
@@ -52,8 +54,11 @@
  home-manager.users.teto = {
    # TODO it should load the whole folder
    imports = [
-    # ../desktop/teto/
+     # ../desktop/teto/
+    # ../../hm/profiles/teto/common.nix
+    ../../hm/profiles/common.nix
     ../../hm/profiles/zsh.nix
+    ../../hm/profiles/neovim.nix
 
      # custom modules
      # ./home.nix

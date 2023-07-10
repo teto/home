@@ -32,6 +32,7 @@ let
     gitAndTools.gitbatch # to fetch form several repos at once
     gitAndTools.lab
 	haskellPackages.fast-tags
+    perf-tools
 
 	inotify-tools # for inotify-wait notably
     just # to read justfiles, *replace* Makefile
@@ -56,6 +57,9 @@ let
 	viu # a console image viewer
     wine
     hexyl # hex editor
+    whois
+    envsubst
+    w3m # for preview in ranger w3mimgdisplay
   ];
 
   imPkgs = all: with pkgs; [
@@ -157,9 +161,15 @@ let
     #   gnome.gnome-calculator # compare with qalqulate-gtk
   ;
 
-  # home.sessionVariables = {
-  #   # JUPYTER_CONFIG_DIR=
-  # };
+  home.sessionVariables = {
+    # JUPYTER_CONFIG_DIR=
+    IPYTHONDIR = "$XDG_CONFIG_HOME/ipython";
+    JUPYTER_CONFIG_DIR = "$XDG_CONFIG_HOME/jupyter";
+    # testing if we can avoid having to symlink XDG_CONFIG_HOME
+    # should be setup by neomutt module
+    # MUTT="$XDG_CONFIG_HOME/mutt";
+    VIM_SOURCE_DIR = "$HOME/vim";
+  };
 
   # the kind of packages u don't want to compile
   # TODO les prendres depuis un channel avec des binaires ?
@@ -190,6 +200,7 @@ in
     ./dev.nix
     ./rofi.nix
     ./wal.nix
+    ./sway.nix
 
     ./nushell.nix
     ./fcitx.nix
@@ -197,6 +208,23 @@ in
     ./neovim.nix
 
   ];
+
+  programs.autojump = {
+    enable = false;
+    enableZshIntegration = true;
+    enableBashIntegration = true;
+  };
+  # programs.z-lua = {
+  #   enable = false;
+  #   enableZshIntegration = true;
+  # };
+  programs.zoxide = {
+    enable = true;
+    enableZshIntegration = true;
+    enableBashIntegration = true;
+    options = [ "--cmd j" ];
+  };
+
 
   # rename to fn, accept a parameter for optional
   home.packages =

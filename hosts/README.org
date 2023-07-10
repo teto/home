@@ -1,0 +1,5 @@
+
+See tips/sops.org
+
+For neotokyo, on a new deployment:
+ssh-keyscan -p4231 neotokyo.fr | ssh-to-age

@@ -6,6 +6,7 @@
 
     ./shell.nix
     ./git.nix
+    ./zsh.nix
 
     # the module is a pain
     # ./xdg-mime.nix
@@ -20,18 +21,13 @@
 
     # TODO try i3-snapshot
     # hstr # to deal with shell history
-    envsubst
     # or lazygit
     nix-prefetch-git
     netcat-gnu # plain 'netcat' is the bsd one
     # nvimpager # 'less' but with neovim
-    # dig.dnsutils  # for dig disabled because of flakes
-    perf-tools
     strace
     tig
-    w3m # for preview in ranger w3mimgdisplay
     xdg-utils
-    whois
   ];
 
   # works only because TIGRC_USER is set
@@ -69,18 +65,12 @@
     # RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/rg.conf";
     ZDOTDIR = "$XDG_CONFIG_HOME/zsh";
     INPUTRC = "$XDG_CONFIG_HOME/inputrc";
-    IPYTHONDIR = "$XDG_CONFIG_HOME/ipython";
-    JUPYTER_CONFIG_DIR = "$XDG_CONFIG_HOME/jupyter";
-    # testing if we can avoid having to symlink XDG_CONFIG_HOME
-    # should be setup by neomutt module
-    # MUTT="$XDG_CONFIG_HOME/mutt";
 
     # TODO package these instead now these are submoudles of dotfiles To remove
     VIFM = "$XDG_CONFIG_HOME/vifm";
     WWW_HOME = "$XDG_CONFIG_HOME/w3m";
     # used by ranger
     TERMCMD = "kitty";
-    VIM_SOURCE_DIR = "$HOME/vim";
     # TERMINAL # used by i3-sensible-terminal
   };
 
@@ -91,21 +81,6 @@
     enable = true;
   };
 
-  programs.autojump = {
-    enable = false;
-    enableZshIntegration = true;
-    enableBashIntegration = true;
-  };
-  # programs.z-lua = {
-  #   enable = false;
-  #   enableZshIntegration = true;
-  # };
-  programs.zoxide = {
-    enable = true;
-    enableZshIntegration = true;
-    enableBashIntegration = true;
-    options = [ "--cmd j" ];
-  };
 
 
   # you can switch from cli with xkb-switch or xkblayout-state
@@ -210,30 +185,10 @@
   # home.activation.copyZshrc = dagEntryBefore [ "linkGeneration" ] ''
   #   cp $
   #   '';
-  # home.file.".digrc".source =  ../../home/digrc;
-
-  # order matters
-  home.file.".mailcap".text = ''
-    application/pdf; evince '%s';
-    # pdftotext
-    # wordtotext
-    # ppt2text
-    # download script mutt_bgrun
-    #application/pdf; pdftohtml -q -stdout %s | w3m -T text/html; copiousoutput
-    #application/msword; wvWare -x /usr/lib/wv/wvHtml.xml %s 2>/dev/null | w3m -T text/html; copiousoutput
-    text/calendar; khal import '%s'
-    text/*; less '%s';
-    # khal import [-a CALENDAR] [--batch] [--random-uid|-r] ICSFILE
-    image/*; eog '%s';
-
-        text/html;  ${pkgs.w3m}/bin/w3m -dump -o document_charset=%{charset} '%s'; nametemplate=%s.html; copiousoutput
-        application/*; xdg-open "%s"
-        */*; xdg-open "%s"
-  '';
 
   # for colors etc.
   programs.lesspipe.enable = true;
 
   # TODO
-  manual.json.enable = false;
+  # manual.json.enable = false;
 }

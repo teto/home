@@ -93,7 +93,6 @@ in
         (lib.mkBefore "zmodload zsh/zprof")
         (lib.mkAfter "zprof")
       ];
-      # home.file.".config/zsh/.zshrc".text = 
     })
 
     (mkIf cfg.enableVocageSensei {
