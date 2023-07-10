@@ -1,10 +1,13 @@
 # TODO this should be fetched from the runners themselves !
 { config, pkgs, lib
-, secrets, 
-flakeInputs,
-... }:
+, secrets
+, flakeInputs
+, ...
+}:
 let
-  secrets = import ../../../nixpkgs/secrets.nix;
+  # secrets = import ../../../nixpkgs/secrets.nix;
+   sshLib = import ../../../nixpkgs/lib/ssh.nix { inherit secrets flakeInputs; };
+
 in
 {
   programs.ssh = {
@@ -14,16 +17,7 @@ in
     matchBlocks = let
      # TODO make this generic/available to all users
      prod-runners = builtins.fromJSON (builtins.readFile "${flakeInputs.nova-ci}/configs/prod/runners-generated.json");
-      mkSshMatchBlock = m: {
-       user = secrets.nova-gitlab-runner-1.userName;
-       identityFile = secrets.nova-runner-1.sshKey;
-       hostname = m.hostname;
-       identitiesOnly = true;
-       extraOptions.userKnownHostsFile = "${flakeInputs.nova-ci}/configs/prod/ssh_known_hosts";
-       port = m.port;
-       # 
-       match = "host ${m.hostname}";
-      };
+
       remoteBuilders = lib.listToAttrs (
           map
             (attr:
@@ -32,7 +26,7 @@ in
             # secrets.nova-runner-1.sshUser 
             lib.nameValuePair 
              "${attr.runnerName}"
-             (mkSshMatchBlock attr)
+             (sshLib.mkSshMatchBlock attr)
             )
             # TODO we should expose the resulting nix expressions directly
              prod-runners);

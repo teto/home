@@ -1,9 +1,10 @@
 # TODO this should be fetched from the runners themselves !
 { config, pkgs, lib, secrets, 
-# flakeInputs,
+flakeInputs,
 ... }:
 let
   secrets = import ../../../nixpkgs/secrets.nix;
+  sshLib = import ../../../nixpkgs/lib/ssh.nix { inherit secrets flakeInputs; };
 in
 {
   programs.ssh = {
@@ -12,7 +13,24 @@ in
 
     # can I have it per target ?
     # controlPath = "";
-	matchBlocks = {
+    matchBlocks = let 
+     # TODO make this generic/available to all users
+     prod-runners = builtins.fromJSON (builtins.readFile "${flakeInputs.nova-ci}/configs/prod/runners-generated.json");
+
+     remoteBuilders = lib.listToAttrs (
+          map
+            (attr:
+            # attrs should only contain
+            # So seems like there is no way to fix those
+            # secrets.nova-runner-1.sshUser 
+            lib.nameValuePair 
+             "${attr.runnerName}"
+             (sshLib.mkSshMatchBlock attr)
+            )
+            # TODO we should expose the resulting nix expressions directly
+             prod-runners);
+
+    in remoteBuilders // {
       jakku = {
         host = secrets.jakku.hostname;
         user = "teto";
@@ -51,21 +69,6 @@ in
       #   # https://github.com/nix-community/home-manager/pull/2992
       #   # match = "ovh1";
 		# port = 12666;
-      # };
-
-      # gitlab = {
-      #   host = "gitlab.devops.novadiscovery.net";
-      #   user = "ubuntu";
-      #   identityFile = "~/.ssh/nova_key";
-      #   identitiesOnly = true;
-      # };
-
-      # novinfra = {
-      #   host = "data.novinfra.net";
-      #   user = "ubuntu";
-      #   # le port depend du service
-      #   # port = 2207;
-      #   identityFile = "~/.ssh/nova_key";
       # };
     };
 

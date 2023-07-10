@@ -98,6 +98,7 @@
       inherit (builtins) listToAttrs baseNameOf;
       # inherit (myPkgs.lib) removeSuffix;
       secrets = import ./nixpkgs/secrets.nix;
+      sshLib = import ./nixpkgs/lib/ssh.nix { inherit secrets; flakeInputs = self.inputs; };
       system = "x86_64-linux";
 
       pkgImport = src:
