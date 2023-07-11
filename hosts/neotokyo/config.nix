@@ -30,7 +30,9 @@
     # ./hardware.nix
     ./openssh.nix
     ./sops.nix
-    ./nextcloud.nix
+
+    # to get the first iteration going on
+    # ./nextcloud.nix
 
     ../common-server.nix
     # ../../nixos/modules/gitolite.nix

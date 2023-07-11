@@ -7,14 +7,34 @@
 
   services.nextcloud = {
    hostName = secrets.jakku.hostname;
-    https = false;
+   https = false;
 
     # New option since NixOS 23.05
+    caching = {
+      apcu = false;
+      redis = true;
+      memcached = false;
+    };
+    # caching.redis = true;
+
+    # use default redis config for small servers
     configureRedis = true;
-    # caching.apcu = false;
     extraAppsEnable = lib.mkForce false;
 
+    database.createLocally = true;
+
+    config = {
+      # we choose postgres because it's faster
+      dbtype = "pgsql";
+
+      # Further forces Nextcloud to use HTTPS
+      # overwriteProtocol = "https";
+    };
+
   };
+
+  # services.redis.servers."nextcloud".enable = true;
+  # services.redis.servers."nextcloud".port = 6379;
 
   # Creating Nextcloud users and configure mail adresses
   # disabling since it fails after first time
@@ -65,5 +85,15 @@
       enableACME = true;
     };
   };
+
+  # This is using an age key that is expected to already be in the filesystem
+  # sops.age.keyFile = "/home/teto/.config/sops/age/keys.txt";
+  sops.secrets."nextcloud/tetoPassword" = {
+    mode = "0440";
+    # TODO only readable by gitlab
+    owner = config.users.users.nextcloud.name;
+    group = config.users.users.nextcloud.group;
+  };
+
 
 }

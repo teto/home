@@ -146,6 +146,11 @@
     # readOnlyStore = false;
   };
 
+  environment.shellAliases = {
+    nix-stray-roots = ''nix-store --gc --print-roots | egrep -v "^(/nix/var|/run/\w+-system|\{memory)"'';
+    nixpaste = "curl -F \"text=<-\" http://nixpaste.lbr.uno";
+  };
+
   # programs.gnome-disks.enable = false;
 
   # don't forget to run ulimit -c unlimited to get the actual coredump

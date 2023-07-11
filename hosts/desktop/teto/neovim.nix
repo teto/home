@@ -23,5 +23,10 @@
       sumneko-lua-language-server
       yaml-language-server
     ];
+
+    plugins = with pkgs.vimPlugins; [
+     tint-nvim
+    ];
+
  };
 }

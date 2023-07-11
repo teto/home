@@ -63,8 +63,6 @@ rec {
 
   # TODO it appears in /etc/bashrc !
   environment.shellAliases = {
-    nix-stray-roots = ''nix-store --gc --print-roots | egrep -v "^(/nix/var|/run/\w+-system|\{memory)"'';
-    nixpaste = "curl -F \"text=<-\" http://nixpaste.lbr.uno";
     ".." = "cd ..";
     "..." = "cd ../..";
 
@@ -89,11 +87,6 @@ rec {
     # LESS=""; # options to pass to less automatically
   };
   environment.extraOutputsToInstall = [ "man" ];
-  # environment.variables = {
-  # };
-
-  # stick to sh as it's shell independant
-  # environment.extraInit = builtins.readFile ../../config/zsh/init.sh;
 
   programs.less = {
     enable = true;
@@ -119,6 +112,5 @@ rec {
     enable = true;
     # wheelNeedsPassword = true;
   };
-
 
 }

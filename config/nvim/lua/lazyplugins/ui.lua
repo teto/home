@@ -1,9 +1,18 @@
 return {
-
+{
+  'mawkler/modicator.nvim',
+  config = function()
+    require('modicator').setup({
+      -- Show warning if any required option is missing
+      show_warnings = false,
+     })
+  end,
+},
    { 'levouh/tint.nvim',
    config = function ()
        -- Default configuration
-       require("tint").setup()
+       -- available in nixpkgs tint-nvim
+       require("tint").setup({})
     end
    },
    {
