@@ -32,22 +32,5 @@ in
              prod-runners);
       in
       remoteBuilders;
-    # {
-     # prod-runners = builtins.fromJSON (builtins.readFile "${flakeInputs.nova-ci}/configs/prod/runners-generated.json");
-     # TODO generate those / map
-      # ovh1 = {
-      #   # checkHostIP
-      #   identityFile = "~/.ssh/nova_key";
-      #   user = "matthieu.coudron";
-      #   host = "ovh1";
-      #   hostname = "ovh-hybrid-runner-1.devops.novadiscovery.net";
-      #   identitiesOnly = true;
-      #   # experimental
-      #   # https://github.com/nix-community/home-manager/pull/2992
-      #   # match = "ovh1";
-      #   extraOptions.userKnownHostsFile = "${flakeInputs.nova-ci}/configs/prod/ssh_known_hosts";
-		# port = 12666;
-      # };
-    # } // remoteBuilders;
   };
 }

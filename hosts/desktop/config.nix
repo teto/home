@@ -6,7 +6,7 @@
     ./sops.nix
 
     # this is only to test the new config
-    ./nextcloud.nix
+    # ./nextcloud.nix
     # ./gitlab-runner.nix
     ../../nixos/profiles/postgresql.nix
 

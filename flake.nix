@@ -98,7 +98,7 @@
       inherit (builtins) listToAttrs baseNameOf;
       # inherit (myPkgs.lib) removeSuffix;
       secrets = import ./nixpkgs/secrets.nix;
-      sshLib = import ./nixpkgs/lib/ssh.nix { inherit secrets; flakeInputs = self.inputs; };
+      # sshLib = import ./nixpkgs/lib/ssh.nix { inherit secrets; flakeInputs = self.inputs; };
       system = "x86_64-linux";
 
       pkgImport = src:
@@ -114,17 +114,6 @@
 
       myPkgs = pkgImport self.inputs.nixpkgs;
       unstablePkgs = pkgImport self.inputs.nixos-unstable;
-
-
-      # legacyLib = nixpkgs.lib;
-      # forAllSystems = legacyLib.genAttrs legacyLib.systems.flakeExposed;
-
-
-      # TODO I should use hm.lib.homeManagerConfiguration
-      # and pass the pkgs to it with
-	  #             extraSpecialArgs = {
-      # flakeInputs = self.inputs;
-      # };
 
       hm-common = { config, lib, pkgs, ... }: {
           home-manager.verbose = true;

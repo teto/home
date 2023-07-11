@@ -1,0 +1,3 @@
+occ stands for "OwnCloud Client"
+
+https://docs.nextcloud.com/server/latest/admin_manual/configuration_server/occ_command.html

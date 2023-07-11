@@ -19,6 +19,8 @@ in
     # caching.apcu = false;
 
     config = {
+      # we choose postgres because it's faster
+      dbtype = "pgsql";
       # Further forces Nextcloud to use HTTPS
       overwriteProtocol = "https";
       # loaded via sops 
@@ -65,6 +67,8 @@ in
     owner = config.users.users.nextcloud.name;
     group = config.users.users.nextcloud.group;
   };
+
+
 
   # create some errors on deploy
   # services.nginx.virtualHosts = { 

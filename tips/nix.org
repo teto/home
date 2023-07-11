@@ -119,7 +119,9 @@ https://github.com/NixOS/nixpkgs/pull/185719
  
  nix-build -A pkgsCross.aarch64-android.neovim
 
- with flakes, one should use legacyPackages
+  with flakes, one should use legacyPackages
+
+ nix build nixpkgs#legacyPackages.x86_64-linux.pkgsCross.aarch64-multiplatform.neovim
 
  # nix shell 
  
