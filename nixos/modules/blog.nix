@@ -5,7 +5,7 @@ in
 {
   services.nginx = {
     enable = true;
-    virtualHosts."www.michaelpj.com" = {
+    virtualHosts."www.neotokyo.com" = {
       # This makes things work nicely when we're not deployed to the 
       # real host, so hostnames don't match
       default = true;

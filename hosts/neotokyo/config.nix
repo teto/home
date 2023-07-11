@@ -3,7 +3,12 @@
   # secrets = import ../../nixpkgs/secrets.nix;
 # in
 {
-  networking.hostName = "neotokyo";
+ networking = {
+   hostName = "neotokyo";
+  firewall = {
+     enable = true;
+   };
+  };
 
   system.stateVersion = "23.05";
 

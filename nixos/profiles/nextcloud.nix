@@ -12,11 +12,11 @@ in
     package = pkgs.nextcloud27;
 
     # Use HTTPS for links
-    https = true;
+    # https = true;
 
     # New option since NixOS 23.05
     configureRedis = true;
-    caching.apcu = false;
+    # caching.apcu = false;
 
     config = {
       # Further forces Nextcloud to use HTTPS
@@ -37,9 +37,8 @@ in
     enableImagemagick = false;
     autoUpdateApps.enable = true;
 
+    extraAppsEnable = true;
     extraApps = with config.services.nextcloud.package.packages.apps; {
-
-
      # inherit news; # removed 'cos gives a wrong error
      inherit contacts;
 	  # mail extension can't be download :s 
@@ -49,33 +48,14 @@ in
       #   sha256 = "sha256-eTc51pkg3OdHJB7X4/hD39Ce+9vKzw1nlJ7BhPOzdy0=";
       # };
     };
-    extraAppsEnable = true;
-  };
-
   # to be able to send mails from the admin panel
   # Test mails can be send via administration interface in the menu section "Basic settings". 
-  # extraOptions = {
-  #   mail_smtpmode = "sendmail";
-  #   mail_sendmailmode = "pipe";
-  # };
-  # Creating Nextcloud users and configure mail adresses
-  # systemd.services.nextcloud-add-user = {
-  # # --password-from-env  looks for the password in OC_PASS
-  #   script = ''
-  #     export OC_PASS="test123"
-  #     ${config.services.nextcloud.occ}/bin/nextcloud-occ user:add --password-from-env teto
-  #     ${config.services.nextcloud.occ}/bin/nextcloud-occ user:setting teto settings email "${secrets.users.teto.email}"
-  #   '';
-  #     # ${config.services.nextcloud.occ}/bin/nextcloud-occ user:add --password-from-env user2
-  #     # ${config.services.nextcloud.occ}/bin/nextcloud-occ user:setting user2 settings email "user2@localhost"
-  #     # ${config.services.nextcloud.occ}/bin/nextcloud-occ user:setting admin settings email "admin@localhost"
-  #   serviceConfig = {
-  #     Type = "oneshot";
-  #     User= "nextcloud";
-  #   };
-  #   after = [ "nextcloud-setup.service" ];
-  #   wantedBy = [ "multi-user.target" ];
-  # };
+   extraOptions = {
+     mail_smtpmode = "sendmail";
+     mail_sendmailmode = "pipe";
+   };
+  };
+
 
   networking.firewall.allowedTCPPorts = [ 80 443 ];
 
