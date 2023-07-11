@@ -314,6 +314,8 @@ if has_rest then
 		result_split_horizontal = false,
 		-- Skip SSL verification, useful for unknown certificates
 		skip_ssl_verification = false,
+		-- engine = 'classic',
+		-- engine = 'treesitter',
 		-- Highlight request on run
 		highlight = {
 			enabled = true,
@@ -335,6 +337,16 @@ if has_rest then
 		-- Jump to request line on run
 		jump_to_request = false,
 	})
+
+-- TODO remove once it's merged upstream
+vim.api.nvim_create_user_command('RestLog', function()
+  vim.cmd(string.format('tabnew %s', vim.fn.stdpath('cache')..'/rest.nvim.log'))
+end, {
+  desc = 'Opens the rest.nvim log.',
+})
+
+
+
 end
 
 -- Snippets are separated from the engine. Add this if you want them:
@@ -360,20 +372,9 @@ vim.g.fzf_preview_window = 'right:30%'
 -- For Commits and BCommits to customize the options used by 'git log':
 vim.g.fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
 
--- " use 'vhakulinen/gnvim-lsp' " load it only for gnvim
-
--- " use 'Rykka/riv.vim', {'for': 'rst'}
--- " use 'Rykka/InstantRst', {'for': 'rst'} " rst live preview with :InstantRst,
 -- " use 'dhruvasagar/vim-table-mode', {'for': 'txt'}
-
 -- " use 'mhinz/vim-rfc', { 'on': 'RFC' } " requires nokigiri gem
 -- " careful maps F4 by default
--- use 'tpope/vim-unimpaired' " [<space> [e [n ]n pour gerer les conflits etc...
--- use 'tpope/vim-scriptease' " Adds command such as :Messages
--- use 'tpope/vim-eunuch' " {provides SudoEdit, SudoWrite , Unlink, Rename etc...
--- " use 'ludovicchabant/vim-gutentags' " automatic tag generation, very good
--- " use 'junegunn/limelight.vim' " focus writing :Limelight, works with goyo
--- " leader
 -- " use 'bronson/vim-trailing-whitespace' " :FixWhitespace
 
 -- TODO this should depend on theme ! computed via lush
@@ -388,10 +389,10 @@ vim.keymap.set('n', '<Leader>sv', '<Cmd>source $MYVIMRC<CR>')
 vim.keymap.set('n', '<Leader>el', '<Cmd>e ~/.config/nvim/lua/init-manual.lua<CR>')
 vim.keymap.set('n', '<F6>', '<Cmd>ASToggle<CR>')
 
--- " set vim's cwd to current file's
+-- set vim's cwd to current file's
 -- nnoremap ,cd :cd %:p:h<CR>:pwd<CR>
 
---  " when launching term
+--  when launching term
 --   tnoremap <Esc> <C-\><C-n>
 
 
@@ -893,8 +894,6 @@ vim.filetype.add({
 		-- ['.http'] = 'http'
 	}
 })
-vim.opt.runtimepath:prepend('/home/teto/neovim/rest.nvim')
-vim.opt.runtimepath:prepend('/home/teto/tree-sitter-http')
 
 vim.api.nvim_set_keymap('n', ',a', '<Plug>(Luadev-Run)', { noremap = false, silent = false })
 vim.api.nvim_set_keymap('v', ',,', '<Plug>(Luadev-Run)', { noremap = false, silent = false })

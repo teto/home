@@ -1,3 +1,23 @@
+* what is nextcloud-occ ?
+
 occ stands for "OwnCloud Client"
 
+
+  occ = pkgs.writeScriptBin "nextcloud-occ" ''
+
 https://docs.nextcloud.com/server/latest/admin_manual/configuration_server/occ_command.html
+
+If deployement fails with:
+Next Doctrine\DBAL\Driver\PDOException: SQLSTATE[42P01]: Undefined table: 7 ERROR: relation "oc_appconfig" does not exist
+LINE 1: SELECT * FROM "oc_appconfig"
+one can try:
+sudo rm /var/lib/nextcloud/config/config.php
+
+
+* Username is invalid because files already exist for this user
+
+This is such a bad message
+sudo rm -rf /var/lib/nextcloud felt good
+
+
+

@@ -3,7 +3,34 @@
   imports = [
      ../../nixos/profiles/nextcloud.nix
   ];
-  services.nextcloud.hostName = "localhost";
+  services.nextcloud = { 
+    hostName = "localhost";
+    https = false;
+
+    # New option since NixOS 23.05
+    caching = {
+      apcu = false;
+      redis = true;
+      memcached = false;
+    };
+    # caching.redis = true;
+
+    # use default redis config for small servers
+    configureRedis = true;
+    extraAppsEnable = lib.mkForce false;
+
+    database.createLocally = true;
+
+    config = {
+      # we choose postgres because it's faster
+      dbtype = "pgsql";
+
+      # Further forces Nextcloud to use HTTPS
+      # overwriteProtocol = "https";
+    };
+
+  };
+
 
   # Creating Nextcloud users and configure mail adresses
   # systemd.services.nextcloud-add-user = {

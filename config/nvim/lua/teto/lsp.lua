@@ -64,7 +64,7 @@ M.set_lsp_lines = function(enable)
       conf.virtual_lines = false
     end
 
-    vim.notify("setting diagnostic config to ", vim.inspect(conf))
+    -- vim.notify("setting diagnostic config to ", vim.inspect(conf))
     vim.diagnostic.config(conf)
 end
 

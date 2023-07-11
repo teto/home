@@ -13,24 +13,14 @@ local on_stop_request =  function  (req)
  print("stopped request with duration of ", duration)
 end
 
-vim.api.nvim_create_autocmd("User", {
-pattern = "RestStartRequest",
-once = true,
-  callback = on_start_request
-   -- function(opts)
-   --  print("IT STARTED")
-   --  vim.pretty_print(opts)
-   --  -- print("IT STARTED")
-  -- end,
-})
+-- vim.api.nvim_create_autocmd("User", {
+-- pattern = "RestStartRequest",
+-- once = true,
+--   callback = on_start_request
+-- })
 
-vim.api.nvim_create_autocmd("User", {
-pattern = "RestStopRequest",
-once = true,
-  callback =  on_stop_request
-  -- function(opts)
-  --   print("IT STARTED")
-  --   vim.pretty_print(opts)
-  --   -- print("IT STARTED")
-  -- end,
-})
+-- vim.api.nvim_create_autocmd("User", {
+-- pattern = "RestStopRequest",
+-- once = true,
+--   callback =  on_stop_request
+-- })
