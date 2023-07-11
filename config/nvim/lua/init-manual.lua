@@ -863,6 +863,8 @@ map f <Plug>Sneak_f
 map F <Plug>Sneak_F
 map t <Plug>Sneak_t
 map T <Plug>Sneak_T
+nmap H ^
+nmap L $
 ]])
 
 -- luadev mappings
@@ -881,9 +883,14 @@ map('n', '<leader>rg', '<Cmd>Grepper -tool rg -open -switch<CR>', { remap = true
 
 --
 vim.filetype.add({
+	extension = {
+		http = "http",
+		env = "env"
+
+	},
 	filename = {
-		['.env'] = 'env',
-		['.http'] = 'http'
+		-- ['.env'] = 'env',
+		-- ['.http'] = 'http'
 	}
 })
 vim.opt.runtimepath:prepend('/home/teto/neovim/rest.nvim')
@@ -903,6 +910,7 @@ vim.o.grepprg = 'rg --vimgrep --no-heading --smart-case'
 
 require('teto.context_menu').setup_rclick_menu_autocommands()
 require('teto.lsp').set_lsp_lines(true)
+require('teto.rest')
 
 -- vim.g.sonokai_style = 'atlantis'
 -- vim.cmd([[colorscheme sonokai]])

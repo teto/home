@@ -3,6 +3,8 @@ hurl --variables-file vars.env test.hurl
 
 Add --verbose to see queries and --very-verbose to see
 
+hurl --file-root
+
 --check-root
 
 export HURL_host=example.net

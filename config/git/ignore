@@ -3,6 +3,8 @@
 tags
 TAGS
 build/
+*.key
+*.qcow2
 
 __pad__
 

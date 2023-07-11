@@ -38,6 +38,7 @@
        modules-right = [ 
         "battery"
         "bluetooth"
+        "network"
         # "backlight"
        ];
        battery = {

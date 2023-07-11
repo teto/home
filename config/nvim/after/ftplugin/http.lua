@@ -4,6 +4,3 @@ vim.keymap.set('n', '<leader>rp', '<Plug>RestNvimPreview', { remap = true, desc 
 vim.keymap.set('n', '<C-j>', "<cmd>lua require('rest-nvim').run(false)<cr>")
 
 
-
-
-

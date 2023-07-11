@@ -13,6 +13,7 @@
   #   };
   # };
 
+  # using joshuto instead
   programs.ranger = {
     enable = true;
     # plugins = [];
@@ -37,6 +38,7 @@
   # };
 
   home.packages = with pkgs; [
+   ironbar # not merged yet
 	# openlens # not in unstable yet 
 	# haxe # to test https://neovim.discourse.group/t/presenting-haxe-neovim-a-new-toolchain-to-build-neovim-plugins/3720
     # meli  # broken jmap mailreader

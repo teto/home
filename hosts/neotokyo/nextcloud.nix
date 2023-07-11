@@ -20,9 +20,21 @@
   # disabling since it fails after first time
   # systemd.services.nextcloud-add-user = {
   # # --password-from-env  looks for the password in OC_PASS
+  #   environment = {
+  #     # OC_PASS = "${confFile}";
+  #   };
+  #   path = [
+  #    # pkgs.which pkgs.procps
+
+  #    config.services.nextcloud.occ
+  #   ];
+  #   # TODO check if necessary
+  #   # preStart = ''
+
+  #   # ${config.services.nextcloud.occ}/bin/
   #   script = ''
   #     export OC_PASS="$(cat /run/secrets/nextcloud/tetoPassword)"
-  #     ${config.services.nextcloud.occ}/bin/nextcloud-occ user:add --password-from-env teto
+  #     nextcloud-occ user:add --password-from-env teto
   #     ${config.services.nextcloud.occ}/bin/nextcloud-occ user:setting teto settings email "${secrets.users.teto.email}"
   #   '';
   #     # ${config.services.nextcloud.occ}/bin/nextcloud-occ user:add --password-from-env user2

@@ -377,12 +377,12 @@ in
 
         # "custom/mymodule#with-css-id"
         # "temperature"
-        "clock"
         "idle_inhibitor"
-        "wireplumber"
         "custom/notification"
         "custom/github"
         "custom/notmuch"
+        "wireplumber"
+        "clock"
         "tray"
        ];
     tray= {
@@ -435,14 +435,19 @@ in
     clock = {
         # "timezone": "America/New_York",
         # TODO look how to display timezone
-        "timezones" = [  "Europe/Paris"  "Asia/Tokyo" ];
-        "tooltip-format"= "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
-        "format-alt"= "{:%Y-%m-%d}";
+        timezones = [  "Europe/Paris"  "Asia/Tokyo" ];
+        tooltip-format= "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
+        format-alt = "{:%Y-%m-%d}";
+         # on-click = "${pkgs.swaynotificationcenter}/bin/swaync-client -t -sw";
+        on-click = "${pkgs.kitty}/bin/kitty sh -c cal -m3";
+
+         # on-click-right = "swaync-client -d -sw";
+
      };
-    cpu= {
-        format= "{usage}% ";
-        tooltip= false;
-    };
+    # cpu= {
+    #     format= "{usage}% ";
+    #     tooltip= false;
+    # };
        "sway/workspaces" = {
         # {name}:
          format= "{name}";
@@ -468,10 +473,10 @@ in
        "custom/notification" = {
          tooltip = false;
          format = "{icon}";
-         "format-icons" = {
+         format-icons = {
            notification = "<span foreground='red'><sup>notifs</sup></span>";
-           none = "No notifications";
-           inhibited-notification = "inhibtited<span foreground='red'><sup>toto</sup></span>";
+           none = "";
+           inhibited-notification = "inhibited<span foreground='red'><sup>toto</sup></span>";
            inhibited-none = "0";
            # Do Not Disturb
            dnd-notification = "dnd <span foreground='red'><sup>dnd</sup></span>";
@@ -487,7 +492,7 @@ in
          escape = true;
        };
        "custom/github"= {
-          "format"= "{} ";
+          format = "{} ";
           "return-type"= "json";
           # The interval (in seconds) in which the information gets polled
           "restart_interval"= 60;
@@ -496,6 +501,7 @@ in
           on-click = "${pkgs.xdg_utils}/bin/xdg-open https://github.com/notifications";
       };
 
+     # TODO only on laptop
      network = {
          # // "interface": "wlp2*", // (Optional) To force the use of this interface
          format-wifi = "{essid} ({signalStrength}%) ";
@@ -519,7 +525,7 @@ in
          return-type = "json";
          # TODO run regularly
          interval = 60;
-         on_click = "kitty sh -c alot -l/tmp/alot.log";
+         on_click = "${pkgs.kitty}/bin/kitty sh -c alot -l/tmp/alot.log";
          # TODO rerun mbsync + notmuch etc
          # TODO read
          # exec-on-event = false;
