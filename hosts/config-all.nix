@@ -35,6 +35,7 @@ rec {
   # services.tzupdate.enable = true;
 
   environment.systemPackages = with pkgs; [
+    ssh-to-age # useful everywhere
     man-pages # because man tcp should always be available
     moreutils # contains errno binary that can translate errnos
     ncurses.dev # for infocmp
