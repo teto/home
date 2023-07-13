@@ -98,7 +98,9 @@ let
   luaPlugins = with pkgs.vimPlugins; [
     { plugin = b64-nvim; }
     { plugin = kui-nvim; }
-    (luaPlugin { plugin = iron-nvim;
+
+    # TODO it should be rocksified
+    # (luaPlugin { plugin = iron-nvim;
     # TODO set lua here
     # config = ''
     #         local iron = require('iron.core')
@@ -143,7 +145,7 @@ let
     #             },
     #         })
     # '';
-   })
+   # })
 
     # { plugin = modicator-nvim; }
     # (luaPlugin {

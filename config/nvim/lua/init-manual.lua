@@ -708,6 +708,8 @@ if has_iron then
 	-- doc at https://github.com/Vigemus/iron.nvim/tree/master
 	local view = require("iron.view")
 	iron.setup({
+		-- Whether a repl should be discarded or not
+		scratch_repl = true,
 		config = {
 			-- If iron should expose `<plug>(...)` mappings for the plugins
 			-- should_map_plug = false,
