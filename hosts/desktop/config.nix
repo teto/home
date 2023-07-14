@@ -128,7 +128,9 @@
     # "net.core.wmem_max" = 1048576;
   };
 
+  services.resolved.enable = true;
   networking.hostName = "jedha"; # Define your hostname.
+
 
   networking.firewall.allowedUDPPorts = [ ];
   # networking.firewall.allowedTCPPorts = [ 8080 ];

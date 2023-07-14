@@ -271,7 +271,7 @@ in
   # might trigger nm-applet crash ?
   # TODO disable it ?
   services.gpg-agent = {
-    enable = true;
+    enable = false;
     defaultCacheTtl = 7200;
     # maxCacheTtl
     enableSshSupport = true;
