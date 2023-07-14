@@ -1,7 +1,9 @@
 -- vim.keymap.set('n',  '<C-J>' , "<Plug>RestNvim<cr>")
 vim.keymap.set('n', '<leader>rr', '<Plug>RestNvim<cr>', { remap = true, desc = 'Run an http request' })
 vim.keymap.set('n', '<leader>rp', '<Plug>RestNvimPreview', { remap = true, desc = 'Preview an http request' })
-vim.keymap.set('n', '<C-j>', "<cmd>lua require('rest-nvim').run_request({ verbose = false; engine = 'classic';})<cr>")
+vim.keymap.set('n', '<C-j>', "<cmd>lua require('rest-nvim').run(false)<cr>")
+-- TODO need to call run_current_request that accepts switching backend
+-- vim.keymap.set('n', '<C-j>', "<cmd>lua require('rest-nvim').run(false)<cr>")
 
 vim.api.nvim_create_user_command("RestFile", function ()
   local filename = "/home/teto/neovim/rest.nvim/tests/basic_get.http"

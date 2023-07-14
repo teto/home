@@ -20,7 +20,7 @@ if not vim.loop.fs_stat(lazypath) then
 		lazypath,
 	})
 end-- require("vim.lsp._watchfiles")._watchfunc = require("vim._watch").watch
-local ffi = require 'ffi'
+-- local ffi = require 'ffi'
 
 -- workaround slow neovim https://github.com/neovim/neovim/issues/23725
 local ok, wf = pcall(require, "vim.lsp._watchfiles")
@@ -692,15 +692,9 @@ vim.g.UltiSnipsSnippetDirectories = { vim.fn.stdpath('config') .. '/snippets' }
 vim.g.tex_flavor = 'latex'
 -- require('teto.treesitter')
 
-
 require('teto.lspconfig')
 
--- logs are written to /home/teto/.cache/vim-lsp.log
 -- vim.lsp.set_log_level('DEBUG')
-
--- hack
--- local _, notifs = pcall(require, 'notifications')
--- vim.lsp.notifier = notifs
 
 local has_iron, iron = pcall(require, 'iron.core')
 if has_iron then
