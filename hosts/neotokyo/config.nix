@@ -75,6 +75,21 @@
    home.stateVersion = "23.05";
  };
 
+  boot.loader = {
+    #    systemd-boot.enable = true;
+    # efi.canTouchEfiVariables = true; # allows to run $ efi...
+    # systemd-boot.editor = true; # allow to edit command line
+    # because it's so hard to timely open VNC, we increase timetout
+    timeout = lib.mkForce 15;
+    # just to generate the entry used by ubuntu's grub
+    grub = {
+      enable = true;
+      useOSProber = true;
+      # install to none, we just need the generated config
+      # for ubuntu grub to discover
+      device = lib.mkForce "/dev/xvda";
+    };
+  };
 
   # security.sudo.wheelNeedsPassword = true;
 

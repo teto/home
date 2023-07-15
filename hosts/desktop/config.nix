@@ -92,8 +92,6 @@
       # install to none, we just need the generated config
       # for ubuntu grub to discover
       device = "/dev/sdb";
-
-
     };
   };
 
