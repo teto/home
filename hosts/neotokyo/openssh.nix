@@ -5,9 +5,11 @@
   ];
 
   services.openssh = {
-    ports = [ secrets.jakku.sshPort ];
+    banner = "You can start the nextcloud-add-user.service unit if teto user doesnt exist yet";
 
-    # authorizedKeysFiles = [
+   ports = [ secrets.jakku.sshPort ];
+
+   # authorizedKeysFiles = [
     #   "~/.ssh/id_rsa.pub"
     # ];
     # new format

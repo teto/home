@@ -1,5 +1,6 @@
 { config, lib, pkgs, ... }:
 {
+  services.resolved.enable = true;
 
   networking.networkmanager = {
     enable = true;

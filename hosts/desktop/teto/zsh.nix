@@ -10,6 +10,9 @@ in
    # ../../profiles/bash.nix
   ];
 
+  xdg.configFile."zsh/zshrc.generated".source = ../../../config/zsh/zshrc;
+
+
   # TODO prefix withg zsh
    programs.zsh = {
 

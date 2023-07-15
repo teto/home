@@ -4,7 +4,7 @@
   services.openssh = {
     enable = true;
     # kinda experimental
-    # services.openssh.banner = "Hello world";
+    # banner = "Hello world";
     ports = [ 12666 ];
 
    # tu peux en avoir plusieurs sur ce mode

@@ -35,7 +35,7 @@ in
     maxUploadSize = "512M";
     logLevel = 0;
     enableBrokenCiphersForSSE = false;
-    # increase security
+    # disable imageMagick for security reasons
     enableImagemagick = false;
     autoUpdateApps.enable = true;
 
