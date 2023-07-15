@@ -315,7 +315,7 @@ if has_rest then
 		-- Skip SSL verification, useful for unknown certificates
 		skip_ssl_verification = false,
 		-- engine = 'classic',
-		-- engine = 'treesitter',
+		parser = 'treesitter',
 		-- Highlight request on run
 		highlight = {
 			enabled = true,

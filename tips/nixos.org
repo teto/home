@@ -5,6 +5,7 @@ dhcpcd
 
   nix-env --list-generations
   nix-env --list-generations --profile /nix/var/nix/profiles/system
+  nix-env --switch-generation 1 --profile /nix/var/nix/profiles/system
 
 * remote install
 

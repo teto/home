@@ -1,4 +1,4 @@
-{ config, flakeInputs, pkgs, lib, ... }:
+{ config, flakeInputs, pkgs, lib, system, ... }:
 let
   pass-custom = (pkgs.pass.override { waylandSupport = true; }).withExtensions (ext:
     with ext; [ pass-import ]);
@@ -21,14 +21,14 @@ let
     psmisc
     util-linux # for lsns (namespace listing)
     rbw
-	haxe
+	# haxe # to test neovim developement
     exa # to list files
     gitAndTools.diff-so-fancy # todo install it via the git config instead
     gitAndTools.gh # github client
     gitAndTools.git-absorb
     gitAndTools.git-crypt
     gitAndTools.git-extras
-    gitAndTools.git-recent
+    gitAndTools.git-recent # 
     gitAndTools.gitbatch # to fetch form several repos at once
     gitAndTools.lab
 	haskellPackages.fast-tags
@@ -36,8 +36,6 @@ let
 
 	inotify-tools # for inotify-wait notably
     just # to read justfiles, *replace* Makefile
-    jq # to run json queries
-    lazygit # kinda like tig
     ncurses.dev # for infocmp
     neovide
     # neovim-remote # broken for latex etc
@@ -55,7 +53,6 @@ let
     universal-ctags # there are many different ctags, be careful !
     tio # serial console reader
 	viu # a console image viewer
-    wine
     hexyl # hex editor
     whois
     envsubst
@@ -96,10 +93,11 @@ let
     all: with pkgs; [
       # apvlv # broken
       # TODO
+    jq # to run json queries
+    lazygit # kinda like tig
       buku # broken
       # gcalc
       # gnome.gnome_control_center
-      # i3-layout-manager  # to save/load layouts
       # mdp # markdown CLI presenter
       # nyxt      # lisp browser
       papis # library manager
@@ -110,10 +108,9 @@ let
       # unstable.transmission_gtk  # bittorrent client
       # vimiv # image viewer
 	  usbutils
-      imv
+      imv # image viewer
 	  vifm
 
-      arandr # to move screens/monitors around
       bandwhich # to monitor per app bandwidth
       du-dust # dust binary: rust replacement of du
       dogdns # dns solver "dog"
@@ -126,6 +123,7 @@ let
       gnome.eog # eye of gnome = image viewer / creates a collision
       gnome.file-roller # for GUI archive handling
       pkgs.networkmanagerapplet # should
+    wine
       hunspellDicts.fr-any
       libnotify
       # luarocks
@@ -143,18 +141,19 @@ let
       rbw # Rust bitwarden unofficial client
       rofi-pass # rofi-pass it's enabled in the HM module ?
       # scrot # screenshot app for xorg
+      sops # password 'manager'
       sd # rust cli for search & replace
       shared-mime-info # temporary fix for nautilus to find the correct files
       sublime3
       # sxiv # simple image viewer
 	  simple-scan
-      translate-shell
+      translate-shell # call wiuth `trans`
       wally-cli # to flash ergodox keyboards
       wireshark
       xarchiver # to unpack/pack files
       # zathura # broken
       ytfzf # browse youtube
-      ranger # or joshuto ?
+      ranger # or joshuto ? see hm configuration
       rsync
       ripgrep
     ]
@@ -173,7 +172,7 @@ let
 
   # the kind of packages u don't want to compile
   # TODO les prendres depuis un channel avec des binaires ?
-  heavyPackages = with pkgs;[
+  heavyPackages = with flakeInputs.nixos-stable.legacyPackages.${pkgs.system}; [
     # anki          # spaced repetition system
     # hopefully we can remove this from the environment
     # it's just that I can't setup latex correctly
