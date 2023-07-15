@@ -32,7 +32,7 @@
     ./sops.nix
 
     # to get the first iteration going on
-    # ./nextcloud.nix
+    ./nextcloud.nix
 
     ../common-server.nix
     # ../../nixos/modules/gitolite.nix

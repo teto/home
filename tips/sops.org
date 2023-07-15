@@ -12,6 +12,10 @@
 
 https://github.com/mozilla/sops#encrypting-using-age
 
+** no age identity found in "environment variable" that could decrypt the data
+
+
+
 To use an alternate key:
 - SOPS_AGE_KEY_FILE=runner3
 - or SOPS_AGE_RECIPIENTS=KEY_CONTENT

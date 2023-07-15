@@ -39,32 +39,13 @@ let
     # '';
   };
 
-  myVimPluginsOverlay = pkgs.callPackage ../../nixpkgs/overlays/vim-plugins/generated.nix {
-    inherit (pkgs.vimUtils) buildVimPluginFrom2Nix;
-  };
+  # myVimPluginsOverlay = pkgs.callPackage ../../nixpkgs/overlays/vim-plugins/generated.nix {
+  #   inherit (pkgs.vimUtils) buildVimPluginFrom2Nix;
+  # };
 
-  myVimPlugins = pkgs.vimPlugins.extend (
-    myVimPluginsOverlay
-  );
-
-
-  # parserDir = pkgs.tree-sitter.withPlugins (tree-sitter-grammars-fn);
-
-  # # TODO this should be done automatically
-  # tree-sitter-grammars-fn = p: with p; [
-  #   tree-sitter-bash
-  #   tree-sitter-c
-  #   tree-sitter-lua
-  #   tree-sitter-query
-  #   # tree-sitter-http
-  #   tree-sitter-json
-  #   tree-sitter-nix
-  #   # tree-sitter-haskell # crashes with a loop
-  #   # tree-sitter-python
-  #   # tree-sitter-html # for rest.nvim
-  #   # tree-sitter-norg
-  #   # tree-sitter-org-nvim
-  # ];
+  # myVimPlugins = pkgs.vimPlugins.extend (
+  #   myVimPluginsOverlay
+  # );
 
 
   # " , { 'tag': 'v3.12.0' }
@@ -72,32 +53,12 @@ let
   # Plug 'bakpakin/fennel.vim'
 
   filetypePlugins = with pkgs.vimPlugins; [
-    { plugin = pkgs.vimPlugins.hurl; }
     { plugin = wmgraphviz-vim; }
-    { plugin = fennel-vim; }
     { plugin = vim-toml; }
-    { plugin = dhall-vim; }
-    { plugin = vim-teal; }
-    moonscript-vim
-    idris-vim
   ];
 
-  treesitterPlugins = # with pkgs.vimPlugins; [
-   [
-      # for :TSPlaygroundToggle
-    # { plugin = playground; }
-    # { plugin = parserDir; }
-    # (luaPlugin {
-    # plugin = nvim-gps;
-    #   config = ''
-    #   require("nvim-gps").setup()
-    #   '';
-    # })
-  ];
 
   luaPlugins = with pkgs.vimPlugins; [
-    { plugin = b64-nvim; }
-    { plugin = kui-nvim; }
 
     # TODO it should be rocksified
     # (luaPlugin { plugin = iron-nvim;
@@ -169,7 +130,7 @@ let
     {
       # we should have a file of the grammars as plugins
       # symlinkJoin
-  # Usage:
+     # Usage:
       plugin = pkgs.symlinkJoin {
        name = "tree-sitter-grammars";
        paths = with pkgs.neovimUtils; [
@@ -206,7 +167,6 @@ let
 
 	# not upstreamed yet
     # (luaPlugin { plugin = nvim-lua-gf; })
-    (luaPlugin { plugin = sniprun; })
     (luaPlugin { plugin = urlview-nvim; })
     # (luaPlugin { plugin = nvim-web-devicons; })
     (luaPlugin {
@@ -411,7 +371,6 @@ let
     })
     (luaPlugin { plugin = fugitive-gitlab-vim; })
     # (luaPlugin { plugin = haskell-tools-nvim; })
-    (luaPlugin { plugin = telescope-manix; })
 
     {
       plugin = registers-nvim;
@@ -430,26 +389,6 @@ let
       # use :Registers
     }
 
-    # FIX https://github.com/NixOS/nixpkgs/issues/169293 first
-    (luaPlugin {
-      plugin = telescope-frecency-nvim; 
-      config = ''
-       require'telescope'.load_extension('frecency')
-       '';
-    })
-    (luaPlugin {
-      plugin = nvimdev-nvim;
-      optional = true;
-      config = ''
-        -- nvimdev {{{
-        -- call nvimdev#init(--path/to/neovim--)
-        vim.g.nvimdev_auto_init = 1
-        vim.g.nvimdev_auto_cd = 1
-        -- vim.g.nvimdev_auto_ctags=1
-        vim.g.nvimdev_auto_lint = 1
-        vim.g.nvimdev_build_readonly = 1
-        --}}}'';
-    })
   ];
 
 
@@ -470,23 +409,6 @@ let
   ];
 
   basePlugins = with pkgs.vimPlugins; [
-    # Packer should remain first
-    (luaPlugin {
-      plugin = nvim-telescope-zeal-cli;
-    })
-
-    # { plugin = vCoolor-vim; }
-    # (luaPlugin {
-    #   plugin = lazy-nvim;
-    #   config = ''
-    #    '';
-    # })
-    # {
-    #   # davidgranstrom/nvim-markdown-preview
-    #   plugin = nvim-markdown-preview;
-    #   config = ''
-    #   '';
-    # }
     # y a aussi vim-markdown
     # TODO package
     # astronauta
@@ -512,14 +434,6 @@ let
     (luaPlugin { plugin = lush-nvim; })
     # (luaPlugin { plugin = gruvbox-nvim; }) 
     # out of tree
-    # call with :Hoogle
-    (luaPlugin {
-      plugin = fzf-hoogle-vim;
-      config = ''
-       vim.g.hoogle_path = "hoogle"
-       vim.g.hoogle_fzf_cache_file = vim.fn.stdpath('cache')..'/hoogle_cache.json'
-       '';
-    })
 
     # (luaPlugin {
     #   # TODO move config hee
@@ -527,14 +441,11 @@ let
     # })
 
     # (luaPlugin { plugin = nvim-peekup; })
-
-
     # (luaPlugin {
     #   plugin = pywal-nvim;
     #   config = ''
     #   '';
     # })
-    (luaPlugin { plugin = glow-nvim; })
     (luaPlugin { plugin = fzf-lua; })
     (luaPlugin {
       # really helps with syntax highlighting
@@ -576,39 +487,6 @@ let
     # let g:gutentags_ctags_exclude = ['.vim-src', 'build', '.mypy_cache']
     # " }}}
 
-    (luaPlugin {
-      plugin = stylish-nvim;
-    })
-    # (luaPlugin {
-    #   plugin = rest-nvim;
-    #   config = ''
-    #     require("rest-nvim").setup({
-    #       -- Open request results in a horizontal split
-    #       result_split_horizontal = false,
-    #       -- Skip SSL verification, useful for unknown certificates
-    #       skip_ssl_verification = false,
-    #       -- Highlight request on run
-    #       highlight = {
-    #        enabled = true,
-    #        timeout = 150,
-    #       },
-    #       result = {
-    #        -- toggle showing URL, HTTP info, headers at top the of result window
-    #        show_url = true,
-    #        show_http_info = true,
-    #        show_headers = true,
-    #        -- disable formatters else they generate errors/add dependencies
-    #        -- for instance when it detects html, it tried to run 'tidy'
-    #        formatters = {
-    #         html = false,
-    #         jq = false
-    #        },
-    #       },
-    #       -- Jump to request line on run
-    #       jump_to_request = false,
-    #     })
-    #     '';
-    # })
 
     # disabling as long as it depends on nvim-treesitter
     # (luaPlugin {
@@ -677,7 +555,6 @@ let
     #   # optional = true;
     # }
     # displays a minimap on the right
-    (luaPlugin { plugin = minimap-vim; })
     (luaPlugin {
       plugin = vim-dirvish;
       config = ''
@@ -767,11 +644,9 @@ let
     (luaPlugin {
       plugin = vim-sayonara;
       config = ''
-        vim.g.sayonara_confirm_quit = 0
+      vim.g.sayonara_confirm_quit = 0
       '';
     })
-
-    # vim-livedown
 
     # { 
     # # node-based :MarkdownPreview
@@ -785,65 +660,6 @@ let
       plugin = vim-commentary;
     }
 
-    (luaPlugin {
-      # reuse once https://github.com/neovim/neovim/issues/9390 is fixed
-      plugin = vimtex;
-      optional = true;
-      config = ''
-        -- Pour le rappel
-        -- <localleader>ll pour la compilation continue du pdf
-        -- <localleader>lv pour la preview du pdf
-        -- see https://github.com/lervag/vimtex/issues/1058
-        -- let g:vimtex_log_ignore 
-        -- taken from https://castel.dev/post/lecture-notes-1/
-        vim.g.tex_conceal='abdmg'
-        vim.g.vimtex_log_verbose=1
-        vim.g.vimtex_quickfix_open_on_warning = 1
-        vim.g.vimtex_view_automatic=1
-        vim.g.vimtex_view_enabled=1
-        -- was only necessary with vimtex lazy loaded
-        -- let g:vimtex_toc_config={}
-        -- let g:vimtex_complete_img_use_tail=1
-        -- autoindent can slow down vim quite a bit
-        -- to check indent parameters, run :verbose set ai? cin? cink? cino? si? inde? indk?
-        vim.g.vimtex_indent_enabled=0
-        vim.g.vimtex_indent_bib_enabled=1
-        vim.g.vimtex_compiler_enabled=1
-        vim.g.vimtex_compiler_progname='nvr'
-        vim.g.vimtex_quickfix_method="latexlog"
-        -- 1=> opened automatically and becomes active (2=> inactive)
-        vim.g.vimtex_quickfix_mode = 2
-        vim.g.vimtex_indent_enabled=0
-        vim.g.vimtex_indent_bib_enabled=1
-        vim.g.vimtex_view_method = 'zathura'
-        vim.g.vimtex_format_enabled = 0
-        vim.g.vimtex_complete_recursive_bib = 0
-        vim.g.vimtex_complete_close_braces = 0
-        vim.g.vimtex_fold_enabled = 0
-        vim.g.vimtex_view_use_temp_files=1 -- to prevent zathura from flickering
-        -- let g:vimtex_syntax_minted = [ { 'lang' : 'json', \ }]
-
-        -- shell-escape is mandatory for minted
-        -- check that '-file-line-error' is properly removed with pplatex
-        -- executable The name/path to the latexmk executable. 
-        '';
-      # vim.gvimtex_compiler_latexmk = {
-      #          'backend' : 'nvim',
-      #          'background' : 1,
-      #          'build_dir' : ''',
-      #          'callback' : 1,
-      #          'continuous' : 1,
-      #          'executable' : 'latexmk',
-      #          'options' : {
-      #            '-pdf',
-      #            '-file-line-error',
-      #            '-bibtex',
-      #            '-synctex=1',
-      #            '-interaction=nonstopmode',
-      #            '-shell-escape',
-      #          },
-      #         }
-    })
     (luaPlugin {
       plugin = unicode-vim;
 
@@ -862,7 +678,8 @@ let
 
   ];
 
-  overlayPlugins = with myVimPlugins; [
+  # with myVimPlugins;
+  overlayPlugins =  [
     # pkgs.vimPlugins.telescope-fzf-native-nvim
     # TODO restore in my overlay
     # {
@@ -877,7 +694,6 @@ let
        basePlugins
     ++ overlayPlugins
     ++ luaPlugins
-    ++ treesitterPlugins
     ++ colorschemePlugins
     ++ filetypePlugins
   ;
@@ -922,13 +738,7 @@ in
     # ;
 
 
-     extraLuaConfig = ''
-       -- logs are written to /home/teto/.cache/vim-lsp.log
-       -- vim.lsp.set_log_level("info")
-       -- require my own manual config
-       require('init-manual')
-     ''
-     + (lib.strings.concatStrings (
+     extraLuaConfig =      (lib.strings.concatStrings (
         lib.mapAttrsToList genBlockLua luaRcBlocks
       ))
      ;
