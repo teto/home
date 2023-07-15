@@ -19,10 +19,10 @@
     #   setlocal expandtab
     # '';
 
-    runtime."ftplugin/c.vim".text = ''
-      " otherwise vim defaults to ccomplete#Complete
-      setlocal omnifunc=v:lua.vim.lsp.omnifunc
-    '';
+    # runtime."ftplugin/c.vim".text = ''
+    #   " otherwise vim defaults to ccomplete#Complete
+    #   setlocal omnifunc=v:lua.vim.lsp.omnifunc
+    # '';
 
 
   };

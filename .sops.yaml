@@ -7,7 +7,7 @@ keys:
   - &teto age18etpu3xwwsv87ysarwndzaxdv3dw7a7zzytxrhdc2gtls0cr0elsa79uc5
   # generated via ssh-to-age
 	# 
-  - &neotokyo age13yn60nrxslrmfyxmhw09eu9xpssrkhejderv4y3fcyzeqlq5ppkqp4cxgl
+  - &neotokyo age1t6hgvgv8gs8vhwch08zzvpc469r3zttmvnpudfuxmkqajdld7s5qv37dtu
 creation_rules:
   - path_regex: hosts/neotokyo/secrets.yaml$
     key_groups:

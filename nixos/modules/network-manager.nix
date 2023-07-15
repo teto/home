@@ -1,15 +1,14 @@
 { config, lib, pkgs, ... }:
 {
 
-  # environment.systemPackages = [
-  #   pkgs.gnome.networkmanagerapplet
-  # ];
-
   networking.networkmanager = {
     enable = true;
     # enableStrongSwan = true;
     # one of "OFF", "ERR", "WARN", "INFO", "DEBUG", "TRACE"
     # logLevel = "TRACE";
+
+    # default is openresolv
+    dns = "systemd-resolved";
 
     # may generate problems
     wifi.scanRandMacAddress = false;
