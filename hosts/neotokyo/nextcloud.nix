@@ -19,6 +19,8 @@
 
     # use default redis config for small servers
     configureRedis = true;
+
+    appstoreEnable = true;
     extraAppsEnable = lib.mkForce false;
 
     database.createLocally = true;
@@ -31,6 +33,11 @@
 
       # Further forces Nextcloud to use HTTPS, useful when behind proxy
       overwriteProtocol = "https";
+    };
+
+    extraApps = with config.services.nextcloud.package.packages.apps; {
+     # inherit news; # removed 'cos gives a wrong error
+     inherit memories;
     };
 
   };
