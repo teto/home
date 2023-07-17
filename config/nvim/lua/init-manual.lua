@@ -913,5 +913,5 @@ require('teto.rest')
 -- vim.cmd([[colorscheme janah]])
 -- vim.cmd([[colorscheme pywal]])
 local theme = require('last-color').recall() or 'sonokai'
-print("Setting colorscheme ", theme )
+-- print("Setting colorscheme ", theme )
 vim.cmd(('colorscheme %s'):format(theme))
