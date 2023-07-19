@@ -3,13 +3,17 @@
 * how to access help
   manpage available via `npm help install`
 
-* npm instlal: where are packages installed ?
+* npm install: where are packages installed ?
 
   Without -g ("global") it installs in the $CWD/node_modules folder.
   -D => install as "dev-dependencies"
  
 * why the `@` in the package ?
   it's a "scope": https://docs.npmjs.com/about-scopes
+
+* to regenerate the package-lock.json with a specific version ?
+
+  npm i --lockfile-version=1
 
 * test
   `npm i playwright`

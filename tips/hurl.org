@@ -1,5 +1,5 @@
 hurl --test basic.hurl
-hurl --variables-file vars.env test.hurl
+hurl --variables-file vars.env test.hurl --check-root ~/jinko
 
 Add --verbose to see queries and --very-verbose to see
 

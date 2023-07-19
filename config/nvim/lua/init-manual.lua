@@ -65,7 +65,7 @@ require('lazy').setup('lazyplugins', {
 	performance = {
 		cache = {
 			-- try ?
-			enabled = false,
+			enabled = true,
 		},
 		-- we install some packages via nix so we want to load from packpath too
 		reset_packpath = false,
@@ -89,7 +89,7 @@ require('lazy').setup('lazyplugins', {
           },
 		},
 	},
-	debug = true,
+	debug = false,
 })
 -- lazy/config.lua sets vim.go.loadplugins = false so I used to run packloadall to restore those plugins
 -- but there seems to be a bug somewhere as overriding VIMRUNTIME would then be dismissed and it would used

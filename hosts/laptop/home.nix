@@ -3,6 +3,7 @@
 {
 
   imports = [
+   ./sway.nix
    ../desktop/teto/home.nix
 
     ../../hm/profiles/vdirsyncer.nix
@@ -18,40 +19,15 @@
     # ../../hm/profiles/vscode.nix #  provided by nova-nix config
     ../../hm/profiles/experimental.nix
     ../../hm/profiles/emacs.nix
-    ../../hm/profiles/wayland.nix
-
   ];
 
-
-  wayland.windowManager.sway = {
-    enable = true;
-
-    extraSessionCommands = lib.mkForce "";
-    extraOptions = [
-      "--verbose"
-      "--debug"
-    ];
-  };
-
-  programs.waybar = {
-   settings = {
-     mainBar = {
-       modules-right = [ 
-        "battery"
-        "bluetooth"
-        "network"
-        # "backlight"
-       ];
-       battery = {
-
-        format = "{time} {icon}";
-       };
-    };
-    };
-  };
+  # dans le cadre de mon experimentation !
+  home.packages = with pkgs; [
+   timg
+   lua
+   imagemagick # for 'convert'
+  ];
 
   # for blue tooth applet; must be installed systemwide
   services.blueman-applet.enable = true;
-
-  services.nextcloud-client.enable = true;
 }
