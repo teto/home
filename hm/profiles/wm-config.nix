@@ -208,12 +208,6 @@ in
     # "${mad}+Tab" = "exec \"${pkgs.rofi}/bin/rofi -modi 'run,drun,window,ssh' -show window\"";
 
     # locker
-    # "${mod}+Ctrl+L"="exec ${pkgs.i3lock-fancy}/bin/i3lock-fancy";
-    "${mod}+Ctrl+L" = "exec ${pkgs.i3lock}/bin/i3lock";
-
-    "${mod}+Ctrl+h" = ''exec "${pkgs.rofi}/bin/rofi -modi 'clipboard:greenclip print' -show clipboard"'';
-    "${mod}+g" = "exec ${pkgs.i3-easyfocus}/bin/i3-easyfocus";
-    "${mad}+w" = "exec ${pkgs.i3-easyfocus}/bin/i3-easyfocus";
 
     # broken
     # "${mod}+b" = "exec ${pkgs.buku_run}/bin/buku_run";
@@ -235,9 +229,6 @@ in
     # split in vertical orientation
     # needs i3next
     "$mod+v" = "split toggle";
-
-    # icons are set for papirus for now
-    "$mod+shift+o" = "exec xkill";
 
     # different focus for windows
     "$mod+$kleft" = "focus left";

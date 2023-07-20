@@ -374,6 +374,10 @@ let
 
     {
       plugin = registers-nvim;
+      # https://github.com/tversteeg/registers.nvim#default-values
+      config = ''
+       require("registers").setup()
+       '';
 
       # let g:registers_return_symbol = "\n" "'⏎' by default
       # let g:registers_tab_symbol = "\t" "'·' by default

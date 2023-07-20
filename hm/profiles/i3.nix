@@ -156,13 +156,24 @@ in
       };
 
       # consider using lib.mkOptionDefault according to help
-      keybindings =
+      keybindings = let 
+       inherit (sharedConfig) mod mad;
+      in
         {
           # "$mod+f" = "fullscreen";
           # "$mod+Shift+f" = "fullscreen global";
           # "$mod+button3" = "floating toggle";
           # "$mod+m" = ''mode "monitors'';
-         "${sharedConfig.mod}+p" = "exec ${pkgs.rofi-pass}/bin/rofi-pass";
+         "${mod}+p" = "exec ${pkgs.rofi-pass}/bin/rofi-pass";
+    # "${mod}+Ctrl+L"="exec ${pkgs.i3lock-fancy}/bin/i3lock-fancy";
+    "${mod}+Ctrl+L" = "exec ${pkgs.i3lock}/bin/i3lock";
+
+    "${mod}+Ctrl+h" = ''exec "${pkgs.rofi}/bin/rofi -modi 'clipboard:greenclip print' -show clipboard"'';
+    "${mod}+g" = "exec ${pkgs.i3-easyfocus}/bin/i3-easyfocus";
+    "${mad}+w" = "exec ${pkgs.i3-easyfocus}/bin/i3-easyfocus";
+    # icons are set for papirus for now
+    "$mod+shift+o" = "exec xkill";
+
 
         }
         // sharedConfig.sharedKeybindings;

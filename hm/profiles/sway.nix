@@ -11,7 +11,7 @@ let
 in
 {
   home.packages = with pkgs; [
-    # clipman # clipboard manager, works with wofi, y a ptet un module
+    clipman # clipboard manager, works with wofi, y a ptet un module
     foot # terminal
     # use it with $ grim -g "$(slurp)"
     grim # replace scrot/flameshot
@@ -250,7 +250,7 @@ in
     "${mod}+Ctrl+L" = "exec ${pkgs.swaylock}/bin/swaylock";
 
     # "${mod}+Ctrl+h" = ''exec "${pkgs.rofi}/bin/rofi -modi 'clipboard:greenclip print' -show clipboard"'';
-    "${mod}+Ctrl+h" = ''exec "${pkgs.clipman}/bin/clipman pick -t rofi'';
+    "${mod}+Ctrl+h" = ''exec ${pkgs.clipman}/bin/clipman pick -t rofi'';
     # "${mod}+g" = "exec ${pkgs.i3-easyfocus}/bin/i3-easyfocus";
     # "${mad}+w" = "exec ${pkgs.i3-easyfocus}/bin/i3-easyfocus";
     # TODO bind
