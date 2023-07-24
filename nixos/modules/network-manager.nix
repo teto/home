@@ -1,6 +1,12 @@
 { config, lib, pkgs, ... }:
 {
-  services.resolved.enable = true;
+  services.resolved= {
+    enable = true;
+    dnssec = "false"; # "allow-downgrade";
+  };
+  # allow-downgrade falls back when dnssec fails, "true" foces dnssec
+  # services.resolved.dnssec = "allow-downgrade";
+
 
   networking.networkmanager = {
     enable = true;

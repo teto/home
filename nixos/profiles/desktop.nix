@@ -71,9 +71,6 @@
   # networking.firewall.allowedUDPPorts = [ 631 ];
   # networking.firewall.allowedTCPPorts = [ 631 ];
 
-  # allow-downgrade falls back when dnssec fails, "true" foces dnssec
-  services.resolved.dnssec = "allow-downgrade";
-
   hardware = {
     # enableAllFirmware =true;
     enableRedistributableFirmware = true;
