@@ -4,7 +4,8 @@
     enable = true;
     # /var/lib/postgresql/13/
     # do I really need it to work locally ?
-    # port par defaut est 5050
+    # port par defaut est 5432
+    port = 5555;
 
     # should be a string
     # initialPasswordFile

@@ -372,7 +372,7 @@ let
     (luaPlugin { plugin = fugitive-gitlab-vim; })
     # (luaPlugin { plugin = haskell-tools-nvim; })
 
-    {
+    (luaPlugin {
       plugin = registers-nvim;
       # https://github.com/tversteeg/registers.nvim#default-values
       config = ''
@@ -391,8 +391,7 @@ let
       # let g:registers_window_min_height = 10 "3 by default, minimum height of the window when there is the cursor at the bottom
       # let g:registers_window_max_width = 20 "100 by default, maximum width of the window
       # use :Registers
-    }
-
+    })
   ];
 
 

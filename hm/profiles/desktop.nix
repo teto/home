@@ -229,11 +229,13 @@ in
   home.packages =
     (desktopPkgs true) ++ (devPkgs true) ++ heavyPackages
     ++ (imPkgs true)
-    ++ [
+    ++ (with pkgs; [
       # pkgs.up # live preview of pipes
       # pkgs.peek # GIF recorder  BROKEN
 	  pkgs.alsa-utils #  for alsamixer
-    ]
+      pinentry-bemenu
+      pinentry-rofi
+    ])
   ;
 
   home.sessionPath = [
@@ -270,7 +272,7 @@ in
   # might trigger nm-applet crash ?
   # TODO disable it ?
   services.gpg-agent = {
-    enable = false;
+    enable = true;
     defaultCacheTtl = 7200;
     # maxCacheTtl
     enableSshSupport = true;
@@ -351,7 +353,6 @@ in
     settings.verbs = [{ invocation = "p"; key = "ctrl-o"; execution = ":open_leave"; }];
   };
 
-  # for pinentry-gnome to work longer
 
   programs.joshuto = {
 
