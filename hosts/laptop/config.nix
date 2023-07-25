@@ -5,6 +5,8 @@
     ./sops.nix
     ./hardware.nix
     ../config-all.nix
+    ../desktop/nextcloud.nix
+
     ../../nixos/modules/distributedBuilds.nix
     ../../nixos/profiles/desktop.nix
     ../../nixos/profiles/rstudio-server.nix

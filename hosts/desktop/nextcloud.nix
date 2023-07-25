@@ -24,9 +24,19 @@
     config = {
       # we choose postgres because it's faster
       dbtype = "pgsql";
+      # services.postgresql
+      # dbport = config.services.postgresql.port;
+      dbport = 5555;
+    # port = 5555;
 
       # Further forces Nextcloud to use HTTPS
       # overwriteProtocol = "https";
+    };
+
+    extraApps = with config.services.nextcloud.package.packages.apps; {
+     # inherit news; # removed 'cos gives a wrong error
+     inherit memories;
+     inherit previewgenerator;
     };
 
   };

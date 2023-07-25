@@ -38,6 +38,8 @@
     extraApps = with config.services.nextcloud.package.packages.apps; {
      # inherit news; # removed 'cos gives a wrong error
      inherit memories;
+     inherit previewgenerator;
+
     };
 
   };
