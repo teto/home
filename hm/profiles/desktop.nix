@@ -39,14 +39,12 @@ let
     ncurses.dev # for infocmp
     neovide
     # neovim-remote # broken for latex etc
-    # nix-doc # to access nix doc (broken)
-    # manix
     nix-output-monitor
     nix-update # nix-update <ATTR> to update a software
     nix-index # to list package contents
     nixpkgs-fmt
     nixpkgs-review
-    nodePackages.bitwarden-cli # 'bw' binary
+    # nodePackages."@bitwarden/cli" # 'bw' binary # broken
     patchutils # for interdiff
     pcalc # cool calc
     rpl # to replace strings across files
