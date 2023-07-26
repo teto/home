@@ -2,10 +2,13 @@
 {
 
   imports = [
+     ../../nixos/modules/nextcloud.nix
      ../../nixos/profiles/nextcloud.nix
   ];
 
   services.nextcloud = {
+   # .enable
+   previewGenerator = true;
    hostName = secrets.jakku.hostname;
    https = false;
 

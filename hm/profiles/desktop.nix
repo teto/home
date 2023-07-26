@@ -32,6 +32,7 @@ let
     gitAndTools.gitbatch # to fetch form several repos at once
     gitAndTools.lab
 	haskellPackages.fast-tags
+    hurl # http tester
     perf-tools
 
 	inotify-tools # for inotify-wait notably
@@ -63,6 +64,8 @@ let
     # libsecret  # to consult
     newsboat #
     mujmap # to sync notmuch tags across jmap 
+    memento # capable to display 2 subtitles at same time
+    vlc
     # leafnode dovecot22 dovecot_pigeonhole fetchmail procmail w3m
     # mairix mutt msmtp lbdb contacts spamassassin
   ] ++ lib.optionals all [

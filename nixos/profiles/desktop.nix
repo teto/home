@@ -95,7 +95,7 @@
   # todo find a good japanese font
   fonts = {
     fontDir.enable = true; # ?
-    fonts = with pkgs; [
+    packages = with pkgs; [
       ubuntu_font_family
       inconsolata # monospace
       noto-fonts-cjk # asiatic

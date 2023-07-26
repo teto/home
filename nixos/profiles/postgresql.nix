@@ -26,15 +26,6 @@
     pkgs.dbeaver # java, crashes often
   ];
 
-  services.pgmanage = {
-    enable = false;
-    connections = {
-      # sslmode=require
-      core-ws = "hostaddr=127.0.0.1 port=5432 dbname=postgres ";
-      # nuc-server = "hostaddr=192.168.0.100 port=5432 dbname=postgres"; 
-    };
-  };
-
   services.pgadmin = {
     # this one is painful
     # you have to create /var/lib/pgadmin and /var/log/pgadmin
@@ -48,11 +39,5 @@
     initialPasswordFile = pkgs.writeText "test" "toto";
   };
 
-  # https://www.pgadmin.org/docs/pgadmin4/6.8/config_py.html
-  # DATA_DIR="/var/lib/pgadmin"
-  # environment.etc."pgadmin/config_system.py".text = ''
-  # SERVER_MODE=None
-  # '';
-  # 
 }
 
