@@ -4,11 +4,13 @@
 
   imports = [
    ./sway.nix
+   ./waybar.nix
    ../desktop/teto/home.nix
 
     ../../hm/profiles/vdirsyncer.nix
     ../../hm/profiles/desktop.nix
     ../../hm/profiles/sway.nix
+    ../../hm/profiles/waybar.nix
     # ../../hm/profiles/weechat.nix
     ../../hm/profiles/extra.nix
     ../../hm/profiles/syncthing.nix

@@ -14,6 +14,7 @@
     ../../../hm/profiles/android.nix
     ../../../hm/profiles/desktop.nix
     ../../../hm/profiles/sway.nix
+    ../../../hm/profiles/waybar.nix
     ../../../hm/profiles/neomutt.nix
     ../../../hm/profiles/nushell.nix
     ../../../hm/profiles/alot.nix
