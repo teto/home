@@ -36,10 +36,10 @@
     deploy-rs.url = "github:serokell/deploy-rs";
     flake-utils.url = "github:numtide/flake-utils";
     treefmt-nix.url = "github:numtide/treefmt-nix";
-	fzf-git-sh = {
-	 url = "github:junegunn/fzf-git.sh";
-	 flake = false;
-	};
+    fzf-git-sh = {
+      url = "github:junegunn/fzf-git.sh";
+      flake = false;
+    };
 
     peerix.url = "github:cid-chan/peerix";
     nixos-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -66,7 +66,7 @@
     # nova.url = "git+ssh://git@git.novadiscovery.net/world/nova-nix.git?ref=master";
     nova.url = "git+ssh://git@git.novadiscovery.net/sys/doctor";
     jinko-stats.url = "git+ssh://git@git.novadiscovery.net/jinko/jinko-stats.git?ref=add-rserver";
-	# c8296214151883ce27036be74d22d04953418cf4
+    # c8296214151883ce27036be74d22d04953418cf4
     nova-ci.url = "git+ssh://git@git.novadiscovery.net/infra/ci-runner";
     neovim = {
       # url = "github:nojnhuh/neovim?dir=contrib&ref=lsp-watch-files";
@@ -83,10 +83,10 @@
 
     # TODO extend vim plugins from this overlay
     neovim-overlay.url = "github:teto/neovim-nightly-overlay/vimPlugins-overlay";
-	tree-sitter = {
-	  url = "github:ahlinc/tree-sitter";
-	  flake = false;
-	};
+    tree-sitter = {
+      url = "github:ahlinc/tree-sitter";
+      flake = false;
+    };
     # nix-direnv = {
     #   url = "github:nix-community/nix-direnv";
     #   flake = false;
@@ -116,26 +116,26 @@
       unstablePkgs = pkgImport self.inputs.nixos-unstable;
 
       hm-common = { config, lib, pkgs, ... }: {
-          home-manager.verbose = true;
-          # install through the use of user.users.USER.packages
-          home-manager.useUserPackages = true;
-          # disables the Home Manager option nixpkgs.*
-          home-manager.useGlobalPkgs = true;
+        home-manager.verbose = true;
+        # install through the use of user.users.USER.packages
+        home-manager.useUserPackages = true;
+        # disables the Home Manager option nixpkgs.*
+        home-manager.useGlobalPkgs = true;
 
-          home-manager.sharedModules = [
-            ./hm/modules/neovim.nix
-            ./hm/modules/i3.nix
-            ./hm/modules/bash.nix
-            ./hm/modules/zsh.nix
-            ./hm/modules/xdg.nix
-          ];
-          home-manager.extraSpecialArgs = {
-            inherit secrets;
-			flakeInputs = self.inputs;
-          };
+        home-manager.sharedModules = [
+          ./hm/modules/neovim.nix
+          ./hm/modules/i3.nix
+          ./hm/modules/bash.nix
+          ./hm/modules/zsh.nix
+          ./hm/modules/xdg.nix
+        ];
+        home-manager.extraSpecialArgs = {
+          inherit secrets;
+          flakeInputs = self.inputs;
+        };
 
-          # TODO imports
-         };
+        # TODO imports
+      };
 
     in
     flake-utils.lib.eachSystem [ "x86_64-linux" ]
@@ -145,12 +145,12 @@
           devShells = {
             # default devShell when working on this repo:
             # - I need sops to edit my secrets
-            # - git-crypt 
+            # - git-crypt
             default = nixpkgs.legacyPackages.${system}.mkShell {
               name = "dotfiles-shell";
               buildInputs = with myPkgs; [
                 # to run `git-crypt export-key`
-                git-crypt 
+                git-crypt
                 sops
                 age
                 ssh-to-age
@@ -187,10 +187,7 @@
           };
         }) // {
 
-	  homeManagerConfigurations = {
-
-
-	  };
+      homeManagerConfigurations = { };
 
       nixosConfigurations =
         let
@@ -236,7 +233,7 @@
             inherit system;
             specialArgs = {
               inherit secrets;
-			  flakeInputs = self.inputs;
+              flakeInputs = self.inputs;
             };
 
             modules = [
@@ -267,8 +264,6 @@
 
                 imports = [
                   ./hosts/neotokyo/config.nix
-                  # just to check how /etc/nix/machines looks like
-                  # ./nixos/modules/distributedBuilds.nix
                 ];
 
               })
@@ -278,7 +273,7 @@
             specialArgs = {
               hostname = "neotokyo";
               inherit secrets;
-			  flakeInputs = self.inputs;
+              flakeInputs = self.inputs;
             };
 
           };
@@ -292,7 +287,7 @@
             };
             modules = [
               self.inputs.sops-nix.nixosModules.sops
-                  # self.inputs.mptcp-flake.nixosModules.mptcp
+              # self.inputs.mptcp-flake.nixosModules.mptcp
               # self.inputs.peerix.nixosModules.peerix
               # often breaks
               # (import ./nixos/modules/hoogle.nix)
@@ -318,18 +313,15 @@
 
       nixosModules =
         let
-          prep = map (path: {
-            name = nixpkgs.lib.removeSuffix ".nix" (baseNameOf path);
-            value = import path;
-          });
-
-          # modules
-          # TODO use the one from the overlay
-          moduleList = import ./modules/list.nix;
-          modulesAttrs = listToAttrs (prep moduleList);
-
+          getNixFilesInDir = dir: builtins.filter (file: nixpkgs.lib.hasSuffix ".nix" file && file != "default.nix") (builtins.attrNames (builtins.readDir dir));
+          genKey = str: nixpkgs.lib.replaceStrings [ ".nix" ] [ "" ] str;
+          genValue = dir: str: { config }: { imports = [ "/${dir}${str}" ]; };
+          moduleFrom = dir: str: { "${genKey str}" = genValue dir str; };
+          modulesFromDir = dir: builtins.foldl' (x: y: x // (moduleFrom dir y)) { } (getNixFilesInDir dir);
         in
-		 modulesAttrs
+        {
+          nixosModules = modulesFromDir ./modules;
+        }
       ;
 
       templates = {
@@ -353,13 +345,13 @@
 
         autoupdating = final: prev: {
 
-		  mujmap = self.inputs.mujmap.packages.x86_64-linux.mujmap;
+          mujmap = self.inputs.mujmap.packages.x86_64-linux.mujmap;
           # neovide = prev.neovide.overrideAttrs(oa: {
           #  src = self.inputs.neovide;
           # });
 
 
-          # TODO override extraLibs instead 
+          # TODO override extraLibs instead
           i3pystatus-custom = (prev.i3pystatus.override ({
             extraLibs = with final.python3Packages; [
               pytz
@@ -395,10 +387,10 @@
         neovimOfficial = self.inputs.neovim.overlay;
         wireshark = import ./overlays/wireshark.nix;
         python = import ./overlays/python.nix;
-        # wayland = 
+        # wayland =
         # mptcp = self.inputs.mptcp-flake.overlays.default;
         nur = self.inputs.nur.overlay;
-		nova-ci = self.inputs.nova-ci.overlays.default;
+        nova-ci = self.inputs.nova-ci.overlays.default;
 
       }
       # just for one specific host
@@ -434,23 +426,24 @@
             };
           in
           {
-           router = genNode ({ 
-            name = "router";
-            # local-facing address
-            # hostname = "192.168.1.11";
-            hostname = "10.0.0.0";
-           }) // {
-             # sshOpts = [ "-F" "ssh_config" ];
-             sshUser = "teto";
-             sshOpts = [ "-i" "~/.ssh/id_rsa"];
+            router = genNode
+              ({
+                name = "router";
+                # local-facing address
+                # hostname = "192.168.1.11";
+                hostname = "10.0.0.0";
+              }) // {
+              # sshOpts = [ "-F" "ssh_config" ];
+              sshUser = "teto";
+              sshOpts = [ "-i" "~/.ssh/id_rsa" ];
 
-           };
+            };
 
-           neotokyo = genNode ({ name = "neotokyo"; hostname = secrets.jakku.hostname; }) // {
-             sshOpts = [ "-t" ];
+            neotokyo = genNode ({ name = "neotokyo"; hostname = secrets.jakku.hostname; }) // {
+              sshOpts = [ "-t" ];
 
-            # user = "teto";
-           };
+              # user = "teto";
+            };
           };
         # nixpkgs.lib.listToAttrs (
         #   map

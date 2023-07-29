@@ -11,7 +11,7 @@
     ../../nixos/profiles/ntp.nix
     ../../nixos/profiles/wireshark.nix
     ../../nixos/modules/network-manager.nix
-    ../../nixos/modules/wifi.nix
+    ../../nixos/profiles/wifi.nix
 
     ./zsh.nix
     ./gnome.nix

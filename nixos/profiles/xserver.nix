@@ -19,10 +19,11 @@
     displayManager = {
 	 # enable startx if you want to bypass display managers
 	 startx.enable = true;
-      autoLogin = {
-        enable = false;
-        user = "teto";
-      };
+     # TODO move to host config
+      # autoLogin = {
+      #   enable = false;
+      #   user = "teto";
+      # };
       defaultSession = "none+i3";
       lightdm = {
         enable = false;

@@ -11,7 +11,7 @@
     ../../nixos/profiles/postgresql.nix
 
     # todo renommer en workstation
-    ../../nixos/modules/docker-daemon.nix
+    ../../nixos/profiles/docker-daemon.nix
 
     ../config-all.nix
     ../../nixos/profiles/desktop.nix
@@ -22,13 +22,13 @@
     ../../nixos/profiles/podman.nix
     ../../nixos/profiles/steam.nix
 
-    ../../nixos/modules/libvirtd.nix
+    # ../../nixos/profiles/libvirtd.nix
     # ../../modules/xserver.nix
     # ../../modules/redis.nix
     ../../nixos/profiles/ntp.nix
 
     # just to check how /etc/nix/machines looks like
-    ../../nixos/modules/distributedBuilds.nix
+    ../../nixos/profiles/distributedBuilds.nix
   ];
 
   home-manager.users.root = {

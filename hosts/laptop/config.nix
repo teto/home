@@ -7,11 +7,11 @@
     ../config-all.nix
     ../desktop/nextcloud.nix
 
-    ../../nixos/modules/distributedBuilds.nix
+    ../../nixos/profiles/distributedBuilds.nix
     ../../nixos/profiles/desktop.nix
     ../../nixos/profiles/rstudio-server.nix
     ../../nixos/profiles/podman.nix
-    ../../nixos/modules/sway.nix
+    ../../nixos/profiles/sway.nix
     # ../../nixos/modules/docker-daemon.nix
     # ../../modules/xserver.nix
     # ./nixos/modules/redis.nix

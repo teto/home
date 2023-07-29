@@ -1,4 +1,42 @@
 return {
+ { 'mhartington/formatter.nvim',
+ config = function ()
+-- Utilities for creating configurations
+local util = require "formatter.util"
+
+-- Provides the Format, FormatWrite, FormatLock, and FormatWriteLock commands
+require("formatter").setup {
+  -- Enable or disable logging
+  logging = true,
+  -- Set the log level
+  log_level = vim.log.levels.WARN,
+  -- All formatter configurations are opt-in
+  filetype = {
+   nix = {       require("formatter.filetypes.nix").nixpkgs_fmt,
+  },
+   py = {
+      require("formatter.filetypes.python").black,
+   },
+    -- Formatter configurations for filetype "lua" go here
+    -- and will be executed in order
+    lua = {
+      -- "formatter.filetypes.lua" defines default configurations for the
+      -- "lua" filetype
+      require("formatter.filetypes.lua").stylua,
+
+    },
+
+    -- Use the special "*" filetype for defining formatter configurations on
+    -- any filetype
+    ["*"] = {
+      -- "formatter.filetypes.any" defines default configurations for any
+      -- filetype
+      require("formatter.filetypes.any").remove_trailing_whitespace
+    }
+  }
+}
+end
+ },
  {
   -- :NullLsLog / NullLsInfo
   'jose-elias-alvarez/null-ls.nvim',
@@ -30,20 +68,15 @@ return {
      -- null_ls.builtins.diagnostics.tsc
      -- null_ls.builtins.diagnostics.yamllint,
      null_ls.builtins.diagnostics.zsh,
-     null_ls.builtins.formatting.black,
      null_ls.builtins.formatting.just,
      null_ls.builtins.formatting.markdown_toc,
-     null_ls.builtins.formatting.nixpkgs_fmt,
+     -- null_ls.builtins.formatting.nixpkgs_fmt,
      null_ls.builtins.formatting.treefmt.with({
       -- treefmt requires a config file
       condition = function(utils)
        return utils.root_has_file("treefmt.toml")
       end,
      }),
-     -- null.builtins.diagnostics.hlint,
-     -- require("null-ls").builtins.formatting.stylua,
-     -- require("null-ls").builtins.diagnostics.eslint,
-     -- require("null-ls").builtins.completion.spell,
     },
    })
   end,

@@ -4,16 +4,16 @@ final: prev:
   # lib = final.callPackage ./lib.nix {};
   # inherit (final.callPackage ./lib.nix { }) mkRemoteBuilderDesc;
 
-  rofi-wayland = prev.rofi.overrideAttrs (oa: {
-   pname = "rofi-wayland";
+  # rofi-wayland = prev.rofi.overrideAttrs (oa: {
+  #  pname = "rofi-wayland";
 
-    src = final.fetchFromGitHub {
-      owner = "lbonn";
-      repo = "rofi";
-      rev = "1e8c22b4a05c7602aa9e51509274ce5ac36a5099";
-      sha256 = "sha256-FvDzJL5VM4UeDCwDeElZhE/eRUefGrt4GmntaIeuQBQ=";
-    };
-  });
+  #   src = final.fetchFromGitHub {
+  #     owner = "lbonn";
+  #     repo = "rofi";
+  #     rev = "1e8c22b4a05c7602aa9e51509274ce5ac36a5099";
+  #     sha256 = "sha256-FvDzJL5VM4UeDCwDeElZhE/eRUefGrt4GmntaIeuQBQ=";
+  #   };
+  # });
 
   # rofi = final.rofi-wayland;
 

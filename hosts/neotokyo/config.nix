@@ -35,14 +35,14 @@
     ./nextcloud.nix
 
     ../common-server.nix
-    # ../../nixos/modules/gitolite.nix
+    # ./gitolite.nix
     # ../../nixos/modules/hercules-ci-agents.nix
 
     ../../nixos/profiles/ntp.nix
     ../../nixos/profiles/nix-daemon.nix
     ../../nixos/profiles/neovim.nix
 
-    # ../modules/blog.nix
+    # ./blog.nix
 
     # just to help someone on irc
     # <nixpkgs/nixos/modules/profiles/hardened.nix>
