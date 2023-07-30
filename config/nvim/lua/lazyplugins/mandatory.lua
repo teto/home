@@ -173,26 +173,34 @@ end
    })
   end
  },
-
- {
-  'Pocco81/AutoSave.nvim',       -- :ASToggle /AsOn / AsOff
-  config = function()
-   local autosave = require('auto-save')
-   autosave.setup({
-    enabled = true,
-    -- execution_message = "AutoSave: saved at " .. vim.fn.strftime("%H:%M:%S"),
-    events = { 'FocusLost' },             -- "InsertLeave"
-    -- conditions = {
-    -- 	exists = true,
-    -- 	filetype_is_not = {},
-    -- 	modifiable = true
-    -- },
-    write_all_buffers = false,
-    -- on_off_commands = true,
-    -- clean_command_line_interval = 2500
-   })
-  end,
- },
+{
+  "okuuva/auto-save.nvim",
+  cmd = "ASToggle", -- optional for lazy loading on command
+  event = { "FocusLost" }, -- optional for lazy loading on trigger events
+  opts = {
+    -- your config goes here
+    -- or just leave it empty :)
+  },
+},
+ -- {
+ --  'Pocco81/AutoSave.nvim',       -- :ASToggle /AsOn / AsOff
+ --  config = function()
+ --   local autosave = require('auto-save')
+ --   autosave.setup({
+ --    enabled = true,
+ --    -- execution_message = "AutoSave: saved at " .. vim.fn.strftime("%H:%M:%S"),
+ --    events = { 'FocusLost' },             -- "InsertLeave"
+ --    -- conditions = {
+ --    -- 	exists = true,
+ --    -- 	filetype_is_not = {},
+ --    -- 	modifiable = true
+ --    -- },
+ --    write_all_buffers = false,
+ --    -- on_off_commands = true,
+ --    -- clean_command_line_interval = 2500
+ --   })
+ --  end,
+ -- },
  'tpope/vim-rhubarb',
  -- competition to potamides/pantran.nvim which uses just AI backends it seems
  {
