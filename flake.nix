@@ -95,8 +95,6 @@
 
   outputs = { self, hm, nur, nixpkgs, flake-utils, treefmt-nix, nova, deploy-rs, ... }:
     let
-      inherit (builtins) listToAttrs baseNameOf;
-      # inherit (myPkgs.lib) removeSuffix;
       secrets = import ./nixpkgs/secrets.nix;
       # sshLib = import ./nixpkgs/lib/ssh.nix { inherit secrets; flakeInputs = self.inputs; };
       system = "x86_64-linux";
@@ -325,6 +323,11 @@
       ;
 
       templates = {
+        default = {
+          path = ./nixpkgs/templates/default;
+          description = "Unopiniated ";
+        };
+
         haskell = {
           path = ./nixpkgs/templates/haskell;
           description = "A flake to help develop haskell libraries.";

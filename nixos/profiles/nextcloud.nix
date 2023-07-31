@@ -36,7 +36,7 @@ in
     logLevel = 0;
     enableBrokenCiphersForSSE = false;
     # disable imageMagick for security reasons
-    enableImagemagick = false;
+    enableImagemagick = true;
     autoUpdateApps.enable = true;
 
     extraAppsEnable = true;

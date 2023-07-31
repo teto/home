@@ -46,14 +46,38 @@ let
        vim.g.hoogle_fzf_cache_file = vim.fn.stdpath('cache')..'/hoogle_cache.json'
        '';
     })
-    (luaPlugin {
-      plugin = stylish-nvim;
+    (luaPlugin { plugin = stylish-nvim; })
+    (luaPlugin { 
+     plugin = image-nvim;
+        /* lua */
+        config =  ''
+          require("image").setup({
+            backend = "kitty",
+            integrations = {
+              markdown = {
+                enabled = true,
+                sizing_strategy = "auto",
+                download_remote_images = false,
+                clear_in_insert_mode = true,
+              },
+              neorg = {
+                enabled = false,
+              },
+            },
+            max_width = nil,
+            max_height = nil,
+            max_width_window_percentage = nil,
+            max_height_window_percentage = 50,
+            kitty_method = "normal",
+            kitty_tmux_write_delay = 10,
+            window_overlap_clear_enabled = false,
+            window_overlap_clear_ft_ignore = { "cmp_menu", "cmp_docs", "" },
+          })
+        '';
     })
 
     # WIP
-    (luaPlugin {
-      plugin = nvim-telescope-zeal-cli;
-    })
+    (luaPlugin { plugin = nvim-telescope-zeal-cli; })
     (luaPlugin { plugin = minimap-vim; })
     (luaPlugin {
       # reuse once https://github.com/neovim/neovim/issues/9390 is fixed

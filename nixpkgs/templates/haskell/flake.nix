@@ -12,11 +12,8 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-
     flake-utils.url = "github:numtide/flake-utils";
-
     hls.url = "github:haskell/haskell-language-server";
-
     flake-compat = {
       url = "github:edolstra/flake-compat";
       flake = false;
@@ -42,7 +39,8 @@
         myModifier = drv:
           pkgs.haskell.lib.addBuildTools drv (with hsPkgs; [
             cabal-install
-            hls.packages.${system}."haskell-language-server-${compilerVersion}"
+            # TODO use the one from nixpkgs instead
+            # hls.packages.${system}."haskell-language-server-${compilerVersion}"
           ]);
 
         # mkDevShell
@@ -60,14 +58,12 @@
       {
         packages = {
 
-          mptcp-pm = mkPackage "mptcp-pm";
+          default = mkPackage "mptcp-pm";
 
         };
 
-        defaultPackage = self.packages.${system}.mptcpanalyzer;
-
         devShells = {
-          mptcp-pm = self.packages.${system}.mptcp-pm.envFunc { };
+          default = self.packages.${system}.mptcp-pm.envFunc { };
         };
       });
 }
