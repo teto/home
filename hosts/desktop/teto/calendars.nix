@@ -1,9 +1,44 @@
 { config, pkgs, lib, secrets, ... }:
 
 let 
-  hmUtils = pkgs.callPackage ../../lib.nix {};
+  hmUtils = pkgs.callPackage ../../../hm/lib.nix {};
 in
 {
+  home.packages = with pkgs; [
+    # need gnome-accounts to make it work
+    gnome3.gnome-calendar
+  ];
+
+  programs.khal = {
+   enable = true;
+   # need a locale to be set
+   locale = { };
+
+   extraConfig = ''
+    [highlight_days]
+    color = #ff0000
+    '';
+    # default_color
+  };
+
+  # broken
+  # xdg.configFile."khal/config".text = lib.mkBefore '' 
+# highlight_event_days = True
+# show_all_days = False
+# # timedelta = "2d"
+
+# [locale]
+# # default_timezone = Asia/Tokyo
+# # local_timezone= Asia/Tokyo
+# unicode_symbols=True
+
+  #  '';
+
+  programs.vdirsyncer = {
+    enable = true;
+    # package = pkgs.vdirsyncerStable;  # can conflict
+
+  };
 
   accounts.calendar = {
     basePath = "${config.home.homeDirectory}/calendars";
@@ -13,6 +48,7 @@ in
       khal = {
        enable = true;
        type = "discover";
+       # primary = true;
       };
 
       vdirsyncer = {

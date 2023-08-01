@@ -10,7 +10,7 @@
 	jq
     eva # calculette in a REPL
     dasht # ~ zeal but in terminal
-    # visidata # broken  # "vd", spreadsheet in terminal
+    visidata # broken  # "vd", spreadsheet in terminal
     gitAndTools.pass-git-helper # to register docker password in terminal
     graphviz
     flamegraph

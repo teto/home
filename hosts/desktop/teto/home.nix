@@ -2,13 +2,14 @@
 { config, lib, flakeInputs, pkgs, ... }:
 {
   imports = [
-    ./ssh-config.nix
-    ./zsh.nix
     ./bash.nix
-    ./mail.nix
+    ./calendars.nix
     ./git.nix
+    ./mail.nix
     ./neovim.nix
+    ./ssh-config.nix
     ./sway.nix
+    ./zsh.nix
 
     # Not tracked, so doesn't need to go in per-machine subdir
     ../../../hm/profiles/android.nix

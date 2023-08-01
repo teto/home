@@ -24,7 +24,7 @@
     flake-utils.lib.eachSystem [ "x86_64-linux" ] (system:
       let
 
-        compilerVersion = "8107";
+        compilerVersion = "96";
 
         haskellOverlay = hnew: hold: with pkgs.haskell.lib; { };
 
@@ -57,13 +57,29 @@
       in
       {
         packages = {
-
           default = mkPackage "mptcp-pm";
-
         };
 
         devShells = {
-          default = self.packages.${system}.mptcp-pm.envFunc { };
+          # default = self.packages.${system}.mptcp-pm.envFunc { };
+          default = pkgs.mkShell {
+            name = "ghc${compilerVersion}-haskell-env";
+            packages =
+              let
+                ghcEnv = hsPkgs.ghcWithPackages (hs: [
+                  hs.ghc
+                  # hs.haskell-language-server
+                  hs.cabal-install
+                  # prev.cairo
+                ]);
+              in
+              [
+                ghcEnv
+                # ghc
+                pkgs.pkg-config
+              ];
+          };
+
         };
       });
 }
