@@ -13,6 +13,7 @@ As my own user:
 
 psql -U postgres -c 'SHOW config_file'
 
+ps_isready -h hostname -U postgres is nice to test connection
 
 +template1=> \conninfo
 You are connected to database "template1" as user "teto" via socket in "/run/postgresql" at port "5432".
@@ -47,3 +48,7 @@ postgres=# \c sales
 CREATE ROLE username superuser;
 
 # \dt
+
+* logging
+
+ https://www.postgresql.org/docs/current/runtime-config-logging.html

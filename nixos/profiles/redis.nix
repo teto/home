@@ -2,7 +2,9 @@
 {
   services.redis = {
 
-    servers.default = {
+    # servers.default = {
+     # creates a redis-test unit ?
+    servers.test = {
       enable = true;
       logLevel = "debug";
       # default port is 6379

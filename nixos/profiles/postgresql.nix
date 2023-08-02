@@ -13,11 +13,24 @@
     # enableTCPIP = true; # if false, use TCP via localhost only or via socket
 
     # pg_hba.conf is generated through authentication bit
-    # authentication = 
+    # sudo cat /var/lib/postgresql/14/pg_hba.conf for a primer
+    authentication = [
+      "host    all             all             samenet            password"
+      # "local   all             all                                     md5"
+      "local all all              peer"
+    ];
 
     # ensureUsers =  [];
     # initdbArgs
     # initialScript = ./postgresql-init.txt;
+    settings = {
+         log_connections = true;
+         log_statement = "all";
+         logging_collector = true;
+         log_disconnections = true;
+         log_destination = lib.mkForce "syslog";
+       };
+
   };
 
   # see https://www.pgadmin.org/docs/pgadmin4/6.8/config_py.html
