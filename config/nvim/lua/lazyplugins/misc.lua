@@ -1,4 +1,20 @@
 return {
+ -- { 'luckasRanarison/nvim-devdocs',
+ -- -- needs a html treesitter
+ --  config = function()
+ --    require("nvim-devdocs").setup()
+ --  end
+ -- },
+ {
+   'TrevorS/uuid-nvim',
+   lazy = true,
+   config = function()
+     -- optional configuration
+     require('uuid-nvim').setup{
+       case = 'upper',
+     }
+   end,
+ },
  { 'jackMort/ChatGPT.nvim',
     config = function()
      -- passing OPENAI_API_KEY in environment for this to work
