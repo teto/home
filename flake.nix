@@ -30,7 +30,10 @@
       url = "github:ohmyzsh/ohmyzsh";
       flake = false;
     };
-
+    ironbar = {
+      url = "github:JakeStanger/ironbar";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     vocage.url = "git+https://git.sr.ht/~teto/vocage?ref=flake";
 
     deploy-rs.url = "github:serokell/deploy-rs";
@@ -121,6 +124,8 @@
         home-manager.useGlobalPkgs = true;
 
         home-manager.sharedModules = [
+          # And add the home-manager module
+          self.inputs.ironbar.homeManagerModules.default
           ./hm/modules/neovim.nix
           ./hm/modules/i3.nix
           ./hm/modules/bash.nix

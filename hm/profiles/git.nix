@@ -27,6 +27,7 @@ in
 
     };
     extraConfig = {
+      # clone.defaultRemoteName = "up";
       init.defaultBranch = "main";
       # git config core.sshCommand "ssh -vvv"
       # useful when merging from kernel

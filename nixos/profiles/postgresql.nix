@@ -14,11 +14,11 @@
 
     # pg_hba.conf is generated through authentication bit
     # sudo cat /var/lib/postgresql/14/pg_hba.conf for a primer
-    authentication = [
-      "host    all             all             samenet            password"
-      # "local   all             all                                     md5"
-      "local all all              peer"
-    ];
+      # "local   all             all                                     md5
+    authentication = ''
+      host    all             all             samenet            password
+      local all all              peer
+    '';
 
     # ensureUsers =  [];
     # initdbArgs

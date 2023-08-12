@@ -6,6 +6,7 @@
     ./hardware.nix
     ../config-all.nix
     ../desktop/nextcloud.nix
+    ../../nixos/modules/luarocks-site.nix
 
     ../../nixos/profiles/distributedBuilds.nix
     ../../nixos/profiles/desktop.nix
