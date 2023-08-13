@@ -20,6 +20,11 @@
       systemd.enable = true;
       settings = {
         mainBar = {
+         fixed-center = false;
+          # a way to have a manual definition !
+          include = [
+            "~/.config/waybar/manual.json"
+          ];
           layer = "top";
           position = "top";
           height = 30;
@@ -104,7 +109,12 @@
             tooltip-format = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
             format-alt = "{:%Y-%m-%d}";
             # on-click = "${pkgs.swaynotificationcenter}/bin/swaync-client -t -sw";
-            on-click = "${pkgs.kitty}/bin/kitty sh -c cal -m3";
+            # TODO launch ikhal instead
+            on-click-right = "${pkgs.kitty}/bin/kitty sh -c cal -m3";
+            actions = {
+               "on-scroll-up" = "shift_up";
+                "on-scroll-down" =  "shift_down";
+            };
 
             # on-click-right = "swaync-client -d -sw";
 
@@ -126,14 +136,14 @@
             #    "3" = "";
             # };
           };
-          temperature = {
-            # "thermal-zone": 2,
-            # "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
-            critical-threshold = 80;
-            # // "format-critical": "{temperatureC}°C {icon}",
-            format = "{temperatureC}°C {icon}";
-            format-icons = [ "" "" "" ];
-          };
+          # temperature = {
+          #   # "thermal-zone": 2,
+          #   # "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+          #   critical-threshold = 80;
+          #   # // "format-critical": "{temperatureC}°C {icon}",
+          #   format = "{temperatureC}°C {icon}";
+          #   format-icons = [ "" "" "" ];
+          # };
           "custom/weather" = {
             format = "{} °";
             tooltip = true;
@@ -164,9 +174,9 @@
           };
           "custom/github" = {
             format = "{} ";
-            "return-type" = "json";
+            return-type = "json";
             # The interval (in seconds) in which the information gets polled
-            "restart_interval" = 60;
+            restart_interval = 60;
             # "exec"= "$HOME/.config/waybar/github.sh";
             exec = lib.getExe githubUpdater;
             on-click = "${pkgs.xdg_utils}/bin/xdg-open https://github.com/notifications";

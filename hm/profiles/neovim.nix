@@ -143,6 +143,7 @@ let
           # # tree-sitter-haskell # crashes with a loop
           # tree-sitter-python
           # tree-sitter-html  # for rest.nvim
+          (grammarToPlugin pkgs.tree-sitter-grammars.tree-sitter-html) # for devdocs
           # tree-sitter-norg
           # tree-sitter-org-nvim
           (grammarToPlugin pkgs.tree-sitter-grammars.tree-sitter-query)

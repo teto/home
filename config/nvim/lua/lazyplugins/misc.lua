@@ -1,10 +1,10 @@
 return {
- -- { 'luckasRanarison/nvim-devdocs',
- -- -- needs a html treesitter
- --  config = function()
- --    require("nvim-devdocs").setup()
- --  end
- -- },
+ { 'luckasRanarison/nvim-devdocs',
+ -- needs a html treesitter
+  config = function()
+    require("nvim-devdocs").setup()
+  end
+ },
  {
    'TrevorS/uuid-nvim',
    lazy = true,
@@ -16,10 +16,14 @@ return {
    end,
  },
  { 'jackMort/ChatGPT.nvim',
+   -- due to https://github.com/jackMort/ChatGPT.nvim/issues/265
+    commit = "24bcca7",
     config = function()
      -- passing OPENAI_API_KEY in environment for this to work
      -- huge setup at https://github.com/jackMort/ChatGPT.nvim
-      require("chatgpt").setup()
+      require("chatgpt").setup({
+        api_host_cmd = "echo -n 'api.openai.com'"
+       })
     end,
  },
  { dir = '/home/teto/neovim/jap.nvim',
