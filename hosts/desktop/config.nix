@@ -280,5 +280,20 @@
     ln -s ${config.boot.kernelPackages.kernel.dev}/vmlinux $out/vmlinux
   '';
 
+
+
+    users = {
+     groups.nginx.gid = config.ids.gids.nginx;
+
+     users =  {
+      nginx = {
+       group = "nginx";
+       # cfg.group;
+        isSystemUser = true;
+        uid = config.ids.uids.nginx;
+      };
+     };
+    };
+
   system.stateVersion = "23.05";
 }

@@ -22,7 +22,7 @@ in
      GITHUB_TOKEN = secrets.githubToken;
      # TODO add it to sops
      OPENAI_API_KEY = secrets.OPENAI_API_KEY;
-     OPENAI_API_HOST = secrets.OPENAI_API_HOST;
+     # OPENAI_API_HOST = secrets.OPENAI_API_HOST;
    };
   };
 }
