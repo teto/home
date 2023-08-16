@@ -52,7 +52,7 @@ in
           serviceConfig.User = "nextcloud";
      # Run ./occ preview:generate-all once after installation.
 # Add a (system) cron job for  ./occ preview:pre-generate     # preview:generate-all
-          serviceConfig.ExecStart = "${occ}/bin/nextcloud-occ preview:pre-generate";
+          serviceConfig.ExecStart = "${occ}/bin/nextcloud-occ preview:generate";
         };
 
  };

@@ -202,6 +202,7 @@
             modules = [
               hm.nixosModules.home-manager
               self.inputs.nixos-hardware.nixosModules.pcengines-apu
+              self.nixosModules.default-hm
               ({ pkgs, ... }: {
                 nixpkgs.overlays = nixpkgs.lib.attrValues self.overlays;
                 imports = [
@@ -209,6 +210,11 @@
                 ];
               })
             ];
+
+            specialArgs = {
+              inherit secrets;
+              flakeInputs = self.inputs;
+            };
           };
 
           # "${nixos}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
@@ -270,7 +276,7 @@
                 ];
 
               })
-              hm-common
+              self.nixosModules.default-hm
               hm.nixosModules.home-manager
             ];
             specialArgs = {
@@ -324,7 +330,10 @@
         in
         {
           nixosModules = modulesFromDir ./modules;
-        }
+         } // {
+
+          default-hm = hm-common;
+         }
       ;
 
       templates = {
@@ -438,12 +447,15 @@
               ({
                 name = "router";
                 # local-facing address
-                # hostname = "192.168.1.11";
-                hostname = "10.0.0.0";
+                hostname = "192.168.1.11";
+                # hostname = "10.0.0.0";
               }) // {
               # sshOpts = [ "-F" "ssh_config" ];
               sshUser = "teto";
-              sshOpts = [ "-i" "~/.ssh/id_rsa" ];
+              sshOpts = [
+               "-i" "~/.ssh/id_rsa" 
+               # "-p${toString secrets.router.sshPort}"
+              ];
 
             };
 

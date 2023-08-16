@@ -15,9 +15,9 @@ systemd is advertised on the matrix:nixos-router so:
   Normally NixOS does not output to serial in the boot process, so we need to enable is by appending console=ttyS0,115200 to the boot entry. All characters appear twice, so just make sure you type it correctyl ;) . ctrl+l can be used to refresh the screen. 
    After installing, you want to make sure that the PCEngine APU entry from the NixOS hardware repo is present, as it enables the console port.
 */
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, secrets, flakeInputs, ... }:
 let
-  secrets = import ../../nixpkgs/secrets.nix;
+  # secrets = import ../../nixpkgs/secrets.nix;
 
   bridgeNetwork = { address = "10.0.0.0"; prefixLength = 24; };
 
@@ -36,12 +36,33 @@ in
     ../config-all.nix
     ./openssh.nix
     ../../nixos/profiles/router.nix
-    # TODO use ${modulePath} instead
-    # self.inputs.nixos-hardware.nixosModules.pcengines-apu 
 
-    # TODO import from https://github.com/NixOS/nixos-hardware/tree/master/pcengines/apu
-    # pcengines/apu
   ];
+
+  home-manager.users.root = {
+   imports = [
+    # ./root/ssh-config.nix
+    ../../hm/profiles/neovim.nix
+   ];
+
+   home.stateVersion = "23.05";
+  };
+
+   # TODO use from flake or from unstable
+   # services.opensnitch-ui.enable
+   # ./hm/profiles/gaming.nix
+  home-manager.users.teto = {
+    # TODO it should load the whole folder
+    imports = [
+     # ./teto/home.nix
+      ../../hm/profiles/zsh.nix
+      ../../hm/profiles/neovim.nix
+
+      # breaks build: doesnt like the "activation-script"
+     # nova.hmConfigurations.dev
+    ];
+   home.stateVersion = "23.05";
+  };
 
   services.journald.extraConfig = ''
     # alternatively one can run journalctl --vacuum-time=2d
@@ -136,7 +157,7 @@ in
   #     internalIPs = [ "br0" ];
   # };
 
-  # this takes a lot of space !
+  # this takes a lot of space ! use cacti instead !
   # services.munin-node = {
   #     enable = true;
   # #     extraConfig = ''
@@ -164,10 +185,10 @@ in
       # matchConfig.Type = "ether";
      };
      # externalInterface / wanInterface
-     "10-wlp5s0" = {
-       matchConfig.OriginalName = "wlp5s0";
-       # linkConfig.MTUBytes = "1442";
-     };
+     # "10-wlp5s0" = {
+     #   matchConfig.OriginalName = "wlan0";
+     #   # linkConfig.MTUBytes = "1442";
+     # };
 
     };
 
@@ -195,7 +216,7 @@ in
        networkConfig.DHCP = "ipv4";
      };
      "10-wirelesss-wan" = {
-       matchConfig.Name = "wlp5s0";
+       matchConfig.Name = "wlan0";
        networkConfig.DHCP = "ipv4";
        networkConfig.IPv6AcceptRA="no";
        networkConfig.LinkLocalAddressing="ipv4";
@@ -221,6 +242,11 @@ in
        # networkConfig.DHCP = "ipv4";
        networkConfig.DHCPServer = true;
        networkConfig.IPMasquerade="ipv4";
+       #   services.resolved= {
+       # enable = true;
+       # dnssec = "false"; # "allow-downgrade";
+       # };
+
        dhcpServerConfig = {
          PoolOffset = 100;
          PoolSize = 40;
@@ -231,10 +257,12 @@ in
          # SendOption
 
          # DefaultLeaseTimeSec=, MaxLeaseTimeSec=
-         # DNS=
+         # the ISP box address
+         DNS="192.168.1.1";
        };
 
 
+       # lui meme
        networkConfig.DHCP = "ipv4";
 
 
@@ -272,6 +300,7 @@ in
     interfaces.br0.allowedUDPPorts = [ 53 ];
   };
 
+
   #   # address of the livebox
   #   defaultGateway = { address = "192.168.1.1"; interface = "wlp5s0"; };
   #  interfaces.enp1s0 = {
@@ -304,11 +333,37 @@ in
   #   nat.internalInterfaces = [ "br0" ];
 
     wireless = {
-      enable = true;
-      userControlled.enable = true;
+      # enable = true;
+      # userControlled.enable = true;
+      iwd = {
+       enable = true;
+      # https://iwd.wiki.kernel.org/networkconfigurationsettings
+       settings = {
+        Settings = {
+        };
+        Network = {
+         EnableIPv6 = false;
+        };
+        Security = {
+         Passphrase = secrets.router.password;
+        };
+
+        # psk = secrets.router.password;
+       };
+       };
+
       networks = {
         neotokyo = {
           psk = secrets.router.password;
+          # appended to wpa_supplicant.conf
+          # freq_list=5180 5190 5200 5210 5220 5230 5240 5250 5260 5270 5280
+          # 
+                   
+          #            freq_list=5180 5190 5200 5210 5220 5230 5240 5250 5260 5270 5280
+
+          # extraConfig = ''
+          #  bssid_whitelist=04:E3:1A:6A:CF:05
+          #  '';
         };
       };
     };
@@ -334,4 +389,6 @@ in
 
   users.mutableUsers = false;
   # networking.enableIPv6 = false;
+
+  system.stateVersion = "23.05";
 }
