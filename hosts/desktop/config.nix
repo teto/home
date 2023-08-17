@@ -4,11 +4,11 @@
     ./hardware.nix
     ./sshd.nix
     ./sops.nix
+    ./postgresql.nix
 
     # this is only to test the new config
     # ./nextcloud.nix
     # ./gitlab-runner.nix
-    ../../nixos/profiles/postgresql.nix
 
     # todo renommer en workstation
     ../../nixos/profiles/docker-daemon.nix

@@ -20,4 +20,6 @@ This is such a bad message
 sudo rm -rf /var/lib/nextcloud felt good
 
 
+Open Collaboration Services (OCS) API i
 
+curl -u USER:PASSWORD https://DOMAIN/ocs/v2.php/apps/serverinfo/api/v1  -H "OCS-APIRequest: true"

@@ -1,6 +1,12 @@
 initdb
 pg_ctl start
 
+
+
+* how to force tcp/ip connection
+
+  export PGHOST=localhost
+
 createuser owning_user
 
 sudo -u postgres psql 
