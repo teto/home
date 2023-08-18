@@ -158,6 +158,7 @@ let
       ranger # or joshuto ? see hm configuration
       rsync
       ripgrep
+      unzip
     ]
     #   gnome.gnome-calculator # compare with qalqulate-gtk
   ;

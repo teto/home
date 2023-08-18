@@ -50,16 +50,9 @@ rec {
     fzf
     lsof
     gitAndTools.gitFull # to get send-email
-    # git-extras # does not find it (yet)
-    # gnupg
-    # gnumake
+    gnumake
     htop
-    # ipsecTools # does it provide ipsec ?
-
-    # pv # monitor copy progress
     sudo
-    unzip
-    # vifm
   ]);
 
   # TODO it appears in /etc/bashrc !
