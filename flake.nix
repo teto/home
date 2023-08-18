@@ -26,6 +26,8 @@
     nixpkgs = {
       url = "github:teto/nixpkgs/nixos-unstable";
     };
+    anyrun.url = "github:Kirottu/anyrun";
+    anyrun.inputs.nixpkgs.follows = "nixpkgs";
     zsh-plugins = {
       url = "github:ohmyzsh/ohmyzsh";
       flake = false;

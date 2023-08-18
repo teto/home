@@ -34,6 +34,27 @@
         "type": "github"
       }
     },
+    "anyrun": {
+      "inputs": {
+        "flake-parts": "flake-parts",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1692163593,
+        "narHash": "sha256-op0O4XCjUA6cZ46dOxIUe5aADElLgQ4iGghwGneJcew=",
+        "owner": "Kirottu",
+        "repo": "anyrun",
+        "rev": "ca77298d465b76c9feb1501e5c1eb999553fa9c1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Kirottu",
+        "repo": "anyrun",
+        "type": "github"
+      }
+    },
     "cargo2nix": {
       "inputs": {
         "flake-compat": "flake-compat_4",
@@ -193,7 +214,7 @@
         "devshell": "devshell",
         "drv-parts": "drv-parts",
         "flake-compat": "flake-compat_9",
-        "flake-parts": "flake-parts_3",
+        "flake-parts": "flake-parts_4",
         "flake-utils-pre-commit": "flake-utils-pre-commit",
         "ghc-utils": "ghc-utils",
         "gomod2nix": "gomod2nix",
@@ -226,7 +247,7 @@
         "devshell": "devshell_2",
         "drv-parts": "drv-parts_2",
         "flake-compat": "flake-compat_11",
-        "flake-parts": "flake-parts_4",
+        "flake-parts": "flake-parts_5",
         "flake-utils-pre-commit": "flake-utils-pre-commit_2",
         "ghc-utils": "ghc-utils_2",
         "gomod2nix": "gomod2nix_2",
@@ -497,6 +518,27 @@
     "flake-parts": {
       "inputs": {
         "nixpkgs-lib": [
+          "anyrun",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1685662779,
+        "narHash": "sha256-cKDDciXGpMEjP1n6HlzKinN0H+oLmNpgeCTzYnsA2po=",
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "rev": "71fb97f0d875fd4de4994dfb849f2c75e17eb6c3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "type": "github"
+      }
+    },
+    "flake-parts_2": {
+      "inputs": {
+        "nixpkgs-lib": [
           "nix-update",
           "nixpkgs"
         ]
@@ -515,7 +557,7 @@
         "type": "github"
       }
     },
-    "flake-parts_2": {
+    "flake-parts_3": {
       "inputs": {
         "nixpkgs-lib": [
           "nixpkgs-wayland",
@@ -537,7 +579,7 @@
         "type": "github"
       }
     },
-    "flake-parts_3": {
+    "flake-parts_4": {
       "inputs": {
         "nixpkgs-lib": [
           "nova-ci",
@@ -560,7 +602,7 @@
         "type": "github"
       }
     },
-    "flake-parts_4": {
+    "flake-parts_5": {
       "inputs": {
         "nixpkgs-lib": [
           "vocage",
@@ -1315,7 +1357,7 @@
     },
     "nix-eval-jobs": {
       "inputs": {
-        "flake-parts": "flake-parts_2",
+        "flake-parts": "flake-parts_3",
         "nixpkgs": "nixpkgs_11",
         "treefmt-nix": "treefmt-nix_2"
       },
@@ -1385,7 +1427,7 @@
     },
     "nix-update": {
       "inputs": {
-        "flake-parts": "flake-parts",
+        "flake-parts": "flake-parts_2",
         "nixpkgs": "nixpkgs_9",
         "treefmt-nix": "treefmt-nix"
       },
@@ -2378,6 +2420,7 @@
     },
     "root": {
       "inputs": {
+        "anyrun": "anyrun",
         "deploy-rs": "deploy-rs",
         "flake-utils": "flake-utils",
         "fzf-git-sh": "fzf-git-sh",

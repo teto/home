@@ -94,8 +94,9 @@ let
     all: with pkgs; [
       # apvlv # broken
       # TODO
-    jq # to run json queries
-    lazygit # kinda like tig
+      flakeInputs.anyrun.packages.${system}.anyrun-with-all-plugins
+      jq # to run json queries
+      lazygit # kinda like tig
       buku # broken
       # gcalc
       # gnome.gnome_control_center
@@ -124,7 +125,7 @@ let
       gnome.eog # eye of gnome = image viewer / creates a collision
       gnome.file-roller # for GUI archive handling
       pkgs.networkmanagerapplet # should
-    wine
+      wine
       hunspellDicts.fr-any
       libnotify
       # luarocks
@@ -160,16 +161,6 @@ let
     ]
     #   gnome.gnome-calculator # compare with qalqulate-gtk
   ;
-
-  home.sessionVariables = {
-    # JUPYTER_CONFIG_DIR=
-    IPYTHONDIR = "$XDG_CONFIG_HOME/ipython";
-    JUPYTER_CONFIG_DIR = "$XDG_CONFIG_HOME/jupyter";
-    # testing if we can avoid having to symlink XDG_CONFIG_HOME
-    # should be setup by neomutt module
-    # MUTT="$XDG_CONFIG_HOME/mutt";
-    VIM_SOURCE_DIR = "$HOME/vim";
-  };
 
   # the kind of packages u don't want to compile
   # TODO les prendres depuis un channel avec des binaires ?
@@ -368,6 +359,16 @@ in
 # ...
 # preview_shown_hook_script = "~/.config/joshuto/on_preview_shown"
 # preview_removed_hook_script = "~/.config/joshuto/on_preview_removed"
+  };
+
+  home.sessionVariables = {
+    # JUPYTER_CONFIG_DIR=
+    IPYTHONDIR = "$XDG_CONFIG_HOME/ipython";
+    JUPYTER_CONFIG_DIR = "$XDG_CONFIG_HOME/jupyter";
+    # testing if we can avoid having to symlink XDG_CONFIG_HOME
+    # should be setup by neomutt module
+    # MUTT="$XDG_CONFIG_HOME/mutt";
+    VIM_SOURCE_DIR = "$HOME/vim";
   };
 
 
