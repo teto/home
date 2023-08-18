@@ -94,7 +94,7 @@ let
     all: with pkgs; [
       # apvlv # broken
       # TODO
-      flakeInputs.anyrun.packages.${system}.anyrun-with-all-plugins
+      flakeInputs.anyrun.packages.${pkgs.system}.anyrun-with-all-plugins
       jq # to run json queries
       lazygit # kinda like tig
       buku # broken
