@@ -4,7 +4,10 @@
     ./hardware.nix
     ./sshd.nix
     ./sops.nix
+
+    # to test core-ws
     ./postgresql.nix
+    ./redis.nix
 
     # this is only to test the new config
     # ./nextcloud.nix

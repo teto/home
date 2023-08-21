@@ -215,6 +215,7 @@ let
       nodePackages.typescript-language-server
       # pandoc # for markdown preview, should be in the package closure instead
       # pythonPackages.pdftotext  # should appear only in RC ? broken
+      python3Packages.flake8 # for nvim-lint and some nixpkgs linters
       nil # a nix lsp
       # rnix-lsp
       rust-analyzer

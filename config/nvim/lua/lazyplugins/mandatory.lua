@@ -37,6 +37,25 @@ require("formatter").setup {
 }
 end
  },
+
+
+
+ -- not as good as null-ls but a recourse
+ {
+  'mfussenegger/nvim-lint',
+  config = function ()
+    require('lint').linters_by_ft = {
+      -- markdown = {'vale',}
+      -- --ignore E501,E265,E402 update.py
+      python = {'flake8'}
+    }
+    vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+      callback = function()
+        require("lint").try_lint()
+      end,
+    })
+  end
+ },
  {
   -- :NullLsLog / NullLsInfo
   'jose-elias-alvarez/null-ls.nvim',
@@ -67,6 +86,7 @@ end
      -- null_ls.builtins.diagnostics.teal,
      -- null_ls.builtins.diagnostics.tsc
      -- null_ls.builtins.diagnostics.yamllint,
+     null_ls.builtins.diagnostics.flake8,
      null_ls.builtins.diagnostics.zsh,
      null_ls.builtins.formatting.just,
      null_ls.builtins.formatting.markdown_toc,

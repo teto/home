@@ -279,5 +279,5 @@ if [[ -n $KITTY_INSTALLATION_DIR ]]; then
 #   unfunction kitty-integration
 fi
 
-# source ~/.zshrc-nova
-# load a random card in folder
+# this erases fzf so annoying
+# source ~/.config/nova/zsh/zshrc

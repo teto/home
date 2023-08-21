@@ -6,18 +6,21 @@
      # creates a redis-test unit ?
     servers.test = {
       enable = true;
-      logLevel = "debug";
+      logLevel = "notice";
       # default port is 6379
-      port = 0;
-      openFirewall = false;
-      # passwordFile = "./redis.txt";
+      # If port 0 is specified Redis will not listen on a TCP socket.
+      openFirewall = true;
+      # Alternatively
+      # requirePassFile = "./redis.txt";
       requirePass = "toto";
+      # vmOverCommit = 1;
 
       # https://redis.io/topics/config
       # https://raw.githubusercontent.com/redis/redis/6.0/redis.conf
       # to enable TLS
 
       settings = {
+        # syslog-enabled = 
         # port = 0; # conflicts with module one
 
         # tls-port = 4242;
@@ -26,33 +29,7 @@
 
         # disable client authentification
         tls-auth-clients = "no";
-
-        # Either tls-ca-cert-file or tls-ca-cert-dir must be specified when tls-cluster, tls-replication or tls-auth-clients are enabled!
-        # Configure a CA certificate(s) bundle or directory to authenticate TLS/SSL
-        # clients and peers.  Redis requires an explicit configuration of at least one
-        # of these, and will not implicitly use the system wide configuration.
-        #
-        # tls-ca-cert-file = "${../../data/ca.crt}";
-
-        # syslog-enabled = "yes";
-
-
-        # Configure allowed ciphers.  See the ciphers(1ssl) manpage for more information
-        # about the syntax of this string.
-        #
-        # Note: this configuration applies only to <= TLSv1.2.
-        #
         tls-ciphers = "DEFAULT:!MEDIUM";
-
-        # Configure allowed TLSv1.3 ciphersuites.  See the ciphers(1ssl) manpage for more
-        # information about the syntax of this string, and specifically for TLSv1.3
-        # ciphersuites.
-        #
-        # tls-ciphersuites TLS_CHACHA20_POLY1305_SHA256
-
-        # When choosing a cipher, use the server's preference instead of the client
-        # preference. By default, the server follows the client's preference.
-        #
         tls-prefer-server-ciphers = "yes";
 
       };

@@ -39,6 +39,8 @@ in
       core = {
         # sshCommand = "ssh -vvv";
         sshCommand = "ssh";
+
+        monitor = "${pkgs.rs-git-fsmonitor}/bin/rs-git-fsmonitor";
       };
 
       rebase = {

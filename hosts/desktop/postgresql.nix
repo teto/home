@@ -26,8 +26,8 @@
       # 'password' is in clear text
     authentication = ''
     # TYPE  DATABASE        USER            ADDRESS                 METHOD
-    local   all             all                                peer
     host    all             all             samenet            password
+    local   all             all                                peer
     '';
 
     # of the form map-name system-username database-username
