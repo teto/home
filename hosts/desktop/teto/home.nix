@@ -10,6 +10,7 @@
     ./ssh-config.nix
     ./sway.nix
     ./zsh.nix
+    ./yazi.nix
 
     # Not tracked, so doesn't need to go in per-machine subdir
     ../../../hm/profiles/android.nix
@@ -37,6 +38,8 @@
 
   ];
 
+  programs.helix.enable = true;
+
   programs.pazi = {
     enable = false;
     enableZshIntegration = true;
@@ -57,9 +60,6 @@
     pciutils # for lspci
     ncdu # to see disk usage
     # bridge-utils# pour  brctl
-    wirelesstools # to get iwconfig
-    # aircrack-ng
-
   ];
 
   # you can switch from cli with xkb-switch or xkblayout-state
