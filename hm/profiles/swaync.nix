@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 {
 
- programs.swaync = {
+ services.swaync = {
   enable = true;
 
  };

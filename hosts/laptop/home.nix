@@ -6,6 +6,7 @@
    ./sway.nix
    ./waybar.nix
    ../desktop/teto/home.nix
+   ../desktop/teto/swaync.nix
 
     ../../hm/profiles/vdirsyncer.nix
     ../../hm/profiles/desktop.nix
