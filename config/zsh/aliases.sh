@@ -73,7 +73,8 @@ function n {
     fi
 }
 alias n="nix develop"
-alias nb='nix build --option builders "$NOVA_OVH1" -j0'
+alias nb='nix build'
+alias nb1='nix build --option builders "$NOVA_OVH1" -j0'
 alias n1='nix develop --option builders "$NOVA_OVH1" -j0'
 alias n2='nix develop --option builders "$NOVA_OVH2" -j0'
 alias n3='nix develop --option builders "$NOVA_AZURE1" -j0'

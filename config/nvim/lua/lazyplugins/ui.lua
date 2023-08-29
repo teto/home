@@ -75,6 +75,7 @@ return {
    },
 
     -- colorschemes
+    'NTBBloodbath/sweetie.nvim',
     'Matsuuu/pinkmare',
     'flrnd/candid.vim',
     'uga-rosa/ccc.nvim',

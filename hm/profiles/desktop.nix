@@ -115,6 +115,7 @@ let
 
       bandwhich # to monitor per app bandwidth
       du-dust # dust binary: rust replacement of du
+      duf # better df (rust)
       dogdns # dns solver "dog"
       ncdu # to see disk usage
       nomacs # image viewer

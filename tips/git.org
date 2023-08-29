@@ -29,3 +29,5 @@ git bisect run ../test.sh
 
 # to change email
 git config user.email
+
+--reset-author is not enough e

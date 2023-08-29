@@ -2,7 +2,8 @@
 local ht = require('haskell-tools')
 -- local buffer = vim.api.nvim_get_current_buf()
 local def_opts = { noremap = true, silent = true, }
-local opts = {
+
+vim.g.haskell_tools = {
   tools = { -- haskell-tools options
    log = {
     level = vim.log.levels.DEBUG
@@ -32,13 +33,14 @@ local opts = {
     },
    },
   },
+
   hls = { -- LSP client options
    cmd = { 'haskell-language-server', '--lsp', '--logfile', "toto.log" },
    capabilities = vim.lsp.protocol.make_client_capabilities(),
 
-   -- on_attach = function(client, bufnr)
-   --  local attach_cb = require('on_attach')
-   --  attach_cb.on_attach(client, bufnr)
+   on_attach = function(client, bufnr)
+     local attach_cb = require('on_attach')
+     attach_cb.on_attach(client, bufnr)
 
    --  -- haskell-language-server relies heavily on codeLenses,
    --  -- so auto-refresh (see advanced configuration) is enabled by default
@@ -47,7 +49,7 @@ local opts = {
    --  vim.keymap.set('n', '<leader>cl', vim.lsp.codelens.run, map_opts)
    --  -- vim.keymap.set('n', '<leader>hs', ht.hoogle.hoogle_signature, map_opts)
    --  -- default_on_attach(client, bufnr)  -- if defined, see nvim-lspconfig
-   -- end,
+   end,
    -- ...
    -- replaces lspconfig.hls.setup
    -- README says: Do not call the nvim-lspconfig.hls setup or set up the lsp manually, as doing so may cause conflicts.
@@ -97,10 +99,10 @@ local opts = {
    --		},
    --	  },
   },
- }
 
+}
 -- print(vim.inspect(ht))
-ht.start_or_attach(opts)
+-- ht.start_or_attach(opts)
 -- ht.setup(opts)
 
 -- Suggested keymaps that do not depend on haskell-language-server:
@@ -113,3 +115,8 @@ vim.keymap.set('n', '<leader>rr', ht.repl.toggle, map_opts)
 -- Toggle a GHCi repl for the current buffer
 vim.keymap.set('n', '<leader>rf', function() ht.repl.toggle(vim.api.nvim_buf_get_name(0)) end, def_opts)
 vim.keymap.set('n', '<leader>rq', ht.repl.quit, map_opts)
+
+
+-- Detect nvim-dap launch configurations
+-- (requires nvim-dap and haskell-debug-adapter)
+-- ht.dap.discover_configurations(bufnr)
