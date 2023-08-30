@@ -11,7 +11,8 @@ let
 in
 {
   home.packages = with pkgs; [
-    clipman # clipboard manager, works with wofi, y a ptet un module
+    clipman # clipboard manager, works with wofi, abandoned
+    # TODO test https://github.com/sentriz/cliphist
     foot # terminal
     # use it with $ grim -g "$(slurp)"
     grim # replace scrot/flameshot
@@ -19,6 +20,7 @@ in
     kickoff # transparent launcher for wlr-root
     wofi # rofi-like
     slurp # capture tool
+    # lavalauncher # TODO a tester
     wf-recorder # for screencasts
     # bemenu as a dmenu replacement
     wl-clipboard # wl-copy / wl-paste
@@ -46,6 +48,7 @@ in
     # swappy # e https://github.com/jtheoof/swappy
     # https://github.com/artemsen/swaykbdd # per window keyboard layout
     # wev # event viewer https://git.sr.ht/~sircmpwn/wev/
+    wl-gammactl # to control gamma
   ];
 
   # https://github.com/rycee/home-manager/pull/829
@@ -250,6 +253,8 @@ in
     "${mod}+Ctrl+L" = "exec ${pkgs.swaylock}/bin/swaylock";
 
     # "${mod}+Ctrl+h" = ''exec "${pkgs.rofi}/bin/rofi -modi 'clipboard:greenclip print' -show clipboard"'';
+
+    # TODO notify/throw popup when clipman fails 
     "${mod}+Ctrl+h" = ''exec ${pkgs.clipman}/bin/clipman pick -t rofi'';
     # "${mod}+g" = "exec ${pkgs.i3-easyfocus}/bin/i3-easyfocus";
     # "${mad}+w" = "exec ${pkgs.i3-easyfocus}/bin/i3-easyfocus";

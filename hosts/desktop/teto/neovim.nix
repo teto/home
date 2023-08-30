@@ -208,7 +208,7 @@ let
       haskellPackages.hasktags
       haskellPackages.fast-tags
       manix # should be no need, telescope-manix should take care of it
-      # nodePackages.vscode-langservers-extracted # needed for typescript language server IIRC
+      nodePackages.vscode-langservers-extracted # needed for typescript language server IIRC
       nodePackages.bash-language-server
       nodePackages.dockerfile-language-server-nodejs # broken
       nodePackages.pyright

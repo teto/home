@@ -14,6 +14,18 @@ in
    # need a locale to be set
    locale = { };
 
+   settings = {
+          default = {
+           # TODO automate
+            default_calendar = "Perso";
+            timedelta = "5d";
+          };
+          view = {
+            agenda_event_format =
+              "{calendar-color}{cancelled}{start-end-time-style} {title}{repeat-symbol}{reset}";
+          };
+   };
+
    extraConfig = ''
     [highlight_days]
     color = #ff0000

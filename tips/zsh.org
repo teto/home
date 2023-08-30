@@ -35,3 +35,13 @@ add-zsh-hook -d preexec [existing_function_name]
 
 To remove registered preexec function
 add-zsh-hook -D preexec set_term_title
+
+* completion
+
+zstyle -L 
+https://zsh.sourceforge.io/Doc/Release/Completion-System.html
+When compinit is run, it searches all such files accessible via fpath/FPATH and reads the first line of each of them. This line should contain one of the tags described below. Files whose first line does not start with one of these tags are not considered to be part of the completion system and will not be treated specially.
+
+#compdef simwork.core-webservice.local =
+
+Might be 

@@ -85,10 +85,10 @@
 
     # '';
 
-    initExtraBeforeCompInit = ''
+    initExtraBeforeCompInit = /* zsh */ ''
       # zsh searches $fpath for completion files
       fpath+=( $ZDOTDIR/completions )
-    '';
+     '';
 
     # to disable loading of /etc/z* files
     # envExtra = '' 

@@ -253,6 +253,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		local bufnr = args.buf
 		local on_attach = require 'on_attach'
 		on_attach.on_attach(client, bufnr)
+		-- print("FIRED ON_ATTACH")
 		-- require'lsp_signature'.on_attach(client, bufnr)
 	end
 })
