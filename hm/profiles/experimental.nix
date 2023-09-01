@@ -40,7 +40,7 @@
   # for programs not merged yet
   home.packages = with pkgs; [
    ironbar 
-   yazi
+   # yazi
 	# haxe # to test https://neovim.discourse.group/t/presenting-haxe-neovim-a-new-toolchain-to-build-neovim-plugins/3720
     # meli  # broken jmap mailreader
   ];

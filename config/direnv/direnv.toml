@@ -1,3 +1,4 @@
 
 [whitelist]
-prefix = [ "/home/teto/nova/ci-runner" ]
+prefix = [ "/home/teto/nova" ]
+

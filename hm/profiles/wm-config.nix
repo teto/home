@@ -118,6 +118,7 @@ let
 
 in
 {
+ inherit notify-send;
   modes = {
     monitors =
       let

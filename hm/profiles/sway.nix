@@ -255,7 +255,7 @@ in
     # "${mod}+Ctrl+h" = ''exec "${pkgs.rofi}/bin/rofi -modi 'clipboard:greenclip print' -show clipboard"'';
 
     # TODO notify/throw popup when clipman fails 
-    "${mod}+Ctrl+h" = ''exec ${pkgs.clipman}/bin/clipman pick -t rofi'';
+    "${mod}+Ctrl+h" = ''exec ${pkgs.clipman}/bin/clipman pick -t rofi || ${sharedConfig.notify-send} 'Failed running clipman' '';
     # "${mod}+g" = "exec ${pkgs.i3-easyfocus}/bin/i3-easyfocus";
     # "${mad}+w" = "exec ${pkgs.i3-easyfocus}/bin/i3-easyfocus";
     # TODO bind

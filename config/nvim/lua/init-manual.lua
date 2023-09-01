@@ -214,8 +214,10 @@ vim.opt.diffopt:append('internal,algorithm:patience')
 vim.opt.undofile = true
 -- let undos persist across open/close
 vim.opt.undodir = vim.fn.stdpath('data') .. '/undo/'
-vim.opt.sessionoptions:remove('terminal')
-vim.opt.sessionoptions:remove('help')
+-- vim.opt.sessionoptions:remove('terminal')
+-- vim.opt.sessionoptions:remove('help')
+-- folds,
+vim.o.sessionoptions="blank,buffers,curdir,help,tabpages,winsize,winpos,localoptions"
 --}}}
 
 -- annoying in fzf-lua ?

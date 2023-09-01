@@ -83,6 +83,10 @@
       url = "github:neovide/neovide";
       flake = false;
     };
+    yazi = {
+      url = "github:sxyazi/yazi";
+      flake = false;
+    };
 
     sops-nix.url = "github:Mic92/sops-nix";
 
@@ -352,6 +356,13 @@
       overlays = {
 
         autoupdating = final: prev: {
+
+          yazi-nightly = prev.yazi.overrideAttrs(oa: {
+           src = self.inputs.yazi;
+              cargoHash = "";
+
+          });
+
 
           mujmap = self.inputs.mujmap.packages.x86_64-linux.mujmap;
           # neovide = prev.neovide.overrideAttrs(oa: {

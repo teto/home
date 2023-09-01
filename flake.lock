@@ -2456,6 +2456,7 @@
         "tree-sitter": "tree-sitter",
         "treefmt-nix": "treefmt-nix_4",
         "vocage": "vocage",
+        "yazi": "yazi",
         "zsh-plugins": "zsh-plugins"
       }
     },
@@ -2912,6 +2913,22 @@
         "ref": "flake",
         "type": "git",
         "url": "https://git.sr.ht/~teto/vocage"
+      }
+    },
+    "yazi": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1693554768,
+        "narHash": "sha256-ARpludMVQlZtCRAfW0cNYVmT3m9t9lunMIW24peYX6Y=",
+        "owner": "sxyazi",
+        "repo": "yazi",
+        "rev": "e9218f8ad14a163bf0197c73b2a2e5aaf316bf16",
+        "type": "github"
+      },
+      "original": {
+        "owner": "sxyazi",
+        "repo": "yazi",
+        "type": "github"
       }
     },
     "zsh-plugins": {

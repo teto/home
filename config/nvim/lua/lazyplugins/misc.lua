@@ -165,7 +165,7 @@ return {
  'rhysd/vim-gfm-syntax', -- markdown syntax compatible with Github's
  { 'eandrju/cellular-automaton.nvim', lazy = true }, -- :CellularAutomaton make_it_rain
  { 'bogado/file-line', branch = 'main' }, -- to open a file at a specific line
- 'norcalli/nvim-terminal.lua' -- , '~/neovim/nvim-terminal.lua' -- to display ANSI colors
+ 'darkonig/nvim-terminal.lua' -- , '~/neovim/nvim-terminal.lua' -- to display ANSI colors
  , -- to display ANSI colors
  'chrisbra/vim-diff-enhanced',
  'linty-org/readline.nvim',

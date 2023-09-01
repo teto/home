@@ -41,6 +41,9 @@ compression = 0
   ci=commit
   cp=cherry-pick
   co=checkout
+  rc=rebase --continue
+  fa= fetch --all
+  ab = absorb
 
   # inspired by https://blog.jez.io/cli-code-review/
   # list files which have changed since REVIEW_BASE

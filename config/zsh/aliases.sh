@@ -53,6 +53,8 @@ alias gap="git add -p";
 alias grc="git rebase --continue";
 alias gra="git rebase --abort";
 
+alias y=yazi
+
 # rename mptcp ?
 alias mp="mptcpanalyzer"
 
