@@ -7,6 +7,7 @@
    ./waybar.nix
    ../desktop/teto/home.nix
    ../desktop/teto/swaync.nix
+   ../desktop/teto/contacts.nix
 
     ../../hm/profiles/vdirsyncer.nix
     ../../hm/profiles/desktop.nix
