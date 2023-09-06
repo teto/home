@@ -1,0 +1,3 @@
+#!/bin/sh
+# needs jq
+printf %s "$1"|jq -sRr @uri
