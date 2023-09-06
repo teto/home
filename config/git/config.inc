@@ -44,6 +44,8 @@ compression = 0
   rc=rebase --continue
   fa= fetch --all
   ab = absorb
+  anoed= --amend --no-edit
+
 
   # inspired by https://blog.jez.io/cli-code-review/
   # list files which have changed since REVIEW_BASE

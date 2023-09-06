@@ -210,6 +210,8 @@ let
       manix # should be no need, telescope-manix should take care of it
       nodePackages.vscode-langservers-extracted # needed for typescript language server IIRC
       nodePackages.bash-language-server
+      # prettier sadly can't use buildNpmPackage because no lockfile https://github.com/NixOS/nixpkgs/issues/229475
+      nodePackages.prettier 
       nodePackages.dockerfile-language-server-nodejs # broken
       nodePackages.pyright
       nodePackages.typescript-language-server

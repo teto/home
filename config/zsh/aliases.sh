@@ -11,6 +11,7 @@ function rfw(){
 # make menuconfig KCONFIG_CONFIG=config_off
 # try xconfig
 # see https://nixos.wiki/wiki/Linux_Kernel for xconfig example
+alias g="git"
 
 alias nvim-dev="nix develop --override-input nixpkgs /home/teto/nixpkgs --no-write-lock-file ./contrib#neovim-developer  --show-trace"
 # alias notif-center='kill -s USR1 $(pidof deadd-notification-center)'

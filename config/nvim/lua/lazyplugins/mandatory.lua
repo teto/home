@@ -12,8 +12,13 @@ require("formatter").setup {
   log_level = vim.log.levels.WARN,
   -- All formatter configurations are opt-in
   filetype = {
-   nix = {       require("formatter.filetypes.nix").nixpkgs_fmt,
-  },
+   nix = {
+    require("formatter.filetypes.nix").nixpkgs_fmt,
+   },
+   ts = {
+
+    require("formatter.filetypes.typescript").prettier,
+   },
    py = {
       require("formatter.filetypes.python").black,
    },
