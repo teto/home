@@ -139,7 +139,7 @@ let
           # tree-sitter-lua
           # tree-sitter-http
           # tree-sitter-json
-          # tree-sitter-nix
+          (grammarToPlugin pkgs.tree-sitter-grammars.tree-sitter-nix)
           # # tree-sitter-haskell # crashes with a loop
           # tree-sitter-python
           # tree-sitter-html  # for rest.nvim
