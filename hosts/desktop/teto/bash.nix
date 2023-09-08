@@ -56,5 +56,9 @@ in
 
     } // remoteBuilders;
 
+    # 
+    initExtra = ''
+      source  ~/home/config/zsh/aliases.sh
+     '';
    };
  }

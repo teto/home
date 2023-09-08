@@ -2,7 +2,7 @@ FAQ:
 
 TODO move this to my blog
 
-Font size:
+* Font size:
 https://texblog.org/2012/08/29/changing-the-font-size-in-latex/
 
 can cleanup files with latexmk
@@ -83,3 +83,9 @@ Some files of importance:
   TEXMFSYSCONFIG: "/home/teto/texlive/2016/texmf-config"
   TEXMFSYSVAR: "/home/teto/texlive/2016/texmf-var"
   TEXMFVAR: "~/.config/texlive2016/texmf-var"
+
+
+kpsexpand '$TEXMFHOME'
+kpsexpand '$TEXMFLOCAL'
+echo "http://tex.stackexchange.com/questions/31339/setting-environment-variables-for-latex-and-bibtex-in-bashrc?lq=1"
+

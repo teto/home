@@ -4,6 +4,9 @@ keymap = [
  	{ on = [ "<PageUp>" ], exec = "arrow -10" },
 	{ on = [ "<PageDown>" ], exec = "arrow 10" },
 
+
+	{ on = [ "/" ], exec = "find" },
+
 	{ on = [ "<Esc>" ], exec = "escape"  },
 	{ on = [ "q" ], exec = "quit" },
 	{ on = [ "<C-q>" ], exec = "close" },

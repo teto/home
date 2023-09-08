@@ -1,4 +1,0 @@
-#!/bin/sh
-i3-msg 'debuglog on; shmlog on; reload'
-
-echo -e "To see the log, run :\ni3-dump-log > /tmp/i3.log"
