@@ -22,7 +22,7 @@ let
     util-linux # for lsns (namespace listing)
     rbw
 	# haxe # to test neovim developement
-    exa # to list files
+    eza # to list files
     gitAndTools.diff-so-fancy # todo install it via the git config instead
     gitAndTools.gh # github client
     gitAndTools.git-absorb
