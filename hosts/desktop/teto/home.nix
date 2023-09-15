@@ -9,6 +9,7 @@
     ./neovim.nix
     ./ssh-config.nix
     ./sway.nix
+    ./swaync.nix
     ./zsh.nix
     ./yazi.nix
 

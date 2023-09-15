@@ -357,11 +357,10 @@
 
         autoupdating = final: prev: {
 
-          yazi-nightly = prev.yazi.overrideAttrs(oa: {
-           src = self.inputs.yazi;
-              cargoHash = "";
-
-          });
+          # yazi-nightly = prev.yazi.overrideAttrs(oa: {
+          #  src = self.inputs.yazi;
+          #     cargoHash = "";
+          # });
 
 
           mujmap = self.inputs.mujmap.packages.x86_64-linux.mujmap;
