@@ -70,6 +70,7 @@ Session.vim
 *.rar
 *.tar
 *.zip
+*.deb
 
 # Logs and databases {{{
 *.log

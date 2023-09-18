@@ -26,6 +26,7 @@ pvc = persistentvolumeclaim
 	kubectl replace --save-config --force -f -
   # alternatively delete the job 
   kubectl delete job <job_name>
+  kubectl apply -f job.yaml
   #+END_SRC
    
 # on peut avoir plusieurs contextes

@@ -12,8 +12,22 @@ let
   };
 
   luaPlugins = with pkgs.vimPlugins; [
-    { plugin = b64-nvim; }
-    { plugin = kui-nvim; }
+    { 
+    # node-based :MarkdownPreview
+    plugin = markdown-preview-nvim;
+    # let g:vim_markdown_preview_github=1
+    # let g:vim_markdown_preview_use_xdg_open=1
+    }
+
+    # nvim-markdown-preview  # :MarkdownPreview
+
+    {
+     plugin = b64-nvim;
+    }
+    {
+     # :
+     plugin = kui-nvim;
+    }
     # FIX https://github.com/NixOS/nixpkgs/issues/169293 first
     (luaPlugin {
       plugin = telescope-frecency-nvim; 

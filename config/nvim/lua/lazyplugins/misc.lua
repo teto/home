@@ -1,4 +1,41 @@
 return {
+{
+ -- neotests has extensions for haskell and playwright
+  "nvim-neotest/neotest",
+  dependencies = {
+    -- "nvim-lua/plenary.nvim",
+    -- "nvim-treesitter/nvim-treesitter",
+    "antoinemadec/FixCursorHold.nvim"
+  },
+  config = function ()
+   -- https://github.com/nvim-neotest/neotest#usage
+   -- require("neotest").run.run()
+   require("neotest").setup({
+     adapters = {
+      require('neotest-haskell') {
+        -- Default: Use stack if possible and then try cabal
+        build_tools = { 'stack', 'cabal' },
+        -- Default: Check for tasty first and then try hspec
+        frameworks = { 'tasty', 'hspec', 'sydtest' },
+      },      
+       -- require("neotest-plenary"),
+       -- require("neotest-vim-test")({
+       --   ignore_file_types = { "python", "vim", "lua" },
+       -- }),
+     },
+   })
+  end
+},
+ {
+  'mrcjkb/neotest-haskell',
+  -- -- 'nvim-neotest/neotest',
+  -- requires = {
+  --   -- ...,
+  --   'mrcjkb/neotest-haskell',
+  --   'nvim-treesitter/nvim-treesitter',
+  --   'nvim-lua/plenary.nvim',
+  -- }
+ },
  { 'luckasRanarison/nvim-devdocs',
  -- needs a html treesitter
   config = function()

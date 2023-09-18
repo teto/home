@@ -1,3 +1,11 @@
+** REPL tips
+
+
+:set args ARG1 ARG2
+main
+
+can pass cli args seen by getArgs
+
 -- TypeError (ShowType r)
 
 CABAL_HELPER_DEBUG=1
