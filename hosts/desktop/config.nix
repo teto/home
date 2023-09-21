@@ -9,6 +9,9 @@
     ./postgresql.nix
     ./redis.nix
 
+
+    ../../nixos/profiles/immich.nix
+
     # this is only to test the new config
     # ./nextcloud.nix
     # ./gitlab-runner.nix

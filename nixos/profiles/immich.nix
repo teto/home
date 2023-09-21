@@ -9,7 +9,7 @@ in
 {
  services.immich = {
   enable = true;
-
+  # python3.11-insightface-0.7.3
 
  };
 

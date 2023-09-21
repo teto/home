@@ -5,6 +5,10 @@ rec {
     # Careful, we're using a different self and super here!
     packageOverrides = pythonself: pythonsuper: {
 
+      protobuf = pythonsuper.protobuf.override {
+        inherit (final.onnxruntime) protobuf;
+      };
+
       kergen = prev.callPackage ./pkgs/kergen.nix { };
 
       mininet-with-man = pythonsuper.mininet.override ({
@@ -34,8 +38,8 @@ rec {
 
   python3Packages = python3.pkgs;
 
-  jupyter-teto = python3.withPackages(ps: [
-   ps.notebook
-   ps.jupyter-client
-  ]);
+  # jupyter-teto = python3.withPackages(ps: [
+  #  ps.notebook
+  #  ps.jupyter-client
+  # ]);
 }

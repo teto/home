@@ -13,6 +13,11 @@
   #   };
   # };
 
+
+  programs.rio = {
+   enable = true;
+  };
+
   # using joshuto instead
   programs.ranger = {
     enable = true;
