@@ -2,4 +2,5 @@ recent
 recent_common
 language
 profiles/Classic
+profiles/*
 decode_as_entries

@@ -10,7 +10,6 @@
 
     ../../nixos/profiles/distributedBuilds.nix
     ../../nixos/profiles/desktop.nix
-    ../../nixos/profiles/rstudio-server.nix
     ../../nixos/profiles/podman.nix
     ../../nixos/profiles/sway.nix
     # ../../nixos/modules/docker-daemon.nix
