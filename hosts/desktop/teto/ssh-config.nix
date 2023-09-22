@@ -30,7 +30,9 @@ in
             # TODO we should expose the resulting nix expressions directly
              prod-runners);
 
-    in remoteBuilders // {
+    in
+    # remoteBuilders //
+     {
       jakku = {
         host = secrets.jakku.hostname;
         user = "teto";

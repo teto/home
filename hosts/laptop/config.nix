@@ -98,8 +98,6 @@
      # custom modules
      ./home.nix
      ../../hm/profiles/nova.nix
-     flakeInputs.nova.hmProfiles.standard
-     flakeInputs.nova.hmProfiles.dev
     # breaks build: doesnt like the "activation-script"
     # nova.hmConfigurations.dev
    ];

@@ -1,7 +1,4 @@
 { secrets, flakeInputs, ... }:
-# let
-#   secrets = import ../../../nixpkgs/secrets.nix;
-# in
 {
 
       mkSshMatchBlock = m: {

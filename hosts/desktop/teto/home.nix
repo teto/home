@@ -23,7 +23,7 @@
     ../../../hm/profiles/alot.nix
     ../../../hm/profiles/extra.nix
     ../../../hm/profiles/vdirsyncer.nix
-    ../../../hm/profiles/experimental.nix
+    # ../../../hm/profiles/experimental.nix
     ../../../hm/profiles/japanese.nix
     ../../../hm/profiles/fcitx.nix
     ../../../hm/profiles/nova.nix
@@ -33,9 +33,6 @@
       ../../../hm/profiles/nova.nix
     # ../../hm/profiles/emacs.nix
     # ../../hm/profiles/weechat.nix
-     flakeInputs.nova.hmProfiles.standard
-     flakeInputs.nova.hmProfiles.dev
-     flakeInputs.nova.hmProfiles.devops
 
   ];
 

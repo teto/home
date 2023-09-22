@@ -39,7 +39,8 @@ in
     # once can set initialHashedPassword too
     # initialPassword
     # generated with nix run nixpkgs.mkpasswd mkpasswd -m sha-512
-    hashedPassword = secrets.users.teto.hashedPassword;
+    # hashedPassword = secrets.users.teto.hashedPassword;
+hashedPassword = "$6$UcKAXNGR1brGF9S4$Xk.U9oCTMCnEnN5FoLni1BwxcfwkmVeyddzdyyHAR/EVXOGEDbzm/bTV4F6mWJxYa.Im85rHQsU8I3FhsHJie1";
 
     openssh.authorizedKeys.keyFiles = [
       ../../../perso/keys/id_rsa.pub

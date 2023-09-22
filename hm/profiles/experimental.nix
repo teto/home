@@ -15,7 +15,7 @@
 
 
   programs.rio = {
-   enable = true;
+   enable = false;
   };
 
   # using joshuto instead

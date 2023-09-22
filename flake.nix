@@ -69,10 +69,10 @@
     nix-index-cache.url = "github:Mic92/nix-index-database";
     i3pystatus = { url = "github:teto/i3pystatus/nix_backend"; flake = false; };
     # nova.url = "git+ssh://git@git.novadiscovery.net/world/nova-nix.git?ref=master";
-    nova.url = "git+ssh://git@git.novadiscovery.net/sys/doctor";
-    jinko-stats.url = "git+ssh://git@git.novadiscovery.net/jinko/jinko-stats.git?ref=add-rserver";
+    # nova.url = "git+ssh://git@git.novadiscovery.net/sys/doctor";
+    # jinko-stats.url = "git+ssh://git@git.novadiscovery.net/jinko/jinko-stats.git?ref=add-rserver";
     # c8296214151883ce27036be74d22d04953418cf4
-    nova-ci.url = "git+ssh://git@git.novadiscovery.net/infra/ci-runner";
+    # nova-ci.url = "git+ssh://git@git.novadiscovery.net/infra/ci-runner";
     neovim = {
       # url = "github:nojnhuh/neovim?dir=contrib&ref=lsp-watch-files";
       url = "github:neovim/neovim?dir=contrib";
@@ -102,7 +102,7 @@
     # };
   };
 
-  outputs = { self, hm, nur, nixpkgs, flake-utils, treefmt-nix, nova, deploy-rs, ... }:
+  outputs = { self, hm, nur, nixpkgs, flake-utils, treefmt-nix, deploy-rs, ... }:
     let
       secrets = import ./nixpkgs/secrets.nix;
       # sshLib = import ./nixpkgs/lib/ssh.nix { inherit secrets; flakeInputs = self.inputs; };
@@ -208,7 +208,7 @@
         let
           system = "x86_64-linux";
         in
-        {
+        rec {
           # TODO generate those from the hosts folder ?
           # with aliases ?
           router = nixpkgs.lib.nixosSystem {
@@ -232,7 +232,7 @@
           };
 
           # it doesn't have to be called like that !
-          mcoudron = nixpkgs.lib.nixosSystem {
+          laptop = nixpkgs.lib.nixosSystem {
             inherit system;
             specialArgs = {
               inherit secrets;
@@ -241,7 +241,7 @@
 
             modules = [
               hm.nixosModules.home-manager
-              nova.nixosProfiles.dev
+              # nova.nixosProfiles.dev
               self.inputs.sops-nix.nixosModules.sops
               hm-common
 
@@ -254,6 +254,23 @@
                 ];
               })
             ];
+          };
+
+          # see https://determinate.systems/posts/extending-nixos-configurations
+          mcoudron = laptop.extendModules {
+           modules = [
+            ({ ... }: {
+              home-manager.users.teto = {
+               imports = [
+                   # flakeInputs.nova.hmProfiles.standard
+                   # flakeInputs.nova.hmProfiles.dev
+                   # flakeInputs.nova.hmProfiles.devops
+
+               ];
+              };
+            })
+             # put everything nova
+           ];
           };
 
           neotokyo = nixpkgs.lib.nixosSystem {
@@ -307,7 +324,7 @@
                 ];
               })
               hm.nixosModules.home-manager
-              nova.nixosProfiles.dev
+              # nova.nixosProfiles.dev
               nur.nixosModules.nur
               hm-common
 
@@ -408,11 +425,11 @@
         # wayland =
         # mptcp = self.inputs.mptcp-flake.overlays.default;
         nur = self.inputs.nur.overlay;
-        nova-ci = self.inputs.nova-ci.overlays.default;
+        # nova-ci = self.inputs.nova-ci.overlays.default;
 
       }
       # just for one specific host
-      // nova.overlays
+      # // nova.overlays
       ;
 
       formatter.x86_64-linux = self.inputs.treefmt-nix.lib.mkWrapper
