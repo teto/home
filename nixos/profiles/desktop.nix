@@ -27,6 +27,7 @@
   nixpkgs = {
     config = {
       allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+        "codeium"
         "Oracle_VM_VirtualBox_Extension_Pack"
         "ec2-api-tools"
         "jiten"  # japanese software recognition tool
@@ -127,7 +128,6 @@
 
   # systemd.packages = [ ];
 
-  # seemingly working for chromium only, check for firefox
   programs.browserpass.enable = true;
 
   nix = {
@@ -145,7 +145,6 @@
 
   environment.shellAliases = {
     nix-stray-roots = ''nix-store --gc --print-roots | egrep -v "^(/nix/var|/run/\w+-system|\{memory)"'';
-    nixpaste = "curl -F \"text=<-\" http://nixpaste.lbr.uno";
   };
 
   # programs.gnome-disks.enable = false;

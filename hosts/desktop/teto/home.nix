@@ -1,11 +1,13 @@
 # home-manager specific config from
-{ config, lib, flakeInputs, pkgs, ... }:
+{ config, lib, flakeInputs
+, pkgs
+, withSecrets
+, ... }:
 {
   imports = [
     ./bash.nix
     ./calendars.nix
     ./git.nix
-    ./mail.nix
     ./neovim.nix
     ./ssh-config.nix
     ./sway.nix
@@ -23,7 +25,7 @@
     ../../../hm/profiles/alot.nix
     ../../../hm/profiles/extra.nix
     ../../../hm/profiles/vdirsyncer.nix
-    ../../../hm/profiles/experimental.nix
+    # ../../../hm/profiles/experimental.nix
     ../../../hm/profiles/japanese.nix
     ../../../hm/profiles/fcitx.nix
     ../../../hm/profiles/nova.nix
@@ -33,11 +35,11 @@
       ../../../hm/profiles/nova.nix
     # ../../hm/profiles/emacs.nix
     # ../../hm/profiles/weechat.nix
-     flakeInputs.nova.hmProfiles.standard
-     flakeInputs.nova.hmProfiles.dev
-     flakeInputs.nova.hmProfiles.devops
 
-  ];
+   ] ++ lib.optionals withSecrets [
+    ./mail.nix
+   ]
+;
 
   programs.helix.enable = true;
 
@@ -60,6 +62,7 @@
     # xorg.xwininfo # for stylish
     pciutils # for lspci
     ncdu # to see disk usage
+    moar # test as pager
     # bridge-utils# pour  brctl
   ];
 

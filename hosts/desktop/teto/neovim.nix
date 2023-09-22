@@ -24,10 +24,7 @@ let
     {
      plugin = b64-nvim;
     }
-    {
-     # :
-     plugin = kui-nvim;
-    }
+    # { plugin = kui-nvim; }
     # FIX https://github.com/NixOS/nixpkgs/issues/169293 first
     (luaPlugin {
       plugin = telescope-frecency-nvim; 
@@ -92,7 +89,7 @@ let
     # })
 
     # WIP
-    (luaPlugin { plugin = nvim-telescope-zeal-cli; })
+    # (luaPlugin { plugin = nvim-telescope-zeal-cli; })
     (luaPlugin { plugin = minimap-vim; })
     (luaPlugin {
       # reuse once https://github.com/neovim/neovim/issues/9390 is fixed
@@ -207,16 +204,18 @@ let
     # plugins = with pkgs.vimPlugins; [
     #  tint-nvim
     # ];
+     # -- vim.lsp.set_log_level("info")
+     # -- require my own manual config
+     # -- logs are written to /home/teto/.cache/vim-lsp.log
+
      extraLuaConfig = ''
-       -- logs are written to /home/teto/.cache/vim-lsp.log
-       -- vim.lsp.set_log_level("info")
-       -- require my own manual config
        require('init-manual')
      '';
 
     extraPackages = with pkgs; [
       # luaPackages.lua-lsp
       # lua53Packages.teal-language-server
+      codeium # ideally not needed and referenced by codeium-vim directly
       editorconfig-checker # used in null-ls
       lua51Packages.luacheck
       haskellPackages.hasktags

@@ -58,25 +58,6 @@ home:
 routerIso:
 		nix build .\#nixosConfigurations.routerIso.config.system.build.isoImage
 
-# I now rely on password-store instead
-keyring:
-	echo "Setup keyrings"
-	# echo " nix-shell -p python3Packages.secretstorage -p python36Packages.keyring -p python36Packages.pygobject3"
-	echo " nix-shell -p 'python.withPackages(ps: with ps; [secretstorage keyring pygobject3])' "
-	# or one can use secret-tool to store data
-	# secret-tool store --label msmtp host smtp.gmail.com service smtp user mattator
-	#
-	# with my custom commands:
-	# secret-tool store --label gmail gmail password
-	#keyring set
-	keyring set gmail login \
-	keyring set gmail password \
-	keyring set gmail client_secret  \
-	keyring set iij login \
-	keyring set iij password \
-	keyring set zaclys login \
-	keyring set zaclys password
-
 cache:
 	#mkdir -p $(shell echo "${XDG_CACHE_HOME:-$HOME/.cache}/less")
 	# todo should be done
@@ -99,9 +80,7 @@ vimPlugins:
 	cd $(NIXPKGS_REPO) \
 		&& pkgs/misc/vim-plugins/update.py -i $(CURDIR)/nixpkgs/overlays/vim-plugins/vim-plugin-names -o $(CURDIR)/nixpkgs/overlays/vim-plugins/generated.nix --no-commit
 
-cachix:
-	cachix use teto
-
 # just to save the command
+# TODO should be loaded into zsh history instead
 rebuild:
 	nixos-rebuild --flake ~/home --override-input nixpkgs /home/teto/nixpkgs --override-input hm /home/teto/hm --override-input nova /home/teto/nova/nova-nix --no-write-lock-file switch  --show-trace --use-remote-sudo

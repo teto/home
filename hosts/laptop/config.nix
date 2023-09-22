@@ -5,15 +5,13 @@
     ./sops.nix
     ./hardware.nix
     ../config-all.nix
-    ../desktop/nextcloud.nix
     ../../nixos/modules/luarocks-site.nix
 
     ../../nixos/profiles/distributedBuilds.nix
     ../../nixos/profiles/desktop.nix
-    ../../nixos/profiles/rstudio-server.nix
     ../../nixos/profiles/podman.nix
     ../../nixos/profiles/sway.nix
-    # ../../nixos/modules/docker-daemon.nix
+    ../../nixos/profiles/docker-daemon.nix
     # ../../modules/xserver.nix
     # ./nixos/modules/redis.nix
     ../../nixos/profiles/steam.nix
@@ -33,20 +31,36 @@
 
   # TODO conditionnally enable it
   # networking.wireless.iwd.enable = true;
-  # boot.loader.systemd-boot.enable = true;
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.efiSysMountPoint = "/boot/efi";
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.grub.enableCryptodisk = true;
-  boot.loader.grub.enable = true;
+  boot.loader.grub.enableCryptodisk = false;
+  boot.loader.grub.enable = false;
   boot.loader.grub.device = "nodev";
+  # boot.loader.grub.efiInstallAsRemovable = true; # in case canTouchEfiVariables doesn't work for your system
   boot.loader.grub.efiSupport = true;
 
-  boot.initrd.luks.devices.luksRoot = {
-    # device = "/dev/disk/by-uuid/6bd496bf-55ac-4e56-abf0-ad1f0db735b2";
-    device = "/dev/sda2";
-    preLVM = true; # luksOpen will be attempted before LVM scan or after it
-    # fallbackToPassword = true;
-    allowDiscards = true; # allow TRIM requests (?!)
+  # Setup keyfile
+  boot.initrd.secrets = {
+    "/crypto_keyfile.bin" = null;
   };
+ 
+  # Enable swap on luks
+  boot.initrd.luks.devices."luks-abd09d4b-3972-405a-b314-44821af95c0e".device = "/dev/disk/by-uuid/abd09d4b-3972-405a-b314-44821af95c0e";
+  boot.initrd.luks.devices."luks-abd09d4b-3972-405a-b314-44821af95c0e".keyFile = "/crypto_keyfile.bin";
+ 
+  # Enable the GNOME Desktop Environment.
+#   services.xserver.displayManager.gdm.enable = true;
+#   services.xserver.desktopManager.gnome.enable = true;
+
+
+#   boot.initrd.luks.devices.luksRoot = {
+#     # device = "/dev/disk/by-uuid/6bd496bf-55ac-4e56-abf0-ad1f0db735b2";
+#     device = "/dev/sda2";
+#     preLVM = true; # luksOpen will be attempted before LVM scan or after it
+#     # fallbackToPassword = true;
+#     allowDiscards = true; # allow TRIM requests (?!)
+#   };
   # boot.kernelParams = [
   # CPU performance scaling driver
   #"intel_pstate=no_hwp" 
@@ -98,8 +112,6 @@
      # custom modules
      ./home.nix
      ../../hm/profiles/nova.nix
-     flakeInputs.nova.hmProfiles.standard
-     flakeInputs.nova.hmProfiles.dev
     # breaks build: doesnt like the "activation-script"
     # nova.hmConfigurations.dev
    ];

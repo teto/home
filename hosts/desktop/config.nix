@@ -10,7 +10,7 @@
     ./redis.nix
 
 
-    ../../nixos/profiles/immich.nix
+    # ../../nixos/profiles/immich.nix
 
     # this is only to test the new config
     # ./nextcloud.nix
@@ -22,7 +22,7 @@
     ../config-all.nix
     ../../nixos/profiles/desktop.nix
     ../../nixos/profiles/nix-daemon.nix
-    ../../nixos/profiles/experimental.nix
+    # ../../nixos/profiles/experimental.nix
     ../../nixos/profiles/steam.nix
     ../../nixos/profiles/opensnitch.nix
     ../../nixos/profiles/podman.nix
@@ -56,7 +56,6 @@
       # breaks build: doesnt like the "activation-script"
      # nova.hmConfigurations.dev
     ];
-   home.stateVersion = "23.05";
   };
 
   # for testing

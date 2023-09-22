@@ -1,5 +1,13 @@
 #+title: zsh tips 
 
+* merge histories
+
+To load history from file:
+builtin fc -R -I "$hist_file_1"
+
+Flush history / HIST_FILE
+builtin fc -W "$hist_file_merged"
+
 zsh --help shows different commands:
 
 

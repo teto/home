@@ -155,29 +155,16 @@ end
  -- 'teto/Modeliner', -- not needed with editorconfig ?
  {
   'lukas-reineke/indent-blankline.nvim',
+  -- main = "ibl",
+  -- opts = 
   config = function()
-   require('indent_blankline').setup({
-    char = '│',
-    buftype_exclude = { 'terminal' },
-    filetype_exclude = { 'help' },
-    space_char_blankline = ' ',
-    show_end_of_line = true,
-    char_highlight_list = {
-     'IndentBlanklineIndent1',
-     'IndentBlanklineIndent2',
-     'IndentBlanklineIndent3',
-     'IndentBlanklineIndent4',
-     'IndentBlanklineIndent5',
-     'IndentBlanklineIndent6',
-    },
-    max_indent_increase = 1,
-    indent_level = 2,
-    show_first_indent_level = false,
+   require("ibl").setup({
+    -- debounce = 200,
+       whitespace = { highlight = { "Whitespace", "NonText" } },
+       scope = { exclude = { language = { "lua" } } },
+   -- require('indent_blankline').setup({
+    -- exclude = { 'terminal' },
     -- blankline_use_treesitter,
-    char_list = { '.', '|', '-' },
-    show_trailing_blankline_indent = false,
-    show_current_context = false,
-    show_current_context_start = true,
     enabled = false,
    })
   end,

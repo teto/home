@@ -26,6 +26,9 @@ return {
    })
   end
 },
+-- {
+--  'Exafunction/codeium.vim'
+-- },
  {
   'mrcjkb/neotest-haskell',
   -- -- 'nvim-neotest/neotest',

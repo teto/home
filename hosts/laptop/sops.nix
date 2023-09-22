@@ -6,5 +6,5 @@
   sops.defaultSopsFile = ../desktop/secrets.yaml;
 
   # This is using an age key that is expected to already be in the filesystem
-  sops.age.keyFile = "/home/teto/.config/sops/age/keys.txt";
+  sops.age.keyFile = "/home/teto/home/secrets/age.key";
 }

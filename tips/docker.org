@@ -1,3 +1,9 @@
+
+* reference 
+
+https://docs.docker.com/engine/reference/builder/#from
+Each FROM instruction clears any state created by previous instructions
+
 when updating this, fill the nix store on the runners by running the following:
   # nix build github:nixos/nix/VERSION --out-link ./dont-remove#
 # push image to registry 
@@ -45,7 +51,9 @@ docker kill $(docker ps -q)
 docker exec -it <container name> /bin/bash
 (the image must be running)
 
-docker-credentials-pass pour eviter d'avoir le mdp en clair dans $HOME/.docker/config.json
+* secure configuration
+
+  Use docker-credentials-pass ("docker-credential-helpers" in nixpkgs) pour eviter d'avoir le mdp en clair dans $HOME/.docker/config.json
 
 docker ps --no-trunc
 
@@ -81,14 +89,16 @@ to join the default network that way.
 $ docker network rm host / bridge / none
 Error response from daemon: host is a pre-defined network and cannot be removed
 
-# How to rebuild and restart a single container ?
+* How to rebuild and restart a single container ?
 Remove the -d to see logs
 `docker-compose up -d --build worker`
 
-# How to stop a single container ?
+* How to stop a single container ?
+
 $ docker-compose rm -f -s -v result-store
 
-# use a preexisting network
+* use a preexisting network
+
 https://docs.docker.com/compose/networking/#use-a-pre-existing-network
 
 docker network create
@@ -113,13 +123,10 @@ Similarly port mapping is disabled.
 # building
 docker build --progress=plain -t abc:1 . --no-cache
 
-# To debug
-docker inspect --format "{{json .State.Health }}" f6c181a5692e | jq
+* To debug
 
-# to restart deployement
+ docker inspect --format "{{json .State.Health }}" f6c181a5692e | jq
 
-kubectl rollout restart deployments
-kubectl delete ns [NAMESPACE]
 
 docker build --progress auto .
 
@@ -130,5 +137,3 @@ docker [[build]] --progress auto --no-cache --build-arg JINKO_VERSION=local  -f 
 
 
 The docker build command builds Docker images from a Dockerfile and a “context”. A build’s context is the set of files located in the specified PATH or URL. The build process can refer to any of the files in the context. For example, your build can use a COPY instruction to reference a file in the context.
-
-download the full bucket aws s3 sync s3://jinko-dev-shared .

@@ -3,10 +3,12 @@
 
 * to ignore certificate check 
   export VAULT_SKIP_VERIFY=1
-* to debug token issues
-  vault token lookup
 
-vault login -method=oidc -path=google
+* to debug auth issues
+
+  vault token lookup
+  vault login -method=oidc -path=google
+
 vault kv put -mount=secret ci-runner/prod PULUMI_CONFIG_PASSPHRASE=toto
 vault kv get -mount=secret -field=ssh_client_key ci-runner/prod/secrets-prod.yaml
 
@@ -16,6 +18,9 @@ vault policy list
 vault secrets list -detailed
 vault secrets enable aws
 vault secrets enable -path=ssh-prod ssh
+
+
+vault read aws/creds/dango_role
 
 #+BEGIN_SRC
 vault secrets list -detailed
