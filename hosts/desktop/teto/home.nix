@@ -1,13 +1,14 @@
 # home-manager specific config from
-{ config, lib, flakeInputs, pkgs, ... }:
+{ config, lib, flakeInputs
+, pkgs
+, withSecrets
+, ... }:
 {
   imports = [
     ./bash.nix
     ./calendars.nix
     ./git.nix
-    ./mail.nix
     ./neovim.nix
-    ./ssh-config.nix
     ./sway.nix
     ./swaync.nix
     ./zsh.nix
@@ -34,7 +35,10 @@
     # ../../hm/profiles/emacs.nix
     # ../../hm/profiles/weechat.nix
 
-  ];
+   ] ++ lib.optionals withSecrets [
+    ./mail.nix
+   ]
+;
 
   programs.helix.enable = true;
 

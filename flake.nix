@@ -126,6 +126,7 @@
         # disables the Home Manager option nixpkgs.*
         home-manager.useGlobalPkgs = true;
 
+
         home-manager.sharedModules = [
           # And add the home-manager module
           self.inputs.ironbar.homeManagerModules.default
@@ -134,9 +135,13 @@
           ./hm/modules/bash.nix
           ./hm/modules/zsh.nix
           ./hm/modules/xdg.nix
+          ({...}: { 
+            home.stateVersion = "23.05";
+          })
         ];
         home-manager.extraSpecialArgs = {
           inherit secrets;
+          withSecrets = false;
           flakeInputs = self.inputs;
         };
 
@@ -225,6 +230,8 @@
 
             specialArgs = {
               inherit secrets;
+               withSecrets = true;
+
               flakeInputs = self.inputs;
             };
           };
@@ -233,7 +240,8 @@
           laptop = nixpkgs.lib.nixosSystem {
             inherit system;
             specialArgs = {
-              inherit secrets;
+              withSecrets = false;
+              secrets = {};
               flakeInputs = self.inputs;
             };
 
@@ -272,6 +280,14 @@
             })
              # put everything nova
            ];
+
+            specialArgs = {
+              hostname = "neotokyo";
+              inherit secrets;
+              withSecrets = true;
+              flakeInputs = self.inputs;
+            };
+
           };
 
           neotokyo = nixpkgs.lib.nixosSystem {
@@ -294,6 +310,7 @@
             specialArgs = {
               hostname = "neotokyo";
               inherit secrets;
+              withSecrets = true;
               flakeInputs = self.inputs;
             };
 
@@ -305,6 +322,7 @@
             pkgs = myPkgs;
             specialArgs = {
               secrets = {};
+              withSecrets = false;
               inherit (self) inputs;
             };
             modules = [
@@ -338,6 +356,25 @@
               inherit secrets;
               inherit (self) inputs;
             };
+
+            modules = [
+            ({ ... }: {
+              imports = [
+                 ./nixos/profiles/rstudio-server.nix
+
+              ];
+              home-manager.users.teto = {
+               imports = [
+                ./hosts/desktop/teto/ssh-config.nix
+                 
+                   # flakeInputs.nova.hmProfiles.standard
+                   # flakeInputs.nova.hmProfiles.dev
+                   # flakeInputs.nova.hmProfiles.devops
+               ];
+              };
+            })
+
+            ];
           });
         };
 

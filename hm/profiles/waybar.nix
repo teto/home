@@ -57,15 +57,15 @@
           ];
           tray = {
             # "icon-size": 21,
-            "spacing" = 10;
+            spacing = 10;
           };
           mpd = {
-            "format" = "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ⸨{songPosition}|{queueLength}⸩ ";
-            "format-disconnected" = "Disconnected ";
-            "format-stopped" = "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}Stopped ";
-            "unknown-tag" = "N/A";
-            "interval" = 2;
-            "consume-icons" = {
+            format = "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ⸨{songPosition}|{queueLength}⸩ ";
+            format-disconnected = "Disconnected ";
+            format-stopped = "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}Stopped ";
+            unknown-tag = "N/A";
+            interval = 2;
+            consume-icons = {
               "on" = " ";
             };
             "random-icons" = {

@@ -56,7 +56,6 @@
       # breaks build: doesnt like the "activation-script"
      # nova.hmConfigurations.dev
     ];
-   home.stateVersion = "23.05";
   };
 
   # for testing

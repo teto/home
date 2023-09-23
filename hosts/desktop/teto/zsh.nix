@@ -1,6 +1,8 @@
-{ config, pkgs, lib, secrets, 
+{ config, pkgs, lib
+, secrets
+, withSecrets
 # flakeInputs,
-... }:
+, ... }:
 let
   secrets = import ../../../nixpkgs/secrets.nix;
 in
@@ -16,7 +18,8 @@ in
   # TODO prefix withg zsh
    programs.zsh = {
 
-   sessionVariables = config.programs.bash.sessionVariables // {
+    sessionVariables = config.programs.bash.sessionVariables // 
+     lib.optionalAttrs withSecrets {
      # HISTFILE="$XDG_CACHE_HOME/zsh_history";
      # TODO load this from sops instead
      GITHUB_TOKEN = secrets.githubToken;

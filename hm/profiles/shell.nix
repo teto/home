@@ -1,4 +1,7 @@
-{ config, pkgs, flakeInputs, lib, secrets, ... } @ args:
+{ config, pkgs, flakeInputs, lib
+, secrets
+, withSecrets
+, ... } @ args:
 {
 
   # imports = [
@@ -21,12 +24,13 @@
       # CAREFUL 
       # HISTFILE="$XDG_CACHE_HOME/bash_history";
 	  # TODO pass the correct port, how to do that ? need ssh_config support
-      # NOVA_RUNNER1 = mkRemoteBuilderDesc secrets.nova-runner-1;
-	  NOVA_CACHE_DEV  = secrets.novaNixCache.dev;
-	  NOVA_CACHE_PROD = secrets.novaNixCache.prod;
 
 	  # wayland variables
-    };
+     } // lib.optionalAttrs withSecrets {
+       NOVA_CACHE_DEV  = secrets.novaNixCache.dev;
+       NOVA_CACHE_PROD = secrets.novaNixCache.prod;
+     }
+;
 
     # "ignorespace"
     historyControl = [ ];
