@@ -49,7 +49,7 @@ This folder contains my customizations for:
 As long as flakes are not supported natively, you need to 
 #+BEGIN_SRC shell
 # when not setting #my-machine, defaults to hostname
-nixos-rebuild switch --flake '.#' --use-remote-sudo
+nixos-rebuild switch --flake 'github:teto/home#laptop' --use-remote-sudo --option accept-flake-config true --option extra-experimental-features 'nix-command flakes repl-flake'
 #+END_SRC
 
 
@@ -65,8 +65,11 @@ transferred.
 
 
 #+BEGIN_SRC
-$ nix shell nixpkgs#magic-wormhole
-$ wormhole send ~/.gnupg ~/.password-store ~/.ssh
+$ nix shell nixpkgs#magic-wormhole-rs
+$ wormhole send ~/.gnupg
+$ wormhole send ~/.password-store 
+$ wormhole send ~/.ssh
+$ wormhole send ~/home/secrets
 #+END_SRC
 
 ** How to recover this repo cyphered files
@@ -75,7 +78,7 @@ Get git-crypt do decypher the files
 Retreive the key (possibly from an existing deployement via `git-crypt export-key toto.key`) and use
 it on the new deployement via:
 #+BEGIN_SRC sh 
-$ git-crypt unlock toto.key
+$ git-crypt unlock secrets/git-crypt-teto.key
 #+END_SRC
 should unlock the files.
 
