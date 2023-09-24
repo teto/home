@@ -9,6 +9,7 @@
     ./calendars.nix
     ./git.nix
     ./neovim.nix
+    ./ssh-config.nix
     ./sway.nix
     ./swaync.nix
     ./zsh.nix

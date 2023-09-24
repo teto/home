@@ -52,6 +52,13 @@ let
     # "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
     # "widget.content.gtk-theme-override" = "Adwaita:light";
   };
+
+
+  commonExtensions = [
+     pkgs.nur.repos.rycee.firefox-addons.bitwarden
+     pkgs.nur.repos.rycee.firefox-addons.ublock-origin
+   ];
+
 in
 {
 
@@ -75,18 +82,11 @@ in
         # pass package for instance
         # with pkgs.nur.repos.rycee.firefox-addons;
         # with pkgs;
-        extensions = [
+        extensions = commonExtensions ++ [
           # TODO no need for bitwarden anymore
-          pkgs.nur.repos.rycee.firefox-addons.bitwarden
           pkgs.nur.repos.rycee.firefox-addons.browserpass
-          pkgs.nur.repos.rycee.firefox-addons.ublock-origin
           pkgs.nur.repos.rycee.firefox-addons."10ten-ja-reader"
 
-        #   (pkgs.fetchFirefoxAddon {
-        #     name = "ublock";
-        #     url = "https://addons.mozilla.org/firefox/downloads/file/3679754/ublock_origin-1.31.0-an+fx.xpi";
-        #     sha256 = "1h768ljlh3pi23l27qp961v1hd0nbj2vasgy11bmcrlqp40zgvnr";
-        #   })
         #   (pkgs.fetchFirefoxAddon {
         #     name = "rikaichamp";
         #     url = "https://addons.mozilla.org/firefox/downloads/file/3691333/rikaichamp-0.3.3-fx.xpi";
@@ -114,6 +114,7 @@ in
       };
 
       nova = lib.mkForce {
+        extensions = commonExtensions;
         # isDefault = false;
         id = 1;
         path = "6bt2uwrj.nova";

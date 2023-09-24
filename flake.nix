@@ -266,7 +266,7 @@
            modules = [
             ({ ... }: {
               imports = [
-                 ./nixos/profiles/rstudio-server.nix
+                 ./nixos/profiles/nova/rstudio-server.nix
                  # nova.nixosProfiles.dev
 
               ];
@@ -360,7 +360,7 @@
             modules = [
             ({ ... }: {
               imports = [
-                 ./nixos/profiles/rstudio-server.nix
+                 ./nixos/profiles/nova/rstudio-server.nix
 
               ];
               home-manager.users.teto = {

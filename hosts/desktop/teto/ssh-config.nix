@@ -1,6 +1,7 @@
 # TODO this should be fetched from the runners themselves !
 { config, pkgs, lib
 , secrets
+, withSecrets
 , flakeInputs
 , ... }:
 {
@@ -10,8 +11,7 @@
 
     # can I have it per target ?
     # controlPath = "";
-    matchBlocks = 
-     {
+    matchBlocks = lib.optionalAttrs withSecrets {
       jakku = {
         host = secrets.jakku.hostname;
         user = "teto";
@@ -33,13 +33,7 @@
 		port = 12666;
       };
 
-      nova = {
-        host = "git.novadiscovery.net";
-        user = "matthieu.coudron";
-        identityFile = "~/.ssh/nova_key";
-      };
-	  
-    };
+     };
 
     extraConfig = 
     ''

@@ -1,5 +1,6 @@
 { config, pkgs, lib
 , secrets 
+, withSecrets 
 , flakeInputs
 , ... }:
 let
@@ -40,8 +41,15 @@ in
             # TODO we should expose the resulting nix expressions directly
              prod-runners);
     in
-    remoteBuilders;
+     lib.optionalAttrs withSecrets remoteBuilders // {
 
+      nova = {
+        host = "git.novadiscovery.net";
+        user = "matthieu.coudron";
+        identityFile = "~/.ssh/nova_key";
+      };
+    };
+	  
   };
 }
 
