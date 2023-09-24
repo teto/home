@@ -74,10 +74,10 @@ in
         # Not accepted. we should find another way to enable it
         # pass package for instance
         # with pkgs.nur.repos.rycee.firefox-addons;
-        # extensions = with pkgs;[
-        #   # TODO no need for bitwarden anymore
-        #   # pkgs.nur.repos.rycee.firefox-addons.bitwarden
-        #   # pkgs.nur.repos.rycee.firefox-addons.browserpass
+        extensions = with pkgs;[
+          # TODO no need for bitwarden anymore
+          pkgs.nur.repos.rycee.firefox-addons.bitwarden
+          pkgs.nur.repos.rycee.firefox-addons.browserpass
 
         #   (pkgs.fetchFirefoxAddon {
         #     name = "ublock";
@@ -93,7 +93,7 @@ in
         #   #        nur.repos.rycee.firefox-addons.browserpass-otp
         #   # nur.repos.rycee.firefox-addons.tree-style-tabs  # not in his nur repo
         #   #        nur.repos.rycee.firefox-addons.gesturefy
-        # ];
+        ];
 
       };
 

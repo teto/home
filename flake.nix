@@ -247,7 +247,6 @@
 
             modules = [
               hm.nixosModules.home-manager
-              # nova.nixosProfiles.dev
               self.inputs.sops-nix.nixosModules.sops
               hm-common
 
@@ -268,6 +267,7 @@
             ({ ... }: {
               imports = [
                  ./nixos/profiles/rstudio-server.nix
+                 # nova.nixosProfiles.dev
 
               ];
               home-manager.users.teto = {

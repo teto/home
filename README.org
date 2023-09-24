@@ -46,6 +46,7 @@ This folder contains my customizations for:
 
 * nixos Install via flakes
 
+As long as flakes are not supported natively, you need to 
 #+BEGIN_SRC shell
 # when not setting #my-machine, defaults to hostname
 nixos-rebuild switch --flake '.#' --use-remote-sudo
@@ -58,6 +59,10 @@ Some secrets can't be shared reliably on the repository so they need to be
 transferred.
 
 ** How to transfer secrets from another machine
+
+* age key for sops
+* git crypt key to decypher secrets saved in the repo
+
 
 #+BEGIN_SRC
 $ nix shell nixpkgs#magic-wormhole

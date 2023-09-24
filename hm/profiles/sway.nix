@@ -185,6 +185,7 @@ in
         # example = { "HDMI-A-2" = { bg = "~/path/to/background.png fill"; }; };
 
          "*" = {  bg = "/home/teto/home/wallpapers/nebula.jpg fill"; };
+        
        };
       input = {
         "type:keyboard" = {
