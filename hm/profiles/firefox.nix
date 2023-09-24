@@ -74,10 +74,13 @@ in
         # Not accepted. we should find another way to enable it
         # pass package for instance
         # with pkgs.nur.repos.rycee.firefox-addons;
-        extensions = with pkgs;[
+        # with pkgs;
+        extensions = [
           # TODO no need for bitwarden anymore
           pkgs.nur.repos.rycee.firefox-addons.bitwarden
           pkgs.nur.repos.rycee.firefox-addons.browserpass
+          pkgs.nur.repos.rycee.firefox-addons.ublock-origin
+          pkgs.nur.repos.rycee.firefox-addons."10ten-ja-reader"
 
         #   (pkgs.fetchFirefoxAddon {
         #     name = "ublock";
