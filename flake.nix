@@ -355,6 +355,7 @@
             specialArgs = {
               inherit secrets;
               inherit (self) inputs;
+              flakeInputs = self.inputs;
             };
 
             modules = [

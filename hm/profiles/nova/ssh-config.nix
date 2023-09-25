@@ -16,6 +16,12 @@ let
     match = "host=${m.hostname},${m.runnerName}";
   };
 in
+# Host prod-sshuttle.k8s.jinko.ai
+# IdentityFile ~/.ssh/nova_key
+
+# Host novinfra.net
+# User ubuntu
+# IdentityFile ~/.ssh/nova_key
 
 {
   programs.ssh = {
