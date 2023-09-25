@@ -54,7 +54,7 @@ in
       };
 
       relay = {
-        host = "prod-sshuttle.k8s.jinko.ai";
+        match = "host=prod-sshuttle.k8s.jinko.ai";
         user = "matthieu.coudron";
         identityFile = "~/.ssh/nova_key";
       };

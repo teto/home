@@ -845,23 +845,6 @@
         "type": "github"
       }
     },
-    "i3pystatus": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1649629540,
-        "narHash": "sha256-TN0PgA9dUlK8exHPqUGrVZdShWA5VnjeOIZX06vssb4=",
-        "owner": "teto",
-        "repo": "i3pystatus",
-        "rev": "744cf618d9448f6753b0a93184e96cafb98f396d",
-        "type": "github"
-      },
-      "original": {
-        "owner": "teto",
-        "ref": "nix_backend",
-        "repo": "i3pystatus",
-        "type": "github"
-      }
-    },
     "ironbar": {
       "inputs": {
         "crane": "crane",
@@ -1894,7 +1877,6 @@
         "flake-utils": "flake-utils",
         "fzf-git-sh": "fzf-git-sh",
         "hm": "hm",
-        "i3pystatus": "i3pystatus",
         "ironbar": "ironbar",
         "jinko-stats": "jinko-stats",
         "mujmap": "mujmap",
