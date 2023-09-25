@@ -48,7 +48,7 @@ in
      lib.optionalAttrs withSecrets remoteBuilders // {
 
       nova = {
-        host = "git.novadiscovery.net";
+        match = "host=git.novadiscovery.net";
         user = "matthieu.coudron";
         identityFile = "~/.ssh/nova_key";
       };

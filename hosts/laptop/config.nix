@@ -11,7 +11,7 @@
     ../../nixos/profiles/desktop.nix
     ../../nixos/profiles/podman.nix
     ../../nixos/profiles/sway.nix
-    # ../../nixos/modules/docker-daemon.nix
+    ../../nixos/profiles/docker-daemon.nix
     # ../../modules/xserver.nix
     # ./nixos/modules/redis.nix
     ../../nixos/profiles/steam.nix
