@@ -32,7 +32,7 @@ in
       "pgadmin" # pgadmin is such a mess
       "wheel" # for sudo
       "vboxusers" # to avoid Kernel driver not accessible
-      # "kvm" # don't think that's needed
+      "kvm" # needed when using runAsRoot when building dockerImage
       # config.users.groups.keys.name
       "keys"
     ];

@@ -67,12 +67,12 @@
     # poetry.url = "github:nix-community/poetry2nix";
     nix-update.url = "github:Mic92/nix-update";
     nix-index-cache.url = "github:Mic92/nix-index-database";
-    i3pystatus = { url = "github:teto/i3pystatus/nix_backend"; flake = false; };
-    # nova.url = "git+ssh://git@git.novadiscovery.net/world/nova-nix.git?ref=master";
-    # nova.url = "git+ssh://git@git.novadiscovery.net/sys/doctor";
-    # jinko-stats.url = "git+ssh://git@git.novadiscovery.net/jinko/jinko-stats.git?ref=add-rserver";
+
+    nova.url = "git+ssh://git@git.novadiscovery.net/sys/doctor";
+    jinko-stats.url = "git+ssh://git@git.novadiscovery.net/jinko/jinko-stats.git?ref=add-rserver";
+
     # c8296214151883ce27036be74d22d04953418cf4
-    # nova-ci.url = "git+ssh://git@git.novadiscovery.net/infra/ci-runner";
+    nova-ci.url = "git+ssh://git@git.novadiscovery.net/infra/ci-runner";
     neovim = {
       # url = "github:nojnhuh/neovim?dir=contrib&ref=lsp-watch-files";
       url = "github:neovim/neovim?dir=contrib";
@@ -88,7 +88,7 @@
     sops-nix.url = "github:Mic92/sops-nix";
 
     # TODO extend vim plugins from this overlay
-    neovim-overlay.url = "github:teto/neovim-nightly-overlay/vimPlugins-overlay";
+    # neovim-overlay.url = "github:teto/neovim-nightly-overlay/vimPlugins-overlay";
     tree-sitter = {
       url = "github:ahlinc/tree-sitter";
       flake = false;
@@ -197,7 +197,6 @@
 
             # aws-lambda-rie = myPkgs.callPackage ./pkgs/aws-lambda-runtime-interface-emulator { };
 
-            inherit (myPkgs) i3pystatus-custom;
             jupyter4ihaskell = myPkgs.jupyter-teto;
             inherit (unstablePkgs) nhs92 nhs94 nhs96;
 
@@ -359,7 +358,7 @@
             };
 
             modules = [
-            ({ ... }: {
+            ({ flakeInputs, ... }: {
               imports = [
                  ./nixos/profiles/nova/rstudio-server.nix
 
@@ -367,10 +366,12 @@
               home-manager.users.teto = {
                imports = [
                 ./hosts/desktop/teto/ssh-config.nix
-                 
-                   # flakeInputs.nova.hmProfiles.standard
-                   # flakeInputs.nova.hmProfiles.dev
-                   # flakeInputs.nova.hmProfiles.devops
+                ./hosts/desktop/teto/bash.nix
+                ./hm/profiles/nova/ssh-config.nix 
+
+                   flakeInputs.nova.hmProfiles.standard
+                   flakeInputs.nova.hmProfiles.dev
+                   flakeInputs.nova.hmProfiles.devops
                ];
               };
             })
@@ -426,34 +427,6 @@
           # neovide = prev.neovide.overrideAttrs(oa: {
           #  src = self.inputs.neovide;
           # });
-
-
-          # TODO override extraLibs instead
-          i3pystatus-custom = (prev.i3pystatus.override ({
-            extraLibs = with final.python3Packages; [
-              pytz
-              notmuch
-              dbus-python
-
-              # humanize for a better display of text
-              humanize
-            ];
-          })).overrideAttrs (oldAttrs: {
-            name = "i3pystatus-dev";
-            # src = builtins.fetchGit {
-            #   url = https://github.com/teto/i3pystatus;
-            #   ref = "nix_backend";
-            # };
-
-            src = self.inputs.i3pystatus;
-            # src = final.fetchFromGitHub {
-            #   repo = "i3pystatus";
-            #   owner = "teto";
-            #   rev="2a3285aa827a9cbf5cd53eb12619e529576997e3";
-            #   sha256 = "sha256-QSxfdsK9OkMEvpRsXn/3xncv3w/ePCGrC9S7wzg99mk=";
-            # };
-          });
-
         };
 
 

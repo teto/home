@@ -16,8 +16,6 @@ let
     match = "host=${m.hostname},${m.runnerName}";
   };
 in
-# Host prod-sshuttle.k8s.jinko.ai
-# IdentityFile ~/.ssh/nova_key
 
 # Host novinfra.net
 # User ubuntu
@@ -54,6 +52,13 @@ in
         user = "matthieu.coudron";
         identityFile = "~/.ssh/nova_key";
       };
+
+      relay = {
+        host = "prod-sshuttle.k8s.jinko.ai";
+        user = "matthieu.coudron";
+        identityFile = "~/.ssh/nova_key";
+      };
+
     };
 	  
   };
