@@ -45,7 +45,7 @@ in
             # TODO we should expose the resulting nix expressions directly
              prod-runners);
     in
-     lib.optionalAttrs withSecrets remoteBuilders // {
+     (lib.optionalAttrs (lib.debug.traceVal withSecrets) remoteBuilders) // {
 
       nova = {
         match = "host=git.novadiscovery.net";

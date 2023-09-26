@@ -214,15 +214,21 @@
                  ./nixos/profiles/nova/rstudio-server.nix
 
               ];
+              home-manager.extraSpecialArgs = {
+                inherit secrets;
+                withSecrets = true;
+                # flakeInputs = self.inputs;
+              };
+
               home-manager.users.teto = {
                imports = [
                 ./hosts/desktop/teto/ssh-config.nix
                 ./hosts/desktop/teto/bash.nix
                 ./hm/profiles/nova/ssh-config.nix 
 
-                   flakeInputs.nova.hmProfiles.standard
-                   flakeInputs.nova.hmProfiles.dev
-                   flakeInputs.nova.hmProfiles.devops
+                 flakeInputs.nova.hmProfiles.standard
+                 flakeInputs.nova.hmProfiles.dev
+                 flakeInputs.nova.hmProfiles.devops
                ];
               };
             });
