@@ -207,16 +207,18 @@ let
     # plugins = with pkgs.vimPlugins; [
     #  tint-nvim
     # ];
+     # -- vim.lsp.set_log_level("info")
+     # -- require my own manual config
+     # -- logs are written to /home/teto/.cache/vim-lsp.log
+
      extraLuaConfig = ''
-       -- logs are written to /home/teto/.cache/vim-lsp.log
-       -- vim.lsp.set_log_level("info")
-       -- require my own manual config
        require('init-manual')
      '';
 
     extraPackages = with pkgs; [
       # luaPackages.lua-lsp
       # lua53Packages.teal-language-server
+      codeium # ideally not needed and referenced by codeium-vim directly
       editorconfig-checker # used in null-ls
       lua51Packages.luacheck
       haskellPackages.hasktags
