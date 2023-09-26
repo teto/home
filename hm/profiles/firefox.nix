@@ -57,6 +57,7 @@ let
   commonExtensions = [
      pkgs.nur.repos.rycee.firefox-addons.bitwarden
      pkgs.nur.repos.rycee.firefox-addons.ublock-origin
+     pkgs.nur.repos.rycee.firefox-addons.tree-style-tab
    ];
 
 in

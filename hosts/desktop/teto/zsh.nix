@@ -1,11 +1,7 @@
 { config, pkgs, lib
 , secrets
 , withSecrets
-# flakeInputs,
 , ... }:
-let
-  secrets = import ../../../nixpkgs/secrets.nix;
-in
 {
   imports = [
    ../../../hm/profiles/zsh.nix

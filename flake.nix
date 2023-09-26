@@ -72,7 +72,7 @@
     jinko-stats.url = "git+ssh://git@git.novadiscovery.net/jinko/jinko-stats.git?ref=add-rserver";
 
     # c8296214151883ce27036be74d22d04953418cf4
-    # nova-ci.url = "git+ssh://git@git.novadiscovery.net/infra/ci-runner";
+    nova-ci.url = "git+ssh://git@git.novadiscovery.net/infra/ci-runner";
 
     neovim = {
       # url = "github:nojnhuh/neovim?dir=contrib&ref=lsp-watch-files";
@@ -209,6 +209,24 @@
       nixosConfigurations =
         let
           system = "x86_64-linux";
+           novaModule = ({ flakeInputs, ... }: {
+              imports = [
+                 ./nixos/profiles/nova/rstudio-server.nix
+
+              ];
+              home-manager.users.teto = {
+               imports = [
+                ./hosts/desktop/teto/ssh-config.nix
+                ./hosts/desktop/teto/bash.nix
+                ./hm/profiles/nova/ssh-config.nix 
+
+                   flakeInputs.nova.hmProfiles.standard
+                   flakeInputs.nova.hmProfiles.dev
+                   flakeInputs.nova.hmProfiles.devops
+               ];
+              };
+            });
+
         in
         rec {
           # TODO generate those from the hosts folder ?
@@ -264,25 +282,11 @@
           # see https://determinate.systems/posts/extending-nixos-configurations
           mcoudron = laptop.extendModules {
            modules = [
-            ({ ... }: {
-              imports = [
-                 ./nixos/profiles/nova/rstudio-server.nix
-                 # nova.nixosProfiles.dev
-
-              ];
-              home-manager.users.teto = {
-               imports = [
-                   # flakeInputs.nova.hmProfiles.standard
-                   # flakeInputs.nova.hmProfiles.dev
-                   # flakeInputs.nova.hmProfiles.devops
-               ];
-              };
-            })
-             # put everything nova
+            novaModule
            ];
 
             specialArgs = {
-              hostname = "neotokyo";
+              hostname = "mcoudron";
               inherit secrets;
               withSecrets = true;
               flakeInputs = self.inputs;
@@ -359,23 +363,7 @@
             };
 
             modules = [
-            ({ flakeInputs, ... }: {
-              imports = [
-                 ./nixos/profiles/nova/rstudio-server.nix
-
-              ];
-              home-manager.users.teto = {
-               imports = [
-                ./hosts/desktop/teto/ssh-config.nix
-                ./hosts/desktop/teto/bash.nix
-                ./hm/profiles/nova/ssh-config.nix 
-
-                   flakeInputs.nova.hmProfiles.standard
-                   flakeInputs.nova.hmProfiles.dev
-                   flakeInputs.nova.hmProfiles.devops
-               ];
-              };
-            })
+               novaModule
 
             ];
           });
