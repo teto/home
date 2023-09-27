@@ -366,6 +366,7 @@
               inherit secrets;
               inherit (self) inputs;
               flakeInputs = self.inputs;
+              withSecrets = true;
             };
 
             modules = [

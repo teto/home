@@ -19,3 +19,9 @@
   `npm i playwright`
 npm list -g allows to list installed programs and their install folders, for instance:
 ~/.npm-global/lib
+
+** pnpm
+
+pnpm link . (-g)
+
+pnpm config
