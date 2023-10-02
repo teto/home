@@ -24,10 +24,7 @@ let
     {
      plugin = b64-nvim;
     }
-    {
-     # :
-     plugin = kui-nvim;
-    }
+    # { plugin = kui-nvim; }
     # FIX https://github.com/NixOS/nixpkgs/issues/169293 first
     (luaPlugin {
       plugin = telescope-frecency-nvim; 
@@ -92,7 +89,7 @@ let
     # })
 
     # WIP
-    (luaPlugin { plugin = nvim-telescope-zeal-cli; })
+    # (luaPlugin { plugin = nvim-telescope-zeal-cli; })
     (luaPlugin { plugin = minimap-vim; })
     (luaPlugin {
       # reuse once https://github.com/neovim/neovim/issues/9390 is fixed

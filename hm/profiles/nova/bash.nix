@@ -12,6 +12,8 @@ in
     sessionVariables = let 
      prod-runners = builtins.fromJSON (builtins.readFile "${flakeInputs.nova-ci}/configs/prod/runners-generated.json");
       defaultMandatoryFeatures = [];
+
+      # generates a { NOVA_XXX = string } attrset that contains paths toward remote builders
       remoteBuilders = lib.listToAttrs (
           map
             (attr:
