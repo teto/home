@@ -1,12 +1,6 @@
 [
   {
-    "slug": "adsum-notabs"
-  },
-  {
-    "slug": "anchors-reveal"
-  },
-  {
-    "slug": "auto-tab-discard"
+	"slug": "switch-to-audible-tab"
   },
   {
     "slug": "bitwarden-password-manager",
@@ -15,12 +9,6 @@
   {
     "slug": "browserpass-ce",
     "pname": "browserpass"
-  },
-  {
-    "slug": "browserpass-otp"
-  },
-  {
-    "slug": "yomichan"
   },
   {
     "slug": "darkreader"
@@ -35,26 +23,7 @@
     "slug": "firefox-color"
   },
   {
-    "slug": "fraidycat"
-  },
-  {
-    "slug": "gesturefy"
-  },
-  {
-    "slug": "ghostery"
-  },
-  {
-    "slug": "google-search-link-fix"
-  },
-  {
-    "slug": "gopass-bridge"
-  },
-  ,
-  {
     "slug": "header-editor"
-  },
-  {
-    "slug": "https-everywhere"
   },
   {
     "slug": "i-dont-care-about-cookies"
@@ -73,18 +42,6 @@
     "slug": "temporary-containers"
   },
   {
-    "slug": "text-contrast-for-dark-themes"
-  },
-  {
-    "slug": "textern"
-  },
-  {
-    "slug": "torswitch"
-  },
-  {
-    "slug": "transparent-standalone-image"
-  },
-  {
     "slug": "ublock-origin"
   },
   {
@@ -92,5 +49,5 @@
   },
   {
     "slug": "vim-vixen"
-  },
+  }
 ]

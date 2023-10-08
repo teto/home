@@ -153,22 +153,22 @@ end
  -- { 'rhysd/committia.vim', lazy = true},
  -- <leader>ml to setup buffer modeline
  -- 'teto/Modeliner', -- not needed with editorconfig ?
- {
-  'lukas-reineke/indent-blankline.nvim',
-  -- main = "ibl",
-  -- opts = 
-  config = function()
-   require("ibl").setup({
-    -- debounce = 200,
-       whitespace = { highlight = { "Whitespace", "NonText" } },
-       scope = { exclude = { language = { "lua" } } },
-   -- require('indent_blankline').setup({
-    -- exclude = { 'terminal' },
-    -- blankline_use_treesitter,
-    enabled = false,
-   })
-  end,
- },
+ -- {
+ --  'lukas-reineke/indent-blankline.nvim',
+ --  -- main = "ibl",
+ --  -- opts = 
+ --  config = function()
+ --   require("ibl").setup({
+ --    -- debounce = 200,
+ --       whitespace = { highlight = { "Whitespace", "NonText" } },
+ --       scope = { exclude = { language = { "lua" } } },
+ --   -- require('indent_blankline').setup({
+ --    -- exclude = { 'terminal' },
+ --    -- blankline_use_treesitter,
+ --    enabled = false,
+ --   })
+ --  end,
+ -- },
  { 'akinsho/bufferline.nvim'
   -- , dependencies = 'nvim-tree/nvim-web-devicons' 
  },

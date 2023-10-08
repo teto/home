@@ -5,7 +5,10 @@
   imports = [
    ./sway.nix
    ./waybar.nix
+    ../../hm/profiles/nova.nix
+
    ../desktop/teto/home.nix
+   ../desktop/teto/neovim.nix
    ../desktop/teto/swaync.nix
    ../desktop/teto/contacts.nix
 
@@ -32,6 +35,8 @@
    imagemagick # for 'convert'
    chromium
   ];
+
+  programs.neovim.enable = true; 
 
   # for blue tooth applet; must be installed systemwide
   services.blueman-applet.enable = true;

@@ -14,6 +14,8 @@ luarocks nix lush.nvim scm-1 --dev
 nix-prefetch-git --fetch-submodules --quiet https://github.com/teto/lush.nvim --branch-name rockspec
 
 
+install from source
+
 * tips related to luarocks-tag-release
 
   d'abord exporter

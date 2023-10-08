@@ -54,25 +54,13 @@
 #   services.xserver.desktopManager.gnome.enable = true;
 
 
-#   boot.initrd.luks.devices.luksRoot = {
-#     # device = "/dev/disk/by-uuid/6bd496bf-55ac-4e56-abf0-ad1f0db735b2";
-#     device = "/dev/sda2";
-#     preLVM = true; # luksOpen will be attempted before LVM scan or after it
-#     # fallbackToPassword = true;
-#     allowDiscards = true; # allow TRIM requests (?!)
-#   };
-  # boot.kernelParams = [
-  # CPU performance scaling driver
-  #"intel_pstate=no_hwp" 
-  # ];
-
   networking.hostName = "mcoudron"; # Define your hostname.
 
   # it apparently still is quite an important thing to have
   # boot.devSize = "5g";
 
   boot.kernelParams = [
-    # "acpi_backlight=vendor"
+    "acpi_backlight=vendor"
     # "i915.enable_psr=0"  # disables a power saving feature that can cause flickering
   ];
 
@@ -83,9 +71,6 @@
     "kvm"
     "kvm-intel" # for virtualisation
   ];
-
-  # boot.extraModulePackages = [];
-  # boot.blacklistedKernelModules = [];
 
   boot.kernel.sysctl = {
     # to not provoke the kernel into crashing
@@ -103,7 +88,6 @@
     ../desktop/root/ssh-config.nix
    ];
 
-   home.stateVersion = "23.05";
   };
 
  home-manager.users.teto = {
@@ -111,9 +95,6 @@
    imports = [
      # custom modules
      ./home.nix
-     ../../hm/profiles/nova.nix
-    # breaks build: doesnt like the "activation-script"
-    # nova.hmConfigurations.dev
    ];
  };
 

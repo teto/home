@@ -48,10 +48,15 @@ let
     "privacy.donottrackheader.enabled" = true;
     "privacy.donottrackheader.value" = 1;
     # "privacy.firstparty.isolate" = true;
-    # "signon.rememberSignons" = false;
     # "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
     # "widget.content.gtk-theme-override" = "Adwaita:light";
   };
+
+  novaFirefoxSettings = {
+      # avoid
+    "signon.rememberSignons" = false;
+  };
+
 
 
   commonExtensions = [
@@ -60,6 +65,12 @@ let
      pkgs.nur.repos.rycee.firefox-addons.tree-style-tab
    ];
 
+   audibleTabExtension = 
+      (pkgs.fetchFirefoxAddon {
+        name = "ublock";
+        url = "https://addons.mozilla.org/firefox/downloads/file/3679754/ublock_origin-1.31.0-an+fx.xpi";
+        sha256 = "1h768ljlh3pi23l27qp961v1hd0nbj2vasgy11bmcrlqp40zgvnr";
+      });
 in
 {
 
@@ -87,16 +98,11 @@ in
           # TODO no need for bitwarden anymore
           pkgs.nur.repos.rycee.firefox-addons.browserpass
           pkgs.nur.repos.rycee.firefox-addons."10ten-ja-reader"
+          audibleTabExtension
+          pkgs.nur.repos.rycee.firefox-addons.browserpass
+          pkgs.nur.repos.rycee.firefox-addons.refined-github
+          # pkgs.nur.repos.rycee.firefox-addons.browserpass-otp
 
-        #   (pkgs.fetchFirefoxAddon {
-        #     name = "rikaichamp";
-        #     url = "https://addons.mozilla.org/firefox/downloads/file/3691333/rikaichamp-0.3.3-fx.xpi";
-        #     sha256 = "sha256-wFW5E7Ewux8ZbKCZXshQaOQojyim7zpsDgrLPAAnFL8=";
-        #   })
-
-        #   #        nur.repos.rycee.firefox-addons.browserpass-otp
-        #   # nur.repos.rycee.firefox-addons.tree-style-tabs  # not in his nur repo
-        #   #        nur.repos.rycee.firefox-addons.gesturefy
         ];
 
       };
@@ -119,7 +125,8 @@ in
         # isDefault = false;
         id = 1;
         path = "6bt2uwrj.nova";
-        settings = { };
+        settings = novaFirefoxSettings; 
+        # let { in { };
       };
     };
   };

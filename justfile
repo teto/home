@@ -10,9 +10,13 @@ BLOG_FOLDER := "${HOME}/blog"
 
 # regen fortunes (not necessary with some fortunes version ?!)                                                                                                                                 
 # strfile not necessarilyu in PATH !
+# TODO using vocage instead
 fortunes:
 	mkdir -p ~/.local/share/matt
 	strfile -c % fortunes/jap.txt ~/.local/share/matt/jap.txt.dat   
+overlays/firefox/addons.nix
+firefox:
+  mozilla-addons-to-nix overlays/firefox/addons.json overlays/firefox/addons.nix
 
 lint: lint-nix lint-lua
 

@@ -26,6 +26,8 @@
     nixpkgs = {
       url = "github:teto/nixpkgs/nixos-unstable";
     };
+
+    firefox2nix.url = "git+https://git.sr.ht/~rycee/mozilla-addons-to-nix";
     anyrun.url = "github:Kirottu/anyrun";
     anyrun.inputs.nixpkgs.follows = "nixpkgs";
     zsh-plugins = {
@@ -120,13 +122,15 @@
       myPkgs = pkgImport self.inputs.nixpkgs;
       unstablePkgs = pkgImport self.inputs.nixos-unstable;
 
+      /**
+       
+      */
       hm-common = { config, lib, pkgs, ... }: {
         home-manager.verbose = true;
         # install through the use of user.users.USER.packages
         home-manager.useUserPackages = true;
         # disables the Home Manager option nixpkgs.*
         home-manager.useGlobalPkgs = true;
-
 
         home-manager.sharedModules = [
           # And add the home-manager module
@@ -136,8 +140,11 @@
           ./hm/modules/bash.nix
           ./hm/modules/zsh.nix
           ./hm/modules/xdg.nix
+
+          ./hm/profiles/neovim.nix
           ({...}: { 
             home.stateVersion = "23.05";
+
           })
         ];
         home-manager.extraSpecialArgs = {
@@ -146,8 +153,19 @@
           flakeInputs = self.inputs;
         };
 
-        # TODO imports
-      };
+        home-manager.users = {
+         root = {
+          imports = [
+            # ../../hm/profiles/neovim.nix
+              # TODO imports
+             ];
+           };
+
+          teto = {
+
+          };
+         };
+       };
 
     in
     flake-utils.lib.eachSystem [ "x86_64-linux" ]
@@ -169,10 +187,15 @@
                 deploy-rs.packages.${system}.deploy-rs
                 just
                 self.packages.${system}.treefmt-with-config
+                self.inputs.firefox2nix.packages.${system}.default
               ];
             };
 
             inherit (unstablePkgs) nhs92 nhs94 nhs96;
+
+            shellHook = ''
+             echo "Run just ..."
+            '';
           };
 
           packages = {
@@ -244,7 +267,7 @@
               self.inputs.nixos-hardware.nixosModules.pcengines-apu
               self.nixosModules.default-hm
               ({ pkgs, ... }: {
-                nixpkgs.overlays = nixpkgs.lib.attrValues self.overlays;
+                # nixpkgs.overlays = nixpkgs.lib.attrValues self.overlays;
                 imports = [
                   ./hosts/router/configuration.nix
 
@@ -263,6 +286,8 @@
           # it doesn't have to be called like that !
           laptop = nixpkgs.lib.nixosSystem {
             inherit system;
+            pkgs = myPkgs;
+
             specialArgs = {
               withSecrets = false;
               secrets = {};
@@ -275,7 +300,6 @@
               hm-common
 
               ({ pkgs, ... }: {
-                nixpkgs.overlays = nixpkgs.lib.attrValues self.overlays;
                 imports = [
                   ./hosts/laptop/config.nix
                   # ./nixos/profiles/chromecast.nix
@@ -307,7 +331,6 @@
               self.inputs.sops-nix.nixosModules.sops
 
               ({ pkgs, ... }: {
-                nixpkgs.overlays = nixpkgs.lib.attrValues self.overlays;
 
                 imports = [
                   ./hosts/neotokyo/config.nix
@@ -342,7 +365,6 @@
               # often breaks
               # (import ./nixos/modules/hoogle.nix)
               ({ pkgs, ... }: {
-                nixpkgs.overlays = nixpkgs.lib.attrValues self.overlays;
 
                 imports = [
                   ./hosts/desktop/config.nix
@@ -423,8 +445,13 @@
           # neovide = prev.neovide.overrideAttrs(oa: {
           #  src = self.inputs.neovide;
           # });
+          firefoxAddonsTeto  = import ./overlays/firefox/generated.nix {
+            inherit (prev) buildFirefoxXpiAddon fetchurl lib stdenv;
+          };
         };
 
+        # TODO
+        # firefox = import ./overlays/firefox/addons.nix;
 
         # nova = import ./nixpkgs/overlays/pkgs/default.nix;
         local = import ./overlays/pkgs/default.nix;
