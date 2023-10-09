@@ -24,8 +24,6 @@ in
 {
   programs.ssh = {
 
-    enable = true;
-
     matchBlocks = let 
 
 
@@ -45,7 +43,7 @@ in
             # TODO we should expose the resulting nix expressions directly
              prod-runners);
     in
-     (lib.optionalAttrs (lib.debug.traceVal withSecrets) remoteBuilders) // {
+     (lib.optionalAttrs (builtins.trace "ssh-config withSecrets: ${toString withSecrets}" withSecrets) remoteBuilders) // {
 
       nova = {
         match = "host=git.novadiscovery.net";
