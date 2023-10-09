@@ -10,8 +10,15 @@ let
 
 in
 {
+
+  imports = [
+    ./wayland.nix
+  ];
+
   home.packages = with pkgs; [
-    clipman # clipboard manager, works with wofi, abandoned
+
+   clipman # clipboard manager, works with wofi, abandoned
+   cliphist
     # TODO test https://github.com/sentriz/cliphist
     foot # terminal
     # use it with $ grim -g "$(slurp)"
@@ -60,11 +67,10 @@ in
     ];
   };
 
-  services.clipman = {
-    enable = true;
-    # see doc for systemdTarget
-    # systemdTarget = 
-  };
+  # services.clipman.enable = true;
+
+  services.cliphist.enable = true;
+
   # todo prepend sharedExtraConfig
   # xdg.configFile."sway/config" = 
 
@@ -253,17 +259,16 @@ in
     # "${mod}+Ctrl+L"="exec ${pkgs.i3lock-fancy}/bin/i3lock-fancy";
     "${mod}+Ctrl+L" = "exec ${pkgs.swaylock}/bin/swaylock";
 
-    # "${mod}+Ctrl+h" = ''exec "${pkgs.rofi}/bin/rofi -modi 'clipboard:greenclip print' -show clipboard"'';
-
     # TODO notify/throw popup when clipman fails 
-    "${mod}+Ctrl+h" = ''exec ${pkgs.clipman}/bin/clipman pick -t rofi || ${sharedConfig.notify-send} 'Failed running clipman' '';
+    # "${mod}+Ctrl+h" = ''exec ${pkgs.clipman}/bin/clipman pick -t rofi || ${sharedConfig.notify-send} 'Failed running clipman' '';
+    # cliphist list | rofi -dmenu
+    "${mod}+Ctrl+h" = ''exec ${pkgs.cliphist}/bin/cliphist list | rofi -dmenu || ${sharedConfig.notify-send} 'Failed running cliphist' '';
+
     # "${mod}+g" = "exec ${pkgs.i3-easyfocus}/bin/i3-easyfocus";
     # "${mad}+w" = "exec ${pkgs.i3-easyfocus}/bin/i3-easyfocus";
     # TODO bind
      # XF86Copy
       };
-
-
 
       startup = [
         # { command = "wl-paste -t text --watch clipman store"; }
@@ -335,12 +340,12 @@ in
    ";
 
 
-  services.mako = {
-    # disabled in favor of swaync
-    enable = false;
-    defaultTimeout = 4000;
-    ignoreTimeout = false;
-  };
+  # services.mako = {
+  #   # disabled in favor of swaync
+  #   enable = false;
+  #   defaultTimeout = 4000;
+  #   ignoreTimeout = false;
+  # };
 
   services.kanshi = {
     enable = true;

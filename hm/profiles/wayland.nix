@@ -2,7 +2,7 @@
 {
 
  # TODO it is done in sway.nix
-  # home.packages = with pkgs; [
+  home.packages = with pkgs; [
   #   clipman # clipboard manager, works with wofi
   #   foot # terminal
   #   grim # replace scrot
@@ -15,6 +15,7 @@
   #   wl-clipboard # wl-copy / wl-paste
   #   wdisplays # to show 
   #   wlogout # a logout menu
-  # ];
+    waypaper # sets wallpapers
+  ];
 
 }
