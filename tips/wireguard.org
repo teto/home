@@ -1,0 +1,4 @@
+
+* how to setup (on nix)
+
+https://nixos.wiki/wiki/WireGuard#Setting_up_WireGuard_with_systemd-networkd

@@ -27,6 +27,7 @@
     ../../nixos/profiles/opensnitch.nix
     ../../nixos/profiles/podman.nix
     ../../nixos/profiles/steam.nix
+    ../../nixos/profiles/wireguard.nix
 
     # ../../nixos/profiles/libvirtd.nix
     # ../../modules/xserver.nix

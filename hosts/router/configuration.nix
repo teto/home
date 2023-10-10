@@ -17,7 +17,6 @@ systemd is advertised on the matrix:nixos-router so:
 */
 { config, lib, pkgs, secrets, flakeInputs, ... }:
 let
-  # secrets = import ../../nixpkgs/secrets.nix;
 
   bridgeNetwork = { address = "10.0.0.0"; prefixLength = 24; };
 
@@ -27,7 +26,6 @@ let
 
   externalInterface = "wlp5s0";
 
-  # bridgeNetwork = "10.0.0.0";
 in
 {
   # pcengines/apu/
@@ -41,7 +39,6 @@ in
 
   home-manager.users.root = {
    imports = [
-    # ./root/ssh-config.nix
     ../../hm/profiles/neovim.nix
    ];
 
@@ -50,7 +47,6 @@ in
 
    # TODO use from flake or from unstable
    # services.opensnitch-ui.enable
-   # ./hm/profiles/gaming.nix
   home-manager.users.teto = {
     # TODO it should load the whole folder
     imports = [
