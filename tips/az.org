@@ -1,0 +1,25 @@
+
+qques exemples de commande utiles:
+
+az login --use-device-code
+
+
+doc 
+https://github.com/MicrosoftDocs/azure-docs-cli/blob/main/docs-ref-conceptual/azure-cli-configuration.md
+
+az storage account list
+
+* az configuration
+
+Present in .azure/config
+az config set defaults.location=westeurope
+
+az config set core.display_region_identified=no
+
+
+az account list-locations
+
+
+* How to create a resource group ?
+az group create --name demoResourceGroup --location westus
+

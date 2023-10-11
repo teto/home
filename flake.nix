@@ -77,9 +77,8 @@
     nova-ci.url = "git+ssh://git@git.novadiscovery.net/infra/ci-runner";
 
     neovim = {
-      # url = "github:nojnhuh/neovim?dir=contrib&ref=lsp-watch-files";
-      url = "github:neovim/neovim?dir=contrib";
-      # url = "github:teto/neovim?dir=contrib&ref=treesitter-message-add-lang";
+      # pinned because of https://github.com/neovim/neovim/issues/25086
+      url = "github:neovim/neovim?dir=contrib&rev=f246cf029fb4e7a07788adfa19f91608db7bd816";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     neovide = {

@@ -6,6 +6,8 @@ build/
 *.key
 *.qcow2
 
+.*.vim
+
 __pad__
 
 # Compiled source {{{

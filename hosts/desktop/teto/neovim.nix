@@ -12,6 +12,118 @@ let
   };
 
   luaPlugins = with pkgs.vimPlugins; [
+    # (luaPlugin {
+    #   plugin = vim-obsession;
+    #   after = ''
+    #     vim.keymap.set("n", "<Leader>$", "<Cmd>Obsession<CR>", { remap = true })
+    #     vim.g.obsession_no_bufenter = true
+    #   '';
+    # })
+
+    # { plugin = vim-dadbod; }
+    # { plugin = vim-dadbod-completion; }
+    # { plugin = vim-dadbod-ui; }
+
+    (luaPlugin {
+      # run with :Diffview
+      plugin = diffview-nvim;
+      # optional = true;
+    })
+
+    # (luaPlugin {
+    #   # TODO move config hee
+    #   plugin = bufferline-nvim;
+    # })
+
+    # (luaPlugin { plugin = nvim-peekup; })
+    # (luaPlugin {
+    #   plugin = pywal-nvim;
+    #   config = ''
+    #   '';
+    # })
+    # (luaPlugin {
+    #   # euclio/vim-markdown-composer
+    #   # https://github.com/euclio/vim-markdown-composer/issues/69#issuecomment-1103440076
+    #   # see https://github.com/euclio/vim-markdown-composer/commit/910fd4321b7f25fbab5fdf84e68222cbc226d8b1
+    #   # https://github.com/euclio/vim-markdown-composer/issues/69#event-6528328732
+    #   # ComposerUpdate / ComposerStart
+    #   # we can now set g:markdown_composer_binary
+    #   # " is that the correct plugin ?
+    #   # " let $NVIM_MKDP_LOG_LEVEL = 'debug'
+    #   # " let $VIM_MKDP_RPC_LOG_FILE = expand('~/mkdp-rpc-log.log')
+    #   # " let g:mkdp_browser = 'firefox'
+    #   plugin = vim-markdown-composer;
+    #   config = ''
+    #     -- use with :ComposerStart
+    #     vim.g.markdown_composer_autostart = 0
+    #     vim.g.markdown_composer_binary = '${vim-markdown-composer.vimMarkdownComposerBin}/bin/markdown-composer'
+    #   '';
+    # })
+    # disabled because of https://github.com/rktjmp/lush.nvim/issues/89
+    (luaPlugin { plugin = lush-nvim; })
+    # (luaPlugin { plugin = gruvbox-nvim; }) 
+    # out of tree
+    (luaPlugin {
+      # really helps with syntax highlighting
+      plugin = haskell-vim;
+      config = ''
+        vim.g.haskell_enable_quantification = 1   -- to enable highlighting of `forall`
+        vim.g.haskell_enable_recursivedo = 1      -- to enable highlighting of `mdo` and `rec`
+        vim.g.haskell_enable_arrowsyntax = 1      -- to enable highlighting of `proc`
+        vim.g.haskell_enable_pattern_synonyms = 1 -- to enable highlighting of `pattern`
+        vim.g.haskell_enable_typeroles = 1        -- to enable highlighting of type roles
+        vim.g.haskell_enable_static_pointers = 1  -- to enable highlighting of `static`
+        vim.g.haskell_backpack = 1                -- to enable highlighting of backpack keywords
+        vim.g.haskell_indent_disable=1
+        '';
+    })
+    # " gutentags + gutenhasktags {{{
+    # " to keep logs GutentagsToggleTrace
+    # " some commands/functions are not available by default !!
+    # " https://github.com/ludovicchabant/vim-gutentags/issues/152
+    # let g:gutentags_define_advanced_commands=1
+    # " let g:gutentags_project_root
+    # " to ease with debug
+    # let g:gutentags_trace=0
+    # let g:gutentags_enabled = 1 " dynamic loading
+    # let g:gutentags_dont_load=0 " kill once and for all
+    # let g:gutentags_project_info = [ {'type': 'python', 'file': 'setup.py'},
+    #                                \ {'type': 'ruby', 'file': 'Gemfile'},
+    #                                \ {'type': 'haskell', 'glob': '*.cabal'} ]
+    # " produce tags for haskell http://hackage.haskell.org/package/hasktags
+    # " it will fail without a wrapper https://github.com/rob-b/gutenhasktags
+    # " looks brittle, hie might be better
+    # " or haskdogs
+    # " let g:gutentags_ctags_executable_haskell = 'gutenhasktags'
+    # let g:gutentags_ctags_executable_haskell = 'hasktags'
+    # " let g:gutentags_ctags_extra_args
+    # let g:gutentags_file_list_command = 'rg --files'
+    # " gutenhasktags/ haskdogs/ hasktags/hothasktags
+
+    # let g:gutentags_ctags_exclude = ['.vim-src', 'build', '.mypy_cache']
+    # " }}}
+
+
+    # disabling as long as it depends on nvim-treesitter
+    # (luaPlugin {
+    #   # matches nvim-orgmode
+    #   plugin = orgmode;
+    #   # config = ''
+    #   #   require('orgmode').setup_ts_grammar()
+    #   #   require('orgmode').setup{
+    #   #       org_capture_templates = {'~/nextcloud/org/*', '~/orgmode/**/*'},
+    #   #       org_default_notes_file = '~/orgmode/refile.org',
+    #   #       -- TODO add templates
+    #   #       org_agenda_templates = { t = { description = 'Task', template = '* TODO %?\n  %u' } },
+    #   #   }'';
+    # })
+
+    (luaPlugin {
+      plugin = SchemaStore-nvim;
+      # config = ''
+      #  '';
+    })
+
     { 
     # node-based :MarkdownPreview
     plugin = markdown-preview-nvim;
@@ -199,7 +311,12 @@ let
 {
   programs.neovim = {
 
-   plugins = luaPlugins ++ filetypePlugins;
+   plugins = luaPlugins 
+   ++ filetypePlugins
+   # ++ [
+
+
+   ;
 
     # plugins = with pkgs.vimPlugins; [
     #  tint-nvim
@@ -208,9 +325,13 @@ let
      # -- require my own manual config
      # -- logs are written to /home/teto/.cache/vim-lsp.log
 
-     extraLuaConfig = ''
-       require('init-manual')
+
+    # viml config, to test home-manager setup
+    extraConfig = ''
      '';
+    extraLuaConfig = ''
+      require('init-manual')
+    '';
 
     extraPackages = with pkgs; [
       # luaPackages.lua-lsp
