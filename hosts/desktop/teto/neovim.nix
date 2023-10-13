@@ -306,7 +306,33 @@ let
     moonscript-vim
     idris-vim
   ];
-
+  
+  extraPackages = with pkgs; [
+      # luaPackages.lua-lsp
+      # lua53Packages.teal-language-server
+      codeium # ideally not needed and referenced by codeium-vim directly
+      editorconfig-checker # used in null-ls
+      lua51Packages.luacheck
+      haskellPackages.hasktags
+      haskellPackages.fast-tags
+      manix # should be no need, telescope-manix should take care of it
+      nodePackages.vscode-langservers-extracted # needed for typescript language server IIRC
+      nodePackages.bash-language-server
+      # prettier sadly can't use buildNpmPackage because no lockfile https://github.com/NixOS/nixpkgs/issues/229475
+      nodePackages.prettier 
+      nodePackages.dockerfile-language-server-nodejs # broken
+      nodePackages.pyright
+      nodePackages.typescript-language-server
+      # pandoc # for markdown preview, should be in the package closure instead
+      # pythonPackages.pdftotext  # should appear only in RC ? broken
+      python3Packages.flake8 # for nvim-lint and some nixpkgs linters
+      nil # a nix lsp
+      # rnix-lsp
+      rust-analyzer
+      shellcheck
+      sumneko-lua-language-server
+      yaml-language-server
+    ];
  in
 {
   programs.neovim = {
@@ -333,32 +359,10 @@ let
       require('init-manual')
     '';
 
-    extraPackages = with pkgs; [
-      # luaPackages.lua-lsp
-      # lua53Packages.teal-language-server
-      codeium # ideally not needed and referenced by codeium-vim directly
-      editorconfig-checker # used in null-ls
-      lua51Packages.luacheck
-      haskellPackages.hasktags
-      haskellPackages.fast-tags
-      manix # should be no need, telescope-manix should take care of it
-      nodePackages.vscode-langservers-extracted # needed for typescript language server IIRC
-      nodePackages.bash-language-server
-      # prettier sadly can't use buildNpmPackage because no lockfile https://github.com/NixOS/nixpkgs/issues/229475
-      nodePackages.prettier 
-      nodePackages.dockerfile-language-server-nodejs # broken
-      nodePackages.pyright
-      nodePackages.typescript-language-server
-      # pandoc # for markdown preview, should be in the package closure instead
-      # pythonPackages.pdftotext  # should appear only in RC ? broken
-      python3Packages.flake8 # for nvim-lint and some nixpkgs linters
-      nil # a nix lsp
-      # rnix-lsp
-      rust-analyzer
-      shellcheck
-      sumneko-lua-language-server
-      yaml-language-server
-    ];
-
+    # TODO fix, doesn't work
+    extraPackages = extraPackages;
  };
+
+ home.packages = extraPackages;
+
 }

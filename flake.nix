@@ -73,6 +73,10 @@
     nova.url = "git+ssh://git@git.novadiscovery.net/sys/doctor";
     jinko-stats.url = "git+ssh://git@git.novadiscovery.net/jinko/jinko-stats.git?ref=add-rserver";
 
+    nix-index-database = {
+      url = "github:nix-community/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     # c8296214151883ce27036be74d22d04953418cf4
     nova-ci.url = "git+ssh://git@git.novadiscovery.net/infra/ci-runner";
 
@@ -294,6 +298,8 @@
             };
 
             modules = [
+              # error: attribute 'cacheHome' missing
+              # self.inputs.nix-index-database.hmModules.nix-index
               hm.nixosModules.home-manager
               self.inputs.sops-nix.nixosModules.sops
               hm-common

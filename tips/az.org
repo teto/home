@@ -3,6 +3,7 @@ qques exemples de commande utiles:
 
 az login --use-device-code
 
+https://woivre.com/blog/2020/02/pulumi-store-your-state-in-azure-storage
 
 doc 
 https://github.com/MicrosoftDocs/azure-docs-cli/blob/main/docs-ref-conceptual/azure-cli-configuration.md

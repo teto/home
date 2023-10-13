@@ -5,6 +5,10 @@
 pulumi -C buildlib/infra-python up -s dev -y -v9 -d --logtostderr
 pulumi up --verbose 9 --logtostderr
 
+
+* 
+ pulumi -C pulumi/infra -s ci-infra-dev config 
+
 pulumi plugin ls
 
 pulumi config get redisPassword

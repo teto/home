@@ -1,15 +1,11 @@
 git fetch --all
-rm ~/.cache/greenclip.history
-git reset --hard gh/nixos-unstable
 home-manager -I nixpkgs=/home/teto/nixpkgs -I nixos-config=/home/teto/home/nixpkgs/configuration-xps.nix switch
-git rebase channels/nixos-unstable
 nix repl . ./nixos
-gch upstream/nixos-unstable -- pkgs/misc/vim-plugins/generated.nix
-sudo nixos-rebuild -I nixos-config=/home/teto/dotfiles/nixpkgs/configuration-lenovo.nix switch
+gch up/nixos-unstable -- pkgs/misc/vim-plugins/generated.nix
 sudo nixos-rebuild --flake ~/home#mcoudron --no-write-lock-file switch
-pkgs/misc/vim-plugins/update.py --proc 1
-sudo nixos-rebuild --flake ~/home#mcoudron --no-write-lock-file --override-input nova /home/teto/nova/nova-nix --override-input nixpkgs /home/teto/nixpkgs switch  --show-trace
+sudo nixos-rebuild --flake ~/home#mcoudron --no-write-lock-file --override-input
+nova /home/teto/nova/doctor --override-input nixpkgs /home/teto/nixpkgs switch  --show-trace
 nixos-rebuild --flake ~/home#mcoudron --no-write-lock-file --override-input nova /home/teto/nova/nova-nix --override-input nixpkgs /home/teto/nixpkgs --override-input hm /home/teto/hm build
 NIXPKGS_ALLOW_UNFREE=1 nixos-rebuild --flake ~/home --no-write-lock-file
---override-input nixpkgs-teto /home/teto/nixpkgs --override-input hm
 /home/teto/hm --override-input nova /home/teto/nova/nova-nix build --impure
+nix-collect-garbage --delete-older-than 3d
