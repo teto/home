@@ -339,9 +339,6 @@ let
 
    plugins = luaPlugins 
    ++ filetypePlugins
-   # ++ [
-
-
    ;
 
     # plugins = with pkgs.vimPlugins; [

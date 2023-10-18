@@ -4,7 +4,7 @@ local lspconfig = require('lspconfig')
 -- local api = vim.api
 
 -- custom attach callback
-local attach_cb = require('on_attach')
+local attach_cb = require('teto.on_attach')
 
 local temp = vim.lsp.handlers['textDocument/formatting']
 vim.lsp.handlers['textDocument/formatting'] = function(...)
@@ -301,35 +301,7 @@ lspconfig.clangd.setup({
         -- "--pretty" -- pretty print json output
     },
     filetypes = { 'c', 'cpp', 'objc', 'objcpp' },
-    -- log_level = vim.lsp.protocol.MessageType.Debug;
-    -- on_attach=attach_cb.on_attach,
     --		-- 'build/compile_commands.json',
     --		root_dir = lspconfig.util.root_pattern( '.git'),
-    --		-- mandated by lsp-status
-    --		init_options = {
-    --				-- clangdFileStatus = true
-    --		},
-    --		-- callbacks = lsp_status.extensions.clangd.setup()
 })
 
--- https://github.com/MaskRay/ccls/wiki/Debugging
--- lspconfig.ccls.setup({
---		name = "ccls",
---		filetypes = { "c", "cpp", "objc", "objcpp" },
---		cmd = { "ccls", "--log-file=/tmp/ccls.log", "-v=1" },
---		log_level = vim.lsp.protocol.MessageType.Log;
---		root_dir = lspconfig.util.root_pattern(".git");
---		init_options = {
---				-- "compilationDatabaseDirectory": "/home/teto/mptcp/build",
---				clang = { excludeArgs = { "-m*", "-Wa*" } },
---				cache = { directory = "/tmp/ccls" }
---		},
---		on_attach = attach_cb.on_attach
--- })
-
--- local function lsp_diagnostic_toggle_virtual_text()
---   local virtual_text = vim.b.lsp_virtual_text_enabled
---   virtual_text = not virtual_text
---   vim.b.lsp_virtual_text_enabled = virtual_text
---   vim.lsp.diagnostic.display(vim.lsp.diagnostic.get(0, 1), 0, 1, {virtual_text = virtual_text})
--- end

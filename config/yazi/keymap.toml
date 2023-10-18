@@ -4,6 +4,12 @@ keymap = [
  	{ on = [ "<PageUp>" ], exec = "arrow -10" },
 	{ on = [ "<PageDown>" ], exec = "arrow 10" },
 
+	# compress zip files
+	{ on = [ "c", "z" ], exec = """
+		shell 'printf "Your Name:"; read name; zip "$name.zip" "$@"' --block --confirm
+	""" },
+	# decompress zip files
+	{ on = [ "z", "u" ],         exec = "shell unzip $@", desc = "Unzip file" },
 
 	{ on = [ "/" ], exec = "find" },
 

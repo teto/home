@@ -39,7 +39,7 @@ vim.g.haskell_tools = {
    capabilities = vim.lsp.protocol.make_client_capabilities(),
 
    on_attach = function(client, bufnr)
-     local attach_cb = require('on_attach')
+     local attach_cb = require('teto.on_attach')
      attach_cb.on_attach(client, bufnr)
 
    --  -- haskell-language-server relies heavily on codeLenses,

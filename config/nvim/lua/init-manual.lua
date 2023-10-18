@@ -248,14 +248,14 @@ vim.opt.winbar = "%{%v:lua.require'nvim-navic'.get_location()%}"
 vim.api.nvim_create_autocmd("LspAttach", {
 	desc = "Attach lsp_signature on new client",
 	callback = function(args)
+		print("Called matt's on_attach autocmd")
 		if not (args.data and args.data.client_id) then
 			return
 		end
 		local client = vim.lsp.get_client_by_id(args.data.client_id)
 		local bufnr = args.buf
-		local on_attach = require 'on_attach'
+		local on_attach = require 'teto.on_attach'
 		on_attach.on_attach(client, bufnr)
-		-- print("FIRED ON_ATTACH")
 		-- require'lsp_signature'.on_attach(client, bufnr)
 	end
 })

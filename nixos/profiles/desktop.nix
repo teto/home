@@ -12,6 +12,7 @@
     ../../nixos/profiles/wireshark.nix
     ../../nixos/modules/network-manager.nix
     ../../nixos/profiles/wifi.nix
+    ../../nixos/profiles/librenms.nix
 
     ./zsh.nix
     ./gnome.nix
@@ -23,28 +24,6 @@
     # only if available
     # ./modules/jupyter.nix
   ];
-
-  nixpkgs = {
-    config = {
-      allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-        "codeium"
-        "Oracle_VM_VirtualBox_Extension_Pack"
-        "ec2-api-tools"
-        "jiten"  # japanese software recognition tool
-        "google-chrome"
-        "slack"
-        "steam"
-        "steam-original"
-        "steam-runtime"
-        "steam-run"
-        "sublimetext3"
-        "vscode"
-        "vscode-extension-ms-vsliveshare-vsliveshare"
-        "xmind"
-        "zoom"
-      ];
-    };
-  };
 
   xdg.portal = {
    enable = true; 
