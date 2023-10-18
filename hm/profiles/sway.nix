@@ -262,7 +262,7 @@ in
     # TODO notify/throw popup when clipman fails 
     # "${mod}+Ctrl+h" = ''exec ${pkgs.clipman}/bin/clipman pick -t rofi || ${sharedConfig.notify-send} 'Failed running clipman' '';
     # cliphist list | rofi -dmenu
-    "${mod}+Ctrl+h" = ''exec ${pkgs.cliphist}/bin/cliphist list | rofi -dmenu || ${sharedConfig.notify-send} 'Failed running cliphist' '';
+    "${mod}+Ctrl+h" = ''exec ${pkgs.cliphist}/bin/cliphist list | rofi -dmenu  -m -1 -p "Select item to copy" -lines 10 -width 35 | cliphist decode | wl-copy | ${sharedConfig.notify-send} 'Failed running cliphist' '';
 
     # "${mod}+g" = "exec ${pkgs.i3-easyfocus}/bin/i3-easyfocus";
     # "${mad}+w" = "exec ${pkgs.i3-easyfocus}/bin/i3-easyfocus";

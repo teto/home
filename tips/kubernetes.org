@@ -2,9 +2,14 @@ Les cluster names sont accessible
 
 aws eks update-kubeconfig --name jk-dev --profile nova-sandbox --user-alias jk-dev
 
+
+kubectl cluster-info --v=4
+
+kubectl api-resources
 kubectl get -n [[XXXX]] ingress
 
 kubectl cluster-info
+kubectl get crd
 
 sts = StatefulSets
 pvc = persistentvolumeclaim

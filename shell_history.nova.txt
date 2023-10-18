@@ -1,4 +1,5 @@
-brun //simwork/jinko-tools:all-simwork-images
-set-ghcide-target //simwork/result-store
-aws eks update-kubeconfig
 aws eks update-kubeconfig --name jinko-prod
+kubectl api-resources 
+aws eks update-kubeconfig --name jk-dev --profile nova-sandbox --user-alias jk-dev
+kubectl apply -f custom/my-ingress-route.yaml --context jk-dev
+

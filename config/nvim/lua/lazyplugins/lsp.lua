@@ -6,7 +6,21 @@ return {
  -- 		vim.cmd [[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]]
  -- 	end
  --  },
- { 'lukas-reineke/lsp-format.nvim',
+
+ {
+  'luckasRanarison/clear-action.nvim'
+  , config = function()
+    require("clear-action").setup({
+     mappings = {
+      code_action = "ga"
+     }
+
+    })
+  end
+ },
+ {
+  -- CodeActionToggleSigns / CodeActionToggleSigns
+  'lukas-reineke/lsp-format.nvim',
   config = function()
    require("lsp-format").setup {}
    -- lsp-format attaches itself on o
@@ -39,7 +53,7 @@ return {
   -- }
   -- use 'nvim-telescope/telescope-dap.nvim'
  -- { 'MrcJkb/haskell-tools.nvim' , dev = true },
- { dir = '/home/teto/neovim/haskell-tools.nvim' },
+ { dir = '/home/teto/haskell-tools.nvim' },
  -- --config = function()
  -- -- local ht = require('haskell-tools')
  -- -- ht.setup({
