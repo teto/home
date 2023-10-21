@@ -248,7 +248,7 @@ vim.opt.winbar = "%{%v:lua.require'nvim-navic'.get_location()%}"
 vim.api.nvim_create_autocmd("LspAttach", {
 	desc = "Attach lsp_signature on new client",
 	callback = function(args)
-		print("Called matt's on_attach autocmd")
+		-- print("Called matt's on_attach autocmd")
 		if not (args.data and args.data.client_id) then
 			return
 		end
@@ -650,7 +650,10 @@ end)
 local has_bufferline, bufferline = pcall(require, 'bufferline')
 if has_bufferline then
 	bufferline.setup({
+
 		options = {
+			-- buffer_close_icon = '',
+
 			view = 'default',
 			numbers = 'buffer_id',
 			-- number_style = "superscript" | "",

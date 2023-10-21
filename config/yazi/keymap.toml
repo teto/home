@@ -58,7 +58,7 @@ keymap = [
 	{ on = [ "k" ], exec = "paste --follow" },
 	{ on = [ "K" ], exec = "paste --follow --force" },
 	{ on = [ "d" ], exec = "remove" },
-	{ on = [ "D" ], exec = "remove --permanently" },
+	{ on = [ "D" ], exec = "remove --permanently --force" },
 	{ on = [ "a" ], exec = "create" },
 	{ on = [ "r" ], exec = "rename" },
 	{ on = [ ";" ], exec = "shell" },
