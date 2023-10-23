@@ -54,5 +54,6 @@
     # pkgs.aws-sam-cli  # BROKEN  for sam lambda
     pkgs.sqlitebrowser
     pkgs.redis # for redis-cli
+    pkgs.google-chrome
   ];
 }

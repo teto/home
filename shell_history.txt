@@ -9,3 +9,5 @@ nixos-rebuild --flake ~/home#mcoudron --no-write-lock-file --override-input nova
 NIXPKGS_ALLOW_UNFREE=1 nixos-rebuild --flake ~/home --no-write-lock-file
 /home/teto/hm --override-input nova /home/teto/nova/nova-nix build --impure
 nix-collect-garbage --delete-older-than 3d
+pkgs/misc/openrussian-cli/default.nix
+nix run .#vimPluginsUpdater -- --proc=10 --github-token=$GITHUB_TOKEN

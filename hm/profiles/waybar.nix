@@ -148,6 +148,8 @@
             format = "{} °";
             tooltip = true;
             interval = 3600;
+            # --hide-conditions
+            # pass location
             exec = "${pkgs.wttrbar}/bin/wttrbar";
             return-type = "json";
           };

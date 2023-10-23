@@ -345,7 +345,6 @@ let
       '';
     })
     (luaPlugin { plugin = fugitive-gitlab-vim; })
-    # (luaPlugin { plugin = haskell-tools-nvim; })
 
     (luaPlugin {
       plugin = registers-nvim;

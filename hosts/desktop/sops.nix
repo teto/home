@@ -7,7 +7,8 @@
 
 
   # This is using an age key that is expected to already be in the filesystem
-  sops.age.keyFile = "secrets/age.key";
+  # sops.age.keyFile = "secrets/age.key";
+  sops.age.keyFile = "/home/teto/home/secrets/age.key";
 
   # sops.secrets."gitlab/registrationToken" = {
   #   mode = "0440";

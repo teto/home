@@ -14,7 +14,8 @@ BLOG_FOLDER := "${HOME}/blog"
 fortunes:
 	mkdir -p ~/.local/share/matt
 	strfile -c % fortunes/jap.txt ~/.local/share/matt/jap.txt.dat   
-overlays/firefox/addons.nix
+
+# overlays/firefox/addons.nix:
 firefox:
   mozilla-addons-to-nix overlays/firefox/addons.json overlays/firefox/addons.nix
 

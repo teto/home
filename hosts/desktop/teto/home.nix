@@ -6,6 +6,8 @@
 {
   imports = [
     ./bash.nix
+      ../../../hm/profiles/nova/bash.nix
+
     ./calendars.nix
     ./git.nix
     ./neovim.nix
@@ -14,6 +16,8 @@
     ./swaync.nix
     ./zsh.nix
     ./yazi.nix
+
+    ../../../hm/profiles/experimental.nix
 
     # Not tracked, so doesn't need to go in per-machine subdir
     ../../../hm/profiles/android.nix
@@ -25,7 +29,6 @@
     ../../../hm/profiles/alot.nix
     ../../../hm/profiles/extra.nix
     ../../../hm/profiles/vdirsyncer.nix
-    # ../../../hm/profiles/experimental.nix
     ../../../hm/profiles/japanese.nix
     ../../../hm/profiles/fcitx.nix
     ../../../hm/profiles/nova.nix

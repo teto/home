@@ -7,17 +7,17 @@ return {
  -- 	end
  --  },
 
- {
-  'luckasRanarison/clear-action.nvim'
-  , config = function()
-    require("clear-action").setup({
-     mappings = {
-      code_action = "ga"
-     }
+ -- {
+ --  'luckasRanarison/clear-action.nvim'
+ --  , config = function()
+ --    require("clear-action").setup({
+ --     mappings = {
+ --      code_action = "ga"
+ --     }
 
-    })
-  end
- },
+ --    })
+ --  end
+ -- },
  {
   -- CodeActionToggleSigns / CodeActionToggleSigns
   'lukas-reineke/lsp-format.nvim',

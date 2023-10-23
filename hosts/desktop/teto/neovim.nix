@@ -24,6 +24,9 @@ let
     # { plugin = vim-dadbod-completion; }
     # { plugin = vim-dadbod-ui; }
 
+    # TODO it needs some extra care
+    (luaPlugin { plugin = haskell-tools-nvim; })
+
     (luaPlugin {
       # run with :Diffview
       plugin = diffview-nvim;
@@ -41,6 +44,8 @@ let
     #   config = ''
     #   '';
     # })
+
+    # TODO look at peek.nvim too
     # (luaPlugin {
     #   # euclio/vim-markdown-composer
     #   # https://github.com/euclio/vim-markdown-composer/issues/69#issuecomment-1103440076

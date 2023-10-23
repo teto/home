@@ -8,7 +8,9 @@
     # $HOME is prepend hence the issues
     dotDir = ".config/zsh";
     # autosuggestion.enable = true;
-    sessionVariables = {};
+    sessionVariables = {
+
+    };
     history = {
       # HISTSIZE
       # loaded in memory, careful since it slows down zsh
@@ -27,6 +29,9 @@
       # trying to generate aliases replacing RUNNER2
       #  l
       # BUILDER2 = 
+     ".." = "cd ..";
+     "..." = "cd ../..";
+
     } // config.programs.bash.shellAliases;
 
     autocd = true;

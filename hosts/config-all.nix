@@ -6,19 +6,14 @@
 
 { config, pkgs, secrets, options, lib, ... }:
 
-let
-  fzf = pkgs.fzf;
-in
-rec {
+{
 
   imports = [
     ../nixos/accounts/root/root.nix
     ../nixos/accounts/teto/teto.nix
     ../nixos/profiles/ntp.nix
     ../nixos/profiles/neovim.nix
-
   ];
-
 
   boot.tmp.cleanOnBoot = true; # to clean /tmp on reboot
   services.journald.extraConfig = ''
@@ -48,17 +43,16 @@ rec {
     fd # replaces 'find'
     file
     fzf
-    lsof
     gitAndTools.gitFull # to get send-email
     gnumake
     htop
+    lsof
     sudo
+    wget
   ]);
 
   # TODO it appears in /etc/bashrc !
   environment.shellAliases = {
-    ".." = "cd ..";
-    "..." = "cd ../..";
 
     # oftenly used programs {{{
     v = "nvim";
@@ -71,15 +65,14 @@ rec {
   # https://wiki.archlinux.org/index.php/Environment_variables#Using_pam_env
   environment.sessionVariables = {
     # XDG_CONFIG_HOME="@{HOME}/.config";
-    XDG_CONFIG_HOME = "$HOME/.config";
-    # EDITOR = "nvim";
+    # XDG_CONFIG_HOME = "$HOME/.config";
     # xdg-settings set default-web-browser firefox.desktop
-    XDG_CACHE_HOME = "$HOME/.cache";
-    XDG_DATA_HOME = "$HOME/.local/share";
+    # XDG_CACHE_HOME = "$HOME/.cache";
+    # XDG_DATA_HOME = "$HOME/.local/share";
     # TODO Move to user config aka homemanager
-    # HISTFILE="'${XDG_CACHE_HOME}/bash_history";
-    # LESS=""; # options to pass to less automatically
+
   };
+
   environment.extraOutputsToInstall = [ "man" ];
 
   programs.less = {
