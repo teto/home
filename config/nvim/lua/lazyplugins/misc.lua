@@ -1,4 +1,8 @@
 return {
+ { 
+  -- 'monkoose/fzf-hoogle.vim'
+  dir = '/home/teto/fzf-hoogle.vim'
+ }, 
 {
  -- neotests has extensions for haskell and playwright
   "nvim-neotest/neotest",
