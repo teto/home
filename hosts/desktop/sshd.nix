@@ -4,7 +4,7 @@
   services.openssh = {
     enable = true;
     # kinda experimental
-    # banner = "Hello world";
+    banner = "If you are not me, log off please";
     ports = [ 12666 ];
 
    # tu peux en avoir plusieurs sur ce mode
@@ -52,8 +52,8 @@
       # kbdInteractiveAuthentication = false;
       KbdInteractiveAuthentication = false;
       PasswordAuthentication = false;
-      # PermitRootLogin = "no";
-	  X11Forwarding = true;
+      PermitRootLogin = "no";
+	  X11Forwarding = false;
 	  # AuthorizedKeysCommandUser = "toto";
 	  # AuthorizedKeysFiles = ["tata" "toto"];
 	  # AuthorizedKeysCommandUser = "toto";
@@ -79,12 +79,12 @@
    #     mand is specified but AuthorizedKeysCommandUser is not, then sshd(8) will refuse to start.
    # 	 Port 320
 	 # Port 42
-   extraConfig = ''
-	AuthorizedKeysFile %h/.ssh/authorized_keys %h/.ssh/authorized_keys2 /etc/ssh/authorized_keys.d/%ujjk
-	 AuthorizedKeysCommand none
-	 # La question est: est-ce que AuthorizedKeysCommandUser est utilise si 
-	 AuthorizedKeysCommandUser toto
-	'';
+   # extraConfig = ''
+	# AuthorizedKeysFile %h/.ssh/authorized_keys %h/.ssh/authorized_keys2 /etc/ssh/authorized_keys.d/%ujjk
+	 # AuthorizedKeysCommand none
+	 # # La question est: est-ce que AuthorizedKeysCommandUser est utilise si 
+	 # AuthorizedKeysCommandUser toto
+	# '';
 
   };
 }

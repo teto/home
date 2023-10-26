@@ -97,7 +97,7 @@ let
       flakeInputs.anyrun.packages.${pkgs.system}.anyrun-with-all-plugins
       jq # to run json queries
       lazygit # kinda like tig
-      buku # broken
+      # buku # broken
       # gcalc
       # gnome.gnome_control_center
       # mdp # markdown CLI presenter

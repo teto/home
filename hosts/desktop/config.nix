@@ -4,6 +4,7 @@
     ./hardware.nix
     ./sshd.nix
     ./sops.nix
+    ./tailscale.nix
 
     # to test core-ws
     ./postgresql.nix

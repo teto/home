@@ -330,6 +330,7 @@ in
     export XDG_SESSION_DESKTOP=sway
     export SDL_VIDEODRIVER=wayland
     export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
+    export MOZ_ENABLE_WAYLAND=1
     '';
 
     wrapperFeatures = { gtk = true; };
