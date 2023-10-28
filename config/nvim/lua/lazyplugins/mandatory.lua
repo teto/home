@@ -1,47 +1,47 @@
 return {
- { 'mhartington/formatter.nvim',
- config = function ()
--- Utilities for creating configurations
-local util = require "formatter.util"
+ -- { 'mhartington/formatter.nvim',
+ -- config = function ()
+-- -- Utilities for creating configurations
+-- local util = require "formatter.util"
 
--- Provides the Format, FormatWrite, FormatLock, and FormatWriteLock commands
-require("formatter").setup {
-  -- Enable or disable logging
-  logging = true,
-  -- Set the log level
-  log_level = vim.log.levels.WARN,
-  -- All formatter configurations are opt-in
-  filetype = {
-   nix = {
-    require("formatter.filetypes.nix").nixpkgs_fmt,
-   },
-   ts = {
+-- -- Provides the Format, FormatWrite, FormatLock, and FormatWriteLock commands
+-- require("formatter").setup {
+ --  -- Enable or disable logging
+ --  logging = true,
+ --  -- Set the log level
+ --  log_level = vim.log.levels.WARN,
+ --  -- All formatter configurations are opt-in
+ --  filetype = {
+ --   nix = {
+ --    require("formatter.filetypes.nix").nixpkgs_fmt,
+ --   },
+ --   ts = {
 
-    require("formatter.filetypes.typescript").prettier,
-   },
-   py = {
-      require("formatter.filetypes.python").black,
-   },
-    -- Formatter configurations for filetype "lua" go here
-    -- and will be executed in order
-    lua = {
-      -- "formatter.filetypes.lua" defines default configurations for the
-      -- "lua" filetype
-      require("formatter.filetypes.lua").stylua,
+ --    require("formatter.filetypes.typescript").prettier,
+ --   },
+ --   py = {
+ --      require("formatter.filetypes.python").black,
+ --   },
+ --    -- Formatter configurations for filetype "lua" go here
+ --    -- and will be executed in order
+ --    lua = {
+ --      -- "formatter.filetypes.lua" defines default configurations for the
+ --      -- "lua" filetype
+ --      require("formatter.filetypes.lua").stylua,
 
-    },
+ --    },
 
-    -- Use the special "*" filetype for defining formatter configurations on
-    -- any filetype
-    -- ["*"] = {
-      -- "formatter.filetypes.any" defines default configurations for any
-      -- filetype
-      -- require("formatter.filetypes.any").remove_trailing_whitespace
-    -- }
-  }
-}
-end
- },
+ --    -- Use the special "*" filetype for defining formatter configurations on
+ --    -- any filetype
+ --    -- ["*"] = {
+ --      -- "formatter.filetypes.any" defines default configurations for any
+ --      -- filetype
+ --      -- require("formatter.filetypes.any").remove_trailing_whitespace
+ --    -- }
+ --  }
+-- }
+-- end
+ -- },
 
 
 
@@ -75,51 +75,51 @@ end
  --    })
  --   end
  -- },
- -- {
- --  -- :NullLsLog / NullLsInfo
- --  'jose-elias-alvarez/null-ls.nvim',
- --  config = function()
- --   local null_ls = require('null-ls')
- --   -- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md
- --   -- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTIN_CONFIG.md
- --   -- null_ls.builtins.diagnostics.shellcheck.with({
- --   -- For diagnostics sources, you can change the format of diagnostic messages by setting diagnostics_format:
- --   -- diagnostic_config = {
- --   -- -- see :help vim.diagnostic.config()
- --   -- underline = true,
- --   -- virtual_text = false,
- --   -- signs = true,
- --   -- update_in_insert = false,
- --   -- severity_sort = true,
- --   -- },
- --   -- }),
- --   null_ls.setup({
- --    sources = {
- --     -- method = null_ls.methods.DIAGNOSTICS_ON_SAVE,
- --     -- needs a luacheck in PATH
- --     null_ls.builtins.diagnostics.luacheck.with({
- --      extra_args = { '--ignore 21/_.*' }
- --     }),
- --     null_ls.builtins.code_actions.shellcheck,
- --     -- null_ls.builtins.diagnostics.editorconfig_checker, -- too noisy
- --     -- null_ls.builtins.diagnostics.teal,
- --     -- null_ls.builtins.diagnostics.tsc
- --     -- null_ls.builtins.diagnostics.yamllint,
- --     null_ls.builtins.diagnostics.flake8,
- --     null_ls.builtins.diagnostics.zsh,
- --     null_ls.builtins.formatting.just,
- --     null_ls.builtins.formatting.markdown_toc,
- --     -- null_ls.builtins.formatting.nixpkgs_fmt,
- --     null_ls.builtins.formatting.treefmt.with({
- --      -- treefmt requires a config file
- --      condition = function(utils)
- --       return utils.root_has_file("treefmt.toml")
- --      end,
- --     }),
- --    },
- --   })
- --  end,
- -- },
+ {
+  -- :NullLsLog / NullLsInfo
+  'nvimtools/none-ls.nvim',
+  config = function()
+   local none_ls = require('null-ls')
+   -- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md
+   -- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTIN_CONFIG.md
+   -- none_ls.builtins.diagnostics.shellcheck.with({
+   -- For diagnostics sources, you can change the format of diagnostic messages by setting diagnostics_format:
+   -- diagnostic_config = {
+   -- -- see :help vim.diagnostic.config()
+   -- underline = true,
+   -- virtual_text = false,
+   -- signs = true,
+   -- update_in_insert = false,
+   -- severity_sort = true,
+   -- },
+   -- }),
+   none_ls.setup({
+    sources = {
+     -- method = none_ls.methods.DIAGNOSTICS_ON_SAVE,
+     -- needs a luacheck in PATH
+     none_ls.builtins.diagnostics.luacheck.with({
+      extra_args = { '--ignore 21/_.*' }
+     }),
+     none_ls.builtins.code_actions.shellcheck,
+     -- none_ls.builtins.diagnostics.editorconfig_checker, -- too noisy
+     -- none_ls.builtins.diagnostics.teal,
+     -- none_ls.builtins.diagnostics.tsc
+     -- none_ls.builtins.diagnostics.yamllint,
+     none_ls.builtins.diagnostics.flake8,
+     none_ls.builtins.diagnostics.zsh,
+     none_ls.builtins.formatting.just,
+     none_ls.builtins.formatting.markdown_toc,
+     -- none_ls.builtins.formatting.nixpkgs_fmt,
+     none_ls.builtins.formatting.treefmt.with({
+      -- treefmt requires a config file
+      condition = function(utils)
+       return utils.root_has_file("treefmt.toml")
+      end,
+     }),
+    },
+   })
+  end,
+ },
  {
   'folke/neodev.nvim',
   config = function()

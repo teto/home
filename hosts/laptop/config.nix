@@ -4,6 +4,8 @@
     ./sshd.nix
     ./sops.nix
     ./hardware.nix
+    ../desktop/tailscale.nix
+
     ../config-all.nix
     ../../nixos/modules/luarocks-site.nix
 
