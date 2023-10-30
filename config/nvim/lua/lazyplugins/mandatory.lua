@@ -46,21 +46,21 @@ return {
 
 
  -- not as good as null-ls but a recourse
- {
-  'mfussenegger/nvim-lint',
-  config = function ()
-    require('lint').linters_by_ft = {
-      -- markdown = {'vale',}
-      -- --ignore E501,E265,E402 update.py
-      python = {'flake8'}
-    }
-    vim.api.nvim_create_autocmd({ "BufWritePost" }, {
-      callback = function()
-        require("lint").try_lint()
-      end,
-    })
-  end
- },
+ -- {
+ --  'mfussenegger/nvim-lint',
+ --  config = function ()
+ --    require('lint').linters_by_ft = {
+ --      -- markdown = {'vale',}
+ --      -- --ignore E501,E265,E402 update.py
+ --      python = {'flake8'}
+ --    }
+ --    vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+ --      callback = function()
+ --        require("lint").try_lint()
+ --      end,
+ --    })
+ --  end
+ -- },
  -- {
  --  'stevearc/conform.nvim',
  --  config = function ()

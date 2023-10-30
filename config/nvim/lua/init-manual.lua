@@ -49,6 +49,7 @@ vim.opt.termguicolors = true
 
 -- TODO package last-color in nix
 vim.opt.rtp:prepend(lazypath)
+-- vim.opt.rtp:prepend("/home/teto/rocks.nvim")
 require('lazy').setup('lazyplugins', {
 	lockfile = vim.fn.stdpath('cache') .. '/lazy-lock.json',
 	dev = {

@@ -26,7 +26,7 @@
     nixpkgs = {
       url = "github:teto/nixpkgs/nixos-unstable";
     };
-
+    rocks-nvim.url = "github:nvim-neorocks/rocks.nvim";
     firefox2nix.url = "git+https://git.sr.ht/~rycee/mozilla-addons-to-nix";
     anyrun.url = "github:Kirottu/anyrun";
     anyrun.inputs.nixpkgs.follows = "nixpkgs";
