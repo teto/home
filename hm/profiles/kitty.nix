@@ -9,7 +9,10 @@
     font.name = "Ubuntu";
 
     # _ksi_preexec breaks my own preexec !
-    # shellIntegration.mode = false;
+    shellIntegration = {
+     enableZshIntegration = true;
+      mode = "enabled";
+    };
     settings = {
 
       bold_font = "auto";

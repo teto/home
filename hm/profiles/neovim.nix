@@ -1,10 +1,17 @@
-{ config, pkgs, lib, ... }:
+{ pkgs, lib
+, flakeInputs
+, ... }:
 
 let
   luaPlugin = attrs: attrs // {
     type = "lua";
     config = lib.optionalString (attrs ? config && attrs.config != null) (genBlockLua attrs.plugin.pname attrs.config);
   };
+
+  # taken from the official flake
+  # must be an unwrapped version
+  # myPackage = pkgs.neovim-unwrapped;
+  myPackage = flakeInputs.neovim.packages."${pkgs.system}".neovim;
 
   genBlockLua = title: content:
     ''
@@ -135,7 +142,8 @@ let
           # tree-sitter-python
           # tree-sitter-html  # for rest.nvim
           (grammarToPlugin pkgs.tree-sitter-grammars.tree-sitter-html) # for devdocs
-          # tree-sitter-norg
+          # (grammarToPlugin pkgs.tree-sitter-grammars.tree-sitter-norg)
+          pkgs.vimPlugins.nvim-treesitter.grammarPlugins.norg
           # tree-sitter-org-nvim
           (grammarToPlugin pkgs.tree-sitter-grammars.tree-sitter-query)
           # (grammarToPlugin tree-sitter-just)
@@ -563,8 +571,6 @@ let
     ++ filetypePlugins
   ;
 
-  # taken from the official flake
-  myPackage = pkgs.neovim;
 in
 {
 
@@ -603,7 +609,7 @@ in
     # ;
 
 
-     extraLuaConfig =      (lib.strings.concatStrings (
+     extraLuaConfig = lib.mkBefore (lib.strings.concatStrings (
         lib.mapAttrsToList genBlockLua luaRcBlocks
       ))
      ;

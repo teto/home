@@ -8,7 +8,7 @@
   home.packages = with pkgs; [
     hakuneko
     hexyl
-    pinta # photo editing
+    # pinta # photo editing
     pciutils # for lspci
     bridge-utils # pour  brctl
     wirelesstools # to get iwconfig

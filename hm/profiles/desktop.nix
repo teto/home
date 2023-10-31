@@ -3,7 +3,7 @@ let
   pass-custom = (pkgs.pass.override { waylandSupport = true; }).withExtensions (ext:
     with ext; [ pass-import ]);
 
-  devPkgs = all: with pkgs; [
+  devPkgs = with pkgs; [
     # TODO pass to vim makeWrapperArgs
     # nodePackages.bash-language-server
     # just in my branch :'(
@@ -13,7 +13,7 @@ let
     # gitAndTools.git-remote-hg
     # nix-prefetch-scripts # broken
     gdb
-    editorconfig-core-c
+    # editorconfig-core-c
     automake
     gnum4 # hum
     # for fuser, useful when can't umount a directory
@@ -21,6 +21,7 @@ let
     psmisc
     util-linux # for lsns (namespace listing)
     rbw
+
 	# haxe # to test neovim developement
     eza # to list files
     gitAndTools.diff-so-fancy # todo install it via the git config instead
@@ -56,9 +57,10 @@ let
     whois
     envsubst
     w3m # for preview in ranger w3mimgdisplay
+    zeal # doc for developers
   ];
 
-  imPkgs = all: with pkgs; [
+  imPkgs = with pkgs; [
     # gnome.california # fails
     khard
     # libsecret  # to consult
@@ -68,9 +70,7 @@ let
     vlc
     # leafnode dovecot22 dovecot_pigeonhole fetchmail procmail w3m
     # mairix mutt msmtp lbdb contacts spamassassin
-  ] ++ lib.optionals all [
     element-desktop
-    slack
   ];
 
 
@@ -91,7 +91,7 @@ let
       };
 
     in
-    all: with pkgs; [
+    with pkgs; [
       # apvlv # broken
       # TODO
       flakeInputs.anyrun.packages.${pkgs.system}.anyrun-with-all-plugins
@@ -129,7 +129,7 @@ let
       wine
       hunspellDicts.fr-any
       libnotify
-      # luarocks
+      # replace with rust-wormhole
       # magic-wormhole  # super tool to exchange secrets between computers
       moc-wrapped # music player
       mupdf.bin # evince does better too
@@ -150,6 +150,7 @@ let
       sublime3
       # sxiv # simple image viewer
 	  simple-scan
+      sioyek # pdf reader
       translate-shell # call wiuth `trans`
       wally-cli # to flash ergodox keyboards
       wireshark
@@ -170,17 +171,12 @@ let
     # anki          # spaced repetition system
     # hopefully we can remove this from the environment
     # it's just that I can't setup latex correctly
-    # unstable.libreoffice
+    libreoffice
 
 	# take the version from stable ?
     # qutebrowser # broken keyboard driven fantastic browser
     gnome.nautilus # demande webkit/todo replace by nemo ?
-    # shutter # screenshot utility
     # mcomix # manga reader
-    # mendeley # requiert qtwebengine
-    zeal # doc for developers
-    # zotero     # doc software
-    # astroid # always compiles webkit so needs 1 full day
   ];
 in
 {
@@ -202,15 +198,12 @@ in
 
   ];
 
-  programs.autojump = {
-    enable = false;
-    enableZshIntegration = true;
-    enableBashIntegration = true;
-  };
-  # programs.z-lua = {
+  # programs.autojump = {
   #   enable = false;
   #   enableZshIntegration = true;
+  #   enableBashIntegration = true;
   # };
+
   programs.zoxide = {
     enable = true;
     enableZshIntegration = true;
@@ -221,8 +214,9 @@ in
 
   # rename to fn, accept a parameter for optional
   home.packages =
-    (desktopPkgs true) ++ (devPkgs true) ++ heavyPackages
-    ++ (imPkgs true)
+   desktopPkgs 
+   ++ devPkgs  ++ heavyPackages
+    ++ imPkgs
     ++ (with pkgs; [
       # pkgs.up # live preview of pipes
       # pkgs.peek # GIF recorder  BROKEN
@@ -295,14 +289,9 @@ in
   };
 
 
-  # as long as there is no better way to configure i3
-  # home.file.".pypirc".source = ../../home/pypirc;
-
   # readline equivalent but in haskell for ghci
   # home.file.".haskeline".source = ../home/haskeline;
 
-  #  TODO newsboat
-  # programs.newsboat.urls =
 
   # [Added Associations]
   # video/x-matroska=vlc.desktop;mpv.desktop;
@@ -347,22 +336,6 @@ in
     # settings.verbs = [{ invocation = "p"; key = "ctrl-o"; execution = ":open_leave"; }];
   };
 
-
-  programs.joshuto = {
-
-   enable = true;
-   # settings = {
-   #   preview = {
-   #     preview_shown_hook_script = "~/.config/joshuto/on_preview_shown";
-   #     preview_removed_hook_script = "~/.config/joshuto/on_preview_removed";
-   #   };
-   # };
-   # [preview]
-# ...
-# preview_shown_hook_script = "~/.config/joshuto/on_preview_shown"
-# preview_removed_hook_script = "~/.config/joshuto/on_preview_removed"
-  };
-
   home.sessionVariables = {
     # JUPYTER_CONFIG_DIR=
     IPYTHONDIR = "$XDG_CONFIG_HOME/ipython";
@@ -372,8 +345,6 @@ in
     # MUTT="$XDG_CONFIG_HOME/mutt";
     VIM_SOURCE_DIR = "$HOME/vim";
   };
-
-
 
   # https://github.com/NixOS/nixpkgs/issues/196651
   manual.manpages.enable = true;

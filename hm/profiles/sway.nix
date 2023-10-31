@@ -16,30 +16,10 @@ in
   ];
 
   home.packages = with pkgs; [
+    swayr # window selector
 
-   clipman # clipboard manager, works with wofi, abandoned
-   cliphist
-    # TODO test https://github.com/sentriz/cliphist
-    foot # terminal
-    # use it with $ grim -g "$(slurp)"
-    grim # replace scrot/flameshot
-    kanshi # autorandr-like
-    kickoff # transparent launcher for wlr-root
-    wofi # rofi-like
-    slurp # capture tool
-    # lavalauncher # TODO a tester
-    wf-recorder # for screencasts
-    # bemenu as a dmenu replacement
-    wl-clipboard # wl-copy / wl-paste
-    wdisplays # to show 
-    swaybg # to set wallpaper
-    swayimg # imageviewer
-    swaynotificationcenter # top cool
-    swaynag-battery # https://github.com/NixOS/nixpkgs/pull/175905
-    sway-launcher-desktop # fzf-based launcher
     # sway overview, draws layouts for each workspace: dope https://github.com/milgra/sov
-    sov  
-    wlr-randr # like xrandr
+    # sov  
     nwg-bar  # locks nothing
     nwg-drawer # launcher
     nwg-menu
@@ -51,11 +31,6 @@ in
     tessen # handle passwords
     waybar
     # eventually ironbar
-    wlprop # like xprop, determines window parameters
-    # swappy # e https://github.com/jtheoof/swappy
-    # https://github.com/artemsen/swaykbdd # per window keyboard layout
-    # wev # event viewer https://git.sr.ht/~sircmpwn/wev/
-    wl-gammactl # to control gamma
   ];
 
   # https://github.com/rycee/home-manager/pull/829
@@ -66,8 +41,6 @@ in
       { event = "lock"; command = "lock"; }
     ];
   };
-
-  # services.clipman.enable = true;
 
   services.cliphist.enable = true;
 
@@ -217,18 +190,6 @@ in
       # we want to override the (pywal) config from i3
       colors = lib.mkForce { };
 
-      # Notification Daemon
-      # Toggle control center
-      # keybindings = {
-      #   # "$mod+Shift+n" = " exec ${pkgs.swaynotificationcenter}/bin/swaync-client -t -sw";
-      #   # clipman can be used too
-      #   # clipman pick -t wofi
-      #   # "${mod}+Ctrl+h" = lib.mkForce ''exec "${pkgs.clipman}/bin/clipman pick -t wofi'';
-      #   # "XF86AudioRaiseVolume" = "exec ${pkgs.pamixer}/bin/pamixer -ui 2 && pamixer --get-volume > $SWAYSOCK.wob";
-      #   # # "exec --no-startup-id pactl set-sink-volume 0 +5%;exec ${notify-send} --icon=speaker_no_sound -u low -t 1000 'Audio Raised volume'";
-      #   # "XF86AudioLowerVolume" = "exec ${pkgs.pamixer}/bin/pamixer -ud 2 && pamixer --get-volume > $SWAYSOCK.wob";
-      #   # "XF86AudioMute"="exec --no-startup-id pactl set-sink-mute 0 toggle;exec ${notify-send} --icon=speaker_no_sound -u low 'test'";
-      # };
     # https://github.com/dylanaraps/pywal/blob/master/pywal/templates/colors-sway
     # TODO
     # from https://www.reddit.com/r/swaywm/comments/uwdboi/how_to_make_chrome_popup_windows_floating/
@@ -271,8 +232,6 @@ in
       };
 
       startup = [
-        # { command = "wl-paste -t text --watch clipman store"; }
-        # { command = ''wl-paste -p -t text --watch clipman store -P --histpath="~/.local/share/clipman-primary.json"''; }
        { command =  "${term} ncmpcpp"; }
       ];
     };
@@ -341,15 +300,38 @@ in
    ";
 
 
-  # services.mako = {
-  #   # disabled in favor of swaync
-  #   enable = false;
-  #   defaultTimeout = 4000;
-  #   ignoreTimeout = false;
-  # };
-
+  # what is kanshi
   services.kanshi = {
     enable = true;
+  };
+
+  # env RUST_BACKTRACE=1 RUST_LOG=swayr=debug swayrd > /tmp/swayrd.log 2>&1
+  systemd.user.services.swayr = {
+    Unit = {
+      Description = "Swayr";
+      # Requires = [ "tray.target" ];
+      # sway ?
+      After = [ "tray.target" ];
+      # PartOf = [ "graphical-session.target" ];
+      # X-Restart-Triggers = mkIf (cfg.settings != { }) [ "${iniFile}" ];
+    };
+
+    # Install = { WantedBy = [ "tray.target" ]; };
+
+    Service = {
+      # Environment = "PATH=${config.home.profileDirectory}/bin:${pkgs.grim}/bin";
+      ExecStart = "${pkgs.swayr}/bin/swayr";
+      # Restart = "on-abort";
+
+      # Sandboxing.
+      # LockPersonality = true;
+      # MemoryDenyWriteExecute = true;
+      # NoNewPrivileges = true;
+      # PrivateUsers = true;
+      # RestrictNamespaces = true;
+      # SystemCallArchitectures = "native";
+      # SystemCallFilter = "@system-service";
+    };
   };
 
 }

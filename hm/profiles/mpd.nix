@@ -8,25 +8,23 @@
  ];
 
 
-  services.mpd = {
-    enable = true;
-    # dataDir = xdg.dataDir
-    musicDirectory = "/mnt/ntfs/Musique";
-    # playlistDirectory = 
-    # extraConfig = 
-    # extraArgs = 
-    network = {
-      # port 
-      # startWhenNeeded = true;
-
-    };
-  };
-
-  programs.ncmpcpp = {
+ services.mpd = {
    enable = true;
-   # bindings = #
-   # settings = 
-    # mpdMusicDir
-  };
+   # dataDir = xdg.dataDir
+   # playlistDirectory = 
+   # extraConfig = 
+   # extraArgs = 
+   network = {
+     # port 
+     # startWhenNeeded = true;
+   };
+ };
+
+ programs.ncmpcpp = {
+  enable = true;
+  # bindings = #
+  # settings = 
+   # mpdMusicDir
+ };
 }
 

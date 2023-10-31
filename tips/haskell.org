@@ -24,14 +24,14 @@ ghc-pkg init ./test.db
 ghc-pkg list --global  (vs user)
 
 https://downloads.haskell.org/~ghc/latest/docs/html/users_guide/packages.html#package-environments
+https://ghc.gitlab.haskell.org/ghc/doc/users_guide/packages.html#package-environments
+https://downloads.haskell.org/~ghc/latest/docs/html/users_guide/packages.html#package-databases
 
 -package-env
 
 Or GHC_ENVIRONMENT
 GHC_PACKAGE_PATH
 /home/teto/.ghc/x86_64-linux-8.10.7/environments/default
-
-https://downloads.haskell.org/~ghc/latest/docs/html/users_guide/packages.html#package-databases
 
 :xa
 cabal install --lib ./servant-openapi3.cabal --package-env ./foo

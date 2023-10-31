@@ -66,7 +66,7 @@ return {
      -- passing OPENAI_API_KEY in environment for this to work
      -- huge setup at https://github.com/jackMort/ChatGPT.nvim
       require("chatgpt").setup({
-        api_key_cmd = "pass show chat.openai.com",
+        -- api_key_cmd = "pass show chat.openai.com",
         api_host_cmd = "echo -n 'api.openai.com'"
        })
     end,
@@ -310,6 +310,7 @@ return {
  -- },
  {
   "giusgad/pets.nvim",
+  cond = not vim.fn.has 'gui_running' == 1,
   dependencies = { "MunifTanjim/nui.nvim", "edluffy/hologram.nvim" },
   config = function ()
    require("pets").setup({})

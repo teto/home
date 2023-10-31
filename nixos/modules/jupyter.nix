@@ -43,7 +43,7 @@ let
   #   # export PATH="${lib.makeBinPath ([ ihaskellEnv ])}''${PATH:+:}$PATH"
   #   # export GHC_PACKAGE_PATH="$(echo ${ihaskellEnv}/lib/*/package.conf.d| tr ' ' ':'):$GHC_PACKAGE_PATH"
   #   # export PATH="${lib..makeBinPath ([ ihaskellEnv jupyter ])}''${PATH:+:}$PATH"
-  #   # to find ghc_pkg/hoogle doc etc
+  #   # to find ghc_pkg doc etc
   #   postBuild = ''
   #     for prg in $out/bin"/"*;do
   #       if [[ -f $prg && -x $prg ]]; then

@@ -22,6 +22,11 @@ https://stackoverflow.com/questions/7151311/using-git-how-could-i-search-for-a-s
 git grep buildLayeredImage `git show-ref --heads`
 
 
+Tools to handle many repos:
+- gita
+- git-repo-manager (grm)
+
+
 # bisect
 
 git bisect run ../test.sh

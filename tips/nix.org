@@ -1,5 +1,12 @@
 #+title: nix tips
 
+** Contributing to nix itself
+
+autoreconfPhase
+configurePhase
+make tests/functional/flakes/show.sh.test
+
+
 * how to package npm packages ?
 
   https://github.com/nix-community/dream2nix
@@ -23,6 +30,10 @@
   nix build .#nixosConfigurations.staging.config.system.build.toplevel
 # nixos/modules/programs/environment.nix
 environment.profileRelativeSessionVariables =
+
+** set local paths for flake inputs
+
+ url = "git+file:/home/teto/jupyenv";
 
 https://github.com/NixOS/nixpkgs/pull/185719
 

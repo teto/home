@@ -26,8 +26,10 @@
     netcat-gnu # plain 'netcat' is the bsd one
     # nvimpager # 'less' but with neovim
     strace
+    tailspin  #  a log viewer based on less ("spin" is the executable)
     tig
     xdg-utils
+    wttrbar # for meteo
   ];
 
   # works only because TIGRC_USER is set
@@ -130,25 +132,6 @@
     # programs.fzf.historyWidgetOptions
   };
 
-  # xresources.properties = {
-  # };
-
-  # home.file.".latexmkrc".text =  ''
-  #   $bibtex="${texliveEnv}/bin/bibtex"
-  #   # c'est du perl à priori
-  #   $pdflatex = 'pdflatex -shell-escape -file-line-error -synctex=1 %O %S';
-  #   # How to make the PDF viewer update its display when the PDF file changes.  See the man page for a description of each method.
-  #   # $pdf_update_method = 2;
-  #   # When PDF update method 2 is used, the number of the Unix signal to send
-  #   # $pdf_update_signal = 'SIGHUP';
-  # '';
-
-  # qt = {
-  #   enable = true;
-  #   platformTheme = "gnome";
-  # };
-
-
   programs.tmux = {
     enable = true;
     sensibleOnTop = true;
@@ -189,6 +172,4 @@
   # for colors etc.
   programs.lesspipe.enable = true;
 
-  # TODO
-  # manual.json.enable = false;
 }

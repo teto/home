@@ -3,6 +3,9 @@ let
   # or use {pkgs.kitty}/bin/kitty
   term = "${pkgs.kitty}/bin/kitty";
 
+
+  myLib = pkgs.callPackage ../lib.nix {};
+
   # key modifier
   # mad = "Mod4";
   # mod = "Mod1";
@@ -92,7 +95,7 @@ let
     XF86AudioRaiseVolume = "exec --no-startup-id ${wpctl} set-volume @DEFAULT_AUDIO_SINK@ 5%+ -l 1.2;exec ${notify-send} --icon=audio-volume-high -u low -t 1000 -h int:value:$(${getIntegerVolume}) -e -h string:synchronous:audio-volume 'Audio volume' 'Audio Raised volume'";
     XF86AudioLowerVolume = "exec --no-startup-id ${wpctl} set-volume @DEFAULT_AUDIO_SINK@ 5%-;exec ${notify-send} --icon=audio-volume-low-symbolic -u low -t 1000 -h int:value:$(${getIntegerVolume}) -e -h string:synchronous:audio-volume 'Audio volume' 'Lower audio volume'";
 
-    XF86AudioMute = "exec --no-startup-id ${wpctl} set-mute @DEFAULT_AUDIO_SINK@ toggle;exec ${notify-send} --icon=speaker_no_sound -e -h boolean:audio-toggle:1 -h string:synchronous:audio-volume -u low 'Toggling audio'" ;
+    XF86AudioMute = "exec --no-startup-id ${myLib.muteAudio}";
     # XF86AudioLowerVolume = "exec --no-startup-id ${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ -5%;exec ${notify-send} --icon=audio-volume-low-symbolic -u low 'Audio lowered'";
     # XF86AudioMute = "exec --no-startup-id ${pkgs.pulseaudio}/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle;exec ${notify-send} --icon=speaker_no_sound -u low 'test'";
 
@@ -102,6 +105,8 @@ let
     # XF86MonBrightnessDown = "exec ${pkgs.brightnessctl}/bin/brightnessctl set 10%-";
 
     # "XF86Display" = "exec " + ../../rofi-scripts/monitor_layout.sh ;
+
+    Mod4 = "exec anyrun";
 
     XF86AudioNext="exec ${mpc} next; exec notify-send --icon=forward -h string:synchronous:mpd 'Audio next'";
     XF86AudioPrev="exec ${mpc} next; exec notify-send --icon=backward -h string:synchronous:mpd 'Audio previous'";

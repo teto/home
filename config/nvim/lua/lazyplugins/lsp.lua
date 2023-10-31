@@ -53,7 +53,9 @@ return {
   -- }
   -- use 'nvim-telescope/telescope-dap.nvim'
  -- { 'MrcJkb/haskell-tools.nvim' , dev = true },
- { dir = '/home/teto/haskell-tools.nvim' },
+ { dir = '/home/teto/haskell-tools.nvim'
+ , ft = { 'haskell', 'lhaskell', 'cabal', 'cabalproject' },
+ },
  -- --config = function()
  -- -- local ht = require('haskell-tools')
  -- -- ht.setup({

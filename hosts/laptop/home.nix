@@ -12,6 +12,7 @@
    ../desktop/teto/neovim.nix
    ../desktop/teto/swaync.nix
    ../desktop/teto/contacts.nix
+   ../desktop/teto/helix.nix
 
     ../../hm/profiles/vdirsyncer.nix
     ../../hm/profiles/desktop.nix
@@ -26,13 +27,13 @@
     ../../hm/profiles/dev.nix
     # ../../hm/profiles/vscode.nix #  provided by nova-nix config
     # ../../hm/profiles/experimental.nix
-    ../../hm/profiles/emacs.nix
+    # ../../hm/profiles/emacs.nix
   ];
 
   # dans le cadre de mon experimentation !
   home.packages = with pkgs; [
-   timg
-   lua
+   timg # to display images in terminal, to compare with imgcat ?
+   # lua
    imagemagick # for 'convert'
    chromium
   ];

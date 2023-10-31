@@ -1,0 +1,8 @@
+NIXPKGS_ALLOW_UNFREE=1 nix shell github:ggerganov/llama.cpp/b1445#cuda --impure
+
+https://github.com/ggerganov/llama.cpp/
+
+* ollama 
+
+ollama serve
+ollama list

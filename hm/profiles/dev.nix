@@ -19,7 +19,6 @@
     # filesystem watcher developed by facebook. Useful used in conjonction 
     # with core.monitorfs in git ()
     watchman
-    # gitlab-runner
     vault
   ];
 

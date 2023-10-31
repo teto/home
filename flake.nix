@@ -82,14 +82,19 @@
 
     neovim = {
       # pinned because of https://github.com/neovim/neovim/issues/25086
-      url = "github:neovim/neovim?dir=contrib&rev=f246cf029fb4e7a07788adfa19f91608db7bd816";
+      # &rev=f246cf029fb4e7a07788adfa19f91608db7bd816
+      url = "github:neovim/neovim?dir=contrib";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     neovide = {
       url = "github:neovide/neovide";
       flake = false;
     };
-    yazi.url = "github:sxyazi/yazi";
+    yazi = {
+      # url = "github:sxyazi/yazi?ref=v0.1.5";
+      url = "github:sxyazi/yazi";
+      # inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     sops-nix.url = "github:Mic92/sops-nix";
 
@@ -481,7 +486,7 @@
         local = import ./overlays/pkgs/default.nix;
         overrides = import ./overlays/overrides.nix;
         haskell = import ./overlays/haskell.nix;
-        neovimOfficial = self.inputs.neovim.overlay;
+        # neovimOfficial = self.inputs.neovim.overlay;
         wireshark = import ./overlays/wireshark.nix;
         python = import ./overlays/python.nix;
         # wayland =

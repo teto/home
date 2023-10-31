@@ -10,7 +10,7 @@ in
   ];
 
   programs.khal = {
-   enable = false; # khal build broken
+   enable = true; # khal build broken
    # need a locale to be set
    locale = { };
 

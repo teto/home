@@ -1,0 +1,135 @@
+/* One Dark Color Theme */
+@define-color bg #282C34;
+@define-color fg #ABB2BF;
+@define-color fg2 #21252B;
+
+@define-color red #E06C75;
+@define-color orange #d19a66;
+@define-color yellow #e5c07b;
+@define-color green #98C379;
+@define-color cyan #56b6c2;
+@define-color blue #61AFEF;
+@define-color purple #c678dd;
+@define-color white #abb2bf;
+@define-color black #282c34;
+@define-color gray #5c6370;
+@define-color highlight #e2be7d;
+@define-color comment #7f848e;
+
+/* * { */
+/* 	font-family: "JetBrainsMono Mono", "Symbols Nerd Font Mono", "Symbols Nerd Font"; */
+/* 	font-size: 17px; */
+/* } */
+
+* {
+    border: none;
+    border-radius: 0;
+    font-family: Roboto, Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    min-height: 0;
+}
+
+window#waybar {
+    background: rgba(43, 48, 59, 0.5);
+    border-bottom: 3px solid rgba(100, 114, 125, 0.5);
+    color: white;
+}
+
+tooltip {
+  background: rgba(43, 48, 59, 0.5);
+  border: 1px solid rgba(100, 114, 125, 0.5);
+}
+tooltip label {
+  color: white;
+}
+
+#workspaces button {
+    padding: 0 5px;
+    background: transparent;
+    color: white;
+    border-bottom: 2px solid transparent;
+}
+
+#workspaces button.focused {
+    background: #64727D;
+    border-bottom: 2px solid white;
+}
+
+/* button { */
+/*     /1* Use box-shadow instead of border so the text isn't offset *1/ */
+/*     box-shadow: inset 0 -3px transparent; */
+/*     /1* Avoid rounded borders under each button name *1/ */
+/*     border: none; */
+/*     border-radius: 0; */
+/* } */
+
+/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
+/* button:hover { */
+/*     background: inherit; */
+/*     box-shadow: inset 0 -3px #ffffff; */
+/*     border-bottom: 3px solid white; */
+/* } */
+
+#workspaces button {
+    padding: 0 5px;
+    background-color: transparent;
+    color: #ffffff;
+}
+
+#workspaces button:hover {
+    background: rgba(0, 0, 0, 0.2);
+    box-shadow: inset 0 -3px #ffffff;
+    border-bottom: 2px solid white;
+
+}
+
+/* #workspaces button.focused { */
+/*     background-color: #64727D; */
+/*     box-shadow: inset 0 -3px #ffffff; */
+/* } */
+
+/* #workspaces button.urgent { */
+/*     background-color: #eb4d4b; */
+/* } */
+#mode, #clock, #battery {
+    padding: 0 10px;
+}
+
+#mode {
+    background: #64727D;
+    border-bottom: 3px solid white;
+}
+
+/* #clock { */
+/*     background-color: #64727D; */
+/* } */
+
+#battery {
+    color: green;
+}
+
+#battery.charging {
+    color: @green;
+    /* background-color: #26A65B; */
+}
+
+@keyframes blink {
+    to {
+        background-color: #ffffff;
+        color: black;
+    }
+}
+
+#wireplumber.muted {
+ background: red
+}
+
+#battery.warning:not(.charging) {
+    background: #f53c3c;
+    color: yellow;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}

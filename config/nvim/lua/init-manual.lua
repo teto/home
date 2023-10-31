@@ -8,7 +8,6 @@ local has_fzf_lua, fzf_lua = pcall(require, 'fzf-lua')
 
 local nnoremap = vim.keymap.set
 local map = vim.keymap.set
-
 local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
 	vim.fn.system({
@@ -245,6 +244,7 @@ vim.opt.wildmenu = true
 -- %=%m %f
 vim.opt.winbar = "%{%v:lua.require'nvim-navic'.get_location()%}"
 
+-- sh -c "lua -e 'dofile [[%]] print(description.homepage)' | xdg-open"
 
 vim.api.nvim_create_autocmd("LspAttach", {
 	desc = "Attach lsp_signature on new client",
@@ -270,8 +270,8 @@ vim.api.nvim_create_autocmd("BufRead", {
 	callback = function(args)
 		-- print("autocmd BufRead cb", args.file)
 		if args.file:endswith("pkgs/development/haskell-modules/hackage-packages.nix") then
-			print("autocmd BufRead cb", args.file)
-			print("DISABLING syntax")
+			-- print("autocmd BufRead cb", args.file)
+			-- print("DISABLING syntax")
 			vim.cmd([[setlocal syntax=off]])
 		end
 

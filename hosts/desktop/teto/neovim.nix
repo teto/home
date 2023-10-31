@@ -6,6 +6,7 @@ let
     ${content}
     -- }}}
     '';
+
   luaPlugin = attrs: attrs // {
     type = "lua";
     config = lib.optionalString (attrs ? config && attrs.config != null) (genBlockLua attrs.plugin.pname attrs.config);
@@ -64,6 +65,7 @@ let
     #     vim.g.markdown_composer_binary = '${vim-markdown-composer.vimMarkdownComposerBin}/bin/markdown-composer'
     #   '';
     # })
+
     # disabled because of https://github.com/rktjmp/lush.nvim/issues/89
     (luaPlugin { plugin = lush-nvim; })
     # (luaPlugin { plugin = gruvbox-nvim; }) 
@@ -139,6 +141,7 @@ let
     # nvim-markdown-preview  # :MarkdownPreview
 
     { 
+     # might get outdated in b64-nvim
      plugin = b64-nvim; # provides B64Decode / Encode
     }
     # { plugin = kui-nvim; }
@@ -319,9 +322,10 @@ let
       # lua53Packages.teal-language-server
       codeium # ideally not needed and referenced by codeium-vim directly
       editorconfig-checker # used in null-ls
-      lua51Packages.luacheck
       haskellPackages.hasktags
       haskellPackages.fast-tags
+      lua51Packages.luacheck
+      llm-ls
       manix # should be no need, telescope-manix should take care of it
       nodePackages.vscode-langservers-extracted # needed for typescript language server IIRC
       nodePackages.bash-language-server
@@ -344,8 +348,9 @@ let
 {
   programs.neovim = {
 
-   plugins = luaPlugins 
-   ++ filetypePlugins
+   plugins =
+           luaPlugins 
+        ++ filetypePlugins
    ;
 
     # plugins = with pkgs.vimPlugins; [

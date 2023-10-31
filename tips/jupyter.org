@@ -2,6 +2,9 @@
 https://docs.jupyter.org/en/latest/use/jupyter-directories.html
 https://jupyter-client.readthedocs.io/en/stable/kernels.html#kernel-specs
 
+
+`nix run .#jupyter-all`
+
 Typically returns:
 $ jupyter --paths
 
