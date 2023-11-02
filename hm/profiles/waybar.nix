@@ -168,10 +168,11 @@ in
             return-type = "json";
           };
           "custom/notification" = {
-            tooltip = true;
-            format = "{text} {icon}";
+            tooltip = false;
+            format = "{icon}";
+            # format = "{text} {icon}";
             format-icons = {
-              # notification = "<span foreground='red'><sup>notifs</sup></span>";
+              notification = "<span foreground='red'><sup>notifs</sup></span>";
               none = "";
               inhibited-notification = "inhibited<span foreground='red'><sup>toto</sup></span>";
               inhibited-none = "0";
@@ -227,7 +228,6 @@ in
               interval = 120;
               on_click = "${pkgs.kitty}/bin/kitty sh -c alot -l/tmp/alot.log";
               # TODO rerun mbsync + notmuch etc
-              # TODO read
               # exec-on-event = false;
               on-click-right = "systemctl start mbsync.service";
               exec = lib.getExe notmuchChecker;
@@ -240,6 +240,8 @@ in
       };
     };
 
-    systemd.user.services.waybar.Service.Environment ="PATH=${lib.makeBinPath [ pkgs.wlogout ]}";
-
+    # TODO
+    systemd.user.services.waybar.Service = {
+      Environment ="PATH=${lib.makeBinPath [ pkgs.wlogout pkgs.fuzzel pkgs.wofi ]}";
+    };
 }

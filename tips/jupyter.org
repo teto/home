@@ -2,7 +2,13 @@
 https://docs.jupyter.org/en/latest/use/jupyter-directories.html
 https://jupyter-client.readthedocs.io/en/stable/kernels.html#kernel-specs
 
+* To list kernels
+ jupyter kernelspec list --debug
 
+* debug a kernel
+result/bin/jupyter-kernel --debug --kernel=haskell
+
+ jupyter kernelspec
 `nix run .#jupyter-all`
 
 Typically returns:

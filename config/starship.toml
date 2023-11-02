@@ -67,7 +67,7 @@ number_threshold = 4
 [cmd_duration]
 # in milliseconds
 min_time = 2_000
-show_notifications = true
+show_notifications = false
 # min_time_to_notify = 10_000
 format = "took [$duration]($style) "
 

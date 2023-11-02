@@ -27,6 +27,14 @@ https://downloads.haskell.org/~ghc/latest/docs/html/users_guide/packages.html#pa
 https://ghc.gitlab.haskell.org/ghc/doc/users_guide/packages.html#package-environments
 https://downloads.haskell.org/~ghc/latest/docs/html/users_guide/packages.html#package-databases
 
+clear-package-db
+global-package-db
+user-package-db
+package-db db.d/
+package-id id_1
+package-id id_2
+...
+
 -package-env
 
 Or GHC_ENVIRONMENT

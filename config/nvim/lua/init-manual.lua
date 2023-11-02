@@ -862,20 +862,8 @@ vim.api.nvim_create_user_command(
 
 vim.api.nvim_set_keymap('n', '<F1>', '<Cmd>lua open_contextual_menu()<CR>', { noremap = true, silent = false })
 
-vim.cmd([[
-map f <Plug>Sneak_f
-map F <Plug>Sneak_F
-map t <Plug>Sneak_t
-map T <Plug>Sneak_T
-nmap H ^
-nmap L $
-]])
-
--- luadev mappings
--- https://github.com/bfredl/nvim-luadev
--- for i=1,2 do
--- 	print("hello: "..tostring(i))
--- end
+map('n', 'H', '^', {})
+map('n', 'L', '$', {})
 
 vim.api.nvim_set_keymap('n', ',a', '<Plug>(Luadev-Run)', { noremap = false, silent = false })
 vim.api.nvim_set_keymap('v', ',,', '<Plug>(Luadev-Run)', { noremap = false, silent = false })

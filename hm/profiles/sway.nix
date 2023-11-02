@@ -209,10 +209,10 @@ in
     "${mod}+Return" = "exec --no-startup-id ${term}";
     "${mod}+Shift+Return" = ''exec --no-startup-id ${term} -d "$(${toString ../../bin/kitty-get-cwd.sh})"'';
 
-    "${mod}+Tab" = "exec \"${pkgs.rofi}/bin/rofi -modi 'drun,window,ssh' -show drun\"";
-    "${mod}+Ctrl+Tab" = "exec \"${pkgs.rofi}/bin/rofi -modi 'window' -show run\"";
+    "${mod}+Tab" = "exec \"${pkgs.rofi}/bin/rofi -modi 'drun' -show drun\"";
+    # "${mod}+Ctrl+Tab" = "exec \"${pkgs.rofi}/bin/rofi -modi 'window' -show run\"";
     # TODO dwindow exclusively with WIN
-    "${mad}+Tab" = "exec \"${pkgs.rofi}/bin/rofi -modi 'run,drun,window,ssh' -show window\"";
+    "${mad}+Tab" = "exec \"${pkgs.swayr}/bin/swayr switch-window";
     "${mad}+a" = "exec \"${pkgs.rofi}/bin/rofi -modi 'run,drun,window,ssh' -show window\"";
     # "${mad}+Tab" = "exec \"${pkgs.rofi}/bin/rofi -modi 'run,drun,window,ssh' -show window\"";
 
@@ -233,6 +233,8 @@ in
 
       startup = [
        { command =  "${term} ncmpcpp"; }
+       { command = "env RUST_BACKTRACE=1 RUST_LOG=swayr=debug swayrd > /tmp/swayrd.log 2>&1"; }
+
       ];
     };
 
@@ -242,8 +244,9 @@ in
     # output HDMI-A-1 bg ~/wallpaper.png stretch
     # TODO remove the config.shared stuff
     # create option for the for_window popups
-    extraConfig = builtins.readFile ../../config/i3/config.shared + ''
+    #       include ~/.config/i3/config.shared
 
+    extraConfig = ''
       # Use Mouse+$mod to drag floating windows to their wanted position
       floating_modifier $mod
 
@@ -281,7 +284,7 @@ in
      # useful for electron based apps: slack / vscode 
     export NIXOS_OZONE_WL=1
 
-      # needs qt5.qtwayland in systemPackages
+    # needs qt5.qtwayland in systemPackages
     export QT_QPA_PLATFORM=wayland
     export SDL_VIDEODRIVER=wayland
     export _JAVA_AWT_WM_NONREPARENTING=1
@@ -296,7 +299,7 @@ in
  };
 
   xdg.configFile."sway/config".text = lib.mkBefore "
-	include ${../../config/i3/config.shared}
+	include ~/.config/i3/config.shared
    ";
 
 

@@ -1,4 +1,7 @@
 return {
+ {
+  'VidocqH/data-viewer.nvim'
+ },
  { 
   -- 'monkoose/fzf-hoogle.vim'
   dir = '/home/teto/fzf-hoogle.vim'

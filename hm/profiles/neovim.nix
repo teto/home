@@ -128,39 +128,31 @@ let
     {
       # we should have a file of the grammars as plugins
       # symlinkJoin
-     # Usage:
       plugin = pkgs.symlinkJoin {
        name = "tree-sitter-grammars";
        paths = with pkgs.neovimUtils; [
-          # tree-sitter-bash
-          # tree-sitter-c
-          # tree-sitter-lua
-          # tree-sitter-http
-          # tree-sitter-json
-          (grammarToPlugin pkgs.tree-sitter-grammars.tree-sitter-nix)
+
+          # pkgs.vimPlugins.nvim-treesitter-parsers.tree-sitter-nix
           # # tree-sitter-haskell # crashes with a loop
           # tree-sitter-python
           # tree-sitter-html  # for rest.nvim
           (grammarToPlugin pkgs.tree-sitter-grammars.tree-sitter-html) # for devdocs
           # (grammarToPlugin pkgs.tree-sitter-grammars.tree-sitter-norg)
           pkgs.vimPlugins.nvim-treesitter.grammarPlugins.norg
-          # tree-sitter-org-nvim
-          (grammarToPlugin pkgs.tree-sitter-grammars.tree-sitter-query)
+          pkgs.vimPlugins.nvim-treesitter.grammarPlugins.nix
+          pkgs.vimPlugins.nvim-treesitter.grammarPlugins.query
+          # (grammarToPlugin pkgs.tree-sitter-grammars.tree-sitter-query)
+          # pkgs.vimPlugins.nvim-treesitter-parsers.tree-sitter-query
+
           # (grammarToPlugin tree-sitter-just)
         ];
       };
-      # see https://github.com/NixOS/nixpkgs/issues/189838#issuecomment-1250993635 for rationale
-      # config = ''
-      # local available, config = pcall(require, 'nvim-treesitter.configs')
-      # config.setup {
-      # parser_install_dir = ${pkgs.buildEnv { name = "tree-sitter-grammars"; paths = tree-sitter-grammars; } }
-      # }
-      # '';
     }
 
 	# not upstreamed yet
     # (luaPlugin { plugin = nvim-lua-gf; })
     (luaPlugin { plugin = urlview-nvim; })
+    (luaPlugin { plugin = nvim-ufo; })
     # (luaPlugin { plugin = nvim-web-devicons; })
     (luaPlugin {
       plugin = trouble-nvim;
@@ -414,7 +406,7 @@ let
     fzfWrapper
 
     #  nvim-colorizer 
-    (luaPlugin { plugin = nvim-terminal-lua; config = "require('terminal').setup()"; })
+    # (luaPlugin { plugin = nvim-terminal-lua; config = "require('terminal').setup()"; })
 
 	# TODO hacking on this
     {
@@ -499,6 +491,11 @@ let
       plugin = vim-sneak;
       config = ''
         -- can press 's' again to go to next result, like ';'
+        vim.keymap.set('n', 'f', '<Plug>Sneak_f')
+        vim.keymap.set('n', 'F', '<Plug>Sneak_F')
+        vim.keymap.set('n', 't', '<Plug>Sneak_t')
+        vim.keymap.set('n', 'T', '<Plug>Sneak_T')
+
         vim.cmd [[
         let g:sneak#s_next = 1 
         let g:sneak#prompt = 'Sneak>'
@@ -506,11 +503,6 @@ let
         let g:sneak#streak = 0
         ]]
         '';
-      # map f <Plug>Sneak_f
-      # map F <Plug>Sneak_F
-      # map t <Plug>Sneak_t
-      # map T <Plug>Sneak_T
-
     })
 
     {
@@ -530,6 +522,7 @@ let
     })
 
     {
+      # 'gcc' to comment line
       plugin = vim-commentary;
     }
 

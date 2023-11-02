@@ -1,4 +1,15 @@
 return {
+ {
+  -- 
+  'stevearc/oil.nvim'
+  , config = function ()
+      require("oil").setup({
+        -- Oil will take over directory buffers (e.g. `vim .` or `:e src/`)
+        -- Set to false if you still want to use netrw.
+        default_file_explorer = true,
+     })
+   end
+ },
 {
   'mawkler/modicator.nvim',
   config = function()
@@ -7,8 +18,10 @@ return {
       show_warnings = false,
      })
   end,
-},
-   { 'levouh/tint.nvim',
+ },
+   {
+    -- dim inactive windows
+    'levouh/tint.nvim',
    config = function ()
        -- Default configuration
        -- available in nixpkgs tint-nvim
@@ -28,14 +41,15 @@ return {
           })
       end
   },
-  { 'romgrk/kirby.nvim',
-  dependencies = {
-  --     -- { 'romgrk/fzy-lua-native', build = 'make install' },
-      -- { 'romgrk/kui.nvim' },
-    },
-  },
+  -- { 'romgrk/kirby.nvim',
+  -- dependencies = {
+  -- --     -- { 'romgrk/fzy-lua-native', build = 'make install' },
+  --     -- { 'romgrk/kui.nvim' },
+  --   },
+  -- },
     -- provides 'NvimTree'
     { 'kyazdani42/nvim-tree.lua', lazy = true},
+
  -- {
  --        'rcarriga/nvim-notify',
  --        config = function()
@@ -67,6 +81,7 @@ return {
  --            vim.notify = require('notify')
  --        end,
  --    },
+
    { 'simrat39/desktop-notify.nvim',
    config = function ()
      require("desktop-notify").override_vim_notify()
@@ -89,7 +104,7 @@ return {
     'adlawson/vim-sorcerer',
     -- use 'npxbr/gruvbox.nvim' " requires lus
     'vim-scripts/Solarized',
-    {'kevinhwang91/nvim-ufo', dependencies = {'kevinhwang91/promise-async'}},
+    -- {'kevinhwang91/nvim-ufo', dependencies = {'kevinhwang91/promise-async'}},
     'romainl/flattened',
     { 'protex/better-digraphs.nvim', lazy=true },
     'NLKNguyen/papercolor-theme',
