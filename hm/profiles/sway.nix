@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ lib, pkgs, ... }:
 let
   # key modifier
   mod = "Mod1";
@@ -32,6 +32,11 @@ in
     waybar
     # eventually ironbar
   ];
+
+  programs.swayr = {
+   enable = true;
+   systemd.enable = true;
+  };
 
   # https://github.com/rycee/home-manager/pull/829
   services.swayidle = {
@@ -233,7 +238,7 @@ in
 
       startup = [
        { command =  "${term} ncmpcpp"; }
-       { command = "env RUST_BACKTRACE=1 RUST_LOG=swayr=debug swayrd > /tmp/swayrd.log 2>&1"; }
+       # { command = "env RUST_BACKTRACE=1 RUST_LOG=swayr=debug swayrd > /tmp/swayrd.log 2>&1"; }
 
       ];
     };
@@ -309,32 +314,39 @@ in
   };
 
   # env RUST_BACKTRACE=1 RUST_LOG=swayr=debug swayrd > /tmp/swayrd.log 2>&1
-  systemd.user.services.swayr = {
-    Unit = {
-      Description = "Swayr";
-      # Requires = [ "tray.target" ];
-      # sway ?
-      After = [ "tray.target" ];
-      # PartOf = [ "graphical-session.target" ];
-      # X-Restart-Triggers = mkIf (cfg.settings != { }) [ "${iniFile}" ];
-    };
+  # https://git.sr.ht/~tsdh/swayr/tree/main/item/swayr/etc/swayrd.service
+  # systemd.user.services.swayr = {
+  #   Unit = {
+  #    Type="simple";
+  #    Environment="RUST_BACKTRACE=1";
+  #    Description = "Swayr";
+  #    Documentation="https://sr.ht/~tsdh/swayr/";
+# # PartOf=sway-session.target
+# # After=sway-session.target
+  #     # Requires = [ "tray.target" ];
+  #     # sway ?
+  #     After = [ "tray.target" ];
+  #     # PartOf = [ "graphical-session.target" ];
+  #     # X-Restart-Triggers = mkIf (cfg.settings != { }) [ "${iniFile}" ];
+  #   };
 
-    # Install = { WantedBy = [ "tray.target" ]; };
+  #   Install = { WantedBy = [ "tray.target" ]; };
 
-    Service = {
-      # Environment = "PATH=${config.home.profileDirectory}/bin:${pkgs.grim}/bin";
-      ExecStart = "${pkgs.swayr}/bin/swayr";
-      # Restart = "on-abort";
+  #   Service = {
+  #     # Environment = "PATH=${config.home.profileDirectory}/bin:${pkgs.grim}/bin";
+  #     ExecStart = "${pkgs.swayr}/bin/swayr";
+  #     Restart="on-failure";
+  #     # Restart = "on-abort";
 
-      # Sandboxing.
-      # LockPersonality = true;
-      # MemoryDenyWriteExecute = true;
-      # NoNewPrivileges = true;
-      # PrivateUsers = true;
-      # RestrictNamespaces = true;
-      # SystemCallArchitectures = "native";
-      # SystemCallFilter = "@system-service";
-    };
-  };
+  #     # Sandboxing.
+  #     # LockPersonality = true;
+  #     # MemoryDenyWriteExecute = true;
+  #     # NoNewPrivileges = true;
+  #     # PrivateUsers = true;
+  #     # RestrictNamespaces = true;
+  #     # SystemCallArchitectures = "native";
+  #     # SystemCallFilter = "@system-service";
+  #   };
+  # };
 
 }

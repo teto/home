@@ -32,8 +32,14 @@ let
     gitAndTools.git-recent # 
     gitAndTools.gitbatch # to fetch form several repos at once
     gitAndTools.lab
+
+
 	haskellPackages.fast-tags
     hurl # http tester
+
+    llm-ls # needed by the neovim plugin
+
+    
     perf-tools
 
 	inotify-tools # for inotify-wait notably
@@ -241,7 +247,7 @@ in
     enable = true;
 	browsers = [ 
 	 "firefox"
-	 # "chromium"
+	 "chromium"
 	];
   };
 

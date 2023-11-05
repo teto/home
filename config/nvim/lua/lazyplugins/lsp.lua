@@ -1,5 +1,36 @@
 return {
  {'neovim/nvim-lspconfig' }, -- while fuzzing details out
+ {
+
+   -- LLMToggleAutoSuggest enables/disables automatic "suggest-as-you-type" suggestions
+   -- LLMSuggestion is used to manually request a suggestion
+  'huggingface/llm.nvim' 
+ -- , config = function ()
+ , opts =  {
+  tokens_to_clear = { "<EOT>" },
+  fim = {
+    enabled = true,
+    prefix = "<PRE> ",
+    middle = " <MID>",
+    suffix = " <SUF>",
+  },
+  -- can be overriden via LLM_NVIM_MODEL
+  model = "codellama/CodeLlama-13b-hf",
+  context_window = 4096,
+  tokenizer = {
+    repository = "codellama/CodeLlama-13b-hf",
+  },
+  lsp = {
+    bin_path = '/nix/store/ngay8qxw0bnirwsnjsk84bdcsbd2q9kc-llm-ls-0.4.0/bin/llm-ls',
+    -- version = "0.4.0",
+  },
+  enable_suggestions_on_startup = true,
+  enable_suggestions_on_files = "*", -- pattern matching syntax to enable suggestions on specific files, either a string or a list of strings
+}
+
+
+
+ },
  -- shows a lightbulb where a codeAction is available
  -- { 'kosayoda/nvim-lightbulb',
  -- 	config = function ()

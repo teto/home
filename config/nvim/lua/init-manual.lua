@@ -21,6 +21,9 @@ if not vim.loop.fs_stat(lazypath) then
 end-- require("vim.lsp._watchfiles")._watchfunc = require("vim._watch").watch
 -- local ffi = require 'ffi'
 
+
+---  set guicursor as a red block in normal mode
+
 -- workaround slow neovim https://github.com/neovim/neovim/issues/23725
 local ok, wf = pcall(require, "vim.lsp._watchfiles")
 if ok then
