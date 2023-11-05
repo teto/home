@@ -209,10 +209,10 @@ in
     "${mod}+Return" = "exec --no-startup-id ${term}";
     "${mod}+Shift+Return" = ''exec --no-startup-id ${term} -d "$(${toString ../../bin/kitty-get-cwd.sh})"'';
 
-    "${mod}+Tab" = "exec \"${pkgs.rofi}/bin/rofi -modi 'drun' -show drun\"";
+    "${mod}+Tab" = "exec ${pkgs.rofi}/bin/rofi -modi 'drun' -show drun";
     # "${mod}+Ctrl+Tab" = "exec \"${pkgs.rofi}/bin/rofi -modi 'window' -show run\"";
     # TODO dwindow exclusively with WIN
-    "${mad}+Tab" = "exec \"${pkgs.swayr}/bin/swayr switch-window";
+    "${mad}+Tab" = "exec ${pkgs.swayr}/bin/swayr switch-window";
     "${mad}+a" = "exec \"${pkgs.rofi}/bin/rofi -modi 'run,drun,window,ssh' -show window\"";
     # "${mad}+Tab" = "exec \"${pkgs.rofi}/bin/rofi -modi 'run,drun,window,ssh' -show window\"";
 
