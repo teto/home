@@ -137,7 +137,7 @@ let
           # tree-sitter-python
           # tree-sitter-html  # for rest.nvim
           (grammarToPlugin pkgs.tree-sitter-grammars.tree-sitter-html) # for devdocs
-          # (grammarToPlugin pkgs.tree-sitter-grammars.tree-sitter-norg)
+          pkgs.vimPlugins.nvim-treesitter.grammarPlugins.org
           pkgs.vimPlugins.nvim-treesitter.grammarPlugins.norg
           pkgs.vimPlugins.nvim-treesitter.grammarPlugins.nix
           pkgs.vimPlugins.nvim-treesitter.grammarPlugins.query
@@ -608,6 +608,7 @@ in
      ;
 
     extraPackages = with pkgs; [
+      emacs # for orgmode-babel
       lua51Packages.luacheck
       nil # a nix lsp
       shellcheck

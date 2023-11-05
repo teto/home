@@ -32,6 +32,8 @@ let
   ];
 
   orgmodePlugins = with pkgs.vimPlugins; [
+   # TODO add     'mrshmllow/orgmode-babel.nvim',
+
     (luaPlugin {
       # matches nvim-orgmode
       plugin = orgmode;
@@ -206,6 +208,7 @@ in
 
 
   config = lib.mkMerge [
+    # TODO add orgmode-babel and emacs to neovim
 
     (mkIf cfg.orgmode.enable {
       programs.neovim.plugins = cfg.orgmode.plugins;

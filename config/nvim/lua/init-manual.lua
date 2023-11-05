@@ -886,6 +886,9 @@ vim.filetype.add({
 	}
 })
 
+-- vim.keymap.set("n", "<Plug>HelloWorld", function() print("Hello World!") end)
+-- vim.keymap.set("n", "gs", "<Plug>HelloWorld")
+
 vim.api.nvim_set_keymap('n', ',a', '<Plug>(Luadev-Run)', { noremap = false, silent = false })
 vim.api.nvim_set_keymap('v', ',,', '<Plug>(Luadev-Run)', { noremap = false, silent = false })
 vim.api.nvim_set_keymap('n', ',,', '<Plug>(Luadev-RunLine)', { noremap = false, silent = false })
