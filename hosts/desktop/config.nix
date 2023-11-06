@@ -4,6 +4,7 @@
     ./hardware.nix
     ./sshd.nix
     ./sops.nix
+    ./teto/sops.nix
     ./tailscale.nix
 
     # to test core-ws

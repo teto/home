@@ -1,7 +1,9 @@
 { config, flakeInputs, pkgs, lib, system, ... }:
 let
+
   pass-custom = (pkgs.pass.override { waylandSupport = true; }).withExtensions (ext:
     with ext; [ pass-import ]);
+
 
   devPkgs = with pkgs; [
     # TODO pass to vim makeWrapperArgs
@@ -124,7 +126,6 @@ let
       duf # better df (rust)
       dogdns # dns solver "dog"
       ncdu # to see disk usage
-      nomacs # image viewer
       desktop-file-utils # to get desktop
       font-manager
       # gthumb # image manager, great to tag pictures
@@ -162,7 +163,10 @@ let
       wireshark
       xarchiver # to unpack/pack files
       # zathura # broken
-      ytfzf # browse youtube
+
+      # ytfzf # browse youtube
+      # nomacs # image viewer
+
       ranger # or joshuto ? see hm configuration
       rsync
       ripgrep

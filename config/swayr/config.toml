@@ -3,7 +3,7 @@ executable = 'fuzzel'
 args = [
     '--dmenu',
      '--prompt=🪟❯ ',
-     '--width=100',
+     '--width=100'
 ]
 
 [format]

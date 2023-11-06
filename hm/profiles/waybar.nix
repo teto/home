@@ -169,11 +169,18 @@ in
           };
           "custom/notification" = {
             tooltip = false;
-            format = "{icon}";
-            # format = "{text} {icon}";
+            # format = "{icon}";
+            format = "{} {icon}";
+
             format-icons = {
-              notification = "<span foreground='red'><sup>notifs</sup></span>";
-              none = "";
+    # //         "5": "",
+    # //         "urgent": "",
+    # //         "focused": "",
+    # //         "default": ""
+
+    # ��
+              notification = "<span foreground='red'><span>";
+              none = "  ";
               inhibited-notification = "inhibited<span foreground='red'><sup>toto</sup></span>";
               inhibited-none = "0";
               # Do Not Disturb

@@ -43,7 +43,7 @@ return {
         load = {
           ["core.defaults"] = {}, -- Loads default behaviour
           ["core.concealer"] = {}, -- Adds pretty icons to your documents
-          ['core.ui.calendar'] = {},
+          -- ['core.ui.calendar'] = {}, -- fails on stable nvim
           ["core.dirman"] = { -- Manages Neorg workspaces
             config = {
               workspaces = {

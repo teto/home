@@ -10,8 +10,14 @@ let
 
   # taken from the official flake
   # must be an unwrapped version
-  # myPackage = pkgs.neovim-unwrapped;
-  myPackage = flakeInputs.neovim.packages."${pkgs.system}".neovim;
+  myPackage = pkgs.neovim-unwrapped;
+  # myPackage = flakeInputs.neovim.packages."${pkgs.system}".neovim;
+ 
+  # libuv_147 = pkgs.libuv.overrideAttrs(oa: {
+  #  version = 
+  # });
+
+
 
   genBlockLua = title: content:
     ''
@@ -608,7 +614,7 @@ in
      ;
 
     extraPackages = with pkgs; [
-      emacs # for orgmode-babel
+      # emacs # for orgmode-babel
       lua51Packages.luacheck
       nil # a nix lsp
       shellcheck

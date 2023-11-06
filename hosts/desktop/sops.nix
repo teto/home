@@ -10,11 +10,4 @@
   # sops.age.keyFile = "secrets/age.key";
   sops.age.keyFile = "/home/teto/home/secrets/age.key";
 
-  sops.secrets."huggingfaceToken" = {
-    mode = "0440";
-    # TODO only readable by gitlab
-    owner = config.users.users.teto.name;
-    group = config.users.users.nobody.group;
-  };
-
 }

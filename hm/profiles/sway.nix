@@ -33,10 +33,17 @@ in
     # eventually ironbar
   ];
 
+  ### swayr configuration {{{
   programs.swayr = {
    enable = true;
    systemd.enable = true;
   };
+  # 
+  systemd.user.services.swayrd.Service = {
+   Environment = [ "PATH=${lib.makeBinPath [ pkgs.fuzzel pkgs.wofi ]}" 
+   ];
+  };
+  # }}}
 
   # https://github.com/rycee/home-manager/pull/829
   services.swayidle = {

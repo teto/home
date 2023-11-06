@@ -82,15 +82,16 @@ return {
  --        end,
  --    },
 
-   { 'simrat39/desktop-notify.nvim',
-   config = function ()
-     require("desktop-notify").override_vim_notify()
-    end
-    -- dependencies = { 'nvim-lua/plenary.nvim'}
-   },
+ -- I use my own
+   -- { 'simrat39/desktop-notify.nvim',
+   -- config = function ()
+   --   require("desktop-notify").override_vim_notify()
+   --  end
+   --  -- dependencies = { 'nvim-lua/plenary.nvim'}
+   -- },
+    { 'protex/better-digraphs.nvim', lazy=true },
 
     -- colorschemes
-    'NTBBloodbath/sweetie.nvim',
     'Matsuuu/pinkmare',
     'flrnd/candid.vim',
     'uga-rosa/ccc.nvim',
@@ -106,7 +107,6 @@ return {
     'vim-scripts/Solarized',
     -- {'kevinhwang91/nvim-ufo', dependencies = {'kevinhwang91/promise-async'}},
     'romainl/flattened',
-    { 'protex/better-digraphs.nvim', lazy=true },
     'NLKNguyen/papercolor-theme',
     'marko-cerovac/material.nvim',
     'shaunsingh/oxocarbon.nvim',
@@ -114,7 +114,6 @@ return {
  -- load 'after/colors'
  -- 'calvinchengx/vim-aftercolors',
 
-    'raddari/last-color.nvim',
     {
         'rose-pine/neovim',
         name = 'rose-pine',
@@ -122,6 +121,8 @@ return {
         -- config = function()
         -- end
     },
+    'raddari/last-color.nvim',
+
 -- shade currently broken
 --	''
 --	shade.setup({

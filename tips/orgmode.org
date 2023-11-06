@@ -12,7 +12,7 @@ Open agenda prompt: <Leader>oa
 Open capture prompt: <Leader>oc
 
 
-#+BEGIN_SRC bash
+#+BEGIN_SRC sh
 echo "hello world"
 #+END_SRC
 

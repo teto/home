@@ -1,0 +1,17 @@
+@document.meta
+tangle: ./init.lua
+@end
+Hello 
+
+#tangle init.lua
+@code lua
+print("Hello World!")
+@end
+
+#exec.start 2023.11.03T00.32.43CET
+#exec.end 0.0000s 0
+@result
+Hello World!
+
+
+@end

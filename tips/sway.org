@@ -4,8 +4,15 @@
 
 * Failed to query DRI3 DRM FD
 
+* to restart sway
+
+#+BEGIN_SRC bash
 restart 
 swaymsg reload
+#+END_SRC
+
+* sway notification center tricks
+swaync-client --reload-config
 
 # add to sway config
 xwayland disable

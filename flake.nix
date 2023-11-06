@@ -47,7 +47,10 @@
       url = "github:junegunn/fzf-git.sh";
       flake = false;
     };
-
+    fenix = {
+     # used for nightly rust devtools
+     url= "github:nix-community/fenix"; inputs."nixpkgs".follows = "nixpkgs"; 
+    };
     peerix.url = "github:cid-chan/peerix";
     nixos-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nixos-stable.url = "github:nixos/nixpkgs/nixos-23.05";
@@ -125,6 +128,10 @@
             # self.inputs.nix.overlays.default
           ];
           config = {
+           # on desktop
+           cudaSupport = true; 
+           checkMeta = false;
+           # showDerivationWarnings = ["maintainerless"];
            allowUnfree = true;
               allowUnfreePredicate = pkg: builtins.elem (nixpkgs.${system}.legacyPackages.lib.getName pkg) [
                "codeium"
@@ -476,6 +483,9 @@
           # });
           firefoxAddonsTeto  = import ./overlays/firefox/generated.nix {
             inherit (prev) buildFirefoxXpiAddon fetchurl lib stdenv;
+          };
+          git-repo-manager = prev.callPackage ./pkgs/git-repo-manager {
+            fenix = self.inputs.fenix;
           };
         };
 

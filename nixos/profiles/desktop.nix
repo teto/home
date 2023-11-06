@@ -138,7 +138,7 @@
   # then coredumpctl debug will launch gdb !
   # boot.kernel.sysctl."kernel.core_pattern" = "core"; to disable.
   # security.pam.loginLimits
-  systemd.coredump.enable = true;
+  systemd.coredump.enable = false;
 
   # see 
     #JournalSizeMax=767M

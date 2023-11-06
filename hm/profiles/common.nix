@@ -26,7 +26,7 @@
     netcat-gnu # plain 'netcat' is the bsd one
     # nvimpager # 'less' but with neovim
     strace
-    tailspin  #  a log viewer based on less ("spin" is the executable)
+    tailspin  #  a log viewer based on less ("spin" or "tsspin" is the executable)
     tig
     xdg-utils
     wttrbar # for meteo

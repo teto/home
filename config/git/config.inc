@@ -2,7 +2,6 @@
 [core]
 # sshCommand=ssh -vvv
 # compactionHeuristic
-fsmonitor = true
   # whitespace = space-before-tab
 compression = 0
 # gitproxy  = git-proxy

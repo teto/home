@@ -52,6 +52,11 @@ vim.opt.termguicolors = true
 -- TODO package last-color in nix
 vim.opt.rtp:prepend(lazypath)
 -- vim.opt.rtp:prepend("/home/teto/rocks.nvim")
+
+-- set it before loading vim plugins like autosession
+-- ,localoptions
+vim.o.sessionoptions="blank,buffers,curdir,help,tabpages,winsize,winpos"
+
 require('lazy').setup('lazyplugins', {
 	lockfile = vim.fn.stdpath('cache') .. '/lazy-lock.json',
 	dev = {
@@ -220,7 +225,6 @@ vim.opt.undodir = vim.fn.stdpath('data') .. '/undo/'
 -- vim.opt.sessionoptions:remove('terminal')
 -- vim.opt.sessionoptions:remove('help')
 -- folds,
-vim.o.sessionoptions="blank,buffers,curdir,help,tabpages,winsize,winpos,localoptions"
 --}}}
 
 -- annoying in fzf-lua ?
@@ -263,6 +267,13 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		-- require'lsp_signature'.on_attach(client, bufnr)
 	end
 })
+
+vim.api.nvim_create_autocmd("VimLeave", {
+	desc = "test to fix stacktrace",
+	callback = function(args)
+	end
+})
+
 
 function string:endswith(ending)
     return ending == "" or self:sub(-#ending) == ending
@@ -907,6 +918,7 @@ vim.o.grepprg = 'rg --vimgrep --no-heading --smart-case'
 require('teto.context_menu').setup_rclick_menu_autocommands()
 require('teto.lsp').set_lsp_lines(true)
 require('teto.rest')
+require('teto.notify').override_vim_notify()
 
 -- vim.g.sonokai_style = 'atlantis'
 -- vim.cmd([[colorscheme sonokai]])

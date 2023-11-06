@@ -6,3 +6,5 @@ https://github.com/ggerganov/llama.cpp/
 
 ollama serve
 ollama list
+
+llama-gpt

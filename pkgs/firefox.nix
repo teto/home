@@ -15,12 +15,18 @@ let
       })
       # https://addons.mozilla.org/firefox/downloads/file/3687872/tree_style_tab_-3.6.3-fx.xpi
     ];
+
+    # see about:policies#documentation
     extraPolicies = {
       CaptivePortal = false;
       DisableFirefoxStudies = true;
       DisablePocket = true;
       DisableTelemetry = true;
       DisableFirefoxAccounts = true;
+      DisableAppUpdate = true;
+      DisplayMenuBar = "default-off";
+      # HomepageURL = "";
+      # Extensiosn = 
       FirefoxHome = {
         Pocket = false;
         Snippets = false;
