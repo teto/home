@@ -2,7 +2,9 @@
 {
    home.packages = with pkgs; [
 
-    ollama
+    # look at nixified-ai
+    ollama # st config.withCuda to enable 
+    # llama-gpt machine
    ];
 
 }

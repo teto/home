@@ -16,22 +16,4 @@ Open capture prompt: <Leader>oc
 echo "hello world"
 #+END_SRC
 
-#+BEGIN_SRC lua
-print("Ran lua bloc")
-#+END_SRC
-
-#+BEGIN_SRC bash
-
-echo "lol"  # << you can run sniprun on this line
-
-
-
-\# or the whole visual selection following:
-
-for i in {1..4};do
-
-echo $i
-
-done
-#+END_SRC
 

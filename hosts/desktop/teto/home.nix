@@ -67,9 +67,6 @@
     options = [ "add Mod1 Alt_R" ];
   };
 
-  # for blue tooth applet; must be installed systemwide
-  # services.blueman-applet.enable = false;
-
   services.nextcloud-client.enable = true;
 
   services.mpd = {

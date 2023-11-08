@@ -5,8 +5,10 @@
   imports = [
    ./sway.nix
    ./waybar.nix
+    ../../hm/profiles/emacs.nix
     ../../hm/profiles/nova.nix
     ../../hm/profiles/qutebrowser.nix
+
 
    ../desktop/teto/home.nix
    ../desktop/teto/neovim.nix

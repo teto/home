@@ -356,6 +356,9 @@ in
     VIM_SOURCE_DIR = "$HOME/vim";
   };
 
+  # export XDG_ settings
+  # systemd.user.sessionVariables = {};
+
   # https://github.com/NixOS/nixpkgs/issues/196651
   manual.manpages.enable = true;
 

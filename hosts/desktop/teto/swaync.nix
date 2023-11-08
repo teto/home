@@ -77,14 +77,11 @@
 		# }
 	# }
 
-
-
-
-
   };
 
   systemd.enable = true;
  };
- # xdg.configFile."swaync/config.json" = lib.mkForce {};
- xdg.configFile."swaync/config.json".enable = false;
+
+ systemd.user.services.swaync.path = [ pkgs.wlogout ];
+ # xdg.configFile."swaync/config.json".enable = false;
 }

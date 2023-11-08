@@ -51,6 +51,14 @@
         {
           "label": "",
           "command": "~/.config/rofi/rofi-bluetooth"
+        },
+        {
+          "label": "",
+          "command": "notify-send -m 'toto'"
+        },
+        {
+          "label": "",
+          "command": "wlogout"
         }
       ]
     },

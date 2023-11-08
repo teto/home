@@ -116,7 +116,7 @@
     # High quality BT calls
     bluetooth = {
       enable = true;
-      powerOnBoot = false;
+      powerOnBoot = true;
       # hsphfpd.enable = false; # conflicts with pipewire
     };
     opengl = {

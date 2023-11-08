@@ -56,11 +56,6 @@
     enableRedistributableFirmware = true;
     sane.enable = true;
     # High quality BT calls
-    bluetooth = {
-      enable = true;
-      powerOnBoot = false;
-      # hsphfpd.enable = false; # conflicts with pipewire
-    };
     opengl = {
       enable = true;
       driSupport = true;
