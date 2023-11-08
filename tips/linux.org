@@ -1,0 +1,2 @@
+
+systemd-run --user --scope -pMemoryMax=<MemoryLimit> -pMemorySwapMax=<SwapMemoryLimit> nixpkgs-review rev HEAD

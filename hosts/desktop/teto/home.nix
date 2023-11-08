@@ -36,7 +36,7 @@
     ../../../hm/profiles/vscode.nix
     ../../../hm/profiles/extra.nix
       # custom modules
-    # ../../hm/profiles/emacs.nix
+    ../../../hm/profiles/emacs.nix
     # ../../hm/profiles/weechat.nix
    ] ++ lib.optionals withSecrets [
     ./mail.nix

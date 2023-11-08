@@ -52,14 +52,14 @@ in
             # "custom/mymodule#with-css-id"
             # "temperature"
             "idle_inhibitor"
-            "custom/notification"
             "custom/github"
             "custom/notmuch"
             "custom/weather" 
             "wireplumber"
             "tray"
-            "custom/power-menu"
+            # "custom/power-menu"
             "clock"
+            "custom/notification"
           ];
           tray = {
             # "icon-size": 21,

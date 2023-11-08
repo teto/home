@@ -208,7 +208,7 @@ in
 	# mkBefore
     # ;config.xsession.windowManager.i3.config.keybindings
     keybindings = sharedConfig.sharedKeybindings // {
-     grave = "${pkgs.swaynotificationcenter}/bin/swaync-client -swb";
+     "${mod}+grave" = "${pkgs.swaynotificationcenter}/bin/swaync-client -swb";
      "${mod}+p" = "exec ${pkgs.tessen}/bin/tessen --dmenu=rofi";
 
         "$GroupFr+$mod+ampersand" = "layout toggle all";
