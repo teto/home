@@ -24,6 +24,10 @@
   "hide-on-action": true,
   "script-fail-notify": true,
   "scripts": {
+    "example-script": {
+      "exec": "echo 'Do something...'",
+      "urgency": "Normal"
+    }
   },
   "notification-visibility": {
   },
@@ -31,11 +35,8 @@
     "buttons-grid",
     "menubar#label",
     "backlight",
-    "backlight#KB",
 	"mpris",
 	"volume",
-	"backlight",
-	"menubar",
     "inhibitors",
     "title",
     "dnd",
@@ -121,20 +122,15 @@
       "device": "intel_backlight",
       "min": 10
     },
-    "backlight#KB": {
-      "label": " ",
-      "device": "asus::kbd_backlight",
-      "subsystem": "leds"
-    },
     "inhibitors": {
       "text": "Inhibitors",
       "button-text": "Clear All Notifs",
       "clear-all-button": true
     },
     "title": {
-      "text": "Notifications",
+      "text": "Notifications TITLE",
       "clear-all-button": true,
-      "button-text": "Clear All"
+      "button-text": "Clear All (or not)"
     },
     "dnd": {
       "text": "Do Not Disturb"

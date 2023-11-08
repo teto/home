@@ -3,7 +3,6 @@
 {
   home.packages = with pkgs; [
   #   # lgogdownloader
-    lutris
   ];
 
   services.upower.percentageLow = 35;

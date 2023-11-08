@@ -1,16 +1,36 @@
 return {
  {
+  -- todo pass the branch with tangle implemetend
+  -- https://github.com/nvim-orgmode/orgmode/pull/617
   'nvim-orgmode/orgmode',
    event = 'VeryLazy',
   config = function ()
    require('orgmode').setup_ts_grammar()
    require('orgmode').setup{
       org_capture_templates = {'~/nextcloud/org/*', '~/orgmode/**/*'},
-      org_default_notes_file = '~/orgmode/refile.org',
+      org_default_notes_file = '~/home/refile.org',
       -- TODO add templates
       org_agenda_templates = {
        t = { description = 'Task', template = '* TODO %?\n  %u' }
       },
+      -- check lua/orgmode/config/defaults.lua to see their list
+      mappings = {
+       disable_all = false,
+        -- global = {
+        -- }
+      },
+      emacs_config = {
+        -- why is it needed ?
+        executable_path = 'emacs',
+        config_path = '$HOME/.emacs.d/init.el',
+      },
+      ui = {
+       -- wtf is that ?
+        menu = {
+          handler = nil,
+        },
+      },
+
    }
 
   end

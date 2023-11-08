@@ -32,6 +32,7 @@
     wlr-randr # like xrandr
 
     # wayprompt
+    wev # equivalent of xev, to find the name of keys for instance
     wshowkeys
   ];
 

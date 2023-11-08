@@ -31,6 +31,8 @@
 
   ];
 
+  services.power-profiles-daemon.enable = true;
+
   # TODO conditionnally enable it
   # networking.wireless.iwd.enable = true;
   boot.loader.systemd-boot.enable = true;

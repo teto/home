@@ -67,29 +67,29 @@ in
           };
           mpd = {
            # {album} - 
-            format = "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ⸨{songPosition}|{queueLength}⸩ ";
-            #  Disconnected ";
-            format-disconnected = "<span color=\"#f53c3c\"></span>";
+            format = "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) â¸¨{songPosition}|{queueLength}â¸© ï";
+            #  Disconnected ï";
+            format-disconnected = "<span color=\"#f53c3c\">ï´</span>";
             # {consumeIcon}{randomIcon}{repeatIcon}
-            format-stopped = "{singleIcon}Stopped ";
+            format-stopped = "{singleIcon}Stopped ï";
             unknown-tag = "N/A";
             interval = 2;
             consume-icons = {
-              "on" = " ";
+              "on" = "ï ";
             };
             random-icons = {
-              off = "<span color=\"#f53c3c\"></span> ";
-              on = " ";
+              off = "<span color=\"#f53c3c\">ï´</span> ";
+              on = "ï´ ";
             };
             repeat-icons = {
-              on = " ";
+              on = "ï ";
             };
             "single-icons" = {
-              on = "1 ";
+              on = "ï1 ";
             };
             state-icons = {
-              paused = "";
-              playing = "";
+              paused = "ï";
+              playing = "ï";
             };
 
             # TODO give current artist/song
@@ -101,18 +101,18 @@ in
             # use a screensaver icon
             format = "{icon}";
             format-icons = {
-              activated = "";
-              deactivated = "";
+              activated = "ï®";
+              deactivated = "ï°";
             };
 
           };
           wireplumber = {
             format = "{volume}% {icon}";
-            # "format-muted": ""
+            # "format-muted": "ï¦"
             # <sup> </sup> 
-            format-muted = "<span background='red'></span>";
+            format-muted = "<span background='red'>ï¦</span>";
             on-click = myLib.muteAudio;
-            format-icons = [ "" "" "" ];
+            format-icons = [ "ï¦" "ï§" "ï¨" ];
           };
           clock = {
             # "timezone": "America/New_York",
@@ -134,7 +134,7 @@ in
 
           };
           # cpu= {
-          #     format= "{usage}% ";
+          #     format= "{usage}% ï";
           #     tooltip= false;
           # };
           "sway/workspaces" = {
@@ -145,21 +145,21 @@ in
             # disable-scroll-wraparound = true;
             # "disable-markup" : false,
             # format-icons = {
-            #    "1" = "";
-            #    "2" = "";
-            #    "3" = "";
+            #    "1" = "ï";
+            #    "2" = "ï©";
+            #    "3" = "ï¡";
             # };
           };
           # temperature = {
           #   # "thermal-zone": 2,
           #   # "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
           #   critical-threshold = 80;
-          #   # // "format-critical": "{temperatureC}°C {icon}",
-          #   format = "{temperatureC}°C {icon}";
-          #   format-icons = [ "" "" "" ];
+          #   # // "format-critical": "{temperatureC}Â°C {icon}",
+          #   format = "{temperatureC}Â°C {icon}";
+          #   format-icons = [ "ï«" "ï" "ï©" ];
           # };
           "custom/weather" = {
-            format = "{} °";
+            format = "{} Â°";
             tooltip = true;
             interval = 3600;
             # --hide-conditions
@@ -173,14 +173,14 @@ in
             format = "{} {icon}";
 
             format-icons = {
-    # //         "5": "",
-    # //         "urgent": "",
-    # //         "focused": "",
-    # //         "default": ""
+    # //         "5": "ïµ",
+    # //         "urgent": "ïª",
+    # //         "focused": "ï",
+    # //         "default": "ï"
 
-    # ��
-              notification = "<span foreground='red'><span>";
-              none = "  ";
+    # ïï¶ª
+              notification = "<span foreground='red'>ï³<span>";
+              none = " ï¶ ";
               inhibited-notification = "inhibited<span foreground='red'><sup>toto</sup></span>";
               inhibited-none = "0";
               # Do Not Disturb
@@ -197,7 +197,7 @@ in
             escape = true;
           };
           "custom/github" = {
-            format = "{} ";
+            format = "{} ï";
             return-type = "json";
             # The interval (in seconds) in which the information gets polled
             restart_interval = 120;
@@ -209,10 +209,10 @@ in
           # TODO only on laptop
           network = {
             # // "interface": "wlp2*", // (Optional) To force the use of this interface
-            format-wifi = "{essid} ({signalStrength}%) ";
-            format-ethernet = "{ifname}: {ipaddr}/{cidr} ";
-            format-linked = "{ifname} (No IP) ";
-            format-disconnected = "Disconnected ⚠";
+            format-wifi = "{essid} ({signalStrength}%) ï«";
+            format-ethernet = "{ifname}: {ipaddr}/{cidr} ï";
+            format-linked = "{ifname} (No IP) ï";
+            format-disconnected = "Disconnected â ";
             format-alt = "{ifname}: {ipaddr}/{cidr}";
           };
 
@@ -228,7 +228,7 @@ in
                 };
             in
             {
-              format = " {} ";
+              format = " {}ï  ";
               max-length = 40;
               return-type = "json";
               # TODO run regularly
