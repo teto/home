@@ -10,6 +10,4 @@
   enable = true;
  };
 
-
- xdg.configFile."swaync/config.json".enable = false;
 }

@@ -1,8 +1,10 @@
 return {
   {
+   'gpanders/nvim-moonwalk',
   'kevinhwang91/nvim-bqf',
   opts = {
     preview = {
+     auto_preview = false,
      delay_syntax = 0
     }
     , func_map = { }
@@ -50,6 +52,8 @@ return {
         next = "j", -- next item
         help = "?" -- help menu
     },
+    auto_open = false,
+    auto_close = true
     },
  },
  -- { 'mhartington/formatter.nvim',

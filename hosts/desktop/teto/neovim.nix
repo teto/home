@@ -146,12 +146,14 @@ let
     }
     # { plugin = kui-nvim; }
     # FIX https://github.com/NixOS/nixpkgs/issues/169293 first
-    (luaPlugin {
-      plugin = telescope-frecency-nvim; 
-      config = ''
-       require'telescope'.load_extension('frecency')
-       '';
-    })
+
+    # (luaPlugin {
+    # broken
+    #   plugin = telescope-frecency-nvim; 
+    #   config = ''
+    #    require'telescope'.load_extension('frecency')
+    #    '';
+    # })
     (luaPlugin {
       plugin = nvimdev-nvim;
       optional = true;
