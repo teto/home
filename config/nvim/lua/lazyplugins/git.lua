@@ -1,5 +1,11 @@
 return {
-
+  {
+   'harrisoncramer/gitlab.nvim',
+   build = function () require("gitlab.server").build(true) end, -- Builds the Go binary
+   config = function()
+     require("gitlab").setup() -- Uses delta reviewer by default
+   end,
+  },
     -- review locally github PRs
     -- local has_octo, octo = pcall(require, 'octo')
     -- if has_octo then

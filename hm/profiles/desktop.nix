@@ -135,6 +135,7 @@ let
       pkgs.networkmanagerapplet # should
       wine
       hunspellDicts.fr-any
+      jaq # jq in rust
       libnotify
       # replace with rust-wormhole
       # magic-wormhole  # super tool to exchange secrets between computers
@@ -142,6 +143,7 @@ let
       mupdf.bin # evince does better too
       ncpamixer # pulseaudio TUI mixer
       noti # send notifications when a command finishes
+      ouch # to (de)compress files
       pass-custom # pass with extensions
       # pulseaudioFull # for pactl
       pavucontrol
@@ -170,6 +172,7 @@ let
       ranger # or joshuto ? see hm configuration
       rsync
       ripgrep
+      simple-scan
       unzip
     ]
     #   gnome.gnome-calculator # compare with qalqulate-gtk
