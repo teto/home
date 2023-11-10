@@ -11,6 +11,13 @@
 
   };
 
+  sops.secrets."gitlab/apiToken" = {
+    mode = "400";
+    owner = config.users.users.teto.name;
+    group = config.users.users.teto.group;
+
+  };
+
   sops.secrets.huggingfaceToken = {
     mode = "0440";
     # TODO only readable by gitlab

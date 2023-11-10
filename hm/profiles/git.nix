@@ -43,8 +43,8 @@ in
         # sshCommand = "ssh -vvv";
         sshCommand = "ssh";
 
-        monitor = "${pkgs.rs-git-fsmonitor}/bin/rs-git-fsmonitor";
-        fsmonitor = "${pkgs.rs-git-fsmonitor}/bin/rs-git-fsmonitor";
+        # might be broken/use too many fds ?
+        # fsmonitor = "${pkgs.rs-git-fsmonitor}/bin/rs-git-fsmonitor";
       };
 
       rebase = {

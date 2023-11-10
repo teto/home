@@ -318,6 +318,8 @@ let
   ];
   
   extraPackages = with pkgs; [
+    go # for gitlab.nvim, we can probably ditch it afterwards
+
       # luaPackages.lua-lsp
       # lua53Packages.teal-language-server
       codeium # ideally not needed and referenced by codeium-vim directly
@@ -368,7 +370,6 @@ let
       require('init-manual')
     '';
 
-    # TODO fix, doesn't work
     extraPackages = extraPackages;
  };
 
