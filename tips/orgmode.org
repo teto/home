@@ -11,10 +11,25 @@ Global mappins
 Open agenda prompt: <Leader>oa
 Open capture prompt: <Leader>oc
 
-
-#+BEGIN_SRC sh
-echo "hello world"
+#+NAME: test-title
+#+BEGIN_SRC sh 
+echo "> title"
 #+END_SRC
+
+#+RESULTS: test-title
+: > title
+
+
+#+NAME: test-sh
+#+BEGIN_SRC sh 
+echo "hello papy"
+#+END_SRC
+
+#+RESULTS: test-sh
+: hello papy
+
+#+RESULTS:
+: hello papy
 
 
 otot

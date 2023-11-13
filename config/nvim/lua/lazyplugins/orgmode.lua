@@ -50,7 +50,7 @@ return {
     cmd = { "OrgExecute", "OrgTangle" },
     opts = {
      -- by default, none are enabled
-     langs = { "python", "lua", "bash" },
+     langs = { "python", "lua", "shell" },
 
      -- paths to emacs packages to additionally load
      load_paths = {}
