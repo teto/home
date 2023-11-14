@@ -28,11 +28,11 @@ let
     # TODO it needs some extra care
     (luaPlugin { plugin = haskell-tools-nvim; })
 
-    (luaPlugin {
-      # run with :Diffview
-      plugin = diffview-nvim;
-      # optional = true;
-    })
+    # (luaPlugin {
+    #   # run with :Diffview
+    #   plugin = diffview-nvim;
+    #   # optional = true;
+    # })
 
     # (luaPlugin {
     #   # TODO move config hee

@@ -1,4 +1,18 @@
 return {
+ { 'jackMort/ChatGPT.nvim',
+   -- due to https://github.com/jackMort/ChatGPT.nvim/issues/265
+    commit = "24bcca7",
+    config = function()
+     -- passing OPENAI_API_KEY in environment for this to work
+     -- huge setup at https://github.com/jackMort/ChatGPT.nvim
+      require("chatgpt").setup({
+        -- api_key_cmd = "pass show chat.openai.com",
+        -- api_host_cmd = "echo -n 'api.openai.com'",
+        -- api_host_cmd = "echo -n '0.0.0.0:3000'"
+       })
+    end,
+ },
+
  {
     "ziontee113/ollama.nvim",
     -- dependencies = {

@@ -1,15 +1,23 @@
 return {
   {
    'harrisoncramer/gitlab.nvim',
+   enabled = false,
    build = function () require("gitlab.server").build(true) end, -- Builds the Go binary
    -- one can then run:
    -- require("gitlab").summary()
    -- require("gitlab").review()
    -- require("gitlab").pipeline()
+   -- dependencies = {
+
+   -- },
    config = function()
      require("gitlab").setup() -- Uses delta reviewer by default
    end,
   },
+  {
+   'sindrets/diffview.nvim' -- :DiffviewOpen
+  }
+
     -- review locally github PRs
     -- local has_octo, octo = pcall(require, 'octo')
     -- if has_octo then
@@ -140,10 +148,6 @@ return {
     --     })
     -- end
 
-    -- use 'sindrets/diffview.nvim' -- :DiffviewOpen
-
-    -- lua require('github-notifications.menu').notifications()
-    -- use 'rlch/github-notifications.nvim'
 
     --use { 'TimUntersberger/neogit',
     --	config = function ()

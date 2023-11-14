@@ -294,7 +294,6 @@ vim.api.nvim_create_autocmd("BufRead", {
 
 -- fugitive-gitlab {{{
 -- also add our token for private repos
-vim.g.fugitive_gitlab_domains = { 'https://git.novadiscovery.net' }
 -- }}}
 -- set guicursor="n-v-c:block-Cursor/lCursor,ve:ver35-Cursor,o:hor50-Cursor,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor,sm:block-Cursor"
 vim.opt.guicursor =
@@ -918,7 +917,11 @@ vim.o.grepprg = 'rg --vimgrep --no-heading --smart-case'
 require('teto.context_menu').setup_rclick_menu_autocommands()
 require('teto.lsp').set_lsp_lines(true)
 require('teto.rest')
-require('teto.notify').override_vim_notify()
+require('teto.secrets')
+
+
+-- commented out till https://github.com/ErikReider/SwayNotificationCenter/issues/323 gets implemented
+-- require('teto.notify').override_vim_notify()
 
 -- vim.g.sonokai_style = 'atlantis'
 -- vim.cmd([[colorscheme sonokai]])
@@ -928,3 +931,10 @@ require('teto.notify').override_vim_notify()
 local theme = require('last-color').recall() or 'sonokai'
 -- print("Setting colorscheme ", theme )
 vim.cmd(('colorscheme %s'):format(theme))
+
+-- https://github.com/neovim/neovim/issues/21856#issuecomment-1514723887
+vim.api.nvim_create_autocmd({ "VimLeave" }, {
+  callback = function()
+    vim.fn.jobstart('notify-send "closing nvim"', {detach=true})
+  end,
+})

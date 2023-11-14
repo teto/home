@@ -2,6 +2,18 @@ return {
  {
   'VidocqH/data-viewer.nvim'
  },
+  {
+    'mikesmithgh/kitty-scrollback.nvim',
+    enabled = true,
+    lazy = true,
+    cmd = { 'KittyScrollbackGenerateKittens', 'KittyScrollbackCheckHealth' },
+    event = { 'User KittyScrollbackLaunch' },
+    -- version = '*', -- latest stable version, may have breaking changes if major version changed
+    -- version = '^2.0.0', -- pin major version, include fixes and features that do not have breaking changes
+    config = function()
+      require('kitty-scrollback').setup()
+    end,
+  },
  -- { 
  --  -- 'monkoose/fzf-hoogle.vim'
  --  dir = '/home/teto/fzf-hoogle.vim'
@@ -37,22 +49,6 @@ return {
 --  'Exafunction/codeium.vim'
 -- },
  {
-  'mrcjkb/neotest-haskell',
-  -- -- 'nvim-neotest/neotest',
-  -- requires = {
-  --   -- ...,
-  --   'mrcjkb/neotest-haskell',
-  --   'nvim-treesitter/nvim-treesitter',
-  --   'nvim-lua/plenary.nvim',
-  -- }
- },
- { 'luckasRanarison/nvim-devdocs',
- -- needs a html treesitter
-  config = function()
-    require("nvim-devdocs").setup()
-  end
- },
- {
    'TrevorS/uuid-nvim',
    lazy = true,
    config = function()
@@ -61,19 +57,6 @@ return {
        case = 'upper',
      }
    end,
- },
- { 'jackMort/ChatGPT.nvim',
-   -- due to https://github.com/jackMort/ChatGPT.nvim/issues/265
-    -- commit = "24bcca7",
-    config = function()
-     -- passing OPENAI_API_KEY in environment for this to work
-     -- huge setup at https://github.com/jackMort/ChatGPT.nvim
-      require("chatgpt").setup({
-        -- api_key_cmd = "pass show chat.openai.com",
-        -- api_host_cmd = "echo -n 'api.openai.com'",
-        api_host_cmd = "echo -n '0.0.0.0:3000'"
-       })
-    end,
  },
  { dir = '/home/teto/neovim/jap.nvim',
   config = function ()

@@ -157,7 +157,8 @@ return {
   end
  },
  { 'j-hui/fidget.nvim',
-  tag = "legacy",
+ -- https://github.com/j-hui/fidget.nvim/blob/main/doc/fidget.md
+  -- tag = "legacy",
   config = function ()
    require"fidget".setup{
     align = {
