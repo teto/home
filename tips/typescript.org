@@ -1,4 +1,15 @@
-coimpiler is called "tsc"
+
+* install via nixpkgs
+
+compiler is called "tsc" available in nodePackages.typescript
+
+compilation goes through
+
+Needs
+
+careful outDir gets added to exclude files
+    "outDir": ".",
+
 
 https://github.com/Microsoft/TypeScript/issues/8760
 can be called with --traceResolution
