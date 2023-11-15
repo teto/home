@@ -921,7 +921,7 @@ require('teto.secrets')
 
 
 -- commented out till https://github.com/ErikReider/SwayNotificationCenter/issues/323 gets implemented
--- require('teto.notify').override_vim_notify()
+require('teto.notify').override_vim_notify()
 
 -- vim.g.sonokai_style = 'atlantis'
 -- vim.cmd([[colorscheme sonokai]])

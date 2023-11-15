@@ -84,15 +84,15 @@ function n {
 }
 alias n="nix develop"
 alias nb='nix build'
-alias nb1='nix build --option builders "$NOVA_AZURE1" -j0'
-alias n1='nix develop --option builders "$NOVA_AZURE1" -j0'
+alias nb1='nix build --option builders "$NOVA_OVH1" -j0'
+alias n1='nix develop --option builders "$NOVA_OVH1" -j0'
 alias n2='nix develop --option builders "$NOVA_AZURE2" -j0'
 # alias n3='nix develop --option builders "$NOVA_AZURE2" -j0'
 
 # TODO should use all runners
 # alias nall='nix develop --option builders "$NOVA_OVH1" -j0'
 alias nr="nix run "
-alias nr1='nix run --option builders "$NOVA_AZURE1" -j0'
+alias nr1='nix run --option builders "$NOVA_OVH1" -j0'
 alias nr2='nix run --option builders "$NOVA_AZURE2" -j0'
 alias nl="nix log "
 # alias lens="sudo rm -rf /home/teto/.config/Lens/extensions && lens"

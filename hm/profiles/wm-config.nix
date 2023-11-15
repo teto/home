@@ -4,7 +4,7 @@ let
   term = "${pkgs.kitty}/bin/kitty";
 
 
-  myLib = pkgs.callPackage ../lib.nix {};
+  myLib = pkgs.callPackage ../lib.nix { };
 
   # key modifier
   # mad = "Mod4";
@@ -32,98 +32,100 @@ let
       "$GroupUs+$mod+Shift+${us}" = "move ${dir}";
     };
 
-   wsAzertyBindings = {
-	 w1= "a" ;
-	 w2= "z" ;
-	 w3= "e" ;
-	 w4= "q" ;
-	 w5= "s" ;
-	 w6= "d" ;
-	 w7= "w" ;
-	 w8= "x" ;
-	 w9= "c" ;
-   };
+  wsAzertyBindings = {
+    w1 = "a";
+    w2 = "z";
+    w3 = "e";
+    w4 = "q";
+    w5 = "s";
+    w6 = "d";
+    w7 = "w";
+    w8 = "x";
+    w9 = "c";
+  };
 
-   wsQwertyBindings = {
-	 w1= "q" ;
-	 w2= "w" ;
-	 w3= "e" ;
-	 w4= "a" ;
-	 w5= "s" ;
-	 w6= "d" ;
-	 w7= "z" ;
-	 w8= "x" ;
-	 w9= "c" ;
-   };
+  wsQwertyBindings = {
+    w1 = "q";
+    w2 = "w";
+    w3 = "e";
+    w4 = "a";
+    w5 = "s";
+    w6 = "d";
+    w7 = "z";
+    w8 = "x";
+    w9 = "c";
+  };
 
-	# ❯ wpctl get-volume @DEFAULT_AUDIO_SINK@
-	# Volume: 0.35
-	# ❯ wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.4
-	# ❯ wpctl get-volume @DEFAULT_AUDIO_SINK@
-	# Volume: 0.40
-	audioKeybindings = let 
-	 notify-send = "${pkgs.libnotify}/bin/notify-send";
-     wpctl = "${pkgs.wireplumber}/bin/wpctl";
-     mpc = "${pkgs.mpc_cli}/bin/mpc";
-     # pkgs.writeShellApplication
-     getIntegerVolume = pkgs.writeShellScript  "get-volume-as-integer" 
-       ''
-       volume=$(${wpctl} get-volume @DEFAULT_AUDIO_SINK@ | cut -f2 -d' ')
-       ${pkgs.perl}/bin/perl -e "print 100 * $volume"
-       '';
-     getBrightness = pkgs.writeShellScript  "get-volume-as-integer" 
-       ''
-       # -m => machine
-       brightness=$(${pkgs.brightnessctl}/bin/brightnessctl -m info | cut -f4 -d, )
-       echo $brightness
-       '';
+  # ❯ wpctl get-volume @DEFAULT_AUDIO_SINK@
+  # Volume: 0.35
+  # ❯ wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.4
+  # ❯ wpctl get-volume @DEFAULT_AUDIO_SINK@
+  # Volume: 0.40
+  audioKeybindings =
+    let
+      notify-send = "${pkgs.libnotify}/bin/notify-send";
+      wpctl = "${pkgs.wireplumber}/bin/wpctl";
+      mpc = "${pkgs.mpc_cli}/bin/mpc";
+      # pkgs.writeShellApplication
+      getIntegerVolume = pkgs.writeShellScript "get-volume-as-integer"
+        ''
+          volume=$(${wpctl} get-volume @DEFAULT_AUDIO_SINK@ | cut -f2 -d' ')
+          ${pkgs.perl}/bin/perl -e "print 100 * $volume"
+        '';
+      getBrightness = pkgs.writeShellScript "get-volume-as-integer"
+        ''
+          # -m => machine
+          brightness=$(${pkgs.brightnessctl}/bin/brightnessctl -m info | cut -f4 -d, )
+          echo $brightness
+        '';
 
-    # { name = "get-volume-as-integer";
-    #   runtimeInputs = [ pkgs.wireplumber ];
-    #   text = ''
-    #   out=$(${wpctl} get-volume @DEFAULT_AUDIO_SINK@ | cut -f2 -d' ')
-    #   echo $(( 100 * $out ))
-    #   '';
-    #   checkPhase = ":";
-    # };
-	in {
-     # wpctl set-volume @DEFAULT_AUDIO_SINK@ 10%+
-     # wpctl get-volume @DEFAULT_AUDIO_SINK@
-     # -l to limit max volume
-     # -t is timeout in ms
-     # -e to avoid keeping notif in history
-    XF86AudioRaiseVolume = "exec --no-startup-id ${wpctl} set-volume @DEFAULT_AUDIO_SINK@ 5%+ -l 1.2;exec ${notify-send} --icon=audio-volume-high -u low -t 1000 -h int:value:$(${getIntegerVolume}) -e -h string:synchronous:audio-volume 'Audio volume' 'Audio Raised volume'";
-    XF86AudioLowerVolume = "exec --no-startup-id ${wpctl} set-volume @DEFAULT_AUDIO_SINK@ 5%-;exec ${notify-send} --icon=audio-volume-low-symbolic -u low -t 1000 -h int:value:$(${getIntegerVolume}) -e -h string:synchronous:audio-volume 'Audio volume' 'Lower audio volume'";
+      # { name = "get-volume-as-integer";
+      #   runtimeInputs = [ pkgs.wireplumber ];
+      #   text = ''
+      #   out=$(${wpctl} get-volume @DEFAULT_AUDIO_SINK@ | cut -f2 -d' ')
+      #   echo $(( 100 * $out ))
+      #   '';
+      #   checkPhase = ":";
+      # };
+    in
+    {
+      # wpctl set-volume @DEFAULT_AUDIO_SINK@ 10%+
+      # wpctl get-volume @DEFAULT_AUDIO_SINK@
+      # -l to limit max volume
+      # -t is timeout in ms
+      # -e to avoid keeping notif in history
+      XF86AudioRaiseVolume = "exec --no-startup-id ${wpctl} set-volume @DEFAULT_AUDIO_SINK@ 5%+ -l 1.2;exec ${notify-send} --icon=audio-volume-high -u low -t 1000 -h int:value:$(${getIntegerVolume}) -e -h string:synchronous:audio-volume 'Audio volume' 'Audio Raised volume'";
+      XF86AudioLowerVolume = "exec --no-startup-id ${wpctl} set-volume @DEFAULT_AUDIO_SINK@ 5%-;exec ${notify-send} --icon=audio-volume-low-symbolic -u low -t 1000 -h int:value:$(${getIntegerVolume}) -e -h string:synchronous:audio-volume 'Audio volume' 'Lower audio volume'";
 
-    XF86AudioMute = "exec --no-startup-id ${myLib.muteAudio}";
-    # XF86AudioLowerVolume = "exec --no-startup-id ${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ -5%;exec ${notify-send} --icon=audio-volume-low-symbolic -u low 'Audio lowered'";
-    # XF86AudioMute = "exec --no-startup-id ${pkgs.pulseaudio}/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle;exec ${notify-send} --icon=speaker_no_sound -u low 'test'";
+      XF86AudioMute = "exec --no-startup-id ${myLib.muteAudio}";
+      # XF86AudioLowerVolume = "exec --no-startup-id ${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ -5%;exec ${notify-send} --icon=audio-volume-low-symbolic -u low 'Audio lowered'";
+      # XF86AudioMute = "exec --no-startup-id ${pkgs.pulseaudio}/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle;exec ${notify-send} --icon=speaker_no_sound -u low 'test'";
 
-    # brightnessctl brightness-low
-    XF86MonBrightnessUp = "exec ${pkgs.brightnessctl}/bin/brightnessctl set +10%; exec ${notify-send} --icon=brightness -u low -t 1000 -h int:value:$(${getBrightness}) -e -h string:synchronous:brightness-level 'Brightness' 'Raised brightness'";
-    XF86MonBrightnessDown = "exec ${pkgs.brightnessctl}/bin/brightnessctl set 10%-; exec ${notify-send} --icon=brightness-low -u low -t 1000 -h int:value:$(${getBrightness}) -e -h string:synchronous:brightness-level 'Brightness' 'Lowered brightness'";
-    # XF86MonBrightnessDown = "exec ${pkgs.brightnessctl}/bin/brightnessctl set 10%-";
+      # brightnessctl brightness-low
+      XF86MonBrightnessUp = "exec ${pkgs.brightnessctl}/bin/brightnessctl set +10%; exec ${notify-send} --icon=brightness -u low -t 1000 -h int:value:$(${getBrightness}) -e -h string:synchronous:brightness-level 'Brightness' 'Raised brightness'";
+      XF86MonBrightnessDown = "exec ${pkgs.brightnessctl}/bin/brightnessctl set 10%-; exec ${notify-send} --icon=brightness-low -u low -t 1000 -h int:value:$(${getBrightness}) -e -h string:synchronous:brightness-level 'Brightness' 'Lowered brightness'";
+      # XF86MonBrightnessDown = "exec ${pkgs.brightnessctl}/bin/brightnessctl set 10%-";
 
-    # "XF86Display" = "exec " + ../../rofi-scripts/monitor_layout.sh ;
+      # "XF86Display" = "exec " + ../../rofi-scripts/monitor_layout.sh ;
 
-    Mod4 = "exec anyrun";
+      Mod4 = "exec anyrun";
 
-    XF86AudioNext="exec ${mpc} next; exec notify-send --icon=forward -h string:synchronous:mpd 'Audio next'";
-    XF86AudioPrev="exec ${mpc} next; exec notify-send --icon=backward -h string:synchronous:mpd 'Audio previous'";
-    # XF86AudioPrev exec mpc prev; exec notify-send "Audio prev"
-    XF86AudioPlay = "exec ${mpc} toggle; exec notify-send --icon=play-pause -h string:synchronous:mpd 'mpd' 'Audio Pause' -e ";
-    # XF86AudioPause (pas presente sur mon clavier ?
+      XF86AudioNext = "exec ${mpc} next; exec notify-send --icon=forward -h string:synchronous:mpd 'Audio next'";
+      XF86AudioPrev = "exec ${mpc} next; exec notify-send --icon=backward -h string:synchronous:mpd 'Audio previous'";
+      # XF86AudioPrev exec mpc prev; exec notify-send "Audio prev"
+      XF86AudioPlay = "exec ${mpc} toggle; exec notify-send --icon=play-pause -h string:synchronous:mpd 'mpd' 'Audio Pause' -e ";
+      # XF86AudioPause (pas presente sur mon clavier ?
 
-    XF86AudioStop="exec ${mpc} stop; exec notify-send --icon=stop -h string:synchronous:mpd 'Stopped Audio' -e";
+      XF86AudioStop = "exec ${mpc} stop; exec notify-send --icon=stop -h string:synchronous:mpd 'Stopped Audio' -e";
 
-    # XF86AudioPlay = "exec ${pkgs.vlc}/bin/vlc; exec ${notify-send} --icon=media-playback-stop-symbolic -u low 'test'";
-    "--release Print" = "exec ${pkgs.flameshot}/bin/scrot -s '/tmp/%s_%H%M_%d.%m.%Y_$wx$h.png'";
+      # XF86AudioPlay = "exec ${pkgs.vlc}/bin/vlc; exec ${notify-send} --icon=media-playback-stop-symbolic -u low 'test'";
+      "--release Print" = "exec ${pkgs.flameshot}/bin/scrot -s '/tmp/%s_%H%M_%d.%m.%Y_$wx$h.png'";
 
-   };
+    };
 
 in
 {
- inherit notify-send;
+  inherit notify-send;
   modes = {
     monitors =
       let
@@ -146,52 +148,52 @@ in
       // move_to_output "down" "down" "down"
       // move_to_output "down" "l" "l";
 
-# resize window (you can also use the mouse for that) {{{
-    resize =  {
-            Escape = "mode default";
-            Return = "mode default";
+    # resize window (you can also use the mouse for that) {{{
+    resize = {
+      Escape = "mode default";
+      Return = "mode default";
 
-       # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
-         j = " resize grow left 10 px or 10 ppt";
-        "Shift+j" = "resize shrink left 10 px or 10 ppt";
+      # Pressing right will grow the window’s width.
+      # Pressing up will shrink the window’s height.
+      # Pressing down will grow the window’s height.
+      j = " resize grow left 10 px or 10 ppt";
+      "Shift+j" = "resize shrink left 10 px or 10 ppt";
 
-        k = " resize grow up  10 px or 10 ppt";
-        "Shift+k" = "resize shrink up 10 px or 10 ppt";
+      k = " resize grow up  10 px or 10 ppt";
+      "Shift+k" = "resize shrink up 10 px or 10 ppt";
 
-        l = "resize grow down 10 px or 10 ppt";
-        "Shift+l" = "resize shrink down 10 px or 10 ppt";
+      l = "resize grow down 10 px or 10 ppt";
+      "Shift+l" = "resize shrink down 10 px or 10 ppt";
 
-        "$GroupFr+m" = "resize grow right 10 px or 10 ppt";
-        "$GroupFr+Shift+m" = "resize shrink right 10 px or 10 ppt";
+      "$GroupFr+m" = "resize grow right 10 px or 10 ppt";
+      "$GroupFr+Shift+m" = "resize shrink right 10 px or 10 ppt";
 
-		# semicolumn is not recognized by sway
-        # bindsym $GroupUs+semicolumn resize grow right 10 px or 10 ppt
-        # bindsym $GroupUs+Shift+semicolumn resize shrink right 10 px or 10 ppt
+      # semicolumn is not recognized by sway
+      # bindsym $GroupUs+semicolumn resize grow right 10 px or 10 ppt
+      # bindsym $GroupUs+Shift+semicolumn resize shrink right 10 px or 10 ppt
 
-        # same bindings, but for the arrow keys
-        #bindsym Right resize shrink width 10 px or 10 ppt
-        #bindsym Up resize grow height 10 px or 10 ppt
-        #bindsym Down resize shrink height 10 px or 10 ppt
-        #bindsym Left resize grow width 10 px or 10 ppt
-        Left = " resize grow left 10 px or 10 ppt";
-        "Shift+Left" = "resize shrink left 10 px or 10 ppt";
+      # same bindings, but for the arrow keys
+      #bindsym Right resize shrink width 10 px or 10 ppt
+      #bindsym Up resize grow height 10 px or 10 ppt
+      #bindsym Down resize shrink height 10 px or 10 ppt
+      #bindsym Left resize grow width 10 px or 10 ppt
+      Left = " resize grow left 10 px or 10 ppt";
+      "Shift+Left" = "resize shrink left 10 px or 10 ppt";
 
-        Up = " resize shrink up  10 px or 10 ppts";
-        "Shift+Up" = "resize grow up 10 px or 10 ppt";
+      Up = " resize shrink up  10 px or 10 ppts";
+      "Shift+Up" = "resize grow up 10 px or 10 ppt";
 
-        Down = "resize grow down 10 px or 10 ppt";
-        "Shift+Down" = "resize shrink down 10 px or 10 ppt";
+      Down = "resize grow down 10 px or 10 ppt";
+      "Shift+Down" = "resize shrink down 10 px or 10 ppt";
 
-        Right = "resize grow right 10 px or 10 ppt";
-        "Shift+Right" = "resize shrink right 10 px or 10 ppt";
+      Right = "resize grow right 10 px or 10 ppt";
+      "Shift+Right" = "resize shrink right 10 px or 10 ppt";
     };
-    };
-    # }}}
+  };
+  # }}}
 
 
-  sharedKeybindings = {
+ sharedKeybindings = {
     # The side buttons move the window around
     "button9" = "move left";
     "button8" = "move right";
@@ -258,28 +260,28 @@ in
     "$mod+Shift+f" = "fullscreen global";
     "$mod+button3" = "floating toggle";
     "$mod+m" = ''mode "monitors'';
-    "$mod+r" =  ''mode "resize"'';
+    "$mod+r" = ''mode "resize"'';
 
 
-   } 
-   // (lib.concatMapAttrs (bind_ws "Fr") wsAzertyBindings)
-   // (lib.concatMapAttrs (bind_ws "Us") wsQwertyBindings)
-   // move_focused_wnd "left" "h" "h"
-   // move_focused_wnd "down" "j" "j"
-   // move_focused_wnd "up" "k" "k"
-   # semicolumn
-   // move_focused_wnd "right" "l" "l"
-   // audioKeybindings
-   ;
-    # just trying to overwrite previous bindings with i3dispatch
-    # // lib.optionalAttrs (pkgs ? i3dispatch ) {
-    # "${mod}+Left" = "exec ${pkgs.i3dispatch}/bin/i3dispatch left";
-    # "${mod}+Right" = "exec ${pkgs.i3dispatch}/bin/i3dispatch right";
-    # "${mod}+Down" = "exec ${pkgs.i3dispatch}/bin/i3dispatch down";
-    # "${mod}+Up" = "exec ${pkgs.i3dispatch}/bin/i3dispatch up";
-    # }
-	# # The middle button over a titlebar kills the window
-	# bindsym --release button2 kill
+  }
+  // (lib.concatMapAttrs (bind_ws "Fr") wsAzertyBindings)
+  // (lib.concatMapAttrs (bind_ws "Us") wsQwertyBindings)
+  // move_focused_wnd "left" "h" "h"
+  // move_focused_wnd "down" "j" "j"
+  // move_focused_wnd "up" "k" "k"
+  # semicolumn
+  // move_focused_wnd "right" "l" "l"
+  // audioKeybindings
+  ;
+  # just trying to overwrite previous bindings with i3dispatch
+  # // lib.optionalAttrs (pkgs ? i3dispatch ) {
+  # "${mod}+Left" = "exec ${pkgs.i3dispatch}/bin/i3dispatch left";
+  # "${mod}+Right" = "exec ${pkgs.i3dispatch}/bin/i3dispatch right";
+  # "${mod}+Down" = "exec ${pkgs.i3dispatch}/bin/i3dispatch down";
+  # "${mod}+Up" = "exec ${pkgs.i3dispatch}/bin/i3dispatch up";
+  # }
+  # # The middle button over a titlebar kills the window
+  # bindsym --release button2 kill
 
   # config shared between i3 and sway
   sharedExtraConfig = ''
@@ -321,7 +323,7 @@ in
 
     	# for_window [all] title_window_icon on
     	for_window [class="^Firefox$"] title_window_icon on
-        ''
+  ''
     # https://faq.i3wm.org/question/5942/using-modifer-key-as-a-binding/
     # https://faq.i3wm.org/question/5429/stay-in-mode-only-while-key-is-pressed/
     # set $set_mark  /home/teto/.i3/set_marks.py

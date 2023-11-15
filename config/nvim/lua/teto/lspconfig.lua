@@ -82,17 +82,17 @@ lspconfig.lua_ls.setup({
 lspconfig.dhall_lsp_server.setup({})
 lspconfig.dockerls.setup({})
 
--- lspconfig.yamlls.setup({
---   -- cmd = { 'yaml-language-server', '--stdio' },
--- --   on_attach = lsp.on_attach,
--- --   capabilities = lsp.capabilities,
---   settings = {
---     yaml = {
---       schemas = require('schemastore').yaml.schemas(),
---     },
---   },
--- -- }
--- })
+lspconfig.yamlls.setup({
+  -- cmd = { 'yaml-language-server', '--stdio' },
+--   on_attach = lsp.on_attach,
+--   capabilities = lsp.capabilities,
+  settings = {
+    yaml = {
+      schemas = require('schemastore').yaml.schemas(),
+    },
+  },
+-- }
+})
 
 
 

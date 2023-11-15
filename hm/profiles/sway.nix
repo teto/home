@@ -79,7 +79,8 @@ in
           names = [ "Inconsolata Normal" ];
           size = 12.0;
         };
-      modes = {
+        modes = sharedConfig.modes
+        // {
         monitors =
           let
             move_to_output = dir: fr: us:
