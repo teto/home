@@ -81,7 +81,11 @@
 
  systemd.user.services.swaync.Service.Environment = [
    # "G_MESSAGES_DEBUG=all"
-   "PATH=${lib.makeBinPath [ pkgs.wlogout pkgs.libnotify pkgs.swaylock  pkgs.fuzzel pkgs.wofi ]}" 
+   "PATH=${lib.makeBinPath [
+    pkgs.wlogout pkgs.libnotify pkgs.swaylock
+    pkgs.fuzzel pkgs.wofi
+    pkgs.wl-clipboard
+   ]}" 
   ];
 
  xdg.configFile."swaync/config.json".enable = false;

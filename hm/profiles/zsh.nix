@@ -35,6 +35,15 @@
     } // config.programs.bash.shellAliases;
 
     autocd = true;
+    
+
+    # https://github.com/nix-community/home-manager/pull/4360
+    syntaxHighlighting = {
+     enable = true;
+     highlighters = [ "brackets" "pattern" "cursor" ];
+     # highlighters = [ "brackets" ];
+     styles =  { comment = "fg=black,bold"; };
+    };
 
     # initExtraFirst = "
     #   ";
