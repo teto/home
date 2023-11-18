@@ -24,6 +24,10 @@
   "hide-on-action": true,
   "script-fail-notify": true,
   "scripts": {
+    "example-action-script": {
+      "exec": "wl-copy \"BODY: $SWAYNC_BODY\"",
+	  "run-on": "action"
+    }
   },
   "notification-visibility": {
   },
@@ -51,7 +55,8 @@
         },
         {
           "label": "",
-          "command": "notify-send -m 'toto'"
+          "command": "notify-send -m 'toto'",
+		  "type": "toggle"
         },
         {
           "label": "",

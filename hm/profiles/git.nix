@@ -5,6 +5,8 @@ in
 {
   programs.git = {
     enable = true;
+
+    # msmtp
     package = pkgs.gitAndTools.gitFull; # to get send-email
     delta.enable = true;
     includes = [

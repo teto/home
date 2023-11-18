@@ -44,8 +44,7 @@ set folder= $MAILDIR
 #folder-hook gmail2 source "$HOME/.mutt/account_gmail"
 #folder-hook lip6
 
-# use postfix instead ?
-# set sendmail="/usr/bin/msmtp"
+# set sendmail="msmtp"
 
 #set use_envelope_from
 # Interactive questions {{{

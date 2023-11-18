@@ -26,7 +26,13 @@ function M.notify_send(msg, level, opts)
 	Job
 		:new({
 			command = "notify-send",
-			args = { "-u", l, "Neovim", msg },
+            -- todo add expire-time depending on timeout
+			args = {
+              "--urgency", l,
+              "--app-name", "neovim",
+             "Neovim",
+             msg  -- body
+            },
 		})
 		:start()
 end
