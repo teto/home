@@ -30,7 +30,11 @@
  aws s3api get-bucket-location --profile jinko-dev --bucket jinko-dev-shared
  
  # https://docs.aws.amazon.com/eks/latest/userguide/create-kubeconfig.html
- aws eks update-kubeconfig --name jinko-prod
+
+ #+BEGIN_SRC shell
+aws eks update-kubeconfig --name jk-preprod --profile nova-jinko --user-alias jk-preprod
+aws eks update-kubeconfig --name jk-dev --profile nova-sandbox --user-alias jk-dev
+ #+END_SRC shell
  
  
  # Lambda
