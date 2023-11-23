@@ -178,7 +178,7 @@
 
           ./hm/profiles/neovim.nix
           ({...}: { 
-            home.stateVersion = "23.05";
+            home.stateVersion = "24.05";
 
           })
         ];
@@ -373,11 +373,9 @@
               self.inputs.sops-nix.nixosModules.sops
 
               ({ pkgs, ... }: {
-
                 imports = [
                   ./hosts/neotokyo/config.nix
                 ];
-
               })
               self.nixosModules.default-hm
               hm.nixosModules.home-manager
@@ -388,8 +386,8 @@
               withSecrets = true;
               flakeInputs = self.inputs;
             };
-
           };
+
 
           # desktop
           desktop = (nixpkgs.lib.nixosSystem {

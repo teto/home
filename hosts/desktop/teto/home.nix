@@ -84,7 +84,7 @@
     # $HOME/.local/share/Zeal/Zeal/docsets
   };
 
-  home.stateVersion = "23.05";
+  # home.stateVersion = "23.05";
 
   # xrandr --output DVI-I-1 --primary
   # xsession.initExtra = ''

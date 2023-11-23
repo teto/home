@@ -45,8 +45,6 @@
     ./root/ssh-config.nix
     # ../../hm/profiles/neovim.nix
    ];
-
-   home.stateVersion = "23.05";
   };
 
    # TODO use from flake or from unstable
