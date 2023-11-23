@@ -170,6 +170,7 @@
         home-manager.sharedModules = [
           # And add the home-manager module
           self.inputs.ironbar.homeManagerModules.default
+          ./hm/profiles/common.nix
           ./hm/modules/neovim.nix
           ./hm/modules/i3.nix
           ./hm/modules/bash.nix

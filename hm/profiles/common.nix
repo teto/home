@@ -28,8 +28,6 @@
     strace
     tailspin  #  a log viewer based on less ("spin" or "tsspin" is the executable)
     tig
-    xdg-utils
-    wttrbar # for meteo
   ];
 
   # works only because TIGRC_USER is set
@@ -69,7 +67,7 @@
     INPUTRC = "$XDG_CONFIG_HOME/inputrc";
 
     # TODO package these instead now these are submoudles of dotfiles To remove
-    VIFM = "$XDG_CONFIG_HOME/vifm";
+    # VIFM = "$XDG_CONFIG_HOME/vifm";
     WWW_HOME = "$XDG_CONFIG_HOME/w3m";
     # used by ranger
     TERMCMD = "kitty";

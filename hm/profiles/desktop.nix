@@ -174,6 +174,8 @@ let
       ripgrep
       simple-scan
       unzip
+      xdg-utils
+      wttrbar # for meteo
     ]
     #   gnome.gnome-calculator # compare with qalqulate-gtk
   ;
