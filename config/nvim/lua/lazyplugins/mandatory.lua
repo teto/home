@@ -118,6 +118,8 @@ return {
  --    })
  --  end
  -- },
+ 
+
  -- {
  --  'stevearc/conform.nvim',
  --  config = function ()
@@ -150,7 +152,11 @@ return {
    -- severity_sort = true,
    -- },
    -- }),
+
+   -- `:NullLsLog`
    none_ls.setup({
+    debug = true,
+
     sources = {
      -- method = none_ls.methods.DIAGNOSTICS_ON_SAVE,
      -- needs a luacheck in PATH
@@ -159,12 +165,16 @@ return {
      }),
      none_ls.builtins.code_actions.shellcheck,
      -- none_ls.builtins.diagnostics.editorconfig_checker, -- too noisy
-     -- none_ls.builtins.diagnostics.teal,
-     -- none_ls.builtins.diagnostics.tsc
-     -- none_ls.builtins.diagnostics.yamllint,
+     none_ls.builtins.diagnostics.tsc,
+     -- doc at https://yamllint.readthedocs.io/en/stable/configuration.html#default-configuration
+     none_ls.builtins.diagnostics.yamllint,
+     -- .with({
+     --  extra_args = { }
+     -- }),
      none_ls.builtins.diagnostics.flake8,
      none_ls.builtins.diagnostics.zsh,
      none_ls.builtins.formatting.just,
+     none_ls.builtins.formatting.prettier,
      none_ls.builtins.formatting.markdown_toc,
      -- none_ls.builtins.formatting.nixpkgs_fmt,
      none_ls.builtins.formatting.treefmt.with({

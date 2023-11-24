@@ -168,6 +168,7 @@ let
         --}}}'';
     })
     (luaPlugin { plugin = sniprun; })
+    (luaPlugin { plugin = telescope-nvim; })
     (luaPlugin { plugin = telescope-manix; })
     # call with :Hoogle
         (luaPlugin { plugin = glow-nvim; })
@@ -325,6 +326,7 @@ let
       # luaPackages.lua-lsp
       # lua53Packages.teal-language-server
       codeium # ideally not needed and referenced by codeium-vim directly
+      yamllint
       editorconfig-checker # used in null-ls
       haskellPackages.hasktags
       haskellPackages.fast-tags

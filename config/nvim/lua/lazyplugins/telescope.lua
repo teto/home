@@ -20,7 +20,6 @@ return {
             -- telescope.load_extension('ghcli')
             local actions = require('telescope.actions')
             local trouble = require('trouble')
-            require('teto.telescope').telescope_create_keymaps()
             -- telescope.setup{}
             local telescope = require('telescope')
             telescope.setup({

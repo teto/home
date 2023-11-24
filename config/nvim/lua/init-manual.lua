@@ -630,6 +630,7 @@ vim.g.spinner_frames = { '⣾', '⣽', '⣻', '⢿', '⡿', '⣟', '⣯', '⣷' 
 
 
 if has_fzf_lua then
+
 	require('fzf-lua.providers.ui_select').register({})
 
 	require('teto.fzf-lua').register_keymaps()
@@ -651,6 +652,11 @@ if has_fzf_lua then
 		},
 	})
 end
+
+-- if we want to use telescope
+-- require('teto.telescope').telescope_create_keymaps()
+
+
 -- nnoremap ( "n", "<Leader>ca", function () vim.lsp.buf.code_action{} end )
 nnoremap('n', '<Leader>ca', function()
 	vim.cmd([[FzfLua lsp_code_actions]])

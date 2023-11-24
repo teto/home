@@ -23,6 +23,13 @@ log_level =
 sleep infinity
 export CI_DEBUG_TRACE
 
+
+One can do 
+script:
+   - export
+
+	 to list all variables too
+
 # Deploy keys
 
 https://docs.gitlab.com/ee/user/project/deploy_keys/

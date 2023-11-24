@@ -56,20 +56,30 @@ return {
      load_paths = {}
    }
  },
+
  {
     "nvim-neorg/neorg",
     config = function()
       require("neorg").setup {
         load = {
           ["core.defaults"] = {}, -- Loads default behaviour
+          ["core.keybinds"] = {
+            config = {
+                default_keybinds = true,
+            }
+          },
           ["core.concealer"] = {}, -- Adds pretty icons to your documents
+          ["core.ui.calendar"] = {},
           -- ['core.ui.calendar'] = {}, -- fails on stable nvim
           ["core.dirman"] = { -- Manages Neorg workspaces
             config = {
               workspaces = {
                 notes = "~/notes",
+                home = "~/home",
+                work = "~/nova/norg"
                 -- notes = "~/Nextcloud/Notes",
               },
+              default_workspace = "notes"
             },
           },
           -- needs neorg-exec plugin
@@ -78,6 +88,7 @@ return {
       }
     end,
  },
+
  {
   -- a plugin for neorg
   -- use with :Neorg exec cursor

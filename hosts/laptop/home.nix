@@ -32,16 +32,34 @@
     # ../../hm/profiles/emacs.nix
   ];
 
+  fonts.fontconfig.enable = true;
+
   # dans le cadre de mon experimentation !
   home.packages = with pkgs; [
    timg # to display images in terminal, to compare with imgcat ?
    # lua
    imagemagick # for 'convert'
    chromium
+
+      ubuntu_font_family
+      inconsolata # monospace
+      noto-fonts-cjk # asiatic
+      (pkgs.nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; })
+      # nerdfonts
+      # corefonts # microsoft fonts  UNFREE
+      font-awesome_5
+      source-code-pro
+      dejavu_fonts
+      # Adobe Source Han Sans
+      source-han-sans #sourceHanSansPackages.japanese
+      fira-code-symbols # for ligatures
+      iosevka
+      # noto-fonts
   ];
 
   programs.neovim.enable = true; 
 
   # for blue tooth applet; must be installed systemwide
   services.blueman-applet.enable = true;
+
 }
