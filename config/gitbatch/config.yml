@@ -1,3 +1,5 @@
-mode: fetch
+# https://github.com/isacikgoz/gitbatch/wiki/Controls
+#  https://github.com/isacikgoz/gitbatch/wiki/Configuration
+mode: pull
 quick: false
 recursion: 1

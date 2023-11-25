@@ -7,7 +7,7 @@
 
     # $HOME is prepend hence the issues
     dotDir = ".config/zsh";
-    # autosuggestion.enable = true;
+
     sessionVariables = {
 
     };
@@ -123,5 +123,9 @@
     enableFancyCursor = true;
     # termTitle.enable = true;
     enableProfiling = false;
+
+    # custom module
+    autosuggestion.enable = true;
+
   };
 }

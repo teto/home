@@ -41,8 +41,6 @@ in
    imports = [
     ../../hm/profiles/neovim.nix
    ];
-
-   home.stateVersion = "23.05";
   };
 
    # TODO use from flake or from unstable
@@ -57,7 +55,6 @@ in
       # breaks build: doesnt like the "activation-script"
      # nova.hmConfigurations.dev
     ];
-   home.stateVersion = "23.05";
   };
 
   services.journald.extraConfig = ''

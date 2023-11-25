@@ -18,7 +18,7 @@
     ./zsh.nix
     ./yazi.nix
 
-    ../../../hm/profiles/experimental.nix
+    # ../../../hm/profiles/experimental.nix
 
     # Not tracked, so doesn't need to go in per-machine subdir
     ../../../hm/profiles/android.nix

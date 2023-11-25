@@ -26,8 +26,36 @@
   ];
 
   xdg.portal = {
+   # https://github.com/flatpak/xdg-desktop-portal/blob/1.18.1/doc/portals.conf.rst.in
    enable = true; 
    xdgOpenUsePortal = true; 
+
+   # is this in configuration.nix ?
+   config.common.default = "*";
+               # {
+               #   common = {
+               #     default = [
+               #       "gtk"
+               #     ];
+               #   };
+               #   pantheon = {
+               #     default = [
+               #       "pantheon"
+               #       "gtk"
+               #     ];
+               #     "org.freedesktop.impl.portal.Secret" = [
+               #       "gnome-keyring"
+               #     ];
+               #   };
+               #   x-cinnamon = {
+               #     default = [
+               #       "xapp"
+               #       "gtk"
+               #     ];
+               #   };
+               # }
+
+
   };
   environment.homeBinInPath = true;
 
