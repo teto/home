@@ -129,34 +129,10 @@ let
     #     '';
     # })
 
-    {
-      # we should have a file of the grammars as plugins
-      # symlinkJoin
-      plugin = pkgs.symlinkJoin {
-       name = "tree-sitter-grammars";
-       paths = with pkgs.neovimUtils; [
-
-          # pkgs.vimPlugins.nvim-treesitter-parsers.tree-sitter-nix
-          # # tree-sitter-haskell # crashes with a loop
-          # tree-sitter-python
-          # tree-sitter-html  # for rest.nvim
-          (grammarToPlugin pkgs.tree-sitter-grammars.tree-sitter-html) # for devdocs
-          pkgs.vimPlugins.nvim-treesitter.grammarPlugins.org
-          pkgs.vimPlugins.nvim-treesitter.grammarPlugins.norg
-          pkgs.vimPlugins.nvim-treesitter.grammarPlugins.nix
-          pkgs.vimPlugins.nvim-treesitter.grammarPlugins.query
-          # (grammarToPlugin pkgs.tree-sitter-grammars.tree-sitter-query)
-          # pkgs.vimPlugins.nvim-treesitter-parsers.tree-sitter-query
-
-          # (grammarToPlugin tree-sitter-just)
-        ];
-      };
-    }
 
 	# not upstreamed yet
     # (luaPlugin { plugin = nvim-lua-gf; })
-    (luaPlugin { plugin = urlview-nvim; })
-    (luaPlugin { plugin = nvim-ufo; })
+
     # (luaPlugin { plugin = nvim-web-devicons; })
     # (luaPlugin {
     #   plugin = trouble-nvim;

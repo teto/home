@@ -13,6 +13,32 @@ let
   };
 
   luaPlugins = with pkgs.vimPlugins; [
+    {
+      # we should have a file of the grammars as plugins
+      # symlinkJoin
+      plugin = pkgs.symlinkJoin {
+       name = "tree-sitter-grammars";
+       paths = with pkgs.neovimUtils; [
+
+          # pkgs.vimPlugins.nvim-treesitter-parsers.tree-sitter-nix
+          # # tree-sitter-haskell # crashes with a loop
+          # tree-sitter-python
+          # tree-sitter-html  # for rest.nvim
+          (grammarToPlugin pkgs.tree-sitter-grammars.tree-sitter-html) # for devdocs
+          pkgs.vimPlugins.nvim-treesitter.grammarPlugins.org
+          pkgs.vimPlugins.nvim-treesitter.grammarPlugins.norg
+          pkgs.vimPlugins.nvim-treesitter.grammarPlugins.nix
+          pkgs.vimPlugins.nvim-treesitter.grammarPlugins.query
+          # (grammarToPlugin pkgs.tree-sitter-grammars.tree-sitter-query)
+          # pkgs.vimPlugins.nvim-treesitter-parsers.tree-sitter-query
+
+          # (grammarToPlugin tree-sitter-just)
+        ];
+      };
+    }
+    (luaPlugin { plugin = urlview-nvim; })
+    (luaPlugin { plugin = nvim-ufo; })
+
     # (luaPlugin {
     #   plugin = vim-obsession;
     #   after = ''
@@ -141,7 +167,7 @@ let
     # nvim-markdown-preview  # :MarkdownPreview
 
     { 
-     # might get outdated in b64-nvim
+     # might get outdated in newer neovim
      plugin = b64-nvim; # provides B64Decode / Encode
     }
     # { plugin = kui-nvim; }
