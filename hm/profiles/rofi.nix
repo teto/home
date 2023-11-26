@@ -41,6 +41,12 @@ in
     ];
     # pass.stores = [];
 
+    theme = {
+      "@import" = "${config.xdg.cacheHome}/wal/colors-rofi-dark.rasi";
+      "@theme" = "purple";
+    };
+
+
     # rofi.font: SourceCodePro 9
     # font =
     # ,Layouts:${../../bin/i3-list-layouts}

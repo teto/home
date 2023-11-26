@@ -32,8 +32,6 @@
     # ../../hm/profiles/emacs.nix
   ];
 
-  fonts.fontconfig.enable = true;
-
   # dans le cadre de mon experimentation !
   home.packages = with pkgs; [
    timg # to display images in terminal, to compare with imgcat ?

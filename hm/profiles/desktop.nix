@@ -219,6 +219,8 @@ in
   #   enableBashIntegration = true;
   # };
 
+  fonts.fontconfig.enable = true;
+
   programs.zoxide = {
     enable = true;
     enableZshIntegration = true;
@@ -241,6 +243,7 @@ in
     ])
   ;
 
+  # TODO remove ? dangerous
   home.sessionPath = [
     "$XDG_DATA_HOME/../bin"
   ];
@@ -297,11 +300,6 @@ in
   # needed for gpg-agent gnome pinentry
   # services.dbus.packages = [ pkgs.gcr ];
 
-
-  programs.rofi.theme = {
-    "@import" = "${config.xdg.cacheHome}/wal/colors-rofi-dark.rasi";
-    "@theme" = "purple";
-  };
 
 
   # readline equivalent but in haskell for ghci
