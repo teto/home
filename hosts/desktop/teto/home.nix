@@ -7,6 +7,7 @@
   imports = [
     ./bash.nix
       ../../../hm/profiles/nova/bash.nix
+    flakeInputs.ironbar.homeManagerModules.default
 
     ./calendars.nix
     ./git.nix
