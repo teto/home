@@ -173,16 +173,18 @@ return {
      -- }),
      none_ls.builtins.diagnostics.flake8,
      none_ls.builtins.diagnostics.zsh,
+
      none_ls.builtins.formatting.just,
      none_ls.builtins.formatting.prettier,
      none_ls.builtins.formatting.markdown_toc,
-     -- none_ls.builtins.formatting.nixpkgs_fmt,
+     none_ls.builtins.formatting.nixpkgs_fmt,
      none_ls.builtins.formatting.treefmt.with({
       -- treefmt requires a config file
       condition = function(utils)
        return utils.root_has_file("treefmt.toml")
       end,
      }),
+
     },
    })
   end,

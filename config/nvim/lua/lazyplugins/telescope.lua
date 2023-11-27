@@ -35,8 +35,11 @@ return {
                 defaults = {
                  preview = false;
                  layout_strategy = "vertical",
+                 sorting_strategy = "ascending",  -- display results top->bottom
                  layout_config = {
                    prompt_position = "top",
+
+                   -- mirror = true,
                      vertical = { width = 0.7 },
                      -- other layout configuration here
                  },
