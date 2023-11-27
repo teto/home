@@ -6,6 +6,10 @@
 -- showcmdloc
 local has_fzf_lua, fzf_lua = pcall(require, 'fzf-lua')
 
+-- set to true to enable it
+local use_fzf_lua  = has_fzf_lua and false
+local use_telescope = not use_fzf_lua
+
 local nnoremap = vim.keymap.set
 local map = vim.keymap.set
 local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
@@ -55,7 +59,7 @@ vim.opt.rtp:prepend(lazypath)
 
 -- set it before loading vim plugins like autosession
 -- ,localoptions
-vim.o.sessionoptions="blank,buffers,curdir,help,tabpages,winsize,winpos"
+vim.o.sessionoptions="buffers,curdir,help,tabpages,winsize,winpos"
 
 require('lazy').setup('lazyplugins', {
 	lockfile = vim.fn.stdpath('cache') .. '/lazy-lock.json',
@@ -323,6 +327,9 @@ vim.keymap.set('n', '<Leader><Leader>', '<Cmd>b#<CR>')
 vim.keymap.set('n', '<f2>',
 	"<cmd>lua require'plenary.reload'.reload_module('rest-nvim.request'); print(require'rest-nvim.request'.ts_get_requests())<cr>"
 )
+
+vim.keymap.set('n', '<localleader>x', '<cmd>Neorg exec cursor<CR>', {silent = true}) -- just this block or blocks within heading section
+vim.keymap.set('n', '<localleader>X', '<cmd>Neorg exec current-file<CR>', {silent = true}) -- whole file
 
 local has_rest, rest = pcall(require, 'rest-nvim')
 if has_rest then
@@ -629,7 +636,7 @@ vim.g.spinner_frames = { '⣾', '⣽', '⣻', '⢿', '⡿', '⣟', '⣯', '⣷' 
 -- vim.g.should_show_diagnostics_in_statusline = true
 
 
-if has_fzf_lua then
+if use_fzf_lua then
 
 	require('fzf-lua.providers.ui_select').register({})
 
@@ -653,14 +660,13 @@ if has_fzf_lua then
 	})
 end
 
--- if we want to use telescope
--- require('teto.telescope').telescope_create_keymaps()
+if use_telescope then
+
+	-- if we want to use telescope
+	require('teto.telescope').telescope_create_keymaps()
+end
 
 
--- nnoremap ( "n", "<Leader>ca", function () vim.lsp.buf.code_action{} end )
-nnoremap('n', '<Leader>ca', function()
-	vim.cmd([[FzfLua lsp_code_actions]])
-end)
 
 -- since it was not merge yet
 -- inoremap <C-k><C-k> <Cmd>lua require'betterdigraphs'.digraphs("i")<CR>

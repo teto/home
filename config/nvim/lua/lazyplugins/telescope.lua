@@ -33,10 +33,13 @@ return {
             local telescope = require('telescope')
             telescope.setup({
                 defaults = {
-                    layout_config = {
-                        vertical = { width = 0.7 },
-                        -- other layout configuration here
-                    },
+                 preview = false;
+                 layout_strategy = "vertical",
+                 layout_config = {
+                   prompt_position = "top",
+                     vertical = { width = 0.7 },
+                     -- other layout configuration here
+                 },
                     mappings = {
                         i = {
                             ['<c-t>'] = trouble.open_with_trouble,

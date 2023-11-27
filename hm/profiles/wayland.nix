@@ -36,6 +36,4 @@
     wshowkeys
   ];
 
-  # TODO export sway's extraSessionCommands
- # MOZ_ENABLE_WAYLAND=1 
 }

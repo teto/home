@@ -13,7 +13,14 @@ let
   };
 
   telescopePlugins =  with pkgs.vimPlugins; [
-    (luaPlugin { plugin = telescope-all-recent-nvim; })
+   # lua require'telescope-all-recent'.toggle_debug()
+   (luaPlugin {
+     plugin = telescope-all-recent-nvim; 
+     config = ''
+          require'telescope-all-recent'.setup{
+      -- your config goes here
+    }'';
+  })
 
   ];
 
@@ -34,7 +41,7 @@ let
           pkgs.vimPlugins.nvim-treesitter.grammarPlugins.norg
           (grammarToPlugin pkgs.tree-sitter-grammars.tree-sitter-norg-meta)
           pkgs.vimPlugins.nvim-treesitter.grammarPlugins.nix
-          pkgs.vimPlugins.nvim-treesitter.grammarPlugins.query
+          # pkgs.vimPlugins.nvim-treesitter.grammarPlugins.query
           # (grammarToPlugin pkgs.tree-sitter-grammars.tree-sitter-query)
           # pkgs.vimPlugins.nvim-treesitter-parsers.tree-sitter-query
 

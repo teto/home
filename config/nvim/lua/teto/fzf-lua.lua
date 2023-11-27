@@ -34,6 +34,19 @@ function M.register_keymaps()
     vim.keymap.set('n', '<Leader>m', function()
         fzf_lua.menus()
     end, { desc = 'Fuzzy search menu entries' })
+
+
+    -- nnoremap ( "n", "<Leader>ca", function () vim.lsp.buf.code_action{} end )
+    vim.keymap.set('n', '<Leader>ca', function()
+        vim.cmd([[FzfLua lsp_code_actions]])
+    end)
+
+
+    -- MRU
+    vim.api.nvim_create_user_command('FzfMru', M.fzf_mru, {})
+    -- vim.keymap.set("n","<C-p>", M.fzf_mru, {desc="Open Files"})
+
+
 end
 
 
@@ -54,7 +67,7 @@ local function get_hash()
   return hash
 end
 
-local function fzf_mru(opts)
+function M.fzf_mru(opts)
   local fzf = require 'fzf-lua'
   opts = fzf.config.normalize_opts(opts, fzf.config.globals.files)
   local hash = get_hash()
@@ -92,8 +105,5 @@ local function fzf_mru(opts)
     fzf.actions.act(opts.actions, selected, opts)
   end)()
 end
-
-vim.api.nvim_create_user_command('FzfMru', fzf_mru, {})
-vim.keymap.set("n","<C-p>", fzf_mru, {desc="Open Files"})
 
 return M
