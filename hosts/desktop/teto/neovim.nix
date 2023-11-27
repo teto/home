@@ -12,6 +12,11 @@ let
     config = lib.optionalString (attrs ? config && attrs.config != null) (genBlockLua attrs.plugin.pname attrs.config);
   };
 
+  telescopePlugins =  with pkgs.vimPlugins; [
+    (luaPlugin { plugin = telescope-all-recent-nvim; })
+
+  ];
+
   luaPlugins = with pkgs.vimPlugins; [
     {
       # we should have a file of the grammars as plugins
@@ -27,6 +32,7 @@ let
           (grammarToPlugin pkgs.tree-sitter-grammars.tree-sitter-html) # for devdocs
           pkgs.vimPlugins.nvim-treesitter.grammarPlugins.org
           pkgs.vimPlugins.nvim-treesitter.grammarPlugins.norg
+          (grammarToPlugin pkgs.tree-sitter-grammars.tree-sitter-norg-meta)
           pkgs.vimPlugins.nvim-treesitter.grammarPlugins.nix
           pkgs.vimPlugins.nvim-treesitter.grammarPlugins.query
           # (grammarToPlugin pkgs.tree-sitter-grammars.tree-sitter-query)
@@ -383,6 +389,7 @@ let
    plugins =
            luaPlugins 
         ++ filetypePlugins
+        ++ telescopePlugins
    ;
 
     # plugins = with pkgs.vimPlugins; [

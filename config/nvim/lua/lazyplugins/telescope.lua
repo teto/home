@@ -3,6 +3,15 @@ return {
 
     -- telescope extension to search hackage require('telescope').load_extension('scout')
     'mrcjkb/scout-fork', -- fork of 'aloussase/scout'  that disappeared
+    -- {
+
+    --   'prochri/telescope-all-recent.nvim'
+    --   , config = function()
+    --     require'telescope-all-recent'.setup{
+    --       -- your config goes here
+    --     }
+    --   end
+    -- },
     {
         dir = '~/telescope.nvim',
         dependencies = {

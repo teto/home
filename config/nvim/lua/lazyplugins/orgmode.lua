@@ -59,6 +59,7 @@ return {
 
  {
     "nvim-neorg/neorg",
+    -- ft = "norg",
     config = function()
       require("neorg").setup {
         load = {
@@ -68,6 +69,7 @@ return {
                 default_keybinds = true,
             }
           },
+          -- ["external.kanban"] = {},
           ["core.concealer"] = {}, -- Adds pretty icons to your documents
           ["core.ui.calendar"] = {},
           -- ['core.ui.calendar'] = {}, -- fails on stable nvim
@@ -76,7 +78,8 @@ return {
               workspaces = {
                 notes = "~/notes",
                 home = "~/home",
-                work = "~/nova/norg"
+                work = "~/nova/norg",
+                ml = "~/ml-tests",
                 -- notes = "~/Nextcloud/Notes",
               },
               default_workspace = "notes"
@@ -87,11 +90,16 @@ return {
         },
       }
     end,
+    dependencies = {
+    --   -- { "pritchett/neorg-capture"},
+    --   -- { 'max397574/neorg-kanban' },
+       {
+        -- a plugin for neorg
+        -- use with :Neorg exec cursor
+        'laher/neorg-exec'
+       },
+
+    }
  },
 
- {
-  -- a plugin for neorg
-  -- use with :Neorg exec cursor
-  'laher/neorg-exec'
- }
 }
