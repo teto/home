@@ -249,6 +249,7 @@ in
 
     # TODO
     systemd.user.services.waybar.Service = {
-      Environment ="PATH=${lib.makeBinPath [ pkgs.wlogout pkgs.fuzzel pkgs.wofi ]}";
+     # to get fonts https://github.com/nix-community/home-manager/issues/4099#issuecomment-1605483260
+      Environment ="PATH=${lib.makeBinPath [ pkgs.wlogout pkgs.fuzzel pkgs.wofi ]}:${config.home.profileDirectory}/bin";
     };
 }

@@ -3,3 +3,12 @@ https://docs.datadoghq.com/getting_started/agent/
 configcheck
 status
 flare <TICKET>
+
+
+sudo agent diagnose
+
+$ sudo agent flare -e EMAIL -s CASE_ID
+Asking the agent to build the flare archive.
+/tmp/datadog-agent-2023-11-30T10-20-11Z-info.zip is going to be uploaded to Datadog
+
+Error: Could not determine flare URL via redirects: 403 Forbidden

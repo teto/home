@@ -27,7 +27,10 @@ make tests/functional/flakes/show.sh.test
 * about flakes
 ** how to build a nixosConfiguration 
 
+   #+BEGIN_SRC shell
   nix build .#nixosConfigurations.staging.config.system.build.toplevel
+  #+END_SRC
+
 # nixos/modules/programs/environment.nix
 environment.profileRelativeSessionVariables =
 

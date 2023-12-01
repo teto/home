@@ -555,8 +555,8 @@ in
 
     # custom options
     # fennel.enable = false;
-    teal.enable = false;
-    orgmode.enable = false;
+    # teal.enable = false;
+    orgmode.enable = true;
     autocompletion.enable = true;
     # TODO ?
     # snippets.enable = true;

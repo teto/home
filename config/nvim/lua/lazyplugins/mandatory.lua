@@ -175,6 +175,7 @@ return {
      none_ls.builtins.diagnostics.zsh,
 
      none_ls.builtins.formatting.just,
+     none_ls.builtins.formatting.yamlfmt, -- from google
      none_ls.builtins.formatting.prettier,
      none_ls.builtins.formatting.markdown_toc,
      none_ls.builtins.formatting.nixpkgs_fmt,

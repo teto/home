@@ -366,6 +366,7 @@ let
       # lua53Packages.teal-language-server
       codeium # ideally not needed and referenced by codeium-vim directly
       yamllint
+      yamlfmt
       editorconfig-checker # used in null-ls
       haskellPackages.hasktags
       haskellPackages.fast-tags

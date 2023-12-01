@@ -12,7 +12,7 @@ Open agenda prompt: <Leader>oa
 Open capture prompt: <Leader>oc
 
 #+NAME: test-title
-#+BEGIN_SRC sh 
+#+BEGIN_SRC sh :tangle yes
 echo "> title"
 #+END_SRC
 
@@ -21,15 +21,18 @@ echo "> title"
 
 
 #+NAME: test-sh
-#+BEGIN_SRC sh 
-echo "hello papy"
+#+BEGIN_SRC sh :tangle yes
+echo "hello ape for real ?"
 #+END_SRC
 
 #+RESULTS: test-sh
-: hello papy
-
-#+RESULTS:
-: hello papy
+: hello ape for real ?
 
 
-otot
+* Use babel/run code
+
+  Possible thanks to 'mrshmllow/orgmode-babel.nvim'. 
+  Try running the "<Range>OrgExecute", "<Range>OrgTangle" commands
+
+  https://orgmode.org/manual/Extracting-Source-Code.html
+

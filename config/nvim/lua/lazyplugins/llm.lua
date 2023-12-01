@@ -7,7 +7,8 @@ return {
      -- huge setup at https://github.com/jackMort/ChatGPT.nvim
       require("chatgpt").setup({
         -- api_key_cmd = "pass show chat.openai.com",
-        -- api_host_cmd = "echo -n 'api.openai.com'",
+        -- see https://github.com/jackMort/ChatGPT.nvim/issues/314
+        -- api_host_cmd = "echo -n api.openai.com",
         -- api_host_cmd = "echo -n '0.0.0.0:3000'"
        })
     end,
