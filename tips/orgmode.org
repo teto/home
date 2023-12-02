@@ -11,6 +11,7 @@ Global mappins
 Open agenda prompt: <Leader>oa
 Open capture prompt: <Leader>oc
 
+
 #+NAME: test-title
 #+BEGIN_SRC sh :tangle yes
 echo "> title"

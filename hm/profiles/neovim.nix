@@ -132,6 +132,7 @@ let
 
 	# not upstreamed yet
     # (luaPlugin { plugin = nvim-lua-gf; })
+    (luaPlugin { plugin = luasnip; })
 
     # required by trouble
     (luaPlugin { plugin = nvim-web-devicons; })

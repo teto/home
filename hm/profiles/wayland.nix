@@ -4,6 +4,8 @@
  # TODO it is done in sway.nix
   home.packages = with pkgs; [
     cliphist
+    clipcat # rust
+
     # TODO test https://github.com/sentriz/cliphist
     foot # terminal
     # use it with $ grim -g "$(slurp)"

@@ -3,10 +3,20 @@ return {
   -- todo pass the branch with tangle implemetend
   -- https://github.com/nvim-orgmode/orgmode/pull/617
   'nvim-orgmode/orgmode',
-   event = 'VeryLazy',
+  --
+  -- otherwise we get 
+  --[orgmode] Cannot detect parser revision.                                                                                                                                                                                                                        
+ -- Please check your org grammar's install info.                                                                                                                                                                                                                   
+ -- Maybe you forgot to call "require('orgmode').setup_ts_grammar()" before setup.   
+ -- maybe it should be checked/ init only for org files.
+   -- event = 'VeryLazy',
   config = function ()
    require('orgmode').setup_ts_grammar()
    require('orgmode').setup{
+      highlight = {
+        enable = true,
+        additional_vim_regex_highlighting = { 'org' },
+      },
       org_capture_templates = {'~/nextcloud/org/*', '~/orgmode/**/*'},
       org_default_notes_file = '~/home/refile.org',
       -- TODO add templates
