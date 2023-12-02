@@ -24,11 +24,12 @@ let
     (luaPlugin { plugin = nvim-cmp; })
     (luaPlugin { plugin = cmp-nvim-lsp; })
     (luaPlugin { plugin = cmp-nvim-lua; })
+    (luaPlugin { plugin = cmp_luasnip; })
     # (luaPlugin { plugin = cmp-cmdline-history; })
     # (luaPlugin { plugin = cmp-conventionalcommits; })
     # (luaPlugin { plugin = cmp-digraphs; })
   #   (luaPlugin { plugin = cmp-vsnip; })
-    ({ plugin = vim-vsnip; })
+    # ({ plugin = vim-vsnip; })
   ];
 
   orgmodePlugins = with pkgs.vimPlugins; [

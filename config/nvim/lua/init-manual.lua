@@ -328,8 +328,12 @@ vim.keymap.set('n', '<f2>',
 	"<cmd>lua require'plenary.reload'.reload_module('rest-nvim.request'); print(require'rest-nvim.request'.ts_get_requests())<cr>"
 )
 
+
+-- TODO I should get the same 
+-- neorg config{{{
 vim.keymap.set('n', '<localleader>x', '<cmd>Neorg exec cursor<CR>', {silent = true}) -- just this block or blocks within heading section
 vim.keymap.set('n', '<localleader>X', '<cmd>Neorg exec current-file<CR>', {silent = true}) -- whole file
+-- }}}
 
 local has_rest, rest = pcall(require, 'rest-nvim')
 if has_rest then
@@ -539,17 +543,17 @@ if has_cmp then
 			{ name = 'nvim_lsp' },
 
 			-- For vsnip user.
-			{ name = 'vsnip' },
+			-- { name = 'vsnip' },
 
 			-- For luasnip user.
-			-- { name = 'luasnip' },
+			{ name = 'luasnip' },
 
 			-- For ultisnips user.
 			-- { name = 'ultisnips' },
 
 			{ name = 'buffer' },
-			-- { name = 'neorg' },
-			-- { name = 'orgmode' },
+			{ name = 'neorg' },
+			{ name = 'orgmode' },
 		},
 	})
 	--  }}}
@@ -675,17 +679,27 @@ end
 
 local has_bufferline, bufferline = pcall(require, 'bufferline')
 if has_bufferline then
+	-- check :h bufferline-configuration
 	bufferline.setup({
+		highlights = {},
 
 		options = {
+			mode = 'buffers',
+			themable = true,
 			-- buffer_close_icon = '',
 
+			numbers = 'buffer_id', -- 'ordinal' ?
+			indicator = {
+				style = "underline"
+			},
 			view = 'default',
-			numbers = 'buffer_id',
 			-- number_style = "superscript" | "",
 			-- mappings = true,
 			modified_icon = '●',
 			close_icon = '',
+            diagnostics = "nvim_lsp",
+            diagnostics_update_in_insert = false,
+			color_icons = true , -- whether or not to add the filetype icon highlights
 			-- left_trunc_marker = '',
 			-- right_trunc_marker = '',
 			-- max_name_length = 18,
@@ -696,7 +710,7 @@ if has_bufferline then
 			-- -- can also be a table containing 2 custom separators
 			-- -- [focused and unfocused]. eg: { '|', '|' }
 			-- separator_style = "slant" | "thick" | "thin" | { 'any', 'any' },
-			separator_style = 'slant',
+			separator_style = 'thick',
 			-- enforce_regular_tabs = false | true,
 			always_show_bufferline = false,
 			-- sort_by = 'extension' | 'relative_directory' | 'directory' | function(buffer_a, buffer_b)
@@ -883,17 +897,36 @@ vim.api.nvim_create_user_command(
 )
 
 -- luasnip maps
-local has_luasnip, ls = pcall(require, 'fzf-lua')
+local has_luasnip, ls = pcall(require, 'luasnip')
+
 if has_luasnip then
+	-- debug with :LuaSnipListAvailable
 	vim.keymap.set({"i"}, "<C-K>", function() ls.expand() end, {silent = true})
 	vim.keymap.set({"i", "s"}, "<C-L>", function() ls.jump( 1) end, {silent = true})
 	vim.keymap.set({"i", "s"}, "<C-J>", function() ls.jump(-1) end, {silent = true})
+
+	-- |"warn"|"info"|"debug")
+	ls.log.set_loglevel("debug")
+	-- ls.log.ping()
 
 	vim.keymap.set({"i", "s"}, "<C-E>", function()
 		if ls.choice_active() then
 			ls.change_choice(1)
 		end
 	end, {silent = true})
+
+	-- ls.add_snippets(filetype, snippets)
+	-- require("luasnip-snippets").load_snippets()
+	-- require("luasnip.loaders").edit_snippet_files(opts:table|nil)
+	-- 
+	-- require("luasnip.loaders.from_lua").load()
+
+	require("luasnip.loaders.from_lua").lazy_load(
+	{ paths = vim.fn.stdpath("config") .."/snippets"}
+	)
+	require("luasnip.loaders.from_vscode").lazy_load()
+	-- require("luasnip.loaders.from_vscode").lazy_load()
+	ls.config.setup {}
 end
 
 -- " Bye bye ex mode
