@@ -49,6 +49,10 @@ https://github.com/NixOS/nixpkgs/pull/185719
  nix flake add mine /home/teto/nixpkgs
  nix print-dev-env --profile /path/to/profile/to/creat
  
+ ** Prevent garbage collection of nix develop environment ?
+   #+begin_src shell
+ nix develop --profile toto
+ #+end_src
  --profile works with nix develop too
  
  https://gist.github.com/edolstra/40da6e3a4d4ee8fd019395365e0772e7

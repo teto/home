@@ -395,6 +395,8 @@ let
       luaformatter
       nodePackages.prettier 
       python3Packages.flake8 # for nvim-lint and some nixpkgs linters
+      pkgs.black
+
       nodePackages.pyright
     ];
  in
