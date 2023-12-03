@@ -49,6 +49,10 @@ let
     }
     (luaPlugin { plugin = urlview-nvim; })
     (luaPlugin { plugin = nvim-ufo; })
+    (luaPlugin { 
+     # this is a peculiarly complex one that needs pynvim, image.nvim
+     plugin = molten-nvim; 
+    })
 
     # (luaPlugin {
     #   plugin = vim-obsession;
@@ -358,35 +362,40 @@ let
   ];
   
   extraPackages = with pkgs; [
-    go # for gitlab.nvim, we can probably ditch it afterwards
+     go # for gitlab.nvim, we can probably ditch it afterwards
 
       # luaPackages.lua-lsp
       # lua53Packages.teal-language-server
-      codeium # ideally not needed and referenced by codeium-vim directly
-      yamllint
-      yamlfmt
-      editorconfig-checker # used in null-ls
+      # codeium # ideally not needed and referenced by codeium-vim directly
       haskellPackages.hasktags
       haskellPackages.fast-tags
-      lua51Packages.luacheck
+
       llm-ls
       manix # should be no need, telescope-manix should take care of it
       nodePackages.vscode-langservers-extracted # needed for typescript language server IIRC
       nodePackages.bash-language-server
       # prettier sadly can't use buildNpmPackage because no lockfile https://github.com/NixOS/nixpkgs/issues/229475
-      nodePackages.prettier 
       nodePackages.dockerfile-language-server-nodejs # broken
-      nodePackages.pyright
       nodePackages.typescript-language-server
       # pandoc # for markdown preview, should be in the package closure instead
       # pythonPackages.pdftotext  # should appear only in RC ? broken
-      python3Packages.flake8 # for nvim-lint and some nixpkgs linters
       nil # a nix lsp
       # rnix-lsp
       rust-analyzer
       shellcheck
       sumneko-lua-language-server
       yaml-language-server
+
+
+      # for none-ls
+      yamllint
+      yamlfmt
+      editorconfig-checker # used in null-ls
+      lua51Packages.luacheck
+      luaformatter
+      nodePackages.prettier 
+      python3Packages.flake8 # for nvim-lint and some nixpkgs linters
+      nodePackages.pyright
     ];
  in
 {

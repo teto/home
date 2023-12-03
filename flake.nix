@@ -134,11 +134,15 @@
            checkMeta = false;
            # showDerivationWarnings = ["maintainerless"];
            allowUnfree = true;
+
+              # this list makes me wanna vomit (except steam maybe because they do good for linux),
+              # and sublime because guy has to eat
               allowUnfreePredicate = pkg: builtins.elem (nixpkgs.${system}.legacyPackages.lib.getName pkg) [
                "codeium"
+               "cudatoolkit"
                "Oracle_VM_VirtualBox_Extension_Pack"
                "ec2-api-tools"
-               "jiten"  # japanese software recognition tool
+               "jiten"  # japanese software recognition tool / use sudachi instead
                "google-chrome"
                "slack"
                "steam"
@@ -494,7 +498,12 @@
 
         autoupdating = final: prev: {
 
-
+         # see https://github.com/NixOS/nixpkgs/pull/257760
+         ollamagpu = final.ollama.override { llama-cpp = (final.llama-cpp.override {
+          cudaSupport = true;
+          openblasSupport = false; 
+         });
+        };
           mujmap-unstable = self.inputs.mujmap.packages.x86_64-linux.mujmap;
           mujmap = final.mujmap-unstable; # needed in HM module
           # neovide = prev.neovide.overrideAttrs(oa: {

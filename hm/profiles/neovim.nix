@@ -417,13 +417,13 @@ let
     #   # optional = true;
     # }
     # displays a minimap on the right
-    (luaPlugin {
-      plugin = vim-dirvish;
-      config = ''
-        vim.g.dirvish_mode=2
-        vim.g.loaded_netrwPlugin = 1
-        '';
-    })
+    # (luaPlugin {
+    #   plugin = vim-dirvish;
+    #   config = ''
+    #     vim.g.dirvish_mode=2
+    #     vim.g.loaded_netrwPlugin = 1
+    #     '';
+    # })
 
     # {
     #   plugin = sql-nvim;

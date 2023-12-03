@@ -10,6 +10,7 @@
     flakeInputs.ironbar.homeManagerModules.default
 
     ./calendars.nix
+    ./ia.nix
     ./git.nix
     ./helix.nix
     ./neovim.nix
@@ -25,6 +26,7 @@
     ../../../hm/profiles/android.nix
     ../../../hm/profiles/desktop.nix
     ../../../hm/profiles/sway.nix
+    ../../../hm/profiles/ia.nix
     ../../../hm/profiles/waybar.nix
     ../../../hm/profiles/neomutt.nix
     # ../../../hm/profiles/nushell.nix

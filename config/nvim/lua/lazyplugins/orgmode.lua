@@ -87,9 +87,9 @@ return {
             config = {
               workspaces = {
                 notes = "~/notes",
-                home = "~/home",
-                work = "~/nova/norg",
-                ml = "~/ml-tests",
+                home = "~/Nextcloud/notes",
+                work = "~/Nextcloud/nova/notes",
+                ml = "~/Nextcloud/notes/ml",
                 -- notes = "~/Nextcloud/Notes",
               },
               default_workspace = "notes"

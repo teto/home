@@ -44,8 +44,11 @@ return {
                      -- other layout configuration here
                  },
                     mappings = {
+                     -- see :h telescope.defaults.history
                         i = {
                             ['<c-t>'] = trouble.open_with_trouble,
+                            ["<C-n>"] = require('telescope.actions').cycle_history_next,
+                            ["<C-p>"] = require('telescope.actions').cycle_history_prev,
 
                             -- 				-- -- To disable a keymap, put [map] = false
                             -- 				-- -- So, to not map "<C-n>", just put

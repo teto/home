@@ -174,6 +174,7 @@ return {
      none_ls.builtins.diagnostics.flake8,
      none_ls.builtins.diagnostics.zsh,
 
+     none_ls.builtins.formatting.black,
      none_ls.builtins.formatting.just,
      none_ls.builtins.formatting.yamlfmt, -- from google
      none_ls.builtins.formatting.prettier,

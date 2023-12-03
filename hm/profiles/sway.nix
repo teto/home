@@ -8,6 +8,7 @@ let
 
   sharedConfig = pkgs.callPackage ./wm-config.nix {};
 
+  myLib = pkgs.callPackage ../lib.nix { };
 in
 {
 
@@ -211,7 +212,6 @@ in
         # "F12" = "exec ~/.cargo/bin/sway";
         # "$mod+F1" = [instance="pad_(?!ncmpcpp)"] move scratchpad; [instance="pad_ncmpcpp"] scratchpad show
 
-        # "${mod}+Ctrl+L" = "exec ${pkgs.swaylock}/bin/swaylock";
     # start a terminal
     "${mod}+Return" = "exec --no-startup-id ${term}";
     "${mod}+Shift+Return" = ''exec --no-startup-id ${term} -d "$(${toString ../../bin/kitty-get-cwd.sh})"'';
@@ -225,7 +225,9 @@ in
 
     # locker
     # "${mod}+Ctrl+L"="exec ${pkgs.i3lock-fancy}/bin/i3lock-fancy";
-    "${mod}+Ctrl+L" = "exec ${pkgs.swaylock}/bin/swaylock";
+
+    # TODO make it a command
+    "${mod}+Ctrl+L" = "exec ${myLib.swaylockCmd} ";
 
     # TODO notify/throw popup when clipman fails 
     # "${mod}+Ctrl+h" = ''exec ${pkgs.clipman}/bin/clipman pick -t rofi || ${sharedConfig.notify-send} 'Failed running clipman' '';
@@ -310,7 +312,7 @@ in
    ";
 
 
-  # what is kanshi
+  # kanshi (wayland monitor placement)
   services.kanshi = {
     enable = true;
   };

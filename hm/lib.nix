@@ -10,6 +10,10 @@ in
    ${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle; ${notify-send} --icon=speaker_no_sound -e -h boolean:audio-toggle:1 -h string:synchronous:audio-volume -u low 'Toggling audio';
    '';
 
+  swaylockCmd = pkgs.writeShellScript  "lock-screen"  ''
+  ${pkgs.swaylock}/bin/swaylock --clock  --indicator -i ~/Nextcloud/images/wallpapers/Hummingbird.jpg
+  '';
+
   # temporary solution since it's not portable
   getPassword = accountName:
     let
