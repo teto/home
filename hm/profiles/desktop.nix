@@ -41,6 +41,8 @@ let
 
     llm-ls # needed by the neovim plugin
 
+
+    presenterm # for presentations from terminal/markdown (in rust, supports images, pretty cool)
     
     perf-tools
 

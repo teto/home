@@ -92,6 +92,7 @@ return {
     { 'protex/better-digraphs.nvim', lazy=true },
 
     -- colorschemes
+    'craftzdog/solarized-osaka.nvim',
     'Matsuuu/pinkmare',
     'flrnd/candid.vim',
     'uga-rosa/ccc.nvim',

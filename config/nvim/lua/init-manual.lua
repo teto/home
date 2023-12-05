@@ -10,6 +10,8 @@ local has_fzf_lua, fzf_lua = pcall(require, 'fzf-lua')
 local use_fzf_lua  = has_fzf_lua and false
 local use_telescope = not use_fzf_lua
 
+local use_neorg = true
+
 local nnoremap = vim.keymap.set
 local map = vim.keymap.set
 local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
@@ -331,8 +333,10 @@ vim.keymap.set('n', '<f2>',
 
 -- TODO I should get the same 
 -- neorg config{{{
-vim.keymap.set('n', '<localleader>x', '<cmd>Neorg exec cursor<CR>', {silent = true}) -- just this block or blocks within heading section
-vim.keymap.set('n', '<localleader>X', '<cmd>Neorg exec current-file<CR>', {silent = true}) -- whole file
+
+if use_neorg then
+	require'teto.neorg'
+end
 -- }}}
 
 local has_rest, rest = pcall(require, 'rest-nvim')
@@ -502,6 +506,25 @@ local has_cmp, cmp = pcall(require, 'cmp')
 if has_cmp then
 	-- use('michaeladler/cmp-notmuch')
 	-- nvim-cmp autocompletion plugin{{{
+	cmp_sources = {
+			{ name = 'nvim_lsp' },
+
+			-- For ultisnips user.
+			-- { name = 'ultisnips' },
+
+			{ name = 'buffer' },
+		}
+    if use_neorg then 
+		table.insert(cmp_sources, { name = 'neorg' })
+	end
+    if use_org then 
+		table.insert(cmp_sources, { name = 'orgmode' })
+	end
+	if use_luasnip then
+			-- For luasnip user.
+		table.insert(cmp_sources, { name = 'luasnip' })
+    end
+
 	cmp.setup({
 		sorting = {
 			comparators = {
@@ -539,22 +562,7 @@ if has_cmp then
 		-- view = {
 		-- 	entries = 'native'
 		-- },
-		sources = {
-			{ name = 'nvim_lsp' },
-
-			-- For vsnip user.
-			-- { name = 'vsnip' },
-
-			-- For luasnip user.
-			{ name = 'luasnip' },
-
-			-- For ultisnips user.
-			-- { name = 'ultisnips' },
-
-			{ name = 'buffer' },
-			{ name = 'neorg' },
-			{ name = 'orgmode' },
-		},
+		sources = cmp_sources,
 	})
 	--  }}}
 	-- 	cmp.setup.cmdline {

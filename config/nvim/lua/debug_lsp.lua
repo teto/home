@@ -5,7 +5,7 @@ local M = {}
 -- We dont have access to unitialized clients
 function M.lsp_diagnose_active_client(name)
     local c
-    for _, client in pairs(vim.lsp.get_active_clients()) do
+    for _, client in pairs(vim.lsp.get_clients()) do
         if client.name == name then
             c = client
             M.lsp_dump_active_client(c)
@@ -24,7 +24,7 @@ local report_info = vim.fn['health#report_info']
 
 function M.check_health()
     print('active clients')
-    for key, client in pairs(vim.lsp.get_active_clients()) do
+    for key, client in pairs(vim.lsp.get_clients()) do
         -- print("loading key "..key)
         M.lsp_dump_active_client(client)
     end

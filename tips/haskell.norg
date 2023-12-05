@@ -1,8 +1,26 @@
-** REPL tips
+* Debug tips
 
+** Runtime configuration
+
+ You can pass
+  run with "+RTS -xc"
+   - {https://downloads.haskell.org/ghc/latest/docs/users_guide/runtime_control.html#rts-flag--xc}[-xc] : dumps to stderr informations about stacktrace
+  Checkout {https://wiki.haskell.org/Debugging} and {https://downloads.haskell.org/ghc/latest/docs/users_guide/runtime_control.html}.
+  Recent versions of GHC allow a dump of a stack trace (of all cost centres) when an exception is raised. In order to enable this, compile with -prof, and run with +RTS -xc
+
+
+* REPL/ghci tips
+
+  use `:script` to load redundant commands
+
+
+** how to set default args ?
+
+@code repl
 
 :set args ARG1 ARG2
 main
+@end
 
 can pass cli args seen by getArgs
 
@@ -19,14 +37,17 @@ CABAL_HELPER_DEBUG=1
 
 -- +RTS -p -s -hy -l-au
 
+@code shell
 # working with ghc-pkg
 ghc-pkg init ./test.db
 ghc-pkg list --global  (vs user)
+   @end
 
 https://downloads.haskell.org/~ghc/latest/docs/html/users_guide/packages.html#package-environments
 https://ghc.gitlab.haskell.org/ghc/doc/users_guide/packages.html#package-environments
 https://downloads.haskell.org/~ghc/latest/docs/html/users_guide/packages.html#package-databases
 
+@code ghcenv
 clear-package-db
 global-package-db
 user-package-db
@@ -35,8 +56,10 @@ package-id id_1
 package-id id_2
 ...
 
--package-env
 
+@end
+
+-package-env
 Or GHC_ENVIRONMENT
 GHC_PACKAGE_PATH
 /home/teto/.ghc/x86_64-linux-8.10.7/environments/default
@@ -50,15 +73,7 @@ https://stackoverflow.com/questions/55379400/how-to-generate-a-ghc-database-for-
 
 cabal haddock --haddock-executables
 
-# How to convert between Text/String/ByteString
-import Data.Text.Encoding
-https://stackoverflow.com/questions/3232074/what-is-the-best-way-to-convert-string-to-bytestring
-https://gist.github.com/dino-/28b09c465c756c44b2c91d777408e166
 
-## string <-> Bytestring
-BLU.toString   :: BL.ByteString -> String
-BLU.fromString :: String -> BL.ByteString
-lazyByteString = BLU.fromString "lazyByteString ä ß"
 
 pour savoir d'ou le pkg est importe:
 	ghc-pkg find-module System.Linux.Netlink
@@ -74,7 +89,7 @@ How to configure cabal ?
 https://www.haskell.org/cabal/users-guide/installing-packages.html
 $ cabal user-config update
 
-see https://wiki.haskell.org/FAQ#How_can_I_get_a_stack_backtrace_when_my_program_throws_an_exception.3F
+   see {https://wiki.haskell.org/FAQ#How_can_I_get_a_stack_backtrace_when_my_program_throws_an_exception.3F}
 
     -- -fno-warn-unused-imports 
     -- -fforce-recomp  makes it build twice on nixos
@@ -99,31 +114,8 @@ https://downloads.haskell.org/~ghc/9.0.1/docs/html/users_guide/debugging.html
 -ddump-timings
 
 
-# 
 cabal haddock --executables
 
-# Lenses
-~. -> view
-
-# Debug
-https://wiki.haskell.org/Debugging
-Recent versions of GHC allow a dump of a stack trace (of all cost centres) when an exception is raised. In order to enable this, compile with -prof, and run with +RTS -xc
-import Debug.Trace
-traceShow / traceId
-
-* ghci 
-  use `:script` to load redundant commands
-
-* Frames
-
-inCoreSoA
-AoS = Array of Structures
-
-# Multiline strings
-        colNames = "age, workclass, fnlwgt, education, education-num, \
-                   \marital-status, occupation, relationship, race, sex, \
-                   \capital-gain, capital-loss, hours-per-week, \
-                   \native-country\n"
 
 * Template Haskell
 (the double tick indicates we want the name of the type, not the type itself).
@@ -140,7 +132,12 @@ Effects which don't make use of the m parameter are known as "first-order effect
 https://ghc.gitlab.haskell.org/ghc/doc/users_guide/packages.html#envvar-GHC_PACKAGE_PATH
 
 * working with strings
+# How to convert between Text/String/ByteString
+import Data.Text.Encoding
+https://stackoverflow.com/questions/3232074/what-is-the-best-way-to-convert-string-to-bytestring
+https://gist.github.com/dino-/28b09c465c756c44b2c91d777408e166
 
+@code haskell
 import Data.ByteString.Lazy as BL
 import Data.ByteString as BS
 import Data.Text as TS
@@ -177,4 +174,4 @@ BL.fromStrict :: BS.ByteString -> BL.ByteString
 BL.toStrict   :: BL.ByteString -> BS.ByteString
 TL.fromStrict :: TS.Text -> TL.Text
 TL.toStrict   :: TL.Text -> TS.Text
-
+@end

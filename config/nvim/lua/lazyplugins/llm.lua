@@ -12,7 +12,7 @@ return {
         -- api_host_cmd = "echo -n '0.0.0.0:3000'"
         --
         -- with `ollama serve`
-        api_host_cmd = "echo -n http://127.0.0.1:11434"
+        -- api_host_cmd = "echo -n http://127.0.0.1:11434"
        })
     end,
  },
