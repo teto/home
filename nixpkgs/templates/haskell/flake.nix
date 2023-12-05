@@ -21,7 +21,7 @@
   };
 
   outputs = { self, nixpkgs, flake-utils, hls, ... }:
-    flake-utils.lib.eachSystem [ "x86_64-linux" ] (system:
+    flake-utils.lib.eachDefaultSystem (system:
       let
 
         compilerVersion = "96";
@@ -41,12 +41,14 @@
             cabal-install
             # TODO use the one from nixpkgs instead
             # hls.packages.${system}."haskell-language-server-${compilerVersion}"
+            # hs.haskell-language-server
           ]);
 
         # mkDevShell
         mkPackage = name:
           hsPkgs.developPackage {
-            root = pkgs.lib.cleanSource (builtins.toPath ./. + "/${name}");
+           # TODO use nix-filter
+            root = pkgs.lib.cleanSource (builtins.toPath ./. + "/src");
             name = name;
             returnShellEnv = false;
             withHoogle = true;
@@ -57,12 +59,10 @@
       in
       {
         packages = {
-          default = mkPackage "mptcp-pm";
+          default = mkPackage "name";
         };
 
-        devShells = {
-          # default = self.packages.${system}.mptcp-pm.envFunc { };
-          default = pkgs.mkShell {
+        devShells.default = pkgs.mkShell {
             name = "ghc${compilerVersion}-haskell-env";
             packages =
               let
@@ -70,16 +70,12 @@
                   hs.ghc
                   # hs.haskell-language-server
                   hs.cabal-install
-                  # prev.cairo
                 ]);
               in
               [
                 ghcEnv
-                # ghc
                 pkgs.pkg-config
               ];
           };
-
-        };
       });
 }

@@ -36,6 +36,8 @@ environment.profileRelativeSessionVariables =
 
 ** set local paths for flake inputs
 
+
+
  url = "git+file:/home/teto/jupyenv";
 
 https://github.com/NixOS/nixpkgs/pull/185719

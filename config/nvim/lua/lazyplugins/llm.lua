@@ -1,15 +1,18 @@
 return {
  { 'jackMort/ChatGPT.nvim',
    -- due to https://github.com/jackMort/ChatGPT.nvim/issues/265
-    commit = "24bcca7",
+    -- commit = "24bcca7",
     config = function()
      -- passing OPENAI_API_KEY in environment for this to work
      -- huge setup at https://github.com/jackMort/ChatGPT.nvim
       require("chatgpt").setup({
         -- api_key_cmd = "pass show chat.openai.com",
         -- see https://github.com/jackMort/ChatGPT.nvim/issues/314
-        api_host_cmd = "echo -n api.openai.com",
+        -- api_host_cmd = "echo -n api.openai.com",
         -- api_host_cmd = "echo -n '0.0.0.0:3000'"
+        --
+        -- with `ollama serve`
+        api_host_cmd = "echo -n http://127.0.0.1:11434"
        })
     end,
  },
@@ -27,13 +30,16 @@ return {
     end,
   }
  , 'David-Kunz/gen.nvim'
+
  , {
+
+
 
     -- LLMToggleAutoSuggest enables/disables automatic "suggest-as-you-type" suggestions
     -- LLMSuggestion is used to manually request a suggestion
-   'huggingface/llm.nvim'
-  -- , config = function ()
-  , opts =  {
+   'huggingface/llm.nvim',
+   enabled = false,
+  opts =  {
    tokens_to_clear = { "<EOT>" },
    fim = {
      enabled = true,

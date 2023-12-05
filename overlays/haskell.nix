@@ -9,7 +9,7 @@ let
       let
         ghcEnv = ghc.ghcWithPackages (hs: [
           hs.ghc
-          # hs.haskell-language-server
+          hs.haskell-language-server
           hs.cabal-install
           # prev.cairo
         ]);
