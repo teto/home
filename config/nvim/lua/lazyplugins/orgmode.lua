@@ -66,50 +66,18 @@ return {
      load_paths = {}
    }
  },
-
  {
     "nvim-neorg/neorg",
     -- ft = "norg",
-    config = function()
-      require("neorg").setup {
-        load = {
-          ["core.defaults"] = {}, -- Loads default behaviour
-          ["core.keybinds"] = {
-            config = {
-                default_keybinds = true,
-            }
-          },
-          -- ["external.kanban"] = {},
-          ["core.concealer"] = {}, -- Adds pretty icons to your documents
-          ["core.ui.calendar"] = {},
-          -- ['core.ui.calendar'] = {}, -- fails on stable nvim
-          ["core.dirman"] = { -- Manages Neorg workspaces
-            config = {
-              workspaces = {
-                notes = "~/notes",
-                home = "~/Nextcloud/notes",
-                work = "~/Nextcloud/nova/notes",
-                ml = "~/Nextcloud/notes/ml",
-                -- notes = "~/Nextcloud/Notes",
-              },
-              default_workspace = "notes"
-            },
-          },
-          -- needs neorg-exec plugin
-          ["external.exec"] = {},
-        },
-      }
-    end,
     dependencies = {
     --   -- { "pritchett/neorg-capture"},
     --   -- { 'max397574/neorg-kanban' },
-       {
-        -- a plugin for neorg
-        -- use with :Neorg exec cursor
-        'laher/neorg-exec'
-       },
-
     }
+ },
+ {
+  -- a plugin for neorg
+  -- use with :Neorg exec cursor
+  'laher/neorg-exec'
  },
 
 }

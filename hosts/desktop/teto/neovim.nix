@@ -26,6 +26,12 @@ let
 
   ];
 
+  # orgmodePlugins = with pkgs.vimPlugins; [ 
+  neorgPlugins = with pkgs.vimPlugins; [
+      (luaPlugin { plugin = neorg-telescope; })
+     ];
+
+
   luaPlugins = with pkgs.vimPlugins; [
     {
       # we should have a file of the grammars as plugins
@@ -256,6 +262,8 @@ let
 
     # WIP
     # (luaPlugin { plugin = nvim-telescope-zeal-cli; })
+
+
     (luaPlugin { plugin = minimap-vim; })
     # (luaPlugin {
     #   # reuse once https://github.com/neovim/neovim/issues/9390 is fixed
@@ -407,6 +415,7 @@ let
            luaPlugins 
         ++ filetypePlugins
         ++ telescopePlugins
+        ++ neorgPlugins
    ;
 
     # plugins = with pkgs.vimPlugins; [
