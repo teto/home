@@ -80,7 +80,7 @@ let
     vlc
     # leafnode dovecot22 dovecot_pigeonhole fetchmail procmail w3m
     # mairix mutt msmtp lbdb contacts spamassassin
-    # element-desktop
+    element-desktop
   ];
 
 
@@ -168,7 +168,7 @@ let
       xarchiver # to unpack/pack files
       # zathura # broken
 
-      # ytfzf # browse youtube
+      # ytfzf # broken browse youtube
       # nomacs # image viewer
 
       ranger # or joshuto ? see hm configuration

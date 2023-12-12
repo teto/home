@@ -132,6 +132,7 @@ let
 
 	# not upstreamed yet
     # (luaPlugin { plugin = nvim-lua-gf; })
+    (luaPlugin { plugin = numb-nvim; })
     (luaPlugin { plugin = luasnip; })
 
     # required by trouble
