@@ -11,7 +11,7 @@ in
    '';
 
   swaylockCmd = pkgs.writeShellScript  "lock-screen"  ''
-  ${pkgs.swaylock}/bin/swaylock --clock  --indicator -i ~/Nextcloud/images/wallpapers/Hummingbird.jpg
+  ${pkgs.swaylock-effects}/bin/swaylock --clock  --indicator -i ~/Nextcloud/images/wallpapers/Hummingbird.jpg
   '';
 
   # temporary solution since it's not portable

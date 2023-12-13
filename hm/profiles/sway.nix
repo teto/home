@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }:
+{ lib, pkgs, config, ... }:
 let
   # key modifier
   mod = "Mod1";
@@ -27,7 +27,7 @@ in
     nwg-menu
     nwg-dock # a nice dock 
     wlogout
-    swaylock
+    swaylock-effects
     sway-contrib.grimshot # contains "grimshot" for instance
     shotman # -c region 
     tessen # handle passwords
@@ -233,6 +233,14 @@ in
     # "${mod}+Ctrl+h" = ''exec ${pkgs.clipman}/bin/clipman pick -t rofi || ${sharedConfig.notify-send} 'Failed running clipman' '';
     # cliphist list | rofi -dmenu
     "${mod}+Ctrl+h" = ''exec ${pkgs.cliphist}/bin/cliphist list | rofi -dmenu  -m -1 -p "Select item to copy" -lines 10 -width 35 | cliphist decode | wl-copy | ${sharedConfig.notify-send} 'Failed running cliphist' '';
+
+     # "${mod}+F1" = "[title=\"ncmpcpp*\"] move scratchpad; [title=\"ncmpcpp*\"] scratchpad show";
+     # kitty nvim -c ":Neorg workspace notes"
+     "${mod}+F1" = ''exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --mark neorg-notes --command kitty nvim -c ":Neorg workspace notes"  '';
+     "${mod}+F2" = ''exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --mark audio --command ${config.programs.ncmpcpp.package}/bin/ncmpcpp '';
+# bindsym F12 exec sway-scratchpad --command "kitty -d /home/user/projects" --mark terminal
+
+    # for_window [con_mark="SCRATCHPAD_terminal"] border pixel 1
 
     # "${mod}+g" = "exec ${pkgs.i3-easyfocus}/bin/i3-easyfocus";
     # "${mad}+w" = "exec ${pkgs.i3-easyfocus}/bin/i3-easyfocus";
