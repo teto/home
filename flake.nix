@@ -120,10 +120,13 @@
       # sshLib = import ./nixpkgs/lib/ssh.nix { inherit secrets; flakeInputs = self.inputs; };
       system = "x86_64-linux";
 
+      autoCalledPackages = import "${nixpkgs}/pkgs/top-level/by-name-overlay.nix" pkgs/by-name;
+
       pkgImport = src:
         import src {
           inherit system;
           overlays = (src.lib.attrValues self.overlays) ++ [
+            autoCalledPackages
             self.inputs.rofi-hoogle.overlay
             # self.inputs.nixpkgs-wayland.overlay
             # self.inputs.nix.overlays.default
@@ -244,12 +247,11 @@
             */
             nvim = self.nixosConfigurations.desktop.config.home-manager.users.teto.programs.neovim.finalPackage;
 
-            nvim-unwrapped = myPkgs.neovim-unwrapped;
-            # .override(
-            #  # { libuv = myPkgs.libuv_147;}
-            #  );
 
-            libuv = myPkgs.libuv_147;
+            inherit (myPkgs) sway-scratchpad ;
+
+            nvim-unwrapped = myPkgs.neovim-unwrapped;
+
   # myPackage = flakeInputs.neovim.packages."${pkgs.system}".neovim;
  
             treefmt-with-config = treefmt-nix.lib.mkWrapper nixpkgs.legacyPackages.x86_64-linux {
