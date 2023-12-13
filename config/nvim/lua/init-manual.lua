@@ -335,7 +335,9 @@ vim.keymap.set('n', '<f2>',
 -- neorg config{{{
 
 if use_neorg then
-	require'teto.neorg'
+	local neorg = require'teto.neorg'
+	neorg.setup()
+	neorg.setup_mappings()
 end
 -- }}}
 
@@ -648,9 +650,12 @@ vim.g.spinner_frames = { '⣾', '⣽', '⣻', '⢿', '⡿', '⣟', '⣯', '⣷' 
 -- vim.g.should_show_diagnostics_in_statusline = true
 
 
+-- vim.ui.select
+fzf_lua.register_ui_select()
+
 if use_fzf_lua then
 
-	require('fzf-lua.providers.ui_select').register({})
+	-- require('fzf-lua.providers.ui_select').register({})
 
 	require('teto.fzf-lua').register_keymaps()
 	local fzf_history_dir = vim.fn.expand('~/.local/share/fzf-history')

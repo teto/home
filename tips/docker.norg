@@ -6,10 +6,13 @@ Each FROM instruction clears any state created by previous instructions
 
 when updating this, fill the nix store on the runners by running the following:
   # nix build github:nixos/nix/VERSION --out-link ./dont-remove#
-# push image to registry 
+* Registry
+ ** push image to registry 
+@code shell
 docker load -i tarball / docker import
 docker tag old new
 docker push (make sure to be logged in, else docker login)
+	@end
 
 # -v host-dir:container-dir
 docker run -v "/nix:/nix" -v "/nix/var/nix/daemon-socket/socket:/nix/var/nix/daemon-socket/socket" -it tetho/nix:test2 sh
@@ -25,19 +28,17 @@ docker run --entrypoint bash -it 885c3cd03b4d643999dca2db0e4e2fefe533f4689864c5d
 
 docker run -it registry.novadiscovery.net/jinko/jinko-platform/jinko-base:local bash 
 
-# how to free space / remove images
+** how to free space / remove images
+@code shell
 docker system prune -af --volumes
 docker image prune -a
 docker rmi -f $(docker images -q)
+   @end
 
 One can use `-e "foo=bar"` to pass additionnal variables.
 
 Pour lister les images et leur nom
 docker ps
-
-# keep docker running
-
-tail -f /dev/null
 
 %% docker container ls
 
@@ -89,9 +90,11 @@ to join the default network that way.
 $ docker network rm host / bridge / none
 Error response from daemon: host is a pre-defined network and cannot be removed
 
-* How to rebuild and restart a single container ?
-Remove the -d to see logs
-`docker-compose up -d --build worker`
+ ** Docker-compose
+*** How to rebuild and restart a single container ?
+
+    Remove the -d to see logs
+    `docker-compose up -d --build worker`
 
 * How to stop a single container ?
 
