@@ -1,6 +1,8 @@
-{ pkgs, lib
+{ pkgs
+, lib
 , flakeInputs
-, ... }:
+, ...
+}:
 
 let
   luaPlugin = attrs: attrs // {

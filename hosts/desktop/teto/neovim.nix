@@ -53,6 +53,9 @@ let
         ];
       };
     }
+
+    # fails because of fzy
+    # (luaPlugin { plugin = flakeInputs.rocks-nvim.packages.${pkgs.system}.rocks-nvim; })
     (luaPlugin { plugin = urlview-nvim; })
     (luaPlugin { plugin = nvim-ufo; })
     (luaPlugin { 

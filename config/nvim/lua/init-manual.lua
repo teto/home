@@ -338,6 +338,12 @@ if use_neorg then
 	local neorg = require'teto.neorg'
 	neorg.setup()
 	neorg.setup_mappings()
+	vim.api.nvim_create_user_command('Notes', function()
+		vim.cmd(":Neorg workspace notes")
+		end, {
+		desc = 'Opens my neorg notes.',
+		})
+
 end
 -- }}}
 
