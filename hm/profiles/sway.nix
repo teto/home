@@ -236,8 +236,8 @@ in
 
      # "${mod}+F1" = "[title=\"ncmpcpp*\"] move scratchpad; [title=\"ncmpcpp*\"] scratchpad show";
      # kitty nvim -c ":Neorg workspace notes"
-     "${mod}+F1" = ''exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --mark neorg-notes --command kitty nvim -c ":Neorg workspace notes"  '';
-     "${mod}+F2" = ''exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --mark audio --command ${config.programs.ncmpcpp.package}/bin/ncmpcpp '';
+     "${mod}+F1" = ''exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --mark neorg-notes --command 'kitty nvim -c ":Neorg workspace notes"'  '';
+     "${mod}+F2" = ''exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --mark audio --command '${config.programs.ncmpcpp.package}/bin/ncmpcpp' '';
 # bindsym F12 exec sway-scratchpad --command "kitty -d /home/user/projects" --mark terminal
 
     # for_window [con_mark="SCRATCHPAD_terminal"] border pixel 1

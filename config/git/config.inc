@@ -2,7 +2,7 @@
 [core]
 [core]
 	# fsmonitor = "/nix/store/pqrqcfw2m27kwhrh7jyj05lp9b5pi0jd-rs-git-fsmonitor-0.1.3/bin/rs-git-fsmonitor"
-	pager = "/nix/store/ms4zb8803ixq3yz4nn0kgyda0q3d3rvw-delta-0.16.5/bin/delta"
+	# pager = "/nix/store/ms4zb8803ixq3yz4nn0kgyda0q3d3rvw-delta-0.16.5/bin/delta"
 	sshCommand = "ssh"
 
 # sshCommand=ssh -vvv

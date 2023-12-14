@@ -23,7 +23,7 @@
     # ../../nixos/profiles/kanata.nix
     ../../nixos/profiles/nix-daemon.nix
     ../../nixos/profiles/postgresql.nix
-    ../../nixos/profiles/home-assistant.nix
+    # ../../nixos/profiles/home-assistant.nix # triggers a Package ‘openssl-1.1.1w’ reaching end of life
     # usually inactive, just to test some stuff
     # ../../nixos/modules/libvirtd.nix
 
