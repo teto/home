@@ -58,6 +58,7 @@ let
     # (luaPlugin { plugin = flakeInputs.rocks-nvim.packages.${pkgs.system}.rocks-nvim; })
     (luaPlugin { plugin = urlview-nvim; })
     (luaPlugin { plugin = nvim-ufo; })
+    (luaPlugin { plugin = ollama-nvim; })
     (luaPlugin { 
      # this is a peculiarly complex one that needs pynvim, image.nvim
      plugin = molten-nvim; 

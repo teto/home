@@ -28,7 +28,10 @@
     };
     nixos-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nixos-stable.url = "github:nixos/nixpkgs/nixos-23.05";
-
+    nix-search-cli = {
+      url = "github:peterldowns/nix-search-cli";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     rocks-nvim.url = "github:nvim-neorocks/rocks.nvim";
     firefox2nix.url = "git+https://git.sr.ht/~rycee/mozilla-addons-to-nix";
     anyrun.url = "github:Kirottu/anyrun";
@@ -54,9 +57,12 @@
      # used for nightly rust devtools
      url= "github:nix-community/fenix"; inputs."nixpkgs".follows = "nixpkgs"; 
     };
-    peerix.url = "github:cid-chan/peerix";
+    # peerix.url = "github:cid-chan/peerix";
     # mptcp-flake.url = "github:teto/mptcp-flake/fix-flake";
-    mujmap.url = "github:elizagamedev/mujmap";
+    mujmap = {
+     url = "github:elizagamedev/mujmap";
+     # inputs.nixpkgs.follows = "nixpkgs"; # breaks build
+    };
     rofi-hoogle.url = "github:teto/rofi-hoogle/fixup";
 
     # TODO use mine instead
@@ -69,7 +75,10 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nur.url = "github:nix-community/NUR";
     nixpkgs-wayland.url = "github:nix-community/nixpkgs-wayland";
-    purebred.url = "github:purebred-mua/purebred";
+    purebred = { 
+      url = "github:purebred-mua/purebred";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     # poetry.url = "github:nix-community/poetry2nix";
     nix-update.url = "github:Mic92/nix-update";
     nix-index-cache.url = "github:Mic92/nix-index-database";
@@ -97,7 +106,7 @@
     yazi = {
       # url = "github:sxyazi/yazi?ref=v0.1.5";
       url = "github:sxyazi/yazi";
-      # inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     sops-nix.url = "github:Mic92/sops-nix";

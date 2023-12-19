@@ -1018,3 +1018,10 @@ vim.api.nvim_create_autocmd({ "VimLeave" }, {
     vim.fn.jobstart('notify-send "closing nvim"', {detach=true})
   end,
 })
+
+
+
+local has_ollama, ollama = pcall(require, 'ollama')
+if has_ollama then
+	ollama.setup()
+end
