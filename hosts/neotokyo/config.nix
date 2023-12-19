@@ -41,6 +41,7 @@
     ../../nixos/profiles/ntp.nix
     ../../nixos/profiles/nix-daemon.nix
     ../../nixos/profiles/neovim.nix
+    ../../nixos/profiles/docker.nix
 
     # ./blog.nix
 
@@ -48,6 +49,9 @@
     # <nixpkgs/nixos/modules/profiles/hardened.nix>
 
   ];
+
+  virtualisation.docker.enable = true;
+
 
   home-manager.users.root = {
    imports = [
@@ -95,7 +99,7 @@
 
   # environment.systemPackages = with pkgs; [ ];
 
-  services.gitolite.adminPubkey = secrets.gitolitePublicKey;
+  # services.gitolite.adminPubkey = secrets.gitolitePublicKey;
 
 
 }

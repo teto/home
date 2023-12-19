@@ -10,7 +10,9 @@ local has_fzf_lua, fzf_lua = pcall(require, 'fzf-lua')
 local use_fzf_lua  = has_fzf_lua and false
 local use_telescope = not use_fzf_lua
 
+local use_org = true
 local use_neorg = true
+local use_luasnip = true
 
 local nnoremap = vim.keymap.set
 local map = vim.keymap.set

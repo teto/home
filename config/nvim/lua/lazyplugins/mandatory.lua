@@ -174,6 +174,7 @@ return {
      none_ls.builtins.diagnostics.flake8,
      none_ls.builtins.diagnostics.zsh,
 
+     -- use with vim.lsp.buf.format()
      none_ls.builtins.formatting.black,
      none_ls.builtins.formatting.just,
      none_ls.builtins.formatting.yamlfmt, -- from google
