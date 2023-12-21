@@ -67,7 +67,8 @@
 
     # TODO use mine instead
     hm = {
-      url = "github:teto/home-manager/scratch";
+      # url = "github:teto/home-manager/scratch";
+      url = "path:/home/teto/hm2";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -596,15 +597,16 @@
             neotokyo = genNode ({ name = "neotokyo"; hostname = secrets.jakku.hostname; }) // {
               sshOpts = [ "-t" ];
 
-              # user = "teto";
-            };
+             } // {
+              user = "teto";
+              sshUser = "teto";
+              sshOpts = [
+               "-i" "~/.ssh/id_rsa" 
+               # "-p${toString secrets.router.sshPort}"
+              ];
+
+             };
           };
-        # nixpkgs.lib.listToAttrs (
-        #   map
-        #     (attr:
-        #       nixpkgs.lib.nameValuePair "${attr.runnerName}-${attr.targetEnvironment}" (genNode attr)
-        #     )
-        #     configs);
       };
 
       # defaultTemplate = templates.app;

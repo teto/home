@@ -92,7 +92,7 @@
       forceSSL = true;
       # https://nixos.org/manual/nixos/stable/index.html#module-security-acme
       enableACME = true;
-      enableReload = true; # reloads service when config changes !
+      # enableReload = true; # reloads service when config changes !
     };
   };
 

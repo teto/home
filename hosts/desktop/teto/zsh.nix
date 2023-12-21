@@ -26,6 +26,7 @@
      GITHUB_TOKEN = secrets.githubToken;
      # TODO add it to sops
      OPENAI_API_KEY = secrets.OPENAI_API_KEY;
+     CDPATH = "~/nova";
      # OPENAI_API_HOST = secrets.OPENAI_API_HOST;
     }
     

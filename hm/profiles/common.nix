@@ -57,8 +57,6 @@
   # https://github.com/commercialhaskell/stack/issues/2358
   # home.file.".stack/config.yaml".source = ../home/stack.yaml;
 
-  home.stateVersion = "23.11";
-
   # - https://github.com/carnager/rofi-scripts.git
   # https://github.com/carnager/buku_run
   home.sessionVariables = {

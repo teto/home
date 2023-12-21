@@ -1250,18 +1250,14 @@
         ]
       },
       "locked": {
-        "lastModified": 1702466418,
-        "narHash": "sha256-7z9HU7ZKpauPLQwWsxd2e/udb+CQWpU7gieBkrhe9R8=",
-        "owner": "teto",
-        "repo": "home-manager",
-        "rev": "66e05a810603fc552985089c242160e6c93f05a1",
-        "type": "github"
+        "lastModified": 1703084907,
+        "narHash": "sha256-OkFjKC6bPKGvfyXDD6Si4Seo0CYF9kf6eMhLZ/9LKjw=",
+        "path": "/home/teto/hm2",
+        "type": "path"
       },
       "original": {
-        "owner": "teto",
-        "ref": "scratch",
-        "repo": "home-manager",
-        "type": "github"
+        "path": "/home/teto/hm2",
+        "type": "path"
       }
     },
     "hm_2": {

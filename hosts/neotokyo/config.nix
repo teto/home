@@ -10,7 +10,7 @@
    };
   };
 
-  system.stateVersion = "23.05";
+  system.stateVersion = "23.11";
 
   # imported from gandhi ?
     boot.initrd.kernelModules = [
@@ -41,7 +41,7 @@
     ../../nixos/profiles/ntp.nix
     ../../nixos/profiles/nix-daemon.nix
     ../../nixos/profiles/neovim.nix
-    ../../nixos/profiles/docker.nix
+    ../../nixos/profiles/docker-daemon.nix
 
     # ./blog.nix
 
@@ -59,7 +59,7 @@
     ../desktop/root/ssh-config.nix
    ];
 
-   home.stateVersion = "23.05";
+   # home.stateVersion = "23.11";
   };
 
  home-manager.users.teto = {
@@ -76,7 +76,7 @@
     # breaks build: doesnt like the "activation-script"
     # nova.hmConfigurations.dev
    ];
-   home.stateVersion = "23.05";
+   # home.stateVersion = "23.05";
  };
 
   boot.loader = {

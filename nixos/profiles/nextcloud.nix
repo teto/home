@@ -34,7 +34,6 @@ in
     };
     maxUploadSize = "512M";
     logLevel = 0;
-    enableBrokenCiphersForSSE = false;
     # disable imageMagick for security reasons
     enableImagemagick = true;
     autoUpdateApps.enable = true;
