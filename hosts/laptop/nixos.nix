@@ -14,13 +14,14 @@
     ../../nixos/profiles/podman.nix
     ../../nixos/profiles/sway.nix
     ../../nixos/profiles/docker-daemon.nix
+    ../../nixos/profiles/greetd.nix
     # ../../modules/xserver.nix
     # ./nixos/modules/redis.nix
     ../../nixos/profiles/steam.nix
     ../../nixos/profiles/qemu.nix
     # ../../nixos/profiles/adb.nix
     # ../../nixos/profiles/cron.nix
-    # ../../nixos/profiles/kanata.nix
+    ../../nixos/profiles/kanata.nix
     ../../nixos/profiles/nix-daemon.nix
     ../../nixos/profiles/postgresql.nix
     # ../../nixos/profiles/home-assistant.nix # triggers a Package ‘openssl-1.1.1w’ reaching end of life

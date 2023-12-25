@@ -1,2 +1,8 @@
 
 systemd-run --user --scope -pMemoryMax=<MemoryLimit> -pMemorySwapMax=<SwapMemoryLimit> nixpkgs-review rev HEAD
+
+
+
+* Toggle Fn keys by default
+
+  Use Fn+Esc

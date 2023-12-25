@@ -54,6 +54,7 @@ let
     nix-output-monitor
     nix-update # nix-update <ATTR> to update a software
     nix-index # to list package contents
+    nix-top # to list current builds
     nixpkgs-fmt
     nixpkgs-review
     # nodePackages."@bitwarden/cli" # 'bw' binary # broken

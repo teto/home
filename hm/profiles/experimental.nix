@@ -12,10 +12,13 @@
 
   programs.xdg.enable = true;
 
-  programs.gnome-shell.enable = true;
   programs.swappy.enable = false;
 
 
+  home.packages = with pkgs; [
+    sudachidict
+    sudachi-rs
+  ];
 
 
   # programs.htop = {

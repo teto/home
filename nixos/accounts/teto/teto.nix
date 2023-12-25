@@ -35,7 +35,10 @@ in
       "kvm" # needed when using runAsRoot when building dockerImage
       # config.users.groups.keys.name
       "keys"
-    ];
+     ] ++  lib.optional (config.services.kanata.enable)
+
+      "uinput" # required for kanata it seems
+     ;
     # once can set initialHashedPassword too
     # initialPassword
     # generated with nix run nixpkgs.mkpasswd mkpasswd -m sha-512

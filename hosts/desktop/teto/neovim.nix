@@ -59,6 +59,11 @@ let
     (luaPlugin { plugin = urlview-nvim; })
     (luaPlugin { plugin = nvim-ufo; })
     (luaPlugin { plugin = ollama-nvim; })
+
+
+    # testin
+    (luaPlugin { plugin = image-nvim; })
+
     (luaPlugin { 
      # this is a peculiarly complex one that needs pynvim, image.nvim
      plugin = molten-nvim; 

@@ -361,7 +361,7 @@
 
               ({ pkgs, ... }: {
                 imports = [
-                  ./hosts/laptop/config.nix
+                  ./hosts/laptop/nixos.nix
                   # ./nixos/profiles/chromecast.nix
                   # ./nixos/profiles/virtualbox.nix
                 ];
@@ -508,14 +508,19 @@
 
       overlays = {
 
-        autoupdating = final: prev: {
-
-         # see https://github.com/NixOS/nixpkgs/pull/257760
-         ollamagpu = final.ollama.override { llama-cpp = (final.llama-cpp.override {
+       autoupdating = final: prev: let 
+        llama-cpp-matt = (final.llama-cpp.override {
           cudaSupport = true;
           openblasSupport = false; 
+          rocmSupport = false;
+          openclSupport = false;
+          stdenv = prev.gcc11Stdenv;
          });
-        };
+
+       in {
+
+         # see https://github.com/NixOS/nixpkgs/pull/257760
+         ollamagpu = final.ollama.override { llama-cpp = llama-cpp-matt;         };
           mujmap-unstable = self.inputs.mujmap.packages.x86_64-linux.mujmap;
           mujmap = final.mujmap-unstable; # needed in HM module
           # neovide = prev.neovide.overrideAttrs(oa: {
