@@ -442,6 +442,12 @@ let
       require('init-manual')
     '';
 
+    extraPython3Packages = p: [ 
+     p.jupyter_client
+     p.pyperclip  #  if you want to use molten_copy_output
+     p.nbformat # to import/export notebooks
+     p.pynvim
+    ];
     extraPackages = extraPackages;
  };
 
