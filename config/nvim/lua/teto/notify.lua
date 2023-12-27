@@ -9,11 +9,18 @@ end
 
 function M.notify_send(msg, level, opts)
 	local l = "low"
-	if level == vim.log.levels.WARN then
+	if level == vim.log.levels.DEBUG then
+		l = "low"
+     elseif level == vim.log.levels.WARN then
 		l = "normal"
 	elseif level == vim.log.levels.ERROR then
 		l = "critical"
 	end
+
+    if level == vim.log.levels.DEBUG then
+      return
+    end
+
 
 	-- opts = opts or {}
 	-- local title = opts.title
