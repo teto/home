@@ -80,7 +80,6 @@
 
     # custom module
     autosuggestion.enable = true;
-
     autosuggestion.highlight = "fg=#d787ff,bold";
 
   };

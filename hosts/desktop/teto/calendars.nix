@@ -31,6 +31,7 @@ in
     [highlight_days]
     color = #ff0000
     '';
+
     # default_color
   };
 

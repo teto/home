@@ -85,7 +85,8 @@ https://github.com/NixOS/nixpkgs/pull/185719
  
  Mention `--max-jobs 0` to build remotely only
  
- # how to iterate on nix repl ?
+ * how to iterate on nix repl ?
+
  ```
  :a (import ./test.nix { inherit lib linkFarm;}) 
  :r 

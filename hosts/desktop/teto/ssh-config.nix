@@ -22,6 +22,8 @@
         # le port depend du service
         port = secrets.jakku.sshPort;
         identityFile = "~/.ssh/id_rsa";
+        identitiesOnly = true;
+		# port = 12666;
       };
 
       router = {

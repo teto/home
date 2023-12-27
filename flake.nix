@@ -67,8 +67,8 @@
 
     # TODO use mine instead
     hm = {
-      # url = "github:teto/home-manager/scratch";
-      url = "path:/home/teto/hm2";
+      url = "github:teto/home-manager/scratch";
+      # url = "path:/home/teto/hm";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -241,13 +241,13 @@
                 self.packages.${system}.treefmt-with-config
                 self.inputs.firefox2nix.packages.${system}.default
               ];
+             shellHook = ''
+              echo "Run just ..."
+             '';
             };
 
             inherit (unstablePkgs) nhs92 nhs94 nhs96;
 
-            shellHook = ''
-             echo "Run just ..."
-            '';
           };
 
           packages = {
@@ -603,7 +603,7 @@
               sshOpts = [ "-t" ];
 
              } // {
-              user = "teto";
+              # user = "teto";
               sshUser = "teto";
               sshOpts = [
                "-i" "~/.ssh/id_rsa" 
