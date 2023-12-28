@@ -42,6 +42,7 @@ let
   ++ lib.optionals withQuagga [ "internet-apps" ]
   ;
 
+  # TODO this is not possible anymore
   ns3forDce = ns-3.override ({ inherit modules python; });
   pythonEnv = python.withPackages (ps:
     lib.optional withManual ps.sphinx

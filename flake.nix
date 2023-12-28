@@ -276,9 +276,9 @@
               programs.nixpkgs-fmt.enable = true;
               programs.stylua.enable = true;
             };
-            dce = myPkgs.callPackage ./pkgs/dce { python = myPkgs.python3; };
 
-            # aws-lambda-rie = myPkgs.callPackage ./pkgs/aws-lambda-runtime-interface-emulator { };
+            # broken
+            # dce = myPkgs.dce;
 
             jupyter4ihaskell = myPkgs.jupyter-teto;
             inherit (unstablePkgs) nhs92 nhs94 nhs96;
