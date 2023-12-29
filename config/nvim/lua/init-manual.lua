@@ -970,10 +970,13 @@ map('n', '<leader>rg', '<Cmd>Grepper -tool rg -open -switch<CR>', { remap = true
 vim.filetype.add({
 	extension = {
 		http = "http",
-		env = "env"
+		env = "env",
+		kbd = "kbd",
+		v = "coq"
 
 	},
 	filename = {
+		['wscript'] =  'python',
 		-- ['.env'] = 'env',
 		-- ['.http'] = 'http'
 	}

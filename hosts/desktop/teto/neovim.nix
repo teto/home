@@ -374,6 +374,7 @@ let
     { plugin = vim-toml; }
     { plugin = dhall-vim; }
     { plugin = vim-teal; }
+    { plugin = kmonad-vim; }
     moonscript-vim
     idris-vim
   ];

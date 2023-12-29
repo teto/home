@@ -1,0 +1,67 @@
+;; (defcfg
+;; )
+
+;; process-unmapped-keys yes
+
+;; Only one defsrc is allowed.
+;;
+;; defsrc defines the keys that will be intercepted by kanata. The order of the
+;; keys matches the deflayer declarations and all deflayer declarations must
+;; have the same number of keys as defsrc.
+;;
+;; The visual/spatial positioning is *not* mandatory; it is done by convention
+;; for visual ease. These items are parsed as a long list with newlines being
+;; ignored.
+	;; tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+	;; caps a    s    d    f    g    h    j    k    l    ;    '    ret
+  (defsrc
+	;; grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+		     i    o        
+	    j    k    l    
+		v
+	;; lsft z    x    c    v    b    n    m    ,    .    /    rsft
+	;; lctl lmet lalt           spc            ralt rmet rctl
+	)
+
+
+(deflocalkeys-linux
+  grave 41
+)
+
+;; (defalias
+;; ;; tap within 100ms for capslk, hold more than 100ms for lctl
+;; cap (tap-hold 100 100 caps lctl))
+
+;; The first layer defined is the layer that will be active by default when
+;; kanata starts up.
+  (deflayer default
+	      _  _
+	    _ _  _
+
+		@vimnav
+  )
+  (deflayer vimnav
+	         up    _
+	    left down  rght
+		_
+  )
+
+;; cap (tap-hold-press 200 200 caps lctl)
+
+;; defalias is used to declare a shortcut for a more complicated action to keep
+;; the deflayer declarations clean and aligned. The alignment in deflayers is not
+;; necessary, but is strongly recommended for ease of understanding visually.
+;;
+;; Aliases are referred to by `@<alias_name>`. Aliases can refer to each other,
+;; e.g. in the `anm` alias. However, an alias can only refer to another alias
+;; that has been defined before it in the file.
+;; https://github.com/jtroo/kanata/blob/main/docs/config.adoc#tap-hold
+
+
+;; tap timeout (unit: ms) / hold timeout (unit: ms) / tap action  / hold action
+
+
+(defalias
+   vimnav (tap-hold-press 200 200 v (layer-toggle vimnav))
+)
+

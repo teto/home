@@ -38,8 +38,4 @@ rec {
 
   python3Packages = python3.pkgs;
 
-  # jupyter-teto = python3.withPackages(ps: [
-  #  ps.notebook
-  #  ps.jupyter-client
-  # ]);
 }

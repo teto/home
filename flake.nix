@@ -280,7 +280,13 @@
             # broken
             # dce = myPkgs.dce;
 
-            jupyter4ihaskell = myPkgs.jupyter-teto;
+            # TODO this exists in ml-tests, let's upstream some of the changes first
+            # jupyter4ihaskell = myPkgs.jupyter-teto;
+             # jupyter-teto = python3.withPackages(ps: [
+             #  ps.notebook
+             #  ps.jupyter-client
+             # ]);
+
             inherit (unstablePkgs) nhs92 nhs94 nhs96;
 
           };

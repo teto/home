@@ -33,6 +33,16 @@ in
       enableFzfGit = mkEnableOption "Fzf-git";
       enableVocageSensei = mkEnableOption "Vocage sensei";
 
+      mcfly = mkOption {
+        # type = termTitleSubmodule;
+        default = {
+          enable = false;
+        };
+        # description = ''
+        #   Update terminal title.
+        # '';
+      };
+
       termTitle = mkOption {
         type = termTitleSubmodule;
         default = {
@@ -197,6 +207,14 @@ in
       '';
     })
 
+    (mkIf cfg.mcfly.enable {
+
+       # ${}
+      programs.zsh.initExtra = ''
+       eval "$(${pkgs.mcfly}/bin/mcfly init zsh)"
+       eval "$(${pkgs.mcfly-fzf}/bin/mcfly-fzf init zsh)"
+      '';
+     })
     (mkIf cfg.zbell.enable {
      # TODO source zbell
       programs.zsh.initExtra = ''

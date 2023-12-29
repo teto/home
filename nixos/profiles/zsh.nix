@@ -13,7 +13,10 @@
     # promptInit
     # vteIntegration = false;
     syntaxHighlighting.enable = false;
-    shellAliases = config.environment.shellAliases // { };
+    shellAliases = config.environment.shellAliases // { 
+     # tweaks 'time' output
+     TIMEFMT="\n================\nCPU\t%P\nuser\t%*U\nsystem\t%*S\ntotal\t%*E";
+    };
     # goes to /etc/zshenv
     # shellInit = ''
     # '';

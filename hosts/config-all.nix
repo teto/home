@@ -70,7 +70,6 @@
     # XDG_CACHE_HOME = "$HOME/.cache";
     # XDG_DATA_HOME = "$HOME/.local/share";
     # TODO Move to user config aka homemanager
-
   };
 
   environment.extraOutputsToInstall = [ "man" ];

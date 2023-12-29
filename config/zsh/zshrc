@@ -281,3 +281,5 @@ fi
 
 # this erases fzf so annoying
 # source ~/.config/nova/zsh/zshrc
+
+source ~/.config/zsh/mcfly-fzf.zsh
