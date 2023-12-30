@@ -1,0 +1,16 @@
+# global section. all windows will default to these settings
+[global]
+color = "#FFFFFF" # this must be a valid color
+focused_color = "#FFFFFF" # to disable a focused_color set this to ""
+icon = "󰖯" # to disable a default icon just set this to ""
+size = "14pt" # must be a valid pango size value
+separator = " " # anything between the icon and window title
+
+# app_id section.  This does an exact string comparison to the app_id or
+# window_properties.class value reported in swaymsg -t get_tree for the window
+# It will be app_id for wayland apps and window_properties.class for X11 apps
+[app_id]
+chromium = { icon = "", color = "#a1c2fa", size = "13pt" }
+firefox = { icon = "", color = "#ff8817" }
+foot = { icon = "" }
+neovide = { icon = "", color = "#8fff6d" }

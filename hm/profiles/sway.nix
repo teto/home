@@ -19,6 +19,9 @@ in
 
   home.packages = with pkgs; [
     swayr # window selector
+    swaycons # window selector
+    # sway-easyfocus # not packaged yet
+    # swayrst #  https://github.com/Nama/swayrst # not packaged yet
 
     # sway overview, draws layouts for each workspace: dope https://github.com/milgra/sov
     # sov  
@@ -252,6 +255,7 @@ in
 
       startup = [
        # { command = "env RUST_BACKTRACE=1 RUST_LOG=swayr=debug swayrd > /tmp/swayrd.log 2>&1"; }
+       { command = "env RUST_BACKTRACE=1 swaycons"; }
 
       ];
     };

@@ -10,14 +10,16 @@
     extraConfig.general.unsafe-accounts-conf = true;
   };
 
+  programs.zsh = {
+    mcfly.enable = true;
+  };
+
   programs.xdg.enable = true;
 
   programs.swappy.enable = false;
 
 
   home.packages = with pkgs; [
-    sudachidict
-    sudachi-rs
   ];
 
 
