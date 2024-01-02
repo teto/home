@@ -62,6 +62,6 @@
 
 
 (defalias
-   vimnav (tap-hold-press 200 200 v (layer-toggle vimnav))
+   vimnav (tap-hold-press 50 300 v (layer-toggle vimnav))
 )
 

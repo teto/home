@@ -1789,16 +1789,32 @@
     },
     "nixos-stable": {
       "locked": {
-        "lastModified": 1703351344,
-        "narHash": "sha256-9FEelzftkE9UaJ5nqxidaJJPEhe9TPhbypLHmc2Mysc=",
+        "lastModified": 1703992652,
+        "narHash": "sha256-C0o8AUyu8xYgJ36kOxJfXIroy9if/G6aJbNOpA5W0+M=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "7790e078f8979a9fcd543f9a47427eeaba38f268",
+        "rev": "32f63574c85fbc80e4ba1fbb932cde9619bad25e",
         "type": "github"
       },
       "original": {
         "owner": "nixos",
-        "ref": "nixos-23.05",
+        "ref": "nixos-23.11",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixos-stable-custom": {
+      "locked": {
+        "lastModified": 1703900474,
+        "narHash": "sha256-Zu+chYVYG2cQ4FCbhyo6rc5Lu0ktZCjRbSPE0fDgukI=",
+        "owner": "teto",
+        "repo": "nixpkgs",
+        "rev": "9dd7699928e26c3c00d5d46811f1358524081062",
+        "type": "github"
+      },
+      "original": {
+        "owner": "teto",
+        "ref": "teto/nixos-23.11",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -2761,6 +2777,7 @@
         "nix-update": "nix-update",
         "nixos-hardware": "nixos-hardware",
         "nixos-stable": "nixos-stable",
+        "nixos-stable-custom": "nixos-stable-custom",
         "nixos-unstable": "nixos-unstable",
         "nixpkgs": "nixpkgs_10",
         "nixpkgs-wayland": "nixpkgs-wayland",

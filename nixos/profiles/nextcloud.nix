@@ -9,11 +9,11 @@ in
 
   services.nextcloud = {
     enable = true;
-    package = pkgs.nextcloud27;
 
     # Use HTTPS for links
     # https = true;
 
+    # package = pkgs.nextcloud27;
     # New option since NixOS 23.05
     configureRedis = true;
     # caching.apcu = false;

@@ -11,6 +11,7 @@
    previewGenerator = true;
    hostName = secrets.jakku.hostname;
    https = false;
+   package = pkgs.nextcloud27;
 
     # New option since NixOS 23.05
     caching = {
@@ -40,7 +41,12 @@
 
     extraApps = with config.services.nextcloud.package.packages.apps; {
      # inherit news; # removed 'cos gives a wrong error
-     inherit memories previewgenerator maps calendar;
+     inherit
+      memories 
+      previewgenerator 
+      # maps
+      # calendar
+      ;
 
     };
 

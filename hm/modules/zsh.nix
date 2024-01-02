@@ -38,6 +38,14 @@ in
         default = {
           enable = false;
         };
+        # export MCFLY_RESULTS_SORT=LAST_RUN
+        # MCFLY_RESULTS=50
+        # MCFLY_PROMPT="❯"
+        # MCFLY_HISTORY_LIMIT
+        # MCFLY_KEY_SCHEME=vim
+        # MCFLY_DELETE_WITHOUT_CONFIRM=true
+        # MCFLY_INTERFACE_VIEW=BOTTOM
+        # MCFLY_DISABLE_MENU=TRUE
         # description = ''
         #   Update terminal title.
         # '';

@@ -27,7 +27,8 @@
       url = "github:teto/nixpkgs/nixos-unstable";
     };
     nixos-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixos-stable.url = "github:nixos/nixpkgs/nixos-23.05";
+    nixos-stable.url = "github:nixos/nixpkgs/nixos-23.11";
+    nixos-stable-custom.url = "github:teto/nixpkgs?ref=teto/nixos-23.11";
     nix-search-cli = {
       url = "github:peterldowns/nix-search-cli";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -241,7 +242,10 @@
                 self.packages.${system}.treefmt-with-config
                 self.inputs.firefox2nix.packages.${system}.default
               ];
+
+             # TODO set SOPS_A
              shellHook = ''
+              export SOPS_AGE_KEY_FILE=$PWD/secrets
               echo "Run just ..."
              '';
             };

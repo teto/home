@@ -14,6 +14,9 @@ let
     # gitAndTools.git-annex # fails on unstable
     # gitAndTools.git-remote-hg
     # nix-prefetch-scripts # broken
+
+    backblaze-b2
+
     gdb
     # editorconfig-core-c
     automake

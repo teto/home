@@ -6,6 +6,7 @@
     ./sops.nix
     ./teto/sops.nix
     ./tailscale.nix
+    ./docker.nix
 
     # to test core-ws
     ./postgresql.nix
@@ -19,7 +20,6 @@
     # ./gitlab-runner.nix
 
     # todo renommer en workstation
-    ../../nixos/profiles/docker-daemon.nix
 
     ../config-all.nix
     ../../nixos/profiles/desktop.nix
