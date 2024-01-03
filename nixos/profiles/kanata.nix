@@ -1,4 +1,7 @@
 { config, lib, pkgs, ... }:
+let 
+  mainConfig = "/home/teto/home/config/kanata/main.kbd";
+in
 {
 
  environment.systemPackages = [
@@ -19,7 +22,7 @@
      #       (include /home/teto/home/config/kanata/extra.kbd)
 	 # config = builtins.readFile ../../config/kanata/main.kbd;
      config = ''
-        (include /home/teto/home/config/kanata/main.kbd)
+        (include ${mainConfig})
         '';
 	 # extraArgs = [];
 	 # extraDefCfg = ''
@@ -27,4 +30,10 @@
 	};
   };
  };
+
+ systemd.services.kanata-foo.serviceConfig = {
+   ProtectHome = lib.mkForce "tmpfs";
+   BindReadOnlyPaths = mainConfig;
+ };
+
 }

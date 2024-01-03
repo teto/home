@@ -23,8 +23,19 @@
           # extraOptions = ["--device=/dev/bus/usb/xxx/xxx" "--rm=false"];
           # entryPoint = "/bin/bash";
             volumes =  [
-              "/home/teto/alot2:/alot"
+              "/home/teto/alot:/alot"
             ];
+        };
+
+        immich = {
+          autoStart = true;
+          image = "ubuntu:latest";
+          # point at photos
+          volumes =  [
+              "/home/teto/immich-photos:/photos"
+            ];
+ 
+
         };
       };
     };

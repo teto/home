@@ -1,5 +1,13 @@
 return {
  {
+ 'stevearc/overseer.nvim',
+ opts = {}
+},
+ {
+  'tpope/vim-dispatch'
+
+ },
+ {
   'mrcjkb/neotest-haskell',
   -- -- 'nvim-neotest/neotest',
   -- requires = {

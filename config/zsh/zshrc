@@ -249,9 +249,9 @@ SPROMPT="Correct $fg[red]%R$reset_color to $fg[green]%r$reset_color [(y)es (n)o 
 # TODO pass a path that is versioned in home
 teatimer() {
     sleep $1;
+    # TODO dont open a new window
     mpv $HOME/home/data/audio/notif1.wav
     notify-send '!! Coffee Time - wake up !!';
-    exit
 }
 
 # fzf config{{{
@@ -272,14 +272,12 @@ _fzf_compgen_dir() {
 # # To add support for TTYs this line can be optionally added.
 # source ~/.cache/wal/colors-tty.sh
 # TODO configure from HM module
-if [[ -n $KITTY_INSTALLATION_DIR ]]; then
-  export KITTY_SHELL_INTEGRATION="enabled"
+# if [[ -n $KITTY_INSTALLATION_DIR ]]; then
+#   export KITTY_SHELL_INTEGRATION="enabled"
 #   autoload -Uz -- "$KITTY_INSTALLATION_DIR"/shell-integration/zsh/kitty-integration
 #   kitty-integration
 #   unfunction kitty-integration
-fi
+# fi
 
 # this erases fzf so annoying
 # source ~/.config/nova/zsh/zshrc
-
-source ~/.config/zsh/mcfly-fzf.zsh

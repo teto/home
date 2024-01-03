@@ -25,7 +25,7 @@
     ../../hm/profiles/syncthing.nix
     ../../hm/profiles/japanese.nix
 
-    ../../hm/profiles/alot.nix
+    # ../../hm/profiles/alot.nix
     ../../hm/profiles/dev.nix
     # ../../hm/profiles/vscode.nix #  provided by nova-nix config
     ../../hm/profiles/experimental.nix

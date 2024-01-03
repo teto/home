@@ -1,4 +1,5 @@
 {
+  "$schema": "/home/teto/.config/swaync/configSchema.json",
   "positionX": "right",
   "positionY": "top",
   "layer": "top",
@@ -25,11 +26,9 @@
   "script-fail-notify": true,
   "scripts": {
     "example-action-script": {
-      "exec": "wl-copy \"BODY: $SWAYNC_BODY\"",
+      "exec": "bash -c '/usr/bin/env > /home/teto/swaync-test.txt'",
 	  "run-on": "action"
     }
-  },
-  "notification-visibility": {
   },
   "widgets": [
     "buttons-grid",
