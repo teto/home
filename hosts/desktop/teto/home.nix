@@ -68,12 +68,6 @@
     # bridge-utils# pour  brctl
   ];
 
-  # you can switch from cli with xkb-switch or xkblayout-state
-  home.keyboard = {
-    # options = [ "grp:caps_toggle" "grp_led:scroll" ];
-    options = [ "add Mod1 Alt_R" ];
-  };
-
   services.nextcloud-client.enable = true;
 
   services.mpd = {

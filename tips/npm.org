@@ -15,7 +15,9 @@
  
 ** to regenerate the package-lock.json with a specific version ?
  
+   #+begin_src shell
    npm i --lockfile-version=1
+#+end_src
  
 ** test
    `npm i playwright`
@@ -26,6 +28,9 @@
  
    npm ci
  
+
+   ** How to map packages from package-lock.json to package.json
+   npm ls -a
    
  
 * pnpm

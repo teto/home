@@ -21,6 +21,13 @@ in
     # '';
   };
 
+  # you can switch from cli with xkb-switch or xkblayout-state
+  # this uses setxkbmap
+  home.keyboard = {
+    # options = [ "grp:caps_toggle" "grp_led:scroll" ];
+    options = [ "add Mod1 Alt_R" ];
+  };
+
   # services.parcellite.enable = true;
 
   imports = [

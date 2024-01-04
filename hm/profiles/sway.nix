@@ -209,11 +209,8 @@ in
      "${mod}+grave" = "${pkgs.swaynotificationcenter}/bin/swaync-client -swb";
      "${mod}+p" = "exec ${pkgs.tessen}/bin/tessen --dmenu=rofi";
 
-        "$GroupFr+$mod+ampersand" = "layout toggle all";
-        "$GroupUs+$mod+1" = "layout toggle all";
-        # TODO https://crates.io/crates/sway-scratchpad
-        # "F12" = "exec ~/.cargo/bin/sway";
-        # "$mod+F1" = [instance="pad_(?!ncmpcpp)"] move scratchpad; [instance="pad_ncmpcpp"] scratchpad show
+    "$GroupFr+$mod+ampersand" = "layout toggle all";
+    "$GroupUs+$mod+1" = "layout toggle all";
 
     # start a terminal
     "${mod}+Return" = "exec --no-startup-id ${term}";
@@ -239,14 +236,16 @@ in
     # cliphist list | rofi -dmenu
     "${mod}+Ctrl+h" = ''exec ${pkgs.cliphist}/bin/cliphist list | rofi -dmenu  -m -1 -p "Select item to copy" -lines 10 -width 35 | cliphist decode | wl-copy | ${sharedConfig.notify-send} 'Failed running cliphist' '';
 
-     # "${mod}+F1" = "[title=\"ncmpcpp*\"] move scratchpad; [title=\"ncmpcpp*\"] scratchpad show";
      # kitty nvim -c ":Neorg workspace notes"
      "${mod}+F1" = ''exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 70 --height 60 --mark neorg-notes --command 'kitty nvim +Notes'  '';
      "${mod}+F2" = ''exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 70 --height 60 --mark audio --command 'kitty ${config.programs.ncmpcpp.package}/bin/ncmpcpp' '';
+     "${mod}+F3" = ''exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 70 --height 60 --mark audio --command 'kitty nvim' '';
+
 # bindsym F12 exec sway-scratchpad --command "kitty -d /home/user/projects" --mark terminal
 
     # for_window [con_mark="SCRATCHPAD_terminal"] border pixel 1
 
+    # use sway-easyfocus
     # "${mod}+g" = "exec ${pkgs.i3-easyfocus}/bin/i3-easyfocus";
     # "${mad}+w" = "exec ${pkgs.i3-easyfocus}/bin/i3-easyfocus";
     # TODO bind
