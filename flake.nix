@@ -521,7 +521,7 @@
        autoupdating = final: prev: let 
         llama-cpp-matt = (final.llama-cpp.override {
           cudaSupport = true;
-          openblasSupport = false; 
+          # openblasSupport = false; 
           rocmSupport = false;
           openclSupport = false;
           stdenv = prev.gcc11Stdenv;
@@ -539,7 +539,7 @@
           firefoxAddonsTeto  = import ./overlays/firefox/generated.nix {
             inherit (prev) buildFirefoxXpiAddon fetchurl lib stdenv;
           };
-          git-repo-manager = prev.callPackage ./pkgs/git-repo-manager {
+          git-repo-manager = prev.callPackage ./pkgs/by-name/gi/git-repo-manager/package.nix {
             fenix = self.inputs.fenix;
           };
         };
