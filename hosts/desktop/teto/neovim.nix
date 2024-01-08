@@ -62,7 +62,8 @@ let
 
 
     # testin
-    (luaPlugin { plugin = image-nvim; })
+    # TODO restore
+    # (luaPlugin { plugin = image-nvim; })
 
     (luaPlugin { 
      # this is a peculiarly complex one that needs pynvim, image.nvim

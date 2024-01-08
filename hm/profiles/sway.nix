@@ -239,7 +239,8 @@ in
      # kitty nvim -c ":Neorg workspace notes"
      "${mod}+F1" = ''exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 70 --height 60 --mark neorg-notes --command 'kitty nvim +Notes'  '';
      "${mod}+F2" = ''exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 70 --height 60 --mark audio --command 'kitty ${config.programs.ncmpcpp.package}/bin/ncmpcpp' '';
-     "${mod}+F3" = ''exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 70 --height 60 --mark audio --command 'kitty nvim' '';
+     # "${mod}+F3" = ''exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 70 --height 60 --mark scratchpad --command 'kitty nvim' '';
+     "${mod}+F3" = ''exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 90 --height 90 --mark scratchpad --command 'kitty nvim' '';
 
 # bindsym F12 exec sway-scratchpad --command "kitty -d /home/user/projects" --mark terminal
 

@@ -546,7 +546,6 @@
 
         # TODO
         # firefox = import ./overlays/firefox/addons.nix;
-
         # nova = import ./nixpkgs/overlays/pkgs/default.nix;
         local = import ./overlays/pkgs/default.nix;
         overrides = import ./overlays/overrides.nix;
