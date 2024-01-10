@@ -521,7 +521,7 @@
        autoupdating = final: prev: let 
         llama-cpp-matt = (final.llama-cpp.override {
           cudaSupport = true;
-          # openblasSupport = false; 
+          blasSupport = false; 
           rocmSupport = false;
           openclSupport = false;
           stdenv = prev.gcc11Stdenv;
