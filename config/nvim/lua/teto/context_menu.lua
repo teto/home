@@ -284,6 +284,7 @@ end
 M.set_toggle_rclick_menu = function()
  local lsp_status = not vim.diagnostic.config().virtual_lines
  M.set_rclick_submenu('MenuToggle', 'Toggle ->', {
+  { 'Autosave', '<cmd>MinimapToggle<cr>' },
   { 'Minimap', '<cmd>MinimapToggle<cr>' },
   { 'Obsession', '<cmd>Obsession<cr>' },
   { 'Indent guides', '<cmd>IndentBlanklineToggle<cr>' },
@@ -308,6 +309,18 @@ M.add_component = function(component)
  table.insert(M.active_menus, component)
 end
 
+-- toto
+M.set_tabs_rclick_menu = function(component)
+ M.set_rclick_submenu('MenuTabs', 'Tabs', {
+  { "Tabs.S2", "<cmd>set  tabstop=2 softtabstop=2 sw=2<cr>" },
+  { "Tabs.S4", "<cmd>set ts=4 sts=4 sw=4<CR>" },
+  { "Tabs.S6", "<cmd>set ts=6 sts=6 sw=6<CR>" },
+  { "Tabs.S8", "<cmd>set ts=8 sts=8 sw=8<CR>" },
+ })
+-- menu_add("Tabs.SwitchExpandTabs :set expandtab!")
+end
+
+
 -- M.set_lsp_rclick_menu()
 -- M.set_repl_rclick_menu()
 -- M.set_rest_rclick_menu()
@@ -317,6 +330,8 @@ end
 -- M.set_telescope_rclick_menu()
 -- M.set_git_rclick_menu()
 -- M.set_toggle_rclick_menu()
+-- TODO add modeline
+ -- '<Cmd>Modeliner<Enter>'
 M.add_component(M.set_lsp_rclick_menu)
 M.add_component(M.set_spectre_rclick_menu)
 M.add_component(M.set_repl_rclick_menu)
@@ -324,6 +339,11 @@ M.add_component(M.set_rest_rclick_menu)
 M.add_component(M.set_sniprun_rclick_menu)
 M.add_component(M.set_toggle_rclick_menu)
 M.add_component(M.set_treesitter_rclick_menu)
+-- todo toggle
+M.rclick_context_menu("PopUp", "Autosave", "toto"
+-- "
+ -- function () require'autosave'.on() end
+ )
 
 -- -- menu_add("Toggle.Biscuits", 'lua require("nvim-biscuits").toggle_biscuits()')
 
