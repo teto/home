@@ -25,7 +25,7 @@ return {
       },
       -- check lua/orgmode/config/defaults.lua to see their list
       mappings = {
-       disable_all = false,
+       disable_all = true,
         -- global = {
         -- }
       },

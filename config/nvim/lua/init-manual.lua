@@ -767,6 +767,7 @@ end
 
 vim.g.UltiSnipsSnippetDirectories = { vim.fn.stdpath('config') .. '/snippets' }
 vim.g.tex_flavor = 'latex'
+
 -- require('teto.treesitter')
 
 require('teto.lspconfig')

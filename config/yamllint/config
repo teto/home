@@ -1,5 +1,6 @@
 ---
 # config at https://yamllint.readthedocs.io/en/stable/rules.html#module-yamllint.rules.braces
+# unable to load schema
 
 yaml-files:
   - '*.yaml'
@@ -13,6 +14,8 @@ rules:
   colons: enable
   commas: enable
   comments:
+    require-starting-space: true
+    min-spaces-from-content: 1
     level: warning
   comments-indentation:
     level: warning

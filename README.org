@@ -97,7 +97,7 @@ NOTE: nixos doesnt seem to work out of the box with git-crypt [[https://github.c
 You can see the resulting config via:
 
 #+BEGIN_SRC
-nix repl .
+nix repl . --override-input nixpkgs github:nixos/nixpkgs
 nixosConfigurations.laptop.config.home-manager.users.teto.programs.neovim.finalPackage.XXX
 #+END_SRC
 
