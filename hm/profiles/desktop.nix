@@ -52,7 +52,7 @@ let
 	inotify-tools # for inotify-wait notably
     just # to read justfiles, *replace* Makefile
     ncurses.dev # for infocmp
-    neovide
+    # neovide
     # neovim-remote # broken for latex etc
     nix-output-monitor
     nix-update # nix-update <ATTR> to update a software

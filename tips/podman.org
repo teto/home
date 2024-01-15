@@ -1,0 +1,4 @@
+.
+
+
+podman export NAME -o ....

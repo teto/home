@@ -8,12 +8,12 @@ local attach_cb = require('teto.on_attach')
 
 local temp = vim.lsp.handlers['textDocument/formatting']
 vim.lsp.handlers['textDocument/formatting'] = function(...)
-    vim.notify('Called formatting')
-    temp(...)
+ vim.notify('Called formatting')
+ temp(...)
 end
 -- override defaults for all servers
 lspconfig.util.default_config = vim.tbl_extend('force', lspconfig.util.default_config, {
-    on_attach = attach_cb.on_attach,
+ on_attach = attach_cb.on_attach,
 })
 
 -- explained at https://github.com/nvim-lua/diagnostic-nvim/issues/73
@@ -38,60 +38,60 @@ lspconfig.util.default_config = vim.tbl_extend('force', lspconfig.util.default_c
 lspconfig.bashls.setup({})
 
 lspconfig.lua_ls.setup({
-    cmd = { 'lua-language-server' },
-    settings = {
-        Lua = {
-            runtime = { version = 'LuaJIT', path = vim.split(package.path, ';') },
-            completion = { keywordSnippet = 'Disable' },
-            diagnostics = {
-                enable = true,
-                globals = {
-                    'vim',
-                    'describe',
-                    'it',
-                    'before_each',
-                    'after_each',
-                    'pending',
-                    'teardown'
-                    -- available in wireplumber
-,
-                    'alsa_monitor',
-                },
-                -- Define variable names that will not be reported as an unused local by unused-local.
-                unusedLocalExclude = { '_*' },
-                disable = {
-                 'lowercase-global',
-                 'unused-function',
-                 -- these are buggy
-                 'duplicate-doc-field',
-                 'duplicate-set-field'
-
-                },
-            },
-            workspace = {
-                checkThirdParty = false,
-                library = {
-                    [vim.fn.expand('$VIMRUNTIME/lua')] = true,
-                    [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
-                },
-            },
-        },
+ cmd = { 'lua-language-server' },
+ settings = {
+  Lua = {
+   runtime = { version = 'LuaJIT', path = vim.split(package.path, ';') },
+   completion = { keywordSnippet = 'Disable' },
+   diagnostics = {
+    enable = true,
+    globals = {
+     'vim',
+     'describe',
+     'it',
+     'before_each',
+     'after_each',
+     'pending',
+     'teardown'
+     -- available in wireplumber
+     ,
+     'alsa_monitor',
     },
+    -- Define variable names that will not be reported as an unused local by unused-local.
+    unusedLocalExclude = { '_*' },
+    disable = {
+     'lowercase-global',
+     'unused-function',
+     -- these are buggy
+     'duplicate-doc-field',
+     'duplicate-set-field'
+
+    },
+   },
+   workspace = {
+    checkThirdParty = false,
+    library = {
+     [vim.fn.expand('$VIMRUNTIME/lua')] = true,
+     [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
+    },
+   },
+  },
+ },
 })
 
 lspconfig.dhall_lsp_server.setup({})
 lspconfig.dockerls.setup({})
 
 lspconfig.yamlls.setup({
-  -- cmd = { 'yaml-language-server', '--stdio' },
---   on_attach = lsp.on_attach,
---   capabilities = lsp.capabilities,
-  settings = {
-    yaml = {
-      schemas = require('schemastore').yaml.schemas(),
-    },
+ -- cmd = { 'yaml-language-server', '--stdio' },
+ --   on_attach = lsp.on_attach,
+ --   capabilities = lsp.capabilities,
+ settings = {
+  yaml = {
+   schemas = require('schemastore').yaml.schemas(),
   },
--- }
+ },
+ -- }
 })
 
 
@@ -103,85 +103,85 @@ pyrightCapabilities.textDocument.publishDiagnostics.tagSupport.valueSet = { 2 }
 -- https://github.com/microsoft/pyright/blob/cf1a5790d2105ac60dd3378a46725519d14b2844/docs/configuration.md
 -- https://microsoft.github.io/pyright/#/configuration?id=diagnostic-rule-defaults
 lspconfig.pyright.setup({
-    -- cmd = {"pyright-langserver", "--stdio"};
-    -- filetypes = {"python"};
-    autostart = false, -- This is the important new option
-    flags = {
-      debounce_text_changes = 150,
+ -- cmd = {"pyright-langserver", "--stdio"};
+ -- filetypes = {"python"};
+ autostart = false,    -- This is the important new option
+ flags = {
+  debounce_text_changes = 150,
+ },
+ capabilities = pyrightCapabilities,
+ root_dir = lspconfig.util.root_pattern(
+  '.git', 'setup.py', 'setup.cfg', 'pyproject.toml', 'requirements.txt'),
+ -- on_attach=attach_cb.on_attach,
+ settings = {
+  -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#pyright
+  -- https://microsoft.github.io/pyright/#/settings
+  python = {
+   analysis = {
+    -- enum { "Error", "Warning", "Information", "Trace" }
+    logLevel = 'Warning',
+    --						autoSearchPaths= true;
+    -- diagnosticMode = 'workspace';
+    --
+    useLibraryCodeForTypes = true,
+    typeCheckingMode = 'basic',             -- 'off', 'basic', 'strict'
+    diagnosticSeverityOverrides = {
+     reportUnusedVariable = false,
+     reportUnusedFunction = false,
+     reportUnusedClass = false,
+     reportPrivateImportUsage = "none",
+     reportMissingImports = false,
     },
-    capabilities = pyrightCapabilities,
-    root_dir = lspconfig.util.root_pattern(
-      '.git', 'setup.py', 'setup.cfg', 'pyproject.toml', 'requirements.txt'),
-    -- on_attach=attach_cb.on_attach,
-    settings = {
-        -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#pyright
-        -- https://microsoft.github.io/pyright/#/settings
-        python = {
-            analysis = {
-                -- enum { "Error", "Warning", "Information", "Trace" }
-                logLevel = 'Warning',
-                --						autoSearchPaths= true;
-                -- diagnosticMode = 'workspace';
-                --
-                useLibraryCodeForTypes = true,
-                typeCheckingMode = 'basic', -- 'off', 'basic', 'strict'
-                diagnosticSeverityOverrides = {
-                 reportUnusedVariable = false,
-                 reportUnusedFunction = false,
-                 reportUnusedClass = false,
-                 reportPrivateImportUsage = "none",
-                 reportMissingImports = false,
-                },
-                disableOrganizeImports = true,
-                reportConstantRedefinition = true,
-                autoSearchPaths = true,
+    disableOrganizeImports = true,
+    reportConstantRedefinition = true,
+    autoSearchPaths = true,
 
-                diagnosticMode = 'openFilesOnly', -- or workspace
-                extraPaths = {
-                 -- "pkgs/applications/editors/vim/plugins"
-                 "/home/teto/nixpkgs3/maintainers/scripts"
+    diagnosticMode = 'openFilesOnly',             -- or workspace
+    extraPaths = {
+     -- "pkgs/applications/editors/vim/plugins"
+     "/home/teto/nixpkgs3/maintainers/scripts"
 
-                },
-                -- reportUnknownParameterType
-                -- diagnosticSeverityOverrides = {
-                --		reportUnusedImport = "warning";
-                -- };
-            },
-        },
-        pyright = {
-            disableOrganizeImports = true,
-            reportUnusedVariable = false,
-        },
     },
+    -- reportUnknownParameterType
+    -- diagnosticSeverityOverrides = {
+    --		reportUnusedImport = "warning";
+    -- };
+   },
+  },
+  pyright = {
+   disableOrganizeImports = true,
+   reportUnusedVariable = false,
+  },
+ },
 })
 
 -- typescript
 -- NOW HANDLED BY NIX IN INIT.lua (or not ?)
 lspconfig.tsserver.setup({
-    autostart = true,
-    -- TODO should be generated/fixed in nix
-    cmd = {
-        'typescript-language-server',
-        '--stdio',
-        -- '--tsserver-path',
-        -- found with 'nix build .#nodePackages.typescript'
-        -- '/nix/store/34pzigggq36pk9sz9a95bz53qlqx1mpx-typescript-4.9.4/lib/node_modules/typescript/lib',
-    },
-    init_options = {
-        preferences = {
-            disableSuggestions = true,
-        },
-    },
+ autostart = true,
+ -- TODO should be generated/fixed in nix
+ cmd = {
+  'typescript-language-server',
+  '--stdio',
+  -- '--tsserver-path',
+  -- found with 'nix build .#nodePackages.typescript'
+  -- '/nix/store/34pzigggq36pk9sz9a95bz53qlqx1mpx-typescript-4.9.4/lib/node_modules/typescript/lib',
+ },
+ init_options = {
+  preferences = {
+   disableSuggestions = true,
+  },
+ },
 })
 
 lspconfig.jsonls.setup({
-    settings = {
-        json = {
-            schemas = require('schemastore').json.schemas(),
-            -- see https://github.com/b0o/SchemaStore.nvim/issues/8 for info about
-            validate = { enable = true },
-        },
-    },
+ settings = {
+  json = {
+   schemas = require('schemastore').json.schemas(),
+   -- see https://github.com/b0o/SchemaStore.nvim/issues/8 for info about
+   validate = { enable = true },
+  },
+ },
 })
 -- commented out because https://github.com/MrcJkb/haskell-tools.nvim recommends to disable it
 --lspconfig.hls.setup({
@@ -226,54 +226,84 @@ lspconfig.jsonls.setup({
 --})
 
 lspconfig.rust_analyzer.setup({
-    capabilities = {
-        textDocument = {
-            completion = {
-                completionItem = {
-                    -- commitCharactersSupport = false,
-                    -- deprecatedSupport = false,
-                    -- documentationFormat = { "markdown", "plaintext" },
-                    -- preselectSupport = false,
-                    snippetSupport = true,
-                },
-            },
-            -- hover = {
-            --	 contentFormat = { "markdown", "plaintext" },
-            --	 dynamicRegistration = false
-            -- },
-            -- references = {
-            --	 dynamicRegistration = false
-            -- },
-            -- signatureHelp = {
-            --	 dynamicRegistration = false,
-            --	 signatureInformation = {
-            --	   documentationFormat = { "markdown", "plaintext" }
-            --	 }
-            -- },
-            -- synchronization = {
-            --	 didSave = true,
-            --	 dynamicRegistration = false,
-            --	 willSave = false,
-            --	 willSaveWaitUntil = false
-            -- }
-        },
+ capabilities = {
+  textDocument = {
+   completion = {
+    completionItem = {
+     -- commitCharactersSupport = false,
+     -- deprecatedSupport = false,
+     -- documentationFormat = { "markdown", "plaintext" },
+     -- preselectSupport = false,
+     snippetSupport = true,
     },
-    cmd = { 'rust-analyzer' },
-    -- root_dir = root_pattern("Cargo.toml", "rust-project.json")
+   },
+   -- hover = {
+   --	 contentFormat = { "markdown", "plaintext" },
+   --	 dynamicRegistration = false
+   -- },
+   -- references = {
+   --	 dynamicRegistration = false
+   -- },
+   -- signatureHelp = {
+   --	 dynamicRegistration = false,
+   --	 signatureInformation = {
+   --	   documentationFormat = { "markdown", "plaintext" }
+   --	 }
+   -- },
+   -- synchronization = {
+   --	 didSave = true,
+   --	 dynamicRegistration = false,
+   --	 willSave = false,
+   --	 willSaveWaitUntil = false
+   -- }
+  },
+ },
+ cmd = { 'rust-analyzer' },
+ -- root_dir = root_pattern("Cargo.toml", "rust-project.json")
 })
 
 -- see https://github.com/oxalica/nil/blob/main/docs/configuration.md for config
+-- https://github.com/neovim/nvim-lspconfig/wiki/Autocompletion
+-- https://github.com/hrsh7th/cmp-nvim-lsp/issues/42#issuecomment-1283825572
+-- local caps = vim.tbl_deep_extend(
+--  'force',
+--  vim.lsp.protocol.make_client_capabilities(),
+--  -- require('cmp_nvim_lsp').default_capabilities(),
+--  -- File watching is disabled by default for neovim.
+--  -- See: https://github.com/neovim/neovim/pull/22405
+--  { workspace = { didChangeWatchedFiles = { dynamicRegistration = true } } }
+-- );
+--  capabilities = caps,
+
 lspconfig.nil_ls.setup({
- settings = {
-    formatting = {
-      command =  {"nixpkgs-fmt"},
-    },
-    diagnostic = {
-        -- // Example: ["unused_binding", "unused_with"]
-      ignored = {"unused_binding", "unused_with"},
-      excludedFiles = {}
-    },
+ init_options = {
+  nix = {
+   flake = {
+    autoArchive = true,
+    -- auto eval flake inputs for improved completion
+    -- generates too many issues
+    autoEvalInputs = false,
    }
+  },
+
+ },
+ settings = {
+  formatting = {
+   command = { "nixpkgs-fmt" },
+  },
+  -- nix = {
+  --  flake = {
+  --   autoArchive = true,
+  --   -- auto eval flake inputs for improved completion
+  --   autoEvalInputs = true,
+  --  }
+  -- },
+  diagnostic = {
+   -- // Example: ["unused_binding", "unused_with"]
+   ignored = { "unused_binding", "unused_with" },
+   excludedFiles = {}
+  },
+ }
 })
 
 -- | Texlab
@@ -293,15 +323,14 @@ lspconfig.nil_ls.setup({
 lspconfig.teal_ls.setup({})
 
 lspconfig.clangd.setup({
-    --compile-commands-dir=build
-    cmd = {
-        'clangd',
-        '--background-index',
-        -- "--log=info", -- error/info/verbose
-        -- "--pretty" -- pretty print json output
-    },
-    filetypes = { 'c', 'cpp', 'objc', 'objcpp' },
-    --		-- 'build/compile_commands.json',
-    --		root_dir = lspconfig.util.root_pattern( '.git'),
+ --compile-commands-dir=build
+ cmd = {
+  'clangd',
+  '--background-index',
+  -- "--log=info", -- error/info/verbose
+  -- "--pretty" -- pretty print json output
+ },
+ filetypes = { 'c', 'cpp', 'objc', 'objcpp' },
+ --		-- 'build/compile_commands.json',
+ --		root_dir = lspconfig.util.root_pattern( '.git'),
 })
-

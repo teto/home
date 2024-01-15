@@ -680,7 +680,17 @@ if use_fzf_lua then
 			preview = {
 				-- default = 'builtin'
 				hidden = 'hidden',
+				-- Only used with the builtin previewer:
+				title          = true,            -- preview border title (file/buf)?
+				title_pos      = "left",        -- left|center|right, title alignment
+				scrollbar      = 'float',         -- `false` or string:'float|border'
+													-- float:  in-window floating border
+													-- border: in-border chars (see below)
+				scrolloff      = '-2',            -- float scrollbar offset from right
+													-- applies only when scrollbar = 'float'
+				scrollchars    = {'█', '' },      -- scrollbar chars ({ <full>, <empty> }
 			},
+			layout = 'flex'
 		},
 	})
 end

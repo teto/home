@@ -17,6 +17,17 @@
     oci-containers = {
       backend = "podman";
       containers = {
+        doctor = {
+          autoStart = true;
+          # TODO load the one from 
+          image = "ubuntu:latest";
+          # extraOptions = ["--device=/dev/bus/usb/xxx/xxx" "--rm=false"];
+          # entryPoint = "/bin/bash";
+            volumes =  [
+              "/home/teto/nova/doctor:/doctor"
+            ];
+            # extraOptions = [ "--network=host" ]
+        };
         ubuntu = {
           autoStart = true;
           image = "ubuntu:latest";
@@ -25,6 +36,7 @@
             volumes =  [
               "/home/teto/alot:/alot"
             ];
+            # extraOptions = [ "--network=host" ]
         };
 
         immich = {

@@ -13,12 +13,8 @@ let
   # taken from the official flake
   # must be an unwrapped version
   # myPackage = pkgs.neovim-unwrapped.override({ libuv = libuv_147;});
-  myPackage = flakeInputs.neovim.packages."${pkgs.system}".neovim.override({ libuv = libuv_147;});
+  myPackage = flakeInputs.neovim.packages."${pkgs.system}".neovim;
  
-  libuv_147 = pkgs.libuv.overrideAttrs(oa: {
-   version =  "v1.47.0";
-  });
-
   genBlockLua = title: content:
     ''
     -- ${title} {{{
@@ -594,8 +590,9 @@ in
 
     extraPackages = with pkgs; [
       # emacs # for orgmode-babel
-      lua51Packages.luacheck
-      nil # a nix lsp
+      luajitPackages.luacheck 
+      nil # a nix lsp, can be debugged with NIL_LOG_PATH and NIL_LOG=nil=debug
+      nixd # another nix LSP
       shellcheck
       sumneko-lua-language-server
       yaml-language-server

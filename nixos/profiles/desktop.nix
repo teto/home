@@ -12,7 +12,7 @@
     ../../nixos/profiles/wireshark.nix
     ../../nixos/modules/network-manager.nix
     ../../nixos/profiles/wifi.nix
-    ../../nixos/profiles/librenms.nix
+    # ../../nixos/profiles/librenms.nix
 
     ./zsh.nix
     ./gnome.nix
