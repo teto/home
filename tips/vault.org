@@ -30,6 +30,10 @@ vault secrets list -detailed
 
 	vault list auth/aws/role
 
+  * impersonate a role
+ 
+	for instance toto-readonly
+
 When you access a KV v2 secrets engine using the vault kv CLI commands, we recommend using the -mount flag syntax (e.g. vault kv get -mount=secret foo) to reference the path to the KV v2 secrets engine.
 Without access to sys, commands like vault policy list or vault secrets list will not work.
 

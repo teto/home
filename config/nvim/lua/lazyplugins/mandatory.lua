@@ -223,8 +223,6 @@ return {
  },
  { 'chrisbra/csv.vim',        lazy = true },
  -- { 'rhysd/committia.vim', lazy = true},
- -- <leader>ml to setup buffer modeline
- -- 'teto/Modeliner', -- not needed with editorconfig ?
  -- {
  --  'lukas-reineke/indent-blankline.nvim',
  --  -- main = "ibl",

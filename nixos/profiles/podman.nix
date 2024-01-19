@@ -18,6 +18,9 @@
       backend = "podman";
       containers = {
         doctor = {
+         #  executable file `sleep unlimited` not found in $PATH: No such file or directory
+         # cmd = ["sleep unlimited" ];
+         # entrypoint = '
           autoStart = true;
           # TODO load the one from 
           image = "ubuntu:latest";

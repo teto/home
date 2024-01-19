@@ -30,6 +30,8 @@ end-- require("vim.lsp._watchfiles")._watchfunc = require("vim._watch").watch
 -- local ffi = require 'ffi'
 
 
+vim.opt.shortmess:append("I")
+
 ---  set guicursor as a red block in normal mode
 
 -- workaround slow neovim https://github.com/neovim/neovim/issues/23725
@@ -424,12 +426,12 @@ vim.api.nvim_set_hl(0, 'DiagnosticVirtualTextError', { fg = 'red' })
 vim.api.nvim_set_hl(0, 'DiagnosticVirtualTextDebug', { fg = 'green' })
 
 -- http://stackoverflow.com/questions/28613190/exclude-quickfix-buffer-from-bnext-bprevious
-vim.keymap.set('n', '<Leader><Leader>', '<Cmd>b#<CR>')
+vim.keymap.set('n', '<Leader><Leader>', '<Cmd>b#<CR>', {desc="Focus alternate buffer"})
 
 vim.keymap.set('n', '<Leader>ev', '<Cmd>e $MYVIMRC<CR>')
-vim.keymap.set('n', '<Leader>sv', '<Cmd>source $MYVIMRC<CR>')
+vim.keymap.set('n', '<Leader>sv', '<Cmd>source $MYVIMRC<CR>', { desc = "source my config"})
 vim.keymap.set('n', '<Leader>el', '<Cmd>e ~/.config/nvim/lua/init-manual.lua<CR>')
-vim.keymap.set('n', '<F6>', '<Cmd>ASToggle<CR>')
+vim.keymap.set('n', '<F6>', '<Cmd>ASToggle<CR>', { desc = "Toggle autosave"})
 
 -- set vim's cwd to current file's
 -- nnoremap ,cd :cd %:p:h<CR>:pwd<CR>
@@ -454,7 +456,6 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 		vim.highlight.on_yank({ higroup = 'IncSearch', timeout = 1000 })
 	end,
 })
-nnoremap('n', '<leader>ml', '<Cmd>Modeliner<Enter>')
 
 vim.api.nvim_create_autocmd('ColorScheme', {
 	desc = "Set italic codelens on new colorschemes",
@@ -463,8 +464,6 @@ vim.api.nvim_create_autocmd('ColorScheme', {
 		vim.api.nvim_set_hl(0, 'LspCodeLens', { italic = true })
 	end,
 })
-
-vim.g.Modeliner_format = 'et ff= fenc= sts= sw= ts= fdm='
 
 -- " auto reload vim config on save
 -- " Watch for changes to vimrc
