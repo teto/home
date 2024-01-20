@@ -1,0 +1,12 @@
+{
+    "Nix module": {
+        "prefix": "nixmod",
+        "body": [
+		  "{ config, lib, pkgs, ... }:",
+		  "{",
+		   "programs.ollama.enable = true;",
+		   "}" 
+		],
+        "description": "Nixos module full file"
+    }
+}

@@ -12,9 +12,9 @@ local use_telescope = not use_fzf_lua
 
 local use_org = true
 local use_neorg = true
-local use_luasnip = true
+local has_luasnip, luasnip = pcall(require, 'luasnip')
+local use_luasnip = has_luasnip and true
 
-local nnoremap = vim.keymap.set
 local map = vim.keymap.set
 local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
@@ -523,10 +523,10 @@ if has_cmp then
 
 			{ name = 'buffer' },
 		}
-    if use_neorg then 
+    if use_neorg then
 		table.insert(cmp_sources, { name = 'neorg' })
 	end
-    if use_org then 
+    if use_org then
 		table.insert(cmp_sources, { name = 'orgmode' })
 	end
 	if use_luasnip then
@@ -925,7 +925,7 @@ vim.api.nvim_create_user_command(
 -- luasnip maps
 local has_luasnip, ls = pcall(require, 'luasnip')
 
-if has_luasnip then
+if use_luasnip then
 	-- debug with :LuaSnipListAvailable
 	vim.keymap.set({"i"}, "<C-K>", function() ls.expand() end, {silent = true})
 	vim.keymap.set({"i", "s"}, "<C-L>", function() ls.jump( 1) end, {silent = true})
@@ -947,10 +947,16 @@ if has_luasnip then
 	-- 
 	-- require("luasnip.loaders.from_lua").load()
 
+	-- loads lua files
 	require("luasnip.loaders.from_lua").lazy_load(
-	{ paths = vim.fn.stdpath("config") .."/snippets"}
+		{ paths = { vim.fn.stdpath("config") .."/snippets"} }
 	)
-	require("luasnip.loaders.from_vscode").lazy_load()
+
+	-- loads json(c) files if there is a package.json
+	require("luasnip.loaders.from_vscode").lazy_load(
+		{ paths = { vim.fn.stdpath("config") .."/snippets"} }
+
+	)
 	-- require("luasnip.loaders.from_vscode").lazy_load()
 	ls.config.setup {}
 end
@@ -989,10 +995,6 @@ vim.filetype.add({
 
 -- vim.keymap.set("n", "<Plug>HelloWorld", function() print("Hello World!") end)
 -- vim.keymap.set("n", "gs", "<Plug>HelloWorld")
-
-vim.api.nvim_set_keymap('n', ',a', '<Plug>(Luadev-Run)', { noremap = false, silent = false })
-vim.api.nvim_set_keymap('v', ',,', '<Plug>(Luadev-Run)', { noremap = false, silent = false })
-vim.api.nvim_set_keymap('n', ',,', '<Plug>(Luadev-RunLine)', { noremap = false, silent = false })
 
 -- vim.api.nvim_set_keymap(
 --	 'n',
