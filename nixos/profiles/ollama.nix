@@ -1,4 +1,7 @@
 { config, lib, pkgs, ... }:
 {
-  programs.ollama.enable = true;
+ services.ollama = {
+   enable = true;
+   # package 
+ };
 }

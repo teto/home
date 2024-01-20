@@ -35,6 +35,7 @@
     # ../../modules/xserver.nix
     # ../../modules/redis.nix
     ../../nixos/profiles/ntp.nix
+    ../../nixos/profiles/ollama.nix
 
     # just to check how /etc/nix/machines looks like
     ../../nixos/profiles/distributedBuilds.nix

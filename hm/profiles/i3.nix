@@ -181,6 +181,7 @@ in
     # icons are set for papirus for now
     "$mod+shift+o" = "exec xkill";
 
+    "${mod}+Shift+Return" = ''exec --no-startup-id ${term} -d "$(xcwd)"'';
 
         }
         // sharedConfig.sharedKeybindings;

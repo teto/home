@@ -25,7 +25,7 @@
     # Not tracked, so doesn't need to go in per-machine subdir
     ../../../hm/profiles/android.nix
     ../../../hm/profiles/desktop.nix
-    ../../../hm/profiles/sway.nix
+    ../../../hm/profiles/gnome.nix
     ../../../hm/profiles/ia.nix
     ../../../hm/profiles/waybar.nix
     ../../../hm/profiles/neomutt.nix
@@ -68,7 +68,7 @@
     # bridge-utils# pour  brctl
   ];
 
-  services.nextcloud-client.enable = true;
+  services.nextcloud-client.enable = false;
 
   services.mpd = {
    musicDirectory = "/mnt/ntfs/Musique";
@@ -80,11 +80,5 @@
     DASHT_DOCSETS_DIR = "/mnt/ext/docsets";
     # $HOME/.local/share/Zeal/Zeal/docsets
   };
-
-  # home.stateVersion = "23.05";
-
-  # xrandr --output DVI-I-1 --primary
-  # xsession.initExtra = ''
-  # '';
 
 }

@@ -435,9 +435,7 @@
               ({ pkgs, ... }: {
 
                 imports = [
-                  ./hosts/desktop/config.nix
-                  # ./nixos/profiles/peerix.nix
-                  # ./nixos/profiles/mptcp.nix
+                  ./hosts/desktop/nixos.nix
                   ./nixos/profiles/nova.nix
 
                 ];
@@ -513,8 +511,6 @@
           description = "A flake to help develop poetry-based python packages";
         };
       };
-      # overlay = import ./nixpkgs/overlays/default.nix;
-      #   (self: prev: { });
 
       overlays = {
 
@@ -524,7 +520,7 @@
           blasSupport = false; 
           rocmSupport = false;
           openclSupport = false;
-          stdenv = prev.gcc11Stdenv;
+          # stdenv = prev.gcc11Stdenv;
          });
 
        in {

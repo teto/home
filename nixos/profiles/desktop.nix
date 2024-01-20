@@ -1,8 +1,4 @@
 { config, lib, pkgs, ... }:
-# let
-# secrets = import ./secrets.nix;
-# userNixpkgs = /home/teto/nixpkgs;
-# in
 {
 
   imports = [

@@ -1,5 +1,9 @@
 { config, lib, flakeInputs, pkgs, ... }:
 {
+  imports = [
+    ../../../hm/profiles/sway.nix
+  ];
+
   # TODO generate a wrapper ?
   wayland.windowManager.sway = {
    	xwayland = true;

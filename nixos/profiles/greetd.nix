@@ -2,7 +2,7 @@
 
 let 
 
- in
+in
 
  {
   services.greetd = {
@@ -21,6 +21,7 @@ let
       # vt = config.services.xserver.tty;
       # restart = false; # should be disabled when using autologin
       default_session = {
+        # dbus-run-session could be interesting too
           command = ''
             ${pkgs.greetd.tuigreet}/bin/tuigreet \
               --sessions /run/current-system/sw/share/wayland-sessions/:/run/current-system/sw/share/xsessions/ \
@@ -39,6 +40,11 @@ let
         command = "${pkgs.sway}/bin/sway";
         user = "teto";
       };
+
+      gnome-shell = {
+        command = "${pkgs.gnome.gnome-shell}/bin/gnome-shell";
+        user = "teto";
+      };
     };
     
   };
@@ -46,5 +52,7 @@ let
   environment.etc."greetd/environments".text = ''
     sway
     bash
+    hyprland
+    gnome-shell
   '';
 }

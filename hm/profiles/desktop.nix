@@ -371,8 +371,6 @@ in
   # https://github.com/NixOS/nixpkgs/issues/196651
   manual.manpages.enable = true;
 
-  services.nextcloud-client.enable = true;
-
   # TODO fix that
   # systemd.user.sessionVariables = {
   # NOTMUCH_CONFIG=home.sessionVariables.NOTMUCH_CONFIG;
