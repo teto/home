@@ -38,7 +38,7 @@ let
     (luaPlugin {
       # matches nvim-orgmode
       plugin = orgmode;
-       config = ''
+       config =  /* lua */ ''
         require('orgmode').setup{
             org_capture_templates = {'~/nextcloud/org/*', '~/orgmode/**/*'},
             org_default_notes_file = '~/orgmode/refile.org',

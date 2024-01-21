@@ -1,5 +1,3 @@
-
-
 -- vim.treesitter.language.register('http', 'http')
 -- vim.treesitter.language.register('json', 'json')
 -- vim.treesitter.language.register('httpResult', 'http')
@@ -8,14 +6,14 @@
 -- ft_to_parser.json = 'json' -- the someft filetype will use the python parser and queries.
 -- ft_to_parser.httpResult = 'http'
 
-local available, config = pcall(require, 'nvim-treesitter.configs')
+local available, ts_config = pcall(require, 'nvim-treesitter.configs')
 if not available then
     return
 end
-
-config.config = config.setup({
+-- ts_config.config = ts_config.setup({
+ts_config.setup({
     -- why is treesitter not using stdpath('data') ?!
-    -- parser_install_dir = '/home/teto/parsers',
+    parser_install_dir = '/home/teto/parsers',
     highlight = {
         enable = true, -- false will disable the whole extension
         disable = {

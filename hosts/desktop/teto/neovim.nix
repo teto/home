@@ -59,7 +59,7 @@ let
     (luaPlugin { plugin = urlview-nvim; })
     (luaPlugin { plugin = nvim-ufo; })
     (luaPlugin { plugin = ollama-nvim; })
-
+    (luaPlugin { plugin =  hmts-nvim; })
 
     # testin
     # TODO restore
@@ -214,7 +214,7 @@ let
     (luaPlugin {
       plugin = nvimdev-nvim;
       optional = true;
-      config = ''
+      config =  /* lua */ ''
         -- nvimdev {{{
         -- call nvimdev#init(--path/to/neovim--)
         vim.g.nvimdev_auto_init = 1
@@ -383,6 +383,8 @@ let
   extraPackages = with pkgs; [
      go # for gitlab.nvim, we can probably ditch it afterwards
 
+     nvimLua.pkgs.luarocks
+
       # luaPackages.lua-lsp
       # lua53Packages.teal-language-server
       # codeium # ideally not needed and referenced by codeium-vim directly
@@ -418,6 +420,9 @@ let
 
       nodePackages.pyright
     ];
+
+    # TODO get lua interpreter to select the good lua packages
+    nvimLua = config.programs.neovim.finalPackage.passthru.unwrapped.lua;
  in
 {
   programs.neovim = {
@@ -440,7 +445,8 @@ let
     # viml config, to test home-manager setup
     extraConfig = ''
      '';
-    extraLuaConfig = ''
+
+    extraLuaConfig =  /* lua */ ''
       require('init-manual')
     '';
 

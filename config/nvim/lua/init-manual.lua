@@ -280,7 +280,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 vim.api.nvim_create_autocmd("VimLeave", {
 	desc = "test to fix stacktrace",
-	callback = function(args)
+	callback = function(_args)
 	end
 })
 
@@ -416,7 +416,6 @@ vim.g.fzf_preview_window = 'right:30%'
 -- For Commits and BCommits to customize the options used by 'git log':
 vim.g.fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
 
--- " use 'dhruvasagar/vim-table-mode', {'for': 'txt'}
 -- " use 'mhinz/vim-rfc', { 'on': 'RFC' } " requires nokigiri gem
 -- " careful maps F4 by default
 -- " use 'bronson/vim-trailing-whitespace' " :FixWhitespace
@@ -428,8 +427,8 @@ vim.api.nvim_set_hl(0, 'DiagnosticVirtualTextDebug', { fg = 'green' })
 -- http://stackoverflow.com/questions/28613190/exclude-quickfix-buffer-from-bnext-bprevious
 vim.keymap.set('n', '<Leader><Leader>', '<Cmd>b#<CR>', {desc="Focus alternate buffer"})
 
-vim.keymap.set('n', '<Leader>ev', '<Cmd>e $MYVIMRC<CR>')
-vim.keymap.set('n', '<Leader>sv', '<Cmd>source $MYVIMRC<CR>', { desc = "source my config"})
+vim.keymap.set('n', '<Leader>ev', '<Cmd>e $MYVIMRC<CR>', {desc="Edit home-manager's generated neovim config"})
+vim.keymap.set('n', '<Leader>sv', '<Cmd>source $MYVIMRC<CR>', { desc = "Reload my neovim config"})
 vim.keymap.set('n', '<Leader>el', '<Cmd>e ~/.config/nvim/lua/init-manual.lua<CR>')
 vim.keymap.set('n', '<F6>', '<Cmd>ASToggle<CR>', { desc = "Toggle autosave"})
 
@@ -637,20 +636,21 @@ if has_sniprun then
 		},
 	})
 	vim.api.nvim_set_keymap('v', 'f', '<Plug>SnipRun', { silent = true })
-	vim.api.nvim_set_keymap('n', '<leader>f', '<Plug>SnipRunOperator', { silent = true })
-	vim.api.nvim_set_keymap('n', '<leader>ff', '<Plug>SnipRun', { silent = true })
+	vim.api.nvim_set_keymap('n', '<leader>f', '<Plug>SnipRunOperator', { silent = true, desc = "Run code (pending operator)";})
+	vim.api.nvim_set_keymap('n', '<leader>ff', '<Plug>SnipRun', { silent = true, desc = "Run some code"})
 end
 
 -- add description
 -- lua require("nvim-treesitter.parsers").reset_cache();
 vim.api.nvim_set_keymap('n', '<f3>', '<cmd>lua vim.treesitter.inspect_tree()<cr>', {})
-vim.api.nvim_set_keymap('n', '<f5>', '<cmd>!make build', {})
+vim.api.nvim_set_keymap('n', '<f5>', '<cmd>!make build', { desc = "Run make build"})
 
 vim.g.indicator_errors = ''
 vim.g.indicator_warnings = ''
 vim.g.indicator_info = '🛈'
 vim.g.indicator_hint = '❗'
 vim.g.indicator_ok = '✅'
+
 -- ✓
 vim.g.spinner_frames = { '⣾', '⣽', '⣻', '⢿', '⡿', '⣟', '⣯', '⣷' }
 
@@ -658,7 +658,17 @@ vim.g.spinner_frames = { '⣾', '⣽', '⣻', '⢿', '⡿', '⣟', '⣯', '⣷' 
 
 
 -- vim.ui.select
-fzf_lua.register_ui_select()
+-- gotten from https://github.com/ibhagwan/fzf-lua/wiki#ui-select-auto-size
+fzf_lua.register_ui_select(function(_, items)
+  local min_h, max_h = 0.15, 0.70
+  local h = (#items + 4) / vim.o.lines
+  if h < min_h then
+    h = min_h
+  elseif h > max_h then
+    h = max_h
+  end
+  return { winopts = { height = h, width = 0.60, row = 0.40 } }
+end)
 
 if use_fzf_lua then
 
@@ -767,7 +777,10 @@ end
 vim.g.UltiSnipsSnippetDirectories = { vim.fn.stdpath('config') .. '/snippets' }
 vim.g.tex_flavor = 'latex'
 
--- require('teto.treesitter')
+require('teto.treesitter')
+-- local available, config = pcall(require, 'nvim-treesitter.configs')
+
+
 
 require('teto.lspconfig')
 

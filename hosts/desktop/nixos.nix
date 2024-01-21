@@ -113,8 +113,9 @@
 	"no-scroll"
   ];
 
-  # DOES NOT WORK !
   boot.kernelPackages = pkgs.linuxPackages_latest;
+  # boot.kernelPackages = pkgs.linuxPackages;
+   # linux_default = pkgs.packages.linux_6_1;
   # boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_6_0;
 
   boot.kernelModules = [
