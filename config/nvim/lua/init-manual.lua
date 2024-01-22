@@ -59,7 +59,8 @@ vim.g.maplocalleader = ' '
 vim.opt.colorcolumn = { 100 }
 vim.opt.termguicolors = true
 
--- TODO package last-color in nix
+-- that's where treesitter installs grammars
+vim.opt.rtp:prepend('/home/teto/parsers')
 vim.opt.rtp:prepend(lazypath)
 -- vim.opt.rtp:prepend("/home/teto/rocks.nvim")
 
@@ -549,8 +550,8 @@ if has_cmp then
 		snippet = {
 			-- SNIPPET SUPPORT MANDATORY in cmp
 			expand = function(args)
-				-- For `vsnip` user.
-				vim.fn['vsnip#anonymous'](args.body)
+				-- For `vsnip` user. broken
+				-- vim.fn['vsnip#anonymous'](args.body)
 
 				-- For `luasnip` user.
 				-- require('luasnip').lsp_expand(args.body)

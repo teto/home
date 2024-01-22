@@ -16,7 +16,24 @@ return {
        })
     end,
  },
+ {
+  -- :GpChatNew
+  'Robitx/gp.nvim',
+	config = function()
+     -- Voice commands (:GpWhisper*) depend on SoX (Sound eXchange) to handle audio recording and processing:
+		require("gp").setup({
 
+         model = { model = "gpt-4-1106-preview", temperature = 1.1, top_p = 1 },
+         openai_api_key = os.getenv("OPENAI_API_KEY"),
+         -- cmd_prefix = "Gp",
+         -- openai_api_endpoint = "https://api.openai.com/v1/chat/completions",
+        })
+		-- or setup with your own config (see Install > Configuration in Readme)
+		-- require("gp").setup(config)
+
+        	-- shortcuts might be setup here (see Usage > Shortcuts in Readme)
+	end,
+ },
  {
     "ziontee113/ollama.nvim",
     -- dependencies = {
@@ -26,10 +43,10 @@ return {
     keys = { },
     config = function()
         local ollama = require("ollama")
-        vim.keymap.set("n", '<C-p>', function() ollama.show() end, {})
+        -- vim.keymap.set("n", '<C-p>', function() ollama.show() end, {})
     end,
   }
- , 'David-Kunz/gen.nvim'
+ -- , 'David-Kunz/gen.nvim'
 
  , {
 

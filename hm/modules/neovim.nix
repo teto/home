@@ -118,6 +118,18 @@ let
       };
     };
 
+  treesitterModule =
+    types.submodule {
+      options = {
+        enable = mkEnableOption "Treesitter";
+
+        plugins = mkOption {
+          # type = types.listOf types.package;
+          default = defaultCompletionPlugins;
+        };
+      };
+    };
+
   orgmodeModule =
     types.submodule {
       options = {
@@ -181,6 +193,14 @@ in
         description = "Autocompletion configuration";
       };
 
+      treesitter = mkOption {
+        type = treesitterModule;
+        default = {
+          enable = true;
+        };
+        description = ''Treesitters settings.'';
+      };
+
       teal = mkOption {
         type = tealModule;
         default = {
@@ -213,6 +233,17 @@ in
 
     (mkIf cfg.orgmode.enable {
       programs.neovim.plugins = cfg.orgmode.plugins;
+    })
+
+    (mkIf cfg.treesitter.enable {
+     programs.neovim.extraLuaConfig = lib.mkBefore (
+      "--toto"
+       # lib.strings.concatStrings (
+       #  lib.mapAttrsToList genBlockLua luaRcBlocks
+       #  )
+       )
+     ;
+
     })
 
     (mkIf cfg.autocompletion.enable {

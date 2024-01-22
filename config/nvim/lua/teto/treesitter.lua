@@ -10,6 +10,12 @@ local available, ts_config = pcall(require, 'nvim-treesitter.configs')
 if not available then
     return
 end
+
+-- TODO add full path to gcc
+require"nvim-treesitter.install".compilers = { 
+  "/nix/store/xq8920m5mbd83vdlydwli7qsh67gfm5v-gcc-wrapper-13.2.0/bin/gcc"
+}
+
 -- ts_config.config = ts_config.setup({
 ts_config.setup({
     -- why is treesitter not using stdpath('data') ?!
@@ -58,4 +64,5 @@ ts_config.setup({
     -- Instead of true it can also be a list of languages
     additional_vim_regex_highlighting = false,
 })
+
 
