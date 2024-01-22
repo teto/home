@@ -16,6 +16,7 @@ return {
        })
     end,
  },
+
  {
   -- :GpChatNew
   'Robitx/gp.nvim',
@@ -35,14 +36,38 @@ return {
 	end,
  },
  {
-    "ziontee113/ollama.nvim",
+  "ziontee113/ollama.nvim",
+ },
+ {
+  "nomnivore/ollama.nvim",
     -- dependencies = {
     --     "nvim-lua/plenary.nvim",
     --     "MunifTanjim/nui.nvim",
     -- },
     keys = { },
     config = function()
-        local ollama = require("ollama")
+       -- TODO add to context menu Ollama
+       local menu = require'teto.context_menu'
+       local set_ollama_menu = function()
+        M.set_rclick_submenu('TetoOllama', 'Ollama', {
+         { 'Promt           <space>ca', '<space>ca' },
+         -- { 'Go to Declaration             gD', 'gD' },
+         -- { 'Go to Definition              gd', 'gd' },
+         -- { 'Go to Implementation          gI', 'gI' },
+        })
+       end
+       menu.add_component(set_ollama_menu)
+       -- menu.
+       -- M.set_rclick_submenu('TetoMenuDap', 'Debug       ', {
+       --  { 'Show DAP UI           <space>bu', '<space>bu' },
+       --  { 'Toggle Breakpoint     <space>bb', '<space>bb' },
+       --  { 'Continue              <space>bc', '<space>bc' },
+       --  { 'Terminate             <space>bk', '<space>bk' },
+       -- }, M.buf_has_dap)
+       --
+        -- local ollama = require("ollama")
+        -- ":<c-u>lua require('ollama').prompt()<cr>",
+        -- ":<c-u>lua require('ollama').prompt('Generate_Code')<cr>",
         -- vim.keymap.set("n", '<C-p>', function() ollama.show() end, {})
     end,
   }

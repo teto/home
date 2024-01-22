@@ -37,8 +37,8 @@ return {
               end
 
               -- Navigation
-              map('n', ']c', "&diff ? ']c' : '<cmd>Gitsigns next_hunk<CR>'", {expr=true})
-              map('n', '[c', "&diff ? '[c' : '<cmd>Gitsigns prev_hunk<CR>'", {expr=true})
+              map('n', ']c', "&diff ? ']c' : '<cmd>Gitsigns next_hunk<CR>'", {expr=true, desc ="Git: go to next hunk"})
+              map('n', '[c', "&diff ? '[c' : '<cmd>Gitsigns prev_hunk<CR>'", {expr=true, desc ="Git: go to previous hunk"})
 
               -- Actions
               map('n', '<leader>hs', '<cmd>Gitsigns stage_hunk<CR>', {desc = "Stage hunk" })
@@ -50,10 +50,12 @@ return {
               map('n', '<leader>hR', '<cmd>Gitsigns reset_buffer<CR>')
               map('n', '<leader>hp', '<cmd>Gitsigns preview_hunk<CR>')
               map('n', '<leader>hb', '<cmd>lua require"gitsigns".blame_line{full=true}<CR>', {desc= "Blame line"})
-              map('n', '<leader>tb', '<cmd>Gitsigns toggle_current_line_blame<CR>')
               map('n', '<leader>hd', '<cmd>Gitsigns diffthis<CR>')
               map('n', '<leader>hD', '<cmd>lua require"gitsigns".diffthis("~")<CR>')
-              map('n', '<leader>td', '<cmd>Gitsigns toggle_deleted<CR>')
+
+              -- disabled to avoid
+              -- map('n', '<leader>tb', '<cmd>Gitsigns toggle_current_line_blame<CR>')
+              -- map('n', '<leader>td', '<cmd>Gitsigns toggle_deleted<CR>')
 
               -- Text object
               map('o', 'ih', ':<C-U>Gitsigns select_hunk<CR>')

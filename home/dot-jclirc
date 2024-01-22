@@ -1,4 +1,0 @@
-jinko_instance: janssen-prod
-jinko_cluster_top_level_domain: prod-2.k8s.jinko.ai
-jinko_http_scheme: https
-jinko_service_dns_separator: '-'

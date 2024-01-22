@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 {
   home.packages = with pkgs; [
-    nyx
+    nyx  # what's that ?
     # firefoxPackages.tor-browser
   ];
 }

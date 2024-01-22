@@ -195,9 +195,16 @@ vim.opt.wrapscan = true -- prevent from going back to the beginning of the file
 vim.opt.inccommand = 'nosplit'
 
 vim.opt.mouse = 'a'
--- https://github.com/neovim/neovim/issues/14921
-vim.opt.mousemodel = 'popup_setpos'
+--[[
+Mouse configuration: 
+https://github.com/neovim/neovim/issues/14921
 
+]]--
+vim.opt.mousemodel = 'popup_setpos'
+-- vim.api.nvim_set_keymap('n', '<F1>', '<Cmd>lua open_contextual_menu()<CR>', { noremap = true, silent = false })
+require('teto.context_menu').setup_rclick_menu_autocommands()
+
+-- MenuPopup
 vim.opt.signcolumn = 'auto:3'
 
 --set shada=!,'50,<1000,s100,:0,n/home/teto/.cache/nvim/shada
@@ -830,76 +837,6 @@ vim.cmd([[highlight IndentBlanklineIndent4 guifg=#56B6C2 gui=nocombine]])
 vim.cmd([[highlight IndentBlanklineIndent5 guifg=#61AFEF gui=nocombine]])
 vim.cmd([[highlight IndentBlanklineIndent6 guifg=#C678DD gui=nocombine]])
 
--- local menu_add, menu_add_cmd = myMenu.menu_add, myMenu.menu_add_cmd
--- menu_add('LSP.Declaration', '<cmd>lua vim.lsp.buf.declaration()<cr>')
--- menu_add('LSP.Definition', '<cmd>lua vim.lsp.buf.definition()<cr>')
--- menu_add('LSP.Hover', '<cmd>lua vim.lsp.buf.references()<cr>')
--- menu_add('LSP.Rename', '<cmd>lua vim.lsp.buf.rename()<cr>')
--- menu_add('LSP.Format', '<cmd>lua vim.lsp.buf.format()<cr>')
-
--- menu_add('Toggle.Minimap', '<cmd>MinimapToggle<cr>')
--- menu_add('Toggle.Obsession', '<cmd>Obsession<cr>')
--- menu_add('Toggle.Blanklines', '<cmd>IndentBlanklineToggle<cr>')
--- menu_add("Toggle.Biscuits", 'lua require("nvim-biscuits").toggle_biscuits()')
-
--- menu_add('REPL.Send line', [[<cmd>lua require'luadev'.exec(vim.api.nvim_get_current_line())<cr>]])
--- menu_add('REPL.Send selection ', 'call <SID>luadev_run_operator(v:true)')
-
--- menu_add ("PopUp.Lsp_declaration", "<Cmd>lua vim.lsp.buf.declaration()<CR>")
--- menu_add ("PopUp.Lsp_definition", "<Cmd>lua vim.lsp.buf.definition()<CR>")
--- menu_add('PopUp.LSP_Rename', '<cmd>lua vim.lsp.buf.rename()<cr>')
--- menu_add('PopUp.LSP_Format', '<cmd>lua vim.lsp.buf.format()<cr>')
-
--- menu_add(
---     'Diagnostic.Display_in_QF',
---     '<cmd>lua vim.diagnostic.setqflist({open = true, severity = { min = vim.diagnostic.severity.WARN } })<cr>'
--- )
--- menu_add(
---     'Diagnostic.Set_severity_to_warning',
---     '<cmd>lua vim.diagnostic.config({virtual_text = { severity = { min = vim.diagnostic.severity.WARN } }})<cr>'
--- )
--- menu_add('Diagnostic.Set_severity_to_all', '<cmd>lua vim.diagnostic.config({virtual_text = { severity = nil }})<cr>')
-
--- menu_add_cmd('Search.Search_and_replace', "lua require('spectre').open()")
--- menu_add('Search.Test', 'let a=3')
-
--- menu_add("Search.Search\ in\ current\ Buffer", :Grepper -switch -buffer")
--- menu_add("Search.Search\ across\ Buffers :Grepper -switch -buffers")
--- menu_add("Search.Search\ across\ directory :Grepper")
--- menu_add("Search.Autoopen\ results :let g:grepper.open=1<CR>")
-
--- menu_add("DAP.Add breakpoint", 'lua require"dap".toggle_breakpoint()')
--- menu_add("DAP.Continue", 'lua require"dap".continue()')
--- menu_add("DAP.Open repl", 'lua require"dap".repl.open()')
-
-function open_contextual_menu()
-	-- getcurpos()	Get the position of the cursor.  This is like getpos('.'), but
-	--		includes an extra "curswant" in the list:
-	--			[0, lnum, col, off, curswant] ~
-	--		The "curswant" number is the preferred column when moving the
-	--		cursor vertically.	Also see |getpos()|.
-	--		The first "bufnum" item is always zero.
-
-	local curpos = vim.fn.getcurpos()
-
-	local menu_opts = {
-		kind = 'menu',
-		prompt = 'Main menu',
-		experimental_mouse = true,
-		position = {
-			screenrow = curpos[2],
-			screencol = curpos[3],
-		},
-		-- ignored
-		-- width = 200,
-		-- height = 300,
-	}
-
-	-- print('### ' ..res)
-	require('stylish').ui_menu(vim.fn.menu_get(''), menu_opts, function(res)
-		vim.cmd(res)
-	end)
-end
 
 vim.opt.listchars = 'tab:•·,trail:·,extends:❯,precedes:❮,nbsp:×'
 -- set listchars+=conceal:X
@@ -978,8 +915,6 @@ end
 -- " Bye bye ex mode
 -- noremap Q <NOP>
 
-vim.api.nvim_set_keymap('n', '<F1>', '<Cmd>lua open_contextual_menu()<CR>', { noremap = true, silent = false })
-
 map('n', 'H', '^', {})
 map('n', 'L', '$', {})
 
@@ -1018,7 +953,6 @@ vim.filetype.add({
 -- )
 vim.o.grepprg = 'rg --vimgrep --no-heading --smart-case'
 
-require('teto.context_menu').setup_rclick_menu_autocommands()
 require('teto.lsp').set_lsp_lines(true)
 require('teto.rest')
 require('teto.secrets')

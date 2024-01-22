@@ -21,7 +21,7 @@ return {
             'nvim-telescope/telescope-media-files.nvim',
             -- 'MrcJkb/telescope-manix', -- :Telescope manix
             -- need a hoogle that supports --json and run 'hoogle generate'
-            'luc-tielen/telescope_hoogle',
+            -- 'luc-tielen/telescope_hoogle', --  broken
             -- psiska/telescope-hoogle.nvim looks less advanced
         },
         config = function()
@@ -143,7 +143,7 @@ return {
             -- telescope.load_extension('fzf')
             --jghauser/papis.nvim telescope.load_extension('fzy_native')
             -- telescope.load_extension("notify")
-            telescope.load_extension('hoogle')
+            -- telescope.load_extension('hoogle')
             -- telescope.load_extension('frecency')
             -- telescope.load_extension('manix')
             -- telescope.load_extension('scout')

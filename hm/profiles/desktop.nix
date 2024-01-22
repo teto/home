@@ -54,6 +54,7 @@ let
     ncurses.dev # for infocmp
     # neovide
     # neovim-remote # broken for latex etc
+    nix-doc # can generate tags for nix
     nix-output-monitor
     nix-update # nix-update <ATTR> to update a software
     nix-index # to list package contents
@@ -106,82 +107,80 @@ let
 
     in
     with pkgs; [
-      # apvlv # broken
       # TODO
-      flakeInputs.anyrun.packages.${pkgs.system}.anyrun-with-all-plugins
-      jq # to run json queries
-      lazygit # kinda like tig
+      # apvlv # broken
       # buku # broken
       # gcalc
       # gnome.gnome_control_center
+      # gthumb # image manager, great to tag pictures
+      # magic-wormhole  # super tool to exchange secrets between computers
       # mdp # markdown CLI presenter
+      # nomacs # image viewer
       # nyxt      # lisp browser
-      papis # library manager
+      # pulseaudioFull # for pactl
+      # replace with rust-wormhole
       # requires xdmcp https://github.com/freedesktop/libXdmcp
+      # scrot # screenshot app for xorg
       # smplayer # GUI around mpv
+      # sxiv # simple image viewer
       # todo try sthg else
-      evince # succeed where zathura/mupdf fail
       # unstable.transmission_gtk  # bittorrent client
       # vimiv # image viewer
+      # ytfzf # broken browse youtube
+      # zathura # broken
+	  simple-scan
 	  usbutils
-      imv # image viewer
 	  vifm
-
       bandwhich # to monitor per app bandwidth
+      desktop-file-utils # to get desktop
+      dogdns # dns solver "dog"
       du-dust # dust binary: rust replacement of du
       duf # better df (rust)
-      dogdns # dns solver "dog"
-      ncdu # to see disk usage
-      desktop-file-utils # to get desktop
+      evince # succeed where zathura/mupdf fail
+      flakeInputs.anyrun.packages.${pkgs.system}.anyrun-with-all-plugins
       font-manager
-      # gthumb # image manager, great to tag pictures
       gnome.adwaita-icon-theme # else nothing appears
       gnome.eog # eye of gnome = image viewer / creates a collision
       gnome.file-roller # for GUI archive handling
-      pkgs.networkmanagerapplet # should
-      wine
       hunspellDicts.fr-any
+      imv # image viewer
       jaq # jq in rust
+      jq # to run json queries
+      lazygit # kinda like tig
       libnotify
-      # replace with rust-wormhole
-      # magic-wormhole  # super tool to exchange secrets between computers
       moc-wrapped # music player
       mupdf.bin # evince does better too
+      ncdu # to see disk usage
       ncpamixer # pulseaudio TUI mixer
       noti # send notifications when a command finishes
       ouch # to (de)compress files
+      papis # library manager
       pass-custom # pass with extensions
-      # pulseaudioFull # for pactl
       pavucontrol
+      pkgs.networkmanagerapplet # should
       procs # Rust replacement for 'ps'
       qiv # image viewer
       qtpass
+      ranger # or joshuto ? see hm configuration
+      restic  # to backup photos to backblaze
       rbw # Rust bitwarden unofficial client
+      ripgrep
       rofi-pass # rofi-pass it's enabled in the HM module ?
-      # scrot # screenshot app for xorg
-      sops # password 'manager'
+      rsync
       sd # rust cli for search & replace
       shared-mime-info # temporary fix for nautilus to find the correct files
-      sublime3
-      # sxiv # simple image viewer
-	  simple-scan
-      sioyek # pdf reader
-      translate-shell # call wiuth `trans`
-      wally-cli # to flash ergodox keyboards
-      wireshark
-      xarchiver # to unpack/pack files
-      # zathura # broken
-
-      # ytfzf # broken browse youtube
-      # nomacs # image viewer
-
-      ranger # or joshuto ? see hm configuration
-      rsync
-      ripgrep
       simple-scan
+      sioyek # pdf reader
+      sops # password 'manager'
+      sublime3
+      translate-shell # call with `trans`
       unzip
-      xdg-utils
+      wally-cli # to flash ergodox keyboards
+      wine
+      wireshark
       wttrbar # for meteo
+      xarchiver # to unpack/pack files
+      xdg-utils
     ]
     #   gnome.gnome-calculator # compare with qalqulate-gtk
   ;

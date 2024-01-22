@@ -22,7 +22,7 @@
     ../../hm/profiles/waybar.nix
     # ../../hm/profiles/weechat.nix
     ../../hm/profiles/extra.nix
-    ../../hm/profiles/syncthing.nix
+    # ../../hm/profiles/syncthing.nix
     ../../hm/profiles/japanese.nix
 
     # ../../hm/profiles/alot.nix

@@ -1,5 +1,9 @@
--- inspired by https://gitlab.com/gabmus/nvpunk/-/blob/master/lua/nvpunk/util/context_menu.lua
--- one can run 'popup <name>' to go straight to the correct menu
+--[[
+inspired by https://gitlab.com/gabmus/nvpunk/-/blob/master/lua/nvpunk/util/context_menu.lua
+one can run 'popup <name>' to go straight to the correct menu
+As long as entries are submenus, they register "popup" commands
+Menu is cleared
+]]-- 
 -- TODO add the number of entries in the top-level menu
 local M = {
  active_menus = {},
@@ -8,7 +12,7 @@ local M = {
 --- Checks if current buf has LSPs attached
 ---@return boolean
 M.buf_has_lsp = function()
- return not vim.tbl_isempty(vim.lsp.get_active_clients({ bufnr = vim.api.nvim_get_current_buf()}))
+ return not vim.tbl_isempty(vim.lsp.get_clients({ bufnr = vim.api.nvim_get_current_buf()}))
 end
 
 M.buf_has_treesitter = function()
@@ -74,9 +78,17 @@ M.clear_menu = function(menu)
 end
 
 --- Formats the label of a menu entry to avoid errors
----@param label string
+---@param label_origin string entry name in the menu
+---@param items table
 ---@return string
-M.format_menu_label = function(label)
+M.format_menu_label = function(label_origin, items)
+ local label = label_origin
+ -- TODO move it as part of the options
+ local cascading_menu_suffix = " ->"
+ if items and not vim.tbl_isempty(items) then
+   label = label .. cascading_menu_suffix
+ end
+
  local res = string.gsub(label, ' ', [[\ ]])
  res = string.gsub(res, '<', [[\<]])
  res = string.gsub(res, '>', [[\>]])
@@ -89,7 +101,7 @@ end
 ---@param action string
 M.rclick_context_menu = function(menu, label, action)
  for _, m in ipairs(MODES) do
-  vim.cmd(m .. 'menu ' .. menu .. '.' .. M.format_menu_label(label) .. ' ' .. action)
+  vim.cmd(m .. 'menu ' .. menu .. '.' .. M.format_menu_label(label, {}) .. ' ' .. action)
  end
 end
 
@@ -100,7 +112,7 @@ end
 ---@param bindif function?
 M.set_rclick_submenu = function(menu_name, submenu_label, items, bindif)
  M.clear_menu(menu_name)
- M.clear_menu('PopUp.' .. M.format_menu_label(submenu_label))
+ -- M.clear_menu('PopUp.' .. M.format_menu_label(submenu_label, items))
  if bindif ~= nil then
   if not bindif() then
    return
@@ -140,6 +152,8 @@ M.set_lsp_rclick_menu = function()
   { 'Show all levels', "<cmd>lua require'teto.lsp'.set_level(vim.diagnostic.severity.HINTS)<cr>" },
   -- 
   { 'Apply all code actions', "<cmd>echo 'TODO'" },
+  -- command! LspStopAllClients lua vim.lsp.stop_client(vim.lsp.get_active_clients())
+  { 'Stop all clients', "<cmd>lua", { desc = "stop all lsp clients" } },
   -- {'Toggle hints only', ''},
  }, M.buf_has_lsp)
 end
@@ -162,27 +176,6 @@ M.set_dap_rclick_menu = function()
  }, M.buf_has_dap)
 end
 
--- M.set_nvimtree_rclick_menu = function()
---     M.set_rclick_submenu('NvpunkFileTreeMenu', 'File        ', {
---         {'New File              <space>fn',   '<space>fn'},
---         {'Rename                     <F2>',   '<F2>'},
---     }, function() return vim.bo.filetype == 'NvimTree' end)
--- end
-
--- M.set_neotree_rclick_menu = function()
---     M.set_rclick_submenu('NeoTreeMenu', 'File        ', {
---         {'New File              <space>fn',   '<space>fn'},
---         {'New Folder            <space>dn',   '<space>dn'},
---         {'Rename                     <F2>',   '<F2>'},
---         {'Toggle Hidden             <C-h>',   '<C-h>'},
---         {'Split Horizontally            i',   'i'},
---         {'Split Vertically              s',   's'},
---         {'Open in New Tab               t',   't'},
---         {'Git Add               <space>ga',   '<space>ga'},
---         {'Git Unstage           <space>gu',   '<space>gu'},
---     }, function() return vim.bo.filetype == 'neo-tree' end)
--- end
-
 M.set_telescope_rclick_menu = function()
  M.set_rclick_submenu('TetoTelescopeMenu', 'Telescope   ', {
   { 'Find File             <space>tf', '<space>tf' },
@@ -199,7 +192,9 @@ M.set_fzf_lua_rclick_menu = function()
  })
 end
 
+
 M.set_git_rclick_menu = function()
+ -- map gitsigns
  M.set_rclick_submenu('MenuTetoGit', 'Git         ', {
   { 'Preview Changes       <space>g?', '<space>g?' },
   { 'Prev Hunk             <space>g[', '<space>g[' },
@@ -321,30 +316,6 @@ M.set_tabs_rclick_menu = function(component)
 end
 
 
--- M.set_lsp_rclick_menu()
--- M.set_repl_rclick_menu()
--- M.set_rest_rclick_menu()
--- M.set_spectre_rclick_menu()
--- M.set_sniprun_rclick_menu()
--- -- M.set_orgmode_rclick_menu()
--- M.set_telescope_rclick_menu()
--- M.set_git_rclick_menu()
--- M.set_toggle_rclick_menu()
--- TODO add modeline
- -- '<Cmd>Modeliner<Enter>'
-M.add_component(M.set_lsp_rclick_menu)
-M.add_component(M.set_spectre_rclick_menu)
-M.add_component(M.set_repl_rclick_menu)
-M.add_component(M.set_rest_rclick_menu)
-M.add_component(M.set_sniprun_rclick_menu)
-M.add_component(M.set_toggle_rclick_menu)
-M.add_component(M.set_treesitter_rclick_menu)
--- todo toggle
-M.rclick_context_menu("PopUp", "Autosave", "toto"
--- "
- -- function () require'autosave'.on() end
- )
-
 -- -- menu_add("Toggle.Biscuits", 'lua require("nvim-biscuits").toggle_biscuits()')
 
 -- menu_add('REPL.Send line', [[<cmd>lua require'luadev'.exec(vim.api.nvim_get_current_line())<cr>]])
@@ -364,14 +335,110 @@ M.rclick_context_menu("PopUp", "Autosave", "toto"
 --     '<cmd>lua vim.diagnostic.config({virtual_text = { severity = { min = vim.diagnostic.severity.WARN } }})<cr>'
 -- )
 
--- TODO the run it on filetype change too
+-- local menu_add, menu_add_cmd = myMenu.menu_add, myMenu.menu_add_cmd
+-- menu_add('LSP.Declaration', '<cmd>lua vim.lsp.buf.declaration()<cr>')
+-- menu_add('LSP.Definition', '<cmd>lua vim.lsp.buf.definition()<cr>')
+-- menu_add('LSP.Hover', '<cmd>lua vim.lsp.buf.references()<cr>')
+-- menu_add('LSP.Rename', '<cmd>lua vim.lsp.buf.rename()<cr>')
+-- menu_add('LSP.Format', '<cmd>lua vim.lsp.buf.format()<cr>')
+
+-- menu_add('Toggle.Minimap', '<cmd>MinimapToggle<cr>')
+-- menu_add('Toggle.Obsession', '<cmd>Obsession<cr>')
+-- menu_add('Toggle.Blanklines', '<cmd>IndentBlanklineToggle<cr>')
+-- menu_add("Toggle.Biscuits", 'lua require("nvim-biscuits").toggle_biscuits()')
+
+-- menu_add('REPL.Send line', [[<cmd>lua require'luadev'.exec(vim.api.nvim_get_current_line())<cr>]])
+-- menu_add('REPL.Send selection ', 'call <SID>luadev_run_operator(v:true)')
+
+-- menu_add ("PopUp.Lsp_declaration", "<Cmd>lua vim.lsp.buf.declaration()<CR>")
+-- menu_add ("PopUp.Lsp_definition", "<Cmd>lua vim.lsp.buf.definition()<CR>")
+-- menu_add('PopUp.LSP_Rename', '<cmd>lua vim.lsp.buf.rename()<cr>')
+-- menu_add('PopUp.LSP_Format', '<cmd>lua vim.lsp.buf.format()<cr>')
+
+-- menu_add(
+--     'Diagnostic.Display_in_QF',
+--     '<cmd>lua vim.diagnostic.setqflist({open = true, severity = { min = vim.diagnostic.severity.WARN } })<cr>'
+-- )
+-- menu_add(
+--     'Diagnostic.Set_severity_to_warning',
+--     '<cmd>lua vim.diagnostic.config({virtual_text = { severity = { min = vim.diagnostic.severity.WARN } }})<cr>'
+-- )
+-- menu_add('Diagnostic.Set_severity_to_all', '<cmd>lua vim.diagnostic.config({virtual_text = { severity = nil }})<cr>')
+
+-- menu_add_cmd('Search.Search_and_replace', "lua require('spectre').open()")
+-- menu_add('Search.Test', 'let a=3')
+
+-- menu_add("Search.Search\ in\ current\ Buffer", :Grepper -switch -buffer")
+-- menu_add("Search.Search\ across\ Buffers :Grepper -switch -buffers")
+-- menu_add("Search.Search\ across\ directory :Grepper")
+-- menu_add("Search.Autoopen\ results :let g:grepper.open=1<CR>")
+
+-- menu_add("DAP.Add breakpoint", 'lua require"dap".toggle_breakpoint()')
+-- menu_add("DAP.Continue", 'lua require"dap".continue()')
+-- menu_add("DAP.Open repl", 'lua require"dap".repl.open()')
+
+-- TODO this uses stylish
+function open_contextual_menu()
+	-- getcurpos()	Get the position of the cursor.  This is like getpos('.'), but
+	--		includes an extra "curswant" in the list:
+	--			[0, lnum, col, off, curswant] ~
+	--		The "curswant" number is the preferred column when moving the
+	--		cursor vertically.	Also see |getpos()|.
+	--		The first "bufnum" item is always zero.
+
+	local curpos = vim.fn.getcurpos()
+
+	local menu_opts = {
+		kind = 'menu',
+		prompt = 'Main menu',
+		experimental_mouse = true,
+		position = {
+			screenrow = curpos[2],
+			screencol = curpos[3],
+		},
+		-- ignored
+		-- width = 200,
+		-- height = 300,
+	}
+
+	-- print('### ' ..res)
+	require('stylish').ui_menu(vim.fn.menu_get(''), menu_opts, function(res)
+		vim.cmd(res)
+	end)
+end
+
+
+--[[ TODO the run it on filetype change too
+Check 'mousemodel'
+-- t'LspAttach', 'FileType'his 
+]]--
 M.setup_rclick_menu_autocommands = function()
- -- M.set_dap_rclick_menu()
- -- M.set_java_rclick_menu()
- -- M.set_nvimtree_rclick_menu()
- vim.api.nvim_create_autocmd({ 'BufEnter', 'LspAttach', 'FileType' }, {
+ -- 'LspAttach', 'FileType'
+ vim.api.nvim_create_autocmd({ 'MenuPopup',  }, {
+
   -- TODO regenerate this function everytime ?
   callback = function()
+   -- 1. we clear the menu
+   M.clear_menu('PopUp')
+
+   -- 2. we configure the menu
+   M.add_component(M.set_lsp_rclick_menu)
+   M.add_component(M.set_spectre_rclick_menu)
+   M.add_component(M.set_repl_rclick_menu)
+   M.add_component(M.set_rest_rclick_menu)
+   M.add_component(M.set_sniprun_rclick_menu)
+   M.add_component(M.set_toggle_rclick_menu)
+   M.add_component(M.set_treesitter_rclick_menu)
+   M.add_component(M.set_tabs_rclick_menu)
+   M.add_component(M.set_git_rclick_menu)
+-- -- M.set_orgmode_rclick_menu()
+-- M.rclick_context_menu("PopUp", "Autosave", "toto"
+-- -- "
+--  -- function () require'autosave'.on() end
+--  )
+
+
+   -- 3. we regenerate the menu
    for _, component in ipairs(M.active_menus) do
     component()
    end
@@ -379,6 +446,5 @@ M.setup_rclick_menu_autocommands = function()
  })
 end
 
-M.clear_menu('PopUp')
 
 return M

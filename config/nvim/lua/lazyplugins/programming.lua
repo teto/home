@@ -1,12 +1,11 @@
 return {
- {
- 'stevearc/overseer.nvim',
- opts = {}
-},
- {
-  'tpope/vim-dispatch'
-
- },
+ -- {
+ -- 'stevearc/overseer.nvim',
+ -- opts = {}
+-- },
+ -- {
+ --  'tpope/vim-dispatch'
+ -- },
  {
   'mrcjkb/neotest-haskell',
   -- -- 'nvim-neotest/neotest',
@@ -17,10 +16,10 @@ return {
   --   'nvim-lua/plenary.nvim',
   -- }
  },
- { 'luckasRanarison/nvim-devdocs',
- -- needs a html treesitter
-  config = function()
-    require("nvim-devdocs").setup()
-  end
- },
+ -- { 'luckasRanarison/nvim-devdocs',
+ -- -- needs a html treesitter
+ --  config = function()
+ --    require("nvim-devdocs").setup()
+ --  end
+ -- },
 }

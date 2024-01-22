@@ -34,6 +34,7 @@
     # ../../nixos/profiles/libvirtd.nix
     # ../../modules/xserver.nix
     # ../../modules/redis.nix
+    ../../nixos/profiles/nvidia.nix
     ../../nixos/profiles/ntp.nix
     ../../nixos/profiles/ollama.nix
 
@@ -232,7 +233,7 @@
 	# Update for NVIDA GPU headless mode, i.e. nvidia-persistenced. It ensures all GPUs stay awake even during headless mode.
 	 # nvidiaPersistenced = true;
   };
-    # https://discourse.nixos.org/t/nvidia-users-testers-requested-sway-on-nvidia-steam-on-wayland/15264/21?u=teto
+  # https://discourse.nixos.org/t/nvidia-users-testers-requested-sway-on-nvidia-steam-on-wayland/15264/21?u=teto
 
   # pkgs.linuxPackages_latest
   # environment.etc."gbm/nvidia-drm_gbm.so".source = "${pkgs.linuxPackages.nvidiaPackages.stable}/lib/libnvidia-allocator.so";
@@ -281,6 +282,9 @@
 
   environment.systemPackages = [
     # pkgs.linuxPackages.nvidia_x11.bin # to get nvidia-smi EVEN when nvidia is not used as a video driver
+    pkgs.nvidia-podman
+    pkgs.nvidia-system-monitor-qt
+    pkgs.nvitop
   ];
 
   # $out here is the profile generation
