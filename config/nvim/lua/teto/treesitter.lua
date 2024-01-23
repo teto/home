@@ -25,7 +25,7 @@ ts_config.setup({
         disable = {
             'rust',
             'bash',
-            -- 'nix',
+            'nix',
             'python',
             'http', -- while I am working on the parser !
             -- 'c',

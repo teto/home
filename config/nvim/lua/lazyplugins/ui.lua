@@ -63,7 +63,7 @@ return {
   --   },
   -- },
     -- provides 'NvimTree'
-    { 'kyazdani42/nvim-tree.lua', lazy = true},
+    -- { 'kyazdani42/nvim-tree.lua', lazy = true},
 
  -- {
  --        'rcarriga/nvim-notify',
