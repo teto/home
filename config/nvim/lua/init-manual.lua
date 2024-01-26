@@ -714,8 +714,10 @@ end
 
 if use_telescope then
 
+	local tts = require('teto.telescope')
 	-- if we want to use telescope
-	require('teto.telescope').telescope_create_keymaps()
+	tts.setup()
+	tts.telescope_create_keymaps()
 end
 
 

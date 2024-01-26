@@ -1,21 +1,21 @@
 return {
- { 'jackMort/ChatGPT.nvim',
-   -- due to https://github.com/jackMort/ChatGPT.nvim/issues/265
-    -- commit = "24bcca7",
-    config = function()
-     -- passing OPENAI_API_KEY in environment for this to work
-     -- huge setup at https://github.com/jackMort/ChatGPT.nvim
-      require("chatgpt").setup({
-        -- api_key_cmd = "pass show chat.openai.com",
-        -- see https://github.com/jackMort/ChatGPT.nvim/issues/314
-        -- api_host_cmd = "echo -n api.openai.com",
-        -- api_host_cmd = "echo -n '0.0.0.0:3000'"
-        --
-        -- with `ollama serve`
-        -- api_host_cmd = "echo -n http://127.0.0.1:11434"
-       })
-    end,
- },
+ --{ 'jackMort/ChatGPT.nvim',
+ --  -- due to https://github.com/jackMort/ChatGPT.nvim/issues/265
+ --   -- commit = "24bcca7",
+ --   config = function()
+ --    -- passing OPENAI_API_KEY in environment for this to work
+ --    -- huge setup at https://github.com/jackMort/ChatGPT.nvim
+ --     require("chatgpt").setup({
+ --       -- api_key_cmd = "pass show chat.openai.com",
+ --       -- see https://github.com/jackMort/ChatGPT.nvim/issues/314
+ --       -- api_host_cmd = "echo -n api.openai.com",
+ --       -- api_host_cmd = "echo -n '0.0.0.0:3000'"
+ --       --
+ --       -- with `ollama serve`
+ --       -- api_host_cmd = "echo -n http://127.0.0.1:11434"
+ --      })
+ --   end,
+ --},
 
  {
   -- :GpChatNew
@@ -35,9 +35,9 @@ return {
         	-- shortcuts might be setup here (see Usage > Shortcuts in Readme)
 	end,
  },
- {
-  "ziontee113/ollama.nvim",
- },
+ -- {
+ --  "ziontee113/ollama.nvim",
+ -- },
  {
   "nomnivore/ollama.nvim",
     -- dependencies = {
