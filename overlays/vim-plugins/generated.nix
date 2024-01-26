@@ -3,16 +3,5 @@
 
 final: prev:
 {
-  gitsigns-nvim = buildVimPluginFrom2Nix {
-    pname = "gitsigns.nvim";
-    version = "2021-09-27";
-    src = fetchFromGitHub {
-      owner = "lewis6991";
-      repo = "gitsigns.nvim";
-      rev = "805b12a9b7b1997a47b185cdb2938e0f3e428714";
-      sha256 = "0lvf9i2px2s54rn0ahp0z0adn8d9qm051jaxqxmpn718kibknl7k";
-    };
-    meta.homepage = "https://github.com/lewis6991/gitsigns.nvim/";
-  };
 
 }

@@ -12,8 +12,10 @@ local use_telescope = not use_fzf_lua
 
 local use_org = true
 local use_neorg = true
-local has_luasnip, luasnip = pcall(require, 'luasnip')
+local has_luasnip, ls = pcall(require, 'luasnip')
 local use_luasnip = has_luasnip and true
+
+local has_gitsigns, gitsigns = pcall(require, 'gitsigns')
 
 local map = vim.keymap.set
 local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
@@ -675,7 +677,21 @@ fzf_lua.register_ui_select(function(_, items)
   elseif h > max_h then
     h = max_h
   end
-  return { winopts = { height = h, width = 0.60, row = 0.40 } }
+
+  local dopreview = vim.o.columns > 200
+  local hidden = 'hidden'
+  if dopreview then
+	  hidden = 'nohidden'
+  end
+  return {
+	winopts = {
+	  height = h, width = 0.80, row = 0.40,
+
+	  preview = {
+		  hidden = hidden,
+	  }
+  	}
+  }
 end)
 
 if use_fzf_lua then
@@ -850,11 +866,12 @@ vim.g.netrw_home = vim.fn.stdpath('data') .. '/nvim'
 
 vim.keymap.set('n', '<F11>', '<Plug>(ToggleListchars)')
 
-vim.keymap.set('n', '<leader>q', '<Cmd>Sayonara!<cr>', { silent = true })
-vim.keymap.set('n', '<leader>Q', '<Cmd>Sayonara<cr>', { silent = true })
+vim.keymap.set('n', '<leader>q', '<Cmd>Sayonara!<cr>', { silent = true, desc = "Closes current window"})
+vim.keymap.set('n', '<leader>Q', '<Cmd>Sayonara<cr>', 
+	{ silent = true, desc = "Close current window, no question asked" })
 
 
-vim.g.vsnip_snippet_dir = vim.fn.stdpath('config') .. '/vsnip'
+-- vim.g.vsnip_snippet_dir = vim.fn.stdpath('config') .. '/vsnip'
 
 map('n', '<Leader>$', '<Cmd>Obsession<CR>')
 
@@ -863,8 +880,8 @@ vim.opt.exrc = true
 
 -- hi CustomLineWarn guifg=#FD971F
 -- command! JsonPretty %!jq '.'
-vim.api.nvim_create_user_command('Htags', '!hasktags .', {})
-vim.api.nvim_create_user_command('JsonPretty', "%!jq '.'", {})
+vim.api.nvim_create_user_command('Htags', '!hasktags .', { desc = "Regenerate tags"})
+vim.api.nvim_create_user_command('JsonPretty', "%!jq '.'", { desc = "Prettify json"})
 
 -- taken from justinmk's config
 vim.api.nvim_create_user_command(
@@ -875,12 +892,9 @@ vim.api.nvim_create_user_command(
 	{}
 )
 
--- luasnip maps
-local has_luasnip, ls = pcall(require, 'luasnip')
-
 if use_luasnip then
 	-- debug with :LuaSnipListAvailable
-	vim.keymap.set({"i"}, "<C-K>", function() ls.expand() end, {silent = true})
+	vim.keymap.set({"i"}, "<C-K>", function() ls.expand() end, {silent = true, desc="Invoke luasnip"})
 	vim.keymap.set({"i", "s"}, "<C-L>", function() ls.jump( 1) end, {silent = true})
 	vim.keymap.set({"i", "s"}, "<C-J>", function() ls.jump(-1) end, {silent = true})
 
@@ -959,6 +973,10 @@ require('teto.lsp').set_lsp_lines(true)
 require('teto.rest')
 require('teto.secrets')
 
+if has_gitsigns then
+	local tgitsigns = require'teto.gitsigns'
+	tgitsigns.setup()
+end
 
 -- commented out till https://github.com/ErikReider/SwayNotificationCenter/issues/323 gets implemented
 local teto_notify = require('teto.notify')
@@ -986,5 +1004,5 @@ vim.api.nvim_create_autocmd({ "VimLeave" }, {
 
 local has_ollama, ollama = pcall(require, 'ollama')
 if has_ollama then
-	ollama.setup()
+	ollama.setup({})
 end
