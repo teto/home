@@ -59,6 +59,7 @@ let
     (luaPlugin { plugin = urlview-nvim; })
     (luaPlugin { plugin = nvim-ufo; })
     (luaPlugin { plugin = ollama-nvim; })
+    (luaPlugin { plugin = mini-nvim; })
     # breaks setup
     # (luaPlugin { plugin =  hmts-nvim; })
 

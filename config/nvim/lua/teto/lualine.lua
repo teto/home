@@ -33,9 +33,16 @@ require('lualine').setup({
                 'filename',
                 path = 1,
                 -- takes a function that is called when component is clicked with mouse.
-                on_click = function(_nb_of_clicks, _button, _modifiers)
-                    local filename = vim.fn.getreg('%')
-                    print('copying filename to clipboard: ' .. filename)
+                -- button is 'l', 'r'
+                on_click = function(_nb_of_clicks, button, _modifiers)
+                    -- local bufnr = vim.fn.bufnr('%')
+                    local filename = vim.fn.bufname('%') -- vim.fn.getreg('%')
+                    local copy_fullpath = (button == 'r')
+                    if copy_fullpath then
+                      filename = vim.fn.fnamemodify(filename, ':p')
+
+                    end
+                    print('To clipboard: ' .. filename)
                     clip.copy(filename)
                 end,
                 -- path=2 => absolute path

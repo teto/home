@@ -11,6 +11,8 @@ build/
 
 __pad__
 
+*.jsonzlib
+
 # Compiled source {{{
 *.com
 *.class

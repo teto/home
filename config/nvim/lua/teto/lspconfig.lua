@@ -37,6 +37,10 @@ lspconfig.util.default_config = vim.tbl_extend('force', lspconfig.util.default_c
 
 lspconfig.bashls.setup({})
 
+
+
+-- Note that there is config set in .luarc.json but it is ignored
+-- https://github.com/LuaLS/lua-language-server/issues/2483
 lspconfig.lua_ls.setup({
  cmd = { 'lua-language-server' },
  settings = {
@@ -59,6 +63,7 @@ lspconfig.lua_ls.setup({
     },
     -- Define variable names that will not be reported as an unused local by unused-local.
     unusedLocalExclude = { '_*' },
+
     disable = {
      'lowercase-global',
      'unused-function',
@@ -69,12 +74,35 @@ lspconfig.lua_ls.setup({
     },
    },
    workspace = {
-    checkThirdParty = false,
-    library = {
-     [vim.fn.expand('$VIMRUNTIME/lua')] = true,
-     [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
-    },
+      -- Make the server aware of Neovim runtime files,
+      -- see also https://github.com/LuaLS/lua-language-server/wiki/Libraries#link-to-workspace .
+      -- Lua-dev.nvim also has similar settings for lua ls, https://github.com/folke/neodev.nvim/blob/main/lua/neodev/luals.lua .
+      maxPreload = 2000,
+      preloadFileSize = 500,
+     checkThirdParty = false,
+       ignoreDir = {
+       "config/wireshark",
+       "config/mpv"
+      },
+
+     library = {
+      -- [vim.fn.expand('$VIMRUNTIME/lua')] = true,
+      -- [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
+      ["/home/teto/neovim/neovim/runtime/lua"] = true,
+      ["/home/teto/neovim/neovim/runtime/lua/vim/lsp"] = true,
+     },
    },
+    -- workspace = {
+    -- },
+    format = {
+      enable = true,
+      -- Put format options here
+      -- NOTE: the value should be String!
+      defaultConfig = {
+        indent_style = 'space',
+        indent_size = '2',
+      },
+    },
   },
  },
 })

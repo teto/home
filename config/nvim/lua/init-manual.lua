@@ -926,6 +926,12 @@ if use_luasnip then
 	)
 	-- require("luasnip.loaders.from_vscode").lazy_load()
 	ls.config.setup {}
+
+
+	-- see also :h haskell-snippets
+	-- needs a treesitter grammar
+	local haskell_snippets = require('haskell-snippets').all
+	ls.add_snippets('haskell', haskell_snippets, { key = 'haskell' })
 end
 
 -- " Bye bye ex mode

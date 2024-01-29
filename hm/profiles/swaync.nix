@@ -80,7 +80,7 @@
  };
 
  systemd.user.services.swaync.Service.Environment = [
-   # "G_MESSAGES_DEBUG=all"
+   "G_MESSAGES_DEBUG=all"
    "PATH=${lib.makeBinPath [
     "/run/current-system/sw"
     pkgs.wlogout pkgs.libnotify pkgs.swaylock

@@ -21,6 +21,8 @@
   };
 
   inputs = {
+   # todo add nixified.ai too
+    localai.url = "github:ck3d/nix-local-ai";
 
     # waybar.url = "github:Alexays/Waybar";
     nixpkgs = {
@@ -99,6 +101,11 @@
       # pinned because of https://github.com/neovim/neovim/issues/25086
       # &rev=f246cf029fb4e7a07788adfa19f91608db7bd816
       url = "github:neovim/neovim?dir=contrib";
+      # url = "github:teto/neovim?dir=contrib&ref=fix-wrap-field";
+      # url = "git+file:///home/teto/neovim/neovim?dir=contrib&ref=fix-wrap-field";
+      # local path fails with:
+      # error: access to absolute path '/nix/store/cmake.deps/deps.txt' is forbidden in pure eval mode (use '--impure' to override)
+      # url = "path:/home/teto/neovim/neovim/contrib";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     neovide = {

@@ -287,6 +287,11 @@
     pkgs.nvitop
   ];
 
+  # testing with localai instead
+  services.ollama = {
+    enable = false;
+  };
+
   # $out here is the profile generation
   system.extraSystemBuilderCmds = ''
     ln -s ${config.boot.kernelPackages.kernel.dev}/vmlinux $out/vmlinux

@@ -150,7 +150,13 @@ let
       libnotify
       moc-wrapped # music player
       mupdf.bin # evince does better too
+
+      ## Alternatives to consider:
+      # - gdu
+      # - pdu
+      # - dua
       ncdu # to see disk usage
+      
       ncpamixer # pulseaudio TUI mixer
       noti # send notifications when a command finishes
       ouch # to (de)compress files

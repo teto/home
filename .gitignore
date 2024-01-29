@@ -1,23 +1,24 @@
+# **
 README.html
+config/astroid/config
+config/astroid/poll.sh
 config/autostart
 config/clerk
-config/sway/config
-config/zsh/.*
-config/systemd/*
-config/nvim/lua/init.lua
 config/git/config
-config/jesseduffield/*
-config/astroid/config
+config/gtk-3.0/*
 config/ipython/*
+config/jesseduffield/*
 config/jupyter/migrated
-config/vlc/*
-config/tmux/tmux.conf
-config/supertuxkart/*
-config/mpv/mpv.conf
 config/kitty/kitty.conf
-config/astroid/poll.sh
+config/mpv/mpv.conf
+config/nvim/lua/init.lua
 config/rofi-pass/
+config/supertuxkart/*
+config/sway/config
+config/systemd/*
 config/terminator
+config/tmux/tmux.conf
+config/vlc/*
+config/zsh/.*
 misc/
-# **
 test*
