@@ -22,3 +22,4 @@ config/vlc/*
 config/zsh/.*
 misc/
 test*
+export.json

@@ -89,3 +89,6 @@ vimPlugins:
 # TODO should be loaded into zsh history instead
 rebuild:
 	nixos-rebuild --flake ~/home --override-input nixpkgs /home/teto/nixpkgs --override-input hm /home/teto/hm --override-input nova /home/teto/nova/nova-nix --no-write-lock-file switch  --show-trace --use-remote-sudo
+
+localai: # starts localai
+	nix run .#local-ai-cublas -- --models-path ~/models
