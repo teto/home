@@ -117,12 +117,17 @@ in
     
 	 programs.zsh.initExtra =
 		''
-		source ${fzf-git-sh}/fzf-git.sh
+         # do nothing
 		'';
     })
 
     (mkIf cfg.enableFzfGit {
 	 programs.zsh.initExtra =
+		''
+		source ${fzf-git-sh}/fzf-git.sh
+		'';
+
+	 programs.bash.initExtra =
 		''
 		source ${fzf-git-sh}/fzf-git.sh
 		'';

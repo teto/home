@@ -48,7 +48,7 @@
       keep-derivations = true   # Idem
       keep-failed = true
 
-      experimental-features = nix-command flakes
+      experimental-features = nix-command flakes auto-allocate-uids
     '';
     #  to keep build-time dependencies around => rebuild while being offline
     # extraOptions = ''

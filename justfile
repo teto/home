@@ -83,7 +83,7 @@ nautilus:
 vimPlugins:
 	# /home/teto/nixpkgs/pkgs/misc/vim-plugins/update.py
 	cd $(NIXPKGS_REPO) \
-		&& pkgs/misc/vim-plugins/update.py -i $(CURDIR)/nixpkgs/overlays/vim-plugins/vim-plugin-names -o $(CURDIR)/nixpkgs/overlays/vim-plugins/generated.nix --no-commit
+		&& nix run .#vimPluginsUpdater -i $(CURDIR)/nixpkgs/overlays/vim-plugins/vim-plugin-names -o $(CURDIR)/nixpkgs/overlays/vim-plugins/generated.nix --no-commit
 
 # just to save the command
 # TODO should be loaded into zsh history instead
@@ -92,3 +92,7 @@ rebuild:
 
 localai: # starts localai
 	nix run .#local-ai-cublas -- --models-path ~/models
+
+nix-check-db:
+	# run in nix shell nixpkgs#sqlite
+	sqlite3 /nix/var/nix/db/db.sqlite 'pragma integrity_check'

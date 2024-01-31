@@ -20,8 +20,9 @@ function M.make_darker()
   -- bg => 3159111 guibg=#303447  
   -- hsl("#c6c6c6")
   -- one can instantiate the 
-  -- tostring(bit.tohex(3159111))
-  local newColor = hsl(hi.bg)
+  local normal_bg_hex = "#"..tostring(bit.tohex(3159111))
+  print(normal_bg_hex)
+  local newColor = hsl(normal_bg_hex)
 
   vim.api.nvim_set_hl(0, 'Normal', {bg = newColor})
   vim.print(hi)
