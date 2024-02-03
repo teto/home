@@ -122,10 +122,11 @@
 
     # TODO extend vim plugins from this overlay
     # neovim-overlay.url = "github:teto/neovim-nightly-overlay/vimPlugins-overlay";
-    tree-sitter = {
-      url = "github:ahlinc/tree-sitter";
-      flake = false;
-    };
+    # tree-sitter = {
+    #   url = "github:ahlinc/tree-sitter";
+    #   flake = false;
+    # };
+
     # nix-direnv = {
     #   url = "github:nix-community/nix-direnv";
     #   flake = false;
