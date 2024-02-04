@@ -12,40 +12,62 @@
   # replace it in the flake with
   # modules = [ pkgs.nixosModules.notDetected ];
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "ehci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" "sr_mod" ];
-  boot.initrd.kernelModules = [ ];
+  boot.initrd.availableKernelModules = [
+  "nvme" "xhci_pci" "ehci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" "sr_mod" 
+   
+  ];
+  boot.initrd.kernelModules = [ 
+  "nvme" "xhci_pci" "ehci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" "sr_mod" 
+
+  ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
   # to remove "TSC_DEADLINE disabled due to Errata;
   # please update microcode to version: 0x22"
   hardware.cpu.intel.updateMicrocode = true;
+
   fileSystems."/" =
-    {
-      device = "/dev/disk/by-uuid/443ce6b0-e43e-43e6-9d10-c0c6293ccf66";
+    { device = "/dev/disk/by-uuid/01435119-f2c1-4316-b828-489a76df79c6";
       fsType = "ext4";
     };
 
-  swapDevices =
-    [{ device = "/dev/disk/by-uuid/ebbfc6ca-a0f0-4b8b-ac1e-7a2b4390d72c"; }];
-
-  fileSystems."/mnt/ext" =
-    {
-      device = "/dev/disk/by-uuid/d118729e-bc3d-4e02-bf6b-f0cb54fef2a1";
-      fsType = "ext4";
-      # "exec"
-      # user disables exec
-      options = [ "defaults" "user" "exec" "nofail" ];
+  fileSystems."/boot" =
+    { device = "/dev/disk/by-uuid/CA0D-A5E4";
+      fsType = "vfat";
     };
 
-  fileSystems."/mnt/ntfs" =
-    {
-      device = "/dev/sda2";
-      fsType = "ntfs";
-      # see https://nixos.wiki/wiki/NTFS
-      options = [ "rw" "uid=teto" "nofail" ];
-      # options = [ "user", ];
-    };
+
+  # fileSystems."/" =
+  #   {
+  #     # device = "/dev/disk/by-uuid/443ce6b0-e43e-43e6-9d10-c0c6293ccf66"; # old /dev/sdc
+  #     device = "/dev/disk/by-uuid/db7925e7-5d55-4336-83db-0defb5cb053a"; # new samsung pro
+  #     fsType = "ext4";
+  #   };
+
+  # swapDevices =
+  #  [{
+  #   # device = 6af85f10-9c4c-4d18-b5d0-30b3fcabfc12
+  #   device = "/dev/disk/by-uuid/ebbfc6ca-a0f0-4b8b-ac1e-7a2b4390d72c"; 
+  # }];
+
+  # fileSystems."/mnt/ext" =
+  #   {
+  #     device = "/dev/disk/by-uuid/d118729e-bc3d-4e02-bf6b-f0cb54fef2a1";
+  #     fsType = "ext4";
+  #     # "exec"
+  #     # user disables exec
+  #     options = [ "defaults" "user" "exec" "nofail" ];
+  #   };
+
+  # fileSystems."/mnt/ntfs" =
+  #   {
+  #     device = "/dev/sda2";
+  #     fsType = "ntfs";
+  #     # see https://nixos.wiki/wiki/NTFS
+  #     options = [ "rw" "uid=teto" "nofail" ];
+  #     # options = [ "user", ];
+  #   };
 
 
 

@@ -88,20 +88,24 @@
   ];
 
   boot.consoleLogLevel = 6;
-  boot.loader = {
-    #    systemd-boot.enable = true;
-    efi.canTouchEfiVariables = true; # allows to run $ efi...
-    systemd-boot.editor = true; # allow to edit command line
-    timeout = 5;
-    # just to generate the entry used by ubuntu's grub
-    grub = {
-      enable = true;
-      useOSProber = true;
-      # install to none, we just need the generated config
-      # for ubuntu grub to discover
-      device = "/dev/sdb";
-    };
-  };
+
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = false;
+
+#   boot.loader = {
+#    #    systemd-boot.enable = true;
+#    efi.canTouchEfiVariables = true; # allows to run $ efi...
+#    systemd-boot.editor = true; # allow to edit command line
+#    timeout = 5;
+#    # just to generate the entry used by ubuntu's grub
+#    grub = {
+#      enable = true;
+#      useOSProber = true;
+#      # install to none, we just need the generated config
+#      # for ubuntu grub to discover
+#      device = "/dev/nvme0n1";
+#    };
+#  };
 
   # hide messages !
   boot.kernelParams = [
