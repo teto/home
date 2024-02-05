@@ -89,23 +89,30 @@
 
   boot.consoleLogLevel = 6;
 
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = false;
 
-#   boot.loader = {
-#    #    systemd-boot.enable = true;
-#    efi.canTouchEfiVariables = true; # allows to run $ efi...
-#    systemd-boot.editor = true; # allow to edit command line
+  boot.loader = {
+     # systemd-boot.enable = true;
+     # systemd-boot.editor = true; # allow to edit command line
+     # systemd-boot.consoldeMode = "auto"; 
+
+     efi.canTouchEfiVariables = false;
+     efi.efiSysMountPoint = "/boot";
+   #    systemd-boot.enable = true;
+   # efi.efiSysMountPoint
 #    timeout = 5;
 #    # just to generate the entry used by ubuntu's grub
-#    grub = {
-#      enable = true;
-#      useOSProber = true;
-#      # install to none, we just need the generated config
-#      # for ubuntu grub to discover
-#      device = "/dev/nvme0n1";
-#    };
-#  };
+   grub = {
+     enable = true;
+     efiSupport = true;
+     efiInstallAsRemovable = true;
+     useOSProber = true;
+
+     # install to none, we just need the generated config
+     # for ubuntu grub to discover
+     # device = "/dev/nvme0n1p3";
+     devices = [ "nodev" ];
+   };
+ };
 
   # hide messages !
   boot.kernelParams = [
@@ -116,6 +123,8 @@
 
 	# see https://forums.developer.nvidia.com/t/unusable-linux-text-console-with-nvidia-drm-modeset-1-or-if-nvidia-persistenced-is-loaded/184428/14
 	"no-scroll"
+   "boot.debug1devices"
+   # fsck.mode=skip
   ];
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
@@ -229,7 +238,7 @@
 
 	# may need to select appropriate driver
     # choose between latest, beta, vulkan_beta, stable
-    package = config.boot.kernelPackages.nvidiaPackages.beta;
+    package = config.boot.kernelPackages.nvidiaPackages.latest;
 
 	# open is only ready for data center use 
 	# open = true;
