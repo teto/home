@@ -60,6 +60,8 @@ let
     (luaPlugin { plugin = nvim-ufo; })
     (luaPlugin { plugin = ollama-nvim; })
     (luaPlugin { plugin = mini-nvim; })
+    (luaPlugin { plugin = cloak-nvim; })
+    (luaPlugin { plugin = nvim-dbee; })
     # breaks setup
     # (luaPlugin { plugin =  hmts-nvim; })
 

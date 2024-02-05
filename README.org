@@ -101,3 +101,7 @@ nix repl . --override-input nixpkgs github:nixos/nixpkgs
 nixosConfigurations.laptop.config.home-manager.users.teto.programs.neovim.finalPackage.XXX
 #+END_SRC
 
+** tips for reinstallation
+
+Apart from dd, to create a windows installer USB key, unetbootin worked the best:
+`nix shell nixpkgs#unetbootin`
