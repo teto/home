@@ -69,7 +69,7 @@
     # "i915.enable_psr=0"  # disables a power saving feature that can cause flickering
   ];
 
-  # boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   boot.kernelModules = [
     # "af_key" # for ipsec/vpn support
@@ -171,10 +171,9 @@
     };
 
     # central regulatory domain agent (CRDA) to allow exchange between kernel and userspace
-    #
     # to prevent the "failed to load regulatory.db" ?
     # see https://wireless.wiki.kernel.org/en/developers/regulatory
-    udev.packages = [ pkgs.crda ];
+    udev.packages = [];
 
     # just locate
     locate.enable = true;

@@ -135,9 +135,60 @@ export PULUMI_SKIP_UPDATE_CHECK=1
 # notifies when long command finishes
 # zbell should recognize aliases
 # zmodload -i zsh/complist
-zbell_ignore=($EDITOR $PAGER "man" "v" "gd" "gf" "sops" "tig" "n" "n1")
-zbell_duration=30
-. "$ZDOTDIR/zbell.zsh"
+# todo should support 
+# ($EDITOR $PAGER 
+# zlong_ignore_cmds='"" "man" "v" "ssh" "nvim" "gd" "gf" "sops" "tig"'
+declare -A zlong_ignore_cmds=(
+    "man"=true 
+    "v"=true
+    "ssh"=true
+    "nvim"=true 
+    "gd"=true 
+    "gf"=true 
+    "sops"=true 
+    "tig"=true
+)
+zlong_duration=10
+
+
+function zlong_alert_display_duration {
+  local T=$1
+  local D=$((T/60/60/24))
+  local H=$((T/60/60%24))
+  local M=$((T/60%60))
+  local S=$((T%60))
+  (( $D > 0 )) && printf '%d days ' $D
+  (( $H > 0 )) && printf '%d hours ' $H
+  (( $M > 0 )) && printf '%d minutes ' $M
+  (( $D > 0 || $H > 0 || $M > 0 )) && printf 'and '
+  printf '%d seconds\n' $S
+}
+
+zlong_alert_func() {
+    local cmd="$1"
+    local secs="$2"
+    local cmd_status="$3"
+    local ftime="$(zlong_alert_display_duration $secs)"
+    if [[ "$zlong_internal_send_notifications" != false ]]; then
+	local icon="object-select-symbolic"
+	local title="Finished in $ftime"
+
+	if [ $cmd_status -ne 0 ]; then
+	    local icon="process-stop-symbolic"
+	    title="$title with status $cmd_status"
+	fi
+	
+	notify-send --icon=$icon "$title" "$cmd"
+    fi
+}
+
+# replaced zbell for now with zlong_alert
+# move to home-manager
+. ~/zlong_alert.zsh/zlong_alert.zsh
+
+# zbell_ignore=($EDITOR $PAGER "man" "v" "ssh" "nvim" "gd" "gf" "sops" "tig")
+# zbell_duration=30
+# . "$ZDOTDIR/zbell.zsh"
 
 # completion config {{{1
 

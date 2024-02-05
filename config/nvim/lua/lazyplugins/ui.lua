@@ -1,6 +1,6 @@
 return {
- {
-  "kndndrj/nvim-dbee",
+ -- {
+ --  "kndndrj/nvim-dbee",
   -- dependencies = {
   --   "MunifTanjim/nui.nvim",
   -- },
@@ -14,16 +14,20 @@ require("dbee").execute(query)
 -- Store the current result to file/buffer/yank-register (see "Getting Started").
 require("dbee").store(format, output, opts)
 ]]--
-  build = function()
-    -- Install tries to automatically detect the install method.
-    -- if it fails, try calling it with one of these parameters:
-    --    "curl", "wget", "bitsadmin", "go"
-    require("dbee").install()
-  end,
-  config = function()
-    require("dbee").setup(--[[optional config]])
-  end,
-},
+  -- build = function()
+  --   -- Install tries to automatically detect the install method.
+  --   -- if it fails, try calling it with one of these parameters:
+  --   --    "curl", "wget", "bitsadmin", "go"
+  --   require("dbee").install()
+  -- end,
+  -- config = function()
+  --   require("dbee").setup(--[[optional config]])
+  -- end,
+-- },
+
+ {
+  'soulis-1256/eagle.nvim'
+ },
  {
   -- 
   'stevearc/oil.nvim'
@@ -200,92 +204,5 @@ require("dbee").store(format, output, opts)
     -- 	}
     --    end
     --  },
-    -- overrides vim.ui / vim.select with the backend of my choice
-    -- use({
-    --     'stevearc/dressing.nvim',
-    --     config = function()
-    --         require('dressing').setup({
-    --             input = {
-    --                 -- Default prompt string
-    --                 default_prompt = '➤ ',
-    --                 -- When true, <Esc> will close the modal
-    --                 insert_only = true,
-    --                 -- These are passed to nvim_open_win
-    --                 anchor = 'SW',
-    --                 relative = 'cursor',
-    --                 border = 'rounded',
-    --                 -- These can be integers or a float between 0 and 1 (e.g. 0.4 for 40%)
-    --                 prefer_width = 40,
-    --                 width = nil,
-    --                 -- min_width and max_width can be a list of mixed types.
-    --                 -- min_width = {20, 0.2} means "the greater of 20 columns or 20% of total"
-    --                 max_width = { 140, 0.9 },
-    --                 min_width = { 20, 0.2 },
-
-    --                 -- see :help dressing_get_config
-    --                 get_config = nil,
-    --             },
-    --             mappings = {
-    --                 ['<C-c>'] = 'Close',
-    --             },
-    --             select = {
-    --                 -- Priority list of preferred vim.select implementations
-    --                 backend = { 'fzf_lua', 'telescope', 'builtin', 'nui' },
-
-    --                 -- Options for fzf selector
-    --                 fzf = {
-    --                     window = {
-    --                         width = 0.5,
-    --                         height = 0.4,
-    --                     },
-    --                 },
-    --                 telescope = {
-    --                     window = {
-    --                         width = 0.5,
-    --                         height = 0.4,
-    --                     },
-    --                 },
-
-    --                 -- Options for nui Menu
-    --                 -- nui = {
-    --                 -- position = "50%",
-    --                 -- size = nil,
-    --                 -- relative = "editor",
-    --                 -- border = {
-    --                 -- style = "rounded",
-    --                 -- },
-    --                 -- max_width = 80,
-    --                 -- max_height = 40,
-    --                 -- },
-    -- -- dressing.select.builtin.win_options.winblend
-    --                 -- Options for built-in selector
-    --                 builtin = {
-    --                     -- These are passed to nvim_open_win
-    --                     anchor = 'NW',
-    --                     relative = 'cursor',
-    --                     border = 'rounded',
-
-    --                     -- Window options
-    -- 					win_options = {
-    -- 						winblend = 10,
-    -- 					},
-
-    --                     -- These can be integers or a float between 0 and 1 (e.g. 0.4 for 40%)
-    --                     -- the min_ and max_ options can be a list of mixed types.
-    --                     -- max_width = {140, 0.8} means "the lesser of 140 columns or 80% of total"
-    --                     width = nil,
-    --                     max_width = { 140, 0.8 },
-    --                     min_width = { 40, 0.2 },
-    --                     height = nil,
-    --                     max_height = 0.9,
-    --                     min_height = { 10, 0.2 },
-    --                 },
-
-    --                 -- see :help dressing_get_config
-    --                 get_config = nil,
-    --             },
-    --         })
-    --     end,
-    -- })
 
 }

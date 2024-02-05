@@ -30,7 +30,7 @@ self: prev:
     propagatedBuildsInputs = (oa.propagatedBuildsInputs or [ ]) ++ [ xdotool grip ];
   });
 
-  pdf-scribe-nvim = self.buildVimPluginFrom2Nix {
+  pdf-scribe-nvim = self.buildVimPlugin {
     pname = "pdf-scribe";
     version = "unstable";
     src = builtins.fetchGit "https://github.com/wbthomason/pdf-scribe.nvim.git";

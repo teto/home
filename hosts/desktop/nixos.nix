@@ -1,16 +1,29 @@
 { config, flakeInputs, lib, pkgs, ... }:
+let 
+  module = { pkgs, ... }@args: flakeInputs.haumea.lib.load {
+    src = ./.;
+    inputs = args // {
+      inputs = flakeInputs;
+    };
+    transformer = flakeInputs.haumea.lib.transformers.liftDefault;
+  };
+
+in
 {
   imports = [
+   module # loaded by haumea
     ./hardware.nix
     ./sshd.nix
     ./sops.nix
     ./teto/sops.nix
-    ./tailscale.nix
+
+    # ./tailscale.nix  # TODO test if it's loaded by haumea
     ./docker.nix
 
     # to test core-ws
     ./postgresql.nix
     ./redis.nix
+    ./teto/restic.nix
 
 
     # ../../nixos/profiles/immich.nix
@@ -43,21 +56,21 @@
   ];
 
   home-manager.users.root = {
-   imports = [
-    ./root/ssh-config.nix
-    # ../../hm/profiles/neovim.nix
-   ];
+    imports = [
+      ./root/ssh-config.nix
+      # ../../hm/profiles/neovim.nix
+    ];
   };
 
-   # TODO use from flake or from unstable
-   # services.opensnitch-ui.enable
-   # ./hm/profiles/gaming.nix
+  # TODO use from flake or from unstable
+  # services.opensnitch-ui.enable
+  # ./hm/profiles/gaming.nix
   home-manager.users.teto = {
     # TODO it should load the whole folder
     imports = [
-     ./teto/home.nix
+      ./teto/home.nix
       # breaks build: doesnt like the "activation-script"
-     # nova.hmConfigurations.dev
+      # nova.hmConfigurations.dev
     ];
   };
 
@@ -78,9 +91,9 @@
   swapDevices = [{
     # label = "dartagnan";
     device = "/fucking_swap";
-    size = 8192; # in MB
+    # size = 8192; # in MB
     # size = 4096; # in MB
-    # size = 16000; # in MB
+    size = 16000; # in MB
   }];
 
   boot.blacklistedKernelModules = [
@@ -89,23 +102,30 @@
 
   boot.consoleLogLevel = 6;
 
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = false;
 
-#   boot.loader = {
-#    #    systemd-boot.enable = true;
-#    efi.canTouchEfiVariables = true; # allows to run $ efi...
-#    systemd-boot.editor = true; # allow to edit command line
-#    timeout = 5;
-#    # just to generate the entry used by ubuntu's grub
-#    grub = {
-#      enable = true;
-#      useOSProber = true;
-#      # install to none, we just need the generated config
-#      # for ubuntu grub to discover
-#      device = "/dev/nvme0n1";
-#    };
-#  };
+  boot.loader = {
+    # systemd-boot.enable = true;
+    # systemd-boot.editor = true; # allow to edit command line
+    # systemd-boot.consoldeMode = "auto"; 
+
+    efi.canTouchEfiVariables = false;
+    efi.efiSysMountPoint = "/boot";
+    #    systemd-boot.enable = true;
+    # efi.efiSysMountPoint
+    #    timeout = 5;
+    #    # just to generate the entry used by ubuntu's grub
+    grub = {
+      enable = true;
+      efiSupport = true;
+      efiInstallAsRemovable = true;
+      useOSProber = true;
+
+      # install to none, we just need the generated config
+      # for ubuntu grub to discover
+      # device = "/dev/nvme0n1p3";
+      devices = [ "nodev" ];
+    };
+  };
 
   # hide messages !
   boot.kernelParams = [
@@ -114,13 +134,15 @@
     # NECESSARY !! https://discourse.nixos.org/t/browsers-unbearably-slow-after-update/9414/30
     "intel_pstate=active"
 
-	# see https://forums.developer.nvidia.com/t/unusable-linux-text-console-with-nvidia-drm-modeset-1-or-if-nvidia-persistenced-is-loaded/184428/14
-	"no-scroll"
+    # see https://forums.developer.nvidia.com/t/unusable-linux-text-console-with-nvidia-drm-modeset-1-or-if-nvidia-persistenced-is-loaded/184428/14
+    "no-scroll"
+    "boot.debug1devices"
+    # fsck.mode=skip
   ];
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
   # boot.kernelPackages = pkgs.linuxPackages;
-   # linux_default = pkgs.packages.linux_6_1;
+  # linux_default = pkgs.packages.linux_6_1;
   # boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_6_0;
 
   boot.kernelModules = [
@@ -130,7 +152,15 @@
   ];
   # boot.extraModulePackages = with config.boot.kernelPackages; [ wireguard ];
 
+
   boot.kernel.sysctl = {
+
+    # max_user_instances limits (roughly) how many applications can watch files (per user);
+    # max_user_watches limits how many filesystem items can be watched, in total across all applications (per user);
+    # max_queued_events limits how many filesystem events will be held in the kernel queue if the application does not read them;
+
+    "fs.inotify.max_user_watches" = 1000000;
+    "fs.inotify.max_user_instances" = 200;
     # to not provoke the kernel into crashing
     # "net.ipv4.tcp_timestamps" = 0;
     # "net.ipv4.ipv4.ip_forward" = 1;
@@ -147,7 +177,7 @@
 
   # temporary while working on result-store
   networking.firewall.allowedTCPPorts = [
-   # 5000 52002
+    # 5000 52002
   ];
 
   # creates problem with buffalo check if it blocks requests or what
@@ -225,17 +255,17 @@
   # this is required as well
   hardware.nvidia = {
     # this makes screen go black on boot :/
-    modesetting.enable =true; # needs "modesetting" in videoDrivers ?
+    modesetting.enable = true; # needs "modesetting" in videoDrivers ?
 
-	# may need to select appropriate driver
+    # may need to select appropriate driver
     # choose between latest, beta, vulkan_beta, stable
-    package = config.boot.kernelPackages.nvidiaPackages.beta;
+    package = config.boot.kernelPackages.nvidiaPackages.latest;
 
-	# open is only ready for data center use 
-	# open = true;
-    powerManagement.enable = false;
-	# Update for NVIDA GPU headless mode, i.e. nvidia-persistenced. It ensures all GPUs stay awake even during headless mode.
-	 # nvidiaPersistenced = true;
+    # open is only ready for data center use 
+    # open = true;
+    powerManagement.enable = true;
+    # Update for NVIDA GPU headless mode, i.e. nvidia-persistenced. It ensures all GPUs stay awake even during headless mode.
+    # nvidiaPersistenced = true;
   };
   # https://discourse.nixos.org/t/nvidia-users-testers-requested-sway-on-nvidia-steam-on-wayland/15264/21?u=teto
 
@@ -246,9 +276,9 @@
   # environment.etc."egl/egl_external_platform.d".source = "/run/opengl-driver/share/egl/egl_external_platform.d/";
   # /alsa-base.conf
   environment.etc."modprobe.d/alsa.conf".text = ''
-   # we want nvidia to get index 1 see 
-   # https://wiki.archlinux.org/title/Advanced_Linux_Sound_Architecture#Set_the_default_sound_card
-   options snd_hda_intel index=1
+    # we want nvidia to get index 1 see 
+    # https://wiki.archlinux.org/title/Advanced_Linux_Sound_Architecture#Set_the_default_sound_card
+    options snd_hda_intel index=1
   '';
 
   environment.variables = {
@@ -257,38 +287,25 @@
 
   environment.sessionVariables = {
     WLR_NO_HARDWARE_CURSORS = "1";
-	LIBVA_DRIVER_NAME="nvidia";
-	__GLX_VENDOR_LIBRARY_NAME="nvidia";
+    LIBVA_DRIVER_NAME = "nvidia";
+    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
   };
 
   # config from https://discourse.nixos.org/t/nvidia-users-testers-requested-sway-on-nvidia-steam-on-wayland/15264/32
   # this 
   hardware.opengl.extraPackages = with pkgs; [
     vaapiVdpau
-    libvdpau-va-gl
-    libva
-    # trying to fix `WLR_RENDERER=vulkan sway`
-    vulkan-validation-layers  # broken
   ];
   # security.sudo.wheelNeedsPassword = ;
   # disabled to run stable-diffusion
   # TODO this should go somewhere else
   services.xserver = {
-    videoDrivers = [
-      "nvidia"
-	  # "modesetting"
-	  # "fbdev"
-    ];
     displayManager.gdm.wayland = true;
   };
   # system.replaceRuntimeDependencies
   #     List of packages to override without doing a full rebuild. The original derivation and replacement derivation must have the same name length, and ideally should have close-to-identical directory layout.
 
   environment.systemPackages = [
-    # pkgs.linuxPackages.nvidia_x11.bin # to get nvidia-smi EVEN when nvidia is not used as a video driver
-    pkgs.nvidia-podman
-    pkgs.nvidia-system-monitor-qt
-    pkgs.nvitop
   ];
 
   # testing with localai instead
@@ -303,18 +320,18 @@
 
 
 
-    users = {
-     groups.nginx.gid = config.ids.gids.nginx;
+  users = {
+    groups.nginx.gid = config.ids.gids.nginx;
 
-     users =  {
+    users = {
       nginx = {
-       group = "nginx";
-       # cfg.group;
+        group = "nginx";
+        # cfg.group;
         isSystemUser = true;
         uid = config.ids.uids.nginx;
       };
-     };
     };
+  };
 
   system.stateVersion = "23.05";
 }

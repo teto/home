@@ -9,12 +9,19 @@
 
   systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
 
+* show environment
+  systemctl --user show-environment
+
 * setup credentials 
 
   systemd-ask-password (echoes password to TTY careful)
 
-  sudo systemd-creds setup 
+ Look at the documentation for systemd-creds: 
+  `sudo systemd-creds setup` creates `/var/lib/systemd/credential.secret` that can be used to encrypt things
+
   https://unix.stackexchange.com/questions/391040/is-there-a-typical-way-to-pass-a-password-to-a-systemd-unit-file
+systemd-creds encrypt --name=foo-secret -p INPUT OUTPUT
+Loads the specified (unencrypted plaintext) input credential file, encrypts it and writes the (encrypted ciphertext) output to the specified target credential file. The resulting file may be referenced in the LoadCredentialEncrypted= setting in unit files, or its contents used literally in SetCredentialEncrypted= settings.
 systemd-analyze blame
 systemd-analyze verify toto.unit
 
@@ -49,6 +56,7 @@ systemd-run --user -p MemoryLimit=3G google-chrome
 
 systemctl list-timers
 
+  EnvironmentFile
 
 One can use systemd-run to create transient .timer units. That is, one can set a command to run at a specified time without having a service file. For example the following command touches a file after 30 seconds:
 

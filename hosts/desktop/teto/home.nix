@@ -10,15 +10,15 @@
     flakeInputs.ironbar.homeManagerModules.default
 
     ./calendars.nix
-    ./ia.nix
     ./git.nix
     ./helix.nix
+    ./ia.nix
     ./neovim.nix
     ./ssh-config.nix
     ./sway.nix
     ./swaync.nix
-    ./zsh.nix
     ./yazi.nix
+    ./zsh.nix
 
     # ../../../hm/profiles/experimental.nix
 
@@ -61,9 +61,6 @@
     pciutils # for lspci
     ncdu # to see disk usage
     moar # test as pager
-
-    # gaming
-    lutris
 
     # bridge-utils# pour  brctl
   ];

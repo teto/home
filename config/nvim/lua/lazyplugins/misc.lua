@@ -1,6 +1,20 @@
 return {
  {
+  -- :DataViewer
   'VidocqH/data-viewer.nvim'
+ },
+ {
+   "jghauser/kitty-runner.nvim",
+
+   -- :KittyOpenRunner / KittyRunCommand / KittySendLines
+   config = function()
+     require("kitty-runner").setup()
+   end
+ },
+ {
+
+  -- require("workspace-diagnostics").populate_workspace_diagnostics(client, bufnr)
+  'artemave/workspace-diagnostics.nvim'
  },
   {
     'mikesmithgh/kitty-scrollback.nvim',
@@ -65,7 +79,6 @@ return {
 
  },
  -- { "shellRaining/hlchunk.nvim", event = { "UIEnter" }, },
- -- { dir = '/home/teto/neovim/nvim-telescope-zeal-cli' },
 
  -- compete with registers.nvim
  -- https://github.com/gelguy/wilder.nvim
@@ -125,13 +138,14 @@ return {
   end
  },
  {
+  -- provides :SessionSave,:SessionRestore, :Autosession search/delete
    'rmagatti/auto-session',
   config = function()
     require("auto-session").setup {
       log_level = "error",
       auto_session_suppress_dirs = { "~/", "~/Projects", "~/Downloads", "/"},
       auto_session_root_dir = ".", -- vim.fn.stdpath('data').."/sessions/",
-      auto_session_use_git_branch = true
+      auto_session_use_git_branch = false
     }
   end
  },

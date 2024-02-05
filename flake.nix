@@ -22,34 +22,50 @@
 
   inputs = {
    # todo add nixified.ai too
-    localai.url = "github:ck3d/nix-local-ai";
+    localai = {
+      url = "github:ck3d/nix-local-ai";
+      # inputs.nixpkgs.follows = "nixpkgs";
+    };
 
+    haumea = {
+      url = "github:nix-community/haumea";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     # waybar.url = "github:Alexays/Waybar";
     nixpkgs = {
       url = "github:teto/nixpkgs/nixos-unstable";
     };
     nixos-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nixos-stable.url = "github:nixos/nixpkgs/nixos-23.11";
-    nixos-stable-custom.url = "github:teto/nixpkgs?ref=teto/nixos-23.11";
+    # nixos-stable-custom.url = "github:teto/nixpkgs?ref=teto/nixos-23.11";
+    nixpkgs-for-hls.url  = "github:nixos/nixpkgs?rev=612f97239e2cc474c13c9dafa0df378058c5ad8d";
     nix-search-cli = {
       url = "github:peterldowns/nix-search-cli";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    rocks-nvim.url = "github:nvim-neorocks/rocks.nvim";
+    rocks-nvim = {
+     url = "github:nvim-neorocks/rocks.nvim";
+     inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     firefox2nix.url = "git+https://git.sr.ht/~rycee/mozilla-addons-to-nix";
-    anyrun.url = "github:Kirottu/anyrun";
-    anyrun.inputs.nixpkgs.follows = "nixpkgs";
-    zsh-plugins = {
-      url = "github:ohmyzsh/ohmyzsh";
-      flake = false;
+    anyrun = {
+     url = "github:Kirottu/anyrun";
+     inputs.nixpkgs.follows = "nixpkgs";
     };
-    ironbar = {
-      url = "github:JakeStanger/ironbar";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+
+    # ironbar = {
+    #   url = "github:JakeStanger/ironbar";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
+
     vocage.url = "git+https://git.sr.ht/~teto/vocage?ref=flake";
 
-    deploy-rs.url = "github:serokell/deploy-rs";
+    deploy-rs = {
+     url = "github:serokell/deploy-rs";
+     inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     flake-utils.url = "github:numtide/flake-utils";
     treefmt-nix.url = "github:numtide/treefmt-nix";
     fzf-git-sh = {
@@ -58,8 +74,11 @@
     };
     fenix = {
      # used for nightly rust devtools
-     url= "github:nix-community/fenix"; inputs."nixpkgs".follows = "nixpkgs"; 
+     # for git-repo-manager du coup
+     url= "github:nix-community/fenix";
+     inputs."nixpkgs".follows = "nixpkgs"; 
     };
+
     # peerix.url = "github:cid-chan/peerix";
     # mptcp-flake.url = "github:teto/mptcp-flake/fix-flake";
     mujmap = {
@@ -75,7 +94,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nix.url = "github:NixOS/nix";
+    # nix.url = "github:NixOS/nix";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nur.url = "github:nix-community/NUR";
     nixpkgs-wayland.url = "github:nix-community/nixpkgs-wayland";
@@ -84,10 +103,15 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # poetry.url = "github:nix-community/poetry2nix";
-    nix-update.url = "github:Mic92/nix-update";
+    nix-update = {
+     url = "github:Mic92/nix-update";
+    };
     nix-index-cache.url = "github:Mic92/nix-index-database";
 
-    nova.url = "git+ssh://git@git.novadiscovery.net/sys/doctor";
+    nova = {
+      url = "git+ssh://git@git.novadiscovery.net/sys/doctor";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     jinko-stats.url = "git+ssh://git@git.novadiscovery.net/jinko/jinko-stats.git?ref=add-rserver";
 
     nix-index-database = {
@@ -95,6 +119,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # c8296214151883ce27036be74d22d04953418cf4
+
+    # TODO this should not be necessary anymore ? just look at doctor ?
     nova-ci.url = "git+ssh://git@git.novadiscovery.net/infra/ci-runner";
 
     neovim = {
@@ -118,7 +144,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    sops-nix.url = "github:Mic92/sops-nix";
+    sops-nix = {
+     url = "github:Mic92/sops-nix";
+     inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # TODO extend vim plugins from this overlay
     # neovim-overlay.url = "github:teto/neovim-nightly-overlay/vimPlugins-overlay";
@@ -135,6 +164,15 @@
 
   outputs = { self, hm, nur, nixpkgs, flake-utils, treefmt-nix, deploy-rs, ... }:
     let
+      novaUserProfile = {
+        firstname = "teto";
+        lastname = "sse";
+        username = "teto";
+        business_unit = "sse";
+        gitlabId = "matthieu.coudron";
+        # email = "matthieu.coudron@novadiscovery.com";
+      };
+
       secrets = import ./nixpkgs/secrets.nix;
       # sshLib = import ./nixpkgs/lib/ssh.nix { inherit secrets; flakeInputs = self.inputs; };
       system = "x86_64-linux";
@@ -212,6 +250,9 @@
           inherit secrets;
           withSecrets = false;
           flakeInputs = self.inputs;
+
+          # 
+          inherit novaUserProfile;
         };
 
         home-manager.users = {
@@ -253,7 +294,7 @@
 
              # TODO set SOPS_A
              shellHook = ''
-              export SOPS_AGE_KEY_FILE=$PWD/secrets
+              export SOPS_AGE_KEY_FILE=$PWD/secrets/age.key
               echo "Run just ..."
              '';
             };

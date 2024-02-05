@@ -53,10 +53,41 @@ nixos-rebuild switch --flake 'github:teto/home#laptop' --use-remote-sudo --optio
 #+END_SRC
 
 
+
+
+* Approach to handling secrets
+
+  Nix writes everything world-readable so you dont want to embed passwords in .nix files.
+
+  ** information you prefer to hide but won't seppuku if discovered...
+
+  ... are handled via git-crypt in the repo.
+
+  ** Infrastructure secrets
+
+  The solution I adopted is [[https://github.com/Mic92/sops-nix][sops-nix]] which reads secrets from sops files.
+
+  *** How to securely load those secrets in systemd units ?
+
+  With sops, you could create /run/secrets/email_password and have your service pick it up.
+  Set the proper owner to avoid anyone being able to read it.
+
+  One further security can be to rely on systemd-creds.
+  LoadCredentialEncrypted
+
+   /home/teto/.config/systemd/user/mbsync.service.d/override.conf
+
+  ** Most intimate secrets
+
+  you wont find on this repo. I handle them via [[https://www.passwordstore.org/][pass]] and transfer them
+  manually on my machines via the tool in the next section.
+
+
 * How to transfer state
 
 Some secrets can't be shared reliably on the repository so they need to be
 transferred.
+
 
 ** How to transfer secrets from another machine
 
@@ -101,3 +132,7 @@ nix repl . --override-input nixpkgs github:nixos/nixpkgs
 nixosConfigurations.laptop.config.home-manager.users.teto.programs.neovim.finalPackage.XXX
 #+END_SRC
 
+** tips for reinstallation
+
+Apart from dd, to create a windows installer USB key, unetbootin worked the best:
+`nix shell nixpkgs#unetbootin`

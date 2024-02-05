@@ -242,6 +242,7 @@ in
      # "${mod}+F3" = ''exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 70 --height 60 --mark scratchpad --command 'kitty nvim' '';
      "${mod}+F3" = ''exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 90 --height 90 --mark scratchpad --command 'kitty nvim' '';
 
+      "--release Print" = "exec ${pkgs.sway-contrib.grimshot}/bin/grimshot copy area";
 # bindsym F12 exec sway-scratchpad --command "kitty -d /home/user/projects" --mark terminal
 
     # for_window [con_mark="SCRATCHPAD_terminal"] border pixel 1

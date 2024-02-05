@@ -1,5 +1,8 @@
 { config, pkgs, lib, ... }:
 {
+  imports = [
+   ./flameshot.nix
+  ];
 
  # TODO it is done in sway.nix
   home.packages = with pkgs; [

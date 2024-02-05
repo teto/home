@@ -1,3 +1,26 @@
+
+
+When seeing:
+➜ nvidia-smi                                                
+Failed to initialize NVML: Driver/library version mismatch
+NVML library version: 535.43
+
+You can run:
+cat /proc/driver/nvidia/version
+
 nvidia-smi
     # see https://forums.developer.nvidia.com/t/unusable-linux-text-console-with-nvidia-drm-modeset-1-or-if-nvidia-persistenced-is-loaded/184428/14  no-scroll
 
+
+* To see processes using GPU:
+sudo nvidia-smi --gpu-reset -i 0
+
+
+* to reset the context
+
+https://forums.developer.nvidia.com/t/11-gb-of-gpu-ram-used-and-no-process-listed-by-nvidia-smi/44459
+  sudo nvidia-smi --gpu-reset -i 0
+
+* check persistence mode (shown by nvitop)
+
+  https://docs.nvidia.com/deploy/driver-persistence/index.html#persistence-mode

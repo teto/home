@@ -1,18 +1,23 @@
 return {
+  -- { 'max397574/better-escape.nvim' },
+  { 'TheBlob42/houdini.nvim',
+    config = function()
+        require('houdini').setup()
+    end
+  },
   {
-   'gpanders/nvim-moonwalk',
+   -- to help with preloading fennel for instance
+   -- 'gpanders/nvim-moonwalk',
   'kevinhwang91/nvim-bqf',
   opts = {
+   -- auto_enable = true;
+   auto_resize_height = false;
     preview = {
      auto_preview = false,
      delay_syntax = 0
     }
     , func_map = { }
-
-
-  }
-
-
+   }
   },
   {
   "folke/trouble.nvim",
@@ -20,13 +25,14 @@ return {
     position = "bottom", -- position of the list can be: bottom, top, left, right
     height = 10, -- height of the trouble list when position is top or bottom
     width = 50, -- width of the list when position is left or right
-    icons = true, -- use devicons for filenames
-    mode = "workspace_diagnostics", -- "workspace_diagnostics", "document_diagnostics", "quickfix", "lsp_references", "loclist"
+    icons = false, -- use devicons for filenames
+    -- "workspace_diagnostics", "document_diagnostics", "quickfix", "lsp_references", "loclist"
+    mode = "workspace_diagnostics", 
     severity = nil, -- nil (ALL) or vim.diagnostic.severity.ERROR | WARN | INFO | HINT
-    fold_open = "", -- icon used for open folds
-    fold_closed = "", -- icon used for closed folds
+    fold_open = "▾", -- icon used for open folds
+    fold_closed = "▸", -- icon used for closed folds
     group = true, -- group results by file
-    padding = true, -- add an extra new line on top of the list
+    padding = false, -- add an extra new line on top of the list
     cycle_results = true, -- cycle item list when reaching beginning or end of list
     action_keys = { -- key mappings for actions in the trouble list
         -- map to {} to remove a mapping, for example:
@@ -139,6 +145,8 @@ return {
   'nvimtools/none-ls.nvim',
   config = function()
    local none_ls = require('null-ls')
+
+   -- none_ls.register(require("none-ls-luacheck.diagnostics.luacheck"))
    -- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md
    -- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTIN_CONFIG.md
    -- none_ls.builtins.diagnostics.shellcheck.with({
@@ -160,7 +168,8 @@ return {
     sources = {
      -- method = none_ls.methods.DIAGNOSTICS_ON_SAVE,
      -- needs a luacheck in PATH
-     none_ls.builtins.diagnostics.luacheck.with({
+     -- none_ls.none-ls-luacheck.diagnostics.luacheck.with({
+     require("none-ls-luacheck.diagnostics.luacheck").with({
       extra_args = { '--ignore 21/_.*' }
      }),
      none_ls.builtins.code_actions.shellcheck,
@@ -191,6 +200,9 @@ return {
     },
    })
   end,
+   dependencies = {
+       "gbprod/none-ls-luacheck.nvim",
+   },
  },
  {
   'folke/neodev.nvim',

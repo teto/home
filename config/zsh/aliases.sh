@@ -108,7 +108,7 @@ function latest {
 
 # ls related updates {{{
 # I also export TIME_STYLE to change the output of this
-alias ls="ls --color=auto --time-style=iso"
+alias ls="ls --hyperlink=auto -p --color=auto --time-style=iso"
 alias ll="ls -l"
 alias la="ls -la"
 # -r makes recent changes appear last, more practical

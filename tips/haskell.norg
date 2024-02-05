@@ -9,6 +9,10 @@
   Recent versions of GHC allow a dump of a stack trace (of all cost centres) when an exception is raised. In order to enable this, compile with -prof, and run with +RTS -xc
 
 
+  If the program doesn't like those (because it eagerly parses the command line)
+
+ https://downloads.haskell.org/ghc/latest/docs/users_guide/runtime_control.html#envvar-GHCRTS
+
 * REPL/ghci tips
 
   use `:script` to load redundant commands
@@ -19,6 +23,7 @@
 @code repl
 
 :set args ARG1 ARG2
+:show args
 main
 @end
 

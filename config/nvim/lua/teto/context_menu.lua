@@ -135,7 +135,18 @@ end
 --     severity_sort = true,
 -- })
 
+
+-- This is a hack to test disabling stan works
+M.restart_hls = function ()
+ local my_hls_tools = require'teto.haskell-tools'
+ local new_settings = my_hls_tools.toggle_stan()
+ vim.g.settings = new_settings
+ vim.cmd [[ HlsRestart ]]
+end
+
+
 M.set_lsp_rclick_menu = function()
+
  M.set_rclick_submenu('TetoMenuLsp', 'LSP         ', {
   { 'Code Actions           <space>ca', '<space>ca' },
   { 'Go to Declaration             gD', 'gD' },
@@ -151,11 +162,22 @@ M.set_lsp_rclick_menu = function()
   { 'Show errors only', "<cmd>lua require'teto.lsp'.set_level(vim.diagnostic.severity.ERROR)<cr>" },
   { 'Show all levels', "<cmd>lua require'teto.lsp'.set_level(vim.diagnostic.severity.HINTS)<cr>" },
   -- 
+  --
   { 'Apply all code actions', "<cmd>echo 'TODO'" },
   -- command! LspStopAllClients lua vim.lsp.stop_client(vim.lsp.get_active_clients())
   { 'Stop all clients', "<cmd>lua", { desc = "stop all lsp clients" } },
+  -- TODO 
+  { 'Haskell: toggle stan', "<cmd>lua require'teto.context_menu'.restart_hls()<CR>", {
+    -- callback = "",
+     desc = "Disable stan"
+    }
+   },
   -- {'Toggle hints only', ''},
  }, M.buf_has_lsp)
+
+ -- if it is haskell we can have items to 
+ -- hls_tools.lsp.load_hls_settings(project_root)
+
 end
 -- menu_add(
 --     'Diagnostic.Display_in_QF',
@@ -205,11 +227,11 @@ end
 
 M.set_repl_luadev_rclick_menu = function()
  M.set_rclick_submenu('MenuTetoReplLuadev', 'Luadev         ', {
+  { 'Send line', [[<cmd>lua require'luadev'.exec(vim.api.nvim_get_current_line())<cr>]] },
   { 'Run       ,a',  '<Plug>(Luadev-Run)'},
   { 'Run line  ,,', '<space>g[' },
  }, M.buf_is_file)
 end
-
 
 
 M.set_spectre_rclick_menu = function()
@@ -244,9 +266,16 @@ M.set_sniprun_rclick_menu = function()
  end)
 end
 
-M.set_repl_rclick_menu = function()
- M.set_rclick_submenu('MenuRepl', 'Repl', {
-  { 'Send line', [[<cmd>lua require'luadev'.exec(vim.api.nvim_get_current_line())<cr>]] },
+M.set_repl_iron_rclick_menu = function()
+ M.set_rclick_submenu('MenuTetoReplIron', 'Luadev         ', {
+  { 'Run       ,a',  '<Plug>(Luadev-Run)'},
+  { 'Run line  ,,', '<space>g[' },
+ }, M.buf_is_file)
+end
+
+
+M.set_repl_snip_rclick_menu = function()
+ M.set_rclick_submenu('MenuTetoReplSnip', 'Repl', {
   -- {'SnipRun',   '<cmd>SnipRun<cr>'},
   -- {'SnipTerminate',   '<cmd>SnipTerminate<cr>'},
  }, function()
@@ -290,6 +319,16 @@ M.set_toggle_rclick_menu = function()
  end)
 end
 
+M.set_autocompletion_rclick_menu = function()
+ M.set_rclick_submenu('MenuTreesitter', 'Treesitter ->', {
+  { 'Show tree', '<cmd>lua vim.treesitter.show_tree()<cr>' },
+  -- {'Obsession',   '<cmd>Obsession<cr>'},
+  -- {'Indent guides',   '<cmd>IndentBlanklineToggle<cr>'},
+ }, function()
+  return true
+ end)
+end
+
 M.set_treesitter_rclick_menu = function()
  M.set_rclick_submenu('MenuTreesitter', 'Treesitter ->', {
   { 'Show tree', '<cmd>lua vim.treesitter.show_tree()<cr>' },
@@ -305,7 +344,7 @@ M.add_component = function(component)
 end
 
 -- toto
-M.set_tabs_rclick_menu = function(component)
+M.set_tabs_rclick_menu = function(_component)
  M.set_rclick_submenu('MenuTabs', 'Tabs', {
   { "Tabs.S2", "<cmd>set  tabstop=2 softtabstop=2 sw=2<cr>" },
   { "Tabs.S4", "<cmd>set ts=4 sts=4 sw=4<CR>" },
@@ -316,44 +355,8 @@ M.set_tabs_rclick_menu = function(component)
 end
 
 
--- -- menu_add("Toggle.Biscuits", 'lua require("nvim-biscuits").toggle_biscuits()')
-
--- menu_add('REPL.Send line', [[<cmd>lua require'luadev'.exec(vim.api.nvim_get_current_line())<cr>]])
--- -- menu_add('REPL.Send selection ', 'call <SID>luadev_run_operator(v:true)')
-
--- menu_add ("PopUp.Lsp_declaration", "<Cmd>lua vim.lsp.buf.declaration()<CR>")
--- menu_add ("PopUp.Lsp_definition", "<Cmd>lua vim.lsp.buf.definition()<CR>")
--- menu_add('PopUp.LSP_Rename', '<cmd>lua vim.lsp.buf.rename()<cr>')
--- menu_add('PopUp.LSP_Format', '<cmd>lua vim.lsp.buf.format()<cr>')
-
--- menu_add(
---     'Diagnostic.Display_in_QF',
---     '<cmd>lua vim.diagnostic.setqflist({open = true, severity = { min = vim.diagnostic.severity.WARN } })<cr>'
--- )
--- menu_add(
---     'Diagnostic.Set_severity_to_warning',
---     '<cmd>lua vim.diagnostic.config({virtual_text = { severity = { min = vim.diagnostic.severity.WARN } }})<cr>'
--- )
-
--- local menu_add, menu_add_cmd = myMenu.menu_add, myMenu.menu_add_cmd
--- menu_add('LSP.Declaration', '<cmd>lua vim.lsp.buf.declaration()<cr>')
--- menu_add('LSP.Definition', '<cmd>lua vim.lsp.buf.definition()<cr>')
--- menu_add('LSP.Hover', '<cmd>lua vim.lsp.buf.references()<cr>')
--- menu_add('LSP.Rename', '<cmd>lua vim.lsp.buf.rename()<cr>')
--- menu_add('LSP.Format', '<cmd>lua vim.lsp.buf.format()<cr>')
-
--- menu_add('Toggle.Minimap', '<cmd>MinimapToggle<cr>')
--- menu_add('Toggle.Obsession', '<cmd>Obsession<cr>')
--- menu_add('Toggle.Blanklines', '<cmd>IndentBlanklineToggle<cr>')
 -- menu_add("Toggle.Biscuits", 'lua require("nvim-biscuits").toggle_biscuits()')
 
--- menu_add('REPL.Send line', [[<cmd>lua require'luadev'.exec(vim.api.nvim_get_current_line())<cr>]])
--- menu_add('REPL.Send selection ', 'call <SID>luadev_run_operator(v:true)')
-
--- menu_add ("PopUp.Lsp_declaration", "<Cmd>lua vim.lsp.buf.declaration()<CR>")
--- menu_add ("PopUp.Lsp_definition", "<Cmd>lua vim.lsp.buf.definition()<CR>")
--- menu_add('PopUp.LSP_Rename', '<cmd>lua vim.lsp.buf.rename()<cr>')
--- menu_add('PopUp.LSP_Format', '<cmd>lua vim.lsp.buf.format()<cr>')
 
 -- menu_add(
 --     'Diagnostic.Display_in_QF',
@@ -424,13 +427,14 @@ M.setup_rclick_menu_autocommands = function()
    -- 2. we configure the menu
    M.add_component(M.set_lsp_rclick_menu)
    M.add_component(M.set_spectre_rclick_menu)
-   M.add_component(M.set_repl_rclick_menu)
+   M.add_component(M.set_repl_iron_rclick_menu)
    M.add_component(M.set_rest_rclick_menu)
    M.add_component(M.set_sniprun_rclick_menu)
    M.add_component(M.set_toggle_rclick_menu)
    M.add_component(M.set_treesitter_rclick_menu)
    M.add_component(M.set_tabs_rclick_menu)
    M.add_component(M.set_git_rclick_menu)
+   M.add_component(M.set_autocompletion_rclick_menu)
 -- -- M.set_orgmode_rclick_menu()
 -- M.rclick_context_menu("PopUp", "Autosave", "toto"
 -- -- "

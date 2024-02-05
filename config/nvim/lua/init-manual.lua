@@ -33,6 +33,7 @@ end-- require("vim.lsp._watchfiles")._watchfunc = require("vim._watch").watch
 
 
 vim.opt.shortmess:append("I")
+vim.opt.foldlevel = 99
 
 ---  set guicursor as a red block in normal mode
 
@@ -44,6 +45,23 @@ if ok then
 	return function() end
 	end
 end
+
+--
+vim.filetype.add({
+	extension = {
+		http = "http",
+		env = "env",
+		kbd = "kbd",
+		v = "coq"
+
+	},
+	filename = {
+		['wscript'] =  'python',
+		['.env'] = 'env',
+		-- ['.http'] = 'http'
+	}
+})
+
 
 -- undocumented like --luamod-dev
 vim.g.__ts_debug = 10
@@ -58,6 +76,7 @@ vim.g.matchparen = 0
 vim.g.mousemoveevent = 1-- must be setup before calling lazy
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
+vim.opt.smoothscroll = true
 vim.opt.colorcolumn = { 100 }
 vim.opt.termguicolors = true
 
@@ -69,6 +88,7 @@ vim.opt.rtp:prepend(lazypath)
 -- set it before loading vim plugins like autosession
 -- ,localoptions
 vim.o.sessionoptions="buffers,curdir,help,tabpages,winsize,winpos"
+-- vim.o.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 
 require('lazy').setup('lazyplugins', {
 	lockfile = vim.fn.stdpath('cache') .. '/lazy-lock.json',
@@ -332,8 +352,8 @@ vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'grey' })
 -- my_image:transmit() -- send image data to terminal
 
 -- while testing/developing rest.nvim
-vim.opt.runtimepath:prepend('/home/teto/neovim/rest.nvim')
-vim.opt.runtimepath:prepend('/home/teto/tree-sitter-http')
+vim.opt.runtimepath:prepend('/home/teto/rest.nvim')
+-- vim.opt.runtimepath:prepend('/home/teto/tree-sitter-http')
 -- lua require'plenary.reload'.reload_module('rest-nvim.request')
 -- vim.opt.runtimepath:prepend('/home/teto/nvim-treesitter')
 
@@ -474,6 +494,7 @@ vim.api.nvim_create_autocmd('ColorScheme', {
 	end,
 })
 
+vim.api.nvim_set_hl(0, 'LspCodeLens', { bg = "red" })
 -- " auto reload vim config on save
 -- " Watch for changes to vimrc
 -- " augroup myvimrc
@@ -525,13 +546,10 @@ if has_cmp then
 	-- use('michaeladler/cmp-notmuch')
 	-- nvim-cmp autocompletion plugin{{{
 	cmp_sources = {
-			{ name = 'nvim_lsp' },
-
-			-- For ultisnips user.
-			-- { name = 'ultisnips' },
-
-			{ name = 'buffer' },
-		}
+		{ name = 'nvim_lsp' },
+		{ name = 'buffer' },
+		-- { name = "cmp-dbee" },
+	}
     if use_neorg then
 		table.insert(cmp_sources, { name = 'neorg' })
 	end
@@ -540,10 +558,29 @@ if has_cmp then
 	end
 	if use_luasnip then
 			-- For luasnip user.
+			-- " Plug 'saadparwaiz1/cmp_luasnip'
 		table.insert(cmp_sources, { name = 'luasnip' })
     end
 
+	--[[
+	:CmpStatus
+	]]
 	cmp.setup({
+
+		-- https://github.com/hrsh7th/nvim-cmp/issues/1747
+		enabled = function()
+			-- return vim.g.cmptoggle
+			return true
+		end,
+		completion = {
+			-- autocomplete = true
+			-- local types = require('cmp.types')
+			-- autocomplete is on by default and it should only be a trigger event array or false
+			autocomplete = { cmp.TriggerEvent.InsertEnter, cmp.TriggerEvent.TextChanged },
+		},
+		view = {            
+			entries = "custom" -- can be "custom", "wildmenu" or "native"
+		},
 		sorting = {
 			comparators = {
 			cmp.config.compare.offset,
@@ -563,36 +600,62 @@ if has_cmp then
 				-- vim.fn['vsnip#anonymous'](args.body)
 
 				-- For `luasnip` user.
-				-- require('luasnip').lsp_expand(args.body)
-
-				-- For `ultisnips` user.
-				-- vim.fn["UltiSnips#Anon"](args.body)
+				require('luasnip').lsp_expand(args.body)
 			end,
 		},
 		mapping = cmp.mapping.preset.insert({
-
-			['<C-d>'] = cmp.mapping.scroll_docs(-4),
-			['<C-f>'] = cmp.mapping.scroll_docs(4),
-			--   ['<C-Space>'] = cmp.mapping.complete(),
-			--   ['<C-e>'] = cmp.mapping.close(),
-			['<CR>'] = cmp.mapping.confirm({ select = true }),
+			["<CR>"] = cmp.mapping.confirm({ select = true }),
+			["<C-n>"] = cmp.mapping.select_next_item(),
+			["<C-p>"] = cmp.mapping.select_prev_item(),
 		}),
+		-- mapping = cmp.mapping.preset.insert({
+
+		-- 	['<C-d>'] = cmp.mapping.scroll_docs(-4),
+		-- 	['<C-f>'] = cmp.mapping.scroll_docs(4),
+		-- 	--   ['<C-Space>'] = cmp.mapping.complete(),
+		-- 	--   ['<C-e>'] = cmp.mapping.close(),
+		-- 	['<CR>'] = cmp.mapping.confirm({ select = true }),
+		-- }),
 		-- view = {
 		-- 	entries = 'native'
 		-- },
 		sources = cmp_sources,
+	    window = {
+			completion = cmp.config.window.bordered(),
+			documentation = cmp.config.window.bordered(),
+		},
 	})
+
+  -- Set configuration for specific filetype.
+  cmp.setup.filetype('gitcommit', {
+    sources = cmp.config.sources({
+	-- You can specify the `git` source if [you were installed it](https://github.com/petertriho/cmp-git).
+      { name = 'git' }, 
+    }, {
+      { name = 'buffer' },
+    })
+  })
+
+  -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
+  -- cmp.setup.cmdline({ '/', '?' }, {
+  --   mapping = cmp.mapping.preset.cmdline(),
+  --   sources = {
+  --     { name = 'buffer' }
+  --   }
+  -- })
+
+  -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+  -- cmp.setup.cmdline(':', {
+  --   mapping = cmp.mapping.preset.cmdline(),
+  --   sources = cmp.config.sources({
+  --     { name = 'path' }
+  --   }, {
+  --     { name = 'cmdline' }
+  --   })
+  -- })
 	--  }}}
-	-- 	cmp.setup.cmdline {
-	-- 	mapping = cmp.mapping.preset.cmdline({
-	-- 		-- Your configuration here.
-	-- 	})
-
-	-- 	}
-
-	--   end
-	-- }
 end
+
 
 -- Load custom tree-sitter grammar for org filetype
 -- orgmode depends on treesitter
@@ -812,6 +875,10 @@ require('teto.lspconfig')
 
 -- vim.lsp.set_log_level('DEBUG')
 
+-- setup haskell-tools
+vim.g.haskell_tools = require'teto.haskell-tools'.generate_settings()
+
+-- iron.nvim repl configuration {{{
 local has_iron, iron = pcall(require, 'iron.core')
 if has_iron then
 
@@ -832,6 +899,13 @@ if has_iron then
 			    -- copied from the nix wrapper :/
 				-- ${pkgs.luajit}/bin
 			    lua = { command = 'lua' },
+				haskell = {
+				  command = function(meta)
+					local file = vim.api.nvim_buf_get_name(meta.current_bufnr)
+					-- call `require` in case iron is set up before haskell-tools
+					return require('haskell-tools').repl.mk_repl_cmd(file)
+				  end,
+				},
 			},
 			-- repl_open_cmd = require('iron.view').left(200),
 			repl_open_cmd = view.split.vertical.botright(0.4)
@@ -839,9 +913,26 @@ if has_iron then
 			-- a float window of height 40 at the bottom.
 		},
 	})
+	require'teto.iron'
+                -- Iron doesn't set keymaps by default anymore. Set them here
+                -- or use `should_map_plug = true` and map from you vim files
+                -- keymaps = {
+                --     send_motion = '<space>sc',
+                --     visual_send = '<space>sc',
+                --     send_file = '<space>sf',
+                --     send_line = '<space>sl',
+                --     send_mark = '<space>sm',
+                --     mark_motion = '<space>mc',
+                --     mark_visual = '<space>mc',
+                --     remove_mark = '<space>md',
+                --     cr = '<space>s<cr>',
+                --     interrupt = '<space>s<space>',
+                --     exit = '<space>sq',
+                --     clear = '<space>cl',
+                -- },
 
 end
-
+-- }}}
 vim.opt.background = 'light' -- or "light" for light mode
 
 vim.opt.showbreak = '↳ ' -- displayed in front of wrapped lines
@@ -864,7 +955,8 @@ vim.opt.listchars:append('conceal:❯')
 -- "set shada=!,'50,<1000,s100,:0,n$XDG_CACHE_HOME/nvim/shada
 vim.g.netrw_home = vim.fn.stdpath('data') .. '/nvim'
 
-vim.keymap.set('n', '<F11>', '<Plug>(ToggleListchars)')
+vim.keymap.set('n', '<F11>', '<Plug>(ToggleListchars)', 
+	{ desc = "Change between different flavors of space/tab characters" })
 
 vim.keymap.set('n', '<leader>q', '<Cmd>Sayonara!<cr>', { silent = true, desc = "Closes current window"})
 vim.keymap.set('n', '<leader>Q', '<Cmd>Sayonara<cr>', 
@@ -948,22 +1040,6 @@ map('n', '<leader>rg', '<Cmd>Grepper -tool git -open -switch<CR>', { remap = tru
 map('n', '<leader>rgb', '<Cmd>Grepper -tool rg -open -switch -buffer<CR>', { remap = true })
 map('n', '<leader>rg', '<Cmd>Grepper -tool rg -open -switch<CR>', { remap = true })
 
---
-vim.filetype.add({
-	extension = {
-		http = "http",
-		env = "env",
-		kbd = "kbd",
-		v = "coq"
-
-	},
-	filename = {
-		['wscript'] =  'python',
-		-- ['.env'] = 'env',
-		-- ['.http'] = 'http'
-	}
-})
-
 -- vim.keymap.set("n", "<Plug>HelloWorld", function() print("Hello World!") end)
 -- vim.keymap.set("n", "gs", "<Plug>HelloWorld")
 
@@ -1002,11 +1078,57 @@ vim.cmd(('colorscheme %s'):format(theme))
 -- https://github.com/neovim/neovim/issues/21856#issuecomment-1514723887
 vim.api.nvim_create_autocmd({ "VimLeave" }, {
   callback = function()
-    vim.fn.jobstart('notify-send "closing nvim"', {detach=true})
+    -- vim.fn.jobstart('notify-send "closing nvim"', {detach=true})
+    vim.fn.jobstart('sleep 2', {detach=true})
   end,
 })
 
 
+local has_cloak, cloak = pcall(require, 'cloak')
+if has_cloak then
+cloak.setup({
+  enabled = false,
+  cloak_character = '*',
+  -- The applied highlight group (colors) on the cloaking, see `:h highlight`.
+  highlight_group = 'Comment',
+  -- Applies the length of the replacement characters for all matched
+  -- patterns, defaults to the length of the matched pattern.
+  cloak_length = nil, -- Provide a number if you want to hide the true length of the value.
+  -- Whether it should try every pattern to find the best fit or stop after the first.
+  try_all_patterns = true,
+  patterns = {
+    {
+      -- Match any file starting with '.env'.
+      -- This can be a table to match multiple file patterns.
+      file_pattern = '.env*',
+      -- Match an equals sign and any character after it.
+      -- This can also be a table of patterns to cloak,
+      -- example: cloak_pattern = { ':.+', '-.+' } for yaml files.
+      cloak_pattern = '=.+',
+      -- A function, table or string to generate the replacement.
+      -- The actual replacement will contain the 'cloak_character'
+      -- where it doesn't cover the original text.
+      -- If left empty the legacy behavior of keeping the first character is retained.
+      replace = nil,
+    },
+  },
+})
+end
+
+vim.keymap.set('n', '[w', function()
+	vim.diagnostic.goto_prev({ wrap = true, severity = vim.diagnostic.severity.WARN })
+end, { buffer = true })
+vim.keymap.set('n', ']w', function()
+	vim.diagnostic.goto_next({ wrap = true , severity = vim.diagnostic.severity.WARN })
+end, { buffer = true })
+
+
+vim.opt.runtimepath:prepend('/home/teto/neovim/nvim-dbee')
+
+local has_dbee, dbee = pcall(require, 'dbee')
+if has_dbee then
+	dbee.setup({})
+end
 
 local has_ollama, ollama = pcall(require, 'ollama')
 if has_ollama then

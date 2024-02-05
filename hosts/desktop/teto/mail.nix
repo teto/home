@@ -102,9 +102,9 @@ let
 
 
       primary = false;
-      userName = "matthieucoudron@fastmail.com";
-      realName = "Matthieu Coudron";
-      address = "matthieucoudron@fastmail.com";
+      userName = secrets.users.teto.userName;
+      realName = secrets.users.teto.realName;
+      address = secrets.users.teto.email;
 
       # fastmail requires an app-specific password
       passwordCommand = getPasswordCommand "perso/fastmail_mc";
@@ -322,8 +322,10 @@ in
     Service = {
       # TODO need DBUS_SESSION_BUS_ADDRESS 
       # --app-name="%N" toto
-      Environment = ''DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/1000/bus"'';
-	  SetCredentialEncrypted=secrets.mail.fastmail_perso;
+      Environment = [ ''DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/1000/bus"'' ];
+	  # SetCredentialEncrypted=secrets.mail.fastmail_perso;
+      # easier to update the file then regenarate the nix code
+      LoadCredentialEncrypted="fastmail_perso:/home/teto/home/secrets/mail.secret";
       # TODO
       # FailureAction=''${pkgs.libnotify}/bin/notify-send "Failure"'';
       # TODO try to use LoadCredential

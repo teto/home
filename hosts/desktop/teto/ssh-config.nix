@@ -11,7 +11,8 @@
 
   programs.ssh = {
 
-    enable = true;
+    # mkForce needed to override doctor's config
+    enable = lib.mkForce true;
 
     # can I have it per target ?
     # controlPath = "";
@@ -40,6 +41,8 @@
       };
 
      };
+
+     
 
     extraConfig = 
     ''

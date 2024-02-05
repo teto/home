@@ -2,7 +2,7 @@
 let
 
   pass-custom = (pkgs.pass.override { waylandSupport = true; }).withExtensions (ext:
-    with ext; [ pass-import ]);
+    with ext; [ pass-import pass-tail ]);
 
 
   devPkgs = with pkgs; [
@@ -15,8 +15,9 @@ let
     # gitAndTools.git-remote-hg
     # nix-prefetch-scripts # broken
 
-    backblaze-b2
+    (backblaze-b2.override({ execName = "b2";}))
 
+    fswatch # fileevent watcher
     gdb
     # editorconfig-core-c
     automake
@@ -33,21 +34,19 @@ let
     gitAndTools.gh # github client
     gitAndTools.git-absorb
     gitAndTools.git-crypt
-    gitAndTools.git-extras
-    gitAndTools.git-recent # 
+    # gitAndTools.git-extras
+    gitAndTools.git-recent # check recently touched branches
     gitAndTools.gitbatch # to fetch form several repos at once
-    gitAndTools.lab
-
+    gitAndTools.lab # to interact with gitlab
 
 	haskellPackages.fast-tags
     hurl # http tester
 
     llm-ls # needed by the neovim plugin
 
-
     presenterm # for presentations from terminal/markdown (in rust, supports images, pretty cool)
     
-    perf-tools
+    perf-tools # to interpret 
 
 	inotify-tools # for inotify-wait notably
     just # to read justfiles, *replace* Makefile
@@ -60,32 +59,34 @@ let
     nix-index # to list package contents
     nix-top # to list current builds
     nixpkgs-fmt
-    nixpkgs-review
+    nixpkgs-review # to help review nix packages
     # nodePackages."@bitwarden/cli" # 'bw' binary # broken
     patchutils # for interdiff
-    pcalc # cool calc
-    rpl # to replace strings across files
+    pcalc # cool calc, see insect too
+    process-compose # docker-compose - like
+    # rpl # to replace strings across files
     universal-ctags # there are many different ctags, be careful !
     tio # serial console reader
 	viu # a console image viewer
     hexyl # hex editor
     whois
-    envsubst
+    envsubst # replace templated files with variables
     w3m # for preview in ranger w3mimgdisplay
     zeal # doc for developers
   ];
 
   imPkgs = with pkgs; [
     # gnome.california # fails
-    khard
+    # khard # see khal.nix instead ?
     # libsecret  # to consult
-    newsboat #
+    # newsboat #
     mujmap # to sync notmuch tags across jmap 
     # memento # broken capable to display 2 subtitles at same time
     vlc
     # leafnode dovecot22 dovecot_pigeonhole fetchmail procmail w3m
     # mairix mutt msmtp lbdb contacts spamassassin
-    element-desktop
+    # element-desktop # TODO this should go into nix profile install
+    popcorntime
   ];
 
 
@@ -208,6 +209,7 @@ in
 {
 
   imports = [
+    ./xdg-portal.nix
     ./common.nix
     ./kitty.nix
     ./mpv.nix
@@ -242,15 +244,17 @@ in
 
   # rename to fn, accept a parameter for optional
   home.packages =
-   desktopPkgs 
-   ++ devPkgs  ++ heavyPackages
-    ++ imPkgs
-    ++ (with pkgs; [
+      desktopPkgs 
+   ++ devPkgs
+   ++ heavyPackages
+   ++ imPkgs
+   ++ (with pkgs; [
       # pkgs.up # live preview of pipes
       # pkgs.peek # GIF recorder  BROKEN
 	  pkgs.alsa-utils #  for alsamixer
-      pinentry-bemenu
+      # pinentry-bemenu
       pinentry-rofi
+      timg
     ])
   ;
 
@@ -280,7 +284,6 @@ in
 
   services.network-manager-applet.enable = true;
 
-  services.flameshot.enable = true;
 
   # programs.gpg-agent = {
   # # --max-cache-ttl
@@ -295,8 +298,10 @@ in
     enableSshSupport = true;
     # grabKeyboardAndMouse= false;
     # pinentryFlavor = "curses";
+
+    # TODO decide when to use it
     pinentryFlavor = "qt";
-    grabKeyboardAndMouse = true; # should be set to false instead
+    grabKeyboardAndMouse = false; # should be set to false instead
     # default-cache-ttl 60
     verbose = true;
     # --max-cache-ttl

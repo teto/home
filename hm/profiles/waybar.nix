@@ -248,8 +248,12 @@ in
     };
 
     # TODO
-    systemd.user.services.waybar.Service = {
-     # to get fonts https://github.com/nix-community/home-manager/issues/4099#issuecomment-1605483260
-      Environment ="PATH=${lib.makeBinPath [ pkgs.wlogout pkgs.fuzzel pkgs.wofi ]}:${config.home.profileDirectory}/bin";
+    systemd.user.services.waybar = {
+      Service = {
+        # to get fonts https://github.com/nix-community/home-manager/issues/4099#issuecomment-1605483260
+         Environment ="PATH=${lib.makeBinPath [ pkgs.wlogout pkgs.fuzzel pkgs.wofi ]}:${config.home.profileDirectory}/bin";
+       };
+       Unit.PartOf = [ "tray.target" ];
+       Install.WantedBy = [ "tray.target" ];
     };
 }

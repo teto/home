@@ -1,10 +1,11 @@
 # vim: set noet fdm=manual fenc=utf-8 ff=unix sts=0 sw=4 ts=4 ft=conf :
-[core]
+[absorb]
+	maxStack=50
+
 [core]
 	# fsmonitor = "/nix/store/pqrqcfw2m27kwhrh7jyj05lp9b5pi0jd-rs-git-fsmonitor-0.1.3/bin/rs-git-fsmonitor"
 	# pager = "/nix/store/ms4zb8803ixq3yz4nn0kgyda0q3d3rvw-delta-0.16.5/bin/delta"
 	sshCommand = "ssh"
-
 # sshCommand=ssh -vvv
 # compactionHeuristic
   # whitespace = space-before-tab
@@ -26,6 +27,10 @@ compression = 0
 [sendemail]
   chainreplyto = false
 
+
+[help]
+autocorrect = 10
+
 # Github helpers
 [url "git://github.com/"]
   # Read-only
@@ -40,9 +45,10 @@ compression = 0
 
 [alias]
   cdiff = diff --word-diff=color
+  # interactive add ?
   ia = !git add $(git ls-files --modified --others --exclude-standard | fzf -m)
   ci=commit
-  ci=commit
+  ca=commit --all
   cp=cherry-pick
   co=checkout
   rc=rebase --continue
@@ -83,3 +89,5 @@ compression = 0
   # look at https://github.com/fcsonline/dotfiles/blob/master/git/gitconfig
   # for fzf+git aliases
   pamfix= !HASH=`git log --pretty=oneline | head -50 | fzf` && git fixit `echo ${HASH} | awk '{ print $1 }'`
+
+  wt = worktree

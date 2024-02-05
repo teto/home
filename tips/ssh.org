@@ -39,5 +39,7 @@ ssh-keygen -lv -f ~/.ssh/known_hosts
 https://unix.stackexchange.com/questions/126908/get-ssh-server-key-fingerprint
 -l     Show fingerprint of specified public key file.
 
+  `-E md5` to precise the algorithm
+ssh-keyscan host | ssh-keygen -lf -
 
 # fingerprint of private key is the same as the public key

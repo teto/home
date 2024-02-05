@@ -1,0 +1,19 @@
+* 
+
+* avec backblaze
+
+  faire gaffe la master key ne permet pas d'utiliser la CLI, faut une cle dediee
+  https://www.backblaze.com/docs/cloud-storage-integrate-restic-with-backblaze-b2
+  https://www.seanh.cc/2022/04/03/restic/#10-create-a-backup-script
+➜ restic init     
+
+  https://restic.readthedocs.io/en/latest/010_introduction.html
+RESTIC_PASSWORD_COMMAND
+RESTIC_READ_CONCURRENCY
+    -r, --repo repository            repository to backup to or restore from (default: $RESTIC_REPOSITORY)
+  --repository-file file       file to read the repository location from (default: $RESTIC_REPOSITORY_FILE)
+  export AWS_ACCESS_KEY_ID=
+  export AWS_SECRET_ACCESS_KEY=
+  export RESTIC_REPOSITORY=
+# export RESTIC_PASSWORD_FILE=/etc/restic-password
+

@@ -12,8 +12,10 @@ let
 
   # taken from the official flake
   # must be an unwrapped version
-  # myPackage = pkgs.neovim-unwrapped.override({ libuv = libuv_147;});
-  myPackage = flakeInputs.neovim.packages."${pkgs.system}".neovim;
+  # myNeovimUnwrapped = pkgs.neovim-unwrapped.override({ libuv = libuv_147;});
+  myNeovimUnwrapped = flakeInputs.neovim.packages."${pkgs.system}".neovim;
+  lua =   myNeovimUnwrapped.lua;
+
  
   genBlockLua = title: content:
     ''
@@ -305,6 +307,9 @@ let
   ];
 
   basePlugins = with pkgs.vimPlugins; [
+
+    # (luaPlugin { plugin = pkgs.neovimUtils.buildNeovimPlugin { luaAttr = "rocks-nvim"; }; })
+   
     (luaPlugin { plugin = fzf-lua; })
 
     { # use ctrl a/xto cycle between different words
@@ -494,13 +499,13 @@ in
     # custom options
     # fennel.enable = false;
     # teal.enable = false;
-    orgmode.enable = true;
+    orgmode.enable = false;
     autocompletion.enable = true;
     # TODO ?
     # snippets.enable = true;
 
     # take the one from the flake
-    package = myPackage;
+    package = myNeovimUnwrapped;
 
     # source doesn't like `stdpath('config').'`
     # todo should use mkBefore ${config.programs.neovim.generatedInitrc}

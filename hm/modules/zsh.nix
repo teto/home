@@ -8,7 +8,6 @@ let
   fzf-git-sh = flakeInputs.fzf-git-sh;
 
     # /tree/master/plugins/zbell
-   # zsh-plugins = "${flakeInputs}/plugins/zbell"
   termTitleSubmodule = types.submodule (import ./title-submodule.nix);
 
   zbellModule = types.submodule {
@@ -224,6 +223,11 @@ in
 
        # ${}
       programs.zsh.initExtra = ''
+       export MCFLY_RESULTS_SORT=LAST_RUN
+       export MCFLY_RESULTS=200
+       # export MCFLY_PROMPT="❯"
+       # export MCFLY_HISTORY_LIMIT
+
        eval "$(${pkgs.mcfly}/bin/mcfly init zsh)"
        eval "$(${pkgs.mcfly-fzf}/bin/mcfly-fzf init zsh)"
       '';

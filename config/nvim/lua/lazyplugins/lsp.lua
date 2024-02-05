@@ -184,8 +184,8 @@ return {
           winblend = 100,             -- Background color opacity in the notification window
           border = "none",            -- Border around the notification window
           zindex = 45,                -- Stacking priority of the notification window
-          max_width = 0,              -- Maximum width of the notification window
-          max_height = 0,             -- Maximum height of the notification window
+          max_width = 400,              -- Maximum width of the notification window
+          max_height = 100,             -- Maximum height of the notification window
           x_padding = 1,              -- Padding from right edge of window boundary
           y_padding = 0,              -- Padding from bottom edge of window boundary
           align = "top",        -- Whether to bottom-align the notification window

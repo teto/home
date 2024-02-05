@@ -1,4 +1,5 @@
-{ config, pkgs, lib, secrets, ... }:
+{ config, pkgs, lib
+, secrets, ... }:
 
 let 
   hmUtils = pkgs.callPackage ../../../hm/lib.nix {};
@@ -8,32 +9,6 @@ in
     # need gnome-accounts to make it work
     gnome3.gnome-calendar
   ];
-
-  programs.khal = {
-   enable = false; # khal build broken
-   # need a locale to be set
-   locale = { };
-
-   # TODO restore
-#    settings = {
-#           default = {
-#            # TODO automate
-#             default_calendar = "Perso";
-#             timedelta = "5d";
-#           };
-#           view = {
-#             agenda_event_format =
-#               "{calendar-color}{cancelled}{start-end-time-style} {title}{repeat-symbol}{reset}";
-#           };
-#    };
-
-   extraConfig = ''
-    [highlight_days]
-    color = #ff0000
-    '';
-
-    # default_color
-  };
 
   # broken
   # xdg.configFile."khal/config".text = lib.mkBefore '' 
@@ -54,6 +29,25 @@ in
 
   };
 
+  # accounts.contact = {
+  #   basePath = "$XDG_CONFIG_HOME/card";
+  #   accounts = {
+  #     testcontacts = {
+  #       khal = {
+  #         enable = true;
+  #         # collections = [ "default" "automaticallyCollected" ];
+  #       };
+  #       local.type = "filesystem";
+  #       local.fileExt = ".vcf";
+  #       name = "testcontacts";
+  #       remote = {
+  #         type = "http";
+  #         url = "https://example.com/contacts.vcf";
+  #       };
+  #     };
+  #   };
+  # };
+
   accounts.calendar = {
     basePath = "${config.home.homeDirectory}/calendars";
 
@@ -61,12 +55,17 @@ in
       # need locale to be set apparently
       khal = {
        enable = true;
+       # type can be: calendar, birthdays and discover
        type = "discover";
        # primary = true;
+       priority = 1000;
+       extraConfig = ''
+       addresses = ${secrets.users.teto.email}
+        '';
       };
 
       vdirsyncer = {
-        enable = true;
+        enable = false;
         # null doesn't look too interesting :s 
         collections = ["from a"  "from b"];
         metadata = [ "color" "displayname" ];

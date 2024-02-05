@@ -48,6 +48,7 @@ let
           pkgs.vimPlugins.nvim-treesitter.grammarPlugins.norg
           # (grammarToPlugin pkgs.tree-sitter-grammars.tree-sitter-norg-meta)
           pkgs.vimPlugins.nvim-treesitter.grammarPlugins.nix
+          pkgs.vimPlugins.nvim-treesitter.grammarPlugins.http
 
           # (grammarToPlugin tree-sitter-just)
         ];
@@ -60,6 +61,8 @@ let
     (luaPlugin { plugin = nvim-ufo; })
     (luaPlugin { plugin = ollama-nvim; })
     (luaPlugin { plugin = mini-nvim; })
+    (luaPlugin { plugin = cloak-nvim; })
+    (luaPlugin { plugin = nvim-dbee; })
     # breaks setup
     # (luaPlugin { plugin =  hmts-nvim; })
 
@@ -86,6 +89,7 @@ let
 
     # TODO it needs some extra care
     (luaPlugin { plugin = haskell-tools-nvim; })
+    (luaPlugin { plugin = nvim-dap; })
 
     # (luaPlugin {
     #   # run with :Diffview
@@ -228,7 +232,7 @@ let
     })
     (luaPlugin { plugin = sniprun; })
     (luaPlugin { plugin = telescope-nvim; })
-    (luaPlugin { plugin = telescope-manix; })
+    # (luaPlugin { plugin = telescope-manix; })
     # call with :Hoogle
         (luaPlugin { plugin = glow-nvim; })
 
@@ -385,6 +389,7 @@ let
   
   extraPackages = with pkgs; [
      go # for gitlab.nvim, we can probably ditch it afterwards
+     gcc # this is sadly a workaround to be able to run :TSInstall
 
      nvimLua.pkgs.luarocks
 
