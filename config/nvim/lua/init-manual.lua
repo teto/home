@@ -1011,7 +1011,7 @@ vim.api.nvim_create_autocmd({ "VimLeave" }, {
 local has_cloak, cloak = pcall(require, 'cloak')
 if has_cloak then
 cloak.setup({
-  enabled = true,
+  enabled = false,
   cloak_character = '*',
   -- The applied highlight group (colors) on the cloaking, see `:h highlight`.
   highlight_group = 'Comment',

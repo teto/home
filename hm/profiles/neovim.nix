@@ -308,7 +308,7 @@ let
 
   basePlugins = with pkgs.vimPlugins; [
 
-    # (luaPlugin { plugin = pkgs.neovimUtils.buildNeovimPlugin { luaAttr = "rocks-nvim"; }; })
+    (luaPlugin { plugin = pkgs.neovimUtils.buildNeovimPlugin { luaAttr = "rocks-nvim"; }; })
    
     (luaPlugin { plugin = fzf-lua; })
 
