@@ -65,7 +65,6 @@ return {
 
  },
  -- { "shellRaining/hlchunk.nvim", event = { "UIEnter" }, },
- -- { dir = '/home/teto/neovim/nvim-telescope-zeal-cli' },
 
  -- compete with registers.nvim
  -- https://github.com/gelguy/wilder.nvim

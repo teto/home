@@ -531,6 +531,7 @@ if has_cmp then
 			-- { name = 'ultisnips' },
 
 			{ name = 'buffer' },
+			-- { name = "cmp-dbee" },
 		}
     if use_neorg then
 		table.insert(cmp_sources, { name = 'neorg' })

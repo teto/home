@@ -49,7 +49,9 @@
 
   fileSystems."/mnt/ntfs" =
     {
-      device = "/dev/sda2";
+     # ntfs-3g doesn't seem to like a path by uuid
+      # device = "/dev/disk/by/uuid/65F4B09F417BB97C";
+      device = "/dev/sdb2";
       fsType = "ntfs";
       # see https://nixos.wiki/wiki/NTFS
       options = [ "rw" "uid=teto" "nofail" ];

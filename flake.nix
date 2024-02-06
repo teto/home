@@ -253,7 +253,7 @@
 
              # TODO set SOPS_A
              shellHook = ''
-              export SOPS_AGE_KEY_FILE=$PWD/secrets
+              export SOPS_AGE_KEY_FILE=$PWD/secrets/age.key
               echo "Run just ..."
              '';
             };
