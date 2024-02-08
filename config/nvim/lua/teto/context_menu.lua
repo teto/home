@@ -290,6 +290,16 @@ M.set_toggle_rclick_menu = function()
  end)
 end
 
+M.set_autocompletion_rclick_menu = function()
+ M.set_rclick_submenu('MenuTreesitter', 'Treesitter ->', {
+  { 'Show tree', '<cmd>lua vim.treesitter.show_tree()<cr>' },
+  -- {'Obsession',   '<cmd>Obsession<cr>'},
+  -- {'Indent guides',   '<cmd>IndentBlanklineToggle<cr>'},
+ }, function()
+  return true
+ end)
+end
+
 M.set_treesitter_rclick_menu = function()
  M.set_rclick_submenu('MenuTreesitter', 'Treesitter ->', {
   { 'Show tree', '<cmd>lua vim.treesitter.show_tree()<cr>' },
@@ -431,6 +441,7 @@ M.setup_rclick_menu_autocommands = function()
    M.add_component(M.set_treesitter_rclick_menu)
    M.add_component(M.set_tabs_rclick_menu)
    M.add_component(M.set_git_rclick_menu)
+   M.add_component(M.set_autocompletion_rclick_menu)
 -- -- M.set_orgmode_rclick_menu()
 -- M.rclick_context_menu("PopUp", "Autosave", "toto"
 -- -- "

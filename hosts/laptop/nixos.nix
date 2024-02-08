@@ -69,7 +69,7 @@
     # "i915.enable_psr=0"  # disables a power saving feature that can cause flickering
   ];
 
-  # boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   boot.kernelModules = [
     # "af_key" # for ipsec/vpn support

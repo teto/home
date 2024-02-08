@@ -525,14 +525,10 @@ if has_cmp then
 	-- use('michaeladler/cmp-notmuch')
 	-- nvim-cmp autocompletion plugin{{{
 	cmp_sources = {
-			{ name = 'nvim_lsp' },
-
-			-- For ultisnips user.
-			-- { name = 'ultisnips' },
-
-			{ name = 'buffer' },
-			-- { name = "cmp-dbee" },
-		}
+		{ name = 'nvim_lsp' },
+		{ name = 'buffer' },
+		-- { name = "cmp-dbee" },
+	}
     if use_neorg then
 		table.insert(cmp_sources, { name = 'neorg' })
 	end
@@ -541,10 +537,29 @@ if has_cmp then
 	end
 	if use_luasnip then
 			-- For luasnip user.
+			-- " Plug 'saadparwaiz1/cmp_luasnip'
 		table.insert(cmp_sources, { name = 'luasnip' })
     end
 
+	--[[
+	:CmpStatus
+	]]
 	cmp.setup({
+
+		-- https://github.com/hrsh7th/nvim-cmp/issues/1747
+		enabled = function()
+			-- return vim.g.cmptoggle
+			return true
+		end,
+		completion = {
+			-- autocomplete = true
+			-- local types = require('cmp.types')
+			-- autocomplete is on by default and it should only be a trigger event array or false
+			autocomplete = { cmp.TriggerEvent.InsertEnter, cmp.TriggerEvent.TextChanged },
+		},
+		view = {            
+			entries = "custom" -- can be "custom", "wildmenu" or "native"
+		},
 		sorting = {
 			comparators = {
 			cmp.config.compare.offset,
@@ -564,36 +579,62 @@ if has_cmp then
 				-- vim.fn['vsnip#anonymous'](args.body)
 
 				-- For `luasnip` user.
-				-- require('luasnip').lsp_expand(args.body)
-
-				-- For `ultisnips` user.
-				-- vim.fn["UltiSnips#Anon"](args.body)
+				require('luasnip').lsp_expand(args.body)
 			end,
 		},
 		mapping = cmp.mapping.preset.insert({
-
-			['<C-d>'] = cmp.mapping.scroll_docs(-4),
-			['<C-f>'] = cmp.mapping.scroll_docs(4),
-			--   ['<C-Space>'] = cmp.mapping.complete(),
-			--   ['<C-e>'] = cmp.mapping.close(),
-			['<CR>'] = cmp.mapping.confirm({ select = true }),
+			["<CR>"] = cmp.mapping.confirm({ select = true }),
+			["<C-n>"] = cmp.mapping.select_next_item(),
+			["<C-p>"] = cmp.mapping.select_prev_item(),
 		}),
+		-- mapping = cmp.mapping.preset.insert({
+
+		-- 	['<C-d>'] = cmp.mapping.scroll_docs(-4),
+		-- 	['<C-f>'] = cmp.mapping.scroll_docs(4),
+		-- 	--   ['<C-Space>'] = cmp.mapping.complete(),
+		-- 	--   ['<C-e>'] = cmp.mapping.close(),
+		-- 	['<CR>'] = cmp.mapping.confirm({ select = true }),
+		-- }),
 		-- view = {
 		-- 	entries = 'native'
 		-- },
 		sources = cmp_sources,
+	    window = {
+			completion = cmp.config.window.bordered(),
+			documentation = cmp.config.window.bordered(),
+		},
 	})
+
+  -- Set configuration for specific filetype.
+  cmp.setup.filetype('gitcommit', {
+    sources = cmp.config.sources({
+	-- You can specify the `git` source if [you were installed it](https://github.com/petertriho/cmp-git).
+      { name = 'git' }, 
+    }, {
+      { name = 'buffer' },
+    })
+  })
+
+  -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
+  -- cmp.setup.cmdline({ '/', '?' }, {
+  --   mapping = cmp.mapping.preset.cmdline(),
+  --   sources = {
+  --     { name = 'buffer' }
+  --   }
+  -- })
+
+  -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+  -- cmp.setup.cmdline(':', {
+  --   mapping = cmp.mapping.preset.cmdline(),
+  --   sources = cmp.config.sources({
+  --     { name = 'path' }
+  --   }, {
+  --     { name = 'cmdline' }
+  --   })
+  -- })
 	--  }}}
-	-- 	cmp.setup.cmdline {
-	-- 	mapping = cmp.mapping.preset.cmdline({
-	-- 		-- Your configuration here.
-	-- 	})
-
-	-- 	}
-
-	--   end
-	-- }
 end
+
 
 -- Load custom tree-sitter grammar for org filetype
 -- orgmode depends on treesitter
