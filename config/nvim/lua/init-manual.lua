@@ -45,6 +45,23 @@ if ok then
 	end
 end
 
+--
+vim.filetype.add({
+	extension = {
+		http = "http",
+		env = "env",
+		kbd = "kbd",
+		v = "coq"
+
+	},
+	filename = {
+		['wscript'] =  'python',
+		['.env'] = 'env',
+		-- ['.http'] = 'http'
+	}
+})
+
+
 -- undocumented like --luamod-dev
 vim.g.__ts_debug = 10
 
@@ -68,7 +85,8 @@ vim.opt.rtp:prepend(lazypath)
 
 -- set it before loading vim plugins like autosession
 -- ,localoptions
-vim.o.sessionoptions="buffers,curdir,help,tabpages,winsize,winpos"
+-- vim.o.sessionoptions="buffers,curdir,help,tabpages,winsize,winpos"
+vim.o.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 
 require('lazy').setup('lazyplugins', {
 	lockfile = vim.fn.stdpath('cache') .. '/lazy-lock.json',
@@ -333,7 +351,7 @@ vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'grey' })
 
 -- while testing/developing rest.nvim
 vim.opt.runtimepath:prepend('/home/teto/neovim/rest.nvim')
-vim.opt.runtimepath:prepend('/home/teto/tree-sitter-http')
+-- vim.opt.runtimepath:prepend('/home/teto/tree-sitter-http')
 -- lua require'plenary.reload'.reload_module('rest-nvim.request')
 -- vim.opt.runtimepath:prepend('/home/teto/nvim-treesitter')
 
@@ -989,22 +1007,6 @@ vim.api.nvim_set_keymap('n', ',,', '<Plug>(Luadev-RunLine)', { noremap = false, 
 map('n', '<leader>rg', '<Cmd>Grepper -tool git -open -switch<CR>', { remap = true })
 map('n', '<leader>rgb', '<Cmd>Grepper -tool rg -open -switch -buffer<CR>', { remap = true })
 map('n', '<leader>rg', '<Cmd>Grepper -tool rg -open -switch<CR>', { remap = true })
-
---
-vim.filetype.add({
-	extension = {
-		http = "http",
-		env = "env",
-		kbd = "kbd",
-		v = "coq"
-
-	},
-	filename = {
-		['wscript'] =  'python',
-		-- ['.env'] = 'env',
-		-- ['.http'] = 'http'
-	}
-})
 
 -- vim.keymap.set("n", "<Plug>HelloWorld", function() print("Hello World!") end)
 -- vim.keymap.set("n", "gs", "<Plug>HelloWorld")

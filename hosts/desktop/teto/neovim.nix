@@ -387,6 +387,7 @@ let
   
   extraPackages = with pkgs; [
      go # for gitlab.nvim, we can probably ditch it afterwards
+     gcc # this is sadly a workaround to be able to run :TSInstall
 
      nvimLua.pkgs.luarocks
 

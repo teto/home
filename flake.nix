@@ -212,6 +212,15 @@
           inherit secrets;
           withSecrets = false;
           flakeInputs = self.inputs;
+
+          # 
+          novaUserProfile = {
+            firstname = "teto";
+            lastname = "sse";
+            username = "teto";
+            business_unit = "sse";
+            # email = "matthieu.coudron@novadiscovery.com";
+          };
         };
 
         home-manager.users = {
