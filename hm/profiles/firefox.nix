@@ -107,12 +107,21 @@ in
 
       };
 
+      bank = lib.mkForce {
+        extensions = [];
+        # isDefault = false;
+        id = 2;
+        # path = "6bt2uwrj.nova";
+        path = "zwiefm8g.bank";
+        settings = {}; 
+      };
+
       # to use with stable-diffusion
       perso-nogpu = {
         settings = defaultFirefoxSettings // { };
         id = 5;
-
       };
+
       spam = lib.mkForce {
         # isDefault = false;
         id = 4;

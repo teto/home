@@ -230,7 +230,7 @@ let
     })
     (luaPlugin { plugin = sniprun; })
     (luaPlugin { plugin = telescope-nvim; })
-    (luaPlugin { plugin = telescope-manix; })
+    # (luaPlugin { plugin = telescope-manix; })
     # call with :Hoogle
         (luaPlugin { plugin = glow-nvim; })
 

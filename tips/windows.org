@@ -1,0 +1,9 @@
+
+
+You gotta use NTFS to create the usb key else the install.wim gets corrupt
+
+To create the USB key unetbootin is ok but it doesn't see NTFS drives so you have to pass the path when invoking the program like `sudo -E unetbootin installtype=USB targetdrive=/dev/sdd1`
+
+https://github.com/unetbootin/unetbootin/pull/4
+Also to play some games, you need the media pack. You can install it from the "optional programs" panel.
+
