@@ -12,7 +12,6 @@
   # iw reg set US
 
   environment.systemPackages = with pkgs; [
-    crda
     iw
     wavemon
   ];

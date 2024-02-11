@@ -4,6 +4,9 @@ b2 get-account-info
 b2 list_buckets
 b2 upload_file bucketName localFilePath b2FileName
 
-** to sync a folder
-b2 sync --noProgress --excludeAllSymlinks /path/to/your/folder b2://your-bucket-name
+* to list files
+b2 ls 
+
+* to sync a folder
+  b2 sync --noProgress --excludeAllSymlinks /path/to/your/folder b2://your-bucket-name
 

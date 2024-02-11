@@ -49,9 +49,28 @@ in
   #  '';
 
   programs.vdirsyncer = {
-    enable = true;
+    enable = false;
     # package = pkgs.vdirsyncerStable;  # can conflict
 
+  };
+
+  accounts.contact = {
+    basePath = "$XDG_CONFIG_HOME/card";
+    accounts = {
+      testcontacts = {
+        khal = {
+          enable = true;
+          collections = [ "default" "automaticallyCollected" ];
+        };
+        local.type = "filesystem";
+        local.fileExt = ".vcf";
+        name = "testcontacts";
+        remote = {
+          type = "http";
+          url = "https://example.com/contacts.vcf";
+        };
+      };
+    };
   };
 
   accounts.calendar = {
@@ -66,7 +85,7 @@ in
       };
 
       vdirsyncer = {
-        enable = true;
+        enable = false;
         # null doesn't look too interesting :s 
         collections = ["from a"  "from b"];
         metadata = [ "color" "displayname" ];

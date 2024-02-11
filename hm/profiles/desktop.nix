@@ -15,7 +15,7 @@ let
     # gitAndTools.git-remote-hg
     # nix-prefetch-scripts # broken
 
-    backblaze-b2
+    (backblaze-b2.override({ execName = "b2";}))
 
     gdb
     # editorconfig-core-c
@@ -295,8 +295,10 @@ in
     enableSshSupport = true;
     # grabKeyboardAndMouse= false;
     # pinentryFlavor = "curses";
+
+    # TODO decide when to use it
     pinentryFlavor = "qt";
-    grabKeyboardAndMouse = true; # should be set to false instead
+    grabKeyboardAndMouse = false; # should be set to false instead
     # default-cache-ttl 60
     verbose = true;
     # --max-cache-ttl

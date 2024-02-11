@@ -171,10 +171,9 @@
     };
 
     # central regulatory domain agent (CRDA) to allow exchange between kernel and userspace
-    #
     # to prevent the "failed to load regulatory.db" ?
     # see https://wireless.wiki.kernel.org/en/developers/regulatory
-    udev.packages = [ pkgs.crda ];
+    udev.packages = [];
 
     # just locate
     locate.enable = true;
