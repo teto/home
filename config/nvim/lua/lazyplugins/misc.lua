@@ -1,6 +1,12 @@
 return {
  {
+  -- :DataViewer
   'VidocqH/data-viewer.nvim'
+ },
+ {
+
+  -- require("workspace-diagnostics").populate_workspace_diagnostics(client, bufnr)
+  'artemave/workspace-diagnostics.nvim'
  },
   {
     'mikesmithgh/kitty-scrollback.nvim',

@@ -4,7 +4,8 @@
   # for android development
   programs.light = {
     enable = true;
-    brightnessKeys = true; # custom patch
+    # make it work even in ttys !
+    brightnessKeys = true; 
   };
 }
 
