@@ -135,10 +135,10 @@ export PULUMI_SKIP_UPDATE_CHECK=1
 # notifies when long command finishes
 # zbell should recognize aliases
 # zmodload -i zsh/complist
-zlong_ignore=($EDITOR $PAGER "man" "v" "ssh" "nvim" "gd" "gf" "sops" "tig")
+# todo should support 
+# ($EDITOR $PAGER 
+zlong_ignore_cmds='"" "man" "v" "ssh" "nvim" "gd" "gf" "sops" "tig"'
 zlong_duration=3
-zlong_title='"Finished in $ftime with status: $cmd_status"'
-zlong_message='"$cmd"'
 
 
 function zlong_alert_display_duration {
@@ -160,18 +160,21 @@ zlong_alert_func() {
     local cmd_status="$3"
     local ftime="$(zlong_alert_display_duration $secs)"
     if [[ "$zlong_internal_send_notifications" != false ]]; then
-        # Find and use the correct notification command based on OS name
-        # if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-	eval notify-send $zlong_title $zlong_message
-        # elif [[ "$OSTYPE" == "darwin"* ]]; then
-        #     (alerter -timeout 3 -message $zlong_message &>/dev/null &)
-        # fi
-    fi
+	local icon="object-select-symbolic"
+	local title="Finished in $ftime"
 
+	if [ $cmd_status -ne 0 ]; then
+	    local icon="process-stop-symbolic"
+	    title="$title with status $cmd_status"
+	fi
+	
+	notify-send --icon=$icon "$title" "$cmd"
+    fi
 }
 
 # replaced zbell for now with zlong_alert
-. /home/teto/zlong_alert.zsh/zlong_alert.zsh
+# move to home-manager
+. ~/zlong_alert.zsh/zlong_alert.zsh
 
 # zbell_ignore=($EDITOR $PAGER "man" "v" "ssh" "nvim" "gd" "gf" "sops" "tig")
 # zbell_duration=30

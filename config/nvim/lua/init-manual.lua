@@ -85,8 +85,8 @@ vim.opt.rtp:prepend(lazypath)
 
 -- set it before loading vim plugins like autosession
 -- ,localoptions
--- vim.o.sessionoptions="buffers,curdir,help,tabpages,winsize,winpos"
-vim.o.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
+vim.o.sessionoptions="buffers,curdir,help,tabpages,winsize,winpos"
+-- vim.o.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 
 require('lazy').setup('lazyplugins', {
 	lockfile = vim.fn.stdpath('cache') .. '/lazy-lock.json',
@@ -1046,7 +1046,8 @@ vim.cmd(('colorscheme %s'):format(theme))
 -- https://github.com/neovim/neovim/issues/21856#issuecomment-1514723887
 vim.api.nvim_create_autocmd({ "VimLeave" }, {
   callback = function()
-    vim.fn.jobstart('notify-send "closing nvim"', {detach=true})
+    -- vim.fn.jobstart('notify-send "closing nvim"', {detach=true})
+    vim.fn.jobstart('sleep 2', {detach=true})
   end,
 })
 

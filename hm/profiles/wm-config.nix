@@ -123,7 +123,6 @@ let
 
       # flameshot not being stable enough
       # "--release Print" = "exec ${pkgs.flameshot}/bin/scrot -s '/tmp/%s_%H%M_%d.%m.%Y_$wx$h.png'";
-      "--release Print" = "exec ${pkgs.sway-contrib.grimshot}/bin/grim save area";
 
     };
 

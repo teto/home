@@ -1,1 +1,10 @@
 result/bin/local-ai --debug
+
+
+nix run .#local-ai-cublas -- --models-path ~/models m
+
+# TODO one can point towards huggingface library too ! (replace index.yaml by hugginface.yaml)
+export GALLERIES='[{"name":"model-gallery", "url":"github:go-skynet/model-gallery/index.yaml"}]'
+
+huggingface gallery used by default ?
+nix run .#local-ai-cublas -- --models-path ~/models models install model-gallery@thebloke__codellama-7b-ggml__codellama-7b.ggmlv3.q2_k.bin
