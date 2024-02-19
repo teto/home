@@ -75,6 +75,7 @@ vim.g.matchparen = 0
 vim.g.mousemoveevent = 1-- must be setup before calling lazy
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
+vim.opt.smoothscroll = true
 vim.opt.colorcolumn = { 100 }
 vim.opt.termguicolors = true
 
@@ -872,6 +873,10 @@ require('teto.lspconfig')
 
 -- vim.lsp.set_log_level('DEBUG')
 
+-- setup haskell-tools
+vim.g.haskell_tools = require'teto.haskell-tools'.generate_settings()
+
+-- iron.nvim repl configuration {{{
 local has_iron, iron = pcall(require, 'iron.core')
 if has_iron then
 
@@ -892,6 +897,13 @@ if has_iron then
 			    -- copied from the nix wrapper :/
 				-- ${pkgs.luajit}/bin
 			    lua = { command = 'lua' },
+				haskell = {
+				  command = function(meta)
+					local file = vim.api.nvim_buf_get_name(meta.current_bufnr)
+					-- call `require` in case iron is set up before haskell-tools
+					return require('haskell-tools').repl.mk_repl_cmd(file)
+				  end,
+				},
 			},
 			-- repl_open_cmd = require('iron.view').left(200),
 			repl_open_cmd = view.split.vertical.botright(0.4)
@@ -899,9 +911,26 @@ if has_iron then
 			-- a float window of height 40 at the bottom.
 		},
 	})
+	require'teto.iron'
+                -- Iron doesn't set keymaps by default anymore. Set them here
+                -- or use `should_map_plug = true` and map from you vim files
+                -- keymaps = {
+                --     send_motion = '<space>sc',
+                --     visual_send = '<space>sc',
+                --     send_file = '<space>sf',
+                --     send_line = '<space>sl',
+                --     send_mark = '<space>sm',
+                --     mark_motion = '<space>mc',
+                --     mark_visual = '<space>mc',
+                --     remove_mark = '<space>md',
+                --     cr = '<space>s<cr>',
+                --     interrupt = '<space>s<space>',
+                --     exit = '<space>sq',
+                --     clear = '<space>cl',
+                -- },
 
 end
-
+-- }}}
 vim.opt.background = 'light' -- or "light" for light mode
 
 vim.opt.showbreak = '↳ ' -- displayed in front of wrapped lines
@@ -924,7 +953,8 @@ vim.opt.listchars:append('conceal:❯')
 -- "set shada=!,'50,<1000,s100,:0,n$XDG_CACHE_HOME/nvim/shada
 vim.g.netrw_home = vim.fn.stdpath('data') .. '/nvim'
 
-vim.keymap.set('n', '<F11>', '<Plug>(ToggleListchars)')
+vim.keymap.set('n', '<F11>', '<Plug>(ToggleListchars)', 
+	{ desc = "Change between different flavors of space/tab characters" })
 
 vim.keymap.set('n', '<leader>q', '<Cmd>Sayonara!<cr>', { silent = true, desc = "Closes current window"})
 vim.keymap.set('n', '<leader>Q', '<Cmd>Sayonara<cr>', 

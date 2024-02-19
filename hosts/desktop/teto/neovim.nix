@@ -88,6 +88,7 @@ let
 
     # TODO it needs some extra care
     (luaPlugin { plugin = haskell-tools-nvim; })
+    (luaPlugin { plugin = nvim-dap; })
 
     # (luaPlugin {
     #   # run with :Diffview

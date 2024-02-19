@@ -9,7 +9,14 @@
   ];
 
   # experimental
-  programs.gnome-shell.enable = true;
+  programs.gnome-shell = {
+   enable = true;
+   # without 'theme', it does not provide gnome-shell
+   theme = {
+          name = "Plata-Noir";
+          package = pkgs.plata-theme;
+         };
+   };
 
   # see https://www.reddit.com/r/NixOS/comments/18hdool/how_do_i_set_a_global_dark_theme_and_configure_gtk/
    dconf.settings = {

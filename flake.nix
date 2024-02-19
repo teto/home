@@ -219,6 +219,7 @@
             lastname = "sse";
             username = "teto";
             business_unit = "sse";
+            gitlabId = "matthieu.coudron";
             # email = "matthieu.coudron@novadiscovery.com";
           };
         };

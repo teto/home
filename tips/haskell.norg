@@ -23,6 +23,7 @@
 @code repl
 
 :set args ARG1 ARG2
+:show args
 main
 @end
 

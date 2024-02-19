@@ -137,8 +137,18 @@ export PULUMI_SKIP_UPDATE_CHECK=1
 # zmodload -i zsh/complist
 # todo should support 
 # ($EDITOR $PAGER 
-zlong_ignore_cmds='"" "man" "v" "ssh" "nvim" "gd" "gf" "sops" "tig"'
-zlong_duration=3
+# zlong_ignore_cmds='"" "man" "v" "ssh" "nvim" "gd" "gf" "sops" "tig"'
+declare -A zlong_ignore_cmds=(
+    "man"=true 
+    "v"=true
+    "ssh"=true
+    "nvim"=true 
+    "gd"=true 
+    "gf"=true 
+    "sops"=true 
+    "tig"=true
+)
+zlong_duration=10
 
 
 function zlong_alert_display_duration {

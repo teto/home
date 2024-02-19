@@ -78,9 +78,9 @@
   swapDevices = [{
     # label = "dartagnan";
     device = "/fucking_swap";
-    size = 8192; # in MB
+    # size = 8192; # in MB
     # size = 4096; # in MB
-    # size = 16000; # in MB
+    size = 16000; # in MB
   }];
 
   boot.blacklistedKernelModules = [
@@ -139,7 +139,15 @@
   ];
   # boot.extraModulePackages = with config.boot.kernelPackages; [ wireguard ];
 
+
   boot.kernel.sysctl = {
+
+    # max_user_instances limits (roughly) how many applications can watch files (per user);
+    # max_user_watches limits how many filesystem items can be watched, in total across all applications (per user);
+    # max_queued_events limits how many filesystem events will be held in the kernel queue if the application does not read them;
+
+    "fs.inotify.max_user_watches" = 1000000;
+    "fs.inotify.max_user_instances" = 200;
     # to not provoke the kernel into crashing
     # "net.ipv4.tcp_timestamps" = 0;
     # "net.ipv4.ipv4.ip_forward" = 1;
@@ -238,7 +246,7 @@
 
 	# may need to select appropriate driver
     # choose between latest, beta, vulkan_beta, stable
-    package = config.boot.kernelPackages.nvidiaPackages.vulkan_beta;
+    package = config.boot.kernelPackages.nvidiaPackages.latest;
 
 	# open is only ready for data center use 
 	# open = true;
