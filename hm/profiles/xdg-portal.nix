@@ -11,6 +11,6 @@
     ];
 
     # config.hyprland.default = [ "wlr" "gtk" ];
-    config.sway.default = [ "wlr" "gtk" ];
+    config.sway.default = [ "wlr" "gtk" "kde" ];
   };
 }

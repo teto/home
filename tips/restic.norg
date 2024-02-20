@@ -1,0 +1,9 @@
+* 
+
+* avec backblaze
+
+  faire gaffe la master key ne permet pas d'utiliser la CLI, faut une cle dediee
+https://www.backblaze.com/docs/cloud-storage-integrate-restic-with-backblaze-b2
+➜ restic init     
+
+  https://restic.readthedocs.io/en/latest/010_introduction.html

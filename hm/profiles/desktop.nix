@@ -242,15 +242,17 @@ in
 
   # rename to fn, accept a parameter for optional
   home.packages =
-   desktopPkgs 
-   ++ devPkgs  ++ heavyPackages
-    ++ imPkgs
-    ++ (with pkgs; [
+      desktopPkgs 
+   ++ devPkgs
+   ++ heavyPackages
+   ++ imPkgs
+   ++ (with pkgs; [
       # pkgs.up # live preview of pipes
       # pkgs.peek # GIF recorder  BROKEN
 	  pkgs.alsa-utils #  for alsamixer
-      pinentry-bemenu
+      # pinentry-bemenu
       pinentry-rofi
+      timg
     ])
   ;
 
@@ -280,7 +282,6 @@ in
 
   services.network-manager-applet.enable = true;
 
-  services.flameshot.enable = true;
 
   # programs.gpg-agent = {
   # # --max-cache-ttl

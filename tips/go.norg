@@ -1,0 +1,4 @@
+
+go run main.go -mod=readonly
+ $GOFLAGS
+-mod=vendor -trimpath

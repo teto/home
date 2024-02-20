@@ -92,7 +92,7 @@ M.generate_settings = function ()
       globalOn = false,
      },
      stan = {
-      globalOn = true
+      globalOn = false
      }
     },
    },

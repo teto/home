@@ -9,6 +9,9 @@
 
   systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
 
+* show environment
+  systemctl --user show-environment
+
 * setup credentials 
 
   systemd-ask-password (echoes password to TTY careful)
@@ -49,6 +52,7 @@ systemd-run --user -p MemoryLimit=3G google-chrome
 
 systemctl list-timers
 
+  EnvironmentFile
 
 One can use systemd-run to create transient .timer units. That is, one can set a command to run at a specified time without having a service file. For example the following command touches a file after 30 seconds:
 
