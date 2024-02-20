@@ -43,21 +43,21 @@
   ];
 
   home-manager.users.root = {
-   imports = [
-    ./root/ssh-config.nix
-    # ../../hm/profiles/neovim.nix
-   ];
+    imports = [
+      ./root/ssh-config.nix
+      # ../../hm/profiles/neovim.nix
+    ];
   };
 
-   # TODO use from flake or from unstable
-   # services.opensnitch-ui.enable
-   # ./hm/profiles/gaming.nix
+  # TODO use from flake or from unstable
+  # services.opensnitch-ui.enable
+  # ./hm/profiles/gaming.nix
   home-manager.users.teto = {
     # TODO it should load the whole folder
     imports = [
-     ./teto/home.nix
+      ./teto/home.nix
       # breaks build: doesnt like the "activation-script"
-     # nova.hmConfigurations.dev
+      # nova.hmConfigurations.dev
     ];
   };
 
@@ -91,28 +91,28 @@
 
 
   boot.loader = {
-     # systemd-boot.enable = true;
-     # systemd-boot.editor = true; # allow to edit command line
-     # systemd-boot.consoldeMode = "auto"; 
+    # systemd-boot.enable = true;
+    # systemd-boot.editor = true; # allow to edit command line
+    # systemd-boot.consoldeMode = "auto"; 
 
-     efi.canTouchEfiVariables = false;
-     efi.efiSysMountPoint = "/boot";
-   #    systemd-boot.enable = true;
-   # efi.efiSysMountPoint
-#    timeout = 5;
-#    # just to generate the entry used by ubuntu's grub
-   grub = {
-     enable = true;
-     efiSupport = true;
-     efiInstallAsRemovable = true;
-     useOSProber = true;
+    efi.canTouchEfiVariables = false;
+    efi.efiSysMountPoint = "/boot";
+    #    systemd-boot.enable = true;
+    # efi.efiSysMountPoint
+    #    timeout = 5;
+    #    # just to generate the entry used by ubuntu's grub
+    grub = {
+      enable = true;
+      efiSupport = true;
+      efiInstallAsRemovable = true;
+      useOSProber = true;
 
-     # install to none, we just need the generated config
-     # for ubuntu grub to discover
-     # device = "/dev/nvme0n1p3";
-     devices = [ "nodev" ];
-   };
- };
+      # install to none, we just need the generated config
+      # for ubuntu grub to discover
+      # device = "/dev/nvme0n1p3";
+      devices = [ "nodev" ];
+    };
+  };
 
   # hide messages !
   boot.kernelParams = [
@@ -121,15 +121,15 @@
     # NECESSARY !! https://discourse.nixos.org/t/browsers-unbearably-slow-after-update/9414/30
     "intel_pstate=active"
 
-	# see https://forums.developer.nvidia.com/t/unusable-linux-text-console-with-nvidia-drm-modeset-1-or-if-nvidia-persistenced-is-loaded/184428/14
-	"no-scroll"
-   "boot.debug1devices"
-   # fsck.mode=skip
+    # see https://forums.developer.nvidia.com/t/unusable-linux-text-console-with-nvidia-drm-modeset-1-or-if-nvidia-persistenced-is-loaded/184428/14
+    "no-scroll"
+    "boot.debug1devices"
+    # fsck.mode=skip
   ];
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
   # boot.kernelPackages = pkgs.linuxPackages;
-   # linux_default = pkgs.packages.linux_6_1;
+  # linux_default = pkgs.packages.linux_6_1;
   # boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_6_0;
 
   boot.kernelModules = [
@@ -164,7 +164,7 @@
 
   # temporary while working on result-store
   networking.firewall.allowedTCPPorts = [
-   # 5000 52002
+    # 5000 52002
   ];
 
   # creates problem with buffalo check if it blocks requests or what
@@ -242,17 +242,17 @@
   # this is required as well
   hardware.nvidia = {
     # this makes screen go black on boot :/
-    modesetting.enable =true; # needs "modesetting" in videoDrivers ?
+    modesetting.enable = true; # needs "modesetting" in videoDrivers ?
 
-	# may need to select appropriate driver
+    # may need to select appropriate driver
     # choose between latest, beta, vulkan_beta, stable
     package = config.boot.kernelPackages.nvidiaPackages.latest;
 
-	# open is only ready for data center use 
-	# open = true;
+    # open is only ready for data center use 
+    # open = true;
     powerManagement.enable = true;
-	# Update for NVIDA GPU headless mode, i.e. nvidia-persistenced. It ensures all GPUs stay awake even during headless mode.
-	 # nvidiaPersistenced = true;
+    # Update for NVIDA GPU headless mode, i.e. nvidia-persistenced. It ensures all GPUs stay awake even during headless mode.
+    # nvidiaPersistenced = true;
   };
   # https://discourse.nixos.org/t/nvidia-users-testers-requested-sway-on-nvidia-steam-on-wayland/15264/21?u=teto
 
@@ -263,9 +263,9 @@
   # environment.etc."egl/egl_external_platform.d".source = "/run/opengl-driver/share/egl/egl_external_platform.d/";
   # /alsa-base.conf
   environment.etc."modprobe.d/alsa.conf".text = ''
-   # we want nvidia to get index 1 see 
-   # https://wiki.archlinux.org/title/Advanced_Linux_Sound_Architecture#Set_the_default_sound_card
-   options snd_hda_intel index=1
+    # we want nvidia to get index 1 see 
+    # https://wiki.archlinux.org/title/Advanced_Linux_Sound_Architecture#Set_the_default_sound_card
+    options snd_hda_intel index=1
   '';
 
   environment.variables = {
@@ -274,18 +274,14 @@
 
   environment.sessionVariables = {
     WLR_NO_HARDWARE_CURSORS = "1";
-	LIBVA_DRIVER_NAME="nvidia";
-	__GLX_VENDOR_LIBRARY_NAME="nvidia";
+    LIBVA_DRIVER_NAME = "nvidia";
+    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
   };
 
   # config from https://discourse.nixos.org/t/nvidia-users-testers-requested-sway-on-nvidia-steam-on-wayland/15264/32
   # this 
   hardware.opengl.extraPackages = with pkgs; [
     vaapiVdpau
-    libvdpau-va-gl
-    libva
-    # trying to fix `WLR_RENDERER=vulkan sway`
-    vulkan-validation-layers  # broken
   ];
   # security.sudo.wheelNeedsPassword = ;
   # disabled to run stable-diffusion
@@ -293,8 +289,8 @@
   services.xserver = {
     videoDrivers = [
       "nvidia"
-	  # "modesetting"
-	  # "fbdev"
+      # "modesetting"
+      # "fbdev"
     ];
     displayManager.gdm.wayland = true;
   };
@@ -320,18 +316,18 @@
 
 
 
-    users = {
-     groups.nginx.gid = config.ids.gids.nginx;
+  users = {
+    groups.nginx.gid = config.ids.gids.nginx;
 
-     users =  {
+    users = {
       nginx = {
-       group = "nginx";
-       # cfg.group;
+        group = "nginx";
+        # cfg.group;
         isSystemUser = true;
         uid = config.ids.uids.nginx;
       };
-     };
     };
+  };
 
   system.stateVersion = "23.05";
 }
