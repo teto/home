@@ -33,6 +33,7 @@ end-- require("vim.lsp._watchfiles")._watchfunc = require("vim._watch").watch
 
 
 vim.opt.shortmess:append("I")
+vim.opt.foldlevel = 99
 
 ---  set guicursor as a red block in normal mode
 

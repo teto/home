@@ -4,19 +4,19 @@
   # for android development
 
 
- services.restic.backups = 
-                 {
-                 # localbackup = {
-                 #   exclude = [
-                 #     "/home/*/.cache"
-                 #   ];
-                 #   initialize = true;
-                 #   passwordFile = "/etc/nixos/secrets/restic-password";
-                 #   paths = [
-                 #     "/home"
-                 #   ];
-                 #   repository = "/mnt/backup-hdd";
-                 # };
+ services.restic.backups = {
+     localbackup = {
+       exclude = [
+         "/home/*/.cache"
+       ];
+       initialize = false;
+       passwordFile = "/run/secrets/restic-password";
+       paths = [
+         "/home/teto/nextcloud"
+       ];
+       # TODO setup repo
+       # repository = "/mnt/backup-hdd";
+     };
 
                  # remotebackup = {
                  #   extraOptions = [
