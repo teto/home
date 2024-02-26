@@ -1,4 +1,10 @@
 return {
+  -- { 'max397574/better-escape.nvim' },
+  { 'TheBlob42/houdini.nvim',
+    config = function()
+        require('houdini').setup()
+    end
+  },
   {
    -- to help with preloading fennel for instance
    -- 'gpanders/nvim-moonwalk',

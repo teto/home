@@ -352,7 +352,7 @@ vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'grey' })
 -- my_image:transmit() -- send image data to terminal
 
 -- while testing/developing rest.nvim
-vim.opt.runtimepath:prepend('/home/teto/neovim/rest.nvim')
+vim.opt.runtimepath:prepend('/home/teto/rest.nvim')
 -- vim.opt.runtimepath:prepend('/home/teto/tree-sitter-http')
 -- lua require'plenary.reload'.reload_module('rest-nvim.request')
 -- vim.opt.runtimepath:prepend('/home/teto/nvim-treesitter')
@@ -494,6 +494,7 @@ vim.api.nvim_create_autocmd('ColorScheme', {
 	end,
 })
 
+vim.api.nvim_set_hl(0, 'LspCodeLens', { bg = "red" })
 -- " auto reload vim config on save
 -- " Watch for changes to vimrc
 -- " augroup myvimrc

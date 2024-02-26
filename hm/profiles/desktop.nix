@@ -208,6 +208,7 @@ in
 {
 
   imports = [
+    ./xdg-portal.nix
     ./common.nix
     ./kitty.nix
     ./mpv.nix

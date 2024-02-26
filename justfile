@@ -1,10 +1,10 @@
 # SHELL = bash
 # provide a default
-# XDG_CONFIG_HOME ?= $(HOME)/.config
-# XDG_CACHE_HOME ?= $(HOME)/.cache
-# XDG_DATA_HOME ?= $(HOME)/.local/share
 # MAILDIR ?= $(HOME)/maildir
 # NIXPKGS_REPO ?= ~/nixpkgs
+
+# Add justfile() function, returning the current justfile, and justfile_directory()
+
 
 BLOG_FOLDER := "${HOME}/blog"
 
@@ -12,6 +12,7 @@ BLOG_FOLDER := "${HOME}/blog"
 # strfile not necessarilyu in PATH !
 # TODO using vocage instead
 fortunes:
+	# 
 	mkdir -p ~/.local/share/matt
 	strfile -c % fortunes/jap.txt ~/.local/share/matt/jap.txt.dat   
 
@@ -34,6 +35,7 @@ deploy-router:
 	# deploy .\#router  -s  --auto-rollback false --magic-rollback false
 	deploy .\#router  -s 
 
+[confirm("prompt")]
 deploy-neotokyo:
 	# - we need interactivty to enter password see 
 	#   https://github.com/serokell/deploy-rs/issues/78#issuecomment-1367467086
@@ -43,15 +45,15 @@ deploy-neotokyo:
 # regenerate my email contacts
 # (to speed up alot autocompletion)
 contacts:
-	sh ~/bin-nix/generate-addressbook
+	sh ./{{justfile_directory()}}/bin-nix/generate-addressbook
 
 # http://stackoverflow.com/questions/448910/makefile-variable-assignment
 config:
-	stow -t "$XDG_CONFIG_HOME" config
+	stow -t {{config_local_directory()}} config
 
 bin:
-	mkdir -p "$(XDG_DATA_HOME)/../bin"
-	stow -t "$(XDG_DATA_HOME)/../bin" bin
+	mkdir -p "{{data_directory()}}/../bin"
+	stow -t "{{data_directory()}}/../bin" bin
 
 local:
 	stow -t "$(XDG_DATA_HOME)" local
@@ -60,13 +62,14 @@ local:
 home:
 	stow --dotfiles -t ${HOME} home
 
+# [confirm("prompt")]
 routerIso:
 		nix build .\#nixosConfigurations.routerIso.config.system.build.isoImage
 
 cache:
 	#mkdir -p $(shell echo "${XDG_CACHE_HOME:-$HOME/.cache}/less")
 	# todo should be done
-	mkdir -p ${XDG_CACHE_HOME}/less ${XDG_CACHE_HOME}/vdirsyncer
+	mkdir -p {{cache_directory()}}/less {{cache_directory()}}/vdirsyncer
 
 fonts:
 	echo "Regenerating cache"

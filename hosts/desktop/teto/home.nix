@@ -25,7 +25,6 @@
     # Not tracked, so doesn't need to go in per-machine subdir
     ../../../hm/profiles/android.nix
     ../../../hm/profiles/desktop.nix
-    ../../../hm/profiles/xdg-portal.nix
     ../../../hm/profiles/gnome.nix
     ../../../hm/profiles/ia.nix
     ../../../hm/profiles/waybar.nix

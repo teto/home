@@ -48,6 +48,7 @@ let
           pkgs.vimPlugins.nvim-treesitter.grammarPlugins.norg
           # (grammarToPlugin pkgs.tree-sitter-grammars.tree-sitter-norg-meta)
           pkgs.vimPlugins.nvim-treesitter.grammarPlugins.nix
+          pkgs.vimPlugins.nvim-treesitter.grammarPlugins.http
 
           # (grammarToPlugin tree-sitter-just)
         ];
