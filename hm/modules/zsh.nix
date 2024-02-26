@@ -224,6 +224,11 @@ in
 
        # ${}
       programs.zsh.initExtra = ''
+       export MCFLY_RESULTS_SORT=LAST_RUN
+       export MCFLY_RESULTS=200
+       # export MCFLY_PROMPT="❯"
+       # export MCFLY_HISTORY_LIMIT
+
        eval "$(${pkgs.mcfly}/bin/mcfly init zsh)"
        eval "$(${pkgs.mcfly-fzf}/bin/mcfly-fzf init zsh)"
       '';

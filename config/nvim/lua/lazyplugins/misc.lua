@@ -4,6 +4,14 @@ return {
   'VidocqH/data-viewer.nvim'
  },
  {
+   "jghauser/kitty-runner.nvim",
+
+   -- :KittyOpenRunner / KittyRunCommand / KittySendLines
+   config = function()
+     require("kitty-runner").setup()
+   end
+ },
+ {
 
   -- require("workspace-diagnostics").populate_workspace_diagnostics(client, bufnr)
   'artemave/workspace-diagnostics.nvim'
