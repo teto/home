@@ -1115,6 +1115,13 @@ cloak.setup({
 })
 end
 
+vim.keymap.set('n', '[w', function()
+	vim.diagnostic.goto_prev({ wrap = true, severity = vim.diagnostic.severity.WARN })
+end, { buffer = true })
+vim.keymap.set('n', ']w', function()
+	vim.diagnostic.goto_next({ wrap = true , severity = vim.diagnostic.severity.WARN })
+end, { buffer = true })
+
 
 vim.opt.runtimepath:prepend('/home/teto/neovim/nvim-dbee')
 

@@ -10,7 +10,7 @@ in
   ];
 
   programs.khal = {
-   enable = false; # khal build broken
+   enable = true; # khal build broken
    # need a locale to be set
    locale = { };
 
@@ -49,29 +49,29 @@ in
   #  '';
 
   programs.vdirsyncer = {
-    enable = false;
+    enable = true;
     # package = pkgs.vdirsyncerStable;  # can conflict
 
   };
 
-  accounts.contact = {
-    basePath = "$XDG_CONFIG_HOME/card";
-    accounts = {
-      testcontacts = {
-        khal = {
-          enable = true;
-          collections = [ "default" "automaticallyCollected" ];
-        };
-        local.type = "filesystem";
-        local.fileExt = ".vcf";
-        name = "testcontacts";
-        remote = {
-          type = "http";
-          url = "https://example.com/contacts.vcf";
-        };
-      };
-    };
-  };
+  # accounts.contact = {
+  #   basePath = "$XDG_CONFIG_HOME/card";
+  #   accounts = {
+  #     testcontacts = {
+  #       khal = {
+  #         enable = true;
+  #         # collections = [ "default" "automaticallyCollected" ];
+  #       };
+  #       local.type = "filesystem";
+  #       local.fileExt = ".vcf";
+  #       name = "testcontacts";
+  #       remote = {
+  #         type = "http";
+  #         url = "https://example.com/contacts.vcf";
+  #       };
+  #     };
+  #   };
+  # };
 
   accounts.calendar = {
     basePath = "${config.home.homeDirectory}/calendars";

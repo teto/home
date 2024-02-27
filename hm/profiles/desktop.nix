@@ -33,10 +33,10 @@ let
     gitAndTools.gh # github client
     gitAndTools.git-absorb
     gitAndTools.git-crypt
-    gitAndTools.git-extras
-    gitAndTools.git-recent # 
+    # gitAndTools.git-extras
+    gitAndTools.git-recent # check recently touched branches ?
     gitAndTools.gitbatch # to fetch form several repos at once
-    gitAndTools.lab
+    gitAndTools.lab # to interact with gitlab
 
 
 	haskellPackages.fast-tags
