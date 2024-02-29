@@ -3,6 +3,9 @@
 {
   home.packages = with pkgs; [
   #   # lgogdownloader
+
+    # gaming
+    lutris
   ];
 
   services.upower.percentageLow = 35;

@@ -27,7 +27,15 @@ require('lualine').setup({
         -- disabled_filetypes = {}
     },
     sections = {
-        lualine_a = { 'branch' },
+        lualine_a = { 
+           { 'branch',
+            on_click = function(_nb_of_clicks, button, _modifiers)
+              clip.copy("BRANCH_PLACEHOLDER")
+
+            -- the
+            end
+           }
+          },
         lualine_b = {
             {
                 'filename',
@@ -40,7 +48,6 @@ require('lualine').setup({
                     local copy_fullpath = (button == 'r')
                     if copy_fullpath then
                       filename = vim.fn.fnamemodify(filename, ':p')
-
                     end
                     print('To clipboard: ' .. filename)
                     clip.copy(filename)

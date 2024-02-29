@@ -62,9 +62,6 @@
     ncdu # to see disk usage
     moar # test as pager
 
-    # gaming
-    lutris
-
     # bridge-utils# pour  brctl
   ];
 

@@ -89,3 +89,5 @@ autocorrect = 10
   # look at https://github.com/fcsonline/dotfiles/blob/master/git/gitconfig
   # for fzf+git aliases
   pamfix= !HASH=`git log --pretty=oneline | head -50 | fzf` && git fixit `echo ${HASH} | awk '{ print $1 }'`
+
+  wt = worktree

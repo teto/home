@@ -1,7 +1,12 @@
 initdb
 pg_ctl start
 
+POSTGRESQL_CONNECTION="$(pg_tmp)"
+psql "$POSTGRESQL_CONNECTION" --no-psqlrc 
 
+* 
+
+\conninfo
 
 * how to force tcp/ip connection
 

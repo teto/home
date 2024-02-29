@@ -135,6 +135,15 @@
 
   outputs = { self, hm, nur, nixpkgs, flake-utils, treefmt-nix, deploy-rs, ... }:
     let
+      novaUserProfile = {
+        firstname = "teto";
+        lastname = "sse";
+        username = "teto";
+        business_unit = "sse";
+        gitlabId = "matthieu.coudron";
+        # email = "matthieu.coudron@novadiscovery.com";
+      };
+
       secrets = import ./nixpkgs/secrets.nix;
       # sshLib = import ./nixpkgs/lib/ssh.nix { inherit secrets; flakeInputs = self.inputs; };
       system = "x86_64-linux";
@@ -214,14 +223,7 @@
           flakeInputs = self.inputs;
 
           # 
-          novaUserProfile = {
-            firstname = "teto";
-            lastname = "sse";
-            username = "teto";
-            business_unit = "sse";
-            gitlabId = "matthieu.coudron";
-            # email = "matthieu.coudron@novadiscovery.com";
-          };
+          inherit novaUserProfile;
         };
 
         home-manager.users = {

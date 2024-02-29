@@ -49,7 +49,7 @@ in
   #  '';
 
   programs.vdirsyncer = {
-    enable = true;
+    enable = false;
     # package = pkgs.vdirsyncerStable;  # can conflict
 
   };
