@@ -22,7 +22,10 @@
 
   inputs = {
    # todo add nixified.ai too
-    localai.url = "github:ck3d/nix-local-ai";
+    localai = {
+      url = "github:ck3d/nix-local-ai";
+      # inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # waybar.url = "github:Alexays/Waybar";
     nixpkgs = {
@@ -30,7 +33,8 @@
     };
     nixos-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nixos-stable.url = "github:nixos/nixpkgs/nixos-23.11";
-    nixos-stable-custom.url = "github:teto/nixpkgs?ref=teto/nixos-23.11";
+    # nixos-stable-custom.url = "github:teto/nixpkgs?ref=teto/nixos-23.11";
+    nixpkgs-for-hls.url  = "github:nixos/nixpkgs?rev=612f97239e2cc474c13c9dafa0df378058c5ad8d";
     nix-search-cli = {
       url = "github:peterldowns/nix-search-cli";
       inputs.nixpkgs.follows = "nixpkgs";

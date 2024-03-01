@@ -145,6 +145,8 @@ return {
   'nvimtools/none-ls.nvim',
   config = function()
    local none_ls = require('null-ls')
+
+   -- none_ls.register(require("none-ls-luacheck.diagnostics.luacheck"))
    -- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md
    -- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTIN_CONFIG.md
    -- none_ls.builtins.diagnostics.shellcheck.with({
@@ -166,7 +168,8 @@ return {
     sources = {
      -- method = none_ls.methods.DIAGNOSTICS_ON_SAVE,
      -- needs a luacheck in PATH
-     none_ls.builtins.diagnostics.luacheck.with({
+     -- none_ls.none-ls-luacheck.diagnostics.luacheck.with({
+     require("none-ls-luacheck.diagnostics.luacheck").with({
       extra_args = { '--ignore 21/_.*' }
      }),
      none_ls.builtins.code_actions.shellcheck,
@@ -197,6 +200,9 @@ return {
     },
    })
   end,
+   dependencies = {
+       "gbprod/none-ls-luacheck.nvim",
+   },
  },
  {
   'folke/neodev.nvim',
