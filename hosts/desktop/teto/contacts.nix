@@ -6,7 +6,6 @@ in
 {
   home.packages = with pkgs; [
     # need gnome-accounts to make it work
-    # gnome3.gnome-calendar
   ];
 
   accounts.contact = {
@@ -26,7 +25,7 @@ in
 
 
   programs.khard = {
-   enable = false;
+   enable = true;
 
    settings = {
       general = {

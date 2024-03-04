@@ -2,7 +2,7 @@
 let
 
   pass-custom = (pkgs.pass.override { waylandSupport = true; }).withExtensions (ext:
-    with ext; [ pass-import ]);
+    with ext; [ pass-import pass-tail ]);
 
 
   devPkgs = with pkgs; [
@@ -17,6 +17,7 @@ let
 
     (backblaze-b2.override({ execName = "b2";}))
 
+    fswatch # fileevent watcher
     gdb
     # editorconfig-core-c
     automake
@@ -34,20 +35,18 @@ let
     gitAndTools.git-absorb
     gitAndTools.git-crypt
     # gitAndTools.git-extras
-    gitAndTools.git-recent # check recently touched branches ?
+    gitAndTools.git-recent # check recently touched branches
     gitAndTools.gitbatch # to fetch form several repos at once
     gitAndTools.lab # to interact with gitlab
-
 
 	haskellPackages.fast-tags
     hurl # http tester
 
     llm-ls # needed by the neovim plugin
 
-
     presenterm # for presentations from terminal/markdown (in rust, supports images, pretty cool)
     
-    perf-tools
+    perf-tools # to interpret 
 
 	inotify-tools # for inotify-wait notably
     just # to read justfiles, *replace* Makefile
@@ -60,7 +59,7 @@ let
     nix-index # to list package contents
     nix-top # to list current builds
     nixpkgs-fmt
-    nixpkgs-review
+    nixpkgs-review # to help review nix packages
     # nodePackages."@bitwarden/cli" # 'bw' binary # broken
     patchutils # for interdiff
     pcalc # cool calc
@@ -70,7 +69,7 @@ let
 	viu # a console image viewer
     hexyl # hex editor
     whois
-    envsubst
+    envsubst # replace templated files with variables
     w3m # for preview in ranger w3mimgdisplay
     zeal # doc for developers
   ];

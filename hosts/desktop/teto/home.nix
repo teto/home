@@ -10,15 +10,15 @@
     flakeInputs.ironbar.homeManagerModules.default
 
     ./calendars.nix
-    ./ia.nix
     ./git.nix
     ./helix.nix
+    ./ia.nix
     ./neovim.nix
     ./ssh-config.nix
     ./sway.nix
     ./swaync.nix
-    ./zsh.nix
     ./yazi.nix
+    ./zsh.nix
 
     # ../../../hm/profiles/experimental.nix
 

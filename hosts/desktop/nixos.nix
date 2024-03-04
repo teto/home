@@ -11,6 +11,7 @@
     # to test core-ws
     ./postgresql.nix
     ./redis.nix
+    ./teto/restic.nix
 
 
     # ../../nixos/profiles/immich.nix

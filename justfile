@@ -8,13 +8,25 @@
 
 BLOG_FOLDER := "${HOME}/blog"
 
-# regen fortunes (not necessary with some fortunes version ?!)                                                                                                                                 
+
+
+
+backup-photos:
+  # or use pass/sops to load secrets ?
+  # source restic.env
+  # 
+  # $(pass show self-hosting/backblaze\ restic-backup-key | tail -n1)
+  # TODO try rustic ?
+  restic backup ~/Nextcloud --repository-file=/run/secrets/restic/teto-bucket \
+   --password-command="pass show self-hosting/backblaze\ restic-backup-key | head -n1"
+
+
+# regen fortunes (not necessary with some fortunes version ?!)
 # strfile not necessarilyu in PATH !
 # TODO using vocage instead
 fortunes:
-	# 
-	mkdir -p ~/.local/share/matt
-	strfile -c % fortunes/jap.txt ~/.local/share/matt/jap.txt.dat   
+  mkdir -p ~/.local/share/matt
+  strfile -c % fortunes/jap.txt ~/.local/share/matt/jap.txt.dat   
 
 # overlays/firefox/addons.nix:
 firefox:
@@ -57,7 +69,7 @@ bin:
 
 local:
 	stow -t "$(XDG_DATA_HOME)" local
-	mkdir -p $(XDG_DATA_HOME)/fzf-history $(XDG_DATA_HOME)/newsbeuter
+	mkdir -p "{{data_directory()}}/fzf-history" {{data_directory()}}/newsbeuter
 
 home:
 	stow --dotfiles -t ${HOME} home
