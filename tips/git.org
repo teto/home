@@ -10,12 +10,17 @@ git gc --aggressive --prune
 https://help.github.com/en/articles/checking-out-pull-requests-locally
  git fetch origin pull/ID/head:BRANCHNAME
 
-# debug ssh
+* Hide untracked files in git status
 
-GIT_SSH_COMMAND="ssh -v"
-GIT_SSH_COMMAND="ssh -vvv" git clone example
+  Use `git status -uno` (ie `--untracked=no`)
 
-# Chercher a travers toutes les branches
+* debug ssh
+
+ GIT_SSH_COMMAND="ssh -v"
+ GIT_SSH_COMMAND="ssh -vvv" git clone example
+
+* Chercher a travers toutes les branches
+
 git grep "string/regexp" $(git rev-list --all)
 https://stackoverflow.com/questions/7151311/using-git-how-could-i-search-for-a-string-across-all-branches
 
@@ -27,7 +32,7 @@ Tools to handle many repos:
 - git-repo-manager (grm)
 
 
-# bisect
+* bisect
 
 git bisect run ../test.sh
 

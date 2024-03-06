@@ -5,5 +5,4 @@
        ../../nixos/profiles/docker-daemon.nix
   ];
 
-  virtualisation.docker.enableNvidia = true;
 }

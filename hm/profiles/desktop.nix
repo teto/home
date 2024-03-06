@@ -62,8 +62,9 @@ let
     nixpkgs-review # to help review nix packages
     # nodePackages."@bitwarden/cli" # 'bw' binary # broken
     patchutils # for interdiff
-    pcalc # cool calc
-    rpl # to replace strings across files
+    pcalc # cool calc, see insect too
+    process-compose # docker-compose - like
+    # rpl # to replace strings across files
     universal-ctags # there are many different ctags, be careful !
     tio # serial console reader
 	viu # a console image viewer

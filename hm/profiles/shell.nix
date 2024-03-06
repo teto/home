@@ -29,6 +29,7 @@
      } // lib.optionalAttrs withSecrets {
        NOVA_CACHE_DEV  = secrets.novaNixCache.dev;
        NOVA_CACHE_PROD = secrets.novaNixCache.prod;
+       HUSKY=0; # To disable HUSKY
      }
 ;
 

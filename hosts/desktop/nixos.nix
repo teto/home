@@ -288,21 +288,12 @@
   # disabled to run stable-diffusion
   # TODO this should go somewhere else
   services.xserver = {
-    videoDrivers = [
-      "nvidia"
-      # "modesetting"
-      # "fbdev"
-    ];
     displayManager.gdm.wayland = true;
   };
   # system.replaceRuntimeDependencies
   #     List of packages to override without doing a full rebuild. The original derivation and replacement derivation must have the same name length, and ideally should have close-to-identical directory layout.
 
   environment.systemPackages = [
-    # pkgs.linuxPackages.nvidia_x11.bin # to get nvidia-smi EVEN when nvidia is not used as a video driver
-    pkgs.nvidia-podman
-    pkgs.nvidia-system-monitor-qt
-    pkgs.nvitop
   ];
 
   # testing with localai instead

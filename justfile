@@ -18,7 +18,7 @@ backup-photos:
   # $(pass show self-hosting/backblaze\ restic-backup-key | tail -n1)
   # TODO try rustic ?
   restic backup ~/Nextcloud --repository-file=/run/secrets/restic/teto-bucket \
-   --password-command="pass show self-hosting/backblaze\ restic-backup-key | head -n1"
+   --password-command="pass show self-hosting/backblaze-restic-backup-key/password"
 
 
 # regen fortunes (not necessary with some fortunes version ?!)
