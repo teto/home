@@ -1,0 +1,5 @@
+shortcuts:
+  process_stop:
+    description: Terminate
+  quit:
+    shortcut: q

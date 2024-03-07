@@ -7,6 +7,7 @@
   # allow-downgrade falls back when dnssec fails, "true" foces dnssec
   # services.resolved.dnssec = "allow-downgrade";
 
+  networking.nameservers = [ "9.9.9.9" ];
 
   networking.networkmanager = {
     enable = true;

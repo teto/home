@@ -25,7 +25,7 @@ in
 
 
   programs.khard = {
-   enable = true;
+   enable = false;
 
    settings = {
       general = {
