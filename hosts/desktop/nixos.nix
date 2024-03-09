@@ -1,11 +1,23 @@
 { config, flakeInputs, lib, pkgs, ... }:
+let 
+  module = { pkgs, ... }@args: flakeInputs.haumea.lib.load {
+    src = ./.;
+    inputs = args // {
+      inputs = flakeInputs;
+    };
+    transformer = flakeInputs.haumea.lib.transformers.liftDefault;
+  };
+
+in
 {
   imports = [
+   module # loaded by haumea
     ./hardware.nix
     ./sshd.nix
     ./sops.nix
     ./teto/sops.nix
-    ./tailscale.nix
+
+    # ./tailscale.nix  # TODO test if it's loaded by haumea
     ./docker.nix
 
     # to test core-ws

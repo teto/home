@@ -85,7 +85,7 @@ let
     vlc
     # leafnode dovecot22 dovecot_pigeonhole fetchmail procmail w3m
     # mairix mutt msmtp lbdb contacts spamassassin
-    element-desktop
+    # element-desktop # TODO this should go into nix profile install
     popcorntime
   ];
 

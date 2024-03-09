@@ -8,7 +8,6 @@ let
   fzf-git-sh = flakeInputs.fzf-git-sh;
 
     # /tree/master/plugins/zbell
-   # zsh-plugins = "${flakeInputs}/plugins/zbell"
   termTitleSubmodule = types.submodule (import ./title-submodule.nix);
 
   zbellModule = types.submodule {

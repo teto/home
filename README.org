@@ -72,7 +72,7 @@ nixos-rebuild switch --flake 'github:teto/home#laptop' --use-remote-sudo --optio
   With sops, you could create /run/secrets/email_password and have your service pick it up.
   Set the proper owner to avoid anyone being able to read it.
 
-  One further security can be to rely on systemd-creds
+  One further security can be to rely on systemd-creds.
   LoadCredentialEncrypted
 
    /home/teto/.config/systemd/user/mbsync.service.d/override.conf
