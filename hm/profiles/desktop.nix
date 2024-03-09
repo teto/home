@@ -77,15 +77,16 @@ let
 
   imPkgs = with pkgs; [
     # gnome.california # fails
-    khard
+    # khard # see khal.nix instead ?
     # libsecret  # to consult
-    newsboat #
+    # newsboat #
     mujmap # to sync notmuch tags across jmap 
     # memento # broken capable to display 2 subtitles at same time
     vlc
     # leafnode dovecot22 dovecot_pigeonhole fetchmail procmail w3m
     # mairix mutt msmtp lbdb contacts spamassassin
     element-desktop
+    popcorntime
   ];
 
 

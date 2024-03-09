@@ -10,7 +10,6 @@ let
   # TODO need hs-hoogle-overlay
   # rofi-hoogle = import "${rofi-hoogle-src}/rofi-hoogle-plugin/package.nix" { inherit pkgs; };
   #   hs-hoogle-query = pkgs.haskellPackages.callPackage "${rofi-hoogle-src}/haskell" {};
-
   #
 in
 {

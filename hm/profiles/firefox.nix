@@ -105,6 +105,18 @@ in
 
         ];
 
+        containers = {
+                "shopping" = {
+                  id = 1;
+                  color = "blue";
+                  icon = "cart";
+                };
+                "dangerous" = {
+                  id = 2;
+                  color = "red";
+                  icon = "fruit";
+                };
+        };
       };
 
       bank = lib.mkForce {

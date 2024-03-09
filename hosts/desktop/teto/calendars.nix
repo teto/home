@@ -1,4 +1,5 @@
-{ config, pkgs, lib, secrets, ... }:
+{ config, pkgs, lib
+, secrets, ... }:
 
 let 
   hmUtils = pkgs.callPackage ../../../hm/lib.nix {};
@@ -8,32 +9,6 @@ in
     # need gnome-accounts to make it work
     gnome3.gnome-calendar
   ];
-
-  programs.khal = {
-   enable = true; # khal build broken
-   # need a locale to be set
-   locale = { };
-
-   # TODO restore
-#    settings = {
-#           default = {
-#            # TODO automate
-#             default_calendar = "Perso";
-#             timedelta = "5d";
-#           };
-#           view = {
-#             agenda_event_format =
-#               "{calendar-color}{cancelled}{start-end-time-style} {title}{repeat-symbol}{reset}";
-#           };
-#    };
-
-   extraConfig = ''
-    [highlight_days]
-    color = #ff0000
-    '';
-
-    # default_color
-  };
 
   # broken
   # xdg.configFile."khal/config".text = lib.mkBefore '' 
@@ -80,8 +55,13 @@ in
       # need locale to be set apparently
       khal = {
        enable = true;
+       # type can be: calendar, birthdays and discover
        type = "discover";
        # primary = true;
+       priority = 1000;
+       extraConfig = ''
+       addresses = ${secrets.users.teto.email}
+        '';
       };
 
       vdirsyncer = {
