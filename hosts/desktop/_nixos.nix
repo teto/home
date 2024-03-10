@@ -34,6 +34,7 @@ in
     # TODO moved from their
     ../../nixos/profiles/nextcloud.nix
     ../../nixos/profiles/postgresql.nix
+    ../../nixos/profiles/redis.nix
     # ../../nixos/profiles/immich.nix
 
     # this is only to test the new config
