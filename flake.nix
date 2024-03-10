@@ -27,6 +27,7 @@
       # inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nix-filter.url = "github:numtide/nix-filter";
     haumea = {
       url = "github:nix-community/haumea";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -484,7 +485,7 @@
               ({ pkgs, ... }: {
 
                 imports = [
-                  ./hosts/desktop/nixos.nix
+                  ./hosts/desktop/_nixos.nix
                   ./nixos/profiles/nova.nix
 
                 ];

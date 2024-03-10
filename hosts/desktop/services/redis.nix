@@ -5,7 +5,7 @@
 
   ];
 
-  services.redis.servers.test = {
+  redis.servers.test = {
    # bind = null; # bind to all interfaces
    # bind can accept several IPs
    # https://stackoverflow.com/questions/19091087/open-redis-port-for-remote-connections

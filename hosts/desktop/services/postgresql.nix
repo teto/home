@@ -1,10 +1,9 @@
 { config, flakeInputs, lib, pkgs, ... }:
 {
-  imports = [
-    ../../nixos/profiles/postgresql.nix
-  ];
+  # imports = [
+  #   ../../nixos/profiles/postgresql.nix
+  # ];
 
-  services.postgresql = {
     enable = true;
     enableTCPIP = true;
     # port par defaut est 5432
@@ -32,10 +31,6 @@
 
     # of the form map-name system-username database-username
     # identMap = "desktop-map teto postgres";
-
-  };
-
-  # TODO give
 
 }
 
