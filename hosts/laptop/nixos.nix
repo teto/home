@@ -1,10 +1,10 @@
 { config, lib, pkgs, flakeInputs, secrets, ... }:
 {
   imports = [
-    ./sshd.nix
+    ./services/openssh.nix
     ./sops.nix
     ./hardware.nix
-    ../desktop/tailscale.nix
+    # ../desktop/services/tailscale.nix
 
     ../config-all.nix
     ../../nixos/modules/luarocks-site.nix

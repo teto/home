@@ -9,11 +9,16 @@ let
      ];
     };
     # loader = inputs: path: 
+    #  inputs.super.defaultWith import;
+
     #  builtins.trace path path;
     inputs = args // {
       inputs = flakeInputs;
     };
-    transformer = flakeInputs.haumea.lib.transformers.liftDefault;
+    transformer = [
+     flakeInputs.haumea.lib.transformers.liftDefault
+     # (flakeInputs.haumea.lib.transformers.hoistAttrs "_import" "import")
+    ];
   };
 
 in
