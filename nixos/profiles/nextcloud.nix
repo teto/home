@@ -22,7 +22,6 @@ in
       # we choose postgres because it's faster
       dbtype = "pgsql";
       # Further forces Nextcloud to use HTTPS
-      overwriteProtocol = "https";
       # loaded via sops 
       adminpassFile = "/run/secrets/${nextcloudAdminPasswordSopsPath}";
       # TODO change it
@@ -33,7 +32,6 @@ in
       # objectstore.s3.enable
     };
     maxUploadSize = "512M";
-    logLevel = 0;
     # disable imageMagick for security reasons
     enableImagemagick = true;
     autoUpdateApps.enable = true;
@@ -51,9 +49,12 @@ in
     };
   # to be able to send mails from the admin panel
   # Test mails can be send via administration interface in the menu section "Basic settings". 
-   extraOptions = {
+    settings = {
      mail_smtpmode = "sendmail";
      mail_sendmailmode = "pipe";
+     overwriteProtocol = "https";
+     logLevel = 0;
+
    };
   };
 

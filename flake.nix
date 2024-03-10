@@ -21,7 +21,7 @@
   };
 
   inputs = {
-   # todo add nixified.ai too
+    # todo add nixified.ai too
     localai = {
       url = "github:ck3d/nix-local-ai";
       # inputs.nixpkgs.follows = "nixpkgs";
@@ -39,20 +39,20 @@
     nixos-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nixos-stable.url = "github:nixos/nixpkgs/nixos-23.11";
     # nixos-stable-custom.url = "github:teto/nixpkgs?ref=teto/nixos-23.11";
-    nixpkgs-for-hls.url  = "github:nixos/nixpkgs?rev=612f97239e2cc474c13c9dafa0df378058c5ad8d";
+    nixpkgs-for-hls.url = "github:nixos/nixpkgs?rev=612f97239e2cc474c13c9dafa0df378058c5ad8d";
     nix-search-cli = {
       url = "github:peterldowns/nix-search-cli";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     rocks-nvim = {
-     url = "github:nvim-neorocks/rocks.nvim";
-     inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:nvim-neorocks/rocks.nvim";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     firefox2nix.url = "git+https://git.sr.ht/~rycee/mozilla-addons-to-nix";
     anyrun = {
-     url = "github:Kirottu/anyrun";
-     inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:Kirottu/anyrun";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # ironbar = {
@@ -63,8 +63,8 @@
     vocage.url = "git+https://git.sr.ht/~teto/vocage?ref=flake";
 
     deploy-rs = {
-     url = "github:serokell/deploy-rs";
-     inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:serokell/deploy-rs";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     flake-utils.url = "github:numtide/flake-utils";
@@ -74,17 +74,17 @@
       flake = false;
     };
     fenix = {
-     # used for nightly rust devtools
-     # for git-repo-manager du coup
-     url= "github:nix-community/fenix";
-     inputs."nixpkgs".follows = "nixpkgs"; 
+      # used for nightly rust devtools
+      # for git-repo-manager du coup
+      url = "github:nix-community/fenix";
+      inputs."nixpkgs".follows = "nixpkgs";
     };
 
     # peerix.url = "github:cid-chan/peerix";
     # mptcp-flake.url = "github:teto/mptcp-flake/fix-flake";
     mujmap = {
-     url = "github:elizagamedev/mujmap";
-     # inputs.nixpkgs.follows = "nixpkgs"; # breaks build
+      url = "github:elizagamedev/mujmap";
+      # inputs.nixpkgs.follows = "nixpkgs"; # breaks build
     };
     rofi-hoogle.url = "github:teto/rofi-hoogle/fixup";
 
@@ -99,13 +99,13 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nur.url = "github:nix-community/NUR";
     nixpkgs-wayland.url = "github:nix-community/nixpkgs-wayland";
-    purebred = { 
+    purebred = {
       url = "github:purebred-mua/purebred";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # poetry.url = "github:nix-community/poetry2nix";
     nix-update = {
-     url = "github:Mic92/nix-update";
+      url = "github:Mic92/nix-update";
     };
     nix-index-cache.url = "github:Mic92/nix-index-database";
 
@@ -122,7 +122,10 @@
     # c8296214151883ce27036be74d22d04953418cf4
 
     # TODO this should not be necessary anymore ? just look at doctor ?
-    nova-ci.url = "git+ssh://git@git.novadiscovery.net/infra/ci-runner";
+    nova-ci = {
+      url = "git+ssh://git@git.novadiscovery.net/infra/ci-runner";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     neovim = {
       # pinned because of https://github.com/neovim/neovim/issues/25086
@@ -146,8 +149,8 @@
     };
 
     sops-nix = {
-     url = "github:Mic92/sops-nix";
-     inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # TODO extend vim plugins from this overlay
@@ -190,33 +193,39 @@
             # self.inputs.nix.overlays.default
           ];
           config = {
-           # on desktop
-           cudaSupport = true; 
-           checkMeta = false;
-           # showDerivationWarnings = ["maintainerless"];
-           allowUnfree = true;
+            # on desktop
+            cudaSupport = true;
+            checkMeta = false;
+            # showDerivationWarnings = ["maintainerless"];
+            # permittedInsecurePackages = [
+            #   "nix"
+            # ];
 
-              # this list makes me wanna vomit (except steam maybe because they do good for linux),
-              # and sublime because guy has to eat
-              allowUnfreePredicate = pkg: builtins.elem (nixpkgs.${system}.legacyPackages.lib.getName pkg) [
-               "codeium"
-               "cudatoolkit"
-               "Oracle_VM_VirtualBox_Extension_Pack"
-               "ec2-api-tools"
-               "jiten"  # japanese software recognition tool / use sudachi instead
-               "google-chrome"
-               "slack"
-               "steam"
-               "steam-original"
-               "steam-runtime"
-               "steam-run"
-               "sublimetext3"
-               "vscode"
-               "vscode-extension-ms-vsliveshare-vsliveshare"
-               "xmind"
-               "zoom"
-             ];
-         };
+            # allowUnfree = true;
+            # this list makes me wanna vomit (except steam maybe because they do good for linux),
+            # and sublime because guy has to eat
+            allowUnfreePredicate = pkg: builtins.elem (nixpkgs.legacyPackages.${system}.lib.getName pkg) [
+              "Oracle_VM_VirtualBox_Extension_Pack"
+              "codeium"
+              "cudatoolkit"
+              "nvidia-x11"
+              "nvidia-settings"
+              "ec2-api-tools"
+              "jiten" # japanese software recognition tool / use sudachi instead
+              "google-chrome"
+              "slack"
+              "steam"
+              "steam-original"
+              "steam-runtime"
+              "steam-run"
+              "sublimetext3"
+              "vault"
+              "vscode"
+              "vscode-extension-ms-vsliveshare-vsliveshare"
+              "xmind"
+              "zoom"
+            ];
+          };
         };
 
       myPkgs = pkgImport self.inputs.nixpkgs;
@@ -242,7 +251,7 @@
           ./hm/modules/xdg.nix
 
           ./hm/profiles/neovim.nix
-          ({...}: { 
+          ({ ... }: {
             home.stateVersion = "23.11";
 
           })
@@ -257,18 +266,16 @@
         };
 
         home-manager.users = {
-         root = {
-          imports = [
-            # ../../hm/profiles/neovim.nix
+          root = {
+            imports = [
+              # ../../hm/profiles/neovim.nix
               # TODO imports
-             ];
-           };
-
-          teto = {
-
+            ];
           };
-         };
-       };
+
+          teto = { };
+        };
+      };
 
     in
     flake-utils.lib.eachSystem [ "x86_64-linux" ]
@@ -293,11 +300,11 @@
                 self.inputs.firefox2nix.packages.${system}.default
               ];
 
-             # TODO set SOPS_A
-             shellHook = ''
-              export SOPS_AGE_KEY_FILE=$PWD/secrets/age.key
-              echo "Run just ..."
-             '';
+              # TODO set SOPS_A
+              shellHook = ''
+                export SOPS_AGE_KEY_FILE=$PWD/secrets/age.key
+                echo "Run just ..."
+              '';
             };
 
             inherit (unstablePkgs) nhs92 nhs94 nhs96;
@@ -312,12 +319,12 @@
             nvim = self.nixosConfigurations.desktop.config.home-manager.users.teto.programs.neovim.finalPackage;
 
 
-            inherit (myPkgs) sway-scratchpad ;
+            inherit (myPkgs) sway-scratchpad;
 
             nvim-unwrapped = myPkgs.neovim-unwrapped;
 
-  # myPackage = flakeInputs.neovim.packages."${pkgs.system}".neovim;
- 
+            # myPackage = flakeInputs.neovim.packages."${pkgs.system}".neovim;
+
             treefmt-with-config = treefmt-nix.lib.mkWrapper nixpkgs.legacyPackages.x86_64-linux {
               # Used to find the project root
               projectRootFile = ".git/config";
@@ -336,10 +343,10 @@
 
             # TODO this exists in ml-tests, let's upstream some of the changes first
             # jupyter4ihaskell = myPkgs.jupyter-teto;
-             # jupyter-teto = python3.withPackages(ps: [
-             #  ps.notebook
-             #  ps.jupyter-client
-             # ]);
+            # jupyter-teto = python3.withPackages(ps: [
+            #  ps.notebook
+            #  ps.jupyter-client
+            # ]);
 
             inherit (unstablePkgs) nhs92 nhs94 nhs96;
 
@@ -351,29 +358,29 @@
       nixosConfigurations =
         let
           system = "x86_64-linux";
-           novaModule = ({ flakeInputs, ... }: {
+          novaModule = ({ flakeInputs, ... }: {
+            imports = [
+              ./nixos/profiles/nova/rstudio-server.nix
+
+            ];
+            home-manager.extraSpecialArgs = {
+              inherit secrets;
+              withSecrets = true;
+              # flakeInputs = self.inputs;
+            };
+
+            home-manager.users.teto = {
               imports = [
-                 ./nixos/profiles/nova/rstudio-server.nix
-
-              ];
-              home-manager.extraSpecialArgs = {
-                inherit secrets;
-                withSecrets = true;
-                # flakeInputs = self.inputs;
-              };
-
-              home-manager.users.teto = {
-               imports = [
                 ./hosts/desktop/teto/ssh-config.nix
                 ./hosts/desktop/teto/bash.nix
-                ./hm/profiles/nova/ssh-config.nix 
+                ./hm/profiles/nova/ssh-config.nix
 
-                 flakeInputs.nova.hmProfiles.standard
-                 flakeInputs.nova.hmProfiles.dev
-                 flakeInputs.nova.hmProfiles.devops
-               ];
-              };
-            });
+                flakeInputs.nova.hmProfiles.standard
+                flakeInputs.nova.hmProfiles.dev
+                flakeInputs.nova.hmProfiles.devops
+              ];
+            };
+          });
 
         in
         rec {
@@ -395,7 +402,7 @@
 
             specialArgs = {
               inherit secrets;
-               withSecrets = true;
+              withSecrets = true;
 
               flakeInputs = self.inputs;
             };
@@ -408,7 +415,7 @@
 
             specialArgs = {
               withSecrets = false;
-              secrets = {};
+              secrets = { };
               flakeInputs = self.inputs;
             };
 
@@ -431,9 +438,9 @@
 
           # see https://determinate.systems/posts/extending-nixos-configurations
           mcoudron = laptop.extendModules {
-           modules = [
-            novaModule
-           ];
+            modules = [
+              novaModule
+            ];
 
             specialArgs = {
               hostname = "mcoudron";
@@ -472,7 +479,7 @@
             inherit system;
             pkgs = myPkgs;
             specialArgs = {
-              secrets = {};
+              secrets = { };
               withSecrets = false;
               inherit (self) inputs;
             };
@@ -499,7 +506,7 @@
 
           # nix build .#nixosConfigurations.teapot.config.system.build.toplevel
           jedha = desktop.extendModules ({
-           # TODO add nova inputs
+            # TODO add nova inputs
             specialArgs = {
               inherit secrets;
               inherit (self) inputs;
@@ -508,19 +515,19 @@
             };
 
             modules = [
-               novaModule
+              novaModule
 
             ];
           });
 
-          test = router.extendModules({
-           modules = [
-             hm.nixosModules.home-manager
-             # ./hosts/desktop/teto/neovim.nix
-             ./nixos/profiles/neovim.nix
+          test = router.extendModules ({
+            modules = [
+              hm.nixosModules.home-manager
+              # ./hosts/desktop/teto/neovim.nix
+              ./nixos/profiles/neovim.nix
 
 
-           ];
+            ];
 
           });
         };
@@ -536,10 +543,10 @@
         in
         {
           nixosModules = modulesFromDir ./modules;
-         } // {
+        } // {
 
           default-hm = hm-common;
-         }
+        }
       ;
 
       templates = {
@@ -564,31 +571,33 @@
 
       overlays = {
 
-       autoupdating = final: prev: let 
-        llama-cpp-matt = (final.llama-cpp.override {
-          cudaSupport = true;
-          blasSupport = false; 
-          rocmSupport = false;
-          openclSupport = false;
-          # stdenv = prev.gcc11Stdenv;
-         });
+        autoupdating = final: prev:
+          let
+            llama-cpp-matt = (final.llama-cpp.override {
+              cudaSupport = true;
+              blasSupport = false;
+              rocmSupport = false;
+              openclSupport = false;
+              # stdenv = prev.gcc11Stdenv;
+            });
 
-       in {
+          in
+          {
 
-         # see https://github.com/NixOS/nixpkgs/pull/257760
-         ollamagpu = final.ollama.override { llama-cpp = llama-cpp-matt;         };
-          mujmap-unstable = self.inputs.mujmap.packages.x86_64-linux.mujmap;
-          mujmap = final.mujmap-unstable; # needed in HM module
-          # neovide = prev.neovide.overrideAttrs(oa: {
-          #  src = self.inputs.neovide;
-          # });
-          firefoxAddonsTeto  = import ./overlays/firefox/generated.nix {
-            inherit (prev) buildFirefoxXpiAddon fetchurl lib stdenv;
+            # see https://github.com/NixOS/nixpkgs/pull/257760
+            ollamagpu = final.ollama.override { llama-cpp = llama-cpp-matt; };
+            mujmap-unstable = self.inputs.mujmap.packages.x86_64-linux.mujmap;
+            mujmap = final.mujmap-unstable; # needed in HM module
+            # neovide = prev.neovide.overrideAttrs(oa: {
+            #  src = self.inputs.neovide;
+            # });
+            firefoxAddonsTeto = import ./overlays/firefox/generated.nix {
+              inherit (prev) buildFirefoxXpiAddon fetchurl lib stdenv;
+            };
+            git-repo-manager = prev.callPackage ./pkgs/by-name/gi/git-repo-manager/package.nix {
+              fenix = self.inputs.fenix;
+            };
           };
-          git-repo-manager = prev.callPackage ./pkgs/by-name/gi/git-repo-manager/package.nix {
-            fenix = self.inputs.fenix;
-          };
-        };
 
         # TODO
         # firefox = import ./overlays/firefox/addons.nix;
@@ -605,8 +614,8 @@
         # nova-ci = self.inputs.nova-ci.overlays.default;
 
       }
-      # just for one specific host
-      # // nova.overlays
+        # just for one specific host
+        # // nova.overlays
       ;
 
       formatter.x86_64-linux = self.inputs.treefmt-nix.lib.mkWrapper
@@ -648,8 +657,9 @@
               # sshOpts = [ "-F" "ssh_config" ];
               sshUser = "teto";
               sshOpts = [
-               "-i" "~/.ssh/id_rsa" 
-               # "-p${toString secrets.router.sshPort}"
+                "-i"
+                "~/.ssh/id_rsa"
+                # "-p${toString secrets.router.sshPort}"
               ];
 
             };
@@ -657,15 +667,16 @@
             neotokyo = genNode ({ name = "neotokyo"; hostname = secrets.jakku.hostname; }) // {
               sshOpts = [ "-t" ];
 
-             } // {
+            } // {
               # user = "teto";
               sshUser = "teto";
               sshOpts = [
-               "-i" "~/.ssh/id_rsa" 
-               # "-p${toString secrets.router.sshPort}"
+                "-i"
+                "~/.ssh/id_rsa"
+                # "-p${toString secrets.router.sshPort}"
               ];
 
-             };
+            };
           };
       };
 
