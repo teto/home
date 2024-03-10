@@ -1,11 +1,11 @@
 {...}:
 {
-  imports = [
-    ../../nixos/profiles/redis.nix
+  # imports = [
+  #   ../../nixos/profiles/redis.nix
 
-  ];
+  # ];
 
-  services.redis.servers.test = {
+  servers.test = {
    # bind = null; # bind to all interfaces
    # bind can accept several IPs
    # https://stackoverflow.com/questions/19091087/open-redis-port-for-remote-connections

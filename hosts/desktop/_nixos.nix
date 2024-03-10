@@ -1,7 +1,15 @@
 { config, flakeInputs, lib, pkgs, ... }:
 let 
   module = { pkgs, ... }@args: flakeInputs.haumea.lib.load {
-    src = ./.;
+   src = flakeInputs.nix-filter {
+     root = ./.;
+     exclude = [
+       "teto"
+       "root"
+     ];
+    };
+    # loader = inputs: path: 
+    #  builtins.trace path path;
     inputs = args // {
       inputs = flakeInputs;
     };
@@ -11,21 +19,22 @@ let
 in
 {
   imports = [
-   module # loaded by haumea
-    ./hardware.nix
-    ./sshd.nix
-    ./sops.nix
+    module # loaded by haumea
+
+    ./_hardware.nix
+    # ./sops.nix
     ./teto/sops.nix
 
     # ./tailscale.nix  # TODO test if it's loaded by haumea
-    ./docker.nix
+    # ./docker.nix
 
     # to test core-ws
-    ./postgresql.nix
-    ./redis.nix
     ./teto/restic.nix
 
-
+    # TODO moved from their
+    ../../nixos/profiles/nextcloud.nix
+    ../../nixos/profiles/postgresql.nix
+    ../../nixos/profiles/redis.nix
     # ../../nixos/profiles/immich.nix
 
     # this is only to test the new config
@@ -35,6 +44,8 @@ in
     # todo renommer en workstation
 
     ../config-all.nix
+    # ../../nixos/profiles/gitlab-runner.nix
+    ../../nixos/profiles/docker-daemon.nix
     ../../nixos/profiles/desktop.nix
     ../../nixos/profiles/nix-daemon.nix
     # ../../nixos/profiles/experimental.nix
@@ -55,11 +66,27 @@ in
     ../../nixos/profiles/distributedBuilds.nix
   ];
 
-  home-manager.users.root = {
+  home-manager.users = 
+   # let
+   # hmRootModule = { pkgs, ... }@args: flakeInputs.haumea.lib.load {
+   #  src = ./.;
+   #  inputs = args // {
+   #    inputs = flakeInputs;
+   #  };
+   #  # transformer =  [
+   #  #  (x: hoistAttrs x )
+   #    # (x: )
+   #  # ];
+   #   # flakeInputs.haumea.lib.transformers.liftDefault;
+  # };
+  # in 
+  {
+   root = {
     imports = [
       ./root/ssh-config.nix
       # ../../hm/profiles/neovim.nix
     ];
+   };
   };
 
   # TODO use from flake or from unstable
@@ -68,7 +95,7 @@ in
   home-manager.users.teto = {
     # TODO it should load the whole folder
     imports = [
-      ./teto/home.nix
+      ./teto/default.nix
       # breaks build: doesnt like the "activation-script"
       # nova.hmConfigurations.dev
     ];

@@ -1,9 +1,8 @@
 { config, secrets, flakeInputs, lib, pkgs, ... }:
 {
-  imports = [
-     ../../nixos/profiles/nextcloud.nix
-  ];
-  services.nextcloud = { 
+  # imports = [
+  #    ../../nixos/profiles/nextcloud.nix
+  # ];
     hostName = "localhost";
     https = false;
 
@@ -26,8 +25,7 @@
       dbtype = "pgsql";
       # services.postgresql
       # dbport = config.services.postgresql.port;
-      dbport = 5555;
-    # port = 5555;
+      dbhost = "localhost:5555";
 
       # Further forces Nextcloud to use HTTPS
       # overwriteProtocol = "https";
@@ -38,8 +36,6 @@
      inherit memories;
      inherit previewgenerator;
     };
-
-  };
 
 
   # Creating Nextcloud users and configure mail adresses

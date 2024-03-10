@@ -1,7 +1,6 @@
 { config, pkgs, lib, ... }:
 {
 
-  services.openssh = {
     enable = true;
     # kinda experimental
     banner = "If you are not me, log off please";
@@ -86,6 +85,5 @@
 	 # AuthorizedKeysCommandUser toto
 	# '';
 
-  };
 }
 
