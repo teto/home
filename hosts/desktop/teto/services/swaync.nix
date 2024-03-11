@@ -3,11 +3,11 @@
 {
 
  imports = [
-   ../../../hm/profiles/swaync.nix
+   ../../../../hm/profiles/swaync.nix
  ];
 
  services.swaync = {
-  enable = true;
+   enable = true;
  };
 
 }

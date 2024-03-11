@@ -20,15 +20,17 @@ in
     # flakeInputs.ironbar.homeManagerModules.default
 
     ./calendars.nix
-    ./git.nix
-    ./helix.nix
+    ./programs/git.nix
+    ./programs/helix.nix
     ./ia.nix
     ./neovim.nix
     ./ssh-config.nix
     ./sway.nix
-    ./swaync.nix
-    ./yazi.nix
-    ./zsh.nix
+    ./services/swaync.nix
+    ./programs/yazi.nix
+    ./programs/khal.nix
+
+    ./programs/zsh.nix
 
     # ../../../hm/profiles/experimental.nix
 
@@ -50,11 +52,14 @@ in
     ../../../hm/profiles/extra.nix
       # custom modules
     ../../../hm/profiles/emacs.nix
+    ../../../hm/profiles/zsh.nix
     # ../../hm/profiles/weechat.nix
    ] ++ lib.optionals withSecrets [
     ./mail.nix
    ]
 ;
+
+  xdg.configFile."zsh/zshrc.generated".source = ../../../config/zsh/zshrc;
 
   programs.pazi = {
     enable = false;
@@ -63,7 +68,7 @@ in
 
   # seulemt pour X
   # programs.feh.enable = true;
-
+  # for programs not merged yet
   home.packages = with pkgs; [
     # signal-desktop # installe a la main
     # gnome.gnome-maps
@@ -73,6 +78,11 @@ in
     moar # test as pager
 
     # bridge-utils# pour  brctl
+   # ironbar 
+	# haxe # to test https://neovim.discourse.group/t/presenting-haxe-neovim-a-new-toolchain-to-build-neovim-plugins/3720
+    # meli  # broken jmap mailreader
+
+    fre
   ];
 
   services.nextcloud-client.enable = false;
@@ -81,6 +91,8 @@ in
    musicDirectory = "/mnt/ntfs/Musique";
   };
 
+
+  xdg.configFile."starship.toml".enable = false;
 
   home.sessionVariables = {
    # TODO create symlink ?

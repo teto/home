@@ -5,5 +5,3 @@
    # package = flakeInputs.yazi.packages.${pkgs.system}.yazi;
    };
  }
-
-
