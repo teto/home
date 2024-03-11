@@ -8,7 +8,6 @@ in
 {
 
   services.nextcloud = {
-    enable = true;
 
     # Use HTTPS for links
     # https = true;
@@ -62,7 +61,7 @@ in
   networking.firewall.allowedTCPPorts = [ 80 443 ];
 
 
-  sops.secrets.${nextcloudAdminPasswordSopsPath} = {
+  sops.secrets.${nextcloudAdminPasswordSopsPath} = lib.mkIf config.services.nextcloud.enable {
     mode = "0440";
     owner = config.users.users.nextcloud.name;
     group = config.users.users.nextcloud.group;

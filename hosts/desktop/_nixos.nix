@@ -72,38 +72,41 @@ in
   ];
 
   home-manager.users = 
-   # let
-   # hmRootModule = { pkgs, ... }@args: flakeInputs.haumea.lib.load {
-   #  src = ./.;
-   #  inputs = args // {
-   #    inputs = flakeInputs;
-   #  };
-   #  # transformer =  [
-   #  #  (x: hoistAttrs x )
-   #    # (x: )
-   #  # ];
-   #   # flakeInputs.haumea.lib.transformers.liftDefault;
-  # };
-  # in 
+   let
+   hmRootModule = { pkgs, ... }@args: flakeInputs.haumea.lib.load {
+    src = ./root;
+    inputs = args // {
+      inputs = flakeInputs;
+    };
+    transformer =  [
+          flakeInputs.haumea.lib.transformers.liftDefault
+
+    #  (x: hoistAttrs x )
+      # (x: )
+    ];
+     # flakeInputs.haumea.lib.transformers.liftDefault;
+  };
+  in 
   {
    root = {
     imports = [
-      ./root/ssh-config.nix
+      hmRootModule
+      # ./root/ssh-config.nix
       # ../../hm/profiles/neovim.nix
     ];
    };
-  };
 
-  # TODO use from flake or from unstable
-  # services.opensnitch-ui.enable
-  # ./hm/profiles/gaming.nix
-  home-manager.users.teto = {
-    # TODO it should load the whole folder
-    imports = [
-      ./teto/default.nix
-      # breaks build: doesnt like the "activation-script"
-      # nova.hmConfigurations.dev
-    ];
+   # TODO use from flake or from unstable
+   # services.opensnitch-ui.enable
+   # ./hm/profiles/gaming.nix
+   teto = {
+     # TODO it should load the whole folder
+     imports = [
+       ./teto/default.nix
+       # breaks build: doesnt like the "activation-script"
+       # nova.hmConfigurations.dev
+     ];
+   };
   };
 
   # for testing

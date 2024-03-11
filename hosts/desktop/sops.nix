@@ -10,4 +10,32 @@
   # sops.age.keyFile = "secrets/age.key";
   age.keyFile = "/home/teto/home/secrets/age.key";
 
+  # By default secrets are owned by root:root. Furthermore the parent directory /run/secrets is only owned by root and the keys group has read access to it:
+  # This is the actual specification of the secrets.
+  secrets.github_token = {
+    mode = "400";
+    owner = config.users.users.teto.name;
+    group = config.users.users.teto.group;
+
+  };
+
+  secrets."gitlab/apiToken" = {
+    mode = "400";
+    owner = config.users.users.teto.name;
+    group = config.users.users.teto.group;
+
+  };
+
+  # secrets.huggingfaceToken = {
+  #   mode = "0440";
+  #   # TODO only readable by gitlab
+  #   owner = config.users.users.teto.name;
+  #   group = config.users.users.nobody.group;
+  # };
+
+  secrets.nix_extra_config = {
+    mode = "400";
+    owner = config.users.users.teto.name;
+    group = config.users.users.teto.group;
+  };
 }

@@ -19,17 +19,18 @@
 #               "{calendar-color}{cancelled}{start-end-time-style} {title}{repeat-symbol}{reset}";
 #           };
 #    };
+
+
+ # spec at https://github.com/pimutils/khal/blob/master/khal/settings/khal.spec
   settings = {
 
-   default_calendar = "fastmail";
-   default_event_duration = "30mn";
-   enable_mouse = true;
-   highlight_event_days = true;
-   highlight_days = {
-    default_color = "red";
-    color = "#ff0000";
-    method = "bg"; 
-    };
+   default = {
+     default_calendar = "fastmail";
+     default_event_duration = "30m";
+     enable_mouse = true;
+     highlight_event_days = true;
+     };
+
 
     keybindings = {
 
@@ -41,9 +42,16 @@
      # agenda_day_format = "{bold}{name}, {date-long}{reset}";
      event_view_always_visible = true;
      # event_view_weighting = 1;
-     frame = true;
+     # not truee
+     frame = 1;
 
     };
+
+     highlight_days = {
+      default_color = "#00ff00";
+      color = "#ff0000";
+      method = "bg"; 
+      };
   };
    # extraConfig = ''
    #  '';

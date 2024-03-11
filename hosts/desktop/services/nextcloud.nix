@@ -1,5 +1,6 @@
 { config, secrets, flakeInputs, lib, pkgs, ... }:
 {
+  enable = false;
   # imports = [
   #    ../../nixos/profiles/nextcloud.nix
   # ];
