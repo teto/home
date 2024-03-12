@@ -1,10 +1,13 @@
-initdb
 pg_ctl start
 
 POSTGRESQL_CONNECTION="$(pg_tmp)"
 psql "$POSTGRESQL_CONNECTION" --no-psqlrc 
 
-* 
+* Initialize a DB
+
+  initdb
+
+unix_socket_directories = '/home/teto/nova/jinko/core-platform-db'	# comma-separated list of directories
 
 \conninfo
 
