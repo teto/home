@@ -1,6 +1,10 @@
 { config, lib, pkgs, ... }:
 {
 
+  include = [
+    ../../../hm/profiles/waybar.nix
+  ];
+
   programs.waybar = let 
 
    # TODO make sure it has jq in PATH
@@ -14,7 +18,6 @@
 
   in {
    enable = true;
-   systemd.enable = true;
    settings = {
      mainBar = {
        layer = "top";
@@ -190,7 +193,7 @@
          # TODO rerun mbsync + notmuch etc
          # TODO read
          # exec-on-event = false;
-         on-click-right = "systemctl start mbsync.service";
+         on-click-right = "systemctl start --user mbsync.service";
          exec = lib.getExe notmuchChecker;
 
          # exec = pkgs.writeShellScript "hello-from-waybar" ''
@@ -200,4 +203,8 @@
      };
     };
   };
+
+  # TODO flaemshot
+  # Unit.PartOf = [ "tray.target" ];
+  # Install.WantedBy = [ "tray.target" ];
  }

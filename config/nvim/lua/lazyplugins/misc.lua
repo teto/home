@@ -13,6 +13,7 @@ return {
  },
  {
 
+  -- trying to show all warnings/errors
   -- require("workspace-diagnostics").populate_workspace_diagnostics(client, bufnr)
   'artemave/workspace-diagnostics.nvim'
  },
@@ -34,8 +35,10 @@ return {
  -- }, 
 {
  -- neotests has extensions for haskell and playwright
+ -- :Neotest summary
   "nvim-neotest/neotest",
   dependencies = {
+   "nvim-neotest/nvim-nio",
     -- "nvim-lua/plenary.nvim",
     -- "nvim-treesitter/nvim-treesitter",
     "antoinemadec/FixCursorHold.nvim"
@@ -97,8 +100,19 @@ return {
  --		}
  --	end
  --}
- -- a zenity picker for several stuff (colors etc)
- -- {'DougBeney/pickachu', lazy = true},
+ { 'ziontee113/color-picker.nvim'
+ -- use with PickColor, o to toggle serliazier, hjkl to change values
+ ,  config = function()
+        require("color-picker")
+    end,
+ },
+ -- {
+ -- -- a zenity picker for several stuff (colors etc)
+ -- -- lazy = true
+ --  'DougBeney/pickachu', 
+ --  cmd= "Pickachu",
+ --  -- :Pick
+ -- },
 
  -- only for dash it seems
  -- Install via nix
@@ -172,6 +186,9 @@ return {
 -- },
 -- default config
  { 'letieu/hacker.nvim',
+
+
+ -- :HackFollow or :HackAuto
   config = function ()
     require("hacker").setup {
    content = [[ Code want to show.... ]], -- The code snippet that show when typing
@@ -209,16 +226,15 @@ return {
 --   dependencies = { {'nvim-tree/nvim-web-devicons'}}
 -- },
  'cameron-wags/rainbow_csv.nvim',
- 'gennaro-tedesco/nvim-peekup',
+ 'gennaro-tedesco/nvim-peekup', -- to see the content of the various buffers
  'rhysd/vim-gfm-syntax', -- markdown syntax compatible with Github's
  { 'eandrju/cellular-automaton.nvim', lazy = true }, -- :CellularAutomaton make_it_rain
  { 'bogado/file-line', branch = 'main' }, -- to open a file at a specific line
  'darkonig/nvim-terminal.lua' -- , '~/neovim/nvim-terminal.lua' -- to display ANSI colors
  , -- to display ANSI colors
  'chrisbra/vim-diff-enhanced',
- 'linty-org/readline.nvim',
  { 'rareitems/anki.nvim', lazy = true }, -- to create anki cards
- 'nvim-zh/colorful-winsep.nvim',
+ 'nvim-zh/colorful-winsep.nvim', -- to have a colored separator around the active window
  -- :Nvimesweeper / :h nvimesweeper
  { 'seandewar/nvimesweeper', lazy = true },
  --  '~/pdf-scribe.nvim'  -- to annotate pdf files from nvim :PdfScribeInit
@@ -311,14 +327,14 @@ return {
  -- },
  {
   "giusgad/pets.nvim",
-  cond = not vim.fn.has 'gui_running' == 1,
+  cond = not vim.fn.has 'gui_running' == 1, -- fails in neovide
   dependencies = { "MunifTanjim/nui.nvim", "edluffy/hologram.nvim" },
   config = function ()
    require("pets").setup({})
   end
 },
  { 'rhysd/git-messenger.vim', cmd = 'GitMessenger' }, -- to show git message :GitMessenger
- { 'tweekmonster/nvim-api-viewer', cmd = 'NvimAPI' },
+ -- { 'tweekmonster/nvim-api-viewer', cmd = 'NvimAPI' },
  -- 'antoinemadec/openrgb.nvim',
  -- 'vim-denops/denops.vim',
  -- to help with nvim-hs

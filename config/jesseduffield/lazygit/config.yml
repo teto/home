@@ -129,7 +129,7 @@ keybinding:
     commits:
         squashDown: s
         renameCommit: r
-        renameCommitWithEditor: R
+        renameCommitWithEditor: r
         viewResetOptions: g
         markCommitAsFixup: f
         createFixupCommit: F
@@ -138,7 +138,7 @@ keybinding:
         moveUpCommit: <c-k>
         amendToCommit: A
         pickCommit: p
-        revertCommit: t
+        revertCommit: R
         cherryPickCopy: c
         cherryPickCopyRange: C
         pasteCommits: v

@@ -3,19 +3,13 @@ let
   filter-cmake = builtins.filterSource (p: t: prev.lib.cleanSourceFilter p t && baseNameOf p != "build");
 
   srcSockDiag = builtins.fetchGit {
-    url = https://github.com/teto/wireshark;
+    url = "https://github.com/teto/wireshark";
     ref = "sock_diag";
     # rev    = "45efb048808d794f53cc431864c9ddfa99952b49";
     # sha256 = "1i0gqf8n8fsz3sqzkhcg05pf0krngnm335pnnlp94yzdkzzg3jyr";
   };
 
 
-  # write in .nvimrc
-  nvimrc = prev.pkgs.writeText "_nvimrc" ''
-    " to deal with cmake build folder
-    let &makeprg="make -C build"
-  '';
-  # add a nix with cquery ?
 in
 {
 

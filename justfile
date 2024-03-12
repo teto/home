@@ -9,17 +9,19 @@
 BLOG_FOLDER := "${HOME}/blog"
 
 
+backup-photos \
+  $AWS_ACCESS_KEY_ID=`pass show self-hosting/backblaze-restic-backup-key/username` $AWS_SECRET_ACCESS_KEY=`pass show self-hosting/backblaze-restic-backup-key/password` :
+  # le --password-command c'est RESTIC_PASSWORD_FILE
+  restic backup ~/Nextcloud --repository-file=/run/secrets/restic/teto-bucket
 
 
-backup-photos:
-  # or use pass/sops to load secrets ?
-  # source restic.env
-  # 
-  # $(pass show self-hosting/backblaze\ restic-backup-key | tail -n1)
-  # TODO try rustic ?
-  restic backup ~/Nextcloud --repository-file=/run/secrets/restic/teto-bucket \
-   --password-command="pass show self-hosting/backblaze-restic-backup-key/password"
+# Generate system-specific systemd credentials such that they dont appear on the git repo
+systemd-credentials:
+  # systemd-ask-password -n | systemd-creds encrypt --name=foo-secret -p - - 
+  systemd-creds encrypt --name=foo-secret -p INPUT OUTPUT
 
+update-kubeconfig: # Update
+  aws eks update-kubeconfig --name jk-dev --profile nova-sandbox --user-alias jk-dev
 
 # regen fortunes (not necessary with some fortunes version ?!)
 # strfile not necessarilyu in PATH !
@@ -29,8 +31,8 @@ fortunes:
   strfile -c % fortunes/jap.txt ~/.local/share/matt/jap.txt.dat   
 
 # overlays/firefox/addons.nix:
-firefox:
-  mozilla-addons-to-nix overlays/firefox/addons.json overlays/firefox/addons.nix
+firefox-addons:
+  mozilla-addons-to-nix overlays/firefox/addons.json overlays/firefox/generated.nix
 
 lint: lint-nix lint-lua
 
@@ -47,12 +49,13 @@ deploy-router:
 	# deploy .\#router  -s  --auto-rollback false --magic-rollback false
 	deploy .\#router  -s 
 
-[confirm("prompt")]
+# [confirm("prompt")]
 deploy-neotokyo:
 	# - we need interactivty to enter password see 
 	#   https://github.com/serokell/deploy-rs/issues/78#issuecomment-1367467086
 	# --ssh-opts="-t" --magic-rollback false
-	deploy .\#neotokyo  -s 
+	deploy '.#neotokyo' -s --interactive-sudo=true
+	# -s 
 
 # regenerate my email contacts
 # (to speed up alot autocompletion)
@@ -71,12 +74,14 @@ local:
 	stow -t "$(XDG_DATA_HOME)" local
 	mkdir -p "{{data_directory()}}/fzf-history" {{data_directory()}}/newsbeuter
 
-home:
+# linkdf -h
+
+home: 
 	stow --dotfiles -t ${HOME} home
 
 # [confirm("prompt")]
 routerIso:
-		nix build .\#nixosConfigurations.routerIso.config.system.build.isoImage
+	nix build .\#nixosConfigurations.routerIso.config.system.build.isoImage
 
 cache:
 	#mkdir -p $(shell echo "${XDG_CACHE_HOME:-$HOME/.cache}/less")
@@ -87,6 +92,7 @@ fonts:
 	echo "Regenerating cache"
 	echo "list fonts with fc-list"
 	fc-cache -vf
+
 
 # xdg:
 # Example: xdg-mime default qutebrowser.desktop text/html

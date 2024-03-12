@@ -4,12 +4,6 @@
   #   enable = true;
   # };
 
-  programs.aerc = {
-    enable = true;
-    # .enable = true;
-    extraConfig.general.unsafe-accounts-conf = true;
-  };
-
   programs.zsh = {
     mcfly.enable = true;
   };

@@ -1,6 +1,6 @@
 {
     "Nix module": {
-        "prefix": "nixmod",
+        "prefix": "nixmod2",
         "body": [
 		  "{ config, lib, pkgs, ... }:",
 		  "{",

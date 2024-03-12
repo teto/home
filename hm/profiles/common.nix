@@ -4,7 +4,7 @@
 
   imports = [
 
-    ./shell.nix
+    ./bash.nix
     ./git.nix
     ./zsh.nix
 
@@ -28,6 +28,7 @@
     strace
     tailspin  #  a log viewer based on less ("spin" or "tsspin" is the executable)
     tig
+    tree
   ];
 
   # works only because TIGRC_USER is set
@@ -38,48 +39,15 @@
     # source ${pkgs.tig}/tig/contrib/large-repo.tigrc
     source ${config.xdg.configHome}/tig/custom.tigrc
   '';
-  # lib.concatStrings [
-  #   (builtins.readFile vimTigrc)
-  #   # TODO reestablish when the package gets updated
-  #   # (builtins.readFile "${pkgs.tig}/tig/contrib/large-repo.tigrc")
-  #   (builtins.readFile ../large-repo.tigrc)
-  # ];
 
-
-  home.file.".gdbinit".text = ''
-    # ../config/gdbinit_simple;
-    # gdb doesn't accept environment variable except via python
-    source ${config.xdg.configHome}/gdb/gdbinit_simple
-    set history filename ${config.xdg.cacheHome}/gdb_history
-  '';
 
   # useful to prevent some problems with nix
   # https://github.com/commercialhaskell/stack/issues/2358
   # home.file.".stack/config.yaml".source = ../home/stack.yaml;
 
-  # - https://github.com/carnager/rofi-scripts.git
-  # https://github.com/carnager/buku_run
-  home.sessionVariables = {
-    # RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/rg.conf";
-    ZDOTDIR = "$XDG_CONFIG_HOME/zsh";
-    INPUTRC = "$XDG_CONFIG_HOME/inputrc";
-
-    # TODO package these instead now these are submoudles of dotfiles To remove
-    # VIFM = "$XDG_CONFIG_HOME/vifm";
-    WWW_HOME = "$XDG_CONFIG_HOME/w3m";
-    # used by ranger
-    TERMCMD = "kitty";
-    # TERMINAL # used by i3-sensible-terminal
-  };
-
-  # source file name can't start with .
-  # home.file.".wgetrc".source = dotfiles/home/wgetrc;
-
   xdg = {
     enable = true;
   };
-
-
 
   # you can switch from cli with xkb-switch or xkblayout-state
   # set to null to disable
@@ -103,6 +71,7 @@
     # settings = {};
   };
 
+  # cool to have when I break neovim
   programs.vim = {
     enable = true;
     settings = {
@@ -115,6 +84,7 @@
 
   programs.fzf = {
     enable = true;
+    enableBashIntegration = true;
     enableZshIntegration = true;
     # so that fzf takes into account .gitignore
     defaultCommand = "${pkgs.fd}/bin/fd --type f";
@@ -160,10 +130,6 @@
         "source-file $XDG_CONFIG_HOME/tmux/config"
       '';
   };
-
-  # home.activation.copyZshrc = dagEntryBefore [ "linkGeneration" ] ''
-  #   cp $
-  #   '';
 
   # for colors etc.
   programs.lesspipe.enable = true;

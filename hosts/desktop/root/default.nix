@@ -1,7 +1,7 @@
 # TODO this should be fetched from the runners themselves !
 { config, pkgs, lib
 , secrets
-, flakeInputs
+# , flakeInputs
 , ...
 }:
 let
@@ -10,8 +10,9 @@ let
 
 in
 {
-  imports = [
-   ../../../hm/profiles/nova/ssh-config.nix
-  ];
+  # imports = [
+  #  ../../../hm/profiles/nova/ssh-config.nix
+  # ];
 
+  # programs.ssh.enable = true;
 }

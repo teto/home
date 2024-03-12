@@ -17,16 +17,19 @@ in
   imports = [
     ./bash.nix
       ../../../hm/profiles/nova/bash.nix
+      ../../../hm/teto/common.nix
+      ../../../hm/profiles/common.nix
     # flakeInputs.ironbar.homeManagerModules.default
 
     ./calendars.nix
     ./programs/git.nix
     ./programs/helix.nix
     ./ia.nix
-    ./neovim.nix
-    ./ssh-config.nix
+    ./programs/neovim.nix
+    ./programs/ssh.nix
     ./sway.nix
     ./services/swaync.nix
+    ./services/mpd.nix
     ./programs/yazi.nix
     ./programs/khal.nix
 
@@ -37,6 +40,7 @@ in
     # Not tracked, so doesn't need to go in per-machine subdir
     ../../../hm/profiles/android.nix
     ../../../hm/profiles/desktop.nix
+    ../../../hm/profiles/gaming.nix
     ../../../hm/profiles/gnome.nix
     ../../../hm/profiles/ia.nix
     ../../../hm/profiles/waybar.nix
@@ -66,10 +70,60 @@ in
     enableZshIntegration = true;
   };
 
+  home.file.".gdbinit".text = ''
+    # ../config/gdbinit_simple;
+    # gdb doesn't accept environment variable except via python
+    source ${config.xdg.configHome}/gdb/gdbinit_simple
+    set history filename ${config.xdg.cacheHome}/gdb_history
+  '';
+
+
+  home.language = {
+   # monetary = 
+   # measurement = 
+   # numeric = 
+   # paper =
+    time= "fr_FR.utf8";
+  };
+
+  
+
+  i18n.glibcLocales = pkgs.glibcLocales.override {
+    allLocales = true;
+ # 229 fr_FR.UTF-8/UTF-8 \
+ # 230 fr_FR/ISO-8859-1 \
+ # 231 fr_FR@euro/ISO-8859-15 \
+    locales = [ "fr_FR.UTF-8/UTF-8" "en_US.UTF-8/UTF-8" ];
+  };
+
+
   # seulemt pour X
   # programs.feh.enable = true;
   # for programs not merged yet
-  home.packages = with pkgs; [
+  home.packages = let 
+
+  # the kind of packages u don't want to compile
+  # TODO les prendres depuis un channel avec des binaires ?
+  # with flakeInputs.nixos-stable.legacyPackages.${pkgs.system};
+  heavyPackages =  [
+    # anki          # spaced repetition system
+    # hopefully we can remove this from the environment
+    # it's just that I can't setup latex correctly
+    pkgs.libreoffice
+
+	# take the version from stable ?
+    # qutebrowser # broken keyboard driven fantastic browser
+    pkgs.gnome.nautilus # demande webkit/todo replace by nemo ?
+    # mcomix # manga reader
+  ];
+
+  in
+   with pkgs; [
+
+      # mdp # markdown CLI presenter
+    # gthumb # image manager, great to tag pictures
+    # magic-wormhole  # super tool to exchange secrets between computers
+    # gnome3.gnome_control_center
     # signal-desktop # installe a la main
     # gnome.gnome-maps
     # xorg.xwininfo # for stylish
@@ -77,27 +131,47 @@ in
     ncdu # to see disk usage
     moar # test as pager
 
+    # nixfmt  # aliased to nixfmt-rfc-style, use the latter to avoid the warning
+    nixfmt-rfc-style # 
+    nix-output-monitor
+    presenterm # for presentations from terminal/markdown (in rust, supports images, pretty cool)
+
+    lutris # for gaming
+
+      sioyek # pdf reader
+     jaq # jq in rust
+	viu # a console image viewer
+      wally-cli # to flash ergodox keyboards
+      wine
+    libreoffice
+
+	# take the version from stable ?
+    # qutebrowser # broken keyboard driven fantastic browser
+    gnome.nautilus # demande webkit/todo replace by nemo ?
+    # hexyl # hex editor
+    # simple-scan
+    # vifm
+    # flakeInputs.anyrun.packages.${pkgs.system}.anyrun-with-all-plugins
+
+    # w3m # for preview in ranger w3mimgdisplay
+
     # bridge-utils# pour  brctl
    # ironbar 
 	# haxe # to test https://neovim.discourse.group/t/presenting-haxe-neovim-a-new-toolchain-to-build-neovim-plugins/3720
     # meli  # broken jmap mailreader
 
-    fre
-  ];
+    unar # used to view archives by yazi
+    # poppler for pdf preview
+   ] 
+   ++ heavyPackages;
 
   services.nextcloud-client.enable = false;
-
-  services.mpd = {
-   musicDirectory = "/mnt/ntfs/Musique";
-  };
-
-
-  xdg.configFile."starship.toml".enable = false;
 
   home.sessionVariables = {
    # TODO create symlink ?
     DASHT_DOCSETS_DIR = "/mnt/ext/docsets";
     # $HOME/.local/share/Zeal/Zeal/docsets
+
   };
 
 }

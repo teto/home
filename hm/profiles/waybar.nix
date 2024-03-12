@@ -20,13 +20,15 @@ in
     in
     {
       enable = true;
+
       systemd.enable = true;
+
       settings = {
         mainBar = {
          fixed-center = false;
           # a way to have a manual definition !
           include = [
-            "~/.config/waybar/manual.json"
+            "~/.config/waybar/manual.jsonc"
           ];
           layer = "top";
           position = "top";

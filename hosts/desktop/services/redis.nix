@@ -1,8 +1,7 @@
 {...}:
 {
-  # imports = [
-  #   ../../nixos/profiles/redis.nix
-
+  # _imports = [
+  #   ../../../nixos/profiles/redis.nix
   # ];
 
   servers.test = {

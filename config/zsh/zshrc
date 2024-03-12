@@ -7,8 +7,17 @@
 # ON_NIXOS=$?
 # prompt off
 
-current_folder="${0:a:h}"
+# current_folder="${0:a:h}"
 . "$ZDOTDIR/aliases.zsh"
+
+# https://stackoverflow.com/questions/24601806/got-permission-denied-when-emulating-sh-under-zsh
+# set -x
+emulate sh -c "source $ZDOTDIR/aliases.sh"
+emulate sh -c "source $ZDOTDIR/../bash/aliases.sh"
+# set +x
+
+# to get sessionVariables
+source ~/.profile
 
 # zsh.enableSuggestions right handside color
 # see https://github.com/zsh-users/zsh-autosuggestions for suggestions
@@ -149,7 +158,7 @@ declare -A zlong_ignore_cmds=(
     "tig"=true
 )
 zlong_duration=10
-
+zlong_terminal_bell=false
 
 function zlong_alert_display_duration {
   local T=$1
@@ -271,6 +280,7 @@ KEYTIMEOUT=1
 
 
 # prompt called in case of error
+# doesn't work with zsh -u
 SPROMPT="Correct $fg[red]%R$reset_color to $fg[green]%r$reset_color [(y)es (n)o (a)bort (e)dit]? "
 
 #}}}
@@ -296,6 +306,8 @@ SPROMPT="Correct $fg[red]%R$reset_color to $fg[green]%r$reset_color [(y)es (n)o 
 # load terminfo for portable keybindings
 # zmodload zsh/terminfo
 
+
+# workaround aws completion being faulty https://github.com/NixOS/nixpkgs/issues/275770#issuecomment-1977471765
 
 # TODO pass a path that is versioned in home
 teatimer() {
@@ -330,5 +342,10 @@ _fzf_compgen_dir() {
 #   unfunction kitty-integration
 # fi
 
-# this erases fzf so annoying
-# source ~/.config/nova/zsh/zshrc
+
+# source $ZDOTDIR/zshrc.generated
+# used in some git aliases
+export REVIEW_BASE=master
+
+# to be able to have completion for programs with bash-only completion like vault
+autoload -U +X bashcompinit && bashcompinit

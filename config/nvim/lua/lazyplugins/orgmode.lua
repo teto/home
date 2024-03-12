@@ -7,11 +7,9 @@ return {
   -- otherwise we get 
   --[orgmode] Cannot detect parser revision.                                                                                                                                                                                                                        
  -- Please check your org grammar's install info.                                                                                                                                                                                                                   
- -- Maybe you forgot to call "require('orgmode').setup_ts_grammar()" before setup.   
  -- maybe it should be checked/ init only for org files.
    -- event = 'VeryLazy',
   config = function ()
-   require('orgmode').setup_ts_grammar()
    require('orgmode').setup{
       highlight = {
         enable = true,
@@ -70,6 +68,8 @@ return {
     "nvim-neorg/neorg",
     -- ft = "norg",
     dependencies = {
+     -- Unable to install neorg: required dependency `vhyrro/luarocks.nvim` not found!
+     'vhyrro/luarocks.nvim'
     --   -- { "pritchett/neorg-capture"},
     --   -- { 'max397574/neorg-kanban' },
     }

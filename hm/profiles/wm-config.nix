@@ -119,11 +119,6 @@ let
       XF86AudioStop = "exec ${mpc} stop; exec notify-send --icon=stop -h string:synchronous:mpd 'Stopped Audio' -e";
 
       # XF86AudioPlay = "exec ${pkgs.vlc}/bin/vlc; exec ${notify-send} --icon=media-playback-stop-symbolic -u low 'test'";
-
-
-      # flameshot not being stable enough
-      # "--release Print" = "exec ${pkgs.flameshot}/bin/scrot -s '/tmp/%s_%H%M_%d.%m.%Y_$wx$h.png'";
-
     };
 
 in
@@ -159,17 +154,17 @@ in
       # Pressing right will grow the window’s width.
       # Pressing up will shrink the window’s height.
       # Pressing down will grow the window’s height.
-      j = " resize grow left 10 px or 10 ppt";
-      "Shift+j" = "resize shrink left 10 px or 10 ppt";
+      j = " resize grow down 10 px or 10 ppt";
+      "Shift+j" = "resize shrink down 10 px or 10 ppt";
 
       k = " resize grow up  10 px or 10 ppt";
       "Shift+k" = "resize shrink up 10 px or 10 ppt";
 
-      l = "resize grow down 10 px or 10 ppt";
-      "Shift+l" = "resize shrink down 10 px or 10 ppt";
+      l = "resize grow right 10 px or 10 ppt";
+      "Shift+l" = "resize shrink right 10 px or 10 ppt";
 
-      "$GroupFr+m" = "resize grow right 10 px or 10 ppt";
-      "$GroupFr+Shift+m" = "resize shrink right 10 px or 10 ppt";
+      h = "resize grow left 10 px or 10 ppt";
+      "$GroupFr+Shift+h" = "resize shrink left 10 px or 10 ppt";
 
       # semicolumn is not recognized by sway
       # bindsym $GroupUs+semicolumn resize grow right 10 px or 10 ppt

@@ -1,4 +1,12 @@
+Each peer needs to have a public-private keypair. 
 
 * how to setup (on nix)
 
 https://nixos.wiki/wiki/WireGuard#Setting_up_WireGuard_with_systemd-networkd
+
+* Generate keys
+
+  umask 077
+mkdir ~/wireguard-keys
+wg genkey > ~/wireguard-keys/private
+wg pubkey < ~/wireguard-keys/private > ~/wireguard-keys/public

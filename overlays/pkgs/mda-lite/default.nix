@@ -1,4 +1,5 @@
 { stdenv
+, lib
 , fetchFromGitLab
 , pkgconfig
 , autoreconfHook
@@ -50,7 +51,7 @@ buildPythonApplication {
 
   meta = with lib; {
 
-    homepage = https://gitlab.planet-lab.eu/cartography/multilevel-mda-lite;
+    homepage = "https://gitlab.planet-lab.eu/cartography/multilevel-mda-lite";
     description = "Multipath traceroute";
     platforms = platforms.unix;
     license = licenses.gpl3;

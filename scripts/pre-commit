@@ -1,2 +1,0 @@
-#!/bin/sh
-pip3 list > ../../pip_packages.list

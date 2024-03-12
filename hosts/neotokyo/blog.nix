@@ -1,7 +1,7 @@
-{ config, lib, pkgs, ... }:
-let
-  secrets = import ../secrets.nix;
-in
+{ config, lib
+, pkgs
+, secrets
+, ... }:
 {
   services.nginx = {
     enable = true;

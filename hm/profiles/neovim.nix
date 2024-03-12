@@ -13,7 +13,9 @@ let
   # taken from the official flake
   # must be an unwrapped version
   # myNeovimUnwrapped = pkgs.neovim-unwrapped.override({ libuv = libuv_147;});
-  myNeovimUnwrapped = flakeInputs.neovim.packages."${pkgs.system}".neovim;
+  myNeovimUnwrapped = flakeInputs.neovim.packages."${pkgs.system}".neovim.overrideAttrs(oa: {
+    patches = builtins.head oa.patches;
+  });
   lua =   myNeovimUnwrapped.lua;
 
  

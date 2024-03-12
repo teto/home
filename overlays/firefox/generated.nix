@@ -1,17 +1,43 @@
 { buildFirefoxXpiAddon, fetchurl, lib, stdenv }:
   {
+    "10ten-ja-reader" = buildFirefoxXpiAddon {
+      pname = "10ten-ja-reader";
+      version = "1.18.0";
+      addonId = "{59812185-ea92-4cca-8ab7-cfcacee81281}";
+      url = "https://addons.mozilla.org/firefox/downloads/file/4241410/10ten_ja_reader-1.18.0.xpi";
+      sha256 = "5433bcfec5a327bf1fa198b3f0645a9cdcdc44232465ad940fa8a5858b6996f8";
+      meta = with lib;
+      {
+        homepage = "https://github.com/birchill/10ten-ja-reader/";
+        description = "Quickly translate Japanese by hovering over words. Formerly released as Rikaichamp.";
+        license = licenses.gpl3;
+        mozPermissions = [
+          "alarms"
+          "clipboardWrite"
+          "contextMenus"
+          "storage"
+          "unlimitedStorage"
+          "http://*/*"
+          "https://*/*"
+          "file:///*"
+          "https://docs.google.com/*"
+        ];
+        platforms = platforms.all;
+      };
+    };
     "bitwarden" = buildFirefoxXpiAddon {
       pname = "bitwarden";
-      version = "2023.9.1";
+      version = "2024.2.1";
       addonId = "{446900e4-71c2-419f-a6a7-df9c091e268b}";
-      url = "https://addons.mozilla.org/firefox/downloads/file/4170561/bitwarden_password_manager-2023.9.1.xpi";
-      sha256 = "46d4fe10ea3a1757a6a4c0d728f3f765d93883f742a3ebb73f36aeb80eec55a9";
+      url = "https://addons.mozilla.org/firefox/downloads/file/4246600/bitwarden_password_manager-2024.2.1.xpi";
+      sha256 = "f2db399e5a0915e4fd7e4906c32c72eac4a2b7bb4b4acacd892fff18e73085d4";
       meta = with lib;
       {
         homepage = "https://bitwarden.com";
-        description = "A secure and free password manager for all of your devices.";
+        description = "At home, at work, or on the go, Bitwarden easily secures all your passwords, passkeys, and sensitive information.";
         license = licenses.gpl3;
         mozPermissions = [
+          "<all_urls>"
           "tabs"
           "contextMenus"
           "storage"
@@ -24,16 +50,17 @@
           "webRequest"
           "webRequestBlocking"
           "file:///*"
-          ];
+          "https://lastpass.com/export.php"
+        ];
         platforms = platforms.all;
-        };
       };
+    };
     "browserpass" = buildFirefoxXpiAddon {
       pname = "browserpass";
-      version = "3.7.2";
+      version = "3.8.0";
       addonId = "browserpass@maximbaz.com";
-      url = "https://addons.mozilla.org/firefox/downloads/file/3711209/browserpass_ce-3.7.2.xpi";
-      sha256 = "b1781405b46f3274697885b53139264dca2ab56ffc4435c093102ad5ebc59297";
+      url = "https://addons.mozilla.org/firefox/downloads/file/4187654/browserpass_ce-3.8.0.xpi";
+      sha256 = "5291d94443be41a80919605b0939c16cc62f9100a8b27df713b735856140a9a7";
       meta = with lib;
       {
         homepage = "https://github.com/browserpass/browserpass-extension";
@@ -51,16 +78,16 @@
           "webRequestBlocking"
           "http://*/*"
           "https://*/*"
-          ];
+        ];
         platforms = platforms.all;
-        };
       };
+    };
     "darkreader" = buildFirefoxXpiAddon {
       pname = "darkreader";
-      version = "4.9.67";
+      version = "4.9.80";
       addonId = "addon@darkreader.org";
-      url = "https://addons.mozilla.org/firefox/downloads/file/4175386/darkreader-4.9.67.xpi";
-      sha256 = "128a151f04af774463448fe1cdb944f6c5095fb17991f82d9aec3c8c4513308e";
+      url = "https://addons.mozilla.org/firefox/downloads/file/4249607/darkreader-4.9.80.xpi";
+      sha256 = "a93f1250b72cc27fe4a9b02be062c68fb079e45a1233d562852b48e1e9b99307";
       meta = with lib;
       {
         homepage = "https://darkreader.org/";
@@ -73,10 +100,10 @@
           "tabs"
           "theme"
           "<all_urls>"
-          ];
+        ];
         platforms = platforms.all;
-        };
       };
+    };
     "decentraleyes" = buildFirefoxXpiAddon {
       pname = "decentraleyes";
       version = "2.0.18";
@@ -97,10 +124,10 @@
           "webNavigation"
           "webRequest"
           "webRequestBlocking"
-          ];
+        ];
         platforms = platforms.all;
-        };
       };
+    };
     "facebook-container" = buildFirefoxXpiAddon {
       pname = "facebook-container";
       version = "2.3.11";
@@ -122,10 +149,10 @@
           "tabs"
           "webRequestBlocking"
           "webRequest"
-          ];
+        ];
         platforms = platforms.all;
-        };
       };
+    };
     "firefox-color" = buildFirefoxXpiAddon {
       pname = "firefox-color";
       version = "2.1.7";
@@ -142,10 +169,10 @@
           "storage"
           "tabs"
           "https://color.firefox.com/*"
-          ];
+        ];
         platforms = platforms.all;
-        };
       };
+    };
     "header-editor" = buildFirefoxXpiAddon {
       pname = "header-editor";
       version = "4.1.1";
@@ -166,16 +193,16 @@
           "downloads"
           "*://*/*"
           "unlimitedStorage"
-          ];
+        ];
         platforms = platforms.all;
-        };
       };
+    };
     "i-dont-care-about-cookies" = buildFirefoxXpiAddon {
       pname = "i-dont-care-about-cookies";
-      version = "3.4.9";
+      version = "3.5.0";
       addonId = "jid1-KKzOGWgsW3Ao4Q@jetpack";
-      url = "https://addons.mozilla.org/firefox/downloads/file/4172206/i_dont_care_about_cookies-3.4.9.xpi";
-      sha256 = "f88b659b2ffb27816d29330fb0f14ebad222a56a8f8c02db450cbaa4bc9af1c3";
+      url = "https://addons.mozilla.org/firefox/downloads/file/4202634/i_dont_care_about_cookies-3.5.0.xpi";
+      sha256 = "4de284454217fc4bee0744fb0aad8e0e10fa540dc03251013afc3ee4c20e49b0";
       meta = with lib;
       {
         homepage = "https://www.i-dont-care-about-cookies.eu/";
@@ -190,16 +217,16 @@
           "webRequest"
           "webRequestBlocking"
           "webNavigation"
-          ];
+        ];
         platforms = platforms.all;
-        };
       };
+    };
     "multi-account-containers" = buildFirefoxXpiAddon {
       pname = "multi-account-containers";
-      version = "8.1.2";
+      version = "8.1.3";
       addonId = "@testpilot-containers";
-      url = "https://addons.mozilla.org/firefox/downloads/file/4058426/multi_account_containers-8.1.2.xpi";
-      sha256 = "0ab8f0222853fb68bc05fcf96401110910dfeb507aaea2cf88c5cd7084d167fc";
+      url = "https://addons.mozilla.org/firefox/downloads/file/4186050/multi_account_containers-8.1.3.xpi";
+      sha256 = "33edd98d0fc7d47fa310f214f897ce4dfe268b0f868c9d7f32b4ca50573df85c";
       meta = with lib;
       {
         homepage = "https://github.com/mozilla/multi-account-containers/#readme";
@@ -219,19 +246,19 @@
           "tabs"
           "webRequestBlocking"
           "webRequest"
-          ];
+        ];
         platforms = platforms.all;
-        };
       };
+    };
     "refined-github" = buildFirefoxXpiAddon {
       pname = "refined-github";
-      version = "23.10.5";
+      version = "24.2.8";
       addonId = "{a4c4eda4-fb84-4a84-b4a1-f7c1cbf2a1ad}";
-      url = "https://addons.mozilla.org/firefox/downloads/file/4177037/refined_github-23.10.5.xpi";
-      sha256 = "22c0ab41009ff7daf249755504a5fb63f6bbaa732ba4acf677bfa79122c498c1";
+      url = "https://addons.mozilla.org/firefox/downloads/file/4233557/refined_github-24.2.8.xpi";
+      sha256 = "df51ec2cd17001bd474b86d75d6657156e91b54de607b6c7b4977a2044c5f6a7";
       meta = with lib;
       {
-        homepage = "https://github.com/sindresorhus/refined-github";
+        homepage = "https://github.com/refined-github/refined-github";
         description = "Simplifies the GitHub interface and adds many useful features.";
         license = licenses.mit;
         mozPermissions = [
@@ -242,10 +269,10 @@
           "https://github.com/*"
           "https://api.github.com/*"
           "https://gist.github.com/*"
-          ];
+        ];
         platforms = platforms.all;
-        };
       };
+    };
     "save-page-we" = buildFirefoxXpiAddon {
       pname = "save-page-we";
       version = "28.11";
@@ -268,10 +295,10 @@
           "contextMenus"
           "notifications"
           "storage"
-          ];
+        ];
         platforms = platforms.all;
-        };
       };
+    };
     "switch-to-audible-tab" = buildFirefoxXpiAddon {
       pname = "switch-to-audible-tab";
       version = "0.0.9";
@@ -284,8 +311,8 @@
         description = "Focus on tab that is currently making sound (Alt+Shift+A).";
         mozPermissions = [ "tabs" "storage" "menus" "activeTab" ];
         platforms = platforms.all;
-        };
       };
+    };
     "temporary-containers" = buildFirefoxXpiAddon {
       pname = "temporary-containers";
       version = "1.9.2";
@@ -307,22 +334,49 @@
           "tabs"
           "webRequest"
           "webRequestBlocking"
-          ];
+        ];
         platforms = platforms.all;
-        };
       };
+    };
+    "tree-style-tab" = buildFirefoxXpiAddon {
+      pname = "tree-style-tab";
+      version = "4.0.3";
+      addonId = "treestyletab@piro.sakura.ne.jp";
+      url = "https://addons.mozilla.org/firefox/downloads/file/4249095/tree_style_tab-4.0.3.xpi";
+      sha256 = "0904fe9db63b949b66f876cbea911c1f2d9f59d5b2ae0e0f1cae362a1ca36720";
+      meta = with lib;
+      {
+        homepage = "http://piro.sakura.ne.jp/xul/_treestyletab.html.en";
+        description = "Show tabs like a tree.";
+        mozPermissions = [
+          "activeTab"
+          "contextualIdentities"
+          "cookies"
+          "menus"
+          "menus.overrideContext"
+          "notifications"
+          "search"
+          "sessions"
+          "storage"
+          "tabs"
+          "theme"
+        ];
+        platforms = platforms.all;
+      };
+    };
     "ublock-origin" = buildFirefoxXpiAddon {
       pname = "ublock-origin";
-      version = "1.52.2";
+      version = "1.56.0";
       addonId = "uBlock0@raymondhill.net";
-      url = "https://addons.mozilla.org/firefox/downloads/file/4171020/ublock_origin-1.52.2.xpi";
-      sha256 = "e8ee3f9d597a6d42db9d73fe87c1d521de340755fd8bfdd69e41623edfe096d6";
+      url = "https://addons.mozilla.org/firefox/downloads/file/4237670/ublock_origin-1.56.0.xpi";
+      sha256 = "f5fbeeac511ca4e10a74723413727fda8e6f9236c726d16eb54ade1fbe7be5be";
       meta = with lib;
       {
         homepage = "https://github.com/gorhill/uBlock#ublock-origin";
         description = "Finally, an efficient wide-spectrum content blocker. Easy on CPU and memory.";
         license = licenses.gpl3;
         mozPermissions = [
+          "alarms"
           "dns"
           "menus"
           "privacy"
@@ -343,10 +397,13 @@
           "https://github.com/*"
           "https://*.github.io/*"
           "https://*.letsblock.it/*"
-          ];
+          "https://github.com/uBlockOrigin/*"
+          "https://ublockorigin.github.io/*"
+          "https://*.reddit.com/r/uBlockOrigin/*"
+        ];
         platforms = platforms.all;
-        };
       };
+    };
     "umatrix" = buildFirefoxXpiAddon {
       pname = "umatrix";
       version = "1.4.4";
@@ -370,10 +427,10 @@
           "<all_urls>"
           "http://*/*"
           "https://*/*"
-          ];
+        ];
         platforms = platforms.all;
-        };
       };
+    };
     "vim-vixen" = buildFirefoxXpiAddon {
       pname = "vim-vixen";
       version = "1.2.3";
@@ -395,8 +452,8 @@
           "bookmarks"
           "browserSettings"
           "<all_urls>"
-          ];
+        ];
         platforms = platforms.all;
-        };
       };
-    }
+    };
+  }

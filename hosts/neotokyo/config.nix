@@ -1,7 +1,14 @@
-{ config, flakeInputs, secrets, modulesPath, pkgs, lib, ... }:
-# let
-  # secrets = import ../../nixpkgs/secrets.nix;
-# in
+{ config
+, flakeInputs
+, secrets
+, modulesPath
+, pkgs
+, lib
+, ... }:
+let
+  # TODO add a justfile to run the basic steps
+  banner = "You can start the nextcloud-add-user.service unit if teto user doesnt exist yet";
+in
 {
  networking = {
    hostName = "neotokyo";
@@ -24,17 +31,19 @@
       serviceConfig.Restart = "always";
     };
 
+  programs.bash.interactiveShellInit = ''
+    cat "${pkgs.writeText "welcome-message" banner}";
+  '';
   imports = [
     # for gandi
     "${modulesPath}/virtualisation/openstack-config.nix"
     # ./hardware.nix
-    ./openssh.nix
+    ./services/openssh.nix
     ./sops.nix
 
     # to get the first iteration going on
-    ./nextcloud.nix
+    ./services/nextcloud.nix
 
-    ../common-server.nix
     # ./gitolite.nix
     # ../../nixos/modules/hercules-ci-agents.nix
 
@@ -42,6 +51,7 @@
     ../../nixos/profiles/nix-daemon.nix
     ../../nixos/profiles/neovim.nix
     ../../nixos/profiles/docker-daemon.nix
+    ../../nixos/profiles/server.nix
 
     # ./blog.nix
 
@@ -55,8 +65,9 @@
 
   home-manager.users.root = {
    imports = [
+    ./users/root.nix
     ../../hm/profiles/neovim.nix
-    ../desktop/root/ssh-config.nix
+    ../desktop/root/programs/ssh.nix
    ];
 
    # home.stateVersion = "23.11";
@@ -67,6 +78,7 @@
    imports = [
      # ../desktop/teto/
     # ../../hm/profiles/teto/common.nix
+    ./teto/default.nix
     ../../hm/profiles/common.nix
     ../../hm/profiles/zsh.nix
     ../../hm/profiles/neovim.nix

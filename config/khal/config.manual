@@ -3,19 +3,22 @@
 path = /home/teto/calendars/fastmail/*
 priority=1000
 type=discover
+color = "#0000ff"
+
+# TODO mettre celui des vacances avec un bg method=fg
 
 
 
 [default]
-default_calendar=fastmail
+default_calendar=Perso
 default_event_duration=30m
-enable_mouse=true
+# enable_mouse=true
 highlight_event_days=true
 
 [highlight_days]
-color=#ff0000
+color=#b3e1f7
 default_color=#f0ff00
-method=bg
+method=fg
 
 [keybindings]
 save=S
@@ -29,8 +32,17 @@ longdatetimeformat=%c
 timeformat=%X
 unicode_symbols=true
 weeknumbers=off
+# local_timezone= Europe/Berlin
+# default_timezone= Europe/Berlin
+# timeformat= %H:%M
+# dateformat= %d.%m.
+# longdateformat= %d.%m.%Y
+# datetimeformat= %d.%m. %H:%M
+# longdatetimeformat= %d.%m.%Y %H:%M
 
 [view]
 event_view_always_visible=true
-frame=true
+frame=width
 
+dynamic_days = false # too complex with true
+min_calendar_display = 2

@@ -55,6 +55,10 @@ in
      logLevel = 0;
 
    };
+
+   # secretFile
+   #     Secret options which will be appended to Nextcloud’s config.php file (written as JSON, in the same form as the services.nextcloud.settings[1] option), for example ‘{"redis":{"password":"secret"}}’.
+
   };
 
 

@@ -6,6 +6,8 @@
 
 
    # enable = true;
+   # check https://github.com/NixOS/nixpkgs/issues/291217
+   acceleration = "nvidia";
    # package 
    # Ollama binds to 127.0.0.1 port 11434 by default. 
    # Change the bind address with the OLLAMA_HOST

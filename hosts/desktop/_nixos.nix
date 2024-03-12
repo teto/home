@@ -1,6 +1,10 @@
-{ config, flakeInputs, lib, pkgs, ... }:
+{ config
+, flakeInputs
+, lib
+, pkgs, ... }:
 let 
-  module = { pkgs, ... }@args: flakeInputs.haumea.lib.load {
+ module = { pkgs, ... }@args: 
+  flakeInputs.haumea.lib.load {
    src = flakeInputs.nix-filter {
      root = ./.;
      exclude = [
@@ -8,16 +12,13 @@ let
        "root"
      ];
     };
-    # loader = inputs: path: 
-    #  inputs.super.defaultWith import;
 
-    #  builtins.trace path path;
     inputs = args // {
       inputs = flakeInputs;
     };
     transformer = [
      flakeInputs.haumea.lib.transformers.liftDefault
-     # (flakeInputs.haumea.lib.transformers.hoistAttrs "_import" "import")
+     (flakeInputs.haumea.lib.transformers.hoistLists "_imports" "imports")
     ];
   };
 
@@ -40,6 +41,7 @@ in
     ../../nixos/profiles/nextcloud.nix
     ../../nixos/profiles/postgresql.nix
     ../../nixos/profiles/redis.nix
+    ../../nixos/profiles/greetd.nix
     # ../../nixos/profiles/immich.nix
 
     # this is only to test the new config
@@ -55,7 +57,7 @@ in
     ../../nixos/profiles/nix-daemon.nix
     # ../../nixos/profiles/experimental.nix
     ../../nixos/profiles/steam.nix
-    ../../nixos/profiles/opensnitch.nix
+    # ../../nixos/profiles/opensnitch.nix
     ../../nixos/profiles/podman.nix
     ../../nixos/profiles/steam.nix
     ../../nixos/profiles/wireguard.nix
@@ -66,33 +68,30 @@ in
     ../../nixos/profiles/nvidia.nix
     ../../nixos/profiles/ntp.nix
     ../../nixos/profiles/ollama.nix
-
-    # just to check how /etc/nix/machines looks like
-    ../../nixos/profiles/distributedBuilds.nix
   ];
 
   home-manager.users = 
-   let
-   hmRootModule = { pkgs, ... }@args: flakeInputs.haumea.lib.load {
-    src = ./root;
-    inputs = args // {
-      inputs = flakeInputs;
-    };
-    transformer =  [
-          flakeInputs.haumea.lib.transformers.liftDefault
+   # let
+   # hmRootModule = { pkgs, ... }@args: flakeInputs.haumea.lib.load {
+   #  src = ./root;
+   #  inputs = args // {
+   #    inputs = flakeInputs;
+   #  };
+   #  transformer =  [
+   #    flakeInputs.haumea.lib.transformers.liftDefault
 
-    #  (x: hoistAttrs x )
-      # (x: )
-    ];
-     # flakeInputs.haumea.lib.transformers.liftDefault;
-  };
-  in 
+   #  #  (x: hoistAttrs x )
+   #    # (x: )
+   #  ];
+   #   # flakeInputs.haumea.lib.transformers.liftDefault;
+  # };
+  # in 
   {
    root = {
     imports = [
-      hmRootModule
-      # ./root/ssh-config.nix
-      # ../../hm/profiles/neovim.nix
+      # hmRootModule
+      ./root/programs/ssh.nix
+      ../../hm/profiles/nova/ssh-config.nix
     ];
    };
 
@@ -103,15 +102,9 @@ in
      # TODO it should load the whole folder
      imports = [
        ./teto/default.nix
-       # breaks build: doesnt like the "activation-script"
-       # nova.hmConfigurations.dev
      ];
    };
   };
-
-  # for testing
-  # services.openssh = {
-  # };
 
   # nesting clones can be useful to prevent GC of some packages
   # https://nixos.org/nix-dev/2017-June/023967.html
@@ -185,7 +178,6 @@ in
     "kvm"
     "kvm-intel" # for virtualisation
   ];
-  # boot.extraModulePackages = with config.boot.kernelPackages; [ wireguard ];
 
 
   boot.kernel.sysctl = {
@@ -229,14 +221,13 @@ in
   #   fi
   # '';
 
-  # programs.seahorse.enable = false; # UI to manage keyrings
 
   # List services that you want to enable:
   services = {
-    gnome = {
-      gnome-keyring.enable = true;
-      at-spi2-core.enable = true; # for keyring it seems
-    };
+    # gnome = {
+    #   gnome-keyring.enable = true;
+    #   at-spi2-core.enable = true; # for keyring it seems
+    # };
 
     # Enable CUPS to print documents.
     # https://nixos.wiki/wiki/Printing

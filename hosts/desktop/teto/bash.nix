@@ -3,7 +3,7 @@ flakeInputs,
 ... }:
 {
   imports = [
-   ../../../hm/profiles/shell.nix
+   ../../../hm/profiles/bash.nix
    # ../../profiles/bash.nix
   ];
 
@@ -18,9 +18,14 @@ flakeInputs,
 
     };
 
+    shellAliases = {
+       nix-stray-roots = ''nix-store --gc --print-roots | egrep -v "^(/nix/var|/run/\w+-system|\{memory)"'';
+    };
+
+
     # 
     initExtra = ''
-      source  ~/home/config/zsh/aliases.sh
+     source  $XDG_CONFIG_HOME/zsh/aliases.sh
      '';
    };
  }

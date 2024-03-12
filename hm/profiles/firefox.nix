@@ -59,18 +59,12 @@ let
 
 
 
-  commonExtensions = [
-     pkgs.nur.repos.rycee.firefox-addons.bitwarden
-     pkgs.nur.repos.rycee.firefox-addons.ublock-origin
-     pkgs.nur.repos.rycee.firefox-addons.tree-style-tab
+  commonExtensions = with pkgs; [
+     firefox-addons.bitwarden
+     firefox-addons.ublock-origin
+     firefox-addons.tree-style-tab
    ];
 
-   audibleTabExtension = 
-      (pkgs.fetchFirefoxAddon {
-        name = "ublock";
-        url = "https://addons.mozilla.org/firefox/downloads/file/3679754/ublock_origin-1.31.0-an+fx.xpi";
-        sha256 = "1h768ljlh3pi23l27qp961v1hd0nbj2vasgy11bmcrlqp40zgvnr";
-      });
 in
 {
 
@@ -81,8 +75,6 @@ in
     enable = true;
     # import the one in pkgs/
     # package = myFirefox;
-
-
     profiles = {
       perso = {
         # https://gitlab.com/rycee/configurations/-/blob/bf46aef74ca53a61fe2d35349fe3dbc6a70b2609/user/firefox.nix#L25-39
@@ -94,28 +86,30 @@ in
         # pass package for instance
         # with pkgs.nur.repos.rycee.firefox-addons;
         # with pkgs;
-        extensions = commonExtensions ++ [
+        extensions = commonExtensions ++ (with pkgs; [
           # TODO no need for bitwarden anymore
-          pkgs.nur.repos.rycee.firefox-addons.browserpass
-          pkgs.nur.repos.rycee.firefox-addons."10ten-ja-reader"
-          audibleTabExtension
-          pkgs.nur.repos.rycee.firefox-addons.browserpass
-          pkgs.nur.repos.rycee.firefox-addons.refined-github
+          firefox-addons.browserpass
+          firefox-addons."10ten-ja-reader"
+          # firefox-addons.audibleTabExtension
+          firefox-addons.switch-to-audible-tab
+          firefox-addons.browserpass
+          firefox-addons.refined-github
           # pkgs.nur.repos.rycee.firefox-addons.browserpass-otp
 
-        ];
+        ]);
 
+        containersForce = true;
         containers = {
-                "shopping" = {
-                  id = 1;
-                  color = "blue";
-                  icon = "cart";
-                };
-                "dangerous" = {
-                  id = 2;
-                  color = "red";
-                  icon = "fruit";
-                };
+          "shopping" = {
+            id = 1;
+            color = "blue";
+            icon = "cart";
+          };
+          "dangerous" = {
+            id = 2;
+            color = "red";
+            icon = "fruit";
+          };
         };
       };
 

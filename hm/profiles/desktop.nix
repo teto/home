@@ -17,16 +17,17 @@ let
 
     (backblaze-b2.override({ execName = "b2";}))
 
-    fswatch # fileevent watcher
-    gdb
     # editorconfig-core-c
-    automake
-    gnum4 # hum
     # for fuser, useful when can't umount a directory
     # https://unix.stackexchange.com/questions/107885/busy-device-on-umount
+    automake
+    fswatch # fileevent watcher
+    fx
+    gdb
+    gnum4 # hum
     psmisc
-    util-linux # for lsns (namespace listing)
     rbw
+    util-linux # for lsns (namespace listing)
 
 	# haxe # to test neovim developement
     eza # to list files
@@ -42,9 +43,8 @@ let
 	haskellPackages.fast-tags
     hurl # http tester
 
-    llm-ls # needed by the neovim plugin
 
-    presenterm # for presentations from terminal/markdown (in rust, supports images, pretty cool)
+    fre # generate a frequency database
     
     perf-tools # to interpret 
 
@@ -54,7 +54,6 @@ let
     # neovide
     # neovim-remote # broken for latex etc
     nix-doc # can generate tags for nix
-    nix-output-monitor
     nix-update # nix-update <ATTR> to update a software
     nix-index # to list package contents
     nix-top # to list current builds
@@ -67,11 +66,8 @@ let
     # rpl # to replace strings across files
     universal-ctags # there are many different ctags, be careful !
     tio # serial console reader
-	viu # a console image viewer
-    hexyl # hex editor
     whois
     envsubst # replace templated files with variables
-    w3m # for preview in ranger w3mimgdisplay
     zeal # doc for developers
   ];
 
@@ -112,40 +108,30 @@ let
       # apvlv # broken
       # buku # broken
       # gcalc
-      # gnome.gnome_control_center
-      # gthumb # image manager, great to tag pictures
-      # magic-wormhole  # super tool to exchange secrets between computers
-      # mdp # markdown CLI presenter
       # nomacs # image viewer
       # nyxt      # lisp browser
       # pulseaudioFull # for pactl
       # replace with rust-wormhole
       # requires xdmcp https://github.com/freedesktop/libXdmcp
-      # scrot # screenshot app for xorg
       # smplayer # GUI around mpv
       # sxiv # simple image viewer
-      # todo try sthg else
       # unstable.transmission_gtk  # bittorrent client
       # vimiv # image viewer
       # ytfzf # broken browse youtube
       # zathura # broken
-	  simple-scan
 	  usbutils
-	  vifm
       bandwhich # to monitor per app bandwidth
       desktop-file-utils # to get desktop
       dogdns # dns solver "dog"
       du-dust # dust binary: rust replacement of du
       duf # better df (rust)
       evince # succeed where zathura/mupdf fail
-      flakeInputs.anyrun.packages.${pkgs.system}.anyrun-with-all-plugins
       font-manager
       gnome.adwaita-icon-theme # else nothing appears
       gnome.eog # eye of gnome = image viewer / creates a collision
       gnome.file-roller # for GUI archive handling
       hunspellDicts.fr-any
       imv # image viewer
-      jaq # jq in rust
       jq # to run json queries
       lazygit # kinda like tig
       libnotify
@@ -161,7 +147,7 @@ let
       ncpamixer # pulseaudio TUI mixer
       noti # send notifications when a command finishes
       ouch # to (de)compress files
-      papis # library manager
+      # papis # library manager
       pass-custom # pass with extensions
       pavucontrol
       pkgs.networkmanagerapplet # should
@@ -170,41 +156,23 @@ let
       qtpass
       ranger # or joshuto ? see hm configuration
       restic  # to backup photos to backblaze
-      rbw # Rust bitwarden unofficial client
+      # rbw # Rust bitwarden unofficial client
       ripgrep
       rofi-pass # rofi-pass it's enabled in the HM module ?
       rsync
       sd # rust cli for search & replace
       shared-mime-info # temporary fix for nautilus to find the correct files
       simple-scan
-      sioyek # pdf reader
       sops # password 'manager'
       sublime3
       translate-shell # call with `trans`
       unzip
-      wally-cli # to flash ergodox keyboards
-      wine
       wireshark
       wttrbar # for meteo
       xarchiver # to unpack/pack files
       xdg-utils
     ]
-    #   gnome.gnome-calculator # compare with qalqulate-gtk
   ;
-
-  # the kind of packages u don't want to compile
-  # TODO les prendres depuis un channel avec des binaires ?
-  heavyPackages = with flakeInputs.nixos-stable.legacyPackages.${pkgs.system}; [
-    # anki          # spaced repetition system
-    # hopefully we can remove this from the environment
-    # it's just that I can't setup latex correctly
-    libreoffice
-
-	# take the version from stable ?
-    # qutebrowser # broken keyboard driven fantastic browser
-    gnome.nautilus # demande webkit/todo replace by nemo ?
-    # mcomix # manga reader
-  ];
 in
 {
 
@@ -218,8 +186,8 @@ in
     ./rofi.nix
     ./wal.nix
     ./sway.nix
+    ./zsh.nix
 
-    ./nushell.nix
     ./fcitx.nix
     ./firefox.nix
     ./neovim.nix
@@ -246,7 +214,6 @@ in
   home.packages =
       desktopPkgs 
    ++ devPkgs
-   ++ heavyPackages
    ++ imPkgs
    ++ (with pkgs; [
       # pkgs.up # live preview of pipes
@@ -265,7 +232,7 @@ in
 
   # tray is enabled by default
   services.udiskie = {
-    enable = true; # broken
+    enable = true;
     notify = false;
     automount = false;
   };
@@ -297,15 +264,13 @@ in
     # maxCacheTtl
     enableSshSupport = true;
     # grabKeyboardAndMouse= false;
-    # pinentryFlavor = "curses";
-
-    # TODO decide when to use it
-    pinentryFlavor = "qt";
     grabKeyboardAndMouse = false; # should be set to false instead
     # default-cache-ttl 60
     verbose = true;
     # --max-cache-ttl
     maxCacheTtl = 86400; # in seconds (86400 = 1 day)
+
+    pinentryPackage = pkgs.pinentry-gnome3;
     # see https://github.com/rycee/home-manager/issues/908
     # could try ncurses as well
     # extraConfig = ''
@@ -349,13 +314,6 @@ in
     };
   };
 
-  # cheatsheets from terminal
-  # programs.navi = {
-  #   enable = true;
-  #   # disabled bcecause it interferes with our fzf widgets mappings
-  #   enableZshIntegration = false;
-  # };
-
   # broot is a terminal file navigator
   programs.broot = {
     enable = true;
@@ -372,7 +330,7 @@ in
     # testing if we can avoid having to symlink XDG_CONFIG_HOME
     # should be setup by neomutt module
     # MUTT="$XDG_CONFIG_HOME/mutt";
-    VIM_SOURCE_DIR = "$HOME/vim";
+    # VIM_SOURCE_DIR = "$HOME/vim";
   };
 
   # export XDG_ settings
@@ -381,8 +339,4 @@ in
   # https://github.com/NixOS/nixpkgs/issues/196651
   manual.manpages.enable = true;
 
-  # TODO fix that
-  # systemd.user.sessionVariables = {
-  # NOTMUCH_CONFIG=home.sessionVariables.NOTMUCH_CONFIG;
-  # };
 }

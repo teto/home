@@ -1,8 +1,6 @@
 #  vim: set et fenc=utf-8 ff=unix sts=0 sw=4 ts=4 fdm=marker :
 #  zsh specific aliases only
 #
-# https://stackoverflow.com/questions/24601806/got-permission-denied-when-emulating-sh-under-zsh
-emulate sh -c "source $ZDOTDIR/aliases.sh"
 
 # Suffix aliases execute a command based on a file’s extension. Suffix aliases are used with the alias -s command.  Here’s my favorite feature of aliases in zsh.  By adding this line:
 # g => global , does not depend on position on line
@@ -31,3 +29,83 @@ alias weather="curl v2.wttr.in"
 
 # Gestion du 'ls' : couleur & ne touche pas aux accents
 # alias ls='ls --classify --tabsize=0 --literal --color=auto --show-control-chars --human-readable'
+# vim: set et fenc=utf-8 ff=unix sts=0 sw=4 ts=4 fdm=marker :
+# TODO move to home-manager ?
+
+rfw(){
+    readlink -f $(which "$1")
+}
+
+
+# to edit nixos kernel config
+# then type $ make menuconfig
+# make menuconfig KCONFIG_CONFIG=config_off
+# try xconfig
+# see https://nixos.wiki/wiki/Linux_Kernel for xconfig example
+
+alias nvim-dev="nix develop --override-input nixpkgs /home/teto/nixpkgs --no-write-lock-file ./contrib#neovim-developer  --show-trace"
+# alias notif-center='kill -s USR1 $(pidof deadd-notification-center)'
+# --option extra-sandbox-paths "/bin/sh=$(readlink -f $(which bash))"
+alias local-rebuild="nixos-rebuild --flake ~/home --override-input nixpkgs-teto /home/teto/nixpkgs --override-input hm /home/teto/hm --override-input nova /home/teto/nova/doctor --override-input mptcp-flake /home/teto/mptcp/mptcp-flake --no-write-lock-file switch --show-trace --use-remote-sudo"
+
+# Gitops quick
+alias mg='if [ -z ${BW_SESSION} ]; then export BW_SESSION=$(bw unlock --raw); fi && make gitops'
+# TODO check return type in bw unlock --check 
+alias bnr='if [ -z ${BW_SESSION} ]; then export BW_SESSION=$(bw unlock --raw); fi && nix develop --option builders "$NOVA_OVH1"'
+alias nfs='nix flake show'
+
+
+
+alias bn='if [ -z ${BW_SESSION} ]; then export BW_SESSION=$(bw unlock --raw); fi && nix develop'
+# function bn {
+
+
+# }
+
+# https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz
+# -f channel:nixos-unstable'
+# github:nixos/nixpkgs/ff9efb0724de5ae0f9db9df2debefced7eb1571d
+# alias hsenv='nix shell nixpkgs#ghc nixpkgs#haskell.packages.ghc8107.cabal-install nixpkgs#pkg-config nixpkgs#haskell-language-server'
+
+# fzf-diff (https://medium.com/@GroundControl/better-git-diffs-with-fzf-89083739a9cb)
+function fzd {
+  preview="git diff $@ --color=always -- {-1}"
+  git diff --name-only $@ | fzf -m --ansi --preview "$preview"
+}
+
+# to run
+function nvimdev {
+    folder="$1"
+    shift
+    binary="$folder/build/bin/nvim"
+    if [ ! -f "$binary" ]; then
+        echo "No binary $binary"
+        return
+    fi
+    VIMRUNTIME="$folder/runtime" "$binary" "$@"
+
+}
+
+
+
+# autres players a tester eventuellement
+# alias n="ncmpcpp"
+function n {
+    if [ -f "./contrib/flake.nix" ];
+    then 
+        nix develop ./contrib
+    else 
+        nix develop "$@"
+    fi
+}
+# alias lens="sudo rm -rf /home/teto/.config/Lens/extensions && lens"
+# alias ff="find . -iname" # use fd instead
+function latest {
+    # shellcheck disable=SC2012
+    ls -lt "$@" |head
+}
+
+#}}}
+
+# alias servethis="nix run nixpkgs#python3 --command \'python -c 'import SimpleHTTPServer; SimpleHTTPServer.test()'\""
+

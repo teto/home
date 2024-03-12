@@ -19,8 +19,11 @@ return {
 
  {
   -- :GpChatNew
-  'Robitx/gp.nvim',
-	config = function()
+  -- use :GpInspectPlugin to debug
+  dir = "~/gp.nvim"
+  -- 'Robitx/gp.nvim'
+  -- , branch = "copilot"
+  , config = function()
  	-- default command agents (model + persona) 
  	-- name, model and system_prompt are mandatory fields 
  	-- to use agent for chat set chat = true, for command set command = true 
@@ -28,25 +31,49 @@ return {
  	-- agents = {  { name = "ChatGPT4" }, ... }, 
 
      local default_config = require('gp.config')
-    -- unpack(default_config.agents),
-     local agents = {
+     -- local agents = 
+     -- Voice commands (:GpWhisper*) depend on SoX (Sound eXchange) to handle audio recording and processing:
+		require("gp").setup({
+-- cd /tmp/gp_whisper && export LC_NUMERIC='C' && sox --norm=-3 rec.wav norm.wav && t=$(sox 'norm.wav' -n channels 1 stats 2>&1 | grep 'RMS lev dB'  | sed -e 's/.* //' | awk '{print $1*1.75}') && sox -q norm.wav -C 196.5 final.mp3 silence -l 1 0.05 $t'dB' -1 1.0 $t'dB' pad 0.1 0.1 tempo 1.75 && curl  --max-time 20 https://api.openai.com/v1/audio/transcriptions -s -H \"Authorization: 
+	-- whisper_rec_cmd = {"sox", "-c", "1", "--buffer", "32", "-d", "rec.wav", "trim", "0", "60:00"},
+	-- whisper_rec_cmd = {"arecord", "-c", "1", "-f", "S16_LE", "-r", "48000", "-d", "3600", "rec.wav"},
+	-- whisper_rec_cmd = {"ffmpeg", "-y", "-f", "avfoundation", "-i", ":0", "-t", "3600", "rec.wav"},
+
+         hooks = {
+           ["Translator"] = function(gp, params)
+             local agent = gp.get_command_agent()
+             local chat_system_prompt = "You are a Translator, please translate between English and Chinese."
+             gp.cmd.ChatNew(params, agent.model, chat_system_prompt)
+           end
+           -- ["Translator"] = function(gp, params)
+           --   local agent = gp.get_command_agent()
+           --   local chat_system_prompt = "You are a Translator, please translate between English and Chinese."
+           --   gp.cmd.ChatNew(params, agent.model, chat_system_prompt)
+           -- end
+
+         },
+         agents = {
+          -- unpack(default_config.agents),
           -- Disable ChatGPT 3.5
-          -- {
-          --   name = "ChatGPT3-5",
-          --   chat = false,  -- just name would suffice
-          --   command = false,   -- just name would suffice
-          -- },
           {
-            name = "mistral",
+            provider = "openai",
+            name = "ChatGPT3-5",
+            chat = true,  -- just name would suffice
+            command = false,   -- just name would suffice
+          },
+          {
+            provider = "localai",
+            name = "Mistral",
             chat = true,
             command = true,
             model = { model = "mistral", temperature = 1.1, top_p = 1 },
             system_prompt = default_config.agents[1].system_prompt
            },
-
           {
-            -- name = "ChatGPT4",
-            name = "toto",
+
+            provider = "openai",
+            name = "ChatGPT4",
+            -- name = "toto",
             chat = true,
             command = true,
             -- string with model name or table with model name and parameters
@@ -62,19 +89,32 @@ return {
               .. "- Don't elide any code from your output if the answer requires coding.\n"
               .. "- Take a deep breath; You've got this!\n",
           },
-    }
-     -- Voice commands (:GpWhisper*) depend on SoX (Sound eXchange) to handle audio recording and processing:
-		require("gp").setup({
+        },
+        -- image_dir = (os.getenv("TMPDIR") or os.getenv("TEMP") or "/tmp") .. "/gp_images",
+        image_dir = vim.fn.stdpath("cache").."/gp_images",
+        whisper_dir = vim.fn.stdpath("cache").."/gp_whisper",
+        whisper_language = "en",
 
-         agents = agents,
-         chat_agents = agents,
-         openai_api_key = os.getenv("OPENAI_API_KEY"),
-         -- cmd_prefix = "Gp",
-         openai_api_endpoint = "https://api.openai.com/v1/chat/completions",
+         -- chat_agents = agents,
          -- openai_api_endpoint = "http://localhost:8080/v1/chat/completions",
          -- agents = agents,
-         chat_topic_gen_model = 'mistral',
-         model = { model = "mistral", temperature = 1.1, top_p = 1 },
+         -- chat_topic_gen_model = 'mistral',
+         -- model = { model = "mistral", temperature = 1.1, top_p = 1 },
+
+         providers = {
+          copilot = {},
+          openai = {
+           -- response from the config.providers.copilot.secret command { "bash", "-c", "cat ~/.config/github-copilot/hosts.json | sed -e 's/.*oauth_token...//;s/\".*//'" } is empty
+            secret = os.getenv("OPENAI_API_KEY"),
+          -- cmd_prefix = "Gp",
+            endpoint = "https://api.openai.com/v1/chat/completions",
+          },
+          -- ollama = {},
+          localai = {
+            endpoint = "http://localhost:11111/v1/chat/completions",
+          }
+
+         }
 
         })
 		-- or setup with your own config (see Install > Configuration in Readme)

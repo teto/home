@@ -11,6 +11,7 @@ pulumi up --verbose 9 --logtostderr
 
 pulumi plugin ls
 
+  * read outputs
 pulumi config get redisPassword
 
 # reference 

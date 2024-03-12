@@ -1,12 +1,13 @@
-{ config, pkgs, options, lib, ... }:
-let
-  secrets = import ../../../nixpkgs/secrets.nix;
-in
+{ config, pkgs, options
+, lib
+# , secrets
+, ... }:
 {
 
  imports = [
-   ../../profiles/zsh.nix
+   ../../profiles/desktop/programs/zsh.nix
   ];
+
   users.users.teto = {
 
     shell = pkgs.zsh;
@@ -43,7 +44,7 @@ in
     # initialPassword
     # generated with nix run nixpkgs.mkpasswd mkpasswd -m sha-512
     # hashedPassword = secrets.users.teto.hashedPassword;
-hashedPassword = "$6$UcKAXNGR1brGF9S4$Xk.U9oCTMCnEnN5FoLni1BwxcfwkmVeyddzdyyHAR/EVXOGEDbzm/bTV4F6mWJxYa.Im85rHQsU8I3FhsHJie1";
+    hashedPassword = "$6$UcKAXNGR1brGF9S4$Xk.U9oCTMCnEnN5FoLni1BwxcfwkmVeyddzdyyHAR/EVXOGEDbzm/bTV4F6mWJxYa.Im85rHQsU8I3FhsHJie1";
 
     openssh.authorizedKeys.keyFiles = [
       ../../../perso/keys/id_rsa.pub

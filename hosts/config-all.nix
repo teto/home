@@ -25,9 +25,6 @@
   # Set your time zone.
   time.timeZone = "Europe/Paris";
   # time.timeZone = "Asia/Tokyo";
-  # set to false on windows machines else it messes up
-  time.hardwareClockInLocalTime = false; # by default false
-  # services.tzupdate.enable = true;
 
   environment.systemPackages = with pkgs; [
     ssh-to-age # useful everywhere
@@ -39,6 +36,7 @@
   ] ++ (with pkgs; [
     # autoconf
     binutils
+    btop
     curl
     fd # replaces 'find'
     file
@@ -89,7 +87,7 @@
     enableCompletion = true;
     shellInit = ''
       # set -o vi
-    '';
+      '';
   };
 
   environment.etc."inputrc".source = ../config/inputrc;

@@ -1,20 +1,21 @@
 { config, pkgs, lib
-, secrets, ... }:
+, secrets
+, ... }:
 
 let 
   hmUtils = pkgs.callPackage ../../../hm/lib.nix {};
 in
 {
-  home.packages = with pkgs; [
+
+ imports = [
+   ./programs/vdirsyncer.nix
+
+ ];
+
+ home.packages = with pkgs; [
     # need gnome-accounts to make it work
     gnome3.gnome-calendar
   ];
-
-  # broken
-  # xdg.configFile."khal/config".text = lib.mkBefore '' 
-# highlight_event_days = True
-# show_all_days = False
-# # timedelta = "2d"
 
 # [locale]
 # # default_timezone = Asia/Tokyo
@@ -22,12 +23,6 @@ in
 # unicode_symbols=True
 
   #  '';
-
-  programs.vdirsyncer = {
-    enable = true;
-    # package = pkgs.vdirsyncerStable;  # can conflict
-
-  };
 
   # accounts.contact = {
   #   basePath = "$XDG_CONFIG_HOME/card";
@@ -51,7 +46,8 @@ in
   accounts.calendar = {
     basePath = "${config.home.homeDirectory}/calendars";
 
-    accounts.fastmail = {
+    accounts = {
+     fastmail = {
       # need locale to be set apparently
       khal = {
        enable = true;
@@ -59,9 +55,12 @@ in
        type = "discover";
        # primary = true;
        priority = 1000;
-       extraConfig = ''
-       addresses = ${secrets.users.teto.email}
-        '';
+       # #b3e1f7
+       color = "#ff0000";
+       # does not seem to be valid
+       # extraConfig = ''
+       # addresses = ${secrets.users.teto.email}
+       #  '';
       };
 
       vdirsyncer = {
@@ -82,12 +81,62 @@ in
         url = "https://caldav.fastmail.com/";
         # url = "https://efss.qloud.my/remote.php/dav/";
         # userName = "m";
-        userName = "matthieucoudron@fastmail.com";
+        # userName = sert
+        userName = secrets.accounts.mail.fastmail_perso.email;
+
         # needs to be an app-specific password/token
         passwordCommand = (hmUtils.getPassword "perso/fastmail_mc");
          # "~/dotfiles/bin/pass-show" "iij/nextcloud"
         # ];
       };
     };
+
+    # nova_gmail = {
+    #   # need locale to be set apparently
+    #   khal = {
+    #    enable = true;
+    #    # type can be: calendar, birthdays and discover
+    #    type = "discover";
+    #    # primary = true;
+    #    priority = 1000;
+    #    # #b3e1f7
+    #    color = "#ff0000";
+    #    # does not seem to be valid
+    #    # extraConfig = ''
+    #    # addresses = ${secrets.users.teto.email}
+    #    #  '';
+    #   };
+
+    #   vdirsyncer = {
+    #     enable = false;
+    #     # null doesn't look too interesting :s 
+    #     collections = ["from a"  "from b"];
+    #     metadata = [ "color" "displayname" ];
+    #   };
+
+    #   local = {
+    #     type = "filesystem";
+    #     fileExt = ".ics";
+    #   };
+
+    #   remote = {
+    #     type = "caldav";
+    #     # url = "http://efss.qloud.my/remote.php/dav/calendars/root/personal/";
+    #     url = "https://caldav.fastmail.com/";
+    #     # url = "https://efss.qloud.my/remote.php/dav/";
+    #     # userName = "m";
+    #   userName = secrets.accounts.mail.nova.email;
+
+    #     # needs to be an app-specific password/token
+    #       # getPasswordCommand = account: lib.strings.escapeShellArgs (pkgs.hmUtils.getPassword account);
+
+    #   passwordCommand = pkgs.hmUtils.getPassword "nova/mail";
+    #     # passwordCommand = (hmUtils.getPassword "perso/fastmail_mc");
+    #      # "~/dotfiles/bin/pass-show" "iij/nextcloud"
+    #     # ];
+    #   };
+    #  };
+    };
+
   };
 }

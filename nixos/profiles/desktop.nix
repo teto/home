@@ -5,14 +5,12 @@
     ../../hosts/config-all.nix
 
     ../../nixos/profiles/ntp.nix
-    ../../nixos/profiles/wireshark.nix
+    ./desktop/programs/wireshark.nix
     ../../nixos/modules/network-manager.nix
-    ../../nixos/profiles/wifi.nix
     # ../../nixos/profiles/librenms.nix
 
-    ./zsh.nix
+    ./desktop/programs/zsh.nix
     ./gnome.nix
-    ./wayland.nix
     ./neovim.nix
     ./pipewire.nix
     ./sops.nix
@@ -21,39 +19,41 @@
     # ./modules/jupyter.nix
   ];
 
-  xdg.portal = {
-   # https://github.com/flatpak/xdg-desktop-portal/blob/1.18.1/doc/portals.conf.rst.in
-   enable = true; 
-   xdgOpenUsePortal = true; 
+  environment.pathsToLink = [ "/share/xdg-desktop-portal" "/share/applications" ];
 
-   # is this in configuration.nix ?
-   config.common.default = "*";
-               # {
-               #   common = {
-               #     default = [
-               #       "gtk"
-               #     ];
-               #   };
-               #   pantheon = {
-               #     default = [
-               #       "pantheon"
-               #       "gtk"
-               #     ];
-               #     "org.freedesktop.impl.portal.Secret" = [
-               #       "gnome-keyring"
-               #     ];
-               #   };
-               #   x-cinnamon = {
-               #     default = [
-               #       "xapp"
-               #       "gtk"
-               #     ];
-               #   };
-               # }
+  # let home-manager do it
+  # xdg.portal = {
+  #  # https://github.com/flatpak/xdg-desktop-portal/blob/1.18.1/doc/portals.conf.rst.in
+  #  enable = true; 
+  #  xdgOpenUsePortal = true; 
+
+  #  # is this in configuration.nix ?
+  #  config.common.default = "*";
+  #              # {
+  #              #   common = {
+  #              #     default = [
+  #              #       "gtk"
+  #              #     ];
+  #              #   };
+  #              #   pantheon = {
+  #              #     default = [
+  #              #       "pantheon"
+  #              #       "gtk"
+  #              #     ];
+  #              #     "org.freedesktop.impl.portal.Secret" = [
+  #              #       "gnome-keyring"
+  #              #     ];
+  #              #   };
+  #              #   x-cinnamon = {
+  #              #     default = [
+  #              #       "xapp"
+  #              #       "gtk"
+  #              #     ];
+  #              #   };
+  #              # }
 
 
-  };
-  environment.homeBinInPath = true;
+  # };
 
   # to get manpages
   documentation.enable = true;
@@ -105,7 +105,9 @@
       ubuntu_font_family
       inconsolata # monospace
       noto-fonts-cjk # asiatic
-      # nerdfonts
+      nerdfonts # otherwise no characters
+      (pkgs.nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; })
+
       # corefonts # microsoft fonts  UNFREE
       font-awesome_5
       source-code-pro
@@ -146,10 +148,6 @@
     # either use --option extra-binary-caches http://hydra.nixos.org/
     # handy to hack/fix around
     # readOnlyStore = false;
-  };
-
-  environment.shellAliases = {
-    nix-stray-roots = ''nix-store --gc --print-roots | egrep -v "^(/nix/var|/run/\w+-system|\{memory)"'';
   };
 
   # programs.gnome-disks.enable = false;

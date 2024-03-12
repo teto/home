@@ -1,10 +1,25 @@
 result/bin/local-ai --debug
 
+* develop localai
 
+go run . --address ":11111" --debug 
+
+* start the old fashioned way
 nix run .#local-ai-cublas -- --models-path ~/models m
+
+  but now localai is in nixpkgs, you just need to override with with_cublas = true;
+
+* how to install the models ?
 
 # TODO one can point towards huggingface library too ! (replace index.yaml by hugginface.yaml)
 export GALLERIES='[{"name":"model-gallery", "url":"github:go-skynet/model-gallery/index.yaml"}]'
 
+model-gallery@whisper-1
+nix run .\#local-ai-cublas -- models install model-gallery@mistral
 huggingface gallery used by default ?
 nix run .#local-ai-cublas -- --models-path ~/models models install model-gallery@thebloke__codellama-7b-ggml__codellama-7b.ggmlv3.q2_k.bin
+
+
+  * How to run the models ?
+
+ nix run github:ck3d/nix-local-ai#local-ai-cublas -- --models-path ~/localai-models

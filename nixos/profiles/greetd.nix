@@ -1,10 +1,5 @@
-{pkgs, ... }: 
-
-let 
-
-in
-
- {
+{pkgs, ... }:
+{
   services.greetd = {
     enable = true;
   # swayConfig = pkgs.writeText "greetd-sway-config" ''
@@ -22,19 +17,16 @@ in
       # restart = false; # should be disabled when using autologin
       default_session = {
         # dbus-run-session could be interesting too
-          command = ''
-            ${pkgs.greetd.tuigreet}/bin/tuigreet \
-              --sessions /run/current-system/sw/share/wayland-sessions/:/run/current-system/sw/share/xsessions/ \
-              --remember \
-              --remember-user-session \
-              --user-menu \
-              --power-shutdown /run/current-system/systemd/bin/systemctl poweroff \
-              --power-reboot /run/current-system/systemd/bin/systemctl reboot
-
-          '';
-
-              # --cmd sx
-        };
+        command = ''
+          ${pkgs.greetd.tuigreet}/bin/tuigreet \
+            --sessions /run/current-system/sw/share/wayland-sessions/:/run/current-system/sw/share/xsessions/ \
+            --remember \
+            --remember-user-session \
+            --user-menu \
+            --power-shutdown /run/current-system/systemd/bin/systemctl poweroff \
+            --power-reboot /run/current-system/systemd/bin/systemctl reboot
+        '';
+      };
 
       initial_session = {
         command = "${pkgs.sway}/bin/sway";

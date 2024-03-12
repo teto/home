@@ -26,10 +26,11 @@ require("dbee").store(format, output, opts)
 -- },
 
  {
+  -- Show diagnostics and lsp info inside a custom window, following the mouse position 
   'soulis-1256/eagle.nvim'
  },
  {
-  -- 
+  -- file explorer
   'stevearc/oil.nvim'
   , config = function ()
       require("oil").setup({

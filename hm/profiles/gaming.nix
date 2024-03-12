@@ -8,7 +8,7 @@
     lutris
   ];
 
-  services.upower.percentageLow = 35;
-  services.upower.percentageCritical = 30;
-  services.upower.percentageAction = 25;
+  # services.upower.percentageLow = 35;
+  # services.upower.percentageCritical = 30;
+  # services.upower.percentageAction = 25;
 }

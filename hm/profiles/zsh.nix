@@ -1,5 +1,13 @@
-{ config, secrets, ... }:
+{ config
+, secrets
+, pkgs
+, ... }:
 {
+  home.sessionVariables = {
+    # RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/rg.conf";
+    ZDOTDIR = "$XDG_CONFIG_HOME/zsh";
+  };
+
   programs.zsh = {
     enable = true;
 
@@ -60,7 +68,9 @@
     # bindkey ‘^P’ up-line-or-beginning-search
     # bindkey ‘^N’ down-line-or-beginning-search
 
+    # source ${pkgs.awscli2}/share/zsh/site-functions/_aws
     initExtra = ''
+      # workaround aws drv bug see https://github.com/NixOS/nixpkgs/issues/275770#issuecomment-1977471765
       # Default to standard vi bindings, regardless of editor string
       bindkey -v
       # we can't bind emacs and vi at the same time so this adds emacs'

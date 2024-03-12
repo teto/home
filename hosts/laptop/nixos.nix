@@ -1,15 +1,49 @@
-{ config, lib, pkgs, flakeInputs, secrets, ... }:
+{ config, lib, pkgs
+, flakeInputs
+, withSecrets 
+, secrets
+, ... }:
+let 
+
+  module = { pkgs, ... }@args: flakeInputs.haumea.lib.load {
+   src = flakeInputs.nix-filter {
+     root = ../desktop;
+    include = [ 
+      # "sops.nix"
+      "sops/secrets.nix"
+    ];
+     # exclude = [
+     #   "teto"
+     #   "root"
+     # ];
+    };
+    # loader = inputs: path: 
+    #  inputs.super.defaultWith import;
+
+    #  builtins.trace path path;
+    inputs = args // {
+      inputs = flakeInputs;
+    };
+    transformer = [
+     flakeInputs.haumea.lib.transformers.liftDefault
+     # (flakeInputs.haumea.lib.transformers.hoistAttrs "_import" "import")
+    ];
+  };
+in
 {
   imports = [
+    module
     ./services/openssh.nix
     ./sops.nix
     ./hardware.nix
+    # ../desktop/sops.nix
     # ../desktop/services/tailscale.nix
 
     ../config-all.nix
     ../../nixos/modules/luarocks-site.nix
 
-    ../../nixos/profiles/distributedBuilds.nix
+
+    ../../nixos/profiles/wifi.nix
     ../../nixos/profiles/desktop.nix
     ../../nixos/profiles/podman.nix
     ../../nixos/profiles/sway.nix
@@ -30,9 +64,25 @@
 
     # ./profiles/pixiecore.nix
 
+   ] ++ lib.optionals withSecrets [
+    ../../nixos/profiles/wireguard.nix
   ];
 
+
+  powerManagement.enable = true;
   services.power-profiles-daemon.enable = true;
+
+  # services.auto-cpufreq.enable = true;
+  # services.auto-cpufreq.settings = {
+	  # battery = {
+	     # governor = "powersave";
+	     # turbo = "never";
+	  # };
+	  # charger = {
+	     # governor = "performance";
+	     # turbo = "auto";
+	  # };
+	# };
 
   # TODO conditionnally enable it
   # networking.wireless.iwd.enable = true;
@@ -58,6 +108,42 @@
 #   services.xserver.displayManager.gdm.enable = true;
 #   services.xserver.desktopManager.gnome.enable = true;
 
+  ### HWP
+  # systemd.tmpfiles.rules = [
+  #   "w /sys/devices/system/cpu/cpufreq/policy*/energy_performance_preference - - - - balance_power"
+  # ];
+
+  ### TLP
+  #services.tlp = {
+  #    enable = true;
+  #    settings = {
+  #      CPU_SCALING_GOVERNOR_ON_AC = "performance";
+  #      CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+
+  #      CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
+  #      CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
+
+  #      PLATFORM_PROFILE_ON_AC = "performance";
+  #      PLATFORM_PROFILE_ON_BAT = "low-power";
+
+  #      CPU_BOOST_ON_AC=1;
+  #      CPU_BOOST_ON_BAT=0;
+
+  #      CPU_HWP_DYN_BOOST_ON_AC=1;
+  #      CPU_HWP_DYN_BOOST_ON_BAT=0;
+
+
+  #      #CPU_MIN_PERF_ON_AC = 0;
+  #      #CPU_MAX_PERF_ON_AC = 100;
+  #      #CPU_MIN_PERF_ON_BAT = 0;
+  #      #CPU_MAX_PERF_ON_BAT = 20;
+
+  #     #Optional helps save long term battery health
+  #     START_CHARGE_THRESH_BAT0 = 60; # 60 and below it starts to charge
+  #     STOP_CHARGE_THRESH_BAT0 = 90; # 90 and above it stops charging
+
+  #    };
+  #};
 
   networking.hostName = "mcoudron"; # Define your hostname.
 
@@ -67,6 +153,8 @@
   boot.kernelParams = [
     "acpi_backlight=vendor"
     # "i915.enable_psr=0"  # disables a power saving feature that can cause flickering
+    # "ahci.mobile_lpm_policy=3"
+    # "rtc_cmos.use_acpi_alarm=1"
   ];
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
@@ -87,20 +175,26 @@
     # "net.core.wmem_max" = 1048576;
   };
 
-  home-manager.users.root = {
-   imports = [
-    ../../hm/profiles/neovim.nix
-    ../desktop/root/ssh-config.nix
-   ];
+  home-manager.users = 
+   {
+    root = {
+     imports = [
+      ../../hm/profiles/neovim.nix
+      ../desktop/root/default.nix
+      ../desktop/root/programs/ssh.nix
+      ../../hm/profiles/nova/ssh-config.nix
 
-  };
+     ];
 
- home-manager.users.teto = {
+    };
+
+   teto = {
    # TODO it should load the whole folder
    imports = [
      # custom modules
-     ./home.nix
+     ./teto/default.nix
    ];
+  };
  };
 
 
@@ -190,14 +284,14 @@
   environment.systemPackages = [
     # cups-pk-helper # to add printer through gnome control center
     pkgs.lm_sensors # to see CPU temperature (command 'sensors')
+    pkgs.vlc # to see it in popcorn
+    pkgs.nerdfonts
   ];
 
   # service to update bios etc
   # managed to get this problem https://github.com/NixOS/nixpkgs/issues/47640
   services.fwupd.enable = true;
   services.gvfs.enable = true;
-
-  programs.ccache.enable = false;
 
   # let's be fucking crazy
   # environment.enableDebugInfo = true;
@@ -209,7 +303,7 @@
     enable = true;
   };
 
-  system.stateVersion = "23.05";
+  system.stateVersion = "23.11";
   
   # services.logind = {
   #   # see https://bbs.archlinux.org/viewtopic.php?id=225977 for problems with LID

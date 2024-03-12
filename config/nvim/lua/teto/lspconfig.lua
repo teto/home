@@ -50,6 +50,7 @@ lspconfig.lua_ls.setup({
    diagnostics = {
     enable = true,
     globals = {
+     -- nvim and its tests
      'vim',
      'describe',
      'it',
@@ -58,8 +59,9 @@ lspconfig.lua_ls.setup({
      'pending',
      'teardown'
      -- available in wireplumber
-     ,
-     'alsa_monitor',
+     , 'alsa_monitor',
+     -- for yazi
+     'ya', 'ui', 'cx', 'Command'
     },
     -- Define variable names that will not be reported as an unused local by unused-local.
     unusedLocalExclude = { '_*' },
@@ -109,6 +111,9 @@ lspconfig.lua_ls.setup({
 
 lspconfig.dhall_lsp_server.setup({})
 lspconfig.dockerls.setup({})
+
+-- 
+lspconfig.gopls.setup({})
 
 lspconfig.yamlls.setup({
  -- cmd = { 'yaml-language-server', '--stdio' },

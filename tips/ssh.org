@@ -1,3 +1,8 @@
+* exit a stuck session
+
+  By default on the OpenSSH client, it's the tilde (~) character.
+  To quit the SSH client, you can press the tilde key and then the period (.) key.
+
 * see running config
  https://superuser.com/questions/1173594/get-configuration-of-running-sshd
  sshd  -T

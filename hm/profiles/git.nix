@@ -1,8 +1,11 @@
-{ config, pkgs, lib, ... } @ args:
-let
-  secrets = import ../../nixpkgs/secrets.nix;
-in
+{ config, pkgs
+, lib
+, ... } @ args:
 {
+
+  home.file.".ssh/allowed_signers".text =
+    "* ${builtins.readFile ../../perso/keys/id_rsa.pub}";
+
   programs.git = {
     enable = true;
 
@@ -68,7 +71,7 @@ in
         ui = true;
       };
       # vimdiff as merge and diff tool
-      merge = {
+      merge = lib.mkForce {
         tool = "fugitive";
         conflictstyle = "diff3";
       };
@@ -83,13 +86,6 @@ in
           cmd = "nvim -f -c \"Gdiffsplit!\" \"$MERGED\"";
         };
       };
-      # [mergetool "vimdiff"]
-      #   prompt = true
-      #   cmd = nvim -d $BASE $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
-
-      # [mergetool "fugitive"]
-      # ; Use :Gdiffsplit! for 3 way diff
-      # 	cmd = nvim -f -c \"Gdiffsplit!\" \"$MERGED\"
 
       # TODO use a fully qualified nvim ?
       diff = {

@@ -1,0 +1,24 @@
+# Paths for models and galleries
+# Path containing models used for inference
+#MODELS_PATH="/var/lib/local-ai/models"
+## JSON list of galleries
+#GALLERIES='[{"name":"model-gallery", "url":"github:go-skynet/model-gallery/index.yaml"}, {"url": "github:go-skynet/model-gallery/huggingface.yaml","name":"huggingface"}]'
+## List of models to preload at startup
+## PRELOAD_MODELS=""
+## Path to a YAML config file for preloading models
+## PRELOAD_MODELS_CONFIG=""
+## Path to the config file
+#LOCALAI_CONFIG_DIR="/etc/local-ai"
+
+## Server address and directories
+## Bind address for the API server
+## ADDRESS=":8080"
+## Directory for images
+#IMAGE_PATH="/var/lib/local-ai/generated/images"
+## Directory for audio
+#AUDIO_PATH="/var/lib/local-ai/generated/audio"
+## Path to backend assets
+#BACKEND_ASSETS_PATH="/var/lib/local-ai/backend_data"
+## 
+# local-ai --models-path ~/localai-models --address ":11111" --help
+models-path: ~/localai-models
