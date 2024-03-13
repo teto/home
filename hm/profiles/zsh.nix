@@ -1,4 +1,7 @@
-{ config, secrets, ... }:
+{ config
+, secrets
+, pkgs
+, ... }:
 {
   programs.zsh = {
     enable = true;
@@ -61,6 +64,8 @@
     # bindkey ‘^N’ down-line-or-beginning-search
 
     initExtra = ''
+      # workaround aws drv bug see https://github.com/NixOS/nixpkgs/issues/275770#issuecomment-1977471765
+      source ${pkgs.awscli2}/share/zsh/site-functions/_aws
       # Default to standard vi bindings, regardless of editor string
       bindkey -v
       # we can't bind emacs and vi at the same time so this adds emacs'

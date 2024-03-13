@@ -27,6 +27,7 @@ in
     ./programs/ssh.nix
     ./sway.nix
     ./services/swaync.nix
+    ./services/mpd.nix
     ./programs/yazi.nix
     ./programs/khal.nix
 
@@ -86,10 +87,6 @@ in
   ];
 
   services.nextcloud-client.enable = false;
-
-  services.mpd = {
-   musicDirectory = "/mnt/ntfs/Musique";
-  };
 
 
   xdg.configFile."starship.toml".enable = false;

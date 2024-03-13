@@ -371,7 +371,7 @@
 
             home-manager.users.teto = {
               imports = [
-                ./hosts/desktop/teto/ssh-config.nix
+                ./hosts/desktop/teto/programs/ssh.nix
                 ./hosts/desktop/teto/bash.nix
                 ./hm/profiles/nova/ssh-config.nix
 

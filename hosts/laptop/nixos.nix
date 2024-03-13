@@ -90,7 +90,7 @@
   home-manager.users.root = {
    imports = [
     ../../hm/profiles/neovim.nix
-    ../desktop/root/ssh-config.nix
+    # ../desktop/root/programs/ssh.nix
    ];
 
   };
@@ -190,6 +190,7 @@
   environment.systemPackages = [
     # cups-pk-helper # to add printer through gnome control center
     pkgs.lm_sensors # to see CPU temperature (command 'sensors')
+    pkgs.vlc # to see CPU temperature (command 'sensors')
   ];
 
   # service to update bios etc

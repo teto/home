@@ -297,6 +297,8 @@ SPROMPT="Correct $fg[red]%R$reset_color to $fg[green]%r$reset_color [(y)es (n)o 
 # zmodload zsh/terminfo
 
 
+# workaround aws completion being faulty https://github.com/NixOS/nixpkgs/issues/275770#issuecomment-1977471765
+
 # TODO pass a path that is versioned in home
 teatimer() {
     sleep $1;

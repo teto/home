@@ -6,7 +6,7 @@
 , ... }:
 {
   imports = [
-   ../../../hm/profiles/nova/ssh-config.nix
+   ../../../../hm/profiles/nova/ssh-config.nix
   ];
 
   programs.ssh = {

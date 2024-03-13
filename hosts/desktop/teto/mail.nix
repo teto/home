@@ -311,7 +311,9 @@ in
       Environment = [ ''DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/1000/bus"'' ];
 	  # SetCredentialEncrypted=secrets.mail.fastmail_perso;
       # easier to update the file then regenarate the nix code
-      LoadCredentialEncrypted="fastmail_perso:/home/teto/home/secrets/mail.secret";
+      # ImportCredential="fastmail_perso:/home/teto/home/secrets/mail.secret";
+      LoadCredential="fastmail_perso:/home/teto/home/secrets/mail.secret";
+      # LoadCredentialEncrypted="fastmail_perso:/home/teto/home/secrets/mail.secret";
       # TODO
       # FailureAction=''${pkgs.libnotify}/bin/notify-send "Failure"'';
       # TODO try to use LoadCredential
