@@ -3,8 +3,8 @@
 # run will become run soon
 
 keymap = [
- 	{ on = [ "<PageUp>" ], run = "arrow -10" },
-	{ on = [ "<PageDown>" ], run = "arrow 10" },
+ 	{ on = [ "<PageUp>" ], run = "arrow -15" },
+	{ on = [ "<PageDown>" ], run = "arrow 15" },
 
 	# compress zip files
 	{ on = [ "c", "z" ], run = """

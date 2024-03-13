@@ -32,5 +32,5 @@ weeknumbers=off
 
 [view]
 event_view_always_visible=true
-frame=true
+frame=width
 

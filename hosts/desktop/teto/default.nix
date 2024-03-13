@@ -23,8 +23,8 @@ in
     ./programs/git.nix
     ./programs/helix.nix
     ./ia.nix
-    ./neovim.nix
-    ./ssh-config.nix
+    ./programs/neovim.nix
+    ./programs/ssh.nix
     ./sway.nix
     ./services/swaync.nix
     ./programs/yazi.nix
