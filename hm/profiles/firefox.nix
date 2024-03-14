@@ -81,8 +81,6 @@ in
     enable = true;
     # import the one in pkgs/
     # package = myFirefox;
-
-
     profiles = {
       perso = {
         # https://gitlab.com/rycee/configurations/-/blob/bf46aef74ca53a61fe2d35349fe3dbc6a70b2609/user/firefox.nix#L25-39
@@ -105,17 +103,18 @@ in
 
         ];
 
+        containersForce = true;
         containers = {
-                "shopping" = {
-                  id = 1;
-                  color = "blue";
-                  icon = "cart";
-                };
-                "dangerous" = {
-                  id = 2;
-                  color = "red";
-                  icon = "fruit";
-                };
+          "shopping" = {
+            id = 1;
+            color = "blue";
+            icon = "cart";
+          };
+          "dangerous" = {
+            id = 2;
+            color = "red";
+            icon = "fruit";
+          };
         };
       };
 

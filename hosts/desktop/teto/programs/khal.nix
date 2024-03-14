@@ -18,6 +18,8 @@
 #           };
 #    };
 
+                 # general = {
+                 # };
 
  # spec at https://github.com/pimutils/khal/blob/master/khal/settings/khal.spec
   settings = {
@@ -25,9 +27,13 @@
    default = {
      default_calendar = "Perso";
      default_event_duration = "30m";
-     enable_mouse = true;
+     # enable_mouse = true; # unknown key
      highlight_event_days = true;
-     };
+     default_action = "list";
+     # Setting this to True will show all days, even when there is no event scheduled on that day.
+     # show_all_days = 
+     # editor = ["vim" "-i" "NONE"];
+    };
 
 
     keybindings = {
@@ -43,13 +49,26 @@
      # not truee
      # 'False', 'width', 'color', 'top',
      frame = "width";
+     dynamic_days = false; # shows too much when true
+     min_calendar_display = 2; # number of months
+    };
 
+    "contact table" = {
+      display = "formatted_name";
+      # preferred_phone_number_type = ["pref" "cell" "home"];
+      # preferred_email_address_type = ["pref" "work" "home"];
+    };
+
+    vcard = {
+     # TODO accept
+      #  INI atom (null, bool, int, float or string)'
+      # private_objects = ["Jabber" "Skype" "Twitter"];
     };
 
      highlight_days = {
       default_color = "#00ff00";
       color = "#ff0000";
-      method = "bg"; 
+      method = "fg";  # bg or fg
       };
   };
    # extraConfig = ''
