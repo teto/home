@@ -149,7 +149,7 @@ declare -A zlong_ignore_cmds=(
     "tig"=true
 )
 zlong_duration=10
-
+zlong_terminal_bell=false
 
 function zlong_alert_display_duration {
   local T=$1

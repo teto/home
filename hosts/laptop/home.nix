@@ -6,6 +6,7 @@
    ./sway.nix
    ./programs/waybar.nix
    ./teto/services/mpd.nix
+   ./teto/services/blueman-applet.nix
 
     ../../hm/profiles/emacs.nix
     ../../hm/profiles/nova.nix
@@ -18,7 +19,6 @@
    ../desktop/teto/contacts.nix
    ../desktop/teto/programs/helix.nix
 
-    ../../hm/profiles/vdirsyncer.nix
     ../../hm/profiles/desktop.nix
     ../../hm/profiles/sway.nix
     ../../hm/profiles/waybar.nix
@@ -58,8 +58,5 @@
   ];
 
   programs.neovim.enable = true; 
-
-  # for blue tooth applet; must be installed systemwide
-  services.blueman-applet.enable = true;
 
 }

@@ -13,6 +13,7 @@ return {
  },
  {
 
+  -- trying to show all warnings/errors
   -- require("workspace-diagnostics").populate_workspace_diagnostics(client, bufnr)
   'artemave/workspace-diagnostics.nvim'
  },
@@ -172,6 +173,9 @@ return {
 -- },
 -- default config
  { 'letieu/hacker.nvim',
+
+
+ -- :HackFollow or :HackAuto
   config = function ()
     require("hacker").setup {
    content = [[ Code want to show.... ]], -- The code snippet that show when typing

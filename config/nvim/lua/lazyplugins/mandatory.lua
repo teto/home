@@ -1,10 +1,12 @@
 return {
   -- { 'max397574/better-escape.nvim' },
-  { 'TheBlob42/houdini.nvim',
-    config = function()
-        require('houdini').setup()
-    end
-  },
+  -- {
+  --   -- use 'jk' as Esc . Supposed to be fast but currently an issue
+  --   'TheBlob42/houdini.nvim',
+  --   config = function()
+  --       require('houdini').setup()
+  --   end
+  -- },
   {
    -- to help with preloading fennel for instance
    -- 'gpanders/nvim-moonwalk',
