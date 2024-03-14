@@ -5,16 +5,16 @@ let
   hmUtils = pkgs.callPackage ../../../hm/lib.nix {};
 in
 {
-  home.packages = with pkgs; [
+
+ imports = [
+   ./programs/vdirsyncer.nix
+
+ ];
+
+ home.packages = with pkgs; [
     # need gnome-accounts to make it work
     gnome3.gnome-calendar
   ];
-
-  # broken
-  # xdg.configFile."khal/config".text = lib.mkBefore '' 
-# highlight_event_days = True
-# show_all_days = False
-# # timedelta = "2d"
 
 # [locale]
 # # default_timezone = Asia/Tokyo
@@ -22,12 +22,6 @@ in
 # unicode_symbols=True
 
   #  '';
-
-  programs.vdirsyncer = {
-    enable = true;
-    # package = pkgs.vdirsyncerStable;  # can conflict
-
-  };
 
   # accounts.contact = {
   #   basePath = "$XDG_CONFIG_HOME/card";
