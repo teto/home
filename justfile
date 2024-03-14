@@ -9,16 +9,10 @@
 BLOG_FOLDER := "${HOME}/blog"
 
 
-
-
-backup-photos:
-  # or use pass/sops to load secrets ?
-  # source restic.env
-  # 
-  # $(pass show self-hosting/backblaze\ restic-backup-key | tail -n1)
-  # TODO try rustic ?
-  restic backup ~/Nextcloud --repository-file=/run/secrets/restic/teto-bucket \
-   --password-command="pass show self-hosting/backblaze-restic-backup-key/password"
+backup-photos \
+  $AWS_ACCESS_KEY_ID=`pass show self-hosting/backblaze-restic-backup-key/username` $AWS_SECRET_ACCESS_KEY=`pass show self-hosting/backblaze-restic-backup-key/password` :
+  # le --password-command c'est RESTIC_PASSWORD_FILE
+  restic backup ~/Nextcloud --repository-file=/run/secrets/restic/teto-bucket
 
 
 # regen fortunes (not necessary with some fortunes version ?!)
