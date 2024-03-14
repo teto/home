@@ -58,6 +58,8 @@ in
       modi = "run,drun,window,ssh";
       /* see to integrate teiler */
       sidebar-mode = true;
+      kb-row-up= "Up";
+      kb-row-down= "Down";
       kb-mode-previous = "Alt+Left";
       kb-mode-next = "Alt+Right,Alt+Tab";
 	  kb-entry-history-up = "Control+p";
