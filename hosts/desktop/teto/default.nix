@@ -73,7 +73,7 @@ in
    # measurement = 
    # numeric = 
    # paper =
-    time= "fr_FR.UTF8";
+    time= "fr_FR.utf8";
   };
 
   

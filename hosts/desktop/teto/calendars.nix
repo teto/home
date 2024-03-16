@@ -53,9 +53,11 @@ in
        type = "discover";
        # primary = true;
        priority = 1000;
-       extraConfig = ''
-       addresses = ${secrets.users.teto.email}
-        '';
+       color = "#ff0000";
+       # does not seem to be valid
+       # extraConfig = ''
+       # addresses = ${secrets.users.teto.email}
+       #  '';
       };
 
       vdirsyncer = {

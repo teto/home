@@ -3,7 +3,7 @@
 path = /home/teto/calendars/fastmail/*
 priority=1000
 type=discover
-color = #0000ff
+color = "#0000ff"
 
 # TODO mettre celui des vacances avec un bg method=fg
 

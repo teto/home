@@ -40,6 +40,7 @@ in
     ../../nixos/profiles/nextcloud.nix
     ../../nixos/profiles/postgresql.nix
     ../../nixos/profiles/redis.nix
+    ../../nixos/profiles/greetd.nix
     # ../../nixos/profiles/immich.nix
 
     # this is only to test the new config

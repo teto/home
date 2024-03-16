@@ -297,10 +297,6 @@ in
     # maxCacheTtl
     enableSshSupport = true;
     # grabKeyboardAndMouse= false;
-    # pinentryFlavor = "curses";
-
-    # TODO decide when to use it
-    pinentryFlavor = "qt";
     grabKeyboardAndMouse = false; # should be set to false instead
     # default-cache-ttl 60
     verbose = true;
