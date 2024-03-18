@@ -1,0 +1,4 @@
+# generated via ssh-to-age
+
+age-keygen -y ~/.config/sops/age/keys.txt to regenerate public key
+

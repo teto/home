@@ -4,6 +4,31 @@ final: prev:
   # lib = final.callPackage ./lib.nix {};
   # inherit (final.callPackage ./lib.nix { }) mkRemoteBuilderDesc;
 
+  # copy/pasted from 
+  # https://gitlab.com/rycee/nur-expressions/-/blob/master/pkgs/firefox-addons/default.nix?ref_type=heads
+  # prev.lib.makeOverridable (
+  buildFirefoxXpiAddon = ({ stdenv ? final.stdenv 
+    , fetchurl ? final.fetchurl, pname, version, addonId, url, sha256, meta, ...
+    }:
+    stdenv.mkDerivation {
+      name = "${pname}-${version}";
+
+      inherit meta;
+
+      src = fetchurl { inherit url sha256; };
+
+      preferLocalBuild = true;
+      allowSubstitutes = true;
+
+      passthru = { inherit addonId; };
+
+      buildCommand = ''
+        dst="$out/share/mozilla/extensions/{ec8030f7-c20a-464f-9b0e-13a3a9e97384}"
+        mkdir -p "$dst"
+        install -v -m644 "$src" "$dst/${addonId}.xpi"
+      '';
+    });
+
   Rdebug = final.lib.enableDebugging (prev.R);
 
   # see https://github.com/NixOS/nixpkgs/pull/156974
@@ -65,16 +90,8 @@ final: prev:
 
   colr = prev.callPackage ./colr { };
 
-  dualsub = prev.callPackage ./dualsubtitles { };
-
   # mda-lite = prev.pythonPackages.callPackage ./mda-lite {};
-
-  subtitles-rs = prev.callPackage ./subtitles-rs { };
 
   # rustNightlyPlatform = prev.recurseIntoAttrs (prev.makeRustPlatform rust-nightly);
   # rt-tests = prev.callPackage ./rt-test.nix {};
-
-  i3dispatch = prev.python3Packages.callPackage ./i3-dispatch { inherit (prev) lib; };
-
-  # i3-snapshot = prev.callPackage ./i3-snapshot {};
 }

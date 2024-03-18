@@ -318,12 +318,14 @@
             */
             nvim = self.nixosConfigurations.desktop.config.home-manager.users.teto.programs.neovim.finalPackage;
 
-
             inherit (myPkgs) sway-scratchpad;
 
             nvim-unwrapped = myPkgs.neovim-unwrapped;
 
             # myPackage = flakeInputs.neovim.packages."${pkgs.system}".neovim;
+            # firefox-addons = import ./overlays/firefox/generated.nix {
+            #   inherit (myPkgs) buildFirefoxXpiAddon fetchurl lib stdenv;
+            # };
 
             treefmt-with-config = treefmt-nix.lib.mkWrapper nixpkgs.legacyPackages.x86_64-linux {
               # Used to find the project root
@@ -591,8 +593,8 @@
             # neovide = prev.neovide.overrideAttrs(oa: {
             #  src = self.inputs.neovide;
             # });
-            firefoxAddonsTeto = import ./overlays/firefox/generated.nix {
-              inherit (prev) buildFirefoxXpiAddon fetchurl lib stdenv;
+            firefox-addons = import ./overlays/firefox/generated.nix {
+              inherit (final) buildFirefoxXpiAddon fetchurl lib stdenv;
             };
             git-repo-manager = prev.callPackage ./pkgs/by-name/gi/git-repo-manager/package.nix {
               fenix = self.inputs.fenix;
@@ -608,14 +610,9 @@
         # neovimOfficial = self.inputs.neovim.overlay;
         wireshark = import ./overlays/wireshark.nix;
         python = import ./overlays/python.nix;
-        # wayland =
         # mptcp = self.inputs.mptcp-flake.overlays.default;
-        nur = self.inputs.nur.overlay;
-        # nova-ci = self.inputs.nova-ci.overlays.default;
-
+        # nur = self.inputs.nur.overlay;
       }
-        # just for one specific host
-        # // nova.overlays
       ;
 
       formatter.x86_64-linux = self.inputs.treefmt-nix.lib.mkWrapper

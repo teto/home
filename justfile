@@ -23,8 +23,8 @@ fortunes:
   strfile -c % fortunes/jap.txt ~/.local/share/matt/jap.txt.dat   
 
 # overlays/firefox/addons.nix:
-firefox:
-  mozilla-addons-to-nix overlays/firefox/addons.json overlays/firefox/addons.nix
+firefox-addons:
+  mozilla-addons-to-nix overlays/firefox/addons.json overlays/firefox/generated.nix
 
 lint: lint-nix lint-lua
 

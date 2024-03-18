@@ -3,7 +3,7 @@ flakeInputs,
 ... }:
 {
   imports = [
-   ../../../hm/profiles/shell.nix
+   ../../../hm/profiles/bash.nix
    # ../../profiles/bash.nix
   ];
 
@@ -20,7 +20,7 @@ flakeInputs,
 
     # 
     initExtra = ''
-      source  ~/home/config/zsh/aliases.sh
+     source  $XDG_CONFIG_HOME/zsh/aliases.sh
      '';
    };
  }

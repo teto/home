@@ -1,6 +1,12 @@
 { config, lib, pkgs, ... }:
 {
 
+  programs.bash.shellAliases = {
+     sscwl = "nix run .#simwork.core-webservice.local -- --bypass-manifest-check -vv";
+
+
+  };
+
   xdg.desktopEntries = {
     # xdg.desktopEntries = {
     #     min = { # minimal definition

@@ -4,7 +4,7 @@
 
   imports = [
 
-    ./shell.nix
+    ./bash.nix
     ./git.nix
     ./zsh.nix
 

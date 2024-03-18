@@ -59,18 +59,12 @@ let
 
 
 
-  commonExtensions = [
-     pkgs.nur.repos.rycee.firefox-addons.bitwarden
-     pkgs.nur.repos.rycee.firefox-addons.ublock-origin
-     pkgs.nur.repos.rycee.firefox-addons.tree-style-tab
+  commonExtensions = with pkgs; [
+     firefox-addons.bitwarden
+     firefox-addons.ublock-origin
+     firefox-addons.tree-style-tab
    ];
 
-   audibleTabExtension = 
-      (pkgs.fetchFirefoxAddon {
-        name = "ublock";
-        url = "https://addons.mozilla.org/firefox/downloads/file/3679754/ublock_origin-1.31.0-an+fx.xpi";
-        sha256 = "1h768ljlh3pi23l27qp961v1hd0nbj2vasgy11bmcrlqp40zgvnr";
-      });
 in
 {
 
@@ -92,16 +86,17 @@ in
         # pass package for instance
         # with pkgs.nur.repos.rycee.firefox-addons;
         # with pkgs;
-        extensions = commonExtensions ++ [
+        extensions = commonExtensions ++ (with pkgs; [
           # TODO no need for bitwarden anymore
-          pkgs.nur.repos.rycee.firefox-addons.browserpass
-          pkgs.nur.repos.rycee.firefox-addons."10ten-ja-reader"
-          audibleTabExtension
-          pkgs.nur.repos.rycee.firefox-addons.browserpass
-          pkgs.nur.repos.rycee.firefox-addons.refined-github
+          firefox-addons.browserpass
+          firefox-addons."10ten-ja-reader"
+          # firefox-addons.audibleTabExtension
+          firefox-addons.switch-to-audible-tab
+          firefox-addons.browserpass
+          firefox-addons.refined-github
           # pkgs.nur.repos.rycee.firefox-addons.browserpass-otp
 
-        ];
+        ]);
 
         containersForce = true;
         containers = {
