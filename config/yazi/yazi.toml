@@ -95,33 +95,16 @@ preloaders = [
 	# PDF
 	{ mime = "application/pdf", run = "pdf" },
 ]
-previewers = [
-	{ name = "*/", run = "folder", sync = true },
-	# Code
-	{ mime = "text/*",                 run = "code" },
-	{ mime = "*/xml",                  run = "code" },
-	{ mime = "*/javascript",           run = "code" },
-	{ mime = "*/x-wine-extension-ini", run = "code" },
-	# JSON
-	{ mime = "application/json", run = "json" },
-	# Image
-	{ mime = "image/vnd.djvu", run = "noop" },
-	{ mime = "image/*",        run = "image" },
-	# Video
-	{ mime = "video/*", run = "video" },
-	# PDF
-	{ mime = "application/pdf", run = "pdf" },
-	# Archive
-	{ mime = "application/zip",             run = "archive" },
-	{ mime = "application/gzip",            run = "archive" },
-	{ mime = "application/x-tar",           run = "archive" },
-	{ mime = "application/x-bzip",          run = "archive" },
-	{ mime = "application/x-bzip2",         run = "archive" },
-	{ mime = "application/x-7z-compressed", run = "archive" },
-	{ mime = "application/x-rar",           run = "archive" },
-	{ mime = "application/xz",              run = "archive" },
-	# Fallback
-	{ name = "*", run = "file" },
+# previewers = [
+# 	{ name = "*/", run = "folder", sync = true },
+# name (String): Glob expression for matching the file name. Case insensitive by default, add \s to the beginning to make it sensitive.
+# mime (String): Glob expression for matching the mime-type. Case insensitive by default, add \s to the beginning to make it sensitive.
+# run (String): The name of the Lua plugin to be ran.
+# sync (Boolean): Whether to run in the sync context, default is false
+append_previewers = [
+  # result of ComputationResults/ScalarArrays-3656b3d2-d682-50b3-92d5-7faf0976bcf5-crossArms.chunks
+  # "run" = name of plugin
+  { name = "*.chunks", run = "chunks", sync = true },
 ]
 
 [input]
@@ -191,6 +174,6 @@ sort_sensitive = false
 sort_reverse   = false
 
 [log]
-enabled = false
+enabled = true
 
 [headsup]

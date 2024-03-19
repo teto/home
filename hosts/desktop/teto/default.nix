@@ -104,6 +104,8 @@ in
     # meli  # broken jmap mailreader
 
     fre
+    unar # used to view archives by yazi
+    # poppler for pdf preview
   ];
 
   services.nextcloud-client.enable = false;

@@ -1,3 +1,4 @@
+Each peer needs to have a public-private keypair. 
 
 * how to setup (on nix)
 

@@ -1,5 +1,13 @@
-* 
+* restic check
 
+* list files
+
+* mount remote
+
+@begin
+  restic mount backup_mnt
+  @end
+The "mount" command mounts the repository via fuse to a directory. This is a read-only mount.
 * avec backblaze
 
   faire gaffe la master key ne permet pas d'utiliser la CLI, faut une cle dediee
