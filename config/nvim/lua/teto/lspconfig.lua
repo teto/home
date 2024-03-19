@@ -50,6 +50,7 @@ lspconfig.lua_ls.setup({
    diagnostics = {
     enable = true,
     globals = {
+     -- nvim and its tests
      'vim',
      'describe',
      'it',
@@ -58,8 +59,8 @@ lspconfig.lua_ls.setup({
      'pending',
      'teardown'
      -- available in wireplumber
-     ,
-     'alsa_monitor',
+     , 'alsa_monitor',
+     'ya', -- for yazi
     },
     -- Define variable names that will not be reported as an unused local by unused-local.
     unusedLocalExclude = { '_*' },

@@ -1,198 +1,199 @@
 [manager]
 
-# run will become run soon
+# exec will become exec soon
 
-keymap = [
- 	{ on = [ "<PageUp>" ], run = "arrow -15" },
-	{ on = [ "<PageDown>" ], run = "arrow 15" },
+append_keymap = [
+ 	{ on = [ "<PageUp>" ], exec = "arrow -15" },
+	{ on = [ "<PageDown>" ], exec = "arrow 15" },
 
 	# compress zip files
-	{ on = [ "c", "z" ], run = """
+	{ on = [ "c", "z" ], exec = """
 		shell 'printf "Your Name:"; read name; zip "$name.zip" "$@"' --block --confirm
 	""" },
 	# decompress zip files
-	{ on = [ "z", "u" ],         run = "shell unzip $@", desc = "Unzip file" },
+	{ on = [ "z", "u" ],         exec = "shell unzip $@", desc = "Unzip file" },
 
-	{ on = [ "/" ], run = "find" },
+	{ on = [ "/" ], exec = "find" },
 
-	{ on = [ "<Esc>" ], run = "escape"  },
-	{ on = [ "q" ], run = "quit" },
-	{ on = [ "<C-q>" ], run = "close" },
-	{ on = [ "<Esc>" ], run = "escape",  desc = "Exit visual mode, clear selected, or cancel search" },
-	{ on = [ "q" ],     run = "quit",    desc = "Exit the process" },
-	{ on = [ "<C-q>" ], run = "close",   desc = "Close the current tab, or quit if it is last tab" },
-	{ on = [ "<C-z>" ], run = "suspend", desc = "Suspend the process" },
+	{ on = [ "<Esc>" ], exec = "escape"  },
+	{ on = [ "q" ], exec = "quit" },
+	{ on = [ "<C-q>" ], exec = "close" },
+	{ on = [ "<Esc>" ], exec = "escape",  desc = "Exit visual mode, clear selected, or cancel search" },
+	{ on = [ "q" ],     exec = "quit",    desc = "Exit the process" },
+	{ on = [ "<C-q>" ], exec = "close",   desc = "Close the current tab, or quit if it is last tab" },
+	{ on = [ "<C-z>" ], exec = "suspend", desc = "Suspend the process" },
 
 	# Navigation
-	{ on = [ "k" ], run = "arrow -1" },
-	{ on = [ "j" ], run = "arrow 1" },
+	{ on = [ "k" ], exec = "arrow -1" },
+	{ on = [ "j" ], exec = "arrow 1" },
 
-	{ on = [ "K" ], run = "arrow -5" },
-	{ on = [ "J" ], run = "arrow 5" },
+	{ on = [ "K" ], exec = "arrow -5" },
+	{ on = [ "J" ], exec = "arrow 5" },
 
-	{ on = [ "h" ], run = "leave" },
-	{ on = [ "l" ], run = "enter" },
+	{ on = [ "h" ], exec = "leave" },
+	{ on = [ "l" ], exec = "enter" },
 
-	{ on = [ "H" ], run = "back" },
-	{ on = [ "L" ], run = "forward" },
+	{ on = [ "H" ], exec = "back" },
+	{ on = [ "L" ], exec = "forward" },
 
-	{ on = [ "<Up>" ], run = "arrow -1" },
-	{ on = [ "<Down>" ], run = "arrow 1" },
-	{ on = [ "<Left>" ], run = "leave" },
-	{ on = [ "<Right>" ], run = "enter" },
+	{ on = [ "<Up>" ], exec = "arrow -1" },
+	{ on = [ "<Down>" ], exec = "arrow 1" },
+	{ on = [ "<Left>" ], exec = "leave" },
+	{ on = [ "<Right>" ], exec = "enter" },
 
 	# Selection
-	{ on = [ "<Space>" ], run = [ "select --state=none", "arrow 1" ] },
-	{ on = [ "v" ], run = "visual_mode" },
-	{ on = [ "V" ], run = "visual_mode --unset" },
-	{ on = [ "<C-a>" ], run = "select_all --state=true" },
-	{ on = [ "<C-r>" ], run = "select_all --state=none" },
+	{ on = [ "<Space>" ], exec = [ "select --state=none", "arrow 1" ] },
+	{ on = [ "v" ], exec = "visual_mode" },
+	{ on = [ "V" ], exec = "visual_mode --unset" },
+	{ on = [ "<C-a>" ], exec = "select_all --state=true" },
+	{ on = [ "<C-r>" ], exec = "select_all --state=none" },
 
 	# Operation
-	{ on = [ "o" ], run = "open" },
-	{ on = [ "O" ], run = "open --interactive" },
-	{ on = [ "<Enter>" ], run = "open" },
-	{ on = [ "<C-Enter>" ], run = "open --interactive" },  # It's cool if you're using a terminal that supports CSI u
-	{ on = [ "y" ], run = "yank" },
-	{ on = [ "x" ], run = "yank --cut" },
-	{ on = [ "p" ], run = "paste" },
-	{ on = [ "P" ], run = "paste --force" },
-	{ on = [ "k" ], run = "paste --follow" },
-	{ on = [ "K" ], run = "paste --follow --force" },
-	{ on = [ "d" ], run = "remove" },
-	{ on = [ "D" ], run = "remove --permanently --force" },
-	{ on = [ "a" ], run = "create" },
-	{ on = [ "r" ], run = "rename" },
-	{ on = [ ";" ], run = "shell" },
-	{ on = [ ":" ], run = "shell --block" },
-	{ on = [ "." ], run = "hidden toggle" },
-	{ on = [ "s" ], run = "search fd" },
-	{ on = [ "S" ], run = "search rg" },
-	{ on = [ "<C-s>" ], run = "search none" },
-	{ on = [ "z" ], run = "jump zoxide" },
-	{ on = [ "Z" ], run = "jump fzf" },
+	{ on = [ "o" ], exec = "open" },
+	{ on = [ "O" ], exec = "open --interactive" },
+	{ on = [ "<Enter>" ], exec = "open" },
+	{ on = [ "<C-Enter>" ], exec = "open --interactive" },  # It's cool if you're using a terminal that supports CSI u
+	{ on = [ "y" ], exec = "yank" },
+	{ on = [ "x" ], exec = "yank --cut" },
+	{ on = [ "p" ], exec = "paste" },
+	{ on = [ "P" ], exec = "paste --force" },
+	{ on = [ "k" ], exec = "paste --follow" },
+	{ on = [ "K" ], exec = "paste --follow --force" },
+	{ on = [ "d" ], exec = "remove" },
+	{ on = [ "D" ], exec = "remove --permanently --force" },
+	{ on = [ "a" ], exec = "create" },
+	{ on = [ "r" ], exec = "rename" },
+	{ on = [ ";" ], exec = "shell" },
+	{ on = [ ":" ], exec = "shell --block" },
+	{ on = [ "." ], exec = "hidden toggle" },
+	{ on = [ "s" ], exec = "search fd" },
+	{ on = [ "S" ], exec = "search rg" },
+	{ on = [ "<C-s>" ], exec = "search none" },
+	{ on = [ "z" ], exec = "jump zoxide" },
+	{ on = [ "Z" ], exec = "jump fzf" },
 
 	# Copy
-	{ on = [ "c", "c" ], run = "copy path" },
-	{ on = [ "c", "d" ], run = "copy dirname" },
-	{ on = [ "c", "f" ], run = "copy filename" },
-	{ on = [ "c", "n" ], run = "copy name_without_ext" },
+	{ on = [ "c", "c" ], exec = "copy path" },
+	{ on = [ "c", "d" ], exec = "copy dirname" },
+	{ on = [ "c", "f" ], exec = "copy filename" },
+	{ on = [ "c", "n" ], exec = "copy name_without_ext" },
 
 	# Sorting
-	{ on = [ ",", "a" ], run = "sort alphabetical" },
-	{ on = [ ",", "A" ], run = "sort alphabetical --reverse" },
-	{ on = [ ",", "c" ], run = "sort created --reverse" },
-	{ on = [ ",", "C" ], run = "sort created" },
-	{ on = [ ",", "m" ], run = "sort modified --reverse" },
-	{ on = [ ",", "M" ], run = "sort modified" },
-	{ on = [ ",", "s" ], run = "sort size --reverse" },
-	{ on = [ ",", "S" ], run = "sort size" },
+	{ on = [ ",", "a" ], exec = "sort alphabetical" },
+	{ on = [ ",", "A" ], exec = "sort alphabetical --reverse" },
+	{ on = [ ",", "c" ], exec = "sort created --reverse" },
+	{ on = [ ",", "C" ], exec = "sort created" },
+	{ on = [ ",", "m" ], exec = "sort modified --reverse" },
+	{ on = [ ",", "M" ], exec = "sort modified" },
+	{ on = [ ",", "s" ], exec = "sort size --reverse" },
+	{ on = [ ",", "S" ], exec = "sort size" },
 
 	# Tabs
-	{ on = [ "t" ], run = "tab_create --current" },
+	{ on = [ "t" ], exec = "tab_create --current" },
 
-	{ on = [ "1" ], run = "tab_switch 0" },
-	{ on = [ "2" ], run = "tab_switch 1" },
-	{ on = [ "3" ], run = "tab_switch 2" },
-	{ on = [ "4" ], run = "tab_switch 3" },
-	{ on = [ "5" ], run = "tab_switch 4" },
-	{ on = [ "6" ], run = "tab_switch 5" },
-	{ on = [ "7" ], run = "tab_switch 6" },
-	{ on = [ "8" ], run = "tab_switch 7" },
-	{ on = [ "9" ], run = "tab_switch 8" },
+	{ on = [ "1" ], exec = "tab_switch 0" },
+	{ on = [ "2" ], exec = "tab_switch 1" },
+	{ on = [ "3" ], exec = "tab_switch 2" },
+	{ on = [ "4" ], exec = "tab_switch 3" },
+	{ on = [ "5" ], exec = "tab_switch 4" },
+	{ on = [ "6" ], exec = "tab_switch 5" },
+	{ on = [ "7" ], exec = "tab_switch 6" },
+	{ on = [ "8" ], exec = "tab_switch 7" },
+	{ on = [ "9" ], exec = "tab_switch 8" },
 
-	{ on = [ "[" ], run = "tab_switch -1 --relative" },
-	{ on = [ "]" ], run = "tab_switch 1 --relative" },
+	{ on = [ "[" ], exec = "tab_switch -1 --relative" },
+	{ on = [ "]" ], exec = "tab_switch 1 --relative" },
 
-	{ on = [ "{" ], run = "tab_swap -1" },
-	{ on = [ "}" ], run = "tab_swap 1" },
+	{ on = [ "{" ], exec = "tab_swap -1" },
+	{ on = [ "}" ], exec = "tab_swap 1" },
 
 	# Tasks
-	{ on = [ "w" ], run = "tasks_show" },
+	{ on = [ "w" ], exec = "tasks_show" },
 
 	# Goto
-	{ on = [ "g", "h" ], run = "cd ~" },
-	{ on = [ "g", "c" ], run = "cd ~/.config" },
-	{ on = [ "g", "d" ], run = "cd ~/Downloads" },
-	{ on = [ "g", "t" ], run = "cd /tmp" },
-	{ on = [ "g", "<Space>" ], run = "cd --interactive" },
+	{ on = [ "g", "h" ], exec = "cd ~" },
+	{ on = [ "g", "c" ], exec = "cd ~/.config" },
+	{ on = [ "g", "d" ], exec = "cd ~/Downloads" },
+	{ on = [ "g", "t" ], exec = "cd /tmp" },
+	{ on = [ "g", "<Space>" ], exec = "cd --interactive" },
 ]
 
 [tasks]
 
 keymap = [
-	{ on = [ "<C-q>" ], run = "close" },
-	{ on = [ "<Esc>" ], run = "close" },
-	{ on = [ "w" ], run = "close" },
+	{ on = [ "<C-q>" ], exec = "close" },
+	{ on = [ "<Esc>" ], exec = "close" },
+	{ on = [ "w" ], exec = "close" },
 
-	{ on = [ "k" ], run = "arrow -1" },
-	{ on = [ "j" ], run = "arrow 1" },
+	{ on = [ "k" ], exec = "arrow -1" },
+	{ on = [ "j" ], exec = "arrow 1" },
 
-	{ on = [ "<Up>" ], run = "arrow -1" },
-	{ on = [ "<Down>" ], run = "arrow 1" },
+	{ on = [ "<Up>" ], exec = "arrow -1" },
+	{ on = [ "<Down>" ], exec = "arrow 1" },
 
-	{ on = [ "<Enter>" ], run = "inspect" },
-	{ on = [ "x" ], run = "cancel" },
+	{ on = [ "<Enter>" ], exec = "inspect" },
+	{ on = [ "x" ], exec = "cancel" },
 ]
 
 [select]
 
 keymap = [
-	{ on = [ "<C-q>" ], run = "close" },
-	{ on = [ "<Esc>" ], run = "close" },
-	{ on = [ "<Enter>" ], run = "close --submit" },
+	{ on = [ "<C-q>" ], exec = "close" },
+	{ on = [ "<Esc>" ], exec = "close" },
+	{ on = [ "<Enter>" ], exec = "close --submit" },
 
-	{ on = [ "k" ], run = "arrow -1" },
-	{ on = [ "j" ], run = "arrow 1" },
+	{ on = [ "k" ], exec = "arrow -1" },
+	{ on = [ "j" ], exec = "arrow 1" },
 
-	{ on = [ "K" ], run = "arrow -5" },
-	{ on = [ "J" ], run = "arrow 5" },
+	{ on = [ "K" ], exec = "arrow -5" },
+	{ on = [ "J" ], exec = "arrow 5" },
 
-	{ on = [ "<Up>" ], run = "arrow -1" },
-	{ on = [ "<Down>" ], run = "arrow 1" },
+	{ on = [ "<Up>" ], exec = "arrow -1" },
+	{ on = [ "<Down>" ], exec = "arrow 1" },
 ]
 
 [input]
 
-keymap = [
-	{ on = [ "<C-q>" ], run = "close" },
-	{ on = [ "<Enter>" ], run = "close --submit" },
-	{ on = [ "<Esc>" ], run = "escape" },
-	{ on = [ "<Backspace>" ], run = "backspace" },
+append_keymap = [
+	{ on = [ "<C-g>"], exec = "plugin test --sync --args='hello world'" },
+	{ on = [ "<C-q>" ], exec = "close" },
+	{ on = [ "<Enter>" ], exec = "close --submit" },
+	{ on = [ "<Esc>" ], exec = "escape" },
+	{ on = [ "<Backspace>" ], exec = "backspace" },
 
 	# Mode
-	{ on = [ "i" ], run = "insert" },
-	{ on = [ "a" ], run = "insert --append" },
-	{ on = [ "v" ], run = "visual" },
+	{ on = [ "i" ], exec = "insert" },
+	{ on = [ "a" ], exec = "insert --append" },
+	{ on = [ "v" ], exec = "visual" },
 
 	# Navigation
-	{ on = [ "h" ], run = "move -1" },
-	{ on = [ "l" ], run = "move 1" },
+	{ on = [ "h" ], exec = "move -1" },
+	{ on = [ "l" ], exec = "move 1" },
 
-	{ on = [ "0" ], run = "move -999" },
-	{ on = [ "$" ], run = "move 999" },
-	{ on = [ "I" ], run = [ "move -999", "insert" ] },
-	{ on = [ "A" ], run = [ "move 999", "insert --append" ] },
+	{ on = [ "0" ], exec = "move -999" },
+	{ on = [ "$" ], exec = "move 999" },
+	{ on = [ "I" ], exec = [ "move -999", "insert" ] },
+	{ on = [ "A" ], exec = [ "move 999", "insert --append" ] },
 
-	{ on = [ "<Left>" ], run = "move -1" },
-	{ on = [ "<Right>" ], run = "move 1" },
+	{ on = [ "<Left>" ], exec = "move -1" },
+	{ on = [ "<Right>" ], exec = "move 1" },
 
-	{ on = [ "b" ], run = "backward" },
-	{ on = [ "w" ], run = "forward" },
-	{ on = [ "e" ], run = "forward --end-of-word" },
+	{ on = [ "b" ], exec = "backward" },
+	{ on = [ "w" ], exec = "forward" },
+	{ on = [ "e" ], exec = "forward --end-of-word" },
 
 	# Deletion
-	{ on = [ "d" ], run = "delete --cut" },
-	{ on = [ "c" ], run = "delete --cut --insert" },
-	{ on = [ "x" ], run = [ "delete --cut", "move 1 --in-operating" ] },
+	{ on = [ "d" ], exec = "delete --cut" },
+	{ on = [ "c" ], exec = "delete --cut --insert" },
+	{ on = [ "x" ], exec = [ "delete --cut", "move 1 --in-operating" ] },
 
 	# Yank/Paste
-	{ on = [ "y" ], run = "yank" },
-	{ on = [ "p" ], run = "paste" },
-	{ on = [ "P" ], run = "paste --before" },
+	{ on = [ "y" ], exec = "yank" },
+	{ on = [ "p" ], exec = "paste" },
+	{ on = [ "P" ], exec = "paste --before" },
 
 	# Undo/Redo
-	{ on = [ "u" ], run = "undo" },
-	{ on = [ "<C-r>" ], run = "redo" },
+	{ on = [ "u" ], exec = "undo" },
+	{ on = [ "<C-r>" ], exec = "redo" },
 ]
 
