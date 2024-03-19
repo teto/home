@@ -200,4 +200,8 @@
      };
     };
   };
+
+  # TODO flaemshot
+  # Unit.PartOf = [ "tray.target" ];
+  # Install.WantedBy = [ "tray.target" ];
  }

@@ -20,7 +20,9 @@ in
     in
     {
       enable = true;
+
       systemd.enable = true;
+
       settings = {
         mainBar = {
          fixed-center = false;

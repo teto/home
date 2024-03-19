@@ -7,6 +7,7 @@
    ./programs/waybar.nix
    ./teto/services/mpd.nix
    ./teto/services/blueman-applet.nix
+   ./swayidle.nix
 
     ../../hm/profiles/emacs.nix
     ../../hm/profiles/nova.nix
@@ -21,6 +22,7 @@
 
     ../../hm/profiles/desktop.nix
     ../../hm/profiles/sway.nix
+    ../../hm/profiles/swayidle.nix
     ../../hm/profiles/waybar.nix
     # ../../hm/profiles/weechat.nix
     ../../hm/profiles/extra.nix

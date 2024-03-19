@@ -59,7 +59,7 @@ let
     # (luaPlugin { plugin = flakeInputs.rocks-nvim.packages.${pkgs.system}.rocks-nvim; })
 
     # should bring in scope fzy
-    (luaPlugin { plugin = rocks-nvim; })
+    # (luaPlugin { plugin = rocks-nvim; })
     (luaPlugin { plugin = urlview-nvim; })
     (luaPlugin { plugin = nvim-ufo; })
     (luaPlugin { plugin = ollama-nvim; })
