@@ -9,6 +9,7 @@ in
   programs.bash = {
 
     # goes to .profile
+    # shellAliases = {
     sessionVariables = let 
      prod-runners = builtins.fromJSON (builtins.readFile "${flakeInputs.nova-ci}/configs/prod/runners-generated.json");
       defaultMandatoryFeatures = [];
@@ -44,6 +45,7 @@ in
 	  NOVA_CACHE_DEV  = secrets.novaNixCache.dev;
 	  NOVA_CACHE_PROD = secrets.novaNixCache.prod;
 
+       HUSKY=0; # To disable HUSKY
 	  # wayland variables
     } // remoteBuilders;
 

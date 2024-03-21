@@ -1,8 +1,6 @@
 #  vim: set et fenc=utf-8 ff=unix sts=0 sw=4 ts=4 fdm=marker :
 #  zsh specific aliases only
 #
-# https://stackoverflow.com/questions/24601806/got-permission-denied-when-emulating-sh-under-zsh
-emulate sh -c "source $ZDOTDIR/aliases.sh"
 
 # Suffix aliases execute a command based on a file’s extension. Suffix aliases are used with the alias -s command.  Here’s my favorite feature of aliases in zsh.  By adding this line:
 # g => global , does not depend on position on line

@@ -28,7 +28,7 @@ in
          fixed-center = false;
           # a way to have a manual definition !
           include = [
-            "~/.config/waybar/manual.json"
+            "~/.config/waybar/manual.jsonc"
           ];
           layer = "top";
           position = "top";

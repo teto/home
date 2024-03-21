@@ -41,14 +41,9 @@
      typeset -gaU chpwd_functions
      chpwd_functions+=fre_chpwd
 
-
-      # source $ZDOTDIR/zshrc.generated
       # if [ -f "$ZDOTDIR/zshrc" ]; then
       source $ZDOTDIR/zshrc
       # fi
-
-      # used in some git aliases
-      export REVIEW_BASE=master
 
      '';
 

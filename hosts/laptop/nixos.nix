@@ -9,6 +9,7 @@
     ../config-all.nix
     ../../nixos/modules/luarocks-site.nix
 
+    ../../nixos/profiles/wireguard.nix
     ../../nixos/profiles/distributedBuilds.nix
     ../../nixos/profiles/desktop.nix
     ../../nixos/profiles/podman.nix
@@ -141,7 +142,7 @@
   home-manager.users.root = {
    imports = [
     ../../hm/profiles/neovim.nix
-    # ../desktop/root/programs/ssh.nix
+    ../desktop/root/default.nix
    ];
 
   };

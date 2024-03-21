@@ -55,19 +55,6 @@ function nvimdev {
 
 }
 
-# git aliases
-alias gap="git add -p";
-alias grc="git rebase --continue";
-alias gra="git rebase --abort";
-
-
-# rename mptcp ?
-alias mp="mptcpanalyzer"
-
-# nix aliases {{{
-
-# no
-alias nixos-fast="nixos-rebuild --no-build-nix --fast"
 
 
 # autres players a tester eventuellement
@@ -80,19 +67,6 @@ function n {
         nix develop "$@"
     fi
 }
-alias n="nix develop"
-alias nb='nix build'
-alias nb1='nix build --option builders "$NOVA_OVH1" -j0'
-alias n1='nix develop --option builders "$NOVA_OVH1" -j0'
-alias n2='nix develop --option builders "$NOVA_AZURE2" -j0'
-# alias n3='nix develop --option builders "$NOVA_AZURE2" -j0'
-
-# TODO should use all runners
-# alias nall='nix develop --option builders "$NOVA_OVH1" -j0'
-alias nr="nix run "
-alias nr1='nix run --option builders "$NOVA_OVH1" -j0'
-alias nr2='nix run --option builders "$NOVA_AZURE2" -j0'
-alias nl="nix log "
 # alias lens="sudo rm -rf /home/teto/.config/Lens/extensions && lens"
 # alias ff="find . -iname" # use fd instead
 function latest {
@@ -104,29 +78,3 @@ function latest {
 
 # alias servethis="nix run nixpkgs#python3 --command \'python -c 'import SimpleHTTPServer; SimpleHTTPServer.test()'\""
 
-# ls related updates {{{
-# I also export TIME_STYLE to change the output of this
-alias ls="ls --hyperlink=auto -p --color=auto --time-style=iso"
-alias ll="ls -l"
-alias la="ls -la"
-# -r makes recent changes appear last, more practical
-# alias llt="ls -ltr"
-# }}}
-
-# oftenly used programs {{{
-# alias c="cat"
-# alias v="nvim"
-#alias n="nvim"
-alias m="neomutt -F \"\$XDG_CONFIG_HOME/mutt/muttrc\""
-# view uses vim as a pager
-alias l="nvim +view"
-alias s="sxiv"
-# parce que apvlv est plus libre que zathura
-alias z="apvlv"
-alias q="qutebrowser"
-# }}}
-
-# compilation related {{{
-alias makej="make -j4"
-alias nm="nm -l"
-# }}}

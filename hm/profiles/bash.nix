@@ -1,14 +1,8 @@
 { config, pkgs, flakeInputs, lib
 , secrets
-, withSecrets
 , ... } @ args:
 {
 
-  # imports = [
-  #   ./zsh.nix
-  # ];
-
-  # 
   programs.atuin = {
     enable = false;
     enableZshIntegration = true;
@@ -24,12 +18,6 @@
       # CAREFUL 
       # HISTFILE="$XDG_CACHE_HOME/bash_history";
 	  # TODO pass the correct port, how to do that ? need ssh_config support
-
-	  # wayland variables
-     } // lib.optionalAttrs withSecrets {
-       NOVA_CACHE_DEV  = secrets.novaNixCache.dev;
-       NOVA_CACHE_PROD = secrets.novaNixCache.prod;
-       HUSKY=0; # To disable HUSKY
      }
 ;
 

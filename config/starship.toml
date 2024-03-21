@@ -94,6 +94,9 @@ disabled = false
 # [haskell]
 # disabled = false
 
+[lua]
+disabled = true
+
 [status]
 disabled = false
 

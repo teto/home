@@ -17,16 +17,17 @@ let
 
     (backblaze-b2.override({ execName = "b2";}))
 
-    fswatch # fileevent watcher
-    gdb
     # editorconfig-core-c
-    automake
-    gnum4 # hum
     # for fuser, useful when can't umount a directory
     # https://unix.stackexchange.com/questions/107885/busy-device-on-umount
+    automake
+    fswatch # fileevent watcher
+    fx
+    gdb
+    gnum4 # hum
     psmisc
-    util-linux # for lsns (namespace listing)
     rbw
+    util-linux # for lsns (namespace listing)
 
 	# haxe # to test neovim developement
     eza # to list files

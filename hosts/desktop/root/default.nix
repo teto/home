@@ -14,4 +14,5 @@ in
    ../../../hm/profiles/nova/ssh-config.nix
   ];
 
+  programs.ssh.enable = true;
 }

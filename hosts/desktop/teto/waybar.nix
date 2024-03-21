@@ -190,7 +190,7 @@
          # TODO rerun mbsync + notmuch etc
          # TODO read
          # exec-on-event = false;
-         on-click-right = "systemctl start mbsync.service";
+         on-click-right = "systemctl start --user mbsync.service";
          exec = lib.getExe notmuchChecker;
 
          # exec = pkgs.writeShellScript "hello-from-waybar" ''

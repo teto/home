@@ -186,7 +186,6 @@ in
     "kvm"
     "kvm-intel" # for virtualisation
   ];
-  # boot.extraModulePackages = with config.boot.kernelPackages; [ wireguard ];
 
 
   boot.kernel.sysctl = {

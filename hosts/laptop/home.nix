@@ -19,6 +19,7 @@
    ../desktop/teto/services/swaync.nix
    ../desktop/teto/contacts.nix
    ../desktop/teto/programs/helix.nix
+    ../desktop/teto/programs/yazi.nix
 
     ../../hm/profiles/desktop.nix
     ../../hm/profiles/sway.nix

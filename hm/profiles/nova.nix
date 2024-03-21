@@ -1,10 +1,12 @@
 { config, lib, pkgs, ... }:
 {
 
+  imports = [
+      ./nova/bash.nix
+  ];
+
   programs.bash.shellAliases = {
      sscwl = "nix run .#simwork.core-webservice.local -- --bypass-manifest-check -vv";
-
-
   };
 
   xdg.desktopEntries = {
@@ -48,7 +50,7 @@
   home.packages = [
     # pkgs.aws-sam-cli  # BROKEN  for sam lambda
     pkgs.sqlitebrowser
-    pkgs.redis # for redis-cli
-    pkgs.google-chrome
+    # pkgs.redis # for redis-cli
+    # pkgs.google-chrome
   ];
 }

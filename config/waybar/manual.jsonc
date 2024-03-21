@@ -32,6 +32,17 @@
     "memory": {
         "format": "{}% "
     },
+	"power-profiles-daemon": {
+	  "format": "{icon}   {profile}",
+	  "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
+	  "tooltip": true,
+	  "format-icons": {
+		"default": "",
+		"performance": "",
+		"balanced": "",
+		"power-saver": ""
+	  }
+	},
     "backlight": {
         "format": "{percent}% {icon}",
         "format-icons": ["", ""]

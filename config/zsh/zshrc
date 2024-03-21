@@ -7,8 +7,17 @@
 # ON_NIXOS=$?
 # prompt off
 
-current_folder="${0:a:h}"
+# current_folder="${0:a:h}"
 . "$ZDOTDIR/aliases.zsh"
+
+# https://stackoverflow.com/questions/24601806/got-permission-denied-when-emulating-sh-under-zsh
+set -x
+emulate sh -c "source $ZDOTDIR/aliases.sh"
+emulate sh -c "source $ZDOTDIR/../bash/aliases.sh"
+set +x
+
+# to get sessionVariables
+source ~/.profile
 
 # zsh.enableSuggestions right handside color
 # see https://github.com/zsh-users/zsh-autosuggestions for suggestions
@@ -332,6 +341,11 @@ _fzf_compgen_dir() {
 #   kitty-integration
 #   unfunction kitty-integration
 # fi
+
+
+# source $ZDOTDIR/zshrc.generated
+# used in some git aliases
+export REVIEW_BASE=master
 
 # this erases fzf so annoying
 # source ~/.config/nova/zsh/zshrc
