@@ -15,7 +15,7 @@ in
     # "wg0" is the network interface name. You can name the interface arbitrarily.
     wg0 = {
       # Determines the IP address and subnet of the client's end of the tunnel interface.
-      ips = [ "10.100.0.2/24" ];
+      ips = [ "10.100.0.3/24" ];
       listenPort = 51820; # to match firewall allowedUDPPorts (without this wg uses random port numbers)
 
       # Path to the private key file.
@@ -35,7 +35,14 @@ in
           # set to 0.0.0.0 to forward all the traffic via VPN.
           # allowedIPs = [ "10.100.0.0/0" ];
           # Or forward only particular subnets
-          allowedIPs = [ "10.100.0.1" "91.108.12.0/22" ];
+          allowedIPs = [ 
+           "10.100.0.1"
+           "91.108.12.0/22" 
+           # ➜ resolvectl query kh.novavault.cloud
+           # kh.novavault.cloud:
+           "54.93.50.138"             
+           "18.194.128.193"
+          ];
 
           # Set this to the server IP and port.
           
@@ -44,7 +51,7 @@ in
           # endpoint = "10.100.0.1:51820"; # ToDo: route to endpoint not automatically configured https://wiki.archlinux.org/index.php/WireGuard#Loop_routing https://discourse.nixos.org/t/solved-minimal-firewall-setup-for-wireguard-client/7577
 
           # Send keepalives every 25 seconds. Important to keep NAT tables alive.
-          persistentKeepalive = 25;
+          persistentKeepalive = 45;
         }
       ];
     };

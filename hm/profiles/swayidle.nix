@@ -4,6 +4,7 @@
   services.swayidle = {
     enable = true;
 
+    # TODO write this in config/swayidle/config instead ?
     timeouts = [
      # timeout in seconds
      { timeout = 300; 
