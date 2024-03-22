@@ -80,7 +80,7 @@ in
       inputs = flakeInputs;
     };
     transformer =  [
-          flakeInputs.haumea.lib.transformers.liftDefault
+      flakeInputs.haumea.lib.transformers.liftDefault
 
     #  (x: hoistAttrs x )
       # (x: )
@@ -229,14 +229,13 @@ in
   #   fi
   # '';
 
-  # programs.seahorse.enable = false; # UI to manage keyrings
 
   # List services that you want to enable:
   services = {
-    gnome = {
-      gnome-keyring.enable = true;
-      at-spi2-core.enable = true; # for keyring it seems
-    };
+    # gnome = {
+    #   gnome-keyring.enable = true;
+    #   at-spi2-core.enable = true; # for keyring it seems
+    # };
 
     # Enable CUPS to print documents.
     # https://nixos.wiki/wiki/Printing

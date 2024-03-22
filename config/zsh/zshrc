@@ -11,10 +11,10 @@
 . "$ZDOTDIR/aliases.zsh"
 
 # https://stackoverflow.com/questions/24601806/got-permission-denied-when-emulating-sh-under-zsh
-set -x
+# set -x
 emulate sh -c "source $ZDOTDIR/aliases.sh"
 emulate sh -c "source $ZDOTDIR/../bash/aliases.sh"
-set +x
+# set +x
 
 # to get sessionVariables
 source ~/.profile
