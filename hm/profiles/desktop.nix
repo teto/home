@@ -162,7 +162,7 @@ let
       ncpamixer # pulseaudio TUI mixer
       noti # send notifications when a command finishes
       ouch # to (de)compress files
-      papis # library manager
+      # papis # library manager
       pass-custom # pass with extensions
       pavucontrol
       pkgs.networkmanagerapplet # should

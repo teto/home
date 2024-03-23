@@ -19,8 +19,10 @@ return {
 
  {
   -- :GpChatNew
-  'Robitx/gp.nvim',
-	config = function()
+  -- 'Robitx/gp.nvim'
+  -- , branch = "copilot"
+  dir = "~/gp.nvim"
+  , config = function()
  	-- default command agents (model + persona) 
  	-- name, model and system_prompt are mandatory fields 
  	-- to use agent for chat set chat = true, for command set command = true 
@@ -28,25 +30,32 @@ return {
  	-- agents = {  { name = "ChatGPT4" }, ... }, 
 
      local default_config = require('gp.config')
-    -- unpack(default_config.agents),
-     local agents = {
+     -- local agents = 
+     -- Voice commands (:GpWhisper*) depend on SoX (Sound eXchange) to handle audio recording and processing:
+		require("gp").setup({
+
+         agents = {
+          -- unpack(default_config.agents),
           -- Disable ChatGPT 3.5
-          -- {
-          --   name = "ChatGPT3-5",
-          --   chat = false,  -- just name would suffice
-          --   command = false,   -- just name would suffice
-          -- },
           {
-            name = "mistral",
+            provider = "openai",
+            name = "ChatGPT3-5",
+            chat = true,  -- just name would suffice
+            command = false,   -- just name would suffice
+          },
+          {
+            provider = "localai",
+            name = "Mistral",
             chat = true,
             command = true,
             model = { model = "mistral", temperature = 1.1, top_p = 1 },
             system_prompt = default_config.agents[1].system_prompt
            },
-
           {
-            -- name = "ChatGPT4",
-            name = "toto",
+
+            provider = "openai",
+            name = "ChatGPT4",
+            -- name = "toto",
             chat = true,
             command = true,
             -- string with model name or table with model name and parameters
@@ -62,19 +71,26 @@ return {
               .. "- Don't elide any code from your output if the answer requires coding.\n"
               .. "- Take a deep breath; You've got this!\n",
           },
-    }
-     -- Voice commands (:GpWhisper*) depend on SoX (Sound eXchange) to handle audio recording and processing:
-		require("gp").setup({
-
-         agents = agents,
-         chat_agents = agents,
-         openai_api_key = os.getenv("OPENAI_API_KEY"),
-         -- cmd_prefix = "Gp",
-         openai_api_endpoint = "https://api.openai.com/v1/chat/completions",
+        },
+         -- chat_agents = agents,
          -- openai_api_endpoint = "http://localhost:8080/v1/chat/completions",
          -- agents = agents,
-         chat_topic_gen_model = 'mistral',
-         model = { model = "mistral", temperature = 1.1, top_p = 1 },
+         -- chat_topic_gen_model = 'mistral',
+         -- model = { model = "mistral", temperature = 1.1, top_p = 1 },
+
+         providers = {
+          openai = {
+           -- response from the config.providers.copilot.secret command { "bash", "-c", "cat ~/.config/github-copilot/hosts.json | sed -e 's/.*oauth_token...//;s/\".*//'" } is empty
+            secret = os.getenv("OPENAI_API_KEY"),
+          -- cmd_prefix = "Gp",
+            endpoint = "https://api.openai.com/v1/chat/completions",
+          },
+          -- ollama = {},
+          localai = {
+            endpoint = "http://localhost:8080/v1/chat/completions",
+          }
+
+         }
 
         })
 		-- or setup with your own config (see Install > Configuration in Readme)

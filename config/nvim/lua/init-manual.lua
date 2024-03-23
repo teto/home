@@ -352,19 +352,10 @@ vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'grey' })
 -- })
 -- my_image:transmit() -- send image data to terminal
 
--- while testing/developing rest.nvim
-vim.opt.runtimepath:prepend('/home/teto/rest.nvim')
--- vim.opt.runtimepath:prepend('/home/teto/tree-sitter-http')
--- lua require'plenary.reload'.reload_module('rest-nvim.request')
--- vim.opt.runtimepath:prepend('/home/teto/nvim-treesitter')
-
 -- f3 to show tree
 vim.keymap.set('n', '<Leader><Leader>', '<Cmd>b#<CR>')
 
-vim.keymap.set('n', '<f2>',
-	"<cmd>lua require'plenary.reload'.reload_module('rest-nvim.request'); print(require'rest-nvim.request'.ts_get_requests())<cr>"
-)
-
+require'teto.rest-nvim'
 
 -- TODO I should get the same 
 -- neorg config{{{

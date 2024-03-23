@@ -93,7 +93,7 @@ in
     imports = [
       hmRootModule
       # ./root/ssh-config.nix
-      # ../../hm/profiles/neovim.nix
+      ../../hm/profiles/nova/ssh-config.nix
     ];
    };
 

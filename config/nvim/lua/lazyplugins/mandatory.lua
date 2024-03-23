@@ -112,21 +112,22 @@ return {
 
 
  -- not as good as null-ls but a recourse
- -- {
- --  'mfussenegger/nvim-lint',
- --  config = function ()
- --    require('lint').linters_by_ft = {
- --      -- markdown = {'vale',}
- --      -- --ignore E501,E265,E402 update.py
- --      python = {'flake8'}
- --    }
- --    vim.api.nvim_create_autocmd({ "BufWritePost" }, {
- --      callback = function()
- --        require("lint").try_lint()
- --      end,
- --    })
- --  end
- -- },
+ {
+  'mfussenegger/nvim-lint',
+  config = function ()
+    require('lint').linters_by_ft = {
+      -- markdown = {'vale',}
+      -- --ignore E501,E265,E402 update.py
+      python = {'flake8'},
+      sh = {'shellcheck'}
+    }
+    vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+      callback = function()
+        require("lint").try_lint()
+      end,
+    })
+  end
+ },
  
 
  -- {
@@ -175,15 +176,15 @@ return {
      require("none-ls-luacheck.diagnostics.luacheck").with({
       extra_args = { '--ignore 21/_.*' }
      }),
-     none_ls.builtins.code_actions.shellcheck,
+     -- none_ls.builtins.code_actions.shellcheck, -- 
      -- none_ls.builtins.diagnostics.editorconfig_checker, -- too noisy
-     none_ls.builtins.diagnostics.tsc,
+     -- none_ls.builtins.diagnostics.tsc,
      -- doc at https://yamllint.readthedocs.io/en/stable/configuration.html#default-configuration
      none_ls.builtins.diagnostics.yamllint,
      -- .with({
      --  extra_args = { }
      -- }),
-     none_ls.builtins.diagnostics.flake8,
+     -- none_ls.builtins.diagnostics.flake8, -- not builtins anymore
      none_ls.builtins.diagnostics.zsh,
 
      -- use with vim.lsp.buf.format()
@@ -191,7 +192,7 @@ return {
      none_ls.builtins.formatting.just,
      none_ls.builtins.formatting.yamlfmt, -- from google
      none_ls.builtins.formatting.prettier,
-     none_ls.builtins.formatting.markdown_toc,
+     -- none_ls.builtins.formatting.markdown_toc,
      none_ls.builtins.formatting.nixpkgs_fmt,
      none_ls.builtins.formatting.treefmt.with({
       -- treefmt requires a config file

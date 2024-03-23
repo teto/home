@@ -15,6 +15,11 @@ backup-photos \
   restic backup ~/Nextcloud --repository-file=/run/secrets/restic/teto-bucket
 
 
+# Generate system-specific systemd credentials such that they dont appear on the git repo
+systemd-credentials:
+  # systemd-ask-password -n | systemd-creds encrypt --name=foo-secret -p - - 
+  systemd-creds encrypt --name=foo-secret -p INPUT OUTPUT
+
 # regen fortunes (not necessary with some fortunes version ?!)
 # strfile not necessarilyu in PATH !
 # TODO using vocage instead
