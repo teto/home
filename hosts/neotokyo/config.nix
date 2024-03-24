@@ -28,11 +28,11 @@
     # for gandi
     "${modulesPath}/virtualisation/openstack-config.nix"
     # ./hardware.nix
-    ./openssh.nix
+    ./services/openssh.nix
     ./sops.nix
 
     # to get the first iteration going on
-    ./nextcloud.nix
+    ./services/nextcloud.nix
 
     ../common-server.nix
     # ./gitolite.nix
@@ -55,8 +55,9 @@
 
   home-manager.users.root = {
    imports = [
+    ./users/root.nix
     ../../hm/profiles/neovim.nix
-    ../desktop/root/ssh-config.nix
+    ../desktop/root/programs/ssh.nix
    ];
 
    # home.stateVersion = "23.11";

@@ -19,9 +19,9 @@ return {
 
  {
   -- :GpChatNew
-  -- 'Robitx/gp.nvim'
-  -- , branch = "copilot"
-  dir = "~/gp.nvim"
+  -- dir = "~/gp.nvim"
+  'Robitx/gp.nvim'
+  , branch = "copilot"
   , config = function()
  	-- default command agents (model + persona) 
  	-- name, model and system_prompt are mandatory fields 
@@ -79,6 +79,7 @@ return {
          -- model = { model = "mistral", temperature = 1.1, top_p = 1 },
 
          providers = {
+          copilot = {},
           openai = {
            -- response from the config.providers.copilot.secret command { "bash", "-c", "cat ~/.config/github-copilot/hosts.json | sed -e 's/.*oauth_token...//;s/\".*//'" } is empty
             secret = os.getenv("OPENAI_API_KEY"),

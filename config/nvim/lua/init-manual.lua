@@ -9,11 +9,11 @@ local has_fzf_lua, fzf_lua = pcall(require, 'fzf-lua')
 -- set to true to enable it
 local use_fzf_lua  = has_fzf_lua and false
 local use_telescope = not use_fzf_lua
-
 local use_org = true
 local use_neorg = true
 local has_luasnip, ls = pcall(require, 'luasnip')
 local use_luasnip = has_luasnip and true
+
 
 local has_gitsigns, gitsigns = pcall(require, 'gitsigns')
 
@@ -1008,6 +1008,18 @@ if use_luasnip then
 		{ paths = { vim.fn.stdpath("config") .."/snippets"} }
 
 	)
+
+	local snip = ls.snippet
+	local s = ls.snippet
+	local sn = ls.snippet_node
+	local t = ls.text_node
+	local func = ls.function_node
+	local i = ls.insert_node
+	local f = ls.function_node
+	-- local c = ls.choice_node
+	-- local d = ls.dynamic_node
+	-- local r = ls.restore_node
+
 	-- require("luasnip.loaders.from_vscode").lazy_load()
 	ls.config.setup {}
 
@@ -1016,6 +1028,61 @@ if use_luasnip then
 	-- needs a treesitter grammar
 	local haskell_snippets = require('haskell-snippets').all
 	ls.add_snippets('haskell', haskell_snippets, { key = 'haskell' })
+	local date = function() return {os.date('%Y-%m-%d')} end
+	ls.add_snippets(nil, {
+		all = {
+			snip({
+				trig = "date",
+				namr = "Date",
+				dscr = "Date in the form of YYYY-MM-DD",
+			}, {
+				func(date, {}),
+			}),
+			snip({
+				trig = "pwd",
+				namr = "PWD",
+				dscr = "Path to current working directory",
+			}, {
+				func(bash, {}, { user_args = { "pwd" } }),
+			}),
+		},
+	sh = {
+        snip("shebang", {
+            t { "#!/bin/sh", "" },
+            insert(0),
+        }),
+    },
+    python = {
+        snip("shebang", {
+            text { "#!/usr/bin/env python", "" },
+            insert(0),
+        }),
+    },
+	})
+	ls.add_snippets("lua", {
+		-- trigger is `fn`, second argument to snippet-constructor are the nodes to insert into the buffer on expansion.
+		s("fn", {
+			-- Simple static text.
+			t("//Parameters: "),
+			-- function, first parameter is the function, second the Placeholders
+			-- whose text it gets as input.
+			-- f(copy, 2),
+			t({ "", "function " }),
+			-- Placeholder/Insert.
+			i(1),
+			t("("),
+			-- Placeholder with initial text.
+			i(2, "int foo"),
+			-- Linebreak
+			t({ ") {", "\t" }),
+			-- Last Placeholder, exit Point of the snippet.
+			i(0),
+			t({ "", "}" }),
+		}),
+	})
+
+    require("luasnip.loaders.from_lua").load({paths = vim.fn.stdpath("config").."/snippets"})
+
 end
 
 -- " Bye bye ex mode

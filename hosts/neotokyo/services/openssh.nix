@@ -1,7 +1,7 @@
 { config, pkgs, lib, secrets, ... }:
 {
   imports = [
-    ../../nixos/profiles/openssh.nix
+    ../../../nixos/profiles/openssh.nix
   ];
 
   services.openssh = {

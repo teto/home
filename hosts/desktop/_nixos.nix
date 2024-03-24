@@ -73,26 +73,26 @@ in
   ];
 
   home-manager.users = 
-   let
-   hmRootModule = { pkgs, ... }@args: flakeInputs.haumea.lib.load {
-    src = ./root;
-    inputs = args // {
-      inputs = flakeInputs;
-    };
-    transformer =  [
-      flakeInputs.haumea.lib.transformers.liftDefault
+   # let
+   # hmRootModule = { pkgs, ... }@args: flakeInputs.haumea.lib.load {
+   #  src = ./root;
+   #  inputs = args // {
+   #    inputs = flakeInputs;
+   #  };
+   #  transformer =  [
+   #    flakeInputs.haumea.lib.transformers.liftDefault
 
-    #  (x: hoistAttrs x )
-      # (x: )
-    ];
-     # flakeInputs.haumea.lib.transformers.liftDefault;
-  };
-  in 
+   #  #  (x: hoistAttrs x )
+   #    # (x: )
+   #  ];
+   #   # flakeInputs.haumea.lib.transformers.liftDefault;
+  # };
+  # in 
   {
    root = {
     imports = [
-      hmRootModule
-      # ./root/ssh-config.nix
+      # hmRootModule
+      ./root/programs/ssh.nix
       ../../hm/profiles/nova/ssh-config.nix
     ];
    };

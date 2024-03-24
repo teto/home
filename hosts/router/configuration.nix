@@ -32,7 +32,7 @@ in
   imports = [
     ./hardware.nix
     ../config-all.nix
-    ./openssh.nix
+    ./services/openssh.nix
     ../../nixos/profiles/router.nix
 
   ];
@@ -115,20 +115,6 @@ in
   security.sudo.wheelNeedsPassword = false;
 
   services.acpid.enable = true;
-  services.openssh = {
-    enable = true;
-    # kinda experimental
-    # services.openssh.banner = "Hello world";
-    # ports = [ 12666 ];
-    # new format
-    settings = {
-      LogLevel = "VERBOSE";
-      KbdInteractiveAuthentication = false;
-      PasswordAuthentication = false;
-      # PermitRootLogin = "prohibit-password";
-    };
-
-  };
 
   services.unbound = {
     enable = false;
@@ -143,12 +129,6 @@ in
       };
     };
   };
-
-  # services.miniupnpd = {
-  #     enable = true;
-  #     externalInterface = "enp1s0";
-  #     internalIPs = [ "br0" ];
-  # };
 
   # this takes a lot of space ! use cacti instead !
   # services.munin-node = {

@@ -39,6 +39,7 @@
   ] ++ (with pkgs; [
     # autoconf
     binutils
+    btop
     curl
     fd # replaces 'find'
     file
@@ -89,7 +90,7 @@
     enableCompletion = true;
     shellInit = ''
       # set -o vi
-    '';
+      '';
   };
 
   environment.etc."inputrc".source = ../config/inputrc;

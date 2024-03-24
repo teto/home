@@ -2,16 +2,16 @@
 {
 
   imports = [
-     ../../nixos/modules/nextcloud.nix
-     ../../nixos/profiles/nextcloud.nix
+     ../../../nixos/modules/nextcloud.nix
+     ../../../nixos/profiles/nextcloud.nix
   ];
 
   services.nextcloud = {
-   # .enable
+   enable = true;
    previewGenerator = true;
    hostName = secrets.jakku.hostname;
    https = false;
-   package = pkgs.nextcloud27;
+   package = pkgs.nextcloud28;
 
     # New option since NixOS 23.05
     caching = {
@@ -33,11 +33,15 @@
       # we choose postgres because it's faster
       dbtype = "pgsql";
 
-      defaultPhoneRegion = "FR";
 
-      # Further forces Nextcloud to use HTTPS, useful when behind proxy
-      overwriteProtocol = "https";
     };
+
+    settings =  {
+      default_phone_region = "FR";
+      # Further forces Nextcloud to use HTTPS, useful when behind proxy
+      overwriteprotocol = "https";
+    };
+
 
     extraApps = with config.services.nextcloud.package.packages.apps; {
      # inherit news; # removed 'cos gives a wrong error

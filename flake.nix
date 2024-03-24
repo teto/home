@@ -455,6 +455,7 @@
 
           neotokyo = nixpkgs.lib.nixosSystem {
             inherit system;
+            # pkgs = self.inputs.nixos-unstable.legacyPackages.${system}.pkgs;
             pkgs = myPkgs;
             modules = [
               self.inputs.sops-nix.nixosModules.sops
