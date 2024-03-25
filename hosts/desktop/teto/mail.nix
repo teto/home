@@ -55,16 +55,16 @@ let
 
 
   # problem is I don't get the error/can't interrupt => TODO use another one
-  mbsyncWrapper = pkgs.writeShellScriptBin "mbsync-wrapper" ''
-    ${pkgs.isync}/bin/mbsync $@
-    notmuch new
-  '';
+  # mbsyncWrapper = pkgs.writeShellScriptBin "mbsync-wrapper" ''
+  #   ${pkgs.isync}/bin/mbsync $@
+  #   notmuch new
+  # '';
 
-  my_tls = {
-    enable = true;
-    # certificatesFile = "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
-    certificatesFile = "/etc/ssl/certs/ca-certificates.crt";
-  };
+  # my_tls = {
+  #   enable = true;
+  #   # certificatesFile = "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
+  #   certificatesFile = "/etc/ssl/certs/ca-certificates.crt";
+  # };
 
   gpgModule = {
     key = "64BB678705EF85ABF7345F69BD024BD9C261596D";
@@ -79,6 +79,7 @@ let
       astroid = { enable = true; };
 
       mbsync = mbsyncConfig // {
+        enable = false; # mujmap is better at it
         remove = "both";
         sync = true;
       };
@@ -98,16 +99,17 @@ let
         # settings.password_command = "cat /home/teto/mujmap_password";
         settings.password_command = getPasswordCommand "perso/fastmail_mc_jmap";
         settings.config_dir = config.accounts.email.maildirBasePath;
+        settings.session_url = "https://api.fastmail.com/.well-known/jmap";
       };
 
 
       primary = false;
-      userName = secrets.users.teto.userName;
+      userName = secrets.accounts.mail.fastmail_perso.login;
       realName = secrets.users.teto.realName;
-      address = secrets.users.teto.email;
+      address = secrets.accounts.mail.fastmail_perso.email;
 
       # fastmail requires an app-specific password
-      passwordCommand = getPasswordCommand "perso/fastmail_mc";
+      passwordCommand = getPasswordCommand "perso/fastmail_mc/password";
 
       # described here https://www.fastmail.com/help/technical/servernamesandports.html
       # imap = { host = "imap.fastmail.com"; tls = my_tls; };
@@ -137,9 +139,9 @@ let
       };
 
       primary = false;
-      userName = "matthieu.coudron@novadiscovery.com";
+      userName = secrets.accounts.mail.nova.email;
       realName = "Matthieu coudron";
-      address = "matthieu.coudron@novadiscovery.com";
+      address = secrets.accounts.mail.nova.email;
       flavor = "gmail.com";
       smtp.tls.useStartTls = true;
 
@@ -243,14 +245,19 @@ in
   imports = [
     ../../../hm/profiles/neomutt.nix
     ./programs/astroid.nix
-    ./programs/mbsync.nix
     ./programs/msmtp.nix
     ./programs/mujmap.nix
+    # ./programs/mbsync.nix  # using mujmap instead ?
+    ./programs/notmuch.nix
   ];
+
+  programs.aerc = {
+   enable = true;
+   extraConfig.general.unsafe-accounts-conf = true;
+  };
 
   home.packages = with pkgs; [
     isync
-    # mbsyncWrapper
   ];
 
   accounts.email.maildirBasePath = "${config.home.homeDirectory}/maildir";
@@ -261,55 +268,24 @@ in
   };
 
 
-  # TODO conditionnally define these
-  programs.notmuch = {
-    enable = true;
-
-    # dont add "inbox" tag
-    new.tags = [ "unread" "inbox" ];
-    # new.ignore = 
-    search.excludeTags = [ "spam" ];
-
-    hooks = {
-      postNew = lib.concatStrings [
-        (builtins.readFile ../../../hooks_perso/post-new)
-      ];
-      # postInsert = 
-    };
-  };
-
 
   services.mbsync =
-   # let 
-      # temporary solution since it's not portable
-      # getPassword = accountName:
-      #   let
-      #   # https://superuser.com/questions/624343/keep-gnupg-credentials-cached-for-entire-user-session
-      #   # 	  export PASSWORD_STORE_GPG_OPTS=" --default-cache-ttl 34560000"
-      #     script = pkgs.writeShellScriptBin "pass-show" ''
-      #     ${pkgs.pass}/bin/pass show "$@" | ${pkgs.coreutils}/bin/head -n 1
-      #   '';
-      #   in
-      #     "${script}/bin/pass-show ${accountName}";
-      # execStartPreScript = pkgs.writeShellScript "mk_data_dir" ''
-      #   ${getPassword "perso/fastmail_mc"} > /tmp/fastmail_pwd;
-      # '';
-	# in
-
    {
+    # disabled because mujmap does it better ?
     enable = true; # disabled because it kept asking for my password
     verbose = true; # to help debug problems in journalctl
     frequency = "*:0/5";
     # TODO add a echo for the log
     postExec = "${pkgs.notmuch}/bin/notmuch new";
   };
+
   # copy load credential implem from https://github.com/NixOS/nixpkgs/pull/211559/files
   systemd.user.services.mbsync = {
     Service = {
       # TODO need DBUS_SESSION_BUS_ADDRESS 
       # --app-name="%N" toto
       Environment = [ ''DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/1000/bus"'' ];
-	  # SetCredentialEncrypted=secrets.mail.fastmail_perso;
+	  # SetCredentialEncrypted=secrets.accounts.mail.fastmail_perso;
       # easier to update the file then regenarate the nix code
       # ImportCredential="fastmail_perso:/home/teto/home/secrets/mail.secret";
       LoadCredential="fastmail_perso:/home/teto/home/secrets/mail.secret";
@@ -329,11 +305,7 @@ in
       # ] ++ lib.optionals (cfg.mail.smtp.passwordFile != null) [ "SMTP_USER_PWD:${cfg.mail.smtp.passwordFile}"];
       # };
     };
-
   };
-
-  # programs.muchsync = { };
-
 
   # generate an addressbook that can be used later
   home.file."bin-nix/generate-addressbook".text = ''

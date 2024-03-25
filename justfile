@@ -51,7 +51,7 @@ deploy-neotokyo:
 	# - we need interactivty to enter password see 
 	#   https://github.com/serokell/deploy-rs/issues/78#issuecomment-1367467086
 	# --ssh-opts="-t" --magic-rollback false
-	deploy '.#neotokyo' -s
+	deploy '.#neotokyo' -s --interactive-sudo=true
 	# -s 
 
 # regenerate my email contacts

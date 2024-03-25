@@ -1,14 +1,11 @@
 { config, lib, pkgs, ... }:
 {
-    
-  programs.msmtp = {
+  # disabled for now, use mbsync instead
+  programs.mbsync = {
     enable = true;
-    extraConfig = ''
-      # this will create a default account which will then break the
-      # default added via primary
-      # syslog         on
-    '';
+    # package = mbsyncWrapper;
   };
+
 
 
 }
