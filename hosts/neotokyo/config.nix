@@ -1,7 +1,10 @@
-{ config, flakeInputs, secrets, modulesPath, pkgs, lib, ... }:
-# let
-  # secrets = import ../../nixpkgs/secrets.nix;
-# in
+{ config
+, flakeInputs
+, secrets
+, modulesPath, pkgs, lib, ... }:
+let
+   banner = "You can start the nextcloud-add-user.service unit if teto user doesnt exist yet";
+in
 {
  networking = {
    hostName = "neotokyo";
@@ -24,6 +27,9 @@
       serviceConfig.Restart = "always";
     };
 
+  programs.bash.interactiveShellInit = ''
+    cat "${pkgs.writeText "welcome-message" banner}";
+  '';
   imports = [
     # for gandi
     "${modulesPath}/virtualisation/openstack-config.nix"

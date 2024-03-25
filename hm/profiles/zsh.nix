@@ -3,6 +3,11 @@
 , pkgs
 , ... }:
 {
+  home.sessionVariables = {
+    # RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/rg.conf";
+    ZDOTDIR = "$XDG_CONFIG_HOME/zsh";
+  };
+
   programs.zsh = {
     enable = true;
 

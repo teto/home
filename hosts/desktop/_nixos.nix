@@ -56,7 +56,7 @@ in
     ../../nixos/profiles/nix-daemon.nix
     # ../../nixos/profiles/experimental.nix
     ../../nixos/profiles/steam.nix
-    ../../nixos/profiles/opensnitch.nix
+    # ../../nixos/profiles/opensnitch.nix
     ../../nixos/profiles/podman.nix
     ../../nixos/profiles/steam.nix
     ../../nixos/profiles/wireguard.nix
@@ -67,9 +67,6 @@ in
     ../../nixos/profiles/nvidia.nix
     ../../nixos/profiles/ntp.nix
     ../../nixos/profiles/ollama.nix
-
-    # just to check how /etc/nix/machines looks like
-    ../../nixos/profiles/distributedBuilds.nix
   ];
 
   home-manager.users = 
@@ -104,15 +101,9 @@ in
      # TODO it should load the whole folder
      imports = [
        ./teto/default.nix
-       # breaks build: doesnt like the "activation-script"
-       # nova.hmConfigurations.dev
      ];
    };
   };
-
-  # for testing
-  # services.openssh = {
-  # };
 
   # nesting clones can be useful to prevent GC of some packages
   # https://nixos.org/nix-dev/2017-June/023967.html

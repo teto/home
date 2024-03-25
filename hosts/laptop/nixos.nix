@@ -1,4 +1,7 @@
-{ config, lib, pkgs, flakeInputs, secrets, ... }:
+{ config, lib, pkgs
+, flakeInputs
+, withSecrets 
+, secrets, ... }:
 {
   imports = [
     ./services/openssh.nix
@@ -9,8 +12,6 @@
     ../config-all.nix
     ../../nixos/modules/luarocks-site.nix
 
-    ../../nixos/profiles/wireguard.nix
-    ../../nixos/profiles/distributedBuilds.nix
     ../../nixos/profiles/desktop.nix
     ../../nixos/profiles/podman.nix
     ../../nixos/profiles/sway.nix
@@ -31,6 +32,8 @@
 
     # ./profiles/pixiecore.nix
 
+   ] ++ lib.optionals withSecrets [
+    ../../nixos/profiles/wireguard.nix
   ];
 
   powerManagement.enable = false;

@@ -428,7 +428,10 @@ let
       nodePackages.prettier 
       python3Packages.flake8 # for nvim-lint and some nixpkgs linters
       pkgs.black
-      sox # to enable GpWhisper in gp.nvim
+      # soxWithMp3 = final.sox.override { llama-cpp = llama-cpp-matt; };
+
+      # to enable GpWhisper in gp.nvim
+      (sox.override({enableLame = true;}))
 
       nodePackages.pyright
     ];

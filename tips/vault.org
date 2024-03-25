@@ -1,5 +1,8 @@
 * accept env variables
-  VAULT_ADDR and VAULT_TOKEN
+  `export VAULT_ADDR=..`
+  and/or VAULT_TOKEN (defaults to ~/.vault-token)
+
+VAULT_LOG_LEVEL
 
 * to ignore certificate check 
   export VAULT_SKIP_VERIFY=1

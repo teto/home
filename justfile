@@ -46,12 +46,13 @@ deploy-router:
 	# deploy .\#router  -s  --auto-rollback false --magic-rollback false
 	deploy .\#router  -s 
 
-[confirm("prompt")]
+# [confirm("prompt")]
 deploy-neotokyo:
 	# - we need interactivty to enter password see 
 	#   https://github.com/serokell/deploy-rs/issues/78#issuecomment-1367467086
 	# --ssh-opts="-t" --magic-rollback false
-	deploy .\#neotokyo  -s 
+	deploy '.#neotokyo' -s
+	# -s 
 
 # regenerate my email contacts
 # (to speed up alot autocompletion)
@@ -70,12 +71,14 @@ local:
 	stow -t "$(XDG_DATA_HOME)" local
 	mkdir -p "{{data_directory()}}/fzf-history" {{data_directory()}}/newsbeuter
 
-home:
+# linkdf -h
+
+home: 
 	stow --dotfiles -t ${HOME} home
 
 # [confirm("prompt")]
 routerIso:
-		nix build .\#nixosConfigurations.routerIso.config.system.build.isoImage
+	nix build .\#nixosConfigurations.routerIso.config.system.build.isoImage
 
 cache:
 	#mkdir -p $(shell echo "${XDG_CACHE_HOME:-$HOME/.cache}/less")

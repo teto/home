@@ -46,13 +46,6 @@
   # ];
 
 
-  home.file.".gdbinit".text = ''
-    # ../config/gdbinit_simple;
-    # gdb doesn't accept environment variable except via python
-    source ${config.xdg.configHome}/gdb/gdbinit_simple
-    set history filename ${config.xdg.cacheHome}/gdb_history
-  '';
-
   # useful to prevent some problems with nix
   # https://github.com/commercialhaskell/stack/issues/2358
   # home.file.".stack/config.yaml".source = ../home/stack.yaml;
@@ -61,15 +54,13 @@
   # https://github.com/carnager/buku_run
   home.sessionVariables = {
     # RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/rg.conf";
-    ZDOTDIR = "$XDG_CONFIG_HOME/zsh";
     INPUTRC = "$XDG_CONFIG_HOME/inputrc";
 
     # TODO package these instead now these are submoudles of dotfiles To remove
     # VIFM = "$XDG_CONFIG_HOME/vifm";
-    WWW_HOME = "$XDG_CONFIG_HOME/w3m";
+    # WWW_HOME = "$XDG_CONFIG_HOME/w3m";
     # used by ranger
-    TERMCMD = "kitty";
-    # TERMINAL # used by i3-sensible-terminal
+    TERMCMD = "kitty"; # xdg-terminal is better bow ?
   };
 
   # source file name can't start with .
@@ -103,6 +94,7 @@
     # settings = {};
   };
 
+  # cool to have when I break neovim
   programs.vim = {
     enable = true;
     settings = {
@@ -115,6 +107,7 @@
 
   programs.fzf = {
     enable = true;
+    enableBashIntegration = true;
     enableZshIntegration = true;
     # so that fzf takes into account .gitignore
     defaultCommand = "${pkgs.fd}/bin/fd --type f";
@@ -160,10 +153,6 @@
         "source-file $XDG_CONFIG_HOME/tmux/config"
       '';
   };
-
-  # home.activation.copyZshrc = dagEntryBefore [ "linkGeneration" ] ''
-  #   cp $
-  #   '';
 
   # for colors etc.
   programs.lesspipe.enable = true;

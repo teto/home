@@ -67,6 +67,13 @@ in
     enableZshIntegration = true;
   };
 
+  home.file.".gdbinit".text = ''
+    # ../config/gdbinit_simple;
+    # gdb doesn't accept environment variable except via python
+    source ${config.xdg.configHome}/gdb/gdbinit_simple
+    set history filename ${config.xdg.cacheHome}/gdb_history
+  '';
+
 
   home.language = {
    # monetary = 
@@ -103,13 +110,12 @@ in
 	# haxe # to test https://neovim.discourse.group/t/presenting-haxe-neovim-a-new-toolchain-to-build-neovim-plugins/3720
     # meli  # broken jmap mailreader
 
-    fre
+    fre # generate a frequency database
     unar # used to view archives by yazi
     # poppler for pdf preview
   ];
 
   services.nextcloud-client.enable = false;
-
 
   xdg.configFile."starship.toml".enable = false;
 

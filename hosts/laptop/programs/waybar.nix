@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 {
 
-  include = [
+  imports = [
     ../../../hm/profiles/waybar.nix
   ];
 

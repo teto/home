@@ -1,7 +1,0 @@
-#!/bin/bash
-# launch this script to install every package in your $HOME
-
-if [ -z $(which stow) ]; then
-	echo "Please install GNU stow before launching this script"
-	exit 1
-fi

@@ -16,8 +16,6 @@
     #       name = "Firefox for nova";
     #     };
     # };
-
-
     full = {
       # full definition
       # https://superuser.com/questions/1179843/how-to-start-a-firefox-with-a-different-wm-class-or-any-other-altered-property
@@ -48,9 +46,7 @@
 
 
   home.packages = [
-    # pkgs.aws-sam-cli  # BROKEN  for sam lambda
     pkgs.sqlitebrowser
-    # pkgs.redis # for redis-cli
-    # pkgs.google-chrome
+    pkgs.google-chrome
   ];
 }

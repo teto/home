@@ -19,9 +19,10 @@ return {
 
  {
   -- :GpChatNew
-  -- dir = "~/gp.nvim"
-  'Robitx/gp.nvim'
-  , branch = "copilot"
+  -- use :GpInspectPlugin to debug
+  dir = "~/gp.nvim"
+  -- 'Robitx/gp.nvim'
+  -- , branch = "copilot"
   , config = function()
  	-- default command agents (model + persona) 
  	-- name, model and system_prompt are mandatory fields 
@@ -33,6 +34,10 @@ return {
      -- local agents = 
      -- Voice commands (:GpWhisper*) depend on SoX (Sound eXchange) to handle audio recording and processing:
 		require("gp").setup({
+-- cd /tmp/gp_whisper && export LC_NUMERIC='C' && sox --norm=-3 rec.wav norm.wav && t=$(sox 'norm.wav' -n channels 1 stats 2>&1 | grep 'RMS lev dB'  | sed -e 's/.* //' | awk '{print $1*1.75}') && sox -q norm.wav -C 196.5 final.mp3 silence -l 1 0.05 $t'dB' -1 1.0 $t'dB' pad 0.1 0.1 tempo 1.75 && curl  --max-time 20 https://api.openai.com/v1/audio/transcriptions -s -H \"Authorization: 
+	-- whisper_rec_cmd = {"sox", "-c", "1", "--buffer", "32", "-d", "rec.wav", "trim", "0", "60:00"},
+	-- whisper_rec_cmd = {"arecord", "-c", "1", "-f", "S16_LE", "-r", "48000", "-d", "3600", "rec.wav"},
+	-- whisper_rec_cmd = {"ffmpeg", "-y", "-f", "avfoundation", "-i", ":0", "-t", "3600", "rec.wav"},
 
          agents = {
           -- unpack(default_config.agents),
@@ -72,6 +77,11 @@ return {
               .. "- Take a deep breath; You've got this!\n",
           },
         },
+        -- image_dir = (os.getenv("TMPDIR") or os.getenv("TEMP") or "/tmp") .. "/gp_images",
+        image_dir = vim.fn.stdpath("cache").."/gp_images",
+        whisper_dir = vim.fn.stdpath("cache").."/gp_whisper",
+        whisper_language = "en",
+
          -- chat_agents = agents,
          -- openai_api_endpoint = "http://localhost:8080/v1/chat/completions",
          -- agents = agents,
@@ -88,7 +98,7 @@ return {
           },
           -- ollama = {},
           localai = {
-            endpoint = "http://localhost:8080/v1/chat/completions",
+            endpoint = "http://localhost:11111/v1/chat/completions",
           }
 
          }
