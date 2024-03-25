@@ -99,9 +99,19 @@ return {
  --		}
  --	end
  --}
- { 'ziontee113/color-picker.nvim' },
- -- a zenity picker for several stuff (colors etc)
- {'DougBeney/pickachu', lazy = true},
+ { 'ziontee113/color-picker.nvim'
+ -- use with PickColor, o to toggle serliazier, hjkl to change values
+ ,  config = function()
+        require("color-picker")
+    end,
+ },
+ -- {
+ -- -- a zenity picker for several stuff (colors etc)
+ -- -- lazy = true
+ --  'DougBeney/pickachu', 
+ --  cmd= "Pickachu",
+ --  -- :Pick
+ -- },
 
  -- only for dash it seems
  -- Install via nix

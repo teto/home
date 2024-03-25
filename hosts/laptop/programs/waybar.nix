@@ -1,5 +1,10 @@
 { config, lib, pkgs, ... }:
 {
+
+  include = [
+    ../../../hm/profiles/waybar.nix
+  ];
+
   programs.waybar = {
    settings = {
      mainBar = {

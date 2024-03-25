@@ -53,6 +53,7 @@ in
        type = "discover";
        # primary = true;
        priority = 1000;
+       # #b3e1f7
        color = "#ff0000";
        # does not seem to be valid
        # extraConfig = ''

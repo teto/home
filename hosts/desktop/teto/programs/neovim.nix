@@ -43,12 +43,12 @@ let
           # pkgs.vimPlugins.nvim-treesitter-parsers.tree-sitter-nix
           # # tree-sitter-haskell # crashes with a loop
           # tree-sitter-html  # for rest.nvim
-          (grammarToPlugin pkgs.tree-sitter-grammars.tree-sitter-html) # for devdocs
-          pkgs.vimPlugins.nvim-treesitter.grammarPlugins.org
-          pkgs.vimPlugins.nvim-treesitter.grammarPlugins.norg
-          # (grammarToPlugin pkgs.tree-sitter-grammars.tree-sitter-norg-meta)
-          pkgs.vimPlugins.nvim-treesitter.grammarPlugins.nix
-          pkgs.vimPlugins.nvim-treesitter.grammarPlugins.http
+          # (grammarToPlugin pkgs.tree-sitter-grammars.tree-sitter-html) # for devdocs
+          # pkgs.vimPlugins.nvim-treesitter.grammarPlugins.org
+          # pkgs.vimPlugins.nvim-treesitter.grammarPlugins.norg
+          # # (grammarToPlugin pkgs.tree-sitter-grammars.tree-sitter-norg-meta)
+          # pkgs.vimPlugins.nvim-treesitter.grammarPlugins.nix
+          # pkgs.vimPlugins.nvim-treesitter.grammarPlugins.http
 
           # (grammarToPlugin tree-sitter-just)
         ];
@@ -344,36 +344,36 @@ let
     #   #         }
     # })
 
-    # (luaPlugin {
-    #   plugin = rest-nvim;
-    #   config = ''
-    #     require("rest-nvim").setup({
-    #       -- Open request results in a horizontal split
-    #       result_split_horizontal = false,
-    #       -- Skip SSL verification, useful for unknown certificates
-    #       skip_ssl_verification = false,
-    #       -- Highlight request on run
-    #       highlight = {
-    #        enabled = true,
-    #        timeout = 150,
-    #       },
-    #       result = {
-    #        -- toggle showing URL, HTTP info, headers at top the of result window
-    #        show_url = true,
-    #        show_http_info = true,
-    #        show_headers = true,
-    #        -- disable formatters else they generate errors/add dependencies
-    #        -- for instance when it detects html, it tried to run 'tidy'
-    #        formatters = {
-    #         html = false,
-    #         jq = false
-    #        },
-    #       },
-    #       -- Jump to request line on run
-    #       jump_to_request = false,
-    #     })
-    #     '';
-    # })
+    (luaPlugin {
+      plugin = rest-nvim;
+      # config = ''
+      #   require("rest-nvim").setup({
+      #     -- Open request results in a horizontal split
+      #     result_split_horizontal = false,
+      #     -- Skip SSL verification, useful for unknown certificates
+      #     skip_ssl_verification = false,
+      #     -- Highlight request on run
+      #     highlight = {
+      #      enabled = true,
+      #      timeout = 150,
+      #     },
+      #     result = {
+      #      -- toggle showing URL, HTTP info, headers at top the of result window
+      #      show_url = true,
+      #      show_http_info = true,
+      #      show_headers = true,
+      #      -- disable formatters else they generate errors/add dependencies
+      #      -- for instance when it detects html, it tried to run 'tidy'
+      #      formatters = {
+      #       html = false,
+      #       jq = false
+      #      },
+      #     },
+      #     -- Jump to request line on run
+      #     jump_to_request = false,
+      #   })
+      #   '';
+    })
 
   ];
 
@@ -428,6 +428,7 @@ let
       nodePackages.prettier 
       python3Packages.flake8 # for nvim-lint and some nixpkgs linters
       pkgs.black
+      sox # to enable GpWhisper in gp.nvim
 
       nodePackages.pyright
     ];

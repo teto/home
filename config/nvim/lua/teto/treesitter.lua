@@ -12,7 +12,7 @@ if not available then
 end
 
 -- TODO add full path to gcc
-require"nvim-treesitter.install".compilers = { 
+require"nvim-treesitter.install".compilers = {
   "/nix/store/xq8920m5mbd83vdlydwli7qsh67gfm5v-gcc-wrapper-13.2.0/bin/gcc"
 }
 
@@ -55,8 +55,19 @@ ts_config.setup({
         --         goto_definition = "gnd",          -- mapping to go to definition of symbol under cursor
         --         list_definitions = "gnD"          -- mapping to list all definitions in current file
         --       }
-    },
-    --     ensure_installed = {"c"}, -- one of 'all', 'language', or a list of languages
+    }
+    -- TSInstall lua xml http json graphql
+    , ensure_installed = {
+     -- rest.nvim grammars
+     "lua", "xml", "http", "json", "graphql"
+     -- for me
+     , "c"
+     , "query"
+
+     , "org", "norg"
+
+
+       }, -- one of 'all', 'language', or a list of languages
 
     -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
     -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).

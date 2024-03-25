@@ -1,6 +1,10 @@
 { config, lib, pkgs, ... }:
 {
 
+  include = [
+    ../../../hm/profiles/waybar.nix
+  ];
+
   programs.waybar = let 
 
    # TODO make sure it has jq in PATH
@@ -14,7 +18,6 @@
 
   in {
    enable = true;
-   systemd.enable = true;
    settings = {
      mainBar = {
        layer = "top";

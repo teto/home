@@ -16,7 +16,7 @@ default_event_duration=30m
 highlight_event_days=true
 
 [highlight_days]
-color=#ff0000
+color=#b3e1f7
 default_color=#f0ff00
 method=fg
 

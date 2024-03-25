@@ -1038,50 +1038,46 @@ if use_luasnip then
 			}, {
 				func(date, {}),
 			}),
-			snip({
-				trig = "pwd",
-				namr = "PWD",
-				dscr = "Path to current working directory",
-			}, {
-				func(bash, {}, { user_args = { "pwd" } }),
+		},
+		sh = {
+			snip("shebang", {
+				t { "#!/bin/sh", "" },
+				i(0),
 			}),
 		},
-	sh = {
-        snip("shebang", {
-            t { "#!/bin/sh", "" },
-            insert(0),
-        }),
-    },
-    python = {
-        snip("shebang", {
-            text { "#!/usr/bin/env python", "" },
-            insert(0),
-        }),
-    },
-	})
-	ls.add_snippets("lua", {
-		-- trigger is `fn`, second argument to snippet-constructor are the nodes to insert into the buffer on expansion.
-		s("fn", {
-			-- Simple static text.
-			t("//Parameters: "),
-			-- function, first parameter is the function, second the Placeholders
-			-- whose text it gets as input.
-			-- f(copy, 2),
-			t({ "", "function " }),
-			-- Placeholder/Insert.
-			i(1),
-			t("("),
-			-- Placeholder with initial text.
-			i(2, "int foo"),
-			-- Linebreak
-			t({ ") {", "\t" }),
-			-- Last Placeholder, exit Point of the snippet.
-			i(0),
-			t({ "", "}" }),
-		}),
+    -- python = {
+    --     snip("shebang", {
+    --         t { "#!/usr/bin/env python", "" },
+    --         i(0),
+    --     }),
+    -- },
+
 	})
 
-    require("luasnip.loaders.from_lua").load({paths = vim.fn.stdpath("config").."/snippets"})
+	-- ls.add_snippets("lua", {
+	-- 	-- trigger is `fn`, second argument to snippet-constructor are the nodes to insert into the buffer on expansion.
+	-- 	s("fn", {
+	-- 		-- Simple static text.
+	-- 		t("//Parameters: "),
+	-- 		-- function, first parameter is the function, second the Placeholders
+	-- 		-- whose text it gets as input.
+	-- 		-- f(copy, 2),
+	-- 		t({ "", "function " }),
+	-- 		-- Placeholder/Insert.
+	-- 		i(1),
+	-- 		t("("),
+	-- 		-- Placeholder with initial text.
+	-- 		i(2, "int foo"),
+	-- 		-- Linebreak
+	-- 		t({ ") {", "\t" }),
+	-- 		-- Last Placeholder, exit Point of the snippet.
+	-- 		i(0),
+	-- 		t({ "", "}" }),
+	-- 	}),
+	-- })
+
+    require("luasnip.loaders.from_lua").load({paths = {vim.fn.stdpath("config").."/snippets"}})
+
 
 end
 
