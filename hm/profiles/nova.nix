@@ -46,6 +46,7 @@
 
 
   home.packages = [
+    pkgs.aws-vault # set it up as 
     pkgs.sqlitebrowser
     pkgs.google-chrome
   ];

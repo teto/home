@@ -41,15 +41,7 @@ in
           # set to 0.0.0.0 to forward all the traffic via VPN.
           # allowedIPs = [ "10.100.0.0/0" ];
           # Or forward only particular subnets
-          allowedIPs = [ 
-           "10.100.0.1"
-           "91.108.12.0/22" 
-           # ➜ resolvectl query kh.novavault.cloud
-
-           # kh.novavault.cloud:
-           "54.93.50.138"             
-           "18.194.128.193"
-          ];
+          allowedIPs = secrets.nova.wireguard.allowedIPs;
 
           # Set this to the server IP and port.
           
