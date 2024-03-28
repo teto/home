@@ -97,9 +97,14 @@ let
 		# fqdn = null;
         # TODO replace with pass
         # settings.password_command = "cat /home/teto/mujmap_password";
+        # look at https://github.com/elizagamedev/mujmap/blob/main/mujmap.toml.example 
+        # for example
+        settings.username = secrets.accounts.mail.fastmail_perso.email;
         settings.password_command = getPasswordCommand "perso/fastmail_mc_jmap";
         settings.config_dir = config.accounts.email.maildirBasePath;
         settings.session_url = "https://api.fastmail.com/.well-known/jmap";
+        # check example at https://github.com/elizagamedev/mujmap/blob/main/mujmap.toml.example
+        # settings.timeout = 5
       };
 
 

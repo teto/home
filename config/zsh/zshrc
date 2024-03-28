@@ -347,8 +347,5 @@ _fzf_compgen_dir() {
 # used in some git aliases
 export REVIEW_BASE=master
 
-# this erases fzf so annoying
-# source ~/.config/nova/zsh/zshrc
-#
-
+# to be able to have completion for programs with bash-only completion like vault
 autoload -U +X bashcompinit && bashcompinit

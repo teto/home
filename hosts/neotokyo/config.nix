@@ -3,7 +3,8 @@
 , secrets
 , modulesPath, pkgs, lib, ... }:
 let
-   banner = "You can start the nextcloud-add-user.service unit if teto user doesnt exist yet";
+  # TODO add a justfile to run the basic steps
+  banner = "You can start the nextcloud-add-user.service unit if teto user doesnt exist yet";
 in
 {
  networking = {

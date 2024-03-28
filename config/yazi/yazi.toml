@@ -10,7 +10,7 @@ sort_reverse   = false
 sort_dir_first = true
 # display information associated with the file on the right side of the file list row.
 linemode       = "size"
-show_hidden    = false
+show_hidden    = true  # toggled with .
 show_symlink   = true
 # The number of files to keep above and below the cursor when moving through the file list.
 scrolloff      = 5
@@ -48,26 +48,29 @@ play = [
 
 [open]
 rules = [
-	{ name = "*/", use = [ "edit", "open", "reveal" ] },
+   # these are all defaults:{{{
+	# { name = "*/", use = [ "edit", "open", "reveal" ] },
+	# { mime = "text/*",  use = [ "edit", "reveal" ] },
+	# { mime = "image/*", use = [ "open", "reveal" ] },
+	# { mime = "video/*", use = [ "play", "reveal" ] },
+	# { mime = "audio/*", use = [ "play", "reveal" ] },
+	# { mime = "inode/x-empty", use = [ "edit", "reveal" ] },
 
-	{ mime = "text/*",  use = [ "edit", "reveal" ] },
-	{ mime = "image/*", use = [ "open", "reveal" ] },
-	{ mime = "video/*", use = [ "play", "reveal" ] },
-	{ mime = "audio/*", use = [ "play", "reveal" ] },
-	{ mime = "inode/x-empty", use = [ "edit", "reveal" ] },
+	# { mime = "application/json", use = [ "edit", "reveal" ] },
+	# { mime = "*/javascript",     use = [ "edit", "reveal" ] },
 
-	{ mime = "application/json", use = [ "edit", "reveal" ] },
-	{ mime = "*/javascript",     use = [ "edit", "reveal" ] },
+	# { mime = "application/zip",             use = [ "extract", "reveal" ] },
+	# { mime = "application/gzip",            use = [ "extract", "reveal" ] },
+	# { mime = "application/x-tar",           use = [ "extract", "reveal" ] },
+	# { mime = "application/x-bzip",          use = [ "extract", "reveal" ] },
+	# { mime = "application/x-bzip2",         use = [ "extract", "reveal" ] },
+	# { mime = "application/x-7z-compressed", use = [ "extract", "reveal" ] },
+	# { mime = "application/x-rar",           use = [ "extract", "reveal" ] },
+	# { mime = "application/xz",              use = [ "extract", "reveal" ] },
+# }}}
 
-	{ mime = "application/zip",             use = [ "extract", "reveal" ] },
-	{ mime = "application/gzip",            use = [ "extract", "reveal" ] },
-	{ mime = "application/x-tar",           use = [ "extract", "reveal" ] },
-	{ mime = "application/x-bzip",          use = [ "extract", "reveal" ] },
-	{ mime = "application/x-bzip2",         use = [ "extract", "reveal" ] },
-	{ mime = "application/x-7z-compressed", use = [ "extract", "reveal" ] },
-	{ mime = "application/x-rar",           use = [ "extract", "reveal" ] },
-	{ mime = "application/xz",              use = [ "extract", "reveal" ] },
 
+	{ mime = "application/octet-stream",              use = [ "extract", "reveal" ] },
 	{ mime = "*", use = [ "open", "reveal" ] },
 ]
 

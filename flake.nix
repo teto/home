@@ -189,6 +189,8 @@
           overlays = (src.lib.attrValues self.overlays) ++ [
             autoCalledPackages
             self.inputs.rofi-hoogle.overlay
+            self.inputs.nova.overlays.default
+
             # self.inputs.nixpkgs-wayland.overlay
             # self.inputs.nix.overlays.default
           ];
@@ -352,19 +354,23 @@
             #  ps.jupyter-client
             # ]);
 
-            inherit (unstablePkgs) nhs92 nhs94 nhs96;
+            inherit (unstablePkgs) 
+             nhs92 
+             nhs94 
+             nhs96 
+             nhs98;
 
           };
         }) // {
 
-      homeManagerConfigurations = { };
+      # homeConfigurations = { };
 
       nixosConfigurations =
         let
           system = "x86_64-linux";
           novaModule = ({ flakeInputs, ... }: {
             imports = [
-              ./nixos/profiles/nova/rstudio-server.nix
+              # ./nixos/profiles/nova/rstudio-server.nix
 
             ];
             home-manager.extraSpecialArgs = {
@@ -379,9 +385,13 @@
                 ./hosts/desktop/teto/bash.nix
                 ./hm/profiles/nova/ssh-config.nix
 
-                flakeInputs.nova.hmProfiles.standard
-                flakeInputs.nova.hmProfiles.dev
-                flakeInputs.nova.hmProfiles.devops
+                # flakeInputs.nova.homeConfigurations.standard
+                "${flakeInputs.nova}/nix/hm/nova-user.nix"
+                "${flakeInputs.nova}/nix/hm/nova-dev.nix"
+          # ./nix/hm/nova-dev.nix
+
+                # flakeInputs.nova.hmProfiles.dev
+                # flakeInputs.nova.hmProfiles.devops
               ];
             };
           });

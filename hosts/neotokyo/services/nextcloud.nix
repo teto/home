@@ -54,6 +54,10 @@
 
     };
 
+   # secretFile = "/run/secrets/nextcloudSecrets.json";
+   #     Secret options which will be appended to Nextcloud’s config.php file (written as JSON, in the same form as the services.nextcloud.settings[1] option), for example ‘{"redis":{"password":"secret"}}’.
+
+
   };
 
   # services.redis.servers."nextcloud".enable = true;
@@ -114,6 +118,5 @@
     owner = config.users.users.nextcloud.name;
     group = config.users.users.nextcloud.group;
   };
-
 
 }

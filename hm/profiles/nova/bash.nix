@@ -24,8 +24,8 @@ in
             lib.nameValuePair 
              (lib.toUpper "NOVA_${attr.runnerName}")
              (hmLib.mkRemoteBuilderDesc (attr // {
-               sshUser = secrets.nova-gitlab-runner-1.userName;
-               sshKey = secrets.nova-runner-1.sshKey;
+               sshUser = secrets.nova.runners.ovh1.userName;
+               sshKey = secrets.nova.runners.ovh1.sshKey;
                system = "x86_64-linux";
                maxJobs = 10;
                speedFactor = 2;
@@ -42,8 +42,8 @@ in
     in {
 	  # TODO pass the correct port, how to do that ? need ssh_config support
       # NOVA_RUNNER1 = mkRemoteBuilderDesc secrets.nova-runner-1;
-	  NOVA_CACHE_DEV  = secrets.novaNixCache.dev;
-	  NOVA_CACHE_PROD = secrets.novaNixCache.prod;
+	  NOVA_CACHE_DEV  = secrets.nova.novaNixCache.dev;
+	  NOVA_CACHE_PROD = secrets.nova.novaNixCache.prod;
 
        HUSKY=0; # To disable HUSKY
 	  # wayland variables

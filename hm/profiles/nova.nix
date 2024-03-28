@@ -49,5 +49,7 @@
     pkgs.aws-vault # set it up as 
     pkgs.sqlitebrowser
     pkgs.google-chrome
+    # pigz for zlib (de)compression
+    pkgs.pigz # pigz -d ~/nova/jinko2/ScalarMetaDataChunked.json.zlib -c
   ];
 }
