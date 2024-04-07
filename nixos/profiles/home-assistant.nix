@@ -5,23 +5,29 @@
   # programs.adb.enable = true;
   services.home-assistant = {
     enable = true;
-	# openFirewall = true;
+	openFirewall = true;
 
 	extraComponents = [
+		"default_config"
+		"deconz" # interface for zigbee conbee II
+		# "esphome"
+		"hue"
+		"emulated_hue"
 
 	];
 
     package = pkgs.home-assistant.override {
 	  extraPackages = python3Packages: with python3Packages; [
+        numpy
 		psycopg2
 	  ];
 	  # look at https://www.home-assistant.io/integrations/
 	  extraComponents = [
-		# "default_config"
-		# "deconz" # interface for zigbee conbee II
+		"default_config"
+		"deconz" # interface for zigbee conbee II
 		# "esphome"
-		# "hue"
-		# "emulated_hue"
+		"hue"
+		"emulated_hue"
 		# "met"
 	  ];
 	};

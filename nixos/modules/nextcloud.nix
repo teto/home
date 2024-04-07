@@ -68,8 +68,8 @@ in
 # ./occ config:app:set --value="64 256 1024" previewgenerator squareSizes
 # ./occ config:app:set --value="64 256 1024" previewgenerator widthSizes
 # ./occ config:app:set --value="64 256 1024" previewgenerator heightSizes
-       (
-        )
+       # (
+       #  )
 
       ];
 }

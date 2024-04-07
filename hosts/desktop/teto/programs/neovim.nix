@@ -417,13 +417,13 @@ let
       rust-analyzer
       shellcheck
       sumneko-lua-language-server
-      yaml-language-server
 
       gopls # LSP for go
 
       # for none-ls
       yamllint
       yamlfmt
+      yaml-language-server
       editorconfig-checker # used in null-ls
       luaformatter
       nodePackages.prettier 
@@ -438,6 +438,8 @@ let
 
       luajitPackages.luacheck 
       yaml-language-server  # ~100MB 
+
+      fswatch # better file watching starting with 0.10
     ];
 
     # TODO get lua interpreter to select the good lua packages

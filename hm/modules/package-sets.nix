@@ -10,6 +10,9 @@ in
   options = {
     package-sets = {
 
+
+     commonToAll = mkEnableOption "packages common to all";
+
       enableServerPackages = mkEnableOption "server packages";
 
       enableOfficePackages = mkEnableOption "office/heavy packages";
