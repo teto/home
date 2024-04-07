@@ -155,10 +155,11 @@ in
          hideEdgeBorders = "smart";
 
         commands = [
-        {
-         criteria = { app_id = "xdg-desktop-portal-gtk"; };
-         command = "floating enable";
-       }
+       #  {
+       #   criteria = { app_id = "xdg-desktop-portal-gtk"; };
+       #   command = "floating enable";
+       # }
+
        # for_window [title="(?:Open|Save) (?:File|Folder|As)"] floating enable;
 # for_window [title="(?:Open|Save) (?:File|Folder|As)"] resize set 800 600
 # for_window [window_role="pop-up"] floating enable

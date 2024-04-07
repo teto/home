@@ -81,5 +81,9 @@
    # settings
 
   };
+
+  environment.systemPackages =  with pkgs; [
+    pkgs.home-assistant-cli
+  ];
 }
 
