@@ -68,5 +68,15 @@
 
 	# /var/lib/hass/configuration.yaml: Secret elevation not defined
   };
+
+
+  # services.deconz.enable
+  # with my conbee 2 key
+  services.zigbee2mqtt = {
+   enable = true;
+   # https://www.zigbee2mqtt.io/information/configuration.html
+   # settings
+
+  };
 }
 
