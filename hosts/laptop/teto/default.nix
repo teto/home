@@ -1,5 +1,7 @@
 # home-manager specific config from
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs
+, flakeInputs
+, ... }:
 {
 
   imports = [
@@ -42,6 +44,9 @@
 
   # dans le cadre de mon experimentation !
   home.packages = with pkgs; [
+    flakeInputs.rippkgs.packages.${pkgs.system}.rippkgs
+    flakeInputs.rippkgs.packages.${pkgs.system}.rippkgs-index
+
     timg # to display images in terminal, to compare with imgcat ?
     imagemagick # for 'convert'
     ubuntu_font_family

@@ -7,12 +7,14 @@
     enable = true;
 	openFirewall = true;
 
+    # subset of package.extraComponents ?!
 	extraComponents = [
 		"default_config"
 		"deconz" # interface for zigbee conbee II
 		# "esphome"
 		"hue"
 		"emulated_hue"
+        "homeassistant_yellow"
 
 	];
 
@@ -24,6 +26,7 @@
 	  # look at https://www.home-assistant.io/integrations/
 	  extraComponents = [
 		"default_config"
+        "homeassistant_yellow"
 		"deconz" # interface for zigbee conbee II
 		# "esphome"
 		"hue"

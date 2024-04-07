@@ -27,7 +27,8 @@
     #   url = "github:ck3d/nix-local-ai";
     #   # inputs.nixpkgs.follows = "nixpkgs";
     # };
-
+    rippkgs.url = "github:replit/rippkgs";
+    rippkgs.inputs.nixpkgs.follows = "nixpkgs";
     nix-filter.url = "github:numtide/nix-filter";
     haumea = {
       url = "github:nix-community/haumea";

@@ -2,3 +2,5 @@ port par defaut= 8123
 
 presser 10 sec le bouton on/off du dimmer switch
 ne pas hesiter a entrer le numero de serie
+
+/var/lib/hass
