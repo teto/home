@@ -19,7 +19,10 @@
     # ./modules/jupyter.nix
   ];
 
-  environment.pathsToLink = [ "/share/xdg-desktop-portal" "/share/applications" ];
+  environment.pathsToLink = [
+   "/share/xdg-desktop-portal" 
+   "/share/applications"
+  ];
 
   # let home-manager do it
   # xdg.portal = {

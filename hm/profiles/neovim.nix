@@ -531,12 +531,10 @@ in
 
     extraPackages = with pkgs; [
       # emacs # for orgmode-babel
-      luajitPackages.luacheck 
       nil # a nix lsp, can be debugged with NIL_LOG_PATH and NIL_LOG=nil=debug
       # nixd # another nix LSP (broken because of nix security issue)
       shellcheck
       sumneko-lua-language-server
-      yaml-language-server
     ];
 
     plugins = map (x: builtins.removeAttrs x [ "after" ]) rawPlugins;

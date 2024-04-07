@@ -10,6 +10,7 @@
 
     extra-substituters = [
       "https://nixpkgs-wayland.cachix.org"
+      # https://github.com/SomeoneSerge/nixpkgs-cuda-ci
     ];
 
     # "https://nixpkgs-wayland.cachix.org"

@@ -425,7 +425,6 @@ let
       yamllint
       yamlfmt
       editorconfig-checker # used in null-ls
-      lua51Packages.luacheck
       luaformatter
       nodePackages.prettier 
       python3Packages.flake8 # for nvim-lint and some nixpkgs linters
@@ -436,6 +435,9 @@ let
       (sox.override({enableLame = true;}))
 
       nodePackages.pyright
+
+      luajitPackages.luacheck 
+      yaml-language-server  # ~100MB 
     ];
 
     # TODO get lua interpreter to select the good lua packages

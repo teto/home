@@ -25,9 +25,14 @@ in
 # 'preview_max_memory' => 4096,
 # 'preview_max_filesize_image' => 256,
 
-
- 
- config = lib.mkIf cfg.previewGenerator  {
+                 # "opcache.interned_strings_buffer" = "8";
+                 # "opcache.max_accelerated_files" = "10000";
+                 # "opcache.memory_consumption" = "128";
+                 # "opcache.revalidate_freq" = "15";
+                 # "opcache.fast_shutdown" = "1";
+ # config:system:set maintenance_window_start --value="1" --type=integer
+ config = lib.mkMerge [ 
+   (lib.mkIf cfg.previewGenerator  {
    # config.
    # services.nextcloud.package.packages.extraApps = with config.services.nextcloud.package.packages.apps; {
    #   # inherit news; # removed 'cos gives a wrong error
@@ -52,8 +57,19 @@ in
           serviceConfig.User = "nextcloud";
      # Run ./occ preview:generate-all once after installation.
 # Add a (system) cron job for  ./occ preview:pre-generate     # preview:generate-all
-          serviceConfig.ExecStart = "${occ}/bin/nextcloud-occ preview:generate";
+
+          # we could even be more verbose with -vvv
+          serviceConfig.ExecStart = "${occ}/bin/nextcloud-occ preview:generate-all -vv";
         };
 
- };
+       })
+
+       # add a oneshot-job https://github.com/nextcloud/previewgenerator?tab=readme-ov-file#i-dont-want-to-generate-all-the-preview-sizes
+# ./occ config:app:set --value="64 256 1024" previewgenerator squareSizes
+# ./occ config:app:set --value="64 256 1024" previewgenerator widthSizes
+# ./occ config:app:set --value="64 256 1024" previewgenerator heightSizes
+       (
+        )
+
+      ];
 }

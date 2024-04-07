@@ -130,6 +130,7 @@ in
     pciutils # for lspci
     ncdu # to see disk usage
     moar # test as pager
+    tailspin  #  a log viewer based on less ("spin" or "tsspin" is the executable)
 
     # nixfmt  # aliased to nixfmt-rfc-style, use the latter to avoid the warning
     nixfmt-rfc-style # 
@@ -151,7 +152,7 @@ in
     # hexyl # hex editor
     # simple-scan
     # vifm
-    # flakeInputs.anyrun.packages.${pkgs.system}.anyrun-with-all-plugins
+    # anyrun
 
     # w3m # for preview in ranger w3mimgdisplay
 

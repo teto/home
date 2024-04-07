@@ -13,6 +13,20 @@
    https = false;
    package = pkgs.nextcloud28;
 
+   # so I used to have
+	# ✗ PHP opcache: The PHP OPcache module is not properly configured. OPcache is not working as it should, opcache_get_status() returns false, please check configuration.
+   # The maximum number of OPcache keys is nearly exceeded. To assure that all scripts can be kept in the cache, it is recommended to apply "opcache.max_accelerated_files" to your PHP configuration with a value higher than "10000".
+   # The OPcache buffer is nearly full. To assure that all scripts can be hold in cache, it is recommended to apply "opcache.memory_consumption" to your PHP configuration with a value higher than "128".
+   # The OPcache interned strings buffer is nearly full. To assure that repeating strings can be effectively cached, it is recommended to apply "opcache.interned_strings_buffer" to your PHP configuration with a value higher than "8"..
+   phpOptions = {
+
+    # check https://www.php.net/manual/en/opcache.configuration.php#ini.opcache.max-accelerated-files
+              # "opcache.fast_shutdown" = "1";
+              "opcache.interned_strings_buffer" = "20";
+              "opcache.max_accelerated_files" = "1000000";
+              "opcache.memory_consumption" = "256";
+              "opcache.revalidate_freq" = "1";
+             };
     # New option since NixOS 23.05
     caching = {
       apcu = true;
@@ -109,6 +123,12 @@
       # enableReload = true; # reloads service when config changes !
     };
   };
+
+  environment.systemPackages = [
+   config.services.nextcloud.occ
+  # inherit (cfg) datadir occ;
+
+  ];
 
   # This is using an age key that is expected to already be in the filesystem
   # sops.age.keyFile = "/home/teto/.config/sops/age/keys.txt";

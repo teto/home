@@ -26,7 +26,6 @@
     netcat-gnu # plain 'netcat' is the bsd one
     # nvimpager # 'less' but with neovim
     strace
-    tailspin  #  a log viewer based on less ("spin" or "tsspin" is the executable)
     tig
     tree
   ];

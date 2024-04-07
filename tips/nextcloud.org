@@ -5,6 +5,13 @@ occ stands for "OwnCloud Client"
 
   occ = pkgs.writeScriptBin "nextcloud-occ" ''
 
+occ status
+occ setupchecks
+occ list to list commands
+
+app:list will show you disabled plugins
+  config:system:set maintenance_window_start --value="1" --type=integer
+
 https://docs.nextcloud.com/server/latest/admin_manual/configuration_server/occ_command.html
 
 If deployement fails with:

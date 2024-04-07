@@ -55,7 +55,6 @@ deploy-neotokyo:
 	#   https://github.com/serokell/deploy-rs/issues/78#issuecomment-1367467086
 	# --ssh-opts="-t" --magic-rollback false
 	deploy '.#neotokyo' -s --interactive-sudo=true
-	# -s 
 
 # regenerate my email contacts
 # (to speed up alot autocompletion)

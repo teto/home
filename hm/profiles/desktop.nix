@@ -123,8 +123,6 @@ let
       bandwhich # to monitor per app bandwidth
       desktop-file-utils # to get desktop
       dogdns # dns solver "dog"
-      du-dust # dust binary: rust replacement of du
-      duf # better df (rust)
       evince # succeed where zathura/mupdf fail
       font-manager
       gnome.adwaita-icon-theme # else nothing appears
@@ -142,7 +140,10 @@ let
       # - gdu
       # - pdu
       # - dua
-      ncdu # to see disk usage
+      # ncdu # to see disk usage
+      dua
+      du-dust # dust binary: rust replacement of du
+      duf # better df (rust)
       
       ncpamixer # pulseaudio TUI mixer
       noti # send notifications when a command finishes

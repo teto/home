@@ -49,12 +49,10 @@ in
     ../../nixos/profiles/sway.nix
     ../../nixos/profiles/docker-daemon.nix
     ../../nixos/profiles/greetd.nix
-    # ../../modules/xserver.nix
-    # ./nixos/modules/redis.nix
     ../../nixos/profiles/steam.nix
     ../../nixos/profiles/qemu.nix
     # ../../nixos/profiles/adb.nix
-    # ../../nixos/profiles/cron.nix
+    # ../../nixos/profiles/nix-cache-sync.nix
     ../../nixos/profiles/kanata.nix
     ../../nixos/profiles/nix-daemon.nix
     ../../nixos/profiles/postgresql.nix
@@ -151,7 +149,10 @@ in
   # boot.devSize = "5g";
 
   boot.kernelParams = [
-    "acpi_backlight=vendor"
+   "acpi_backlight=legacy"
+   # "acpi_osi=linux"
+
+    # "acpi_backlight=vendor"
     # "i915.enable_psr=0"  # disables a power saving feature that can cause flickering
     # "ahci.mobile_lpm_policy=3"
     # "rtc_cmos.use_acpi_alarm=1"
@@ -192,6 +193,7 @@ in
    # TODO it should load the whole folder
    imports = [
      # custom modules
+     ../../hm/modules/package-sets.nix
      ./teto/default.nix
    ];
   };

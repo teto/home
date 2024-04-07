@@ -35,12 +35,15 @@
     # ../../hm/profiles/vscode.nix #  provided by nova-nix config
   ];
 
+  package-sets = {
+   enableDesktopGUIPackages= true;
+   wifiPackages = true;
+  };
+
   # dans le cadre de mon experimentation !
   home.packages = with pkgs; [
     timg # to display images in terminal, to compare with imgcat ?
-    # lua
     imagemagick # for 'convert'
-    # chromium
     ubuntu_font_family
     inconsolata # monospace
     noto-fonts-cjk # asiatic
