@@ -102,39 +102,39 @@
 
   # inspired by https://gist.github.com/539h/8144b5cabf97b5b206da
   # todo find a good japanese font
-  fonts = {
-    fontDir.enable = true; # ?
-    packages = with pkgs; [
-      ubuntu_font_family
-      inconsolata # monospace
-      noto-fonts-cjk # asiatic
-      nerdfonts # otherwise no characters
-      (pkgs.nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; })
+  # fonts = {
+  #   fontDir.enable = true; # ?
+  #   packages = with pkgs; [
+  #     ubuntu_font_family
+  #     inconsolata # monospace
+  #     noto-fonts-cjk # asiatic
+  #     nerdfonts # otherwise no characters
+  #     # (pkgs.nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; })
 
-      # corefonts # microsoft fonts  UNFREE
-      font-awesome_5
-      source-code-pro
-      dejavu_fonts
-      # Adobe Source Han Sans
-      source-han-sans #sourceHanSansPackages.japanese
-      fira-code-symbols # for ligatures
-      iosevka
-      # noto-fonts
-    ];
+  #     # corefonts # microsoft fonts  UNFREE
+  #     font-awesome_5
+  #     source-code-pro
+  #     dejavu_fonts
+  #     # Adobe Source Han Sans
+  #     source-han-sans #sourceHanSansPackages.japanese
+  #     fira-code-symbols # for ligatures
+  #     iosevka
+  #     # noto-fonts
+  #   ];
 
-    fontconfig = {
-      enable = true;
-      antialias = true; # some fonts can be disgusting else
-      allowBitmaps = false; # ugly
-      includeUserConf = true;
-      cache32Bit = false; # defualt false
-      defaultFonts = {
-        # monospace = [ "" ];
-        # serif = [ "" ];
-        # sansSerif =
-      };
-    };
-  };
+  #   fontconfig = {
+  #     enable = true;
+  #     antialias = true; # some fonts can be disgusting else
+  #     allowBitmaps = false; # ugly
+  #     includeUserConf = true;
+  #     cache32Bit = false; # defualt false
+  #     defaultFonts = {
+  #       # monospace = [ "" ];
+  #       # serif = [ "" ];
+  #       # sansSerif =
+  #     };
+  #   };
+  # };
 
   # systemd.packages = [ ];
 
@@ -158,28 +158,19 @@
   # don't forget to run ulimit -c unlimited to get the actual coredump
   # check thos comment to setup user ulimits https://github.com/NixOS/nixpkgs/issues/159964#issuecomment-1252682060
   # systemd.services."user@1000".serviceConfig.LimitNOFILE = "32768";
+  # look at man limits.conf
+# cat /proc/sys/fs/file-max /proc/sys/fs/file-nr
+  # type: soft/hard/- (-=both soft and hard
   security.pam.loginLimits = [
    # 
    # to avoid "Bad file descriptor" and "Too many open files" situations
-   { domain = "*"; item = "nofile"; type = "-"; value = "32768"; }
-   { domain = "*"; item = "memlock"; type = "-"; value = "32768"; }
+   # ulimit -u
+
+   # maximum number of open file descriptors
+   { domain = "*"; item = "nofile"; type = "-"; value = "70000"; }
+   # maximum locked-in-memory address space
+   { domain = "*"; item = "memlock"; type = "-"; value = "70000"; }
   ];
-  # then coredumpctl debug will launch gdb !
-  # boot.kernel.sysctl."kernel.core_pattern" = "core"; to disable.
-  # security.pam.loginLimits
-  systemd.coredump.enable = false;
-
-  # see 
-    #JournalSizeMax=767M
-    #MaxUse=
-    #KeepFree=
-  systemd.coredump.extraConfig = ''
-    #Storage=external
-    #Compress=yes
-    ProcessSizeMax=5G
-    ExternalSizeMax=10G
-  '';
-
   # users.motd = 
   # security.pam.loginLimits = [
   #   {
@@ -196,7 +187,6 @@
   #   }
   # ];
 
-
   environment.etc."security/limits.conf".text = ''
     #[domain]        [type]  [item]  [value]
     teto  soft  core  unlimited
@@ -204,6 +194,23 @@
     *  hard  memlock  256
     @audio   -  nice     -20
   '';
+
+  # then coredumpctl debug will launch gdb !
+  # boot.kernel.sysctl."kernel.core_pattern" = "core"; to disable.
+  # security.pam.loginLimits
+  systemd.coredump.enable = false;
+
+  # see 
+    #JournalSizeMax=767M
+    #MaxUse=
+    #KeepFree=
+  systemd.coredump.extraConfig = ''
+    #Storage=external
+    #Compress=yes
+    ProcessSizeMax=5G
+    ExternalSizeMax=10G
+  '';
+
   # teto  hard  core  unlimited
 
   # systemd.services."systemd-coredump".serviceConfig.ProtectHome = false;

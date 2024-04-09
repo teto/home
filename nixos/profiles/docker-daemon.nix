@@ -23,6 +23,6 @@
 
   environment.systemPackages = with pkgs; [
     # if docker finds the binary, it will try to use it ! 
-    # docker-credential-helpers
+    docker-credential-helpers
   ];
 }

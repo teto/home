@@ -24,6 +24,7 @@
    ../../desktop/teto/programs/helix.nix
    ../../desktop/teto/programs/yazi.nix
 
+    ../../../hm/profiles/wezterm.nix
     ../../../hm/profiles/desktop.nix
     ../../../hm/profiles/sway.nix
     ../../../hm/profiles/swayidle.nix
@@ -40,6 +41,11 @@
   package-sets = {
    enableDesktopGUIPackages= true;
    wifiPackages = true;
+  };
+
+  programs.zsh = {
+    enable = true;
+    enableTetoConfig = true;
   };
 
   # dans le cadre de mon experimentation !

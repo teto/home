@@ -26,5 +26,9 @@
       # PermitRootLogin = "no";
 	  X11Forwarding = false;
     };
+
+    # hostKeys = [ ];
+
+    settings.HostKey = "/run/secrets/ssh_host_key";
   };
 }

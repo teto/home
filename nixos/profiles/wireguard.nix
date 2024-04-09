@@ -29,7 +29,7 @@ in
       # Note: The private key can also be included inline via the privateKey option,
       # but this makes the private key world-readable; thus, using privateKeyFile is
       # recommended.
-      privateKeyFile = "/home/teto/home/secrets/nova-wg.key";
+      privateKeyFile = "${secrets.secretsFolder}/nova-wg.key";
 
       peers = [
         # For a client configuration, one peer entry for the server will suffice.

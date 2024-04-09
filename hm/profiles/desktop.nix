@@ -43,7 +43,6 @@ let
 	haskellPackages.fast-tags
     hurl # http tester
 
-
     fre # generate a frequency database
     
     perf-tools # to interpret 
@@ -77,7 +76,6 @@ let
     # libsecret  # to consult
     # newsboat #
     mujmap # to sync notmuch tags across jmap 
-    # memento # broken capable to display 2 subtitles at same time
     vlc
     # leafnode dovecot22 dovecot_pigeonhole fetchmail procmail w3m
     # mairix mutt msmtp lbdb contacts spamassassin
@@ -124,7 +122,7 @@ let
       desktop-file-utils # to get desktop
       dogdns # dns solver "dog"
       evince # succeed where zathura/mupdf fail
-      font-manager
+      # font-manager
       gnome.adwaita-icon-theme # else nothing appears
       gnome.eog # eye of gnome = image viewer / creates a collision
       gnome.file-roller # for GUI archive handling
@@ -166,6 +164,7 @@ let
       simple-scan
       sops # password 'manager'
       sublime3
+      sysz # fzf for systemd
       translate-shell # call with `trans`
       unzip
       wireshark
@@ -195,12 +194,7 @@ in
 
   ];
 
-  # programs.autojump = {
-  #   enable = false;
-  #   enableZshIntegration = true;
-  #   enableBashIntegration = true;
-  # };
-
+  # allows to find fonts enabled through home.packages
   fonts.fontconfig.enable = true;
 
   programs.zoxide = {
@@ -223,6 +217,23 @@ in
       # pinentry-bemenu
       pinentry-rofi
       timg
+
+      # fonts
+      ubuntu_font_family
+      inconsolata # monospace
+      noto-fonts-cjk # asiatic
+      nerdfonts # otherwise no characters
+      # (pkgs.nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; })
+
+      # corefonts # microsoft fonts  UNFREE
+      font-awesome_5
+      source-code-pro
+      dejavu_fonts
+      # Adobe Source Han Sans
+      source-han-sans #sourceHanSansPackages.japanese
+      fira-code-symbols # for ligatures
+      iosevka
+
     ])
   ;
 
@@ -305,11 +316,11 @@ in
   # [Removed Associations]
   # application/pdf=Mendeley.desktop
   programs.rbw = {
-    enable = false;
+    enable = true;
     settings = {
       email = config.accounts.email.accounts.fastmail.address;
       lock_timeout = 300;
-      pinentry = "gnome";
+      pinentry = pkgs.pinentry-gnome3;
       # see https://github.com/nix-community/home-manager/issues/2476
       device_id = "111252f7-88b7-47f2-abb9-03dc4b2469ed";
     };
@@ -326,8 +337,6 @@ in
 
   home.sessionVariables = {
     # JUPYTER_CONFIG_DIR=
-    IPYTHONDIR = "$XDG_CONFIG_HOME/ipython";
-    JUPYTER_CONFIG_DIR = "$XDG_CONFIG_HOME/jupyter";
     # testing if we can avoid having to symlink XDG_CONFIG_HOME
     # should be setup by neomutt module
     # MUTT="$XDG_CONFIG_HOME/mutt";

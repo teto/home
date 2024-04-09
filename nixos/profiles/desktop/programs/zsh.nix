@@ -7,7 +7,7 @@
     enableGlobalCompInit = false;
     # enableAutosuggestions = true;
     autosuggestions = {
-      enable = false;
+      enable = lib.mkForce false;
       # highlightStyle = ""
     };
     # promptInit

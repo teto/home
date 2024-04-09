@@ -1,0 +1,8 @@
+cat /proc/interrupts to see if interrupts are balanced, if not   enable irqbalance
+
+* check packetloss
+ 
+  netstat -s
+  with ethtool
+
+https://man.archlinux.org/man/iwd.config.5#Rank

@@ -1,6 +1,11 @@
 { config, lib, pkgs, ... }:
 {
 
+  environment.systemPackages = [ 
+
+    pkgs.wayland-pipewire-idle-inhibit # not sure how to use it yet
+  ];
+
   services.pipewire = {
     enable = true;
 

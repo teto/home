@@ -1,4 +1,7 @@
-{ config, lib, pkgs, flakeInputs, ... }:
+{ config, lib, pkgs, flakeInputs
+, secrets
+, withSecrets
+, ... }:
 
 with lib;
 
@@ -23,14 +26,15 @@ let
         };
       };
     };
-
 in
 {
 
   options = {
     programs.zsh = {
-      enableFzfGit = mkEnableOption "Fzf-git";
-      enableVocageSensei = mkEnableOption "Vocage sensei";
+
+     enableTetoConfig = mkEnableOption "Things I am used to";
+     enableFzfGit = mkEnableOption "Fzf-git";
+     enableVocageSensei = mkEnableOption "Vocage sensei";
 
       mcfly = mkOption {
         # type = termTitleSubmodule;
@@ -113,23 +117,17 @@ in
     })
 
     (mkIf cfg.enableVocageSensei {
-    
-	 programs.zsh.initExtra =
-		''
+
+     programs.zsh.initExtra =
+        ''
          # do nothing
-		'';
+        '';
     })
 
     (mkIf cfg.enableFzfGit {
-	 programs.zsh.initExtra =
-		''
-		source ${fzf-git-sh}/fzf-git.sh
-		'';
+     programs.zsh.initExtra = ''source ${fzf-git-sh}/fzf-git.sh'';
 
-	 programs.bash.initExtra =
-		''
-		source ${fzf-git-sh}/fzf-git.sh
-		'';
+     programs.bash.initExtra = ''source ${fzf-git-sh}/fzf-git.sh'';
     })
 
     (mkIf cfg.enableFancyCtrlZ {
@@ -230,7 +228,7 @@ in
 
        eval "$(${pkgs.mcfly}/bin/mcfly init zsh)"
        eval "$(${pkgs.mcfly-fzf}/bin/mcfly-fzf init zsh)"
-      '';
+       '';
      })
     (mkIf cfg.zbell.enable {
      # TODO source zbell
@@ -243,6 +241,42 @@ in
     #   # TODO move to data instead ?
     #   CABAL_DIR="$XDG_CACHE_HOME/cabal";
     # };
+
+    (mkIf cfg.enableTetoConfig {
+     programs.zsh = {
+       history = {
+        path = "${config.xdg.cacheHome}/zsh_history";
+       };
+
+       sessionVariables = config.programs.bash.sessionVariables // 
+        (lib.optionalAttrs withSecrets {
+        # HISTFILE="$XDG_CACHE_HOME/zsh_history";
+        # TODO load this from sops instead
+        GITHUB_TOKEN = secrets.githubToken;
+        # TODO add it to sops
+        OPENAI_API_KEY = secrets.OPENAI_API_KEY;
+
+        # fre experiment
+        FZF_CTRL_T_COMMAND="command fre --sorted";
+        FZF_CTRL_T_OPTS="--tiebreak=index";
+      });
+
+      autosuggestion.enable = true;
+      autosuggestion.highlight = "fg=#d787ff,bold";
+
+      # fre_chpwd() {
+      #   fre --add "$(pwd)"
+      # }
+      # typeset -gaU chpwd_functions
+      # chpwd_functions+=fre_chpwd
+       # if [ -f "$ZDOTDIR/zshrc" ]; then
+       # fi
+      initExtra = ''
+       source $ZDOTDIR/zshrc
+       '';
+
+      };
+    })
   ]);
 }
 

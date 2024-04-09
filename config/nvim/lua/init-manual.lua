@@ -31,7 +31,7 @@ if not vim.loop.fs_stat(lazypath) then
 end-- require("vim.lsp._watchfiles")._watchfunc = require("vim._watch").watch
 -- local ffi = require 'ffi'
 
-
+vim.g.loaded_matchit = 1 
 vim.opt.shortmess:append("I")
 vim.opt.foldlevel = 99
 vim.opt.mousemoveevent = true
@@ -121,7 +121,7 @@ require('lazy').setup('lazyplugins', {
 		  }, -- add any custom paths here that you want to includes in the rtp
           disabled_plugins = {
             -- "gzip",
-            -- "matchit",
+            "matchit",
             "matchparen",
             -- "netrwPlugin",
             "tarPlugin",
@@ -570,7 +570,7 @@ if has_cmp then
 			-- autocomplete is on by default and it should only be a trigger event array or false
 			autocomplete = { cmp.TriggerEvent.InsertEnter, cmp.TriggerEvent.TextChanged },
 		},
-		view = {            
+		view = {
 			entries = "custom" -- can be "custom", "wildmenu" or "native"
 		},
 		sorting = {

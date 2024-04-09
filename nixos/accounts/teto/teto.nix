@@ -15,27 +15,28 @@
     isNormalUser = true; # creates home/ sets default shell
     uid = 1000;
     extraGroups = [
+      "adbusers" # for android tools
       "audio" # for pulseaudio/pipewire
       "dialout" # to access serial devices like the conbee II
       "docker" # to access docker socket
+      "hass" # home-assistant
       "input" # for libinput-gestures
+      "jupyter"
+      "keys"
+      "kvm" # needed when using runAsRoot when building dockerImage
       "libvirtd" # for nixops
       "networkmanager" # not necessary for nixpos
-      "adbusers" # for android tools
-      "wireshark"
-      "plugdev" # for udiskie
-      "jupyter"
-      "video" # to control brightness
-      "rtkit" # for pipewire
+      "pgadmin" # pgadmin is such a mess
       "pipewire" # for pipewire
+      "plugdev" # for udiskie
       "podman"
       "postgres"
-      "pgadmin" # pgadmin is such a mess
-      "wheel" # for sudo
+      "rtkit" # for pipewire
       "vboxusers" # to avoid Kernel driver not accessible
-      "kvm" # needed when using runAsRoot when building dockerImage
+      "video" # to control brightness
+      "wheel" # for sudo
+      "wireshark"
       # config.users.groups.keys.name
-      "keys"
      ] ++  lib.optional (config.services.kanata.enable)
 
       "uinput" # required for kanata it seems

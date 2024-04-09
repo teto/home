@@ -42,12 +42,12 @@
         # "custom/mymodule#with-css-id"
         # "temperature"
         "idle_inhibitor"
-        "custom/notification"
         "custom/github"
         "custom/notmuch"
         "wireplumber"
         "clock"
         "tray"
+        "custom/notification"
        ];
     tray= {
         # "icon-size": 21,
@@ -136,17 +136,17 @@
 
        "custom/notification" = {
          tooltip = false;
-         format = "{icon}";
+         format = "{icon}";
          format-icons = {
            notification = "<span foreground='red'><sup>notifs</sup></span>";
-           none = "";
-           inhibited-notification = "inhibited<span foreground='red'><sup>toto</sup></span>";
-           inhibited-none = "0";
+           none = "🔔";
+           inhibited-notification = "🔔inhibited<span foreground='red'><sup>toto</sup></span>";
+           inhibited-none = "🔔0";
            # Do Not Disturb
            dnd-notification = "dnd <span foreground='red'><sup>dnd</sup></span>";
-           dnd-none = "no dnd";
-           dnd-inhibited-notification = "dnd<span foreground='red'><sup>dnd</sup></span>";
-           dnd-inhibited-none = "none";
+           dnd-none = "🔕";
+           dnd-inhibited-notification = "<span foreground='red'>🔕</span>";
+           dnd-inhibited-none = "🔕   none";
          };
          return-type = "json";
          # exec-if = "which swaync-client";

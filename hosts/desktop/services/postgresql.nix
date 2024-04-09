@@ -1,6 +1,6 @@
 { config, flakeInputs, lib, pkgs, ... }:
 {
-  # imports = [
+  # _imports = [
   #   ../../nixos/profiles/postgresql.nix
   # ];
 

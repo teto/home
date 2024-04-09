@@ -30,7 +30,7 @@ let
 
   # orgmodePlugins = with pkgs.vimPlugins; [ 
   neorgPlugins = with pkgs.vimPlugins; [
-      (luaPlugin { plugin = neorg-telescope; })
+      # (luaPlugin { plugin = neorg-telescope; })
      ];
 
 
@@ -61,7 +61,7 @@ let
     # (luaPlugin { plugin = flakeInputs.rocks-nvim.packages.${pkgs.system}.rocks-nvim; })
 
     # should bring in scope fzy
-    # (luaPlugin { plugin = rocks-nvim; })
+    (luaPlugin { plugin = rocks-nvim; })
     (luaPlugin { plugin = urlview-nvim; })
     (luaPlugin { plugin = nvim-ufo; })
     (luaPlugin { plugin = ollama-nvim; })
@@ -345,37 +345,37 @@ let
     #   #         }
     # })
 
-    (luaPlugin {
-      plugin = rest-nvim;
-      # config = ''
-      #   require("rest-nvim").setup({
-      #     -- Open request results in a horizontal split
-      #     result_split_horizontal = false,
-      #     -- Skip SSL verification, useful for unknown certificates
-      #     skip_ssl_verification = false,
-      #     -- Highlight request on run
-      #     highlight = {
-      #      enabled = true,
-      #      timeout = 150,
-      #     },
-      #     result = {
-      #      -- toggle showing URL, HTTP info, headers at top the of result window
-      #      show_url = true,
-      #      show_http_info = true,
-      #      show_headers = true,
-      #      -- disable formatters else they generate errors/add dependencies
-      #      -- for instance when it detects html, it tried to run 'tidy'
-      #      formatters = {
-      #       html = false,
-      #       jq = false
-      #      },
-      #     },
-      #     -- Jump to request line on run
-      #     jump_to_request = false,
-      #   })
-      #   '';
-    })
-
+    # triggers too many errors
+    # (luaPlugin {
+    #   plugin = rest-nvim;
+    #   # config = ''
+    #   #   require("rest-nvim").setup({
+    #   #     -- Open request results in a horizontal split
+    #   #     result_split_horizontal = false,
+    #   #     -- Skip SSL verification, useful for unknown certificates
+    #   #     skip_ssl_verification = false,
+    #   #     -- Highlight request on run
+    #   #     highlight = {
+    #   #      enabled = true,
+    #   #      timeout = 150,
+    #   #     },
+    #   #     result = {
+    #   #      -- toggle showing URL, HTTP info, headers at top the of result window
+    #   #      show_url = true,
+    #   #      show_http_info = true,
+    #   #      show_headers = true,
+    #   #      -- disable formatters else they generate errors/add dependencies
+    #   #      -- for instance when it detects html, it tried to run 'tidy'
+    #   #      formatters = {
+    #   #       html = false,
+    #   #       jq = false
+    #   #      },
+    #   #     },
+    #   #     -- Jump to request line on run
+    #   #     jump_to_request = false,
+    #   #   })
+    #   #   '';
+    # })
   ];
 
   filetypePlugins = with pkgs.vimPlugins; [
@@ -470,6 +470,10 @@ let
     extraLuaConfig =  /* lua */ ''
       require('init-manual')
     '';
+
+    # HACK till we fix it
+    # extraLuaPackages = ps: nvimLua.pkgs.rest-nvim.propagatedBuildInputs;
+
 
     extraPython3Packages = p: [ 
      p.jupyter_client

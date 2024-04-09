@@ -39,7 +39,7 @@
 
     distributedBuilds = true;
 
-    package = pkgs.nixVersions.nix_2_21;
+    package = pkgs.nixVersions.nix_2_22;
 
     # added to nix.conf
     # experimental-features = nix-command flakes

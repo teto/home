@@ -2,7 +2,6 @@
 {
 
   # for android development
-  # programs.adb.enable = true;
   services.home-assistant = {
     enable = true;
 	openFirewall = true;
@@ -25,33 +24,54 @@
 	  ];
 	  # look at https://www.home-assistant.io/integrations/
 	  extraComponents = [
-		"default_config"
-        "homeassistant_yellow"
+        "recorder" # to plot history of devices
+		"default_config"  # metapackage
+        "homeassistant_yellow"  # metapackage
 		"deconz" # interface for zigbee conbee II
 		# "esphome"
 		"hue"
 		"emulated_hue"
+        "meteo_france"
 		# "met"
 	  ];
 	};
 
 
+    # TODO add whisper
     config = {
+
+      # bluetooth = {};  # NO
+      default_config = {};  # enables several default components
+      # map = {};  # show a local map
+      network = {};
       homeassistant = {
         name = "Home";
-			# https://www.home-assistant.io/docs/configuration/secrets/
+          # https://www.home-assistant.io/docs/configuration/secrets/
 
-            # latitude = "!secret latitude";
-            # longitude = "!secret longitude";
-            # elevation = "!secret elevation";
+          # latitude = "!secret latitude";
+          # longitude = "!secret longitude";
+          # elevation = "!secret elevation";
 
-			latitude = "45.764043";
-			longitude = "4.835659";
-			elevation = "0";
-            unit_system = "metric";
-            time_zone = "Europe/Paris";
+          latitude = "45.764043";
+          longitude = "4.835659";
+          elevation = "0";
+          unit_system = "metric";
+          time_zone = "Europe/Paris";
       };
 
+      # https://www.home-assistant.io/integrations/recorder/
+      recorder = {}; # sqlite by default
+      history = {};
+      logbook = {};
+      # Text to speech
+      tts = {
+        platform = "google_translate";
+      };
+
+      # THE FILE DISAPPEARED !
+      # script= "!include scripts.yaml";
+      # scene= "!include scenes.yaml";
+        automation = "!include automations.yaml";
 	  # frontend must be mandatory
         frontend = {
           themes = "!include_dir_merge_named themes";
@@ -82,7 +102,7 @@
 
   };
 
-  environment.systemPackages =  with pkgs; [
+  environment.systemPackages = [
     pkgs.home-assistant-cli
   ];
 }

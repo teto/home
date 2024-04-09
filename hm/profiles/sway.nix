@@ -5,6 +5,11 @@ let
   mad = "Mod4";
 
   term = "${pkgs.kitty}/bin/kitty";
+  # we could go for xdg-terminal too
+  # term = "${pkgs.rio}/bin/rio";
+  # term = "${pkgs.wezterm}/bin/wezterm";
+
+  rofi = pkgs.rofi-wayland;
 
   sharedConfig = pkgs.callPackage ./wm-config.nix {};
 
@@ -65,7 +70,7 @@ in
    # https://github.com/nix-community/home-manager/pull/4039
    # https://github.com/NixOS/nixpkgs/pull/237044
 
-  # package = pkgs.swayfx;
+    # package = pkgs.swayfx;
    # package = pkgs.sway-unwrapped;
 
    config = 
@@ -174,7 +179,8 @@ in
         # todo put a better path
         # example = { "HDMI-A-2" = { bg = "~/path/to/background.png fill"; }; };
 
-         "*" = {  bg = "/home/teto/home/wallpapers/nebula.jpg fill"; };
+        #  "/home/teto/home/wallpapers/nebula.jpg fill"
+         "*" = {  bg = "${../../wallpapers/nebula.jpg} fill"; };
         
        };
       input = {
@@ -217,13 +223,13 @@ in
     "${mod}+Return" = "exec --no-startup-id ${term}";
     "${mod}+Shift+Return" = ''exec --no-startup-id ${term} -d "$(${toString ../../bin/kitty-get-cwd.sh})"'';
 
-    Menu = "exec ${pkgs.rofi}/bin/rofi -modi 'drun' -show drun";
-    "${mod}+Tab" = "exec ${pkgs.rofi}/bin/rofi -modi 'drun' -show drun";
+    Menu = "exec ${rofi}/bin/rofi -modi 'drun' -show drun";
+    "${mod}+Tab" = "exec ${rofi}/bin/rofi -modi 'drun' -show drun";
     # "${mod}+Ctrl+Tab" = "exec \"${pkgs.rofi}/bin/rofi -modi 'window' -show run\"";
     # TODO dwindow exclusively with WIN
     "${mad}+Tab" = "exec ${pkgs.swayr}/bin/swayr switch-window";
     "${mad}+p" = "exec ${lib.getExe pkgs.wofi-pass} ";
-    "${mad}+a" = "exec \"${pkgs.rofi}/bin/rofi -modi 'run,drun,window,ssh' -show window\"";
+    "${mad}+a" = "exec \"${rofi}/bin/rofi -modi 'run,drun,window,ssh' -show window\"";
     # "${mad}+Tab" = "exec \"${pkgs.rofi}/bin/rofi -modi 'run,drun,window,ssh' -show window\"";
 
     # locker
@@ -279,16 +285,8 @@ in
       # Generated windows.
       for_window [title="(?:Open|Save) (?:File|Folder|As)"] floating enable;
       for_window [title="(?:Open|Save) (?:File|Folder|As)"] resize set 800 600
-      for_window [window_role="pop-up"] floating enable
-      for_window [window_role="bubble"] floating enable
-      for_window [window_role="task_dialog"] floating enable
-      for_window [window_role="Preferences"] floating enable
-      for_window [window_type="dialog"] floating enable
-      for_window [window_type="menu"] floating enable
-
 
       # timeout in ms
-      seat * hide_cursor 8000
       include ~/.config/sway/manual.config
       '';
       # include ~/.config/sway/swayfx.txt
@@ -301,6 +299,7 @@ in
     # eventually start foot --server
     # TODO we should wrap sway with that ?
     # some of these advised by https://github.com/flameshot-org/flameshot/blob/master/docs/Sway%20and%20wlroots%20support.md
+    # export MOZ_ENABLE_WAYLAND=1
     extraSessionCommands = ''
     # according to https://www.reddit.com/r/swaywm/comments/11d89w2/some_workarounds_to_use_sway_with_nvidia/
     export XWAYLAND_NO_GLAMOR=1
@@ -315,8 +314,7 @@ in
     export XDG_CURRENT_DESKTOP=sway
     export XDG_SESSION_DESKTOP=sway
     export SDL_VIDEODRIVER=wayland
-    export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
-    export MOZ_ENABLE_WAYLAND=1
+    export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
     '';
 
     wrapperFeatures = { gtk = true; };

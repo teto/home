@@ -43,6 +43,11 @@ lint-lua:
 	stylua config/nvim/init.lua
 
 # deploy my router
+# sudo brctl stp br0 on
+# sudo sysctl -w     "net.ipv6.conf.all.accept_ra"=0;
+# sudo sysctl -w     "net.ipv6.conf.all.disable_ipv6"=1;
+# sudo sysctl -w     "net.ipv6.conf.default.disable_ipv6"=1;
+# sudo sysctl -w     "net.ipv6.conf.lo.disable_ipv6"=1;
 deploy-router:
 	# --auto-rollback false --magic-rollback false
 	# we MUST skip checks else it fails
@@ -62,8 +67,12 @@ contacts:
 	sh ./{{justfile_directory()}}/bin-nix/generate-addressbook
 
 # http://stackoverflow.com/questions/448910/makefile-variable-assignment
+# symlink all my dotfiles in $HOME
 config:
 	stow -t {{config_local_directory()}} config
+# linkdf -h
+# home: 
+# 	stow --dotfiles -t ${HOME} home
 
 bin:
 	mkdir -p "{{data_directory()}}/../bin"
@@ -73,15 +82,16 @@ local:
 	stow -t "$(XDG_DATA_HOME)" local
 	mkdir -p "{{data_directory()}}/fzf-history" {{data_directory()}}/newsbeuter
 
-# linkdf -h
 
-home: 
-	stow --dotfiles -t ${HOME} home
-
+# Build my router image
 # [confirm("prompt")]
 routerIso:
 	nix build .\#nixosConfigurations.routerIso.config.system.build.isoImage
 
+router-image:
+	nix build .\#nixosConfigurations.routerIso.config.system.build.toplevel
+
+# this shouldn't need to be done !
 cache:
 	#mkdir -p $(shell echo "${XDG_CACHE_HOME:-$HOME/.cache}/less")
 	# todo should be done
@@ -96,7 +106,7 @@ fonts:
 # xdg:
 # Example: xdg-mime default qutebrowser.desktop text/html
 
-# TODO do with nix
+# Configure nautilus
 nautilus:
 	gsettings set org.gnome.desktop.background show-desktop-icons false
 
@@ -110,9 +120,7 @@ vimPlugins:
 rebuild:
 	nixos-rebuild --flake ~/home --override-input nixpkgs /home/teto/nixpkgs --override-input hm /home/teto/hm --override-input nova /home/teto/nova/nova-nix --no-write-lock-file switch  --show-trace --use-remote-sudo
 
-localai: # starts localai
-	nix run .#local-ai-cublas -- --models-path ~/models
-
+# Check nix sqlite database
 nix-check-db:
 	# run in nix shell nixpkgs#sqlite
 	sqlite3 /nix/var/nix/db/db.sqlite 'pragma integrity_check'

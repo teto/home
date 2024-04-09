@@ -12,11 +12,12 @@
 
 # https://stackoverflow.com/questions/24601806/got-permission-denied-when-emulating-sh-under-zsh
 # set -x
-emulate sh -c "source $ZDOTDIR/aliases.sh"
+emulate sh -c "source $ZDOTDIR/aliases.zsh"
+# TODO use
 emulate sh -c "source $ZDOTDIR/../bash/aliases.sh"
 # set +x
 
-# to get sessionVariables
+# to reload sessionVariables
 source ~/.profile
 
 # zsh.enableSuggestions right handside color
@@ -349,3 +350,5 @@ export REVIEW_BASE=master
 
 # to be able to have completion for programs with bash-only completion like vault
 autoload -U +X bashcompinit && bashcompinit
+
+# source <(_HASS_CLI_COMPLETE=zsh_source hass-cli)

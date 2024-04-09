@@ -16,7 +16,7 @@ in {
       enable = mkOption {
         type = types.bool;
         default = false;
-        description = lib.mdDoc ''
+        description = ''
           Whether to run an equivalent of www.luarocks.org website
           '';
       };

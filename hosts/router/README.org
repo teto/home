@@ -1,0 +1,8 @@
+
+
+* Flash the bios
+
+  Instructions at:
+  https://pcengines.github.io/apu2-documentation/firmware_flashing/#corebootrom-flashing
+  boot with iomen=relaxed
+  https://teklager.se/en/knowledge-base/apu-bios-upgrade/

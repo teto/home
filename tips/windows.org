@@ -7,3 +7,8 @@ To create the USB key unetbootin is ok but it doesn't see NTFS drives so you hav
 https://github.com/unetbootin/unetbootin/pull/4
 Also to play some games, you need the media pack. You can install it from the "optional programs" panel.
 
+* How to create the USB key ? 
+ 
+  nix shell .#woeusb-ng
+sudo woeusb --device ~/Downloads/Win10_22H2_French_x64v1.iso /dev/sdd
+

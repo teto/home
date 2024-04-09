@@ -22,11 +22,6 @@
   };
 
   inputs = {
-    # todo add nixified.ai too
-    # localai = {
-    #   url = "github:ck3d/nix-local-ai";
-    #   # inputs.nixpkgs.follows = "nixpkgs";
-    # };
     rippkgs.url = "github:replit/rippkgs";
     rippkgs.inputs.nixpkgs.follows = "nixpkgs";
     nix-filter.url = "github:numtide/nix-filter";
@@ -192,7 +187,7 @@
             self.inputs.rofi-hoogle.overlay
             self.inputs.nova.overlays.default
 
-            # self.inputs.nixpkgs-wayland.overlay
+            self.inputs.nixpkgs-wayland.overlay
             # self.inputs.nix.overlays.default
           ];
           config = {
@@ -207,10 +202,15 @@
             # allowUnfree = true;
             # this list makes me wanna vomit (except steam maybe because they do good for linux),
             # and sublime because guy has to eat
-            allowUnfreePredicate = pkg: builtins.elem (nixpkgs.legacyPackages.${system}.lib.getName pkg) [
+            allowUnfreePredicate = pkg: let 
+              legacyPkgs = nixpkgs.legacyPackages.${system};
+              pkgName = legacyPkgs.lib.getName pkg;
+            in if legacyPkgs.lib.hasPrefix "cuda" pkgName then true 
+               else builtins.elem pkgName [
               "Oracle_VM_VirtualBox_Extension_Pack"
               "codeium"
-              # cuda stuff
+
+              # cuda stuff, mostly for local-ai
               "cuda_cudart"
               "cuda_cccl"
               "cuda_nvcc"
@@ -223,6 +223,12 @@
               "libnvjitlink"
               "libcufft"
               "cudnn"
+              "libnpp"
+              "cuda-merged"
+              "cuda_cuobjdump"
+              "cuda_gdb"
+              "cuda_nvdisasm"
+              "libcusolver"
 
               "ec2-api-tools"
               "jiten" # japanese software recognition tool / use sudachi instead
@@ -305,13 +311,14 @@
               buildInputs = with myPkgs; [
                 # to run `git-crypt export-key`
                 git-crypt
-                sops
+                sops # to decrypt secrets
                 age
                 ssh-to-age
                 deploy-rs.packages.${system}.deploy-rs
-                just
+                just  # to run justfiles
                 self.packages.${system}.treefmt-with-config
                 self.inputs.firefox2nix.packages.${system}.default
+                wormhole-rs   # "wormhole-rs send"
               ];
 
               # TODO set SOPS_A
@@ -375,7 +382,28 @@
           };
         }) // {
 
-      # homeConfigurations = { };
+    homeModules = { 
+
+      default = ({ config, pkgs, lib, ... }: {
+        imports = [
+
+          # And add the home-manager module
+          ./hm/profiles/common.nix
+          ./hm/modules/neovim.nix
+          ./hm/modules/i3.nix
+          ./hm/modules/bash.nix
+          ./hm/modules/zsh.nix
+          ./hm/modules/xdg.nix
+
+          ./hm/profiles/neovim.nix
+          ({ ... }: {
+            home.stateVersion = "23.11";
+
+          })
+        ];
+        });
+
+      };
 
       nixosConfigurations =
         let
@@ -397,13 +425,8 @@
                 ./hosts/desktop/teto/bash.nix
                 ./hm/profiles/nova/ssh-config.nix
 
-                # flakeInputs.nova.homeConfigurations.standard
                 "${flakeInputs.nova}/nix/hm/nova-user.nix"
                 "${flakeInputs.nova}/nix/hm/nova-dev.nix"
-          # ./nix/hm/nova-dev.nix
-
-                # flakeInputs.nova.hmProfiles.dev
-                # flakeInputs.nova.hmProfiles.devops
               ];
             };
           });
@@ -419,7 +442,6 @@
               self.inputs.nixos-hardware.nixosModules.pcengines-apu
               self.nixosModules.default-hm
               ({ pkgs, ... }: {
-                # nixpkgs.overlays = nixpkgs.lib.attrValues self.overlays;
                 imports = [
                   ./hosts/router/configuration.nix
                 ];
@@ -566,9 +588,9 @@
           moduleFrom = dir: str: { "${genKey str}" = genValue dir str; };
           modulesFromDir = dir: builtins.foldl' (x: y: x // (moduleFrom dir y)) { } (getNixFilesInDir dir);
         in
-        {
-          nixosModules = modulesFromDir ./modules;
-        } // {
+        # {
+           (modulesFromDir ./nixos/modules)
+        // {
 
           default-hm = hm-common;
         }
@@ -685,8 +707,8 @@
               ({
                 name = "router";
                 # local-facing address
-                hostname = "192.168.1.11";
-                # hostname = "10.0.0.0";
+                # hostname = "192.168.1.11";
+                hostname = "10.0.0.1";
               }) // {
               # sshOpts = [ "-F" "ssh_config" ];
               sshUser = "teto";

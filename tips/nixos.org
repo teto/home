@@ -10,3 +10,6 @@ dhcpcd
 * remote install
 
  nixos-rebuild --flake .#router --target-host teto@10.0.0.4 switch  --use-remote-sudo
+
+
+  sudo nixos-install --root /mnt --system /nix/var/nix/profiles/system-35-link

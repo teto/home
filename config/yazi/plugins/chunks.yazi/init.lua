@@ -1,54 +1,67 @@
--- ~/.config/yazi/plugins/test.yazi/init.lua
-
 local M = {}
 
 function M:peek()
-	local child = Command("view_json")
-		:args({
-			tostring(self.file.url),
-		})
-		:stdout(Command.PIPED)
-		:stderr(Command.PIPED)
-		:spawn()
+  -- ya.notify {
+  --     title = "chunk plugin activated !",
+  --     content = "",
+  --     timeout = 1
+  --     -- level = "info",
+  -- }
+  -- ya.dbg("LOL")
+  ya.err("LOL called with "..tostring(self.file.url))
 
-	if not child then
-		return self:fallback_to_builtin()
+  ya.preview_widgets(self, { ui.Paragraph.parse(self.area, "Loading chunks...") })
+  local child = Command("view_json")
+      :args({
+          tostring(self.file.url),
+      })
+      :stdout(Command.PIPED)
+      :stderr(Command.PIPED)
+      :spawn()
+
+  if not child then
+   -- TODO show stderr ?
+      ya.err("fallback to builtins")
+      ya.preview_widgets(self, { ui.Paragraph.parse(self.area, "Loading chunks...") })
+      return self:fallback_to_builtin()
+  end
+
+	local limit = self.area.h
+	local i, lines = 0, ""
+	repeat
+		local next, event = child:read_line()
+		if event == 1 then
+           ya.err("event == 1: falling back to builtins")
+			return self:fallback_to_builtin()
+		elseif event ~= 0 then
+          -- event ~= 0
+			break
+		end
+
+		i = i + 1
+		if i > self.skip then
+			lines = lines .. next
+		end
+	until i >= self.skip + limit
+
+	child:start_kill()
+	if self.skip > 0 and i < self.skip + limit then
+		ya.manager_emit("peek", { math.max(0, i - limit), only_if = tostring(self.file.url), upper_bound = true })
+	else
+		lines = lines:gsub("\t", string.rep(" ", PREVIEW.tab_size))
+		ya.preview_widgets(self, { ui.Paragraph.parse(self.area, lines) })
 	end
-
-	-- local limit = self.area.h
-	-- local i, lines = 0, ""
-	-- repeat
-	-- 	local next, event = child:read_line()
-	-- 	if event == 1 then
-	-- 		return self:fallback_to_builtin()
-	-- 	elseif event ~= 0 then
-	-- 		break
-	-- 	end
-
-	-- 	i = i + 1
-	-- 	if i > self.skip then
-	-- 		lines = lines .. next
-	-- 	end
-	-- until i >= self.skip + limit
-
-	-- child:start_kill()
-	-- if self.skip > 0 and i < self.skip + limit then
-	-- 	ya.manager_emit("peek", { math.max(0, i - limit), only_if = tostring(self.file.url), upper_bound = true })
-	-- else
-	-- 	lines = lines:gsub("\t", string.rep(" ", PREVIEW.tab_size))
-	-- 	ya.preview_widgets(self, { ui.Paragraph.parse(self.area, lines) })
-	-- end
     --
 
     -- log("hello world")
     -- print("test logger") -- got printed in the output
     -- lines = lines:gsub("\t", string.rep(" ", 4))
-    p = ui.Paragraph.parse(self.area, "----- TOTO -----\n\n")
+    -- p = ui.Paragraph.parse(self.area, "----- TOTO -----\n\n")
 
     -- ya.preview_widgets(self, { ui.Paragraph.parse(self.area, {"toto", "tata" } })
 
 	-- ya.preview_widgets(self, { p:wrap(ui.Paragraph.WRAP) })
-	ya.preview_widgets(self, { p })
+	-- ya.preview_widgets(self, { p })
 end
 
 function M:seek(units)

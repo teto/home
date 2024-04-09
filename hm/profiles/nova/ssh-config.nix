@@ -11,6 +11,8 @@ let
     hostname = m.hostname;
     identitiesOnly = true;
     extraOptions.userKnownHostsFile = lib.mkForce "${flakeInputs.nova-ci}/configs/prod/ssh_known_hosts";
+    # extraOptions.LocalCommand = "cd nixpkgs";
+    # extraOptions.RemoteCommand = "cd nixpkgs";
     port = m.port;
     ## 
     match = "host=${m.hostname},${m.runnerName}";

@@ -34,7 +34,10 @@ zsh/zleparameter
 https://zsh.sourceforge.io/Doc/Release/User-Contributions.html#Manipulating-Hook-Functions
 
 
-# List hooks
+* List hooks
+
+  zshaddhistory
+
 `source ~/.config/zsh/zhooks.plugin.zsh` then run `zhooks`
 `add-zsh-hook -L [HOOK]`
 

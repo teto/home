@@ -90,8 +90,6 @@
       '';
   };
 
-  environment.etc."inputrc".source = ../config/inputrc;
-
   security.sudo = {
     enable = true;
     # wheelNeedsPassword = true;

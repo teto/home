@@ -1,5 +1,12 @@
 return {
  {
+  -- highlight cursor position and selection in command mode
+  -- (which is not the case by default
+   "moyiz/command-and-cursor.nvim",
+   event = "VeryLazy",
+   opts = {},
+ },
+ {
   -- :DataViewer
   'VidocqH/data-viewer.nvim'
  },

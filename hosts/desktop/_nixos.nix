@@ -1,5 +1,6 @@
 { config
 , flakeInputs
+, modulesPath
 , lib
 , pkgs, ... }:
 let 
@@ -12,6 +13,7 @@ let
        "root"
      ];
     };
+    
 
     inputs = args // {
       inputs = flakeInputs;
@@ -27,7 +29,7 @@ in
   imports = [
     module # loaded by haumea
 
-    ./_hardware.nix
+    ./_boot.nix
     # ./sops.nix
     ./teto/sops.nix
 
@@ -38,6 +40,7 @@ in
     ./teto/restic.nix
 
     # TODO moved from their
+    # ../../nixos/profiles/localai.nix
     ../../nixos/profiles/nextcloud.nix
     ../../nixos/profiles/postgresql.nix
     ../../nixos/profiles/redis.nix
@@ -69,6 +72,9 @@ in
     ../../nixos/profiles/ntp.nix
     ../../nixos/profiles/ollama.nix
   ];
+
+  # TODO check how it interacts with less
+  # environment.etc."inputrc".source = ../../config/inputrc;
 
   home-manager.users = 
    # let
@@ -112,6 +118,10 @@ in
   # it apparently still is quite an important thing to have
   boot.devSize = "5g";
 
+  boot.blacklistedKernelModules = [
+    "nouveau"
+  ];
+
   # necessary for qemu  to prevent
   # NOTE: this doesn't change the size of /run/user see https://nixos.org/nix-dev/2015-July/017657.html
   boot.runSize = "10g";
@@ -124,12 +134,7 @@ in
     size = 16000; # in MB
   }];
 
-  boot.blacklistedKernelModules = [
-    # "nouveau"
-  ];
-
   boot.consoleLogLevel = 6;
-
 
   boot.loader = {
     # systemd-boot.enable = true;
@@ -168,10 +173,9 @@ in
     # fsck.mode=skip
   ];
 
+  # boot.kernelPackages = pkgs.linuxPackages_default;
   boot.kernelPackages = pkgs.linuxPackages_latest;
   # boot.kernelPackages = pkgs.linuxPackages;
-  # linux_default = pkgs.packages.linux_6_1;
-  # boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_6_0;
 
   boot.kernelModules = [
     "af_key" # for ipsec/vpn support
@@ -252,47 +256,29 @@ in
     ];
   };
 
+  services.xserver = {
+    videoDrivers = [
+      # "nouveau"
+      "nvidia"
+     ];
+   };
 
   security.sudo.extraConfig = ''
-    Defaults        timestamp_timeout=60
+    Defaults        timestamp_timeout=300
   '';
 
   # networking.enableIPv6 = false;
-
-
   # rtkit is optional but recommended {{{
   security.rtkit.enable = true;
 
   # }}}
 
-  # kind of a test
-  # security.pam.services.lightdm.enableGnomeKeyring = true;
 
   # ebpf ?
   # broken in https://github.com/NixOS/nixpkgs/issues/56724
   # programs.bcc.enable = true;
 
-  # services.xserver = {
-  #   enable = true;
-  #   autorun = false;
-  #   windowManager.i3.enable = true;
-  # };
-
   # this is required as well
-  hardware.nvidia = {
-    # this makes screen go black on boot :/
-    modesetting.enable = true; # needs "modesetting" in videoDrivers ?
-
-    # may need to select appropriate driver
-    # choose between latest, beta, vulkan_beta, stable
-    package = config.boot.kernelPackages.nvidiaPackages.latest;
-
-    # open is only ready for data center use 
-    # open = true;
-    powerManagement.enable = true;
-    # Update for NVIDA GPU headless mode, i.e. nvidia-persistenced. It ensures all GPUs stay awake even during headless mode.
-    # nvidiaPersistenced = true;
-  };
   # https://discourse.nixos.org/t/nvidia-users-testers-requested-sway-on-nvidia-steam-on-wayland/15264/21?u=teto
 
   # pkgs.linuxPackages_latest
@@ -325,26 +311,19 @@ in
   # security.sudo.wheelNeedsPassword = ;
   # disabled to run stable-diffusion
   # TODO this should go somewhere else
-  services.xserver = {
-    displayManager.gdm.wayland = true;
-  };
+  # services.xserver = {
+  #   displayManager.gdm.wayland = true;
+  # };
   # system.replaceRuntimeDependencies
   #     List of packages to override without doing a full rebuild. The original derivation and replacement derivation must have the same name length, and ideally should have close-to-identical directory layout.
 
   environment.systemPackages = [
   ];
 
-  # testing with localai instead
-  services.ollama = {
-    enable = false;
-  };
-
   # $out here is the profile generation
   system.extraSystemBuilderCmds = ''
     ln -s ${config.boot.kernelPackages.kernel.dev}/vmlinux $out/vmlinux
   '';
-
-
 
   users = {
     groups.nginx.gid = config.ids.gids.nginx;
@@ -359,5 +338,5 @@ in
     };
   };
 
-  system.stateVersion = "23.05";
+  system.stateVersion = "23.11";
 }

@@ -255,7 +255,10 @@ return {
  --   })
  --  end,
  -- },
- { 'akinsho/bufferline.nvim'
+ { 
+  -- 'akinsho/bufferline.nvim'
+  -- see https://github.com/akinsho/bufferline.nvim/pull/896
+ 'Theyashsawarkar/bufferline.nvim'
   -- , dependencies = 'nvim-tree/nvim-web-devicons' 
  },
 

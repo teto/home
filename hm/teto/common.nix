@@ -21,7 +21,7 @@
     # VIFM = "$XDG_CONFIG_HOME/vifm";
     # WWW_HOME = "$XDG_CONFIG_HOME/w3m";
     # used by ranger
-    TERMCMD = "kitty"; # xdg-terminal is better bow ?
+    # TERMCMD = "kitty"; # xdg-terminal is better bow ?
 
   };
 }

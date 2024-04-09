@@ -4,7 +4,7 @@
 , pkgs
 , withSecrets
 , ... }:
-let
+# let
   # module = { pkgs, ... }@args: flakeInputs.haumea.lib.load {
   #   src = ./haumea-test;
   #   inputs = args // {
@@ -12,13 +12,14 @@ let
   #   };
   #   transformer = flakeInputs.haumea.lib.transformers.liftDefault;
   # };
-in
+# in
 {
   imports = [
     ./bash.nix
       ../../../hm/profiles/nova/bash.nix
       ../../../hm/teto/common.nix
       ../../../hm/profiles/common.nix
+      ../../../hm/profiles/wezterm.nix
     # flakeInputs.ironbar.homeManagerModules.default
 
     ./calendars.nix
@@ -63,7 +64,8 @@ in
    ]
 ;
 
-  xdg.configFile."zsh/zshrc.generated".source = ../../../config/zsh/zshrc;
+  # TODO use mkSymlinkOufOf  ? ?
+  # xdg.configFile."zsh/zshrc.generated".source = ../../../config/zsh/zshrc;
 
   programs.pazi = {
     enable = false;
@@ -163,13 +165,20 @@ in
 
     unar # used to view archives by yazi
     # poppler for pdf preview
+    memento # broken capable to display 2 subtitles at same time
+    rio # xdg-terminal
    ] 
    ++ heavyPackages;
+
+  # package-sets.enableDesktopGUIPackages = true;
 
   services.nextcloud-client.enable = false;
 
   home.sessionVariables = {
    # TODO create symlink ?
+    IPYTHONDIR = "$XDG_CONFIG_HOME/ipython";
+    JUPYTER_CONFIG_DIR = "$XDG_CONFIG_HOME/jupyter";
+
     DASHT_DOCSETS_DIR = "/mnt/ext/docsets";
     # $HOME/.local/share/Zeal/Zeal/docsets
 

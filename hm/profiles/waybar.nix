@@ -103,8 +103,8 @@ in
             # use a screensaver icon
             format = "{icon}";
             format-icons = {
-              activated = "ï®";
-              deactivated = "ï°";
+              activated = "no timeout";
+              deactivated = "timeout";
             };
 
           };
@@ -112,9 +112,10 @@ in
             format = "{volume}% {icon}";
             # "format-muted": "ï¦"
             # <sup> </sup> 
-            format-muted = "<span background='red'>ï¦</span>";
+            # 🔈
+            format-muted = "<span background='red'>🔇</span>";
             on-click = myLib.muteAudio;
-            format-icons = [ "ï¦" "ï§" "ï¨" ];
+            format-icons = [ "🔈" "🔉" "🔊" ];
           };
           clock = {
             # "timezone": "America/New_York",

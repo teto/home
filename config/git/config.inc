@@ -15,7 +15,14 @@ compression = 0
 [push]
   default = simple
 
+[status]
+# showuntrackedfiles = no
+
 # http.postBuffer 52428800
+[user]
+
+	email = '886074+teto@users.noreply.github.com'
+	name = "Matthieu C."
 
 [credential "https://github.com"]
 	username = teto
@@ -91,3 +98,6 @@ autocorrect = 10
   pamfix= !HASH=`git log --pretty=oneline | head -50 | fzf` && git fixit `echo ${HASH} | awk '{ print $1 }'`
 
   wt = worktree
+
+
+

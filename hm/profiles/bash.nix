@@ -23,7 +23,7 @@
       # AWS_VAULT_PASS_PASSWORD_STORE_DIR
       AWS_VAULT_PASS_PREFIX="nova";
       AWS_VAULT_BACKEND="pass";
-      SUDO_PROMPT="\a[sudo] please enter a password: ";
+      SUDO_PROMPT="	a[sudo] please enter a password: ";
      };
 
     # "ignorespace"

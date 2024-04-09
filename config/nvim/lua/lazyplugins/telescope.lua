@@ -22,7 +22,7 @@ return {
             'nvim-telescope/telescope-symbols.nvim',
             'nvim-telescope/telescope-fzy-native.nvim',
             'nvim-telescope/telescope-media-files.nvim',
-            -- 'MrcJkb/telescope-manix', -- :Telescope manix
+            'MrcJkb/telescope-manix', -- :Telescope manix
             -- need a hoogle that supports --json and run 'hoogle generate'
             -- 'luc-tielen/telescope_hoogle', --  broken
             -- psiska/telescope-hoogle.nvim looks less advanced

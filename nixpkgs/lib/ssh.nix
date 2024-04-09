@@ -1,4 +1,0 @@
-{ secrets, flakeInputs, ... }:
-{
-
- }

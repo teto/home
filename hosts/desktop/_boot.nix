@@ -22,6 +22,7 @@
   ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
+  boot.supportedFilesystems = [ "vfat" "xfs" "cifs" "ntfs" ];
 
   # to remove "TSC_DEADLINE disabled due to Errata;
   # please update microcode to version: 0x22"

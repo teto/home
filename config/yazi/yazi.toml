@@ -40,13 +40,16 @@ extract = [
 	{ run = 'unar "$1"', desc = "Extract here" },
 ]
 extract_zlib = [
-	# { run = 'pigz -dc "$1"', desc = "Extract zlib here" },
-	{ run = 'nvim "$1"', desc = "Extract zlib here" },
+	{ run = 'pigz -dc "$1"', desc = "Extract zlib here" },
+	# { run = 'nvim "$1"', desc = "Extract zlib here" },
 ]
 play = [
 	{ run = 'mpv "$@"', orphan = true, for = "unix" },
 	{ run = 'mpv "%1"', orphan = true, for = "windows" },
 	{ run = '''mediainfo "$1"; echo "Press enter to exit"; read _''', block = true, desc = "Show media info", for = "unix" },
+]
+nix = [
+
 ]
 
 [open]
@@ -77,7 +80,7 @@ rules = [
 	# { mime = "application/octet-stream",     use = [ "extract_zlib" ] },
 	# https://yazi-rs.github.io/docs/configuration/yazi/#open
   { name = "*.jsonzlib", use = [ "extract_zlib" ] },
-	{ mime = "*", use = [ "open", "reveal" ] }
+   { mime = "*", use = [ "open", "reveal" ] }
 
 ]
 
@@ -105,7 +108,7 @@ preloaders = [
 prepend_previewers = [
   # sync = true
   { name = "*.chunks", run = "chunks" },
-  { name = "*.jsonzlib", run = "extract_zlib" },
+  { name = "*.jsonzlib", run = "jsonzlib" },
   { mime = "audio/*", run = "zaz" },
 ]
 

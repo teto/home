@@ -57,9 +57,11 @@ lspconfig.lua_ls.setup({
      'before_each',
      'after_each',
      'pending',
-     'teardown'
+     'teardown',
+     -- for luasnip
+     's', 't', 'i',
      -- available in wireplumber
-     , 'alsa_monitor',
+     'alsa_monitor',
      -- for yazi
      'ya', 'ui', 'cx', 'Command'
     },

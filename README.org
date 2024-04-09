@@ -40,7 +40,7 @@ This folder contains my customizations for:
 - [[https://github.com/vimus/vimus][vimus]] (or vimpc ? mpd player)
 - [[https://www.visidata.org/][visidata]] (for data analysis, csv/json/pcap/... reader)
 - [[https://weechat.org/][weechat]] (Irc client)
-- [[https://github.com/sxyazi/yazi][yazi]] a terminal file manager like ranger or joshuto, just super fast
+- [[https://github.com/sxyazi/yazi][yazi]] a TUI file manager in rust, much faster than ranger or joshuto, just amazing
 - zsh (alternative to bash)
 
 
@@ -49,7 +49,7 @@ This folder contains my customizations for:
 As long as flakes are not supported natively, you need to 
 #+BEGIN_SRC shell
 # when not setting #my-machine, defaults to hostname
-nixos-rebuild switch --flake 'github:teto/home#laptop' --use-remote-sudo --option accept-flake-config true --option extra-experimental-features 'nix-command flakes repl-flake'
+nixos-rebuild switch --flake 'github:teto/home#laptop' --use-remote-sudo --option accept-flake-config true --option extra-experimental-features 'nix-command flakes'
 #+END_SRC
 
 

@@ -493,7 +493,6 @@ let
 in
 {
 
-  #  extraLuaPackages = ps: [ps.mpack];
   programs.neovim = {
     enable = true;
     defaultEditor = true;
@@ -528,6 +527,12 @@ in
         lib.mapAttrsToList genBlockLua luaRcBlocks
       ))
      ;
+
+    # TODO this should disappear in the future
+    # extraLuaPackages = ps: ps.rest-nvim.propagatedBuildInputs ;
+    # [
+    #   ps.mpack
+    # ];
 
     extraPackages = with pkgs; [
       # emacs # for orgmode-babel

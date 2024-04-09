@@ -317,12 +317,6 @@ in
 
     # Mod4 => window key
     set $mad Super_L
-    # Mod4
-
-    for_window [title="Thunderbird$"] title_format " %title"
-
-    # for_window [all] title_window_icon on
-    for_window [class="^Firefox$"] title_window_icon on
     ''
     # https://faq.i3wm.org/question/5942/using-modifer-key-as-a-binding/
     # https://faq.i3wm.org/question/5429/stay-in-mode-only-while-key-is-pressed/

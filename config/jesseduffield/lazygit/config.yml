@@ -1,3 +1,4 @@
+notARepository: 'quit'
 gui:
     scrollHeight: 2
     scrollPastBottom: true
@@ -8,7 +9,6 @@ gui:
     expandFocusedSidePanel: false
     mainPanelSplitMode: flexible
     theme:
-        lightTheme: false
         activeBorderColor:
             - green
             - bold
@@ -18,20 +18,15 @@ gui:
             - blue
         selectedLineBgColor:
             - default
-        selectedRangeBgColor:
-            - blue
     commitLength:
         show: true
 git:
     paging:
         colorArg: always
-        pager: ""
         useConfig: false
     merging:
         manualCommit: false
         args: ""
-    pull:
-        mode: merge
     skipHookPrefix: WIP
     autoFetch: true
     branchLogCmd: git log --graph --color=always --abbrev-commit --decorate --date=relative --pretty=medium {{branchName}} --
@@ -41,8 +36,6 @@ git:
 update:
     method: prompt
     days: 14
-reporting: undetermined
-splashUpdatesIndex: 0
 confirmOnQuit: false
 quitOnTopLevelReturn: true
 keybinding:
@@ -72,7 +65,6 @@ keybinding:
         select: <space>
         goInto: <enter>
         confirm: <enter>
-        confirm-alt1: "y"
         remove: d
         new: "n"
         edit: e
@@ -140,7 +132,6 @@ keybinding:
         pickCommit: p
         revertCommit: R
         cherryPickCopy: c
-        cherryPickCopyRange: C
         pasteCommits: v
         tagCommit: T
         checkoutCommit: <space>
@@ -150,8 +141,6 @@ keybinding:
     commitFiles:
         checkoutCommitFile: c
     main:
-        toggleDragSelect: v
-        toggleDragSelect-alt: V
         toggleSelectHunk: a
         pickBothHunks: b
     submodules:
@@ -162,5 +151,9 @@ os:
     open: sh -c "xdg-open {{filename}} >/dev/null"
     openLink: sh -c "xdg-open {{link}} >/dev/null"
 disableStartupPopups: false
-customCommands: []
+customCommands:
+  - key: '<c-r>'
+    context: 'commits'
+    command: 'gh pr list'
+    loadingText: 'Listing github branches'
 services: {}

@@ -37,9 +37,9 @@
 
   # see https://www.pgadmin.org/docs/pgadmin4/6.8/config_py.html
 
-  environment.systemPackages = [
-    pkgs.dbeaver # java, crashes often
-  ];
+  # environment.systemPackages = [
+  #   pkgs.dbeaver # java, crashes often
+  # ];
 
 }
 

@@ -1,4 +1,5 @@
 # **
+*.env
 README.html
 config/astroid/config
 config/astroid/poll.sh

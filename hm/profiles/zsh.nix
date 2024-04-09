@@ -89,7 +89,8 @@
 
       # VERY IMPORTANT else zsh can eat last line
       setopt prompt_sp
-
+      # very magic, if glob doesn't find anything then abort the glob
+      setopt no_nomatch
       '';
 
     # https://github.com/atweiden/fzf-extras

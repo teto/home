@@ -3,6 +3,16 @@
 local M = {}
 
 function M:peek()
+  -- ya.notify {
+  --     title = "chunk plugin activated !",
+  --     content = "",
+  --     timeout = 1
+  --     -- level = "info",
+  -- }
+  -- ya.dbg("LOL")
+  ya.err("LOL called with "..tostring(self.file.url))
+
+  ya.preview_widgets(self, { ui.Paragraph.parse(self.area, "Loading jsonzlib...") })
 	local child = Command("pigz")
 		:args({
           '-dc',
