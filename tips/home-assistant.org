@@ -4,3 +4,5 @@ presser 10 sec le bouton on/off du dimmer switch
 ne pas hesiter a entrer le numero de serie
 
 /var/lib/hass
+
+sudo -u hass /nix/store/j0d9289d0sg7f1l62vd1g3mfw4268dhl-homeassistant-2024.4.4/bin/hass --script auth  --config '/var/lib/hass'  list

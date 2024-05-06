@@ -12,3 +12,6 @@ Also to play some games, you need the media pack. You can install it from the "o
   nix shell .#woeusb-ng
 sudo woeusb --device ~/Downloads/Win10_22H2_French_x64v1.iso /dev/sdd
 
+* edit the boot sequence
+
+  EasyBCD from neosoft is great !

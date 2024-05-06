@@ -6,3 +6,19 @@ systemd-run --user --scope -pMemoryMax=<MemoryLimit> -pMemorySwapMax=<SwapMemory
 * Toggle Fn keys by default
 
   Use Fn+Esc
+
+* Label and UUIDs
+
+Salut, Les PARTUUID/PARTLABEL identifient les partitions GPT. En revanche les UUID/LABEL identifient les filesystem
+
+** update label of disk
+
+   For ext4: e2label /dev/XXX <label>
+https://askubuntu.com/questions/1103569/how-do-i-change-the-label-reported-by-lsblk
+
+** Update UUID of disk
+
+tune2fs -U random /dev/sdbXXX
+
+sudo mkfs.ext4 /dev/sdb2
+

@@ -10,7 +10,7 @@ local has_fzf_lua, fzf_lua = pcall(require, 'fzf-lua')
 local use_fzf_lua  = has_fzf_lua and false
 local use_telescope = not use_fzf_lua
 local use_org = true
-local use_neorg = true
+local use_neorg = false
 local has_luasnip, ls = pcall(require, 'luasnip')
 local use_luasnip = has_luasnip and true
 
@@ -756,6 +756,8 @@ if use_fzf_lua then
 	require('teto.fzf-lua').register_keymaps()
 	local fzf_history_dir = vim.fn.expand('~/.local/share/fzf-history')
 	fzf_lua.setup({
+		'default-title', 
+		defaults = { formatter = 'path.filename_first' } ,
 		commands = { sort_lastused = true },
 		-- [...]
 		fzf_opts = {

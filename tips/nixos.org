@@ -1,3 +1,17 @@
+
+* installations 
+
+https://nixos.org/manual/nixos/stable/#sec-installation
+
+ ** mbr install
+  
+  # parted /dev/sda -- mklabel msdos
+  parted /dev/sda -- mkpart primary 1MB
+  # parted /dev/sda -- set 1 boot on
+
+  mkfs.ext4 -L nixos /dev/sda1
+
+
 * get ip in installer
 dhcpcd
 

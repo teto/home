@@ -129,15 +129,17 @@ in
     (mkIf cfg.developer {
       home.packages = [
         docker-credential-helpers
-        pcalc # cool calc, see insect too
-
+        developer 
+        dasht # ~ zeal but in terminal
+        gitu
       ];
 
     })
-    (mkIf cfg.developer {
+    (mkIf cfg.scientificSoftware {
       home.packages = [
-        dasht # ~ zeal but in terminal
-        gitu
+
+        fend # rust unit convertor
+        pcalc # cool calc, see insect too
 
       ];
 

@@ -64,16 +64,16 @@ return {
      load_paths = {}
    }
  },
- {
-    "nvim-neorg/neorg",
-    -- ft = "norg",
-    dependencies = {
-     -- Unable to install neorg: required dependency `vhyrro/luarocks.nvim` not found!
-     'vhyrro/luarocks.nvim'
-    --   -- { "pritchett/neorg-capture"},
-    --   -- { 'max397574/neorg-kanban' },
-    }
- },
+ -- {
+ --    "nvim-neorg/neorg",
+ --    -- ft = "norg",
+ --    dependencies = {
+ --     -- Unable to install neorg: required dependency `vhyrro/luarocks.nvim` not found!
+ --     'vhyrro/luarocks.nvim'
+ --    --   -- { "pritchett/neorg-capture"},
+ --    --   -- { 'max397574/neorg-kanban' },
+ --    }
+ -- },
  {
   -- a plugin for neorg
   -- use with :Neorg exec cursor

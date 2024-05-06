@@ -9,16 +9,13 @@
       (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "ehci_pci" "usb_storage" "sd_mod" "sdhci_pci" ];
+  boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "ehci_pci" "usb_storage" "uas" "sd_mod" "sdhci_pci" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    {
-      # 
-      device = "/dev/disk/by-label/nixos-new";  # NEW external 256GB disk
-      # device = "/dev/disk/by-uuid/4a42442f-7409-44cb-a81a-eafc12f89f54";  # OLD
+    { device = "/dev/disk/by-uuid/48e0da2b-53c8-4169-8f52-c3c689aadc23";
       fsType = "ext4";
     };
 

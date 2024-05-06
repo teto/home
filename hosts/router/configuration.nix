@@ -80,23 +80,20 @@ in
   # boot.loader.grub.version = 2;
   # boot.loader.efi.efiSysMountPoint = "/boot/efi";
   # Define on which hard drive you want to install Grub.
-  # or "nodev" for efi only
-
-  # grub is installed in master boot record
-  # 
-  boot.loader.grub.devices = [
-    "/dev/sdb"
-    # "/dev/sdb2"
-  ]; 
+  boot.loader.grub.device = "/dev/sdb"; # or "nodev" for efi only
 
   # for the live cd
   # isoImage.squashfsCompression = "zstd -Xcompression-level 5";
 
-  users.users.teto.packages = [
-    # pciutils # for lspci
-    # bridge-utils # pour  brctl
-    # aircrack-ng
-  ];
+  users = {
+    mutableUsers = false;
+
+    users.teto.packages = [
+      # pciutils # for lspci
+      # bridge-utils # pour  brctl
+      # aircrack-ng
+    ];
+  };
 
 
 
@@ -380,8 +377,6 @@ in
   # };
 
   time.timeZone = "Europe/Paris";
-
-  users.mutableUsers = false;
 
   system.stateVersion = "23.11";
 }

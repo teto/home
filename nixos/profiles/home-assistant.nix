@@ -59,6 +59,9 @@
           time_zone = "Europe/Paris";
       };
 
+      # allows to connect remotely
+      network = {};
+
       # https://www.home-assistant.io/integrations/recorder/
       recorder = {}; # sqlite by default
       history = {};
