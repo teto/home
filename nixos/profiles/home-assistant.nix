@@ -1,5 +1,8 @@
 { config, lib, pkgs, ... }:
 {
+  environment.systemPackages = [
+    pkgs.home-assistant-cli
+  ];
 
   # for android development
   services.home-assistant = {
@@ -8,7 +11,7 @@
 
     # subset of package.extraComponents ?!
 	extraComponents = [
-		"default_config"
+		# "default_config"
 		"deconz" # interface for zigbee conbee II
 		# "esphome"
 		"hue"
@@ -18,19 +21,24 @@
 	];
 
     package = pkgs.home-assistant.override {
+
 	  extraPackages = python3Packages: with python3Packages; [
         numpy
 		psycopg2
 	  ];
 	  # look at https://www.home-assistant.io/integrations/
+      # pkgs/servers/home-assistant/component-packages.nix
 	  extraComponents = [
         "recorder" # to plot history of devices
-		"default_config"  # metapackage
+
+        # removed to avoid zha
+		# "default_config"  # metapackage
         "homeassistant_yellow"  # metapackage
 		"deconz" # interface for zigbee conbee II
 		# "esphome"
-		"hue"
-		"emulated_hue"
+		# "hue"
+		# "emulated_hue"
+        "mqtt"
         "meteo_france"
 		# "met"
 	  ];
@@ -38,6 +46,7 @@
 
 
     # TODO add whisper
+    # https://nixos.wiki/wiki/Home_Assistant
     config = {
 
       # bluetooth = {};  # NO
@@ -66,6 +75,13 @@
       recorder = {}; # sqlite by default
       history = {};
       logbook = {};
+      # logbook.exclude.entities = hiddenEntities;
+      system_health = { };
+      system_log = { };
+      mobile_app = { };
+      shopping_list = { };
+      backup = { };
+      logger.default = "info";
       # Text to speech
       tts = {
         platform = "google_translate";
@@ -98,15 +114,39 @@
 
   # services.deconz.enable
   # with my conbee 2 key
-  services.zigbee2mqtt = {
-   enable = true;
-   # https://www.zigbee2mqtt.io/information/configuration.html
-   # settings
 
+  # "z2m" (zigbee2mqtt)
+  services.zigbee2mqtt = {
+    enable = true;
+    # https://www.zigbee2mqtt.io/information/configuration.html
+    settings = {
+      homeassistant = config.services.home-assistant.enable;
+      permit_join = true; # todo disable after configuration for secuirty
+      serial = {
+        # according to https://www.zigbee2mqtt.io/guide/adapters/#recommended
+        # might need to flash the firmware
+        adapter= "deconz"; # value for conbee II
+        port = "/dev/ttyACM0";
+        # port = null;
+      };
+      frontend= {
+        # true; # starts on 8080
+          # Optional, default 8080
+          # 1880
+        # port= 1010;
+      };
+      advanced = { log_level= "info"; };
+    };
   };
 
-  environment.systemPackages = [
-    pkgs.home-assistant-cli
-  ];
+  # needed by zigbee2mqtt
+  services.mosquitto = {
+    enable = true;
+    listeners = [ {
+      acl = [ "pattern readwrite #" ];
+      omitPasswordAuth = true;
+      settings.allow_anonymous = true;
+    } ];
+  };
 }
 

@@ -4,8 +4,14 @@
 	oneFixupPerCommit = true
 [core]
 	# fsmonitor = "/nix/store/pqrqcfw2m27kwhrh7jyj05lp9b5pi0jd-rs-git-fsmonitor-0.1.3/bin/rs-git-fsmonitor"
-	# pager = "/nix/store/ms4zb8803ixq3yz4nn0kgyda0q3d3rvw-delta-0.16.5/bin/delta"
 	sshCommand = "ssh"
+    # pager = "ov -F"
+
+# [pager]
+#     diff = "ov -F --section-delimiter '^diff' --section-header"
+#     log = "ov -F --section-delimiter '^commit' --section-header-num 3"
+#     show = "ov -F --header 3"
+
 # sshCommand=ssh -vvv
 # compactionHeuristic
   # whitespace = space-before-tab

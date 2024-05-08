@@ -6,3 +6,9 @@ ne pas hesiter a entrer le numero de serie
 /var/lib/hass
 
 sudo -u hass /nix/store/j0d9289d0sg7f1l62vd1g3mfw4268dhl-homeassistant-2024.4.4/bin/hass --script auth  --config '/var/lib/hass'  list
+
+* zigbee2mqtt (z2m)
+
+  1. enable mqtt service (mosquitto for instance)
+
+	 Z igbee2MQTT:info  2019-11-09T12:19:56: Successfully interviewed '0x00158d0001dc126a', device has successfully been paired

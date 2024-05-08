@@ -346,8 +346,8 @@ let
     # })
 
     # triggers too many errors
-    # (luaPlugin {
-    #   plugin = rest-nvim;
+    (luaPlugin {
+      plugin = rest-nvim;
     #   # config = ''
     #   #   require("rest-nvim").setup({
     #   #     -- Open request results in a horizontal split
@@ -375,7 +375,7 @@ let
     #   #     jump_to_request = false,
     #   #   })
     #   #   '';
-    # })
+    })
   ];
 
   filetypePlugins = with pkgs.vimPlugins; [
