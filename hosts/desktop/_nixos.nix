@@ -40,7 +40,7 @@ in
     ./teto/restic.nix
 
     # TODO moved from their
-    # ../../nixos/profiles/localai.nix
+    ../../nixos/profiles/localai.nix
     ../../nixos/profiles/nextcloud.nix
     ../../nixos/profiles/postgresql.nix
     ../../nixos/profiles/redis.nix

@@ -34,7 +34,7 @@ in
     ../config-all.nix
     ./services/openssh.nix
     ../../nixos/profiles/router.nix
-
+    ../../nixos/profiles/home-assistant.nix
   ];
 
   environment.systemPackages = with pkgs; [
@@ -121,6 +121,16 @@ in
     "iomem=relaxed" # to be able to flash rom from host !
   ];
   boot.supportedFilesystems = pkgs.lib.mkForce [ "vfat" "xfs" "cifs" ];
+
+  nix = {
+    package = pkgs.nixVersions.nix_2_22;
+
+    extraOptions = '' 
+      experimental-features = nix-command flakes
+    '';
+  
+  };
+
 
   # irqbalance is supposed to distribute hardware interrupts across processors
   # to increase perf
@@ -325,13 +335,16 @@ in
     #   nat.internalInterfaces = [ "br0" ];
 
     wireless = {
+      scanOnLowSignal = false; # consume less energy and we dont roam anyway
       # enable = true;
       # userControlled.enable = true;
       iwd = {
         enable = true;
         # https://iwd.wiki.kernel.org/networkconfigurationsettings
         settings = {
-          Settings = { };
+          Settings = {
+            AutoConnect = true;
+          };
           Network = {
             EnableIPv6 = false;
           };
