@@ -15,7 +15,10 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/48e0da2b-53c8-4169-8f52-c3c689aadc23";
+    { 
+      # for the external disk sdb1
+      # device = "/dev/disk/by-uuid/48e0da2b-53c8-4169-8f52-c3c689aadc23";
+      device = "/dev/sda1";
       fsType = "ext4";
     };
 

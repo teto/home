@@ -30,6 +30,7 @@ in
 {
   # pcengines/apu/
   imports = [
+    ./iwd.nix
     ./hardware.nix
     ../config-all.nix
     ./services/openssh.nix
@@ -80,7 +81,7 @@ in
   # boot.loader.grub.version = 2;
   # boot.loader.efi.efiSysMountPoint = "/boot/efi";
   # Define on which hard drive you want to install Grub.
-  boot.loader.grub.device = "/dev/sdb"; # or "nodev" for efi only
+  boot.loader.grub.device = "/dev/sda"; # or "nodev" for efi only
 
   # for the live cd
   # isoImage.squashfsCompression = "zstd -Xcompression-level 5";
@@ -342,15 +343,16 @@ in
         enable = true;
         # https://iwd.wiki.kernel.org/networkconfigurationsettings
         settings = {
-          Settings = {
+          Settings = { 
             AutoConnect = true;
+            AlwaysRandomizeAddress= false;
           };
           Network = {
             EnableIPv6 = false;
           };
-          Security = {
-            Passphrase = secrets.router.password;
-          };
+          # Security = {
+          #   Passphrase = secrets.router.password;
+          # };
 
           # psk = secrets.router.password;
         };

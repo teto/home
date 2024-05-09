@@ -707,14 +707,13 @@
               ({
                 name = "router";
                 # local-facing address
-                # hostname = "192.168.1.11";
-                hostname = "10.0.0.1";
+                hostname = "192.168.1.11";
+                # hostname = "10.0.0.1";
               }) // {
               # sshOpts = [ "-F" "ssh_config" ];
-              sshUser = "teto";
+              sshUser = "root";
               sshOpts = [
-                "-i"
-                "~/.ssh/id_rsa"
+                "-i/home/teto/.ssh/id_rsa"
                 # "-p${toString secrets.router.sshPort}"
               ];
 

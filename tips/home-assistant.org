@@ -12,3 +12,6 @@ sudo -u hass /nix/store/j0d9289d0sg7f1l62vd1g3mfw4268dhl-homeassistant-2024.4.4/
   1. enable mqtt service (mosquitto for instance)
 
 	 Z igbee2MQTT:info  2019-11-09T12:19:56: Successfully interviewed '0x00158d0001dc126a', device has successfully been paired
+ 
+** sonoff SNZB-02 
+   Change celsius to fahreneit: double tap reset button https://www.zigbee2mqtt.io/devices/SNZB-02D.html
