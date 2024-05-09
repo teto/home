@@ -32,11 +32,13 @@
         "recorder" # to plot history of devices
 
         # removed to avoid zha
-		# "default_config"  # metapackage
+		"default_config"  # metapackage
         "homeassistant_yellow"  # metapackage
 		"deconz" # interface for zigbee conbee II
 		# "esphome"
 		# "hue"
+
+        "met"
 		# "emulated_hue"
         "mqtt"
         "meteo_france"
@@ -46,6 +48,7 @@
 
 
     # TODO add whisper
+    # backups exist at /var/lib/hass/backups/
     # https://nixos.wiki/wiki/Home_Assistant
     config = {
 
@@ -103,6 +106,8 @@
 	   "https://www.home-assistant.io/atom.xml"
 	   # "https://nixos.org/blogs.xml"
 	  ];
+# services.home-assistant.config."scene manual" = [];
+# services.home-assistant.config."scene ui" = "!include scenes.yaml";
     };
 	
 	# so that it can be overriden from the web interface 
@@ -110,6 +115,13 @@
 
 	# /var/lib/hass/configuration.yaml: Secret elevation not defined
   };
+
+  # If you did not create any automations through the UI, 
+  # Home Assistant will fail loading because the automations.yaml file does not exist yet and it will fail including it. To avoid that, add a systemd tmpfiles.d rule: 
+  # taken from https://wiki.nixos.org/wiki/Home_Assistant#Combine_declarative_and_UI_defined_scenes
+  systemd.tmpfiles.rules = [
+    "f ${config.services.home-assistant.configDir}/automations.yaml 0755 hass hass"
+  ];
 
 
   # services.deconz.enable
