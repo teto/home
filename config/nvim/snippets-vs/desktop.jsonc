@@ -1,0 +1,9 @@
+{
+	"desktop": {
+		"prefix": "desktop",
+		"body": [
+			"Exec=nvim %F",
+			"Terminal=True"
+		]
+	}
+}

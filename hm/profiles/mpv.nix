@@ -1,5 +1,7 @@
 { config, pkgs, lib, ... }:
 {
+
+  # TODO use wrapper instead ?
   programs.mpv = {
     enable = true;
 
@@ -9,9 +11,13 @@
       ytdl-format = "bestvideo+bestaudio";
       # cache-default = 4000000;
     };
+
+
+    # Scripts:  'mpvacious'
     package = (pkgs.wrapMpv
       (pkgs.mpv-unwrapped.override {
         vapoursynthSupport = true;
+
       })
       {
         extraMakeWrapperArgs = [
@@ -20,6 +26,13 @@
           ":"
           "${pkgs.vapoursynth-mvtools}/lib/vapoursynth"
         ];
+        scripts = [ 
+          
+          pkgs.mpvScripts.mpvacious # Adds mpv keybindings to create Anki cards from movies and TV shows
+          pkgs.mpvScripts.manga-reader
+          # pkgs.mpvScripts.mpv-notify-send # does not work ?
+        ];
+
       });
   };
 

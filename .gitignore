@@ -24,6 +24,7 @@ config/zsh/.*
 misc/
 test*
 export.json
+result
 
 # very important not to version those
 secrets/*

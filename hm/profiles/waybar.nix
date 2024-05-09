@@ -99,15 +99,17 @@ in
             tooltip-format-disconnected = "MPD (disconnected)";
           };
 
-          idle_inhibitor = {
-            # use a screensaver icon
-            format = "{icon}";
-            format-icons = {
-              activated = "no timeout";
-              deactivated = "timeout";
-            };
+          # moved to manual
+          # idle_inhibitor = {
+          #   # use a screensaver icon
+          #   start-activated = true;
+          #   format = "{icon}";
+          #   format-icons = {
+          #     activated = "no timeout";
+          #     deactivated = "timeout";
+          #   };
+          # };
 
-          };
           wireplumber = {
             format = "{volume}% {icon}";
             # "format-muted": "ï¦"
@@ -173,7 +175,7 @@ in
           "custom/notification" = {
             tooltip = false;
             # format = "{icon}";
-            format = "{} {icon}";
+            format = "{} {icon} ";
 
             format-icons = {
     # //         "5": "ïµ",
@@ -183,12 +185,12 @@ in
 
     # ïï¶ª
               notification = "<span foreground='red'>ï³<span>";
-              none = " ï¶ ";
+              none = "no notifs ï¶ ";
               inhibited-notification = "inhibited<span foreground='red'><sup>toto</sup></span>";
-              inhibited-none = "0";
+              inhibited-none = "0 inhibted";
               # Do Not Disturb
               dnd-notification = "<span foreground='red'><sup>Notifs</sup></span>";
-              dnd-none = "no notifs";
+              dnd-none = "no notifs (dnd)";
               dnd-inhibited-notification = "dnd<span foreground='red'><sup>dnd</sup></span>";
               dnd-inhibited-none = "none";
             };

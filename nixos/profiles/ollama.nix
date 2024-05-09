@@ -18,4 +18,9 @@
 
    # OLLAMA_MODELS to help it find models
  };
+
+ # services.nextjs-ollama-llm-ui = {
+
+ #   enable = true;
+ # };
 }

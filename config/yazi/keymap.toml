@@ -8,6 +8,9 @@
 prepend_keymap = [
  	{ on = [ "<PageUp>" ], run = "seek -5", desc = "Seek up 5 units in the preview" },
 	{ on = [ "<PageDown>" ], run = "seek 5",  desc = "Seek down 5 units in the preview" },
+	# https://github.com/sxyazi/yazi/issues/1046
+	{ on = [ "z" ], run = "plugin zoxide" },
+	{ on = [ "Z" ], run = "plugin fzf" },
 ]
 
 
@@ -16,7 +19,7 @@ prepend_keymap = [
 prepend_keymap = [
 	{ on = [ "<C-g>"], run = "plugin test --sync --args='hello world'" },
 	{ on = [ "<C-q>" ], run = "close" },
-	{ on = [ "<Enter>" ], run = "close --submit" },
+	# { on = [ "<Enter>" ], run = "close --submit" },
 	{ on = [ "<Esc>" ], run = "escape" },
 	{ on = [ "<Backspace>" ], run = "backspace" },
 

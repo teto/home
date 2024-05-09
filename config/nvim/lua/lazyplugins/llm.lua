@@ -21,6 +21,10 @@ return {
   -- :GpChatNew
   -- use :GpInspectPlugin to debug
   dir = "~/gp.nvim"
+  -- , enabled = false
+  , lazy = true
+  -- lazy load on command
+  -- , cmd = { "GpWhisper" }
   -- 'Robitx/gp.nvim'
   -- , branch = "copilot"
   , config = function()

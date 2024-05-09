@@ -4,8 +4,12 @@ let
   swayEnvVars =  {
       WLR_NO_HARDWARE_CURSORS=1;
       # we need vulkan else we get flickering
+      # TODO move it to sessionVariables instead so we can override it instead of having hardcoded ?
+      # or modify the wrapper to set allow overriding
       WLR_RENDERER="vulkan";
       # WLR_RENDERER="gles2"; # taken from reddit
+
+      # scintille sinon
       __GL_GSYNC_ALLOWED=0; # global vsync
       __GL_SYNC_TO_VBLANK=0;
       __GL_VRR_ALLOWED=0;

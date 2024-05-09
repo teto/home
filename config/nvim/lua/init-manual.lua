@@ -73,7 +73,7 @@ vim.g.__ts_debug = 10
 -- local reload = require'plenary.reload'
 -- reload.reload_module('plenary')
 -- require'plenary'
-vim.g.matchparen = 0
+vim.g.matchparen = 1
 vim.g.mousemoveevent = 1-- must be setup before calling lazy
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
@@ -377,31 +377,15 @@ local has_rest, rest = pcall(require, 'rest-nvim')
 if has_rest then
 	rest.setup({
 		-- Open request results in a horizontal split
-		result_split_horizontal = false,
 		-- Skip SSL verification, useful for unknown certificates
 		skip_ssl_verification = false,
 		-- engine = 'classic',
 		-- parser = 'treesitter',
 		-- Highlight request on run
 		highlight = {
-			enabled = true,
+			-- enabled = true,
 			timeout = 150,
 		},
-		result = {
-			-- toggle showing URL, HTTP info, headers at top the of result window
-			show_curl_command = true,
-			show_url = true,
-			show_http_info = true,
-			show_headers = true,
-			-- disable formatters else they generate errors/add dependencies
-			-- for instance when it detects html, it tried to run 'tidy'
-			formatters = {
-				html = false,
-				jq = false,
-			},
-		},
-		-- Jump to request line on run
-		jump_to_request = false,
 	})
 
 -- TODO remove once it's merged upstream
@@ -508,6 +492,7 @@ vim.cmd([[sign define DiagnosticSignHint text=H texthl=LspDiagnosticsSignHint li
 --       \ | highlight NeomakePerso cterm=underline ctermbg=Red  ctermfg=227  gui=underline
 
 -- netrw config {{{
+vim.g.netrw_nogx = 1 -- disable netrw gx
 vim.g.netrw_browsex_viewer = 'xdg-open'
 vim.g.netrw_home = vim.env.XDG_CACHE_HOME .. '/nvim'
 vim.g.netrw_liststyle = 1 -- long listing with timestamp
@@ -529,12 +514,35 @@ vim.api.nvim_create_autocmd('BufReadPost', {
 	end,
 })
 
+vim.api.nvim_create_autocmd('BufReadPost', {
+	pattern = '*.jsonzlib',
+	callback = function()
+		-- " autocmd BufReadPre *.jsonzlib %!pigz -dc "%" - | jq '.'
+		print("MATCHED JSONZLIB PATTERN")
+
+		-- enew
+		-- vim.cmd([[%!pigz -dc "%" - | jq '.']])
+		-- vim.highlight.on_yank({ higroup = 'IncSearch', timeout = 1000 })
+	end,
+})
+
+vim.api.nvim_create_user_command('ViewChunk', function()
+  vim.cmd("!view_json %")
+end, {
+  desc = '',
+})
+
+
+
 -- local verbose_output = false
 -- require("tealmaker").build_all(verbose_output)
 
 
 local has_cmp, cmp = pcall(require, 'cmp')
 if has_cmp then
+    -- nvim_cmp should be disabled when 'prompt' 
+
+
 	-- use('michaeladler/cmp-notmuch')
 	-- nvim-cmp autocompletion plugin{{{
 	cmp_sources = {
@@ -562,7 +570,15 @@ if has_cmp then
 		-- https://github.com/hrsh7th/nvim-cmp/issues/1747
 		enabled = function()
 			-- return vim.g.cmptoggle
+			-- return true
+			-- disable autocompletion in prompt (wasn't playing good with telescope)
+			buftype = vim.api.nvim_get_option_value("buftype", {buf=0})
+			if buftype == "prompt" then return false end
+
 			return true
+			-- local context = require 'cmp.config.context'
+			-- -- disable autocompletion in comments 
+			-- return not context.in_treesitter_capture("comment") and not context.in_syntax_group("Comment")
 		end,
 		completion = {
 			-- autocomplete = true
@@ -622,7 +638,7 @@ if has_cmp then
   cmp.setup.filetype('gitcommit', {
     sources = cmp.config.sources({
 	-- You can specify the `git` source if [you were installed it](https://github.com/petertriho/cmp-git).
-      { name = 'git' }, 
+      { name = 'git' },
     }, {
       { name = 'buffer' },
     })
@@ -756,7 +772,7 @@ if use_fzf_lua then
 	require('teto.fzf-lua').register_keymaps()
 	local fzf_history_dir = vim.fn.expand('~/.local/share/fzf-history')
 	fzf_lua.setup({
-		'default-title', 
+		'default-title',
 		defaults = { formatter = 'path.filename_first' } ,
 		commands = { sort_lastused = true },
 		-- [...]
@@ -835,6 +851,7 @@ if has_bufferline then
 			-- max_name_length = 18,
 			-- max_prefix_length = 15, -- prefix used when a buffer is deduplicated
 			-- tab_size = 18,
+			show_buffer_icons = false,
 			show_buffer_close_icons = false,
 			persist_buffer_sort = true, -- whether or not custom sorted buffers should persist
 			-- -- can also be a table containing 2 custom separators
@@ -956,11 +973,11 @@ vim.opt.listchars:append('conceal:❯')
 -- "set shada=!,'50,<1000,s100,:0,n$XDG_CACHE_HOME/nvim/shada
 vim.g.netrw_home = vim.fn.stdpath('data') .. '/nvim'
 
-vim.keymap.set('n', '<F11>', '<Plug>(ToggleListchars)', 
+vim.keymap.set('n', '<F11>', '<Plug>(ToggleListchars)',
 	{ desc = "Change between different flavors of space/tab characters" })
 
 vim.keymap.set('n', '<leader>q', '<Cmd>Sayonara!<cr>', { silent = true, desc = "Closes current window"})
-vim.keymap.set('n', '<leader>Q', '<Cmd>Sayonara<cr>', 
+vim.keymap.set('n', '<leader>Q', '<Cmd>Sayonara<cr>',
 	{ silent = true, desc = "Close current window, no question asked" })
 
 
@@ -992,103 +1009,7 @@ if use_luasnip then
 	vim.keymap.set({"i", "s"}, "<C-L>", function() ls.jump( 1) end, {silent = true})
 	vim.keymap.set({"i", "s"}, "<C-J>", function() ls.jump(-1) end, {silent = true})
 
-	-- |"warn"|"info"|"debug")
-	ls.log.set_loglevel("debug")
-	-- ls.log.ping()
-
-	vim.keymap.set({"i", "s"}, "<C-E>", function()
-		if ls.choice_active() then
-			ls.change_choice(1)
-		end
-	end, {silent = true})
-
-	-- ls.add_snippets(filetype, snippets)
-	-- require("luasnip-snippets").load_snippets()
-	-- require("luasnip.loaders").edit_snippet_files(opts:table|nil)
-	-- 
-	-- require("luasnip.loaders.from_lua").load()
-
-	-- loads lua files
-	require("luasnip.loaders.from_lua").lazy_load(
-		{ paths = { vim.fn.stdpath("config") .."/snippets"} }
-	)
-
-	-- loads json(c) files if there is a package.json
-	require("luasnip.loaders.from_vscode").lazy_load(
-		{ paths = { vim.fn.stdpath("config") .."/snippets"} }
-
-	)
-
-	local snip = ls.snippet
-	local s = ls.snippet
-	local sn = ls.snippet_node
-	local t = ls.text_node
-	local func = ls.function_node
-	local i = ls.insert_node
-	local f = ls.function_node
-	-- local c = ls.choice_node
-	-- local d = ls.dynamic_node
-	-- local r = ls.restore_node
-
-	-- require("luasnip.loaders.from_vscode").lazy_load()
-	ls.config.setup {}
-
-
-	-- see also :h haskell-snippets
-	-- needs a treesitter grammar
-	local haskell_snippets = require('haskell-snippets').all
-	ls.add_snippets('haskell', haskell_snippets, { key = 'haskell' })
-	local date = function() return {os.date('%Y-%m-%d')} end
-	ls.add_snippets(nil, {
-		all = {
-			snip({
-				trig = "date",
-				namr = "Date",
-				dscr = "Date in the form of YYYY-MM-DD",
-			}, {
-				func(date, {}),
-			}),
-		},
-		sh = {
-			snip("shebang", {
-				t { "#!/bin/sh", "" },
-				i(0),
-			}),
-		},
-    -- python = {
-    --     snip("shebang", {
-    --         t { "#!/usr/bin/env python", "" },
-    --         i(0),
-    --     }),
-    -- },
-
-	})
-
-	-- ls.add_snippets("lua", {
-	-- 	-- trigger is `fn`, second argument to snippet-constructor are the nodes to insert into the buffer on expansion.
-	-- 	s("fn", {
-	-- 		-- Simple static text.
-	-- 		t("//Parameters: "),
-	-- 		-- function, first parameter is the function, second the Placeholders
-	-- 		-- whose text it gets as input.
-	-- 		-- f(copy, 2),
-	-- 		t({ "", "function " }),
-	-- 		-- Placeholder/Insert.
-	-- 		i(1),
-	-- 		t("("),
-	-- 		-- Placeholder with initial text.
-	-- 		i(2, "int foo"),
-	-- 		-- Linebreak
-	-- 		t({ ") {", "\t" }),
-	-- 		-- Last Placeholder, exit Point of the snippet.
-	-- 		i(0),
-	-- 		t({ "", "}" }),
-	-- 	}),
-	-- })
-
-    require("luasnip.loaders.from_lua").load({paths = {vim.fn.stdpath("config").."/snippets"}})
-
-
+	require 'teto.snippets'
 end
 
 -- " Bye bye ex mode
@@ -1119,6 +1040,22 @@ vim.o.grepprg = 'rg --vimgrep --no-heading --smart-case'
 require('teto.lsp').set_lsp_lines(true)
 require('teto.rest')
 require('teto.secrets')
+
+require("neotest").setup({
+	adapters = {
+	require('neotest-haskell') {
+	-- Default: Use stack if possible and then try cabal
+	-- todo use nix
+	build_tools = { 'cabal' },
+	-- Default: Check for tasty first and then try hspec
+	frameworks = { 'tasty', 'hspec', 'sydtest' },
+	},
+	-- require("neotest-plenary"),
+	-- require("neotest-vim-test")({
+	--   ignore_file_types = { "python", "vim", "lua" },
+	-- }),
+	},
+})
 
 if has_gitsigns then
 	local tgitsigns = require'teto.gitsigns'

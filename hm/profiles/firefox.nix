@@ -1,6 +1,8 @@
 { config, pkgs, lib, ... }:
 let
 
+  # https://discourse.nixos.org/t/how-do-you-pin-a-firefox-extensions-add-on-to-the-firefox-toolbar/36081
+  # browser.uiCustomization.state 
   defaultFirefoxSettings = {
     # TODO use my own startpage
     "browser.startup.homepage" = "https://github.com/teto";
@@ -10,17 +12,32 @@ let
     # "general.useragent.locale" = "en-GB";
     # "browser.bookmarks.showMobileBookmarks" = true;
 
+
     "beacon.enabled" = false;
+    # "browser.aboutConfig.showWarning" = false;
+    "browser.cache.disk.enable" = false; # Be kind to hard drive
+
     "browser.display.background_color" = "#c5c8c6";
     "browser.display.foreground_color" = "#1d1f21";
+
     "browser.safebrowsing.appRepURL" = "";
     "browser.safebrowsing.malware.enabled" = false;
-    "browser.search.hiddenOneOffs" =
-      "Google,Yahoo,Bing,Amazon.com,Twitter";
+
+    "browser.search.hiddenOneOffs" = "Google,Yahoo,Bing,Amazon.com,Twitter";
     "browser.search.suggest.enabled" = false;
+
+
+    "mousewheel.default.delta_multiplier_x" = 20;
+    "mousewheel.default.delta_multiplier_y" = 20;
+    "mousewheel.default.delta_multiplier_z" = 20;
+
+
     "browser.send_pings" = false;
+
     "browser.startup.page" = 3;
+
     "browser.tabs.closeWindowWithLastTab" = false;
+
     "browser.urlbar.placeholderName" = "DuckDuckGo";
     "browser.urlbar.speculativeConnect.enabled" = false;
     # "devtools.theme" = "${config.theme.base16.kind}";
@@ -39,17 +56,22 @@ let
     # "media.video_stats.enabled" = false;
     "network.IDN_show_punycode" = true;
     "network.allow-experiments" = false;
+
     "network.dns.disablePrefetch" = true;
+    # "network.prefetch-next" = false;
+
     # "network.http.referer.XOriginPolicy" = 2;
     # "network.http.referer.XOriginTrimmingPolicy" = 2;
     # "network.http.referer.trimmingPolicy" = 1;
-    # "network.prefetch-next" = false;
     "permissions.default.shortcuts" = 2; # Don't steal my shortcuts!
+
     "privacy.donottrackheader.enabled" = true;
     "privacy.donottrackheader.value" = 1;
     # "privacy.firstparty.isolate" = true;
     # "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
     # "widget.content.gtk-theme-override" = "Adwaita:light";
+
+    "widget.use-xdg-desktop-portal.file-picker" = 1;
   };
 
   novaFirefoxSettings = {
@@ -86,6 +108,8 @@ in
         # pass package for instance
         # with pkgs.nur.repos.rycee.firefox-addons;
         # with pkgs;
+
+        # pkgs.open-in-mpv
         extensions = commonExtensions ++ (with pkgs; [
           # TODO no need for bitwarden anymore
           firefox-addons.browserpass
@@ -97,6 +121,42 @@ in
           # pkgs.nur.repos.rycee.firefox-addons.browserpass-otp
 
         ]);
+
+        search = {
+
+          force = true;
+          engines = {
+            "Nix Packages" = {
+              urls = [{
+                template = "https://search.nixos.org/packages";
+                params = [
+                  { name = "type"; value = "packages"; }
+                  { name = "query"; value = "{searchTerms}"; }
+                ];
+              }];
+              icon = "''${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+              definedAliases = [ "@np" ];
+            };
+            "NixOS Wiki" = {
+              urls = [{ template = "https://nixos.wiki/index.php?search={searchTerms}"; }];
+              iconUpdateURL = "https://nixos.wiki/favicon.png";
+              updateInterval = 24 * 60 * 60 * 1000; # every day
+              definedAliases = [ "@nw" ];
+            };
+            hoogle = {
+                urls = [ {
+                  template = "https://hoogle.haskell.org/?hoogle=%s&scope=set%3Astackage";
+                  params = [
+                    { name = "type"; value = "keyword"; }
+                  ];
+                }
+              ];
+              definedAliases = [ "@ho" ];
+              };
+            "Bing".metaData.hidden = true;
+            "Google".metaData.alias = "@g"; # builtin engines only support specifying one additional alias
+          };
+        };
 
         containersForce = true;
         containers = {

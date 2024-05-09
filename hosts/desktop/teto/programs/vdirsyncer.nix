@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 {
   programs.vdirsyncer = {
-    enable = false;
+    enable = true;
     # Provide package from stable channel ?
     # package = pkgs.vdirsyncerStable;  
 

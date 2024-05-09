@@ -34,6 +34,11 @@ let
      ];
 
 
+  neotestPlugins = with pkgs.vimPlugins; [
+      neotest 
+      neotest-haskell
+     ];
+
   luaPlugins = with pkgs.vimPlugins; [
     {
       # we should have a file of the grammars as plugins
@@ -234,7 +239,7 @@ let
         vim.g.nvimdev_build_readonly = 1
         --}}}'';
     })
-    (luaPlugin { plugin = sniprun; })
+    # (luaPlugin { plugin = sniprun; })
     (luaPlugin { plugin = telescope-nvim; })
     # (luaPlugin { plugin = telescope-manix; })
     # call with :Hoogle
@@ -403,7 +408,7 @@ let
       haskellPackages.hasktags
       haskellPackages.fast-tags
 
-      llm-ls
+      # llm-ls
       manix # should be no need, telescope-manix should take care of it
       nodePackages.vscode-langservers-extracted # needed for typescript language server IIRC
       nodePackages.bash-language-server
@@ -431,6 +436,7 @@ let
       pkgs.black
       # soxWithMp3 = final.sox.override { llama-cpp = llama-cpp-matt; };
 
+      nixfmt-rfc-style # 
       # to enable GpWhisper in gp.nvim
       (sox.override({enableLame = true;}))
 
@@ -453,6 +459,7 @@ let
         ++ filetypePlugins
         ++ telescopePlugins
         ++ neorgPlugins
+        ++ neotestPlugins
    ;
 
     # plugins = with pkgs.vimPlugins; [
@@ -464,15 +471,18 @@ let
 
 
     # viml config, to test home-manager setup
-    extraConfig = ''
-     '';
+    # extraConfig = ''
+    #  '';
 
     extraLuaConfig =  /* lua */ ''
       require('init-manual')
     '';
 
     # HACK till we fix it
-    # extraLuaPackages = ps: nvimLua.pkgs.rest-nvim.propagatedBuildInputs;
+    extraLuaPackages = lp: 
+         [ lp.sqlite ]
+        # nvimLua.pkgs.rest-nvim.propagatedBuildInputs
+    ;
 
 
     extraPython3Packages = p: [ 
@@ -485,5 +495,16 @@ let
  };
 
  home.packages = extraPackages;
+
+ # just for some
+ xdg.configFile."nvim/lua/generated-by-nix.lua" = {
+   enable = true;
+   text = ''
+     local M = {}
+     M.gcc_path = "${pkgs.gcc}/bin/gcc"
+     return M
+     '';
+  };
+
 
 }

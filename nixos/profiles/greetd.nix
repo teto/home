@@ -1,4 +1,7 @@
-{pkgs, ... }:
+{ config
+, pkgs
+, ...
+}:
 {
 
   # https://man.sr.ht/~kennylevinsen/greetd/
@@ -14,9 +17,15 @@
   #     -b 'Reboot' 'systemctl reboot'
   # '';
     settings = {
+
+        # SESSION_DIRS = "${config.services.xserver.displayManager.sessionData.desktops}/share";
+
+# https://github.com/apognu/tuigreet
       # --sessions /run/current-system/sw/share/wayland-sessions/:/run/current-system/sw/share/xsessions/ \
       # vt = config.services.xserver.tty;
       # restart = false; # should be disabled when using autologin
+
+      # https://man.sr.ht/~kennylevinsen/greetd/
       default_session = {
         # dbus-run-session could be interesting too
     # -s, --sessions DIRS colon-separated list of Wayland session paths
@@ -30,13 +39,14 @@
             --remember \
             --remember-user-session \
             --greeting "Hello noob" \
+            --sessions ${config.services.xserver.displayManager.sessionData.desktops}/share/xsessions:${config.services.xserver.displayManager.sessionData.desktops}/share/wayland-sessions
             --user-menu \
             --power-shutdown /run/current-system/systemd/bin/systemctl poweroff \
             --power-reboot /run/current-system/systemd/bin/systemctl reboot
         '';
       };
 
-      # initial_session = autologin !!
+      # initial_session => autologin !!
       initial_session = {
         # should be the one provided byy home-manager
         # command = "${pkgs.sway}/bin/sway";
@@ -58,10 +68,10 @@
   ];
 
   # Edit gtkgreet list of login environments, which is by default read from /etc/greetd/environments
-  environment.etc."greetd/environments".text = ''
-    sway
-    bash
-    hyprland
-    gnome-shell
-  '';
+  # environment.etc."greetd/environments".text = ''
+  #   sway
+  #   bash
+  #   hyprland
+  #   gnome-shell
+  # '';
 }

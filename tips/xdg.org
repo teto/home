@@ -35,3 +35,13 @@ and finally update it with
 $ xdg-mime default zathura.desktop application/pdf
 ```
 
+
+* work with .desktop files
+
+
+  desktop-file-validate <your desktop file>
+update-desktop-database -v ~/.local/share/applications
+
+ Start one from terminal: $(nix-build -A gtk3.out)/bin/gtk-launch nvim.desktop
+
+  https://specifications.freedesktop.org/desktop-entry-spec/desktop-entry-spec-latest.html

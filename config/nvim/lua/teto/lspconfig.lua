@@ -294,7 +294,7 @@ lspconfig.rust_analyzer.setup({
   },
  },
  cmd = { 'rust-analyzer' },
- -- root_dir = root_pattern("Cargo.toml", "rust-project.json")
+ root_dir = lspconfig.util.root_pattern("Cargo.toml", "rust-project.json")
 })
 
 -- see https://github.com/oxalica/nil/blob/main/docs/configuration.md for config

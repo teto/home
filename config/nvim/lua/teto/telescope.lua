@@ -8,8 +8,12 @@ function M.telescope_create_keymaps()
     vim.keymap.set('n', '<Leader>b', function()
         require('telescope.builtin').buffers({})
     end, { desc =  "Fuzzy search buffers" })
+
     vim.keymap.set('n', '<Leader>o', function()
-        require('telescope.builtin').git_files({})
+        -- require('telescope.builtin').git_files({})
+        require("telescope").extensions.smart_open.smart_open({
+         cwd_only = true,
+        })
     end, { desc =  "Fuzzy search git files" })
     -- vim.keymap.set ('n', "<Leader>F", function () vim.cmd("FzfFiletypes") end)
     vim.keymap.set('n', '<Leader>t', function()
@@ -33,11 +37,16 @@ function M.setup()
     -- TODO check for telescope github extension too
     -- telescope.load_extension('ghcli')
     local actions = require('telescope.actions')
-    local trouble = require('trouble')
+    local open_with_trouble = require("trouble.sources.telescope").open
     -- telescope.setup{}
     local telescope = require('telescope')
+
     telescope.setup({
-        defaults = {
+       defaults = {
+         -- completion = { autocomplete = false },
+         path_display = {
+             "filename_first",
+         },
          preview = false;
          layout_strategy = "vertical",
          sorting_strategy = "ascending",  -- display results top->bottom
@@ -51,7 +60,7 @@ function M.setup()
             mappings = {
              -- see :h telescope.defaults.history
                 i = {
-                    ['<c-t>'] = trouble.open_with_trouble,
+                    ['<c-t>'] = open_with_trouble,
                     ["<C-n>"] = require('telescope.actions').cycle_history_next,
                     ["<C-p>"] = require('telescope.actions').cycle_history_prev,
 
@@ -67,9 +76,10 @@ function M.setup()
                     ['<esc>'] = actions.close,
                 },
                 n = {
-                    ['<C-t>'] = function(prompt_bufnr, mode)
-                        require('trouble.providers.telescope').open_with_trouble(prompt_bufnr, mode)
-                    end,
+                    ['<C-t>'] = open_with_trouble,
+                    -- function(prompt_bufnr, mode)
+                    --     require('trouble.providers.telescope').open_with_trouble(prompt_bufnr, mode)
+                    -- end,
                     -- ["<c-t>"] = trouble.open_with_trouble,
                     ['<esc>'] = actions.close,
                 },
@@ -117,6 +127,12 @@ function M.setup()
             -- 		-- buffer_previewer_maker = require'telescope.previewers'.buffer_previewer_maker
         },
         extensions = {
+          smart_open = {
+           -- open_buffer_indicators (default: {previous = "•", others = "∘"}
+           show_scores = true,
+            match_algorithm = "fzf",
+            disable_devicons = false,
+          },
             -- 		fzf = {
             -- 			fuzzy = true,					 -- false will only do exact matching
             -- 			override_generic_sorter = true, -- override the generic sorter

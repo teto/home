@@ -88,7 +88,6 @@
     # TODO use mine instead
     hm = {
       url = "github:teto/home-manager/scratch";
-      # url = "path:/home/teto/hm";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -124,14 +123,7 @@
     };
 
     neovim = {
-      # pinned because of https://github.com/neovim/neovim/issues/25086
-      # &rev=f246cf029fb4e7a07788adfa19f91608db7bd816
-      url = "github:neovim/neovim?dir=contrib";
-      # url = "github:teto/neovim?dir=contrib&ref=fix-wrap-field";
-      # url = "git+file:///home/teto/neovim/neovim?dir=contrib&ref=fix-wrap-field";
-      # local path fails with:
-      # error: access to absolute path '/nix/store/cmake.deps/deps.txt' is forbidden in pure eval mode (use '--impure' to override)
-      # url = "path:/home/teto/neovim/neovim/contrib";
+      url = "github:nix-community/neovim-nightly-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     neovide = {
@@ -187,7 +179,7 @@
             self.inputs.rofi-hoogle.overlay
             self.inputs.nova.overlays.default
 
-            self.inputs.nixpkgs-wayland.overlay
+            # self.inputs.nixpkgs-wayland.overlay
             # self.inputs.nix.overlays.default
           ];
           config = {
@@ -264,15 +256,20 @@
         home-manager.sharedModules = [
           # And add the home-manager module
           ./hm/profiles/common.nix
+
+          # TODO it should autoload those
           ./hm/modules/neovim.nix
           ./hm/modules/i3.nix
           ./hm/modules/bash.nix
           ./hm/modules/zsh.nix
           ./hm/modules/xdg.nix
+          ./hm/modules/package-sets.nix
 
           ./hm/profiles/neovim.nix
           ({ ... }: {
-            home.stateVersion = "23.11";
+            home.stateVersion = "24.05";
+
+            home.enableNixpkgsReleaseCheck = false;
 
           })
         ];
@@ -328,7 +325,7 @@
               '';
             };
 
-            inherit (unstablePkgs) nhs92 nhs94 nhs96;
+            inherit (unstablePkgs) nhs92 nhs94 nhs96 nhs98 nhs910 nhs912;
 
           };
 
@@ -683,7 +680,6 @@
 
       # the 'deploy' entry is used by 'deploy-rs' to deploy our nixosConfigurations
       # if it doesn't work you can always fall back to the vanilla nixos-rebuild:
-      # NIX_SSHOPTS="-F ssh_config" nixos-rebuild switch --flake '.#ovh3-prod' --target-host nova@ovh-hybrid-runner-3.devops.novadiscovery.net --use-remote-sudo
       deploy = {
         # WARN: when bootstrapping, the "nova" user doesn't exist yet and as such you should run
         # deploy .#TARGET --ssh-user root

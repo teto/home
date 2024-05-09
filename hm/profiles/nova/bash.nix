@@ -25,13 +25,12 @@ in
             (attr:
             # attrs should only contain
             # So seems like there is no way to fix those
-            # secrets.nova-runner-1.sshUser 
             lib.nameValuePair 
              (lib.toUpper "NOVA_${attr.runnerName}")
              (pkgs.hmUtils.mkRemoteBuilderDesc (attr // {
                sshUser = secrets.nova.runners.ovh1.userName;
                sshKey = secrets.nova.runners.ovh1.sshKey;
-               system = "x86_64-linux";
+               system = "x86_64-linux,i686-linux";
                maxJobs = 10;
                speedFactor = 2;
                supportedFeatures = defaultSupportedFeatures;

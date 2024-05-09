@@ -5,6 +5,15 @@ alias n1='nix develop --option builders "$NOVA_OVH1" -j0'
 alias n2='nix develop --option builders "$NOVA_AZURE2" -j0'
 # alias n3='nix develop --option builders "$NOVA_AZURE2" -j0'
 
+# Haskell related aliases{{{
+alias nhs92="nix develop \$HOME/home#nhs92";
+alias nhs94="nix develop \$HOME/home#nhs94";
+alias nhs96="nix develop \$HOME/home#nhs96";
+alias nhs98="nix develop \$HOME/home#nhs98";
+alias nhs910="nix develop \$HOME/home#nhs910";
+alias nhs912="nix develop \$HOME/home#nhs912";
+# }}}
+
 # TODO should use all runners
 # alias nall='nix develop --option builders "$NOVA_OVH1" -j0'
 alias nr="nix run "
@@ -13,6 +22,8 @@ alias nr2='nix run --option builders "$NOVA_AZURE2" -j0'
 alias nl="nix log "
 alias g="git"
 alias y=yazi
+alias j="just -g"
+alias jctl="journalctl -b0"
 
 # git aliases
 alias gap="git add -p";
@@ -25,19 +36,17 @@ alias mp="mptcpanalyzer"
 
 # nix aliases {{{
 
-# no
-alias nixos-fast="nixos-rebuild --no-build-nix --fast"
-
 
 # directories only
 alias      ld="eza -lD";
-alias      lf="eza -lF --color=always | grep -v /";
+# alias      lf="eza -lF --color=always | grep -v /";
 alias      lh="eza -dl .* --group-directories-first";
-alias      ll="eza -al --group-directories-first";
-alias      lt="eza -al --sort=modified";
+# alias      ll="eza -al --group-directories-first";
+# alias      lt="eza -al --sort=modified -snew";
 
 
 # advanced
+# TODO add --hyperlink
 alias ls='eza --color=always --group-directories-first --icons=auto'
 alias ll='eza -la --icons --octal-permissions --group-directories-first'
 alias l='eza -bGF --header --git --color=always --group-directories-first --icons=auto'
@@ -46,7 +55,7 @@ alias la='eza --long --all --group --group-directories-first'
 alias lx='eza -lbhHigUmuSa@ --time-style=long-iso --git --color-scale --color=always --group-directories-first --icons=auto'
 
 alias lS='eza -1 --color=always --group-directories-first --icons=auto'
-alias lt='eza --tree --level=2 --color=always --group-directories-first --icons=auto'
+alias lt='eza --tree --level=2 --color=always --group-directories-first --icons=auto -snew'
 alias l.="eza -a | grep -E '^\.'"
 
 # ls related updates {{{
@@ -67,7 +76,7 @@ alias m="neomutt -F \"\$XDG_CONFIG_HOME/mutt/muttrc\""
 alias l="nvim +view"
 alias s="sxiv"
 # parce que apvlv est plus libre que zathura
-alias z="apvlv"
+# alias z="apvlv"
 alias q="qutebrowser"
 # }}}
 

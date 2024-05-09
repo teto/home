@@ -11,9 +11,11 @@ if not available then
     return
 end
 
--- TODO add full path to gcc
+-- generated
+local nix_deps = require'generated-by-nix'
+
 require"nvim-treesitter.install".compilers = {
-  "/nix/store/xq8920m5mbd83vdlydwli7qsh67gfm5v-gcc-wrapper-13.2.0/bin/gcc"
+  nix_deps.gcc_path
 }
 
 -- ts_config.config = ts_config.setup({

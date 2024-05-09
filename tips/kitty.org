@@ -1,4 +1,9 @@
 
+* debug kitty input 
+
+As advised here https://github.com/kovidgoyal/kitty/issues/2191#issuecomment-565353150
+--debug-keyboard
+
 
 one can send system notifications via kitty
 vim.api.nvim_chan_send(vim.v.stderr, '\027]99;;Hello world\027\\')

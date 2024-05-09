@@ -506,7 +506,7 @@ in
     # snippets.enable = true;
 
     # take the one from the flake
-    package = myNeovimUnwrapped;
+    # package = myNeovimUnwrapped;
 
     # source doesn't like `stdpath('config').'`
     # todo should use mkBefore ${config.programs.neovim.generatedInitrc}

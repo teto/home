@@ -1,178 +1,26 @@
 { config, flakeInputs, pkgs, lib, system, ... }:
 let
 
-  pass-custom = (pkgs.pass.override { waylandSupport = true; }).withExtensions (ext:
-    with ext; [ pass-import pass-tail ]);
 
+  fontsPkgs = with pkgs; [
+      # fonts
+      ubuntu_font_family
+      inconsolata # monospace
+      noto-fonts-cjk # asiatic
+      nerdfonts # otherwise no characters
+      # (pkgs.nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; })
 
-  devPkgs = with pkgs; [
-    # TODO pass to vim makeWrapperArgs
-    # nodePackages.bash-language-server
-    # just in my branch :'(
-    # luaPackages.lua-lsp
-    # gdb-debug = prev.enableDebgging prev.gdb ;
-    # gitAndTools.git-annex # fails on unstable
-    # gitAndTools.git-remote-hg
-    # nix-prefetch-scripts # broken
+      # corefonts # microsoft fonts  UNFREE
+      font-awesome_5
+      source-code-pro
+      dejavu_fonts
+      # Adobe Source Han Sans
+      source-han-sans #sourceHanSansPackages.japanese
+      fira-code-symbols # for ligatures
+      iosevka
 
-    (backblaze-b2.override({ execName = "b2";}))
+    ];
 
-    # editorconfig-core-c
-    # for fuser, useful when can't umount a directory
-    # https://unix.stackexchange.com/questions/107885/busy-device-on-umount
-    automake
-    fswatch # fileevent watcher
-    fx
-    gdb
-    gnum4 # hum
-    psmisc
-    rbw
-    util-linux # for lsns (namespace listing)
-
-	# haxe # to test neovim developement
-    eza # to list files
-    gitAndTools.diff-so-fancy # todo install it via the git config instead
-    gitAndTools.gh # github client
-    gitAndTools.git-absorb
-    gitAndTools.git-crypt
-    # gitAndTools.git-extras
-    gitAndTools.git-recent # check recently touched branches
-    gitAndTools.gitbatch # to fetch form several repos at once
-    gitAndTools.lab # to interact with gitlab
-
-	haskellPackages.fast-tags
-    hurl # http tester
-
-    fre # generate a frequency database
-    
-    perf-tools # to interpret 
-
-	inotify-tools # for inotify-wait notably
-    just # to read justfiles, *replace* Makefile
-    ncurses.dev # for infocmp
-    # neovide
-    # neovim-remote # broken for latex etc
-    nix-doc # can generate tags for nix
-    nix-update # nix-update <ATTR> to update a software
-    nix-index # to list package contents
-    nix-top # to list current builds
-    nixpkgs-fmt
-    nixpkgs-review # to help review nix packages
-    # nodePackages."@bitwarden/cli" # 'bw' binary # broken
-    patchutils # for interdiff
-    pcalc # cool calc, see insect too
-    process-compose # docker-compose - like
-    # rpl # to replace strings across files
-    universal-ctags # there are many different ctags, be careful !
-    tio # serial console reader
-    whois
-    envsubst # replace templated files with variables
-    zeal # doc for developers
-  ];
-
-  imPkgs = with pkgs; [
-    # gnome.california # fails
-    # khard # see khal.nix instead ?
-    # libsecret  # to consult
-    # newsboat #
-    mujmap # to sync notmuch tags across jmap 
-    vlc
-    # leafnode dovecot22 dovecot_pigeonhole fetchmail procmail w3m
-    # mairix mutt msmtp lbdb contacts spamassassin
-    # element-desktop # TODO this should go into nix profile install
-    popcorntime
-  ];
-
-
-  desktopPkgs =
-    let
-      # wrap moc to load config from XDG_CONFIG via -C
-      moc-wrapped = pkgs.symlinkJoin {
-        name = "moc-wrapped-${pkgs.moc.version}";
-        paths = [ pkgs.moc ];
-        buildInputs = [ pkgs.makeWrapper ];
-        # passthru.unwrapped = mpv;
-        postBuild = ''
-          # wrapProgram can't operate on symlinks
-          rm "$out/bin/mocp"
-          makeWrapper "${pkgs.moc}/bin/mocp" "$out/bin/mocp" --add-flags "-C $XDG_CONFIG_HOME/moc/config"
-          # rm "$out/bin/mocp"
-        '';
-      };
-
-    in
-    with pkgs; [
-      # TODO
-      # apvlv # broken
-      # buku # broken
-      # gcalc
-      # nomacs # image viewer
-      # nyxt      # lisp browser
-      # pulseaudioFull # for pactl
-      # replace with rust-wormhole
-      # requires xdmcp https://github.com/freedesktop/libXdmcp
-      # smplayer # GUI around mpv
-      # sxiv # simple image viewer
-      # unstable.transmission_gtk  # bittorrent client
-      # vimiv # image viewer
-      # ytfzf # broken browse youtube
-      # zathura # broken
-	  usbutils
-      bandwhich # to monitor per app bandwidth
-      desktop-file-utils # to get desktop
-      dogdns # dns solver "dog"
-      evince # succeed where zathura/mupdf fail
-      # font-manager
-      gnome.adwaita-icon-theme # else nothing appears
-      gnome.eog # eye of gnome = image viewer / creates a collision
-      gnome.file-roller # for GUI archive handling
-      hunspellDicts.fr-any
-      imv # image viewer
-      jq # to run json queries
-      lazygit # kinda like tig
-      libnotify
-      moc-wrapped # music player
-      mupdf.bin # evince does better too
-
-      ## Alternatives to consider:
-      # - gdu
-      # - pdu
-      # - dua
-      # ncdu # to see disk usage
-      dua
-      du-dust # dust binary: rust replacement of du
-      duf # better df (rust)
-      
-      ncpamixer # pulseaudio TUI mixer
-      noti # send notifications when a command finishes
-      ouch # to (de)compress files
-      # papis # library manager
-      pass-custom # pass with extensions
-      pavucontrol
-      pkgs.networkmanagerapplet # should
-      procs # Rust replacement for 'ps'
-      qiv # image viewer
-      qtpass
-      ranger # or joshuto ? see hm configuration
-      restic  # to backup photos to backblaze
-      # rbw # Rust bitwarden unofficial client
-      ripgrep
-      rofi-pass # rofi-pass it's enabled in the HM module ?
-      rsync
-      sd # rust cli for search & replace
-      shared-mime-info # temporary fix for nautilus to find the correct files
-      simple-scan
-      sops # password 'manager'
-      sublime3
-      sysz # fzf for systemd
-      translate-shell # call with `trans`
-      unzip
-      wireshark
-      wttrbar # for meteo
-      xarchiver # to unpack/pack files
-      xdg-utils
-    ]
-  ;
 in
 {
 
@@ -201,15 +49,17 @@ in
     enable = true;
     enableZshIntegration = true;
     enableBashIntegration = true;
-    options = [ "--cmd j" ];
+    options = [ "--cmd k" ];
   };
 
+  package-sets = {
+    developer = true;
+    enableDesktopPackages = true;
+  };
 
   # rename to fn, accept a parameter for optional
   home.packages =
-      desktopPkgs 
-   ++ devPkgs
-   ++ imPkgs
+      fontsPkgs
    ++ (with pkgs; [
       # pkgs.up # live preview of pipes
       # pkgs.peek # GIF recorder  BROKEN
@@ -217,22 +67,8 @@ in
       # pinentry-bemenu
       pinentry-rofi
       timg
+      # pass-custom
 
-      # fonts
-      ubuntu_font_family
-      inconsolata # monospace
-      noto-fonts-cjk # asiatic
-      nerdfonts # otherwise no characters
-      # (pkgs.nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; })
-
-      # corefonts # microsoft fonts  UNFREE
-      font-awesome_5
-      source-code-pro
-      dejavu_fonts
-      # Adobe Source Han Sans
-      source-han-sans #sourceHanSansPackages.japanese
-      fira-code-symbols # for ligatures
-      iosevka
 
     ])
   ;

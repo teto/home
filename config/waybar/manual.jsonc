@@ -43,6 +43,15 @@
 		"power-saver": ""
 	  }
 	},
+    "idle_inhibitor": {
+	 "start-activated" : true,
+
+	   "format": "inhibitor: {icon}",
+	   "format-icons": {
+		   "activated": "",
+		   "deactivated": ""
+	   }
+    },
     "backlight": {
         "format": "{percent}% {icon}",
         "format-icons": ["", ""]
@@ -58,5 +67,9 @@
 		"tooltip": true,
 		"tooltip-format": "Power Options",
 		"on-click": "wlogout"
-	}
+	},
+    "tray": {
+        // "icon-size": 21,
+        "spacing": 10
+    }
 }

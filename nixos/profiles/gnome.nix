@@ -19,6 +19,34 @@
   # optional to use google/nextcloud calendar
   # External calendar such as google/nextcloud can be only added via the gnome-control-center:
 
-  # $ nix-shell -p gnome.gnome-control-center --run "gnome-control-center"
 
+
+
+
+  # read the doc at https://nixos.wiki/wiki/GNOME
+
+  # $ nix-shell -p gnome.gnome-control-center --run "gnome-control-center"
+  # services.xserver = {
+  #   enable = true;
+  #   # displayManager.gdm.enable = true;
+  #   desktopManager.gnome.enable = true;
+  # };
+  # environment.gnome.excludePackages = (with pkgs; [
+  #   gnome-photos
+  #   gnome-tour
+  #   gedit # text editor
+  # ]) ++ (with pkgs.gnome; [
+  #   cheese # webcam tool
+  #   gnome-music
+  #   gnome-terminal
+  #   epiphany # web browser
+  #   geary # email reader
+  #   evince # document viewer
+  #   gnome-characters
+  #   totem # video player
+  #   tali # poker game
+  #   iagno # go game
+  #   hitori # sudoku game
+  #   atomix # puzzle game
+  # ]);
 }

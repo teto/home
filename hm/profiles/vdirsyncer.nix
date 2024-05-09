@@ -3,6 +3,6 @@
 
 
   services.vdirsyncer = {
-    # enable = false;
+    enable = true;
   };
 }

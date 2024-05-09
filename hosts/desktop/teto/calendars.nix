@@ -8,9 +8,16 @@ in
 {
 
  imports = [
-   ./programs/vdirsyncer.nix
+   # ./programs/vdirsyncer.nix
 
  ];
+
+  programs.vdirsyncer = {
+    enable = true;
+    # Provide package from stable channel ?
+    # package = pkgs.vdirsyncerStable;  
+
+  };
 
  home.packages = with pkgs; [
     # need gnome-accounts to make it work
@@ -64,7 +71,7 @@ in
       };
 
       vdirsyncer = {
-        enable = false;
+        enable = true;
         # null doesn't look too interesting :s 
         collections = ["from a"  "from b"];
         metadata = [ "color" "displayname" ];

@@ -4,14 +4,15 @@ with lib;
 let
   cfg = config.package-sets;
 
+  pass-custom = (pkgs.pass.override { waylandSupport = true; }).withExtensions (ext:
+    with ext; [ pass-import pass-tail ]);
+
 in
 {
 
   options = {
     package-sets = {
 
-
-      commonToAll = mkEnableOption "packages common to all";
 
       enableDesktopPackages = mkEnableOption "desktop packages";
       enableServerPackages = mkEnableOption "server packages";
@@ -28,6 +29,9 @@ in
 
       enableIMPackages = mkEnableOption "IM packages";
       wifiPackages = mkEnableOption "wifi packages";
+      energyPackages = mkEnableOption "energy management packages";
+      enableGaming = mkEnableOption "Gaming packages";
+      waylandPackages = mkEnableOption "Wayland packages";
     };
 
   };
@@ -40,6 +44,14 @@ in
 
   config = mkMerge [
     ({
+      # INSTALLED whatever the config
+      home.packages = with pkgs; [
+        just # to read justfiles, *replace* Makefile
+        # nvim
+      ];
+    })
+
+    ({
       home.packages = with pkgs; [
 
         sublime3
@@ -48,14 +60,13 @@ in
         wireshark
         wttrbar # for meteo
         xarchiver # to unpack/pack files
-        xdg-utils
       ];
 
     })
 
     (mkIf cfg.enableDesktopPackages {
 
-      home.packages = [
+      home.packages = with pkgs; [
         # anki          # spaced repetition system
         # hopefully we can remove this from the environment
         # it's just that I can't setup latex correctly
@@ -66,6 +77,85 @@ in
         pkgs.gnome.nautilus # demande webkit/todo replace by nemo ?
         # mcomix # manga reader
         pkgs.popcorntime
+        # gnome.california # fails
+        # khard # see khal.nix instead ?
+        # libsecret  # to consult
+        # newsboat #
+        # mujmap # to sync notmuch tags across jmap 
+        pkgs.vlc
+        # leafnode dovecot22 dovecot_pigeonhole fetchmail procmail w3m
+        # mairix mutt msmtp lbdb contacts spamassassin
+        # element-desktop # TODO this should go into nix profile install
+        # mcomix # manga reader
+      # TODO
+      # apvlv # broken
+      # buku # broken
+      # gcalc
+      # nomacs # image viewer
+      # nyxt      # lisp browser
+      # pulseaudioFull # for pactl
+      # replace with rust-wormhole
+      # requires xdmcp https://github.com/freedesktop/libXdmcp
+      # smplayer # GUI around mpv
+      # sxiv # simple image viewer
+      # unstable.transmission_gtk  # bittorrent client
+      # vimiv # image viewer
+      # ytfzf # broken browse youtube
+      # zathura # broken
+	  usbutils
+      bandwhich # to monitor per app bandwidth
+      desktop-file-utils # to get desktop
+      dogdns # dns solver "dog"
+      evince # succeed where zathura/mupdf fail
+      # font-manager
+      gnome.adwaita-icon-theme # else nothing appears
+      gnome.eog # eye of gnome = image viewer / creates a collision
+      gnome.file-roller # for GUI archive handling
+      hunspellDicts.fr-any
+      imv # image viewer
+      jq # to run json queries
+      lazygit # kinda like tig
+      libnotify
+      moc-wrapped # music player
+      mupdf.bin # evince does better too
+
+      ## Alternatives to consider:
+      # - gdu
+      # - pdu
+      # - dua
+      # ncdu # to see disk usage
+      dua
+      du-dust # dust binary: rust replacement of du
+      duf # better df (rust)
+      
+      ncpamixer # pulseaudio TUI mixer
+      noti # send notifications when a command finishes
+      ouch # to (de)compress files
+      # papis # library manager
+      pass-custom # pass with extensions
+      pavucontrol
+      pkgs.networkmanagerapplet # should
+      procs # Rust replacement for 'ps'
+      qiv # image viewer
+      qtpass
+      ranger # or joshuto ? see hm configuration
+      restic  # to backup photos to backblaze
+      # rbw # Rust bitwarden unofficial client
+      ripgrep
+      rofi-pass # rofi-pass it's enabled in the HM module ?
+      rsync
+      sd # rust cli for search & replace
+      shared-mime-info # temporary fix for nautilus to find the correct files
+      sublime3
+      sysz # fzf for systemd
+      translate-shell # call with `trans`
+      unzip
+      wireshark
+      wttrbar # for meteo
+      xarchiver # to unpack/pack files
+      xdg-utils
+      xdg-terminal-exec # necessary for gio launch to launch terminal
+
       ];
 
     })
@@ -77,12 +167,9 @@ in
         # hopefully we can remove this from the environment
         # it's just that I can't setup latex correctly
         pkgs.libreoffice
+        pkgs.simple-scan
 
-        # take the version from stable ?
-        # qutebrowser # broken keyboard driven fantastic browser
         pkgs.gnome.nautilus # demande webkit/todo replace by nemo ?
-        # mcomix # manga reader
-        pkgs.popcorntime
       ];
 
     })
@@ -127,16 +214,80 @@ in
     })
 
     (mkIf cfg.developer {
-      home.packages = [
+      home.packages = with pkgs; [
         docker-credential-helpers
-        developer 
+        nix-diff
         dasht # ~ zeal but in terminal
-        gitu
+        sops # password 'manager'
+        # TODO pass to vim makeWrapperArgs
+        # nodePackages.bash-language-server
+        # just in my branch :'(
+        # luaPackages.lua-lsp
+        # gdb-debug = prev.enableDebgging prev.gdb ;
+        # gitAndTools.git-annex # fails on unstable
+        # gitAndTools.git-remote-hg
+        # nix-prefetch-scripts # broken
+
+        (backblaze-b2.override({ execName = "b2";}))
+
+        # editorconfig-core-c
+        # for fuser, useful when can't umount a directory
+        # https://unix.stackexchange.com/questions/107885/busy-device-on-umount
+        automake
+        lurk  # a rust strace
+        fswatch # fileevent watcher
+        fx # json reader
+        gdb
+        gnum4 # hum
+        # psmisc # ps -a for python ?
+        rbw
+        util-linux # for lsns (namespace listing)
+
+        # haxe # to test neovim developement
+        eza # to list files
+        gitAndTools.diff-so-fancy # todo install it via the git config instead
+        gitAndTools.gh # github client
+        gitAndTools.git-absorb
+        gitAndTools.git-crypt
+        # gitAndTools.git-extras
+        gitAndTools.git-recent # check recently touched branches
+        gitAndTools.gitbatch # to fetch form several repos at once
+        gitAndTools.lab # to interact with gitlab
+        gitu  # like lazygit
+
+        haskellPackages.fast-tags # generate TAGS file for vim
+        hurl # http tester
+
+        fre # generate a frequency database
+        
+        perf-tools # to interpret 
+
+        inotify-tools # for inotify-wait notably
+        ncurses.dev # for infocmp
+        # neovide
+        # neovim-remote # broken for latex etc
+        nix-doc # can generate tags for nix
+        nix-update # nix-update <ATTR> to update a software
+        nix-index # to list package contents
+        nix-top # to list current builds
+        nixpkgs-fmt
+        nixfmt-rfc-style # the official one
+        nixpkgs-review # to help review nix packages
+        # nodePackages."@bitwarden/cli" # 'bw' binary # broken
+        patchutils # for interdiff
+        process-compose # docker-compose - like
+        # rpl # to replace strings across files
+        universal-ctags # there are many different ctags, be careful !
+        tio # serial console reader
+        whois
+        envsubst # replace templated files with variables
+        zeal # doc for developers
+
       ];
 
     })
     (mkIf cfg.scientificSoftware {
-      home.packages = [
+      home.packages = with pkgs; [
 
         fend # rust unit convertor
         pcalc # cool calc, see insect too
@@ -144,6 +295,53 @@ in
       ];
 
     })
+
+    (mkIf cfg.enableGaming {
+      home.packages = with pkgs; [
+
+        lutris
+
+      ];
+
+    })
+
+    (mkIf cfg.waylandPackages {
+      home.packages = with pkgs; [
+        cliphist
+        clipcat # rust
+
+        # TODO test https://github.com/sentriz/cliphist
+        foot # terminal
+        # use it with $ grim -g "$(slurp)"
+        grim # replace scrot/flameshot
+        kanshi # autorandr-like
+        kickoff # transparent launcher for wlr-root
+        fuzzel  # rofi-like
+        wofi # rofi-like
+        slurp # capture tool
+        # lavalauncher # TODO a tester
+        wf-recorder # for screencasts
+        # bemenu as a dmenu replacement
+        wl-clipboard # wl-copy / wl-paste
+        wdisplays # to show 
+        swaybg # to set wallpaper
+        swayimg # imageviewer
+        swaynotificationcenter # top cool
+        swaynag-battery # https://github.com/NixOS/nixpkgs/pull/175905
+        sway-launcher-desktop # fzf-based launcher
+        waypaper # sets wallpapers
+        wlprop # like xprop, determines window parameters
+        # swappy # e https://github.com/jtheoof/swappy
+        # https://github.com/artemsen/swaykbdd # per window keyboard layout
+        # wev # event viewer https://git.sr.ht/~sircmpwn/wev/
+        wl-gammactl # to control gamma
+        wlr-randr # like xrandr
+
+        # wayprompt
+        wev # equivalent of xev, to find the name of keys for instance
+        wshowkeys
+      ];
+})
 
   ];
 }

@@ -21,6 +21,10 @@ add_newline = false
 #   $character\
 #   """
 
+# Move the directory to the second line
+format = """$all$hostname$character
+"""
+
 [aws]
 disabled = true
 # displayed_items
@@ -36,6 +40,10 @@ displayed_items = "region"
 success_symbol = "➜"     # The "symbol" segment is being set to "➜"
 vicmd_symbol = "v"  # "❮"
 # error_symbol
+
+[hostname]
+ssh_only = true
+format = "$ssh_symbol$hostname "
 
 # Disable the package module, hiding it from the prompt completely
 [package]

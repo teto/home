@@ -26,6 +26,7 @@
   time.timeZone = "Europe/Paris";
   # time.timeZone = "Asia/Tokyo";
 
+  # todo move to package sets
   environment.systemPackages = with pkgs; [
     ssh-to-age # useful everywhere
     man-pages # because man tcp should always be available

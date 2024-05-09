@@ -31,7 +31,11 @@ edit = [
 	{ run = '${EDITOR:=nvim} "$@"', desc = "$EDITOR", block = true, for = "unix" },
 ]
 open = [
-	{ run = 'xdg-open "$@"',                desc = "Open", for = "linux" },
+	{ run = 'xdg-open "$1"',                desc = "xdg-open", for = "linux" , block = true },
+]
+open-external = [
+	# todo use gio launch ?
+	{ run = 'xdg-open "$1"',                desc = "xdg-open", for = "linux" , block = true },
 ]
 reveal = [
 	{ run = '''exiftool "$1"; echo "Press enter to exit"; read _''', block = true, desc = "Show EXIF", for = "unix" },
@@ -79,7 +83,7 @@ rules = [
 	# , "reveal"
 	# { mime = "application/octet-stream",     use = [ "extract_zlib" ] },
 	# https://yazi-rs.github.io/docs/configuration/yazi/#open
-  { name = "*.jsonzlib", use = [ "extract_zlib" ] },
+  { name = "*.jsonzlib", use = [ "extract_zlib", "open" ] },
    { mime = "*", use = [ "open", "reveal" ] }
 
 ]
@@ -95,7 +99,7 @@ suppress_preload = false
 [plugin]
 # https://yazi-rs.github.io/docs/configuration/yazi/#plugin
 preloaders = [
-	{ name = "*", cond = "!mime", run = "mime", multi = true, prio = "high" },
+	# { name = "*", cond = "!mime", run = "mime", multi = true, prio = "high" },
 	# Image
 	{ mime = "image/vnd.djvu", run = "noop" },
 	{ mime = "image/*",        run = "image" },

@@ -23,7 +23,7 @@
       # AWS_VAULT_PASS_PASSWORD_STORE_DIR
       AWS_VAULT_PASS_PREFIX="nova";
       AWS_VAULT_BACKEND="pass";
-      SUDO_PROMPT="	a[sudo] please enter a password: ";
+      # SUDO_PROMPT="	a[sudo] please enter a password: ";
      };
 
     # "ignorespace"
@@ -52,12 +52,6 @@
       lh="eza -dl .* --group-directories-first";
       ll="eza -al --group-directories-first";
       lt="eza -al --sort=modified";
-      # }}}
-
-      # Haskell related aliases{{{
-      nhs92 = "nix develop $HOME/home#nhs92";
-      nhs94 = "nix develop $HOME/home#nhs94";
-      nhs96 = "nix develop $HOME/home#nhs96";
       # }}}
 
       ns = "nix-shell";

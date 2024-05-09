@@ -13,10 +13,11 @@
 
     # ../../../hm/profiles/emacs.nix
     ../../../hm/profiles/nova.nix
-    # ../../../hm/profiles/qutebrowser.nix
+    ../../../hm/profiles/qutebrowser.nix
 
    # ../desktop/teto/default.nix  # Track for regressions
 
+   ../../desktop/teto/calendars.nix
    ../../desktop/teto/programs/neovim.nix
    ../../desktop/teto/services/swaync.nix
    ../../desktop/teto/contacts.nix
@@ -35,7 +36,7 @@
     ../../../hm/profiles/experimental.nix
     # ../../hm/profiles/syncthing.nix
     # ../../hm/profiles/alot.nix
-    # ../../hm/profiles/vscode.nix #  provided by nova-nix config
+    ../../../hm/profiles/vscode.nix #  provided by nova-nix config
   ];
 
   package-sets = {

@@ -27,4 +27,6 @@ in
  nhs94 = mkGhcShell "94";
  nhs96 = mkGhcShell "96";
  nhs98 = mkGhcShell "98";
+ nhs910 = mkGhcShell "910";
+ nhs912 = mkGhcShell "912";
 }

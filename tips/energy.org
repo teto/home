@@ -1,0 +1,6 @@
+
+cpupower frequency-info
+powertop
+perf-bias: 8
+
+upower -i /org/freedesktop/UPower/devices/battery_BAT0

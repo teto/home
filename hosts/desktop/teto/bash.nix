@@ -25,7 +25,7 @@ flakeInputs,
 
     # 
     initExtra = ''
-     source  $XDG_CONFIG_HOME/zsh/aliases.sh
+     source  $XDG_CONFIG_HOME/bash/aliases.sh
      '';
    };
  }

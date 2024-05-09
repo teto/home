@@ -7,6 +7,20 @@ return {
    opts = {},
  },
  {
+  "danielfalk/smart-open.nvim",
+  branch = "0.2.x",
+  config = function()
+    require("telescope").load_extension("smart_open")
+  end,
+  dependencies = {
+    -- "kkharji/sqlite.lua", -- installed via nix
+    -- Only required if using match_algorithm fzf
+    -- { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+    -- Optional.  If installed, native fzy will be used when match_algorithm is fzy
+    -- { "nvim-telescope/telescope-fzy-native.nvim" },
+  },
+},
+ {
   -- :DataViewer
   'VidocqH/data-viewer.nvim'
  },
@@ -40,38 +54,42 @@ return {
  --  -- 'monkoose/fzf-hoogle.vim'
  --  dir = '/home/teto/fzf-hoogle.vim'
  -- }, 
-{
- -- neotests has extensions for haskell and playwright
- -- :Neotest summary
-  "nvim-neotest/neotest",
-  dependencies = {
-   "nvim-neotest/nvim-nio",
-    -- "nvim-lua/plenary.nvim",
-    -- "nvim-treesitter/nvim-treesitter",
-    "antoinemadec/FixCursorHold.nvim"
-  },
-  config = function ()
-   -- https://github.com/nvim-neotest/neotest#usage
-   -- require("neotest").run.run()
-   require("neotest").setup({
-     adapters = {
-      require('neotest-haskell') {
-        -- Default: Use stack if possible and then try cabal
-        build_tools = { 'stack', 'cabal' },
-        -- Default: Check for tasty first and then try hspec
-        frameworks = { 'tasty', 'hspec', 'sydtest' },
-      },      
-       -- require("neotest-plenary"),
-       -- require("neotest-vim-test")({
-       --   ignore_file_types = { "python", "vim", "lua" },
-       -- }),
-     },
-   })
-  end
-},
+
+-- {
+--  -- neotests has extensions for haskell and playwright
+--  -- :Neotest summary
+--   "nvim-neotest/neotest",
+--   dependencies = {
+--    "nvim-neotest/nvim-nio",
+--     -- "nvim-lua/plenary.nvim",
+--     -- "nvim-treesitter/nvim-treesitter",
+--     "antoinemadec/FixCursorHold.nvim"
+--   },
+--   config = function ()
+--    -- https://github.com/nvim-neotest/neotest#usage
+--    -- require("neotest").run.run()
+--    require("neotest").setup({
+--      adapters = {
+--       require('neotest-haskell') {
+--         -- Default: Use stack if possible and then try cabal
+--         build_tools = { 'stack', 'cabal' },
+--         -- Default: Check for tasty first and then try hspec
+--         frameworks = { 'tasty', 'hspec', 'sydtest' },
+--       },      
+--        -- require("neotest-plenary"),
+--        -- require("neotest-vim-test")({
+--        --   ignore_file_types = { "python", "vim", "lua" },
+--        -- }),
+--      },
+--    })
+--   end
+
+-- },
 -- {
 --  'Exafunction/codeium.vim'
 -- },
+
+
  {
    'TrevorS/uuid-nvim',
    lazy = true,
@@ -82,6 +100,7 @@ return {
      }
    end,
  },
+
  { dir = '/home/teto/neovim/jap.nvim',
   config = function ()
     vim.keymap.set('n', '<Leader>j', [[<Cmd>lua require'jap-nvim'.show_info()<CR>]])

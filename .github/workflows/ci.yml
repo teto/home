@@ -17,4 +17,13 @@ jobs:
     - name: Build server and client
       run: |
         nix build .#nvim --accept-flake-config
+    - name: Update firefox-addons
+      run: |
+        just firefox-addons
+    - name: Update vim plugins
+      run: |
+        just vimPlugins
+    - name: Lint
+      run: |
+        just lint
     # - run: nixos-rebuild --flake .#laptop --show-trace build

@@ -8,7 +8,7 @@ function M:peek()
   --     -- level = "info",
   -- }
   -- ya.dbg("LOL")
-  ya.err("LOL called with "..tostring(self.file.url))
+  ya.dbg("chunks plugins called with "..tostring(self.file.url))
 
   ya.preview_widgets(self, { ui.Paragraph.parse(self.area, "Loading chunks...") })
   local child = Command("view_json")

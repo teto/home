@@ -12,6 +12,7 @@ zsh --help shows different commands:
 
 
 https://unix.stackexchange.com/questions/74184/how-to-save-current-command-on-zsh
+
 push-line mapping
 
 * bypass local config

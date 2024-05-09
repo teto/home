@@ -6,6 +6,9 @@ autoreconfPhase
 configurePhase
 make tests/functional/flakes/show.sh.test
 
+* the registry (!)
+
+the only way to avoid a redownload of the global registry is to pass --flake-registry ''
 
 * how to package npm packages ?
 

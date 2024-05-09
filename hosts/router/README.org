@@ -6,3 +6,11 @@
   https://pcengines.github.io/apu2-documentation/firmware_flashing/#corebootrom-flashing
   boot with iomen=relaxed
   https://teklager.se/en/knowledge-base/apu-bios-upgrade/
+
+
+
+# sudo brctl stp br0 on
+# sudo sysctl -w     "net.ipv6.conf.all.accept_ra"=0;
+# sudo sysctl -w     "net.ipv6.conf.all.disable_ipv6"=1;
+# sudo sysctl -w     "net.ipv6.conf.default.disable_ipv6"=1;
+# sudo sysctl -w     "net.ipv6.conf.lo.disable_ipv6"=1;

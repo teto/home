@@ -20,6 +20,7 @@
       ../../../hm/teto/common.nix
       ../../../hm/profiles/common.nix
       ../../../hm/profiles/wezterm.nix
+      ../../../hm/profiles/mpv.nix
     # flakeInputs.ironbar.homeManagerModules.default
 
     ./calendars.nix
@@ -51,7 +52,7 @@
     ../../../hm/profiles/extra.nix
     ../../../hm/profiles/vdirsyncer.nix
     ../../../hm/profiles/japanese.nix
-    ../../../hm/profiles/fcitx.nix
+    # ../../../hm/profiles/fcitx.nix
     ../../../hm/profiles/nova.nix
     ../../../hm/profiles/vscode.nix
     ../../../hm/profiles/extra.nix
@@ -102,24 +103,7 @@
   # seulemt pour X
   # programs.feh.enable = true;
   # for programs not merged yet
-  home.packages = let 
-
-  # the kind of packages u don't want to compile
-  # TODO les prendres depuis un channel avec des binaires ?
-  # with flakeInputs.nixos-stable.legacyPackages.${pkgs.system};
-  heavyPackages =  [
-    # anki          # spaced repetition system
-    # hopefully we can remove this from the environment
-    # it's just that I can't setup latex correctly
-    pkgs.libreoffice
-
-	# take the version from stable ?
-    # qutebrowser # broken keyboard driven fantastic browser
-    pkgs.gnome.nautilus # demande webkit/todo replace by nemo ?
-    # mcomix # manga reader
-  ];
-
-  in
+  home.packages = 
    with pkgs; [
 
       # mdp # markdown CLI presenter
@@ -130,23 +114,21 @@
     # gnome.gnome-maps
     # xorg.xwininfo # for stylish
     pciutils # for lspci
-    ncdu # to see disk usage
     moar # test as pager
     tailspin  #  a log viewer based on less ("spin" or "tsspin" is the executable)
 
     # nixfmt  # aliased to nixfmt-rfc-style, use the latter to avoid the warning
     nixfmt-rfc-style # 
-    nix-output-monitor
+    nix-output-monitor # 'nom'
     presenterm # for presentations from terminal/markdown (in rust, supports images, pretty cool)
 
     lutris # for gaming
 
-      sioyek # pdf reader
-     jaq # jq in rust
+    sioyek # pdf reader
+    jaq # jq in rust
 	viu # a console image viewer
-      wally-cli # to flash ergodox keyboards
-      wine
-    libreoffice
+    wally-cli # to flash ergodox keyboards
+    wine
 
 	# take the version from stable ?
     # qutebrowser # broken keyboard driven fantastic browser
@@ -166,13 +148,19 @@
     unar # used to view archives by yazi
     # poppler for pdf preview
     memento # broken capable to display 2 subtitles at same time
-    rio # xdg-terminal
-   ] 
-   ++ heavyPackages;
 
+    rofi-rbw-wayland
+   ] 
+   ;
+
+
+  package-sets = {
+
+    enableOfficePackages = true;
+  };
   # package-sets.enableDesktopGUIPackages = true;
 
-  services.nextcloud-client.enable = false;
+  services.nextcloud-client.enable = true;
 
   home.sessionVariables = {
    # TODO create symlink ?

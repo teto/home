@@ -4,11 +4,16 @@
 # NIXPKGS_REPO ?= ~/nixpkgs
 
 # Add justfile() function, returning the current justfile, and justfile_directory()
-
+# NIXPKGS_REPO := x'~/nixpkgs' # only on master
+NIXPKGS_REPO := env_var('HOME') / 'nixpkgs'
+DOCTOR_REPO := "/home/teto/nova/doctor"
 
 BLOG_FOLDER := "${HOME}/blog"
 
+# loads variables from .env
+set dotenv-load
 
+# backup my photo folder
 backup-photos \
   $AWS_ACCESS_KEY_ID=`pass show self-hosting/backblaze-restic-backup-key/username` $AWS_SECRET_ACCESS_KEY=`pass show self-hosting/backblaze-restic-backup-key/password` :
   # le --password-command c'est RESTIC_PASSWORD_FILE
@@ -20,6 +25,9 @@ systemd-credentials:
   # systemd-ask-password -n | systemd-creds encrypt --name=foo-secret -p - - 
   systemd-creds encrypt --name=foo-secret -p INPUT OUTPUT
 
+nixpkgs-update-luarocks:
+  nix run '.#luarocks-packages-updater'
+
 update-kubeconfig: # Update
   aws eks update-kubeconfig --name jk-dev --profile nova-sandbox --user-alias jk-dev
 
@@ -30,7 +38,7 @@ fortunes:
   mkdir -p ~/.local/share/matt
   strfile -c % fortunes/jap.txt ~/.local/share/matt/jap.txt.dat   
 
-# overlays/firefox/addons.nix:
+# Update the nix derivations for firefox plugins
 firefox-addons:
   mozilla-addons-to-nix overlays/firefox/addons.json overlays/firefox/generated.nix
 
@@ -43,13 +51,7 @@ lint-lua:
 	stylua config/nvim/init.lua
 
 # deploy my router
-# sudo brctl stp br0 on
-# sudo sysctl -w     "net.ipv6.conf.all.accept_ra"=0;
-# sudo sysctl -w     "net.ipv6.conf.all.disable_ipv6"=1;
-# sudo sysctl -w     "net.ipv6.conf.default.disable_ipv6"=1;
-# sudo sysctl -w     "net.ipv6.conf.lo.disable_ipv6"=1;
 deploy-router:
-	# --auto-rollback false --magic-rollback false
 	# we MUST skip checks else it fails
 	# deploy .\#router  -s  --auto-rollback false --magic-rollback false
 	deploy .\#router  -s 
@@ -63,16 +65,13 @@ deploy-neotokyo:
 
 # regenerate my email contacts
 # (to speed up alot autocompletion)
-contacts:
-	sh ./{{justfile_directory()}}/bin-nix/generate-addressbook
+# contacts:
+# 	sh ./{{justfile_directory()}}/bin-nix/generate-addressbook
 
 # http://stackoverflow.com/questions/448910/makefile-variable-assignment
 # symlink all my dotfiles in $HOME
 config:
 	stow -t {{config_local_directory()}} config
-# linkdf -h
-# home: 
-# 	stow --dotfiles -t ${HOME} home
 
 bin:
 	mkdir -p "{{data_directory()}}/../bin"
@@ -82,13 +81,12 @@ local:
 	stow -t "$(XDG_DATA_HOME)" local
 	mkdir -p "{{data_directory()}}/fzf-history" {{data_directory()}}/newsbeuter
 
-
 # Build my router image
 # [confirm("prompt")]
 routerIso:
 	nix build .\#nixosConfigurations.routerIso.config.system.build.isoImage
 
-router-image:
+router-build:
 	nix build .\#nixosConfigurations.routerIso.config.system.build.toplevel
 
 # this shouldn't need to be done !
@@ -110,15 +108,35 @@ fonts:
 nautilus:
 	gsettings set org.gnome.desktop.background show-desktop-icons false
 
+# update my nix vim plugins overlay
 vimPlugins:
-	# /home/teto/nixpkgs/pkgs/misc/vim-plugins/update.py
-	cd $(NIXPKGS_REPO) \
-		&& nix run .#vimPluginsUpdater -i $(CURDIR)/nixpkgs/overlays/vim-plugins/vim-plugin-names -o $(CURDIR)/nixpkgs/overlays/vim-plugins/generated.nix --no-commit
+	# TODO make it so it works with --commit !
+	nix run {{NIXPKGS_REPO}}#vimPluginsUpdater -- \
+	  -i {{justfile_directory()}}/overlays/vim-plugins/vim-plugin-names \
+	  -o ${{justfile_directory()}}/overlays/vim-plugins/generated.nix \
+	  --github-token=$GITHUB_TOKEN \
+	  --no-commit
+
+# https://unix.stackexchange.com/questions/74184/how-to-save-current-command-on-zsh
+zsh-load-history:
+  hist_file="shell_history.txt"
+  builtin fc -R -I "$hist_file"
+
+  # Flush history / HIST_FILE
+  builtin fc -W "$hist_file_merged"
+
 
 # just to save the command
-# TODO should be loaded into zsh history instead
-rebuild:
-	nixos-rebuild --flake ~/home --override-input nixpkgs /home/teto/nixpkgs --override-input hm /home/teto/hm --override-input nova /home/teto/nova/nova-nix --no-write-lock-file switch  --show-trace --use-remote-sudo
+# should be loaded into zsh history instead
+rebuild: (nixos-rebuild "build")
+switch: (nixos-rebuild "switch")
+
+[private]
+nixos-rebuild command builders="$NOVA_OVH1":
+	nixos-rebuild --flake ~/home --override-input nixpkgs {{NIXPKGS_REPO}} \
+	   --override-input hm /home/teto/hm --override-input nova /home/teto/nova/doctor \
+	   --option builders "$NOVA_OVH1" -j0 \
+	   --no-write-lock-file --show-trace --use-remote-sudo {{command}}
 
 # Check nix sqlite database
 nix-check-db:

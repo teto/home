@@ -9,7 +9,7 @@
 
   # may need to select appropriate driver
   # choose between latest, beta, vulkan_beta, stable
-  package = config.boot.kernelPackages.nvidiaPackages.production;
+  package = config.boot.kernelPackages.nvidiaPackages.latest;
   nvidiaSettings = true;
 
   # open is only ready for data center use 

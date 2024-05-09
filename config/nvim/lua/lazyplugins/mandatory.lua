@@ -28,7 +28,6 @@ return {
     position = "bottom", -- position of the list can be: bottom, top, left, right
     height = 10, -- height of the trouble list when position is top or bottom
     width = 50, -- width of the list when position is left or right
-    icons = false, -- use devicons for filenames
     -- "workspace_diagnostics", "document_diagnostics", "quickfix", "lsp_references", "loclist"
     mode = "workspace_diagnostics", 
     severity = nil, -- nil (ALL) or vim.diagnostic.severity.ERROR | WARN | INFO | HINT
@@ -228,17 +227,16 @@ return {
   -- you can specify also another config if you want
   config = function()
    require("gx").setup {
-    open_browser_app = "os_specific",   -- specify your browser app; default for macos is "open" and for linux "xdg-open"
-    handlers = {
-     plugin = true,                     -- open plugin links in lua (e.g. packer, lazy, ..)
-     github = true,                     -- open github issues
-     package_json = true,               -- open dependencies from package.json
-    },
+    -- open_browser_app = "xdg-open",   -- specify your browser app; default for macos is "open" and for linux "xdg-open"
+    -- handlers = {
+    --  plugin = true,                     -- open plugin links in lua (e.g. packer, lazy, ..)
+    --  github = true,                     -- open github issues
+    --  package_json = true,               -- open dependencies from package.json
+    -- },
    }
   end,
  },
  { 'chrisbra/csv.vim',        lazy = true },
- -- { 'rhysd/committia.vim', lazy = true},
  -- {
  --  'lukas-reineke/indent-blankline.nvim',
  --  -- main = "ibl",
@@ -255,10 +253,10 @@ return {
  --   })
  --  end,
  -- },
- { 
-  -- 'akinsho/bufferline.nvim'
+ {
+  'akinsho/bufferline.nvim'
   -- see https://github.com/akinsho/bufferline.nvim/pull/896
- 'Theyashsawarkar/bufferline.nvim'
+ -- 'Theyashsawarkar/bufferline.nvim'
   -- , dependencies = 'nvim-tree/nvim-web-devicons' 
  },
 

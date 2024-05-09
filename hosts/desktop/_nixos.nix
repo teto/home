@@ -76,6 +76,10 @@ in
   # TODO check how it interacts with less
   # environment.etc."inputrc".source = ../../config/inputrc;
 
+
+  # just for fun ?
+  # services.desktopManager.plasma6.enable = true;
+
   home-manager.users = 
    # let
    # hmRootModule = { pkgs, ... }@args: flakeInputs.haumea.lib.load {
@@ -111,6 +115,8 @@ in
      ];
    };
   };
+
+  services.xserver.displayManager.gdm.enable = true;
 
   # nesting clones can be useful to prevent GC of some packages
   # https://nixos.org/nix-dev/2017-June/023967.html
@@ -174,7 +180,7 @@ in
   ];
 
   # boot.kernelPackages = pkgs.linuxPackages_default;
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_8;
   # boot.kernelPackages = pkgs.linuxPackages;
 
   boot.kernelModules = [
@@ -263,10 +269,6 @@ in
      ];
    };
 
-  security.sudo.extraConfig = ''
-    Defaults        timestamp_timeout=300
-  '';
-
   # networking.enableIPv6 = false;
   # rtkit is optional but recommended {{{
   security.rtkit.enable = true;
@@ -318,6 +320,7 @@ in
   #     List of packages to override without doing a full rebuild. The original derivation and replacement derivation must have the same name length, and ideally should have close-to-identical directory layout.
 
   environment.systemPackages = [
+    pkgs.ntfsprogs
   ];
 
   # $out here is the profile generation

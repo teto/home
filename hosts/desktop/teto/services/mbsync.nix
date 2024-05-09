@@ -13,6 +13,7 @@
   };
 
   # copy load credential implem from https://github.com/NixOS/nixpkgs/pull/211559/files
+  # systemd.user.services.mbsync
   systemd.user.services.mbsync = {
     Service = {
       # TODO need DBUS_SESSION_BUS_ADDRESS 
