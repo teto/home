@@ -24,19 +24,19 @@
     # flakeInputs.ironbar.homeManagerModules.default
 
     ./calendars.nix
+    ./ia.nix
+    ./sway.nix
     ./programs/git.nix
     ./programs/helix.nix
-    ./ia.nix
     ./programs/neovim.nix
     ./programs/ssh.nix
-    ./sway.nix
-    ./services/swaync.nix
-    ./services/mpd.nix
     ./programs/yazi.nix
     ./programs/khal.nix
-
     ./programs/zsh.nix
 
+    ./services/swaync.nix
+    ./services/mpd.nix
+    ./services/mpris.nix
     # ../../../hm/profiles/experimental.nix
 
     # Not tracked, so doesn't need to go in per-machine subdir

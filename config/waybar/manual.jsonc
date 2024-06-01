@@ -1,4 +1,22 @@
 {
+ "position": "top",
+
+  "modules-left": [
+	"sway/workspaces",
+	"sway/mode"
+  ],
+  "modules-center": [
+	"sway/window",
+	// "custom/hello-from-waybar"
+	"mpd"
+  ],
+
+ "modules-right": [
+
+  "custom/github",
+  "custom/notmuch",
+  "custom/weather"
+	  ],
     "mpd": {
         "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ⸨{songPosition}|{queueLength}⸩ ",
         "format-disconnected": "Disconnected ",
@@ -44,7 +62,7 @@
 	  }
 	},
     "idle_inhibitor": {
-	 "start-activated" : true,
+	 "start-activated" : false,
 
 	   "format": "inhibitor: {icon}",
 	   "format-icons": {

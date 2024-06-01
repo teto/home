@@ -31,22 +31,22 @@ in
             "~/.config/waybar/manual.jsonc"
           ];
           layer = "top";
-          position = "top";
+          # position = "top";
           height = 30;
           # output = [
           # "eDP-1"
           # "HDMI-A-1"
           # ];
           # "wlr/taskbar"
-          modules-left = [
-            "sway/workspaces"
-            "sway/mode"
-          ];
-          modules-center = [
-            "sway/window"
-            # "custom/hello-from-waybar"
-            "mpd"
-          ];
+          # modules-left = [
+          #   "sway/workspaces"
+          #   "sway/mode"
+          # ];
+          # modules-center = [
+          #   "sway/window"
+          #   # "custom/hello-from-waybar"
+          #   "mpd"
+          # ];
           modules-right = [
             # "mpd"
             "custom/launcher"
@@ -98,17 +98,6 @@ in
             tooltip-format = "MPD (connected)";
             tooltip-format-disconnected = "MPD (disconnected)";
           };
-
-          # moved to manual
-          # idle_inhibitor = {
-          #   # use a screensaver icon
-          #   start-activated = true;
-          #   format = "{icon}";
-          #   format-icons = {
-          #     activated = "no timeout";
-          #     deactivated = "timeout";
-          #   };
-          # };
 
           wireplumber = {
             format = "{volume}% {icon}";
