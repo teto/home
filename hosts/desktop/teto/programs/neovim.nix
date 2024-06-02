@@ -40,27 +40,47 @@ let
      ];
 
   luaPlugins = with pkgs.vimPlugins; [
-    {
-      # we should have a file of the grammars as plugins
-      # symlinkJoin
-      plugin = pkgs.symlinkJoin {
-       name = "tree-sitter-grammars";
-       paths = with pkgs.neovimUtils; [
+    # {
+    #   # we should have a file of the grammars as plugins
+    #   # symlinkJoin
+    #   plugin = pkgs.symlinkJoin {
+    #    name = "tree-sitter-grammars";
+    #    paths = with pkgs.neovimUtils; [
+    #       # pkgs.vimPlugins.nvim-treesitter-parsers.tree-sitter-nix
+    #       # # tree-sitter-haskell # crashes with a loop
+    #       # tree-sitter-html  # for rest.nvim
+    #       # (grammarToPlugin pkgs.tree-sitter-grammars.tree-sitter-html) # for devdocs
+    #       # pkgs.vimPlugins.nvim-treesitter.grammarPlugins.org
+    #       # pkgs.vimPlugins.nvim-treesitter.grammarPlugins.norg
+    #       # # (grammarToPlugin pkgs.tree-sitter-grammars.tree-sitter-norg-meta)
+    #       # pkgs.vimPlugins.nvim-treesitter.grammarPlugins.nix
+    #       # pkgs.vimPlugins.nvim-treesitter.grammarPlugins.http
+    #       # (grammarToPlugin tree-sitter-just)
+    #     ];
+    #   };
+    # }
 
-          # pkgs.vimPlugins.nvim-treesitter-parsers.tree-sitter-nix
-          # # tree-sitter-haskell # crashes with a loop
-          # tree-sitter-html  # for rest.nvim
-          # (grammarToPlugin pkgs.tree-sitter-grammars.tree-sitter-html) # for devdocs
-          # pkgs.vimPlugins.nvim-treesitter.grammarPlugins.org
-          # pkgs.vimPlugins.nvim-treesitter.grammarPlugins.norg
-          # # (grammarToPlugin pkgs.tree-sitter-grammars.tree-sitter-norg-meta)
-          # pkgs.vimPlugins.nvim-treesitter.grammarPlugins.nix
-          # pkgs.vimPlugins.nvim-treesitter.grammarPlugins.http
+    (luaPlugin {
+      plugin = gitsigns-nvim;
+      # TODO here we should read config from a file
+      # config = 
+    })
 
-          # (grammarToPlugin tree-sitter-just)
-        ];
-      };
-    }
+    # {
+    #   plugin = fidget-nvim;
+    #   type = "lua";
+    #   config = ''
+    #     require"fidget".setup{}
+    #   '';
+    # }
+
+    # (luaPlugin {
+    #   plugin = lsp_lines-nvim;
+    #   config = ''
+    #   require("lsp_lines").register_lsp_virtual_lines()
+    #   '';
+    # })
+
 
     # fails because of fzy
     # (luaPlugin { plugin = flakeInputs.rocks-nvim.packages.${pkgs.system}.rocks-nvim; })

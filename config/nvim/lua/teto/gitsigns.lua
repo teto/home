@@ -1,5 +1,5 @@
 -- attach_to_untracked = true,
-local M = {} 
+local M = {}
 M.setup = function()
         require 'gitsigns'.setup {
         -- '│' passe mais '▎' non :s
@@ -68,4 +68,4 @@ M.setup = function()
           }  -- If luajit is present
         }
      end
-
+return M

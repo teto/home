@@ -1,4 +1,5 @@
-{ config, pkgs, lib
+{ config
+, pkgs
 , secrets
 , ... }:
 
@@ -85,14 +86,12 @@ in
       remote = {
         type = "caldav";
         # url = "http://efss.qloud.my/remote.php/dav/calendars/root/personal/";
-        url = "https://caldav.fastmail.com/";
         # url = "https://efss.qloud.my/remote.php/dav/";
-        # userName = "m";
-        # userName = sert
+        url = "https://caldav.fastmail.com/";
         userName = secrets.accounts.mail.fastmail_perso.email;
 
         # needs to be an app-specific password/token
-        passwordCommand = (hmUtils.getPassword "perso/fastmail_mc");
+        passwordCommand = (hmUtils.getPassword "perso/fastmail_mc/password");
          # "~/dotfiles/bin/pass-show" "iij/nextcloud"
         # ];
       };

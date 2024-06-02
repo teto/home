@@ -193,27 +193,6 @@ let
     #   };
     # })
 
-    # (luaPlugin {
-    #   plugin = gitsigns-nvim;
-    #   # TODO here we should read config from a file
-    #   config = 
-    # }
-
-    # {
-    #   plugin = fidget-nvim;
-    #   type = "lua";
-    #   config = ''
-    #     require"fidget".setup{}
-    #   '';
-    # }
-
-    # (luaPlugin {
-    #   plugin = lsp_lines-nvim;
-    #   config = ''
-    #   require("lsp_lines").register_lsp_virtual_lines()
-    #   '';
-    # })
-
     (luaPlugin {
       plugin = marks-nvim;
       config = /* lua */ ''
