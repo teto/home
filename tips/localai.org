@@ -23,3 +23,8 @@ nix run .#local-ai-cublas -- --models-path ~/models models install model-gallery
   * How to run the models ?
 
  nix run github:ck3d/nix-local-ai#local-ai-cublas -- --models-path ~/localai-models
+
+  ggml_cuda_init: failed to initialize CUDA: CUDA driver is a stub library
+  NCCL_DEBUG=INFO
+
+  LD_DEBUG=libs

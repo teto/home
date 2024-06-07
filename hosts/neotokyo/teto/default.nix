@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 let
   welcomeMessage = ''
-    Welcome to the novadiscovery CI/CD runner dear devops.
+    Welcome to the router, dear master.
 
     A few tips:
     - `journalctl -b0 -r` to see what's up lately

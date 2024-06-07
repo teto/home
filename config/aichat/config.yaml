@@ -1,0 +1,9 @@
+model: localai
+clients:
+- type: openai-compatible
+  name: localai
+  api_base: http://localhost:11111/v1
+  api_key: null
+  models:
+  - name: mistral
+    max_input_tokens: null

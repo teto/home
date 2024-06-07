@@ -8,15 +8,36 @@
   "modules-center": [
 	"sway/window",
 	// "custom/hello-from-waybar"
-	"mpd"
+	"mpd",
+  "systemd-failed-units"
   ],
 
  "modules-right": [
-
+  "sway/language",
   "custom/github",
   "custom/notmuch",
   "custom/weather"
-	  ],
+ ],
+ "sway/workspaces": {
+   // # {name}:
+   "format": "{name}",
+   "disable-scroll": false,
+   "all-outputs" : false
+   // # disable-scroll-wraparound = true;
+   // # "disable-markup" : false,
+   // # format-icons = {
+   // #    "1" = "ï";
+   // #    "2" = "ï©";
+   // #    "3" = "ï¡";
+   // # };
+ },
+            "systemd-failed-units": {
+                "hide-on-ok": false,
+                "format": "✗ {nr_failed}",
+                "format-ok": "✓",
+                "system": true,
+                "user": false,
+           },
     "mpd": {
         "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ⸨{songPosition}|{queueLength}⸩ ",
         "format-disconnected": "Disconnected ",
@@ -64,7 +85,7 @@
     "idle_inhibitor": {
 	 "start-activated" : false,
 
-	   "format": "inhibitor: {icon}",
+	   "format": "{icon}",
 	   "format-icons": {
 		   "activated": "",
 		   "deactivated": ""

@@ -4,12 +4,6 @@
   # https://github.com/nix-community/nixops-libvirtd#prepare-libvirtd
   networking.firewall.checkReversePath = false;
 
-  # see https://nixos.org/nix-dev/2015-July/017657.html for problems 
-  # with /run/user/1000 size
-  services.logind.extraConfig = ''
-    RuntimeDirectorySize=3G
-  '';
-
   environment.systemPackages = [
     # to run ubuntu, needs libvirtd service
     # pkgs.virt-manager  # broken)

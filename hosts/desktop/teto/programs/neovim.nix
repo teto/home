@@ -60,11 +60,11 @@ let
     #   };
     # }
 
-    (luaPlugin {
-      plugin = gitsigns-nvim;
-      # TODO here we should read config from a file
-      # config = 
-    })
+    # (luaPlugin {
+    #   plugin = gitsigns-nvim;
+    #   # TODO here we should read config from a file
+    #   # config = 
+    # })
 
     # {
     #   plugin = fidget-nvim;
@@ -81,12 +81,8 @@ let
     #   '';
     # })
 
-
-    # fails because of fzy
-    # (luaPlugin { plugin = flakeInputs.rocks-nvim.packages.${pkgs.system}.rocks-nvim; })
-
     # should bring in scope fzy
-    (luaPlugin { plugin = rocks-nvim; })
+    # (luaPlugin { plugin = rocks-nvim; })
     (luaPlugin { plugin = urlview-nvim; })
     (luaPlugin { plugin = nvim-ufo; })
     (luaPlugin { plugin = ollama-nvim; })
@@ -460,7 +456,7 @@ let
       # to enable GpWhisper in gp.nvim
       (sox.override({enableLame = true;}))
 
-      nodePackages.pyright
+      pyright
 
       luajitPackages.luacheck 
       yaml-language-server  # ~100MB 

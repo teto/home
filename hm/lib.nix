@@ -1,6 +1,13 @@
 { pkgs, lib, ... }:
 let
   notify-send = "${pkgs.libnotify}/bin/notify-send";
+ 
+  genBlockLua = title: content:
+    ''
+    -- ${title} {{{
+    ${content}
+    -- }}}
+    '';
 in
 {
 
@@ -42,5 +49,11 @@ in
     ]
     );
 
+  luaPlugin = attrs: attrs // {
+    type = "lua";
+    config = lib.optionalString (attrs ? config && attrs.config != null) (genBlockLua attrs.plugin.pname attrs.config);
+  };
+
+  inherit genBlockLua;
 
 }

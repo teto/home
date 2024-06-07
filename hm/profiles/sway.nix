@@ -1,4 +1,6 @@
-{ lib, pkgs, config, ... }:
+{ lib, pkgs, config
+# , tetoLib
+, ... }:
 let
   # key modifier
   mod = "Mod1";
@@ -13,18 +15,25 @@ let
 
   sharedConfig = pkgs.callPackage ./wm-config.nix {};
 
-  myLib = pkgs.callPackage ../lib.nix { };
+  myLib = pkgs.tetoLib;
+    # pkgs.callPackage ../lib.nix { };
+
+  # TODO load sway folder via haumea
 in
 {
 
   imports = [
-    ./wayland.nix
-    ./swayidle.nix
+   ./flameshot.nix
   ];
 
+ # TODO it is done in sway.nix
+ # replaced with  package-sets.wayland
+ package-sets.waylandPackages = true;
+
   home.packages = with pkgs; [
+    swayidle
     swayr # window selector
-    swaycons # window selector
+    swaycons # show icon on windows
     # sway-easyfocus # not packaged yet
     # swayrst #  https://github.com/Nama/swayrst # not packaged yet
 
@@ -34,8 +43,7 @@ in
     nwg-drawer # launcher
     nwg-menu
     nwg-dock # a nice dock 
-    wlogout
-    swaylock-effects
+    swaylock-effects # offers sexier 
     sway-contrib.grimshot # contains "grimshot" for instance
     shotman # -c region 
     tessen # handle passwords
@@ -48,6 +56,7 @@ in
    enable = true;
    systemd.enable = true;
   };
+
   # 
   systemd.user.services.swayrd.Service = {
    Environment = [ "PATH=${lib.makeBinPath [ pkgs.fuzzel pkgs.wofi ]}" 

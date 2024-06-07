@@ -7,11 +7,11 @@
     "${modulesPath}/../../pkgs/by-name/lo/local-ai/module.nix"
   ];
 
-  services.local-ai= {
+  services.local-ai = {
 
-    enable = true;
+    enable = false;
     port = 11111;
-    models = "/home/teto/models";
+    # models = "/home/teto/models";
     
   };
 

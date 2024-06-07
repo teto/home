@@ -1,15 +1,41 @@
-{ config, lib, pkgs, ... }:
+{ config, lib
+, pkgs
+, flakeInputs
+, ... }:
+let 
+
+ autoloadedModule = { pkgs, ... }@args: 
+  flakeInputs.haumea.lib.load {
+   src = flakeInputs.nix-filter {
+     root = ./desktop;
+     # exclude = [
+     #   "teto"
+     #   "root"
+     # ];
+    };
+    
+
+    inputs = args // {
+      inputs = flakeInputs;
+    };
+    transformer = [
+     flakeInputs.haumea.lib.transformers.liftDefault
+     (flakeInputs.haumea.lib.transformers.hoistLists "_imports" "imports")
+    ];
+  };
+in
 {
 
   imports = [
+    autoloadedModule
     ../../hosts/config-all.nix
 
     ../../nixos/profiles/ntp.nix
-    ./desktop/programs/wireshark.nix
+    # ./desktop/programs/wireshark.nix
     ../../nixos/modules/network-manager.nix
     # ../../nixos/profiles/librenms.nix
 
-    ./desktop/programs/zsh.nix
+    # ./desktop/programs/zsh.nix
     ./gnome.nix
     ./neovim.nix
     ./pipewire.nix
@@ -18,6 +44,13 @@
     # only if available
     # ./modules/jupyter.nix
   ];
+
+  # see https://nixos.org/nix-dev/2015-July/017657.html for problems 
+  # with /run/user/1000 size
+  services.logind.extraConfig = ''
+    RuntimeDirectorySize=3G
+  '';
+
 
   environment.pathsToLink = [
    "/share/xdg-desktop-portal" 
@@ -68,11 +101,8 @@
   documentation.doc.enable = true; # builds html doc, slow
   documentation.info.enable = false;
 
-  environment.systemPackages = with pkgs; [
-    stow
+  environment.systemPackages = [
   ];
-
-  security.pam.services.swaylock = {};
 
   # networking.firewall.checkReversePath = false; # for nixops
   # networking.firewall.allowedUDPPorts = [ 631 ];
@@ -138,7 +168,7 @@
 
   # systemd.packages = [ ];
 
-  programs.browserpass.enable = true;
+  # programs.browserpass.enable = true;
 
   nix = {
 
@@ -161,6 +191,9 @@
   # look at man limits.conf
 # cat /proc/sys/fs/file-max /proc/sys/fs/file-nr
   # type: soft/hard/- (-=both soft and hard
+  security.pam.services.swaylock = {};
+
+
   security.pam.loginLimits = [
    # 
    # to avoid "Bad file descriptor" and "Too many open files" situations

@@ -6,7 +6,8 @@
             "critical": 5
         },
         "format": "{time} {icon}",
-        "format-charging": " {capacity}% ",
+		// 
+        "format-charging": "{capacity}%  ",
         "format-plugged": "{capacity}% ",
         "format-alt": "{time} {icon}",
         // "format-good": "", // An empty format will hide the module
@@ -15,11 +16,31 @@
         "format-icons": ["", "", "", "", ""]
     },
 
-       "modules-right": [ 
-        "battery",
-        "bluetooth",
-        "network",
-        "backlight"
-       ]
+	"modules-center": [
+
+  "systemd-failed-units",
+	],
+  "modules-right": [ 
+   "battery",
+   "bluetooth",
+   "network",
+   "backlight",
+   // "mpd"
+   "custom/launcher",
+
+   // "custom/mymodule#with-css-id",
+   // "temperature",
+   "idle_inhibitor",
+   "custom/github",
+   "custom/notmuch",
+   "custom/weather" ,
+   "wireplumber",
+   "tray",
+   // "custom/power-menu",
+   "sway/language",
+   "clock",
+   "custom/notification"
+
+  ]
 }
 

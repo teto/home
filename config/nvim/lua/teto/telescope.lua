@@ -63,6 +63,7 @@ function M.setup()
                     ['<c-t>'] = open_with_trouble,
                     ["<C-n>"] = require('telescope.actions').cycle_history_next,
                     ["<C-p>"] = require('telescope.actions').cycle_history_prev,
+                    ["<C-w>"] = { "<c-s-w>", type = "command" },
 
                     -- 				-- -- To disable a keymap, put [map] = false
                     -- 				-- -- So, to not map "<C-n>", just put
@@ -132,6 +133,11 @@ function M.setup()
            show_scores = true,
             match_algorithm = "fzf",
             disable_devicons = false,
+            mappings = {
+              i = {
+                ["<esc>"] = require("telescope.actions").close,
+              },
+            },
           },
             -- 		fzf = {
             -- 			fuzzy = true,					 -- false will only do exact matching

@@ -1,5 +1,4 @@
-ignore-empty-password=true
-image
-clock  
-indicator 
+ignore-empty-password
+clock
+indicator
 image=/home/teto/Nextcloud/images/wallpapers/Hummingbird.jpg

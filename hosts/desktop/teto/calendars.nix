@@ -4,7 +4,7 @@
 , ... }:
 
 let 
-  hmUtils = pkgs.callPackage ../../../hm/lib.nix {};
+  tetoLib = pkgs.callPackage ../../../hm/lib.nix {};
 in
 {
 
@@ -91,7 +91,7 @@ in
         userName = secrets.accounts.mail.fastmail_perso.email;
 
         # needs to be an app-specific password/token
-        passwordCommand = (hmUtils.getPassword "perso/fastmail_mc/password");
+        passwordCommand = (tetoLib.getPassword "perso/fastmail_mc/password");
          # "~/dotfiles/bin/pass-show" "iij/nextcloud"
         # ];
       };
@@ -134,10 +134,10 @@ in
     #   userName = secrets.accounts.mail.nova.email;
 
     #     # needs to be an app-specific password/token
-    #       # getPasswordCommand = account: lib.strings.escapeShellArgs (pkgs.hmUtils.getPassword account);
+    #       # getPasswordCommand = account: lib.strings.escapeShellArgs (pkgs.tetoLib.getPassword account);
 
-    #   passwordCommand = pkgs.hmUtils.getPassword "nova/mail";
-    #     # passwordCommand = (hmUtils.getPassword "perso/fastmail_mc");
+    #   passwordCommand = pkgs.tetoLib.getPassword "nova/mail";
+    #     # passwordCommand = (tetoLib.getPassword "perso/fastmail_mc");
     #      # "~/dotfiles/bin/pass-show" "iij/nextcloud"
     #     # ];
     #   };

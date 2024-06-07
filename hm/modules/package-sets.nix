@@ -14,7 +14,7 @@ in
     package-sets = {
 
 
-      enableDesktopPackages = mkEnableOption "desktop packages";
+      desktop = mkEnableOption "desktop packages";
       enableServerPackages = mkEnableOption "server packages";
 
       enableOfficePackages = mkEnableOption "office/heavy packages";
@@ -28,10 +28,14 @@ in
       # with flakeInputs.nixos-stable.legacyPackages.${pkgs.system};
 
       enableIMPackages = mkEnableOption "IM packages";
-      wifiPackages = mkEnableOption "wifi packages";
-      energyPackages = mkEnableOption "energy management packages";
+      wifi = mkEnableOption "wifi packages";
+      energy = mkEnableOption "energy management packages";
       enableGaming = mkEnableOption "Gaming packages";
       waylandPackages = mkEnableOption "Wayland packages";
+
+
+      # laptop = mkEnableOption "Laptop packages (energy + wifi)";
+
     };
 
   };
@@ -42,12 +46,28 @@ in
   #   })
   # ];
 
+
+ # home.packages = [
+ #  pkgs.ncmpcpp
+ #  pkgs.mpc_cli
+ #  pkgs.ymuse # GUI
+ # ];
+
+
+
   config = mkMerge [
     ({
       # INSTALLED whatever the config
       home.packages = with pkgs; [
+        btop
+        curl
         just # to read justfiles, *replace* Makefile
+        gitAndTools.gitFull # to get send-email
+        gnumake
+        tree 
+        stow
         # nvim
+        # zenith  # resources monitor
       ];
     })
 
@@ -64,13 +84,28 @@ in
 
     })
 
-    (mkIf cfg.enableDesktopPackages {
+    (mkIf cfg.desktop {
 
-      home.packages = with pkgs; [
+      home.packages = with pkgs; let 
+
+        # for 'convert' executable. Can convert PDF too
+        myImagemagick = pkgs.imagemagick.override({ghostscriptSupport=true;});
+      in 
+        [
+
+        acpi # for acpi -V
         # anki          # spaced repetition system
         # hopefully we can remove this from the environment
         # it's just that I can't setup latex correctly
         pkgs.rofi-rbw-wayland
+        pkgs.timg # to display images in terminal, to compare with imgcat ?
+        myImagemagick
+
+        # mpd
+        pkgs.ncmpcpp
+        pkgs.mpc_cli
+        pkgs.ymuse # GUI
+
 
         # take the version from stable ?
         # qutebrowser # broken keyboard driven fantastic browser
@@ -194,6 +229,8 @@ in
 
     (mkIf cfg.enableDesktopGUIPackages {
       home.packages = with pkgs; [
+        hakuneko
+
         memento # broken capable to display 2 subtitles at same time
         vlc
         # leafnode dovecot22 dovecot_pigeonhole fetchmail procmail w3m
@@ -205,19 +242,23 @@ in
 
     })
 
-    (mkIf cfg.wifiPackages {
+    (mkIf cfg.wifi {
       home.packages = with pkgs; [
         wirelesstools # to get iwconfig
         iw
         wavemon
+
+        # aircrack-ng # TODO move to hacking package-set
       ];
     })
 
     (mkIf cfg.developer {
       home.packages = with pkgs; [
-        docker-credential-helpers
-        nix-diff
+        automake
+        (backblaze-b2.override({ execName = "b2";}))
         dasht # ~ zeal but in terminal
+        docker-credential-helpers
+        envsubst # replace templated files with variables
         sops # password 'manager'
         # TODO pass to vim makeWrapperArgs
         # nodePackages.bash-language-server
@@ -227,13 +268,14 @@ in
         # gitAndTools.git-annex # fails on unstable
         # gitAndTools.git-remote-hg
         # nix-prefetch-scripts # broken
+        nix-diff
+        nix-prefetch-git
+        netcat-gnu # plain 'netcat' is the bsd one
 
-        (backblaze-b2.override({ execName = "b2";}))
 
         # editorconfig-core-c
         # for fuser, useful when can't umount a directory
         # https://unix.stackexchange.com/questions/107885/busy-device-on-umount
-        automake
         lurk  # a rust strace
         fswatch # fileevent watcher
         fx # json reader
@@ -277,10 +319,10 @@ in
         patchutils # for interdiff
         process-compose # docker-compose - like
         # rpl # to replace strings across files
-        universal-ctags # there are many different ctags, be careful !
+        strace
         tio # serial console reader
+        universal-ctags # there are many different ctags, be careful !
         whois
-        envsubst # replace templated files with variables
         zeal # doc for developers
 
       ];
@@ -289,6 +331,7 @@ in
     (mkIf cfg.scientificSoftware {
       home.packages = with pkgs; [
 
+        nodePackages.insect # fancy calculator
         fend # rust unit convertor
         pcalc # cool calc, see insect too
 
@@ -340,8 +383,18 @@ in
         # wayprompt
         wev # equivalent of xev, to find the name of keys for instance
         wshowkeys
+        wlogout
+
       ];
-})
+    })
+    (mkIf cfg.energy {
+      home.packages = [
+        pkgs.powertop # superuseful
+        pkgs.pcm
+      ];
+
+
+    })
 
   ];
 }

@@ -1,6 +1,6 @@
 { config, pkgs, secrets, options, lib, ... }:
 {
-  programs.zsh = {
+  # programs.zsh = {
     enable = true;
     zsh-autoenv.enable = false;
     enableCompletion = true;
@@ -38,6 +38,6 @@
     # #   # Don't try to bind CTRL Q / CTRL S !!
     # #   # cat > /dev/null
     # #   # And press it
-  };
+  # };
 
 }

@@ -37,9 +37,9 @@
   ] ++ (with pkgs; [
     # autoconf
     binutils
-    btop
     curl
     fd # replaces 'find'
+    just
     file
     fzf
     gitAndTools.gitFull # to get send-email
@@ -85,7 +85,7 @@
 
   # for nix-shell
   programs.bash = {
-    enableCompletion = true;
+    completion.enable = true;
     shellInit = ''
       # set -o vi
       '';

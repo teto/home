@@ -1,6 +1,19 @@
 { config, flakeInputs, pkgs, lib, system, ... }:
 let
 
+ autoloadedModule = { pkgs, ... }@args: 
+  flakeInputs.haumea.lib.load {
+   src = flakeInputs.nix-filter {
+     root = ./desktop;
+    };
+    inputs = args // {
+      inputs = flakeInputs;
+    };
+    transformer = [
+     flakeInputs.haumea.lib.transformers.liftDefault
+     (flakeInputs.haumea.lib.transformers.hoistLists "_imports" "imports")
+    ];
+  };
 
   fontsPkgs = with pkgs; [
       # fonts
@@ -25,36 +38,36 @@ in
 {
 
   imports = [
+    autoloadedModule
     ./xdg-portal.nix
     ./common.nix
     ./kitty.nix
     ./mpv.nix
-    ./mpd.nix
+    # ./mpd.nix
     ./dev.nix
     ./rofi.nix
-    ./wal.nix
     ./sway.nix
     ./zsh.nix
 
     ./fcitx.nix
     ./firefox.nix
     ./neovim.nix
-
   ];
 
   # allows to find fonts enabled through home.packages
   fonts.fontconfig.enable = true;
 
-  programs.zoxide = {
-    enable = true;
-    enableZshIntegration = true;
-    enableBashIntegration = true;
-    options = [ "--cmd k" ];
-  };
+  # programs.zoxide = {
+  #   enable = true;
+  #   enableZshIntegration = true;
+  #   enableBashIntegration = true;
+  #   options = [ "--cmd k" ];
+  # };
 
   package-sets = {
     developer = true;
-    enableDesktopPackages = true;
+    desktop = true;
+    energy = true;
   };
 
   # rename to fn, accept a parameter for optional
@@ -68,22 +81,14 @@ in
       pinentry-rofi
       timg
       # pass-custom
-
-
     ])
   ;
 
   # TODO remove ? dangerous
-  home.sessionPath = [
-    "$XDG_DATA_HOME/../bin"
-  ];
+  # home.sessionPath = [
+  #   "$XDG_DATA_HOME/../bin"
+  # ];
 
-  # tray is enabled by default
-  services.udiskie = {
-    enable = true;
-    notify = false;
-    automount = false;
-  };
 
   programs.browserpass = {
     enable = true;
@@ -106,25 +111,25 @@ in
 
   # might trigger nm-applet crash ?
   # TODO disable it ?
-  services.gpg-agent = {
-    enable = true;
-    defaultCacheTtl = 7200;
-    # maxCacheTtl
-    enableSshSupport = true;
-    # grabKeyboardAndMouse= false;
-    grabKeyboardAndMouse = false; # should be set to false instead
-    # default-cache-ttl 60
-    verbose = true;
-    # --max-cache-ttl
-    maxCacheTtl = 86400; # in seconds (86400 = 1 day)
+  # services.gpg-agent = {
+  #   enable = true;
+  #   defaultCacheTtl = 7200;
+  #   # maxCacheTtl
+  #   enableSshSupport = true;
+  #   # grabKeyboardAndMouse= false;
+  #   grabKeyboardAndMouse = false; # should be set to false instead
+  #   # default-cache-ttl 60
+  #   verbose = true;
+  #   # --max-cache-ttl
+  #   maxCacheTtl = 86400; # in seconds (86400 = 1 day)
 
-    pinentryPackage = pkgs.pinentry-gnome3;
-    # see https://github.com/rycee/home-manager/issues/908
-    # could try ncurses as well
-    # extraConfig = ''
-    #   pinentry-program ${pkgs.pinentry-gnome}/bin/pinentry-gnome
-    # '';
-  };
+  #   pinentryPackage = pkgs.pinentry-gnome3;
+  #   # see https://github.com/rycee/home-manager/issues/908
+  #   # could try ncurses as well
+  #   # extraConfig = ''
+  #   #   pinentry-program ${pkgs.pinentry-gnome}/bin/pinentry-gnome
+  #   # '';
+  # };
 
   # needed for gpg-agent gnome pinentry
   # services.dbus.packages = [ pkgs.gcr ];
@@ -163,21 +168,21 @@ in
   };
 
   # broot is a terminal file navigator
-  programs.broot = {
-    enable = true;
-    enableZshIntegration = true;
+  # programs.broot = {
+  #   enable = true;
+  #   enableZshIntegration = true;
 
-    # alt+enter is taken by i3 see https://github.com/Canop/broot/issues/86
-    # settings.verbs = [{ invocation = "p"; key = "ctrl-o"; execution = ":open_leave"; }];
-  };
+  #   # alt+enter is taken by i3 see https://github.com/Canop/broot/issues/86
+  #   # settings.verbs = [{ invocation = "p"; key = "ctrl-o"; execution = ":open_leave"; }];
+  # };
 
-  home.sessionVariables = {
-    # JUPYTER_CONFIG_DIR=
-    # testing if we can avoid having to symlink XDG_CONFIG_HOME
-    # should be setup by neomutt module
-    # MUTT="$XDG_CONFIG_HOME/mutt";
-    # VIM_SOURCE_DIR = "$HOME/vim";
-  };
+  # home.sessionVariables = {
+  #   # JUPYTER_CONFIG_DIR=
+  #   # testing if we can avoid having to symlink XDG_CONFIG_HOME
+  #   # should be setup by neomutt module
+  #   # MUTT="$XDG_CONFIG_HOME/mutt";
+  #   # VIM_SOURCE_DIR = "$HOME/vim";
+  # };
 
   # export XDG_ settings
   # systemd.user.sessionVariables = {};

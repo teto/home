@@ -22,7 +22,7 @@ return {
   -- use :GpInspectPlugin to debug
   dir = "~/gp.nvim"
   -- , enabled = false
-  , lazy = true
+  , lazy = false
   -- lazy load on command
   -- , cmd = { "GpWhisper" }
   -- 'Robitx/gp.nvim'

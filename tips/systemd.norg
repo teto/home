@@ -69,3 +69,6 @@ sudo systemctl edit gitlab-runner.service
 Failed to create directories for "/etc/systemd/system/gitlab-runner.service.d/override.conf": No such file or directory
 
 You can also try `edit --full`
+
+
+systemctl --user show-environment

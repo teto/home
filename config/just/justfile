@@ -6,3 +6,6 @@ local:
 
 platform:
   nix run  .#fastbuild.simwork.core-webservice.platform
+
+sscwl:
+  nix run .#simwork.core-webservice.local -- --bypass-manifest-check -vv

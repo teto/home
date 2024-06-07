@@ -22,8 +22,17 @@
   };
 
   inputs = {
-    rippkgs.url = "github:replit/rippkgs";
-    rippkgs.inputs.nixpkgs.follows = "nixpkgs";
+    anyrun = {
+      url = "github:Kirottu/anyrun";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    deploy-rs = {
+      url = "github:serokell/deploy-rs";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    firefox2nix.url = "git+https://git.sr.ht/~rycee/mozilla-addons-to-nix";
     nix-filter.url = "github:numtide/nix-filter";
     haumea = {
       url = "github:nix-community/haumea";
@@ -34,23 +43,18 @@
       url = "github:teto/nixpkgs/nixos-unstable";
     };
     nixos-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixos-stable.url = "github:nixos/nixpkgs/nixos-23.11";
+    nixos-stable.url = "github:nixos/nixpkgs/nixos-24.05";
     # nixos-stable-custom.url = "github:teto/nixpkgs?ref=teto/nixos-23.11";
     nixpkgs-for-hls.url = "github:nixos/nixpkgs?rev=612f97239e2cc474c13c9dafa0df378058c5ad8d";
+
     nix-search-cli = {
       url = "github:peterldowns/nix-search-cli";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    rocks-nvim = {
-      url = "github:nvim-neorocks/rocks.nvim";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    firefox2nix.url = "git+https://git.sr.ht/~rycee/mozilla-addons-to-nix";
-    anyrun = {
-      url = "github:Kirottu/anyrun";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # rocks-nvim = {
+    #   url = "github:nvim-neorocks/rocks.nvim";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
     # ironbar = {
     #   url = "github:JakeStanger/ironbar";
@@ -58,11 +62,6 @@
     # };
 
     vocage.url = "git+https://git.sr.ht/~teto/vocage?ref=flake";
-
-    deploy-rs = {
-      url = "github:serokell/deploy-rs";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
 
     flake-utils.url = "github:numtide/flake-utils";
     treefmt-nix.url = "github:numtide/treefmt-nix";
@@ -83,8 +82,6 @@
       url = "github:elizagamedev/mujmap";
       # inputs.nixpkgs.follows = "nixpkgs"; # breaks build
     };
-    rofi-hoogle.url = "github:teto/rofi-hoogle/fixup";
-
     # TODO use mine instead
     hm = {
       url = "github:teto/home-manager/scratch";
@@ -95,10 +92,6 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nur.url = "github:nix-community/NUR";
     nixpkgs-wayland.url = "github:nix-community/nixpkgs-wayland";
-    purebred = {
-      url = "github:purebred-mua/purebred";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     # poetry.url = "github:nix-community/poetry2nix";
     nix-update = {
       url = "github:Mic92/nix-update";
@@ -130,11 +123,14 @@
       url = "github:neovide/neovide";
       flake = false;
     };
-    yazi = {
-      # url = "github:sxyazi/yazi?ref=v0.1.5";
-      url = "github:sxyazi/yazi";
+    purebred = {
+      url = "github:purebred-mua/purebred";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    rippkgs.url = "github:replit/rippkgs";
+    rippkgs.inputs.nixpkgs.follows = "nixpkgs";
+    rofi-hoogle.url = "github:teto/rofi-hoogle/fixup";
+
 
     sops-nix = {
       url = "github:Mic92/sops-nix";
@@ -152,6 +148,15 @@
     #   url = "github:nix-community/nix-direnv";
     #   flake = false;
     # };
+    wayland-pipewire-idle-inhibit = {
+      url = "github:rafaelrc7/wayland-pipewire-idle-inhibit";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    yazi = {
+      # url = "github:sxyazi/yazi?ref=v0.1.5";
+      url = "github:sxyazi/yazi";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { self, hm, nur, nixpkgs, flake-utils, treefmt-nix, deploy-rs, ... }:
@@ -221,6 +226,7 @@
               "cuda_gdb"
               "cuda_nvdisasm"
               "libcusolver"
+              "libXNVCtrl"
 
               "ec2-api-tools"
               "jiten" # japanese software recognition tool / use sudachi instead
@@ -254,6 +260,8 @@
         home-manager.useGlobalPkgs = true;
 
         home-manager.sharedModules = [
+          self.inputs.wayland-pipewire-idle-inhibit.homeModules.default
+
           # And add the home-manager module
           ./hm/profiles/common.nix
 
@@ -419,7 +427,7 @@
             home-manager.users.teto = {
               imports = [
                 ./hosts/desktop/teto/programs/ssh.nix
-                ./hosts/desktop/teto/bash.nix
+                ./hosts/desktop/teto/programs/bash.nix
                 ./hm/profiles/nova/ssh-config.nix
 
                 "${flakeInputs.nova}/nix/hm/nova-user.nix"
@@ -569,8 +577,6 @@
               hm.nixosModules.home-manager
               # ./hosts/desktop/teto/neovim.nix
               ./nixos/profiles/neovim.nix
-
-
             ];
 
           });
@@ -640,31 +646,43 @@
               ];
               buildInputs = oldAttrs.buildInputs ++ [ final.libsForQt5.kguiaddons ];
             });
+
+            local-ai-teto =  (prev.local-ai.override({
+              # with_cublas = true;
+              with_tts = false;
+              }));
+
             # see https://github.com/NixOS/nixpkgs/pull/257760
             ollamagpu = final.ollama.override { llama-cpp = llama-cpp-matt; };
+
             mujmap-unstable = self.inputs.mujmap.packages.x86_64-linux.mujmap;
             mujmap = final.mujmap-unstable; # needed in HM module
+
             # neovide = prev.neovide.overrideAttrs(oa: {
             #  src = self.inputs.neovide;
             # });
+
             firefox-addons = import ./overlays/firefox/generated.nix {
               inherit (final) buildFirefoxXpiAddon fetchurl lib stdenv;
             };
+
             git-repo-manager = prev.callPackage ./pkgs/by-name/gi/git-repo-manager/package.nix {
               fenix = self.inputs.fenix;
             };
 
-            hmUtils = final.callPackage ./hm/lib.nix {};
+            # protocol-local = prev.protocol.overrideAttrs (oldAttrs: {
+            #   src = builtins.fetchGit {
+            #     url = "https://github.com/teto/protocol";
+            #   };
+            # });
+
+            tetoLib = final.callPackage ./hm/lib.nix {};
           };
 
         # TODO
-        # firefox = import ./overlays/firefox/addons.nix;
-        # nova = import ./nixpkgs/overlays/pkgs/default.nix;
         local = import ./overlays/pkgs/default.nix;
-        overrides = import ./overlays/overrides.nix;
         haskell = import ./overlays/haskell.nix;
         # neovimOfficial = self.inputs.neovim.overlay;
-        # wireshark = import ./overlays/wireshark.nix;
         python = import ./overlays/python.nix;
         # mptcp = self.inputs.mptcp-flake.overlays.default;
         # nur = self.inputs.nur.overlay;

@@ -1,7 +1,7 @@
 { config, pkgs, lib, secrets, ... }:
 
 let 
-  hmUtils = pkgs.callPackage ../../../hm/lib.nix {};
+  tetoLib = pkgs.callPackage ../../../hm/lib.nix {};
 in
 {
   home.packages = with pkgs; [

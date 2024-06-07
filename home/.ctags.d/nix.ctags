@@ -1,0 +1,12 @@
+--langdef=nix
+--languages=+nix
+--langmap=nix:.nix
+# packages are "name = <tag>" or "pname = <tag>"
+--kinddef-nix=p,package,package definition
+--regex-nix=/[p?]name\s*=\s*"(\w+)"/\1/p/
+# functions have args, so look for a : right of the =
+--kinddef-nix=f,function,function definition
+--regex-nix=/(\S+)\s*=\s+\w+:/\1/f/
+# attrs just have =, but only index if they have >=4 chars
+--kinddef-nix=a,attr,attribute definition
+--regex-nix=/\s+([a-zA-Z_0-9-]{4,20})\s*=/\1/a/

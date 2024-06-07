@@ -84,7 +84,6 @@ vim.opt.termguicolors = true
 -- that's where treesitter installs grammars
 vim.opt.rtp:prepend('/home/teto/parsers')
 vim.opt.rtp:prepend(lazypath)
--- vim.opt.rtp:prepend("/home/teto/rocks.nvim")
 
 -- set it before loading vim plugins like autosession
 -- ,localoptions
@@ -885,6 +884,7 @@ vim.g.UltiSnipsSnippetDirectories = { vim.fn.stdpath('config') .. '/snippets' }
 vim.g.tex_flavor = 'latex'
 
 require('teto.treesitter')
+require('teto.orgmode')
 -- local available, config = pcall(require, 'nvim-treesitter.configs')
 
 
@@ -998,7 +998,7 @@ vim.api.nvim_create_user_command('JsonPretty', "%!jq '.'", { desc = "Prettify js
 vim.api.nvim_create_user_command(
 	'Tags',
 	[[
-	!ctags -R --exclude='build*' --exclude='.vim-src/**' --exclude='venv/**' --exclude='**/site-packages/**' --exclude='data/**' --exclude='dist/**' --exclude='notebooks/**' --exclude='Notebooks/**' --exclude='*graphhopper_data/*.json' --exclude='*graphhopper/*.json' --exclude='*.json' --exclude='qgis/**' *]]
+	!ctags -R --exclude='build*' --exclude='venv/**' --exclude='**/site-packages/**' --exclude='data/**' --exclude='dist/**' --exclude='notebooks/**' --exclude='*.json' --exclude='qgis/**' *]]
 	,
 	{}
 )
@@ -1125,7 +1125,7 @@ vim.keymap.set('n', ']w', function()
 end, { buffer = true })
 
 
-vim.opt.runtimepath:prepend('/home/teto/neovim/nvim-dbee')
+-- vim.opt.runtimepath:prepend('/home/teto/neovim/nvim-dbee')
 
 local has_dbee, dbee = pcall(require, 'dbee')
 if has_dbee then

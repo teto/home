@@ -1,12 +1,4 @@
-{ config, pkgs, lib, secrets, 
-flakeInputs,
-... }:
 {
-  imports = [
-   ../../../hm/profiles/bash.nix
-   # ../../profiles/bash.nix
-  ];
-
   programs.bash = {
 
     # goes to .profile
@@ -27,5 +19,6 @@ flakeInputs,
     initExtra = ''
      source  $XDG_CONFIG_HOME/bash/aliases.sh
      '';
-   };
- }
+};
+}
+

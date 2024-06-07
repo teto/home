@@ -1,6 +1,8 @@
 final: prev:
 {
 
+  # gufw is a GUI to iptables
+
   # lib = final.callPackage ./lib.nix {};
   # inherit (final.callPackage ./lib.nix { }) mkRemoteBuilderDesc;
       # wrap moc to load config from XDG_CONFIG via -C
@@ -45,15 +47,9 @@ final: prev:
   Rdebug = final.lib.enableDebugging (prev.R);
 
 
-  # gufw = prev.callPackage ./gufw {};
-  # upstreamed already
-
+  # no commit in 2 years
   # haskell-docs-cli = prev.haskellPackages.callCabal2nix "haskell-docs-cli" (prev.fetchzip {
   #       url = "https://github.com/lazamar/haskell-docs-cli/archive/e7f1a60db8696fc96987a3447d402c4d0d54b5e0.tar.gz";
   #       sha256 = "sha256-/9VjXFgbBz/OXjxu8/N7enNdVs1sQZmUiKhjSTIl6Fg=";
   #     }) {};
-
-  # menutray = prev.callPackage ./menutray { };
-
-  # rt-tests = prev.callPackage ./rt-test.nix {};
 }

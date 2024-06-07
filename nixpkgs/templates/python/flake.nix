@@ -36,7 +36,7 @@
         devShell = defaultPackage.overrideAttrs (oa: {
 
           propagatedBuildInputs = oa.propagatedBuildInputs ++ [
-            pkgs.nodePackages.pyright
+            pkgs.pyright
             # poetry2nix.packages."${system}".poetry
           ];
 

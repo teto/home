@@ -14,8 +14,6 @@
         ];
        # modules-right = [ 
        #  "battery"
-       #  "bluetooth"
-       #  "network"
        #  "backlight"
        # ];
 
@@ -38,7 +36,6 @@
        #  format-full = "";
        #  format-icons = ["" "" "" "" ""];
        # };
-       # bluetooth = {};
     };
     };
   };

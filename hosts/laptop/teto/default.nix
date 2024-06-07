@@ -18,6 +18,8 @@
    # ../desktop/teto/default.nix  # Track for regressions
 
    ../../desktop/teto/calendars.nix
+
+   ../../desktop/teto/programs/khal.nix
    ../../desktop/teto/programs/neovim.nix
    ../../desktop/teto/services/swaync.nix
    ../../desktop/teto/contacts.nix
@@ -25,10 +27,11 @@
    ../../desktop/teto/programs/helix.nix
    ../../desktop/teto/programs/yazi.nix
 
+    ../../../hm/profiles/vdirsyncer.nix
     ../../../hm/profiles/wezterm.nix
     ../../../hm/profiles/desktop.nix
     ../../../hm/profiles/sway.nix
-    ../../../hm/profiles/swayidle.nix
+    # ../../../hm/profiles/swayidle.nix
     ../../../hm/profiles/extra.nix
     ../../../hm/profiles/japanese.nix
 
@@ -41,7 +44,8 @@
 
   package-sets = {
    enableDesktopGUIPackages= true;
-   wifiPackages = true;
+    energy = true;
+    wifi = true;
   };
 
   programs.zsh = {
@@ -51,11 +55,10 @@
 
   # dans le cadre de mon experimentation !
   home.packages = with pkgs; [
+
     flakeInputs.rippkgs.packages.${pkgs.system}.rippkgs
     flakeInputs.rippkgs.packages.${pkgs.system}.rippkgs-index
 
-    timg # to display images in terminal, to compare with imgcat ?
-    imagemagick # for 'convert'
     ubuntu_font_family
     inconsolata # monospace
     noto-fonts-cjk # asiatic
@@ -70,7 +73,6 @@
     fira-code-symbols # for ligatures
     iosevka
 
-    tree 
     # noto-fonts
   ];
 

@@ -30,74 +30,6 @@ in
           include = [
             "~/.config/waybar/manual.jsonc"
           ];
-          layer = "top";
-          # position = "top";
-          height = 30;
-          # output = [
-          # "eDP-1"
-          # "HDMI-A-1"
-          # ];
-          # "wlr/taskbar"
-          # modules-left = [
-          #   "sway/workspaces"
-          #   "sway/mode"
-          # ];
-          # modules-center = [
-          #   "sway/window"
-          #   # "custom/hello-from-waybar"
-          #   "mpd"
-          # ];
-          modules-right = [
-            # "mpd"
-            "custom/launcher"
-
-            # "custom/mymodule#with-css-id"
-            # "temperature"
-            "idle_inhibitor"
-            "custom/github"
-            "custom/notmuch"
-            "custom/weather" 
-            "wireplumber"
-            "tray"
-            # "custom/power-menu"
-            "clock"
-            "custom/notification"
-          ];
-          tray = {
-            # "icon-size": 21,
-            spacing = 10;
-          };
-          mpd = {
-           # {album} - 
-            format = "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) â¸¨{songPosition}|{queueLength}â¸© ï";
-            #  Disconnected ï";
-            format-disconnected = "<span color=\"#f53c3c\">ï´</span>";
-            # {consumeIcon}{randomIcon}{repeatIcon}
-            format-stopped = "{singleIcon}Stopped ï";
-            unknown-tag = "N/A";
-            interval = 2;
-            consume-icons = {
-              "on" = "ï ";
-            };
-            random-icons = {
-              off = "<span color=\"#f53c3c\">ï´</span> ";
-              on = "ï´ ";
-            };
-            repeat-icons = {
-              on = "ï ";
-            };
-            "single-icons" = {
-              on = "ï1 ";
-            };
-            state-icons = {
-              paused = "ï";
-              playing = "ï";
-            };
-
-            # TODO give current artist/song
-            tooltip-format = "MPD (connected)";
-            tooltip-format-disconnected = "MPD (disconnected)";
-          };
 
           wireplumber = {
             format = "{volume}% {icon}";
@@ -118,7 +50,8 @@ in
             tooltip-format = "<big>{:%Y %B}</big>\n<tt>{calendar}</tt>";
             format-alt = "{:%Y-%m-%d}";
             # TODO launch ikhal instead
-            on-click-right = "${pkgs.kitty}/bin/kitty sh -c cal -m3";
+            # or a terminal
+            on-click-right = "kitty sh -c cal -m3";
             actions = {
                on-scroll-up = "shift_up";
                on-scroll-down =  "shift_down";
@@ -131,19 +64,6 @@ in
           #     format= "{usage}% ï";
           #     tooltip= false;
           # };
-          "sway/workspaces" = {
-            # {name}:
-            format = "{name}";
-            disable-scroll = false;
-            all-outputs = false;
-            # disable-scroll-wraparound = true;
-            # "disable-markup" : false,
-            # format-icons = {
-            #    "1" = "ï";
-            #    "2" = "ï©";
-            #    "3" = "ï¡";
-            # };
-          };
           # temperature = {
           #   # "thermal-zone": 2,
           #   # "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
@@ -201,14 +121,14 @@ in
           };
 
           # TODO only on laptop
-          network = {
-            # // "interface": "wlp2*", // (Optional) To force the use of this interface
-            format-wifi = "{essid} ({signalStrength}%) ï«";
-            format-ethernet = "{ifname}: {ipaddr}/{cidr} ï";
-            format-linked = "{ifname} (No IP) ï";
-            format-disconnected = "Disconnected â ";
-            format-alt = "{ifname}: {ipaddr}/{cidr}";
-          };
+          # network = {
+          #   # // "interface": "wlp2*", // (Optional) To force the use of this interface
+          #   format-wifi = "{essid} ({signalStrength}%) ï«";
+          #   format-ethernet = "{ifname}: {ipaddr}/{cidr} ï";
+          #   format-linked = "{ifname} (No IP) ï";
+          #   format-disconnected = "Disconnected â ";
+          #   format-alt = "{ifname}: {ipaddr}/{cidr}";
+          # };
 
 
           "custom/notmuch" =
@@ -230,6 +150,7 @@ in
               on_click = "${pkgs.kitty}/bin/kitty sh -c alot -l/tmp/alot.log";
               # TODO rerun mbsync + notmuch etc
               # exec-on-event = false;
+              # TODO create
               on-click-right = "systemctl start mbsync.service";
               exec = lib.getExe notmuchChecker;
 
@@ -242,10 +163,14 @@ in
     };
 
     # TODO
-    systemd.user.services.waybar = {
+    systemd.user.services.waybar = lib.mkIf config.services.waybar.enable {
       Service = {
         # to get fonts https://github.com/nix-community/home-manager/issues/4099#issuecomment-1605483260
-         Environment ="PATH=${lib.makeBinPath [ pkgs.wlogout pkgs.fuzzel pkgs.wofi ]}:${config.home.profileDirectory}/bin";
+        Environment ="PATH=${lib.makeBinPath [
+          pkgs.wlogout pkgs.fuzzel pkgs.wofi
+          pkgs.swaynotificationcenter
+          pkgs.wttrbar
+        ]}:${config.home.profileDirectory}/bin";
        };
        Unit.PartOf = [ "tray.target" ];
        Install.WantedBy = [ "tray.target" ];

@@ -15,17 +15,20 @@
 # in
 {
   imports = [
-    ./bash.nix
-      ../../../hm/profiles/nova/bash.nix
-      ../../../hm/teto/common.nix
-      ../../../hm/profiles/common.nix
-      ../../../hm/profiles/wezterm.nix
-      ../../../hm/profiles/mpv.nix
+    ../../../hm/profiles/bash.nix
+
+    ../../../hm/profiles/nova/programs/bash.nix
+    ../../../hm/teto/common.nix
+    # ../../../hm/profiles/common.nix
+    ../../../hm/profiles/desktop.nix
+    ../../../hm/profiles/wezterm.nix
     # flakeInputs.ironbar.homeManagerModules.default
 
     ./calendars.nix
     ./ia.nix
     ./sway.nix
+
+    ./programs/bash.nix
     ./programs/git.nix
     ./programs/helix.nix
     ./programs/neovim.nix
@@ -41,7 +44,6 @@
 
     # Not tracked, so doesn't need to go in per-machine subdir
     ../../../hm/profiles/android.nix
-    ../../../hm/profiles/desktop.nix
     ../../../hm/profiles/gaming.nix
     ../../../hm/profiles/gnome.nix
     ../../../hm/profiles/ia.nix

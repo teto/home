@@ -25,10 +25,10 @@ systemd-credentials:
   # systemd-ask-password -n | systemd-creds encrypt --name=foo-secret -p - - 
   systemd-creds encrypt --name=foo-secret -p INPUT OUTPUT
 
-nixpkgs-update-luarocks:
+update-luarocks:
   nix run '.#luarocks-packages-updater'
 
-update-kubeconfig: # Update
+aws-update-kubeconfig: # Update
   aws eks update-kubeconfig --name jk-dev --profile nova-sandbox --user-alias jk-dev
 
 # regen fortunes (not necessary with some fortunes version ?!)
@@ -109,7 +109,7 @@ nautilus:
 	gsettings set org.gnome.desktop.background show-desktop-icons false
 
 # update my nix vim plugins overlay
-vimPlugins:
+update-vimPlugins:
 	# TODO make it so it works with --commit !
 	nix run {{NIXPKGS_REPO}}#vimPluginsUpdater -- \
 	  -i {{justfile_directory()}}/overlays/vim-plugins/vim-plugin-names \
@@ -132,8 +132,9 @@ rebuild: (nixos-rebuild "build")
 switch: (nixos-rebuild "switch")
 switch-local: (nixos-rebuild "switch")
 
+# {{builders}}
 [private]
-nixos-rebuild command builders="--option builders $NOVA_OVH1 -j0":
+nixos-rebuild command builders="--option builders \"$NOVA_OVH1\" -j0":
 	nixos-rebuild --flake ~/home --override-input nixpkgs {{NIXPKGS_REPO}} \
 	   --override-input hm /home/teto/hm --override-input nova /home/teto/nova/doctor \
 	   --no-write-lock-file --show-trace --use-remote-sudo {{command}}

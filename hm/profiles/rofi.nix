@@ -40,6 +40,7 @@ in
     ];
     # pass.stores = [];
 
+    # TODO use pywal ?
     theme = {
       "@import" = "${config.xdg.cacheHome}/wal/colors-rofi-dark.rasi";
       "@theme" = "purple";

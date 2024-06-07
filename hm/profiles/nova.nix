@@ -2,15 +2,20 @@
 {
 
   imports = [
-      ./nova/bash.nix
+      ./nova/programs/bash.nix
+  ];
+
+  home.packages = [
+    pkgs.aws-vault # set it up as 
+    pkgs.sqlitebrowser
+    pkgs.google-chrome
+    # pigz for zlib (de)compression
+    pkgs.pigz # pigz -d ~/nova/jinko2/ScalarMetaDataChunked.json.zlib -c
+    pkgs.openapi-tui # explore openapi spec in terminal
   ];
 
   # to counter doctor's config of starship
   xdg.configFile."starship.toml".enable = false;
-
-  programs.bash.shellAliases = {
-     sscwl = "nix run .#simwork.core-webservice.local -- --bypass-manifest-check -vv";
-  };
 
   xdg.desktopEntries = {
     # xdg.desktopEntries = {
@@ -46,14 +51,4 @@
     #   name = "Test";
     # };
   };
-
-
-  home.packages = [
-    pkgs.aws-vault # set it up as 
-    pkgs.sqlitebrowser
-    pkgs.google-chrome
-    # pigz for zlib (de)compression
-    pkgs.pigz # pigz -d ~/nova/jinko2/ScalarMetaDataChunked.json.zlib -c
-    pkgs.openapi-tui # explore openapi spec in terminal
-  ];
 }

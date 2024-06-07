@@ -223,6 +223,7 @@ in
       programs.zsh.initExtra = ''
        export MCFLY_RESULTS_SORT=LAST_RUN
        export MCFLY_RESULTS=200
+       export MCFLY_FZF_NO_STRICT_ORDERING=1
        # export MCFLY_PROMPT="❯"
        # export MCFLY_HISTORY_LIMIT
 

@@ -1,4 +1,22 @@
 
+sudo tlp-stat
+
+
+* powertop
+
+powertop --calibrate
+sudo powertop --auto-tune
+will set 
+
+Depending of the brand and model of your CPU you can reach different C-States. If your system isn't optimized, you will see this:
+
+powertop --auto-tune &>/dev/null
+https://forums.unraid.net/topic/98070-reduce-power-consumption-with-powertop/
+
+if powertop doesn't recognize processor it shows only C3
+
+pcm
+
 cpupower frequency-info
 powertop
 perf-bias: 8

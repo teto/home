@@ -14,20 +14,12 @@
 
   xdg.mime.enable = true;
 
-  # home.extraOutputsToInstall = [ "man" "doc" ];
   programs.man.enable = true;
 
   home.packages = with pkgs; [
-
     # TODO try i3-snapshot
     # hstr # to deal with shell history
-    # or lazygit
-    nix-prefetch-git
-    netcat-gnu # plain 'netcat' is the bsd one
-    # nvimpager # 'less' but with neovim
-    strace
     tig
-    tree
   ];
 
   # works only because TIGRC_USER is set
@@ -71,15 +63,15 @@
   };
 
   # cool to have when I break neovim
-  programs.vim = {
-    enable = true;
-    settings = {
-      number = true;
-    };
-    extraConfig = ''
-     " TODO set different paths accordingly, to language server especially
-     '';
-  };
+  # programs.vim = {
+  #   enable = true;
+  #   settings = {
+  #     number = true;
+  #   };
+  #   extraConfig = ''
+  #    " TODO set different paths accordingly, to language server especially
+  #    '';
+  # };
 
   programs.fzf = {
     enable = true;
@@ -131,6 +123,6 @@
   };
 
   # for colors etc.
-  programs.lesspipe.enable = true;
+  programs.lesspipe.enable = false;
 
 }

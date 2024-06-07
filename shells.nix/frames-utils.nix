@@ -1,3 +1,4 @@
+# it now has a flake.nix so this could probably be removed/tweaked
 { compilerName ? "ghc884"
 }:
 

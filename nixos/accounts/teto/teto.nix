@@ -4,10 +4,6 @@
 , ... }:
 {
 
- imports = [
-   ../../profiles/desktop/programs/zsh.nix
-  ];
-
   users.users.teto = {
 
     shell = pkgs.zsh;
@@ -51,9 +47,6 @@
       ../../../perso/keys/id_rsa.pub
     ];
 
-    packages = with pkgs; [
-      ncdu # to see disk usage
-    ];
   };
 
   nix.settings.trusted-users = [ "teto" ];

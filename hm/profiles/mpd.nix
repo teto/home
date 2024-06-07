@@ -1,11 +1,6 @@
 { config, lib, pkgs, ... }:
 {
 
- home.packages = [
-  pkgs.ncmpcpp
-  pkgs.mpc_cli
-  pkgs.ymuse # GUI
- ];
 
 
  services.mpd = {
@@ -20,11 +15,11 @@
    };
  };
 
- programs.ncmpcpp = {
-  enable = true;
-  # bindings = #
-  # settings = 
-   # mpdMusicDir
- };
+ # programs.ncmpcpp = {
+ #  enable = true;
+ #  # bindings = #
+ #  # settings = 
+ #   # mpdMusicDir
+ # };
 }
 

@@ -2,21 +2,10 @@
 {
 
   include = [
-    ../../../hm/profiles/waybar.nix
+    ../../../../hm/profiles/waybar.nix
   ];
 
-  programs.waybar = let 
-
-   # TODO make sure it has jq in PATH
-   githubUpdater = pkgs.writeShellApplication 
-    { name = "github-updater";
-      runtimeInputs = [ pkgs.coreutils pkgs.curl pkgs.jq ];
-      text = (builtins.readFile ../modules/waybar/github.sh);
-      checkPhase = ":";
-    };
-
-
-  in {
+  programs.waybar = {
    enable = true;
    settings = {
      mainBar = {
@@ -155,15 +144,6 @@
          on-click-right = "swaync-client -d -sw";
          escape = true;
        };
-       "custom/github"= {
-          format = "{} ";
-          "return-type"= "json";
-          # The interval (in seconds) in which the information gets polled
-          "restart_interval"= 60;
-          # "exec"= "$HOME/.config/waybar/github.sh";
-          exec = lib.getExe githubUpdater;
-          on-click = "${pkgs.xdg_utils}/bin/xdg-open https://github.com/notifications";
-      };
 
      # TODO only on laptop
      network = {

@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }:
 {
 
-  services.openssh = {
+  # services.openssh = {
     enable = false;
     # kinda experimental
     ports = [ 12666 ];
@@ -39,6 +39,6 @@
     # permitRootLogin = "prohibit-password";
     # passwordAuthentication = false;
 
-  };
+  # };
 }
 

@@ -302,7 +302,7 @@ in
     workspace_auto_back_and_forth true
     show_marks yes
 
-    set $w1 1:
+    set $w1 1:󰖯
     set $w2 2:
     set $w3 3:
     set $w4 4:qemu
