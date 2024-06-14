@@ -57,6 +57,15 @@ in
   # allows to find fonts enabled through home.packages
   fonts.fontconfig.enable = true;
 
+  i18n.glibcLocales = pkgs.glibcLocales.override {
+    allLocales = true;
+ # 229 fr_FR.UTF-8/UTF-8 \
+ # 230 fr_FR/ISO-8859-1 \
+ # 231 fr_FR@euro/ISO-8859-15 \
+    locales = [ "fr_FR.UTF-8/UTF-8" "en_US.UTF-8/UTF-8" ];
+  };
+
+
   # programs.zoxide = {
   #   enable = true;
   #   enableZshIntegration = true;
@@ -79,7 +88,10 @@ in
 	  pkgs.alsa-utils #  for alsamixer
       # pinentry-bemenu
       pinentry-rofi
+      # gnome3.gnome-font-viewer  # Not very good
+
       timg
+      gh-dash
       # pass-custom
     ])
   ;
@@ -88,15 +100,6 @@ in
   # home.sessionPath = [
   #   "$XDG_DATA_HOME/../bin"
   # ];
-
-
-  programs.browserpass = {
-    enable = true;
-	browsers = [ 
-	 "firefox"
-	 "chromium"
-	];
-  };
 
   services.gnome-keyring = {
     enable = true;

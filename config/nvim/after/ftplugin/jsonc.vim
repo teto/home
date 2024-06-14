@@ -1,1 +1,1 @@
-set commentstring=\/\/
+let &commentstring='// %s'

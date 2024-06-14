@@ -61,6 +61,7 @@
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
 
+    # doesnt have a nixpkgs input
     vocage.url = "git+https://git.sr.ht/~teto/vocage?ref=flake";
 
     flake-utils.url = "github:numtide/flake-utils";
@@ -89,32 +90,7 @@
     };
 
     # nix.url = "github:NixOS/nix";
-    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
-    nur.url = "github:nix-community/NUR";
-    nixpkgs-wayland.url = "github:nix-community/nixpkgs-wayland";
     # poetry.url = "github:nix-community/poetry2nix";
-    nix-update = {
-      url = "github:Mic92/nix-update";
-    };
-    nix-index-cache.url = "github:Mic92/nix-index-database";
-
-    nova = {
-      url = "git+ssh://git@git.novadiscovery.net/sys/doctor";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    nix-index-database = {
-      url = "github:nix-community/nix-index-database";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    # c8296214151883ce27036be74d22d04953418cf4
-
-    # TODO this should not be necessary anymore ? just look at doctor ?
-    nova-ci = {
-      url = "git+ssh://git@git.novadiscovery.net/infra/ci-runner";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     neovim = {
       url = "github:nix-community/neovim-nightly-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -123,6 +99,30 @@
       url = "github:neovide/neovide";
       flake = false;
     };
+    nix-update = {
+      url = "github:Mic92/nix-update";
+    };
+    nix-index-cache.url = "github:Mic92/nix-index-database";
+
+    nix-index-database = {
+      url = "github:nix-community/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    # c8296214151883ce27036be74d22d04953418cf4
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+    nixpkgs-wayland.url = "github:nix-community/nixpkgs-wayland";
+
+    # TODO this should not be necessary anymore ? just look at doctor ?
+    nova = {
+      url = "git+ssh://git@git.novadiscovery.net/sys/doctor";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nova-ci = {
+      url = "git+ssh://git@git.novadiscovery.net/infra/ci-runner";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nur.url = "github:nix-community/NUR";
     purebred = {
       url = "github:purebred-mua/purebred";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -182,7 +182,10 @@
           overlays = (src.lib.attrValues self.overlays) ++ [
             autoCalledPackages
             self.inputs.rofi-hoogle.overlay
-            self.inputs.nova.overlays.default
+
+            # the nova overlay just brings ztp-creds and gitlab-ssh-keys
+            # removing the overlay means we dont need it during evaluation
+            # self.inputs.nova.overlays.default
 
             # self.inputs.nixpkgs-wayland.overlay
             # self.inputs.nix.overlays.default
@@ -346,7 +349,7 @@
             # generates a infinite trace right now
             # nvim = self.nixosConfigurations.desktop.config.home-manager.users.teto.programs.neovim.finalPackage;
 
-            inherit (myPkgs) sway-scratchpad;
+            inherit (myPkgs) sway-scratchpad local-ai-teto;
 
             nvim-unwrapped = myPkgs.neovim-unwrapped;
 
@@ -649,8 +652,9 @@
 
             local-ai-teto =  (prev.local-ai.override({
               # with_cublas = true;
-              with_tts = false;
-              }));
+              # with_tts = false;
+              # with_stablediffusion = false; # sthg about CUDA_RUNTIME_DIR
+            }));
 
             # see https://github.com/NixOS/nixpkgs/pull/257760
             ollamagpu = final.ollama.override { llama-cpp = llama-cpp-matt; };

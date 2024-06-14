@@ -140,7 +140,7 @@ in
   # boot.devSize = "5g";
 
   boot.kernelParams = [
-   "acpi_backlight=legacy"
+   # "acpi_backlight=legacy"
    # "acpi_osi=linux"
 
     # "acpi_backlight=vendor"
@@ -171,11 +171,11 @@ in
    {
     root = {
      imports = [
-      ../../hm/profiles/neovim.nix
       ../desktop/root/default.nix
       ../desktop/root/programs/ssh.nix
-      ../../hm/profiles/nova/ssh-config.nix
 
+      ../../hm/profiles/nova/ssh-config.nix
+      ../../hm/profiles/neovim.nix
      ];
 
     };

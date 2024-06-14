@@ -413,21 +413,21 @@ let
   ];
   
   extraPackages = with pkgs; [
-     go # for gitlab.nvim, we can probably ditch it afterwards
-     gcc # this is sadly a workaround to be able to run :TSInstall
+    bash-language-server
+    go # for gitlab.nvim, we can probably ditch it afterwards
+    gcc # this is sadly a workaround to be able to run :TSInstall
 
-     nvimLua.pkgs.luarocks
+    nvimLua.pkgs.luarocks
 
-      # luaPackages.lua-lsp
-      # lua53Packages.teal-language-server
-      # codeium # ideally not needed and referenced by codeium-vim directly
-      haskellPackages.hasktags
-      haskellPackages.fast-tags
+    # luaPackages.lua-lsp
+    # lua53Packages.teal-language-server
+    # codeium # ideally not needed and referenced by codeium-vim directly
+    haskellPackages.hasktags
+    haskellPackages.fast-tags
 
       # llm-ls
       manix # should be no need, telescope-manix should take care of it
       nodePackages.vscode-langservers-extracted # needed for typescript language server IIRC
-      nodePackages.bash-language-server
       # prettier sadly can't use buildNpmPackage because no lockfile https://github.com/NixOS/nixpkgs/issues/229475
       nodePackages.dockerfile-language-server-nodejs # broken
       nodePackages.typescript-language-server

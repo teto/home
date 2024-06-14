@@ -16,11 +16,6 @@
 @define-color highlight #e2be7d;
 @define-color comment #7f848e;
 
-/* * { */
-/* 	font-family: "JetBrainsMono Mono", "Symbols Nerd Font Mono", "Symbols Nerd Font"; */
-/* 	font-size: 17px; */
-/* } */
-
 * {
     border: none;
     border-radius: 0;

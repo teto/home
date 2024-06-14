@@ -142,7 +142,7 @@ in
       desktop-file-utils # to get desktop
       dogdns # dns solver "dog"
       evince # succeed where zathura/mupdf fail
-      # font-manager
+      font-manager  # pretty good font manager
       gnome.adwaita-icon-theme # else nothing appears
       gnome.eog # eye of gnome = image viewer / creates a collision
       gnome.file-roller # for GUI archive handling

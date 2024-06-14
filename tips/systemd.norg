@@ -5,6 +5,8 @@
   systemctl service-log-level systemd-networkd debug
   systemctl service-log-level
 
+systemctl --failed to list failed units (--user)
+
 * import variables ?
 
   systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK

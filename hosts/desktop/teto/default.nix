@@ -35,6 +35,7 @@
     ./programs/ssh.nix
     ./programs/yazi.nix
     ./programs/khal.nix
+    ./programs/waybar.nix
     ./programs/zsh.nix
 
     ./services/swaync.nix
@@ -107,6 +108,8 @@
   # for programs not merged yet
   home.packages = 
    with pkgs; [
+   # local-ai-teto # wip
+    llm-ls # needed by the neovim plugin
 
       # mdp # markdown CLI presenter
     # gthumb # image manager, great to tag pictures
@@ -122,7 +125,7 @@
     # nixfmt  # aliased to nixfmt-rfc-style, use the latter to avoid the warning
     nixfmt-rfc-style # 
     nix-output-monitor # 'nom'
-    presenterm # for presentations from terminal/markdown (in rust, supports images, pretty cool)
+    presenterm   # for presentations from terminal/markdown (in rust, supports images, pretty cool)
 
     lutris # for gaming
 

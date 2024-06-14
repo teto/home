@@ -31,13 +31,47 @@
    // #    "3" = "ï¡";
    // # };
  },
-            "systemd-failed-units": {
-                "hide-on-ok": false,
-                "format": "✗ {nr_failed}",
-                "format-ok": "✓",
-                "system": true,
-                "user": false,
-           },
+   "systemd-failed-units": {
+	   "hide-on-ok": false,
+	   "format": "✗ {nr_failed}",
+	   "format-ok": "✓",
+	   "system": true,
+	   "user": true
+  },
+ "clock": {
+  // "timezone": "America/New_York",
+  // TODO look how to display timezone
+  "timezones": [
+    "Europe/Paris",
+    "Asia/Tokyo"
+  ],
+  "tooltip-format": "<big>{:%Y %B}</big>\n<tt>{calendar}</tt>",
+  "format-alt": "{:%Y-%m-%d}",
+  // TODO launch ikhal instead
+  // or a terminal
+  "on-click-right": "kitty sh -c cal -m3",
+  "actions": {
+    "on-scroll-up": "shift_up",
+    "on-scroll-down": "shift_down"
+  }
+},
+  "custom/notmuch": {
+    "format": " {} 📧",
+    "max-length": 40,
+    "return-type": "json",
+    // TODO run regularly
+    "interval": 120,
+    "on_click": "kitty sh -c alot -l/tmp/alot.log",
+    // TODO rerun mbsync + notmuch etc
+    // "exec-on-event": false,
+    // TODO create
+    "on-click-right": "systemctl start --user mujmap-fastmail.service",
+	// TODO retreive executable name
+    "exec": "lib.getExe notmuchChecker"
+    // "exec": "pkgs.writeShellScript \"hello-from-waybar\" ''\n  echo \"from within waybar\"\n''"
+},
+
+
     "mpd": {
         "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ⸨{songPosition}|{queueLength}⸩ ",
         "format-disconnected": "Disconnected ",

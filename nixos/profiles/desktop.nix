@@ -45,13 +45,6 @@ in
     # ./modules/jupyter.nix
   ];
 
-  # see https://nixos.org/nix-dev/2015-July/017657.html for problems 
-  # with /run/user/1000 size
-  services.logind.extraConfig = ''
-    RuntimeDirectorySize=3G
-  '';
-
-
   environment.pathsToLink = [
    "/share/xdg-desktop-portal" 
    "/share/applications"
@@ -255,8 +248,7 @@ in
   documentation.nixos.enable = true;
 
   # programs.file-roller.enable = true;
-
-  programs.system-config-printer.enable = true;
+  # programs.system-config-printer.enable = true;
 
   # system.activationScripts.report-nixos-changes = ''
   #   PATH=$PATH:${lib.makeBinPath [ pkgs.nvd pkgs.nix ]}

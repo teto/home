@@ -1,0 +1,19 @@
+// config included only for the desktop
+{
+ // "modules-center": [
+ // ],
+ //
+
+  "modules-right": [
+    // "custom/mymodule#with-css-id",
+    // "temperature",
+    "idle_inhibitor",
+    "custom/github",
+	"custom/notmuch",
+    "wireplumber",
+    "clock",
+    "tray",
+    "custom/notification"
+  ]
+}
+

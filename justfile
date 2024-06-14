@@ -132,11 +132,12 @@ rebuild: (nixos-rebuild "build")
 switch: (nixos-rebuild "switch")
 switch-local: (nixos-rebuild "switch")
 
-# {{builders}}
+# 
 [private]
 nixos-rebuild command builders="--option builders \"$NOVA_OVH1\" -j0":
 	nixos-rebuild --flake ~/home --override-input nixpkgs {{NIXPKGS_REPO}} \
 	   --override-input hm /home/teto/hm --override-input nova /home/teto/nova/doctor \
+	   {{builders}} \
 	   --no-write-lock-file --show-trace --use-remote-sudo {{command}}
 
 # Check nix sqlite database

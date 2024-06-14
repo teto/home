@@ -8,13 +8,13 @@ This folder contains my customizations for:
 - [[https://github.com/pazz/alot][alot]] (MUA: Mail User Agent, like mutt)
 - [[https://github.com/astroidmail/astroid][astroid]] (MUA with a GUI)
 - bash
-- broot file explorer
+- [[https://dystroy.org/broot/][broot]] file explorer
 - [[https://github.com/jarun/Buku][buku]]: a cli bookmark manager
 - clerk (to control mpd via rofi)
-- font handling font-manager
-- fcitx5 (input method mechanims)
+- [[font-manager][https://github.com/FontManager/font-manager]] the best font manager I could find
+- fcitx5 (input method mechanims, e.g. to type japanese from your qwerty keyboard)
 - [[https://github.com/rycee/home-manager/][home-manager]]
-- htop
+- htop / btop
 - [[www.i3wm.org][i3]], a great if not the best tiling window manager)
 - [[https://github.com/Alexays/Waybar][waybar]] sway bar
 - [[https://github.com/pimutils/khard][khard]] (a carddav CLI)
@@ -30,9 +30,10 @@ This folder contains my customizations for:
 - [[qutebrowser][www.qutebrowser.org]] (vim like browser)
 - [[https://github.com/DaveDavenport/rofi][rofi]] (a dmenu-like interactive prompt, works with clerk/i3 etc...)
 - [[https://starship.rs/][starship]] (prompt manager)
-- sxiv (image viewer)
+- nssxiv (image viewer)
 - [[www.swaywm.com][sway]] (wayland window manager)
 - [[https://sw.kovidgoyal.net/kitty/][kitty]] (a modal terminal)
+- [[https://wezfurlong.org/][wezterm]] (a modal terminal)
 - [[https://github.com/jonas/tig][tig]] (a git history reader)
 - tmux (terminal multiplexer)
 - [[https://github.com/tio/tio][tio]] a serial device tool
