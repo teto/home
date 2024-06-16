@@ -1,8 +1,12 @@
-{ config, pkgs, lib
-, secrets 
-, withSecrets 
-, flakeInputs
-, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  secrets,
+  withSecrets,
+  flakeInputs,
+  ...
+}:
 let
   # sshLib = import ../../../nixpkgs/lib/ssh.nix { inherit secrets flakeInputs; };
   mkSshMatchBlock = m: {
@@ -26,37 +30,38 @@ in
 {
   programs.ssh = {
 
-    matchBlocks = let 
+    matchBlocks =
+      let
 
+        # TODO make this generic/available to all users
+        prod-runners = builtins.fromJSON (
+          builtins.readFile "${flakeInputs.nova-ci}/configs/prod/runners-generated.json"
+        );
 
-     # TODO make this generic/available to all users
-     prod-runners = builtins.fromJSON (builtins.readFile "${flakeInputs.nova-ci}/configs/prod/runners-generated.json");
-
-     remoteBuilders = lib.listToAttrs (
+        remoteBuilders = lib.listToAttrs (
           map
-            (attr:
-            # attrs should only contain
-            # So seems like there is no way to fix those
-            # secrets.nova-runner-1.sshUser 
-            lib.nameValuePair 
-             "${attr.runnerName}"
-             (mkSshMatchBlock attr)
+            (
+              attr:
+              # attrs should only contain
+              # So seems like there is no way to fix those
+              # secrets.nova-runner-1.sshUser 
+              lib.nameValuePair "${attr.runnerName}" (mkSshMatchBlock attr)
             )
             # TODO we should expose the resulting nix expressions directly
-             prod-runners);
-    in
-     (lib.optionalAttrs (builtins.trace "ssh-config withSecrets: ${toString withSecrets}" withSecrets) remoteBuilders) // 
-     {
+            prod-runners
+        );
+      in
+      (lib.optionalAttrs (builtins.trace "ssh-config withSecrets: ${toString withSecrets}" withSecrets) remoteBuilders)
+      // {
 
-      nova = {
-        match = "host=git.novadiscovery.net";
-        user = "matthieu.coudron";
-        identityFile = "~/.ssh/nova_key";
+        nova = {
+          match = "host=git.novadiscovery.net";
+          user = "matthieu.coudron";
+          identityFile = "~/.ssh/nova_key";
+        };
+        relay-prod = {
+          identityFile = "~/.ssh/nova_key";
+        };
       };
-      relay-prod = {
-        identityFile = "~/.ssh/nova_key";
-      };
-    };
   };
 }
-

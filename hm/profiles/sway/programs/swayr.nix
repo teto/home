@@ -1,5 +1,4 @@
 {
-   enable = true;
-   systemd.enable = true;
+  enable = true;
+  systemd.enable = true;
 }
-

@@ -5,20 +5,17 @@ vim.keymap.set('n', '<C-j>', "<cmd>lua require('rest-nvim').run(false)<cr>")
 -- TODO need to call run_current_request that accepts switching backend
 -- vim.keymap.set('n', '<C-j>', "<cmd>lua require('rest-nvim').run(false)<cr>")
 
-vim.api.nvim_create_user_command("RestFile", function ()
-  local filename = "/home/teto/neovim/rest.nvim/tests/basic_get.http"
-  local _res = require('rest-nvim').run_file(filename , { verbose = false; })
-  -- print("Found ".. #requests .. " requests ! ")
- end, { desc = "Running whole file"}
-  )
+vim.api.nvim_create_user_command('RestFile', function()
+    local filename = '/home/teto/neovim/rest.nvim/tests/basic_get.http'
+    local _res = require('rest-nvim').run_file(filename, { verbose = false })
+    -- print("Found ".. #requests .. " requests ! ")
+end, { desc = 'Running whole file' })
 
 -- show the number of queries found
 -- engine = 'classic';
-vim.api.nvim_create_user_command("RestCount", function ()
-  local requests = require('rest-nvim.request.classic').buf_list_requests(vim.fn.bufnr(), { verbose = false; })
-  print("Found ".. #requests .. " requests ! ")
- end, { desc = "toto"}
-  )
+vim.api.nvim_create_user_command('RestCount', function()
+    local requests = require('rest-nvim.request.classic').buf_list_requests(vim.fn.bufnr(), { verbose = false })
+    print('Found ' .. #requests .. ' requests ! ')
+end, { desc = 'toto' })
 -- vim.api.nvim_create_user_command("RestCount"
 -- vim.keymap.set('n', '<C-j>', "<cmd>lua require('rest-nvim').run(false)<cr>")
-

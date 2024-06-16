@@ -1,6 +1,6 @@
 return {
-    s("shebang", {
-        t { "#!/bin/sh", "" },
+    s('shebang', {
+        t({ '#!/bin/sh', '' }),
         i(0),
     }),
 }

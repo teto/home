@@ -43,10 +43,10 @@ nix build -o /tmp/pixiecore -f channel:nixos-unstable pixiecore
 # These ports need to be open in your firewall:
 # UDP: 67, 69
 # TCP: 64172
-# --dhcp-no-bind 
+# --dhcp-no-bind
 sudo /tmp/pixiecore/bin/pixiecore \
   boot $n/bzImage $n/initrd \
   --cmdline "$init loglevel=4" \
-  --debug --dhcp-no-bind  \
+  --debug --dhcp-no-bind \
   --port 64172 --status-port 64172 \
   --listen-addr 192.168.1.13

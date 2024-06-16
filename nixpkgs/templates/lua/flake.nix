@@ -6,15 +6,22 @@
     flake-utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = { self, nixpkgs, flake-utils, ... }:
-    flake-utils.lib.eachSystem [ "x86_64-linux" ] (system:
+  outputs =
+    {
+      self,
+      nixpkgs,
+      flake-utils,
+      ...
+    }:
+    flake-utils.lib.eachSystem [ "x86_64-linux" ] (
+      system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
 
-        mkPackage = luaVersion:
-          pkgs."lua${luaVersion}Packages".luarocks;
+        mkPackage = luaVersion: pkgs."lua${luaVersion}Packages".luarocks;
 
-        mkDevShell = luaVersion:
+        mkDevShell =
+          luaVersion:
           let
             luaPkgs = pkgs."lua${luaVersion}Packages";
           in
@@ -46,6 +53,6 @@
           luarocks-53 = mkDevShell "53";
           luarocks-54 = mkDevShell "54";
         };
-      });
+      }
+    );
 }
-

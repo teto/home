@@ -1,4 +1,10 @@
-{ config, pkgs, options, lib, ... }:
+{
+  config,
+  pkgs,
+  options,
+  lib,
+  ...
+}:
 {
   programs.git = {
     userName = lib.mkForce "Matthieu Coudron";
@@ -11,6 +17,5 @@
       key = "88A4D2369454E51E"; # new key
     };
 
-   };
- }
-
+  };
+}

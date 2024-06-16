@@ -1,9 +1,5 @@
 { pkgs, ... }:
-let 
+let
 
-
-  in
-[
-    pkgs.ntfsprogs
-]
-
+in
+[ pkgs.ntfsprogs ]

@@ -1,28 +1,29 @@
 # some dependencies need to be patched
 # http://code.nsnam.org/bake/file/c502b48053dc/bakeconf.xml
-{ stdenv
-, fetchFromGitHub
-, autoreconfHook
-, libtool
-, intltool
-, pkgconfig
-, ns-3
-, gcc
-, castxml ? null
+{
+  stdenv,
+  fetchFromGitHub,
+  autoreconfHook,
+  libtool,
+  intltool,
+  pkgconfig,
+  ns-3,
+  gcc,
+  castxml ? null,
   # hidden dependency of waf
-, ncurses
-, python
-, lib
-, fetchurl
-, withManual ? false
-, withQuagga ? false
-, withExamples ? false
-, openssl ? null
-, ccnd ? null
-, iperf2 ? null
+  ncurses,
+  python,
+  lib,
+  fetchurl,
+  withManual ? false,
+  withQuagga ? false,
+  withExamples ? false,
+  openssl ? null,
+  ccnd ? null,
+  iperf2 ? null,
   # shall we generate bindings
-, pythonSupport ? false
-, ...
+  pythonSupport ? false,
+  ...
 }:
 
 let
@@ -38,15 +39,20 @@ let
     "tap-bridge"
     "mobility"
     "flow-monitor"
-  ]
-  ++ lib.optionals withQuagga [ "internet-apps" ]
-  ;
+  ] ++ lib.optionals withQuagga [ "internet-apps" ];
 
   # TODO this is not possible anymore
   ns3forDce = ns-3.override ({ inherit modules python; });
-  pythonEnv = python.withPackages (ps:
+  pythonEnv = python.withPackages (
+    ps:
     lib.optional withManual ps.sphinx
-    ++ lib.optionals pythonSupport (with ps;[ pybindgen pygccxml ])
+    ++ lib.optionals pythonSupport (
+      with ps;
+      [
+        pybindgen
+        pygccxml
+      ]
+    )
   );
 
   dce = stdenv.mkDerivation rec {
@@ -56,23 +62,23 @@ let
     outputs = [ "out" ] ++ lib.optional pythonSupport "py";
 
     # with other modules
-    srcs = [
-      (fetchFromGitHub {
+    srcs =
+      [
+        (fetchFromGitHub {
+          owner = "direct-code-execution";
+          repo = "ns-3-dce";
+          rev = "dce-${version}";
+          sha256 = "0f2g47mql8jjzn2q6lm0cbb5fv62sdqafdvx5g8s3lqri1sca14n";
+          name = "dce";
+        })
+      ]
+      ++ lib.optional withQuagga (fetchFromGitHub {
         owner = "direct-code-execution";
-        repo = "ns-3-dce";
-        rev = "dce-${version}";
-        sha256 = "0f2g47mql8jjzn2q6lm0cbb5fv62sdqafdvx5g8s3lqri1sca14n";
-        name = "dce";
-      })
-    ]
-    ++ lib.optional withQuagga (fetchFromGitHub {
-      owner = "direct-code-execution";
-      repo = "ns-3-dce-quagga";
-      rev = "dce-${dce-version}";
-      sha256 = "1bbb1v33mv1p8isiggg9qg3a8hs0yq5s1dqz22lbdx55jrdxm7rb";
-      name = "dce-quagga";
-    })
-    ;
+        repo = "ns-3-dce-quagga";
+        rev = "dce-${dce-version}";
+        sha256 = "1bbb1v33mv1p8isiggg9qg3a8hs0yq5s1dqz22lbdx55jrdxm7rb";
+        name = "dce-quagga";
+      });
 
     postUnpack = lib.optionalString withQuagga ''
       # mv won't work :'(
@@ -81,10 +87,17 @@ let
 
     sourceRoot = "dce";
 
-    buildInputs = [ ns3forDce gcc pythonEnv ]
-      ++ lib.optionals pythonSupport [ castxml ncurses ]
-      ++ lib.optionals withExamples [ openssl ]
-    ;
+    buildInputs =
+      [
+        ns3forDce
+        gcc
+        pythonEnv
+      ]
+      ++ lib.optionals pythonSupport [
+        castxml
+        ncurses
+      ]
+      ++ lib.optionals withExamples [ openssl ];
 
     nativeBuildInputs = [ pkgconfig ];
 
@@ -98,7 +111,9 @@ let
 
       ${pythonEnv.interpreter} ./waf configure --prefix=$out \
       --with-ns3=${ns3forDce} --with-python=${pythonEnv.interpreter} \
-        ${lib.optionalString (!withExamples) "--disable-examples "} ${lib.optionalString (!doCheck) " --disable-tests" };
+        ${lib.optionalString (!withExamples) "--disable-examples "} ${
+          lib.optionalString (!doCheck) " --disable-tests"
+        };
 
       runHook postConfigure
     '';
@@ -114,7 +129,7 @@ let
     # '';
 
     meta = {
-      homepage = https://www.nsnam.org/overview/projects/direct-code-execution;
+      homepage = "https://www.nsnam.org/overview/projects/direct-code-execution";
       license = lib.licenses.gpl3;
       description = "Run real applications/network stacks in the simulator ns-3";
       platforms = with lib.platforms; unix;

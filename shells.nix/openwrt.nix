@@ -1,4 +1,6 @@
-{ pkgs ? import <nixpkgs> { } }:
+{
+  pkgs ? import <nixpkgs> { },
+}:
 
 let
   fixWrapper = pkgs.runCommand "fix-wrapper" { } ''
@@ -13,8 +15,8 @@ let
 
   fhs = pkgs.buildFHSUserEnv {
     name = "openwrt-env";
-    targetPkgs = pkgs: with pkgs;
-      [
+    targetPkgs =
+      pkgs: with pkgs; [
         git
         perl
         gnumake

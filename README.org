@@ -12,10 +12,9 @@ This folder contains my customizations for:
 - [[https://github.com/jarun/Buku][buku]]: a cli bookmark manager
 - clerk (to control mpd via rofi)
 - [[font-manager][https://github.com/FontManager/font-manager]] the best font manager I could find
-- fcitx5 (input method mechanims, e.g. to type japanese from your qwerty keyboard)
+- [[https://fcitx-im.org/wiki/Fcitx_5][fcitx5]] (input method mechanims, e.g. to type japanese from your qwerty keyboard)
 - [[https://github.com/rycee/home-manager/][home-manager]]
 - htop / btop
-- [[www.i3wm.org][i3]], a great if not the best tiling window manager)
 - [[https://github.com/Alexays/Waybar][waybar]] sway bar
 - [[https://github.com/pimutils/khard][khard]] (a carddav CLI)
 - [[https://github.com/pimutils/khal][khal]] (a calendar CLI)
@@ -32,8 +31,8 @@ This folder contains my customizations for:
 - [[https://starship.rs/][starship]] (prompt manager)
 - nssxiv (image viewer)
 - [[www.swaywm.com][sway]] (wayland window manager)
-- [[https://sw.kovidgoyal.net/kitty/][kitty]] (a modal terminal)
-- [[https://wezfurlong.org/][wezterm]] (a modal terminal)
+- [[https://sw.kovidgoyal.net/kitty/][kitty]] (terminal)
+- [[https://wezfurlong.org/][wezterm]] (terminal)
 - [[https://github.com/jonas/tig][tig]] (a git history reader)
 - tmux (terminal multiplexer)
 - [[https://github.com/tio/tio][tio]] a serial device tool

@@ -1,10 +1,14 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
   cfg = config.programs.home-assistant-cli;
 in
 {
   # options = {
-
 
   #   programs.home-assistant-cli = {
   #     config = lib.mkOption {
@@ -16,8 +20,8 @@ in
   #   };
   # };
 
-  config = mk
-
-  export HASS_SERVER=
-  export HASS_TOKEN=
+  # config = mk
+  #
+  # export HASS_SERVER=
+  # export HASS_TOKEN=
 }

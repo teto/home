@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
 
   # for android development
@@ -13,4 +18,3 @@
   #   })
   # ];
 }
-

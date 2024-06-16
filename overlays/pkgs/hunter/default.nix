@@ -1,13 +1,14 @@
-{ stdenv
-, lib
-, callPackage
-, makeRustPlatform
-, fetchFromGitHub
-, IOKit ? null
-, makeWrapper
-, glib
-, gst_all_1
-, libsixel
+{
+  stdenv,
+  lib,
+  callPackage,
+  makeRustPlatform,
+  fetchFromGitHub,
+  IOKit ? null,
+  makeWrapper,
+  glib,
+  gst_all_1,
+  libsixel,
 }:
 
 assert stdenv.isDarwin -> IOKit != null;
@@ -21,7 +22,11 @@ let
     sha256 = "08fvzb8w80bkkabc1iyhzd15f4sm7ra10jn32kfch5klgl0gj3j3";
   };
   mozilla = callPackage "${mozillaOverlay.out}/package-set.nix" { };
-  rustNightly = (mozilla.rustChannelOf { inherit date; channel = "nightly"; }).rust;
+  rustNightly =
+    (mozilla.rustChannelOf {
+      inherit date;
+      channel = "nightly";
+    }).rust;
   rustPlatform = makeRustPlatform {
     cargo = rustNightly;
     rustc = rustNightly;
@@ -59,7 +64,7 @@ rustPlatform.buildRustPackage rec {
 
   meta = with lib; {
     description = "The fastest file manager in the galaxy!";
-    homepage = https://github.com/rabite0/hunter;
+    homepage = "https://github.com/rabite0/hunter";
     license = licenses.wtfpl;
     maintainers = [ ];
     platforms = platforms.unix;

@@ -1,10 +1,15 @@
 # inspired by https://nixos.wiki/wiki/GNOME
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
 
-  environment.systemPackages = with pkgs; [ 
-   gnome.adwaita-icon-theme
-   gnomeExtensions.appindicator
+  environment.systemPackages = with pkgs; [
+    gnome.adwaita-icon-theme
+    gnomeExtensions.appindicator
   ];
 
   # as per  https://nixos.wiki/wiki/GNOME/Calendar
@@ -18,10 +23,6 @@
   services.gnome.gnome-online-accounts.enable = true;
   # optional to use google/nextcloud calendar
   # External calendar such as google/nextcloud can be only added via the gnome-control-center:
-
-
-
-
 
   # read the doc at https://nixos.wiki/wiki/GNOME
 

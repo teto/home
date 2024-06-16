@@ -1,32 +1,38 @@
-{ config, secrets, lib, pkgs, ... }:
+{
+  config,
+  secrets,
+  lib,
+  pkgs,
+  ...
+}:
 {
 
   imports = [
-     ../../../nixos/modules/nextcloud.nix
-     ../../../nixos/profiles/nextcloud.nix
+    ../../../nixos/modules/nextcloud.nix
+    ../../../nixos/profiles/nextcloud.nix
   ];
 
   services.nextcloud = {
-   enable = true;
-   previewGenerator = true;
-   hostName = secrets.jakku.hostname;
-   https = false;
-   package = pkgs.nextcloud28;
+    enable = true;
+    previewGenerator = true;
+    hostName = secrets.jakku.hostname;
+    https = false;
+    package = pkgs.nextcloud28;
 
-   # so I used to have
-	# ✗ PHP opcache: The PHP OPcache module is not properly configured. OPcache is not working as it should, opcache_get_status() returns false, please check configuration.
-   # The maximum number of OPcache keys is nearly exceeded. To assure that all scripts can be kept in the cache, it is recommended to apply "opcache.max_accelerated_files" to your PHP configuration with a value higher than "10000".
-   # The OPcache buffer is nearly full. To assure that all scripts can be hold in cache, it is recommended to apply "opcache.memory_consumption" to your PHP configuration with a value higher than "128".
-   # The OPcache interned strings buffer is nearly full. To assure that repeating strings can be effectively cached, it is recommended to apply "opcache.interned_strings_buffer" to your PHP configuration with a value higher than "8"..
-   phpOptions = {
+    # so I used to have
+    # ✗ PHP opcache: The PHP OPcache module is not properly configured. OPcache is not working as it should, opcache_get_status() returns false, please check configuration.
+    # The maximum number of OPcache keys is nearly exceeded. To assure that all scripts can be kept in the cache, it is recommended to apply "opcache.max_accelerated_files" to your PHP configuration with a value higher than "10000".
+    # The OPcache buffer is nearly full. To assure that all scripts can be hold in cache, it is recommended to apply "opcache.memory_consumption" to your PHP configuration with a value higher than "128".
+    # The OPcache interned strings buffer is nearly full. To assure that repeating strings can be effectively cached, it is recommended to apply "opcache.interned_strings_buffer" to your PHP configuration with a value higher than "8"..
+    phpOptions = {
 
-    # check https://www.php.net/manual/en/opcache.configuration.php#ini.opcache.max-accelerated-files
-              # "opcache.fast_shutdown" = "1";
-              "opcache.interned_strings_buffer" = "20";
-              "opcache.max_accelerated_files" = "1000000";
-              "opcache.memory_consumption" = "256";
-              "opcache.revalidate_freq" = "1";
-             };
+      # check https://www.php.net/manual/en/opcache.configuration.php#ini.opcache.max-accelerated-files
+      # "opcache.fast_shutdown" = "1";
+      "opcache.interned_strings_buffer" = "20";
+      "opcache.max_accelerated_files" = "1000000";
+      "opcache.memory_consumption" = "256";
+      "opcache.revalidate_freq" = "1";
+    };
     # New option since NixOS 23.05
     caching = {
       apcu = true;
@@ -47,30 +53,27 @@
       # we choose postgres because it's faster
       dbtype = "pgsql";
 
-
     };
 
-    settings =  {
+    settings = {
       default_phone_region = "FR";
       # Further forces Nextcloud to use HTTPS, useful when behind proxy
       overwriteprotocol = "https";
     };
 
-
     extraApps = with config.services.nextcloud.package.packages.apps; {
-     # inherit news; # removed 'cos gives a wrong error
-     inherit
-      memories 
-      previewgenerator 
-      # maps
-      # calendar
-      ;
+      # inherit news; # removed 'cos gives a wrong error
+      inherit
+        memories
+        previewgenerator
+        # maps
+        # calendar
+        ;
 
     };
 
-   # secretFile = "/run/secrets/nextcloudSecrets.json";
-   #     Secret options which will be appended to Nextcloud’s config.php file (written as JSON, in the same form as the services.nextcloud.settings[1] option), for example ‘{"redis":{"password":"secret"}}’.
-
+    # secretFile = "/run/secrets/nextcloudSecrets.json";
+    #     Secret options which will be appended to Nextcloud’s config.php file (written as JSON, in the same form as the services.nextcloud.settings[1] option), for example ‘{"redis":{"password":"secret"}}’.
 
   };
 
@@ -80,8 +83,8 @@
   # Creating Nextcloud users and configure mail adresses
   # disabling since it fails after first time
   # --password-from-env  looks for the password in OC_PASS
-    # environment = { # OC_PASS = "${confFile}";
-    # };
+  # environment = { # OC_PASS = "${confFile}";
+  # };
   systemd.services.nextcloud-add-user = {
     path = [ config.services.nextcloud.occ ];
     script = ''
@@ -89,31 +92,31 @@
       nextcloud-occ user:add --password-from-env teto
       ${config.services.nextcloud.occ}/bin/nextcloud-occ user:setting teto settings email "${secrets.users.teto.email}"
     '';
-      # ${config.services.nextcloud.occ}/bin/nextcloud-occ user:add --password-from-env user2
-      # ${config.services.nextcloud.occ}/bin/nextcloud-occ user:setting user2 settings email "user2@localhost"
-      # ${config.services.nextcloud.occ}/bin/nextcloud-occ user:setting admin settings email "admin@localhost"
+    # ${config.services.nextcloud.occ}/bin/nextcloud-occ user:add --password-from-env user2
+    # ${config.services.nextcloud.occ}/bin/nextcloud-occ user:setting user2 settings email "user2@localhost"
+    # ${config.services.nextcloud.occ}/bin/nextcloud-occ user:setting admin settings email "admin@localhost"
     serviceConfig = {
       Type = "oneshot";
-      User= "nextcloud";
+      User = "nextcloud";
     };
     # DONT run it automatically
     # after = [ "nextcloud-setup.service" ];
 
     # see https://discourse.nixos.org/t/disable-a-systemd-service-while-having-it-in-nixoss-conf/12732
     wantedBy = lib.mkForce [ ];
-     # "multi-user.target"
+    # "multi-user.target"
     # ];
   };
 
   # security.acme.
   # https://nixos.org/manual/nixos/stable/index.html#module-security-acme
   security.acme = {
-   acceptTerms = true;
-   defaults.email = secrets.users.teto.email;
+    acceptTerms = true;
+    defaults.email = secrets.users.teto.email;
   };
 
   # create some errors on deploy
-  services.nginx.virtualHosts = { 
+  services.nginx.virtualHosts = {
     # "cloud.acelpb.com" = {... }
     # see https://nixos.wiki/wiki/Nextcloud
     "${secrets.jakku.hostname}" = {
@@ -125,8 +128,8 @@
   };
 
   environment.systemPackages = [
-   config.services.nextcloud.occ
-  # inherit (cfg) datadir occ;
+    config.services.nextcloud.occ
+    # inherit (cfg) datadir occ;
 
   ];
 

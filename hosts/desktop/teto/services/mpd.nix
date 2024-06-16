@@ -1,6 +1,11 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
   services.mpd = {
-   musicDirectory = "/mnt/ntfs/Musique";
+    musicDirectory = "/mnt/ntfs/Musique";
   };
 }

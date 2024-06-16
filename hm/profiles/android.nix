@@ -1,8 +1,11 @@
-{ config, flakeInputs, pkgs, lib, ... }:
+{
+  config,
+  flakeInputs,
+  pkgs,
+  lib,
+  ...
+}:
 {
 
-  home.packages = with pkgs; [
-	android-tools
-   ];
+  home.packages = with pkgs; [ android-tools ];
 }
-

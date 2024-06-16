@@ -2,3 +2,7 @@
 #vg=opengl
 term-status-msg="Time: ${time-pos}"
 
+force-window=%3%yes
+profile=%6%gpu-hq
+ytdl-format=%19%bestvideo+bestaudio
+

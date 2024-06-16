@@ -1,43 +1,49 @@
-{ config, secrets, flakeInputs, lib, pkgs, ... }:
+{
+  config,
+  secrets,
+  flakeInputs,
+  lib,
+  pkgs,
+  ...
+}:
 {
   enable = false;
   # imports = [
   #    ../../nixos/profiles/nextcloud.nix
   # ];
-    hostName = "localhost";
-    https = false;
+  hostName = "localhost";
+  https = false;
 
-    # New option since NixOS 23.05
-    caching = {
-      apcu = false;
-      redis = true;
-      memcached = false;
-    };
-    # caching.redis = true;
+  # New option since NixOS 23.05
+  caching = {
+    apcu = false;
+    redis = true;
+    memcached = false;
+  };
+  # caching.redis = true;
 
-    # use default redis config for small servers
-    configureRedis = true;
-    extraAppsEnable = lib.mkForce false;
+  # use default redis config for small servers
+  configureRedis = true;
+  extraAppsEnable = lib.mkForce false;
 
-    database.createLocally = true;
+  database.createLocally = true;
 
-    config = {
-      # we choose postgres because it's faster
-      dbtype = "pgsql";
-      # services.postgresql
-      # dbport = config.services.postgresql.port;
-      dbhost = "localhost:5555";
+  config = {
+    # we choose postgres because it's faster
+    dbtype = "pgsql";
+    # services.postgresql
+    # dbport = config.services.postgresql.port;
+    dbhost = "localhost:5555";
 
-      # Further forces Nextcloud to use HTTPS
-      # overwriteProtocol = "https";
-    };
+    # Further forces Nextcloud to use HTTPS
+    # overwriteProtocol = "https";
+  };
 
-    extraApps = with config.services.nextcloud.package.packages.apps; {
-     # inherit news; # removed 'cos gives a wrong error
-     inherit memories;
-     inherit previewgenerator;
-    };
-
+  extraApps = with config.services.nextcloud.package.packages.apps; {
+    # inherit news; # removed 'cos gives a wrong error
+    inherit memories;
+    inherit previewgenerator;
+  };
 
   # Creating Nextcloud users and configure mail adresses
   # systemd.services.nextcloud-add-user = {
@@ -59,4 +65,3 @@
   # };
 
 }
-

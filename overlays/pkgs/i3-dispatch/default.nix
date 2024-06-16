@@ -1,9 +1,10 @@
-{ lib
-, buildPythonApplication
-, fetchFromGitHub
-, xdotool
-, psutil
-, pynvim
+{
+  lib,
+  buildPythonApplication,
+  fetchFromGitHub,
+  xdotool,
+  psutil,
+  pynvim,
 }:
 
 buildPythonApplication rec {
@@ -22,10 +23,9 @@ buildPythonApplication rec {
   # };
 
   src = builtins.fetchGit {
-    url = https://github.com/teto/i3-dispatch.git;
+    url = "https://github.com/teto/i3-dispatch.git";
     rev = "8f7213a05a4f6d91424a5ab604e0f97f05f16aa8";
   };
-
 
   # src = fetchFromGitHub {
   #   owner = "krlanguet";
@@ -34,11 +34,15 @@ buildPythonApplication rec {
   #   sha256 ="0f4blz90pjfr3ylpkg3fb7lls5kfizfyz7sismqaflg11z698911";
   # };
 
-  propagatedBuildInputs = [ xdotool psutil pynvim ];
+  propagatedBuildInputs = [
+    xdotool
+    psutil
+    pynvim
+  ];
 
   meta = with lib; {
     description = "tool to move around in i3";
-    homepage = https://github.com/teto/i3-dispatch;
+    homepage = "https://github.com/teto/i3-dispatch";
     # homepage = https://github.com/krlanguet/i3-cycle-dispatch;
     maintainers = [ maintainers.teto ];
 

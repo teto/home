@@ -1,4 +1,12 @@
-{ config, pkgs, secrets, options, flakeInputs, lib, ... }:
+{
+  config,
+  pkgs,
+  secrets,
+  options,
+  flakeInputs,
+  lib,
+  ...
+}:
 {
   users.users.root = {
     # isNormalUser = true; # creates home/ sets default shell

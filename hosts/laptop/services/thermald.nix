@@ -1,5 +1,10 @@
-{ config, lib, pkgs, ... }:
-  # services.thermald. 
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+# services.thermald. 
 
 {
   enable = true;

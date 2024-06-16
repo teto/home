@@ -11,18 +11,27 @@
   systemd is advertised on the matrix:nixos-router so:
   - the guide https://nixos.wiki/wiki/Systemd-networkd
 
-  When booting, hit tab to edit the boot entry. 
-  Normally NixOS does not output to serial in the boot process, so we need to enable is by appending console=ttyS0,115200 to the boot entry. All characters appear twice, so just make sure you type it correctyl ;) . ctrl+l can be used to refresh the screen. 
+  When booting, hit tab to edit the boot entry.
+  Normally NixOS does not output to serial in the boot process, so we need to enable is by appending console=ttyS0,115200 to the boot entry. All characters appear twice, so just make sure you type it correctyl ;) . ctrl+l can be used to refresh the screen.
    After installing, you want to make sure that the PCEngine APU entry from the NixOS hardware repo is present, as it enables the console port.
 */
-{ config, lib, pkgs, secrets, flakeInputs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  secrets,
+  flakeInputs,
+  ...
+}:
 let
 
-  bridgeNetwork = { address = "10.0.0.0"; prefixLength = 24; };
+  bridgeNetwork = {
+    address = "10.0.0.0";
+    prefixLength = 24;
+  };
 
   # todo rely on a lib to manipulate network
-  show = at:
-    "${at.address}/${toString at.prefixLength}";
+  show = at: "${at.address}/${toString at.prefixLength}";
 
   externalInterface = "wlan0";
 
@@ -49,11 +58,8 @@ in
     pkgs.wget
   ];
 
-
   home-manager.users.root = {
-    imports = [
-      ../../hm/profiles/neovim.nix
-    ];
+    imports = [ ../../hm/profiles/neovim.nix ];
   };
 
   # TODO use from flake or from unstable
@@ -65,16 +71,13 @@ in
       ./teto/nix.nix
       ../../hm/profiles/zsh.nix
       ../../hm/profiles/neovim.nix
-
-      # breaks build: doesnt like the "activation-script"
-      # nova.hmConfigurations.dev
     ];
   };
 
   services.journald.extraConfig = ''
     # alternatively one can run journalctl --vacuum-time=2d
     SystemMaxUse=200MB
-    '';
+  '';
 
   # Use the GRUB 2 boot loader.
   boot.loader.grub.enable = true;
@@ -95,8 +98,6 @@ in
       # aircrack-ng
     ];
   };
-
-
 
   # boot.kernel.sysctl = {
   #   # to not provoke the kernel into crashing
@@ -121,17 +122,20 @@ in
     "console=ttyS0,115200"
     "iomem=relaxed" # to be able to flash rom from host !
   ];
-  boot.supportedFilesystems = pkgs.lib.mkForce [ "vfat" "xfs" "cifs" ];
+  boot.supportedFilesystems = pkgs.lib.mkForce [
+    "vfat"
+    "xfs"
+    "cifs"
+  ];
 
   nix = {
     package = pkgs.nixVersions.nix_2_22;
 
-    extraOptions = '' 
+    extraOptions = ''
       experimental-features = nix-command flakes
     '';
-  
-  };
 
+  };
 
   # irqbalance is supposed to distribute hardware interrupts across processors
   # to increase perf
@@ -145,7 +149,10 @@ in
     enable = false;
     settings = {
       server = {
-        interface = [ "127.0.0.1" "10.42.42.42" ];
+        interface = [
+          "127.0.0.1"
+          "10.42.42.42"
+        ];
         access-control = [
           "0.0.0.0/0 refuse"
           "127.0.0.0/8 allow"
@@ -163,7 +170,6 @@ in
   # #     '';
   # };
 
-
   # following the guide https://nixos.wiki/wiki/Systemd-networkd
   systemd.network = {
     enable = true;
@@ -172,7 +178,7 @@ in
       timeout = 20;
 
       # interfaces to be ignored when declaring online status
-      ignoredInterfaces = ["enp1s0" ];
+      ignoredInterfaces = [ "enp1s0" ];
     };
 
     # example
@@ -264,10 +270,8 @@ in
           DNS = "192.168.1.1";
         };
 
-
         # lui meme
         networkConfig.DHCP = "ipv4";
-
 
       };
       "10-enp2s0" = {
@@ -303,7 +307,6 @@ in
       interfaces.br0.allowedUDPPorts = [ 53 ];
     };
 
-
     #   # address of the livebox
     #   defaultGateway = { address = "192.168.1.1"; interface = "wlp5s0"; };
     #  interfaces.enp1s0 = {
@@ -312,7 +315,6 @@ in
     #     # { address = "192.168.1.127"; prefixLength = 24; }
     #     # ];
     #   };
-
 
     #   interfaces.wlp5s0 = {
     #     useDHCP = true;
@@ -343,9 +345,9 @@ in
         enable = true;
         # https://iwd.wiki.kernel.org/networkconfigurationsettings
         settings = {
-          Settings = { 
+          Settings = {
             AutoConnect = true;
-            AlwaysRandomizeAddress= false;
+            AlwaysRandomizeAddress = false;
           };
           Network = {
             EnableIPv6 = false;

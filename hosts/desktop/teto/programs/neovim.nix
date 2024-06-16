@@ -1,43 +1,51 @@
-{ config, pkgs, lib
-, flakeInputs
-, ... }:
-let 
-  genBlockLua = title: content:
-    ''
+{
+  config,
+  pkgs,
+  lib,
+  flakeInputs,
+  ...
+}:
+let
+  genBlockLua = title: content: ''
     -- ${title} {{{
     ${content}
     -- }}}
-    '';
+  '';
 
-  luaPlugin = attrs: attrs // {
-    type = "lua";
-    config = lib.optionalString (attrs ? config && attrs.config != null) (genBlockLua attrs.plugin.pname attrs.config);
-  };
+  luaPlugin =
+    attrs:
+    attrs
+    // {
+      type = "lua";
+      config = lib.optionalString (attrs ? config && attrs.config != null) (
+        genBlockLua attrs.plugin.pname attrs.config
+      );
+    };
 
-  telescopePlugins =  with pkgs.vimPlugins; [
+  telescopePlugins = with pkgs.vimPlugins; [
 
-   # lua require'telescope-all-recent'.toggle_debug()
+    # lua require'telescope-all-recent'.toggle_debug()
 
-   # (luaPlugin {
-   #   plugin = telescope-all-recent-nvim; 
-   #   config = ''
-   #        require'telescope-all-recent'.setup{
-   #    -- your config goes here
-   #  }'';
-  # })
+    # (luaPlugin {
+    #   plugin = telescope-all-recent-nvim; 
+    #   config = ''
+    #        require'telescope-all-recent'.setup{
+    #    -- your config goes here
+    #  }'';
+    # })
 
   ];
 
   # orgmodePlugins = with pkgs.vimPlugins; [ 
   neorgPlugins = with pkgs.vimPlugins; [
-      # (luaPlugin { plugin = neorg-telescope; })
-     ];
+    # (luaPlugin { plugin = neorg-telescope; })
+  ];
 
-
+  # try via rocks.nvim first
   neotestPlugins = with pkgs.vimPlugins; [
-      neotest 
-      neotest-haskell
-     ];
+    #     neotest 
+    #     neotest-haskell
+  ];
 
   luaPlugins = with pkgs.vimPlugins; [
     # {
@@ -74,20 +82,10 @@ let
     #   '';
     # }
 
-    # (luaPlugin {
-    #   plugin = lsp_lines-nvim;
-    #   config = ''
-    #   require("lsp_lines").register_lsp_virtual_lines()
-    #   '';
-    # })
-
     # should bring in scope fzy
     # (luaPlugin { plugin = rocks-nvim; })
     (luaPlugin { plugin = urlview-nvim; })
     (luaPlugin { plugin = nvim-ufo; })
-    (luaPlugin { plugin = ollama-nvim; })
-    (luaPlugin { plugin = mini-nvim; })
-    (luaPlugin { plugin = cloak-nvim; })
     (luaPlugin { plugin = nvim-dbee; })
     # breaks setup
     # (luaPlugin { plugin =  hmts-nvim; })
@@ -96,10 +94,10 @@ let
     # TODO restore
     # (luaPlugin { plugin = image-nvim; })
 
-    (luaPlugin { 
-     # this is a peculiarly complex one that needs pynvim, image.nvim
-     plugin = molten-nvim; 
-    })
+    # (luaPlugin { 
+    #  # this is a peculiarly complex one that needs pynvim, image.nvim
+    #  plugin = molten-nvim; 
+    # })
 
     # (luaPlugin {
     #   plugin = vim-obsession;
@@ -115,6 +113,8 @@ let
 
     # TODO it needs some extra care
     (luaPlugin { plugin = haskell-tools-nvim; })
+
+    # I've not been using it so far
     (luaPlugin { plugin = nvim-dap; })
 
     # (luaPlugin {
@@ -158,7 +158,7 @@ let
     # disabled because of https://github.com/rktjmp/lush.nvim/issues/89
     (luaPlugin { plugin = lush-nvim; })
     # (luaPlugin { plugin = gruvbox-nvim; }) 
-    # out of tree
+
     (luaPlugin {
       # really helps with syntax highlighting
       plugin = haskell-vim;
@@ -171,8 +171,9 @@ let
         vim.g.haskell_enable_static_pointers = 1  -- to enable highlighting of `static`
         vim.g.haskell_backpack = 1                -- to enable highlighting of backpack keywords
         vim.g.haskell_indent_disable=1
-        '';
+      '';
     })
+
     # " gutentags + gutenhasktags {{{
     # " to keep logs GutentagsToggleTrace
     # " some commands/functions are not available by default !!
@@ -195,10 +196,8 @@ let
     # " let g:gutentags_ctags_extra_args
     # let g:gutentags_file_list_command = 'rg --files'
     # " gutenhasktags/ haskdogs/ hasktags/hothasktags
-
     # let g:gutentags_ctags_exclude = ['.vim-src', 'build', '.mypy_cache']
     # " }}}
-
 
     # disabling as long as it depends on nvim-treesitter
     # (luaPlugin {
@@ -219,19 +218,15 @@ let
       #  '';
     })
 
-    { 
-    # node-based :MarkdownPreview
-    plugin = markdown-preview-nvim;
-    # let g:vim_markdown_preview_github=1
-    # let g:vim_markdown_preview_use_xdg_open=1
+    {
+      # node-based :MarkdownPreview
+      plugin = markdown-preview-nvim;
+      # let g:vim_markdown_preview_github=1
+      # let g:vim_markdown_preview_use_xdg_open=1
     }
 
     # nvim-markdown-preview  # :MarkdownPreview
 
-    { 
-     # might get outdated in newer neovim
-     plugin = b64-nvim; # provides B64Decode / Encode
-    }
     # { plugin = kui-nvim; }
     # FIX https://github.com/NixOS/nixpkgs/issues/169293 first
 
@@ -242,24 +237,27 @@ let
     #    require'telescope'.load_extension('frecency')
     #    '';
     # })
+
     (luaPlugin {
       plugin = nvimdev-nvim;
       optional = true;
-      config =  /* lua */ ''
-        -- nvimdev {{{
-        -- call nvimdev#init(--path/to/neovim--)
-        vim.g.nvimdev_auto_init = 1
-        vim.g.nvimdev_auto_cd = 1
-        -- vim.g.nvimdev_auto_ctags=1
-        vim.g.nvimdev_auto_lint = 1
-        vim.g.nvimdev_build_readonly = 1
-        --}}}'';
+      config = # lua
+        ''
+          -- nvimdev {{{
+          -- call nvimdev#init(--path/to/neovim--)
+          vim.g.nvimdev_auto_init = 1
+          vim.g.nvimdev_auto_cd = 1
+          -- vim.g.nvimdev_auto_ctags=1
+          vim.g.nvimdev_auto_lint = 1
+          vim.g.nvimdev_build_readonly = 1
+          --}}}'';
     })
+
     # (luaPlugin { plugin = sniprun; })
     (luaPlugin { plugin = telescope-nvim; })
     # (luaPlugin { plugin = telescope-manix; })
     # call with :Hoogle
-        (luaPlugin { plugin = glow-nvim; })
+    (luaPlugin { plugin = glow-nvim; })
 
     # (luaPlugin {
     #   plugin = fzf-hoogle-vim;
@@ -304,8 +302,8 @@ let
     # WIP
     # (luaPlugin { plugin = nvim-telescope-zeal-cli; })
 
-
     (luaPlugin { plugin = minimap-vim; })
+
     # (luaPlugin {
     #   # reuse once https://github.com/neovim/neovim/issues/9390 is fixed
     #   plugin = vimtex;
@@ -366,37 +364,8 @@ let
     #   #         }
     # })
 
-    # triggers too many errors
-    (luaPlugin {
-      plugin = rest-nvim;
-    #   # config = ''
-    #   #   require("rest-nvim").setup({
-    #   #     -- Open request results in a horizontal split
-    #   #     result_split_horizontal = false,
-    #   #     -- Skip SSL verification, useful for unknown certificates
-    #   #     skip_ssl_verification = false,
-    #   #     -- Highlight request on run
-    #   #     highlight = {
-    #   #      enabled = true,
-    #   #      timeout = 150,
-    #   #     },
-    #   #     result = {
-    #   #      -- toggle showing URL, HTTP info, headers at top the of result window
-    #   #      show_url = true,
-    #   #      show_http_info = true,
-    #   #      show_headers = true,
-    #   #      -- disable formatters else they generate errors/add dependencies
-    #   #      -- for instance when it detects html, it tried to run 'tidy'
-    #   #      formatters = {
-    #   #       html = false,
-    #   #       jq = false
-    #   #      },
-    #   #     },
-    #   #     -- Jump to request line on run
-    #   #     jump_to_request = false,
-    #   #   })
-    #   #   '';
-    })
+    # TODO put into rocks.nvim
+    (luaPlugin { plugin = rest-nvim; })
   ];
 
   filetypePlugins = with pkgs.vimPlugins; [
@@ -405,18 +374,22 @@ let
     { plugin = fennel-vim; }
     { plugin = vim-toml; }
     { plugin = dhall-vim; }
-    { plugin = vim-teal; }
     { plugin = kmonad-vim; }
     { plugin = vim-just; }
     moonscript-vim
     idris-vim
   ];
-  
+
   extraPackages = with pkgs; [
     bash-language-server
+    black
+    editorconfig-checker # used in null-ls
+    fswatch # better file watching starting with 0.10
     go # for gitlab.nvim, we can probably ditch it afterwards
-    gcc # this is sadly a workaround to be able to run :TSInstall
+    # gcc # this is sadly a workaround to be able to run :TSInstall
+    luajitPackages.luacheck
 
+    luaformatter
     nvimLua.pkgs.luarocks
 
     # luaPackages.lua-lsp
@@ -425,102 +398,76 @@ let
     haskellPackages.hasktags
     haskellPackages.fast-tags
 
-      # llm-ls
-      manix # should be no need, telescope-manix should take care of it
-      nodePackages.vscode-langservers-extracted # needed for typescript language server IIRC
-      # prettier sadly can't use buildNpmPackage because no lockfile https://github.com/NixOS/nixpkgs/issues/229475
-      nodePackages.dockerfile-language-server-nodejs # broken
-      nodePackages.typescript-language-server
-      # pandoc # for markdown preview, should be in the package closure instead
-      # pythonPackages.pdftotext  # should appear only in RC ? broken
-      nil # a nix lsp
-      # rnix-lsp
-      rust-analyzer
-      shellcheck
-      sumneko-lua-language-server
+    # llm-ls
+    manix # should be no need, telescope-manix should take care of it
+    nodePackages.vscode-langservers-extracted # needed for typescript language server IIRC
+    # prettier sadly can't use buildNpmPackage because no lockfile https://github.com/NixOS/nixpkgs/issues/229475
+    nodePackages.dockerfile-language-server-nodejs
+    nodePackages.typescript-language-server
+    # pandoc # for markdown preview, should be in the package closure instead
+    # pythonPackages.pdftotext  # should appear only in RC ? broken
+    nil # a nix lsp
+    # rnix-lsp
+    rust-analyzer
+    shellcheck
+    sumneko-lua-language-server
 
-      gopls # LSP for go
+    gopls # LSP for go
 
-      # for none-ls
-      yamllint
-      yamlfmt
-      yaml-language-server
-      editorconfig-checker # used in null-ls
-      luaformatter
-      nodePackages.prettier 
-      python3Packages.flake8 # for nvim-lint and some nixpkgs linters
-      pkgs.black
-      # soxWithMp3 = final.sox.override { llama-cpp = llama-cpp-matt; };
+    # for none-ls
+    nixfmt # -rfc-style #
+    nodePackages.prettier
+    python3Packages.flake8 # for nvim-lint and some nixpkgs linters
+    # soxWithMp3 = final.sox.override { llama-cpp = llama-cpp-matt; };
 
-      nixfmt-rfc-style # 
-      # to enable GpWhisper in gp.nvim
-      (sox.override({enableLame = true;}))
+    # to enable GpWhisper in gp.nvim
+    (sox.override ({ enableLame = true; }))
 
-      pyright
+    pyright
 
-      luajitPackages.luacheck 
-      yaml-language-server  # ~100MB 
+    yaml-language-server # ~100MB
+    yamllint
+    yamlfmt
+  ];
 
-      fswatch # better file watching starting with 0.10
-    ];
-
-    # TODO get lua interpreter to select the good lua packages
-    nvimLua = config.programs.neovim.finalPackage.passthru.unwrapped.lua;
- in
+  # TODO get lua interpreter to select the good lua packages
+  nvimLua = config.programs.neovim.finalPackage.passthru.unwrapped.lua;
+in
 {
   programs.neovim = {
 
-   plugins =
-           luaPlugins 
-        ++ filetypePlugins
-        ++ telescopePlugins
-        ++ neorgPlugins
-        ++ neotestPlugins
-   ;
+    plugins = luaPlugins ++ filetypePlugins ++ telescopePlugins ++ neorgPlugins ++ neotestPlugins;
 
     # plugins = with pkgs.vimPlugins; [
     #  tint-nvim
     # ];
-     # -- vim.lsp.set_log_level("info")
-     # -- require my own manual config
-     # -- logs are written to /home/teto/.cache/vim-lsp.log
-
+    # -- vim.lsp.set_log_level("info")
+    # -- require my own manual config
+    # -- logs are written to /home/teto/.cache/vim-lsp.log
 
     # viml config, to test home-manager setup
     # extraConfig = ''
     #  '';
 
-    extraLuaConfig =  /* lua */ ''
-      require('init-manual')
-    '';
+    extraLuaConfig = # lua
+      ''
+        require('init-manual')
+      '';
 
     # HACK till we fix it
-    extraLuaPackages = lp: 
-         [ lp.sqlite ]
-        # nvimLua.pkgs.rest-nvim.propagatedBuildInputs
+    # or else we need a vim.g.sqlite_clib_path
+    extraLuaPackages = lp: [ lp.sqlite ]
+    # nvimLua.pkgs.rest-nvim.propagatedBuildInputs
     ;
 
-
-    extraPython3Packages = p: [ 
-     p.jupyter_client
-     p.pyperclip  #  if you want to use molten_copy_output
-     p.nbformat # to import/export notebooks
-     p.pynvim
+    extraPython3Packages = p: [
+      p.jupyter_client
+      p.pyperclip # if you want to use molten_copy_output
+      p.nbformat # to import/export notebooks
+      p.pynvim
     ];
     extraPackages = extraPackages;
- };
-
- home.packages = extraPackages;
-
- # just for some
- xdg.configFile."nvim/lua/generated-by-nix.lua" = {
-   enable = true;
-   text = ''
-     local M = {}
-     M.gcc_path = "${pkgs.gcc}/bin/gcc"
-     return M
-     '';
   };
 
-
+  home.packages = extraPackages;
 }

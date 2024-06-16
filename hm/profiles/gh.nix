@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... } @ args:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}@args:
 let
   secrets = import ./secrets.nix;
 in

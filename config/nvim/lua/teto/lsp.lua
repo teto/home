@@ -3,22 +3,22 @@ local M = {}
 -- see https://git.sr.ht/~whynothugo/lsp_lines.nvim
 -- for additionnal config
 M.default_config = {
- -- disabled because too big in haskell
- virtual_lines = { only_current_line = true },
- virtual_text = false,
- {
-  severity = { min = vim.diagnostic.severity.WARN }
- },
- signs = true,
- severity_sort = true,
+    -- disabled because too big in haskell
+    virtual_lines = { only_current_line = true },
+    virtual_text = false,
+    {
+        severity = { min = vim.diagnostic.severity.WARN },
+    },
+    signs = true,
+    severity_sort = true,
 
- -- TODO how to add borders ?
- float = {
-  source = true,
-  severity_sort = true,
-  border = "rounded",
- }
- -- update_in_insert = false,
+    -- TODO how to add borders ?
+    float = {
+        source = true,
+        severity_sort = true,
+        border = 'rounded',
+    },
+    -- update_in_insert = false,
 }
 
 --
@@ -42,29 +42,28 @@ diagnostics_active = true
 
 -- code to toggle diagnostic display
 M.toggle_diagnostic_display = function()
- -- local diagnostics_active = true
- diagnostics_active = not diagnostics_active
- if diagnostics_active then
-  vim.diagnostic.show()
- else
-  vim.diagnostic.hide()
- end
+    -- local diagnostics_active = true
+    diagnostics_active = not diagnostics_active
+    if diagnostics_active then
+        vim.diagnostic.show()
+    else
+        vim.diagnostic.hide()
+    end
 end
-
 
 -- toggle between virttext / lsp_lines / nothing
 M.set_lsp_lines = function(enable)
- -- local diagnostics_active = true
- local conf = M.default_config
- conf.virtual_text = not enable
- if enable then
-  conf.virtual_lines = { only_current_line = true }
- else
-  conf.virtual_lines = false
- end
+    -- local diagnostics_active = true
+    local conf = M.default_config
+    conf.virtual_text = not enable
+    if enable then
+        conf.virtual_lines = { only_current_line = true }
+    else
+        conf.virtual_lines = false
+    end
 
- -- vim.notify("setting diagnostic config to ", vim.inspect(conf))
- vim.diagnostic.config(conf)
+    -- vim.notify("setting diagnostic config to ", vim.inspect(conf))
+    vim.diagnostic.config(conf)
 end
 
 --- severity being vim.diagnostic.severity.WARN
@@ -73,29 +72,28 @@ end
 -- lua vim.print(vim.diagnostic.get(0)) returned 0 as namespace
 -- vim.diagnostic.severity.ERROR = 1
 M.set_level = function(severity)
- -- Disable virtual_text since it's redundant due to lsp_lines.
- -- { min = }
- local opts = {
-  signs = {
-   severity = severity
-  }
- }
- local opts_global = {
-    severity = { min = severity }
-   }
- local diags = vim.diagnostic.get(0)
- local bufnr = vim.fn.bufnr('%')
- vim.diagnostic.config(opts_global)
- -- vim.diagnostic.get(0, { severity = { min = vim.diagnostic.severity.WARN } })
+    -- Disable virtual_text since it's redundant due to lsp_lines.
+    -- { min = }
+    local opts = {
+        signs = {
+            severity = severity,
+        },
+    }
+    local opts_global = {
+        severity = { min = severity },
+    }
+    local diags = vim.diagnostic.get(0)
+    local bufnr = vim.fn.bufnr('%')
+    vim.diagnostic.config(opts_global)
+    -- vim.diagnostic.get(0, { severity = { min = vim.diagnostic.severity.WARN } })
 
- -- needs diags to show
- -- signs are in a different namespace
- -- print("Setting bufnr", bufnr)
-                   -- • optional: (optional) boolean, if true, `nil` is valid
+    -- needs diags to show
+    -- signs are in a different namespace
+    -- print("Setting bufnr", bufnr)
+    -- • optional: (optional) boolean, if true, `nil` is valid
 
- vim.diagnostic.show(nil, bufnr, diags, { signs = { severity = severity } })
+    vim.diagnostic.show(nil, bufnr, diags, { signs = { severity = severity } })
 end
-
 
 -- M.fake_diags = { {
 --     _tags = {

@@ -1,5 +1,5 @@
 let
-  nix_src = fetchGit https://github.com/NixOS/nix;
+  nix_src = fetchGit "https://github.com/NixOS/nix";
   nix_release = import (nix_src + "/release.nix") {
     nix = nix_src;
     nixpkgs = <nixpkgs>;

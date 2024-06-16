@@ -1,15 +1,14 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 {
   # you can use dunstctl to control stuff
   # to debug dunst: -verbosity debug
   # icon_path is generated from icon_theme or set manually
   services.dunst = {
-    enable = true; # failed to produce output path for output 'out' at 
-
-    # iconTheme = {
-    # 	package = pkgs.gnome.adwaita-icon-theme;
-    # 	name = "Adwaita";
-    # }; 
 
     iconTheme = {
       package = pkgs.papirus-icon-theme;
@@ -46,7 +45,6 @@
       # of "1". Make sure this key actually exists on your keyboard layout,
       # history = "ctrl+grave";
       #   };
-
 
       # [shortcuts]
 

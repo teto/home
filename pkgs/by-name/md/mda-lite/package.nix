@@ -1,26 +1,29 @@
-{ stdenv
-, lib
-, fetchFromGitLab
-, pkgconfig
-, autoreconfHook
-, check
-, graph-tool
+{
+  stdenv,
+  lib,
+  fetchFromGitLab,
+  pkgconfig,
+  autoreconfHook,
+  check,
+  graph-tool,
   # , openssl # for libcrypto
   # , libpcap
-, scapy
-, setuptools
-, netifaces
-, python
-, buildPythonApplication
+  scapy,
+  setuptools,
+  netifaces,
+  python,
+  buildPythonApplication,
 }:
 
 let
-  pythonEnv = python.withPackages (ps: with ps; [
-    scapy
-    netifaces
-    setuptools
-    graph-tool
-  ]);
+  pythonEnv = python.withPackages (
+    ps: with ps; [
+      scapy
+      netifaces
+      setuptools
+      graph-tool
+    ]
+  );
 in
 # stdenv.mkDerivation rec 
 buildPythonApplication {
@@ -57,4 +60,3 @@ buildPythonApplication {
     license = licenses.gpl3;
   };
 }
-

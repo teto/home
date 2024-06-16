@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 {
   news.display = "silent";
 
@@ -31,7 +36,6 @@
     source ${config.xdg.configHome}/tig/custom.tigrc
   '';
 
-
   # useful to prevent some problems with nix
   # https://github.com/commercialhaskell/stack/issues/2358
   # home.file.".stack/config.yaml".source = ../home/stack.yaml;
@@ -50,7 +54,6 @@
       "ctrl:nocaps" # makes caps lock an additionnal ctrl
     ];
   };
-
 
   # xdg-settings set default-web-browser firefox.desktop
 
@@ -119,7 +122,7 @@
       set-option -g status on                # turn the status bar on
       if-shell -b 'head $XDG_CONFIG_HOME/tmux/config' \
         "source-file $XDG_CONFIG_HOME/tmux/config"
-      '';
+    '';
   };
 
   # for colors etc.

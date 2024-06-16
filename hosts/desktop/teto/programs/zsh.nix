@@ -1,8 +1,9 @@
-{ config
-, secrets
-, lib
-, withSecrets
-, ...
+{
+  config,
+  secrets,
+  lib,
+  withSecrets,
+  ...
 }:
 {
 
@@ -10,49 +11,49 @@
 
     enableTetoConfig = true;
 
+    #  history = {
+    #   path = "${config.xdg.cacheHome}/zsh_history";
+    #  };
+    #
+    #  sessionVariables = config.programs.bash.sessionVariables // 
+    #   lib.optionalAttrs withSecrets {
+    #   # HISTFILE="$XDG_CACHE_HOME/zsh_history";
+    #   # TODO load this from sops instead
+    #   GITHUB_TOKEN = secrets.githubToken;
+    #   # TODO add it to sops
+    #   OPENAI_API_KEY = secrets.OPENAI_API_KEY;
+    #   CDPATH = "~/nova";
+    #   # OPENAI_API_HOST = secrets.OPENAI_API_HOST;
+    #  }
+    #
+    #  // {
+    #   # fre experiment
+    #
+    #   FZF_CTRL_T_COMMAND="command fre --sorted";
+    #   FZF_CTRL_T_OPTS="--tiebreak=index";
+    # };
 
-   #  history = {
-   #   path = "${config.xdg.cacheHome}/zsh_history";
-   #  };
-   #
-   #  sessionVariables = config.programs.bash.sessionVariables // 
-   #   lib.optionalAttrs withSecrets {
-   #   # HISTFILE="$XDG_CACHE_HOME/zsh_history";
-   #   # TODO load this from sops instead
-   #   GITHUB_TOKEN = secrets.githubToken;
-   #   # TODO add it to sops
-   #   OPENAI_API_KEY = secrets.OPENAI_API_KEY;
-   #   CDPATH = "~/nova";
-   #   # OPENAI_API_HOST = secrets.OPENAI_API_HOST;
-   #  }
-   #
-   #  // {
-   #   # fre experiment
-   #
-   #   FZF_CTRL_T_COMMAND="command fre --sorted";
-   #   FZF_CTRL_T_OPTS="--tiebreak=index";
-   # };
+    # test for 
+    # - https://www.reddit.com/r/neovim/comments/17dn1be/implementing_mru_sorting_with_minipick_and_fzflua/
+    # - https://lib.rs/crates/fre
+    initExtra = ''
+      fre_chpwd() {
+        fre --add "$(pwd)"
+      }
+      typeset -gaU chpwd_functions
+      chpwd_functions+=fre_chpwd
 
-  # test for 
-  # - https://www.reddit.com/r/neovim/comments/17dn1be/implementing_mru_sorting_with_minipick_and_fzflua/
-  # - https://lib.rs/crates/fre
-   initExtra = ''
-     fre_chpwd() {
-       fre --add "$(pwd)"
-     }
-     typeset -gaU chpwd_functions
-     chpwd_functions+=fre_chpwd
+       # if [ -f "$ZDOTDIR/zshrc" ]; then
+       source $ZDOTDIR/zshrc
+       # fi
 
-      # if [ -f "$ZDOTDIR/zshrc" ]; then
-      source $ZDOTDIR/zshrc
-      # fi
+    '';
 
-     '';
-
-    initExtraBeforeCompInit = /* zsh */ ''
-      # zsh searches $fpath for completion files
-      fpath+=( $ZDOTDIR/completions )
-     '';
+    initExtraBeforeCompInit = # zsh
+      ''
+        # zsh searches $fpath for completion files
+        fpath+=( $ZDOTDIR/completions )
+      '';
 
     # to disable loading of /etc/z* files
     # envExtra = '' 
@@ -74,5 +75,5 @@
     autosuggestion.enable = lib.mkForce false;
     autosuggestion.highlight = "fg=#d787ff,bold";
 
-   };
-  }
+  };
+}

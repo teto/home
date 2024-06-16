@@ -4,7 +4,14 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, secrets, options, lib, ... }:
+{
+  config,
+  pkgs,
+  secrets,
+  options,
+  lib,
+  ...
+}:
 
 {
 
@@ -19,7 +26,7 @@
   services.journald.extraConfig = ''
     # alternatively one can run journalctl --vacuum-time=2d
     SystemMaxUse=2G
-    '';
+  '';
   # see https://github.com/NixOS/nixpkgs/issues/15293
 
   # Set your time zone.
@@ -27,28 +34,31 @@
   # time.timeZone = "Asia/Tokyo";
 
   # todo move to package sets
-  environment.systemPackages = with pkgs; [
-    ssh-to-age # useful everywhere
-    man-pages # because man tcp should always be available
-    moreutils # contains errno binary that can translate errnos
-    ncurses.dev # for infocmp
-    # termite.terminfo # broken on unstable to be able to edit over ssh
-    kitty.terminfo # to be able to edit over ssh
-  ] ++ (with pkgs; [
-    # autoconf
-    binutils
-    curl
-    fd # replaces 'find'
-    just
-    file
-    fzf
-    gitAndTools.gitFull # to get send-email
-    gnumake
-    htop
-    lsof
-    sudo
-    wget
-  ]);
+  environment.systemPackages =
+    with pkgs;
+    [
+      ssh-to-age # useful everywhere
+      man-pages # because man tcp should always be available
+      moreutils # contains errno binary that can translate errnos
+      ncurses.dev # for infocmp
+      # termite.terminfo # broken on unstable to be able to edit over ssh
+      kitty.terminfo # to be able to edit over ssh
+    ]
+    ++ (with pkgs; [
+      # autoconf
+      binutils
+      curl
+      fd # replaces 'find'
+      just
+      file
+      fzf
+      gitAndTools.gitFull # to get send-email
+      gnumake
+      htop
+      lsof
+      sudo
+      wget
+    ]);
 
   # TODO it appears in /etc/bashrc !
   environment.shellAliases = {
@@ -58,7 +68,6 @@
     c = "cat";
     # }}}
   };
-
 
   # variables set by PAM
   # https://wiki.archlinux.org/index.php/Environment_variables#Using_pam_env
@@ -88,7 +97,7 @@
     completion.enable = true;
     shellInit = ''
       # set -o vi
-      '';
+    '';
   };
 
   security.sudo = {

@@ -1,17 +1,16 @@
 # it now has a flake.nix so this could probably be removed/tweaked
-{ compilerName ? "ghc884"
+{
+  compilerName ? "ghc884",
 }:
 
 let
   pkgs = nixpkgs.pkgs;
 
   nixpkgsRev = "d3f7e969b9860fb80750147aeb56dab1c730e756";
-  nixpkgs = import
-    (fetchTarball {
-      url = "https://github.com/nixos/nixpkgs/archive/${nixpkgsRev}.tar.gz";
-      sha256 = "13z5lsgfgpw2wisglicy7krjrhypcc2y7krzxn54ybcninyiwhsn";
-    })
-    { };
+  nixpkgs = import (fetchTarball {
+    url = "https://github.com/nixos/nixpkgs/archive/${nixpkgsRev}.tar.gz";
+    sha256 = "13z5lsgfgpw2wisglicy7krjrhypcc2y7krzxn54ybcninyiwhsn";
+  }) { };
 
   hsEnv = myHaskellPackages.ghcWithPackages (hs: [
     hs.haskell-language-server

@@ -1,6 +1,11 @@
-{ config, lib, pkgs, ... }:
 {
-  services.resolved= {
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+{
+  services.resolved = {
     enable = true;
     dnssec = "false"; # "allow-downgrade";
   };
@@ -32,7 +37,6 @@
     #   "interface-name:client-*"
     #   "interface-name:server-*"
     #   ];
-
 
     # networking.resolvconfOptions
     # wifi.powersave=false;

@@ -1,4 +1,10 @@
-{ config, pkgs, options, lib, ... }:
+{
+  config,
+  pkgs,
+  options,
+  lib,
+  ...
+}:
 let
 
   #ihaskellEnv = ghcWithPackages (self: [
@@ -25,16 +31,21 @@ let
   # apparemment le global peut se configurer via nixpkgs.config.ihaskell.packages.
   # faut s'en inspirer
   # by default --use-rtsopts=""
-  ihaskellKernel = pkgs.runCommand "ihaskellKernel"
-    {
-      # haskellEnv is a trick that should not be needed !
-      # https://github.com/NixOS/nixpkgs/issues/47135#issuecomment-431495187
-      # haskellEnv.env ?
-      buildInputs = [ pkgs.jupyter haskellEnv ];
-    } ''
-    export HOME=/tmp
-    ${haskellEnv}/bin/ihaskell install --prefix=$out --use-rtsopts=""
-  '';
+  ihaskellKernel =
+    pkgs.runCommand "ihaskellKernel"
+      {
+        # haskellEnv is a trick that should not be needed !
+        # https://github.com/NixOS/nixpkgs/issues/47135#issuecomment-431495187
+        # haskellEnv.env ?
+        buildInputs = [
+          pkgs.jupyter
+          haskellEnv
+        ];
+      }
+      ''
+        export HOME=/tmp
+        ${haskellEnv}/bin/ihaskell install --prefix=$out --use-rtsopts=""
+      '';
   #
   # buildEnv {
   #   name = "ihaskell-with-packages";
@@ -82,11 +93,15 @@ in
       # Python3 kernel
       python3 =
         let
-          env = (pkgs.python3.withPackages (pythonPackages: with pythonPackages; [
-            ipykernel
-            pandas
-            scikitlearn
-          ]));
+          env = (
+            pkgs.python3.withPackages (
+              pythonPackages: with pythonPackages; [
+                ipykernel
+                pandas
+                scikitlearn
+              ]
+            )
+          );
         in
         {
           displayName = "Python 3 for machine learning";
@@ -119,14 +134,16 @@ in
           #  ${ihaskellEnv}/bin/ihaskell ''$@
           #'';
           # share/jupyter/kernels/haskell/
-          content = builtins.fromJSON (builtins.readFile "${ihaskellKernel}/share/jupyter/kernels/haskell/kernel.json");
+          content = builtins.fromJSON (
+            builtins.readFile "${ihaskellKernel}/share/jupyter/kernels/haskell/kernel.json"
+          );
         in
         # builtins.trace
         content
-        # todo
-        # // {
-        #   content.
-        # }
+      # todo
+      # // {
+      #   content.
+      # }
       ;
 
       # {
@@ -145,7 +162,6 @@ in
       # ];
       # language = "haskell";
       # };
-
 
       # sage = let
       #   # readFile

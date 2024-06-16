@@ -1,28 +1,31 @@
-{ config, lib
-, pkgs
-, flakeInputs
-, ... }:
-let 
+{
+  config,
+  lib,
+  pkgs,
+  flakeInputs,
+  ...
+}:
+let
 
- autoloadedModule = { pkgs, ... }@args: 
-  flakeInputs.haumea.lib.load {
-   src = flakeInputs.nix-filter {
-     root = ./desktop;
-     # exclude = [
-     #   "teto"
-     #   "root"
-     # ];
-    };
-    
+  autoloadedModule =
+    { pkgs, ... }@args:
+    flakeInputs.haumea.lib.load {
+      src = flakeInputs.nix-filter {
+        root = ./desktop;
+        # exclude = [
+        #   "teto"
+        #   "root"
+        # ];
+      };
 
-    inputs = args // {
-      inputs = flakeInputs;
+      inputs = args // {
+        inputs = flakeInputs;
+      };
+      transformer = [
+        flakeInputs.haumea.lib.transformers.liftDefault
+        (flakeInputs.haumea.lib.transformers.hoistLists "_imports" "imports")
+      ];
     };
-    transformer = [
-     flakeInputs.haumea.lib.transformers.liftDefault
-     (flakeInputs.haumea.lib.transformers.hoistLists "_imports" "imports")
-    ];
-  };
 in
 {
 
@@ -31,23 +34,21 @@ in
     ../../hosts/config-all.nix
 
     ../../nixos/profiles/ntp.nix
-    # ./desktop/programs/wireshark.nix
     ../../nixos/modules/network-manager.nix
     # ../../nixos/profiles/librenms.nix
 
-    # ./desktop/programs/zsh.nix
     ./gnome.nix
     ./neovim.nix
     ./pipewire.nix
-    ./sops.nix
+    # ./sops.nix
 
     # only if available
     # ./modules/jupyter.nix
   ];
 
   environment.pathsToLink = [
-   "/share/xdg-desktop-portal" 
-   "/share/applications"
+    "/share/xdg-desktop-portal"
+    "/share/applications"
   ];
 
   # let home-manager do it
@@ -81,7 +82,6 @@ in
   #              #   };
   #              # }
 
-
   # };
 
   # to get manpages
@@ -94,8 +94,7 @@ in
   documentation.doc.enable = true; # builds html doc, slow
   documentation.info.enable = false;
 
-  environment.systemPackages = [
-  ];
+  environment.systemPackages = [ ];
 
   # networking.firewall.checkReversePath = false; # for nixops
   # networking.firewall.allowedUDPPorts = [ 631 ];
@@ -104,20 +103,7 @@ in
   hardware = {
     # enableAllFirmware =true;
     enableRedistributableFirmware = true;
-    sane.enable = true;
     # High quality BT calls
-    opengl = {
-      enable = true;
-      driSupport = true;
-      driSupport32Bit = true;
-      extraPackages = with pkgs; [
-        libvdpau-va-gl
-        libva
-        # trying to fix `WLR_RENDERER=vulkan sway`
-        vulkan-validation-layers  # broken
-      ];
-
-    };
   };
 
   # console.font = "Lat2-Terminus16";
@@ -167,51 +153,12 @@ in
 
     # This priority propagates to build processes. 0 is the default Unix process I/O priority, 7 is the lowest
     # daemonIONiceLevel = 3;
-    nixPath = [
-      "nixpkgs=flake:/home/teto/nixpkgs"
-    ];
+    nixPath = [ "nixpkgs=flake:/home/teto/nixpkgs" ];
 
     # either use --option extra-binary-caches http://hydra.nixos.org/
     # handy to hack/fix around
     # readOnlyStore = false;
   };
-
-  # programs.gnome-disks.enable = false;
-
-  # don't forget to run ulimit -c unlimited to get the actual coredump
-  # check thos comment to setup user ulimits https://github.com/NixOS/nixpkgs/issues/159964#issuecomment-1252682060
-  # systemd.services."user@1000".serviceConfig.LimitNOFILE = "32768";
-  # look at man limits.conf
-# cat /proc/sys/fs/file-max /proc/sys/fs/file-nr
-  # type: soft/hard/- (-=both soft and hard
-  security.pam.services.swaylock = {};
-
-
-  security.pam.loginLimits = [
-   # 
-   # to avoid "Bad file descriptor" and "Too many open files" situations
-   # ulimit -u
-
-   # maximum number of open file descriptors
-   { domain = "*"; item = "nofile"; type = "-"; value = "70000"; }
-   # maximum locked-in-memory address space
-   { domain = "*"; item = "memlock"; type = "-"; value = "70000"; }
-  ];
-  # users.motd = 
-  # security.pam.loginLimits = [
-  #   {
-  #     domain = "teto";
-  #     type = "soft";
-  #     item = "core";
-  #     value = "unlimited";
-  #   }
-  #   {
-  #     domain = "*";
-  #     type = "hard";
-  #     item = "memlock";
-  #     value = "256";
-  #   }
-  # ];
 
   environment.etc."security/limits.conf".text = ''
     #[domain]        [type]  [item]  [value]
@@ -227,9 +174,9 @@ in
   systemd.coredump.enable = false;
 
   # see 
-    #JournalSizeMax=767M
-    #MaxUse=
-    #KeepFree=
+  #JournalSizeMax=767M
+  #MaxUse=
+  #KeepFree=
   systemd.coredump.extraConfig = ''
     #Storage=external
     #Compress=yes
@@ -255,9 +202,9 @@ in
   #   nvd diff $(ls -dv /nix/var/nix/profiles/system-*-link | tail -2)
   # '';
 
-#   system.activationScripts.report-home-manager-changes = ''
-#     PATH=$PATH:${lib.makeBinPath [ pkgs.nvd pkgs.nix ]}
-#     nvd diff $(ls -dv /nix/var/nix/profiles/per-user/teto/home-manager-*-link | tail -2)
-#   '';
+  #   system.activationScripts.report-home-manager-changes = ''
+  #     PATH=$PATH:${lib.makeBinPath [ pkgs.nvd pkgs.nix ]}
+  #     nvd diff $(ls -dv /nix/var/nix/profiles/per-user/teto/home-manager-*-link | tail -2)
+  #   '';
 
 }

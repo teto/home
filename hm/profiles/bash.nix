@@ -1,6 +1,11 @@
-{ config, pkgs, flakeInputs, lib
-, secrets
-, ... } @ args:
+{
+  config,
+  pkgs,
+  flakeInputs,
+  lib,
+  secrets,
+  ...
+}@args:
 {
 
   programs.atuin = {
@@ -17,18 +22,21 @@
       HISTTIMEFORMAT = "%d.%m.%y %T ";
       # CAREFUL 
       # HISTFILE="$XDG_CACHE_HOME/bash_history";
-	  # TODO pass the correct port, how to do that ? need ssh_config support
+      # TODO pass the correct port, how to do that ? need ssh_config support
       # full path towards thee ~/.password-store folder
       # AWS_VAULT_PASS_PASSWORD_STORE_DIR="nova";
       # AWS_VAULT_PASS_PASSWORD_STORE_DIR
-      AWS_VAULT_PASS_PREFIX="nova";
-      AWS_VAULT_BACKEND="pass";
+      AWS_VAULT_PASS_PREFIX = "nova";
+      AWS_VAULT_BACKEND = "pass";
       # SUDO_PROMPT="	a[sudo] please enter a password: ";
-     };
+    };
 
     # "ignorespace"
     historyControl = [ ];
-    historyIgnore = [ "ls" "pwd" ];
+    historyIgnore = [
+      "ls"
+      "pwd"
+    ];
     # shellOptions = [ "histappend" "checkwinsize" "extglob" "globstar" "checkjobs" ];
     historyFile = "${config.xdg.cacheHome}/bash_history";
     # historyFile = "$XDG_CACHE_HOME/bash_history";
@@ -47,11 +55,11 @@
 
       # ls aliases
       # {{{
-      ld="eza -lD";
-      lf="eza -lF --color=always | grep -v /";
-      lh="eza -dl .* --group-directories-first";
-      ll="eza -al --group-directories-first";
-      lt="eza -al --sort=modified";
+      ld = "eza -lD";
+      lf = "eza -lF --color=always | grep -v /";
+      lh = "eza -dl .* --group-directories-first";
+      ll = "eza -al --group-directories-first";
+      lt = "eza -al --sort=modified";
       # }}}
 
       ns = "nix-shell";
@@ -103,8 +111,8 @@
     };
 
     initExtra = ''
-     source $XDG_CONFIG_HOME/bash/aliases.sh
-     '';
+      source $XDG_CONFIG_HOME/bash/aliases.sh
+    '';
   };
 
 }

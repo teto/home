@@ -1,6 +1,10 @@
-{ lib, pkgs, config
-# , tetoLib
-, ... }:
+{
+  lib,
+  pkgs,
+  config,
+  # , tetoLib
+  ...
+}:
 let
   # key modifier
   mod = "Mod1";
@@ -13,39 +17,38 @@ let
 
   rofi = pkgs.rofi-wayland;
 
-  sharedConfig = pkgs.callPackage ./wm-config.nix {};
+  sharedConfig = pkgs.callPackage ./wm-config.nix { };
 
   myLib = pkgs.tetoLib;
-    # pkgs.callPackage ../lib.nix { };
+  # pkgs.callPackage ../lib.nix { };
 
-  # TODO load sway folder via haumea
 in
+# TODO load sway folder via haumea
 {
 
-  imports = [
-   ./flameshot.nix
-  ];
+  imports = [ ./flameshot.nix ];
 
- # TODO it is done in sway.nix
- # replaced with  package-sets.wayland
- package-sets.waylandPackages = true;
+  # TODO it is done in sway.nix
+  # replaced with  package-sets.wayland
+  package-sets.waylandPackages = true;
 
   home.packages = with pkgs; [
     swayidle
     swayr # window selector
     swaycons # show icon on windows
+    # swayhide
     # sway-easyfocus # not packaged yet
     # swayrst #  https://github.com/Nama/swayrst # not packaged yet
 
     # sway overview, draws layouts for each workspace: dope https://github.com/milgra/sov
     # sov  
-    nwg-bar  # locks nothing
+    nwg-bar # locks nothing
     nwg-drawer # launcher
     nwg-menu
-    nwg-dock # a nice dock 
-    swaylock-effects # offers sexier 
+    nwg-dock # a nice dock
+    swaylock-effects # offers sexier
     sway-contrib.grimshot # contains "grimshot" for instance
-    shotman # -c region 
+    shotman # -c region
     tessen # handle passwords
     waybar
     # eventually ironbar
@@ -53,59 +56,59 @@ in
 
   ### swayr configuration {{{
   programs.swayr = {
-   enable = true;
-   systemd.enable = true;
+    enable = true;
+    systemd.enable = true;
   };
 
   # 
-  systemd.user.services.swayrd.Service = {
-   Environment = [ "PATH=${lib.makeBinPath [ pkgs.fuzzel pkgs.wofi ]}" 
-   ];
+  systemd.user.services.swayrd.Service = lib.mkIf config.programs.swayr.enable {
+    Environment = [
+      "PATH=${
+        lib.makeBinPath [
+          pkgs.fuzzel
+          pkgs.wofi
+        ]
+      }"
+    ];
   };
   # }}}
-
-
-  services.cliphist.enable = true;
 
   # todo prepend sharedExtraConfig
   # xdg.configFile."sway/config" = 
 
   wayland.windowManager.sway = {
-   enable = true;
-   # creates a sway-session target that is started on wayland start
-   systemd.enable = true;
+    enable = true;
+    # creates a sway-session target that is started on wayland start
+    systemd.enable = true;
 
-   # disabling swayfx until  those get merged 
-   # https://github.com/nix-community/home-manager/pull/4039
-   # https://github.com/NixOS/nixpkgs/pull/237044
+    # disabling swayfx until  those get merged 
+    # https://github.com/nix-community/home-manager/pull/4039
+    # https://github.com/NixOS/nixpkgs/pull/237044
 
     # package = pkgs.swayfx;
-   # package = pkgs.sway-unwrapped;
+    # package = pkgs.sway-unwrapped;
 
-   config = 
-      {
-        terminal = term;
-        workspaceAutoBackAndForth = true;
+    config = {
+      terminal = term;
+      workspaceAutoBackAndForth = true;
 
-        focus = {
-          followMouse = false;
-          wrapping = "yes";
-        };
+      focus = {
+        followMouse = false;
+        wrapping = "yes";
+      };
 
-        fonts = {
-          # Source Code Pro
-          names = [ "Inconsolata Normal" ];
-          size = 12.0;
-        };
-        modes = sharedConfig.modes
-        // {
+      fonts = {
+        # Source Code Pro
+        names = [ "Inconsolata Normal" ];
+        size = 12.0;
+      };
+      modes = sharedConfig.modes // {
         monitors =
           let
-            move_to_output = dir: fr: us:
-              {
-                "$GroupFr+$mod+${fr}" = "move workspace to output ${dir}";
-                "$GroupUs+$mod+${us}" = "move workspace to output ${dir}";
-              };
+            move_to_output = dir: fr: us: {
+              "$GroupFr+$mod+${fr}" = "move workspace to output ${dir}";
+              "$GroupUs+$mod+${us}" = "move workspace to output ${dir}";
+            };
           in
           {
             "Escape" = "mode default";
@@ -118,8 +121,7 @@ in
           // move_to_output "top" "Up" "Up"
           // move_to_output "top" "k" "k"
           // move_to_output "down" "down" "down"
-          // move_to_output "down" "l" "l"
-        ;
+          // move_to_output "down" "l" "l";
         # mouse= {
         # bindsym $mod+Left exec	$(xdotool mousemove_relative --sync -- -15 0)
         # bindsym $mod+Right exec $(xdotool mousemove_relative --sync -- 15 0)
@@ -165,120 +167,120 @@ in
         };
       };
 
-       window = {
-         hideEdgeBorders = "smart";
+      window = {
+        hideEdgeBorders = "smart";
 
         commands = [
-       #  {
-       #   criteria = { app_id = "xdg-desktop-portal-gtk"; };
-       #   command = "floating enable";
-       # }
+          #  {
+          #   criteria = { app_id = "xdg-desktop-portal-gtk"; };
+          #   command = "floating enable";
+          # }
 
-       # for_window [title="(?:Open|Save) (?:File|Folder|As)"] floating enable;
-# for_window [title="(?:Open|Save) (?:File|Folder|As)"] resize set 800 600
-# for_window [window_role="pop-up"] floating enable
-# for_window [window_role="bubble"] floating enable
-# for_window [window_role="task_dialog"] floating enable
-# for_window [window_role="Preferences"] floating enable
-# for_window [window_type="dialog"] floating enable
-# for_window [window_type="menu"] floating enable
-      ];
-     };
-       output = {
+          # for_window [title="(?:Open|Save) (?:File|Folder|As)"] floating enable;
+          # for_window [title="(?:Open|Save) (?:File|Folder|As)"] resize set 800 600
+          # for_window [window_role="pop-up"] floating enable
+          # for_window [window_role="bubble"] floating enable
+          # for_window [window_role="task_dialog"] floating enable
+          # for_window [window_role="Preferences"] floating enable
+          # for_window [window_type="dialog"] floating enable
+          # for_window [window_type="menu"] floating enable
+        ];
+      };
+      output = {
         # todo put a better path
         # example = { "HDMI-A-2" = { bg = "~/path/to/background.png fill"; }; };
 
         #  "/home/teto/home/wallpapers/nebula.jpg fill"
-         "*" = {  bg = "${../../wallpapers/nebula.jpg} fill"; };
-        
-       };
+        "*" = {
+          bg = "${../../wallpapers/nebula.jpg} fill";
+        };
+
+      };
       input = {
         "type:keyboard" = {
           xkb_layout = "us,fr";
           xkb_options = "ctrl:nocaps";
-          xkb_numlock =  "enabled"; # sadly bools wont work
+          xkb_numlock = "enabled"; # sadly bools wont work
           # repeat_delay 500
           # repeat_rate 5
           # to swap altwin:swap_lalt_lwin
         };
       };
       # terminal = term;
-      bars = [
-      ];
+      bars = [ ];
       # menu = 
       workspaceOutputAssign = [
-       { 
-        workspace="toto";
-        output = "eDP1";
-       }
+        {
+          workspace = "toto";
+          output = "eDP1";
+        }
       ];
 
       # we want to override the (pywal) config from i3
       colors = lib.mkForce { };
 
-    # https://github.com/dylanaraps/pywal/blob/master/pywal/templates/colors-sway
-    # TODO
-    # from https://www.reddit.com/r/swaywm/comments/uwdboi/how_to_make_chrome_popup_windows_floating/
-	# mkBefore
-    # ;config.xsession.windowManager.i3.config.keybindings
-    keybindings = sharedConfig.sharedKeybindings // {
-     "${mod}+grave" = "${pkgs.swaynotificationcenter}/bin/swaync-client -swb";
-     "${mod}+p" = "exec ${pkgs.tessen}/bin/tessen --dmenu=rofi";
+      # https://github.com/dylanaraps/pywal/blob/master/pywal/templates/colors-sway
+      # TODO
+      # from https://www.reddit.com/r/swaywm/comments/uwdboi/how_to_make_chrome_popup_windows_floating/
+      # mkBefore
+      # ;config.xsession.windowManager.i3.config.keybindings
+      keybindings = sharedConfig.sharedKeybindings // {
+        "${mod}+grave" = "${pkgs.swaynotificationcenter}/bin/swaync-client -swb";
+        "${mod}+p" = "exec ${pkgs.tessen}/bin/tessen --dmenu=rofi";
 
-    "$GroupFr+$mod+ampersand" = "layout toggle all";
-    "$GroupUs+$mod+1" = "layout toggle all";
+        "$GroupFr+$mod+ampersand" = "layout toggle all";
+        "$GroupUs+$mod+1" = "layout toggle all";
 
-    # start a terminal
-    "${mod}+Return" = "exec --no-startup-id ${term}";
-    "${mod}+Shift+Return" = ''exec --no-startup-id ${term} -d "$(${toString ../../bin/kitty-get-cwd.sh})"'';
+        # start a terminal
+        "${mod}+Return" = "exec --no-startup-id ${term}";
+        "${mod}+Shift+Return" = ''exec --no-startup-id ${term} -d "$(${toString ../../bin/kitty-get-cwd.sh})"'';
 
-    Menu = "exec ${rofi}/bin/rofi -modi 'drun' -show drun";
-    "${mod}+Tab" = "exec ${rofi}/bin/rofi -modi 'drun' -show drun";
-    # "${mod}+Ctrl+Tab" = "exec \"${pkgs.rofi}/bin/rofi -modi 'window' -show run\"";
-    # TODO dwindow exclusively with WIN
-    "${mad}+Tab" = "exec ${pkgs.swayr}/bin/swayr switch-window";
-    "${mad}+p" = "exec ${lib.getExe pkgs.wofi-pass} ";
-    "${mad}+a" = "exec \"${rofi}/bin/rofi -modi 'run,drun,window,ssh' -show window\"";
-    # "${mad}+Tab" = "exec \"${pkgs.rofi}/bin/rofi -modi 'run,drun,window,ssh' -show window\"";
+        Menu = "exec ${rofi}/bin/rofi -modi 'drun' -show drun";
+        "${mod}+Tab" = "exec ${rofi}/bin/rofi -modi 'drun' -show drun";
+        # "${mod}+Ctrl+Tab" = "exec \"${pkgs.rofi}/bin/rofi -modi 'window' -show run\"";
+        # TODO dwindow exclusively with WIN
+        "${mad}+Tab" = "exec ${pkgs.swayr}/bin/swayr switch-window";
+        "${mad}+p" = "exec ${lib.getExe pkgs.wofi-pass} ";
+        "${mad}+a" = "exec \"${rofi}/bin/rofi -modi 'run,drun,window,ssh' -show window\"";
+        # "${mad}+Tab" = "exec \"${pkgs.rofi}/bin/rofi -modi 'run,drun,window,ssh' -show window\"";
 
-    # locker
-    # "${mod}+Ctrl+L"="exec ${pkgs.i3lock-fancy}/bin/i3lock-fancy";
+        # locker
+        # "${mod}+Ctrl+L"="exec ${pkgs.i3lock-fancy}/bin/i3lock-fancy";
 
-    # TODO make it a command
-    "${mod}+Ctrl+L" = "exec ${myLib.swaylockCmd} ";
+        # TODO make it a command
+        "${mod}+Ctrl+L" = "exec ${myLib.swaylockCmd} ";
 
-    # TODO notify/throw popup when clipman fails 
-    # "${mod}+Ctrl+h" = ''exec ${pkgs.clipman}/bin/clipman pick -t rofi || ${sharedConfig.notify-send} 'Failed running clipman' '';
-    # cliphist list | rofi -dmenu
-    "${mod}+Ctrl+h" = ''exec ${pkgs.cliphist}/bin/cliphist list | rofi -dmenu  -m -1 -p "Select item to copy" -lines 10 -width 35 | cliphist decode | wl-copy | ${sharedConfig.notify-send} 'Failed running cliphist' '';
+        # TODO notify/throw popup when clipman fails 
+        # "${mod}+Ctrl+h" = ''exec ${pkgs.clipman}/bin/clipman pick -t rofi || ${sharedConfig.notify-send} 'Failed running clipman' '';
+        # cliphist list | rofi -dmenu
+        "${mod}+Ctrl+h" = ''exec ${pkgs.cliphist}/bin/cliphist list | rofi -dmenu  -m -1 -p "Select item to copy" -lines 10 -width 35 | cliphist decode | wl-copy | ${sharedConfig.notify-send} 'Failed running cliphist' '';
 
-     # kitty nvim -c ":Neorg workspace notes"
-     "${mod}+F1" = ''exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 70 --height 60 --mark neorg-notes --command 'kitty nvim +Notes'  '';
-     "${mod}+F2" = ''exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 70 --height 60 --mark audio --command 'kitty ${config.programs.ncmpcpp.package}/bin/ncmpcpp' '';
-     # "${mod}+F3" = ''exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 70 --height 60 --mark scratchpad --command 'kitty nvim' '';
-     "${mod}+F3" = ''exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 90 --height 90 --mark scratchpad --command 'kitty nvim' '';
+        # kitty nvim -c ":Neorg workspace notes"
+        "${mod}+F1" = ''exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 70 --height 60 --mark neorg-notes --command 'kitty nvim +Notes'  '';
+        "${mod}+F2" = ''exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 70 --height 60 --mark audio --command 'kitty ${config.programs.ncmpcpp.package}/bin/ncmpcpp' '';
+        # "${mod}+F3" = ''exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 70 --height 60 --mark scratchpad --command 'kitty nvim' '';
+        "${mod}+F3" = ''exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 90 --height 90 --mark scratchpad --command 'kitty nvim' '';
 
-      "--release Print" = "exec ${pkgs.sway-contrib.grimshot}/bin/grimshot copy area";
-# bindsym F12 exec sway-scratchpad --command "kitty -d /home/user/projects" --mark terminal
+        "--release Print" = "exec ${pkgs.sway-contrib.grimshot}/bin/grimshot copy area";
+        # bindsym F12 exec sway-scratchpad --command "kitty -d /home/user/projects" --mark terminal
 
-    # for_window [con_mark="SCRATCHPAD_terminal"] border pixel 1
+        # for_window [con_mark="SCRATCHPAD_terminal"] border pixel 1
 
-    # use sway-easyfocus
-    # "${mod}+g" = "exec ${pkgs.i3-easyfocus}/bin/i3-easyfocus";
-    # "${mad}+w" = "exec ${pkgs.i3-easyfocus}/bin/i3-easyfocus";
-    # TODO bind
-     # XF86Copy
+        # use sway-easyfocus
+        # "${mod}+g" = "exec ${pkgs.i3-easyfocus}/bin/i3-easyfocus";
+        # "${mad}+w" = "exec ${pkgs.i3-easyfocus}/bin/i3-easyfocus";
+        # TODO bind
+        # XF86Copy
       };
 
       startup = [
-       # { command = "env RUST_BACKTRACE=1 RUST_LOG=swayr=debug swayrd > /tmp/swayrd.log 2>&1"; }
-       { command = "env RUST_BACKTRACE=1 swaycons"; }
+        # { command = "env RUST_BACKTRACE=1 RUST_LOG=swayr=debug swayrd > /tmp/swayrd.log 2>&1"; }
+        { command = "env RUST_BACKTRACE=1 swaycons"; }
 
       ];
     };
 
-
-	extraConfigEarly = sharedConfig.sharedExtraConfig;
+    extraConfigEarly = sharedConfig.sharedExtraConfig;
 
     # output HDMI-A-1 bg ~/wallpaper.png stretch
     # TODO remove the config.shared stuff
@@ -297,9 +299,8 @@ in
 
       # timeout in ms
       include ~/.config/sway/manual.config
-      '';
-      # include ~/.config/sway/swayfx.txt
-
+    '';
+    # include ~/.config/sway/swayfx.txt
 
     extraOptions = [
       "--verbose"
@@ -310,34 +311,30 @@ in
     # some of these advised by https://github.com/flameshot-org/flameshot/blob/master/docs/Sway%20and%20wlroots%20support.md
     # export MOZ_ENABLE_WAYLAND=1
     extraSessionCommands = ''
-    # according to https://www.reddit.com/r/swaywm/comments/11d89w2/some_workarounds_to_use_sway_with_nvidia/
-    export XWAYLAND_NO_GLAMOR=1
+      # according to https://www.reddit.com/r/swaywm/comments/11d89w2/some_workarounds_to_use_sway_with_nvidia/
+      export XWAYLAND_NO_GLAMOR=1
 
-     # useful for electron based apps: slack / vscode 
-    export NIXOS_OZONE_WL=1
+       # useful for electron based apps: slack / vscode 
+      export NIXOS_OZONE_WL=1
 
-    # needs qt5.qtwayland in systemPackages
-    export QT_QPA_PLATFORM=wayland
-    export SDL_VIDEODRIVER=wayland
-    export _JAVA_AWT_WM_NONREPARENTING=1
-    export XDG_CURRENT_DESKTOP=sway
-    export XDG_SESSION_DESKTOP=sway
-    export SDL_VIDEODRIVER=wayland
-    export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
+      # needs qt5.qtwayland in systemPackages
+      export QT_QPA_PLATFORM=wayland
+      export SDL_VIDEODRIVER=wayland
+      export _JAVA_AWT_WM_NONREPARENTING=1
+      export XDG_CURRENT_DESKTOP=sway
+      export XDG_SESSION_DESKTOP=sway
+      export SDL_VIDEODRIVER=wayland
+      export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
     '';
 
-    wrapperFeatures = { gtk = true; };
- };
+    wrapperFeatures = {
+      gtk = true;
+    };
+  };
 
   xdg.configFile."sway/config".text = lib.mkBefore "
 	include ~/.config/i3/config.shared
    ";
-
-
-  # kanshi (wayland monitor placement)
-  services.kanshi = {
-    enable = true;
-  };
 
   # env RUST_BACKTRACE=1 RUST_LOG=swayr=debug swayrd > /tmp/swayrd.log 2>&1
   # https://git.sr.ht/~tsdh/swayr/tree/main/item/swayr/etc/swayrd.service
@@ -347,8 +344,8 @@ in
   #    Environment="RUST_BACKTRACE=1";
   #    Description = "Swayr";
   #    Documentation="https://sr.ht/~tsdh/swayr/";
-# # PartOf=sway-session.target
-# # After=sway-session.target
+  # # PartOf=sway-session.target
+  # # After=sway-session.target
   #     # Requires = [ "tray.target" ];
   #     # sway ?
   #     After = [ "tray.target" ];

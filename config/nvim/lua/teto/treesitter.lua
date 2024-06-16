@@ -12,10 +12,10 @@ if not available then
 end
 
 -- generated
-local nix_deps = require'generated-by-nix'
+local nix_deps = require('generated-by-nix')
 
-require"nvim-treesitter.install".compilers = {
-  nix_deps.gcc_path
+require('nvim-treesitter.install').compilers = {
+    nix_deps.gcc_path,
 }
 
 -- ts_config.config = ts_config.setup({
@@ -58,19 +58,19 @@ ts_config.setup({
         --         goto_definition = "gnd",          -- mapping to go to definition of symbol under cursor
         --         list_definitions = "gnD"          -- mapping to list all definitions in current file
         --       }
-    }
-    -- TSInstall lua xml http json graphql
-    , ensure_installed = {
-     -- rest.nvim grammars
-     "lua", "xml", "http", "json", "graphql"
-     -- for me
-     , "c"
-     , "query"
-
-     , "org", "norg"
-
-
-       }, -- one of 'all', 'language', or a list of languages
+    }, -- TSInstall lua xml http json graphql
+    ensure_installed = {
+        -- rest.nvim grammars
+        'lua',
+        'xml',
+        'http',
+        'json',
+        'graphql', -- for me
+        'c',
+        'query',
+        'org',
+        'norg',
+    }, -- one of 'all', 'language', or a list of languages
 
     -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
     -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
@@ -78,5 +78,3 @@ ts_config.setup({
     -- Instead of true it can also be a list of languages
     additional_vim_regex_highlighting = false,
 })
-
-

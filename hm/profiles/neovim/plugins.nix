@@ -1,15 +1,19 @@
 { pkgs, ... }:
-let 
+let
   inherit (pkgs.tetoLib) luaPlugin;
 in
 {
   basePlugins = with pkgs.vimPlugins; [
 
-    (luaPlugin { plugin = pkgs.neovimUtils.buildNeovimPlugin { luaAttr = "rocks-nvim"; }; })
-   
+    (luaPlugin { plugin = rocks-nvim; })
+
+    # use the imperative way
+    # (luaPlugin { plugin = rocks-config-nvim; })
+
     (luaPlugin { plugin = fzf-lua; })
 
-    { # use ctrl a/xto cycle between different words
+    {
+      # use ctrl a/xto cycle between different words
       plugin = vim-CtrlXA;
     }
     # { plugin = jbyuki/venn.nvim; }
@@ -29,7 +33,7 @@ in
     #  nvim-colorizer 
     # (luaPlugin { plugin = nvim-terminal-lua; config = "require('terminal').setup()"; })
 
-	# TODO hacking on this
+    # TODO hacking on this
     {
       # display git diff while rebasing, pretty dope
       plugin = auto-git-diff;
@@ -70,7 +74,7 @@ in
     # }
     { plugin = vim-fugitive; }
 
-	# replaced by alpha.nvim ?
+    # replaced by alpha.nvim ?
     # (luaPlugin {
     #   plugin = vim-startify;
     #   # cool stuff is that it autostarts sessions
@@ -123,7 +127,7 @@ in
 
         let g:sneak#streak = 0
         ]]
-        '';
+      '';
     })
 
     {
@@ -137,9 +141,7 @@ in
     # neomutt-vim
     (luaPlugin {
       plugin = vim-sayonara;
-      config = ''
-      vim.g.sayonara_confirm_quit = 0
-      '';
+      config = ''vim.g.sayonara_confirm_quit = 0'';
     })
 
     # {
@@ -160,7 +162,7 @@ in
 
         -- overrides ga
         vim.keymap.set ( "n", "ga",  "<Plug>(UnicodeGA)", { remap = true, } )
-        '';
+      '';
     })
   ];
 
@@ -233,7 +235,7 @@ in
     #             },
     #         })
     # '';
-   # })
+    # })
 
     # { plugin = modicator-nvim; }
     # (luaPlugin {
@@ -254,8 +256,7 @@ in
     #     '';
     # })
 
-
-	# not upstreamed yet
+    # not upstreamed yet
     # (luaPlugin { plugin = nvim-lua-gf; })
     (luaPlugin { plugin = numb-nvim; })
     (luaPlugin { plugin = luasnip; })
@@ -318,43 +319,44 @@ in
 
     (luaPlugin {
       plugin = marks-nvim;
-      config = /* lua */ ''
-          require'marks'.setup {
-            -- whether to map keybinds or not. default true
-            default_mappings = true,
-            -- whether movements cycle back to the beginning/end of buffer. default true
-            cyclic = true,
-            -- whether the shada file is updated after modifying uppercase marks. default false
-            force_write_shada = false,
-            -- how often (in ms) to redraw signs/recompute mark positions.
-            -- higher values will have better performance but may cause visual lag,
-            -- while lower values may cause performance penalties. default 150.
-            refresh_interval = 1000,
-            -- sign priorities for each type of mark - builtin marks, uppercase marks, lowercase
-            -- marks, and bookmarks.
-            -- can be either a table with all/none of the keys, or a single number, in which case
-            -- the priority applies to all marks.
-            -- default 10.
-            sign_priority = { lower=10, upper=15, builtin=8, bookmark=20 },
-            -- marks.nvim allows you to up to 10 bookmark groups, each with its own
-            -- sign/virttext. Bookmarks can be used to group together positions and quickly move
-            -- across multiple buffers. default sign is '!@#$%^&*()' (from 0 to 9), and
-            -- default virt_text is "".
-            bookmark_0 = {
-              sign = "⚑",
-              virt_text = "hello world"
-            },
-            mappings = {}
-        }
+      config = # lua
+        ''
+            require'marks'.setup {
+              -- whether to map keybinds or not. default true
+              default_mappings = true,
+              -- whether movements cycle back to the beginning/end of buffer. default true
+              cyclic = true,
+              -- whether the shada file is updated after modifying uppercase marks. default false
+              force_write_shada = false,
+              -- how often (in ms) to redraw signs/recompute mark positions.
+              -- higher values will have better performance but may cause visual lag,
+              -- while lower values may cause performance penalties. default 150.
+              refresh_interval = 1000,
+              -- sign priorities for each type of mark - builtin marks, uppercase marks, lowercase
+              -- marks, and bookmarks.
+              -- can be either a table with all/none of the keys, or a single number, in which case
+              -- the priority applies to all marks.
+              -- default 10.
+              sign_priority = { lower=10, upper=15, builtin=8, bookmark=20 },
+              -- marks.nvim allows you to up to 10 bookmark groups, each with its own
+              -- sign/virttext. Bookmarks can be used to group together positions and quickly move
+              -- across multiple buffers. default sign is '!@#$%^&*()' (from 0 to 9), and
+              -- default virt_text is "".
+              bookmark_0 = {
+                sign = "⚑",
+                virt_text = "hello world"
+              },
+              mappings = {}
+          }
         '';
     })
 
-    vim-lion # Use with gl/L<text object><character to align to 
+    vim-lion # Use with gl/L<text object><character to align to
 
     # TODO replace with grug ?
     (luaPlugin {
       plugin = nvim-spectre;
-	  # TODO add to menu instead
+      # TODO add to menu instead
       config = ''
         -- nnoremap ( "n", "<leader>S",  function() require('spectre').open() end )
       '';
@@ -377,8 +379,8 @@ in
       plugin = registers-nvim;
       # https://github.com/tversteeg/registers.nvim#default-values
       config = ''
-       require("registers").setup()
-       '';
+        require("registers").setup()
+      '';
 
       # let g:registers_return_symbol = "\n" "'⏎' by default
       # let g:registers_tab_symbol = "\t" "'·' by default

@@ -1,17 +1,16 @@
 {
   # # vim-markdown-composer
-  xdotool
-, grip
-, nodejs
-, fetchzip
-, patchelf
-, glibc
-, autoPatchelfHook
-, pkgs
+  xdotool,
+  grip,
+  nodejs,
+  fetchzip,
+  patchelf,
+  glibc,
+  autoPatchelfHook,
+  pkgs,
 }:
 
-self: prev:
-{
+self: prev: {
   # in super.vim-markdown-composer.overrideAttrs(oa: {
 
   #   propagatedBuildsInputs = (oa.propagatedBuildsInputs or []) ++ [
@@ -27,7 +26,10 @@ self: prev:
   # https://github.com/JamshedVesuna/vim-markdown-preview#installation
   # yet another contender: https://github.com/MikeCoder/markdown-preview.vim
   vim-markdown-preview = prev.vim-markdown-preview.overrideAttrs (oa: {
-    propagatedBuildsInputs = (oa.propagatedBuildsInputs or [ ]) ++ [ xdotool grip ];
+    propagatedBuildsInputs = (oa.propagatedBuildsInputs or [ ]) ++ [
+      xdotool
+      grip
+    ];
   });
 
   pdf-scribe-nvim = self.buildVimPlugin {

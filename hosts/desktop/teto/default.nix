@@ -1,72 +1,82 @@
 # home-manager specific config from
-{ config, lib
-, flakeInputs
-, pkgs
-, withSecrets
-, ... }:
+{
+  config,
+  lib,
+  flakeInputs,
+  pkgs,
+  withSecrets,
+  ...
+}:
 # let
-  # module = { pkgs, ... }@args: flakeInputs.haumea.lib.load {
-  #   src = ./haumea-test;
-  #   inputs = args // {
-  #     inputs = flakeInputs;
-  #   };
-  #   transformer = flakeInputs.haumea.lib.transformers.liftDefault;
-  # };
+# module = { pkgs, ... }@args: flakeInputs.haumea.lib.load {
+#   src = ./haumea-test;
+#   inputs = args // {
+#     inputs = flakeInputs;
+#   };
+#   transformer = flakeInputs.haumea.lib.transformers.liftDefault;
+# };
 # in
 {
-  imports = [
-    ../../../hm/profiles/bash.nix
 
-    ../../../hm/profiles/nova/programs/bash.nix
-    ../../../hm/teto/common.nix
-    # ../../../hm/profiles/common.nix
-    ../../../hm/profiles/desktop.nix
-    ../../../hm/profiles/wezterm.nix
-    # flakeInputs.ironbar.homeManagerModules.default
+  # services.nextcloud-client.enable = true;
 
-    ./calendars.nix
-    ./ia.nix
-    ./sway.nix
+  imports =
+    [
+      ../../../hm/profiles/bash.nix
 
-    ./programs/bash.nix
-    ./programs/git.nix
-    ./programs/helix.nix
-    ./programs/neovim.nix
-    ./programs/ssh.nix
-    ./programs/yazi.nix
-    ./programs/khal.nix
-    ./programs/waybar.nix
-    ./programs/zsh.nix
+      ../../../hm/profiles/nova/programs/bash.nix
+      ../../../hm/teto/common.nix
+      # ../../../hm/profiles/common.nix
+      ../../../hm/profiles/desktop.nix
+      ../../../hm/profiles/wezterm.nix
+      # flakeInputs.ironbar.homeManagerModules.default
 
-    ./services/swaync.nix
-    ./services/mpd.nix
-    ./services/mpris.nix
-    # ../../../hm/profiles/experimental.nix
+      ./calendars.nix
+      ./sway.nix
 
-    # Not tracked, so doesn't need to go in per-machine subdir
-    ../../../hm/profiles/android.nix
-    ../../../hm/profiles/gaming.nix
-    ../../../hm/profiles/gnome.nix
-    ../../../hm/profiles/ia.nix
-    ../../../hm/profiles/waybar.nix
-    ../../../hm/profiles/neomutt.nix
-    # ../../../hm/profiles/nushell.nix
-    ../../../hm/profiles/alot.nix
-    ../../../hm/profiles/extra.nix
-    ../../../hm/profiles/vdirsyncer.nix
-    ../../../hm/profiles/japanese.nix
-    # ../../../hm/profiles/fcitx.nix
-    ../../../hm/profiles/nova.nix
-    ../../../hm/profiles/vscode.nix
-    ../../../hm/profiles/extra.nix
+      ./programs/bash.nix
+      ./programs/git.nix
+      ./programs/helix.nix
+      ./programs/neovim.nix
+      ./programs/ssh.nix
+      ./programs/yazi.nix
+      ./programs/khal.nix
+      ./programs/waybar.nix
+      ./programs/zsh.nix
+
+      ./services/swaync.nix
+      ./services/mpd.nix
+      ./services/mpris.nix
+      ./services/nextcloud-client.nix
+      # ../../../hm/profiles/experimental.nix
+
+      # Not tracked, so doesn't need to go in per-machine subdir
+      ../../../hm/profiles/gnome.nix
+      ../../../hm/profiles/waybar.nix
+      # ../../../hm/profiles/fcitx.nix
+      ../../../hm/profiles/vscode.nix
       # custom modules
-    ../../../hm/profiles/emacs.nix
-    ../../../hm/profiles/zsh.nix
-    # ../../hm/profiles/weechat.nix
-   ] ++ lib.optionals withSecrets [
-    ./mail.nix
-   ]
-;
+      ../../../hm/profiles/emacs.nix
+      ../../../hm/profiles/zsh.nix
+      # ../../hm/profiles/weechat.nix
+    ]
+    ++ lib.optionals withSecrets [
+      ./sops.nix
+      ./mail.nix
+      ./ia.nix
+      ../../../hm/profiles/ia.nix
+      ../../../hm/profiles/neomutt.nix
+      # ../../../hm/profiles/nushell.nix
+      ../../../hm/profiles/alot.nix
+      ../../../hm/profiles/android.nix
+      ../../../hm/profiles/gaming.nix
+
+      ../../../hm/profiles/nova.nix
+      ../../../hm/profiles/extra.nix
+      ../../../hm/profiles/extra.nix
+      ../../../hm/profiles/vdirsyncer.nix
+      ../../../hm/profiles/japanese.nix
+    ];
 
   # TODO use mkSymlinkOufOf  ? ?
   # xdg.configFile."zsh/zshrc.generated".source = ../../../config/zsh/zshrc;
@@ -83,35 +93,32 @@
     set history filename ${config.xdg.cacheHome}/gdb_history
   '';
 
-
   home.language = {
-   # monetary = 
-   # measurement = 
-   # numeric = 
-   # paper =
-    time= "fr_FR.utf8";
+    # monetary = 
+    # measurement = 
+    # numeric = 
+    # paper =
+    time = "fr_FR.utf8";
   };
-
-  
 
   i18n.glibcLocales = pkgs.glibcLocales.override {
     allLocales = true;
- # 229 fr_FR.UTF-8/UTF-8 \
- # 230 fr_FR/ISO-8859-1 \
- # 231 fr_FR@euro/ISO-8859-15 \
-    locales = [ "fr_FR.UTF-8/UTF-8" "en_US.UTF-8/UTF-8" ];
+    # 229 fr_FR.UTF-8/UTF-8 \
+    # 230 fr_FR/ISO-8859-1 \
+    # 231 fr_FR@euro/ISO-8859-15 \
+    locales = [
+      "fr_FR.UTF-8/UTF-8"
+      "en_US.UTF-8/UTF-8"
+    ];
   };
-
 
   # seulemt pour X
   # programs.feh.enable = true;
   # for programs not merged yet
-  home.packages = 
-   with pkgs; [
-   # local-ai-teto # wip
+  home.packages = with pkgs; [
     llm-ls # needed by the neovim plugin
 
-      # mdp # markdown CLI presenter
+    # mdp # markdown CLI presenter
     # gthumb # image manager, great to tag pictures
     # magic-wormhole  # super tool to exchange secrets between computers
     # gnome3.gnome_control_center
@@ -120,22 +127,21 @@
     # xorg.xwininfo # for stylish
     pciutils # for lspci
     moar # test as pager
-    tailspin  #  a log viewer based on less ("spin" or "tsspin" is the executable)
+    tailspin # a log viewer based on less ("spin" or "tsspin" is the executable)
 
     # nixfmt  # aliased to nixfmt-rfc-style, use the latter to avoid the warning
-    nixfmt-rfc-style # 
-    nix-output-monitor # 'nom'
-    presenterm   # for presentations from terminal/markdown (in rust, supports images, pretty cool)
+    presenterm # for presentations from terminal/markdown (in rust, supports images, pretty cool)
 
     lutris # for gaming
 
     sioyek # pdf reader
-    jaq # jq in rust
-	viu # a console image viewer
+    jaq
+    # jq in rust
+    viu # a console image viewer
     wally-cli # to flash ergodox keyboards
     wine
 
-	# take the version from stable ?
+    # take the version from stable ?
     # qutebrowser # broken keyboard driven fantastic browser
     gnome.nautilus # demande webkit/todo replace by nemo ?
     # hexyl # hex editor
@@ -146,18 +152,15 @@
     # w3m # for preview in ranger w3mimgdisplay
 
     # bridge-utils# pour  brctl
-   # ironbar 
-	# haxe # to test https://neovim.discourse.group/t/presenting-haxe-neovim-a-new-toolchain-to-build-neovim-plugins/3720
-    # meli  # broken jmap mailreader
+    # ironbar 
+    # haxe # to test https://neovim.discourse.group/t/presenting-haxe-neovim-a-new-toolchain-to-build-neovim-plugins/3720
 
     unar # used to view archives by yazi
     # poppler for pdf preview
     memento # broken capable to display 2 subtitles at same time
 
     rofi-rbw-wayland
-   ] 
-   ;
-
+  ];
 
   package-sets = {
 
@@ -165,10 +168,8 @@
   };
   # package-sets.enableDesktopGUIPackages = true;
 
-  services.nextcloud-client.enable = true;
-
   home.sessionVariables = {
-   # TODO create symlink ?
+    # TODO create symlink ?
     IPYTHONDIR = "$XDG_CONFIG_HOME/ipython";
     JUPYTER_CONFIG_DIR = "$XDG_CONFIG_HOME/jupyter";
 

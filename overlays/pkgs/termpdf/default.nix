@@ -1,16 +1,17 @@
-{ lib
-, buildPythonApplication
-, fetchFromGitHub
-, fetchPypi
-, bibtool
-, pybtex
-, pymupdf
-, pynvim
-, pyperclip
-, roman
-, pdfrw
-, pagelabels
-, setuptools
+{
+  lib,
+  buildPythonApplication,
+  fetchFromGitHub,
+  fetchPypi,
+  bibtool,
+  pybtex,
+  pymupdf,
+  pynvim,
+  pyperclip,
+  roman,
+  pdfrw,
+  pagelabels,
+  setuptools,
 }:
 buildPythonApplication {
   pname = "termpdf.py";
@@ -46,12 +47,8 @@ buildPythonApplication {
 
   meta = with lib; {
     description = "Linux kernel config generator";
-    homepage = https://github.com/dsanson/termpdf.py;
+    homepage = "https://github.com/dsanson/termpdf.py";
     maintainers = with maintainers; [ teto ];
     license = licenses.mit;
   };
 }
-
-
-
-

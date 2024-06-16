@@ -1,8 +1,12 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 {
 
   services.opensnitch = {
     enable = false;
   };
 }
-

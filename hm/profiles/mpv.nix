@@ -1,10 +1,16 @@
-{ config, pkgs, lib, ... }:
 {
-
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+{
 
   # TODO use wrapper instead ?
   programs.mpv = {
-    enable = true;
+
+    # for now generate the config manually
+    enable = false;
 
     config = {
       profile = "gpu-hq";
@@ -12,7 +18,6 @@
       ytdl-format = "bestvideo+bestaudio";
       # cache-default = 4000000;
     };
-
 
     # Scripts:  'mpvacious'
     # package = (pkgs.wrapMpv
@@ -28,7 +33,7 @@
     #       "${pkgs.vapoursynth-mvtools}/lib/vapoursynth"
     #     ];
     #     # scripts = [ 
-          
+
     #     #   pkgs.mpvScripts.mpvacious # Adds mpv keybindings to create Anki cards from movies and TV shows
     #     #   pkgs.mpvScripts.manga-reader
     #     #   # pkgs.mpvScripts.mpv-notify-send # does not work ?
@@ -36,13 +41,13 @@
 
     #   });
 
-        scripts = [ 
-          
-          pkgs.mpvScripts.mpvacious # Adds mpv keybindings to create Anki cards from movies and TV shows
-          pkgs.mpvScripts.manga-reader
-          pkgs.mpvScripts.mpris
-          # pkgs.mpvScripts.mpv-notify-send # does not work ?
-        ];
+    scripts = [
+
+      pkgs.mpvScripts.mpvacious # Adds mpv keybindings to create Anki cards from movies and TV shows
+      pkgs.mpvScripts.manga-reader
+      pkgs.mpvScripts.mpris
+      # pkgs.mpvScripts.mpv-notify-send # does not work ?
+    ];
 
   };
   # profiles

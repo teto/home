@@ -1,6 +1,9 @@
 {
 
-    enable = false;
+  enable = true;
 
- # authKeyFile = ;
+  # necessary for headscale
+  useRoutingFeatures = "client";
+
+  # authKeyFile = ;
 }

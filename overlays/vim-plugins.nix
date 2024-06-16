@@ -1,5 +1,4 @@
-final: prev:
-rec {
+final: prev: rec {
 
   # inherit (super.vimUtils.override {inherit (super) vim;}) buildVimPluginFrom2Nix;
 

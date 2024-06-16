@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
   virtualisation = {
     podman = {
@@ -49,7 +54,6 @@
         #   volumes =  [
         #       "/home/teto/immich-photos:/photos"
         #     ];
- 
 
         # };
       };

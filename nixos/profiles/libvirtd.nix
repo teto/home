@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
   # dont filter DHCP packets
   # https://github.com/nix-community/nixops-libvirtd#prepare-libvirtd
@@ -35,7 +40,7 @@
 
     # qemuRunAsRoot=false;
     # virtualisation.libvirtd.qemu.runAsRoot
-	# replaced in my fork with
+    # replaced in my fork with
     # qemu.user = "teto";
 
     qemu.verbatimConfig = ''
@@ -58,9 +63,6 @@
       # very verbose but in a non-interesting way
       # "--verbose"
     ];
-
-
-
 
     # TODO automate creation of networks
     # create it with `virsh -c qemu:///system`

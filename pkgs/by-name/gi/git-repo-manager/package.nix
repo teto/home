@@ -1,28 +1,31 @@
-{ stdenv
-, fetchFromGitHub
-, makeRustPlatform
+{
+  stdenv,
+  fetchFromGitHub,
+  makeRustPlatform,
   # , rustPlatform
-, openssl
-, zstd
-, pkg-config
-, fenix
+  openssl,
+  zstd,
+  pkg-config,
+  fenix,
 }:
 
 let
   toolchain = fenix.packages.${stdenv.hostPlatform.system}.minimal.toolchain;
 
-  rustPlatform = (makeRustPlatform {
-    cargo = toolchain;
-    rustc = toolchain;
-  });
-  # (fenix.packages.${stdenv.hostPlatform.system}.latest.withComponents [
-  # "cargo"
-  # "clippy"
-  # "rust-src"
-  # "rustc"
-  # "rustfmt"
-  # ]);
+  rustPlatform = (
+    makeRustPlatform {
+      cargo = toolchain;
+      rustc = toolchain;
+    }
+  );
 in
+# (fenix.packages.${stdenv.hostPlatform.system}.latest.withComponents [
+# "cargo"
+# "clippy"
+# "rust-src"
+# "rustc"
+# "rustfmt"
+# ]);
 rustPlatform.buildRustPackage (
   let
     version = "unstable-2023-08-28";
@@ -46,7 +49,10 @@ rustPlatform.buildRustPackage (
 
     nativeBuildInputs = [ pkg-config ];
 
-    buildInputs = [ openssl zstd ];
+    buildInputs = [
+      openssl
+      zstd
+    ];
 
     # buildFeatures = additionalFeatures [ (lib.optional withDefaultFeatures "default") ];
 

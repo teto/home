@@ -1,0 +1,27 @@
+name: bumping overlays
+
+on:
+  schedule:
+    - cron: '0 0 * * *'
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    # - uses: cachix/install-nix-action@v21
+    #   with:
+    #     nix_path: nixpkgs=channel:nixos-unstable
+    - name: Install Nix
+      uses: DeterminateSystems/nix-installer-action@v12
+    - name: Run the Magic Nix Cache
+      uses: DeterminateSystems/magic-nix-cache-action@v3
+    - name: Update firefox-addons
+      run: |
+        just firefox-addons
+    - name: Update vim plugins
+      run: |
+        just vimPlugins
+    - name: Build desktop
+      run: |
+        just vimPlugins

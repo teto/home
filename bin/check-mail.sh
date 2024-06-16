@@ -2,4 +2,3 @@
 # ${pkgs.isync}/bin/mbsync $@
 mbsync $@
 notmuch new
-

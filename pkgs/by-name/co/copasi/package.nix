@@ -1,13 +1,14 @@
-{ stdenv
-, fetchFromGitHub
+{
+  stdenv,
+  fetchFromGitHub,
   # , git, autoreconfHook,
   # pkgconfig
-, bison
-, flex
-, libpcap
-, xercesc
-, pcre
-, cmake
+  bison,
+  flex,
+  libpcap,
+  xercesc,
+  pcre,
+  cmake,
 }:
 
 let
@@ -20,11 +21,11 @@ let
     sha256 = "09p88naalkbh33cngrgfdw236iy0q1m5r0q4w3ibjpi4qlaw7iis";
   };
 
-  # netbeeTools = stdenv.mkDerivation rec {
-  #   inherit src;
-  #   sourceRoot="net/
-  # };
 in
+# netbeeTools = stdenv.mkDerivation rec {
+#   inherit src;
+#   sourceRoot="net/
+# };
 stdenv.mkDerivation rec {
   name = "netbee";
   version = "1.3";
@@ -57,7 +58,14 @@ stdenv.mkDerivation rec {
 
   # $ sudo apt-get install libpcap-dev libxerces-c2-dev libpcre3-dev flex bison libboost-all-dev
   # https://github.com/CPqD/ofsoftswitch13/wiki/OpenFlow-1.3-Tutorial
-  buildInputs = [ cmake bison flex xercesc libpcap pcre.dev ];
+  buildInputs = [
+    cmake
+    bison
+    flex
+    xercesc
+    libpcap
+    pcre.dev
+  ];
 
   # for $f in ${subfolders}
   preConfigure = ''
@@ -74,12 +82,10 @@ stdenv.mkDerivation rec {
 
   # TODO
   meta = with lib; {
-    homepage = https://openflowswitch.org;
+    homepage = "https://openflowswitch.org";
     description = "Advanced library for packet processing. Includes NetVM, NetPDL, and NetPFL.";
     platforms = platforms.unix;
     license = licenses.lgpl2;
   };
 
 }
-
-

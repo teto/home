@@ -10,7 +10,7 @@
     foldBlock = ''
       vim.o.fillchars='foldopen:▾,foldclose:▸,msgsep:‾'
       vim.o.foldcolumn='auto:2'
-      '';
+    '';
     # dealingwithpdf= ''
     #   " Read-only pdf through pdftotext / arf kinda fails silently on CJK documents
     #   " autocmd BufReadPost *.pdf silent %!pdftotext -nopgbrk -layout -q -eol unix "%" - | fmt -w78

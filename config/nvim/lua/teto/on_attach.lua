@@ -7,12 +7,12 @@ local function default_mappings()
     vim.keymap.set('n', 'gA', vim.lsp.buf.code_action, { buffer = true })
     vim.keymap.set('n', 'g0', vim.lsp.buf.document_symbol, { buffer = true })
 
-    -- local 
+    -- local
     vim.keymap.set('n', '[e', function()
         vim.diagnostic.goto_prev({ wrap = true, severity = vim.diagnostic.severity.ERROR })
     end, { buffer = true })
     vim.keymap.set('n', ']e', function()
-        vim.diagnostic.goto_next({ wrap = true , severity = vim.diagnostic.severity.ERROR })
+        vim.diagnostic.goto_next({ wrap = true, severity = vim.diagnostic.severity.ERROR })
     end, { buffer = true })
 
     vim.keymap.set('n', '<c-k>', function()

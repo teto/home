@@ -1,17 +1,25 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 with lib;
 
 let
   cfg = config.programs.neovim;
 
-  luaPlugin = attrs: attrs // {
-    type = "lua";
-    # config = lib.optionalString
-    #   (attrs ? config && attrs.config != null) 
-    #   (genBlockLua attrs.plugin.pname attrs.config)
-    #   ;
-  };
+  luaPlugin =
+    attrs:
+    attrs
+    // {
+      type = "lua";
+      # config = lib.optionalString
+      #   (attrs ? config && attrs.config != null) 
+      #   (genBlockLua attrs.plugin.pname attrs.config)
+      #   ;
+    };
 
   # completionPlugins = with pkgs.vimPlugins; [
   #   # (luaPlugin { plugin = coq_nvim; })
@@ -28,23 +36,24 @@ let
     # (luaPlugin { plugin = cmp-cmdline-history; })
     # (luaPlugin { plugin = cmp-conventionalcommits; })
     # (luaPlugin { plugin = cmp-digraphs; })
-  #   (luaPlugin { plugin = cmp-vsnip; })
+    #   (luaPlugin { plugin = cmp-vsnip; })
     # ({ plugin = vim-vsnip; })
   ];
 
   orgmodePlugins = with pkgs.vimPlugins; [
-   # TODO add     'mrshmllow/orgmode-babel.nvim',
+    # TODO add     'mrshmllow/orgmode-babel.nvim',
 
     (luaPlugin {
       # matches nvim-orgmode
       plugin = orgmode;
-       config =  /* lua */ ''
-        require('orgmode').setup{
-            org_capture_templates = {'~/nextcloud/org/*', '~/orgmode/**/*'},
-            org_default_notes_file = '~/orgmode/refile.org',
-            -- TODO add templates
-            org_agenda_templates = { t = { description = 'Task', template = '* TODO %?\n  %u' } },
-        }
+      config = # lua
+        ''
+          require('orgmode').setup{
+              org_capture_templates = {'~/nextcloud/org/*', '~/orgmode/**/*'},
+              org_default_notes_file = '~/orgmode/refile.org',
+              -- TODO add templates
+              org_agenda_templates = { t = { description = 'Task', template = '* TODO %?\n  %u' } },
+          }
         '';
     })
   ];
@@ -92,87 +101,76 @@ let
     # })
   ];
 
-  autocompletionModule =
-    types.submodule {
-      options = {
-        enable = mkEnableOption "autocompletion";
+  autocompletionModule = types.submodule {
+    options = {
+      enable = mkEnableOption "autocompletion";
 
-        plugins = mkOption {
-          # type = types.listOf types.package;
-          default = defaultCompletionPlugins;
-          # descriptcompletionPlugins = with pkgs.vimPlugins; [
-          # # (luaPlugin { plugin = coq_nvim; })
-          # (luaPlugin { plugin = nvim-cmp; })
-          # (luaPlugin { plugin = cmp-nvim-lsp; })
-          # # (luaPlugin { plugin = cmp-cmdline-history; })
-          # # (luaPlugin { plugin = cmp-conventionalcommits; })
-          # # (luaPlugin { plugin = cmp-digraphs; })
-          # (luaPlugin { plugin = cmp-rg; })
-          # (luaPlugin { plugin = cmp-vsnip; })
-          # ({ plugin = vim-vsnip; })
-          # # (luaPlugin { plugin = cmp-zsh; })
-          # # vim-vsnip
-          # # vim-vsnip-integ
-          # ]ion = "The plugins to use.";
-        };
+      plugins = mkOption {
+        # type = types.listOf types.package;
+        default = defaultCompletionPlugins;
+        # descriptcompletionPlugins = with pkgs.vimPlugins; [
+        # # (luaPlugin { plugin = coq_nvim; })
+        # (luaPlugin { plugin = nvim-cmp; })
+        # (luaPlugin { plugin = cmp-nvim-lsp; })
+        # # (luaPlugin { plugin = cmp-cmdline-history; })
+        # # (luaPlugin { plugin = cmp-conventionalcommits; })
+        # # (luaPlugin { plugin = cmp-digraphs; })
+        # (luaPlugin { plugin = cmp-rg; })
+        # (luaPlugin { plugin = cmp-vsnip; })
+        # ({ plugin = vim-vsnip; })
+        # # (luaPlugin { plugin = cmp-zsh; })
+        # # vim-vsnip
+        # # vim-vsnip-integ
+        # ]ion = "The plugins to use.";
       };
     };
+  };
 
-  treesitterModule =
-    types.submodule {
-      options = {
-        enable = mkEnableOption "Treesitter";
+  treesitterModule = types.submodule {
+    options = {
+      enable = mkEnableOption "Treesitter";
 
-        plugins = mkOption {
-          # type = types.listOf types.package;
-          default = defaultCompletionPlugins;
-        };
+      plugins = mkOption {
+        # type = types.listOf types.package;
+        default = defaultCompletionPlugins;
       };
     };
+  };
 
-  orgmodeModule =
-    types.submodule {
-      options = {
+  orgmodeModule = types.submodule {
+    options = {
 
-        enable = mkEnableOption "Orgmode";
+      enable = mkEnableOption "Orgmode";
 
-        plugins = mkOption {
-          # type = types.listOf types.package;
-          default = orgmodePlugins;
-          description = "The file extension to use.";
-        };
+      plugins = mkOption {
+        # type = types.listOf types.package;
+        default = orgmodePlugins;
+        description = "The file extension to use.";
       };
     };
+  };
 
-  fennelModule =
-    types.submodule {
-      options = {
-        enable = mkEnableOption "Fennel";
-        plugins = mkOption {
-          # type = types.listOf types.package;
-          default = fennelPlugins;
-          description = "The file extension to use.";
-        };
+  fennelModule = types.submodule {
+    options = {
+      enable = mkEnableOption "Fennel";
+      plugins = mkOption {
+        # type = types.listOf types.package;
+        default = fennelPlugins;
+        description = "The file extension to use.";
       };
     };
+  };
 
-  tealModule =
-    types.submodule {
-      options = {
-        enable = mkEnableOption "Teal";
-        plugins = mkOption {
-          # type = types.listOf types.package;
-          default = with pkgs.vimPlugins; [
-            (luaPlugin {
-              plugin = nvim-teal-maker;
-            })
-          ];
-          description = "Teal associated plugins";
-        };
+  tealModule = types.submodule {
+    options = {
+      enable = mkEnableOption "Teal";
+      plugins = mkOption {
+        # type = types.listOf types.package;
+        default = with pkgs.vimPlugins; [ (luaPlugin { plugin = nvim-teal-maker; }) ];
+        description = "Teal associated plugins";
       };
     };
-
-
+  };
 
 in
 {
@@ -184,8 +182,8 @@ in
           enable = false;
         };
         description = ''
-          		Enable orgmode support.
-          	  '';
+          Enable orgmode support.
+        '';
       };
 
       autocompletion = mkOption {
@@ -227,22 +225,18 @@ in
     };
   };
 
-
   config = lib.mkMerge [
     # TODO add orgmode-babel and emacs to neovim
 
-    (mkIf cfg.orgmode.enable {
-      programs.neovim.plugins = cfg.orgmode.plugins;
-    })
+    (mkIf cfg.orgmode.enable { programs.neovim.plugins = cfg.orgmode.plugins; })
 
     (mkIf cfg.treesitter.enable {
-     programs.neovim.extraLuaConfig = lib.mkBefore (
-      "--toto"
-       # lib.strings.concatStrings (
-       #  lib.mapAttrsToList genBlockLua luaRcBlocks
-       #  )
-       )
-     ;
+      programs.neovim.extraLuaConfig = lib.mkBefore (
+        "--toto"
+        # lib.strings.concatStrings (
+        #  lib.mapAttrsToList genBlockLua luaRcBlocks
+        #  )
+      );
 
     })
 
@@ -250,13 +244,9 @@ in
       programs.neovim.plugins = cfg.autocompletion.plugins; # [ ];
     })
 
-    (mkIf cfg.teal.enable {
-      programs.neovim.plugins = cfg.teal.plugins;
-    })
+    (mkIf cfg.teal.enable { programs.neovim.plugins = cfg.teal.plugins; })
 
-    (mkIf cfg.fennel.enable {
-      programs.neovim.plugins = cfg.fennel.plugins;
-    })
+    (mkIf cfg.fennel.enable { programs.neovim.plugins = cfg.fennel.plugins; })
 
   ];
 

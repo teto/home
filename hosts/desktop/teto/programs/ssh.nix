@@ -1,13 +1,15 @@
 # TODO this should be fetched from the runners themselves !
-{ config, pkgs, lib
-, secrets
-, withSecrets
-, flakeInputs
-, ... }:
 {
-  imports = [
-   ../../../../hm/profiles/nova/ssh-config.nix
-  ];
+  config,
+  pkgs,
+  lib,
+  secrets,
+  withSecrets,
+  flakeInputs,
+  ...
+}:
+{
+  imports = [ ../../../../hm/profiles/nova/ssh-config.nix ];
 
   programs.ssh = {
 
@@ -24,7 +26,7 @@
         port = secrets.jakku.sshPort;
         identityFile = "~/.ssh/id_rsa";
         identitiesOnly = true;
-		# port = 12666;
+        # port = 12666;
       };
 
       router = {
@@ -37,18 +39,15 @@
         # experimental
         # https://github.com/nix-community/home-manager/pull/2992
         # match = "ovh1";
-		port = 12666;
+        port = 12666;
       };
 
-     };
+    };
 
-     
-
-    extraConfig = 
-    ''
-    Include "${config.xdg.configHome}/ssh/config"
-    # TODO remove when doctor's home-manager is ok
-    Include ${config.xdg.configHome}/nova/jinkompute/ssh_config
+    extraConfig = ''
+      Include "${config.xdg.configHome}/ssh/config"
+      # TODO remove when doctor's home-manager is ok
+      Include ${config.xdg.configHome}/nova/jinkompute/ssh_config
     '';
   };
 }

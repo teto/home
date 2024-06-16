@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 {
   # as long as xdg doesn't accept symlinks (for which I proposed a patch)
   # and overrides my mimeapps.list

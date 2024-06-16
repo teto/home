@@ -1,6 +1,8 @@
 
 sudo tlp-stat
 
+* 
+cpupower frequency-set -g governor
 
 * powertop
 

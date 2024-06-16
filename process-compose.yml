@@ -1,0 +1,20 @@
+# doc at https://f1bonacc1.github.io/process-compose/configuration/
+#
+is_strict: true
+
+processes:
+  redis:
+    command: |
+      echo "TOTO"
+      sleep 40
+    depends_on:
+      runtrial:
+        # condition: toto
+        condition: process_completed_successfully
+
+  # one shot task, hence why we disable it now
+  runtrial:
+    namespace: task
+    disabled: true
+    command:
+      echo "TRIAL DONE"

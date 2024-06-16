@@ -5,7 +5,7 @@ echo "Usage: $0 [<compiler>]"
 echo "Compiler"
 
 echo " -xc pour le C, -xc++ pour le C++"
-gcc -xc -E -v < /dev/null
+gcc -xc -E -v </dev/null
 
 # echo | gcc -Wp,-v -x c++ - -fsyntax-only
 

@@ -1,7 +1,9 @@
-{ config
-, secrets
-, pkgs
-, ... }:
+{
+  config,
+  secrets,
+  pkgs,
+  ...
+}:
 {
   home.sessionVariables = {
     # RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/rg.conf";
@@ -36,20 +38,25 @@
       # trying to generate aliases replacing RUNNER2
       #  l
       # BUILDER2 = 
-     ".." = "cd ..";
-     "..." = "cd ../..";
+      ".." = "cd ..";
+      "..." = "cd ../..";
 
     } // config.programs.bash.shellAliases;
 
     autocd = true;
-    
 
     # https://github.com/nix-community/home-manager/pull/4360
     syntaxHighlighting = {
-     enable = true;
-     highlighters = [ "brackets" "pattern" "cursor" ];
-     # highlighters = [ "brackets" ];
-     styles =  { comment = "fg=black,bold"; };
+      enable = true;
+      highlighters = [
+        "brackets"
+        "pattern"
+        "cursor"
+      ];
+      # highlighters = [ "brackets" ];
+      styles = {
+        comment = "fg=black,bold";
+      };
     };
 
     # initExtraFirst = "
@@ -91,7 +98,7 @@
       setopt prompt_sp
       # very magic, if glob doesn't find anything then abort the glob
       setopt no_nomatch
-      '';
+    '';
 
     # https://github.com/atweiden/fzf-extras
     # the zsh script does nothing yet
@@ -101,7 +108,6 @@
     # loginExtra = ''
 
     # '';
-
 
     # custom module
     enableFancyCursor = true;

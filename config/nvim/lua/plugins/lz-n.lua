@@ -1,0 +1,42 @@
+require('lz.n').load({
+    -- {
+    --     "neo-tree.nvim",
+    --     keys = {
+    --         -- Create a key mapping and lazy-load when it is used
+    --         { "<leader>ft", "<CMD>Neotree toggle<CR>", desc = "NeoTree toggle" },
+    --     },
+    --     after = function()
+    --         require("neo-tree").setup()
+    --     end,
+    -- },
+    -- {
+    --     "crates.nvim",
+    --     -- lazy-load when opening a toml file
+    --     ft = "toml",
+    -- },
+    -- {
+    --     "sweetie.nvim",
+    --     -- lazy-load when setting the `sweetie` colorscheme
+    --     colorscheme = "sweetie",
+    -- },
+    -- {
+    --     "vim-startuptime",
+    --     cmd = "StartupTime",
+    --     before = function()
+    --         -- Configuration for plugins that don't force you to call a `setup` function
+    --         -- for initialization should typically go in a `before`
+    --         --- or `beforeAll` function.
+    --         vim.g.startuptime_tries = 10
+    --     end,
+    -- },
+    -- {
+    --     "nvim-cmp",
+    --     -- load cmp on InsertEnter
+    --     event = "InsertEnter",
+    -- },
+    -- {
+    --     "dial.nvim",
+    --     -- lazy-load on keys. -- Mode is `n` by default.
+    --     keys = { "<C-a>", { "<C-x>", mode = "n" } },
+    -- },
+})

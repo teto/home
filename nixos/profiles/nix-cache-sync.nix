@@ -1,9 +1,12 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
 
-  /*
-     Sync the runner cache with our official cache
-  */
+  # Sync the runner cache with our official cache
   sync2Cache = pkgs.writeShellScript "sync2Cache" ''
     export AWS_SHARED 
     ${pkgs.nix}/bin/nix copy  --to 's3://devops-ci-infra-prod-caching-nix?region=eu-central-1&profile=nix-daemon'  --all
@@ -26,7 +29,6 @@ in
   # ];
   # };
 
-
   # see `man systemd.timer` for more info
   # Persistent is so that when you schedule the timer for noon but that your laptop is off at this time, it fires as soon as you wake up instead of just skipping
   # https://www.codyhiar.com/blog/repeated-tasks-with-systemd-service-timers-on-nixos/
@@ -36,7 +38,6 @@ in
 
     # path = with pkgs; [ systemd system-sendmail ];
   };
-
 
   systemd.timers.cache-update = {
     wantedBy = [ "timers.target" ];
@@ -48,8 +49,8 @@ in
 
   systemd.services.test-timer = {
     script = ''
-      	 echo "hello world"
-      	'';
+      echo "hello world"
+    '';
     serviceConfig = {
       Type = "oneshot";
       # ExecStart = "${pkgs.coreutils}/bin/true";
@@ -67,4 +68,3 @@ in
   };
 
 }
-

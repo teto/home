@@ -1,6 +1,7 @@
 let
   secrets = import ../secrets.nix;
-  nixos-remote = { config, pkgs, ... }:
+  nixos-remote =
+    { config, pkgs, ... }:
     {
       deployment.targetHost = (builtins.head secrets.mptcp_server.interfaces.ipv4.addresses).address;
       deployment.targetEnv = "none";

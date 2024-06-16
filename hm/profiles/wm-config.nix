@@ -1,8 +1,12 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 let
   # or use {pkgs.kitty}/bin/kitty
   term = "${pkgs.kitty}/bin/kitty";
-
 
   myLib = pkgs.callPackage ../lib.nix { };
 
@@ -16,8 +20,10 @@ let
   notify-send = "${pkgs.libnotify}/bin/notify-send";
 
   # note that you can assign a workspace to a specific monitor !
-  bind_ws = layout: workspace_id: fr:
-    let ws = builtins.toString workspace_id;
+  bind_ws =
+    layout: workspace_id: fr:
+    let
+      ws = builtins.toString workspace_id;
     in
     {
       "$Group${layout}+$mod+${fr}" = ''workspace "''$${ws}"'';
@@ -26,11 +32,10 @@ let
       # "$GroupUs+Shift+$mod+${us}" = ''move container to workspace "$w${ws}"'';
     };
 
-  move_focused_wnd = dir: fr: us:
-    {
-      "$GroupFr+$mod+Shift+${fr}" = "move ${dir}";
-      "$GroupUs+$mod+Shift+${us}" = "move ${dir}";
-    };
+  move_focused_wnd = dir: fr: us: {
+    "$GroupFr+$mod+Shift+${fr}" = "move ${dir}";
+    "$GroupUs+$mod+Shift+${us}" = "move ${dir}";
+  };
 
   wsAzertyBindings = {
     w1 = "a";
@@ -67,27 +72,25 @@ let
       wpctl = "${pkgs.wireplumber}/bin/wpctl";
       mpc = "${pkgs.mpc_cli}/bin/mpc";
       # pkgs.writeShellApplication
-      getIntegerVolume = pkgs.writeShellScript "get-volume-as-integer"
-        ''
-          volume=$(${wpctl} get-volume @DEFAULT_AUDIO_SINK@ | cut -f2 -d' ')
-          ${pkgs.perl}/bin/perl -e "print 100 * $volume"
-        '';
-      getBrightness = pkgs.writeShellScript "get-volume-as-integer"
-        ''
-          # -m => machine
-          brightness=$(${pkgs.brightnessctl}/bin/brightnessctl -m info | cut -f4 -d, )
-          echo $brightness
-        '';
+      getIntegerVolume = pkgs.writeShellScript "get-volume-as-integer" ''
+        volume=$(${wpctl} get-volume @DEFAULT_AUDIO_SINK@ | cut -f2 -d' ')
+        ${pkgs.perl}/bin/perl -e "print 100 * $volume"
+      '';
+      getBrightness = pkgs.writeShellScript "get-volume-as-integer" ''
+        # -m => machine
+        brightness=$(${pkgs.brightnessctl}/bin/brightnessctl -m info | cut -f4 -d, )
+        echo $brightness
+      '';
 
-      # { name = "get-volume-as-integer";
-      #   runtimeInputs = [ pkgs.wireplumber ];
-      #   text = ''
-      #   out=$(${wpctl} get-volume @DEFAULT_AUDIO_SINK@ | cut -f2 -d' ')
-      #   echo $(( 100 * $out ))
-      #   '';
-      #   checkPhase = ":";
-      # };
     in
+    # { name = "get-volume-as-integer";
+    #   runtimeInputs = [ pkgs.wireplumber ];
+    #   text = ''
+    #   out=$(${wpctl} get-volume @DEFAULT_AUDIO_SINK@ | cut -f2 -d' ')
+    #   echo $(( 100 * $out ))
+    #   '';
+    #   checkPhase = ":";
+    # };
     {
       # wpctl set-volume @DEFAULT_AUDIO_SINK@ 10%+
       # wpctl get-volume @DEFAULT_AUDIO_SINK@
@@ -127,11 +130,10 @@ in
   modes = {
     monitors =
       let
-        move_to_output = dir: fr: us:
-          {
-            "$GroupFr+$mod+${fr}" = "move workspace to output ${dir}";
-            "$GroupUs+$mod+${us}" = "move workspace to output ${dir}";
-          };
+        move_to_output = dir: fr: us: {
+          "$GroupFr+$mod+${fr}" = "move workspace to output ${dir}";
+          "$GroupUs+$mod+${us}" = "move workspace to output ${dir}";
+        };
       in
       {
         Escape = "mode default";
@@ -190,89 +192,85 @@ in
   };
   # }}}
 
+  sharedKeybindings =
+    {
+      # The side buttons move the window around
+      "button9" = "move left";
+      "button8" = "move right";
+      # start a terminal
+      "${mod}+Return" = "exec --no-startup-id ${term}";
+      # bindsym $mod+Shift+Return exec --no-startup-id ~/.i3/fork_term.sh
 
- sharedKeybindings = {
-    # The side buttons move the window around
-    "button9" = "move left";
-    "button8" = "move right";
-    # start a terminal
-    "${mod}+Return" = "exec --no-startup-id ${term}";
-    # bindsym $mod+Shift+Return exec --no-startup-id ~/.i3/fork_term.sh
+      # change container layout (stacked, tabbed, default)
+      "$GroupFr+$mod+ampersand" = "layout toggle";
+      "$GroupUs+$mod+1" = "layout toggle";
+      # todo use i3lock-fancy instead
+      # alternative is "light"
+      # "${mod}+ctrl+v" = "exec ${pkgs.bash}/bin/bash ~/vim-anywhere/bin/run";
 
-    # change container layout (stacked, tabbed, default)
-    "$GroupFr+$mod+ampersand" = "layout toggle";
-    "$GroupUs+$mod+1" = "layout toggle";
-    # todo use i3lock-fancy instead
-    # alternative is "light"
-    # "${mod}+ctrl+v" = "exec ${pkgs.bash}/bin/bash ~/vim-anywhere/bin/run";
+      "${mod}+Tab" = "exec \"${pkgs.rofi}/bin/rofi -modi 'drun,window,ssh' -show drun\"";
+      "${mod}+Ctrl+Tab" = "exec \"${pkgs.rofi}/bin/rofi -modi 'window' -show run\"";
+      # TODO dwindow exclusively with WIN
 
-    "${mod}+Tab" = "exec \"${pkgs.rofi}/bin/rofi -modi 'drun,window,ssh' -show drun\"";
-    "${mod}+Ctrl+Tab" = "exec \"${pkgs.rofi}/bin/rofi -modi 'window' -show run\"";
-    # TODO dwindow exclusively with WIN
+      "${mad}+Tab" = "exec \"${pkgs.rofi}/bin/rofi -modi 'run,drun,window,ssh' -show window\"";
+      "${mad}+a" = "exec \"${pkgs.rofi}/bin/rofi -modi 'run,drun,window,ssh' -show window\"";
 
-    "${mad}+Tab" = "exec \"${pkgs.rofi}/bin/rofi -modi 'run,drun,window,ssh' -show window\"";
-    "${mad}+a" = "exec \"${pkgs.rofi}/bin/rofi -modi 'run,drun,window,ssh' -show window\"";
+      # "${mad}+Tab" = "exec \"${pkgs.rofi}/bin/rofi -modi 'run,drun,window,ssh' -show window\"";
 
-    # "${mad}+Tab" = "exec \"${pkgs.rofi}/bin/rofi -modi 'run,drun,window,ssh' -show window\"";
+      # locker
 
-    # locker
+      # broken
+      # "${mod}+b" = "exec ${pkgs.buku_run}/bin/buku_run";
+      "${mad}+c" = "exec ${pkgs.rofi-calc}/bin/rofi-calc";
 
-    # broken
-    # "${mod}+b" = "exec ${pkgs.buku_run}/bin/buku_run";
-    "${mad}+c" = "exec ${pkgs.rofi-calc}/bin/rofi-calc";
+      "${mod}+Shift+1" = "exec qutebrowser";
 
-    "${mod}+Shift+1" = "exec qutebrowser";
+      # "${mod}+Shift+Return" = "exec --no-startup-id ${pkgs.termite -d "$(xcwd)"
 
-    # "${mod}+Shift+Return" = "exec --no-startup-id ${pkgs.termite -d "$(xcwd)"
+      # test rofi-randr
+      # } // {
+      "$GroupFr+$mod+apostrophe" = "kill";
+      "$GroupUs+$mod+4" = "kill";
 
+      "$mod+t" = "floating toggle";
+      "$mod+y" = "sticky toggle; exec ${notify-send}";
 
-    # test rofi-randr
-    # } // {
-    "$GroupFr+$mod+apostrophe" = "kill";
-    "$GroupUs+$mod+4" = "kill";
+      # split in vertical orientation
+      # needs i3next
+      "$mod+v" = "split toggle";
 
-    "$mod+t" = "floating toggle";
-    "$mod+y" = "sticky toggle; exec ${notify-send}";
+      # different focus for windows
+      "$mod+$kleft" = "focus left";
+      "$mod+$kdown" = "focus down";
+      "$mod+$kup" = "focus up";
+      "$mod+$kright" = "focus right";
 
-    # split in vertical orientation
-    # needs i3next
-    "$mod+v" = "split toggle";
+      # toggle tiling / floating
+      "$mod+Shift+space" = "floating toggle";
+      # change focus between tiling / floating windows
+      "$mod+space" = "focus mode_toggle";
 
-    # different focus for windows
-    "$mod+$kleft" = "focus left";
-    "$mod+$kdown" = "focus down";
-    "$mod+$kup" = "focus up";
-    "$mod+$kright" = "focus right";
+      # alternatively, you can use the cursor keys:
+      "$mod+Shift+Left" = "move left";
+      "$mod+Shift+Down" = "move down";
+      "$mod+Shift+Up" = "move up";
+      "$mod+Shift+Right" = "move right";
 
-    # toggle tiling / floating
-    "$mod+Shift+space" = "floating toggle";
-    # change focus between tiling / floating windows
-    "$mod+space" = "focus mode_toggle";
+      "$mod+f" = "fullscreen";
+      "$mod+Shift+f" = "fullscreen global";
+      "$mod+button3" = "floating toggle";
+      "$mod+m" = ''mode "monitors'';
+      "$mod+r" = ''mode "resize"'';
 
-
-    # alternatively, you can use the cursor keys:
-    "$mod+Shift+Left" = "move left";
-    "$mod+Shift+Down" = "move down";
-    "$mod+Shift+Up" = "move up";
-    "$mod+Shift+Right" = "move right";
-
-    "$mod+f" = "fullscreen";
-    "$mod+Shift+f" = "fullscreen global";
-    "$mod+button3" = "floating toggle";
-    "$mod+m" = ''mode "monitors'';
-    "$mod+r" = ''mode "resize"'';
-
-
-  }
-  // (lib.concatMapAttrs (bind_ws "Fr") wsAzertyBindings)
-  // (lib.concatMapAttrs (bind_ws "Us") wsQwertyBindings)
-  // move_focused_wnd "left" "h" "h"
-  // move_focused_wnd "down" "j" "j"
-  // move_focused_wnd "up" "k" "k"
-  # semicolumn
-  // move_focused_wnd "right" "l" "l"
-  // audioKeybindings
-  ;
+    }
+    // (lib.concatMapAttrs (bind_ws "Fr") wsAzertyBindings)
+    // (lib.concatMapAttrs (bind_ws "Us") wsQwertyBindings)
+    // move_focused_wnd "left" "h" "h"
+    // move_focused_wnd "down" "j" "j"
+    // move_focused_wnd "up" "k" "k"
+    # semicolumn
+    // move_focused_wnd "right" "l" "l"
+    // audioKeybindings;
   # just trying to overwrite previous bindings with i3dispatch
   # // lib.optionalAttrs (pkgs ? i3dispatch ) {
   # "${mod}+Left" = "exec ${pkgs.i3dispatch}/bin/i3dispatch left";
@@ -317,19 +315,18 @@ in
 
     # Mod4 => window key
     set $mad Super_L
-    ''
-    # https://faq.i3wm.org/question/5942/using-modifer-key-as-a-binding/
-    # https://faq.i3wm.org/question/5429/stay-in-mode-only-while-key-is-pressed/
-    # set $set_mark  /home/teto/.i3/set_marks.py
-    #bindsym $mad exec notify-send "XP mode"; mode "xp"; exec $set_mark
+  ''
+  # https://faq.i3wm.org/question/5942/using-modifer-key-as-a-binding/
+  # https://faq.i3wm.org/question/5429/stay-in-mode-only-while-key-is-pressed/
+  # set $set_mark  /home/teto/.i3/set_marks.py
+  #bindsym $mad exec notify-send "XP mode"; mode "xp"; exec $set_mark
 
-
-    # bindsym $mod+shift+e exec /home/teto/i3-easyfocus/easyfocus
-    # Tests for title_format
-    # give the focused window a prefix
-    # bindsym $mod+Shift+g title_format "[test] %title"
-    # for_window [class="^qutebrowser$"] title_format "<span background='blue'>QB</span> %title"
-    # for_window  title_format "<span background='#F28559'>FF</span> %title"
+  # bindsym $mod+shift+e exec /home/teto/i3-easyfocus/easyfocus
+  # Tests for title_format
+  # give the focused window a prefix
+  # bindsym $mod+Shift+g title_format "[test] %title"
+  # for_window [class="^qutebrowser$"] title_format "<span background='blue'>QB</span> %title"
+  # for_window  title_format "<span background='#F28559'>FF</span> %title"
 
   ;
 }

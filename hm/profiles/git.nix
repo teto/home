@@ -1,14 +1,19 @@
-{ config, pkgs
-, lib
-, ... } @ args:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 {
 
   # for aws-vault ?
-  home.file.".ssh/allowed_signers".text =
-    "* ${builtins.readFile ../../perso/keys/id_rsa.pub}";
+  home.file.".ssh/allowed_signers".text = "* ${builtins.readFile ../../perso/keys/id_rsa.pub}";
 
   programs.git = {
     enable = true;
+
+    userName = lib.mkForce "Matthieu C.";
+    userEmail = lib.mkForce "886074+teto@users.noreply.github.com";
 
     # msmtp
     package = pkgs.gitAndTools.gitFull; # to get send-email
@@ -38,7 +43,9 @@
       init.defaultBranch = "main";
       # git config core.sshCommand "ssh -vvv"
       # useful when merging from kernel
-      checkout = { defaultRemote = "upstream"; };
+      checkout = {
+        defaultRemote = "upstream";
+      };
 
       # https://git-scm.com/book/en/v2/Git-Tools-Credential-StoragE
       credential.helper = "store";
@@ -62,8 +69,6 @@
         rebase = true;
         # ff = "only";
       };
-
-
 
       stash = {
         showPatch = 1;
@@ -105,4 +110,3 @@
     };
   };
 }
-

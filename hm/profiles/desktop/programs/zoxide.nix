@@ -1,6 +1,6 @@
 {
-    enable = true;
-    enableZshIntegration = true;
-    enableBashIntegration = true;
-    options = [ "--cmd k" ];
+  enable = true;
+  enableZshIntegration = true;
+  enableBashIntegration = true;
+  options = [ "--cmd k" ];
 }

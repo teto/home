@@ -9,3 +9,10 @@ platform:
 
 sscwl:
   nix run .#simwork.core-webservice.local -- --bypass-manifest-check -vv
+
+update-luarocks:
+  # TODO run in command directory
+  nix run '.#luarocks-packages-updater' -- --proc=4
+
+llama: # Start llama server
+  llama-server -m ~/models/mistral-7b-openorca.Q6_K.gguf -c 2048 --port 11111 -ngl 33

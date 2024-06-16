@@ -1,14 +1,18 @@
-{ config, pkgs, lib, secrets, ... }:
 {
-  imports = [
-    ../../../nixos/profiles/openssh.nix
-  ];
+  config,
+  pkgs,
+  lib,
+  secrets,
+  ...
+}:
+{
+  imports = [ ../../../nixos/profiles/openssh.nix ];
 
   services.openssh = {
 
-   ports = [ secrets.jakku.sshPort ];
+    ports = [ secrets.jakku.sshPort ];
 
-   # authorizedKeysFiles = [
+    # authorizedKeysFiles = [
     #   "~/.ssh/id_rsa.pub"
     # ];
     # new format
@@ -16,7 +20,7 @@
       LogLevel = "VERBOSE";
       KbdInteractiveAuthentication = false;
       # PasswordAuthentication = false;
-	  X11Forwarding = false;
+      X11Forwarding = false;
       PermitRootLogin = lib.mkForce "no";
     };
   };

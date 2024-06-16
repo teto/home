@@ -1,7 +1,12 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
 
-  environment.systemPackages = [ 
+  environment.systemPackages = [
 
     pkgs.wayland-pipewire-idle-inhibit # not sure how to use it yet
   ];
@@ -52,4 +57,4 @@
 #"default.clock.quantum" = 1024;
 #"default.clock.min-quantum" = 32;
 #"default.clock.max-quantum" = 8192;
-# "pulse.min.req" = 0.021333; 
+# "pulse.min.req" = 0.021333;

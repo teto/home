@@ -59,7 +59,7 @@ aws eks update-kubeconfig --name jk-dev --profile nova-sandbox --user-alias jk-d
  
 * roles
 aws iam list-roles
-aws sts assume-role --role-arn "arn:aws:iam::419998656076:role/cirunner_dev_deploy" --profile nova-sandbox --role-session-name toto
+aws sts assume-role --role-arn "arn:aws:iam::REDACTED:role/cirunner_dev_deploy" --profile nova-sandbox --role-session-name toto
 
 From the output:
 export AWS_ACCESS_KEY_ID=RoleAccessKeyID

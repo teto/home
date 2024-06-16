@@ -1,11 +1,12 @@
-{ stdenv
-, buildPythonPackage
-, fetchFromGitHub
-, rofi
-, papis
-, python-rofi
-, fetchPypi
-, lib
+{
+  stdenv,
+  buildPythonPackage,
+  fetchFromGitHub,
+  rofi,
+  papis,
+  python-rofi,
+  fetchPypi,
+  lib,
 }:
 buildPythonPackage rec {
   pname = "papis-python-rofi";
@@ -22,17 +23,18 @@ buildPythonPackage rec {
   #   sha256 = "0iy6r29ncpca7v4ibnig2mh93nkrqvy4nhmzkq6flxmryghfzhwn";
   # };
 
-  buildInputs = [ rofi papis python-rofi ];
+  buildInputs = [
+    rofi
+    papis
+    python-rofi
+  ];
 
   doCheck = false;
 
   meta = with lib; {
     description = "Linux kernel config generator";
-    homepage = https://github.com/nichoski/kergen;
+    homepage = "https://github.com/nichoski/kergen";
     maintainers = with maintainers; [ teto ];
     license = licenses.asl20;
   };
 }
-
-
-

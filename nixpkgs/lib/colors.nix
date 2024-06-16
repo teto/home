@@ -81,41 +81,114 @@ let
   };
 
   attrs = {
-    bold = { bold = true; };
-    italic = { italic = true; };
-    underline = { underline = true; };
-    reverse = { reverse = true; };
-    undercurl = { undercurl = true; };
-    standout = { standout = true; };
+    bold = {
+      bold = true;
+    };
+    italic = {
+      italic = true;
+    };
+    underline = {
+      underline = true;
+    };
+    reverse = {
+      reverse = true;
+    };
+    undercurl = {
+      undercurl = true;
+    };
+    standout = {
+      standout = true;
+    };
   };
 
-  themes = builtins.mapAttrs (k: v: v // { black = v.base0; white = v.base7; }) {
-    solarizedLight = with palettes.solarized; {
-      primary = { fg = base7; bg = orange; };
-      text = { fg = base0; bg = base7; };
-      cursor = { fg = base7; bg = "#cf000f"; };
-      comment = { fg = base4; };
-      error = { fg = red; } // attrs.bold;
-      string = { fg = green; };
-      highlight = { fg = red; } // attrs.bold;
-      suggestion = { fg = base1; };
-      selectedSuggestion = { fg = base0; } // attrs.bold;
-    } // palettes.solarized;
+  themes =
+    builtins.mapAttrs
+      (
+        k: v:
+        v
+        // {
+          black = v.base0;
+          white = v.base7;
+        }
+      )
+      {
+        solarizedLight =
+          with palettes.solarized;
+          {
+            primary = {
+              fg = base7;
+              bg = orange;
+            };
+            text = {
+              fg = base0;
+              bg = base7;
+            };
+            cursor = {
+              fg = base7;
+              bg = "#cf000f";
+            };
+            comment = {
+              fg = base4;
+            };
+            error = {
+              fg = red;
+            } // attrs.bold;
+            string = {
+              fg = green;
+            };
+            highlight = {
+              fg = red;
+            } // attrs.bold;
+            suggestion = {
+              fg = base1;
+            };
+            selectedSuggestion = {
+              fg = base0;
+            } // attrs.bold;
+          }
+          // palettes.solarized;
 
-    gotham = with palettes.gotham; {
-      primary = { fg = base7; bg = base0; };
-      # TODO: replace this with a lighter/darker shade of primary
-      primaryRaised = { fg = base7; bg = base3; };
-      text = { fg = base6; bg = "#000000"; };
-      cursor = { fg = base0; bg = "#72f970"; };
-      comment = { fg = base4; };
-      error = { fg = red; } // attrs.bold;
-      string = { fg = cyan; } // attrs.italic;
-      highlight = { fg = yellow; } // attrs.bold;
-      suggestion = { fg = base5; };
-      selectedSuggestion = { fg = base6; } // attrs.bold;
-    } // palettes.gotham;
-  };
+        gotham =
+          with palettes.gotham;
+          {
+            primary = {
+              fg = base7;
+              bg = base0;
+            };
+            # TODO: replace this with a lighter/darker shade of primary
+            primaryRaised = {
+              fg = base7;
+              bg = base3;
+            };
+            text = {
+              fg = base6;
+              bg = "#000000";
+            };
+            cursor = {
+              fg = base0;
+              bg = "#72f970";
+            };
+            comment = {
+              fg = base4;
+            };
+            error = {
+              fg = red;
+            } // attrs.bold;
+            string = {
+              fg = cyan;
+            } // attrs.italic;
+            highlight = {
+              fg = yellow;
+            } // attrs.bold;
+            suggestion = {
+              fg = base5;
+            };
+            selectedSuggestion = {
+              fg = base6;
+            } // attrs.bold;
+          }
+          // palettes.gotham;
+      };
 
 in
 

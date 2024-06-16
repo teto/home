@@ -1,5 +1,10 @@
 # could be called home-huge.nix
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
 
   # broken on unstable because python2

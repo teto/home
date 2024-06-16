@@ -15,12 +15,17 @@
 
         "format-icons": ["", "", "", "", ""]
     },
+    "temperature": {
+      "hwmon-path": "/sys/class/hwmon/hwmon5/temp1_input"
+    },
 
 	"modules-center": [
 
-  "systemd-failed-units",
+  "systemd-failed-units"
 	],
   "modules-right": [ 
+   // "cpu",
+   "temperature",
    "battery",
    "bluetooth",
    "network",

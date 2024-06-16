@@ -1,0 +1,21 @@
+
+-- require'rest'.setup({
+-- 	-- Open request results in a horizontal split
+-- 	-- Skip SSL verification, useful for unknown certificates
+-- 	skip_ssl_verification = false,
+-- 	-- engine = 'classic',
+-- 	-- parser = 'treesitter',
+-- 	-- Highlight request on run
+-- 	highlight = {
+-- 		-- enabled = true,
+-- 		timeout = 150,
+-- 	},
+-- })
+--
+--
+-- -- TODO remove once it's merged upstream
+-- vim.api.nvim_create_user_command('RestLog', function()
+--   vim.cmd(string.format('tabnew %s', vim.fn.stdpath('cache')..'/rest.nvim.log'))
+-- end, {
+--   desc = 'Opens the rest.nvim log.',
+-- })

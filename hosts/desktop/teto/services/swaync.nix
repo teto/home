@@ -1,13 +1,16 @@
 # sway notification center
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
 
- imports = [
-   ../../../../hm/profiles/swaync.nix
- ];
+  imports = [ ../../../../hm/profiles/swaync.nix ];
 
- services.swaync = {
-   enable = true;
- };
+  services.swaync = {
+    enable = true;
+  };
 
 }

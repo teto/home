@@ -124,7 +124,6 @@ with lib.modules;
     KPROBE_EVENTS = yes;
   };
 
-
   noChelsio = {
 
     CRYPTO_DEV_CHELSIO_TLS = option no;
@@ -329,7 +328,6 @@ with lib.modules;
     "8139TOO_8129" = yes;
     # CONFIG_8139_OLD_RX_RESET is not set
 
-
     # PATA_MARVELL         = yes;
     # SATA_SIS             = yes;
     # MD_RAID0             = yes;
@@ -406,7 +404,6 @@ with lib.modules;
     MODULE_COMPRESS_XZ = mkForce no;
     KERNEL_XZ = mkForce no;
   };
-
 
   mptcpConfigStructured = {
 
@@ -494,7 +491,6 @@ with lib.modules;
 
     # else I get an error with current mptcp 0.95
     HSA_AMD = lib.modules.mkForce no;
-
 
     # DRM_AMDGPU = yes; # generates another error, implies DRM ?
 

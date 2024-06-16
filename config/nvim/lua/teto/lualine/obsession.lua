@@ -14,8 +14,7 @@ local M = {
     function()
         return ''
     end,
-    color = obsession_color    -- , color = obsession_color
-,
+    color = obsession_color, -- , color = obsession_color
     type = 'lua_expr',
     on_click = function()
         vim.cmd([[Obsession]])

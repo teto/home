@@ -1,7 +1,12 @@
 # checkout nixos/modules/services/continuous-integration/gitlab-runner.nix to
 # check how the config is generated/service run
 # For all options not available, just use "registrationFlags"
-{ modulesPath, pkgs, lib, ... }@attrs:
+{
+  modulesPath,
+  pkgs,
+  lib,
+  ...
+}@attrs:
 let
   gitlabUrl = "https://git.novadiscovery.net/";
 
@@ -42,9 +47,7 @@ in
         executor = "docker";
         # registrationConfigFile is mandatory so forward it to /dev/null
         registrationConfigFile = "/dev/null";
-        registrationFlags = defaultRegistrationFlags ++ [
-          "--docker-memory 32G"
-        ];
+        registrationFlags = defaultRegistrationFlags ++ [ "--docker-memory 32G" ];
         dockerPrivileged = true;
 
         # copied from nixpkgs' gitlab-runner module default
@@ -73,7 +76,17 @@ in
           . ${pkgs.nix}/etc/profile.d/nix.sh
 
           # nix-env installs in NIX_PROFILE or /nix/var/nix/profiles/default (see manpage)
-          ${pkgs.nix}/bin/nix-env -i ${lib.concatStringsSep " " (with pkgs; [ nix cacert git openssh ])}
+          ${pkgs.nix}/bin/nix-env -i ${
+            lib.concatStringsSep " " (
+              with pkgs;
+              [
+                nix
+                cacert
+                git
+                openssh
+              ]
+            )
+          }
 
           cp "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt" /etc/ssl/certs/ca-certificates.crt
           mkdir -p ~/.config/nix
@@ -115,7 +128,12 @@ in
 
           };
 
-        tagList = [ (renameTag "nix") (renameTag "bazel") "nixos" runnerName ];
+        tagList = [
+          (renameTag "nix")
+          (renameTag "bazel")
+          "nixos"
+          runnerName
+        ];
       };
 
     };
@@ -127,4 +145,3 @@ in
     requires = [ "run-secrets.d.mount" ];
   };
 }
-

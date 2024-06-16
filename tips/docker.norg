@@ -26,7 +26,7 @@ docker run --name NAME mattator/dce-dockerfiles:latest
 To override the entrypoint !
 docker run --entrypoint bash -it 885c3cd03b4d643999dca2db0e4e2fefe533f4689864c5d022bc077c75e22aa0
 
-docker run -it registry.novadiscovery.net/jinko/jinko-platform/jinko-base:local bash 
+docker run -it myRegistry.net/jinko-platform/jinko-base:local bash 
 
 ** how to free space / remove images
 @code shell

@@ -1,9 +1,12 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
 
-
-  services.mbsync =
-   {
+  services.mbsync = {
     # disabled because mujmap does it better ?
     enable = false; # disabled because it kept asking for my password
     verbose = true; # to help debug problems in journalctl
@@ -19,10 +22,10 @@
       # TODO need DBUS_SESSION_BUS_ADDRESS 
       # --app-name="%N" toto
       Environment = [ ''DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/1000/bus"'' ];
-	  # SetCredentialEncrypted=secrets.accounts.mail.fastmail_perso;
+      # SetCredentialEncrypted=secrets.accounts.mail.fastmail_perso;
       # easier to update the file then regenarate the nix code
       # ImportCredential="fastmail_perso:/home/teto/home/secrets/mail.secret";
-      LoadCredential="fastmail_perso:/home/teto/home/secrets/mail.secret";
+      LoadCredential = "fastmail_perso:/home/teto/home/secrets/mail.secret";
       # LoadCredentialEncrypted="fastmail_perso:/home/teto/home/secrets/mail.secret";
       # TODO
       # FailureAction=''${pkgs.libnotify}/bin/notify-send "Failure"'';

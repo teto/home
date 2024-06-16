@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 {
 
   services.openssh = {
@@ -24,7 +29,7 @@
       KbdInteractiveAuthentication = false;
       # PasswordAuthentication = false;
       # PermitRootLogin = "no";
-	  X11Forwarding = false;
+      X11Forwarding = false;
     };
 
     # hostKeys = [ ];

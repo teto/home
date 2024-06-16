@@ -1,9 +1,14 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
   services.redis = {
 
     # servers.default = {
-     # creates a redis-test unit ?
+    # creates a redis-test unit ?
     servers.test = {
       enable = true;
       logLevel = "notice";

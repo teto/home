@@ -35,119 +35,118 @@ function M.register_keymaps()
         fzf_lua.menus()
     end, { desc = 'Fuzzy search menu entries' })
 
-
     -- nnoremap ( "n", "<Leader>ca", function () vim.lsp.buf.code_action{} end )
     vim.keymap.set('n', '<Leader>ca', function()
         vim.cmd([[FzfLua lsp_code_actions]])
     end)
 
-
     -- MRU
     vim.api.nvim_create_user_command('FzfMru', M.fzf_mru, {})
     -- vim.keymap.set("n","<C-p>", M.fzf_mru, {desc="Open Files"})
-
-
 end
 
-
--- copy/pasted from 
+-- copy/pasted from
 -- https://www.reddit.com/r/neovim/comments/17dn1be/implementing_mru_sorting_with_minipick_and_fzflua/
 local function get_hash()
-  -- The get_hash() is utilised to create an independent "store"
-  -- By default `fre --add` adds to global history, in order to restrict this to
-  -- current directory we can create a hash which will keep history separate.
-  -- With this in mind, we can also append git branch to make sorting based on 
-  -- Current dir + git branch
-  local str = 'echo "dir:' .. vim.fn.getcwd()
-  if vim.b.gitsigns_head then
-    str = str .. ';git:' .. vim.b.gitsigns_head .. '"'
-  end
-  vim.print(str)
-  local hash = vim.fn.system(str .. " | md5sum | awk '{print $1}'")
-  return hash
+    -- The get_hash() is utilised to create an independent "store"
+    -- By default `fre --add` adds to global history, in order to restrict this to
+    -- current directory we can create a hash which will keep history separate.
+    -- With this in mind, we can also append git branch to make sorting based on
+    -- Current dir + git branch
+    local str = 'echo "dir:' .. vim.fn.getcwd()
+    if vim.b.gitsigns_head then
+        str = str .. ';git:' .. vim.b.gitsigns_head .. '"'
+    end
+    vim.print(str)
+    local hash = vim.fn.system(str .. " | md5sum | awk '{print $1}'")
+    return hash
 end
 
 function M.fzf_mru(opts)
-  local fzf = require 'fzf-lua'
-  opts = fzf.config.normalize_opts(opts, fzf.config.globals.files)
-  local hash = get_hash()
-  opts.cmd = 'command cat <(fre --sorted --store_name ' .. hash .. ") <(fd -t f) | awk '!x[$0]++'" -- | the awk command is used to filter out duplicates.
-  opts.fzf_opts = vim.tbl_extend('force', opts.fzf_opts, {
-    ['--tiebreak'] = 'index' -- make sure that items towards top are from history
-  })
-  opts.actions = vim.tbl_extend('force', opts.actions or {}, {
-    ['ctrl-d'] = {
-      -- Ctrl-d to remove from history
-      function(sel)
-        if #sel < 1 then return end
-        vim.fn.system('fre --delete ' .. sel[1] .. ' --store_name ' .. hash)
-      end,
-      -- This will refresh the list
-      fzf.actions.resume,
-    },
-    -- TODO: Don't know why this didn't work
-    -- ["default"] = {
-    --   fn = function(selected)
-    --     if #selected < 2 then
-    --       return
-    --     end
-    --     print('exec:', selected[2])
-    --     vim.cmd('!fre --add ' .. selected[2])
-    --     fzf.actions.file_edit_or_qf(selected)
-    --   end,
-    --   exec_silent = true,
-    -- },
-  })
+    local fzf = require('fzf-lua')
+    opts = fzf.config.normalize_opts(opts, fzf.config.globals.files)
+    local hash = get_hash()
+    opts.cmd = 'command cat <(fre --sorted --store_name ' .. hash .. ") <(fd -t f) | awk '!x[$0]++'" -- | the awk command is used to filter out duplicates.
+    opts.fzf_opts = vim.tbl_extend('force', opts.fzf_opts, {
+        ['--tiebreak'] = 'index', -- make sure that items towards top are from history
+    })
+    opts.actions = vim.tbl_extend('force', opts.actions or {}, {
+        ['ctrl-d'] = {
+            -- Ctrl-d to remove from history
+            function(sel)
+                if #sel < 1 then
+                    return
+                end
+                vim.fn.system('fre --delete ' .. sel[1] .. ' --store_name ' .. hash)
+            end,
+            -- This will refresh the list
+            fzf.actions.resume,
+        },
+        -- TODO: Don't know why this didn't work
+        -- ["default"] = {
+        --   fn = function(selected)
+        --     if #selected < 2 then
+        --       return
+        --     end
+        --     print('exec:', selected[2])
+        --     vim.cmd('!fre --add ' .. selected[2])
+        --     fzf.actions.file_edit_or_qf(selected)
+        --   end,
+        --   exec_silent = true,
+        -- },
+    })
 
-  fzf.core.fzf_wrap(opts, opts.cmd, function(selected)
-    if not selected or #selected < 2 then return end
-    vim.fn.system('fre --add ' .. selected[2] .. ' --store_name ' .. hash)
-    fzf.actions.act(opts.actions, selected, opts)
-  end)()
+    fzf.core.fzf_wrap(opts, opts.cmd, function(selected)
+        if not selected or #selected < 2 then
+            return
+        end
+        vim.fn.system('fre --add ' .. selected[2] .. ' --store_name ' .. hash)
+        fzf.actions.act(opts.actions, selected, opts)
+    end)()
 end
 
 ---@param opts {cwd?:string} | table
 function M.files(opts)
-  opts = opts or {}
+    opts = opts or {}
 
-  local fzflua = require('fzf-lua')
+    local fzflua = require('fzf-lua')
 
-  if not opts.cwd then
-    -- vim.uv.cwd()
-    -- safe_cwd(vim.t.Cwd)
-    opts.cwd = vim.uv.cwd()
-  end
-  local cmd = nil
-  if vim.fn.executable('fd') == 1 then
-    local fzfutils = require('fzf-lua.utils')
-    -- fzf-lua.defaults#defaults.files.fd_opts
-    cmd = string.format(
-      [[fd --color=never --type f --hidden --follow --exclude .git -x printf "{}: {/} %s\n"]],
-      fzfutils.ansi_codes.grey('{//}')
-    )
-    opts.fzf_opts = {
-      -- process ansi colors
-      ['--ansi'] = '',
-      ['--with-nth'] = '2..',
-      ['--delimiter'] = '\\s',
-      ['--tiebreak'] = 'begin,index',
+    if not opts.cwd then
+        -- vim.uv.cwd()
+        -- safe_cwd(vim.t.Cwd)
+        opts.cwd = vim.uv.cwd()
+    end
+    local cmd = nil
+    if vim.fn.executable('fd') == 1 then
+        local fzfutils = require('fzf-lua.utils')
+        -- fzf-lua.defaults#defaults.files.fd_opts
+        cmd = string.format(
+            [[fd --color=never --type f --hidden --follow --exclude .git -x printf "{}: {/} %s\n"]],
+            fzfutils.ansi_codes.grey('{//}')
+        )
+        opts.fzf_opts = {
+            -- process ansi colors
+            ['--ansi'] = '',
+            ['--with-nth'] = '2..',
+            ['--delimiter'] = '\\s',
+            ['--tiebreak'] = 'begin,index',
+        }
+        -- opts._fmt = opts._fmt or {}
+        -- opts._fmt.from = function(entry, _opts)
+        --   local s = fzfutils.strsplit(entry, ' ')
+        --   return s[3]
+        -- end
+    end
+    opts.cmd = cmd
+
+    opts.winopts = {
+        fullscreen = false,
+        height = 0.90,
+        width = 1,
     }
-    -- opts._fmt = opts._fmt or {}
-    -- opts._fmt.from = function(entry, _opts)
-    --   local s = fzfutils.strsplit(entry, ' ')
-    --   return s[3]
-    -- end
-  end
-  opts.cmd = cmd
+    opts.ignore_current_file = true
 
-  opts.winopts = {
-    fullscreen = false,
-    height = 0.90,
-    width = 1,
-  }
-  opts.ignore_current_file = true
-
-  return fzflua.files(opts)
+    return fzflua.files(opts)
 end
 
 return M

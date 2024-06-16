@@ -1,35 +1,42 @@
-{ config
-, flakeInputs
-, secrets
-, modulesPath
-, pkgs
-, lib
-, ... }:
+{
+  config,
+  flakeInputs,
+  secrets,
+  modulesPath,
+  pkgs,
+  lib,
+  ...
+}:
 let
   # TODO add a justfile to run the basic steps
   banner = "You can start the nextcloud-add-user.service unit if teto user doesnt exist yet";
 in
 {
- networking = {
-   hostName = "neotokyo";
-  firewall = {
-     enable = true;
-   };
+  networking = {
+    hostName = "neotokyo";
+    firewall = {
+      enable = true;
+    };
   };
 
   system.stateVersion = "23.11";
 
   # imported from gandhi ?
-    boot.initrd.kernelModules = [
-      "xen-blkfront" "xen-tpmfront" "xen-kbdfront" "xen-fbfront"
-      "xen-netfront" "xen-pcifront" "xen-scsifront"
-    ];
-    # This is to get a prompt via the "openstack console url show" command
-    systemd.services."getty@tty1" = {
-      enable = lib.mkForce true;
-      wantedBy = [ "multi-user.target" ];
-      serviceConfig.Restart = "always";
-    };
+  boot.initrd.kernelModules = [
+    "xen-blkfront"
+    "xen-tpmfront"
+    "xen-kbdfront"
+    "xen-fbfront"
+    "xen-netfront"
+    "xen-pcifront"
+    "xen-scsifront"
+  ];
+  # This is to get a prompt via the "openstack console url show" command
+  systemd.services."getty@tty1" = {
+    enable = lib.mkForce true;
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig.Restart = "always";
+  };
 
   programs.bash.interactiveShellInit = ''
     cat "${pkgs.writeText "welcome-message" banner}";
@@ -62,34 +69,33 @@ in
 
   virtualisation.docker.enable = true;
 
-
   home-manager.users.root = {
-   imports = [
-    ./users/root.nix
-    ../../hm/profiles/neovim.nix
-    ../desktop/root/programs/ssh.nix
-   ];
+    imports = [
+      ./users/root.nix
+      ../../hm/profiles/neovim.nix
+      ../desktop/root/programs/ssh.nix
+    ];
 
-   # home.stateVersion = "23.11";
+    # home.stateVersion = "23.11";
   };
 
- home-manager.users.teto = {
-   # TODO it should load the whole folder
-   imports = [
-     # ../desktop/teto/
-    # ../../hm/profiles/teto/common.nix
-    ./teto/default.nix
-    ../../hm/profiles/common.nix
-    ../../hm/profiles/zsh.nix
-    ../../hm/profiles/neovim.nix
+  home-manager.users.teto = {
+    # TODO it should load the whole folder
+    imports = [
+      # ../desktop/teto/
+      # ../../hm/profiles/teto/common.nix
+      ./teto/default.nix
+      ../../hm/profiles/common.nix
+      ../../hm/profiles/zsh.nix
+      ../../hm/profiles/neovim.nix
 
-     # custom modules
-     # ./home.nix
-    # breaks build: doesnt like the "activation-script"
-    # nova.hmConfigurations.dev
-   ];
-   # home.stateVersion = "23.05";
- };
+      # custom modules
+      # ./home.nix
+      # breaks build: doesnt like the "activation-script"
+      # nova.hmConfigurations.dev
+    ];
+    # home.stateVersion = "23.05";
+  };
 
   boot.loader = {
     #    systemd-boot.enable = true;
@@ -112,6 +118,5 @@ in
   # environment.systemPackages = with pkgs; [ ];
 
   # services.gitolite.adminPubkey = secrets.gitolitePublicKey;
-
 
 }

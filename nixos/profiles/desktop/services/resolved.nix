@@ -1,4 +1,4 @@
 {
-    enable = true;
-    dnssec = "false"; # "allow-downgrade";
+  enable = true;
+  dnssec = "false"; # "allow-downgrade";
 }

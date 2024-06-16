@@ -1,10 +1,10 @@
 return {
- -- {
- --  "kndndrj/nvim-dbee",
-  -- dependencies = {
-  --   "MunifTanjim/nui.nvim",
-  -- },
-  --[[ Reference
+    -- {
+    --  "kndndrj/nvim-dbee",
+    -- dependencies = {
+    --   "MunifTanjim/nui.nvim",
+    -- },
+    --[[ Reference
 -- Open/close/toggle the UI.
 require("dbee").open()
 require("dbee").close()
@@ -13,168 +13,100 @@ require("dbee").toggle()
 require("dbee").execute(query)
 -- Store the current result to file/buffer/yank-register (see "Getting Started").
 require("dbee").store(format, output, opts)
-]]--
-  -- build = function()
-  --   -- Install tries to automatically detect the install method.
-  --   -- if it fails, try calling it with one of these parameters:
-  --   --    "curl", "wget", "bitsadmin", "go"
-  --   require("dbee").install()
-  -- end,
-  -- config = function()
-  --   require("dbee").setup(--[[optional config]])
-  -- end,
--- },
+]]
+    --
+    -- build = function()
+    --   -- Install tries to automatically detect the install method.
+    --   -- if it fails, try calling it with one of these parameters:
+    --   --    "curl", "wget", "bitsadmin", "go"
+    --   require("dbee").install()
+    -- end,
+    -- config = function()
+    --   require("dbee").setup(--[[optional config]])
+    -- end,
+    -- },
 
-{
- 'MagicDuck/grug-far.nvim'
-  , config = function()
-      require('grug-far').setup({
-        -- ... options, see Configuration section below ...
-        -- ... there are no required options atm...
-      })
-    end
-},
- -- {
- --  -- Show diagnostics and lsp info inside a custom window, following the mouse position 
- --  'soulis-1256/eagle.nvim'
- -- },
- {
-  -- file explorer
-  'stevearc/oil.nvim'
-  , config = function ()
-      require("oil").setup({
-        -- Oil will take over directory buffers (e.g. `vim .` or `:e src/`)
-        -- Set to false if you still want to use netrw.
-        default_file_explorer = true,
-     })
-   end
- },
--- {
---   'mawkler/modicator.nvim',
---   config = function()
---     require('modicator').setup({
---       -- Show warning if any required option is missing
---       show_warnings = false,
---      })
---   end,
---  },
-   {
-    -- dim inactive windows
-    'levouh/tint.nvim',
-   config = function ()
-       -- Default configuration
-       -- available in nixpkgs tint-nvim
-       require("tint").setup({})
-    end
-   },
-   {
-      'tzachar/highlight-undo.nvim',
-      config = function()
-        require('highlight-undo').setup({
-          hlgroup = 'HighlightUndo',
-          duration = 300,
-          keymaps = {
-            {'n', 'u', 'undo', {}},
-            {'n', '<C-r>', 'redo', {}},
-          }
-          })
-      end
-  },
-  -- { 'romgrk/kirby.nvim',
-  -- dependencies = {
-  -- --     -- { 'romgrk/fzy-lua-native', build = 'make install' },
-  --     -- { 'romgrk/kui.nvim' },
-  --   },
-  -- },
-    -- provides 'NvimTree'
-    -- { 'kyazdani42/nvim-tree.lua', lazy = true},
+    -- {
+    --   'mawkler/modicator.nvim',
+    --   config = function()
+    --     require('modicator').setup({
+    --       -- Show warning if any required option is missing
+    --       show_warnings = false,
+    --      })
+    --   end,
+    --  },
 
- -- {
- --        'rcarriga/nvim-notify',
- --        config = function()
- --            require('notify').setup({
- --                -- Animation style (see below for details)
- --                stages = 'fade_in_slide_out',
+    -- {
+    --  -- dim inactive windows
+    --  'levouh/tint.nvim',
+    -- config = function ()
+    --     -- Default configuration
+    --     -- available in nixpkgs tint-nvim
+    --     require("tint").setup({})
+    --  end
+    -- },
+    --  {
+    --     'tzachar/highlight-undo.nvim',
+    --     config = function()
+    --       require('highlight-undo').setup({
+    --         hlgroup = 'HighlightUndo',
+    --         duration = 300,
+    --         keymaps = {
+    --           {'n', 'u', 'undo', {}},
+    --           {'n', '<C-r>', 'redo', {}},
+    --         }
+    --         })
+    --     end
+    -- },
+    -- { 'romgrk/kirby.nvim',
+    -- dependencies = {
+    -- --     -- { 'romgrk/fzy-lua-native', build = 'make install' },
+    --     -- { 'romgrk/kui.nvim' },
+    --   },
+    -- },
 
- --                -- Function called when a new window is opened, use for changing win settings/config
- --                -- on_open = nil,
- --                -- Function called when a window is closed
- --                -- on_close = nil,
- --                -- Render function for notifications. See notify-render()
- --                -- render = "default",
- --                -- Default timeout for notifications
- --                timeout = 5000,
- --                -- Max number of columns for messages
- --                max_width = 100,
- --                -- Max number of lines for a message
- --                -- max_height = 50,
+    -- {
+    --        'rcarriga/nvim-notify',
+    --        config = function()
+    --            require('notify').setup({
+    --                -- Animation style (see below for details)
+    --                stages = 'fade_in_slide_out',
 
- --                -- For stages that change opacity this is treated as the highlight behind the window
- --                -- Set this to either a highlight group, an RGB hex value e.g. "#000000" or a function returning an RGB code for dynamic values
- --                background_colour = 'Normal',
+    --                -- Function called when a new window is opened, use for changing win settings/config
+    --                -- on_open = nil,
+    --                -- Function called when a window is closed
+    --                -- on_close = nil,
+    --                -- Render function for notifications. See notify-render()
+    --                -- render = "default",
+    --                -- Default timeout for notifications
+    --                timeout = 5000,
+    --                -- Max number of columns for messages
+    --                max_width = 100,
+    --                -- Max number of lines for a message
+    --                -- max_height = 50,
 
- --                -- Minimum width for notification windows
- --                minimum_width = 50,
- --            })
+    --                -- For stages that change opacity this is treated as the highlight behind the window
+    --                -- Set this to either a highlight group, an RGB hex value e.g. "#000000" or a function returning an RGB code for dynamic values
+    --                background_colour = 'Normal',
 
- --            vim.notify = require('notify')
- --        end,
- --    },
+    --                -- Minimum width for notification windows
+    --                minimum_width = 50,
+    --            })
 
- -- I use my own
-   -- { 'simrat39/desktop-notify.nvim',
-   -- config = function ()
-   --   require("desktop-notify").override_vim_notify()
-   --  end
-   --  -- dependencies = { 'nvim-lua/plenary.nvim'}
-   -- },
-    { 'protex/better-digraphs.nvim', lazy=true },
+    --            vim.notify = require('notify')
+    --        end,
+    --    },
 
     -- colorschemes
-    'craftzdog/solarized-osaka.nvim',
-    'Matsuuu/pinkmare',
-    'flrnd/candid.vim',
-    'uga-rosa/ccc.nvim',
+    -- 'uga-rosa/ccc.nvim', -- color picker
     -- {
     --   'NvChad/nvim-colorizer.lua',
     --     config = function ()
     --         require('colorizer').setup()
     --     end
     -- },
-    -- 'whatyouhide/vim-gotham'
-    'adlawson/vim-sorcerer',
     -- use 'npxbr/gruvbox.nvim' " requires lus
-    'vim-scripts/Solarized',
     -- {'kevinhwang91/nvim-ufo', dependencies = {'kevinhwang91/promise-async'}},
-    'romainl/flattened',
-    'NLKNguyen/papercolor-theme',
-    'marko-cerovac/material.nvim',
-    'shaunsingh/oxocarbon.nvim',
-    { "catppuccin/nvim", name = "catppuccin" },
- -- load 'after/colors'
- -- 'calvinchengx/vim-aftercolors',
-
-    {
-        'rose-pine/neovim',
-        name = 'rose-pine',
-        -- tag = 'v1.*',
-        -- config = function()
-        -- end
-    },
-    'raddari/last-color.nvim',
-
--- shade currently broken
---	''
---	shade.setup({
---		overlay_opacity = 70,
---		opacity_step = 1,
---		-- keys = {
---		--	 brightness_up	  = '<C-Up>',
---		--	 brightness_down  = '<C-Down>',
---		--	 toggle			  = '<Leader>s',
---		-- }
---	})
---end
-
-
+    -- load 'after/colors'
+    -- 'calvinchengx/vim-aftercolors',
 }

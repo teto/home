@@ -1,6 +1,11 @@
-{ config, lib, pkgs, ... }:
 {
-    
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+{
+
   programs.msmtp = {
     enable = true;
     extraConfig = ''
@@ -10,8 +15,4 @@
     '';
   };
 
-
-
-
 }
-

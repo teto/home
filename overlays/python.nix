@@ -5,15 +5,11 @@ rec {
     # Careful, we're using a different self and super here!
     packageOverrides = pythonself: pythonsuper: {
 
-      protobuf = pythonsuper.protobuf.override {
-        inherit (final.onnxruntime) protobuf;
-      };
+      protobuf = pythonsuper.protobuf.override { inherit (final.onnxruntime) protobuf; };
 
       kergen = prev.callPackage ./pkgs/kergen.nix { };
 
-      mininet-with-man = pythonsuper.mininet.override ({
-        withManpage = true;
-      });
+      mininet-with-man = pythonsuper.mininet.override ({ withManpage = true; });
 
       # because of https://github.com/pazz/alot/issues/1512
       # tuple('='.join(p) for p in part.get_params())

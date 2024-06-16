@@ -1,12 +1,15 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
 
   # for sharedssh access
   services.gvfs.enable = true;
 
-  imports = [
-  ];
-
+  imports = [ ];
 
   # to test locally
   # services.gitlab-runner.enable = true;

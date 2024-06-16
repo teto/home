@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 {
   myFirefox = pkgs.wrapFirefox pkgs.firefox-unwrapped {
     extraExtensions = [

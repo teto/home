@@ -4,7 +4,6 @@ i3-msg "workspace 9; append_layout $HOME/.i3/test.json"
 
 urxvt -cd $HOME/dce &
 
-
 #i3-msg "workspace 9; append_layout /home/teto/.i3/ws1.json"
 
 ##urxvt -e sh -c "cd $HOME/ns3off;$SHELL" &

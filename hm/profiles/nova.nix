@@ -1,12 +1,15 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
 
-  imports = [
-      ./nova/programs/bash.nix
-  ];
+  imports = [ ./nova/programs/bash.nix ];
 
   home.packages = [
-    pkgs.aws-vault # set it up as 
+    pkgs.aws-vault # set it up as
     pkgs.sqlitebrowser
     pkgs.google-chrome
     # pigz for zlib (de)compression
@@ -34,8 +37,14 @@
       terminal = false;
       name = "nova (Firefox)";
       genericName = "Web Browser";
-      mimeType = [ "text/html" "text/xml" ];
-      categories = [ "Network" "WebBrowser" ];
+      mimeType = [
+        "text/html"
+        "text/xml"
+      ];
+      categories = [
+        "Network"
+        "WebBrowser"
+      ];
       startupNotify = false;
       # extraConfig = ''
       #   [X-ExtraSection]

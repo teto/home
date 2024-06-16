@@ -1,1 +1,8 @@
 open-in-mpv 
+
+
+frontends
+
+https://github.com/mpv-player/mpv/wiki/Applications-using-mpv
+ff2mpv
+you can adjust sub delay with 'z' and 'x' keys,

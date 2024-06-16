@@ -1,9 +1,10 @@
-{ stdenv
-, fetchFromGitHub
-, cmake
-, curl
-, pkgconfig
-, lib
+{
+  stdenv,
+  fetchFromGitHub,
+  cmake,
+  curl,
+  pkgconfig,
+  lib,
 }:
 
 stdenv.mkDerivation rec {
@@ -17,13 +18,16 @@ stdenv.mkDerivation rec {
     sha256 = "1zxk52s1h5qx62idil237zdpj8agrry0w1xwkfx05wvv9sw4ld35";
   };
 
-  buildInputs = [ cmake pkgconfig curl ];
+  buildInputs = [
+    cmake
+    pkgconfig
+    curl
+  ];
 
   meta = with lib; {
-    homepage = https://github.com/tohojo/http-getter;
+    homepage = "https://github.com/tohojo/http-getter";
     description = "Simple getter for HTTP URLs using cURL";
     platforms = platforms.unix;
     license = licenses.gpl3;
   };
 }
-

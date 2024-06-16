@@ -21,15 +21,16 @@
 
 # }
 
-{ mkDerivation
-, base
-, hspec
-, optparse-applicative
-, process
-, QuickCheck
-, stdenv
-, fetchFromGitHub
-, lib
+{
+  mkDerivation,
+  base,
+  hspec,
+  optparse-applicative,
+  process,
+  QuickCheck,
+  stdenv,
+  fetchFromGitHub,
+  lib,
 }:
 mkDerivation {
   pname = "gutenhasktags";
@@ -43,10 +44,17 @@ mkDerivation {
   };
   isLibrary = false;
   isExecutable = true;
-  executableHaskellDepends = [ base optparse-applicative process ];
-  testHaskellDepends = [ base hspec QuickCheck ];
+  executableHaskellDepends = [
+    base
+    optparse-applicative
+    process
+  ];
+  testHaskellDepends = [
+    base
+    hspec
+    QuickCheck
+  ];
   homepage = "https://github.com/githubuser/gutenhasktags";
   description = "TODO Initial project template from stack";
   license = lib.licenses.bsd3;
 }
-

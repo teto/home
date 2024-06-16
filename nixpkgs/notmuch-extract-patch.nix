@@ -1,11 +1,11 @@
-{ stdenv
-, notmuch
-, buildPythonApplication
-, fetchFromGitHub
+{
+  stdenv,
+  notmuch,
+  buildPythonApplication,
+  fetchFromGitHub,
 }:
 # super.pkgs.stdenv.mkDerivation 
-buildPythonApplication
-{
+buildPythonApplication {
   name = "notmuch-extract-patch";
   src = fetchFromGitHub {
     owner = "aaptel";
@@ -13,9 +13,7 @@ buildPythonApplication
     rev = "f6b282d91af581178150e36369e7fe03a9c813d4";
     sha256 = "0b8gzyv3lp9qxy2z94ncmh2k8yzwl91ws3m7v2cp232fyx6s7wp7";
   };
-  buildInputs = [
-    notmuch
-  ];
+  buildInputs = [ notmuch ];
   # unpackPhase = "true";
   installPhase = ''
     mkdir -p $out/bin

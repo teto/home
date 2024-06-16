@@ -6,9 +6,10 @@ yaml-files:
   - '*.yaml'
   - '*.yml'
   - '.yamllint'
-
+# "yaml.customTags": [ "!reference sequence" ]
 rules:
-  anchors: enable
+  anchors:
+   forbid-undeclared-aliases: true
   braces: disable
   brackets: disable
   colons: enable

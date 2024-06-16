@@ -1,4 +1,9 @@
-{ pkgs, config, lib, ... }:
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
 let
   cfg = config.services.local-ai;
   inherit (lib) mkOption types;
@@ -35,23 +40,24 @@ in
       wantedBy = [ "multi-user.target" ];
       serviceConfig = {
         # DynamicUser = true;
-        ExecStart = lib.escapeShellArgs ([
-          "${cfg.package}/bin/local-ai"
-          "--debug"
-          "--address"
-          ":${toString cfg.port}"
-          "--threads"
-          (toString cfg.threads)
-          "--localai-config-dir"
-          "."
-          "--models-path"
-          (toString cfg.models)
-        ]
-        ++ cfg.extraArgs);
+        ExecStart = lib.escapeShellArgs (
+          [
+            "${cfg.package}/bin/local-ai"
+            "--debug"
+            "--address"
+            ":${toString cfg.port}"
+            "--threads"
+            (toString cfg.threads)
+            "--localai-config-dir"
+            "."
+            "--models-path"
+            (toString cfg.models)
+          ]
+          ++ cfg.extraArgs
+        );
         RuntimeDirectory = "local-ai";
         WorkingDirectory = "%t/local-ai";
       };
     };
   };
 }
-

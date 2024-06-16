@@ -1,4 +1,8 @@
-{ lib, buildPythonPackage, fetchFromGitHub }:
+{
+  lib,
+  buildPythonPackage,
+  fetchFromGitHub,
+}:
 buildPythonPackage rec {
   pname = "kergen";
   version = "0.1.4";
@@ -14,10 +18,8 @@ buildPythonPackage rec {
 
   meta = with lib; {
     description = "Linux kernel config generator";
-    homepage = https://github.com/nichoski/kergen;
+    homepage = "https://github.com/nichoski/kergen";
     maintainers = with maintainers; [ teto ];
     license = licenses.asl20;
   };
 }
-
-

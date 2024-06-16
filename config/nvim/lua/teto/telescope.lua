@@ -7,14 +7,14 @@ function M.telescope_create_keymaps()
     end)
     vim.keymap.set('n', '<Leader>b', function()
         require('telescope.builtin').buffers({})
-    end, { desc =  "Fuzzy search buffers" })
+    end, { desc = 'Fuzzy search buffers' })
 
     vim.keymap.set('n', '<Leader>o', function()
         -- require('telescope.builtin').git_files({})
-        require("telescope").extensions.smart_open.smart_open({
-         cwd_only = true,
+        require('telescope').extensions.smart_open.smart_open({
+            cwd_only = true,
         })
-    end, { desc =  "Fuzzy search git files" })
+    end, { desc = 'Fuzzy search git files' })
     -- vim.keymap.set ('n', "<Leader>F", function () vim.cmd("FzfFiletypes") end)
     vim.keymap.set('n', '<Leader>t', function()
         require('telescope.builtin').tags({})
@@ -37,33 +37,35 @@ function M.setup()
     -- TODO check for telescope github extension too
     -- telescope.load_extension('ghcli')
     local actions = require('telescope.actions')
-    local open_with_trouble = require("trouble.sources.telescope").open
+
+    -- local open_with_trouble = require("trouble.sources.telescope").open
+
     -- telescope.setup{}
     local telescope = require('telescope')
 
     telescope.setup({
-       defaults = {
-         -- completion = { autocomplete = false },
-         path_display = {
-             "filename_first",
-         },
-         preview = false;
-         layout_strategy = "vertical",
-         sorting_strategy = "ascending",  -- display results top->bottom
-         layout_config = {
-           prompt_position = "top",
+        defaults = {
+            -- completion = { autocomplete = false },
+            path_display = {
+                'filename_first',
+            },
+            preview = false,
+            layout_strategy = 'vertical',
+            sorting_strategy = 'ascending', -- display results top->bottom
+            layout_config = {
+                prompt_position = 'top',
 
-           -- mirror = true,
-             vertical = { width = 0.7 },
-             -- other layout configuration here
-         },
+                -- mirror = true,
+                vertical = { width = 0.7 },
+                -- other layout configuration here
+            },
             mappings = {
-             -- see :h telescope.defaults.history
+                -- see :h telescope.defaults.history
                 i = {
-                    ['<c-t>'] = open_with_trouble,
-                    ["<C-n>"] = require('telescope.actions').cycle_history_next,
-                    ["<C-p>"] = require('telescope.actions').cycle_history_prev,
-                    ["<C-w>"] = { "<c-s-w>", type = "command" },
+                    -- ['<c-t>'] = open_with_trouble,
+                    ['<C-n>'] = require('telescope.actions').cycle_history_next,
+                    ['<C-p>'] = require('telescope.actions').cycle_history_prev,
+                    ['<C-w>'] = { '<c-s-w>', type = 'command' },
 
                     -- 				-- -- To disable a keymap, put [map] = false
                     -- 				-- -- So, to not map "<C-n>", just put
@@ -77,7 +79,7 @@ function M.setup()
                     ['<esc>'] = actions.close,
                 },
                 n = {
-                    ['<C-t>'] = open_with_trouble,
+                    -- ['<C-t>'] = open_with_trouble,
                     -- function(prompt_bufnr, mode)
                     --     require('trouble.providers.telescope').open_with_trouble(prompt_bufnr, mode)
                     -- end,
@@ -128,17 +130,17 @@ function M.setup()
             -- 		-- buffer_previewer_maker = require'telescope.previewers'.buffer_previewer_maker
         },
         extensions = {
-          smart_open = {
-           -- open_buffer_indicators (default: {previous = "•", others = "∘"}
-           show_scores = true,
-            match_algorithm = "fzf",
-            disable_devicons = false,
-            mappings = {
-              i = {
-                ["<esc>"] = require("telescope.actions").close,
-              },
+            smart_open = {
+                -- open_buffer_indicators (default: {previous = "•", others = "∘"}
+                show_scores = true,
+                match_algorithm = 'fzf',
+                disable_devicons = false,
+                mappings = {
+                    i = {
+                        ['<esc>'] = require('telescope.actions').close,
+                    },
+                },
             },
-          },
             -- 		fzf = {
             -- 			fuzzy = true,					 -- false will only do exact matching
             -- 			override_generic_sorter = true, -- override the generic sorter
@@ -179,6 +181,5 @@ function M.setup()
     -- User TelescopePreviewerLoaded
 end
 --}}}
-
 
 return M

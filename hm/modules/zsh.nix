@@ -1,7 +1,12 @@
-{ config, lib, pkgs, flakeInputs
-, secrets
-, withSecrets
-, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  flakeInputs,
+  secrets,
+  withSecrets,
+  ...
+}:
 
 with lib;
 
@@ -10,31 +15,34 @@ let
 
   fzf-git-sh = flakeInputs.fzf-git-sh;
 
-    # /tree/master/plugins/zbell
+  # /tree/master/plugins/zbell
   termTitleSubmodule = types.submodule (import ./title-submodule.nix);
 
   zbellModule = types.submodule {
-      options = {
+    options = {
 
-        enable = mkEnableOption "Z-bell";
+      enable = mkEnableOption "Z-bell";
 
-        ignore = mkOption {
-          type = types.listOf types.str;
-          # add $EDITOR
-          default = ["man" "$EDITOR"];
-          description = "The list of programs to ignore.";
-        };
+      ignore = mkOption {
+        type = types.listOf types.str;
+        # add $EDITOR
+        default = [
+          "man"
+          "$EDITOR"
+        ];
+        description = "The list of programs to ignore.";
       };
     };
+  };
 in
 {
 
   options = {
     programs.zsh = {
 
-     enableTetoConfig = mkEnableOption "Things I am used to";
-     enableFzfGit = mkEnableOption "Fzf-git";
-     enableVocageSensei = mkEnableOption "Vocage sensei";
+      enableTetoConfig = mkEnableOption "Things I am used to";
+      enableFzfGit = mkEnableOption "Fzf-git";
+      enableVocageSensei = mkEnableOption "Vocage sensei";
 
       mcfly = mkOption {
         # type = termTitleSubmodule;
@@ -73,7 +81,6 @@ in
         '';
       };
 
-
       enableFancyCursor = mkOption {
         default = true;
         type = types.bool;
@@ -94,8 +101,8 @@ in
         # default = true;
         # plugins/zbell/zbell.plugin.zsh
         type = zbellModule;
-        default =  {
-          enable =false;
+        default = {
+          enable = false;
         };
         description = ''
           Whether to enable Fish integration.
@@ -118,16 +125,15 @@ in
 
     (mkIf cfg.enableVocageSensei {
 
-     programs.zsh.initExtra =
-        ''
-         # do nothing
-        '';
+      programs.zsh.initExtra = ''
+        # do nothing
+      '';
     })
 
     (mkIf cfg.enableFzfGit {
-     programs.zsh.initExtra = ''source ${fzf-git-sh}/fzf-git.sh'';
+      programs.zsh.initExtra = ''source ${fzf-git-sh}/fzf-git.sh'';
 
-     programs.bash.initExtra = ''source ${fzf-git-sh}/fzf-git.sh'';
+      programs.bash.initExtra = ''source ${fzf-git-sh}/fzf-git.sh'';
     })
 
     (mkIf cfg.enableFancyCtrlZ {
@@ -146,52 +152,55 @@ in
       '';
     })
 
-    (let 
-      shellSetTitleFunctions = ''
-      function set_term_title (){
-        print -n "\e]0;$1\a"
-      }
+    (
+      let
+        shellSetTitleFunctions = ''
+          function set_term_title (){
+            print -n "\e]0;$1\a"
+          }
 
-      set_term_title_for_new_prompt () {
-          echo "set_term_title_for_new_prompt"
-          set_term_title "$(pwd):'$3'"
-      }
-      # zsh passes
-      set_term_title_for_program () {
-          echo "set_term_title_for_program \$1: '$1' \$2: '$2' \$3: '$3'"
-          set_term_title "program: $(pwd):'$3'"
-      }
-      '';
-
-     in mkIf cfg.termTitle.enable {
-
-      # https://zsh.sourceforge.io/Doc/Release/Functions.html
-      # preexec: Executed just after a command has been read and is about to be executed.
-      # add-zsh-hook zsh_directory_name
-      # autoload zsh-mime-setup
-      # -n Do not add a newline to the output.
-      # print -Pn "\e]0;$(echo "$1")\a"
-      programs.zsh.initExtra = ''
-      ${shellSetTitleFunctions}
-
-
-      # https://zsh.sourceforge.io/Doc/Release/Functions.html#index-preexec_005ffunctions
-      # pass 3 arguments: non-expanded, expanded, fully-expanded
-      add-zsh-hook preexec set_term_title_for_program
-      # precmd: Executed before each prompt.
-      add-zsh-hook precmd set_term_title_for_new_prompt
-      '';
-
-      # depending 
-      # in my case since I am using starship
-      # https://starship.rs/advanced-config/#custom-pre-prompt-and-pre-execution-commands-in-bash
-      programs.bash.initExtra =  ''
-        ${shellSetTitleFunctions}
-        trap set_term_title DEBUG
+          set_term_title_for_new_prompt () {
+              echo "set_term_title_for_new_prompt"
+              set_term_title "$(pwd):'$3'"
+          }
+          # zsh passes
+          set_term_title_for_program () {
+              echo "set_term_title_for_program \$1: '$1' \$2: '$2' \$3: '$3'"
+              set_term_title "program: $(pwd):'$3'"
+          }
         '';
 
-       # config.programs.zsh.initExtra;
-    })
+      in
+      mkIf cfg.termTitle.enable {
+
+        # https://zsh.sourceforge.io/Doc/Release/Functions.html
+        # preexec: Executed just after a command has been read and is about to be executed.
+        # add-zsh-hook zsh_directory_name
+        # autoload zsh-mime-setup
+        # -n Do not add a newline to the output.
+        # print -Pn "\e]0;$(echo "$1")\a"
+        programs.zsh.initExtra = ''
+          ${shellSetTitleFunctions}
+
+
+          # https://zsh.sourceforge.io/Doc/Release/Functions.html#index-preexec_005ffunctions
+          # pass 3 arguments: non-expanded, expanded, fully-expanded
+          add-zsh-hook preexec set_term_title_for_program
+          # precmd: Executed before each prompt.
+          add-zsh-hook precmd set_term_title_for_new_prompt
+        '';
+
+        # depending 
+        # in my case since I am using starship
+        # https://starship.rs/advanced-config/#custom-pre-prompt-and-pre-execution-commands-in-bash
+        programs.bash.initExtra = ''
+          ${shellSetTitleFunctions}
+          trap set_term_title DEBUG
+        '';
+
+        # config.programs.zsh.initExtra;
+      }
+    )
 
     (mkIf cfg.enableFancyCursor {
       programs.zsh.initExtra = ''
@@ -219,23 +228,22 @@ in
 
     (mkIf cfg.mcfly.enable {
 
-       # ${}
+      # ${}
       programs.zsh.initExtra = ''
-       export MCFLY_RESULTS_SORT=LAST_RUN
-       export MCFLY_RESULTS=200
-       export MCFLY_FZF_NO_STRICT_ORDERING=1
-       # export MCFLY_PROMPT="❯"
-       # export MCFLY_HISTORY_LIMIT
+        export MCFLY_RESULTS_SORT=LAST_RUN
+        export MCFLY_RESULTS=200
+        export MCFLY_FZF_NO_STRICT_ORDERING=1
+        # export MCFLY_PROMPT="❯"
+        # export MCFLY_HISTORY_LIMIT
 
-       eval "$(${pkgs.mcfly}/bin/mcfly init zsh)"
-       eval "$(${pkgs.mcfly-fzf}/bin/mcfly-fzf init zsh)"
-       '';
-     })
-    (mkIf cfg.zbell.enable {
-     # TODO source zbell
-      programs.zsh.initExtra = ''
+        eval "$(${pkgs.mcfly}/bin/mcfly init zsh)"
+        eval "$(${pkgs.mcfly-fzf}/bin/mcfly-fzf init zsh)"
       '';
-     })
+    })
+    (mkIf cfg.zbell.enable {
+      # TODO source zbell
+      programs.zsh.initExtra = '''';
+    })
 
     # home.sessionVariables = {
     #   CABAL_CONFIG="$XDG_CONFIG_HOME/cabal/config";
@@ -244,40 +252,40 @@ in
     # };
 
     (mkIf cfg.enableTetoConfig {
-     programs.zsh = {
-       history = {
-        path = "${config.xdg.cacheHome}/zsh_history";
-       };
+      programs.zsh = {
+        history = {
+          path = "${config.xdg.cacheHome}/zsh_history";
+        };
 
-       sessionVariables = config.programs.bash.sessionVariables // 
-        (lib.optionalAttrs withSecrets {
-        # HISTFILE="$XDG_CACHE_HOME/zsh_history";
-        # TODO load this from sops instead
-        GITHUB_TOKEN = secrets.githubToken;
-        # TODO add it to sops
-        OPENAI_API_KEY = secrets.OPENAI_API_KEY;
+        sessionVariables =
+          config.programs.bash.sessionVariables
+          // (lib.optionalAttrs withSecrets {
+            # HISTFILE="$XDG_CACHE_HOME/zsh_history";
+            # TODO load this from sops instead
+            GITHUB_TOKEN = secrets.githubToken;
+            # TODO add it to sops
+            OPENAI_API_KEY = secrets.OPENAI_API_KEY;
 
-        # fre experiment
-        FZF_CTRL_T_COMMAND="command fre --sorted";
-        FZF_CTRL_T_OPTS="--tiebreak=index";
-      });
+            # fre experiment
+            FZF_CTRL_T_COMMAND = "command fre --sorted";
+            FZF_CTRL_T_OPTS = "--tiebreak=index";
+          });
 
-      autosuggestion.enable = true;
-      autosuggestion.highlight = "fg=#d787ff,bold";
+        autosuggestion.enable = true;
+        autosuggestion.highlight = "fg=#d787ff,bold";
 
-      # fre_chpwd() {
-      #   fre --add "$(pwd)"
-      # }
-      # typeset -gaU chpwd_functions
-      # chpwd_functions+=fre_chpwd
-       # if [ -f "$ZDOTDIR/zshrc" ]; then
-       # fi
-      initExtra = ''
-       source $ZDOTDIR/zshrc
-       '';
+        # fre_chpwd() {
+        #   fre --add "$(pwd)"
+        # }
+        # typeset -gaU chpwd_functions
+        # chpwd_functions+=fre_chpwd
+        # if [ -f "$ZDOTDIR/zshrc" ]; then
+        # fi
+        initExtra = ''
+          source $ZDOTDIR/zshrc
+        '';
 
       };
     })
   ]);
 }
-

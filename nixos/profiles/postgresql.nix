@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 {
 
   services.postgresql = {
@@ -11,10 +16,9 @@
     # should be a string
     # initialPasswordFile
 
-
     # pg_hba.conf is generated through authentication bit
     # sudo cat /var/lib/postgresql/14/pg_hba.conf for a primer
-      # "local   all             all                                     md5
+    # "local   all             all                                     md5
 
     # Dont keep it else it is concatenated with the rest and order matters
     # authentication = ''
@@ -26,12 +30,12 @@
     # initdbArgs
     # initialScript = ./postgresql-init.txt;
     settings = {
-         log_connections = true;
-         log_statement = "all";
-         logging_collector = true;
-         log_disconnections = true;
-         log_destination = lib.mkForce "syslog";
-       };
+      log_connections = true;
+      log_statement = "all";
+      logging_collector = true;
+      log_disconnections = true;
+      log_destination = lib.mkForce "syslog";
+    };
 
   };
 
@@ -42,4 +46,3 @@
   # ];
 
 }
-

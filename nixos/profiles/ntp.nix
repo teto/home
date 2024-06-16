@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
   services.openntpd = {
     enable = false;
@@ -37,15 +42,14 @@
     # to correct big errors on startup
     initstepslew = {
       enabled = true;
-	  threshold = 100;
+      threshold = 100;
     };
 
-
-	# we allow chrony to make big changes at 
-	# see https://chrony.tuxfamily.org/faq.html#_is_chronyd_allowed_to_step_the_system_clock
-	extraConfig = ''
-	  makestep 1 -1
-	'';
+    # we allow chrony to make big changes at 
+    # see https://chrony.tuxfamily.org/faq.html#_is_chronyd_allowed_to_step_the_system_clock
+    extraConfig = ''
+      makestep 1 -1
+    '';
   };
 
 }

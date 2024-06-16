@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
 
   environment.systemPackages = with pkgs; [
@@ -13,13 +18,13 @@
   # Enable the X11 windowing system.
   services.xserver = {
     enable = true;
-	# TODO enable in host-specific configuration
+    # TODO enable in host-specific configuration
     # autorun = true;
 
     displayManager = {
-	 # enable startx if you want to bypass display managers
-	 startx.enable = true;
-     # TODO move to host config
+      # enable startx if you want to bypass display managers
+      startx.enable = true;
+      # TODO move to host config
       # autoLogin = {
       #   enable = false;
       #   user = "teto";
@@ -38,10 +43,9 @@
       #   in [ fakeSession ];
       # defaultSession = null;
       gdm = {
-	    # enable = false;
+        # enable = false;
         wayland = true;
       };
-
 
       # job.logXsession = true; # writes into ~/.xsessions-errors
       # enableCtrlAltBackspace = false;

@@ -1,3 +1,1 @@
-{
-  gitolite-server = import ./config-iij-gitolite.nix;
-}
+{ gitolite-server = import ./config-iij-gitolite.nix; }

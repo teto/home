@@ -1,10 +1,11 @@
-{ pkgs
-, lib
-, config
-, secrets
-, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  secrets,
+  ...
+}:
 let
-
 
   getPasswordCommand = account: lib.strings.escapeShellArgs (pkgs.tetoLib.getPassword account);
 
@@ -53,9 +54,7 @@ let
       };
     };
 
-
   };
-
 
   # problem is I don't get the error/can't interrupt => TODO use another one
   # mbsyncWrapper = pkgs.writeShellScriptBin "mbsync-wrapper" ''
@@ -74,63 +73,62 @@ let
     signByDefault = false;
   };
 
-  fastmail =
-    accountExtra //
-    {
-      gpg = gpgModule;
-      flavor = "fastmail.com";
-      astroid = { enable = true; };
-
-      mbsync = mbsyncConfig // {
-        enable = false; # mujmap is better at it
-        remove = "both";
-        sync = true;
-      };
-
-      # folders.sent = "[Gmail]/Sent Mail";
-
-      msmtp.enable = true;
-      aerc.enable = true;
-      notmuch = {
-        enable = true;
-        # fqdn = "fastmail.com";
-      };
-      mujmap = {
-        enable = true;
-		# fqdn = null;
-        # TODO replace with pass
-        # settings.password_command = "cat /home/teto/mujmap_password";
-        # look at https://github.com/elizagamedev/mujmap/blob/main/mujmap.toml.example 
-        # for example
-        settings.username = secrets.accounts.mail.fastmail_perso.email;
-        # settings.password_command = getPasswordCommand "perso/fastmail_mc_jmap";
-        settings.password_command = "${pkgs.pass}/bin/pass show perso/fastmail_mc_jmap";
-        settings.config_dir = config.accounts.email.maildirBasePath;
-        settings.session_url = "https://api.fastmail.com/.well-known/jmap";
-        # check example at https://github.com/elizagamedev/mujmap/blob/main/mujmap.toml.example
-        # settings.timeout = 5
-      };
-
-
-      primary = false;
-      userName = secrets.accounts.mail.fastmail_perso.login;
-      realName = secrets.users.teto.realName;
-      address = secrets.accounts.mail.fastmail_perso.email;
-
-      # fastmail requires an app-specific password
-      passwordCommand = getPasswordCommand "perso/fastmail_mc/password";
-
-      # described here https://www.fastmail.com/help/technical/servernamesandports.html
-      # imap = { host = "imap.fastmail.com"; tls = my_tls; };
-      # smtp = { host = "smtp.fastmail.com"; tls = my_tls; };
-      # smtp.tls.useStartTls = false;
+  fastmail = accountExtra // {
+    gpg = gpgModule;
+    flavor = "fastmail.com";
+    astroid = {
+      enable = true;
     };
 
+    mbsync = mbsyncConfig // {
+      enable = false; # mujmap is better at it
+      remove = "both";
+      sync = true;
+    };
+
+    # folders.sent = "[Gmail]/Sent Mail";
+
+    msmtp.enable = true;
+    aerc.enable = true;
+    notmuch = {
+      enable = true;
+      # fqdn = "fastmail.com";
+    };
+    mujmap = {
+      enable = true;
+      # fqdn = null;
+      # TODO replace with pass
+      # settings.password_command = "cat /home/teto/mujmap_password";
+      # look at https://github.com/elizagamedev/mujmap/blob/main/mujmap.toml.example 
+      # for example
+      settings.username = secrets.accounts.mail.fastmail_perso.email;
+      # settings.password_command = getPasswordCommand "perso/fastmail_mc_jmap";
+      settings.password_command = "${pkgs.pass}/bin/pass show perso/fastmail_mc_jmap";
+      settings.config_dir = config.accounts.email.maildirBasePath;
+      settings.session_url = "https://api.fastmail.com/.well-known/jmap";
+      # check example at https://github.com/elizagamedev/mujmap/blob/main/mujmap.toml.example
+      # settings.timeout = 5
+    };
+
+    primary = false;
+    userName = secrets.accounts.mail.fastmail_perso.login;
+    realName = secrets.users.teto.realName;
+    address = secrets.accounts.mail.fastmail_perso.email;
+
+    # fastmail requires an app-specific password
+    passwordCommand = getPasswordCommand "perso/fastmail_mc/password";
+
+    # described here https://www.fastmail.com/help/technical/servernamesandports.html
+    # imap = { host = "imap.fastmail.com"; tls = my_tls; };
+    # smtp = { host = "smtp.fastmail.com"; tls = my_tls; };
+    # smtp.tls.useStartTls = false;
+  };
 
   nova = # {{{
-    accountExtra //
-    {
-      astroid = { enable = true; };
+    accountExtra // {
+      astroid = {
+        enable = true;
+      };
       neomutt = {
         enable = false;
       };
@@ -157,7 +155,6 @@ let
       passwordCommand = getPasswordCommand "nova/mail";
     };
   # }}}
-
 
   gmail = accountExtra // {
     gpg = gpgModule;
@@ -253,26 +250,23 @@ in
 
   imports = [
     ../../../hm/profiles/neomutt.nix
+    ./programs/aerc.nix
     ./programs/astroid.nix
     ./programs/msmtp.nix
     ./programs/mujmap.nix
     # ./programs/mbsync.nix  # using mujmap instead ?
     ./programs/notmuch.nix
-    ./services/mbsync.nix  # using mujmap instead ?
+    ./services/mbsync.nix # using mujmap instead ?
   ];
 
-  programs.aerc = {
-   enable = true;
-   extraConfig.general.unsafe-accounts-conf = true;
-  };
-
   services.mujmap = {
-   enable = true;
+    enable = true;
   };
 
   home.packages = with pkgs; [
     isync
     mujmap
+    meli-git # broken jmap mailreader
   ];
 
   accounts.email.maildirBasePath = "${config.home.homeDirectory}/maildir";
@@ -281,7 +275,6 @@ in
     inherit fastmail;
     inherit nova;
   };
-
 
   # generate an addressbook that can be used later
   home.file."bin-nix/generate-addressbook".text = ''

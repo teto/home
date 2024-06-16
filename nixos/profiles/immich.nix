@@ -1,5 +1,10 @@
-
-{ config, lib, pkgs, secrets, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  secrets,
+  ...
+}:
 let
   # secrets = import ../nixpkgs/secrets.nix;
 
@@ -10,21 +15,19 @@ let
 
 in
 {
- # services.immich = {
- #  enable = false;
- #  # python3.11-insightface-0.7.3
- #      server.typesense.apiKeyFile = typesenseApiKeyFile;
+  # services.immich = {
+  #  enable = false;
+  #  # python3.11-insightface-0.7.3
+  #      server.typesense.apiKeyFile = typesenseApiKeyFile;
 
- # };
+  # };
 
-    services.typesense = {
-      enable = true;
-      # In a real setup you should generate an api key for immich
-      # and not use the admin key!
-      apiKeyFile = typesenseApiKeyFile;
-      settings.server.api-address = "127.0.0.1";
-    };
+  services.typesense = {
+    enable = true;
+    # In a real setup you should generate an api key for immich
+    # and not use the admin key!
+    apiKeyFile = typesenseApiKeyFile;
+    settings.server.api-address = "127.0.0.1";
+  };
 
-
-
- }
+}

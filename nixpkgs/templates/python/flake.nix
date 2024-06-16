@@ -14,18 +14,26 @@
     };
   };
 
-  outputs = { self, nixpkgs, flake-utils, poetry2nix, ... }:
+  outputs =
+    {
+      self,
+      nixpkgs,
+      flake-utils,
+      poetry2nix,
+      ...
+    }:
     let
-    in flake-utils.lib.eachDefaultSystem (system:
+    in
+    flake-utils.lib.eachDefaultSystem (
+      system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
 
-        overrides = pkgs.poetry2nix.overrides.withDefaults (final: prev: {
-          matplotlib = pkgs.python3Packages.matplotlib;
-        });
+        overrides = pkgs.poetry2nix.overrides.withDefaults (
+          final: prev: { matplotlib = pkgs.python3Packages.matplotlib; }
+        );
       in
       rec {
-
 
         packages.myPackage = pkgs.poetry2nix.mkPoetryApplication {
           projectDir = ./.;
@@ -44,5 +52,6 @@
             export PYTHONPATH="$PWD:$PYTHONPATH"
           '';
         });
-      });
+      }
+    );
 }

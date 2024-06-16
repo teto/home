@@ -1,17 +1,18 @@
 # python3 with argparse, zdg, sqlite3, pathlib and BeautifulSoup (bs4)
 # Zeal (install the desired documentation sets from its GUI)
 # Lynx web browser
-{ lib
-, stdenv
-, fetchFromGitLab
-# , zeal
-# , lynx
-# , python3Packages
-# , sqlite
-# , writePython3
-, xdg
-, beautifulsoup4
-, buildPythonApplication
+{
+  lib,
+  stdenv,
+  fetchFromGitLab,
+  # , zeal
+  # , lynx
+  # , python3Packages
+  # , sqlite
+  # , writePython3
+  xdg,
+  beautifulsoup4,
+  buildPythonApplication,
 }:
 let
 
@@ -37,7 +38,10 @@ buildPythonApplication {
 
   format = "other";
 
-  propagatedBuildInputs = [ xdg beautifulsoup4];
+  propagatedBuildInputs = [
+    xdg
+    beautifulsoup4
+  ];
 
   # sourceRoot = "";
   buildPhase = "";
@@ -55,4 +59,3 @@ buildPythonApplication {
     platforms = platforms.linux;
   };
 }
-

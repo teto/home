@@ -1,16 +1,19 @@
 # sway notification center
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
 
- imports = [
-   ../../../hm/profiles/swaync.nix
- ];
+  imports = [ ../../../hm/profiles/swaync.nix ];
 
- # TODO
- services.swaync = {
-  enable = true;
+  # TODO
+  services.swaync = {
+    enable = true;
 
- };
- # xdg.configFile."swaync/config.json" = lib.mkForce {};
- # xdg.configFile."swaync/config.json".enable = false;
+  };
+  # xdg.configFile."swaync/config.json" = lib.mkForce {};
+  # xdg.configFile."swaync/config.json".enable = false;
 }

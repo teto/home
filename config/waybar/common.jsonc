@@ -1,0 +1,216 @@
+{
+ "position": "top",
+
+  "modules-left": [
+	"sway/workspaces",
+	"sway/mode"
+  ],
+  "modules-center": [
+	"sway/window",
+	// "custom/hello-from-waybar"
+	"mpd",
+  "systemd-failed-units"
+  ],
+
+ "modules-right": [
+  "sway/language",
+  "custom/github",
+  "custom/notmuch",
+  "custom/weather"
+ ],
+ "sway/workspaces": {
+   // # {name}:
+   "format": "{name}",
+   "disable-scroll": false,
+   "all-outputs" : false
+   // # disable-scroll-wraparound = true;
+   // # "disable-markup" : false,
+   // # format-icons = {
+   // #    "1" = "ï";
+   // #    "2" = "ï©";
+   // #    "3" = "ï¡";
+   // # };
+ },
+   "systemd-failed-units": {
+	   "hide-on-ok": false,
+	   "format": "✗ {nr_failed}",
+	   "format-ok": "✓",
+	   "system": true,
+	   "user": true
+  },
+ "clock": {
+  // "timezone": "America/New_York",
+  // TODO look how to display timezone
+  "timezones": [
+    "Europe/Paris",
+    "Asia/Tokyo"
+  ],
+  "tooltip-format": "<big>{:%Y %B}</big>\n<tt>{calendar}</tt>",
+  "format-alt": "{:%Y-%m-%d}",
+  // TODO launch ikhal instead
+  // or a terminal
+  "on-click-right": "kitty sh -c ikhal",
+  "actions": {
+    "on-scroll-up": "shift_up",
+    "on-scroll-down": "shift_down"
+  }
+},
+  "custom/notmuch": {
+    "format": " {} 📧",
+    "max-length": 40,
+    "return-type": "json",
+    // TODO run regularly
+    "interval": 120,
+    "on_click": "kitty sh -c alot -l/tmp/alot.log",
+    // TODO rerun mbsync + notmuch etc
+    // "exec-on-event": false,
+    // TODO create
+    "on-click-right": "systemctl start --user mujmap-fastmail.service",
+	// TODO retreive executable name
+    "exec": "notmuchChecker"
+    // "exec": "pkgs.writeShellScript \"hello-from-waybar\" ''\n  echo \"from within waybar\"\n''"
+},
+  "custom/notification": {
+    "tooltip": false,
+    // "format": "{icon}",
+    "format": "{} notifs ",
+    "format-icons": {
+      // "5": "ïµ",
+      // "urgent": "ïª",
+      // "focused": "ï",
+      // "default": "ï"
+      // "ïï¶ª"
+      "notification": "<span foreground='red'>ï³<span>",
+      "none": "no notifs ï¶ ",
+      "inhibited-notification": "inhibited<span foreground='red'><sup>toto</sup></span>",
+      "inhibited-none": "0 inhibted",
+      // Do Not Disturb
+      "dnd-notification": "<span foreground='red'><sup>Notifs</sup></span>",
+      "dnd-none": "no notifs (dnd)",
+      "dnd-inhibited-notification": "dnd<span foreground='red'><sup>dnd</sup></span>",
+      "dnd-inhibited-none": "none"
+    },
+    "return-type": "json",
+    // "exec-if": "which swaync-client",
+    "exec": "swaync-client -swb",
+    "on-click": "swaync-client -t -sw",
+    "on-click-right": "swaync-client -d -sw",
+    "escape": true
+  },
+    "mpd": {
+        "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ⸨{songPosition}|{queueLength}⸩ ",
+        "format-disconnected": "Disconnected ",
+        "format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}Stopped ",
+        "unknown-tag": "N/A",
+        "interval": 2,
+        "consume-icons": {
+            "on": " "
+        },
+        "random-icons": {
+            "off": "<span color=\"#f53c3c\"></span> ",
+            "on": " "
+        },
+        "repeat-icons": {
+            "on": " "
+        },
+        "single-icons": {
+            "on": "1 "
+        },
+        "state-icons": {
+            "paused": "",
+            "playing": ""
+        },
+        "tooltip-format": "MPD (connected)",
+        "tooltip-format-disconnected": "MPD (disconnected)"
+    },
+	"cpu": {
+		 "interval": 10,
+		 "format": "{usage}% ",
+		 "max-length": 10
+		 // "tooltip": false
+
+	},
+    "memory": {
+        "format": "{}% "
+    },
+	"power-profiles-daemon": {
+	  "format": "{icon}   {profile}",
+	  "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
+	  "tooltip": true,
+	  "format-icons": {
+		"default": "",
+		"performance": "",
+		"balanced": "",
+		"power-saver": ""
+	  }
+	},
+    "idle_inhibitor": {
+	 "start-activated" : false,
+
+	   "format": "{icon}",
+	   "format-icons": {
+		   "activated": "",
+		   "deactivated": ""
+	   }
+    },
+    "backlight": {
+        "format": "{percent}% {icon}",
+        "format-icons": ["", ""]
+    },
+	"custom/launcher": {
+		"format": "",
+		"tooltip": false,
+		"tooltip-format": "App Launcher",
+		"on-click": "fuzzel"
+	},
+	"custom/power-menu": {
+		"format": "⏻",
+		"tooltip": true,
+		"tooltip-format": "Power Options",
+		"on-click": "wlogout"
+	},
+	"custom/calendar": {
+		"format": "{}",
+		"tooltip": true,
+		"interval": 300,
+		"format-icons": {
+			"default": ""
+		},
+		"exec": "waybar-khal",
+		"return-type": "json"
+	},
+   "custom/cputemp": {
+       "interval": 2,
+       "return-type": "json",
+       "format": "{icon} {}",
+       "format-icons": [
+           "",
+           "",
+           "",
+           "",
+           ""
+       ],
+       "exec": "~/.config/waybar/cputemp"
+   },
+   "custom/nixos-unstable-updates": {
+       "format": "{} {icon}",
+       "return-type": "json",
+       "format-icons": {
+           "has-updates": "󱍷",
+           "updated": "󰂪"
+       },
+       "exec-if": "which waybar-nixpkgs-updater",
+	   // TODO adjust
+       "exec": "waybar-module-pacman-updates  --interval-seconds 5 --network-interval-seconds 300"
+   },
+	"custom/gpu-usage": {
+	  "exec": "gpu-usage",
+	  "format": "GPU: {}%",
+	  "return-type": "",
+	  "interval": 1
+	},
+    "tray": {
+        // "icon-size": 21,
+        "spacing": 10
+    }
+}

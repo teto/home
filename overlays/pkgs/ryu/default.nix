@@ -1,4 +1,8 @@
-{ stdenv, buildPythonPackage, fetchFromGitHub }:
+{
+  stdenv,
+  buildPythonPackage,
+  fetchFromGitHub,
+}:
 buildPythonPackage rec {
   pname = "ryu";
   version = "4.33";
@@ -14,7 +18,7 @@ buildPythonPackage rec {
 
   meta = with lib; {
     description = "Component-based software defined networking framework";
-    homepage = https://github.com/nichoski/kergen;
+    homepage = "https://github.com/nichoski/kergen";
     maintainers = with maintainers; [ teto ];
     license = licenses.asl20;
   };

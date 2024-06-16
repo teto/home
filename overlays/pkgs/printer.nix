@@ -1,17 +1,18 @@
-{ stdenv
-, fetchurl
-, makeWrapper
-, cups
-, dpkg
-, a2ps
-, ghostscript
-, gnugrep
-, gnused
-, coreutils
-, file
-, perl
-, which
-, lib
+{
+  stdenv,
+  fetchurl,
+  makeWrapper,
+  cups,
+  dpkg,
+  a2ps,
+  ghostscript,
+  gnugrep,
+  gnused,
+  coreutils,
+  file,
+  perl,
+  which,
+  lib,
 }:
 
 stdenv.mkDerivation rec {
@@ -24,7 +25,12 @@ stdenv.mkDerivation rec {
   };
 
   nativeBuildInputs = [ makeWrapper ];
-  buildInputs = [ cups ghostscript dpkg a2ps ];
+  buildInputs = [
+    cups
+    ghostscript
+    dpkg
+    a2ps
+  ];
 
   unpackPhase = ":";
 
@@ -55,9 +61,14 @@ stdenv.mkDerivation rec {
        ; do
          #substituteInPlace $f \
          wrapProgram $f \
-           --prefix PATH : ${lib.makeBinPath [
-             coreutils ghostscript gnugrep gnused
-           ]}
+           --prefix PATH : ${
+             lib.makeBinPath [
+               coreutils
+               ghostscript
+               gnugrep
+               gnused
+             ]
+           }
        done
 
        # Hack suggested by samueldr.
@@ -70,15 +81,23 @@ stdenv.mkDerivation rec {
        ln -s $out/opt/brother/Printers/HLL2360DW/cupswrapper/brother-HLL2360DW-cups-en.ppd $out/share/cups/model/
 
        wrapProgram $out/opt/brother/Printers/HLL2360DW/lpd/lpdfilter \
-         --prefix PATH ":" ${ lib.makeBinPath [ ghostscript a2ps file gnused gnugrep coreutils which ] }
+         --prefix PATH ":" ${
+           lib.makeBinPath [
+             ghostscript
+             a2ps
+             file
+             gnused
+             gnugrep
+             coreutils
+             which
+           ]
+         }
   '';
 
   meta = with lib; {
     homepage = "https://www.brother.com/";
     description = "Brother HL-L2360DW combined print driver";
     license = licenses.unfree;
-    platforms = [
-      "x86_64-linux"
-    ];
+    platforms = [ "x86_64-linux" ];
   };
 }

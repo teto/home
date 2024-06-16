@@ -1,4 +1,9 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 {
   # TODO test http://alot.readthedocs.io/en/latest/configuration/key_bindings.html
   # w = pipeto urlscan 2> /dev/null

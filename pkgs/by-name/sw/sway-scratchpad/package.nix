@@ -1,10 +1,11 @@
-{ rustPlatform
-, fetchFromGitHub
-, lib
+{
+  rustPlatform,
+  fetchFromGitHub,
+  lib,
 
-, makeWrapper
-, installShellFiles
-, stdenv
+  makeWrapper,
+  installShellFiles,
+  stdenv,
 
 }:
 
@@ -21,7 +22,10 @@ rustPlatform.buildRustPackage rec {
 
   cargoHash = "sha256-VLWjpb9OmYkBykP51YURWnvgzI1DW0731DbDcJh/7h8=";
 
-  nativeBuildInputs = [ makeWrapper installShellFiles ];
+  nativeBuildInputs = [
+    makeWrapper
+    installShellFiles
+  ];
 
   # postInstall = with lib;
   # ''
@@ -37,6 +41,6 @@ rustPlatform.buildRustPackage rec {
     description = "Convert a command to a scratchpad, and toggle visibility";
     homepage = "https://github.com/matejc/sway-scratchpad";
     license = licenses.bsd2;
-    maintainers = with maintainers; [teto];
+    maintainers = with maintainers; [ teto ];
   };
 }

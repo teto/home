@@ -1,0 +1,192 @@
+# This is your rocks.nvim plugins declaration file.
+# Here is a small yet pretty detailed example on how to use it:
+#
+# [plugins]
+# nvim-treesitter = "semver_version"  # e.g. "1.0.0"
+
+# List of non-Neovim rocks.
+# This includes things like `toml` or other lua packages.
+[rocks]
+
+[plugins."rocks-git.nvim"]
+
+dir = "/home/teto/rocks-git.nvim"
+
+# List of Neovim plugins to install alongside their versions.
+# If the plugin name contains a dot then you must add quotes to the key name!
+[plugins]
+# "rocks.nvim" = "2.19.0" # rocks.nvim can also manage itself :D
+# "rocks-git.nvim"= "1.5.1"
+cmp-rg = "1.3.9"
+"oil.nvim" = "2.11.0"
+# -- :DiffviewOpen
+"diffview.nvim" = "scm"
+"haskell-tools.nvim" = "3.1.10"
+"none-ls.nvim" = "scm"
+"bufferline.nvim" = "4.6.1"
+auto-session = "2.1.0"
+"rocks-config.nvim" = "2.1.2"
+"trouble.nvim" = "3.4.3"
+"lualine.nvim" = "scm"
+"rocks-lazy.nvim" = "scm"
+"rest.nvim" = "2.0.1"
+"nui.nvim" = "0.3.0"
+neotest = "5.3.3"
+"rocks-dev.nvim" = "1.2.3"
+nvim-lint = "scm"
+"telescope.nvim" = "scm"
+"lsp_signature.nvim" = "0.3.1"
+friendly-snippets = "scm"
+"haskell-snippets.nvim" = "1.4.4"
+"smart-open.nvim"= "scm"
+
+
+
+[plugins.neotest-haskell]
+version = "2.0.0"
+dir = "/home/teto/neotest-haskell"
+
+[plugins."auto-save.nvim"]
+version = "scm"
+cmd = "ASToggle" # optional for lazy loading on command
+# Tolerated ?
+# event = { "FocusLost" } # optional for lazy loading on trigger events
+
+
+[plugins.neorg]
+version = "8.8.1"
+ft = "norg"
+
+[plugins."gp.nvim"]
+dir = "/home/teto/gp.nvim2"
+
+[plugins.vim-sorcerer]
+git = "github:adlawson/vim-sorcerer"
+rev = "1.3^{}"
+
+[plugins.Solarized]
+git = "vim-scripts/Solarized"
+rev = "1.0.0b1^{}"
+colorscheme= "solarized"
+
+[plugins."oxocarbon.nvim"]
+git = "shaunsingh/oxocarbon.nvim"
+rev = "main"
+
+[plugins."last-color.nvim"]
+git = "raddari/last-color.nvim"
+
+[plugins.pinkmare]
+git = "Matsuuu/pinkmare"
+
+[plugins.nvim-lspconfig]
+git = "neovim/nvim-lspconfig"
+rev = "v0.1.8"
+
+[plugins."kanagawa.nvim"]
+version = "scm"
+opt = true
+
+[plugins.nvim-tetris]
+git = "alec-gibson/nvim-tetris"
+rev = "v0.1.1"
+opt = true
+
+# lazyload on {'on': 'StartupTime'} " see startup time per script
+[plugins."startuptime.vim"]
+git = "tweekmonster/startuptime.vim"
+opt = true
+
+[plugins."command-and-cursor.nvim"]
+# event VeryLazy
+# highlight cursor position and selection in command mode
+# (which is not the case by default
+
+git = "moyiz/command-and-cursor.nvim"
+
+[plugins.nvim-navic]
+git = "SmiteshP/nvim-navic"
+
+[plugins."cloak.nvim"]
+# can conceal some patterns in some specific files
+git = "laytan/cloak.nvim"
+opt = true
+rev = "648aca6d33ec011dc3166e7af3b38820d01a71e4"
+
+[plugins."git-messenger.vim"]
+# to show git message :GitMessenger
+git = "rhysd/git-messenger.vim"
+cmd = "GitMessenger"
+
+[plugins."hurl.nvim"]
+git = "jellydn/hurl.nvim"
+rev = "v1.5.1"
+
+[plugins.vim-listchars]
+# to cycle between different list/listchars configurations
+git = "teto/vim-listchars"
+
+[plugins."none-ls-luacheck.nvim"]
+git = "gbprod/none-ls-luacheck.nvim"
+rev = "v0.0.1"
+
+[plugins.nvim-bqf]
+git = "kevinhwang91/nvim-bqf"
+rev = "v1.1.1"
+
+[plugins.i3-vim-syntax]
+git = "PotatoesMaster/i3-vim-syntax"
+
+[plugins."grug-far.nvim"]
+git = "MagicDuck/grug-far.nvim"
+
+[plugins.neovim]
+git = "rose-pine/neovim"
+rev = "v3.0.1"
+
+[plugins.papercolor-theme]
+git = "NLKNguyen/papercolor-theme"
+rev = "v1.0"
+
+[plugins."material.nvim"]
+git = "marko-cerovac/material.nvim"
+
+[plugins."better-digraphs.nvim"]
+git = "protex/better-digraphs.nvim"
+opt = true
+
+[plugins."ccc.nvim"]
+git = "uga-rosa/ccc.nvim"
+rev = "v2.0.3^{}"
+opt = true
+
+[plugins."tint.nvim"]
+git = "levouh/tint.nvim"
+
+[plugins."hacker.nvim"]
+git = "letieu/hacker.nvim"
+opt = true
+
+[plugins.nvimesweeper]
+# :Nvimesweeper / :h nvimesweeper
+
+git = "seandewar/nvimesweeper"
+opt = true
+
+[plugins."color-picker.nvim"]
+# use with :PickColor
+git = "ziontee113/color-picker.nvim"
+
+[plugins."lsp_lines.nvim"]
+git = "https://git.sr.ht/~whynothugo/lsp_lines.nvim"
+rev = "v3.0.0^{}"
+
+[plugins."highlight-undo.nvim"]
+git = "tzachar/highlight-undo.nvim"
+
+[plugins."baleia.nvim"]
+git = "m00qek/baleia.nvim"
+rev = "v1.4.0"
+
+[config]
+plugins_dir = "plugins/"

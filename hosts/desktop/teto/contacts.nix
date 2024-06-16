@@ -1,7 +1,13 @@
-{ config, pkgs, lib, secrets, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  secrets,
+  ...
+}:
 
-let 
-  tetoLib = pkgs.callPackage ../../../hm/lib.nix {};
+let
+  tetoLib = pkgs.callPackage ../../../hm/lib.nix { };
 in
 {
   home.packages = with pkgs; [
@@ -9,31 +15,34 @@ in
   ];
 
   accounts.contact = {
-   # XDG_DATA instead ?
+    # XDG_DATA instead ?
     basePath = ".contacts";
 
     # basePath = ".contacts";
     accounts = {
 
-     fastmail = {
-       khard = {
-         enable = true;
+      fastmail = {
+        khard = {
+          enable = true;
         };
       };
     };
   };
 
-
   programs.khard = {
-   enable = false;
+    enable = false;
 
-   settings = {
+    settings = {
       general = {
         default_action = "list";
-        editor = ["nvim" "-i" "NONE"];
+        editor = [
+          "nvim"
+          "-i"
+          "NONE"
+        ];
         merge_editor = "nvim -d";
       };
 
-   };
+    };
   };
 }

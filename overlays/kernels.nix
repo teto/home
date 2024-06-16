@@ -13,11 +13,14 @@ let
   # EXT4_ENCRYPTION
 
   # https://wiki.strongswan.org/projects/strongswan/wiki/KernelModules
-  structuredConfigs = import ./kernels/structured.nix { inherit (prev) lib; inherit libk; };
-
+  structuredConfigs = import ./kernels/structured.nix {
+    inherit (prev) lib;
+    inherit libk;
+  };
 
   # TODO for dev shellHook
-  addMenuConfig = kernel:
+  addMenuConfig =
+    kernel:
     # kernel;
     (kernel.overrideAttrs (o: {
       nativeBuildInputs = o.nativeBuildInputs ++ [
@@ -28,42 +31,53 @@ let
         prev.python
       ];
       # buildInputs = (o.buildInputs or []) ++ [prev.python];
-      shellHook = (o.shellHook or "") + ''
-        echo "make menuconfig KCONFIG_CONFIG=$PWD/build/.config"
-        echo "make menuconfig KCONFIG_CONFIG=$PWD/build/.config"
-      '';
+      shellHook =
+        (o.shellHook or "")
+        + ''
+          echo "make menuconfig KCONFIG_CONFIG=$PWD/build/.config"
+          echo "make menuconfig KCONFIG_CONFIG=$PWD/build/.config"
+        '';
     }));
 
-
-
   # soundConfig
-  defaultConfigStructured = with prev.lib.kernel; with structuredConfigs; (prev.lib.mkMerge [
-    # structuredConfigs.kvmConfigStructured
-    bpfConfigStructured
-    debugConfigStructured
-    mininetConfigStructured
-    kvmConfigStructured
-    mptcpConfigStructured
-    localConfigStructured
-    net9p
-    # strongswanStructured  # to get VPN working
-    persoConfig
+  defaultConfigStructured =
+    with prev.lib.kernel;
+    with structuredConfigs;
+    (prev.lib.mkMerge [
+      # structuredConfigs.kvmConfigStructured
+      bpfConfigStructured
+      debugConfigStructured
+      mininetConfigStructured
+      kvmConfigStructured
+      mptcpConfigStructured
+      localConfigStructured
+      net9p
+      # strongswanStructured  # to get VPN working
+      persoConfig
 
-    paravirtualization_guest
-    minimalConfig
-    # noChelsio # because of mptcp trunk
+      paravirtualization_guest
+      minimalConfig
+      # noChelsio # because of mptcp trunk
 
-  ]);
+    ]);
 
   # todo remove tags
-  filter-src = builtins.filterSource (p: t:
-    let baseName = baseNameOf p;
-    in prev.lib.cleanSourceFilter p t && baseName != "build" && baseName != "tags");
+  filter-src = builtins.filterSource (
+    p: t:
+    let
+      baseName = baseNameOf p;
+    in
+    prev.lib.cleanSourceFilter p t && baseName != "build" && baseName != "tags"
+  );
 
 in
 rec {
 
-  kernelForDev = { debugKconfig ? true }: kernel:
+  kernelForDev =
+    {
+      debugKconfig ? true,
+    }:
+    kernel:
     (kernel.overrideAttrs (oa: {
       # could be or kernelPatches
       # prePatch = ''
@@ -73,7 +87,8 @@ rec {
     }));
 
   #   Setups the kernel config to use virtio as a guest
-  kernelConfigureAsGuest = kernel:
+  kernelConfigureAsGuest =
+    kernel:
     (kernel.override {
       # temp because of deadline
       # preferBuiltin = true; -> should change the structuredConfig
@@ -86,20 +101,21 @@ rec {
       autoModules = true;
 
       # structuredConfigs.debugConfigStructured
-      structuredExtraConfig = with structuredConfigs; (prev.lib.mkMerge [
-        kernel.configfile.passthru.structuredConfig
-        net9p
-        paravirtualization_guest
-        kvmConfigStructured
-        # mptcpConfigStructured
-      ]);
+      structuredExtraConfig =
+        with structuredConfigs;
+        (prev.lib.mkMerge [
+          kernel.configfile.passthru.structuredConfig
+          net9p
+          paravirtualization_guest
+          kvmConfigStructured
+          # mptcpConfigStructured
+        ]);
     });
 
   # TODO maybe I should modify linuxPackagesFor instead ?
   linux_latest_debug = prev.linux_latest.override {
     structuredExtraConfig = structuredConfigs.debugConfigStructured;
   };
-
 
   # used to check https://github.com/NixOS/nixpkgs/pull/55755/files
   linux_latest_without_ns = prev.linux_latest.override {
@@ -110,30 +126,31 @@ rec {
     };
   };
 
-
   # TODO try make localmodconfig
-  linux_mptcp_trunk_raw = (prev.callPackage ./pkgs/kernels/linux-mptcp-trunk.nix {
+  linux_mptcp_trunk_raw = (
+    prev.callPackage ./pkgs/kernels/linux-mptcp-trunk.nix {
 
-    # will set INSTALL_MOD_STRIP=1
-    dontStrip = true;
+      # will set INSTALL_MOD_STRIP=1
+      dontStrip = true;
 
-    # triggers can't exec "lsmod"
-    # defconfig = "localmodconfig";
-    kernelPatches = prev.linux_5_4.kernelPatches;
-    # does not seem true anymore
-    # preferBuiltin = false;
-    ignoreConfigErrors = true;
-    # autoModules = true;
-    # boot.debug1device
+      # triggers can't exec "lsmod"
+      # defconfig = "localmodconfig";
+      kernelPatches = prev.linux_5_4.kernelPatches;
+      # does not seem true anymore
+      # preferBuiltin = false;
+      ignoreConfigErrors = true;
+      # autoModules = true;
+      # boot.debug1device
 
-    structuredExtraConfig = defaultConfigStructured;
-  });
+      structuredExtraConfig = defaultConfigStructured;
+    }
+  );
 
-  linux_latest_with_virtio = (prev.linux_latest.override {
-    structuredExtraConfig = with structuredConfigs; (prev.lib.mkMerge [
-      kvmConfigStructured
-    ]);
-  });
+  linux_latest_with_virtio = (
+    prev.linux_latest.override {
+      structuredExtraConfig = with structuredConfigs; (prev.lib.mkMerge [ kvmConfigStructured ]);
+    }
+  );
 
   linuxPackages_mptcp_trunk = prev.linuxPackagesFor linux_mptcp_trunk_raw;
 
@@ -165,9 +182,7 @@ rec {
   #   '';
   # });
 
-  /*
-    simple convenience to just test the code faster
-  */
+  # simple convenience to just test the code faster
   # checkKernelConfigTest = let
   #   # alread flattened
   #   # genericCfg = import ../os-specific/linux/kernel/common-config.nix {

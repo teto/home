@@ -1,4 +1,6 @@
-{ pkgs ? import <nixpkgs> }:
+{
+  pkgs ? import <nixpkgs>,
+}:
 with pkgs;
 stdenv.mkDerivation {
 
@@ -20,7 +22,6 @@ stdenv.mkDerivation {
     patchShebangs bin/
   '';
   preferLocalBuild = true;
-
 
   # install -D setup $out/bin/setup_color_switcher
   # zsh completion needed to be sourced

@@ -1,5 +1,9 @@
 # with import <nixpkgs> {};
-{ stdenv, fetchurl, perl }:
+{
+  stdenv,
+  fetchurl,
+  perl,
+}:
 let
   myPerl = (perl.withPackages (p: [ ]));
 in
@@ -12,9 +16,6 @@ stdenv.mkDerivation rec {
     sha256 = "0qcxcnqz2nlwfzlrn115kkp3n8dd7593h762vxs6vfqm13i39lq1";
   };
 
-  nativeBuildInputs =
-    [
-      myPerl
-    ];
+  nativeBuildInputs = [ myPerl ];
 
 }

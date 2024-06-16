@@ -1,4 +1,10 @@
-{ config, pkgs, options, lib, ... }:
+{
+  config,
+  pkgs,
+  options,
+  lib,
+  ...
+}:
 {
   virtualisation.virtualbox = {
     host.enable = false;

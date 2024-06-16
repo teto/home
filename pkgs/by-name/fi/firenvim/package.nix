@@ -1,13 +1,20 @@
-{ stdenv, rustPlatform, fetchFromGitHub, sqlite }: let
+{
+  stdenv,
+  rustPlatform,
+  fetchFromGitHub,
+  sqlite,
+}:
+let
 
-manifest = {
-  description = "Firenvim extension host application";
-  name = "com.samhh.bukubrow";
-  path = "@out@/bin/bukubrow";
-  type = "stdio";
-};
+  manifest = {
+    description = "Firenvim extension host application";
+    name = "com.samhh.bukubrow";
+    path = "@out@/bin/bukubrow";
+    type = "stdio";
+  };
 
-in rustPlatform.buildRustPackage rec {
+in
+rustPlatform.buildRustPackage rec {
   pname = "firenvim";
   version = "0.1.11";
 
@@ -24,10 +31,11 @@ in rustPlatform.buildRustPackage rec {
 
   buildInputs = [ sqlite ];
 
-  passAsFile = [ "firefoxManifest" "chromeManifest" ];
-  firefoxManifest = builtins.toJSON (manifest // {
-    allowed_extensions = [ "bukubrow@samhh.com" ];
-  });
+  passAsFile = [
+    "firefoxManifest"
+    "chromeManifest"
+  ];
+  firefoxManifest = builtins.toJSON (manifest // { allowed_extensions = [ "bukubrow@samhh.com" ]; });
   # chromeManifest = builtins.toJSON (manifest // {
   #   allowed_origins = [ "chrome-extension://ghniladkapjacfajiooekgkfopkjblpn/" ];
   # });
@@ -40,11 +48,9 @@ in rustPlatform.buildRustPackage rec {
 
   meta = with stdenv.lib; {
     description = "Turn Firefox into a Neovim client.";
-    homepage = https://github.com/glacambre/firenvim;
+    homepage = "https://github.com/glacambre/firenvim";
     license = licenses.gpl3;
     platforms = platforms.all;
     maintainers = with maintainers; [ teto ];
   };
 }
-
-

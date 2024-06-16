@@ -1,13 +1,17 @@
-
-{ config, lib, pkgs, ... }:
 {
-    
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+{
+
   programs.astroid = {
     enable = false;
     # TODO factor with my mbsyncwrapper ?
     pollScript = ''
-     check-mail.sh gmail
-     '';
+      check-mail.sh gmail
+    '';
 
     # I don't want it to trigger
     # P => main_window.poll

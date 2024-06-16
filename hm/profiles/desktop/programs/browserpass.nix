@@ -1,7 +1,7 @@
 {
-    enable = true;
-	browsers = [ 
-	 "firefox"
-	 "chromium"
-	];
-  }
+  enable = true;
+  browsers = [
+    "firefox"
+    "chromium"
+  ];
+}

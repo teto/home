@@ -1,0 +1,5 @@
+{
+  inputMethod = {
+    enabled = "fcitx5";
+  };
+}

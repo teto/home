@@ -6,12 +6,12 @@ alias n2='nix develop --option builders "$NOVA_AZURE2" -j0'
 # alias n3='nix develop --option builders "$NOVA_AZURE2" -j0'
 
 # Haskell related aliases{{{
-alias nhs92="nix develop \$HOME/home#nhs92";
-alias nhs94="nix develop \$HOME/home#nhs94";
-alias nhs96="nix develop \$HOME/home#nhs96";
-alias nhs98="nix develop \$HOME/home#nhs98";
-alias nhs910="nix develop \$HOME/home#nhs910";
-alias nhs912="nix develop \$HOME/home#nhs912";
+alias nhs92="nix develop \$HOME/home#nhs92"
+alias nhs94="nix develop \$HOME/home#nhs94"
+alias nhs96="nix develop \$HOME/home#nhs96"
+alias nhs98="nix develop \$HOME/home#nhs98"
+alias nhs910="nix develop \$HOME/home#nhs910"
+alias nhs912="nix develop \$HOME/home#nhs912"
 # }}}
 
 # TODO should use all runners
@@ -23,34 +23,33 @@ alias nl="nix log "
 alias g="git"
 alias y=yazi
 alias j="just -g"
+alias js="just switch"
+alias jr="just build"
 alias jctl="journalctl -b0"
 
 # git aliases
-alias gap="git add -p";
-alias grc="git rebase --continue";
-alias gra="git rebase --abort";
-
+alias gap="git add -p"
+alias grc="git rebase --continue"
+alias gra="git rebase --abort"
 
 # rename mptcp ?
 alias mp="mptcpanalyzer"
 
 # nix aliases {{{
 
-
 # directories only
-alias      ld="eza -lD";
+alias ld="eza -lD"
 # alias      lf="eza -lF --color=always | grep -v /";
-alias      lh="eza -dl .* --group-directories-first";
+alias lh="eza -dl .* --group-directories-first"
 # alias      ll="eza -al --group-directories-first";
 # alias      lt="eza -al --sort=modified -snew";
-
 
 # advanced
 # TODO add --hyperlink
 alias ls='eza --color=always --group-directories-first --icons=auto'
 alias ll='eza -la --icons --octal-permissions --group-directories-first'
 alias l='eza -bGF --header --git --color=always --group-directories-first --icons=auto'
-alias llm='eza -lbGd --header --git --sort=modified --color=always --group-directories-first --icons=auto' 
+alias llm='eza -lbGd --header --git --sort=modified --color=always --group-directories-first --icons=auto'
 alias la='eza --long --all --group --group-directories-first'
 alias lx='eza -lbhHigUmuSa@ --time-style=long-iso --git --color-scale --color=always --group-directories-first --icons=auto'
 
@@ -85,11 +84,10 @@ alias makej="make -j4"
 alias nm="nm -l"
 # }}}
 
-
 export MCFLY_KEY_SCHEME=vim
 
 # defaults to 'RANK'
-export MCFLY_RESULTS_SORT=LAST_RUN 
+export MCFLY_RESULTS_SORT=LAST_RUN
 export MCFLY_RESULTS=200
 # export MCFLY_INTERFACE_VIEW=BOTTOM
 # MCFLY_DISABLE_MENU

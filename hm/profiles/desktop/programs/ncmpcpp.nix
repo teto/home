@@ -2,5 +2,5 @@
   enable = true;
   # bindings = #
   # settings = 
-   # mpdMusicDir
- }
+  # mpdMusicDir
+}

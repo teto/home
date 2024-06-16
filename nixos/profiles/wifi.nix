@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
   # https://wireless.wiki.kernel.org/en/developers/Regulatory/CRDA#Using_iw_to_change_regulatory_domains
 

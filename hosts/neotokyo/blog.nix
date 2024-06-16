@@ -1,7 +1,10 @@
-{ config, lib
-, pkgs
-, secrets
-, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  secrets,
+  ...
+}:
 {
   services.nginx = {
     enable = true;

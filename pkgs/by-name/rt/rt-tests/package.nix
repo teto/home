@@ -1,4 +1,9 @@
-{ stdenv, fetchurl, numactl, lib }:
+{
+  stdenv,
+  fetchurl,
+  numactl,
+  lib,
+}:
 
 stdenv.mkDerivation {
   name = "re-tests";

@@ -1,6 +1,10 @@
-{ config, pkgs, lib
-, flakeInputs
-, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  flakeInputs,
+  ...
+}:
 {
   home.packages = with pkgs; [
     tagainijisho # japanse dict; like zkanji Qt based
@@ -12,7 +16,8 @@
     sudachi-rs # a japanese tokenizer
     sudachidict
     # sudachi-rs
-
+    kanji-stroke-order-font # for memento
   ];
 
+  xdg.dataFile."jmdict".source = pkgs.jmdict;
 }

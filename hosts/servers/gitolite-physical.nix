@@ -3,7 +3,8 @@ let
   #     builtins.fetchTarball "https://github.com/hercules-ci/hercules-ci-agent/archive/stable.tar.gz";
 
   secrets = import ../secrets.nix;
-  nixos-remote = { config, pkgs, ... }:
+  nixos-remote =
+    { config, pkgs, ... }:
     {
       deployment.targetHost = (builtins.head secrets.gitolite_server.interfaces.ipv4.addresses).address;
       # deployment.targetHost = builtins.head secrets.gitolite_server.hostname;

@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
   welcomeMessage = ''
     Welcome to the router, dear master.
@@ -10,14 +15,12 @@ let
     - sudo systemctl start nextcloud-add-user to create the teto user
     - everything is in /var/lib/nextcloud
   '';
-  in
+in
 {
- 
- programs.zsh.loginExtra = ''
-  cat "${pkgs.writeText "login-welcome" welcomeMessage}";
+
+  programs.zsh.loginExtra = ''
+    cat "${pkgs.writeText "login-welcome" welcomeMessage}";
   '';
 
-  home.packages = [
-   pkgs.yazi
-  ];
+  home.packages = [ pkgs.yazi ];
 }

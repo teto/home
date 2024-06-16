@@ -1,4 +1,9 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 {
   # programs.meli = {
   #   enable = true;
@@ -12,10 +17,7 @@
 
   programs.swappy.enable = false;
 
-
-  home.packages = with pkgs; [
-  ];
-
+  home.packages = with pkgs; [ ];
 
   # programs.htop = {
   #   enabled = true;

@@ -1,18 +1,27 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  flakeInputs,
+  ...
+}:
 with lib;
 
 let
   cfg = config.package-sets;
 
-  pass-custom = (pkgs.pass.override { waylandSupport = true; }).withExtensions (ext:
-    with ext; [ pass-import pass-tail ]);
+  pass-custom = (pkgs.pass.override { waylandSupport = true; }).withExtensions (
+    ext: with ext; [
+      pass-import
+      pass-tail
+    ]
+  );
 
 in
 {
 
   options = {
     package-sets = {
-
 
       desktop = mkEnableOption "desktop packages";
       enableServerPackages = mkEnableOption "server packages";
@@ -33,27 +42,11 @@ in
       enableGaming = mkEnableOption "Gaming packages";
       waylandPackages = mkEnableOption "Wayland packages";
 
-
       # laptop = mkEnableOption "Laptop packages (energy + wifi)";
 
     };
 
   };
-
-  # config = lib.mkMerge [
-  #   (mkIf cfg.orgmode.enable {
-  #     programs.neovim.plugins = cfg.orgmode.plugins;
-  #   })
-  # ];
-
-
- # home.packages = [
- #  pkgs.ncmpcpp
- #  pkgs.mpc_cli
- #  pkgs.ymuse # GUI
- # ];
-
-
 
   config = mkMerge [
     ({
@@ -64,9 +57,9 @@ in
         just # to read justfiles, *replace* Makefile
         gitAndTools.gitFull # to get send-email
         gnumake
-        tree 
+        tree
         stow
-        # nvim
+        pciutils # for lspci
         # zenith  # resources monitor
       ];
     })
@@ -86,112 +79,113 @@ in
 
     (mkIf cfg.desktop {
 
-      home.packages = with pkgs; let 
+      home.packages =
+        with pkgs;
+        let
 
-        # for 'convert' executable. Can convert PDF too
-        myImagemagick = pkgs.imagemagick.override({ghostscriptSupport=true;});
-      in 
+          # for 'convert' executable. Can convert PDF too
+          myImagemagick = pkgs.imagemagick.override ({ ghostscriptSupport = true; });
+        in
         [
 
-        acpi # for acpi -V
-        # anki          # spaced repetition system
-        # hopefully we can remove this from the environment
-        # it's just that I can't setup latex correctly
-        pkgs.rofi-rbw-wayland
-        pkgs.timg # to display images in terminal, to compare with imgcat ?
-        myImagemagick
+          acpi # for acpi -V
+          # anki          # spaced repetition system
+          # hopefully we can remove this from the environment
+          # it's just that I can't setup latex correctly
+          pkgs.rofi-rbw-wayland
+          pkgs.timg # to display images in terminal, to compare with imgcat ?
+          myImagemagick
 
-        # mpd
-        pkgs.ncmpcpp
-        pkgs.mpc_cli
-        pkgs.ymuse # GUI
+          # mpd
+          pkgs.ncmpcpp
+          pkgs.mpc_cli
+          pkgs.ymuse # GUI
 
+          # take the version from stable ?
+          # qutebrowser # broken keyboard driven fantastic browser
+          pkgs.nautilus # demande webkit/todo replace by nemo ?
+          # mcomix # manga reader
+          pkgs.popcorntime
+          # gnome.california # fails
+          # khard # see khal.nix instead ?
+          # libsecret  # to consult
+          # newsboat #
+          # mujmap # to sync notmuch tags across jmap 
+          pkgs.vlc
+          # leafnode dovecot22 dovecot_pigeonhole fetchmail procmail w3m
+          # mairix mutt msmtp lbdb contacts spamassassin
+          # element-desktop # TODO this should go into nix profile install
+          # mcomix # manga reader
+          # TODO
+          # apvlv # broken
+          # buku # broken
+          # gcalc
+          # nomacs # image viewer
+          # nyxt      # lisp browser
+          # pulseaudioFull # for pactl
+          # replace with rust-wormhole
+          # requires xdmcp https://github.com/freedesktop/libXdmcp
+          smplayer # GUI around mpv
+          # sxiv # simple image viewer
+          # unstable.transmission_gtk  # bittorrent client
+          # vimiv # image viewer
+          # ytfzf # broken browse youtube
+          # zathura # broken
+          usbutils
+          bandwhich # to monitor per app bandwidth
+          desktop-file-utils # to get desktop
+          dogdns # dns solver "dog"
+          evince # succeed where zathura/mupdf fail
+          font-manager # pretty good font manager
+          adwaita-icon-theme # else nothing appears
+          eog # eye of gnome = image viewer / creates a collision
+          file-roller # for GUI archive handling
+          hunspellDicts.fr-any
+          imv # image viewer
+          jq # to run json queries
+          lazygit # kinda like tig
+          libnotify
+          moc-wrapped # music player
+          mupdf.bin # evince does better too
 
-        # take the version from stable ?
-        # qutebrowser # broken keyboard driven fantastic browser
-        pkgs.gnome.nautilus # demande webkit/todo replace by nemo ?
-        # mcomix # manga reader
-        pkgs.popcorntime
-        # gnome.california # fails
-        # khard # see khal.nix instead ?
-        # libsecret  # to consult
-        # newsboat #
-        # mujmap # to sync notmuch tags across jmap 
-        pkgs.vlc
-        # leafnode dovecot22 dovecot_pigeonhole fetchmail procmail w3m
-        # mairix mutt msmtp lbdb contacts spamassassin
-        # element-desktop # TODO this should go into nix profile install
-        # mcomix # manga reader
-      # TODO
-      # apvlv # broken
-      # buku # broken
-      # gcalc
-      # nomacs # image viewer
-      # nyxt      # lisp browser
-      # pulseaudioFull # for pactl
-      # replace with rust-wormhole
-      # requires xdmcp https://github.com/freedesktop/libXdmcp
-      # smplayer # GUI around mpv
-      # sxiv # simple image viewer
-      # unstable.transmission_gtk  # bittorrent client
-      # vimiv # image viewer
-      # ytfzf # broken browse youtube
-      # zathura # broken
-	  usbutils
-      bandwhich # to monitor per app bandwidth
-      desktop-file-utils # to get desktop
-      dogdns # dns solver "dog"
-      evince # succeed where zathura/mupdf fail
-      font-manager  # pretty good font manager
-      gnome.adwaita-icon-theme # else nothing appears
-      gnome.eog # eye of gnome = image viewer / creates a collision
-      gnome.file-roller # for GUI archive handling
-      hunspellDicts.fr-any
-      imv # image viewer
-      jq # to run json queries
-      lazygit # kinda like tig
-      libnotify
-      moc-wrapped # music player
-      mupdf.bin # evince does better too
+          ## Alternatives to consider:
+          # - gdu
+          # - pdu
+          # - dua
+          # ncdu # to see disk usage
+          dua
+          du-dust # dust binary: rust replacement of du
+          duf # better df (rust)
 
-      ## Alternatives to consider:
-      # - gdu
-      # - pdu
-      # - dua
-      # ncdu # to see disk usage
-      dua
-      du-dust # dust binary: rust replacement of du
-      duf # better df (rust)
-      
-      ncpamixer # pulseaudio TUI mixer
-      noti # send notifications when a command finishes
-      ouch # to (de)compress files
-      # papis # library manager
-      pass-custom # pass with extensions
-      pavucontrol
-      pkgs.networkmanagerapplet # should
-      procs # Rust replacement for 'ps'
-      qiv # image viewer
-      qtpass
-      ranger # or joshuto ? see hm configuration
-      restic  # to backup photos to backblaze
-      # rbw # Rust bitwarden unofficial client
-      ripgrep
-      rofi-pass # rofi-pass it's enabled in the HM module ?
-      rsync
-      sd # rust cli for search & replace
-      shared-mime-info # temporary fix for nautilus to find the correct files
-      sublime3
-      sysz # fzf for systemd
-      translate-shell # call with `trans`
-      unzip
-      wireshark
-      wttrbar # for meteo
-      xarchiver # to unpack/pack files
-      xdg-utils
-      xdg-terminal-exec # necessary for gio launch to launch terminal
+          ncpamixer # pulseaudio TUI mixer
+          noti # send notifications when a command finishes
+          ouch # to (de)compress files
+          # papis # library manager
+          pass-custom # pass with extensions
+          pavucontrol
+          pkgs.networkmanagerapplet # should
+          procs # Rust replacement for 'ps'
+          qiv # image viewer
+          qtpass
+          ranger # or joshuto ? see hm configuration
+          restic # to backup photos to backblaze
+          # rbw # Rust bitwarden unofficial client
+          ripgrep
+          rofi-pass # rofi-pass it's enabled in the HM module ?
+          rsync
+          sd # rust cli for search & replace
+          shared-mime-info # temporary fix for nautilus to find the correct files
+          sublime3
+          sysz # fzf for systemd
+          translate-shell # call with `trans`
+          unzip
+          wireshark
+          wttrbar # for meteo
+          xarchiver # to unpack/pack files
+          xdg-utils
+          xdg-terminal-exec # necessary for gio launch to launch terminal
 
-      ];
+        ];
 
     })
 
@@ -204,7 +198,7 @@ in
         pkgs.libreoffice
         pkgs.simple-scan
 
-        pkgs.gnome.nautilus # demande webkit/todo replace by nemo ?
+        pkgs.nautilus # demande webkit/todo replace by nemo ?
       ];
 
     })
@@ -215,7 +209,7 @@ in
         # khard # see khal.nix instead ?
         # libsecret  # to consult
         # newsboat #
-        mujmap # to sync notmuch tags across jmap 
+        mujmap # to sync notmuch tags across jmap
         # memento # broken capable to display 2 subtitles at same time
         vlc
         # leafnode dovecot22 dovecot_pigeonhole fetchmail procmail w3m
@@ -255,7 +249,7 @@ in
     (mkIf cfg.developer {
       home.packages = with pkgs; [
         automake
-        (backblaze-b2.override({ execName = "b2";}))
+        (backblaze-b2.override ({ execName = "b2"; }))
         dasht # ~ zeal but in terminal
         docker-credential-helpers
         envsubst # replace templated files with variables
@@ -268,15 +262,18 @@ in
         # gitAndTools.git-annex # fails on unstable
         # gitAndTools.git-remote-hg
         # nix-prefetch-scripts # broken
+        nix-output-monitor # 'nom'
+
         nix-diff
         nix-prefetch-git
         netcat-gnu # plain 'netcat' is the bsd one
-
+        gitAndTools.diff-so-fancy
+        jq
 
         # editorconfig-core-c
         # for fuser, useful when can't umount a directory
         # https://unix.stackexchange.com/questions/107885/busy-device-on-umount
-        lurk  # a rust strace
+        lurk # a rust strace
         fswatch # fileevent watcher
         fx # json reader
         gdb
@@ -295,14 +292,14 @@ in
         gitAndTools.git-recent # check recently touched branches
         gitAndTools.gitbatch # to fetch form several repos at once
         gitAndTools.lab # to interact with gitlab
-        gitu  # like lazygit
+        gitu # like lazygit
 
         haskellPackages.fast-tags # generate TAGS file for vim
         hurl # http tester
 
         fre # generate a frequency database
-        
-        perf-tools # to interpret 
+
+        perf-tools # to interpret
 
         inotify-tools # for inotify-wait notably
         ncurses.dev # for infocmp
@@ -311,9 +308,10 @@ in
         nix-doc # can generate tags for nix
         nix-update # nix-update <ATTR> to update a software
         nix-index # to list package contents
-        nix-top # to list current builds
+        # nix-top # (abandoned) to list current builds
         nixpkgs-fmt
-        nixfmt-rfc-style # the official one
+        # nixfmt-rfc-style # the official one
+        nixfmt
         nixpkgs-review # to help review nix packages
         # nodePackages."@bitwarden/cli" # 'bw' binary # broken
         patchutils # for interdiff
@@ -325,16 +323,20 @@ in
         whois
         zeal # doc for developers
 
+        flakeInputs.rippkgs.packages.${pkgs.system}.rippkgs
+        flakeInputs.rippkgs.packages.${pkgs.system}.rippkgs-index
       ];
 
     })
     (mkIf cfg.scientificSoftware {
       home.packages = with pkgs; [
 
+        eva # calculette in a REPL
         nodePackages.insect # fancy calculator
         fend # rust unit convertor
         pcalc # cool calc, see insect too
 
+        graphviz
       ];
 
     })
@@ -359,14 +361,14 @@ in
         grim # replace scrot/flameshot
         kanshi # autorandr-like
         kickoff # transparent launcher for wlr-root
-        fuzzel  # rofi-like
+        fuzzel # rofi-like
         wofi # rofi-like
         slurp # capture tool
         # lavalauncher # TODO a tester
         wf-recorder # for screencasts
         # bemenu as a dmenu replacement
         wl-clipboard # wl-copy / wl-paste
-        wdisplays # to show 
+        wdisplays # to show
         swaybg # to set wallpaper
         swayimg # imageviewer
         swaynotificationcenter # top cool
@@ -392,7 +394,6 @@ in
         pkgs.powertop # superuseful
         pkgs.pcm
       ];
-
 
     })
 

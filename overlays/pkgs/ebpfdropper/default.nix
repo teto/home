@@ -1,5 +1,9 @@
-{ stdenv, runCommand, llvm, clang }:
-
+{
+  stdenv,
+  runCommand,
+  llvm,
+  clang,
+}:
 
 # this stdenv belongs to clang
 stdenv.mkDerivation {
@@ -33,4 +37,3 @@ stdenv.mkDerivation {
 
   '';
 }
-
