@@ -8,13 +8,13 @@
 
   wayland.windowManager.sway = {
     enable = true;
-    xwayland = true;
+    xwayland = false; # test to avoid crashes
 
     extraSessionCommands = lib.mkForce "";
     extraOptions = [
       "--verbose"
       "--debug"
-      "--unsupported-gpu" # to work with the quadro
+      # "--unsupported-gpu" # to work with the quadro
     ];
   };
   # some of it already read from profiles/sway

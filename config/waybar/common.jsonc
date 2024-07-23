@@ -54,6 +54,18 @@
     "on-scroll-up": "shift_up",
     "on-scroll-down": "shift_down"
   }
+ },
+ "custom/nix-updates": {
+    "exec": "/home/teto/home/bin/waybar-nixpkgs-update-check", // <--- path to script
+    "on-click": "$HOME/bin/update-checker && notify-send 'The system has been updated'", // refresh on click
+    "interval": 3600, // refresh every hour
+    "tooltip": true,
+    "return-type": "json",
+    "format": "{} {icon}",
+    "format-icons": {
+        "has-updates": "", // icon when updates needed
+        "updated": "" // icon when all packages updated
+    },
 },
   "custom/notmuch": {
     "format": " {} 📧",
