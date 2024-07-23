@@ -10,6 +10,8 @@ local M = {
     active_menus = {},
 }
 
+
+
 --monkey patching of the neovim vim.api
 -- {{{
 ---@param modes string[] Accepted modes
@@ -22,6 +24,8 @@ vim.api.nvim_menu_set = function(modes, name, action)
 
 end
 -- }}}
+
+local menu_add = vim.api.nvim_menu_set
 
 --- Checks if current buf has LSPs attached
 ---@return boolean
@@ -197,14 +201,14 @@ M.set_lsp_rclick_menu = function()
     -- if it is haskell we can have items to
     -- hls_tools.lsp.load_hls_settings(project_root)
 end
--- menu_add(
---     'Diagnostic.Display_in_QF',
---     '<cmd>lua vim.diagnostic.setqflist({open = true, severity = { min = vim.diagnostic.severity.WARN } })<cr>'
--- )
--- menu_add(
---     'Diagnostic.Set_severity_to_warning',
---     '<cmd>lua vim.diagnostic.config({virtual_text = { severity = { min = vim.diagnostic.severity.WARN } }})<cr>'
--- )
+menu_add({'n'},
+    'Diagnostic.Display_in_QF',
+    '<cmd>lua vim.diagnostic.setqflist({open = true, severity = { min = vim.diagnostic.severity.WARN } })<cr>'
+)
+menu_add({'n'},
+    'Diagnostic.Set_severity_to_warning',
+    '<cmd>lua vim.diagnostic.config({virtual_text = { severity = { min = vim.diagnostic.severity.WARN } }})<cr>'
+)
 -- menu_add('Diagnostic.Set_severity_to_all', '<cmd>lua vim.diagnostic.config({virtual_text = { severity = nil }})<cr>')
 
 M.set_dap_rclick_menu = function()
@@ -452,6 +456,7 @@ M.setup_rclick_menu_autocommands = function()
             M.add_component(M.set_tabs_rclick_menu)
             M.add_component(M.set_git_rclick_menu)
             M.add_component(M.set_autocompletion_rclick_menu)
+            M.add_component(M.set_diagnostic_rclick_menu)
             -- -- M.set_orgmode_rclick_menu()
             -- M.rclick_context_menu("PopUp", "Autosave", "toto"
             -- -- "

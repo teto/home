@@ -29,7 +29,9 @@ let
   #   # vim-vsnip-integ
   # ];
   defaultCompletionPlugins = with pkgs.vimPlugins; [
-    (luaPlugin { plugin = nvim-cmp; })
+
+    # TODO I should be able to attach
+    # (luaPlugin { plugin = nvim-cmp; })
     (luaPlugin { plugin = cmp-nvim-lsp; })
     (luaPlugin { plugin = cmp-nvim-lua; })
     (luaPlugin { plugin = cmp_luasnip; })

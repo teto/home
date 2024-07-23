@@ -15,6 +15,8 @@
       ../../desktop/teto/calendars.nix
       ../../desktop/teto/contacts.nix
       ../../desktop/teto/mail.nix
+      ../../desktop/teto/sops.nix
+      ../../../hm/profiles/vdirsyncer.nix
 
       ../../desktop/teto/programs/khal.nix
       ../../../hm/profiles/experimental.nix
@@ -36,13 +38,13 @@
       ../../desktop/teto/programs/helix.nix
       ../../desktop/teto/programs/yazi.nix
 
-      ../../../hm/profiles/vdirsyncer.nix
-      ../../../hm/profiles/wezterm.nix
-      ../../../hm/profiles/desktop.nix
-      ../../../hm/profiles/sway.nix
       # ../../../hm/profiles/swayidle.nix
+      ../../../hm/profiles/desktop.nix
       ../../../hm/profiles/extra.nix
       ../../../hm/profiles/japanese.nix
+      ../../../hm/profiles/sway.nix
+      ../../../hm/profiles/wezterm.nix
+      ../../../hm/profiles/yazi.nix
 
       ../../../hm/profiles/dev.nix
       # ../../hm/profiles/syncthing.nix
@@ -77,11 +79,11 @@
     source-han-sans # sourceHanSansPackages.japanese
     fira-code-symbols # for ligatures
     iosevka
-
-    meli-git # broken jmap mailreader
-
     # noto-fonts
   ];
-
+  systemd.user.settings.Manager.DefaultEnvironment = {
+    PATH= "/home/teto/.nix-profile/bin";
+# /home/teto/.nix-profile/bin:/nix/profile/bin:/home/teto/.local/state/nix/profile/bin:/etc/profiles/per-user/teto/bin:/nix/var/nix/profiles/default/bin:/run/current-system/sw/bin:/home/teto/.local/share/../bin
+  };
   programs.neovim.enable = true;
 }

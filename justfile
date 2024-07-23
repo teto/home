@@ -22,7 +22,11 @@ build: (nixos-rebuild "build")
 
 switch: (nixos-rebuild "switch" "")
 
+repl: (nixos-rebuild "repl" "")
+
 # --override-input rocks-nvim /home/teto/rocks.nvim
+# TODO check if the paths exists to ease bootstrap ? 
+# same for NOVA_OVH1
 [private]
 nixos-rebuild command builders="--option builders \"$NOVA_OVH1\" -j0":
     nixos-rebuild --flake ~/home --override-input nixpkgs {{ NIXPKGS_REPO }} \
@@ -30,6 +34,9 @@ nixos-rebuild command builders="--option builders \"$NOVA_OVH1\" -j0":
        --override-input nova /home/teto/nova/doctor \
        {{ builders }} \
        --no-write-lock-file --show-trace --use-remote-sudo {{ command }}
+
+nixos-bootstrap:
+ nom build .#nixosConfigurations.$HOSTNAME.config.system.build.toplevel 
 
 # nom build
 # nix flake update
@@ -99,6 +106,9 @@ deploy-neotokyo:
 config:
     stow -t {{ config_local_directory() }} config
 
+home:
+    stow -t {{ config_local_directory() }} config
+
 bin:
     mkdir -p "{{ data_directory() }}/../bin"
     stow -t "{{ data_directory() }}/../bin" bin
@@ -155,3 +165,14 @@ zsh-load-history:
 nix-check-db:
     # run in nix shell nixpkgs#sqlite
     sqlite3 /nix/var/nix/db/db.sqlite 'pragma integrity_check'
+
+# receive secrets
+receive-secrets:
+  wormhole-rs receive
+
+secrets:
+  wormhole-rs send ~/.gnupg
+  wormhole-rs send ~/.password-store 
+  wormhole-rs send ~/.ssh
+  wormhole-rs send ~/home/secrets
+

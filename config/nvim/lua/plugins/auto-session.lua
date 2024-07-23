@@ -4,3 +4,6 @@ require('auto-session').setup({
     auto_session_root_dir = '.', -- vim.fn.stdpath('data').."/sessions/",
     auto_session_use_git_branch = false,
 })
+
+-- used to be obsession
+vim.keymap.set('n', '<Leader>$', '<Cmd>SessionSave<CR>')

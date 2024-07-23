@@ -27,7 +27,9 @@ none_ls.setup({
         -- require("none-ls-luacheck.diagnostics.luacheck").with({
         --  extra_args = { '--ignore 21/_.*' }
         -- }),
-        -- none_ls.builtins.code_actions.shellcheck, --
+		-- require("none-ls-shellcheck.diagnostics"),
+		-- require("none-ls-shellcheck.code_actions"),
+
         -- none_ls.builtins.diagnostics.editorconfig_checker, -- too noisy
         -- none_ls.builtins.diagnostics.tsc,
         -- doc at https://yamllint.readthedocs.io/en/stable/configuration.html#default-configuration
@@ -35,7 +37,7 @@ none_ls.setup({
         -- .with({
         --  extra_args = { }
         -- }),
-        -- none_ls.builtins.diagnostics.flake8, -- not builtins anymore
+        require'none-ls.diagnostics.flake8', -- not builtins anymore
         none_ls.builtins.diagnostics.zsh,
 
         -- use with vim.lsp.buf.format()

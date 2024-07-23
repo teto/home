@@ -57,13 +57,6 @@
 
   # xdg-settings set default-web-browser firefox.desktop
 
-  # don't enable it since it will override my zle-keymap-select binding
-  programs.starship = {
-    enable = lib.mkForce true;
-    enableZshIntegration = true;
-    enableBashIntegration = true;
-    # settings = {};
-  };
 
   # cool to have when I break neovim
   # programs.vim = {

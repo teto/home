@@ -94,9 +94,10 @@ transferred.
 * age key for sops
 * git crypt key to decypher secrets saved in the repo
 
+TODO mention termscp or yazi + rsync ?
+
 On the old machine:
 #+BEGIN_SRC
-$ nix shell nixpkgs#magic-wormhole-rs
 $ wormhole send ~/.gnupg
 $ wormhole send ~/.password-store 
 $ wormhole send ~/.ssh
@@ -105,7 +106,7 @@ $ wormhole send ~/home/secrets
 
 On the new machine:
 #+BEGIN_SRC
-$ wormhole receive RENDEZVOUSPHRASE
+$ just receive-secrets
 tar xvf -C ~/.gnupg/ gnupg.tar
 ...
 #+END_SRC

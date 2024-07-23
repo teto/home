@@ -1,0 +1,8 @@
+#!/bin/sh
+# --peers=false --active
+STATUS=$(tailscale status --json | jq .BackendState)
+
+# TODO toggle it on click
+
+echo "{ \"text\":\"$STATUS\", \"alt\":\"$alt\", \"tooltip\":\"$tooltip\" }"
+

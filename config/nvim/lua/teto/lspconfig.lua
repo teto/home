@@ -313,7 +313,7 @@ lspconfig.nil_ls.setup({
     },
     settings = {
         formatting = {
-            command = { 'nixpkgs-fmt' },
+            command = { 'nixfmt' },
         },
         -- nix = {
         --  flake = {

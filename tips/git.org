@@ -14,6 +14,12 @@ https://help.github.com/en/articles/checking-out-pull-requests-locally
 
   Use `git status -uno` (ie `--untracked=no`)
 
+* debug config
+
+git config --list --show-origin --show-scope
+git config --global --edit
+
+
 * debug ssh
 
  GIT_SSH_COMMAND="ssh -v"

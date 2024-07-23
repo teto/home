@@ -139,14 +139,8 @@ return {
 
     -- 'cameron-wags/rainbow_csv.nvim',
 
-    -- 'gennaro-tedesco/nvim-peekup', -- to see the content of the various buffers
-
     -- 'darkonig/nvim-terminal.lua' -- , '~/neovim/nvim-terminal.lua' -- to display ANSI colors
     -- to display ANSI colors
-
-    -- { 'rareitems/anki.nvim', lazy = true }, -- to create anki cards
-
-    -- 'nvim-zh/colorful-winsep.nvim', -- to have a colored separator around the active window
 
     --  '~/pdf-scribe.nvim'  -- to annotate pdf files from nvim :PdfScribeInit
     -- PdfScribeInit

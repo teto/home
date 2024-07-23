@@ -68,8 +68,9 @@
     };
 
     meli = {
-      # url = "https://git.meli-email.org/meli/meli.git";
-      url = "github:meli/meli"; # official mirror
+      url = "git+https://git.meli-email.org/meli/meli.git";
+      # url = "github:meli/meli"; # official mirror
+      # ref = "refs/pull/449/head";
       flake = false;
     };
 
@@ -134,6 +135,9 @@
 
     nur.url = "github:nix-community/NUR";
 
+    ouch-yazi-plugin = { url = "github:ndtoan96/ouch.yazi"; flake = false; };
+    rsync-yazi-plugin = { url = "github:GianniBYoung/rsync.yazi"; flake = false; };
+
     purebred = {
       url = "github:purebred-mua/purebred";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -142,7 +146,11 @@
     rippkgs.url = "github:replit/rippkgs";
     rippkgs.inputs.nixpkgs.follows = "nixpkgs";
 
-    rofi-hoogle.url = "github:teto/rofi-hoogle/fixup";
+    # rofi-hoogle.url = "github:teto/rofi-hoogle/fixup";
+    rofi-hoogle = {
+      url = "github:rebeccaskinner/rofi-hoogle";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     sops-nix = {
       url = "github:Mic92/sops-nix";
@@ -201,7 +209,7 @@
           inherit system;
           overlays = (src.lib.attrValues self.overlays) ++ [
             autoCalledPackages
-            self.inputs.rofi-hoogle.overlay
+            # self.inputs.rofi-hoogle.overlay
 
             # the nova overlay just brings ztp-creds and gitlab-ssh-keys
             # removing the overlay means we dont need it during evaluation
@@ -345,27 +353,33 @@
     flake-utils.lib.eachSystem [ "x86_64-linux" ] (system: {
 
       devShells = {
-        # default devShell when working on this repo:
+        # devShell when working on this repo:
+        # and also when bootstrapping a new machine which is why I add some basic tooling
         # - I need sops to edit my secrets
         # - git-crypt
         default = nixpkgs.legacyPackages.${system}.mkShell {
           name = "dotfiles-shell";
           buildInputs = with myPkgs; [
-            # to run `git-crypt export-key`
-            git-crypt
-            sops # to decrypt secrets
+            
             age
-            ssh-to-age
             deploy-rs.packages.${system}.deploy-rs
+            fzf # for just's "--select"
+            git-crypt  # to run `git-crypt export-key`
             just # to run justfiles
-            self.packages.${system}.treefmt-with-config
+            magic-wormhole-rs # to transfer secrets
+            nix-output-monitor
             self.inputs.firefox2nix.packages.${system}.default
+            self.packages.${system}.treefmt-with-config
+            ripgrep
+            sops # to decrypt secrets
+            ssh-to-age
             wormhole-rs # "wormhole-rs send"
           ];
 
           # TODO set SOPS_A
           shellHook = ''
             export SOPS_AGE_KEY_FILE=$PWD/secrets/age.key
+            source config/bash/aliases.sh
             echo "Run just ..."
           '';
         };
@@ -393,10 +407,11 @@
         nvim = self.nixosConfigurations.desktop.config.home-manager.users.teto.programs.neovim.finalPackage;
 
         inherit (myPkgs)
-          sway-scratchpad
-          local-ai-teto
           jmdict
+          local-ai-teto
+          meli-git
           popcorntime-teto
+          sway-scratchpad
           ;
 
         nvim-unwrapped = myPkgs.neovim-unwrapped;
@@ -407,7 +422,10 @@
 
           # TODO useofficial 
           programs.fourmolu.enable = true;
-          programs.nixfmt.enable = true;
+          programs.nixfmt = { 
+            enable = true;
+            package = myPkgs.nixfmt;
+          };
           programs.stylua.enable = true;
           programs.just.enable = true;
           programs.shfmt.enable = true;
@@ -727,6 +745,7 @@
               meli-git = prev.meli.overrideAttrs (drv: rec {
                 name = "meli-${version}";
                 version = "g${self.inputs.meli.shortRev}";
+                # version = "g-from-git";
                 src = self.inputs.meli;
 
                 # dontUnpack = true;
@@ -736,7 +755,7 @@
                   prev.lib.const {
                     name = "${name}-vendor.tar.gz";
                     inherit src;
-                    outputHash = "sha256-ydtigsjGc4AwblB3nYt62jX76LU0ZjtRGuoExHfbqts=";
+                    outputHash = "sha256-fWCcY5A5FLc6LRmxpGMN5V2IdxZCrtW9/aSfAfYIN3Y=";
                   }
                 );
                 # cargoHash = "sha256-1LHCqv+OPS6tLMpmXny5ycW+8I/JRPQ7n8kcGfw6RMs=";
@@ -759,6 +778,14 @@
               # neovide = prev.neovide.overrideAttrs(oa: {
               #  src = self.inputs.neovide;
               # });
+
+              # moved to by-name
+              # pass-custom = (pkgs.pass.override { waylandSupport = true; }).withExtensions (
+              #   ext: with ext; [
+              #     pass-import
+              #     pass-tail
+              #   ]
+              # );
 
               firefox-addons = import ./overlays/firefox/generated.nix {
                 inherit (final)

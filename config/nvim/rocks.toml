@@ -39,6 +39,13 @@ nvim-lint = "scm"
 friendly-snippets = "scm"
 "haskell-snippets.nvim" = "1.4.4"
 "smart-open.nvim"= "scm"
+"none-ls-extras.nvim" = "scm"
+"yazi.nvim" = "3.1.0"
+tree-sitter-haskell = "0.0.2"
+nvim-cmp = "scm"
+"lspkind.nvim" = "scm"
+"modicator.nvim" = "scm"
+luasnip = "2.3.0"
 
 
 
@@ -58,7 +65,7 @@ version = "8.8.1"
 ft = "norg"
 
 [plugins."gp.nvim"]
-dir = "/home/teto/gp.nvim2"
+dir = "/home/teto/gp.nvim"
 
 [plugins.vim-sorcerer]
 git = "github:adlawson/vim-sorcerer"
@@ -187,6 +194,12 @@ git = "tzachar/highlight-undo.nvim"
 [plugins."baleia.nvim"]
 git = "m00qek/baleia.nvim"
 rev = "v1.4.0"
+
+[plugins."none-ls-shellcheck.nvim"]
+git = "gbprod/none-ls-shellcheck.nvim"
+
+[plugins.vim-aftercolors]
+git = "calvinchengx/vim-aftercolors"
 
 [config]
 plugins_dir = "plugins/"

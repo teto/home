@@ -46,3 +46,5 @@ require('gp').setup({
 -- require("gp").setup(config)
 
 -- shortcuts might be setup here (see Usage > Shortcuts in Readme)
+vim.keymap.set('n', '<F2>', '<Cmd>GpChatToggle<CR>', { desc = 'Toggle gp.nvim chat' })
+

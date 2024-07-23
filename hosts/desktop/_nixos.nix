@@ -59,6 +59,7 @@ in
       # ./docker.nix
 
       ../../nixos/profiles/greetd.nix
+      ../../nixos/profiles/nova.nix
       # ../../nixos/profiles/immich.nix
 
       # this is only to test the new config
@@ -78,7 +79,7 @@ in
       ../../nixos/profiles/podman.nix
 
       # ../../nixos/profiles/libvirtd.nix
-      ../../nixos/profiles/nvidia.nix
+      # ../../nixos/profiles/nvidia.nix
       ../../nixos/profiles/ntp.nix
       ../../nixos/profiles/ollama.nix
     ]
@@ -137,7 +138,8 @@ in
         imports = [ ./teto/default.nix ];
       };
     };
-  boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_8;
+  # boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_8;
+  boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_10;
 
   services.xserver.displayManager.gdm.enable = true;
 
@@ -333,6 +335,7 @@ in
   # https://github.com/containers/image/blob/main/docs/containers-registries.conf.5.md
   # look into credential-helpers
   #
+  # public.ecr.aws
   environment.etc."containers/registries.conf".text = lib.mkForce ''
     # Note that order matters here. quay.io is the redhat repo
     unqualified-search-registries = [  "registry.novadiscovery.net", "docker.io", "quay.io" ]

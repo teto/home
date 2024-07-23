@@ -24,7 +24,7 @@ let
   # Plug 'bakpakin/fennel.vim'
 
   rawPlugins =
-    pluginsMap.basePlugins
+       pluginsMap.basePlugins
     ++ pluginsMap.luaPlugins
     ++ pluginsMap.colorschemePlugins
     ++ pluginsMap.filetypePlugins;

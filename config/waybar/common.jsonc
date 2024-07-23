@@ -36,7 +36,13 @@
 	   "format": "✗ {nr_failed}",
 	   "format-ok": "✓",
 	   "system": true,
-	   "user": true
+	   "user": true,
+       "menu": "on-click",
+       "menu-file": "~/.config/waybar/menu-systemd-failed-units.xml",
+       "menu-actions": {
+            "kitty": "kitty sh -c ikhal",
+            // "reboot": "reboot",
+       }
   },
  "clock": {
   // "timezone": "America/New_York",

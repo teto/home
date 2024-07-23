@@ -11,6 +11,8 @@ prepend_keymap = [
 	# https://github.com/sxyazi/yazi/issues/1046
 	{ on = [ "z" ], run = "plugin zoxide" },
 	{ on = [ "Z" ], run = "plugin fzf" },
+    # run  = "plugin rsync --args='user@server.com'",
+    { on   = ["R"], run  = "plugin rsync", desc = "Copy files using rsync" }
 ]
 
 

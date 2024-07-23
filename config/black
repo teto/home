@@ -1,0 +1,5 @@
+# a toml file
+# [tool.black]
+# black can read in pyproject.toml
+# 79 is default for flake8
+line_length = 79

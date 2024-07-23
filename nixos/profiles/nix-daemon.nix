@@ -120,6 +120,7 @@
 
     # "https://teto.cachix.org"
     settings = {
+      builders-use-substitutes = true;
       extra-substituters = [
         # "https://cache.nixos.org/" # part of the default
         "https://jupyterwith.cachix.org"

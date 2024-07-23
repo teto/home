@@ -10,13 +10,6 @@ with lib;
 let
   cfg = config.package-sets;
 
-  pass-custom = (pkgs.pass.override { waylandSupport = true; }).withExtensions (
-    ext: with ext; [
-      pass-import
-      pass-tail
-    ]
-  );
-
 in
 {
 
@@ -161,7 +154,7 @@ in
           noti # send notifications when a command finishes
           ouch # to (de)compress files
           # papis # library manager
-          pass-custom # pass with extensions
+          pass-teto # pass with extensions
           pavucontrol
           pkgs.networkmanagerapplet # should
           procs # Rust replacement for 'ps'
@@ -295,7 +288,7 @@ in
         gitu # like lazygit
 
         haskellPackages.fast-tags # generate TAGS file for vim
-        hurl # http tester
+        hurl # http tester (broken)
 
         fre # generate a frequency database
 
@@ -305,13 +298,12 @@ in
         ncurses.dev # for infocmp
         # neovide
         # neovim-remote # broken for latex etc
-        nix-doc # can generate tags for nix
+        # nix-doc # can generate tags for nix
         nix-update # nix-update <ATTR> to update a software
         nix-index # to list package contents
         # nix-top # (abandoned) to list current builds
-        nixpkgs-fmt
-        # nixfmt-rfc-style # the official one
-        nixfmt
+        nixfmt # the official one
+        # nixfmt
         nixpkgs-review # to help review nix packages
         # nodePackages."@bitwarden/cli" # 'bw' binary # broken
         patchutils # for interdiff

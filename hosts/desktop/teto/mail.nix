@@ -269,6 +269,10 @@ in
     meli-git # broken jmap mailreader
   ];
 
+  systemd.user.services.mujmap-fastmail.Service = {
+    Environment="PATH=${pkgs.lib.makeBinPath [ pkgs.pass-teto ]}";
+  };
+
   accounts.email.maildirBasePath = "${config.home.homeDirectory}/maildir";
   accounts.email.accounts = {
     inherit gmail;

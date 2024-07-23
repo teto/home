@@ -23,6 +23,14 @@ jobs:
       run: |
         nix develop -c just lint-check
     # - run: nixos-rebuild --flake .#laptop --show-trace build
-    - name: build desktop config
+    - name: eval desktop config
       run: |
-       nix build .#nixosConfigurations.desktop.config.system.build.toplevel
+       nix eval .#nixosConfigurations.desktop.config.system.build.toplevel
+
+    - name: eval laptop config
+      run: |
+       nix eval .#nixosConfigurations.laptop.config.system.build.toplevel
+
+    - name: enter devShell
+      run: |
+       nix develop --command true

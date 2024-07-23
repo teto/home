@@ -80,14 +80,14 @@ in
       ../config-all.nix
       ../../nixos/modules/luarocks-site.nix
 
-      ../../nixos/profiles/wifi.nix
       ../../nixos/profiles/desktop.nix
-      ../../nixos/profiles/podman.nix
-      ../../nixos/profiles/sway.nix
       ../../nixos/profiles/docker-daemon.nix
       ../../nixos/profiles/greetd.nix
-      ../../nixos/profiles/steam.nix
+      ../../nixos/profiles/podman.nix
       ../../nixos/profiles/qemu.nix
+      ../../nixos/profiles/steam.nix
+      ../../nixos/profiles/sway.nix
+      ../../nixos/profiles/wifi.nix
       # ../../nixos/profiles/adb.nix
       # ../../nixos/profiles/nix-cache-sync.nix
       ../../nixos/profiles/kanata.nix
@@ -101,6 +101,7 @@ in
 
     ]
     ++ lib.optionals withSecrets [
+      ../../nixos/profiles/nova.nix
       # ../../nixos/profiles/wireguard.nix
     ];
 
@@ -110,6 +111,7 @@ in
       # "nvidia"
     ];
   };
+  # boot.blacklistedKernelModules = [ "nouveau" ];
 
   # services.tailscale = {
   #   enable = true;
@@ -118,6 +120,8 @@ in
   #
   # enables command on boot/suspend etc
   powerManagement.enable = false;
+
+  security.polkit.enable = true;
 
   # To control power levels via powerprofilesctl
   # services.power-profiles-daemon.enable = true;
@@ -201,9 +205,7 @@ in
 
       # adds out-of-tree support for AAC, APTX, APTX-HD and LDAC.
       # SBC / AAC
-      extraModules = [
-        pkgs.pulseaudio-modules-bt
-      ];
+      extraModules = [ pkgs.pulseaudio-modules-bt ];
 
       # extraClientConf =
       # only this one has bluetooth

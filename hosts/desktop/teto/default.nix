@@ -129,7 +129,6 @@
     moar # test as pager
     tailspin # a log viewer based on less ("spin" or "tsspin" is the executable)
 
-    # nixfmt  # aliased to nixfmt-rfc-style, use the latter to avoid the warning
     presenterm # for presentations from terminal/markdown (in rust, supports images, pretty cool)
 
     lutris # for gaming
@@ -143,7 +142,7 @@
 
     # take the version from stable ?
     # qutebrowser # broken keyboard driven fantastic browser
-    gnome.nautilus # demande webkit/todo replace by nemo ?
+    nautilus # demande webkit/todo replace by nemo ?
     # hexyl # hex editor
     # simple-scan
     # vifm
