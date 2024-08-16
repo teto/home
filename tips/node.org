@@ -9,6 +9,9 @@ node --inspect-brk <CMD>
 
 open websocket via for instance in chrome about//inspect (or sthg alike)
 
+moduleResolution determines the algorithm used for finding/resolving modules e.g. looking in node_modules or searching relative paths
+
+module determines the type of import/export used -
 
 * typescript
 

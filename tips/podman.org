@@ -2,4 +2,13 @@
 
 Current issue running as non-root:
 https://github.com/NixOS/nixpkgs/issues/259770
+
+
 podman export NAME -o ....
+
+
+REGISTRY_AUTH_FILE
+
+* how to debug config ?
+
+podman info

@@ -1,5 +1,5 @@
 {
-# systemd.services."<service-name>".wantedBy = lib.mkForce [ ];
+  # systemd.services."<service-name>".wantedBy = lib.mkForce [ ];
 
   settings = {
     LogLevel = "VERBOSE";

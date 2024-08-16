@@ -16,9 +16,10 @@
       ../../desktop/teto/contacts.nix
       ../../desktop/teto/mail.nix
       ../../desktop/teto/sops.nix
+      ../../desktop/teto/programs/khal.nix
+
       ../../../hm/profiles/vdirsyncer.nix
 
-      ../../desktop/teto/programs/khal.nix
       ../../../hm/profiles/experimental.nix
     ]
     ++ [
@@ -29,10 +30,12 @@
       ./services/swayidle.nix
 
       # ../../../hm/profiles/emacs.nix
-      # ../../../hm/profiles/qutebrowser.nix
+      ../../../hm/profiles/qutebrowser.nix
 
       # ../desktop/teto/default.nix  # Track for regressions
 
+      ../../desktop/teto/programs/ssh.nix
+      ../../desktop/teto/programs/bash.nix
       ../../desktop/teto/programs/neovim.nix
       ../../desktop/teto/services/swaync.nix
       ../../desktop/teto/programs/helix.nix
@@ -54,8 +57,10 @@
 
   package-sets = {
     enableDesktopGUIPackages = true;
+    enableIMPackages = true;
     energy = true;
     wifi = true;
+    llms = true;
   };
 
   programs.zsh = {
@@ -82,8 +87,8 @@
     # noto-fonts
   ];
   systemd.user.settings.Manager.DefaultEnvironment = {
-    PATH= "/home/teto/.nix-profile/bin";
-# /home/teto/.nix-profile/bin:/nix/profile/bin:/home/teto/.local/state/nix/profile/bin:/etc/profiles/per-user/teto/bin:/nix/var/nix/profiles/default/bin:/run/current-system/sw/bin:/home/teto/.local/share/../bin
+    PATH = "/home/teto/.nix-profile/bin";
+    # /home/teto/.nix-profile/bin:/nix/profile/bin:/home/teto/.local/state/nix/profile/bin:/etc/profiles/per-user/teto/bin:/nix/var/nix/profiles/default/bin:/run/current-system/sw/bin:/home/teto/.local/share/../bin
   };
   programs.neovim.enable = true;
 }

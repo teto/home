@@ -6,7 +6,7 @@
 }@args:
 {
   programs.mcfly = {
-    enable = true;
+    enable = false; # disabled because it crashed
     keyScheme = "vim";
     enableZshIntegration = true;
 

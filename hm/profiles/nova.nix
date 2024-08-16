@@ -9,16 +9,19 @@
   imports = [ ./nova/programs/bash.nix ];
 
   home.packages = [
-    pkgs.aws-vault # set it up as
+    pkgs.aws-vault-nova # wrap aws-vault with some specific variables
     pkgs.sqlitebrowser
-    pkgs.google-chrome
+    # pkgs.google-chrome
     # pigz for zlib (de)compression
+
+    # for my yazi plugin
     pkgs.pigz # pigz -d ~/nova/jinko2/ScalarMetaDataChunked.json.zlib -c
     pkgs.openapi-tui # explore openapi spec in terminal
   ];
 
   # to counter doctor's config of starship
   xdg.configFile."starship.toml".enable = false;
+  xdg.configFile."nix/nix.conf".enable = false;
 
   xdg.desktopEntries = {
     # xdg.desktopEntries = {

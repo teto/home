@@ -8,7 +8,7 @@ let
 
   # https://discourse.nixos.org/t/how-do-you-pin-a-firefox-extensions-add-on-to-the-firefox-toolbar/36081
   # browser.uiCustomization.state 
-  defaultFirefoxSettings = {
+  myDefaultSettings = {
     # TODO use my own startpage
     "browser.startup.homepage" = "https://github.com/teto";
     "browser.search.region" = "FR";
@@ -30,6 +30,16 @@ let
     "browser.search.hiddenOneOffs" = "Google,Yahoo,Bing,Amazon.com,Twitter";
     "browser.search.suggest.enabled" = false;
 
+    "browser.translations.neverTranslateLanguages" = "en";
+    "browser.newtabpage.activity-stream.showSponsored" = false;
+    "browser.newtabpage.activity-stream.showSponsoredTopSites" = false;
+
+    "browser.urlbar.showSearchSuggestionsFirst" = false;
+    "browser.urlbar.suggest.bookmark" = true;
+
+    "sidebar.revamp" = true;
+    "sidebar.verticalTabs" = true;
+
     "mousewheel.default.delta_multiplier_x" = 20;
     "mousewheel.default.delta_multiplier_y" = 20;
     "mousewheel.default.delta_multiplier_z" = 20;
@@ -37,13 +47,15 @@ let
     "browser.send_pings" = false;
 
     "browser.startup.page" = 3;
-
     "browser.tabs.closeWindowWithLastTab" = false;
+    "browser.tabs.hoverpreview.enabled" = true;
 
     "browser.urlbar.placeholderName" = "DuckDuckGo";
     "browser.urlbar.speculativeConnect.enabled" = false;
     # "devtools.theme" = "${config.theme.base16.kind}";
     "dom.battery.enabled" = false;
+
+    "layout.spellcheckDefault" = 0;
 
     # breaks facebook messenger when set to false
     "dom.event.clipboardevents.enabled" = true;
@@ -59,7 +71,7 @@ let
     "network.IDN_show_punycode" = true;
     "network.allow-experiments" = false;
 
-    "network.dns.disablePrefetch" = true;
+    "network.dns.disablePrefetch" = false;
     # "network.prefetch-next" = false;
 
     # "network.http.referer.XOriginPolicy" = 2;
@@ -74,9 +86,15 @@ let
     # "widget.content.gtk-theme-override" = "Adwaita:light";
 
     "widget.use-xdg-desktop-portal.file-picker" = 1;
+
+    # "general.config.filename" = 
+
+    # TO avoid
+    "signon.prefillForms" = true;
+    # "signon.rememberSignons" = false;
   };
 
-  novaFirefoxSettings = {
+  novaSpecificSettings = {
     # avoid
     "signon.rememberSignons" = false;
   };
@@ -97,10 +115,73 @@ in
   enable = true;
   # import the one in pkgs/
   # package = myFirefox;
+  languagePacks = [
+    "fr-FR"
+    "jp-JP"
+    "en-GB"
+    # 5840
+  ];
+  # check about:policies
+  policies = {
+    BlockAboutConfig = false;
+    AppAutoUpdate = true;
+
+    AutofillAddressEnabled = false;
+    AutofillCreditCardEnabled = false;
+
+    # DefaultDownloadDirectory
+    DisableFirefoxStudies = true;
+    # DisableFormHistory;
+    DisablePocket = true;
+    DisableTelemetry = true;
+    DisplayMenuBar = "default-off";
+    HardwareAcceleration = true;
+    # buggy see https://github.com/nix-community/home-manager/issues/5821
+    NoDefaultBookmarks = true;
+    # OfferToSaveLoginsDefault = 
+    # TranslateEnabled = 
+    PDFjs = false;
+    Bookmarks = { };
+    #  "type": "array",
+    #  "items": {
+    #   "type": "object",
+    #   "properties": {
+    #    "Title": {
+    #     "type": "string"
+    #    },
+    #    "URL": {
+    #     "type": "URL"
+    #    },
+    #    "Favicon": {
+    #     "type": "URLorEmpty"
+    #    },
+    #    "Placement": {
+    #     "type": "string",
+    #     "enum": [
+    #      "toolbar",
+    #      "menu"
+    #     ]
+    #    },
+    #    "Folder": {
+    #     "type": "string"
+    #    }
+    #   },
+    #   "required": [
+    #    "Title",
+    #    "URL"
+    #   ]
+    #  }
+    # }
+    # DefaultDownloadDirectory = "\${home}/Downloads";
+  };
+  nativeMessagingHosts = [
+    # add it to firefox-addons. ?
+    pkgs.ff2mpv
+  ];
   profiles = {
     perso = {
       # https://gitlab.com/rycee/configurations/-/blob/bf46aef74ca53a61fe2d35349fe3dbc6a70b2609/user/firefox.nix#L25-39
-      settings = defaultFirefoxSettings;
+      settings = myDefaultSettings;
       path = "q1pprbmm.default";
       # extraConfig = 
       id = 0;
@@ -198,7 +279,7 @@ in
 
     # to use with stable-diffusion
     perso-nogpu = {
-      settings = defaultFirefoxSettings // { };
+      settings = myDefaultSettings // { };
       id = 5;
     };
 
@@ -214,7 +295,7 @@ in
       # isDefault = false;
       id = 1;
       path = "6bt2uwrj.nova";
-      settings = novaFirefoxSettings;
+      settings = myDefaultSettings // novaSpecificSettings;
       # let { in { };
     };
     # };

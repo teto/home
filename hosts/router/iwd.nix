@@ -14,7 +14,9 @@ let
     [Security]
     Passphrase=${secrets.router.password}
   '';
+
 in
+# BandModifier5Ghz
 {
   # config = {
   # sops.secrets = {

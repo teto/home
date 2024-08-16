@@ -1,15 +1,15 @@
-{ config, lib
-, pkgs
-, flakeInputs
-, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  flakeInputs,
+  ...
+}:
 {
 
-  xdg.configFile."yazi/plugins/ouch.yazi".source  =
-    flakeInputs.ouch-yazi-plugin;
+  xdg.configFile."yazi/plugins/ouch.yazi".source = flakeInputs.ouch-yazi-plugin;
 
-  xdg.configFile."yazi/plugins/rsync.yazi".source  =
-    flakeInputs.rsync-yazi-plugin;
-
+  xdg.configFile."yazi/plugins/rsync.yazi".source = flakeInputs.rsync-yazi-plugin;
 
   # 7z
   home.packages = [

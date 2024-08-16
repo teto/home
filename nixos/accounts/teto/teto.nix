@@ -8,6 +8,8 @@
 }:
 {
 
+  programs.zsh.enable = true;
+
   users.users.teto = {
 
     shell = pkgs.zsh;
@@ -49,7 +51,9 @@
     # hashedPassword = secrets.users.teto.hashedPassword;
     hashedPassword = "$6$UcKAXNGR1brGF9S4$Xk.U9oCTMCnEnN5FoLni1BwxcfwkmVeyddzdyyHAR/EVXOGEDbzm/bTV4F6mWJxYa.Im85rHQsU8I3FhsHJie1";
 
-    openssh.authorizedKeys.keyFiles = [ ../../../perso/keys/id_rsa.pub ];
+    openssh.authorizedKeys.keyFiles = [
+      ../../../perso/keys/id_rsa.pub
+    ];
 
   };
 

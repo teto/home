@@ -18,7 +18,7 @@
 
   # services.xserver.desktopManager.gnome.enable = true;
 
-  services.gnome.evolution-data-server.enable = false;
+  services.gnome.evolution-data-server.enable = lib.mkForce false;
   # optional to use google/nextcloud calendar
   services.gnome.gnome-online-accounts.enable = true;
   # optional to use google/nextcloud calendar

@@ -24,7 +24,7 @@ let
   # Plug 'bakpakin/fennel.vim'
 
   rawPlugins =
-       pluginsMap.basePlugins
+    pluginsMap.basePlugins
     ++ pluginsMap.luaPlugins
     ++ pluginsMap.colorschemePlugins
     ++ pluginsMap.filetypePlugins;
@@ -73,10 +73,7 @@ in
 
     extraPackages = with pkgs; [
       # emacs # for orgmode-babel
-      nil # a nix lsp, can be debugged with NIL_LOG_PATH and NIL_LOG=nil=debug
-      nixd # another nix LSP (broken because of nix security issue)
       shellcheck
-      sumneko-lua-language-server
     ];
 
     plugins = map (x: builtins.removeAttrs x [ "after" ]) rawPlugins;
@@ -147,7 +144,7 @@ in
 
         };
 
-        luarocksConfigStr = (lib.generators.toLua { asBindings = true; } luarocksConfigAttr2);
+        luarocksConfigStr = (lib.generators.toLua { asBindings = false; } luarocksConfigAttr2);
 
         # this is a backup
         # luarocksConfigStrDefault = ''
@@ -172,7 +169,7 @@ in
       in
       {
         enable = true;
-        text = luarocksConfigStr;
+        text = "return ${luarocksConfigStr}";
       };
   };
 }

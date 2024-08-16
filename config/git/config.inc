@@ -4,6 +4,11 @@
 	oneFixupPerCommit = false
     autoStageIfNothingStaged = true
 
+[blame]
+# 6:# $ git config blame.ignoreRevsFile .git-blame-ignore-revs
+# 12:# The ignoreRevsFile can't be set globally due to blame failing if the file isn't present.
+# ignoreRevsFile = .git-blame-ignore-revs
+
 [core]
 	# fsmonitor = "/nix/store/pqrqcfw2m27kwhrh7jyj05lp9b5pi0jd-rs-git-fsmonitor-0.1.3/bin/rs-git-fsmonitor"
 	sshCommand = "ssh"
@@ -34,10 +39,6 @@ compression = 0
 
 [credential "https://github.com"]
 	username = teto
-
-# [credential "https://git.novadiscovery.net/jinko/scenario"]
-# 	username = platform
-
 
 [sendemail]
   chainreplyto = false

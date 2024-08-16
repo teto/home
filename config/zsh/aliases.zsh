@@ -49,7 +49,6 @@ alias nvim-dev="nix develop --override-input nixpkgs /home/teto/nixpkgs --no-wri
 alias local-rebuild="nixos-rebuild --flake ~/home --override-input nixpkgs-teto /home/teto/nixpkgs --override-input hm /home/teto/hm --override-input nova /home/teto/nova/doctor --override-input mptcp-flake /home/teto/mptcp/mptcp-flake --no-write-lock-file switch --show-trace --use-remote-sudo"
 
 # Gitops quick
-alias mg='if [ -z ${BW_SESSION} ]; then export BW_SESSION=$(bw unlock --raw); fi && make gitops'
 # TODO check return type in bw unlock --check 
 alias bnr='if [ -z ${BW_SESSION} ]; then export BW_SESSION=$(bw unlock --raw); fi && nix develop --option builders "$NOVA_OVH1"'
 alias nfs='nix flake show'

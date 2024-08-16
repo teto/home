@@ -12,9 +12,3 @@ https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packa
 https://github.com/purescript/npm-installer/issues/16
 npm install --global --ignore-scripts purescript 
 
-$ nix-shell -A nodePackages_10_x.insect ~/nixpkgs
- npm install insect
-node_modules/.bin/insect
-
-
-nix-shell -p nodejs

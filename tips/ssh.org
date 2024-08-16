@@ -47,4 +47,10 @@ https://unix.stackexchange.com/questions/126908/get-ssh-server-key-fingerprint
   `-E md5` to precise the algorithm
 ssh-keyscan host | ssh-keygen -lf -
 
+* deal with agents
+
+@code
+eval $(ssh-agent)
+
+
 # fingerprint of private key is the same as the public key

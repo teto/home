@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  dotfilesPath,
   ...
 }:
 let
@@ -130,7 +131,7 @@ in
           pkgs.wttrbar # for weather module
           pkgs.xdg_utils # for xdg-open
         ]
-      }:${config.home.profileDirectory}/bin";
+      }:${dotfilesPath}/bin";
     };
     Unit.PartOf = [ "tray.target" ];
     Install.WantedBy = [ "tray.target" ];

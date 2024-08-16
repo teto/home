@@ -30,8 +30,10 @@ let
   # ];
   defaultCompletionPlugins = with pkgs.vimPlugins; [
 
-    # TODO I should be able to attach
-    # (luaPlugin { plugin = nvim-cmp; })
+    # TODO I should be able to remove it as it's a dependency of the other modules 
+    # but it doesn't seem to work yet for hm
+    (luaPlugin { plugin = nvim-cmp; })
+
     (luaPlugin { plugin = cmp-nvim-lsp; })
     (luaPlugin { plugin = cmp-nvim-lua; })
     (luaPlugin { plugin = cmp_luasnip; })
@@ -139,6 +141,21 @@ let
     };
   };
 
+  neorgModule = types.submodule {
+    options = {
+
+      enable = mkEnableOption "Neorg";
+
+      plugins = mkOption {
+        # type = types.listOf types.package;
+        default = [
+          (luaPlugin { plugin = vimPlugins.neorg-telescope; })
+        ];
+        description = "toto";
+      };
+    };
+  };
+
   orgmodeModule = types.submodule {
     options = {
 
@@ -183,9 +200,15 @@ in
         default = {
           enable = false;
         };
-        description = ''
-          Enable orgmode support.
-        '';
+        description = "Enable orgmode support";
+      };
+
+      neorg = mkOption {
+        type = neorgModule;
+        default = {
+          enable = false;
+        };
+        description = "Enable neorg support";
       };
 
       autocompletion = mkOption {
@@ -231,6 +254,8 @@ in
     # TODO add orgmode-babel and emacs to neovim
 
     (mkIf cfg.orgmode.enable { programs.neovim.plugins = cfg.orgmode.plugins; })
+
+    (mkIf cfg.neorg.enable { programs.neovim.plugins = cfg.neorg.plugins; })
 
     (mkIf cfg.treesitter.enable {
       programs.neovim.extraLuaConfig = lib.mkBefore (

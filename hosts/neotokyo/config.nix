@@ -1,5 +1,6 @@
 {
   config,
+  flakeSelf,
   flakeInputs,
   secrets,
   modulesPath,
@@ -41,15 +42,21 @@ in
   programs.bash.interactiveShellInit = ''
     cat "${pkgs.writeText "welcome-message" banner}";
   '';
+
   imports = [
     # for gandi
     "${modulesPath}/virtualisation/openstack-config.nix"
+    flakeSelf.nixosModules.teto-nogui
+
     # ./hardware.nix
     ./services/openssh.nix
     ./sops.nix
 
     # to get the first iteration going on
+    ./services/gitolite.nix
     ./services/nextcloud.nix
+    ./services/nginx.nix
+    ./services/immich.nix
 
     # ./gitolite.nix
     # ../../nixos/modules/hercules-ci-agents.nix
@@ -57,7 +64,7 @@ in
     ../../nixos/profiles/ntp.nix
     ../../nixos/profiles/nix-daemon.nix
     ../../nixos/profiles/neovim.nix
-    ../../nixos/profiles/docker-daemon.nix
+    # ../../nixos/profiles/docker-daemon.nix
     ../../nixos/profiles/server.nix
 
     # ./blog.nix
@@ -67,34 +74,37 @@ in
 
   ];
 
-  virtualisation.docker.enable = true;
+  # virtualisation.docker.enable = true;
 
-  home-manager.users.root = {
-    imports = [
-      ./users/root.nix
-      ../../hm/profiles/neovim.nix
-      ../desktop/root/programs/ssh.nix
+  users.users.teto = {
+    extraGroups = [
+      "nextcloud" # to be able to list files
     ];
-
-    # home.stateVersion = "23.11";
   };
 
-  home-manager.users.teto = {
-    # TODO it should load the whole folder
-    imports = [
-      # ../desktop/teto/
-      # ../../hm/profiles/teto/common.nix
-      ./teto/default.nix
-      ../../hm/profiles/common.nix
-      ../../hm/profiles/zsh.nix
-      ../../hm/profiles/neovim.nix
+  home-manager.users = {
+    root = {
+      imports = [
+        # ./users/root.nix
+        ../../hm/profiles/neovim.nix
+        ../desktop/root/programs/ssh.nix
+      ];
 
-      # custom modules
-      # ./home.nix
-      # breaks build: doesnt like the "activation-script"
-      # nova.hmConfigurations.dev
-    ];
-    # home.stateVersion = "23.05";
+      # home.stateVersion = "23.11";
+    };
+    teto = {
+      # TODO it should load the whole folder
+      imports = [
+        flakeSelf.homeModules.teto-nogui
+
+        ./teto/default.nix
+        ../../hm/profiles/neovim.nix
+
+        # custom modules
+        # ./home.nix
+        # breaks build: doesnt like the "activation-script"
+      ];
+    };
   };
 
   boot.loader = {

@@ -10,17 +10,17 @@ local obsession_component = require('teto.lualine.obsession')
 -- print(vim.inspect(obsession_component))
 
 -- local component = {function() return "toto" end , color = {fg= "red"}}
-local trouble = require('trouble')
-local symbols = trouble.statusline({
-    mode = 'lsp_document_symbols',
-    groups = {},
-    title = false,
-    filter = { range = true },
-    format = '{kind_icon}{symbol.name:Normal}',
-    -- The following line is needed to fix the background color
-    -- Set it to the lualine section you want to use
-    hl_group = 'lualine_c_normal',
-})
+-- local trouble = require('trouble')
+-- local symbols = trouble.statusline({
+--     mode = 'lsp_document_symbols',
+--     groups = {},
+--     title = false,
+--     filter = { range = true },
+--     format = '{kind_icon}{symbol.name:Normal}',
+--     -- The following line is needed to fix the background color
+--     -- Set it to the lualine section you want to use
+--     hl_group = 'lualine_c_normal',
+-- })
 -- table.insert(_opts.sections.lualine_c, )
 
 -- Trying to display
@@ -73,23 +73,27 @@ require('lualine').setup({
         },
 
         lualine_c = {
-            -- 'lsp_progress',
+            'lsp_progress',
             -- obsession_component,
             -- {'lsp_progress', display_components = { 'lsp_client_name', { 'title', 'percentage', 'message' }}}
             -- ,  gps.get_location, condition = gps.is_available
             -- obsession_status
             -- { '' , type = "lua_expr"}
             --
-            {
-                symbols.get,
-                cond = symbols.has,
-            },
+
+            -- {
+            --     symbols.get,
+            --     cond = symbols.has,
+            -- },
         },
         lualine_x = {
             -- 'encoding', 'fileformat', 'filetype'
             -- obsession_status
         },
-        lualine_y = { 'diagnostics', 'progress' }, -- progress = %progress in file
+        lualine_y = {
+            'diagnostics',
+            'progress',
+        }, -- progress = %progress in file
         lualine_z = {
             obsession_component,
             get_workspace_diagnostic_count,
@@ -104,24 +108,24 @@ require('lualine').setup({
     --	 lualine_y = {},
     --	 lualine_z = {}
     -- },
-	-- tabline is handled by bufferline.nvim
+    -- tabline is handled by bufferline.nvim
     -- tabline = {},
-	winbar = {
-	  lualine_a = {},
-	  lualine_b = {},
-	  lualine_c = {'filename'},
-	  lualine_x = {},
-	  lualine_y = { 'diagnostics', 'progress' },
-	  lualine_z = {}
-	},
+    winbar = {
+        lualine_a = {},
+        lualine_b = {},
+        lualine_c = { 'filename' },
+        lualine_x = {},
+        lualine_y = { 'diagnostics', 'progress' },
+        lualine_z = {},
+    },
 
-	inactive_winbar = {
-	  lualine_a = {},
-	  lualine_b = {},
-	  lualine_c = {'filename'},
-	  lualine_x = {},
-	  lualine_y = {},
-	  lualine_z = {}
-	},
+    inactive_winbar = {
+        lualine_a = {},
+        lualine_b = {},
+        lualine_c = { 'filename' },
+        lualine_x = {},
+        lualine_y = {},
+        lualine_z = {},
+    },
     extensions = { 'fzf', 'fugitive' },
 })

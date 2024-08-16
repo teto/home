@@ -1,0 +1,9 @@
+You can double click any subtitle in the list to seek to it. The double arrow buttons also seek to the next and previous subtitles. You can also use Ctrl+Left and Ctrl+Right to seek to the previous and next subtitle respectively. This last one is an mpv bind. Default binds are documented here and here.
+
+    is it possible to copy/paste from the first subtitle track?
+
+The subtitles are read only and non-selectable. You can copy it to clipboard by double clicking it. Since this is bound to toggling fullscreen by default, I'd recommend disabling that mpv bind if you want to use that feature. There is no way in Memento to only select a portion of the subtitle. The act of moving the cursor over the subtitle triggers searches and searches end up selecting text, so implementing something like that isn't really in the cards.
+
+    By the way, this could be made more discoverable with a context menu.
+
+The last bit of hidden functionality is that Shift+Ctrl+c copies the audio of the current selection in the list. Maybe it's worth adding a context menu to document those secrets.

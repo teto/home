@@ -1,5 +1,5 @@
 {
-  enable = true;
+  enable = false;
   systemdTarget = "sway-session.target";
   settings = {
     verbosity = "INFO";

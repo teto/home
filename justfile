@@ -1,13 +1,12 @@
 # SHELL = bash
 # provide a default
-# MAILDIR ?= $(HOME)/maildir
-# NIXPKGS_REPO ?= ~/nixpkgs
 # Add justfile() function, returning the current justfile, and justfile_directory()
-# NIXPKGS_REPO := x'~/nixpkgs' # only on master
 
 NIXPKGS_REPO := env_var('HOME') / 'nixpkgs'
-DOCTOR_REPO := "/home/teto/nova/doctor"
 BLOG_FOLDER := "${HOME}/blog"
+
+default:
+    just --choose
 
 # loads variables from .env
 
@@ -25,18 +24,20 @@ switch: (nixos-rebuild "switch" "")
 repl: (nixos-rebuild "repl" "")
 
 # --override-input rocks-nvim /home/teto/rocks.nvim
-# TODO check if the paths exists to ease bootstrap ? 
+# TODO check if the paths exists to ease bootstrap ?
 # same for NOVA_OVH1
+
+# --override-input nova /home/teto/nova/doctor \
 [private]
 nixos-rebuild command builders="--option builders \"$NOVA_OVH1\" -j0":
     nixos-rebuild --flake ~/home --override-input nixpkgs {{ NIXPKGS_REPO }} \
-       --override-input hm /home/teto/hm \
-       --override-input nova /home/teto/nova/doctor \
+      --override-input hm /home/teto/hm \
+      --override-input nova-doctor /home/teto/nova/doctor \
        {{ builders }} \
        --no-write-lock-file --show-trace --use-remote-sudo {{ command }}
 
 nixos-bootstrap:
- nom build .#nixosConfigurations.$HOSTNAME.config.system.build.toplevel 
+    nom build .#nixosConfigurations.$HOSTNAME.config.system.build.toplevel 
 
 # nom build
 # nix flake update
@@ -46,7 +47,10 @@ nixos-bootstrap:
 # backup my photo folder
 backup-photos $AWS_ACCESS_KEY_ID=`pass show self-hosting/backblaze-restic-backup-key/username` $AWS_SECRET_ACCESS_KEY=`pass show self-hosting/backblaze-restic-backup-key/password`:
     # le --password-command c'est RESTIC_PASSWORD_FILE
-    restic backup ~/Nextcloud --repository-file=/run/secrets/restic/teto-bucket
+    restic backup ~/Nextcloud --repository-file=~/.config/sops-nix/secrets/restic/teto-bucket
+
+backup-mount:
+    bin/restic-wrapper.sh restic mount ./b2-mount
 
 # Generate system-specific systemd credentials such that they dont appear on the git repo
 systemd-credentials:
@@ -106,13 +110,16 @@ deploy-neotokyo:
 config:
     stow -t {{ config_local_directory() }} config
 
+# symlink home/ dotfiles into $HOME
 home:
-    stow -t {{ config_local_directory() }} config
+    stow --dotfiles -t {{ home_directory() }} home
 
+# symlink bin/ dotfiles into $HOME
 bin:
     mkdir -p "{{ data_directory() }}/../bin"
     stow -t "{{ data_directory() }}/../bin" bin
 
+# symlink to XDG_DATA_HOME
 local:
     stow -t "$(XDG_DATA_HOME)" local
     mkdir -p "{{ data_directory() }}/fzf-history" {{ data_directory() }}/newsbeuter
@@ -124,7 +131,7 @@ routerIso:
     nix build .\#nixosConfigurations.routerIso.config.system.build.isoImage
 
 router-build:
-    nix build .\#nixosConfigurations.routerIso.config.system.build.toplevel
+    nix build .\#nixosConfigurations.router.config.system.build.toplevel
 
 # this shouldn't need to be done !
 cache:
@@ -153,6 +160,15 @@ update-vimPlugins:
       --github-token=$GITHUB_TOKEN \
       --no-commit
 
+# update my luarocks overlay
+update-luarocks-packages:
+    # TODO make it so it works with --commit !
+    nix run {{ NIXPKGS_REPO }}#luarocks-package-updater -- \
+      -i {{ justfile_directory() }}/overlays/luarocks-packages/luarocks-list.csv \
+      -o ${{ justfile_directory() }}/overlays/luarocks-packages/generated.nix \
+      --github-token=$GITHUB_TOKEN \
+      --no-commit
+
 # https://unix.stackexchange.com/questions/74184/how-to-save-current-command-on-zsh
 zsh-load-history:
     hist_file="shell_history.txt"
@@ -167,12 +183,19 @@ nix-check-db:
     sqlite3 /nix/var/nix/db/db.sqlite 'pragma integrity_check'
 
 # receive secrets
-receive-secrets:
-  wormhole-rs receive
+secrets-receive:
+    wormhole-rs receive
 
-secrets:
-  wormhole-rs send ~/.gnupg
-  wormhole-rs send ~/.password-store 
-  wormhole-rs send ~/.ssh
-  wormhole-rs send ~/home/secrets
+# install git hooks
+git-hooks:
+    ln -sf {{ justfile_directory() }}/contrib/pre-push  .git/hooks
 
+secrets-send:
+    # wormhole-rs send ~/.gnupg
+    # wormhole-rs send ~/.password-store 
+    # wormhole-rs send ~/.ssh
+    wormhole-rs send ~/home/secrets
+
+# snippet to regenerate the doc of some project
+panvimdoc:
+    panvimdoc --project-name gp.nvim --vim-version "neovim" --input-file README.md --demojify true --treesitter true --doc-mapping true --doc-mapping-project-name true --dedup-subheadings true

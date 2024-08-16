@@ -11,6 +11,17 @@ restart
 swaymsg reload
 #+END_SRC
 
+
+# Handle virtual monitors
+
+```
+swaymsg create_output
+swaymsg output
+# to make it disappear !
+swaymsg output HEADLESS-1 unplug
+swaymsg output HEADLESS-1 disable
+```
+
 * sway notification center tricks
 swaync-client --reload-config
 

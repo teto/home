@@ -17,7 +17,7 @@
     previewGenerator = true;
     hostName = secrets.jakku.hostname;
     https = false;
-    package = pkgs.nextcloud28;
+    package = pkgs.nextcloud30;
 
     # so I used to have
     # ✗ PHP opcache: The PHP OPcache module is not properly configured. OPcache is not working as it should, opcache_get_status() returns false, please check configuration.
@@ -116,14 +116,32 @@
   };
 
   # create some errors on deploy
-  services.nginx.virtualHosts = {
-    # "cloud.acelpb.com" = {... }
-    # see https://nixos.wiki/wiki/Nextcloud
-    "${secrets.jakku.hostname}" = {
-      forceSSL = true;
-      # https://nixos.org/manual/nixos/stable/index.html#module-security-acme
-      enableACME = true;
-      # enableReload = true; # reloads service when config changes !
+  # for now we generate one certificate per virtual host
+  # https://discourse.nixos.org/t/nixos-nginx-acme-ssl-certificates-for-multiple-domains/19608/2
+  services.nginx = {
+
+    # ceeformat is unknown ?
+    virtualHosts = {
+
+      # see https://nixos.wiki/wiki/Nextcloud
+      # extends the already configured by the nixos module nginx
+      # https://betterstack.com/community/questions/what-is-the-difference-between-host-http-host-server-name-variable-nginx/
+      # server_name is  typically used to match the server block in the Nginx configuration based on the incoming request.
+      "${secrets.jakku.hostname}" = {
+        forceSSL = true;
+
+        # proxyWebsockets = true
+        # https://nixos.org/manual/nixos/stable/index.html#module-security-acme
+        enableACME = true;
+        # enableReload = true; # reloads service when config changes !
+
+        # listen = [ 80 ];
+        # listen = [ { addr = "127.0.0.1"; port = 80; }];
+        # locations."/" = {
+        #   proxyPass = "http://localhost:8080"; # Assuming service 1 runs on localhost:8080
+        # };
+      };
+
     };
   };
 
@@ -135,7 +153,7 @@
 
   # This is using an age key that is expected to already be in the filesystem
   # sops.age.keyFile = "/home/teto/.config/sops/age/keys.txt";
-  sops.secrets."nextcloud/tetoPassword" = {
+  sops.secrets."nextcloud/tetoPassword" = lib.mkIf config.services.nextcloud.enable {
     mode = "0440";
     # TODO only readable by gitlab
     owner = config.users.users.nextcloud.name;

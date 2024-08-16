@@ -19,7 +19,7 @@
     ../nixos/accounts/root/root.nix
     ../nixos/accounts/teto/teto.nix
     ../nixos/profiles/ntp.nix
-    ../nixos/profiles/neovim.nix
+    # ../nixos/profiles/neovim.nix
   ];
 
   boot.tmp.cleanOnBoot = true; # to clean /tmp on reboot
@@ -27,6 +27,7 @@
     # alternatively one can run journalctl --vacuum-time=2d
     SystemMaxUse=2G
   '';
+
   # see https://github.com/NixOS/nixpkgs/issues/15293
 
   # Set your time zone.
@@ -49,12 +50,9 @@
       binutils
       curl
       fd # replaces 'find'
-      just
       file
       fzf
-      gitAndTools.gitFull # to get send-email
-      gnumake
-      htop
+      # htop
       lsof
       sudo
       wget

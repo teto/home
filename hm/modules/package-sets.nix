@@ -17,12 +17,15 @@ in
     package-sets = {
 
       desktop = mkEnableOption "desktop packages";
-      enableServerPackages = mkEnableOption "server packages";
-
-      enableOfficePackages = mkEnableOption "office/heavy packages";
+      server = mkEnableOption "server packages";
 
       developer = mkEnableOption "Developer packages";
+
+      kubernetes = mkEnableOption "Kubernetes packages";
+
       scientificSoftware = mkEnableOption "Scientific packages";
+
+      enableOfficePackages = mkEnableOption "office/heavy packages";
       enableDesktopGUIPackages = mkEnableOption "Heavy desktop packages";
       # TODO convert into description
       # the kind of packages u don't want to compile
@@ -35,7 +38,10 @@ in
       enableGaming = mkEnableOption "Gaming packages";
       waylandPackages = mkEnableOption "Wayland packages";
 
+      llms = mkEnableOption "IA/Large language model packages";
       # laptop = mkEnableOption "Laptop packages (energy + wifi)";
+
+      japanese = mkEnableOption "Japanese stuff";
 
     };
 
@@ -52,22 +58,17 @@ in
         gnumake
         tree
         stow
+        systemctl-tui
         pciutils # for lspci
         # zenith  # resources monitor
       ];
     })
+    (mkIf cfg.llms {
+      home.packages = [
 
-    ({
-      home.packages = with pkgs; [
-
-        sublime3
-        translate-shell # call with `trans`
-        unzip
-        wireshark
-        wttrbar # for meteo
-        xarchiver # to unpack/pack files
+        # pkgs.aider-chat  # breaks
+        pkgs.python3Packages.huggingface-hub
       ];
-
     })
 
     (mkIf cfg.desktop {
@@ -154,7 +155,7 @@ in
           noti # send notifications when a command finishes
           ouch # to (de)compress files
           # papis # library manager
-          pass-teto # pass with extensions
+          (lib.hiPrio pass-teto) # pass with extensions, override nova's
           pavucontrol
           pkgs.networkmanagerapplet # should
           procs # Rust replacement for 'ps'
@@ -177,6 +178,8 @@ in
           xarchiver # to unpack/pack files
           xdg-utils
           xdg-terminal-exec # necessary for gio launch to launch terminal
+
+          xwayland-satellite # to launch X applications within wayland (and without a full Xwayland ?)
 
         ];
 
@@ -202,13 +205,13 @@ in
         # khard # see khal.nix instead ?
         # libsecret  # to consult
         # newsboat #
+        immich-cli
         mujmap # to sync notmuch tags across jmap
+        # signal-desktop # installe a la main
         # memento # broken capable to display 2 subtitles at same time
-        vlc
         # leafnode dovecot22 dovecot_pigeonhole fetchmail procmail w3m
         # mairix mutt msmtp lbdb contacts spamassassin
         # element-desktop # TODO this should go into nix profile install
-        popcorntime
 
       ];
 
@@ -217,7 +220,6 @@ in
     (mkIf cfg.enableDesktopGUIPackages {
       home.packages = with pkgs; [
         hakuneko
-
         memento # broken capable to display 2 subtitles at same time
         vlc
         # leafnode dovecot22 dovecot_pigeonhole fetchmail procmail w3m
@@ -240,13 +242,23 @@ in
     })
 
     (mkIf cfg.developer {
+      home.packages = [
+        pkgs.k9s
+        pkgs.kubectl
+        pkgs.serie
+      ];
+    })
+
+    (mkIf cfg.developer {
       home.packages = with pkgs; [
         automake
+        cargo
         (backblaze-b2.override ({ execName = "b2"; }))
         dasht # ~ zeal but in terminal
         docker-credential-helpers
-        envsubst # replace templated files with variables
+        gettext # for envsubst (TO NOT CONFOUND with gettext's envsubst)
         sops # password 'manager'
+        glab # gitlab cli
         # TODO pass to vim makeWrapperArgs
         # nodePackages.bash-language-server
         # just in my branch :'(
@@ -259,6 +271,7 @@ in
 
         nix-diff
         nix-prefetch-git
+        nix-tree
         netcat-gnu # plain 'netcat' is the bsd one
         gitAndTools.diff-so-fancy
         jq
@@ -270,10 +283,14 @@ in
         fswatch # fileevent watcher
         fx # json reader
         gdb
+        gnupg
         gnum4 # hum
         # psmisc # ps -a for python ?
         rbw
         util-linux # for lsns (namespace listing)
+        just
+        gitAndTools.gitFull # to get send-email
+        gnumake
 
         # haxe # to test neovim developement
         eza # to list files
@@ -294,6 +311,7 @@ in
 
         perf-tools # to interpret
 
+        inotify-info # to debug filewatching issues, very nice
         inotify-tools # for inotify-wait notably
         ncurses.dev # for infocmp
         # neovide
@@ -311,6 +329,7 @@ in
         # rpl # to replace strings across files
         strace
         tio # serial console reader
+        tig
         universal-ctags # there are many different ctags, be careful !
         whois
         zeal # doc for developers
@@ -345,7 +364,7 @@ in
     (mkIf cfg.waylandPackages {
       home.packages = with pkgs; [
         cliphist
-        clipcat # rust
+        # clipcat # rust broken
 
         # TODO test https://github.com/sentriz/cliphist
         foot # terminal
@@ -374,6 +393,24 @@ in
         wl-gammactl # to control gamma
         wlr-randr # like xrandr
 
+        swayidle
+        swayr # window selector
+        swaycons # show icon on windows
+        # swayhide
+        # sway-easyfocus # not packaged yet
+        # swayrst #  https://github.com/Nama/swayrst # not packaged yet
+
+        # sway overview, draws layouts for each workspace: dope https://github.com/milgra/sov
+        # sov  
+        nwg-bar # locks nothing
+        nwg-drawer # launcher
+        nwg-menu
+        nwg-dock # a nice dock
+        swaylock-effects # offers sexier
+        sway-contrib.grimshot # contains "grimshot" for instance
+        shotman # -c region
+        tessen # handle passwords
+        waybar
         # wayprompt
         wev # equivalent of xev, to find the name of keys for instance
         wshowkeys
@@ -381,10 +418,28 @@ in
 
       ];
     })
+
     (mkIf cfg.energy {
       home.packages = [
         pkgs.powertop # superuseful
         pkgs.pcm
+      ];
+
+    })
+
+    (mkIf cfg.japanese {
+      home.packages = with pkgs; [
+        # pkgs.powertop # superuseful
+        # pkgs.pcm
+        pkgs.python3Packages.manga_ocr
+        tagainijisho # japanse dict; like zkanji Qt based
+        # ${config.system}
+        # flakeInputs.vocage.packages."x86_64-linux".vocage
+        # jiten # unfree, helpful for jap.nvim
+        sudachi-rs # a japanese tokenizer
+        sudachidict
+        # sudachi-rs
+        kanji-stroke-order-font # for memento
       ];
 
     })

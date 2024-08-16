@@ -20,8 +20,6 @@ let
   sharedConfig = pkgs.callPackage ./wm-config.nix { };
 
   myLib = pkgs.tetoLib;
-  # pkgs.callPackage ../lib.nix { };
-
 in
 # TODO load sway folder via haumea
 {
@@ -32,27 +30,10 @@ in
   # replaced with  package-sets.wayland
   package-sets.waylandPackages = true;
 
-  home.packages = with pkgs; [
-    swayidle
-    swayr # window selector
-    swaycons # show icon on windows
-    # swayhide
-    # sway-easyfocus # not packaged yet
-    # swayrst #  https://github.com/Nama/swayrst # not packaged yet
-
-    # sway overview, draws layouts for each workspace: dope https://github.com/milgra/sov
-    # sov  
-    nwg-bar # locks nothing
-    nwg-drawer # launcher
-    nwg-menu
-    nwg-dock # a nice dock
-    swaylock-effects # offers sexier
-    sway-contrib.grimshot # contains "grimshot" for instance
-    shotman # -c region
-    tessen # handle passwords
-    waybar
-    # eventually ironbar
-  ];
+  # home.packages = with pkgs; [
+  #   # waybar
+  #   # eventually ironbar
+  # ];
 
   ### swayr configuration {{{
   programs.swayr = {
@@ -87,6 +68,8 @@ in
 
     # package = pkgs.swayfx;
     # package = pkgs.sway-unwrapped;
+
+    checkConfig = false;
 
     config = {
       terminal = term;
@@ -189,9 +172,17 @@ in
       output = {
         # todo put a better path
         # example = { "HDMI-A-2" = { bg = "~/path/to/background.png fill"; }; };
+        # example = { "HDMI-A-2" = { bg = "~/path/to/background.png fill"; }; };
+       #         Some outputs may have different names when disconnecting and reconnecting. To identify these, the name can be substituted for a string consisting of the make, model and serial which you can get from swaymsg -t get_outputs. Each value must be  sepa‐ rated by one space. For example:
+       #     output "Some Company ABC123 0x00000000" pos 1920 0
+        "HDMI-A-1" = {
+          bg = "${../../wallpapers/toureiffel.jpg} fill";
+
+        };
 
         #  "/home/teto/home/wallpapers/nebula.jpg fill"
         "*" = {
+          adaptive_sync = "off";
           bg = "${../../wallpapers/nebula.jpg} fill";
         };
 
@@ -288,14 +279,6 @@ in
     #       include ~/.config/i3/config.shared
 
     extraConfig = ''
-      # Use Mouse+$mod to drag floating windows to their wanted position
-      floating_modifier $mod
-
-      bindsym button2 kill
-
-      # Generated windows.
-      for_window [title="(?:Open|Save) (?:File|Folder|As)"] floating enable;
-      for_window [title="(?:Open|Save) (?:File|Folder|As)"] resize set 800 600
 
       # timeout in ms
       include ~/.config/sway/manual.config

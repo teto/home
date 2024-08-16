@@ -1,4 +1,0 @@
-
-# to merge 2 fodlers, use :
-
-rsync -a /path/to/source/ /path/to/destination

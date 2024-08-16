@@ -94,19 +94,17 @@
 
     distributedBuilds = true;
 
-    # package = pkgs.nixVersions.nix_2_23;
-    package = flakeInputs.nix.packages.${pkgs.system}.nix;
+    package = pkgs.nixVersions.nix_2_24;
+    # package = flakeInputs.nix.packages.${pkgs.system}.nix;
     # .nixVersions.nix_2_23;
 
     # added to nix.conf
     # experimental-features = nix-command flakes
-    extraOptions = ''
-      keep-outputs = true       # Nice for developers
-      keep-derivations = true   # Idem
-      keep-failed = true
+    # extraOptions = ''
+    #   keep-outputs = true       # Nice for developers
+    #
+    # '';
 
-      experimental-features = nix-command flakes auto-allocate-uids
-    '';
     #  to keep build-time dependencies around => rebuild while being offline
     # extraOptions = ''
     #   gc-keep-outputs = true
@@ -121,6 +119,13 @@
     # "https://teto.cachix.org"
     settings = {
       builders-use-substitutes = true;
+      use-xdg-base-directories = true;
+
+      keep-outputs = true; # Nice for developers
+      keep-derivations = true; # Idem
+      keep-failed = true;
+      # experimental-features = nix-command flakes auto-allocate-uids
+      extra-experimental-features = "auto-allocate-uids nix-command flakes cgroups";
       extra-substituters = [
         # "https://cache.nixos.org/" # part of the default
         "https://jupyterwith.cachix.org"

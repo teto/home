@@ -1,14 +1,15 @@
+# shellcheck shell=bash
 alias n="nix develop"
 alias nb='nix build'
 alias nb1='nix build --option builders "$NOVA_OVH1" -j0'
 alias n1='nix develop --option builders "$NOVA_OVH1" -j0'
-alias n2='nix develop --option builders "$NOVA_AZURE2" -j0'
+alias n2='nix develop --option builders "$NOVA_CAMPUS1" -j0'
 # alias n3='nix develop --option builders "$NOVA_AZURE2" -j0'
 
 # Haskell related aliases{{{
-alias nhs92="nix develop \$HOME/home#nhs92"
-alias nhs94="nix develop \$HOME/home#nhs94"
-alias nhs96="nix develop \$HOME/home#nhs96"
+# alias nhs92="nix develop \$HOME/home#nhs92"
+# alias nhs94="nix develop \$HOME/home#nhs94"
+# alias nhs96="nix develop \$HOME/home#nhs96"
 alias nhs98="nix develop \$HOME/home#nhs98"
 alias nhs910="nix develop \$HOME/home#nhs910"
 alias nhs912="nix develop \$HOME/home#nhs912"
@@ -18,7 +19,7 @@ alias nhs912="nix develop \$HOME/home#nhs912"
 # alias nall='nix develop --option builders "$NOVA_OVH1" -j0'
 alias nr="nix run "
 alias nr1='nix run --option builders "$NOVA_OVH1" -j0'
-alias nr2='nix run --option builders "$NOVA_AZURE2" -j0'
+alias nr2='nix run --option builders "$NOVA_CAMPUS1" -j0'
 alias nl="nix log "
 alias g="git"
 alias y=yazi
@@ -70,6 +71,7 @@ alias l.="eza -a | grep -E '^\.'"
 # alias c="cat"
 # alias v="nvim"
 #alias n="nvim"
+# TODO alias to meli
 alias m="neomutt -F \"\$XDG_CONFIG_HOME/mutt/muttrc\""
 # view uses vim as a pager
 alias l="nvim +view"

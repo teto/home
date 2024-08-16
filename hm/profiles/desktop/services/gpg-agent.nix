@@ -4,7 +4,7 @@
   enable = true;
   defaultCacheTtl = 7200;
   # maxCacheTtl
-  enableSshSupport = true;
+  enableSshSupport = false; # too confusing for now
   # grabKeyboardAndMouse= false;
   grabKeyboardAndMouse = false; # should be set to false instead
   # default-cache-ttl 60

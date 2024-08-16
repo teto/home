@@ -9,6 +9,9 @@ build/
 .nixos-test-history  # nixos test-driver repl history
 .*.vim
 
+# gp.nvim cache
+.gp.md 
+
 __pad__
 
 *.jsonzlib
@@ -76,6 +79,11 @@ Session.vim
 *.tar
 *.zip
 *.deb
+
+
+# media {{{
+*.mkv
+# }}}
 
 # Logs and databases {{{
 *.log

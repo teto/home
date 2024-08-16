@@ -19,10 +19,11 @@
     mode = "enabled";
   };
   settings = {
-
+    update_check_interval = 0; # set to 0 to disable (in hours)
     # bold_font = "auto";
     # italic_font = "auto";
     # bold_italic_font = "auto";
+    confirm_os_window_close = 0;
 
     font_size = 12;
     url_style = "curly";

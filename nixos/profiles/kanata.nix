@@ -38,6 +38,7 @@ in
 
   systemd.services.kanata-foo.serviceConfig = {
     ProtectHome = lib.mkForce "tmpfs";
+    DynamicUser = false;
     BindReadOnlyPaths = mainConfig;
   };
 

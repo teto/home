@@ -7,10 +7,10 @@
 {
   "10ten-ja-reader" = buildFirefoxXpiAddon {
     pname = "10ten-ja-reader";
-    version = "1.19.1";
+    version = "1.21.1";
     addonId = "{59812185-ea92-4cca-8ab7-cfcacee81281}";
-    url = "https://addons.mozilla.org/firefox/downloads/file/4299897/10ten_ja_reader-1.19.1.xpi";
-    sha256 = "e7e6ac877da00a8b08b68f265665a6317febdbb692350031fb133fcc2e92dd88";
+    url = "https://addons.mozilla.org/firefox/downloads/file/4355635/10ten_ja_reader-1.21.1.xpi";
+    sha256 = "81d85cfdc03cb0c921cac84547e7a7a539af11ff9a81dd901b3f3bfa67ba45f1";
     meta = with lib; {
       homepage = "https://github.com/birchill/10ten-ja-reader/";
       description = "Quickly translate Japanese by hovering over words. Formerly released as Rikaichamp.";
@@ -31,10 +31,10 @@
   };
   "bitwarden" = buildFirefoxXpiAddon {
     pname = "bitwarden";
-    version = "2024.6.2";
+    version = "2024.9.1";
     addonId = "{446900e4-71c2-419f-a6a7-df9c091e268b}";
-    url = "https://addons.mozilla.org/firefox/downloads/file/4305759/bitwarden_password_manager-2024.6.2.xpi";
-    sha256 = "c064e2d6601cb921ecd154e0d3bfd54d71af43da1947aa51666877ef0afd1436";
+    url = "https://addons.mozilla.org/firefox/downloads/file/4355865/bitwarden_password_manager-2024.9.1.xpi";
+    sha256 = "f484fbcd1e45e4a68f2eec8fb8c22fed5a77f1a00b515f38c167e36b4d6118bf";
     meta = with lib; {
       homepage = "https://bitwarden.com";
       description = "At home, at work, or on the go, Bitwarden easily secures all your passwords, passkeys, and sensitive information.";
@@ -49,6 +49,7 @@
         "clipboardRead"
         "clipboardWrite"
         "idle"
+        "alarms"
         "webRequest"
         "webRequestBlocking"
         "webNavigation"
@@ -86,10 +87,10 @@
   };
   "darkreader" = buildFirefoxXpiAddon {
     pname = "darkreader";
-    version = "4.9.86";
+    version = "4.9.94";
     addonId = "addon@darkreader.org";
-    url = "https://addons.mozilla.org/firefox/downloads/file/4295557/darkreader-4.9.86.xpi";
-    sha256 = "dde9896751858d0179f3d724a59f2bd4a0d61e599cb8822dc8ed2de320510714";
+    url = "https://addons.mozilla.org/firefox/downloads/file/4359254/darkreader-4.9.94.xpi";
+    sha256 = "251c4e7d0a30c0cab006803600e59ab92dcc0c606429740d42677846d4c9ccd6";
     meta = with lib; {
       homepage = "https://darkreader.org/";
       description = "Dark mode for every website. Take care of your eyes, use dark theme for night and daily browsing.";
@@ -219,10 +220,10 @@
   };
   "multi-account-containers" = buildFirefoxXpiAddon {
     pname = "multi-account-containers";
-    version = "8.1.3";
+    version = "8.2.0";
     addonId = "@testpilot-containers";
-    url = "https://addons.mozilla.org/firefox/downloads/file/4186050/multi_account_containers-8.1.3.xpi";
-    sha256 = "33edd98d0fc7d47fa310f214f897ce4dfe268b0f868c9d7f32b4ca50573df85c";
+    url = "https://addons.mozilla.org/firefox/downloads/file/4355970/multi_account_containers-8.2.0.xpi";
+    sha256 = "1ce35650853973572bc1ce770076d93e00b6b723b799f7b90c3045268c64b422";
     meta = with lib; {
       homepage = "https://github.com/mozilla/multi-account-containers/#readme";
       description = "Firefox Multi-Account Containers lets you keep parts of your online life separated into color-coded tabs. Cookies are separated by container, allowing you to use the web with multiple accounts and integrate Mozilla VPN for an extra layer of privacy.";
@@ -247,10 +248,10 @@
   };
   "refined-github" = buildFirefoxXpiAddon {
     pname = "refined-github";
-    version = "24.6.21";
+    version = "24.10.1";
     addonId = "{a4c4eda4-fb84-4a84-b4a1-f7c1cbf2a1ad}";
-    url = "https://addons.mozilla.org/firefox/downloads/file/4307292/refined_github-24.6.21.xpi";
-    sha256 = "0e377404047a430cc359e8c645c0274746f390a8b73a3eaaf4651433b9c24e31";
+    url = "https://addons.mozilla.org/firefox/downloads/file/4362555/refined_github-24.10.1.xpi";
+    sha256 = "d922b9094365977860ec490d66fa96b004bb8446084930111514b2d8a6143c1d";
     meta = with lib; {
       homepage = "https://github.com/refined-github/refined-github";
       description = "Simplifies the GitHub interface and adds many useful features.";
@@ -262,6 +263,7 @@
         "activeTab"
         "alarms"
         "https://github.com/*"
+        "https://api.github.com/*"
         "https://gist.github.com/*"
       ];
       platforms = platforms.all;
@@ -336,10 +338,10 @@
   };
   "tree-style-tab" = buildFirefoxXpiAddon {
     pname = "tree-style-tab";
-    version = "4.0.18";
+    version = "4.0.23";
     addonId = "treestyletab@piro.sakura.ne.jp";
-    url = "https://addons.mozilla.org/firefox/downloads/file/4302180/tree_style_tab-4.0.18.xpi";
-    sha256 = "4e619c4d7ff604a93db483ad66d4b0a9ef5832255541115c0e9d280608ab8f76";
+    url = "https://addons.mozilla.org/firefox/downloads/file/4350896/tree_style_tab-4.0.23.xpi";
+    sha256 = "d8061eff00b56ccfdd6fd290b14ef2c8ef692a14eb8db1a27529f21e43df1f30";
     meta = with lib; {
       homepage = "http://piro.sakura.ne.jp/xul/_treestyletab.html.en";
       description = "Show tabs like a tree.";
@@ -361,10 +363,10 @@
   };
   "ublock-origin" = buildFirefoxXpiAddon {
     pname = "ublock-origin";
-    version = "1.58.0";
+    version = "1.60.0";
     addonId = "uBlock0@raymondhill.net";
-    url = "https://addons.mozilla.org/firefox/downloads/file/4290466/ublock_origin-1.58.0.xpi";
-    sha256 = "470c56994a7174db21578adce598b158a5dc0970c87c5cfe889ac632bd3085ea";
+    url = "https://addons.mozilla.org/firefox/downloads/file/4359936/ublock_origin-1.60.0.xpi";
+    sha256 = "e2cda9b2a1b0a7f6e5ef0da9f87f28df52f8560587ba2e51a3003121cfb81600";
     meta = with lib; {
       homepage = "https://github.com/gorhill/uBlock#ublock-origin";
       description = "Finally, an efficient wide-spectrum content blocker. Easy on CPU and memory.";

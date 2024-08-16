@@ -1,0 +1,60 @@
+[settings]
+mouse_mode = true
+
+[keybindings.Menu]
+"<Ctrl-c>" = "Quit"
+"q" = "AbortQuery"
+"<Alt-1>" = "FocusMenu"
+"<Alt-2>" = "FocusEditor"
+"<Alt-3>" = "FocusData"
+"<Alt-4>" = "FocusHistory"
+"<Ctrl-k>" = "FocusMenu"
+"<Ctrl-j>" = "FocusEditor"
+"<Ctrl-h>" = "FocusData"
+"<Ctrl-g>" = "FocusHistory"
+"<Tab>" = "CycleFocusForwards"
+"<Backtab>" = "CycleFocusBackwards"
+
+[keybindings.Editor]
+"<Alt-q>" = "AbortQuery"
+"<F5>" = "SubmitEditorQuery"
+"<Alt-1>" = "FocusMenu"
+"<Alt-2>" = "FocusEditor"
+"<Alt-3>" = "FocusData"
+"<Alt-4>" = "FocusHistory"
+"<Ctrl-k>" = "FocusMenu"
+"<Ctrl-j>" = "FocusEditor"
+"<Ctrl-h>" = "FocusData"
+"<Ctrl-g>" = "FocusHistory"
+"<Backtab>" = "CycleFocusBackwards"
+
+[keybindings.History]
+"<Ctrl-c>" = "Quit"
+"q" = "AbortQuery"
+"<Alt-1>" = "FocusMenu"
+"<Alt-2>" = "FocusEditor"
+"<Alt-3>" = "FocusData"
+"<Alt-4>" = "FocusHistory"
+"<Ctrl-k>" = "FocusMenu"
+"<Ctrl-j>" = "FocusEditor"
+"<Ctrl-h>" = "FocusData"
+"<Ctrl-g>" = "FocusHistory"
+"<Tab>" = "CycleFocusForwards"
+"<Backtab>" = "CycleFocusBackwards"
+
+[keybindings.Data]
+"<Ctrl-c>" = "Quit"
+"q" = "AbortQuery"
+"<Alt-1>" = "FocusMenu"
+"<Alt-2>" = "FocusEditor"
+"<Alt-3>" = "FocusData"
+"<Alt-4>" = "FocusHistory"
+"<Ctrl-k>" = "FocusMenu"
+"<Ctrl-j>" = "FocusEditor"
+"<Ctrl-h>" = "FocusData"
+"<Ctrl-g>" = "FocusHistory"
+"<Tab>" = "CycleFocusForwards"
+"<Backtab>" = "CycleFocusBackwards"
+
+[keybindings.PopUp]
+"<Ctrl-c>" = "Quit"

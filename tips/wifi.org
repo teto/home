@@ -1,2 +1,27 @@
 
+
+* see current configuration
+
+iwconfig wlan0
+
+iwlist channel
+sudo iwconfig wlo1 channel 40
+wont work if the interface is marked "Managed"
+
+sudo rfkill block 0
+networkctl up wlan0
+
+* iwd:
+
+/etc/iwd/main.conf
+
+[General]
+RoamThreshold=-75
+RoamThreshold5G=-80
+
+iwctl station wlan0 show       
+BandModifier5Ghz
+station wlan0 scan
+
 iwctl# station wlan0 connect <SSID>
+

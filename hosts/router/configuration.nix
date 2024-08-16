@@ -21,6 +21,7 @@
   pkgs,
   secrets,
   flakeInputs,
+  flakeSelf,
   ...
 }:
 let
@@ -51,9 +52,9 @@ in
     flashrom # to be able to flash the bios see https://teklager.se/en/knowledge-base/apu-bios-upgrade/
     dmidecode # to get version of the bios: dmidecode -t bios
     bridge-utils
-    wirelesstools
+    iw
     iwd # contains iwmon
-    pkgs.wirelesstools # to get iwconfig
+    # pkgs.wirelesstools # to get iwconfig
     pkgs.tshark
     pkgs.wget
   ];
@@ -67,11 +68,14 @@ in
   home-manager.users.teto = {
     # TODO it should load the whole folder
     imports = [
+      flakeSelf.homeModules.teto-nogui
       # ./teto/home.nix
       ./teto/nix.nix
       ../../hm/profiles/zsh.nix
       ../../hm/profiles/neovim.nix
     ];
+
+    package-sets.wifi = true;
   };
 
   services.journald.extraConfig = ''
@@ -129,7 +133,8 @@ in
   ];
 
   nix = {
-    package = pkgs.nixVersions.nix_2_22;
+    # nix_2_24 ?
+    # package = pkgs.nixVersions.nix_2_22;
 
     extraOptions = ''
       experimental-features = nix-command flakes
@@ -341,6 +346,8 @@ in
       scanOnLowSignal = false; # consume less energy and we dont roam anyway
       # enable = true;
       # userControlled.enable = true;
+
+      # checkout man iwd.config
       iwd = {
         enable = true;
         # https://iwd.wiki.kernel.org/networkconfigurationsettings
@@ -352,6 +359,23 @@ in
           Network = {
             EnableIPv6 = false;
           };
+
+          Rank = {
+            # supposed to be the default
+            BandModifier5Ghz = 1;
+          };
+          Scan = {
+
+            DisablePeriodicScan = true;
+            # supp
+
+          };
+
+          # DriverQuirks = {
+          #
+          # };
+          # IpV4
+          # APAddressPool
           # Security = {
           #   Passphrase = secrets.router.password;
           # };
@@ -395,5 +419,5 @@ in
 
   time.timeZone = "Europe/Paris";
 
-  system.stateVersion = "23.11";
+  system.stateVersion = "24.05";
 }

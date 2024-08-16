@@ -9,35 +9,73 @@ local has_fzf_lua, fzf_lua = pcall(require, 'fzf-lua')
 -- set to true to enable it
 local use_fzf_lua = has_fzf_lua and false
 local use_telescope = not use_fzf_lua
-local has_luasnip, ls = pcall(require, 'luasnip')
-local use_luasnip = has_luasnip and true
+-- local has_luasnip, ls = pcall(require, 'luasnip')
+-- local use_luasnip = has_luasnip and true
 
-local has_gitsigns, gitsigns = pcall(require, 'gitsigns')
+-- local has_gitsigns, gitsigns = pcall(require, 'gitsigns')
 
 local map = vim.keymap.set
 
 local nix_deps = require('generated-by-nix')
 
+-- TODO remove in favor of the generated one
 vim.g.sqlite_clib_path = nix_deps.sqlite_clib_path
 
--- -- require("vim.lsp._watchfiles")._watchfunc = require("vim._watch").watch
+-- set it before loading vim plugins like autosession
+-- ,localoptions
+vim.o.sessionoptions = 'buffers,curdir,help,tabpages,winsize,winpos,localoptions'
+
+-- vim.opt.rtp:prepend(os.getenv('HOME') .. '/rocks-dev.nvim')
+vim.opt.rtp:prepend(os.getenv('HOME') .. '/rocks.nvim')
+
+-- require("vim.lsp._watchfiles")._watchfunc = require("vim._watch").watch
 -- local ffi = require 'ffi'
--- vim.g.luarocks_binary = "/nix/store/5j4av7r2aivkgcpqfr5z9zg1p45ga760-luarocks_bootstrap-3.11.0/bin/luarocks"
-local luarocks_config_fn = assert(loadfile(vim.fn.stdpath('config') .. '/luarocks-config-generated.lua'))
--- local f = assert(loadfile(filename))
--- return f()
+local custom_luarocks_config_filename = vim.fn.stdpath('config') .. '/luarocks-config-generated.lua'
+-- print("Loading custom luarocks config from: "..custom_luarocks_config_filename)
+local luarocks_config_fn, errmsg = loadfile(custom_luarocks_config_filename)
+
+if luarocks_config_fn == nil then
+    print('Could not load ' .. errmsg)
+end
+
+-- function
+-- print(tostring(luarocks_config_fn))
+-- vim.print(tostring(luarocks_config_fn()))
 vim.g.rocks_nvim = {
-	-- this is the default -- , luarocks_config = "~/.local/share/nvim/rocks/luarocks-config.lua" -- , luarocks_config = vim.fn.stdpath('config')..'/luarocks-config-generated.lua'
-	-- TODO reference one from
-	-- use nix_deps.luarocks_executable
+    -- TODO reference one from
+    -- use nix_deps.luarocks_executable
     luarocks_binary = nix_deps.luarocks_executable,
-    luarocks_config = luarocks_config_fn(), -- , luarocks_config = nil
+    -- /home/teto/.local/share/nvim/rocks/luarocks-config.lua
+    luarocks_config = luarocks_config_fn(),
     _log_level = vim.log.levels.TRACE,
+
+    -- checkout constants.DEFAULT_DEV_SERVERS
+    servers = { 'https://luarocks.org/manifests/neorocks/' },
+
     lazy = true, -- for cleaner logs
+    -- rocks.nvim config
+    treesitter = {
+        auto_highlight = {},
+        auto_install = 'prompt',
+        parser_map = {},
+        ---@type string[] | fun(lang: string, bufnr: integer):boolean
+
+        -- filetypes or a function
+        disable = {
+            'lhaskell',
+        },
+    },
 }
 
+local has_avante, avante_mod = pcall(require, 'avante')
+if has_avante then
+    require('avante_lib').load()
+    avante_mod.setup({
+        -- Your config here!
+    })
+end
+
 -- vim.opt.packpath:prepend('/home/teto/gp.nvim2')
--- local gp_defaults = require'gp.defaults'
 
 -- vim.g.baleia = require("baleia").setup({ })
 -- -- Command to colorize the current buffer
@@ -45,21 +83,25 @@ vim.g.rocks_nvim = {
 -- 	vim.g.baleia.once(vim.api.nvim_get_current_buf())
 -- end, { bang = true })
 
--- Command to show logs 
+-- Command to show logs
 -- vim.api.nvim_create_user_command("BaleiaLogs", vim.g.baleia.logger.show, { bang = true })
 
 -- TODO prefix with gp_defaults.
-local chat_system_prompt = "You are a general AI assistant.\n\n"
-	.. "The user provided the additional info about how they would like you to respond:\n\n"
-	.. "- If you're unsure don't guess and say you don't know instead.\n"
-	.. "- Ask question if you need clarification to provide better answer.\n"
-	.. "- Think deeply and carefully from first principles step by step.\n"
-	.. "- Zoom out first to see the big picture and then zoom in to details.\n"
-	.. "- Use Socratic method to improve your thinking and coding skills.\n"
-	.. "- Don't elide any code from your output if the answer requires coding.\n"
-	.. "- Take a deep breath; You've got this!\n"
--- 
-vim.g.gpt_prompt = {
+-- local defaults = require('gp.defaults')
+--
+-- local chat_system_prompt = defaults.chat_system_prompt
+
+local chat_system_prompt = 'You are a general AI assistant.\n\n'
+    .. 'The user provided the additional info about how they would like you to respond:\n\n'
+    .. "- If you're unsure don't guess and say you don't know instead.\n"
+    .. '- Ask question if you need clarification to provide better answer.\n'
+    .. '- Think deeply and carefully from first principles step by step.\n'
+    .. '- Zoom out first to see the big picture and then zoom in to details.\n'
+    .. '- Use Socratic method to improve your thinking and coding skills.\n'
+    .. "- Don't elide any code from your output if the answer requires coding.\n"
+    .. "- Take a deep breath; You've got this!\n"
+
+vim.g.gp_nvim = {
     agents = {
         -- unpack(default_config.agents),
         -- Disable ChatGPT 3.5
@@ -96,9 +138,13 @@ vim.g.gpt_prompt = {
         -- },
     },
     -- image_dir = (os.getenv("TMPDIR") or os.getenv("TEMP") or "/tmp") .. "/gp_images",
-    image_dir = vim.fn.stdpath('cache') .. '/gp_images',
-    whisper_dir = vim.fn.stdpath('cache') .. '/gp_whisper',
-    whisper_language = 'en',
+    image = {
+        store_dir = vim.fn.stdpath('cache') .. '/gp_images',
+    },
+    whisper = {
+        store_dir = vim.fn.stdpath('cache') .. '/gp_whisper',
+        language = 'en',
+    },
 
     -- chat_agents = agents,
     -- openai_api_endpoint = "http://localhost:8080/v1/chat/completions",
@@ -116,6 +162,7 @@ vim.g.gpt_prompt = {
         },
         -- ollama = {},
         localai = {
+            secret = '',
             endpoint = 'http://localhost:11111/v1/chat/completions',
         },
         googleai = {
@@ -128,14 +175,7 @@ vim.g.gpt_prompt = {
             secret = os.getenv('ANTHROPIC_API_KEY'),
         },
     },
-
 }
-
-vim.opt.rtp:prepend(os.getenv('HOME') .. '/rocks.nvim')
-
--- vim.g.rocks_nvim = {
--- 	-- _log_level = vim.log.levels.INFO
--- }
 
 vim.g.loaded_matchit = 1
 vim.opt.shortmess:append('I')
@@ -189,11 +229,6 @@ vim.opt.termguicolors = true
 -- that's where treesitter installs grammars
 vim.opt.rtp:prepend('/home/teto/parsers')
 -- vim.opt.rtp:prepend(lazypath)
-
--- set it before loading vim plugins like autosession
--- ,localoptions
-vim.o.sessionoptions = 'buffers,curdir,help,tabpages,winsize,winpos'
--- vim.o.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 
 -- lazy/config.lua sets vim.go.loadplugins = false so I used to run packloadall to restore those plugins
 -- but there seems to be a bug somewhere as overriding VIMRUNTIME would then be dismissed and it would used
@@ -487,7 +522,7 @@ vim.api.nvim_create_autocmd('ColorScheme', {
     desc = 'Set italic codelens on new colorschemes',
     callback = function()
         -- TODO create a TextYankPost highlight if it doesn't exist in scheme ?!
-        vim.api.nvim_set_hl(0, 'LspCodeLens', { italic = true, bg="Red" })
+        vim.api.nvim_set_hl(0, 'LspCodeLens', { italic = true, bg = 'Red' })
     end,
 })
 
@@ -556,19 +591,6 @@ end, {
 -- local verbose_output = false
 -- require("tealmaker").build_all(verbose_output)
 
--- Load custom tree-sitter grammar for org filetype
--- orgmode depends on treesitter
--- local has_orgmode, orgmode = pcall(require, 'orgmode')
--- if has_orgmode then
--- 	it's already done in nix, but maybe let the possibility to :xa
--- 	require('orgmode').setup{
--- 		org_capture_templates = {'~/nextcloud/org/*', '~/orgmode/**/*'},
--- 		org_default_notes_file = '~/orgmode/refile.org',
--- 		-- TODO add templates
--- 		org_agenda_templates = { t = { description = 'Task', template = '* TODO %?\n  %u' }  }
--- 	}
--- end
-
 local has_sniprun, sniprun = pcall(require, 'sniprun')
 
 if has_sniprun then
@@ -617,7 +639,6 @@ if has_sniprun then
 end
 
 -- add description
--- lua require("nvim-treesitter.parsers").reset_cache();
 vim.api.nvim_set_keymap('n', '<f3>', '<cmd>lua vim.treesitter.inspect_tree()<cr>', {})
 vim.api.nvim_set_keymap('n', '<f5>', '<cmd>!make build', { desc = 'Run make build' })
 
@@ -703,14 +724,6 @@ if use_telescope then
     tts.telescope_create_keymaps()
 end
 
--- local use_gp = true
--- if use_gp then
-
--- 	local my_gp = require('teto.gp')
--- 	-- if we want to use telescope
--- 	my_gp.Translator(gp)
--- end
-
 -- since it was not merge yet
 -- inoremap <C-k><C-k> <Cmd>lua require'betterdigraphs'.digraphs("i")<CR>
 -- nnoremap { "n", "r<C-k><C-k>" , function () require'betterdigraphs'.digraphs("r") end}
@@ -721,12 +734,9 @@ end
 -- 	-- check :h bufferline-configuration
 -- end
 
-vim.g.UltiSnipsSnippetDirectories = { vim.fn.stdpath('config') .. '/snippets' }
 vim.g.tex_flavor = 'latex'
 
 require('teto.treesitter')
-require('teto.orgmode')
-
 require('teto.lspconfig')
 
 -- vim.lsp.set_log_level('DEBUG')
@@ -775,7 +785,6 @@ vim.keymap.set(
 
 -- vim.g.vsnip_snippet_dir = vim.fn.stdpath('config') .. '/vsnip'
 
-
 -- nvim will load any .nvimrc in the cwd; useful for per-project settings
 vim.opt.exrc = true
 
@@ -819,33 +828,16 @@ map('n', '<leader>rg', '<Cmd>Grepper -tool rg -open -switch<CR>', { remap = true
 require('teto.lsp').set_lsp_lines(true)
 require('teto.secrets')
 
-if has_gitsigns then
-    local tgitsigns = require('plugins.gitsigns')
-    tgitsigns.setup()
-end
+-- if has_gitsigns then
+--     local tgitsigns = require('plugins.gitsigns')
+--     tgitsigns.setup()
+-- end
 
 -- commented out till https://github.com/ErikReider/SwayNotificationCenter/issues/323 gets implemented
 local teto_notify = require('teto.notify')
 if teto_notify.should_use_provider() then
     teto_notify.override_vim_notify()
 end
-
--- vim.g.sonokai_style = 'atlantis'
--- vim.cmd([[colorscheme sonokai]])
--- vim.cmd([[colorscheme rose-pine]])
--- vim.cmd([[colorscheme janah]])
--- vim.cmd([[colorscheme pywal]])
-
--- https://github.com/neovim/neovim/issues/21856#issuecomment-1514723887
--- vim.api.nvim_create_autocmd({ "VimLeave" }, {
---   callback = function()
---     -- vim.fn.jobstart('notify-send "closing nvim"', {detach=true})
---     vim.fn.jobstart('sleep 2', {detach=true})
---   end,
--- })
--- until rocks-config.nvim works, let's require those manually:
--- for now
--- require'plugins.oil-nvim'
 
 -- vim.api.nvim_create_autocmd({ "VimEnter" }, {
 --   callback = function()
@@ -875,3 +867,9 @@ local has_dbee, dbee = pcall(require, 'dbee')
 if has_dbee then
     dbee.setup({})
 end
+
+vim.keymap.set('n', '<C-t>', function()
+    require('menu').open('default')
+end, {})
+
+vim.opt.completeopt = 'preview,menu,menuone'

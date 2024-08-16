@@ -133,23 +133,23 @@ in
   # TODO conditionnally enable it
   # networking.wireless.iwd.enable = true;
   boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.efiSysMountPoint = "/boot/efi";
+  # boot.loader.efi.efiSysMountPoint = "/boot/EFI";
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.grub.enableCryptodisk = false;
-  boot.loader.grub.enable = false;
-  boot.loader.grub.device = "nodev";
+  # boot.loader.grub.enableCryptodisk = false;
+  # boot.loader.grub.enable = false;
+  # boot.loader.grub.device = "nodev";
   # boot.loader.grub.efiInstallAsRemovable = true; # in case canTouchEfiVariables doesn't work for your system
-  boot.loader.grub.efiSupport = true;
+  # boot.loader.grub.efiSupport = true;
 
   # Setup keyfile
-  boot.initrd.secrets = {
-    # for systemd-crypt or luks ?
-    "/crypto_keyfile.bin" = null;
-  };
+  # boot.initrd.secrets = {
+  #   # for systemd-crypt or luks ?
+  #   "/crypto_keyfile.bin" = null;
+  # };
 
   # Enable swap on luks
-  boot.initrd.luks.devices."luks-abd09d4b-3972-405a-b314-44821af95c0e".device = "/dev/disk/by-uuid/abd09d4b-3972-405a-b314-44821af95c0e";
-  boot.initrd.luks.devices."luks-abd09d4b-3972-405a-b314-44821af95c0e".keyFile = "/crypto_keyfile.bin";
+  # boot.initrd.luks.devices."luks-abd09d4b-3972-405a-b314-44821af95c0e".device = "/dev/disk/by-uuid/abd09d4b-3972-405a-b314-44821af95c0e";
+  # boot.initrd.luks.devices."luks-abd09d4b-3972-405a-b314-44821af95c0e".keyFile = "/crypto_keyfile.bin";
 
   # Enable the GNOME Desktop Environment.
   #   services.xserver.displayManager.gdm.enable = true;
@@ -266,11 +266,18 @@ in
 
   networking.iproute2.enable = true;
 
+  swapDevices = [
+    {
+      device = "/fucking_swap";
+      size = 16000; # in MB
+    }
+  ];
+
   programs.gnome-disks = {
     enable = true;
   };
 
-  system.stateVersion = "23.11";
+  system.stateVersion = "24.05";
 
   # services.logind = {
   #   # see https://bbs.archlinux.org/viewtopic.php?id=225977 for problems with LID

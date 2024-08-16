@@ -1,7 +1,11 @@
 -- How to add a new server
 -- https://github.com/neovim/nvim-lsp/issues/41
-local lspconfig = require('lspconfig')
+local has_lspconfig, lspconfig = pcall(require, 'lspconfig')
 -- local api = vim.api
+
+if not has_lspconfig then
+    return
+end
 
 -- custom attach callback
 local attach_cb = require('teto.on_attach')
@@ -19,6 +23,10 @@ end
 -- })
 
 lspconfig.bashls.setup({})
+
+-- lspconfig.markdown_oxide.setup({})
+-- lspconfig.remark_ls.setup({})
+lspconfig.marksman.setup({})
 
 -- Note that there is config set in .luarc.json but it is ignored
 -- https://github.com/LuaLS/lua-language-server/issues/2483
@@ -72,7 +80,7 @@ lspconfig.lua_ls.setup({
                 -- Make the server aware of Neovim runtime files,
                 -- see also https://github.com/LuaLS/lua-language-server/wiki/Libraries#link-to-workspace .
                 -- Lua-dev.nvim also has similar settings for lua ls, https://github.com/folke/neodev.nvim/blob/main/lua/neodev/luals.lua .
-                maxPreload = 2000,
+                maxPreload = 4000,
                 preloadFileSize = 500,
                 checkThirdParty = false,
                 ignoreDir = {
@@ -83,8 +91,8 @@ lspconfig.lua_ls.setup({
                 library = {
                     -- [vim.fn.expand('$VIMRUNTIME/lua')] = true,
                     -- [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
-                    ['/home/teto/neovim/neovim/runtime/lua'] = true,
-                    ['/home/teto/neovim/neovim/runtime/lua/vim/lsp'] = true,
+                    -- ['/home/teto/neovim/neovim/runtime/lua'] = true,
+                    -- ['/home/teto/neovim/neovim/runtime/lua/vim/lsp'] = true,
                 },
             },
             -- workspace = {
@@ -111,13 +119,22 @@ lspconfig.dockerls.setup({})
 --
 lspconfig.gopls.setup({})
 
+-- see https://github.com/redhat-developer/yaml-language-server for doc
 lspconfig.yamlls.setup({
     -- cmd = { 'yaml-language-server', '--stdio' },
     --   on_attach = lsp.on_attach,
     --   capabilities = lsp.capabilities,
     settings = {
         yaml = {
-            schemas = require('schemastore').yaml.schemas(),
+            -- customTags
+            schemaStore = { enable = true },
+            -- schemas = require('schemastore').yaml.schemas(),
+
+            format = {
+                enable = true,
+                proseWrap = 'Preserve',
+                printWidth = 120,
+            },
         },
     },
     -- }

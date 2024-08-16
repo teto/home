@@ -12,7 +12,10 @@ let
   autoloadedModule =
     { pkgs, ... }@args:
     flakeInputs.haumea.lib.load {
-      src = flakeInputs.nix-filter { root = ./desktop; };
+      src = ./desktop;
+      #   flakeInputs.nix-filter { 
+      #   root = ./desktop;
+      # };
       inputs = args // {
         inputs = flakeInputs;
       };
@@ -109,34 +112,6 @@ in
 
   services.network-manager-applet.enable = true;
 
-  # readline equivalent but in haskell for ghci
-  # home.file.".haskeline".source = ../home/haskeline;
-  # programs.gpg-agent = {
-  # # --max-cache-ttl
-  # };
-
-  # might trigger nm-applet crash ?
-  # TODO disable it ?
-  # services.gpg-agent = {
-  #   enable = true;
-  #   defaultCacheTtl = 7200;
-  #   # maxCacheTtl
-  #   enableSshSupport = true;
-  #   # grabKeyboardAndMouse= false;
-  #   grabKeyboardAndMouse = false; # should be set to false instead
-  #   # default-cache-ttl 60
-  #   verbose = true;
-  #   # --max-cache-ttl
-  #   maxCacheTtl = 86400; # in seconds (86400 = 1 day)
-
-  #   pinentryPackage = pkgs.pinentry-gnome3;
-  #   # see https://github.com/rycee/home-manager/issues/908
-  #   # could try ncurses as well
-  #   # extraConfig = ''
-  #   #   pinentry-program ${pkgs.pinentry-gnome}/bin/pinentry-gnome
-  #   # '';
-  # };
-
   # needed for gpg-agent gnome pinentry
   # services.dbus.packages = [ pkgs.gcr ];
 
@@ -151,9 +126,6 @@ in
       device_id = "111252f7-88b7-47f2-abb9-03dc4b2469ed";
     };
   };
-
-  # export XDG_ settings
-  # systemd.user.sessionVariables = {};
 
   # https://github.com/NixOS/nixpkgs/issues/196651
   manual.manpages.enable = true;

@@ -8,51 +8,62 @@
 # This includes things like `toml` or other lua packages.
 [rocks]
 
-[plugins."rocks-git.nvim"]
-
-dir = "/home/teto/rocks-git.nvim"
-
 # List of Neovim plugins to install alongside their versions.
 # If the plugin name contains a dot then you must add quotes to the key name!
 [plugins]
+"rocks-git.nvim"= "2.2.0"
 # "rocks.nvim" = "2.19.0" # rocks.nvim can also manage itself :D
 # "rocks-git.nvim"= "1.5.1"
 cmp-rg = "1.3.9"
-"oil.nvim" = "2.11.0"
+"oil.nvim" = "2.12.1"
 # -- :DiffviewOpen
 "diffview.nvim" = "scm"
-"haskell-tools.nvim" = "3.1.10"
+"haskell-tools.nvim" = "4.2.0"
 "none-ls.nvim" = "scm"
-"bufferline.nvim" = "4.6.1"
-auto-session = "2.1.0"
-"rocks-config.nvim" = "2.1.2"
-"trouble.nvim" = "3.4.3"
+"bufferline.nvim" = "4.7.0"
+auto-session = "2.5.0"
+"rocks-config.nvim" = "2.2.0"
+"trouble.nvim" = "3.6.0"
 "lualine.nvim" = "scm"
 "rocks-lazy.nvim" = "scm"
-"rest.nvim" = "2.0.1"
+"rest.nvim" = "3.7.0"
 "nui.nvim" = "0.3.0"
-neotest = "5.3.3"
-"rocks-dev.nvim" = "1.2.3"
+neotest = "5.4.1"
+"rocks-dev.nvim" = "1.7.0"
 nvim-lint = "scm"
 "telescope.nvim" = "scm"
 "lsp_signature.nvim" = "0.3.1"
 friendly-snippets = "scm"
 "haskell-snippets.nvim" = "1.4.4"
-"smart-open.nvim"= "scm"
 "none-ls-extras.nvim" = "scm"
-"yazi.nvim" = "3.1.0"
-tree-sitter-haskell = "0.0.2"
+"yazi.nvim" = "6.0.4"
+tree-sitter-haskell = "scm"
 nvim-cmp = "scm"
 "lspkind.nvim" = "scm"
 "modicator.nvim" = "scm"
 luasnip = "2.3.0"
+tree-sitter-http = "scm"
+"hurl.nvim"= "1.7.1"
+"gitsigns.nvim" = "0.9.0"
+nvim-treehopper = "scm"
+nvim-treesitter-textobjects = "scm"
+
+[plugins."smart-open.nvim"]
+git = "danielfalk/smart-open.nvim"
+rev = "0.3.x"
+
+[plugins."typescript-tools.nvim" ]
+git = "pmizio/typescript-tools.nvim"
+rev = "f8c2e0b36b651c85f52ad5c5373ff8b07adc15a7"
+# nvim-treesitter-textobjects = "scm"
+# "rocks-treesitter.nvim" = "1.0.3"
 
 
-
-[plugins.neotest-haskell]
-version = "2.0.0"
-dir = "/home/teto/neotest-haskell"
-
+#
+# [plugins.neotest-haskell]
+# version = "2.0.0"
+# dir = "/home/teto/neotest-haskell"
+#
 [plugins."auto-save.nvim"]
 version = "scm"
 cmd = "ASToggle" # optional for lazy loading on command
@@ -61,17 +72,18 @@ cmd = "ASToggle" # optional for lazy loading on command
 
 
 [plugins.neorg]
-version = "8.8.1"
+version = "9.1.1"
 ft = "norg"
 
 [plugins."gp.nvim"]
+# rev = "scm"
 dir = "/home/teto/gp.nvim"
 
 [plugins.vim-sorcerer]
 git = "github:adlawson/vim-sorcerer"
 rev = "1.3^{}"
 
-[plugins.Solarized]
+[plugins.solarized]
 git = "vim-scripts/Solarized"
 rev = "1.0.0b1^{}"
 colorscheme= "solarized"
@@ -125,10 +137,6 @@ rev = "648aca6d33ec011dc3166e7af3b38820d01a71e4"
 git = "rhysd/git-messenger.vim"
 cmd = "GitMessenger"
 
-[plugins."hurl.nvim"]
-git = "jellydn/hurl.nvim"
-rev = "v1.5.1"
-
 [plugins.vim-listchars]
 # to cycle between different list/listchars configurations
 git = "teto/vim-listchars"
@@ -167,9 +175,6 @@ git = "uga-rosa/ccc.nvim"
 rev = "v2.0.3^{}"
 opt = true
 
-[plugins."tint.nvim"]
-git = "levouh/tint.nvim"
-
 [plugins."hacker.nvim"]
 git = "letieu/hacker.nvim"
 opt = true
@@ -200,6 +205,29 @@ git = "gbprod/none-ls-shellcheck.nvim"
 
 [plugins.vim-aftercolors]
 git = "calvinchengx/vim-aftercolors"
+
+[plugins."tint.nvim"]
+git = "levouh/tint.nvim"
+
+[plugins."live-command.nvim"]
+git = "smjonas/live-command.nvim"
+rev = "2.0.0"
+
+[plugins.nvim-pnpm-catalog-lens]
+git = "ryoppippi/nvim-pnpm-catalog-lens"
+rev = "v0.2.2"
+
+[plugins.lualine-lsp-progress]
+git = "arkav/lualine-lsp-progress"
+
+[plugins.volt]
+git = "nvchad/volt"
+
+[plugins.menu]
+git = "nvchad/menu"
+
+[plugins."bigfile.nvim"]
+git = "lunarvim/bigfile.nvim"
 
 [config]
 plugins_dir = "plugins/"

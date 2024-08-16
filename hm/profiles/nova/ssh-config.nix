@@ -5,12 +5,14 @@
   secrets,
   withSecrets,
   flakeInputs,
+  dotfilesPath,
+
   ...
 }:
 let
   # sshLib = import ../../../nixpkgs/lib/ssh.nix { inherit secrets flakeInputs; };
   mkSshMatchBlock = m: {
-    # user = secrets.nova-gitlab-runner-1.userName;
+    user = secrets.nova.runners.nova-runner-1.sshUser;
     identityFile = secrets.nova.runners.nova-runner-1.sshKey;
     hostname = m.hostname;
     identitiesOnly = true;
@@ -55,12 +57,9 @@ in
       // {
 
         nova = {
-          match = "host=git.novadiscovery.net";
-          user = "matthieu.coudron";
-          identityFile = "~/.ssh/nova_key";
-        };
-        relay-prod = {
-          identityFile = "~/.ssh/nova_key";
+          match = "host=${secrets.nova.gitlab.uri}";
+          user = "matthieu.coudron"; # secrets.nova.gitlab.user;
+          identityFile = "${dotfilesPath}/secrets/ssh/nova_key";
         };
       };
   };
