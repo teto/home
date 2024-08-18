@@ -16,6 +16,7 @@ let
         include = lib.optionals withSecrets [
           # "sops.nix"
           "sops/secrets.nix"
+          "services/openssh.nix"
         ];
         # exclude = [
         #   "teto"

@@ -1,7 +1,9 @@
 # vim: set noet fdm=manual fenc=utf-8 ff=unix sts=0 sw=4 ts=4 ft=conf :
 [absorb]
 	maxStack=50
-	oneFixupPerCommit = true
+	oneFixupPerCommit = false
+    autoStageIfNothingStaged = true
+
 [core]
 	# fsmonitor = "/nix/store/pqrqcfw2m27kwhrh7jyj05lp9b5pi0jd-rs-git-fsmonitor-0.1.3/bin/rs-git-fsmonitor"
 	sshCommand = "ssh"

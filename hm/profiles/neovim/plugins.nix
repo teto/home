@@ -158,7 +158,7 @@ in
       # nmap ga <Plug>(UnicodeGA)
 
       config = ''
-        vim.g.Unicode_data_directory='${pkgs.vimPlugins.unicode-vim}/autoload/unicode'
+        ${unicode-vim.passthru.initLua}
 
         -- overrides ga
         vim.keymap.set ( "n", "ga",  "<Plug>(UnicodeGA)", { remap = true, } )

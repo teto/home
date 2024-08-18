@@ -6,8 +6,7 @@
 }:
 {
 
-  # services.openssh = {
-  enable = false;
+  enable = true;
   # kinda experimental
   ports = [ 12666 ];
 
@@ -19,7 +18,13 @@
   #   { addr = "0.0.0.0"; port = 64022; }
   # ];
 
-  startWhenNeeded = true;
+  hostKeys = 
+  [ 
+      { type = "rsa"; bits = 4096; path = "/etc/ssh/ssh_host_rsa_key"; }
+      { type = "ed25519"; path = "/etc/ssh/ssh_host_ed25519_key"; }
+  ];
+
+  # startWhenNeeded = true;
 
   # extraConfig = ''
   # HostKey /home/teto/.ssh/server_id_rsa
@@ -31,18 +36,12 @@
   # authorizedKeys = { }
 
   # new format
-  settings = {
-    LogLevel = "VERBOSE";
-    KbdInteractiveAuthentication = false;
-    PasswordAuthentication = false;
-    # PermitRootLogin = "no";
-    X11Forwarding = true;
-  };
+  # settings = {
+  # };
 
   # kbdInteractiveAuthentication = false;
   # logLevel = "VERBOSE";
   # permitRootLogin = "prohibit-password";
   # passwordAuthentication = false;
-
   # };
 }
