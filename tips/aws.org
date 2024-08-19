@@ -11,7 +11,17 @@
 
    AWS_CONFIG_FILE (can't be specified on CLI)
    export AWS_SHARED_CREDENTIALS_FILE
- 
+
+ AWS Security Token Service (AWS STS) 
+
+ARN= Amazon Resource Name
+
+
+Excerpt
+You can attach an identity-based policy to a user group so that all of the users in the user group receive the policy's permissions. You cannot identify a user group as a Principal in a policy (such as a resource-based policy) because groups relate to permissions, not authentication, and principals are authenticated IAM entities. For more information about policy types, see Identity-based policies and resource-based policies.
+
+Short-term credentials consist of three parts: Access key ID, secret access key, and a security token. The access key ID for short-term credentials will always start with the prefix ‘ASIA’, 
+
  # s3 
  
  How to download files with a pattern
@@ -61,6 +71,8 @@ aws eks update-kubeconfig --name jk-dev --profile nova-sandbox --user-alias jk-d
  
 * roles
 aws iam list-roles
+role chaining
+--transitive-tag-keys
 aws sts assume-role --role-arn "arn:aws:iam::REDACTED:role/cirunner_dev_deploy" --profile nova-sandbox --role-session-name toto
 
 From the output:
@@ -68,3 +80,7 @@ export AWS_ACCESS_KEY_ID=RoleAccessKeyID
 export AWS_SECRET_ACCESS_KEY=RoleSecretKey
 export AWS_SESSION_TOKEN=RoleSessionToken
 unset AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY AWS_SESSION_TOKEN
+
+aws configure get aws_access_key_id --profile myprofile
+aws configure get aws_secret_access_key --profile myprofile
+aws configure get aws_session_token --profile myprofile

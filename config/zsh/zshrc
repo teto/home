@@ -194,7 +194,7 @@ zlong_alert_func() {
 
 # replaced zbell for now with zlong_alert
 # move to home-manager
-. ~/zlong_alert.zsh/zlong_alert.zsh
+. $ZDOTDIR/zlong_alert.zsh/zlong_alert.zsh
 
 # zbell_ignore=($EDITOR $PAGER "man" "v" "ssh" "nvim" "gd" "gf" "sops" "tig")
 # zbell_duration=30

@@ -270,6 +270,7 @@ in
         fswatch # fileevent watcher
         fx # json reader
         gdb
+        gnupg
         gnum4 # hum
         # psmisc # ps -a for python ?
         rbw

@@ -9,12 +9,12 @@ dans ton terminal auparavant.
 gpgconf --check-programs
 gpg --list-keys
 
-
 To
 https://stackoverflow.com/questions/28321712/gpg-decryption-fails-with-no-secret-key-error
 
 gpg-agent --debug-all --no-detach --log-file
 
+To kill the agent 
 gpgconf --kill gpg-agent
 
 gpg-agent.conf contains:

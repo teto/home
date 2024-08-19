@@ -2,3 +2,10 @@
 # to merge 2 fodlers, use :
 
 rsync -a /path/to/source/ /path/to/destination
+
+
+* Download remote files
+rsync [-options] user@SOURCE_IP_ADDRESS:/SOURCE /DESTINATION
+
+rsync --rsh=ssh
+--inplace --no-whole-file

@@ -10,17 +10,17 @@ local obsession_component = require('teto.lualine.obsession')
 -- print(vim.inspect(obsession_component))
 
 -- local component = {function() return "toto" end , color = {fg= "red"}}
-local trouble = require('trouble')
-local symbols = trouble.statusline({
-    mode = 'lsp_document_symbols',
-    groups = {},
-    title = false,
-    filter = { range = true },
-    format = '{kind_icon}{symbol.name:Normal}',
-    -- The following line is needed to fix the background color
-    -- Set it to the lualine section you want to use
-    hl_group = 'lualine_c_normal',
-})
+-- local trouble = require('trouble')
+-- local symbols = trouble.statusline({
+--     mode = 'lsp_document_symbols',
+--     groups = {},
+--     title = false,
+--     filter = { range = true },
+--     format = '{kind_icon}{symbol.name:Normal}',
+--     -- The following line is needed to fix the background color
+--     -- Set it to the lualine section you want to use
+--     hl_group = 'lualine_c_normal',
+-- })
 -- table.insert(_opts.sections.lualine_c, )
 
 -- Trying to display
@@ -80,10 +80,11 @@ require('lualine').setup({
             -- obsession_status
             -- { '' , type = "lua_expr"}
             --
-            {
-                symbols.get,
-                cond = symbols.has,
-            },
+
+            -- {
+            --     symbols.get,
+            --     cond = symbols.has,
+            -- },
         },
         lualine_x = {
             -- 'encoding', 'fileformat', 'filetype'

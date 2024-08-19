@@ -1,7 +1,11 @@
 -- How to add a new server
 -- https://github.com/neovim/nvim-lsp/issues/41
-local lspconfig = require('lspconfig')
+local has_lspconfig, lspconfig = pcall(require, 'lspconfig')
 -- local api = vim.api
+
+if not has_lspconfig then
+ return
+end
 
 -- custom attach callback
 local attach_cb = require('teto.on_attach')

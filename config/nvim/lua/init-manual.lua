@@ -20,18 +20,19 @@ local nix_deps = require('generated-by-nix')
 
 vim.g.sqlite_clib_path = nix_deps.sqlite_clib_path
 
--- -- require("vim.lsp._watchfiles")._watchfunc = require("vim._watch").watch
+vim.opt.rtp:prepend(os.getenv('HOME') .. '/rocks-dev.nvim')
+vim.opt.rtp:prepend(os.getenv('HOME') .. '/rocks.nvim')
+
+-- require("vim.lsp._watchfiles")._watchfunc = require("vim._watch").watch
 -- local ffi = require 'ffi'
--- vim.g.luarocks_binary = "/nix/store/5j4av7r2aivkgcpqfr5z9zg1p45ga760-luarocks_bootstrap-3.11.0/bin/luarocks"
 local luarocks_config_fn = assert(loadfile(vim.fn.stdpath('config') .. '/luarocks-config-generated.lua'))
 -- local f = assert(loadfile(filename))
 -- return f()
 vim.g.rocks_nvim = {
-	-- this is the default -- , luarocks_config = "~/.local/share/nvim/rocks/luarocks-config.lua" -- , luarocks_config = vim.fn.stdpath('config')..'/luarocks-config-generated.lua'
 	-- TODO reference one from
 	-- use nix_deps.luarocks_executable
     luarocks_binary = nix_deps.luarocks_executable,
-    luarocks_config = luarocks_config_fn(), -- , luarocks_config = nil
+    luarocks_config = luarocks_config_fn(),
     _log_level = vim.log.levels.TRACE,
     lazy = true, -- for cleaner logs
 }
@@ -131,11 +132,6 @@ vim.g.gpt_prompt = {
 
 }
 
-vim.opt.rtp:prepend(os.getenv('HOME') .. '/rocks.nvim')
-
--- vim.g.rocks_nvim = {
--- 	-- _log_level = vim.log.levels.INFO
--- }
 
 vim.g.loaded_matchit = 1
 vim.opt.shortmess:append('I')

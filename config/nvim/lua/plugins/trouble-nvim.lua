@@ -1,4 +1,4 @@
-opts =
+local opts =
 {
 	auto_open = false,
 	auto_close = true,
@@ -43,7 +43,7 @@ opts =
 		help = '?', -- help menu
 	},
 }
-require('trouble').setup(opts)
+require('trouble.config').setup(opts)
 
 vim.keymap.set('n', 'f2', function()
     -- vim.diagnostic.goto_prev({ wrap = true, severity = vim.diagnostic.severity.WARN }

@@ -3,5 +3,6 @@
     ext: with ext; [
       pass-import
       pass-tail
+      pass-otp
     ]
   )

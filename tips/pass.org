@@ -4,3 +4,9 @@ Look at
 * import from bitwarden
   with https://github.com/roddhjav/pass-import one can import from bitwarden via:
   pass import bitwarden <bitwarden_export_....json>
+
+
+  when `pass` fails with 
+  "public key decryption failed: No secret key"
+
+ gpg --list-secret-keys

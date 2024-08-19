@@ -27,11 +27,11 @@ repl: (nixos-rebuild "repl" "")
 # --override-input rocks-nvim /home/teto/rocks.nvim
 # TODO check if the paths exists to ease bootstrap ? 
 # same for NOVA_OVH1
+# --override-input nova /home/teto/nova/doctor \
 [private]
 nixos-rebuild command builders="--option builders \"$NOVA_OVH1\" -j0":
     nixos-rebuild --flake ~/home --override-input nixpkgs {{ NIXPKGS_REPO }} \
-       --override-input hm /home/teto/hm \
-       --override-input nova /home/teto/nova/doctor \
+      --override-input hm /home/teto/hm \
        {{ builders }} \
        --no-write-lock-file --show-trace --use-remote-sudo {{ command }}
 
@@ -107,7 +107,7 @@ config:
     stow -t {{ config_local_directory() }} config
 
 home:
-    stow -t {{ config_local_directory() }} config
+    stow --dotfiles -t {{ config_local_directory() }} home
 
 bin:
     mkdir -p "{{ data_directory() }}/../bin"

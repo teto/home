@@ -395,6 +395,13 @@
 
       };
 
+      poetry = unstablePkgs.buildFHSEnv {
+        name = "poetry";
+        # inherit targetPkgs;
+        runScript = "ldd";
+      };
+
+
       formatter = self.packages.${system}.treefmt-with-config;
 
       packages = {
