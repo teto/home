@@ -124,10 +124,15 @@
     # nixpkgs-wayland.url = "github:nix-community/nixpkgs-wayland";
 
     # TODO this should not be necessary anymore ? just look at doctor ?
-    nova = {
+    nova-doctor = {
       url = "git+ssh://git@git.novadiscovery.net/sys/doctor";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    #  c'est relou, faudrait le merger avec le precedent !
+    # nova-doctor-nixos = {
+    #   url = "git+ssh://git@git.novadiscovery.net/sys/doctor?dir=nixos";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
     nova-ci = {
       url = "git+ssh://git@git.novadiscovery.net/infra/ci-runner";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -168,7 +173,7 @@
 
     wayland-pipewire-idle-inhibit = {
       url = "github:rafaelrc7/wayland-pipewire-idle-inhibit";
-      inputs.nixpkgs.follows = "nixpkgs";
+      # inputs.nixpkgs.follows = "nixpkgs";
     };
     yazi = {
       # url = "github:sxyazi/yazi?ref=v0.1.5";
@@ -300,6 +305,7 @@
           home-manager.useGlobalPkgs = true;
 
           home-manager.sharedModules = [
+            # remote broken
             self.inputs.wayland-pipewire-idle-inhibit.homeModules.default
             # todo home-manager
             self.inputs.sops-nix.homeManagerModules.sops
@@ -335,6 +341,7 @@
               inherit withSecrets;
               flakeInputs = self.inputs;
               inherit novaUserProfile;
+              dotfilesPath = "/home/teto/home";
             };
 
           home-manager.users = {
@@ -537,8 +544,8 @@
                     ./hosts/desktop/teto/programs/bash.nix
                     ./hm/profiles/nova/ssh-config.nix
 
-                    "${flakeInputs.nova}/nix/hm/nova-user.nix"
-                    "${flakeInputs.nova}/nix/hm/nova-dev.nix"
+                    "${flakeInputs.nova-doctor}/nix/hm/nova-user.nix"
+                    "${flakeInputs.nova-doctor}/nix/hm/nova-dev.nix"
                   ];
                 };
               }

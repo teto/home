@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  dotfilesPath,
   pkgs,
   ...
 }:
@@ -21,7 +22,46 @@
   environment.systemPackages = [
     pkgs.dbeaver-bin
     pkgs.tailscale-systray
+    pkgs.trayscale
   ];
+
+  home-manager = {
+                # self.inputs.sops-nix.homeManagerModules.sops
+
+    users =
+    # let
+    # hmRootModule = { pkgs, ... }@args: flakeInputs.haumea.lib.load {
+    #  src = ./root;
+    #  inputs = args // {
+    #    inputs = flakeInputs;
+    #  };
+    #  transformer =  [
+    #    flakeInputs.haumea.lib.transformers.liftDefault
+
+    #  #  (x: hoistAttrs x )
+    #    # (x: )
+    #  ];
+    #   # flakeInputs.haumea.lib.transformers.liftDefault;
+    # };
+    # in 
+    {
+
+      # root = {
+      #   # imports = [
+      #   #   # hmRootModule
+      #   #   ./root/programs/ssh.nix
+      #   #   ../../hm/profiles/nova/ssh-config.nix
+      #   # ];
+      #
+      # sops.defaultSopsFile = ../secrets.yaml;
+      #
+      # # This is using an age key that is expected to already be in the filesystem
+      # # sops.age.keyFile = "secrets/age.key";
+      # sops.age.keyFile = "${dotfilesPath}/secrets/age.key";
+      # };
+    };
+  };
+    
 
   # to test locally
   # services.gitlab-runner.enable = true;
