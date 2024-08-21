@@ -127,6 +127,7 @@
     nova-doctor = {
       url = "git+ssh://git@git.novadiscovery.net/sys/doctor";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.hm.follows = "hm";
     };
     #  c'est relou, faudrait le merger avec le precedent !
     # nova-doctor-nixos = {
@@ -194,11 +195,17 @@
     }:
     let
       novaUserProfile = {
+        login = "teto";
         firstname = "teto";
         lastname = "sse";
         username = "teto";
         business_unit = "sse";
         gitlabId = "matthieu.coudron";
+        keyboard_layout = "qwerty";
+
+        # generated with nix run nixpkgs.mkpasswd mkpasswd -m sha-512
+        # hashedPassword = secrets.users.teto.hashedPassword;
+        password = "$6$UcKAXNGR1brGF9S4$Xk.U9oCTMCnEnN5FoLni1BwxcfwkmVeyddzdyyHAR/EVXOGEDbzm/bTV4F6mWJxYa.Im85rHQsU8I3FhsHJie1";
         # email = "matthieu.coudron@novadiscovery.com";
       };
 
@@ -206,6 +213,7 @@
       # sshLib = import ./nixpkgs/lib/ssh.nix { inherit secrets; flakeInputs = self.inputs; };
       system = "x86_64-linux";
 
+      # TODO check out packagesFromDirectoryRecursive  as well ?
       autoCalledPackages = import "${nixpkgs}/pkgs/top-level/by-name-overlay.nix" pkgs/by-name;
 
       pkgImport =
@@ -512,7 +520,7 @@
                 (
                   { ... }:
                   {
-                    home.stateVersion = "23.11";
+                    home.stateVersion = "24.05";
 
                   }
                 )
@@ -606,13 +614,19 @@
 
             # see https://determinate.systems/posts/extending-nixos-configurations
             mcoudron = laptop.extendModules {
-              modules = [ novaModule ];
+              modules = [
+                novaModule
+                # TODO add dev / devops nixos modules
+                self.inputs.nova-doctor.nixosModules.common
+              ];
 
               specialArgs = {
                 hostname = "mcoudron";
                 inherit secrets;
                 withSecrets = true;
                 flakeInputs = self.inputs;
+                userConfig = novaUserProfile;
+                doctor = self.inputs.nova-doctor;
               };
 
             };

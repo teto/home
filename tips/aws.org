@@ -84,3 +84,8 @@ unset AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY AWS_SESSION_TOKEN
 aws configure get aws_access_key_id --profile myprofile
 aws configure get aws_secret_access_key --profile myprofile
 aws configure get aws_session_token --profile myprofile
+
+* EC2
+
+to get the instance user data, you can try the describe instance attribute
+aws ec2 describe-instance-attribute --instance-id <InstanceID> --attribute userData

@@ -1506,27 +1506,6 @@
         "type": "github"
       }
     },
-    "hm_2": {
-      "inputs": {
-        "nixpkgs": [
-          "nova-doctor",
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1707175763,
-        "narHash": "sha256-0MKHC6tQ4KEuM5rui6DjKZ/VNiSANB4E+DJ/+wPS1PU=",
-        "owner": "nix-community",
-        "repo": "home-manager",
-        "rev": "f99eace7c167b8a6a0871849493b1c613d0f1b80",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-community",
-        "repo": "home-manager",
-        "type": "github"
-      }
-    },
     "libgit2": {
       "flake": false,
       "locked": {
@@ -2516,7 +2495,9 @@
       "inputs": {
         "flake-utils": "flake-utils_9",
         "gitlab-ssh-keys": "gitlab-ssh-keys_2",
-        "hm": "hm_2",
+        "hm": [
+          "hm"
+        ],
         "nixpkgs": [
           "nixpkgs"
         ],

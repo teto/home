@@ -270,7 +270,7 @@ in
     enable = true;
   };
 
-  system.stateVersion = "23.11";
+  system.stateVersion = "24.05";
 
   # services.logind = {
   #   # see https://bbs.archlinux.org/viewtopic.php?id=225977 for problems with LID

@@ -26,7 +26,7 @@
   };
 
   services.ntp = {
-    enable = false;
+    enable = lib.mkForce false;
   };
 
   services.timesyncd = {
