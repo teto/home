@@ -226,7 +226,8 @@
 
             # the nova overlay just brings ztp-creds and gitlab-ssh-keys
             # removing the overlay means we dont need it during evaluation
-            # self.inputs.nova.overlays.default
+            self.inputs.nova-doctor.overlays.default 
+            self.inputs.nova-doctor.overlays.autoCalledPackages
 
             # self.inputs.nixpkgs-wayland.overlay
             # self.inputs.nix.overlays.default
@@ -627,6 +628,7 @@
                 flakeInputs = self.inputs;
                 userConfig = novaUserProfile;
                 doctor = self.inputs.nova-doctor;
+                # self = self.inputs.nova-doctor;
               };
 
             };

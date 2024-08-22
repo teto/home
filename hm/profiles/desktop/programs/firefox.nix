@@ -97,6 +97,18 @@ in
   enable = true;
   # import the one in pkgs/
   # package = myFirefox;
+  languagePacks = [
+    "fr"
+    "en-GB"
+  ];
+  policies = {
+    BlockAboutConfig = false;
+    # DefaultDownloadDirectory = "\${home}/Downloads";
+  };
+  nativeMessagingHosts = [
+    # add it to firefox-addons. ?
+    pkgs.ff2mpv
+  ];
   profiles = {
     perso = {
       # https://gitlab.com/rycee/configurations/-/blob/bf46aef74ca53a61fe2d35349fe3dbc6a70b2609/user/firefox.nix#L25-39

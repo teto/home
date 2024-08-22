@@ -2507,11 +2507,11 @@
         "user-profile": "user-profile"
       },
       "locked": {
-        "lastModified": 1722512502,
-        "narHash": "sha256-eiqXxP1l/Qptv+nxCwE+8QoEWUvoAAlaSyDabn83I/4=",
+        "lastModified": 1724314052,
+        "narHash": "sha256-vef/67mLlfF0oOXmhvBqzlyPTxhbmd1nzsYT+CCMWcQ=",
         "ref": "refs/heads/main",
-        "rev": "f81ec60a0d8c3667339bd986aeaac3800c93f835",
-        "revCount": 979,
+        "rev": "47cf2871c8912045c7af2de9d0d5d2702e2950a5",
+        "revCount": 992,
         "type": "git",
         "url": "ssh://git@git.novadiscovery.net/sys/doctor"
       },
@@ -3275,7 +3275,7 @@
       "flake": false,
       "locked": {
         "lastModified": 0,
-        "narHash": "sha256-eiqXxP1l/Qptv+nxCwE+8QoEWUvoAAlaSyDabn83I/4=",
+        "narHash": "sha256-vef/67mLlfF0oOXmhvBqzlyPTxhbmd1nzsYT+CCMWcQ=",
         "path": ".",
         "type": "path"
       },
