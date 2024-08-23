@@ -48,13 +48,14 @@ let
   ];
 
   luaPlugins = with pkgs.vimPlugins; [
+    pkgs.vimPlugins.nvim-treesitter-parsers.nix
     # {
     #   # we should have a file of the grammars as plugins
     #   # symlinkJoin
     #   plugin = pkgs.symlinkJoin {
     #    name = "tree-sitter-grammars";
     #    paths = with pkgs.neovimUtils; [
-    #       # pkgs.vimPlugins.nvim-treesitter-parsers.tree-sitter-nix
+          # pkgs.vimPlugins.nvim-treesitter-parsers.tree-sitter-nix
     #       # # tree-sitter-haskell # crashes with a loop
     #       # tree-sitter-html  # for rest.nvim
     #       # (grammarToPlugin pkgs.tree-sitter-grammars.tree-sitter-html) # for devdocs
@@ -84,9 +85,12 @@ let
 
     # should bring in scope fzy
     # (luaPlugin { plugin = rocks-nvim; })
-    (luaPlugin { plugin = urlview-nvim; })
-    (luaPlugin { plugin = nvim-ufo; })
+    # (luaPlugin { plugin = urlview-nvim; })
+
+    # (luaPlugin { plugin = nvim-ufo; })
+
     (luaPlugin { plugin = nvim-dbee; })
+
     # breaks setup
     # (luaPlugin { plugin =  hmts-nvim; })
 
@@ -115,7 +119,7 @@ let
     (luaPlugin { plugin = haskell-tools-nvim; })
 
     # I've not been using it so far
-    (luaPlugin { plugin = nvim-dap; })
+    # (luaPlugin { plugin = nvim-dap; })
 
     # (luaPlugin {
     #   # run with :Diffview
@@ -156,10 +160,11 @@ let
     # })
 
     # disabled because of https://github.com/rktjmp/lush.nvim/issues/89
-    (luaPlugin { plugin = lush-nvim; })
+    # (luaPlugin { plugin = lush-nvim; }) # dependency of some colorschemes
     # (luaPlugin { plugin = gruvbox-nvim; }) 
 
     (luaPlugin {
+      # TODO could try 
       # really helps with syntax highlighting
       plugin = haskell-vim;
       config = ''
@@ -225,39 +230,29 @@ let
       # let g:vim_markdown_preview_use_xdg_open=1
     }
 
-    # nvim-markdown-preview  # :MarkdownPreview
-
     # { plugin = kui-nvim; }
     # FIX https://github.com/NixOS/nixpkgs/issues/169293 first
-
-    # (luaPlugin {
-    # broken
-    #   plugin = telescope-frecency-nvim; 
-    #   config = ''
-    #    require'telescope'.load_extension('frecency')
-    #    '';
-    # })
 
     (luaPlugin {
       plugin = nvimdev-nvim;
       optional = true;
       config = # lua
         ''
-          -- nvimdev {{{
-          -- call nvimdev#init(--path/to/neovim--)
-          vim.g.nvimdev_auto_init = 1
-          vim.g.nvimdev_auto_cd = 1
-          -- vim.g.nvimdev_auto_ctags=1
-          vim.g.nvimdev_auto_lint = 1
-          vim.g.nvimdev_build_readonly = 1
-          --}}}'';
+        -- nvimdev {{{
+        -- call nvimdev#init(--path/to/neovim--)
+        vim.g.nvimdev_auto_init = 1
+        vim.g.nvimdev_auto_cd = 1
+        -- vim.g.nvimdev_auto_ctags=1
+        vim.g.nvimdev_auto_lint = 1
+        vim.g.nvimdev_build_readonly = 1
+        --}}}'';
     })
 
     # (luaPlugin { plugin = sniprun; })
     (luaPlugin { plugin = telescope-nvim; })
     # (luaPlugin { plugin = telescope-manix; })
     # call with :Hoogle
-    (luaPlugin { plugin = glow-nvim; })
+    # (luaPlugin { plugin = glow-nvim; })
 
     # (luaPlugin {
     #   plugin = fzf-hoogle-vim;

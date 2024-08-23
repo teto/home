@@ -2,8 +2,9 @@
 # E111 => 4 spaces tabs
 # don't let spaces else it is not recognized
 # E123 buggy
+# E722: do not use bare 'except'
 ignore = 
-	F401,E501,W291,F841,E265,N806,E265,E111,F401,E201,E303,E128,E261,E123
+	F401,E501,W291,F841,E265,N806,E265,E111,F401,E201,E303,E128,E261,E123,E722
 
 max-line-length = 160
 exclude = .git, test_*
