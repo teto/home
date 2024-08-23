@@ -27,8 +27,8 @@ none_ls.setup({
         -- require("none-ls-luacheck.diagnostics.luacheck").with({
         --  extra_args = { '--ignore 21/_.*' }
         -- }),
-		-- require("none-ls-shellcheck.diagnostics"),
-		-- require("none-ls-shellcheck.code_actions"),
+		require("none-ls-shellcheck.diagnostics"),
+		require("none-ls-shellcheck.code_actions"),
 
         -- none_ls.builtins.diagnostics.editorconfig_checker, -- too noisy
         -- none_ls.builtins.diagnostics.tsc,

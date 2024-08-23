@@ -74,7 +74,7 @@ in
     extraPackages = with pkgs; [
       # emacs # for orgmode-babel
       nil # a nix lsp, can be debugged with NIL_LOG_PATH and NIL_LOG=nil=debug
-      nixd # another nix LSP (broken because of nix security issue)
+      nixd # another nix LSP
       shellcheck
       sumneko-lua-language-server
     ];
