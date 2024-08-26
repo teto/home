@@ -9,6 +9,9 @@ NIXPKGS_REPO := env_var('HOME') / 'nixpkgs'
 DOCTOR_REPO := "/home/teto/nova/doctor"
 BLOG_FOLDER := "${HOME}/blog"
 
+
+default: 
+ just --list
 # loads variables from .env
 
 set dotenv-load := true
@@ -107,13 +110,16 @@ deploy-neotokyo:
 config:
     stow -t {{ config_local_directory() }} config
 
+# symlink home/ dotfiles into $HOME
 home:
     stow --dotfiles -t {{ config_local_directory() }} home
 
+# symlink bin/ dotfiles into $HOME
 bin:
     mkdir -p "{{ data_directory() }}/../bin"
     stow -t "{{ data_directory() }}/../bin" bin
 
+# symlink to XDG_DATA_HOME
 local:
     stow -t "$(XDG_DATA_HOME)" local
     mkdir -p "{{ data_directory() }}/fzf-history" {{ data_directory() }}/newsbeuter

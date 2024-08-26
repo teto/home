@@ -8,7 +8,7 @@
 
   wayland.windowManager.sway = {
     enable = true;
-    xwayland = false; # test to avoid crashes
+    xwayland = true; # test to avoid crashes
 
     extraSessionCommands = lib.mkForce "";
     extraOptions = [

@@ -1162,11 +1162,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1723803910,
-        "narHash": "sha256-yezvUuFiEnCFbGuwj/bQcqg7RykIEqudOy/RBrId0pc=",
+        "lastModified": 1724440431,
+        "narHash": "sha256-9etXEOUtzeMgqg1u0wp+EdwG7RpmrAZ2yX516bMj2aE=",
         "owner": "cachix",
         "repo": "git-hooks.nix",
-        "rev": "bfef0ada09e2c8ac55bbcd0831bd0c9d42e651ba",
+        "rev": "c8a54057aae480c56e28ef3e14e4960628ac495b",
         "type": "github"
       },
       "original": {
@@ -1643,11 +1643,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1724141451,
-        "narHash": "sha256-SoPZKkqwrxHmCXt5qjK6yT4jfr1R6+J9ya5oV49AR4Q=",
+        "lastModified": 1724575478,
+        "narHash": "sha256-8jWDD3SI5Xmi3x7PiAmGQSNjIkMoT9UFwhIAF8IzA8s=",
         "owner": "nix-community",
         "repo": "neovim-nightly-overlay",
-        "rev": "e575f5de031b6e06b90f40f84ed53b614bef2c9b",
+        "rev": "d7860e03b1849714482eceff96433bf2d9fbeb68",
         "type": "github"
       },
       "original": {
@@ -1682,11 +1682,11 @@
     "neovim-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1724106236,
-        "narHash": "sha256-FGLERUg/GAG2npgkBJ0XcEoA9rWNyH+DYW3PZ3/tYsU=",
+        "lastModified": 1724537263,
+        "narHash": "sha256-Gvx0buJ7kFv1LzgKzhy9LjVfDI149+1KkeaH7kJn/Zs=",
         "owner": "neovim",
         "repo": "neovim",
-        "rev": "1d11808bfd2879bf278cd05a7095a6634fa5afec",
+        "rev": "cf44121f7fb6f55a22e644a1e5e1f1dc6b90c27a",
         "type": "github"
       },
       "original": {
@@ -2507,15 +2507,16 @@
         "user-profile": "user-profile"
       },
       "locked": {
-        "lastModified": 1724314052,
-        "narHash": "sha256-vef/67mLlfF0oOXmhvBqzlyPTxhbmd1nzsYT+CCMWcQ=",
-        "ref": "refs/heads/main",
-        "rev": "47cf2871c8912045c7af2de9d0d5d2702e2950a5",
-        "revCount": 992,
+        "lastModified": 1724410051,
+        "narHash": "sha256-oA3CZxmOIW51bVBjVvBpGNU4AxsNcp0rg5w0fMQsVvM=",
+        "ref": "dev",
+        "rev": "41fcfaa5dbc04890f13e15955ca362620546b6e8",
+        "revCount": 994,
         "type": "git",
         "url": "ssh://git@git.novadiscovery.net/sys/doctor"
       },
       "original": {
+        "ref": "dev",
         "type": "git",
         "url": "ssh://git@git.novadiscovery.net/sys/doctor"
       }
@@ -3275,7 +3276,7 @@
       "flake": false,
       "locked": {
         "lastModified": 0,
-        "narHash": "sha256-vef/67mLlfF0oOXmhvBqzlyPTxhbmd1nzsYT+CCMWcQ=",
+        "narHash": "sha256-oA3CZxmOIW51bVBjVvBpGNU4AxsNcp0rg5w0fMQsVvM=",
         "path": ".",
         "type": "path"
       },

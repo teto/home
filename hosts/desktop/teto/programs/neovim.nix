@@ -91,6 +91,8 @@ let
 
     (luaPlugin { plugin = nvim-dbee; })
 
+    # pkgs.vimPlugins.cellular-automaton-nvim
+
     # breaks setup
     # (luaPlugin { plugin =  hmts-nvim; })
 
@@ -451,7 +453,9 @@ in
 
     # HACK till we fix it
     # or else we need a vim.g.sqlite_clib_path
-    extraLuaPackages = lp: [ lp.sqlite ]
+    extraLuaPackages = lp: [
+      lp.sqlite 
+    ]
     # nvimLua.pkgs.rest-nvim.propagatedBuildInputs
     ;
 

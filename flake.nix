@@ -125,7 +125,7 @@
 
     # TODO this should not be necessary anymore ? just look at doctor ?
     nova-doctor = {
-      url = "git+ssh://git@git.novadiscovery.net/sys/doctor";
+      url = "git+ssh://git@git.novadiscovery.net/sys/doctor?ref=dev";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.hm.follows = "hm";
     };

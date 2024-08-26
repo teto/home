@@ -12,7 +12,8 @@ sscwl:
 
 update-luarocks:
   # TODO run in command directory
-  nix run '.#luarocks-packages-updater' -- --proc=4
+  # TODO pass token
+  nix run '.#luarocks-packages-updater' -- --proc=4 --github-token=$GITHUB_TOKEN
 
 llama: # Start llama server
   llama-server -m ~/models/mistral-7b-openorca.Q6_K.gguf -c 2048 --port 11111 -ngl 33
