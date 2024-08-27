@@ -112,7 +112,7 @@ config:
 
 # symlink home/ dotfiles into $HOME
 home:
-    stow --dotfiles -t {{ config_local_directory() }} home
+    stow --dotfiles -t {{ home_directory() }} home
 
 # symlink bin/ dotfiles into $HOME
 bin:

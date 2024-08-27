@@ -40,10 +40,17 @@ set vi-cmd-mode-string \1\e[2 q\2
     # "G": end-of-history
 Control-a: beginning-of-line
 Control-e: end-of-line
-    set keymap vi-insert       #notice how the "jj" movement is
-    # "jj": vi-movement-mode     #after 'set keymap vi-insert'?
-    # "\C-w": backward-kill-word
-    "\C-p": history-search-backward
+#notice how the "jj" movement is
+set keymap vi-insert       
+set keymap vi-insert
+"\C-a": beginning-of-line
+"\C-e": end-of-line
+"\C-k": kill-line
+"\C-y": yank
+"\C-u": unix-line-discard
+# "jj": vi-movement-mode     #after 'set keymap vi-insert'?
+# "\C-w": backward-kill-word
+"\C-p": history-search-backward
 # $endif
 
 # for linux console and RH/Debian xterm
@@ -57,8 +64,6 @@ Control-e: end-of-line
 # "\e[5D": backward-word
 # "\e[1;5C": forward-word
 # "\e[1;5D": backward-word
-
-# : beginning-of-line
 
 # for rxvt
 # "\e[8~": end-of-line
