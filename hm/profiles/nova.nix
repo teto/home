@@ -9,7 +9,7 @@
   imports = [ ./nova/programs/bash.nix ];
 
   home.packages = [
-    pkgs.aws-vault # set it up as
+    pkgs.aws-vault-nova # wrap aws-vault with some specific variables
     pkgs.sqlitebrowser
     pkgs.google-chrome
     # pigz for zlib (de)compression

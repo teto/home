@@ -17,7 +17,7 @@ in
     package-sets = {
 
       desktop = mkEnableOption "desktop packages";
-      enableServerPackages = mkEnableOption "server packages";
+      server = mkEnableOption "server packages";
 
       enableOfficePackages = mkEnableOption "office/heavy packages";
 
@@ -52,22 +52,10 @@ in
         gnumake
         tree
         stow
+        systemctl-tui
         pciutils # for lspci
         # zenith  # resources monitor
       ];
-    })
-
-    ({
-      home.packages = with pkgs; [
-
-        sublime3
-        translate-shell # call with `trans`
-        unzip
-        wireshark
-        wttrbar # for meteo
-        xarchiver # to unpack/pack files
-      ];
-
     })
 
     (mkIf cfg.desktop {
@@ -382,6 +370,7 @@ in
 
       ];
     })
+
     (mkIf cfg.energy {
       home.packages = [
         pkgs.powertop # superuseful
