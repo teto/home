@@ -5,6 +5,10 @@
 ** how to access help
   manpage available via `npm help install`
 
+** How to update a dependency version ?
+
+npm install lodash@latest --save
+
 ** npm install: where are packages installed ?
 
   Without -g ("global") it installs in the $CWD/node_modules folder.

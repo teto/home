@@ -198,6 +198,7 @@
         login = "teto";
         firstname = "teto";
         lastname = "sse";
+        displayname = "Matt";
         username = "teto";
         business_unit = "sse";
         gitlabId = "matthieu.coudron";
@@ -356,6 +357,7 @@
           home-manager.users = {
             root = {
               imports = [
+                self.inputs.nova-doctor.homeModules.root
                 # ../../hm/profiles/neovim.nix
                 # TODO imports
               ];
@@ -385,7 +387,7 @@
             magic-wormhole-rs # to transfer secrets
             nix-output-monitor
             self.inputs.firefox2nix.packages.${system}.default
-            self.packages.${system}.treefmt-with-config
+            self.packages.${system}.treefmt-home
             ripgrep
             sops # to decrypt secrets
             ssh-to-age
@@ -417,8 +419,7 @@
         runScript = "ldd";
       };
 
-
-      # formatter = self.packages.${system}.treefmt-with-config;
+# 
 
       packages = (autoCalledPackages myPkgs {}) // {
         /*
@@ -438,28 +439,6 @@
           ;
 
         nvim-unwrapped = myPkgs.neovim-unwrapped;
-
-        treefmt-with-config = treefmt-nix.lib.mkWrapper nixpkgs.legacyPackages.x86_64-linux {
-          # Used to find the project root
-          projectRootFile = ".git/config";
-
-          # TODO useofficial 
-          programs.fourmolu.enable = true;
-          programs.nixfmt = { 
-            enable = true;
-            package = myPkgs.nixfmt;
-          };
-          programs.stylua.enable = true;
-          programs.just.enable = true;
-          programs.shfmt.enable = true;
-
-          settings.global.excludes = [
-            "*.org"
-            "*.wiki"
-            "nixpkgs/secrets.nix" # all git-crypt files ?
-          ];
-
-        };
 
         # TODO this exists in ml-tests, let's upstream some of the changes first
         # jupyter4ihaskell = myPkgs.jupyter-teto;
@@ -496,6 +475,9 @@
 
       in
       {
+        #  Standalone home-manager configuration entrypoint
+        #  Available through 'home-manager --flake .# your-username@your-hostname'
+        homeConfigurations = {};
 
         homeModules = {
 
@@ -551,6 +533,7 @@
                   imports = [
                     ./hosts/desktop/teto/programs/ssh.nix
                     ./hosts/desktop/teto/programs/bash.nix
+
                     ./hm/profiles/nova/ssh-config.nix
 
                     "${flakeInputs.nova-doctor}/nix/hm/nova-user.nix"

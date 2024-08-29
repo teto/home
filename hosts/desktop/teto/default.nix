@@ -116,7 +116,7 @@
   # programs.feh.enable = true;
   # for programs not merged yet
   home.packages = with pkgs; [
-    llm-ls # needed by the neovim plugin
+    # llm-ls # needed by the neovim plugin
 
     # mdp # markdown CLI presenter
     # gthumb # image manager, great to tag pictures

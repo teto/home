@@ -1,6 +1,5 @@
 -- treesitter testing playground
 local ts = vim.treesitter
--- local ts_utils = require('nvim-treesitter.ts_utils')
 
 local query = [[
     (request @request_lists)

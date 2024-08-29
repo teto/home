@@ -37,6 +37,20 @@
 
   };
 
+  # lab_config_file
+  sops.secrets."lab/config.toml" = {
+    key = "lab_config_file";
+    # alternatively one can use
+    # LAB_CORE_TOKEN
+    # LAB_CORE_HOST
+    
+
+    # sopsFile = ./secrets.yml.enc; # optionally define per-secret files
+    mode = "400";
+    # owner = config.users.users.teto.name;
+    # group = config.users.users.teto.group;
+  };
+
   sops.secrets.huggingfaceToken = {
     mode = "0440";
     # TODO only readable by gitlab

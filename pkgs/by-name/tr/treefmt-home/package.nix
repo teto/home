@@ -1,22 +1,22 @@
+{ flakeInputs, treefmt-nix }:
+flakeInputs.treefmt-nix.lib.mkWrapper flakeInputs.nixpkgs.legacyPackages.x86_64-linux {
+# Used to find the project root
+projectRootFile = ".git/config";
 
-         treefmt-nix.lib.mkWrapper nixpkgs.legacyPackages.x86_64-linux {
-          # Used to find the project root
-          projectRootFile = ".git/config";
+# TODO useofficial 
+programs.fourmolu.enable = true;
+programs.nixfmt = { 
+  enable = true;
+  # package = myPkgs.nixfmt;
+};
+programs.stylua.enable = true;
+programs.just.enable = true;
+programs.shfmt.enable = true;
 
-          # TODO useofficial 
-          programs.fourmolu.enable = true;
-          programs.nixfmt = { 
-            enable = true;
-            package = myPkgs.nixfmt;
-          };
-          programs.stylua.enable = true;
-          programs.just.enable = true;
-          programs.shfmt.enable = true;
+settings.global.excludes = [
+  "*.org"
+  "*.wiki"
+  "nixpkgs/secrets.nix" # all git-crypt files ?
+];
 
-          settings.global.excludes = [
-            "*.org"
-            "*.wiki"
-            "nixpkgs/secrets.nix" # all git-crypt files ?
-          ];
-
-        };
+}

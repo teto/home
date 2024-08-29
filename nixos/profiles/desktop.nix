@@ -31,6 +31,7 @@ in
 
   imports = [
     autoloadedModule
+    flakeInputs.nix-index-database.nixosModules.nix-index
     ../../hosts/config-all.nix
 
     ../../nixos/profiles/ntp.nix

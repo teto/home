@@ -1,12 +1,8 @@
 # SHELL = bash
 # provide a default
-# MAILDIR ?= $(HOME)/maildir
-# NIXPKGS_REPO ?= ~/nixpkgs
 # Add justfile() function, returning the current justfile, and justfile_directory()
-# NIXPKGS_REPO := x'~/nixpkgs' # only on master
 
 NIXPKGS_REPO := env_var('HOME') / 'nixpkgs'
-DOCTOR_REPO := "/home/teto/nova/doctor"
 BLOG_FOLDER := "${HOME}/blog"
 
 

@@ -20,7 +20,7 @@ local nix_deps = require('generated-by-nix')
 
 vim.g.sqlite_clib_path = nix_deps.sqlite_clib_path
 
-vim.opt.rtp:prepend(os.getenv('HOME') .. '/rocks-dev.nvim')
+-- vim.opt.rtp:prepend(os.getenv('HOME') .. '/rocks-dev.nvim')
 vim.opt.rtp:prepend(os.getenv('HOME') .. '/rocks.nvim')
 
 -- require("vim.lsp._watchfiles")._watchfunc = require("vim._watch").watch
@@ -613,7 +613,6 @@ if has_sniprun then
 end
 
 -- add description
--- lua require("nvim-treesitter.parsers").reset_cache();
 vim.api.nvim_set_keymap('n', '<f3>', '<cmd>lua vim.treesitter.inspect_tree()<cr>', {})
 vim.api.nvim_set_keymap('n', '<f5>', '<cmd>!make build', { desc = 'Run make build' })
 
@@ -864,6 +863,22 @@ end, { buffer = true })
 vim.keymap.set('n', ']e', function()
     vim.diagnostic.goto_next({ wrap = true, severity = vim.diagnostic.severity.ERROR })
 end, { buffer = true })
+
+
+vim.g.rocks_nvim = {
+    -- rocks.nvim config
+    treesitter = {
+        auto_highlight = { },
+        auto_install = "prompt",
+        parser_map = { },
+        ---@type string[] | fun(lang: string, bufnr: integer):boolean
+
+		-- filetypes or a function
+        disable = {
+			"lhaskell"
+		},
+    },
+}
 
 -- vim.opt.runtimepath:prepend('/home/teto/neovim/nvim-dbee')
 

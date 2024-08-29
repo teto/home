@@ -16,7 +16,7 @@
   nvidiaSettings = true;
 
   # open is only ready for data center use 
-  # open = true;
+  open = false;
   powerManagement.enable = true;
   # Update for NVIDA GPU headless mode, i.e. nvidia-persistenced. It ensures all GPUs stay awake even during headless mode.
   # nvidiaPersistenced = true;
