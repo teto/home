@@ -8,30 +8,27 @@
 # This includes things like `toml` or other lua packages.
 [rocks]
 
-[plugins."rocks-git.nvim"]
-
-dir = "/home/teto/rocks-git.nvim"
-
 # List of Neovim plugins to install alongside their versions.
 # If the plugin name contains a dot then you must add quotes to the key name!
 [plugins]
+"rocks-git.nvim"= "2.0.1"
 # "rocks.nvim" = "2.19.0" # rocks.nvim can also manage itself :D
 # "rocks-git.nvim"= "1.5.1"
 cmp-rg = "1.3.9"
-"oil.nvim" = "2.12.0"
+"oil.nvim" = "2.12.1"
 # -- :DiffviewOpen
 "diffview.nvim" = "scm"
-"haskell-tools.nvim" = "4.0.0"
+"haskell-tools.nvim" = "4.0.1"
 "none-ls.nvim" = "scm"
-"bufferline.nvim" = "4.7.0"
+"bufferline.nvim" = "4.6.1"
 auto-session = "2.5.0"
 "rocks-config.nvim" = "2.2.0"
 "trouble.nvim" = "3.6.0"
 "lualine.nvim" = "scm"
 "rocks-lazy.nvim" = "scm"
-"rest.nvim" = "2.0.1"
+"rest.nvim" = "3.2.1"
 "nui.nvim" = "0.3.0"
-neotest = "5.4.0"
+neotest = "5.4.1"
 # "rocks-dev.nvim" = "1.3.0"
 nvim-lint = "scm"
 "telescope.nvim" = "scm"
@@ -40,8 +37,8 @@ friendly-snippets = "scm"
 "haskell-snippets.nvim" = "1.4.4"
 "smart-open.nvim"= "scm"
 "none-ls-extras.nvim" = "scm"
-"yazi.nvim" = "6.0.1"
-tree-sitter-haskell = "0.0.2"
+"yazi.nvim" = "6.0.4"
+tree-sitter-haskell = "scm"
 nvim-cmp = "scm"
 "lspkind.nvim" = "scm"
 "modicator.nvim" = "scm"
