@@ -30,6 +30,10 @@ let
     "browser.search.hiddenOneOffs" = "Google,Yahoo,Bing,Amazon.com,Twitter";
     "browser.search.suggest.enabled" = false;
 
+    "browser.translations.neverTranslateLanguages" = "en";
+    "browser.newtabpage.activity-stream.showSponsored" = false;
+    "browser.newtabpage.activity-stream.showSponsoredTopSites" = false;
+
     "mousewheel.default.delta_multiplier_x" = 20;
     "mousewheel.default.delta_multiplier_y" = 20;
     "mousewheel.default.delta_multiplier_z" = 20;
@@ -45,6 +49,8 @@ let
     # "devtools.theme" = "${config.theme.base16.kind}";
     "dom.battery.enabled" = false;
 
+    "layout.spellcheckDefault" = 0; 
+
     # breaks facebook messenger when set to false
     "dom.event.clipboardevents.enabled" = true;
     "experiments.activeExperiment" = false;
@@ -59,7 +65,7 @@ let
     "network.IDN_show_punycode" = true;
     "network.allow-experiments" = false;
 
-    "network.dns.disablePrefetch" = true;
+    "network.dns.disablePrefetch" = false;
     # "network.prefetch-next" = false;
 
     # "network.http.referer.XOriginPolicy" = 2;
@@ -74,6 +80,12 @@ let
     # "widget.content.gtk-theme-override" = "Adwaita:light";
 
     "widget.use-xdg-desktop-portal.file-picker" = 1;
+
+    # "general.config.filename" = 
+
+    # TO avoid
+    "signon.prefillForms" = true;
+    # "signon.rememberSignons" = false;
   };
 
   novaFirefoxSettings = {
