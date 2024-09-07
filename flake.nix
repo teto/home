@@ -601,7 +601,7 @@
               modules = [
                 novaModule
                 # TODO add dev / devops nixos modules
-                self.inputs.nova-doctor.nixosModules.common
+                # self.inputs.nova-doctor.nixosModules.common
               ];
 
               specialArgs = {

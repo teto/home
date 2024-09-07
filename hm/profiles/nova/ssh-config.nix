@@ -10,7 +10,7 @@
 let
   # sshLib = import ../../../nixpkgs/lib/ssh.nix { inherit secrets flakeInputs; };
   mkSshMatchBlock = m: {
-    # user = secrets.nova-gitlab-runner-1.userName;
+    user = secrets.nova.runners.nova-runner-1.sshUser;
     identityFile = secrets.nova.runners.nova-runner-1.sshKey;
     hostname = m.hostname;
     identitiesOnly = true;

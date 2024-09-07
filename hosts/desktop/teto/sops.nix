@@ -40,6 +40,7 @@
   # lab_config_file
   sops.secrets."lab/config.toml" = {
     key = "lab_config_file";
+    path = "/home/teto/.config/lab/config.toml";
     # alternatively one can use
     # LAB_CORE_TOKEN
     # LAB_CORE_HOST

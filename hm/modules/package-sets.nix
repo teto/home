@@ -235,6 +235,7 @@ in
         docker-credential-helpers
         envsubst # replace templated files with variables
         sops # password 'manager'
+        glab # gitlab cli
         # TODO pass to vim makeWrapperArgs
         # nodePackages.bash-language-server
         # just in my branch :'(
