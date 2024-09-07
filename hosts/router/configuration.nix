@@ -21,6 +21,7 @@
   pkgs,
   secrets,
   flakeInputs,
+  flakeSelf,
   ...
 }:
 let
@@ -67,6 +68,7 @@ in
   home-manager.users.teto = {
     # TODO it should load the whole folder
     imports = [
+      flakeSelf.inputs.homeModules.teto-nogui
       # ./teto/home.nix
       ./teto/nix.nix
       ../../hm/profiles/zsh.nix

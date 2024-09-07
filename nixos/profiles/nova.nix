@@ -2,6 +2,7 @@
   config,
   lib,
   dotfilesPath,
+  flakeInputs,
   pkgs,
   ...
 }:
@@ -46,19 +47,20 @@
     # in 
     {
 
-      # root = {
-      #   # imports = [
-      #   #   # hmRootModule
-      #   #   ./root/programs/ssh.nix
-      #   #   ../../hm/profiles/nova/ssh-config.nix
-      #   # ];
-      #
+      root = {
+        imports = [
+          # hmRootModule
+          flakeInputs.nova-doctor.homeModules.root
+          # ./root/programs/ssh.nix
+          # ../../hm/profiles/nova/ssh-config.nix
+        ];
+        programs.zsh.enable = true;
       # sops.defaultSopsFile = ../secrets.yaml;
       #
       # # This is using an age key that is expected to already be in the filesystem
       # # sops.age.keyFile = "secrets/age.key";
       # sops.age.keyFile = "${dotfilesPath}/secrets/age.key";
-      # };
+      };
     };
   };
     

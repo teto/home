@@ -284,6 +284,7 @@ in
 
         perf-tools # to interpret
 
+        inotify-info # to debug filewatching issues, very nice
         inotify-tools # for inotify-wait notably
         ncurses.dev # for infocmp
         # neovide

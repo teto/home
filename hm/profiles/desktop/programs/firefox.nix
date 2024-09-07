@@ -34,6 +34,12 @@ let
     "browser.newtabpage.activity-stream.showSponsored" = false;
     "browser.newtabpage.activity-stream.showSponsoredTopSites" = false;
 
+    "browser.urlbar.showSearchSuggestionsFirst" = false;
+    "browser.urlbar.suggest.bookmark" = true;
+
+    # "sidebar.revamp" = true;
+    # "sidebar.verticalTabs" = true;
+
     "mousewheel.default.delta_multiplier_x" = 20;
     "mousewheel.default.delta_multiplier_y" = 20;
     "mousewheel.default.delta_multiplier_z" = 20;

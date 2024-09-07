@@ -222,6 +222,10 @@
         import src {
           inherit system;
           overlays = (src.lib.attrValues self.overlays) ++ [
+            (final: prev: {
+              # expose it for autoCalledPackages
+              inherit treefmt-nix;
+            })
             autoCalledPackages
             # self.inputs.rofi-hoogle.overlay
 
@@ -356,11 +360,10 @@
 
           home-manager.users = {
             root = {
-              imports = [
-                self.inputs.nova-doctor.homeModules.root
-                # ../../hm/profiles/neovim.nix
-                # TODO imports
-              ];
+              # imports = [
+              #   # ../../hm/profiles/neovim.nix
+              #   # TODO imports
+              # ];
             };
 
             teto = { };
@@ -387,7 +390,8 @@
             magic-wormhole-rs # to transfer secrets
             nix-output-monitor
             self.inputs.firefox2nix.packages.${system}.default
-            self.packages.${system}.treefmt-home
+            # self.packages.${system}.
+            treefmt-home
             ripgrep
             sops # to decrypt secrets
             ssh-to-age
@@ -479,9 +483,17 @@
         #  Available through 'home-manager --flake .# your-username@your-hostname'
         homeConfigurations = {};
 
+        # TODO scan hm/{modules, profiles} folder
         homeModules = {
 
-          default = (
+          sway = ./hm/profiles/sway.nix;
+
+
+          # teto-nogui = 
+
+          # teto-desktop = 
+
+          teto-nogui = (
             {
               config,
               pkgs,
@@ -489,12 +501,15 @@
               ...
             }:
             {
+              # inspire ./teto/default.nix
+
               imports = [
+                
 
                 # And add the home-manager module
                 ./hm/profiles/common.nix
                 ./hm/modules/neovim.nix
-                ./hm/modules/i3.nix
+                # ./hm/modules/i3.nix
                 ./hm/modules/bash.nix
                 ./hm/modules/zsh.nix
                 ./hm/modules/xdg.nix
@@ -536,8 +551,8 @@
 
                     ./hm/profiles/nova/ssh-config.nix
 
-                    "${flakeInputs.nova-doctor}/nix/hm/nova-user.nix"
-                    "${flakeInputs.nova-doctor}/nix/hm/nova-dev.nix"
+                    flakeInputs.nova-doctor.homeModules.user
+                    flakeInputs.nova-doctor.homeModules.sse
                   ];
                 };
               }
@@ -553,12 +568,13 @@
                 hm.nixosModules.home-manager
                 self.inputs.nixos-hardware.nixosModules.pcengines-apu
                 self.nixosModules.default-hm
-                (
-                  { pkgs, ... }:
-                  {
-                    imports = [ ./hosts/router/configuration.nix ];
-                  }
-                )
+                ./hosts/router/configuration.nix
+                # (
+                #   { pkgs, ... }:
+                #   {
+                #     imports = [ ./hosts/router/configuration.nix ];
+                #   }
+                # )
               ];
 
               specialArgs = {
@@ -622,13 +638,15 @@
               pkgs = myPkgs;
               modules = [
                 self.inputs.sops-nix.nixosModules.sops
-
-                (
-                  { pkgs, ... }:
-                  {
-                    imports = [ ./hosts/neotokyo/config.nix ];
-                  }
-                )
+                ./hosts/neotokyo/config.nix 
+                # (
+                #   { pkgs, ... }:
+                #   {
+                #     imports = [
+                #       ./hosts/neotokyo/config.nix 
+                #     ];
+                #   }
+                # )
                 self.nixosModules.default-hm
                 hm.nixosModules.home-manager
               ];
@@ -647,6 +665,7 @@
               specialArgs = {
                 secrets = { };
                 withSecrets = false;
+                flakeSelf = self;
                 flakeInputs = self.inputs;
                 inherit (self) inputs;
               };

@@ -1,5 +1,5 @@
-{ flakeInputs, treefmt-nix }:
-flakeInputs.treefmt-nix.lib.mkWrapper flakeInputs.nixpkgs.legacyPackages.x86_64-linux {
+{ treefmt-nix, pkgs }:
+treefmt-nix.lib.mkWrapper pkgs {
 # Used to find the project root
 projectRootFile = ".git/config";
 

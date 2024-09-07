@@ -1,6 +1,7 @@
 {
   config,
   flakeInputs,
+  flakeSelf,
   modulesPath,
   withSecrets,
   lib,
@@ -135,7 +136,10 @@ in
       # ./hm/profiles/gaming.nix
       teto = {
         # TODO it should load the whole folder
-        imports = [ ./teto/default.nix ];
+        imports = [ 
+          ./teto/default.nix
+          flakeSelf.homeModules.teto-nogui
+        ];
       };
     };
   # boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_8;
