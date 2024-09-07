@@ -8,6 +8,8 @@
 }:
 {
 
+  programs.zsh.enable = true;
+
   users.users.teto = {
 
     shell = pkgs.zsh;

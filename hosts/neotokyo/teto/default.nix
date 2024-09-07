@@ -18,6 +18,7 @@ let
 in
 {
 
+  programs.zsh.enable = true;
   programs.zsh.loginExtra = ''
     cat "${pkgs.writeText "login-welcome" welcomeMessage}";
   '';

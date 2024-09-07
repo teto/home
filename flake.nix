@@ -217,6 +217,32 @@
       # TODO check out packagesFromDirectoryRecursive  as well ?
       autoCalledPackages = import "${nixpkgs}/pkgs/top-level/by-name-overlay.nix" pkgs/by-name;
 
+      /** default system 
+      modules: List
+      */
+      mkNixosSystem = { 
+          modules  # array
+        , withSecrets # bool
+        , hostname
+        }:
+          nixpkgs.lib.nixosSystem {
+              inherit system;
+              # pkgs = self.inputs.nixos-unstable.legacyPackages.${system}.pkgs;
+              pkgs = myPkgs;
+              modules = [
+                self.inputs.sops-nix.nixosModules.sops
+                self.nixosModules.default-hm
+                hm.nixosModules.home-manager
+              ] ++ modules;
+              specialArgs = {
+                hostname = "neotokyo";
+                inherit secrets;
+                withSecrets = true;
+                flakeSelf = self;
+                flakeInputs = self.inputs;
+              };
+            };
+
       pkgImport =
         src:
         import src {
@@ -489,10 +515,7 @@
           sway = ./hm/profiles/sway.nix;
 
 
-          # teto-nogui = 
-
           # teto-desktop = 
-
           teto-nogui = (
             {
               config,
@@ -504,22 +527,20 @@
               # inspire ./teto/default.nix
 
               imports = [
-                
-
                 # And add the home-manager module
-                ./hm/profiles/common.nix
                 ./hm/modules/neovim.nix
                 # ./hm/modules/i3.nix
                 ./hm/modules/bash.nix
                 ./hm/modules/zsh.nix
                 ./hm/modules/xdg.nix
 
+                ./hm/profiles/common.nix
                 ./hm/profiles/neovim.nix
+                ./hm/profiles/zsh.nix
                 (
                   { ... }:
                   {
                     home.stateVersion = "24.05";
-
                   }
                 )
               ];
@@ -531,32 +552,6 @@
         nixosConfigurations =
           let
             system = "x86_64-linux";
-            novaModule = (
-              { flakeInputs, ... }:
-              {
-                imports = [
-                  # ./nixos/profiles/nova/rstudio-server.nix
-
-                ];
-                home-manager.extraSpecialArgs = {
-                  inherit secrets;
-                  withSecrets = true;
-                  # flakeInputs = self.inputs;
-                };
-
-                home-manager.users.teto = {
-                  imports = [
-                    ./hosts/desktop/teto/programs/ssh.nix
-                    ./hosts/desktop/teto/programs/bash.nix
-
-                    ./hm/profiles/nova/ssh-config.nix
-
-                    flakeInputs.nova-doctor.homeModules.user
-                    flakeInputs.nova-doctor.homeModules.sse
-                  ];
-                };
-              }
-            );
 
           in
           rec {
@@ -615,7 +610,8 @@
             # see https://determinate.systems/posts/extending-nixos-configurations
             mcoudron = laptop.extendModules {
               modules = [
-                novaModule
+                self.nixosModules.novaModule
+
                 # TODO add dev / devops nixos modules
                 # self.inputs.nova-doctor.nixosModules.common
               ];
@@ -632,31 +628,41 @@
 
             };
 
-            neotokyo = nixpkgs.lib.nixosSystem {
-              inherit system;
-              # pkgs = self.inputs.nixos-unstable.legacyPackages.${system}.pkgs;
-              pkgs = myPkgs;
+            neotokyo = mkNixosSystem {
               modules = [
-                self.inputs.sops-nix.nixosModules.sops
                 ./hosts/neotokyo/config.nix 
-                # (
-                #   { pkgs, ... }:
-                #   {
-                #     imports = [
-                #       ./hosts/neotokyo/config.nix 
-                #     ];
-                #   }
-                # )
-                self.nixosModules.default-hm
-                hm.nixosModules.home-manager
+                self.nixosModules.teto-nogui
               ];
-              specialArgs = {
-                hostname = "neotokyo";
-                inherit secrets;
-                withSecrets = true;
-                flakeInputs = self.inputs;
-              };
+              hostname = "neotokyo";
+              withSecrets = true;
             };
+
+            # neotokyo = nixpkgs.lib.nixosSystem {
+            #   inherit system;
+            #   # pkgs = self.inputs.nixos-unstable.legacyPackages.${system}.pkgs;
+            #   pkgs = myPkgs;
+            #   modules = [
+            #     self.inputs.sops-nix.nixosModules.sops
+            #     ./hosts/neotokyo/config.nix 
+            #     # (
+            #     #   { pkgs, ... }:
+            #     #   {
+            #     #     imports = [
+            #     #       ./hosts/neotokyo/config.nix 
+            #     #     ];
+            #     #   }
+            #     # )
+            #     self.nixosModules.default-hm
+            #     hm.nixosModules.home-manager
+            #   ];
+            #   specialArgs = {
+            #     hostname = "neotokyo";
+            #     inherit secrets;
+            #     withSecrets = true;
+            #     flakeSelf = self;
+            #     flakeInputs = self.inputs;
+            #   };
+            # };
 
             # desktop is a 
             desktop = nixpkgs.lib.nixosSystem {
@@ -697,7 +703,9 @@
                 withSecrets = true;
               };
 
-              modules = [ novaModule ];
+              modules = [ 
+                self.nixosModules.novaModule
+              ];
             });
 
             test = router.extendModules ({
@@ -721,6 +729,34 @@
         nixosModules = (modulesFromDir ./nixos/modules) // {
 
           default-hm = hm-common;
+          teto-nogui = nixos/accounts/teto/teto.nix;
+          novaModule = (
+              { flakeInputs, ... }:
+              {
+                imports = [
+                  # ./nixos/profiles/nova/rstudio-server.nix
+
+                ];
+                home-manager.extraSpecialArgs = {
+                  inherit secrets;
+                  withSecrets = true;
+                  # flakeInputs = self.inputs;
+                };
+
+                home-manager.users.teto = {
+                  imports = [
+                    ./hosts/desktop/teto/programs/ssh.nix
+                    ./hosts/desktop/teto/programs/bash.nix
+
+                    ./hm/profiles/nova/ssh-config.nix
+
+                    flakeInputs.nova-doctor.homeModules.user
+                    flakeInputs.nova-doctor.homeModules.sse
+                  ];
+                };
+              }
+            );
+
         };
 
         templates = {

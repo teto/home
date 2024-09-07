@@ -1,5 +1,6 @@
 {
   config,
+  flakeSelf,
   flakeInputs,
   secrets,
   modulesPath,
@@ -41,9 +42,11 @@ in
   programs.bash.interactiveShellInit = ''
     cat "${pkgs.writeText "welcome-message" banner}";
   '';
+
   imports = [
     # for gandi
     "${modulesPath}/virtualisation/openstack-config.nix"
+    flakeSelf.nixosModules.teto-nogui
     # ./hardware.nix
     ./services/openssh.nix
     ./sops.nix
@@ -82,19 +85,15 @@ in
   home-manager.users.teto = {
     # TODO it should load the whole folder
     imports = [
-      # ../desktop/teto/
-      # ../../hm/profiles/teto/common.nix
+      flakeSelf.homeModules.teto-nogui
+
       ./teto/default.nix
-      ../../hm/profiles/common.nix
-      ../../hm/profiles/zsh.nix
       ../../hm/profiles/neovim.nix
 
       # custom modules
       # ./home.nix
       # breaks build: doesnt like the "activation-script"
-      # nova.hmConfigurations.dev
     ];
-    # home.stateVersion = "23.05";
   };
 
   boot.loader = {
