@@ -37,8 +37,8 @@ let
     "browser.urlbar.showSearchSuggestionsFirst" = false;
     "browser.urlbar.suggest.bookmark" = true;
 
-    # "sidebar.revamp" = true;
-    # "sidebar.verticalTabs" = true;
+    "sidebar.revamp" = true;
+    "sidebar.verticalTabs" = true;
 
     "mousewheel.default.delta_multiplier_x" = 20;
     "mousewheel.default.delta_multiplier_y" = 20;
