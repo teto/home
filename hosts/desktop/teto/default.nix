@@ -134,8 +134,7 @@
     lutris # for gaming
 
     sioyek # pdf reader
-    jaq
-    # jq in rust
+    jaq # jq in rust
     viu # a console image viewer
     wally-cli # to flash ergodox keyboards
     wine
@@ -156,7 +155,7 @@
 
     unar # used to view archives by yazi
     # poppler for pdf preview
-    memento # broken capable to display 2 subtitles at same time
+    memento # capable to display 2 subtitles at same time
 
     rofi-rbw-wayland
   ];

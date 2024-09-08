@@ -47,8 +47,8 @@ let
     "browser.send_pings" = false;
 
     "browser.startup.page" = 3;
-
     "browser.tabs.closeWindowWithLastTab" = false;
+    "browser.tabs.hoverpreview.enabled" = true;
 
     "browser.urlbar.placeholderName" = "DuckDuckGo";
     "browser.urlbar.speculativeConnect.enabled" = false;

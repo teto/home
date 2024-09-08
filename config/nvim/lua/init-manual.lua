@@ -18,24 +18,55 @@ local map = vim.keymap.set
 
 local nix_deps = require('generated-by-nix')
 
+-- TODO remove in favor of the generated one
 vim.g.sqlite_clib_path = nix_deps.sqlite_clib_path
+
+-- set it before loading vim plugins like autosession
+-- ,localoptions
+vim.o.sessionoptions = 'buffers,curdir,help,tabpages,winsize,winpos,localoptions'
 
 -- vim.opt.rtp:prepend(os.getenv('HOME') .. '/rocks-dev.nvim')
 vim.opt.rtp:prepend(os.getenv('HOME') .. '/rocks.nvim')
 
 -- require("vim.lsp._watchfiles")._watchfunc = require("vim._watch").watch
 -- local ffi = require 'ffi'
-local luarocks_config_fn = assert(loadfile(vim.fn.stdpath('config') .. '/luarocks-config-generated.lua'))
--- local f = assert(loadfile(filename))
--- return f()
+local custom_luarocks_config_filename = vim.fn.stdpath('config') .. '/luarocks-config-generated.lua'
+-- print("Loading custom luarocks config from: "..custom_luarocks_config_filename)
+local luarocks_config_fn, errmsg = loadfile(custom_luarocks_config_filename)
+
+if luarocks_config_fn == nil then
+	print("Could not load "..errmsg)
+end
+
+-- function
+-- print(tostring(luarocks_config_fn))
+-- vim.print(tostring(luarocks_config_fn()))
 vim.g.rocks_nvim = {
 	-- TODO reference one from
 	-- use nix_deps.luarocks_executable
     luarocks_binary = nix_deps.luarocks_executable,
+	-- /home/teto/.local/share/nvim/rocks/luarocks-config.lua
     luarocks_config = luarocks_config_fn(),
     _log_level = vim.log.levels.TRACE,
+
+	-- checkout constants.DEFAULT_DEV_SERVERS
+	servers = { "https://luarocks.org/manifests/neorocks/"} ,
+
     lazy = true, -- for cleaner logs
+    -- rocks.nvim config
+    treesitter = {
+        auto_highlight = { },
+        auto_install = "prompt",
+        parser_map = { },
+        ---@type string[] | fun(lang: string, bufnr: integer):boolean
+
+		-- filetypes or a function
+        disable = {
+			"lhaskell"
+		},
+    },
 }
+
 
 -- vim.opt.packpath:prepend('/home/teto/gp.nvim2')
 -- local gp_defaults = require'gp.defaults'
@@ -186,10 +217,6 @@ vim.opt.termguicolors = true
 vim.opt.rtp:prepend('/home/teto/parsers')
 -- vim.opt.rtp:prepend(lazypath)
 
--- set it before loading vim plugins like autosession
--- ,localoptions
-vim.o.sessionoptions = 'buffers,curdir,help,tabpages,winsize,winpos'
--- vim.o.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 
 -- lazy/config.lua sets vim.go.loadplugins = false so I used to run packloadall to restore those plugins
 -- but there seems to be a bug somewhere as overriding VIMRUNTIME would then be dismissed and it would used
@@ -864,21 +891,6 @@ vim.keymap.set('n', ']e', function()
     vim.diagnostic.goto_next({ wrap = true, severity = vim.diagnostic.severity.ERROR })
 end, { buffer = true })
 
-
-vim.g.rocks_nvim = {
-    -- rocks.nvim config
-    treesitter = {
-        auto_highlight = { },
-        auto_install = "prompt",
-        parser_map = { },
-        ---@type string[] | fun(lang: string, bufnr: integer):boolean
-
-		-- filetypes or a function
-        disable = {
-			"lhaskell"
-		},
-    },
-}
 
 -- vim.opt.runtimepath:prepend('/home/teto/neovim/nvim-dbee')
 

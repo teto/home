@@ -147,7 +147,7 @@ in
 
         };
 
-        luarocksConfigStr = (lib.generators.toLua { asBindings = true; } luarocksConfigAttr2);
+        luarocksConfigStr = (lib.generators.toLua { asBindings = false; } luarocksConfigAttr2);
 
         # this is a backup
         # luarocksConfigStrDefault = ''
@@ -172,7 +172,7 @@ in
       in
       {
         enable = true;
-        text = luarocksConfigStr;
+        text = "return ${luarocksConfigStr}";
       };
   };
 }
