@@ -194,6 +194,8 @@
       ...
     }:
     let
+      dotfilesPath = "/home/teto/home";
+
       novaUserProfile = {
         login = "teto";
         firstname = "teto";
@@ -382,7 +384,8 @@
               inherit withSecrets;
               flakeInputs = self.inputs;
               inherit novaUserProfile;
-              dotfilesPath = "/home/teto/home";
+              # TODO get it from ./. ?
+              inherit dotfilesPath;
             };
 
           home-manager.users = {

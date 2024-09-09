@@ -67,9 +67,7 @@ vim.g.rocks_nvim = {
     },
 }
 
-
 -- vim.opt.packpath:prepend('/home/teto/gp.nvim2')
--- local gp_defaults = require'gp.defaults'
 
 -- vim.g.baleia = require("baleia").setup({ })
 -- -- Command to colorize the current buffer
@@ -81,7 +79,12 @@ vim.g.rocks_nvim = {
 -- vim.api.nvim_create_user_command("BaleiaLogs", vim.g.baleia.logger.show, { bang = true })
 
 -- TODO prefix with gp_defaults.
-local chat_system_prompt = "You are a general AI assistant.\n\n"
+-- local defaults = require('gp.defaults')
+--
+-- local chat_system_prompt = defaults.chat_system_prompt
+
+local chat_system_prompt = 
+	"You are a general AI assistant.\n\n"
 	.. "The user provided the additional info about how they would like you to respond:\n\n"
 	.. "- If you're unsure don't guess and say you don't know instead.\n"
 	.. "- Ask question if you need clarification to provide better answer.\n"
@@ -90,8 +93,8 @@ local chat_system_prompt = "You are a general AI assistant.\n\n"
 	.. "- Use Socratic method to improve your thinking and coding skills.\n"
 	.. "- Don't elide any code from your output if the answer requires coding.\n"
 	.. "- Take a deep breath; You've got this!\n"
--- 
-vim.g.gpt_prompt = {
+
+vim.g.gp_nvim = {
     agents = {
         -- unpack(default_config.agents),
         -- Disable ChatGPT 3.5
@@ -128,9 +131,13 @@ vim.g.gpt_prompt = {
         -- },
     },
     -- image_dir = (os.getenv("TMPDIR") or os.getenv("TEMP") or "/tmp") .. "/gp_images",
-    image_dir = vim.fn.stdpath('cache') .. '/gp_images',
-    whisper_dir = vim.fn.stdpath('cache') .. '/gp_whisper',
-    whisper_language = 'en',
+    image = {
+		store_dir = vim.fn.stdpath('cache') .. '/gp_images',
+	},
+    whisper = {
+		store_dir = vim.fn.stdpath('cache') .. '/gp_whisper',
+    	language = 'en',
+	},
 
     -- chat_agents = agents,
     -- openai_api_endpoint = "http://localhost:8080/v1/chat/completions",
@@ -148,6 +155,7 @@ vim.g.gpt_prompt = {
         },
         -- ollama = {},
         localai = {
+			secret = "",
             endpoint = 'http://localhost:11111/v1/chat/completions',
         },
         googleai = {

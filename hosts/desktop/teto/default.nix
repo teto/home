@@ -5,6 +5,7 @@
   flakeInputs,
   pkgs,
   withSecrets,
+  dotfilesPath,
   ...
 }:
 # let
@@ -48,7 +49,7 @@
       ./services/mpd.nix
       ./services/mpris.nix
       ./services/nextcloud-client.nix
-      # ../../../hm/profiles/experimental.nix
+      ../../../hm/profiles/experimental.nix
 
       # Not tracked, so doesn't need to go in per-machine subdir
       ../../../hm/profiles/gnome.nix

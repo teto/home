@@ -15,6 +15,9 @@
 
   programs.xdg.enable = true;
 
+
+  services.trayscale.enable = true;
+
   programs.swappy.enable = false;
 
   home.packages = with pkgs; [ ];

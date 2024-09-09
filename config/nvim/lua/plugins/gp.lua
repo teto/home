@@ -1,3 +1,5 @@
+-- lua require'gp.setup'
+
 -- default command agents (model + persona)
 -- name, model and system_prompt are mandatory fields
 -- to use agent for chat set chat = true, for command set command = true

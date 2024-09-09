@@ -63,7 +63,9 @@ set keymap vi-insert
 "\C-u": unix-line-discard
 # "jj": vi-movement-mode     #after 'set keymap vi-insert'?
 # "\C-w": backward-kill-word
-"\C-p": history-search-backward
+# history-search-backward
+"\C-p": previous-history
+
 # $endif
 
 # for linux console and RH/Debian xterm

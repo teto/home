@@ -24,6 +24,7 @@ in
     sessionVariables =
       let
         prod-runners = builtins.fromJSON (
+          # TODO fetch it from doctor ?
           builtins.readFile "${flakeInputs.nova-ci}/configs/prod/runners-generated.json"
         );
 
@@ -62,7 +63,7 @@ in
         # NOVA_RUNNER1 = mkRemoteBuilderDesc secrets.nova-runner-1;
         NOVA_CACHE_DEV = secrets.nova.novaNixCache.dev;
         NOVA_CACHE_PROD = secrets.nova.novaNixCache.prod;
-
+        CI_REGISTRY_IMAGE="https://registry.novadiscovery.net";
         HUSKY = 0; # To disable HUSKY
         # wayland variables
       }
