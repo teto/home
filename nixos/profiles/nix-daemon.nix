@@ -121,6 +121,7 @@
     # "https://teto.cachix.org"
     settings = {
       builders-use-substitutes = true;
+      use-xdg-base-directories = true;
       extra-substituters = [
         # "https://cache.nixos.org/" # part of the default
         "https://jupyterwith.cachix.org"
