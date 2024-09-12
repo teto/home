@@ -71,7 +71,7 @@ dir = "/home/teto/gp.nvim"
 git = "github:adlawson/vim-sorcerer"
 rev = "1.3^{}"
 
-[plugins.Solarized]
+[plugins.solarized]
 git = "vim-scripts/Solarized"
 rev = "1.0.0b1^{}"
 colorscheme= "solarized"

@@ -5,7 +5,9 @@
     autoStageIfNothingStaged = true
 
 [blame]
-ignoreRevsFile = .git-blame-ignore-revs
+# 6:# $ git config blame.ignoreRevsFile .git-blame-ignore-revs
+# 12:# The ignoreRevsFile can't be set globally due to blame failing if the file isn't present.
+# ignoreRevsFile = .git-blame-ignore-revs
 
 [core]
 	# fsmonitor = "/nix/store/pqrqcfw2m27kwhrh7jyj05lp9b5pi0jd-rs-git-fsmonitor-0.1.3/bin/rs-git-fsmonitor"
