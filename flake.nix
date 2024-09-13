@@ -593,6 +593,7 @@
                 withSecrets = false;
                 secrets = { };
                 flakeInputs = self.inputs;
+                inherit dotfilesPath;
               };
 
               modules = [
@@ -620,9 +621,12 @@
                 # self.inputs.nova-doctor.nixosModules.common
               ];
 
+              # TODO retain existing specialArgs and inject mine ?!
               specialArgs = {
                 hostname = "mcoudron";
                 inherit secrets;
+                inherit dotfilesPath;
+
                 withSecrets = true;
                 flakeInputs = self.inputs;
                 userConfig = novaUserProfile;

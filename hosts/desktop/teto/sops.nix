@@ -38,15 +38,13 @@
   };
 
   # lab_config_file
-  sops.secrets."lab/config.toml" = {
+  # https://github.com/zaquestion/lab
+  sops.secrets."lab/lab.toml" = {
     key = "lab_config_file";
-    path = "/home/teto/.config/lab/config.toml";
+    # path = "/home/teto/.config/lab/lab.toml";
     # alternatively one can use
     # LAB_CORE_TOKEN
     # LAB_CORE_HOST
-    
-
-    # sopsFile = ./secrets.yml.enc; # optionally define per-secret files
     mode = "400";
     # owner = config.users.users.teto.name;
     # group = config.users.users.teto.group;
