@@ -917,7 +917,7 @@
           # Build the derivation on the target system.
           # Will also fetch all external dependencies from the target system's substituters.
           # This default to `false`
-          remoteBuild = true;
+          remoteBuild = false;
 
           # Timeout for profile activation.
           # This defaults to 240 seconds.

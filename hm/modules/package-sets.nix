@@ -248,6 +248,7 @@ in
 
         nix-diff
         nix-prefetch-git
+        nix-tree
         netcat-gnu # plain 'netcat' is the bsd one
         gitAndTools.diff-so-fancy
         jq
@@ -264,6 +265,9 @@ in
         # psmisc # ps -a for python ?
         rbw
         util-linux # for lsns (namespace listing)
+      just
+      gitAndTools.gitFull # to get send-email
+      gnumake
 
         # haxe # to test neovim developement
         eza # to list files

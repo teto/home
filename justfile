@@ -127,7 +127,7 @@ routerIso:
     nix build .\#nixosConfigurations.routerIso.config.system.build.isoImage
 
 router-build:
-    nix build .\#nixosConfigurations.routerIso.config.system.build.toplevel
+    nix build .\#nixosConfigurations.router.config.system.build.toplevel
 
 # this shouldn't need to be done !
 cache:

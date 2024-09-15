@@ -29,7 +29,7 @@
       ./services/swayidle.nix
 
       # ../../../hm/profiles/emacs.nix
-      # ../../../hm/profiles/qutebrowser.nix
+      ../../../hm/profiles/qutebrowser.nix
 
       # ../desktop/teto/default.nix  # Track for regressions
 

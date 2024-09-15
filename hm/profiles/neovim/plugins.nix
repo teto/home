@@ -95,9 +95,7 @@ in
     #           \ {'z': $XDG_CONFIG_HOME.'/zsh/'},
     #           \ {'m': $XDG_CONFIG_HOME.'/mptcpanalyzer/config'},
     #           \ {'n': $XDG_CONFIG_HOME.'/nvim/config'},
-    #           \ {'N': $XDG_CONFIG_HOME.'/ncmpcpp/config'},
     #           \ ]
-    #           " \ {'q': $XDG_CONFIG_HOME.'/qutebrowser/qutebrowser.conf'},
     #     let g:startify_files_number = 10
     #     let g:startify_session_autoload = 1
     #     let g:startify_session_persistence = 0
