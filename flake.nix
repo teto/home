@@ -195,6 +195,7 @@
     }:
     let
       dotfilesPath = "/home/teto/home";
+      secretsFolder = "/home/teto/home/secrets";
 
       novaUserProfile = {
         login = "teto";
@@ -212,7 +213,8 @@
         # email = "matthieu.coudron@novadiscovery.com";
       };
 
-      secrets = import ./nixpkgs/secrets.nix;
+      secrets = import ./nixpkgs/secrets.nix { inherit secretsFolder dotfilesPath; };
+
       # sshLib = import ./nixpkgs/lib/ssh.nix { inherit secrets; flakeInputs = self.inputs; };
       system = "x86_64-linux";
 
@@ -237,11 +239,12 @@
                 hm.nixosModules.home-manager
               ] ++ modules;
               specialArgs = {
-                hostname = "neotokyo";
+                inherit hostname;
                 inherit secrets;
                 withSecrets = true;
                 flakeSelf = self;
                 flakeInputs = self.inputs;
+                inherit dotfilesPath secretsFolder;
               };
             };
 
@@ -358,7 +361,6 @@
 
             # TODO it should autoload those
             ./hm/modules/neovim.nix
-            ./hm/modules/i3.nix
             ./hm/modules/bash.nix
             ./hm/modules/zsh.nix
             ./hm/modules/xdg.nix
@@ -385,7 +387,7 @@
               flakeInputs = self.inputs;
               inherit novaUserProfile;
               # TODO get it from ./. ?
-              inherit dotfilesPath;
+              inherit dotfilesPath secretsFolder;
             };
 
           home-manager.users = {
@@ -517,6 +519,7 @@
         homeModules = {
 
           sway = ./hm/profiles/sway.nix;
+          # neovim = ./hm/profiles/sway.nix; 
 
 
           # teto-desktop = 
@@ -561,27 +564,17 @@
           rec {
             # TODO generate those from the hosts folder ?
             # with aliases ?
-            router = nixpkgs.lib.nixosSystem {
-              inherit system;
+            router = 
+              mkNixosSystem {
+                withSecrets = true;
+                hostname = "router";
+
               modules = [
                 hm.nixosModules.home-manager
                 self.inputs.nixos-hardware.nixosModules.pcengines-apu
-                self.nixosModules.default-hm
+                # self.nixosModules.default-hm
                 ./hosts/router/configuration.nix
-                # (
-                #   { pkgs, ... }:
-                #   {
-                #     imports = [ ./hosts/router/configuration.nix ];
-                #   }
-                # )
               ];
-
-              specialArgs = {
-                inherit secrets;
-                withSecrets = true;
-
-                flakeInputs = self.inputs;
-              };
             };
 
             # it doesn't have to be called like that !
@@ -638,6 +631,7 @@
 
             neotokyo = mkNixosSystem {
               modules = [
+                hm-common
                 ./hosts/neotokyo/config.nix 
                 self.nixosModules.teto-nogui
               ];

@@ -113,6 +113,16 @@
     ];
   };
 
+  # works only because TIGRC_USER is set
+  # if file exists vim.tigrc
+  home.file."${config.xdg.configHome}/tig/config".text = ''
+    source ${pkgs.tig}/etc/vim.tigrc
+    # not provided
+    # source ${pkgs.tig}/tig/contrib/large-repo.tigrc
+    source ${config.xdg.configHome}/tig/custom.tigrc
+  '';
+
+
   # seulemt pour X
   # programs.feh.enable = true;
   # for programs not merged yet
@@ -129,6 +139,7 @@
     pciutils # for lspci
     moar # test as pager
     tailspin # a log viewer based on less ("spin" or "tsspin" is the executable)
+    tig
 
     presenterm # for presentations from terminal/markdown (in rust, supports images, pretty cool)
 

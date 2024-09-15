@@ -52,9 +52,9 @@ in
     flashrom # to be able to flash the bios see https://teklager.se/en/knowledge-base/apu-bios-upgrade/
     dmidecode # to get version of the bios: dmidecode -t bios
     bridge-utils
-    wirelesstools
+    iw
     iwd # contains iwmon
-    pkgs.wirelesstools # to get iwconfig
+    # pkgs.wirelesstools # to get iwconfig
     pkgs.tshark
     pkgs.wget
   ];
@@ -68,12 +68,14 @@ in
   home-manager.users.teto = {
     # TODO it should load the whole folder
     imports = [
-      flakeSelf.inputs.homeModules.teto-nogui
+      flakeSelf.homeModules.teto-nogui
       # ./teto/home.nix
       ./teto/nix.nix
       ../../hm/profiles/zsh.nix
       ../../hm/profiles/neovim.nix
     ];
+
+    package-sets.wifi = true;
   };
 
   services.journald.extraConfig = ''
@@ -398,5 +400,5 @@ in
 
   time.timeZone = "Europe/Paris";
 
-  system.stateVersion = "23.11";
+  system.stateVersion = "24.05";
 }

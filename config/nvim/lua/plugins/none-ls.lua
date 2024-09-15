@@ -37,7 +37,7 @@ none_ls.setup({
         -- .with({
         --  extra_args = { }
         -- }),
-        require'none-ls.diagnostics.flake8', -- not builtins anymore
+        -- require'none-ls.diagnostics.flake8', -- not builtins anymore
         none_ls.builtins.diagnostics.zsh,
 
         -- use with vim.lsp.buf.format()

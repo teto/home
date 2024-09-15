@@ -5,6 +5,7 @@
   lib,
   secrets,
   withSecrets,
+  secretsFolder,
   flakeInputs,
   ...
 }:
@@ -24,14 +25,14 @@
         user = "teto";
         # le port depend du service
         port = secrets.jakku.sshPort;
-        identityFile = "~/.ssh/id_rsa";
+        identityFile = "${secretsFolder}/ssh/id_rsa";
         identitiesOnly = true;
         # port = 12666;
       };
 
       router = {
         # checkHostIP
-        identityFile = "~/.ssh/id_rsa";
+        identityFile = "${secretsFolder}/ssh/id_rsa";
         user = "teto";
         host = "router";
         hostname = secrets.router.hostname;
@@ -42,8 +43,22 @@
         port = 12666;
       };
 
+      router-lan = {
+        # checkHostIP
+        identityFile = "${secretsFolder}/ssh/id_rsa";
+        user = "teto";
+        host = "router";
+        hostname = "10.0.0.1";
+        identitiesOnly = true;
+        # experimental
+        # https://github.com/nix-community/home-manager/pull/2992
+        # match = "ovh1";
+        port = 12666;
+      };
+
     };
 
+    # TODO parts of this should be accessible from 
     extraConfig = ''
       Include "${config.xdg.configHome}/ssh/config"
       # TODO remove when doctor's home-manager is ok

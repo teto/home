@@ -82,6 +82,14 @@ in
     # home.stateVersion = "23.11";
   };
 
+  users.users.teto = {
+
+    extraGroups = [
+      "nextcloud" # to be able to list files
+    ];
+
+  };
+
   home-manager.users.teto = {
     # TODO it should load the whole folder
     imports = [

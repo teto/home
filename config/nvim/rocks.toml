@@ -11,7 +11,7 @@
 # List of Neovim plugins to install alongside their versions.
 # If the plugin name contains a dot then you must add quotes to the key name!
 [plugins]
-"rocks-git.nvim"= "2.0.1"
+"rocks-git.nvim"= "2.2.0"
 # "rocks.nvim" = "2.19.0" # rocks.nvim can also manage itself :D
 # "rocks-git.nvim"= "1.5.1"
 cmp-rg = "1.3.9"
@@ -167,9 +167,6 @@ git = "uga-rosa/ccc.nvim"
 rev = "v2.0.3^{}"
 opt = true
 
-[plugins."tint.nvim"]
-git = "levouh/tint.nvim"
-
 [plugins."hacker.nvim"]
 git = "letieu/hacker.nvim"
 opt = true
@@ -200,6 +197,13 @@ git = "gbprod/none-ls-shellcheck.nvim"
 
 [plugins.vim-aftercolors]
 git = "calvinchengx/vim-aftercolors"
+
+[plugins."tint.nvim"]
+git = "levouh/tint.nvim"
+
+[plugins."live-command.nvim"]
+git = "smjonas/live-command.nvim"
+rev = "2.0.0"
 
 [config]
 plugins_dir = "plugins/"

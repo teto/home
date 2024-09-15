@@ -1,4 +1,11 @@
 
+Config for an APU router.
+
+
+* debug wifi
+
+$ iwctl
+
 
 * Flash the bios
 

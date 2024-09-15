@@ -61,7 +61,6 @@ in
 
       ../../nixos/profiles/greetd.nix
       ../../nixos/profiles/nova.nix
-      # ../../nixos/profiles/immich.nix
 
       # this is only to test the new config
       # ./nextcloud.nix
@@ -80,7 +79,7 @@ in
       ../../nixos/profiles/podman.nix
 
       # ../../nixos/profiles/libvirtd.nix
-      # ../../nixos/profiles/nvidia.nix
+      # ../../nixos/profiles/immich.nix
       ../../nixos/profiles/ntp.nix
       ../../nixos/profiles/ollama.nix
     ]

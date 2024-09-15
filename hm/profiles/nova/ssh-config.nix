@@ -5,6 +5,8 @@
   secrets,
   withSecrets,
   flakeInputs,
+  dotfilesPath,
+
   ...
 }:
 let
@@ -57,10 +59,10 @@ in
         nova = {
           match = "host=git.novadiscovery.net";
           user = "matthieu.coudron";
-          identityFile = "~/.ssh/nova_key";
+          identityFile = "${dotfilesPath}/secrets/ssh/nova_key";
         };
         relay-prod = {
-          identityFile = "~/.ssh/nova_key";
+          identityFile = "${dotfilesPath}/secrets/ssh/nova_key";
         };
       };
   };

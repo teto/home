@@ -116,8 +116,10 @@ in
   # import the one in pkgs/
   # package = myFirefox;
   languagePacks = [
-    "fr"
+    "fr-FR"
+    "jp-JP"
     "en-GB"
+    # 5840
   ];
   policies = {
     BlockAboutConfig = false;
