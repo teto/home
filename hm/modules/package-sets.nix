@@ -34,7 +34,8 @@ in
       energy = mkEnableOption "energy management packages";
       enableGaming = mkEnableOption "Gaming packages";
       waylandPackages = mkEnableOption "Wayland packages";
-
+        
+      llms = mkEnableOption "IA/Large language model packages";
       # laptop = mkEnableOption "Laptop packages (energy + wifi)";
 
     };
@@ -55,6 +56,12 @@ in
         systemctl-tui
         pciutils # for lspci
         # zenith  # resources monitor
+      ];
+    })
+    (mkIf cfg.llms {
+      home.packages = [
+
+        # pkgs.aider-chat  # breaks
       ];
     })
 
@@ -265,9 +272,9 @@ in
         # psmisc # ps -a for python ?
         rbw
         util-linux # for lsns (namespace listing)
-      just
-      gitAndTools.gitFull # to get send-email
-      gnumake
+        just
+        gitAndTools.gitFull # to get send-email
+        gnumake
 
         # haxe # to test neovim developement
         eza # to list files
@@ -306,6 +313,7 @@ in
         # rpl # to replace strings across files
         strace
         tio # serial console reader
+        tig # 
         universal-ctags # there are many different ctags, be careful !
         whois
         zeal # doc for developers

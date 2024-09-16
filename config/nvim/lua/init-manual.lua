@@ -67,6 +67,16 @@ vim.g.rocks_nvim = {
     },
 }
 
+
+local has_avante, avante_mod = pcall(require, 'avante')
+if has_avante then
+
+	require('avante_lib').load()
+	avante_mod.setup ({
+	-- Your config here!
+	})
+end
+
 -- vim.opt.packpath:prepend('/home/teto/gp.nvim2')
 
 -- vim.g.baleia = require("baleia").setup({ })

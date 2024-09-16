@@ -75,7 +75,7 @@ keybinding:
         scrollDownMain-alt1: J
         scrollUpMain-alt2: <c-u>
         scrollDownMain-alt2: <c-d>
-        executeCustomCommand: ':'
+        executeShellCommand: ':'
         createRebaseOptionsMenu: m
         pushFiles: P
         pullFiles: p
@@ -152,8 +152,8 @@ os:
     openLink: sh -c "xdg-open {{link}} >/dev/null"
 disableStartupPopups: false
 customCommands:
-  - key: '<c-r>'
-    context: 'commits'
-    command: 'gh pr list'
-    loadingText: 'Listing github branches'
+    - key: '<c-r>'
+      context: 'commits'
+      command: 'gh pr list'
+      loadingText: 'Listing github branches'
 services: {}

@@ -43,7 +43,7 @@ nvim-cmp = "scm"
 "lspkind.nvim" = "scm"
 "modicator.nvim" = "scm"
 luasnip = "2.3.0"
-nvim-treesitter-textobjects = "scm"
+# nvim-treesitter-textobjects = "scm"
 # "rocks-treesitter.nvim" = "1.0.3"
 
 

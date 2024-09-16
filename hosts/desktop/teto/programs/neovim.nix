@@ -118,7 +118,11 @@ let
     # { plugin = vim-dadbod-ui; }
 
     # TODO it needs some extra care
-    (luaPlugin { plugin = haskell-tools-nvim; })
+
+    # TODO should be able to handle it via rocks ?
+    (luaPlugin { plugin = avante-nvim; })
+
+    # (luaPlugin { plugin = haskell-tools-nvim; })
 
     # I've not been using it so far
     # (luaPlugin { plugin = nvim-dap; })
@@ -362,19 +366,19 @@ let
     # })
 
     # TODO put into rocks.nvim
-    (luaPlugin { plugin = rest-nvim; })
+    # (luaPlugin { plugin = rest-nvim; })
   ];
 
   filetypePlugins = with pkgs.vimPlugins; [
     # { plugin = pkgs.vimPlugins.hurl; }
     { plugin = wmgraphviz-vim; }
     { plugin = fennel-vim; }
-    { plugin = vim-toml; }
+    { plugin = vim-toml; } # TODO use treesitter
     { plugin = dhall-vim; }
     { plugin = kmonad-vim; }
     { plugin = vim-just; }
-    moonscript-vim
-    idris-vim
+    # moonscript-vim
+    # idris-vim
   ];
 
   extraPackages = with pkgs; [
@@ -397,7 +401,7 @@ let
 
     # llm-ls
     manix # should be no need, telescope-manix should take care of it
-    nodePackages.vscode-langservers-extracted # needed for typescript language server IIRC
+    # nodePackages.vscode-langservers-extracted # needed for typescript language server IIRC
     # prettier sadly can't use buildNpmPackage because no lockfile https://github.com/NixOS/nixpkgs/issues/229475
     nodePackages.dockerfile-language-server-nodejs
     nodePackages.typescript-language-server

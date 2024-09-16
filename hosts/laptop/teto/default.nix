@@ -56,6 +56,7 @@
     enableDesktopGUIPackages = true;
     energy = true;
     wifi = true;
+    llms = true;
   };
 
   programs.zsh = {
