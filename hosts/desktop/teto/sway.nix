@@ -34,7 +34,7 @@ in
 
   # TODO generate a wrapper ?
   wayland.windowManager.sway = {
-    xwayland = true;
+    xwayland = false;
     extraOptions = [
       # -Dlegacy-wl-drm
       "--unsupported-gpu"

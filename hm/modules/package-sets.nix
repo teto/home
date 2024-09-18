@@ -173,6 +173,8 @@ in
           xdg-utils
           xdg-terminal-exec # necessary for gio launch to launch terminal
 
+          xwayland-satellite # to launch X applications within wayland (and without a full Xwayland ?)
+
         ];
 
     })
