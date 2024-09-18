@@ -9,9 +9,9 @@
   #   enable = true;
   # };
 
-  programs.zsh = {
-    mcfly.enable = true;
-  };
+  # programs.zsh = {
+  #   mcfly.enable = true;
+  # };
 
   programs.xdg.enable = true;
 
