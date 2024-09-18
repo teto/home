@@ -237,6 +237,7 @@ in
     (mkIf cfg.developer {
       home.packages = with pkgs; [
         automake
+        cargo
         (backblaze-b2.override ({ execName = "b2"; }))
         dasht # ~ zeal but in terminal
         docker-credential-helpers

@@ -267,6 +267,13 @@ in
 
   networking.iproute2.enable = true;
 
+  swapDevices = [
+    {
+      device = "/fucking_swap";
+      size = 16000; # in MB
+    }
+  ];
+
   programs.gnome-disks = {
     enable = true;
   };

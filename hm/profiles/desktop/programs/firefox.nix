@@ -8,7 +8,7 @@ let
 
   # https://discourse.nixos.org/t/how-do-you-pin-a-firefox-extensions-add-on-to-the-firefox-toolbar/36081
   # browser.uiCustomization.state 
-  defaultFirefoxSettings = {
+  myDefaultSettings = {
     # TODO use my own startpage
     "browser.startup.homepage" = "https://github.com/teto";
     "browser.search.region" = "FR";
@@ -94,7 +94,7 @@ let
     # "signon.rememberSignons" = false;
   };
 
-  novaFirefoxSettings = {
+  novaSpecificSettings = {
     # avoid
     "signon.rememberSignons" = false;
   };
@@ -132,7 +132,7 @@ in
   profiles = {
     perso = {
       # https://gitlab.com/rycee/configurations/-/blob/bf46aef74ca53a61fe2d35349fe3dbc6a70b2609/user/firefox.nix#L25-39
-      settings = defaultFirefoxSettings;
+      settings = myDefaultSettings;
       path = "q1pprbmm.default";
       # extraConfig = 
       id = 0;
@@ -230,7 +230,7 @@ in
 
     # to use with stable-diffusion
     perso-nogpu = {
-      settings = defaultFirefoxSettings // { };
+      settings = myDefaultSettings // { };
       id = 5;
     };
 
@@ -246,7 +246,7 @@ in
       # isDefault = false;
       id = 1;
       path = "6bt2uwrj.nova";
-      settings = novaFirefoxSettings;
+      settings = myDefaultSettings // novaSpecificSettings;
       # let { in { };
     };
     # };
