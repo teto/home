@@ -346,6 +346,8 @@ in
       scanOnLowSignal = false; # consume less energy and we dont roam anyway
       # enable = true;
       # userControlled.enable = true;
+
+      # checkout man iwd.config
       iwd = {
         enable = true;
         # https://iwd.wiki.kernel.org/networkconfigurationsettings
@@ -357,6 +359,23 @@ in
           Network = {
             EnableIPv6 = false;
           };
+
+          Rank = {
+          # supposed to be the default
+            BandModifier5Ghz=1;
+          };
+          Scan = {
+
+            DisablePeriodicScan=true;
+                      # supp
+
+          };
+
+          # DriverQuirks = {
+          #
+          # };
+          # IpV4
+          # APAddressPool
           # Security = {
           #   Passphrase = secrets.router.password;
           # };
