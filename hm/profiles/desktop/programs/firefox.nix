@@ -121,8 +121,56 @@ in
     "en-GB"
     # 5840
   ];
+  # check about:policies
   policies = {
     BlockAboutConfig = false;
+    AppAutoUpdate = true;
+
+    AutofillAddressEnabled = false;
+    AutofillCreditCardEnabled = false;
+
+    # DefaultDownloadDirectory
+    DisableFirefoxStudies = true;
+    # DisableFormHistory;
+    DisablePocket = true;
+    DisableTelemetry = true;
+    DisplayMenuBar = "default-off";
+    HardwareAcceleration = true;
+    NoDefaultBookmarks = true;
+    # OfferToSaveLoginsDefault = 
+    # TranslateEnabled = 
+    PDFjs = false;
+    Bookmarks = { };
+#  "type": "array",
+#  "items": {
+#   "type": "object",
+#   "properties": {
+#    "Title": {
+#     "type": "string"
+#    },
+#    "URL": {
+#     "type": "URL"
+#    },
+#    "Favicon": {
+#     "type": "URLorEmpty"
+#    },
+#    "Placement": {
+#     "type": "string",
+#     "enum": [
+#      "toolbar",
+#      "menu"
+#     ]
+#    },
+#    "Folder": {
+#     "type": "string"
+#    }
+#   },
+#   "required": [
+#    "Title",
+#    "URL"
+#   ]
+#  }
+# }
     # DefaultDownloadDirectory = "\${home}/Downloads";
   };
   nativeMessagingHosts = [
