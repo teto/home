@@ -16,9 +16,10 @@
       ../../desktop/teto/contacts.nix
       ../../desktop/teto/mail.nix
       ../../desktop/teto/sops.nix
+      ../../desktop/teto/programs/khal.nix
+
       ../../../hm/profiles/vdirsyncer.nix
 
-      ../../desktop/teto/programs/khal.nix
       ../../../hm/profiles/experimental.nix
     ]
     ++ [

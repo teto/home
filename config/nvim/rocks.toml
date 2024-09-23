@@ -206,5 +206,9 @@ git = "levouh/tint.nvim"
 git = "smjonas/live-command.nvim"
 rev = "2.0.0"
 
+[plugins.nvim-pnpm-catalog-lens]
+git = "ryoppippi/nvim-pnpm-catalog-lens"
+rev = "v0.2.2"
+
 [config]
 plugins_dir = "plugins/"

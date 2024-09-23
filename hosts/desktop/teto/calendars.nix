@@ -6,10 +6,6 @@
   withSecrets,
   ...
 }:
-
-# let 
-#   tetoLib = pkgs.callPackage ../../../hm/lib.nix {};
-# in
 {
 
   imports = [

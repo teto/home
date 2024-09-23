@@ -105,7 +105,6 @@
       keep-derivations = true   # Idem
       keep-failed = true
 
-      experimental-features = nix-command flakes auto-allocate-uids
     '';
     #  to keep build-time dependencies around => rebuild while being offline
     # extraOptions = ''
@@ -122,6 +121,8 @@
     settings = {
       builders-use-substitutes = true;
       use-xdg-base-directories = true;
+      # experimental-features = nix-command flakes auto-allocate-uids
+      extra-experimental-features = "auto-allocate-uids nix-command flakes cgroups";
       extra-substituters = [
         # "https://cache.nixos.org/" # part of the default
         "https://jupyterwith.cachix.org"
