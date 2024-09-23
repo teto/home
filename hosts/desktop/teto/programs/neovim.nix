@@ -49,6 +49,7 @@ let
 
   luaPlugins = with pkgs.vimPlugins; [
     pkgs.vimPlugins.nvim-treesitter-parsers.nix
+    pkgs.vimPlugins.nvim-treesitter-parsers.hurl
     # {
     #   # we should have a file of the grammars as plugins
     #   # symlinkJoin

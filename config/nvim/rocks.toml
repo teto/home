@@ -44,6 +44,7 @@ nvim-cmp = "scm"
 "modicator.nvim" = "scm"
 luasnip = "2.3.0"
 tree-sitter-http = "scm"
+"hurl.nvim"= "1.7.1"
 # nvim-treesitter-textobjects = "scm"
 # "rocks-treesitter.nvim" = "1.0.3"
 
@@ -125,10 +126,6 @@ rev = "648aca6d33ec011dc3166e7af3b38820d01a71e4"
 # to show git message :GitMessenger
 git = "rhysd/git-messenger.vim"
 cmd = "GitMessenger"
-
-[plugins."hurl.nvim"]
-git = "jellydn/hurl.nvim"
-rev = "v1.5.1"
 
 [plugins.vim-listchars]
 # to cycle between different list/listchars configurations
