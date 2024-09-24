@@ -183,7 +183,7 @@ let
         vim.g.haskell_enable_static_pointers = 1  -- to enable highlighting of `static`
         vim.g.haskell_backpack = 1                -- to enable highlighting of backpack keywords
         vim.g.haskell_indent_disable=1
-      '';
+        '';
     })
 
     # " gutentags + gutenhasktags {{{

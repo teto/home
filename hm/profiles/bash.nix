@@ -58,7 +58,7 @@
       ld = "eza -lD";
       lf = "eza -lF --color=always | grep -v /";
       lh = "eza -dl .* --group-directories-first";
-      ll = "eza -al --group-directories-first";
+      ll = lib.mkForce "eza -al --group-directories-first";
       lt = "eza -al --sort=modified";
       # }}}
 

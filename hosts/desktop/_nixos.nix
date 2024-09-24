@@ -79,7 +79,7 @@ in
       ../../nixos/profiles/podman.nix
 
       # ../../nixos/profiles/libvirtd.nix
-      # ../../nixos/profiles/immich.nix
+      ../../nixos/profiles/immich.nix
       ../../nixos/profiles/ntp.nix
       ../../nixos/profiles/ollama.nix
     ]

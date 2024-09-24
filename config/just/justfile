@@ -21,3 +21,4 @@ llama: # Start llama server
 # Update nixpkgs neovim plugins
 update-neovim-packages:
   nix run '.#neovim-plugins-updater' -- --proc=4 --github-token=$GITHUB_TOKEN
+

@@ -6,18 +6,13 @@
   ...
 }:
 let
-  # secrets = import ../nixpkgs/secrets.nix;
-
-  # used to setup sops at the bottom of the file
-  # nextcloudAdminPasswordSopsPath = "nextcloud/adminPassword";
-
   # typesenseApiKeyFile = pkgs.writeText "typesense-api-key" "12318551487654187654";
 
 in
 {
 
   services.immich = {
-   enable = true;
+   enable = false;
    # python3.11-insightface-0.7.3
        # server.typesense.apiKeyFile = typesenseApiKeyFile;
   };

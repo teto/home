@@ -45,6 +45,7 @@ nvim-cmp = "scm"
 luasnip = "2.3.0"
 tree-sitter-http = "scm"
 "hurl.nvim"= "1.7.1"
+"gitsigns.nvim" = "0.9.0"
 # nvim-treesitter-textobjects = "scm"
 # "rocks-treesitter.nvim" = "1.0.3"
 
