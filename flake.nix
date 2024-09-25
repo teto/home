@@ -752,7 +752,7 @@
 
                     ./hm/profiles/nova/ssh-config.nix
 
-                    flakeInputs.nova-doctor.homeModules.user
+                    # flakeInputs.nova-doctor.homeModules.user
                     # flakeInputs.nova-doctor.homeModules.sse
                   ];
                 };
