@@ -175,6 +175,8 @@
   package-sets = {
 
     enableOfficePackages = true;
+    kubernetes = true;
+    developer = true;
   };
   # package-sets.enableDesktopGUIPackages = true;
 

@@ -26,10 +26,7 @@
     pkgs.trayscale
   ];
 
-  home-manager = {
-                # self.inputs.sops-nix.homeManagerModules.sops
 
-    users =
     # let
     # hmRootModule = { pkgs, ... }@args: flakeInputs.haumea.lib.load {
     #  src = ./root;
@@ -45,11 +42,11 @@
     #   # flakeInputs.haumea.lib.transformers.liftDefault;
     # };
     # in 
+  home-manager = {
+    users =
     {
-
       root = {
         imports = [
-          # hmRootModule
           flakeInputs.nova-doctor.homeModules.root
           # ./root/programs/ssh.nix
           # ../../hm/profiles/nova/ssh-config.nix
