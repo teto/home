@@ -22,6 +22,9 @@ in
       enableOfficePackages = mkEnableOption "office/heavy packages";
 
       developer = mkEnableOption "Developer packages";
+
+      kubernetes = mkEnableOption "Kubernetes packages";
+
       scientificSoftware = mkEnableOption "Scientific packages";
       enableDesktopGUIPackages = mkEnableOption "Heavy desktop packages";
       # TODO convert into description
@@ -233,6 +236,13 @@ in
         wavemon
 
         # aircrack-ng # TODO move to hacking package-set
+      ];
+    })
+
+    (mkIf cfg.developer {
+      home.packages = [
+        pkgs.k9s
+        pkgs.kubectl
       ];
     })
 
