@@ -177,6 +177,7 @@
     enableOfficePackages = true;
     kubernetes = true;
     developer = true;
+    llms = true;
   };
   # package-sets.enableDesktopGUIPackages = true;
 

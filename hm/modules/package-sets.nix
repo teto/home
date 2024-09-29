@@ -41,6 +41,8 @@ in
       llms = mkEnableOption "IA/Large language model packages";
       # laptop = mkEnableOption "Laptop packages (energy + wifi)";
 
+      japanese = mkEnableOption "Japanese stuff";
+
     };
 
   };
@@ -65,6 +67,7 @@ in
       home.packages = [
 
         # pkgs.aider-chat  # breaks
+        pkgs.python3Packages.huggingface-hub
       ];
     })
 
@@ -402,6 +405,23 @@ in
       home.packages = [
         pkgs.powertop # superuseful
         pkgs.pcm
+      ];
+
+    })
+
+    (mkIf cfg.japanese {
+      home.packages = with pkgs; [
+        # pkgs.powertop # superuseful
+        # pkgs.pcm
+        pkgs.python3Packages.manga_ocr
+        tagainijisho # japanse dict; like zkanji Qt based
+        # ${config.system}
+        # flakeInputs.vocage.packages."x86_64-linux".vocage
+        # jiten # unfree, helpful for jap.nvim
+        sudachi-rs # a japanese tokenizer
+        sudachidict
+        # sudachi-rs
+        kanji-stroke-order-font # for memento
       ];
 
     })

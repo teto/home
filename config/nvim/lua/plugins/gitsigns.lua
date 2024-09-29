@@ -83,4 +83,6 @@ M.setup = function()
         }, -- If luajit is present
     })
 end
+
+N.setup()
 return M

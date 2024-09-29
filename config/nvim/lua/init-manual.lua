@@ -12,7 +12,7 @@ local use_telescope = not use_fzf_lua
 local has_luasnip, ls = pcall(require, 'luasnip')
 local use_luasnip = has_luasnip and true
 
-local has_gitsigns, gitsigns = pcall(require, 'gitsigns')
+-- local has_gitsigns, gitsigns = pcall(require, 'gitsigns')
 
 local map = vim.keymap.set
 
@@ -597,18 +597,6 @@ end, {
 -- local verbose_output = false
 -- require("tealmaker").build_all(verbose_output)
 
--- Load custom tree-sitter grammar for org filetype
--- orgmode depends on treesitter
--- local has_orgmode, orgmode = pcall(require, 'orgmode')
--- if has_orgmode then
--- 	it's already done in nix, but maybe let the possibility to :xa
--- 	require('orgmode').setup{
--- 		org_capture_templates = {'~/nextcloud/org/*', '~/orgmode/**/*'},
--- 		org_default_notes_file = '~/orgmode/refile.org',
--- 		-- TODO add templates
--- 		org_agenda_templates = { t = { description = 'Task', template = '* TODO %?\n  %u' }  }
--- 	}
--- end
 
 local has_sniprun, sniprun = pcall(require, 'sniprun')
 
@@ -743,13 +731,7 @@ if use_telescope then
     tts.telescope_create_keymaps()
 end
 
--- local use_gp = true
--- if use_gp then
 
--- 	local my_gp = require('teto.gp')
--- 	-- if we want to use telescope
--- 	my_gp.Translator(gp)
--- end
 
 -- since it was not merge yet
 -- inoremap <C-k><C-k> <Cmd>lua require'betterdigraphs'.digraphs("i")<CR>
@@ -761,12 +743,9 @@ end
 -- 	-- check :h bufferline-configuration
 -- end
 
-vim.g.UltiSnipsSnippetDirectories = { vim.fn.stdpath('config') .. '/snippets' }
 vim.g.tex_flavor = 'latex'
 
 require('teto.treesitter')
-require('teto.orgmode')
-
 require('teto.lspconfig')
 
 -- vim.lsp.set_log_level('DEBUG')
@@ -859,10 +838,10 @@ map('n', '<leader>rg', '<Cmd>Grepper -tool rg -open -switch<CR>', { remap = true
 require('teto.lsp').set_lsp_lines(true)
 require('teto.secrets')
 
-if has_gitsigns then
-    local tgitsigns = require('plugins.gitsigns')
-    tgitsigns.setup()
-end
+-- if has_gitsigns then
+--     local tgitsigns = require('plugins.gitsigns')
+--     tgitsigns.setup()
+-- end
 
 -- commented out till https://github.com/ErikReider/SwayNotificationCenter/issues/323 gets implemented
 local teto_notify = require('teto.notify')
@@ -870,22 +849,6 @@ if teto_notify.should_use_provider() then
     teto_notify.override_vim_notify()
 end
 
--- vim.g.sonokai_style = 'atlantis'
--- vim.cmd([[colorscheme sonokai]])
--- vim.cmd([[colorscheme rose-pine]])
--- vim.cmd([[colorscheme janah]])
--- vim.cmd([[colorscheme pywal]])
-
--- https://github.com/neovim/neovim/issues/21856#issuecomment-1514723887
--- vim.api.nvim_create_autocmd({ "VimLeave" }, {
---   callback = function()
---     -- vim.fn.jobstart('notify-send "closing nvim"', {detach=true})
---     vim.fn.jobstart('sleep 2', {detach=true})
---   end,
--- })
--- until rocks-config.nvim works, let's require those manually:
--- for now
--- require'plugins.oil-nvim'
 
 -- vim.api.nvim_create_autocmd({ "VimEnter" }, {
 --   callback = function()

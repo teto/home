@@ -47,12 +47,14 @@ in
     # for gandi
     "${modulesPath}/virtualisation/openstack-config.nix"
     flakeSelf.nixosModules.teto-nogui
+
     # ./hardware.nix
     ./services/openssh.nix
     ./sops.nix
 
     # to get the first iteration going on
     ./services/nextcloud.nix
+    ./services/immich.nix
 
     # ./gitolite.nix
     # ../../nixos/modules/hercules-ci-agents.nix
@@ -60,7 +62,7 @@ in
     ../../nixos/profiles/ntp.nix
     ../../nixos/profiles/nix-daemon.nix
     ../../nixos/profiles/neovim.nix
-    ../../nixos/profiles/docker-daemon.nix
+    # ../../nixos/profiles/docker-daemon.nix
     ../../nixos/profiles/server.nix
 
     # ./blog.nix
@@ -70,11 +72,11 @@ in
 
   ];
 
-  virtualisation.docker.enable = true;
+  # virtualisation.docker.enable = true;
 
   home-manager.users.root = {
     imports = [
-      ./users/root.nix
+      # ./users/root.nix
       ../../hm/profiles/neovim.nix
       ../desktop/root/programs/ssh.nix
     ];
@@ -83,11 +85,9 @@ in
   };
 
   users.users.teto = {
-
     extraGroups = [
       "nextcloud" # to be able to list files
     ];
-
   };
 
   home-manager.users.teto = {

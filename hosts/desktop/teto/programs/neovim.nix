@@ -43,8 +43,8 @@ let
 
   # try via rocks.nvim first
   neotestPlugins = with pkgs.vimPlugins; [
-    #     neotest 
-    #     neotest-haskell
+    # neotest 
+    # neotest-haskell
   ];
 
   luaPlugins = with pkgs.vimPlugins; [
@@ -70,29 +70,12 @@ let
     #   };
     # }
 
-    # (luaPlugin {
-    #   plugin = gitsigns-nvim;
-    #   # TODO here we should read config from a file
-    #   # config = 
-    # })
-
-    # {
-    #   plugin = fidget-nvim;
-    #   type = "lua";
-    #   config = ''
-    #     require"fidget".setup{}
-    #   '';
-    # }
-
     # should bring in scope fzy
     # (luaPlugin { plugin = rocks-nvim; })
-    # (luaPlugin { plugin = urlview-nvim; })
 
     # (luaPlugin { plugin = nvim-ufo; })
 
     (luaPlugin { plugin = nvim-dbee; })
-
-    # pkgs.vimPlugins.cellular-automaton-nvim
 
     # breaks setup
     # (luaPlugin { plugin =  hmts-nvim; })
@@ -106,17 +89,7 @@ let
     #  plugin = molten-nvim; 
     # })
 
-    # (luaPlugin {
-    #   plugin = vim-obsession;
-    #   after = ''
-    #     vim.keymap.set("n", "<Leader>$", "<Cmd>Obsession<CR>", { remap = true })
-    #     vim.g.obsession_no_bufenter = true
-    #   '';
-    # })
 
-    # { plugin = vim-dadbod; }
-    # { plugin = vim-dadbod-completion; }
-    # { plugin = vim-dadbod-ui; }
 
     # TODO it needs some extra care
 
@@ -127,12 +100,6 @@ let
 
     # I've not been using it so far
     # (luaPlugin { plugin = nvim-dap; })
-
-    # (luaPlugin {
-    #   # run with :Diffview
-    #   plugin = diffview-nvim;
-    #   # optional = true;
-    # })
 
     # (luaPlugin {
     #   # TODO move config hee
@@ -168,7 +135,6 @@ let
 
     # disabled because of https://github.com/rktjmp/lush.nvim/issues/89
     # (luaPlugin { plugin = lush-nvim; }) # dependency of some colorschemes
-    # (luaPlugin { plugin = gruvbox-nvim; }) 
 
     (luaPlugin {
       # TODO could try 
@@ -186,30 +152,6 @@ let
         '';
     })
 
-    # " gutentags + gutenhasktags {{{
-    # " to keep logs GutentagsToggleTrace
-    # " some commands/functions are not available by default !!
-    # " https://github.com/ludovicchabant/vim-gutentags/issues/152
-    # let g:gutentags_define_advanced_commands=1
-    # " let g:gutentags_project_root
-    # " to ease with debug
-    # let g:gutentags_trace=0
-    # let g:gutentags_enabled = 1 " dynamic loading
-    # let g:gutentags_dont_load=0 " kill once and for all
-    # let g:gutentags_project_info = [ {'type': 'python', 'file': 'setup.py'},
-    #                                \ {'type': 'ruby', 'file': 'Gemfile'},
-    #                                \ {'type': 'haskell', 'glob': '*.cabal'} ]
-    # " produce tags for haskell http://hackage.haskell.org/package/hasktags
-    # " it will fail without a wrapper https://github.com/rob-b/gutenhasktags
-    # " looks brittle, hie might be better
-    # " or haskdogs
-    # " let g:gutentags_ctags_executable_haskell = 'gutenhasktags'
-    # let g:gutentags_ctags_executable_haskell = 'hasktags'
-    # " let g:gutentags_ctags_extra_args
-    # let g:gutentags_file_list_command = 'rg --files'
-    # " gutenhasktags/ haskdogs/ hasktags/hothasktags
-    # let g:gutentags_ctags_exclude = ['.vim-src', 'build', '.mypy_cache']
-    # " }}}
 
     # disabling as long as it depends on nvim-treesitter
     # (luaPlugin {
@@ -226,8 +168,6 @@ let
 
     (luaPlugin {
       plugin = SchemaStore-nvim;
-      # config = ''
-      #  '';
     })
 
     {
@@ -305,66 +245,6 @@ let
     # (luaPlugin { plugin = nvim-telescope-zeal-cli; })
 
     (luaPlugin { plugin = minimap-vim; })
-
-    # (luaPlugin {
-    #   # reuse once https://github.com/neovim/neovim/issues/9390 is fixed
-    #   plugin = vimtex;
-    #   optional = true;
-    #   config = ''
-    #     -- Pour le rappel
-    #     -- <localleader>ll pour la compilation continue du pdf
-    #     -- <localleader>lv pour la preview du pdf
-    #     -- see https://github.com/lervag/vimtex/issues/1058
-    #     -- let g:vimtex_log_ignore 
-    #     -- taken from https://castel.dev/post/lecture-notes-1/
-    #     vim.g.tex_conceal='abdmg'
-    #     vim.g.vimtex_log_verbose=1
-    #     vim.g.vimtex_quickfix_open_on_warning = 1
-    #     vim.g.vimtex_view_automatic=1
-    #     vim.g.vimtex_view_enabled=1
-    #     -- was only necessary with vimtex lazy loaded
-    #     -- let g:vimtex_toc_config={}
-    #     -- let g:vimtex_complete_img_use_tail=1
-    #     -- autoindent can slow down vim quite a bit
-    #     -- to check indent parameters, run :verbose set ai? cin? cink? cino? si? inde? indk?
-    #     vim.g.vimtex_indent_enabled=0
-    #     vim.g.vimtex_indent_bib_enabled=1
-    #     vim.g.vimtex_compiler_enabled=1
-    #     vim.g.vimtex_compiler_progname='nvr'
-    #     vim.g.vimtex_quickfix_method="latexlog"
-    #     -- 1=> opened automatically and becomes active (2=> inactive)
-    #     vim.g.vimtex_quickfix_mode = 2
-    #     vim.g.vimtex_indent_enabled=0
-    #     vim.g.vimtex_indent_bib_enabled=1
-    #     vim.g.vimtex_view_method = 'zathura'
-    #     vim.g.vimtex_format_enabled = 0
-    #     vim.g.vimtex_complete_recursive_bib = 0
-    #     vim.g.vimtex_complete_close_braces = 0
-    #     vim.g.vimtex_fold_enabled = 0
-    #     vim.g.vimtex_view_use_temp_files=1 -- to prevent zathura from flickering
-    #     -- let g:vimtex_syntax_minted = [ { 'lang' : 'json', \ }]
-
-    #     -- shell-escape is mandatory for minted
-    #     -- check that '-file-line-error' is properly removed with pplatex
-    #     -- executable The name/path to the latexmk executable. 
-    #     '';
-    #   # vim.gvimtex_compiler_latexmk = {
-    #   #          'backend' : 'nvim',
-    #   #          'background' : 1,
-    #   #          'build_dir' : ''',
-    #   #          'callback' : 1,
-    #   #          'continuous' : 1,
-    #   #          'executable' : 'latexmk',
-    #   #          'options' : {
-    #   #            '-pdf',
-    #   #            '-file-line-error',
-    #   #            '-bibtex',
-    #   #            '-synctex=1',
-    #   #            '-interaction=nonstopmode',
-    #   #            '-shell-escape',
-    #   #          },
-    #   #         }
-    # })
 
     # TODO put into rocks.nvim
     # (luaPlugin { plugin = rest-nvim; })

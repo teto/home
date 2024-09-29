@@ -90,7 +90,10 @@ require('lualine').setup({
             -- 'encoding', 'fileformat', 'filetype'
             -- obsession_status
         },
-        lualine_y = { 'diagnostics', 'progress' }, -- progress = %progress in file
+        lualine_y = { 
+		 'diagnostics',
+		 'progress'
+		}, -- progress = %progress in file
         lualine_z = {
             obsession_component,
             get_workspace_diagnostic_count,

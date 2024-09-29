@@ -5,7 +5,7 @@
   {
     enable = lib.mkForce true;
     enableZshIntegration = true;
-    enableBashIntegration = lib.mkForce false;
+    enableBashIntegration = lib.mkForce true;
     # settings = {};
   }
 
