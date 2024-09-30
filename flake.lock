@@ -2439,11 +2439,11 @@
     },
     "nixpkgs_6": {
       "locked": {
-        "lastModified": 1727476831,
-        "narHash": "sha256-RRaENFZ3P9XjtHCQFTVAaYt/th//CK+udt3CPJGo4Ko=",
+        "lastModified": 1727649330,
+        "narHash": "sha256-Lm00m4MHMTqZArE0Zzz+NwHtZHd7XgA5tGdNrnI8r6s=",
         "owner": "teto",
         "repo": "nixpkgs",
-        "rev": "a01cdfd2c91d8755fe148bb91eb2be479c6c9772",
+        "rev": "8501a47903aa2a6a592abd110dede1f2d59d60b9",
         "type": "github"
       },
       "original": {

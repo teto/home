@@ -631,9 +631,7 @@
 
             neotokyo = mkNixosSystem {
               modules = [
-                hm-common
                 ./hosts/neotokyo/config.nix 
-                self.nixosModules.teto-nogui
               ];
               hostname = "neotokyo";
               withSecrets = true;

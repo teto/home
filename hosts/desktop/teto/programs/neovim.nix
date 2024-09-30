@@ -288,7 +288,8 @@ let
     nodePackages.typescript-language-server
     # pandoc # for markdown preview, should be in the package closure instead
     # pythonPackages.pdftotext  # should appear only in RC ? broken
-    nil # a nix lsp
+      nil # a nix lsp, can be debugged with NIL_LOG_PATH and NIL_LOG=nil=debug
+      nixd # another nix LSP
     # rnix-lsp
     rust-analyzer
     shellcheck

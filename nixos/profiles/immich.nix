@@ -12,7 +12,6 @@ in
 {
 
   services.immich = {
-   enable = true;
    machine-learning = { enable = false; };
    # python3.11-insightface-0.7.3
        # server.typesense.apiKeyFile = typesenseApiKeyFile;
