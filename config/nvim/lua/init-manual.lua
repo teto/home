@@ -9,8 +9,8 @@ local has_fzf_lua, fzf_lua = pcall(require, 'fzf-lua')
 -- set to true to enable it
 local use_fzf_lua = has_fzf_lua and false
 local use_telescope = not use_fzf_lua
-local has_luasnip, ls = pcall(require, 'luasnip')
-local use_luasnip = has_luasnip and true
+-- local has_luasnip, ls = pcall(require, 'luasnip')
+-- local use_luasnip = has_luasnip and true
 
 -- local has_gitsigns, gitsigns = pcall(require, 'gitsigns')
 

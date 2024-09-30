@@ -14,17 +14,17 @@ local cmp = require'cmp'
 
 
    -- TODO auto insert into cmp
-   if use_neorg then
+   -- if use_neorg then
 	   table.insert(cmp_sources, { name = 'neorg' })
-   end
-   if use_org then
+   -- end
+   -- if use_org then
 	   table.insert(cmp_sources, { name = 'orgmode' })
-   end
-   if use_luasnip then
+   -- end
+   -- if use_luasnip then
 	   -- For luasnip user.
 	   -- " Plug 'saadparwaiz1/cmp_luasnip'
 	   table.insert(cmp_sources, { name = 'luasnip' })
-   end
+   -- end
 
    --[[
    :CmpStatus
