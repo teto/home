@@ -125,6 +125,20 @@
       enableACME = true;
       # enableReload = true; # reloads service when config changes !
     };
+
+    "immich.{secrets.jakku.hostname}" = {
+      forceSSL = false;
+      # https://nixos.org/manual/nixos/stable/index.html#module-security-acme
+      enableACME = false;
+      # enableReload = true; # reloads service when config changes !
+      listen = [
+        {
+          port = "3001";
+          addr = "${secrets.jakku.hostname}";
+        }
+
+      ];
+    };
   };
 
   environment.systemPackages = [

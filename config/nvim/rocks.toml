@@ -208,5 +208,8 @@ rev = "2.0.0"
 git = "ryoppippi/nvim-pnpm-catalog-lens"
 rev = "v0.2.2"
 
+[plugins.lualine-lsp-progress]
+git = "arkav/lualine-lsp-progress"
+
 [config]
 plugins_dir = "plugins/"
