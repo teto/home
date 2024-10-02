@@ -288,14 +288,6 @@ in
     #       include ~/.config/i3/config.shared
 
     extraConfig = ''
-      # Use Mouse+$mod to drag floating windows to their wanted position
-      floating_modifier $mod
-
-      bindsym button2 kill
-
-      # Generated windows.
-      for_window [title="(?:Open|Save) (?:File|Folder|As)"] floating enable;
-      for_window [title="(?:Open|Save) (?:File|Folder|As)"] resize set 800 600
 
       # timeout in ms
       include ~/.config/sway/manual.config

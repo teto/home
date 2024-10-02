@@ -2,6 +2,10 @@
 " ❌
 
 
+omap     <silent> m :<C-U>lua require('tsht').nodes()<CR>
+xnoremap <silent> m :lua require('tsht').nodes()<CR>
+
+
 
 " to load plugins in ftplugin matching ftdetect
 filetype plugin on
@@ -34,12 +38,12 @@ endfunc
 " }}}
 
 " FzfBranches
-function! SignifyUpdateBranch(branch)
-  " echom 'chosen branch='.a:branch
-  let g:signify_vcs_cmds = {
-	\'git': 'git diff --no-color --no-ext-diff -U0 '.a:branch.' -- %f'
-    \}
-endfunc
+"function! SignifyUpdateBranch(branch)
+"  " echom 'chosen branch='.a:branch
+"  let g:signify_vcs_cmds = {
+"	\'git': 'git diff --no-color --no-ext-diff -U0 '.a:branch.' -- %f'
+"    \}
+"endfunc
 
 nnoremap <kPageUp> :lprev
 nnoremap <kPageDown> :lnext
