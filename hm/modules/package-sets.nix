@@ -19,13 +19,14 @@ in
       desktop = mkEnableOption "desktop packages";
       server = mkEnableOption "server packages";
 
-      enableOfficePackages = mkEnableOption "office/heavy packages";
 
       developer = mkEnableOption "Developer packages";
 
       kubernetes = mkEnableOption "Kubernetes packages";
 
       scientificSoftware = mkEnableOption "Scientific packages";
+
+      enableOfficePackages = mkEnableOption "office/heavy packages";
       enableDesktopGUIPackages = mkEnableOption "Heavy desktop packages";
       # TODO convert into description
       # the kind of packages u don't want to compile
@@ -205,6 +206,7 @@ in
         # khard # see khal.nix instead ?
         # libsecret  # to consult
         # newsboat #
+        immich-cli
         mujmap # to sync notmuch tags across jmap
         # memento # broken capable to display 2 subtitles at same time
         vlc

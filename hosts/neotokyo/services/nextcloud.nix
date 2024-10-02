@@ -116,6 +116,8 @@
   };
 
   # create some errors on deploy
+  # for now we generate one certificate per virtual host
+  # https://discourse.nixos.org/t/nixos-nginx-acme-ssl-certificates-for-multiple-domains/19608/2
   services.nginx = {
     # Enable status page reachable from localhost on http://127.0.0.1/nginx_status.
     statusPage = true;
@@ -124,46 +126,52 @@
     # ceeformat is unknown ?
     virtualHosts = {
 
-    # see https://nixos.wiki/wiki/Nextcloud
-    # extends the already configured by the nixos module nginx
-    # https://betterstack.com/community/questions/what-is-the-difference-between-host-http-host-server-name-variable-nginx/
-    # server_name is  typically used to match the server block in the Nginx configuration based on the incoming request.
-    "${secrets.jakku.hostname}" = {
-      forceSSL = true;
-      # https://nixos.org/manual/nixos/stable/index.html#module-security-acme
-      enableACME = true;
-      # enableReload = true; # reloads service when config changes !
-
-      # listen = [ 80 ];
-      # listen = [ { addr = "127.0.0.1"; port = 80; }];
-      # locations."/" = {
-      #   proxyPass = "http://localhost:8080"; # Assuming service 1 runs on localhost:8080
-      # };
-    };
-    "immich.${secrets.jakku.hostname}" = {
+      # see https://nixos.wiki/wiki/Nextcloud
+      # extends the already configured by the nixos module nginx
+      # https://betterstack.com/community/questions/what-is-the-difference-between-host-http-host-server-name-variable-nginx/
+      # server_name is  typically used to match the server block in the Nginx configuration based on the incoming request.
+      "${secrets.jakku.hostname}" = {
         forceSSL = true;
-        # enableACME = false;
-        useACMEHost = "${secrets.jakku.hostname}";
+        # https://nixos.org/manual/nixos/stable/index.html#module-security-acme
+        enableACME = true;
+        # enableReload = true; # reloads service when config changes !
 
-        # listen on all interfaces
-        # listen = [ { addr = "0.0.0.0"; port = 80; }];
+        # listen = [ 80 ];
+        # listen = [ { addr = "127.0.0.1"; port = 80; }];
+        # locations."/" = {
+        #   proxyPass = "http://localhost:8080"; # Assuming service 1 runs on localhost:8080
+        # };
+      };
 
-        locations."/" = {
-          #  echo $server_name;  # Will output the server name defined in the current server block
-          proxyPass = "http://localhost:3001";
-        };
+      "immich.${secrets.jakku.hostname}" = {
+          forceSSL = true;
+          enableACME = true;
+          # useACMEHost = "${secrets.jakku.hostname}";
 
-        root = pkgs.runCommand "testdir" {} ''
-          mkdir "$out"
-          echo this is immich > "$out/index.html"
-        '';
+          # listen on all interfaces
+          # listen = [ { addr = "0.0.0.0"; port = 80; }];
+
+          locations."/" = {
+            #  echo $server_name;  # Will output the server name defined in the current server block
+            proxyPass = "http://localhost:3001";
+          };
+
+          root = pkgs.runCommand "testdir" {} ''
+            mkdir "$out"
+            echo this is immich > "$out/index.html"
+          '';
       };
 
     # "blog.${secrets.jakku.hostname}" = {
-    #     forceSSL = false;
+    #     forceSSL = true;
     #     # https://nixos.org/manual/nixos/stable/index.html#module-security-acme
-    #     enableACME = false;
+    #     enableACME = true;
     #     listen = [ { addr = "127.0.0.1"; port = 3001; }];
+    #
+    #     root = pkgs.runCommand "testdir" {} ''
+    #       mkdir "$out"
+    #       echo "WIP" > "$out/index.html"
+    #     '';
     #
     #     # extraConfig = ''
     #     #   access_log syslog:server=unix:/dev/log,facility=user,tag=mytag,severity=info ceeformat;
@@ -172,7 +180,7 @@
     #
     #   };
 
-    "status.${secrets.jakku.hostname}" = {
+      "status.${secrets.jakku.hostname}" = {
         root = pkgs.runCommand "testdir" {} ''
           mkdir "$out"
           echo hello world > "$out/index.html"

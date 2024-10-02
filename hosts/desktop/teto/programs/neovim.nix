@@ -75,7 +75,7 @@ let
 
     # (luaPlugin { plugin = nvim-ufo; })
 
-    (luaPlugin { plugin = nvim-dbee; })
+    # (luaPlugin { plugin = nvim-dbee; })
 
     # breaks setup
     # (luaPlugin { plugin =  hmts-nvim; })
