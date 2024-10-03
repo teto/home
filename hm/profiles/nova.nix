@@ -21,6 +21,7 @@
 
   # to counter doctor's config of starship
   xdg.configFile."starship.toml".enable = false;
+  xdg.configFile."nix/nix.conf".enable = false;
 
   xdg.desktopEntries = {
     # xdg.desktopEntries = {

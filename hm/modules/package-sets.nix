@@ -156,7 +156,7 @@ in
           noti # send notifications when a command finishes
           ouch # to (de)compress files
           # papis # library manager
-          pass-teto # pass with extensions
+          (lib.hiPrio pass-teto) # pass with extensions, override nova's
           pavucontrol
           pkgs.networkmanagerapplet # should
           procs # Rust replacement for 'ps'
