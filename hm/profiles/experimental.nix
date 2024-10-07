@@ -15,12 +15,13 @@
 
   programs.xdg.enable = true;
 
+  i18n.inputMethod.fcitx5.waylandFrontend = true;
 
   # services.trayscale.enable = true;
 
   programs.swappy.enable = false;
 
-  home.packages = with pkgs; [ ];
+  # home.packages = with pkgs; [ ];
 
   # programs.htop = {
   #   enabled = true;

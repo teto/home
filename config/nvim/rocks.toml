@@ -212,5 +212,11 @@ rev = "v0.2.2"
 [plugins.lualine-lsp-progress]
 git = "arkav/lualine-lsp-progress"
 
+[plugins.volt]
+git = "nvchad/volt"
+
+[plugins.menu]
+git = "nvchad/menu"
+
 [config]
 plugins_dir = "plugins/"

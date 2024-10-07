@@ -84,5 +84,5 @@ M.setup = function()
     })
 end
 
-N.setup()
+M.setup()
 return M

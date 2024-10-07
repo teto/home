@@ -22,7 +22,7 @@
 
   environment.systemPackages = [
     pkgs.dbeaver-bin
-    pkgs.tailscale-systray
+    # pkgs.tailscale-systray
     # pkgs.trayscale
   ];
 

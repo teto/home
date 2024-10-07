@@ -132,6 +132,8 @@
       # server_name is  typically used to match the server block in the Nginx configuration based on the incoming request.
       "${secrets.jakku.hostname}" = {
         forceSSL = true;
+
+        # proxyWebsockets = true
         # https://nixos.org/manual/nixos/stable/index.html#module-security-acme
         enableACME = true;
         # enableReload = true; # reloads service when config changes !
@@ -147,13 +149,13 @@
           forceSSL = true;
           enableACME = true;
           # useACMEHost = "${secrets.jakku.hostname}";
-
           # listen on all interfaces
           # listen = [ { addr = "0.0.0.0"; port = 80; }];
 
           locations."/" = {
             #  echo $server_name;  # Will output the server name defined in the current server block
             proxyPass = "http://localhost:3001";
+            proxyWebsockets = true;
           };
 
           root = pkgs.runCommand "testdir" {} ''
