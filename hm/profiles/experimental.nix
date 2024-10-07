@@ -21,6 +21,8 @@
 
   programs.swappy.enable = false;
 
+  programs.vifm.enable = true;
+
   # home.packages = with pkgs; [ ];
 
   # programs.htop = {
