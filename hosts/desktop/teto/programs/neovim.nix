@@ -297,6 +297,8 @@ let
 
     gopls # LSP for go
 
+    marksman # markdown LSP server
+
     # for none-ls
     nixfmt # -rfc-style #
     nodePackages.prettier

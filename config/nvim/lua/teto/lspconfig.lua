@@ -24,6 +24,12 @@ end
 
 lspconfig.bashls.setup({})
 
+
+
+-- lspconfig.markdown_oxide.setup({})
+-- lspconfig.remark_ls.setup({})
+lspconfig.marksman.setup({})
+
 -- Note that there is config set in .luarc.json but it is ignored
 -- https://github.com/LuaLS/lua-language-server/issues/2483
 lspconfig.lua_ls.setup({
