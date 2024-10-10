@@ -18,7 +18,7 @@ cmp-rg = "1.3.9"
 "oil.nvim" = "2.12.1"
 # -- :DiffviewOpen
 "diffview.nvim" = "scm"
-"haskell-tools.nvim" = "4.0.1"
+"haskell-tools.nvim" = "4.2.0"
 "none-ls.nvim" = "scm"
 "bufferline.nvim" = "4.7.0"
 auto-session = "2.5.0"

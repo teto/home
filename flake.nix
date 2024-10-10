@@ -754,6 +754,7 @@
 
                     flakeInputs.nova-doctor.homeModules.user
                     flakeInputs.nova-doctor.homeModules.sse
+                    flakeInputs.nova-doctor.homeModules.vpn
                   ];
                 };
               }
