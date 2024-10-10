@@ -258,7 +258,7 @@ in
         (backblaze-b2.override ({ execName = "b2"; }))
         dasht # ~ zeal but in terminal
         docker-credential-helpers
-        envsubst # replace templated files with variables
+        gettext # for envsubst (TO NOT CONFOUND with gettext's envsubst)
         sops # password 'manager'
         glab # gitlab cli
         # TODO pass to vim makeWrapperArgs

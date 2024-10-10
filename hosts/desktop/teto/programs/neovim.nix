@@ -94,7 +94,8 @@ let
     # TODO it needs some extra care
 
     # TODO should be able to handle it via rocks ?
-    (luaPlugin { plugin = avante-nvim; })
+    # avante lets you use neovim as cursor IDE
+    # (luaPlugin { plugin = avante-nvim; })
 
     # (luaPlugin { plugin = haskell-tools-nvim; })
 
