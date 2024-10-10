@@ -218,5 +218,8 @@ git = "nvchad/volt"
 [plugins.menu]
 git = "nvchad/menu"
 
+[plugins."bigfile.nvim"]
+git = "lunarvim/bigfile.nvim"
+
 [config]
 plugins_dir = "plugins/"
