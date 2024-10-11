@@ -11,6 +11,14 @@ restart
 swaymsg reload
 #+END_SRC
 
+
+# Handle virtual monitors
+
+```
+swaymsg create_output
+swaymsg output
+```
+
 * sway notification center tricks
 swaync-client --reload-config
 

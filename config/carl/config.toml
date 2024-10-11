@@ -1,0 +1,18 @@
+################################
+# default config file for calr #
+################################
+
+# the name of the calr theme:
+theme = "default"
+
+# you can include multiple ics files:
+[[ical]]
+file = "/home/teto/calendars/fastmail/0d3b49d8-e818-4971-b1d1-dd93e1d30e82/"
+
+[[ical]]
+file = "/home/teto/calendars/fastmail/80458b4f-7cae-4739-91a8-505355874089/"
+
+#[[ical]]
+#file = "birthdays.ics"
+#stylenames = ['FGPurple']
+#weight = 3

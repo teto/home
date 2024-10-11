@@ -248,6 +248,7 @@ in
       home.packages = [
         pkgs.k9s
         pkgs.kubectl
+        pkgs.serie
       ];
     })
 
