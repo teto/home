@@ -16,7 +16,7 @@ local opts =
 	group = true, -- group results by file
 	padding = false, -- add an extra new line on top of the list
 	pinned = false, -- When pinned, the opened trouble window will be bound to the current buffer
-	keys = false,
+	keys = {},
 
 	action_keys = { -- key mappings for actions in the trouble list
 		-- map to {} to remove a mapping, for example:
