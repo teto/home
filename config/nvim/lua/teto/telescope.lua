@@ -13,7 +13,7 @@ function M.telescope_create_keymaps()
         -- require('telescope.builtin').git_files({})
         require('telescope').extensions.smart_open.smart_open({
             cwd_only = true,
-			-- match_algorithm = "fzf",
+            -- match_algorithm = "fzf",
         })
     end, { desc = 'Fuzzy search git files' })
     -- vim.keymap.set ('n', "<Leader>F", function () vim.cmd("FzfFiletypes") end)

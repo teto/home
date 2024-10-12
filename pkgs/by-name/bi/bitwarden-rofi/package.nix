@@ -1,6 +1,14 @@
-{ lib, stdenv, fetchFromGitHub, rofi,
-coreutils, util-linux, gawk, makeWrapper, jq
-, keyutils
+{
+  lib,
+  stdenv,
+  fetchFromGitHub,
+  rofi,
+  coreutils,
+  util-linux,
+  gawk,
+  makeWrapper,
+  jq,
+  keyutils,
 # , nodePackages bw-cli
 # TODO needs ydotools on wayland
 }:
@@ -25,14 +33,16 @@ stdenv.mkDerivation rec {
     cp -a bwmenu $out/bin/bwmenu
   '';
 
-  wrapperPath = with lib; makeBinPath [
-    coreutils
-    gawk
-    keyutils
-    jq
-    rofi
-    # util-linux
-  ];
+  wrapperPath =
+    with lib;
+    makeBinPath [
+      coreutils
+      gawk
+      keyutils
+      jq
+      rofi
+      # util-linux
+    ];
 
   fixupPhase = ''
     patchShebangs $out/bin
@@ -48,8 +58,3 @@ stdenv.mkDerivation rec {
   #   platforms = with lib.platforms; linux;
   # };
 }
-
-
-
-
-

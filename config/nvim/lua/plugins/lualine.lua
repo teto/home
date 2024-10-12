@@ -90,10 +90,10 @@ require('lualine').setup({
             -- 'encoding', 'fileformat', 'filetype'
             -- obsession_status
         },
-        lualine_y = { 
-		 'diagnostics',
-		 'progress'
-		}, -- progress = %progress in file
+        lualine_y = {
+            'diagnostics',
+            'progress',
+        }, -- progress = %progress in file
         lualine_z = {
             obsession_component,
             get_workspace_diagnostic_count,
@@ -108,24 +108,24 @@ require('lualine').setup({
     --	 lualine_y = {},
     --	 lualine_z = {}
     -- },
-	-- tabline is handled by bufferline.nvim
+    -- tabline is handled by bufferline.nvim
     -- tabline = {},
-	winbar = {
-	  lualine_a = {},
-	  lualine_b = {},
-	  lualine_c = {'filename'},
-	  lualine_x = {},
-	  lualine_y = { 'diagnostics', 'progress' },
-	  lualine_z = {}
-	},
+    winbar = {
+        lualine_a = {},
+        lualine_b = {},
+        lualine_c = { 'filename' },
+        lualine_x = {},
+        lualine_y = { 'diagnostics', 'progress' },
+        lualine_z = {},
+    },
 
-	inactive_winbar = {
-	  lualine_a = {},
-	  lualine_b = {},
-	  lualine_c = {'filename'},
-	  lualine_x = {},
-	  lualine_y = {},
-	  lualine_z = {}
-	},
+    inactive_winbar = {
+        lualine_a = {},
+        lualine_b = {},
+        lualine_c = { 'filename' },
+        lualine_x = {},
+        lualine_y = {},
+        lualine_z = {},
+    },
     extensions = { 'fzf', 'fugitive' },
 })

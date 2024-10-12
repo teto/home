@@ -61,9 +61,9 @@ in
           user = "matthieu.coudron";
           identityFile = "${dotfilesPath}/secrets/ssh/nova_key";
         };
-        relay-prod = {
-          identityFile = "${dotfilesPath}/secrets/ssh/nova_key";
-        };
+        # relay-prod = {
+        #   identityFile = "${dotfilesPath}/secrets/ssh/nova_key";
+        # };
       };
   };
 }

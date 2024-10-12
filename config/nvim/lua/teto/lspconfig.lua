@@ -4,7 +4,7 @@ local has_lspconfig, lspconfig = pcall(require, 'lspconfig')
 -- local api = vim.api
 
 if not has_lspconfig then
- return
+    return
 end
 
 -- custom attach callback
@@ -23,8 +23,6 @@ end
 -- })
 
 lspconfig.bashls.setup({})
-
-
 
 -- lspconfig.markdown_oxide.setup({})
 -- lspconfig.remark_ls.setup({})
@@ -121,7 +119,6 @@ lspconfig.dockerls.setup({})
 --
 lspconfig.gopls.setup({})
 
-
 -- see https://github.com/redhat-developer/yaml-language-server for doc
 lspconfig.yamlls.setup({
     -- cmd = { 'yaml-language-server', '--stdio' },
@@ -129,15 +126,15 @@ lspconfig.yamlls.setup({
     --   capabilities = lsp.capabilities,
     settings = {
         yaml = {
-		 -- customTags
-		  schemaStore =  { enable = true },
-		   -- schemas = require('schemastore').yaml.schemas(),
+            -- customTags
+            schemaStore = { enable = true },
+            -- schemas = require('schemastore').yaml.schemas(),
 
-			format = {
-			 enable = true,
-			 proseWrap = "Preserve",
-			 printWidth = 120
-			},
+            format = {
+                enable = true,
+                proseWrap = 'Preserve',
+                printWidth = 120,
+            },
         },
     },
     -- }

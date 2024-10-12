@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
 
   i18n.inputMethod = {
     enabled = null;
@@ -11,7 +12,10 @@
       name = "Default";
       defaultLayout = "us";
       defaultIm = "mozc";
-      items = [ { name = "keyboard-us"; } { name = "mozc"; } ];
+      items = [
+        { name = "keyboard-us"; }
+        { name = "mozc"; }
+      ];
     };
   };
 

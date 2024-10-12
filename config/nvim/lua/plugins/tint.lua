@@ -1,2 +1,2 @@
 -- Default configuration
-require("tint").setup()
+require('tint').setup()

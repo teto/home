@@ -135,7 +135,7 @@ in
       # ./hm/profiles/gaming.nix
       teto = {
         # TODO it should load the whole folder
-        imports = [ 
+        imports = [
           ./teto/default.nix
           flakeSelf.homeModules.teto-nogui
         ];

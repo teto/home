@@ -122,7 +122,6 @@
     source ${config.xdg.configHome}/tig/custom.tigrc
   '';
 
-
   # seulemt pour X
   # programs.feh.enable = true;
   # for programs not merged yet

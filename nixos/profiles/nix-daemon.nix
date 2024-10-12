@@ -121,8 +121,8 @@
       builders-use-substitutes = true;
       use-xdg-base-directories = true;
 
-      keep-outputs = true;       # Nice for developers
-      keep-derivations = true;   # Idem
+      keep-outputs = true; # Nice for developers
+      keep-derivations = true; # Idem
       keep-failed = true;
       # experimental-features = nix-command flakes auto-allocate-uids
       extra-experimental-features = "auto-allocate-uids nix-command flakes cgroups";

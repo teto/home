@@ -1,5 +1,3 @@
-
-
 -- require('img-clip').setup ({
 --   -- use recommended settings from above
 -- })
@@ -10,6 +8,6 @@
 --   -- use recommended settings from above
 -- })
 require('avante_lib').load()
-require('avante').setup ({
-  provider = "claude", -- Recommend using Claude
+require('avante').setup({
+    provider = 'claude', -- Recommend using Claude
 })

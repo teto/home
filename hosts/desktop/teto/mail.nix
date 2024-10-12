@@ -270,7 +270,7 @@ in
   ];
 
   systemd.user.services.mujmap-fastmail.Service = {
-    Environment="PATH=${pkgs.lib.makeBinPath [ pkgs.pass-teto ]}";
+    Environment = "PATH=${pkgs.lib.makeBinPath [ pkgs.pass-teto ]}";
   };
 
   accounts.email.maildirBasePath = "${config.home.homeDirectory}/maildir";

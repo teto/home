@@ -146,44 +146,44 @@
       };
 
       "immich.${secrets.jakku.hostname}" = {
-          forceSSL = true;
-          enableACME = true;
-          # useACMEHost = "${secrets.jakku.hostname}";
-          # listen on all interfaces
-          # listen = [ { addr = "0.0.0.0"; port = 80; }];
+        forceSSL = true;
+        enableACME = true;
+        # useACMEHost = "${secrets.jakku.hostname}";
+        # listen on all interfaces
+        # listen = [ { addr = "0.0.0.0"; port = 80; }];
 
-          locations."/" = {
-            #  echo $server_name;  # Will output the server name defined in the current server block
-            proxyPass = "http://localhost:3001";
-            proxyWebsockets = true;
-          };
+        locations."/" = {
+          #  echo $server_name;  # Will output the server name defined in the current server block
+          proxyPass = "http://localhost:3001";
+          proxyWebsockets = true;
+        };
 
-          root = pkgs.runCommand "testdir" {} ''
-            mkdir "$out"
-            echo this is immich > "$out/index.html"
-          '';
+        root = pkgs.runCommand "testdir" { } ''
+          mkdir "$out"
+          echo this is immich > "$out/index.html"
+        '';
       };
 
-    # "blog.${secrets.jakku.hostname}" = {
-    #     forceSSL = true;
-    #     # https://nixos.org/manual/nixos/stable/index.html#module-security-acme
-    #     enableACME = true;
-    #     listen = [ { addr = "127.0.0.1"; port = 3001; }];
-    #
-    #     root = pkgs.runCommand "testdir" {} ''
-    #       mkdir "$out"
-    #       echo "WIP" > "$out/index.html"
-    #     '';
-    #
-    #     # extraConfig = ''
-    #     #   access_log syslog:server=unix:/dev/log,facility=user,tag=mytag,severity=info ceeformat;
-    #     #   location /favicon.ico { allow all; access_log off; log_not_found off; }
-    #     # '';
-    #
-    #   };
+      # "blog.${secrets.jakku.hostname}" = {
+      #     forceSSL = true;
+      #     # https://nixos.org/manual/nixos/stable/index.html#module-security-acme
+      #     enableACME = true;
+      #     listen = [ { addr = "127.0.0.1"; port = 3001; }];
+      #
+      #     root = pkgs.runCommand "testdir" {} ''
+      #       mkdir "$out"
+      #       echo "WIP" > "$out/index.html"
+      #     '';
+      #
+      #     # extraConfig = ''
+      #     #   access_log syslog:server=unix:/dev/log,facility=user,tag=mytag,severity=info ceeformat;
+      #     #   location /favicon.ico { allow all; access_log off; log_not_found off; }
+      #     # '';
+      #
+      #   };
 
       "status.${secrets.jakku.hostname}" = {
-        root = pkgs.runCommand "testdir" {} ''
+        root = pkgs.runCommand "testdir" { } ''
           mkdir "$out"
           echo hello world > "$out/index.html"
         '';

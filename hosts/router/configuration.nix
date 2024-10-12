@@ -361,13 +361,13 @@ in
           };
 
           Rank = {
-          # supposed to be the default
-            BandModifier5Ghz=1;
+            # supposed to be the default
+            BandModifier5Ghz = 1;
           };
           Scan = {
 
-            DisablePeriodicScan=true;
-                      # supp
+            DisablePeriodicScan = true;
+            # supp
 
           };
 

@@ -56,7 +56,7 @@ let
     #   plugin = pkgs.symlinkJoin {
     #    name = "tree-sitter-grammars";
     #    paths = with pkgs.neovimUtils; [
-          # pkgs.vimPlugins.nvim-treesitter-parsers.tree-sitter-nix
+    # pkgs.vimPlugins.nvim-treesitter-parsers.tree-sitter-nix
     #       # # tree-sitter-haskell # crashes with a loop
     #       # tree-sitter-html  # for rest.nvim
     #       # (grammarToPlugin pkgs.tree-sitter-grammars.tree-sitter-html) # for devdocs
@@ -88,8 +88,6 @@ let
     #  # this is a peculiarly complex one that needs pynvim, image.nvim
     #  plugin = molten-nvim; 
     # })
-
-
 
     # TODO it needs some extra care
 
@@ -150,9 +148,8 @@ let
         vim.g.haskell_enable_static_pointers = 1  -- to enable highlighting of `static`
         vim.g.haskell_backpack = 1                -- to enable highlighting of backpack keywords
         vim.g.haskell_indent_disable=1
-        '';
+      '';
     })
-
 
     # disabling as long as it depends on nvim-treesitter
     # (luaPlugin {
@@ -186,14 +183,14 @@ let
       optional = true;
       config = # lua
         ''
-        -- nvimdev {{{
-        -- call nvimdev#init(--path/to/neovim--)
-        vim.g.nvimdev_auto_init = 1
-        vim.g.nvimdev_auto_cd = 1
-        -- vim.g.nvimdev_auto_ctags=1
-        vim.g.nvimdev_auto_lint = 1
-        vim.g.nvimdev_build_readonly = 1
-        --}}}'';
+          -- nvimdev {{{
+          -- call nvimdev#init(--path/to/neovim--)
+          vim.g.nvimdev_auto_init = 1
+          vim.g.nvimdev_auto_cd = 1
+          -- vim.g.nvimdev_auto_ctags=1
+          vim.g.nvimdev_auto_lint = 1
+          vim.g.nvimdev_build_readonly = 1
+          --}}}'';
     })
 
     # (luaPlugin { plugin = sniprun; })
@@ -289,8 +286,8 @@ let
     nodePackages.typescript-language-server
     # pandoc # for markdown preview, should be in the package closure instead
     # pythonPackages.pdftotext  # should appear only in RC ? broken
-      nil # a nix lsp, can be debugged with NIL_LOG_PATH and NIL_LOG=nil=debug
-      nixd # another nix LSP
+    nil # a nix lsp, can be debugged with NIL_LOG_PATH and NIL_LOG=nil=debug
+    nixd # another nix LSP
     # rnix-lsp
     rust-analyzer
     shellcheck
@@ -343,7 +340,7 @@ in
     # HACK till we fix it
     # or else we need a vim.g.sqlite_clib_path
     extraLuaPackages = lp: [
-      lp.sqlite 
+      lp.sqlite
     ]
     # nvimLua.pkgs.rest-nvim.propagatedBuildInputs
     ;

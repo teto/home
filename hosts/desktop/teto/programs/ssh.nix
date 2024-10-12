@@ -34,12 +34,12 @@
         # checkHostIP
         identityFile = "${secretsFolder}/ssh/id_rsa";
         user = "teto";
-        host = "router";
+        # host = "router";
         hostname = secrets.router.hostname;
         identitiesOnly = true;
         # experimental
         # https://github.com/nix-community/home-manager/pull/2992
-        # match = "ovh1";
+        match = "router";
         port = 12666;
       };
 
@@ -52,7 +52,7 @@
         identitiesOnly = true;
         # experimental
         # https://github.com/nix-community/home-manager/pull/2992
-        # match = "ovh1";
+        match = "router-lan";
         port = 12666;
       };
 

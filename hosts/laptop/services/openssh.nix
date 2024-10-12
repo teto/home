@@ -18,10 +18,16 @@
   #   { addr = "0.0.0.0"; port = 64022; }
   # ];
 
-  hostKeys = 
-  [ 
-      { type = "rsa"; bits = 4096; path = "/etc/ssh/ssh_host_rsa_key"; }
-      { type = "ed25519"; path = "/etc/ssh/ssh_host_ed25519_key"; }
+  hostKeys = [
+    {
+      type = "rsa";
+      bits = 4096;
+      path = "/etc/ssh/ssh_host_rsa_key";
+    }
+    {
+      type = "ed25519";
+      path = "/etc/ssh/ssh_host_ed25519_key";
+    }
   ];
 
   # startWhenNeeded = true;

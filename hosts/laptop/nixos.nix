@@ -181,7 +181,6 @@ in
     };
   };
 
-
   # it is necessary to use dnssec though :(
   networking.resolvconf.dnsExtensionMechanism = false;
   networking.resolvconf.dnsSingleRequest = true; # juste pour test

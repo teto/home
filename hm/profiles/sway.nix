@@ -32,27 +32,10 @@ in
   # replaced with  package-sets.wayland
   package-sets.waylandPackages = true;
 
-  home.packages = with pkgs; [
-    swayidle
-    swayr # window selector
-    swaycons # show icon on windows
-    # swayhide
-    # sway-easyfocus # not packaged yet
-    # swayrst #  https://github.com/Nama/swayrst # not packaged yet
-
-    # sway overview, draws layouts for each workspace: dope https://github.com/milgra/sov
-    # sov  
-    nwg-bar # locks nothing
-    nwg-drawer # launcher
-    nwg-menu
-    nwg-dock # a nice dock
-    swaylock-effects # offers sexier
-    sway-contrib.grimshot # contains "grimshot" for instance
-    shotman # -c region
-    tessen # handle passwords
-    waybar
-    # eventually ironbar
-  ];
+  # home.packages = with pkgs; [
+  #   # waybar
+  #   # eventually ironbar
+  # ];
 
   ### swayr configuration {{{
   programs.swayr = {
@@ -189,6 +172,12 @@ in
       output = {
         # todo put a better path
         # example = { "HDMI-A-2" = { bg = "~/path/to/background.png fill"; }; };
+        # example = { "HDMI-A-2" = { bg = "~/path/to/background.png fill"; }; };
+        example = {
+          "HDMI-A-1" = {
+            bg = "${../../wallpapers/toureiffel.jpg}";
+          };
+        };
 
         #  "/home/teto/home/wallpapers/nebula.jpg fill"
         "*" = {
@@ -226,6 +215,7 @@ in
       # ;config.xsession.windowManager.i3.config.keybindings
       keybindings = sharedConfig.sharedKeybindings // {
         "${mod}+grave" = "${pkgs.swaynotificationcenter}/bin/swaync-client -swb";
+        "${mod}+p" = "exec ${pkgs.tessen}/bin/tessen --dmenu=rofi";
         "${mod}+p" = "exec ${pkgs.tessen}/bin/tessen --dmenu=rofi";
 
         "$GroupFr+$mod+ampersand" = "layout toggle all";

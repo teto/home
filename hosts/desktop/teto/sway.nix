@@ -16,9 +16,9 @@ let
     # WLR_RENDERER="gles2"; # taken from reddit
 
     # scintille sinon
-    __GL_GSYNC_ALLOWED = 0; # global vsync
-    __GL_SYNC_TO_VBLANK = 0;
-    __GL_VRR_ALLOWED = 0;
+    # __GL_GSYNC_ALLOWED = 0; # global vsync
+    # __GL_SYNC_TO_VBLANK = 0;
+    # __GL_VRR_ALLOWED = 0;
 
     # should be obsolete now
     GBM_BACKEND = "nvidia-drm";

@@ -35,46 +35,44 @@ local custom_luarocks_config_filename = vim.fn.stdpath('config') .. '/luarocks-c
 local luarocks_config_fn, errmsg = loadfile(custom_luarocks_config_filename)
 
 if luarocks_config_fn == nil then
-	print("Could not load "..errmsg)
+    print('Could not load ' .. errmsg)
 end
 
 -- function
 -- print(tostring(luarocks_config_fn))
 -- vim.print(tostring(luarocks_config_fn()))
 vim.g.rocks_nvim = {
-	-- TODO reference one from
-	-- use nix_deps.luarocks_executable
+    -- TODO reference one from
+    -- use nix_deps.luarocks_executable
     luarocks_binary = nix_deps.luarocks_executable,
-	-- /home/teto/.local/share/nvim/rocks/luarocks-config.lua
+    -- /home/teto/.local/share/nvim/rocks/luarocks-config.lua
     luarocks_config = luarocks_config_fn(),
     _log_level = vim.log.levels.TRACE,
 
-	-- checkout constants.DEFAULT_DEV_SERVERS
-	servers = { "https://luarocks.org/manifests/neorocks/"} ,
+    -- checkout constants.DEFAULT_DEV_SERVERS
+    servers = { 'https://luarocks.org/manifests/neorocks/' },
 
     lazy = true, -- for cleaner logs
     -- rocks.nvim config
     treesitter = {
-        auto_highlight = { },
-        auto_install = "prompt",
-        parser_map = { },
+        auto_highlight = {},
+        auto_install = 'prompt',
+        parser_map = {},
         ---@type string[] | fun(lang: string, bufnr: integer):boolean
 
-		-- filetypes or a function
+        -- filetypes or a function
         disable = {
-			"lhaskell"
-		},
+            'lhaskell',
+        },
     },
 }
 
-
 local has_avante, avante_mod = pcall(require, 'avante')
 if has_avante then
-
-	require('avante_lib').load()
-	avante_mod.setup ({
-	-- Your config here!
-	})
+    require('avante_lib').load()
+    avante_mod.setup({
+        -- Your config here!
+    })
 end
 
 -- vim.opt.packpath:prepend('/home/teto/gp.nvim2')
@@ -85,7 +83,7 @@ end
 -- 	vim.g.baleia.once(vim.api.nvim_get_current_buf())
 -- end, { bang = true })
 
--- Command to show logs 
+-- Command to show logs
 -- vim.api.nvim_create_user_command("BaleiaLogs", vim.g.baleia.logger.show, { bang = true })
 
 -- TODO prefix with gp_defaults.
@@ -93,16 +91,15 @@ end
 --
 -- local chat_system_prompt = defaults.chat_system_prompt
 
-local chat_system_prompt = 
-	"You are a general AI assistant.\n\n"
-	.. "The user provided the additional info about how they would like you to respond:\n\n"
-	.. "- If you're unsure don't guess and say you don't know instead.\n"
-	.. "- Ask question if you need clarification to provide better answer.\n"
-	.. "- Think deeply and carefully from first principles step by step.\n"
-	.. "- Zoom out first to see the big picture and then zoom in to details.\n"
-	.. "- Use Socratic method to improve your thinking and coding skills.\n"
-	.. "- Don't elide any code from your output if the answer requires coding.\n"
-	.. "- Take a deep breath; You've got this!\n"
+local chat_system_prompt = 'You are a general AI assistant.\n\n'
+    .. 'The user provided the additional info about how they would like you to respond:\n\n'
+    .. "- If you're unsure don't guess and say you don't know instead.\n"
+    .. '- Ask question if you need clarification to provide better answer.\n'
+    .. '- Think deeply and carefully from first principles step by step.\n'
+    .. '- Zoom out first to see the big picture and then zoom in to details.\n'
+    .. '- Use Socratic method to improve your thinking and coding skills.\n'
+    .. "- Don't elide any code from your output if the answer requires coding.\n"
+    .. "- Take a deep breath; You've got this!\n"
 
 vim.g.gp_nvim = {
     agents = {
@@ -142,12 +139,12 @@ vim.g.gp_nvim = {
     },
     -- image_dir = (os.getenv("TMPDIR") or os.getenv("TEMP") or "/tmp") .. "/gp_images",
     image = {
-		store_dir = vim.fn.stdpath('cache') .. '/gp_images',
-	},
+        store_dir = vim.fn.stdpath('cache') .. '/gp_images',
+    },
     whisper = {
-		store_dir = vim.fn.stdpath('cache') .. '/gp_whisper',
-    	language = 'en',
-	},
+        store_dir = vim.fn.stdpath('cache') .. '/gp_whisper',
+        language = 'en',
+    },
 
     -- chat_agents = agents,
     -- openai_api_endpoint = "http://localhost:8080/v1/chat/completions",
@@ -165,7 +162,7 @@ vim.g.gp_nvim = {
         },
         -- ollama = {},
         localai = {
-			secret = "",
+            secret = '',
             endpoint = 'http://localhost:11111/v1/chat/completions',
         },
         googleai = {
@@ -178,9 +175,7 @@ vim.g.gp_nvim = {
             secret = os.getenv('ANTHROPIC_API_KEY'),
         },
     },
-
 }
-
 
 vim.g.loaded_matchit = 1
 vim.opt.shortmess:append('I')
@@ -234,7 +229,6 @@ vim.opt.termguicolors = true
 -- that's where treesitter installs grammars
 vim.opt.rtp:prepend('/home/teto/parsers')
 -- vim.opt.rtp:prepend(lazypath)
-
 
 -- lazy/config.lua sets vim.go.loadplugins = false so I used to run packloadall to restore those plugins
 -- but there seems to be a bug somewhere as overriding VIMRUNTIME would then be dismissed and it would used
@@ -528,7 +522,7 @@ vim.api.nvim_create_autocmd('ColorScheme', {
     desc = 'Set italic codelens on new colorschemes',
     callback = function()
         -- TODO create a TextYankPost highlight if it doesn't exist in scheme ?!
-        vim.api.nvim_set_hl(0, 'LspCodeLens', { italic = true, bg="Red" })
+        vim.api.nvim_set_hl(0, 'LspCodeLens', { italic = true, bg = 'Red' })
     end,
 })
 
@@ -596,7 +590,6 @@ end, {
 
 -- local verbose_output = false
 -- require("tealmaker").build_all(verbose_output)
-
 
 local has_sniprun, sniprun = pcall(require, 'sniprun')
 
@@ -731,8 +724,6 @@ if use_telescope then
     tts.telescope_create_keymaps()
 end
 
-
-
 -- since it was not merge yet
 -- inoremap <C-k><C-k> <Cmd>lua require'betterdigraphs'.digraphs("i")<CR>
 -- nnoremap { "n", "r<C-k><C-k>" , function () require'betterdigraphs'.digraphs("r") end}
@@ -794,7 +785,6 @@ vim.keymap.set(
 
 -- vim.g.vsnip_snippet_dir = vim.fn.stdpath('config') .. '/vsnip'
 
-
 -- nvim will load any .nvimrc in the cwd; useful for per-project settings
 vim.opt.exrc = true
 
@@ -849,7 +839,6 @@ if teto_notify.should_use_provider() then
     teto_notify.override_vim_notify()
 end
 
-
 -- vim.api.nvim_create_autocmd({ "VimEnter" }, {
 --   callback = function()
 -- 	require'plugins.oil-nvim'
@@ -871,7 +860,6 @@ end, { buffer = true })
 vim.keymap.set('n', ']e', function()
     vim.diagnostic.goto_next({ wrap = true, severity = vim.diagnostic.severity.ERROR })
 end, { buffer = true })
-
 
 -- vim.opt.runtimepath:prepend('/home/teto/neovim/nvim-dbee')
 

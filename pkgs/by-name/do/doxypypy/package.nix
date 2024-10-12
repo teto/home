@@ -1,6 +1,7 @@
-{ stdenv
-, buildPythonPackage
-, fetchPypi
+{
+  stdenv,
+  buildPythonPackage,
+  fetchPypi,
 }:
 
 buildPythonPackage rec {
@@ -14,7 +15,7 @@ buildPythonPackage rec {
 
   meta = with stdenv.lib; {
     description = "a Doxygen filter for Python";
-    homepage = https://github.com/Feneric/doxypypy;
+    homepage = "https://github.com/Feneric/doxypypy";
     license = licenses.gpl2;
   };
 

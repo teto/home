@@ -12,9 +12,11 @@ in
 {
 
   services.immich = {
-   machine-learning = { enable = false; };
-   # python3.11-insightface-0.7.3
-       # server.typesense.apiKeyFile = typesenseApiKeyFile;
+    machine-learning = {
+      enable = false;
+    };
+    # python3.11-insightface-0.7.3
+    # server.typesense.apiKeyFile = typesenseApiKeyFile;
   };
 
   # services.typesense = {

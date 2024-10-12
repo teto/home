@@ -5,8 +5,11 @@
   ];
   services.immich = {
     enable = true;
-    # host = ""; # all interfaces (example from module option)
-    machine-learning = { enable = false; };
+    # host = ""; # all interfaces (example from module option) breaks with nginx
+
+    machine-learning = {
+      enable = true;
+    };
     # secretsFile
     openFirewall = true;
 

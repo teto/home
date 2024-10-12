@@ -17,7 +17,7 @@ local M = {
     color = obsession_color, -- , color = obsession_color
     type = 'lua_expr',
     on_click = function()
-	 -- tODO toggle session
+        -- tODO toggle session
         vim.cmd([[SessionToggleAutoSave]])
         -- force a redraw
         vim.cmd('redrawstatus')

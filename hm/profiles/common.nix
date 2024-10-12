@@ -42,8 +42,6 @@
 
   # xdg-settings set default-web-browser firefox.desktop
 
-
-
   programs.fzf = {
     enable = true;
     enableBashIntegration = true;

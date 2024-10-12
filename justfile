@@ -5,9 +5,9 @@
 NIXPKGS_REPO := env_var('HOME') / 'nixpkgs'
 BLOG_FOLDER := "${HOME}/blog"
 
+default:
+    just --list
 
-default: 
- just --list
 # loads variables from .env
 
 set dotenv-load := true
@@ -24,8 +24,9 @@ switch: (nixos-rebuild "switch" "")
 repl: (nixos-rebuild "repl" "")
 
 # --override-input rocks-nvim /home/teto/rocks.nvim
-# TODO check if the paths exists to ease bootstrap ? 
+# TODO check if the paths exists to ease bootstrap ?
 # same for NOVA_OVH1
+
 # --override-input nova /home/teto/nova/doctor \
 [private]
 nixos-rebuild command builders="--option builders \"$NOVA_OVH1\" -j0":
@@ -36,7 +37,7 @@ nixos-rebuild command builders="--option builders \"$NOVA_OVH1\" -j0":
        --no-write-lock-file --show-trace --use-remote-sudo {{ command }}
 
 nixos-bootstrap:
- nom build .#nixosConfigurations.$HOSTNAME.config.system.build.toplevel 
+    nom build .#nixosConfigurations.$HOSTNAME.config.system.build.toplevel 
 
 # nom build
 # nix flake update
@@ -174,11 +175,10 @@ nix-check-db:
 
 # receive secrets
 receive-secrets:
-  wormhole-rs receive
+    wormhole-rs receive
 
 secrets:
-  wormhole-rs send ~/.gnupg
-  wormhole-rs send ~/.password-store 
-  wormhole-rs send ~/.ssh
-  wormhole-rs send ~/home/secrets
-
+    wormhole-rs send ~/.gnupg
+    wormhole-rs send ~/.password-store 
+    wormhole-rs send ~/.ssh
+    wormhole-rs send ~/home/secrets

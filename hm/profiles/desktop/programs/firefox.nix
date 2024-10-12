@@ -55,7 +55,7 @@ let
     # "devtools.theme" = "${config.theme.base16.kind}";
     "dom.battery.enabled" = false;
 
-    "layout.spellcheckDefault" = 0; 
+    "layout.spellcheckDefault" = 0;
 
     # breaks facebook messenger when set to false
     "dom.event.clipboardevents.enabled" = true;
@@ -142,36 +142,36 @@ in
     # TranslateEnabled = 
     PDFjs = false;
     Bookmarks = { };
-#  "type": "array",
-#  "items": {
-#   "type": "object",
-#   "properties": {
-#    "Title": {
-#     "type": "string"
-#    },
-#    "URL": {
-#     "type": "URL"
-#    },
-#    "Favicon": {
-#     "type": "URLorEmpty"
-#    },
-#    "Placement": {
-#     "type": "string",
-#     "enum": [
-#      "toolbar",
-#      "menu"
-#     ]
-#    },
-#    "Folder": {
-#     "type": "string"
-#    }
-#   },
-#   "required": [
-#    "Title",
-#    "URL"
-#   ]
-#  }
-# }
+    #  "type": "array",
+    #  "items": {
+    #   "type": "object",
+    #   "properties": {
+    #    "Title": {
+    #     "type": "string"
+    #    },
+    #    "URL": {
+    #     "type": "URL"
+    #    },
+    #    "Favicon": {
+    #     "type": "URLorEmpty"
+    #    },
+    #    "Placement": {
+    #     "type": "string",
+    #     "enum": [
+    #      "toolbar",
+    #      "menu"
+    #     ]
+    #    },
+    #    "Folder": {
+    #     "type": "string"
+    #    }
+    #   },
+    #   "required": [
+    #    "Title",
+    #    "URL"
+    #   ]
+    #  }
+    # }
     # DefaultDownloadDirectory = "\${home}/Downloads";
   };
   nativeMessagingHosts = [

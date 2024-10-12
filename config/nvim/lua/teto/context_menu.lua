@@ -10,18 +10,15 @@ local M = {
     active_menus = {},
 }
 
-
-
 --monkey patching of the neovim vim.api
 -- {{{
 ---@param modes string[] Accepted modes
 ---@param name string Fullpath to the menu
 vim.api.nvim_menu_set = function(modes, name, action)
-  for _, m in ipairs(modes) do
-	-- .. '.' .. M.format_menu_label(label, {})
-	vim.cmd(m .. 'menu ' .. name  .. ' ' .. action)
-  end
-
+    for _, m in ipairs(modes) do
+        -- .. '.' .. M.format_menu_label(label, {})
+        vim.cmd(m .. 'menu ' .. name .. ' ' .. action)
+    end
 end
 -- }}}
 
@@ -161,7 +158,6 @@ M.restart_hls = function()
     vim.cmd([[ HlsRestart ]])
 end
 
-
 -- menu_get({path} [, {modes}])                                        *menu_get()*
 
 -- menu_add('LSP')
@@ -201,11 +197,13 @@ M.set_lsp_rclick_menu = function()
     -- if it is haskell we can have items to
     -- hls_tools.lsp.load_hls_settings(project_root)
 end
-menu_add({'n'},
+menu_add(
+    { 'n' },
     'Diagnostic.Display_in_QF',
     '<cmd>lua vim.diagnostic.setqflist({open = true, severity = { min = vim.diagnostic.severity.WARN } })<cr>'
 )
-menu_add({'n'},
+menu_add(
+    { 'n' },
     'Diagnostic.Set_severity_to_warning',
     '<cmd>lua vim.diagnostic.config({virtual_text = { severity = { min = vim.diagnostic.severity.WARN } }})<cr>'
 )
@@ -427,7 +425,6 @@ function open_contextual_menu()
         vim.cmd(res)
     end)
 end
-
 
 -- vim.g.menu
 

@@ -19,7 +19,6 @@ in
       desktop = mkEnableOption "desktop packages";
       server = mkEnableOption "server packages";
 
-
       developer = mkEnableOption "Developer packages";
 
       kubernetes = mkEnableOption "Kubernetes packages";
@@ -38,7 +37,7 @@ in
       energy = mkEnableOption "energy management packages";
       enableGaming = mkEnableOption "Gaming packages";
       waylandPackages = mkEnableOption "Wayland packages";
-        
+
       llms = mkEnableOption "IA/Large language model packages";
       # laptop = mkEnableOption "Laptop packages (energy + wifi)";
 
@@ -330,7 +329,7 @@ in
         # rpl # to replace strings across files
         strace
         tio # serial console reader
-        tig # 
+        tig
         universal-ctags # there are many different ctags, be careful !
         whois
         zeal # doc for developers
@@ -394,6 +393,24 @@ in
         wl-gammactl # to control gamma
         wlr-randr # like xrandr
 
+        swayidle
+        swayr # window selector
+        swaycons # show icon on windows
+        # swayhide
+        # sway-easyfocus # not packaged yet
+        # swayrst #  https://github.com/Nama/swayrst # not packaged yet
+
+        # sway overview, draws layouts for each workspace: dope https://github.com/milgra/sov
+        # sov  
+        nwg-bar # locks nothing
+        nwg-drawer # launcher
+        nwg-menu
+        nwg-dock # a nice dock
+        swaylock-effects # offers sexier
+        sway-contrib.grimshot # contains "grimshot" for instance
+        shotman # -c region
+        tessen # handle passwords
+        waybar
         # wayprompt
         wev # equivalent of xev, to find the name of keys for instance
         wshowkeys
