@@ -177,6 +177,11 @@ nix-check-db:
 receive-secrets:
     wormhole-rs receive
 
+# install git hooks
+git-hooks:
+	ln -sf {{ justfile_directory() }}/contrib/pre-push  .git/hooks
+
+
 secrets:
     wormhole-rs send ~/.gnupg
     wormhole-rs send ~/.password-store 
