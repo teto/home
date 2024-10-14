@@ -83,7 +83,7 @@ let
     mbsync = mbsyncConfig // {
       enable = false; # mujmap is better at it
       remove = "both";
-      sync = true;
+      # sync = true;
     };
 
     # folders.sent = "[Gmail]/Sent Mail";
@@ -138,7 +138,7 @@ let
         extraConfig.account = {
           AuthMechs = "LOGIN";
         };
-        sync = false;
+        # sync = false;
       };
       msmtp.enable = true;
       notmuch = {
@@ -159,6 +159,7 @@ let
   gmail = accountExtra // {
     gpg = gpgModule;
     astroid.enable = true;
+    thunderbird.enable = true;
 
     # folders.drafts = "[Gmail]/Drafts";
     # folders.inbox = "Inbox";

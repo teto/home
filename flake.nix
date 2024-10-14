@@ -363,6 +363,8 @@
             self.inputs.wayland-pipewire-idle-inhibit.homeModules.default
             # todo home-manager
             self.inputs.sops-nix.homeManagerModules.sops
+            self.homeModules.services-mujmap
+            # self.homeModules.services-swaync
 
             # And add the home-manager module
             ./hm/profiles/common.nix
@@ -528,6 +530,8 @@
         # TODO scan hm/{modules, profiles} folder
         homeModules = {
 
+          services-mujmap = ./hm/services/mujmap.nix;
+          # services-swaync = ./hm/services/swaync.nix;
           sway = ./hm/profiles/sway.nix;
           # neovim = ./hm/profiles/sway.nix; 
 

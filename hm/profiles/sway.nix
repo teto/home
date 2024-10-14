@@ -20,8 +20,6 @@ let
   sharedConfig = pkgs.callPackage ./wm-config.nix { };
 
   myLib = pkgs.tetoLib;
-  # pkgs.callPackage ../lib.nix { };
-
 in
 # TODO load sway folder via haumea
 {
@@ -70,6 +68,8 @@ in
 
     # package = pkgs.swayfx;
     # package = pkgs.sway-unwrapped;
+
+    checkConfig = false;
 
     config = {
       terminal = term;
@@ -173,10 +173,8 @@ in
         # todo put a better path
         # example = { "HDMI-A-2" = { bg = "~/path/to/background.png fill"; }; };
         # example = { "HDMI-A-2" = { bg = "~/path/to/background.png fill"; }; };
-        example = {
-          "HDMI-A-1" = {
-            bg = "${../../wallpapers/toureiffel.jpg}";
-          };
+        "HDMI-A-1" = {
+          bg = "${../../wallpapers/toureiffel.jpg} fill";
         };
 
         #  "/home/teto/home/wallpapers/nebula.jpg fill"
@@ -215,7 +213,6 @@ in
       # ;config.xsession.windowManager.i3.config.keybindings
       keybindings = sharedConfig.sharedKeybindings // {
         "${mod}+grave" = "${pkgs.swaynotificationcenter}/bin/swaync-client -swb";
-        "${mod}+p" = "exec ${pkgs.tessen}/bin/tessen --dmenu=rofi";
         "${mod}+p" = "exec ${pkgs.tessen}/bin/tessen --dmenu=rofi";
 
         "$GroupFr+$mod+ampersand" = "layout toggle all";

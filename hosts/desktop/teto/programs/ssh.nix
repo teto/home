@@ -39,20 +39,22 @@
         identitiesOnly = true;
         # experimental
         # https://github.com/nix-community/home-manager/pull/2992
-        match = "router";
+        match = "host=router";
         port = 12666;
+        # RemoteCommand
+        # SendEnv LANG LC_*
       };
 
       router-lan = {
         # checkHostIP
         identityFile = "${secretsFolder}/ssh/id_rsa";
         user = "teto";
-        host = "router";
+        # host = "router";
         hostname = "10.0.0.1";
         identitiesOnly = true;
         # experimental
         # https://github.com/nix-community/home-manager/pull/2992
-        match = "router-lan";
+        match = "host=router-lan";
         port = 12666;
       };
 
