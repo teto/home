@@ -46,7 +46,10 @@ nixos-bootstrap:
 # backup my photo folder
 backup-photos $AWS_ACCESS_KEY_ID=`pass show self-hosting/backblaze-restic-backup-key/username` $AWS_SECRET_ACCESS_KEY=`pass show self-hosting/backblaze-restic-backup-key/password`:
     # le --password-command c'est RESTIC_PASSWORD_FILE
-    restic backup ~/Nextcloud --repository-file=/run/secrets/restic/teto-bucket
+    restic backup ~/Nextcloud --repository-file=~/.config/sops-nix/secrets/restic/teto-bucket
+
+backup-mount:
+  bin/restic-wrapper.sh restic mount ./b2-mount
 
 # Generate system-specific systemd credentials such that they dont appear on the git repo
 systemd-credentials:

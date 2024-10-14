@@ -208,12 +208,11 @@ in
         # newsboat #
         immich-cli
         mujmap # to sync notmuch tags across jmap
+    # signal-desktop # installe a la main
         # memento # broken capable to display 2 subtitles at same time
-        vlc
         # leafnode dovecot22 dovecot_pigeonhole fetchmail procmail w3m
         # mairix mutt msmtp lbdb contacts spamassassin
         # element-desktop # TODO this should go into nix profile install
-        popcorntime
 
       ];
 
@@ -222,7 +221,6 @@ in
     (mkIf cfg.enableDesktopGUIPackages {
       home.packages = with pkgs; [
         hakuneko
-
         memento # broken capable to display 2 subtitles at same time
         vlc
         # leafnode dovecot22 dovecot_pigeonhole fetchmail procmail w3m

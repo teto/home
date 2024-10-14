@@ -433,6 +433,8 @@
           # TODO set SOPS_A
           shellHook = ''
             export SOPS_AGE_KEY_FILE=$PWD/secrets/age.key
+            export RESTIC_REPOSITORY_FILE=/run/secrets/restic/teto-bucket
+            export RESTIC_PASSWORD_FILE=
             source config/bash/aliases.sh
             echo "Run just ..."
           '';

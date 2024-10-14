@@ -131,10 +131,8 @@
 
     # mdp # markdown CLI presenter
     # gthumb # image manager, great to tag pictures
-    # magic-wormhole  # super tool to exchange secrets between computers
-    # gnome3.gnome_control_center
-    # signal-desktop # installe a la main
-    # gnome.gnome-maps
+    gnome3.gnome_control_center
+    gnome.gnome-maps
     # xorg.xwininfo # for stylish
     pciutils # for lspci
     moar # test as pager

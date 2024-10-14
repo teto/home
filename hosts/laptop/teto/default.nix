@@ -55,6 +55,7 @@
 
   package-sets = {
     enableDesktopGUIPackages = true;
+    enableIMPackages = true;
     energy = true;
     wifi = true;
     llms = true;
