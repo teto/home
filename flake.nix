@@ -187,7 +187,7 @@
     yazi = {
       # url = "github:sxyazi/yazi?ref=v0.1.5";
       url = "github:sxyazi/yazi";
-      inputs.nixpkgs.follows = "nixpkgs";
+      # inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
@@ -880,9 +880,10 @@
                   ;
               };
 
-              git-repo-manager = prev.callPackage ./pkgs/by-name/gi/git-repo-manager/package.nix {
-                fenix = self.inputs.fenix;
-              };
+              # borken with recent update https://github.com/NixOS/nixpkgs/issues/348832
+              # git-repo-manager = prev.callPackage ./pkgs/by-name/gi/git-repo-manager/package.nix {
+              #   fenix = self.inputs.fenix;
+              # };
 
               tetoLib = final.callPackage ./hm/lib.nix { };
             };

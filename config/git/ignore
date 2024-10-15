@@ -80,6 +80,11 @@ Session.vim
 *.zip
 *.deb
 
+
+# media {{{
+*.mkv
+# }}}
+
 # Logs and databases {{{
 *.log
 *.db
