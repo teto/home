@@ -5,7 +5,7 @@ rec {
     # Careful, we're using a different self and super here!
     packageOverrides = pythonself: pythonsuper: {
 
-      protobuf = pythonsuper.protobuf.override { inherit (final.onnxruntime) protobuf; };
+      # protobuf = pythonsuper.protobuf.override { inherit (final.onnxruntime) protobuf; };
 
       kergen = prev.callPackage ./pkgs/kergen.nix { };
 

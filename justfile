@@ -160,6 +160,16 @@ update-vimPlugins:
       --github-token=$GITHUB_TOKEN \
       --no-commit
 
+# update my luarocks overlay
+update-luarocks-packages:
+    # TODO make it so it works with --commit !
+    nix run {{ NIXPKGS_REPO }}#luarocks-package-updater -- \
+      -i {{ justfile_directory() }}/overlays/luarocks-packages/luarocks-list.csv \
+      -o ${{ justfile_directory() }}/overlays/luarocks-packages/generated.nix \
+      --github-token=$GITHUB_TOKEN \
+      --no-commit
+
+
 # https://unix.stackexchange.com/questions/74184/how-to-save-current-command-on-zsh
 zsh-load-history:
     hist_file="shell_history.txt"

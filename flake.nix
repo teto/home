@@ -806,6 +806,12 @@
 
             in
             {
+              termscp = prev.termscp.overrideAttrs(oa:  {
+                 cargoBuildFlags = "--no-default-features";
+                });
+
+              rofi-rbw = prev.rofi-rbw.override({ waylandSupport=true; });
+
               flameshotGrim = final.flameshot.overrideAttrs (oldAttrs: {
                 src = prev.fetchFromGitHub {
                   owner = "flameshot-org";

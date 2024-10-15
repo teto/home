@@ -69,7 +69,7 @@
       ../../../hm/profiles/neomutt.nix
       # ../../../hm/profiles/nushell.nix
       ../../../hm/profiles/alot.nix
-      ../../../hm/profiles/android.nix
+      # ../../../hm/profiles/android.nix
       ../../../hm/profiles/gaming.nix
 
       ../../../hm/profiles/nova.nix
