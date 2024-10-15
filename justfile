@@ -6,7 +6,7 @@ NIXPKGS_REPO := env_var('HOME') / 'nixpkgs'
 BLOG_FOLDER := "${HOME}/blog"
 
 default:
-    just --list
+    just --choose
 
 # loads variables from .env
 
@@ -174,7 +174,7 @@ nix-check-db:
     sqlite3 /nix/var/nix/db/db.sqlite 'pragma integrity_check'
 
 # receive secrets
-receive-secrets:
+secrets-receive:
     wormhole-rs receive
 
 # install git hooks
@@ -182,8 +182,12 @@ git-hooks:
 	ln -sf {{ justfile_directory() }}/contrib/pre-push  .git/hooks
 
 
-secrets:
-    wormhole-rs send ~/.gnupg
-    wormhole-rs send ~/.password-store 
-    wormhole-rs send ~/.ssh
+secrets-send:
+    # wormhole-rs send ~/.gnupg
+    # wormhole-rs send ~/.password-store 
+    # wormhole-rs send ~/.ssh
     wormhole-rs send ~/home/secrets
+
+# snippet to regenerate the doc of some project
+panvimdoc:
+	panvimdoc --project-name gp.nvim --vim-version "neovim" --input-file README.md --demojify true --treesitter true --doc-mapping true --doc-mapping-project-name true --dedup-subheadings true
