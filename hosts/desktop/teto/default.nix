@@ -130,8 +130,8 @@
 
     # mdp # markdown CLI presenter
     # gthumb # image manager, great to tag pictures
-    gnome3.gnome_control_center
-    gnome.gnome-maps
+    gnome-control-center
+    gnome-maps
     # xorg.xwininfo # for stylish
     pciutils # for lspci
     moar # test as pager

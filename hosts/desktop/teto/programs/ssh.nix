@@ -20,6 +20,14 @@
     # can I have it per target ?
     # controlPath = "";
     matchBlocks = lib.optionalAttrs withSecrets {
+
+      gitlab = {
+        match = "host=gitlab.com";
+        user = "mattator";
+        identityFile = "${secretsFolder}/ssh/gitlab";
+        identitiesOnly = true;
+      };
+
       jakku = {
         host = secrets.jakku.hostname;
         user = "teto";

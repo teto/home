@@ -219,7 +219,9 @@
         # email = "matthieu.coudron@novadiscovery.com";
       };
 
-      secrets = import ./nixpkgs/secrets.nix { inherit secretsFolder dotfilesPath; };
+      secrets = import ./nixpkgs/secrets.nix {
+        inherit secretsFolder dotfilesPath; 
+      };
 
       # sshLib = import ./nixpkgs/lib/ssh.nix { inherit secrets; flakeInputs = self.inputs; };
       system = "x86_64-linux";
@@ -252,6 +254,8 @@
             withSecrets = true;
             flakeSelf = self;
             flakeInputs = self.inputs;
+            userConfig = novaUserProfile;
+
             inherit dotfilesPath secretsFolder;
           };
         };
@@ -607,13 +611,7 @@
                 hm.nixosModules.home-manager
                 self.inputs.sops-nix.nixosModules.sops
                 hm-common
-
-                (
-                  { pkgs, ... }:
-                  {
-                    imports = [ ./hosts/laptop/nixos.nix ];
-                  }
-                )
+                ./hosts/laptop/nixos.nix 
               ];
             };
 
@@ -677,43 +675,39 @@
             # };
 
             # desktop is a 
-            desktop = nixpkgs.lib.nixosSystem {
-              inherit system;
-              pkgs = myPkgs;
-              specialArgs = {
-                secrets = { };
-                withSecrets = false;
-                flakeSelf = self;
-                flakeInputs = self.inputs;
-                inherit (self) inputs;
-              };
+            desktop = mkNixosSystem {
+              withSecrets = false;
+              hostname = "jedha";
+              # inherit system;
+              # pkgs = myPkgs;
+              # specialArgs = {
+              #   secrets = { };
+              #   withSecrets = false;
+              #   flakeSelf = self;
+              #   flakeInputs = self.inputs;
+              #   inherit (self) inputs;
+              # };
               modules = [
-                self.inputs.sops-nix.nixosModules.sops
+                # self.inputs.sops-nix.nixosModules.sops
+                 ./hosts/desktop/_nixos.nix
                 # self.inputs.mptcp-flake.nixosModules.mptcp
                 # self.inputs.peerix.nixosModules.peerix
-                (
-                  { pkgs, ... }:
-                  {
-
-                    imports = [ ./hosts/desktop/_nixos.nix ];
-                  }
-                )
-                hm.nixosModules.home-manager
+                # hm.nixosModules.home-manager
                 # nova.nixosProfiles.dev
                 # nur.nixosModules.nur
-                hm-common
+                # hm-common
               ];
             };
 
             # nix build .#nixosConfigurations.teapot.config.system.build.toplevel
             jedha = desktop.extendModules ({
               # TODO add nova inputs
-              specialArgs = {
-                inherit secrets;
-                inherit (self) inputs;
-                flakeInputs = self.inputs;
-                withSecrets = true;
-              };
+              # specialArgs = {
+              #   inherit secrets;
+              #   inherit (self) inputs;
+              #   flakeInputs = self.inputs;
+              #   withSecrets = true;
+              # };
 
               modules = [
                 self.nixosModules.novaModule
@@ -748,6 +742,7 @@
               imports = [
                 # ./nixos/profiles/nova/rstudio-server.nix
 
+                  flakeInputs.nova-doctor.nixosModules.gnome
               ];
               home-manager.extraSpecialArgs = {
                 inherit secrets;
@@ -764,7 +759,7 @@
 
                   flakeInputs.nova-doctor.homeModules.user
                   flakeInputs.nova-doctor.homeModules.sse
-                  flakeInputs.nova-doctor.homeModules.vpn
+                  # flakeInputs.nova-doctor.homeModules.vpn
                 ];
               };
             }

@@ -57,13 +57,10 @@ in
       // {
 
         nova = {
-          match = "host=git.novadiscovery.net";
-          user = "matthieu.coudron";
+          match = "host=${secrets.nova.gitlab.uri}";
+          user = secrets.nova.gitlab.user;
           identityFile = "${dotfilesPath}/secrets/ssh/nova_key";
         };
-        # relay-prod = {
-        #   identityFile = "${dotfilesPath}/secrets/ssh/nova_key";
-        # };
       };
   };
 }
