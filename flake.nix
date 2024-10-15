@@ -123,6 +123,8 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     # nixpkgs-wayland.url = "github:nix-community/nixpkgs-wayland";
 
+    nvd.url = "git+ssh://git@gitlab.com/mattator/nvd?ref=add-module";
+
     # TODO this should not be necessary anymore ? just look at doctor ?
     nova-doctor = {
       url = "git+ssh://git@git.novadiscovery.net/sys/doctor?ref=dev";

@@ -138,6 +138,8 @@
     tailspin # a log viewer based on less ("spin" or "tsspin" is the executable)
     tig
 
+    panvimdoc # to generate vim doc from README, for instance in gp.nvim
+
     presenterm # for presentations from terminal/markdown (in rust, supports images, pretty cool)
 
     lutris # for gaming
