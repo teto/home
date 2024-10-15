@@ -867,3 +867,8 @@ local has_dbee, dbee = pcall(require, 'dbee')
 if has_dbee then
     dbee.setup({})
 end
+
+vim.keymap.set("n", "<C-t>", function()
+  require("menu").open("default")
+end, {})
+
