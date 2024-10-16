@@ -64,10 +64,12 @@
 
 
   # kinda nova specific
-  systemd.services.greetd.serviceConfig = {
+  systemd.services.greetd.serviceConfig = let 
+    settingsFormat = pkgs.formats.toml { };
+  in {
     # should I live in the "greeter" group
 
-    ExecStart = "${pkgs.greetd.greetd}/bin/greetd --config ${lib.settingsFormat.generate "greetd.toml" config.services.greetd.settings} -s /var/cache/tuigreet";
+    ExecStart = lib.mkForce "${pkgs.greetd.greetd}/bin/greetd --config ${settingsFormat.generate "greetd.toml" config.services.greetd.settings} -s /var/cache/tuigreet/sock";
   };
 
   environment.systemPackages = [
