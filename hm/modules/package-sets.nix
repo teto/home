@@ -364,7 +364,7 @@ in
     (mkIf cfg.waylandPackages {
       home.packages = with pkgs; [
         cliphist
-        clipcat # rust
+        # clipcat # rust broken
 
         # TODO test https://github.com/sentriz/cliphist
         foot # terminal

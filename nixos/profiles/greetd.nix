@@ -35,6 +35,7 @@
           ${pkgs.greetd.tuigreet}/bin/tuigreet \
             --remember \
             --remember-user-session \
+            --user-menu \
             --greeting "Hello noob" \
             --sessions ${config.services.xserver.displayManager.sessionData.desktops}/share/xsessions:${config.services.xserver.displayManager.sessionData.desktops}/share/wayland-sessions
             --user-menu \

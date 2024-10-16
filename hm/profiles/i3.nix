@@ -34,24 +34,11 @@ in
 
   # services.parcellite.enable = true;
 
-  imports = [
-    # todo should be disabled if sway enabled 
-    # ./dunst.nix
-  ];
-
-  home.sessionVariables = {
-    # JUPYTER_CONFIG_DIR=
-
-    # this variable is used by i3-sensible-terminal to determine the basic terminal
-    # so define it only in i3 ?
-    TERMINAL = "kitty";
-  };
-
   home.packages = with pkgs; [
     # xbacklight # for usage with i3pystatus backight module
     # i3-layout-manager  # to save/load layouts
     arandr # to move screens/monitors around
-    xclip
+    # xclip
     xcwd
     xdotool # needed for vimtex + zathura
     xorg.xbacklight # todo should be set from module
