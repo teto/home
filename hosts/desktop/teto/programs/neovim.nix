@@ -38,7 +38,6 @@ let
 
   # orgmodePlugins = with pkgs.vimPlugins; [ 
   neorgPlugins = with pkgs.vimPlugins; [
-    # (luaPlugin { plugin = neorg-telescope; })
   ];
 
   # try via rocks.nvim first

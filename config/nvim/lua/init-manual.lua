@@ -872,3 +872,5 @@ vim.keymap.set("n", "<C-t>", function()
   require("menu").open("default")
 end, {})
 
+vim.opt.completeopt="preview,menu,menuone"
+

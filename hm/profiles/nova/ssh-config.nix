@@ -58,7 +58,7 @@ in
 
         nova = {
           match = "host=${secrets.nova.gitlab.uri}";
-          user = secrets.nova.gitlab.user;
+          user = "matthieu.coudron"; # secrets.nova.gitlab.user;
           identityFile = "${dotfilesPath}/secrets/ssh/nova_key";
         };
       };

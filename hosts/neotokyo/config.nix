@@ -54,6 +54,7 @@ in
 
     # to get the first iteration going on
     ./services/nextcloud.nix
+    ./services/nginx.nix
     ./services/immich.nix
 
     # ./gitolite.nix
@@ -74,23 +75,23 @@ in
 
   # virtualisation.docker.enable = true;
 
-  home-manager.users.root = {
-    imports = [
-      # ./users/root.nix
-      ../../hm/profiles/neovim.nix
-      ../desktop/root/programs/ssh.nix
-    ];
-
-    # home.stateVersion = "23.11";
-  };
-
   users.users.teto = {
     extraGroups = [
       "nextcloud" # to be able to list files
     ];
   };
 
-  home-manager.users.teto = {
+  home-manager.users = { 
+    root = {
+      imports = [
+        # ./users/root.nix
+        ../../hm/profiles/neovim.nix
+        ../desktop/root/programs/ssh.nix
+      ];
+
+    # home.stateVersion = "23.11";
+    };
+    teto = {
     # TODO it should load the whole folder
     imports = [
       flakeSelf.homeModules.teto-nogui
@@ -102,6 +103,7 @@ in
       # ./home.nix
       # breaks build: doesnt like the "activation-script"
     ];
+    };
   };
 
   boot.loader = {

@@ -249,6 +249,10 @@
             self.inputs.sops-nix.nixosModules.sops
             self.nixosModules.default-hm
             hm.nixosModules.home-manager
+            # { ... }:
+            #   home-manager.extraSpecialArgs = {
+    # inherit secrets withSecrets;
+
           ] ++ modules;
           specialArgs = {
             inherit hostname;
@@ -260,6 +264,7 @@
 
             inherit dotfilesPath secretsFolder;
           };
+
         };
 
       pkgImport =
@@ -355,6 +360,8 @@
           config,
           lib,
           pkgs,
+          withSecrets,
+          secrets,
           ...
         }:
         {
@@ -394,9 +401,9 @@
             )
           ];
           home-manager.extraSpecialArgs =
-            let
-              withSecrets = false;
-            in
+            # let
+            #   withSecrets = false;
+            # in
             {
               secrets = lib.optionalAttrs withSecrets secrets;
               inherit withSecrets;
@@ -513,6 +520,7 @@
     // (
       let
         getNixFilesInDir =
+          # listFilesRecursive
           dir:
           builtins.filter (file: nixpkgs.lib.hasSuffix ".nix" file && file != "default.nix") (
             builtins.attrNames (builtins.readDir dir)
@@ -520,9 +528,9 @@
         genKey = str: nixpkgs.lib.replaceStrings [ ".nix" ] [ "" ] str;
         genValue =
           dir: str:
-          { config }:
+          { config, ... }:
           {
-            imports = [ "/${dir}${str}" ];
+            imports = [ "/${dir}/${str}" ];
           };
         moduleFrom = dir: str: { "${genKey str}" = genValue dir str; };
         modulesFromDir = dir: builtins.foldl' (x: y: x // (moduleFrom dir y)) { } (getNixFilesInDir dir);
@@ -704,12 +712,12 @@
             # nix build .#nixosConfigurations.teapot.config.system.build.toplevel
             jedha = desktop.extendModules ({
               # TODO add nova inputs
-              # specialArgs = {
+              specialArgs = {
               #   inherit secrets;
               #   inherit (self) inputs;
               #   flakeInputs = self.inputs;
-              #   withSecrets = true;
-              # };
+                withSecrets = true;
+              };
 
               modules = [
                 self.nixosModules.novaModule
@@ -734,38 +742,16 @@
 
         };
 
-        nixosModules = (modulesFromDir ./nixos/modules) // {
+        nixosModules = 
+        # (modulesFromDir ./nixos/modules) // 
+          {
 
           default-hm = hm-common;
           teto-nogui = nixos/accounts/teto/teto.nix;
-          novaModule = (
-            { flakeInputs, ... }:
-            {
-              imports = [
-                # ./nixos/profiles/nova/rstudio-server.nix
-
-                  flakeInputs.nova-doctor.nixosModules.gnome
-              ];
-              home-manager.extraSpecialArgs = {
-                inherit secrets;
-                withSecrets = true;
-                # flakeInputs = self.inputs;
-              };
-
-              home-manager.users.teto = {
-                imports = [
-                  ./hosts/desktop/teto/programs/ssh.nix
-                  ./hosts/desktop/teto/programs/bash.nix
-
-                  ./hm/profiles/nova/ssh-config.nix
-
-                  flakeInputs.nova-doctor.homeModules.user
-                  flakeInputs.nova-doctor.homeModules.sse
-                  # flakeInputs.nova-doctor.homeModules.vpn
-                ];
-              };
-            }
-          );
+          novaModule = nixos/modules/nextcloud.nix;
+          # novaModule = 
+          # (
+          # );
 
         };
 

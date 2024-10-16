@@ -1,6 +1,7 @@
 { dotfilesPath
 , secrets
 , pkgs
+, lib
 , ... }:
 {
   imports = [
@@ -11,7 +12,7 @@
     # host = ""; # all interfaces (example from module option) breaks with nginx
 
     machine-learning = {
-      enable = true;
+      # enable = lib.mkForce true;
     };
     # secretsFile
     openFirewall = true;
@@ -42,10 +43,6 @@
 
         };
 
-        root = pkgs.runCommand "testdir" { } ''
-          mkdir "$out"
-          echo this is immich > "$out/index.html"
-        '';
       };
 
 }

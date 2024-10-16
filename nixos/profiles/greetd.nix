@@ -1,4 +1,6 @@
-{ config, pkgs, ... }:
+{ config, pkgs
+, lib
+, ... }:
 {
 
   # https://man.sr.ht/~kennylevinsen/greetd/
@@ -60,9 +62,18 @@
 
   };
 
+
+  # kinda nova specific
+  systemd.services.greetd.serviceConfig = {
+    # should I live in the "greeter" group
+
+    ExecStart = "${pkgs.greetd.greetd}/bin/greetd --config ${lib.settingsFormat.generate "greetd.toml" config.services.greetd.settings} -s /var/cache/tuigreet";
+  };
+
   environment.systemPackages = [
     # 
     pkgs.greetd.tuigreet
+    pkgs.greetd.greetd # to allow for testing, setting GREETD_SOCK
   ];
 
   # Edit gtkgreet list of login environments, which is by default read from /etc/greetd/environments

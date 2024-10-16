@@ -28,6 +28,11 @@ systemd-analyze blame
 systemd-analyze verify toto.unit
 
 
+systemctl service-log-level greetd.service 
+Unit greetd.service doesn't declare BusName=.
+Hint: the service must declare BusName= and implement the appropriate D-Bus interface.
+      See the org.freedesktop.LogControl1(5) man page for details.
+
 systemctl --failed --user
 
 # coredump

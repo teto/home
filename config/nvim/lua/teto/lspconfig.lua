@@ -80,7 +80,7 @@ lspconfig.lua_ls.setup({
                 -- Make the server aware of Neovim runtime files,
                 -- see also https://github.com/LuaLS/lua-language-server/wiki/Libraries#link-to-workspace .
                 -- Lua-dev.nvim also has similar settings for lua ls, https://github.com/folke/neodev.nvim/blob/main/lua/neodev/luals.lua .
-                maxPreload = 2000,
+                maxPreload = 4000,
                 preloadFileSize = 500,
                 checkThirdParty = false,
                 ignoreDir = {
@@ -91,8 +91,8 @@ lspconfig.lua_ls.setup({
                 library = {
                     -- [vim.fn.expand('$VIMRUNTIME/lua')] = true,
                     -- [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
-                    ['/home/teto/neovim/neovim/runtime/lua'] = true,
-                    ['/home/teto/neovim/neovim/runtime/lua/vim/lsp'] = true,
+                    -- ['/home/teto/neovim/neovim/runtime/lua'] = true,
+                    -- ['/home/teto/neovim/neovim/runtime/lua/vim/lsp'] = true,
                 },
             },
             -- workspace = {

@@ -35,7 +35,6 @@ nvim-lint = "scm"
 "lsp_signature.nvim" = "0.3.1"
 friendly-snippets = "scm"
 "haskell-snippets.nvim" = "1.4.4"
-"smart-open.nvim"= "scm"
 "none-ls-extras.nvim" = "scm"
 "yazi.nvim" = "6.0.4"
 tree-sitter-haskell = "scm"
@@ -47,6 +46,11 @@ tree-sitter-http = "scm"
 "hurl.nvim"= "1.7.1"
 "gitsigns.nvim" = "0.9.0"
 nvim-treehopper = "scm"
+nvim-treesitter-textobjects = "scm"
+
+[plugins."smart-open.nvim"]
+git = "danielfalk/smart-open.nvim"
+rev = "0.3.x"
 
 [plugins."typescript-tools.nvim" ]
 git = "pmizio/typescript-tools.nvim"

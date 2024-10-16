@@ -151,7 +151,6 @@
     wine
 
     # take the version from stable ?
-    qutebrowser # broken keyboard driven fantastic browser
     nautilus # demande webkit/todo replace by nemo ?
     # hexyl # hex editor
     # simple-scan
