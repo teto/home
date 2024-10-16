@@ -1,8 +1,9 @@
 {
   config,
   lib,
-  pkgs,
-  ...
+  pkgs
+  , dotfilesPath
+  , ...
 }:
 let
   myLib = pkgs.tetoLib;
@@ -130,7 +131,7 @@ in
           pkgs.wttrbar # for weather module
           pkgs.xdg_utils # for xdg-open
         ]
-      }:${config.home.profileDirectory}/bin";
+      }:${dotfilesPath}/bin";
     };
     Unit.PartOf = [ "tray.target" ];
     Install.WantedBy = [ "tray.target" ];

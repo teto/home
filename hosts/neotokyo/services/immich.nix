@@ -35,7 +35,7 @@
 
         locations."/" = {
           #  echo $server_name;  # Will output the server name defined in the current server block
-          proxyPass = "http://localhost:3001";
+          proxyPass = "http://localhost:2283";
           proxyWebsockets = true;
           extraConfig = ''
             client_max_body_size 100M;

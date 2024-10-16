@@ -630,8 +630,6 @@
               modules = [
                 self.nixosModules.novaModule
 
-                # TODO add dev / devops nixos modules
-                # self.inputs.nova-doctor.nixosModules.common
               ];
 
               # TODO retain existing specialArgs and inject mine ?!
@@ -713,9 +711,6 @@
             jedha = desktop.extendModules ({
               # TODO add nova inputs
               specialArgs = {
-              #   inherit secrets;
-              #   inherit (self) inputs;
-              #   flakeInputs = self.inputs;
                 withSecrets = true;
               };
 

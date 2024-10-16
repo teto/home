@@ -33,18 +33,47 @@
         # -x, --xsessions DIRS
         #                     colon-separated list of X11 session paths
         #             --sessions /run/current-system/sw/share/wayland-sessions/:/run/current-system/sw/share/xsessions/ \
-        command = ''
-          ${pkgs.greetd.tuigreet}/bin/tuigreet \
+        # --session-wrapper --user-menu     allow graphical selection of users from a menu
+# Sessions
+#
+# The available sessions are fetched from desktop files in /usr/share/xsessions and /usr/share/wayland-sessions. If you want to provide custom directories, you can set the --sessions arguments with a colon-separated list of directories for tuigreet to fetch session definitions some other place.
+# Desktop environments
+#
+# greetd only accepts environment-less commands to be used to start a session. Therefore, if your desktop environment requires either arguments or environment variables, you will need to create a wrapper script and refer to it in an appropriate desktop file.
+#
+# For example, to run X11 Gnome, you may need to start it through startx and configure your ~/.xinitrc (or an external xinitrc with a wrapper script):
+#
+# exec gnome-session
+#
+# To run Wayland Gnome, you would need to create a wrapper script akin to the following:
+#
+# XDG_SESSION_TYPE=wayland dbus-run-session gnome-session
+#
+# Then refer to your wrapper script in a custom desktop file (in a directory declared with the -s/--sessions option):
+#
+# Name=Wayland Gnome
+# Exec=/path/to/my/wrapper.sh
+#
+
+# on a   services.xserver.desktopManager.gnome.enable = true;
+# tuigreet = "${}";
+            # --xsessions ${config.services.xserver.displayManager.sessionData.desktops}/share/xsessions:${config.services.xserver.displayManager.sessionData.desktops}/share/wayland-sessions
+            command =
+              builtins.trace "home.path: ${config.home-manager.users.teto.home.path}"
+            ''
+          ${lib.getExe pkgs.greetd.tuigreet} \
             --remember \
             --remember-user-session \
-            --user-menu \
+            --user-menu --time \
             --greeting "Hello noob" \
-            --sessions ${config.services.xserver.displayManager.sessionData.desktops}/share/xsessions:${config.services.xserver.displayManager.sessionData.desktops}/share/wayland-sessions
             --user-menu \
             --power-shutdown /run/current-system/systemd/bin/systemctl poweroff \
+            --sessions ${config.home-manager.users.teto.home.path}/share/wayland-sessions
             --power-reboot /run/current-system/systemd/bin/systemctl reboot
         '';
       };
+
+      # default_session
 
       # initial_session => autologin !!
       initial_session = {
@@ -54,10 +83,10 @@
         user = "teto";
       };
 
-      gnome-shell = {
-        command = "${pkgs.gnome.gnome-shell}/bin/gnome-shell";
-        user = "teto";
-      };
+      # gnome-shell = {
+      #   command = "${pkgs.gnome.gnome-shell}/bin/gnome-shell";
+      #   user = "teto";
+      # };
     };
 
   };
