@@ -207,7 +207,7 @@ in
         # newsboat #
         immich-cli
         mujmap # to sync notmuch tags across jmap
-    # signal-desktop # installe a la main
+        # signal-desktop # installe a la main
         # memento # broken capable to display 2 subtitles at same time
         # leafnode dovecot22 dovecot_pigeonhole fetchmail procmail w3m
         # mairix mutt msmtp lbdb contacts spamassassin

@@ -21,8 +21,8 @@ let
     # __GL_VRR_ALLOWED = 0;
 
     # should be obsolete now
-    GBM_BACKEND = "nvidia-drm";
-    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+    # GBM_BACKEND = "nvidia-drm";
+    # __GLX_VENDOR_LIBRARY_NAME = "nvidia";
 
     # WLR_DRM_DEVICES can be used to select a card
   };

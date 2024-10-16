@@ -50,7 +50,7 @@ backup-photos $AWS_ACCESS_KEY_ID=`pass show self-hosting/backblaze-restic-backup
     restic backup ~/Nextcloud --repository-file=~/.config/sops-nix/secrets/restic/teto-bucket
 
 backup-mount:
-  bin/restic-wrapper.sh restic mount ./b2-mount
+    bin/restic-wrapper.sh restic mount ./b2-mount
 
 # Generate system-specific systemd credentials such that they dont appear on the git repo
 systemd-credentials:
@@ -169,7 +169,6 @@ update-luarocks-packages:
       --github-token=$GITHUB_TOKEN \
       --no-commit
 
-
 # https://unix.stackexchange.com/questions/74184/how-to-save-current-command-on-zsh
 zsh-load-history:
     hist_file="shell_history.txt"
@@ -189,8 +188,7 @@ secrets-receive:
 
 # install git hooks
 git-hooks:
-	ln -sf {{ justfile_directory() }}/contrib/pre-push  .git/hooks
-
+    ln -sf {{ justfile_directory() }}/contrib/pre-push  .git/hooks
 
 secrets-send:
     # wormhole-rs send ~/.gnupg
@@ -200,4 +198,4 @@ secrets-send:
 
 # snippet to regenerate the doc of some project
 panvimdoc:
-	panvimdoc --project-name gp.nvim --vim-version "neovim" --input-file README.md --demojify true --treesitter true --doc-mapping true --doc-mapping-project-name true --dedup-subheadings true
+    panvimdoc --project-name gp.nvim --vim-version "neovim" --input-file README.md --demojify true --treesitter true --doc-mapping true --doc-mapping-project-name true --dedup-subheadings true

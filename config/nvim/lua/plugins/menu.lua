@@ -1,6 +1,5 @@
+-- require("menu").open(options,  { mouse = true, border = false })
 
--- require("menu").open(options,  { mouse = true, border = false }) 
-
-vim.keymap.set("n", "<C-t>", function()
-  require("menu").open("default")
+vim.keymap.set('n', '<C-t>', function()
+    require('menu').open('default')
 end, {})

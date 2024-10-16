@@ -154,7 +154,6 @@ let
     };
   };
 
-
   orgmodeModule = types.submodule {
     options = {
 

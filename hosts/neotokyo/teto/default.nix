@@ -23,7 +23,7 @@ in
     cat "${pkgs.writeText "login-welcome" welcomeMessage}";
   '';
 
-  home.packages = [ 
+  home.packages = [
     pkgs.yazi
   ];
 }

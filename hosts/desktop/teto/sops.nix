@@ -4,7 +4,8 @@
   pkgs,
   withSecrets,
   dotfilesPath,
-  ... }:
+  ...
+}:
 {
   # SECRETS appear in ~/.config/sops-nix/secrets/*
 

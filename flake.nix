@@ -222,7 +222,7 @@
       };
 
       secrets = import ./nixpkgs/secrets.nix {
-        inherit secretsFolder dotfilesPath; 
+        inherit secretsFolder dotfilesPath;
       };
 
       # sshLib = import ./nixpkgs/lib/ssh.nix { inherit secrets; flakeInputs = self.inputs; };
@@ -251,7 +251,7 @@
             hm.nixosModules.home-manager
             # { ... }:
             #   home-manager.extraSpecialArgs = {
-    # inherit secrets withSecrets;
+            # inherit secrets withSecrets;
 
           ] ++ modules;
           specialArgs = {
@@ -621,7 +621,7 @@
                 hm.nixosModules.home-manager
                 self.inputs.sops-nix.nixosModules.sops
                 hm-common
-                ./hosts/laptop/nixos.nix 
+                ./hosts/laptop/nixos.nix
               ];
             };
 
@@ -697,7 +697,7 @@
               # };
               modules = [
                 # self.inputs.sops-nix.nixosModules.sops
-                 ./hosts/desktop/_nixos.nix
+                ./hosts/desktop/_nixos.nix
                 # self.inputs.mptcp-flake.nixosModules.mptcp
                 # self.inputs.peerix.nixosModules.peerix
                 # hm.nixosModules.home-manager
@@ -737,18 +737,18 @@
 
         };
 
-        nixosModules = 
-        # (modulesFromDir ./nixos/modules) // 
+        nixosModules =
+          # (modulesFromDir ./nixos/modules) // 
           {
 
-          default-hm = hm-common;
-          teto-nogui = nixos/accounts/teto/teto.nix;
-          novaModule = nixos/modules/nextcloud.nix;
-          # novaModule = 
-          # (
-          # );
+            default-hm = hm-common;
+            teto-nogui = nixos/accounts/teto/teto.nix;
+            novaModule = nixos/modules/nextcloud.nix;
+            # novaModule = 
+            # (
+            # );
 
-        };
+          };
 
         templates = {
           default = {
@@ -787,11 +787,11 @@
 
             in
             {
-              termscp = prev.termscp.overrideAttrs(oa:  {
-                 cargoBuildFlags = "--no-default-features";
-                });
+              termscp = prev.termscp.overrideAttrs (oa: {
+                cargoBuildFlags = "--no-default-features";
+              });
 
-              rofi-rbw = prev.rofi-rbw.override({ waylandSupport=true; });
+              rofi-rbw = prev.rofi-rbw.override ({ waylandSupport = true; });
 
               flameshotGrim = final.flameshot.overrideAttrs (oldAttrs: {
                 src = prev.fetchFromGitHub {

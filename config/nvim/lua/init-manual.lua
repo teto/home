@@ -868,9 +868,8 @@ if has_dbee then
     dbee.setup({})
 end
 
-vim.keymap.set("n", "<C-t>", function()
-  require("menu").open("default")
+vim.keymap.set('n', '<C-t>', function()
+    require('menu').open('default')
 end, {})
 
-vim.opt.completeopt="preview,menu,menuone"
-
+vim.opt.completeopt = 'preview,menu,menuone'

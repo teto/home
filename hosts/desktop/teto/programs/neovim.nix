@@ -37,8 +37,10 @@ let
   ];
 
   # orgmodePlugins = with pkgs.vimPlugins; [ 
-  neorgPlugins = with pkgs.vimPlugins; [
-  ];
+  neorgPlugins =
+    with pkgs.vimPlugins;
+    [
+    ];
 
   # try via rocks.nvim first
   neotestPlugins = with pkgs.vimPlugins; [

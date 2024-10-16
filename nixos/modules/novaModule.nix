@@ -1,11 +1,15 @@
-{ flakeInputs, secrets, withSecrets, ... }:
+{
+  flakeInputs,
+  secrets,
+  withSecrets,
+  ...
+}:
 {
   imports = [
     # ./nixos/profiles/nova/rstudio-server.nix
 
-      flakeInputs.nova-doctor.nixosModules.gnome
+    flakeInputs.nova-doctor.nixosModules.gnome
   ];
-
 
   # # devrait deja etre ok ?
   # home-manager.extraSpecialArgs = {
@@ -27,4 +31,3 @@
     ];
   };
 }
-

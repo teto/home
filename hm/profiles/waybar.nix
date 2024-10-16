@@ -1,9 +1,9 @@
 {
   config,
   lib,
-  pkgs
-  , dotfilesPath
-  , ...
+  pkgs,
+  dotfilesPath,
+  ...
 }:
 let
   myLib = pkgs.tetoLib;

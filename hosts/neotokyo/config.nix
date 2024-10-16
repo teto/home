@@ -81,7 +81,7 @@ in
     ];
   };
 
-  home-manager.users = { 
+  home-manager.users = {
     root = {
       imports = [
         # ./users/root.nix
@@ -89,20 +89,20 @@ in
         ../desktop/root/programs/ssh.nix
       ];
 
-    # home.stateVersion = "23.11";
+      # home.stateVersion = "23.11";
     };
     teto = {
-    # TODO it should load the whole folder
-    imports = [
-      flakeSelf.homeModules.teto-nogui
+      # TODO it should load the whole folder
+      imports = [
+        flakeSelf.homeModules.teto-nogui
 
-      ./teto/default.nix
-      ../../hm/profiles/neovim.nix
+        ./teto/default.nix
+        ../../hm/profiles/neovim.nix
 
-      # custom modules
-      # ./home.nix
-      # breaks build: doesnt like the "activation-script"
-    ];
+        # custom modules
+        # ./home.nix
+        # breaks build: doesnt like the "activation-script"
+      ];
     };
   };
 
