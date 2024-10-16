@@ -61,27 +61,35 @@
         # on a   services.xserver.desktopManager.gnome.enable = true;
         # tuigreet = "${}";
         # --xsessions ${config.services.xserver.displayManager.sessionData.desktops}/share/xsessions:${config.services.xserver.displayManager.sessionData.desktops}/share/wayland-sessions
-        command = let 
-          waylandWrapper = pkgs.writeShellScriptBin "wayland-wrapper" ''
-            export WLR_NO_HARDWARE_CURSORS=1;
-            export WLR_RENDERER="vulkan";
-            $@
+        command =
+          let
+            waylandWrapper = pkgs.writeShellScriptBin "wayland-wrapper" ''
+              export WLR_NO_HARDWARE_CURSORS=1;
+              export WLR_RENDERER="vulkan";
+              $@
             '';
 
-          flags = lib.concatStringsSep " " [
-            "--debug /tmp/tuigreet.log"
-            "--remember --remember-user-session" 
-            "--user-menu --time" 
-            "--greeting 'Hello noob'" 
-            "--user-menu" 
-            "--sessions ${config.home-manager.users.teto.home.path}/share/wayland-sessions" 
-            "--power-shutdown /run/current-system/systemd/bin/systemctl poweroff" 
-            "--power-reboot /run/current-system/systemd/bin/systemctl reboot"
-            # "--session-wrapper "
-          ];
+            flags = lib.concatStringsSep " " [
+              "--debug /tmp/tuigreet.log"
+              "--remember --remember-user-session"
+              "--user-menu"
+              "--time"
+              "--greeting 'Hello noob'"
+              "--sessions ${config.home-manager.users.teto.home.path}/share/wayland-sessions"
+              "--power-shutdown /run/current-system/systemd/bin/systemctl poweroff"
+              "--power-reboot /run/current-system/systemd/bin/systemctl reboot"
+              # "--session-wrapper "
+            ];
 
-
-          in builtins.trace "home.path: ${config.home-manager.users.teto.home.path}/share/wayland-sessions" "${lib.getExe pkgs.greetd.tuigreet} ${flags}"; 
+            sessionData = config.services.displayManager.sessionData.desktops;
+            sessionPackages = lib.concatStringsSep ":" config.services.displayManager.sessionPackages;
+            hmSessionPath = "${config.home-manager.users.teto.home.path}/share/wayland-sessions";
+          in
+          # services.displayManager.sessionPackages
+          # builtins.trace "home.path: ${config.home-manager.users.teto.home.path}/share/wayland-sessions" 
+          # config.services.xserver.displayManager.session.desktops
+          builtins.trace "sessionPath: ${sessionPackages}\nsessionData: ${sessionData}\nhome.path: ${hmSessionPath}"
+            "${lib.getExe pkgs.greetd.tuigreet} ${flags}";
 
         # user = "greeter"; # it's the default already
       };
@@ -101,6 +109,19 @@
     };
 
   };
+
+  # copied from doctor just for the test
+  services.xserver.exportConfiguration = true;
+  services.displayManager.autoLogin.enable = false;
+  services.xserver.displayManager.gdm.enable = true;
+  services.xserver.displayManager.gdm.settings = {
+    greeter.Exclude = let
+      users = builtins.attrNames (lib.filterAttrs (k: v: v.isNormalUser) config.users.users);
+      admin_users = builtins.filter (n: builtins.substring 0 6 n == "admin_") users;
+    in
+      "bin,root,daemon,adm,lp,sync,shutdown,halt,mail,news,uucp,operator,nobody,nobody4,noaccess,postgres,pvm,rpm,nfsnobody,pcap,${builtins.concatStringsSep "," admin_users}";
+  };
+  services.xserver.desktopManager.gnome.enable = true;
 
   # kinda nova specific
   systemd.services.greetd.serviceConfig =
