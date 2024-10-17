@@ -17,6 +17,9 @@ swaymsg reload
 ```
 swaymsg create_output
 swaymsg output
+# to make it disappear !
+swaymsg output HEADLESS-1 unplug
+swaymsg output HEADLESS-1 disable
 ```
 
 * sway notification center tricks

@@ -34,6 +34,8 @@
 
       # ../desktop/teto/default.nix  # Track for regressions
 
+      ../../desktop/teto/programs/ssh.nix
+      ../../desktop/teto/programs/bash.nix
       ../../desktop/teto/programs/neovim.nix
       ../../desktop/teto/services/swaync.nix
       ../../desktop/teto/programs/helix.nix

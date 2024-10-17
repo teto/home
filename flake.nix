@@ -604,6 +604,7 @@
             };
 
             # it doesn't have to be called like that !
+            # TODO use mkNixosSystem
             laptop = nixpkgs.lib.nixosSystem {
               inherit system;
               pkgs = myPkgs;
@@ -629,7 +630,6 @@
             mcoudron = laptop.extendModules {
               modules = [
                 self.nixosModules.novaModule
-
               ];
 
               # TODO retain existing specialArgs and inject mine ?!
@@ -639,7 +639,7 @@
                 inherit dotfilesPath;
 
                 withSecrets = true;
-                flakeInputs = self.inputs;
+                # flakeInputs = self.inputs;
                 userConfig = novaUserProfile;
                 doctor = self.inputs.nova-doctor;
                 # self = self.inputs.nova-doctor;
