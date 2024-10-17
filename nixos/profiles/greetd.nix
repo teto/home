@@ -75,7 +75,9 @@
               "--user-menu"
               "--time"
               "--greeting 'Hello noob'"
-              "--sessions ${config.home-manager.users.teto.home.path}/share/wayland-sessions"
+              "--sessions ${config.home-manager.users.teto.home.path}/share/wayland-sessions:${sessionData}/share/wayland-sessions"
+              "--xsessions ${config.home-manager.users.teto.home.path}/share/xsessions:${sessionData}/share/xsessions"
+              # "--asterisks"
               "--power-shutdown /run/current-system/systemd/bin/systemctl poweroff"
               "--power-reboot /run/current-system/systemd/bin/systemctl reboot"
               # "--session-wrapper "
@@ -88,7 +90,8 @@
           # services.displayManager.sessionPackages
           # builtins.trace "home.path: ${config.home-manager.users.teto.home.path}/share/wayland-sessions" 
           # config.services.xserver.displayManager.session.desktops
-          builtins.trace "sessionPath: ${sessionPackages}\nsessionData: ${sessionData}\nhome.path: ${hmSessionPath}"
+          builtins.trace
+            "sessionPath: ${sessionPackages}\nsessionData: ${sessionData}\nhome.path: ${hmSessionPath}"
             "${lib.getExe pkgs.greetd.tuigreet} ${flags}";
 
         # user = "greeter"; # it's the default already
@@ -115,10 +118,11 @@
   services.displayManager.autoLogin.enable = false;
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.displayManager.gdm.settings = {
-    greeter.Exclude = let
-      users = builtins.attrNames (lib.filterAttrs (k: v: v.isNormalUser) config.users.users);
-      admin_users = builtins.filter (n: builtins.substring 0 6 n == "admin_") users;
-    in
+    greeter.Exclude =
+      let
+        users = builtins.attrNames (lib.filterAttrs (k: v: v.isNormalUser) config.users.users);
+        admin_users = builtins.filter (n: builtins.substring 0 6 n == "admin_") users;
+      in
       "bin,root,daemon,adm,lp,sync,shutdown,halt,mail,news,uucp,operator,nobody,nobody4,noaccess,postgres,pvm,rpm,nfsnobody,pcap,${builtins.concatStringsSep "," admin_users}";
   };
   services.xserver.desktopManager.gnome.enable = true;
