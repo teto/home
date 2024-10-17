@@ -31,13 +31,13 @@
         #   echo "WIP" > "$out/index.html"
         # '';
 
-       # root /home/username/mysite/public/; #Absolute path to where your hugo site is
-       # index index.html; # Hugo generates HTML
+        # root /home/username/mysite/public/; #Absolute path to where your hugo site is
+        # index index.html; # Hugo generates HTML
         # looking at https://gideonwolfe.com/posts/sysadmin/hugonginx/
         locations."/" = {
           extraConfig = ''
             try_files $uri $uri/ =404;
-            '';
+          '';
         };
 
         # extraConfig = ''

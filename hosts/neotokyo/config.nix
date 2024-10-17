@@ -53,6 +53,7 @@ in
     ./sops.nix
 
     # to get the first iteration going on
+    ./services/gitolite.nix
     ./services/nextcloud.nix
     ./services/nginx.nix
     ./services/immich.nix
