@@ -30,8 +30,10 @@ let
   # ];
   defaultCompletionPlugins = with pkgs.vimPlugins; [
 
-    # TODO I should be able to attach
-    # (luaPlugin { plugin = nvim-cmp; })
+    # TODO I should be able to remove it as it's a dependency of the other modules 
+    # but it doesn't seem to work yet for hm
+    (luaPlugin { plugin = nvim-cmp; })
+
     (luaPlugin { plugin = cmp-nvim-lsp; })
     (luaPlugin { plugin = cmp-nvim-lua; })
     (luaPlugin { plugin = cmp_luasnip; })

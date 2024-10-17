@@ -733,21 +733,17 @@
           package-sets = ./hm/modules/packages-sets;
           # (modulesFromDir ./hm/modules)
 
-          # desktop = 
-
         };
 
         nixosModules =
+          # broken
           # (modulesFromDir ./nixos/modules) // 
           {
 
             default-hm = hm-common;
             teto-nogui = nixos/accounts/teto/teto.nix;
-            novaModule = nixos/modules/nextcloud.nix;
-            # novaModule = 
-            # (
-            # );
-
+            nextcloud = nixos/modules/nextcloud.nix;
+            novaModule = nixos/modules/novaModule.nix;
           };
 
         templates = {

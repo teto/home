@@ -105,38 +105,34 @@
         user = "teto";
       };
 
-      # gnome-shell = {
-      #   command = "${pkgs.gnome.gnome-shell}/bin/gnome-shell";
-      #   user = "teto";
-      # };
     };
 
   };
 
-  # copied from doctor just for the test
-  services.xserver.exportConfiguration = true;
-  services.displayManager.autoLogin.enable = false;
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.displayManager.gdm.settings = {
-    greeter.Exclude =
-      let
-        users = builtins.attrNames (lib.filterAttrs (k: v: v.isNormalUser) config.users.users);
-        admin_users = builtins.filter (n: builtins.substring 0 6 n == "admin_") users;
-      in
-      "bin,root,daemon,adm,lp,sync,shutdown,halt,mail,news,uucp,operator,nobody,nobody4,noaccess,postgres,pvm,rpm,nfsnobody,pcap,${builtins.concatStringsSep "," admin_users}";
-  };
-  services.xserver.desktopManager.gnome.enable = true;
-
-  # kinda nova specific
-  systemd.services.greetd.serviceConfig =
-    let
-      settingsFormat = pkgs.formats.toml { };
-    in
-    {
-      # should I live in the "greeter" group
-
-      ExecStart = lib.mkForce "${pkgs.greetd.greetd}/bin/greetd --config ${settingsFormat.generate "greetd.toml" config.services.greetd.settings} -s /var/cache/tuigreet/sock";
-    };
+  # # copied from doctor just for the test
+  # services.xserver.exportConfiguration = true;
+  # services.displayManager.autoLogin.enable = false;
+  # services.xserver.displayManager.gdm.enable = true;
+  # services.xserver.displayManager.gdm.settings = {
+  #   greeter.Exclude =
+  #     let
+  #       users = builtins.attrNames (lib.filterAttrs (k: v: v.isNormalUser) config.users.users);
+  #       admin_users = builtins.filter (n: builtins.substring 0 6 n == "admin_") users;
+  #     in
+  #     "bin,root,daemon,adm,lp,sync,shutdown,halt,mail,news,uucp,operator,nobody,nobody4,noaccess,postgres,pvm,rpm,nfsnobody,pcap,${builtins.concatStringsSep "," admin_users}";
+  # };
+  # services.xserver.desktopManager.gnome.enable = true;
+  #
+  # # kinda nova specific
+  # systemd.services.greetd.serviceConfig =
+  #   let
+  #     settingsFormat = pkgs.formats.toml { };
+  #   in
+  #   {
+  #     # should I live in the "greeter" group
+  #
+  #     ExecStart = lib.mkForce "${pkgs.greetd.greetd}/bin/greetd --config ${settingsFormat.generate "greetd.toml" config.services.greetd.settings} -s /var/cache/tuigreet/sock";
+  #   };
 
   environment.systemPackages = [
     # 
