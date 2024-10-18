@@ -10,15 +10,14 @@
   ...
 }:
 {
-  imports = [
-    ../../../../hm/profiles/nova/ssh-config.nix
-  ];
 
   programs.ssh = {
 
     # mkForce needed to override doctor's config
     enable = lib.mkForce true;
-
+ # When enabled, a private key that is used during authentication will be added to ssh-agent if it is running (with confirmation enabled if set to ‘confirm’). The argument must be ‘no’ (the default), ‘yes’, ‘confirm’ (optionally followed by a time
+ #           interval), ‘ask’ or a time interval (e.g. ‘1h’).
+    # addKeysToAgent  = "confirm";
     # can I have it per target ?
     # controlPath = "";
     matchBlocks = lib.optionalAttrs withSecrets {

@@ -45,6 +45,7 @@
       ./programs/waybar.nix
       ./programs/zsh.nix
 
+      ./services/ssh-agent.nix
       ./services/swaync.nix
       ./services/mpd.nix
       ./services/mpris.nix
