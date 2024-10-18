@@ -30,15 +30,6 @@
       # https://man.sr.ht/~kennylevinsen/greetd/
       default_session = {
         # dbus-run-session could be interesting too
-        # -s, --sessions DIRS colon-separated list of Wayland session paths
-        #     --session-wrapper 'CMD [ARGS]...'
-        #                     wrapper command to initialize the non-X11 session
-        # -x, --xsessions DIRS
-        #                     colon-separated list of X11 session paths
-        #             --sessions /run/current-system/sw/share/wayland-sessions/:/run/current-system/sw/share/xsessions/ \
-        # --session-wrapper --user-menu     allow graphical selection of users from a menu
-        # Sessions
-        #
         # The available sessions are fetched from desktop files in /usr/share/xsessions and /usr/share/wayland-sessions. If you want to provide custom directories, you can set the --sessions arguments with a colon-separated list of directories for tuigreet to fetch session definitions some other place.
         # Desktop environments
         #
@@ -57,35 +48,36 @@
         # Name=Wayland Gnome
         # Exec=/path/to/my/wrapper.sh
         #
-
-        # on a   services.xserver.desktopManager.gnome.enable = true;
         # tuigreet = "${}";
         # --xsessions ${config.services.xserver.displayManager.sessionData.desktops}/share/xsessions:${config.services.xserver.displayManager.sessionData.desktops}/share/wayland-sessions
         command =
           let
-            waylandWrapper = pkgs.writeShellScriptBin "wayland-wrapper" ''
+            waylandWrapper = pkgs.writeShellScript "wayland-wrapper" ''
               export WLR_NO_HARDWARE_CURSORS=1;
               export WLR_RENDERER="vulkan";
+              export XDG_SESSION_TYPE=wayland
               $@
             '';
 
             flags = lib.concatStringsSep " " [
               "--debug /tmp/tuigreet.log"
-              "--remember --remember-user-session"
+              "--remember"
+              "--remember-user-session"
               "--user-menu"
               "--time"
               "--greeting 'Hello noob'"
               "--sessions ${config.home-manager.users.teto.home.path}/share/wayland-sessions:${sessionData}/share/wayland-sessions"
               "--xsessions ${config.home-manager.users.teto.home.path}/share/xsessions:${sessionData}/share/xsessions"
-              # "--asterisks"
+              # "--asterisks"  # show asterisks
               "--power-shutdown /run/current-system/systemd/bin/systemctl poweroff"
               "--power-reboot /run/current-system/systemd/bin/systemctl reboot"
-              # "--session-wrapper "
+              "--session-wrapper ${waylandWrapper}"
             ];
 
             sessionData = config.services.displayManager.sessionData.desktops;
             sessionPackages = lib.concatStringsSep ":" config.services.displayManager.sessionPackages;
             hmSessionPath = "${config.home-manager.users.teto.home.path}/share/wayland-sessions";
+
           in
           # services.displayManager.sessionPackages
           # builtins.trace "home.path: ${config.home-manager.users.teto.home.path}/share/wayland-sessions" 
@@ -109,33 +101,7 @@
 
   };
 
-  # # copied from doctor just for the test
-  # services.xserver.exportConfiguration = true;
-  # services.displayManager.autoLogin.enable = false;
-  # services.xserver.displayManager.gdm.enable = true;
-  # services.xserver.displayManager.gdm.settings = {
-  #   greeter.Exclude =
-  #     let
-  #       users = builtins.attrNames (lib.filterAttrs (k: v: v.isNormalUser) config.users.users);
-  #       admin_users = builtins.filter (n: builtins.substring 0 6 n == "admin_") users;
-  #     in
-  #     "bin,root,daemon,adm,lp,sync,shutdown,halt,mail,news,uucp,operator,nobody,nobody4,noaccess,postgres,pvm,rpm,nfsnobody,pcap,${builtins.concatStringsSep "," admin_users}";
-  # };
-  # services.xserver.desktopManager.gnome.enable = true;
-  #
-  # # kinda nova specific
-  # systemd.services.greetd.serviceConfig =
-  #   let
-  #     settingsFormat = pkgs.formats.toml { };
-  #   in
-  #   {
-  #     # should I live in the "greeter" group
-  #
-  #     ExecStart = lib.mkForce "${pkgs.greetd.greetd}/bin/greetd --config ${settingsFormat.generate "greetd.toml" config.services.greetd.settings} -s /var/cache/tuigreet/sock";
-  #   };
-
   environment.systemPackages = [
-    # 
     pkgs.greetd.tuigreet
     pkgs.greetd.greetd # to allow for testing, setting GREETD_SOCK
   ];

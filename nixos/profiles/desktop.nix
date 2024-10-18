@@ -205,17 +205,17 @@ in
         pkgs.nix
       ]
     }
-    nvd diff $(ls -dv /nix/var/nix/profiles/system-*-link | tail -2)
+    nvd diff /nix/var/nix/profiles/system $(ls -dv /nix/var/nix/profiles/system-*-link | tail -1)
   '';
 
-  system.activationScripts.report-home-manager-changes = ''
-    PATH=$PATH:${
-      lib.makeBinPath [
-        pkgs.nvd
-        pkgs.nix
-      ]
-    }
-    nvd diff $(ls -dv /nix/var/nix/profiles/per-user/teto/home-manager-*-link | tail -2)
-  '';
+  # system.activationScripts.report-home-manager-changes = ''
+  #   PATH=$PATH:${
+  #     lib.makeBinPath [
+  #       pkgs.nvd
+  #       pkgs.nix
+  #     ]
+  #   }
+  #   nvd diff $(ls -dv /nix/var/nix/profiles/per-user/teto/home-manager-*-link | tail -2)
+  # '';
 
 }

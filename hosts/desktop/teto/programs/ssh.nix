@@ -70,11 +70,15 @@
 
     };
 
+    includes = [
+      "${config.xdg.configHome}/ssh/config"
+    ];
+
     # TODO parts of this should be accessible from 
-    extraConfig = ''
-      Include "${config.xdg.configHome}/ssh/config"
-      # TODO remove when doctor's home-manager is ok
-      Include ${config.xdg.configHome}/nova/jinkompute/ssh_config
-    '';
+    # extraConfig = ''
+    #   Include 
+    #   # TODO remove when doctor's home-manager is ok
+    #   Include ${config.xdg.configHome}/nova/jinkompute/ssh_config
+    # '';
   };
 }
