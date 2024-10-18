@@ -8,7 +8,8 @@
 
   # enable gitolite
   services.gitolite = {
-    enable = true;
+    enable = false;
+    # read
     # adminPubkey = secrets.gitolitePublicKey ;
     # group 
     # user

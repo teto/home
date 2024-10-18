@@ -25,7 +25,9 @@
     [
       ../../../hm/profiles/bash.nix
 
+
       ../../../hm/profiles/nova/programs/bash.nix
+
       ../../../hm/teto/common.nix
       # ../../../hm/profiles/common.nix
       ../../../hm/profiles/desktop.nix

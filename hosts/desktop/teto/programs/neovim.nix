@@ -333,6 +333,8 @@ in
     # extraConfig = ''
     #  '';
 
+    withNodeJs = true; # for tests
+
     extraLuaConfig = # lua
       ''
         require('init-manual')
