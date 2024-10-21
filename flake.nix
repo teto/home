@@ -342,6 +342,7 @@
                   "steam-original"
                   "steam-runtime"
                   "steam-run"
+                  "steam-unwrapped"
                   "sublimetext3"
                   "vault"
                   "vscode"
@@ -456,6 +457,7 @@
           # TODO set SOPS_A
           shellHook = ''
             export SOPS_AGE_KEY_FILE=$PWD/secrets/age.key
+            # TODO rely on scripts/load-restic.sh now ?
             export RESTIC_REPOSITORY_FILE=/run/secrets/restic/teto-bucket
             export RESTIC_PASSWORD_FILE=
             source config/bash/aliases.sh
@@ -544,6 +546,7 @@
         # TODO scan hm/{modules, profiles} folder
         homeModules = {
 
+          # bash = ./hm/profiles/bash.nix;
           services-mujmap = ./hm/services/mujmap.nix;
           # services-swaync = ./hm/services/swaync.nix;
           sway = ./hm/profiles/sway.nix;

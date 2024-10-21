@@ -250,7 +250,7 @@ in
 {
 
   imports = [
-    ../../../hm/profiles/neomutt.nix
+    ../../../../../hm/profiles/neomutt.nix
     ./programs/aerc.nix
     ./programs/astroid.nix
     ./programs/msmtp.nix

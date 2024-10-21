@@ -12,7 +12,7 @@ let
   autoloadedModule =
     { pkgs, ... }@args:
     flakeInputs.haumea.lib.load {
-      src =  ./desktop; 
+      src = ./desktop;
       #   flakeInputs.nix-filter { 
       #   root = ./desktop;
       # };

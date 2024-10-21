@@ -28,7 +28,9 @@ let
   };
 in
 {
-  imports = [ ../../../hm/profiles/sway.nix ];
+  imports = [
+    ../../../../../hm/profiles/sway.nix 
+  ];
 
   home.sessionVariables = swayEnvVars;
 

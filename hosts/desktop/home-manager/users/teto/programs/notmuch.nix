@@ -20,7 +20,10 @@
 
     # or we could use mkOutOfStoreSymlink ?
     hooks = {
-      postNew = lib.concatStrings [ (builtins.readFile ../../../../hooks_perso/post-new) ];
+      postNew = lib.concatStrings [ 
+        # TODO move them up to a "mail" section ? or to config/notmuch
+        (builtins.readFile ../../../../../../hooks_perso/post-new) 
+      ];
       # postInsert = 
     };
   };

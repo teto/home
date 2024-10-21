@@ -16,6 +16,8 @@ let
         root = ./.;
         exclude = [
           "teto"
+          "users"
+          "home-manager"
           "root"
         ];
       };
@@ -86,7 +88,9 @@ in
     ++ lib.optionals withSecrets [
       ../../nixos/profiles/steam.nix
       # to test core-ws
-      ./teto/restic.nix
+
+      # TODO restore
+      # ./teto/restic.nix
 
       # TODO moved from their
       # ../../nixos/profiles/localai.nix
@@ -136,7 +140,7 @@ in
       teto = {
         # TODO it should load the whole folder
         imports = [
-          ./teto/default.nix
+          ./home-manager/users/teto/default.nix
           flakeSelf.homeModules.teto-nogui
         ];
       };

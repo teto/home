@@ -6,7 +6,9 @@
 }:
 {
 
-  imports = [ ../../../../hm/profiles/waybar.nix ];
+  imports = [ 
+    ../../../../../../hm/profiles/waybar.nix 
+  ];
 
   programs.waybar = {
     enable = true;
