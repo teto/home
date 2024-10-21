@@ -361,6 +361,7 @@ in
 
   '';
 
+  # what's the diff ?!
   environment.variables = {
     WLR_NO_HARDWARE_CURSORS = "1";
   };

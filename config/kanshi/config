@@ -19,7 +19,7 @@
 
 profile desktop_duo {
   output 'Creatix Polymedia GmbH LDLC M31,5 NK32201600457' enable position 0,0
-  output 'Philips Consumer Electronics Company PHL 273V7 0x000011E7' enable position 1920,0
+  output 'Philips Consumer Electronics Company PHL 273V7 0x000011E7' enable position 2560,0
 }
 
 profile desktop_mono {

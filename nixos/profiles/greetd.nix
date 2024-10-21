@@ -66,12 +66,13 @@
               "--user-menu"
               "--time"
               "--greeting 'Hello noob'"
+              # TODO make sway the default wrapper
               "--sessions ${config.home-manager.users.teto.home.path}/share/wayland-sessions:${sessionData}/share/wayland-sessions"
               "--xsessions ${config.home-manager.users.teto.home.path}/share/xsessions:${sessionData}/share/xsessions"
               # "--asterisks"  # show asterisks
               "--power-shutdown /run/current-system/systemd/bin/systemctl poweroff"
               "--power-reboot /run/current-system/systemd/bin/systemctl reboot"
-              "--session-wrapper ${waylandWrapper}"
+              # "--session-wrapper ${waylandWrapper}"
             ];
 
             sessionData = config.services.displayManager.sessionData.desktops;

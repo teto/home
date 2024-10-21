@@ -59,6 +59,7 @@
       ./programs/waybar.nix
       ./programs/zsh.nix
 
+      ./services/kanshi.nix
       ./services/ssh-agent.nix
       ./services/swaync.nix
       ./services/mpd.nix
