@@ -62,8 +62,8 @@
   }
  },
  "custom/nix-updates": {
-    "exec": "/home/teto/home/bin/waybar-nixpkgs-update-check", // <--- path to script
-    "on-click": "$HOME/bin/update-checker && notify-send 'The system has been updated'", // refresh on click
+    "exec": "waybar-nixpkgs-update-check", // <--- path to script
+    "on-click": "waybar-nixpkgs-update-check && notify-send 'The system has been updated'", // refresh on click
     "interval": 3600, // refresh every hour
     "tooltip": true,
     "return-type": "json",
@@ -85,7 +85,7 @@
     // TODO create
     "on-click-right": "systemctl start --user mujmap-fastmail.service",
 	// TODO retreive executable name
-    "exec": "notmuchChecker"
+    "exec": "waybar-notmuch-module"
     // "exec": "pkgs.writeShellScript \"hello-from-waybar\" ''\n  echo \"from within waybar\"\n''"
 },
   "custom/notification": {

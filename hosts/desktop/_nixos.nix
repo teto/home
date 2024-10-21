@@ -148,8 +148,7 @@ in
 
   # boot.kernel.sysctl."kernel.dmesg_restrict" = false;
 
-  # boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_8;
-  # boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_10;
+  boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_11;
 
   services.xserver.displayManager.gdm.enable = true;
 
@@ -211,13 +210,8 @@ in
 
     # see https://forums.developer.nvidia.com/t/unusable-linux-text-console-with-nvidia-drm-modeset-1-or-if-nvidia-persistenced-is-loaded/184428/14
     "no-scroll"
-    "boot.debug1devices"
     # fsck.mode=skip
   ];
-
-  # boot.kernelPackages = pkgs.linuxPackages_default;
-  # boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_8;
-  # boot.kernelPackages = pkgs.linuxPackages;
 
   boot.kernelModules = [
     "af_key" # for ipsec/vpn support
@@ -253,11 +247,6 @@ in
   networking.firewall.allowedTCPPorts = [
     # 5000 52002
   ];
-
-  # creates problem with buffalo check if it blocks requests or what
-  # it is necessary to use dnssec though :(
-  networking.resolvconf.dnsExtensionMechanism = false;
-  networking.resolvconf.dnsSingleRequest = false;
 
   # to allow wireshark to capture from netlink
   # networking.localCommands = ''

@@ -90,6 +90,8 @@
     enableZshIntegration = true;
   };
 
+  programs.nh.enable = true;
+
   home.file.".gdbinit".text = ''
     # ../config/gdbinit_simple;
     # gdb doesn't accept environment variable except via python

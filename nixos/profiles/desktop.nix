@@ -148,7 +148,6 @@ in
 
   # systemd.packages = [ ];
 
-  # programs.browserpass.enable = true;
 
   nix = {
 
@@ -169,6 +168,10 @@ in
     @audio   -  nice     -20
   '';
 
+  boot.kernelParams = [
+    "boot.debug1devices"
+  ];
+
   # then coredumpctl debug will launch gdb !
   # boot.kernel.sysctl."kernel.core_pattern" = "core"; to disable.
   # security.pam.loginLimits
@@ -185,8 +188,6 @@ in
     ExternalSizeMax=10G
   '';
 
-  # teto  hard  core  unlimited
-
   # systemd.services."systemd-coredump".serviceConfig.ProtectHome = false;
   # systemd.services."systemd-coredump@".serviceConfig.ProtectHome = false;
   # environment.etc."systemd/system/systemd-coredump@.service.d/override.conf".text = ''
@@ -198,6 +199,7 @@ in
   # programs.file-roller.enable = true;
   # programs.system-config-printer.enable = true;
 
+  # TODO move to nixosModule
   system.activationScripts.report-nixos-changes = ''
     PATH=$PATH:${
       lib.makeBinPath [
