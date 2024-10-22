@@ -183,8 +183,6 @@ vim.opt.foldlevel = 99
 vim.opt.mousemoveevent = true
 vim.o.grepprg = 'rg --vimgrep --no-heading --smart-case'
 
----  set guicursor as a red block in normal mode
-
 -- workaround slow neovim https://github.com/neovim/neovim/issues/23725
 local ok, wf = pcall(require, 'vim.lsp._watchfiles')
 if ok then
@@ -484,8 +482,20 @@ vim.g.fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %
 -- " use 'bronson/vim-trailing-whitespace' " :FixWhitespace
 
 -- TODO this should depend on theme ! computed via lush
-vim.api.nvim_set_hl(0, 'DiagnosticVirtualTextError', { fg = 'red' })
-vim.api.nvim_set_hl(0, 'DiagnosticVirtualTextDebug', { fg = 'green' })
+vim.api.nvim_create_autocmd('ColorScheme', {
+    desc = 'Set italic codelens on new colorschemes',
+    callback = function()
+        -- TODO create a TextYankPost highlight if it doesn't exist in scheme ?!
+        vim.api.nvim_set_hl(0, 'LspCodeLens', { italic = true, bg = 'blue' })
+		vim.api.nvim_set_hl(0, 'DiagnosticVirtualTextError', { fg = 'red' })
+		vim.api.nvim_set_hl(0, 'DiagnosticVirtualTextDebug', { fg = 'green' })
+-- autocmd ColorScheme *
+--       \ highlight Comment gui=italic
+--       \ | highlight Search gui=underline
+--       \ | highlight MatchParen guibg=NONE guifg=NONE gui=underline
+
+    end,
+})
 
 -- http://stackoverflow.com/questions/28613190/exclude-quickfix-buffer-from-bnext-bprevious
 vim.keymap.set('n', '<Leader><Leader>', '<Cmd>b#<CR>', { desc = 'Focus alternate buffer' })
@@ -518,15 +528,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     end,
 })
 
-vim.api.nvim_create_autocmd('ColorScheme', {
-    desc = 'Set italic codelens on new colorschemes',
-    callback = function()
-        -- TODO create a TextYankPost highlight if it doesn't exist in scheme ?!
-        vim.api.nvim_set_hl(0, 'LspCodeLens', { italic = true, bg = 'Red' })
-    end,
-})
 
--- vim.api.nvim_set_hl(0, 'LspCodeLens', { bg = 'red' })
 -- " auto reload vim config on save
 -- " Watch for changes to vimrc
 -- " augroup myvimrc
@@ -540,12 +542,6 @@ vim.cmd(
     [[sign define DiagnosticSignInformation text=I texthl=LspDiagnosticsSignInformation linehl= numhl=CustomLineWarn]]
 )
 vim.cmd([[sign define DiagnosticSignHint text=H texthl=LspDiagnosticsSignHint linehl= numhl=]])
-
--- autocmd ColorScheme *
---       \ highlight Comment gui=italic
---       \ | highlight Search gui=underline
---       \ | highlight MatchParen guibg=NONE guifg=NONE gui=underline
---       \ | highlight NeomakePerso cterm=underline ctermbg=Red  ctermfg=227  gui=underline
 
 -- netrw config {{{
 vim.g.netrw_nogx = 1 -- disable netrw gx
@@ -594,48 +590,7 @@ end, {
 local has_sniprun, sniprun = pcall(require, 'sniprun')
 
 if has_sniprun then
-    sniprun.setup({
-        -- selected_interpreters = {'Python3_fifo'},        --" use those instead of the default for the current filetype
-        -- repl_enable = {'Python3_fifo', 'R_original'},    --" enable REPL-like behavior for the given interpreters
-        -- repl_disable = {},                               --" disable REPL-like behavior for the given interpreters
-        interpreter_options = { --# interpreter-specific options, see docs / :SnipInfo <name>
-            Bash_original = {
-                use_on_filetypes = { 'nix' }, --# the 'use_on_filetypes' configuration key is
-            },
-            --# use the interpreter name as key
-            --GFM_original = {
-            --use_on_filetypes = {"markdown.pandoc"}    --# the 'use_on_filetypes' configuration key is
-            --											--# available for every interpreter
-            --},
-            --Python3_original = {
-            --	error_truncate = "auto"         --# Truncate runtime errors 'long', 'short' or 'auto'
-            --									--# the hint is available for every interpreter
-            --									--# but may not be always respected
-            --}
-        },
-        -- possible values are 'none', 'single', 'double', or 'shadow'
-        borders = 'single',
-        --live_display = { "VirtualTextOk" }, --# display mode used in live_mode
-        ----# You can use the same keys to customize whether a sniprun producing
-        ----# no output should display nothing or '(no output)'
-        --show_no_output = {
-        --	"Classic",
-        --	"TempFloatingWindow",      --# implies LongTempFloatingWindow, which has no effect on its own
-        --},
-        --" you can combo different display modes as desired
-        display = {
-            'Classic', -- "display results in the command-line  area
-            'VirtualTextOk', -- "display ok results as virtual text (multiline is shortened)
-        },
-    })
-    vim.api.nvim_set_keymap('v', 'f', '<Plug>SnipRun', { silent = true })
-    vim.api.nvim_set_keymap(
-        'n',
-        '<leader>f',
-        '<Plug>SnipRunOperator',
-        { silent = true, desc = 'Run code (pending operator)' }
-    )
-    vim.api.nvim_set_keymap('n', '<leader>ff', '<Plug>SnipRun', { silent = true, desc = 'Run some code' })
+	require'plugins.sniprun'
 end
 
 -- add description
@@ -748,7 +703,6 @@ require('teto.lspconfig')
 vim.g.haskell_tools = require('teto.haskell-tools').generate_settings()
 
 vim.opt.background = 'light' -- or "light" for light mode
-
 vim.opt.showbreak = '↳ ' -- displayed in front of wrapped lines
 
 -- TODO add a command to select a ref  and call Gitsigns change_base afterwards
@@ -839,13 +793,6 @@ if teto_notify.should_use_provider() then
     teto_notify.override_vim_notify()
 end
 
--- vim.api.nvim_create_autocmd({ "VimEnter" }, {
---   callback = function()
--- 	require'plugins.oil-nvim'
--- 	require'plugins.bufferline'
---   end,
--- })
-
 -- same for e ?
 vim.keymap.set('n', '[w', function()
     vim.diagnostic.goto_prev({ wrap = true, severity = vim.diagnostic.severity.WARN })
@@ -854,6 +801,7 @@ vim.keymap.set('n', ']w', function()
     vim.diagnostic.goto_next({ wrap = true, severity = vim.diagnostic.severity.WARN })
 end, { buffer = true })
 
+-- TODO add a set E for across buffers
 vim.keymap.set('n', '[e', function()
     vim.diagnostic.goto_prev({ wrap = true, severity = vim.diagnostic.severity.ERROR })
 end, { buffer = true })

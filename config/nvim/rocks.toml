@@ -11,7 +11,7 @@
 # List of Neovim plugins to install alongside their versions.
 # If the plugin name contains a dot then you must add quotes to the key name!
 [plugins]
-"rocks-git.nvim"= "2.2.0"
+"rocks-git.nvim"= "2.4.2"
 # "rocks.nvim" = "2.19.0" # rocks.nvim can also manage itself :D
 # "rocks-git.nvim"= "1.5.1"
 cmp-rg = "1.3.9"
@@ -22,7 +22,7 @@ cmp-rg = "1.3.9"
 "none-ls.nvim" = "scm"
 "bufferline.nvim" = "4.7.0"
 auto-session = "2.5.0"
-"rocks-config.nvim" = "2.2.0"
+"rocks-config.nvim" = "3.0.0"
 "trouble.nvim" = "3.6.0"
 "lualine.nvim" = "scm"
 "rocks-lazy.nvim" = "scm"
@@ -228,6 +228,10 @@ git = "nvchad/menu"
 
 [plugins."bigfile.nvim"]
 git = "lunarvim/bigfile.nvim"
+
+[plugins."iron.nvim"]
+git = "vigemus/iron.nvim"
+rev = "v3.0"
 
 [config]
 plugins_dir = "plugins/"
