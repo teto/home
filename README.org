@@ -46,10 +46,14 @@ This folder contains my customizations for:
 
 * nixos Install via flakes
 
-As long as flakes are not supported natively, you need to 
+As long as flakes are not supported natively, you need to:
 #+BEGIN_SRC shell
 # when not setting #my-machine, defaults to hostname
-nixos-rebuild switch --flake 'github:teto/home#laptop' --use-remote-sudo --option accept-flake-config true --option extra-experimental-features 'nix-command flakes'
+# deploy a first generation without any secrets but in my favorite environment
+$ nixos-rebuild switch --flake 'github:teto/home#laptop' --use-remote-sudo --option accept-flake-config true --option extra-experimental-features 'nix-command flakes'
+$ just stow-config stow-home stow-local
+# once you've moved on the secrets to where they must be, you can deploy the final configuration
+$ nixos-rebuild switch --flake 'github:teto/home#laptop-with-secrets' --use-remote-sudo --option accept-flake-config true --option extra-experimental-features 'nix-command flakes'
 #+END_SRC
 
 

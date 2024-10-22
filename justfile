@@ -107,20 +107,20 @@ deploy-neotokyo:
 # http://stackoverflow.com/questions/448910/makefile-variable-assignment
 
 # symlink all my dotfiles in $HOME
-config:
+stow-config:
     stow -t {{ config_local_directory() }} config
 
 # symlink home/ dotfiles into $HOME
-home:
+stow-home:
     stow --dotfiles -t {{ home_directory() }} home
 
 # symlink bin/ dotfiles into $HOME
-bin:
+stow-bin:
     mkdir -p "{{ data_directory() }}/../bin"
     stow -t "{{ data_directory() }}/../bin" bin
 
 # symlink to XDG_DATA_HOME
-local:
+stow-local:
     stow -t "$(XDG_DATA_HOME)" local
     mkdir -p "{{ data_directory() }}/fzf-history" {{ data_directory() }}/newsbeuter
 
