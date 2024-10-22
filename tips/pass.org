@@ -1,6 +1,8 @@
 Look at 
 .gpg-id
 
+* How to init a password store ?
+
 * import from bitwarden
   with https://github.com/roddhjav/pass-import one can import from bitwarden via:
   pass import bitwarden <bitwarden_export_....json>

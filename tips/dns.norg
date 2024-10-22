@@ -1,0 +1,2 @@
+resolvectl to dump config
+sudo systemd-resolve --interface=eno1 --set-dns=1.1.1.1 

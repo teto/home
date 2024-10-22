@@ -18,7 +18,7 @@ final: prev: {
     '';
   };
 
-  # copy/pasted from 
+  # copy/pasted from
   # https://gitlab.com/rycee/nur-expressions/-/blob/master/pkgs/firefox-addons/default.nix?ref_type=heads
   # prev.lib.makeOverridable (
   buildFirefoxXpiAddon = (

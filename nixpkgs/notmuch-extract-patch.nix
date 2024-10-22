@@ -4,7 +4,7 @@
   buildPythonApplication,
   fetchFromGitHub,
 }:
-# super.pkgs.stdenv.mkDerivation 
+# super.pkgs.stdenv.mkDerivation
 buildPythonApplication {
   name = "notmuch-extract-patch";
   src = fetchFromGitHub {

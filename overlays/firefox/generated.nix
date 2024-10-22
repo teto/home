@@ -7,10 +7,10 @@
 {
   "10ten-ja-reader" = buildFirefoxXpiAddon {
     pname = "10ten-ja-reader";
-    version = "1.21.1";
+    version = "1.22.0";
     addonId = "{59812185-ea92-4cca-8ab7-cfcacee81281}";
-    url = "https://addons.mozilla.org/firefox/downloads/file/4355635/10ten_ja_reader-1.21.1.xpi";
-    sha256 = "81d85cfdc03cb0c921cac84547e7a7a539af11ff9a81dd901b3f3bfa67ba45f1";
+    url = "https://addons.mozilla.org/firefox/downloads/file/4371439/10ten_ja_reader-1.22.0.xpi";
+    sha256 = "d6f3197b7e3383f2723b9376d93e03fe515e5c610f9c0723d9618b10d3cc4bf1";
     meta = with lib; {
       homepage = "https://github.com/birchill/10ten-ja-reader/";
       description = "Quickly translate Japanese by hovering over words. Formerly released as Rikaichamp.";
@@ -29,12 +29,41 @@
       platforms = platforms.all;
     };
   };
+  "argent-x" = buildFirefoxXpiAddon {
+    pname = "argent-x";
+    version = "5.19.3";
+    addonId = "{51e0c76c-7dbc-41ba-a45d-c579be84301b}";
+    url = "https://addons.mozilla.org/firefox/downloads/file/4377196/argent_x-5.19.3.xpi";
+    sha256 = "d0cb6617221572fe3c983b8222905079a114356fe573a86f58bcb542231ec2d7";
+    meta = with lib; {
+      homepage = "https://www.argent.xyz/argent-x/";
+      description = "7 out of 10 Starknet users choose Argent X as their Starknet wallet. Join 2m+ Argent users now.";
+      license = licenses.gpl3;
+      mozPermissions = [
+        "alarms"
+        "tabs"
+        "storage"
+        "unlimitedStorage"
+        "notifications"
+        "webNavigation"
+        "http://localhost/*"
+        "https://alpha4.starknet.io/*"
+        "https://alpha4-2.starknet.io/*"
+        "https://alpha-mainnet.starknet.io/*"
+        "https://external.integration.starknet.io/*"
+        "https://healthcheck.argent.xyz/*"
+        "https://cloud.argent-api.com/*"
+        "<all_urls>"
+      ];
+      platforms = platforms.all;
+    };
+  };
   "bitwarden" = buildFirefoxXpiAddon {
     pname = "bitwarden";
-    version = "2024.9.1";
+    version = "2024.10.1";
     addonId = "{446900e4-71c2-419f-a6a7-df9c091e268b}";
-    url = "https://addons.mozilla.org/firefox/downloads/file/4355865/bitwarden_password_manager-2024.9.1.xpi";
-    sha256 = "f484fbcd1e45e4a68f2eec8fb8c22fed5a77f1a00b515f38c167e36b4d6118bf";
+    url = "https://addons.mozilla.org/firefox/downloads/file/4371752/bitwarden_password_manager-2024.10.1.xpi";
+    sha256 = "7b7357ddce2756dc536b86b5c14139ec09731c1c114ac82807c60fba3ced12a5";
     meta = with lib; {
       homepage = "https://bitwarden.com";
       description = "At home, at work, or on the go, Bitwarden easily secures all your passwords, passkeys, and sensitive information.";
@@ -87,10 +116,10 @@
   };
   "darkreader" = buildFirefoxXpiAddon {
     pname = "darkreader";
-    version = "4.9.94";
+    version = "4.9.96";
     addonId = "addon@darkreader.org";
-    url = "https://addons.mozilla.org/firefox/downloads/file/4359254/darkreader-4.9.94.xpi";
-    sha256 = "251c4e7d0a30c0cab006803600e59ab92dcc0c606429740d42677846d4c9ccd6";
+    url = "https://addons.mozilla.org/firefox/downloads/file/4378073/darkreader-4.9.96.xpi";
+    sha256 = "6e2f1a36d2398195b0cd7ee0fcb198ea4db6a57a1b3bf7b2cf5f17a8768f477e";
     meta = with lib; {
       homepage = "https://darkreader.org/";
       description = "Dark mode for every website. Take care of your eyes, use dark theme for night and daily browsing.";
@@ -218,6 +247,36 @@
       platforms = platforms.all;
     };
   };
+  "metamask" = buildFirefoxXpiAddon {
+    pname = "metamask";
+    version = "12.0.6";
+    addonId = "webextension@metamask.io";
+    url = "https://addons.mozilla.org/firefox/downloads/file/4342782/ether_metamask-12.0.6.xpi";
+    sha256 = "a66e20bbe5ded1b9408420e4c2ffc82369cc3bfd27350afe25f2c0ef6b26ff3b";
+    meta = with lib; {
+      description = "Ethereum Browser Extension";
+      mozPermissions = [
+        "storage"
+        "unlimitedStorage"
+        "clipboardWrite"
+        "http://localhost:8545/"
+        "https://*.infura.io/"
+        "https://*.codefi.network/"
+        "https://*.cx.metamask.io/"
+        "https://chainid.network/chains.json"
+        "https://lattice.gridplus.io/*"
+        "activeTab"
+        "webRequest"
+        "*://*.eth/"
+        "notifications"
+        "file://*/*"
+        "http://*/*"
+        "https://*/*"
+        "*://connect.trezor.io/*/popup.html"
+      ];
+      platforms = platforms.all;
+    };
+  };
   "multi-account-containers" = buildFirefoxXpiAddon {
     pname = "multi-account-containers";
     version = "8.2.0";
@@ -248,10 +307,10 @@
   };
   "refined-github" = buildFirefoxXpiAddon {
     pname = "refined-github";
-    version = "24.10.1";
+    version = "24.11.12";
     addonId = "{a4c4eda4-fb84-4a84-b4a1-f7c1cbf2a1ad}";
-    url = "https://addons.mozilla.org/firefox/downloads/file/4362555/refined_github-24.10.1.xpi";
-    sha256 = "d922b9094365977860ec490d66fa96b004bb8446084930111514b2d8a6143c1d";
+    url = "https://addons.mozilla.org/firefox/downloads/file/4386666/refined_github-24.11.12.xpi";
+    sha256 = "883ba8755883af1159027f555e568969fd9507b233a0545035a2a9d990e4cbff";
     meta = with lib; {
       homepage = "https://github.com/refined-github/refined-github";
       description = "Simplifies the GitHub interface and adds many useful features.";
@@ -263,7 +322,6 @@
         "activeTab"
         "alarms"
         "https://github.com/*"
-        "https://api.github.com/*"
         "https://gist.github.com/*"
       ];
       platforms = platforms.all;
@@ -338,10 +396,10 @@
   };
   "tree-style-tab" = buildFirefoxXpiAddon {
     pname = "tree-style-tab";
-    version = "4.0.23";
+    version = "4.0.24";
     addonId = "treestyletab@piro.sakura.ne.jp";
-    url = "https://addons.mozilla.org/firefox/downloads/file/4350896/tree_style_tab-4.0.23.xpi";
-    sha256 = "d8061eff00b56ccfdd6fd290b14ef2c8ef692a14eb8db1a27529f21e43df1f30";
+    url = "https://addons.mozilla.org/firefox/downloads/file/4377780/tree_style_tab-4.0.24.xpi";
+    sha256 = "e1826e2054aede2f390cb98ff22915cc1e89778a6ebf94d68467200aeba8fefd";
     meta = with lib; {
       homepage = "http://piro.sakura.ne.jp/xul/_treestyletab.html.en";
       description = "Show tabs like a tree.";
@@ -363,10 +421,10 @@
   };
   "ublock-origin" = buildFirefoxXpiAddon {
     pname = "ublock-origin";
-    version = "1.60.0";
+    version = "1.61.0";
     addonId = "uBlock0@raymondhill.net";
-    url = "https://addons.mozilla.org/firefox/downloads/file/4359936/ublock_origin-1.60.0.xpi";
-    sha256 = "e2cda9b2a1b0a7f6e5ef0da9f87f28df52f8560587ba2e51a3003121cfb81600";
+    url = "https://addons.mozilla.org/firefox/downloads/file/4382536/ublock_origin-1.61.0.xpi";
+    sha256 = "e6fd55b799a568c66c10892a8f22428e6773fe16d7466ce9dee2952f224b203d";
     meta = with lib; {
       homepage = "https://github.com/gorhill/uBlock#ublock-origin";
       description = "Finally, an efficient wide-spectrum content blocker. Easy on CPU and memory.";

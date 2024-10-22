@@ -61,7 +61,7 @@
 
             flags = lib.concatStringsSep " " [
               "--debug /tmp/tuigreet.log"
-              "--remember"
+              "--remember" # remember last logged-in username
               "--remember-user-session"
               "--user-menu"
               "--time"
@@ -81,7 +81,7 @@
 
           in
           # services.displayManager.sessionPackages
-          # builtins.trace "home.path: ${config.home-manager.users.teto.home.path}/share/wayland-sessions" 
+          # builtins.trace "home.path: ${config.home-manager.users.teto.home.path}/share/wayland-sessions"
           # config.services.xserver.displayManager.session.desktops
           builtins.trace
             "sessionPath: ${sessionPackages}\nsessionData: ${sessionData}\nhome.path: ${hmSessionPath}"

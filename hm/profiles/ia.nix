@@ -7,9 +7,11 @@
 {
   home.packages = with pkgs; [
 
-    llama-cpp # simpler than
+    # openai-whisper is the openai official one
+    openai-whisper-cpp
+
     # look at nixified-ai
-    # ollama # st config.withCuda to enable 
+    # ollama # st config.withCuda to enable
     # llama-gpt machine
 
     # TODO use in ml-tests

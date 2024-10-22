@@ -67,7 +67,7 @@ with lib.modules;
   };
 
   ovsConfigStructured = {
-    #prev.pkgs.openvswitch.kernelExtraConfig or 
+    #prev.pkgs.openvswitch.kernelExtraConfig or
     # Can't be embedded; must be a module !?
     NF_INET = yes;
     NF_CONNTRACK = yes;
@@ -135,7 +135,7 @@ with lib.modules;
     # CHELSIO_T3? no
     # CHELSIO_T4? no
     CHELSIO_LIB = no;
-    # to prevent selection of NET_VENDOR_CHELSIO 
+    # to prevent selection of NET_VENDOR_CHELSIO
     # SCSI_LOWLEVEL = no;
     CHELSIO_TLS = no;
   };
@@ -172,7 +172,7 @@ with lib.modules;
     VETH = yes;
     TTY = yes;
     VIRTIO = yes; # should be selected by the rest
-    # no 
+    # no
     VSOCKETS = yes;
     VHOST_VSOCK = yes;
     CAIF_VIRTIO = no;
@@ -194,7 +194,7 @@ with lib.modules;
     REMOTEPROC = no;
     VIRTIO_CONSOLE = yes;
     NETWORK_FILESYSTEMS = yes;
-    # yes when 
+    # yes when
     PACKET = yes;
     PACKET_DIAG = yes;
 
@@ -205,7 +205,7 @@ with lib.modules;
     HW_RANDOM_VIRTIO = yes; # Means module or yes
     DRM_VIRTIO_GPU = mkForce no;
 
-    # to fix a build issue :s 
+    # to fix a build issue :s
     # depends on INET_DIAG that defaults to yes
     # INET_TCP_DIAG = yes;
 
@@ -368,7 +368,7 @@ with lib.modules;
   };
 
   lklConfig = {
-    # make ARCH=lkl 
+    # make ARCH=lkl
     LKL_HOST = yes;
     LKL_STATIC = yes;
     LKL_SHARED = yes;

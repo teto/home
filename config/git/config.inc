@@ -36,6 +36,8 @@ compression = 0
 
 	email = '886074+teto@users.noreply.github.com'
 	name = "Matthieu C."
+	# instruct Git to avoid trying to guess defaults for user.email and user.name, and 
+	useConfigOnly  = true
 
 [credential "https://github.com"]
 	username = teto
@@ -72,6 +74,10 @@ autocorrect = 10
   ab = absorb
   canoed= commit --amend --no-edit
 
+  # list the remote tags without fetching the. Need the remote afterwards
+  ls-remote-tags = ls-remote --tags
+
+  # gh-pr = git fetch up pull/<pr-number>/head:my-local-branch-name
 
   # inspired by https://blog.jez.io/cli-code-review/
   # list files which have changed since REVIEW_BASE

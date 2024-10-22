@@ -42,22 +42,6 @@
 
   # xdg-settings set default-web-browser firefox.desktop
 
-  programs.fzf = {
-    enable = true;
-    enableBashIntegration = true;
-    enableZshIntegration = true;
-    # so that fzf takes into account .gitignore
-    defaultCommand = "${pkgs.fd}/bin/fd --type f";
-
-    # add support for ctrl+o to open selected file in VS Code
-    defaultOptions = [ "--bind='ctrl-o:execute(code {})+abort'" ];
-    # Setting fd as the default source for fzf
-    # defaultOptions
-    # changeDirWidgetOptions
-    # programs.fzf.fileWidgetOptions
-    # programs.fzf.historyWidgetOptions
-  };
-
   # for colors etc.
   programs.lesspipe.enable = false;
 

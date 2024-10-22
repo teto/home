@@ -1,6 +1,6 @@
 {
 
-  # _impots = [ 
+  # _impots = [
   # ];
 
   # services.pipewire = {

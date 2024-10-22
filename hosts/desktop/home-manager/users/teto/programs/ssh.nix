@@ -18,25 +18,45 @@
     # When enabled, a private key that is used during authentication will be added to ssh-agent if it is running (with confirmation enabled if set to ‘confirm’). The argument must be ‘no’ (the default), ‘yes’, ‘confirm’ (optionally followed by a time
     #           interval), ‘ask’ or a time interval (e.g. ‘1h’).
 
-    addKeysToAgent  = "yes";
+    addKeysToAgent = "yes";
 
     # can I have it per target ?
     # controlPath = "";
     matchBlocks = lib.optionalAttrs withSecrets {
 
       gitlab = {
-        match = "host=gitlab.com";
+        match = "host gitlab.com";
         user = "mattator";
         identityFile = "${secretsFolder}/ssh/gitlab";
         identitiesOnly = true;
+        extraOptions = {
+          AddKeysToAgent = "yes";
+        };
       };
 
-      jakku = {
-        host = secrets.jakku.hostname;
+      neotokyo-teto = {
+        match = "user teto host ${secrets.jakku.hostname}";
+        hostname = secrets.jakku.hostname;
         user = "teto";
         # le port depend du service
         port = secrets.jakku.sshPort;
         identityFile = "${secretsFolder}/ssh/id_rsa";
+        identitiesOnly = true;
+        # port = 12666;
+        serverAliveCountMax = 3;
+        # sendEnv
+        extraOptions = {
+
+        };
+      };
+
+      neotokyo-gitolite-admin = {
+        match = "user gitolite host ${secrets.jakku.hostname}";
+        hostname = secrets.jakku.hostname;
+        # user = "gitolite";
+        # le port depend du service
+        port = secrets.jakku.sshPort;
+        identityFile = "${secretsFolder}/ssh/neotokyo-gitolite";
         identitiesOnly = true;
         # port = 12666;
       };
@@ -50,8 +70,8 @@
         identitiesOnly = true;
         # experimental
         # https://github.com/nix-community/home-manager/pull/2992
-        match = "host=router";
-        port = 12666;
+        match = "host router";
+        # port = 12666;
         # RemoteCommand
         # SendEnv LANG LC_*
       };
@@ -65,7 +85,7 @@
         identitiesOnly = true;
         # experimental
         # https://github.com/nix-community/home-manager/pull/2992
-        match = "host=router-lan";
+        match = "host router-lan";
         port = 12666;
       };
 
@@ -75,9 +95,9 @@
       "${config.xdg.configHome}/ssh/config"
     ];
 
-    # TODO parts of this should be accessible from 
+    # TODO parts of this should be accessible from
     # extraConfig = ''
-    #   Include 
+    #   Include
     #   # TODO remove when doctor's home-manager is ok
     #   Include ${config.xdg.configHome}/nova/jinkompute/ssh_config
     # '';

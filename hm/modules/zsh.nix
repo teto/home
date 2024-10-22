@@ -190,7 +190,7 @@ in
           add-zsh-hook precmd set_term_title_for_new_prompt
         '';
 
-        # depending 
+        # depending
         # in my case since I am using starship
         # https://starship.rs/advanced-config/#custom-pre-prompt-and-pre-execution-commands-in-bash
         programs.bash.initExtra = ''
@@ -262,13 +262,6 @@ in
           // (lib.optionalAttrs withSecrets {
             # HISTFILE="$XDG_CACHE_HOME/zsh_history";
             # TODO load this from sops instead
-            GITHUB_TOKEN = secrets.githubToken;
-            # TODO add it to sops
-            OPENAI_API_KEY = secrets.OPENAI_API_KEY;
-
-            # fre experiment
-            FZF_CTRL_T_COMMAND = "command fre --sorted";
-            FZF_CTRL_T_OPTS = "--tiebreak=index";
           });
 
         autosuggestion.enable = true;

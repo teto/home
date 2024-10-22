@@ -14,7 +14,7 @@
 
   # as per  https://nixos.wiki/wiki/GNOME/Calendar
   programs.dconf.enable = true;
-  services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
+  services.udev.packages = [ pkgs.gnome-settings-daemon ];
 
   # services.xserver.desktopManager.gnome.enable = true;
 

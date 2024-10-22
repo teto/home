@@ -19,7 +19,7 @@ in
     # will enable SNI for nm-applet => icon will popup on wayland systray
     preferStatusNotifierItems = true;
     scriptPath = ".hm-xsession";
-    # initExtra = 
+    # initExtra =
 
     # profileExtra = ''
     # '';
@@ -164,7 +164,8 @@ in
         # "${mod}+Ctrl+L"="exec ${pkgs.i3lock-fancy}/bin/i3lock-fancy";
         "${mod}+Ctrl+L" = "exec ${pkgs.i3lock}/bin/i3lock";
 
-        "${mod}+Ctrl+h" = ''exec "${pkgs.rofi}/bin/rofi -modi 'clipboard:greenclip print' -show clipboard"'';
+        "${mod}+Ctrl+h" =
+          ''exec "${pkgs.rofi}/bin/rofi -modi 'clipboard:greenclip print' -show clipboard"'';
         "${mod}+g" = "exec ${pkgs.i3-easyfocus}/bin/i3-easyfocus";
         "${mad}+w" = "exec ${pkgs.i3-easyfocus}/bin/i3-easyfocus";
         # icons are set for papirus for now

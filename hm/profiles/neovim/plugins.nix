@@ -4,11 +4,7 @@ let
 in
 {
   basePlugins = with pkgs.vimPlugins; [
-
     (luaPlugin { plugin = rocks-nvim; })
-
-    # use the imperative way
-    # (luaPlugin { plugin = rocks-config-nvim; })
 
     (luaPlugin { plugin = fzf-lua; })
 
@@ -16,8 +12,16 @@ in
       # use ctrl a/xto cycle between different words
       plugin = vim-CtrlXA;
     }
+    pkgs.vimPlugins.telescope-fzf-native-nvim # for use with smart-open + fzf algo
+    # pkgs.vimPlugins.blink-cmp # replace cmp-nvim
+    pkgs.vimPlugins.vim-nixhash # :NixHash
+    pkgs.vimPlugins.targets-vim # to get 'ci/'
+    pkgs.vimPlugins.direnv-vim # to get 'ci/'
+
     # { plugin = jbyuki/venn.nvim; }
     # { plugin = telescope-nvim; }
+
+    telescope-fzf-native-nvim # needed by smart-open.nvim
     (luaPlugin {
       plugin = fzf-vim;
       # " mostly fzf mappings, use TAB to mark several files at the same time
@@ -30,7 +34,7 @@ in
     # defined in overrides: TODO this should be easier: like fzf-vim should be enough
     fzfWrapper
 
-    #  nvim-colorizer 
+    #  nvim-colorizer
     # (luaPlugin { plugin = nvim-terminal-lua; config = "require('terminal').setup()"; })
 
     # TODO hacking on this
@@ -41,6 +45,8 @@ in
       # let g:auto_git_diff_disable_auto_update=1
       # '';
     }
+
+    # TODO move to rocks
     # {
     #   plugin = vim-dasht;
     # config = ''
@@ -56,59 +62,18 @@ in
     # " search ALL the docsets
     # nnoremap <silent> <Leader><Leader>K :call Dasht([expand('<cword>'), expand('<cWORD>')], '!')<Return>
     # '';
-
     #   # optional = true;
     # }
-    # displays a minimap on the right
-    # (luaPlugin {
-    #   plugin = vim-dirvish;
-    #   config = ''
-    #     vim.g.dirvish_mode=2
-    #     vim.g.loaded_netrwPlugin = 1
-    #     '';
-    # })
 
     # {
     #   plugin = sql-nvim;
     #   # config = "let g:sql_clib_path = '${pkgs.sqlite.out}/lib/libsqlite3.so'";
     # }
+
     { plugin = vim-fugitive; }
 
-    # replaced by alpha.nvim ?
-    # (luaPlugin {
-    #   plugin = vim-startify;
-    #   # cool stuff is that it autostarts sessions
-    #   config = ''
-    #     vim.cmd [[
-    #     let g:startify_use_env = 0
-    #     let g:startify_disable_at_vimenter = 0
-    #     let g:startify_lists = [
-    #           \ { 'header': ['   MRU '.getcwd() ], 'type': 'dir'},
-    #           \ { 'header': ['   MRU' ],           'type': 'files'} ,
-    #           \ { 'header': ['   Bookmarks' ],     'type': 'bookmarks' },
-    #           \ { 'header': ['   Sessions'  ],      'type': 'sessions' }
-    #           \ ]
-    #     let g:startify_bookmarks = [
-    #           \ {'i': $XDG_CONFIG_HOME.'/i3/config.main'},
-    #           \ {'h': $XDG_CONFIG_HOME.'/nixpkgs/home.nix'},
-    #           \ {'c': 'dotfiles/nixpkgs/configuration.nix'},
-    #           \ {'z': $XDG_CONFIG_HOME.'/zsh/'},
-    #           \ {'m': $XDG_CONFIG_HOME.'/mptcpanalyzer/config'},
-    #           \ {'n': $XDG_CONFIG_HOME.'/nvim/config'},
-    #           \ ]
-    #     let g:startify_files_number = 10
-    #     let g:startify_session_autoload = 1
-    #     let g:startify_session_persistence = 0
-    #     let g:startify_change_to_vcs_root = 0
-    #     let g:startify_session_savevars = []
-    #     let g:startify_session_delete_buffers = 1
-    #     let g:startify_change_to_dir = 0
-    #     let g:startify_relative_path = 0
-    #     ]]
-    #   '';
-    # })
+    vim-scriptease # create commans like :Messages
 
-    vim-scriptease
     # test with hop ?
     (luaPlugin {
       plugin = vim-sneak;
@@ -132,9 +97,12 @@ in
       plugin = vim-grepper;
       # careful these mappings are not applied as they arrive before the plug declaration
     }
+
     vim-nix
+
     # ctrl-e causes an issue with telescope prompt
     vim-rsi
+
     # ' " syntax file for neomutt
     # neomutt-vim
     (luaPlugin {
@@ -142,19 +110,8 @@ in
       config = ''vim.g.sayonara_confirm_quit = 0'';
     })
 
-    # {
-    #   # 'gcc' to comment line
-    #   plugin = vim-commentary;
-    # }
-
     (luaPlugin {
       plugin = unicode-vim;
-
-      # " let g:Unicode_cache_directory='${pkgs.vimPlugins.unicode-vim}/share/vim-plugins/unicode-vim/autoload/unicode'
-      # let g:Unicode_data_directory='${pkgs.vimPlugins.unicode-vim}/share/vim-plugins/unicode-vim/autoload/unicode'
-      # " overrides ga
-      # nmap ga <Plug>(UnicodeGA)
-
       config = ''
         ${unicode-vim.passthru.initLua}
 
@@ -187,139 +144,23 @@ in
 
   luaPlugins = with pkgs.vimPlugins; [
 
-    # TODO it should be rocksified
-    # (luaPlugin { plugin = iron-nvim;
-    # TODO set lua here
-    # config = ''
-    #         local iron = require('iron.core')
-    #         iron.setup({
-    #             config = {
-    #                 -- If iron should expose `<plug>(...)` mappings for the plugins
-    #                 should_map_plug = false,
-    #                 -- Whether a repl should be discarded or not
-    #                 scratch_repl = true,
-    #                 -- Your repl definitions come here
-    #                 repl_definition = {
-    #                     sh = { command = { 'zsh' } },
-    #                     nix = { command = { 'nix', 'repl', '/home/teto/nixpkgs' } },
-    #                     -- copied from the nix wrapper :/
-    #                     lua = { command = '${pkgs.luajit}/bin/lua' },
-    #                 },
-    #                 # bottom('40')
-    #                 repl_open_cmd = require('iron.view').leftabove(40),
-    #                 -- how the REPL window will be opened, the default is opening
-    #                 -- a float window of height 40 at the bottom.
-    #             },
-    #             -- Iron doesn't set keymaps by default anymore. Set them here
-    #             -- or use `should_map_plug = true` and map from you vim files
-    #             keymaps = {
-    #                 send_motion = '<space>sc',
-    #                 visual_send = '<space>sc',
-    #                 send_file = '<space>sf',
-    #                 send_line = '<space>sl',
-    #                 send_mark = '<space>sm',
-    #                 mark_motion = '<space>mc',
-    #                 mark_visual = '<space>mc',
-    #                 remove_mark = '<space>md',
-    #                 cr = '<space>s<cr>',
-    #                 interrupt = '<space>s<space>',
-    #                 exit = '<space>sq',
-    #                 clear = '<space>cl',
-    #             },
-    #             -- If the highlight is on, you can change how it looks
-    #             -- For the available options, check nvim_set_hl
-    #             highlight = {
-    #                 italic = true,
-    #             },
-    #         })
-    # '';
-    # })
-
     # { plugin = modicator-nvim; }
-    # (luaPlugin {
-    #   plugin = nvim-lspconfig;
-    #   config = let nodePkgs = pkgs.nodePackages; in ''
-    #     local lspconfig = require 'lspconfig'
-    #     lspconfig.tsserver.setup({
-    #         autostart = true,
-    #         -- TODO should be generated/fixed in nix
-    #         cmd = {
-    #           "${lib.getExe nodePkgs.typescript-language-server}",
-    #               "--stdio",
-    #               "--tsserver-path",
-    #               -- found with 'nix build .#nodePackages.typescript'
-    #               "${nodePkgs.typescript}/lib/node_modules/typescript/lib"
-    #         }
-    #      })
-    #     '';
-    # })
 
     # not upstreamed yet
     # (luaPlugin { plugin = nvim-lua-gf; })
+
     (luaPlugin { plugin = numb-nvim; })
+
     (luaPlugin { plugin = luasnip; })
 
     # required by trouble
     (luaPlugin { plugin = nvim-web-devicons; })
-    # (luaPlugin {
-    #   plugin = trouble-nvim;
-    #   config = ''
-    #     require'trouble'.setup {
-    #     position = "bottom", -- position of the list can be: bottom, top, left, right
-    #     height = 10, -- height of the trouble list when position is top or bottom
-    #     width = 50, -- width of the list when position is left or right
-    #     icons = false, -- use devicons for filenames
-    #     -- mode = "workspace_diagnostics", -- "lsp_workspace_diagnostics", "lsp_document_diagnostics", "quickfix", "lsp_references", "loclist"
-    #     -- fold_open = "", -- icon used for open folds
-    #     -- fold_closed = "", -- icon used for closed folds
-    #     action_keys = { -- key mappings for actions in the trouble list
-    #         -- map to {} to remove a mapping, for example:
-    #         -- close = {},
-    #         close = "q", -- close the list
-    #         cancel = "<esc>", -- cancel the preview and get back to your last window / buffer / cursor
-    #         refresh = "r", -- manually refresh
-    #         jump = {"<cr>", "<tab>"}, -- jump to the diagnostic or open / close folds
-    #         open_split = { "<c-x>" }, -- open buffer in new split
-    #         open_vsplit = { "<c-v>" }, -- open buffer in new vsplit
-    #         open_tab = { "<c-t>" }, -- open buffer in new tab
-    #         jump_close = {"o"}, -- jump to the diagnostic and close the list
-    #         toggle_mode = "m", -- toggle between "workspace" and "document" diagnostics mode
-    #         toggle_preview = "P", -- toggle auto_preview
-    #         hover = "K", -- opens a small poup with the full multiline message
-    #         preview = "p", -- preview the diagnostic location
-    #         close_folds = {"zM", "zm"}, -- close all folds
-    #         open_folds = {"zR", "zr"}, -- open all folds
-    #         toggle_fold = {"zA", "za"}, -- toggle fold of current file
-    #         previous = "k", -- preview item
-    #         next = "j" -- next item
-    #     },
-    #     -- indent_lines = true, -- add an indent guide below the fold icons
-    #     -- auto_open = false, -- automatically open the list when you have diagnostics
-    #     -- auto_close = false, -- automatically close the list when you have no diagnostics
-    #     -- auto_preview = true, -- automatyically preview the location of the diagnostic. <esc> to close preview and go back to last window
-    #     -- auto_fold = false, -- automatically fold a file trouble list at creation
-    #     signs = {
-    #         -- icons / text used for a diagnostic
-    #         error = "",
-    #         warning = "",
-    #         hint = "",
-    #         information = "",
-    #         other = "﫠"
-    #     },
-    #     use_diagnostic_signs = true -- enabling this will use the signs defined in your lsp client
-    #     }
-    #     '';
-
-    #   runtime = {
-    #     "ftplugin/c.vim".text = "setlocal omnifunc=v:lua.vim.lsp.omnifunc";
-    #   };
-    # })
 
     (luaPlugin {
       plugin = marks-nvim;
       config = # lua
         ''
-            require'marks'.setup {
+          require'marks'.setup {
               -- whether to map keybinds or not. default true
               default_mappings = true,
               -- whether movements cycle back to the beginning/end of buffer. default true
@@ -351,15 +192,6 @@ in
 
     vim-lion # Use with gl/L<text object><character to align to
 
-    # TODO replace with grug ?
-    (luaPlugin {
-      plugin = nvim-spectre;
-      # TODO add to menu instead
-      config = ''
-        -- nnoremap ( "n", "<leader>S",  function() require('spectre').open() end )
-      '';
-    })
-
     # (luaPlugin {
     #   # prettier quickfix
     #   plugin = nvim-bqf;
@@ -371,6 +203,7 @@ in
     #     })
     #   '';
     # })
+
     (luaPlugin { plugin = fugitive-gitlab-vim; })
   ];
 

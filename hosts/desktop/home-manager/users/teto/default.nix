@@ -4,10 +4,10 @@
   lib,
   flakeInputs,
   pkgs,
-  withSecrets
-  , dotfilesPath
-  , flakeSelf
-  , ...
+  withSecrets,
+  dotfilesPath,
+  flakeSelf,
+  ...
 }:
 # let
 # module = { pkgs, ... }@args: flakeInputs.haumea.lib.load {
@@ -27,22 +27,21 @@
       # flakeSelf.homeModules.bash
       ../../../../../hm/profiles/bash.nix
 
-      ../../../../../hm/profiles/nova/programs/bash.nix
+      flakeSelf.homeModules.teto-desktop
+      flakeSelf.homeModules.fzf
+      # flakeSelf.homeModules.gnome-shell
 
-      ../../../../../hm/teto/common.nix
+      # ../../../../../hm/teto/common.nix
+
       # ../../../hm/profiles/common.nix
-      ../../../../../hm/profiles/desktop.nix
       ../../../../../hm/profiles/wezterm.nix
-      # flakeInputs.ironbar.homeManagerModules.default
       # ../../../hm/profiles/experimental.nix
 
       # Not tracked, so doesn't need to go in per-machine subdir
-      ../../../../../hm/profiles/gnome.nix
-      ../../../../../hm/profiles/waybar.nix
       # ../../../../../hm/profiles/fcitx.nix
       ../../../../../hm/profiles/vscode.nix
       # custom modules
-      ../../../../../hm/profiles/emacs.nix
+      # ../../../../../hm/profiles/emacs.nix
       ../../../../../hm/profiles/zsh.nix
       # ../../../../hm/profiles/weechat.nix
 
@@ -65,23 +64,26 @@
       ./services/mpd.nix
       ./services/mpris.nix
       ./services/nextcloud-client.nix
+      flakeSelf.homeModules.japanese
+      flakeSelf.homeModules.yazi
     ]
     ++ lib.optionals withSecrets [
       ./sops.nix
       ./mail.nix
       ./ia.nix
+      flakeSelf.homeModules.nova
+      flakeSelf.homeModules.alot
+      # ../../../../../hm/profiles/japanese.nix
       ../../../../../hm/profiles/ia.nix
       # ../../../../../hm/profiles/nushell.nix
-      ../../../../../hm/profiles/alot.nix
       # ../../../hm/profiles/android.nix
       ../../../../../hm/profiles/gaming.nix
 
-      ../../../../../hm/profiles/nova.nix
-      ../../../../../hm/profiles/extra.nix
-      ../../../../../hm/profiles/extra.nix
-      ../../../../../hm/profiles/vdirsyncer.nix
-      ../../../../../hm/profiles/japanese.nix
     ];
+
+  services.vdirsyncer = {
+    enable = true;
+  };
 
   # TODO use mkSymlinkOufOf  ? ?
   # xdg.configFile."zsh/zshrc.generated".source = ../../../config/zsh/zshrc;
@@ -93,6 +95,9 @@
 
   programs.nh.enable = true;
 
+  # never tried
+  # home.preferXdgDirectories = false;
+
   home.file.".gdbinit".text = ''
     # ../config/gdbinit_simple;
     # gdb doesn't accept environment variable except via python
@@ -101,9 +106,9 @@
   '';
 
   home.language = {
-    # monetary = 
-    # measurement = 
-    # numeric = 
+    # monetary =
+    # measurement =
+    # numeric =
     # paper =
     time = "fr_FR.utf8";
   };
@@ -134,6 +139,7 @@
   home.packages = with pkgs; [
     # llm-ls # needed by the neovim plugin
 
+    cointop
     # mdp # markdown CLI presenter
     # gthumb # image manager, great to tag pictures
     gnome-control-center
@@ -141,7 +147,7 @@
     # xorg.xwininfo # for stylish
     pciutils # for lspci
     moar # test as pager
-    tailspin # a log viewer based on less ("spin" or "tsspin" is the executable)
+    # tailspin # (broken) a log viewer based on less ("spin" or "tsspin" is the executable)
     tig
 
     panvimdoc # to generate vim doc from README, for instance in gp.nvim
@@ -166,14 +172,32 @@
     # w3m # for preview in ranger w3mimgdisplay
 
     # bridge-utils# pour  brctl
-    # ironbar 
+    # ironbar
     # haxe # to test https://neovim.discourse.group/t/presenting-haxe-neovim-a-new-toolchain-to-build-neovim-plugins/3720
 
     unar # used to view archives by yazi
     # poppler for pdf preview
     memento # capable to display 2 subtitles at same time
+    mdcat
 
     rofi-rbw-wayland
+    # ];
+    # home.packages = with pkgs; [
+
+    ubuntu_font_family
+    inconsolata # monospace
+    noto-fonts-cjk-sans # asiatic
+    nerd-fonts.fira-code # otherwise no characters
+    nerd-fonts.droid-sans-mono # otherwise no characters
+    # corefonts # microsoft fonts  UNFREE
+    font-awesome_5 # needed for waybar
+    source-code-pro
+    dejavu_fonts
+    # Adobe Source Han Sans
+    source-han-sans # sourceHanSansPackages.japanese
+    fira-code-symbols # for ligatures
+    iosevka
+    # noto-fonts
   ];
 
   package-sets = {
@@ -191,9 +215,18 @@
     IPYTHONDIR = "$XDG_CONFIG_HOME/ipython";
     JUPYTER_CONFIG_DIR = "$XDG_CONFIG_HOME/jupyter";
 
+    LLM_LOCAL_PORT = 11111;
+
     DASHT_DOCSETS_DIR = "/mnt/ext/docsets";
     # $HOME/.local/share/Zeal/Zeal/docsets
-
   };
 
+  systemd.user.services.xwayland-satellite = {
+    Service = {
+      # TODO need DBUS_SESSION_BUS_ADDRESS
+      # --app-name="%N" toto
+      Environment = [ ''DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/1000/bus"'' ];
+      Exec = "${pkgs.xwayland-satellite}/bin/xwayland-satellite";
+    };
+  };
 }

@@ -17,7 +17,7 @@ in
 
     openFirewall = true;
     # mode = "boot";
-    # kernel = 
+    # kernel =
     kernel = "https://boot.netboot.xyz";
     # kernel = "${netboot}/bzImage";
     # package =  pkgs.linux_mptcp_trunk_raw;

@@ -1,6 +1,11 @@
-{ config, lib, pkgs, ... }:
 {
-  services.kanshi =  {
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+{
+  services.kanshi = {
 
     enable = true;
   };

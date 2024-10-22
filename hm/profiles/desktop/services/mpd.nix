@@ -1,11 +1,11 @@
 {
   enable = true;
   # dataDir = xdg.dataDir
-  # playlistDirectory = 
-  # extraConfig = 
-  # extraArgs = 
+  # playlistDirectory =
+  # extraConfig =
+  # extraArgs =
   network = {
-    # port 
+    # port
     # startWhenNeeded = true;
   };
 }

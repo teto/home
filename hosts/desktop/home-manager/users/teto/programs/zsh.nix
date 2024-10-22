@@ -1,8 +1,6 @@
 {
-  config,
-  secrets,
+  pkgs,
   lib,
-  withSecrets,
   ...
 }:
 {
@@ -10,30 +8,19 @@
   programs.zsh = {
 
     enableTetoConfig = true;
+    plugins = [
+      # {
+      #   name = "vi-mode";
+      #   src = pkgs.zsh-vi-mode;
+      #   file = "share/zsh-vi-mode/zsh-vi-mode.plugin.zsh";
+      # }
+    ];
 
     #  history = {
     #   path = "${config.xdg.cacheHome}/zsh_history";
     #  };
-    #
-    #  sessionVariables = config.programs.bash.sessionVariables // 
-    #   lib.optionalAttrs withSecrets {
-    #   # HISTFILE="$XDG_CACHE_HOME/zsh_history";
-    #   # TODO load this from sops instead
-    #   GITHUB_TOKEN = secrets.githubToken;
-    #   # TODO add it to sops
-    #   OPENAI_API_KEY = secrets.OPENAI_API_KEY;
-    #   CDPATH = "~/nova";
-    #   # OPENAI_API_HOST = secrets.OPENAI_API_HOST;
-    #  }
-    #
-    #  // {
-    #   # fre experiment
-    #
-    #   FZF_CTRL_T_COMMAND="command fre --sorted";
-    #   FZF_CTRL_T_OPTS="--tiebreak=index";
-    # };
 
-    # test for 
+    # test for
     # - https://www.reddit.com/r/neovim/comments/17dn1be/implementing_mru_sorting_with_minipick_and_fzflua/
     # - https://lib.rs/crates/fre
     initExtra = ''
@@ -47,7 +34,10 @@
        source $ZDOTDIR/zshrc
        # fi
 
+       # see https://github.com/jeffreytse/zsh-vi-mode for integration
+       # TODO you can also use home-manager's built-in "plugin" feature:
     '';
+    # source ${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 
     initExtraBeforeCompInit = # zsh
       ''
@@ -56,7 +46,7 @@
       '';
 
     # to disable loading of /etc/z* files
-    # envExtra = '' 
+    # envExtra = ''
     # setopt no_global_rcs
     # '';
     # kernel aliases {{{

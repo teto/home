@@ -15,8 +15,8 @@ in
     services.nextcloud = {
       previewGenerator = lib.mkEnableOption "preview generator";
 
-      # 
-      # memories = lib.mkEnableOption "memories"; 
+      #
+      # memories = lib.mkEnableOption "memories";
 
     };
     # occ memories:places-setup    # set up reverse geocoding, will force re-indexing

@@ -8,10 +8,45 @@ let
   );
 
 in
-rec {
+{
+  alot = prev.alot.overrideAttrs ({
+    doCheck = false;
+    doInstallCheck = false;
+
+  });
 
   protocol-local = prev.protocol.overrideAttrs (oldAttrs: {
     src = builtins.fetchGit { url = "https://github.com/teto/protocol"; };
+  });
+
+  llama-cpp-with-curl = prev.llama-cpp.overrideAttrs (oa: {
+
+    nativeBuildInputs = oa.nativeBuildInputs ++ [
+      final.curl.dev
+    ];
+
+    cmakeFlags = oa.cmakeFlags ++ [
+
+      (prev.lib.cmakeBool "LLAMA_CURL" true)
+    ];
+  });
+
+  termscp-matt = prev.termscp.overrideAttrs (oa: {
+    cargoBuildFlags = "--no-default-features";
+  });
+
+  flameshotGrim = final.flameshot.overrideAttrs (oldAttrs: {
+    src = prev.fetchFromGitHub {
+      owner = "flameshot-org";
+      repo = "flameshot";
+      rev = "3d21e4967b68e9ce80fb2238857aa1bf12c7b905";
+      sha256 = "sha256-OLRtF/yjHDN+sIbgilBZ6sBZ3FO6K533kFC1L2peugc=";
+    };
+    cmakeFlags = [
+      "-DUSE_WAYLAND_CLIPBOARD=1"
+      "-DUSE_WAYLAND_GRIM=1"
+    ];
+    buildInputs = oldAttrs.buildInputs ++ [ final.libsForQt5.kguiaddons ];
   });
 
   # xdg-utils = prev.xdg-utils.overrideAttrs(oa: {

@@ -8,10 +8,10 @@
 
   # enable gitolite
   services.gitolite = {
-    enable = false;
+    enable = true;
     # read
-    # adminPubkey = secrets.gitolitePublicKey ;
-    # group 
+    adminPubkey = builtins.readFile ./neotokyo-gitolite.pub;
+    # group
     # user
     # enableGitAnnex = false;
     # by default dataLib -> /var/lib/gitolite

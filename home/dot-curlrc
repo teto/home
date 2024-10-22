@@ -1,0 +1,7 @@
+# export SSL_CERT_FILE=/path/to/ca_bundle.crt
+# export SSL_CERT_DIR=/path/to/ca/dir
+# cafile = "ca-bundle.crt"
+# CURL_CA_BUNDLE
+# cacert = "/nix/store/6w6x3cailcq7a7xh8vgyn3rgkgfnp7np-nss-cacert-3.106/etc/ssl/certs/ca-bundle.crt"
+# capath = "/nix/store/6w6x3cailcq7a7xh8vgyn3rgkgfnp7np-nss-cacert-3.106/etc/ssl/certs"
+

@@ -5,9 +5,21 @@
   ...
 }:
 {
-  # programs.meli = {
-  #   enable = true;
-  # };
+
+  programs.meli = {
+    enable = true;
+
+    includes = [
+      "notmuch.toml"
+      "fastmail.toml"
+    ];
+
+    settings = {
+      notifications = {
+        script = "notify-send";
+      };
+    };
+  };
 
   # programs.zsh = {
   #   mcfly.enable = true;
@@ -20,6 +32,8 @@
   # services.trayscale.enable = true;
 
   programs.swappy.enable = false;
+
+  # services.wl-clip-persist.enable = true;
 
   programs.vifm.enable = true;
 

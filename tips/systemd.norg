@@ -1,9 +1,18 @@
 
+systemctl get-default
+systemctl list-dependencies
+systemctl show-environment --user ?
+
+systemd.user.settings.Manager.DefaultEnvironment
+
 * how to enable debug  ?
 
   Works only if service declares BusName / d-bus
   systemctl service-log-level systemd-networkd debug
   systemctl service-log-level
+
+ else 
+  systemctl log-level debug
 
 systemctl --failed to list failed units (--user)
 
@@ -55,11 +64,16 @@ systemctl list-jobs
 
 # to remove core files
 systemd-tmpfiles --clean
+systemd-tmpfiles --cat-config
 
 To limit memory consumption:
 systemd-run --user -p MemoryLimit=3G google-chrome
 
 ō
+
+* nixos systemd.tmpfiles creates the service:
+
+systemd-tmpfiles-setup-sysroot
 
 systemctl list-timers
 
@@ -78,4 +92,4 @@ Failed to create directories for "/etc/systemd/system/gitlab-runner.service.d/ov
 You can also try `edit --full`
 
 
-systemctl --user show-environment
+StateDirectoryMode=

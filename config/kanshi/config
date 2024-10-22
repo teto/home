@@ -17,13 +17,17 @@
 #   exec echo "7 eight 9"
 # }
 
-profile desktop_duo {
-  output 'Creatix Polymedia GmbH LDLC M31,5 NK32201600457' enable position 0,0
-  output 'Philips Consumer Electronics Company PHL 273V7 0x000011E7' enable position 2560,0
-}
+
+# status = "enable";
 
 profile desktop_mono {
   output 'Creatix Polymedia GmbH LDLC M31,5 NK32201600457' enable position 0,0
   output 'Philips Consumer Electronics Company PHL 273V7 0x000011E7' disable
 }
+
+profile desktop_duo {
+  output 'Creatix Polymedia GmbH LDLC M31,5 NK32201600457' enable position 0,0
+  output 'Philips Consumer Electronics Company PHL 273V7 0x000011E7' enable position 2560,360
+}
+
 

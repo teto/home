@@ -1,4 +1,4 @@
 [user]
-	email = "matthieu.coudron@novadiscovery.com"
+	email = "matthieu.coudron@novainsilico.ai"
 	name = "Matthieu Coudron"
 

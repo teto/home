@@ -9,6 +9,7 @@
     enable = true;
     # package = pkgs.flameshotGrim;
   };
+
   systemd.user.services.flameshot.Service = {
     # environment.NEXTCLOUD_CONFIG_DIR = "${datadir}/config";
     # Environment= {

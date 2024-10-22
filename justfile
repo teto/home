@@ -4,6 +4,7 @@
 
 NIXPKGS_REPO := env_var('HOME') / 'nixpkgs'
 BLOG_FOLDER := "${HOME}/blog"
+NOVOS_REPO := "/home/teto/nova/doctor"
 
 default:
     just --choose
@@ -17,26 +18,26 @@ switch-remote: (nixos-rebuild "switch")
 # just to save the command
 
 # should be loaded into zsh history instead
+boot: (nixos-rebuild "boot --install-bootloader" "")
+
 build: (nixos-rebuild "build")
 
 switch: (nixos-rebuild "switch" "")
 
 repl: (nixos-rebuild "repl" "")
 
-# --override-input rocks-nvim /home/teto/rocks.nvim
-# TODO check if the paths exists to ease bootstrap ?
-# same for NOVA_OVH1
-
 # --override-input nova /home/teto/nova/doctor \
 [private]
 nixos-rebuild command builders="--option builders \"$NOVA_OVH1\" -j0":
     nixos-rebuild --flake ~/home --override-input nixpkgs {{ NIXPKGS_REPO }} \
       --override-input hm /home/teto/hm \
-      --override-input nova-doctor /home/teto/nova/doctor \
+      --override-input nova-doctor {{ NOVOS_REPO }} \
        {{ builders }} \
-       --no-write-lock-file --show-trace --use-remote-sudo {{ command }}
+       --no-write-lock-file --show-trace \
+       --use-remote-sudo \
+       {{ command }}
 
-nixos-bootstrap:
+build-nom:
     nom build .#nixosConfigurations.$HOSTNAME.config.system.build.toplevel 
 
 # nom build
@@ -95,10 +96,8 @@ deploy-router:
 
 # [confirm("prompt")]
 deploy-neotokyo:
-    # - we need interactivty to enter password see 
-    #   https://github.com/serokell/deploy-rs/issues/78#issuecomment-1367467086
-    # --ssh-opts="-t" --magic-rollback false
-    deploy '.#neotokyo' -s --interactive-sudo=true
+    # --magic-rollback false --auto-rollback=false
+    deploy '.#neotokyo' -s --interactive-sudo=true -- --override-input nixpkgs {{ NIXPKGS_REPO }}
 
 # regenerate my email contacts
 # (to speed up alot autocompletion)
@@ -183,8 +182,13 @@ nix-check-db:
     sqlite3 /nix/var/nix/db/db.sqlite 'pragma integrity_check'
 
 # receive secrets
-secrets-receive:
+secrets-wormhole-receive:
     wormhole-rs receive
+
+# rsync
+secrets-scp-sync:
+    # laptop must exist in ssh config
+    scp -r laptop:/home/teto/home/secrets ~/home/secrets
 
 # install git hooks
 git-hooks:

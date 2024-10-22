@@ -12,39 +12,28 @@
 
   users.users.teto = {
 
+    # name = "Matt"; # This fucks up everything
+
     shell = pkgs.zsh;
 
     isNormalUser = true; # creates home/ sets default shell
     uid = 1000;
-    extraGroups =
-      [
-        "adbusers" # for android tools
-        "audio" # for pulseaudio/pipewire
-        "dialout" # to access serial devices like the conbee II
-        "docker" # to access docker socket
-        "hass" # home-assistant
-        "input" # for libinput-gestures
-        "jupyter"
-        "keys"
-        "kvm" # needed when using runAsRoot when building dockerImage
-        "libvirtd" # for nixops
-        "networkmanager" # not necessary for nixpos
-        "pgadmin" # pgadmin is such a mess
-        "pipewire" # for pipewire
-        "plugdev" # for udiskie
-        "podman"
-        "postgres"
-        "rtkit" # for pipewire
-        "vboxusers" # to avoid Kernel driver not accessible
-        "video" # to control brightness
-        "wheel" # for sudo
-        "wireshark"
-        # config.users.groups.keys.name
-      ]
-      ++ lib.optional (config.services.kanata.enable)
-
-        "uinput" # required for kanata it seems
-    ;
+    extraGroups = [
+      "audio" # for pulseaudio/pipewire
+      "dialout" # to access serial devices like the conbee II
+      "docker" # to access docker socket
+      "input" # for libinput-gestures
+      "keys"
+      "kvm" # needed when using runAsRoot when building dockerImage
+      "networkmanager" # not necessary for nixpos
+      "pipewire" # for pipewire
+      "plugdev" # for udiskie
+      "podman"
+      "postgres"
+      "rtkit" # for pipewire
+      "wheel" # for sudo
+      # config.users.groups.keys.name
+    ];
     # once can set initialHashedPassword too
     # initialPassword
     # generated with nix run nixpkgs.mkpasswd mkpasswd -m sha-512

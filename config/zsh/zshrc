@@ -1,4 +1,6 @@
 # vim: set noet fenc=utf-8 ff=unix  sts=0 sw=4 ts=8 foldmethod=marker :
+# TODO
+# https://unix.stackexchange.com/questions/74184/how-to-save-current-command-on-zsh
 
 # check we are on nixos
 #########################################
@@ -11,11 +13,8 @@
 . "$ZDOTDIR/aliases.zsh"
 
 # https://stackoverflow.com/questions/24601806/got-permission-denied-when-emulating-sh-under-zsh
-# set -x
 emulate sh -c "source $ZDOTDIR/aliases.zsh"
-# TODO use
-emulate sh -c "source $ZDOTDIR/../bash/aliases.sh"
-# set +x
+emulate sh -c "source $XDG_CONFIG_HOME/bash/aliases.sh"
 
 # to reload sessionVariables
 source ~/.profile
@@ -25,6 +24,9 @@ source ~/.profile
 # AUTOSUGGESTION_HIGHLIGHT_COLOR="fg=cyan"
 
 # TODO make it a function cat some.json | python -m json.tool
+
+
+setopt completealiases
 
 # History parameters {{{
 
@@ -352,3 +354,13 @@ export REVIEW_BASE=master
 autoload -U +X bashcompinit && bashcompinit
 
 # source <(_HASS_CLI_COMPLETE=zsh_source hass-cli)
+function merge_hist() {
+    hist_file="{{config_directory()}}/zsh/shell_history.txt"
+    builtin fc -R -I "$hist_file"
+    builtin fc -W "$hist_file_merged"
+}
+compdef _git gch
+
+compdef _pass pass-nova
+compdef _pass pass-pro
+compdef _pass pass-perso

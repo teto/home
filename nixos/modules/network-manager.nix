@@ -9,10 +9,11 @@
     enable = true;
     dnssec = "false"; # "allow-downgrade";
   };
+
   # allow-downgrade falls back when dnssec fails, "true" foces dnssec
   # services.resolved.dnssec = "allow-downgrade";
 
-  # quad9 
+  # quad9
   # networking.nameservers = [ "9.9.9.9" ];
 
   networking.networkmanager = {

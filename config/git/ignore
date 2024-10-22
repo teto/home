@@ -1,9 +1,9 @@
 #  vim: set noet fenc=utf-8 ff=unix sts=0 sw=4 ts=4 foldmethod=marker :
 .direnv
 .ccls-cache/
-tags
-TAGS
-build/
+/tags
+/TAGS
+/build/
 *.key
 *.qcow2
 .nixos-test-history  # nixos test-driver repl history

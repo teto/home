@@ -36,6 +36,8 @@
       d = "diff";
       mg = "mergetool";
 
+      # get top level directory of the repo
+      root = "git rev-parse --show-toplevel";
     };
     extraConfig = {
       # breaks jkops
@@ -95,7 +97,6 @@
 
       # TODO use a fully qualified nvim ?
       diff = {
-        # there is now a specific nvim entry ?
         tool = "nvim -d";
         word-diff = "color";
         renamelimit = 14000; # useful for kernel

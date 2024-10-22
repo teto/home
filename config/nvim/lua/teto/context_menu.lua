@@ -159,7 +159,6 @@ M.restart_hls = function()
 end
 
 -- menu_get({path} [, {modes}])                                        *menu_get()*
-
 -- menu_add('LSP')
 
 M.set_lsp_rclick_menu = function()
@@ -252,20 +251,6 @@ M.set_repl_luadev_rclick_menu = function()
     }, M.buf_is_file)
 end
 
-M.set_spectre_rclick_menu = function()
-    -- nnoremap <leader>sw <cmd>lua require('spectre').open_visual({select_word=true})<CR>
-    -- vnoremap <leader>s <cmd>lua require('spectre').open_visual()<CR>
-    -- "  search in current file
-    -- nnoremap <leader>sp viw:lua require('spectre').open_file_search()<cr>
-
-    M.set_rclick_submenu('MenuSpectre', 'Replace         ', {
-        { 'Replace', '<cmd>lua require("spectre").open()<cr>' },
-        { 'Replace word', '<cmd>lua require("spectre").open_visual({select_word=true})<cr>' },
-        { 'Search file', '<cmd>lua require("spectre").open()<cr>' },
-    }, function()
-        return true
-    end)
-end
 -- menu_add('Rest.RunRequest', "<cmd>lua require('rest-nvim').run(true)<cr>")
 
 M.set_rest_rclick_menu = function()
@@ -289,15 +274,6 @@ M.set_repl_iron_rclick_menu = function()
         { 'Run       ,a', '<Plug>(Luadev-Run)' },
         { 'Run line  ,,', '<space>g[' },
     }, M.buf_is_file)
-end
-
-M.set_repl_snip_rclick_menu = function()
-    M.set_rclick_submenu('MenuTetoReplSnip', 'Repl', {
-        -- {'SnipRun',   '<cmd>SnipRun<cr>'},
-        -- {'SnipTerminate',   '<cmd>SnipTerminate<cr>'},
-    }, function()
-        return true
-    end)
 end
 
 M.toggle_lsp_lines = function()
@@ -433,8 +409,11 @@ Check 'mousemodel'
 -- t'LspAttach', 'FileType'his 
 ]]
 --
+--
 M.setup_rclick_menu_autocommands = function()
     -- 'LspAttach', 'FileType'
+    -- local has_spectre, spectre = pcall(require, 'spectre')
+
     vim.api.nvim_create_autocmd({ 'MenuPopup' }, {
 
         -- TODO regenerate this function everytime ?
@@ -444,7 +423,7 @@ M.setup_rclick_menu_autocommands = function()
 
             -- 2. we configure the menu
             M.add_component(M.set_lsp_rclick_menu)
-            M.add_component(M.set_spectre_rclick_menu)
+            -- M.add_component(M.set_grugfar_rclick_menu)
             M.add_component(M.set_repl_iron_rclick_menu)
             M.add_component(M.set_rest_rclick_menu)
             M.add_component(M.set_sniprun_rclick_menu)
@@ -467,5 +446,12 @@ M.setup_rclick_menu_autocommands = function()
         end,
     })
 end
+
+-- options is a table or string, if string then it will look at the table from menus* module of this repo
+-- opts : { mouse = true, border = false }"
+--
+vim.keymap.set('n', '<C-t>', function()
+    require('menu').open('default')
+end, {})
 
 return M

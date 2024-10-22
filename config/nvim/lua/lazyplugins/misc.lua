@@ -1,15 +1,4 @@
 return {
-    -- {
-    --  "reo101/nix-update.nvim",
-    --  dependencies = {
-    -- 	 -- None (yet), but could use those
-    -- 	 -- "nvim-lua/plenary.nvim",
-    -- 	 -- "nvim-telescope/telescope.nvim",
-    --  },
-    --  config = function()
-    -- 	 require("nix-update").setup()
-    --  end,
-    -- },
 
     -- TODO move to opt
     -- {
@@ -31,11 +20,6 @@ return {
     -- },
 
     -- {
-    --  -- 'monkoose/fzf-hoogle.vim'
-    --  dir = '/home/teto/fzf-hoogle.vim'
-    -- },
-
-    -- {
     --   'TrevorS/uuid-nvim',
     --   lazy = true,
     --   config = function()
@@ -47,24 +31,6 @@ return {
     -- },
 
     -- { "shellRaining/hlchunk.nvim", event = { "UIEnter" }, },
-
-    -- compete with registers.nvim
-    -- https://github.com/gelguy/wilder.nvim
-    -- TODO upstream
-    --use {
-    --	'chipsenkbeil/distant.nvim'
-    --	, opt = true
-    --	, config = function()
-    --		require('distant').setup {
-    --		-- Applies Chip's personal settings to every machine you connect to
-    --		--
-    --		-- 1. Ensures that distant servers terminate with no connections
-    --		-- 2. Provides navigation bindings for remote directories
-    --		-- 3. Provides keybinding to jump into a remote file's parent directory
-    --		['*'] = require('distant.settings').chip_default()
-    --		}
-    --	end
-    --}
 
     -- REPL (Read Execute Present Loop) {{{
     -- github mirror of use 'http://gitlab.com/HiPhish/repl.nvim'
@@ -95,24 +61,6 @@ return {
     -- 		'hrsh7th/vim-vsnip-integ',
     -- 		'rafamadriz/friendly-snippets'
     -- 	},
-
-    -- { 'gelguy/wilder.nvim' },
-    -- { 'notomo/gesture.nvim' , opt = true; },
-    -- 'anuvyklack/hydra.nvim', -- to create submodes
-    -- "terrortylor/nvim-comment"
-
-    -- {
-    --  -- provides :SessionSave,:SessionRestore, :Autosession search/delete
-    --   'rmagatti/auto-session',
-    --  config = function()
-    --    require("auto-session").setup {
-    --      log_level = "error",
-    --      auto_session_suppress_dirs = { "~/", "~/Projects", "~/Downloads", "/"},
-    --      auto_session_root_dir = ".", -- vim.fn.stdpath('data').."/sessions/",
-    --      auto_session_use_git_branch = false
-    --    }
-    --  end
-    -- },
     -- {
     --   -- yeah it depends
     --     'goolord/alpha-nvim',
@@ -121,34 +69,12 @@ return {
     --         require'alpha'.setup(require'alpha.themes.startify'.config)
     --     end
     -- },
-    -- {
-    --   'glepnir/dashboard-nvim',
-    --   event = 'VimEnter',
-    --   config = function()
-    --     require('dashboard').setup {
-    --       -- config
-    --       -- change_to_vcs_root
-    --       -- shortcut_type = "letter" or "number"
-    --       hide = {
-    --        statusline = false
-    --       }
-    --     }
-    --   end,
-    --   dependencies = { {'nvim-tree/nvim-web-devicons'}}
-    -- },
-
-    -- 'cameron-wags/rainbow_csv.nvim',
-
-    -- 'darkonig/nvim-terminal.lua' -- , '~/neovim/nvim-terminal.lua' -- to display ANSI colors
-    -- to display ANSI colors
 
     --  '~/pdf-scribe.nvim'  -- to annotate pdf files from nvim :PdfScribeInit
     -- PdfScribeInit
     -- vim.g.pdfscribe_pdf_dir  = expand('$HOME').'/Nextcloud/papis_db'
     -- vim.g.pdfscribe_notes_dir = expand('$HOME').'/Nextcloud/papis_db'
     -- }}}
-
-    -- { 'bfredl/nvim-luadev', cmd = 'Luadev' },
 
     -- for quickreading: use :FSToggle to Toggle flow state
     -- {'nullchilly/fsread.nvim', config = function ()
@@ -171,11 +97,5 @@ return {
     --     end,
     -- },
 
-    -- 'vim-denops/denops.vim',
-    -- to help with nvim-hs
     --  'ryoppippi/bad-apple.vim' -- needs denops
-    --  'kshenoy/vim-signature' -- display marks in gutter, love it
-
-    -- terminal image viewer in neovim see https://github.com/edluffy/hologram.nvim#usage for usage
-    --  'edluffy/hologram.nvim' -- hologram-nvim
 }

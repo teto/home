@@ -6,10 +6,13 @@
   ...
 }:
 {
-  imports = [ ../../../nixos/profiles/openssh.nix ];
+  imports = [
+    ../../../nixos/profiles/openssh.nix
+  ];
 
   services.openssh = {
 
+    enable = true;
     ports = [ secrets.jakku.sshPort ];
 
     # authorizedKeysFiles = [
@@ -17,11 +20,14 @@
     # ];
     # new format
     settings = {
-      LogLevel = "VERBOSE";
+      # LogLevel = "VERBOSE";
+      LogLevel = lib.mkForce "DEBUG";
       KbdInteractiveAuthentication = false;
       # PasswordAuthentication = false;
       X11Forwarding = false;
       PermitRootLogin = lib.mkForce "no";
+      HostKey = "/run/secrets/ssh_host_key";
     };
+
   };
 }

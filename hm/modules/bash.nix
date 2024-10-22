@@ -57,7 +57,7 @@ in
       in
       mkIf cfg.termTitle.enable {
 
-        # depending 
+        # depending
         # in my case since I am using starship
         # https://starship.rs/advanced-config/#custom-pre-prompt-and-pre-execution-commands-in-bash
         # starship_precmd_user_func="set_win_title"

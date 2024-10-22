@@ -6,7 +6,10 @@
 }:
 {
 
-  imports = [ ./nova/programs/bash.nix ];
+  imports = [
+    ./nova/programs/bash.nix
+    ./nova/programs/firefox.nix
+  ];
 
   home.packages = [
     pkgs.aws-vault-nova # wrap aws-vault with some specific variables
@@ -36,9 +39,9 @@
       type = "Application";
       exec = "firefox -p nova --class firefox-nova";
       icon = "firefox";
-      comment = "Nova (firefox)";
+      comment = "Firefox (nova)";
       terminal = false;
-      name = "nova (Firefox)";
+      name = "Firefox (nova)";
       genericName = "Web Browser";
       mimeType = [
         "text/html"

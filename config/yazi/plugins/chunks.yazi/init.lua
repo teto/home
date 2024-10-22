@@ -10,7 +10,7 @@ function M:peek()
     -- ya.dbg("LOL")
     ya.dbg('chunks plugins called with ' .. tostring(self.file.url))
 
-    ya.preview_widgets(self, { ui.Paragraph.parse(self.area, 'Loading chunks...') })
+    ya.preview_widgets(self, { ui.Text('Loading chunks...'):area(self.area):align(ui.Text.RIGHT) })
     local child = Command('view_json')
         :args({
             tostring(self.file.url),
@@ -22,7 +22,7 @@ function M:peek()
     if not child then
         -- TODO show stderr ?
         ya.err('fallback to builtins')
-        ya.preview_widgets(self, { ui.Paragraph.parse(self.area, 'Loading chunks...') })
+        ya.preview_widgets(self, { ui.Test('fall back to builtins...'):area(self.area) })
         return self:fallback_to_builtin()
     end
 
@@ -49,7 +49,7 @@ function M:peek()
         ya.manager_emit('peek', { math.max(0, i - limit), only_if = tostring(self.file.url), upper_bound = true })
     else
         lines = lines:gsub('\t', string.rep(' ', PREVIEW.tab_size))
-        ya.preview_widgets(self, { ui.Paragraph.parse(self.area, lines) })
+        ya.preview_widgets(self, { ui.Text(lines):area(self.area) })
     end
     --
 

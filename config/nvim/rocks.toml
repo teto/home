@@ -11,24 +11,24 @@
 # List of Neovim plugins to install alongside their versions.
 # If the plugin name contains a dot then you must add quotes to the key name!
 [plugins]
-"rocks-git.nvim"= "2.2.0"
+"rocks-git.nvim"= "2.5.0"
 # "rocks.nvim" = "2.19.0" # rocks.nvim can also manage itself :D
 # "rocks-git.nvim"= "1.5.1"
 cmp-rg = "1.3.9"
-"oil.nvim" = "2.12.1"
+"oil.nvim" = "2.12.2"
 # -- :DiffviewOpen
 "diffview.nvim" = "scm"
-"haskell-tools.nvim" = "4.2.0"
+"haskell-tools.nvim" = "4.3.1"
 "none-ls.nvim" = "scm"
-"bufferline.nvim" = "4.7.0"
+"bufferline.nvim" = "4.8.0"
 auto-session = "2.5.0"
-"rocks-config.nvim" = "2.2.0"
+"rocks-config.nvim" = "3.0.0"
 "trouble.nvim" = "3.6.0"
 "lualine.nvim" = "scm"
 "rocks-lazy.nvim" = "scm"
-"rest.nvim" = "3.7.0"
+"rest.nvim" = "3.8.3"
 "nui.nvim" = "0.3.0"
-neotest = "5.4.1"
+neotest = "5.6.1"
 "rocks-dev.nvim" = "1.7.0"
 nvim-lint = "scm"
 "telescope.nvim" = "scm"
@@ -36,25 +36,27 @@ nvim-lint = "scm"
 friendly-snippets = "scm"
 "haskell-snippets.nvim" = "1.4.4"
 "none-ls-extras.nvim" = "scm"
-"yazi.nvim" = "6.0.4"
+"yazi.nvim" = "6.4.3"
 tree-sitter-haskell = "scm"
 nvim-cmp = "scm"
-"lspkind.nvim" = "scm"
+# "lspkind.nvim" = "scm"
 "modicator.nvim" = "scm"
 luasnip = "2.3.0"
 tree-sitter-http = "scm"
 "hurl.nvim"= "1.7.1"
 "gitsigns.nvim" = "0.9.0"
 nvim-treehopper = "scm"
-nvim-treesitter-textobjects = "scm"
+# nvim-treesitter-textobjects = "scm"
+nvim-bqf= "1.1.1"
+# needs https://github.com/nvim-telescope/telescope-fzf-native.nvim if you enable the fzf algorithm
+"smart-open.nvim"= "scm"
 
-[plugins."smart-open.nvim"]
-git = "danielfalk/smart-open.nvim"
-rev = "0.3.x"
-
-[plugins."typescript-tools.nvim" ]
-git = "pmizio/typescript-tools.nvim"
-rev = "f8c2e0b36b651c85f52ad5c5373ff8b07adc15a7"
+"llm.nvim" = "scm"
+vim-startuptime= "4.5.0"
+"grug-far.nvim"= "scm"
+"typescript-tools.nvim" = "scm"
+menu= "scm"
+"snacks.nvim" = "2.6.0"
 # nvim-treesitter-textobjects = "scm"
 # "rocks-treesitter.nvim" = "1.0.3"
 
@@ -81,7 +83,7 @@ dir = "/home/teto/gp.nvim"
 
 [plugins.vim-sorcerer]
 git = "github:adlawson/vim-sorcerer"
-rev = "1.3^{}"
+rev = "1.3"
 
 [plugins.solarized]
 git = "vim-scripts/Solarized"
@@ -94,13 +96,15 @@ rev = "main"
 
 [plugins."last-color.nvim"]
 git = "raddari/last-color.nvim"
+rev = "000e3e50047602f4b9725dd33aff631018592595"
 
 [plugins.pinkmare]
 git = "Matsuuu/pinkmare"
+rev = "5121864e3fbc35f1cf8f62db9b26c6dbe54bd094"
 
 [plugins.nvim-lspconfig]
 git = "neovim/nvim-lspconfig"
-rev = "v0.1.8"
+rev = "v1.0.0"
 
 [plugins."kanagawa.nvim"]
 version = "scm"
@@ -111,49 +115,38 @@ git = "alec-gibson/nvim-tetris"
 rev = "v0.1.1"
 opt = true
 
-# lazyload on {'on': 'StartupTime'} " see startup time per script
-[plugins."startuptime.vim"]
-git = "tweekmonster/startuptime.vim"
-opt = true
+# [plugins."startuptime.vim"]
+# git = "tweekmonster/startuptime.vim"
+# rev = "dfa57f522d6f61793fe5fea65bca7484751b8ca2"
+# opt = true
 
 [plugins."command-and-cursor.nvim"]
-# event VeryLazy
-# highlight cursor position and selection in command mode
-# (which is not the case by default
-
 git = "moyiz/command-and-cursor.nvim"
+rev = "43485e6d4f0ffd42414b35e156075e46047563dd"
 
 [plugins.nvim-navic]
 git = "SmiteshP/nvim-navic"
+rev = "8649f694d3e76ee10c19255dece6411c29206a54"
 
 [plugins."cloak.nvim"]
-# can conceal some patterns in some specific files
 git = "laytan/cloak.nvim"
-opt = true
 rev = "648aca6d33ec011dc3166e7af3b38820d01a71e4"
+opt = true
 
 [plugins."git-messenger.vim"]
-# to show git message :GitMessenger
 git = "rhysd/git-messenger.vim"
-cmd = "GitMessenger"
 
 [plugins.vim-listchars]
-# to cycle between different list/listchars configurations
 git = "teto/vim-listchars"
+rev = "c9839537f8a6a32726a504cc34113719a7dcd8fc"
 
 [plugins."none-ls-luacheck.nvim"]
 git = "gbprod/none-ls-luacheck.nvim"
 rev = "v0.0.1"
 
-[plugins.nvim-bqf]
-git = "kevinhwang91/nvim-bqf"
-rev = "v1.1.1"
-
 [plugins.i3-vim-syntax]
 git = "PotatoesMaster/i3-vim-syntax"
-
-[plugins."grug-far.nvim"]
-git = "MagicDuck/grug-far.nvim"
+rev = "affe37e89911c47831cb5b87697ac70e48bb3e0f"
 
 [plugins.neovim]
 git = "rose-pine/neovim"
@@ -165,36 +158,39 @@ rev = "v1.0"
 
 [plugins."material.nvim"]
 git = "marko-cerovac/material.nvim"
+rev = "b5d0ff3ad37ba00cea3dc3dce0b0f555b481c6f4"
 
 [plugins."better-digraphs.nvim"]
 git = "protex/better-digraphs.nvim"
+rev = "5b2c63418d1e2c91d17f6d4e966bdafc5072a8d9"
 opt = true
 
 [plugins."ccc.nvim"]
 git = "uga-rosa/ccc.nvim"
-rev = "v2.0.3^{}"
+rev = "v2.0.3"
 opt = true
 
 [plugins."hacker.nvim"]
 git = "letieu/hacker.nvim"
+rev = "6818e75c076beb05ffcad2be6a78e0e0f800416d"
 opt = true
 
 [plugins.nvimesweeper]
-# :Nvimesweeper / :h nvimesweeper
-
 git = "seandewar/nvimesweeper"
+rev = "a75828943e4279cd850ad6a6cff4c49238997573"
 opt = true
 
 [plugins."color-picker.nvim"]
-# use with :PickColor
 git = "ziontee113/color-picker.nvim"
+rev = "06cb5f853535dea529a523e9a0e8884cdf9eba4d"
 
 [plugins."lsp_lines.nvim"]
 git = "https://git.sr.ht/~whynothugo/lsp_lines.nvim"
-rev = "v3.0.0^{}"
+rev = "v3.0.0"
 
 [plugins."highlight-undo.nvim"]
 git = "tzachar/highlight-undo.nvim"
+rev = "1ea1c79372d7d93c88fd97543880927b7635e3d2"
 
 [plugins."baleia.nvim"]
 git = "m00qek/baleia.nvim"
@@ -202,32 +198,43 @@ rev = "v1.4.0"
 
 [plugins."none-ls-shellcheck.nvim"]
 git = "gbprod/none-ls-shellcheck.nvim"
+rev = "0f84461241e76e376a95fb7391deac82dc3efdbf"
 
 [plugins.vim-aftercolors]
 git = "calvinchengx/vim-aftercolors"
+rev = "89b7c45a48a661da88a3a574ef9fa90b936064a4"
 
 [plugins."tint.nvim"]
 git = "levouh/tint.nvim"
+rev = "02bd0527a315a80e4e25bb2dd7b6994fb0daae01"
 
 [plugins."live-command.nvim"]
 git = "smjonas/live-command.nvim"
-rev = "2.0.0"
+rev = "2.2.0"
 
 [plugins.nvim-pnpm-catalog-lens]
 git = "ryoppippi/nvim-pnpm-catalog-lens"
-rev = "v0.2.2"
+rev = "v0.3.0"
 
 [plugins.lualine-lsp-progress]
 git = "arkav/lualine-lsp-progress"
+rev = "56842d097245a08d77912edf5f2a69ba29f275d7"
 
 [plugins.volt]
 git = "nvchad/volt"
-
-[plugins.menu]
-git = "nvchad/menu"
+rev = "43f72b49037c191eb3cfe26ba7a5574b4bfce226"
 
 [plugins."bigfile.nvim"]
 git = "lunarvim/bigfile.nvim"
+rev = "33eb067e3d7029ac77e081cfe7c45361887a311a"
+
+[plugins."iron.nvim"]
+git = "vigemus/iron.nvim"
+branch = "master"
+
+[plugins."http-codes.nvim"]
+git = "barrett-ruth/http-codes.nvim"
+rev = "a610788dff2fb5df05b230d73a926c8dc3173c16"
 
 [config]
 plugins_dir = "plugins/"

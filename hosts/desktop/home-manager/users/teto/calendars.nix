@@ -9,14 +9,12 @@
 {
 
   imports = [
-    # ./programs/vdirsyncer.nix
-
   ];
 
   programs.vdirsyncer = {
     enable = withSecrets;
     # Provide package from stable channel ?
-    # package = pkgs.vdirsyncerStable;  
+    # package = pkgs.vdirsyncerStable;
 
   };
 
@@ -24,13 +22,6 @@
     # need gnome-accounts to make it work
     gnome-calendar
   ];
-
-  # [locale]
-  # # default_timezone = Asia/Tokyo
-  # # local_timezone= Asia/Tokyo
-  # unicode_symbols=True
-
-  #  '';
 
   # accounts.contact = {
   #   basePath = "$XDG_CONFIG_HOME/card";
@@ -73,7 +64,7 @@
 
         vdirsyncer = {
           enable = withSecrets;
-          # null doesn't look too interesting :s 
+          # null doesn't look too interesting :s
           collections = [
             "from a"
             "from b"
@@ -119,7 +110,7 @@
 
       #   vdirsyncer = {
       #     enable = false;
-      #     # null doesn't look too interesting :s 
+      #     # null doesn't look too interesting :s
       #     collections = ["from a"  "from b"];
       #     metadata = [ "color" "displayname" ];
       #   };

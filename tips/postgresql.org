@@ -1,3 +1,15 @@
+* Primer on postgresql
+
+Interesting read about how it all fits together:
+https://www.postgresql.org/docs/current/ddl-schemas.html
+
+TLDR; tables live in a schema, unqualified commands are searched in search_path:
+SHOW search_path;
+
+One can modify it with:
+SET search_path TO myschema,public;
+
+
 pg_ctl start
 
 POSTGRESQL_CONNECTION="$(pg_tmp)"
@@ -10,6 +22,49 @@ psql "$POSTGRESQL_CONNECTION" --no-psqlrc
 unix_socket_directories = '/home/teto/nova/jinko/core-platform-db'	# comma-separated list of directories
 
 \conninfo
+
+
+select pid as process_id,
+       usename as username,
+       datname as database_name,
+       client_addr,
+       application_name,
+       backend_start,
+       xact_start,
+       state,
+       state_change,
+       query
+from pg_stat_activity;
+
+select blocked_locks.pid as blocked_pid,
+         blocked_locks.granted,
+         blocked_activity.usename as blocked_user,
+         blocked_activity.client_addr as blocked_addr,
+         blocked_activity.xact_start as blocked_xact_start,
+         blocked_activity.state_change as blocked_state_change,
+         blocking_locks.pid as blocking_pid,
+         blocking_activity.usename as blocking_user,
+         blocking_activity.client_addr as blocking_addr,
+         blocking_activity.xact_start as blocking_xact_start,
+         blocking_activity.state_change as blocking_state_change,
+         blocked_activity.query as blocked_statement,
+         blocking_activity.query as current_statement_in_blocking_process
+   from pg_catalog.pg_locks blocked_locks
+    join pg_catalog.pg_stat_activity blocked_activity on blocked_activity.pid = blocked_locks.pid
+    join pg_catalog.pg_locks blocking_locks 
+        on blocking_locks.locktype = blocked_locks.locktype
+        and blocking_locks.database is not distinct from blocked_locks.database
+        and blocking_locks.relation is not distinct from blocked_locks.relation
+        and blocking_locks.page is not distinct from blocked_locks.page
+        and blocking_locks.tuple is not distinct from blocked_locks.tuple
+        and blocking_locks.virtualxid is not distinct from blocked_locks.virtualxid
+        and blocking_locks.transactionid is not distinct from blocked_locks.transactionid
+        and blocking_locks.classid is not distinct from blocked_locks.classid
+        and blocking_locks.objid is not distinct from blocked_locks.objid
+        and blocking_locks.objsubid is not distinct from blocked_locks.objsubid
+        and blocking_locks.pid != blocked_locks.pid
+    join pg_catalog.pg_stat_activity blocking_activity on blocking_activity.pid = blocking_locks.pid;
+
 
 * how to force tcp/ip connection
 
@@ -52,9 +107,19 @@ ALTER USER postgres with password ‘new-password’;
 SHOW hba_file;
 
 `sudo -u postgres createuser teto` worked
+With additionnal permissions
+sudo -u postgres createuser teto --createdb --echo -s
+CREATE USER foo WITH PASSWORD 'secret';
+
+# 
+ALTER ROLE teto WITH SUPERUSER CREATEROLE CREATEDB;
 
 # How to list the tables ?
 `\l`
+\dt core.*
+
+# list users
+`\du`
 
 # how to switch databases ?
 postgres=# \c sales
@@ -66,3 +131,28 @@ CREATE ROLE username superuser;
 * logging
 
  https://www.postgresql.org/docs/current/runtime-config-logging.html
+
+* ISSUES
+
+** `WARNING:  database "postgres" has a collation version mismatch`
+
+collation refers to locales/glibc etc
+```
+template1=# show lc_collate;
+ lc_collate  
+-------------
+ en_US.UTF-8
+(1 row)
+```
+
+Dont forget to add the ";"
+```
+ALTER DATABASE template1 REFRESH COLLATION VERSION;
+```
+
+** FATAL:  database "postgres" does not exist
+
+sudo -u postgres psql  -d template1
+
+
+CURRENT_TIMESTAMP()

@@ -42,7 +42,7 @@ in
     ];
 
     #       "WIRESHARK_ABORT_ON_DISSECTOR_BUG=1"
-    # G_DEBUG=fatal_criticals 
+    # G_DEBUG=fatal_criticals
     # libtool --mode=execute gdb $HOME/wireshark/debug/run/$1
     # or break on proto_report_dissector_bug
     shellHook =

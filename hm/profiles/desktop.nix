@@ -2,9 +2,11 @@
   config,
   flakeInputs,
   pkgs,
-  lib,
-  system,
+  # lib,
+  # system,
   withSecrets,
+  dotfilesPath,
+  secretsFolder,
   ...
 }:
 let
@@ -13,7 +15,7 @@ let
     { pkgs, ... }@args:
     flakeInputs.haumea.lib.load {
       src = ./desktop;
-      #   flakeInputs.nix-filter { 
+      #   flakeInputs.nix-filter {
       #   root = ./desktop;
       # };
       inputs = args // {
@@ -29,9 +31,10 @@ let
     # fonts
     ubuntu_font_family
     inconsolata # monospace
-    noto-fonts-cjk # asiatic
-    nerdfonts # otherwise no characters
-    # (pkgs.nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; })
+
+    noto-fonts-cjk-sans # asiatic
+    nerd-fonts.fira-code # otherwise no characters
+    nerd-fonts.droid-sans-mono # otherwise no characters
 
     # corefonts # microsoft fonts  UNFREE
     font-awesome_5
@@ -71,6 +74,7 @@ in
     locales = [
       "fr_FR.UTF-8/UTF-8"
       "en_US.UTF-8/UTF-8"
+      # "en_US.UTF-8/UTF-8"
     ];
   };
 
@@ -100,15 +104,13 @@ in
 
       timg
       gh-dash
-      # pass-custom
     ]);
 
   # TODO remove ? dangerous
-  home.sessionPath = [ "$XDG_DATA_HOME/../bin" ];
-
-  services.gnome-keyring = {
-    enable = true;
-  };
+  home.sessionPath = [
+    "$XDG_DATA_HOME/../bin"
+    "${dotfilesPath}/bin"
+  ];
 
   services.network-manager-applet.enable = true;
 

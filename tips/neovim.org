@@ -5,6 +5,15 @@ nvim -V30log.txt to log information
 you can start neovim with --luamod-dev
 also set vim.g.__ts_debug to help debug language-tree
 
+
+* load the result of rg --vimgrep in quickfix:
+
+@code.start
+rg --vimgrep use-xdg | nvim -q
+@code.end
+should work but it does not. Use intermediate file.
+
+
 * debug haskell-tools.nvim
 
   lua require('haskell-tools').start_or_attach({  tools = { log = { level = vim.log.levels.DEBUG }}})

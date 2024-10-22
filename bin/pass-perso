@@ -1,0 +1,3 @@
+. /home/teto/.config/bash/lib.sh
+export PASSWORD_STORE_DIR="$TETO_SECRETS_FOLDER/password-store"
+pass "$@"

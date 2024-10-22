@@ -46,7 +46,7 @@ none_ls.setup({
         none_ls.builtins.formatting.yamlfmt, -- from google
         none_ls.builtins.formatting.prettier,
         -- none_ls.builtins.formatting.markdown_toc,
-        none_ls.builtins.formatting.nixpkgs_fmt,
+        -- none_ls.builtins.formatting.nixpkgs_fmt,
         none_ls.builtins.formatting.treefmt.with({
             -- treefmt requires a config file
             condition = function(utils)

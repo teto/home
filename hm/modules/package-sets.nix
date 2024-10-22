@@ -66,7 +66,8 @@ in
     (mkIf cfg.llms {
       home.packages = [
 
-        # pkgs.aider-chat  # breaks
+        # pkgs.ollama # to test huggingface
+        pkgs.aider-chat # breaks
         pkgs.python3Packages.huggingface-hub
       ];
     })
@@ -104,7 +105,7 @@ in
           # khard # see khal.nix instead ?
           # libsecret  # to consult
           # newsboat #
-          # mujmap # to sync notmuch tags across jmap 
+          # mujmap # to sync notmuch tags across jmap
           pkgs.vlc
           # leafnode dovecot22 dovecot_pigeonhole fetchmail procmail w3m
           # mairix mutt msmtp lbdb contacts spamassassin
@@ -179,6 +180,8 @@ in
           xdg-utils
           xdg-terminal-exec # necessary for gio launch to launch terminal
 
+          # Run xwayland-satellite. You can specify an X display to use (i.e. :12). Be sure to set the same DISPLAY
+          # the package contains a systemd service
           xwayland-satellite # to launch X applications within wayland (and without a full Xwayland ?)
 
         ];
@@ -194,7 +197,7 @@ in
         pkgs.libreoffice
         pkgs.simple-scan
 
-        pkgs.nautilus # demande webkit/todo replace by nemo ?
+        # pkgs.nautilus # demande webkit/todo replace by nemo ?
       ];
 
     })
@@ -205,8 +208,9 @@ in
         # khard # see khal.nix instead ?
         # libsecret  # to consult
         # newsboat #
+        carl # not upstreamed yet. cargo cal
         immich-cli
-        mujmap # to sync notmuch tags across jmap
+        mujmap-unstable # to sync notmuch tags across jmap
         # signal-desktop # installe a la main
         # memento # broken capable to display 2 subtitles at same time
         # leafnode dovecot22 dovecot_pigeonhole fetchmail procmail w3m
@@ -222,6 +226,8 @@ in
         hakuneko
         memento # broken capable to display 2 subtitles at same time
         vlc
+        # pinta # photo editing
+
         # leafnode dovecot22 dovecot_pigeonhole fetchmail procmail w3m
         # mairix mutt msmtp lbdb contacts spamassassin
         # element-desktop # TODO this should go into nix profile install
@@ -241,7 +247,7 @@ in
       ];
     })
 
-    (mkIf cfg.developer {
+    (mkIf cfg.kubernetes {
       home.packages = [
         pkgs.k9s
         pkgs.kubectl
@@ -259,6 +265,11 @@ in
         gettext # for envsubst (TO NOT CONFOUND with gettext's envsubst)
         sops # password 'manager'
         glab # gitlab cli
+        hexyl # hexcode viewer
+
+        libossp_uuid # for the 'libuuid' executable
+
+        jujutsu
         # TODO pass to vim makeWrapperArgs
         # nodePackages.bash-language-server
         # just in my branch :'(
@@ -306,6 +317,7 @@ in
 
         haskellPackages.fast-tags # generate TAGS file for vim
         hurl # http tester (broken)
+        httpie # for api testing
 
         fre # generate a frequency database
 
@@ -320,11 +332,12 @@ in
         nix-update # nix-update <ATTR> to update a software
         nix-index # to list package contents
         # nix-top # (abandoned) to list current builds
-        nixfmt # the official one
-        # nixfmt
+        nixfmt-rfc-style # the official one
         nixpkgs-review # to help review nix packages
         # nodePackages."@bitwarden/cli" # 'bw' binary # broken
         patchutils # for interdiff
+
+        rainfrog # database exploration
         process-compose # docker-compose - like
         # rpl # to replace strings across files
         strace
@@ -343,9 +356,9 @@ in
       home.packages = with pkgs; [
 
         eva # calculette in a REPL
-        nodePackages.insect # fancy calculator
+        numbat # fancy calculator, child of 'insect'
         fend # rust unit convertor
-        pcalc # cool calc, see insect too
+        pcalc # cool calc, see numbat too
 
         graphviz
       ];
@@ -376,7 +389,7 @@ in
         wofi # rofi-like
         slurp # capture tool
         # lavalauncher # TODO a tester
-        wf-recorder # for screencasts
+        # wf-recorder # (broken) for screencasts
         # bemenu as a dmenu replacement
         wl-clipboard # wl-copy / wl-paste
         wdisplays # to show
@@ -401,7 +414,7 @@ in
         # swayrst #  https://github.com/Nama/swayrst # not packaged yet
 
         # sway overview, draws layouts for each workspace: dope https://github.com/milgra/sov
-        # sov  
+        # sov
         nwg-bar # locks nothing
         nwg-drawer # launcher
         nwg-menu
@@ -431,6 +444,7 @@ in
       home.packages = with pkgs; [
         # pkgs.powertop # superuseful
         # pkgs.pcm
+        pkgs.mokuro
         pkgs.python3Packages.manga_ocr
         tagainijisho # japanse dict; like zkanji Qt based
         # ${config.system}

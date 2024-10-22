@@ -1,10 +1,11 @@
 # shellcheck shell=bash
+alias pc="process-compose"
 alias n="nix develop"
 alias nb='nix build'
 alias nb1='nix build --option builders "$NOVA_OVH1" -j0'
 alias n1='nix develop --option builders "$NOVA_OVH1" -j0'
 alias n2='nix develop --option builders "$NOVA_CAMPUS1" -j0'
-# alias n3='nix develop --option builders "$NOVA_AZURE2" -j0'
+# alias n3='nix develop --option builders "$NOVA_CAMPUS2" -j0'
 
 # Haskell related aliases{{{
 # alias nhs92="nix develop \$HOME/home#nhs92"

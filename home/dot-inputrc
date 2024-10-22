@@ -50,6 +50,8 @@ set vi-cmd-mode-string \1\e[2 q\2
 #set keymap vi-command
 "k": previous-history
 "j": next-history
+"\C-p": previous-history
+"\C-n": next-history
 
 # Control-a: beginning-of-line
 # Control-e: end-of-line

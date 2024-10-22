@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  dotfilesPath,
   ...
 }:
 {
@@ -11,6 +12,12 @@
     XDG_SESSION_TYPE = "wayland";
     # QT_WAYLAND_DISABLE_WINDOWDECORATION=1
     # SetLoginEnvironment=no
+  };
+
+  user.settings.Manager.DefaultEnvironment = {
+    # when use-xdg-directories is true, the bin is in $XDG_STATE_HOME/
+    PATH = "/home/teto/.local/state/nix/profile/bin;${dotfilesPath}/bin";
+    # /home/teto/.nix-profile/bin:/nix/profile/bin:/home/teto/.local/state/nix/profile/bin:/etc/profiles/per-user/teto/bin:/nix/var/nix/profiles/default/bin:/run/current-system/sw/bin:/home/teto/.local/share/../bin
   };
 
   # systemd.user.settings

@@ -1,0 +1,5 @@
+
+On the first run one can select a model with:
+@code.start
+result/bin/whisper-cpp-download-ggml-model medium
+@code.end

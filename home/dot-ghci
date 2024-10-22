@@ -1,0 +1,33 @@
+-- https://downloads.haskell.org/~ghc/7.0.1/docs/html/users_guide/ghci-dot-files.html
+-- :set -XNoImplicitPrelude
+-- :m + GOA
+-- setLambdabotHome "/home/teto/.cabal/bin"
+-- Alternatively, for POSIX-systems providing "which", you can use:
+-- findPosixLambdabot >>= setLambdabotHome
+-- wakeup
+-- :def bs        lambdabot "botsnack"
+-- :def pl        lambdabot "pl"
+-- :def index     lambdabot "index"
+-- :def docs      lambdabot "docs"
+-- :def instances lambdabot "instances"
+-- :def hoogle    lambdabot "hoogle"
+-- :def source    lambdabot "fptools"
+-- :def where     lambdabot "where"
+-- :def version   lambdabot "version"
+-- :def src lambdabot "src"
+
+-- Turn off output for resource usage and types.  This is to reduce verbosity when reloading this file.
+:unset +s +t
+-- Turn on multi-line input and remove the distracting verbosity.
+:set +m -v0
+-- Turn off all compiler warnings and turn on OverloadedStrings for interactive input.
+-- :seti -w -XOverloadedStrings
+-- Set the preferred editor for use with the :e command.  I would recommend using an editor in a separate terminal, and using :r to reload, but :e can still be useful for quick edits from within GHCi.
+:set editor nvim
+
+-- rest of file
+
+-- Use :rr to reload this file.
+:def! rr \_ -> return ":script ~/.ghci"
+-- Turn on output of types.  This line should be last.
+:set +t

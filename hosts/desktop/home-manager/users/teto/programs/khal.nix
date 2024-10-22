@@ -33,7 +33,7 @@
         # enable_mouse = true; # unknown key
         highlight_event_days = true;
         # Setting this to True will show all days, even when there is no event scheduled on that day.
-        # show_all_days = 
+        # show_all_days =
         # editor = ["vim" "-i" "NONE"];
 
         timedelta = "5d";

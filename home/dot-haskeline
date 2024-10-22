@@ -1,0 +1,4 @@
+# as advised on http://wiki.haskell.org/GHC/GHCi
+maxHistorySize: Nothing
+historyDuplicates: IgnoreConsecutive
+completionPromptLimit: Just 250

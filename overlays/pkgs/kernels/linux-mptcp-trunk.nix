@@ -33,7 +33,7 @@ buildLinux (
     # this can take a long time
     src = builtins.fetchGit {
       # url = https://github.com/teto/mptcp.git;
-      #  tilpner: arg the git fetch was working but after 50mn died with "remote: fatal: Out of memory, calloc failed". I will give more memory to the VM 
+      #  tilpner: arg the git fetch was working but after 50mn died with "remote: fatal: Out of memory, calloc failed". I will give more memory to the VM
       # now it seems like the firewall blocks some ports that could be used
 
       # this was too slow on gitolite

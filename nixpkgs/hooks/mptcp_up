@@ -16,14 +16,14 @@ fi
 
 if [ -z "$DEVICE_IFACE" ]; then
 
-	${utillinux}/logger "invalid \$DEVICE_IFACE"
+	${util-linux}/logger "invalid \$DEVICE_IFACE"
 	exit 0
 fi
 
 # mkdir -p /etc/iproute2
 # FIRST, make a table-alias
 if [ `grep "$DEVICE_IFACE" /etc/iproute2/rt_tables | wc -l` -eq 0 ]; then
-	${utillinux}/logger "Adding to iproute2/rt_tables \$DEVICE_IFACE"
+	${util-linux}/logger "Adding to iproute2/rt_tables \$DEVICE_IFACE"
 	NUM=$(wc -l < /etc/iproute2/rt_tables)
 	echo "$NUM  $DEVICE_IFACE" >> /etc/iproute2/rt_tables
 

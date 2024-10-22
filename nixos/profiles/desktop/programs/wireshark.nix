@@ -6,7 +6,7 @@
 }:
 {
   # won't work on nixos yet
-  # programs.wireshark. 
+  # programs.wireshark.
   enable = true; # installs setuid
   package = pkgs.wireshark-cli; # which one
 

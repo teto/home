@@ -1,3 +1,18 @@
+-- if vim.env.PROF then
+--   -- example for lazy.nvim
+--   -- change this to the correct path for your plugin manager
+--   -- ~/.local/share/nvim/site/pack/luarocks/opt/snacks.nvim/
+--   local snacksFolder = vim.fn.stdpath("data") .. "/site/pack/luarocks/opt/snacks.nvim"
+--   vim.opt.rtp:append(snacksFolder)
+--   require("snacks.profiler").startup({
+--     startup = {
+--       event = "VimEnter", -- stop profiler on this event. Defaults to `VimEnter`
+--       -- event = "UIEnter",
+--       -- event = "VeryLazy",
+--     },
+--   })
+-- end
+
 -- vim: set noet fdm=marker fenc=utf-8 ff=unix sts=0 sw=4 ts=4 :
 -- https://github.com/nanotee/nvim-lua-guide#using-meta-accessors
 -- https://www.reddit.com/r/neovim/comments/o8dlwg/how_to_append_to_an_option_in_lua/
@@ -77,113 +92,16 @@ end
 
 -- vim.opt.packpath:prepend('/home/teto/gp.nvim2')
 
--- vim.g.baleia = require("baleia").setup({ })
--- -- Command to colorize the current buffer
--- vim.api.nvim_create_user_command("BaleiaColorize", function()
--- 	vim.g.baleia.once(vim.api.nvim_get_current_buf())
--- end, { bang = true })
-
--- Command to show logs
--- vim.api.nvim_create_user_command("BaleiaLogs", vim.g.baleia.logger.show, { bang = true })
-
 -- TODO prefix with gp_defaults.
 -- local defaults = require('gp.defaults')
 --
 -- local chat_system_prompt = defaults.chat_system_prompt
-
-local chat_system_prompt = 'You are a general AI assistant.\n\n'
-    .. 'The user provided the additional info about how they would like you to respond:\n\n'
-    .. "- If you're unsure don't guess and say you don't know instead.\n"
-    .. '- Ask question if you need clarification to provide better answer.\n'
-    .. '- Think deeply and carefully from first principles step by step.\n'
-    .. '- Zoom out first to see the big picture and then zoom in to details.\n'
-    .. '- Use Socratic method to improve your thinking and coding skills.\n'
-    .. "- Don't elide any code from your output if the answer requires coding.\n"
-    .. "- Take a deep breath; You've got this!\n"
-
-vim.g.gp_nvim = {
-    agents = {
-        -- unpack(default_config.agents),
-        -- Disable ChatGPT 3.5
-        {
-            provider = 'localai',
-            name = 'Mistral',
-            chat = true,
-            command = true,
-            model = { model = 'mistral', temperature = 1.1, top_p = 1 },
-            system_prompt = chat_system_prompt,
-            -- system_prompt = default_config.agents[1].system_prompt
-            -- Gp: Agent Mistral is missing model or system_prompt
-            -- If you want to disable an agent, use: { name = 'Mistral', disable = true },
-        },
-        -- {
-        --
-        --   provider = "openai",
-        --   name = "ChatGPT4",
-        --   -- name = "toto",
-        --   chat = true,
-        --   command = true,
-        --   -- string with model name or table with model name and parameters
-        --   model = { model = "gpt-4-1106-preview", temperature = 1.1, top_p = 1 },
-        --   -- system prompt (use this to specify the persona/role of the AI)
-        --   system_prompt = "You are a general AI assistant.\n\n"
-        --  .. "The user provided the additional info about how they would like you to respond:\n\n"
-        --  .. "- If you're unsure don't guess and say you don't know instead.\n"
-        --  .. "- Ask question if you need clarification to provide better answer.\n"
-        --  .. "- Think deeply and carefully from first principles step by step.\n"
-        --  .. "- Zoom out first to see the big picture and then zoom in to details.\n"
-        --  .. "- Use Socratic method to improve your thinking and coding skills.\n"
-        --  .. "- Don't elide any code from your output if the answer requires coding.\n"
-        --  .. "- Take a deep breath; You've got this!\n",
-        -- },
-    },
-    -- image_dir = (os.getenv("TMPDIR") or os.getenv("TEMP") or "/tmp") .. "/gp_images",
-    image = {
-        store_dir = vim.fn.stdpath('cache') .. '/gp_images',
-    },
-    whisper = {
-        store_dir = vim.fn.stdpath('cache') .. '/gp_whisper',
-        language = 'en',
-    },
-
-    -- chat_agents = agents,
-    -- openai_api_endpoint = "http://localhost:8080/v1/chat/completions",
-    -- agents = agents,
-    -- chat_topic_gen_model = 'mistral',
-    -- model = { model = "mistral", temperature = 1.1, top_p = 1 },
-
-    providers = {
-        copilot = {},
-        openai = {
-            -- response from the config.providers.copilot.secret command { "bash", "-c", "cat ~/.config/github-copilot/hosts.json | sed -e 's/.*oauth_token...//;s/\".*//'" } is empty
-            secret = os.getenv('OPENAI_API_KEY'),
-            -- cmd_prefix = "Gp",
-            endpoint = 'https://api.openai.com/v1/chat/completions',
-        },
-        -- ollama = {},
-        localai = {
-            secret = '',
-            endpoint = 'http://localhost:11111/v1/chat/completions',
-        },
-        googleai = {
-            endpoint = 'https://generativelanguage.googleapis.com/v1beta/models/{{model}}:streamGenerateContent?key={{secret}}',
-            secret = os.getenv('GOOGLEAI_API_KEY'),
-        },
-
-        anthropic = {
-            endpoint = 'https://api.anthropic.com/v1/messages',
-            secret = os.getenv('ANTHROPIC_API_KEY'),
-        },
-    },
-}
 
 vim.g.loaded_matchit = 1
 vim.opt.shortmess:append('I')
 vim.opt.foldlevel = 99
 vim.opt.mousemoveevent = true
 vim.o.grepprg = 'rg --vimgrep --no-heading --smart-case'
-
----  set guicursor as a red block in normal mode
 
 -- workaround slow neovim https://github.com/neovim/neovim/issues/23725
 local ok, wf = pcall(require, 'vim.lsp._watchfiles')
@@ -326,7 +244,7 @@ vim.opt.mousemodel = 'popup_setpos'
 require('teto.context_menu').setup_rclick_menu_autocommands()
 
 -- MenuPopup
-vim.opt.signcolumn = 'auto:3'
+vim.opt.signcolumn = 'auto:1-3'
 
 --set shada=!,'50,<1000,s100,:0,n/home/teto/.cache/nvim/shada
 
@@ -484,8 +402,19 @@ vim.g.fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %
 -- " use 'bronson/vim-trailing-whitespace' " :FixWhitespace
 
 -- TODO this should depend on theme ! computed via lush
-vim.api.nvim_set_hl(0, 'DiagnosticVirtualTextError', { fg = 'red' })
-vim.api.nvim_set_hl(0, 'DiagnosticVirtualTextDebug', { fg = 'green' })
+vim.api.nvim_create_autocmd('ColorScheme', {
+    desc = 'Set italic codelens on new colorschemes',
+    callback = function()
+        -- TODO create a TextYankPost highlight if it doesn't exist in scheme ?!
+        vim.api.nvim_set_hl(0, 'LspCodeLens', { italic = true, bg = 'blue' })
+        vim.api.nvim_set_hl(0, 'DiagnosticVirtualTextError', { fg = 'red' })
+        vim.api.nvim_set_hl(0, 'DiagnosticVirtualTextDebug', { fg = 'green' })
+        -- autocmd ColorScheme *
+        --       \ highlight Comment gui=italic
+        --       \ | highlight Search gui=underline
+        --       \ | highlight MatchParen guibg=NONE guifg=NONE gui=underline
+    end,
+})
 
 -- http://stackoverflow.com/questions/28613190/exclude-quickfix-buffer-from-bnext-bprevious
 vim.keymap.set('n', '<Leader><Leader>', '<Cmd>b#<CR>', { desc = 'Focus alternate buffer' })
@@ -518,15 +447,6 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     end,
 })
 
-vim.api.nvim_create_autocmd('ColorScheme', {
-    desc = 'Set italic codelens on new colorschemes',
-    callback = function()
-        -- TODO create a TextYankPost highlight if it doesn't exist in scheme ?!
-        vim.api.nvim_set_hl(0, 'LspCodeLens', { italic = true, bg = 'Red' })
-    end,
-})
-
--- vim.api.nvim_set_hl(0, 'LspCodeLens', { bg = 'red' })
 -- " auto reload vim config on save
 -- " Watch for changes to vimrc
 -- " augroup myvimrc
@@ -540,12 +460,6 @@ vim.cmd(
     [[sign define DiagnosticSignInformation text=I texthl=LspDiagnosticsSignInformation linehl= numhl=CustomLineWarn]]
 )
 vim.cmd([[sign define DiagnosticSignHint text=H texthl=LspDiagnosticsSignHint linehl= numhl=]])
-
--- autocmd ColorScheme *
---       \ highlight Comment gui=italic
---       \ | highlight Search gui=underline
---       \ | highlight MatchParen guibg=NONE guifg=NONE gui=underline
---       \ | highlight NeomakePerso cterm=underline ctermbg=Red  ctermfg=227  gui=underline
 
 -- netrw config {{{
 vim.g.netrw_nogx = 1 -- disable netrw gx
@@ -594,48 +508,7 @@ end, {
 local has_sniprun, sniprun = pcall(require, 'sniprun')
 
 if has_sniprun then
-    sniprun.setup({
-        -- selected_interpreters = {'Python3_fifo'},        --" use those instead of the default for the current filetype
-        -- repl_enable = {'Python3_fifo', 'R_original'},    --" enable REPL-like behavior for the given interpreters
-        -- repl_disable = {},                               --" disable REPL-like behavior for the given interpreters
-        interpreter_options = { --# interpreter-specific options, see docs / :SnipInfo <name>
-            Bash_original = {
-                use_on_filetypes = { 'nix' }, --# the 'use_on_filetypes' configuration key is
-            },
-            --# use the interpreter name as key
-            --GFM_original = {
-            --use_on_filetypes = {"markdown.pandoc"}    --# the 'use_on_filetypes' configuration key is
-            --											--# available for every interpreter
-            --},
-            --Python3_original = {
-            --	error_truncate = "auto"         --# Truncate runtime errors 'long', 'short' or 'auto'
-            --									--# the hint is available for every interpreter
-            --									--# but may not be always respected
-            --}
-        },
-        -- possible values are 'none', 'single', 'double', or 'shadow'
-        borders = 'single',
-        --live_display = { "VirtualTextOk" }, --# display mode used in live_mode
-        ----# You can use the same keys to customize whether a sniprun producing
-        ----# no output should display nothing or '(no output)'
-        --show_no_output = {
-        --	"Classic",
-        --	"TempFloatingWindow",      --# implies LongTempFloatingWindow, which has no effect on its own
-        --},
-        --" you can combo different display modes as desired
-        display = {
-            'Classic', -- "display results in the command-line  area
-            'VirtualTextOk', -- "display ok results as virtual text (multiline is shortened)
-        },
-    })
-    vim.api.nvim_set_keymap('v', 'f', '<Plug>SnipRun', { silent = true })
-    vim.api.nvim_set_keymap(
-        'n',
-        '<leader>f',
-        '<Plug>SnipRunOperator',
-        { silent = true, desc = 'Run code (pending operator)' }
-    )
-    vim.api.nvim_set_keymap('n', '<leader>ff', '<Plug>SnipRun', { silent = true, desc = 'Run some code' })
+    require('plugins.sniprun')
 end
 
 -- add description
@@ -734,21 +607,22 @@ end
 -- 	-- check :h bufferline-configuration
 -- end
 
+vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
+    pattern = '*.gitlab-ci*.{yml,yaml}',
+    callback = function()
+        vim.bo.filetype = 'yaml.gitlab'
+    end,
+})
+
 vim.g.tex_flavor = 'latex'
 
 require('teto.treesitter')
-require('teto.lspconfig')
-
 -- vim.lsp.set_log_level('DEBUG')
-
--- local has_iron, iron = pcall(require, 'iron.core')
--- if has_iron then
 
 -- setup haskell-tools
 vim.g.haskell_tools = require('teto.haskell-tools').generate_settings()
 
 vim.opt.background = 'light' -- or "light" for light mode
-
 vim.opt.showbreak = '↳ ' -- displayed in front of wrapped lines
 
 -- TODO add a command to select a ref  and call Gitsigns change_base afterwards
@@ -839,13 +713,6 @@ if teto_notify.should_use_provider() then
     teto_notify.override_vim_notify()
 end
 
--- vim.api.nvim_create_autocmd({ "VimEnter" }, {
---   callback = function()
--- 	require'plugins.oil-nvim'
--- 	require'plugins.bufferline'
---   end,
--- })
-
 -- same for e ?
 vim.keymap.set('n', '[w', function()
     vim.diagnostic.goto_prev({ wrap = true, severity = vim.diagnostic.severity.WARN })
@@ -854,6 +721,7 @@ vim.keymap.set('n', ']w', function()
     vim.diagnostic.goto_next({ wrap = true, severity = vim.diagnostic.severity.WARN })
 end, { buffer = true })
 
+-- TODO add a set E for across buffers
 vim.keymap.set('n', '[e', function()
     vim.diagnostic.goto_prev({ wrap = true, severity = vim.diagnostic.severity.ERROR })
 end, { buffer = true })
@@ -868,8 +736,5 @@ if has_dbee then
     dbee.setup({})
 end
 
-vim.keymap.set('n', '<C-t>', function()
-    require('menu').open('default')
-end, {})
-
 vim.opt.completeopt = 'preview,menu,menuone'
+vim.opt.messagesopt = 'wait:1000,history:500'

@@ -5,5 +5,9 @@
   ...
 }:
 {
-  services.upower.enable = false;
+  enable = true;
+  # percentageLow = 35;
+  # percentageCritical = 30;
+  # percentageAction = 25;
+
 }

@@ -5,8 +5,8 @@
   ...
 }:
 {
-  # programs.toto = 
-  # defaultOptions = 
+  # programs.toto =
+  # defaultOptions =
 
   # execWheelOnly
   # extraOptions

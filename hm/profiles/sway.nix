@@ -24,7 +24,9 @@ in
 # TODO load sway folder via haumea
 {
 
-  imports = [ ./flameshot.nix ];
+  imports = [
+    ./flameshot.nix
+  ];
 
   # TODO it is done in sway.nix
   # replaced with  package-sets.wayland
@@ -41,7 +43,7 @@ in
     systemd.enable = true;
   };
 
-  # 
+  #
   systemd.user.services.swayrd.Service = lib.mkIf config.programs.swayr.enable {
     Environment = [
       "PATH=${
@@ -55,14 +57,14 @@ in
   # }}}
 
   # todo prepend sharedExtraConfig
-  # xdg.configFile."sway/config" = 
+  # xdg.configFile."sway/config" =
 
   wayland.windowManager.sway = {
     enable = true;
     # creates a sway-session target that is started on wayland start
     systemd.enable = true;
 
-    # disabling swayfx until  those get merged 
+    # disabling swayfx until  those get merged
     # https://github.com/nix-community/home-manager/pull/4039
     # https://github.com/NixOS/nixpkgs/pull/237044
 
@@ -173,8 +175,8 @@ in
         # todo put a better path
         # example = { "HDMI-A-2" = { bg = "~/path/to/background.png fill"; }; };
         # example = { "HDMI-A-2" = { bg = "~/path/to/background.png fill"; }; };
-       #         Some outputs may have different names when disconnecting and reconnecting. To identify these, the name can be substituted for a string consisting of the make, model and serial which you can get from swaymsg -t get_outputs. Each value must be  sepa‐ rated by one space. For example:
-       #     output "Some Company ABC123 0x00000000" pos 1920 0
+        #         Some outputs may have different names when disconnecting and reconnecting. To identify these, the name can be substituted for a string consisting of the make, model and serial which you can get from swaymsg -t get_outputs. Each value must be  sepa‐ rated by one space. For example:
+        #     output "Some Company ABC123 0x00000000" pos 1920 0
         "HDMI-A-1" = {
           bg = "${../../wallpapers/toureiffel.jpg} fill";
 
@@ -199,7 +201,7 @@ in
       };
       # terminal = term;
       bars = [ ];
-      # menu = 
+      # menu =
       workspaceOutputAssign = [
         {
           workspace = "toto";
@@ -224,7 +226,8 @@ in
 
         # start a terminal
         "${mod}+Return" = "exec --no-startup-id ${term}";
-        "${mod}+Shift+Return" = ''exec --no-startup-id ${term} -d "$(${toString ../../bin/kitty-get-cwd.sh})"'';
+        "${mod}+Shift+Return" =
+          ''exec --no-startup-id ${term} -d "$(${toString ../../bin/kitty-get-cwd.sh})"'';
 
         Menu = "exec ${rofi}/bin/rofi -modi 'drun' -show drun";
         "${mod}+Tab" = "exec ${rofi}/bin/rofi -modi 'drun' -show drun";
@@ -241,16 +244,20 @@ in
         # TODO make it a command
         "${mod}+Ctrl+L" = "exec ${myLib.swaylockCmd} ";
 
-        # TODO notify/throw popup when clipman fails 
+        # TODO notify/throw popup when clipman fails
         # "${mod}+Ctrl+h" = ''exec ${pkgs.clipman}/bin/clipman pick -t rofi || ${sharedConfig.notify-send} 'Failed running clipman' '';
         # cliphist list | rofi -dmenu
-        "${mod}+Ctrl+h" = ''exec ${pkgs.cliphist}/bin/cliphist list | rofi -dmenu  -m -1 -p "Select item to copy" -lines 10 -width 35 | cliphist decode | wl-copy | ${sharedConfig.notify-send} 'Failed running cliphist' '';
+        "${mod}+Ctrl+h" =
+          ''exec ${pkgs.cliphist}/bin/cliphist list | rofi -dmenu  -m -1 -p "Select item to copy" -lines 10 -width 35 | cliphist decode | wl-copy | ${sharedConfig.notify-send} 'Failed running cliphist' '';
 
         # kitty nvim -c ":Neorg workspace notes"
-        "${mod}+F1" = ''exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 70 --height 60 --mark neorg-notes --command 'kitty nvim +Notes'  '';
-        "${mod}+F2" = ''exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 70 --height 60 --mark audio --command 'kitty ${config.programs.ncmpcpp.package}/bin/ncmpcpp' '';
+        "${mod}+F1" =
+          ''exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 70 --height 60 --mark neorg-notes --command 'kitty nvim +Notes'  '';
+        "${mod}+F2" =
+          ''exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 70 --height 60 --mark audio --command 'kitty ${config.programs.ncmpcpp.package}/bin/ncmpcpp' '';
         # "${mod}+F3" = ''exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 70 --height 60 --mark scratchpad --command 'kitty nvim' '';
-        "${mod}+F3" = ''exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 90 --height 90 --mark scratchpad --command 'kitty nvim' '';
+        "${mod}+F3" =
+          ''exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 90 --height 90 --mark scratchpad --command 'kitty nvim' '';
 
         "--release Print" = "exec ${pkgs.sway-contrib.grimshot}/bin/grimshot copy area";
         # bindsym F12 exec sway-scratchpad --command "kitty -d /home/user/projects" --mark terminal
@@ -279,7 +286,6 @@ in
     #       include ~/.config/i3/config.shared
 
     extraConfig = ''
-
       # timeout in ms
       include ~/.config/sway/manual.config
     '';
@@ -293,6 +299,7 @@ in
     # TODO we should wrap sway with that ?
     # some of these advised by https://github.com/flameshot-org/flameshot/blob/master/docs/Sway%20and%20wlroots%20support.md
     # export MOZ_ENABLE_WAYLAND=1
+    # TODO put it in the wrapper started by the .desktop file !
     extraSessionCommands = ''
       # according to https://www.reddit.com/r/swaywm/comments/11d89w2/some_workarounds_to_use_sway_with_nvidia/
       export XWAYLAND_NO_GLAMOR=1

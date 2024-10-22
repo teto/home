@@ -1,2 +1,24 @@
 * hack on ghc
   Use "nix run "
+
+* ghci
+
+-ghci-script ~/toto.
+-ignore-dot-ghci
+
+import System.Environment
+getEnv "toto"
+
+https://github.com/haskell/haskeline/wiki/UserPreferences
+
+.ghci
+-ghc-script
+-ignore-dot-ghci
+* multiline strings in ghci
+Prelude> :{
+Prelude| let addTwo :: Int -> Int -> Int
+Prelude|     addTwo x y = x + y 
+Prelude| :}
+Prelude> addTwo 4 7
+
+or :set +m

@@ -27,7 +27,7 @@ let
     # lua require'telescope-all-recent'.toggle_debug()
 
     # (luaPlugin {
-    #   plugin = telescope-all-recent-nvim; 
+    #   plugin = telescope-all-recent-nvim;
     #   config = ''
     #        require'telescope-all-recent'.setup{
     #    -- your config goes here
@@ -36,21 +36,21 @@ let
 
   ];
 
-  # orgmodePlugins = with pkgs.vimPlugins; [ 
-  neorgPlugins =
-    with pkgs.vimPlugins;
-    [
-    ];
-
   # try via rocks.nvim first
   neotestPlugins = with pkgs.vimPlugins; [
-    # neotest 
+    # neotest
     # neotest-haskell
   ];
 
   luaPlugins = with pkgs.vimPlugins; [
+    pkgs.vimPlugins.llm-nvim
+
     pkgs.vimPlugins.nvim-treesitter-parsers.nix
     pkgs.vimPlugins.nvim-treesitter-parsers.hurl
+
+    # TODO check that it brings xxd in scope
+    # pkgs.vimPlugins.hex-nvim
+
     # {
     #   # we should have a file of the grammars as plugins
     #   # symlinkJoin
@@ -85,9 +85,9 @@ let
     # TODO restore
     # (luaPlugin { plugin = image-nvim; })
 
-    # (luaPlugin { 
+    # (luaPlugin {
     #  # this is a peculiarly complex one that needs pynvim, image.nvim
-    #  plugin = molten-nvim; 
+    #  plugin = molten-nvim;
     # })
 
     # TODO it needs some extra care
@@ -137,7 +137,7 @@ let
     # (luaPlugin { plugin = lush-nvim; }) # dependency of some colorschemes
 
     (luaPlugin {
-      # TODO could try 
+      # TODO could try
       # really helps with syntax highlighting
       plugin = haskell-vim;
       config = ''
@@ -166,6 +166,7 @@ let
     # })
 
     (luaPlugin {
+      # for yaml lsp
       plugin = SchemaStore-nvim;
     })
 
@@ -179,6 +180,7 @@ let
     # { plugin = kui-nvim; }
     # FIX https://github.com/NixOS/nixpkgs/issues/169293 first
 
+    # this could be moved to my config
     (luaPlugin {
       plugin = nvimdev-nvim;
       optional = true;
@@ -194,8 +196,10 @@ let
           --}}}'';
     })
 
-    # (luaPlugin { plugin = sniprun; })
+    (luaPlugin { plugin = sniprun; })
+
     (luaPlugin { plugin = telescope-nvim; })
+
     # (luaPlugin { plugin = telescope-manix; })
     # call with :Hoogle
     # (luaPlugin { plugin = glow-nvim; })
@@ -208,10 +212,11 @@ let
     #    '';
     # })
 
-    (luaPlugin { plugin = stylish-nvim; })
+    # cool but I dont use it
+    # (luaPlugin { plugin = stylish-nvim; })
 
     # doesnt seem to work + problematic on neovide
-    # (luaPlugin { 
+    # (luaPlugin {
     #  plugin = image-nvim;
     #     /* lua */
     #     config =  ''
@@ -250,7 +255,7 @@ let
   ];
 
   filetypePlugins = with pkgs.vimPlugins; [
-    # { plugin = pkgs.vimPlugins.hurl; }
+    { plugin = pkgs.vimPlugins.hurl; }
     { plugin = wmgraphviz-vim; }
     { plugin = fennel-vim; }
     { plugin = vim-toml; } # TODO use treesitter
@@ -279,12 +284,15 @@ let
     haskellPackages.hasktags
     haskellPackages.fast-tags
 
-    # llm-ls
+    llm-ls
     manix # should be no need, telescope-manix should take care of it
     # nodePackages.vscode-langservers-extracted # needed for typescript language server IIRC
     # prettier sadly can't use buildNpmPackage because no lockfile https://github.com/NixOS/nixpkgs/issues/229475
     nodePackages.dockerfile-language-server-nodejs
-    nodePackages.typescript-language-server
+
+    # TODO map it to a plugin instead
+    # nodePackages.typescript-language-server
+
     # pandoc # for markdown preview, should be in the package closure instead
     # pythonPackages.pdftotext  # should appear only in RC ? broken
     nil # a nix lsp, can be debugged with NIL_LOG_PATH and NIL_LOG=nil=debug
@@ -299,7 +307,7 @@ let
     marksman # markdown LSP server
 
     # for none-ls
-    nixfmt # -rfc-style #
+    nixfmt-rfc-style # -rfc-style #
     nodePackages.prettier
     python3Packages.flake8 # for nvim-lint and some nixpkgs linters
     # soxWithMp3 = final.sox.override { llama-cpp = llama-cpp-matt; };
@@ -320,7 +328,7 @@ in
 {
   programs.neovim = {
 
-    plugins = luaPlugins ++ filetypePlugins ++ telescopePlugins ++ neorgPlugins ++ neotestPlugins;
+    plugins = luaPlugins ++ filetypePlugins ++ telescopePlugins ++ neotestPlugins;
 
     # plugins = with pkgs.vimPlugins; [
     #  tint-nvim

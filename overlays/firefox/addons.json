@@ -1,4 +1,11 @@
 [
+ {
+  "slug": "argent-x"
+ },
+ {
+  "slug": "ether-metamask",
+  "pname": "metamask"
+ },
   {
 	"slug": "switch-to-audible-tab"
   },

@@ -4,7 +4,7 @@
   pkgs,
   ...
 }:
-# services.thermald. 
+# services.thermald.
 
 {
   enable = true;

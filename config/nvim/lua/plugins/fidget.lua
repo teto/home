@@ -3,11 +3,13 @@ require('fidget').setup({
         ignore_done_already = true, -- Ignore new tasks that are already complete
     },
     notification = {
-        poll_rate = 10, -- How frequently to update and render notifications
+        poll_rate = 20, -- How frequently to update and render notifications
         filter = vim.log.levels.INFO, -- Minimum notifications level
         override_vim_notify = false, -- Automatically override vim.notify() with Fidget
         -- How to configure notification groups when instantiated
-        configs = { default = require('fidget.notification').default_config },
+        configs = {
+            default = require('fidget.notification').default_config,
+        },
         -- Options related to how notifications are rendered as text
         view = {
             stack_upwards = true, -- Display notification items from bottom to top

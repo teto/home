@@ -8,10 +8,6 @@
   lib,
   ...
 }:
-let
-  # TODO add a justfile to run the basic steps
-  banner = "You can start the nextcloud-add-user.service unit if teto user doesnt exist yet";
-in
 {
   networking = {
     hostName = "neotokyo";
@@ -20,7 +16,7 @@ in
     };
   };
 
-  system.stateVersion = "23.11";
+  system.stateVersion = "24.05";
 
   # imported from gandhi ?
   boot.initrd.kernelModules = [
@@ -39,14 +35,13 @@ in
     serviceConfig.Restart = "always";
   };
 
-  programs.bash.interactiveShellInit = ''
-    cat "${pkgs.writeText "welcome-message" banner}";
-  '';
-
   imports = [
     # for gandi
     "${modulesPath}/virtualisation/openstack-config.nix"
     flakeSelf.nixosModules.teto-nogui
+
+    flakeSelf.nixosModules.neovim
+    flakeSelf.nixosModules.ntp
 
     # ./hardware.nix
     ./services/openssh.nix
@@ -55,19 +50,15 @@ in
     # to get the first iteration going on
     ./services/gitolite.nix
     ./services/nextcloud.nix
+    ./services/postgresqlBackup.nix
     ./services/nginx.nix
     ./services/immich.nix
 
-    # ./gitolite.nix
     # ../../nixos/modules/hercules-ci-agents.nix
-
-    ../../nixos/profiles/ntp.nix
-    ../../nixos/profiles/nix-daemon.nix
-    ../../nixos/profiles/neovim.nix
     # ../../nixos/profiles/docker-daemon.nix
-    ../../nixos/profiles/server.nix
 
-    # ./blog.nix
+    ../../nixos/profiles/nix-daemon.nix
+    ../../nixos/profiles/server.nix
 
     # just to help someone on irc
     # <nixpkgs/nixos/modules/profiles/hardened.nix>
@@ -76,33 +67,44 @@ in
 
   # virtualisation.docker.enable = true;
 
-  users.users.teto = {
-    extraGroups = [
-      "nextcloud" # to be able to list files
-    ];
+  users = {
+
+    users.teto = {
+      # name = "Matt";
+      extraGroups = [
+        "nextcloud" # to be able to list files
+        "backup" # to read
+      ];
+    };
+    users.postgres = {
+      extraGroups = [
+        "backup"
+        config.users.groups.backup.name
+      ];
+    };
+    groups.backup = { };
   };
 
   home-manager.users = {
     root = {
       imports = [
-        # ./users/root.nix
-        ../../hm/profiles/neovim.nix
-        ../desktop/root/programs/ssh.nix
-      ];
 
-      # home.stateVersion = "23.11";
+        flakeSelf.homeModules.neovim
+        (
+          { ... }:
+          {
+            programs.ssh.enable = true;
+          }
+        )
+
+      ];
     };
     teto = {
       # TODO it should load the whole folder
       imports = [
+        ./home-manager/users/teto/default.nix
         flakeSelf.homeModules.teto-nogui
-
-        ./teto/default.nix
-        ../../hm/profiles/neovim.nix
-
-        # custom modules
-        # ./home.nix
-        # breaks build: doesnt like the "activation-script"
+        flakeSelf.homeModules.neovim
       ];
     };
   };
@@ -116,7 +118,7 @@ in
     # just to generate the entry used by ubuntu's grub
     grub = {
       enable = true;
-      useOSProber = true;
+      useOSProber = false;
       # install to none, we just need the generated config
       # for ubuntu grub to discover
       device = lib.mkForce "/dev/xvda";
@@ -125,7 +127,11 @@ in
 
   # security.sudo.wheelNeedsPassword = true;
 
-  # environment.systemPackages = with pkgs; [ ];
+  environment.systemPackages = [
+    pkgs.neovim
+    pkgs.zola # needed in the post-receive hook of the blog !
+    pkgs.yazi
+  ];
 
   # services.gitolite.adminPubkey = secrets.gitolitePublicKey;
 

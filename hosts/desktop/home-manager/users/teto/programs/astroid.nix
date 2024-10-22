@@ -20,10 +20,12 @@
       # TODO use "killed"
       startup.queries = {
         # "Unread iij"= "tag:unread and not tag:deleted and not tag:muted and not tag:ietf and to:coudron@iij.ad.jp";
-        "Unread gmail" = "tag:unread and not tag:deleted and not tag:muted and not tag:ietf and to:mattator@gmail.com";
+        "Unread gmail" =
+          "tag:unread and not tag:deleted and not tag:muted and not tag:ietf and to:mattator@gmail.com";
         "Flagged" = "tag:flagged";
         # "Drafts"= "tag:draft";
-        "fastmail" = "tag:unread and not tag:deleted and not tag:muted and not tag:ietf and to:matthieucoudron@fastmail.com";
+        "fastmail" =
+          "tag:unread and not tag:deleted and not tag:muted and not tag:ietf and to:matthieucoudron@fastmail.com";
         # "nova"= "tag:unread and not tag:deleted and not tag:muted and not tag:ietf and to:mattator@gmail.com";
         "ietf" = "tag:ietf";
         "gh" = "tag:gh";

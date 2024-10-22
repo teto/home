@@ -48,7 +48,7 @@
 
   # to remove "TSC_DEADLINE disabled due to Errata;
   # please update microcode to version: 0x22"
-  hardware.cpu.intel.updateMicrocode = true;
+  # hardware.cpu.intel.updateMicrocode = true;
 
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/01435119-f2c1-4316-b828-489a76df79c6";

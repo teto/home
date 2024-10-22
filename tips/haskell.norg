@@ -1,3 +1,7 @@
+* get env
+
+System.Environment.getEnv
+
 * Debug tips
 
 ** Runtime configuration
@@ -16,6 +20,7 @@
 * REPL/ghci tips
 
   use `:script` to load redundant commands
+
 
 
 ** how to set default args ?

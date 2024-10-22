@@ -13,13 +13,13 @@
   # services.gvfs.enable = true;
 
   imports = [ ];
-  services.tailscale = {
-
-    enable = true;
-
-    # necessary for headscale
-    useRoutingFeatures = "client";
-  };
+  # services.tailscale = {
+  #
+  #   enable = true;
+  #
+  #   # necessary for headscale
+  #   useRoutingFeatures = "client";
+  # };
 
   environment.systemPackages = [
     pkgs.dbeaver-bin
@@ -31,9 +31,9 @@
   # Expected by
   environment.etc."nixos/nova-nixos/config.json".text = builtins.toJSON {
     README = "this file is a dummy one, used to include most dependencies in the liveboot";
-    displayname = "MC";
+    displayname = "Matt C";
 
-    email = secrets.accounts.mail.nova.email;
+    email = secrets.nova.accounts.email;
     # password = "$6$rounds=656000$kfC6x6MDyR33Wgdo$m0IcbB1psI.yacdCwZRUvrzSeB6a5h2wnaS2VRtYV0WOPPSdWnG7vO3fGVcn9rmTGN.Ic0rWkDarHGFSkZFXM1";
     pc = "nova";
     team = "sse";
@@ -51,28 +51,11 @@
     collections = [ ];
   };
 
-  # let
-  # hmRootModule = { pkgs, ... }@args: flakeInputs.haumea.lib.load {
-  #  src = ./root;
-  #  inputs = args // {
-  #    inputs = flakeInputs;
-  #  };
-  #  transformer =  [
-  #    flakeInputs.haumea.lib.transformers.liftDefault
-
-  #  #  (x: hoistAttrs x )
-  #    # (x: )
-  #  ];
-  #   # flakeInputs.haumea.lib.transformers.liftDefault;
-  # };
-  # in 
   home-manager = {
     users = {
       root = {
         imports = [
           flakeInputs.nova-doctor.homeModules.root
-          # ./root/programs/ssh.nix
-          # ../../hm/profiles/nova/ssh-config.nix
         ];
         programs.zsh.enable = true;
         # sops.defaultSopsFile = ../secrets.yaml;
@@ -83,12 +66,5 @@
       };
     };
   };
-
-  # to test locally
-  # services.gitlab-runner.enable = true;
-
-  # nix = {
-  # };
-  #
   # programs.fuse.userAllowOther = false;
 }
