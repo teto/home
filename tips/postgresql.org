@@ -52,9 +52,15 @@ ALTER USER postgres with password ‘new-password’;
 SHOW hba_file;
 
 `sudo -u postgres createuser teto` worked
+With additionnal permissions
+sudo -u postgres createuser teto --createdb --echo -s
+CREATE USER foo WITH PASSWORD 'secret';
 
 # How to list the tables ?
 `\l`
+
+# list users
+`\du`
 
 # how to switch databases ?
 postgres=# \c sales
@@ -66,3 +72,25 @@ CREATE ROLE username superuser;
 * logging
 
  https://www.postgresql.org/docs/current/runtime-config-logging.html
+
+* ISSUES
+
+** `WARNING:  database "postgres" has a collation version mismatch`
+
+collation refers to locales/glibc etc
+```
+template1=# show lc_collate;
+ lc_collate  
+-------------
+ en_US.UTF-8
+(1 row)
+```
+
+Dont forget to add the ";"
+```
+ALTER DATABASE template1 REFRESH COLLATION VERSION;
+```
+
+** FATAL:  database "postgres" does not exist
+
+sudo -u postgres psql  -d template1

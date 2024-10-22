@@ -1,4 +1,5 @@
 # shellcheck shell=bash
+alias pc="process-compose"
 alias n="nix develop"
 alias nb='nix build'
 alias nb1='nix build --option builders "$NOVA_OVH1" -j0'

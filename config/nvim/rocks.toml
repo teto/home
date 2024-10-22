@@ -231,7 +231,7 @@ git = "lunarvim/bigfile.nvim"
 
 [plugins."iron.nvim"]
 git = "vigemus/iron.nvim"
-rev = "v3.0"
+branch = "master"
 
 [config]
 plugins_dir = "plugins/"
