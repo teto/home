@@ -241,7 +241,7 @@ in
       ];
     })
 
-    (mkIf cfg.developer {
+    (mkIf cfg.kubernetes {
       home.packages = [
         pkgs.k9s
         pkgs.kubectl
@@ -325,6 +325,8 @@ in
         nixpkgs-review # to help review nix packages
         # nodePackages."@bitwarden/cli" # 'bw' binary # broken
         patchutils # for interdiff
+
+        rainfrog # database exploration
         process-compose # docker-compose - like
         # rpl # to replace strings across files
         strace

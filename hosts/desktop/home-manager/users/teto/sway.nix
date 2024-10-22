@@ -29,7 +29,7 @@ let
 in
 {
   imports = [
-    ../../../../../hm/profiles/sway.nix 
+    ../../../../../hm/profiles/sway.nix
   ];
 
   home.sessionVariables = swayEnvVars;

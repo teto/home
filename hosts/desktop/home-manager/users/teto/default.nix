@@ -4,10 +4,10 @@
   lib,
   flakeInputs,
   pkgs,
-  withSecrets
-  , dotfilesPath
-  , flakeSelf
-  , ...
+  withSecrets,
+  dotfilesPath,
+  flakeSelf,
+  ...
 }:
 # let
 # module = { pkgs, ... }@args: flakeInputs.haumea.lib.load {

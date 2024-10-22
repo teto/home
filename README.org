@@ -15,6 +15,7 @@ This folder contains my customizations for:
 - [[https://fcitx-im.org/wiki/Fcitx_5][fcitx5]] (input method mechanims, e.g. to type japanese from your qwerty keyboard)
 - [[https://github.com/rycee/home-manager/][home-manager]]
 - htop / btop
+- kanshi: a monitor manager for wayland
 - [[https://github.com/Alexays/Waybar][waybar]] sway bar
 - [[https://github.com/pimutils/khard][khard]] (a carddav CLI)
 - [[https://github.com/pimutils/khal][khal]] (a calendar CLI)

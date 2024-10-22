@@ -148,7 +148,6 @@ in
 
   # systemd.packages = [ ];
 
-
   nix = {
 
     # This priority propagates to build processes. 0 is the default Unix process I/O priority, 7 is the lowest

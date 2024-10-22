@@ -7,8 +7,8 @@
 }:
 {
 
-  imports = [ 
-    ../../../../../../hm/profiles/swaync.nix 
+  imports = [
+    ../../../../../../hm/profiles/swaync.nix
   ];
 
   services.swaync = {
