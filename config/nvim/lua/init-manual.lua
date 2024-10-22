@@ -487,13 +487,12 @@ vim.api.nvim_create_autocmd('ColorScheme', {
     callback = function()
         -- TODO create a TextYankPost highlight if it doesn't exist in scheme ?!
         vim.api.nvim_set_hl(0, 'LspCodeLens', { italic = true, bg = 'blue' })
-		vim.api.nvim_set_hl(0, 'DiagnosticVirtualTextError', { fg = 'red' })
-		vim.api.nvim_set_hl(0, 'DiagnosticVirtualTextDebug', { fg = 'green' })
--- autocmd ColorScheme *
---       \ highlight Comment gui=italic
---       \ | highlight Search gui=underline
---       \ | highlight MatchParen guibg=NONE guifg=NONE gui=underline
-
+        vim.api.nvim_set_hl(0, 'DiagnosticVirtualTextError', { fg = 'red' })
+        vim.api.nvim_set_hl(0, 'DiagnosticVirtualTextDebug', { fg = 'green' })
+        -- autocmd ColorScheme *
+        --       \ highlight Comment gui=italic
+        --       \ | highlight Search gui=underline
+        --       \ | highlight MatchParen guibg=NONE guifg=NONE gui=underline
     end,
 })
 
@@ -527,7 +526,6 @@ vim.api.nvim_create_autocmd('TextYankPost', {
         vim.highlight.on_yank({ higroup = 'IncSearch', timeout = 1000 })
     end,
 })
-
 
 -- " auto reload vim config on save
 -- " Watch for changes to vimrc
@@ -590,7 +588,7 @@ end, {
 local has_sniprun, sniprun = pcall(require, 'sniprun')
 
 if has_sniprun then
-	require'plugins.sniprun'
+    require('plugins.sniprun')
 end
 
 -- add description

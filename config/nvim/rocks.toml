@@ -47,6 +47,7 @@ tree-sitter-http = "scm"
 "gitsigns.nvim" = "0.9.0"
 nvim-treehopper = "scm"
 nvim-treesitter-textobjects = "scm"
+nvim-bqf= "1.1.1"
 
 [plugins."smart-open.nvim"]
 git = "danielfalk/smart-open.nvim"
@@ -144,10 +145,6 @@ git = "teto/vim-listchars"
 [plugins."none-ls-luacheck.nvim"]
 git = "gbprod/none-ls-luacheck.nvim"
 rev = "v0.0.1"
-
-[plugins.nvim-bqf]
-git = "kevinhwang91/nvim-bqf"
-rev = "v1.1.1"
 
 [plugins.i3-vim-syntax]
 git = "PotatoesMaster/i3-vim-syntax"

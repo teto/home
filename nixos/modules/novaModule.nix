@@ -1,5 +1,6 @@
 {
   flakeInputs,
+  pkgs,
   secrets,
   withSecrets,
   ...
@@ -18,9 +19,15 @@
   #   # flakeInputs = self.inputs;
   # };
 
+  environment.systemPackages = [
+    pkgs.doctor_manage_collections
+
+  ];
+
   home-manager.users.teto = {
     imports = [
 
+      # TODO move it here
       ../../hm/profiles/nova/ssh-config.nix
 
       flakeInputs.nova-doctor.homeModules.user
