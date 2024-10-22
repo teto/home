@@ -967,11 +967,12 @@
                 // {
                   # user = "teto";
                   sshUser = "teto";
-                  sshOpts = [
-                    "-i"
-                    "~/.ssh/id_rsa"
-                    # "-p${toString secrets.router.sshPort}"
-                  ];
+                  # TODO should be picked up by ssh automatically
+                  # sshOpts = [
+                  #   "-i"
+                  #   "~/.ssh/id_rsa"
+                  #   # "-p${toString secrets.router.sshPort}"
+                  # ];
 
                 };
             };

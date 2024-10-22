@@ -129,7 +129,7 @@ in
           pkgs.fuzzel
           pkgs.wofi
           pkgs.wttrbar # for weather module
-          pkgs.xdg_utils # for xdg-open
+          pkgs.xdg-utils # for xdg-open
         ]
       }:${dotfilesPath}/bin";
     };

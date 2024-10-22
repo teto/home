@@ -29,7 +29,7 @@ let
     # fonts
     ubuntu_font_family
     inconsolata # monospace
-    noto-fonts-cjk # asiatic
+    noto-fonts-cjk-sans # asiatic
     nerdfonts # otherwise no characters
     # (pkgs.nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; })
 

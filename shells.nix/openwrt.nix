@@ -22,7 +22,7 @@ let
         gnumake
         gcc
         unzip
-        utillinux
+        util-linux
         python2
         patch
         wget
