@@ -12,11 +12,11 @@
   imports =
     lib.optionals withSecrets [
       ../../../hm/profiles/nova.nix
-      ../../desktop/teto/calendars.nix
-      ../../desktop/teto/contacts.nix
-      ../../desktop/teto/mail.nix
-      ../../desktop/teto/sops.nix
-      ../../desktop/teto/programs/khal.nix
+      ../../desktop/home-manager/users/teto/calendars.nix
+      ../../desktop/home-manager/users/teto/contacts.nix
+      ../../desktop/home-manager/users/teto/mail.nix
+      ../../desktop/home-manager/users/teto/sops.nix
+      ../../desktop/home-manager/users/teto/programs/khal.nix
 
       ../../../hm/profiles/vdirsyncer.nix
 
@@ -34,12 +34,12 @@
 
       # ../desktop/teto/default.nix  # Track for regressions
 
-      ../../desktop/teto/programs/ssh.nix
-      ../../desktop/teto/programs/bash.nix
-      ../../desktop/teto/programs/neovim.nix
-      ../../desktop/teto/services/swaync.nix
-      ../../desktop/teto/programs/helix.nix
-      ../../desktop/teto/programs/yazi.nix
+      ../../desktop/home-manager/users/teto/programs/ssh.nix
+      ../../desktop/home-manager/users/teto/programs/bash.nix
+      ../../desktop/home-manager/users/teto/programs/neovim.nix
+      ../../desktop/home-manager/users/teto/programs/helix.nix
+      ../../desktop/home-manager/users/teto/programs/yazi.nix
+      ../../desktop/home-manager/users/teto/services/nextcloud-client.nix
 
       # ../../../hm/profiles/swayidle.nix
       ../../../hm/profiles/desktop.nix

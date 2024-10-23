@@ -1,4 +1,8 @@
 
+systemctl get-default
+systemctl list-dependencies
+systemctl show-environment --user ?
+
 * how to enable debug  ?
 
   Works only if service declares BusName / d-bus
