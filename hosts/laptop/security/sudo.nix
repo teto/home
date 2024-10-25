@@ -6,7 +6,8 @@
 }:
 {
 
-  security.sudo.extraConfig = ''
+  # TODO leverage nixos module to generate notifs
+  extraConfig = ''
     Defaults        timestamp_timeout=60
   '';
 

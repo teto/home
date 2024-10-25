@@ -13,7 +13,10 @@ let
     flakeInputs.haumea.lib.load {
       src = flakeInputs.nix-filter {
         root = ./.;
-        include = lib.optionals withSecrets [
+        include = [
+          "services/"
+          "programs/"
+        ] ++ lib.optionals withSecrets [
           # "sops.nix"
           "sops/secrets.nix"
           "services/openssh.nix"
@@ -21,6 +24,8 @@ let
         # exclude = [
         #   "teto"
         #   "root"
+        #   "_hardware.nix"
+        #   "nixos.nix"
         # ];
       };
       # loader = inputs: path: 
@@ -67,11 +72,8 @@ in
   imports =
     [
       laptopAutoloaded
+      # should not ?!
       desktopAutoloaded
-      # ./services/openssh.nix
-      # ./services/tlp.nix
-      # ./services/thermald.nix
-      # ./services/upower.nix
 
       ./sops.nix
       ./_hardware.nix
@@ -203,10 +205,6 @@ in
     pulseaudio = {
       enable = false;
       systemWide = false;
-
-      # adds out-of-tree support for AAC, APTX, APTX-HD and LDAC.
-      # SBC / AAC
-      extraModules = [ pkgs.pulseaudio-modules-bt ];
 
       # extraClientConf =
       # only this one has bluetooth

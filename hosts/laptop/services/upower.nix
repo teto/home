@@ -5,5 +5,5 @@
   ...
 }:
 {
-  services.upower.enable = false;
+  enable = false;
 }

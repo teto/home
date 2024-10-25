@@ -625,7 +625,7 @@
                 hm.nixosModules.home-manager
                 self.inputs.sops-nix.nixosModules.sops
                 hm-common
-                ./hosts/laptop/nixos.nix
+                ./hosts/laptop/_nixos.nix
               ];
             };
 
