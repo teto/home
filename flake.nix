@@ -550,7 +550,7 @@
           services-mujmap = ./hm/services/mujmap.nix;
           # services-swaync = ./hm/services/swaync.nix;
           sway = ./hm/profiles/sway.nix;
-          # neovim = ./hm/profiles/sway.nix; 
+          neovim = ./hm/profiles/neovim.nix; 
 
           # teto-desktop = 
           teto-nogui = (

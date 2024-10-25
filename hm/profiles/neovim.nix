@@ -57,6 +57,7 @@ in
     extraPackages = with pkgs; [
       # emacs # for orgmode-babel
       shellcheck
+      gitlab-ci-ls # gitlab lsp
     ];
 
     plugins = map (x: builtins.removeAttrs x [ "after" ]) rawPlugins;

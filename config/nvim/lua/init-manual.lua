@@ -687,15 +687,17 @@ end
 -- 	-- check :h bufferline-configuration
 -- end
 
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+  pattern = "*.gitlab-ci*.{yml,yaml}",
+  callback = function()
+    vim.bo.filetype = "yaml.gitlab"
+  end,
+})
+
 vim.g.tex_flavor = 'latex'
 
 require('teto.treesitter')
-require('teto.lspconfig')
-
 -- vim.lsp.set_log_level('DEBUG')
-
--- local has_iron, iron = pcall(require, 'iron.core')
--- if has_iron then
 
 -- setup haskell-tools
 vim.g.haskell_tools = require('teto.haskell-tools').generate_settings()

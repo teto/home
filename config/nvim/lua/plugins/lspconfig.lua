@@ -8,7 +8,7 @@ if not has_lspconfig then
 end
 
 -- custom attach callback
-local attach_cb = require('teto.on_attach')
+-- local attach_cb = require('teto.on_attach')
 
 local temp = vim.lsp.handlers['textDocument/formatting']
 vim.lsp.handlers['textDocument/formatting'] = function(...)
@@ -120,25 +120,25 @@ lspconfig.dockerls.setup({})
 lspconfig.gopls.setup({})
 
 -- see https://github.com/redhat-developer/yaml-language-server for doc
-lspconfig.yamlls.setup({
-    -- cmd = { 'yaml-language-server', '--stdio' },
-    --   on_attach = lsp.on_attach,
-    --   capabilities = lsp.capabilities,
-    settings = {
-        yaml = {
-            -- customTags
-            schemaStore = { enable = true },
-            -- schemas = require('schemastore').yaml.schemas(),
-
-            format = {
-                enable = true,
-                proseWrap = 'Preserve',
-                printWidth = 120,
-            },
-        },
-    },
-    -- }
-})
+-- lspconfig.yamlls.setup({
+--     -- cmd = { 'yaml-language-server', '--stdio' },
+--     --   on_attach = lsp.on_attach,
+--     --   capabilities = lsp.capabilities,
+--     settings = {
+--         yaml = {
+--             -- customTags
+--             schemaStore = { enable = true },
+--             -- schemas = require('schemastore').yaml.schemas(),
+--
+--             format = {
+--                 enable = true,
+--                 proseWrap = 'Preserve',
+--                 printWidth = 120,
+--             },
+--         },
+--     },
+--     -- }
+-- })
 
 local pyrightCapabilities = vim.lsp.protocol.make_client_capabilities()
 pyrightCapabilities.textDocument.publishDiagnostics.tagSupport.valueSet = { 2 }
@@ -362,6 +362,15 @@ lspconfig.nil_ls.setup({
 -- })
 
 lspconfig.teal_ls.setup({})
+
+-- set a specific type of .yaml
+-- vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+--   pattern = "*.gitlab-ci*.{yml,yaml}",
+--   callback = function()
+--     vim.bo.filetype = "yaml.gitlab"
+--   end,
+-- })
+lspconfig.gitlab_ci_ls.setup{}
 
 lspconfig.clangd.setup({
     --compile-commands-dir=build

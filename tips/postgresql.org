@@ -56,6 +56,9 @@ With additionnal permissions
 sudo -u postgres createuser teto --createdb --echo -s
 CREATE USER foo WITH PASSWORD 'secret';
 
+# 
+ALTER ROLE teto WITH SUPERUSER CREATEROLE CREATEDB;
+
 # How to list the tables ?
 `\l`
 
