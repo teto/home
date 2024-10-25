@@ -14,14 +14,11 @@ let
   # taken from the official flake
   # must be an unwrapped version
   # myNeovimUnwrapped = pkgs.neovim-unwrapped.override({ libuv = libuv_147;});
-  # myNeovimUnwrapped = flakeInputs.neovim.packages."${pkgs.system}".neovim.overrideAttrs(oa: {
+  myNeovimUnwrapped = flakeInputs.neovim.packages."${pkgs.system}".neovim;
+  # .overrideAttrs(oa: {
   #   patches = builtins.head oa.patches;
   # });
-  # lua =   myNeovimUnwrapped.lua;
-
-  # " , { 'tag': 'v3.12.0' }
-  # Plug 'Olical/aniseed' " dependency of ?
-  # Plug 'bakpakin/fennel.vim'
+  # lua = myNeovimUnwrapped.lua;
 
   rawPlugins =
     pluginsMap.basePlugins
@@ -45,21 +42,7 @@ in
     # snippets.enable = true;
 
     # take the one from the flake
-    # package = myNeovimUnwrapped;
-
-    # source doesn't like `stdpath('config').'`
-    # todo should use mkBefore ${config.programs.neovim.generatedInitrc}
-    # source $XDG_CONFIG_HOME/nvim/init.manual.vim
-    # extraConfig = let 
-    # in ''
-    #   let mapleader = " "
-    #   let maplocalleader = ","
-    # ''
-    # # concatStrings = builtins.concatStringsSep "";
-    # + (lib.strings.concatStrings (
-    # lib.mapAttrsToList genBlockViml vimlRcBlocks
-    # ))
-    # ;
+    package = myNeovimUnwrapped;
 
     extraLuaConfig = lib.mkBefore (
       lib.strings.concatStrings (lib.mapAttrsToList genBlockLua (import ./neovim/options.nix).luaRcBlocks)

@@ -80,7 +80,7 @@ lspconfig.lua_ls.setup({
                 -- Make the server aware of Neovim runtime files,
                 -- see also https://github.com/LuaLS/lua-language-server/wiki/Libraries#link-to-workspace .
                 -- Lua-dev.nvim also has similar settings for lua ls, https://github.com/folke/neodev.nvim/blob/main/lua/neodev/luals.lua .
-                maxPreload = 4000,
+                maxPreload = 1000,
                 preloadFileSize = 500,
                 checkThirdParty = false,
                 ignoreDir = {

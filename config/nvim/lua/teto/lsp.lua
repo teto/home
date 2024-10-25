@@ -18,7 +18,7 @@ M.default_config = {
         severity_sort = true,
         border = 'rounded',
     },
-    -- update_in_insert = false,
+    update_in_insert = true,
 }
 
 --

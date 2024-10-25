@@ -5,6 +5,8 @@
 To load history from file:
 builtin fc -R -I "$hist_file_1"
 
+SHARE_HISTORY
+
 Flush history / HIST_FILE
 builtin fc -W "$hist_file_merged"
 

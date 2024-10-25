@@ -7,6 +7,19 @@ local:
 platform:
   nix run  .#fastbuild.simwork.core-webservice.platform
 
+# Merge some hardcoded shell commands in shell history
+zsh-load-history:
+    #!/usr/bin/env zsh
+    # man zshbuiltins(1)
+    # fc = Fix Cache
+
+    hist_file="{{config_directory()}}/zsh/shell_history.txt"
+    # -R  => reads the history from the given file
+    builtin fc -R -I "$hist_file"
+
+    # Flush history / HIST_FILE
+    # builtin fc -W "$hist_file_merged"
+
 sscwl:
   nix run .#simwork.core-webservice.local -- --bypass-manifest-check -vv
 
