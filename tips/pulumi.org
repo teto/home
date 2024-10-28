@@ -5,7 +5,10 @@
 pulumi -C buildlib/infra-python up -s dev -y -v9 -d --logtostderr
 pulumi up --verbose 9 --logtostderr
 
+pulumi up --tracing=file:./up.trace
+PULUMI_DEBUG_COMMANDS=1 pulumi view-trace ./up.trace
 
+https://www.pulumi.com/docs/iac/support/troubleshooting/
 * 
  pulumi -C pulumi/infra -s ci-infra-dev config 
 
