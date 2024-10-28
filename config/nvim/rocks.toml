@@ -230,5 +230,9 @@ git = "lunarvim/bigfile.nvim"
 git = "vigemus/iron.nvim"
 branch = "master"
 
+[plugins."http-codes.nvim"]
+git = "barrett-ruth/http-codes.nvim"
+rev = "a610788dff2fb5df05b230d73a926c8dc3173c16"
+
 [config]
 plugins_dir = "plugins/"

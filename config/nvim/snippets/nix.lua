@@ -1,3 +1,4 @@
+-- fmt returns a table of nodes, not a node.
 return {
     -- ri(1) --repeats inserted text after jump from insert node
     s('nixmod', {
@@ -22,4 +23,38 @@ return {
         i(1, 'programs.toto = '),
         t({ '', '}' }),
     }),
+
+	s('mod2', 
+	 -- format node is pretty cool
+	 fmt([[
+	 {{ config, lib, pkgs, ... }}:
+	 let
+		cfg = config.programs.{};
+	 in
+	 {{
+		imports = [];
+		options = {{
+		enable = lib.mkEnableOption "Neovim";
+
+		viAlias = lib.mkOption {{
+		  type = lib.types.bool;
+		  default = false;
+		  description = '''';
+		}};
+
+	   }};
+
+	   config = lib.mkIf cfg.enable {{
+
+
+		# ....
+	   }};
+
+	 }}
+
+	 ]], {
+	   i(1, "feature"),
+	})
+
+	)
 }

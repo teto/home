@@ -14,8 +14,12 @@
 
   services.nextcloud = {
     enable = true;
+
+    # TODO disable ?
     previewGenerator = true;
-    hostName = secrets.jakku.hostname;
+    #       description = "FQDN for the nextcloud instance.";
+    hostName = "nextcloud.${secrets.jakku.hostname}";
+    # true ?
     https = false;
     package = pkgs.nextcloud30;
 
@@ -127,7 +131,7 @@
       # extends the already configured by the nixos module nginx
       # https://betterstack.com/community/questions/what-is-the-difference-between-host-http-host-server-name-variable-nginx/
       # server_name is  typically used to match the server block in the Nginx configuration based on the incoming request.
-      "${secrets.jakku.hostname}" = {
+      "nextcloud.${secrets.jakku.hostname}" = {
         forceSSL = true;
 
         # proxyWebsockets = true

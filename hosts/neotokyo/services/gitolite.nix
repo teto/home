@@ -8,9 +8,9 @@
 
   # enable gitolite
   services.gitolite = {
-    enable = false;
+    enable = true;
     # read
-    # adminPubkey = secrets.gitolitePublicKey ;
+    adminPubkey = builtins.readFile ./neotokyo-gitolite.pub;
     # group 
     # user
     # enableGitAnnex = false;

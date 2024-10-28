@@ -1,11 +1,6 @@
 -- How to add a new server
 -- https://github.com/neovim/nvim-lsp/issues/41
-local has_lspconfig, lspconfig = pcall(require, 'lspconfig')
--- local api = vim.api
-
-if not has_lspconfig then
-    return
-end
+local lspconfig = require'lspconfig'
 
 -- custom attach callback
 -- local attach_cb = require('teto.on_attach')
@@ -55,6 +50,9 @@ lspconfig.lua_ls.setup({
                     's',
                     't',
                     'i',
+                    'fmt',
+                    'f', -- function node
+					'c', -- for choice
                     -- available in wireplumber
                     'alsa_monitor',
                     -- for yazi
