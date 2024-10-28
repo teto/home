@@ -147,9 +147,9 @@ in
 
   # boot.kernel.sysctl."kernel.dmesg_restrict" = false;
 
-  boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_11;
+  # boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_11;
 
-  services.xserver.displayManager.gdm.enable = true;
+  # services.xserver.displayManager.gdm.enable = true;
 
   # nesting clones can be useful to prevent GC of some packages
   # https://nixos.org/nix-dev/2017-June/023967.html

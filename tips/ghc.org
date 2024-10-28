@@ -1,2 +1,11 @@
 * hack on ghc
   Use "nix run "
+
+* multiline strings in ghci
+Prelude> :{
+Prelude| let addTwo :: Int -> Int -> Int
+Prelude|     addTwo x y = x + y 
+Prelude| :}
+Prelude> addTwo 4 7
+
+or :set +m

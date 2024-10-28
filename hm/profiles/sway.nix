@@ -279,10 +279,9 @@ in
     #       include ~/.config/i3/config.shared
 
     extraConfig = ''
-
       # timeout in ms
       include ~/.config/sway/manual.config
-    '';
+      '';
     # include ~/.config/sway/swayfx.txt
 
     extraOptions = [

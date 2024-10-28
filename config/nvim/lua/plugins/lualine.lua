@@ -42,6 +42,8 @@ require('lualine').setup({
         lualine_a = {
             {
                 'branch',
+				-- truncate too long branch names !
+				fmt = function(str) return str:sub(1,20) end,
                 on_click = function(_nb_of_clicks, _button, _modifiers)
                     clip.copy('BRANCH_PLACEHOLDER')
                     -- the
