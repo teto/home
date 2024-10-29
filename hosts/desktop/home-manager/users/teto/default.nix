@@ -93,6 +93,9 @@
 
   programs.nh.enable = true;
 
+  # never tried
+  # home.preferXdgDirectories = false;
+
   home.file.".gdbinit".text = ''
     # ../config/gdbinit_simple;
     # gdb doesn't accept environment variable except via python
@@ -193,7 +196,6 @@
 
     DASHT_DOCSETS_DIR = "/mnt/ext/docsets";
     # $HOME/.local/share/Zeal/Zeal/docsets
-
   };
 
 }
