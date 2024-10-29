@@ -16,7 +16,7 @@
     enable = true;
 
     # TODO disable ?
-    previewGenerator = true;
+    # previewGenerator = true;
     #       description = "FQDN for the nextcloud instance.";
     hostName = "nextcloud.${secrets.jakku.hostname}";
     # true ?

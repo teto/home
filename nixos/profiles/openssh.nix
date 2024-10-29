@@ -7,9 +7,8 @@
 {
 
   services.openssh = {
-    enable = true;
     # kinda experimental
-    # services.openssh.banner = "Hello world";
+    # openssh.banner = "Hello world";
 
     # # for sshfs edit or scp
     allowSFTP = true;
@@ -31,7 +30,5 @@
       # PermitRootLogin = "no";
       X11Forwarding = false;
     };
-
-    settings.HostKey = "/run/secrets/ssh_host_key";
   };
 }

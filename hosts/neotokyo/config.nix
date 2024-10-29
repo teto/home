@@ -48,6 +48,9 @@ in
     "${modulesPath}/virtualisation/openstack-config.nix"
     flakeSelf.nixosModules.teto-nogui
 
+    flakeSelf.nixosModules.neovim
+    flakeSelf.nixosModules.ntp
+
     # ./hardware.nix
     ./services/openssh.nix
     ./sops.nix
@@ -55,15 +58,14 @@ in
     # to get the first iteration going on
     ./services/gitolite.nix
     ./services/nextcloud.nix
+    ./services/postgresqlBackup.nix
     ./services/nginx.nix
     ./services/immich.nix
 
     # ./gitolite.nix
     # ../../nixos/modules/hercules-ci-agents.nix
 
-    ../../nixos/profiles/ntp.nix
     ../../nixos/profiles/nix-daemon.nix
-    ../../nixos/profiles/neovim.nix
     # ../../nixos/profiles/docker-daemon.nix
     ../../nixos/profiles/server.nix
 

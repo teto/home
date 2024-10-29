@@ -47,6 +47,11 @@ in
     # ./modules/jupyter.nix
   ];
 
+  # see https://github.com/NixOS/nixpkgs/issues/15293
+  # Set your time zone.
+  time.timeZone = "Europe/Paris";
+  # time.timeZone = "Asia/Tokyo";
+
   environment.pathsToLink = [
     "/share/xdg-desktop-portal"
     "/share/applications"

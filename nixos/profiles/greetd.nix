@@ -61,7 +61,7 @@
 
             flags = lib.concatStringsSep " " [
               "--debug /tmp/tuigreet.log"
-              "--remember"
+              "--remember"  # remember last logged-in username
               "--remember-user-session"
               "--user-menu"
               "--time"

@@ -62,7 +62,6 @@ in
       # ./docker.nix
 
       ../../nixos/profiles/greetd.nix
-      ../../nixos/profiles/nova.nix
 
       # this is only to test the new config
       # ./nextcloud.nix
@@ -73,16 +72,17 @@ in
       ../config-all.nix
       # ../../nixos/profiles/gitlab-runner.nix
       ../../nixos/profiles/docker-daemon.nix
-      ../../nixos/profiles/desktop.nix
+      flakeSelf.nixosModules.novaModule
+      flakeSelf.nixosModules.desktop
+      # ../../nixos/profiles/desktop.nix
       ../../nixos/profiles/nix-daemon.nix
       # ../../nixos/profiles/experimental.nix
       ../../nixos/profiles/steam.nix
       # ../../nixos/profiles/opensnitch.nix
-      ../../nixos/profiles/podman.nix
+      # ../../nixos/profiles/podman.nix
 
       # ../../nixos/profiles/libvirtd.nix
       ../../nixos/profiles/immich.nix
-      ../../nixos/profiles/ntp.nix
       ../../nixos/profiles/ollama.nix
     ]
     ++ lib.optionals withSecrets [
@@ -98,7 +98,6 @@ in
       ../../nixos/profiles/postgresql.nix
       ../../nixos/profiles/redis.nix
 
-      # ../../nixos/profiles/wireguard.nix
     ]
 
   ;

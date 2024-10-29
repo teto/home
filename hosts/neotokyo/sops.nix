@@ -1,5 +1,6 @@
 {
-  ...
+  config
+, ...
 }:
 {
   imports = [
@@ -15,5 +16,11 @@
   # sign. Runtime dir is $XDG_RUNTIME_DIR on linux and $(getconf
   # DARWIN_USER_TEMP_DIR) on darwin.
   # path = "%r/test.txt"; 
+
+  # secrets.ssh_host_rsa = {
+  #   mode = "400";
+  #   owner = config.users.users.teto.name;
+  #   group = config.users.users.teto.group;
+  # };
 
 }

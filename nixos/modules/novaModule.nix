@@ -9,6 +9,7 @@
   imports = [
     # ./nixos/profiles/nova/rstudio-server.nix
 
+    ../profiles/nova.nix
     flakeInputs.nova-doctor.nixosModules.gnome
   ];
 

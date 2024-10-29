@@ -39,6 +39,7 @@
             try_files $uri $uri/ =404;
           '';
         };
+        root = "/home/teto/blog";
 
         # extraConfig = ''
         #   access_log syslog:server=unix:/dev/log,facility=user,tag=mytag,severity=info ceeformat;

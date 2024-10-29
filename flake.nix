@@ -746,7 +746,14 @@
             default-hm = hm-common;
             teto-nogui = nixos/accounts/teto/teto.nix;
             nextcloud = nixos/modules/nextcloud.nix;
+            #             nixos/profiles/nova.nix
             novaModule = nixos/modules/novaModule.nix;
+            neovim = nixos/profiles/neovim.nix;
+            ntp = nixos/profiles/ntp.nix;
+            desktop = nixos/profiles/desktop.nix;
+            universal = hosts/config-all.nix;
+
+
           };
 
         templates = {

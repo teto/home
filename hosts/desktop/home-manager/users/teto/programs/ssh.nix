@@ -31,12 +31,24 @@
         identitiesOnly = true;
       };
 
-      jakku = {
-        host = secrets.jakku.hostname;
+      neotokyo-teto = {
+        match = "user=teto host=${secrets.jakku.hostname}";
+        hostname = secrets.jakku.hostname;
         user = "teto";
         # le port depend du service
         port = secrets.jakku.sshPort;
         identityFile = "${secretsFolder}/ssh/id_rsa";
+        identitiesOnly = true;
+        # port = 12666;
+      };
+
+      neotokyo-gitolite-admin = {
+        match = "user=gitolite host=${secrets.jakku.hostname}";
+        hostname = secrets.jakku.hostname;
+        # user = "gitolite";
+        # le port depend du service
+        port = secrets.jakku.sshPort;
+        identityFile = "${secretsFolder}/ssh/neotokyo-gitolite";
         identitiesOnly = true;
         # port = 12666;
       };
