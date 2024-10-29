@@ -1,5 +1,5 @@
 {
-    extraGroups = [
-      "nextcloud" # to be able to list files
-    ];
-  }
+  extraGroups = [
+    "nextcloud" # to be able to list files
+  ];
+}

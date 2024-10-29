@@ -24,9 +24,11 @@ return {
         t({ '', '}' }),
     }),
 
-	s('mod2', 
-	 -- format node is pretty cool
-	 fmt([[
+    s(
+        'mod2',
+        -- format node is pretty cool
+        fmt(
+            [[
 	 {{ config, lib, pkgs, ... }}:
 	 let
 		cfg = config.programs.{};
@@ -52,9 +54,10 @@ return {
 
 	 }}
 
-	 ]], {
-	   i(1, "feature"),
-	})
-
-	)
+	 ]],
+            {
+                i(1, 'feature'),
+            }
+        )
+    ),
 }

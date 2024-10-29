@@ -1,7 +1,8 @@
 { config, lib, ... }:
 {
 
-  extraGroups = [
+  extraGroups =
+    [
       "vboxusers" # to avoid Kernel driver not accessible
       "video" # to control brightness
       "wireshark"
@@ -10,9 +11,10 @@
       "jupyter"
       "hass" # home-assistant
       "adbusers" # for android tools
-  ] ++ lib.optional (config.services.kanata.enable) [
+    ]
+    ++ lib.optional (config.services.kanata.enable) [
 
-        "uinput" # required for kanata it seems
-  ];
+      "uinput" # required for kanata it seems
+    ];
 
 }

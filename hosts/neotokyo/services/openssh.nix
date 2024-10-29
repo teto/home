@@ -6,8 +6,8 @@
   ...
 }:
 {
-  imports = [ 
-    ../../../nixos/profiles/openssh.nix  
+  imports = [
+    ../../../nixos/profiles/openssh.nix
   ];
 
   services.openssh = {

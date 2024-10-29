@@ -98,5 +98,4 @@ return {
     -- },
 
     --  'ryoppippi/bad-apple.vim' -- needs denops
-
 }

@@ -1,6 +1,6 @@
 {
-  config
-, ...
+  config,
+  ...
 }:
 {
   imports = [

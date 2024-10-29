@@ -14,4 +14,3 @@
   # cp "${pkgs.skopeo.policy}/default-policy.json" /etc/containers/policy.json
   # cp ${containerRegistryConf} /etc/containers/registries.conf
 }
-

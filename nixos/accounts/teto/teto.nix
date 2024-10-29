@@ -16,24 +16,22 @@
 
     isNormalUser = true; # creates home/ sets default shell
     uid = 1000;
-    extraGroups =
-      [
-        "audio" # for pulseaudio/pipewire
-        "dialout" # to access serial devices like the conbee II
-        "docker" # to access docker socket
-        "input" # for libinput-gestures
-        "keys"
-        "kvm" # needed when using runAsRoot when building dockerImage
-        "networkmanager" # not necessary for nixpos
-        "pipewire" # for pipewire
-        "plugdev" # for udiskie
-        "podman"
-        "postgres"
-        "rtkit" # for pipewire
-        "wheel" # for sudo
-        # config.users.groups.keys.name
-      ]
-    ;
+    extraGroups = [
+      "audio" # for pulseaudio/pipewire
+      "dialout" # to access serial devices like the conbee II
+      "docker" # to access docker socket
+      "input" # for libinput-gestures
+      "keys"
+      "kvm" # needed when using runAsRoot when building dockerImage
+      "networkmanager" # not necessary for nixpos
+      "pipewire" # for pipewire
+      "plugdev" # for udiskie
+      "podman"
+      "postgres"
+      "rtkit" # for pipewire
+      "wheel" # for sudo
+      # config.users.groups.keys.name
+    ];
     # once can set initialHashedPassword too
     # initialPassword
     # generated with nix run nixpkgs.mkpasswd mkpasswd -m sha-512

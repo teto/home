@@ -1,6 +1,6 @@
 -- How to add a new server
 -- https://github.com/neovim/nvim-lsp/issues/41
-local lspconfig = require'lspconfig'
+local lspconfig = require('lspconfig')
 
 -- custom attach callback
 -- local attach_cb = require('teto.on_attach')
@@ -52,7 +52,7 @@ lspconfig.lua_ls.setup({
                     'i',
                     'fmt',
                     'f', -- function node
-					'c', -- for choice
+                    'c', -- for choice
                     -- available in wireplumber
                     'alsa_monitor',
                     -- for yazi
@@ -368,7 +368,7 @@ lspconfig.teal_ls.setup({})
 --     vim.bo.filetype = "yaml.gitlab"
 --   end,
 -- })
-lspconfig.gitlab_ci_ls.setup{}
+lspconfig.gitlab_ci_ls.setup({})
 
 lspconfig.clangd.setup({
     --compile-commands-dir=build

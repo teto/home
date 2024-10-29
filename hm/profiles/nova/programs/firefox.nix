@@ -3,8 +3,7 @@ let
     # avoid
     "signon.rememberSignons" = false;
   };
-in {
+in
+{
 
 }
-
-

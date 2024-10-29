@@ -13,14 +13,16 @@ let
     flakeInputs.haumea.lib.load {
       src = flakeInputs.nix-filter {
         root = ./.;
-        include = [
-          "services/"
-          "programs/"
-        ] ++ lib.optionals withSecrets [
-          # "sops.nix"
-          "sops/secrets.nix"
-          "services/openssh.nix"
-        ];
+        include =
+          [
+            "services/"
+            "programs/"
+          ]
+          ++ lib.optionals withSecrets [
+            # "sops.nix"
+            "sops/secrets.nix"
+            "services/openssh.nix"
+          ];
         # exclude = [
         #   "teto"
         #   "root"

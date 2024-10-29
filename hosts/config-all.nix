@@ -28,8 +28,6 @@
     SystemMaxUse=2G
   '';
 
-
-
   # todo move to package sets
   environment.systemPackages =
     with pkgs;
@@ -65,8 +63,9 @@
 
   # variables set by PAM
   # https://wiki.archlinux.org/index.php/Environment_variables#Using_pam_env
-  environment.sessionVariables = {
-  };
+  environment.sessionVariables =
+    {
+    };
 
   environment.extraOutputsToInstall = [ "man" ];
 

@@ -550,7 +550,7 @@
           services-mujmap = ./hm/services/mujmap.nix;
           # services-swaync = ./hm/services/swaync.nix;
           sway = ./hm/profiles/sway.nix;
-          neovim = ./hm/profiles/neovim.nix; 
+          neovim = ./hm/profiles/neovim.nix;
 
           # teto-desktop = 
           teto-nogui = (
@@ -752,7 +752,6 @@
             ntp = nixos/profiles/ntp.nix;
             desktop = nixos/profiles/desktop.nix;
             universal = hosts/config-all.nix;
-
 
           };
 

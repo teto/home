@@ -6,8 +6,7 @@
     pgdumpOptions = "--no-owner";
 
     # generate systemd services called "postgresqlBackup-${db}"
-    databases = 
-    [
+    databases = [
       config.services.immich.database.name
     ];
 
