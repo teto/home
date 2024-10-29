@@ -36,9 +36,9 @@
       type = "Application";
       exec = "firefox -p nova --class firefox-nova";
       icon = "firefox";
-      comment = "Nova (firefox)";
+      comment = "Firefox (nova)";
       terminal = false;
-      name = "nova (Firefox)";
+      name = "Firefox (nova)";
       genericName = "Web Browser";
       mimeType = [
         "text/html"
