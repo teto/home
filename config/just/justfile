@@ -7,6 +7,12 @@ local:
 platform:
   nix run  .#fastbuild.simwork.core-webservice.platform
 
+repl:
+  # TODO:
+  # autoload System.Environment
+  # setEnv "PORCUPINE_ARGS" "--bypass-manifest-check -vv"
+  nix run  .#simwork.core-webservice.platform._repl
+
 # Merge some hardcoded shell commands in shell history
 zsh-load-history:
     #!/usr/bin/env zsh
