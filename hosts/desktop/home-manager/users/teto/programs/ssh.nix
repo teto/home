@@ -29,6 +29,9 @@
         user = "mattator";
         identityFile = "${secretsFolder}/ssh/gitlab";
         identitiesOnly = true;
+        extraOptions = {
+          AddKeysToAgent = "yes";
+        };
       };
 
       neotokyo-teto = {
@@ -40,6 +43,11 @@
         identityFile = "${secretsFolder}/ssh/id_rsa";
         identitiesOnly = true;
         # port = 12666;
+        serverAliveCountMax = 3;
+        # sendEnv
+        extraOptions = {
+
+        };
       };
 
       neotokyo-gitolite-admin = {
