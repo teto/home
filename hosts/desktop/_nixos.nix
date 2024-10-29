@@ -147,7 +147,7 @@ in
 
   # boot.kernel.sysctl."kernel.dmesg_restrict" = false;
 
-  # boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_11;
+  boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_11;
 
   # services.xserver.displayManager.gdm.enable = true;
 
