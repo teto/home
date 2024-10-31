@@ -36,12 +36,6 @@ let
 
   ];
 
-  # orgmodePlugins = with pkgs.vimPlugins; [ 
-  neorgPlugins =
-    with pkgs.vimPlugins;
-    [
-    ];
-
   # try via rocks.nvim first
   neotestPlugins = with pkgs.vimPlugins; [
     # neotest 
@@ -320,7 +314,7 @@ in
 {
   programs.neovim = {
 
-    plugins = luaPlugins ++ filetypePlugins ++ telescopePlugins ++ neorgPlugins ++ neotestPlugins;
+    plugins = luaPlugins ++ filetypePlugins ++ telescopePlugins ++ neotestPlugins;
 
     # plugins = with pkgs.vimPlugins; [
     #  tint-nvim

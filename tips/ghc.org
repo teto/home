@@ -1,6 +1,15 @@
 * hack on ghc
   Use "nix run "
 
+* ghci
+
+
+
+https://github.com/haskell/haskeline/wiki/UserPreferences
+
+.ghci
+-ghc-script
+-ignore-dot-ghci
 * multiline strings in ghci
 Prelude> :{
 Prelude| let addTwo :: Int -> Int -> Int

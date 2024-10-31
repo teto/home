@@ -39,6 +39,7 @@
             try_files $uri $uri/ =404;
           '';
         };
+        # root = "/var/www/blog";
         root = "/home/teto/blog";
 
         # extraConfig = ''

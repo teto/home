@@ -22,6 +22,7 @@ text/plain=nvim.desktop
 application/octet-stream=nvim.desktop
 # could be gio launch instead ?
 application/x-desktop=nvim.desktop
+x-scheme-handler/discord-647066573147996161=discord-647066573147996161.desktop
 
 [Added Associations]
 video/x-matroska=vlc.desktop;mpv.desktop;

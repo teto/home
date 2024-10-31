@@ -1,3 +1,4 @@
+# https://github.com/achristmascarl/rainfrog/blob/main/.config/rainfrog_config.toml
 [settings]
 mouse_mode = true
 
@@ -6,8 +7,8 @@ mouse_mode = true
 "q" = "AbortQuery"
 "<Alt-1>" = "FocusMenu"
 "<Alt-2>" = "FocusEditor"
-"<Alt-3>" = "FocusData"
-"<Alt-4>" = "FocusHistory"
+"3" = "FocusData"
+"4" = "FocusHistory"
 "<Ctrl-k>" = "FocusMenu"
 "<Ctrl-j>" = "FocusEditor"
 "<Ctrl-h>" = "FocusData"
