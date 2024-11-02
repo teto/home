@@ -234,7 +234,6 @@ rev = "33eb067e3d7029ac77e081cfe7c45361887a311a"
 
 [plugins."iron.nvim"]
 git = "vigemus/iron.nvim"
-rev = "v3.0"
 branch = "master"
 
 [plugins."http-codes.nvim"]
