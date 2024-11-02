@@ -40,7 +40,8 @@
           '';
         };
         # root = "/var/www/blog";
-        root = "/home/teto/blog";
+        root = "/var/lib/gitolite/blog-generated";
+        # root = "/home/teto/blog";
 
         # extraConfig = ''
         #   access_log syslog:server=unix:/dev/log,facility=user,tag=mytag,severity=info ceeformat;
