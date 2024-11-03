@@ -11,6 +11,8 @@
     # ${config.system}
     # flakeInputs.vocage.packages."x86_64-linux".vocage
     # jiten # unfree, helpful for jap.nvim
+
+    mokuro # 
     sudachi-rs # a japanese tokenizer
     sudachidict
     # sudachi-rs

@@ -389,6 +389,7 @@
             ./hm/modules/bash.nix
             ./hm/modules/zsh.nix
             ./hm/modules/xdg.nix
+            # ./hm/modules/firefox.nix
             ./hm/modules/package-sets.nix
 
             ./hm/profiles/neovim.nix
@@ -826,7 +827,7 @@
                   prev.lib.const {
                     name = "${name}-vendor.tar.gz";
                     inherit src;
-                    outputHash = "sha256-fWCcY5A5FLc6LRmxpGMN5V2IdxZCrtW9/aSfAfYIN3Y=";
+                    outputHash = "sha256-fWCcY5A5FLc5LRmxpGMN5V0IdxZCrtW9/aSfAfYIN3Y=";
                   }
                 );
                 # cargoHash = "sha256-1LHCqv+OPS6tLMpmXny5ycW+8I/JRPQ7n8kcGfw6RMs=";

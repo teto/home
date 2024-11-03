@@ -1179,11 +1179,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1728778939,
-        "narHash": "sha256-WybK5E3hpGxtCYtBwpRj1E9JoiVxe+8kX83snTNaFHE=",
+        "lastModified": 1729104314,
+        "narHash": "sha256-pZRZsq5oCdJt3upZIU4aslS9XwFJ+/nVtALHIciX/BI=",
         "owner": "cachix",
         "repo": "git-hooks.nix",
-        "rev": "ff68f91754be6f3427e4986d7949e6273659be1d",
+        "rev": "3c3e88f0f544d6bb54329832616af7eb971b6be6",
         "type": "github"
       },
       "original": {
@@ -1677,11 +1677,11 @@
     "meli": {
       "flake": false,
       "locked": {
-        "lastModified": 1728293756,
-        "narHash": "sha256-BtkA6slJW7HvpizH9FsQ0A4/cG9KW2nk1UlG9sGPOtg=",
+        "lastModified": 1729102016,
+        "narHash": "sha256-HMW6OgmKb9t1EB8ogQrDHb7VHgYmFKONyu1qX0Z0wDU=",
         "ref": "refs/heads/master",
-        "rev": "b2200ec3abe9c5649d2628f88afe636f02a91be6",
-        "revCount": 2567,
+        "rev": "1b708a99904cd5542aef984302d8133d5ee98082",
+        "revCount": 2570,
         "type": "git",
         "url": "https://git.meli-email.org/meli/meli.git"
       },
@@ -1764,11 +1764,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1729058155,
-        "narHash": "sha256-m/wgI/ZWERMrADlk/c2aF/MKIchBghWQ0YUkTqhgDwU=",
+        "lastModified": 1730088025,
+        "narHash": "sha256-FIdIaN7f6karwtDV65VXTV8VThNrR63nwykfgXpm4p4=",
         "owner": "nix-community",
         "repo": "neovim-nightly-overlay",
-        "rev": "97456a48c4784f34e6c7f2f1e5fbde7a145b866a",
+        "rev": "f35afbe60a4ff71fd65fec3839fc38943f961951",
         "type": "github"
       },
       "original": {
@@ -1803,11 +1803,11 @@
     "neovim-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1729018221,
-        "narHash": "sha256-xwFqmvrzzymfE/6NE1g/E2TOOou23Ok08bzLeftfdow=",
+        "lastModified": 1729121305,
+        "narHash": "sha256-c94xkA/RuszC4PfmB+MWqOo2vbO66GTO6XKer0mbltA=",
         "owner": "neovim",
         "repo": "neovim",
-        "rev": "82b02ae2f2af439a8c678ed6b55a43121055f279",
+        "rev": "852954ff6d96adce0158f74ca494fdcef3aa1921",
         "type": "github"
       },
       "original": {

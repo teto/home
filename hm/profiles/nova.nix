@@ -6,7 +6,10 @@
 }:
 {
 
-  imports = [ ./nova/programs/bash.nix ];
+  imports = [
+    ./nova/programs/bash.nix 
+    ./nova/programs/firefox.nix 
+  ];
 
   home.packages = [
     pkgs.aws-vault-nova # wrap aws-vault with some specific variables

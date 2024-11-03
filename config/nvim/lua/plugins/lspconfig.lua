@@ -197,7 +197,7 @@ lspconfig.pyright.setup({
 
 -- typescript
 -- NOW HANDLED BY NIX IN INIT.lua (or not ?)
-lspconfig.tsserver.setup({
+lspconfig.ts_ls.setup({
     autostart = true,
     -- TODO should be generated/fixed in nix
     cmd = {
