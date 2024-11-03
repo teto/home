@@ -240,5 +240,9 @@ branch = "master"
 git = "barrett-ruth/http-codes.nvim"
 rev = "a610788dff2fb5df05b230d73a926c8dc3173c16"
 
+[plugins.vim-startuptime]
+git = "dstein64/vim-startuptime"
+rev = "v4.5.0"
+
 [config]
 plugins_dir = "plugins/"

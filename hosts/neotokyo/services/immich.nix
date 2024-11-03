@@ -9,6 +9,8 @@
   imports = [
     ../../../nixos/profiles/immich.nix
   ];
+
+
   services.immich = {
     enable = true;
     # host = ""; # all interfaces (example from module option) breaks with nginx
@@ -19,6 +21,7 @@
     # secretsFile
     openFirewall = true;
 
+    # "IMMICH_MEDIA_LOCATION=/var/lib/immich"
     # https://immich.app/docs/install/environment-variables/
     environment = {
       IMMICH_LOG_LEVEL = "verbose";

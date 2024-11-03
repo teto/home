@@ -39,7 +39,7 @@
             try_files $uri $uri/ =404;
           '';
         };
-        # root = "/var/www/blog";
+        # I had to manually "chmod a+x /var/lib/gitolite"
         root = "/var/lib/gitolite/blog-generated";
         # root = "/home/teto/blog";
 
