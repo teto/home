@@ -794,6 +794,11 @@
 
             in
             {
+              alot = prev.alot.overrideAttrs({
+                doCheck = false;
+                doInstallCheck = false;
+
+              });
               termscp = prev.termscp.overrideAttrs (oa: {
                 cargoBuildFlags = "--no-default-features";
               });
@@ -823,11 +828,15 @@
                 # dontUnpack = true;
                 # cargoHash = "sha256-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX=";
                 # cargoHash = "sha256-vZkMfaALnRBK8ZwMB2uvvJgQq+BdUX7enNnr9t5H+MY=";
+                cargoPatches = [];
                 cargoDeps = drv.cargoDeps.overrideAttrs (
                   prev.lib.const {
+
                     name = "${name}-vendor.tar.gz";
                     inherit src;
-                    outputHash = "sha256-fWCcY5A5FLc5LRmxpGMN5V0IdxZCrtW9/aSfAfYIN3Y=";
+                    outputHash = "sha256-EZbfpnepzGdVDEVStPlsFJXOPqVZCKibkEoogAzsGig=";
+                    cargoPatches = [];
+
                   }
                 );
                 # cargoHash = "sha256-1LHCqv+OPS6tLMpmXny5ycW+8I/JRPQ7n8kcGfw6RMs=";

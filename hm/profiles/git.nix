@@ -36,6 +36,8 @@
       d = "diff";
       mg = "mergetool";
 
+      # get top level directory of the repo
+      root = "git rev-parse --show-toplevel";
     };
     extraConfig = {
       # breaks jkops

@@ -101,7 +101,6 @@
   ];
 
   # systemd.user.settings.Manager.DefaultEnvironment = {
-  #   PATH = "/home/teto/.nix-profile/bin";
   #   # /home/teto/.nix-profile/bin:/nix/profile/bin:/home/teto/.local/state/nix/profile/bin:/etc/profiles/per-user/teto/bin:/nix/var/nix/profiles/default/bin:/run/current-system/sw/bin:/home/teto/.local/share/../bin
   # };
 

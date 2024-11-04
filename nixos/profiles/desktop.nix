@@ -117,39 +117,40 @@ in
 
   # inspired by https://gist.github.com/539h/8144b5cabf97b5b206da
   # todo find a good japanese font
-  # fonts = {
-  #   fontDir.enable = true; # ?
-  #   packages = with pkgs; [
-  #     ubuntu_font_family
-  #     inconsolata # monospace
-  #     noto-fonts-cjk-sans # asiatic
-  #     nerdfonts # otherwise no characters
-  #     # (pkgs.nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; })
+  # restored for waybar to see fonts ?
+  fonts = {
+    fontDir.enable = true; # ?
+    packages = with pkgs; [
+      ubuntu_font_family
+      inconsolata # monospace
+      noto-fonts-cjk-sans # asiatic
+      nerdfonts # otherwise no characters
+      # (pkgs.nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; })
 
-  #     # corefonts # microsoft fonts  UNFREE
-  #     font-awesome_5
-  #     source-code-pro
-  #     dejavu_fonts
-  #     # Adobe Source Han Sans
-  #     source-han-sans #sourceHanSansPackages.japanese
-  #     fira-code-symbols # for ligatures
-  #     iosevka
-  #     # noto-fonts
-  #   ];
+      # corefonts # microsoft fonts  UNFREE
+      font-awesome_5
+      source-code-pro
+      dejavu_fonts
+      # Adobe Source Han Sans
+      source-han-sans #sourceHanSansPackages.japanese
+      fira-code-symbols # for ligatures
+      iosevka
+      # noto-fonts
+    ];
 
-  #   fontconfig = {
-  #     enable = true;
-  #     antialias = true; # some fonts can be disgusting else
-  #     allowBitmaps = false; # ugly
-  #     includeUserConf = true;
-  #     cache32Bit = false; # defualt false
-  #     defaultFonts = {
-  #       # monospace = [ "" ];
-  #       # serif = [ "" ];
-  #       # sansSerif =
-  #     };
-  #   };
-  # };
+    fontconfig = {
+      enable = true;
+      antialias = true; # some fonts can be disgusting else
+      allowBitmaps = false; # ugly
+      includeUserConf = true;
+      cache32Bit = false; # defualt false
+      defaultFonts = {
+        # monospace = [ "" ];
+        # serif = [ "" ];
+        # sansSerif =
+      };
+    };
+  };
 
   # systemd.packages = [ ];
 

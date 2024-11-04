@@ -37,7 +37,10 @@ update-luarocks:
   nix run '.#luarocks-packages-updater' -- --proc=4 --github-token=$GITHUB_TOKEN
 
 llama: # Start llama server
-  llama-server -m ~/models/mistral-7b-openorca.Q6_K.gguf -c 2048 --port 11111 -ngl 33
+  llama-server -m ~/models/mistral-7b-openorca.Q6_K.gguf -c 2048 --port ${LLM_LOCAL_PORT} -ngl 33
+
+whisper:
+  llama-server -m ~/models/mistral-7b-openorca.Q6_K.gguf -c 2048 --port ${LLM_LOCAL_PORT} -ngl 33
 
 # Update nixpkgs neovim plugins
 update-neovim-packages:

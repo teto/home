@@ -137,6 +137,7 @@
   home.packages = with pkgs; [
     # llm-ls # needed by the neovim plugin
 
+    cointop
     # mdp # markdown CLI presenter
     # gthumb # image manager, great to tag pictures
     gnome-control-center
@@ -144,7 +145,7 @@
     # xorg.xwininfo # for stylish
     pciutils # for lspci
     moar # test as pager
-    tailspin # a log viewer based on less ("spin" or "tsspin" is the executable)
+    # tailspin # (broken) a log viewer based on less ("spin" or "tsspin" is the executable)
     tig
 
     panvimdoc # to generate vim doc from README, for instance in gp.nvim
@@ -193,6 +194,9 @@
     # TODO create symlink ?
     IPYTHONDIR = "$XDG_CONFIG_HOME/ipython";
     JUPYTER_CONFIG_DIR = "$XDG_CONFIG_HOME/jupyter";
+
+    LLM_LOCAL_PORT = 11111;
+
 
     DASHT_DOCSETS_DIR = "/mnt/ext/docsets";
     # $HOME/.local/share/Zeal/Zeal/docsets

@@ -66,7 +66,8 @@ in
     (mkIf cfg.llms {
       home.packages = [
 
-        # pkgs.aider-chat  # breaks
+        pkgs.ollama # to test huggingface
+        pkgs.aider-chat  # breaks
         pkgs.python3Packages.huggingface-hub
       ];
     })
@@ -379,7 +380,7 @@ in
         wofi # rofi-like
         slurp # capture tool
         # lavalauncher # TODO a tester
-        wf-recorder # for screencasts
+        # wf-recorder # (broken) for screencasts
         # bemenu as a dmenu replacement
         wl-clipboard # wl-copy / wl-paste
         wdisplays # to show

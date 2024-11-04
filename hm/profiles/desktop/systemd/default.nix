@@ -15,7 +15,6 @@
 
   user.settings.Manager.DefaultEnvironment = {
     # when use-xdg-directories is true, the bin is in $XDG_STATE_HOME/
-    # /home/teto/.nix-profile/bin:
     PATH = "/home/teto/.local/state/nix/profile/bin";
     # /home/teto/.nix-profile/bin:/nix/profile/bin:/home/teto/.local/state/nix/profile/bin:/etc/profiles/per-user/teto/bin:/nix/var/nix/profiles/default/bin:/run/current-system/sw/bin:/home/teto/.local/share/../bin
   };
