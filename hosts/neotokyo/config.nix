@@ -127,7 +127,7 @@ in
 
   # security.sudo.wheelNeedsPassword = true;
 
-  environment.systemPackages = [ 
+  environment.systemPackages = [
     pkgs.neovim
     pkgs.zola # needed in the post-receive hook of the blog !
     pkgs.yazi

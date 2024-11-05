@@ -7,8 +7,8 @@
 {
 
   imports = [
-    ./nova/programs/bash.nix 
-    ./nova/programs/firefox.nix 
+    ./nova/programs/bash.nix
+    ./nova/programs/firefox.nix
   ];
 
   home.packages = [

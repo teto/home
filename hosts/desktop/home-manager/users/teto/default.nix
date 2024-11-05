@@ -197,7 +197,6 @@
 
     LLM_LOCAL_PORT = 11111;
 
-
     DASHT_DOCSETS_DIR = "/mnt/ext/docsets";
     # $HOME/.local/share/Zeal/Zeal/docsets
   };

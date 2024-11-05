@@ -40,8 +40,8 @@ llama: # Start llama server
   llama-server -m ~/models/mistral-7b-openorca.Q6_K.gguf -c 2048 --port ${LLM_LOCAL_PORT} -ngl 33
 
 whisper:
-  llama-server -m ~/.cache/huggingface/hub/models--ggerganov--whisper.cpp/blobs/ -c 2048 --port ${LLM_LOCAL_PORT} -ngl 33
-
+  llama-server -m /home/teto/.cache/huggingface/hub/models--ggerganov--whisper.cpp/snapshots/5359861c739e955e79d9a303bcbc70fb988958b1/ggml-large-v3.bin -c 2048 --port ${LLM_LOCAL_PORT} -ngl 33
+  
 # Update nixpkgs neovim plugins
 update-neovim-packages:
   nix run '.#neovim-plugins-updater' -- --proc=4 --github-token=$GITHUB_TOKEN

@@ -39,7 +39,10 @@
           ];
         }
       ];
-      definedAliases = [ "@ho" "@hg" ];
+      definedAliases = [
+        "@ho"
+        "@hg"
+      ];
     };
     "Bing".metaData.hidden = true;
     "Google".metaData.alias = "@g"; # builtin engines only support specifying one additional alias

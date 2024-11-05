@@ -77,47 +77,17 @@
         repo = "mptcp-flake";
       };
 
-      nova.to = {
-        type = "git";
-        url = "ssh://git@git.novadiscovery.net/world/nova-nix.git";
-      };
-      # nova.to = { type = "git+ssh://git@git.novadiscovery.net:4224/world/nova-nix.git";
-      # "github:nixos/nixpkgs/nixos-unstable";
-      # home-manager
     };
-
-    # sshServe = {
-    #   enable = true;
-    #   protocol = "ssh";
-    #   # keys = [ secrets.gitolitePublicKey ];
-    # };
 
     distributedBuilds = true;
 
     package = pkgs.nixVersions.nix_2_24;
-    # package = flakeInputs.nix.packages.${pkgs.system}.nix;
-    # .nixVersions.nix_2_23;
-
-    # added to nix.conf
-    # experimental-features = nix-command flakes
-    # extraOptions = ''
-    #   keep-outputs = true       # Nice for developers
-    #
-    # '';
-
-    #  to keep build-time dependencies around => rebuild while being offline
-    # extraOptions = ''
-    #   gc-keep-outputs = true
-    #   # http-connections = 25 is the default
-    #   http2 = true
-    #   keep-derivations = true
-    #   keep-failed = true
-    #   show-trace = false
-    #   builders-use-substitutes = true
-    # '';
 
     # "https://teto.cachix.org"
     settings = {
+    #   # http-connections = 25 is the default
+    #   http2 = true;
+      # show-trace = false;
       builders-use-substitutes = true;
       use-xdg-base-directories = true;
 
@@ -129,8 +99,6 @@
       extra-substituters = [
         # "https://cache.nixos.org/" # part of the default
         "https://jupyterwith.cachix.org"
-        # TODO move it to nova's ?
-        "https://static-haskell-nix.cachix.org"
         # "https://hydra.iohk.io"  # was blocking
         "https://haskell-language-server.cachix.org"
       ];

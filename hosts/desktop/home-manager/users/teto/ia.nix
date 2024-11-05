@@ -24,7 +24,9 @@
       # whisper-cpp broken
       # local-ai-teto
       # my-local-ai
-      llama-cpp # to test
+      # llama-cpp # to test
+
+      llama-cpp-matt # simpler than
       # llm-ls # needed by the neovim plugin
       # from overlay
       # ollamagpu # st config.withCuda to enable 

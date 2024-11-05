@@ -132,7 +132,7 @@ in
       source-code-pro
       dejavu_fonts
       # Adobe Source Han Sans
-      source-han-sans #sourceHanSansPackages.japanese
+      source-han-sans # sourceHanSansPackages.japanese
       fira-code-symbols # for ligatures
       iosevka
       # noto-fonts

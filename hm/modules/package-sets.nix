@@ -67,7 +67,7 @@ in
       home.packages = [
 
         # pkgs.ollama # to test huggingface
-        pkgs.aider-chat  # breaks
+        pkgs.aider-chat # breaks
         pkgs.python3Packages.huggingface-hub
       ];
     })
@@ -260,6 +260,8 @@ in
         gettext # for envsubst (TO NOT CONFOUND with gettext's envsubst)
         sops # password 'manager'
         glab # gitlab cli
+
+        jujutsu
         # TODO pass to vim makeWrapperArgs
         # nodePackages.bash-language-server
         # just in my branch :'(

@@ -100,7 +100,6 @@ in
 
       timg
       gh-dash
-      # pass-custom
     ]);
 
   # TODO remove ? dangerous

@@ -7,9 +7,9 @@ require('fidget').setup({
         filter = vim.log.levels.INFO, -- Minimum notifications level
         override_vim_notify = false, -- Automatically override vim.notify() with Fidget
         -- How to configure notification groups when instantiated
-        configs = { 
-		  default = require('fidget.notification').default_config 
-		},
+        configs = {
+            default = require('fidget.notification').default_config,
+        },
         -- Options related to how notifications are rendered as text
         view = {
             stack_upwards = true, -- Display notification items from bottom to top

@@ -495,12 +495,15 @@
         # generates a infinite trace right now
         nvim = self.nixosConfigurations.desktop.config.home-manager.users.teto.programs.neovim.finalPackage;
 
+
         inherit (myPkgs)
           jmdict
           local-ai-teto
           meli-git
           popcorntime-teto
           sway-scratchpad
+          gpt4all
+          gpt4all-cuda
           ;
 
         nvim-unwrapped = myPkgs.neovim-unwrapped;
@@ -783,7 +786,7 @@
             final: prev:
             let
               llama-cpp-matt = (
-                final.llama-cpp.override {
+                final.llama-cpp-with-curl.override {
                   cudaSupport = true;
                   blasSupport = false;
                   rocmSupport = false;
@@ -794,30 +797,8 @@
 
             in
             {
-              alot = prev.alot.overrideAttrs({
-                doCheck = false;
-                doInstallCheck = false;
 
-              });
-              termscp = prev.termscp.overrideAttrs (oa: {
-                cargoBuildFlags = "--no-default-features";
-              });
-
-              rofi-rbw = prev.rofi-rbw.override ({ waylandSupport = true; });
-
-              flameshotGrim = final.flameshot.overrideAttrs (oldAttrs: {
-                src = prev.fetchFromGitHub {
-                  owner = "flameshot-org";
-                  repo = "flameshot";
-                  rev = "3d21e4967b68e9ce80fb2238857aa1bf12c7b905";
-                  sha256 = "sha256-OLRtF/yjHDN+sIbgilBZ6sBZ3FO6K533kFC1L2peugc=";
-                };
-                cmakeFlags = [
-                  "-DUSE_WAYLAND_CLIPBOARD=1"
-                  "-DUSE_WAYLAND_GRIM=1"
-                ];
-                buildInputs = oldAttrs.buildInputs ++ [ final.libsForQt5.kguiaddons ];
-              });
+              inherit llama-cpp-matt;
 
               meli-git = prev.meli.overrideAttrs (drv: rec {
                 name = "meli-${version}";
@@ -828,14 +809,14 @@
                 # dontUnpack = true;
                 # cargoHash = "sha256-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX=";
                 # cargoHash = "sha256-vZkMfaALnRBK8ZwMB2uvvJgQq+BdUX7enNnr9t5H+MY=";
-                cargoPatches = [];
+                cargoPatches = [ ];
                 cargoDeps = drv.cargoDeps.overrideAttrs (
                   prev.lib.const {
 
                     name = "${name}-vendor.tar.gz";
                     inherit src;
                     outputHash = "sha256-EZbfpnepzGdVDEVStPlsFJXOPqVZCKibkEoogAzsGig=";
-                    cargoPatches = [];
+                    cargoPatches = [ ];
 
                   }
                 );
@@ -888,7 +869,7 @@
           # TODO
           local = import ./overlays/pkgs/default.nix;
           haskell = import ./overlays/haskell.nix;
-          # neovimOfficial = self.inputs.neovim.overlay;
+          overrides = import ./overlays/overrides.nix;
           python = import ./overlays/python.nix;
           # mptcp = self.inputs.mptcp-flake.overlays.default;
           # nur = self.inputs.nur.overlay;

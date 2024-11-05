@@ -1,10 +1,16 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
-   cfg = config.programs.firefox;
+  cfg = config.programs.firefox;
 
-in {
-  options = {  
-    programs.firefox = {  
+in
+{
+  options = {
+    programs.firefox = {
       # mkEnableOption
       addMySearchEngines = lib.mkOption {
         default = false;
@@ -48,7 +54,7 @@ in {
         # TranslateEnabled = 
         PDFjs = false;
         Bookmarks = { };
-        };
+      };
     }
   ];
 }

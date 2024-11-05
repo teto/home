@@ -3,15 +3,15 @@
   pkgs,
   lib,
   ...
-}: 
+}:
 let
-  ffLib = pkgs.callPackage ../../../../nixpkgs/lib/firefox.nix {};
+  ffLib = pkgs.callPackage ../../../../nixpkgs/lib/firefox.nix { };
   novaSpecificSettings = {
     # avoid
     "signon.rememberSignons" = false;
   };
 
-  firefoxLib = pkgs.callPackage ../../../../nixpkgs/lib/firefox.nix {};
+  firefoxLib = pkgs.callPackage ../../../../nixpkgs/lib/firefox.nix { };
 in
 {
   programs.firefox = {

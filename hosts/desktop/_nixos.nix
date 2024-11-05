@@ -73,7 +73,6 @@ in
 
       # ../../nixos/profiles/libvirtd.nix
       ../../nixos/profiles/immich.nix
-      # ../../nixos/profiles/ollama.nix
     ]
     ++ lib.optionals withSecrets [
       ../../nixos/profiles/steam.nix
@@ -349,6 +348,14 @@ in
   system.extraSystemBuilderCmds = ''
     ln -s ${config.boot.kernelPackages.kernel.dev}/vmlinux $out/vmlinux
   '';
+
+  # use systemd program to set permissions instead of a nixpkgs script
+  # might break some permissions see https://github.com/NixOS/nixpkgs/pull/353659
+  # systemd.sysusers.enable = true;
+
+  # just to test
+  # https://www.freedesktop.org/software/systemd/man/latest/systemd-sysupdate.html
+  systemd.sysupdate.enable = true;
 
   users = {
     groups.nginx.gid = config.ids.gids.nginx;
