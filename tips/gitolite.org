@@ -1,0 +1,10 @@
+gitolite help
+https://gitolite.com/gitolite/cookbook
+
+edit ~/.gitolite.rc to enable:
+'repo-specific-hooks'
+
+https://russt.me/2013/02/automatic-deployment-with-gitolite/
+
+https://serverfault.com/questions/827571/setting-up-gitolite-repository-hook/827583
+and to enable syslog logging as well.

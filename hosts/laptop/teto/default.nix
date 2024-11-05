@@ -68,6 +68,19 @@
     enableTetoConfig = true;
   };
 
+  home.file.".inputrc" = {
+    # dotfilesPath
+    source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/home/home/dot-inputrc";
+  };
+
+  # xdg.configFile = {
+  #   "zsh" = {
+  #     source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/.config/zsh";
+  #     recursive = true;
+  #   };
+  #   # ...
+  # };
+
   # dans le cadre de mon experimentation !
   home.packages = with pkgs; [
 

@@ -202,6 +202,7 @@
       ...
     }:
     let
+      # should it depend on home.homeDirectory instead ?
       dotfilesPath = "/home/teto/home";
       secretsFolder = "/home/teto/home/secrets";
 
