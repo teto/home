@@ -66,7 +66,7 @@ in
     (mkIf cfg.llms {
       home.packages = [
 
-        pkgs.ollama # to test huggingface
+        # pkgs.ollama # to test huggingface
         pkgs.aider-chat  # breaks
         pkgs.python3Packages.huggingface-hub
       ];

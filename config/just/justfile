@@ -40,7 +40,7 @@ llama: # Start llama server
   llama-server -m ~/models/mistral-7b-openorca.Q6_K.gguf -c 2048 --port ${LLM_LOCAL_PORT} -ngl 33
 
 whisper:
-  llama-server -m ~/models/mistral-7b-openorca.Q6_K.gguf -c 2048 --port ${LLM_LOCAL_PORT} -ngl 33
+  llama-server -m ~/.cache/huggingface/hub/models--ggerganov--whisper.cpp/blobs/ -c 2048 --port ${LLM_LOCAL_PORT} -ngl 33
 
 # Update nixpkgs neovim plugins
 update-neovim-packages:
