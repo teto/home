@@ -55,26 +55,16 @@ in
     [
       autoloadedModule # loaded by haumea
       ./_boot.nix
-      # ./sops.nix
-      # ./teto/sops.nix
 
-      # ./tailscale.nix  # TODO test if it's loaded by haumea
-      # ./docker.nix
 
       ../../nixos/profiles/greetd.nix
-
-      # this is only to test the new config
-      # ./nextcloud.nix
-      # ./gitlab-runner.nix
 
       # todo renommer en workstation
 
       ../config-all.nix
-      # ../../nixos/profiles/gitlab-runner.nix
       ../../nixos/profiles/docker-daemon.nix
       flakeSelf.nixosModules.novaModule
       flakeSelf.nixosModules.desktop
-      # ../../nixos/profiles/desktop.nix
       ../../nixos/profiles/nix-daemon.nix
       # ../../nixos/profiles/experimental.nix
       ../../nixos/profiles/steam.nix
@@ -83,7 +73,7 @@ in
 
       # ../../nixos/profiles/libvirtd.nix
       ../../nixos/profiles/immich.nix
-      ../../nixos/profiles/ollama.nix
+      # ../../nixos/profiles/ollama.nix
     ]
     ++ lib.optionals withSecrets [
       ../../nixos/profiles/steam.nix
@@ -329,67 +319,30 @@ in
     options snd_hda_intel index=1
   '';
 
-  # TODO  move to doctor
-  # https://github.com/containers/image/blob/main/docs/containers-registries.conf.5.md
-  # look into credential-helpers
-  #
-  # public.ecr.aws
-  environment.etc."containers/registries.conf".text = lib.mkForce ''
-    # Note that order matters here. quay.io is the redhat repo
-    unqualified-search-registries = [  "registry.novadiscovery.net", "docker.io", "quay.io" ]
 
-    [[registry]]
-    # In Nov. 2020, Docker rate-limits image pulling.  To avoid hitting these
-    # limits while testing, always use the google mirror for qualified and
-    # unqualified `docker.io` images.
-    # Ref: https://cloud.google.com/container-registry/docs/pulling-cached-images
-    prefix="docker.io"
-    location="mirror.gcr.io"
-
-    [[registry]]
-    prefix = "nova"
-    location = "registry.novadiscovery.net"
-    insecure = false
-
-    # Alias used in tests. Must contain registry AND repository
-    [aliases]
-      simwork = "registry.novadiscovery.net/jinko/jinko/core-webservice"
-      habu = "registry.novadiscovery.net/jinko/dorayaki/habu"
-      dango = "registry.novadiscovery.net/jinko/dorayaki/dango"
-      # "podman-desktop-test123"="florent.fr/will/like"
-
-  '';
-
-  # what's the diff ?!
+  # set on shell initialisation (e.g. in /etc/profile
   environment.variables = {
     WLR_NO_HARDWARE_CURSORS = "1";
+    # see if it is correctly interpolated
+    ZDOTDIR="$HOME/.config/zsh";
   };
 
+  # variables set by PAM early in the process
+  #   Also, these variables are merged into environment.variables[
   environment.sessionVariables = {
     WLR_NO_HARDWARE_CURSORS = "1";
     LIBVA_DRIVER_NAME = "nvidia";
     __GLX_VENDOR_LIBRARY_NAME = "nvidia";
   };
 
-  # this 
-  # security.sudo.wheelNeedsPassword = ;
-  # disabled to run stable-diffusion
-  # TODO this should go somewhere else
-  # services.xserver = {
-  #   displayManager.gdm.wayland = true;
-  # };
   # system.replaceRuntimeDependencies
   #     List of packages to override without doing a full rebuild. The original derivation and replacement derivation must have the same name length, and ideally should have close-to-identical directory layout.
 
-  environment.systemPackages = [
-    # pkgs.ntfsprogs
-
-    # (builtins.trace "${myNvim}" myNvim)
-    pkgs.nvidia-system-monitor-qt # executable is called qnvsm
-    pkgs.nvitop
-    pkgs.vulkan-tools # for vkcude for instance
-    # pkgs.vkmark # vkmark to test
-  ];
+  # environment.systemPackages = [
+  #   # pkgs.ntfsprogs
+  #
+  #   # (builtins.trace "${myNvim}" myNvim)
+  # ];
 
   # $out here is the profile generation
   system.extraSystemBuilderCmds = ''
@@ -409,5 +362,5 @@ in
     };
   };
 
-  system.stateVersion = "23.11";
+  system.stateVersion = "24.05";
 }
