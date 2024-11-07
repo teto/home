@@ -77,8 +77,6 @@
       ../../../../../hm/profiles/gaming.nix
 
       ../../../../../hm/profiles/nova.nix
-      ../../../../../hm/profiles/extra.nix
-      ../../../../../hm/profiles/extra.nix
       ../../../../../hm/profiles/vdirsyncer.nix
       ../../../../../hm/profiles/japanese.nix
     ];
@@ -178,6 +176,23 @@
     memento # capable to display 2 subtitles at same time
 
     rofi-rbw-wayland
+    # ];
+    # home.packages = with pkgs; [
+
+    ubuntu_font_family
+    inconsolata # monospace
+    noto-fonts-cjk-sans # asiatic
+    # (pkgs.nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; })
+    # nerdfonts
+    # corefonts # microsoft fonts  UNFREE
+    font-awesome_5
+    source-code-pro
+    dejavu_fonts
+    # Adobe Source Han Sans
+    source-han-sans # sourceHanSansPackages.japanese
+    fira-code-symbols # for ligatures
+    iosevka
+    # noto-fonts
   ];
 
   package-sets = {

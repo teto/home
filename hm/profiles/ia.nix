@@ -7,10 +7,8 @@
 {
   home.packages = with pkgs; [
 
-
     # openai-whisper is the openai official one
     openai-whisper-cpp
-    
 
     # look at nixified-ai
     # ollama # st config.withCuda to enable 

@@ -83,7 +83,7 @@ in
       # ../desktop/services/tailscale.nix
 
       ../config-all.nix
-      ../../nixos/modules/luarocks-site.nix
+      # ../../nixos/modules/luarocks-site.nix
 
       ../../nixos/profiles/desktop.nix
       ../../nixos/profiles/docker-daemon.nix

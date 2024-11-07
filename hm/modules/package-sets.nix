@@ -223,6 +223,8 @@ in
         hakuneko
         memento # broken capable to display 2 subtitles at same time
         vlc
+        # pinta # photo editing
+
         # leafnode dovecot22 dovecot_pigeonhole fetchmail procmail w3m
         # mairix mutt msmtp lbdb contacts spamassassin
         # element-desktop # TODO this should go into nix profile install
@@ -260,6 +262,7 @@ in
         gettext # for envsubst (TO NOT CONFOUND with gettext's envsubst)
         sops # password 'manager'
         glab # gitlab cli
+        hexyl # hexcode viewer
 
         jujutsu
         # TODO pass to vim makeWrapperArgs

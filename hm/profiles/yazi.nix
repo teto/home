@@ -16,4 +16,11 @@
 
     pkgs._7zz # required for the ouch plugin
   ];
+
+  programs.yazi = {
+    enable = true;
+    enableBashIntegration = true;
+    enableZshIntegration = true;
+    # package = flakeInputs.yazi.packages.${pkgs.system}.yazi;
+  };
 }

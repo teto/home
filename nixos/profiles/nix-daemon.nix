@@ -85,8 +85,8 @@
 
     # "https://teto.cachix.org"
     settings = {
-    #   # http-connections = 25 is the default
-    #   http2 = true;
+      #   # http-connections = 25 is the default
+      #   http2 = true;
       # show-trace = false;
       builders-use-substitutes = true;
       use-xdg-base-directories = true;

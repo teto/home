@@ -5,21 +5,21 @@
   pkgs,
   withSecrets,
   flakeInputs,
+  flakeSelf,
   ...
 }:
 {
 
   imports =
     lib.optionals withSecrets [
-      ../../../hm/profiles/nova.nix
       ../../desktop/home-manager/users/teto/calendars.nix
       ../../desktop/home-manager/users/teto/contacts.nix
       ../../desktop/home-manager/users/teto/mail.nix
       ../../desktop/home-manager/users/teto/sops.nix
       ../../desktop/home-manager/users/teto/programs/khal.nix
 
+      ../../../hm/profiles/nova.nix
       ../../../hm/profiles/vdirsyncer.nix
-
       ../../../hm/profiles/experimental.nix
     ]
     ++ [
@@ -43,17 +43,20 @@
 
       # ../../../hm/profiles/swayidle.nix
       ../../../hm/profiles/desktop.nix
-      ../../../hm/profiles/extra.nix
       ../../../hm/profiles/japanese.nix
       ../../../hm/profiles/sway.nix
       ../../../hm/profiles/wezterm.nix
-      ../../../hm/profiles/yazi.nix
+      flakeSelf.homeModules.yazi
+      flakeSelf.homeModules.neovim-base
 
       ../../../hm/profiles/dev.nix
       # ../../hm/profiles/syncthing.nix
       # ../../hm/profiles/alot.nix
       ../../../hm/profiles/vscode.nix # provided by nova-nix config
     ];
+
+  # broken on unstable because python2
+  services.opensnitch-ui.enable = false;
 
   package-sets = {
     enableDesktopGUIPackages = true;

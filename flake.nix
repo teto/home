@@ -495,7 +495,6 @@
         # generates a infinite trace right now
         nvim = self.nixosConfigurations.desktop.config.home-manager.users.teto.programs.neovim.finalPackage;
 
-
         inherit (myPkgs)
           jmdict
           local-ai-teto
@@ -742,6 +741,13 @@
           # (modulesFromDir ./hm/modules)
 
         };
+        homeModules = {
+          package-sets = ./hm/modules/packages-sets;
+          # (modulesFromDir ./hm/modules)
+
+          yazi = ./hm/profiles/yazi.nix;
+          neovim-base = ./hm/profiles/neovim.nix;
+        };
 
         nixosModules =
           # broken
@@ -755,6 +761,7 @@
             novaModule = nixos/modules/novaModule.nix;
             neovim = nixos/profiles/neovim.nix;
             ntp = nixos/profiles/ntp.nix;
+            nvd = nixos/modules/nvd.nix;
             desktop = nixos/profiles/desktop.nix;
             universal = hosts/config-all.nix;
 

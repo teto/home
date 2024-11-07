@@ -3,6 +3,7 @@
   lib,
   pkgs,
   flakeInputs,
+  flakeSelf,
   ...
 }:
 let
@@ -32,14 +33,15 @@ in
   imports = [
     autoloadedModule
     flakeInputs.nix-index-database.nixosModules.nix-index
-    ../../hosts/config-all.nix
+    flakeSelf.nixosModules.nvd
+    flakeSelf.nixosModules.universal
+    flakeSelf.nixosModules.neovim
 
     ../../nixos/profiles/ntp.nix
     ../../nixos/modules/network-manager.nix
     # ../../nixos/profiles/librenms.nix
 
     ./gnome.nix
-    ./neovim.nix
     ./pipewire.nix
     # ./sops.nix
 
@@ -203,26 +205,5 @@ in
 
   # programs.file-roller.enable = true;
   # programs.system-config-printer.enable = true;
-
-  # TODO move to nixosModule
-  system.activationScripts.report-nixos-changes = ''
-    PATH=$PATH:${
-      lib.makeBinPath [
-        pkgs.nvd
-        pkgs.nix
-      ]
-    }
-    nvd diff /nix/var/nix/profiles/system $(ls -dv /nix/var/nix/profiles/system-*-link | tail -1)
-  '';
-
-  # system.activationScripts.report-home-manager-changes = ''
-  #   PATH=$PATH:${
-  #     lib.makeBinPath [
-  #       pkgs.nvd
-  #       pkgs.nix
-  #     ]
-  #   }
-  #   nvd diff $(ls -dv /nix/var/nix/profiles/per-user/teto/home-manager-*-link | tail -2)
-  # '';
 
 }
