@@ -363,6 +363,7 @@
           lib,
           pkgs,
           withSecrets,
+          flakeSelf,
           secrets,
           ...
         }:
@@ -404,13 +405,11 @@
             )
           ];
           home-manager.extraSpecialArgs =
-            # let
-            #   withSecrets = false;
-            # in
             {
               secrets = lib.optionalAttrs withSecrets secrets;
               inherit withSecrets;
               flakeInputs = self.inputs;
+              inherit flakeSelf;
               inherit novaUserProfile;
               # TODO get it from ./. ?
               inherit dotfilesPath secretsFolder;
@@ -612,23 +611,14 @@
 
             # it doesn't have to be called like that !
             # TODO use mkNixosSystem
-            laptop = nixpkgs.lib.nixosSystem {
-              inherit system;
-              pkgs = myPkgs;
+            laptop = mkNixosSystem {
+              withSecrets = false;
 
-              specialArgs = {
-                withSecrets = false;
-                secrets = { };
-                flakeInputs = self.inputs;
-                inherit dotfilesPath;
-              };
+              hostname = "laptop";
 
               modules = [
-                # error: attribute 'cacheHome' missing
                 # self.inputs.nix-index-database.hmModules.nix-index
-                hm.nixosModules.home-manager
-                self.inputs.sops-nix.nixosModules.sops
-                hm-common
+                # self.inputs.sops-nix.nixosModules.sops
                 ./hosts/laptop/_nixos.nix
               ];
             };
@@ -662,55 +652,14 @@
               withSecrets = true;
             };
 
-            # neotokyo = nixpkgs.lib.nixosSystem {
-            #   inherit system;
-            #   # pkgs = self.inputs.nixos-unstable.legacyPackages.${system}.pkgs;
-            #   pkgs = myPkgs;
-            #   modules = [
-            #     self.inputs.sops-nix.nixosModules.sops
-            #     ./hosts/neotokyo/config.nix 
-            #     # (
-            #     #   { pkgs, ... }:
-            #     #   {
-            #     #     imports = [
-            #     #       ./hosts/neotokyo/config.nix 
-            #     #     ];
-            #     #   }
-            #     # )
-            #     self.nixosModules.default-hm
-            #     hm.nixosModules.home-manager
-            #   ];
-            #   specialArgs = {
-            #     hostname = "neotokyo";
-            #     inherit secrets;
-            #     withSecrets = true;
-            #     flakeSelf = self;
-            #     flakeInputs = self.inputs;
-            #   };
-            # };
-
             # desktop is a 
             desktop = mkNixosSystem {
               withSecrets = false;
               hostname = "jedha";
-              # inherit system;
-              # pkgs = myPkgs;
-              # specialArgs = {
-              #   secrets = { };
-              #   withSecrets = false;
-              #   flakeSelf = self;
-              #   flakeInputs = self.inputs;
-              #   inherit (self) inputs;
-              # };
               modules = [
-                # self.inputs.sops-nix.nixosModules.sops
                 ./hosts/desktop/_nixos.nix
                 # self.inputs.mptcp-flake.nixosModules.mptcp
                 # self.inputs.peerix.nixosModules.peerix
-                # hm.nixosModules.home-manager
-                # nova.nixosProfiles.dev
-                # nur.nixosModules.nur
-                # hm-common
               ];
             };
 

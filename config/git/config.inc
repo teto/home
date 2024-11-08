@@ -72,6 +72,10 @@ autocorrect = 10
   ab = absorb
   canoed= commit --amend --no-edit
 
+  # list the remote tags without fetching the. Need the remote afterwards
+  ls-remote-tags = ls-remote --tags
+
+  # gh-pr = git fetch up pull/<pr-number>/head:my-local-branch-name
 
   # inspired by https://blog.jez.io/cli-code-review/
   # list files which have changed since REVIEW_BASE

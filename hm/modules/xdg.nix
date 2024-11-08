@@ -22,9 +22,9 @@ in
   config = mkIf cfg.enable {
 
     home.sessionVariables = {
-      CABAL_CONFIG = "${config.home.sessionVariables.XDG_CONFIG_HOME}/cabal/config";
+      # CABAL_CONFIG = "${config.home.sessionVariables.XDG_CONFIG_HOME}/cabal/config";
       # TODO move to data instead ?
-      CABAL_DIR = "${config.home.sessionVariables.XDG_CACHE_HOME}//cabal";
+      # CABAL_DIR = "${config.home.sessionVariables.XDG_CACHE_HOME}/cabal";
     };
   };
 }

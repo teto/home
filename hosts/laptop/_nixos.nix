@@ -26,7 +26,6 @@ let
         # exclude = [
         #   "teto"
         #   "root"
-        #   "_hardware.nix"
         #   "nixos.nix"
         # ];
       };
@@ -57,10 +56,7 @@ let
         #   "root"
         # ];
       };
-      # loader = inputs: path: 
-      #  inputs.super.defaultWith import;
 
-      #  builtins.trace path path;
       inputs = args // {
         inputs = flakeInputs;
       };
@@ -79,8 +75,6 @@ in
 
       ./sops.nix
       ./_hardware.nix
-      # ../desktop/sops.nix
-      # ../desktop/services/tailscale.nix
 
       ../config-all.nix
       # ../../nixos/modules/luarocks-site.nix
@@ -94,7 +88,6 @@ in
       ../../nixos/profiles/sway.nix
       ../../nixos/profiles/wifi.nix
       # ../../nixos/profiles/adb.nix
-      # ../../nixos/profiles/nix-cache-sync.nix
       ../../nixos/profiles/kanata.nix
       ../../nixos/profiles/nix-daemon.nix
       ../../nixos/profiles/postgresql.nix
