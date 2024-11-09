@@ -61,7 +61,7 @@
       url = "github:elizagamedev/mujmap";
       # inputs.nixpkgs.follows = "nixpkgs"; # breaks build
     };
-    # TODO use mine instead
+
     hm = {
       url = "github:teto/home-manager/scratch";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -103,7 +103,6 @@
 
     nixos-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nixos-stable.url = "github:nixos/nixpkgs/nixos-24.05";
-    # nixos-stable-custom.url = "github:teto/nixpkgs?ref=teto/nixos-23.11";
     nixpkgs-for-hls.url = "github:nixos/nixpkgs?rev=612f97239e2cc474c13c9dafa0df378058c5ad8d";
 
     nix-search-cli = {

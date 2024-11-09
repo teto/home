@@ -23,9 +23,6 @@ switch: (nixos-rebuild "switch" "")
 
 repl: (nixos-rebuild "repl" "")
 
-# --override-input rocks-nvim /home/teto/rocks.nvim
-# TODO check if the paths exists to ease bootstrap ?
-# same for NOVA_OVH1
 
 # --override-input nova /home/teto/nova/doctor \
 [private]
@@ -95,9 +92,7 @@ deploy-router:
 
 # [confirm("prompt")]
 deploy-neotokyo:
-    # - we need interactivty to enter password see 
-    #   https://github.com/serokell/deploy-rs/issues/78#issuecomment-1367467086
-    # --ssh-opts="-t" --magic-rollback false
+    # --magic-rollback false --auto-rollback=false
     deploy '.#neotokyo' -s --interactive-sudo=true
 
 # regenerate my email contacts

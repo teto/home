@@ -1,5 +1,7 @@
 {
   config,
+  secretsFolder, 
+  dotfilesPath,
   ...
 }:
 {
@@ -8,7 +10,11 @@
   ];
   # This will add secrets.yml to the nix store
   # You can avoid this by adding a string to the full path instead, i.e.
-  sops.defaultSopsFile = ./secrets.yaml;
+  sops.defaultSopsFile = "${secretsFolder}/neotokyo-secrets.yaml";
+
+  # to avoid the 'secrets.yaml' is not in the Nix store.
+  sops.validateSopsFiles = false;
+
   sops.age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
   # sops.age.keyFile = "/home/teto/home/secrets/age.key";
 
