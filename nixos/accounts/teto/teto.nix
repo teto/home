@@ -12,6 +12,8 @@
 
   users.users.teto = {
 
+    name = "Matt";
+
     shell = pkgs.zsh;
 
     isNormalUser = true; # creates home/ sets default shell

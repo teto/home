@@ -72,7 +72,7 @@ in
       # ../../nixos/profiles/podman.nix
 
       # ../../nixos/profiles/libvirtd.nix
-      ../../nixos/profiles/immich.nix
+      # ../../nixos/profiles/immich.nix
     ]
     ++ lib.optionals withSecrets [
       ../../nixos/profiles/steam.nix

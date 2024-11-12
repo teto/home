@@ -72,7 +72,8 @@
 
   users = {
     users.teto = {
-      groups = [
+      name = "Matt";
+      extraGroups = [
         "nextcloud" # to be able to list files
         "backup" # to read 
       ];

@@ -77,10 +77,10 @@ in
       ./sops.nix
       ./_hardware.nix
 
-      ../config-all.nix
       # ../../nixos/modules/luarocks-site.nix
 
-      ../../nixos/profiles/desktop.nix
+      flakeSelf.nixosModules.universal
+      # ../../nixos/profiles/desktop.nix
       ../../nixos/profiles/docker-daemon.nix
       ../../nixos/profiles/greetd.nix
       ../../nixos/profiles/podman.nix

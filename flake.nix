@@ -390,9 +390,9 @@
             ./hm/modules/zsh.nix
             ./hm/modules/xdg.nix
             # ./hm/modules/firefox.nix
-            ./hm/modules/package-sets.nix
 
-            ./hm/profiles/neovim.nix
+            self.homeModules.package-sets
+            self.homeModules.neovim
             (
               { ... }:
               {
@@ -637,10 +637,6 @@
             });
           };
 
-        homeManagerModules = {
-          package-sets = ./hm/modules/packages-sets;
-          # (modulesFromDir ./hm/modules)
-        };
         #  Standalone home-manager configuration entrypoint
         #  Available through 'home-manager --flake .# your-username@your-hostname'
         # homeConfigurations = { };
@@ -661,7 +657,7 @@
           # for stuff not in home-manager yet
           # experimental = ../../../hm/profiles/experimental.nix;
 
-          package-sets = ./hm/modules/packages-sets;
+          package-sets = ./hm/modules/package-sets.nix;
           # (modulesFromDir ./hm/modules)
 
           yazi = ./hm/profiles/yazi.nix;

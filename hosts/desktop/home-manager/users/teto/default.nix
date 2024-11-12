@@ -33,7 +33,6 @@
       # ../../../hm/profiles/common.nix
       ../../../../../hm/profiles/desktop.nix
       ../../../../../hm/profiles/wezterm.nix
-      # flakeInputs.ironbar.homeManagerModules.default
       # ../../../hm/profiles/experimental.nix
 
       # Not tracked, so doesn't need to go in per-machine subdir
