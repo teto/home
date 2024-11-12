@@ -18,7 +18,7 @@
       ../../desktop/home-manager/users/teto/sops.nix
       ../../desktop/home-manager/users/teto/programs/khal.nix
 
-      ../../../hm/profiles/nova.nix
+      flakeSelf.homeModules.nova
       ../../../hm/profiles/vdirsyncer.nix
       ../../../hm/profiles/experimental.nix
     ]
@@ -48,8 +48,9 @@
       ../../../hm/profiles/wezterm.nix
       flakeSelf.homeModules.yazi
       flakeSelf.homeModules.neovim-base
+      flakeSelf.homeModules.developer
 
-      ../../../hm/profiles/dev.nix
+      # ../../../hm/profiles/dev.nix
       # ../../hm/profiles/syncthing.nix
       # ../../hm/profiles/alot.nix
       ../../../hm/profiles/vscode.nix # provided by nova-nix config

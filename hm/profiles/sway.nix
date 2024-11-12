@@ -24,7 +24,9 @@ in
 # TODO load sway folder via haumea
 {
 
-  imports = [ ./flameshot.nix ];
+  imports = [ 
+    ./flameshot.nix 
+  ];
 
   # TODO it is done in sway.nix
   # replaced with  package-sets.wayland
@@ -292,6 +294,7 @@ in
     # TODO we should wrap sway with that ?
     # some of these advised by https://github.com/flameshot-org/flameshot/blob/master/docs/Sway%20and%20wlroots%20support.md
     # export MOZ_ENABLE_WAYLAND=1
+    # TODO put it in the wrapper started by the .desktop file !
     extraSessionCommands = ''
       # according to https://www.reddit.com/r/swaywm/comments/11d89w2/some_workarounds_to_use_sway_with_nvidia/
       export XWAYLAND_NO_GLAMOR=1

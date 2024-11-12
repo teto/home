@@ -440,6 +440,7 @@ in
       home.packages = with pkgs; [
         # pkgs.powertop # superuseful
         # pkgs.pcm
+        pkgs.mokuro
         pkgs.python3Packages.manga_ocr
         tagainijisho # japanse dict; like zkanji Qt based
         # ${config.system}

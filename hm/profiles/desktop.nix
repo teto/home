@@ -71,6 +71,7 @@ in
     locales = [
       "fr_FR.UTF-8/UTF-8"
       "en_US.UTF-8/UTF-8"
+      "en_US.UTF-8/UTF-8"
     ];
   };
 
@@ -103,11 +104,9 @@ in
     ]);
 
   # TODO remove ? dangerous
-  home.sessionPath = [ "$XDG_DATA_HOME/../bin" ];
-
-  services.gnome-keyring = {
-    enable = true;
-  };
+  home.sessionPath = [
+    "$XDG_DATA_HOME/../bin" 
+  ];
 
   services.network-manager-applet.enable = true;
 

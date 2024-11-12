@@ -68,6 +68,10 @@ systemd-run --user -p MemoryLimit=3G google-chrome
 
 ō
 
+* nixos systemd.tmpfiles creates the service:
+
+systemd-tmpfiles-setup-sysroot
+
 systemctl list-timers
 
   EnvironmentFile

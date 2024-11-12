@@ -16,6 +16,9 @@
     vault
   ];
 
+  # packages-sets = {
+  # };
+
   programs.direnv = {
     enable = true;
 

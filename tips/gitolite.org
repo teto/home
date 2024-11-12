@@ -8,3 +8,7 @@ https://russt.me/2013/02/automatic-deployment-with-gitolite/
 
 https://serverfault.com/questions/827571/setting-up-gitolite-repository-hook/827583
 and to enable syslog logging as well.
+
+
+to test a post-receive hook installed by gitolite, one could:
+repositories/blog.git/hooks/post-receive.h00-deploy

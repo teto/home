@@ -6,6 +6,8 @@
   ...
 }:
 {
+
+  # TODO check against package-sets
   home.packages = with pkgs; [
     tagainijisho # japanse dict; like zkanji Qt based
     # ${config.system}

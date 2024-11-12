@@ -541,52 +541,6 @@
 
       in
       {
-        #  Standalone home-manager configuration entrypoint
-        #  Available through 'home-manager --flake .# your-username@your-hostname'
-        homeConfigurations = { };
-
-        # TODO scan hm/{modules, profiles} folder
-        homeModules = {
-
-          # bash = ./hm/profiles/bash.nix;
-          services-mujmap = ./hm/services/mujmap.nix;
-          # services-swaync = ./hm/services/swaync.nix;
-          sway = ./hm/profiles/sway.nix;
-          neovim = ./hm/profiles/neovim.nix;
-
-          # teto-desktop = 
-          teto-nogui = (
-            {
-              config,
-              pkgs,
-              lib,
-              ...
-            }:
-            {
-              # inspire ./teto/default.nix
-
-              imports = [
-                # And add the home-manager module
-                ./hm/modules/neovim.nix
-                # ./hm/modules/i3.nix
-                ./hm/modules/bash.nix
-                ./hm/modules/zsh.nix
-                ./hm/modules/xdg.nix
-
-                ./hm/profiles/common.nix
-                ./hm/profiles/neovim.nix
-                ./hm/profiles/zsh.nix
-                (
-                  { ... }:
-                  {
-                    home.stateVersion = "24.05";
-                  }
-                )
-              ];
-            }
-          );
-
-        };
 
         nixosConfigurations =
           let
@@ -687,14 +641,66 @@
         homeManagerModules = {
           package-sets = ./hm/modules/packages-sets;
           # (modulesFromDir ./hm/modules)
-
         };
+        #  Standalone home-manager configuration entrypoint
+        #  Available through 'home-manager --flake .# your-username@your-hostname'
+        # homeConfigurations = { };
+
+        # TODO scan hm/{modules, profiles} folder
         homeModules = {
+
+          # bash = ./hm/profiles/bash.nix;
+          services-mujmap = ./hm/services/mujmap.nix;
+          # services-swaync = ./hm/services/swaync.nix;
+          sway = ./hm/profiles/sway.nix;
+          neovim = ./hm/profiles/neovim.nix;
+          nova = ./hm/profiles/nova.nix;
+          developer = ./hm/profiles/dev.nix;
+
+          # for stuff not in home-manager yet
+          # experimental = ../../../hm/profiles/experimental.nix;
+
           package-sets = ./hm/modules/packages-sets;
           # (modulesFromDir ./hm/modules)
 
           yazi = ./hm/profiles/yazi.nix;
           neovim-base = ./hm/profiles/neovim.nix;
+
+          teto-desktop = 
+            ./hm/profiles/desktop.nix;
+            # hosts/desktop/home-manager/users/teto/default.nix;
+          teto-nogui = (
+            {
+              config,
+              pkgs,
+              lib,
+              ...
+            }:
+            {
+              # inspire ./teto/default.nix
+
+              imports = [
+                # And add the home-manager module
+                ./hm/modules/neovim.nix
+                # ./hm/modules/i3.nix
+                ./hm/modules/bash.nix
+                ./hm/modules/zsh.nix
+                ./hm/modules/xdg.nix
+
+                ./hm/profiles/common.nix
+                ./hm/profiles/neovim.nix
+                ./hm/profiles/zsh.nix
+                (
+                  { ... }:
+                  {
+                    home.stateVersion = "24.05";
+                  }
+                )
+              ];
+            }
+          );
+
+        # homeModules = {
         };
 
         nixosModules =

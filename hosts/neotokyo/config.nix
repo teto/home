@@ -20,7 +20,7 @@ in
     };
   };
 
-  system.stateVersion = "23.11";
+  system.stateVersion = "24.05";
 
   # imported from gandhi ?
   boot.initrd.kernelModules = [
@@ -78,18 +78,28 @@ in
 
   # virtualisation.docker.enable = true;
 
-  users.users.teto = {
-    extraGroups = [
-      "nextcloud" # to be able to list files
-    ];
+  users = {
+    users.teto = {
+      groups = [
+        "nextcloud" # to be able to list files
+        "backup" # to read 
+      ];
+    };
+    groups.backup = {};
   };
 
   home-manager.users = {
     root = {
       imports = [
         # ./users/root.nix
-        ../../hm/profiles/neovim.nix
-        ../desktop/root/programs/ssh.nix
+        
+        flakeSelf.homeModules.neovim
+        # ../../hm/profiles/neovim.nix
+        ({ ... }:
+        {
+          programs.ssh.enable = true;
+        })
+
       ];
 
       # home.stateVersion = "23.11";
@@ -102,9 +112,6 @@ in
         ./teto/default.nix
         ../../hm/profiles/neovim.nix
 
-        # custom modules
-        # ./home.nix
-        # breaks build: doesnt like the "activation-script"
       ];
     };
   };
@@ -118,7 +125,7 @@ in
     # just to generate the entry used by ubuntu's grub
     grub = {
       enable = true;
-      useOSProber = true;
+      useOSProber = false;
       # install to none, we just need the generated config
       # for ubuntu grub to discover
       device = lib.mkForce "/dev/xvda";

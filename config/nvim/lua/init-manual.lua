@@ -324,7 +324,7 @@ vim.opt.mousemodel = 'popup_setpos'
 require('teto.context_menu').setup_rclick_menu_autocommands()
 
 -- MenuPopup
-vim.opt.signcolumn = 'auto:3'
+vim.opt.signcolumn = 'auto:1-3'
 
 --set shada=!,'50,<1000,s100,:0,n/home/teto/.cache/nvim/shada
 
@@ -815,9 +815,5 @@ local has_dbee, dbee = pcall(require, 'dbee')
 if has_dbee then
     dbee.setup({})
 end
-
-vim.keymap.set('n', '<C-t>', function()
-    require('menu').open('default')
-end, {})
 
 vim.opt.completeopt = 'preview,menu,menuone'

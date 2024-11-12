@@ -6,10 +6,6 @@
   ...
 }:
 {
-  imports = [
-    ../../../nixos/profiles/immich.nix
-  ];
-
   services.immich = {
     enable = true;
     # host = ""; # all interfaces (example from module option) breaks with nginx
