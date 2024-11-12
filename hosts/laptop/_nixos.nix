@@ -3,6 +3,7 @@
   lib,
   pkgs,
   flakeInputs,
+  flakeSelf,
   withSecrets,
   secrets,
   ...
@@ -95,20 +96,12 @@ in
       # usually inactive, just to test some stuff
       # ../../nixos/modules/libvirtd.nix
 
-      # ./profiles/pixiecore.nix
-
     ]
     ++ lib.optionals withSecrets [
-      ../../nixos/profiles/nova.nix
-      # ../../nixos/profiles/wireguard.nix
+      flakeSelf.nixosModules.novaModule
     ];
 
-  services.xserver = {
-    videoDrivers = [
-      # "nouveau"
-      # "nvidia"
-    ];
-  };
+
   # boot.blacklistedKernelModules = [ "nouveau" ];
 
   # services.tailscale = {
@@ -117,6 +110,7 @@ in
   # };
   #
   # enables command on boot/suspend etc
+
   powerManagement.enable = false;
 
   security.polkit.enable = true;

@@ -50,10 +50,10 @@ nvim-treesitter-textobjects = "scm"
 nvim-bqf= "1.1.1"
 "smart-open.nvim"= "scm"
 "llm.nvim" = "scm"
-
-[plugins."typescript-tools.nvim" ]
-git = "pmizio/typescript-tools.nvim"
-rev = "f8c2e0b36b651c85f52ad5c5373ff8b07adc15a7"
+vim-startuptime= "4.5.0"
+"grug-far.nvim"= "scm"
+"typescript-tools.nvim" = "scm"
+menu= "scm"
 # nvim-treesitter-textobjects = "scm"
 # "rocks-treesitter.nvim" = "1.0.3"
 
@@ -112,10 +112,10 @@ git = "alec-gibson/nvim-tetris"
 rev = "v0.1.1"
 opt = true
 
-[plugins."startuptime.vim"]
-git = "tweekmonster/startuptime.vim"
-rev = "dfa57f522d6f61793fe5fea65bca7484751b8ca2"
-opt = true
+# [plugins."startuptime.vim"]
+# git = "tweekmonster/startuptime.vim"
+# rev = "dfa57f522d6f61793fe5fea65bca7484751b8ca2"
+# opt = true
 
 [plugins."command-and-cursor.nvim"]
 git = "moyiz/command-and-cursor.nvim"
@@ -144,10 +144,6 @@ rev = "v0.0.1"
 [plugins.i3-vim-syntax]
 git = "PotatoesMaster/i3-vim-syntax"
 rev = "affe37e89911c47831cb5b87697ac70e48bb3e0f"
-
-[plugins."grug-far.nvim"]
-git = "MagicDuck/grug-far.nvim"
-rev = "85cadf849bdb22540c36da2034d21de0b37c0952"
 
 [plugins.neovim]
 git = "rose-pine/neovim"
@@ -225,10 +221,6 @@ rev = "56842d097245a08d77912edf5f2a69ba29f275d7"
 git = "nvchad/volt"
 rev = "43f72b49037c191eb3cfe26ba7a5574b4bfce226"
 
-[plugins.menu]
-git = "nvchad/menu"
-rev = "ee85b2e394fde354bd24e35ff7a688d10c9212fa"
-
 [plugins."bigfile.nvim"]
 git = "lunarvim/bigfile.nvim"
 rev = "33eb067e3d7029ac77e081cfe7c45361887a311a"
@@ -240,10 +232,6 @@ branch = "master"
 [plugins."http-codes.nvim"]
 git = "barrett-ruth/http-codes.nvim"
 rev = "a610788dff2fb5df05b230d73a926c8dc3173c16"
-
-[plugins.vim-startuptime]
-git = "dstein64/vim-startuptime"
-rev = "v4.5.0"
 
 [config]
 plugins_dir = "plugins/"

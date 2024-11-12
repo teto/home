@@ -8,10 +8,6 @@
   lib,
   ...
 }:
-let
-  # TODO add a justfile to run the basic steps
-  banner = "You can start the nextcloud-add-user.service unit if teto user doesnt exist yet";
-in
 {
   networking = {
     hostName = "neotokyo";
@@ -38,10 +34,6 @@ in
     wantedBy = [ "multi-user.target" ];
     serviceConfig.Restart = "always";
   };
-
-  programs.bash.interactiveShellInit = ''
-    cat "${pkgs.writeText "welcome-message" banner}";
-  '';
 
   imports = [
     # for gandi
@@ -109,9 +101,9 @@ in
       imports = [
         flakeSelf.homeModules.teto-nogui
 
-        ./teto/default.nix
-        ../../hm/profiles/neovim.nix
-
+        ./home-manager/users/teto/default.nix
+        flakeSelf.homeModules.teto-nogui
+        flakeSelf.homeModules.neovim
       ];
     };
   };

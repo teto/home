@@ -631,8 +631,7 @@
             test = router.extendModules ({
               modules = [
                 hm.nixosModules.home-manager
-                # ./hosts/desktop/teto/neovim.nix
-                ./nixos/profiles/neovim.nix
+                self.homeModules.neovim
               ];
 
             });
@@ -653,7 +652,9 @@
           services-mujmap = ./hm/services/mujmap.nix;
           # services-swaync = ./hm/services/swaync.nix;
           sway = ./hm/profiles/sway.nix;
-          neovim = ./hm/profiles/neovim.nix;
+
+          # 
+          neovim-full = hosts/desktop/home-manager/users/teto/programs/neovim.nix;
           nova = ./hm/profiles/nova.nix;
           developer = ./hm/profiles/dev.nix;
 
@@ -664,7 +665,7 @@
           # (modulesFromDir ./hm/modules)
 
           yazi = ./hm/profiles/yazi.nix;
-          neovim-base = ./hm/profiles/neovim.nix;
+          neovim = ./hm/profiles/neovim.nix;
 
           teto-desktop = 
             ./hm/profiles/desktop.nix;
