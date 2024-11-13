@@ -80,6 +80,7 @@ in
       # ../../nixos/modules/luarocks-site.nix
 
       flakeSelf.nixosModules.universal
+      flakeSelf.nixosModules.nix-daemon
       # ../../nixos/profiles/desktop.nix
       ../../nixos/profiles/docker-daemon.nix
       ../../nixos/profiles/greetd.nix
@@ -90,7 +91,6 @@ in
       ../../nixos/profiles/wifi.nix
       # ../../nixos/profiles/adb.nix
       ../../nixos/profiles/kanata.nix
-      ../../nixos/profiles/nix-daemon.nix
       ../../nixos/profiles/postgresql.nix
       # ../../nixos/profiles/home-assistant.nix 
       # usually inactive, just to test some stuff

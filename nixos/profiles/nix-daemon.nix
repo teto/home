@@ -3,6 +3,7 @@
   lib,
   system,
   flakeInputs,
+  secrets,
   pkgs,
   ...
 }:
@@ -83,7 +84,6 @@
 
     package = pkgs.nixVersions.nix_2_24;
 
-    # "https://teto.cachix.org"
     settings = {
       #   # http-connections = 25 is the default
       #   http2 = true;
@@ -96,10 +96,13 @@
       keep-failed = true;
       # experimental-features = nix-command flakes auto-allocate-uids
       extra-experimental-features = "auto-allocate-uids nix-command flakes cgroups";
-      extra-substituters = [
+      substituters = [
         # "https://cache.nixos.org/" # part of the default
-        "https://jupyterwith.cachix.org"
-        # "https://hydra.iohk.io"  # was blocking
+        # "https://teto.cachix.org"
+        secrets.nova.novaNixCache.prod
+      ];
+
+      extra-substituters = [
         "https://haskell-language-server.cachix.org"
       ];
       trusted-public-keys = [

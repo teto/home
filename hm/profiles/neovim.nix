@@ -21,7 +21,7 @@ let
   # lua = myNeovimUnwrapped.lua;
 
   rawPlugins =
-    pluginsMap.basePlugins
+       pluginsMap.basePlugins
     ++ pluginsMap.luaPlugins
     ++ pluginsMap.colorschemePlugins
     ++ pluginsMap.filetypePlugins;

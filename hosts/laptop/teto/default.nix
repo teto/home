@@ -47,7 +47,7 @@
       ../../../hm/profiles/sway.nix
       ../../../hm/profiles/wezterm.nix
       flakeSelf.homeModules.yazi
-      flakeSelf.homeModules.neovim-base
+      flakeSelf.homeModules.neovim
       flakeSelf.homeModules.developer
 
       # ../../../hm/profiles/dev.nix
@@ -72,6 +72,7 @@
     enableTetoConfig = true;
   };
 
+  # just stow-config
   home.file.".inputrc" = {
     # dotfilesPath
     source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/home/home/dot-inputrc";
@@ -108,5 +109,4 @@
   #   # /home/teto/.nix-profile/bin:/nix/profile/bin:/home/teto/.local/state/nix/profile/bin:/etc/profiles/per-user/teto/bin:/nix/var/nix/profiles/default/bin:/run/current-system/sw/bin:/home/teto/.local/share/../bin
   # };
 
-  programs.neovim.enable = true;
 }

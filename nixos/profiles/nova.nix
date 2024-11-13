@@ -31,9 +31,9 @@
   # Expected by
   environment.etc."nixos/nova-nixos/config.json".text = builtins.toJSON {
     README = "this file is a dummy one, used to include most dependencies in the liveboot";
-    displayname = "MC";
+    displayname = "Matt C";
 
-    email = secrets.accounts.mail.nova.email;
+    email = secrets.nova.accounts.email;
     # password = "$6$rounds=656000$kfC6x6MDyR33Wgdo$m0IcbB1psI.yacdCwZRUvrzSeB6a5h2wnaS2VRtYV0WOPPSdWnG7vO3fGVcn9rmTGN.Ic0rWkDarHGFSkZFXM1";
     pc = "nova";
     team = "sse";

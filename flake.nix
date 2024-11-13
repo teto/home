@@ -654,6 +654,7 @@
           nova = ./hm/profiles/nova.nix;
           developer = ./hm/profiles/dev.nix;
 
+
           # for stuff not in home-manager yet
           # experimental = ../../../hm/profiles/experimental.nix;
 
@@ -711,6 +712,7 @@
             #             nixos/profiles/nova.nix
             novaModule = nixos/modules/novaModule.nix;
             neovim = nixos/profiles/neovim.nix;
+            nix-daemon = nixos/profiles/nix-daemon.nix;
             ntp = nixos/profiles/ntp.nix;
             nvd = nixos/modules/nvd.nix;
             desktop = nixos/profiles/desktop.nix;
@@ -793,7 +795,6 @@
               ollamagpu = final.ollama.override { llama-cpp = llama-cpp-matt; };
 
               mujmap-unstable = self.inputs.mujmap.packages.x86_64-linux.mujmap;
-              mujmap = final.mujmap-unstable; # needed in HM module
 
               # neovide = prev.neovide.overrideAttrs(oa: {
               #  src = self.inputs.neovide;
