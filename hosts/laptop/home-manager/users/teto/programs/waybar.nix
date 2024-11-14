@@ -2,11 +2,14 @@
   config,
   lib,
   pkgs,
+  flakeSelf,
   ...
 }:
 {
 
-  imports = [ ../../../../hm/profiles/waybar.nix ];
+  imports = [ 
+    flakeSelf.homeModules.waybar
+  ];
 
   programs.waybar = {
 

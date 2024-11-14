@@ -12,6 +12,7 @@
 
     machine-learning = {
       # enable = lib.mkForce true;
+      enable = false;
     };
     # secretsFile
     openFirewall = true;

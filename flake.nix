@@ -385,7 +385,7 @@
             ./hm/profiles/common.nix
 
             # TODO it should autoload those
-            ./hm/modules/neovim.nix
+            self.homeModules.neovim
             ./hm/modules/bash.nix
             ./hm/modules/zsh.nix
             ./hm/modules/xdg.nix
@@ -393,6 +393,7 @@
 
             self.homeModules.package-sets
             self.homeModules.neovim
+            self.homeModules.neovim-module
             (
               { ... }:
               {
@@ -643,6 +644,7 @@
 
         # TODO scan hm/{modules, profiles} folder
         homeModules = {
+          waybar = ./hm/profiles/waybar.nix;
 
           # bash = ./hm/profiles/bash.nix;
           services-mujmap = ./hm/services/mujmap.nix;
@@ -663,6 +665,7 @@
 
           yazi = ./hm/profiles/yazi.nix;
           neovim = ./hm/profiles/neovim.nix;
+          neovim-module = ./hm/modules/neovim.nix;
 
           teto-desktop = 
             ./hm/profiles/desktop.nix;
@@ -686,10 +689,10 @@
                 ./hm/modules/xdg.nix
 
                 ./hm/profiles/common.nix
-                ./hm/profiles/neovim.nix
+                self.homeModules.neovim
                 ./hm/profiles/zsh.nix
                 (
-                  { ... }:
+                  # { ... }:
                   {
                     home.stateVersion = "24.05";
                   }

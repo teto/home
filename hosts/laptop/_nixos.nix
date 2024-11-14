@@ -16,6 +16,10 @@ let
         root = ./.;
         include =
           [
+            "boot.nix"
+            # UNCOMMENTING this will break everything since its content is not adapted
+            # "home-manager/"
+            "users/"
             "services/"
             "programs/"
           ]
@@ -24,11 +28,15 @@ let
             "sops/secrets.nix"
             "services/openssh.nix"
           ];
-        # exclude = [
-        #   "teto"
-        #   "root"
-        #   "nixos.nix"
-        # ];
+        exclude = [
+          # "teto"
+          # "root"
+          # "environment.nix"
+          # "boot.nix"
+          "generated.nix"
+          "_nixos.nix"
+          # "sops.nix"
+        ];
       };
       # loader = inputs: path: 
       #  inputs.super.defaultWith import;
@@ -49,6 +57,7 @@ let
       src = flakeInputs.nix-filter {
         root = ../desktop;
         include = [
+          # TODO just include directly
           # "sops.nix"
           "sops/secrets.nix"
         ];
@@ -75,7 +84,7 @@ in
       desktopAutoloaded
 
       ./sops.nix
-      ./_hardware.nix
+      ./generated.nix
 
       # ../../nixos/modules/luarocks-site.nix
 
@@ -101,16 +110,9 @@ in
       flakeSelf.nixosModules.novaModule
     ];
 
-
   # boot.blacklistedKernelModules = [ "nouveau" ];
 
-  # services.tailscale = {
-  #   enable = true;
-  #   useRoutingFeatures = "client";
-  # };
-  #
   # enables command on boot/suspend etc
-
   powerManagement.enable = false;
 
   security.polkit.enable = true;
@@ -142,32 +144,26 @@ in
   # boot.initrd.luks.devices."luks-abd09d4b-3972-405a-b314-44821af95c0e".device = "/dev/disk/by-uuid/abd09d4b-3972-405a-b314-44821af95c0e";
   # boot.initrd.luks.devices."luks-abd09d4b-3972-405a-b314-44821af95c0e".keyFile = "/crypto_keyfile.bin";
 
-  # Enable the GNOME Desktop Environment.
-  #   services.xserver.displayManager.gdm.enable = true;
-  #   services.xserver.desktopManager.gnome.enable = true;
-
   ### HWP
-  # systemd.tmpfiles.rules = [
-  #   "w /sys/devices/system/cpu/cpufreq/policy*/energy_performance_preference - - - - balance_power"
-  # ];
 
   home-manager.users = {
     root = {
       imports = [
-        ../desktop/root/default.nix
-        ../desktop/root/programs/ssh.nix
+        # ../desktop/root/programs/ssh.nix
+        ./home-manager/users/root/default.nix
 
-        ../../hm/profiles/neovim.nix
-      ] ++ lib.optionals withSecrets [ ../../hm/profiles/nova/ssh-config.nix ];
-
+        # flakeSelf.homeModules.neovim
+      # ] ++ lib.optionals withSecrets [
+      #   # ../../hm/profiles/nova/ssh-config.nix 
+      #     flakeSelf.homeModules.nova
+      ];
     };
 
     teto = {
       # TODO it should load the whole folder
       imports = [
         # custom modules
-        ../../hm/modules/package-sets.nix
-        ./teto/default.nix
+        ./home-manager/users/teto/default.nix
       ];
     };
   };

@@ -266,7 +266,7 @@ in
 
   home.packages = with pkgs; [
     isync
-    mujmap
+    mujmap-unstable
     meli-git # broken jmap mailreader
   ];
 

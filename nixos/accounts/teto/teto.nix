@@ -12,7 +12,7 @@
 
   users.users.teto = {
 
-    name = "Matt";
+    # name = "Matt"; # This fucks up everything
 
     shell = pkgs.zsh;
 

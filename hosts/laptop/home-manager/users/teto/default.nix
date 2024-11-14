@@ -12,15 +12,15 @@
 
   imports =
     lib.optionals withSecrets [
-      ../../desktop/home-manager/users/teto/calendars.nix
-      ../../desktop/home-manager/users/teto/contacts.nix
-      ../../desktop/home-manager/users/teto/mail.nix
-      ../../desktop/home-manager/users/teto/sops.nix
-      ../../desktop/home-manager/users/teto/programs/khal.nix
+      ../../../../desktop/home-manager/users/teto/calendars.nix
+      ../../../../desktop/home-manager/users/teto/contacts.nix
+      ../../../../desktop/home-manager/users/teto/mail.nix
+      ../../../../desktop/home-manager/users/teto/sops.nix
+      ../../../../desktop/home-manager/users/teto/programs/khal.nix
 
       flakeSelf.homeModules.nova
-      ../../../hm/profiles/vdirsyncer.nix
-      ../../../hm/profiles/experimental.nix
+      ../../../../../hm/profiles/vdirsyncer.nix
+      ../../../../../hm/profiles/experimental.nix
     ]
     ++ [
       ./sway.nix
@@ -30,30 +30,31 @@
       ./services/swayidle.nix
 
       # ../../../hm/profiles/emacs.nix
-      ../../../hm/profiles/qutebrowser.nix
+      ../../../../../hm/profiles/qutebrowser.nix
 
       # ../desktop/teto/default.nix  # Track for regressions
 
-      ../../desktop/home-manager/users/teto/programs/ssh.nix
-      ../../desktop/home-manager/users/teto/programs/bash.nix
-      ../../desktop/home-manager/users/teto/programs/neovim.nix
-      ../../desktop/home-manager/users/teto/programs/helix.nix
-      ../../desktop/home-manager/users/teto/programs/yazi.nix
-      ../../desktop/home-manager/users/teto/services/nextcloud-client.nix
+      ../../../../desktop/home-manager/users/teto/programs/ssh.nix
+      ../../../../desktop/home-manager/users/teto/programs/bash.nix
+      ../../../../desktop/home-manager/users/teto/programs/neovim.nix
+      ../../../../desktop/home-manager/users/teto/programs/helix.nix
+      ../../../../desktop/home-manager/users/teto/programs/yazi.nix
+      ../../../../desktop/home-manager/users/teto/services/nextcloud-client.nix
 
       # ../../../hm/profiles/swayidle.nix
-      ../../../hm/profiles/desktop.nix
-      ../../../hm/profiles/japanese.nix
-      ../../../hm/profiles/sway.nix
-      ../../../hm/profiles/wezterm.nix
+      ../../../../../hm/profiles/desktop.nix
+      ../../../../../hm/profiles/japanese.nix
+      ../../../../../hm/profiles/sway.nix
+      ../../../../../hm/profiles/wezterm.nix
       flakeSelf.homeModules.yazi
       flakeSelf.homeModules.neovim
       flakeSelf.homeModules.developer
+      flakeSelf.homeModules.package-sets
 
       # ../../../hm/profiles/dev.nix
       # ../../hm/profiles/syncthing.nix
       # ../../hm/profiles/alot.nix
-      ../../../hm/profiles/vscode.nix # provided by nova-nix config
+      ../../../../../hm/profiles/vscode.nix # provided by nova-nix config
     ];
 
   # broken on unstable because python2

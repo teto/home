@@ -213,6 +213,9 @@ in
 
       autocompletion = mkOption {
         type = autocompletionModule;
+        default = {
+          enable = false;
+        };
         description = "Autocompletion configuration";
       };
 

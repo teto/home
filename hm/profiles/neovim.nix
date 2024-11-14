@@ -36,8 +36,8 @@ in
     # custom options
     # fennel.enable = false;
     # teal.enable = false;
-    orgmode.enable = false;
-    autocompletion.enable = true;
+    # orgmode.enable = false;
+    # autocompletion.enable = true;
     # TODO ?
     # snippets.enable = true;
 

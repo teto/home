@@ -134,7 +134,7 @@ in
 
   nix = {
     # nix_2_24 ?
-    # package = pkgs.nixVersions.nix_2_22;
+    # package = pkgs.nixVersions.nix_2_24;
 
     extraOptions = ''
       experimental-features = nix-command flakes

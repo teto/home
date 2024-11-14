@@ -13,10 +13,6 @@ let
     flakeInputs.haumea.lib.load {
       src = flakeInputs.nix-filter {
         root = ./desktop;
-        # exclude = [
-        #   "teto"
-        #   "root"
-        # ];
       };
 
       inputs = args // {
