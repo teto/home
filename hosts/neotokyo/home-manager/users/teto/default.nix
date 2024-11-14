@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  flakeSelf,
   ...
 }:
 let
@@ -23,13 +24,12 @@ in
     cat "${pkgs.writeText "welcome-message" banner}";
   '';
 
+  imports = [
+    flakeSelf.homeModules.yazi
+  ];
 
   programs.zsh.enable = true;
   programs.zsh.loginExtra = ''
     cat "${pkgs.writeText "login-welcome" welcomeMessage}";
   '';
-
-  home.packages = [
-    pkgs.yazi
-  ];
 }

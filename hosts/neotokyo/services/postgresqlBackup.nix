@@ -34,17 +34,31 @@ in
   # see TMPFILES.D(5)
   systemd.tmpfiles.rules = [
     # "d '${cfg.location}' 0700 postgres - - -"
-    "d '/var/backup/postgresql' 0700 postgres backup - -"
+
+    # 'backup' group hasread access only
+    "d '/var/backup/postgresql' 0740 postgres backup - -"
   ];
 
-  # chgrp ${syncthingCfg.group} ${encBackupFileLocation} && \
   # mv ${encBackupFileLocation} ${backupDir}/ && \
-  # systemd.services."postgresqlBackup-${dbName}".serviceConfig = {
-  #   ExecStartPost = ''
-  #     echo "DB dump encrypted successfully" && \
-  #     echo "DB dump moved to the backup directory"'
-  #   '';
-  # };
+
+  systemd.services."postgresqlBackup-${dbName}".serviceConfig = {
+  # script = pkgs.writeShellScriptBin "pg-db-archive" ''
+  #   #!/usr/bin/env bash
+  #
+  #   ## Fail on any error:
+  #   set -e
+  #
+    ExecStartPost = pkgs.writeShellScript "pg-db-archive" ''
+      ## Define the backup directory path:
+      set -x
+      _dirBackup="${config.services.postgresqlBackup.location}"
+
+      echo "assigning group to $_dirBackup"
+      chgrp -R "backup" "/var/backup/postgresql"
+      echo "Changing permissions"
+      chmod -R 440 "/var/backup/postgresql"
+    '';
+  };
 
   # systemd.tmpfiles.rules = [
   #   "z ${syncthingCfg.dataDir} 0750 ${syncthingCfg.user} ${syncthingCfg.group}"

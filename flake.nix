@@ -721,6 +721,8 @@
             desktop = nixos/profiles/desktop.nix;
             universal = hosts/config-all.nix;
 
+            # server = ;
+
           };
 
         templates = {

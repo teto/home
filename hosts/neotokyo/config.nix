@@ -54,14 +54,11 @@
     ./services/nginx.nix
     ./services/immich.nix
 
-    # ./gitolite.nix
     # ../../nixos/modules/hercules-ci-agents.nix
+    # ../../nixos/profiles/docker-daemon.nix
 
     ../../nixos/profiles/nix-daemon.nix
-    # ../../nixos/profiles/docker-daemon.nix
     ../../nixos/profiles/server.nix
-
-    # ./blog.nix
 
     # just to help someone on irc
     # <nixpkgs/nixos/modules/profiles/hardened.nix>
@@ -84,24 +81,18 @@
   home-manager.users = {
     root = {
       imports = [
-        # ./users/root.nix
         
         flakeSelf.homeModules.neovim
-        # ../../hm/profiles/neovim.nix
         ({ ... }:
         {
           programs.ssh.enable = true;
         })
 
       ];
-
-      # home.stateVersion = "23.11";
     };
     teto = {
       # TODO it should load the whole folder
       imports = [
-        flakeSelf.homeModules.teto-nogui
-
         ./home-manager/users/teto/default.nix
         flakeSelf.homeModules.teto-nogui
         flakeSelf.homeModules.neovim
