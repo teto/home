@@ -26,16 +26,24 @@
 
   ];
 
-  home-manager.users.teto = {
+  home-manager.users = {
+    root = {
+      imports = [
+          ../../hm/profiles/nova/ssh-config.nix
+        ];
+
+    };
+
+    teto = {
     imports = [
+        # TODO move it here
+        ../../hm/profiles/nova/ssh-config.nix
 
-      # TODO move it here
-      ../../hm/profiles/nova/ssh-config.nix
-
-      flakeInputs.nova-doctor.homeModules.user
-      flakeInputs.nova-doctor.homeModules.sse
-      flakeInputs.nova-doctor.homeModules.vpn
-    ];
+        flakeInputs.nova-doctor.homeModules.user
+        flakeInputs.nova-doctor.homeModules.sse
+        flakeInputs.nova-doctor.homeModules.vpn
+      ];
+    };
   };
 
   # TODO  move to doctor

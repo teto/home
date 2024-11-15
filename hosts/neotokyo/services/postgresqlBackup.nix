@@ -56,7 +56,8 @@ in
       echo "assigning group to $_dirBackup"
       chgrp -R "backup" "/var/backup/postgresql"
       echo "Changing permissions"
-      chmod -R 440 "/var/backup/postgresql"
+      # TODO ideally we could change it to 440 ?
+      chmod -R 640 "/var/backup/postgresql"
     '';
   };
 

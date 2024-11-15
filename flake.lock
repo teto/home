@@ -1612,11 +1612,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1729090247,
-        "narHash": "sha256-Yv0/drsZpgROroHiu1Gq76gY+cBumzQ+X+HDO2TUUOo=",
+        "lastModified": 1731629994,
+        "narHash": "sha256-W4Nc11D3QhN5OgPaIgGez3kiT+ZG//D4DPDsLYKHIEg=",
         "owner": "teto",
         "repo": "home-manager",
-        "rev": "05c622b154f7426f3d996eb93eabded72f1bca55",
+        "rev": "5b6a1aed45faa3d33526eec7f5ff4533d804bcb1",
         "type": "github"
       },
       "original": {
@@ -2616,11 +2616,11 @@
     },
     "nixpkgs_6": {
       "locked": {
-        "lastModified": 1729630903,
-        "narHash": "sha256-B97enyhoYnPyxQv218l2YcREVgOP8TiZcaH37g84n+Y=",
+        "lastModified": 1731667959,
+        "narHash": "sha256-mZc1d1+lYnM6Xh/DnZUAb2A6bat08VgPUsh4su97/SI=",
         "owner": "teto",
         "repo": "nixpkgs",
-        "rev": "6433eff5c3960bc0f10650af5d3c176284fa94d6",
+        "rev": "20411fb208773943194347c090ca23aa631ed7d7",
         "type": "github"
       },
       "original": {
@@ -2706,11 +2706,11 @@
         "treefmt-nix": "treefmt-nix_2"
       },
       "locked": {
-        "lastModified": 1726227785,
-        "narHash": "sha256-IaIWMh/t0w8WPz+drMFMdWWQvjByyPc4TmhBAZ0Uluw=",
+        "lastModified": 1731408855,
+        "narHash": "sha256-lwcOfznUGO2VPs7/olQ0KC+dqmwLVGIXoBLMa4+C4x8=",
         "ref": "refs/heads/master",
-        "rev": "4f33699bc021ffd7be974448cbcda49d33a5cc3b",
-        "revCount": 1351,
+        "rev": "493cad7ca09470cc237276d10feeed641fd1916e",
+        "revCount": 1358,
         "type": "git",
         "url": "ssh://git@git.novadiscovery.net/infra/ci-runner"
       },
