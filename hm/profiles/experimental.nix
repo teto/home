@@ -21,6 +21,8 @@
 
   programs.swappy.enable = false;
 
+  programs.wl-clip-persist.enable = true;
+
   programs.vifm.enable = true;
 
   # home.packages = with pkgs; [ ];

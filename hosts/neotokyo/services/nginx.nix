@@ -5,8 +5,8 @@
   secrets,
   ...
 }:
-let 
-  acmeRoot =  "/var/lib/acme/";
+let
+  acmeRoot = "/var/lib/acme/";
 in
 {
 
@@ -15,10 +15,10 @@ in
     # defaults.email = "cert+admin@example.com";
     # "blog.${secrets.jakku.hostname}"
 
-
-    /* we are trying to generate a multidomain certificate here, 
-    inspired by:
-    - https://discourse.nixos.org/t/nixos-nginx-acme-ssl-certificates-for-multiple-domains/19608/3
+    /*
+      we are trying to generate a multidomain certificate here,
+      inspired by:
+      - https://discourse.nixos.org/t/nixos-nginx-acme-ssl-certificates-for-multiple-domains/19608/3
     */
     certs."blog.${secrets.jakku.hostname}" = {
       # blog.${secrets.jakku.hostname}
@@ -29,13 +29,13 @@ in
       enableDebugLogs = true;
       group = "nginx";
 
-      extraDomainNames = [ 
+      extraDomainNames = [
         # "blog.${secrets.jakku.hostname}"
         "www.${secrets.jakku.hostname}"
         "${secrets.jakku.hostname}"
         # "www.example.com"
       ];
-# https://discourse.nixos.org/t/setup-a-wildcard-certificate-with-acme-on-a-custom-domain-name-hosted-by-powerdns/15055/6
+      # https://discourse.nixos.org/t/setup-a-wildcard-certificate-with-acme-on-a-custom-domain-name-hosted-by-powerdns/15055/6
     };
     # certs."${secrets.jakku.hostname}" = {
     #   # ${secrets.jakku.hostname}
@@ -64,8 +64,8 @@ in
         # All serverAliases will be added as extra domain names on the certificate.
         serverAliases = [
           # "blog.${secrets.jakku.hostname}" 
-          "${secrets.jakku.hostname}" 
-          "www.${secrets.jakku.hostname}" 
+          "${secrets.jakku.hostname}"
+          "www.${secrets.jakku.hostname}"
         ];
         # Directory for the ACME challenge, which is public. Don’t put certs or keys in here. Set to null to inherit from config.security.acme.
         # acmeRoot = "/var/lib/acme/challenges-de";

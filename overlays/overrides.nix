@@ -31,7 +31,7 @@ in
     ];
   });
 
-  termscp = prev.termscp.overrideAttrs (oa: {
+  termscp-matt = prev.termscp.overrideAttrs (oa: {
     cargoBuildFlags = "--no-default-features";
   });
 

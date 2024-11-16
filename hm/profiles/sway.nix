@@ -24,8 +24,8 @@ in
 # TODO load sway folder via haumea
 {
 
-  imports = [ 
-    ./flameshot.nix 
+  imports = [
+    ./flameshot.nix
   ];
 
   # TODO it is done in sway.nix

@@ -1,17 +1,20 @@
-{ pkgs
-, withSecrets 
-, lib
-, flakeSelf
-, ... 
+{
+  pkgs,
+  withSecrets,
+  lib,
+  flakeSelf,
+  ...
 
 }:
 {
-    imports = [
+  imports =
+    [
 
       # flakeSelf.homeModules.neovim
-    ] ++ lib.optionals withSecrets [
+    ]
+    ++ lib.optionals withSecrets [
       # ../../hm/profiles/nova/ssh-config.nix 
-        flakeSelf.homeModules.nova
+      flakeSelf.homeModules.nova
     ];
 
   programs.ssh.enable = true;

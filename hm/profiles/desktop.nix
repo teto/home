@@ -105,7 +105,7 @@ in
 
   # TODO remove ? dangerous
   home.sessionPath = [
-    "$XDG_DATA_HOME/../bin" 
+    "$XDG_DATA_HOME/../bin"
   ];
 
   services.network-manager-applet.enable = true;

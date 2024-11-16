@@ -251,7 +251,6 @@ M.set_repl_luadev_rclick_menu = function()
     }, M.buf_is_file)
 end
 
-
 -- menu_add('Rest.RunRequest', "<cmd>lua require('rest-nvim').run(true)<cr>")
 
 M.set_rest_rclick_menu = function()
@@ -410,10 +409,10 @@ Check 'mousemodel'
 -- t'LspAttach', 'FileType'his 
 ]]
 --
--- 
+--
 M.setup_rclick_menu_autocommands = function()
     -- 'LspAttach', 'FileType'
-	-- local has_spectre, spectre = pcall(require, 'spectre')
+    -- local has_spectre, spectre = pcall(require, 'spectre')
 
     vim.api.nvim_create_autocmd({ 'MenuPopup' }, {
 
@@ -448,12 +447,11 @@ M.setup_rclick_menu_autocommands = function()
     })
 end
 
-    -- options is a table or string, if string then it will look at the table from menus* module of this repo
-    -- opts : { mouse = true, border = false }"
-    --
+-- options is a table or string, if string then it will look at the table from menus* module of this repo
+-- opts : { mouse = true, border = false }"
+--
 vim.keymap.set('n', '<C-t>', function()
     require('menu').open('default')
 end, {})
-
 
 return M

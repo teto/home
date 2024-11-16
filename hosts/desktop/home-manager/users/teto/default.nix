@@ -27,9 +27,11 @@
       # flakeSelf.homeModules.bash
       ../../../../../hm/profiles/bash.nix
 
-      ../../../../../hm/profiles/nova/programs/bash.nix
+      flakeSelf.homeModules.nova
+      flakeSelf.homeModules.teto-desktop
 
-      ../../../../../hm/teto/common.nix
+      # ../../../../../hm/teto/common.nix
+
       # ../../../hm/profiles/common.nix
       ../../../../../hm/profiles/desktop.nix
       ../../../../../hm/profiles/wezterm.nix

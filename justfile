@@ -23,7 +23,6 @@ switch: (nixos-rebuild "switch" "")
 
 repl: (nixos-rebuild "repl" "")
 
-
 # --override-input nova /home/teto/nova/doctor \
 [private]
 nixos-rebuild command builders="--option builders \"$NOVA_OVH1\" -j0":
@@ -178,8 +177,13 @@ nix-check-db:
     sqlite3 /nix/var/nix/db/db.sqlite 'pragma integrity_check'
 
 # receive secrets
-secrets-receive:
+secrets-wormhole-receive:
     wormhole-rs receive
+
+# rsync
+secrets-scp-sync:
+    # laptop must exist in ssh config
+    scp -r laptop:/home/teto/home/secrets ~/home/secrets
 
 # install git hooks
 git-hooks:

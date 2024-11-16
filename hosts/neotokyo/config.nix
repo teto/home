@@ -72,21 +72,23 @@
       # name = "Matt";
       extraGroups = [
         "nextcloud" # to be able to list files
-        "backup" # to read 
+        "backup" # to read
       ];
     };
-    groups.backup = {};
+    groups.backup = { };
   };
 
   home-manager.users = {
     root = {
       imports = [
-        
+
         flakeSelf.homeModules.neovim
-        ({ ... }:
-        {
-          programs.ssh.enable = true;
-        })
+        (
+          { ... }:
+          {
+            programs.ssh.enable = true;
+          }
+        )
 
       ];
     };

@@ -153,9 +153,9 @@ in
         ./home-manager/users/root/default.nix
 
         # flakeSelf.homeModules.neovim
-      # ] ++ lib.optionals withSecrets [
-      #   # ../../hm/profiles/nova/ssh-config.nix 
-      #     flakeSelf.homeModules.nova
+        # ] ++ lib.optionals withSecrets [
+        #   # ../../hm/profiles/nova/ssh-config.nix 
+        #     flakeSelf.homeModules.nova
       ];
     };
 

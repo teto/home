@@ -1,15 +1,15 @@
 /**
-
-there is a lot to say about backups 
-- https://thenegation.com/posts/nixos-pg-archives/
-- https://notes.abhinavsarkar.net/2023/mastodon-backup
-
+  there is a lot to say about backups
+  - https://thenegation.com/posts/nixos-pg-archives/
+  - https://notes.abhinavsarkar.net/2023/mastodon-backup
 */
-{ config
-, pkgs
-, secrets
-, ... }:
-let 
+{
+  config,
+  pkgs,
+  secrets,
+  ...
+}:
+let
   dbName = config.services.immich.database.name;
 in
 {
@@ -42,12 +42,12 @@ in
   # mv ${encBackupFileLocation} ${backupDir}/ && \
 
   systemd.services."postgresqlBackup-${dbName}".serviceConfig = {
-  # script = pkgs.writeShellScriptBin "pg-db-archive" ''
-  #   #!/usr/bin/env bash
-  #
-  #   ## Fail on any error:
-  #   set -e
-  #
+    # script = pkgs.writeShellScriptBin "pg-db-archive" ''
+    #   #!/usr/bin/env bash
+    #
+    #   ## Fail on any error:
+    #   set -e
+    #
     ExecStartPost = pkgs.writeShellScript "pg-db-archive" ''
       ## Define the backup directory path:
       set -x

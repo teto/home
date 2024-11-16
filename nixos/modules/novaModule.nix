@@ -29,12 +29,12 @@
   home-manager.users = {
     root = {
       imports = [
-          ../../hm/profiles/nova/ssh-config.nix
-        ];
+        ../../hm/profiles/nova/ssh-config.nix
+      ];
     };
 
     teto = {
-    imports = [
+      imports = [
         # TODO move it here
         ../../hm/profiles/nova/ssh-config.nix
 

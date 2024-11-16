@@ -7,7 +7,7 @@
 }:
 {
 
-  imports = [ 
+  imports = [
     flakeSelf.homeModules.waybar
   ];
 

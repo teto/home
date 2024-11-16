@@ -405,16 +405,15 @@
               }
             )
           ];
-          home-manager.extraSpecialArgs =
-            {
-              secrets = lib.optionalAttrs withSecrets secrets;
-              inherit withSecrets;
-              flakeInputs = self.inputs;
-              inherit flakeSelf;
-              inherit novaUserProfile;
-              # TODO get it from ./. ?
-              inherit dotfilesPath secretsFolder;
-            };
+          home-manager.extraSpecialArgs = {
+            secrets = lib.optionalAttrs withSecrets secrets;
+            inherit withSecrets;
+            flakeInputs = self.inputs;
+            inherit flakeSelf;
+            inherit novaUserProfile;
+            # TODO get it from ./. ?
+            inherit dotfilesPath secretsFolder;
+          };
 
           home-manager.users = {
             root = {
@@ -503,6 +502,7 @@
           sway-scratchpad
           gpt4all
           gpt4all-cuda
+          termscp-matt
           ;
 
         nvim-unwrapped = myPkgs.neovim-unwrapped;
@@ -655,8 +655,9 @@
           # 
           neovim-full = hosts/desktop/home-manager/users/teto/programs/neovim.nix;
           nova = ./hm/profiles/nova.nix;
-          developer = ./hm/profiles/dev.nix;
 
+          xdg = ./hm/profiles/xdg.nix;
+          developer = ./hm/profiles/dev.nix;
 
           # for stuff not in home-manager yet
           # experimental = ../../../hm/profiles/experimental.nix;
@@ -668,9 +669,8 @@
           neovim = ./hm/profiles/neovim.nix;
           neovim-module = ./hm/modules/neovim.nix;
 
-          teto-desktop = 
-            ./hm/profiles/desktop.nix;
-            # hosts/desktop/home-manager/users/teto/default.nix;
+          teto-desktop = ./hm/profiles/desktop.nix;
+          # hosts/desktop/home-manager/users/teto/default.nix;
           teto-nogui = (
             {
               config,
@@ -696,13 +696,12 @@
                   # { ... }:
                   {
                     home.stateVersion = "24.05";
-                  }
-                )
+                  })
               ];
             }
           );
 
-        # homeModules = {
+          # homeModules = {
         };
 
         nixosModules =
@@ -721,6 +720,7 @@
             nvd = nixos/modules/nvd.nix;
             desktop = nixos/profiles/desktop.nix;
             universal = hosts/config-all.nix;
+            steam = nixos/profiles/steam.nix;
 
             # server = ;
 
