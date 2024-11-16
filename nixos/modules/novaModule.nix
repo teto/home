@@ -31,7 +31,6 @@
       imports = [
           ../../hm/profiles/nova/ssh-config.nix
         ];
-
     };
 
     teto = {
