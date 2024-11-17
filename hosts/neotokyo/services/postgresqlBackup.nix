@@ -16,7 +16,7 @@ in
   services.postgresqlBackup = {
     enable = true;
     startAt = "*-*-* *:15:00";
-    pgdumpOptions = "--no-owner";
+    pgdumpOptions = "--no-owner -v";
 
     # generate systemd services called "postgresqlBackup-${db}"
     databases = [
@@ -36,29 +36,29 @@ in
     # "d '${cfg.location}' 0700 postgres - - -"
 
     # 'backup' group hasread access only
-    "d '/var/backup/postgresql' 0740 postgres backup - -"
+    # 0740 would be better but for now just make it work
+    # TODO check if this takes precedence over postgresqlBackup tmpfiles
+    "d '/var/backup/postgresql' 0750 postgres backup - -"
   ];
 
   # mv ${encBackupFileLocation} ${backupDir}/ && \
 
   systemd.services."postgresqlBackup-${dbName}".serviceConfig = {
     # script = pkgs.writeShellScriptBin "pg-db-archive" ''
-    #   #!/usr/bin/env bash
-    #
-    #   ## Fail on any error:
-    #   set -e
-    #
+
+    # change the owner so that the restic job can read the file and back it up
     ExecStartPost = pkgs.writeShellScript "pg-db-archive" ''
       ## Define the backup directory path:
       set -x
       _dirBackup="${config.services.postgresqlBackup.location}"
 
       echo "assigning group to $_dirBackup"
+      # does it have the right ? immich.sql.gz
       chgrp -R "backup" "/var/backup/postgresql"
       echo "Changing permissions"
-      # TODO ideally we could change it to 440 ?
-      chmod -R 640 "/var/backup/postgresql"
     '';
+    # # TODO ideally we could change it to 440 ?
+    # chmod -R 640 "/var/backup/postgresql"
   };
 
   # systemd.tmpfiles.rules = [

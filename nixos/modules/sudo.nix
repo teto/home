@@ -1,26 +1,28 @@
-
-
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
-cfg = config.programs.neovim;
+  cfg = config.security.sudo;
 in
 {
   options = {
+    config = lib.mkEnableOption {
+      description = "Enable bell on sudo";
+      # default = false;
+    };
   };
 
-  
-programs.neovim = {
-    config = mkOption {
-      type = types.nullOr types.lines;
-      description = "Script to configure this plugin. The scripting language should match type.";
-      default = null;
-    };
+  config = lib.mkIf cfg.enable (
+    lib.mkMerge [
+      {
+        config.security.sudo.extraConfig = ''
+          Defaults        passprompt="[sudo] password for %p: ", timestamp_timeout=360, timestamp_type=global
+        '';
+      }
+    ]
+  );
 
 }
-  extraConfig = ''
-    Defaults        passprompt="[sudo] password for %p: ", timestamp_timeout=360, timestamp_type=global
-  '';
-
-}
-
-

@@ -27,13 +27,12 @@
       # flakeSelf.homeModules.bash
       ../../../../../hm/profiles/bash.nix
 
-      flakeSelf.homeModules.nova
       flakeSelf.homeModules.teto-desktop
+      # ../../../../../hm/profiles/desktop.nix
 
       # ../../../../../hm/teto/common.nix
 
       # ../../../hm/profiles/common.nix
-      ../../../../../hm/profiles/desktop.nix
       ../../../../../hm/profiles/wezterm.nix
       # ../../../hm/profiles/experimental.nix
 
@@ -66,20 +65,21 @@
       ./services/mpd.nix
       ./services/mpris.nix
       ./services/nextcloud-client.nix
+      flakeSelf.homeModules.japanese
     ]
     ++ lib.optionals withSecrets [
       ./sops.nix
       ./mail.nix
       ./ia.nix
+      flakeSelf.homeModules.nova
+      # ../../../../../hm/profiles/japanese.nix
       ../../../../../hm/profiles/ia.nix
       # ../../../../../hm/profiles/nushell.nix
       ../../../../../hm/profiles/alot.nix
       # ../../../hm/profiles/android.nix
       ../../../../../hm/profiles/gaming.nix
 
-      ../../../../../hm/profiles/nova.nix
       ../../../../../hm/profiles/vdirsyncer.nix
-      ../../../../../hm/profiles/japanese.nix
     ];
 
   # TODO use mkSymlinkOufOf  ? ?

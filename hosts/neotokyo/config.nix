@@ -68,6 +68,7 @@
   # virtualisation.docker.enable = true;
 
   users = {
+
     users.teto = {
       # name = "Matt";
       extraGroups = [
@@ -75,6 +76,13 @@
         "backup" # to read
       ];
     };
+
+    users.postgres = {
+      extraGroups = [
+        "backup" # to read
+      ];
+    };
+
     groups.backup = { };
   };
 

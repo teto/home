@@ -544,100 +544,95 @@
       in
       {
 
-        nixosConfigurations =
-          let
-            system = "x86_64-linux";
+        nixosConfigurations = rec {
+          # TODO generate those from the hosts folder ?
+          # with aliases ?
+          router = mkNixosSystem {
+            withSecrets = true;
+            hostname = "router";
 
-          in
-          rec {
-            # TODO generate those from the hosts folder ?
-            # with aliases ?
-            router = mkNixosSystem {
-              withSecrets = true;
-              hostname = "router";
-
-              modules = [
-                hm.nixosModules.home-manager
-                self.inputs.nixos-hardware.nixosModules.pcengines-apu
-                # self.nixosModules.default-hm
-                ./hosts/router/configuration.nix
-              ];
-            };
-
-            # it doesn't have to be called like that !
-            # TODO use mkNixosSystem
-            laptop = mkNixosSystem {
-              withSecrets = false;
-
-              hostname = "laptop";
-
-              modules = [
-                # self.inputs.nix-index-database.hmModules.nix-index
-                # self.inputs.sops-nix.nixosModules.sops
-                ./hosts/laptop/_nixos.nix
-              ];
-            };
-
-            # see https://determinate.systems/posts/extending-nixos-configurations
-            mcoudron = laptop.extendModules {
-              modules = [
-                self.nixosModules.novaModule
-              ];
-
-              # TODO retain existing specialArgs and inject mine ?!
-              specialArgs = {
-                hostname = "mcoudron";
-                inherit secrets;
-                inherit dotfilesPath;
-
-                withSecrets = true;
-                # flakeInputs = self.inputs;
-                userConfig = novaUserProfile;
-                doctor = self.inputs.nova-doctor;
-                # self = self.inputs.nova-doctor;
-              };
-
-            };
-
-            neotokyo = mkNixosSystem {
-              modules = [
-                ./hosts/neotokyo/config.nix
-              ];
-              hostname = "neotokyo";
-              withSecrets = true;
-            };
-
-            # desktop is a 
-            desktop = mkNixosSystem {
-              withSecrets = false;
-              hostname = "jedha";
-              modules = [
-                ./hosts/desktop/_nixos.nix
-                # self.inputs.mptcp-flake.nixosModules.mptcp
-                # self.inputs.peerix.nixosModules.peerix
-              ];
-            };
-
-            # nix build .#nixosConfigurations.teapot.config.system.build.toplevel
-            jedha = desktop.extendModules ({
-              # TODO add nova inputs
-              specialArgs = {
-                withSecrets = true;
-              };
-
-              modules = [
-                self.nixosModules.novaModule
-              ];
-            });
-
-            test = router.extendModules ({
-              modules = [
-                hm.nixosModules.home-manager
-                self.homeModules.neovim
-              ];
-
-            });
+            modules = [
+              hm.nixosModules.home-manager
+              self.inputs.nixos-hardware.nixosModules.pcengines-apu
+              # self.nixosModules.default-hm
+              ./hosts/router/configuration.nix
+            ];
           };
+
+          # it doesn't have to be called like that !
+          # TODO use mkNixosSystem
+          laptop = mkNixosSystem {
+            withSecrets = false;
+
+            hostname = "laptop";
+
+            modules = [
+              # self.inputs.nix-index-database.hmModules.nix-index
+              # self.inputs.sops-nix.nixosModules.sops
+              ./hosts/laptop/_nixos.nix
+            ];
+          };
+
+          # see https://determinate.systems/posts/extending-nixos-configurations
+          mcoudron = laptop.extendModules {
+            modules = [
+              self.nixosModules.novaModule
+            ];
+
+            # TODO retain existing specialArgs and inject mine ?!
+            specialArgs = {
+              hostname = "mcoudron";
+              inherit secrets;
+              inherit dotfilesPath;
+
+              withSecrets = true;
+              # flakeInputs = self.inputs;
+              userConfig = novaUserProfile;
+              doctor = self.inputs.nova-doctor;
+              # self = self.inputs.nova-doctor;
+            };
+
+          };
+
+          neotokyo = mkNixosSystem {
+            modules = [
+              ./hosts/neotokyo/config.nix
+            ];
+            hostname = "neotokyo";
+            withSecrets = true;
+          };
+
+          # desktop is a 
+          desktop = mkNixosSystem {
+            withSecrets = false;
+            hostname = "jedha";
+            modules = [
+              ./hosts/desktop/_nixos.nix
+              # self.inputs.mptcp-flake.nixosModules.mptcp
+              # self.inputs.peerix.nixosModules.peerix
+            ];
+          };
+
+          # nix build .#nixosConfigurations.teapot.config.system.build.toplevel
+          jedha = desktop.extendModules ({
+            # TODO add nova inputs
+            specialArgs = {
+              withSecrets = true;
+            };
+
+            modules = [
+              self.nixosModules.novaModule
+            ];
+          });
+
+          test = router.extendModules ({
+            modules = [
+              hm.nixosModules.home-manager
+              self.homeModules.neovim
+            ];
+
+          });
+        };
 
         #  Standalone home-manager configuration entrypoint
         #  Available through 'home-manager --flake .# your-username@your-hostname'
@@ -646,6 +641,8 @@
         # TODO scan hm/{modules, profiles} folder
         homeModules = {
           waybar = ./hm/profiles/waybar.nix;
+
+          japanese = hm/profiles/japanese.nix;
 
           # bash = ./hm/profiles/bash.nix;
           services-mujmap = ./hm/services/mujmap.nix;

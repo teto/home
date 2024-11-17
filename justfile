@@ -32,7 +32,7 @@ nixos-rebuild command builders="--option builders \"$NOVA_OVH1\" -j0":
        {{ builders }} \
        --no-write-lock-file --show-trace --use-remote-sudo {{ command }}
 
-nixos-bootstrap:
+build-nom:
     nom build .#nixosConfigurations.$HOSTNAME.config.system.build.toplevel 
 
 # nom build
@@ -92,7 +92,7 @@ deploy-router:
 # [confirm("prompt")]
 deploy-neotokyo:
     # --magic-rollback false --auto-rollback=false
-    deploy '.#neotokyo' -s --interactive-sudo=true
+    deploy '.#neotokyo' -s --interactive-sudo=true -- --override-input nixpkgs {{ NIXPKGS_REPO }}
 
 # regenerate my email contacts
 # (to speed up alot autocompletion)
