@@ -16,7 +16,14 @@ let
     identityFile = secrets.nova.runners.nova-runner-1.sshKey;
     hostname = m.hostname;
     identitiesOnly = true;
-    extraOptions.userKnownHostsFile = lib.mkForce "${flakeInputs.nova-ci}/configs/prod/ssh_known_hosts";
+    extraOptions = {
+      userKnownHostsFile = lib.mkForce "${flakeInputs.nova-ci}/configs/prod/ssh_known_hosts";
+
+      # persist connections when logging in remote builders
+      controlmaster = "auto";
+      controlpath="/tmp/ssh-%r@%h:%p";
+    };
+
     # extraOptions.LocalCommand = "cd nixpkgs";
     # extraOptions.RemoteCommand = "cd nixpkgs";
     port = m.port;

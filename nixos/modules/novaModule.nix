@@ -12,6 +12,7 @@
 
     ../profiles/nova.nix
     flakeInputs.nova-doctor.nixosModules.gnome
+    flakeInputs.nova-doctor.nixosModules.vpn
   ];
 
   # # devrait deja etre ok ?
