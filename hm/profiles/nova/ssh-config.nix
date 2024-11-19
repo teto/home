@@ -21,7 +21,7 @@ let
 
       # persist connections when logging in remote builders
       controlmaster = "auto";
-      controlpath="/tmp/ssh-%r@%h:%p";
+      controlpath = "/tmp/ssh-%r@%h:%p";
     };
 
     # extraOptions.LocalCommand = "cd nixpkgs";

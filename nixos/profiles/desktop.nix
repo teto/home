@@ -122,8 +122,8 @@ in
       ubuntu_font_family
       inconsolata # monospace
       noto-fonts-cjk-sans # asiatic
-      nerdfonts # otherwise no characters
-      # (pkgs.nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; })
+      # nerdfonts # otherwise no characters
+      (pkgs.nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; })
 
       # corefonts # microsoft fonts  UNFREE
       font-awesome_5
