@@ -48,10 +48,10 @@ in
       (lib.strings.concatStrings (
         lib.mapAttrsToList genBlockLua (import ./neovim/options.nix).luaRcBlocks
       ))
-      + ''
-        vim.opt.number = true
-        vim.opt.relativenumber = true
-      ''
+      # + ''
+      #   vim.opt.number = true
+      #   vim.opt.relativenumber = true
+      # ''
     );
 
     # TODO this should disappear in the future

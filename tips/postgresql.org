@@ -1,3 +1,15 @@
+* Primer on postgresql
+
+Interesting read about how it all fits together:
+https://www.postgresql.org/docs/current/ddl-schemas.html
+
+TLDR; tables live in a schema, unqualified commands are searched in search_path:
+SHOW search_path;
+
+One can modify it with:
+SET search_path TO myschema,public;
+
+
 pg_ctl start
 
 POSTGRESQL_CONNECTION="$(pg_tmp)"
@@ -61,6 +73,7 @@ ALTER ROLE teto WITH SUPERUSER CREATEROLE CREATEDB;
 
 # How to list the tables ?
 `\l`
+\dt core.*
 
 # list users
 `\du`

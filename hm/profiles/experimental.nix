@@ -21,7 +21,7 @@
 
   programs.swappy.enable = false;
 
-  services.wl-clip-persist.enable = true;
+  # services.wl-clip-persist.enable = true;
 
   programs.vifm.enable = true;
 

@@ -76,13 +76,12 @@
         "backup" # to read
       ];
     };
-
     users.postgres = {
       extraGroups = [
-        "backup" # to read
+        "backup"
+        config.users.groups.backup.name
       ];
     };
-
     groups.backup = { };
   };
 

@@ -113,7 +113,8 @@ in
   # boot.blacklistedKernelModules = [ "nouveau" ];
 
   # enables command on boot/suspend etc
-  powerManagement.enable = false;
+  # powerManagement.enable = true;
+  # powerManagement.cpuFreqGovernor = "powersave";
 
   security.polkit.enable = true;
 

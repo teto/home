@@ -86,6 +86,10 @@ in
     # add it to firefox-addons. ?
     pkgs.ff2mpv
   ];
+
+  # Having "profiles.ini" makes firefox -ProfileManager crash with
+  # 'An unexpected error has prevented your changes from being saved.'
+  # firefox -P or --profile should work though
   profiles = {
     perso = {
       # https://gitlab.com/rycee/configurations/-/blob/bf46aef74ca53a61fe2d35349fe3dbc6a70b2609/user/firefox.nix#L25-39
@@ -140,6 +144,21 @@ in
       # path = "6bt2uwrj.nova";
       path = "zwiefm8g.bank";
       settings = { };
+    };
+
+    # for dangerous stuff
+    sketchy = lib.mkForce {
+      extensions = with pkgs; [ 
+          # firefox-addons.browserpass
+          firefox-addons.argent-x
+          firefox-addons.metamask
+      ];
+      # isDefault = false;
+      id = 10;
+      path = "l6ll66o0.bank";
+      settings = { };
+      
+
     };
 
     # to use with stable-diffusion
