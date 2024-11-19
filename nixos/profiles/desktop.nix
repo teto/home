@@ -123,7 +123,12 @@ in
       inconsolata # monospace
       noto-fonts-cjk-sans # asiatic
       # nerdfonts # otherwise no characters
-      (pkgs.nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; })
+      (pkgs.nerdfonts.override {
+        fonts = [
+          "FiraCode"
+          "DroidSansMono"
+        ];
+      })
 
       # corefonts # microsoft fonts  UNFREE
       font-awesome_5

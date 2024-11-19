@@ -264,6 +264,8 @@ in
         glab # gitlab cli
         hexyl # hexcode viewer
 
+        libossp_uuid # for the 'libuuid' executable
+
         jujutsu
         # TODO pass to vim makeWrapperArgs
         # nodePackages.bash-language-server

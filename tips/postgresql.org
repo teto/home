@@ -97,3 +97,6 @@ ALTER DATABASE template1 REFRESH COLLATION VERSION;
 ** FATAL:  database "postgres" does not exist
 
 sudo -u postgres psql  -d template1
+
+
+CURRENT_TIMESTAMP()
