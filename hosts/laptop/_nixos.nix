@@ -254,8 +254,18 @@ in
     {
       device = "/fucking_swap";
       size = 16000; # in MB
+      # randomEncryption.enable = true;
+      # options = [ "nofail" ];
+      # priority = 5;
     }
   ];
+
+  # default is 60. Range is 0-200. Lower number says use RAM rather than swap.
+  # I considered it, didn't try it out yet
+  zramSwap = {
+    enable = true;
+    priority = 10;  # higher than HDD swap
+  };
 
   programs.gnome-disks = {
     enable = true;

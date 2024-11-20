@@ -12,6 +12,9 @@ in
       # use ctrl a/xto cycle between different words
       plugin = vim-CtrlXA;
     }
+    pkgs.vimPlugins.telescope-fzf-native-nvim # for use with smart-open + fzf algo
+    pkgs.vimPlugins.blink-cmp
+
     # { plugin = jbyuki/venn.nvim; }
     # { plugin = telescope-nvim; }
     (luaPlugin {

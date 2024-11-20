@@ -97,7 +97,6 @@
       # experimental-features = nix-command flakes auto-allocate-uids
       extra-experimental-features = "auto-allocate-uids nix-command flakes cgroups";
       substituters = [
-        # "https://cache.nixos.org/" # part of the default
         # "https://teto.cachix.org"
         secrets.nova.novaNixCache.prod
       ];

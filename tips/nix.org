@@ -27,6 +27,11 @@ the only way to avoid a redownload of the global registry is to pass --flake-reg
 
   See https://github.com/nixos/nix/issues/3352
 
+* how to check if package is in cache ? 
+
+see https://nixos.wiki/wiki/Binary_Cache:
+nix path-info -r /nix/store/sb7nbfcc1ca6j0d0v18f7qzwlsyvi8fz-ocaml-4.10.0 --store https://cache.nixos.org/
+
 * about flakes
 ** how to build a nixosConfiguration 
 
