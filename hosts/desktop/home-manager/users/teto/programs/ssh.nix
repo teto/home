@@ -25,7 +25,7 @@
     matchBlocks = lib.optionalAttrs withSecrets {
 
       gitlab = {
-        match = "host=gitlab.com";
+        match = "host gitlab.com";
         user = "mattator";
         identityFile = "${secretsFolder}/ssh/gitlab";
         identitiesOnly = true;
@@ -35,7 +35,7 @@
       };
 
       neotokyo-teto = {
-        match = "user=teto host=${secrets.jakku.hostname}";
+        match = "user teto host ${secrets.jakku.hostname}";
         hostname = secrets.jakku.hostname;
         user = "teto";
         # le port depend du service
@@ -51,7 +51,7 @@
       };
 
       neotokyo-gitolite-admin = {
-        match = "user=gitolite host=${secrets.jakku.hostname}";
+        match = "user gitolite host ${secrets.jakku.hostname}";
         hostname = secrets.jakku.hostname;
         # user = "gitolite";
         # le port depend du service
@@ -70,7 +70,7 @@
         identitiesOnly = true;
         # experimental
         # https://github.com/nix-community/home-manager/pull/2992
-        match = "host=router";
+        match = "host router";
         port = 12666;
         # RemoteCommand
         # SendEnv LANG LC_*
@@ -85,7 +85,7 @@
         identitiesOnly = true;
         # experimental
         # https://github.com/nix-community/home-manager/pull/2992
-        match = "host=router-lan";
+        match = "host router-lan";
         port = 12666;
       };
 

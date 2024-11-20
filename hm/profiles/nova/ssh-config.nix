@@ -28,7 +28,7 @@ let
     # extraOptions.RemoteCommand = "cd nixpkgs";
     port = m.port;
     ## 
-    match = "host=${m.hostname},${m.runnerName}";
+    match = "host ${m.hostname},${m.runnerName}";
   };
 in
 
@@ -59,7 +59,7 @@ in
       // {
 
         nova = {
-          match = "host=${secrets.nova.gitlab.uri}";
+          match = "host ${secrets.nova.gitlab.uri}";
           user = "matthieu.coudron"; # secrets.nova.gitlab.user;
           identityFile = "${secretsFolder}/ssh/nova_key";
         };
