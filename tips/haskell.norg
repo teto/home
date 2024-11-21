@@ -1,3 +1,7 @@
+* get env
+
+System.Environment.getEnv
+
 * Debug tips
 
 ** Runtime configuration

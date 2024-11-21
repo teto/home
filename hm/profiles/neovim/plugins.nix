@@ -18,6 +18,8 @@ in
 
     # { plugin = jbyuki/venn.nvim; }
     # { plugin = telescope-nvim; }
+
+    telescope-fzf-native-nvim # needed by smart-open.nvim
     (luaPlugin {
       plugin = fzf-vim;
       # " mostly fzf mappings, use TAB to mark several files at the same time

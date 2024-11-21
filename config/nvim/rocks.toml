@@ -48,7 +48,9 @@ tree-sitter-http = "scm"
 nvim-treehopper = "scm"
 nvim-treesitter-textobjects = "scm"
 nvim-bqf= "1.1.1"
+# needs https://github.com/nvim-telescope/telescope-fzf-native.nvim if you enable the fzf algorithm
 "smart-open.nvim"= "scm"
+
 "llm.nvim" = "scm"
 vim-startuptime= "4.5.0"
 "grug-far.nvim"= "scm"
