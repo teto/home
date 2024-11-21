@@ -3,7 +3,11 @@
 
 * ghci
 
+-ghci-script ~/toto.
+-ignore-dot-ghci
 
+import System.Environment
+getEnv "toto"
 
 https://github.com/haskell/haskeline/wiki/UserPreferences
 

@@ -379,7 +379,6 @@
             self.inputs.wayland-pipewire-idle-inhibit.homeModules.default
             # todo home-manager
             self.inputs.sops-nix.homeManagerModules.sops
-            self.homeModules.services-mujmap
             # self.homeModules.services-swaync
 
             # And add the home-manager module
@@ -391,6 +390,7 @@
             ./hm/modules/zsh.nix
             ./hm/modules/xdg.nix
             # ./hm/modules/firefox.nix
+            self.homeModules.fzf
 
             self.homeModules.package-sets
             self.homeModules.neovim
@@ -423,7 +423,11 @@
               # ];
             };
 
-            teto = { };
+            teto = { 
+              imports = [
+                self.homeModules.services-mujmap
+              ];
+            };
           };
         };
 
@@ -640,8 +644,9 @@
 
         # TODO scan hm/{modules, profiles} folder
         homeModules = {
-          waybar = ./hm/profiles/waybar.nix;
 
+          developer = ./hm/profiles/dev.nix;
+          fzf = ./hm/profiles/fzf.nix;
           japanese = hm/profiles/japanese.nix;
 
           # bash = ./hm/profiles/bash.nix;
@@ -653,8 +658,6 @@
           neovim-full = hosts/desktop/home-manager/users/teto/programs/neovim.nix;
           nova = ./hm/profiles/nova.nix;
 
-          xdg = ./hm/profiles/xdg.nix;
-          developer = ./hm/profiles/dev.nix;
 
           # for stuff not in home-manager yet
           # experimental = ../../../hm/profiles/experimental.nix;
@@ -662,7 +665,6 @@
           package-sets = ./hm/modules/package-sets.nix;
           # (modulesFromDir ./hm/modules)
 
-          yazi = ./hm/profiles/yazi.nix;
           neovim = ./hm/profiles/neovim.nix;
           neovim-module = ./hm/modules/neovim.nix;
 
@@ -698,7 +700,9 @@
             }
           );
 
-          # homeModules = {
+          waybar = ./hm/profiles/waybar.nix;
+          xdg = ./hm/profiles/xdg.nix;
+          yazi = ./hm/profiles/yazi.nix;
         };
 
         nixosModules =
@@ -718,9 +722,7 @@
             desktop = nixos/profiles/desktop.nix;
             universal = hosts/config-all.nix;
             steam = nixos/profiles/steam.nix;
-
-            # server = ;
-
+            sudo = nixos/modules/sudo.nix;
           };
 
         templates = {

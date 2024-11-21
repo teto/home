@@ -20,8 +20,8 @@ let
       userKnownHostsFile = lib.mkForce "${flakeInputs.nova-ci}/configs/prod/ssh_known_hosts";
 
       # persist connections when logging in remote builders
-      controlmaster = "auto";
-      controlpath = "/tmp/ssh-%r@%h:%p";
+      # controlmaster = "auto";
+      # controlpath = "/tmp/ssh-%r@%h:%p";
     };
 
     # extraOptions.LocalCommand = "cd nixpkgs";

@@ -206,6 +206,7 @@ in
         # khard # see khal.nix instead ?
         # libsecret  # to consult
         # newsboat #
+        carl # not upstreamed yet. cargo cal
         immich-cli
         mujmap-unstable # to sync notmuch tags across jmap
         # signal-desktop # installe a la main

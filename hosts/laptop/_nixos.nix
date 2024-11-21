@@ -88,6 +88,7 @@ in
 
       # ../../nixos/modules/luarocks-site.nix
 
+      flakeSelf.nixosModules.sudo
       flakeSelf.nixosModules.universal
       flakeSelf.nixosModules.nix-daemon
       # ../../nixos/profiles/desktop.nix

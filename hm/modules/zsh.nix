@@ -262,13 +262,10 @@ in
           // (lib.optionalAttrs withSecrets {
             # HISTFILE="$XDG_CACHE_HOME/zsh_history";
             # TODO load this from sops instead
-            GITHUB_TOKEN = secrets.githubToken;
+            # GITHUB_TOKEN = secrets.githubToken;
             # TODO add it to sops
-            OPENAI_API_KEY = secrets.OPENAI_API_KEY;
+            # OPENAI_API_KEY = secrets.OPENAI_API_KEY;
 
-            # fre experiment
-            FZF_CTRL_T_COMMAND = "command fre --sorted";
-            FZF_CTRL_T_OPTS = "--tiebreak=index";
           });
 
         autosuggestion.enable = true;
