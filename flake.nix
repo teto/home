@@ -573,7 +573,7 @@
             modules = [
               # self.inputs.nix-index-database.hmModules.nix-index
               # self.inputs.sops-nix.nixosModules.sops
-              ./hosts/laptop/_nixos.nix
+              ./hosts/laptop
             ];
           };
 

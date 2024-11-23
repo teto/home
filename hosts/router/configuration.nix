@@ -60,7 +60,7 @@ in
   ];
 
   home-manager.users.root = {
-    imports = [ ../../hm/profiles/neovim.nix ];
+    imports = [ flakeSelf.homeModules.neovim ];
   };
 
   # TODO use from flake or from unstable
@@ -69,10 +69,10 @@ in
     # TODO it should load the whole folder
     imports = [
       flakeSelf.homeModules.teto-nogui
+       flakeSelf.homeModules.neovim
       # ./teto/home.nix
       ./teto/nix.nix
       ../../hm/profiles/zsh.nix
-      ../../hm/profiles/neovim.nix
     ];
 
     package-sets.wifi = true;

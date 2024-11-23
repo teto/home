@@ -61,8 +61,8 @@ in
       {
         # TODO pass the correct port, how to do that ? need ssh_config support
         # NOVA_RUNNER1 = mkRemoteBuilderDesc secrets.nova-runner-1;
-        NOVA_CACHE_DEV = secrets.nova.novaNixCache.dev;
-        NOVA_CACHE_PROD = secrets.nova.novaNixCache.prod;
+        # NOVA_CACHE_DEV = secrets.nova.novaNixCache.dev;
+        # NOVA_CACHE_PROD = secrets.nova.novaNixCache.prod;
         CI_REGISTRY_IMAGE = "https://registry.novadiscovery.net";
         HUSKY = 0; # To disable HUSKY
         # wayland variables

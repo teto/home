@@ -14,6 +14,7 @@ in
     }
     pkgs.vimPlugins.telescope-fzf-native-nvim # for use with smart-open + fzf algo
     pkgs.vimPlugins.blink-cmp
+    pkgs.vimPlugins.vim-nixhash # :NixHash
 
     # { plugin = jbyuki/venn.nvim; }
     # { plugin = telescope-nvim; }

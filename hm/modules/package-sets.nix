@@ -195,7 +195,7 @@ in
         pkgs.libreoffice
         pkgs.simple-scan
 
-        pkgs.nautilus # demande webkit/todo replace by nemo ?
+        # pkgs.nautilus # demande webkit/todo replace by nemo ?
       ];
 
     })

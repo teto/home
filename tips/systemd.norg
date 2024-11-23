@@ -62,6 +62,7 @@ systemctl list-jobs
 
 # to remove core files
 systemd-tmpfiles --clean
+systemd-tmpfiles --cat-config
 
 To limit memory consumption:
 systemd-run --user -p MemoryLimit=3G google-chrome

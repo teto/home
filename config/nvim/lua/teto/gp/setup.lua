@@ -28,7 +28,6 @@ local final_config = vim.tbl_extend('error', vim.g.gp_nvim, {
     -- whisper_rec_cmd = {"sox", "-c", "1", "--buffer", "32", "-d", "rec.wav", "trim", "0", "60:00"},
     -- whisper_rec_cmd = {"arecord", "-c", "1", "-f", "S16_LE", "-r", "48000", "-d", "3600", "rec.wav"},
     -- whisper_rec_cmd = {"ffmpeg", "-y", "-f", "avfoundation", "-i", ":0", "-t", "3600", "rec.wav"},
-    -- openai_api_key = os.getenv("OPENAI_API_KEY"),
 
     hooks = {
         ['Translator'] = function(gp, params)

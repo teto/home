@@ -14,24 +14,6 @@
     #  history = {
     #   path = "${config.xdg.cacheHome}/zsh_history";
     #  };
-    #
-    #  sessionVariables = config.programs.bash.sessionVariables // 
-    #   lib.optionalAttrs withSecrets {
-    #   # HISTFILE="$XDG_CACHE_HOME/zsh_history";
-    #   # TODO load this from sops instead
-    #   GITHUB_TOKEN = secrets.githubToken;
-    #   # TODO add it to sops
-    #   OPENAI_API_KEY = secrets.OPENAI_API_KEY;
-    #   CDPATH = "~/nova";
-    #   # OPENAI_API_HOST = secrets.OPENAI_API_HOST;
-    #  }
-    #
-    #  // {
-    #   # fre experiment
-    #
-    #   FZF_CTRL_T_COMMAND="command fre --sorted";
-    #   FZF_CTRL_T_OPTS="--tiebreak=index";
-    # };
 
     # test for 
     # - https://www.reddit.com/r/neovim/comments/17dn1be/implementing_mru_sorting_with_minipick_and_fzflua/

@@ -37,6 +37,10 @@
     # group = config.users.users.nobody.group;
   };
 
+  sops.secrets."OPENAI_API_KEY" = {
+    mode = "400";
+  };
+
   sops.secrets."gitlab/apiToken" = {
     mode = "400";
     # owner = config.users.users.teto.name;

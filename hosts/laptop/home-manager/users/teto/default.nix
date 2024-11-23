@@ -63,6 +63,7 @@
   package-sets = {
     enableDesktopGUIPackages = true;
     enableIMPackages = true;
+    enableOfficePackages = true;
     energy = true;
     wifi = true;
     llms = true;
