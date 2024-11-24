@@ -9,8 +9,6 @@
 {
 
   imports = [
-    # ./programs/vdirsyncer.nix
-
   ];
 
   programs.vdirsyncer = {
@@ -25,12 +23,6 @@
     gnome-calendar
   ];
 
-  # [locale]
-  # # default_timezone = Asia/Tokyo
-  # # local_timezone= Asia/Tokyo
-  # unicode_symbols=True
-
-  #  '';
 
   # accounts.contact = {
   #   basePath = "$XDG_CONFIG_HOME/card";

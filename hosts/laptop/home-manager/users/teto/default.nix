@@ -42,10 +42,11 @@
       ../../../../desktop/home-manager/users/teto/services/nextcloud-client.nix
 
       # ../../../hm/profiles/swayidle.nix
-      ../../../../../hm/profiles/desktop.nix
       ../../../../../hm/profiles/japanese.nix
-      ../../../../../hm/profiles/sway.nix
+      # ../../../../../hm/profiles/sway.nix
       ../../../../../hm/profiles/wezterm.nix
+
+      flakeSelf.homeModules.teto-desktop
       flakeSelf.homeModules.yazi
       flakeSelf.homeModules.neovim
       flakeSelf.homeModules.developer
@@ -56,6 +57,11 @@
       # ../../hm/profiles/alot.nix
       ../../../../../hm/profiles/vscode.nix # provided by nova-nix config
     ];
+
+
+  home.sessionPath = [
+    "$HOME/.local/bin"
+  ];
 
   # broken on unstable because python2
   services.opensnitch-ui.enable = false;

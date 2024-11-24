@@ -8,11 +8,11 @@
 }@args:
 {
 
-  programs.atuin = {
-    enable = false;
-    enableZshIntegration = true;
-  };
-
+  # programs.atuin = {
+  #   enable = false;
+  #   enableZshIntegration = true;
+  # };
+  #
   programs.bash = {
     enable = true;
     termTitle.enable = true;
