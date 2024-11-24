@@ -160,6 +160,7 @@ let
     # })
 
     (luaPlugin {
+      # for yaml lsp
       plugin = SchemaStore-nvim;
     })
 
@@ -173,6 +174,7 @@ let
     # { plugin = kui-nvim; }
     # FIX https://github.com/NixOS/nixpkgs/issues/169293 first
 
+    # this could be moved to my config
     (luaPlugin {
       plugin = nvimdev-nvim;
       optional = true;
@@ -188,8 +190,10 @@ let
           --}}}'';
     })
 
-    # (luaPlugin { plugin = sniprun; })
+    (luaPlugin { plugin = sniprun; })
+
     (luaPlugin { plugin = telescope-nvim; })
+
     # (luaPlugin { plugin = telescope-manix; })
     # call with :Hoogle
     # (luaPlugin { plugin = glow-nvim; })
@@ -202,7 +206,8 @@ let
     #    '';
     # })
 
-    (luaPlugin { plugin = stylish-nvim; })
+    # cool but I dont use it
+    # (luaPlugin { plugin = stylish-nvim; })
 
     # doesnt seem to work + problematic on neovide
     # (luaPlugin { 

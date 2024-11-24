@@ -66,6 +66,7 @@
       ./services/mpris.nix
       ./services/nextcloud-client.nix
       flakeSelf.homeModules.japanese
+      flakeSelf.homeModules.yazi
     ]
     ++ lib.optionals withSecrets [
       ./sops.nix

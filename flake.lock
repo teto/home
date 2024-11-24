@@ -2802,11 +2802,11 @@
     "ouch-yazi-plugin": {
       "flake": false,
       "locked": {
-        "lastModified": 1721057035,
-        "narHash": "sha256-yLt9aY6hUIOdBI5bMdCs7VYFJGyD3WIkmPxvWKNCskA=",
+        "lastModified": 1731382206,
+        "narHash": "sha256-fEfsHEddL7bg4z85UDppspVGlfUJIa7g11BwjHbufrE=",
         "owner": "ndtoan96",
         "repo": "ouch.yazi",
-        "rev": "251da6930ca8b7ee0384810086c3bf644caede3e",
+        "rev": "db1488358941a2bc9918fa91c304d6724a0bb608",
         "type": "github"
       },
       "original": {
