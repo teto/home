@@ -109,9 +109,6 @@ in
     "$XDG_DATA_HOME/../bin"
   ];
 
-  xdg.configFile."teto-utils/lib.sh".text = ''
-    JEDHA_SECRETS_FOLDER=${secretsFolder}
-  '';
 
   services.network-manager-applet.enable = true;
 

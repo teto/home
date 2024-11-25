@@ -36,6 +36,8 @@ compression = 0
 
 	email = '886074+teto@users.noreply.github.com'
 	name = "Matthieu C."
+	# instruct Git to avoid trying to guess defaults for user.email and user.name, and 
+	useConfigOnly  = true
 
 [credential "https://github.com"]
 	username = teto
