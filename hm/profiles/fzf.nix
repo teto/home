@@ -8,8 +8,8 @@
     defaultCommand = "${pkgs.fd}/bin/fd --type f";
     # You can make CTRL-R paste the current query when there's no match
     # export FZF_CTRL_R_OPTS=''
-    historyWidgetOptions =  ["--bind enter:accept-or-print-query"];
-    fileWidgetOptions = [  "--tiebreak=index" ];
+    historyWidgetOptions = [ "--bind enter:accept-or-print-query" ];
+    fileWidgetOptions = [ "--tiebreak=index" ];
     fileWidgetCommand = "command fre --sorted";
 
     # changeDirWidgetOptions

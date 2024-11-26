@@ -148,16 +148,15 @@ in
 
     # for dangerous stuff
     sketchy = lib.mkForce {
-      extensions = with pkgs; [ 
-          # firefox-addons.browserpass
-          firefox-addons.argent-x
-          firefox-addons.metamask
+      extensions = with pkgs; [
+        # firefox-addons.browserpass
+        firefox-addons.argent-x
+        firefox-addons.metamask
       ];
       # isDefault = false;
       id = 10;
       path = "l6ll66o0.bank";
       settings = { };
-      
 
     };
 

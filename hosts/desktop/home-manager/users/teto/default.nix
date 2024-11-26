@@ -176,6 +176,7 @@
     unar # used to view archives by yazi
     # poppler for pdf preview
     memento # capable to display 2 subtitles at same time
+    mdcat
 
     rofi-rbw-wayland
     # ];

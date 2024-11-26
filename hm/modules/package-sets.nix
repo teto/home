@@ -180,10 +180,8 @@ in
           xdg-utils
           xdg-terminal-exec # necessary for gio launch to launch terminal
 
-
-
-# Run xwayland-satellite. You can specify an X display to use (i.e. :12). Be sure to set the same DISPLAY 
-# the package contains a systemd service
+          # Run xwayland-satellite. You can specify an X display to use (i.e. :12). Be sure to set the same DISPLAY 
+          # the package contains a systemd service
           xwayland-satellite # to launch X applications within wayland (and without a full Xwayland ?)
 
         ];

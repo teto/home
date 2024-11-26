@@ -265,7 +265,7 @@ in
   # I considered it, didn't try it out yet
   zramSwap = {
     enable = true;
-    priority = 10;  # higher than HDD swap
+    priority = 10; # higher than HDD swap
   };
 
   programs.gnome-disks = {

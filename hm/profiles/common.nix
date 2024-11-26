@@ -42,7 +42,6 @@
 
   # xdg-settings set default-web-browser firefox.desktop
 
-
   # for colors etc.
   programs.lesspipe.enable = false;
 

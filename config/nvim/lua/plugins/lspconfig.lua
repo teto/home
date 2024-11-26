@@ -195,25 +195,6 @@ lspconfig.pyright.setup({
     },
 })
 
--- typescript
--- REPLACED by typescript-tools: to remove
--- lspconfig.ts_ls.setup({
---     autostart = true,
---     -- TODO should be generated/fixed in nix
---     cmd = {
---         'typescript-language-server',
---         '--stdio',
---         -- '--tsserver-path',
---         -- found with 'nix build .#nodePackages.typescript'
---         -- '/nix/store/34pzigggq36pk9sz9a95bz53qlqx1mpx-typescript-4.9.4/lib/node_modules/typescript/lib',
---     },
---     init_options = {
---         preferences = {
---             disableSuggestions = true,
---         },
---     },
--- })
-
 lspconfig.jsonls.setup({
     settings = {
         json = {
@@ -223,6 +204,7 @@ lspconfig.jsonls.setup({
         },
     },
 })
+
 -- commented out because https://github.com/MrcJkb/haskell-tools.nvim recommends to disable it
 --lspconfig.hls.setup({
 --	-- cmd = {

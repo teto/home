@@ -28,4 +28,3 @@ rustPlatform.buildRustPackage rec {
     mainProgram = "carl";
   };
 }
-

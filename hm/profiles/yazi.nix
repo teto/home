@@ -13,8 +13,6 @@
 
   # xdg.configFile."yazi/plugins/rsync.yazi".source = flakeInputs.rsync-yazi-plugin;
 
-
-
   # 7z
   home.packages = [
 

@@ -423,7 +423,7 @@
               # ];
             };
 
-            teto = { 
+            teto = {
               imports = [
                 self.homeModules.services-mujmap
               ];
@@ -657,7 +657,6 @@
           # 
           neovim-full = hosts/desktop/home-manager/users/teto/programs/neovim.nix;
           nova = ./hm/profiles/nova.nix;
-
 
           # for stuff not in home-manager yet
           # experimental = ../../../hm/profiles/experimental.nix;
