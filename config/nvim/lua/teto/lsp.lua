@@ -84,7 +84,7 @@ M.set_level = function(severity)
     }
     local diags = vim.diagnostic.get(0)
     local bufnr = vim.fn.bufnr('%')
-    vim.diagnostic.config(opts_global)
+    -- vim.diagnostic.config(opts_global)
     -- vim.diagnostic.get(0, { severity = { min = vim.diagnostic.severity.WARN } })
 
     -- needs diags to show
@@ -92,7 +92,8 @@ M.set_level = function(severity)
     -- print("Setting bufnr", bufnr)
     -- • optional: (optional) boolean, if true, `nil` is valid
 
-    vim.diagnostic.show(nil, bufnr, diags, { signs = { severity = severity } })
+	print("setting severity for buffer", bufnr)
+    vim.diagnostic.show(31, bufnr, diags, { signs = { severity = severity } })
 end
 
 -- M.fake_diags = { {

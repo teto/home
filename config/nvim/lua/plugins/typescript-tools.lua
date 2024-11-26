@@ -20,7 +20,7 @@ require('typescript-tools').setup({
         expose_as_code_action = {},
         -- string|nil - specify a custom path to `tsserver.js` file, if this is nil or file under path
         -- not exists then standard path resolution strategy is applied
-        tsserver_path = nil,
+        -- tsserver_path = nil,
         -- specify a list of plugins to load by tsserver, e.g., for support `styled-components`
         -- (see 💅 `styled-components` support section)
         tsserver_plugins = {},
@@ -32,7 +32,7 @@ require('typescript-tools').setup({
         tsserver_file_preferences = {},
         -- locale of all tsserver messages, supported locales you can find here:
         -- https://github.com/microsoft/TypeScript/blob/3c221fc086be52b19801f6e8d82596d04607ede6/src/compiler/utilitiesPublic.ts#L620
-        tsserver_locale = 'en',
+        -- tsserver_locale = 'en',
         -- mirror of VSCode's `typescript.suggest.completeFunctionCalls`
         complete_function_calls = false,
         include_completions_with_insert_text = true,
