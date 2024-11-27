@@ -92,7 +92,7 @@ M.set_level = function(severity)
     -- print("Setting bufnr", bufnr)
     -- • optional: (optional) boolean, if true, `nil` is valid
 
-	print("setting severity for buffer", bufnr)
+    print('setting severity for buffer', bufnr)
     vim.diagnostic.show(31, bufnr, diags, { signs = { severity = severity } })
 end
 

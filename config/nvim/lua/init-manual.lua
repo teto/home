@@ -91,7 +91,6 @@ end
 --
 -- local chat_system_prompt = defaults.chat_system_prompt
 
-
 vim.g.loaded_matchit = 1
 vim.opt.shortmess:append('I')
 vim.opt.foldlevel = 99

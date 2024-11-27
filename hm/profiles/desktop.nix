@@ -111,7 +111,6 @@ in
     "${dotfilesPath}/bin"
   ];
 
-
   services.network-manager-applet.enable = true;
 
   # needed for gpg-agent gnome pinentry

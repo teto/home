@@ -58,7 +58,6 @@
       ../../../../../hm/profiles/vscode.nix # provided by nova-nix config
     ];
 
-
   home.sessionPath = [
     "$HOME/.local/bin"
   ];

@@ -8,8 +8,9 @@
 }:
 {
 
-  imports = [
-  ];
+  imports =
+    [
+    ];
 
   programs.vdirsyncer = {
     enable = withSecrets;
@@ -22,7 +23,6 @@
     # need gnome-accounts to make it work
     gnome-calendar
   ];
-
 
   # accounts.contact = {
   #   basePath = "$XDG_CONFIG_HOME/card";

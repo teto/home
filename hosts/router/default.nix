@@ -69,7 +69,7 @@ in
     # TODO it should load the whole folder
     imports = [
       flakeSelf.homeModules.teto-nogui
-       flakeSelf.homeModules.neovim
+      flakeSelf.homeModules.neovim
       # ./teto/home.nix
       ./teto/nix.nix
       ../../hm/profiles/zsh.nix
