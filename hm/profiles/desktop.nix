@@ -5,6 +5,7 @@
   # lib,
   # system,
   withSecrets
+, dotfilesPath
 , secretsFolder
 , ...
 }:
@@ -107,6 +108,7 @@ in
   # TODO remove ? dangerous
   home.sessionPath = [
     "$XDG_DATA_HOME/../bin"
+    "${dotfilesPath}/bin"
   ];
 
 

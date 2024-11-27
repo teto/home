@@ -1,15 +1,19 @@
-{
-  config,
-  secrets,
-  lib,
-  withSecrets,
-  ...
+{ pkgs
+, lib
+, ...
 }:
 {
 
   programs.zsh = {
 
     enableTetoConfig = true;
+    plugins = [
+      {
+        name = "vi-mode";
+        src = pkgs.zsh-vi-mode;
+        file = "share/zsh-vi-mode/zsh-vi-mode.plugin.zsh";
+      }
+    ];
 
     #  history = {
     #   path = "${config.xdg.cacheHome}/zsh_history";
@@ -29,7 +33,10 @@
        source $ZDOTDIR/zshrc
        # fi
 
-    '';
+       # see https://github.com/jeffreytse/zsh-vi-mode for integration
+       # TODO you can also use home-manager's built-in "plugin" feature:
+      '';
+       # source ${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 
     initExtraBeforeCompInit = # zsh
       ''

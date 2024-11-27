@@ -31,7 +31,7 @@ in
   systemd.tmpfiles.rules = [
     # C -> /source/to/copy
     # "C /var/lib/iwd/chimera-iot.psk 0400 root root - /run/secrets/iwd_network_chimera-iot.psk"
-    "C /var/lib/iwd/neotokyo.psk 0600 root root - ${n1}"
+    # "C /var/lib/iwd/neotokyo.psk 0600 root root - ${n1}"
     # "C /var/lib/iwd/neotokyo.psk 0600 root root - ${config.sops.secrets."iwd_neotokyo.psk".path}"
   ];
   # };

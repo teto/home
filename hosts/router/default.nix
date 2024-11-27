@@ -272,7 +272,10 @@ in
 
           # DefaultLeaseTimeSec=, MaxLeaseTimeSec=
           # the ISP box address
-          DNS = "192.168.1.1";
+
+          # nom DNS visible dans "Mode reseau" sur freebox os
+          DNS= "freebox-server";
+          # DNS = "192.168.1.1";
         };
 
         # lui meme
@@ -343,6 +346,10 @@ in
     #   nat.internalInterfaces = [ "br0" ];
 
     wireless = {
+
+      # TODO create manually ? copy from desktop-.yaml
+      # secrets/
+      secretsFile = "/run/wireless.conf";
       scanOnLowSignal = false; # consume less energy and we dont roam anyway
       # enable = true;
       # userControlled.enable = true;
@@ -387,6 +394,7 @@ in
       networks = {
         neotokyo = {
           psk = secrets.router.password;
+          # pskRaw 
           # appended to wpa_supplicant.conf
           # freq_list=5180 5190 5200 5210 5220 5230 5240 5250 5260 5270 5280
           # 

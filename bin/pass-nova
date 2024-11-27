@@ -1,5 +1,6 @@
 #!/bin/sh
 # https://zwyx.dev/blog/shared-password-stores
 # export PASSWORD_STORE_KEY
-export PASSWORD_STORE_DIR=secrets/pass-nova
+# should be absolute
+export PASSWORD_STORE_DIR="$TETO_SECRETS_FOLDER/pass-nova"
 pass "$@"

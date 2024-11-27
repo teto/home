@@ -71,7 +71,7 @@
         # experimental
         # https://github.com/nix-community/home-manager/pull/2992
         match = "host router";
-        port = 12666;
+        # port = 12666;
         # RemoteCommand
         # SendEnv LANG LC_*
       };

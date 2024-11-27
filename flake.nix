@@ -559,7 +559,7 @@
               hm.nixosModules.home-manager
               self.inputs.nixos-hardware.nixosModules.pcengines-apu
               # self.nixosModules.default-hm
-              ./hosts/router/configuration.nix
+              ./hosts/router/default.nix
             ];
           };
 
@@ -902,14 +902,14 @@
                 genNode ({
                   name = "router";
                   # local-facing address
-                  hostname = "192.168.1.11";
+                  hostname = "router";
                   # hostname = "10.0.0.1";
                 })
                 // {
                   # sshOpts = [ "-F" "ssh_config" ];
-                  sshUser = "root";
+                  # sshUser = "root";
                   sshOpts = [
-                    "-i/home/teto/.ssh/id_rsa"
+                    # "-i/home/teto/.ssh/id_rsa"
                     # "-p${toString secrets.router.sshPort}"
                   ];
 
