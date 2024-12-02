@@ -329,6 +329,10 @@ in
   # https://www.freedesktop.org/software/systemd/man/latest/systemd-sysupdate.html
   systemd.sysupdate.enable = false;
 
+
+  # SHould be a level instead ?
+  # systemd.enableStrictShellChecks = true;
+
   users = {
     groups.nginx.gid = config.ids.gids.nginx;
 

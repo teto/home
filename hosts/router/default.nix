@@ -274,7 +274,7 @@ in
           # the ISP box address
 
           # nom DNS visible dans "Mode reseau" sur freebox os
-          DNS= "freebox-server";
+          DNS = "freebox-server";
           # DNS = "192.168.1.1";
         };
 

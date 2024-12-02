@@ -1,6 +1,7 @@
-{ pkgs
-, lib
-, ...
+{
+  pkgs,
+  lib,
+  ...
 }:
 {
 
@@ -35,8 +36,8 @@
 
        # see https://github.com/jeffreytse/zsh-vi-mode for integration
        # TODO you can also use home-manager's built-in "plugin" feature:
-      '';
-       # source ${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+    '';
+    # source ${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 
     initExtraBeforeCompInit = # zsh
       ''

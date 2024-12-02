@@ -108,7 +108,7 @@
 
     nix-search-cli = {
       url = "github:peterldowns/nix-search-cli";
-      inputs.nixpkgs.follows = "nixpkgs";
+      # inputs.nixpkgs.follows = "nixpkgs";
     };
     nix-update = {
       url = "github:Mic92/nix-update";
@@ -117,7 +117,7 @@
 
     nix-index-database = {
       url = "github:nix-community/nix-index-database";
-      inputs.nixpkgs.follows = "nixpkgs";
+      # inputs.nixpkgs.follows = "nixpkgs";
     };
     # c8296214151883ce27036be74d22d04953418cf4
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
@@ -158,7 +158,7 @@
     };
 
     rippkgs.url = "github:replit/rippkgs";
-    rippkgs.inputs.nixpkgs.follows = "nixpkgs";
+    # rippkgs.inputs.nixpkgs.follows = "nixpkgs";
 
     # rofi-hoogle.url = "github:teto/rofi-hoogle/fixup";
     rofi-hoogle = {

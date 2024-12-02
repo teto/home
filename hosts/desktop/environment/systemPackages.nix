@@ -9,7 +9,9 @@ in
   pkgs.vulkan-tools # for vkcude for instance
   # pkgs.vkmark # vkmark to test
 
-  pkgs.nerdfonts
+  pkgs.nerd-fonts.fira-code # otherwise no characters
+  pkgs.nerd-fonts.droid-sans-mono # otherwise no characters
+
   pkgs.ubuntu_font_family
   pkgs.inconsolata # monospace
   pkgs.noto-fonts-cjk-sans # asiatic

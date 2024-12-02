@@ -267,7 +267,7 @@ in
   home.packages = with pkgs; [
     isync
     mujmap-unstable
-    meli-git # broken jmap mailreader
+    # meli-git # broken jmap mailreader
   ];
 
   systemd.user.services.mujmap-fastmail.Service = {

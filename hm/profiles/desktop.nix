@@ -4,10 +4,10 @@
   pkgs,
   # lib,
   # system,
-  withSecrets
-, dotfilesPath
-, secretsFolder
-, ...
+  withSecrets,
+  dotfilesPath,
+  secretsFolder,
+  ...
 }:
 let
 
@@ -31,9 +31,10 @@ let
     # fonts
     ubuntu_font_family
     inconsolata # monospace
+
     noto-fonts-cjk-sans # asiatic
-    nerdfonts # otherwise no characters
-    # (pkgs.nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; })
+    nerd-fonts.fira-code # otherwise no characters
+    nerd-fonts.droid-sans-mono # otherwise no characters
 
     # corefonts # microsoft fonts  UNFREE
     font-awesome_5
