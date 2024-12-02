@@ -1,3 +1,18 @@
+-- if vim.env.PROF then
+--   -- example for lazy.nvim
+--   -- change this to the correct path for your plugin manager
+--   -- ~/.local/share/nvim/site/pack/luarocks/opt/snacks.nvim/
+--   local snacksFolder = vim.fn.stdpath("data") .. "/site/pack/luarocks/opt/snacks.nvim"
+--   vim.opt.rtp:append(snacksFolder)
+--   require("snacks.profiler").startup({
+--     startup = {
+--       event = "VimEnter", -- stop profiler on this event. Defaults to `VimEnter`
+--       -- event = "UIEnter",
+--       -- event = "VeryLazy",
+--     },
+--   })
+-- end
+
 -- vim: set noet fdm=marker fenc=utf-8 ff=unix sts=0 sw=4 ts=4 :
 -- https://github.com/nanotee/nvim-lua-guide#using-meta-accessors
 -- https://www.reddit.com/r/neovim/comments/o8dlwg/how_to_append_to_an_option_in_lua/

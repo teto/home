@@ -142,6 +142,11 @@ in
       includeUserConf = true;
       cache32Bit = false; # defualt false
       defaultFonts = {
+
+        monospace = [ "Noto Sans Mono CJK JP" ];
+
+        sansSerif = [ "Noto Sans CJK JP" ];
+
         # monospace = [ "" ];
         # serif = [ "" ];
         # sansSerif =
