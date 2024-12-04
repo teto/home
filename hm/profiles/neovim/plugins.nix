@@ -13,7 +13,7 @@ in
       plugin = vim-CtrlXA;
     }
     pkgs.vimPlugins.telescope-fzf-native-nvim # for use with smart-open + fzf algo
-    pkgs.vimPlugins.blink-cmp
+    # pkgs.vimPlugins.blink-cmp # replace cmp-nvim
     pkgs.vimPlugins.vim-nixhash # :NixHash
     pkgs.vimPlugins.targets-vim # to get 'ci/'
     pkgs.vimPlugins.direnv-vim # to get 'ci/'

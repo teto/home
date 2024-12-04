@@ -45,6 +45,10 @@ let
   luaPlugins = with pkgs.vimPlugins; [
     pkgs.vimPlugins.nvim-treesitter-parsers.nix
     pkgs.vimPlugins.nvim-treesitter-parsers.hurl
+
+    # TODO check that it brings xxd in scope
+    pkgs.vimPlugins.hex-nvim
+
     # {
     #   # we should have a file of the grammars as plugins
     #   # symlinkJoin
@@ -283,7 +287,10 @@ let
     # nodePackages.vscode-langservers-extracted # needed for typescript language server IIRC
     # prettier sadly can't use buildNpmPackage because no lockfile https://github.com/NixOS/nixpkgs/issues/229475
     nodePackages.dockerfile-language-server-nodejs
-    nodePackages.typescript-language-server
+
+    # TODO map it to a plugin instead
+    # nodePackages.typescript-language-server
+
     # pandoc # for markdown preview, should be in the package closure instead
     # pythonPackages.pdftotext  # should appear only in RC ? broken
     nil # a nix lsp, can be debugged with NIL_LOG_PATH and NIL_LOG=nil=debug

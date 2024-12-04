@@ -15,15 +15,22 @@ b.setup({
     },
     -- set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
     -- adjusts spacing to ensure icons are aligned
-    nerd_font_variant = 'mono',
+    -- nerd_font_variant = 'mono',
 
     -- experimental auto-brackets support
     -- accept = { auto_brackets = { enabled = true } }
 
     -- experimental signature help support
     -- trigger = { signature_help = { enabled = true } }
-  },
   -- allows extending the enabled_providers array elsewhere in your config
   -- without having to redefining it
   -- opts_extend = { "sources.completion.enabled_providers" }
 })
+
+ -- example calling setup directly for each LSP
+  config = function()
+    local capabilities = require('blink.cmp').get_lsp_capabilities()
+    local lspconfig = require('lspconfig')
+
+    lspconfig['lua-ls'].setup({ capabilities = capabilities })
+  end

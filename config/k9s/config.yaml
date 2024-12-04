@@ -15,10 +15,12 @@ k9s:
     defaultsToFullScreen: false
   skipLatestRevCheck: false
   disablePodCounting: false
+  featureGates:
+   nodeShell: true # => enable nodeShell for this context. Defaults to false
   shellPod:
     # alpine ?
     image: busybox:1.35.0
-    namespace: default
+    # namespace: default
     limits:
       cpu: 100m
       memory: 100Mi

@@ -2,5 +2,7 @@
 # https://zwyx.dev/blog/shared-password-stores
 # export PASSWORD_STORE_KEY
 # should be absolute
+# should be temporary
+. /home/teto/.config/bash/lib.sh
 export PASSWORD_STORE_DIR="$TETO_SECRETS_FOLDER/pass-nova"
 pass "$@"
