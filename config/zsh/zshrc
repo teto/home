@@ -25,6 +25,9 @@ source ~/.profile
 
 # TODO make it a function cat some.json | python -m json.tool
 
+
+setopt completealiases
+
 # History parameters {{{
 
 # make some commands not show up in history
@@ -356,3 +359,5 @@ function merge_hist() {
     builtin fc -R -I "$hist_file"
     builtin fc -W "$hist_file_merged"
 }
+compdef _git gch
+compdef _pass pass-nova
