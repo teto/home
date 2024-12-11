@@ -4,6 +4,7 @@
 
 NIXPKGS_REPO := env_var('HOME') / 'nixpkgs'
 BLOG_FOLDER := "${HOME}/blog"
+NOVOS_REPO := "/home/teto/nova/doctor"
 
 default:
     just --choose
@@ -28,7 +29,7 @@ repl: (nixos-rebuild "repl" "")
 nixos-rebuild command builders="--option builders \"$NOVA_OVH1\" -j0":
     nixos-rebuild --flake ~/home --override-input nixpkgs {{ NIXPKGS_REPO }} \
       --override-input hm /home/teto/hm \
-      --override-input nova-doctor /home/teto/nova/doctor \
+      --override-input nova-doctor {{ NOVOS_REPO }} \
        {{ builders }} \
        --no-write-lock-file --show-trace --use-remote-sudo {{ command }}
 

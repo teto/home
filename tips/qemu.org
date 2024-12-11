@@ -1,4 +1,6 @@
 
+# 
+qemu-img info image.qcow2
 
 # to get a kvmconfig
 $ make kvmconfig

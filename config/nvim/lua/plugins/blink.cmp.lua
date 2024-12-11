@@ -1,4 +1,4 @@
-local b = require'blink.cmp'
+local b = require('blink.cmp')
 b.setup({
     -- 'default' for mappings similar to built-in completion
     -- 'super-tab' for mappings similar to vscode (tab to accept, arrow keys to navigate)
@@ -8,10 +8,10 @@ b.setup({
     keymap = { preset = 'default' },
 
     highlight = {
-      -- sets the fallback highlight groups to nvim-cmp's highlight groups
-      -- useful for when your theme doesn't support blink.cmp
-      -- will be removed in a future release, assuming themes add support
-      use_nvim_cmp_as_default = true,
+        -- sets the fallback highlight groups to nvim-cmp's highlight groups
+        -- useful for when your theme doesn't support blink.cmp
+        -- will be removed in a future release, assuming themes add support
+        use_nvim_cmp_as_default = true,
     },
     -- set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
     -- adjusts spacing to ensure icons are aligned
@@ -22,15 +22,15 @@ b.setup({
 
     -- experimental signature help support
     -- trigger = { signature_help = { enabled = true } }
-  -- allows extending the enabled_providers array elsewhere in your config
-  -- without having to redefining it
-  -- opts_extend = { "sources.completion.enabled_providers" }
+    -- allows extending the enabled_providers array elsewhere in your config
+    -- without having to redefining it
+    -- opts_extend = { "sources.completion.enabled_providers" }
 })
 
- -- example calling setup directly for each LSP
-  config = function()
+-- example calling setup directly for each LSP
+config = function()
     local capabilities = require('blink.cmp').get_lsp_capabilities()
     local lspconfig = require('lspconfig')
 
     lspconfig['lua-ls'].setup({ capabilities = capabilities })
-  end
+end
