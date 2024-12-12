@@ -357,9 +357,9 @@ in
       home.packages = with pkgs; [
 
         eva # calculette in a REPL
-        nodePackages.insect # fancy calculator
+        numbat # fancy calculator, child of 'insect'
         fend # rust unit convertor
-        pcalc # cool calc, see insect too
+        pcalc # cool calc, see numbat too
 
         graphviz
       ];

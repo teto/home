@@ -1,5 +1,10 @@
 rofi-pass / passmenu/ pass
 
+
+You can always use a key ID instead of a user ID. For example, for encrypting a message to my newer key:
+gpg --encrypt --recipient A4FF2279
+
+
 Si tu as operation annulée au moment d'entrer ton mot de passe, c'est que le
 pinentry foire. Tu peux installer pinentry-curses (apparemment utilisée par
 		défaut si t'as:
@@ -8,6 +13,7 @@ dans ton terminal auparavant.
 
 gpgconf --check-programs
 gpg --list-keys
+gpg --list-secret-keys
 
 To
 https://stackoverflow.com/questions/28321712/gpg-decryption-fails-with-no-secret-key-error

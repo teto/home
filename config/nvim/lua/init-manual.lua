@@ -746,3 +746,4 @@ if has_dbee then
 end
 
 vim.opt.completeopt = 'preview,menu,menuone'
+vim.opt.messagesopt = "wait:1000,history:500"
