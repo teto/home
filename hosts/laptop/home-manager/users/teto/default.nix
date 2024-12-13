@@ -20,7 +20,7 @@
 
       flakeSelf.homeModules.nova
       ../../../../../hm/profiles/vdirsyncer.nix
-      ../../../../../hm/profiles/experimental.nix
+      # ../../../../../hm/profiles/experimental.nix
     ]
     ++ [
       ./sway.nix
@@ -69,6 +69,7 @@
     enableDesktopGUIPackages = true;
     enableIMPackages = true;
     enableOfficePackages = true;
+    scientificSoftware = true;
     energy = true;
     wifi = true;
     llms = true;

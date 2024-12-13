@@ -310,6 +310,7 @@ in
   # system.replaceRuntimeDependencies
   #     List of packages to override without doing a full rebuild. The original derivation and replacement derivation must have the same name length, and ideally should have close-to-identical directory layout.
 
+  environment.systemPackages = [ pkgs.nixos-rebuild-ng ];
   # environment.systemPackages = [
   #   # pkgs.ntfsprogs
   #
