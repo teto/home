@@ -171,7 +171,7 @@ in
     # "earlycon=ttyS0"
     # "console=ttyS0" 
     # NECESSARY !! https://discourse.nixos.org/t/browsers-unbearably-slow-after-update/9414/30
-    "intel_pstate=active"
+    # "intel_pstate=active"
 
     # see https://forums.developer.nvidia.com/t/unusable-linux-text-console-with-nvidia-drm-modeset-1-or-if-nvidia-persistenced-is-loaded/184428/14
     "no-scroll"
@@ -181,7 +181,7 @@ in
   boot.kernelModules = [
     "af_key" # for ipsec/vpn support
     "kvm"
-    "kvm-intel" # for virtualisation
+    # "kvm-intel" # for virtualisation
   ];
 
   boot.kernel.sysctl = {

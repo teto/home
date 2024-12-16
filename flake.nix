@@ -457,6 +457,11 @@
             sops # to decrypt secrets
             ssh-to-age
             wormhole-rs # "wormhole-rs send"
+
+            # boot debug
+            chntpw  # to edit BCD (Boot configuration data) from windows
+            efibootmgr
+            smartmontools # for smartctl
           ];
 
           # TODO set SOPS_A
@@ -469,6 +474,10 @@
             echo "Run just ..."
           '';
         };
+
+        # debug = 
+        # default = nixpkgs.legacyPackages.${system}.mkShell {
+        #   name = "dotfiles-shell";
 
         inherit (unstablePkgs)
           nhs92

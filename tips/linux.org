@@ -2,6 +2,10 @@
 systemd-run --user --scope -pMemoryMax=<MemoryLimit> -pMemorySwapMax=<SwapMemoryLimit> nixpkgs-review rev HEAD
 
 
+* check for unsync data 
+
+For instance, whgen you are writing to an usb stick:
+cat /proc/meminfo | grep Dirty
 
 * Toggle Fn keys by default
 

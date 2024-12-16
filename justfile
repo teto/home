@@ -18,6 +18,7 @@ switch-remote: (nixos-rebuild "switch")
 # just to save the command
 
 # should be loaded into zsh history instead
+boot: (nixos-rebuild "boot --install-bootloader" "")
 build: (nixos-rebuild "build")
 
 switch: (nixos-rebuild "switch" "")
@@ -31,7 +32,9 @@ nixos-rebuild command builders="--option builders \"$NOVA_OVH1\" -j0":
       --override-input hm /home/teto/hm \
       --override-input nova-doctor {{ NOVOS_REPO }} \
        {{ builders }} \
-       --no-write-lock-file --show-trace --use-remote-sudo {{ command }}
+       --no-write-lock-file --show-trace \
+       --use-remote-sudo \
+       {{ command }}
 
 build-nom:
     nom build .#nixosConfigurations.$HOSTNAME.config.system.build.toplevel 
