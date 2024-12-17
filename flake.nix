@@ -459,7 +459,7 @@
             wormhole-rs # "wormhole-rs send"
 
             # boot debug
-            chntpw  # to edit BCD (Boot configuration data) from windows
+            chntpw # to edit BCD (Boot configuration data) from windows
             efibootmgr
             smartmontools # for smartctl
           ];

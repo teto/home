@@ -5,5 +5,8 @@
   ...
 }:
 {
-  services.mujmap.enable = true;
+  services.mujmap = {
+    enable = true;
+    package = pkgs.mujmap-unstable;
+  };
 }

@@ -96,7 +96,9 @@ let
     };
     mujmap = {
       enable = true;
+      # session_url Mutually exclusive with `fqdn`.
       # fqdn = null;
+      settings.fqdn = "fastmail.com";
       # TODO replace with pass
       # settings.password_command = "cat /home/teto/mujmap_password";
       # look at https://github.com/elizagamedev/mujmap/blob/main/mujmap.toml.example 
@@ -105,7 +107,9 @@ let
       # settings.password_command = getPasswordCommand "perso/fastmail_mc_jmap";
       settings.password_command = "${pkgs.pass}/bin/pass show perso/fastmail_mc_jmap";
       settings.config_dir = config.accounts.email.maildirBasePath;
-      settings.session_url = "https://api.fastmail.com/.well-known/jmap";
+      # 
+      # settings.session_url = "https://api.fastmail.com/.well-known/jmap";
+      # settings.session_url = "https://api.fastmail.com/jmap/session";
       # check example at https://github.com/elizagamedev/mujmap/blob/main/mujmap.toml.example
       # settings.timeout = 5
     };

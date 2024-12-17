@@ -19,6 +19,7 @@ switch-remote: (nixos-rebuild "switch")
 
 # should be loaded into zsh history instead
 boot: (nixos-rebuild "boot --install-bootloader" "")
+
 build: (nixos-rebuild "build")
 
 switch: (nixos-rebuild "switch" "")
