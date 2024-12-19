@@ -22,6 +22,7 @@ let
             "users/"
             "services/"
             "programs/"
+            "hardware/"
           ]
           ++ lib.optionals withSecrets [
             # "sops.nix"
@@ -91,7 +92,10 @@ in
       flakeSelf.nixosModules.sudo
       flakeSelf.nixosModules.universal
       flakeSelf.nixosModules.nix-daemon
-      # ../../nixos/profiles/desktop.nix
+
+      # TODO this triggers the error on boot I think
+      ../../nixos/profiles/desktop.nix
+
       ../../nixos/profiles/docker-daemon.nix
       ../../nixos/profiles/greetd.nix
       ../../nixos/profiles/podman.nix
@@ -141,6 +145,9 @@ in
   #   # for systemd-crypt or luks ?
   #   "/crypto_keyfile.bin" = null;
   # };
+
+  # Load nvidia driver for Xorg and Wayland
+  services.xserver.videoDrivers = ["nvidia"];
 
   # Enable swap on luks
   # boot.initrd.luks.devices."luks-abd09d4b-3972-405a-b314-44821af95c0e".device = "/dev/disk/by-uuid/abd09d4b-3972-405a-b314-44821af95c0e";

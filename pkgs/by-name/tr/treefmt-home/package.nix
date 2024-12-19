@@ -5,7 +5,7 @@ treefmt-nix.lib.mkWrapper pkgs {
 
   # TODO useofficial 
   programs.fourmolu.enable = true;
-  programs.nixfmt = {
+  programs.nixfmt-rfc-style = {
     enable = true;
     # package = myPkgs.nixfmt;
   };

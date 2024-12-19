@@ -266,6 +266,7 @@ in
 
   services.mujmap = {
     enable = true;
+    package = pkgs.mujmap-unstable;
   };
 
   home.packages = with pkgs; [

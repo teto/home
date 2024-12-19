@@ -1,4 +1,6 @@
 
+* bcd = boot configuration data
+
 
 You gotta use NTFS to create the usb key else the install.wim gets corrupt
 

@@ -305,7 +305,7 @@ let
     marksman # markdown LSP server
 
     # for none-ls
-    nixfmt # -rfc-style #
+    nixfmt-rfc-style # -rfc-style #
     nodePackages.prettier
     python3Packages.flake8 # for nvim-lint and some nixpkgs linters
     # soxWithMp3 = final.sox.override { llama-cpp = llama-cpp-matt; };

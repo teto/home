@@ -156,11 +156,14 @@ in
     grub = {
       enable = true;
       efiSupport = true;
-      efiInstallAsRemovable = false;
+      # If you turn this feature on, GRUB will install itself in a special location within efiSysMountPoint (namely EFI/boot/boot$arch.efi) which the firmwares are hardcoded to try first, regardless of NVRAM EFI variables.
+      efiInstallAsRemovable = true;
+      #
       useOSProber = true;
 
       # install to none, we just need the generated config
       # for ubuntu grub to discover
+      # boot.loader.grub.device has to be set to nodev 465, otherwise the grub installer will assume it has to install the Legacy (MBR) bits too. When doing so, it will either embed itself into
       # device = "/dev/nvme0n1p3";
       devices = [ "nodev" ];
     };

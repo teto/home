@@ -10,6 +10,7 @@
   # this makes screen go black on boot :/
   modesetting.enable = true; # needs "modesetting" in videoDrivers ?
 
+  open = false;
   # may need to select appropriate driver
   # choose between latest, beta, vulkan_beta, stable
   package = config.boot.kernelPackages.nvidiaPackages.latest;

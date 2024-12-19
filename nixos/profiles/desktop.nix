@@ -176,7 +176,7 @@ in
   '';
 
   boot.kernelParams = [
-    "boot.debug1devices"
+    # "boot.debug1devices"
   ];
 
   # then coredumpctl debug will launch gdb !

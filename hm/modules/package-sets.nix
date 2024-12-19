@@ -332,8 +332,7 @@ in
         nix-update # nix-update <ATTR> to update a software
         nix-index # to list package contents
         # nix-top # (abandoned) to list current builds
-        nixfmt # the official one
-        # nixfmt
+        nixfmt-rfc-style # the official one
         nixpkgs-review # to help review nix packages
         # nodePackages."@bitwarden/cli" # 'bw' binary # broken
         patchutils # for interdiff
