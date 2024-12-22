@@ -103,9 +103,11 @@ let
       # settings.password_command = "cat /home/teto/mujmap_password";
       # look at https://github.com/elizagamedev/mujmap/blob/main/mujmap.toml.example 
       # for example
+      # getPasswordCommand
       settings.username = secrets.accounts.mail.fastmail_perso.email;
       # settings.password_command = getPasswordCommand "perso/fastmail_mc_jmap";
-      settings.password_command = "${pkgs.pass}/bin/pass show perso/fastmail_mc_jmap";
+      # ${pkgs.pass-teto}/bin/
+      settings.password_command = "pass show perso/fastmail_mc_jmap";
       settings.config_dir = config.accounts.email.maildirBasePath;
       # 
       # settings.session_url = "https://api.fastmail.com/.well-known/jmap";
@@ -254,7 +256,7 @@ in
 {
 
   imports = [
-    ../../../../../hm/profiles/neomutt.nix
+    # ../../../../../hm/profiles/neomutt.nix
     ./programs/aerc.nix
     ./programs/astroid.nix
     ./programs/msmtp.nix

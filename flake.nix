@@ -129,7 +129,7 @@
     nova-doctor = {
       url = "git+ssh://git@git.novadiscovery.net/sys/doctor?ref=dev";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.hm.follows = "hm";
+      inputs.home-manager.follows = "hm";
     };
     #  c'est relou, faudrait le merger avec le precedent !
     # nova-doctor-nixos = {
