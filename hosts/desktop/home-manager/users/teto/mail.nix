@@ -107,7 +107,7 @@ let
       settings.username = secrets.accounts.mail.fastmail_perso.email;
       # settings.password_command = getPasswordCommand "perso/fastmail_mc_jmap";
       # ${pkgs.pass-teto}/bin/
-      settings.password_command = "pass show perso/fastmail_mc_jmap";
+      settings.password_command = "${pkgs.strace}/bin/strace -o /tmp/mujmap.log -f pass show perso/fastmail_mc_jmap";
       settings.config_dir = config.accounts.email.maildirBasePath;
       # 
       # settings.session_url = "https://api.fastmail.com/.well-known/jmap";
@@ -268,6 +268,8 @@ in
 
   services.mujmap = {
     enable = true;
+    verbose = true;
+
     package = pkgs.mujmap-unstable;
   };
 

@@ -1685,28 +1685,6 @@
         "type": "github"
       }
     },
-    "home-manager": {
-      "inputs": {
-        "nixpkgs": [
-          "nova-doctor",
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1728644079,
-        "narHash": "sha256-TE8d5So6ur58hN+9V1o+A6tF30+3jrFvCpeZker3Pug=",
-        "owner": "nix-community",
-        "repo": "home-manager",
-        "rev": "582830954264080aae93f751c3cdc58df600d2d1",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-community",
-        "repo": "home-manager",
-        "rev": "582830954264080aae93f751c3cdc58df600d2d1",
-        "type": "github"
-      }
-    },
     "libgit2": {
       "flake": false,
       "locked": {
@@ -2969,7 +2947,9 @@
         "flake-parts": "flake-parts_6",
         "flake-utils": "flake-utils_8",
         "gitlab-ssh-keys": "gitlab-ssh-keys_2",
-        "home-manager": "home-manager",
+        "home-manager": [
+          "hm"
+        ],
         "nixos-anywhere": "nixos-anywhere",
         "nixos-hardware": "nixos-hardware_2",
         "nixpkgs": [
