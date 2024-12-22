@@ -47,7 +47,7 @@ let
     pkgs.vimPlugins.nvim-treesitter-parsers.hurl
 
     # TODO check that it brings xxd in scope
-    pkgs.vimPlugins.hex-nvim
+    # pkgs.vimPlugins.hex-nvim
 
     # {
     #   # we should have a file of the grammars as plugins

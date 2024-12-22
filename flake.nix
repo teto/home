@@ -654,6 +654,7 @@
         # TODO scan hm/{modules, profiles} folder
         homeModules = {
 
+          alot = ./hm/profiles/alot.nix;
           developer = ./hm/profiles/dev.nix;
           fzf = ./hm/profiles/fzf.nix;
           japanese = hm/profiles/japanese.nix;
@@ -670,6 +671,7 @@
           # for stuff not in home-manager yet
           # experimental = ../../../hm/profiles/experimental.nix;
 
+          gnome-shell = ./hm/profiles/gnome.nix;
           package-sets = ./hm/modules/package-sets.nix;
           # (modulesFromDir ./hm/modules)
 

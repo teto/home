@@ -1,3 +1,6 @@
+
+busctl --user list
+
 https://linuxembedded.fr/2015/07/comprendre-dbus
 busctl
 d-feet replaced by d-spy

@@ -21,7 +21,7 @@
     border-radius: 0;
     background: rgba(43, 48, 59, 0.5);
 	/* font-family: "Ubuntu", "Symbols Nerd Font Mono", "Symbols Nerd Font"; */
-/*     font-family: Roboto, Helvetica, Arial, sans-serif; */
+    font-family: "Symbols Nerd Font", "Ubuntu";
 /*     font-size: 13px; */
 /*     min-height: 0; */
 }
@@ -70,10 +70,12 @@ tooltip label {
 	background-color: rgba(0,43,51,0.85);
     margin: 2px 10px 0 0;
 }
+
 .modules-center {
 	background-color: rgba(0,43,51,0.85);
     margin: 2px 0 0 0;
 }
+
 /* .modules-left { */
 /*     margin: 2px 0 0 5px; */
 /* 	background-color: rgba(0,119,179,0.6); */

@@ -1,4 +1,5 @@
 {
+  flakeSelf,
   config,
   lib,
   pkgs,
@@ -7,7 +8,7 @@
 {
 
   imports = [
-    ../../../../../../hm/profiles/waybar.nix
+    flakeSelf.homeModules.waybar
   ];
 
   programs.waybar = {
@@ -16,26 +17,6 @@
       mainBar = {
 
         include = [ "~/.config/waybar/desktop.jsonc" ];
-        # output = [
-        # "eDP-1"
-        # "HDMI-A-1"
-        # ];
-        # "wlr/taskbar" 
-        # modules-left = [
-        #  "sway/workspaces"
-        #  "sway/mode"
-        # ];
-
-        # clock = {
-        #     # "timezone": "America/New_York",
-        #     # TODO look how to display timezone
-        #     timezones = [  "Europe/Paris"  "Asia/Tokyo" ];
-        #     tooltip-format= "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
-        #     format-alt = "{:%Y-%m-%d}";
-        #      # on-click = "${pkgs.swaynotificationcenter}/bin/swaync-client -t -sw";
-        #     on-click = "${pkgs.kitty}/bin/kitty sh -c cal -m3";
-        #      # on-click-right = "swaync-client -d -sw";
-        #  };
 
         # "custom/notification" = {
         #   tooltip = false;

@@ -146,7 +146,7 @@ in
     # systemd-boot.editor = true; # allow to edit command line
     # systemd-boot.consoldeMode = "auto"; 
 
-    efi.canTouchEfiVariables = true;
+    # efi.canTouchEfiVariables = true;
     # defaults to /boot
     efi.efiSysMountPoint = "/boot";
     #    systemd-boot.enable = true;

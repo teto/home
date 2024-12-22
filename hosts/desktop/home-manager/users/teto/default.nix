@@ -29,7 +29,7 @@
 
       flakeSelf.homeModules.teto-desktop
       flakeSelf.homeModules.fzf
-      # ../../../../../hm/profiles/desktop.nix
+      # flakeSelf.homeModules.gnome-shell
 
       # ../../../../../hm/teto/common.nix
 
@@ -38,12 +38,10 @@
       # ../../../hm/profiles/experimental.nix
 
       # Not tracked, so doesn't need to go in per-machine subdir
-      ../../../../../hm/profiles/gnome.nix
-      ../../../../../hm/profiles/waybar.nix
       # ../../../../../hm/profiles/fcitx.nix
       ../../../../../hm/profiles/vscode.nix
       # custom modules
-      ../../../../../hm/profiles/emacs.nix
+      # ../../../../../hm/profiles/emacs.nix
       ../../../../../hm/profiles/zsh.nix
       # ../../../../hm/profiles/weechat.nix
 
@@ -74,15 +72,18 @@
       ./mail.nix
       ./ia.nix
       flakeSelf.homeModules.nova
+      flakeSelf.homeModules.alot
       # ../../../../../hm/profiles/japanese.nix
       ../../../../../hm/profiles/ia.nix
       # ../../../../../hm/profiles/nushell.nix
-      ../../../../../hm/profiles/alot.nix
       # ../../../hm/profiles/android.nix
       ../../../../../hm/profiles/gaming.nix
 
-      ../../../../../hm/profiles/vdirsyncer.nix
     ];
+
+  services.vdirsyncer = {
+    enable = true;
+  };
 
   # TODO use mkSymlinkOufOf  ? ?
   # xdg.configFile."zsh/zshrc.generated".source = ../../../config/zsh/zshrc;
@@ -189,7 +190,7 @@
     nerd-fonts.fira-code # otherwise no characters
     nerd-fonts.droid-sans-mono # otherwise no characters
     # corefonts # microsoft fonts  UNFREE
-    font-awesome_5
+    font-awesome_5 # needed for waybar
     source-code-pro
     dejavu_fonts
     # Adobe Source Han Sans
@@ -220,4 +221,12 @@
     # $HOME/.local/share/Zeal/Zeal/docsets
   };
 
+  systemd.user.services.xwayland-satellite = {
+    Service = {
+      # TODO need DBUS_SESSION_BUS_ADDRESS 
+      # --app-name="%N" toto
+      Environment = [ ''DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/1000/bus"'' ];
+      Exec = "${pkgs.xwayland-satellite}/bin/xwayland-satellite";
+    };
+  };
 }

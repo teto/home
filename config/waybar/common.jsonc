@@ -19,7 +19,8 @@
   "custom/weather"
  ],
  "sway/workspaces": {
-   // # {name}:
+   // to avoid warning see https://github.com/Alexays/Waybar/discussions/2816
+   "window-rewrite": {},
    "format": "{name}",
    "disable-scroll": false,
    "all-outputs" : false
