@@ -55,10 +55,11 @@ in
     );
 
     # TODO this should disappear in the future
-    # extraLuaPackages = ps: ps.rest-nvim.propagatedBuildInputs ;
-    # [
-    #   ps.mpack
-    # ];
+    extraLuaPackages = ps: 
+    [
+      ps.nvim-nio
+      ps.fzy
+    ];
 
     extraPackages = with pkgs; [
       # emacs # for orgmode-babel

@@ -20,7 +20,7 @@
 
       flakeSelf.homeModules.nova
       ../../../../../hm/profiles/vdirsyncer.nix
-      # ../../../../../hm/profiles/experimental.nix
+      ../../../../../hm/profiles/experimental.nix
     ]
     ++ [
       ./sway.nix
@@ -116,7 +116,12 @@
   programs.neovim.plugins = [ pkgs.vimPlugins.vim-dadbod-ui ];
   # pkgs.callPackage ./programs/neovim.nix {};
 
-  # systemd.user.settings.Manager.DefaultEnvironment = {
+  # TODO move upper ?
+  systemd.user.settings.Manager.DefaultEnvironment = {
+    NOTMUCH_CONFIG = "${config.xdg.configHome}/notmuch/default/config";
+    # NOTMUCH_CONFIG = "${config.xdg.configHome}/notmuch/default/config";
+  };
+
   #   # /home/teto/.nix-profile/bin:/nix/profile/bin:/home/teto/.local/state/nix/profile/bin:/etc/profiles/per-user/teto/bin:/nix/var/nix/profiles/default/bin:/run/current-system/sw/bin:/home/teto/.local/share/../bin
   # };
 

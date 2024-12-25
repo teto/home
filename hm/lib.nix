@@ -32,7 +32,8 @@ in
     # in
     # ["${script}/bin/pass-show" accountName];
     [
-      "${pkgs.pass}/bin/pass"
+      # ${pkgs.pass-teto}/bin/
+      "pass-perso"
       "show"
       accountName
     ];

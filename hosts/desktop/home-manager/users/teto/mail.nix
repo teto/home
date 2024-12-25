@@ -107,7 +107,8 @@ let
       settings.username = secrets.accounts.mail.fastmail_perso.email;
       # settings.password_command = getPasswordCommand "perso/fastmail_mc_jmap";
       # ${pkgs.pass-teto}/bin/
-      settings.password_command = "${pkgs.strace}/bin/strace -o /tmp/mujmap.log -f pass show perso/fastmail_mc_jmap";
+      # ${pkgs.strace}/bin/strace -o /tmp/mujmap.log -f 
+      settings.password_command = "/home/teto/home/bin/pass-perso show perso/fastmail_mc_jmap";
       settings.config_dir = config.accounts.email.maildirBasePath;
       # 
       # settings.session_url = "https://api.fastmail.com/.well-known/jmap";
@@ -280,7 +281,10 @@ in
   ];
 
   systemd.user.services.mujmap-fastmail.Service = {
-    Environment = "PATH=${pkgs.lib.makeBinPath [ pkgs.pass-teto ]}";
+    Environment = [
+      "PATH=${pkgs.lib.makeBinPath [ pkgs.pass-teto pkgs.bash ]}"
+    ];
+    # TODO add notmuch_CONFIG ?
   };
 
   accounts.email.maildirBasePath = "${config.home.homeDirectory}/maildir";

@@ -360,4 +360,7 @@ function merge_hist() {
     builtin fc -W "$hist_file_merged"
 }
 compdef _git gch
+
 compdef _pass pass-nova
+compdef _pass pass-pro
+compdef _pass pass-perso
