@@ -79,6 +79,9 @@ let
     astroid = {
       enable = true;
     };
+    meli = {
+      enable = true;
+    };
 
     mbsync = mbsyncConfig // {
       enable = false; # mujmap is better at it

@@ -12,7 +12,7 @@ let
 
   cfg = config.programs.meli;
 
-  enabledAccounts = attrValues (lib.filterAttrs (_: a: a.meli.enable) config.accounts.email.accounts);
+  enabledAccounts = lib.filterAttrs (_: a: a.meli.enable) config.accounts.email.accounts;
 
   accountAttr =
     name: account:
@@ -22,6 +22,7 @@ let
     {
       display_name = "Name";
       root_mailbox = account.maildir.absPath;
+      identity = account.address;
       subscribed_mailboxes = [ "*" ];
       server_password_command = "pass-perso show perso/fastmail_mc_jmap";
       # server_password=""
@@ -143,7 +144,6 @@ in
           tomlFormat.generate "config.toml" (
             cfg.settings
             // {
-
               accounts = accountsAttr;
             }
           )
