@@ -17,17 +17,13 @@ let
         include =
           [
             "boot.nix"
+            "environment.nix"
             # UNCOMMENTING this will break everything since its content is not adapted
             # "home-manager/"
             "users/"
             "services/"
             "programs/"
             "hardware/"
-          ]
-          ++ lib.optionals withSecrets [
-            # "sops.nix"
-            "sops/secrets.nix"
-            "services/openssh.nix"
           ];
         exclude = [
           # "teto"
@@ -37,7 +33,13 @@ let
           "generated.nix"
           "_nixos.nix"
           # "sops.nix"
-        ];
+        ]
+          ++ lib.optionals (!withSecrets) [
+            # "sops.nix"
+            "sops/secrets.nix"
+            "services/openssh.nix"
+          ]
+        ;
       };
       # loader = inputs: path: 
       #  inputs.super.defaultWith import;
@@ -115,7 +117,7 @@ in
       flakeSelf.nixosModules.novaModule
     ];
 
-  # boot.blacklistedKernelModules = [ "nouveau" ];
+  boot.blacklistedKernelModules = [ "nouveau" ];
 
   # enables command on boot/suspend etc
   # powerManagement.enable = true;
@@ -279,7 +281,7 @@ in
     enable = true;
   };
 
-  system.stateVersion = "24.05";
+  system.stateVersion = "24.11";
 
   # services.logind = {
   #   # see https://bbs.archlinux.org/viewtopic.php?id=225977 for problems with LID

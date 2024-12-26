@@ -7,3 +7,8 @@ huggingface-cli download ggerganov/whisper.cpp ggml-large-v3.bin
 https://huggingface.co/models?library=gguf
 
 https://huggingface.co/spaces/ggml-org/gguf-my-repo to convert a repo
+
+https://huggingface.co/docs/huggingface_hub/package_reference/environment_variables
+HF_TOKEN_PATH
+
+default llm-ls inference home is const HF_INFERENCE_API_HOSTNAME: &str = "api-inference.huggingface.co";

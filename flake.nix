@@ -385,6 +385,8 @@
             ./hm/profiles/common.nix
 
             # TODO it should autoload those
+            self.homeModules.meli
+
             self.homeModules.neovim
             ./hm/modules/bash.nix
             ./hm/modules/zsh.nix
@@ -398,7 +400,7 @@
             (
               { ... }:
               {
-                home.stateVersion = "24.05";
+                home.stateVersion = "24.11";
 
                 # to avoid warnings about incompatible stateVersions
                 home.enableNixpkgsReleaseCheck = false;
@@ -665,6 +667,7 @@
           sway = ./hm/profiles/sway.nix;
 
           # 
+          meli = ./hm/modules/programs/meli.nix;
           neovim-full = hosts/desktop/home-manager/users/teto/programs/neovim.nix;
           nova = ./hm/profiles/nova.nix;
 

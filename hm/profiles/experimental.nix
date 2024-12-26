@@ -6,10 +6,18 @@
 }:
 {
 
-  # programs.meli = {
-  #   enable = true;
-  # };
-  #
+  programs.meli = {
+    enable = true;
+
+    includes = ["fastmail.toml"];
+
+    settings = {
+      notifications = {
+        script = "notify-send";
+      };
+    };
+  };
+
   # programs.zsh = {
   #   mcfly.enable = true;
   # };
