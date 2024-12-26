@@ -27,7 +27,7 @@ let
     # lua require'telescope-all-recent'.toggle_debug()
 
     # (luaPlugin {
-    #   plugin = telescope-all-recent-nvim; 
+    #   plugin = telescope-all-recent-nvim;
     #   config = ''
     #        require'telescope-all-recent'.setup{
     #    -- your config goes here
@@ -38,11 +38,13 @@ let
 
   # try via rocks.nvim first
   neotestPlugins = with pkgs.vimPlugins; [
-    # neotest 
+    # neotest
     # neotest-haskell
   ];
 
   luaPlugins = with pkgs.vimPlugins; [
+    pkgs.vimPlugins.llm-nvim
+
     pkgs.vimPlugins.nvim-treesitter-parsers.nix
     pkgs.vimPlugins.nvim-treesitter-parsers.hurl
 
@@ -83,9 +85,9 @@ let
     # TODO restore
     # (luaPlugin { plugin = image-nvim; })
 
-    # (luaPlugin { 
+    # (luaPlugin {
     #  # this is a peculiarly complex one that needs pynvim, image.nvim
-    #  plugin = molten-nvim; 
+    #  plugin = molten-nvim;
     # })
 
     # TODO it needs some extra care
@@ -135,7 +137,7 @@ let
     # (luaPlugin { plugin = lush-nvim; }) # dependency of some colorschemes
 
     (luaPlugin {
-      # TODO could try 
+      # TODO could try
       # really helps with syntax highlighting
       plugin = haskell-vim;
       config = ''
@@ -214,7 +216,7 @@ let
     # (luaPlugin { plugin = stylish-nvim; })
 
     # doesnt seem to work + problematic on neovide
-    # (luaPlugin { 
+    # (luaPlugin {
     #  plugin = image-nvim;
     #     /* lua */
     #     config =  ''
@@ -282,7 +284,7 @@ let
     haskellPackages.hasktags
     haskellPackages.fast-tags
 
-    # llm-ls
+    llm-ls
     manix # should be no need, telescope-manix should take care of it
     # nodePackages.vscode-langservers-extracted # needed for typescript language server IIRC
     # prettier sadly can't use buildNpmPackage because no lockfile https://github.com/NixOS/nixpkgs/issues/229475

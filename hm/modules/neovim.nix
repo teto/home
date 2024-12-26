@@ -16,7 +16,7 @@ let
     // {
       type = "lua";
       # config = lib.optionalString
-      #   (attrs ? config && attrs.config != null) 
+      #   (attrs ? config && attrs.config != null)
       #   (genBlockLua attrs.plugin.pname attrs.config)
       #   ;
     };
@@ -30,7 +30,7 @@ let
   # ];
   defaultCompletionPlugins = with pkgs.vimPlugins; [
 
-    # TODO I should be able to remove it as it's a dependency of the other modules 
+    # TODO I should be able to remove it as it's a dependency of the other modules
     # but it doesn't seem to work yet for hm
     (luaPlugin { plugin = nvim-cmp; })
 

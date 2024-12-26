@@ -21,7 +21,7 @@
   copyDesktopItems,
 }:
 
-# stdenv.mkDerivation rec 
+# stdenv.mkDerivation rec
 mkYarnPackage rec {
 
   pname = "popcorntime";

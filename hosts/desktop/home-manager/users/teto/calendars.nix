@@ -8,14 +8,13 @@
 }:
 {
 
-  imports =
-    [
-    ];
+  imports = [
+  ];
 
   programs.vdirsyncer = {
     enable = withSecrets;
     # Provide package from stable channel ?
-    # package = pkgs.vdirsyncerStable;  
+    # package = pkgs.vdirsyncerStable;
 
   };
 
@@ -65,7 +64,7 @@
 
         vdirsyncer = {
           enable = withSecrets;
-          # null doesn't look too interesting :s 
+          # null doesn't look too interesting :s
           collections = [
             "from a"
             "from b"
@@ -111,7 +110,7 @@
 
       #   vdirsyncer = {
       #     enable = false;
-      #     # null doesn't look too interesting :s 
+      #     # null doesn't look too interesting :s
       #     collections = ["from a"  "from b"];
       #     metadata = [ "color" "displayname" ];
       #   };

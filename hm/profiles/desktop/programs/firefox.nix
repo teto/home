@@ -12,7 +12,7 @@ in
 {
 
   # TODO prefix with stable
-  # look at firefox/wrapper to add policies 
+  # look at firefox/wrapper to add policies
   # https://github.com/mozilla/policy-templates#enterprisepoliciesenabled
   # programs.firefox = {
   enable = true;
@@ -46,8 +46,8 @@ in
     HardwareAcceleration = true;
     # buggy see https://github.com/nix-community/home-manager/issues/5821
     NoDefaultBookmarks = true;
-    # OfferToSaveLoginsDefault = 
-    # TranslateEnabled = 
+    # OfferToSaveLoginsDefault =
+    # TranslateEnabled =
     PDFjs = false;
     Bookmarks = { };
     #  "type": "array",
@@ -95,7 +95,7 @@ in
       # https://gitlab.com/rycee/configurations/-/blob/bf46aef74ca53a61fe2d35349fe3dbc6a70b2609/user/firefox.nix#L25-39
       settings = ffLib.myDefaultSettings;
       path = "q1pprbmm.default";
-      # extraConfig = 
+      # extraConfig =
       id = 0;
       # Not accepted. we should find another way to enable it
       # pass package for instance

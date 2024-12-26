@@ -11,7 +11,7 @@
     enable = true;
     # read
     adminPubkey = builtins.readFile ./neotokyo-gitolite.pub;
-    # group 
+    # group
     # user
     # enableGitAnnex = false;
     # by default dataLib -> /var/lib/gitolite

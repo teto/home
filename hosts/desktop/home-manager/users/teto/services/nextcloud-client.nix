@@ -12,8 +12,6 @@
     pkgs.nextcloud-client
   ];
 
-  systemd.user.services.nextcloud-client =
-    lib.mkIf config.services.nextcloud-client.enable
-      {
-      };
+  systemd.user.services.nextcloud-client = lib.mkIf config.services.nextcloud-client.enable {
+  };
 }

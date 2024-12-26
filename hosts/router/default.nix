@@ -245,7 +245,7 @@ in
       # };
       "br0" = {
         matchConfig.Name = "br0";
-        # address = [ 
+        # address = [
         # ];
         networkConfig.Address = "10.0.0.1/${toString bridgeNetwork.prefixLength}";
         # routes = [
@@ -394,10 +394,10 @@ in
       networks = {
         neotokyo = {
           psk = secrets.router.password;
-          # pskRaw 
+          # pskRaw
           # appended to wpa_supplicant.conf
           # freq_list=5180 5190 5200 5210 5220 5230 5240 5250 5260 5270 5280
-          # 
+          #
 
           #            freq_list=5180 5190 5200 5210 5220 5230 5240 5250 5260 5270 5280
 

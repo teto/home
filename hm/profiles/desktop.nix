@@ -15,7 +15,7 @@ let
     { pkgs, ... }@args:
     flakeInputs.haumea.lib.load {
       src = ./desktop;
-      #   flakeInputs.nix-filter { 
+      #   flakeInputs.nix-filter {
       #   root = ./desktop;
       # };
       inputs = args // {

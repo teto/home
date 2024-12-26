@@ -20,7 +20,7 @@
     # goes to .profile
     sessionVariables = {
       HISTTIMEFORMAT = "%d.%m.%y %T ";
-      # CAREFUL 
+      # CAREFUL
       # HISTFILE="$XDG_CACHE_HOME/bash_history";
       # TODO pass the correct port, how to do that ? need ssh_config support
       # full path towards thee ~/.password-store folder
@@ -100,7 +100,7 @@
       gbr = "git branch";
       # }}}
 
-      # ls 
+      # ls
 
       # kitty
       kcat = "kitty +kitten icat";

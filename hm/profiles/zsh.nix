@@ -37,7 +37,7 @@
     shellAliases = {
       # trying to generate aliases replacing RUNNER2
       #  l
-      # BUILDER2 = 
+      # BUILDER2 =
       ".." = "cd ..";
       "..." = "cd ../..";
 

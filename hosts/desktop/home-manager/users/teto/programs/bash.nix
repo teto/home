@@ -5,7 +5,7 @@
     # goes to .profile
     sessionVariables = {
       HISTTIMEFORMAT = "%d.%m.%y %T ";
-      # CAREFUL 
+      # CAREFUL
       # HISTFILE="$XDG_CACHE_HOME/bash_history";
 
     };

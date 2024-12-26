@@ -9,11 +9,11 @@
   services.mpd = {
     enable = true;
     # dataDir = xdg.dataDir
-    # playlistDirectory = 
-    # extraConfig = 
-    # extraArgs = 
+    # playlistDirectory =
+    # extraConfig =
+    # extraArgs =
     network = {
-      # port 
+      # port
       # startWhenNeeded = true;
     };
   };
@@ -21,7 +21,7 @@
   # programs.ncmpcpp = {
   #  enable = true;
   #  # bindings = #
-  #  # settings = 
+  #  # settings =
   #   # mpdMusicDir
   # };
 }

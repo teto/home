@@ -63,7 +63,7 @@ in
         useACMEHost = "blog.${secrets.jakku.hostname}";
         # All serverAliases will be added as extra domain names on the certificate.
         serverAliases = [
-          # "blog.${secrets.jakku.hostname}" 
+          # "blog.${secrets.jakku.hostname}"
           "${secrets.jakku.hostname}"
           "www.${secrets.jakku.hostname}"
         ];

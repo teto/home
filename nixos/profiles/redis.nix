@@ -25,7 +25,7 @@
       # to enable TLS
 
       settings = {
-        # syslog-enabled = 
+        # syslog-enabled =
         # port = 0; # conflicts with module one
 
         # tls-port = 4242;

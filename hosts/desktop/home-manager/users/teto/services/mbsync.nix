@@ -19,7 +19,7 @@
   # systemd.user.services.mbsync
   systemd.user.services.mbsync = lib.mkIf config.services.mbsync.enable {
     Service = {
-      # TODO need DBUS_SESSION_BUS_ADDRESS 
+      # TODO need DBUS_SESSION_BUS_ADDRESS
       # --app-name="%N" toto
       Environment = [ ''DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/1000/bus"'' ];
       # SetCredentialEncrypted=secrets.accounts.mail.fastmail_perso;

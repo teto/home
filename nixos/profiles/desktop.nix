@@ -58,8 +58,8 @@ in
   # let home-manager do it
   # xdg.portal = {
   #  # https://github.com/flatpak/xdg-desktop-portal/blob/1.18.1/doc/portals.conf.rst.in
-  #  enable = true; 
-  #  xdgOpenUsePortal = true; 
+  #  enable = true;
+  #  xdgOpenUsePortal = true;
 
   #  # is this in configuration.nix ?
   #  config.common.default = "*";
@@ -184,7 +184,7 @@ in
   # security.pam.loginLimits
   systemd.coredump.enable = false;
 
-  # see 
+  # see
   #JournalSizeMax=767M
   #MaxUse=
   #KeepFree=

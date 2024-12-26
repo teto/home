@@ -92,7 +92,6 @@ end
 
 -- vim.opt.packpath:prepend('/home/teto/gp.nvim2')
 
-
 -- TODO prefix with gp_defaults.
 -- local defaults = require('gp.defaults')
 --

@@ -11,7 +11,7 @@
   pam.services.swaylock = { };
 
   pam.loginLimits = [
-    # 
+    #
     # to avoid "Bad file descriptor" and "Too many open files" situations
     # ulimit -u
 
@@ -30,7 +30,7 @@
       value = "70000";
     }
   ];
-  # users.motd = 
+  # users.motd =
   # security.pam.loginLimits = [
   #   {
   #     domain = "teto";

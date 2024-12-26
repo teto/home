@@ -12,7 +12,7 @@
 
 # ifeq ($(HAVE_GNOME_H),1)
 # CFLAGS = -g -O4 -Wall -I. `gnome-config --cflags gnome gnomeui`
-# LDFLAGS=  `gnome-config --libs gnome gnomeui`  
+# LDFLAGS=  `gnome-config --libs gnome gnomeui`
 let
   variant = "gtk";
 in

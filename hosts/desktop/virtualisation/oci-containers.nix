@@ -6,7 +6,7 @@
     #  # cmd = ["sleep unlimited" ];
     #  # entrypoint = '
     #   autoStart = true;
-    #   # TODO load the one from 
+    #   # TODO load the one from
     #   image = "ubuntu:latest";
     #   # extraOptions = ["--device=/dev/bus/usb/xxx/xxx" "--rm=false"];
     #   # entryPoint = "/bin/bash";

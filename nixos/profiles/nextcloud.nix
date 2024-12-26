@@ -27,11 +27,11 @@ in
       # we choose postgres because it's faster
       dbtype = "pgsql";
       # Further forces Nextcloud to use HTTPS
-      # loaded via sops 
+      # loaded via sops
       adminpassFile = "/run/secrets/${nextcloudAdminPasswordSopsPath}";
       # TODO change it
       # adminUser = "root";
-      # dbpassFile = 
+      # dbpassFile =
 
       # we can use an s3 account
       # objectstore.s3.enable
@@ -45,7 +45,7 @@ in
     extraApps = with config.services.nextcloud.package.packages.apps; {
       # inherit news; # removed 'cos gives a wrong error
       inherit contacts;
-      # mail extension can't be download :s 
+      # mail extension can't be download :s
       # example of how to get a more recent version
       # contacts = pkgs.fetchNextcloudApp rec {
       #   url = "https://github.com/nextcloud-releases/contacts/releases/download/v4.2.2/contacts-v4.2.2.tar.gz";
@@ -53,7 +53,7 @@ in
       # };
     };
     # to be able to send mails from the admin panel
-    # Test mails can be send via administration interface in the menu section "Basic settings". 
+    # Test mails can be send via administration interface in the menu section "Basic settings".
     settings = {
       mail_smtpmode = "sendmail";
       mail_sendmailmode = "pipe";
@@ -79,7 +79,7 @@ in
   };
 
   # create some errors on deploy
-  # services.nginx.virtualHosts = { 
+  # services.nginx.virtualHosts = {
   #   # "cloud.acelpb.com" = {... }
   #   "${secrets.gitolite_server.hostname}" = {
   #     forceSSL = false;

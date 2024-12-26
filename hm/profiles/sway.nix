@@ -43,7 +43,7 @@ in
     systemd.enable = true;
   };
 
-  # 
+  #
   systemd.user.services.swayrd.Service = lib.mkIf config.programs.swayr.enable {
     Environment = [
       "PATH=${
@@ -57,14 +57,14 @@ in
   # }}}
 
   # todo prepend sharedExtraConfig
-  # xdg.configFile."sway/config" = 
+  # xdg.configFile."sway/config" =
 
   wayland.windowManager.sway = {
     enable = true;
     # creates a sway-session target that is started on wayland start
     systemd.enable = true;
 
-    # disabling swayfx until  those get merged 
+    # disabling swayfx until  those get merged
     # https://github.com/nix-community/home-manager/pull/4039
     # https://github.com/NixOS/nixpkgs/pull/237044
 
@@ -201,7 +201,7 @@ in
       };
       # terminal = term;
       bars = [ ];
-      # menu = 
+      # menu =
       workspaceOutputAssign = [
         {
           workspace = "toto";
@@ -226,7 +226,8 @@ in
 
         # start a terminal
         "${mod}+Return" = "exec --no-startup-id ${term}";
-        "${mod}+Shift+Return" = ''exec --no-startup-id ${term} -d "$(${toString ../../bin/kitty-get-cwd.sh})"'';
+        "${mod}+Shift+Return" =
+          ''exec --no-startup-id ${term} -d "$(${toString ../../bin/kitty-get-cwd.sh})"'';
 
         Menu = "exec ${rofi}/bin/rofi -modi 'drun' -show drun";
         "${mod}+Tab" = "exec ${rofi}/bin/rofi -modi 'drun' -show drun";
@@ -243,16 +244,20 @@ in
         # TODO make it a command
         "${mod}+Ctrl+L" = "exec ${myLib.swaylockCmd} ";
 
-        # TODO notify/throw popup when clipman fails 
+        # TODO notify/throw popup when clipman fails
         # "${mod}+Ctrl+h" = ''exec ${pkgs.clipman}/bin/clipman pick -t rofi || ${sharedConfig.notify-send} 'Failed running clipman' '';
         # cliphist list | rofi -dmenu
-        "${mod}+Ctrl+h" = ''exec ${pkgs.cliphist}/bin/cliphist list | rofi -dmenu  -m -1 -p "Select item to copy" -lines 10 -width 35 | cliphist decode | wl-copy | ${sharedConfig.notify-send} 'Failed running cliphist' '';
+        "${mod}+Ctrl+h" =
+          ''exec ${pkgs.cliphist}/bin/cliphist list | rofi -dmenu  -m -1 -p "Select item to copy" -lines 10 -width 35 | cliphist decode | wl-copy | ${sharedConfig.notify-send} 'Failed running cliphist' '';
 
         # kitty nvim -c ":Neorg workspace notes"
-        "${mod}+F1" = ''exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 70 --height 60 --mark neorg-notes --command 'kitty nvim +Notes'  '';
-        "${mod}+F2" = ''exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 70 --height 60 --mark audio --command 'kitty ${config.programs.ncmpcpp.package}/bin/ncmpcpp' '';
+        "${mod}+F1" =
+          ''exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 70 --height 60 --mark neorg-notes --command 'kitty nvim +Notes'  '';
+        "${mod}+F2" =
+          ''exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 70 --height 60 --mark audio --command 'kitty ${config.programs.ncmpcpp.package}/bin/ncmpcpp' '';
         # "${mod}+F3" = ''exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 70 --height 60 --mark scratchpad --command 'kitty nvim' '';
-        "${mod}+F3" = ''exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 90 --height 90 --mark scratchpad --command 'kitty nvim' '';
+        "${mod}+F3" =
+          ''exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 90 --height 90 --mark scratchpad --command 'kitty nvim' '';
 
         "--release Print" = "exec ${pkgs.sway-contrib.grimshot}/bin/grimshot copy area";
         # bindsym F12 exec sway-scratchpad --command "kitty -d /home/user/projects" --mark terminal

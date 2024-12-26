@@ -20,7 +20,7 @@
     # rserverExtraConfig = ''
 
     # defaults to "/var/lib/rstudio-server"
-    # serverWorkingDir 
+    # serverWorkingDir
     # rsessionExtraConfig = ''
     #  '';
   };

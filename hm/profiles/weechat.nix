@@ -28,7 +28,7 @@ in
   # there is no such module
   # programs.weechat = {
   #   enable = true;
-  #   # plugins = 
+  #   # plugins =
   #   init = ''
   #   '';
   # };

@@ -93,7 +93,7 @@ rec {
       # temp because of deadline
       # preferBuiltin = true; -> should change the structuredConfig
       # defconfig = "kvmguest"; # doesn't work well
-      # TODO 
+      # TODO
       # it was not answering Console on 8250/16550 and compatible serial port, NAME: SERIAL_8250_CONSOLE, ALTS: Y/n/?, ANSWER:
       ignoreConfigErrors = true;
 
@@ -171,7 +171,7 @@ rec {
   #   inherit (linux_mptcp_trunk_raw) src version modDirVersion;
   #   # version = linux_mptcp_94.version;
   #   configfile = ./kernels/mptcp_trunk_netlink.config;
-  #   # we need this to true else the kernel can't parse the config and 
+  #   # we need this to true else the kernel can't parse the config and
   #   # detect if modules are in used
   #   allowImportFromDerivation = true;
   #   # modDirVersion="4.14.70";

@@ -20,7 +20,7 @@
     #   path = "${config.xdg.cacheHome}/zsh_history";
     #  };
 
-    # test for 
+    # test for
     # - https://www.reddit.com/r/neovim/comments/17dn1be/implementing_mru_sorting_with_minipick_and_fzflua/
     # - https://lib.rs/crates/fre
     initExtra = ''
@@ -46,7 +46,7 @@
       '';
 
     # to disable loading of /etc/z* files
-    # envExtra = '' 
+    # envExtra = ''
     # setopt no_global_rcs
     # '';
     # kernel aliases {{{

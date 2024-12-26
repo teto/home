@@ -477,7 +477,7 @@
           '';
         };
 
-        # debug = 
+        # debug =
         # default = nixpkgs.legacyPackages.${system}.mkShell {
         #   name = "dotfiles-shell";
 
@@ -498,7 +498,7 @@
         runScript = "ldd";
       };
 
-      # 
+      #
 
       packages = (autoCalledPackages myPkgs { }) // {
         /*
@@ -617,7 +617,7 @@
             withSecrets = true;
           };
 
-          # desktop is a 
+          # desktop is a
           desktop = mkNixosSystem {
             withSecrets = false;
             hostname = "jedha";
@@ -666,7 +666,7 @@
           # services-swaync = ./hm/services/swaync.nix;
           sway = ./hm/profiles/sway.nix;
 
-          # 
+          #
           meli = ./hm/modules/programs/meli.nix;
           neovim-full = hosts/desktop/home-manager/users/teto/programs/neovim.nix;
           nova = ./hm/profiles/nova.nix;
@@ -720,7 +720,7 @@
 
         nixosModules =
           # broken
-          # (modulesFromDir ./nixos/modules) // 
+          # (modulesFromDir ./nixos/modules) //
           {
 
             default-hm = hm-common;

@@ -34,7 +34,7 @@ in
     # defined in overrides: TODO this should be easier: like fzf-vim should be enough
     fzfWrapper
 
-    #  nvim-colorizer 
+    #  nvim-colorizer
     # (luaPlugin { plugin = nvim-terminal-lua; config = "require('terminal').setup()"; })
 
     # TODO hacking on this

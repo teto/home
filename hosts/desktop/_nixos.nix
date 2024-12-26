@@ -88,7 +88,7 @@ in
     #  ];
     #   # flakeInputs.haumea.lib.transformers.liftDefault;
     # };
-    # in 
+    # in
     {
       root = {
         imports = [
@@ -144,7 +144,7 @@ in
   boot.loader = {
     systemd-boot.enable = false;
     # systemd-boot.editor = true; # allow to edit command line
-    # systemd-boot.consoldeMode = "auto"; 
+    # systemd-boot.consoldeMode = "auto";
 
     # efi.canTouchEfiVariables = true;
     # defaults to /boot
@@ -172,7 +172,7 @@ in
   # hide messages !
   boot.kernelParams = [
     # "earlycon=ttyS0"
-    # "console=ttyS0" 
+    # "console=ttyS0"
     # NECESSARY !! https://discourse.nixos.org/t/browsers-unbearably-slow-after-update/9414/30
     # "intel_pstate=active"
 

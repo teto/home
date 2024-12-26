@@ -30,7 +30,7 @@
   #       ":"
   #       "${pkgs.vapoursynth-mvtools}/lib/vapoursynth"
   #     ];
-  #     # scripts = [ 
+  #     # scripts = [
 
   #     #   pkgs.mpvScripts.mpvacious # Adds mpv keybindings to create Anki cards from movies and TV shows
   #     #   pkgs.mpvScripts.manga-reader

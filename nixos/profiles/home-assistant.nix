@@ -113,14 +113,14 @@
       # services.home-assistant.config."scene ui" = "!include scenes.yaml";
     };
 
-    # so that it can be overriden from the web interface 
+    # so that it can be overriden from the web interface
     configWritable = true;
 
     # /var/lib/hass/configuration.yaml: Secret elevation not defined
   };
 
-  # If you did not create any automations through the UI, 
-  # Home Assistant will fail loading because the automations.yaml file does not exist yet and it will fail including it. To avoid that, add a systemd tmpfiles.d rule: 
+  # If you did not create any automations through the UI,
+  # Home Assistant will fail loading because the automations.yaml file does not exist yet and it will fail including it. To avoid that, add a systemd tmpfiles.d rule:
   # taken from https://wiki.nixos.org/wiki/Home_Assistant#Combine_declarative_and_UI_defined_scenes
   systemd.tmpfiles.rules = [
     "f ${config.services.home-assistant.configDir}/automations.yaml 0755 hass hass"

@@ -22,7 +22,7 @@
   ports = [ 12666 ];
 
   # tu peux en avoir plusieurs sur ce mode
-  # alors que on a 
+  # alors que on a
   # AuthorizedKeysFile %h/.ssh/authorized_keys %h/.ssh/authorized_keys2 /etc/ssh/authorized_keys.d/%u
 
   # # for sshfs edit or scp

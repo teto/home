@@ -8,7 +8,7 @@
   # programs.kitty = {
   enable = true;
   # we need a monospace font
-  # check that it supports italic with font-manager or 
+  # check that it supports italic with font-manager or
   # printf '\e[3mAB'
   # font.name = "Source Code Pro";
   # font.name = "Ubuntu";

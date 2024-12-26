@@ -106,9 +106,9 @@
   '';
 
   home.language = {
-    # monetary = 
-    # measurement = 
-    # numeric = 
+    # monetary =
+    # measurement =
+    # numeric =
     # paper =
     time = "fr_FR.utf8";
   };
@@ -172,7 +172,7 @@
     # w3m # for preview in ranger w3mimgdisplay
 
     # bridge-utils# pour  brctl
-    # ironbar 
+    # ironbar
     # haxe # to test https://neovim.discourse.group/t/presenting-haxe-neovim-a-new-toolchain-to-build-neovim-plugins/3720
 
     unar # used to view archives by yazi
@@ -223,7 +223,7 @@
 
   systemd.user.services.xwayland-satellite = {
     Service = {
-      # TODO need DBUS_SESSION_BUS_ADDRESS 
+      # TODO need DBUS_SESSION_BUS_ADDRESS
       # --app-name="%N" toto
       Environment = [ ''DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/1000/bus"'' ];
       Exec = "${pkgs.xwayland-satellite}/bin/xwayland-satellite";

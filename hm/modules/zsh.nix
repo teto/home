@@ -190,7 +190,7 @@ in
           add-zsh-hook precmd set_term_title_for_new_prompt
         '';
 
-        # depending 
+        # depending
         # in my case since I am using starship
         # https://starship.rs/advanced-config/#custom-pre-prompt-and-pre-execution-commands-in-bash
         programs.bash.initExtra = ''

@@ -101,16 +101,16 @@ let
       settings.fqdn = "fastmail.com";
       # TODO replace with pass
       # settings.password_command = "cat /home/teto/mujmap_password";
-      # look at https://github.com/elizagamedev/mujmap/blob/main/mujmap.toml.example 
+      # look at https://github.com/elizagamedev/mujmap/blob/main/mujmap.toml.example
       # for example
       # getPasswordCommand
       settings.username = secrets.accounts.mail.fastmail_perso.email;
       # settings.password_command = getPasswordCommand "perso/fastmail_mc_jmap";
       # ${pkgs.pass-teto}/bin/
-      # ${pkgs.strace}/bin/strace -o /tmp/mujmap.log -f 
+      # ${pkgs.strace}/bin/strace -o /tmp/mujmap.log -f
       settings.password_command = "/home/teto/home/bin/pass-perso show perso/fastmail_mc_jmap";
       settings.config_dir = config.accounts.email.maildirBasePath;
-      # 
+      #
       # settings.session_url = "https://api.fastmail.com/.well-known/jmap";
       # settings.session_url = "https://api.fastmail.com/jmap/session";
       # check example at https://github.com/elizagamedev/mujmap/blob/main/mujmap.toml.example
@@ -282,7 +282,12 @@ in
 
   systemd.user.services.mujmap-fastmail.Service = {
     Environment = [
-      "PATH=${pkgs.lib.makeBinPath [ pkgs.pass-teto pkgs.bash ]}"
+      "PATH=${
+        pkgs.lib.makeBinPath [
+          pkgs.pass-teto
+          pkgs.bash
+        ]
+      }"
     ];
     # TODO add notmuch_CONFIG ?
   };

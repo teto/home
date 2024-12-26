@@ -15,7 +15,7 @@
       "unread"
       "inbox"
     ];
-    # new.ignore = 
+    # new.ignore =
     search.excludeTags = [ "spam" ];
 
     # or we could use mkOutOfStoreSymlink ?
@@ -24,7 +24,7 @@
         # TODO move them up to a "mail" section ? or to config/notmuch
         (builtins.readFile ../../../../../../hooks_perso/post-new)
       ];
-      # postInsert = 
+      # postInsert =
     };
   };
 

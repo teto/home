@@ -64,9 +64,8 @@
 
   # variables set by PAM
   # https://wiki.archlinux.org/index.php/Environment_variables#Using_pam_env
-  environment.sessionVariables =
-    {
-    };
+  environment.sessionVariables = {
+  };
 
   environment.extraOutputsToInstall = [ "man" ];
 

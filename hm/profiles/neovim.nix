@@ -55,8 +55,7 @@ in
     );
 
     # TODO this should disappear in the future
-    extraLuaPackages = ps: 
-    [
+    extraLuaPackages = ps: [
       ps.nvim-nio
       ps.fzy
     ];

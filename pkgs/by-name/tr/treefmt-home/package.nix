@@ -3,9 +3,9 @@ treefmt-nix.lib.mkWrapper pkgs {
   # Used to find the project root
   projectRootFile = ".git/config";
 
-  # TODO useofficial 
+  # TODO useofficial
   programs.fourmolu.enable = true;
-  programs.nixfmt-rfc-style = {
+  programs.nixfmt = {
     enable = true;
     # package = myPkgs.nixfmt;
   };

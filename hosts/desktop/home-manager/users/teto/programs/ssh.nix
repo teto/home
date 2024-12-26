@@ -95,9 +95,9 @@
       "${config.xdg.configHome}/ssh/config"
     ];
 
-    # TODO parts of this should be accessible from 
+    # TODO parts of this should be accessible from
     # extraConfig = ''
-    #   Include 
+    #   Include
     #   # TODO remove when doctor's home-manager is ok
     #   Include ${config.xdg.configHome}/nova/jinkompute/ssh_config
     # '';

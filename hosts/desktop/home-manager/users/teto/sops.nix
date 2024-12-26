@@ -28,7 +28,7 @@
   };
 
   # restic:
-  #   teto-bucket: 
+  #   teto-bucket:
 
   sops.secrets."restic/teto-bucket" = {
     mode = "0440";

@@ -47,7 +47,7 @@ in
         wireplumber = {
           format = "{volume}% {icon}";
           # "format-muted": "ï¦"
-          # <sup> </sup> 
+          # <sup> </sup>
           # 🔈
           format-muted = "<span background='red'>🔇</span>";
           on-click = myLib.muteAudio;

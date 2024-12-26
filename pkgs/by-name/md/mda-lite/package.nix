@@ -25,7 +25,7 @@ let
     ]
   );
 in
-# stdenv.mkDerivation rec 
+# stdenv.mkDerivation rec
 buildPythonApplication {
   name = "mda-lite";
   version = "20180606";

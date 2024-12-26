@@ -14,34 +14,33 @@ let
     flakeInputs.haumea.lib.load {
       src = flakeInputs.nix-filter {
         root = ./.;
-        include =
+        include = [
+          "boot.nix"
+          "environment.nix"
+          # UNCOMMENTING this will break everything since its content is not adapted
+          # "home-manager/"
+          "users/"
+          "services/"
+          "programs/"
+          "hardware/"
+        ];
+        exclude =
           [
-            "boot.nix"
-            "environment.nix"
-            # UNCOMMENTING this will break everything since its content is not adapted
-            # "home-manager/"
-            "users/"
-            "services/"
-            "programs/"
-            "hardware/"
-          ];
-        exclude = [
-          # "teto"
-          # "root"
-          # "environment.nix"
-          # "boot.nix"
-          "generated.nix"
-          "_nixos.nix"
-          # "sops.nix"
-        ]
+            # "teto"
+            # "root"
+            # "environment.nix"
+            # "boot.nix"
+            "generated.nix"
+            "_nixos.nix"
+            # "sops.nix"
+          ]
           ++ lib.optionals (!withSecrets) [
             # "sops.nix"
             "sops/secrets.nix"
             "services/openssh.nix"
-          ]
-        ;
+          ];
       };
-      # loader = inputs: path: 
+      # loader = inputs: path:
       #  inputs.super.defaultWith import;
 
       #  builtins.trace path path;
@@ -108,7 +107,7 @@ in
       # ../../nixos/profiles/adb.nix
       ../../nixos/profiles/kanata.nix
       ../../nixos/profiles/postgresql.nix
-      # ../../nixos/profiles/home-assistant.nix 
+      # ../../nixos/profiles/home-assistant.nix
       # usually inactive, just to test some stuff
       # ../../nixos/modules/libvirtd.nix
 
@@ -149,7 +148,7 @@ in
   # };
 
   # Load nvidia driver for Xorg and Wayland
-  services.xserver.videoDrivers = ["nvidia"];
+  services.xserver.videoDrivers = [ "nvidia" ];
 
   # Enable swap on luks
   # boot.initrd.luks.devices."luks-abd09d4b-3972-405a-b314-44821af95c0e".device = "/dev/disk/by-uuid/abd09d4b-3972-405a-b314-44821af95c0e";
@@ -165,7 +164,7 @@ in
 
         # flakeSelf.homeModules.neovim
         # ] ++ lib.optionals withSecrets [
-        #   # ../../hm/profiles/nova/ssh-config.nix 
+        #   # ../../hm/profiles/nova/ssh-config.nix
         #     flakeSelf.homeModules.nova
       ];
     };

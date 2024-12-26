@@ -9,7 +9,10 @@
   programs.meli = {
     enable = true;
 
-    includes = ["fastmail.toml"];
+    includes = [
+      "notmuch.toml"
+      "fastmail.toml"
+    ];
 
     settings = {
       notifications = {

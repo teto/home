@@ -49,7 +49,7 @@
   };
 
   # https://discourse.nixos.org/t/how-do-you-pin-a-firefox-extensions-add-on-to-the-firefox-toolbar/36081
-  # browser.uiCustomization.state 
+  # browser.uiCustomization.state
   myDefaultSettings = {
     # TODO use my own startpage
     "browser.startup.homepage" = "https://github.com/teto";
@@ -129,7 +129,7 @@
 
     "widget.use-xdg-desktop-portal.file-picker" = 1;
 
-    # "general.config.filename" = 
+    # "general.config.filename" =
 
     # TO avoid
     "signon.prefillForms" = true;

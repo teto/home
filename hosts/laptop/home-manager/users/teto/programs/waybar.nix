@@ -16,7 +16,7 @@
     settings = {
       mainBar = {
         include = [ "~/.config/waybar/laptop.jsonc" ];
-        # modules-right = [ 
+        # modules-right = [
         #  "battery"
         #  "backlight"
         # ];

@@ -50,8 +50,8 @@ in
         HardwareAcceleration = true;
         # buggy see https://github.com/nix-community/home-manager/issues/5821
         NoDefaultBookmarks = true;
-        # OfferToSaveLoginsDefault = 
-        # TranslateEnabled = 
+        # OfferToSaveLoginsDefault =
+        # TranslateEnabled =
         PDFjs = false;
         Bookmarks = { };
       };

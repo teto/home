@@ -105,7 +105,7 @@ in
           # khard # see khal.nix instead ?
           # libsecret  # to consult
           # newsboat #
-          # mujmap # to sync notmuch tags across jmap 
+          # mujmap # to sync notmuch tags across jmap
           pkgs.vlc
           # leafnode dovecot22 dovecot_pigeonhole fetchmail procmail w3m
           # mairix mutt msmtp lbdb contacts spamassassin
@@ -180,7 +180,7 @@ in
           xdg-utils
           xdg-terminal-exec # necessary for gio launch to launch terminal
 
-          # Run xwayland-satellite. You can specify an X display to use (i.e. :12). Be sure to set the same DISPLAY 
+          # Run xwayland-satellite. You can specify an X display to use (i.e. :12). Be sure to set the same DISPLAY
           # the package contains a systemd service
           xwayland-satellite # to launch X applications within wayland (and without a full Xwayland ?)
 
@@ -414,7 +414,7 @@ in
         # swayrst #  https://github.com/Nama/swayrst # not packaged yet
 
         # sway overview, draws layouts for each workspace: dope https://github.com/milgra/sov
-        # sov  
+        # sov
         nwg-bar # locks nothing
         nwg-drawer # launcher
         nwg-menu
