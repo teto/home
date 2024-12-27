@@ -10,15 +10,14 @@
   # this makes screen go black on boot :/
   modesetting.enable = true; # needs "modesetting" in videoDrivers ?
 
-  open = false;
+  # open is only ready for data center use
+  open = true;
   # may need to select appropriate driver
   # choose between latest, beta, vulkan_beta, stable
-  package = config.boot.kernelPackages.nvidiaPackages.stable;
+  package = config.boot.kernelPackages.nvidiaPackages.beta;
   nvidiaSettings = true;
 
-  # open is only ready for data center use
-  # open = true;
-  powerManagement.enable = true;
+  powerManagement.enable = false;
   # Update for NVIDA GPU headless mode, i.e. nvidia-persistenced. It ensures all GPUs stay awake even during headless mode.
   # nvidiaPersistenced = true;
 }

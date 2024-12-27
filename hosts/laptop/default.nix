@@ -11,41 +11,36 @@
 let
   laptopAutoloaded =
     { pkgs, ... }@args:
-    flakeInputs.haumea.lib.load {
-      src = flakeInputs.nix-filter {
+    flakeSelf.inputs.haumea.lib.load {
+      src = flakeSelf.inputs.nix-filter {
+        name = "laptopAutoloaded";
         root = ./.;
         include = [
           "boot.nix"
           "environment.nix"
           # UNCOMMENTING this will break everything since its content is not adapted
           # "home-manager/"
+          # "home-manager/"
           "users/"
           "services/"
+          "security/"
           "programs/"
           "hardware/"
         ];
+
         exclude =
           [
-            # "teto"
-            # "root"
-            # "environment.nix"
             # "boot.nix"
             "generated.nix"
-            "_nixos.nix"
-            # "sops.nix"
           ]
           ++ lib.optionals (!withSecrets) [
-            # "sops.nix"
             "sops/secrets.nix"
             "services/openssh.nix"
           ];
       };
-      # loader = inputs: path:
-      #  inputs.super.defaultWith import;
 
-      #  builtins.trace path path;
       inputs = args // {
-        inputs = flakeInputs;
+        inputs = flakeSelf.inputs;
       };
       transformer = [
         flakeInputs.haumea.lib.transformers.liftDefault
@@ -55,8 +50,8 @@ let
 
   desktopAutoloaded =
     { pkgs, ... }@args:
-    flakeInputs.haumea.lib.load {
-      src = flakeInputs.nix-filter {
+    flakeSelf.inputs.haumea.lib.load {
+      src = flakeSelf.inputs.nix-filter {
         root = ../desktop;
         include = [
           # TODO just include directly
@@ -70,7 +65,7 @@ let
       };
 
       inputs = args // {
-        inputs = flakeInputs;
+        inputs = flakeSelf.inputs;
       };
       transformer = [
         flakeInputs.haumea.lib.transformers.liftDefault
