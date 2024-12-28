@@ -27,7 +27,10 @@
       url = "github:Kirottu/anyrun";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
+    globset = {
+      url = "github:pdtpartners/globset";
+      inputs.nixpkgs-lib.follows = "nixpkgs";
+    };
     deploy-rs = {
       url = "github:serokell/deploy-rs";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -657,6 +660,7 @@
         homeModules = {
 
           alot = ./hm/profiles/alot.nix;
+          calendars = ./hm/profiles/calendars.nix;
           developer = ./hm/profiles/dev.nix;
           fzf = ./hm/profiles/fzf.nix;
           japanese = hm/profiles/japanese.nix;

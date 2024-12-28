@@ -11,7 +11,6 @@
     flakeSelf.homeModules.waybar
   ];
 
-  programs.waybar = {
 
     settings = {
       mainBar = {
@@ -41,6 +40,5 @@
         #  format-icons = ["" "" "" "" ""];
         # };
       };
-    };
   };
 }

@@ -11,7 +11,7 @@
 
     includes = [
       "notmuch.toml"
-      "fastmail.toml"
+      # "fastmail.toml"
     ];
 
     settings = {

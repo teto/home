@@ -1,0 +1,3 @@
+{
+polkit.enable = true;
+}

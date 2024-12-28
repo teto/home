@@ -175,9 +175,9 @@ in
     @audio   -  nice     -20
   '';
 
-  boot.kernelParams = [
+  # boot.kernelParams = [
     # "boot.debug1devices"
-  ];
+  # ];
 
   # then coredumpctl debug will launch gdb !
   # boot.kernel.sysctl."kernel.core_pattern" = "core"; to disable.

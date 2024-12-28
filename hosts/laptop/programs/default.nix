@@ -1,0 +1,5 @@
+{
+gnome-disks = {
+    enable = true;
+  };
+}

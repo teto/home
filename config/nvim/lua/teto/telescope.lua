@@ -9,13 +9,14 @@ function M.telescope_create_keymaps()
         require('telescope.builtin').buffers({})
     end, { desc = 'Fuzzy search buffers' })
 
+	-- todo use fzf-lua instead
     vim.keymap.set('n', '<Leader>o', function()
         -- require('telescope.builtin').git_files({})
         require('telescope').extensions.smart_open.smart_open({
             cwd_only = true,
             -- match_algorithm = "fzf",
         })
-    end, { desc = 'Fuzzy search git files' })
+    end, { desc = 'Telescope: fuzzy search git files' })
     -- vim.keymap.set ('n', "<Leader>F", function () vim.cmd("FzfFiletypes") end)
     vim.keymap.set('n', '<Leader>t', function()
         require('telescope.builtin').tags({})

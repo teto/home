@@ -7,7 +7,9 @@
 }:
 {
 
-  imports = [ ../../../hm/profiles/swaync.nix ];
+  imports = [ 
+    ../../../hm/profiles/swaync.nix
+  ];
 
   # TODO
   services.swaync = {

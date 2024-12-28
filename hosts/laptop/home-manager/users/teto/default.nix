@@ -6,28 +6,30 @@
   withSecrets,
   flakeInputs,
   flakeSelf,
+  secretsFolder,
   ...
 }:
 {
 
-  imports =
+    imports =
     lib.optionals withSecrets [
-      ../../../../desktop/home-manager/users/teto/calendars.nix
+      flakeSelf.homeModules.calendars
+
       ../../../../desktop/home-manager/users/teto/contacts.nix
       ../../../../desktop/home-manager/users/teto/mail.nix
       ../../../../desktop/home-manager/users/teto/sops.nix
       ../../../../desktop/home-manager/users/teto/programs/khal.nix
 
       flakeSelf.homeModules.nova
-      ../../../../../hm/profiles/vdirsyncer.nix
+      # ../../../../../hm/profiles/vdirsyncer.nix
       ../../../../../hm/profiles/experimental.nix
     ]
     ++ [
-      ./sway.nix
-      ./programs/waybar.nix
-      ./services/mpd.nix
-      ./services/blueman-applet.nix
-      ./services/swayidle.nix
+      # ./sway.nix
+      # ./programs/waybar.nix
+      # ./services/mpd.nix
+      # ./services/blueman-applet.nix
+      # ./services/swayidle.nix
 
       # ../../../hm/profiles/emacs.nix
       ../../../../../hm/profiles/qutebrowser.nix
@@ -58,12 +60,21 @@
       ../../../../../hm/profiles/vscode.nix # provided by nova-nix config
     ];
 
+  # services.vdirsyncer = {
+  #   enable = true;
+  # };
+  # # broken on unstable because python2
+  # services.opensnitch-ui.enable = false;
+
+  # xdg.configFile."teto-utils/lib.sh".text = ''
+  xdg.configFile."bash/lib.sh".text = ''
+    TETO_SECRETS_FOLDER=${secretsFolder}
+  '';
+
   home.sessionPath = [
     "$HOME/.local/bin"
   ];
 
-  # broken on unstable because python2
-  services.opensnitch-ui.enable = false;
 
   package-sets = {
     enableDesktopGUIPackages = true;
@@ -75,11 +86,11 @@
     llms = true;
   };
 
-  programs.zsh = {
-    enable = true;
-    enableTetoConfig = true;
-  };
-
+  # programs.zsh = {
+  #   enable = true;
+  #   enableTetoConfig = true;
+  # };
+  #
   # just stow-config
   home.file.".inputrc" = {
     # dotfilesPath
@@ -113,8 +124,7 @@
     # noto-fonts
   ];
 
-  programs.neovim.plugins = [ pkgs.vimPlugins.vim-dadbod-ui ];
-  # pkgs.callPackage ./programs/neovim.nix {};
+  # programs.neovim.plugins = [ pkgs.vimPlugins.vim-dadbod-ui ];
 
   # TODO move upper ?
   systemd.user.settings.Manager.DefaultEnvironment = {
