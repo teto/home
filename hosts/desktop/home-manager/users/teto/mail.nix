@@ -80,7 +80,10 @@ let
       enable = true;
     };
     meli = {
-      enable = true;
+      enable = false;
+      settings = {
+        listing.index_style = "compact";
+      };
     };
 
     mbsync = mbsyncConfig // {

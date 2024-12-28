@@ -22,7 +22,7 @@
 local has_fzf_lua, fzf_lua = pcall(require, 'fzf-lua')
 
 -- set to true to enable it
-local use_fzf_lua = has_fzf_lua and false
+local use_fzf_lua = has_fzf_lua and true
 local use_telescope = not use_fzf_lua
 -- local has_luasnip, ls = pcall(require, 'luasnip')
 -- local use_luasnip = has_luasnip and true
@@ -555,12 +555,33 @@ fzf_lua.register_ui_select(function(_, items)
     }
 end)
 
+
 if use_fzf_lua then
     -- require('fzf-lua.providers.ui_select').register({})
 
     require('teto.fzf-lua').register_keymaps()
     local fzf_history_dir = vim.fn.expand('~/.local/share/fzf-history')
     fzf_lua.setup({
+      previewers = {
+        builtin = {
+          -- fzf-lua is very fast, but it really struggled to preview a couple files
+          -- in a repo. Those files were very big JavaScript files (1MB, minified, all on a single line).
+          -- It turns out it was Treesitter having trouble parsing the files.
+          -- With this change, the previewer will not add syntax highlighting to files larger than 100KB
+          -- (Yes, I know you shouldn't have 100KB minified files in source control.)
+          syntax_limit_b = 1024 * 100, -- 100KB
+        },
+      },
+        oldfiles = {
+        -- In Telescope, when I used <leader>fr, it would load old buffers.
+        -- fzf lua does the same, but by default buffers visited in the current
+        -- session are not included. I use <leader>fr all the time to switch
+        -- back to buffers I was just in. If you missed this from Telescope,
+        -- give it a try.
+        include_current_session = true,
+        -- cwd_only = true,
+        stat_file = true, -- verify files exist on disk
+      },
         'default-title',
         defaults = { formatter = 'path.filename_first' },
         commands = { sort_lastused = true },
@@ -570,6 +591,7 @@ if use_fzf_lua then
             ['--history'] = fzf_history_dir,
             -- to get the prompt at the top
             ['--layout'] = 'reverse',
+            -- ["--no-scrollbar"] = true,
         },
         winopts = {
             preview = {
@@ -587,8 +609,18 @@ if use_fzf_lua then
             },
             layout = 'flex',
         },
+        keymap = {
+            fzf = {
+                -- use cltr-q to select all items and convert to quickfix list
+                ["ctrl-q"] = "select-all+accept",
+            },
+        },
     })
 end
+
+vim.keymap.set('n', '<Leader>b', function()
+    require('fzf-lua').buffers({})
+end, { desc = 'Fuzzy search buffers (fzf-lua)' })
 
 if use_telescope then
     local tts = require('teto.telescope')
@@ -737,4 +769,4 @@ if has_dbee then
 end
 
 vim.opt.completeopt = 'preview,menu,menuone'
-vim.opt.messagesopt = 'wait:1000,history:500'
+vim.opt.messagesopt = 'wait:5000,history:500'

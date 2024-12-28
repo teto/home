@@ -11,13 +11,22 @@
 
     includes = [
       "notmuch.toml"
-      "fastmail.toml"
+      # "fastmail.toml"
     ];
 
     settings = {
       notifications = {
         script = "notify-send";
       };
+
+      # shortcuts.general = {
+      #   next_tab = "]";
+      # };
+
+      # composing = {
+      #   editor_command = 'nvim +/^$' # optional, by default $EDITOR is used.
+      # };
+
     };
   };
 

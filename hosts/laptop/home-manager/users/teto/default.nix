@@ -6,6 +6,7 @@
   withSecrets,
   flakeInputs,
   flakeSelf,
+  dotfilesPath,
   ...
 }:
 {
@@ -119,6 +120,7 @@
   # TODO move upper ?
   systemd.user.settings.Manager.DefaultEnvironment = {
     NOTMUCH_CONFIG = "${config.xdg.configHome}/notmuch/default/config";
+    # for vdirsyncer
     # NOTMUCH_CONFIG = "${config.xdg.configHome}/notmuch/default/config";
   };
 

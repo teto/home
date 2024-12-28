@@ -444,7 +444,7 @@ in
       home.packages = with pkgs; [
         # pkgs.powertop # superuseful
         # pkgs.pcm
-        # pkgs.mokuro # broken because of triton-llvm
+        pkgs.mokuro # broken because of triton-llvm
         pkgs.python3Packages.manga_ocr
         tagainijisho # japanse dict; like zkanji Qt based
         # ${config.system}

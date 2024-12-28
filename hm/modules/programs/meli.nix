@@ -29,28 +29,8 @@ let
       server_username = "matthieucoudron@fastmail.com";
 
       send_mail = "msmtp --read-recipients --read-envelope-from";
-
-      # ++ mapAttrsToList (n: v: n + "=" + v) ({
-      #   address = address;
-      #   realname = realName;
-      #   sendmail_command =
-      #     optionalString (alot.sendMailCommand != null) alot.sendMailCommand;
-      # } // optionalAttrs (folders.sent != null) {
-      #   sent_box = "maildir" + "://" + maildir.absPath + "/" + folders.sent;
-      # } // optionalAttrs (folders.drafts != null) {
-      #   draft_box = "maildir" + "://" + maildir.absPath + "/" + folders.drafts;
-      # } // optionalAttrs (aliases != [ ]) {
-      #   aliases = concatStringsSep "," aliases;
-      # } // optionalAttrs (gpg != null) {
-      #   gpg_key = gpg.key;
-      #   encrypt_by_default = if gpg.encryptByDefault then "all" else "none";
-      #   sign_by_default = boolStr gpg.signByDefault;
-      # } // optionalAttrs (signature.showSignature != "none") {
-      #   signature = pkgs.writeText "signature.txt" signature.text;
-      #   signature_as_attachment = boolStr (signature.showSignature == "attach");
-      # }) ++ [ alot.extraConfig ] ++ [ "[[[abook]]]" ]
-      # ++ mapAttrsToList (n: v: n + "=" + v) alot.contactCompletion);
     }
+    // account.meli.settings
     // lib.optionalAttrs isJmap {
       format = "jmap";
       server_url = "https://api.fastmail.com/jmap/session";
@@ -140,6 +120,11 @@ in
         # mkIf (cfg.settings != { }) {
         #   source = cfg.settings;
         # };
+
+        # just so not notmuch accout appears before fastmail
+        (lib.concatMapStringsSep "\n" (inc: "include(\"${inc}\")") cfg.includes)
+        + "\n"
+        + (
         builtins.readFile (
           tomlFormat.generate "config.toml" (
             cfg.settings
@@ -147,8 +132,8 @@ in
               accounts = accountsAttr;
             }
           )
-        )
-        + (lib.concatMapStringsSep "\n" (inc: "include(\"${inc}\")") cfg.includes);
+          ))
+          ;
     };
 
 }
