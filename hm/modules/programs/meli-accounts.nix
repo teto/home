@@ -3,8 +3,8 @@ pkgs:
 
 with lib;
 
-let 
-    tomlFormat = pkgs.formats.toml { };
+let
+  tomlFormat = pkgs.formats.toml { };
 in
 {
   options.meli = {
@@ -12,12 +12,11 @@ in
 
     # listing.index_style = "compact"
     settings = mkOption {
-        type = tomlFormat.type;
-        default = { };
-        # example = literalExpression ''
-        #   {
+      type = tomlFormat.type;
+      default = { };
+      # example = literalExpression ''
+      #   {
     };
-
 
     # sendMailCommand = mkOption {
     #   type = types.nullOr types.str;
@@ -44,4 +43,3 @@ in
     #   null);
   };
 }
-

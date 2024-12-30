@@ -1,4 +1,4 @@
-local Job = require('plenary.job')
+-- local Job = require('plenary.job')
 
 local M = {}
 
@@ -29,18 +29,16 @@ function M.notify_send(msg, level, opts)
     -- 	vim.list_extend(command, {'-t', string.format('%d', timeout * 1000)})
     -- end
 
-    Job:new({
-        command = 'notify-send',
+    vim.fn.jobstart({
+         'notify-send',
         -- todo add expire-time depending on timeout
-        args = {
             '--urgency',
             l,
             '--app-name',
             'neovim',
             'Neovim',
             msg, -- body
-        },
-    }):start()
+    })
 end
 
 function M.override_vim_notify()

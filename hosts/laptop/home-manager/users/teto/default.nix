@@ -43,7 +43,6 @@
       ../../../../desktop/home-manager/users/teto/services/nextcloud-client.nix
 
       # ../../../hm/profiles/swayidle.nix
-      ../../../../../hm/profiles/japanese.nix
       # ../../../../../hm/profiles/sway.nix
       ../../../../../hm/profiles/wezterm.nix
 

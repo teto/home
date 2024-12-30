@@ -28,7 +28,7 @@ auto-session = "2.5.0"
 "rocks-lazy.nvim" = "scm"
 "rest.nvim" = "3.8.3"
 "nui.nvim" = "0.3.0"
-neotest = "5.6.1"
+neotest = "5.7.0"
 "rocks-dev.nvim" = "1.7.0"
 nvim-lint = "scm"
 "telescope.nvim" = "scm"
@@ -47,18 +47,20 @@ tree-sitter-http = "scm"
 "gitsigns.nvim" = "0.9.0"
 nvim-treehopper = "scm"
 # nvim-treesitter-textobjects = "scm"
-nvim-bqf= "1.1.1"
+# nvim-bqf= "1.1.1"
 # needs https://github.com/nvim-telescope/telescope-fzf-native.nvim if you enable the fzf algorithm
 "smart-open.nvim"= "scm"
 
-"llm.nvim" = "scm"
 vim-startuptime= "4.5.0"
 "grug-far.nvim"= "scm"
-"typescript-tools.nvim" = "scm"
+# removed during testing
+# "typescript-tools.nvim" = "scm"
 menu= "scm"
 "snacks.nvim" = "2.6.0"
-fzf-lua = "0.0.1594"
+fzf-lua = "0.0.1609"
 "lz.n" = "2.9.2"
+nvim-navic= "scm"
+nvim-lspconfig= "1.2.0"
 # nvim-treesitter-textobjects = "scm"
 # "rocks-treesitter.nvim" = "1.0.3"
 
@@ -74,6 +76,8 @@ cmd = "ASToggle" # optional for lazy loading on command
 # Tolerated ?
 # event = { "FocusLost" } # optional for lazy loading on trigger events
 
+[plugins."llm.nvim"]
+dir = "~/llm.nvim"
 
 [plugins.neorg]
 version = "9.1.1"
@@ -104,10 +108,6 @@ rev = "000e3e50047602f4b9725dd33aff631018592595"
 git = "Matsuuu/pinkmare"
 rev = "5121864e3fbc35f1cf8f62db9b26c6dbe54bd094"
 
-[plugins.nvim-lspconfig]
-git = "neovim/nvim-lspconfig"
-rev = "v1.0.0"
-
 [plugins."kanagawa.nvim"]
 version = "scm"
 opt = true
@@ -125,10 +125,6 @@ opt = true
 [plugins."command-and-cursor.nvim"]
 git = "moyiz/command-and-cursor.nvim"
 rev = "43485e6d4f0ffd42414b35e156075e46047563dd"
-
-[plugins.nvim-navic]
-git = "SmiteshP/nvim-navic"
-rev = "8649f694d3e76ee10c19255dece6411c29206a54"
 
 [plugins."cloak.nvim"]
 git = "laytan/cloak.nvim"

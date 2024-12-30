@@ -1,0 +1,16 @@
+golden-test:
+  nix run  .#fastbuild.simwork.core-webservice.golden-test
+
+local:
+  nix run  .#fastbuild.simwork.core-webservice.local -- --bypass-manifest-check
+
+platform:
+  nix run  .#fastbuild.simwork.core-webservice.platform
+
+repl:
+  # TODO:
+  # autoload System.Environment
+  # setEnv "PORCUPINE_ARGS" "--bypass-manifest-check -vv"
+  # --ghci-args 
+  # --ghci-script
+  nix run  .#simwork.core-webservice.platform._repl 

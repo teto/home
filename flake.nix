@@ -461,7 +461,7 @@
             wormhole-rs # "wormhole-rs send"
 
             # boot debug
-            chntpw # to edit BCD (Boot configuration data) from windows
+            # chntpw # broken to edit BCD (Boot configuration data) from windows
             efibootmgr
             smartmontools # for smartctl
           ];
@@ -659,7 +659,6 @@
           alot = ./hm/profiles/alot.nix;
           developer = ./hm/profiles/dev.nix;
           fzf = ./hm/profiles/fzf.nix;
-          japanese = hm/profiles/japanese.nix;
 
           # bash = ./hm/profiles/bash.nix;
           services-mujmap = ./hm/services/mujmap.nix;
@@ -704,11 +703,6 @@
                 ./hm/profiles/common.nix
                 self.homeModules.neovim
                 ./hm/profiles/zsh.nix
-                (
-                  # { ... }:
-                  {
-                    home.stateVersion = "24.05";
-                  })
               ];
             }
           );

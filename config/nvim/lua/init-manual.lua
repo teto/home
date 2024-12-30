@@ -28,6 +28,7 @@ local use_telescope = not use_fzf_lua
 -- local use_luasnip = has_luasnip and true
 
 -- local has_gitsigns, gitsigns = pcall(require, 'gitsigns')
+--
 
 local map = vim.keymap.set
 
@@ -102,6 +103,18 @@ vim.opt.shortmess:append('I')
 vim.opt.foldlevel = 99
 vim.opt.mousemoveevent = true
 vim.o.grepprg = 'rg --vimgrep --no-heading --smart-case'
+
+-- this in nightly
+vim.lsp.config('*', {
+    capabilities = {
+        textDocument = {
+            semanticTokens = {
+                multilineTokenSupport = true,
+            },
+        },
+    },
+    root_markers = { '.git' },
+})
 
 -- workaround slow neovim https://github.com/neovim/neovim/issues/23725
 local ok, wf = pcall(require, 'vim.lsp._watchfiles')
@@ -325,6 +338,16 @@ vim.api.nvim_create_autocmd('LspAttach', {
         local bufnr = args.buf
         local on_attach = require('teto.on_attach')
         on_attach.on_attach(client, bufnr)
+
+        -- if client:supports_method('textDocument/implementation') then
+        --   -- Create a keymap for vim.lsp.buf.implementation
+        -- end
+
+        if client:supports_method('textDocument/completion') then
+            -- Enable auto-completion
+            vim.lsp.completion.enable(true, client.id, args.buf, { autotrigger = true })
+        end
+
         -- require'lsp_signature'.on_attach(client, bufnr)
     end,
 })
@@ -555,33 +578,32 @@ fzf_lua.register_ui_select(function(_, items)
     }
 end)
 
-
 if use_fzf_lua then
     -- require('fzf-lua.providers.ui_select').register({})
 
     require('teto.fzf-lua').register_keymaps()
     local fzf_history_dir = vim.fn.expand('~/.local/share/fzf-history')
     fzf_lua.setup({
-      previewers = {
-        builtin = {
-          -- fzf-lua is very fast, but it really struggled to preview a couple files
-          -- in a repo. Those files were very big JavaScript files (1MB, minified, all on a single line).
-          -- It turns out it was Treesitter having trouble parsing the files.
-          -- With this change, the previewer will not add syntax highlighting to files larger than 100KB
-          -- (Yes, I know you shouldn't have 100KB minified files in source control.)
-          syntax_limit_b = 1024 * 100, -- 100KB
+        previewers = {
+            builtin = {
+                -- fzf-lua is very fast, but it really struggled to preview a couple files
+                -- in a repo. Those files were very big JavaScript files (1MB, minified, all on a single line).
+                -- It turns out it was Treesitter having trouble parsing the files.
+                -- With this change, the previewer will not add syntax highlighting to files larger than 100KB
+                -- (Yes, I know you shouldn't have 100KB minified files in source control.)
+                syntax_limit_b = 1024 * 100, -- 100KB
+            },
         },
-      },
         oldfiles = {
-        -- In Telescope, when I used <leader>fr, it would load old buffers.
-        -- fzf lua does the same, but by default buffers visited in the current
-        -- session are not included. I use <leader>fr all the time to switch
-        -- back to buffers I was just in. If you missed this from Telescope,
-        -- give it a try.
-        include_current_session = true,
-        -- cwd_only = true,
-        stat_file = true, -- verify files exist on disk
-      },
+            -- In Telescope, when I used <leader>fr, it would load old buffers.
+            -- fzf lua does the same, but by default buffers visited in the current
+            -- session are not included. I use <leader>fr all the time to switch
+            -- back to buffers I was just in. If you missed this from Telescope,
+            -- give it a try.
+            include_current_session = true,
+            -- cwd_only = true,
+            stat_file = true, -- verify files exist on disk
+        },
         'default-title',
         defaults = { formatter = 'path.filename_first' },
         commands = { sort_lastused = true },
@@ -612,7 +634,7 @@ if use_fzf_lua then
         keymap = {
             fzf = {
                 -- use cltr-q to select all items and convert to quickfix list
-                ["ctrl-q"] = "select-all+accept",
+                ['ctrl-q'] = 'select-all+accept',
             },
         },
     })
@@ -768,5 +790,11 @@ if has_dbee then
     dbee.setup({})
 end
 
-vim.opt.completeopt = 'preview,menu,menuone'
-vim.opt.messagesopt = 'wait:5000,history:500'
+vim.lsp.enable("lua_ls")
+-- done via plugin for now
+-- vim.lsp.enable("llm")
+
+vim.opt.completeopt = 'preview,menu,menuone,noselect'
+-- wait:5000, wrong idea
+vim.opt.messagesopt = 'hit-enter,history:500'
+

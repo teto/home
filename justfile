@@ -206,4 +206,8 @@ panvimdoc:
 
 # speed up notmuch operations by pruning database
 notmuch-speedup:
-	notmuch compact
+    notmuch compact
+
+# cumulative changes between the booted and current system generations
+nix-diff-booted:
+    nix store diff-closures /run/*-system

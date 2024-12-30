@@ -446,7 +446,7 @@ in
         # pkgs.pcm
 
         # https://github.com/NixOS/nixpkgs/pull/368909
-        pkgs.kakasi
+        pkgs.kakasi # convert kanjis into kanas etc
         pkgs.mokuro # broken because of triton-llvm
         pkgs.python3Packages.manga_ocr
         tagainijisho # japanse dict; like zkanji Qt based
@@ -459,6 +459,7 @@ in
         kanji-stroke-order-font # for memento
       ];
 
+      xdg.dataFile."jmdict".source = pkgs.jmdict;
     })
 
   ];

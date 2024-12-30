@@ -1,8 +1,15 @@
 { pkgs, ... }:
 let
   inherit (pkgs.tetoLib) luaPlugin;
+
 in
 {
+  telescopePlugins = with pkgs.vimPlugins; [
+    # { plugin = telescope-nvim; }
+    # pkgs.vimPlugins.telescope-fzf-native-nvim # for use with smart-open + fzf algo
+    # telescope-fzf-native-nvim # needed by smart-open.nvim
+  ];
+
   basePlugins = with pkgs.vimPlugins; [
     (luaPlugin { plugin = rocks-nvim; })
 
@@ -12,16 +19,14 @@ in
       # use ctrl a/xto cycle between different words
       plugin = vim-CtrlXA;
     }
-    pkgs.vimPlugins.telescope-fzf-native-nvim # for use with smart-open + fzf algo
+
     # pkgs.vimPlugins.blink-cmp # replace cmp-nvim
     pkgs.vimPlugins.vim-nixhash # :NixHash
     pkgs.vimPlugins.targets-vim # to get 'ci/'
     pkgs.vimPlugins.direnv-vim # to get 'ci/'
 
     # { plugin = jbyuki/venn.nvim; }
-    # { plugin = telescope-nvim; }
 
-    telescope-fzf-native-nvim # needed by smart-open.nvim
     (luaPlugin {
       plugin = fzf-vim;
       # " mostly fzf mappings, use TAB to mark several files at the same time

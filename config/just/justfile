@@ -1,3 +1,6 @@
+default:
+    just --choose
+
 golden-test:
   nix run  .#fastbuild.simwork.core-webservice.golden-test
 
@@ -31,14 +34,17 @@ zsh-load-history:
 sscwl:
   nix run .#simwork.core-webservice.local -- --bypass-manifest-check -vv
 
+# update luarocks packages
 update-luarocks:
   # TODO run in command directory
   # TODO pass token
   nix run '.#luarocks-packages-updater' -- --proc=4 --github-token=$GITHUB_TOKEN
 
-llama: # Start llama server
+# Start mistral server
+llama: 
   llama-server -m ~/models/mistral-7b-openorca.Q6_K.gguf -c 2048 --port ${LLM_LOCAL_PORT} -ngl 33
 
+# voice recognition
 whisper:
   llama-server -m /home/teto/.cache/huggingface/hub/models--ggerganov--whisper.cpp/snapshots/5359861c739e955e79d9a303bcbc70fb988958b1/ggml-large-v3.bin -c 2048 --port ${LLM_LOCAL_PORT} -ngl 33
   
@@ -46,3 +52,6 @@ whisper:
 update-neovim-packages:
   nix run '.#neovim-plugins-updater' -- --proc=4 --github-token=$GITHUB_TOKEN
 
+# fetch new mail
+mail-fetch:
+  systemctl start --user mujmap-fastmail.service

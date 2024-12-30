@@ -1,30 +1,33 @@
 # **
 *.env
-README.html
-config/astroid/config
-config/astroid/poll.sh
-config/autostart
-config/clerk
-config/git/config
-config/gtk-3.0/*
-config/ipython/*
-config/jesseduffield/*
-config/jupyter/migrated
-config/kitty/kitty.conf
-config/mpv/mpv.conf
-config/nvim/lua/init.lua
-config/rofi-pass/
-config/supertuxkart/*
-config/sway/config
-config/systemd/*
-config/terminator
-config/tmux/tmux.conf
-config/vlc/*
-config/zsh/.*
-misc/
+/README.html
+/config/astroid/config
+/config/astroid/poll.sh
+/config/autostart
+/config/clerk
+/config/git/config
+/config/gtk-3.0/*
+/config/ipython/*
+/config/jesseduffield/*
+/config/jupyter/migrated
+/config/kitty/kitty.conf
+/config/mpv/mpv.conf
+/config/nvim/lua/init.lua
+/config/rofi-pass/
+/config/supertuxkart/*
+/config/sway/config
+/config/systemd/*
+/config/terminator
+/config/tmux/tmux.conf
+/config/vlc/*
+/config/zsh/.*
+/misc/
 test*
 export.json
 result
+
+# jinko
+*.jsongz
 
 # very important not to version those
 secrets/*

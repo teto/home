@@ -1,0 +1,7 @@
+OLLAMA_MODELS:/home/teto/.ollama/models 
+
+* list locally available models ?
+
+@code.start
+curl http://localhost:11434/api/tags
+@code.end

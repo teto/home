@@ -142,3 +142,6 @@ nixosConfigurations.laptop.config.home-manager.users.teto.programs.neovim.finalP
 
 Apart from dd, to create a windows installer USB key, unetbootin worked the best:
 `nix shell nixpkgs#unetbootin`
+
+
+Tell me what to do please

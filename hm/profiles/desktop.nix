@@ -89,6 +89,8 @@ in
     developer = true;
     desktop = true;
     energy = true;
+
+
   };
 
   # rename to fn, accept a parameter for optional
@@ -98,6 +100,7 @@ in
       # pkgs.up # live preview of pipes
       # pkgs.peek # GIF recorder  BROKEN
       pkgs.alsa-utils # for alsamixer
+      pkgs.lm_sensors # for `sensors` executable
       # pinentry-bemenu
       pinentry-rofi
       # gnome3.gnome-font-viewer  # Not very good

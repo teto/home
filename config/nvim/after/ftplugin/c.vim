@@ -9,6 +9,5 @@
 " otherwise vim defaults to ccomplete#Complete
 setlocal omnifunc=v:lua.vim.lsp.omnifunc
 
+lua vim.lsp.enable('clangd')
 
-" diagnostic-nvim
-let g:completion_trigger_character = ['.', '::', '->']

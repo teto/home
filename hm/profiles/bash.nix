@@ -44,7 +44,7 @@
       # ".."="cd ..";
       # "..."="cd ../..";
 
-      nix-stray-roots = ''nix-store --gc --print-roots | egrep -v "^(/nix/var|/run/\w+-system|\{memory)"'';
+      nix-stray-roots = ''nix-store --gc --print-roots | egrep -v "^(/nix/var|/proc|/run/\w+-system|\{memory)"'';
 
       v = "nvim";
       c = "cat";
@@ -111,6 +111,8 @@
     };
 
     initExtra = ''
+      # enable vimode
+      set -o vi
       source $XDG_CONFIG_HOME/bash/aliases.sh
     '';
   };

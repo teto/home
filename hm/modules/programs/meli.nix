@@ -116,6 +116,8 @@ in
     in
     mkIf cfg.enable {
 
+      home.packages = [ pkgs.meli ];
+
       xdg.configFile."meli/config.toml".text =
         # mkIf (cfg.settings != { }) {
         #   source = cfg.settings;
@@ -124,16 +126,13 @@ in
         # just so not notmuch accout appears before fastmail
         (lib.concatMapStringsSep "\n" (inc: "include(\"${inc}\")") cfg.includes)
         + "\n"
-        + (
-        builtins.readFile (
+        + (builtins.readFile (
           tomlFormat.generate "config.toml" (
-            cfg.settings
-            // {
+            lib.recursiveUpdate cfg.settings {
               accounts = accountsAttr;
             }
           )
-          ))
-          ;
+        ));
     };
 
 }
