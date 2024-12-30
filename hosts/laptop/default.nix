@@ -26,6 +26,7 @@ let
           "security/"
           "programs/"
           "hardware/"
+
         ];
 
         exclude =

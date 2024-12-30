@@ -444,6 +444,9 @@ in
       home.packages = with pkgs; [
         # pkgs.powertop # superuseful
         # pkgs.pcm
+
+        # https://github.com/NixOS/nixpkgs/pull/368909
+        pkgs.kakasi
         pkgs.mokuro # broken because of triton-llvm
         pkgs.python3Packages.manga_ocr
         tagainijisho # japanse dict; like zkanji Qt based

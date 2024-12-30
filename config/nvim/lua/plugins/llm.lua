@@ -4,7 +4,7 @@ llm.setup({
     api_token = nil, -- cf Install paragraph
     model = 'bigcode/starcoder2-15b', -- the model ID, behavior depends on backend
     backend = 'openai', -- backend ID, "huggingface" | "ollama" | "openai" | "tgi"
-    url = nil, -- the http url of the backend
+    -- url = nil, -- the http url of the backend
     tokens_to_clear = { '<|endoftext|>' }, -- tokens to remove from the model's output
     -- parameters that are added to the request body, values are arbitrary, you can set any field:value pair here it will be passed as is to the backend
     request_body = {
@@ -28,8 +28,8 @@ llm.setup({
     -- llm-ls configuration, cf llm-ls section
     lsp = {
         bin_path = nil,
-        host = nil,
-        port = nil,
+        host = "localhost",
+        port = 4567,
         -- or { LLM_LOG_LEVEL = "DEBUG" } to set the log level of llm-ls
         cmd_env = {
             LLM_LOG_LEVEL = 'DEBUG',

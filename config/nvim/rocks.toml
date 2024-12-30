@@ -58,6 +58,7 @@ vim-startuptime= "4.5.0"
 menu= "scm"
 "snacks.nvim" = "2.6.0"
 fzf-lua = "0.0.1594"
+"lz.n" = "2.9.2"
 # nvim-treesitter-textobjects = "scm"
 # "rocks-treesitter.nvim" = "1.0.3"
 
