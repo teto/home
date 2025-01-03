@@ -1,1 +1,1 @@
-set commentstring=#\ %s
+setlocal commentstring=#\ %s

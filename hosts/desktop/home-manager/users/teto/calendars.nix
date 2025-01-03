@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  lib,
   secrets,
   tetoLib,
   withSecrets,
@@ -140,4 +141,16 @@
     };
 
   };
+
+  systemd.user.services.vdirsyncer.Service = lib.mkIf config.programs.vdirsyncer.enable {
+    Environment = [
+      "PATH=$PATH:${
+        pkgs.lib.makeBinPath [
+          pkgs.pass-teto
+          pkgs.bash
+        ]
+      }"
+    ];
+  };
+
 }

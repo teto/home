@@ -7,7 +7,6 @@
   ...
 }:
 {
-
   programs.zsh.enable = true;
 
   users.users.teto = {

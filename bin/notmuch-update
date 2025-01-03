@@ -1,4 +1,5 @@
 #!/bin/bash
 notmuch new 
+# TODO these are in other folders now ?
 notmuch tag --batch --input="$HOME/.notmuch/foss"
 notmuch tag --batch --input="$HOME/.notmuch/tag_ietf"

@@ -1,4 +1,4 @@
--- tell me what to do 
+-- tell me what to do
 -- if vim.env.PROF then
 --   -- example for lazy.nvim
 --   -- change this to the correct path for your plugin manager
@@ -323,11 +323,6 @@ vim.opt.wildmenu = true
 -- navic counts on documentSymbols
 -- %=%m %f
 
--- local has_navic, navic = pcall(require, 'nvim-navic')
--- if has_navic then
---     vim.opt.winbar = "%{%v:lua.require'nvim-navic'.get_location()%}"
--- end
---
 -- sh -c "lua -e 'dofile [[%]] print(description.homepage)' | xdg-open"
 
 vim.api.nvim_create_autocmd('LspAttach', {
@@ -780,23 +775,33 @@ end, { buffer = true })
 
 -- TODO add a set E for across buffers
 vim.keymap.set('n', '[e', function()
-    vim.diagnostic.goto_prev({ wrap = true, severity = vim.diagnostic.severity.ERROR })
+    vim.diagnostic.jump({count=-1, float=true, wrap = true, severity = vim.diagnostic.severity.ERROR })
 end, { buffer = true })
 vim.keymap.set('n', ']e', function()
-    vim.diagnostic.goto_next({ wrap = true, severity = vim.diagnostic.severity.ERROR })
+    vim.diagnostic.jump({count=1, wrap = true, severity = vim.diagnostic.severity.ERROR })
 end, { buffer = true })
 
 -- vim.opt.runtimepath:prepend('/home/teto/neovim/nvim-dbee')
-
-local has_dbee, dbee = pcall(require, 'dbee')
-if has_dbee then
-    dbee.setup({})
-end
+-- local has_dbee, dbee = pcall(require, 'dbee')
+-- if has_dbee then
+--     dbee.setup({})
+-- end
 
 vim.lsp.enable('lua_ls')
+vim.lsp.enable('rust_analyzer')
 -- done via plugin for now
 -- vim.lsp.enable("llm")
 
 vim.opt.completeopt = 'preview,menu,menuone,noselect'
 -- wait:5000, wrong idea
 vim.opt.messagesopt = 'hit-enter,history:500'
+
+-- pasted from :help terminal-scrollback-pager
+vim.api.nvim_create_user_command('TermHl', function()
+    local b = vim.api.nvim_create_buf(false, true)
+    local chan = vim.api.nvim_open_term(b, {})
+    vim.api.nvim_chan_send(chan, table.concat(vim.api.nvim_buf_get_lines(0, 0, -1, false), '\n'))
+    vim.api.nvim_win_set_buf(0, b)
+end, { desc = 'Highlights ANSI termcodes in curbuf' })
+
+require'plugins.blink-cmp'

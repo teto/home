@@ -10,8 +10,6 @@ let
     # avoid
     "signon.rememberSignons" = false;
   };
-
-  firefoxLib = pkgs.callPackage ../../../../nixpkgs/lib/firefox.nix { };
 in
 {
   programs.firefox = {
@@ -22,7 +20,11 @@ in
         id = 1;
         path = "6bt2uwrj.nova";
         settings = ffLib.myDefaultSettings // novaSpecificSettings;
-        # let { in { };
+        search = {
+          force = true;
+          engines = ffLib.searchEngines;
+        };
+
       };
     };
   };

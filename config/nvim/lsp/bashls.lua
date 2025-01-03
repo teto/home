@@ -1,1 +1,4 @@
-return {}
+return {
+    cmd = { "bashls"}
+
+}

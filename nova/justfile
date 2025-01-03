@@ -1,3 +1,14 @@
+# use it with:
+# ln -sf $HOME/home/nova/justfile justfile.local
+tc:
+  nix run  .#typecheck
+
+deps:
+  nix run  .#mk_deps_file
+
+unit:
+  nix run  .#simwork.core-webservice.unit
+
 golden-test:
   nix run  .#fastbuild.simwork.core-webservice.golden-test
 

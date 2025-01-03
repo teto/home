@@ -1,3 +1,8 @@
+
+* to find what font renders the character, you can try
+
+fc-match -s monospace:charset=f796 | head -n3
+
 * Fontconfig handles 
 
 https://www.freedesktop.org/software/fontconfig/fontconfig-user.html

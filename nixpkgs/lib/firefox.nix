@@ -63,8 +63,9 @@
     # "browser.aboutConfig.showWarning" = false;
     "browser.cache.disk.enable" = false; # Be kind to hard drive
 
-    "browser.display.background_color" = "#c5c8c6";
-    "browser.display.foreground_color" = "#1d1f21";
+    # this makes many sites unreadable
+    # "browser.display.background_color" = "#c5c8c6";
+    # "browser.display.foreground_color" = "#1d1f21";
 
     "browser.safebrowsing.appRepURL" = "";
     "browser.safebrowsing.malware.enabled" = false;

@@ -166,7 +166,6 @@ set delete = yes
 # timeout-hook 'exec sync-mailbox'
 # shutdown-hook 'exec sync-mailbox'
 
-macro index @ '<shell-escape>check-mail.sh >/dev/null 2>&1 &<enter>' "Check for new mails"
 
 # nani ?
 # set uncollapse_jump = yes
@@ -175,7 +174,7 @@ macro index @ '<shell-escape>check-mail.sh >/dev/null 2>&1 &<enter>' "Check for 
 set pipe_split=yes
 
 # only available in neomutt
-set new_mail_command="notify-send --icon='/home/teto/.config/neomutt/mutt-48x48.png' \
+set new_mail_command="notify-send --icon='mail-unread-symbolic' \
 'New Email' '%n new messages, %u unread.' &"
 
 # set hidden_tags = "unread,draft,flagged,passed,replied,attachment,signed,encrypted"
@@ -234,7 +233,6 @@ bind index,pager B sidebar-toggle-visible
 
 
 # does it run notmuch ?
-# macro index o "<shell-escape>mbsync mailbox<enter>" "run mbsync to sync mail for this account"
 # taken from steve losh config
 bind index p recall-message
 bind compose p postpone-message
@@ -331,6 +329,8 @@ bind index < vfolder-window-backward
 bind index > vfolder-window-forward
 set virtual_spoolfile = yes
 
+# >/dev/null 2>&1 
+macro index @ "<shell-escape>just -g mail-sync >/dev/null 2>&1 &<enter>" "Sync mails"
 # macro index A "<modify-labels>+archive -unread -inbox\\n" "Archive message"
 # macro index c "<change-vfolder>?" "Change to vfolder overview"
 # macro index \\\\ "<vfolder-from-query>" "Search mailbox"

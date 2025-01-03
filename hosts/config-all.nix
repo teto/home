@@ -24,20 +24,13 @@
 
   boot.tmp.cleanOnBoot = true; # to clean /tmp on reboot
 
-  services.journald.extraConfig = ''
-    # alternatively one can run journalctl --vacuum-time=2d
-    SystemMaxUse=2G
-  '';
-
   # todo move to package sets
   environment.systemPackages =
     with pkgs;
     [
-      ssh-to-age # useful everywhere
+      # ssh-to-age # useful everywhere
       man-pages # because man tcp should always be available
-      # moreutils # contains errno binary that can translate errnos
       ncurses.dev # for infocmp
-      # termite.terminfo # broken on unstable to be able to edit over ssh
       kitty.terminfo # to be able to edit over ssh
     ]
     ++ (with pkgs; [
@@ -46,16 +39,12 @@
       curl
       fd # replaces 'find'
       file
-      fzf
-      # htop
-      lsof
+      # lsof
       sudo
-      wget
     ]);
 
   # TODO it appears in /etc/bashrc !
   environment.shellAliases = {
-
     # oftenly used programs {{{
     v = "nvim";
     c = "cat";
@@ -91,5 +80,4 @@
     enable = true;
     # wheelNeedsPassword = true;
   };
-
 }

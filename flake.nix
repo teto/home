@@ -669,6 +669,7 @@
           meli = ./hm/modules/programs/meli.nix;
           neovim-full = hosts/desktop/home-manager/users/teto/programs/neovim.nix;
           nova = ./hm/profiles/nova.nix;
+          neomutt = ./hm/profiles/neomutt.nix;
 
           # for stuff not in home-manager yet
           # experimental = ../../../hm/profiles/experimental.nix;
@@ -682,6 +683,14 @@
 
           teto-desktop = ./hm/profiles/desktop.nix;
           # hosts/desktop/home-manager/users/teto/default.nix;
+
+          # needs zsh-extra ?
+          teto-zsh =  
+             ./hm/profiles/zsh.nix;
+
+          zsh-extra = ./hm/modules/zsh.nix;
+          bash-extra = ./hm/modules/bash.nix;
+
           teto-nogui = (
             {
               config,
@@ -694,15 +703,12 @@
 
               imports = [
                 # And add the home-manager module
-                ./hm/modules/neovim.nix
-                # ./hm/modules/i3.nix
-                ./hm/modules/bash.nix
-                ./hm/modules/zsh.nix
-                ./hm/modules/xdg.nix
-
                 ./hm/profiles/common.nix
+                ./hm/modules/xdg.nix
                 self.homeModules.neovim
-                ./hm/profiles/zsh.nix
+                self.homeModules.neovim-module
+                self.homeModules.bash-extra
+                self.homeModules.zsh-extra
               ];
             }
           );

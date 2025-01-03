@@ -129,6 +129,10 @@ should unlock the files.
 NOTE: nixos doesnt seem to work out of the box with git-crypt [[https://github.com/NixOS/nix/issues/5260][anymore]], 
  the secret is to leave your repo in a dirty state so that nix sees the unlocked secrets.nix !
 
+* Font management
+
+fontconfig
+
 * Debug neovim config ?
 
 You can see the resulting config via:

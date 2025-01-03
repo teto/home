@@ -55,8 +55,8 @@ in
     iw
     iwd # contains iwmon
     # pkgs.wirelesstools # to get iwconfig
-    pkgs.tshark
-    pkgs.wget
+    # pkgs.tshark too heavy
+    # pkgs.wget
   ];
 
   home-manager.users.root = {
@@ -70,9 +70,7 @@ in
     imports = [
       flakeSelf.homeModules.teto-nogui
       flakeSelf.homeModules.neovim
-      # ./teto/home.nix
       ./teto/nix.nix
-      ../../hm/profiles/zsh.nix
     ];
 
     package-sets.wifi = true;
@@ -407,6 +405,13 @@ in
         };
       };
     };
+  };
+
+  services.xserver = {
+    videoDrivers = [
+      # "nouveau"
+      "nvidia"
+    ];
   };
 
   # services.dhcpd4 = {

@@ -67,6 +67,7 @@ in
 
   ;
 
+
   # TODO check how it interacts with less
   # environment.etc."inputrc".source = ../../config/inputrc;
 
@@ -114,7 +115,6 @@ in
 
   # boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_12;
   boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_6; # works
-
   # services.xserver.displayManager.gdm.enable = true;
 
   # nesting clones can be useful to prevent GC of some packages
@@ -185,6 +185,11 @@ in
     "af_key" # for ipsec/vpn support
     "kvm"
     # "kvm-intel" # for virtualisation
+
+    # https://discourse.nixos.org/t/ddcci-kernel-driver/22186/3
+    "i2c-dev"
+    "ddcci_backlight" # to control external monitors brightness
+
   ];
 
   boot.kernel.sysctl = {

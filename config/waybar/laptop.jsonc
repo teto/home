@@ -23,12 +23,29 @@
 
   "systemd-failed-units"
 	],
+
+   "group/network": {
+     "orientation": "inherit",
+     "drawer": {
+         "transition-duration": 500,
+         "children-class": "not-power",
+         "transition-left-to-right": true
+     },
+     "modules": ["network", "network#2"]
+  },
+  "network": {
+   "format-wifi": "{essid}",
+  },
+  "network#2": {
+     "format": "{ipaddr}"
+  },
+
   "modules-right": [ 
    // "cpu",
    "temperature",
    "battery",
    "bluetooth",
-   "network",
+   "group/network",
    "backlight",
    // "mpd"
    "custom/launcher",
@@ -43,9 +60,8 @@
    "tray",
    // "custom/power-menu",
    "sway/language",
-   "clock",
-   "custom/notification"
-
+   "custom/notification",
+   "group/clock"
   ]
 }
 

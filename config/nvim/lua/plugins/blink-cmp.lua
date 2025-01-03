@@ -7,12 +7,12 @@ b.setup({
     -- your own keymap.
     keymap = { preset = 'default' },
 
-    highlight = {
-        -- sets the fallback highlight groups to nvim-cmp's highlight groups
-        -- useful for when your theme doesn't support blink.cmp
-        -- will be removed in a future release, assuming themes add support
-        use_nvim_cmp_as_default = true,
-    },
+    -- highlight = {
+    --     -- sets the fallback highlight groups to nvim-cmp's highlight groups
+    --     -- useful for when your theme doesn't support blink.cmp
+    --     -- will be removed in a future release, assuming themes add support
+    --     use_nvim_cmp_as_default = true,
+    -- },
     -- set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
     -- adjusts spacing to ensure icons are aligned
     -- nerd_font_variant = 'mono',
@@ -25,6 +25,11 @@ b.setup({
     -- allows extending the enabled_providers array elsewhere in your config
     -- without having to redefining it
     -- opts_extend = { "sources.completion.enabled_providers" }
+	snippets = { preset = 'luasnip' },
+    -- ensure you have the `snippets` source (enabled by default)
+    sources = {
+      default = { 'lsp', 'path', 'snippets', 'buffer' },
+    },
 })
 
 -- example calling setup directly for each LSP

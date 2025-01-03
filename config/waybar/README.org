@@ -1,0 +1,4 @@
+
+https://github.com/Alexays/Waybar/wiki/Styling#interactive-styling
+
+env GTK_DEBUG=interactive waybar

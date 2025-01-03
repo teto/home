@@ -53,5 +53,5 @@ update-neovim-packages:
   nix run '.#neovim-plugins-updater' -- --proc=4 --github-token=$GITHUB_TOKEN
 
 # fetch new mail
-mail-fetch:
+mail-sync:
   systemctl start --user mujmap-fastmail.service

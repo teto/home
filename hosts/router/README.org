@@ -1,5 +1,8 @@
+Config for APU4D4 router, i.e., x86-based system.
+Bought on https://teklager.se/en/products/routers/apu4d4-open-source-router
 
-Config for an APU router.
+It runs home-assistant with:
+- mosquitto: an mqtt message broker
 
 
 * debug wifi

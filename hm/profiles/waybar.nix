@@ -10,6 +10,7 @@ let
   myLib = pkgs.tetoLib;
 
   # TODO make sure it has jq in PATH
+  # annoying to have to rebuild in order to check
   githubUpdater = pkgs.writeShellApplication {
     name = "github-updater";
     runtimeInputs = [
@@ -27,7 +28,7 @@ let
       pkgs.notmuch
       pkgs.jq
     ];
-    text = builtins.readFile ../modules/waybar/notmuch.sh;
+    text = builtins.readFile ../../bin/waybar-notmuch-module;
     checkPhase = ":";
   };
 in
@@ -45,6 +46,7 @@ in
         include = [ "~/.config/waybar/common.jsonc" ];
 
         wireplumber = {
+          # <span font-family=\"Font Awesome 6 Pro Regular\">{icon}</span> {capacity}%
           format = "{volume}% {icon}";
           # "format-muted": "ï¦"
           # <sup> </sup>
@@ -58,7 +60,8 @@ in
           ];
         };
         "custom/weather" = {
-          format = "{} Â°";
+          # https://fontawesome.com/icons/cloud?f=classic&s=solid
+          format = " {}  ";
           tooltip = true;
           interval = 3600;
           # --hide-conditions
@@ -66,16 +69,6 @@ in
           exec = "${pkgs.wttrbar}/bin/wttrbar";
           return-type = "json";
         };
-        "custom/github" = {
-          format = "{} ï";
-          return-type = "json";
-          # The interval (in seconds) in which the information gets polled
-          restart_interval = 120;
-          # "exec"= "$HOME/.config/waybar/github.sh";
-          exec = lib.getExe githubUpdater;
-          on-click = "xdg-open https://github.com/notifications";
-        };
-
       };
     };
   };
@@ -84,7 +77,7 @@ in
   systemd.user.services.waybar = lib.mkIf config.programs.waybar.enable {
     Service = {
       # to get fonts https://github.com/nix-community/home-manager/issues/4099#issuecomment-1605483260
-      Environment = "PATH=${
+      Environment = "PATH=$PATH:${
         lib.makeBinPath [
           notmuchChecker
           pkgs.swaynotificationcenter
@@ -93,7 +86,12 @@ in
           pkgs.wofi
           pkgs.wttrbar # for weather module
           pkgs.xdg-utils # for xdg-open
+
+          # for the github notifier
+          pkgs.curl
+          pkgs.jq
         ]
+        # needs to find nvidia smi as well
       }:${dotfilesPath}/bin";
     };
     Unit.PartOf = [ "tray.target" ];

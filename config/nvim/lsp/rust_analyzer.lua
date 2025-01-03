@@ -1,4 +1,7 @@
 return {
+	cmd = { 'rust-analyzer' },
+	root_dir = vim.fs.root(0, {'Cargo.toml', 'rust-project.json'}),
+	filetypes = { "*.rs" },
     capabilities = {
         textDocument = {
             completion = {
@@ -31,6 +34,4 @@ return {
             -- }
         },
     },
-    cmd = { 'rust-analyzer' },
-    root_dir = lspconfig.util.root_pattern('Cargo.toml', 'rust-project.json'),
 }

@@ -27,6 +27,7 @@
       # flakeSelf.homeModules.bash
       ../../../../../hm/profiles/bash.nix
 
+      flakeSelf.homeModules.teto-bash
       flakeSelf.homeModules.teto-desktop
       flakeSelf.homeModules.fzf
       # flakeSelf.homeModules.gnome-shell

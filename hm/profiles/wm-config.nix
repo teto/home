@@ -166,7 +166,7 @@ in
       "Shift+l" = "resize shrink right 10 px or 10 ppt";
 
       h = "resize grow left 10 px or 10 ppt";
-      "$GroupFr+Shift+h" = "resize shrink left 10 px or 10 ppt";
+      "Shift+h" = "resize shrink left 10 px or 10 ppt";
 
       # semicolumn is not recognized by sway
       # bindsym $GroupUs+semicolumn resize grow right 10 px or 10 ppt

@@ -37,8 +37,8 @@ nixos-rebuild command builders="--option builders \"$NOVA_OVH1\" -j0":
        --use-remote-sudo \
        {{ command }}
 
-build-nom:
-    nom build .#nixosConfigurations.$HOSTNAME.config.system.build.toplevel 
+build-nom hostname:
+    nom build .#nixosConfigurations.{{hostname}}.config.system.build.toplevel 
 
 # nom build
 # nix flake update
@@ -85,13 +85,12 @@ lint-nix:
     # nixfmt --check .
     treefmt --formatters=nixfmt --allow-missing-formatter -u info
 
-lint-lua:
-    stylua config/nvim/init.lua
-
 # deploy my router
 deploy-router:
     # we MUST skip checks else it fails
     # deploy .\#router  -s  --auto-rollback false --magic-rollback false
+    #     nix
+    # run `nix path-info -Sh ./result` to see first if you have enough place
     deploy .\#router  -s 
 
 # [confirm("prompt")]

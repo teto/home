@@ -278,6 +278,12 @@ in
 
   system.stateVersion = "24.11";
 
+  services.journald.extraConfig = ''
+    # alternatively one can run journalctl --vacuum-time=2d
+    SystemMaxUse=2G
+  '';
+
+
   # services.logind = {
   #   # see https://bbs.archlinux.org/viewtopic.php?id=225977 for problems with LID
   #   # lidSwitch = "ignore";

@@ -30,7 +30,8 @@ maximum_level = "DEBUG"
 use_color = true
 window_title = "Meli"
 use_mouse = true
-progress_spinner_sequence = 0
+# progress_spinner_sequence = 0
+progress_spinner_sequence = { frames = [] }
 #theme = "dark" # or "light"
 
 # [notifications]
@@ -57,8 +58,8 @@ next_tab = ']'
 
 # listing-compact
 [shortcuts.listing]
-scroll_up = "up"
-scroll_down = "down"
+# scroll_up = "up"
+# scroll_down = "down"
 focus_left = "left"
 focus_right = "right"
 

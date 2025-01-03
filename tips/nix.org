@@ -102,8 +102,8 @@ https://github.com/NixOS/nixpkgs/pull/185719
  
  CURL_TRACE 
  
- # human readable output of closure size
- nix path-info -Sh $(nix-build ./shell.nix -A inputDerivation)
+# human readable output of closure size
+nix path-info -Sh $(nix-build ./shell.nix -A inputDerivation)
  
  
  # Nix paths I keep forgetting

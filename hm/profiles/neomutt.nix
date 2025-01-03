@@ -25,7 +25,7 @@
 
     # will search into $XDG_CONFIG_HOME/neomutt/
     extraConfig = ''
-      source test.rc
+    source test.rc
     '';
 
     # # only available in neomutt

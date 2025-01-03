@@ -13,20 +13,16 @@
     openFirewall = true;
 
     # subset of package.extraComponents ?!
-    extraComponents = [
-      # "default_config"
-      "deconz" # interface for zigbee conbee II
-      # "esphome"
-      "hue"
-      "emulated_hue"
-      "homeassistant_yellow"
-
-    ];
+    # extraComponents = [
+    #   # "default_config"
+    #   # "apple_tv" # to avoid an error, try removing it ?
+    #   # "deconz" # interface for zigbee conbee II
+    # ];
 
     package = pkgs.home-assistant.override {
 
       extraPackages =
-        python3Packages: with python3Packages; [
+        python3Packages: with pkgs.python3Packages; [
           numpy
           psycopg2
         ];
@@ -41,6 +37,11 @@
         "deconz" # interface for zigbee conbee II
         # "esphome"
         # "hue"
+      # "esphome"
+      "emulated_hue"
+      "freebox"
+      "homeassistant_yellow" # brings zha
+      "hue"
 
         "met"
         # "emulated_hue"
@@ -105,10 +106,11 @@
         server_host = "0.0.0.0";
         server_port = 8123;
       };
-      feedreader.urls = [
-        "https://www.home-assistant.io/atom.xml"
-        # "https://nixos.org/blogs.xml"
-      ];
+      # TODO remove as it was removed from yaml
+      # feedreader.urls = [
+      #   "https://www.home-assistant.io/atom.xml"
+      #   # "https://nixos.org/blogs.xml"
+      # ];
       # services.home-assistant.config."scene manual" = [];
       # services.home-assistant.config."scene ui" = "!include scenes.yaml";
     };
@@ -122,6 +124,7 @@
   # If you did not create any automations through the UI,
   # Home Assistant will fail loading because the automations.yaml file does not exist yet and it will fail including it. To avoid that, add a systemd tmpfiles.d rule:
   # taken from https://wiki.nixos.org/wiki/Home_Assistant#Combine_declarative_and_UI_defined_scenes
+  # TODO cp the sops secrets
   systemd.tmpfiles.rules = [
     "f ${config.services.home-assistant.configDir}/automations.yaml 0755 hass hass"
   ];
@@ -134,7 +137,8 @@
     enable = true;
     # https://www.zigbee2mqtt.io/information/configuration.html
     settings = {
-      homeassistant = config.services.home-assistant.enable;
+      # homeassistant = config.services.home-assistant.enable;
+      homeassistant = false;
       permit_join = true; # todo disable after configuration for secuirty
       serial = {
         # according to https://www.zigbee2mqtt.io/guide/adapters/#recommended
@@ -144,13 +148,12 @@
         # port = null;
       };
       frontend = {
-        # true; # starts on 8080
+        enabled = true; 
         # Optional, default 8080
-        # 1880
-        # port= 1010;
+        # port= 1010; 
       };
       advanced = {
-        log_level = "info";
+        log_level = "debug";
       };
     };
   };
@@ -161,6 +164,7 @@
     listeners = [
       {
         acl = [ "pattern readwrite #" ];
+        # TODO set one via !secret ?
         omitPasswordAuth = true;
         settings.allow_anonymous = true;
       }

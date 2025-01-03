@@ -47,7 +47,10 @@ require('lualine').setup({
                     return str:sub(1, 20)
                 end,
                 on_click = function(_nb_of_clicks, _button, _modifiers)
-                    clip.copy('BRANCH_PLACEHOLDER')
+
+				    local branch_name = 'BRANCH_PLACEHOLDER'
+                    clip.copy(branch_name)
+                    print('To clipboard: ' .. branch_name)
                     -- the
                 end,
             },
