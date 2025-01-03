@@ -30,14 +30,14 @@ function M.notify_send(msg, level, opts)
     -- end
 
     vim.fn.jobstart({
-         'notify-send',
+        'notify-send',
         -- todo add expire-time depending on timeout
-            '--urgency',
-            l,
-            '--app-name',
-            'neovim',
-            'Neovim',
-            msg, -- body
+        '--urgency',
+        l,
+        '--app-name',
+        'neovim',
+        'Neovim',
+        msg, -- body
     })
 end
 

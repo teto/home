@@ -1,12 +1,12 @@
 return {
     cmd = { 'lua-language-server' },
-	filetypes = { "lua" },
+    filetypes = { 'lua' },
     settings = {
         Lua = {
-            runtime = { 
-			 version = 'LuaJIT',
-			 -- path = vim.split(package.path, ';') 
-			},
+            runtime = {
+                version = 'LuaJIT',
+                -- path = vim.split(package.path, ';')
+            },
             completion = { keywordSnippet = 'Disable' },
             diagnostics = {
                 enable = true,

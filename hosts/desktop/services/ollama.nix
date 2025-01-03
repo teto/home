@@ -3,7 +3,9 @@
   enable = true;
 
   # start it as teto such that it can find
-  user = "ollama";
+  user = "teto";
+
+  # user = "ollama";
   group = "users";
 
   home = "/home/teto";
@@ -13,6 +15,7 @@
   acceleration = "cuda";
   # folders where to find models:
   # Default: "\${config.services.ollama.home}/models"
+  # models = "/mnt/ext/ollama/models";
   # models = "/home/teto/.ollama/models";
   # user = "teto;
   # package

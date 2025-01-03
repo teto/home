@@ -5,3 +5,13 @@ OLLAMA_MODELS:/home/teto/.ollama/models
 @code.start
 curl http://localhost:11434/api/tags
 @code.end
+
+* remove parameter from modelfile ?
+
+https://github.com/ollama/ollama/issues/6797
+
+
+* test run
+ollama run codellama "write a python function to add two numbers"
+
+codellama:7b-code

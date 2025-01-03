@@ -27,5 +27,5 @@ return {
             excludedFiles = {},
         },
     },
-	filetypes = { "nix" }
+    filetypes = { 'nix' },
 }

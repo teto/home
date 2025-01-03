@@ -90,7 +90,6 @@ in
     desktop = true;
     energy = true;
 
-
   };
 
   # rename to fn, accept a parameter for optional

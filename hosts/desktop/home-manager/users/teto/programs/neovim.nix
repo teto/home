@@ -132,7 +132,7 @@ let
         vim.g.haskell_enable_static_pointers = 1  -- to enable highlighting of `static`
         vim.g.haskell_backpack = 1                -- to enable highlighting of backpack keywords
         vim.g.haskell_indent_disable=1
-        '';
+      '';
     })
 
     # disabling as long as it depends on nvim-treesitter
@@ -180,7 +180,6 @@ let
     })
 
     (luaPlugin { plugin = sniprun; })
-
 
     # (luaPlugin { plugin = telescope-manix; })
     # call with :Hoogle
@@ -304,7 +303,7 @@ let
     yamlfmt
   ];
 
-    # (luaPlugin { plugin = telescope-nvim; })
+  # (luaPlugin { plugin = telescope-nvim; })
 
   # TODO get lua interpreter to select the good lua packages
   nvimLua = config.programs.neovim.finalPackage.passthru.unwrapped.lua;
@@ -312,11 +311,11 @@ in
 {
   programs.neovim = {
 
-    plugins = 
-    luaPlugins
-    ++ filetypePlugins
-    # ++ telescopePlugins
-    ++ neotestPlugins;
+    plugins =
+      luaPlugins
+      ++ filetypePlugins
+      # ++ telescopePlugins
+      ++ neotestPlugins;
 
     # plugins = with pkgs.vimPlugins; [
     #  tint-nvim
@@ -350,9 +349,8 @@ in
       p.nbformat # to import/export notebooks
       p.pynvim
     ];
-    extraPackages = 
-    extraPackages
-        ++   pkgs.vimPlugins.llm-nvim.runtimeDeps # temporary workaround
+    extraPackages =
+      extraPackages ++ pkgs.vimPlugins.llm-nvim.runtimeDeps # temporary workaround
     ;
   };
 

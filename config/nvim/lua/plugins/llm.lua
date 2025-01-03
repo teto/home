@@ -3,10 +3,9 @@ local llm = require('llm')
 llm.setup({
     api_token = nil, -- cf Install paragraph
     -- model = 'bigcode/starcoder2-15b', -- the model ID, behavior depends on backend
-	--    model = 'bartowski/Code-Llama-3-8B-GGUF:IQ1_M',
-	-- model = 'llama2:latest'
-	model = 'codellama:7b-code',
-
+    --    model = 'bartowski/Code-Llama-3-8B-GGUF:IQ1_M',
+    -- model = 'llama2:latest'
+    model = 'codellama:7b-instruct',
 
     -- model =  "codellama:7b",
     -- model = "meta-llama/Llama-3.1-8B",
@@ -57,6 +56,6 @@ llm.setup({
     tokenizer = nil, -- cf Tokenizer paragraph
     context_window = 1024, -- max number of tokens for the context window
     enable_suggestions_on_startup = true,
-    enable_suggestions_on_files = {'*.lua', '*.nix' }, -- pattern matching syntax to enable suggestions on specific files, either a string or a list of strings
+    enable_suggestions_on_files = { '*.lua', '*.nix' }, -- pattern matching syntax to enable suggestions on specific files, either a string or a list of strings
     disable_url_path_completion = false, -- cf Backend
 })

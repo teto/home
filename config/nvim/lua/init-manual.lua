@@ -1,8 +1,11 @@
+-- tell me what to do 
 -- if vim.env.PROF then
 --   -- example for lazy.nvim
 --   -- change this to the correct path for your plugin manager
 --   -- ~/.local/share/nvim/site/pack/luarocks/opt/snacks.nvim/
 --   local snacksFolder = vim.fn.stdpath("data") .. "/site/pack/luarocks/opt/snacks.nvim"
+--
+--
 --   vim.opt.rtp:append(snacksFolder)
 --   require("snacks.profiler").startup({
 --     startup = {
@@ -790,11 +793,10 @@ if has_dbee then
     dbee.setup({})
 end
 
-vim.lsp.enable("lua_ls")
+vim.lsp.enable('lua_ls')
 -- done via plugin for now
 -- vim.lsp.enable("llm")
 
 vim.opt.completeopt = 'preview,menu,menuone,noselect'
 -- wait:5000, wrong idea
 vim.opt.messagesopt = 'hit-enter,history:500'
-
