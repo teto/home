@@ -96,6 +96,7 @@ in
       ../../nixos/profiles/docker-daemon.nix
       ../../nixos/profiles/greetd.nix
       ../../nixos/profiles/podman.nix
+      ../../nixos/profiles/homepage-dashboard.nix
       ../../nixos/profiles/qemu.nix
       ../../nixos/profiles/steam.nix
       ../../nixos/profiles/sway.nix

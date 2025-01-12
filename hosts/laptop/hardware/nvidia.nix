@@ -11,10 +11,10 @@
   modesetting.enable = true; # needs "modesetting" in videoDrivers ?
 
   # open is only ready for data center use
-  open = true;
+  open = false;
   # may need to select appropriate driver
   # choose between latest, beta, vulkan_beta, stable
-  package = config.boot.kernelPackages.nvidiaPackages.beta;
+  package = config.boot.kernelPackages.nvidiaPackages.stable;
   nvidiaSettings = true;
 
   powerManagement.enable = false;
