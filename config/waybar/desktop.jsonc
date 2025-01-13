@@ -1,24 +1,23 @@
 // config included only for the desktop
 {
-
-  "modules-right": [
-    // "custom/mymodule#with-css-id",
-    // "temperature",
-    "custom/gpu-usage",
-    "idle_inhibitor",
-    "custom/github",
-	"custom/notmuch",
-    "wireplumber",
-    "clock",
-    "tray",
-    "custom/calendar",
-    "custom/notification"
-  ],
-   "temperature": {
-    // click-to-reveal
-    // TODO adjust
-     "hwmon-path": "/sys/class/hwmon/hwmon3/device/hwmon/hwmon3/temp1_input"
-   },
-
+	"modules-right": [
+		// "custom/mymodule#with-css-id",
+		// "temperature",
+		"backlight/slider",
+		"custom/gpu-usage",
+		"idle_inhibitor",
+		"custom/github",
+		"custom/notmuch",
+		"wireplumber",
+		"tray",
+		"custom/calendar",
+		"group/clock",
+        "custom/calendar",
+		"custom/notification",
+	],
+	"temperature": {
+		// click-to-reveal
+		// TODO adjust
+		"hwmon-path": "/sys/class/hwmon/hwmon3/device/hwmon/hwmon3/temp1_input",
+	},
 }
-

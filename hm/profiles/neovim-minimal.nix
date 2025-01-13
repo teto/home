@@ -9,6 +9,7 @@
   programs.neovim = {
     enable = false;
     vimAlias = false;
+    highlightOnYank = true;
     plugins = with pkgs.vimPlugins; [
       sensible
       fugitive

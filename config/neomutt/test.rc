@@ -63,6 +63,7 @@ bind pager ] next-unread
 bind index,pager y modify-labels
 bind index,pager X change-vfolder
 
+bind index,pager S sidebar-toggle-visible
 
 # to prevent from jumping to next mail
 set pager_stop = yes

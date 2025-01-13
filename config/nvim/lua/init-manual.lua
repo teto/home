@@ -27,25 +27,65 @@ local has_fzf_lua, fzf_lua = pcall(require, 'fzf-lua')
 -- set to true to enable it
 local use_fzf_lua = has_fzf_lua and true
 local use_telescope = not use_fzf_lua
--- local has_luasnip, ls = pcall(require, 'luasnip')
--- local use_luasnip = has_luasnip and true
 
--- local has_gitsigns, gitsigns = pcall(require, 'gitsigns')
---
 
 local map = vim.keymap.set
 
 local nix_deps = require('generated-by-nix')
 
+diagnostic_default_config = {
+    -- disabled because too big in haskell
+    virtual_lines = { only_current_line = true },
+    virtual_text = false,
+    {
+        severity = { min = vim.diagnostic.severity.WARN },
+    },
+    signs = {
+        severity = { min = vim.diagnostic.severity.WARN },
+        text = {
+            [vim.diagnostic.severity.ERROR] = '',
+            [vim.diagnostic.severity.WARN] = '',
+            [vim.diagnostic.severity.INFO] = '',
+            [vim.diagnostic.severity.HINT] = '',
+        },
+        numhl = {
+            [vim.diagnostic.severity.WARN] = 'WarningMsg',
+            [vim.diagnostic.severity.ERROR] = 'ErrorMsg',
+            [vim.diagnostic.severity.INFO] = 'DiagnosticInfo',
+            [vim.diagnostic.severity.HINT] = 'DiagnosticHint',
+        },
+    },
+    severity_sort = true,
+
+    -- TODO how to add borders ?
+    float = {
+        source = true,
+        severity_sort = true,
+        border = 'rounded',
+    },
+    update_in_insert = true,
+}
+
+vim.diagnostic.config(diagnostic_default_config)
+
+-- this should not be needed anymore
+-- vim.cmd([[sign define DiagnosticSignError text=✘ texthl=LspDiagnosticsSignError linehl= numhl=]])
+-- vim.cmd([[sign define DiagnosticSignWarning text=！ texthl=LspDiagnosticsSignWarning linehl= numhl=CustomLineWarn]])
+-- vim.cmd(
+--     [[sign define DiagnosticSignInformation text=I texthl=LspDiagnosticsSignInformation linehl= numhl=CustomLineWarn]]
+-- )
+-- vim.cmd([[sign define DiagnosticSignHint text=H texthl=LspDiagnosticsSignHint linehl= numhl=]])
+
+
 -- TODO remove in favor of the generated one
-vim.g.sqlite_clib_path = nix_deps.sqlite_clib_path
+-- vim.g.sqlite_clib_path = nix_deps.sqlite_clib_path
 
 -- set it before loading vim plugins like autosession
 -- ,localoptions
 vim.o.sessionoptions = 'buffers,curdir,help,tabpages,winsize,winpos,localoptions'
 
 -- vim.opt.rtp:prepend(os.getenv('HOME') .. '/rocks-dev.nvim')
-vim.opt.rtp:prepend(os.getenv('HOME') .. '/rocks.nvim')
+-- vim.opt.rtp:prepend(os.getenv('HOME') .. '/rocks.nvim')
 
 -- require("vim.lsp._watchfiles")._watchfunc = require("vim._watch").watch
 -- local ffi = require 'ffi'
@@ -63,6 +103,8 @@ end
 vim.g.rocks_nvim = {
     -- TODO reference one from
     -- use nix_deps.luarocks_executable
+    -- coming from nixpkgs
+	-- TODO removing this generates errors at runtime :'(
     luarocks_binary = nix_deps.luarocks_executable,
     -- /home/teto/.local/share/nvim/rocks/luarocks-config.lua
     luarocks_config = luarocks_config_fn(),
@@ -86,13 +128,15 @@ vim.g.rocks_nvim = {
     },
 }
 
-local has_avante, avante_mod = pcall(require, 'avante')
-if has_avante then
-    require('avante_lib').load()
-    avante_mod.setup({
-        -- Your config here!
-    })
-end
+-- local has_avante, avante_mod = pcall(require, 'avante')
+-- if has_avante then
+--     require('avante_lib').load()
+--     avante_mod.setup({
+--         -- Your config here!
+--     })
+-- end
+
+
 
 -- vim.opt.packpath:prepend('/home/teto/gp.nvim2')
 
@@ -102,9 +146,11 @@ end
 -- local chat_system_prompt = defaults.chat_system_prompt
 
 vim.g.loaded_matchit = 1
+
 vim.opt.shortmess:append('I')
 vim.opt.foldlevel = 99
 vim.opt.mousemoveevent = true
+
 vim.o.grepprg = 'rg --vimgrep --no-heading --smart-case'
 
 -- this in nightly
@@ -135,16 +181,24 @@ vim.filetype.add({
         env = 'env',
         kbd = 'kbd',
         v = 'coq',
+        -- ignore some big files from nixpkgs like all-packages.nix ? seems to already be done somewhere else
+        -- nix = function(path, bufnr)
+        --     return true
+        -- end
     },
     filename = {
         ['wscript'] = 'python',
         ['.env'] = 'env',
+        -- todo add for my ssh configs as well
         -- ['.http'] = 'http'
+    },
+    pattern = {
+        ['.*/.env.*'] = 'env',
     },
 })
 
 -- undocumented like --luamod-dev
-vim.g.__ts_debug = 10
+-- vim.g.__ts_debug = 10
 
 -- vim.cmd([[packloadall ]])
 -- HOW TO TEST our fork of plenary
@@ -156,30 +210,22 @@ vim.g.matchparen = 1
 vim.g.mousemoveevent = 1 -- must be setup before calling lazy
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
-vim.opt.smoothscroll = true
+
 vim.opt.colorcolumn = { 100 }
-vim.opt.termguicolors = true
 
 -- that's where treesitter installs grammars
 vim.opt.rtp:prepend('/home/teto/parsers')
--- vim.opt.rtp:prepend(lazypath)
 
 -- lazy/config.lua sets vim.go.loadplugins = false so I used to run packloadall to restore those plugins
 -- but there seems to be a bug somewhere as overriding VIMRUNTIME would then be dismissed and it would used
 -- whatever VIMRUNTIME, even an old one ? so there is some cache invalidation issue somewhere ?
 -- this is a quickfix that works around lazyplugins issue but I need to find the rootcause
-vim.go.loadplugins = true
+-- vim.go.loadplugins = true
 
 -- main config {{{
 -- vim.opt.splitbelow = true	-- on horizontal splits
 vim.opt.splitright = true -- on vertical split
 
-vim.opt.title = true -- vim will change terminal title
--- look at :h statusline to see the available 'items'
--- to count the number of buffer
--- echo len(filter(range(1, bufnr('$')), 'buflisted(v:val)'))
--- let &titlestring=" %t %{len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) } - NVIM"
-vim.opt.titlestring = "%{getpid().':'.getcwd()}"
 
 -- Indentation {{{
 vim.opt.tabstop = 4 -- a tab takes 4 characters (local to buffer) abrege en ts
@@ -218,16 +264,18 @@ vim.opt.cpoptions = 'aABceFsn' -- vi ComPatibility options
 -- vim.g.vimsyn_embed = 'lP'  -- support embedded lua, python and ruby
 -- don't syntax-highlight long lines
 vim.opt.synmaxcol = 300
+
 vim.g.did_install_default_menus = 1 -- avoid stupid menu.vim (saves ~100ms)
 
 vim.o.swapfile = false
+
 vim.opt.number = true
 vim.opt.relativenumber = true
+
 vim.o.laststatus = 3
 -- vim.opt.conceallevel = 2
 vim.opt.concealcursor = 'nc'
 vim.opt.showmode = false -- Show the current mode on command line
-vim.opt.cursorline = true -- highlight cursor line
 
 -- set noautoread " to prevent from interfering with our plugin
 -- set breakat=80 " characters at which wrap can break line
@@ -255,7 +303,7 @@ https://github.com/neovim/neovim/issues/14921
 
 ]]
 --
-vim.opt.mousemodel = 'popup_setpos'
+
 -- vim.api.nvim_set_keymap('n', '<F1>', '<Cmd>lua open_contextual_menu()<CR>', { noremap = true, silent = false })
 require('teto.context_menu').setup_rclick_menu_autocommands()
 
@@ -263,7 +311,6 @@ require('teto.context_menu').setup_rclick_menu_autocommands()
 vim.opt.signcolumn = 'auto:1-3'
 
 --set shada=!,'50,<1000,s100,:0,n/home/teto/.cache/nvim/shada
-
 -- added 'n' to defaults to allow wrapping lines to overlap with numbers
 -- n => ? used for wrapped lines as well
 -- vim.opt.matchpairs+=<:>  -- Characters for which % should work
@@ -291,13 +338,11 @@ vim.opt.diffopt:append('hiddenoff')
 vim.opt.diffopt:append('iwhiteall')
 -- vim.opt.diffopt:append('linematch')
 vim.opt.diffopt:append('internal,algorithm:patience')
+vim.opt.diffopt:append('linematch:60')
 
 vim.opt.undofile = true
 -- let undos persist across open/close
 vim.opt.undodir = vim.fn.stdpath('data') .. '/undo/'
--- vim.opt.sessionoptions:remove('terminal')
--- vim.opt.sessionoptions:remove('help')
--- folds,
 --}}}
 
 -- annoying in fzf-lua ?
@@ -335,7 +380,16 @@ vim.api.nvim_create_autocmd('LspAttach', {
         local client = vim.lsp.get_client_by_id(args.data.client_id)
         local bufnr = args.buf
         local on_attach = require('teto.on_attach')
+
+        -- dont attach in diffmode
+        if vim.wo.diff then
+            vim.schedule(function()
+                vim.lsp.stop_client(client.id)
+            end)
+            return
+        end
         on_attach.on_attach(client, bufnr)
+
 
         -- if client:supports_method('textDocument/implementation') then
         --   -- Create a keymap for vim.lsp.buf.implementation
@@ -350,26 +404,26 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end,
 })
 
-vim.api.nvim_create_autocmd('VimLeave', {
-    desc = 'test to fix stacktrace',
-    callback = function(_args) end,
-})
-
+-- vim.api.nvim_create_autocmd('VimLeave', {
+--     desc = 'test to fix stacktrace',
+--     callback = function(_args) end,
+-- })
+--
 function string:endswith(ending)
     return ending == '' or self:sub(-#ending) == ending
 end
 
-vim.api.nvim_create_autocmd('BufRead', {
-    desc = 'Disable syntax on big files',
-    callback = function(args)
-        -- print("autocmd BufRead cb", args.file)
-        if args.file:endswith('pkgs/development/haskell-modules/hackage-packages.nix') then
-            -- print("autocmd BufRead cb", args.file)
-            -- print("DISABLING syntax")
-            vim.cmd([[setlocal syntax=off]])
-        end
-    end,
-})
+-- vim.api.nvim_create_autocmd('BufRead', {
+--     desc = 'Disable syntax on big files',
+--     callback = function(args)
+--         -- print("autocmd BufRead cb", args.file)
+--         if args.file:endswith('pkgs/development/haskell-modules/hackage-packages.nix') then
+--             -- print("autocmd BufRead cb", args.file)
+--             -- print("DISABLING syntax")
+--             vim.cmd([[setlocal syntax=off]])
+--         end
+--     end,
+-- })
 
 -- fugitive-gitlab {{{
 -- also add our token for private repos
@@ -379,9 +433,9 @@ vim.opt.guicursor =
     'n-v-c:block-blinkon250-Cursor/lCursor,ve:ver35-Cursor,o:hor50-Cursor,i-ci:ver25-blinkon250-Cursor/lCursor,r-cr:hor20-Cursor/lCursor'
 
 -- highl Cursor ctermfg=16 ctermbg=253 guifg=#000000 guibg=#00FF00
-vim.api.nvim_set_hl(0, 'Cursor', { ctermfg = 16, ctermbg = 253, fg = '#000000', bg = '#00FF00' })
-vim.api.nvim_set_hl(0, 'CursorLine', { fg = 'None', bg = '#293739' })
-vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'grey' })
+-- vim.api.nvim_set_hl(0, 'Cursor', { ctermfg = 16, ctermbg = 253, fg = '#000000', bg = '#00FF00' })
+-- vim.api.nvim_set_hl(0, 'CursorLine', { fg = 'None', bg = '#293739' })
+-- vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'grey' })
 
 -- local my_image = require('hologram.image'):new({
 --	   source = '/home/teto/doctor.png',
@@ -393,12 +447,10 @@ vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'grey' })
 -- f3 to show tree
 vim.keymap.set('n', '<Leader><Leader>', '<Cmd>b#<CR>')
 
-require('teto.rest-nvim')
+-- customizations for rest
+-- require('teto.rest')
 
 -- Snippets are separated from the engine. Add this if you want them:
-
--- " use 'justinmk/vim-gtfo' " gfo to open filemanager in cwd
--- " use 'wannesm/wmgraphviz.vim', {'for': 'dot'} " graphviz syntax highlighting
 
 -- prefix commands :Files become :FzfFiles, etc.
 vim.g.fzf_command_prefix = 'Fzf'
@@ -418,15 +470,11 @@ vim.g.fzf_preview_window = 'right:30%'
 -- For Commits and BCommits to customize the options used by 'git log':
 vim.g.fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
 
--- " use 'mhinz/vim-rfc', { 'on': 'RFC' } " requires nokigiri gem
--- " careful maps F4 by default
--- " use 'bronson/vim-trailing-whitespace' " :FixWhitespace
 
 -- TODO this should depend on theme ! computed via lush
 vim.api.nvim_create_autocmd('ColorScheme', {
     desc = 'Set italic codelens on new colorschemes',
     callback = function()
-        -- TODO create a TextYankPost highlight if it doesn't exist in scheme ?!
         vim.api.nvim_set_hl(0, 'LspCodeLens', { italic = true, bg = 'blue' })
         vim.api.nvim_set_hl(0, 'DiagnosticVirtualTextError', { fg = 'red' })
         vim.api.nvim_set_hl(0, 'DiagnosticVirtualTextDebug', { fg = 'green' })
@@ -445,8 +493,8 @@ vim.keymap.set('n', '<Leader>sv', '<Cmd>source $MYVIMRC<CR>', { desc = 'Reload m
 vim.keymap.set('n', '<Leader>el', '<Cmd>e ~/.config/nvim/lua/init-manual.lua<CR>')
 vim.keymap.set('n', '<F6>', '<Cmd>ASToggle<CR>', { desc = 'Toggle autosave' })
 
--- set vim's cwd to current file's
--- nnoremap ,cd :cd %:p:h<CR>:pwd<CR>
+
+vim.g.autosave_disable_inside_paths = { vim.fn.stdpath('config') }
 
 --  when launching term
 --   tnoremap <Esc> <C-\><C-n>
@@ -460,14 +508,6 @@ vim.g.fzf_layout = { ['down'] = '~40%' }
 -- For Commits and BCommits to customize the options used by 'git log':
 vim.g.fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
 
-vim.api.nvim_create_autocmd('TextYankPost', {
-    callback = function()
-        -- TODO higroup should be its own ? a darker version of CursorLine
-        -- if it doesnt exist
-        vim.highlight.on_yank({ higroup = 'IncSearch', timeout = 1000 })
-    end,
-})
-
 -- " auto reload vim config on save
 -- " Watch for changes to vimrc
 -- " augroup myvimrc
@@ -475,19 +515,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 -- "   au BufWritePost $MYVIMRC,.vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc,init.vim so $MYVIMRC | if has('gui_running') | so $MYGVIMRC | endif
 -- " augroup END
 
-vim.cmd([[sign define DiagnosticSignError text=✘ texthl=LspDiagnosticsSignError linehl= numhl=]])
-vim.cmd([[sign define DiagnosticSignWarning text=！ texthl=LspDiagnosticsSignWarning linehl= numhl=CustomLineWarn]])
-vim.cmd(
-    [[sign define DiagnosticSignInformation text=I texthl=LspDiagnosticsSignInformation linehl= numhl=CustomLineWarn]]
-)
-vim.cmd([[sign define DiagnosticSignHint text=H texthl=LspDiagnosticsSignHint linehl= numhl=]])
 
--- netrw config {{{
-vim.g.netrw_nogx = 1 -- disable netrw gx
-vim.g.netrw_browsex_viewer = 'xdg-open'
-vim.g.netrw_home = vim.env.XDG_CACHE_HOME .. '/nvim'
-vim.g.netrw_liststyle = 1 -- long listing with timestamp
---}}}
 vim.keymap.set('n', '<leader>rg', '<Cmd>Grepper -tool rg -open -switch<CR>')
 
 -- vim.keymap.set("n", "<leader>rgb", "<Cmd>Grepper -tool rgb -open -switch -buffer<CR>")
@@ -501,7 +529,6 @@ vim.api.nvim_create_autocmd('BufReadPost', {
     pattern = '*.pdf',
     callback = function()
         vim.cmd([[%!pdftotext -nopgbrk -layout -q -eol unix "%" - | fmt -w78]])
-        vim.highlight.on_yank({ higroup = 'IncSearch', timeout = 1000 })
     end,
 })
 
@@ -510,17 +537,13 @@ vim.api.nvim_create_autocmd('BufReadPost', {
     callback = function()
         -- " autocmd BufReadPre *.jsonzlib %!pigz -dc "%" - | jq '.'
         print('MATCHED JSONZLIB PATTERN')
-
-        -- enew
-        -- vim.cmd([[%!pigz -dc "%" - | jq '.']])
-        -- vim.highlight.on_yank({ higroup = 'IncSearch', timeout = 1000 })
     end,
 })
 
 vim.api.nvim_create_user_command('ViewChunk', function()
     vim.cmd('!view_json %')
 end, {
-    desc = '',
+    desc = 'View nova chunk file',
 })
 
 -- local verbose_output = false
@@ -533,8 +556,7 @@ if has_sniprun then
 end
 
 -- add description
-vim.api.nvim_set_keymap('n', '<f3>', '<cmd>lua vim.treesitter.inspect_tree()<cr>', {})
-vim.api.nvim_set_keymap('n', '<f5>', '<cmd>!make build', { desc = 'Run make build' })
+-- vim.api.nvim_set_keymap('n', '<f5>', '<cmd>!make build', { desc = 'Run make build' })
 
 vim.g.indicator_errors = ''
 vim.g.indicator_warnings = ''
@@ -545,102 +567,10 @@ vim.g.indicator_ok = '✅'
 -- ✓
 vim.g.spinner_frames = { '⣾', '⣽', '⣻', '⢿', '⡿', '⣟', '⣯', '⣷' }
 
--- vim.g.should_show_diagnostics_in_statusline = true
-
--- vim.ui.select
--- gotten from https://github.com/ibhagwan/fzf-lua/wiki#ui-select-auto-size
-fzf_lua.register_ui_select(function(_, items)
-    local min_h, max_h = 0.15, 0.70
-    local h = (#items + 4) / vim.o.lines
-    if h < min_h then
-        h = min_h
-    elseif h > max_h then
-        h = max_h
-    end
-
-    local dopreview = vim.o.columns > 200
-    local hidden = 'hidden'
-    if dopreview then
-        hidden = 'nohidden'
-    end
-    return {
-        winopts = {
-            height = h,
-            width = 0.80,
-            row = 0.40,
-
-            preview = {
-                hidden = hidden,
-            },
-        },
-    }
-end)
 
 if use_fzf_lua then
-    -- require('fzf-lua.providers.ui_select').register({})
-
-    require('teto.fzf-lua').register_keymaps()
-    local fzf_history_dir = vim.fn.expand('~/.local/share/fzf-history')
-    fzf_lua.setup({
-        previewers = {
-            builtin = {
-                -- fzf-lua is very fast, but it really struggled to preview a couple files
-                -- in a repo. Those files were very big JavaScript files (1MB, minified, all on a single line).
-                -- It turns out it was Treesitter having trouble parsing the files.
-                -- With this change, the previewer will not add syntax highlighting to files larger than 100KB
-                -- (Yes, I know you shouldn't have 100KB minified files in source control.)
-                syntax_limit_b = 1024 * 100, -- 100KB
-            },
-        },
-        oldfiles = {
-            -- In Telescope, when I used <leader>fr, it would load old buffers.
-            -- fzf lua does the same, but by default buffers visited in the current
-            -- session are not included. I use <leader>fr all the time to switch
-            -- back to buffers I was just in. If you missed this from Telescope,
-            -- give it a try.
-            include_current_session = true,
-            -- cwd_only = true,
-            stat_file = true, -- verify files exist on disk
-        },
-        'default-title',
-        defaults = { formatter = 'path.filename_first' },
-        commands = { sort_lastused = true },
-        -- [...]
-        fzf_opts = {
-            -- [...]
-            ['--history'] = fzf_history_dir,
-            -- to get the prompt at the top
-            ['--layout'] = 'reverse',
-            -- ["--no-scrollbar"] = true,
-        },
-        winopts = {
-            preview = {
-                -- default = 'builtin'
-                hidden = 'hidden',
-                -- Only used with the builtin previewer:
-                title = true, -- preview border title (file/buf)?
-                title_pos = 'left', -- left|center|right, title alignment
-                scrollbar = 'float', -- `false` or string:'float|border'
-                -- float:  in-window floating border
-                -- border: in-border chars (see below)
-                scrolloff = '-2', -- float scrollbar offset from right
-                -- applies only when scrollbar = 'float'
-                scrollchars = { '█', '' }, -- scrollbar chars ({ <full>, <empty> }
-            },
-            layout = 'flex',
-        },
-        keymap = {
-            fzf = {
-                -- use cltr-q to select all items and convert to quickfix list
-                ['ctrl-q'] = 'select-all+accept',
-            },
-        },
-    })
+    require'plugins.fzf-lua'
 end
-
-vim.keymap.set('n', '<Leader>b', function()
-    require('fzf-lua').buffers({})
-end, { desc = 'Fuzzy search buffers (fzf-lua)' })
 
 if use_telescope then
     local tts = require('teto.telescope')
@@ -668,23 +598,24 @@ vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
 
 vim.g.tex_flavor = 'latex'
 
-require('teto.treesitter')
+-- should not be required anymore since plugins/nvim-treesitter.lua is called
+-- require('teto.treesitter')
 -- vim.lsp.set_log_level('DEBUG')
 
 -- setup haskell-tools
 vim.g.haskell_tools = require('teto.haskell-tools').generate_settings()
 
-vim.opt.background = 'light' -- or "light" for light mode
+-- vim.opt.background = 'light' -- or "light" for light mode
 vim.opt.showbreak = '↳ ' -- displayed in front of wrapped lines
 
 -- TODO add a command to select a ref  and call Gitsigns change_base afterwards
 
-vim.cmd([[highlight IndentBlanklineIndent1 guifg=#E06C75 gui=nocombine]])
-vim.cmd([[highlight IndentBlanklineIndent2 guifg=#E5C07B gui=nocombine]])
-vim.cmd([[highlight IndentBlanklineIndent3 guifg=#98C379 gui=nocombine]])
-vim.cmd([[highlight IndentBlanklineIndent4 guifg=#56B6C2 gui=nocombine]])
-vim.cmd([[highlight IndentBlanklineIndent5 guifg=#61AFEF gui=nocombine]])
-vim.cmd([[highlight IndentBlanklineIndent6 guifg=#C678DD gui=nocombine]])
+-- vim.cmd([[highlight IndentBlanklineIndent1 guifg=#E06C75 gui=nocombine]])
+-- vim.cmd([[highlight IndentBlanklineIndent2 guifg=#E5C07B gui=nocombine]])
+-- vim.cmd([[highlight IndentBlanklineIndent3 guifg=#98C379 gui=nocombine]])
+-- vim.cmd([[highlight IndentBlanklineIndent4 guifg=#56B6C2 gui=nocombine]])
+-- vim.cmd([[highlight IndentBlanklineIndent5 guifg=#61AFEF gui=nocombine]])
+-- vim.cmd([[highlight IndentBlanklineIndent6 guifg=#C678DD gui=nocombine]])
 
 vim.opt.listchars = 'tab:•·,trail:·,extends:❯,precedes:❮,nbsp:×'
 -- set listchars+=conceal:X
@@ -692,7 +623,7 @@ vim.opt.listchars = 'tab:•·,trail:·,extends:❯,precedes:❮,nbsp:×'
 vim.opt.listchars:append('conceal:❯')
 
 -- "set shada=!,'50,<1000,s100,:0,n$XDG_CACHE_HOME/nvim/shada
-vim.g.netrw_home = vim.fn.stdpath('data') .. '/nvim'
+-- vim.g.netrw_home = vim.fn.stdpath('data') .. '/nvim'
 
 vim.keymap.set(
     'n',
@@ -701,15 +632,7 @@ vim.keymap.set(
     { desc = 'Change between different flavors of space/tab characters' }
 )
 
-vim.keymap.set('n', '<leader>q', '<Cmd>Sayonara!<cr>', { silent = true, desc = 'Closes current window' })
-vim.keymap.set(
-    'n',
-    '<leader>Q',
-    '<Cmd>Sayonara<cr>',
-    { silent = true, desc = 'Close current window, no question asked' }
-)
 
--- vim.g.vsnip_snippet_dir = vim.fn.stdpath('config') .. '/vsnip'
 
 -- nvim will load any .nvimrc in the cwd; useful for per-project settings
 vim.opt.exrc = true
@@ -737,9 +660,9 @@ vim.api.nvim_set_keymap('n', ',a', '<Plug>(Luadev-Run)', { noremap = false, sile
 vim.api.nvim_set_keymap('v', ',,', '<Plug>(Luadev-Run)', { noremap = false, silent = false })
 vim.api.nvim_set_keymap('n', ',,', '<Plug>(Luadev-RunLine)', { noremap = false, silent = false })
 
-map('n', '<leader>rg', '<Cmd>Grepper -tool git -open -switch<CR>', { remap = true })
-map('n', '<leader>rgb', '<Cmd>Grepper -tool rg -open -switch -buffer<CR>', { remap = true })
-map('n', '<leader>rg', '<Cmd>Grepper -tool rg -open -switch<CR>', { remap = true })
+vim.keymap.set('n', '<leader>rg', '<Cmd>Grepper -tool git -open -switch<CR>', { remap = true })
+vim.keymap.set('n', '<leader>rgb', '<Cmd>Grepper -tool rg -open -switch -buffer<CR>', { remap = true })
+vim.keymap.set('n', '<leader>rg', '<Cmd>Grepper -tool rg -open -switch<CR>', { remap = true })
 
 -- vim.keymap.set("n", "<Plug>HelloWorld", function() print("Hello World!") end)
 -- vim.keymap.set("n", "gs", "<Plug>HelloWorld")
@@ -751,7 +674,6 @@ map('n', '<leader>rg', '<Cmd>Grepper -tool rg -open -switch<CR>', { remap = true
 --	 { noremap = true, silent = true }
 -- )
 
-require('teto.lsp').set_lsp_lines(true)
 require('teto.secrets')
 
 -- if has_gitsigns then
@@ -766,20 +688,21 @@ if teto_notify.should_use_provider() then
 end
 
 -- same for e ?
-vim.keymap.set('n', '[w', function()
-    vim.diagnostic.goto_prev({ wrap = true, severity = vim.diagnostic.severity.WARN })
-end, { buffer = true })
-vim.keymap.set('n', ']w', function()
-    vim.diagnostic.goto_next({ wrap = true, severity = vim.diagnostic.severity.WARN })
-end, { buffer = true })
+-- vim.keymap.set('n', '[w', function()
+--     vim.diagnostic.goto_prev({ wrap = true, severity = vim.diagnostic.severity.WARN })
+-- end, {})
+-- vim.keymap.set('n', ']w', function()
+--     vim.diagnostic.goto_next({ wrap = true, severity = vim.diagnostic.severity.WARN })
+-- end, {})
 
--- TODO add a set E for across buffers
-vim.keymap.set('n', '[e', function()
-    vim.diagnostic.jump({count=-1, float=true, wrap = true, severity = vim.diagnostic.severity.ERROR })
-end, { buffer = true })
-vim.keymap.set('n', ']e', function()
-    vim.diagnostic.jump({count=1, wrap = true, severity = vim.diagnostic.severity.ERROR })
-end, { buffer = true })
+-- TODO add a set E for across buffers moved to on_attach
+-- vim.keymap.set('n', '[e', function()
+--     vim.diagnostic.jump({ count = -1, float = true, wrap = true, severity = vim.diagnostic.severity.ERROR })
+-- end, { buffer = true })
+-- vim.keymap.set('n', ']e', function()
+--     vim.diagnostic.jump({ count = 1, wrap = true, severity = vim.diagnostic.severity.ERROR })
+-- end, { buffer = true })
+
 
 -- vim.opt.runtimepath:prepend('/home/teto/neovim/nvim-dbee')
 -- local has_dbee, dbee = pcall(require, 'dbee')
@@ -787,10 +710,6 @@ end, { buffer = true })
 --     dbee.setup({})
 -- end
 
-vim.lsp.enable('lua_ls')
-vim.lsp.enable('rust_analyzer')
--- done via plugin for now
--- vim.lsp.enable("llm")
 
 vim.opt.completeopt = 'preview,menu,menuone,noselect'
 -- wait:5000, wrong idea
@@ -804,4 +723,61 @@ vim.api.nvim_create_user_command('TermHl', function()
     vim.api.nvim_win_set_buf(0, b)
 end, { desc = 'Highlights ANSI termcodes in curbuf' })
 
-require'plugins.blink-cmp'
+-- because it's installed via nix due to its rust dependencies, we have to call it manually
+require('plugins.blink-cmp')
+
+local b64 = require('teto.b64')
+
+vim.keymap.set('v', '<leader>b', function() end)
+vim.keymap.set('v', '<leader>B', '<Plug>(ToBase64)')
+
+-- vim.keymap.set('c', '<c-a>', '<c-y>', { })
+
+
+
+
+-- used to avoid ftetect on those
+-- :let g:ft_ignore_pat = '\.\(Z\|gz\|bz2\|zip\|tgz\)$'
+
+-- Key mapping to apply Base64 encoding to selected text
+vim.api.nvim_set_keymap(
+    'v',
+    '<leader>be',
+    [[:lua apply_function_to_selection(base64_encode)<CR>]],
+    { noremap = true, silent = true }
+)
+
+vim.api.nvim_create_autocmd('ColorScheme', {
+  callback = function()
+    vim.api.nvim_set_hl(0, 'LspReferenceTarget', {})
+  end,
+})
+
+-- 0 is kinda buggy with confirm and so on
+vim.opt.cmdheight = 1
+
+
+
+-- for indentblankline
+require('plugins.nvim-treesitter-textobjects')
+-- autoloaded
+-- require('plugins.nvim-treesitter')
+
+vim.lsp.enable('lua_ls')
+vim.lsp.enable('rust_analyzer')
+vim.lsp.enable('clangd')
+vim.lsp.enable('pyright')
+
+-- vim.lsp.enable('llm-ls')
+-- done via plugin for now
+-- vim.lsp.enable("llm")
+-- disable diagnostics when entering diffmode ?
+-- vim.api.nvim_create_autocmd("WinEnter", {
+--   callback = function()
+--     if vim.wo.diff then
+--       vim.diagnostic.disable(0) -- Disable diagnostics for the buffer
+--     else
+--       vim.diagnostic.enable(0)  -- Re-enable diagnostics when leaving diff mode
+--     end
+--   end,
+-- })

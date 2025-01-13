@@ -1,4 +1,4 @@
-local M = {}
+-- local M = {}
 --
 -- otherwise we get
 --[orgmode] Cannot detect parser revision.
@@ -10,11 +10,13 @@ local M = {}
 -- Open capture prompt: <Leader>oc
 -- In any orgmode buffer press g? for help
 
-M.setup = function()
+-- M.setup = function()
     require('orgmode').setup({
         highlight = {
-            enable = true,
-            additional_vim_regex_highlighting = { 'org' },
+            enable = false,
+            additional_vim_regex_highlighting = { 
+			 -- 'org'
+			},
         },
         org_capture_templates = { '~/nextcloud/org/*', '~/orgmode/**/*' },
         org_default_notes_file = '~/home/refile.org',
@@ -42,4 +44,4 @@ M.setup = function()
     })
 end
 
-return M
+-- return M

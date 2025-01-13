@@ -1,0 +1,29 @@
+
+* debug kitty input 
+
+As advised here https://github.com/kovidgoyal/kitty/issues/2191#issuecomment-565353150
+--debug-keyboard
+
+kitty --debug-font-fallback
+
+one can send system notifications via kitty
+vim.api.nvim_chan_send(vim.v.stderr, '\027]99;;Hello world\027\\')
+
+kitty +kitten ssh myserver
+
+open scrollback buffer ctrl + shift + h
+afficher les liens ctrl + shift + e
+
+
+kitty +kitten icat ~/Nextcloud/images/39950.png
+
+
+# Shell integration
+https://sw.kovidgoyal.net/kitty/shell-integration/#configuration
+shell_integration disabled
+
+
+* check terminal feature 
+
+  kitten query_terminal  allow_hyperlinks
+

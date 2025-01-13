@@ -1,29 +1,46 @@
-{ pkgs, ... }:
+{ pkgs
+, flakeSelf
+, ...
+}:
 let
   inherit (pkgs.tetoLib) luaPlugin;
 
 in
 {
-  telescopePlugins = with pkgs.vimPlugins; [
+  telescopePlugins =  [
     # { plugin = telescope-nvim; }
     # pkgs.vimPlugins.telescope-fzf-native-nvim # for use with smart-open + fzf algo
     # telescope-fzf-native-nvim # needed by smart-open.nvim
   ];
 
   basePlugins = with pkgs.vimPlugins; [
+
+    # (luaPlugin { plugin = flakeSelf.inputs.rocks-nvim.packages.${pkgs.system}.rocks-nvim; })
     (luaPlugin { plugin = rocks-nvim; })
+    # (luaPlugin { plugin = rocks-git-nvim; })
 
     (luaPlugin { plugin = fzf-lua; })
+    (luaPlugin { 
+      plugin = oil-nvim; 
+      config = '' 
+        require("oil").setup({
+          -- Oil will take over directory buffers (e.g. `vim .` or `:e src/`)
+          -- Set to false if you want some other plugin (e.g. netrw) to open when you edit directories.
+          default_file_explorer = true,
+        })
+        '';
+    })
 
     {
       # use ctrl a/xto cycle between different words
       plugin = vim-CtrlXA;
     }
 
-    pkgs.vimPlugins.blink-cmp # replace cmp-nvim
-    pkgs.vimPlugins.vim-nixhash # :NixHash
-    pkgs.vimPlugins.targets-vim # to get 'ci/'
-    pkgs.vimPlugins.direnv-vim # to get 'ci/'
+      # TODO add tests
+    { plugin = grug-far-nvim; }
+    { plugin = bigfile-nvim; }
+
+    pkgs.vimPlugins.direnv-vim # to get syntax coloring ?
 
     # { plugin = jbyuki/venn.nvim; }
 
@@ -36,20 +53,13 @@ in
         vim.g.fzf_nvim_statusline = 0 -- disable statusline overwriting'';
     })
 
-    # defined in overrides: TODO this should be easier: like fzf-vim should be enough
+    # defined in overrides: 
+    # TODO we should be able to do without !
     fzfWrapper
 
     #  nvim-colorizer
     # (luaPlugin { plugin = nvim-terminal-lua; config = "require('terminal').setup()"; })
 
-    # TODO hacking on this
-    {
-      # display git diff while rebasing, pretty dope
-      plugin = auto-git-diff;
-      # config = ''
-      # let g:auto_git_diff_disable_auto_update=1
-      # '';
-    }
 
     # TODO move to rocks
     # {
@@ -98,10 +108,13 @@ in
       '';
     })
 
-    {
+    (luaPlugin {
       plugin = vim-grepper;
       # careful these mappings are not applied as they arrive before the plug declaration
-    }
+      config = ''
+      -- TODO grepper config
+      '';
+    })
 
     vim-nix
 
@@ -112,24 +125,26 @@ in
     # neomutt-vim
     (luaPlugin {
       plugin = vim-sayonara;
-      config = ''vim.g.sayonara_confirm_quit = 0'';
-    })
-
-    (luaPlugin {
-      plugin = unicode-vim;
       config = ''
-        ${unicode-vim.passthru.initLua}
+        vim.g.sayonara_confirm_quit = 0
+        vim.keymap.set('n', '<leader>q', '<Cmd>Sayonara!<cr>', { silent = true, desc = 'Closes current window' })
+        vim.keymap.set(
+            'n',
+            '<leader>Q',
+            '<Cmd>Sayonara<cr>',
+            { silent = true, desc = 'Close current window, no question asked' }
+        )
 
-        -- overrides ga
-        vim.keymap.set ( "n", "ga",  "<Plug>(UnicodeGA)", { remap = true, } )
-      '';
+        '';
     })
   ];
 
   filetypePlugins = with pkgs.vimPlugins; [
-    { plugin = wmgraphviz-vim; }
-    { plugin = vim-toml; }
+    # TODO package neomutt.vim
+    # { plugin = wmgraphviz-vim; }
+    # { plugin = vim-toml; }
   ];
+
 
   colorschemePlugins = with pkgs.vimPlugins; [
     { plugin = sonokai; }
@@ -151,15 +166,7 @@ in
 
     # { plugin = modicator-nvim; }
 
-    # not upstreamed yet
-    # (luaPlugin { plugin = nvim-lua-gf; })
 
-    (luaPlugin { plugin = numb-nvim; })
-
-    (luaPlugin { plugin = luasnip; })
-
-    # required by trouble
-    (luaPlugin { plugin = nvim-web-devicons; })
 
     (luaPlugin {
       plugin = marks-nvim;

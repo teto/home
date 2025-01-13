@@ -8,7 +8,10 @@ function M.register_keymaps()
         fzf_lua.files()
     end)
     vim.keymap.set('n', '<Leader>o', function()
-        fzf_lua.git_files()
+        fzf_lua.git_files({
+			-- fzf_opts = {['--scheme'] = 'path'}
+		}
+		)
     end)
     vim.keymap.set('n', '<Leader>F', function()
         fzf_lua.filetypes()
@@ -68,7 +71,8 @@ function M.fzf_mru(opts)
     local hash = get_hash()
     opts.cmd = 'command cat <(fre --sorted --store_name ' .. hash .. ") <(fd -t f) | awk '!x[$0]++'" -- | the awk command is used to filter out duplicates.
     opts.fzf_opts = vim.tbl_extend('force', opts.fzf_opts, {
-        ['--tiebreak'] = 'index', -- make sure that items towards top are from history
+        -- ['--tiebreak'] = 'index', -- make sure that items towards top are from history
+		['--scheme'] = 'path',
     })
     opts.actions = vim.tbl_extend('force', opts.actions or {}, {
         ['ctrl-d'] = {

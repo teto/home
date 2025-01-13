@@ -11,27 +11,27 @@ let
 
   # TODO make sure it has jq in PATH
   # annoying to have to rebuild in order to check
-  githubUpdater = pkgs.writeShellApplication {
-    name = "github-updater";
-    runtimeInputs = [
-      pkgs.coreutils
-      pkgs.curl
-      pkgs.jq
-    ];
-    text = (builtins.readFile ../modules/waybar/github.sh);
-    checkPhase = ":";
-  };
+  # githubUpdater = pkgs.writeShellApplication {
+  #   name = "github-updater";
+  #   runtimeInputs = [
+  #     pkgs.coreutils
+  #     pkgs.curl
+  #     pkgs.jq
+  #   ];
+  #   text = (builtins.readFile ../modules/waybar/github.sh);
+  #   checkPhase = ":";
+  # };
 
-  notmuchChecker = pkgs.writeShellApplication {
-    name = "waybar-notmuch-module";
-    runtimeInputs = [
-      pkgs.notmuch
-      pkgs.jq
-    ];
-    text = builtins.readFile ../../bin/waybar-notmuch-module;
-    checkPhase = ":";
-  };
 in
+# notmuchChecker = pkgs.writeShellApplication {
+#   name = "waybar-notmuch-module";
+#   runtimeInputs = [
+#     pkgs.notmuch
+#     pkgs.jq
+#   ];
+#   text = builtins.readFile ../../bin/waybar-notmuch-module;
+#   checkPhase = ":";
+# };
 {
 
   programs.waybar = {
@@ -46,10 +46,7 @@ in
         include = [ "~/.config/waybar/common.jsonc" ];
 
         wireplumber = {
-          # <span font-family=\"Font Awesome 6 Pro Regular\">{icon}</span> {capacity}%
           format = "{volume}% {icon}";
-          # "format-muted": "ï¦"
-          # <sup> </sup>
           # 🔈
           format-muted = "<span background='red'>🔇</span>";
           on-click = myLib.muteAudio;
@@ -76,20 +73,24 @@ in
   # TODO
   systemd.user.services.waybar = lib.mkIf config.programs.waybar.enable {
     Service = {
-      # to get fonts https://github.com/nix-community/home-manager/issues/4099#issuecomment-1605483260
-      Environment = "PATH=$PATH:${
+      # to get:
+      # - fonts https://github.com/nix-community/home-manager/issues/4099#issuecomment-1605483260
+      # - nvidia-smi
+      Environment = "PATH=$PATH:/etc/profiles/per-user/teto/bin:/run/current-system/sw/bin:${
         lib.makeBinPath [
-          notmuchChecker
+          # notmuchChecker
+          pkgs.curl
+          pkgs.fuzzel
+          # for the github notifier
+          pkgs.jq
+          pkgs.nvidia-system-monitor-qt
           pkgs.swaynotificationcenter
           pkgs.wlogout
-          pkgs.fuzzel
           pkgs.wofi
           pkgs.wttrbar # for weather module
           pkgs.xdg-utils # for xdg-open
 
-          # for the github notifier
-          pkgs.curl
-          pkgs.jq
+          pkgs.python3 # for khal
         ]
         # needs to find nvidia smi as well
       }:${dotfilesPath}/bin";

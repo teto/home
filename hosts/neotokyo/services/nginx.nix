@@ -14,6 +14,14 @@ in
     acceptTerms = true;
     # defaults.email = "cert+admin@example.com";
     # "blog.${secrets.jakku.hostname}"
+    # config.security.acme.
+    defaults = {
+      validMinDays = 15; # to avoid the warning email from letsencrypt
+      email = secrets.jakku.email;
+      # security.acme.defaults.credentialFiles
+      # Environment variables suffixed by “_FILE” to set for the cert’s service for your selected dnsProvider. To find out what values you need to set, consult the documentation at https://go-acme.github.io/lego/dns/[1] for the corresponding
+      # dnsProvider. This allows to securely pass credential files to lego by leveraging systemd credentials.
+    };
 
     /*
       we are trying to generate a multidomain certificate here,
@@ -23,7 +31,7 @@ in
     certs."blog.${secrets.jakku.hostname}" = {
       # blog.${secrets.jakku.hostname}
       # webroot = acmeRoot;
-      email = secrets.jakku.email;
+      # email = secrets.jakku.email;
 
       webroot = "/var/lib/acme/acme-challenge/";
       enableDebugLogs = true;
@@ -48,6 +56,10 @@ in
 
   users.users.nginx.extraGroups = [ "acme" ];
 
+  systemd.tmpfiles.rules = [
+    "d /var/www 0775 nginx www"
+  ];
+
   services.nginx = {
     # Enable status page reachable from localhost on http://127.0.0.1/nginx_status.
     statusPage = true;
@@ -55,6 +67,11 @@ in
 
     virtualHosts = {
       "blog.${secrets.jakku.hostname}" = {
+
+        # I had to manually "chmod a+x /var/lib/gitolite"
+        # root = "/var/lib/gitolite/blog-generated";
+        # root = "/home/teto/blog-generated-www";
+        root = "/var/www/blog-generated";
 
         # default = true; # wtf does this do ?
         forceSSL = true;
@@ -79,8 +96,6 @@ in
           '';
         };
 
-        # I had to manually "chmod a+x /var/lib/gitolite"
-        root = "/var/lib/gitolite/blog-generated";
       };
 
       "status.${secrets.jakku.hostname}" = {

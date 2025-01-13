@@ -1,7 +1,11 @@
-Look at 
-.gpg-id
 
 * How to init a password store ?
+
+pass init your_email@domain.com
+
+ gpg --list-secret-keys
+
+Look at .gpg-id
 
 * import from bitwarden
   with https://github.com/roddhjav/pass-import one can import from bitwarden via:
@@ -11,4 +15,3 @@ Look at
   when `pass` fails with 
   "public key decryption failed: No secret key"
 
- gpg --list-secret-keys

@@ -18,6 +18,7 @@ let
           # as a pass extension
           # pass-tail
           pass-otp
+          # pass-fzf
         ]
       );
 in

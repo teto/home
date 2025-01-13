@@ -1,306 +1,335 @@
 {
- "position": "top",
- "reload_style_on_change": true,
-  "modules-left": [
-	"sway/workspaces",
-	"sway/mode"
-  ],
-  "modules-center": [
-	"sway/window",
-	// "custom/hello-from-waybar"
-	"mpd",
-  "systemd-failed-units"
-  ],
+	"position":               "top",
+	"reload_style_on_change": true,
+	"modules-left": [
+		"sway/workspaces",
+		"sway/mode",
+	],
+	"modules-center": [
+		"sway/window",
+		// "custom/hello-from-waybar"
+		"mpd",
+		"systemd-failed-units",
+	],
 
- "modules-right": [
-  "sway/language",
-  "custom/github",
-  "group/courriel",
-  "custom/weather"
- ],
- "sway/workspaces": {
-   // to avoid warning see https://github.com/Alexays/Waybar/discussions/2816
-   "window-rewrite": {},
-   "format": "{name}",
-   "disable-scroll": false,
-   "all-outputs" : false
-   // # disable-scroll-wraparound = true;
-   // # "disable-markup" : false,
-   // # format-icons = {
-   // #    "1" = "ï";
-   // #    "2" = "ï©";
-   // #    "3" = "ï¡";
-   // # };
- },
-  // se as a drawer to expand format
- "clock": {
-  // "timezone": "America/New_York",
-  // TODO look how to display timezone
-  "timezones": [
-    "Europe/Paris",
-    // "Europe/London",
-    "Asia/Tokyo"
-  ],
-  "tooltip-format": "<big>{:%Y %B}</big>\n<tt>{calendar}</tt>",
-  "format-alt": "{:%Y-%m-%d}",
-  // TODO launch ikhal instead
-  // or a terminal
-  "on-click-right": "kitty sh -c ikhal",
-  "actions": {
-   // 
-    "on-scroll-up": "tz_up",
-    "on-scroll-down": "tz_down"
-  }
- },
- "custom/nix-updates": {
-    "exec": "waybar-nixpkgs-update-check", // <--- path to script
-    "on-click": "waybar-nixpkgs-update-check && notify-send 'The system has been updated'", // refresh on click
-    "interval": 3600, // refresh every hour
-    "tooltip": true,
-    "return-type": "json",
-    "format": "{} {icon}",
-    "format-icons": {
-        "has-updates": "", // icon when updates needed
-        "updated": "" // icon when all packages updated
-    }
-	},
-   "group/courriel": {
-     "orientation": "inherit",
-     "drawer": {
-         "transition-duration": 500,
-         "children-class": "not-power",
-         "transition-left-to-right": true
-     },
-     // TODO show 
-     "modules": [
-         "custom/notmuch"
-         // "systemd-failed-units#2" 
-     ]
-  },
-// PUT in a drawer !!
-  "custom/notmuch": {
-    "format": "NOTMUCH {}  ",
-    "max-length": 40,
-    "return-type": "json",
-    // TODO run regularly
-    "interval": 120,
-    // start neomutt or meli
-    "on_click": "kitty sh -c neomutt",
-    // TODO rerun mbsync + notmuch etc
-    "on-click-right": "systemctl start --user mujmap-fastmail.service",
-	// TODO retreive executable name
-    "exec": "waybar-notmuch-module"
-    // "exec": "pkgs.writeShellScript \"hello-from-waybar\" ''\n  echo \"from within waybar\"\n''"
-},
-  "custom/notification": {
-    "tooltip": false,
-    // "format": "{icon}",
-    "format": "{} 🔔 ",
-    "format-icons": {
-      // "5": "ïµ",
-      // "urgent": "ïª",
-      // "focused": "ï",
-      // "default": "ï"
-      // "ïï¶ª"
-      // "🔔"
-      "notification": "<span foreground='red'>ï³<span>",
-      "none": "no notifs ï¶ ",
-      "inhibited-notification": "🔕 inhibited<span foreground='red'><sup>toto</sup></span>",
-      "inhibited-none": "0 inhibted",
-      // Do Not Disturb
-      "dnd-notification": "<span foreground='red'><sup>Notifs</sup></span>",
-      "dnd-none": "no notifs (dnd)",
-      "dnd-inhibited-notification": "dnd<span foreground='red'><sup>dnd</sup></span>",
-      "dnd-inhibited-none": "none"
-    },
-    "return-type": "json",
-    // "exec-if": "which swaync-client",
-    "exec": "swaync-client -swb",
-    "on-click": "swaync-client -t -sw",
-    "on-click-right": "swaync-client -d -sw",
-    "escape": true
-  },
-    "mpd": {
-        "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ⸨{songPosition}|{queueLength}⸩ ",
-        "format-disconnected": "Disconnected ",
-        "format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}Stopped ",
-        "unknown-tag": "N/A",
-        "interval": 2,
-        "consume-icons": {
-            "on": " "
-        },
-        "random-icons": {
-            "off": "<span color=\"#f53c3c\"></span> ",
-            "on": " "
-        },
-        "repeat-icons": {
-            "on": " "
-        },
-        "single-icons": {
-            "on": "1 "
-        },
-        "state-icons": {
-            "paused": "",
-            "playing": ""
-        },
-        "tooltip-format": "MPD (connected)",
-        "tooltip-format-disconnected": "MPD (disconnected)"
-    },
-	"cpu": {
-		 "interval": 10,
-		 "format": "{usage}% ",
-		 "max-length": 10
-		 // "tooltip": false
+	"modules-right": [
+		"sway/language",
+		"custom/github",
+		// "group/courriel",
+		"custom/notmuch",
 
+		"custom/weather",
+	],
+	"sway/workspaces": {
+		// to avoid warning see https://github.com/Alexays/Waybar/discussions/2816
+		"window-rewrite": {},
+		"format":         "{name}",
+		"disable-scroll": false,
+		"all-outputs":    false,
+		// # disable-scroll-wraparound = true;
+		// # "disable-markup" : false,
+		// # format-icons = {
+		// #    "1" = "ï";
+		// #    "2" = "ï©";
+		// #    "3" = "ï¡";
+		// # };
 	},
-    "memory": {
-        "format": "{}% "
-    },
-	"power-profiles-daemon": {
-	  "format": "{icon}   {profile}",
-	  "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
-	  "tooltip": true,
-	  "format-icons": {
-		"default": "",
-		"performance": "",
-		"balanced": "",
-		"power-saver": ""
-	  }
+	// se as a drawer to expand format
+	"clock": {
+		// "timezone": "America/New_York",
+		// TODO look how to display timezone
+		"timezones": [
+			"Europe/Paris",
+			// "Europe/London",
+			"Asia/Tokyo",
+		],
+		"tooltip-format": "<big>{:%Y %B}</big>\n<tt>{calendar}</tt>",
+		"format-alt":     "{:%Y-%m-%d}",
+		// TODO launch ikhal instead
+		// or a terminal
+		"on-click-right": "kitty sh -c ikhal",
+		"actions": {
+			//
+			"on-scroll-up":   "tz_up",
+			"on-scroll-down": "tz_down",
+		},
 	},
-    "idle_inhibitor": {
-	 "start-activated" : false,
-
-	   "format": " {icon} ",
-	   "format-icons": {
-		   "activated": "",
-		   "deactivated": ""
-	   }
-    },
-    "backlight": {
-        "format": "{percent}% {icon}",
-        "format-icons": ["", ""]
-    },
-	"custom/launcher": {
-		"format": "",
+	"custom/nix-updates": {
+		"exec":        "waybar-nixpkgs-update-check", // <--- path to script
+		"on-click":    "waybar-nixpkgs-update-check && notify-send 'The system has been updated'", // refresh on click
+		"interval":    3600, // refresh every hour
+		"tooltip":     true,
+		"return-type": "json",
+		"format":      "{} {icon}",
+		"format-icons": {
+			"has-updates": "", // icon when updates needed
+			"updated":     "", // icon when all packages updated
+		},
+	},
+	"group/courriel": {
+		"orientation": "inherit",
+		"drawer": {
+			"transition-duration":      500,
+			"children-class":           "not-power",
+			"transition-left-to-right": true,
+		},
+		// TODO show
+		"modules": [
+			"custom/notmuch"
+			// "systemd-failed-units#2"
+		],
+	},
+	// PUT in a drawer !!
+	"custom/notmuch": {
+		"format":      "  {}  ",
+		"max-length":  40,
+		"return-type": "json",
+		// TODO run regularly
+		"interval": 120,
+		// start neomutt or meli
+		// "on_click": "kitty sh -c neomutt",
+		// TODO rerun mbsync + notmuch etc
+		// "on-click-right": "systemctl start --user mujmap-fastmail.service",
+		"on-click": "kitty sh -c neomutt",
+		// TODO retreive executable name
+		"exec": "waybar-custom-notmuch.sh",
+		// "exec": "pkgs.writeShellScript \"hello-from-waybar\" ''\n  echo \"from within waybar\"\n''"
+		"menu": "on-click-right",
+		"menu-file": "~/.config/waybar/menu-notmuch.xml",
+		"menu-actions": {
+			"neomutt": "kitty sh -c neomutt",
+            "fetchfastmail": "fetch-fastmail",
+			// "reboot": "reboot",
+		},
+	},
+	"custom/notification": {
 		"tooltip": false,
+		// "format": "{icon}",
+		"format": "{} 🔔 ",
+		"format-icons": {
+			// "5": "ïµ",
+			// "urgent": "ïª",
+			// "focused": "ï",
+			// "default": "ï"
+			// "ïï¶ª"
+			// "🔔"
+			"notification":           "<span foreground='red'>ï³<span>",
+			"none":                   "no notifs ï¶ ",
+			"inhibited-notification": "🔕 inhibited<span foreground='red'><sup>toto</sup></span>",
+			"inhibited-none":         "0 inhibted",
+			// Do Not Disturb
+			"dnd-notification":           "<span foreground='red'><sup>Notifs</sup></span>",
+			"dnd-none":                   "no notifs (dnd)",
+			"dnd-inhibited-notification": "dnd<span foreground='red'><sup>dnd</sup></span>",
+			"dnd-inhibited-none":         "none",
+		},
+		"return-type": "json",
+		// "exec-if": "which swaync-client",
+		"exec":           "swaync-client -swb",
+		"on-click":       "swaync-client -t -sw",
+		"on-click-right": "swaync-client -d -sw",
+		"escape":         true,
+	},
+	"mpd": {
+		"format":              "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ⸨{songPosition}|{queueLength}⸩ ",
+		"format-disconnected": "Disconnected ",
+		"format-stopped":      "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}Stopped ",
+		"unknown-tag":         "N/A",
+		"interval":            2,
+		"consume-icons": {
+			"on": " ",
+		},
+		"random-icons": {
+			"off": "<span color=\"#f53c3c\"></span> ",
+			"on":  " ",
+		},
+		"repeat-icons": {
+			"on": " ",
+		},
+		"single-icons": {
+			"on": "1 ",
+		},
+		"state-icons": {
+			"paused":  "",
+			"playing": "",
+		},
+		"tooltip-format":              "MPD (connected)",
+		"tooltip-format-disconnected": "MPD (disconnected)",
+	},
+	"cpu": {
+		"interval":   10,
+		"format":     "{usage}% ",
+		"max-length": 10,
+		// "tooltip": false
+	},
+	"memory": {
+		"format": "{}% ",
+	},
+	"power-profiles-daemon": {
+		"format":         "{icon}   {profile}",
+		"tooltip-format": "Power profile: {profile}\nDriver: {driver}",
+		"tooltip":        true,
+		"format-icons": {
+			"default":     "",
+			"performance": "",
+			"balanced":    "",
+			"power-saver": "",
+		},
+	},
+	"idle_inhibitor": {
+		"start-activated": false,
+
+		"format": " {icon} ",
+		"format-icons": {
+			"activated":   "",
+			"deactivated": "",
+		},
+	},
+	"backlight": {
+		"format":       "{percent}% {icon}",
+		"format-icons": ["", ""],
+	},
+	"custom/launcher": {
+		"format":         "",
+		"tooltip":        false,
 		"tooltip-format": "App Launcher",
-		"on-click": "fuzzel"
+		"on-click":       "fuzzel",
 	},
 	"custom/power-menu": {
-		"format": "⏻",
-		"tooltip": true,
+		"format":         "⏻",
+		"tooltip":        true,
 		"tooltip-format": "Power Options",
-		"on-click": "wlogout"
+		"on-click":       "wlogout",
 	},
 	"custom/calendar": {
-		"format": "{}",
-		"tooltip": true,
+		"format":   "{}",
+		"tooltip":  true,
 		"interval": 300,
 		"format-icons": {
-			"default": ""
+			"default": "",
 		},
-		"exec": "waybar-khal.py",
-		"return-type": "json"
+		"exec":        "waybar-khal.py",
+		"return-type": "json",
 	},
-   "custom/cputemp": {
-       "interval": 2,
-       "return-type": "json",
-       "format": "{icon} {}",
-       "format-icons": [
-           "",
-           "",
-           "",
-           "",
-           ""
-       ],
-       "exec": "~/.config/waybar/cputemp"
-   },
-   "custom/nixos-unstable-updates": {
-       "format": "{} {icon}",
-       "return-type": "json",
-       "format-icons": {
-           "has-updates": "󱍷",
-           "updated": "󰂪"
-       },
-       "exec-if": "which waybar-nixpkgs-updater",
-	   // TODO adjust
-       "exec": "waybar-module-pacman-updates  --interval-seconds 5 --network-interval-seconds 300"
-   },
+	"custom/cputemp": {
+		"interval":    2,
+		"return-type": "json",
+		"format":      "{icon} {}",
+		"format-icons": [
+			"",
+			"",
+			"",
+			"",
+			"",
+		],
+		"exec": "~/.config/waybar/cputemp",
+	},
+	"custom/nixos-unstable-updates": {
+		"format":      "{} {icon}",
+		"return-type": "json",
+		"format-icons": {
+			"has-updates": "󱍷",
+			"updated":     "󰂪",
+		},
+		"exec-if": "which waybar-nixpkgs-updater",
+		// TODO adjust
+		"exec": "waybar-module-pacman-updates  --interval-seconds 5 --network-interval-seconds 300",
+	},
 	"custom/gpu-usage": {
-	  "exec": "gpu-usage",
-	  "format": "GPU: {}%",
-	  "return-type": "",
-	  "interval": 1
+		"exec":        "gpu-usage",
+		"format":      "GPU: {}%",
+		"return-type": "",
+		"interval":    1,
 	},
-    "tray": {
-        // "icon-size": 21,
-        "spacing": 10
-    },
-   "group/clock": {
-     "orientation": "inherit",
-     "drawer": {
-         "transition-duration": 500,
-         "children-class": "not-power",
-         "transition-left-to-right": true,
-     },
-     "modules": ["clock", "clock#2"]
-  },
- "clock#2": {
-  // "timezone": "America/New_York",
-  // TODO look how to display timezone
-  "timezones": [
-    "Europe/Paris",
-    "Asia/Tokyo"
-  ],
-  "tooltip-format": "<big>{:%Y %B}</big>\n<tt>{calendar}</tt>",
-  "format": "{:%d %B %Y}",
-  // TODO launch ikhal instead
-  // or a terminal
-  "on-click-right": "kitty sh -c ikhal",
-  // "actions": {
-  //   "on-scroll-up": "shift_up",
-  //   "on-scroll-down": "shift_down"
-  // }
- },
-   "group/systemd": {
-     "orientation": "inherit",
-     "drawer": {
-         "transition-duration": 500,
-         "children-class": "not-power",
-         "transition-left-to-right": true,
-     },
-     "modules": ["systemd-failed-units",
-         "systemd-failed-units#2" 
-     ]
-  },
+	"tray": {
+		// "icon-size": 21,
+		"spacing": 10,
+	},
+	"group/clock": {
+		"orientation": "inherit",
+		"drawer": {
+			"transition-duration":      500,
+			"children-class":           "not-power",
+			"transition-left-to-right": true,
+		},
+		"modules": ["clock", "clock#2"],
+	},
+	"clock#2": {
+		// "timezone": "America/New_York",
+		// TODO look how to display timezone
+		"timezones": [
+			"Europe/Paris",
+			"Asia/Tokyo",
+		],
+		"tooltip-format": "<big>{:%Y %B}</big>\n<tt>{calendar}</tt>",
+		"format":         "{:%d %B %Y}",
+		// TODO launch ikhal instead
+		// or a terminal
+		"on-click-right": "kitty sh -c ikhal",
+		// "actions": {
+		//   "on-scroll-up": "shift_up",
+		//   "on-scroll-down": "shift_down"
+		// }
+	},
+	"group/systemd": {
+		"orientation": "inherit",
+		"drawer": {
+			"transition-duration":      500,
+			"children-class":           "not-power",
+			"transition-left-to-right": true,
+		},
+		"modules": [
+			"systemd-failed-units",
+			"systemd-failed-units#2",
+		],
+	},
 
-   "systemd-failed-units": {
-	   "hide-on-ok": false,
-       // nr_failed_user
-	   "format": "✗ {nr_failed_user} user failures {nr_failed_system} system failures",
-	   "format-ok": "✓",
-	   "system": true,
-	   "user": true,
-       "menu": "on-click",
-       "menu-file": "~/.config/waybar/menu-systemd-failed-units.xml",
-       "menu-actions": {
-            "kitty": "kitty sh -c ikhal",
-            // "reboot": "reboot",
-       }
-  },
-"custom/github": {
-	// https://fontawesome.com/icons/github?f=brands&s=solid
-	"format" : " {}  ",
-	// return-type : "json",
-	// The interval (in seconds) in which the information gets polled
-	"restart_interval" : 120,
-    "tooltip": true,
-	// todo add runtimeInputs
-	// exec : lib.getExe githubUpdater,
-	// exec : "${dotfilesPath}/config/waybar/",
-	"exec" : "waybar-custom-github.sh",
-	"on-click" : "xdg-open https://github.com/notifications",
-}
-
-
+	"systemd-failed-units": {
+		"hide-on-ok": false,
+		// nr_failed_user
+		"format":    "✗ {nr_failed_user} user failures {nr_failed_system} system failures",
+		"format-ok": "✓",
+		"system":    true,
+		"user":      true,
+		"menu":      "on-click",
+		"menu-file": "~/.config/waybar/menu-systemd-failed-units.xml",
+		"menu-actions": {
+			"kitty": "kitty sh -c ikhal",
+			// "reboot": "reboot",
+		},
+	},
+	"custom/github": {
+		// https://fontawesome.com/icons/github?f=brands&s=solid
+		"format": " {}  ",
+		// return-type : "json",
+		// The interval (in seconds) in which the information gets polled
+		"restart_interval": 120,
+		"tooltip":          true,
+		// todo add runtimeInputs
+		// exec : lib.getExe githubUpdater,
+		// exec : "${dotfilesPath}/config/waybar/",
+		"exec":     "waybar-custom-github.sh",
+		"on-click": "xdg-open https://github.com/notifications",
+	},
+	"backlight/slider": {
+		"min":         0,
+		"max":         100,
+		"orientation": "horizontal",
+		"device":      "intel_backlight",
+	},
+	"group/network": {
+		"orientation": "inherit",
+		"drawer": {
+			"transition-duration":      500,
+			"children-class":           "not-power",
+			"transition-left-to-right": true,
+		},
+		"modules": ["network", "network#2"],
+	},
+	"network": {
+		"format-wifi": "{essid}",
+	},
+	"network#2": {
+		"format": "{ipaddr}",
+	},
 }

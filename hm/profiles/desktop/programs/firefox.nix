@@ -30,19 +30,13 @@ in
   ];
 
   # check about:policies
-  policies = {
+  policies = ffLib.commonPolicies // {
     BlockAboutConfig = false;
     AppAutoUpdate = true;
 
-    AutofillAddressEnabled = false;
-    AutofillCreditCardEnabled = false;
-
     # DefaultDownloadDirectory
-    DisableFirefoxStudies = true;
     # DisableFormHistory;
     DisablePocket = true;
-    DisableTelemetry = true;
-    DisplayMenuBar = "default-off";
     HardwareAcceleration = true;
     # buggy see https://github.com/nix-community/home-manager/issues/5821
     NoDefaultBookmarks = true;
@@ -103,7 +97,7 @@ in
       # with pkgs;
 
       # pkgs.open-in-mpv
-      extensions =
+      extensions.packages =
         ffLib.commonExtensions
         ++ (with pkgs; [
           # TODO no need for bitwarden anymore
@@ -111,7 +105,6 @@ in
           firefox-addons."10ten-ja-reader"
           # firefox-addons.audibleTabExtension
           firefox-addons.switch-to-audible-tab
-          firefox-addons.browserpass
           firefox-addons.refined-github
           # pkgs.nur.repos.rycee.firefox-addons.browserpass-otp
 
@@ -138,7 +131,7 @@ in
     };
 
     bank = lib.mkForce {
-      extensions = [ ];
+      extensions.packages = [ ];
       # isDefault = false;
       id = 2;
       # path = "6bt2uwrj.nova";
@@ -148,7 +141,7 @@ in
 
     # for dangerous stuff
     sketchy = lib.mkForce {
-      extensions = with pkgs; [
+      extensions.packages = with pkgs; [
         # firefox-addons.browserpass
         firefox-addons.argent-x
         firefox-addons.metamask

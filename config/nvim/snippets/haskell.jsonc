@@ -1,0 +1,14 @@
+// https://code.visualstudio.com/docs/editor/userdefinedsnippets#_create-your-own-snippets
+{
+    "Nix module": {
+        // additionnal keywords to react to
+        prefix: [
+            "ignore-missing-declarations",
+        ],
+        body: [
+         "{-# OPTIONS_GHC -Wno-missing-signatures #-}"
+        ],
+        description: "Ignore warnings about missing declarations",
+    },
+}
+

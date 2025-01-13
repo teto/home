@@ -21,6 +21,10 @@
   services.gnome.evolution-data-server.enable = lib.mkForce false;
   # optional to use google/nextcloud calendar
   services.gnome.gnome-online-accounts.enable = true;
+
+  # consumes quite a bit of CPU 
+  services.gnome.localsearch.enable = false;
+
   # optional to use google/nextcloud calendar
   # External calendar such as google/nextcloud can be only added via the gnome-control-center:
 

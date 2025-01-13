@@ -1,0 +1,65 @@
+#!/usr/bin/env bash
+# firefox router that opens a link with the correct firefox profile depending on a list of domains
+# run firefox from a terminal, without being attached to it; similar to nohup
+# You can use it from terminal but also from a desktop file like this one:
+# [Desktop Entry]
+# Categories=Network;
+# Name=firefox-wrapper
+# GenericName=Firefox Wrapper
+# Exec=/home/teto/home/bin/firefox-wrapper
+# Type=Application
+declare -A domains
+
+# array prefix -> profile
+domains['kh.novavault.cloud/']="nova"
+domains['jinko.ai']="nova"
+
+
+# argv=("$@")
+# argc=$(($# - 1))
+# url=''
+# if [ $argc -ge 0 ]; then
+#     url=${argv[$argc]}
+#     # avoid recursion!
+#     if [[ "$url" == "$protocol"* ]]; then
+#         url="https${url:${#protocol}}" # s/ghttps/https/
+#         argv[$argc]=$url # store it
+#     fi
+# fi
+
+# TODO recall it firefox-router or dispatch ?
+echo "FIREFOX-PROXY"
+
+LOGFILE=/tmp/firefox-router-$(date +%m%d)
+echo "called at $(date) with args '$1'" > "$LOGFILE"
+
+#echo $url
+#echo "`date` ${argv[*]}" >> /tmp/firefox.log
+
+url=$1
+echo "checking if url $url is in domains ?"
+# https://github.com/curl/trurl
+# use a separate profile for special links
+# we use https://github.com/curl/trurl to parse the url
+# trurl --get {scheme}  --url https://www.jinko.ai/teot
+protocol=$(trurl --get '{scheme}'  "$url")
+domain=$(trurl --get '{host}'  "$url")
+echo "protocol [$protocol] "
+echo "domain   [$domain] "
+echo "Checking out if domain is in the list of domains"
+profile=${domains[$domain]}
+echo "Result: $profile"
+
+
+if [ -n "$profile" ]; then
+ echo "Launching ff with profile $profile"
+   # TODO follow args
+    # firefox with profile
+    set -x 
+    { firefox -P "$profile" "$@" &> /dev/null; } &
+    set +x 
+else
+ echo "Launching ff with default profile"
+    # normal firefox
+    { firefox "${argv[@]}" &> /dev/null; } &
+fi

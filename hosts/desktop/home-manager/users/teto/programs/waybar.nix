@@ -16,7 +16,7 @@
     settings = {
       mainBar = {
         include = [
-          "~/.config/waybar/desktop.jsonc" 
+          "~/.config/waybar/desktop.jsonc"
         ];
       };
     };

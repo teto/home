@@ -10,7 +10,7 @@
   pkgs,
 }:
 
-self: prev: {
+final: prev: {
   # in super.vim-markdown-composer.overrideAttrs(oa: {
 
   #   propagatedBuildsInputs = (oa.propagatedBuildsInputs or []) ++ [
@@ -32,7 +32,7 @@ self: prev: {
     ];
   });
 
-  pdf-scribe-nvim = self.buildVimPlugin {
+  pdf-scribe-nvim = final.buildVimPlugin {
     pname = "pdf-scribe";
     version = "unstable";
     src = builtins.fetchGit "https://github.com/wbthomason/pdf-scribe.nvim.git";
@@ -43,7 +43,7 @@ self: prev: {
     #   # sha256 = "1ccq6akkm8n612ni5g7w7v5gv73g7p1d9i92k0bnsy33fvi3pmnh";
     # };
     # libpoppler-glib.so
-    propagatedBuildInputs = [ self.poppler ];
+    propagatedBuildInputs = [ final.poppler ];
 
     # concat with ;
     # LUA_CPATH = "${pkgs.poppler}/ rg";
@@ -58,40 +58,5 @@ self: prev: {
   #     substituteInPlace $out/share/vim-plugins/nvim-markdown-preview/autoload/markdown.vim --replace "live-server" \
   #         "${pkgs.nodePackages.live-server}/bin/live-server"
   #     '';
-  # });
-
-  # markdown-preview-nvim = let
-  #   version = "0.0.9";
-  #   index_js = fetchzip {
-  #       # TODO fix linux/macos
-  #       url = "https://github.com/iamcco/markdown-preview.nvim/releases/download/v${version}/markdown-preview-linux.tar.gz";
-  #       sha256 = "0lxk8h4q64g21ywgnfq2hl431ap14kq4hxlacfyhz860jll3qf0j";
-  #     };
-  #   nodePackages = import ./nodepkgs.nix {
-  #     inherit (prev) pkgs;
-  #   #   inherit (prev.stdenv.hostPlatform) system;
-  #   };
-  #     # node2nix ./package.json
-  # in prev.markdown-preview-nvim.overrideAttrs(old: {
-  #   # you still need to enable the node js provider in your nvim config
-  #   # TODO fix folder
-  #   buildInputs = (old.buildInputs or []) ++ [ autoPatchelfHook glibc pkgs.gcc-unwrapped.lib ] ++ (with nodePackages; [
-
-  #   ]);
-
-  #   # first it checks if file is
-  #   # TODO use install -D
-  #     # mkdir -p $out/share/vim-plugins/coc-nvim/app
-  #     # ${glibc.out}/lib/ld-linux-x86-64.so.2
-  #     # --set-interpreter $NIX_CC/nix-support/dynamic-linker
-  #   #       patchelf  $out/share/vim-plugins/markdown-preview-nvim/app/bin/markdown-preview-linux
-  #   postInstall = ''
-  #     set -x
-
-  #     mkdir -p $out/share/vim-plugins/markdown-preview-nvim/app/bin
-  #     cp ${index_js}/markdown-preview-linux $out/share/vim-plugins/markdown-preview-nvim/app/bin
-
-  #   '';
-
   # });
 }

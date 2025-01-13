@@ -1,0 +1,74 @@
+#!/bin/sh
+#
+# Shows the calendar event that's happening now, of the next on if there isn't
+# one.
+
+set -e
+
+render() {
+  # Find the next upcoming event, starting two minutes from now.
+  # If my current event ends in two minutes and another one starts, the
+  # widget is already updated with what's upcoming.
+  SINCE="$(date '+%Y-%m-%d %H:%M')"
+
+  # TODO: On overlap, try to prefer the event where I've confirmed attendance.
+
+  EVENT="$(
+    khal list "$SINCE" 24h \
+      --day-format 'SKIPME' \
+      --format "{start-end-time-style} {title:.31}{repeat-symbol}" |
+      grep -v SKIPME |  # filter out headers
+      grep -Ev '↦|↔ |⇥' |  # filter out continuing all day events
+      grep -v '\[Lunch\]' |  # filter out lunch
+      grep -v '^ ' |  # exclude full-day events
+      head -n 1  # show just the first
+  )"
+
+  if [ -z "$EVENT" ]; then
+    TEXT=""
+    CLASS="no-event"
+  else
+    TEXT=" $EVENT"
+    CLASS="event"
+  fi
+
+  jq --compact-output \
+    --null-input \
+    --arg text "$TEXT" \
+    --arg class "$CLASS" \
+    '{"text": $text, "class": $class}'
+}
+
+# TODO: try to debounce this, so as to avoid too many executions. This is
+#       especially important since inotify may emit several events for just one
+#       change.
+
+# TODO: re-render as soon as an event ends (or actually, a minute before that!)
+
+# In order to make sure events are updated as time passes, this re-renderes
+# every two minutes. That aside, whenever a calendar event changes, we alreays
+# re-render immediately.
+#
+# It would be ideal to determine _when_ the current event ends, and set the
+# timeout accordinly. That would require parsing khal's output a bit more.
+while true; do
+  # Render one for initial state and then between timeouts.
+  render
+
+  # Re-render any time there's changes.
+  inotifywait \
+    --event modify \
+    --event create \
+    --event delete \
+    --event close_write \
+    --event moved_to \
+    --event move \
+    --monitor \
+    --timeout 120 \
+    --recursive \
+    "$HOME/.local/share/calendars" 2> /dev/null | \
+    while read -r _; do
+      sleep 1
+      render
+    done
+done

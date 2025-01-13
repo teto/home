@@ -46,6 +46,8 @@ in
     ./services/openssh.nix
     ../../nixos/profiles/router.nix
     ../../nixos/profiles/home-assistant.nix
+
+    flakeSelf.nixosModules.default-hm
   ];
 
   environment.systemPackages = with pkgs; [
@@ -131,8 +133,6 @@ in
   ];
 
   nix = {
-    # nix_2_24 ?
-    # package = pkgs.nixVersions.nix_2_24;
 
     extraOptions = ''
       experimental-features = nix-command flakes

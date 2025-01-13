@@ -37,11 +37,11 @@
         "deconz" # interface for zigbee conbee II
         # "esphome"
         # "hue"
-      # "esphome"
-      "emulated_hue"
-      "freebox"
-      "homeassistant_yellow" # brings zha
-      "hue"
+        # "esphome"
+        "emulated_hue"
+        "freebox"
+        "homeassistant_yellow" # brings zha
+        "hue"
 
         "met"
         # "emulated_hue"
@@ -148,9 +148,9 @@
         # port = null;
       };
       frontend = {
-        enabled = true; 
+        enabled = true;
         # Optional, default 8080
-        # port= 1010; 
+        # port= 1010;
       };
       advanced = {
         log_level = "debug";

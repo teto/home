@@ -14,18 +14,22 @@
     # SetLoginEnvironment=no
   };
 
+  # when use-xdg-directories is true, the bin is in $XDG_STATE_HOME/
+  # PATH= "${dotfilesPath}/bin";
+  # /home/teto/.local/state/nix/profile/bin
+
+  # systemctl --user show-environment to check value
   user.settings.Manager.DefaultEnvironment = {
-    # when use-xdg-directories is true, the bin is in $XDG_STATE_HOME/
-    # PATH= "${dotfilesPath}/bin";
-    # /home/teto/.local/state/nix/profile/bin
     # c'est transforme en PATH=$'$PATH:/home/teto/.local/state/nix/profile/bin:/home/teto/home/bin' bizarrement
     # TODO add coreutils
-    PATH = "$PATH:/home/teto/.local/state/nix/profile/bin:${pkgs.coreutils}/bin:${dotfilesPath}/bin";
-    # /home/teto/.nix-profile/bin:/nix/profile/bin:/home/teto/.local/state/nix/profile/bin:/etc/profiles/per-user/teto/bin:/nix/var/nix/profiles/default/bin:/run/current-system/sw/bin:/home/teto/.local/share/../bin
+
+    # settings.Manager.DefaultEnvironment
+    # prefixing with '$PATH:' generates:
+    # PATH=$'$PATH:/home/teto/.local/state/nix/profile/bin:/nix/store/4s9rah4cwaxflicsk5cndnknqlk9n4p3-coreutils-9.5/bin:/home/teto/home/bin'
+    # which is odd ?
+    PATH = "/home/teto/.local/state/nix/profile/bin:${pkgs.coreutils}/bin:${dotfilesPath}/bin";
   };
 
   # systemd.user.settings
   #     Extra config options for user session service manager. See systemd-user.conf(5) for available options.
-
-  # settings.Manager.DefaultEnvironment
 }

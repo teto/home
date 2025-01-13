@@ -27,15 +27,15 @@
   "scripts": {
     "example-action-script": {
       "exec": "bash -c 'wl-copy \"$SWAYNC_BODY\"'",
-	  "run-on": "action"
+      "run-on": "action"
     }
   },
   "widgets": [
     "buttons-grid",
     "menubar#label",
     "backlight",
-	"mpris",
-	"volume",
+    "mpris",
+    "volume",
     "inhibitors",
     "title",
     "dnd",
@@ -55,7 +55,7 @@
         {
           "label": "",
           "command": "notify-send -m 'toto'",
-		  "type": "toggle"
+          "type": "toggle"
         },
         {
           "label": "",
@@ -68,9 +68,9 @@
     },
     "menubar#label": {
       "menu#power-buttons": {
-        "label": "", 
+        "label": "",
         "position": "right",
-        "actions": [ 
+        "actions": [
           {
             "label": " Reboot",
             "command": "systemctl reboot"
@@ -90,9 +90,9 @@
         ]
       },
       "menu#powermode-buttons": {
-        "label": "", 
+        "label": "",
         "position": "left",
-        "actions": [ 
+        "actions": [
           {
             "label": "Performance",
             "command": "powerprofilesctl set performance"
@@ -127,13 +127,8 @@
       "button-text": "Clear All Notifs",
       "clear-all-button": true
     },
-    "title": {
-      "text": "Notifications TITLE",
-      "clear-all-button": true,
-      "button-text": "Clear All (or not)"
-    },
     "dnd": {
-      "text": "Do Not Disturb"
+      "text": "Mute notifications"
     },
     "label": {
       "max-lines": 5,

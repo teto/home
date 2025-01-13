@@ -1,14 +1,17 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
+{ pkgs
+, flakeSelf
+, ...
 }:
 {
 
   imports = [
     ./nova/programs/bash.nix
     ./nova/programs/firefox.nix
+    # flakeSelf.inputs.jinko-seeder.homeModules.jinko-seeder
+
+    # TODO improve that
+    flakeSelf.inputs.nova-doctor.homeModules.browsers
+
   ];
 
   home.packages = [
@@ -20,11 +23,14 @@
     # for my yazi plugin
     pkgs.pigz # pigz -d ~/nova/jinko2/ScalarMetaDataChunked.json.zlib -c
     pkgs.openapi-tui # explore openapi spec in terminal
+
+    pkgs.yq # required for bin/start_psql.sh
   ];
 
   # to counter doctor's config of starship
   xdg.configFile."starship.toml".enable = false;
-  xdg.configFile."nix/nix.conf".enable = false;
+
+  # xdg.configFile."nix/nix.conf".enable = false;
 
   xdg.desktopEntries = {
     # xdg.desktopEntries = {

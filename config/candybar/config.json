@@ -1,9 +1,9 @@
 {
-	"height": 24,
+	"height":   24,
 	"position": "top",
-	"monitor": 0,
+	"monitor":  0,
 	"theme": {
-		"uri": "file:////usr/local/share/candybar/theme-default/index.html",
+		"uri":    "file:////usr/local/share/candybar/theme-default/index.html",
 		"config": {}
 	},
 	"widgets": [

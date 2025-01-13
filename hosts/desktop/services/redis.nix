@@ -12,5 +12,10 @@
     port = 6379;
 
     logfile = "stdout"; # defaults to "/dev/null"
+
+    # Alternatively
+    # requirePassFile = "./redis.txt";
+    # requirePass = "toto";
+    # vmOverCommit = 1;
   };
 }

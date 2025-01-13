@@ -1,7 +1,7 @@
 return {
-	cmd = { 'rust-analyzer' },
-	root_dir = vim.fs.root(0, {'Cargo.toml', 'rust-project.json'}),
-	filetypes = { "*.rs" },
+    cmd = { 'rust-analyzer' },
+    root_dir = vim.fs.root(0, { 'Cargo.toml', 'rust-project.json' }),
+    filetypes = { '*.rs' },
     capabilities = {
         textDocument = {
             completion = {

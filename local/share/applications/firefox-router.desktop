@@ -1,0 +1,9 @@
+[Desktop Entry]
+Categories=Network;
+Name=firefox-wrapper
+GenericName=Firefox Wrapper
+Exec=/home/teto/home/bin/firefox-router
+Type=Application
+
+
+

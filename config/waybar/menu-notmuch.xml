@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+ <object class="GtkMenu" id="menu">
+  <child>
+   <object class="GtkMenuItem" id="fetchfastmail">
+    <property name="label">Fetch fastmail</property>
+   </object>
+  </child>
+  <child>
+   <object class="GtkMenuItem" id="fetchnova">
+    <property name="label">Fetch nova mail</property>
+   </object>
+   </child>
+  <child>
+   <object class="GtkMenuItem" id="open-neomutt">
+    <property name="label">Open neomutt</property>
+   </object>
+  </child>
+  <child>
+   <object class="GtkMenuItem" id="open-meli">
+    <property name="label">Open meli</property>
+   </object>
+  </child>
+  <child>
+   <object class="GtkMenuItem" id="open-alot">
+    <property name="label">Open alot</property>
+   </object>
+  </child>
+ </object>
+</interface>
+

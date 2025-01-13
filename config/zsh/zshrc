@@ -15,6 +15,7 @@
 # https://stackoverflow.com/questions/24601806/got-permission-denied-when-emulating-sh-under-zsh
 emulate sh -c "source $ZDOTDIR/aliases.zsh"
 emulate sh -c "source $XDG_CONFIG_HOME/bash/aliases.sh"
+emulate sh -c "source $XDG_CONFIG_HOME/bash/fzf.sh"
 
 # to reload sessionVariables
 source ~/.profile

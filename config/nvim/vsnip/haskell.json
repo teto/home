@@ -1,16 +1,16 @@
 {
-
   "haddock module": {
-    "prefix": ["mod-haddock"],
+    "prefix": [
+      "mod-haddock"
+    ],
     "body": [
-"{-",
-"Module:  ${1: Module}",
-"Description : ${2: Description}",
-"Maintainer  : matt",
-"Portability : Linux",
-"-}"
+      "{-",
+      "Module:  ${1: Module}",
+      "Description : ${2: Description}",
+      "Maintainer  : matt",
+      "Portability : Linux",
+      "-}"
     ],
     "description": "Haddock Header for module"
   }
 }
-

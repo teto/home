@@ -1,4 +1,3 @@
 return {
-    cmd = { "bashls"}
-
+    cmd = { 'bashls' },
 }

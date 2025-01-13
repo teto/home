@@ -23,7 +23,6 @@
   };
 
   # services.nextjs-ollama-llm-ui = {
-
   #   enable = true;
   # };
 }

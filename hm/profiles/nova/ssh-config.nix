@@ -5,7 +5,6 @@
   secrets,
   withSecrets,
   flakeInputs,
-  dotfilesPath,
   secretsFolder,
 
   ...
@@ -55,7 +54,7 @@ in
             prod-runners
         );
       in
-      (lib.optionalAttrs (builtins.trace "ssh-config withSecrets: ${toString withSecrets}" withSecrets) remoteBuilders)
+      (lib.optionalAttrs (builtins.trace "ssh-config withSecrets for nova: ${toString withSecrets}" withSecrets) remoteBuilders)
       // {
 
         nova = {

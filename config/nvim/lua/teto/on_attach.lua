@@ -15,6 +15,13 @@ local function default_mappings()
         vim.diagnostic.goto_next({ wrap = true, severity = vim.diagnostic.severity.ERROR })
     end, { buffer = true })
 
+	vim.keymap.set('n', '[w', function()
+		vim.diagnostic.goto_prev({ wrap = true, severity = vim.diagnostic.severity.WARN })
+	end, { buffer = true })
+	vim.keymap.set('n', ']w', function()
+		vim.diagnostic.goto_next({ wrap = true, severity = vim.diagnostic.severity.WARN })
+	end, { buffer = true })
+
     -- vim.keymap.set('n', '<c-k>', function()
     --     vim.diagnostic.goto_prev({ wrap = true })
     -- end, { buffer = true })

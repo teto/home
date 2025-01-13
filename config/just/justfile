@@ -1,5 +1,13 @@
+# NIXPKGS_REPO := env_var('HOME') / 'nixpkgs'
+
+NIXPKGS := "/home/teto/nixpkgs"
+
 default:
     just --choose
+
+simwork-install-my-env:
+  ln -sf {{justfile_directory()}}/../../nova/justfile justfile.local
+  ln -sf $HOME/home/nova/.envrc .envrc
 
 golden-test:
   nix run  .#fastbuild.simwork.core-webservice.golden-test
@@ -38,7 +46,7 @@ sscwl:
 update-luarocks:
   # TODO run in command directory
   # TODO pass token
-  nix run '.#luarocks-packages-updater' -- --proc=4 --github-token=$GITHUB_TOKEN
+  nix run '.#luarocks-packages-updater' -- --proc=4 --github-token=$(pass show 'github token')
 
 # Start mistral server
 llama: 
@@ -55,3 +63,15 @@ update-neovim-packages:
 # fetch new mail
 mail-sync:
   systemctl start --user mujmap-fastmail.service
+  systemctl start --user mujmap-fastmail.service
+
+# generate database executable -> nix attributes
+nixpkgs-index:
+ rippkgs-index nixpkgs {{NIXPKGS}} --index ~/.local/share/rippkgs-index.sqlite
+
+# TODO finish
+nix-index:
+  nix run github:nix-community/nix-index-database BIN_TO_SEARCH
+
+nix-gc:
+  nix-collect-garbage --delete-older-than 3d

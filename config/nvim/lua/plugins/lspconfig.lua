@@ -18,7 +18,6 @@ local lspconfig = require('lspconfig')
 
 -- lspconfig.markdown_oxide.setup({})
 -- lspconfig.remark_ls.setup({})
--- lspconfig.marksman.setup({})
 
 -- Note that there is config set in .luarc.json but it is ignored
 -- https://github.com/LuaLS/lua-language-server/issues/2483
@@ -112,82 +111,82 @@ local lspconfig = require('lspconfig')
 -- lspconfig.dockerls.setup({})
 
 -- see https://github.com/redhat-developer/yaml-language-server for doc
--- lspconfig.yamlls.setup({
---     -- cmd = { 'yaml-language-server', '--stdio' },
---     --   on_attach = lsp.on_attach,
---     --   capabilities = lsp.capabilities,
---     settings = {
---         yaml = {
---             -- customTags
---             schemaStore = { enable = true },
---             -- schemas = require('schemastore').yaml.schemas(),
---
---             format = {
---                 enable = true,
---                 proseWrap = 'Preserve',
---                 printWidth = 120,
---             },
---         },
---     },
---     -- }
--- })
-
-local pyrightCapabilities = vim.lsp.protocol.make_client_capabilities()
-pyrightCapabilities.textDocument.publishDiagnostics.tagSupport.valueSet = { 2 }
-
--- you can configure pyright via a pyrightconfig.json too
--- https://github.com/microsoft/pyright/blob/cf1a5790d2105ac60dd3378a46725519d14b2844/docs/configuration.md
--- https://microsoft.github.io/pyright/#/configuration?id=diagnostic-rule-defaults
-lspconfig.pyright.setup({
-    -- cmd = {"pyright-langserver", "--stdio"};
-    -- filetypes = {"python"};
-    autostart = false, -- This is the important new option
-    flags = {
-        debounce_text_changes = 150,
-    },
-    capabilities = pyrightCapabilities,
-    root_dir = lspconfig.util.root_pattern('.git', 'setup.py', 'setup.cfg', 'pyproject.toml', 'requirements.txt'),
-    -- on_attach=attach_cb.on_attach,
+lspconfig.yamlls.setup({
+    -- cmd = { 'yaml-language-server', '--stdio' },
+    --   on_attach = lsp.on_attach,
+    --   capabilities = lsp.capabilities,
     settings = {
-        -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#pyright
-        -- https://microsoft.github.io/pyright/#/settings
-        python = {
-            analysis = {
-                -- enum { "Error", "Warning", "Information", "Trace" }
-                logLevel = 'Warning',
-                --						autoSearchPaths= true;
-                -- diagnosticMode = 'workspace';
-                --
-                useLibraryCodeForTypes = true,
-                typeCheckingMode = 'basic', -- 'off', 'basic', 'strict'
-                diagnosticSeverityOverrides = {
-                    reportUnusedVariable = false,
-                    reportUnusedFunction = false,
-                    reportUnusedClass = false,
-                    reportPrivateImportUsage = 'none',
-                    reportMissingImports = false,
-                },
-                disableOrganizeImports = true,
-                reportConstantRedefinition = true,
-                autoSearchPaths = true,
+        yaml = {
+            -- customTags
+            schemaStore = { enable = true },
+            -- schemas = require('schemastore').yaml.schemas(),
 
-                diagnosticMode = 'openFilesOnly', -- or workspace
-                extraPaths = {
-                    -- "pkgs/applications/editors/vim/plugins"
-                    -- "/home/teto/nixpkgs3/maintainers/scripts"
-                },
-                -- reportUnknownParameterType
-                -- diagnosticSeverityOverrides = {
-                --		reportUnusedImport = "warning";
-                -- };
+            format = {
+                enable = true,
+                proseWrap = 'Preserve',
+                printWidth = 120,
             },
         },
-        pyright = {
-            disableOrganizeImports = true,
-            reportUnusedVariable = false,
-        },
     },
+    -- }
 })
+
+-- local pyrightCapabilities = vim.lsp.protocol.make_client_capabilities()
+-- pyrightCapabilities.textDocument.publishDiagnostics.tagSupport.valueSet = { 2 }
+--
+-- -- you can configure pyright via a pyrightconfig.json too
+-- -- https://github.com/microsoft/pyright/blob/cf1a5790d2105ac60dd3378a46725519d14b2844/docs/configuration.md
+-- -- https://microsoft.github.io/pyright/#/configuration?id=diagnostic-rule-defaults
+-- lspconfig.pyright.setup({
+--     -- cmd = {"pyright-langserver", "--stdio"};
+--     -- filetypes = {"python"};
+--     autostart = false, -- This is the important new option
+--     flags = {
+--         debounce_text_changes = 150,
+--     },
+--     capabilities = pyrightCapabilities,
+--     root_dir = lspconfig.util.root_pattern('.git', 'setup.py', 'setup.cfg', 'pyproject.toml', 'requirements.txt'),
+--     -- on_attach=attach_cb.on_attach,
+--     settings = {
+--         -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#pyright
+--         -- https://microsoft.github.io/pyright/#/settings
+--         python = {
+--             analysis = {
+--                 -- enum { "Error", "Warning", "Information", "Trace" }
+--                 logLevel = 'Warning',
+--                 --						autoSearchPaths= true;
+--                 -- diagnosticMode = 'workspace';
+--                 --
+--                 useLibraryCodeForTypes = true,
+--                 typeCheckingMode = 'basic', -- 'off', 'basic', 'strict'
+--                 diagnosticSeverityOverrides = {
+--                     reportUnusedVariable = false,
+--                     reportUnusedFunction = false,
+--                     reportUnusedClass = false,
+--                     reportPrivateImportUsage = 'none',
+--                     reportMissingImports = false,
+--                 },
+--                 disableOrganizeImports = true,
+--                 reportConstantRedefinition = true,
+--                 autoSearchPaths = true,
+--
+--                 diagnosticMode = 'openFilesOnly', -- or workspace
+--                 extraPaths = {
+--                     -- "pkgs/applications/editors/vim/plugins"
+--                     -- "/home/teto/nixpkgs3/maintainers/scripts"
+--                 },
+--                 -- reportUnknownParameterType
+--                 -- diagnosticSeverityOverrides = {
+--                 --		reportUnusedImport = "warning";
+--                 -- };
+--             },
+--         },
+--         pyright = {
+--             disableOrganizeImports = true,
+--             reportUnusedVariable = false,
+--         },
+--     },
+-- })
 
 lspconfig.jsonls.setup({
     settings = {
@@ -198,48 +197,6 @@ lspconfig.jsonls.setup({
         },
     },
 })
-
--- commented out because https://github.com/MrcJkb/haskell-tools.nvim recommends to disable it
---lspconfig.hls.setup({
---	-- cmd = {
---	-- 	  "haskell-language-server", "--lsp"
---		  -- , "--debug"
---		  -- , "-j2"	-- -j1 doesnt work, and more threads => crash
---	-- },
---	single_file_support = true,
---	filetypes = { "haskell", "lhaskell" },
---	capabilities = make_cmp_capabilities(),
---	root_dir = lspconfig.util.root_pattern(
---		"*.cabal"
---		-- , "stack.yaml"
---		-- , "cabal.project"
---		-- , "package.yaml"
---		, "hie.yaml"
---	),
---	-- message_level = vim.lsp.protocol.MessageType.Warning,
---	settings = {
---	  haskell = {
---		completionSnippetsOn = true,
---		formattingProvider = "stylish-haskell",
---		-- "haskell.trace.server": "messages",
---		-- logFile = "/tmp/nvim-hls.log",
---		-- "codeLens.enable": true,
---	  -- hlintOn = false
---		plugin= {
---			hlint = {
---		  -- "config": {
---		  --	   "flags": []
---		  -- },
---			  diagnosticsOn= false,
---			  codeActionsOn= false
---			},
---		  }
---		},
---	  },
---	  flags = {
---			 -- allow_incremental_sync = false;
---	  }
---})
 
 -- see https://github.com/oxalica/nil/blob/main/docs/configuration.md for config
 -- https://github.com/neovim/nvim-lspconfig/wiki/Autocompletion

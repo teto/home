@@ -101,7 +101,7 @@ function n {
 # alias ff="find . -iname" # use fd instead
 function latest {
     # shellcheck disable=SC2012
-    ls -lt "$@" |head
+    eza --sort newest "$@"
 }
 
 #}}}

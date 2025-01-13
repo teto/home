@@ -1,23 +1,29 @@
 {
     "Nix module": {
-        "prefix": "nixmod2",
+        "prefix": [
+            "nixmod2"
+        ],
         "body": [
-		  "{ config, lib, pkgs, ... }:",
-          "let",
-          "   cfg = config.programs.zsh;",
-		  "in {",
-		  "  options = {  ",
-		  "  programs.zsh = {  ",
-          "enableProfiling = mkOption {",
-          "  default = false;",
-          "  type = types.bool;",
-          "  description = ''",
-          "    Whether to enable Fish integration.",
-          "  '';",
-          "};",
-           " }",
-		   "}" 
-		],
+            "{ config, lib, pkgs, ... }:",
+            "let",
+            "   cfg = config.programs.${1:foo};",
+            "in {",
+            "  options = {",
+            "    programs.${1} = {",
+            "      enable = lib.mkEnableOption \"${1}\";",
+            "      custom = lib.mkOption {",
+            "        default = false;",
+            "        type = lib.types.bool;",
+            "        description = ''",
+            "          Whether to enable Fish integration.",
+            "        '';",
+            "      };",
+            "    };",
+            "  };",
+            "  config = lib.mkIf cfg.enable {",
+            "  };",
+            "}"
+        ],
         "description": "Nixos module full file"
     }
 }

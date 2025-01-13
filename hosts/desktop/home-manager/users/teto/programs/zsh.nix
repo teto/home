@@ -20,30 +20,7 @@
     #   path = "${config.xdg.cacheHome}/zsh_history";
     #  };
 
-    # test for
-    # - https://www.reddit.com/r/neovim/comments/17dn1be/implementing_mru_sorting_with_minipick_and_fzflua/
-    # - https://lib.rs/crates/fre
-    initExtra = ''
-      fre_chpwd() {
-        fre --add "$(pwd)"
-      }
-      typeset -gaU chpwd_functions
-      chpwd_functions+=fre_chpwd
-
-       # if [ -f "$ZDOTDIR/zshrc" ]; then
-       source $ZDOTDIR/zshrc
-       # fi
-
-       # see https://github.com/jeffreytse/zsh-vi-mode for integration
-       # TODO you can also use home-manager's built-in "plugin" feature:
-    '';
     # source ${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
-
-    initExtraBeforeCompInit = # zsh
-      ''
-        # zsh searches $fpath for completion files
-        fpath+=( $ZDOTDIR/completions )
-      '';
 
     # to disable loading of /etc/z* files
     # envExtra = ''

@@ -1,7 +1,33 @@
+-- https://luals.github.io/wiki/settings
 return {
-    cmd = { 'lua-language-server' },
-    filetypes = { 'lua' },
+    cmd = {
+        'lua-language-server',
+        '--loglevel=trace',
+        '--logpath=/home/teto/lua_ls.log',
+    },
+    filetypes = {
+        -- 'lua'
+    },
+    -- single_file_support = true,
+    root_markers = { '.luarc.json', '.luarc.jsonc' },
+
+    -- disable lua-ls since it's too annoying
+    root_dir = false,
+    -- root_dir = function(fname)
+    --   local root = util.root_pattern(unpack(root_files))(fname)
+    --   if root and root ~= vim.env.HOME then
+    --     return root
+    --   end
+    --   local root_lua = util.root_pattern 'lua/'(fname) or ''
+    --   local root_git = vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1]) or ''
+    --   if root_lua == '' and root_git == '' then
+    --     return
+    --   end
+    --   return #root_lua >= #root_git and root_lua or root_git
+    -- end,
+
     settings = {
+
         Lua = {
             runtime = {
                 version = 'LuaJIT',
@@ -55,7 +81,7 @@ return {
                 -- Make the server aware of Neovim runtime files,
                 -- see also https://github.com/LuaLS/lua-language-server/wiki/Libraries#link-to-workspace .
                 -- Lua-dev.nvim also has similar settings for lua ls, https://github.com/folke/neodev.nvim/blob/main/lua/neodev/luals.lua .
-                maxPreload = 1000,
+                maxPreload = 100,
                 preloadFileSize = 500,
                 checkThirdParty = false,
                 ignoreDir = {

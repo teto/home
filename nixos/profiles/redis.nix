@@ -15,10 +15,6 @@
       # default port is 6379
       # If port 0 is specified Redis will not listen on a TCP socket.
       openFirewall = true;
-      # Alternatively
-      # requirePassFile = "./redis.txt";
-      requirePass = "toto";
-      # vmOverCommit = 1;
 
       # https://redis.io/topics/config
       # https://raw.githubusercontent.com/redis/redis/6.0/redis.conf

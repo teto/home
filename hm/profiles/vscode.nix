@@ -1,14 +1,12 @@
 {
-  config,
   pkgs,
-  lib,
   ...
 }:
 {
 
   programs.vscode.enable = true;
   programs.vscode = {
-    extensions = with pkgs.vscode-extensions; [
+    profiles.default.extensions = with pkgs.vscode-extensions; [
       # arrterian.nix-env-selector # not packaged ?
       # https://marketplace.visualstudio.com/items?itemName=asvetliakov.vscode-neovim
       # asvetliakov.vscode-neovim # only in my fork

@@ -2,7 +2,7 @@
 -- For custom components see
 -- https://github.com/nvim-lualine/lualine.nvim#custom-components
 local clip = require('teto.clipboard')
-local obsession_component = require('teto.lualine.obsession')
+-- local obsession_component = require('lualine.obsession')
 -- local hl = require('lualine.highlight')
 -- hl.get_stl_default_hl()
 -- print(vim.inspect(hl))
@@ -28,6 +28,13 @@ local get_workspace_diagnostic_count = function()
     local ws_diags = #vim.diagnostic.get()
     return 'count: ' .. tostring(ws_diags)
 end
+
+diagnostic_session = 
+		  {'diagnostics',
+		  -- sources
+		   -- sections = { 'error', 'warn' }
+		  }
+
 require('lualine').setup({
     options = {
         icons_enabled = false,
@@ -47,8 +54,9 @@ require('lualine').setup({
                     return str:sub(1, 20)
                 end,
                 on_click = function(_nb_of_clicks, _button, _modifiers)
-
-				    local branch_name = 'BRANCH_PLACEHOLDER'
+				 -- the component should have a 'status' output
+                    local branch_name = 'BRANCH_PLACEHOLDER'
+					-- status()
                     clip.copy(branch_name)
                     print('To clipboard: ' .. branch_name)
                     -- the
@@ -98,13 +106,18 @@ require('lualine').setup({
             -- obsession_status
         },
         lualine_y = {
-            'diagnostics',
+		  -- {'diagnostics',
+		  -- -- sources
+		  --  -- sections = { 'error', 'warn' }
+		  -- },
             'progress',
         }, -- progress = %progress in file
         lualine_z = {
-            obsession_component,
-            get_workspace_diagnostic_count,
-            'location',
+			-- 'obsession',
+			'gp-nvim',
+			-- 'autosession',
+            -- get_workspace_diagnostic_count,
+            -- 'location',
         },
     },
     -- inactive_sections = {
@@ -117,22 +130,32 @@ require('lualine').setup({
     -- },
     -- tabline is handled by bufferline.nvim
     -- tabline = {},
+	--[[ TODO :
+	- add lock for readonly
+	- also if diffthis is set
+	]]--
     winbar = {
-        lualine_a = {},
-        lualine_b = {},
-        lualine_c = { 'filename' },
+        lualine_a = {'filename'},
+        lualine_b = {'diagnostics', },
+        lualine_c = {},
         lualine_x = {},
-        lualine_y = { 'diagnostics', 'progress' },
+        lualine_y = { 'progress' },
         lualine_z = {},
     },
 
     inactive_winbar = {
-        lualine_a = {},
-        lualine_b = {},
-        lualine_c = { 'filename' },
+        lualine_a = {'filename'},
+        lualine_b = {'diagnostics', },
+        lualine_c = {},
         lualine_x = {},
         lualine_y = {},
         lualine_z = {},
     },
-    extensions = { 'fzf', 'fugitive' },
+    extensions = { 
+	  'fzf',
+	  'fugitive',
+	  'oil',
+	  'man',
+	  'trouble',
+	 },
 })

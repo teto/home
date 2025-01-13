@@ -26,6 +26,7 @@ in
       '';
   });
 
+  # use as a devShell for wireshark ?
   wireshark-dev = prev.wireshark.overrideAttrs (oa: {
     name = "wireshark-dev";
     # src = srcSockDiag;

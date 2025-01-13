@@ -1,0 +1,11 @@
+read -r -d '\n' username password _ <<<$(pass-nova show $1)
+
+cat << EOJ
+{
+  "Version": 1,
+  "AccessKeyId": "$username",
+  "SecretAccessKey": "$password"
+}
+EOJ
+
+

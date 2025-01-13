@@ -1,3 +1,8 @@
+
+https://www.pulumi.com/docs/iac/cli/environment-variables/
+PULUMI_DISABLE_AUTOMATIC_PLUGIN_ACQUISITION
+PULUMI_HOME
+
 * enables logging 
 
   pulumi uses the glog package for logging, which by default logs to files in /tmp.
@@ -13,8 +18,9 @@ https://www.pulumi.com/docs/iac/support/troubleshooting/
  pulumi -C pulumi/infra -s ci-infra-dev config 
 
 pulumi plugin ls
-
-  * read outputs
+pulumi -C pulumi/apps/rds-core -s infra-rds-core-${CI_ENVIRONMENT_NAME} about
+ 
+* read outputs
 pulumi config get redisPassword
 
 # reference 

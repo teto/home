@@ -2,7 +2,7 @@
   config,
   lib,
   pkgs,
-  flakeInputs,
+  flakeSelf,
   secrets,
   withSecrets,
   ...
@@ -13,7 +13,7 @@ with lib;
 let
   cfg = config.programs.zsh;
 
-  fzf-git-sh = flakeInputs.fzf-git-sh;
+  fzf-git-sh = flakeSelf.inputs.fzf-git-sh;
 
   # /tree/master/plugins/zbell
   termTitleSubmodule = types.submodule (import ./title-submodule.nix);

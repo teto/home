@@ -10,6 +10,7 @@ with lib;
 let
   cfg = config.package-sets;
 
+  inherit (pkgs.tetoLib) ignoreBroken;
 in
 {
 
@@ -60,6 +61,7 @@ in
         stow
         systemctl-tui
         pciutils # for lspci
+        wget
         # zenith  # resources monitor
       ];
     })
@@ -67,8 +69,9 @@ in
       home.packages = [
 
         # pkgs.ollama # to test huggingface
-        pkgs.aider-chat # breaks
+        # pkgs.aider-chat # breaks
         pkgs.python3Packages.huggingface-hub
+        pkgs.repomix  # to upload a codebase to llm
       ];
     })
 
@@ -152,7 +155,7 @@ in
           du-dust # dust binary: rust replacement of du
           duf # better df (rust)
 
-          ncpamixer # pulseaudio TUI mixer
+          (ignoreBroken ncpamixer) # pulseaudio TUI mixer
           noti # send notifications when a command finishes
           ouch # to (de)compress files
           # papis # library manager
@@ -209,7 +212,7 @@ in
         # libsecret  # to consult
         # newsboat #
         carl # not upstreamed yet. cargo cal
-        immich-cli
+        (ignoreBroken immich-cli)
         mujmap-unstable # to sync notmuch tags across jmap
         # signal-desktop # installe a la main
         # memento # broken capable to display 2 subtitles at same time
@@ -258,11 +261,14 @@ in
     (mkIf cfg.developer {
       home.packages = with pkgs; [
         automake
+        bfs # https://github.com/tavianator/bfs
         cargo
-        (backblaze-b2.override ({ execName = "b2"; }))
+        (tetoLib.ignoreBroken(backblaze-b2.override ({ execName = "b2"; })))
         dasht # ~ zeal but in terminal
         docker-credential-helpers
         gettext # for envsubst (TO NOT CONFOUND with gettext's envsubst)
+        # live replace with fzf, use like `fd | sad toto tata`
+        sad
         sops # password 'manager'
         glab # gitlab cli
         hexyl # hexcode viewer
@@ -321,7 +327,9 @@ in
 
         fre # generate a frequency database
 
-        perf-tools # to interpret
+        # there is also https://github.com/TaKO8Ki/gobang
+        lazysql # SQL editor
+        (tetoLib.ignoreBroken harlequin) # SQL python editor
 
         inotify-info # to debug filewatching issues, very nice
         inotify-tools # for inotify-wait notably
@@ -334,18 +342,20 @@ in
         # nix-top # (abandoned) to list current builds
         nixfmt-rfc-style # the official one
         nixpkgs-review # to help review nix packages
-        # nodePackages."@bitwarden/cli" # 'bw' binary # broken
         patchutils # for interdiff
+        perf-tools # to interpret
 
         rainfrog # database exploration
         process-compose # docker-compose - like
         # rpl # to replace strings across files
         strace
+        shfmt # shell format
         tio # serial console reader
         tig
         universal-ctags # there are many different ctags, be careful !
         whois
         zeal # doc for developers
+        xan # CLI csv helper
 
         flakeInputs.rippkgs.packages.${pkgs.system}.rippkgs
         flakeInputs.rippkgs.packages.${pkgs.system}.rippkgs-index
@@ -448,12 +458,12 @@ in
         # https://github.com/NixOS/nixpkgs/pull/368909
         pkgs.kakasi # convert kanjis into kanas etc
         pkgs.mokuro # broken because of triton-llvm
-        pkgs.python3Packages.manga_ocr
+        pkgs.python3Packages.manga-ocr
         tagainijisho # japanse dict; like zkanji Qt based
         # ${config.system}
         # flakeInputs.vocage.packages."x86_64-linux".vocage
         # jiten # unfree, helpful for jap.nvim
-        sudachi-rs # a japanese tokenizer
+        (tetoLib.ignoreBroken sudachi-rs) # a japanese tokenizer
         sudachidict
         # sudachi-rs
         kanji-stroke-order-font # for memento

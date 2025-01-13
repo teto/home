@@ -1,3 +1,4 @@
+bin/start_psql.sh filter=git-crypt diff=git-crypt
 config/sublime-text-3/Local/License.sublime_license filter=git-crypt diff=git-crypt
 config/ssh/config filter=git-crypt diff=git-crypt
 nixpkgs/secrets.nix filter=git-crypt diff=git-crypt

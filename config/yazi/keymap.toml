@@ -22,8 +22,9 @@ prepend_keymap = [
 	{ on = [ "<C-g>"], run = "plugin test --sync --args='hello world'" },
 	{ on = [ "<C-q>" ], run = "close" },
 	# { on = [ "<Enter>" ], run = "close --submit" },
-	{ on = [ "<Esc>" ], run = "escape" },
+	{ on = [ "<Esc>" ], run = "close", desc = "Cancel input" },
 	{ on = [ "<Backspace>" ], run = "backspace" },
+    { on   = [ "c", "m" ], run  = "plugin chmod", desc = "Chmod on selected files" }
 
 ]
 

@@ -1,25 +1,32 @@
+/* TODO load a pywal generated style */
+/* @import url("file:///etc/xdg/waybar/style.css") */
 /* One Dark Color Theme */
-@define-color bg #282C34;
-@define-color fg #ABB2BF;
-@define-color fg2 #21252B;
+/* @define-color bg #282C34; */
+/* @define-color fg #ABB2BF; */
+/* @define-color fg2 #21252B; */
+/**/
+/* @define-color red #E06C75; */
+/* @define-color orange #d19a66; */
+/* @define-color yellow #e5c07b; */
+/* @define-color green #98C379; */
+/* @define-color cyan #56b6c2; */
+/* @define-color blue #61AFEF; */
+/* @define-color purple #c678dd; */
+/* @define-color white #abb2bf; */
+/* @define-color black #282c34; */
+/* @define-color gray #5c6370; */
+/* @define-color highlight #e2be7d; */
+/* @define-color comment #7f848e; */
 
-@define-color red #E06C75;
-@define-color orange #d19a66;
-@define-color yellow #e5c07b;
-@define-color green #98C379;
-@define-color cyan #56b6c2;
-@define-color blue #61AFEF;
-@define-color purple #c678dd;
-@define-color white #abb2bf;
-@define-color black #282c34;
-@define-color gray #5c6370;
-@define-color highlight #e2be7d;
-@define-color comment #7f848e;
+@import url("/home/teto/.cache/wal/waybar-gtk.css");
+
+@define-color workspace-bg-focused #64727D;
+@define-color module-bg rgba(0,43,51,0.85);
 
 * {
     border: none;
     border-radius: 0;
-    background: rgba(43, 48, 59, 0.5);
+    /* background: rgba(43, 48, 59, 0.5); */
 	/* font-family: "Ubuntu", "Symbols Nerd Font Mono", "Symbols Nerd Font"; */
     font-family: "Symbols Nerd Font", "Ubuntu";
 /*     font-size: 13px; */
@@ -30,6 +37,7 @@ window#waybar {
     /* background: transparent; */
     /* border-bottom: 3px solid rgba(100, 114, 125, 0.5); */
     color: white;
+    background: transparent;
 }
 
 /* what is this ? */
@@ -54,6 +62,7 @@ tooltip label {
 
 
 #workspaces button:hover {
+
     background: rgba(0, 0, 0, 0.2);
     box-shadow: inset 0 -3px #ffffff;
     border-bottom: 2px solid white;
@@ -61,18 +70,20 @@ tooltip label {
 }
 
 #workspaces button.focused {
-    background: #64727D;
+    background: @workspace-bg-focused;
     /* border-bottom: 2px solid white; */
 }
 
 /*-----module groups----*/
 .modules-right {
-	background-color: rgba(0,43,51,0.85);
+	background-color: @module-bg;
     margin: 2px 10px 0 0;
 }
 
 .modules-center {
-	background-color: rgba(0,43,51,0.85);
+   border-radius: 30;
+
+	background-color: @module-bg;
     margin: 2px 0 0 0;
 }
 

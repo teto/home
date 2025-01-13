@@ -1,8 +1,9 @@
 #!/bin/sh
 # shellcheck shell=bash
-# set -x
+set -ue
 token="$(cat "$XDG_CONFIG_HOME/sops-nix/secrets/github_token")"
-count=$(curl -u teto:"${token}" https://api.github.com/notifications | jq '. | length')
+# -s for silent
+count=$(curl -su teto:"${token}" https://api.github.com/notifications | jq '. | length')
 
 # TODO for now always display some result
 # if [[ "$count" != "0" ]]; then
@@ -13,5 +14,6 @@ cat <<EOF
 $count
 $count unread notifs
 unmuted
+
 EOF
 # fi

@@ -2,7 +2,6 @@
 # Here is a small yet pretty detailed example on how to use it:
 #
 # [plugins]
-# nvim-treesitter = "semver_version"  # e.g. "1.0.0"
 
 # List of non-Neovim rocks.
 # This includes things like `toml` or other lua packages.
@@ -11,57 +10,66 @@
 # List of Neovim plugins to install alongside their versions.
 # If the plugin name contains a dot then you must add quotes to the key name!
 [plugins]
-"rocks-git.nvim"= "2.5.0"
+"rocks-git.nvim"= "2.5.2"
 # "rocks.nvim" = "2.19.0" # rocks.nvim can also manage itself :D
 # "rocks-git.nvim"= "1.5.1"
-# cmp-rg = "1.3.9"
-"oil.nvim" = "2.12.2"
+# "oil.nvim" = "2.14.0"
 # -- :DiffviewOpen
 # "diffview.nvim" = "scm"
-"haskell-tools.nvim" = "4.3.2"
+"haskell-tools.nvim" = "4.4.2"
+
+# needed the patch from https://github.com/nvimtools/none-ls.nvim/pull/248
 "none-ls.nvim" = "scm"
-"bufferline.nvim" = "4.8.0"
+"none-ls-extras.nvim" = "scm"
+
+"bufferline.nvim" = "4.9.1"
 auto-session = "2.5.0"
-"rocks-config.nvim" = "3.0.0"
-"trouble.nvim" = "3.6.0"
+"rocks-config.nvim" = "3.1.0"
+"trouble.nvim" = "3.7.1"
 "lualine.nvim" = "scm"
 "rocks-lazy.nvim" = "scm"
-"rest.nvim" = "3.8.3"
+# "rest.nvim" = "3.10.1"
 "nui.nvim" = "0.3.0"
-neotest = "5.7.0"
+neotest = "5.8.0"
 "rocks-dev.nvim" = "1.7.0"
-nvim-lint = "scm"
+# nvim-lint = "scm"
 # "telescope.nvim" = "scm"
 "lsp_signature.nvim" = "0.3.1"
 friendly-snippets = "scm"
-"haskell-snippets.nvim" = "1.4.4"
-"none-ls-extras.nvim" = "scm"
-"yazi.nvim" = "6.4.3"
+# "haskell-snippets.nvim" = "1.4.4"
+"yazi.nvim" = "9.0.2"
 tree-sitter-haskell = "scm"
+tree-sitter-org = "0.0.1"
 # replaced with blink ?
-# nvim-cmp = "scm"
 # "lspkind.nvim" = "scm"
-"modicator.nvim" = "scm"
-luasnip = "2.3.0"
-tree-sitter-http = "scm"
-"hurl.nvim"= "1.7.1"
-"gitsigns.nvim" = "0.9.0"
-nvim-treehopper = "scm"
-# nvim-treesitter-textobjects = "scm"
+# "modicator.nvim" = "scm"
+# luasnip = "2.3.0"
+tree-sitter-http = "0.0.35"
+"hurl.nvim"= "2.1.0"
+"gitsigns.nvim" = "1.0.1"
+
+# works with hop.nvim to jump somewhere in the AST (depends on hop.nvim so not that interesting)
+# nvim-treehopper = "scm"
+
 # nvim-bqf= "1.1.1"
 # needs https://github.com/nvim-telescope/telescope-fzf-native.nvim if you enable the fzf algorithm
-"smart-open.nvim"= "scm"
+# "smart-open.nvim"= "scm"
 
 vim-startuptime= "4.5.0"
 "grug-far.nvim"= "scm"
 # removed during testing
+# installed via nix
 "typescript-tools.nvim" = "scm"
 menu= "scm"
 # "snacks.nvim" = "2.6.0"
-fzf-lua = "0.0.1609"
-"lz.n" = "2.9.2"
-# nvim-navic= "scm"
-# nvim-lspconfig= "1.2.0"
+fzf-lua = "0.0.1776"
+"lz.n" = "2.11.2"
+"indent-blankline.nvim" = "3.8.7"
+"llm.nvim"= "scm"
+# volt is a UI library
+volt= "scm"
+# "telescope.nvim" = "0.1.6"
+nvim-lspconfig= "1.7.0"
 # nvim-treesitter-textobjects = "scm"
 # "rocks-treesitter.nvim" = "1.0.3"
 
@@ -71,17 +79,14 @@ fzf-lua = "0.0.1609"
 # version = "2.0.0"
 # dir = "/home/teto/neotest-haskell"
 #
-[plugins."auto-save.nvim"]
-version = "scm"
-cmd = "ASToggle" # optional for lazy loading on command
-# Tolerated ?
-# event = { "FocusLost" } # optional for lazy loading on trigger events
 
-[plugins."llm.nvim"]
-dir = "~/llm.nvim"
+# guy said he is going to deprecate it
+# [plugins."auto-save.nvim"]
+# version = "scm"
+# cmd = "ASToggle" # optional for lazy loading on command
 
 [plugins.neorg]
-version = "9.1.1"
+version = "9.2.0"
 ft = "norg"
 
 [plugins."gp.nvim"]
@@ -134,6 +139,7 @@ opt = true
 
 [plugins."git-messenger.vim"]
 git = "rhysd/git-messenger.vim"
+rev = "edc603d4cda7894a743e383e16c638e206d03148"
 
 [plugins.vim-listchars]
 git = "teto/vim-listchars"
@@ -149,7 +155,7 @@ rev = "affe37e89911c47831cb5b87697ac70e48bb3e0f"
 
 [plugins.neovim]
 git = "rose-pine/neovim"
-rev = "v3.0.1"
+rev = "v3.0.2"
 
 [plugins.papercolor-theme]
 git = "NLKNguyen/papercolor-theme"
@@ -174,23 +180,24 @@ git = "letieu/hacker.nvim"
 rev = "6818e75c076beb05ffcad2be6a78e0e0f800416d"
 opt = true
 
-[plugins.nvimesweeper]
-git = "seandewar/nvimesweeper"
-rev = "a75828943e4279cd850ad6a6cff4c49238997573"
-opt = true
+# [plugins.nvimesweeper]
+# git = "seandewar/nvimesweeper"
+# rev = "a75828943e4279cd850ad6a6cff4c49238997573"
+# opt = true
 
-[plugins."color-picker.nvim"]
-git = "ziontee113/color-picker.nvim"
-rev = "06cb5f853535dea529a523e9a0e8884cdf9eba4d"
+# [plugins."color-picker.nvim"]
+# git = "ziontee113/color-picker.nvim"
+# rev = "06cb5f853535dea529a523e9a0e8884cdf9eba4d"
 
-[plugins."lsp_lines.nvim"]
-git = "https://git.sr.ht/~whynothugo/lsp_lines.nvim"
-rev = "v3.0.0"
-
+# [plugins."lsp_lines.nvim"]
+# git = "https://git.sr.ht/~whynothugo/lsp_lines.nvim"
+# rev = "v3.0.0"
+#
 [plugins."highlight-undo.nvim"]
 git = "tzachar/highlight-undo.nvim"
 rev = "1ea1c79372d7d93c88fd97543880927b7635e3d2"
 
+# 
 [plugins."baleia.nvim"]
 git = "m00qek/baleia.nvim"
 rev = "v1.4.0"
@@ -207,33 +214,53 @@ rev = "89b7c45a48a661da88a3a574ef9fa90b936064a4"
 git = "levouh/tint.nvim"
 rev = "02bd0527a315a80e4e25bb2dd7b6994fb0daae01"
 
-[plugins."live-command.nvim"]
-git = "smjonas/live-command.nvim"
-rev = "2.2.0"
-
-[plugins.nvim-pnpm-catalog-lens]
-git = "ryoppippi/nvim-pnpm-catalog-lens"
-rev = "v0.3.0"
+# [plugins."live-command.nvim"]
+# git = "smjonas/live-command.nvim"
+# rev = "2.2.0"
+#
+# [plugins.nvim-pnpm-catalog-lens]
+# git = "ryoppippi/nvim-pnpm-catalog-lens"
+# rev = "v0.3.0"
 
 [plugins.lualine-lsp-progress]
 git = "arkav/lualine-lsp-progress"
 rev = "56842d097245a08d77912edf5f2a69ba29f275d7"
 
-[plugins.volt]
-git = "nvchad/volt"
-rev = "43f72b49037c191eb3cfe26ba7a5574b4bfce226"
-
-[plugins."bigfile.nvim"]
-git = "lunarvim/bigfile.nvim"
-rev = "33eb067e3d7029ac77e081cfe7c45361887a311a"
-
 [plugins."iron.nvim"]
-git = "vigemus/iron.nvim"
+# git = "vigemus/iron.nvim"
+dir = "/home/teto/iron.nvim"
+# rev = "v3.0"
 branch = "master"
 
-[plugins."http-codes.nvim"]
-git = "barrett-ruth/http-codes.nvim"
-rev = "a610788dff2fb5df05b230d73a926c8dc3173c16"
+[plugins.vim-env-syntax]
+git = "overleaf/vim-env-syntax"
+rev = "2137f77840fe6e5e67dc0422f1759ab1ddc86d60"
+
+[plugins."treewalker.nvim"]
+git = "aaronik/treewalker.nvim"
+rev = "4992fa9d27792b7a573e4545c9b2c4e61aba4f44"
+
+[plugins."neomutt.vim"]
+git = "neomutt/neomutt.vim"
+rev = "20220408"
+
+[plugins."endec.nvim"]
+git = "ovk/endec.nvim"
+rev = "949ece728ecc0cacf3c6c81bbcda186fe3fef5cf"
+
+[plugins."nvim-colorizer.lua"]
+git = "norcalli/nvim-colorizer.lua"
+rev = "a065833f35a3a7cc3ef137ac88b5381da2ba302e"
+
+[plugins.blink-cmp]
+git = "kaiser-yang/blink-cmp-git"
+rev = "v2.4.0"
+
+
+#q
+# [plugins.blink-cmp]
+# git = "kaiser-yang/blink-cmp-git"
+# rev = "v2.0.0"
 
 # we actually need some rust for it
 # [plugins."blink.cmp"]

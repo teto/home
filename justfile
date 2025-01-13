@@ -5,6 +5,8 @@
 NIXPKGS_REPO := env_var('HOME') / 'nixpkgs'
 BLOG_FOLDER := "${HOME}/blog"
 NOVOS_REPO := "/home/teto/nova/doctor"
+HM_REPO := "/home/teto/hm"
+JK_SEEDER_REPO := "/home/teto/nova/jinko-seeder"
 
 default:
     just --choose
@@ -24,21 +26,24 @@ build: (nixos-rebuild "build")
 
 switch: (nixos-rebuild "switch" "")
 
+rollback: (nixos-rebuild "switch" "--rollback")
+
 repl: (nixos-rebuild "repl" "")
 
 # --override-input nova /home/teto/nova/doctor \
 [private]
 nixos-rebuild command builders="--option builders \"$NOVA_OVH1\" -j0":
     nixos-rebuild --flake ~/home --override-input nixpkgs {{ NIXPKGS_REPO }} \
-      --override-input hm /home/teto/hm \
+      --override-input hm {{ HM_REPO }} \
       --override-input nova-doctor {{ NOVOS_REPO }} \
+      --override-input jinko-seeder {{ JK_SEEDER_REPO }} \
        {{ builders }} \
        --no-write-lock-file --show-trace \
        --use-remote-sudo \
        {{ command }}
 
 build-nom hostname:
-    nom build .#nixosConfigurations.{{hostname}}.config.system.build.toplevel 
+    nom build .#nixosConfigurations.{{ hostname }}.config.system.build.toplevel 
 
 # nom build
 # nix flake update
@@ -119,8 +124,14 @@ stow-bin:
 
 # symlink to XDG_DATA_HOME
 stow-local:
-    stow -t "$(XDG_DATA_HOME)" local
-    mkdir -p "{{ data_directory() }}/fzf-history" {{ data_directory() }}/newsbeuter
+  echo "Local: {{ data_local_directory() }}"
+  echo "data_directory: {{ data_directory() }}"
+
+  # data_local_directory returns ~/.local/share
+  stow -t {{ data_local_directory() }}/.. local
+  # it's a file so should not be here
+  # "{{ data_directory() }}/fzf-history"
+  mkdir -p  {{ data_directory() }}/newsbeuter
 
 # Build my router image
 
@@ -210,3 +221,7 @@ notmuch-speedup:
 # cumulative changes between the booted and current system generations
 nix-diff-booted:
     nix store diff-closures /run/*-system
+
+# run a X compatibility layer, you need to export the correct DISPLAY beforehand
+xwayland:
+  xwayland-satellite

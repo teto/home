@@ -1,6 +1,10 @@
 open-in-mpv 
 
 
+* enable debug
+
+--msg-level=all=v
+
 frontends
 
 https://github.com/mpv-player/mpv/wiki/Applications-using-mpv

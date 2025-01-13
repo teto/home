@@ -44,7 +44,7 @@
       # ".."="cd ..";
       # "..."="cd ../..";
 
-      nix-stray-roots = ''nix-store --gc --print-roots | egrep -v "^(/nix/var|/proc|/run/\w+-system|\{memory)"'';
+      nix-stray-roots = ''nix-store --gc --print-roots | egrep -v "^(/nix/var|/proc|/run/\w+-system|\{memory)" | less'';
 
       v = "nvim";
       c = "cat";
@@ -53,12 +53,12 @@
 
       n = "nix develop";
 
-      # ls aliases
-      # {{{
+      # ls aliases {{{
       ld = "eza -lD";
       lf = "eza -lF --color=always | grep -v /";
       lh = "eza -dl .* --group-directories-first";
-      ll = lib.mkForce "eza -al --group-directories-first";
+      # we have to add -g (--group) else it's hidden by default
+      ll = lib.mkForce "eza -al -g --group-directories-first";
       lt = "eza -al --sort=modified";
       # }}}
 

@@ -39,6 +39,17 @@ vim.g.gp_nvim = {
             -- Gp: Agent Mistral is missing model or system_prompt
             -- If you want to disable an agent, use: { name = 'Mistral', disable = true },
         },
+        {
+            provider = 'cohere',
+            name = 'cohere-chat',
+            chat = true,
+            command = true,
+            model = { model = 'command-r-plus-08-2024', temperature = 1.1, top_p = 1 },
+            system_prompt = chat_system_prompt,
+            -- system_prompt = default_config.agents[1].system_prompt
+            -- Gp: Agent Mistral is missing model or system_prompt
+            -- If you want to disable an agent, use: { name = 'Mistral', disable = true },
+        },
         -- {
         --
         --   provider = "openai",
@@ -83,7 +94,14 @@ vim.g.gp_nvim = {
             -- secret = os.getenv('OPENAI_API_KEY'),
             endpoint = 'https://api.openai.com/v1/chat/completions',
         },
-        -- ollama = {},
+        cohere = {
+            -- response from the config.providers.copilot.secret command { "bash", "-c", "cat ~/.config/github-copilot/hosts.json | sed -e 's/.*oauth_token...//;s/\".*//'" } is empty
+            -- todo use pass instead since I can sync it
+            secret = { 'bash', '-c', 'cat $XDG_CONFIG_HOME/sops-nix/secrets/COHERE_API_KEY' },
+            -- secret = os.getenv('OPENAI_API_KEY'),
+            endpoint = 'https://api.openai.com/v1/chat/completions',
+        },
+        -- works for localai or ollama
         localai = {
             secret = '',
             endpoint = 'http://localhost:11111/v1/chat/completions',

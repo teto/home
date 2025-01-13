@@ -13,6 +13,8 @@
   home.packages =
     with pkgs;
     let
+      # flakeInputs.localai.packages.${pkgs.system}.local-ai-cublas #cublas is the cuda version
+      # whisper-cpp broken
       my-local-ai = (
         local-ai-teto.override ({
           # with_cublas = true;
@@ -21,18 +23,9 @@
       );
     in
     [
-      # whisper-cpp broken
-      # local-ai-teto
       # my-local-ai
       # llama-cpp # to test
-
       llama-cpp-matt # simpler than
-      # llm-ls # needed by the neovim plugin
-      # from overlay
-      # ollamagpu # st config.withCuda to enable
-
-      # broken
-      # flakeInputs.localai.packages.${pkgs.system}.local-ai-cublas #cublas is the cuda version
     ];
 
   # services.local-ai.enable = true;

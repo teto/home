@@ -3,12 +3,13 @@
   secrets,
   lib,
   pkgs,
+  flakeSelf,
   ...
 }:
 {
 
   imports = [
-    ../../../nixos/modules/nextcloud.nix
+    flakeSelf.nixosModules.nextcloud
     ../../../nixos/profiles/nextcloud.nix
   ];
 
@@ -114,10 +115,11 @@
 
   # security.acme.
   # https://nixos.org/manual/nixos/stable/index.html#module-security-acme
-  security.acme = {
-    acceptTerms = true;
-    defaults.email = secrets.users.teto.email;
-  };
+  # TODO remove it uses defaults from nginx.nix
+  # security.acme = {
+  #   acceptTerms = true;
+  #   # defaults.email = secrets.users.teto.email;
+  # };
 
   # create some errors on deploy
   # for now we generate one certificate per virtual host

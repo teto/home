@@ -8,9 +8,6 @@ alias n2='nix develop --option builders "$NOVA_CAMPUS1" -j0'
 # alias n3='nix develop --option builders "$NOVA_CAMPUS2" -j0'
 
 # Haskell related aliases{{{
-# alias nhs92="nix develop \$HOME/home#nhs92"
-# alias nhs94="nix develop \$HOME/home#nhs94"
-# alias nhs96="nix develop \$HOME/home#nhs96"
 alias nhs98="nix develop \$HOME/home#nhs98"
 alias nhs910="nix develop \$HOME/home#nhs910"
 alias nhs912="nix develop \$HOME/home#nhs912"
@@ -35,7 +32,7 @@ alias grc="git rebase --continue"
 alias gra="git rebase --abort"
 
 # rename mptcp ?
-alias mp="mptcpanalyzer"
+# alias mp="mptcpanalyzer"
 
 # nix aliases {{{
 
@@ -48,16 +45,14 @@ alias lh="eza -dl .* --group-directories-first"
 
 # advanced
 # TODO add --hyperlink
-alias ls='eza --color=always --group-directories-first --icons=auto'
-alias ll='eza -la --icons --octal-permissions --group-directories-first'
-alias l='eza -bGF --header --git --color=always --group-directories-first --icons=auto'
-alias llm='eza -lbGd --header --git --sort=modified --color=always --group-directories-first --icons=auto'
-alias la='eza --long --all --group --group-directories-first'
+alias ls='eza --color=always --group-directories-first --icons=auto --hyperlink'
+alias ll='eza -la --icons --octal-permissions --group-directories-first --hyperlink'
+# alias llm='eza -lbGd --header --git --sort=modified --color=always --group-directories-first --icons=auto'
 alias lx='eza -lbhHigUmuSa@ --time-style=long-iso --git --color-scale --color=always --group-directories-first --icons=auto'
 
 alias lS='eza -1 --color=always --group-directories-first --icons=auto'
 alias lt='eza --tree --level=2 --color=always --group-directories-first --icons=auto -snew'
-alias l.="eza -a | grep -E '^\.'"
+# alias l.="eza -a | grep -E '^\.'"
 
 # ls related updates {{{
 # I also export TIME_STYLE to change the output of this

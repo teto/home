@@ -39,8 +39,14 @@
       # get top level directory of the repo
       root = "git rev-parse --show-toplevel";
     };
+
+
+    # lots inspired by https://blog.gitbutler.com/how-git-core-devs-configure-git/
     extraConfig = {
       # breaks jkops
+      branch = {
+        sort = "-committerdate";
+      };
       clone.defaultRemoteName = "up";
       init.defaultBranch = "main";
       # git config core.sshCommand "ssh -vvv"
@@ -53,18 +59,25 @@
       credential.helper = "store";
 
       # show the full diff under the commit message
-      commit.verbose = true;
+      commit = {
+        status = true;
+        verbose = true;
+        # template = "filename";
+      };
       core = {
         # sshCommand = "ssh -vvv";
         sshCommand = "ssh";
 
         # might be broken/use too many fds ?
         # fsmonitor = "${pkgs.rs-git-fsmonitor}/bin/rs-git-fsmonitor";
+        # untrackedCache ?
       };
 
       rebase = {
         autosquash = true;
         autoStash = true;
+        # takes stacked refs in a branch and makes sure they're also moved when a branch is rebased.
+        updateRefs = true;
       };
 
       pull = {
@@ -75,13 +88,19 @@
       stash = {
         showPatch = 1;
       };
+
+      column = {
+        # nodense
+        ui = "always";
+      };
+
       color = {
         ui = true;
       };
       # vimdiff as merge and diff tool
       merge = lib.mkForce {
         tool = "fugitive";
-        conflictstyle = "diff3";
+        conflictstyle = "zdiff3";
       };
 
       mergetool = {
@@ -97,10 +116,20 @@
 
       # TODO use a fully qualified nvim ?
       diff = {
+        algorithm = "histogram";
         tool = "nvim -d";
-        word-diff = "color";
+        # word-diff = "color";
         renamelimit = 14000; # useful for kernel
+        # how code movement in different colors then added and removed lines.
+        colorMoved = true;
 
+        # replace the a/ and b/ in your diff header output with where the diff is coming from, so i/ (index), w/ (working directory) or c/ commit. 
+        mnemonicPrefix = true;
+
+      };
+
+      tag = {
+        sort = "version:refname";
       };
 
       # pager = {

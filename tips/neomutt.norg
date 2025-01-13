@@ -2,11 +2,12 @@
 flags are listed in : flag_chars
 https://neomutt.org/guide/gettingstarted
 
+My config
+
 lua-source ~/.config/neomutt/utils.lua
 folder-hook neomutt 'lua chgdir("~/.maildirs/NetC/neomutt", true)'
 
 
-15:19 <ryzokuken> that would help me do it faster
 15:22 <jindraj> teto: sure it's possible. look here https://neomutt.org/guide/configuration.html#23-%C2%A0executing-functions
 15:36 <teto> jindraj: sorry if that sounds stupid but I dont get how to exec toggle-unread on just the marked items ? 
 15:46 <jindraj> either use toggle-new (but it switches it, so if you accidentaly tag unread message it will be marked as read).

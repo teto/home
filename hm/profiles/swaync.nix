@@ -7,25 +7,25 @@
 {
 
   services.swaync = {
-    # enable = true;
+    enable = true;
     # https://github.com/ErikReider/SwayNotificationCenter/blob/main/src/configSchema.json
     # see gist.github.com/JannisPetschenka/fb00eec3efea9c7fff8c38a01ce5d507
     settings = {
-      positionX = "right";
-      positionY = "top";
-      layer = "overlay";
-      control-center-layer = "top";
-      layer-shell = true;
-      cssPriority = "application";
-      control-center-margin-top = 0;
-      control-center-margin-bottom = 0;
-      control-center-margin-right = 0;
-      control-center-margin-left = 0;
-      notification-2fa-action = true;
-      notification-inline-replies = false;
-      notification-icon-size = 64;
-      notification-body-image-height = 100;
-      notification-body-image-width = 200;
+      # positionX = "right";
+      # positionY = "top";
+      # layer = "overlay";
+      # control-center-layer = "top";
+      # layer-shell = true;
+      # cssPriority = "application";
+      # control-center-margin-top = 0;
+      # control-center-margin-bottom = 0;
+      # control-center-margin-right = 0;
+      # control-center-margin-left = 0;
+      # notification-2fa-action = true;
+      # notification-inline-replies = false;
+      # notification-icon-size = 64;
+      # notification-body-image-height = 100;
+      # notification-body-image-width = 200;
       # widgets = [];
       # positionX": "right",
       # "positionY": "top",
@@ -85,12 +85,16 @@
 
   };
 
-  systemd.user.services.swaync.Service.Environment = [
+  # systemd.user.services.flameshot.Service
+  # lib.mkIf config.services.swaync.enable [
+  systemd.user.services.swaync.Service = {
+    Environment = [
     # helpful to debug but quite verbose
     # "G_MESSAGES_DEBUG=all"
-    "PATH=${
+    "PATH=$PATH:${
       lib.makeBinPath [
         "/run/current-system/sw"
+        "/etc/profiles/per-user/teto/bin"
         pkgs.wlogout
         pkgs.libnotify
         pkgs.swaylock
@@ -100,6 +104,7 @@
       ]
     }"
   ];
+  };
 
   xdg.configFile."swaync/config.json".enable = false;
 }

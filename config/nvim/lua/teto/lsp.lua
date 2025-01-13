@@ -2,24 +2,24 @@ local M = {}
 
 -- see https://git.sr.ht/~whynothugo/lsp_lines.nvim
 -- for additionnal config
-M.default_config = {
-    -- disabled because too big in haskell
-    virtual_lines = { only_current_line = true },
-    virtual_text = false,
-    {
-        severity = { min = vim.diagnostic.severity.WARN },
-    },
-    signs = true,
-    severity_sort = true,
-
-    -- TODO how to add borders ?
-    float = {
-        source = true,
-        severity_sort = true,
-        border = 'rounded',
-    },
-    update_in_insert = true,
-}
+-- M.default_config = {
+--     -- disabled because too big in haskell
+--     virtual_lines = { only_current_line = true },
+--     virtual_text = false,
+--     {
+--         severity = { min = vim.diagnostic.severity.WARN },
+--     },
+--     signs = true,
+--     severity_sort = true,
+--
+--     -- TODO how to add borders ?
+--     float = {
+--         source = true,
+--         severity_sort = true,
+--         border = 'rounded',
+--     },
+--     update_in_insert = true,
+-- }
 
 --
 -- lua vim.diagnostic.setqflist({open = tru, severity = { min = vim.diagnostic.severity.WARN } })
@@ -54,7 +54,7 @@ end
 -- toggle between virttext / lsp_lines / nothing
 M.set_lsp_lines = function(enable)
     -- local diagnostics_active = true
-    local conf = M.default_config
+    local conf = vim.diagnostic.config()
     conf.virtual_text = not enable
     if enable then
         conf.virtual_lines = { only_current_line = true }
@@ -93,6 +93,7 @@ M.set_level = function(severity)
     -- • optional: (optional) boolean, if true, `nil` is valid
 
     print('setting severity for buffer', bufnr)
+    -- lua vim.print(vim.diagnostic.get(0, { severity = { min = vim.diagnostic.severity.HINT }})
     vim.diagnostic.show(31, bufnr, diags, { signs = { severity = severity } })
 end
 

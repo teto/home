@@ -3,7 +3,6 @@
   pkgs,
   secrets,
   options,
-  flakeInputs,
   lib,
   ...
 }:

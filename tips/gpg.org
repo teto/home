@@ -1,5 +1,12 @@
 rofi-pass / passmenu/ pass
 
+* A TUI can help
+
+since there is no completion
+
+  nix shell nixpkgs#gpg-tui
+
+  is really helpful
 
 You can always use a key ID instead of a user ID. For example, for encrypting a message to my newer key:
 gpg --encrypt --recipient A4FF2279

@@ -7,7 +7,7 @@
 }:
 let
   welcomeMessage = ''
-    Welcome to the router, dear master.
+    Welcome to neotokyo, dear master.
 
     A few tips:
     - `journalctl -b0 -r` to see what's up lately

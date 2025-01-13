@@ -33,6 +33,7 @@ docker run -it myRegistry.net/jinko-platform/jinko-base:local bash
 docker system prune -af --volumes
 docker image prune -a
 docker rmi -f $(docker images -q)
+docker container prune
    @end
 
 One can use `-e "foo=bar"` to pass additionnal variables.

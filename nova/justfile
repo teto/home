@@ -1,22 +1,38 @@
 # use it with:
 # ln -sf $HOME/home/nova/justfile justfile.local
+
+# typecheck
 tc:
   nix run  .#typecheck
 
+# regenerate nix deps file 
 deps:
   nix run  .#mk_deps_file
 
+# run cws golden tests
+golden:
+  nix run  .#simwork.core-webservice.unit -- "Golden "
+
+# reset 
+golden-reset:
+  nix run  .#simwork.core-webservice.unit -- "Golden " --golden-reset
+
+# run core tests
 unit:
   nix run  .#simwork.core-webservice.unit
+
+# reset the openapi doc
+openapi-reset:
+  nix run  .#simwork.core-webservice.unit -- "openapi" --golden-reset
 
 golden-test:
   nix run  .#fastbuild.simwork.core-webservice.golden-test
 
 local:
-  nix run  .#fastbuild.simwork.core-webservice.local -- --bypass-manifest-check
+  nix run  .#fastbuild.simwork.core-webservice.local    -- --bypass-manifest-check --migrate-sql-tables
 
 platform:
-  nix run  .#fastbuild.simwork.core-webservice.platform
+  nix run  .#fastbuild.simwork.core-webservice.platform -- --bypass-manifest-check --migrate-sql-tables
 
 repl:
   # TODO:

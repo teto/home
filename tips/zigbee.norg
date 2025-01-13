@@ -1,0 +1,12 @@
+
+There are three sorts of Zigbee radios; Coordinator, Router and End Device.
+1. Coordinator is a hub or bridge, it's where the devices register.
+2. Routers are nodes in the mesh network. They can communicate back to the coordinator and also onwards to other nodes.
+3. End Devices can only talk to a parent device (a router or coordinator), they cannot relay data.
+
+LQI = Link Quality 
+
+on zigbee2mqtt UI, one can see what role a device plays.
+
+
+When a device joins, the coordinator exposes the network key.

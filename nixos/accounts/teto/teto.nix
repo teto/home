@@ -31,6 +31,7 @@
       "postgres"
       "rtkit" # for pipewire
       "wheel" # for sudo
+      "www" # for zola
       # config.users.groups.keys.name
     ];
     # once can set initialHashedPassword too

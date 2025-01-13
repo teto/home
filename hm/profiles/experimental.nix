@@ -1,9 +1,6 @@
-{
-  pkgs,
-  lib,
-  config,
-  secrets,
-  ...
+{ pkgs
+, flakeSelf
+, ...
 }:
 {
 
@@ -11,19 +8,33 @@
   #   mcfly.enable = true;
   # };
 
+  # programs.lapce.enable = true;
+  programs.mods = {
+    # disabled because zsh completion took too long
+    enable = false; 
+  };
+
+  # written by teto
+  programs.fzf.enableLiveRegex = true;
+
   programs.xdg.enable = true;
 
-  i18n.inputMethod.fcitx5.waylandFrontend = true;
+  home.packages = [
+
+    flakeSelf.inputs.lux.packages.${pkgs.system}.lux
+  ];
+
 
   # services.trayscale.enable = true;
 
-  programs.swappy.enable = false;
+  # programs.swappy.enable = false;
 
   # services.wl-clip-persist.enable = true;
 
   programs.vifm.enable = true;
 
-  # home.packages = with pkgs; [ ];
+  wayland.windowManager.wayfire.enable = false;
+  # programs.wayfire.enable = true;
 
   # programs.htop = {
   #   enabled = true;

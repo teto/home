@@ -27,35 +27,32 @@
       # flakeSelf.homeModules.bash
       ../../../../../hm/profiles/bash.nix
 
-      flakeSelf.homeModules.teto-bash
-      flakeSelf.homeModules.teto-desktop
-      flakeSelf.homeModules.fzf
+      flakeSelf.homeModules.ollama
+      flakeSelf.homeModules.experimental
+      # ../../../hm/profiles/experimental.nix
       # flakeSelf.homeModules.gnome-shell
 
       # ../../../../../hm/teto/common.nix
 
       # ../../../hm/profiles/common.nix
       ../../../../../hm/profiles/wezterm.nix
-      # ../../../hm/profiles/experimental.nix
 
       # Not tracked, so doesn't need to go in per-machine subdir
       # ../../../../../hm/profiles/fcitx.nix
       ../../../../../hm/profiles/vscode.nix
       # custom modules
       # ../../../../../hm/profiles/emacs.nix
-      ../../../../../hm/profiles/zsh.nix
       # ../../../../hm/profiles/weechat.nix
 
       ./calendars.nix
       ./sway.nix
 
-      ./programs/bash.nix
-      ./programs/git.nix
+      # ./programs/bash.nix
+      # ./programs/git.nix
       ./programs/helix.nix
       ./programs/neovim.nix
-      ./programs/ssh.nix
+      # ./programs/ssh.nix
       ./programs/yazi.nix
-      ./programs/khal.nix
       ./programs/waybar.nix
       ./programs/zsh.nix
 
@@ -65,14 +62,13 @@
       ./services/mpd.nix
       ./services/mpris.nix
       ./services/nextcloud-client.nix
-      flakeSelf.homeModules.yazi
     ]
     ++ lib.optionals withSecrets [
       ./sops.nix
       ./mail.nix
       ./ia.nix
-      flakeSelf.homeModules.nova
-      flakeSelf.homeModules.alot
+      # flakeSelf.homeModules.nova
+      flakeSelf.homeProfiles.alot
       # ../../../../../hm/profiles/japanese.nix
       ../../../../../hm/profiles/ia.nix
       # ../../../../../hm/profiles/nushell.nix
@@ -81,17 +77,8 @@
 
     ];
 
-  services.vdirsyncer = {
-    enable = true;
-  };
-
   # TODO use mkSymlinkOufOf  ? ?
   # xdg.configFile."zsh/zshrc.generated".source = ../../../config/zsh/zshrc;
-
-  programs.pazi = {
-    enable = false;
-    enableZshIntegration = true;
-  };
 
   programs.nh.enable = true;
 
@@ -105,14 +92,6 @@
     set history filename ${config.xdg.cacheHome}/gdb_history
   '';
 
-  home.language = {
-    # monetary =
-    # measurement =
-    # numeric =
-    # paper =
-    time = "fr_FR.utf8";
-  };
-
   i18n.glibcLocales = pkgs.glibcLocales.override {
     allLocales = true;
     # 229 fr_FR.UTF-8/UTF-8 \
@@ -124,14 +103,6 @@
     ];
   };
 
-  # works only because TIGRC_USER is set
-  # if file exists vim.tigrc
-  home.file."${config.xdg.configHome}/tig/config".text = ''
-    source ${pkgs.tig}/etc/vim.tigrc
-    # not provided
-    # source ${pkgs.tig}/tig/contrib/large-repo.tigrc
-    source ${config.xdg.configHome}/tig/custom.tigrc
-  '';
 
   # seulemt pour X
   # programs.feh.enable = true;

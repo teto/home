@@ -1,3 +1,12 @@
+# interesting one
+# merge.conflictstyle = zdiff3
+# rebase.autosquash = true
+# rebase.autostash = true 
+# commit.verbose = true
+# grep.patternType = perl
+# feature.experimental = true
+
+
 # vim: set noet fdm=manual fenc=utf-8 ff=unix sts=0 sw=4 ts=4 ft=conf :
 [absorb]
 	maxStack=50
@@ -9,10 +18,14 @@
 # 12:# The ignoreRevsFile can't be set globally due to blame failing if the file isn't present.
 # ignoreRevsFile = .git-blame-ignore-revs
 
+[column]
+	status = row
+
 [core]
 	# fsmonitor = "/nix/store/pqrqcfw2m27kwhrh7jyj05lp9b5pi0jd-rs-git-fsmonitor-0.1.3/bin/rs-git-fsmonitor"
 	sshCommand = "ssh"
     # pager = "ov -F"
+	excludesfile = ~/.config/git/gitignore
 
 # [pager]
 #     diff = "ov -F --section-delimiter '^diff' --section-header"
@@ -26,7 +39,12 @@ compression = 0
 # gitproxy  = git-proxy
 
 [push]
-  default = simple
+  default = simple # default
+  autoSetupRemote = true
+
+
+[fetch]
+pruneTags = false
 
 [status]
 # showuntrackedfiles = no
@@ -45,9 +63,13 @@ compression = 0
 [sendemail]
   chainreplyto = false
 
+[rerere]
+  enabled = true
+  autoupdate = true
+
 
 [help]
-autocorrect = 10
+	autocorrect = prompt
 
 # Github helpers
 [url "git://github.com/"]
@@ -58,13 +80,17 @@ autocorrect = 10
   # With write access
   insteadOf = wgh:
 
-[difftool]
-  prompt = false
+# [difftool]
+#   prompt = false
 
 [alias]
   cdiff = diff --word-diff=color
-  # interactive add ?
-  ia = !git add $(git ls-files --modified --others --exclude-standard | fzf -m)
+  # interactive add with fzf !
+  # TODO add colors ? show the command
+  ia = git add $(git ls-files --modified --others --exclude-standard | fzf -m)
+  id = !git diff $(git ls-files --modified --others --exclude-standard | fzf -m)
+  is = !git show $(git log --pretty=oneline | cut -c1-7 | fzf -m)
+
   ci=commit
   ca=commit --all
   cp=cherry-pick

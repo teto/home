@@ -1,34 +1,33 @@
 {
 	"pyls": {
-		"configurationSources": [
-		],
+		"configurationSources": [],
 		"plugins": {
-            "pyflakes": {
-                "enabled": false
-            },
-            "autopep8": {
-                "enabled": false
-            },
-            "pylint": {
-                "enabled": false
-            },
-            "mccabe_lint": {
-                "enabled": false
-            },
-            "pydocstyle": {
-                "enabled": false
-            },
-            "pycodestyle": {
-                "enabled": false
-            }
-        }
+			"pyflakes": {
+				"enabled": false
+			},
+			"autopep8": {
+				"enabled": false
+			},
+			"pylint": {
+				"enabled": false
+			},
+			"mccabe_lint": {
+				"enabled": false
+			},
+			"pydocstyle": {
+				"enabled": false
+			},
+			"pycodestyle": {
+				"enabled": false
+			}
+		}
 	},
 	"languageServerHaskell": {
-        "hlintOn": false,
-        "maxNumberOfProblems": 10,
-		"trace.server": "verbose",
+		"hlintOn":              false,
+		"maxNumberOfProblems":  10,
+		"trace.server":         "verbose",
 		"completionSnippetsOn": true
-    },
+	},
 	"initializationOptions": {
 		"cacheDirectory": "/tmp/cquery"
 	}

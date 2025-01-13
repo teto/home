@@ -4,7 +4,7 @@ treefmt-nix.lib.mkWrapper pkgs {
   projectRootFile = ".git/config";
 
   # TODO useofficial
-  programs.fourmolu.enable = true;
+  # programs.fourmolu.enable = true;
   programs.nixfmt = {
     enable = true;
     # package = myPkgs.nixfmt;
@@ -12,6 +12,16 @@ treefmt-nix.lib.mkWrapper pkgs {
   programs.stylua.enable = true;
   programs.just.enable = true;
   programs.shfmt.enable = true;
+
+  # supports jsonc I think
+  # programs.jsonfmt.enable = true;
+  # programs.hujsonfmt.enable = true;
+
+  # formatjson5 supports comments but it is too violent, it removes quotes around keys
+  # programs.formatjson5 = {
+  #   enable = true;
+  #   includes = [ "*.jsonc" ];
+  # };
 
   settings.global.excludes = [
     "*.org"

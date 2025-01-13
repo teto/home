@@ -16,6 +16,9 @@
 
 ARN= Amazon Resource Name
 
+* policies
+In AWS, managed policies (attached to roles, users, or groups) do not define who can assume the role or access the resources. Instead, they define what actions are allowed or denied. The Principal element is only used in trust policies or resource-based policies, not in attached policies.
+
 
 Excerpt
 You can attach an identity-based policy to a user group so that all of the users in the user group receive the policy's permissions. You cannot identify a user group as a Principal in a policy (such as a resource-based policy) because groups relate to permissions, not authentication, and principals are authenticated IAM entities. For more information about policy types, see Identity-based policies and resource-based policies.

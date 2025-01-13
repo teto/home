@@ -1,12 +1,11 @@
 {
- "$schema": "https://raw.githubusercontent.com/sumneko/vscode-lua/master/setting/schema.json",
- "hint.enable" : false,
- "workspace": {
-  "useGitIgnore": true,
-  "ignoreDir": [ 
-	"config/wireshark", 
-	"config/mpv"
-  ]
-
- }
+	"$schema":     "https://raw.githubusercontent.com/sumneko/vscode-lua/master/setting/schema.json",
+	"hint.enable": false,
+	"workspace": {
+		"useGitIgnore": true,
+		"ignoreDir": [
+			"config/wireshark",
+			"config/mpv"
+		]
+	}
 }

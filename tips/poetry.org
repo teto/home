@@ -33,10 +33,3 @@ to compare with `pipenv where`
 
 # poetry and nix
 mkPoetryEnv returns a withPackages()
-
-** install on ubuntu
- 
-   in the alot context 
-   apt install python3 curl libnotmuch-dev libgpgme-dev gcc
-   curl -sSL https://install.python-poetry.org | python3 -
-   export PATH="/root/.local/bin:$PATH"

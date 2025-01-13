@@ -1,19 +1,10 @@
 -- attach_to_untracked = true,
 local M = {}
+
 M.setup = function()
     require('gitsigns').setup({
         -- '│' passe mais '▎' non :s
         signs = {
-            add = { hl = 'GitSignsAdd', text = '▎', numhl = 'GitSignsAddNr', linehl = 'GitSignsAddLn' },
-            change = { hl = 'GitSignsChange', text = '▎', numhl = 'GitSignsChangeNr', linehl = 'GitSignsChangeLn' },
-            delete = { hl = 'GitSignsDelete', text = '▎', numhl = 'GitSignsDeleteNr', linehl = 'GitSignsDeleteLn' },
-            topdelete = { hl = 'GitSignsDelete', text = '▎', numhl = 'GitSignsDeleteNr', linehl = 'GitSignsDeleteLn' },
-            changedelete = {
-                hl = 'GitSignsChange',
-                text = '▎',
-                numhl = 'GitSignsChangeNr',
-                linehl = 'GitSignsChangeLn',
-            },
         },
         signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
         numhl = false, -- Toggle with `:Gitsigns toggle_numhl`
@@ -82,6 +73,11 @@ M.setup = function()
             internal = false,
         }, -- If luajit is present
     })
+  vim.api.nvim_set_hl(0, 'GitSignsDeleteLn', { link = 'GitSignsDeleteLn' })
+  vim.api.nvim_set_hl(0, 'GitSignsChangedeleteLn', { link = 'GitSignsChangeLn' })
+  vim.api.nvim_set_hl(0, 'GitSignsChangedelete', { link = 'GitSignsChange' })
+  vim.api.nvim_set_hl(0, 'GitSignsChangeLn', { link = 'GitSignsChangeLn' })
+  vim.api.nvim_set_hl(0, 'GitSignsAddNr', { link = 'GitSignsAddNr' })
 end
 
 M.setup()

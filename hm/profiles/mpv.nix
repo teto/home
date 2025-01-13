@@ -9,8 +9,9 @@
   # TODO use wrapper instead ?
   programs.mpv = {
 
-    # for now generate the config manually
-    enable = false;
+    includes = [
+      "manual.conf"
+    ];
 
     config = {
       profile = "gpu-hq";

@@ -1,5 +1,11 @@
 #+title: nix tips
 
+* how to require a proprietary file ?
+
+`requireFile`
+
+
+
 ** Contributing to nix itself
 
 autoreconfPhase
@@ -10,16 +16,31 @@ make tests/functional/flakes/show.sh.test
 
 the only way to avoid a redownload of the global registry is to pass --flake-registry ''
 
+
+* find why 
+
+nix why-depends --all /nix/var/nix/profiles/system /etc/profiles/per-user/teto/bin/luarocks 
+  #+BEGIN_SRC shell
+/nix/store/p1b9zgvb1s9vrhrfw18cqprpjjbdvdda-nixos-system-mcoudron-25.05.20250205.e2fe8f7
+└───/nix/store/m3z5vgybyfgmzmjgc1dmx6n8mfla3wdm-etc
+    ├───/nix/store/573mj57k7qfjpsyybd3f2685d4ysrj2d-user-environment
+    │   └───/nix/store/fmwbpr67w6vhsk9mxwx3h0bpnx8bk483-home-manager-path
+    └───/nix/store/9mnfciykxxlqc04prkj64k232y1kniir-system-units
+        ├───/nix/store/6h5lx52s276i85jxi0l2yrdb2s3my3bg-unit-home-manager-teto.service
+        │   └───/nix/store/pbzw290082a39wkid903bvxcv52ws4ic-home-manager-generation
+        │       ├───/nix/store/fmwbpr67w6vhsk9mxwx3h0bpnx8bk483-home-manager-path
+        │       └───/nix/store/9ggz564lxs9fy8pwysz74434fzl965cj-home-manager-files
+        │           └───/nix/store/prfcmraxpcjd6hbvmgya4amvb1hx45bg-hm_fontconfigconf.d10hmfon>
+        │               └───/nix/store/fmwbpr67w6vhsk9mxwx3h0bpnx8bk483-home-manager-path
+        └───/nix/store/i94xrzbjh9p7x6cz9ymkwrc4y45kz9rv-unit-greetd.service
+            └───/nix/store/i1h7xn0ppf2m5s2fhmwgp3a4xgg8mw76-greetd.toml
+                └───/nix/store/fmwbpr67w6vhsk9mxwx3h0bpnx8bk483-home-manager-path
+  #+END_SRC
+
 * how to package npm packages ?
 
   https://github.com/nix-community/dream2nix
-  https://github.com/nix-community/npmlock2nix
-  https://github.com/serokell/nix-npm-buildpackage
 
-
-  With nix-npm-build-package, if you hit:
-  "cache mode is 'only-if-cached' but no cached response available"
-  check https://github.com/serokell/nix-npm-buildpackage/issues/58
 
 * du --human-readable --total --summarize $(nix-store --query --requisites $(echo $store_paths)) > >(sort --human-numeric-sort)
 
@@ -155,3 +176,8 @@ nix path-info -Sh $(nix-build ./shell.nix -A inputDerivation)
  # nix shell 
  
  does not execute hooks !
+
+* nixpkgs-review
+
+Pass `--build-args "--option substituters https://cache.nixos.org/"` for extra config
+  --extra-nixpkgs-config '{ allowUnfree = false; }'

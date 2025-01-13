@@ -15,7 +15,7 @@ in
   programs.firefox = {
     profiles = {
       nova = lib.mkForce {
-        extensions = ffLib.commonExtensions;
+        extensions.packages = ffLib.commonExtensions;
         # isDefault = false;
         id = 1;
         path = "6bt2uwrj.nova";
@@ -23,6 +23,24 @@ in
         search = {
           force = true;
           engines = ffLib.searchEngines;
+        };
+        containersForce = true;
+        containers = {
+          "staging" = {
+            id = 1;
+            color = "green";
+            icon = "cart";
+          };
+          "preprod" = {
+            id = 2;
+            color = "orange";
+            icon = "fruit";
+          };
+          "prod" = {
+            id = 3;
+            color = "red";
+            icon = "fruit";
+          };
         };
 
       };

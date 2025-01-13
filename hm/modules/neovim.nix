@@ -21,27 +21,10 @@ let
       #   ;
     };
 
-  # completionPlugins = with pkgs.vimPlugins; [
-  #   # (luaPlugin { plugin = coq_nvim; })
-  #   (luaPlugin { plugin = cmp-rg; })
-  #   # (luaPlugin { plugin = cmp-zsh; })
-  #   # vim-vsnip
-  #   # vim-vsnip-integ
-  # ];
-  defaultCompletionPlugins = with pkgs.vimPlugins; [
-
-    # TODO I should be able to remove it as it's a dependency of the other modules
-    # but it doesn't seem to work yet for hm
-    (luaPlugin { plugin = nvim-cmp; })
-
-    (luaPlugin { plugin = cmp-nvim-lsp; })
-    (luaPlugin { plugin = cmp-nvim-lua; })
-    (luaPlugin { plugin = cmp_luasnip; })
-    # (luaPlugin { plugin = cmp-cmdline-history; })
-    # (luaPlugin { plugin = cmp-conventionalcommits; })
-    # (luaPlugin { plugin = cmp-digraphs; })
-    #   (luaPlugin { plugin = cmp-vsnip; })
-    # ({ plugin = vim-vsnip; })
+  blinkPlugins = [
+    pkgs.vimPlugins.blink-cmp # replace cmp-nvim
+    # flakeSelf.inputs.blink-cmp.packages.${pkgs.system}.blink-cmp
+    # pkgs.vimPlugins.blink-cmp-git # autocomplete github issues/PRs
   ];
 
   orgmodePlugins = with pkgs.vimPlugins; [
@@ -52,12 +35,12 @@ let
       plugin = orgmode;
       config = # lua
         ''
-          require('orgmode').setup{
-              org_capture_templates = {'~/nextcloud/org/*', '~/orgmode/**/*'},
-              org_default_notes_file = '~/orgmode/refile.org',
-              -- TODO add templates
-              org_agenda_templates = { t = { description = 'Task', template = '* TODO %?\n  %u' } },
-          }
+        require('orgmode').setup{
+            org_capture_templates = {'~/nextcloud/org/*', '~/orgmode/**/*'},
+            org_default_notes_file = '~/orgmode/refile.org',
+            -- TODO add templates
+            org_agenda_templates = { t = { description = 'Task', template = '* TODO %?\n  %u' } },
+        }
         '';
     })
   ];
@@ -105,30 +88,15 @@ let
     # })
   ];
 
-  autocompletionModule = types.submodule {
-    options = {
-      enable = mkEnableOption "autocompletion";
+  treesitterPlugins =  [
+    pkgs.vimPlugins.nvim-treesitter-pairs 
+    pkgs.vimPlugins.nvim-treesitter-textobjects
+    pkgs.vimPlugins.nvim-treesitter-parsers.nix
+    pkgs.vimPlugins.nvim-treesitter-parsers.json
 
-      plugins = mkOption {
-        # type = types.listOf types.package;
-        default = defaultCompletionPlugins;
-        # descriptcompletionPlugins = with pkgs.vimPlugins; [
-        # # (luaPlugin { plugin = coq_nvim; })
-        # (luaPlugin { plugin = nvim-cmp; })
-        # (luaPlugin { plugin = cmp-nvim-lsp; })
-        # # (luaPlugin { plugin = cmp-cmdline-history; })
-        # # (luaPlugin { plugin = cmp-conventionalcommits; })
-        # # (luaPlugin { plugin = cmp-digraphs; })
-        # (luaPlugin { plugin = cmp-rg; })
-        # (luaPlugin { plugin = cmp-vsnip; })
-        # ({ plugin = vim-vsnip; })
-        # # (luaPlugin { plugin = cmp-zsh; })
-        # # vim-vsnip
-        # # vim-vsnip-integ
-        # ]ion = "The plugins to use.";
-      };
-    };
-  };
+    # query is already provided by neovim
+    # pkgs.vimPlugins.nvim-treesitter-parsers.query
+  ];
 
   treesitterModule = types.submodule {
     options = {
@@ -136,7 +104,8 @@ let
 
       plugins = mkOption {
         # type = types.listOf types.package;
-        default = defaultCompletionPlugins;
+        default = treesitterPlugins;
+          # [];
       };
     };
   };
@@ -195,6 +164,34 @@ in
 {
   options = {
     programs.neovim = {
+      highlightOnYank = mkEnableOption "highlight on yank" // {
+        default = true;
+      };
+
+      enableMyDefaults = mkEnableOption "my favorite defaults";
+
+      enableBlink = mkEnableOption "blink-cmp autocompletion";
+
+      enableRocks = mkEnableOption "The awesome rocks-nvim plugin manager";
+
+      lsp = mkOption {
+        type = types.submodule {
+          options = {
+
+            mapOnAttach = mkEnableOption "Mappings on LspAttach";
+
+            # todo add
+          };
+        };
+
+        default = {
+          mapOnAttach = false;
+        };
+        description = "Various lsp configurations";
+      };
+
+      # enableYazi = mkEnableOption "The file manager yazi";
+
       orgmode = mkOption {
         type = orgmodeModule;
         default = {
@@ -211,13 +208,13 @@ in
         description = "Enable neorg support";
       };
 
-      autocompletion = mkOption {
-        type = autocompletionModule;
-        default = {
-          enable = false;
-        };
-        description = "Autocompletion configuration";
-      };
+      # autocompletion = mkOption {
+      #   type = autocompletionModule;
+      #   default = {
+      #     enable = false;
+      #   };
+      #   description = "Autocompletion configuration";
+      # };
 
       treesitter = mkOption {
         type = treesitterModule;
@@ -255,26 +252,88 @@ in
 
   config = lib.mkMerge [
     # TODO add orgmode-babel and emacs to neovim
+    (mkIf cfg.highlightOnYank {
+        programs.neovim.extraLuaConfig = ''
+        vim.api.nvim_create_autocmd('TextYankPost', {
+            callback = function()
+                -- TODO higroup should be its own ? a darker version of CursorLine
+                -- if it doesnt exist
+                vim.highlight.on_yank({ higroup = 'IncSearch', timeout = 1000 })
+            end,
+        })
+        '';
+    })
 
+    (mkIf cfg.enableMyDefaults {
+        programs.neovim.extraLuaConfig = ''
+        vim.opt.title = true -- vim will change terminal title
+        -- look at :h statusline to see the available 'items'
+        -- let &titlestring=" %t %{len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) } - NVIM"
+        vim.opt.titlestring = "%{getpid().':'.getcwd()}"
+        vim.opt.smoothscroll = true
+        vim.opt.termguicolors = true
+        vim.opt.cursorline = true -- highlight cursor line
+
+        vim.opt.mousemodel = 'popup_setpos'
+        '';
+    })
+
+    (mkIf cfg.enableBlink {
+      programs.neovim.plugins = blinkPlugins;
+    })
+
+    (mkIf cfg.enableRocks {
+      programs.neovim.plugins = [
+        pkgs.vimPlugins.rocks-nvim
+        pkgs.vimPlugins.rocks-config
+        pkgs.vimPlugins.rocks-git
+        pkgs.vimPlugins.rocks-dev
+      ];
+    })
     (mkIf cfg.orgmode.enable { programs.neovim.plugins = cfg.orgmode.plugins; })
 
     (mkIf cfg.neorg.enable { programs.neovim.plugins = cfg.neorg.plugins; })
 
+    (mkIf cfg.lsp.mapOnAttach {
+        programs.neovim.extraLuaConfig = /* lua */ ''
+        vim.api.nvim_create_autocmd('LspAttach', {
+            desc = 'Attach lsp_signature on new client',
+            callback = function(args)
+                -- print("Called matt's on_attach autocmd")
+                if not (args.data and args.data.client_id) then
+                    return
+                end
+                local client = vim.lsp.get_client_by_id(args.data.client_id)
+                local bufnr = args.buf
+
+                -- local on_attach = require('teto.on_attach')
+                vim.keymap.set('n', '[e', function()
+                    vim.diagnostic.goto_prev({ wrap = true, severity = vim.diagnostic.severity.ERROR })
+                end, { buffer = true })
+                vim.keymap.set('n', ']e', function()
+                    vim.diagnostic.goto_next({ wrap = true, severity = vim.diagnostic.severity.ERROR })
+                end, { buffer = true })
+
+            end
+            })
+            '';
+
+    })
+
     (mkIf cfg.treesitter.enable {
-      programs.neovim.extraLuaConfig = lib.mkBefore (
-        "--toto"
+      programs.neovim.plugins = treesitterPlugins;
+      # programs.neovim.extraLuaConfig = lib.mkBefore (
+        # "--toto"
         # lib.strings.concatStrings (
         #  lib.mapAttrsToList genBlockLua luaRcBlocks
         #  )
-      );
-
     })
 
-    (mkIf cfg.autocompletion.enable {
-      programs.neovim.plugins = cfg.autocompletion.plugins; # [ ];
-    })
+    # (mkIf cfg.autocompletion.enable {
+    #   programs.neovim.plugins = cfg.autocompletion.plugins; # [ ];
+    # })
 
-    (mkIf cfg.teal.enable { programs.neovim.plugins = cfg.teal.plugins; })
+    # (mkIf cfg.teal.enable { programs.neovim.plugins = cfg.teal.plugins; })
 
     (mkIf cfg.fennel.enable { programs.neovim.plugins = cfg.fennel.plugins; })
 

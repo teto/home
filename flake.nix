@@ -28,27 +28,27 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    blink-cmp = {
+      url = "github:Saghen/blink.cmp";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     deploy-rs = {
       url = "github:serokell/deploy-rs";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    firefox2nix.url = "git+https://git.sr.ht/~rycee/mozilla-addons-to-nix";
-    haumea = {
-      url = "github:nix-community/haumea";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    flake-schemas.url = "github:DeterminateSystems/flake-schemas";
 
-    rocks-nvim = {
-      url = "github:nvim-neorocks/rocks.nvim";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    firefox2nix.url = "git+https://git.sr.ht/~rycee/mozilla-addons-to-nix";
 
     flake-utils.url = "github:numtide/flake-utils";
+
     fzf-git-sh = {
       url = "github:junegunn/fzf-git.sh";
       flake = false;
     };
+    
     fenix = {
       # used for nightly rust devtools
       # for git-repo-manager du coup
@@ -56,16 +56,27 @@
       inputs."nixpkgs".follows = "nixpkgs";
     };
 
-    # peerix.url = "github:cid-chan/peerix";
-    # mptcp-flake.url = "github:teto/mptcp-flake/fix-flake";
-    mujmap = {
-      url = "github:elizagamedev/mujmap";
-      # inputs.nixpkgs.follows = "nixpkgs"; # breaks build
+    git-repo-manager = {
+      url = "github:hakoerber/git-repo-manager";
+    };
+
+    haumea = {
+      url = "github:nix-community/haumea";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     hm = {
       url = "github:teto/home-manager/scratch";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    lux.url = "github:nvim-neorocks/lux";
+
+    # peerix.url = "github:cid-chan/peerix";
+    # mptcp-flake.url = "github:teto/mptcp-flake/fix-flake";
+    mujmap = {
+      url = "github:elizagamedev/mujmap";
+      # inputs.nixpkgs.follows = "nixpkgs"; # breaks build
     };
 
     meli = {
@@ -76,10 +87,18 @@
     };
 
     # poetry.url = "github:nix-community/poetry2nix";
-    neovim = {
+    neovim-nightly-overlay = {
       url = "github:nix-community/neovim-nightly-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.neovim-src.follows = "neovim-src";
     };
+
+    neovim-src = {
+      url = "github:neovim/neovim";
+      # url = "github:teto/neovim?ref=teto/add-zsh-completion";
+      flake = false;
+    };
+
     # TODO extend vim plugins from this overlay
     # neovim-overlay.url = "github:teto/neovim-nightly-overlay/vimPlugins-overlay";
     # tree-sitter = {
@@ -102,23 +121,35 @@
       url = "github:teto/nix?ref=teto/remove-assert-outputsSubstitutionTried";
     };
 
-    nixos-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixos-stable.url = "github:nixos/nixpkgs/nixos-24.05";
-    nixpkgs-for-hls.url = "github:nixos/nixpkgs?rev=612f97239e2cc474c13c9dafa0df378058c5ad8d";
+    nix-schemas.url = "github:DeterminateSystems/nix-src/flake-schemas";
 
-    nix-search-cli = {
-      url = "github:peterldowns/nix-search-cli";
+    rocks-nvim = {
+      url = "/home/teto/rocks.nvim";
+      # url = "github:nvim-neorocks/rocks.nvim";
       # inputs.nixpkgs.follows = "nixpkgs";
     };
+
+
+    nixos-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixos-stable.url = "github:nixos/nixpkgs/nixos-24.11";
+    # nixpkgs-for-hls.url = "github:nixos/nixpkgs?rev=612f97239e2cc474c13c9dafa0df378058c5ad8d";
+
+    # nix-search-cli = {
+    #   url = "github:peterldowns/nix-search-cli";
+    #   # inputs.nixpkgs.follows = "nixpkgs";
+    # };
+
     nix-update = {
       url = "github:Mic92/nix-update";
     };
-    nix-index-cache.url = "github:Mic92/nix-index-database";
+
+    # nix-index-cache.url = "github:Mic92/nix-index-database";
 
     nix-index-database = {
       url = "github:nix-community/nix-index-database";
       # inputs.nixpkgs.follows = "nixpkgs";
     };
+
     # c8296214151883ce27036be74d22d04953418cf4
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     # nixpkgs-wayland.url = "github:nix-community/nixpkgs-wayland";
@@ -127,10 +158,13 @@
 
     # TODO this should not be necessary anymore ? just look at doctor ?
     nova-doctor = {
-      url = "git+ssh://git@git.novadiscovery.net/sys/doctor?ref=dev";
+      # url = "git+ssh://git@git.novadiscovery.net/sys/doctor?ref=dev";
+      url = "git+ssh://git@git.novadiscovery.net/sys/doctor?ref=matt/scratch";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "hm";
+      # inputs.user-profile.follows = "hm";
     };
+
     #  c'est relou, faudrait le merger avec le precedent !
     # nova-doctor-nixos = {
     #   url = "git+ssh://git@git.novadiscovery.net/sys/doctor?dir=nixos";
@@ -138,6 +172,11 @@
     # };
     nova-ci = {
       url = "git+ssh://git@git.novadiscovery.net/infra/ci-runner";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    jinko-seeder = {
+      url = "git+ssh://git@git.novadiscovery.net/jinko/dorayaki/jinko-seeder";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -159,6 +198,11 @@
 
     rippkgs.url = "github:replit/rippkgs";
     # rippkgs.inputs.nixpkgs.follows = "nixpkgs";
+    
+    rest-nvim = {
+      url = "github:teto/rest.nvim?ref=matt/nix-expo";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # rofi-hoogle.url = "github:teto/rofi-hoogle/fixup";
     rofi-hoogle = {
@@ -176,7 +220,9 @@
     #   flake = false;
     # };
 
-    treefmt-nix.url = "github:numtide/treefmt-nix";
+    # treefmt-nix.url = "github:numtide/treefmt-nix";
+    treefmt-nix.url = "github:teto/treefmt-nix?ref=teto/add-hujsonfmt";
+
     # doesnt have a nixpkgs input
     vocage.url = "git+https://git.sr.ht/~teto/vocage?ref=flake";
 
@@ -185,9 +231,9 @@
       # inputs.nixpkgs.follows = "nixpkgs";
     };
     yazi = {
-      # url = "github:sxyazi/yazi?ref=v0.1.5";
       url = "github:sxyazi/yazi";
-      # inputs.nixpkgs.follows = "nixpkgs";
+      # url = "github:sxyazi/yazi?rev=00e8adc3decc370a7e14caaeae3676361549fceb";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
@@ -220,6 +266,13 @@
         # hashedPassword = secrets.users.teto.hashedPassword;
         password = "$6$UcKAXNGR1brGF9S4$Xk.U9oCTMCnEnN5FoLni1BwxcfwkmVeyddzdyyHAR/EVXOGEDbzm/bTV4F6mWJxYa.Im85rHQsU8I3FhsHJie1";
         # email = "matthieu.coudron@novadiscovery.com";
+
+        has_sudo = true;
+        collections = [
+          "matthieu.coudron/fortunes"
+          "nova/nix-ld" # for monolix
+          "nova/virtualbox"
+        ];
       };
 
       secrets = import ./nixpkgs/secrets.nix {
@@ -248,20 +301,18 @@
           pkgs = myPkgs;
           modules = [
             self.inputs.sops-nix.nixosModules.sops
-            self.nixosModules.default-hm
             hm.nixosModules.home-manager
-            # { ... }:
-            #   home-manager.extraSpecialArgs = {
-            # inherit secrets withSecrets;
-
           ] ++ modules;
+
           specialArgs = {
             inherit hostname;
             inherit secrets;
             withSecrets = true;
             flakeSelf = self;
-            flakeInputs = self.inputs;
+            # flakeInputs = self.inputs;
+            # TODO check how to remove one
             userConfig = novaUserProfile;
+            inherit novaUserProfile;
 
             inherit dotfilesPath secretsFolder;
           };
@@ -311,6 +362,7 @@
               else
                 builtins.elem pkgName [
                   "Oracle_VM_VirtualBox_Extension_Pack"
+                  "Oracle_VirtualBox_Extension_Pack"
                   "codeium"
 
                   # cuda stuff, mostly for local-ai
@@ -356,6 +408,26 @@
 
       myPkgs = pkgImport self.inputs.nixpkgs;
       unstablePkgs = pkgImport self.inputs.nixos-unstable;
+      stablePkgs = pkgImport self.inputs.nixos-stable;
+
+      genKey = str: nixpkgs.lib.replaceStrings [ ".nix" ] [ "" ] (
+          builtins.baseNameOf (toString str)
+        );
+
+      # converts the name via genKey
+      importDir = folder: 
+        let 
+          listOfModules = nixpkgs.lib.filter 
+              # and != default.nix ?
+              (n: nixpkgs.lib.strings.hasSuffix ".nix" n)
+              (nixpkgs.lib.filesystem.listFilesRecursive folder);
+        in 
+
+        nixpkgs.lib.listToAttrs (
+
+          nixpkgs.lib.map (x: nixpkgs.lib.nameValuePair (genKey x) x) listOfModules )
+        ;
+
 
       hm-common =
         {
@@ -382,21 +454,24 @@
             # self.homeModules.services-swaync
 
             # And add the home-manager module
-            ./hm/profiles/common.nix
+            ./hm/modules/xdg.nix # does nothing
+            # ./hm/modules/firefox.nix
 
             # TODO it should autoload those
             self.homeModules.meli
 
-            self.homeModules.neovim
-            ./hm/modules/bash.nix
-            ./hm/modules/zsh.nix
-            ./hm/modules/xdg.nix
-            # ./hm/modules/firefox.nix
+            self.homeModules.bash
+            self.homeModules.kitty
+            self.homeProfiles.common
+            self.homeModules.zsh
             self.homeModules.fzf
 
-            self.homeModules.package-sets
+            self.homeModules.fre
+            self.homeModules.mod-cliphist
+            self.homeModules.fzf
             self.homeModules.neovim
             self.homeModules.neovim-module
+            self.homeModules.package-sets
             (
               { ... }:
               {
@@ -427,7 +502,6 @@
 
             teto = {
               imports = [
-                self.homeModules.services-mujmap
               ];
             };
           };
@@ -474,7 +548,7 @@
             export RESTIC_PASSWORD_FILE=
             source config/bash/aliases.sh
             echo "Run just ..."
-          '';
+            '';
         };
 
         # debug =
@@ -482,8 +556,8 @@
         #   name = "dotfiles-shell";
 
         inherit (unstablePkgs)
-          nhs92
-          nhs94
+          # nhs92
+          # nhs94
           nhs96
           nhs98
           nhs910
@@ -491,6 +565,21 @@
           ;
 
       };
+
+# Downloads/linux_monolixSuite2024R1/monolixSuite-pkg-output 
+# ➜ nix-shell -p steam-run --run "steam-run ./monolixSuite2024R1"
+      monolix = unstablePkgs.buildFHSEnv {
+        name = "monolix";
+        # this should be somewhat synced with what exists in nix-ld ?
+        targetPkgs = [
+          unstablePkgs.xorg.xcbutilwm.out # for libxcb-icccm.so.4
+          unstablePkgs.fontconfig.lib # for libfontconfig.so.1
+
+        ];
+        # inherit targetPkgs;
+        runScript = "ldd";
+      };
+
 
       poetry = unstablePkgs.buildFHSEnv {
         name = "poetry";
@@ -500,7 +589,9 @@
 
       #
 
-      packages = (autoCalledPackages myPkgs { }) // {
+      packages = 
+      self.inputs.neovim-nightly-overlay.packages.${system}
+        // (autoCalledPackages myPkgs { }) // {
         /*
           my own nvim with
           I need to get the finalPackage generated by home-manager for my desktop
@@ -530,8 +621,8 @@
         # ]);
 
         inherit (unstablePkgs)
-          nhs92
-          nhs94
+          # nhs92
+          # nhs94
           nhs96
           nhs98
           ;
@@ -539,25 +630,11 @@
       };
     })
     // (
-      let
-        getNixFilesInDir =
-          # listFilesRecursive
-          dir:
-          builtins.filter (file: nixpkgs.lib.hasSuffix ".nix" file && file != "default.nix") (
-            builtins.attrNames (builtins.readDir dir)
-          );
-        genKey = str: nixpkgs.lib.replaceStrings [ ".nix" ] [ "" ] str;
-        genValue =
-          dir: str:
-          { config, ... }:
-          {
-            imports = [ "/${dir}/${str}" ];
-          };
-        moduleFrom = dir: str: { "${genKey str}" = genValue dir str; };
-        modulesFromDir = dir: builtins.foldl' (x: y: x // (moduleFrom dir y)) { } (getNixFilesInDir dir);
-
-      in
       {
+        # Tell Nix what schemas to use.
+        schemas = self.inputs.flake-schemas.schemas 
+          # // other-schemas.schemas
+        ;
 
         nixosConfigurations = rec {
           # TODO generate those from the hosts folder ?
@@ -591,7 +668,7 @@
           # see https://determinate.systems/posts/extending-nixos-configurations
           mcoudron = laptop.extendModules {
             modules = [
-              self.nixosModules.novaModule
+              self.nixosModules.nova
             ];
 
             # TODO retain existing specialArgs and inject mine ?!
@@ -601,17 +678,15 @@
               inherit dotfilesPath;
 
               withSecrets = true;
-              # flakeInputs = self.inputs;
               userConfig = novaUserProfile;
               doctor = self.inputs.nova-doctor;
-              # self = self.inputs.nova-doctor;
             };
 
           };
 
           neotokyo = mkNixosSystem {
             modules = [
-              ./hosts/neotokyo/config.nix
+              ./hosts/neotokyo/default.nix
             ];
             hostname = "neotokyo";
             withSecrets = true;
@@ -636,7 +711,7 @@
             };
 
             modules = [
-              self.nixosModules.novaModule
+              self.nixosModules.nova
             ];
           });
 
@@ -654,42 +729,51 @@
         # homeConfigurations = { };
 
         # TODO scan hm/{modules, profiles} folder
-        homeModules = {
-
+        homeProfiles = {
           alot = ./hm/profiles/alot.nix;
-          developer = ./hm/profiles/dev.nix;
+          common = ./hm/profiles/common.nix;
           fzf = ./hm/profiles/fzf.nix;
+        };
+
+        homeModules = 
+          (importDir  ./hm/modules) //
+          {
+
+          bash = ./hm/modules/bash.nix;
+          developer = ./hm/profiles/dev.nix;
+          # for stuff not in home-manager yet
+          experimental = ./hm/profiles/experimental.nix; #  { flakeSelf = self; };
+          fre = ./hm/modules/fre.nix;
+          gnome-shell = ./hm/profiles/gnome.nix;
+
+          meli = ./hm/modules/programs/meli.nix;
+          mod-cliphist = ./hm/modules/cliphist.nix;
+          fzf = ./hm/modules/fzf.nix;
+          kitty = ./hm/modules/kitty.nix;
+          mpv = ./hm/profiles/mpv.nix;
+
+          # neovim-full = hosts/desktop/home-manager/users/teto/programs/neovim.nix;
+          # neomutt = ./hm/profiles/neomutt.nix;
+          neovim = ./hm/profiles/neovim.nix;
+          neovim-module = ./hm/modules/neovim.nix;
+          nova = ./hm/profiles/nova.nix;
+
+          ollama = hosts/desktop/home-manager/users/teto/services/ollama.nix;
+
+          package-sets = ./hm/modules/package-sets.nix;
+          # (modulesFromDir ./hm/modules)
 
           # bash = ./hm/profiles/bash.nix;
           services-mujmap = ./hm/services/mujmap.nix;
           # services-swaync = ./hm/services/swaync.nix;
           sway = ./hm/profiles/sway.nix;
-
-          #
-          meli = ./hm/modules/programs/meli.nix;
-          neovim-full = hosts/desktop/home-manager/users/teto/programs/neovim.nix;
-          nova = ./hm/profiles/nova.nix;
-          neomutt = ./hm/profiles/neomutt.nix;
-
-          # for stuff not in home-manager yet
-          # experimental = ../../../hm/profiles/experimental.nix;
-
-          gnome-shell = ./hm/profiles/gnome.nix;
-          package-sets = ./hm/modules/package-sets.nix;
-          # (modulesFromDir ./hm/modules)
-
-          neovim = ./hm/profiles/neovim.nix;
-          neovim-module = ./hm/modules/neovim.nix;
+          sway-notification-center = ./hm/profiles/swaync.nix;
 
           teto-desktop = ./hm/profiles/desktop.nix;
           # hosts/desktop/home-manager/users/teto/default.nix;
 
           # needs zsh-extra ?
-          teto-zsh =  
-             ./hm/profiles/zsh.nix;
-
-          zsh-extra = ./hm/modules/zsh.nix;
-          bash-extra = ./hm/modules/bash.nix;
+          teto-zsh = ./hm/profiles/zsh.nix;
 
           teto-nogui = (
             {
@@ -703,39 +787,45 @@
 
               imports = [
                 # And add the home-manager module
-                ./hm/profiles/common.nix
+                self.homeProfiles.common
                 ./hm/modules/xdg.nix
                 self.homeModules.neovim
                 self.homeModules.neovim-module
-                self.homeModules.bash-extra
-                self.homeModules.zsh-extra
+                self.homeModules.bash
+                self.homeModules.zsh
               ];
             }
           );
 
+          # provided by nova-nix config
+          vscode = ./hm/profiles/vscode.nix;
+
           waybar = ./hm/profiles/waybar.nix;
           xdg = ./hm/profiles/xdg.nix;
           yazi = ./hm/profiles/yazi.nix;
+          zsh = ./hm/modules/zsh.nix;
         };
 
-        nixosModules =
-          # broken
-          # (modulesFromDir ./nixos/modules) //
-          {
+        nixosModules = (importDir  ./nixos/modules)
+          // {
 
             default-hm = hm-common;
+            gnome = ./nixos/profiles/gnome.nix;
             teto-nogui = nixos/accounts/teto/teto.nix;
-            nextcloud = nixos/modules/nextcloud.nix;
-            #             nixos/profiles/nova.nix
-            novaModule = nixos/modules/novaModule.nix;
+            nova = nixos/profiles/nova.nix;
             neovim = nixos/profiles/neovim.nix;
             nix-daemon = nixos/profiles/nix-daemon.nix;
+            nix-ld = nixos/profiles/nix-ld.nix;
             ntp = nixos/profiles/ntp.nix;
-            nvd = nixos/modules/nvd.nix;
-            desktop = nixos/profiles/desktop.nix;
+
             universal = hosts/config-all.nix;
+            desktop = nixos/profiles/desktop.nix;
+            server = nixos/profiles/server.nix;
             steam = nixos/profiles/steam.nix;
-            sudo = nixos/modules/sudo.nix;
+
+            # sudo = nixos/modules/sudo.nix;
+            # nextcloud = nixos/modules/nextcloud.nix;
+            # nvd = nixos/modules/nvd.nix;
           };
 
         templates = {

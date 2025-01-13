@@ -17,10 +17,13 @@ https://unix.stackexchange.com/questions/74184/how-to-save-current-command-on-zs
 
 push-line mapping
 
+* debug zsh 
+  zsh -lxv to debug
+
 * bypass local config
+
   zsh -f <=> --no-rcs => disable local config
   -d disables global config
-  zsh -lxv to debug
 
 * test
 

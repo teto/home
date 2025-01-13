@@ -66,6 +66,7 @@ in
         CI_REGISTRY_IMAGE = "https://registry.novadiscovery.net";
         HUSKY = 0; # To disable HUSKY
         # wayland variables
+        CDPATH = "$CDPATH:$HOME/nova";
       }
       // remoteBuilders;
 

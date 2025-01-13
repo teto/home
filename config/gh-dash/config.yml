@@ -1,5 +1,5 @@
 prSections:
-  - title: My Pull Requests
+  - title: My PRs
     filters: is:open author:@me
   - title: Needs My Review
     filters: is:open review-requested:@me
@@ -14,8 +14,24 @@ issuesSections:
   - title: Subscribed
     filters: is:open -author:@me repo:microsoft/vscode repo:dlvhdr/gh-dash
 defaults:
+  layout:
+    prs:
+      repo:
+        grow: true,
+        width: 10
+        hidden: false
   prsLimit: 20 # global limit
   issuesLimit: 20 # global limit
   preview:
     open: true
     width: 60
+  refetchIntervalMinutes: 30 # will re-fetch all sections every 30 minutes
+repoPaths: # configure where to locate repos when checking out PRs
+  :owner/:repo: ~/:repo # template if you always clone GitHub repos in a consistent location
+  # dlvhdr/*: ~/code/repos/dlvhdr/* # will match dlvhdr/repo-name to ~/code/repos/dlvhdr/repo-name
+  # dlvhdr/gh-dash: ~/code/gh-dash # will not match wildcard and map to specified path
+# keybindings: # optional, define custom keybindings - see more info below
+# theme: # optional, see more info below
+# pager:
+#   diff: less # or delta for example
+# confirmQuit: false # show prompt on quit or not

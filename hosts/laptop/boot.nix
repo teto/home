@@ -1,7 +1,12 @@
 { pkgs, ... }:
 {
 
-  kernelPackages = pkgs.linuxPackages_latest;
+  plymouth.theme = "spinner";
+  plymouth.enable = false; # I cant get to login with plymouth ?
+  # todo rename data to assets ?
+  # plymouth.logo = ../../data/boot-plymouth-logo.png;
+
+  kernelPackages = pkgs.linuxPackages_6_11;
 
   # it apparently still is quite an important thing to have
   devSize = "5g";
@@ -10,6 +15,8 @@
   tmp.tmpfsSize = "5Gb";
 
   kernelParams = [
+    "plymouth.use-simpledrm" # kesako ?
+
     # "acpi_backlight=legacy"
     # "acpi_osi=linux"
 

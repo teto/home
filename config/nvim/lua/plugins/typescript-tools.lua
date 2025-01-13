@@ -17,7 +17,7 @@ require('typescript-tools').setup({
         -- "remove_unused_imports"|"organize_imports") -- or string "all"
         -- to include all supported code actions
         -- specify commands exposed as code_actions
-        expose_as_code_action = {},
+        -- expose_as_code_action = {},
         -- string|nil - specify a custom path to `tsserver.js` file, if this is nil or file under path
         -- not exists then standard path resolution strategy is applied
         -- tsserver_path = nil,

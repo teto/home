@@ -1,0 +1,29 @@
+{
+  "name": "friendly-snippets",
+  "engines": {
+    "vscode": "^1.11.0"
+  },
+  "contributes": {
+    "snippets": [
+      {
+        "language": [
+          "plaintext",
+          "markdown",
+          "tex",
+          "html",
+          "global",
+          "all"
+        ],
+        "path": "./snippets/global.json"
+      },
+      {
+        "language": "nix",
+        "path": "../snippets/nix.jsonc"
+      },
+      {
+        "language": "desktop",
+        "path": "./desktop.jsonc"
+      }
+    ]
+  }
+}

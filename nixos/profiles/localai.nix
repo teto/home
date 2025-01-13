@@ -6,7 +6,6 @@
   ...
 }:
 {
-  #
   imports = [ "${modulesPath}/../../pkgs/by-name/lo/local-ai/module.nix" ];
 
   services.local-ai = {
@@ -17,11 +16,4 @@
 
   };
 
-  # testing with localai instead
-  services.ollama = {
-    enable = false;
-  };
-
-  # models-path
-  # models
 }

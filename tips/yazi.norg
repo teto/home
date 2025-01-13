@@ -1,7 +1,19 @@
 ~/.local/state/yazi/yazi.log
 
+https://yazi-rs.github.io/docs/plugins/overview#logging
+
+log level 
+
 yazi debug
 
+* list of plugins at https://github.com/yazi-rs/plugins/tree/main/git.yazi
+
+To install for instance:
+
+```
+ya pack -a yazi-rs/plugins:git
+ya pack -a yazi-rs/plugins:smart-enter
+```
 
 * How to list tasks ?
 

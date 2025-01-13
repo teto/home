@@ -1,5 +1,14 @@
 { pkgs }:
 {
+  commonPolicies = {
+
+    AutofillAddressEnabled = false;
+    AutofillCreditCardEnabled = false;
+    DisableFirefoxStudies = true;
+
+    DisableTelemetry = true;
+    DisplayMenuBar = "default-off";
+  };
   searchEngines = {
     "Nix Packages" = {
       urls = [

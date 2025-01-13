@@ -32,10 +32,12 @@ in
   # replaced with  package-sets.wayland
   package-sets.waylandPackages = true;
 
-  # home.packages = with pkgs; [
-  #   # waybar
-  #   # eventually ironbar
-  # ];
+  home.packages = [
+    # waybar
+    # eventually ironbar
+
+    pkgs.sway-scratchpad
+  ];
 
   ### swayr configuration {{{
   programs.swayr = {
@@ -68,6 +70,7 @@ in
     # https://github.com/nix-community/home-manager/pull/4039
     # https://github.com/NixOS/nixpkgs/pull/237044
 
+    # be careful as this can override default options 
     # package = pkgs.swayfx;
     # package = pkgs.sway-unwrapped;
 
@@ -255,9 +258,13 @@ in
           ''exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 70 --height 60 --mark neorg-notes --command 'kitty nvim +Notes'  '';
         "${mod}+F2" =
           ''exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 70 --height 60 --mark audio --command 'kitty ${config.programs.ncmpcpp.package}/bin/ncmpcpp' '';
-        # "${mod}+F3" = ''exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 70 --height 60 --mark scratchpad --command 'kitty nvim' '';
         "${mod}+F3" =
-          ''exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 90 --height 90 --mark scratchpad --command 'kitty nvim' '';
+          ''exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 60 --height 50 --mark gp_nvim --command "kitty nvim -c GpChatToggle" '';
+
+        # TODO implement Travis/Pasting Voice recognized text
+        # "${mod}+F4" =
+        #   ''exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 60 --height 50 --mark gp_nvim --command "kitty nvim -c 'GpChat' " '';
+        #
 
         "--release Print" = "exec ${pkgs.sway-contrib.grimshot}/bin/grimshot copy area";
         # bindsym F12 exec sway-scratchpad --command "kitty -d /home/user/projects" --mark terminal
@@ -275,7 +282,11 @@ in
         # { command = "env RUST_BACKTRACE=1 RUST_LOG=swayr=debug swayrd > /tmp/swayrd.log 2>&1"; }
         { command = "env RUST_BACKTRACE=1 swaycons"; }
 
-      ];
+      ] ++ lib.optional config.services.cliphist.enable (
+
+        { command = "wl-paste --watch cliphist store"; }
+
+        );
     };
 
     extraConfigEarly = sharedConfig.sharedExtraConfig;
@@ -295,6 +306,7 @@ in
       "--verbose"
       "--debug"
     ];
+
     # eventually start foot --server
     # TODO we should wrap sway with that ?
     # some of these advised by https://github.com/flameshot-org/flameshot/blob/master/docs/Sway%20and%20wlroots%20support.md

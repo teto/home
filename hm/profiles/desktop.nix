@@ -2,12 +2,12 @@
   config,
   flakeInputs,
   pkgs,
-  # lib,
+  lib
   # system,
-  withSecrets,
-  dotfilesPath,
-  secretsFolder,
-  ...
+, withSecrets
+, dotfilesPath
+# , secretsFolder
+, ...
 }:
 let
 
@@ -109,7 +109,7 @@ in
     ]);
 
   # TODO remove ? dangerous
-  home.sessionPath = [
+  home.sessionPath = lib.mkBefore [
     "$XDG_DATA_HOME/../bin"
     "${dotfilesPath}/bin"
   ];

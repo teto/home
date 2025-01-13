@@ -2,7 +2,6 @@
   config,
   lib,
   pkgs,
-  flakeInputs,
   flakeSelf,
   ...
 }:
@@ -10,17 +9,21 @@ let
 
   autoloadedModule =
     { pkgs, ... }@args:
-    flakeInputs.haumea.lib.load {
-      src = flakeInputs.nix-filter {
+    flakeSelf.inputs.haumea.lib.load {
+      src = flakeSelf.inputs.nix-filter {
         root = ./desktop;
+        # exclude = [
+        #     "home-manager/users/teto/services/mbsync.nix"
+        # ];
       };
 
+
       inputs = args // {
-        inputs = flakeInputs;
+        inputs = flakeSelf.inputs;
       };
       transformer = [
-        flakeInputs.haumea.lib.transformers.liftDefault
-        (flakeInputs.haumea.lib.transformers.hoistLists "_imports" "imports")
+        flakeSelf.inputs.haumea.lib.transformers.liftDefault
+        (flakeSelf.inputs.haumea.lib.transformers.hoistLists "_imports" "imports")
       ];
     };
 in
@@ -28,10 +31,14 @@ in
 
   imports = [
     autoloadedModule
-    flakeInputs.nix-index-database.nixosModules.nix-index
+
+    flakeSelf.nixosModules.default-hm
+
+    flakeSelf.inputs.nix-index-database.nixosModules.nix-index
     flakeSelf.nixosModules.nvd
     flakeSelf.nixosModules.universal
     flakeSelf.nixosModules.neovim
+
 
     ../../nixos/profiles/ntp.nix
     ../../nixos/modules/network-manager.nix
@@ -160,7 +167,10 @@ in
 
     # This priority propagates to build processes. 0 is the default Unix process I/O priority, 7 is the lowest
     # daemonIONiceLevel = 3;
-    nixPath = [ "nixpkgs=flake:/home/teto/nixpkgs" ];
+    # prepending with 'flake:' makes HM copy a lot more thna just 'path:'
+    nixPath = [ 
+      "nixpkgs=/home/teto/nixpkgs"
+    ];
 
     # either use --option extra-binary-caches http://hydra.nixos.org/
     # handy to hack/fix around

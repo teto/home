@@ -1,18 +1,18 @@
-{
-  config,
-  flakeInputs,
-  flakeSelf,
-  modulesPath,
-  withSecrets,
-  lib,
+{ config,
+  flakeSelf
+  # modulesPath,
+, withSecrets
+, lib,
   pkgs,
   ...
 }:
 let
+  haumea = flakeSelf.inputs.haumea;
+
   autoloadedModule =
     { pkgs, ... }@args:
-    flakeInputs.haumea.lib.load {
-      src = flakeInputs.nix-filter {
+    haumea.lib.load {
+      src = flakeSelf.inputs.nix-filter {
         root = ./.;
         exclude = [
           "teto"
@@ -23,11 +23,11 @@ let
       };
 
       inputs = args // {
-        inputs = flakeInputs;
+        # inputs = flakeInputs;
       };
       transformer = [
-        flakeInputs.haumea.lib.transformers.liftDefault
-        (flakeInputs.haumea.lib.transformers.hoistLists "_imports" "imports")
+        haumea.lib.transformers.liftDefault
+        (haumea.lib.transformers.hoistLists "_imports" "imports")
       ];
     };
 
@@ -42,7 +42,7 @@ in
       # todo renommer en workstation
 
       ../../nixos/profiles/docker-daemon.nix
-      flakeSelf.nixosModules.novaModule
+      flakeSelf.nixosModules.nova
       flakeSelf.nixosModules.desktop
       flakeSelf.nixosModules.nix-daemon
       flakeSelf.nixosModules.steam
@@ -66,7 +66,6 @@ in
     ]
 
   ;
-
 
   # TODO check how it interacts with less
   # environment.etc."inputrc".source = ../../config/inputrc;
@@ -113,8 +112,8 @@ in
 
   # boot.kernel.sysctl."kernel.dmesg_restrict" = false;
 
-  # boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_12;
-  boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_6; # works
+  boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_12;
+  # boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_6; # works
   # services.xserver.displayManager.gdm.enable = true;
 
   # nesting clones can be useful to prevent GC of some packages
@@ -199,7 +198,7 @@ in
     # max_queued_events limits how many filesystem events will be held in the kernel queue if the application does not read them;
 
     # to avoid "Bad file descriptor" and "Too many open files" situations
-    "fs.inotify.max_user_watches" = 1000000;
+    "fs.inotify.max_user_watches" = lib.mkForce 1000000;
     "fs.inotify.max_user_instances" = 600;
     # "fs.inotify.max_queued_events" = ;
 
@@ -291,11 +290,11 @@ in
   # programs.bcc.enable = true;
 
   # /alsa-base.conf
-  environment.etc."modprobe.d/alsa.conf".text = ''
-    # we want nvidia to get index 1 see 
-    # https://wiki.archlinux.org/title/Advanced_Linux_Sound_Architecture#Set_the_default_sound_card
-    options snd_hda_intel index=1
-  '';
+  # environment.etc."modprobe.d/alsa.conf".text = ''
+  #   # we want nvidia to get index 1 see 
+  #   # https://wiki.archlinux.org/title/Advanced_Linux_Sound_Architecture#Set_the_default_sound_card
+  #   options snd_hda_intel index=1
+  # '';
 
   # set on shell initialisation (e.g. in /etc/profile
   environment.variables = {

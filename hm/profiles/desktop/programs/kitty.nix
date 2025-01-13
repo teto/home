@@ -5,7 +5,6 @@
   ...
 }:
 {
-  # programs.kitty = {
   enable = true;
   # we need a monospace font
   # check that it supports italic with font-manager or
@@ -32,5 +31,4 @@
   extraConfig = ''
     include ./manual.conf
   '';
-  # };
 }

@@ -1,10 +1,12 @@
 {
   "Class": {
-    "prefix": ["input"],
+    "prefix": [
+      "input"
+    ],
     "body": [
-	  " = {",
-	  "\turl = ",
-	  "\tflake = false",
+      " = {",
+      "\turl = ",
+      "\tflake = false",
       "}"
     ],
     "description": "Defines flake input"

@@ -2,16 +2,16 @@
   config,
   lib,
   pkgs,
-  flakeInputs,
   flakeSelf,
   withSecrets,
   secrets,
   ...
 }:
 let
+  haumea = flakeSelf.inputs.haumea;
   laptopAutoloaded =
     { pkgs, ... }@args:
-    flakeSelf.inputs.haumea.lib.load {
+    haumea.lib.load {
       src = flakeSelf.inputs.nix-filter {
         name = "laptopAutoloaded";
         root = ./.;
@@ -44,8 +44,8 @@ let
         inputs = flakeSelf.inputs;
       };
       transformer = [
-        flakeInputs.haumea.lib.transformers.liftDefault
-        (flakeInputs.haumea.lib.transformers.hoistAttrs "_import" "import")
+        haumea.lib.transformers.liftDefault
+        (haumea.lib.transformers.hoistAttrs "_import" "import")
       ];
     };
 
@@ -69,8 +69,8 @@ let
         inputs = flakeSelf.inputs;
       };
       transformer = [
-        flakeInputs.haumea.lib.transformers.liftDefault
-        (flakeInputs.haumea.lib.transformers.hoistAttrs "_import" "import")
+        haumea.lib.transformers.liftDefault
+        (haumea.lib.transformers.hoistAttrs "_import" "import")
       ];
     };
 in
@@ -86,9 +86,11 @@ in
 
       # ../../nixos/modules/luarocks-site.nix
 
+      flakeSelf.nixosModules.desktop
       flakeSelf.nixosModules.sudo
       flakeSelf.nixosModules.universal
       flakeSelf.nixosModules.nix-daemon
+      flakeSelf.nixosModules.nix-ld
 
       # TODO this triggers the error on boot I think
       ../../nixos/profiles/desktop.nix
@@ -110,7 +112,7 @@ in
 
     ]
     ++ lib.optionals withSecrets [
-      flakeSelf.nixosModules.novaModule
+      flakeSelf.nixosModules.nova
     ];
 
   boot.blacklistedKernelModules = [ "nouveau" ];
@@ -194,14 +196,6 @@ in
       enable = true;
       enable32Bit = true;
     };
-    pulseaudio = {
-      enable = false;
-      systemWide = false;
-
-      # extraClientConf =
-      # only this one has bluetooth
-      package = pkgs.pulseaudioFull;
-    };
   };
 
   # TODO move to laptop
@@ -225,6 +219,15 @@ in
       enable = true;
       browsing = true;
       drivers = [ pkgs.gutenprint ];
+    };
+
+    pulseaudio = {
+      enable = false;
+      systemWide = false;
+
+      # extraClientConf =
+      # only this one has bluetooth
+      package = pkgs.pulseaudioFull;
     };
 
     # central regulatory domain agent (CRDA) to allow exchange between kernel and userspace
@@ -283,7 +286,6 @@ in
     # alternatively one can run journalctl --vacuum-time=2d
     SystemMaxUse=2G
   '';
-
 
   # services.logind = {
   #   # see https://bbs.archlinux.org/viewtopic.php?id=225977 for problems with LID

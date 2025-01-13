@@ -1,5 +1,5 @@
 " vim: set noet fenc=utf-8 ff=unix sts=0 sw=2 ts=8 fdm=marker :
-" ❌
+" now unused ?
 
 
 omap     <silent> m :<C-U>lua require('tsht').nodes()<CR>
