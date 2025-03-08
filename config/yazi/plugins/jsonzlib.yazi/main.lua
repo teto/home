@@ -12,7 +12,7 @@ function M:peek(job)
     ya.dbg('Called with ' .. tostring(job.file.url))
 
     -- see https://github.com/sxyazi/yazi/pull/1033 for an example on how to parse
-	local temp_lines = { ui.Line('Loading jsonzlib...') }
+    local temp_lines = { ui.Line('Loading jsonzlib...') }
     ya.preview_widgets(job, { ui.Text(temp_lines):area(job.area, ui.Text.RIGHT) })
     local pigz = Command('pigz')
         :args({
@@ -37,7 +37,7 @@ function M:peek(job)
         ya.dbg('READLINE')
         ya.dbg(next)
         if event == 1 then
-     -- TODO notify
+            -- TODO notify
             ya.err('Falling back to builtin')
             return self:fallback_to_builtin(job)
         elseif event ~= 0 then

@@ -2,16 +2,16 @@
   config,
   lib,
   pkgs,
-  flakeInputs,
+  flakeSelf,
   ...
 }:
 {
 
-  xdg.configFile."yazi/plugins/ouch.yazi".source = flakeInputs.ouch-yazi-plugin;
+  xdg.configFile."yazi/plugins/ouch.yazi".source = flakeSelf.inputs.ouch-yazi-plugin;
 
-  xdg.configFile."yazi/plugins/rsync.yazi".source = flakeInputs.rsync-yazi-plugin;
+  xdg.configFile."yazi/plugins/rsync.yazi".source = flakeSelf.inputs.rsync-yazi-plugin;
 
-  # xdg.configFile."yazi/plugins/rsync.yazi".source = flakeInputs.rsync-yazi-plugin;
+  # xdg.configFile."yazi/plugins/rsync.yazi".source = flakeSelf.inputs.rsync-yazi-plugin;
 
   # 7z
   home.packages = [
@@ -23,6 +23,6 @@
     enable = true;
     enableBashIntegration = true;
     enableZshIntegration = true;
-    package = flakeInputs.yazi.packages.${pkgs.system}.yazi;
+    package = flakeSelf.inputs.yazi.packages.${pkgs.system}.yazi;
   };
 }

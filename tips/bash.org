@@ -1,4 +1,20 @@
+
+* How to deal with autocompletion ?
+
+complete is a builtins. type it to list all candidates
+
+             autoload -U bashcompinit
+ 
 `help set` will show you options:
+argbash -o {script_file} {script_file}
+
+How to handle argbash-init ?
+
+Just run argbash -o {script_file} {script_file} to update. But this is only needed if the template section (ie: the commented block starting with # Created by argbash-init v2.10.0) has been changed
+
+
+
+Just run argbash -o {script_file} {script_file} to update. But this is only needed if the template section (ie: the commented block starting with # Created by argbash-init v2.10.0) has been changed
 
 shopt -sp
 

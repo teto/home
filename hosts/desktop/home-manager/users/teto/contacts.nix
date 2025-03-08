@@ -6,13 +6,10 @@
   ...
 }:
 
-let
-  tetoLib = pkgs.callPackage ../../../hm/lib.nix { };
-in
+# let
+#   tetoLib = pkgs.callPackage ../../../hm/lib.nix { };
+# in
 {
-  home.packages = with pkgs; [
-    # need gnome-accounts to make it work
-  ];
 
   accounts.contact = {
     # XDG_DATA instead ?
@@ -25,24 +22,9 @@ in
         khard = {
           enable = true;
         };
+
+        # pimsync.enable = false;
       };
-    };
-  };
-
-  programs.khard = {
-    enable = false;
-
-    settings = {
-      general = {
-        default_action = "list";
-        editor = [
-          "nvim"
-          "-i"
-          "NONE"
-        ];
-        merge_editor = "nvim -d";
-      };
-
     };
   };
 }

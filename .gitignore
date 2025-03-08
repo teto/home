@@ -1,5 +1,8 @@
 # **
-*.env
+/.gp.md
+/.direnv
+/*.log
+/*.env
 /README.html
 /config/astroid/config
 /config/astroid/poll.sh

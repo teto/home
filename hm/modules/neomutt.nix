@@ -1,22 +1,19 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}:
+{ config, lib, pkgs, ... }:
 let
-  cfg = config.programs.foo;
-in
-{
+   cfg = config.programs.neomutt;
+in {
   options = {
-    programs.foo = {
-      enableProfiling = lib.mkOption {
-        default = false;
-        type = lib.types.bool;
-        description = ''
-          Whether to enable Fish integration.
-        '';
-      };
+    programs.neomutt = {
+      enableVimKeys = lib.mkEnableOption "neomutt";
+      # custom = lib.mkOption {
+      #   default = false;
+      #   type = lib.types.bool;
+      #   description = ''
+      #     Whether to enable Fish integration.
+      #   '';
+      # };
     };
+  };
+  config = lib.mkIf cfg.enableVimKeys {
   };
 }

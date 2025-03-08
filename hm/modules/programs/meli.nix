@@ -26,7 +26,8 @@ let
       subscribed_mailboxes = [ "*" ];
       server_password_command = "pass-perso show perso/fastmail_mc_jmap";
       # server_password=""
-      server_username = "matthieucoudron@fastmail.com";
+      # use account
+      server_username = secrets.accounts.mail.fastmail_perso.login;
 
       send_mail = "msmtp --read-recipients --read-envelope-from";
     }
@@ -116,23 +117,22 @@ in
     in
     mkIf cfg.enable {
 
+      # TODO should be an option
       home.packages = [ pkgs.meli ];
 
-      xdg.configFile."meli/config.toml".text =
-        # mkIf (cfg.settings != { }) {
-        #   source = cfg.settings;
-        # };
+      xdg.configFile."meli/config.toml".text = let
 
-        # just so not notmuch accout appears before fastmail
-        (lib.concatMapStringsSep "\n" (inc: "include(\"${inc}\")") cfg.includes)
-        + "\n"
-        + (builtins.readFile (
-          tomlFormat.generate "config.toml" (
+        generatedToml = tomlFormat.generate "config.toml" (
             lib.recursiveUpdate cfg.settings {
               accounts = accountsAttr;
             }
-          )
-        ));
+          );
+      in 
+        # just so not notmuch accout appears before fastmail
+        (lib.concatMapStringsSep "\n" (inc: "include(\"${inc}\")") cfg.includes)
+        + "\n"
+        + (builtins.readFile (generatedToml))
+          ;
     };
 
 }

@@ -1,8 +1,6 @@
-{ flakeInputs, pkgs, ... }:
 {
   enable = true;
-  # package = flakeInputs.yazi.packages.${pkgs.system}.yazi;
-
-  # plugins = {
-  # }
+  enableBashIntegration = true;
+  enableZshIntegration = true;
+  # package = flakeSelf.inputs.yazi.packages.${pkgs.system}.yazi;
 }

@@ -12,16 +12,16 @@
 
 -- local M = require('lualine.component'):extend()
 --
--- function M:update_status(is_focused) 
+-- function M:update_status(is_focused)
 --
 --  self.status = "TOTO"
 --  return "TOTO"
 -- end
 
 local function location()
-  -- local line = vim.fn.line('.')
-  -- local col = vim.fn.charcol('.')
-  return "TOTO"
+    -- local line = vim.fn.line('.')
+    -- local col = vim.fn.charcol('.')
+    return 'TOTO'
 end
 
 return location

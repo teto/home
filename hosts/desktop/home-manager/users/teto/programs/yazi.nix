@@ -3,7 +3,7 @@
   pkgs,
   options,
   lib,
-  flakeInputs,
+  flakeSelf,
   ...
 }:
 {
@@ -11,6 +11,6 @@
     enable = true;
     enableBashIntegration = true;
     enableZshIntegration = true;
-    # package = flakeInputs.yazi.packages.${pkgs.system}.yazi;
+    # package = flakeSelf.inputs.yazi.packages.${pkgs.system}.yazi;
   };
 }

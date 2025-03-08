@@ -1,0 +1,1 @@
+message(STATUS "Install configuration: \"${CMAKE_INSTALL_CONFIG_NAME}\"")

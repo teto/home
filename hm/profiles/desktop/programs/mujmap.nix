@@ -6,8 +6,8 @@
 }:
 {
   # Bridge for synchronizing email and tags between JMAP and notmuch
-    enable = true;
-    package = pkgs.mujmap-unstable;
+  enable = true;
+  package = pkgs.mujmap-unstable;
 
-    # fqdn = null;
+  # fqdn = null;
 }

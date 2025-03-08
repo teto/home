@@ -11,7 +11,6 @@
   #
   #   extra-substituters = [
   #     "https://nixpkgs-wayland.cachix.org"
-  #     # https://github.com/SomeoneSerge/nixpkgs-cuda-ci
   #   ];
   #
   #   # "https://nixpkgs-wayland.cachix.org"
@@ -42,13 +41,14 @@
 
     firefox2nix.url = "git+https://git.sr.ht/~rycee/mozilla-addons-to-nix";
 
+
     flake-utils.url = "github:numtide/flake-utils";
 
     fzf-git-sh = {
       url = "github:junegunn/fzf-git.sh";
       flake = false;
     };
-    
+
     fenix = {
       # used for nightly rust devtools
       # for git-repo-manager du coup
@@ -129,7 +129,6 @@
       # inputs.nixpkgs.follows = "nixpkgs";
     };
 
-
     nixos-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nixos-stable.url = "github:nixos/nixpkgs/nixos-24.11";
     # nixpkgs-for-hls.url = "github:nixos/nixpkgs?rev=612f97239e2cc474c13c9dafa0df378058c5ad8d";
@@ -186,8 +185,11 @@
       url = "github:ndtoan96/ouch.yazi";
       flake = false;
     };
-    rsync-yazi-plugin = {
-      url = "github:GianniBYoung/rsync.yazi";
+
+    # https://git.sr.ht/~whynothugo/pimsync
+    pimsync-src = {
+      # "sourcehut:"
+      url = "git+https://git.sr.ht/~whynothugo/pimsync";
       flake = false;
     };
 
@@ -198,7 +200,12 @@
 
     rippkgs.url = "github:replit/rippkgs";
     # rippkgs.inputs.nixpkgs.follows = "nixpkgs";
-    
+
+    rsync-yazi-plugin = {
+      url = "github:GianniBYoung/rsync.yazi";
+      flake = false;
+    };
+
     rest-nvim = {
       url = "github:teto/rest.nvim?ref=matt/nix-expo";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -225,6 +232,10 @@
 
     # doesnt have a nixpkgs input
     vocage.url = "git+https://git.sr.ht/~teto/vocage?ref=flake";
+
+    # AModules/fix-expand-fill-no-center
+    # https://github.com/Alexays/Waybar/pull/3881
+    waybar.url = "github:Alexays/Waybar?ref=pull/3881/head";
 
     wayland-pipewire-idle-inhibit = {
       url = "github:rafaelrc7/wayland-pipewire-idle-inhibit";
@@ -271,7 +282,8 @@
         collections = [
           "matthieu.coudron/fortunes"
           "nova/nix-ld" # for monolix
-          "nova/virtualbox"
+          "nova/julia"
+          # "nova/virtualbox"
         ];
       };
 
@@ -279,7 +291,7 @@
         inherit secretsFolder dotfilesPath;
       };
 
-      # sshLib = import ./nixpkgs/lib/ssh.nix { inherit secrets; flakeInputs = self.inputs; };
+      # sshLib = import ./nixpkgs/lib/ssh.nix { inherit secrets; flakeSelf.inputs = self.inputs; };
       system = "x86_64-linux";
 
       # TODO check out packagesFromDirectoryRecursive  as well ?
@@ -309,7 +321,6 @@
             inherit secrets;
             withSecrets = true;
             flakeSelf = self;
-            # flakeInputs = self.inputs;
             # TODO check how to remove one
             userConfig = novaUserProfile;
             inherit novaUserProfile;
@@ -410,24 +421,23 @@
       unstablePkgs = pkgImport self.inputs.nixos-unstable;
       stablePkgs = pkgImport self.inputs.nixos-stable;
 
-      genKey = str: nixpkgs.lib.replaceStrings [ ".nix" ] [ "" ] (
-          builtins.baseNameOf (toString str)
-        );
+      genKey = str: nixpkgs.lib.replaceStrings [ ".nix" ] [ "" ] (builtins.baseNameOf (toString str));
 
       # converts the name via genKey
-      importDir = folder: 
-        let 
-          listOfModules = nixpkgs.lib.filter 
+      importDir =
+        folder:
+        let
+          listOfModules =
+            nixpkgs.lib.filter
               # and != default.nix ?
               (n: nixpkgs.lib.strings.hasSuffix ".nix" n)
               (nixpkgs.lib.filesystem.listFilesRecursive folder);
-        in 
+        in
 
         nixpkgs.lib.listToAttrs (
 
-          nixpkgs.lib.map (x: nixpkgs.lib.nameValuePair (genKey x) x) listOfModules )
-        ;
-
+          nixpkgs.lib.map (x: nixpkgs.lib.nameValuePair (genKey x) x) listOfModules
+        );
 
       hm-common =
         {
@@ -462,16 +472,20 @@
 
             self.homeModules.bash
             self.homeModules.kitty
-            self.homeProfiles.common
             self.homeModules.zsh
             self.homeModules.fzf
 
             self.homeModules.fre
             self.homeModules.mod-cliphist
             self.homeModules.fzf
+
+            self.homeProfiles.common
+            self.homeProfiles.neovim
             self.homeModules.neovim
-            self.homeModules.neovim-module
+            self.homeModules.pimsync
             self.homeModules.package-sets
+            self.homeModules.tig
+
             (
               { ... }:
               {
@@ -485,7 +499,7 @@
           home-manager.extraSpecialArgs = {
             secrets = lib.optionalAttrs withSecrets secrets;
             inherit withSecrets;
-            flakeInputs = self.inputs;
+            # flakeSelf.inputs = self.inputs;
             inherit flakeSelf;
             inherit novaUserProfile;
             # TODO get it from ./. ?
@@ -548,7 +562,7 @@
             export RESTIC_PASSWORD_FILE=
             source config/bash/aliases.sh
             echo "Run just ..."
-            '';
+          '';
         };
 
         # debug =
@@ -566,8 +580,8 @@
 
       };
 
-# Downloads/linux_monolixSuite2024R1/monolixSuite-pkg-output 
-# ➜ nix-shell -p steam-run --run "steam-run ./monolixSuite2024R1"
+      # Downloads/linux_monolixSuite2024R1/monolixSuite-pkg-output
+      # ➜ nix-shell -p steam-run --run "steam-run ./monolixSuite2024R1"
       monolix = unstablePkgs.buildFHSEnv {
         name = "monolix";
         # this should be somewhat synced with what exists in nix-ld ?
@@ -580,7 +594,6 @@
         runScript = "ldd";
       };
 
-
       poetry = unstablePkgs.buildFHSEnv {
         name = "poetry";
         # inherit targetPkgs;
@@ -589,463 +602,492 @@
 
       #
 
-      packages = 
-      self.inputs.neovim-nightly-overlay.packages.${system}
-        // (autoCalledPackages myPkgs { }) // {
-        /*
-          my own nvim with
-          I need to get the finalPackage generated by home-manager for my desktop
-        */
+      formatter = self.packages.${system}.treefmt-home;
 
-        # generates a infinite trace right now
-        nvim = self.nixosConfigurations.desktop.config.home-manager.users.teto.programs.neovim.finalPackage;
+      packages =
+        self.inputs.neovim-nightly-overlay.packages.${system}
+        // (autoCalledPackages myPkgs { })
+        // {
+          /*
+            my own nvim with
+            I need to get the finalPackage generated by home-manager for my desktop
+          */
 
-        inherit (myPkgs)
-          jmdict
-          local-ai-teto
-          meli-git
-          popcorntime-teto
-          sway-scratchpad
-          gpt4all
-          gpt4all-cuda
-          termscp-matt
-          ;
+          # generates a infinite trace right now
+          nvim = self.nixosConfigurations.desktop.config.home-manager.users.teto.programs.neovim.finalPackage;
 
-        nvim-unwrapped = myPkgs.neovim-unwrapped;
+          inherit (myPkgs)
+            jmdict
+            local-ai-teto
+            meli-git
+            popcorntime-teto
+            sway-scratchpad
+            gpt4all
+            gpt4all-cuda
+            termscp-matt
+            pimsync-dev
+            ;
 
-        # TODO this exists in ml-tests, let's upstream some of the changes first
-        # jupyter4ihaskell = myPkgs.jupyter-teto;
-        # jupyter-teto = python3.withPackages(ps: [
-        #  ps.notebook
-        #  ps.jupyter-client
-        # ]);
+          nvim-unwrapped = myPkgs.neovim-unwrapped;
 
-        inherit (unstablePkgs)
-          # nhs92
-          # nhs94
-          nhs96
-          nhs98
-          ;
+          # TODO this exists in ml-tests, let's upstream some of the changes first
+          # jupyter4ihaskell = myPkgs.jupyter-teto;
+          # jupyter-teto = python3.withPackages(ps: [
+          #  ps.notebook
+          #  ps.jupyter-client
+          # ]);
 
-      };
+          inherit (unstablePkgs)
+            # nhs92
+            # nhs94
+            nhs96
+            nhs98
+            ;
+
+        };
     })
-    // (
-      {
-        # Tell Nix what schemas to use.
-        schemas = self.inputs.flake-schemas.schemas 
-          # // other-schemas.schemas
-        ;
+    // ({
+      # Tell Nix what schemas to use.
+      schemas = self.inputs.flake-schemas.schemas
+      # // other-schemas.schemas
+      ;
 
-        nixosConfigurations = rec {
-          # TODO generate those from the hosts folder ?
-          # with aliases ?
-          router = mkNixosSystem {
+      nixosConfigurations = rec {
+        # TODO generate those from the hosts folder ?
+        # with aliases ?
+        router = mkNixosSystem {
+          withSecrets = true;
+          hostname = "router";
+
+          modules = [
+            hm.nixosModules.home-manager
+            self.inputs.nixos-hardware.nixosModules.pcengines-apu
+            # self.nixosModules.default-hm
+            ./hosts/router/default.nix
+          ];
+        };
+
+        # it doesn't have to be called like that !
+        # TODO use mkNixosSystem
+        laptop = mkNixosSystem {
+          withSecrets = false;
+
+          hostname = "laptop";
+
+          modules = [
+            # self.inputs.nix-index-database.hmModules.nix-index
+            # self.inputs.sops-nix.nixosModules.sops
+            ./hosts/laptop
+          ];
+        };
+
+        # see https://determinate.systems/posts/extending-nixos-configurations
+        tatooine = laptop.extendModules {
+          modules = [
+            self.nixosModules.nova
+          ];
+
+          # TODO retain existing specialArgs and inject mine ?!
+          specialArgs = {
+            hostname = "tatooine";
+            inherit secrets;
+            inherit dotfilesPath;
+
             withSecrets = true;
-            hostname = "router";
-
-            modules = [
-              hm.nixosModules.home-manager
-              self.inputs.nixos-hardware.nixosModules.pcengines-apu
-              # self.nixosModules.default-hm
-              ./hosts/router/default.nix
-            ];
+            userConfig = novaUserProfile;
+            doctor = self.inputs.nova-doctor;
           };
 
-          # it doesn't have to be called like that !
-          # TODO use mkNixosSystem
-          laptop = mkNixosSystem {
-            withSecrets = false;
+        };
 
-            hostname = "laptop";
+        neotokyo = mkNixosSystem {
+          modules = [
+            ./hosts/neotokyo/default.nix
+          ];
+          hostname = "neotokyo";
+          withSecrets = true;
+        };
 
-            modules = [
-              # self.inputs.nix-index-database.hmModules.nix-index
-              # self.inputs.sops-nix.nixosModules.sops
-              ./hosts/laptop
-            ];
-          };
+        # desktop is a
+        desktop = mkNixosSystem {
+          withSecrets = false;
+          hostname = "jedha";
+          modules = [
+            ./hosts/desktop/_nixos.nix
+            # self.inputs.mptcp-flake.nixosModules.mptcp
+            # self.inputs.peerix.nixosModules.peerix
+          ];
+        };
 
-          # see https://determinate.systems/posts/extending-nixos-configurations
-          mcoudron = laptop.extendModules {
-            modules = [
-              self.nixosModules.nova
-            ];
-
-            # TODO retain existing specialArgs and inject mine ?!
-            specialArgs = {
-              hostname = "mcoudron";
-              inherit secrets;
-              inherit dotfilesPath;
-
-              withSecrets = true;
-              userConfig = novaUserProfile;
-              doctor = self.inputs.nova-doctor;
-            };
-
-          };
-
-          neotokyo = mkNixosSystem {
-            modules = [
-              ./hosts/neotokyo/default.nix
-            ];
-            hostname = "neotokyo";
+        # nix build .#nixosConfigurations.teapot.config.system.build.toplevel
+        jedha = desktop.extendModules ({
+          # TODO add nova inputs
+          specialArgs = {
             withSecrets = true;
           };
 
-          # desktop is a
-          desktop = mkNixosSystem {
-            withSecrets = false;
-            hostname = "jedha";
-            modules = [
-              ./hosts/desktop/_nixos.nix
-              # self.inputs.mptcp-flake.nixosModules.mptcp
-              # self.inputs.peerix.nixosModules.peerix
-            ];
-          };
+          modules = [
+            self.nixosModules.nova
+          ];
+        });
 
-          # nix build .#nixosConfigurations.teapot.config.system.build.toplevel
-          jedha = desktop.extendModules ({
-            # TODO add nova inputs
-            specialArgs = {
-              withSecrets = true;
-            };
+        test = router.extendModules ({
+          modules = [
+            hm.nixosModules.home-manager
+            self.homeProfiles.neovim
+          ];
 
-            modules = [
-              self.nixosModules.nova
-            ];
-          });
+        });
+      };
 
-          test = router.extendModules ({
-            modules = [
-              hm.nixosModules.home-manager
+      #  Standalone home-manager configuration entrypoint
+      #  Available through 'home-manager --flake .# your-username@your-hostname'
+      # homeConfigurations = { };
+
+      # TODO scan hm/{modules, profiles} folder
+      homeProfiles = (importDir ./hm/profiles) // {
+        common = ./hm/profiles/common.nix;
+        fzf = ./hm/profiles/fzf.nix;
+        neovim = ./hm/profiles/neovim.nix;
+        nova = ./hm/profiles/nova.nix;
+
+        teto-desktop = ./hm/profiles/desktop.nix;
+        # sway = ./hm/profiles/sway.nix;
+        # sway-notification-center = ./hm/profiles/swaync.nix;
+      };
+
+      homeModules = (importDir ./hm/modules) // {
+
+        # fre = ./hm/modules/fre.nix;
+        # bash = ./hm/modules/bash.nix;
+        # neovim-module = ./hm/modules/neovim.nix;
+        # fzf = ./hm/modules/fzf.nix;
+        # kitty = ./hm/modules/kitty.nix;
+        # package-sets = ./hm/modules/package-sets.nix;
+        # zsh = ./hm/modules/zsh.nix;
+        mod-cliphist = ./hm/modules/cliphist.nix;
+
+        # c un profile en fait
+        meli = ./hm/modules/programs/meli.nix;
+
+        developer = ./hm/profiles/dev.nix;
+        # for stuff not in home-manager yet
+        experimental = ./hm/profiles/experimental.nix; # { flakeSelf = self; };
+        gnome-shell = ./hm/profiles/gnome.nix;
+
+        mpv = ./hm/profiles/mpv.nix;
+
+        # neovim-full = hosts/desktop/home-manager/users/teto/programs/neovim.nix;
+        # neomutt = ./hm/profiles/neomutt.nix;
+
+        # ollama = hosts/desktop/home-manager/users/teto/services/ollama.nix;
+
+        # (modulesFromDir ./hm/modules)
+
+        # bash = ./hm/profiles/bash.nix;
+        services-mujmap = ./hm/services/mujmap.nix;
+        # services-swaync = ./hm/services/swaync.nix;
+        # hosts/desktop/home-manager/users/teto/default.nix;
+
+        # needs zsh-extra ?
+        teto-zsh = ./hm/profiles/zsh.nix;
+
+        teto-nogui = (
+          {
+            config,
+            pkgs,
+            lib,
+            ...
+          }:
+          {
+            # inspire ./teto/default.nix
+
+            imports = [
+              # And add the home-manager module
+              self.homeProfiles.common
+              ./hm/modules/xdg.nix
+              self.homeProfiles.neovim
               self.homeModules.neovim
+              self.homeModules.bash
+              self.homeModules.zsh
             ];
+          }
+        );
 
-          });
+        # provided by nova-nix config
+        vscode = ./hm/profiles/vscode.nix;
+
+        waybar = ./hm/profiles/waybar.nix;
+        xdg = ./hm/profiles/xdg.nix;
+        yazi = ./hm/profiles/yazi.nix;
+      };
+
+      nixosProfiles = {
+        gnome = ./nixos/profiles/gnome.nix;
+      };
+
+      nixosModules = (importDir ./nixos/modules) // {
+        # neovim = nixos/profiles/neovim.nix;
+
+        default-hm = hm-common;
+        teto-nogui = nixos/accounts/teto/teto.nix;
+        nova = nixos/profiles/nova.nix;
+        nix-daemon = nixos/profiles/nix-daemon.nix;
+        nix-ld = nixos/profiles/nix-ld.nix;
+        ntp = nixos/profiles/ntp.nix;
+
+        universal = hosts/config-all.nix;
+        desktop = nixos/profiles/desktop.nix;
+        server = nixos/profiles/server.nix;
+        steam = nixos/profiles/steam.nix;
+      };
+
+      templates = {
+        default = {
+          path = ./nixpkgs/templates/default;
+          description = "Unopiniated ";
         };
 
-        #  Standalone home-manager configuration entrypoint
-        #  Available through 'home-manager --flake .# your-username@your-hostname'
-        # homeConfigurations = { };
-
-        # TODO scan hm/{modules, profiles} folder
-        homeProfiles = {
-          alot = ./hm/profiles/alot.nix;
-          common = ./hm/profiles/common.nix;
-          fzf = ./hm/profiles/fzf.nix;
+        haskell = {
+          path = ./nixpkgs/templates/haskell;
+          description = "A flake to help develop haskell libraries.";
         };
+        lua = {
+          path = ./nixpkgs/templates/lua;
+          description = "A flake to help develop haskell libraries.";
+        };
+        python = {
+          path = ./nixpkgs/poetry/haskell;
+          description = "A flake to help develop poetry-based python packages";
+        };
+      };
 
-        homeModules = 
-          (importDir  ./hm/modules) //
+      overlays = {
+
+        autoupdating =
+          final: prev:
+          let
+            llama-cpp-matt = (
+              final.llama-cpp-with-curl.override {
+                cudaSupport = true;
+                blasSupport = false;
+                rocmSupport = false;
+                openclSupport = false;
+                # stdenv = prev.gcc11Stdenv;
+              }
+            );
+
+          in
           {
 
-          bash = ./hm/modules/bash.nix;
-          developer = ./hm/profiles/dev.nix;
-          # for stuff not in home-manager yet
-          experimental = ./hm/profiles/experimental.nix; #  { flakeSelf = self; };
-          fre = ./hm/modules/fre.nix;
-          gnome-shell = ./hm/profiles/gnome.nix;
+            inherit llama-cpp-matt;
 
-          meli = ./hm/modules/programs/meli.nix;
-          mod-cliphist = ./hm/modules/cliphist.nix;
-          fzf = ./hm/modules/fzf.nix;
-          kitty = ./hm/modules/kitty.nix;
-          mpv = ./hm/profiles/mpv.nix;
+            meli-git = prev.meli.overrideAttrs (drv: rec {
+              name = "meli-${version}";
+              version = "g${self.inputs.meli.shortRev}";
+              # version = "g-from-git";
+              src = self.inputs.meli;
 
-          # neovim-full = hosts/desktop/home-manager/users/teto/programs/neovim.nix;
-          # neomutt = ./hm/profiles/neomutt.nix;
-          neovim = ./hm/profiles/neovim.nix;
-          neovim-module = ./hm/modules/neovim.nix;
-          nova = ./hm/profiles/nova.nix;
+              # dontUnpack = true;
+              # cargoHash = "sha256-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX=";
+              # cargoHash = "sha256-vZkMfaALnRBK8ZwMB2uvvJgQq+BdUX7enNnr9t5H+MY=";
+              cargoPatches = [ ];
+              cargoDeps = drv.cargoDeps.overrideAttrs (
+                prev.lib.const {
 
-          ollama = hosts/desktop/home-manager/users/teto/services/ollama.nix;
+                  name = "${name}-vendor.tar.gz";
+                  inherit src;
+                  outputHash = "sha256-EZbfpnepzGdVDEVStPlsFJXOPqVZCKibkEoogAzsGig=";
+                  cargoPatches = [ ];
 
-          package-sets = ./hm/modules/package-sets.nix;
-          # (modulesFromDir ./hm/modules)
-
-          # bash = ./hm/profiles/bash.nix;
-          services-mujmap = ./hm/services/mujmap.nix;
-          # services-swaync = ./hm/services/swaync.nix;
-          sway = ./hm/profiles/sway.nix;
-          sway-notification-center = ./hm/profiles/swaync.nix;
-
-          teto-desktop = ./hm/profiles/desktop.nix;
-          # hosts/desktop/home-manager/users/teto/default.nix;
-
-          # needs zsh-extra ?
-          teto-zsh = ./hm/profiles/zsh.nix;
-
-          teto-nogui = (
-            {
-              config,
-              pkgs,
-              lib,
-              ...
-            }:
-            {
-              # inspire ./teto/default.nix
-
-              imports = [
-                # And add the home-manager module
-                self.homeProfiles.common
-                ./hm/modules/xdg.nix
-                self.homeModules.neovim
-                self.homeModules.neovim-module
-                self.homeModules.bash
-                self.homeModules.zsh
-              ];
-            }
-          );
-
-          # provided by nova-nix config
-          vscode = ./hm/profiles/vscode.nix;
-
-          waybar = ./hm/profiles/waybar.nix;
-          xdg = ./hm/profiles/xdg.nix;
-          yazi = ./hm/profiles/yazi.nix;
-          zsh = ./hm/modules/zsh.nix;
-        };
-
-        nixosModules = (importDir  ./nixos/modules)
-          // {
-
-            default-hm = hm-common;
-            gnome = ./nixos/profiles/gnome.nix;
-            teto-nogui = nixos/accounts/teto/teto.nix;
-            nova = nixos/profiles/nova.nix;
-            neovim = nixos/profiles/neovim.nix;
-            nix-daemon = nixos/profiles/nix-daemon.nix;
-            nix-ld = nixos/profiles/nix-ld.nix;
-            ntp = nixos/profiles/ntp.nix;
-
-            universal = hosts/config-all.nix;
-            desktop = nixos/profiles/desktop.nix;
-            server = nixos/profiles/server.nix;
-            steam = nixos/profiles/steam.nix;
-
-            # sudo = nixos/modules/sudo.nix;
-            # nextcloud = nixos/modules/nextcloud.nix;
-            # nvd = nixos/modules/nvd.nix;
-          };
-
-        templates = {
-          default = {
-            path = ./nixpkgs/templates/default;
-            description = "Unopiniated ";
-          };
-
-          haskell = {
-            path = ./nixpkgs/templates/haskell;
-            description = "A flake to help develop haskell libraries.";
-          };
-          lua = {
-            path = ./nixpkgs/templates/lua;
-            description = "A flake to help develop haskell libraries.";
-          };
-          python = {
-            path = ./nixpkgs/poetry/haskell;
-            description = "A flake to help develop poetry-based python packages";
-          };
-        };
-
-        overlays = {
-
-          autoupdating =
-            final: prev:
-            let
-              llama-cpp-matt = (
-                final.llama-cpp-with-curl.override {
-                  cudaSupport = true;
-                  blasSupport = false;
-                  rocmSupport = false;
-                  openclSupport = false;
-                  # stdenv = prev.gcc11Stdenv;
                 }
               );
+              # cargoHash = "sha256-1LHCqv+OPS6tLMpmXny5ycW+8I/JRPQ7n8kcGfw6RMs=";
+            });
 
-            in
-            {
+            local-ai-teto = (
+              prev.local-ai.override ({
+                # with_cublas = true;
+                # with_tts = false;
+                # with_stablediffusion = false; # sthg about CUDA_RUNTIME_DIR
+              })
+            );
 
-              inherit llama-cpp-matt;
+            # see https://github.com/NixOS/nixpkgs/pull/257760
+            ollamagpu = final.ollama.override { llama-cpp = llama-cpp-matt; };
 
-              meli-git = prev.meli.overrideAttrs (drv: rec {
-                name = "meli-${version}";
-                version = "g${self.inputs.meli.shortRev}";
-                # version = "g-from-git";
-                src = self.inputs.meli;
+            mujmap-unstable = self.inputs.mujmap.packages.x86_64-linux.mujmap;
 
-                # dontUnpack = true;
-                # cargoHash = "sha256-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX=";
-                # cargoHash = "sha256-vZkMfaALnRBK8ZwMB2uvvJgQq+BdUX7enNnr9t5H+MY=";
-                cargoPatches = [ ];
-                cargoDeps = drv.cargoDeps.overrideAttrs (
-                  prev.lib.const {
+            # neovide = prev.neovide.overrideAttrs(oa: {
+            #  src = self.inputs.neovide;
+            # });
 
-                    name = "${name}-vendor.tar.gz";
-                    inherit src;
-                    outputHash = "sha256-EZbfpnepzGdVDEVStPlsFJXOPqVZCKibkEoogAzsGig=";
-                    cargoPatches = [ ];
+            # moved to by-name
+            # pass-custom = (pkgs.pass.override { waylandSupport = true; }).withExtensions (
+            #   ext: with ext; [
+            #     pass-import
+            #     pass-tail
+            #   ]
+            # );
 
-                  }
-                );
-                # cargoHash = "sha256-1LHCqv+OPS6tLMpmXny5ycW+8I/JRPQ7n8kcGfw6RMs=";
+            firefox-addons = import ./overlays/firefox/generated.nix {
+              inherit (final)
+                buildFirefoxXpiAddon
+                fetchurl
+                lib
+                stdenv
+                ;
+            };
+
+            # borken with recent update https://github.com/NixOS/nixpkgs/issues/348832
+            # git-repo-manager = prev.callPackage ./pkgs/by-name/gi/git-repo-manager/package.nix {
+            #   fenix = self.inputs.fenix;
+            # };
+
+            tetoLib = final.callPackage ./hm/lib.nix { };
+
+            # FIX: https://github.com/NixOS/nixpkgs/issues/392278
+            auto-cpufreq = prev.auto-cpufreq.overrideAttrs (oldAttrs: {
+              postPatch =
+                oldAttrs.postPatch
+                + ''
+
+                  substituteInPlace pyproject.toml \
+                  --replace-fail 'psutil = "^6.0.0"' 'psutil = ">=6.0.0,<8.0.0"'
+                '';
+            });
+
+            pimsync-dev = prev.pimsync.overrideAttrs(drv: 
+            let
+                pimsync-src = self.inputs.pimsync-src;
+              in rec {
+
+              version = "g${pimsync-src.shortRev}";
+              src = pimsync-src;
+
+              PIMSYNC_VERSION = "${version}";
+
+              useFetchCargoVendor = true;
+              cargoDeps = final.rustPlatform.fetchCargoVendor {
+                inherit src;
+                hash = "sha256-/6YjyKB/xOCTNZlKewddEaZ1ZN2PC5dQoP0A5If67MA=";
+              };
+
               });
+          };
 
-              local-ai-teto = (
-                prev.local-ai.override ({
-                  # with_cublas = true;
-                  # with_tts = false;
-                  # with_stablediffusion = false; # sthg about CUDA_RUNTIME_DIR
-                })
-              );
+        # TODO
+        local = import ./overlays/pkgs/default.nix;
+        haskell = import ./overlays/haskell.nix;
+        overrides = import ./overlays/overrides.nix;
+        python = import ./overlays/python.nix;
+        # mptcp = self.inputs.mptcp-flake.overlays.default;
+        # nur = self.inputs.nur.overlay;
+      };
 
-              # see https://github.com/NixOS/nixpkgs/pull/257760
-              ollamagpu = final.ollama.override { llama-cpp = llama-cpp-matt; };
+      # the 'deploy' entry is used by 'deploy-rs' to deploy our nixosConfigurations
+      # if it doesn't work you can always fall back to the vanilla nixos-rebuild:
+      deploy = {
+        # This is the user that the profile will be deployed to (will use sudo if not the same as above).
+        # If `sshUser` is specified, this will be the default (though it will _not_ default to your own username)
+        user = "root";
 
-              mujmap-unstable = self.inputs.mujmap.packages.x86_64-linux.mujmap;
+        # Which sudo command to use. Must accept at least two arguments:
+        # the user name to execute commands as and the rest is the command to execute
+        # This will default to "sudo -u" if not specified anywhere.
+        # sudo = "doas -u";
 
-              # neovide = prev.neovide.overrideAttrs(oa: {
-              #  src = self.inputs.neovide;
-              # });
+        # This is an optional list of arguments that will be passed to SSH.
+        # sshOpts = [ "-p" "2121" ];
 
-              # moved to by-name
-              # pass-custom = (pkgs.pass.override { waylandSupport = true; }).withExtensions (
-              #   ext: with ext; [
-              #     pass-import
-              #     pass-tail
-              #   ]
-              # );
+        # Fast connection to the node. If this is true, copy the whole closure instead of letting the node substitute.
+        # This defaults to `false`
+        fastConnection = false;
 
-              firefox-addons = import ./overlays/firefox/generated.nix {
-                inherit (final)
-                  buildFirefoxXpiAddon
-                  fetchurl
-                  lib
-                  stdenv
-                  ;
+        # If the previous profile should be re-activated if activation fails.
+        # This defaults to `true`
+        autoRollback = true;
+
+        # See the earlier section about Magic Rollback for more information.
+        # This defaults to `true`
+        magicRollback = true;
+
+        # The path which deploy-rs will use for temporary files, this is currently only used by `magicRollback` to create an inotify watcher in for confirmations
+        # If not specified, this will default to `/tmp`
+        # (if `magicRollback` is in use, this _must_ be writable by `user`)
+        # tempPath = "/home/someuser/.deploy-rs";
+
+        # Build the derivation on the target system.
+        # Will also fetch all external dependencies from the target system's substituters.
+        # This default to `false`
+        remoteBuild = false;
+
+        # Timeout for profile activation.
+        # This defaults to 240 seconds.
+        activationTimeout = 600;
+
+        # Timeout for profile activation confirmation.
+        # This defaults to 30 seconds.
+        confirmTimeout = 60;
+
+        # for now
+        # sshOpts = [ "-F" "ssh_config" ];
+        nodes =
+          let
+            # system = "x86_64-linux";
+            genNode = attrs: {
+              inherit (attrs) hostname;
+              profiles.system = {
+                # remoteBuild = false;
+                hostname = attrs.hostname;
+                path = deploy-rs.lib.${system}.activate.nixos self.nixosConfigurations.${attrs.name};
+              };
+            };
+          in
+          {
+            router =
+              genNode ({
+                name = "router";
+                # local-facing address
+                hostname = "router";
+                # hostname = "10.0.0.1";
+              })
+              // {
+                # sshOpts = [ "-F" "ssh_config" ];
+                # sshUser = "root";
+                sshOpts = [
+                  # "-i/home/teto/.ssh/id_rsa"
+                  # "-p${toString secrets.router.sshPort}"
+                ];
+
               };
 
-              # borken with recent update https://github.com/NixOS/nixpkgs/issues/348832
-              # git-repo-manager = prev.callPackage ./pkgs/by-name/gi/git-repo-manager/package.nix {
-              #   fenix = self.inputs.fenix;
-              # };
+            neotokyo =
+              genNode ({
+                name = "neotokyo";
+                hostname = secrets.jakku.hostname;
+              })
+              // {
+                # sshOpts = [ "-t" ];
+                interactiveSudo = true;
+                # user = "teto";
+              }
+              // {
+                # user = "teto";
+                sshUser = "teto";
+                # TODO should be picked up by ssh automatically
+                # sshOpts = [
+                #   "-i"
+                #   "~/.ssh/id_rsa"
+                #   # "-p${toString secrets.router.sshPort}"
+                # ];
 
-              tetoLib = final.callPackage ./hm/lib.nix { };
-            };
-
-          # TODO
-          local = import ./overlays/pkgs/default.nix;
-          haskell = import ./overlays/haskell.nix;
-          overrides = import ./overlays/overrides.nix;
-          python = import ./overlays/python.nix;
-          # mptcp = self.inputs.mptcp-flake.overlays.default;
-          # nur = self.inputs.nur.overlay;
-        };
-
-        # the 'deploy' entry is used by 'deploy-rs' to deploy our nixosConfigurations
-        # if it doesn't work you can always fall back to the vanilla nixos-rebuild:
-        deploy = {
-          # This is the user that the profile will be deployed to (will use sudo if not the same as above).
-          # If `sshUser` is specified, this will be the default (though it will _not_ default to your own username)
-          user = "root";
-
-          # Which sudo command to use. Must accept at least two arguments:
-          # the user name to execute commands as and the rest is the command to execute
-          # This will default to "sudo -u" if not specified anywhere.
-          # sudo = "doas -u";
-
-          # This is an optional list of arguments that will be passed to SSH.
-          # sshOpts = [ "-p" "2121" ];
-
-          # Fast connection to the node. If this is true, copy the whole closure instead of letting the node substitute.
-          # This defaults to `false`
-          fastConnection = false;
-
-          # If the previous profile should be re-activated if activation fails.
-          # This defaults to `true`
-          autoRollback = true;
-
-          # See the earlier section about Magic Rollback for more information.
-          # This defaults to `true`
-          magicRollback = true;
-
-          # The path which deploy-rs will use for temporary files, this is currently only used by `magicRollback` to create an inotify watcher in for confirmations
-          # If not specified, this will default to `/tmp`
-          # (if `magicRollback` is in use, this _must_ be writable by `user`)
-          # tempPath = "/home/someuser/.deploy-rs";
-
-          # Build the derivation on the target system.
-          # Will also fetch all external dependencies from the target system's substituters.
-          # This default to `false`
-          remoteBuild = false;
-
-          # Timeout for profile activation.
-          # This defaults to 240 seconds.
-          activationTimeout = 600;
-
-          # Timeout for profile activation confirmation.
-          # This defaults to 30 seconds.
-          confirmTimeout = 60;
-
-          # for now
-          # sshOpts = [ "-F" "ssh_config" ];
-          nodes =
-            let
-              # system = "x86_64-linux";
-              genNode = attrs: {
-                inherit (attrs) hostname;
-                profiles.system = {
-                  # remoteBuild = false;
-                  hostname = attrs.hostname;
-                  path = deploy-rs.lib.${system}.activate.nixos self.nixosConfigurations.${attrs.name};
-                };
               };
-            in
-            {
-              router =
-                genNode ({
-                  name = "router";
-                  # local-facing address
-                  hostname = "router";
-                  # hostname = "10.0.0.1";
-                })
-                // {
-                  # sshOpts = [ "-F" "ssh_config" ];
-                  # sshUser = "root";
-                  sshOpts = [
-                    # "-i/home/teto/.ssh/id_rsa"
-                    # "-p${toString secrets.router.sshPort}"
-                  ];
+          };
+      };
 
-                };
+      # defaultTemplate = templates.app;
 
-              neotokyo =
-                genNode ({
-                  name = "neotokyo";
-                  hostname = secrets.jakku.hostname;
-                })
-                // {
-                  # sshOpts = [ "-t" ];
-                  interactiveSudo = true;
-                  # user = "teto";
-                }
-                // {
-                  # user = "teto";
-                  sshUser = "teto";
-                  # TODO should be picked up by ssh automatically
-                  # sshOpts = [
-                  #   "-i"
-                  #   "~/.ssh/id_rsa"
-                  #   # "-p${toString secrets.router.sshPort}"
-                  # ];
-
-                };
-            };
-        };
-
-        # defaultTemplate = templates.app;
-
-      }
-    );
+    });
 }
 #+END_SRC nix

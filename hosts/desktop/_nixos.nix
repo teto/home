@@ -1,8 +1,9 @@
-{ config,
-  flakeSelf
+{
+  config,
+  flakeSelf,
   # modulesPath,
-, withSecrets
-, lib,
+  withSecrets,
+  lib,
   pkgs,
   ...
 }:
@@ -23,7 +24,7 @@ let
       };
 
       inputs = args // {
-        # inputs = flakeInputs;
+        # inputs = flakeSelf.inputs;
       };
       transformer = [
         haumea.lib.transformers.liftDefault
@@ -38,10 +39,8 @@ in
       autoloadedModule # loaded by haumea
       ./_boot.nix
       ../../nixos/profiles/greetd.nix
-
-      # todo renommer en workstation
-
       ../../nixos/profiles/docker-daemon.nix
+
       flakeSelf.nixosModules.nova
       flakeSelf.nixosModules.desktop
       flakeSelf.nixosModules.nix-daemon
@@ -75,18 +74,18 @@ in
 
   home-manager.users =
     # let
-    # hmRootModule = { pkgs, ... }@args: flakeInputs.haumea.lib.load {
+    # hmRootModule = { pkgs, ... }@args: flakeSelf.inputs.haumea.lib.load {
     #  src = ./root;
     #  inputs = args // {
-    #    inputs = flakeInputs;
+    #    inputs = flakeSelf.inputs;
     #  };
     #  transformer =  [
-    #    flakeInputs.haumea.lib.transformers.liftDefault
+    #    flakeSelf.inputs.haumea.lib.transformers.liftDefault
 
     #  #  (x: hoistAttrs x )
     #    # (x: )
     #  ];
-    #   # flakeInputs.haumea.lib.transformers.liftDefault;
+    #   # flakeSelf.inputs.haumea.lib.transformers.liftDefault;
     # };
     # in
     {
@@ -110,10 +109,8 @@ in
       };
     };
 
-  # boot.kernel.sysctl."kernel.dmesg_restrict" = false;
 
-  boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_12;
-  # boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_6; # works
+  boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_13; # works ?
   # services.xserver.displayManager.gdm.enable = true;
 
   # nesting clones can be useful to prevent GC of some packages
@@ -183,8 +180,6 @@ in
   boot.kernelModules = [
     "af_key" # for ipsec/vpn support
     "kvm"
-    # "kvm-intel" # for virtualisation
-
     # https://discourse.nixos.org/t/ddcci-kernel-driver/22186/3
     "i2c-dev"
     "ddcci_backlight" # to control external monitors brightness
@@ -291,7 +286,7 @@ in
 
   # /alsa-base.conf
   # environment.etc."modprobe.d/alsa.conf".text = ''
-  #   # we want nvidia to get index 1 see 
+  #   # we want nvidia to get index 1 see
   #   # https://wiki.archlinux.org/title/Advanced_Linux_Sound_Architecture#Set_the_default_sound_card
   #   options snd_hda_intel index=1
   # '';

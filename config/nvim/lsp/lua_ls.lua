@@ -6,7 +6,7 @@ return {
         '--logpath=/home/teto/lua_ls.log',
     },
     filetypes = {
-        -- 'lua'
+        'lua',
     },
     -- single_file_support = true,
     root_markers = { '.luarc.json', '.luarc.jsonc' },

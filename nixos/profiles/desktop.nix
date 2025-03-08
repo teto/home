@@ -12,14 +12,11 @@ let
     flakeSelf.inputs.haumea.lib.load {
       src = flakeSelf.inputs.nix-filter {
         root = ./desktop;
-        # exclude = [
-        #     "home-manager/users/teto/services/mbsync.nix"
-        # ];
       };
-
 
       inputs = args // {
         inputs = flakeSelf.inputs;
+        # inherit config;
       };
       transformer = [
         flakeSelf.inputs.haumea.lib.transformers.liftDefault
@@ -37,19 +34,19 @@ in
     flakeSelf.inputs.nix-index-database.nixosModules.nix-index
     flakeSelf.nixosModules.nvd
     flakeSelf.nixosModules.universal
-    flakeSelf.nixosModules.neovim
+    flakeSelf.nixosProfiles.gnome
+    flakeSelf.nixosModules.nix-daemon
+    flakeSelf.nixosModules.sudo
 
-
-    ../../nixos/profiles/ntp.nix
-    ../../nixos/modules/network-manager.nix
+    ./greetd.nix
+    ./ntp.nix
+    ../modules/network-manager.nix
     # ../../nixos/profiles/librenms.nix
 
-    ./gnome.nix
     ./pipewire.nix
-    # ./sops.nix
 
-    # only if available
-    # ./modules/jupyter.nix
+    # TODO autoload it ?
+    # ./desktop/sops.nix
   ];
 
   # see https://github.com/NixOS/nixpkgs/issues/15293
@@ -102,7 +99,7 @@ in
 
   # on master it is disabled
   documentation.man.enable = true; # temp
-  documentation.doc.enable = true; # builds html doc, slow
+  documentation.doc.enable = false; # builds html doc, slow
   documentation.info.enable = false;
 
   environment.systemPackages = [ ];
@@ -168,10 +165,11 @@ in
     # This priority propagates to build processes. 0 is the default Unix process I/O priority, 7 is the lowest
     # daemonIONiceLevel = 3;
     # prepending with 'flake:' makes HM copy a lot more thna just 'path:'
-    nixPath = [ 
+    nixPath = [
       "nixpkgs=/home/teto/nixpkgs"
     ];
 
+    settings.log-lines = 20;
     # either use --option extra-binary-caches http://hydra.nixos.org/
     # handy to hack/fix around
     # readOnlyStore = false;
@@ -188,6 +186,7 @@ in
   boot.kernelParams = [
     # "boot.debug1devices"
   ];
+  boot.kernel.sysctl."kernel.dmesg_restrict" = false;
 
   # then coredumpctl debug will launch gdb !
   # boot.kernel.sysctl."kernel.core_pattern" = "core"; to disable.
@@ -214,6 +213,6 @@ in
   documentation.nixos.enable = true;
 
   # programs.file-roller.enable = true;
-  # programs.system-config-printer.enable = true;
+  programs.system-config-printer.enable = true;
 
 }

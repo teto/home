@@ -13,6 +13,7 @@ declare -A domains
 # array prefix -> profile
 domains['kh.novavault.cloud/']="nova"
 domains['jinko.ai']="nova"
+domains['git.novadiscovery.net']="nova"
 
 
 # argv=("$@")
@@ -56,10 +57,10 @@ if [ -n "$profile" ]; then
    # TODO follow args
     # firefox with profile
     set -x 
-    { firefox -P "$profile" "$@" &> /dev/null; } &
+    { set -x; firefox -P "$profile" "$@" &> /dev/null; } &
     set +x 
 else
  echo "Launching ff with default profile"
     # normal firefox
-    { firefox "${argv[@]}" &> /dev/null; } &
+    { firefox "$@" &> /dev/null; } &
 fi

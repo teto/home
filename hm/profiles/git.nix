@@ -19,7 +19,7 @@
     package = pkgs.gitAndTools.gitFull; # to get send-email
     delta.enable = true;
     includes = [
-      { path = config.xdg.configHome + "/git/config.inc"; }
+      # { path = config.xdg.configHome + "/git/config.inc"; }
       # everything under ~/yourworkfolder/ is company code, so use the other user/email/gpg key, etc
       {
         # path = ./resources/gitconfigwork;
@@ -39,7 +39,6 @@
       # get top level directory of the repo
       root = "git rev-parse --show-toplevel";
     };
-
 
     # lots inspired by https://blog.gitbutler.com/how-git-core-devs-configure-git/
     extraConfig = {
@@ -123,7 +122,7 @@
         # how code movement in different colors then added and removed lines.
         colorMoved = true;
 
-        # replace the a/ and b/ in your diff header output with where the diff is coming from, so i/ (index), w/ (working directory) or c/ commit. 
+        # replace the a/ and b/ in your diff header output with where the diff is coming from, so i/ (index), w/ (working directory) or c/ commit.
         mnemonicPrefix = true;
 
       };

@@ -4,12 +4,12 @@
   pkgs,
   lib,
   secrets,
-  # , flakeInputs
+  # , flakeSelf.inputs
   ...
 }:
 let
   # secrets = import ../../../nixpkgs/secrets.nix;
-  # sshLib = import ../../../nixpkgs/lib/ssh.nix { inherit secrets flakeInputs; };
+  # sshLib = import ../../../nixpkgs/lib/ssh.nix { inherit secrets flakeSelf.inputs; };
 
 in
 {

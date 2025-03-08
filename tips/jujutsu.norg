@@ -1,0 +1,49 @@
+Jujutsu does not have a corresponding concept of a 'current bookmark'; instead, you update bookmarks manually. 
+Doesnt work with git-crypt:
+https://github.com/jj-vcs/jj/discussions/4995
+https://github.com/jj-vcs/jj/issues/53
+
+* configuration 
+
+jj config edit --user
+jj git init --colocate
+
+jj git clone ..
+
+jj rebase -s @ -d master
+
+jj describe -m "add a comment to main"
+
+# Add a feature, then add a description and start a new commit
+$ jj commit -m 'feat(bar): add support for bar'
+# Let Jujutsu generate a bookmark name and push that to GitHub. Note that we
+# push the working-copy commit's *parent* because the working-copy commit
+# itself is empty.
+$ jj git push -c @-
+
+* There is no concept of branch"
+
+`jj util gc` to speed up repos with several branches
+
+* fetch /
+   
+  jj git fetch --remote gh
+  jj git push
+
+* bookmarks 
+
+https://github.com/jj-vcs/jj/blob/main/docs/bookmarks.md
+
+  jj bookmark list
+
+
+* configure remotes:
+
+  .jj/repo/config.toml
+
+@code.start
+
+[git]
+fetch = ["up", "gh"]
+push = "gh"
+@code.end

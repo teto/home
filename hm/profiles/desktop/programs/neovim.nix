@@ -27,15 +27,14 @@ let
     # pkgs.vimPlugins.blink-cmp-git # autocomplete github issues/PRs
   ];
 
-
   # try via rocks.nvim first
   neotestPlugins = with pkgs.vimPlugins; [
     # neotest
     # neotest-haskell
   ];
 
-  treesitterPlugins =  [
-    pkgs.vimPlugins.nvim-treesitter-pairs 
+  treesitterPlugins = [
+    pkgs.vimPlugins.nvim-treesitter-pairs
     pkgs.vimPlugins.nvim-treesitter-textobjects
     pkgs.vimPlugins.nvim-treesitter-parsers.nix
     pkgs.vimPlugins.nvim-treesitter-parsers.hurl
@@ -58,7 +57,6 @@ let
   luaPlugins = with pkgs.vimPlugins; [
 
     pkgs.vimPlugins.typescript-tools-nvim
-
 
     # not upstreamed yet
     # (luaPlugin { plugin = nvim-lua-gf; })
@@ -118,7 +116,7 @@ let
     luajitPackages.luacheck
 
     luaformatter
-    # nvimLua.pkgs.luarocks # should be brought by rocks config 
+    # nvimLua.pkgs.luarocks # should be brought by rocks config
 
     # luaPackages.lua-lsp
     # lua53Packages.teal-language-server
@@ -130,7 +128,6 @@ let
     nodePackages.vscode-langservers-extracted # needed for jsonls aka "vscode-json-language-server"
     # prettier sadly can't use buildNpmPackage because no lockfile https://github.com/NixOS/nixpkgs/issues/229475
     nodePackages.dockerfile-language-server-nodejs
-
 
     # TODO map it to a plugin instead
     # nodePackages.typescript-language-server
@@ -169,78 +166,85 @@ in
 
   lsp.mapOnAttach = true;
 
-  # 
+  #
   # enableYazi = true;
+
+  # local nix_deps = require('generated-by-nix')
 
   extraLuaConfig = # lua
     lib.mkAfter ''
-    require('init-manual')
+      require('init-manual')
     '';
 
   # _imports = [
-  #   flakeSelf.homeModules.neovim
+  #   flakeSelf.homeProfiles.neovim
   # ];
   #
-    plugins =
-      [ # TODO hacking on this
-        {
-          # display git diff while rebasing, pretty dope
-          plugin = pkgs.vimPlugins.auto-git-diff;
-          # config = ''
-          # let g:auto_git_diff_disable_auto_update=1
-          # '';
-        }
-        (luaPlugin {
-          plugin = pkgs.vimPlugins.unicode-vim;
-          # ${pkgs.vimPlugins.unicode-vim.passthru.initLua}
-          config = ''
+  plugins =
+    [
+      # TODO hacking on this
+
+
+      # TODO replaced with https://github.com/yutkat/git-rebase-auto-diff.nvim 
+      # {
+      #   # display git diff while rebasing, pretty dope
+      #   # my complaints: has issues with sync mode
+      #   plugin = pkgs.vimPlugins.auto-git-diff;
+      #   # config = ''
+      #   # let g:auto_git_diff_disable_auto_update=1
+      #   # '';
+      # }
+
+      (luaPlugin {
+        plugin = pkgs.vimPlugins.unicode-vim;
+        # ${pkgs.vimPlugins.unicode-vim.passthru.initLua}
+        config = ''
           -- overrides ga
           vim.keymap.set ( "n", "ga",  "<Plug>(UnicodeGA)", { remap = true, } )
-          '';
-        })
+        '';
+      })
 
-      ]
-      ++ luaPlugins
-      ++ blinkPlugins
-      ++ filetypePlugins
-      ++ treesitterPlugins
-      # ++ telescopePlugins
-      ++ neotestPlugins;
-
-    # plugins = with pkgs.vimPlugins; [
-    #  tint-nvim
-    # ];
-    # -- vim.lsp.set_log_level("info")
-    # -- require my own manual config
-    # -- logs are written to /home/teto/.cache/vim-lsp.log
-
-    # viml config, to test home-manager setup
-    # extraConfig = ''
-    #  '';
-
-    withNodeJs = true; # for tests
-
-
-    # HACK till we fix it
-    # or else we need a vim.g.sqlite_clib_path
-    extraLuaPackages = lp: [
-      lp.sqlite
     ]
-    # nvimLua.pkgs.rest-nvim.propagatedBuildInputs
-    ;
+    ++ luaPlugins
+    ++ blinkPlugins
+    ++ filetypePlugins
+    ++ treesitterPlugins
+    # ++ telescopePlugins
+    ++ neotestPlugins;
 
-    extraPython3Packages = p: [
-      p.jupyter_client
-      p.pyperclip # if you want to use molten_copy_output
-      p.nbformat # to import/export notebooks
-      p.pynvim
-    ];
-    extraPackages =
-      extraPackages 
-      ++ pkgs.vimPlugins.llm-nvim.runtimeDeps # temporary workaround
-      ++ [
-          pkgs.gitlab-ci-ls # gitlab lsp
-        ]
+  # plugins = with pkgs.vimPlugins; [
+  #  tint-nvim
+  # ];
+  # -- vim.lsp.set_log_level("info")
+  # -- require my own manual config
+  # -- logs are written to /home/teto/.cache/vim-lsp.log
 
-    ;
+  # viml config, to test home-manager setup
+  # extraConfig = ''
+  #  '';
+
+  withNodeJs = true; # for tests
+
+  # HACK till we fix it
+  # or else we need a vim.g.sqlite_clib_path
+  extraLuaPackages = lp: [
+    lp.sqlite
+  ]
+  # nvimLua.pkgs.rest-nvim.propagatedBuildInputs
+  ;
+
+  extraPython3Packages = p: [
+    p.jupyter_client
+    p.pyperclip # if you want to use molten_copy_output
+    p.nbformat # to import/export notebooks
+    p.pynvim
+  ];
+  extraPackages =
+    extraPackages
+    ++ pkgs.vimPlugins.llm-nvim.runtimeDeps # temporary workaround
+    ++ [
+      pkgs.gitlab-ci-ls # gitlab lsp
+    ]
+
+  ;
 }

@@ -6,6 +6,9 @@ you can start neovim with --luamod-dev
 also set vim.g.__ts_debug to help debug language-tree
 
 
+ExternalProject_Add(uncrustify
+https://cmake.org/cmake/help/latest/module/ExternalProject.html#id2
+
 * load the result of rg --vimgrep in quickfix:
 
 @code.start

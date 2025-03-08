@@ -1,0 +1,5 @@
+vainfo
+
+ls -l /dev/dri/by-path
+
+cat /proc/acpi/wakeup

@@ -12,7 +12,6 @@ end
 
 -- local M = require('lualine.component'):extend()
 
-
 local M = {
     function()
         return ''

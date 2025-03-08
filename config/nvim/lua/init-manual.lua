@@ -1,37 +1,21 @@
--- tell me what to do
--- if vim.env.PROF then
---   -- example for lazy.nvim
---   -- change this to the correct path for your plugin manager
---   -- ~/.local/share/nvim/site/pack/luarocks/opt/snacks.nvim/
---   local snacksFolder = vim.fn.stdpath("data") .. "/site/pack/luarocks/opt/snacks.nvim"
---
---
---   vim.opt.rtp:append(snacksFolder)
---   require("snacks.profiler").startup({
---     startup = {
---       event = "VimEnter", -- stop profiler on this event. Defaults to `VimEnter`
---       -- event = "UIEnter",
---       -- event = "VeryLazy",
---     },
---   })
--- end
-
 -- vim: set noet fdm=marker fenc=utf-8 ff=unix sts=0 sw=4 ts=4 :
 -- https://github.com/nanotee/nvim-lua-guide#using-meta-accessors
 -- https://www.reddit.com/r/neovim/comments/o8dlwg/how_to_append_to_an_option_in_lua/
 -- local configs = require'nvim_lsp/configs'
 -- vim.loader.enable()
 -- showcmdloc
+
 local has_fzf_lua, fzf_lua = pcall(require, 'fzf-lua')
 
 -- set to true to enable it
 local use_fzf_lua = has_fzf_lua and true
 local use_telescope = not use_fzf_lua
 
-
 local map = vim.keymap.set
 
 local nix_deps = require('generated-by-nix')
+-- new option
+-- vim.o.winborder = "rounded"
 
 diagnostic_default_config = {
     -- disabled because too big in haskell
@@ -76,6 +60,8 @@ vim.diagnostic.config(diagnostic_default_config)
 -- )
 -- vim.cmd([[sign define DiagnosticSignHint text=H texthl=LspDiagnosticsSignHint linehl= numhl=]])
 
+-- vim.opt.foldtext = 'v:lua.vim.treesitter.foldtext()'
+vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 
 -- TODO remove in favor of the generated one
 -- vim.g.sqlite_clib_path = nix_deps.sqlite_clib_path
@@ -85,7 +71,7 @@ vim.diagnostic.config(diagnostic_default_config)
 vim.o.sessionoptions = 'buffers,curdir,help,tabpages,winsize,winpos,localoptions'
 
 -- vim.opt.rtp:prepend(os.getenv('HOME') .. '/rocks-dev.nvim')
--- vim.opt.rtp:prepend(os.getenv('HOME') .. '/rocks.nvim')
+vim.opt.rtp:prepend(os.getenv('HOME') .. '/rocks.nvim')
 
 -- require("vim.lsp._watchfiles")._watchfunc = require("vim._watch").watch
 -- local ffi = require 'ffi'
@@ -104,7 +90,7 @@ vim.g.rocks_nvim = {
     -- TODO reference one from
     -- use nix_deps.luarocks_executable
     -- coming from nixpkgs
-	-- TODO removing this generates errors at runtime :'(
+    -- TODO removing this generates errors at runtime :'(
     luarocks_binary = nix_deps.luarocks_executable,
     -- /home/teto/.local/share/nvim/rocks/luarocks-config.lua
     luarocks_config = luarocks_config_fn(),
@@ -135,8 +121,6 @@ vim.g.rocks_nvim = {
 --         -- Your config here!
 --     })
 -- end
-
-
 
 -- vim.opt.packpath:prepend('/home/teto/gp.nvim2')
 
@@ -225,7 +209,6 @@ vim.opt.rtp:prepend('/home/teto/parsers')
 -- main config {{{
 -- vim.opt.splitbelow = true	-- on horizontal splits
 vim.opt.splitright = true -- on vertical split
-
 
 -- Indentation {{{
 vim.opt.tabstop = 4 -- a tab takes 4 characters (local to buffer) abrege en ts
@@ -323,8 +306,6 @@ vim.opt.whichwrap = vim.opt.whichwrap + '<,>,h,l'
 -- folding config {{{
 -- " block,hor,mark,percent,quickfix,search,tag,undo
 -- " set foldopen+=all " specifies commands for which folds should open
--- " set foldclose=all
--- "set foldtext=
 vim.opt.fillchars = vim.opt.fillchars + 'foldopen:▾,foldsep:│,foldclose:▸'
 vim.opt.fillchars = vim.opt.fillchars + 'msgsep:‾'
 vim.opt.fillchars = vim.opt.fillchars + 'diff: ' -- \
@@ -389,7 +370,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
             return
         end
         on_attach.on_attach(client, bufnr)
-
 
         -- if client:supports_method('textDocument/implementation') then
         --   -- Create a keymap for vim.lsp.buf.implementation
@@ -470,7 +450,6 @@ vim.g.fzf_preview_window = 'right:30%'
 -- For Commits and BCommits to customize the options used by 'git log':
 vim.g.fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
 
-
 -- TODO this should depend on theme ! computed via lush
 vim.api.nvim_create_autocmd('ColorScheme', {
     desc = 'Set italic codelens on new colorschemes',
@@ -493,7 +472,6 @@ vim.keymap.set('n', '<Leader>sv', '<Cmd>source $MYVIMRC<CR>', { desc = 'Reload m
 vim.keymap.set('n', '<Leader>el', '<Cmd>e ~/.config/nvim/lua/init-manual.lua<CR>')
 vim.keymap.set('n', '<F6>', '<Cmd>ASToggle<CR>', { desc = 'Toggle autosave' })
 
-
 vim.g.autosave_disable_inside_paths = { vim.fn.stdpath('config') }
 
 --  when launching term
@@ -514,7 +492,6 @@ vim.g.fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %
 -- "   au!
 -- "   au BufWritePost $MYVIMRC,.vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc,init.vim so $MYVIMRC | if has('gui_running') | so $MYGVIMRC | endif
 -- " augroup END
-
 
 vim.keymap.set('n', '<leader>rg', '<Cmd>Grepper -tool rg -open -switch<CR>')
 
@@ -567,9 +544,8 @@ vim.g.indicator_ok = '✅'
 -- ✓
 vim.g.spinner_frames = { '⣾', '⣽', '⣻', '⢿', '⡿', '⣟', '⣯', '⣷' }
 
-
 if use_fzf_lua then
-    require'plugins.fzf-lua'
+    require('plugins.fzf-lua')
 end
 
 if use_telescope then
@@ -631,8 +607,6 @@ vim.keymap.set(
     '<Plug>(ToggleListchars)',
     { desc = 'Change between different flavors of space/tab characters' }
 )
-
-
 
 -- nvim will load any .nvimrc in the cwd; useful for per-project settings
 vim.opt.exrc = true
@@ -703,13 +677,11 @@ end
 --     vim.diagnostic.jump({ count = 1, wrap = true, severity = vim.diagnostic.severity.ERROR })
 -- end, { buffer = true })
 
-
 -- vim.opt.runtimepath:prepend('/home/teto/neovim/nvim-dbee')
 -- local has_dbee, dbee = pcall(require, 'dbee')
 -- if has_dbee then
 --     dbee.setup({})
 -- end
-
 
 vim.opt.completeopt = 'preview,menu,menuone,noselect'
 -- wait:5000, wrong idea
@@ -733,9 +705,6 @@ vim.keymap.set('v', '<leader>B', '<Plug>(ToBase64)')
 
 -- vim.keymap.set('c', '<c-a>', '<c-y>', { })
 
-
-
-
 -- used to avoid ftetect on those
 -- :let g:ft_ignore_pat = '\.\(Z\|gz\|bz2\|zip\|tgz\)$'
 
@@ -748,15 +717,13 @@ vim.api.nvim_set_keymap(
 )
 
 vim.api.nvim_create_autocmd('ColorScheme', {
-  callback = function()
-    vim.api.nvim_set_hl(0, 'LspReferenceTarget', {})
-  end,
+    callback = function()
+        vim.api.nvim_set_hl(0, 'LspReferenceTarget', {})
+    end,
 })
 
 -- 0 is kinda buggy with confirm and so on
 vim.opt.cmdheight = 1
-
-
 
 -- for indentblankline
 require('plugins.nvim-treesitter-textobjects')

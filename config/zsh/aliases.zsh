@@ -36,7 +36,6 @@ rfw(){
     readlink -f $(which "$1")
 }
 
-
 # to edit nixos kernel config
 # then type $ make menuconfig
 # make menuconfig KCONFIG_CONFIG=config_off
@@ -105,6 +104,3 @@ function latest {
 }
 
 #}}}
-
-# alias servethis="nix run nixpkgs#python3 --command \'python -c 'import SimpleHTTPServer; SimpleHTTPServer.test()'\""
-

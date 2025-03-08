@@ -2,12 +2,12 @@
   config,
   pkgs,
   lib,
-  flakeInputs,
+  flakeSelf,
   ...
 }:
 let
 
-  nvimLib = pkgs.callPackages ../../../../../../hm/profiles/neovim/lib.nix {};
+  nvimLib = pkgs.callPackages ../../../../../../hm/profiles/neovim/lib.nix { };
 
   inherit (nvimLib) luaPlugin;
 
@@ -27,7 +27,6 @@ let
     # pkgs.vimPlugins.targets-vim # to get 'ci/'
     # TODO check that it brings xxd in scope
     # pkgs.vimPlugins.hex-nvim
-
 
     # should bring in scope fzy
     # (luaPlugin { plugin = nvim-ufo; })
@@ -83,7 +82,6 @@ let
 
     # disabled because of https://github.com/rktjmp/lush.nvim/issues/89
     # (luaPlugin { plugin = lush-nvim; }) # dependency of some colorschemes
-
 
     {
       # node-based :MarkdownPreview
@@ -153,7 +151,6 @@ let
   filetypePlugins = with pkgs.vimPlugins; [
   ];
 
-
   # (luaPlugin { plugin = telescope-nvim; })
 
   # TODO get lua interpreter to select the good lua packages
@@ -163,7 +160,7 @@ in
   programs.neovim = {
 
     plugins =
-         luaPlugins
+      luaPlugins
       ++ filetypePlugins
       ++ treesitterPlugins
       # ++ telescopePlugins

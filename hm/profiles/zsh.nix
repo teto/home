@@ -74,7 +74,17 @@
     # bindkey ‘^P’ up-line-or-beginning-search
     # bindkey ‘^N’ down-line-or-beginning-search
 
+    # adds bash compatibility layer for autocompletion. Adds 'complete' for instance
+    # used for jinko-seeder
+    # is it going to be merged with compinit ?
+    # completionInit = ''
+    #   autoload -U compinit && compinit
+    #   autoload -U bashcompinit; bashcompinit
+    # '';
+
     # source ${pkgs.awscli2}/share/zsh/site-functions/_aws
+    # initExtraFirst
+    # auto
     initExtra = ''
 
       # workaround aws drv bug see https://github.com/NixOS/nixpkgs/issues/275770#issuecomment-1977471765

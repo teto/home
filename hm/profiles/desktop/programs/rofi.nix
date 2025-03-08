@@ -1,7 +1,7 @@
 {
   config,
   pkgs,
-  flakeInputs,
+  flakeSelf,
   lib,
   ...
 }:
@@ -29,7 +29,7 @@
     rofi-emoji
     rofi-calc
     # passed as a flake now
-    flakeInputs.rofi-hoogle.packages.${pkgs.system}.rofi-hoogle # TODO see https://github.com/rebeccaskinner/rofi-hoogle/issues/3
+    flakeSelf.inputs.rofi-hoogle.packages.${pkgs.system}.rofi-hoogle # TODO see https://github.com/rebeccaskinner/rofi-hoogle/issues/3
   ];
   # pass.stores = [];
 

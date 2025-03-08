@@ -17,15 +17,15 @@ return {
     --     'compile_flags.txt',
     --     'configure.ac' -- AutoTools
     --   )(fname) or vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1])
-	-- end,
+    -- end,
 
     filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda', 'proto' },
     capabilities = {
-      textDocument = {
-        completion = {
-          editsNearCursor = true,
+        textDocument = {
+            completion = {
+                editsNearCursor = true,
+            },
         },
-      },
-      offsetEncoding = { 'utf-8', 'utf-16' },
+        offsetEncoding = { 'utf-8', 'utf-16' },
     },
 }

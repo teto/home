@@ -1,7 +1,13 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
-   cfg = config.programs.cliphist;
-in {
+  cfg = config.programs.cliphist;
+in
+{
   options = {
     programs.cliphist = {
       enableFzfIntegration = lib.mkEnableOption "fzf integration";
@@ -15,7 +21,6 @@ in {
 
     (lib.mkIf cfg.enableFzfIntegration {
 
-
       programs.bash.initExtra = ''
         cliphist list | fzf --no-sort | cliphist decode | wl-copy
       '';
@@ -26,5 +31,5 @@ in {
 
     })
 
-    ];
+  ];
 }

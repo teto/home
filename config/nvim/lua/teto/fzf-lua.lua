@@ -1,6 +1,25 @@
+-- wiki is pretty dope https://github.com/ibhagwan/fzf-lua/wiki/Advanced#fzf-exec-api
 local _, fzf_lua = pcall(require, 'fzf-lua')
 
 local M = {}
+
+-- lua require'fzf-lua'.fzf_exec({ "line1", "line2" })
+
+-- use fre to filter files by
+function M.git_fre() end
+
+local git_files_opts = {
+
+    entry_maker = function(entry)
+        -- Here you can add prioritized sorting or influence entries
+        return {
+            valid = true,
+            value = entry,
+            ordinal = entry, -- What's used for filtering/sorting matches
+            display = 'TOTO ' .. entry, -- How the display is rendered
+        }
+    end,
+}
 
 function M.register_keymaps()
     -- autocomplete :FzfLua to see what's available
@@ -9,9 +28,9 @@ function M.register_keymaps()
     end)
     vim.keymap.set('n', '<Leader>o', function()
         fzf_lua.git_files({
-			-- fzf_opts = {['--scheme'] = 'path'}
-		}
-		)
+            -- entry_maker = entry_maker
+            -- fzf_opts = {['--scheme'] = 'path'}
+        })
     end)
     vim.keymap.set('n', '<Leader>F', function()
         fzf_lua.filetypes()
@@ -72,7 +91,7 @@ function M.fzf_mru(opts)
     opts.cmd = 'command cat <(fre --sorted --store_name ' .. hash .. ") <(fd -t f) | awk '!x[$0]++'" -- | the awk command is used to filter out duplicates.
     opts.fzf_opts = vim.tbl_extend('force', opts.fzf_opts, {
         -- ['--tiebreak'] = 'index', -- make sure that items towards top are from history
-		['--scheme'] = 'path',
+        ['--scheme'] = 'path',
     })
     opts.actions = vim.tbl_extend('force', opts.actions or {}, {
         ['ctrl-d'] = {

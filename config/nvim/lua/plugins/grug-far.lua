@@ -1,8 +1,3 @@
-require('grug-far').setup({
-    -- ... options, see Configuration section below ...
-    -- ... there are no required options atm...
-})
-
 local menu = require('teto.context_menu')
 
 -- lua require('grug-far').open({ prefills = { search = vim.fn.expand("<cword>") } })

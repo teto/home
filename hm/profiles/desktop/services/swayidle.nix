@@ -2,7 +2,7 @@
 {
   # https://github.com/rycee/home-manager/pull/829
   # services.swayidle = {
-  enable = true;
+  enable = false;
 
   # TODO write this in config/swayidle/config instead ?
   timeouts = [

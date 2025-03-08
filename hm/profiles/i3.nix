@@ -19,10 +19,6 @@ in
     # will enable SNI for nm-applet => icon will popup on wayland systray
     preferStatusNotifierItems = true;
     scriptPath = ".hm-xsession";
-    # initExtra =
-
-    # profileExtra = ''
-    # '';
   };
 
   # you can switch from cli with xkb-switch or xkblayout-state
@@ -31,8 +27,6 @@ in
     # options = [ "grp:caps_toggle" "grp_led:scroll" ];
     options = [ "add Mod1 Alt_R" ];
   };
-
-  # services.parcellite.enable = true;
 
   home.packages = with pkgs; [
     # xbacklight # for usage with i3pystatus backight module

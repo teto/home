@@ -1,17 +1,14 @@
-{
-  pkgs,
-  lib,
-  config,
-  ...
+{ dotfilesPath
+
 }:
 {
   # TODO test http://alot.readthedocs.io/en/latest/configuration/key_bindings.html
   # w = pipeto urlscan 2> /dev/null
-  programs.alot = {
     enable = true;
 
     # Hooks are python callables that live in a module specified by hooksfile in the config.
-    hooks = builtins.readFile ../../config/alot/apply_patch.py;
+    # xdg.configFile."alot/hooks.py"
+    # hooks = builtins.readFile "${;
 
     # see https://github.com/pazz/alot/wiki/Tips,-Tricks-and-other-cool-Hacks for more ideas
     bindings =
@@ -119,10 +116,11 @@
       thread_authors_replace_me = true;
       notify_timeout = 20; # -1 for unlimited
 
+      hooksfile = "${dotfilesPath}/config/alot/apply_patch.py";
+
       initial_command = "search tag:inbox AND NOT tag:killed";
       # initial_command = "bufferlist; taglist; search foo; search bar; buffer 0";
       # envelope_txt2html = "pandoc -f markdown -t html -s --self-contained";
       # envelope_html2txt = "${pkgs.pandoc}/bin/pandoc -t markdown -f html";
     };
-  };
 }

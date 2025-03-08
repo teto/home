@@ -1,51 +1,33 @@
 {
-  config,
   lib,
-  dotfilesPath,
   flakeSelf,
-  pkgs
-, secrets
-, novaUserProfile
-, ...
+  pkgs,
+  novaUserProfile,
+  ...
 }:
-let 
-  flakeInputs = flakeSelf.inputs;
-in
 {
   imports = [
-    # ./nixos/profiles/nova/rstudio-server.nix
-
-    # ../profiles/nova.nix
-    flakeInputs.nova-doctor.nixosModules.antivirus
-    flakeInputs.nova-doctor.nixosModules.collections
-    flakeInputs.nova-doctor.nixosModules.vpn
-    flakeInputs.nova-doctor.nixosModules.nix-daemon
+    flakeSelf.inputs.nova-doctor.nixosModules.antivirus
+    flakeSelf.inputs.nova-doctor.nixosModules.collections
+    flakeSelf.inputs.nova-doctor.nixosModules.vpn
+    flakeSelf.inputs.nova-doctor.nixosModules.nix-daemon
+    flakeSelf.inputs.nova-doctor.nixosModules.virt-manager
 
     # we need both because nova consumes quite a bit of CPU
-    flakeInputs.nova-doctor.nixosModules.gnome
-    flakeSelf.nixosModules.gnome
+    flakeSelf.inputs.nova-doctor.nixosModules.gnome
+    flakeSelf.nixosProfiles.gnome
   ];
-
-  # # devrait deja etre ok ?
-  # home-manager.extraSpecialArgs = {
-  #   inherit secrets withSecrets;
-  #   # withSecrets = true;
-  #   # flakeInputs = self.inputs;
-  # };
 
   environment.systemPackages = [
     pkgs.doctor_upgrade_nixos
     pkgs.dbeaver-bin
-    # pkgs.tailscale-systray
-    # pkgs.trayscale
-    # pkgs.doctor_manage_collections
   ];
 
   # home-manager = {
   #   users = {
   #     root = {
   #       imports = [
-  #         flakeInputs.nova-doctor.homeModules.root
+  #         flakeSelf.inputs.nova-doctor.homeModules.root
   #       ];
   #       programs.zsh.enable = true;
   #       # sops.defaultSopsFile = ../secrets.yaml;
@@ -65,14 +47,15 @@ in
       ];
     };
 
+    # novaUserProfile.userName
     teto = {
       imports = [
         # TODO move it here
-        ../../hm/profiles/nova/ssh-config.nix
+        ../../hm/profiles/nova.nix
 
-        flakeInputs.nova-doctor.homeModules.user
-        flakeInputs.nova-doctor.homeModules.sse
-        flakeInputs.nova-doctor.homeModules.vpn
+        flakeSelf.inputs.nova-doctor.homeModules.user
+        flakeSelf.inputs.nova-doctor.homeModules.sse
+        flakeSelf.inputs.nova-doctor.homeModules.vpn
       ];
     };
   };
@@ -80,8 +63,6 @@ in
   # for sharedssh access
   # services.gvfs.enable = true;
 
-  # userName = secrets.accounts.mail.nova.email;
-  # Expected by
 
   # builtins.toJSON
   # lib.generators.toPretty {}
@@ -115,6 +96,5 @@ in
       simwork = "registry.novadiscovery.net/jinko/jinko/core-webservice"
       habu = "registry.novadiscovery.net/jinko/dorayaki/habu"
       dango = "registry.novadiscovery.net/jinko/dorayaki/dango"
-      # "podman-desktop-test123"="florent.fr/will/like"
   '';
 }

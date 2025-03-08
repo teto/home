@@ -4,7 +4,7 @@
   lib,
   secrets,
   withSecrets,
-  flakeInputs,
+  flakeSelf,
   secretsFolder,
 
   ...
@@ -16,7 +16,7 @@ let
     hostname = m.hostname;
     identitiesOnly = true;
     extraOptions = {
-      userKnownHostsFile = lib.mkForce "${flakeInputs.nova-ci}/configs/prod/ssh_known_hosts";
+      userKnownHostsFile = lib.mkForce "${flakeSelf.inputs.nova-ci}/configs/prod/ssh_known_hosts";
 
       # persist connections when logging in remote builders
       # controlmaster = "auto";
@@ -39,7 +39,7 @@ in
 
         # TODO make this generic/available to all users
         prod-runners = builtins.fromJSON (
-          builtins.readFile "${flakeInputs.nova-ci}/configs/prod/runners-generated.json"
+          builtins.readFile "${flakeSelf.inputs.nova-ci}/configs/prod/runners-generated.json"
         );
 
         remoteBuilders = lib.listToAttrs (

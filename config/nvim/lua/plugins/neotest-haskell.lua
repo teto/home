@@ -1,6 +1,7 @@
-require('neotest').setup({
+local neotest = require('neotest')
+neotest.setup({
     adapters = {
-        require('neotest-haskell')({
+        neotest({
             -- Default: Use stack if possible and then try cabal
             build_tools = { 'stack', 'cabal' },
             -- Default: Check for tasty first and then try hspec

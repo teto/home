@@ -1,5 +1,5 @@
 #  vim: set noet fenc=utf-8 ff=unix sts=0 sw=4 ts=4 foldmethod=marker :
-.direnv
+/.direnv
 .ccls-cache/
 /tags
 /TAGS
@@ -10,7 +10,7 @@
 .*.vim
 
 # gp.nvim cache
-.gp.md 
+/.gp.md 
 
 __pad__
 

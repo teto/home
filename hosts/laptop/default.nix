@@ -9,6 +9,7 @@
 }:
 let
   haumea = flakeSelf.inputs.haumea;
+
   laptopAutoloaded =
     { pkgs, ... }@args:
     haumea.lib.load {
@@ -79,30 +80,22 @@ in
     [
       laptopAutoloaded
       # should not ?!
-      desktopAutoloaded
+      # desktopAutoloaded
 
-      ./sops.nix
       ./generated.nix
 
-      # ../../nixos/modules/luarocks-site.nix
-
       flakeSelf.nixosModules.desktop
-      flakeSelf.nixosModules.sudo
-      flakeSelf.nixosModules.universal
-      flakeSelf.nixosModules.nix-daemon
       flakeSelf.nixosModules.nix-ld
 
       # TODO this triggers the error on boot I think
-      ../../nixos/profiles/desktop.nix
+      flakeSelf.nixosModules.desktop
 
       ../../nixos/profiles/docker-daemon.nix
-      ../../nixos/profiles/greetd.nix
       ../../nixos/profiles/podman.nix
-      ../../nixos/profiles/homepage-dashboard.nix
+      # ../../nixos/profiles/homepage-dashboard.nix
       ../../nixos/profiles/qemu.nix
       ../../nixos/profiles/steam.nix
-      ../../nixos/profiles/sway.nix
-      ../../nixos/profiles/wifi.nix
+      # ../../nixos/profiles/sway.nix
       # ../../nixos/profiles/adb.nix
       ../../nixos/profiles/kanata.nix
       ../../nixos/profiles/postgresql.nix
@@ -122,6 +115,11 @@ in
   # powerManagement.cpuFreqGovernor = "powersave";
 
   security.polkit.enable = true;
+
+  # https://github.com/rycee/home-manager/pull/829
+  # https://discourse.nixos.org/t/sway-nixos-home-manager-conflict/20760/10
+  programs.sway.enable = true;
+  programs.sway.package = null;
 
   # To control power levels via powerprofilesctl
   # services.power-profiles-daemon.enable = true;
@@ -161,10 +159,9 @@ in
         # ../desktop/root/programs/ssh.nix
         ./home-manager/users/root/default.nix
 
-        # flakeSelf.homeModules.neovim
+        # flakeSelf.homeProfiles.neovim
         # ] ++ lib.optionals withSecrets [
         #   # ../../hm/profiles/nova/ssh-config.nix
-        #     flakeSelf.homeModules.nova
       ];
     };
 
@@ -180,7 +177,7 @@ in
   # it is necessary to use dnssec though :(
   networking.resolvconf.dnsExtensionMechanism = false;
   networking.resolvconf.dnsSingleRequest = true; # juste pour test
-  networking.hostName = "mcoudron"; # Define your hostname.
+  networking.hostName = "tatooine"; # Define your hostname.
 
   hardware = {
     # enableAllFirmware =true;

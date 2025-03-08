@@ -70,8 +70,8 @@ nixpkgs-index:
  rippkgs-index nixpkgs {{NIXPKGS}} --index ~/.local/share/rippkgs-index.sqlite
 
 # TODO finish
-nix-index:
-  nix run github:nix-community/nix-index-database BIN_TO_SEARCH
+nix-index args:
+  nix run github:nix-community/nix-index-database {{args}}
 
 nix-gc:
   nix-collect-garbage --delete-older-than 3d

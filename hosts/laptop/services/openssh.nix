@@ -1,12 +1,9 @@
 {
-  config,
-  pkgs,
-  lib,
   ...
 }:
 {
 
-  enable = true;
+  enable = false;
   # kinda experimental
   ports = [ 12666 ];
 

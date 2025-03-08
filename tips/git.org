@@ -7,6 +7,10 @@ git repack -a -d --depth=250 --window=250
 
 git gc --aggressive --prune
 
+* how to select a version during rebase ?
+
+git checkout --ours / --theirs during a rebase to avoid conflict
+
 https://help.github.com/en/articles/checking-out-pull-requests-locally
  git fetch origin pull/ID/head:BRANCHNAME
 
@@ -47,3 +51,7 @@ git bisect run ../test.sh
 git config user.email
 
 --reset-author is not enough e
+
+* signatures
+
+git config gpg.ssh.allowedSignersFile

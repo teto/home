@@ -15,9 +15,9 @@
   # programs.mpv = {
   enable = true;
 
-    includes = [
-      "manual.conf"
-    ];
+  includes = [
+    "manual.conf"
+  ];
 
   # see https://wiki.archlinux.org/title/Mpv
   #   # Include additional configuration files

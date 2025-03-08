@@ -25,5 +25,16 @@
             "}"
         ],
         "description": "Nixos module full file"
+    },
+    "nix profile": {
+      "prefix": [ "nixprof" ],
+      "body": [
+         "{ config, lib, pkgs, ... }:",
+         "{",
+          "  ",
+          "}"
+         ],
+        "description": "A simple nix profile"
+
     }
 }

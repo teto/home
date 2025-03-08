@@ -16,7 +16,7 @@ in
         default = false;
         type = lib.types.bool;
         description = ''
-          Whether to enable Fish integration.
+          Add teto's favorite search engines.
         '';
       };
     };

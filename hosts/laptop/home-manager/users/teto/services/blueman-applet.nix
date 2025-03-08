@@ -10,6 +10,6 @@
 
   # --loglevel debug
   systemd.user.services.blueman-applet.Service = {
-    ExecStart = lib.mkForce "${pkgs.blueman}/bin/blueman-applet --loglevel debug"; 
+    ExecStart = lib.mkForce "${pkgs.blueman}/bin/blueman-applet --loglevel debug";
   };
 }

@@ -1,0 +1,16 @@
+{
+    "zola new post": {
+        "prefix": [
+            "zpost"
+        ],
+        "body": [
+         "+++",
+         "description='homepage'",
+         "title='test toto'",
+         "tags=neovim",
+         "author=Matt",
+         "+++"
+        ],
+        "description": "New blog post"
+    }
+}

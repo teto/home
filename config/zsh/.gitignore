@@ -1,3 +1,4 @@
-.zcompdump
+/.zcompdump
+/.zshenv
 zshrc.generated
 cache/

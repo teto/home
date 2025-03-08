@@ -54,6 +54,7 @@ local view = require('iron.view')
 
 -- }}}
 
+local nix_deps = require('generated-by-nix')
 iron.setup({
     config = {
         -- Whether a repl should be discarded or not
@@ -68,6 +69,10 @@ iron.setup({
             python = {
                 command = { 'python3' }, -- or { "ipython", "--no-autoindent" }
                 format = require('iron.fts.common').bracketed_paste_python,
+            },
+            lua = {
+                -- lua_interpreter
+                command = { nix_deps.lua_interpreter },
             },
         },
         -- How the repl window will be displayed

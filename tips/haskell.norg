@@ -22,6 +22,10 @@ System.Environment.getEnv
   use `:script` to load redundant commands
 
 
+* Convert tuple
+
+  uncurry / curry
+
 
 ** how to set default args ?
 

@@ -35,7 +35,8 @@ setopt completealiases
 # export HISTIGNORE="ls:ll:cd -:pwd:exit:date"
 
 # multiple zsh sessions will append to the same history file (incrementally, after each command is executed)
-# setopt inc_append_history
+
+setopt inc_append_history # write just after the command was entered rather than save on terminal exit
 setopt hist_expire_dups_first # purge duplicates first
 setopt hist_ignore_dups # Do not write events to history that are duplicates of previous events
 # setopt hist_find_no_dups # When searching history don't display results already cycled through twice
@@ -205,11 +206,11 @@ zlong_alert_func() {
 
 # completion config {{{1
 
-# autoload -U compinit && compinit
-
 # Enable completion caching, use rehash to clear
-zstyle ':completion::complete:*' use-cache on
+# TODO should I do this before calling compinit :o ?
+zstyle ':completion::complete:*' use-cache off
 zstyle ':completion::complete:*' cache-path "${XDG_CACHE_HOME:-~/.cache}/zsh/cache/$HOST"
+zstyle ':completion:*' file-sort modification
 
 # Fallback to built in ls colors
 zstyle ':completion:*' list-colors ''
@@ -224,7 +225,7 @@ zstyle ':completion:*' select-prompt '%SScrolling active: current selection at %
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#) ([0-9a-z-]#)*=01;34=0=01'
 
 # list of completers to use
-zstyle ':completion:*::::' completer _expand _complete _ignored _approximate
+# zstyle ':completion:*::::' completer _expand _complete _ignored _approximate
 
 zstyle ':completion:*' menu select=1 _complete _ignored _approximate
 
@@ -321,21 +322,6 @@ teatimer() {
     notify-send '!! Coffee Time - wake up !!';
 }
 
-# fzf config{{{
-# Use fd (https://github.com/sharkdp/fd) instead of the default find
-# command for listing path candidates.
-# - The first argument to the function ($1) is the base path to start traversal
-# - See the source code (completion.{bash,zsh}) for the details.
-_fzf_compgen_path() {
-  fd --hidden --follow --exclude ".git" . "$1"
-}
-
-# Use fd to generate the list for directory completion
-_fzf_compgen_dir() {
-  fd --type d --hidden --follow --exclude ".git" . "$1"
-}
-# }}}
-
 # # To add support for TTYs this line can be optionally added.
 # source ~/.cache/wal/colors-tty.sh
 # TODO configure from HM module
@@ -349,10 +335,7 @@ _fzf_compgen_dir() {
 
 # source $ZDOTDIR/zshrc.generated
 # used in some git aliases
-export REVIEW_BASE=master
-
-# to be able to have completion for programs with bash-only completion like vault
-autoload -U +X bashcompinit && bashcompinit
+# export REVIEW_BASE=master
 
 # source <(_HASS_CLI_COMPLETE=zsh_source hass-cli)
 function merge_hist() {
@@ -360,6 +343,11 @@ function merge_hist() {
     builtin fc -R -I "$hist_file"
     builtin fc -W "$hist_file_merged"
 }
+
+autoload jk-env
+
+compdef _jk-env jk-env
+
 compdef _git gch
 
 compdef _pass pass-nova

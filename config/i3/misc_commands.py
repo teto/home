@@ -1,7 +1,6 @@
 #!/usr/bin/python
 NOTIFY="notify-send"
 
-#virsh vcpu pin
 if [ $# -ne 1 ]; then
 	$NOTIFY "Use: $0 <action>"
 	exit 1

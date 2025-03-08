@@ -12,12 +12,7 @@
     ./bash.nix
     ./git.nix
     ./zsh.nix
-
-    # the module is a pain
-    # ./xdg-mime.nix
   ];
-
-  xdg.mime.enable = true;
 
   programs.man.enable = true;
 
@@ -27,6 +22,7 @@
 
   xdg = {
     enable = true;
+    mime.enable = true;
   };
 
   # you can switch from cli with xkb-switch or xkblayout-state
@@ -39,8 +35,6 @@
       "ctrl:nocaps" # makes caps lock an additionnal ctrl
     ];
   };
-
-  # xdg-settings set default-web-browser firefox.desktop
 
   # for colors etc.
   programs.lesspipe.enable = false;

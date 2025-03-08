@@ -10,7 +10,7 @@
 # List of Neovim plugins to install alongside their versions.
 # If the plugin name contains a dot then you must add quotes to the key name!
 [plugins]
-"rocks-git.nvim"= "2.5.2"
+"rocks-git.nvim"= "2.5.3"
 # "rocks.nvim" = "2.19.0" # rocks.nvim can also manage itself :D
 # "rocks-git.nvim"= "1.5.1"
 # "oil.nvim" = "2.14.0"
@@ -23,7 +23,7 @@
 "none-ls-extras.nvim" = "scm"
 
 "bufferline.nvim" = "4.9.1"
-auto-session = "2.5.0"
+auto-session = "2.5.1"
 "rocks-config.nvim" = "3.1.0"
 "trouble.nvim" = "3.7.1"
 "lualine.nvim" = "scm"
@@ -37,16 +37,15 @@ neotest = "5.8.0"
 "lsp_signature.nvim" = "0.3.1"
 friendly-snippets = "scm"
 # "haskell-snippets.nvim" = "1.4.4"
-"yazi.nvim" = "9.0.2"
+"yazi.nvim" = "9.2.0"
 tree-sitter-haskell = "scm"
-tree-sitter-org = "0.0.1"
-# replaced with blink ?
+# tree-sitter-org = "0.0.1"
 # "lspkind.nvim" = "scm"
 # "modicator.nvim" = "scm"
 # luasnip = "2.3.0"
 tree-sitter-http = "0.0.35"
 "hurl.nvim"= "2.1.0"
-"gitsigns.nvim" = "1.0.1"
+"gitsigns.nvim" = "1.0.2"
 
 # works with hop.nvim to jump somewhere in the AST (depends on hop.nvim so not that interesting)
 # nvim-treehopper = "scm"
@@ -56,20 +55,21 @@ tree-sitter-http = "0.0.35"
 # "smart-open.nvim"= "scm"
 
 vim-startuptime= "4.5.0"
-"grug-far.nvim"= "scm"
 # removed during testing
 # installed via nix
 "typescript-tools.nvim" = "scm"
 menu= "scm"
 # "snacks.nvim" = "2.6.0"
-fzf-lua = "0.0.1776"
+fzf-lua = "0.0.1792"
 "lz.n" = "2.11.2"
-"indent-blankline.nvim" = "3.8.7"
+"indent-blankline.nvim" = "3.9.0"
 "llm.nvim"= "scm"
 # volt is a UI library
 volt= "scm"
 # "telescope.nvim" = "0.1.6"
 nvim-lspconfig= "1.7.0"
+tree-sitter-orgmode = "2.0.0"
+tree-sitter-org = "0.0.1"
 # nvim-treesitter-textobjects = "scm"
 # "rocks-treesitter.nvim" = "1.0.3"
 
@@ -87,11 +87,16 @@ nvim-lspconfig= "1.7.0"
 
 [plugins.neorg]
 version = "9.2.0"
-ft = "norg"
+# ft = "norg"
 
 [plugins."gp.nvim"]
 # rev = "scm"
 dir = "/home/teto/gp.nvim"
+
+[plugins."grug-far.nvim"]
+# "grug-far.nvim"= "1.5.4"
+dir = "/home/teto/grug-far.nvim"
+
 
 [plugins.vim-sorcerer]
 git = "github:adlawson/vim-sorcerer"
@@ -228,7 +233,7 @@ rev = "56842d097245a08d77912edf5f2a69ba29f275d7"
 
 [plugins."iron.nvim"]
 # git = "vigemus/iron.nvim"
-dir = "/home/teto/iron.nvim"
+dir = "/home/teto/neovim/iron.nvim"
 # rev = "v3.0"
 branch = "master"
 
@@ -252,20 +257,18 @@ rev = "949ece728ecc0cacf3c6c81bbcda186fe3fef5cf"
 git = "norcalli/nvim-colorizer.lua"
 rev = "a065833f35a3a7cc3ef137ac88b5381da2ba302e"
 
-[plugins.blink-cmp]
+[plugins.blink-cmp-git]
 git = "kaiser-yang/blink-cmp-git"
 rev = "v2.4.0"
 
+[plugins."git-rebase-auto-diff.nvim"]
+git = "yutkat/git-rebase-auto-diff.nvim"
+rev = "ad95f18cb85c24ddc0b48bf190bc313dfc58e2d6"
 
-#q
-# [plugins.blink-cmp]
-# git = "kaiser-yang/blink-cmp-git"
-# rev = "v2.0.0"
+[plugins."statuscol.nvim"]
+git = "luukvbaal/statuscol.nvim"
+rev = "c399884e8f64019ec9bb581251f9710915b7f996"
 
-# we actually need some rust for it
-# [plugins."blink.cmp"]
-# git = "saghen/blink.cmp"
-# rev = "v0.9.2"
 
 [config]
 plugins_dir = "plugins/"

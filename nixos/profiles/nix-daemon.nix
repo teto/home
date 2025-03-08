@@ -1,15 +1,15 @@
-{ pkgs
-, flakeSelf
-, ...
+{
+  pkgs,
+  flakeSelf,
+  ...
 }:
 {
   nix = {
 
     distributedBuilds = true;
 
-    package = 
-      # pkgs.nixVersions.nix_2_26
-      flakeSelf.inputs.nix-schemas.packages.${pkgs.system}.nix
+    package = pkgs.nixVersions.nix_2_26
+    # flakeSelf.inputs.nix-schemas.packages.${pkgs.system}.nix
     ;
 
     settings = {

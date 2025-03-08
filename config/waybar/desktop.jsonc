@@ -13,11 +13,11 @@
 		"custom/calendar",
 		"group/clock",
         "custom/calendar",
-		"custom/notification",
+		"custom/notification"
 	],
 	"temperature": {
 		// click-to-reveal
 		// TODO adjust
-		"hwmon-path": "/sys/class/hwmon/hwmon3/device/hwmon/hwmon3/temp1_input",
-	},
+		"hwmon-path": "/sys/class/hwmon/hwmon3/device/hwmon/hwmon3/temp1_input"
+	}
 }

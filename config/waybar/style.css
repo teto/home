@@ -81,7 +81,7 @@ tooltip label {
 }
 
 .modules-center {
-   border-radius: 30;
+   border-radius: 30px;
 
 	background-color: @module-bg;
     margin: 2px 0 0 0;

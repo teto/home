@@ -1,29 +1,27 @@
 {
   config,
-  flakeInputs,
+  flakeSelf,
   pkgs,
-  lib
+  lib,
   # system,
-, withSecrets
-, dotfilesPath
-# , secretsFolder
-, ...
+  withSecrets,
+  dotfilesPath,
+  # , secretsFolder
+  ...
 }:
 let
 
+  haumea = flakeSelf.inputs.haumea;
   autoloadedModule =
     { pkgs, ... }@args:
-    flakeInputs.haumea.lib.load {
+    haumea.lib.load {
       src = ./desktop;
-      #   flakeInputs.nix-filter {
-      #   root = ./desktop;
-      # };
       inputs = args // {
-        inputs = flakeInputs;
+        inputs = flakeSelf.inputs;
       };
       transformer = [
-        flakeInputs.haumea.lib.transformers.liftDefault
-        (flakeInputs.haumea.lib.transformers.hoistLists "_imports" "imports")
+        haumea.lib.transformers.liftDefault
+        (haumea.lib.transformers.hoistLists "_imports" "imports")
       ];
     };
 

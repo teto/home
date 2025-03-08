@@ -1,13 +1,13 @@
-{ pkgs
-, flakeSelf
-, ...
+{
+  pkgs,
+  flakeSelf,
+  ...
 }:
 let
   inherit (pkgs.tetoLib) luaPlugin;
-
 in
 {
-  telescopePlugins =  [
+  telescopePlugins = [
     # { plugin = telescope-nvim; }
     # pkgs.vimPlugins.telescope-fzf-native-nvim # for use with smart-open + fzf algo
     # telescope-fzf-native-nvim # needed by smart-open.nvim
@@ -20,15 +20,15 @@ in
     # (luaPlugin { plugin = rocks-git-nvim; })
 
     (luaPlugin { plugin = fzf-lua; })
-    (luaPlugin { 
-      plugin = oil-nvim; 
-      config = '' 
+    (luaPlugin {
+      plugin = oil-nvim;
+      config = ''
         require("oil").setup({
           -- Oil will take over directory buffers (e.g. `vim .` or `:e src/`)
           -- Set to false if you want some other plugin (e.g. netrw) to open when you edit directories.
           default_file_explorer = true,
         })
-        '';
+      '';
     })
 
     {
@@ -36,8 +36,14 @@ in
       plugin = vim-CtrlXA;
     }
 
-      # TODO add tests
-    { plugin = grug-far-nvim; }
+    # TODO add tests
+    #       (luaPlugin { plugin = grug-far-nvim;
+    # # hpefuly not needed in the next iteration
+    # #        config = ''
+    # #          require('grug-far').setup({ })
+    # #        '';
+    #       })
+
     { plugin = bigfile-nvim; }
 
     pkgs.vimPlugins.direnv-vim # to get syntax coloring ?
@@ -53,13 +59,12 @@ in
         vim.g.fzf_nvim_statusline = 0 -- disable statusline overwriting'';
     })
 
-    # defined in overrides: 
+    # defined in overrides:
     # TODO we should be able to do without !
     fzfWrapper
 
     #  nvim-colorizer
     # (luaPlugin { plugin = nvim-terminal-lua; config = "require('terminal').setup()"; })
-
 
     # TODO move to rocks
     # {
@@ -112,7 +117,7 @@ in
       plugin = vim-grepper;
       # careful these mappings are not applied as they arrive before the plug declaration
       config = ''
-      -- TODO grepper config
+        -- TODO grepper config
       '';
     })
 
@@ -135,7 +140,7 @@ in
             { silent = true, desc = 'Close current window, no question asked' }
         )
 
-        '';
+      '';
     })
   ];
 
@@ -165,8 +170,6 @@ in
   luaPlugins = with pkgs.vimPlugins; [
 
     # { plugin = modicator-nvim; }
-
-
 
     (luaPlugin {
       plugin = marks-nvim;
@@ -202,7 +205,8 @@ in
         '';
     })
 
-    vim-lion # Use with gl/L<text object><character to align to
+    # install via rocks
+    # vim-lion # Use with gl/L<text object><character to align to
 
     # (luaPlugin {
     #   # prettier quickfix
@@ -216,7 +220,8 @@ in
     #   '';
     # })
 
-    (luaPlugin { plugin = fugitive-gitlab-vim; })
+    # move to Rocks
+    # (luaPlugin { plugin = fugitive-gitlab-vim; })
   ];
 
 }

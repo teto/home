@@ -18,7 +18,7 @@ return {
         debounce_text_changes = 150,
     },
     capabilities = pyrightCapabilities,
-	root_markers = root_files,
+    root_markers = root_files,
 
     settings = {
         -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#pyright

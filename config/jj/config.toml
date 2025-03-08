@@ -1,3 +1,31 @@
 [user]
-name = "Some One"
-email = "someone@example.com"
+   # email = "886074+teto@users.noreply.github.com"
+   name = "Matthieu C."
+   signingKey = "88A4D2369454E51E"
+
+[ui]
+default-command = "log"
+default-description = "\n\nTESTED=TODO"
+# Possible values: "color-words" (default), "git", "summary"
+diff.format = "git"
+
+[colors]
+commit_id = "green"
+
+
+[templates]
+draft_commit_description = '''
+concat(
+  description,
+  surround(
+    "\nJJ: This commit contains the following changes:\n", "",
+    indent("JJ:     ", diff.stat(72)),
+  ),
+  "\nJJ: ignore-rest\n",
+  diff.git(),
+)
+'''
+
+
+[include]
+	path = "/home/teto/.config/jj/config.inc"

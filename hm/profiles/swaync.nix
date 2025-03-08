@@ -89,21 +89,21 @@
   # lib.mkIf config.services.swaync.enable [
   systemd.user.services.swaync.Service = {
     Environment = [
-    # helpful to debug but quite verbose
-    # "G_MESSAGES_DEBUG=all"
-    "PATH=$PATH:${
-      lib.makeBinPath [
-        "/run/current-system/sw"
-        "/etc/profiles/per-user/teto/bin"
-        pkgs.wlogout
-        pkgs.libnotify
-        pkgs.swaylock
-        pkgs.fuzzel
-        pkgs.wofi
-        pkgs.wl-clipboard
-      ]
-    }"
-  ];
+      # helpful to debug but quite verbose
+      # "G_MESSAGES_DEBUG=all"
+      "PATH=$PATH:${
+        lib.makeBinPath [
+          "/run/current-system/sw"
+          "/etc/profiles/per-user/teto/bin"
+          pkgs.wlogout
+          pkgs.libnotify
+          pkgs.swaylock
+          pkgs.fuzzel
+          pkgs.wofi
+          pkgs.wl-clipboard
+        ]
+      }"
+    ];
   };
 
   xdg.configFile."swaync/config.json".enable = false;

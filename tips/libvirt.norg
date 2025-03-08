@@ -1,0 +1,23 @@
+
+On the system-level, /var/lib/libvirt/images/ will be activated by default; on a user-session, virt-manager creates $XDG_DATA_HOME/images.
+
+Create a pool
+pool-define-as ext dir - - - - "/mnt/ext/libvirt/images"    ( vs pool-undefine )
+
+virsh -c qemu:///system
+
+* deal with networks
+
+net-list 
+net-start default
+ virsh net-autostart default # to avoid doing it on every start
+ 
+* edit the domain
+
+  list --all
+  edit <NAME>
+
+Virtual machines are called domains
+
+# to see the console
+console <DOMAIN>

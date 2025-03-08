@@ -12,8 +12,9 @@ prepend_keymap = [
 	{ on = [ "z" ], run = "plugin zoxide" },
 	{ on = [ "Z" ], run = "plugin fzf" },
     # run  = "plugin rsync --args='user@server.com'",
-    { on   = ["R"], run  = "plugin rsync", desc = "Copy files using rsync" }
-]
+    { on   = ["R"], run  = "plugin rsync", desc = "Copy files using rsync" },
+    { on  = ["y"], run = [ 'shell -- for path in "$@"; do cat "$path"; done | wl-copy', "yank" ] }
+   ]
 
 
 [input]

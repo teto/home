@@ -73,12 +73,12 @@ in
 
   inherit genBlockLua;
 
-  /* 
-  convert a package to null because used to be borken
+  /*
+    convert a package to null because used to be borken
 
-
-  null wont work
+    null wont work
   */
-  ignoreBroken = x: builtins.traceVerbose "${x.name} disabled because broken it used to be broken" pkgs.hello;
+  ignoreBroken =
+    x: builtins.traceVerbose "${x.name} disabled because broken it used to be broken" pkgs.hello;
 
 }

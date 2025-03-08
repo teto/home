@@ -16,6 +16,10 @@ systemd.user.settings.Manager.DefaultEnvironment
 
 systemctl --failed to list failed units (--user)
 
+
+* power 
+  check systemd-inhibit
+
 * import variables ?
 
   systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK

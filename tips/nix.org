@@ -4,6 +4,8 @@
 
 `requireFile`
 
+* how to develop 2 programs in pair
+nix develop --redirect <flake> <directory>
 
 
 ** Contributing to nix itself

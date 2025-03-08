@@ -3,7 +3,7 @@
   pkgs,
   lib,
   secrets,
-  flakeInputs,
+  flakeSelf,
   withSecrets,
   ...
 }:
@@ -17,7 +17,7 @@ let
   ];
 in
 {
-  programs.bash = lib.optionalAttrs withSecrets {
+  programs.bash = lib.optionalAttrs (lib.trace "nova bash.nix" withSecrets) {
 
     # goes to .profile
     # shellAliases = {
@@ -25,7 +25,7 @@ in
       let
         prod-runners = builtins.fromJSON (
           # TODO fetch it from doctor ?
-          builtins.readFile "${flakeInputs.nova-ci}/configs/prod/runners-generated.json"
+          builtins.readFile "${flakeSelf.inputs.nova-ci}/configs/prod/runners-generated.json"
         );
 
         # generates a { NOVA_XXX = string } attrset that contains paths toward remote builders

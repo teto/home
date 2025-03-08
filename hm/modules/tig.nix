@@ -1,7 +1,13 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
-   cfg = config.programs.tig;
-in {
+  cfg = config.programs.tig;
+in
+{
   options = {
     programs.tig = {
       enable = lib.mkEnableOption "tig";

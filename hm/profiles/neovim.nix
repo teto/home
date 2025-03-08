@@ -1,16 +1,17 @@
 {
   pkgs,
   lib,
-  config
-, flakeSelf
-, ...
+  config,
+  flakeSelf,
+  ...
 }:
 
 let
 
-  inherit (pkgs.tetoLib) 
+  inherit (pkgs.tetoLib)
     luaPlugin
-    genBlockLua;
+    genBlockLua
+    ;
 
   pluginsMap = pkgs.callPackage ./neovim/plugins.nix { inherit flakeSelf; };
 
@@ -18,11 +19,9 @@ let
 
   rawPlugins =
     # add grepper
-       pluginsMap.basePlugins
-    ++ pluginsMap.luaPlugins
-    ++ pluginsMap.colorschemePlugins
-    # ++ pluginsMap.filetypePlugins
-    ;
+    pluginsMap.basePlugins ++ pluginsMap.luaPlugins ++ pluginsMap.colorschemePlugins
+  # ++ pluginsMap.filetypePlugins
+  ;
 
   vimPlugins = pkgs.vimPlugins;
 in
@@ -55,20 +54,18 @@ in
 
     extraLuaConfig = lib.mkBefore (
       ''
-      vim.g.mapleader = ' '
+        vim.g.mapleader = ' '
 
-      vim.opt.hidden = true -- you can open a new buffer even if current is unsaved (error E37) =
+        vim.opt.hidden = true -- you can open a new buffer even if current is unsaved (error E37) =
       ''
-      +
-      (lib.strings.concatStrings (
+      + (lib.strings.concatStrings (
         lib.mapAttrsToList genBlockLua (import ./neovim/options.nix).luaRcBlocks
       ))
       + ''
-      vim.opt.number = true
-      vim.opt.relativenumber = true
+        vim.opt.number = true
+        vim.opt.relativenumber = true
       ''
-      )
-      ;
+    );
 
     # TODO this should disappear in the future
     extraLuaPackages = ps: [
@@ -104,7 +101,7 @@ in
           M.luarocks_executable = "${luaInterpreter.pkgs.luarocks_bootstrap}/bin/luarocks"
           M.sqlite_clib_path = "${pkgs.sqlite.out}/lib/libsqlite3${pkgs.stdenv.hostPlatform.extensions.sharedLibrary}"
           return M
-          '';
+        '';
       };
 
     # could use toLua or buildLuarocksConfig

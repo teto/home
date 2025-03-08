@@ -4,33 +4,32 @@ b.setup({
     -- 'super-tab' for mappings similar to vscode (tab to accept, arrow keys to navigate)
     -- 'enter' for mappings similar to 'super-tab' but with 'enter' to accept
     -- see the "default configuration" section below for full documentation on how to define
-	fuzzy = {
-	 implementation = "rust"
-	 -- ~/.local/share/nvim/lazy/blink.cmp/target/release/libblink_cmp_fuzzy.so
-	 --
-      -- sorts = {
-      --   function(a, b)
-      --     if a.client_name == nil or b.client_name == nil then return end
-      --     return b.client_name == 'emmet_ls'
-      --   end,
-      --   -- default sorts
-      --   'score',
-      --   'sort_text',
-	  -- },
-
-	},
+    fuzzy = {
+        implementation = 'rust',
+        -- ~/.local/share/nvim/lazy/blink.cmp/target/release/libblink_cmp_fuzzy.so
+        --
+        -- sorts = {
+        --   function(a, b)
+        --     if a.client_name == nil or b.client_name == nil then return end
+        --     return b.client_name == 'emmet_ls'
+        --   end,
+        --   -- default sorts
+        --   'score',
+        --   'sort_text',
+        -- },
+    },
     -- your own keymap.
     keymap = {
         preset = 'default',
     },
-	cmdline = {
-	 -- disable in cmdline
-	  -- sources = {},
+    cmdline = {
+        -- disable in cmdline
+        -- sources = {},
 
-	  keymap = {
-		 -- preset = 'super-tab',
-	  },
-	},
+        keymap = {
+            -- preset = 'super-tab',
+        },
+    },
 
     completion = {
         trigger = {
@@ -176,30 +175,32 @@ b.setup({
     -- allows extending the enabled_providers array elsewhere in your config
     -- without having to redefining it
     -- opts_extend = { "sources.completion.enabled_providers" }
-    snippets = { 
-	 -- preset = 'luasnip' 
-	},
+    snippets = {
+        -- preset = 'luasnip'
+    },
     -- ensure you have the `snippets` source (enabled by default)
     sources = {
         default = {
-		  'lsp', 'path', 'snippets', 'buffer' ,
-		  'git'
-		 },
-		providers = {
-			git = {
-				module = 'blink-cmp-git',
-				name = 'Git',
-				opts = {
-					-- options for the blink-cmp-git
-				},
-
-			},
-			snippets = {
-			 opts = {
-			  search_path = "";
-			 }
-			}
-		}
+            'lsp',
+            'path',
+            'snippets',
+            'buffer',
+            'git',
+        },
+        providers = {
+            git = {
+                module = 'blink-cmp-git',
+                name = 'Git',
+                opts = {
+                    -- options for the blink-cmp-git
+                },
+            },
+            snippets = {
+                opts = {
+                    search_path = '',
+                },
+            },
+        },
     },
     --    menu = {
     --      -- Don't automatically show the completion menu

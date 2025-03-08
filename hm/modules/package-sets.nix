@@ -2,7 +2,7 @@
   config,
   lib,
   pkgs,
-  flakeInputs,
+  flakeSelf,
   ...
 }:
 with lib;
@@ -31,7 +31,7 @@ in
       # TODO convert into description
       # the kind of packages u don't want to compile
       # TODO les prendres depuis un channel avec des binaires ?
-      # with flakeInputs.nixos-stable.legacyPackages.${pkgs.system};
+      # with flakeSelf.inputs.nixos-stable.legacyPackages.${pkgs.system};
 
       enableIMPackages = mkEnableOption "IM packages";
       wifi = mkEnableOption "wifi packages";
@@ -43,6 +43,8 @@ in
       # laptop = mkEnableOption "Laptop packages (energy + wifi)";
 
       japanese = mkEnableOption "Japanese stuff";
+
+      jujutsu = mkEnableOption "jujutsu";
 
     };
 
@@ -65,13 +67,27 @@ in
         # zenith  # resources monitor
       ];
     })
+
+    (mkIf cfg.jujutsu {
+      home.packages = [
+
+        # pkgs.ollama # to test huggingface
+        # pkgs.aider-chat # breaks
+        pkgs.jujutsu
+        pkgs.jjui
+        pkgs.jjui
+        pkgs.jj-fzf
+      ];
+    })
+
+
     (mkIf cfg.llms {
       home.packages = [
 
         # pkgs.ollama # to test huggingface
         # pkgs.aider-chat # breaks
         pkgs.python3Packages.huggingface-hub
-        pkgs.repomix  # to upload a codebase to llm
+        pkgs.repomix # to upload a codebase to llm
       ];
     })
 
@@ -98,6 +114,8 @@ in
           pkgs.ncmpcpp
           pkgs.mpc_cli
           pkgs.ymuse # GUI
+
+          pkgs.libva-utils
 
           # take the version from stable ?
           # qutebrowser # broken keyboard driven fantastic browser
@@ -155,7 +173,7 @@ in
           du-dust # dust binary: rust replacement of du
           duf # better df (rust)
 
-          (ignoreBroken ncpamixer) # pulseaudio TUI mixer
+          ncpamixer # pulseaudio TUI mixer
           noti # send notifications when a command finishes
           ouch # to (de)compress files
           # papis # library manager
@@ -212,7 +230,7 @@ in
         # libsecret  # to consult
         # newsboat #
         carl # not upstreamed yet. cargo cal
-        (ignoreBroken immich-cli)
+        immich-cli
         mujmap-unstable # to sync notmuch tags across jmap
         # signal-desktop # installe a la main
         # memento # broken capable to display 2 subtitles at same time
@@ -260,15 +278,16 @@ in
 
     (mkIf cfg.developer {
       home.packages = with pkgs; [
+        argbash # to generate bash parsers
         automake
         bfs # https://github.com/tavianator/bfs
         cargo
-        (tetoLib.ignoreBroken(backblaze-b2.override ({ execName = "b2"; })))
+        (backblaze-b2.override { execName = "b2"; })
         dasht # ~ zeal but in terminal
+        difftastic # smart diffs
         docker-credential-helpers
         gettext # for envsubst (TO NOT CONFOUND with gettext's envsubst)
-        # live replace with fzf, use like `fd | sad toto tata`
-        sad
+        sad # live replace with fzf, use like `fd | sad toto tata`
         sops # password 'manager'
         glab # gitlab cli
         hexyl # hexcode viewer
@@ -284,6 +303,7 @@ in
         # gitAndTools.git-annex # fails on unstable
         # gitAndTools.git-remote-hg
         # nix-prefetch-scripts # broken
+        manix
         nix-output-monitor # 'nom'
 
         nix-diff
@@ -329,7 +349,7 @@ in
 
         # there is also https://github.com/TaKO8Ki/gobang
         lazysql # SQL editor
-        (tetoLib.ignoreBroken harlequin) # SQL python editor
+        harlequin # SQL python editor
 
         inotify-info # to debug filewatching issues, very nice
         inotify-tools # for inotify-wait notably
@@ -357,8 +377,8 @@ in
         zeal # doc for developers
         xan # CLI csv helper
 
-        flakeInputs.rippkgs.packages.${pkgs.system}.rippkgs
-        flakeInputs.rippkgs.packages.${pkgs.system}.rippkgs-index
+        flakeSelf.inputs.rippkgs.packages.${pkgs.system}.rippkgs
+        flakeSelf.inputs.rippkgs.packages.${pkgs.system}.rippkgs-index
       ];
 
     })
@@ -433,7 +453,7 @@ in
         sway-contrib.grimshot # contains "grimshot" for instance
         shotman # -c region
         tessen # handle passwords
-        waybar
+        # waybar # to avoid setting it twice with module
         # wayprompt
         wev # equivalent of xev, to find the name of keys for instance
         wshowkeys
@@ -461,11 +481,10 @@ in
         pkgs.python3Packages.manga-ocr
         tagainijisho # japanse dict; like zkanji Qt based
         # ${config.system}
-        # flakeInputs.vocage.packages."x86_64-linux".vocage
+        # flakeSelf.inputs.vocage.packages."x86_64-linux".vocage
         # jiten # unfree, helpful for jap.nvim
-        (tetoLib.ignoreBroken sudachi-rs) # a japanese tokenizer
+        sudachi-rs # a japanese tokenizer
         sudachidict
-        # sudachi-rs
         kanji-stroke-order-font # for memento
       ];
 

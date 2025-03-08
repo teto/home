@@ -1,11 +1,13 @@
-{ pkgs
-, flakeSelf
-, ...
+{
+  pkgs,
+  flakeSelf,
+  ...
 }:
 {
 
   imports = [
     ./nova/programs/bash.nix
+    ./nova/ssh-config.nix
     ./nova/programs/firefox.nix
     # flakeSelf.inputs.jinko-seeder.homeModules.jinko-seeder
 
@@ -15,6 +17,8 @@
   ];
 
   home.packages = [
+    flakeSelf.inputs.jinko-seeder.packages.${pkgs.system}.jinko-seeder
+
     pkgs.aws-vault-nova # wrap aws-vault with some specific variables
     pkgs.sqlitebrowser
     # pkgs.google-chrome

@@ -1,5 +1,30 @@
 #+title: zsh tips 
 
+
+* autocompletion
+
+to read about completion:
+man zshcompsys
+
+basically it goes through fpath, looks at files starting with _, and looks at the first line. It should start with `#compdef` else it's ignored ?
+#compdef foobar =>  the file contains code for completing the foobar command.
+
+You can also use the compdef command directly (e.g. in your ~/.zshrc file) to tell zsh which function to use for completing a command like this:
+
+The uppercase FPATH is a string which contains a colon-separated list of directories. The lowercase fpath is an array of directories.
+Changing one affects the other !
+
+The zstyle command itself is documented in the zshmodule man page. The styles values are documented in the zshcompsys and zshcompwid 
+To skip the cache compinit -D
+
+ The  function  `bashcompinit` provides compatibility with bash's programmable completion system.  When run it will define the functions, compgen and complete which correspond to the bash
+       builtins with the same names.  It will then be possible to use completion specifications and functions written for bash.
+
+* find provenance of function
+` whence -v jk-env`
+or
+`functions -u jk-env` to see where it comes from
+
 * merge histories
 
 To load history from file:

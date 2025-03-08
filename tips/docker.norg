@@ -5,7 +5,12 @@ https://docs.docker.com/engine/reference/builder/#from
 Each FROM instruction clears any state created by previous instructions
 
 when updating this, fill the nix store on the runners by running the following:
+
   # nix build github:nixos/nix/VERSION --out-link ./dont-remove#
+
+
+* Mapping ports 
+ In Docker Compose, the ports keyword allows you to set one or more mappings from the host to the container. For example, above you have mapped port 5500 on the host to port 5500 on the container. However, you do not need to match the port number. 
 * Registry
  ** push image to registry 
 @code shell

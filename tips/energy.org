@@ -1,7 +1,7 @@
-
+cat /proc/acpi/wakeup
 sudo tlp-stat
 
-* 
+*lspci -tvnn 
 cpupower frequency-set -g governor
 
 cat /sys/devices/system/cpu/intel_pstate/no_turbo

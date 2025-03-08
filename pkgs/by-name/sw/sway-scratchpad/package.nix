@@ -5,22 +5,21 @@
 
   makeWrapper,
   installShellFiles,
-  stdenv,
 
 }:
 
 rustPlatform.buildRustPackage rec {
   pname = "sway-scratchpad";
-  version = "0.2.0";
+  version = "0.2.1";
 
   src = fetchFromGitHub {
     owner = "matejc";
     repo = pname;
     rev = "v${version}";
-    hash = "sha256-TgiwU95BbKFvISDe8+wn8VQ+8vQNuGsb+7p9kP//5lw=";
+    hash = "sha256-Ic0vzxby2vJTqdmfDDAYs0TNyntMJuEknbXK3wRjnR4=";
   };
 
-  cargoHash = "sha256-VLWjpb9OmYkBykP51YURWnvgzI1DW0731DbDcJh/7h8=";
+  cargoHash = "sha256-Q+kg1h+kMuni5uhZ1fnHIGbipZ+rdAuyI0Va9ypQuz0=";
 
   nativeBuildInputs = [
     makeWrapper

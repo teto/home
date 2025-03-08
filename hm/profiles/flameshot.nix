@@ -21,11 +21,11 @@
     # };
 
     # Environment = [
-      # "SDL_VIDEODRIVER=wayland"
-      # "_JAVA_AWT_WM_NONREPARENTING=1"
-      # "QT_QPA_PLATFORM=wayland"
-      # "XDG_CURRENT_DESKTOP=sway"
-      # "XDG_SESSION_DESKTOP=sway"
+    # "SDL_VIDEODRIVER=wayland"
+    # "_JAVA_AWT_WM_NONREPARENTING=1"
+    # "QT_QPA_PLATFORM=wayland"
+    # "XDG_CURRENT_DESKTOP=sway"
+    # "XDG_SESSION_DESKTOP=sway"
     # ];
   };
 }

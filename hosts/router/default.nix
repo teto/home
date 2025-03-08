@@ -20,7 +20,6 @@
   lib,
   pkgs,
   secrets,
-  flakeInputs,
   flakeSelf,
   ...
 }:
@@ -62,7 +61,7 @@ in
   ];
 
   home-manager.users.root = {
-    imports = [ flakeSelf.homeModules.neovim ];
+    imports = [ flakeSelf.homeProfiles.neovim ];
   };
 
   # TODO use from flake or from unstable
@@ -71,7 +70,7 @@ in
     # TODO it should load the whole folder
     imports = [
       flakeSelf.homeModules.teto-nogui
-      flakeSelf.homeModules.neovim
+      flakeSelf.homeProfiles.neovim
       ./teto/nix.nix
     ];
 

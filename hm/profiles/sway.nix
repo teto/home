@@ -70,7 +70,7 @@ in
     # https://github.com/nix-community/home-manager/pull/4039
     # https://github.com/NixOS/nixpkgs/pull/237044
 
-    # be careful as this can override default options 
+    # be careful as this can override default options
     # package = pkgs.swayfx;
     # package = pkgs.sway-unwrapped;
 
@@ -254,12 +254,13 @@ in
           ''exec ${pkgs.cliphist}/bin/cliphist list | rofi -dmenu  -m -1 -p "Select item to copy" -lines 10 -width 35 | cliphist decode | wl-copy | ${sharedConfig.notify-send} 'Failed running cliphist' '';
 
         # kitty nvim -c ":Neorg workspace notes"
+        # Notes is a custom command
         "${mod}+F1" =
           ''exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 70 --height 60 --mark neorg-notes --command 'kitty nvim +Notes'  '';
         "${mod}+F2" =
           ''exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 70 --height 60 --mark audio --command 'kitty ${config.programs.ncmpcpp.package}/bin/ncmpcpp' '';
         "${mod}+F3" =
-          ''exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 60 --height 50 --mark gp_nvim --command "kitty nvim -c GpChatToggle" '';
+          ''exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 60 --height 50 --mark gp_nvim --command "kitty nvim -c \"GpChatToggle tabnew\"" '';
 
         # TODO implement Travis/Pasting Voice recognized text
         # "${mod}+F4" =
@@ -278,13 +279,15 @@ in
         # XF86Copy
       };
 
-      startup = [
-        # { command = "env RUST_BACKTRACE=1 RUST_LOG=swayr=debug swayrd > /tmp/swayrd.log 2>&1"; }
-        { command = "env RUST_BACKTRACE=1 swaycons"; }
+      startup =
+        [
+          # { command = "env RUST_BACKTRACE=1 RUST_LOG=swayr=debug swayrd > /tmp/swayrd.log 2>&1"; }
+          { command = "env RUST_BACKTRACE=1 swaycons"; }
 
-      ] ++ lib.optional config.services.cliphist.enable (
+        ]
+        ++ lib.optional config.services.cliphist.enable (
 
-        { command = "wl-paste --watch cliphist store"; }
+          { command = "wl-paste --watch cliphist store"; }
 
         );
     };

@@ -41,3 +41,7 @@ repl:
   # --ghci-args 
   # --ghci-script
   nix run  .#simwork.core-webservice.platform._repl 
+ 
+repl-core:
+  nix run  .#repl -- -ghci-args ":l CoreWebserviceSpec"
+

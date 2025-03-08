@@ -2,7 +2,7 @@
   config,
   lib,
   pkgs,
-  flakeInputs,
+  flakeSelf,
   ...
 }:
 {
@@ -13,7 +13,7 @@
   home.packages =
     with pkgs;
     let
-      # flakeInputs.localai.packages.${pkgs.system}.local-ai-cublas #cublas is the cuda version
+      # flakeSelf.inputs.localai.packages.${pkgs.system}.local-ai-cublas #cublas is the cuda version
       # whisper-cpp broken
       my-local-ai = (
         local-ai-teto.override ({

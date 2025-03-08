@@ -1,7 +1,13 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
-   cfg = config.programs.kitty;
-in {
+  cfg = config.programs.kitty;
+in
+{
   options = {
     programs.kitty = {
       enableScrollback = lib.mkEnableOption "kitty";

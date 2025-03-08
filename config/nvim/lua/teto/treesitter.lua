@@ -10,4 +10,3 @@ local available, ts_config = pcall(require, 'nvim-treesitter.configs')
 if not available then
     return
 end
-

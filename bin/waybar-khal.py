@@ -11,9 +11,9 @@ today = datetime.date.today().strftime("%Y-%m-%d")
 
 # next_week = (datetime.date.today() +
 #              datetime.timedelta(days=10)).strftime("%Y-%m-%d")
-until = "tomorrow"
+until_date = "tomorrow"
 
-output = subprocess.check_output("khal list now "+until_date, shell=True)
+output = subprocess.check_output("khal list now "+ until_date, shell=True)
 output = output.decode("utf-8")
 
 lines = output.split("\n")

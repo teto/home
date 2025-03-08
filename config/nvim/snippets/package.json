@@ -23,6 +23,10 @@
       {
         "language": "desktop",
         "path": "./desktop.jsonc"
+      },
+      {
+        "language": "markdown",
+        "path": "./markdown.jsonc"
       }
     ]
   }

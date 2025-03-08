@@ -1,4 +1,5 @@
 -- fmt returns a table of nodes, not a node.
+-- for luasnip
 return {
     -- ri(1) --repeats inserted text after jump from insert node
     s('nixmod', {

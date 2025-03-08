@@ -1,10 +1,17 @@
-{ writeShellApplication, uni, fzf, ... }:
+{
+  writeShellApplication,
+  uni,
+  fzf,
+  ...
+}:
 
 writeShellApplication {
   name = "unicode-picker";
-  runtimeInputs = [ uni fzf ];
-  text =
-    ''
+  runtimeInputs = [
+    uni
+    fzf
+  ];
+  text = ''
     case ''${1-} in
       emoji)
         uni -c e all -f '%(emoji) %(name)' | fzf -d ' ' --bind="enter:become(printf '%s' {+1})"
@@ -18,5 +25,5 @@ writeShellApplication {
         exit 1
         ;;
     esac
-    '';
+  '';
 }

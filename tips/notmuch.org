@@ -6,5 +6,9 @@ use `notmuch compact` on DB from times to times.
 NOTMUCH_DEBUG_QUERY=1 notmuch search big brown fox
 pour supprimer physiquement les mails
 
+the https://github.com/nix-community/home-manager/pull/6479
+
+NOTMUCH_CONFIG
+
 # TODO ajouter 
 notmuch search --format=text0 --output=files tag:trash and not date:2weeks.. | xargs -0 --no-run-if-empty rm

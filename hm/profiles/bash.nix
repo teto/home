@@ -1,7 +1,7 @@
 {
   config,
   pkgs,
-  flakeInputs,
+  flakeSelf,
   lib,
   secrets,
   ...

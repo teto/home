@@ -124,14 +124,14 @@ stow-bin:
 
 # symlink to XDG_DATA_HOME
 stow-local:
-  echo "Local: {{ data_local_directory() }}"
-  echo "data_directory: {{ data_directory() }}"
+    echo "Local: {{ data_local_directory() }}"
+    echo "data_directory: {{ data_directory() }}"
 
-  # data_local_directory returns ~/.local/share
-  stow -t {{ data_local_directory() }}/.. local
-  # it's a file so should not be here
-  # "{{ data_directory() }}/fzf-history"
-  mkdir -p  {{ data_directory() }}/newsbeuter
+    # data_local_directory returns ~/.local/share
+    stow -t {{ data_local_directory() }}/.. local
+    # it's a file so should not be here
+    # "{{ data_directory() }}/fzf-history"
+    mkdir -p  {{ data_directory() }}/newsbeuter
 
 # Build my router image
 
@@ -146,7 +146,8 @@ router-build:
 cache:
     #mkdir -p $(shell echo "${XDG_CACHE_HOME:-$HOME/.cache}/less")
     # todo should be done
-    mkdir -p {{ cache_directory() }}/less {{ cache_directory() }}/vdirsyncer
+    # TODO we shouln't have to create {{ cache_directory() }}/vdirsyncer
+    mkdir -p {{ cache_directory() }}/less 
 
 fonts:
     echo "Regenerating cache"
@@ -224,4 +225,4 @@ nix-diff-booted:
 
 # run a X compatibility layer, you need to export the correct DISPLAY beforehand
 xwayland:
-  xwayland-satellite
+    xwayland-satellite

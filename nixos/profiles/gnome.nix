@@ -22,7 +22,7 @@
   # optional to use google/nextcloud calendar
   services.gnome.gnome-online-accounts.enable = true;
 
-  # consumes quite a bit of CPU 
+  # consumes quite a bit of CPU
   services.gnome.localsearch.enable = false;
 
   # optional to use google/nextcloud calendar

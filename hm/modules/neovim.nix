@@ -30,19 +30,19 @@ let
   orgmodePlugins = with pkgs.vimPlugins; [
     # TODO add     'mrshmllow/orgmode-babel.nvim',
 
-    (luaPlugin {
-      # matches nvim-orgmode
-      plugin = orgmode;
-      config = # lua
-        ''
-        require('orgmode').setup{
-            org_capture_templates = {'~/nextcloud/org/*', '~/orgmode/**/*'},
-            org_default_notes_file = '~/orgmode/refile.org',
-            -- TODO add templates
-            org_agenda_templates = { t = { description = 'Task', template = '* TODO %?\n  %u' } },
-        }
-        '';
-    })
+    # (luaPlugin {
+    #   # matches nvim-orgmode
+    #   plugin = orgmode;
+    #   config = # lua
+    #     ''
+    #     require('orgmode').setup{
+    #         org_capture_templates = {'~/nextcloud/org/*', '~/orgmode/**/*'},
+    #         org_default_notes_file = '~/orgmode/refile.org',
+    #         -- TODO add templates
+    #         org_agenda_templates = { t = { description = 'Task', template = '* TODO %?\n  %u' } },
+    #     }
+    #     '';
+    # })
   ];
 
   fennelPlugins = with pkgs.vimPlugins; [
@@ -88,8 +88,8 @@ let
     # })
   ];
 
-  treesitterPlugins =  [
-    pkgs.vimPlugins.nvim-treesitter-pairs 
+  treesitterPlugins = [
+    pkgs.vimPlugins.nvim-treesitter-pairs
     pkgs.vimPlugins.nvim-treesitter-textobjects
     pkgs.vimPlugins.nvim-treesitter-parsers.nix
     pkgs.vimPlugins.nvim-treesitter-parsers.json
@@ -105,7 +105,7 @@ let
       plugins = mkOption {
         # type = types.listOf types.package;
         default = treesitterPlugins;
-          # [];
+        # [];
       };
     };
   };
@@ -253,7 +253,7 @@ in
   config = lib.mkMerge [
     # TODO add orgmode-babel and emacs to neovim
     (mkIf cfg.highlightOnYank {
-        programs.neovim.extraLuaConfig = ''
+      programs.neovim.extraLuaConfig = ''
         vim.api.nvim_create_autocmd('TextYankPost', {
             callback = function()
                 -- TODO higroup should be its own ? a darker version of CursorLine
@@ -261,11 +261,11 @@ in
                 vim.highlight.on_yank({ higroup = 'IncSearch', timeout = 1000 })
             end,
         })
-        '';
+      '';
     })
 
     (mkIf cfg.enableMyDefaults {
-        programs.neovim.extraLuaConfig = ''
+      programs.neovim.extraLuaConfig = ''
         vim.opt.title = true -- vim will change terminal title
         -- look at :h statusline to see the available 'items'
         -- let &titlestring=" %t %{len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) } - NVIM"
@@ -275,7 +275,7 @@ in
         vim.opt.cursorline = true -- highlight cursor line
 
         vim.opt.mousemodel = 'popup_setpos'
-        '';
+      '';
     })
 
     (mkIf cfg.enableBlink {
@@ -295,38 +295,39 @@ in
     (mkIf cfg.neorg.enable { programs.neovim.plugins = cfg.neorg.plugins; })
 
     (mkIf cfg.lsp.mapOnAttach {
-        programs.neovim.extraLuaConfig = /* lua */ ''
-        vim.api.nvim_create_autocmd('LspAttach', {
-            desc = 'Attach lsp_signature on new client',
-            callback = function(args)
-                -- print("Called matt's on_attach autocmd")
-                if not (args.data and args.data.client_id) then
-                    return
-                end
-                local client = vim.lsp.get_client_by_id(args.data.client_id)
-                local bufnr = args.buf
+      programs.neovim.extraLuaConfig = # lua
+        ''
+          vim.api.nvim_create_autocmd('LspAttach', {
+              desc = 'Attach lsp_signature on new client',
+              callback = function(args)
+                  -- print("Called matt's on_attach autocmd")
+                  if not (args.data and args.data.client_id) then
+                      return
+                  end
+                  local client = vim.lsp.get_client_by_id(args.data.client_id)
+                  local bufnr = args.buf
 
-                -- local on_attach = require('teto.on_attach')
-                vim.keymap.set('n', '[e', function()
-                    vim.diagnostic.goto_prev({ wrap = true, severity = vim.diagnostic.severity.ERROR })
-                end, { buffer = true })
-                vim.keymap.set('n', ']e', function()
-                    vim.diagnostic.goto_next({ wrap = true, severity = vim.diagnostic.severity.ERROR })
-                end, { buffer = true })
+                  -- local on_attach = require('teto.on_attach')
+                  vim.keymap.set('n', '[e', function()
+                      vim.diagnostic.goto_prev({ wrap = true, severity = vim.diagnostic.severity.ERROR })
+                  end, { buffer = true })
+                  vim.keymap.set('n', ']e', function()
+                      vim.diagnostic.goto_next({ wrap = true, severity = vim.diagnostic.severity.ERROR })
+                  end, { buffer = true })
 
-            end
-            })
-            '';
+              end
+              })
+        '';
 
     })
 
     (mkIf cfg.treesitter.enable {
       programs.neovim.plugins = treesitterPlugins;
       # programs.neovim.extraLuaConfig = lib.mkBefore (
-        # "--toto"
-        # lib.strings.concatStrings (
-        #  lib.mapAttrsToList genBlockLua luaRcBlocks
-        #  )
+      # "--toto"
+      # lib.strings.concatStrings (
+      #  lib.mapAttrsToList genBlockLua luaRcBlocks
+      #  )
     })
 
     # (mkIf cfg.autocompletion.enable {

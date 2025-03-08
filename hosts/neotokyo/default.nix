@@ -1,7 +1,7 @@
 {
   config,
   flakeSelf,
-  flakeInputs,
+  flakeSelf,
   secrets,
   modulesPath,
   pkgs,
@@ -104,7 +104,7 @@
     root = {
       imports = [
 
-        flakeSelf.homeModules.neovim
+        flakeSelf.homeProfiles.neovim
         (
           { ... }:
           {
@@ -119,7 +119,7 @@
       imports = [
         ./home-manager/users/teto/default.nix
         flakeSelf.homeModules.teto-nogui
-        flakeSelf.homeModules.neovim
+        flakeSelf.homeProfiles.neovim
       ];
     };
   };

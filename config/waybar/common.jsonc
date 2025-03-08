@@ -5,21 +5,6 @@
 		"sway/workspaces",
 		"sway/mode",
 	],
-	"modules-center": [
-		"sway/window",
-		// "custom/hello-from-waybar"
-		"mpd",
-		"systemd-failed-units",
-	],
-
-	"modules-right": [
-		"sway/language",
-		"custom/github",
-		// "group/courriel",
-		"custom/notmuch",
-
-		"custom/weather",
-	],
 	"sway/workspaces": {
 		// to avoid warning see https://github.com/Alexays/Waybar/discussions/2816
 		"window-rewrite": {},
@@ -49,7 +34,6 @@
 		// or a terminal
 		"on-click-right": "kitty sh -c ikhal",
 		"actions": {
-			//
 			"on-scroll-up":   "tz_up",
 			"on-scroll-down": "tz_down",
 		},

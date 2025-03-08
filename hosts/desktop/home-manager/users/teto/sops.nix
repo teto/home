@@ -1,5 +1,4 @@
 {
-  dotfilesPath,
   secretsFolder,
   ...
 }:
@@ -27,9 +26,6 @@
     # group = config.users.users.teto.group;
   };
 
-  # restic:
-  #   teto-bucket:
-
   sops.secrets."restic/teto-bucket" = {
     mode = "0440";
     # TODO only readable by gitlab
@@ -37,28 +33,9 @@
     # group = config.users.users.nobody.group;
   };
 
-  sops.secrets."OPENAI_API_KEY" = {
+  # OPENAI_API_KEY_PERSO
+  sops.secrets."OPENAI_API_KEY_NOVA" = {
     mode = "400";
-  };
-
-  sops.secrets."gitlab/apiToken" = {
-    mode = "400";
-    # owner = config.users.users.teto.name;
-    # group = config.users.users.teto.group;
-
-  };
-
-  # lab_config_file
-  # https://github.com/zaquestion/lab
-  sops.secrets."lab/lab.toml" = {
-    key = "lab_config_file";
-    # path = "/home/teto/.config/lab/lab.toml";
-    # alternatively one can use
-    # LAB_CORE_TOKEN
-    # LAB_CORE_HOST
-    mode = "400";
-    # owner = config.users.users.teto.name;
-    # group = config.users.users.teto.group;
   };
 
   sops.secrets.huggingfaceToken = {

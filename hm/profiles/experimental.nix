@@ -1,6 +1,7 @@
-{ pkgs
-, flakeSelf
-, ...
+{
+  pkgs,
+  flakeSelf,
+  ...
 }:
 {
 
@@ -11,7 +12,7 @@
   # programs.lapce.enable = true;
   programs.mods = {
     # disabled because zsh completion took too long
-    enable = false; 
+    enable = false;
   };
 
   # written by teto
@@ -21,9 +22,8 @@
 
   home.packages = [
 
-    flakeSelf.inputs.lux.packages.${pkgs.system}.lux
+    # flakeSelf.inputs.lux.packages.${pkgs.system}.lux-cli # fails to build
   ];
-
 
   # services.trayscale.enable = true;
 

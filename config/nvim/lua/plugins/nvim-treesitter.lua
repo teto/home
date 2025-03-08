@@ -1,9 +1,9 @@
 -- for incremental selection
-print("plugins/nvim-treesitter.lua CALLED !")
+print('plugins/nvim-treesitter.lua CALLED !')
 -- require'nvim-treesitter.configs'.setup {
 --   -- A list of parser names, or "all" (the listed parsers MUST always be installed)
---   ensure_installed = { 
---    -- "c", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline" 
+--   ensure_installed = {
+--    -- "c", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline"
 --   },
 --
 --   -- Install parsers synchronously (only applied to `ensure_installed`)
@@ -62,12 +62,11 @@ ts_config.setup({
     },
     incremental_selection = {
         enable = true,
-		disable = { 
-		 'cpp',
-		 'lua',
-		 'org'
-
-		},
+        disable = {
+            'cpp',
+            'lua',
+            'org',
+        },
         --         keymaps = {                       -- mappings for incremental selection (visual mappings)
         --           init_selection = 'gnn',         -- maps in normal mode to init the node/scope selection
         --           node_incremental = "grn",       -- increment to the upper named parent
@@ -108,4 +107,3 @@ ts_config.setup({
     -- Instead of true it can also be a list of languages
     additional_vim_regex_highlighting = false,
 })
-

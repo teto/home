@@ -9,6 +9,6 @@
 
   services.vdirsyncer = {
     enable = true;
-    package = pkgs.pimsync;
+    # package = pkgs.pimsync;
   };
 }
