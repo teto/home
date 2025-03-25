@@ -72,6 +72,7 @@
     # measurement =
     # numeric =
     # paper =
+    base = "fr_FR.utf8";
     time = "fr_FR.utf8";
   };
 

@@ -26,27 +26,22 @@
     # settings.Manager.DefaultEnvironment
     # /home/teto/.local/state/nix/profile/bin refernece ceux installes par nix profile
     PATH = "/home/teto/.local/state/nix/profile/bin:${pkgs.coreutils}/bin:${dotfilesPath}/bin";
-    NOTMUCH_CONFIG = "${config.xdg.configHome}/notmuch/default/config";
+    NOTMUCH_CONFIG = "${config.xdg.configHome}/notmuch/default/config"; # for vdirsyncer
   };
-  # TODO move
-  # systemd.user.settings.Manager.DefaultEnvironment = {
-  #   # for vdirsyncer
-  #   # NOTMUCH_CONFIG = "${config.xdg.configHome}/notmuch/default/config";
-  # };
-  #
-  #
-  # # conditionnally define it
-  # systemd.user.services.mujmap-fastmail.Service = {
-  #   Environment = [
-  #     "PATH=${
-  #       pkgs.lib.makeBinPath [
-  #         pkgs.pass-teto
-  #         pkgs.bash
-  #       ]
-  #     }"
-  #   ];
-  #   # TODO add notmuch_CONFIG ?
-  # };
+
+  # TODO conditionnally define it
+  # lib.mkIf config.mujmap-fastmail.enable
+  user.services.mujmap-fastmail.Service =  {
+    Environment = [
+      "PATH=${
+        pkgs.lib.makeBinPath [
+          pkgs.pass-teto
+          pkgs.bash
+        ]
+      }"
+    ];
+    # TODO add notmuch_CONFIG ?
+  };
 
   # TODO move somewhere else close to mbsync
   # copy load credential implem from https://github.com/NixOS/nixpkgs/pull/211559/files

@@ -1,3 +1,4 @@
+{ config, ...}:
 {
 
   enable = false;
@@ -8,6 +9,7 @@
   # user = "ollama";
   group = "users";
 
+  # TODO use config.home.homeDirectory ?
   home = "/home/teto";
   # example = "/path/to/ollama/models";
 

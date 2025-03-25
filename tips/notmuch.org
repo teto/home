@@ -1,12 +1,12 @@
 NOTMUCH_DEBUG_QUERY=1 
 
+database.mail_root
+
 use `notmuch compact` on DB from times to times.
 
 # to debug a query https://notmuchmail.org/bugs/
 NOTMUCH_DEBUG_QUERY=1 notmuch search big brown fox
 pour supprimer physiquement les mails
-
-the https://github.com/nix-community/home-manager/pull/6479
 
 NOTMUCH_CONFIG
 

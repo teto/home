@@ -39,10 +39,6 @@ nix why-depends --all /nix/var/nix/profiles/system /etc/profiles/per-user/teto/b
                 └───/nix/store/fmwbpr67w6vhsk9mxwx3h0bpnx8bk483-home-manager-path
   #+END_SRC
 
-* how to package npm packages ?
-
-  https://github.com/nix-community/dream2nix
-
 
 * du --human-readable --total --summarize $(nix-store --query --requisites $(echo $store_paths)) > >(sort --human-numeric-sort)
 
@@ -66,8 +62,6 @@ nix path-info -r /nix/store/sb7nbfcc1ca6j0d0v18f7qzwlsyvi8fz-ocaml-4.10.0 --stor
 environment.profileRelativeSessionVariables =
 
 ** set local paths for flake inputs
-
-
 
  url = "git+file:/home/teto/jupyenv";
 

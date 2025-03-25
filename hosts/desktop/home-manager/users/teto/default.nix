@@ -13,17 +13,16 @@
   imports =
     [
       # flakeSelf.homeModules.bash
-      ../../../../../hm/profiles/bash.nix
+      # ../../../../../hm/profiles/bash.nix
 
       flakeSelf.homeModules.ollama
       flakeSelf.homeModules.experimental
+      flakeSelf.homeModules.vscode
       # ../../../hm/profiles/experimental.nix
       # flakeSelf.homeModules.gnome-shell
 
-      ../../../../../hm/profiles/wezterm.nix
-
-      # Not tracked, so doesn't need to go in per-machine subdir
-      ../../../../../hm/profiles/vscode.nix
+      # flakeSelf.homeModules.wezterm
+      # ../../../../../hm/profiles/wezterm.nix
 
       ./calendars.nix
       ./sway.nix
@@ -53,7 +52,7 @@
   # TODO use mkSymlinkOufOf  ? ?
   # xdg.configFile."zsh/zshrc.generated".source = ../../../config/zsh/zshrc;
 
-  programs.nh.enable = true;
+  # programs.nh.enable = true;
 
   # never tried
   # home.preferXdgDirectories = false;
@@ -65,8 +64,6 @@
     set history filename ${config.xdg.cacheHome}/gdb_history
   '';
 
-  # seulemt pour X
-  # programs.feh.enable = true;
   # for programs not merged yet
   home.packages =
     with pkgs;

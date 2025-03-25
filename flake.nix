@@ -353,6 +353,7 @@
           config = {
             # on desktop
             cudaSupport = true;
+            cudaCapabilities = [ "6.0" "7.0" ]; # can speed up some builds ?
             checkMeta = false;
             # showDerivationWarnings = ["maintainerless"];
             # permittedInsecurePackages = [

@@ -25,7 +25,6 @@
 	# fsmonitor = "/nix/store/pqrqcfw2m27kwhrh7jyj05lp9b5pi0jd-rs-git-fsmonitor-0.1.3/bin/rs-git-fsmonitor"
 	sshCommand = "ssh"
     # pager = "ov -F"
-	excludesfile = ~/.config/git/gitignore
 
 # [pager]
 #     diff = "ov -F --section-delimiter '^diff' --section-header"

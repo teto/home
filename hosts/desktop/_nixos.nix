@@ -10,16 +10,39 @@
 let
   haumea = flakeSelf.inputs.haumea;
 
-  autoloadedModule =
+  # NOT READY YET
+  autoloadedHmModule = 
+    { pkgs, ... }@args:
+    haumea.lib.load {
+      src = flakeSelf.inputs.nix-filter {
+        root = ./home-manager/users/teto;
+        exclude = [
+          # "teto"
+          # "users"
+          "home-manager" # exclude home-manager because intputs are not the same: it must be imported differently
+          # "root"
+        ];
+      };
+
+      inputs = args // {
+        # inputs = flakeSelf.inputs;
+      };
+      transformer = [
+        haumea.lib.transformers.liftDefault
+        (haumea.lib.transformers.hoistLists "_imports" "imports")
+      ];
+    };
+
+  autoloadedNixosModule =
     { pkgs, ... }@args:
     haumea.lib.load {
       src = flakeSelf.inputs.nix-filter {
         root = ./.;
         exclude = [
-          "teto"
-          "users"
-          "home-manager"
-          "root"
+          # "teto"
+          # "users"
+          "home-manager" # exclude home-manager because intputs are not the same: it must be imported differently
+          # "root"
         ];
       };
 
@@ -36,7 +59,7 @@ in
 {
   imports =
     [
-      autoloadedModule # loaded by haumea
+      autoloadedNixosModule # loaded by haumea
       ./_boot.nix
       ../../nixos/profiles/greetd.nix
       ../../nixos/profiles/docker-daemon.nix
@@ -92,7 +115,7 @@ in
       root = {
         imports = [
           # hmRootModule
-          ./root/programs/ssh.nix
+          # ./root/programs/ssh.nix
           ../../hm/profiles/nova/ssh-config.nix
         ];
       };
@@ -105,6 +128,7 @@ in
         imports = [
           ./home-manager/users/teto/default.nix
           flakeSelf.homeModules.teto-nogui
+          # autoloadedHmModule
         ];
       };
     };
