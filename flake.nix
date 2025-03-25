@@ -753,7 +753,7 @@
 
         teto-desktop = ./hm/profiles/desktop.nix;
         # sway = ./hm/profiles/sway.nix;
-        # sway-notification-center = ./hm/profiles/swaync.nix;
+        sway-notification-center = ./hm/profiles/swaync.nix;
       };
 
       homeModules = (importDir ./hm/modules) // {
@@ -780,7 +780,7 @@
         # neovim-full = hosts/desktop/home-manager/users/teto/programs/neovim.nix;
         # neomutt = ./hm/profiles/neomutt.nix;
 
-        # ollama = hosts/desktop/home-manager/users/teto/services/ollama.nix;
+        ollama = hosts/desktop/home-manager/users/teto/services/ollama.nix;
 
         # (modulesFromDir ./hm/modules)
 

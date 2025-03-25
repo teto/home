@@ -2,7 +2,7 @@
 return {
     cmd = {
         'lua-language-server',
-        '--loglevel=trace',
+        -- '--loglevel=trace',
         '--logpath=/home/teto/lua_ls.log',
     },
     filetypes = {

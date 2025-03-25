@@ -37,7 +37,7 @@ neotest = "5.8.0"
 "lsp_signature.nvim" = "0.3.1"
 friendly-snippets = "scm"
 # "haskell-snippets.nvim" = "1.4.4"
-"yazi.nvim" = "9.2.0"
+"yazi.nvim" = "10.0.0"
 tree-sitter-haskell = "scm"
 # tree-sitter-org = "0.0.1"
 # "lspkind.nvim" = "scm"
@@ -60,7 +60,7 @@ vim-startuptime= "4.5.0"
 "typescript-tools.nvim" = "scm"
 menu= "scm"
 # "snacks.nvim" = "2.6.0"
-fzf-lua = "0.0.1792"
+fzf-lua = "0.0.1798"
 "lz.n" = "2.11.2"
 "indent-blankline.nvim" = "3.9.0"
 "llm.nvim"= "scm"
@@ -70,6 +70,7 @@ volt= "scm"
 nvim-lspconfig= "1.7.0"
 tree-sitter-orgmode = "2.0.0"
 tree-sitter-org = "0.0.1"
+"grug-far.nvim"= "1.5.10"
 # nvim-treesitter-textobjects = "scm"
 # "rocks-treesitter.nvim" = "1.0.3"
 
@@ -92,10 +93,6 @@ version = "9.2.0"
 [plugins."gp.nvim"]
 # rev = "scm"
 dir = "/home/teto/gp.nvim"
-
-[plugins."grug-far.nvim"]
-# "grug-far.nvim"= "1.5.4"
-dir = "/home/teto/grug-far.nvim"
 
 
 [plugins.vim-sorcerer]

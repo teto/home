@@ -13,14 +13,14 @@
 
       flakeSelf.homeProfiles.common
       flakeSelf.homeProfiles.neovim
-      flakeSelf.homeModules.sway
+      flakeSelf.homeProfiles.sway
+      flakeSelf.homeProfiles.sway-notification-center
 
       flakeSelf.homeModules.fzf
       flakeSelf.homeModules.teto-zsh
       flakeSelf.homeModules.yazi
       flakeSelf.homeModules.services-mujmap
       flakeSelf.homeModules.pimsync
-      flakeSelf.homeModules.sway-notification-center
       flakeSelf.homeModules.mpv
       flakeSelf.homeModules.developer
       flakeSelf.homeModules.package-sets
