@@ -15,6 +15,8 @@
       # flakeSelf.homeModules.bash
       # ../../../../../hm/profiles/bash.nix
 
+      flakeSelf.homeProfiles.qutebrowser
+
       flakeSelf.homeModules.ollama
       flakeSelf.homeModules.experimental
       flakeSelf.homeModules.vscode
