@@ -43,6 +43,7 @@ let
   ];
 
   filetypePlugins = with pkgs.vimPlugins; [
+    { plugin = neomutt-vim; }
     { plugin = pkgs.vimPlugins.hurl; }
     { plugin = wmgraphviz-vim; }
     # { plugin = fennel-vim; }
@@ -56,6 +57,7 @@ let
 
   luaPlugins = with pkgs.vimPlugins; [
 
+    { plugin = nvim-colorizer-lua; }
     pkgs.vimPlugins.typescript-tools-nvim
 
     # not upstreamed yet
@@ -75,12 +77,13 @@ let
     # (luaPlugin { plugin = nvim-dap; })
 
     # disabling as long as it depends on nvim-treesitter
-    (luaPlugin {
-      # matches nvim-orgmode
-      plugin = orgmode;
-      # TODO autoload via lz.n instead
-      # config = '' '';
-    })
+    # can now be installed via Rocks
+    # (luaPlugin {
+    #   # matches nvim-orgmode
+    #   plugin = orgmode;
+    #   # TODO autoload via lz.n instead
+    #   # config = '' '';
+    # })
 
     (luaPlugin {
       # for yaml lsp
@@ -184,8 +187,7 @@ in
     [
       # TODO hacking on this
 
-
-      # TODO replaced with https://github.com/yutkat/git-rebase-auto-diff.nvim 
+      # TODO replaced with https://github.com/yutkat/git-rebase-auto-diff.nvim
       {
         # display git diff while rebasing, pretty dope
         # my complaints: has issues with sync mode

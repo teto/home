@@ -19,7 +19,9 @@ local nix_deps = require('generated-by-nix')
 
 diagnostic_default_config = {
     -- disabled because too big in haskell
-    virtual_lines = { only_current_line = true },
+    virtual_lines = {
+		only_current_line = true
+	},
     virtual_text = false,
     {
         severity = { min = vim.diagnostic.severity.WARN },
@@ -730,10 +732,21 @@ require('plugins.nvim-treesitter-textobjects')
 -- autoloaded
 -- require('plugins.nvim-treesitter')
 
-vim.lsp.enable('lua_ls')
+-- one can pass a list as well
+-- vim.lsp.enable('lua_ls')
 vim.lsp.enable('rust_analyzer')
 vim.lsp.enable('clangd')
 vim.lsp.enable('pyright')
+
+-- Autoload from everything lsp/ in rtp
+-- local configs = {}
+--
+-- for _, v in ipairs(vim.api.nvim_get_runtime_file('lsp/*', true)) do  
+--   local name = vim.fn.fnamemodify(v, ':t:r')  
+--   configs[name] = true  
+-- end
+--
+-- vim.lsp.enable(vim.tbl_keys(configs))
 
 -- vim.lsp.enable('llm-ls')
 -- done via plugin for now
@@ -748,3 +761,10 @@ vim.lsp.enable('pyright')
 --     end
 --   end,
 -- })
+--
+
+-- HACK around sway-scratchpad limitation where one can't esapce quotes so alleviate the need for that via a proxy command
+vim.api.nvim_create_user_command('LlmChat', function()
+	vim.cmd[[GpChatToggle tab]]
+end, { desc = "TOTO" })
+

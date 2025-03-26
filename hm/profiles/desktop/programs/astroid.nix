@@ -1,18 +1,19 @@
 {
-  config,
-  lib,
+  # config,
+  # lib,
   pkgs,
   ...
 }:
 {
 
-  programs.astroid = {
-    enable = false;
+  # programs.astroid = {
+    enable = true;
     # TODO factor with my mbsyncwrapper ?
     pollScript = ''
       check-mail.sh gmail
     '';
 
+    # TODO sendMailCommand
     # I don't want it to trigger
     # P => main_window.poll
     extraConfig = {
@@ -35,5 +36,5 @@
     externalEditor = ''
       ${pkgs.kitty}/bin/kitty nvim -c 'set ft=mail' '+set fileencoding=utf-8' '+set ff=unix' '+set enc=utf-8' '+set fo+=w' %1
     '';
-  };
+  # };
 }

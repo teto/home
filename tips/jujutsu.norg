@@ -1,7 +1,38 @@
+
+Answer directly from brice:
+> jj git init --colocate will try to read refs/remotes/origin/HEAD and set trunk() to it. It doesn't try any other remote names
+> then the hardcoded fallback just checks {main,master,trunk}@{origin,upstream}
+
+
+bcp de reponses a https://github.com/jj-vcs/jj/blob/main/docs/git-command-table.md
+
+
 Jujutsu does not have a corresponding concept of a 'current bookmark'; instead, you update bookmarks manually. 
 Doesnt work with git-crypt:
 https://github.com/jj-vcs/jj/discussions/4995
 https://github.com/jj-vcs/jj/issues/53
+
+
+* revset
+
+  See doc at `jj help -k revsets`.
+
+   https://jj-vcs.github.io/jj/latest/config/#set-of-immutable-commits
+    --ignore-immutable
+
+
+* git-log like
+
+
+  jj log -r ::@
+
+  jj log -r 'all()' to see even immutable commits
+  https://github.com/jj-vcs/jj/discussions/5669
+
+
+* how to deal with immutable 
+jj log -r 'REV | roots(REV:: & immutable_heads())'
+jj config list --include-defaults |grep immutable
 
 * configuration 
 
@@ -13,6 +44,18 @@ jj git clone ..
 jj rebase -s @ -d master
 
 jj describe -m "add a comment to main"
+
+* update bookmark
+
+  jj bookmark set my_branch_name -r @-  # Note the trailing `-` else 
+* push a bookmark
+ 
+@code.start
+   # Let Jujutsu generate a bookmark name and push that to GitHub. Note that we
+  # push the working-copy commit's *parent* because the working-copy commit
+# itself is empty.
+$ jj git push -c @-
+@code.end
 
 # Add a feature, then add a description and start a new commit
 $ jj commit -m 'feat(bar): add support for bar'
@@ -27,8 +70,19 @@ $ jj git push -c @-
 
 * fetch /
    
+ jj config set --repo git.fetch '["origin", "upstream"]'
+ jj config set --repo git.push "github" to configure remote
+
   jj git fetch --remote gh
   jj git push
+
+jj git push --change
+
+[git]
+push-bookmark-prefix = "martinvonz/push-"
+
+
+core.fsmonitor = "watchman"
 
 * bookmarks 
 

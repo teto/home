@@ -90,7 +90,7 @@ vim.g.gp_nvim = {
         copilot = {},
         openai = {
             -- response from the config.providers.copilot.secret command { "bash", "-c", "cat ~/.config/github-copilot/hosts.json | sed -e 's/.*oauth_token...//;s/\".*//'" } is empty
-			-- or put it in pass
+            -- or put it in pass
             secret = { 'bash', '-c', 'cat $XDG_CONFIG_HOME/sops-nix/secrets/OPENAI_API_KEY_NOVA' },
             -- secret = os.getenv('OPENAI_API_KEY'),
             endpoint = 'https://api.openai.com/v1/chat/completions',

@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 with lib;
 
@@ -6,11 +11,13 @@ let
 
   cfg = config.services.pimsync;
 
-  pimsyncOptions = [ ]
+  pimsyncOptions =
+    [ ]
     ++ optional (cfg.verbosity != null) "--verbosity ${cfg.verbosity}"
     ++ optional (cfg.configFile != null) "--config ${cfg.configFile}";
 
-in {
+in
+{
   meta.maintainers = [ maintainers.pjones ];
 
   options.services.pimsync = {
@@ -36,8 +43,15 @@ in {
     };
 
     verbosity = mkOption {
-      type = types.nullOr
-        (types.enum [ "CRITICAL" "ERROR" "WARNING" "INFO" "DEBUG" ]);
+      type = types.nullOr (
+        types.enum [
+          "CRITICAL"
+          "ERROR"
+          "WARNING"
+          "INFO"
+          "DEBUG"
+        ]
+      );
       default = null;
       description = ''
         Whether pimsync should produce verbose output.
@@ -64,23 +78,30 @@ in {
       Service = {
         Type = "oneshot";
         # TODO `pimsync discover`
-        ExecStart = let optStr = concatStringsSep " " pimsyncOptions;
-        in [
-          # "${cfg.package}/bin/pimsync ${optStr} metasync"
-          "${cfg.package}/bin/pimsync ${optStr} sync"
-        ];
+        ExecStart =
+          let
+            optStr = concatStringsSep " " pimsyncOptions;
+          in
+          [
+            # "${cfg.package}/bin/pimsync ${optStr} metasync"
+            "${cfg.package}/bin/pimsync ${optStr} sync"
+          ];
       };
     };
 
     systemd.user.timers.pimsync = {
-      Unit = { Description = "pimsync calendar&contacts synchronization"; };
+      Unit = {
+        Description = "pimsync calendar&contacts synchronization";
+      };
 
       Timer = {
         OnCalendar = cfg.frequency;
         Unit = "pimsync.service";
       };
 
-      Install = { WantedBy = [ "timers.target" ]; };
+      Install = {
+        WantedBy = [ "timers.target" ];
+      };
     };
   };
 }

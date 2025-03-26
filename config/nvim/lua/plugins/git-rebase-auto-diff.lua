@@ -1,1 +1,1 @@
-require"git-rebase-auto-diff".setup()
+require('git-rebase-auto-diff').setup()

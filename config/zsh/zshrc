@@ -37,12 +37,18 @@ setopt completealiases
 # multiple zsh sessions will append to the same history file (incrementally, after each command is executed)
 
 setopt inc_append_history # write just after the command was entered rather than save on terminal exit
+setopt inc_append_history_time # command duration as well !!
 setopt hist_expire_dups_first # purge duplicates first
 setopt hist_ignore_dups # Do not write events to history that are duplicates of previous events
+setopt hist_reduce_blanks    # Remove superfluous blanks from each command line being added to the history.
+setopt hist_no_store         # Don't store history commands
+setopt extended_history      # Write the history file in the ':start:elapsed;command' format.
 # setopt hist_find_no_dups # When searching history don't display results already cycled through twice
 # setopt hist_reduce_blanks # Remove extra blanks from each command line being added to history
 setopt hist_verify # don't execute, just expand history
 setopt share_history # imports new commands and appends typed commands to history
+
+# histtimeformat
 # }}}
 # Zsh options {{{1
 setopt beep # (no_)beep don't beep on error
@@ -353,3 +359,4 @@ compdef _git gch
 compdef _pass pass-nova
 compdef _pass pass-pro
 compdef _pass pass-perso
+

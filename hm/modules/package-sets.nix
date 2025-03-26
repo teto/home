@@ -72,19 +72,18 @@ in
       home.packages = [
 
         # pkgs.ollama # to test huggingface
-        # pkgs.aider-chat # breaks
-        pkgs.jujutsu
+        flakeSelf.inputs.jujutsu.packages.${pkgs.system}.jujutsu
+
+        # pkgs.jujutsu # replaced with the one from flake
         pkgs.jjui
-        pkgs.jjui
+        pkgs.lazyjj
         pkgs.jj-fzf
       ];
     })
 
-
     (mkIf cfg.llms {
       home.packages = [
 
-        # pkgs.ollama # to test huggingface
         # pkgs.aider-chat # breaks
         pkgs.python3Packages.huggingface-hub
         pkgs.repomix # to upload a codebase to llm
@@ -294,7 +293,6 @@ in
 
         libossp_uuid # for the 'libuuid' executable
 
-        jujutsu
         # TODO pass to vim makeWrapperArgs
         # nodePackages.bash-language-server
         # just in my branch :'(
@@ -358,7 +356,6 @@ in
         # neovim-remote # broken for latex etc
         # nix-doc # can generate tags for nix
         nix-update # nix-update <ATTR> to update a software
-        nix-index # to list package contents
         # nix-top # (abandoned) to list current builds
         nixfmt-rfc-style # the official one
         nixpkgs-review # to help review nix packages
@@ -376,6 +373,8 @@ in
         whois
         zeal # doc for developers
         xan # CLI csv helper
+        viddy # fileevent watcher
+        watchman
 
         flakeSelf.inputs.rippkgs.packages.${pkgs.system}.rippkgs
         flakeSelf.inputs.rippkgs.packages.${pkgs.system}.rippkgs-index

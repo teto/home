@@ -120,19 +120,19 @@ in
       # TODO should be an option
       home.packages = [ pkgs.meli ];
 
-      xdg.configFile."meli/config.toml".text = let
+      xdg.configFile."meli/config.toml".text =
+        let
 
-        generatedToml = tomlFormat.generate "config.toml" (
+          generatedToml = tomlFormat.generate "config.toml" (
             lib.recursiveUpdate cfg.settings {
               accounts = accountsAttr;
             }
           );
-      in 
+        in
         # just so not notmuch accout appears before fastmail
         (lib.concatMapStringsSep "\n" (inc: "include(\"${inc}\")") cfg.includes)
         + "\n"
-        + (builtins.readFile (generatedToml))
-          ;
+        + (builtins.readFile (generatedToml));
     };
 
 }

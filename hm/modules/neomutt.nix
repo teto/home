@@ -1,7 +1,13 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
-   cfg = config.programs.neomutt;
-in {
+  cfg = config.programs.neomutt;
+in
+{
   options = {
     programs.neomutt = {
       enableVimKeys = lib.mkEnableOption "neomutt";

@@ -1,4 +1,3 @@
--- attach_to_untracked = true,
 local M = {}
 
 M.setup = function()
@@ -6,10 +5,16 @@ M.setup = function()
         -- '│' passe mais '▎' non :s
         signs = {},
         signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
-        numhl = false, -- Toggle with `:Gitsigns toggle_numhl`
-        linehl = false, -- Toggle with `:Gitsigns toggle_linehl`
+		signs_staged_enable = false,
+        numhl = true, -- Toggle with `:Gitsigns toggle_numhl`
+        linehl = true, -- Toggle with `:Gitsigns toggle_linehl`
         word_diff = true, -- Toggle with `:Gitsigns toggle_word_diff`
-        attach_to_untracked = true,
+		watch_gitdir = {
+		  follow_files = true
+		},
+
+        attach_to_untracked = false,
+
         on_attach = function(bufnr)
             local function map(mode, lhs, rhs, opts)
                 opts = vim.tbl_extend('force', { noremap = true, silent = true }, opts or {})

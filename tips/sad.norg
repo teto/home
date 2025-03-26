@@ -1,0 +1,3 @@
+fd | sad toto tata
+
+echo pkgs/applications/editors/vim/plugins/overrides.nix | sad 'nvimSkipModules = "(\w+)"' 'nvimSkipModules = [ "$1" ]'

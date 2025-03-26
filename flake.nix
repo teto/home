@@ -41,7 +41,6 @@
 
     firefox2nix.url = "git+https://git.sr.ht/~rycee/mozilla-addons-to-nix";
 
-
     flake-utils.url = "github:numtide/flake-utils";
 
     fzf-git-sh = {
@@ -58,6 +57,7 @@
 
     git-repo-manager = {
       url = "github:hakoerber/git-repo-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     haumea = {
@@ -67,6 +67,15 @@
 
     hm = {
       url = "github:teto/home-manager/scratch";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # nixpkgs follow
+    jujutsu = {
+      # ?rev=669bfaf09b48a94c4756aff94ff00af9ee387307 is the commit with conf.d support
+      url = "github:jj-vcs/jj";
+      # url = "github:bryceberger/jj?ref=revset-evaluator";
+      
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -83,6 +92,11 @@
       url = "git+https://git.meli-email.org/meli/meli.git";
       # url = "github:meli/meli"; # official mirror
       # ref = "refs/pull/449/head";
+      flake = false;
+    };
+
+    neomutt-src = {
+      url = "github:neomutt/neomutt?ref=flatcap/notmuch";
       flake = false;
     };
 
@@ -146,7 +160,7 @@
 
     nix-index-database = {
       url = "github:nix-community/nix-index-database";
-      # inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # c8296214151883ce27036be74d22d04953418cf4
@@ -353,7 +367,10 @@
           config = {
             # on desktop
             cudaSupport = true;
-            cudaCapabilities = [ "6.0" "7.0" ]; # can speed up some builds ?
+            cudaCapabilities = [
+              "6.0"
+              "7.0"
+            ]; # can speed up some builds ?
             checkMeta = false;
             # showDerivationWarnings = ["maintainerless"];
             # permittedInsecurePackages = [
@@ -376,6 +393,7 @@
                   "Oracle_VM_VirtualBox_Extension_Pack"
                   "Oracle_VirtualBox_Extension_Pack"
                   "codeium"
+                  "claude-code"
 
                   # cuda stuff, mostly for local-ai
                   "cuda_cudart"
@@ -420,7 +438,7 @@
 
       myPkgs = pkgImport self.inputs.nixpkgs;
       unstablePkgs = pkgImport self.inputs.nixos-unstable;
-      stablePkgs = pkgImport self.inputs.nixos-stable;
+      # stablePkgs = pkgImport self.inputs.nixos-stable;
 
       genKey = str: nixpkgs.lib.replaceStrings [ ".nix" ] [ "" ] (builtins.baseNameOf (toString str));
 
@@ -621,6 +639,7 @@
             jmdict
             local-ai-teto
             meli-git
+            neomutt
             popcorntime-teto
             sway-scratchpad
             gpt4all
@@ -676,7 +695,6 @@
           hostname = "laptop";
 
           modules = [
-            # self.inputs.nix-index-database.hmModules.nix-index
             # self.inputs.sops-nix.nixosModules.sops
             ./hosts/laptop
           ];
@@ -715,8 +733,6 @@
           hostname = "jedha";
           modules = [
             ./hosts/desktop/_nixos.nix
-            # self.inputs.mptcp-flake.nixosModules.mptcp
-            # self.inputs.peerix.nixosModules.peerix
           ];
         };
 
@@ -752,6 +768,7 @@
         neovim = ./hm/profiles/neovim.nix;
         nova = ./hm/profiles/nova.nix;
 
+        # developer = ./hm/profiles/dev.nix;
         teto-desktop = ./hm/profiles/desktop.nix;
         # sway = ./hm/profiles/sway.nix;
         sway-notification-center = ./hm/profiles/swaync.nix;
@@ -759,19 +776,11 @@
 
       homeModules = (importDir ./hm/modules) // {
 
-        # fre = ./hm/modules/fre.nix;
-        # bash = ./hm/modules/bash.nix;
-        # neovim-module = ./hm/modules/neovim.nix;
-        # fzf = ./hm/modules/fzf.nix;
-        # kitty = ./hm/modules/kitty.nix;
-        # package-sets = ./hm/modules/package-sets.nix;
-        # zsh = ./hm/modules/zsh.nix;
         mod-cliphist = ./hm/modules/cliphist.nix;
 
         # c un profile en fait
         meli = ./hm/modules/programs/meli.nix;
 
-        developer = ./hm/profiles/dev.nix;
         # for stuff not in home-manager yet
         experimental = ./hm/profiles/experimental.nix; # { flakeSelf = self; };
         gnome-shell = ./hm/profiles/gnome.nix;
@@ -883,6 +892,10 @@
 
             inherit llama-cpp-matt;
 
+            neomutt = prev.lib.warn "neomutt override" (prev.neomutt.overrideAttrs({
+              src = self.inputs.neomutt-src;
+            }));
+
             meli-git = prev.meli.overrideAttrs (drv: rec {
               name = "meli-${version}";
               version = "g${self.inputs.meli.shortRev}";
@@ -898,7 +911,7 @@
 
                   name = "${name}-vendor.tar.gz";
                   inherit src;
-                  outputHash = "sha256-EZbfpnepzGdVDEVStPlsFJXOPqVZCKibkEoogAzsGig=";
+                  outputHash = "";
                   cargoPatches = [ ];
 
                 }
@@ -958,23 +971,26 @@
                 '';
             });
 
-            pimsync-dev = prev.pimsync.overrideAttrs(drv: 
-            let
+            pimsync-dev = prev.pimsync.overrideAttrs (
+              drv:
+              let
                 pimsync-src = self.inputs.pimsync-src;
-              in rec {
+              in
+              rec {
 
-              version = "g${pimsync-src.shortRev}";
-              src = pimsync-src;
+                version = "g${pimsync-src.shortRev}";
+                src = pimsync-src;
 
-              PIMSYNC_VERSION = "${version}";
+                PIMSYNC_VERSION = "${version}";
 
-              useFetchCargoVendor = true;
-              cargoDeps = final.rustPlatform.fetchCargoVendor {
-                inherit src;
-                hash = "sha256-/6YjyKB/xOCTNZlKewddEaZ1ZN2PC5dQoP0A5If67MA=";
-              };
+                useFetchCargoVendor = true;
+                cargoDeps = final.rustPlatform.fetchCargoVendor {
+                  inherit src;
+                  hash = "sha256-/6YjyKB/xOCTNZlKewddEaZ1ZN2PC5dQoP0A5If67MA=";
+                };
 
-              });
+              }
+            );
           };
 
         # TODO

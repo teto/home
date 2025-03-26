@@ -52,7 +52,6 @@ in
     autoloadedModule
     ./xdg-portal.nix
     ./common.nix
-    ./dev.nix
     ./sway.nix
     ./zsh.nix
 

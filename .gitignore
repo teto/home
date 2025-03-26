@@ -9,6 +9,7 @@
 /config/autostart
 /config/clerk
 /config/git/config
+/config/git/allowed-signers
 /config/gtk-3.0/*
 /config/ipython/*
 /config/jesseduffield/*
@@ -16,6 +17,7 @@
 /config/kitty/kitty.conf
 /config/mpv/mpv.conf
 /config/nvim/lua/init.lua
+/config/jj/config.toml
 /config/rofi-pass/
 /config/supertuxkart/*
 /config/sway/config

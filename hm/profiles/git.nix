@@ -18,6 +18,7 @@
     # msmtp
     package = pkgs.gitAndTools.gitFull; # to get send-email
     delta.enable = true;
+
     includes = [
       # { path = config.xdg.configHome + "/git/config.inc"; }
       # everything under ~/yourworkfolder/ is company code, so use the other user/email/gpg key, etc

@@ -14,9 +14,11 @@
 
   # _ksi_preexec breaks my own preexec !
   shellIntegration = {
-    enableZshIntegration = true;
-    mode = "enabled";
+    enableBashIntegration = false;
+    enableZshIntegration = false;
+    mode = null; # "enabled";
   };
+
   settings = {
     update_check_interval = 0; # set to 0 to disable (in hours)
     # bold_font = "auto";

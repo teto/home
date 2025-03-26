@@ -2,6 +2,9 @@
 /.direnv
 /.envrc
 
+# aider-chat workflow files
+/.aider*
+
 .ccls-cache/
 /tags
 /TAGS

@@ -68,9 +68,10 @@ fzf-lua = "0.0.1798"
 volt= "scm"
 # "telescope.nvim" = "0.1.6"
 nvim-lspconfig= "1.7.0"
-tree-sitter-orgmode = "2.0.0"
-tree-sitter-org = "0.0.1"
+# tree-sitter-org = "0.0.1"
 "grug-far.nvim"= "1.5.10"
+orgmode = "0.5.2" # has tree-sitter-orgmode as a dep
+# tree-sitter-orgmode = "2.0.0"
 # nvim-treesitter-textobjects = "scm"
 # "rocks-treesitter.nvim" = "1.0.3"
 
@@ -265,6 +266,10 @@ rev = "ad95f18cb85c24ddc0b48bf190bc313dfc58e2d6"
 [plugins."statuscol.nvim"]
 git = "luukvbaal/statuscol.nvim"
 rev = "c399884e8f64019ec9bb581251f9710915b7f996"
+
+[plugins."codecompanion.nvim"]
+git = "olimorris/codecompanion.nvim"
+rev = "v14.2.2"
 
 
 [config]

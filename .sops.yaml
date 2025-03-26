@@ -17,3 +17,8 @@ creation_rules:
     key_groups:
     - age:
       - *teto
+  - path_regex: nixos/profiles/desktop/secrets.yml
+    key_groups:
+    - age:
+      - *teto
+      

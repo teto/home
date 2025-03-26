@@ -15,6 +15,7 @@
       flakeSelf.homeProfiles.neovim
       flakeSelf.homeProfiles.sway
       flakeSelf.homeProfiles.sway-notification-center
+      flakeSelf.homeProfiles.developer
 
       flakeSelf.homeModules.fzf
       flakeSelf.homeModules.teto-zsh
@@ -22,7 +23,6 @@
       flakeSelf.homeModules.services-mujmap
       flakeSelf.homeModules.pimsync
       flakeSelf.homeModules.mpv
-      flakeSelf.homeModules.developer
       flakeSelf.homeModules.package-sets
       flakeSelf.homeModules.vscode
       flakeSelf.homeModules.waybar
@@ -39,6 +39,8 @@
   # '';
 
   home.packages = with pkgs; [
+    pkgs.aider-chat # breaks
+
     isync # not used ?
     mujmap-unstable
     meli # broken jmap mailreader
@@ -65,7 +67,6 @@
     jujutsu = true;
 
   };
-
 
   home.language = {
     # monetary =

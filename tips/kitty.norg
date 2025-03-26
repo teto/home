@@ -18,7 +18,8 @@ afficher les liens ctrl + shift + e
 kitty +kitten icat ~/Nextcloud/images/39950.png
 
 
-# Shell integration
+* Shell integration
+
 https://sw.kovidgoyal.net/kitty/shell-integration/#configuration
 shell_integration disabled
 

@@ -1,0 +1,68 @@
+[user]
+   email = "886074+teto@users.noreply.github.com"
+   name = "Matthieu C."
+   signingKey = "88A4D2369454E51E"
+
+[aliases]
+# `jj l` shows commits on the working-copy commit's (anonymous) bookmark
+# compared to the `main` bookmark
+# l = ["log", "-r", "(main..@):: | (main..@)-"]
+
+# git log-like
+gl = ["log", "-r", "(..@)::"]
+
+
+[revset-aliases]
+# "immutable_heads()" = "builtin_immutable_heads() | (trunk().. & ~mine())"
+# $ jj log -r 'why_immutable(xyz)'
+# see https://github.com/jj-vcs/jj/discussions/5669 for more explanation
+
+'why_immutable(r)' = 'r | roots(r:: & immutable_heads())'
+
+# I overrode revset-aliases.mine() to include both my emails
+# Or, rather, I set it to author(exact:'name') | author(exact:'email')
+
+
+
+[ui]
+default-command = "log"
+# default-description = "\n\nTESTED=TODO"
+# Possible values: "color-words" (default), "git", "summary"
+diff.format = "git"
+
+[colors]
+commit_id = "green"
+"commit_id prefix" = { bold = true }
+
+[core]
+# fsmonitor = "watchman"
+# watchman.register_snapshot_trigger = true
+
+[git]
+push-bookmark-prefix = "matt/push-"
+
+[snapshot]
+max-new-file-size = "10MiB"
+
+
+[templates]
+draft_commit_description = '''
+concat(
+  description,
+  surround(
+    "\nJJ: This commit contains the following changes:\n", "",
+    indent("JJ:     ", diff.stat(72)),
+  ),
+  "\nJJ: ignore-rest\n",
+  diff.git(),
+)
+'''
+
+# override user.email if the repository is located under ~/oss
+[[--scope]]
+--when.repositories = ["~/nova"]
+[--scope.user]
+email = "YOUR_OSS_EMAIL@novatoto.ai"
+
+# [include]
+# 	path = "/home/teto/.config/jj/config.inc"

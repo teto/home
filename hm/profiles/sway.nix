@@ -16,7 +16,6 @@ let
   # term = "${pkgs.wezterm}/bin/wezterm";
 
   rofi = pkgs.rofi-wayland;
-
   sharedConfig = pkgs.callPackage ./wm-config.nix { };
 
   myLib = pkgs.tetoLib;
@@ -260,7 +259,7 @@ in
         "${mod}+F2" =
           ''exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 70 --height 60 --mark audio --command 'kitty ${config.programs.ncmpcpp.package}/bin/ncmpcpp' '';
         "${mod}+F3" =
-          ''exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 60 --height 50 --mark gp_nvim --command "kitty nvim -c \"GpChatToggle tabnew\"" '';
+          ''exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 60 --height 50 --mark gp_nvim --command "kitty nvim -cLlmChat" '';
 
         # TODO implement Travis/Pasting Voice recognized text
         # "${mod}+F4" =

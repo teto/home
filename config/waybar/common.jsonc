@@ -50,6 +50,18 @@
 			"updated":     "", // icon when all packages updated
 		},
 	},
+    "custom/mail-check": {
+		"exec":        "waybar-mail-check", // <--- path to script
+		"on-click":    "ONCLICK", // refresh on click
+		"interval":    10, // refresh every hour
+		"tooltip":     true,
+		"return-type": "json",
+		"format":      "{} {icon}",
+		"format-icons": {
+			"has-updates": "", // icon when updates needed
+			"updated":     "", // icon when all packages updated
+		},
+    },
 	"group/courriel": {
 		"orientation": "inherit",
 		"drawer": {

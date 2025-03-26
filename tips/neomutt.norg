@@ -1,4 +1,7 @@
 
+type `:bind` to list mappings
+type `:macro` to list macros ! 
+
 flags are listed in : flag_chars
 https://neomutt.org/guide/gettingstarted
 
@@ -7,6 +10,8 @@ My config
 lua-source ~/.config/neomutt/utils.lua
 folder-hook neomutt 'lua chgdir("~/.maildirs/NetC/neomutt", true)'
 
+* email polling
+https://neomutt.org/guide/advancedusage#13-2-%C2%A0polling-for-new-mail
 
 15:22 <jindraj> teto: sure it's possible. look here https://neomutt.org/guide/configuration.html#23-%C2%A0executing-functions
 15:36 <teto> jindraj: sorry if that sounds stupid but I dont get how to exec toggle-unread on just the marked items ? 

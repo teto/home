@@ -30,8 +30,11 @@ in
     autoloadedModule
 
     flakeSelf.nixosModules.default-hm
+    # flakeSelf.inputs.mptcp-flake.nixosModules.mptcp
+    # flakeSelf.inputs.peerix.nixosModules.peerix
 
-    flakeSelf.inputs.nix-index-database.nixosModules.nix-index
+    # installed via HM
+    # flakeSelf.inputs.nix-index-database.nixosModules.nix-index
     flakeSelf.nixosModules.nvd
     flakeSelf.nixosModules.universal
     flakeSelf.nixosProfiles.gnome

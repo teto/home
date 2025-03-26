@@ -11,7 +11,7 @@ let
   haumea = flakeSelf.inputs.haumea;
 
   # NOT READY YET
-  autoloadedHmModule = 
+  autoloadedHmModule =
     { pkgs, ... }@args:
     haumea.lib.load {
       src = flakeSelf.inputs.nix-filter {
@@ -121,18 +121,14 @@ in
       };
 
       # TODO use from flake or from unstable
-      # services.opensnitch-ui.enable
-      # ./hm/profiles/gaming.nix
       teto = {
         # TODO it should load the whole folder
         imports = [
           ./home-manager/users/teto/default.nix
-          flakeSelf.homeModules.teto-nogui
-          # autoloadedHmModule
+          # autoloadedHmModule # TODO fix
         ];
       };
     };
-
 
   boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_13; # works ?
   # services.xserver.displayManager.gdm.enable = true;
@@ -314,6 +310,9 @@ in
   #   # https://wiki.archlinux.org/title/Advanced_Linux_Sound_Architecture#Set_the_default_sound_card
   #   options snd_hda_intel index=1
   # '';
+
+  # TODO find a way to autologin on desktop
+  # services.greetd
 
   # set on shell initialisation (e.g. in /etc/profile
   environment.variables = {

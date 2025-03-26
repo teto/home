@@ -8,6 +8,7 @@
 		"idle_inhibitor",
 		"custom/github",
 		"custom/notmuch",
+		"custom/mail-check",
 		"wireplumber",
 		"tray",
 		"custom/calendar",

@@ -31,7 +31,7 @@
 
   # TODO conditionnally define it
   # lib.mkIf config.mujmap-fastmail.enable
-  user.services.mujmap-fastmail.Service =  {
+  user.services.mujmap-fastmail.Service = {
     Environment = [
       "PATH=${
         pkgs.lib.makeBinPath [

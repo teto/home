@@ -1,4 +1,39 @@
 # vim: set fdm=marker fenc=utf-8 ff=unix sts=0 ft=neomuttrc :
+
+# important one to avoid
+set wait_key = no
+
+# macro index <F2> "<shell-escape>notmuch search --output=tags id:%m<enter>" "Show Notmuch tags for message"
+
+macro index \Cn "<enter-command>toggle sidebar_visible<enter><refresh>"
+
+# controls how date is displayed in index_format
+# set date_format="%A %d %b %Y à %H:%M:%S (%Z)"
+# set date_format="%<[y?%<[d?%[%H:%M]&%[%m/%d]>&%[%y.%m]>"
+
+# set index_format = "%4C %Z %{%b %d} %-15.15L (%?l?%4l&%4c?) %s"
+# %{%d %d}
+# TODO display only if collapsed
+# &%<l?%l Lines&%c Bytes>
+# I want to be able to see where
+# (%?l?%4l&%4c?)
+# %g -> tags
+# %> inbox name ?
+# SCOL / FCOL
+# %<[y?%<[m?%<[d?%[%H:%M ]&%[%a %d]>&%[%b %d]>&%[%m/%y ]>
+# use conditional dates
+# %Z -> tags
+# set index_format="%4C %-6@date@ %-15.15F %Z (%4c) %s"
+
+# index-format-hook  date  "~d<1d"    "%[%H:%M]"
+# index-format-hook  date  "~d<1m"    "%[%a %d]"
+# index-format-hook  date  "~d<1y"    "%[%b %d]"
+# index-format-hook  date  "~A"       "%[%m/%y]"
+
+set index_format = "%-15.15L %<M?%2M Msgs&       > %Z %g %s %*    %<[y?%<[m?%<[d?%[%H:%M ]&%[%a %d]>&%[%b %d]>&%[%m/%y ]>"
+#
+# set index_format="%?M?_%M_ ?%Z %2C %.13d (%-$FCOL.${FCOL}F) %-$SCOL.${SCOL}s %?M?_%M_&(%c/%l?"
+
 #
 # TO DEBUG
 # - set VAR? to see the actual value
@@ -70,10 +105,10 @@ set pager_stop = yes
 
 # set mailcap_path = ~/.config/neomutt/mailcap
 # alternative_order multipart/mixed text/plain text/calendar application/ics text/html
-# auto_view text/html
+auto_view text/html
 # auto_view text/calendar
-# auto_view application/ics
-# set show_multipart_alternative = "info"
+auto_view application/ics
+set show_multipart_alternative = "info"
 
 # exec change-vfolder
 #
@@ -86,6 +121,7 @@ set pager_stop = yes
 #
 # Plenty of space
 # set sidebar_divider_char = '│'
+# set sidebar_sort = unread
 set sort_aux = reverse-last-date-received
 
 # source theme
@@ -102,32 +138,6 @@ source solarized-dark-256.neomuttrc
 # set folder_format="%N %3C %d %2l (%5s) %f"
 # set message_format="From: <%a>, Sub: %s"
 
-# controls how date is displayed in index_format
-# set date_format="%A %d %b %Y à %H:%M:%S (%Z)"
-# set date_format="%<[y?%<[d?%[%H:%M]&%[%m/%d]>&%[%y.%m]>"
-
-# set index_format = "%4C %Z %{%b %d} %-15.15L (%?l?%4l&%4c?) %s"
-# %{%d %d}
-# TODO display only if collapsed
-# &%<l?%l Lines&%c Bytes>
-# I want to be able to see where
-# (%?l?%4l&%4c?)
-# %g -> tags
-# %> inbox name ?
-# SCOL / FCOL
-# %<[y?%<[m?%<[d?%[%H:%M ]&%[%a %d]>&%[%b %d]>&%[%m/%y ]>
-# use conditional dates
-# %Z -> tags
-# set index_format="%4C %-6@date@ %-15.15F %Z (%4c) %s"
-
-# index-format-hook  date  "~d<1d"    "%[%H:%M]"
-# index-format-hook  date  "~d<1m"    "%[%a %d]"
-# index-format-hook  date  "~d<1y"    "%[%b %d]"
-# index-format-hook  date  "~A"       "%[%m/%y]"
-
-set index_format = "%-15.15L %<M?%2M Msgs&       > %Z %g %s %*    %<[y?%<[m?%<[d?%[%H:%M ]&%[%a %d]>&%[%b %d]>&%[%m/%y ]>"
-#
-# set index_format="%?M?_%M_ ?%Z %2C %.13d (%-$FCOL.${FCOL}F) %-$SCOL.${SCOL}s %?M?_%M_&(%c/%l?"
 
 # set pager_format="%Z %C/%m %d (%F) %s (%c/%l) %|-"
 # set pgp_entry_format="%3n %t%f %4l/0x%k %-4a %2c %u %[%a %e.%h'%y at %k:%M:%S %Z]"
@@ -162,6 +172,8 @@ set delete = yes
 
 
 # macro attach s <save-entry><kill-line>/home/YOU/downloads/<enter>y "Save entry"
+#
+# macro index A "<modify-labels>+archive -unread -inbox\\n" "Archive message"
 
 # hum keep it manual
 # timeout-hook 'exec sync-mailbox'
@@ -178,7 +190,6 @@ set pipe_split=yes
 set new_mail_command="notify-send --icon='mail-unread-symbolic' \
 'New Email' '%n new messages, %u unread.' &"
 
-# set hidden_tags = "unread,draft,flagged,passed,replied,attachment,signed,encrypted"
 
 # https://neomutt.org/feature/notmuch
 
@@ -221,6 +232,7 @@ unset collapse_unread
 # set ispell="aspell -e -c"
 # <Enter>             select-entry                   sélectionner l'entrée courante
 
+# d simple
 bind index D delete-message
 
 # cache caching {{{
@@ -240,10 +252,12 @@ bind compose p postpone-message
 
 # sidebar {{{
 unset sidebar_visible
-set sidebar_format = "%B%?F? [%F]?%* %?N?%N/?%S"
+# https://neomutt.org/guide/gettingstarted.html#intro-sidebar-format
+# set sidebar_format = "%B%?F? [%F]?%* %?N?%N/?%S"
+set sidebar_format = "%D %?N?%N/?%S"
 set mail_check_stats
 # Plenty of space
-set sidebar_width = 25
+# set sidebar_width = 25
 # Pretty line-drawing character
 set sidebar_divider_char = '│'
 # }}}
@@ -302,7 +316,6 @@ set ts_enabled
 # set ts_status_format
 # }}}
 
-# set hidden_tags = "inbox,unread,draft,flagged,passed,replied,signed,encrypted,attachment"
 # virtual-mailboxes "neomutt" "notmuch://?query=folder:neomutt and NOT tag:archive"
 # virtual-mailboxes "eudyptula" "notmuch://?query=folder:eudyptula and NOT tag:archive"
 # virtual-mailboxes "vfio" "notmuch://?query=folder:vfio and NOT tag:archive"
@@ -314,10 +327,27 @@ set nm_open_timeout = 5
 # 'messages'.
 set nm_query_type = messages
 # This variable specifies notmuch query limit.
-set nm_db_limit = 10000
+set nm_db_limit = 2000
 set nm_unread_tag = unread
+
+set nm_flagged_tag = "flagged"
+
 # set nm_exclude_tags = ""
-set hidden_tags = "inbox"
+
+# run a notmuch command
+macro index Q "<vfolder-from-query>"
+macro index,pager A "<modify-labels>+archive -unread -inbox\\n"
+
+# subscribe neomutt-devel@neomutt.org
+# subscribe neomutt-users@neomutt.org
+#
+# lua-source '~/.config/mutt/folder-hook.lua'
+# folder-hook neomutt 'lua chgdir("~/.maildirs/somewhere/neomutt", true)'
+# folder-hook notmuch 'lua chgdir("~/.maildirs/somewhere/notmuch", false)'
+
+# Par defaut: "inbox,unread,draft,flagged,passed,replied,signed,encrypted,attachment"
+# set hidden_tags = "inbox"
+
 
 set nm_query_window_duration=2
 set nm_query_window_timebase = "year"
@@ -325,21 +355,28 @@ set nm_query_window_timebase = "year"
  # nm_sendmail: #!/bin/bash
  #    tee >(notmuch-deliver -t sent -f Sent) | sendmail $*
 
+
+# <vfolder-from-query>
 # generate virtual folder from query with time window
-bind index < vfolder-window-backward
-bind index > vfolder-window-forward
+# shifts virtual folder time window backwards
+# bind index < vfolder-window-backward
+# bind index > vfolder-window-forward
 set virtual_spoolfile = yes
 
 # >/dev/null 2>&1 
 macro index @ "<shell-escape>just -g mail-sync >/dev/null 2>&1 &<enter>" "Sync mails"
+
 # macro index A "<modify-labels>+archive -unread -inbox\\n" "Archive message"
 # macro index c "<change-vfolder>?" "Change to vfolder overview"
 # macro index \\\\ "<vfolder-from-query>" "Search mailbox"
 
 virtual-mailboxes "sent" "notmuch://?query=tag:sent"
 virtual-mailboxes "ietf" "notmuch://?query=tag:ietf"
-virtual-mailboxes "unread" "notmuch://?query=tag:unread"
+virtual-mailboxes "unread" "notmuch://?query=tag:unread and not tag:spam"
 
+
+
+# show icons instead of text ?
 tag-transforms "unread" "" \
 				"attachment" "" \
 				"github" "" \

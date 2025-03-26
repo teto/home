@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+systemctl show --user mujmap-fastmail -p ActiveState -p SubState -p ExecMainPID
+A=B
+systemctl is-active --quiet mujmap-fastfmail 
+# && echo Service is running
+
+updates="toto"
+alt="running"
+tooltip="TOTO"
+echo "{ \"text\":\"$updates\", \"alt\":\"$alt\", \"tooltip\":\"$tooltip\" }"

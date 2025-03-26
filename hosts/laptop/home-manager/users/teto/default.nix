@@ -48,7 +48,6 @@
   package-sets = {
     enableDesktopGUIPackages = true;
     enableIMPackages = true;
-    enableOfficePackages = true;
     scientificSoftware = true;
     energy = true;
     wifi = true;

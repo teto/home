@@ -142,7 +142,6 @@ let
       # settings.timeout = 5
     };
 
-
     # described here https://www.fastmail.com/help/technical/servernamesandports.html
     # imap = { host = "imap.fastmail.com"; tls = my_tls; };
     # smtp = { host = "smtp.fastmail.com"; tls = my_tls; };
@@ -275,10 +274,10 @@ in
 {
   email.maildirBasePath = mailDirBasePath;
   email.accounts = {
-    inherit 
-    # gmail
-    fastmail
-    # nova # access pb
-    ;
+    inherit
+      # gmail
+      fastmail
+      # nova # access pb
+      ;
   };
 }

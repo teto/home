@@ -1,7 +1,10 @@
-{ pkgs, lib
-, flakeSelf
-, config,
-... }:
+{
+  pkgs,
+  lib,
+  flakeSelf,
+  config,
+  ...
+}:
 {
 
   # _imports = [

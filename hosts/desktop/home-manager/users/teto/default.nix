@@ -9,22 +9,21 @@
 }:
 {
 
-
   imports =
     [
       # flakeSelf.homeModules.bash
       # ../../../../../hm/profiles/bash.nix
 
       flakeSelf.homeProfiles.qutebrowser
+      flakeSelf.inputs.nix-index-database.hmModules.nix-index
 
+      flakeSelf.homeModules.teto-nogui
       flakeSelf.homeModules.ollama
       flakeSelf.homeModules.experimental
       flakeSelf.homeModules.vscode
+      flakeSelf.homeProfiles.wezterm
       # ../../../hm/profiles/experimental.nix
       # flakeSelf.homeModules.gnome-shell
-
-      # flakeSelf.homeModules.wezterm
-      # ../../../../../hm/profiles/wezterm.nix
 
       ./calendars.nix
       ./sway.nix
@@ -32,7 +31,6 @@
       # ./programs/bash.nix
       # ./programs/git.nix
       ./programs/neovim.nix
-      # ./programs/yazi.nix # loaded from profile noew
       ./programs/waybar.nix
       ./programs/zsh.nix
 
@@ -46,10 +44,10 @@
     ++ lib.optionals withSecrets [
       ./sops.nix
       ./ia.nix
-      # ../../../../../hm/profiles/ia.nix
       # ../../../../../hm/profiles/nushell.nix
-
     ];
+
+  # services.opensnitch-ui.enable
 
   # TODO use mkSymlinkOufOf  ? ?
   # xdg.configFile."zsh/zshrc.generated".source = ../../../config/zsh/zshrc;
@@ -91,7 +89,7 @@
     [
       # llm-ls # needed by the neovim plugin
 
-      cointop  # bitcoin tracker
+      cointop # bitcoin tracker
       # mdp # markdown CLI presenter
       # gthumb # image manager, great to tag pictures
       gnome-control-center
@@ -104,7 +102,6 @@
       moar # test as pager
       pciutils # for lspci
       presenterm # for presentations from terminal/markdown (in rust, supports images, pretty cool)
-
 
       sioyek # pdf reader
       tailspin # (broken) a log viewer based on less ("spin" or "tsspin" is the executable)

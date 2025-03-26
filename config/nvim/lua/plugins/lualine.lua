@@ -23,41 +23,40 @@ local clip = require('teto.clipboard')
 -- })
 -- table.insert(_opts.sections.lualine_c, )
 
-
-
-
-
 local on_click_gp = function(_nb_of_clicks, _button, _modifiers)
-	 -- vim.notify("builtins GP.nvim")
-	 local menu_opts = {
-	  mouse = true,
-	  border = false
-	 }
+    -- vim.notify("builtins GP.nvim")
+    local menu_opts = {
+        mouse = true,
+        border = false,
+    }
 
-	 -- list possible agents from the api
-	 -- one can look at agent_completion
-	 local agents = require'gp'._chat_agents
-	 local entries = {}
-	 for _, ag in ipairs(agents) do
-	   entries[#entries] = {
-		{ name = tostring(ag),
-		cmd = ":GpAgent "..ag
-	   }
+    -- list possible agents from the api
+    -- one can look at agent_completion
+    local agents = require('gp')._chat_agents
 
-	   }
-	 end
-	 -- local entries = {
-		--  {
-		-- name = "Code Actions",
-		-- cmd = vim.lsp.buf.code_action,
-		-- rtxt = "<leader>ca",
-		--  },
+    local entries = {}
+    for _, ag in ipairs(agents) do
+	 -- print("Adding entry", tostring(ag))
+        entries[#entries + 1] = {
+		 -- rtxt
+            name = tostring(ag),
+			cmd = ':GpAgent ' .. tostring(ag),
+        }
+	 -- print("Nb of entries", #entries)
+    end
+    -- local entries = {
+    --  {
+    -- name = "Code Actions",
+    -- cmd = vim.lsp.buf.code_action,
+    -- rtxt = "<leader>ca",
+    --  },
+    --  { name = "separator" },
+    -- }
 
-	 --  { name = "separator" },
-	 -- }
-	 require("menu").open(entries, menu_opts)
-   end
-
+	-- vim.print(entries)
+	-- entries must be non empty else nvim will complain about 'height' being not positive
+    require('menu').open(entries, menu_opts)
+end
 
 -- Trying to display
 -- local get_workspace_diagnostic_count = function()
@@ -71,7 +70,7 @@ diagnostic_session = {
     -- sections = { 'error', 'warn' }
 }
 
-local branch_name = ""
+local branch_name = ''
 
 require('lualine').setup({
     options = {
@@ -89,8 +88,8 @@ require('lualine').setup({
                 'branch',
                 -- truncate too long branch names !
                 fmt = function(str)
-				  -- truncation should be an option ?
-				    branch_name = str:sub(1, 20)
+                    -- truncation should be an option ?
+                    branch_name = str:sub(1, 20)
                     return branch_name
                 end,
                 on_click = function(_nb_of_clicks, _button, _modifiers)
@@ -154,10 +153,10 @@ require('lualine').setup({
         }, -- progress = %progress in file
         lualine_z = {
             -- 'obsession',
-			{
-			 'gp-nvim',
-			 on_click = on_click_gp
-			},
+            {
+                'gp-nvim',
+                on_click = on_click_gp,
+            },
             -- 'autosession',
             -- get_workspace_diagnostic_count,
             -- 'location',

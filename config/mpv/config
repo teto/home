@@ -2,6 +2,8 @@
 #vg=opengl
 term-status-msg="Time: ${time-pos}"
 
+# equivalent to 'Q'
+save-position-on-quit
 force-window=%3%yes
 profile=%6%gpu-hq
 ytdl-format=%19%bestvideo+bestaudio

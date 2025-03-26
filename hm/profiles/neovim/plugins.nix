@@ -150,7 +150,6 @@ in
     # { plugin = vim-toml; }
   ];
 
-
   colorschemePlugins = with pkgs.vimPlugins; [
     { plugin = sonokai; }
     { plugin = tokyonight-nvim; }

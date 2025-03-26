@@ -1,2 +1,4 @@
 power management
 upower -d
+
+https://www.kernel.org/doc/Documentation/cpu-freq/governors.txt

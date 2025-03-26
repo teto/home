@@ -28,6 +28,11 @@ in
           builtins.readFile "${flakeSelf.inputs.nova-ci}/configs/prod/runners-generated.json"
         );
 
+        mkKey =
+          name:
+          # TODO normalize name toShellVar ?
+          lib.toUpper ("NOVA_" + lib.replaceStrings [ "-" ] [ "_" ] name);
+
         # generates a { NOVA_XXX = string } attrset that contains paths toward remote builders
         remoteBuilders = lib.listToAttrs (
           map
@@ -35,7 +40,7 @@ in
               attr:
               # attrs should only contain
               # So seems like there is no way to fix those
-              lib.nameValuePair (lib.toUpper "NOVA_${attr.runnerName}") (
+              lib.nameValuePair (mkKey attr.runnerName) (
                 pkgs.tetoLib.mkRemoteBuilderDesc (
                   attr
                   // {

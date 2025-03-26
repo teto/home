@@ -9,6 +9,10 @@
   #   mcfly.enable = true;
   # };
 
+  # programs.code
+
+  programs.claude-code.enable = true;
+
   # programs.lapce.enable = true;
   programs.mods = {
     # disabled because zsh completion took too long

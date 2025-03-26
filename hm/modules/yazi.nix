@@ -1,7 +1,13 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
-   cfg = config.programs.yazi;
-in {
+  cfg = config.programs.yazi;
+in
+{
   options = {
     programs.yazi = {
       enable = lib.mkEnableOption "yazi";

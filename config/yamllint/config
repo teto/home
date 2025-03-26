@@ -15,9 +15,9 @@ rules:
   colons: enable
   commas: enable
   comments:
-    require-starting-space: true
+    require-starting-space: false
     min-spaces-from-content: 1
-    level: warning
+    level: hint
   comments-indentation: disable
     # level: warning
   document-end: disable

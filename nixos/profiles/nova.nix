@@ -7,7 +7,7 @@
 }:
 {
   imports = [
-    flakeSelf.inputs.nova-doctor.nixosModules.antivirus
+    # flakeSelf.inputs.nova-doctor.nixosModules.antivirus
     flakeSelf.inputs.nova-doctor.nixosModules.collections
     flakeSelf.inputs.nova-doctor.nixosModules.vpn
     flakeSelf.inputs.nova-doctor.nixosModules.nix-daemon
@@ -62,7 +62,6 @@
 
   # for sharedssh access
   # services.gvfs.enable = true;
-
 
   # builtins.toJSON
   # lib.generators.toPretty {}
