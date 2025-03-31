@@ -188,14 +188,14 @@ in
       # TODO hacking on this
 
       # TODO replaced with https://github.com/yutkat/git-rebase-auto-diff.nvim
-      {
-        # display git diff while rebasing, pretty dope
-        # my complaints: has issues with sync mode
-        plugin = pkgs.vimPlugins.auto-git-diff;
-        # config = ''
-        # let g:auto_git_diff_disable_auto_update=1
-        # '';
-      }
+      # {
+      #   # display git diff while rebasing, pretty dope
+      #   # my complaints: has issues with sync mode
+      #   plugin = pkgs.vimPlugins.auto-git-diff;
+      #   # config = ''
+      #   # let g:auto_git_diff_disable_auto_update=1
+      #   # '';
+      # }
 
       (luaPlugin {
         plugin = pkgs.vimPlugins.unicode-vim;

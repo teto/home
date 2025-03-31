@@ -2,6 +2,23 @@
 {
   inputMethod = {
     enabled = "fcitx5";
+    fcitx5 = {
+      addons = with pkgs; [
+        fcitx5-mozc # currently broken
+      ];
+
+      waylandFrontend = true;
+    };
+
+    # inputs = {
+    #   name = "Default";
+    #   defaultLayout = "us";
+    #   defaultIm = "mozc";
+    #   items = [
+    #     { name = "keyboard-us"; }
+    #     { name = "mozc"; }
+    #   ];
+    # };
   };
 
   glibcLocales = pkgs.glibcLocales.override {

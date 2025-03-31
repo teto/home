@@ -37,7 +37,7 @@ neotest = "5.8.0"
 "lsp_signature.nvim" = "0.3.1"
 friendly-snippets = "scm"
 # "haskell-snippets.nvim" = "1.4.4"
-"yazi.nvim" = "10.0.0"
+"yazi.nvim" = "10.0.1"
 tree-sitter-haskell = "scm"
 # tree-sitter-org = "0.0.1"
 # "lspkind.nvim" = "scm"
@@ -60,7 +60,7 @@ vim-startuptime= "4.5.0"
 "typescript-tools.nvim" = "scm"
 menu= "scm"
 # "snacks.nvim" = "2.6.0"
-fzf-lua = "0.0.1798"
+fzf-lua = "0.0.1804"
 "lz.n" = "2.11.2"
 "indent-blankline.nvim" = "3.9.0"
 "llm.nvim"= "scm"
@@ -69,8 +69,8 @@ volt= "scm"
 # "telescope.nvim" = "0.1.6"
 nvim-lspconfig= "1.7.0"
 # tree-sitter-org = "0.0.1"
-"grug-far.nvim"= "1.5.10"
-orgmode = "0.5.2" # has tree-sitter-orgmode as a dep
+"grug-far.nvim"= "1.5.18"
+orgmode = "0.5.3"
 # tree-sitter-orgmode = "2.0.0"
 # nvim-treesitter-textobjects = "scm"
 # "rocks-treesitter.nvim" = "1.0.3"
@@ -88,7 +88,7 @@ orgmode = "0.5.2" # has tree-sitter-orgmode as a dep
 # cmd = "ASToggle" # optional for lazy loading on command
 
 [plugins.neorg]
-version = "9.2.0"
+version = "9.3.0"
 # ft = "norg"
 
 [plugins."gp.nvim"]
@@ -125,11 +125,6 @@ opt = true
 git = "alec-gibson/nvim-tetris"
 rev = "v0.1.1"
 opt = true
-
-# [plugins."startuptime.vim"]
-# git = "tweekmonster/startuptime.vim"
-# rev = "dfa57f522d6f61793fe5fea65bca7484751b8ca2"
-# opt = true
 
 [plugins."command-and-cursor.nvim"]
 git = "moyiz/command-and-cursor.nvim"
@@ -183,19 +178,6 @@ git = "letieu/hacker.nvim"
 rev = "6818e75c076beb05ffcad2be6a78e0e0f800416d"
 opt = true
 
-# [plugins.nvimesweeper]
-# git = "seandewar/nvimesweeper"
-# rev = "a75828943e4279cd850ad6a6cff4c49238997573"
-# opt = true
-
-# [plugins."color-picker.nvim"]
-# git = "ziontee113/color-picker.nvim"
-# rev = "06cb5f853535dea529a523e9a0e8884cdf9eba4d"
-
-# [plugins."lsp_lines.nvim"]
-# git = "https://git.sr.ht/~whynothugo/lsp_lines.nvim"
-# rev = "v3.0.0"
-#
 [plugins."highlight-undo.nvim"]
 git = "tzachar/highlight-undo.nvim"
 rev = "1ea1c79372d7d93c88fd97543880927b7635e3d2"
@@ -216,14 +198,6 @@ rev = "89b7c45a48a661da88a3a574ef9fa90b936064a4"
 [plugins."tint.nvim"]
 git = "levouh/tint.nvim"
 rev = "02bd0527a315a80e4e25bb2dd7b6994fb0daae01"
-
-# [plugins."live-command.nvim"]
-# git = "smjonas/live-command.nvim"
-# rev = "2.2.0"
-#
-# [plugins.nvim-pnpm-catalog-lens]
-# git = "ryoppippi/nvim-pnpm-catalog-lens"
-# rev = "v0.3.0"
 
 [plugins.lualine-lsp-progress]
 git = "arkav/lualine-lsp-progress"
@@ -269,7 +243,7 @@ rev = "c399884e8f64019ec9bb581251f9710915b7f996"
 
 [plugins."codecompanion.nvim"]
 git = "olimorris/codecompanion.nvim"
-rev = "v14.2.2"
+rev = "v14.5.0"
 
 
 [config]

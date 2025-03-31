@@ -2,9 +2,8 @@
 {
 
   i18n.inputMethod = {
-    enabled = null;
-
-    # "fcitx5";
+    enabled =  "fcitx5";
+    #;
     # fcitx5.addons = with pkgs.fcitx-engines;  [ mozc ];
     fcitx5.addons = with pkgs; [
       fcitx5-mozc # currently broken

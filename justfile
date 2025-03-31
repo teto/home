@@ -226,3 +226,4 @@ nix-diff-booted:
 # run a X compatibility layer, you need to export the correct DISPLAY beforehand
 xwayland:
     xwayland-satellite
+

@@ -79,7 +79,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    lux.url = "github:nvim-neorocks/lux";
+    lux = {
+      url = "github:nvim-neorocks/lux";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # peerix.url = "github:cid-chan/peerix";
     # mptcp-flake.url = "github:teto/mptcp-flake/fix-flake";
@@ -154,6 +157,7 @@
 
     nix-update = {
       url = "github:Mic92/nix-update";
+      inputs.nixpkgs.follows = "nixpkgs"; # breaks build
     };
 
     # nix-index-cache.url = "github:Mic92/nix-index-database";
@@ -763,8 +767,8 @@
 
       # TODO scan hm/{modules, profiles} folder
       homeProfiles = (importDir ./hm/profiles) // {
-        common = ./hm/profiles/common.nix;
-        fzf = ./hm/profiles/fzf.nix;
+        # common = ./hm/profiles/common.nix;
+        # fzf = ./hm/profiles/fzf.nix;
         neovim = ./hm/profiles/neovim.nix;
         nova = ./hm/profiles/nova.nix;
 
@@ -795,8 +799,6 @@
         # (modulesFromDir ./hm/modules)
 
         # bash = ./hm/profiles/bash.nix;
-        services-mujmap = ./hm/services/mujmap.nix;
-        # services-swaync = ./hm/services/swaync.nix;
         # hosts/desktop/home-manager/users/teto/default.nix;
 
         # needs zsh-extra ?
@@ -959,17 +961,6 @@
             # };
 
             tetoLib = final.callPackage ./hm/lib.nix { };
-
-            # FIX: https://github.com/NixOS/nixpkgs/issues/392278
-            auto-cpufreq = prev.auto-cpufreq.overrideAttrs (oldAttrs: {
-              postPatch =
-                oldAttrs.postPatch
-                + ''
-
-                  substituteInPlace pyproject.toml \
-                  --replace-fail 'psutil = "^6.0.0"' 'psutil = ">=6.0.0,<8.0.0"'
-                '';
-            });
 
             pimsync-dev = prev.pimsync.overrideAttrs (
               drv:
