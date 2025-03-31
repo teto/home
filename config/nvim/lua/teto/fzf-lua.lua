@@ -8,6 +8,9 @@ local M = {}
 -- use fre to filter files by
 function M.git_fre() end
 
+
+local fzf_jj = require'teto.fzf-lua.providers.jj'
+
 local git_files_opts = {
 
     entry_maker = function(entry)
@@ -27,10 +30,21 @@ function M.register_keymaps()
         fzf_lua.files()
     end)
     vim.keymap.set('n', '<Leader>o', function()
-        fzf_lua.git_files({
-            -- entry_maker = entry_maker
-            -- fzf_opts = {['--scheme'] = 'path'}
-        })
+	 -- first check if we are 
+	  if fzf_jj.is_jj_repo() then
+
+	   fzf_jj.files({
+		-- fzf_lua.git_files({
+		 --     -- entry_maker = entry_maker
+		     fzf_opts = {['--scheme'] = 'path'}
+		})
+	   else 
+		fzf_lua.git_files({
+		 entry_maker = entry_maker,
+		 fzf_opts = {['--scheme'] = 'path'}
+		})
+	   end
+		 
     end)
     vim.keymap.set('n', '<Leader>F', function()
         fzf_lua.filetypes()

@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# This script checks if the systemd service 'mujmap-fastmail.service' is running
+# and outputs its status in JSON format for waybar.
+status=$(systemctl is-active --user mujmap-fastmail.service 2>/dev/null)
+if [ "$status" = "active" ]; then
+    echo '{"text": "mail: active", "class": "active"}'
+else
+    echo '{"text": "mail: inactive", "class": "inactive"}'
+fi

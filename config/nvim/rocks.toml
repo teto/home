@@ -229,10 +229,6 @@ rev = "949ece728ecc0cacf3c6c81bbcda186fe3fef5cf"
 git = "norcalli/nvim-colorizer.lua"
 rev = "a065833f35a3a7cc3ef137ac88b5381da2ba302e"
 
-[plugins.blink-cmp-git]
-git = "kaiser-yang/blink-cmp-git"
-rev = "v2.4.0"
-
 [plugins."git-rebase-auto-diff.nvim"]
 git = "yutkat/git-rebase-auto-diff.nvim"
 rev = "ad95f18cb85c24ddc0b48bf190bc313dfc58e2d6"

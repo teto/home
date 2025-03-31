@@ -110,27 +110,6 @@ local lspconfig = require('lspconfig')
 -- lspconfig.dhall_lsp_server.setup({})
 -- lspconfig.dockerls.setup({})
 
--- see https://github.com/redhat-developer/yaml-language-server for doc
-lspconfig.yamlls.setup({
-    -- cmd = { 'yaml-language-server', '--stdio' },
-    --   on_attach = lsp.on_attach,
-    --   capabilities = lsp.capabilities,
-    settings = {
-        yaml = {
-            -- customTags
-            schemaStore = { enable = true },
-            -- schemas = require('schemastore').yaml.schemas(),
-
-            format = {
-                enable = true,
-                proseWrap = 'Preserve',
-                printWidth = 120,
-            },
-        },
-    },
-    -- }
-})
-
 -- local pyrightCapabilities = vim.lsp.protocol.make_client_capabilities()
 -- pyrightCapabilities.textDocument.publishDiagnostics.tagSupport.valueSet = { 2 }
 --
@@ -188,15 +167,15 @@ lspconfig.yamlls.setup({
 --     },
 -- })
 
-lspconfig.jsonls.setup({
-    settings = {
-        json = {
-            schemas = require('schemastore').json.schemas(),
-            -- see https://github.com/b0o/SchemaStore.nvim/issues/8 for info about
-            validate = { enable = true },
-        },
-    },
-})
+-- lspconfig.jsonls.setup({
+--     settings = {
+--         json = {
+--             schemas = require('schemastore').json.schemas(),
+--             -- see https://github.com/b0o/SchemaStore.nvim/issues/8 for info about
+--             validate = { enable = true },
+--         },
+--     },
+-- })
 
 -- see https://github.com/oxalica/nil/blob/main/docs/configuration.md for config
 -- https://github.com/neovim/nvim-lspconfig/wiki/Autocompletion

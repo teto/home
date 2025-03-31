@@ -67,7 +67,8 @@
       #mostly for testin
       # dfh="df --human-readable";
       # duh="du --human-readable";
-      latest = "ls -lt |head";
+      # --reverse|head";
+      latest = "eza --sort newest -l | tail ";
 
       # trans aliases{{{
       fren = "trans -from fr -to en ";

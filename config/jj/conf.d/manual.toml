@@ -1,16 +1,14 @@
-[user]
-   email = "886074+teto@users.noreply.github.com"
-   name = "Matthieu C."
-   signingKey = "88A4D2369454E51E"
+"$schema" = "https://jj-vcs.github.io/jj/latest/config-schema.json"
 
 [aliases]
 # `jj l` shows commits on the working-copy commit's (anonymous) bookmark
 # compared to the `main` bookmark
-# l = ["log", "-r", "(main..@):: | (main..@)-"]
+l = ["log", "-r", "(main..@):: | (main..@)-"]
 
 # git log-like
 gl = ["log", "-r", "(..@)::"]
-
+fa = ["git", "fetch", "--all-remotes"]
+colocate = ["git", "init", "--colocate"]
 
 [revset-aliases]
 # "immutable_heads()" = "builtin_immutable_heads() | (trunk().. & ~mine())"
@@ -18,28 +16,78 @@ gl = ["log", "-r", "(..@)::"]
 # see https://github.com/jj-vcs/jj/discussions/5669 for more explanation
 
 'why_immutable(r)' = 'r | roots(r:: & immutable_heads())'
+"trunk()" = '''
+latest(
+  remote_bookmarks(exact:"main", exact:"origin") |
+  remote_bookmarks(exact:"master", exact:"origin") |
+  remote_bookmarks(exact:"trunk", exact:"origin") |
+  remote_bookmarks(exact:"main", glob:"up*") |
+  remote_bookmarks(exact:"master", glob:"up*") |
+  remote_bookmarks(exact:"trunk", glob:"up*") |
+  remote_bookmarks(exact:"dev", glob:"up*") |
+  root()
+)
+'''
 
 # I overrode revset-aliases.mine() to include both my emails
 # Or, rather, I set it to author(exact:'name') | author(exact:'email')
 
-
+[experimental-advance-branches]
+enabled-branches = ["glob:*"]
+disabled-branches = ["main", "dev", "master", "glob:push-*"]
 
 [ui]
-default-command = "log"
+# log
+default-command = "status"
 # default-description = "\n\nTESTED=TODO"
 # Possible values: "color-words" (default), "git", "summary"
 diff.format = "git"
+log-word-wrap = true
+# Enable pagination for commands that support it (default)
+paginate = "auto"
+# Disable all pagination, equivalent to using --no-pager
+# paginate = "never"
+
+# The ui.merge-editor key specifies the tool used for three-way merge tools by jj resolve. Use merge-tools.TOOL.merge-args
+merge-editor = "nvim"
+# The ui.diff-editor setting affects the default tool used for editing diffs (e.g. jj split, jj squash -i)
+
+[merge-tools.kdiff3]
+# program  = "kdiff3"     # Defaults to the name of the tool if not specified
+merge-args = ["$base", "$left", "$right", "-o", "$output", "--auto"]
+[merge-tools.meld]
+merge-args = ["$left", "$base", "$right", "-o", "$output", "--auto-merge"]
+
+[merge-tools.vimdiff]
+merge-args = ["-f", "-d", "$output", "-M",
+    "$left", "$base", "$right",
+    "-c", "wincmd J", "-c", "set modifiable",
+    "-c", "set write"]
+program = "vim"
+merge-tool-edits-conflict-markers = true    # See below for an explanation
+
+[merge-tools.nvim]
+program = "nvim"
+merge-args = ["-f", "-d", "$output", "-M",
+    "$left", "$base", "$right",
+    "-c", "wincmd J", "-c", "set modifiable",
+    "-c", "set write"]
+merge-tool-edits-conflict-markers = true    # See below for an explanation
+
+# merge-tools.vimdiff.merge-tool-edits-conflict-markers = true
 
 [colors]
 commit_id = "green"
 "commit_id prefix" = { bold = true }
+"working_copy commit_id" = { underline = true }
 
 [core]
 # fsmonitor = "watchman"
 # watchman.register_snapshot_trigger = true
 
 [git]
-push-bookmark-prefix = "matt/push-"
+# avoided the '/' because it creates issues with gitlab slugifying for components
+push-bookmark-prefix = "matt-push-"
 
 [snapshot]
 max-new-file-size = "10MiB"
@@ -57,12 +105,36 @@ concat(
   diff.git(),
 )
 '''
+bookmark_list = '''label("TOTO")'''
+# bookmark_list = '''
+# if(remote,
+#   if(tracked,
+#     "  " ++ separate(" ",
+#       label("bookmark", "@" ++ remote),
+#       format_tracked_remote_ref_distances(self),
+#     ) ++ format_ref_targets(self),
+#     label("bookmark", name ++ "@" ++ remote) ++ format_ref_targets(self),
+#   ),
+#   label("bookmark", name) ++ if(present, format_ref_targets(self), " (deleted)"),
+# ) ++ "\n"
+# '''
+
+# templates.commit_summary = 'format_commit_summary_with_refs(self, bookmarks)'
 
 # override user.email if the repository is located under ~/oss
-[[--scope]]
---when.repositories = ["~/nova"]
-[--scope.user]
-email = "YOUR_OSS_EMAIL@novatoto.ai"
+# [[--scope]]
+# --when.repositories = ["~/nova"]
+# [--scope.user]
+# email = "YOUR_OSS_EMAIL@novatoto.ai"
 
-# [include]
-# 	path = "/home/teto/.config/jj/config.inc"
+
+# disable pagination for `jj status`, use `delta` for `jj diff` and `jj show`
+[[--scope]]
+--when.commands = ["status"]
+[--scope.ui]
+paginate = "never"
+[[--scope]]
+--when.commands = ["diff", "show"]
+[--scope.ui]
+pager = "delta"
+

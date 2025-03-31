@@ -1,6 +1,10 @@
 #+title: zsh tips 
 
 
+* how to remove a binding 
+
+bindkey -r
+
 * autocompletion
 
 to read about completion:

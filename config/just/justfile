@@ -9,23 +9,6 @@ simwork-install-my-env:
   ln -sf {{justfile_directory()}}/../../nova/justfile justfile.local
   ln -sf $HOME/home/nova/.envrc .envrc
 
-golden-test:
-  nix run  .#fastbuild.simwork.core-webservice.golden-test
-
-local:
-  nix run  .#fastbuild.simwork.core-webservice.local
-
-platform:
-  nix run  .#fastbuild.simwork.core-webservice.platform
-
-repl:
-  # TODO:
-  # autoload System.Environment
-  # setEnv "PORCUPINE_ARGS" "--bypass-manifest-check -vv"
-  # --ghci-args 
-  # --ghci-script
-  nix run  .#simwork.core-webservice.platform._repl 
-
 # Merge some hardcoded shell commands in shell history
 zsh-load-history:
     #!/usr/bin/env zsh
@@ -38,9 +21,6 @@ zsh-load-history:
 
     # Flush history / HIST_FILE
     # builtin fc -W "$hist_file_merged"
-
-sscwl:
-  nix run .#simwork.core-webservice.local -- --bypass-manifest-check -vv
 
 # update luarocks packages
 update-luarocks:
@@ -63,7 +43,7 @@ update-neovim-packages:
 # fetch new mail
 mail-sync:
   systemctl start --user mujmap-fastmail.service
-  systemctl start --user mujmap-fastmail.service
+  # systemctl start --user mujmap-fastmail.service
 
 # generate database executable -> nix attributes
 nixpkgs-index:

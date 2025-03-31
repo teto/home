@@ -1,5 +1,6 @@
 // config included only for the desktop
 {
+  "$schema": "/home/teto/home/config/waybar/schema.json",
 	"modules-right": [
 		// "custom/mymodule#with-css-id",
 		// "temperature",
@@ -15,6 +16,11 @@
 		"group/clock",
         "custom/calendar",
 		"custom/notification"
+	],
+	"modules-center": [
+		"custom/mic-status",
+        "custom/mail-check",
+        "custom/ollama",
 	],
 	"temperature": {
 		// click-to-reveal

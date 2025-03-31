@@ -1,5 +1,4 @@
 # interesting one
-# merge.conflictstyle = zdiff3
 # rebase.autosquash = true
 # rebase.autostash = true 
 # commit.verbose = true

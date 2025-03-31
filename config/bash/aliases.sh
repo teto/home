@@ -91,3 +91,7 @@ export MCFLY_RESULTS=200
 # MCFLY_DISABLE_MENU
 # export MCFLY_PROMPT="❯"
 # export MCFLY_HISTORY_LIMIT
+
+# show branch
+# alias gv=glab ci view -b "\$(jj log -r 'ancestors(@) & bookmarks()')"
+

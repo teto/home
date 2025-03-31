@@ -27,7 +27,6 @@ let
     # pkgs.vimPlugins.blink-cmp-git # autocomplete github issues/PRs
   ];
 
-  # try via rocks.nvim first
   neotestPlugins = with pkgs.vimPlugins; [
     # neotest
     # neotest-haskell
@@ -57,8 +56,20 @@ let
 
   luaPlugins = with pkgs.vimPlugins; [
 
+    (luaPlugin {
+      plugin = avante-nvim.overrideAttrs({
+
+        src = flakeSelf.inputs.avante-nvim-src;
+      }); 
+        # require("avante").setup()
+      # config = ''
+      # require("avante_lib").load()
+      # '';
+
+    })
     { plugin = nvim-colorizer-lua; }
     pkgs.vimPlugins.typescript-tools-nvim
+    pkgs.vimPlugins.gitlab-vim
 
     # not upstreamed yet
     # (luaPlugin { plugin = nvim-lua-gf; })

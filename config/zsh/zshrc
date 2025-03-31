@@ -12,10 +12,15 @@
 # current_folder="${0:a:h}"
 . "$ZDOTDIR/aliases.zsh"
 
+# where was it bound ? native ? we need to remove it before sourcing jj.sh
+# that maps ^j^b
+bindkey -r '^j'
+
 # https://stackoverflow.com/questions/24601806/got-permission-denied-when-emulating-sh-under-zsh
 emulate sh -c "source $ZDOTDIR/aliases.zsh"
 emulate sh -c "source $XDG_CONFIG_HOME/bash/aliases.sh"
 emulate sh -c "source $XDG_CONFIG_HOME/bash/fzf.sh"
+emulate sh -c "source $XDG_CONFIG_HOME/bash/jj.sh"
 
 # to reload sessionVariables
 source ~/.profile
@@ -48,6 +53,7 @@ setopt extended_history      # Write the history file in the ':start:elapsed;com
 setopt hist_verify # don't execute, just expand history
 setopt share_history # imports new commands and appends typed commands to history
 
+HIST_STAMPS="yyyy-mm-dd"  # can see the date in `history -E`
 # histtimeformat
 # }}}
 # Zsh options {{{1
@@ -104,6 +110,8 @@ bindkey "[A"      history-search-backward              # up arrow
 bindkey "^D"      delete-char                          # ctrl-d
 bindkey "^F"      forward-char                         # ctrl-f
 bindkey "^B"      backward-char                        # ctrl-b
+# bindkey "^J"      backward-char                        # ctrl-b
+
 # expand aliases, useful when running aliases in a sudo command
 # http://www.math.cmu.edu/~gautam/sj/blog/20140625-zsh-expand-alias.html
 # function expand-ealias()
@@ -359,4 +367,3 @@ compdef _git gch
 compdef _pass pass-nova
 compdef _pass pass-pro
 compdef _pass pass-perso
-

@@ -1,4 +1,5 @@
 {
+  "$schema": "/home/teto/home/config/waybar/schema.json",
 	"position":               "top",
 	"reload_style_on_change": true,
 	"modules-left": [
@@ -50,10 +51,34 @@
 			"updated":     "", // icon when all packages updated
 		},
 	},
+	"custom/mic-status": {
+		"exec":        "waybar-mic-status",
+		"on-click":    "waybar-nixpkgs-update-check && notify-send 'The system has been updated'", // refresh on click
+		"interval":    5, // refresh every hour
+		"tooltip":     true,
+		// "return-type": "json",
+		"format":      "{} {icon}",
+		"format-icons": {
+			"has-updates": "", // icon when updates needed
+			"updated":     "", // icon when all packages updated
+		},
+	},
+	"custom/ollama": {
+		"exec":        "waybar-ollama", 
+		"on-click":    "waybar-nixpkgs-update-check && notify-send 'The system has been updated'", // refresh on click
+		"interval":    5, // refresh every hour
+		"tooltip":     true,
+		// "return-type": "json",
+		"format":      "{} {icon}",
+		"format-icons": {
+			"has-updates": "", // icon when updates needed
+			"updated":     "", // icon when all packages updated
+		},
+	},
     "custom/mail-check": {
-		"exec":        "waybar-mail-check", // <--- path to script
+		"exec":        "waybar-check-mail", // <--- path to script
 		"on-click":    "ONCLICK", // refresh on click
-		"interval":    10, // refresh every hour
+		"interval":    1, // refresh every hour
 		"tooltip":     true,
 		"return-type": "json",
 		"format":      "{} {icon}",
@@ -94,7 +119,7 @@
 		"menu-file": "~/.config/waybar/menu-notmuch.xml",
 		"menu-actions": {
 			"neomutt": "kitty sh -c neomutt",
-            "fetchfastmail": "fetch-fastmail",
+            "fetchfastmail": "just -g mailsync",
 			// "reboot": "reboot",
 		},
 	},

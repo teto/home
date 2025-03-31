@@ -2,8 +2,18 @@
 -- https://github.com/nanotee/nvim-lua-guide#using-meta-accessors
 -- https://www.reddit.com/r/neovim/comments/o8dlwg/how_to_append_to_an_option_in_lua/
 -- local configs = require'nvim_lsp/configs'
--- vim.loader.enable()
+vim.loader.enable(false)
 -- showcmdloc
+-- require('avante_lib').load()
+require('avante').setup({
+    provider = 'openai',
+
+	openai = {
+	 api_key_name = "cmd:cat /home/teto/.config/sops-nix/secrets/OPENAI_API_KEY_NOVA",
+   }
+	-- openai_api_key = os.getenv("OPENAI_API_KEY")
+})
+-- print(package.cpath)
 
 local has_fzf_lua, fzf_lua = pcall(require, 'fzf-lua')
 
@@ -73,7 +83,7 @@ vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 vim.o.sessionoptions = 'buffers,curdir,help,tabpages,winsize,winpos,localoptions'
 
 -- vim.opt.rtp:prepend(os.getenv('HOME') .. '/rocks-dev.nvim')
-vim.opt.rtp:prepend(os.getenv('HOME') .. '/rocks.nvim')
+-- vim.opt.rtp:prepend(os.getenv('HOME') .. '/rocks.nvim')
 
 -- require("vim.lsp._watchfiles")._watchfunc = require("vim._watch").watch
 -- local ffi = require 'ffi'
@@ -763,8 +773,13 @@ vim.lsp.enable('pyright')
 -- })
 --
 
+-- require('plugins.avante')
+
+
 -- HACK around sway-scratchpad limitation where one can't esapce quotes so alleviate the need for that via a proxy command
 vim.api.nvim_create_user_command('LlmChat', function()
 	vim.cmd[[GpChatToggle tab]]
 end, { desc = "TOTO" })
 
+
+-- print(package.cpath)

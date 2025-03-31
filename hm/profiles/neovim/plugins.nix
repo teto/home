@@ -172,7 +172,7 @@ in
 
     (luaPlugin {
       plugin = marks-nvim;
-      config = # lua
+      config = /* lua */
         ''
           require'marks'.setup {
               -- whether to map keybinds or not. default true

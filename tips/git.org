@@ -2,6 +2,9 @@ https://ochronus.com/git-tips-from-the-trenches/
 
 Miminize size of .git folders (like 8G on my linux folder)
 
+GIT_DIR
+https://git-scm.com/book/en/v2/Git-Internals-Environment-Variables
+
 Command advised/used by linus:
 git repack -a -d --depth=250 --window=250
 

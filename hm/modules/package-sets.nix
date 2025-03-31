@@ -127,8 +127,6 @@ in
           # newsboat #
           # mujmap # to sync notmuch tags across jmap
           pkgs.vlc
-          # leafnode dovecot22 dovecot_pigeonhole fetchmail procmail w3m
-          # mairix mutt msmtp lbdb contacts spamassassin
           # element-desktop # TODO this should go into nix profile install
           # mcomix # manga reader
           # TODO
@@ -233,7 +231,8 @@ in
         mujmap-unstable # to sync notmuch tags across jmap
         # signal-desktop # installe a la main
         # memento # broken capable to display 2 subtitles at same time
-        # leafnode dovecot22 dovecot_pigeonhole fetchmail procmail w3m
+        # leafnode dovecot22 dovecot_pigeonhole fetchmail procmail 
+        w3m
         # mairix mutt msmtp lbdb contacts spamassassin
         # element-desktop # TODO this should go into nix profile install
 
@@ -248,7 +247,7 @@ in
         vlc
         # pinta # photo editing
 
-        # leafnode dovecot22 dovecot_pigeonhole fetchmail procmail w3m
+        # leafnode dovecot22 dovecot_pigeonhole fetchmail procmail 
         # mairix mutt msmtp lbdb contacts spamassassin
         # element-desktop # TODO this should go into nix profile install
         popcorntime
@@ -285,11 +284,13 @@ in
         dasht # ~ zeal but in terminal
         difftastic # smart diffs
         docker-credential-helpers
+        flakeSelf.inputs.starship-jj.packages.${pkgs.system}.default # custom.jj for starship
         gettext # for envsubst (TO NOT CONFOUND with gettext's envsubst)
         sad # live replace with fzf, use like `fd | sad toto tata`
         sops # password 'manager'
         glab # gitlab cli
         hexyl # hexcode viewer
+
 
         libossp_uuid # for the 'libuuid' executable
 
@@ -369,6 +370,7 @@ in
         shfmt # shell format
         tio # serial console reader
         tig
+        tmux  # when connecting via ssh
         universal-ctags # there are many different ctags, be careful !
         whois
         zeal # doc for developers

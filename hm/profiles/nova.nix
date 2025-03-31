@@ -1,7 +1,7 @@
-{
-  pkgs,
-  flakeSelf,
-  ...
+{ config
+, pkgs
+, flakeSelf
+, ...
 }:
 {
 
@@ -15,6 +15,18 @@
     flakeSelf.inputs.nova-doctor.homeModules.browsers
 
   ];
+
+  programs.git = {
+    includes = [
+      # { path = config.xdg.configHome + "/git/config.inc"; }
+      # everything under ~/yourworkfolder/ is company code, so use the other user/email/gpg key, etc
+      {
+        # path = ./resources/gitconfigwork;
+        path = config.xdg.configHome + "/git/config.nova.inc";
+        condition = "gitdir:~/nova/";
+      }
+    ];
+  };
 
   home.packages = [
     flakeSelf.inputs.jinko-seeder.packages.${pkgs.system}.jinko-seeder

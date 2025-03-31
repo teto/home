@@ -24,6 +24,10 @@ sleep infinity
 export CI_DEBUG_TRACE
 
 
+* Access a project via its ID: 
+
+https://gitlab.com/projects/ID
+
 One can do 
 script:
    - export

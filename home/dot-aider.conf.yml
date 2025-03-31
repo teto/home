@@ -24,8 +24,7 @@ model: o3-mini
 # API Keys and settings:
 
 ## Specify the OpenAI API key
-#openai-api-key: opeo3-mini
-
+openai-api-key: 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%
 ## Specify the Anthropic API key
 #anthropic-api-key: xxx
 
@@ -411,7 +410,7 @@ model: o3-mini
 #multiline: false
 
 ## Enable/disable terminal bell notifications when LLM responses are ready (default: False)
-#notifications: false
+notifications: false
 
 ## Specify a command to run for notifications instead of the terminal bell. If not specified, a default command for your OS may be used.
 #notifications-command: xxx

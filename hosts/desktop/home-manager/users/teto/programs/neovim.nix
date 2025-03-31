@@ -144,7 +144,6 @@ let
 
     # (luaPlugin { plugin = minimap-vim; })
 
-    # TODO put into rocks.nvim
     # (luaPlugin { plugin = rest-nvim; })
   ];
 
@@ -165,7 +164,12 @@ in
       ++ treesitterPlugins
       # ++ telescopePlugins
       ++ neotestPlugins;
+
+      extraPackages = [ 
+        # pkgs.taplo # a toml LSP server 
+      ];
   };
+
 
   # home.packages = extraPackages;
 }

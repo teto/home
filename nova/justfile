@@ -34,6 +34,9 @@ local:
 platform:
   nix run  .#fastbuild.simwork.core-webservice.platform -- --bypass-manifest-check --migrate-sql-tables
 
+sscwl:
+  nix run .#simwork.core-webservice.local -- --bypass-manifest-check -vv
+
 repl:
   # TODO:
   # autoload System.Environment

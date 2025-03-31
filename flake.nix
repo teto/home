@@ -27,6 +27,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    avante-nvim-src = {
+      # url = "github:teto/avante.nvim?ref=matt/debug";
+      url = "path:/home/teto/neovim/avante.nvim";
+      flake = false;
+      # inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     blink-cmp = {
       url = "github:Saghen/blink.cmp";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -99,7 +106,7 @@
     };
 
     neomutt-src = {
-      url = "github:neomutt/neomutt?ref=flatcap/notmuch";
+      url = "github:neomutt/neomutt";
       flake = false;
     };
 
@@ -130,7 +137,7 @@
 
     # waybar.url = "github:Alexays/Waybar";
     nixpkgs = {
-      url = "github:teto/nixpkgs/nixos-unstable";
+      url = "github:teto/nixpkgs/scratch";
     };
 
     nix = {
@@ -141,7 +148,7 @@
     nix-schemas.url = "github:DeterminateSystems/nix-src/flake-schemas";
 
     rocks-nvim = {
-      url = "/home/teto/rocks.nvim";
+      url = "/home/teto/neovim/rocks.nvim";
       # url = "github:nvim-neorocks/rocks.nvim";
       # inputs.nixpkgs.follows = "nixpkgs";
     };
@@ -237,6 +244,23 @@
 
     sops-nix = {
       url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # starship-jj-patch = {
+    #   url = "https://patch-diff.githubusercontent.com/raw/starship/starship/pull/6388.diff";
+    #   flake = false;
+    # };
+    #
+    # starship-jj = {
+    #   url = "https://patch-diff.githubusercontent.com/raw/starship/starship/pull/6388.diff";
+    #   flake = false;
+    # };
+
+    # GIT_DIR=.jj/repo/store/git gh issue list
+    # provides a package 'starship-jj' used as a custom
+    starship-jj = {
+      url = "gitlab:lanastara_foss/starship-jj";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

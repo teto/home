@@ -35,9 +35,24 @@ fzf_lua.setup({
     defaults = {
         --  "path.dirname_first"
         -- formatter = 'path.filename_first',
-        git_icons = true,
+        git_icons = false,
         file_icons = false,
         color_icons = true,
+
+		-- jj = {
+		--   previewer         = M._default_previewer_fn,
+		--   cmd               = "git ls-files --exclude-standard",
+		--   multiprocess      = true,
+		--   file_icons        = 1,
+		--   color_icons       = true,
+		--   git_icons         = true,
+		--   fzf_opts          = { ["--multi"] = true, ["--scheme"] = "path" },
+		--   _fzf_nth_devicons = true,
+		--   _actions          = function() return M.globals.actions.files end,
+		--   winopts           = { preview = { winopts = { cursorline = false } } },
+		--
+		--  files
+		-- }
     },
     previewers = {
         builtin = {
@@ -64,6 +79,8 @@ fzf_lua.setup({
     -- [...]
     fzf_opts = {
         -- [...]
+		-- it shows raw ansi codes when disabled !
+		-- ['--ansi'] = false, -- for speed
         ['--history'] = fzf_history_dir,
         -- to get the prompt at the top
         -- ['--layout'] = 'reverse', -- reverse is the default

@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# This script checks if the microphone is in use by analyzing sound device usage via lsof.
+output=$(lsof /dev/snd/* 2>/dev/null)
+if [ -n "$output" ]; then
+    echo "mic: active"
+else
+    echo "mic: inactive"
+fi

@@ -5,7 +5,20 @@ Answer directly from brice:
 
 
 bcp de reponses a https://github.com/jj-vcs/jj/blob/main/docs/git-command-table.md
+git mergetool => jj resolve
 
+* see default templates and all
+
+jj config list --include-defaults
+
+
+* 
+A divergent change is a change that has more than one visible commit.
+
+* git push 
+
+https://github.com/jj-vcs/jj/discussions/2425
+jj git push -c @
 
 Jujutsu does not have a corresponding concept of a 'current bookmark'; instead, you update bookmarks manually. 
 Doesnt work with git-crypt:
@@ -67,6 +80,12 @@ $ jj git push -c @-
 * There is no concept of branch"
 
 `jj util gc` to speed up repos with several branches
+
+
+* init from a bare repo
+
+When a repo was initialized with --bare, you can create a jujutsu repo via
+`jj git init --git-repo=<path>`
 
 * fetch /
    
