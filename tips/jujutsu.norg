@@ -4,6 +4,13 @@ Answer directly from brice:
 > then the hardcoded fallback just checks {main,master,trunk}@{origin,upstream}
 
 
+* fake a git repo in jj workspace ?
+
+  In workspaces, we have .jj/repo that hints at the main git repo
+GIT_DIR=.jj/repo/store/git
+  .jj/repo/store/git_target
+
+  jj log -p --git
 bcp de reponses a https://github.com/jj-vcs/jj/blob/main/docs/git-command-table.md
 git mergetool => jj resolve
 

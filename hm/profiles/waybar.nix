@@ -82,6 +82,7 @@ in
           pkgs.curl
           pkgs.fuzzel
           # for the github notifier
+          pkgs.world-wall-clock
           pkgs.jq
           pkgs.nvidia-system-monitor-qt
           pkgs.swaynotificationcenter

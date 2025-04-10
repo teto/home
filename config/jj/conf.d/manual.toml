@@ -32,10 +32,10 @@ latest(
 # I overrode revset-aliases.mine() to include both my emails
 # Or, rather, I set it to author(exact:'name') | author(exact:'email')
 
-[experimental-advance-branches]
-enabled-branches = ["glob:*"]
-disabled-branches = ["main", "dev", "master", "glob:push-*"]
-
+# [experimental-advance-branches]
+# enabled-branches = ["glob:*"]
+# disabled-branches = ["main", "dev", "master", "glob:push-*"]
+#
 [ui]
 # log
 default-command = "status"
@@ -105,7 +105,7 @@ concat(
   diff.git(),
 )
 '''
-bookmark_list = '''label("TOTO")'''
+# bookmark_list = '''label("TOTO")'''
 # bookmark_list = '''
 # if(remote,
 #   if(tracked,

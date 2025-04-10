@@ -142,12 +142,13 @@ format = "[$symbol](blue bold) $output "
 symbol = "󱗆 "
 when = "jj root --ignore-working-copy"
 
-[custom.jjstate]
-when = "jj root --ignore-working-copy"
-# shows modified/added/deleted
-command = '''
-jj log -r@ -n1 --no-graph -T "" --stat | tail -n1 | sd "(\d+) files? changed, (\d+) insertions?\(\+\), (\d+) deletions?\(-\)" ' ${1}m ${2}+ ${3}-' | sd " 0." ""
-'''
+#
+# [custom.jjstate]
+# when = "jj root --ignore-working-copy"
+# # shows modified/added/deleted
+# command = '''
+# jj log -r@ -n1 --no-graph -T "" --stat | tail -n1 | sd "(\d+) files? changed, (\d+) insertions?\(\+\), (\d+) deletions?\(-\)" ' ${1}m ${2}+ ${3}-' | sd " 0." ""
+# '''
 
 [git_branch]
 disabled = true

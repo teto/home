@@ -325,6 +325,7 @@
           "matthieu.coudron/fortunes"
           "nova/nix-ld" # for monolix
           "nova/julia"
+          "nova/python"
           # "nova/virtualbox"
         ];
       };

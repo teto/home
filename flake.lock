@@ -42,8 +42,8 @@
     "avante-nvim-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1743464803,
-        "narHash": "sha256-pbS2S1x1DsP7uwVCptZ7hvmdV8RFbmUBponA6lZi6a8=",
+        "lastModified": 1743754432,
+        "narHash": "sha256-7voi1xFckzVgxCitkxDZ02DAgKKeppG9+ybbY9eEvNc=",
         "path": "/home/teto/neovim/avante.nvim",
         "type": "path"
       },

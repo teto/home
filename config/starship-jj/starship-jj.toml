@@ -1,0 +1,65 @@
+module_separator = " "
+
+[bookmarks]
+search_depth = 100
+exclude = []
+
+[[module]]
+type = "Bookmarks"
+separator = " "
+color = "Magenta"
+behind_symbol = "⇡"
+
+[[module]]
+type = "Commit"
+max_length = 24
+
+[[module]]
+type = "State"
+separator = " "
+
+[module.conflict]
+disabled = false
+text = "(CONFLICT)"
+color = "Red"
+
+[module.divergent]
+disabled = false
+text = "(DIVERGENT)"
+color = "Cyan"
+
+[module.empty]
+disabled = false
+text = "(EMPTY)"
+color = "Yellow"
+
+[module.immutable]
+disabled = false
+text = "(IMMUTABLE)"
+color = "Yellow"
+
+[module.hidden]
+disabled = false
+text = "(HIDDEN)"
+color = "Yellow"
+
+[[module]]
+type = "Metrics"
+template = "[{changed} {added}{removed}]"
+color = "Magenta"
+
+[module.changed_files]
+prefix = ""
+suffix = ""
+color = "Cyan"
+
+[module.added_lines]
+prefix = "+"
+suffix = ""
+color = "Green"
+
+[module.removed_lines]
+prefix = "-"
+suffix = ""
+color = "Red"
+

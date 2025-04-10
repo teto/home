@@ -34,6 +34,7 @@
 		// TODO launch ikhal instead
 		// or a terminal
 		"on-click-right": "kitty sh -c ikhal",
+		"on-click-left": "kitty sh -c world-wall-clock",
 		"actions": {
 			"on-scroll-up":   "tz_up",
 			"on-scroll-down": "tz_down",
