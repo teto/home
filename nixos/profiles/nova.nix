@@ -51,7 +51,7 @@
     teto = {
       imports = [
         # TODO move it here
-        ../../hm/profiles/nova.nix
+        flakeSelf.homeProfiles.nova
 
         flakeSelf.inputs.nova-doctor.homeModules.user
         flakeSelf.inputs.nova-doctor.homeModules.sse

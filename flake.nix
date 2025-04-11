@@ -794,8 +794,8 @@
       homeProfiles = (importDir ./hm/profiles) // {
         # common = ./hm/profiles/common.nix;
         # fzf = ./hm/profiles/fzf.nix;
-        neovim = ./hm/profiles/neovim.nix;
-        nova = ./hm/profiles/nova.nix;
+        neovim = ./hm/profiles/neovim;
+        nova = ./hm/profiles/nova/default.nix;
 
         # developer = ./hm/profiles/dev.nix;
         teto-desktop = ./hm/profiles/desktop.nix;

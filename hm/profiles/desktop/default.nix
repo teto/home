@@ -65,6 +65,7 @@
     developer = true;
     enableIMPackages = true;
     jujutsu = true;
+    waylandPackages = true;
 
   };
 

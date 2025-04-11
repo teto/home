@@ -139,6 +139,7 @@ in
           # replace with rust-wormhole
           # requires xdmcp https://github.com/freedesktop/libXdmcp
           smplayer # GUI around mpv
+          celluloid # GUI around mpv
           # sxiv # simple image viewer
           # unstable.transmission_gtk  # bittorrent client
           # vimiv # image viewer
@@ -452,6 +453,8 @@ in
         nwg-dock # a nice dock
         swaylock-effects # offers sexier
         sway-contrib.grimshot # contains "grimshot" for instance
+        pkgs.sway-scratchpad
+
         shotman # -c region
         tessen # handle passwords
         # waybar # to avoid setting it twice with module

@@ -18,12 +18,6 @@ Name=keyboard-fr
 # Layout
 Layout=
 
-[Groups/0/Items/2]
-# Name
-Name=keyboard-jp
-# Layout
-Layout=
-
 [GroupOrder]
 0=Default
 

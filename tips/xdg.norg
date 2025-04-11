@@ -51,3 +51,8 @@ update-desktop-database -v ~/.local/share/applications
  Start one from terminal: $(nix-build -A gtk3.out)/bin/gtk-launch nvim.desktop
 
   https://specifications.freedesktop.org/desktop-entry-spec/desktop-entry-spec-latest.html
+
+* GIO
+
+  the gnome equivalent 
+  gio mime text/html

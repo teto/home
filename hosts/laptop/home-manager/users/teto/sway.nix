@@ -25,4 +25,13 @@
   #     lib.concatStringsSep "\n" exportVariables;
   # };
 
+  config = {
+      workspaceOutputAssign = [
+        {
+          workspace = "toto";
+          output = "eDP1";
+        }
+      ];
+  };
+
 }

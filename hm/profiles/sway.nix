@@ -20,60 +20,15 @@ let
 
   myLib = pkgs.tetoLib;
 in
-# TODO load sway folder via haumea
 {
 
-  imports = [
-    ./flameshot.nix
-  ];
-
-  # TODO it is done in sway.nix
-  # replaced with  package-sets.wayland
-  package-sets.waylandPackages = true;
-
-  home.packages = [
-    # waybar
-    # eventually ironbar
-
-    pkgs.sway-scratchpad
-  ];
-
-  ### swayr configuration {{{
-  programs.swayr = {
-    enable = true;
-    systemd.enable = true;
-  };
-
-  #
-  systemd.user.services.swayrd.Service = lib.mkIf config.programs.swayr.enable {
-    Environment = [
-      "PATH=${
-        lib.makeBinPath [
-          pkgs.fuzzel
-          pkgs.wofi
-        ]
-      }"
-    ];
-  };
-  # }}}
 
   # todo prepend sharedExtraConfig
   # xdg.configFile."sway/config" =
 
   wayland.windowManager.sway = {
-    enable = true;
+    # enable = true;
     # creates a sway-session target that is started on wayland start
-    systemd.enable = true;
-
-    # disabling swayfx until  those get merged
-    # https://github.com/nix-community/home-manager/pull/4039
-    # https://github.com/NixOS/nixpkgs/pull/237044
-
-    # be careful as this can override default options
-    # package = pkgs.swayfx;
-    # package = pkgs.sway-unwrapped;
-
-    checkConfig = false;
 
     config = {
       terminal = term;
@@ -179,10 +134,6 @@ in
         # example = { "HDMI-A-2" = { bg = "~/path/to/background.png fill"; }; };
         #         Some outputs may have different names when disconnecting and reconnecting. To identify these, the name can be substituted for a string consisting of the make, model and serial which you can get from swaymsg -t get_outputs. Each value must be  sepa‐ rated by one space. For example:
         #     output "Some Company ABC123 0x00000000" pos 1920 0
-        "HDMI-A-1" = {
-          bg = "${../../wallpapers/toureiffel.jpg} fill";
-
-        };
 
         #  "/home/teto/home/wallpapers/nebula.jpg fill"
         "*" = {
@@ -204,12 +155,6 @@ in
       # terminal = term;
       bars = [ ];
       # menu =
-      workspaceOutputAssign = [
-        {
-          workspace = "toto";
-          output = "eDP1";
-        }
-      ];
 
       # we want to override the (pywal) config from i3
       colors = lib.mkForce { };
@@ -266,8 +211,9 @@ in
         #   ''exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 60 --height 50 --mark gp_nvim --command "kitty nvim -c 'GpChat' " '';
         #
 
-        "--release Print" = "exec ${pkgs.sway-contrib.grimshot}/bin/grimshot copy area";
-        # bindsym F12 exec sway-scratchpad --command "kitty -d /home/user/projects" --mark terminal
+        # TODO try with flameshot again ?
+        # "--release Print" = "exec ${pkgs.sway-contrib.grimshot}/bin/grimshot copy area";
+        "--release Print" = "exec ${pkgs.flameshot}/bin/flameshot gui";
 
         # for_window [con_mark="SCRATCHPAD_terminal"] border pixel 1
 
@@ -314,9 +260,9 @@ in
     # some of these advised by https://github.com/flameshot-org/flameshot/blob/master/docs/Sway%20and%20wlroots%20support.md
     # export MOZ_ENABLE_WAYLAND=1
     # TODO put it in the wrapper started by the .desktop file !
+    # # according to https://www.reddit.com/r/swaywm/comments/11d89w2/some_workarounds_to_use_sway_with_nvidia/
+    # export XWAYLAND_NO_GLAMOR=1
     extraSessionCommands = ''
-      # according to https://www.reddit.com/r/swaywm/comments/11d89w2/some_workarounds_to_use_sway_with_nvidia/
-      export XWAYLAND_NO_GLAMOR=1
 
        # useful for electron based apps: slack / vscode 
       export NIXOS_OZONE_WL=1
@@ -331,13 +277,14 @@ in
       export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
     '';
 
+    # describe what it does
     wrapperFeatures = {
       gtk = true;
     };
   };
 
   xdg.configFile."sway/config".text = lib.mkBefore "
-	include ~/.config/i3/config.shared
+	include ~/.config/sway/config.shared
    ";
 
   # env RUST_BACKTRACE=1 RUST_LOG=swayr=debug swayrd > /tmp/swayrd.log 2>&1

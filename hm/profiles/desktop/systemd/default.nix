@@ -74,4 +74,15 @@
 
   # systemd.user.settings
   #     Extra config options for user session service manager. See systemd-user.conf(5) for available options.
+  user.services.swayrd.Service = lib.mkIf config.programs.swayr.enable {
+    Environment = [
+      "PATH=${
+        lib.makeBinPath [
+          pkgs.fuzzel
+          pkgs.wofi
+        ]
+      }"
+    ];
+  };
+
 }

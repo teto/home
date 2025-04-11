@@ -6,9 +6,9 @@
 {
 
   imports = [
-    ./nova/programs/bash.nix
-    ./nova/ssh-config.nix
-    ./nova/programs/firefox.nix
+    ./programs/bash.nix
+    ./ssh-config.nix
+    ./programs/firefox.nix
     # flakeSelf.inputs.jinko-seeder.homeModules.jinko-seeder
 
     # TODO improve that

@@ -13,7 +13,8 @@ prepend_keymap = [
 	{ on = [ "Z" ], run = "plugin fzf" },
     # run  = "plugin rsync --args='user@server.com'",
     { on   = ["R"], run  = "plugin rsync", desc = "Copy files using rsync" },
-    { on  = ["y"], run = [ 'shell -- for path in "$@"; do cat "$path"; done | wl-copy', "yank" ] }
+    { on  = ["y"], run = [ 'shell -- for path in "$@"; do cat "$path"; done | wl-copy', "yank" ] },
+    { on  = ["d"], run = [ 'yank --cut' ], desc = "move files" }
    ]
 
 
@@ -29,3 +30,7 @@ prepend_keymap = [
 
 ]
 
+[help]
+prepend_keymap = [
+	{ on = [ "/"], run = "filter" }
+]

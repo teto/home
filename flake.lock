@@ -5217,11 +5217,11 @@
         "rust-overlay": "rust-overlay_5"
       },
       "locked": {
-        "lastModified": 1744112829,
-        "narHash": "sha256-oxO7nT4AZJilxA2DliYk57NETHu78xQ8nFdV+UwyKHE=",
+        "lastModified": 1744348981,
+        "narHash": "sha256-R/mQ2xG32eqmOpQlghK/rJkkngdN44SL+CoHfDPVIPY=",
         "owner": "sxyazi",
         "repo": "yazi",
-        "rev": "99ea3b74c4260a724b43af812df0f68ef59395b7",
+        "rev": "bef481057a736f6fdf9c99e0b9043220c9475d68",
         "type": "github"
       },
       "original": {
