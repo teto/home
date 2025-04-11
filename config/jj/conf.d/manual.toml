@@ -51,6 +51,12 @@ paginate = "auto"
 # The ui.merge-editor key specifies the tool used for three-way merge tools by jj resolve. Use merge-tools.TOOL.merge-args
 merge-editor = "nvim"
 # The ui.diff-editor setting affects the default tool used for editing diffs (e.g. jj split, jj squash -i)
+# Shows a single snapshot and one or more diffs to apply to it
+# conflict-marker-style = "diff"
+# # Shows a snapshot for each side and base of the conflict
+# conflict-marker-style = "snapshot"
+# Uses Git's "diff3" conflict markers to support tools that depend on it
+conflict-marker-style = "git"
 
 [merge-tools.kdiff3]
 # program  = "kdiff3"     # Defaults to the name of the tool if not specified
@@ -64,7 +70,7 @@ merge-args = ["-f", "-d", "$output", "-M",
     "-c", "wincmd J", "-c", "set modifiable",
     "-c", "set write"]
 program = "vim"
-merge-tool-edits-conflict-markers = true    # See below for an explanation
+merge-tool-edits-conflict-markers = true
 
 [merge-tools.nvim]
 program = "nvim"
@@ -72,7 +78,18 @@ merge-args = ["-f", "-d", "$output", "-M",
     "$left", "$base", "$right",
     "-c", "wincmd J", "-c", "set modifiable",
     "-c", "set write"]
-merge-tool-edits-conflict-markers = true    # See below for an explanation
+merge-tool-edits-conflict-markers = true
+
+
+[merge-tools.diffconflicts]
+# https://github.com/rafikdraoui/jj-diffconflicts
+program = "nvim"
+merge-args = [
+    "-c", "let g:jj_diffconflicts_marker_length=$marker_length",
+    "-c", "JJDiffConflicts!", "$output", "$base", "$left", "$right",
+]
+merge-tool-edits-conflict-markers = true
+# cmd = "nvim -d $BASE $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'"
 
 # merge-tools.vimdiff.merge-tool-edits-conflict-markers = true
 

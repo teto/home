@@ -19,6 +19,15 @@ git mergetool => jj resolve
 jj config list --include-defaults
 
 
+* how to configure
+
+```
+[git]
+  fetch = "upstream" # ["upstream", "origin"]
+push = "origin"
+  ```
+
+
 * 
 A divergent change is a change that has more than one visible commit.
 
