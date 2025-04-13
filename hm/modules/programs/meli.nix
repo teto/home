@@ -70,6 +70,14 @@ in
         default = [ ];
       };
 
+    package = lib.mkPackageOption pkgs "meli" {
+      nullable = true;
+      extraDescription = ''
+        The Meli mailreader
+      '';
+    };
+
+
       settings = mkOption {
         type = tomlFormat.type;
         default = { };
@@ -118,7 +126,7 @@ in
     mkIf cfg.enable {
 
       # TODO should be an option
-      home.packages = [ pkgs.meli ];
+      home.packages = [cfg.package];
 
       xdg.configFile."meli/config.toml".text =
         let
