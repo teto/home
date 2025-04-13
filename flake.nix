@@ -813,11 +813,7 @@
         # for stuff not in home-manager yet
         experimental = ./hm/profiles/experimental.nix; # { flakeSelf = self; };
         gnome-shell = ./hm/profiles/gnome.nix;
-
         mpv = ./hm/profiles/mpv.nix;
-
-        # neovim-full = hosts/desktop/home-manager/users/teto/programs/neovim.nix;
-        # neomutt = ./hm/profiles/neomutt.nix;
 
         ollama = hosts/desktop/home-manager/users/teto/services/ollama.nix;
 

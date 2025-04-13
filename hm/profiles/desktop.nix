@@ -56,7 +56,7 @@ in
     ./zsh.nix
 
     # ./fcitx.nix
-    ./neovim.nix
+    ./neovim
   ];
 
   # allows to find fonts enabled through home.packages
