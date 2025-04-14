@@ -20,7 +20,6 @@ bindkey -r '^j'
 emulate sh -c "source $ZDOTDIR/aliases.zsh"
 emulate sh -c "source $XDG_CONFIG_HOME/bash/aliases.sh"
 emulate sh -c "source $XDG_CONFIG_HOME/bash/fzf.sh"
-emulate sh -c "source $XDG_CONFIG_HOME/bash/jj.sh"
 
 # to reload sessionVariables
 source ~/.profile
@@ -367,3 +366,4 @@ compdef _git gch
 compdef _pass pass-nova
 compdef _pass pass-pro
 compdef _pass pass-perso
+source $XDG_CONFIG_HOME/bash/jj.sh

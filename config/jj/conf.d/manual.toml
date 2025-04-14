@@ -109,8 +109,19 @@ push-bookmark-prefix = "matt-push-"
 [snapshot]
 max-new-file-size = "10MiB"
 
-
+# configure the template used when no -T is specified.
 [templates]
+# Use builtin log template
+log = "builtin_log_compact"
+# Use builtin op log template
+op_log = "builtin_op_log_compact"
+# Use builtin show template
+show = "builtin_log_detailed"
+
+
+[template-aliases]
+bookmark_list_simple = '''(label("bookmark", name)) ++ "\n"'''
+
 draft_commit_description = '''
 concat(
   description,
@@ -122,19 +133,20 @@ concat(
   diff.git(),
 )
 '''
-# bookmark_list = '''label("TOTO")'''
-# bookmark_list = '''
-# if(remote,
-#   if(tracked,
-#     "  " ++ separate(" ",
-#       label("bookmark", "@" ++ remote),
-#       format_tracked_remote_ref_distances(self),
-#     ) ++ format_ref_targets(self),
-#     label("bookmark", name ++ "@" ++ remote) ++ format_ref_targets(self),
-#   ),
-#   label("bookmark", name) ++ if(present, format_ref_targets(self), " (deleted)"),
-# ) ++ "\n"
-# '''
+
+
+bookmark_list = '''
+if(remote,
+  if(tracked,
+    "  " ++ separate(" ",
+      label("bookmark", "@" ++ remote),
+      format_tracked_remote_ref_distances(self),
+    ) ++ format_ref_targets(self),
+    label("bookmark", name ++ "@" ++ remote) ++ format_ref_targets(self),
+  ),
+  label("bookmark", name) ++ if(present, format_ref_targets(self), " (deleted)"),
+) ++ "\n"
+'''
 
 # templates.commit_summary = 'format_commit_summary_with_refs(self, bookmarks)'
 
