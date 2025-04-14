@@ -52,12 +52,25 @@
         # --xsessions ${config.services.xserver.displayManager.sessionData.desktops}/share/xsessions:${config.services.xserver.displayManager.sessionData.desktops}/share/wayland-sessions
         command =
           let
-            waylandWrapper = pkgs.writeShellScript "wayland-wrapper" ''
-              export WLR_NO_HARDWARE_CURSORS=1;
-              export WLR_RENDERER="vulkan";
-              export XDG_SESSION_TYPE=wayland
-              $@
-            '';
+            swaySystemd = pkgs.makeDesktopItem {
+              name = "sway-systemd";
+              # ${pkgs.}
+              exec = "/run/current-system/systemd/bin/systemctl";
+              # icon = "ivan.png";
+              desktopName = "sway-systemd";
+              genericName = "sway-systemd";
+              categories = [
+                "RolePlaying"
+              ];
+              comment = "test matt";
+            };
+
+            # waylandWrapper = pkgs.writeShellScript "wayland-wrapper" ''
+            #   export WLR_NO_HARDWARE_CURSORS=1;
+            #   export WLR_RENDERER="vulkan";
+            #   export XDG_SESSION_TYPE=wayland
+            #   $@
+            # '';
 
             flags = lib.concatStringsSep " " [
               "--debug /tmp/tuigreet.log"

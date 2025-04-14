@@ -65,7 +65,7 @@ alias lt='eza --tree --level=2 --color=always --group-directories-first --icons=
 
 # oftenly used programs {{{
 # alias c="cat"
-# alias v="nvim"
+alias v="nvim"
 #alias n="nvim"
 # TODO alias to meli
 alias m="neomutt -F \"\$XDG_CONFIG_HOME/mutt/muttrc\""

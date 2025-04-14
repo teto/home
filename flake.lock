@@ -2396,11 +2396,11 @@
         "rust-overlay": "rust-overlay_2"
       },
       "locked": {
-        "lastModified": 1744137605,
-        "narHash": "sha256-Fivn3wS8TG+1P2UsD4wtD2H4YNZSgFKEhflsH/QCY2Y=",
+        "lastModified": 1744592850,
+        "narHash": "sha256-t/vPNGc/xqB/vm8Yjd+nxbqtbyunACbJNpeY3SLmDmM=",
         "owner": "jj-vcs",
         "repo": "jj",
-        "rev": "d92b782dad95fa60a9baa4547c5f00f55f070ceb",
+        "rev": "26ffaf4ac2fefad6b789908cd0c127ce4c96d287",
         "type": "github"
       },
       "original": {
@@ -2480,7 +2480,7 @@
         "type": "indirect"
       }
     },
-    "meli": {
+    "meli-src": {
       "flake": false,
       "locked": {
         "lastModified": 1744466463,
@@ -4259,7 +4259,7 @@
         "jinko-seeder": "jinko-seeder",
         "jujutsu": "jujutsu",
         "lux": "lux",
-        "meli": "meli",
+        "meli-src": "meli-src",
         "mujmap": "mujmap",
         "neomutt-src": "neomutt-src",
         "neovide": "neovide",
@@ -4390,11 +4390,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1742783666,
-        "narHash": "sha256-IwdSl51NL6V0f+mYXZR0UTKaGleOsk9zV3l6kt5SUWw=",
+        "lastModified": 1744252416,
+        "narHash": "sha256-Vrs2GxaL0tLi9GCIUrutHgPSr+g7GYCetu7argsNrB4=",
         "owner": "oxalica",
         "repo": "rust-overlay",
-        "rev": "60766d63c227d576510ecfb5edd3a687d56f6bc7",
+        "rev": "2af83121f9d2c5281796e60e2b048906a84b9fac",
         "type": "github"
       },
       "original": {

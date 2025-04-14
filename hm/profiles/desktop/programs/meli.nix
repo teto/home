@@ -1,6 +1,8 @@
-{ pkgs, secrets, ... }:
+{ pkgs, secrets, flakeSelf, ... }:
 {
   enable = true;
+
+  package = pkgs.meli-git;
 
   includes = [
     "manual.toml"

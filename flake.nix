@@ -98,7 +98,7 @@
       # inputs.nixpkgs.follows = "nixpkgs"; # breaks build
     };
 
-    meli = {
+    meli-src = {
       url = "git+https://git.meli-email.org/meli/meli.git";
       # url = "github:meli/meli"; # official mirror
       # ref = "refs/pull/449/head";
@@ -247,21 +247,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # starship-jj-patch = {
-    #   url = "https://patch-diff.githubusercontent.com/raw/starship/starship/pull/6388.diff";
-    #   flake = false;
-    # };
-    #
-    # starship-jj = {
-    #   url = "https://patch-diff.githubusercontent.com/raw/starship/starship/pull/6388.diff";
-    #   flake = false;
-    # };
-
     # GIT_DIR=.jj/repo/store/git gh issue list
     # provides a package 'starship-jj' used as a custom
     starship-jj = {
       url = "gitlab:lanastara_foss/starship-jj";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # nix-direnv = {
@@ -921,25 +910,20 @@
 
             meli-git = prev.meli.overrideAttrs (drv: rec {
               name = "meli-${version}";
-              version = "g${self.inputs.meli.shortRev}";
-              # version = "g-from-git";
-              src = self.inputs.meli;
+              version = "g${self.inputs.meli-src.shortRev}";
+              src = self.inputs.meli-src;
 
-              # dontUnpack = true;
-              # cargoHash = "sha256-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX=";
-              # cargoHash = "sha256-vZkMfaALnRBK8ZwMB2uvvJgQq+BdUX7enNnr9t5H+MY=";
               cargoPatches = [ ];
-              cargoDeps = drv.cargoDeps.overrideAttrs (
-                prev.lib.const {
+              useFetchCargoVendor = true;
 
-                  name = "${name}-vendor.tar.gz";
-                  inherit src;
-                  outputHash = "";
-                  cargoPatches = [ ];
+              cargoDeps = final.rustPlatform.fetchCargoVendor {
+                inherit src;
+                hash = "sha256-OyOLAw3HzXY85Jwolh4Wqjmm6au6wRwGq5WkicOt5eg=";
+              };
 
-                }
-              );
-              # cargoHash = "sha256-1LHCqv+OPS6tLMpmXny5ycW+8I/JRPQ7n8kcGfw6RMs=";
+              checkFlags = drv.checkFlags ++ [
+                "--skip=test_imap_watch"
+              ];
             });
 
             local-ai-teto = (

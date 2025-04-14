@@ -44,7 +44,6 @@
 
     isync # not used ?
     mujmap-unstable
-    meli # broken jmap mailreader
     notmuch # needed for waybar-custom-notmuch.sh
 
     panvimdoc # to generate vim doc from README, for instance in gp.nvim
