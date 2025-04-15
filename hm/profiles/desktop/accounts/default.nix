@@ -273,7 +273,8 @@ let
 in
 {
   email.maildirBasePath = mailDirBasePath;
-} // lib.optionalAttrs withSecrets {
+}
+// lib.optionalAttrs withSecrets {
   email.accounts = {
     inherit
       # gmail

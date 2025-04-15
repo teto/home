@@ -12,12 +12,12 @@ let
   mujmapAccounts = lib.filter (a: a.mujmap.enable) (lib.attrValues config.accounts.email.accounts);
 
   mujmapOptions =
-        lib.optional (cfg.verbose) "--verbose"
+    lib.optional (cfg.verbose) "--verbose"
     ++ lib.optional (cfg.configFile != null) "-C ${cfg.configFile}";
 in
 # ++ [ (concatMapStringsSep " -a" (a: a.name) mujmapAccounts) ];
 {
-  meta.maintainers = [];
+  meta.maintainers = [ ];
 
   options.services.mujmap = {
     enable = lib.mkEnableOption "mujmap";
@@ -59,55 +59,58 @@ in
     };
   };
 
-  config = let 
+  config =
+    let
 
-    mkMujmapServiceName = name: "mujmap-${name}";
-    in lib.mkIf cfg.enable {
-    assertions = [
-      (lib.hm.assertions.assertPlatform "services.mujmap" pkgs lib.platforms.linux)
-    ];
+      mkMujmapServiceName = name: "mujmap-${name}";
+    in
+    lib.mkIf cfg.enable {
+      assertions = [
+        (lib.hm.assertions.assertPlatform "services.mujmap" pkgs lib.platforms.linux)
+      ];
 
-    systemd.user.services = lib.mapAttrs' (
-      name: account:
-      lib.nameValuePair (mkMujmapServiceName name) {
-        Unit = {
-          Description = "mujmap mailbox synchronization";
-        };
-
-        Service =
-          # ${pkgs.dbus}/bin/dbus-send --system \
-          #   / net.nuetzlich.SystemNotifications.Notify \
-          #   "string:Problem detected with disk: $SMARTD_DEVICESTRING" \
-          #   "string:Warning message from smartd is: $SMARTD_MESSAGE"
-          # ''}
-          {
-            Type = "oneshot";
-            # TODO should be 
-            ExecStart = "${cfg.package}/bin/mujmap -C ${config.accounts.email.maildirBasePath}/fastmail sync ${lib.concatStringsSep " " mujmapOptions}";
+      systemd.user.services = lib.mapAttrs' (
+        name: account:
+        lib.nameValuePair (mkMujmapServiceName name) {
+          Unit = {
+            Description = "mujmap mailbox synchronization";
           };
 
-      }
-    ) config.accounts.email.accounts;
+          Service =
+            # ${pkgs.dbus}/bin/dbus-send --system \
+            #   / net.nuetzlich.SystemNotifications.Notify \
+            #   "string:Problem detected with disk: $SMARTD_DEVICESTRING" \
+            #   "string:Warning message from smartd is: $SMARTD_MESSAGE"
+            # ''}
+            {
+              Type = "oneshot";
+              # TODO should be
+              ExecStart = "${cfg.package}/bin/mujmap -C ${config.accounts.email.maildirBasePath}/fastmail sync ${lib.concatStringsSep " " mujmapOptions}";
+            };
 
-    # check all accounts
-    systemd.user.timers =      lib.mapAttrs' (
-      name: account: let
-        timerName = mkMujmapServiceName name;
-      in
-        lib.nameValuePair timerName
-    {
-      Unit = {
-        Description = "mujmap mailbox synchronization";
-      };
+        }
+      ) config.accounts.email.accounts;
 
-      Timer = {
-        OnCalendar = cfg.frequency;
-        Unit = "${timerName}.service";
-      };
+      # check all accounts
+      systemd.user.timers = lib.mapAttrs' (
+        name: account:
+        let
+          timerName = mkMujmapServiceName name;
+        in
+        lib.nameValuePair timerName {
+          Unit = {
+            Description = "mujmap mailbox synchronization";
+          };
 
-      Install = {
-        WantedBy = [ "timers.target" ];
-      };
-    }) config.accounts.email.accounts;
-  };
+          Timer = {
+            OnCalendar = cfg.frequency;
+            Unit = "${timerName}.service";
+          };
+
+          Install = {
+            WantedBy = [ "timers.target" ];
+          };
+        }
+      ) config.accounts.email.accounts;
+    };
 }

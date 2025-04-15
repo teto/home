@@ -58,9 +58,7 @@ in
 
         vim.opt.hidden = true -- you can open a new buffer even if current is unsaved (error E37) =
       ''
-      + (lib.strings.concatStrings (
-        lib.mapAttrsToList genBlockLua (import ./options.nix).luaRcBlocks
-      ))
+      + (lib.strings.concatStrings (lib.mapAttrsToList genBlockLua (import ./options.nix).luaRcBlocks))
       + ''
         vim.opt.number = true
         vim.opt.relativenumber = true

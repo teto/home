@@ -22,7 +22,6 @@ let
 in
 {
 
-
   # todo prepend sharedExtraConfig
   # xdg.configFile."sway/config" =
 

@@ -36,13 +36,13 @@ local on_click_gp = function(_nb_of_clicks, _button, _modifiers)
 
     local entries = {}
     for _, ag in ipairs(agents) do
-	 -- print("Adding entry", tostring(ag))
+        -- print("Adding entry", tostring(ag))
         entries[#entries + 1] = {
-		 -- rtxt
+            -- rtxt
             name = tostring(ag),
-			cmd = ':GpAgent ' .. tostring(ag),
+            cmd = ':GpAgent ' .. tostring(ag),
         }
-	 -- print("Nb of entries", #entries)
+        -- print("Nb of entries", #entries)
     end
     -- local entries = {
     --  {
@@ -53,8 +53,8 @@ local on_click_gp = function(_nb_of_clicks, _button, _modifiers)
     --  { name = "separator" },
     -- }
 
-	-- vim.print(entries)
-	-- entries must be non empty else nvim will complain about 'height' being not positive
+    -- vim.print(entries)
+    -- entries must be non empty else nvim will complain about 'height' being not positive
     require('menu').open(entries, menu_opts)
 end
 

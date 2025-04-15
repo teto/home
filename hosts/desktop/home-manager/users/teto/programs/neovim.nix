@@ -165,11 +165,10 @@ in
       # ++ telescopePlugins
       ++ neotestPlugins;
 
-      extraPackages = [ 
-        # pkgs.taplo # a toml LSP server 
-      ];
+    extraPackages = [
+      # pkgs.taplo # a toml LSP server
+    ];
   };
-
 
   # home.packages = extraPackages;
 }

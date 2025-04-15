@@ -1,5 +1,3 @@
-
-
 -- see https://github.com/redhat-developer/yaml-language-server for doc
 return {
     cmd = { 'yaml-language-server', '--stdio' },

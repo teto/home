@@ -1,6 +1,11 @@
-{ pkgs, secrets
-, withSecrets
-, flakeSelf, ... }:
+{
+  pkgs,
+  secrets,
+  withSecrets,
+
+  flakeSelf,
+  ...
+}:
 {
   enable = withSecrets;
 
@@ -17,6 +22,7 @@
     };
 
     accounts.notmuch = {
+      # todo use ${home.
       root_mailbox = "/home/teto/maildir"; # where .notmuch/ directory is located
       send_mail = "msmtp --read-recipients --read-envelope-from";
       # where to find notmuch

@@ -10,10 +10,10 @@
 
   # kesak ?
   dirHashes = {
-                 docs  = "$HOME/Documents";
-                 vids  = "$HOME/Videos";
-                 dl    = "$HOME/Downloads";
-               };
+    docs = "$HOME/Documents";
+    vids = "$HOME/Videos";
+    dl = "$HOME/Downloads";
+  };
 
   sessionVariables = {
     # HISTTIMEFORMAT = "%d.%m.%y %T ";

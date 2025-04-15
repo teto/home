@@ -17,9 +17,9 @@
       email = config.programs.git.userEmail;
       name = "teto";
     };
-    
+
     # # this generates what looks like an ok config but jj doesn't seem to care for it
-    # "--scope" = [ 
+    # "--scope" = [
     #   {
     #     "--when.repositories" = ["~/nova"];
     #   }

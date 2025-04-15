@@ -27,6 +27,8 @@ treefmt-nix.lib.mkWrapper pkgs {
     "*.org"
     "*.wiki"
     "nixpkgs/secrets.nix" # all git-crypt files ?
+    "config/bash/jj.sh" # it has zsh oddities not supported by shfmt
+    "config/nvim/lua/teto/secrets.lua"
   ];
 
 }

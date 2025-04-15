@@ -4,7 +4,6 @@
 }:
 {
 
-
   sops.secrets."restic/teto-bucket" = {
     mode = "0440";
     # TODO only readable by gitlab

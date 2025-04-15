@@ -232,7 +232,7 @@ in
         mujmap-unstable # to sync notmuch tags across jmap
         # signal-desktop # installe a la main
         # memento # broken capable to display 2 subtitles at same time
-        # leafnode dovecot22 dovecot_pigeonhole fetchmail procmail 
+        # leafnode dovecot22 dovecot_pigeonhole fetchmail procmail
         w3m
         # mairix mutt msmtp lbdb contacts spamassassin
         # element-desktop # TODO this should go into nix profile install
@@ -248,7 +248,7 @@ in
         vlc
         # pinta # photo editing
 
-        # leafnode dovecot22 dovecot_pigeonhole fetchmail procmail 
+        # leafnode dovecot22 dovecot_pigeonhole fetchmail procmail
         # mairix mutt msmtp lbdb contacts spamassassin
         # element-desktop # TODO this should go into nix profile install
         popcorntime
@@ -291,7 +291,6 @@ in
         sops # password 'manager'
         glab # gitlab cli
         hexyl # hexcode viewer
-
 
         libossp_uuid # for the 'libuuid' executable
 
@@ -371,7 +370,7 @@ in
         shfmt # shell format
         tio # serial console reader
         tig
-        tmux  # when connecting via ssh
+        tmux # when connecting via ssh
         universal-ctags # there are many different ctags, be careful !
         whois
         zeal # doc for developers

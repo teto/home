@@ -1,18 +1,22 @@
-{ flakeSelf, config, lib, pkgs, ... }:
+{
+  flakeSelf,
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
   _imports = [
     flakeSelf.homeProfiles.sway
   ];
 
-  windowManager.sway = {  
+  windowManager.sway = {
     enable = true;
     xwayland = false;
-
 
     systemd.enable = true;
     # SWAYSOCK/WAYLAND etc
     # systemd.variables =  [ "PATH" ];
-
 
     # disabling swayfx until  those get merged
     # https://github.com/nix-community/home-manager/pull/4039

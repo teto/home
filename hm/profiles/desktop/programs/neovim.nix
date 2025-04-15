@@ -61,8 +61,8 @@ let
       #   .overrideAttrs({
       #
       #   src = flakeSelf.inputs.avante-nvim-src;
-      # }); 
-        # require("avante").setup()
+      # });
+      # require("avante").setup()
       # config = ''
       # require("avante_lib").load()
       # '';

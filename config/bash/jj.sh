@@ -84,10 +84,14 @@ if [[ -n "${BASH_VERSION:-}" ]]; then
     done
   }
 elif [[ -v ZSH_VERSION ]]; then
+  # used for multiselect
   __fzf_jj_join() {
     local item
     while read -r item; do
+     # The `zsh` array option `(q)` is used here to quote words safely. It ensures that any metacharacters in the `item` (such as spaces or special characters) are properly escaped, preventing them from being misinterpreted by the shell. This way, each individual item is treated as a safe argument or word.
+      # shellcheck disable=2296
       echo -n "${(q)item} "
+      # echo -n "${item} "
     done
   }
 

@@ -1,6 +1,6 @@
 {
   secretsFolder,
-  withSecrets
+  withSecrets,
 }:
 {
   # SECRETS appear in ~/.config/sops-nix/secrets/*

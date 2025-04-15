@@ -5,13 +5,13 @@ M.setup = function()
         -- '│' passe mais '▎' non :s
         signs = {},
         signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
-		signs_staged_enable = false,
+        signs_staged_enable = false,
         numhl = true, -- Toggle with `:Gitsigns toggle_numhl`
         linehl = true, -- Toggle with `:Gitsigns toggle_linehl`
         word_diff = true, -- Toggle with `:Gitsigns toggle_word_diff`
-		watch_gitdir = {
-		  follow_files = true
-		},
+        watch_gitdir = {
+            follow_files = true,
+        },
 
         attach_to_untracked = false,
 

@@ -20,7 +20,6 @@
       flakeSelf.homeModules.teto-nogui
       flakeSelf.homeModules.ollama
       flakeSelf.homeModules.experimental
-      flakeSelf.homeModules.vscode
       flakeSelf.homeProfiles.wezterm
       # ../../../hm/profiles/experimental.nix
       # flakeSelf.homeModules.gnome-shell

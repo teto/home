@@ -94,4 +94,3 @@ export MCFLY_RESULTS=200
 
 # show branch
 # alias gv=glab ci view -b "\$(jj log -r 'ancestors(@) & bookmarks()')"
-

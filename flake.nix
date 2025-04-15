@@ -82,7 +82,7 @@
       # ?rev=669bfaf09b48a94c4756aff94ff00af9ee387307 is the commit with conf.d support
       url = "github:jj-vcs/jj";
       # url = "github:bryceberger/jj?ref=revset-evaluator";
-      
+
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -608,8 +608,6 @@
         #   name = "dotfiles-shell";
 
         inherit (unstablePkgs)
-          # nhs92
-          # nhs94
           nhs96
           nhs98
           nhs910
@@ -787,6 +785,11 @@
 
         teto-desktop = ./hm/profiles/desktop.nix;
         sway-notification-center = ./hm/profiles/swaync.nix;
+        # provided by nova-nix config
+        # vscode = ./hm/profiles/vscode.nix;
+
+        # waybar = ./hm/profiles/waybar.nix;
+
       };
 
       homeModules = (importDir ./hm/modules) // {
@@ -823,7 +826,6 @@
             imports = [
               # And add the home-manager module
               self.homeProfiles.common
-              ./hm/modules/xdg.nix
               self.homeProfiles.neovim
               self.homeModules.neovim
               self.homeModules.bash
@@ -832,10 +834,6 @@
           }
         );
 
-        # provided by nova-nix config
-        vscode = ./hm/profiles/vscode.nix;
-
-        waybar = ./hm/profiles/waybar.nix;
         xdg = ./hm/profiles/xdg.nix;
         yazi = ./hm/profiles/yazi.nix;
       };
@@ -900,9 +898,11 @@
 
             inherit llama-cpp-matt;
 
-            neomutt = prev.lib.warn "neomutt override" (prev.neomutt.overrideAttrs({
-              src = self.inputs.neomutt-src;
-            }));
+            neomutt = prev.lib.warn "neomutt override" (
+              prev.neomutt.overrideAttrs ({
+                src = self.inputs.neomutt-src;
+              })
+            );
 
             meli-git = prev.meli.overrideAttrs (drv: rec {
               name = "meli-${version}";

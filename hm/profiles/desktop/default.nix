@@ -17,6 +17,7 @@
       flakeSelf.homeProfiles.sway-notification-center
       flakeSelf.homeProfiles.developer
       flakeSelf.homeProfiles.mpv
+      flakeSelf.homeProfiles.vscode
 
       flakeSelf.homeModules.fzf
       flakeSelf.homeModules.teto-zsh
@@ -24,7 +25,6 @@
       flakeSelf.homeModules.services-mujmap
       flakeSelf.homeModules.pimsync
       flakeSelf.homeModules.package-sets
-      flakeSelf.homeModules.vscode
       flakeSelf.homeModules.waybar
     ]
     ++ lib.optionals withSecrets [

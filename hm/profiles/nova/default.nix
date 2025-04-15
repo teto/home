@@ -1,7 +1,8 @@
-{ config
-, pkgs
-, flakeSelf
-, ...
+{
+  config,
+  pkgs,
+  flakeSelf,
+  ...
 }:
 {
 

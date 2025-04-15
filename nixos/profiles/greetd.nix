@@ -54,20 +54,20 @@
           let
             swaySystemd = pkgs.makeDesktopItem {
               name = "sway-systemd";
-#               Exec=/nix/store/vkkgngnfy2461zrwfsdh1gklxdkir2dc-gnome-session-47.0.1/bin/gnome-session
-# TryExec=/nix/store/vkkgngnfy2461zrwfsdh1gklxdkir2dc-gnome-session-47.0.1/bin/gnome-session
-# Type=Application
-# DesktopNames=GNOME
+              #               Exec=/nix/store/vkkgngnfy2461zrwfsdh1gklxdkir2dc-gnome-session-47.0.1/bin/gnome-session
+              # TryExec=/nix/store/vkkgngnfy2461zrwfsdh1gklxdkir2dc-gnome-session-47.0.1/bin/gnome-session
+              # Type=Application
+              # DesktopNames=GNOME
               # ${pkgs.}
               # systemd.user.targets.sway-session
               exec = "/run/current-system/systemd/bin/systemctl start graphical-session";
-          # Whether to enable {file}`sway-session.target` on
-          # sway startup. This links to
-          # {file}`graphical-session.target`.
-          # Some important environment variables will be imported to systemd
-          # and dbus user environment before reaching the target, including
+              # Whether to enable {file}`sway-session.target` on
+              # sway startup. This links to
+              # {file}`graphical-session.target`.
+              # Some important environment variables will be imported to systemd
+              # and dbus user environment before reaching the target, including
 
-              # tryExec = 
+              # tryExec =
               # icon = "ivan.png";
               desktopName = "sway-systemd";
               genericName = "sway-systemd";
@@ -77,7 +77,7 @@
               comment = "test matt";
             };
 
-            swaySystemdSession = pkgs.runCommand "createsway" {} ''
+            swaySystemdSession = pkgs.runCommand "createsway" { } ''
               mkdir -p $out/share/wayland-sessions
               echo "${swaySystemd}"
               install -D -m755 ${swaySystemd}/share/applications/sway-systemd.desktop $out/share/wayland-sessions/

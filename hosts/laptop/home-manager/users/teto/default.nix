@@ -14,7 +14,7 @@
       # ../../../../desktop/home-manager/users/teto/calendars.nix
       ../../../../desktop/home-manager/users/teto/contacts.nix
 
-      # TODO 
+      # TODO
       ../../../../desktop/home-manager/users/teto/sops.nix
 
       # flakeSelf.inputs.git-repo-manager.packages.${pkgs.system}.git-repo-manager

@@ -1,106 +1,114 @@
-local core = require "fzf-lua.core"
-local path = require "fzf-lua.path"
-local libuv = require "fzf-lua.libuv"
-local utils = require "fzf-lua.utils"
-local config = require "fzf-lua.config"
-local shell = require "fzf-lua.shell"
-local make_entry = require "fzf-lua.make_entry"
-local defaults = require "fzf-lua.defaults"
+local core = require('fzf-lua.core')
+local path = require('fzf-lua.path')
+local libuv = require('fzf-lua.libuv')
+local utils = require('fzf-lua.utils')
+local config = require('fzf-lua.config')
+local shell = require('fzf-lua.shell')
+local make_entry = require('fzf-lua.make_entry')
+local defaults = require('fzf-lua.defaults')
 
 local M = {}
 
 -- should fzf-lua expose lazyloaded_modules ?
 function M.jj_cwd(cmd, opts)
-  -- local git_args = {
-  --   { "cwd",          "-C" },
-  --   { "git_dir",      "--git-dir" },
-  --   { "git_worktree", "--work-tree" },
-  --   { "git_config",   "-c",         noexpand = true },
-  -- }
-  -- -- NOTE: we copy the opts due to a bug with Windows network drives starting with "\\"
-  -- -- as `vim.fn.expand` would reduce the double slash to a single slash modifying the
-  -- -- original `opts.cwd` ref (#1429)
-  -- local o = {}
-  -- for _, a in ipairs(git_args) do o[a[1]] = opts[a[1]] end
-  -- if type(cmd) == "string" then
-  --   local args = ""
-  --   for _, a in ipairs(git_args) do
-  --     if o[a[1]] then
-  --       o[a[1]] = a.noexpand and o[a[1]] or libuv.expand(o[a[1]])
-  --       args = args .. ("%s %s "):format(a[2], libuv.shellescape(o[a[1]]))
-  --     end
-  --   end
-  --   cmd = cmd:gsub("^git ", "git " .. args)
-  -- else
-  --   local idx = 2
-  --   cmd = utils.tbl_deep_clone(cmd)
-  --   for _, a in ipairs(git_args) do
-  --     if o[a[1]] then
-  --       o[a[1]] = a.noexpand and o[a[1]] or libuv.expand(o[a[1]])
-  --       table.insert(cmd, idx, a[2])
-  --       table.insert(cmd, idx + 1, o[a[1]])
-  --       idx = idx + 2
-  --     end
-  --   end
-  -- end
-  return cmd
+    -- local git_args = {
+    --   { "cwd",          "-C" },
+    --   { "git_dir",      "--git-dir" },
+    --   { "git_worktree", "--work-tree" },
+    --   { "git_config",   "-c",         noexpand = true },
+    -- }
+    -- -- NOTE: we copy the opts due to a bug with Windows network drives starting with "\\"
+    -- -- as `vim.fn.expand` would reduce the double slash to a single slash modifying the
+    -- -- original `opts.cwd` ref (#1429)
+    -- local o = {}
+    -- for _, a in ipairs(git_args) do o[a[1]] = opts[a[1]] end
+    -- if type(cmd) == "string" then
+    --   local args = ""
+    --   for _, a in ipairs(git_args) do
+    --     if o[a[1]] then
+    --       o[a[1]] = a.noexpand and o[a[1]] or libuv.expand(o[a[1]])
+    --       args = args .. ("%s %s "):format(a[2], libuv.shellescape(o[a[1]]))
+    --     end
+    --   end
+    --   cmd = cmd:gsub("^git ", "git " .. args)
+    -- else
+    --   local idx = 2
+    --   cmd = utils.tbl_deep_clone(cmd)
+    --   for _, a in ipairs(git_args) do
+    --     if o[a[1]] then
+    --       o[a[1]] = a.noexpand and o[a[1]] or libuv.expand(o[a[1]])
+    --       table.insert(cmd, idx, a[2])
+    --       table.insert(cmd, idx + 1, o[a[1]])
+    --       idx = idx + 2
+    --     end
+    --   end
+    -- end
+    return cmd
 end
 
 function M.is_jj_repo(opts, noerr)
-  return not not M.jj_root(opts, noerr)
+    return not not M.jj_root(opts, noerr)
 end
 
 function M.jj_root(opts, noerr)
-  local cmd = M.jj_cwd({ "jj", "root", "--ignore-working-copy" }, opts)
-  local output, err = utils.io_systemlist(cmd)
-  if err ~= 0 then
-    if not noerr then utils.info(unpack(output)) end
-    return nil
-  end
-  print("jj_root:", output[1])
-  return output[1]
+    local cmd = M.jj_cwd({ 'jj', 'root', '--ignore-working-copy' }, opts)
+    local output, err = utils.io_systemlist(cmd)
+    if err ~= 0 then
+        if not noerr then
+            utils.info(unpack(output))
+        end
+        return nil
+    end
+    print('jj_root:', output[1])
+    return output[1]
 end
 
 local function set_jj_cwd_args(opts)
-  -- verify cwd is a jj repo, override user supplied
-  -- cwd if cwd isn't a jj repo, error was already
-  -- printed to `:messages` by 'path.jj_root'
-  local jj_root = M.jj_root(opts)
-  if not opts.cwd or not jj_root then
-    opts.cwd = jj_root
-  end
-  -- leave it for now
-  -- if opts.jj_dir or opts.jj_worktree then
-  --   opts.cmd = path.jj_cwd(opts.cmd, opts)
-  -- end
-  return opts
+    -- verify cwd is a jj repo, override user supplied
+    -- cwd if cwd isn't a jj repo, error was already
+    -- printed to `:messages` by 'path.jj_root'
+    local jj_root = M.jj_root(opts)
+    if not opts.cwd or not jj_root then
+        opts.cwd = jj_root
+    end
+    -- leave it for now
+    -- if opts.jj_dir or opts.jj_worktree then
+    --   opts.cmd = path.jj_cwd(opts.cmd, opts)
+    -- end
+    return opts
 end
 
 local jj_defaults = vim.tbl_extend('force', defaults.defaults.git, {
-	 -- previewer         = M._default_previewer_fn,
-	 cmd               = "jj file --color=never list",
-	 -- multiprocess      = true,
-	 -- file_icons        = 1,
-	 -- color_icons       = true,
-	 -- git_icons         = true,
-	 -- fzf_opts          = { ["--multi"] = true, ["--scheme"] = "path" },
-	 -- _fzf_nth_devicons = true,
-	 _actions          = function() return config.globals.actions.files end,
-	 -- winopts           = { preview = { winopts = { cursorline = false } } },
-   })
+    -- previewer         = M._default_previewer_fn,
+    cmd = 'jj file --color=never list',
+    -- multiprocess      = true,
+    -- file_icons        = 1,
+    -- color_icons       = true,
+    -- git_icons         = true,
+    -- fzf_opts          = { ["--multi"] = true, ["--scheme"] = "path" },
+    -- _fzf_nth_devicons = true,
+    _actions = function()
+        return config.globals.actions.files
+    end,
+    -- winopts           = { preview = { winopts = { cursorline = false } } },
+})
 
 M.files = function(opts)
-  -- fzf-lua uses "git.files" to reference the defaults
-  opts = config.normalize_opts(opts, jj_defaults)
-  if not opts then return end
-  opts = set_jj_cwd_args(opts)
-  if not opts.cwd then return end
-  local contents = core.mt_cmd_wrapper(opts)
-  opts = core.set_header(opts, opts.headers or { "cwd" })
-  local result =  core.fzf_exec(contents, opts)
-  print("tOTO")
-  print(result)
-  return result
+    -- fzf-lua uses "git.files" to reference the defaults
+    opts = config.normalize_opts(opts, jj_defaults)
+    if not opts then
+        return
+    end
+    opts = set_jj_cwd_args(opts)
+    if not opts.cwd then
+        return
+    end
+    local contents = core.mt_cmd_wrapper(opts)
+    opts = core.set_header(opts, opts.headers or { 'cwd' })
+    local result = core.fzf_exec(contents, opts)
+    print('tOTO')
+    print(result)
+    return result
 end
 
 -- M.status = function(opts)
@@ -352,4 +360,3 @@ end
 -- end
 
 return M
-

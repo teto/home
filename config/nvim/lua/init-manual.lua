@@ -8,10 +8,10 @@ vim.loader.enable(false)
 require('avante').setup({
     provider = 'openai',
 
-	openai = {
-	 api_key_name = "cmd:cat /home/teto/.config/sops-nix/secrets/OPENAI_API_KEY_NOVA",
-   }
-	-- openai_api_key = os.getenv("OPENAI_API_KEY")
+    openai = {
+        api_key_name = 'cmd:cat /home/teto/.config/sops-nix/secrets/OPENAI_API_KEY_NOVA',
+    },
+    -- openai_api_key = os.getenv("OPENAI_API_KEY")
 })
 -- print(package.cpath)
 
@@ -30,8 +30,8 @@ local nix_deps = require('generated-by-nix')
 diagnostic_default_config = {
     -- disabled because too big in haskell
     virtual_lines = {
-		only_current_line = true
-	},
+        only_current_line = true,
+    },
     virtual_text = false,
     {
         severity = { min = vim.diagnostic.severity.WARN },
@@ -751,9 +751,9 @@ vim.lsp.enable('pyright')
 -- Autoload from everything lsp/ in rtp
 -- local configs = {}
 --
--- for _, v in ipairs(vim.api.nvim_get_runtime_file('lsp/*', true)) do  
---   local name = vim.fn.fnamemodify(v, ':t:r')  
---   configs[name] = true  
+-- for _, v in ipairs(vim.api.nvim_get_runtime_file('lsp/*', true)) do
+--   local name = vim.fn.fnamemodify(v, ':t:r')
+--   configs[name] = true
 -- end
 --
 -- vim.lsp.enable(vim.tbl_keys(configs))
@@ -775,11 +775,9 @@ vim.lsp.enable('pyright')
 
 -- require('plugins.avante')
 
-
 -- HACK around sway-scratchpad limitation where one can't esapce quotes so alleviate the need for that via a proxy command
 vim.api.nvim_create_user_command('LlmChat', function()
-	vim.cmd[[GpChatToggle tab]]
-end, { desc = "TOTO" })
-
+    vim.cmd([[GpChatToggle tab]])
+end, { desc = 'TOTO' })
 
 -- print(package.cpath)
