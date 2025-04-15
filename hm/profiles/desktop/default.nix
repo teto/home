@@ -18,6 +18,7 @@
       flakeSelf.homeProfiles.developer
       flakeSelf.homeProfiles.mpv
       flakeSelf.homeProfiles.vscode
+      flakeSelf.homeProfiles.waybar
 
       flakeSelf.homeModules.fzf
       flakeSelf.homeModules.teto-zsh
@@ -25,7 +26,6 @@
       flakeSelf.homeModules.services-mujmap
       flakeSelf.homeModules.pimsync
       flakeSelf.homeModules.package-sets
-      flakeSelf.homeModules.waybar
     ]
     ++ lib.optionals withSecrets [
       flakeSelf.homeProfiles.nova
@@ -53,7 +53,7 @@
 
     pkgs.trurl # used to parse url in the firefox-router executable
     viu # a console image viewer
-    mdcat
+    mdcat # markdown viewer
 
   ];
 

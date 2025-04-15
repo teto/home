@@ -122,7 +122,6 @@ in
 
   # inspired by https://gist.github.com/539h/8144b5cabf97b5b206da
   # todo find a good japanese font
-  # restored for waybar to see fonts ?
   fonts = {
     fontDir.enable = true; # ?
     packages = with pkgs; [

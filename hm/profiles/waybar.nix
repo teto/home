@@ -6,32 +6,6 @@
   dotfilesPath,
   ...
 }:
-let
-  myLib = pkgs.tetoLib;
-
-  # TODO make sure it has jq in PATH
-  # annoying to have to rebuild in order to check
-  # githubUpdater = pkgs.writeShellApplication {
-  #   name = "github-updater";
-  #   runtimeInputs = [
-  #     pkgs.coreutils
-  #     pkgs.curl
-  #     pkgs.jq
-  #   ];
-  #   text = (builtins.readFile ../modules/waybar/github.sh);
-  #   checkPhase = ":";
-  # };
-
-in
-# notmuchChecker = pkgs.writeShellApplication {
-#   name = "waybar-notmuch-module";
-#   runtimeInputs = [
-#     pkgs.notmuch
-#     pkgs.jq
-#   ];
-#   text = builtins.readFile ../../bin/waybar-notmuch-module;
-#   checkPhase = ":";
-# };
 {
 
   programs.waybar = {
@@ -44,28 +18,6 @@ in
     #     fixed-center = false;
     #     # a way to have a manual definition !
     #     include = [ "~/.config/waybar/common.jsonc" ];
-    #
-    #     wireplumber = {
-    #       format = "{volume}% {icon}";
-    #       # 🔈
-    #       format-muted = "<span background='red'>🔇</span>";
-    #       on-click = myLib.muteAudio;
-    #       format-icons = [
-    #         "🔈"
-    #         "🔉"
-    #         "🔊"
-    #       ];
-    #     };
-    #     "custom/weather" = {
-    #       # https://fontawesome.com/icons/cloud?f=classic&s=solid
-    #       format = " {}  ";
-    #       tooltip = true;
-    #       interval = 3600;
-    #       # --hide-conditions
-    #       # pass location
-    #       exec = "${pkgs.wttrbar}/bin/wttrbar";
-    #       return-type = "json";
-    #     };
     #   };
     # };
   };

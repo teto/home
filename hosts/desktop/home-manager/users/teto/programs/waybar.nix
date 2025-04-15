@@ -1,15 +1,11 @@
-{
-  flakeSelf,
-  config,
-  lib,
-  pkgs,
-  ...
+{ flakeSelf
+, ...
 }:
 {
 
-  imports = [
-    flakeSelf.homeModules.waybar
-  ];
+  # imports = [
+  #   flakeSelf.homeProfiles.waybar
+  # ];
 
   programs.waybar = {
     enable = true;

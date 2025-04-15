@@ -456,7 +456,6 @@ in
 
         shotman # -c region
         tessen # handle passwords
-        # waybar # to avoid setting it twice with module
         # wayprompt
         wev # equivalent of xev, to find the name of keys for instance
         wshowkeys

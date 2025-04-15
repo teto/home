@@ -52,11 +52,13 @@ in
     autoloadedModule
     ./xdg-portal.nix
     ./common.nix
-    ./sway.nix
+    # ./sway.nix
+    flakeSelf.homeProfiles.sway
+    flakeSelf.homeProfiles.neovim
     ./zsh.nix
 
     # ./fcitx.nix
-    ./neovim
+    # ./neovim
   ];
 
   # allows to find fonts enabled through home.packages

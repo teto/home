@@ -6,7 +6,7 @@ in
 {
   enable = true;
 
-  package = flakeSelf.inputs.waybar.packages.${pkgs.system}.waybar;
+  # package = flakeSelf.inputs.waybar.packages.${pkgs.system}.waybar;
   systemd.enable = true;
 
   settings = {

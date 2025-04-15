@@ -787,9 +787,6 @@
         sway-notification-center = ./hm/profiles/swaync.nix;
         # provided by nova-nix config
         # vscode = ./hm/profiles/vscode.nix;
-
-        # waybar = ./hm/profiles/waybar.nix;
-
       };
 
       homeModules = (importDir ./hm/modules) // {
