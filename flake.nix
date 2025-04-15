@@ -545,13 +545,6 @@
           };
 
           home-manager.users = {
-            root = {
-              # imports = [
-              #   # ../../hm/profiles/neovim.nix
-              #   # TODO imports
-              # ];
-            };
-
             teto = {
               imports = [
               ];
@@ -718,6 +711,10 @@
 
         # see https://determinate.systems/posts/extending-nixos-configurations
         tatooine = laptop.extendModules {
+          # pkgs = ;
+          # myPkgs.extend(
+          # self.inputs.nova-doctor.overlays.default);
+          # self.inputs.nova-doctor.overlays.autoCalledPackages
           modules = [
             self.nixosModules.nova
           ];
@@ -754,12 +751,25 @@
 
         # nix build .#nixosConfigurations.teapot.config.system.build.toplevel
         jedha = desktop.extendModules ({
+
           specialArgs = {
             withSecrets = true;
+            # pkgs = myPkgs.extend(
+            #   self.inputs.nova-doctor.overlays.default).extend(
+            #   self.inputs.nova-doctor.overlays.autoCalledPackages
+            #
+            #     );
           };
 
           modules = [
             self.nixosModules.nova
+            ({
+              nixpkgs.overlays = [
+                self.inputs.nova-doctor.overlays.default
+                self.inputs.nova-doctor.overlays.autoCalledPackages
+
+              ];
+            })
           ];
         });
 
@@ -779,7 +789,7 @@
       # TODO scan hm/{modules, profiles} folder
       homeProfiles = (importDir ./hm/profiles) // {
         neovim = ./hm/profiles/neovim;
-        # nova = ./hm/profiles/nova/default.nix;
+        nova = ./hm/profiles/nova/default.nix;
         mpv = ./hm/profiles/mpv.nix;
 
         teto-desktop = ./hm/profiles/desktop.nix;
