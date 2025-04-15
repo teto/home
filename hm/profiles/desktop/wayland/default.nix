@@ -1,10 +1,17 @@
-{ config, lib, pkgs, ... }:
+{ flakeSelf, config, lib, pkgs, ... }:
 {
+  _imports = [
+    flakeSelf.homeProfiles.sway
+  ];
+
   windowManager.sway = {  
     enable = true;
     xwayland = false;
+
+
     systemd.enable = true;
-    systemd.variables =  [ "PATH" ];
+    # SWAYSOCK/WAYLAND etc
+    # systemd.variables =  [ "PATH" ];
 
 
     # disabling swayfx until  those get merged

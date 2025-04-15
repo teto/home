@@ -32,7 +32,6 @@
       # neovim should come from the nixos profile
       ../../../../desktop/home-manager/users/teto/services/nextcloud-client.nix
 
-      # ../../../../../hm/profiles/sway.nix
       ../../../../../hm/profiles/wezterm.nix
     ];
 

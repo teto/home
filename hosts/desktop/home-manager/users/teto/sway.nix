@@ -4,15 +4,6 @@
   lib,
   ...
 }:
-let
-  # https://gitlab.freedesktop.org/wlroots/wlroots/-/blob/master/docs/env_vars.md?ref_type=heads
-  swayEnvVars = {
-    WLR_NO_HARDWARE_CURSORS = 1;
-    # we need vulkan else we get flickering
-    # TODO move it to sessionVariables instead so we can override it instead of having hardcoded ?
-    # or modify the wrapper to set allow overriding
-  };
-in
 {
   imports = [
     flakeSelf.homeProfiles.sway
@@ -22,6 +13,7 @@ in
 
   # TODO generate a wrapper ?
   wayland.windowManager.sway = {
+    enable = true;
     xwayland = false;
     extraOptions = [
       # -Dlegacy-wl-drm

@@ -54,13 +54,25 @@
           let
             swaySystemd = pkgs.makeDesktopItem {
               name = "sway-systemd";
+#               Exec=/nix/store/vkkgngnfy2461zrwfsdh1gklxdkir2dc-gnome-session-47.0.1/bin/gnome-session
+# TryExec=/nix/store/vkkgngnfy2461zrwfsdh1gklxdkir2dc-gnome-session-47.0.1/bin/gnome-session
+# Type=Application
+# DesktopNames=GNOME
               # ${pkgs.}
-              exec = "/run/current-system/systemd/bin/systemctl";
+              # systemd.user.targets.sway-session
+              exec = "/run/current-system/systemd/bin/systemctl start graphical-session";
+          # Whether to enable {file}`sway-session.target` on
+          # sway startup. This links to
+          # {file}`graphical-session.target`.
+          # Some important environment variables will be imported to systemd
+          # and dbus user environment before reaching the target, including
+
+              # tryExec = 
               # icon = "ivan.png";
               desktopName = "sway-systemd";
               genericName = "sway-systemd";
               categories = [
-                "RolePlaying"
+                # "RolePlaying"
               ];
               comment = "test matt";
             };
@@ -71,6 +83,7 @@
               install -D -m755 ${swaySystemd}/share/applications/sway-systemd.desktop $out/share/wayland-sessions/
             '';
 
+            # WLR_NO_HARDWARE_CURSORS = 1;
             # waylandWrapper = pkgs.writeShellScript "wayland-wrapper" ''
             #   export WLR_NO_HARDWARE_CURSORS=1;
             #   export WLR_RENDERER="vulkan";
