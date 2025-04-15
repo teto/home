@@ -65,6 +65,12 @@
               comment = "test matt";
             };
 
+            swaySystemdSession = pkgs.runCommand "createsway" {} ''
+              mkdir -p $out/share/wayland-sessions
+              echo "${swaySystemd}"
+              install -D -m755 ${swaySystemd}/share/applications/sway-systemd.desktop $out/share/wayland-sessions/
+            '';
+
             # waylandWrapper = pkgs.writeShellScript "wayland-wrapper" ''
             #   export WLR_NO_HARDWARE_CURSORS=1;
             #   export WLR_RENDERER="vulkan";
@@ -80,7 +86,7 @@
               "--time"
               "--greeting 'Hello noob'"
               # TODO make sway the default wrapper
-              "--sessions ${config.home-manager.users.teto.home.path}/share/wayland-sessions:${sessionData}/share/wayland-sessions"
+              "--sessions ${swaySystemdSession}:${config.home-manager.users.teto.home.path}/share/wayland-sessions:${sessionData}/share/wayland-sessions"
               "--xsessions ${config.home-manager.users.teto.home.path}/share/xsessions:${sessionData}/share/xsessions"
               # "--asterisks"  # show asterisks
               "--power-shutdown /run/current-system/systemd/bin/systemctl poweroff"
