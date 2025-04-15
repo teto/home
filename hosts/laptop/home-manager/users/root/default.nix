@@ -12,7 +12,6 @@
       # flakeSelf.homeProfiles.neovim
     ]
     ++ lib.optionals withSecrets [
-      # ../../hm/profiles/nova/ssh-config.nix
       flakeSelf.homeProfiles.nova
     ];
 

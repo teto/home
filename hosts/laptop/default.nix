@@ -76,37 +76,33 @@ let
     };
 in
 {
-  imports =
-    [
-      laptopAutoloaded
-      # should not ?!
-      # desktopAutoloaded
+  imports = [
+    laptopAutoloaded
+    # should not ?!
+    # desktopAutoloaded
 
-      ./generated.nix
+    ./generated.nix
 
-      flakeSelf.nixosModules.desktop
-      flakeSelf.nixosModules.nix-ld
+    flakeSelf.nixosModules.desktop
+    flakeSelf.nixosModules.nix-ld
 
-      # TODO this triggers the error on boot I think
-      flakeSelf.nixosModules.desktop
+    # TODO this triggers the error on boot I think
+    flakeSelf.nixosModules.desktop
 
-      ../../nixos/profiles/docker-daemon.nix
-      ../../nixos/profiles/podman.nix
-      # ../../nixos/profiles/homepage-dashboard.nix
-      ../../nixos/profiles/qemu.nix
-      ../../nixos/profiles/steam.nix
-      # ../../nixos/profiles/sway.nix
-      # ../../nixos/profiles/adb.nix
-      ../../nixos/profiles/kanata.nix
-      ../../nixos/profiles/postgresql.nix
-      # ../../nixos/profiles/home-assistant.nix
-      # usually inactive, just to test some stuff
-      # ../../nixos/modules/libvirtd.nix
+    ../../nixos/profiles/docker-daemon.nix
+    ../../nixos/profiles/podman.nix
+    # ../../nixos/profiles/homepage-dashboard.nix
+    ../../nixos/profiles/qemu.nix
+    ../../nixos/profiles/steam.nix
+    # ../../nixos/profiles/sway.nix
+    # ../../nixos/profiles/adb.nix
+    ../../nixos/profiles/kanata.nix
+    ../../nixos/profiles/postgresql.nix
+    # ../../nixos/profiles/home-assistant.nix
+    # usually inactive, just to test some stuff
+    # ../../nixos/modules/libvirtd.nix
 
-    ]
-    ++ lib.optionals withSecrets [
-      flakeSelf.nixosModules.nova
-    ];
+  ];
 
   boot.blacklistedKernelModules = [ "nouveau" ];
 

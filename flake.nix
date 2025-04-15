@@ -754,7 +754,6 @@
 
         # nix build .#nixosConfigurations.teapot.config.system.build.toplevel
         jedha = desktop.extendModules ({
-          # TODO add nova inputs
           specialArgs = {
             withSecrets = true;
           };
@@ -780,7 +779,7 @@
       # TODO scan hm/{modules, profiles} folder
       homeProfiles = (importDir ./hm/profiles) // {
         neovim = ./hm/profiles/neovim;
-        nova = ./hm/profiles/nova/default.nix;
+        # nova = ./hm/profiles/nova/default.nix;
         mpv = ./hm/profiles/mpv.nix;
 
         teto-desktop = ./hm/profiles/desktop.nix;

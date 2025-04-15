@@ -12,10 +12,10 @@
   imports =
     lib.optionals withSecrets [
       # ../../../../desktop/home-manager/users/teto/calendars.nix
-      ../../../../desktop/home-manager/users/teto/contacts.nix
+      # ../../../../desktop/home-manager/users/teto/contacts.nix
 
       # TODO
-      ../../../../desktop/home-manager/users/teto/sops.nix
+      # ../../../../desktop/home-manager/users/teto/sops.nix
 
       # flakeSelf.inputs.git-repo-manager.packages.${pkgs.system}.git-repo-manager
     ]
@@ -34,7 +34,8 @@
       # neovim should come from the nixos profile
       ../../../../desktop/home-manager/users/teto/services/nextcloud-client.nix
 
-      ../../../../../hm/profiles/wezterm.nix
+      # ../../../../../hm/profiles/wezterm.nix
+      flakeSelf.homeProfiles.wezterm
     ];
 
   home.sessionPath = [

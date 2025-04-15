@@ -1,5 +1,6 @@
-{ flakeSelf
-, ...
+{
+  flakeSelf,
+  ...
 }:
 {
 

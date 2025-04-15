@@ -18,7 +18,7 @@
       flakeSelf.homeProfiles.developer
       flakeSelf.homeProfiles.mpv
       flakeSelf.homeProfiles.vscode
-      flakeSelf.homeProfiles.waybar
+      # flakeSelf.homeProfiles.waybar # breaks eval ?!
 
       flakeSelf.homeModules.fzf
       flakeSelf.homeModules.teto-zsh
@@ -27,7 +27,7 @@
       flakeSelf.homeModules.pimsync
       flakeSelf.homeModules.package-sets
     ]
-    ++ lib.optionals withSecrets [
+    ++ lib.optionals (lib.debug.traceVal withSecrets) [
       flakeSelf.homeProfiles.nova
     ];
 

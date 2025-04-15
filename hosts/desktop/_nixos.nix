@@ -64,7 +64,6 @@ in
       ../../nixos/profiles/greetd.nix
       ../../nixos/profiles/docker-daemon.nix
 
-      flakeSelf.nixosModules.nova
       flakeSelf.nixosModules.desktop
       flakeSelf.nixosModules.nix-daemon
       flakeSelf.nixosModules.steam
@@ -95,40 +94,16 @@ in
   # just for fun ?
   # services.desktopManager.plasma6.enable = true;
 
-  home-manager.users =
-    # let
-    # hmRootModule = { pkgs, ... }@args: flakeSelf.inputs.haumea.lib.load {
-    #  src = ./root;
-    #  inputs = args // {
-    #    inputs = flakeSelf.inputs;
-    #  };
-    #  transformer =  [
-    #    flakeSelf.inputs.haumea.lib.transformers.liftDefault
-
-    #  #  (x: hoistAttrs x )
-    #    # (x: )
-    #  ];
-    #   # flakeSelf.inputs.haumea.lib.transformers.liftDefault;
-    # };
-    # in
-    {
-      root = {
-        imports = [
-          # hmRootModule
-          # ./root/programs/ssh.nix
-          ../../hm/profiles/nova/ssh-config.nix
-        ];
-      };
-
-      # TODO use from flake or from unstable
-      teto = {
-        # TODO it should load the whole folder
-        imports = [
-          ./home-manager/users/teto/default.nix
-          # autoloadedHmModule # TODO fix
-        ];
-      };
+  home-manager.users = {
+    # TODO use from flake or from unstable
+    teto = {
+      # TODO it should load the whole folder
+      imports = [
+        ./home-manager/users/teto/default.nix
+        # autoloadedHmModule # TODO fix
+      ];
     };
+  };
 
   boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_13; # works ?
   # services.xserver.displayManager.gdm.enable = true;

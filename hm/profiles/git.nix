@@ -12,7 +12,7 @@
   programs.git = {
     enable = true;
 
-    # due to nova
+    # mkForce due to nova
     userName = lib.mkForce "Matthieu C.";
     userEmail = lib.mkForce "886074+teto@users.noreply.github.com";
 

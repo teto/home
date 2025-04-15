@@ -8,7 +8,7 @@
 
     distributedBuilds = true;
 
-    package = pkgs.nixVersions.nix_2_26
+    package = pkgs.nixVersions.nix_2_28
     # flakeSelf.inputs.nix-schemas.packages.${pkgs.system}.nix
     ;
 
@@ -25,10 +25,6 @@
 
       # experimental-features = nix-command flakes auto-allocate-uids
       extra-experimental-features = "auto-allocate-uids nix-command flakes cgroups";
-      # substituters = [
-      #   # "https://teto.cachix.org"
-      #   secrets.nova.novaNixCache.prod
-      # ];
 
       extra-substituters = [
         "https://haskell-language-server.cachix.org"
