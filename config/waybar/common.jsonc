@@ -120,7 +120,11 @@
 		"menu-file": "~/.config/waybar/menu-notmuch.xml",
 		"menu-actions": {
 			"neomutt": "kitty sh -c neomutt",
-            "fetchfastmail": "just -g mailsync",
+            "fetch-fastmail": "just -g mailsync",
+            "fetch-nova": "just -g mailsync",
+            "open-neomutt": "kitty sh -c neomutt",
+            "open-meli": "kitty sh -c meli",
+            "open-alot": "kitty sh -c alot",
 			// "reboot": "reboot",
 		},
 	},

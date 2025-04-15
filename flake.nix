@@ -148,8 +148,8 @@
     nix-schemas.url = "github:DeterminateSystems/nix-src/flake-schemas";
 
     rocks-nvim = {
-      url = "/home/teto/neovim/rocks.nvim";
-      # url = "github:nvim-neorocks/rocks.nvim";
+      # url = "/home/teto/neovim/rocks.nvim";
+      url = "github:nvim-neorocks/rocks.nvim";
       # inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -351,7 +351,7 @@
           specialArgs = {
             inherit hostname;
             inherit secrets;
-            withSecrets = true;
+            inherit withSecrets;
             flakeSelf = self;
             # TODO check how to remove one
             userConfig = novaUserProfile;
@@ -376,8 +376,9 @@
 
             # the nova overlay just brings ztp-creds and gitlab-ssh-keys
             # removing the overlay means we dont need it during evaluation
-            self.inputs.nova-doctor.overlays.default
-            self.inputs.nova-doctor.overlays.autoCalledPackages
+            # we dont want to pull those inputs for secret-less envs
+            # self.inputs.nova-doctor.overlays.default
+            # self.inputs.nova-doctor.overlays.autoCalledPackages
 
             # self.inputs.nixpkgs-wayland.overlay
             # self.inputs.nix.overlays.default
@@ -713,7 +714,6 @@
           hostname = "laptop";
 
           modules = [
-            # self.inputs.sops-nix.nixosModules.sops
             ./hosts/laptop
           ];
         };
@@ -781,14 +781,11 @@
 
       # TODO scan hm/{modules, profiles} folder
       homeProfiles = (importDir ./hm/profiles) // {
-        # common = ./hm/profiles/common.nix;
-        # fzf = ./hm/profiles/fzf.nix;
         neovim = ./hm/profiles/neovim;
         nova = ./hm/profiles/nova/default.nix;
+        mpv = ./hm/profiles/mpv.nix;
 
-        # developer = ./hm/profiles/dev.nix;
         teto-desktop = ./hm/profiles/desktop.nix;
-        # sway = ./hm/profiles/sway.nix;
         sway-notification-center = ./hm/profiles/swaync.nix;
       };
 
@@ -802,7 +799,6 @@
         # for stuff not in home-manager yet
         experimental = ./hm/profiles/experimental.nix; # { flakeSelf = self; };
         gnome-shell = ./hm/profiles/gnome.nix;
-        mpv = ./hm/profiles/mpv.nix;
 
         ollama = hosts/desktop/home-manager/users/teto/services/ollama.nix;
 
@@ -982,7 +978,7 @@
                 useFetchCargoVendor = true;
                 cargoDeps = final.rustPlatform.fetchCargoVendor {
                   inherit src;
-                  hash = "sha256-/6YjyKB/xOCTNZlKewddEaZ1ZN2PC5dQoP0A5If67MA=";
+                  hash = "sha256-vnBk0uojWDM9PS8v5Qda2UflmIFZ09Qp9l25qTTWGMc=";
                 };
 
               }

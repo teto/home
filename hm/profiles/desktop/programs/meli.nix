@@ -1,6 +1,8 @@
-{ pkgs, secrets, flakeSelf, ... }:
+{ pkgs, secrets
+, withSecrets
+, flakeSelf, ... }:
 {
-  enable = true;
+  enable = withSecrets;
 
   package = pkgs.meli-git;
 

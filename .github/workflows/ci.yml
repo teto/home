@@ -1,4 +1,4 @@
-name: nvim
+name: Eval nixosConfigurations
 
 # on: [push, pull_request]
 on: [push, pull_request]
@@ -12,9 +12,9 @@ jobs:
     #   with:
     #     nix_path: nixpkgs=channel:nixos-unstable
     - name: Install Nix
-      uses: DeterminateSystems/nix-installer-action@v12
-    - name: Run the Magic Nix Cache
-      uses: DeterminateSystems/magic-nix-cache-action@v3
+      uses: DeterminateSystems/nix-installer-action@v16
+    # - name: Run the Magic Nix Cache
+    #   uses: DeterminateSystems/magic-nix-cache-action@v3
     # disabled for now
     # - name: Build neovim
     #   run: |
@@ -30,6 +30,7 @@ jobs:
     - name: eval laptop config
       run: |
        nix eval .#nixosConfigurations.laptop.config.system.build.toplevel
+       nix build --dry-run .#nixosConfigurations.laptop.config.system.build.toplevel
 
     - name: enter devShell
       run: |

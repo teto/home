@@ -1,12 +1,13 @@
 {
   config,
   pkgs,
+  withSecrets,
   lib,
   secrets,
   ...
 }:
 
-{
+lib.optionalAttrs withSecrets {
   basePath = "${config.home.homeDirectory}/calendars";
 
   accounts = {

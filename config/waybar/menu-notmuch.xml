@@ -2,12 +2,12 @@
 <interface>
  <object class="GtkMenu" id="menu">
   <child>
-   <object class="GtkMenuItem" id="fetchfastmail">
+   <object class="GtkMenuItem" id="fetch-fastmail">
     <property name="label">Fetch fastmail</property>
    </object>
   </child>
   <child>
-   <object class="GtkMenuItem" id="fetchnova">
+   <object class="GtkMenuItem" id="fetch-nova">
     <property name="label">Fetch nova mail</property>
    </object>
    </child>

@@ -2,7 +2,7 @@
   config,
   pkgs,
   lib,
-  # , self
+  withSecrets,
   secrets,
   ...
 }:
@@ -273,6 +273,7 @@ let
 in
 {
   email.maildirBasePath = mailDirBasePath;
+} // lib.optionalAttrs withSecrets {
   email.accounts = {
     inherit
       # gmail
@@ -280,4 +281,5 @@ in
       # nova # access pb
       ;
   };
+
 }

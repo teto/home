@@ -156,12 +156,7 @@ in
   home-manager.users = {
     root = {
       imports = [
-        # ../desktop/root/programs/ssh.nix
         ./home-manager/users/root/default.nix
-
-        # flakeSelf.homeProfiles.neovim
-        # ] ++ lib.optionals withSecrets [
-        #   # ../../hm/profiles/nova/ssh-config.nix
       ];
     };
 

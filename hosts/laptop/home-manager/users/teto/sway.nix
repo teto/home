@@ -8,7 +8,6 @@
 
   wayland.windowManager.sway = {
     enable = true;
-    xwayland = true; # test to avoid crashes
 
     extraSessionCommands = lib.mkForce "";
     extraOptions = [
@@ -16,7 +15,6 @@
       "--debug"
       # "--unsupported-gpu" # to work with the quadro
     ];
-  };
   # some of it already read from profiles/sway
   #   extraSessionCommands =  let
   #     exportVariables =
@@ -25,13 +23,14 @@
   #     lib.concatStringsSep "\n" exportVariables;
   # };
 
-  config = {
-      workspaceOutputAssign = [
-        {
-          workspace = "toto";
-          output = "eDP1";
-        }
-      ];
+    config = {
+        workspaceOutputAssign = [
+          {
+            workspace = "toto";
+            output = "eDP1";
+          }
+        ];
+    };
   };
 
 }

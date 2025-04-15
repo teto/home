@@ -7,10 +7,10 @@
 }:
 {
 
-  # _imports = [
-  #   flakeSelf.homeModules.mpv
-  # ];
-  #
+  _imports = [
+    flakeSelf.homeProfiles.mpv
+  ];
+
   # TODO use wrapper instead ?
   # programs.mpv = {
   enable = true;

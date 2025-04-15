@@ -16,13 +16,13 @@
       flakeSelf.homeProfiles.sway
       flakeSelf.homeProfiles.sway-notification-center
       flakeSelf.homeProfiles.developer
+      flakeSelf.homeProfiles.mpv
 
       flakeSelf.homeModules.fzf
       flakeSelf.homeModules.teto-zsh
       flakeSelf.homeModules.yazi
       flakeSelf.homeModules.services-mujmap
       flakeSelf.homeModules.pimsync
-      flakeSelf.homeModules.mpv
       flakeSelf.homeModules.package-sets
       flakeSelf.homeModules.vscode
       flakeSelf.homeModules.waybar

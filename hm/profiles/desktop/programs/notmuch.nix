@@ -2,10 +2,15 @@
   config,
   lib,
   pkgs,
+  withSecrets,
   ...
 }:
 {
-  enable = true;
+
+  # enabling it
+  # - teto profile: notmuch: Must have a user name set.
+  # - teto profile: notmuch: Must have a user primary email address set.
+  enable = withSecrets;
 
   # dont add "inbox" tag
   new.tags = [

@@ -57,10 +57,11 @@ let
   luaPlugins = with pkgs.vimPlugins; [
 
     (luaPlugin {
-      plugin = avante-nvim.overrideAttrs({
-
-        src = flakeSelf.inputs.avante-nvim-src;
-      }); 
+      plugin = avante-nvim;
+      #   .overrideAttrs({
+      #
+      #   src = flakeSelf.inputs.avante-nvim-src;
+      # }); 
         # require("avante").setup()
       # config = ''
       # require("avante_lib").load()
