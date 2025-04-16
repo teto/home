@@ -3884,8 +3884,12 @@
         "nmt": "nmt",
         "nur": "nur",
         "treefmt-nix": "treefmt-nix_6",
-        "user-profile": "user-profile",
-        "userConfig": "userConfig"
+        "user-profile": [
+          "nixpkgs"
+        ],
+        "userConfig": [
+          "nixpkgs"
+        ]
       },
       "locked": {
         "lastModified": 1742838058,
@@ -5016,34 +5020,6 @@
         "repo": "treefmt-nix",
         "type": "github"
       }
-    },
-    "user-profile": {
-      "flake": false,
-      "locked": {
-        "path": ".",
-        "type": "path"
-      },
-      "original": {
-        "path": ".",
-        "type": "path"
-      },
-      "parent": [
-        "nova-doctor"
-      ]
-    },
-    "userConfig": {
-      "flake": false,
-      "locked": {
-        "path": "./nixos/dummy_config.json",
-        "type": "path"
-      },
-      "original": {
-        "path": "./nixos/dummy_config.json",
-        "type": "path"
-      },
-      "parent": [
-        "nova-doctor"
-      ]
     },
     "utils": {
       "inputs": {

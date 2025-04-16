@@ -186,7 +186,9 @@
       url = "git+ssh://git@git.novadiscovery.net/sys/doctor?ref=matt/scratch";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "hm";
-      # inputs.user-profile.follows = "hm";
+      # otherwise it gives lockfile contains unlocked input (because its value is `path:.`)
+      inputs.user-profile.follows = "nixpkgs";
+      inputs.userConfig.follows = "nixpkgs";
     };
 
     #  c'est relou, faudrait le merger avec le precedent !
