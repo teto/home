@@ -506,6 +506,7 @@
             # And add the home-manager module
             ./hm/modules/xdg.nix # does nothing
             # ./hm/modules/firefox.nix
+            self.homeProfiles.fzf # todo move to common.nix ?
 
             # TODO it should autoload those
             self.homeModules.meli
@@ -513,7 +514,6 @@
             self.homeModules.bash
             self.homeModules.kitty
             self.homeModules.zsh
-            self.homeModules.fzf
 
             self.homeModules.fre
             self.homeModules.mod-cliphist
@@ -792,6 +792,8 @@
 
         teto-desktop = ./hm/profiles/desktop.nix;
         sway-notification-center = ./hm/profiles/swaync.nix;
+        waybar = ./hm/profiles/waybar.nix;
+
         # provided by nova-nix config
         # vscode = ./hm/profiles/vscode.nix;
       };

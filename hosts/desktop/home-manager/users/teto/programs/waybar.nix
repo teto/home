@@ -4,9 +4,9 @@
 }:
 {
 
-  # imports = [
-  #   flakeSelf.homeProfiles.waybar
-  # ];
+  imports = [
+    flakeSelf.homeProfiles.waybar
+  ];
 
   programs.waybar = {
     enable = true;

@@ -5,7 +5,7 @@
 {
 
   imports = [
-    # flakeSelf.homeProfiles.waybar
+    flakeSelf.homeProfiles.waybar
   ];
 
   programs.waybar = {
