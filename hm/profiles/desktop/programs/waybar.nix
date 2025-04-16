@@ -6,7 +6,8 @@ in
 {
   enable = true;
 
-  # package = flakeSelf.inputs.waybar.packages.${pkgs.system}.waybar;
+  # fix for "no fixed center_"
+  package = flakeSelf.inputs.waybar.packages.${pkgs.system}.waybar;
   systemd.enable = true;
 
   settings = {

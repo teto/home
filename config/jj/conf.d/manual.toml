@@ -32,8 +32,8 @@ latest(
 # I overrode revset-aliases.mine() to include both my emails
 # Or, rather, I set it to author(exact:'name') | author(exact:'email')
 
-# [experimental-advance-branches]
-# enabled-branches = ["glob:*"]
+[experimental-advance-branches]
+enabled-branches = ["glob:push-*"]
 # disabled-branches = ["main", "dev", "master", "glob:push-*"]
 #
 [ui]
@@ -42,7 +42,7 @@ default-command = "status"
 # default-description = "\n\nTESTED=TODO"
 # Possible values: "color-words" (default), "git", "summary"
 diff.format = "git"
-log-word-wrap = true
+# log-word-wrap = true
 # Enable pagination for commands that support it (default)
 paginate = "auto"
 # Disable all pagination, equivalent to using --no-pager
