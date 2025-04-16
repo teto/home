@@ -27,12 +27,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    avante-nvim-src = {
-      # url = "github:teto/avante.nvim?ref=matt/debug";
-      url = "path:/home/teto/neovim/avante.nvim";
-      flake = false;
-      # inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # avante-nvim-src = {
+    #   # url = "github:teto/avante.nvim?ref=matt/debug";
+    #   url = "path:/home/teto/neovim/avante.nvim";
+    #   flake = false;
+    #   # inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
     blink-cmp = {
       url = "github:Saghen/blink.cmp";
@@ -781,10 +781,6 @@
 
         });
       };
-
-      #  Standalone home-manager configuration entrypoint
-      #  Available through 'home-manager --flake .# your-username@your-hostname'
-      # homeConfigurations = { };
 
       # TODO scan hm/{modules, profiles} folder
       homeProfiles = (importDir ./hm/profiles) // {
