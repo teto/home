@@ -165,9 +165,10 @@ nautilus:
 update-vimPlugins:
     # TODO make it so it works with --commit !
     nix run {{ NIXPKGS_REPO }}#vimPluginsUpdater -- \
+      --nixpkgs ~/nixpkgs \
       -i {{ justfile_directory() }}/overlays/vim-plugins/vim-plugin-names \
-      -o ${{ justfile_directory() }}/overlays/vim-plugins/generated.nix \
-      --github-token=$GITHUB_TOKEN \
+      -o {{ justfile_directory() }}/overlays/vim-plugins/generated.nix \
+      --github-token=$(cat ~/.config/sops-nix/secrets/github_token) \
       --no-commit
 
 # update my luarocks overlay
@@ -176,7 +177,7 @@ update-luarocks-packages:
     nix run {{ NIXPKGS_REPO }}#luarocks-package-updater -- \
       -i {{ justfile_directory() }}/overlays/luarocks-packages/luarocks-list.csv \
       -o ${{ justfile_directory() }}/overlays/luarocks-packages/generated.nix \
-      --github-token=$GITHUB_TOKEN \
+      --github-token=$(cat ~/.config/sops-nix/secrets/github_token) \
       --no-commit
 
 # https://unix.stackexchange.com/questions/74184/how-to-save-current-command-on-zsh

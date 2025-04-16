@@ -49,18 +49,20 @@ paginate = "auto"
 # paginate = "never"
 
 # The ui.merge-editor key specifies the tool used for three-way merge tools by jj resolve. Use merge-tools.TOOL.merge-args
-merge-editor = "nvim"
+merge-editor = "diffconflicts"
+
 # The ui.diff-editor setting affects the default tool used for editing diffs (e.g. jj split, jj squash -i)
 # Shows a single snapshot and one or more diffs to apply to it
-# conflict-marker-style = "diff"
+conflict-marker-style = "diff"
 # # Shows a snapshot for each side and base of the conflict
 # conflict-marker-style = "snapshot"
 # Uses Git's "diff3" conflict markers to support tools that depend on it
-conflict-marker-style = "git"
+# conflict-marker-style = "git"
 
 [merge-tools.kdiff3]
 # program  = "kdiff3"     # Defaults to the name of the tool if not specified
 merge-args = ["$base", "$left", "$right", "-o", "$output", "--auto"]
+
 [merge-tools.meld]
 merge-args = ["$left", "$base", "$right", "-o", "$output", "--auto-merge"]
 
@@ -79,6 +81,18 @@ merge-args = ["-f", "-d", "$output", "-M",
     "-c", "wincmd J", "-c", "set modifiable",
     "-c", "set write"]
 merge-tool-edits-conflict-markers = true
+
+
+# fugitive doesnt work because
+# [merge-tools.fugitive]
+# program = "nvim"
+# merge-args = [ "-f", "-c", "Gdiffsplit!" , "$output"]
+#
+# [mergetool "fugitive"]
+# 	cmd = "nvim -f -c \"Gdiffsplit!\" \"$MERGED\""
+#
+# [mergetool "vimdiff"]
+# 	cmd = "nvim -d $BASE $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'"
 
 
 [merge-tools.diffconflicts]
