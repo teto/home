@@ -73,7 +73,17 @@
     completion.enable = true;
     shellInit = ''
       # set -o vi
+
+      # disable flow control see https://unix.stackexchange.com/questions/12107/how-to-unfreeze-after-accidentally-pressing-ctrl-s-in-a-terminal/12108#12108
+      stty -ixon
     '';
+  };
+
+  programs.zsh = {
+    # autosuggestions.async
+    interactiveShellInit = ''
+      stty -ixon
+      '';
   };
 
   security.sudo = {

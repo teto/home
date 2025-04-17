@@ -33,7 +33,8 @@
 
     keybindings = {
 
-      save = "S";
+      # ctrl S wont work !
+      save = "ctrl s";
     };
 
     view = {

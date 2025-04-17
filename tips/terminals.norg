@@ -1,0 +1,7 @@
+
+* (un)freeze terminals
+
+https://unix.stackexchange.com/questions/12107/how-to-unfreeze-after-accidentally-pressing-ctrl-s-in-a-terminal
+This stop/start scheme is software flow control, which is implemented by the OS's terminal device driver rather than the shell or terminal emulator. It can be configured with the stty command.
+
+To disable it altogether, put stty -ixon in a shell startup script such as ~/.bashrc or ~/.zshrc. To instead just allow any key to get things flowing again, use stty ixany.

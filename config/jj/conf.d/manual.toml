@@ -5,12 +5,16 @@
 # compared to the `main` bookmark
 l = ["log", "-r", "(main..@):: | (main..@)-"]
 
+# would like 
+# sp = [""]
+
 # git log-like
 gl = ["log", "-r", "(..@)::"]
 fa = ["git", "fetch", "--all-remotes"]
 colocate = ["git", "init", "--colocate"]
 
 [revset-aliases]
+# TODO override immutable to ignore mine not in trunk
 # "immutable_heads()" = "builtin_immutable_heads() | (trunk().. & ~mine())"
 # $ jj log -r 'why_immutable(xyz)'
 # see https://github.com/jj-vcs/jj/discussions/5669 for more explanation
@@ -41,7 +45,7 @@ enabled-branches = ["glob:push-*"]
 default-command = "status"
 # default-description = "\n\nTESTED=TODO"
 # Possible values: "color-words" (default), "git", "summary"
-diff.format = "git"
+# diff.format = "git"
 # log-word-wrap = true
 # Enable pagination for commands that support it (default)
 paginate = "auto"
@@ -49,15 +53,15 @@ paginate = "auto"
 # paginate = "never"
 
 # The ui.merge-editor key specifies the tool used for three-way merge tools by jj resolve. Use merge-tools.TOOL.merge-args
-merge-editor = "diffconflicts"
+merge-editor = "nvim"
 
 # The ui.diff-editor setting affects the default tool used for editing diffs (e.g. jj split, jj squash -i)
 # Shows a single snapshot and one or more diffs to apply to it
-conflict-marker-style = "diff"
+# conflict-marker-style = "diff"
 # # Shows a snapshot for each side and base of the conflict
 # conflict-marker-style = "snapshot"
 # Uses Git's "diff3" conflict markers to support tools that depend on it
-# conflict-marker-style = "git"
+conflict-marker-style = "git"
 
 [merge-tools.kdiff3]
 # program  = "kdiff3"     # Defaults to the name of the tool if not specified
@@ -131,23 +135,25 @@ log = "builtin_log_compact"
 op_log = "builtin_op_log_compact"
 # Use builtin show template
 show = "builtin_log_detailed"
+# Equivalent to `commit.verbose = true` in Git
+draft_commit_description =  "commit_description_verbose"
 
 
 [template-aliases]
 bookmark_list_simple = '''(label("bookmark", name)) ++ "\n"'''
 
-draft_commit_description = '''
+# Equivalent to `commit.verbose = true` in Git
+commit_description_verbose = '''
+
 concat(
   description,
-  surround(
-    "\nJJ: This commit contains the following changes:\n", "",
-    indent("JJ:     ", diff.stat(72)),
-  ),
-  "\nJJ: ignore-rest\n",
+  "\n",
+  "JJ: This commit contains the following changes:\n",
+  indent("JJ:    ", diff.stat(72)),
+  "JJ: ignore-rest\n",
   diff.git(),
 )
 '''
-
 
 bookmark_list = '''
 if(remote,

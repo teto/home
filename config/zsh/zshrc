@@ -9,15 +9,15 @@
 # ON_NIXOS=$?
 # prompt off
 
-# current_folder="${0:a:h}"
-. "$ZDOTDIR/aliases.zsh"
 
 # where was it bound ? native ? we need to remove it before sourcing jj.sh
 # that maps ^j^b
 bindkey -r '^j'
 
 # https://stackoverflow.com/questions/24601806/got-permission-denied-when-emulating-sh-under-zsh
-emulate sh -c "source $ZDOTDIR/aliases.zsh"
+# current_folder="${0:a:h}"
+. "$ZDOTDIR/aliases.zsh"
+
 emulate sh -c "source $XDG_CONFIG_HOME/bash/aliases.sh"
 emulate sh -c "source $XDG_CONFIG_HOME/bash/fzf.sh"
 

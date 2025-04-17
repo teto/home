@@ -7,6 +7,8 @@ BLOG_FOLDER := "${HOME}/blog"
 NOVOS_REPO := "/home/teto/nova/doctor"
 HM_REPO := "/home/teto/hm"
 JK_SEEDER_REPO := "/home/teto/nova/jinko-seeder"
+# not versioned, where we store secrets
+SECRETS_FOLDER := justfile_directory() / "secrets"
 
 default:
     just --choose
@@ -122,6 +124,12 @@ stow-bin:
     mkdir -p "{{ data_directory() }}/../bin"
     stow -t "{{ data_directory() }}/../bin" bin
 
+# symlink e.g. aws credentials in their expected position
+stow-secrets:
+    ln -s {{ SECRETS_FOLDER }}/aws  {{ home_directory() }}/.aws
+    # ln -s {{ justfile_directory() }}/ 
+
+
 # symlink to XDG_DATA_HOME
 stow-local:
     echo "Local: {{ data_local_directory() }}"
@@ -227,3 +235,5 @@ nix-diff-booted:
 # run a X compatibility layer, you need to export the correct DISPLAY beforehand
 xwayland:
     xwayland-satellite
+
+rsync-send:

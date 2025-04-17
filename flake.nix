@@ -574,7 +574,7 @@
             magic-wormhole-rs # to transfer secrets
             nix-output-monitor
             self.inputs.firefox2nix.packages.${system}.default
-            # self.packages.${system}.
+            termscp-matt
             treefmt-home
             ripgrep
             sops # to decrypt secrets

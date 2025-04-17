@@ -1,3 +1,4 @@
+# WARNING: not included by the generated one !
 [calendars]
 [[fastmail]]
 path = /home/teto/calendars/fastmail/*
@@ -21,7 +22,7 @@ default_color=#f0ff00
 method=fg
 
 [keybindings]
-save=S
+save=ctrl s
 
 [locale]
 dateformat=%x
