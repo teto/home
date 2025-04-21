@@ -20,7 +20,7 @@
       # flakeSelf.inputs.git-repo-manager.packages.${pkgs.system}.git-repo-manager
     ]
     ++ [
-      flakeSelf.homeModules.experimental
+      # flakeSelf.homeModules.experimental
       ./sway.nix
       ./programs/waybar.nix
       ./programs/neovim.nix

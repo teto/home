@@ -16,7 +16,7 @@ let
     hostname = m.hostname;
     identitiesOnly = true;
     extraOptions = {
-      userKnownHostsFile = lib.mkForce "${flakeSelf.inputs.nova-ci}/configs/prod/ssh_known_hosts";
+      # userKnownHostsFile = lib.mkForce "${flakeSelf.inputs.nova-ci}/configs/prod/ssh_known_hosts";
 
       # persist connections when logging in remote builders
       # controlmaster = "auto";
@@ -38,9 +38,11 @@ in
       let
 
         # TODO make this generic/available to all users
-        prod-runners = builtins.fromJSON (
-          builtins.readFile "${flakeSelf.inputs.nova-ci}/configs/prod/runners-generated.json"
-        );
+        prod-runners =  []
+          # builtins.fromJSON (
+          # # builtins.readFile "${flakeSelf.inputs.nova-ci}/configs/prod/runners-generated.json"
+          # )
+          ;
 
         remoteBuilders = lib.listToAttrs (
           map

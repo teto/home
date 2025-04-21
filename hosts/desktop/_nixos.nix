@@ -68,11 +68,8 @@ in
       flakeSelf.nixosModules.nix-daemon
       flakeSelf.nixosModules.steam
       flakeSelf.nixosModules.universal
-      # ../../nixos/profiles/experimental.nix
       # ../../nixos/profiles/opensnitch.nix
       # ../../nixos/profiles/podman.nix
-
-      # ../../nixos/profiles/libvirtd.nix
     ]
     ++ lib.optionals withSecrets [
       # TODO restore

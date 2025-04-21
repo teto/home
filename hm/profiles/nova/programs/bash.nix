@@ -19,14 +19,13 @@ in
 {
   programs.bash = lib.optionalAttrs (lib.trace "nova bash.nix" withSecrets) {
 
-    # goes to .profile
-    # shellAliases = {
     sessionVariables =
       let
-        prod-runners = builtins.fromJSON (
-          # TODO fetch it from doctor ?
-          builtins.readFile "${flakeSelf.inputs.nova-ci}/configs/prod/runners-generated.json"
-        );
+        prod-runners = [];
+        #   builtins.fromJSON (
+        #   # TODO fetch it from doctor ?
+        #   # builtins.readFile "${flakeSelf.inputs.nova-ci}/configs/prod/runners-generated.json"
+        # );
 
         mkKey =
           name:

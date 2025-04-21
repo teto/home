@@ -806,7 +806,7 @@
         meli = ./hm/modules/programs/meli.nix;
 
         # for stuff not in home-manager yet
-        experimental = ./hm/profiles/experimental.nix; # { flakeSelf = self; };
+        experimental = ./hm/profiles/experimental.nix;
         gnome-shell = ./hm/profiles/gnome.nix;
 
         ollama = hosts/desktop/home-manager/users/teto/services/ollama.nix;

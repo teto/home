@@ -1,5 +1,4 @@
 {
-  config,
   lib,
   pkgs,
   flakeSelf,
@@ -20,7 +19,6 @@ let
           "boot.nix"
           "environment.nix"
           # UNCOMMENTING this will break everything since its content is not adapted
-          # "home-manager/"
           # "home-manager/"
           "users/"
           "services/"
@@ -50,30 +48,30 @@ let
       ];
     };
 
-  desktopAutoloaded =
-    { pkgs, ... }@args:
-    flakeSelf.inputs.haumea.lib.load {
-      src = flakeSelf.inputs.nix-filter {
-        root = ../desktop;
-        include = [
-          # TODO just include directly
-          # "sops.nix"
-          "sops/secrets.nix"
-        ];
-        # exclude = [
-        #   "teto"
-        #   "root"
-        # ];
-      };
-
-      inputs = args // {
-        inputs = flakeSelf.inputs;
-      };
-      transformer = [
-        haumea.lib.transformers.liftDefault
-        (haumea.lib.transformers.hoistAttrs "_import" "import")
-      ];
-    };
+  # desktopAutoloaded =
+  #   { pkgs, ... }@args:
+    # flakeSelf.inputs.haumea.lib.load {
+    #   src = flakeSelf.inputs.nix-filter {
+    #     root = ../desktop;
+    #     include = [
+    #       # TODO just include directly
+    #       # "sops.nix"
+    #       "sops/secrets.nix"
+    #     ];
+    #     # exclude = [
+    #     #   "teto"
+    #     #   "root"
+    #     # ];
+    #   };
+    #
+    #   inputs = args // {
+    #     inputs = flakeSelf.inputs;
+    #   };
+    #   transformer = [
+    #     haumea.lib.transformers.liftDefault
+    #     (haumea.lib.transformers.hoistAttrs "_import" "import")
+    #   ];
+    # };
 in
 {
   imports = [
@@ -101,6 +99,12 @@ in
     # ../../nixos/profiles/home-assistant.nix
     # usually inactive, just to test some stuff
     # ../../nixos/modules/libvirtd.nix
+
+  ];
+
+  nixpkgs.overlays = lib.optionals withSecrets [
+    flakeSelf.inputs.nova-doctor.overlays.default
+    flakeSelf.inputs.nova-doctor.overlays.autoCalledPackages
 
   ];
 

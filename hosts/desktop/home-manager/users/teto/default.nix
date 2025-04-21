@@ -12,7 +12,6 @@
   imports =
     [
       # flakeSelf.homeModules.bash
-      # ../../../../../hm/profiles/bash.nix
 
       flakeSelf.homeProfiles.qutebrowser
       flakeSelf.inputs.nix-index-database.hmModules.nix-index
@@ -21,14 +20,11 @@
       flakeSelf.homeModules.ollama
       flakeSelf.homeModules.experimental
       flakeSelf.homeProfiles.wezterm
-      # ../../../hm/profiles/experimental.nix
       # flakeSelf.homeModules.gnome-shell
 
       ./calendars.nix
       ./sway.nix
 
-      # ./programs/bash.nix
-      # ./programs/git.nix
       ./programs/neovim.nix
       ./programs/waybar.nix
       ./programs/zsh.nix

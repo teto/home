@@ -14,8 +14,8 @@
     flakeSelf.inputs.nova-doctor.nixosModules.virt-manager
 
     # we need both because nova consumes quite a bit of CPU
-    flakeSelf.inputs.nova-doctor.nixosModules.gnome
-    flakeSelf.nixosProfiles.gnome
+    # flakeSelf.inputs.nova-doctor.nixosModules.gnome
+    # flakeSelf.nixosProfiles.gnome
   ];
 
   environment.systemPackages = [

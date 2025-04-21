@@ -185,9 +185,10 @@ b.setup({
             'path',
             'snippets',
             'buffer',
-            'git',
+            -- 'git',
         },
         providers = {
+		 -- ve:
             git = {
                 module = 'blink-cmp-git',
                 name = 'Git',

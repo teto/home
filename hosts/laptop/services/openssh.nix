@@ -4,7 +4,6 @@
 {
 
   enable = false;
-  # kinda experimental
   ports = [ 12666 ];
 
   # # for sshfs edit or scp
