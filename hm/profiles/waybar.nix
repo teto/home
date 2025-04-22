@@ -28,7 +28,8 @@
       # to get:
       # - fonts https://github.com/nix-community/home-manager/issues/4099#issuecomment-1605483260
       # - nvidia-smi
-      Environment = "PATH=$PATH:/etc/profiles/per-user/teto/bin:/run/current-system/sw/bin:${
+      Environment = [
+        "PATH=$PATH:/etc/profiles/per-user/teto/bin:/run/current-system/sw/bin:${
         lib.makeBinPath [
           # notmuchChecker
           pkgs.curl
@@ -46,7 +47,8 @@
           pkgs.python3 # for khal
         ]
         # needs to find nvidia smi as well
-      }:${dotfilesPath}/bin";
+      }:${dotfilesPath}/bin"
+    ];
     };
     Unit.PartOf = [ "tray.target" ];
     Install.WantedBy = [ "tray.target" ];

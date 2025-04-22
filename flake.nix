@@ -318,7 +318,7 @@
 
         has_sudo = true;
         collections = [
-          "matthieu.coudron/fortunes"
+          # "matthieu.coudron/fortunes"
           "nova/nix-ld" # for monolix
           "nova/julia"
           "nova/python"
