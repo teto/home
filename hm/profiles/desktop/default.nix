@@ -77,8 +77,4 @@
     time = "fr_FR.utf8";
   };
 
-  xdg.configFile."bash/lib.sh".text = ''
-    TETO_SECRETS_FOLDER=${secretsFolder}
-  '';
-
 }

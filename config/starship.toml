@@ -1,7 +1,7 @@
 # Get editor completions based on the config schema
 "$schema" = 'https://starship.rs/config-schema.json'
 
-command_timeout = 1000 # ms
+command_timeout = 600 # ms
 
 # https://starship.rs/config/#status
 # Don't print a new line at the start of the prompt

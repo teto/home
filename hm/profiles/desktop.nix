@@ -50,7 +50,7 @@ in
 
   imports = [
     autoloadedModule
-    ./xdg-portal.nix
+    # ./xdg-portal.nix
     ./common.nix
     # ./sway.nix
     flakeSelf.homeProfiles.sway

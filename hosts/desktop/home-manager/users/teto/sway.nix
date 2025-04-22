@@ -37,6 +37,11 @@
           bg = "${dotfilesPath}/wallpapers/toureiffel.jpg fill";
 
         };
+        "HDMI-A-2" = {
+          enable = "";
+          # bg = "${dotfilesPath}/wallpapers/toureiffel.jpg fill";
+
+        };
 
         #  "/home/teto/home/wallpapers/nebula.jpg fill"
         "*" = {

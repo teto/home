@@ -491,7 +491,7 @@ in
         kanji-stroke-order-font # for memento
       ];
 
-      xdg.dataFile."jmdict".source = pkgs.jmdict;
+      # xdg.dataFile."jmdict".source = pkgs.jmdict;
     })
 
   ];
