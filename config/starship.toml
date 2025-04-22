@@ -1,6 +1,8 @@
 # Get editor completions based on the config schema
 "$schema" = 'https://starship.rs/config-schema.json'
 
+command_timeout = 1000 # ms
+
 # https://starship.rs/config/#status
 # Don't print a new line at the start of the prompt
 add_newline = false
@@ -161,6 +163,5 @@ disabled = true
 when = true
 command = "jj root --ignore-working-copy >/dev/null 2>&1 || starship module git_branch"
 description = "Only show git_branch if we're not in a jj repo"
-
 # [custom.example]
 # format = "[$symbol$output]($style) "

@@ -73,9 +73,10 @@ in
 
         # pkgs.ollama # to test huggingface
         flakeSelf.inputs.jujutsu.packages.${pkgs.system}.jujutsu
+        flakeSelf.inputs.jjui.packages.${pkgs.system}.jjui
 
         # pkgs.jujutsu # replaced with the one from flake
-        pkgs.jjui
+        # pkgs.jjui
         pkgs.lazyjj
         pkgs.jj-fzf
       ];
@@ -348,7 +349,7 @@ in
 
         # there is also https://github.com/TaKO8Ki/gobang
         lazysql # SQL editor
-        harlequin # SQL python editor
+        (ignoreBroken harlequin) # SQL python editor
 
         inotify-info # to debug filewatching issues, very nice
         inotify-tools # for inotify-wait notably

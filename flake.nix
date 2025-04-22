@@ -76,6 +76,10 @@
       url = "github:teto/home-manager/scratch";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    jjui = {
+      url = "github:idursun/jjui";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # nixpkgs follow
     jujutsu = {
@@ -85,6 +89,7 @@
 
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
 
     lux = {
       url = "github:nvim-neorocks/lux";

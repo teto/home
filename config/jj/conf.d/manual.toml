@@ -13,6 +13,9 @@ gl = ["log", "-r", "(..@)::"]
 fa = ["git", "fetch", "--all-remotes"]
 colocate = ["git", "init", "--colocate"]
 
+# shamefully stolen from https://github.com/jj-vcs/jj/discussions/5568#discussioncomment-12674748
+tug = ["bookmark", "move", "--from", "closest_bookmark(@)", "--to", "closest_pushable(@)"]
+
 [revset-aliases]
 # TODO override immutable to ignore mine not in trunk
 # "immutable_heads()" = "builtin_immutable_heads() | (trunk().. & ~mine())"
@@ -32,6 +35,13 @@ latest(
   root()
 )
 '''
+
+
+# used in the tug alias 
+# https://github.com/jj-vcs/jj/discussions/5568#discussioncomment-12674748
+'closest_bookmark(to)' = 'heads(::to & bookmarks())'
+'closest_pushable(to)' = 'heads(::to & ~description(exact:"") & (~empty() | merges()))'
+
 
 # I overrode revset-aliases.mine() to include both my emails
 # Or, rather, I set it to author(exact:'name') | author(exact:'email')
@@ -61,7 +71,8 @@ merge-editor = "nvim"
 # # Shows a snapshot for each side and base of the conflict
 # conflict-marker-style = "snapshot"
 # Uses Git's "diff3" conflict markers to support tools that depend on it
-conflict-marker-style = "git"
+# careful because it prevents from using diffconflicts
+# conflict-marker-style = "git"
 
 [merge-tools.kdiff3]
 # program  = "kdiff3"     # Defaults to the name of the tool if not specified
@@ -99,17 +110,15 @@ merge-tool-edits-conflict-markers = true
 # 	cmd = "nvim -d $BASE $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'"
 
 
-[merge-tools.diffconflicts]
+[merge-tools.jj-diffconflicts]
 # https://github.com/rafikdraoui/jj-diffconflicts
+# Careful, works only with native conflict-marker-style
 program = "nvim"
 merge-args = [
     "-c", "let g:jj_diffconflicts_marker_length=$marker_length",
     "-c", "JJDiffConflicts!", "$output", "$base", "$left", "$right",
 ]
 merge-tool-edits-conflict-markers = true
-# cmd = "nvim -d $BASE $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'"
-
-# merge-tools.vimdiff.merge-tool-edits-conflict-markers = true
 
 [colors]
 commit_id = "green"
@@ -126,6 +135,7 @@ push-bookmark-prefix = "matt-push-"
 
 [snapshot]
 max-new-file-size = "10MiB"
+auto-update-stale = true
 
 # configure the template used when no -T is specified.
 [templates]

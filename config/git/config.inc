@@ -47,6 +47,10 @@ pruneTags = false
 [status]
 # showuntrackedfiles = no
 
+[mergetool "diffconflicts"]
+# use with https://github.com/whiteinge/diffconflicts
+cmd = 'nvim -c DiffConflicts "$MERGED" "$BASE" "$LOCAL" "$REMOTE"'
+
 # http.postBuffer 52428800
 [user]
 

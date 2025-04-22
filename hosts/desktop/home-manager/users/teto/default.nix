@@ -26,7 +26,7 @@
       ./sway.nix
 
       ./programs/neovim.nix
-      ./programs/waybar.nix
+      ./programs/waybar.nix # TODO resotre ?
       ./programs/zsh.nix
 
       ./services/kanshi.nix

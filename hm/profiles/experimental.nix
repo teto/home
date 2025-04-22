@@ -11,7 +11,7 @@
 
   # programs.code
 
-  programs.claude-code.enable = true;
+  programs.chawan.enable = true;
 
   # programs.lapce.enable = true;
   programs.mods = {

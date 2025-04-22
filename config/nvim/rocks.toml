@@ -245,6 +245,10 @@ rev = "v14.5.0"
 git = "rafikdraoui/jj-diffconflicts"
 rev = "20acec2eba0f1af6621880e59ae692ab34210416"
 
+[plugins.diffconflicts]
+git = "whiteinge/diffconflicts"
+rev = "2.3.0"
+
 
 [config]
 plugins_dir = "plugins/"

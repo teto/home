@@ -13,22 +13,31 @@
   enable = true;
   settings = {
     user = {
-      # "jdoe@example.org";
       email = config.programs.git.userEmail;
       name = "teto";
     };
 
     # # this generates what looks like an ok config but jj doesn't seem to care for it
-    # "--scope" = [
-    #   {
-    #     "--when.repositories" = ["~/nova"];
-    #   }
-    # ];
-    #
+    "--scope" = [
+      {
+        "--when"."repositories" = ["~/nova"];
+        "user" = {
+          email = secrets.accounts.mail.nova.email;
+        };
+      }
+    ];
+
     # "--scope.user" = {
     #     email = secrets.accounts.mail.nova.email;
     # };
 
+            # "--scope" = [
+            #   {
+            #     "--when"."repositories" = [ "~/work/" ];
+            #     user.email = "foo@bar";
+            #     gpg.key = "/some/apth";
+            #   }
+            # ];
   };
 
   # my fork only

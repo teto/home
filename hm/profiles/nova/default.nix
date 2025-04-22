@@ -10,7 +10,7 @@
     ./programs/bash.nix
     ./ssh-config.nix
     ./programs/firefox.nix
-    # flakeSelf.inputs.jinko-seeder.homeModules.jinko-seeder
+    flakeSelf.inputs.jinko-seeder.homeModules.jinko-seeder
 
     # TODO improve that
     flakeSelf.inputs.nova-doctor.homeModules.browsers
