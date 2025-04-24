@@ -196,15 +196,10 @@
       inputs.userConfig.follows = "nixpkgs";
     };
 
-    #  c'est relou, faudrait le merger avec le precedent !
-    # nova-doctor-nixos = {
-    #   url = "git+ssh://git@git.novadiscovery.net/sys/doctor?dir=nixos";
+    # nova-ci = {
+    #   url = "git+ssh://git@git.novadiscovery.net/infra/ci-runner";
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
-    nova-ci = {
-      url = "git+ssh://git@git.novadiscovery.net/infra/ci-runner";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
 
     jinko-seeder = {
       url = "git+ssh://git@git.novadiscovery.net/jinko/dorayaki/jinko-seeder";
@@ -233,6 +228,7 @@
     rippkgs.url = "github:replit/rippkgs";
     # rippkgs.inputs.nixpkgs.follows = "nixpkgs";
 
+    # TODO use from nixpkgs
     rsync-yazi-plugin = {
       url = "github:GianniBYoung/rsync.yazi";
       flake = false;
@@ -275,6 +271,7 @@
     # https://github.com/Alexays/Waybar/pull/3881
     waybar.url = "github:Alexays/Waybar?ref=pull/3881/head";
 
+    # doesn't work, hypridle seems better fitted ?
     wayland-pipewire-idle-inhibit = {
       url = "github:rafaelrc7/wayland-pipewire-idle-inhibit";
       # inputs.nixpkgs.follows = "nixpkgs";

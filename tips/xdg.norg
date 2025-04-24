@@ -1,4 +1,19 @@
 
+
+* MIME database (Multipurpose Internet Mail Extensions)
+
+https://specifications.freedesktop.org/shared-mime-info-spec/latest/
+
+
+
+* Presentation of mimeapps.list
+
+  Quoting https://wiki.archlinux.org/title/XDG_MIME_Applications :
+
+    Added Associations indicates that the applications support opening that MIME type. For example, bar.desktop and baz.desktop can open JPEG images. This might affect the application list you see when right-clicking a file in a file browser.
+    Removed Associations indicates that the applications do not support that MIME type. For example, baz.desktop cannot open H.264 video.
+    Default Applications indicates that the applications should be the default choice for opening that MIME type. For example, JPEG images should be opened with foo.desktop. This implicitly adds an association between the application and the MIME type. If there are multiple applications, they are tried in order.
+
 https://www.guyrutenberg.com/2018/01/20/set-default-application-using-xdg-mime/
 
 Locations:

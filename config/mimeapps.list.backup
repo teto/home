@@ -22,6 +22,10 @@ text/plain=nvim.desktop
 application/octet-stream=nvim.desktop
 # could be gio launch instead ?
 application/x-desktop=nvim.desktop
+application/octet-stream=nvim.desktop
+application/x-desktop=nvim.desktop
+text/*=nvim.desktop
+text/x-dbus-service=nvim.desktop
 
 [Added Associations]
 video/x-matroska=vlc.desktop;mpv.desktop;

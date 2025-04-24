@@ -2,8 +2,13 @@
 
 NIXPKGS := "/home/teto/nixpkgs"
 
+# select a target
 default:
     just --choose
+
+# find machines on local network
+avahi-discover:
+  avahi-browse -d local _workstation._tcp -t --resolve
 
 simwork-install-my-env:
   ln -sf {{justfile_directory()}}/../../nova/justfile justfile.local

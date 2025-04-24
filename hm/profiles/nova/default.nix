@@ -28,7 +28,7 @@
   };
 
   home.packages = [
-    # flakeSelf.inputs.jinko-seeder.packages.${pkgs.system}.jinko-seeder
+    flakeSelf.inputs.jinko-seeder.packages.${pkgs.system}.jinko-seeder
 
     pkgs.aws-vault-nova # wrap aws-vault with some specific variables
     pkgs.sqlitebrowser

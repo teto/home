@@ -1,1 +1,11 @@
+Avahi provides local hostname resolution using a "hostname.local"
  avahi-browse --all --ignore-local --resolve --terminate
+
+avahi exposes several tools such as:
+- avahi-browse -a
+- avahi-publish
+- avahi-resolve
+- avahi-set-host-name
+
+TODO advertise ssh server ?
+home-assistant ?

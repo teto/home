@@ -38,15 +38,24 @@ repl: (nixos-rebuild "repl" "")
 # |& nom
 [private]
 nixos-rebuild command builders="--option builders \"$NOVA_OVH1\" -j0":
-    nixos-rebuild \
-      --flake ~/home --override-input nixpkgs {{ NIXPKGS_REPO }} \
+    nom build \
+      .#nixosConfigurations.jedha.config.system.build.toplevel \
+      --override-input nixpkgs {{ NIXPKGS_REPO }} \
       --override-input hm {{ HM_REPO }} \
       --override-input nova-doctor {{ NOVOS_REPO }} \
       --override-input jinko-seeder {{ JK_SEEDER_REPO }} \
        {{ builders }} \
-       --no-write-lock-file --show-trace \
-       --use-remote-sudo \
-       {{ command }} |& nom
+       --no-write-lock-file --show-trace
+
+    nixos-rebuild \
+      --flake ~/home \
+      --use-remote-sudo \
+      --override-input nixpkgs {{ NIXPKGS_REPO }} \
+      --override-input hm {{ HM_REPO }} \
+      --override-input nova-doctor {{ NOVOS_REPO }} \
+      --override-input jinko-seeder {{ JK_SEEDER_REPO }} \
+       {{ builders }} \
+      switch
 
 build-nom hostname:
     nom build .#nixosConfigurations.{{ hostname }}.config.system.build.toplevel 
