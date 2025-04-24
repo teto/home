@@ -32,17 +32,21 @@ rollback: (nixos-rebuild "switch" "--rollback")
 
 repl: (nixos-rebuild "repl" "")
 
+# --log-format internal-json 
 # --override-input nova /home/teto/nova/doctor \
+# nom can hide when there is a lock
+# |& nom
 [private]
 nixos-rebuild command builders="--option builders \"$NOVA_OVH1\" -j0":
-    nixos-rebuild --flake ~/home --override-input nixpkgs {{ NIXPKGS_REPO }} \
+    nixos-rebuild \
+      --flake ~/home --override-input nixpkgs {{ NIXPKGS_REPO }} \
       --override-input hm {{ HM_REPO }} \
       --override-input nova-doctor {{ NOVOS_REPO }} \
       --override-input jinko-seeder {{ JK_SEEDER_REPO }} \
        {{ builders }} \
        --no-write-lock-file --show-trace \
        --use-remote-sudo \
-       {{ command }}
+       {{ command }} |& nom
 
 build-nom hostname:
     nom build .#nixosConfigurations.{{ hostname }}.config.system.build.toplevel 

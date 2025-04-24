@@ -101,6 +101,7 @@
     "browser.startup.page" = 3;
     "browser.tabs.closeWindowWithLastTab" = false;
     "browser.tabs.hoverpreview.enabled" = true;
+    "browser.tabs.maxOpenBeforeWarn" = 5;
 
     "browser.urlbar.placeholderName" = "DuckDuckGo";
     "browser.urlbar.speculativeConnect.enabled" = false;
@@ -120,6 +121,8 @@
     "layout.css.devPixelsPerPx" = "1";
     # "media.navigator.enabled" = false;
     # "media.video_stats.enabled" = false;
+    "media.autoplay.block-event.enabled" = true;
+    # "media.videocontrols.picture-in-picture.enable-when-switching-tabs.enabled" =  true;
     "network.IDN_show_punycode" = true;
     "network.allow-experiments" = false;
 

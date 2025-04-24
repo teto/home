@@ -87,7 +87,7 @@ in
 
         # pkgs.aider-chat # breaks
         pkgs.python3Packages.huggingface-hub
-        pkgs.repomix # to upload a codebase to llm
+        # pkgs.repomix # to upload a codebase to llm
       ];
     })
 
@@ -112,8 +112,8 @@ in
 
           # mpd
           pkgs.ncmpcpp
-          pkgs.mpc_cli
-          pkgs.ymuse # GUI
+          # pkgs.mpc_cli
+          # pkgs.ymuse # GUI
 
           pkgs.libva-utils
 
@@ -215,7 +215,7 @@ in
         # hopefully we can remove this from the environment
         # it's just that I can't setup latex correctly
         pkgs.libreoffice
-        pkgs.simple-scan
+        # pkgs.simple-scan
 
         # pkgs.nautilus # demande webkit/todo replace by nemo ?
       ];
@@ -430,7 +430,7 @@ in
         swaynotificationcenter # top cool
         swaynag-battery # https://github.com/NixOS/nixpkgs/pull/175905
         sway-launcher-desktop # fzf-based launcher
-        waypaper # sets wallpapers
+        # waypaper # sets wallpapers
         wlprop # like xprop, determines window parameters
         # swappy # e https://github.com/jtheoof/swappy
         # https://github.com/artemsen/swaykbdd # per window keyboard layout

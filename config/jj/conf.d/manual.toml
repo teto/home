@@ -132,6 +132,9 @@ commit_id = "green"
 [git]
 # avoided the '/' because it creates issues with gitlab slugifying for components
 push-bookmark-prefix = "matt-push-"
+fetch = ["up", "origin"] # ["upstream", "origin"]
+push = "gh"
+
 
 [snapshot]
 max-new-file-size = "10MiB"
