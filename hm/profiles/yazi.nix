@@ -7,7 +7,8 @@
 }:
 {
 
-  xdg.configFile."yazi/plugins/ouch.yazi".source = flakeSelf.inputs.ouch-yazi-plugin;
+  # now installed via yazi.plugins
+  # xdg.configFile."yazi/plugins/ouch.yazi".source = flakeSelf.inputs.ouch-yazi-plugin;
 
   xdg.configFile."yazi/plugins/rsync.yazi".source = flakeSelf.inputs.rsync-yazi-plugin;
 
@@ -24,5 +25,11 @@
     enableBashIntegration = true;
     enableZshIntegration = true;
     package = flakeSelf.inputs.yazi.packages.${pkgs.system}.yazi;
+
+    plugins = {
+
+      ouch = pkgs.yaziPlugins.ouch;
+
+    };
   };
 }

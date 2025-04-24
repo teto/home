@@ -38,7 +38,7 @@
 
         };
         "HDMI-A-2" = {
-          enable = "";
+          disable = "";
           # bg = "${dotfilesPath}/wallpapers/toureiffel.jpg fill";
 
         };
