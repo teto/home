@@ -3,6 +3,13 @@
 #
 # [plugins]
 
+# todo generate some via nix ?
+import = [
+  # "rocks-local.toml", # Paths are relative to the rocks.toml file directory by default
+  # "~/my-rocks.toml", # Path expansion is supported through vim.fn.expand
+  # "/home/user/my-rocks.toml", # Absolute paths are supported
+]
+
 # List of non-Neovim rocks.
 # This includes things like `toml` or other lua packages.
 [rocks]
@@ -199,9 +206,9 @@ rev = "89b7c45a48a661da88a3a574ef9fa90b936064a4"
 git = "levouh/tint.nvim"
 rev = "02bd0527a315a80e4e25bb2dd7b6994fb0daae01"
 
-[plugins.lualine-lsp-progress]
-git = "arkav/lualine-lsp-progress"
-rev = "56842d097245a08d77912edf5f2a69ba29f275d7"
+# [plugins.lualine-lsp-progress]
+# git = "arkav/lualine-lsp-progress"
+# rev = "56842d097245a08d77912edf5f2a69ba29f275d7"
 
 [plugins."iron.nvim"]
 # git = "vigemus/iron.nvim"
@@ -249,6 +256,11 @@ rev = "20acec2eba0f1af6621880e59ae692ab34210416"
 git = "whiteinge/diffconflicts"
 rev = "2.3.0"
 
+[plugins."lsp-progress.nvim"]
+git = "linrongbin16/lsp-progress.nvim"
+rev = "v1.0.13"
+# to call setup
+options = {}
 
 [config]
 plugins_dir = "plugins/"

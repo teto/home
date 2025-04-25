@@ -38,7 +38,6 @@
       port = secrets.jakku.sshPort;
       identityFile = "${secretsFolder}/ssh/id_rsa";
       identitiesOnly = true;
-      # port = 12666;
       serverAliveCountMax = 3;
       # sendEnv
       extraOptions = {

@@ -39,9 +39,11 @@ in
 
         # TODO make this generic/available to all users
         prod-runners =  []
-          # builtins.fromJSON (
+          builtins.fromJSON (
+            builtins.readFile "${flakeSelf.inputs.nova-doctor}/nix/hm/ci-runners/runners-generated.json"
+
           # # builtins.readFile "${flakeSelf.inputs.nova-ci}/configs/prod/runners-generated.json"
-          # )
+          )
           ;
 
         remoteBuilders = lib.listToAttrs (

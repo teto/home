@@ -5,7 +5,10 @@
 
   # depends on withSecrets ?
   enable = true;
-  ports = [ 12666 ];
+
+  # careful this is merged with my default sshd profile and so generates 2 ListenStream=12666
+  # in the systemd unit, thus triggering an error !
+  # ports = [ 12666 ];
 
   # # for sshfs edit or scp
   allowSFTP = true;

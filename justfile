@@ -140,6 +140,7 @@ stow-bin:
 # symlink e.g. aws credentials in their expected position
 stow-secrets:
     ln -s {{ SECRETS_FOLDER }}/aws  {{ home_directory() }}/.aws
+    ln -s {{ SECRETS_FOLDER }}/password-store  {{ home_directory() }}/.password-store
     # ln -s {{ justfile_directory() }}/ 
 
 

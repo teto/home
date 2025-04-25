@@ -38,6 +38,19 @@
     mode = "400";
   };
 
+  # OPENAI_API_KEY_PERSO
+  secrets."OPENAI_API_KEY_NOVA" = {
+    mode = "400";
+  };
+
+  secrets.huggingfaceToken = {
+    mode = "0440";
+    # TODO only readable by gitlab
+    # owner = config.users.users.teto.name;
+    # group = config.users.users.nobody.group;
+  };
+
+
   # lab_config_file
   # https://github.com/zaquestion/lab
   secrets."lab/lab.toml" = {
@@ -46,6 +59,12 @@
     # alternatively one can use
     # LAB_CORE_TOKEN
     # LAB_CORE_HOST
+    mode = "400";
+    # owner = config.users.users.teto.name;
+    # group = config.users.users.teto.group;
+  };
+
+  secrets.nix_extra_config = {
     mode = "400";
     # owner = config.users.users.teto.name;
     # group = config.users.users.teto.group;

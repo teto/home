@@ -17,7 +17,6 @@
       flakeSelf.inputs.nix-index-database.hmModules.nix-index
 
       flakeSelf.homeModules.teto-nogui
-      flakeSelf.homeModules.ollama
       flakeSelf.homeModules.experimental
       flakeSelf.homeProfiles.wezterm
       # flakeSelf.homeModules.gnome-shell
@@ -29,6 +28,7 @@
       ./programs/waybar.nix # TODO resotre ?
       ./programs/zsh.nix
 
+      ./services/ollama.nix
       ./services/kanshi.nix
       ./services/ssh-agent.nix
       ./services/swaync.nix

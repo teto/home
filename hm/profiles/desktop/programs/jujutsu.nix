@@ -24,6 +24,11 @@
         "user" = {
           email = secrets.accounts.mail.nova.email;
         };
+        "git" = {
+
+          push = "up";
+          fetch = "up";
+        };
       }
     ];
 

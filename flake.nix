@@ -814,7 +814,7 @@
         experimental = ./hm/profiles/experimental.nix;
         gnome-shell = ./hm/profiles/gnome.nix;
 
-        ollama = hosts/desktop/home-manager/users/teto/services/ollama.nix;
+        # ollama = hosts/desktop/home-manager/users/teto/services/ollama.nix;
 
         # (modulesFromDir ./hm/modules)
 
