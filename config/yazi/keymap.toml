@@ -17,6 +17,9 @@ prepend_keymap = [
     { on  = ["d"], run = [ 'yank --cut' ], desc = "move files" }
    ]
 
+# on   = "R"
+# run  = "plugin rsync --args='user@server.com'"
+# desc = "Copy files using rsync to default location"
 
 [input]
 

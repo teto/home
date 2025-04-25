@@ -3,9 +3,15 @@
 
 rsync -a /path/to/source/ /path/to/destination
 
+-e 'ssh -p 10022'
+
+-v to increase verbosity
+
+* Upload files
 
 * Download remote files
 rsync [-options] user@SOURCE_IP_ADDRESS:/SOURCE /DESTINATION
 
+rsh= remote shell
 rsync --rsh=ssh
 --inplace --no-whole-file

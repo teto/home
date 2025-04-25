@@ -649,6 +649,8 @@
           # generates a infinite trace right now
           nvim = self.nixosConfigurations.desktop.config.home-manager.users.teto.programs.neovim.finalPackage;
 
+
+
           inherit (myPkgs)
             jmdict
             local-ai-teto
@@ -660,6 +662,7 @@
             gpt4all-cuda
             termscp-matt
             pimsync-dev
+            rsync-yazi
             ;
 
           nvim-unwrapped = myPkgs.neovim-unwrapped;
@@ -991,6 +994,21 @@
 
               }
             );
+
+            rsync-yazi = myPkgs.yaziPlugins.mkYaziPlugin {
+                pname = "rsync.yazi";
+                version = "g${self.inputs.rsync-yazi-plugin.shortRev}";
+
+                src = self.inputs.rsync-yazi-plugin;
+
+                # meta = {
+                #   description = "Yazi plugin to preview archives";
+                #   homepage = "https://github.com/ndtoan96/ouch.yazi";
+                #   license = myPkgs.lib.licenses.mit;
+                #   maintainers = with myPkgs.lib.maintainers; [ ];
+                # };
+            };
+
           };
 
         # TODO
