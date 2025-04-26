@@ -38,7 +38,7 @@ in
       let
 
         # TODO make this generic/available to all users
-        prod-runners =  []
+        prod-runners =  
           builtins.fromJSON (
             builtins.readFile "${flakeSelf.inputs.nova-doctor}/nix/hm/ci-runners/runners-generated.json"
 

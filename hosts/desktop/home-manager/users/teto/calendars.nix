@@ -22,6 +22,7 @@
   home.packages = with pkgs; [
     # need gnome-accounts to make it work
     gnome-calendar
+    calcure # pytthon calendar viewer
   ];
 
   # accounts.contact = {

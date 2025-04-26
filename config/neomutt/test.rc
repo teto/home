@@ -5,6 +5,9 @@ set wait_key = no
 
 # macro index <F2> "<shell-escape>notmuch search --output=tags id:%m<enter>" "Show Notmuch tags for message"
 
+# check https://superuser.com/questions/333862/how-do-i-open-a-link-from-an-email-in-mutt-without-using-the-mouse
+# advises urlscan over urldecode
+macro index,pager \cb ": unset wait_key; set pipe_decode\n|w3m\n: set wait_key; unset pipe_decode\n" "call w3m to extract URLs out of a message"
 macro index \Cn "<enter-command>toggle sidebar_visible<enter><refresh>"
 
 # controls how date is displayed in index_format
