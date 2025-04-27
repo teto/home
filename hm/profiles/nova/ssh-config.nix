@@ -26,7 +26,6 @@ let
     # extraOptions.LocalCommand = "cd nixpkgs";
     # extraOptions.RemoteCommand = "cd nixpkgs";
     port = m.port;
-    ##
     match = "host ${m.hostname},${m.runnerName}";
   };
 in

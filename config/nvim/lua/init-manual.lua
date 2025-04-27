@@ -2,7 +2,7 @@
 -- https://github.com/nanotee/nvim-lua-guide#using-meta-accessors
 -- https://www.reddit.com/r/neovim/comments/o8dlwg/how_to_append_to_an_option_in_lua/
 -- local configs = require'nvim_lsp/configs'
-vim.loader.enable(false)
+-- vim.loader.enable(true)
 -- showcmdloc
 -- require('avante_lib').load()
 require('avante').setup({
@@ -82,6 +82,7 @@ vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 -- ,localoptions
 vim.o.sessionoptions = 'buffers,curdir,help,tabpages,winsize,winpos,localoptions'
 
+vim.opt.rtp:prepend(os.getenv('HOME') .. '/neovim/diffview.nvim')
 -- vim.opt.rtp:prepend(os.getenv('HOME') .. '/rocks-dev.nvim')
 -- vim.opt.rtp:prepend(os.getenv('HOME') .. '/rocks.nvim')
 
@@ -781,3 +782,5 @@ vim.api.nvim_create_user_command('LlmChat', function()
 end, { desc = 'TOTO' })
 
 -- print(package.cpath)
+-- vim.print(vim.opt.rtp)
+require('plugins.diffview')

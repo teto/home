@@ -90,7 +90,11 @@ in
     #   # config = "let g:sql_clib_path = '${pkgs.sqlite.out}/lib/libsqlite3.so'";
     # }
 
+    # I am replacing vim-fugitive  with diffview-nvim because it's lua and easier to change probably to support jujutsu
     { plugin = vim-fugitive; }
+
+    # testing my fork
+    # { plugin = diffview-nvim; }
 
     vim-scriptease # create commans like :Messages
 
