@@ -1,7 +1,7 @@
 { config, ... }:
 {
 
-  enable = false;
+  enable = true;
 
   # start it as teto such that it can find
   user = "teto";

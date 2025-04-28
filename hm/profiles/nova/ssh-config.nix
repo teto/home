@@ -1,6 +1,6 @@
 {
   # config,
-  # pkgs,
+  pkgs,
   lib,
   secrets,
   withSecrets,
@@ -10,12 +10,24 @@
   ...
 }:
 let
+  # TODO make this generic/available to all users
+  prod-runners =  
+    builtins.fromJSON (
+      builtins.readFile "${flakeSelf.inputs.nova-doctor}/nix/hm/ci-runners/runners-generated.json"
+    );
+
+  knownHostsFile = pkgs.writeText "ssh_known_hosts" (lib.concatMapStrings 
+        (runner: runner.publicHostKey) prod-runners)
+    ;
+
   mkSshMatchBlock = m: {
     user = secrets.nova.runners.nova-runner-1.sshUser;
     identityFile = secrets.nova.runners.nova-runner-1.sshKey;
     hostname = m.hostname;
     identitiesOnly = true;
     extraOptions = {
+      # TODO add it /generate from publicHostKey ?
+      userKnownHostsFile = "${knownHostsFile}";
       # userKnownHostsFile = lib.mkForce "${flakeSelf.inputs.nova-ci}/configs/prod/ssh_known_hosts";
 
       # persist connections when logging in remote builders
@@ -28,6 +40,8 @@ let
     port = m.port;
     match = "host ${m.hostname},${m.runnerName}";
   };
+
+
 in
 
 {
@@ -35,16 +49,6 @@ in
 
     matchBlocks =
       let
-
-        # TODO make this generic/available to all users
-        prod-runners =  
-          builtins.fromJSON (
-            builtins.readFile "${flakeSelf.inputs.nova-doctor}/nix/hm/ci-runners/runners-generated.json"
-
-          # # builtins.readFile "${flakeSelf.inputs.nova-ci}/configs/prod/runners-generated.json"
-          )
-          ;
-
         remoteBuilders = lib.listToAttrs (
           map
             (
