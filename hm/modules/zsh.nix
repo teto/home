@@ -132,9 +132,9 @@ in
     })
 
     (mkIf cfg.enableFzfGit {
-      programs.zsh.initExtra = ''source ${fzf-git-sh}/fzf-git-sh/fzf-git.sh'';
+      programs.zsh.initExtra = ''source ${fzf-git-sh}/share/fzf-git-sh/fzf-git.sh'';
 
-      programs.bash.initExtra = ''source ${fzf-git-sh}/fzf-git-sh/fzf-git.sh'';
+      programs.bash.initExtra = ''source ${fzf-git-sh}/share/fzf-git-sh/fzf-git.sh'';
     })
 
     (mkIf cfg.enableFancyCtrlZ {

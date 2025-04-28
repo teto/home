@@ -178,6 +178,7 @@ in
 {
   enableBlink = true;
   enableMyDefaults = true;
+  useAsManViewer = true;
 
   lsp.mapOnAttach = true;
 

@@ -168,6 +168,8 @@ in
         default = true;
       };
 
+      useAsManViewer = mkEnableOption "use as man viewer";
+
       enableMyDefaults = mkEnableOption "my favorite defaults";
 
       enableBlink = mkEnableOption "blink-cmp autocompletion";
@@ -263,7 +265,6 @@ in
         })
       '';
     })
-
     (mkIf cfg.enableMyDefaults {
       programs.neovim.extraLuaConfig = ''
         vim.opt.title = true -- vim will change terminal title
@@ -320,6 +321,13 @@ in
         '';
 
     })
+
+    (mkIf cfg.useAsManViewer {
+      home.sessionVariables = {
+        MANPAGER="nvim +Man!";
+      };
+    })
+
 
     (mkIf cfg.treesitter.enable {
       programs.neovim.plugins = treesitterPlugins;

@@ -3,11 +3,17 @@
   programs.fzf = {
     enable = true;
     enableBashIntegration = true;
-    enableZshIntegration = true;
+
+
+    # we roll out our own via
+    # enableZshIntegration
+    enableZshIntegration = false;
     # so that fzf takes into account .gitignore
     defaultCommand = "${pkgs.fd}/bin/fd --type f";
     # You can make CTRL-R paste the current query when there's no match
     # export FZF_CTRL_R_OPTS=''
+
+    # See https://github.com/junegunn/fzf/issues/4346#issuecomment-2810047340   showLastUse = true;
 
     historyWidgetOptions = [ "--bind enter:accept-or-print-query" ];
     fileWidgetOptions = [ "--tiebreak=index" ];

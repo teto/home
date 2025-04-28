@@ -513,6 +513,7 @@
 
             # TODO it should autoload those
             self.homeModules.meli
+            self.homeModules.nvimpager
 
             self.homeModules.bash
             self.homeModules.kitty

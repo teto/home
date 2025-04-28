@@ -10,6 +10,15 @@
 }:
 let
   cfg = config.programs.fzf;
+
+  # copied from hm/modules/programs/fzf.nix
+  zshIntegration =
+    # if hasShellIntegrationEmbedded then
+      ''
+        if [[ $options[zle] = on ]]; then
+          eval "$(${lib.getExe cfg.package} --zsh | sed -e '/zmodload/s/perl/perl_off/' -e '/selected/s#fc -rl#fc -rlt "%d/%b %H:%M:%S"#')"
+        fi
+      '';
 in
 {
   options = {
@@ -19,6 +28,8 @@ in
       enableClipboardSelector = lib.mkEnableOption "clipboard";
       zshPassCompletion = lib.mkEnableOption "ZSH pass completion";
       manix = lib.mkEnableOption "manix";
+
+      showLastUse = lib.mkEnableOption "Show last use";
 
       # useFdForCompgen = lib.mkEnableOption "compgenPath";
       # custom = lib.mkOption {
@@ -50,7 +61,7 @@ in
       in
       {
         programs.bash.initExtra = fzfCompgen;
-        programs.zsh.initExtra = fzfCompgen;
+        programs.zsh.initContent = fzfCompgen;
       }
     ))
 
@@ -82,7 +93,7 @@ in
     })
     (lib.mkIf cfg.zshGitCheckoutAutocompletion {
 
-      programs.zsh.initExtra = ''
+      programs.zsh.initContent = ''
         _fzf_complete_git() {
             ARGS="$@"
             local branches
@@ -104,9 +115,21 @@ in
 
     })
 
+    
+    # TODO do https://github.com/junegunn/fzf/issues/4346#issuecomment-2810047340
+    (lib.mkIf cfg.showLastUse {
+
+      # FZF_CTRL_R_OPTS
+      programs.fzf.historyWidgetOptions = ["--with-nth 2"];
+
+      programs.zsh.initContent = ''
+        ${zshIntegration}
+        '';
+    })
+
     (lib.mkIf cfg.zshPassCompletion {
 
-      programs.zsh.initExtra = ''
+      programs.zsh.initContent = ''
         _fzf_complete_pass() {
           _fzf_complete +m -- "$@" < <(
             local prefix

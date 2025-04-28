@@ -125,8 +125,8 @@
       # initial_session => autologin !!
       initial_session = {
         # should be the one provided byy home-manager
-        command = "${pkgs.sway}/bin/sway";
-        # command = "sway";
+        # command = "${pkgs.sway}/bin/sway";
+        command = "sway";
         user = "teto";
       };
 
