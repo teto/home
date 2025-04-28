@@ -309,6 +309,7 @@ in
         nix-diff
         nix-prefetch-git
         nix-tree
+        nix-melt
         netcat-gnu # plain 'netcat' is the bsd one
         gitAndTools.diff-so-fancy
         jq

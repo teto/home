@@ -272,15 +272,15 @@ let
 
 in
 {
-  email.maildirBasePath = mailDirBasePath;
-}
-// lib.optionalAttrs withSecrets {
-  email.accounts = {
-    inherit
-      # gmail
-      fastmail
-      # nova # access pb
-      ;
+  email = {
+    maildirBasePath = mailDirBasePath;
+    accounts = lib.optionalAttrs withSecrets {
+      inherit
+        # gmail
+        fastmail
+        # nova # access pb
+        ;
+    };
   };
 
 }

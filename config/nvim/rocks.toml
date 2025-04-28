@@ -25,8 +25,8 @@ import = [
 # "diffview.nvim" = "scm"
 "haskell-tools.nvim" = "4.4.2"
 
-# needed the patch from https://github.com/nvimtools/none-ls.nvim/pull/248
-"none-ls.nvim" = "scm"
+# needed the patch from https://github.com/nvimtools/none-ls.nvim/pull/277/
+# "none-ls.nvim" = "scm"
 "none-ls-extras.nvim" = "scm"
 
 "bufferline.nvim" = "4.9.1"
@@ -152,9 +152,20 @@ rev = "edc603d4cda7894a743e383e16c638e206d03148"
 git = "teto/vim-listchars"
 rev = "c9839537f8a6a32726a504cc34113719a7dcd8fc"
 
+
+[plugins."none-ls.nvim"]
+
+git = "ulisses-cruz/none-ls.nvim"
+rev = "main"
+
 [plugins."none-ls-luacheck.nvim"]
 git = "gbprod/none-ls-luacheck.nvim"
 rev = "v0.0.1"
+
+[plugins."none-ls-shellcheck.nvim"]
+git = "gbprod/none-ls-shellcheck.nvim"
+rev = "0f84461241e76e376a95fb7391deac82dc3efdbf"
+
 
 [plugins.i3-vim-syntax]
 git = "PotatoesMaster/i3-vim-syntax"
@@ -195,10 +206,6 @@ rev = "1ea1c79372d7d93c88fd97543880927b7635e3d2"
 [plugins."baleia.nvim"]
 git = "m00qek/baleia.nvim"
 rev = "v1.4.0"
-
-[plugins."none-ls-shellcheck.nvim"]
-git = "gbprod/none-ls-shellcheck.nvim"
-rev = "0f84461241e76e376a95fb7391deac82dc3efdbf"
 
 [plugins.vim-aftercolors]
 git = "calvinchengx/vim-aftercolors"

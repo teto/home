@@ -13,7 +13,8 @@ with lib;
 let
   cfg = config.programs.zsh;
 
-  fzf-git-sh = flakeSelf.inputs.fzf-git-sh;
+  # fzf-git-sh = flakeSelf.inputs.fzf-git-sh;
+  fzf-git-sh = pkgs.fzf-git-sh;
 
   # /tree/master/plugins/zbell
   termTitleSubmodule = types.submodule (import ./title-submodule.nix);
@@ -131,9 +132,9 @@ in
     })
 
     (mkIf cfg.enableFzfGit {
-      programs.zsh.initExtra = ''source ${fzf-git-sh}/fzf-git.sh'';
+      programs.zsh.initExtra = ''source ${fzf-git-sh}/fzf-git-sh/fzf-git.sh'';
 
-      programs.bash.initExtra = ''source ${fzf-git-sh}/fzf-git.sh'';
+      programs.bash.initExtra = ''source ${fzf-git-sh}/fzf-git-sh/fzf-git.sh'';
     })
 
     (mkIf cfg.enableFancyCtrlZ {

@@ -748,6 +748,7 @@ require('plugins.nvim-treesitter-textobjects')
 vim.lsp.enable('rust_analyzer')
 vim.lsp.enable('clangd')
 vim.lsp.enable('pyright')
+vim.lsp.enable('yamlls')
 
 -- Autoload from everything lsp/ in rtp
 -- local configs = {}

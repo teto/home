@@ -50,10 +50,11 @@
 
     flake-utils.url = "github:numtide/flake-utils";
 
-    fzf-git-sh = {
-      url = "github:junegunn/fzf-git.sh";
-      flake = false;
-    };
+    # in nixpkgs
+    # fzf-git-sh = {
+    #   url = "github:junegunn/fzf-git.sh";
+    #   flake = false;
+    # };
 
     fenix = {
       # used for nightly rust devtools
