@@ -9,6 +9,7 @@ l = ["log", "-r", "(main..@):: | (main..@)-"]
 # sp = [""]
 
 # git log-like
+gp = ["git", "push"]
 gl = ["log", "-r", "::@"]
 fa = ["git", "fetch", "--all-remotes"]
 colocate = ["git", "init", "--colocate"]

@@ -80,6 +80,7 @@ nvim-lspconfig= "1.7.0"
 orgmode = "0.5.3"
 neogit = "2.0.0"  # provides a nicer git status (than fugitive) ?
 "diffview.nvim" = "scm"
+tree-sitter-norg = "0.2.6"
 # tree-sitter-orgmode = "2.0.0"
 # nvim-treesitter-textobjects = "scm"
 # "rocks-treesitter.nvim" = "1.0.3"
