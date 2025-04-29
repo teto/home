@@ -14,6 +14,7 @@ declare -A domains
 domains['kh.novavault.cloud/']="nova"
 domains['jinko.ai']="nova"
 domains['git.novadiscovery.net']="nova"
+domains['novinfra.net']="nova"
 domains['accounts.google.com']="nova"  # for vault login
 
 

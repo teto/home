@@ -47,7 +47,6 @@ in
 
           # Set this to the server IP and port.
 
-          # kh1.vault.dev.jinko.ai
           inherit endpoint;
           # endpoint = "10.100.0.1:51820"; # ToDo: route to endpoint not automatically configured https://wiki.archlinux.org/index.php/WireGuard#Loop_routing https://discourse.nixos.org/t/solved-minimal-firewall-setup-for-wireguard-client/7577
 
