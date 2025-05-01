@@ -103,7 +103,7 @@ version = "9.3.0"
 
 [plugins."gp.nvim"]
 # rev = "scm"
-dir = "/home/teto/gp.nvim"
+dir = "/home/teto/neovim/gp.nvim"
 
 
 [plugins.vim-sorcerer]

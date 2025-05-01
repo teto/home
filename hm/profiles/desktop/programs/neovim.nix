@@ -230,9 +230,6 @@ in
   # plugins = with pkgs.vimPlugins; [
   #  tint-nvim
   # ];
-  # -- vim.lsp.set_log_level("info")
-  # -- require my own manual config
-  # -- logs are written to /home/teto/.cache/vim-lsp.log
 
   # viml config, to test home-manager setup
   # extraConfig = ''
