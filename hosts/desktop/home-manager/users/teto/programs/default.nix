@@ -1,0 +1,4 @@
+{
+
+  chawan.enable = true;
+}
