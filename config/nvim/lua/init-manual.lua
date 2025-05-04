@@ -5,6 +5,12 @@
 -- vim.loader.enable(true)
 -- showcmdloc
 -- require('avante_lib').load()
+--
+--
+--
+-- https://www.reddit.com/r/neovim/comments/1kcz8un/great_improvements_to_the_cmdline_in_nightly/
+-- require('vim._extui').enable({})
+
 require('avante').setup({
     provider = 'openai',
 

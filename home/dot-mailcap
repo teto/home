@@ -1,5 +1,6 @@
 # copied from https://github.com/neomutt/neomutt-contrib/blob/main/sample.mailcap
 # text/html; netscape -remote openURL\(%s\)
+text/html; w3m -dump -o document_charset=%{charset} '%s'; nametemplate=%s.html; copiousoutput
 text/html; firefox %s
 image/gif; xv %s
 image/jpg; xv %s
@@ -33,7 +34,6 @@ text/calendar; khal import '%s'
 text/*; less '%s';
 # khal import [-a CALENDAR] [--batch] [--random-uid|-r] ICSFILE
 image/*; eog '%s';
-text/html; w3m -dump -o document_charset=%{charset} '%s'; nametemplate=%s.html; copiousoutput
 application/vnd.openxmlformats-officedocument.wordprocessingml.document; libreoffice '%s'
 
 *; xdg-open %s

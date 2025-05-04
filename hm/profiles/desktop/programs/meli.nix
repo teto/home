@@ -10,7 +10,8 @@
 {
   enable = withSecrets;
 
-  package = pkgs.meli-git;
+  # package = pkgs.meli-git;
+  package = pkgs.meli;
 
   includes = [
     "manual.toml"

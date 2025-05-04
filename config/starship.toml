@@ -122,27 +122,28 @@ disabled = true
 
 # JUJUTSU custom
 # see https://github.com/starship/starship/issues/6076#issuecomment-2637346408
-# [custom.jj]
-# command = '''
-# jj log -r@ -n1 --ignore-working-copy --no-graph --color always  -T '
-#   separate(" ",
-#     bookmarks.map(|x| truncate_end(10, x.name(), "…")).join(" "),
-#     tags.map(|x| truncate_end(10, x.name(), "…")).join(" "),
-#     surround("\"", "\"", truncate_end(24, description.first_line(), "…")),
-#     if(conflict, "conflict"),
-#     if(divergent, "divergent"),
-#     if(hidden, "hidden"),
-#   )
-# '
-# '''
-# when = "jj root --ignore-working-copy"
-# symbol = " "
-
 [custom.jj]
-command='''starship-jj --ignore-working-copy starship prompt'''
-format = "[$symbol](blue bold) $output "
-symbol = "󱗆 "
+command = '''
+jj log -r@ -n1 --ignore-working-copy --no-graph --color always  -T '
+  separate(" ",
+    bookmarks.map(|x| truncate_end(10, x.name(), "…")).join(" "),
+    tags.map(|x| truncate_end(10, x.name(), "…")).join(" "),
+    surround("\"", "\"", truncate_end(24, description.first_line(), "…")),
+    if(conflict, "conflict"),
+    if(divergent, "divergent"),
+    if(hidden, "hidden"),
+  )
+'
+'''
 when = "jj root --ignore-working-copy"
+symbol = " "
+
+# this creates rogue processes that eat cpu
+# [custom.jj]
+# command='''starship-jj --ignore-working-copy starship prompt'''
+# format = "[$symbol](blue bold) $output "
+# symbol = "󱗆 "
+# when = "jj root --ignore-working-copy"
 
 #
 # [custom.jjstate]

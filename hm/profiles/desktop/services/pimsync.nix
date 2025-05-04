@@ -25,6 +25,6 @@
 
   enable = true;
 
-  package = pkgs.pimsync-dev;
+  # package = pkgs.pimsync-dev;
 
 }

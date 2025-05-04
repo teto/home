@@ -11,7 +11,7 @@ in
   options = {
     programs.cliphist = {
       enableFzfIntegration = lib.mkEnableOption "fzf integration";
-      enablePrimay = (lib.mkEnableOption "fzf integration") // {
+      enablePrimary = (lib.mkEnableOption "fzf integration") // {
         description = "Watch wl-clipboard for primary selection";
 
       };

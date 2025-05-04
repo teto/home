@@ -272,5 +272,9 @@ rev = "v1.0.13"
 # to call setup
 options = {}
 
+[plugins."visual-whitespace.nvim"]
+git = "mcauley-penney/visual-whitespace.nvim"
+rev = "d55348fab9254bf208766efac9a35100ac474ec0"
+
 [config]
 plugins_dir = "plugins/"

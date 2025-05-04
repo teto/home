@@ -7,7 +7,8 @@
 
     # we roll out our own via
     # enableZshIntegration
-    enableZshIntegration = true;
+    enableZshIntegration = false;
+    enableZshIntegrationAdvanced = true;
     # so that fzf takes into account .gitignore
     defaultCommand = "${pkgs.fd}/bin/fd --type f";
     # You can make CTRL-R paste the current query when there's no match

@@ -16,8 +16,10 @@ let
       builtins.readFile "${flakeSelf.inputs.nova-doctor}/nix/hm/ci-runners/runners-generated.json"
     );
 
-  knownHostsFile = pkgs.writeText "ssh_known_hosts" (lib.concatMapStrings 
-        (runner: runner.publicHostKey) prod-runners)
+    knownHostsFile = pkgs.writeText "ssh_known_hosts" 
+      "${flakeSelf.inputs.nova-doctor}/nix/hm/ci-runners/ssh_known_hosts"
+    # (lib.concatMapStrings 
+    #     (runner: runner.publicHostKey) prod-runners)
     ;
 
   mkSshMatchBlock = m: {

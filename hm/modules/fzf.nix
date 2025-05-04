@@ -12,11 +12,28 @@ let
   cfg = config.programs.fzf;
 
   # copied from hm/modules/programs/fzf.nix
+  # -t '%s'
   zshIntegration =
     # if hasShellIntegrationEmbedded then
       ''
         if [[ $options[zle] = on ]]; then
-          eval "$(${lib.getExe cfg.package} --zsh | sed -e '/zmodload/s/perl/perl_off/' -e '/selected/s#fc -rl#fc -rlt "%d/%b %H:%M:%S"#')"
+              awk_filter='
+              {
+                ts = int($2)
+                delta = systime() - ts
+                delta_days = int(delta / 86400)
+                if (delta < 0) { $2="+" (-delta_days) "d" }
+                else if (delta_days < 1 && delta < 72000) { $2=strftime("%H:%M", ts) }
+                else if (delta_days == 0) { $2="1d" }
+                else { $2=delta_days "d" }
+                line=$0; $1=""; $2=""
+                if (!seen[$0]++) print line
+              }'
+              fc_opts='-i'
+              n=2
+          # %s => timestamp
+          # fc -rl $fc_opts -t '%s' 1 | sed -E "s/^ *//" | awk "$awk_filter" |
+          eval "$(${lib.getExe cfg.package} --zsh | sed -e '/zmodload/s/perl/perl_off/' -e '/selected/s#fc -rl#fc -rlt "%s"#')"
         fi
       '';
 in
@@ -29,7 +46,7 @@ in
       zshPassCompletion = lib.mkEnableOption "ZSH pass completion";
       manix = lib.mkEnableOption "manix";
 
-      showLastUse = lib.mkEnableOption "Show last use";
+      enableZshIntegrationAdvanced = lib.mkEnableOption "Show last use";
 
       # useFdForCompgen = lib.mkEnableOption "compgenPath";
       # custom = lib.mkOption {
@@ -117,10 +134,17 @@ in
 
     
     # TODO do https://github.com/junegunn/fzf/issues/4346#issuecomment-2810047340
-    (lib.mkIf cfg.showLastUse {
+    (lib.mkIf cfg.enableZshIntegrationAdvanced {
 
       # FZF_CTRL_R_OPTS
-      programs.fzf.historyWidgetOptions = ["--with-nth 2"];
+
+    # -n, --nth=N[,..]         Comma-separated list of field index expressions
+    #                          for limiting search scope. Each can be a non-zero
+    #                          integer or a range expression ([BEGIN]..[END]).
+    # --with-nth=N[,..]        Transform the presentation of each line using
+    #                          field index expressions
+    # --accept-nth=N[,..]      Define which fields to print on accept
+      programs.fzf.historyWidgetOptions = ["--with-nth=2.."];
 
       programs.zsh.initContent = ''
         ${zshIntegration}
