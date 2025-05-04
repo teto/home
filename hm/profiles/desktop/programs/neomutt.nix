@@ -30,8 +30,10 @@
 
   # will search into $XDG_CONFIG_HOME/neomutt/
   extraConfig = ''
+    # important one to avoid
+    set wait_key = no
     source test.rc
-  '';
+    '';
 
   macros = [
     {

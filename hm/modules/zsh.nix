@@ -13,9 +13,6 @@ with lib;
 let
   cfg = config.programs.zsh;
 
-  # fzf-git-sh = flakeSelf.inputs.fzf-git-sh;
-  fzf-git-sh = pkgs.fzf-git-sh;
-
   # /tree/master/plugins/zbell
   termTitleSubmodule = types.submodule (import ./title-submodule.nix);
 
@@ -41,9 +38,8 @@ in
   options = {
     programs.zsh = {
 
-      enableTetoConfig = mkEnableOption "Things I am used to";
-      enableFzfGit = mkEnableOption "Fzf-git";
-      enableVocageSensei = mkEnableOption "Vocage sensei";
+      enableTetoConfig = lib.mkEnableOption "Things I am used to";
+      enableVocageSensei = lib.mkEnableOption "Vocage sensei";
 
       mcfly = mkOption {
         # type = termTitleSubmodule;
@@ -115,8 +111,8 @@ in
   config = mkIf cfg.enable (mkMerge [
     (mkIf cfg.enableProfiling {
 
-      # programs.zsh.initExtraFirst = lib.mkBefore "zmodload zsh/zprof";
-      # programs.zsh.initExtra = lib.mkAfter "zprof";
+      # programs.zsh.initContentFirst = lib.mkBefore "zmodload zsh/zprof";
+      # programs.zsh.initContent = lib.mkAfter "zprof";
 
       home.file.".config/zsh/.zshrc".text = mkMerge [
         (lib.mkBefore "zmodload zsh/zprof")
@@ -126,19 +122,13 @@ in
 
     (mkIf cfg.enableVocageSensei {
 
-      programs.zsh.initExtra = ''
+      programs.zsh.initContent = ''
         # do nothing
       '';
     })
 
-    (mkIf cfg.enableFzfGit {
-      programs.zsh.initExtra = ''source ${fzf-git-sh}/share/fzf-git-sh/fzf-git.sh'';
-
-      programs.bash.initExtra = ''source ${fzf-git-sh}/share/fzf-git-sh/fzf-git.sh'';
-    })
-
     (mkIf cfg.enableFancyCtrlZ {
-      programs.zsh.initExtra = ''
+      programs.zsh.initContent = ''
         fancy-ctrl-z () {
           if [[ $#BUFFER -eq 0 ]]; then
             BUFFER="fg"
@@ -180,7 +170,7 @@ in
         # autoload zsh-mime-setup
         # -n Do not add a newline to the output.
         # print -Pn "\e]0;$(echo "$1")\a"
-        programs.zsh.initExtra = ''
+        programs.zsh.initContent = ''
           ${shellSetTitleFunctions}
 
 
@@ -199,12 +189,12 @@ in
           trap set_term_title DEBUG
         '';
 
-        # config.programs.zsh.initExtra;
+        # config.programs.zsh.initContent;
       }
     )
 
     (mkIf cfg.enableFancyCursor {
-      programs.zsh.initExtra = ''
+      programs.zsh.initContent = ''
         # set cursor depending in vi mode
         # inspired by http://lynnard.me/blog/2014/01/05/change-cursor-shape-for-zsh-vi-mode/
         # zle-line-init 
@@ -230,7 +220,7 @@ in
     (mkIf cfg.mcfly.enable {
 
       # ${}
-      programs.zsh.initExtra = ''
+      programs.zsh.initContent = ''
         export MCFLY_RESULTS_SORT=LAST_RUN
         export MCFLY_RESULTS=200
         export MCFLY_FZF_NO_STRICT_ORDERING=1
@@ -243,7 +233,7 @@ in
     })
     (mkIf cfg.zbell.enable {
       # TODO source zbell
-      programs.zsh.initExtra = '''';
+      programs.zsh.initContent = '''';
     })
 
     # home.sessionVariables = {
@@ -275,7 +265,7 @@ in
         # chpwd_functions+=fre_chpwd
         # if [ -f "$ZDOTDIR/zshrc" ]; then
         # fi
-        initExtra = ''
+        initContent = ''
           source $ZDOTDIR/zshrc
         '';
 

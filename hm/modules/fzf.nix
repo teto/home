@@ -11,6 +11,9 @@
 let
   cfg = config.programs.fzf;
 
+  # fzf-git-sh = flakeSelf.inputs.fzf-git-sh;
+  fzf-git-sh = pkgs.fzf-git-sh;
+
   # copied from hm/modules/programs/fzf.nix
   # -t '%s'
   zshIntegration =
@@ -42,6 +45,8 @@ in
     programs.fzf = {
       enableLiveRegex = lib.mkEnableOption "test";
       zshGitCheckoutAutocompletion = lib.mkEnableOption "zsh git checkout autocompletion";
+      enableFzfGit = lib.mkEnableOption "Fzf-git";
+
       enableClipboardSelector = lib.mkEnableOption "clipboard";
       zshPassCompletion = lib.mkEnableOption "ZSH pass completion";
       manix = lib.mkEnableOption "manix";
@@ -165,6 +170,13 @@ in
         }
       '';
     })
+
+    (lib.mkIf cfg.enableFzfGit {
+      programs.zsh.initContent = ''source ${fzf-git-sh}/share/fzf-git-sh/fzf-git.sh'';
+
+      programs.bash.initExtra = ''source ${fzf-git-sh}/share/fzf-git-sh/fzf-git.sh'';
+    })
+
 
     # actually exists already "cliphist-fzf"
     # alias fzf-clip to it ?

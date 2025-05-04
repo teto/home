@@ -26,7 +26,7 @@
 
   home.packages = [
 
-    # flakeSelf.inputs.lux.packages.${pkgs.system}.lux-cli # fails to build
+    flakeSelf.inputs.lux.packages.${pkgs.system}.lux-cli # fails to build
   ];
 
   # services.trayscale.enable = true;

@@ -4,6 +4,8 @@
     enable = true;
     enableBashIntegration = true;
 
+    enableFzfGit = true;
+
 
     # we roll out our own via
     # enableZshIntegration

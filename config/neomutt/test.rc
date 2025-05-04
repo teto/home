@@ -1,7 +1,11 @@
 # vim: set fdm=marker fenc=utf-8 ff=unix sts=0 ft=neomuttrc :
 
-# important one to avoid
-set wait_key = no
+set debug_file=~/.cache/neomutt.log
+
+# between 1 and 5
+set debug_level=4
+
+set sendmail="/nix/store/xld67m8fzhl92yaxc7d3rf6lpgkhpq92-msmtp-1.8.26/bin/msmtpq  --read-envelope-from --read-recipients"
 
 # macro index <F2> "<shell-escape>notmuch search --output=tags id:%m<enter>" "Show Notmuch tags for message"
 
@@ -115,7 +119,6 @@ set show_multipart_alternative = "info"
 
 # exec change-vfolder
 #
-# set debug_file = neolog
 # between 1-5, 2 recommended
 # set debug_level = 2
 

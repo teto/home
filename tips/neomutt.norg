@@ -1,11 +1,19 @@
 
+* debug 
+
+  set sendmail?
+
+  -d loglevel
+  # set debug_file = neolog
+
+
 type `:bind` to list mappings
 type `:macro` to list macros ! 
 
 flags are listed in : flag_chars
 https://neomutt.org/guide/gettingstarted
 
-My config
+* My config
 
 lua-source ~/.config/neomutt/utils.lua
 folder-hook neomutt 'lua chgdir("~/.maildirs/NetC/neomutt", true)'

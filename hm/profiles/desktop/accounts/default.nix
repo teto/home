@@ -30,7 +30,7 @@ let
   accountExtra = {
     neomutt = {
       enable = true;
-      sendMailCommand = "msmtpq --debug --read-envelope-from --read-recipients";
+      sendMailCommand = "${pkgs.msmtp}/bin/msmtpq --debug --read-envelope-from --read-recipients";
 
     };
 

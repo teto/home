@@ -16,7 +16,7 @@ let
       builtins.readFile "${flakeSelf.inputs.nova-doctor}/nix/hm/ci-runners/runners-generated.json"
     );
 
-    knownHostsFile = pkgs.writeText "ssh_known_hosts" 
+    generatedKnownHostsFile = pkgs.writeText "ssh_known_hosts" 
       "${flakeSelf.inputs.nova-doctor}/nix/hm/ci-runners/ssh_known_hosts"
     # (lib.concatMapStrings 
     #     (runner: runner.publicHostKey) prod-runners)
@@ -29,7 +29,12 @@ let
     identitiesOnly = true;
     extraOptions = {
       # TODO add it /generate from publicHostKey ?
-      userKnownHostsFile = "${knownHostsFile}";
+      # GlobalKnownHostsFile
+      # userKnownHostsFile = "${knownHostsFile}";
+      userKnownHostsFile = "/home/teto/.config/ssh/known_hosts";
+      # needs to be an absolute path
+      # knownHostsCommand = ""
+      # knownHostsCommand = "/home/teto/.config/ssh/known_hosts";
       # userKnownHostsFile = lib.mkForce "${flakeSelf.inputs.nova-ci}/configs/prod/ssh_known_hosts";
 
       # persist connections when logging in remote builders
@@ -73,4 +78,6 @@ in
         };
       };
   };
+
+  xdg.configFile."ssh/generated_known_hosts".source = generatedKnownHostsFile;
 }

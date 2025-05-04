@@ -53,12 +53,7 @@ let
     #   plugin = bufferline-nvim;
     # })
 
-    # (luaPlugin { plugin = nvim-peekup; })
-    # (luaPlugin {
-    #   plugin = pywal-nvim;
-    #   config = ''
-    #   '';
-    # })
+    # (luaPlugin { plugin = nvim-peekup; })  # deno-based markdown preview
 
     # TODO look at peek.nvim too
     # (luaPlugin {

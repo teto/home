@@ -161,6 +161,9 @@ in
       # mkBefore
       # ;config.xsession.windowManager.i3.config.keybindings
       keybindings = sharedConfig.sharedKeybindings // {
+        # triggers even when there is a window
+        # "--whole-window BTN_RIGHT" = "exec ${rofi}/bin/rofi -modi 'drun' -show drun";
+
         "${mod}+grave" = "${pkgs.swaynotificationcenter}/bin/swaync-client -swb";
         "${mod}+p" = "exec ${pkgs.tessen}/bin/tessen --dmenu=rofi";
 

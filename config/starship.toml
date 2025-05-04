@@ -123,8 +123,9 @@ disabled = true
 # JUJUTSU custom
 # see https://github.com/starship/starship/issues/6076#issuecomment-2637346408
 [custom.jj]
+# we limit to 4
 command = '''
-jj log -r@ -n1 --ignore-working-copy --no-graph --color always  -T '
+jj log -r@ -n4 --ignore-working-copy --no-graph --color always  -T '
   separate(" ",
     bookmarks.map(|x| truncate_end(10, x.name(), "…")).join(" "),
     tags.map(|x| truncate_end(10, x.name(), "…")).join(" "),

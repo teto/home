@@ -12,8 +12,6 @@
   programs.zsh = {
     enable = true;
 
-    enableFzfGit = true;
-
     # $HOME is prepend hence the issues
     dotDir = ".config/zsh";
 
@@ -58,9 +56,6 @@
       };
     };
 
-    # initExtraFirst = "
-    #   ";
-
     enableCompletion = true;
     #   bindkey "^R" history-incremental-search-backward
     #   bindkey "^K"      kill-whole-line                      # ctrl-k
@@ -85,7 +80,7 @@
     # source ${pkgs.awscli2}/share/zsh/site-functions/_aws
     # initExtraFirst
     # auto
-    initExtra = ''
+    initContent = ''
 
       # workaround aws drv bug see https://github.com/NixOS/nixpkgs/issues/275770#issuecomment-1977471765
       # Default to standard vi bindings, regardless of editor string

@@ -276,5 +276,9 @@ options = {}
 git = "mcauley-penney/visual-whitespace.nvim"
 rev = "d55348fab9254bf208766efac9a35100ac474ec0"
 
+[plugins."hunk.nvim"]
+git = "julienvincent/hunk.nvim"
+rev = "v1.6.0"
+
 [config]
 plugins_dir = "plugins/"

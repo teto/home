@@ -9,6 +9,8 @@
 }:
 {
 
+  # HashKnownHosts no
+
   # mkForce needed to override doctor's config
   enable = lib.mkForce true;
   # When enabled, a private key that is used during authentication will be added to ssh-agent if it is running (with confirmation enabled if set to ‘confirm’). The argument must be ‘no’ (the default), ‘yes’, ‘confirm’ (optionally followed by a time

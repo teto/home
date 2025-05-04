@@ -27,7 +27,7 @@ in
 
     (lib.mkIf cfg.enable {
 
-      programs.zsh.initExtra = ''
+      programs.zsh.initContent = ''
         fre_chpwd() {
           fre --add "$(pwd)"
         }

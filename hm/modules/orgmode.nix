@@ -32,7 +32,7 @@ in
   config = mkIf cfg.enable (mkMerge [
 
     (mkIf cfg.enableFancyCtrlZ {
-      programs.zsh.initExtra = ''
+      programs.zsh.initContent = ''
         fancy-ctrl-z () {
           if [[ $#BUFFER -eq 0 ]]; then
             BUFFER="fg"

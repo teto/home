@@ -12,7 +12,7 @@
   # --max-cache-ttl
   maxCacheTtl = 86400; # in seconds (86400 = 1 day)
 
-  pinentryPackage = pkgs.pinentry-gnome3;
+  pinentry.package = pkgs.pinentry-gnome3;
   # see https://github.com/rycee/home-manager/issues/908
   # could try ncurses as well
   # extraConfig = ''

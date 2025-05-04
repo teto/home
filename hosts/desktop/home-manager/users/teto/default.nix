@@ -126,6 +126,7 @@
     developer = true;
     llms = true;
     enableIMPackages = true;
+    japanese = true;
   };
   # package-sets.enableDesktopGUIPackages = true;
 
