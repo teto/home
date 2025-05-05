@@ -209,10 +209,10 @@
 
     nur.url = "github:nix-community/NUR";
 
-    ouch-yazi-plugin = {
-      url = "github:ndtoan96/ouch.yazi";
-      flake = false;
-    };
+    # ouch-yazi-plugin = {
+    #   url = "github:ndtoan96/ouch.yazi";
+    #   flake = false;
+    # };
 
     # https://git.sr.ht/~whynothugo/pimsync
     pimsync-src = {

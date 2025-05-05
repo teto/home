@@ -10,6 +10,10 @@ import = [
   # "/home/user/my-rocks.toml", # Absolute paths are supported
 ]
 
+
+[dev]
+path = "~/neovim"
+
 # List of non-Neovim rocks.
 # This includes things like `toml` or other lua packages.
 [rocks]

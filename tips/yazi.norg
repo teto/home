@@ -2,10 +2,18 @@
 
 https://yazi-rs.github.io/docs/plugins/overview#logging
 
+~/.local/state/yazi/yazi.log
+
+YAZI_LOG=debug yazi
+
 log level 
 
 yazi debug
+I
 
+file -bL --mime-type
+
+message/rfc822
 * list of plugins at https://github.com/yazi-rs/plugins/tree/main/git.yazi
 
 To install for instance:

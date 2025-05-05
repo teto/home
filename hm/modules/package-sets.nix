@@ -229,6 +229,7 @@ in
         # libsecret  # to consult
         # newsboat #
         carl # not upstreamed yet. cargo cal
+        python3Packages.subliminal # to download subtitles
         immich-cli
         mujmap-unstable # to sync notmuch tags across jmap
         # signal-desktop # installe a la main

@@ -3,6 +3,9 @@ Answer directly from brice:
 > jj git init --colocate will try to read refs/remotes/origin/HEAD and set trunk() to it. It doesn't try any other remote names
 > then the hardcoded fallback just checks {main,master,trunk}@{origin,upstream}
 
+* support for "ours" and "theirs":
+
+  See https://github.com/jj-vcs/jj/pull/5785 .
 
 * fake a git repo in jj workspace ?
 

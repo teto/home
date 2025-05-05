@@ -10,6 +10,9 @@ JK_SEEDER_REPO := "/home/teto/nova/jinko-seeder"
 # not versioned, where we store secrets
 SECRETS_FOLDER := justfile_directory() / "secrets"
 
+
+import? 'justfile.generated'
+
 default:
     just --choose
 
@@ -250,4 +253,7 @@ nix-diff-booted:
 xwayland:
     xwayland-satellite
 
-rsync-send:
+# rsync-send:
+
+test-msmtp-send-mail:
+ cat contrib/2025-05-04-21.38.53.mail | msmtp --read-envelope-from --read-recipients -- REDACTED@email

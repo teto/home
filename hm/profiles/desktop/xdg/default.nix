@@ -1,4 +1,4 @@
-{ pkgs, secretsFolder, ...}:
+{ pkgs, secretsFolder, secrets, ...}:
 {
 
   desktopEntries = {
@@ -44,6 +44,7 @@ portal = {
 
   configFile."bash/lib.sh".text = ''
     TETO_SECRETS_FOLDER=${secretsFolder}
+    TETO_PERSONAL_EMAIL=${secrets.accounts.mail.fastmail_perso.login}
   '';
 
 

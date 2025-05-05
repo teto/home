@@ -65,6 +65,7 @@ paginate = "auto"
 
 # The ui.merge-editor key specifies the tool used for three-way merge tools by jj resolve. Use merge-tools.TOOL.merge-args
 merge-editor = "nvim"
+# diff-editor = ["nvim", "-c", "DiffEditor $left $right $output"]
 
 # The ui.diff-editor setting affects the default tool used for editing diffs (e.g. jj split, jj squash -i)
 # Shows a single snapshot and one or more diffs to apply to it

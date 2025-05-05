@@ -113,6 +113,7 @@ prepend_previewers = [
   # sync = true
   { name = "*.chunks", run = "chunks" },
   { name = "*.jsonzlib", run = "jsonzlib" },
+  { mime = "message/rfc822", run = "code" },
   { mime = "audio/*", run = "zaz" },
   # Archive previewer
   { mime = "application/*zip",            run = "ouch" },
