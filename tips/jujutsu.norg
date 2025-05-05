@@ -3,6 +3,11 @@ Answer directly from brice:
 > jj git init --colocate will try to read refs/remotes/origin/HEAD and set trunk() to it. It doesn't try any other remote names
 > then the hardcoded fallback just checks {main,master,trunk}@{origin,upstream}
 
+
+visible commits: `jj log -r 'all()`
+
+`jj help -k revsets`
+
 * support for "ours" and "theirs":
 
   See https://github.com/jj-vcs/jj/pull/5785 .

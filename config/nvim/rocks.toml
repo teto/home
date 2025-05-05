@@ -277,6 +277,7 @@ rev = "v1.0.13"
 options = {}
 
 [plugins."visual-whitespace.nvim"]
+dev = true
 git = "mcauley-penney/visual-whitespace.nvim"
 rev = "d55348fab9254bf208766efac9a35100ac474ec0"
 

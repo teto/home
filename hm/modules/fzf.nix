@@ -36,7 +36,8 @@ let
               n=2
           # %s => timestamp
           # fc -rl $fc_opts -t '%s' 1 | sed -E "s/^ *//" | awk "$awk_filter" |
-          eval "$(${lib.getExe cfg.package} --zsh | sed -e '/zmodload/s/perl/perl_off/' -e '/selected/s#fc -rl#fc -rlt "%s"#')"
+          # c\ change the content of the line
+          eval "$(${lib.getExe cfg.package} --zsh | sed -e '/zmodload/s/perl/perl_off/' -e '/selected=/c\selected="$(fc -rlt "%s" | awk "$awk_filter" |')"
         fi
       '';
 in
