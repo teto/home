@@ -1,2 +1,0 @@
-#!/bin/sh
-while sleep 1; do echo "aap"; done | rofi -dmenu

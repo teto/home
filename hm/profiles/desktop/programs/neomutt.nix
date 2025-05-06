@@ -30,8 +30,12 @@
 
   # will search into $XDG_CONFIG_HOME/neomutt/
   extraConfig = ''
-    # important one to avoid
-    set wait_key = no
+    set wait_key=no # avoid nagging prompts
+    set auto_edit # skip silly questions before writing mail
+    set help # show top menu bar with shortcuts
+    set fast_reply # skip to compose when replying
+    unset askcc # ask for CC:
+
     source test.rc
     '';
 

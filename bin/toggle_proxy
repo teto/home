@@ -1,4 +1,0 @@
-#
-# see https://github.com/NixOS/nixpkgs/issues/27535
-# https://www.reddit.com/r/NixOS/comments/6od9vy/nixos_roaming_laptop_network_proxy_configuration/
-sudo /run/current-system/fine-tune/child-1/bin/switch-to-configuration test

@@ -1,13 +1,52 @@
 # vim: set fdm=marker fenc=utf-8 ff=unix sts=0 ft=neomuttrc :
 
-set debug_file=~/.cache/neomutt.log
-
 # between 1 and 5
 set debug_level=4
+set debug_file=~/.cache/neomutt.log
 
-set sendmail="/nix/store/xld67m8fzhl92yaxc7d3rf6lpgkhpq92-msmtp-1.8.26/bin/msmtpq  --read-envelope-from --read-recipients"
+# https://neomutt.org/guide/tuning
+# if too low, can slow down neomutt
+set read_inc=1000
+
+# advised by msmtp manpage ?!
+# <0 => always put sendmail in the background without waiting
+set sendmail_wait=-1
+
+    
+
+# 
+# set sendmail="/nix/store/xld67m8fzhl92yaxc7d3rf6lpgkhpq92-msmtp-1.8.26/bin/msmtpq  --read-envelope-from --read-recipients"
+
+set uncollapse_jump # jump to newly received mail in thread
 
 # macro index <F2> "<shell-escape>notmuch search --output=tags id:%m<enter>" "Show Notmuch tags for message"
+
+# Configure header displays {{{
+
+# Ignore all headers
+ignore *
+
+# Then un-ignore the ones I want to see
+unignore From:
+unignore To:
+unignore Reply-To:
+unignore Mail-Followup-To:
+unignore Subject:
+unignore Date:
+unignore Organization:
+unignore Newsgroups:
+unignore CC:
+unignore BCC:
+unignore Message-ID:
+unignore X-Mailer:
+unignore User-Agent:
+unignore X-Junked-Because:
+unignore X-SpamProbe:
+unignore X-Virus-hagbard:
+
+# Now order the visable header lines
+hdr_order From: Subject: To: CC: BCC: Reply-To: Mail-Followup-To: Date: Organization: User-Agent: X-Mailer:
+# }}}
 
 # check https://superuser.com/questions/333862/how-do-i-open-a-link-from-an-email-in-mutt-without-using-the-mouse
 # advises urlscan over urldecode
@@ -79,26 +118,24 @@ set index_format = "%-15.15L %<M?%2M Msgs&       > %Z %g %s %*    %<[y?%<[m?%<[d
 # F	message is from you
 # L	message is sent to a subscribed mailing list
 #
-set move = no
+set move=no
 
-# disable top menu bar
-set help=no
 
 # TODO set flag_chars
 # TODO set to_chars " +TCFLR"
 
 
-set sleep_time = 0		# Pause 0 seconds for informational messages
-set markers = no		# Disables the `+` displayed at line wraps
-set mark_old = no		# Unread mail stay unread until read
+set sleep_time=0		# Pause 0 seconds for informational messages
+# set markers=yes		# Disables the `+` displayed at line wraps
+set mark_old=no		# Unread mail stay unread until read
 
 set tilde                # displays "~" to show EOF
 
 set history=100
-
 set save_history=100    # per category size of the history
 
 bind index D delete-thread
+bind index dd delete-thread
 bind pager [ previous-unread
 bind pager ] next-unread
 
@@ -108,7 +145,7 @@ bind index,pager X change-vfolder
 bind index,pager S sidebar-toggle-visible
 
 # to prevent from jumping to next mail
-set pager_stop = yes
+set pager_stop=yes
 
 # set mailcap_path = ~/.config/neomutt/mailcap
 # alternative_order multipart/mixed text/plain text/calendar application/ics text/html
@@ -133,6 +170,7 @@ set sort_aux = reverse-last-date-received
 # source theme
 # source $XDG_CONFIG_HOME/neomutt/dracula.muttrc
 # source $XDG_CONFIG_HOME/neomutt/zenburn.neomuttrc
+# soruce from wallust
 source solarized-dark-256.neomuttrc
 # source $XDG_CONFIG_HOME/neomutt/formats
 
@@ -156,9 +194,6 @@ source solarized-dark-256.neomuttrc
 alternative_order text/plain text text/enriched
 
 
-# https://neomutt.org/guide/tuning
-# if too low, can slow down neomutt
-set read_inc=1000
 
 # read-thread
 # work around a bug in vimrc config
@@ -169,12 +204,7 @@ bind pager,index R group-reply
 bind index zc collapse-thread
 bind index zo collapse-thread
 
-bind index [ previous-unread
-bind index ] next-unread
-
-alternative_order text/enriched text/plain text
-
-set delete = yes
+set delete=yes
 
 
 # macro attach s <save-entry><kill-line>/home/YOU/downloads/<enter>y "Save entry"
@@ -269,10 +299,8 @@ set sidebar_divider_char = '│'
 # }}}
 
 # compose View Options{{{
-set envelope_from                    # which from?
+unset envelope_from  # dont add `-f` to sendmail commands else msmtp complains about it conflicting with --read-envelope-from
 set edit_headers                     # show headers when composing
-set fast_reply                       # skip to compose when replying
-set askcc                            # ask for CC:
 set fcc_attach                       # save attachments with the body
 set forward_format = "Fwd: %s"       # format of subject when forwarding
 set forward_decode                   # decode when forwarding
@@ -290,32 +318,6 @@ unset mime_forward                   # forward attachments as part of body
 auto_view text/html		# automatically show html (mailcap uses w3m)
 
 
-# Configure header displays {{{
-
-# Ignore all headers
-ignore *
-
-# Then un-ignore the ones I want to see
-unignore From:
-unignore To:
-unignore Reply-To:
-unignore Mail-Followup-To:
-unignore Subject:
-unignore Date:
-unignore Organization:
-unignore Newsgroups:
-unignore CC:
-unignore BCC:
-unignore Message-ID:
-unignore X-Mailer:
-unignore User-Agent:
-unignore X-Junked-Because:
-unignore X-SpamProbe:
-unignore X-Virus-hagbard:
-
-# Now order the visable header lines
-hdr_order From: Subject: To: CC: BCC: Reply-To: Mail-Followup-To: Date: Organization: User-Agent: X-Mailer:
-# }}}
 
 # Terminal config {{{
 set ts_enabled
@@ -328,7 +330,7 @@ set ts_enabled
 
 # notmuch config {{{
 # This option specifies timeout for Notmuch database. Default is 5 seconds.
-set nm_open_timeout = 5
+set nm_open_timeout = 3
 # This variable specifies notmuch query type, supported types: 'threads' and
 # 'messages'.
 set nm_query_type = messages
