@@ -35,14 +35,6 @@
 --   ignore = { filetypes = {}, buftypes = {} },
 -- }
 
-require('avante').setup({
-    provider = 'openai',
-
-    openai = {
-        api_key_name = 'cmd:cat /home/teto/.config/sops-nix/secrets/OPENAI_API_KEY_NOVA',
-    },
-    -- openai_api_key = os.getenv("OPENAI_API_KEY")
-})
 -- print(package.cpath)
 
 local has_fzf_lua, fzf_lua = pcall(require, 'fzf-lua')
@@ -805,7 +797,7 @@ vim.lsp.enable('yamlls')
 -- })
 --
 
--- require('plugins.avante')
+require('plugins.avante')
 
 -- HACK around sway-scratchpad limitation where one can't esapce quotes so alleviate the need for that via a proxy command
 vim.api.nvim_create_user_command('LlmChat', function()

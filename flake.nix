@@ -439,6 +439,7 @@
                   "cuda_nvdisasm"
                   "libcusolver"
                   "libXNVCtrl"
+                  "libcusparse_lt"
 
                   "lens-desktop" # kubernetes resource viewer
                   "ec2-api-tools"
