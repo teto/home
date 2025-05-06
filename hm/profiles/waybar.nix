@@ -48,6 +48,7 @@
         ]
         # needs to find nvidia smi as well
       }:${dotfilesPath}/bin"
+      "LC_ALL=ja_JP.utf8"
     ];
     };
     Unit.PartOf = [ "tray.target" ];

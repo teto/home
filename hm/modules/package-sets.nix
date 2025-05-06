@@ -182,7 +182,6 @@ in
           procs # Rust replacement for 'ps'
           qiv # image viewer
           qtpass
-          ranger # or joshuto ? see hm configuration
           restic # to backup photos to backblaze
           # rbw # Rust bitwarden unofficial client
           ripgrep
@@ -191,7 +190,7 @@ in
           sd # rust cli for search & replace
           shared-mime-info # temporary fix for nautilus to find the correct files
           sublime3
-          sysz # fzf for systemd
+          sysz # fzf for systemd, see systemd-tui too
           translate-shell # call with `trans`
           unzip
           wireshark

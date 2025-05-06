@@ -1,5 +1,16 @@
+{ pkgs, ... }:
 {
   enable = true; # khal build broken
+
+
+  package = pkgs.khal.overrideAttrs(oa: {
+
+    postInstall = ''
+      wrapProgram $out/bin/ikhal --set LC_ALL ja_JP.utf8
+      '';
+
+  });
+
   # need a locale to be set
   locale = {
     timeformat = "%H:%M";

@@ -48,7 +48,7 @@
 
       v = "nvim";
       c = "cat";
-      r = "ranger";
+      m = "neomutt";
       y = "yazi";
 
       n = "nix develop";
