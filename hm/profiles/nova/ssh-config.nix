@@ -31,7 +31,7 @@ let
       # TODO add it /generate from publicHostKey ?
       # GlobalKnownHostsFile
       # userKnownHostsFile = "${knownHostsFile}";
-      userKnownHostsFile = "/home/teto/.config/ssh/known_hosts";
+      # userKnownHostsFile = "/home/teto/.config/ssh/known_hosts";
       # needs to be an absolute path
       # knownHostsCommand = ""
       # knownHostsCommand = "/home/teto/.config/ssh/known_hosts";

@@ -1,8 +1,13 @@
 can download snapshot of db at https://drive.google.com/drive/u/0/folders/1z4zF9ImZlNeTZZplflvvnpZfJp3WVLPk
 https://pypi.org/project/jamdict-data/
 
+
+
+
 jamdict est une bonne api python
 
+* jiten 
+./result/bin/jiten jmdict 新幹線
 result/bin/jiten r2k toto
 jiten permet de convertir kanjis / katakanas
 

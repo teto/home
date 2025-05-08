@@ -110,6 +110,7 @@ in
           pkgs.timg # to display images in terminal, to compare with imgcat ?
           myImagemagick
 
+          pkgs.kcc # to convert ebooks to remarkable format
           # mpd
           pkgs.ncmpcpp
           # pkgs.mpc_cli
@@ -231,6 +232,7 @@ in
         python3Packages.subliminal # to download subtitles
         immich-cli
         mujmap-unstable # to sync notmuch tags across jmap
+        calcure
         # signal-desktop # installe a la main
         # memento # broken capable to display 2 subtitles at same time
         # leafnode dovecot22 dovecot_pigeonhole fetchmail procmail
@@ -476,19 +478,16 @@ in
 
     (mkIf cfg.japanese {
       home.packages = with pkgs; [
-        # pkgs.powertop # superuseful
-        # pkgs.pcm
 
         # https://github.com/NixOS/nixpkgs/pull/368909
         pkgs.kakasi # convert kanjis into kanas etc
         pkgs.mokuro # broken because of triton-llvm
         pkgs.python3Packages.manga-ocr
         tagainijisho # japanse dict; like zkanji Qt based
-        # ${config.system}
         # flakeSelf.inputs.vocage.packages."x86_64-linux".vocage
-        # jiten # unfree, helpful for jap.nvim
-        sudachi-rs # a japanese tokenizer
-        sudachidict
+        jiten # unfree, helpful for jap.nvim
+        sudachi-rs # a japanese tokenizer (can have sudachidict builtins)
+        sudachidict  # exists in small/medium/large
         kanji-stroke-order-font # for memento
       ];
 
