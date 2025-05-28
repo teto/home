@@ -6,7 +6,7 @@
   # todo rename data to assets ?
   # plymouth.logo = ../../data/boot-plymouth-logo.png;
 
-  kernelPackages = pkgs.linuxPackages_6_13;
+  kernelPackages = pkgs.linuxPackages_latest;
 
   # it apparently still is quite an important thing to have
   devSize = "5g";

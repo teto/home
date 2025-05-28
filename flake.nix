@@ -390,7 +390,7 @@
           ];
           config = {
             # on desktop
-            cudaSupport = true;
+            cudaSupport = false;
             cudaCapabilities = [
               "6.0"
               "7.0"

@@ -2,18 +2,20 @@ can download snapshot of db at https://drive.google.com/drive/u/0/folders/1z4zF9
 https://pypi.org/project/jamdict-data/
 
 
+list of interesting software
 
-
+* sudachi: japanese tokenizer: helps break a sentence into its components
 jamdict est une bonne api python
-
-* jiten 
+* [ichiran][ichiran-github]: see https://ichi.moe/ for how it works
+* [jiten]
 ./result/bin/jiten jmdict 新幹線
 result/bin/jiten r2k toto
 jiten permet de convertir kanjis / katakanas
 
 
 docker exec -it ichiran-main-1 ichiran-cli -i "一覧は最高だぞ"
-https://github.com/tshatrov/ichiran
 
+[ichiran-github]: https://github.com/tshatrov/ichiran
+[jiten-website]: https://jitendex.org/
 
 https://github.com/ichisadashioko/kanji-recognition

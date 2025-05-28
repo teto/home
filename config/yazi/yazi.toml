@@ -43,6 +43,11 @@ reveal = [
 extract = [
 	{ run = 'unar "$1"', desc = "Extract here" },
 ]
+extract-ouch = [
+	{ run = 'ouch d -y "%*"', desc = "Extract here with ouch", for = "windows" },
+	{ run = 'ouch d -y "$@"', desc = "Extract here with ouch", for = "unix" }
+]
+
 extract_zlib = [
 	{ run = 'pigz -dc "$1"', desc = "Extract zlib here" },
 	# { run = 'nvim "$1"', desc = "Extract zlib here" },

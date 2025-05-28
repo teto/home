@@ -350,6 +350,10 @@ teatimer() {
 # used in some git aliases
 # export REVIEW_BASE=master
 
+
+# todo upstream to package 
+eval "$(_JITEN_COMPLETE=zsh_source jiten)"
+
 # source <(_HASS_CLI_COMPLETE=zsh_source hass-cli)
 function merge_hist() {
     hist_file="{{config_directory()}}/zsh/shell_history.txt"

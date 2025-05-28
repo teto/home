@@ -15,7 +15,7 @@ let
   # term = "${pkgs.rio}/bin/rio";
   # term = "${pkgs.wezterm}/bin/wezterm";
 
-  rofi = pkgs.rofi-wayland;
+  rofi = pkgs.rofi-teto; # rofi-wayland;
   sharedConfig = pkgs.callPackage ./wm-config.nix { };
 
   myLib = pkgs.tetoLib;
@@ -177,12 +177,10 @@ in
 
         Menu = "exec ${rofi}/bin/rofi -modi 'drun' -show drun";
         "${mod}+Tab" = "exec ${rofi}/bin/rofi -modi 'drun' -show drun";
-        # "${mod}+Ctrl+Tab" = "exec \"${pkgs.rofi}/bin/rofi -modi 'window' -show run\"";
         # TODO dwindow exclusively with WIN
         "${mad}+Tab" = "exec ${pkgs.swayr}/bin/swayr switch-window";
         "${mad}+p" = "exec ${lib.getExe pkgs.wofi-pass} ";
         "${mad}+a" = "exec \"${rofi}/bin/rofi -modi 'run,drun,window,ssh' -show window\"";
-        # "${mad}+Tab" = "exec \"${pkgs.rofi}/bin/rofi -modi 'run,drun,window,ssh' -show window\"";
 
         # locker
         # "${mod}+Ctrl+L"="exec ${pkgs.i3lock-fancy}/bin/i3lock-fancy";

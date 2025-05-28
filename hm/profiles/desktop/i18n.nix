@@ -11,6 +11,10 @@
       waylandFrontend = true;
     };
 
+    # quickPhraseFiles
+
+    # ignoreUserConfig = false;
+
     # inputs = {
     #   name = "Default";
     #   defaultLayout = "us";

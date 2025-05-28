@@ -285,5 +285,13 @@ rev = "d55348fab9254bf208766efac9a35100ac474ec0"
 git = "julienvincent/hunk.nvim"
 rev = "v1.6.0"
 
+[plugins."img-clip.nvim"]
+git = "hakonharnes/img-clip.nvim"
+rev = "v0.6.0"
+
+[plugins."fcitx.nvim"]
+git = "h-hg/fcitx.nvim"
+rev = "dcb6b70888aa893d3d223bb777d4117bbdac06a7"
+
 [config]
 plugins_dir = "plugins/"

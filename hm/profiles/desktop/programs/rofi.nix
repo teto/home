@@ -9,7 +9,8 @@
 
   enable = true;
 
-  package = pkgs.rofi-wayland;
+  # package = pkgs.rofi-wayland;
+  package = pkgs.rofi-teto;
 
   terminal = "${pkgs.kitty}/bin/kitty";
   # borderWidth = 1;

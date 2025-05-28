@@ -106,7 +106,7 @@ in
           # anki          # spaced repetition system
           # hopefully we can remove this from the environment
           # it's just that I can't setup latex correctly
-          pkgs.rofi-rbw-wayland
+          # pkgs.rofi-rbw-wayland
           pkgs.timg # to display images in terminal, to compare with imgcat ?
           myImagemagick
 
@@ -186,7 +186,8 @@ in
           restic # to backup photos to backblaze
           # rbw # Rust bitwarden unofficial client
           ripgrep
-          rofi-pass # rofi-pass it's enabled in the HM module ?
+          # rofi-pass # rofi-pass it's enabled in the HM module ?
+          rofi-teto
           rsync
           sd # rust cli for search & replace
           shared-mime-info # temporary fix for nautilus to find the correct files
