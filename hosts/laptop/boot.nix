@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 {
 
   plymouth.theme = "spinner";
@@ -6,7 +6,9 @@
   # todo rename data to assets ?
   # plymouth.logo = ../../data/boot-plymouth-logo.png;
 
-  kernelPackages = pkgs.linuxPackages_latest;
+  
+  # lib.mkForce 
+  kernelPackages = pkgs.linuxPackages_6_6; # pkgs.linuxPackages_latest;
 
   # it apparently still is quite an important thing to have
   devSize = "5g";

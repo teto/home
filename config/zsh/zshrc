@@ -371,3 +371,7 @@ compdef _pass pass-nova
 compdef _pass pass-pro
 compdef _pass pass-perso
 source $XDG_CONFIG_HOME/bash/jj.sh
+
+# Merge that shell history with current one
+fc -R -I "$hist_file_1"
+

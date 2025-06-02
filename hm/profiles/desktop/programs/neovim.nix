@@ -214,9 +214,11 @@ in
         plugin = pkgs.vimPlugins.unicode-vim;
         # ${pkgs.vimPlugins.unicode-vim.passthru.initLua}
         config = ''
+          -- since the autoadd was disabled/doesn't seem to work
+          ${pkgs.vimPlugins.unicode-vim.passthru.initLua}
           -- overrides ga
           vim.keymap.set ( "n", "ga",  "<Plug>(UnicodeGA)", { remap = true, } )
-        '';
+          '';
       })
 
     ]

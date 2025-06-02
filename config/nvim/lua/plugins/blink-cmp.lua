@@ -181,11 +181,12 @@ b.setup({
     -- ensure you have the `snippets` source (enabled by default)
     sources = {
         default = {
-            'lsp',
-            'path',
-            'snippets',
-            'buffer',
-            -- 'git',
+		 -- 'digraphs',
+		  'lsp',
+		  'path',
+		  'snippets',
+		  'buffer',
+		  -- 'git',
         },
         providers = {
 		 -- ve:

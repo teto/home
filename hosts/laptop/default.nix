@@ -108,6 +108,7 @@ in
 
   ];
 
+
   boot.blacklistedKernelModules = [ "nouveau" ];
 
   # enables command on boot/suspend etc
@@ -201,7 +202,7 @@ in
   # List services that you want to enable:
   services = {
     gnome = {
-      gnome-keyring.enable = true;
+      gnome-keyring.enable = false;
       at-spi2-core.enable = true; # for keyring it seems
     };
 

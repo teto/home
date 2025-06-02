@@ -1,0 +1,3 @@
+My neovim config is tentacular, dont try this at home.
+Core plugins I want everywhere or that depend on system program are handled by nix (installation and configuration).
+The rest is installed via rocks.nvim.

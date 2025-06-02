@@ -121,6 +121,9 @@ prepend_previewers = [
   { mime = "message/rfc822", run = "code" },
   { mime = "audio/*", run = "zaz" },
   # Archive previewer
+  # file -bL --mime-type
+  
+  { mime = "application/octet-stream",    run = "ouch" },
   { mime = "application/*zip",            run = "ouch" },
   { mime = "application/x-tar",           run = "ouch" },
   { mime = "application/x-bzip2",         run = "ouch" },

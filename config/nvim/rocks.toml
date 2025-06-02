@@ -11,6 +11,9 @@ import = [
 ]
 
 
+[config]
+plugins_dir = "plugins/"
+
 [dev]
 path = "~/neovim"
 
@@ -54,7 +57,7 @@ tree-sitter-haskell = "scm"
 # "lspkind.nvim" = "scm"
 # "modicator.nvim" = "scm"
 # luasnip = "2.3.0"
-tree-sitter-http = "0.0.35"
+tree-sitter-http = "0.0.36"
 "hurl.nvim"= "2.1.0"
 "gitsigns.nvim" = "1.0.2"
 
@@ -82,9 +85,10 @@ nvim-lspconfig= "1.7.0"
 # tree-sitter-org = "0.0.1"
 "grug-far.nvim"= "1.5.18"
 orgmode = "0.5.3"
-neogit = "2.0.0"  # provides a nicer git status (than fugitive) ?
+neogit = "2.0.0"
 "diffview.nvim" = "scm"
 tree-sitter-norg = "0.2.6"
+"none-ls.nvim"= "scm"
 # tree-sitter-orgmode = "2.0.0"
 # nvim-treesitter-textobjects = "scm"
 # "rocks-treesitter.nvim" = "1.0.3"
@@ -109,6 +113,9 @@ version = "9.3.0"
 # rev = "scm"
 dir = "/home/teto/neovim/gp.nvim"
 
+[plugins."jap.nvim"]
+# rev = "scm"
+dir = "/home/teto/neovim/jap.nvim"
 
 [plugins.vim-sorcerer]
 git = "github:adlawson/vim-sorcerer"
@@ -157,12 +164,6 @@ rev = "edc603d4cda7894a743e383e16c638e206d03148"
 git = "teto/vim-listchars"
 rev = "c9839537f8a6a32726a504cc34113719a7dcd8fc"
 
-
-[plugins."none-ls.nvim"]
-
-git = "ulisses-cruz/none-ls.nvim"
-rev = "main"
-
 [plugins."none-ls-luacheck.nvim"]
 git = "gbprod/none-ls-luacheck.nvim"
 rev = "v0.0.1"
@@ -170,7 +171,6 @@ rev = "v0.0.1"
 [plugins."none-ls-shellcheck.nvim"]
 git = "gbprod/none-ls-shellcheck.nvim"
 rev = "0f84461241e76e376a95fb7391deac82dc3efdbf"
-
 
 [plugins.i3-vim-syntax]
 git = "PotatoesMaster/i3-vim-syntax"
@@ -260,7 +260,7 @@ rev = "c399884e8f64019ec9bb581251f9710915b7f996"
 
 [plugins."codecompanion.nvim"]
 git = "olimorris/codecompanion.nvim"
-rev = "v14.5.0"
+rev = "v15.11.0"
 
 [plugins.jj-diffconflicts]
 git = "rafikdraoui/jj-diffconflicts"
@@ -277,13 +277,12 @@ rev = "v1.0.13"
 options = {}
 
 [plugins."visual-whitespace.nvim"]
-dev = true
 git = "mcauley-penney/visual-whitespace.nvim"
 rev = "d55348fab9254bf208766efac9a35100ac474ec0"
 
 [plugins."hunk.nvim"]
 git = "julienvincent/hunk.nvim"
-rev = "v1.6.0"
+rev = "v1.7.0"
 
 [plugins."img-clip.nvim"]
 git = "hakonharnes/img-clip.nvim"
@@ -293,5 +292,3 @@ rev = "v0.6.0"
 git = "h-hg/fcitx.nvim"
 rev = "dcb6b70888aa893d3d223bb777d4117bbdac06a7"
 
-[config]
-plugins_dir = "plugins/"
