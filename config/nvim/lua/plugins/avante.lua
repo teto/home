@@ -9,7 +9,12 @@
 -- })
 -- require('avante_lib').load()
 require('avante').setup({
+  behaviour = {
+   enable_token_counting = true,
+   -- auto_approve_tool_permissions = {"bash", "replace_in_file"}, -- Auto-approve specific tools only
+  },
     provider = 'openai',
+    ui = { border = 'single', background_color = '#FF0000' },
    -- provider = "ollama",
 
     openai = {
@@ -20,4 +25,51 @@ require('avante').setup({
 	--   -- model = "qwq:32b",
 	-- }
     -- openai_api_key = os.getenv("OPENAI_API_KEY")
+
+windows = {
+    ask = {
+      floating = false, -- Open the 'AvanteAsk' prompt in a floating window
+      start_insert = true, -- Start insert mode when opening the ask window
+      border = "rounded",
+      ---@type "ours" | "theirs"
+      focus_on_apply = "ours", -- which diff to focus after applying
+    },
+
+        },
+  custom_tools = {
+    {
+      name = "run_go_tests",  -- Unique name for the tool
+      description = "Run Go unit tests and return results",  -- Description shown to AI
+      command = "go test -v ./...",  -- Shell command to execute
+      param = {  -- Input parameters (optional)
+        type = "table",
+        fields = {
+          {
+            name = "target",
+            description = "Package or directory to test (e.g. './pkg/...' or './internal/pkg')",
+            type = "string",
+            optional = true,
+          },
+        },
+      },
+      returns = {  -- Expected return values
+        {
+          name = "result",
+          description = "Result of the fetch",
+          type = "string",
+        },
+        {
+          name = "error",
+          description = "Error message if the fetch was not successful",
+          type = "string",
+          optional = true,
+        },
+      },
+      func = function(params, on_log, on_complete)  -- Custom function to execute
+        local target = params.target or "./..."
+        return vim.fn.system(string.format("go test -v %s", target))
+      end,
+    },
+  },
+
 })

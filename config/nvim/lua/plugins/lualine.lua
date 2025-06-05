@@ -176,7 +176,14 @@ require('lualine').setup({
 	- add lock for readonly
 	- also if diffthis is set
 	]]
-    --
+
+    -- Disable winbar for these filetypes
+    disabled_filetypes = {
+     winbar = { 
+      'help', 'markdown', 'AvanteInput',
+      'Avante'
+     },  
+    },
     winbar = {
         lualine_a = { 'filename' },
         lualine_b = { 'diagnostics' },

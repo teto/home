@@ -253,10 +253,12 @@ in
     p.nbformat # to import/export notebooks
     p.pynvim
   ];
+
   extraPackages =
     extraPackages
     ++ pkgs.vimPlugins.llm-nvim.runtimeDeps # temporary workaround
     ++ [
+      pkgs.stylua # for lua formatting
       pkgs.gitlab-ci-ls # gitlab lsp
     ]
 

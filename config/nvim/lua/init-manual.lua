@@ -1,3 +1,4 @@
+
 -- vim: set noet fdm=marker fenc=utf-8 ff=unix sts=0 sw=4 ts=4 :
 -- https://github.com/nanotee/nvim-lua-guide#using-meta-accessors
 -- https://www.reddit.com/r/neovim/comments/o8dlwg/how_to_append_to_an_option_in_lua/
@@ -47,7 +48,7 @@ local map = vim.keymap.set
 
 local nix_deps = require('generated-by-nix')
 -- new option
--- vim.o.winborder = "rounded"
+vim.o.winborder = "rounded"
 
 diagnostic_default_config = {
     -- disabled because too big in haskell
@@ -804,7 +805,25 @@ vim.api.nvim_create_user_command('LlmChat', function()
     vim.cmd([[GpChatToggle tab]])
 end, { desc = 'TOTO' })
 
+
+
+
 -- print(package.cpath)
 -- vim.print(vim.opt.rtp)
 require('plugins.diffview')
 require('lsp-progress').setup()
+
+local mclipboard = require'teto.clipboard'
+
+vim.keymap.set('n', '<F7>', function () mclipboard.copy_filename() end, 
+			   { desc = 'Copy buffer filename' })
+
+-- Set highlight for GitSignsAdd with green background
+-- setting those in gitsigns.lua, they got erased
+vim.api.nvim_set_hl(0, 'GitSignsAdd', {
+    bg = '#00FF00',  -- Green background
+})
+vim.api.nvim_set_hl(0, 'GitSignsChangeLn', {
+    bg = '#00FF00',  -- Green background
+})
+

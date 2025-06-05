@@ -120,14 +120,14 @@
     neovim-nightly-overlay = {
       url = "github:nix-community/neovim-nightly-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.neovim-src.follows = "neovim-src";
+      # inputs.neovim-src.follows = "neovim-src";
     };
 
-    neovim-src = {
-      url = "github:neovim/neovim";
-      # url = "github:teto/neovim?ref=teto/add-zsh-completion";
-      flake = false;
-    };
+    # neovim-src = {
+    #   url = "github:neovim/neovim";
+    #   # url = "github:teto/neovim?ref=teto/add-zsh-completion";
+    #   flake = false;
+    # };
 
     # TODO extend vim plugins from this overlay
     # neovim-overlay.url = "github:teto/neovim-nightly-overlay/vimPlugins-overlay";

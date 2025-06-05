@@ -85,7 +85,9 @@ in
   xdg.configFile = {
     "nvim/lua/generated-by-nix.lua" =
       let
-        luaInterpreter = config.programs.neovim.package.lua;
+        # hitting this limit https://github.com/luarocks/luarocks/issues/1797
+        # luaInterpreter = config.programs.neovim.package.lua;
+        luaInterpreter = pkgs.lua51Packages.lua;
         # -- vim.g.sqlite_clib_path" 'path = vim.g.sqlite_clib_path or  "${sqlite.out}/lib/libsqlite3${stdenv.hostPlatform.extensions.sharedLibrary}"'
 
       in

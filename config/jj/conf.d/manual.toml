@@ -134,8 +134,8 @@ commit_id = "green"
 [git]
 # avoided the '/' because it creates issues with gitlab slugifying for components
 push-bookmark-prefix = "matt-push-"
-fetch = ["up", "origin"] # ["upstream", "origin"]
-push = "gh"
+# fetch = ["up", "origin"] # ["upstream", "origin"]
+# push = "gh"
 auto-local-bookmark = true
 
 [snapshot]

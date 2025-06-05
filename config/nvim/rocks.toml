@@ -30,7 +30,7 @@ path = "~/neovim"
 # "oil.nvim" = "2.14.0"
 # -- :DiffviewOpen
 # "diffview.nvim" = "scm"
-"haskell-tools.nvim" = "4.4.2"
+"haskell-tools.nvim" = "6.1.0"
 
 # needed the patch from https://github.com/nvimtools/none-ls.nvim/pull/277/
 # "none-ls.nvim" = "scm"

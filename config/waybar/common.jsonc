@@ -119,7 +119,7 @@
 		"menu": "on-click-right",
 		"menu-file": "~/.config/waybar/menu-notmuch.xml",
 		"menu-actions": {
-			"neomutt": "kitty sh -c neomutt",
+			"neomutt": "kitty --debug-font-fallback sh -c neomutt",
             "fetch-fastmail": "just -g mailsync",
             "fetch-nova": "just -g mailsync",
             "open-neomutt": "kitty sh -c neomutt",
