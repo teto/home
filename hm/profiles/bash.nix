@@ -101,14 +101,8 @@
       gbr = "git branch";
       # }}}
 
-      # ls
-
       # kitty
       kcat = "kitty +kitten icat";
-
-      # modprobe to use
-      # might need to use -S as well
-      # modprobe_exp="modprobe -d /home/teto/mptcp/build";
     };
 
     initExtra = ''

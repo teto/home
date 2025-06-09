@@ -64,7 +64,6 @@ in
       };
 
       includes = mkOption {
-        # (either str path)
         type = with types; listOf (str);
         description = "Path of the configuration file to include.";
         default = [ ];

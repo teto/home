@@ -19,6 +19,11 @@
   ];
 
   settings = {
+    # includes = [
+    #   "manual.toml"
+    #   # "fastmail.toml"
+    # ];
+
     notifications = {
       script = "notify-send";
     };

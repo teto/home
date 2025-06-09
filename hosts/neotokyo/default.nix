@@ -1,7 +1,6 @@
 {
   config,
   flakeSelf,
-  flakeSelf,
   secrets,
   modulesPath,
   pkgs,
@@ -28,6 +27,7 @@
     "xen-pcifront"
     "xen-scsifront"
   ];
+
   # This is to get a prompt via the "openstack console url show" command
   systemd.services."getty@tty1" = {
     enable = lib.mkForce true;
@@ -41,7 +41,7 @@
 
     flakeSelf.nixosModules.teto-nogui
     flakeSelf.nixosModules.default-hm
-    flakeSelf.nixosModules.neovim
+    # flakeSelf.nixosModules.neovim
     flakeSelf.nixosModules.ntp
     flakeSelf.nixosModules.nix-daemon
 
@@ -119,7 +119,8 @@
       imports = [
         ./home-manager/users/teto/default.nix
         flakeSelf.homeModules.teto-nogui
-        flakeSelf.homeProfiles.neovim
+        # flakeSelf.homeProfiles.neovim
+        # flakeSelf.homeProfiles.yazi
       ];
     };
   };

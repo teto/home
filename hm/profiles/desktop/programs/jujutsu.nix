@@ -8,7 +8,7 @@
 {
 
   # ediff = false;
-  package = flakeSelf.inputs.jujutsu.packages.${pkgs.system}.jujutsu;
+  # package = flakeSelf.inputs.jujutsu.packages.${pkgs.system}.jujutsu;
 
   enable = true;
   settings = {

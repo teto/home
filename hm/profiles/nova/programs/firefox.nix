@@ -1,6 +1,6 @@
 {
-  config,
   pkgs,
+  secrets,
   lib,
   ...
 }:
@@ -9,6 +9,8 @@ let
   novaSpecificSettings = {
     # avoid
     "signon.rememberSignons" = false;
+    "browser.startup.homepage" = secrets.nova.gitlab.uri;
+
   };
 in
 {

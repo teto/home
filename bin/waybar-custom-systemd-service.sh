@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Specify your service here
-SERVICE="apache2"
+SERVICE="ollama"
 
 # Check if the service is active
 if systemctl is-active --quiet "$SERVICE"; then

@@ -513,7 +513,6 @@
             self.homeProfiles.fzf # todo move to common.nix ?
 
             # TODO it should autoload those
-            self.homeModules.meli
             self.homeModules.nvimpager
 
             self.homeModules.bash
@@ -810,8 +809,8 @@
 
         mod-cliphist = ./hm/modules/cliphist.nix;
 
-        # c un profile en fait
-        meli = ./hm/modules/programs/meli.nix;
+        # existe dans hm now
+        # meli = ./hm/modules/programs/meli.nix;
 
         # for stuff not in home-manager yet
         experimental = ./hm/profiles/experimental.nix;
@@ -841,6 +840,7 @@
               # And add the home-manager module
               self.homeProfiles.common
               self.homeProfiles.neovim
+              # self.homeProfiles.yazi
               self.homeModules.neovim
               self.homeModules.bash
               self.homeModules.zsh

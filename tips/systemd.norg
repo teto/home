@@ -5,6 +5,10 @@ systemctl show-environment --user ?
 
 systemd.user.settings.Manager.DefaultEnvironment
 
+* redirect a program output into journald
+
+  prog >2 >(systemctl-cat -t prog-identifier)
+
 * how to enable debug  ?
 
   Works only if service declares BusName / d-bus

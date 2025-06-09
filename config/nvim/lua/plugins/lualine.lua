@@ -80,6 +80,17 @@ require('lualine').setup({
         section_separators = { left = '', right = '' },
         separators = { left = '', right = '' },
         globalstatus = true,
+		-- Disable winbar for these filetypes
+		disabled_filetypes = {
+		 winbar = { 
+		  'help', 'markdown',
+		  'AvanteInput',
+		  'AvanteSelectedFiles',
+		  -- 'AvanteConfirm',
+		  'Avante'
+		 }  
+		},
+
         -- disabled_filetypes = {}
     },
     sections = {
@@ -177,13 +188,6 @@ require('lualine').setup({
 	- also if diffthis is set
 	]]
 
-    -- Disable winbar for these filetypes
-    disabled_filetypes = {
-     winbar = { 
-      'help', 'markdown', 'AvanteInput',
-      'Avante'
-     },  
-    },
     winbar = {
         lualine_a = { 'filename' },
         lualine_b = { 'diagnostics' },

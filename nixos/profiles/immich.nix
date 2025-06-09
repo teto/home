@@ -12,6 +12,7 @@ in
 {
 
   services.immich = {
+    package = pkgs.immich-no-ad;
     machine-learning = {
       enable = false;
     };

@@ -2,6 +2,7 @@
   config,
   pkgs,
   lib,
+  # secrets, # for email
   ...
 }:
 {

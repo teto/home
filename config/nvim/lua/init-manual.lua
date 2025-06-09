@@ -105,6 +105,9 @@ vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 -- ,localoptions
 vim.o.sessionoptions = 'buffers,curdir,help,tabpages,winsize,winpos,localoptions'
 
+-- fixing some stuff
+vim.opt.rtp:prepend(os.getenv('HOME') .. '/neovim/avante.nvim')
+-- doing jj tests
 vim.opt.rtp:prepend(os.getenv('HOME') .. '/neovim/diffview.nvim')
 -- vim.opt.rtp:prepend(os.getenv('HOME') .. '/rocks-dev.nvim')
 -- vim.opt.rtp:prepend(os.getenv('HOME') .. '/rocks.nvim')

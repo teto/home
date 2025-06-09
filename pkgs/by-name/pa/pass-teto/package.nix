@@ -7,9 +7,9 @@ let
   passEnv =
     (pass.override {
       waylandSupport = true;
-      wrapperArgs = [
-        # "--set PASSWORD_STORE_DIR=${secretsFolder}/password-store"
-      ];
+      # wrapperArgs = [
+      #   # "--set PASSWORD_STORE_DIR=${secretsFolder}/password-store"
+      # ];
     }).withExtensions
       (
         ext: with ext; [

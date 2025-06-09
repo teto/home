@@ -65,7 +65,7 @@
 		},
 	},
 	"custom/ollama": {
-		"exec":        "waybar-ollama", 
+		"exec":        "waybar-custom-systemd-service ollama", 
 		"on-click":    "waybar-nixpkgs-update-check && notify-send 'The system has been updated'", // refresh on click
 		"interval":    5, // refresh every hour
 		"tooltip":     true,
@@ -103,7 +103,7 @@
 	},
 	// PUT in a drawer !!
 	"custom/notmuch": {
-		"format":      "  {}  ",
+		"format":      "  {}    ",
 		"max-length":  40,
 		"return-type": "json",
 		// TODO run regularly
@@ -112,7 +112,7 @@
 		// "on_click": "kitty sh -c neomutt",
 		// TODO rerun mbsync + notmuch etc
 		// "on-click-right": "systemctl start --user mujmap-fastmail.service",
-		"on-click": "kitty sh -c neomutt",
+		"on-click": "kitty --debug-font-fallback sh -c neomutt >2 >(systemd-cat -t kitty-neomutt)",
 		// TODO retreive executable name
 		"exec": "waybar-custom-notmuch.sh",
 		// "exec": "pkgs.writeShellScript \"hello-from-waybar\" ''\n  echo \"from within waybar\"\n''"

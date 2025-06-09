@@ -96,8 +96,10 @@ let
       showDefaultMailbox = false;
 
     };
+
+    # TODO restore
     meli = {
-      enable = false;
+      enable = true;
       settings = {
         listing.index_style = "compact";
       };
