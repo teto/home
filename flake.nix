@@ -581,6 +581,7 @@
             termscp-matt
             treefmt-home
             ripgrep
+            rustic # testing against restic
             sops # to decrypt secrets
             ssh-to-age
             wormhole-rs # "wormhole-rs send"
