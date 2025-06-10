@@ -390,7 +390,7 @@
           ];
           config = {
             # on desktop
-            cudaSupport = false;
+            cudaSupport = true;
             cudaCapabilities = [
               "6.0"
               "7.0"
@@ -424,6 +424,7 @@
                   "cuda_cccl"
                   "cuda_nvcc"
                   "libcublas"
+                  "libcufile"
                   "cudatoolkit"
                   "libcurand"
                   "libcusparse"

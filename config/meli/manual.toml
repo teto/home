@@ -63,8 +63,9 @@ next_tab = ']'
 focus_left = "left"
 focus_right = "right"
 
-[shortcuts.composing]
-edit_mail = 'e'
+# [shortcuts.composing]
+# edit_mail = 'e'
+
 #
 ##Thread view defaults:
 #[shortcuts.compact-listing]
@@ -93,9 +94,9 @@ edit_mail = 'e'
 #page_up = "PageUp"
 #page_down = "PageDown"
 
-[composing]
-#required for sending e-mail
-editor_command = 'nvim +/^$' # optional, by default $EDITOR is used.
+# [composing]
+# #required for sending e-mail
+# editor_command = 'nvim +/^$' # optional, by default $EDITOR is used.
 
 #[pgp]
 #auto_sign = false # always sign sent messages

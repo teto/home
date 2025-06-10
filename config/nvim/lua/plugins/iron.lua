@@ -72,7 +72,7 @@ iron.setup({
             },
             lua = {
                 -- lua_interpreter
-                command = { nix_deps.lua_interpreter },
+                command = { nix_deps.lua_interpreter .. "/bin/lua" },
             },
         },
         -- How the repl window will be displayed

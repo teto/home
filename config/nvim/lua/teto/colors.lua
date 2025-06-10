@@ -2,6 +2,9 @@
 --     bg = tonumber('0x0032aa'),
 --     try one of https://github.com/Firanel/lua-color
 
+-- "lush" provides nice stuff 
+-- "colortils.nvim" also has some utilities
+
 local lush = require('lush')
 local bit = require('bit')
 local hsl = lush.hsl -- We'll use hsl a lot so its nice to bind it separately
@@ -25,6 +28,14 @@ function M.make_darker()
 
     vim.api.nvim_set_hl(0, 'Normal', { bg = newColor })
     vim.print(hi)
+end
+
+function M.number_to_hex(n)
+  return string.format("#%06x", bit.tohex(n))
+end
+
+function M.rgb_to_hex(n)
+  return string.format("#%06x", n)
 end
 
 return M

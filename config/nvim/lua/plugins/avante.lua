@@ -21,6 +21,19 @@ require('avante').setup({
 	 openai = {
 		 api_key_name = 'cmd:cat /home/teto/.config/sops-nix/secrets/OPENAI_API_KEY_NOVA',
 	 },
+    ollama = {
+	 model = "mistral",
+      endpoint = "http://127.0.0.1:11434",
+      timeout = 30000, -- Timeout in milliseconds
+      extra_request_body = {
+        options = {
+          temperature = 0.75,
+          num_ctx = 20480,
+          keep_alive = "5m",
+        },
+      },
+    },
+
    },
 	-- ollama = {
 	--   model = "deepseek-r1:7b"
@@ -28,7 +41,7 @@ require('avante').setup({
 	-- }
     -- openai_api_key = os.getenv("OPENAI_API_KEY")
 
-windows = {
+   windows = {
     ask = {
       floating = false, -- Open the 'AvanteAsk' prompt in a floating window
       start_insert = true, -- Start insert mode when opening the ask window

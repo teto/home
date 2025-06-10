@@ -292,3 +292,15 @@ rev = "v0.6.0"
 git = "h-hg/fcitx.nvim"
 rev = "dcb6b70888aa893d3d223bb777d4117bbdac06a7"
 
+[plugins."color-converter.nvim"]
+git = "ntbbloodbath/color-converter.nvim"
+rev = "5888e92cbccf0de202d2b617f6a8f3011a43bd52"
+
+[plugins.nvim-luadev]
+git = "bfredl/nvim-luadev"
+rev = "3ba0c02c378503739f1fdb95cff3ea2aad48db3e"
+
+[plugins."colortils.nvim"]
+git = "max397574/colortils.nvim"
+rev = "v1.2.0"
+

@@ -1,13 +1,21 @@
 [preview]
   # extra_args = []
   show_at_start = true
-  width_percentage = 70.0
+  width_percentage = 50.0
   width_increment_percentage = 5.0
+
+# [keys]
+# cancel = ["q"]
+# escape = ["esc"]
 
 # experimental_log_batching_enabled = true
 
+[ui]
+auto_refresh_interval=2
+
 [custom_commands]
-# "duplicate" = { key = ["m"], args = ["duplicate", "-d", "@" } }
+# duplicate 
+"duplicate" = { key = ["d"], args = ["duplicate", "-d", "@",  "$change_id"] }
 "show diff" = { key = ["U"], args = ["diff", "-r", "$change_id", "--color", "always"], show = "diff" }
 "show oplog diff" = { key = ["ctrl+o"], args = ["op", "show",  "$operation_id", "--color", "always"], show = "diff" }
 "resolve vscode" = { key = ["R"], args = ["resolve", "--tool", "vscode"], show = "interactive" }

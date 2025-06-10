@@ -181,9 +181,10 @@ in
           pavucontrol
           pkgs.networkmanagerapplet # should
           procs # Rust replacement for 'ps'
-          qiv # image viewer
+          qiv # image viewer doesnt work on wayland, needs adjustements ?
           qtpass
           restic # to backup photos to backblaze
+          rustic # rust client for restic. Backups should be compatible
           # rbw # Rust bitwarden unofficial client
           ripgrep
           # rofi-pass # rofi-pass it's enabled in the HM module ?
@@ -233,10 +234,12 @@ in
         python3Packages.subliminal # to download subtitles
         immich-cli
         mujmap-unstable # to sync notmuch tags across jmap
+        oculante # image viewer
         calcure
         # signal-desktop # installe a la main
         # memento # broken capable to display 2 subtitles at same time
         # leafnode dovecot22 dovecot_pigeonhole fetchmail procmail
+        vimiv-qt
         w3m
         # mairix mutt msmtp lbdb contacts spamassassin
         # element-desktop # TODO this should go into nix profile install

@@ -30,7 +30,14 @@ let
     ubuntu_font_family
     inconsolata # monospace
 
-    noto-fonts-cjk-sans # asiatic
+    # gpt recommended:
+  # Cica	Japanese-focused monospaced font
+    pkgs.myrica	 # https://myrica.estable.jp/ Balanced monospace font with CJK support
+    pkgs.hackgen-nf-font  # HackGen Console	Great for code + Japanese
+    pkgs.source-han-code-jp # Source Han Code JP	From Adobe; fixed-width variant of Source Han Sans
+
+    # cica
+    noto-fonts-cjk-sans # asiatic but double-width by default
     nerd-fonts.fira-code # otherwise no characters
     nerd-fonts.droid-sans-mono # otherwise no characters
 

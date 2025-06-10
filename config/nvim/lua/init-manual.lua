@@ -493,6 +493,14 @@ vim.g.fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %
 vim.api.nvim_create_autocmd('ColorScheme', {
     desc = 'Set italic codelens on new colorschemes',
     callback = function()
+
+		local bgcol = vim.api.nvim_get_hl(0,{ name = "Normal"})
+		local c = require'colortils'
+		local utils = require'colortils.utils.colors'
+		local hl_normal = vim.api.nvim_get_hl(0,{ name = "Normal"})
+		-- local
+		-- TODO use teto.colors
+		utils.get_grey(hl_normal.bg)
         vim.api.nvim_set_hl(0, 'LspCodeLens', { italic = true, bg = 'blue' })
         vim.api.nvim_set_hl(0, 'DiagnosticVirtualTextError', { fg = 'red' })
         vim.api.nvim_set_hl(0, 'DiagnosticVirtualTextDebug', { fg = 'green' })
