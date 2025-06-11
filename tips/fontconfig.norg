@@ -1,7 +1,11 @@
 
 * to find what font renders the character, you can try
 
-fc-match -s monospace:charset=f796 | head -n3
+  fc-match -s monospace:charset=f796
+
+  or  (-s = sort)
+
+fc-match -s 出 
 
 * Fontconfig handles 
 

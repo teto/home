@@ -197,6 +197,7 @@ in
           translate-shell # call with `trans`
           unzip
           wireshark
+          wiremix # pipewire handler
           wttrbar # for meteo
           xarchiver # to unpack/pack files
           xdg-utils

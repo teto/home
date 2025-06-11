@@ -6,3 +6,15 @@ get "borrow.xxx"
 create a key: SET title "The Hobbit"
 zcard
 zrange
+
+* debug high activity 
+
+  look at instantaneous_ops_per_sec in info
+
+  monitor                             # Watch live commands
+  slowlog get                         # Check slow commands
+  info stats                          # Redis stats
+  info commandstats                   # Per-command usage
+  client list                         # List clients
+  info persistence                    # Check background tasks
+  sudo perf top -p $(pidof redis-server)        # Profile live CPU usage

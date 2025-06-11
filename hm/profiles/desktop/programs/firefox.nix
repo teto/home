@@ -97,7 +97,8 @@ in
       # with pkgs;
 
       # pkgs.open-in-mpv
-      extensions.packages =
+      extensions = {
+        packages =
         ffLib.commonExtensions
         ++ (with pkgs; [
           # TODO no need for bitwarden anymore
@@ -109,6 +110,9 @@ in
           # pkgs.nur.repos.rycee.firefox-addons.browserpass-otp
 
         ]);
+        # autoDisableScopes = 0;
+        # update.autoUpdateDefault = false;
+      };
 
       search = {
         force = true;

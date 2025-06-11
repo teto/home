@@ -29,9 +29,31 @@
     NOTMUCH_CONFIG = "${config.xdg.configHome}/notmuch/default/config"; # for vdirsyncer
   };
 
+
   # TODO conditionnally define it
   # lib.mkIf config.mujmap-fastmail.enable
-  user.services.mujmap-fastmail.Service = {
+  user.services = {
+    # copied from nixos nixos/doc/manual/administration/service-mgmt.chapter.md, hoping it works the same
+    "notify-teto@".serviceConfig = {
+              # /run/wrappers/bin/sudo -u "#$USERID" DBUS_SESSION_BUS_ADDRESS="unix:path=$ADDRESS/bus" \
+              #   ${pkgs.libnotify}/bin/notify-send -t 60000 -i dialog-warning "Interrupted" "Scan interrupted. Don't forget to have it run to completion at least once a week!"
+              # exit 1
+
+      ExecStart = "echo 'hello world'";
+      # User = "...";
+    };
+    # "base-unit@".serviceConfig = {
+    #   ExecStart = "...";
+    #   User = "...";
+    # };
+    # "base-unit@instance-a" = {
+    #   overrideStrategy = "asDropin"; # needed for templates to work
+    #   wantedBy = [ "multi-user.target" ]; # causes NixOS to manage the instance
+    # };
+
+
+    # TODO enable conditionnally on account/services
+    mujmap-fastmail.Service = {
     Environment = [
       "PATH=${
         pkgs.lib.makeBinPath [
@@ -74,7 +96,8 @@
 
   # systemd.user.settings
   #     Extra config options for user session service manager. See systemd-user.conf(5) for available options.
-  user.services.swayrd.Service = lib.mkIf config.programs.swayr.enable {
+  # user.services.
+    swayrd.Service = lib.mkIf config.programs.swayr.enable {
     Environment = [
       "PATH=${
         lib.makeBinPath [
@@ -85,7 +108,8 @@
     ];
   };
 
-  user.services.pimsync.Service = lib.mkIf config.programs.pimsync.enable {
+  # user.services.
+  pimsync.Service = lib.mkIf config.programs.pimsync.enable {
     Environment = [
       "PATH=$PATH:${
         pkgs.lib.makeBinPath [
@@ -95,5 +119,6 @@
       }"
     ];
   };
+};
 
 }

@@ -3,6 +3,11 @@ systemctl get-default
 systemctl list-dependencies
 systemctl show-environment --user ?
 
+* notify on failure
+
+  Unit terminating by `@` => template.
+  Call it with on OnFailure
+
 systemd.user.settings.Manager.DefaultEnvironment
 
 * redirect a program output into journald

@@ -55,7 +55,8 @@ b.setup({
         menu = {
             enabled = true,
             min_width = 15,
-            max_height = 10,
+            max_height = 20,
+			-- what are possible values ?
             border = 'none',
             -- winblend = 0,
             -- winhighlight = 'Normal:BlinkCmpMenu,FloatBorder:BlinkCmpMenuBorder,CursorLine:BlinkCmpMenuSelection,Search:None',

@@ -161,8 +161,6 @@ vim.g.rocks_nvim = {
 --     })
 -- end
 
--- vim.opt.packpath:prepend('/home/teto/gp.nvim2')
-
 -- TODO prefix with gp_defaults.
 -- local defaults = require('gp.defaults')
 --
@@ -823,6 +821,7 @@ end, { desc = 'TOTO' })
 -- vim.print(vim.opt.rtp)
 require('plugins.diffview')
 require('lsp-progress').setup()
+require('teto.cursorline')
 
 local mclipboard = require'teto.clipboard'
 

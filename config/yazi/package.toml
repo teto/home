@@ -8,5 +8,10 @@ use = "yazi-rs/plugins:smart-enter"
 rev = "2730199"
 hash = "7918aab6a71caf31b58411f789195677"
 
+[[plugin.deps]]
+use = "stelcodes/bunny"
+rev = "a0b4e18"
+hash = "7acba2bb504c67dd7f2da135b88aae1b"
+
 [flavor]
 deps = []
