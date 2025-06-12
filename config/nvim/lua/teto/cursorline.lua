@@ -4,6 +4,8 @@ local function check_diagnostics_and_set_cursorline()
   local has_error = vim.diagnostic.count(0, { severity = vim.diagnostic.severity.ERROR })[1]
   -- > 0
 
+  vim.notify("Updating cursorline with errors ? ".. tostring(has_error))
+
   -- Change CursorLine color based on presence of errors
   if has_error then
     vim.api.nvim_set_hl(0, 'CursorLine', { bg = '#FF0000' })  -- Red if error

@@ -18,6 +18,7 @@ require('avante').setup({
    -- provider = "ollama",
 
    providers = {
+	azure = nil,
 	 openai = {
 		 api_key_name = 'cmd:cat /home/teto/.config/sops-nix/secrets/OPENAI_API_KEY_NOVA',
 	 },

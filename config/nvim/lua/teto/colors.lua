@@ -7,6 +7,7 @@
 
 local lush = require('lush')
 local bit = require('bit')
+
 local hsl = lush.hsl -- We'll use hsl a lot so its nice to bind it separately
 -- local v = require'lush.vivid.hsl.convert'
 -- vim.api.nvim_set_hl(0, 'Normal', { fg = "#ffffff", bg = "#333333" })

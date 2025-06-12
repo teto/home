@@ -87,6 +87,38 @@ diagnostic_default_config = {
 
 vim.diagnostic.config(diagnostic_default_config)
 
+
+vim.g.rest_nvim = {
+	request = {
+		skip_ssl_verification = true,
+	},
+	env = {
+		enable = false;
+	},
+	ui = {
+		winbar = true
+	}
+}
+
+-- 	-- Open request results in a horizontal split
+-- 	-- Skip SSL verification, useful for unknown certificates
+-- 	-- engine = 'classic',
+-- 	-- parser = 'treesitter',
+-- 	-- Highlight request on run
+-- 	highlight = {
+-- 		-- enabled = true,
+-- 		timeout = 150,
+-- 	},
+-- })
+--
+--
+-- -- TODO remove once it's merged upstream
+-- vim.api.nvim_create_user_command('RestLog', function()
+--   vim.cmd(string.format('tabnew %s', vim.fn.stdpath('cache')..'/rest.nvim.log'))
+-- end, {
+--   desc = 'Opens the rest.nvim log.',
+-- })
+
 -- this should not be needed anymore
 -- vim.cmd([[sign define DiagnosticSignError text=✘ texthl=LspDiagnosticsSignError linehl= numhl=]])
 -- vim.cmd([[sign define DiagnosticSignWarning text=！ texthl=LspDiagnosticsSignWarning linehl= numhl=CustomLineWarn]])
@@ -498,10 +530,12 @@ vim.api.nvim_create_autocmd('ColorScheme', {
 		local hl_normal = vim.api.nvim_get_hl(0,{ name = "Normal"})
 		-- local
 		-- TODO use teto.colors
-		utils.get_grey(hl_normal.bg)
+		-- utils.get_grey(hl_normal.bg)
+
         vim.api.nvim_set_hl(0, 'LspCodeLens', { italic = true, bg = 'blue' })
         vim.api.nvim_set_hl(0, 'DiagnosticVirtualTextError', { fg = 'red' })
         vim.api.nvim_set_hl(0, 'DiagnosticVirtualTextDebug', { fg = 'green' })
+
         -- autocmd ColorScheme *
         --       \ highlight Comment gui=italic
         --       \ | highlight Search gui=underline

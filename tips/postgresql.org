@@ -15,6 +15,20 @@ pg_ctl start
 POSTGRESQL_CONNECTION="$(pg_tmp)"
 psql "$POSTGRESQL_CONNECTION" --no-psqlrc 
 
+
+* monitor db status 
+
+see contrib/psql-debug.sql
+
+* load external script:
+
+\i /path/to/yourfile.sql
+This \i command (for "include") runs the file as if typed into the prompt.
+
+* monitor index creation
+
+select * from pg_stat_progress_create_index
+
 * Initialize a DB
 
   initdb
