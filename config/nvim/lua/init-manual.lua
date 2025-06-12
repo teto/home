@@ -871,3 +871,4 @@ vim.api.nvim_set_hl(0, 'GitSignsChangeLn', {
     bg = '#00FF00',  -- Green background
 })
 
+require("mcphub").setup()

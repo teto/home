@@ -375,3 +375,8 @@ source $XDG_CONFIG_HOME/bash/jj.sh
 # Merge that shell history with current one
 fc -R -I "$hist_file_1"
 
+# mostly for mcp-hub
+# adding where "npm -g install" install packages
+# retreivable via npm config get prefix
+# which might very be patched by nix I suspect ?
+PATH="$HOME/.cache/npm-packages/bin:$PATH"
