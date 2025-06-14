@@ -18,7 +18,8 @@ auto_refresh_interval=2
 "duplicate" = { key = ["d"], args = ["duplicate", "-d", "@",  "$change_id"] }
 "show diff" = { key = ["U"], args = ["diff", "-r", "$change_id", "--color", "always"], show = "diff" }
 "show oplog diff" = { key = ["ctrl+o"], args = ["op", "show",  "$operation_id", "--color", "always"], show = "diff" }
-"resolve vscode" = { key = ["R"], args = ["resolve", "--tool", "vscode"], show = "interactive" }
+# "resolve vscode" = { key = ["R"], args = ["resolve", "--tool", "vscode"], show = "interactive" }
 "new main" = { args = ["new", "main"] }
 "revert" = { key = [ "R" ] , args = [ "revert", "-r", "$change_id" ] }
 "tug" = { key = ["ctrl+t"], args = ["bookmark", "move", "--from", "closest_bookmark($change_id)", "--to", "closest_pushable($change_id)"] }
+"duplicage" = { key = ["ctrl+d"], args = ["duplicate" ] }

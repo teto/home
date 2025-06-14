@@ -8,6 +8,8 @@
 
 let
 
+  mcp-hub = flakeSelf.inputs.packages.${pkgs.system}.mcp-hub;
+
   inherit (pkgs.tetoLib)
     luaPlugin
     genBlockLua
@@ -100,6 +102,7 @@ in
           M.lua_interpreter = "${luaInterpreter}"
           M.luarocks_executable = "${luaInterpreter.pkgs.luarocks_bootstrap}/bin/luarocks"
           M.sqlite_clib_path = "${pkgs.sqlite.out}/lib/libsqlite3${pkgs.stdenv.hostPlatform.extensions.sharedLibrary}"
+          M.mcp_hub_path = "${mcp-hub}/bin/mcp-hub";
           return M
         '';
       };

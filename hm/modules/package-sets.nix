@@ -77,6 +77,9 @@ in
         # flakeSelf.inputs.jjui.packages.${pkgs.system}.jjui
         pkgs.jjui
 
+        # pkgs.jujutsu # replaced with the one from flake
+        # pkgs.jjui
+        pkgs.gg-jj
         pkgs.lazyjj
         pkgs.jj-fzf
       ];

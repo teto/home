@@ -124,7 +124,7 @@ in
 
   # needed for gpg-agent gnome pinentry
   # services.dbus.packages = [ pkgs.gcr ];
-  programs.nvimpager.enable = true;
+  programs.nvimpager.enable = false; # too slow
 
   programs.rbw = {
     enable = withSecrets;

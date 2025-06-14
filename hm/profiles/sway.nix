@@ -241,10 +241,10 @@ in
     # create option for the for_window popups
     #       include ~/.config/i3/config.shared
 
+    # timeout in ms
     extraConfig = ''
-      # timeout in ms
       include ~/.config/sway/manual.config
-    '';
+      '';
     # include ~/.config/sway/swayfx.txt
 
     extraOptions = [

@@ -1,4 +1,5 @@
 [Default Applications]
+application/yaml=nvim.desktop
 video/x-matroska=mpv.desktop
 text/csv=sublime_text.desktop
 text/x-lua=nvim.desktop
