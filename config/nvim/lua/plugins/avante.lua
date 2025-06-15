@@ -89,3 +89,12 @@ require('avante').setup({
   },
 
 })
+
+-- https://github.com/NixOS/nixpkgs/pull/408463
+-- require("avante.api").ask()
+  vim.keymap.set({ "n", "v" }, "F2", 
+   function()
+	require("avante.api").ask({ without_selection = true; })
+   end,
+   { noremap = true })
+

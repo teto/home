@@ -110,9 +110,9 @@ tree-sitter-norg = "0.2.6"
 version = "9.3.0"
 # ft = "norg"
 
-[plugins."gp.nvim"]
-# rev = "scm"
-dir = "/home/teto/neovim/gp.nvim"
+# [plugins."gp.nvim"]
+# # rev = "scm"
+# dir = "/home/teto/neovim/gp.nvim"
 
 [plugins."jap.nvim"]
 # rev = "scm"

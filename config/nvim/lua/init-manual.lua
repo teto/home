@@ -845,7 +845,8 @@ require('plugins.avante')
 
 -- HACK around sway-scratchpad limitation where one can't esapce quotes so alleviate the need for that via a proxy command
 vim.api.nvim_create_user_command('LlmChat', function()
-    vim.cmd([[GpChatToggle tab]])
+    -- vim.cmd([[GpChatToggle tab]])
+	require("avante.api").ask({ without_selection = true; })
 end, { desc = 'TOTO' })
 
 
@@ -871,4 +872,12 @@ vim.api.nvim_set_hl(0, 'GitSignsChangeLn', {
     bg = '#00FF00',  -- Green background
 })
 
-require("mcphub").setup()
+require("mcphub").setup({
+	-- looks odd ?
+	-- use_bundled_binary = true,  -- Use local `mcp-hub` binary
+
+	-- we could point at the nix executable with:
+	-- cmd = "node",
+	-- cmdArgs = {"/path/to/mcp-hub/src/utils/cli.js"},
+
+})

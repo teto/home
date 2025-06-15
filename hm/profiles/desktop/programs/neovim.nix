@@ -12,6 +12,8 @@ let
     -- }}}
   '';
 
+  mcp-hub = flakeSelf.inputs.mcp-hub.packages.${pkgs.system}.mcp-hub;
+
   luaPlugin =
     attrs:
     attrs
@@ -260,6 +262,7 @@ in
     ++ [
       pkgs.stylua # for lua formatting
       pkgs.gitlab-ci-ls # gitlab lsp
+      mcp-hub
     ]
 
   ;
