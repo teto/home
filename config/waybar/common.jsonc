@@ -65,7 +65,7 @@
 		},
 	},
 	"custom/ollama": {
-		"exec":        "waybar-custom-systemd-service ollama", 
+		"exec":        "waybar-custom-systemd-service.sh ollama", 
 		"on-click":    "waybar-nixpkgs-update-check && notify-send 'The system has been updated'", // refresh on click
 		"interval":    5, // refresh every hour
 		"tooltip":     true,

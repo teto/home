@@ -1,4 +1,6 @@
-{ pkgs, lib, ... }:
+{ pkgs, lib
+, dotfilesPath
+, ... }:
 let
   notify-send = "${pkgs.libnotify}/bin/notify-send";
 
@@ -33,7 +35,7 @@ in
     # ["${script}/bin/pass-show" accountName];
     [
       # ${pkgs.pass-teto}/bin/
-      "pass-perso"
+      "${dotfilesPath}/bin/pass-perso"
       "show"
       accountName
     ];

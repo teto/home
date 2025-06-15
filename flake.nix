@@ -982,7 +982,9 @@
             #   fenix = self.inputs.fenix;
             # };
 
-            tetoLib = final.callPackage ./hm/lib.nix { };
+            tetoLib = final.callPackage ./hm/lib.nix {
+              inherit dotfilesPath;
+            };
 
             pimsync-dev = prev.pimsync.overrideAttrs (
               drv:

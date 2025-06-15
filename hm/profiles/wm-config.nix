@@ -8,7 +8,7 @@ let
   # or use {pkgs.kitty}/bin/kitty
   term = "${pkgs.kitty}/bin/kitty";
 
-  myLib = pkgs.callPackage ../lib.nix { };
+  myLib = pkgs.tetoLib;
 
   # key modifier
   # mad = "Mod4";
