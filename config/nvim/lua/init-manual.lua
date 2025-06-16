@@ -141,7 +141,7 @@ vim.o.sessionoptions = 'buffers,curdir,help,tabpages,winsize,winpos,localoptions
 vim.opt.rtp:prepend(os.getenv('HOME') .. '/neovim/avante.nvim')
 -- doing jj tests
 vim.opt.rtp:prepend(os.getenv('HOME') .. '/neovim/diffview.nvim')
--- vim.opt.rtp:prepend(os.getenv('HOME') .. '/rocks-dev.nvim')
+-- vim.opt.rtp:prepend(os.getenv('HOME') .. '/neovim/rocks-dev.nvim')
 -- vim.opt.rtp:prepend(os.getenv('HOME') .. '/rocks.nvim')
 
 -- require("vim.lsp._watchfiles")._watchfunc = require("vim._watch").watch
@@ -810,7 +810,7 @@ require('plugins.nvim-treesitter-textobjects')
 -- require('plugins.nvim-treesitter')
 
 -- one can pass a list as well
--- vim.lsp.enable('lua_ls')
+vim.lsp.enable('lua_ls')
 vim.lsp.enable('rust_analyzer')
 vim.lsp.enable('clangd')
 vim.lsp.enable('pyright')
@@ -872,12 +872,24 @@ vim.api.nvim_set_hl(0, 'GitSignsChangeLn', {
     bg = '#00FF00',  -- Green background
 })
 
-require("mcphub").setup({
+vim.opt.rtp:prepend(os.getenv('HOME') .. '/neovim/mcphub.nvim')
+-- require("mcphub").setup(
+vim.g.mcphub = 
+	{
+		config = vim.fn.expand("~/.config/mcphub/servers.json"), -- Absolute path to MCP Servers config file (will create if not exists)
+		port = 37373, -- The port `mcp-hub` server listens to
 	-- looks odd ?
 	-- use_bundled_binary = true,  -- Use local `mcp-hub` binary
 
 	-- we could point at the nix executable with:
 	-- cmd = "node",
 	-- cmdArgs = {"/path/to/mcp-hub/src/utils/cli.js"},
+	log = {
+        to_file = true,
+        file_path = vim.fn.expand("~/mcphub.log"),
+        level = vim.log.levels.DEBUG,
+		prefix = "MCPHub",
+	},
 
-})
+}
+-- )

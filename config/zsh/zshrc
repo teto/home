@@ -379,4 +379,4 @@ fc -R -I "$hist_file_1"
 # adding where "npm -g install" install packages
 # retreivable via npm config get prefix
 # which might very be patched by nix I suspect ?
-PATH="$HOME/.cache/npm-packages/bin:$PATH"
+PATH="$HOME/.cargo/bin:$HOME/.cache/npm-packages/bin:$PATH"

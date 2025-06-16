@@ -41,7 +41,7 @@
       identity = secrets.accounts.mail.fastmail_perso.login;
       display_name = secrets.accounts.mail.fastmail_perso.displayName;
       manual_refresh = false; # defaults to false
-      refresh_command = "just -g mail-fetch";
+      refresh_command = "just -g mail-sync";
     };
 
     # shortcuts.general = {

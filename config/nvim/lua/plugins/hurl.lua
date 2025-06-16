@@ -2,6 +2,11 @@ local hurl = require('hurl')
 hurl.setup({
     -- Show debugging info
     debug = true, -- writes to log in ~/.local/state/nvim/hurl.
+	-- Specify your custom environment file name here
+	-- by default
+	-- env_file = {
+	-- 	'hurl.env',
+	-- },
     -- Show notification on run
     show_notification = false,
     -- find_env_files_in_folders(),

@@ -15,7 +15,7 @@ import = [
 plugins_dir = "plugins/"
 
 [dev]
-path = "~/neovim"
+path = "/home/teto/neovim"
 
 # List of non-Neovim rocks.
 # This includes things like `toml` or other lua packages.
@@ -42,7 +42,6 @@ auto-session = "2.5.1"
 "trouble.nvim" = "3.7.1"
 "lualine.nvim" = "scm"
 "rocks-lazy.nvim" = "scm"
-# "rest.nvim" = "3.10.1"
 "nui.nvim" = "0.4.0"
 neotest = "5.8.0"
 "rocks-dev.nvim" = "1.8.0"
@@ -307,7 +306,6 @@ rev = "v1.2.0"
 
 [plugins."mcphub.nvim"]
 # :MCPHub
-git = "ravitemer/mcphub.nvim"
-rev = "v5.7.2"
-options = {}
+dev = true 
+# dir = "/home/teto/neovim/mcphub.nvim"
 

@@ -191,13 +191,13 @@ b.setup({
         },
         providers = {
 		 -- ve:
-            git = {
-                module = 'blink-cmp-git',
-                name = 'Git',
-                opts = {
-                    -- options for the blink-cmp-git
-                },
-            },
+            -- git = {
+            --     module = 'blink-cmp-git',
+            --     name = 'Git',
+            --     opts = {
+            --         -- options for the blink-cmp-git
+            --     },
+            -- },
             snippets = {
                 opts = {
                     search_path = '',
