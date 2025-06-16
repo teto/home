@@ -873,6 +873,7 @@ vim.api.nvim_set_hl(0, 'GitSignsChangeLn', {
 })
 
 vim.opt.rtp:prepend(os.getenv('HOME') .. '/neovim/mcphub.nvim')
+vim.opt.rtp:prepend(os.getenv('HOME') .. '/neovim/hurl.nvim')
 -- require("mcphub").setup(
 vim.g.mcphub = 
 	{
