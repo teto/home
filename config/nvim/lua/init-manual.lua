@@ -1,4 +1,3 @@
-
 -- vim: set noet fdm=marker fenc=utf-8 ff=unix sts=0 sw=4 ts=4 :
 -- https://github.com/nanotee/nvim-lua-guide#using-meta-accessors
 -- https://www.reddit.com/r/neovim/comments/o8dlwg/how_to_append_to_an_option_in_lua/
@@ -53,9 +52,23 @@ vim.o.winborder = "rounded"
 diagnostic_default_config = {
     -- disabled because too big in haskell
     virtual_lines = {
-        only_current_line = true,
+        current_line = true,
+		-- Function that can transform the diagnostic
+		-- format = if 
     },
-    virtual_text = false,
+    virtual_text = {
+		source = "if_many",
+		      -- • {format}?             (`fun(diagnostic:vim.Diagnostic): string?`) If
+		      --                       not nil, the return value is the text used to
+		      --                       display the diagnostic. Example: >lua
+		      --                           function(diagnostic)
+		      --                             if diagnostic.severity == vim.diagnostic.severity.ERROR then
+		      --                               return string.format("E: %s", diagnostic.message)
+		      --                             end
+		      --                             return diagnostic.message
+		      --                           end
+		      --
+	},
     {
         severity = { min = vim.diagnostic.severity.WARN },
     },

@@ -13,10 +13,10 @@
   # package = pkgs.meli-git;
   package = pkgs.meli;
 
-  # includes = [
-  #   "manual.toml"
-  #   # "fastmail.toml"
-  # ];
+  includes = [
+    "manual.toml"
+    # "fastmail.toml"
+  ];
 
   settings = {
     # includes = [

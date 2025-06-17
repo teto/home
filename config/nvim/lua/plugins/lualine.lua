@@ -164,10 +164,10 @@ require('lualine').setup({
         }, -- progress = %progress in file
         lualine_z = {
             -- 'obsession',
-            {
-                'gp-nvim',
-                on_click = on_click_gp,
-            },
+            -- {
+            --     'gp-nvim',
+            --     on_click = on_click_gp,
+            -- },
             -- 'autosession',
             -- get_workspace_diagnostic_count,
             -- 'location',
