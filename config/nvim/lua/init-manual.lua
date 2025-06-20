@@ -669,7 +669,7 @@ vim.g.tex_flavor = 'latex'
 -- should not be required anymore since plugins/nvim-treesitter.lua is called
 -- require('teto.treesitter')
 -- vim.lsp.set_log_level('DEBUG')
-
+vim.lsp.set_log_level(vim.lsp.log_levels.INFO)
 -- setup haskell-tools
 vim.g.haskell_tools = require('teto.haskell-tools').generate_settings()
 
@@ -873,7 +873,7 @@ require('teto.cursorline')
 
 local mclipboard = require'teto.clipboard'
 
-vim.keymap.set('n', '<F7>', function () mclipboard.copy_filename() end, 
+vim.keymap.set('n', '<F7>', function () mclipboard.copy_filename() end,
 			   { desc = 'Copy buffer filename' })
 
 -- Set highlight for GitSignsAdd with green background
@@ -887,8 +887,7 @@ vim.api.nvim_set_hl(0, 'GitSignsChangeLn', {
 
 vim.opt.rtp:prepend(os.getenv('HOME') .. '/neovim/mcphub.nvim')
 vim.opt.rtp:prepend(os.getenv('HOME') .. '/neovim/hurl.nvim')
--- require("mcphub").setup(
-vim.g.mcphub = 
+vim.g.mcphub =
 	{
 		config = vim.fn.expand("~/.config/mcphub/servers.json"), -- Absolute path to MCP Servers config file (will create if not exists)
 		port = 37373, -- The port `mcp-hub` server listens to
@@ -906,4 +905,10 @@ vim.g.mcphub =
 	},
 
 }
--- )
+    vim.keymap.set('n', '[[', function()
+        vim.diagnostic.goto_prev({ wrap = true})
+    end, { buffer = true })
+    vim.keymap.set('n', ']]', function()
+        vim.diagnostic.goto_next({ wrap = true})
+    end, { buffer = true })
+

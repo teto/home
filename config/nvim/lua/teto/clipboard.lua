@@ -12,7 +12,7 @@ M.get = function()
     vim.cmd("call provider#clipboard#Call('get', )")
 end
 
---- @param fullpath copy the absolute path
+---@param fullpath boolean copy the absolute path
 M.copy_filename = function (fullpath)
    local filename = vim.fn.bufname('%') -- vim.fn.getreg('%')
    local fullpath = (button == 'r')

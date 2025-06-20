@@ -1,0 +1,1 @@
+CALLBACK_CMD: notify-send "way-displays ${CALLBACK_LEVEL}" "${CALLBACK_MSG}"

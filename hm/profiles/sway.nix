@@ -29,6 +29,8 @@ in
     # enable = true;
     # creates a sway-session target that is started on wayland start
 
+   systemd.enable = true;
+
     config = {
       terminal = term;
       workspaceAutoBackAndForth = true;
@@ -40,6 +42,7 @@ in
 
       fonts = {
         # Source Code Pro
+        # TODO use the japanese font 
         names = [ "Inconsolata Normal" ];
         size = 12.0;
       };
@@ -281,8 +284,9 @@ in
   };
 
   xdg.configFile."sway/config".text = lib.mkBefore "
-	include ~/.config/sway/config.shared
-   ";
+     include ~/.config/sway/config.shared
+     ";
+
 
   # env RUST_BACKTRACE=1 RUST_LOG=swayr=debug swayrd > /tmp/swayrd.log 2>&1
   # https://git.sr.ht/~tsdh/swayr/tree/main/item/swayr/etc/swayrd.service

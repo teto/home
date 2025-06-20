@@ -1,10 +1,14 @@
 {
+  flakeSelf,
   config,
   lib,
   pkgs,
   ...
 }:
 {
+  imports = [
+    flakeSelf.homeProfiles.sway
+  ];
 
   wayland.windowManager.sway = {
     enable = true;

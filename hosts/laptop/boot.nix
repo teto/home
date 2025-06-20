@@ -8,7 +8,7 @@
 
   
   # lib.mkForce 
-  kernelPackages = pkgs.linuxPackages_6_6; # pkgs.linuxPackages_latest;
+  kernelPackages = pkgs.linuxPackages_6_14; # pkgs.linuxPackages_latest;
 
   # it apparently still is quite an important thing to have
   devSize = "5g";

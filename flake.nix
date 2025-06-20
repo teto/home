@@ -816,9 +816,6 @@
 
         mod-cliphist = ./hm/modules/cliphist.nix;
 
-        # existe dans hm now
-        # meli = ./hm/modules/programs/meli.nix;
-
         # for stuff not in home-manager yet
         experimental = ./hm/profiles/experimental.nix;
         gnome-shell = ./hm/profiles/gnome.nix;
@@ -925,23 +922,6 @@
               })
             );
 
-            meli-git = prev.meli.overrideAttrs (drv: rec {
-              name = "meli-${version}";
-              version = "g${self.inputs.meli-src.shortRev}";
-              src = self.inputs.meli-src;
-
-              cargoPatches = [ ];
-              useFetchCargoVendor = true;
-
-              cargoDeps = final.rustPlatform.fetchCargoVendor {
-                inherit src;
-                hash = "sha256-OyOLAw3HzXY85Jwolh4Wqjmm6au6wRwGq5WkicOt5eg=";
-              };
-
-              checkFlags = drv.checkFlags ++ [
-                "--skip=test_imap_watch"
-              ];
-            });
 
             local-ai-teto = (
               prev.local-ai.override ({
