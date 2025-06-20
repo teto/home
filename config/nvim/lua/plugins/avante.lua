@@ -154,6 +154,8 @@ require('avante').setup({
 
 })
 
+-- vim.api.nvim_create_user_command('', '!hasktags .', { desc = 'Regenerate tags' })
+
 -- https://github.com/NixOS/nixpkgs/pull/408463
 -- require("avante.api").ask()
   vim.keymap.set({ "n", "v" }, "F2", 

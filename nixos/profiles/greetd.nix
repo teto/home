@@ -69,7 +69,7 @@
 
               # tryExec =
               # icon = "ivan.png";
-              desktopName = "sway-systemd";
+              desktopName = "sway-systemd;wlroots";
               genericName = "sway-systemd";
               categories = [
                 # "RolePlaying"
@@ -82,6 +82,13 @@
               echo "${swaySystemd}"
               install -D -m755 ${swaySystemd}/share/applications/sway-systemd.desktop $out/share/wayland-sessions/
             '';
+
+            waylandSessionsPackages = [
+              # swaySystemdSession
+              config.home-manager.users.teto.home.path
+              sessionData
+            ];
+            waylandSessionsPath = lib.concatMapStringsSep ":" (pkg: "${pkg}/share/wayland-sessions") waylandSessionsPackages;
 
             # WLR_NO_HARDWARE_CURSORS = 1;
             # waylandWrapper = pkgs.writeShellScript "wayland-wrapper" ''
@@ -99,7 +106,7 @@
               "--time"
               "--greeting 'Hello noob'"
               # TODO make sway the default wrapper
-              "--sessions ${swaySystemdSession}:${config.home-manager.users.teto.home.path}/share/wayland-sessions:${sessionData}/share/wayland-sessions"
+              "--sessions ${waylandSessionsPath}"
               "--xsessions ${config.home-manager.users.teto.home.path}/share/xsessions:${sessionData}/share/xsessions"
               # "--asterisks"  # show asterisks
               "--power-shutdown /run/current-system/systemd/bin/systemctl poweroff"
@@ -108,7 +115,7 @@
             ];
 
             sessionData = config.services.displayManager.sessionData.desktops;
-            sessionPackages = lib.concatStringsSep ":" config.services.displayManager.sessionPackages;
+            # sessionPackages = lib.concatStringsSep ":" config.services.displayManager.sessionPackages;
             hmSessionPath = "${config.home-manager.users.teto.home.path}/share/wayland-sessions";
 
           in
@@ -116,7 +123,7 @@
           # builtins.trace "home.path: ${config.home-manager.users.teto.home.path}/share/wayland-sessions"
           # config.services.xserver.displayManager.session.desktops
           builtins.trace
-            "sessionPath: ${sessionPackages}\nsessionData: ${sessionData}\nhome.path: ${hmSessionPath}"
+            "sessionPath: ${waylandSessionsPath}\nsessionData: ${sessionData}\nhome.path: ${hmSessionPath}"
             "${lib.getExe pkgs.greetd.tuigreet} ${flags}";
 
         # user = "greeter"; # it's the default already

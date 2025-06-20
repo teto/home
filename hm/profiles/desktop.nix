@@ -57,15 +57,11 @@ in
 
   imports = [
     autoloadedModule
-    # ./xdg-portal.nix
     ./common.nix
-    # ./sway.nix
     flakeSelf.homeProfiles.sway
     flakeSelf.homeProfiles.neovim
     ./zsh.nix
 
-    # ./fcitx.nix
-    # ./neovim
   ];
 
   # allows to find fonts enabled through home.packages

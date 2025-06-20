@@ -6,7 +6,7 @@
     HISTTIMEFORMAT = "%d.%m.%y %T ";
     # CAREFUL
     # HISTFILE="$XDG_CACHE_HOME/bash_history";
-    CDPATH = "$CDPATH:$HOME/neovim";
+    CDPATH = "$HOME/neovim:$HOME/nova";
   };
 
   shellAliases = {

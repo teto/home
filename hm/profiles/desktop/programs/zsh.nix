@@ -18,7 +18,7 @@
   sessionVariables = {
     # HISTTIMEFORMAT = "%d.%m.%y %T ";
     # CAREFUL
-    CDPATH = "$CDPATH:$HOME/neovim";
+    CDPATH = "$HOME/neovim:$HOME/nova";
   };
 
   completionInit = ''

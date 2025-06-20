@@ -80,6 +80,7 @@ alias q="qutebrowser"
 # compilation related {{{
 alias makej="make -j4"
 alias nm="nm -l"
+alias ts="tailscale"
 # }}}
 
 export MCFLY_KEY_SCHEME=vim

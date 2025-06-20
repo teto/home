@@ -51,7 +51,15 @@
       "LC_ALL=ja_JP.utf8"
     ];
     };
-    Unit.PartOf = [ "tray.target" ];
+    Unit = {
+      PartOf = [ "tray.target" ];
+      # waybar might be slow to start but because of portals instead
+      # StartLimitIntervalSec = 100;
+      # 
+      # StartLimitIntervalUSec=10s;
+
+    };
     Install.WantedBy = [ "tray.target" ];
+
   };
 }

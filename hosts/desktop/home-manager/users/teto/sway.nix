@@ -19,12 +19,6 @@
       # -Dlegacy-wl-drm
       "--unsupported-gpu"
     ];
-    # some of it already read from profiles/sway
-    # extraSessionCommands =
-    #   let
-    #     exportVariables = lib.mapAttrsToList (n: v: ''export ${n}=${builtins.toString v}'') swayEnvVars;
-    #   in
-    #   lib.concatStringsSep "\n" exportVariables;
 
     config = {
       output = {
@@ -37,14 +31,15 @@
           bg = "${dotfilesPath}/wallpapers/toureiffel.jpg fill";
 
         };
-        "HDMI-A-2" = {
-          disable = "";
-          # bg = "${dotfilesPath}/wallpapers/toureiffel.jpg fill";
-
-        };
+        # "HDMI-A-2" = {
+        #   disable = "";
+        #   # bg = "${dotfilesPath}/wallpapers/toureiffel.jpg fill";
+        #
+        # };
 
         #  "/home/teto/home/wallpapers/nebula.jpg fill"
         "*" = {
+          # fails with nvidia but shallbe revisited ?
           adaptive_sync = "off";
         };
 

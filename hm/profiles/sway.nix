@@ -22,14 +22,26 @@ let
 in
 {
 
-  # todo prepend sharedExtraConfig
-  # xdg.configFile."sway/config" =
-
   wayland.windowManager.sway = {
     # enable = true;
-    # creates a sway-session target that is started on wayland start
 
-   systemd.enable = true;
+    # creates a sway-session target that is started on wayland start
+    systemd = {
+      enable = true;
+
+      # turns out enabling way-displays kills of all that
+      variables = [
+          "DISPLAY"
+          "WAYLAND_DISPLAY"
+          "SWAYSOCK"
+          "XDG_CURRENT_DESKTOP"
+          "XDG_SESSION_TYPE"
+          "NIXOS_OZONE_WL"
+          "XCURSOR_THEME"
+          "XCURSOR_SIZE"
+        ];
+    };
+
 
     config = {
       terminal = term;
