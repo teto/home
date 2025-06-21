@@ -329,8 +329,18 @@
       system = "x86_64-linux";
 
       # TODO check out packagesFromDirectoryRecursive  as well ?
-      # packagesFromDirectoryRecursive
-      autoCalledPackages = import "${nixpkgs}/pkgs/top-level/by-name-overlay.nix" ./by-name;
+      byNamePkgsOverlay = import "${nixpkgs}/pkgs/top-level/by-name-overlay.nix" ./by-name;
+
+      # 
+      autoloadedPkgsOverlay = final: _prev: nixpkgs.legacyPackages.${system}.lib.packagesFromDirectoryRecursive  {
+        # inherit (self) callPackage;
+        # callPackage = callPackage
+        # TODO could be renamed to self ?
+        # nixpkgs.legacyPackages.${system}
+        callPackage = final.newScope { flakeSelf = self; };
+        directory = ./pkgs;
+      };
+
 
       /**
         default system
@@ -371,17 +381,18 @@
           inherit system;
           overlays = (src.lib.attrValues self.overlays) ++ [
             (final: prev: {
-              # expose it for autoCalledPackages
+              # expose it for byNamePkgsOverlay
               inherit treefmt-nix;
             })
-            autoCalledPackages
+            byNamePkgsOverlay
+            autoloadedPkgsOverlay
             # self.inputs.rofi-hoogle.overlay
 
             # the nova overlay just brings ztp-creds and gitlab-ssh-keys
             # removing the overlay means we dont need it during evaluation
             # we dont want to pull those inputs for secret-less envs
             # self.inputs.nova-doctor.overlays.default
-            # self.inputs.nova-doctor.overlays.autoCalledPackages
+            # self.inputs.nova-doctor.overlays.byNamePkgsOverlay
 
             # self.inputs.nixpkgs-wayland.overlay
             # self.inputs.nix.overlays.default
@@ -641,7 +652,8 @@
 
       packages =
         self.inputs.neovim-nightly-overlay.packages.${system}
-        // (autoCalledPackages myPkgs { })
+        // (byNamePkgsOverlay myPkgs { })
+        // (autoloadedPkgsOverlay myPkgs { })
         // {
           /*
             my own nvim with
@@ -723,7 +735,7 @@
           # pkgs = ;
           # myPkgs.extend(
           # self.inputs.nova-doctor.overlays.default);
-          # self.inputs.nova-doctor.overlays.autoCalledPackages
+          # self.inputs.nova-doctor.overlays.byNamePkgsOverlay
           modules = [
             self.nixosModules.nova
           ];
@@ -765,7 +777,7 @@
             withSecrets = true;
             # pkgs = myPkgs.extend(
             #   self.inputs.nova-doctor.overlays.default).extend(
-            #   self.inputs.nova-doctor.overlays.autoCalledPackages
+            #   self.inputs.nova-doctor.overlays.byNamePkgsOverlay
             #
             #     );
           };
@@ -775,7 +787,7 @@
             ({
               nixpkgs.overlays = [
                 self.inputs.nova-doctor.overlays.default
-                self.inputs.nova-doctor.overlays.autoCalledPackages
+                self.inputs.nova-doctor.overlays.byNamePkgsOverlay
 
               ];
             })

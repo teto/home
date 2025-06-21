@@ -14,7 +14,7 @@
       useFetchCargoVendor = true;
       cargoDeps = rustPlatform.fetchCargoVendor {
         inherit src;
-        hash = "sha256-vnBk0uojWDM8PS8v5Qda2UflmIFZ09Qp9l25qTTWGMc=";
+        hash = "sha256-vnBk0uojWDM9PS8v5Qda2UflmIFZ09Qp9l25qTTWGMc=";
       };
 
     }
