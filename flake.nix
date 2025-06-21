@@ -8,7 +8,6 @@
 
   # commented to avoid warnings
   # nixConfig = {
-  #
   #   extra-substituters = [
   #     "https://nixpkgs-wayland.cachix.org"
   #   ];
@@ -55,13 +54,6 @@
     #   url = "github:junegunn/fzf-git.sh";
     #   flake = false;
     # };
-
-    fenix = {
-      # used for nightly rust devtools
-      # for git-repo-manager du coup
-      url = "github:nix-community/fenix";
-      inputs."nixpkgs".follows = "nixpkgs";
-    };
 
     git-repo-manager = {
       url = "github:hakoerber/git-repo-manager";
@@ -337,6 +329,7 @@
       system = "x86_64-linux";
 
       # TODO check out packagesFromDirectoryRecursive  as well ?
+      # packagesFromDirectoryRecursive
       autoCalledPackages = import "${nixpkgs}/pkgs/top-level/by-name-overlay.nix" pkgs/by-name;
 
       /**
@@ -664,13 +657,13 @@
             jmdict
             local-ai-teto
             meli-git
-            neomutt
+            # neomutt
             popcorntime-teto
             sway-scratchpad
             gpt4all
             gpt4all-cuda
             termscp-matt
-            pimsync-dev
+            # pimsync-dev
             rsync-yazi
             ;
 
@@ -916,7 +909,7 @@
 
             inherit llama-cpp-matt;
 
-            neomutt = prev.lib.warn "neomutt override" (
+            neomutt-dev = prev.lib.warn "neomutt override" (
               prev.neomutt.overrideAttrs ({
                 src = self.inputs.neomutt-src;
               })
@@ -957,35 +950,10 @@
                 ;
             };
 
-            # borken with recent update https://github.com/NixOS/nixpkgs/issues/348832
-            # git-repo-manager = prev.callPackage ./pkgs/by-name/gi/git-repo-manager/package.nix {
-            #   fenix = self.inputs.fenix;
-            # };
-
             tetoLib = final.callPackage ./hm/lib.nix {
               inherit dotfilesPath;
             };
 
-            pimsync-dev = prev.pimsync.overrideAttrs (
-              drv:
-              let
-                pimsync-src = self.inputs.pimsync-src;
-              in
-              rec {
-
-                version = "g${pimsync-src.shortRev}";
-                src = pimsync-src;
-
-                PIMSYNC_VERSION = "${version}";
-
-                useFetchCargoVendor = true;
-                cargoDeps = final.rustPlatform.fetchCargoVendor {
-                  inherit src;
-                  hash = "sha256-vnBk0uojWDM9PS8v5Qda2UflmIFZ09Qp9l25qTTWGMc=";
-                };
-
-              }
-            );
 
             rsync-yazi = myPkgs.yaziPlugins.mkYaziPlugin {
                 pname = "rsync.yazi";
