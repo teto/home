@@ -330,7 +330,7 @@
 
       # TODO check out packagesFromDirectoryRecursive  as well ?
       # packagesFromDirectoryRecursive
-      autoCalledPackages = import "${nixpkgs}/pkgs/top-level/by-name-overlay.nix" pkgs/by-name;
+      autoCalledPackages = import "${nixpkgs}/pkgs/top-level/by-name-overlay.nix" ./by-name;
 
       /**
         default system
