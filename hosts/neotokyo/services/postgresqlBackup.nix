@@ -13,8 +13,10 @@ let
   dbName = config.services.immich.database.name;
 in
 {
+  # official service from nixpkgs
   services.postgresqlBackup = {
     enable = true;
+    # every day everyhour
     startAt = "*-*-* *:15:00";
     pgdumpOptions = "--no-owner -v";
 

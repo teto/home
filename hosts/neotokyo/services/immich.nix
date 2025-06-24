@@ -10,6 +10,8 @@
     enable = true;
     # host = ""; # all interfaces (example from module option) breaks with nginx
 
+    group = "teto";
+
     machine-learning = {
       # enable = lib.mkForce true;
       enable = false;

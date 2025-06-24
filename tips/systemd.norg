@@ -97,6 +97,17 @@ One can use systemd-run to create transient .timer units. That is, one can set a
 # systemd-run --on-active=30 /bin/touch /tmp/foo
 
 
+* override  Identifier in journalctl:
+
+  add 
+  ```
+  [Service]
+  SyslogIdentifier = "nm-applet";
+  ```
+
+  will work only if transport is stdout/stderr though see
+  https://github.com/systemd/systemd/issues/8687
+
 # debug systemd issue 
 
 sudo systemctl edit gitlab-runner.service                

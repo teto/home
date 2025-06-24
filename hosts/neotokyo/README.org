@@ -4,3 +4,6 @@ reverseproxy: nginx
 
 We use et’s Encrypt uses the ACME protocol to verify that you control a given domain name and to issue you a certificate. 
 Using a "wildcard"
+
+
+* backup procedure
