@@ -184,8 +184,8 @@ in
   useAsManViewer = true;
 
   lsp.mapOnAttach = true;
+  lualsAddons = true;
 
-  #
   # enableYazi = true;
 
   # local nix_deps = require('generated-by-nix')

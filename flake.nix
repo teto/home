@@ -26,6 +26,16 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    luals-busted-addon = {
+      url = "https://github.com/LuaCATS/busted.git";
+      flake = false;
+    };
+
+    luals-luassert-addon = {
+      url = "https://github.com/LuaCATS/luassert.git";
+      flake = false;
+    };
+
     # avante-nvim-src = {
     #   # url = "github:teto/avante.nvim?ref=matt/debug";
     #   url = "path:/home/teto/neovim/avante.nvim";

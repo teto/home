@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  flakeSelf,
   ...
 }:
 
@@ -169,6 +170,7 @@ in
       };
 
       useAsManViewer = mkEnableOption "use as man viewer";
+      lualsAddons = mkEnableOption "Install luals addons";
 
       enableMyDefaults = mkEnableOption "my favorite defaults";
 
@@ -328,6 +330,15 @@ in
       };
     })
 
+    (mkIf cfg.lualsAddons {
+      # maybe those addons should be added to "pkgs" instead
+      xdg.configFile."nvim/luals-addons.lua".text = ''
+        {
+        "${flakeSelf.inputs.luals-busted-addon}",
+        "${flakeSelf.inputs.luals-luassert-addon}"
+        }
+        '';
+    })
 
     (mkIf cfg.treesitter.enable {
       programs.neovim.plugins = treesitterPlugins;
