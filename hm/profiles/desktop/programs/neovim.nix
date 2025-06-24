@@ -58,18 +58,19 @@ let
 
   luaPlugins = with pkgs.vimPlugins; [
 
-    (luaPlugin {
-      plugin = avante-nvim;
-      #   .overrideAttrs({
-      #
-      #   src = flakeSelf.inputs.avante-nvim-src;
-      # });
-      # require("avante").setup()
-      # config = ''
-      # require("avante_lib").load()
-      # '';
-
-    })
+    # (luaPlugin {
+    #   plugin = avante-nvim;
+    #   #   .overrideAttrs({
+    #   #
+    #   #   src = flakeSelf.inputs.avante-nvim-src;
+    #   # });
+    #   # require("avante").setup()
+    #   # config = ''
+    #   # require("avante_lib").load()
+    #   # '';
+    #
+    # })
+    { plugin = nui-nvim; }
     { plugin = nvim-colorizer-lua; }
     pkgs.vimPlugins.typescript-tools-nvim
     pkgs.vimPlugins.gitlab-vim

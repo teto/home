@@ -787,8 +787,7 @@
             ({
               nixpkgs.overlays = [
                 self.inputs.nova-doctor.overlays.default
-                self.inputs.nova-doctor.overlays.byNamePkgsOverlay
-
+                self.inputs.nova-doctor.overlays.autoCalledPackages
               ];
             })
           ];

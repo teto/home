@@ -30,16 +30,16 @@ in
       enable = true;
 
       # turns out enabling way-displays kills of all that
-      variables = [
-          "DISPLAY"
-          "WAYLAND_DISPLAY"
-          "SWAYSOCK"
-          "XDG_CURRENT_DESKTOP"
-          "XDG_SESSION_TYPE"
-          "NIXOS_OZONE_WL"
-          "XCURSOR_THEME"
-          "XCURSOR_SIZE"
-        ];
+      # variables = [
+      #     "DISPLAY"
+      #     "WAYLAND_DISPLAY"
+      #     "SWAYSOCK"
+      #     "XDG_CURRENT_DESKTOP"
+      #     "XDG_SESSION_TYPE"
+      #     "NIXOS_OZONE_WL"
+      #     "XCURSOR_THEME"
+      #     "XCURSOR_SIZE"
+      #   ];
     };
 
 

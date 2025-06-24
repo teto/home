@@ -110,6 +110,7 @@ in
           # hopefully we can remove this from the environment
           # it's just that I can't setup latex correctly
           # pkgs.rofi-rbw-wayland
+          pkgs.ddcutil # 
           pkgs.timg # to display images in terminal, to compare with imgcat ?
           myImagemagick
 
@@ -489,8 +490,8 @@ in
 
         # https://github.com/NixOS/nixpkgs/pull/368909
         pkgs.kakasi # convert kanjis into kanas etc
-        pkgs.mokuro # broken because of triton-llvm
-        pkgs.python3Packages.manga-ocr
+        (ignoreBroken pkgs.mokuro) # broken because of manga-ocr
+        (ignoreBroken pkgs.python3Packages.manga-ocr)
         tagainijisho # japanse dict; like zkanji Qt based
         # flakeSelf.inputs.vocage.packages."x86_64-linux".vocage
         jiten # unfree, helpful for jap.nvim

@@ -9,7 +9,9 @@
 -- })
 -- require('avante_lib').load()
 require('avante').setup({
+  debug = false, -- print error messages
   behaviour = {
+   auto_set_keymaps = false,
    enable_token_counting = false,
    -- auto_approve_tool_permissions = {"bash", "replace_in_file"}, -- Auto-approve specific tools only
   },
