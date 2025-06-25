@@ -50,7 +50,7 @@ neotest = "5.8.0"
 "lsp_signature.nvim" = "0.3.1"
 friendly-snippets = "scm"
 # "haskell-snippets.nvim" = "1.4.4"
-"yazi.nvim" = "11.5.1"
+"yazi.nvim" = "11.5.3"
 # tree-sitter-haskell = "scm"
 # tree-sitter-org = "0.0.1"
 # "lspkind.nvim" = "scm"
@@ -73,16 +73,16 @@ vim-startuptime= "4.5.0"
 "typescript-tools.nvim" = "scm"
 menu= "scm"
 # "snacks.nvim" = "2.6.0"
-fzf-lua = "0.0.1927"
+fzf-lua = "0.0.1948"
 "lz.n" = "2.11.2"
 "indent-blankline.nvim" = "3.9.0"
 "llm.nvim"= "scm"
 # volt is a UI library
 volt= "scm"
 # "telescope.nvim" = "0.1.6"
-nvim-lspconfig= "2.2.0"
+nvim-lspconfig= "2.3.0"
 # tree-sitter-org = "0.0.1"
-"grug-far.nvim"= "1.6.38"
+"grug-far.nvim"= "1.6.42"
 orgmode = "0.6.0"
 neogit = "2.0.0"
 "diffview.nvim" = "scm"
@@ -232,7 +232,7 @@ branch = "master"
 
 [plugins.vim-env-syntax]
 git = "overleaf/vim-env-syntax"
-rev = "2137f77840fe6e5e67dc0422f1759ab1ddc86d60"
+branch = "main"
 
 [plugins."treewalker.nvim"]
 git = "aaronik/treewalker.nvim"
@@ -260,7 +260,7 @@ rev = "c399884e8f64019ec9bb581251f9710915b7f996"
 
 [plugins."codecompanion.nvim"]
 git = "olimorris/codecompanion.nvim"
-rev = "v15.12.0"
+rev = "v17.3.0"
 
 [plugins.jj-diffconflicts]
 git = "rafikdraoui/jj-diffconflicts"
@@ -282,7 +282,7 @@ rev = "d55348fab9254bf208766efac9a35100ac474ec0"
 
 [plugins."hunk.nvim"]
 git = "julienvincent/hunk.nvim"
-rev = "v1.7.0"
+rev = "v1.8.0"
 
 [plugins."img-clip.nvim"]
 git = "hakonharnes/img-clip.nvim"
