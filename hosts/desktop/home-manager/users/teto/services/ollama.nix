@@ -1,5 +1,8 @@
 {
-  services.ollama.enable = true;
+  services.ollama = {
+    enable = true;
+    acceleration = "cuda";
+  };
 
       # acceleration = "nvidia";
 
