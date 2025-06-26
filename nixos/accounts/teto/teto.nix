@@ -22,6 +22,7 @@
       "dialout" # to access serial devices like the conbee II
       "docker" # to access docker socket
       "input" # for libinput-gestures
+      "i2c" # to control brightness of the screen
       "keys"
       "kvm" # needed when using runAsRoot when building dockerImage
       "networkmanager" # not necessary for nixpos
