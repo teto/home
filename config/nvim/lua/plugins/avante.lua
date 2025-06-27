@@ -40,8 +40,9 @@ require('avante').setup({
       extra_request_body = {
         options = {
           temperature = 0.75,
+		  -- 32768
           num_ctx = 20480,
-          keep_alive = "5m",
+          keep_alive = "10m",
         },
       },
     },

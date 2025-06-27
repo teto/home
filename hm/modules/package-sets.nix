@@ -144,6 +144,7 @@ in
           # pulseaudioFull # for pactl
           # replace with rust-wormhole
           # requires xdmcp https://github.com/freedesktop/libXdmcp
+          s-search # "s" to open web search
           smplayer # GUI around mpv
           celluloid # GUI around mpv
           # sxiv # simple image viewer

@@ -103,7 +103,6 @@ in
   };
 
   boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_15;
-  # boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_13; # works
   # services.xserver.displayManager.gdm.enable = true;
 
   # nesting clones can be useful to prevent GC of some packages
@@ -198,24 +197,7 @@ in
     # "net.core.wmem_max" = 1048576;
   };
 
-  networking.hostName = "jedha"; # Define your hostname.
-
-  networking.firewall.allowedUDPPorts = [ ];
-  # networking.firewall.allowedTCPPorts = [ 8080 ];
-
-  # temporary while working on result-store
-  networking.firewall.allowedTCPPorts = [
-    # 5000 52002
-  ];
-
-  # to allow wireshark to capture from netlink
-  # networking.localCommands = ''
-  #   ip link show nlmon0
-  #   if [ $? -ne 0 ]; then
-  #     ip link add nlmon0 type nlmon
-  #     ip link set dev nlmon0 up
-  #   fi
-  # '';
+  # networking.hostName = "jedha"; # Define your hostname.
 
   i18n.glibcLocales = pkgs.glibcLocales.override {
     # hum
@@ -288,13 +270,10 @@ in
   #   options snd_hda_intel index=1
   # '';
 
-  # TODO find a way to autologin on desktop
-  # services.greetd
-
   # set on shell initialisation (e.g. in /etc/profile
   environment.variables = {
-    # TODO move
-    WLR_NO_HARDWARE_CURSORS = "1";
+    # TODO move to sway/wayland
+    # WLR_NO_HARDWARE_CURSORS = "1";
 
     # see if it is correctly interpolated
     # TODO remove ?
@@ -304,7 +283,8 @@ in
   # variables set by PAM early in the process
   #   Also, these variables are merged into environment.variables[
   environment.sessionVariables = {
-    WLR_NO_HARDWARE_CURSORS = "1";
+    # WLR_NO_HARDWARE_CURSORS = "1";
+    # TODO move it 
     LIBVA_DRIVER_NAME = "nvidia";
     __GLX_VENDOR_LIBRARY_NAME = "nvidia";
   };
@@ -312,12 +292,9 @@ in
   # system.replaceRuntimeDependencies
   #     List of packages to override without doing a full rebuild. The original derivation and replacement derivation must have the same name length, and ideally should have close-to-identical directory layout.
 
-  environment.systemPackages = [ pkgs.nixos-rebuild-ng ];
-  # environment.systemPackages = [
-  #   # pkgs.ntfsprogs
-  #
-  #   # (builtins.trace "${myNvim}" myNvim)
-  # ];
+  environment.systemPackages = [
+    pkgs.gpu-viewer
+  ];
 
   # $out here is the profile generation
   system.extraSystemBuilderCmds = ''
@@ -348,5 +325,5 @@ in
     };
   };
 
-  # system.stateVersion = "24.11";
+  system.stateVersion = "25.05";
 }
