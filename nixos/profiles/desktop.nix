@@ -34,7 +34,7 @@ in
     # flakeSelf.inputs.peerix.nixosModules.peerix
 
     # installed via HM
-    # flakeSelf.inputs.nix-index-database.nixosModules.nix-index
+    flakeSelf.inputs.nix-index-database.nixosModules.nix-index
     flakeSelf.nixosModules.nvd
     flakeSelf.nixosModules.universal
     flakeSelf.nixosProfiles.gnome

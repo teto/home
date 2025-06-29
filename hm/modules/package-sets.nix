@@ -69,19 +69,20 @@ in
     })
 
     (mkIf cfg.jujutsu {
-      home.packages = [
+      home.packages = let 
+        jj = pkgs.jujutsu; # replaced with the one from flake
+
+      in [
+        jj
 
         # pkgs.ollama # to test huggingface
-        pkgs.jujutsu # replaced with the one from flake
         # flakeSelf.inputs.jujutsu.packages.${pkgs.system}.jujutsu
-        # flakeSelf.inputs.jjui.packages.${pkgs.system}.jjui
-        pkgs.jjui
-
-        # pkgs.jujutsu # replaced with the one from flake
+        flakeSelf.inputs.jjui.packages.${pkgs.system}.jjui
         # pkgs.jjui
-        pkgs.gg-jj
+
+        # pkgs.gg-jj
         pkgs.lazyjj
-        pkgs.jj-fzf
+        # pkgs.jj-fzf
       ];
     })
 

@@ -27,12 +27,12 @@
     };
 
     luals-busted-addon = {
-      url = "https://github.com/LuaCATS/busted.git";
+      url = "github:LuaCATS/busted";
       flake = false;
     };
 
     luals-luassert-addon = {
-      url = "https://github.com/LuaCATS/luassert.git";
+      url = "github:LuaCATS/luassert";
       flake = false;
     };
 
@@ -591,6 +591,7 @@
           buildInputs = with myPkgs; [
 
             age
+            dmidecode
             deploy-rs.packages.${system}.deploy-rs
             fzf # for just's "--select"
             git-crypt # to run `git-crypt export-key`
