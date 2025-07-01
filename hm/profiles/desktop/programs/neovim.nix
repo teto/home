@@ -246,6 +246,8 @@ in
   # or else we need a vim.g.sqlite_clib_path
   extraLuaPackages = lp: [
     lp.sqlite
+    lp.lsqlite3
+    lp.lual
   ]
   # nvimLua.pkgs.rest-nvim.propagatedBuildInputs
   ;

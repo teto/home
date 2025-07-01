@@ -916,4 +916,4 @@ end, { buffer = true })
 vim.keymap.set('n', ',jl', function()
 	-- vim.diagnostic.goto_next({ wrap = true})
 	vim.cmd[[ JapLookup ]]
-end, { buffer = false })
+end, { buffer = false, desc = "Japanese lookup" })

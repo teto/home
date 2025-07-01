@@ -2280,11 +2280,11 @@
         "systems": "systems_8"
       },
       "locked": {
-        "lastModified": 1750893430,
-        "narHash": "sha256-/DSphZ0zYtZa//InV7fdqMfSRp/h8ufQp1oUQakyXYM=",
+        "lastModified": 1751319473,
+        "narHash": "sha256-wT2iKYUVC0w5/JB97xFcXLqRUIEYjdxxl4HGUkFfc4I=",
         "owner": "idursun",
         "repo": "jjui",
-        "rev": "09f0b4f4fc5d2ea968514de9bd9c70256564dd07",
+        "rev": "fa3ba9ee7f758096d0799b1d2d23c31c08545850",
         "type": "github"
       },
       "original": {

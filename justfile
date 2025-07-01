@@ -199,9 +199,9 @@ update-vimPlugins:
 # update my luarocks overlay
 update-luarocks-packages:
     # TODO make it so it works with --commit !
-    nix run {{ NIXPKGS_REPO }}#luarocks-package-updater -- \
+    nix run {{ NIXPKGS_REPO }}#luarocks-packages-updater -- \
       -i {{ justfile_directory() }}/overlays/luarocks-packages/luarocks-list.csv \
-      -o ${{ justfile_directory() }}/overlays/luarocks-packages/generated.nix \
+      -o {{ justfile_directory() }}/overlays/luarocks-packages/generated.nix \
       --github-token=$(cat ~/.config/sops-nix/secrets/github_token) \
       --no-commit
 

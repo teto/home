@@ -1,13 +1,23 @@
-final: prev: {
+gfinal: gprev: 
+# let 
+  # generated =  ./luarocks-packages/generated.nix;
 
-  # lua5_1 = prev.lua5_1.override {
+# in
+  {
+    # TODO we should not need this if it's in Repo ?
 
-  #   packageOverrides = luafinal: luaprev: {
-  #     testEnv = (luaprev.lua.withPackages (p: [
-  #     ])).overrideAttrs (oa: {
-  #       NIX_DEBUG = 9;
-  #     });
-  #   };
+  # lua5_1 = gprev.lua5_1.override {
+  #
+  #   packageOverrides = final: prev: let
+  #     # testEnv = (luaprev.lua.withPackages (p: [
+  #     # ])).overrideAttrs (oa: {
+  #     #   NIX_DEBUG = 9;
+  #     # });
+  #       # final: prev:
+  #       # generated = pkgs.callPackage ./luarocks-packages/generated.nix { inherit (final) callPackage; } final prev;
+  #   in 
+  #     generated;
+  #
   # };
 
   # lua51Packages = lua5_1.pkgs;
