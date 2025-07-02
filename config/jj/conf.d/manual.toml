@@ -20,10 +20,9 @@ tug = ["bookmark", "move", "--from", "closest_bookmark(@)", "--to", "closest_pus
 [revset-aliases]
 # TODO override immutable to ignore mine not in trunk
 # "immutable_heads()" = "builtin_immutable_heads() | (trunk().. & ~mine())"
-# $ jj log -r 'why_immutable(xyz)'
-# see https://github.com/jj-vcs/jj/discussions/5669 for more explanation
 
-'why_immutable(r)' = 'r | roots(r:: & immutable_heads())'
+# from ypares
+narrow = "ancestors(reachable(@, trunk()..), 2) | trunk()"
 "trunk()" = '''
 latest(
   remote_bookmarks(exact:"main", exact:"origin") |
@@ -37,6 +36,9 @@ latest(
 )
 '''
 
+# $ jj log -r 'why_immutable(xyz)'
+# see https://github.com/jj-vcs/jj/discussions/5669 for more explanation
+'why_immutable(r)' = 'r | roots(r:: & immutable_heads())'
 
 # used in the tug alias 
 # https://github.com/jj-vcs/jj/discussions/5568#discussioncomment-12674748

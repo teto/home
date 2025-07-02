@@ -256,4 +256,5 @@ xwayland:
 # rsync-send:
 
 test-msmtp-send-mail:
- cat contrib/2025-05-04-21.38.53.mail | msmtp --read-envelope-from --read-recipients -- REDACTED@email
+  # TODO generate the mail headers
+  cat contrib/2025-05-04-21.38.53.mail | msmtp --read-envelope-from --read-recipients 

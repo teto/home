@@ -60,6 +60,7 @@ Session.vim
 *.a
 *.png
 *.pcap
+*.sqlite
 # }}}
 
 # Backup files {{{
@@ -90,6 +91,7 @@ Session.vim
 
 # media {{{
 *.mkv
+*.webp
 # }}}
 
 # Logs and databases {{{

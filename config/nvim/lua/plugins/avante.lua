@@ -50,8 +50,13 @@ require('avante').setup({
 	 model = "devstral",
 	 __inherited_from = 'ollama',
     },
-	["ollama:codegemma"] = {
+	["ollama/codegemma"] = {
 	  model = "codegemma",
+	  -- doesn't support tools apparently ?
+	  __inherited_from = 'ollama',
+    },
+	["ollama/qwen"] = {
+	  model = "qwen2.5-coder",
 	  __inherited_from = 'ollama',
     }
    },
