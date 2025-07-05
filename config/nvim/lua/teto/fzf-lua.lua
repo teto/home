@@ -28,6 +28,7 @@ function M.register_keymaps()
     -- autocomplete :FzfLua to see what's available
     vim.keymap.set('n', '<Leader>g', function()
         -- fzf_lua.files()
+		-- vim.print(fzf_lua_enchanted)
 		fzf_lua_enchanted.files()
     end)
 	-- local file_dir = vim.fn.expand('%:p:h')
@@ -42,6 +43,9 @@ function M.register_keymaps()
 		--   end)
 
     vim.keymap.set('n', '<Leader>o', function()
+		-- TODO hopefully we can leverage:
+		--    fzf_lua_enchanted.files() at some point
+
         -- first check if we are
         if fzf_jj.is_jj_repo() then
             fzf_jj.files({
@@ -50,33 +54,42 @@ function M.register_keymaps()
                 fzf_opts = { ['--scheme'] = 'path' },
             })
         else
+		 -- TODO fix
             fzf_lua.git_files({
-                entry_maker = entry_maker,
+                -- entry_maker = entry_maker,
                 fzf_opts = { ['--scheme'] = 'path' },
             })
         end
     end)
+
     vim.keymap.set('n', '<Leader>F', function()
         fzf_lua.filetypes()
-    end, { desc = 'Select fileype' })
+    end, { desc = 'Select filetype' })
+
     vim.keymap.set('n', '<Leader>h', function()
         fzf_lua.oldfiles()
     end)
+
     vim.keymap.set('n', '<Leader>t', function()
         fzf_lua.tags()
     end, { desc = 'Fuzzysearch tags' })
+
     vim.keymap.set('n', '<Leader>T', function()
         fzf_lua.tags()
     end, { desc = 'Fuzzysearch tags' })
+
     vim.keymap.set('n', '<Leader>b', function()
         fzf_lua.buffers()
     end, { desc = 'Fuzzysearch buffers' })
+
     vim.keymap.set('n', '<Leader>C', function()
         fzf_lua.colorschemes()
     end, { desc = 'Select a colorscheme' })
+
     vim.keymap.set('n', '<Leader>l', function()
         fzf_lua.live_grep()
     end)
+
     vim.keymap.set('n', '<Leader>m', function()
         fzf_lua.menus()
     end, { desc = 'Fuzzy search menu entries' })

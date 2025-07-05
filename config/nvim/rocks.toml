@@ -84,12 +84,12 @@ nvim-lspconfig= "2.3.0"
 # tree-sitter-org = "0.0.1"
 "grug-far.nvim"= "1.6.42"
 orgmode = "0.6.0"
-neogit = "2.0.0"
+# neogit = "2.0.0"
 "diffview.nvim" = "scm"
 tree-sitter-norg = "0.2.6"
 "none-ls.nvim"= "scm"
 "rest.nvim" = "3.13.0"
-"rocks.nvim" = "2.45.0"
+# "rocks.nvim" = "2.45.0"
 tree-sitter-orgmode = "2.0.1"
 # tree-sitter-orgmode = "2.0.0"
 # nvim-treesitter-textobjects = "scm"
@@ -124,21 +124,21 @@ git = "vim-scripts/Solarized"
 rev = "1.0.0b1^{}"
 colorscheme= "solarized"
 
-[plugins."oxocarbon.nvim"]
-git = "shaunsingh/oxocarbon.nvim"
-rev = "main"
+# [plugins."oxocarbon.nvim"]
+# git = "shaunsingh/oxocarbon.nvim"
+# rev = "main"
 
-# [plugins."last-color.nvim"]
-# git = "raddari/last-color.nvim"
-# rev = "000e3e50047602f4b9725dd33aff631018592595"
+[plugins."last-color.nvim"]
+git = "raddari/last-color.nvim"
+rev = "000e3e50047602f4b9725dd33aff631018592595"
 
 # [plugins.pinkmare]
 # git = "Matsuuu/pinkmare"
 # rev = "5121864e3fbc35f1cf8f62db9b26c6dbe54bd094"
 
-[plugins."kanagawa.nvim"]
-version = "scm"
-opt = true
+# [plugins."kanagawa.nvim"]
+# version = "scm"
+# opt = true
 
 # [plugins.nvim-tetris]
 # git = "alec-gibson/nvim-tetris"
@@ -170,13 +170,13 @@ rev = "v0.0.1"
 git = "gbprod/none-ls-shellcheck.nvim"
 rev = "0f84461241e76e376a95fb7391deac82dc3efdbf"
 
-[plugins.i3-vim-syntax]
-git = "PotatoesMaster/i3-vim-syntax"
-rev = "affe37e89911c47831cb5b87697ac70e48bb3e0f"
+# [plugins.i3-vim-syntax]
+# git = "PotatoesMaster/i3-vim-syntax"
+# rev = "affe37e89911c47831cb5b87697ac70e48bb3e0f"
 
-[plugins.neovim]
-git = "rose-pine/neovim"
-rev = "v3.0.2"
+# [plugins.neovim]
+# git = "rose-pine/neovim"
+# rev = "v3.0.2"
 
 [plugins.papercolor-theme]
 git = "NLKNguyen/papercolor-theme"
@@ -240,6 +240,7 @@ rev = "4992fa9d27792b7a573e4545c9b2c4e61aba4f44"
 git = "neomutt/neomutt.vim"
 rev = "20220408"
 
+# encode/decode for b64 ?
 [plugins."endec.nvim"]
 git = "ovk/endec.nvim"
 rev = "949ece728ecc0cacf3c6c81bbcda186fe3fef5cf"
@@ -305,5 +306,9 @@ rev = "v1.2.0"
 [plugins."mcphub.nvim"]
 # :MCPHub
 dev = true 
+
+[plugins.fzf-lua-enchanted-files]
+git = "otavioschwanck/fzf-lua-enchanted-files"
+rev = "cc4a65e567f3c9c13abfbd039f4ff9f4b7427230"
 # dir = "/home/teto/neovim/mcphub.nvim"
 

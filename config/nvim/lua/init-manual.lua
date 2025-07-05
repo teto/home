@@ -45,7 +45,10 @@ local use_telescope = not use_fzf_lua
 
 local map = vim.keymap.set
 
-local nix_deps = require('generated-by-nix')
+local valid_file, nix_deps = pcall(require, 'generated-by-nix')
+if not valid_file then
+	error("Invalid generated-by-nix")
+end
 -- new option
 vim.o.winborder = "rounded"
 
@@ -834,8 +837,11 @@ vim.pack.add({
 	"https://github.com/teto/vim-listchars",
 	"https://github.com/adlawson/vim-sorcerer",
 	"https://github.com/Matsuuu/pinkmare",
-	{ src = "https://github.com/raddari/last-color.nvim", rev = "000e3e50047602f4b9725dd33aff631018592595"
-	},
+	-- doesnt work ?
+	-- "https://github.com/otavioschwanck/fzf-lua-enchanted-files",
+	"https://github.com/PotatoesMaster/i3-vim-syntax",
+	"https://github.com/rose-pine/neovim",
+	"https://github.com/nvim-neorocks/rocks.nvim",
 })
 
 -- Autoload from everything lsp/ in rtp
@@ -861,7 +867,6 @@ vim.pack.add({
 --     end
 --   end,
 -- })
---
 
 require('plugins.avante')
 
@@ -869,20 +874,19 @@ require('plugins.avante')
 vim.api.nvim_create_user_command('LlmChat', function()
     -- vim.cmd([[GpChatToggle tab]])
 	require("avante.api").ask({ without_selection = true; })
-end, { desc = 'TOTO' })
+end, { desc = 'Ask without selecting anything' })
 
 
 
 
--- print(package.cpath)
--- vim.print(vim.opt.rtp)
 require('plugins.diffview')
 require('lsp-progress').setup()
 require('teto.cursorline')
 
 local mclipboard = require'teto.clipboard'
 
-vim.keymap.set('n', '<F7>', function () mclipboard.copy_filename() end,
+vim.keymap.set('n', '<F7>', function () 
+		mclipboard.copy_filename() end,
 			   { desc = 'Copy buffer filename' })
 
 -- Set highlight for GitSignsAdd with green background
@@ -895,7 +899,7 @@ vim.api.nvim_set_hl(0, 'GitSignsChangeLn', {
 })
 
 vim.opt.rtp:prepend(os.getenv('HOME') .. '/neovim/mcphub.nvim')
-vim.opt.rtp:prepend(os.getenv('HOME') .. '/neovim/hurl.nvim')
+-- vim.opt.rtp:prepend(os.getenv('HOME') .. '/neovim/hurl.nvim')
 vim.g.mcphub =
 	{
 		config = vim.fn.expand("~/.config/mcphub/servers.json"), -- Absolute path to MCP Servers config file (will create if not exists)

@@ -99,6 +99,8 @@ in
           M.lua_interpreter = "${luaInterpreter}"
           M.luarocks_executable = "${luaInterpreter.pkgs.luarocks_bootstrap}/bin/luarocks"
           M.sqlite_clib_path = "${pkgs.sqlite.out}/lib/libsqlite3${pkgs.stdenv.hostPlatform.extensions.sharedLibrary}"
+          M.edict_kanjidb = "${flakeSelf.inputs.edict-kanji-db}/kanji.db"
+          M.edict_expressiondb = "${flakeSelf.inputs.edict-expression-db}/expression.db"
           return M
         '';
       };

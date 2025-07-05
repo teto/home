@@ -25,6 +25,15 @@
       url = "github:Kirottu/anyrun";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    edict-kanji-db = {
+      url = "https://github.com/odrevet/edict_database/releases/download/v0.0.2/kanji.zip";
+      flake = false;
+    };
+
+    edict-expression-db = {
+      url = "https://github.com/odrevet/edict_database/releases/download/v0.0.2/expression.zip";
+      flake = false;
+    };
 
     luals-busted-addon = {
       url = "github:LuaCATS/busted";
