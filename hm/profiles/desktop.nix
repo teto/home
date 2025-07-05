@@ -91,7 +91,7 @@ in
     developer = true;
     desktop = true;
     energy = true;
-
+    scientificSoftware = true;
   };
 
   # rename to fn, accept a parameter for optional

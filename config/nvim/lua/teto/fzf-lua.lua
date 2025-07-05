@@ -1,5 +1,6 @@
 -- wiki is pretty dope https://github.com/ibhagwan/fzf-lua/wiki/Advanced#fzf-exec-api
 local _, fzf_lua = pcall(require, 'fzf-lua')
+local _, fzf_lua_enchanted = pcall(require, "fzf-lua-enchanted-files")
 
 local M = {}
 
@@ -26,8 +27,20 @@ local git_files_opts = {
 function M.register_keymaps()
     -- autocomplete :FzfLua to see what's available
     vim.keymap.set('n', '<Leader>g', function()
-        fzf_lua.files()
+        -- fzf_lua.files()
+		fzf_lua_enchanted.files()
     end)
+	-- local file_dir = vim.fn.expand('%:p:h')
+
+		--   vim.keymap.set('n', '<Leader>G', function()
+		--       -- fzf_lua.files()
+		-- fzf_lua_enchanted.files({
+		--  -- cwd =false ,
+		--  -- prompt = "LOL > "
+		-- }
+		-- )
+		--   end)
+
     vim.keymap.set('n', '<Leader>o', function()
         -- first check if we are
         if fzf_jj.is_jj_repo() then

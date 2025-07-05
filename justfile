@@ -250,7 +250,14 @@ nix-diff-booted:
     nix store diff-closures /run/*-system
 
 # run a X compatibility layer, you need to export the correct DISPLAY beforehand
-xwayland:
+xwayland: satellite
+    xwayland-satellite
+
+satellite: 
+    echo "Run export DISPLAY=:0 program"
+    # You can silence all messages from Xwayland by setting the env var RUST_LOG=xwayland_process=off
+    #  https://github.com/Supreeeme/xwayland-satellite/issues/154
+    export RUST_LOG=xwayland_process=off
     xwayland-satellite
 
 # rsync-send:

@@ -18,10 +18,6 @@
           template = "https://jisho.org/search/{searchTerms}";
           params = [
             {
-              name = "type";
-              value = "packages";
-            }
-            {
               name = "query";
               value = "{searchTerms}";
             }

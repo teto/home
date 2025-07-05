@@ -829,6 +829,15 @@ vim.lsp.enable('clangd')
 vim.lsp.enable('pyright')
 vim.lsp.enable('yamlls')
 
+-- testing packadd
+vim.pack.add({
+	"https://github.com/teto/vim-listchars",
+	"https://github.com/adlawson/vim-sorcerer",
+	"https://github.com/Matsuuu/pinkmare",
+	{ src = "https://github.com/raddari/last-color.nvim", rev = "000e3e50047602f4b9725dd33aff631018592595"
+	},
+})
+
 -- Autoload from everything lsp/ in rtp
 -- local configs = {}
 --

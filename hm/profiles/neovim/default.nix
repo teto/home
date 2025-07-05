@@ -72,7 +72,6 @@ in
     ];
 
     extraPackages = with pkgs; [
-      # emacs # for orgmode-babel
       shellcheck
     ];
 

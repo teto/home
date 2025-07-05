@@ -8,6 +8,8 @@ visible commits: `jj log -r 'all()`
 
 `jj help -k revsets`
 
+* git blame <=> jj file annotate 
+
 * support for "ours" and "theirs":
 
   See https://github.com/jj-vcs/jj/pull/5785 .
