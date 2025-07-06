@@ -49,6 +49,12 @@ local valid_file, nix_deps = pcall(require, 'generated-by-nix')
 if not valid_file then
 	error("Invalid generated-by-nix")
 end
+vim.g.rikai = {
+	kanjidb = nix_deps.edict_kanjidb,
+	jmdictdb = nix_deps.edict_expressiondb
+}
+
+
 -- new option
 vim.o.winborder = "rounded"
 
@@ -900,6 +906,8 @@ vim.api.nvim_set_hl(0, 'GitSignsChangeLn', {
 
 vim.opt.rtp:prepend(os.getenv('HOME') .. '/neovim/mcphub.nvim')
 -- vim.opt.rtp:prepend(os.getenv('HOME') .. '/neovim/hurl.nvim')
+-- useless, I need to tweak the lua path ?
+-- vim.opt.rtp:prepend(os.getenv('HOME') .. '/neovim/lual')
 vim.g.mcphub =
 	{
 		config = vim.fn.expand("~/.config/mcphub/servers.json"), -- Absolute path to MCP Servers config file (will create if not exists)
@@ -928,5 +936,5 @@ end, { buffer = true })
 
 vim.keymap.set('n', ',jl', function()
 	-- vim.diagnostic.goto_next({ wrap = true})
-	vim.cmd[[ JapLookup ]]
+	vim.cmd[[ RikaiLookup ]]
 end, { buffer = false, desc = "Japanese lookup" })

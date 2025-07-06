@@ -23,18 +23,19 @@ local function check_diagnostics_and_set_cursorline()
 end
 
 -- Configure autocommand
-vim.api.nvim_create_autocmd('CursorHold', {
-  pattern = '*',
-  callback = check_diagnostics_and_set_cursorline,
-})
+-- DiagnosticChanged instead ?
+-- vim.api.nvim_create_autocmd('CursorHold', {
+--   pattern = '*',
+--   callback = check_diagnostics_and_set_cursorline,
+-- })
 
 
-vim.api.nvim_create_autocmd({'ColorScheme', 'VimEnter' }, {
-  pattern = '*',
-  callback = function ()
-	saved_color =  vim.api.nvim_get_hl(0, { name = 'CursorLine'})
-	-- vim.print("Saved color")
-	-- vim.print("Saved color", saved_color)
-  end,
-})
+-- vim.api.nvim_create_autocmd({'ColorScheme', 'VimEnter' }, {
+--   pattern = '*',
+--   callback = function ()
+-- 	saved_color =  vim.api.nvim_get_hl(0, { name = 'CursorLine'})
+-- 	-- vim.print("Saved color")
+-- 	-- vim.print("Saved color", saved_color)
+--   end,
+-- })
 

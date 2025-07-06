@@ -135,7 +135,6 @@ commit_id = "green"
 
 [git]
 # avoided the '/' because it creates issues with gitlab slugifying for components
-push-bookmark-prefix = "matt-push-"
 # fetch = ["up", "origin"] # ["upstream", "origin"]
 # push = "gh"
 auto-local-bookmark = true
@@ -146,6 +145,8 @@ auto-update-stale = true
 
 # configure the template used when no -T is specified.
 [templates]
+git_push_bookmark = '"matt-push-" ++ change_id.short()'
+
 # Use builtin log template
 log = "builtin_log_compact"
 # Use builtin op log template

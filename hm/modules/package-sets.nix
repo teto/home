@@ -77,8 +77,8 @@ in
 
         # pkgs.ollama # to test huggingface
         # flakeSelf.inputs.jujutsu.packages.${pkgs.system}.jujutsu
-        flakeSelf.inputs.jjui.packages.${pkgs.system}.jjui
-        # pkgs.jjui
+        # flakeSelf.inputs.jjui.packages.${pkgs.system}.jjui
+        pkgs.jjui
 
         # pkgs.gg-jj
         pkgs.lazyjj

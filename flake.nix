@@ -90,7 +90,7 @@
     };
     jjui = {
       url = "github:idursun/jjui";
-      inputs.nixpkgs.follows = "nixpkgs";
+      # inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # nixpkgs follow
