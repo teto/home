@@ -13,7 +13,16 @@ gp = ["git", "push"]
 gl = ["log", "-r", "::@"]
 fa = ["git", "fetch", "--all-remotes"]
 colocate = ["git", "init", "--colocate"]
+# "l" aliases: list recent changes on multiple branches, elided, as one line.
+# add more l's to show more changes: l=10, ll=30, lll=100, llll=all
+# l           = ["log", "-Tlog1", "-n10"]
+ll          = ["log", "-Tlog1", "-n30"]
+lll         = ["log", "-Tlog1", "-n100"]
+llll        = ["log", "-Tlog1"]
 
+# append v to show full descriptions
+lv          = ["log", "-Tlogv", "-n10"]
+llv         = ["log", "-Tlogv", "-n30"]
 # shamefully stolen from https://github.com/jj-vcs/jj/discussions/5568#discussioncomment-12674748
 tug = ["bookmark", "move", "--from", "closest_bookmark(@)", "--to", "closest_pushable(@)"]
 
@@ -58,7 +67,8 @@ enabled-branches = ["glob:push-*"]
 default-command = "status"
 # default-description = "\n\nTESTED=TODO"
 # Possible values: "color-words" (default), "git", "summary"
-# diff.format = "git"
+# to work with fugitive
+diff-formatter = ":git"
 # log-word-wrap = true
 # Enable pagination for commands that support it (default)
 paginate = "auto"
@@ -128,6 +138,8 @@ merge-tool-edits-conflict-markers = true
 commit_id = "green"
 "commit_id prefix" = { bold = true }
 "working_copy commit_id" = { underline = true }
+"diff removed token" = { fg = "bright red", bg = "#400000", underline = false }
+"diff added token" = { fg = "bright green", bg = "#003000", underline = false }
 
 [core]
 # fsmonitor = "watchman"
@@ -155,7 +167,12 @@ op_log = "builtin_op_log_compact"
 show = "builtin_log_detailed"
 # Equivalent to `commit.verbose = true` in Git
 draft_commit_description =  "commit_description_verbose"
-
+# log_node = '''
+# if(self && !current_working_copy && !immutable && !conflict && in_branch(self),
+#   "◇",
+#   builtin_log_node
+# )
+# '''
 
 [template-aliases]
 bookmark_list_simple = '''(label("bookmark", name)) ++ "\n"'''

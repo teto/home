@@ -37,7 +37,7 @@
 
 -- print(package.cpath)
 
-local has_fzf_lua, fzf_lua = pcall(require, 'fzf-lua')
+local has_fzf_lua, _fzf_lua = pcall(require, 'fzf-lua')
 
 -- set to true to enable it
 local use_fzf_lua = has_fzf_lua and true

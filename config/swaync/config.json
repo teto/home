@@ -44,12 +44,26 @@
   "widget-config": {
     "buttons-grid": {
       "actions": [
-        {
+       {
+        "label": "VPN",
+        "type": "toggle",
+        "active": true,
+        "command": "sh -c '[[ $SWAYNC_TOGGLE_STATE == true ]] && nmcli radio wifi on || nmcli radio wifi off'",
+        "update-command": "sh -c '[[ $(nmcli radio wifi) == \"enabled\" ]] && echo true || echo false'"
+      },
+       {
+        "label": "Wifi",
+        "type": "toggle",
+        "active": true,
+        "command": "sh -c '[[ $SWAYNC_TOGGLE_STATE == true ]] && nmcli radio wifi on || nmcli radio wifi off'",
+        "update-command": "sh -c '[[ $(nmcli radio wifi) == \"enabled\" ]] && echo true || echo false'"
+      },
+      {
           "label": "直",
           "command": "~/.config/rofi/rofi-wifi-menu.sh"
         },
         {
-          "label": "",
+          "label": "Dent bleue",
           "command": "~/.config/rofi/rofi-bluetooth"
         },
         {
@@ -68,7 +82,7 @@
     },
     "menubar#label": {
       "menu#power-buttons": {
-        "label": "",
+        "label": "Machine state",
         "position": "right",
         "actions": [
           {
@@ -90,7 +104,7 @@
         ]
       },
       "menu#powermode-buttons": {
-        "label": "",
+        "label": "Power-profiles",
         "position": "left",
         "actions": [
           {
@@ -111,15 +125,16 @@
         "position": "left",
         "actions": [
           {
-            "label": "",
+            "label": "Screenshot",
             "command": "grim"
           }
         ]
       }
     },
     "backlight": {
-      "label": "",
+      "label": "Brightness",
       "device": "intel_backlight",
+      "subsystem": "backlight",
       "min": 10
     },
     "inhibitors": {
