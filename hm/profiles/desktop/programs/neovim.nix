@@ -248,6 +248,7 @@ in
     lp.sqlite
     lp.lsqlite3
     lp.lual
+    lp.utf8
   ]
   # nvimLua.pkgs.rest-nvim.propagatedBuildInputs
   ;

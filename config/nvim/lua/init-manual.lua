@@ -51,7 +51,8 @@ if not valid_file then
 end
 vim.g.rikai = {
 	kanjidb = nix_deps.edict_kanjidb,
-	jmdictdb = nix_deps.edict_expressiondb
+	jmdictdb = nix_deps.edict_expressiondb,
+	log_level = vim.log.levels.DEBUG
 }
 
 
@@ -936,5 +937,9 @@ end, { buffer = true })
 
 vim.keymap.set('n', ',jl', function()
 	-- vim.diagnostic.goto_next({ wrap = true})
+	vim.cmd[[ RikaiLookup ]]
+end, { buffer = false, desc = "Japanese lookup" })
+
+vim.keymap.set('n', '<D-j>', function()
 	vim.cmd[[ RikaiLookup ]]
 end, { buffer = false, desc = "Japanese lookup" })
