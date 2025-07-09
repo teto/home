@@ -1,5 +1,13 @@
 vainfo
 
 ls -l /dev/dri/by-path
+ls -l /sys/class/drm/renderD*/device/driver
+
+* multigpu sway setup
+
+https://github.com/swaywm/sway/wiki#i-have-a-multi-gpu-setup-like-intelnvidia-or-intelamd-and-sway-does-not-start--some-video-cards-cannot-display--full-screen-images-etc-will-be-corrupted
+udevadm info /dev/dri/cardX --attribute-walk
+
+  drivers AMDGPU
 
 cat /proc/acpi/wakeup

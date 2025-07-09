@@ -4,10 +4,13 @@
   width_percentage = 50.0
   width_increment_percentage = 5.0
 
-# [keys]
+[keys]
 # cancel = ["q"]
 # escape = ["esc"]
 
+  [keys.preview]
+    scroll_up = ["ctrl+b"]
+    scroll_down = ["ctrl+f"]
 # experimental_log_batching_enabled = true
 
 [ui]

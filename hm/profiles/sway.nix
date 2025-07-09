@@ -278,6 +278,11 @@ in
     # TODO put it in the wrapper started by the .desktop file !
     # # according to https://www.reddit.com/r/swaywm/comments/11d89w2/some_workarounds_to_use_sway_with_nvidia/
     # export XWAYLAND_NO_GLAMOR=1
+    
+
+    # to list cards
+    # ls -l /sys/class/drm/renderD*/device/driver
+    # WLR_DRM_DEVICES
     extraSessionCommands = ''
 
        # useful for electron based apps: slack / vscode 
@@ -291,7 +296,12 @@ in
       export XDG_SESSION_DESKTOP=sway
       export SDL_VIDEODRIVER=wayland
       export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
+      # select first igpu then nvidia
     '';
+    # see https://github.com/swaywm/sway/wiki#i-have-a-multi-gpu-setup-like-intelnvidia-or-intelamd-and-sway-does-not-start--some-video-cards-cannot-display--full-screen-images-etc-will-be-corrupted 
+    # for multigpu setups
+    # The first card is used for actual rendering, and display buffers are copied to the secondary cards for any displays connected to them.
+    # export WLR_DRM_DEVICES=/dev/dri/card0:/dev/dri/card1
 
     # describe what it does
     wrapperFeatures = {

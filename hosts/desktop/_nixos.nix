@@ -292,6 +292,25 @@ in
   # system.replaceRuntimeDependencies
   #     List of packages to override without doing a full rebuild. The original derivation and replacement derivation must have the same name length, and ideally should have close-to-identical directory layout.
 
+  # for moonloader keyboard
+  hardware.keyboard.zsa.enable = true;
+
+  # try giving stable ids to our GPUs
+  services.udev.packages = [
+    (pkgs.writeTextDir "etc/udev/rules.d/42-static-gpu-naming.rules" 
+                # lib.concatLines (
+                #   ))
+                # pci-0000:0e:00.0
+      # ID_PATH=pci-0000:0e:00.0
+      # ID_PATH_TAG=pci-0000_0e_00_0
+      ''
+      KERNEL=="card*", SUBSYSTEM=="drm", ATTRS{vendor}=="0x10de", ATTRS{device}=="0x13c0", SYMLINK+="dri/by-name/igpu"
+      KERNEL=="card*", SUBSYSTEM=="drm", ATTRS{vendor}=="0x1022", ATTRS{device}=="0x2504", SYMLINK+="dri/by-name/egpu"
+      ''
+      )
+  ];
+
+
   environment.systemPackages = [
     pkgs.gpu-viewer
   ];

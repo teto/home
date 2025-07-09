@@ -267,6 +267,10 @@ satellite:
     export RUST_LOG=xwayland_process=off
     xwayland-satellite
 
+udev-restart:
+  sudo udevadm control --reload-rules
+  sudo udevadm trigger
+
 # rsync-send:
 
 test-msmtp-send-mail:

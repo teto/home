@@ -36,6 +36,7 @@
       ./services/mpd.nix
       ./services/mpris.nix
       ./services/nextcloud-client.nix
+      ./services/wpaperd.nix
     ]
     ++ lib.optionals withSecrets [
       ./sops.nix
@@ -104,6 +105,7 @@
       # tig
       wally-cli # to flash ergodox keyboards
       wine
+      wpaperd
 
       # take the version from stable ?
       nautilus # demande webkit/todo replace by nemo ?
