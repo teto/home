@@ -3,6 +3,7 @@
   show_at_start = true
   width_percentage = 50.0
   width_increment_percentage = 5.0
+# experimental_log_batching_enabled = true
 
 [keys]
 # cancel = ["q"]
@@ -11,10 +12,10 @@
   [keys.preview]
     scroll_up = ["ctrl+b"]
     scroll_down = ["ctrl+f"]
-# experimental_log_batching_enabled = true
+
 
 [ui]
-auto_refresh_interval=60
+auto_refresh_interval=4
 
 [custom_commands]
 # duplicate 
@@ -25,4 +26,3 @@ auto_refresh_interval=60
 "new main" = { args = ["new", "main"] }
 "revert" = { key = [ "R" ] , args = [ "revert", "-r", "$change_id" ] }
 "tug" = { key = ["ctrl+t"], args = ["bookmark", "move", "--from", "closest_bookmark($change_id)", "--to", "closest_pushable($change_id)"] }
-"duplicage" = { key = ["ctrl+d"], args = ["duplicate" ] }

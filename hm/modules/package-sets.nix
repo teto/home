@@ -71,14 +71,14 @@ in
     (mkIf cfg.jujutsu {
       home.packages = let 
         jj = pkgs.jujutsu; # replaced with the one from flake
-
+        # jjui = flakeSelf.inputs.jjui.packages.${pkgs.system}.jjui;
+        jjui = pkgs.jjui;
       in [
         jj
 
         # pkgs.ollama # to test huggingface
         # flakeSelf.inputs.jujutsu.packages.${pkgs.system}.jujutsu
-        # flakeSelf.inputs.jjui.packages.${pkgs.system}.jjui
-        pkgs.jjui
+        jjui
 
         # pkgs.gg-jj
         pkgs.lazyjj

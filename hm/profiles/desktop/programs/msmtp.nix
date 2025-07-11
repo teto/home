@@ -15,7 +15,7 @@ in
 {
     enable = true;
     # TODO add default account ?
-    configContent = "# should be in middle";
+    # configContent = "# should be in middle";
     extraConfig = "# test commment";
     extraAccounts = ''
       # this will create a default account which will then break the

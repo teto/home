@@ -1,5 +1,6 @@
 local M = {}
 
+
 -- see https://git.sr.ht/~whynothugo/lsp_lines.nvim
 -- for additionnal config
 -- M.default_config = {

@@ -23,6 +23,7 @@
         "--when"."repositories" = ["~/nova"];
         "user" = {
           email = secrets.accounts.mail.nova.email;
+          name = secrets.accounts.mail.nova.displayName;
         };
         "git" = {
 
