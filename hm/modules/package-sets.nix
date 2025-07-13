@@ -387,6 +387,7 @@ in
         tig
         tmux # when connecting via ssh
         universal-ctags # there are many different ctags, be careful !
+        uv # to install python packages
         whois
         zeal # doc for developers
         xan # CLI csv helper

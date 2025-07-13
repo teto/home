@@ -58,7 +58,6 @@ friendly-snippets = "scm"
 # luasnip = "2.3.0"
 tree-sitter-http = "0.0.36"
 "hurl.nvim"= "2.2.0"
-"gitsigns.nvim" = "1.0.2"
 
 # works with hop.nvim to jump somewhere in the AST (depends on hop.nvim so not that interesting)
 # nvim-treehopper = "scm"
@@ -114,6 +113,14 @@ version = "9.3.0"
 # [plugins."gp.nvim"]
 # # rev = "scm"
 # dir = "/home/teto/neovim/gp.nvim"
+
+
+[plugins."gitsigns.nvim"]
+rev = "1.0.2"
+# we set opt=true to to load it after the colorscheme was set
+# with cmd.packadd
+opt = true 
+
 
 [plugins."jap.nvim"]
 # rev = "scm"

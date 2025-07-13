@@ -225,7 +225,7 @@
 		"format":         "⏻",
 		"tooltip":        true,
 		"tooltip-format": "Power Options",
-		"on-click":       "wlogout",
+		"on-click":       "wlogout -s",
 	},
 	"custom/calendar": {
 		"format":   "{}",

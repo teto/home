@@ -42,7 +42,18 @@
     "notifications"
   ],
   "widget-config": {
+    "slider#backlight": {
+        "label": "󰃟",
+        "max_limit": 86,
+        "min_limit": 1,
+        "min": 0,
+        "max": 100,
+        "cmd_setter": "ddcutil-wrapper set $value",
+        "cmd_getter": "ddcutil-wrapper get"
+    },
     "buttons-grid": {
+      "buttons-per-row": 5,
+
       "actions": [
        {
         "label": "VPN",
@@ -150,6 +161,7 @@
       "text": "Label Text"
     },
     "mpris": {
+      "autohide": true,
       "image-size": 96,
       "image-radius": 12
     }

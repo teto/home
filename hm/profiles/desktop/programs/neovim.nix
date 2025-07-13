@@ -263,6 +263,7 @@ in
   extraPackages =
     extraPackages
     ++ pkgs.vimPlugins.llm-nvim.runtimeDeps # temporary workaround
+    ++ pkgs.vimPlugins.typescript-tools-nvim.runtimeDeps
     ++ [
       pkgs.stylua # for lua formatting
       pkgs.gitlab-ci-ls # gitlab lsp

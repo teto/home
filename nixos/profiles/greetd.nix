@@ -104,7 +104,8 @@
               "--remember-user-session"
               "--user-menu"
               "--time"
-              "--greeting 'Hello noob'"
+              # yoroshiku~~~
+              "--greeting 'よろしくお願いします'"
               # TODO make sway the default wrapper
               "--sessions ${waylandSessionsPath}"
               "--xsessions ${config.home-manager.users.teto.home.path}/share/xsessions:${sessionData}/share/xsessions"

@@ -46,6 +46,10 @@ require('avante').setup({
         },
       },
     },
+	["local:mistral-nemo"] = {
+	 model = "devstral",
+	 __inherited_from = 'ollama',
+    },
 	["ollama:devstral"] = {
 	 model = "devstral",
 	 __inherited_from = 'ollama',

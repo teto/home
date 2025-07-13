@@ -1,0 +1,7 @@
+#!/bin/sh
+swaync_backlight() { # args: set|get [value]
+	case "$1" in
+	set) ddcutil setvcp 0x10 $2 ;;
+	get) ddcutil getvcp 0x10 | grep -oP "current value =\s+\K[0-9]+" ;;
+	esac
+}

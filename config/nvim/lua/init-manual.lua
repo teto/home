@@ -563,6 +563,7 @@ vim.api.nvim_create_autocmd('ColorScheme', {
         --       \ highlight Comment gui=italic
         --       \ | highlight Search gui=underline
         --       \ | highlight MatchParen guibg=NONE guifg=NONE gui=underline
+		vim.cmd.packadd("gitsigns.nvim")
     end,
 })
 
@@ -943,3 +944,5 @@ end, { buffer = false, desc = "Japanese lookup" })
 vim.keymap.set('n', '<D-j>', function()
 	vim.cmd[[ RikaiLookup ]]
 end, { buffer = false, desc = "Japanese lookup" })
+
+require'teto.lsp'.ignore_simwork_extended_warnings()

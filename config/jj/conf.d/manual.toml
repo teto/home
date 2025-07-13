@@ -86,7 +86,7 @@ merge-editor = "nvim"
 # conflict-marker-style = "snapshot"
 # Uses Git's "diff3" conflict markers to support tools that depend on it
 # careful because it prevents from using diffconflicts
-# conflict-marker-style = "git"
+conflict-marker-style = "git"
 
 [merge-tools.kdiff3]
 # program  = "kdiff3"     # Defaults to the name of the tool if not specified
