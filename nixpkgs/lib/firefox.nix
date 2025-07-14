@@ -47,6 +47,13 @@
       icon = "''${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
       definedAliases = [ "@np" ];
     };
+    # it has no search engine yet :'(
+    # "Nixpkgs manual" = {
+    #   urls = [ { template = "https://nixos.org/manual/nixpkgs/stable?search={searchTerms}"; } ];
+    #   icon = "https://nixos.wiki/favicon.png";
+    #   updateInterval = 24 * 60 * 60 * 1000; # every day
+    #   definedAliases = [ "@nm" ];
+    # };
     "NixOS Wiki" = {
       urls = [ { template = "https://nixos.wiki/index.php?search={searchTerms}"; } ];
       icon = "https://nixos.wiki/favicon.png";

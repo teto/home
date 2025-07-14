@@ -290,7 +290,11 @@ in
     })
 
     (mkIf cfg.developer {
-      home.packages = with pkgs; [
+      home.packages = with pkgs; let 
+        mcp-servers = [ pkgs.github-mcp-server ] ;
+      in
+        mcp-servers 
+        ++ [
         argbash # to generate bash parsers
         automake
         bfs # https://github.com/tavianator/bfs
