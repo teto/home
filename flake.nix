@@ -90,7 +90,7 @@
     };
     jjui = {
       url = "github:idursun/jjui";
-      # inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # nixpkgs follow
@@ -245,6 +245,12 @@
     rippkgs.url = "github:replit/rippkgs";
     # rippkgs.inputs.nixpkgs.follows = "nixpkgs";
 
+    rikai-nvim = {
+      url = "github:teto/rikai.nvim";
+      # url = "/home/teto/neovim/jap.nvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # TODO use from nixpkgs
     rsync-yazi-plugin = {
       url = "github:GianniBYoung/rsync.yazi";
@@ -398,14 +404,30 @@
         src:
         import src {
           inherit system;
-          overlays = (src.lib.attrValues self.overlays) ++ [
+          overlays =  [
             (final: prev: {
               # expose it for byNamePkgsOverlay
               inherit treefmt-nix;
-            })
+
+              # # TODO get lua interpreter to select the good lua packages
+              # nvimLua = config.programs.neovim.finalPackage.passthru.unwrapped.lua;
+
+
+              # luajit = prev.luajit.override {
+              #   packageOverrides = self.inputs.rikai-nvim.overlays.luaOverlay;
+              # };
+              #
+              # lua5_1 = prev.lua5_1.override {
+              #   packageOverrides = self.inputs.rikai-nvim.overlays.luaOverlay;
+              # };
+
+            }) 
+
             byNamePkgsOverlay
             autoloadedPkgsOverlay
             # self.inputs.rofi-hoogle.overlay
+        # mptcp = self.inputs.mptcp-flake.overlays.default;
+        # nur = self.inputs.nur.overlay;
 
             # the nova overlay just brings ztp-creds and gitlab-ssh-keys
             # removing the overlay means we dont need it during evaluation
@@ -415,7 +437,9 @@
 
             # self.inputs.nixpkgs-wayland.overlay
             # self.inputs.nix.overlays.default
-          ];
+          ]
+          ++ (src.lib.attrValues self.overlays)
+          ;
           config = {
             # on desktop
             cudaSupport = true;
@@ -1007,8 +1031,7 @@
         haskell = import ./overlays/haskell.nix;
         overrides = import ./overlays/overrides.nix;
         python = import ./overlays/python.nix;
-        # mptcp = self.inputs.mptcp-flake.overlays.default;
-        # nur = self.inputs.nur.overlay;
+        lua = import ./overlays/lua.nix;
       };
 
       # the 'deploy' entry is used by 'deploy-rs' to deploy our nixosConfigurations

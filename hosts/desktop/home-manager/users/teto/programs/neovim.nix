@@ -7,6 +7,7 @@
 }:
 let
 
+  # reference flakeSelf instead ?
   nvimLib = pkgs.callPackages ../../../../../../hm/profiles/neovim/lib.nix { };
 
   inherit (nvimLib) luaPlugin;

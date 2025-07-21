@@ -24,6 +24,24 @@ local git_files_opts = {
     end,
 }
 
+-- https://github.com/ibhagwan/fzf-lua/issues/860
+_G.myfiles = function(opts)
+  opts = opts or {}
+  opts.debug = true -- use this to debug print the underlying command in the first line
+  opts.cmd = opts.cmd or "fd --color=never --type f --hidden --follow"
+  opts.actions = {
+    ["ctrl-g"] = function(_, o)
+      _G.myfiles(o)
+    end
+  }
+  if opts.cmd:match("%s+%-%-no%-ignore$") then
+    opts.cmd = opts.cmd:gsub("%s+%-%-no%-ignore$", "")
+  else
+    opts.cmd = opts.cmd .. " --no-ignore"
+  end
+  fzf_lua.files(opts)
+end
+
 function M.register_keymaps()
     -- autocomplete :FzfLua to see what's available
     vim.keymap.set('n', '<Leader>g', function()
@@ -208,5 +226,7 @@ function M.files(opts)
 
     return fzflua.files(opts)
 end
+
+-- fzf_lua.config.set_action_helpstr(fn_ptr, “help string”)
 
 return M

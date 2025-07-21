@@ -167,7 +167,7 @@ in
           jq # to run json queries
           lazygit # kinda like tig
           libnotify
-          moc-wrapped # music player
+          (ignoreBroken moc-wrapped) # music player
           mupdf.bin # evince does better too
 
           ## Alternatives to consider:
@@ -297,6 +297,8 @@ in
         ++ [
         argbash # to generate bash parsers
         automake
+        bcal # calculatrice 
+        # bmm # rust bookmark manager (not package yet)
         bfs # https://github.com/tavianator/bfs
         cargo
         (backblaze-b2.override { execName = "b2"; })
@@ -367,7 +369,7 @@ in
 
         # there is also https://github.com/TaKO8Ki/gobang
         lazysql # SQL editor
-        harlequin # SQL python editor
+        # harlequin # SQL python editor (broken)
 
         inotify-info # to debug filewatching issues, very nice
         inotify-tools # for inotify-wait notably

@@ -177,6 +177,12 @@ let
 
   # TODO get lua interpreter to select the good lua packages
   nvimLua = config.programs.neovim.finalPackage.passthru.unwrapped.lua;
+
+
+  finalLua = nvimLua.override {
+    packageOverrides = flakeSelf.inputs.rikai-nvim.overlays.luaOverlay;
+  };
+
 in
 {
   enableBlink = true;
@@ -245,10 +251,13 @@ in
   # HACK till we fix it
   # or else we need a vim.g.sqlite_clib_path
   extraLuaPackages = lp: [
+
+    # importing dependencies of rikai.nvim
     lp.sqlite
     lp.lsqlite3
     lp.lual
     lp.utf8
+    lp.alogger
   ]
   # nvimLua.pkgs.rest-nvim.propagatedBuildInputs
   ;

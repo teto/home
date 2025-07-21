@@ -16,6 +16,8 @@ let
   pluginsMap = pkgs.callPackage ./plugins.nix { inherit flakeSelf; };
 
   myNeovimUnwrapped = flakeSelf.inputs.neovim-nightly-overlay.packages."${pkgs.system}".neovim;
+  # nvimLua = config.programs.neovim.finalPackage.passthru.unwrapped.lua;
+
 
   rawPlugins =
     # add grepper

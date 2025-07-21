@@ -1,9 +1,26 @@
+# how core contributors configure jj: https://github.com/jj-vcs/jj/discussions/5812
 "$schema" = "https://jj-vcs.github.io/jj/latest/config-schema.json"
+
+# [revsets]
+# # By default, show the current stack of work.
+# log = 'stack(@)'
 
 [aliases]
 # `jj l` shows commits on the working-copy commit's (anonymous) bookmark
 # compared to the `main` bookmark
-l = ["log", "-r", "(main..@):: | (main..@)-"]
+# l = ["log", "-r", "(main..@):: | (main..@)-"]
+l = ["log", "-r", "ancestors(reachable(@, mutable()), 2)"]
+
+n = ["new"]
+s = ["show"]
+nt = ["new", "trunk()"]
+
+# Get all open stacks of work.
+open = ["log", "-r", "open()"]
+
+# Better name, IMO.
+credit = ["file", "annotate"]
+
 
 # would like 
 # sp = [""]
@@ -25,25 +42,56 @@ lv          = ["log", "-Tlogv", "-n10"]
 llv         = ["log", "-Tlogv", "-n30"]
 # shamefully stolen from https://github.com/jj-vcs/jj/discussions/5568#discussioncomment-12674748
 tug = ["bookmark", "move", "--from", "closest_bookmark(@)", "--to", "closest_pushable(@)"]
+# stolen from https://github.com/jj-vcs/jj/discussions/5812
+rebase-all = ["rebase", "-s", "all:roots(trunk()..mutable())", "-d", "trunk()"]
+
 
 [revset-aliases]
 # TODO override immutable to ignore mine not in trunk
 # "immutable_heads()" = "builtin_immutable_heads() | (trunk().. & ~mine())"
+# trunk() by default resolves to the latest 'main'/'master' remote bookmark. May
+# require customization for repos like nixpkgs.
+'trunk()' = 'latest((present(main) | present(master)) & remote_bookmarks())'
+
+# Private and WIP commits that should never be pushed anywhere. Often part of
+# work-in-progress merge stacks.
+'wip()' = 'description(glob:"wip:*")'
+'private()' = 'description(glob:"private:*")'
+'blacklist()' = 'wip() | private()'
+
+# stack(x, n) is the set of mutable commits reachable from 'x', with 'n'
+# parents. 'n' is often useful to customize the display and return set for
+# certain operations. 'x' can be used to target the set of 'roots' to traverse,
+# e.g. @ is the current stack.
+'stack()' = 'ancestors(reachable(@, mutable()), 2)'
+'stack(x)' = 'ancestors(reachable(x, mutable()), 2)'
+'stack(x, n)' = 'ancestors(reachable(x, mutable()), n)'
+
+
+# The current set of "open" works. It is defined as:
+#
+# - given the set of commits not in trunk, that are written by me,
+# - calculate the given stack() for each of those commits
+#
+# n = 1, meaning that nothing from `trunk()` is included, so all resulting
+# commits are mutable by definition.
+'open()' = 'stack(trunk().. & mine(), 1)'
 
 # from ypares
 narrow = "ancestors(reachable(@, trunk()..), 2) | trunk()"
-"trunk()" = '''
-latest(
-  remote_bookmarks(exact:"main", exact:"origin") |
-  remote_bookmarks(exact:"master", exact:"origin") |
-  remote_bookmarks(exact:"trunk", exact:"origin") |
-  remote_bookmarks(exact:"main", glob:"up*") |
-  remote_bookmarks(exact:"master", glob:"up*") |
-  remote_bookmarks(exact:"trunk", glob:"up*") |
-  remote_bookmarks(exact:"dev", glob:"up*") |
-  root()
-)
-'''
+# dev 
+# "trunk()" = '''
+# latest(
+#   remote_bookmarks(exact:"main", exact:"origin") |
+#   remote_bookmarks(exact:"master", exact:"origin") |
+#   remote_bookmarks(exact:"trunk", exact:"origin") |
+#   remote_bookmarks(exact:"main", glob:"up*") |
+#   remote_bookmarks(exact:"master", glob:"up*") |
+#   remote_bookmarks(exact:"trunk", glob:"up*") |
+#   remote_bookmarks(exact:"dev", glob:"up*") |
+#   root()
+# )
+# '''
 
 # $ jj log -r 'why_immutable(xyz)'
 # see https://github.com/jj-vcs/jj/discussions/5669 for more explanation
@@ -74,6 +122,9 @@ diff-formatter = ":git"
 paginate = "auto"
 # Disable all pagination, equivalent to using --no-pager
 # paginate = "never"
+
+log-synthetic-elided-nodes = true
+graph.style = "square"
 
 # The ui.merge-editor key specifies the tool used for three-way merge tools by jj resolve. Use merge-tools.TOOL.merge-args
 merge-editor = "nvim"
@@ -111,6 +162,11 @@ merge-args = ["-f", "-d", "$output", "-M",
     "-c", "set write"]
 merge-tool-edits-conflict-markers = true
 
+[merge-tools.mergiraf]
+program = "mergiraf"
+merge-args = ["merge", "$base", "$left", "$right", "-o", "$output", "--fast"]
+merge-conflict-exit-codes = [1]
+conflict-marker-style = "git"
 
 # fugitive doesnt work because
 # [merge-tools.fugitive]
@@ -153,6 +209,7 @@ auto-local-bookmark = true
 
 [snapshot]
 max-new-file-size = "10MiB"
+# FIXME (upstream): why isn't this on by default?
 auto-update-stale = true
 
 # configure the template used when no -T is specified.
@@ -175,7 +232,46 @@ draft_commit_description =  "commit_description_verbose"
 # '''
 
 [template-aliases]
+# Code to hyperlink something for the terminal.
+# FIXME (upstream): should this go upstream?
+'hyperlink(url, text)' = '''
+  concat(
+    raw_escape_sequence("\e]8;;" ++ url ++ "\e\\"),
+    label("text link", text),
+    raw_escape_sequence("\e]8;;\e\\"),
+  )
+'''
 bookmark_list_simple = '''(label("bookmark", name)) ++ "\n"'''
+
+# Author's name, committer's timestamp and time zone, full descriptions.
+logv = 'smlog(original_time(committer.timestamp()), description, bookmarks, tags)'
+
+# Like logv but just one line of description.
+log1 = 'smlog(original_time(committer.timestamp()), description.first_line(), bookmarks, tags)'
+
+# Like log1 but shows committer's timestamp localised to current time zone.
+log1current = 'smlog(local_time(committer.timestamp()), description.first_line(), bookmarks, tags)'
+
+# Like log1 but shows author's timestamp and time zone.
+log1author = 'smlog(original_time(author.timestamp()), description.first_line(), bookmarks, tags)'
+
+# Like log1a but shows author's timestamp localised to current time zone.
+log1authorcurrent = 'smlog(local_time(author.timestamp()), description.first_line(), bookmarks, tags)'
+
+# Like log1 but don't show bookmarks.
+log1nobookmarks = 'smlog(original_time(committer.timestamp()), description.first_line(), "", tags)'
+
+# Like log1 but don't show tags.
+log1notags = 'smlog(original_time(committer.timestamp()), description.first_line(), bookmarks, "")'
+
+# Two lines per change (default layout)
+log2 = "builtin_log_compact"
+
+# Two lines per change (sm layout)
+# log2 = "smlog2"
+
+# Three lines per change (default layout)
+log3 = 'builtin_log_compact ++ "\n"'
 
 # Equivalent to `commit.verbose = true` in Git
 commit_description_verbose = '''
