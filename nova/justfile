@@ -37,7 +37,7 @@ platform:
 sscwl:
   nix run .#simwork.core-webservice.local -- --bypass-manifest-check -vv
 
-repl:
+repl-cw:
   # TODO:
   # autoload System.Environment
   # setEnv "PORCUPINE_ARGS" "--bypass-manifest-check -vv"
@@ -45,6 +45,6 @@ repl:
   # --ghci-script
   nix run  .#simwork.core-webservice.platform._repl 
  
-repl-core:
-  nix run  .#repl -- -ghci-args ":l CoreWebserviceSpec"
+repl:
+  nix run  .#repl -- -Wno-x-vpop-patient-table -Wno-x-pre-v2-routes -ghci-args ":l CoreWebserviceSpec"
 

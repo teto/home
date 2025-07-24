@@ -174,13 +174,13 @@ in
   networking.hostName = "tatooine"; # Define your hostname.
 
   hardware = {
-    # enableAllFirmware =true;
+    enableAllFirmware =true;
     enableRedistributableFirmware = true;
     sane.enable = true;
     # High quality BT calls
     bluetooth = {
       enable = true;
-      powerOnBoot = true;
+      powerOnBoot = false;
       # hsphfpd.enable = false; # conflicts with pipewire
     };
     graphics = {
@@ -277,6 +277,10 @@ in
     # alternatively one can run journalctl --vacuum-time=2d
     SystemMaxUse=2G
   '';
+
+  # to remove "TSC_DEADLINE disabled due to Errata;
+  # please update microcode to version: 0x22"
+  # hardware.cpu.intel.updateMicrocode = true;
 
   # services.logind = {
   #   # see https://bbs.archlinux.org/viewtopic.php?id=225977 for problems with LID

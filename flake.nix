@@ -453,7 +453,7 @@
             #   "nix"
             # ];
 
-            # allowUnfree = true;
+            allowUnfree = true;
             # this list makes me wanna vomit (except steam maybe because they do good for linux),
             # and sublime because guy has to eat
             allowUnfreePredicate =

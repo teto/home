@@ -68,6 +68,7 @@ return {
                     'ui',
                     'cx',
                     'Command',
+                    'assert',
                 },
                 -- Define variable names that will not be reported as an unused local by unused-local.
                 unusedLocalExclude = { '_*' },
@@ -80,6 +81,7 @@ return {
                     'duplicate-set-field',
                     --
                     'missing-fields', -- to silence vim.uv.os_name warnings for instance
+                    'undefined-field', -- Disable undefined-field diagnostic
                 },
             },
             workspace = {
