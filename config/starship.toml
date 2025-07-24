@@ -124,19 +124,27 @@ disabled = true
 # see https://github.com/starship/starship/issues/6076#issuecomment-2637346408
 [custom.jj]
 # TODO show changeset
-# we limit to 4
+# 
+#     surround("\"", "\"", truncate_end(24, description.first_line(), "…")),
 command = '''
-jj log -r@ -n4 --ignore-working-copy --no-graph --color always  -T '
+jj log -r ::@ -n2 --ignore-working-copy --no-graph --color always  -T '
   separate(" ",
-    bookmarks.map(|x| truncate_end(10, x.name(), "…")).join(" "),
+    bookmarks.map(|x| truncate_end(18, x.name(), "…")).join(" "),
     tags.map(|x| truncate_end(10, x.name(), "…")).join(" "),
-    surround("\"", "\"", truncate_end(24, description.first_line(), "…")),
     if(conflict, "conflict"),
     if(divergent, "divergent"),
     if(hidden, "hidden"),
+    " "
   )
 '
+
+# surround() , stringify / concat
+jj log -r@ --ignore-working-copy --no-graph -T 'surround("[",
+                                 "]",
+                                 change_id.shortest()
+                                 )'
 '''
+
 when = "jj root --ignore-working-copy"
 symbol = " "
 

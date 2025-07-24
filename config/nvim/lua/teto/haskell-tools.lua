@@ -3,7 +3,7 @@ M.generate_settings = function()
     return {
         tools = { -- haskell-tools options
             log = {
-                level = vim.log.levels.DEBUG,
+                -- level = vim.log.levels.DEBUG,
             },
 
             codeLens = {

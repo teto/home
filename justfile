@@ -276,3 +276,7 @@ udev-restart:
 test-msmtp-send-mail:
   # TODO generate the mail headers
   cat contrib/2025-05-04-21.38.53.mail | msmtp --read-envelope-from --read-recipients 
+
+dbus-list-sessions: 
+  # org.freedesktop.DBus.ListNames
+  dbus-send --session --dest=org.freedesktop.DBus --type=method_call --print-reply /org/freedesktop/DBus org.freedesktop.DBus.ListNames

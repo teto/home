@@ -19,6 +19,8 @@ local haskell_diagnostic_severity = {
 
 
 
+-- overrides vim.lsp.handlers["textDocument/publishDiagnostics"] 
+-- should do so only when
 function M.ignore_simwork_extended_warnings()
  -- Save the original handler
  local orig_handler = vim.lsp.handlers["textDocument/publishDiagnostics"]
@@ -37,26 +39,6 @@ function M.ignore_simwork_extended_warnings()
  end
 end
 
--- see https://git.sr.ht/~whynothugo/lsp_lines.nvim
--- for additionnal config
--- M.default_config = {
---     -- disabled because too big in haskell
---     virtual_lines = { only_current_line = true },
---     virtual_text = false,
---     {
---         severity = { min = vim.diagnostic.severity.WARN },
---     },
---     signs = true,
---     severity_sort = true,
---
---     -- TODO how to add borders ?
---     float = {
---         source = true,
---         severity_sort = true,
---         border = 'rounded',
---     },
---     update_in_insert = true,
--- }
 
 --
 -- lua vim.diagnostic.setqflist({open = tru, severity = { min = vim.diagnostic.severity.WARN } })

@@ -930,11 +930,18 @@ vim.g.mcphub =
 }
 
 vim.keymap.set('n', '[[', function()
-	vim.diagnostic.goto_prev({ wrap = true})
-end, { buffer = true })
+	vim.diagnostic.jump(
+		{
+			count = -1,
+			wrap = true
+			-- severity
+			-- on_jump 
+		}
+	)
+end, { buffer = false })
 vim.keymap.set('n', ']]', function()
-	vim.diagnostic.goto_next({ wrap = true})
-end, { buffer = true })
+	vim.diagnostic.jump({ count = 1, wrap = true})
+end, { buffer = false })
 
 vim.keymap.set('n', ',jl', function()
 	-- vim.diagnostic.goto_next({ wrap = true})

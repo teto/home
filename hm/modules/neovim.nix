@@ -298,6 +298,7 @@ in
     (mkIf cfg.neorg.enable { programs.neovim.plugins = cfg.neorg.plugins; })
 
     (mkIf cfg.lsp.mapOnAttach {
+      # TODO enable treesitter multilanguage
       programs.neovim.extraLuaConfig = # lua
         ''
           vim.api.nvim_create_autocmd('LspAttach', {
@@ -312,10 +313,18 @@ in
 
                   -- local on_attach = require('teto.on_attach')
                   vim.keymap.set('n', '[e', function()
-                      vim.diagnostic.goto_prev({ wrap = true, severity = vim.diagnostic.severity.ERROR })
+                      vim.diagnostic.jump({
+                        wrap = true,
+                        severity = vim.diagnostic.severity.ERROR,
+                        count = -1
+                      })
                   end, { buffer = true })
                   vim.keymap.set('n', ']e', function()
-                      vim.diagnostic.goto_next({ wrap = true, severity = vim.diagnostic.severity.ERROR })
+                      vim.diagnostic.jump({ 
+                        count = 1,
+                        wrap = true,
+                        severity = vim.diagnostic.severity.ERROR,
+                      })
                   end, { buffer = true })
 
               end

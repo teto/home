@@ -46,5 +46,8 @@ repl-cw:
   nix run  .#simwork.core-webservice.platform._repl 
  
 repl:
-  nix run  .#repl -- -Wno-x-vpop-patient-table -Wno-x-pre-v2-routes -ghci-args ":l CoreWebserviceSpec"
+  nix run  .#repl -- -Wno-x-vpop-patient-table -Wno-x-pre-v2-routes 
+
+  # cree un pb ?
+  # -ghci-args ":l CoreWebserviceSpec"
 

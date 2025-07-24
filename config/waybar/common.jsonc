@@ -324,6 +324,19 @@
 			// "reboot": "reboot",
 		},
 	},
+	"custom/vpn": {
+		// https://fontawesome.com/icons/github?f=brands&s=solid
+		"format": " {}  ",
+		// return-type : "json",
+		// The interval (in seconds) in which the information gets polled
+		"restart_interval": 120,
+		"tooltip":          true,
+		// todo add runtimeInputs
+		// exec : lib.getExe githubUpdater,
+		// exec : "${dotfilesPath}/config/waybar/",
+		"exec":     "waybar-tailscale-status",
+		"on-click": "xdg-open https://github.com/notifications",
+    },
 	"custom/github": {
 		// https://fontawesome.com/icons/github?f=brands&s=solid
 		"format": " {}  ",
