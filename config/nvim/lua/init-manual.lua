@@ -52,7 +52,11 @@ end
 vim.g.rikai = {
 	kanjidb = nix_deps.edict_kanjidb,
 	jmdictdb = nix_deps.edict_expressiondb,
-	log_level = vim.log.levels.DEBUG
+	log_level = vim.log.levels.DEBUG,
+	separator = "===>>>",
+	popup = {
+
+	}
 }
 
 

@@ -24,13 +24,13 @@ path = "/home/teto/neovim"
 # List of Neovim plugins to install alongside their versions.
 # If the plugin name contains a dot then you must add quotes to the key name!
 [plugins]
-"rocks-git.nvim"= "2.5.3"
+"rocks-git.nvim"= "2.5.4"
 # "rocks.nvim" = "2.19.0" # rocks.nvim can also manage itself :D
 # "rocks-git.nvim"= "1.5.1"
 # "oil.nvim" = "2.14.0"
 # -- :DiffviewOpen
 # "diffview.nvim" = "scm"
-"haskell-tools.nvim" = "6.1.0"
+"haskell-tools.nvim" = "6.1.1"
 
 # needed the patch from https://github.com/nvimtools/none-ls.nvim/pull/277/
 # "none-ls.nvim" = "scm"
@@ -38,25 +38,25 @@ path = "/home/teto/neovim"
 
 "bufferline.nvim" = "4.9.1"
 auto-session = "2.5.1"
-"rocks-config.nvim" = "3.1.1"
+"rocks-config.nvim" = "3.1.2"
 "trouble.nvim" = "3.7.1"
 "lualine.nvim" = "scm"
 "rocks-lazy.nvim" = "scm"
 "nui.nvim" = "0.4.0"
-neotest = "5.8.0"
-"rocks-dev.nvim" = "1.8.0"
+neotest = "5.9.1"
+"rocks-dev.nvim" = "1.8.1"
 # nvim-lint = "scm"
 # "telescope.nvim" = "scm"
 "lsp_signature.nvim" = "0.3.1"
 friendly-snippets = "scm"
 # "haskell-snippets.nvim" = "1.4.4"
-"yazi.nvim" = "11.5.3"
+"yazi.nvim" = "11.6.1"
 # tree-sitter-haskell = "scm"
 # tree-sitter-org = "0.0.1"
 # "lspkind.nvim" = "scm"
 # "modicator.nvim" = "scm"
 # luasnip = "2.3.0"
-tree-sitter-http = "0.0.36"
+tree-sitter-http = "0.0.37"
 "hurl.nvim"= "2.2.0"
 
 # works with hop.nvim to jump somewhere in the AST (depends on hop.nvim so not that interesting)
@@ -72,8 +72,8 @@ vim-startuptime= "4.5.0"
 "typescript-tools.nvim" = "scm"
 menu= "scm"
 # "snacks.nvim" = "2.6.0"
-fzf-lua = "0.0.1948"
-"lz.n" = "2.11.2"
+fzf-lua = "0.0.2045"
+"lz.n" = "2.11.4"
 "indent-blankline.nvim" = "3.9.0"
 "llm.nvim"= "scm"
 # volt is a UI library
@@ -81,7 +81,7 @@ volt= "scm"
 # "telescope.nvim" = "0.1.6"
 nvim-lspconfig= "2.3.0"
 # tree-sitter-org = "0.0.1"
-"grug-far.nvim"= "1.6.42"
+"grug-far.nvim"= "1.6.43"
 orgmode = "0.6.0"
 # neogit = "2.0.0"
 "diffview.nvim" = "scm"
@@ -90,6 +90,7 @@ tree-sitter-norg = "0.2.6"
 "rest.nvim" = "3.13.0"
 # "rocks.nvim" = "2.45.0"
 tree-sitter-orgmode = "2.0.1"
+"gitsigns.nvim"= "1.0.2"
 # tree-sitter-orgmode = "2.0.0"
 # nvim-treesitter-textobjects = "scm"
 # "rocks-treesitter.nvim" = "1.0.3"
@@ -108,49 +109,20 @@ tree-sitter-orgmode = "2.0.1"
 
 [plugins.neorg]
 version = "9.3.0"
-# ft = "norg"
-
-# [plugins."gp.nvim"]
-# # rev = "scm"
-# dir = "/home/teto/neovim/gp.nvim"
 
 
-[plugins."gitsigns.nvim"]
-rev = "1.0.2"
-# we set opt=true to to load it after the colorscheme was set
-# with cmd.packadd
-opt = true 
-
-
-[plugins."jap.nvim"]
+[plugins."rikai.nvim"]
 # rev = "scm"
-dir = "/home/teto/neovim/jap.nvim"
+dir = "/home/teto/neovim/rikai.nvim"
 
 [plugins.solarized]
 git = "vim-scripts/Solarized"
 rev = "1.0.0b1^{}"
 colorscheme= "solarized"
 
-# [plugins."oxocarbon.nvim"]
-# git = "shaunsingh/oxocarbon.nvim"
-# rev = "main"
-
 [plugins."last-color.nvim"]
 git = "raddari/last-color.nvim"
 rev = "000e3e50047602f4b9725dd33aff631018592595"
-
-# [plugins.pinkmare]
-# git = "Matsuuu/pinkmare"
-# rev = "5121864e3fbc35f1cf8f62db9b26c6dbe54bd094"
-
-# [plugins."kanagawa.nvim"]
-# version = "scm"
-# opt = true
-
-# [plugins.nvim-tetris]
-# git = "alec-gibson/nvim-tetris"
-# rev = "v0.1.1"
-# opt = true
 
 [plugins."command-and-cursor.nvim"]
 git = "moyiz/command-and-cursor.nvim"
@@ -198,11 +170,6 @@ git = "protex/better-digraphs.nvim"
 rev = "5b2c63418d1e2c91d17f6d4e966bdafc5072a8d9"
 opt = true
 
-# [plugins."ccc.nvim"]
-# git = "uga-rosa/ccc.nvim"
-# rev = "v2.0.3"
-# opt = true
-
 [plugins."hacker.nvim"]
 git = "letieu/hacker.nvim"
 rev = "6818e75c076beb05ffcad2be6a78e0e0f800416d"
@@ -247,7 +214,6 @@ rev = "4992fa9d27792b7a573e4545c9b2c4e61aba4f44"
 git = "neomutt/neomutt.vim"
 rev = "20220408"
 
-# encode/decode for b64 ?
 [plugins."endec.nvim"]
 git = "ovk/endec.nvim"
 rev = "949ece728ecc0cacf3c6c81bbcda186fe3fef5cf"

@@ -73,7 +73,8 @@ let
     { plugin = nui-nvim; }
     { plugin = nvim-colorizer-lua; }
     pkgs.vimPlugins.typescript-tools-nvim
-    pkgs.vimPlugins.gitlab-vim
+
+    # pkgs.vimPlugins.gitlab-vim  # not 
 
     # not upstreamed yet
     # (luaPlugin { plugin = nvim-lua-gf; })

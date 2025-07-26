@@ -59,7 +59,6 @@ function M.jj_root(opts, noerr)
         end
         return nil
     end
-    print('jj_root:', output[1])
     return output[1]
 end
 
@@ -67,7 +66,7 @@ local function set_jj_cwd_args(opts)
     -- verify cwd is a jj repo, override user supplied
     -- cwd if cwd isn't a jj repo, error was already
     -- printed to `:messages` by 'path.jj_root'
-    local jj_root = M.jj_root(opts)
+    local jj_root = M.jj_root(opts, true)
     if not opts.cwd or not jj_root then
         opts.cwd = jj_root
     end
@@ -106,8 +105,6 @@ M.files = function(opts)
     local contents = core.mt_cmd_wrapper(opts)
     opts = core.set_header(opts, opts.headers or { 'cwd' })
     local result = core.fzf_exec(contents, opts)
-    print('tOTO')
-    print(result)
     return result
 end
 

@@ -47,7 +47,5 @@ repl-cw:
  
 repl:
   nix run  .#repl -- -Wno-x-vpop-patient-table -Wno-x-pre-v2-routes 
-
   # cree un pb ?
   # -ghci-args ":l CoreWebserviceSpec"
-
