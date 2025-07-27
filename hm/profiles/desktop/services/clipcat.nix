@@ -10,6 +10,8 @@
   # menuSettings = {};
   # ctlSettings
   daemonSettings = {
+    
+    daemonize = true;
 
     watcher = {
       # Enable watching the X11/Wayland clipboard selection.

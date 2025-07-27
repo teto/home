@@ -2,27 +2,17 @@
 <interface>
  <object class="GtkMenu" id="menu">
   <child>
-   <object class="GtkMenuItem" id="kitty">
-    <property name="label">Suspend</property>
+   <object class="GtkMenuItem" id="journalctl">
+    <property name="label">Open failed units</property>
    </object>
   </child>
   <child>
-   <object class="GtkMenuItem" id="hibernat">
-    <property name="label">Hibernate</property>
-   </object>
-  </child>
-  <child>
-   <object class="GtkMenuItem" id="shutdown">
-    <property name="label">Shutdown</property>
+   <object class="GtkMenuItem" id="systemctl-tui">
+    <property name="label">systemctl-tui</property>
    </object>
   </child>
   <child>
    <object class="GtkSeparatorMenuItem" id="delimiter1"/>
-  </child>
-  <child>
-   <object class="GtkMenuItem" id="reboot">
-    <property name="label">Reboot</property>
-   </object>
   </child>
  </object>
 </interface>

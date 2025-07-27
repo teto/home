@@ -98,7 +98,6 @@
 		// TODO show
 		"modules": [
 			"custom/notmuch"
-			// "systemd-failed-units#2"
 		],
 	},
 	// PUT in a drawer !!
@@ -313,14 +312,15 @@
 	"systemd-failed-units": {
 		"hide-on-ok": false,
 		// nr_failed_user
-		"format":    "✗ {nr_failed_user} user failures {nr_failed_system} system failures",
+		"format":    "✗ {nr_failed_user} user failures / {nr_failed_system} system failures",
 		"format-ok": "✓",
 		"system":    true,
 		"user":      true,
 		"menu":      "on-click",
 		"menu-file": "~/.config/waybar/menu-systemd-failed-units.xml",
 		"menu-actions": {
-			"kitty": "kitty sh -c ikhal",
+			"journalctl": "kitty sh -c journalctl -b0 -x",
+			"systemctl-tui": "kitty sh -c systemctl-tui",
 			// "reboot": "reboot",
 		},
 	},
