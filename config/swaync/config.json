@@ -78,8 +78,13 @@
           "command": "~/.config/rofi/rofi-bluetooth"
         },
         {
-          "label": "",
+          "label": "Fake notifs",
           "command": "notify-send -m 'toto'",
+          "type": "toggle"
+        },
+        {
+          "label": "Next wallpaper",
+          "command": "wpaperctl next",
           "type": "toggle"
         },
         {

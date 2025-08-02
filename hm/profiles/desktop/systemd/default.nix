@@ -32,14 +32,35 @@
 
   # TODO conditionnally define it
   # lib.mkIf config.mujmap-fastmail.enable
+  # TODO try an equivalent with mail
   user.services = {
     # copied from nixos nixos/doc/manual/administration/service-mgmt.chapter.md, hoping it works the same
     "notify-teto@".serviceConfig = {
               # /run/wrappers/bin/sudo -u "#$USERID" DBUS_SESSION_BUS_ADDRESS="unix:path=$ADDRESS/bus" \
               #   ${pkgs.libnotify}/bin/notify-send -t 60000 -i dialog-warning "Interrupted" "Scan interrupted. Don't forget to have it run to completion at least once a week!"
               # exit 1
+      ExecStart = pkgs.writeScript "notify-and-wait" ''
+          #!${pkgs.stdenv.shell}
 
-      ExecStart = "echo 'hello world'";
+          notify_and_wait() {
+            ADDRESS=$1
+            USERID=''${ADDRESS#/run/user/}
+            # gnome-shell doesn't respect the timeout from notify-send,
+            # hence the additional timeout command to make sure we exit
+            # before the end of time
+            result=$(/run/wrappers/bin/sudo -u "#$USERID" DBUS_SESSION_BUS_ADDRESS="unix:path=$ADDRESS/bus" \
+                ${pkgs.coreutils}/bin/timeout 60s ${pkgs.libnotify}/bin/notify-send -t 60000 -i dialog-warning -A "interrupt=Interrupt today's scan" -A "continue=OK, start now" "Daily scan" "Daily scan will start in one minute")
+            if [ "$result" = "interrupt" ]; then
+              /run/wrappers/bin/sudo -u "#$USERID" DBUS_SESSION_BUS_ADDRESS="unix:path=$ADDRESS/bus" \
+                ${pkgs.libnotify}/bin/notify-send -t 60000 -i dialog-warning "Interrupted" "Scan interrupted. Don't forget to have it run to completion at least once a week!"
+              exit 1
+            fi
+          }
+          for ADDRESS in /run/user/*; do
+            notify_and_wait "$ADDRESS" &
+          done
+          '';
+
       # User = "...";
     };
     # "base-unit@".serviceConfig = {
@@ -54,14 +75,14 @@
 
     # TODO enable conditionnally on account/services
     mujmap-fastmail.Service = {
-    Environment = [
-      "PATH=${
-        pkgs.lib.makeBinPath [
-          pkgs.pass-teto
-          pkgs.bash
-        ]
-      }"
-    ];
+      Environment = [
+        "PATH=${
+          pkgs.lib.makeBinPath [
+            pkgs.pass-teto
+            pkgs.bash
+          ]
+        }"
+      ];
     # TODO add notmuch_CONFIG ?
   };
 
@@ -118,6 +139,11 @@
         ]
       }"
     ];
+
+  # The [Unit] section accepts an OnFailure option. This is a space-separated list of one or more units that are activated when this unit enters the “failed” state.
+    OnFailure = "notify-teto@%i.service";
+    # PrivateTmp=true
+
   };
 };
 

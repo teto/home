@@ -102,9 +102,9 @@ M.files = function(opts)
     if not opts.cwd then
         return
     end
-    local contents = core.mt_cmd_wrapper(opts)
+    -- local contents = core.mt_cmd_wrapper(opts)
     opts = core.set_header(opts, opts.headers or { 'cwd' })
-    local result = core.fzf_exec(contents, opts)
+    local result = core.fzf_exec(opts.cmd, opts)
     return result
 end
 
