@@ -145,6 +145,7 @@ in
           # pulseaudioFull # for pactl
           # replace with rust-wormhole
           # requires xdmcp https://github.com/freedesktop/libXdmcp
+          rmpc # rust mpd client with synced lyrics and cover display !
           s-search # "s" to open web search
           smplayer # GUI around mpv
           celluloid # GUI around mpv

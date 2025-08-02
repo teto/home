@@ -10,7 +10,8 @@
     enable = true;
     # host = ""; # all interfaces (example from module option) breaks with nginx
 
-    group = "teto";
+    # The group immich should run as.
+    group = "immich";
 
     machine-learning = {
       # enable = lib.mkForce true;
@@ -28,6 +29,12 @@
     # merged into environment
     # secretsFile = "/run/secrets/immich";
   };
+
+  systemd.services.immich-server.serviceConfig = {
+    # we override the default 0077 such that the backup job can read the files
+    UMask = "0027";
+  };
+
 
   services.nginx.virtualHosts."immich.${secrets.jakku.hostname}" = {
     forceSSL = true;

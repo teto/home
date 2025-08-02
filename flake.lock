@@ -1552,6 +1552,19 @@
         "type": "github"
       }
     },
+    "furigana-url": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1732525622,
+        "narHash": "sha256-S26fUKXpOKkZ9lXKehKZ28X6x6psnGkhAtgs64NyzaI=",
+        "type": "tarball",
+        "url": "https://github.com/Doublevil/JmdictFurigana/releases/download/2.3.1%2B2024-11-25/JmdictFurigana.json.tar.gz"
+      },
+      "original": {
+        "type": "tarball",
+        "url": "https://github.com/Doublevil/JmdictFurigana/releases/download/2.3.1%2B2024-11-25/JmdictFurigana.json.tar.gz"
+      }
+    },
     "gen-luarc": {
       "inputs": {
         "flake-parts": "flake-parts_21",
@@ -4130,6 +4143,7 @@
         "firefox2nix": "firefox2nix",
         "flake-schemas": "flake-schemas",
         "flake-utils": "flake-utils_2",
+        "furigana-url": "furigana-url",
         "git-repo-manager": "git-repo-manager",
         "haumea": "haumea",
         "hm": "hm",

@@ -29,9 +29,12 @@
       url = "https://github.com/odrevet/edict_database/releases/download/v0.0.2/kanji.zip";
       flake = false;
     };
-
     edict-expression-db = {
       url = "https://github.com/odrevet/edict_database/releases/download/v0.0.2/expression.zip";
+      flake = false;
+    };
+    furigana-url = {
+      url = "https://github.com/Doublevil/JmdictFurigana/releases/download/2.3.1%2B2024-11-25/JmdictFurigana.json.tar.gz";
       flake = false;
     };
 

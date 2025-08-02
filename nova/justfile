@@ -46,6 +46,7 @@ repl-cw:
   nix run  .#simwork.core-webservice.platform._repl 
  
 repl:
+  # setEnv "PORCUPINE_ARGS" "-vv -c2 --bypass-manifest-check --migrate-sql-tables"
   nix run  .#repl -- -Wno-x-vpop-patient-table -Wno-x-pre-v2-routes 
   # cree un pb ?
   # -ghci-args ":l CoreWebserviceSpec"

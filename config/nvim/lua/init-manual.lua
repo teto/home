@@ -956,4 +956,21 @@ vim.keymap.set('n', '<D-j>', function()
 	vim.cmd[[ RikaiLookup ]]
 end, { buffer = false, desc = "Japanese lookup" })
 
+-- Autocommand to highlight the word under the cursor when the cursor moves
+-- vim.api.nvim_create_autocmd({"CursorMoved", "CursorMovedI"}, {
+--     group = highlight_group,
+--     pattern = "*",
+--     callback = highlight_current_word,
+-- })
+
 require'teto.lsp'.ignore_simwork_extended_warnings()
+
+function get_selection()
+   -- does not handle rectangular selection
+   local s_start = vim.fn.getpos "."
+   -- in visual mode returns the other end of the connections
+   local s_end = vim.fn.getpos "v"
+   local lines = vim.fn.getregion(s_start,s_end)
+   return lines
+end
+

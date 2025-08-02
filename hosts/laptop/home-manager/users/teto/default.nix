@@ -27,6 +27,7 @@
       ./programs/zsh.nix
       ./services/mpd.nix
       ./services/blueman-applet.nix
+      ./services/wpaperd.nix
       # ./services/swayidle.nix
 
       # ../desktop/teto/default.nix  # Track for regressions

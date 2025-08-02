@@ -8,4 +8,11 @@
     # port
     # startWhenNeeded = true;
   };
+
+  extraConfig = ''
+    audio_output {
+            type            "pipewire"
+            name            "PipeWire Sound Server"
+    }
+    '';
 }

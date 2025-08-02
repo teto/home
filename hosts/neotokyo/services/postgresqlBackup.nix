@@ -7,6 +7,7 @@
   config,
   pkgs,
   secrets,
+  lib,
   ...
 }:
 let
@@ -129,6 +130,15 @@ in
         # immediately if it missed the last start time
       };
     };
+  };
+
+  systemd.services.immich-server.serviceConfig = {
+    # we override the default 0077 such that the backup job can read the files
+    UMask = lib.mkForce "0027";
+  };
+
+  systemd.services.restic-backups-immich-db-to-backblaze.serviceConfig = {
+    Group = "immich"; # such that it can read the files
   };
 
   # services.restic.server.enable
