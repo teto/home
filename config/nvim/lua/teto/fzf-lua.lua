@@ -28,7 +28,9 @@ local git_files_opts = {
 _G.myfiles = function(opts)
   opts = opts or {}
   opts.debug = true -- use this to debug print the underlying command in the first line
-  opts.cmd = opts.cmd or "fd --color=never --type f --hidden --follow"
+  -- les --hidden vont regarder les .git --sortr=modified"
+  opts.cmd = opts.cmd or "rg --files --hidden --ignore --glob='!.git' --sortr=modified"
+  -- opts.cmd = opts.cmd or "fd --color=never --type f --follow -X ls -t"
   opts.actions = {
     ["ctrl-g"] = function(_, o)
       _G.myfiles(o)

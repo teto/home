@@ -72,7 +72,7 @@ fzf_lua.setup({
         -- give it a try.
         include_current_session = true,
         -- cwd_only = true,
-        stat_file = true, -- verify files exist on disk
+        stat_file = false, -- verify files exist on disk
     },
     'default-title',
     commands = { sort_lastused = true },
