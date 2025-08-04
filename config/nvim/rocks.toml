@@ -282,6 +282,10 @@ dev = true
 
 [plugins.fzf-lua-enchanted-files]
 git = "otavioschwanck/fzf-lua-enchanted-files"
-rev = "cc4a65e567f3c9c13abfbd039f4ff9f4b7427230"
+rev = "ecc3fa31b7ca65400a946ddef9152e97dab86cf2"
+
+[plugins."fzf-lua-frecency.nvim"]
+git = "elanmed/fzf-lua-frecency.nvim"
+rev = "a0c0f78e5db49580aa4aabc6dda1813bb9c789ee"
 # dir = "/home/teto/neovim/mcphub.nvim"
 
