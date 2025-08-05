@@ -55,7 +55,9 @@ function M.jj_root(opts, noerr)
     local output, err = utils.io_systemlist(cmd)
     if err ~= 0 then
         if not noerr then
-            utils.info(unpack(output))
+		  -- dont propagate message
+		  -- utils.info("MATT custom jj_root message")
+            -- utils.info(unpack(output))
         end
         return nil
     end

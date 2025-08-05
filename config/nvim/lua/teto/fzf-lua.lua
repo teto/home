@@ -25,31 +25,31 @@ local git_files_opts = {
 }
 
 -- https://github.com/ibhagwan/fzf-lua/issues/860
-_G.myfiles = function(opts)
-  opts = opts or {}
-  opts.debug = true -- use this to debug print the underlying command in the first line
-  -- les --hidden vont regarder les .git --sortr=modified"
-  opts.cmd = opts.cmd or "rg --files --hidden --ignore --glob='!.git' --sortr=modified"
-  -- opts.cmd = opts.cmd or "fd --color=never --type f --follow -X ls -t"
-  opts.actions = {
-    ["ctrl-g"] = function(_, o)
-      _G.myfiles(o)
-    end
-  }
-  if opts.cmd:match("%s+%-%-no%-ignore$") then
-    opts.cmd = opts.cmd:gsub("%s+%-%-no%-ignore$", "")
-  else
-    opts.cmd = opts.cmd .. " --no-ignore"
-  end
-  fzf_lua.files(opts)
-end
+-- _G.myfiles = function(opts)
+--   opts = opts or {}
+--   opts.debug = true -- use this to debug print the underlying command in the first line
+--   -- les --hidden vont regarder les .git --sortr=modified"
+--   opts.cmd = opts.cmd or "rg --files --hidden --ignore --glob='!.git' --sortr=modified"
+--   -- opts.cmd = opts.cmd or "fd --color=never --type f --follow -X ls -t"
+--   opts.actions = {
+--     ["ctrl-g"] = function(_, o)
+--       _G.myfiles(o)
+--     end
+--   }
+--   if opts.cmd:match("%s+%-%-no%-ignore$") then
+--     opts.cmd = opts.cmd:gsub("%s+%-%-no%-ignore$", "")
+--   else
+--     opts.cmd = opts.cmd .. " --no-ignore"
+--   end
+--   fzf_lua.files(opts)
+-- end
 
 function M.register_keymaps()
     -- autocomplete :FzfLua to see what's available
     vim.keymap.set('n', '<Leader>g', function()
-        -- fzf_lua.files()
+        fzf_lua.files()
 		-- vim.print(fzf_lua_enchanted)
-		fzf_lua_enchanted.files()
+		-- fzf_lua_enchanted.files()
     end)
 	-- local file_dir = vim.fn.expand('%:p:h')
 
@@ -75,10 +75,19 @@ function M.register_keymaps()
             })
         else
 		 -- TODO fix
-            fzf_lua.git_files({
-                -- entry_maker = entry_maker,
-                fzf_opts = { ['--scheme'] = 'path' },
-            })
+            -- fzf_lua.git_files({
+            --     -- entry_maker = entry_maker,
+            --     fzf_opts = { ['--scheme'] = 'path' },
+            -- })
+
+			fzf_lua.combine({
+
+			  -- can be a table as well
+			  -- order matters
+			  -- files can appear several times
+			  pickers = "frecency,files"
+			})
+
         end
     end)
 

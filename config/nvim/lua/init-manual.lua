@@ -653,6 +653,9 @@ vim.g.spinner_frames = { '⣾', '⣽', '⣻', '⢿', '⡿', '⣟', '⣯', '⣷' 
 
 if use_fzf_lua then
     require('plugins.fzf-lua')
+	-- else frecency doesnt appear
+	require('fzf-lua-frecency').setup()
+	require('teto.fzf-lua').register_keymaps()
 end
 
 if use_telescope then
