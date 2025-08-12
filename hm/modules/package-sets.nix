@@ -57,6 +57,7 @@ in
         btop
         curl
         just # to read justfiles, *replace* Makefile
+        jq 
         gitAndTools.gitFull # to get send-email
         gnumake
         tree
@@ -107,6 +108,8 @@ in
         [
 
           acpi # for acpi -V
+          pkgs.ani-cli  # to watch anime 
+
           # anki          # spaced repetition system
           # hopefully we can remove this from the environment
           # it's just that I can't setup latex correctly
@@ -165,7 +168,6 @@ in
           file-roller # for GUI archive handling
           hunspellDicts.fr-any
           imv # image viewer
-          jq # to run json queries
           lazygit # kinda like tig
           libnotify
           (ignoreBroken moc-wrapped) # music player
@@ -180,9 +182,9 @@ in
           du-dust # dust binary: rust replacement of du
           duf # better df (rust)
 
-          ncpamixer # pulseaudio TUI mixer
+          # ncpamixer # pulseaudio TUI mixer
           noti # send notifications when a command finishes
-          ouch # to (de)compress files
+          (ouch.override({ enableUnfree = true; })) # to (de)compress files
           # papis # library manager
           (lib.hiPrio pass-teto) # pass with extensions, override nova's
           pavucontrol
@@ -200,7 +202,7 @@ in
           sd # rust cli for search & replace
           shared-mime-info # temporary fix for nautilus to find the correct files
           sublime3
-          sysz # fzf for systemd, see systemd-tui too
+          # sysz # fzf for systemd, see systemd-tui too
           translate-shell # call with `trans`
           unzip
           wireshark
@@ -213,6 +215,7 @@ in
           # Run xwayland-satellite. You can specify an X display to use (i.e. :12). Be sure to set the same DISPLAY
           # the package contains a systemd service
           xwayland-satellite # to launch X applications within wayland (and without a full Xwayland ?)
+          yt-dlp # to download youtube videos
 
         ];
 
@@ -500,6 +503,7 @@ in
 
         # https://github.com/NixOS/nixpkgs/pull/368909
         pkgs.kakasi # convert kanjis into kanas etc
+        pkgs.kanji-stroke-order-font  # font that shows strike order (!!) cool when learning
         (ignoreBroken pkgs.mokuro) # broken because of manga-ocr
         (ignoreBroken pkgs.python3Packages.manga-ocr)
         tagainijisho # japanse dict; like zkanji Qt based
