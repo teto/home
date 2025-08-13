@@ -8,7 +8,7 @@ M.setup = function()
         signs_staged_enable = false,
 		-- it doesn't work properly, sometimes it takes only
         numhl = true, -- Toggle with `:Gitsigns toggle_numhl`
-        linehl = true, -- Toggle with `:Gitsigns toggle_linehl`
+        linehl = false, -- Toggle with `:Gitsigns toggle_linehl`
         word_diff = true, -- Toggle with `:Gitsigns toggle_word_diff`
         watch_gitdir = {
             follow_files = true,

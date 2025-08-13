@@ -104,10 +104,12 @@ in
       pkgs.lm_sensors # for `sensors` executable
       # pinentry-bemenu
       pinentry-rofi
+      pciutils # for lspci
       # gnome3.gnome-font-viewer  # Not very good
 
       timg
       gh-dash
+      wpaperd
     ]);
 
   # TODO remove ? dangerous

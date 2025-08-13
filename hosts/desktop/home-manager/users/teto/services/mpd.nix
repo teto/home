@@ -6,6 +6,8 @@
 }:
 {
   services.mpd = {
-    musicDirectory = "/mnt/ntfs/Musique";
+    enable = true;
+    musicDirectory = "/mnt/ext/music";
+
   };
 }

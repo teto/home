@@ -24,11 +24,13 @@
 
       ./calendars.nix
       ./sway.nix
+      ./systemd.nix
 
       ./programs/neovim.nix
       ./programs/waybar.nix # TODO resotre ?
       ./programs/zsh.nix
 
+      ./services/local-ai.nix
       ./services/ollama.nix
       ./services/kanshi.nix
       ./services/ssh-agent.nix
@@ -65,23 +67,23 @@
   home.packages =
     with pkgs;
     let
-      fonts = [
-        ubuntu_font_family
-        inconsolata # monospace
-        noto-fonts-cjk-sans # asiatic
-        nerd-fonts.fira-code # otherwise no characters
-        nerd-fonts.droid-sans-mono # otherwise no characters
-        # corefonts # microsoft fonts  UNFREE
-        font-awesome_5 # needed for waybar
-        source-code-pro
-        dejavu_fonts
-        # Adobe Source Han Sans
-        source-han-sans # sourceHanSansPackages.japanese
-        fira-code-symbols # for ligatures
-        iosevka
-        # noto-fonts
-
-      ];
+      # fonts = [
+      #   ubuntu_font_family
+      #   inconsolata # monospace
+      #   noto-fonts-cjk-sans # asiatic
+      #   nerd-fonts.fira-code # otherwise no characters
+      #   nerd-fonts.droid-sans-mono # otherwise no characters
+      #   # corefonts # microsoft fonts  UNFREE
+      #   font-awesome_5 # needed for waybar
+      #   source-code-pro
+      #   dejavu_fonts
+      #   # Adobe Source Han Sans
+      #   source-han-sans # sourceHanSansPackages.japanese
+      #   fira-code-symbols # for ligatures
+      #   iosevka
+      #   # noto-fonts
+      #
+      # ];
     in
     [
       # llm-ls # needed by the neovim plugin
@@ -95,9 +97,9 @@
 
       lact # GPU controller, needs a daemon
       lutris # for gaming
+
       # xorg.xwininfo # for stylish
       moar # test as pager
-      pciutils # for lspci
       presenterm # for presentations from terminal/markdown (in rust, supports images, pretty cool)
 
       sioyek # pdf reader
@@ -105,7 +107,6 @@
       # tig
       wally-cli # to flash ergodox keyboards
       wine
-      wpaperd
 
       # take the version from stable ?
       nautilus # demande webkit/todo replace by nemo ?
@@ -113,14 +114,14 @@
       # simple-scan
       # vifm
       # anyrun
-      # w3m # for preview in ranger w3mimgdisplay
 
       # bridge-utils# pour  brctl
-      # ironbar
-      # haxe # to test https://neovim.discourse.group/t/presenting-haxe-neovim-a-new-toolchain-to-build-neovim-plugins/3720
-
     ]
-    ++ fonts;
+    ++ [
+      koboldcpp
+      llama-cpp # for llama-server and benchmarks
+    ]
+    ;
 
   package-sets = {
 
@@ -144,24 +145,4 @@
     # $HOME/.local/share/Zeal/Zeal/docsets
   };
 
-  systemd.user.services = {
-    xwayland-satellite = {
-      Service = {
-        # TODO need DBUS_SESSION_BUS_ADDRESS
-        # --app-name="%N" toto
-        Environment = [ ''DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/1000/bus"'' ];
-        Exec = "${pkgs.xwayland-satellite}/bin/xwayland-satellite";
-      };
-    };
-
-    ollama = {
-# OLLAMA_CONTEXT_LENGTH: 32768
-# OLLAMA_FLASH_ATTENTION: true
-# OLLAMA_KV_CACHE_TYPE: q4_0
-      Service = {
-        # OLLAMA_KEEP_ALIVE The duration that models stay loaded in memory (default is "5m") 
-        Environment = [ "OLLAMA_MODELS=/home/teto/models" ];
-      };
-    };
-  };
 }

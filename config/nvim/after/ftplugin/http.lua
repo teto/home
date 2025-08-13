@@ -1,6 +1,7 @@
 -- vim.keymap.set('n',  '<C-J>' , "<Plug>RestNvim<cr>")
 vim.keymap.set('n', '<leader>rr', '<Plug>RestNvim<cr>', { remap = true, desc = 'Run an http request' })
 vim.keymap.set('n', '<leader>rp', '<Plug>RestNvimPreview', { remap = true, desc = 'Preview an http request' })
+-- Rest run
 vim.keymap.set('n', '<C-j>', "<cmd>lua require('rest-nvim').run(false)<cr>")
 -- TODO need to call run_current_request that accepts switching backend
 -- vim.keymap.set('n', '<C-j>', "<cmd>lua require('rest-nvim').run(false)<cr>")

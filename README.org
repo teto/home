@@ -23,6 +23,7 @@ This folder contains my customizations for:
 - [[https://marlam.de/msmtp/news][msmtp]] (MSA: Mail Sending Agent)
 - [[https://neomutt.org][neomutt]] (Mail User Agent)
 - ncmpcpp (mpd console player)
+- [[https://mierak.github.io/rmpc/]][rmcp]] (mpd console player)
 - [[https://github.com/neovim/neovim][neovim]] (fork of vim)
 - [[https://newsboat.org/][newboat]] (RSS reader, fork of newsbeuter)
 - [[www.notmuch.org][notmuch]] (to tag mails)

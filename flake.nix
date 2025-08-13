@@ -714,7 +714,7 @@
 
           inherit (myPkgs)
             jmdict
-            local-ai-teto
+            # local-ai-teto # conflicts with llama-cpp ?
             meli-git
             # neomutt
             popcorntime-teto

@@ -25,7 +25,7 @@
     [
       # my-local-ai
       # llama-cpp # to test
-      llama-cpp-matt # simpler than
+      # llama-cpp-matt # simpler than # conflicts with llama-cpp
     ];
 
   # services.local-ai.enable = true;

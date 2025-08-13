@@ -241,6 +241,7 @@ in
         # khard # see khal.nix instead ?
         # libsecret  # to consult
         # newsboat #
+        bmm # bookmark manager
         carl # not upstreamed yet. cargo cal
         python3Packages.subliminal # to download subtitles
         immich-cli
@@ -504,8 +505,8 @@ in
         # https://github.com/NixOS/nixpkgs/pull/368909
         pkgs.kakasi # convert kanjis into kanas etc
         pkgs.kanji-stroke-order-font  # font that shows strike order (!!) cool when learning
-        (ignoreBroken pkgs.mokuro) # broken because of manga-ocr
-        (ignoreBroken pkgs.python3Packages.manga-ocr)
+        (pkgs.mokuro) # broken because of manga-ocr
+        (pkgs.python3Packages.manga-ocr)
         tagainijisho # japanse dict; like zkanji Qt based
         # flakeSelf.inputs.vocage.packages."x86_64-linux".vocage
         jiten # unfree, helpful for jap.nvim

@@ -57,6 +57,11 @@ in
   time.timeZone = "Europe/Paris";
   # time.timeZone = "Asia/Tokyo";
 
+  # Enabling this option is necessary for Qt plugins to work in the installed profiles (e.g.: ‘nix-env -i’ or ‘environment.systemPackages’).
+  # enabled to solve issues with 'kcc'
+  # plugins seem to live in qtbase, yet for now I couldn't find a wayland one.
+  qt.enable = true;
+
   environment.pathsToLink = [
     "/share/xdg-desktop-portal"
     "/share/applications"
