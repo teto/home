@@ -26,8 +26,25 @@
       ];
       # icon = "''${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
       definedAliases = [ "@ji" ];
-
     };
+
+    "youtube" = {
+      urls = [
+        {
+          # 
+          template = "https://www.youtube.com/results?search_query={searchTerms}";
+          params = [
+            {
+              name = "query";
+              value = "{searchTerms}";
+            }
+          ];
+        }
+      ];
+      # icon = "''${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+      definedAliases = [ "@yt" ];
+    };
+
     "Nix Packages" = {
       urls = [
         {
@@ -85,6 +102,10 @@
   # https://discourse.nixos.org/t/how-do-you-pin-a-firefox-extensions-add-on-to-the-firefox-toolbar/36081
   # browser.uiCustomization.state
   myDefaultSettings = {
+
+    # to avoid all those freaking advised article
+    "browser.newtabpage.activity-stream.feeds.section.topstories" = "false";
+
     # TODO use my own startpage
     "browser.startup.homepage" = "https://github.com/teto";
     "browser.search.region" = "FR";

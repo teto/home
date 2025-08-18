@@ -15,8 +15,8 @@ in
 
   basePlugins = with pkgs.vimPlugins; [
 
-    # (luaPlugin { plugin = flakeSelf.inputs.rocks-nvim.packages.${pkgs.system}.rocks-nvim; })
-    (luaPlugin { plugin = rocks-nvim; })
+    (luaPlugin { plugin = flakeSelf.inputs.rocks-nvim.packages.${pkgs.system}.rocks-nvim; })
+    # (luaPlugin { plugin = rocks-nvim; })
     # (luaPlugin { plugin = rocks-git-nvim; })
 
     (luaPlugin { plugin = fzf-lua; })

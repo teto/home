@@ -119,8 +119,7 @@ in
           myImagemagick
 
           pkgs.kcc # to convert ebooks to remarkable format
-          # mpd
-          pkgs.ncmpcpp
+          pkgs.ncmpcpp  # outdated/ replaced by rmpc 
           # pkgs.mpc_cli
           # pkgs.ymuse # GUI
 
@@ -149,6 +148,7 @@ in
           # replace with rust-wormhole
           # requires xdmcp https://github.com/freedesktop/libXdmcp
           rmpc # rust mpd client with synced lyrics and cover display !
+          pkgs.euphonica # nice looking mpd GUI
           s-search # "s" to open web search
           smplayer # GUI around mpv
           celluloid # GUI around mpv

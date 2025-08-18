@@ -42,6 +42,7 @@
             "5":       SwitchToTab("Albums"),
             "6":       SwitchToTab("Playlists"),
             "7":       SwitchToTab("Search"),
+            "7":       SwitchToTab("Lyrics"),
             "q":       Quit,
             ">":       NextTrack,
             "p":       TogglePause,
@@ -125,9 +126,18 @@
         (
             name: "Queue",
             pane: Split(
-                direction: Horizontal,
-                panes: [(size: "40%", pane: Pane(AlbumArt)), (size: "60%", pane: Pane(Queue))],
-            ),
+                  direction: Vertical,
+                  panes: [
+                       (
+                        size: "90%",
+                        pane: Split(
+                         direction: Horizontal,
+                         panes: [
+                            (size: "40%", pane: Pane(AlbumArt)),
+                            (size: "60%", pane: Pane(Queue))
+                         ],
+                       )),
+                  ]),
         ),
         (
             name: "Directories",
@@ -152,6 +162,10 @@
         (
             name: "Search",
             pane: Pane(Search),
+        ),
+        (
+            name: "Lyrics",
+            pane: Pane(Lyrics),
         ),
     ],
 )

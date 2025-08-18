@@ -687,7 +687,7 @@ vim.g.tex_flavor = 'latex'
 -- should not be required anymore since plugins/nvim-treesitter.lua is called
 -- require('teto.treesitter')
 -- vim.lsp.set_log_level('DEBUG')
-vim.lsp.set_log_level(vim.lsp.log_levels.INFO)
+vim.lsp.log.set_level(vim.lsp.log_levels.INFO)
 -- setup haskell-tools
 vim.g.haskell_tools = require('teto.haskell-tools').generate_settings()
 
