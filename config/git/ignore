@@ -1,5 +1,6 @@
 #  vim: set noet fenc=utf-8 ff=unix sts=0 sw=4 ts=4 foldmethod=marker :
 /.direnv
+*.env
 /.envrc
 
 # remove core files
@@ -61,6 +62,8 @@ Session.vim
 *.png
 *.pcap
 *.sqlite
+*.wav
+*.mp3
 # }}}
 
 # Backup files {{{

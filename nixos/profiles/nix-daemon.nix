@@ -8,7 +8,7 @@
 
     distributedBuilds = true;
 
-    package = pkgs.nixVersions.nix_2_29
+    package = pkgs.nixVersions.nix_2_30
     # flakeSelf.inputs.nix-schemas.packages.${pkgs.system}.nix
     ;
 

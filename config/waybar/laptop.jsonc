@@ -16,7 +16,9 @@
         "format-icons": ["", "", "", "", ""]
     },
     "temperature": {
-      "hwmon-path": "/sys/class/hwmon/hwmon5/temp1_input"
+      // "hwmon-path": "/sys/class/hwmon/hwmon5/temp1_input"
+		"hwmon-path": "/sys/devices/platform/coretemp.0/hwmon/hwmon?/temp1_input"
+
     },
 
 	"modules-center": [

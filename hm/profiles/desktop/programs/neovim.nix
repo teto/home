@@ -259,6 +259,8 @@ in
     lp.lual
     lp.utf8
     lp.alogger
+    lp.mega-cmdparse
+    lp.mega-logging # should not be needed ?
   ]
   # nvimLua.pkgs.rest-nvim.propagatedBuildInputs
   ;
